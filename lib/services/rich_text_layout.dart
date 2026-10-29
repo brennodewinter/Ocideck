@@ -3,6 +3,7 @@ import '../models/slide.dart';
 import '../models/slide_format.dart';
 import '../utils/markdown_paste_cleanup.dart';
 import 'markdown_body_blocks.dart';
+import 'identity_slot_memo.dart';
 import 'slide_layout_metrics.dart';
 
 /// Target fill when splitting pages during layout planning.
@@ -307,20 +308,10 @@ RichTextLayoutPlan planRichTextLayout({
 /// De vier andere previews gebruikten `memoizedRenderLayout` al; de rijke tekst
 /// was de duurste van de vijf en als enige niet aangesloten. Sleutel op de dia
 /// (onveranderlijk, dus identiteit is een geldige wijzigingsstempel) plus alles
-/// wat de uitkomst verder bepaalt.
-/// Expando per dia i.p.v. een globale LRU (#2622): de memo leeft zo lang als
-/// de dia en kent geen capaciteitsklif bij sequentiële scans. Binnen de dia
-/// een klein mapje per (profiel, font, geometrie) — plafond 6, FIFO.
-final Expando<
-  Map<(ThemeProfile, String, double, double, double, bool), RichTextLayoutPlan>
->
-_richTextPlanCache =
-    Expando<
-      Map<
-        (ThemeProfile, String, double, double, double, bool),
-        RichTextLayoutPlan
-      >
-    >('richTextPlan');
+/// wat de uitkomst verder bepaalt. Zelfde per-dia memo als de layoutschaal:
+/// een globale LRU viel weg zodra het deck groter was dan het plafond (#2622).
+final IdentitySlotMemo<Slide, RichTextLayoutPlan> _richTextPlanCache =
+    IdentitySlotMemo(6, 'richTextPlan');
 
 RichTextLayoutPlan planRichTextForSlide({
   required Slide slide,
@@ -331,13 +322,8 @@ RichTextLayoutPlan planRichTextForSlide({
   required String font,
   bool splitWithImage = false,
 }) {
-  final perSlide = _richTextPlanCache[slide] ??=
-      <
-        (ThemeProfile, String, double, double, double, bool),
-        RichTextLayoutPlan
-      >{};
   final key = (profile, font, w, availW, availH, splitWithImage);
-  final cached = perSlide[key];
+  final cached = _richTextPlanCache.read(slide, key);
   if (cached != null) return cached;
   final plan = _planRichTextForSlide(
     slide: slide,
@@ -348,8 +334,7 @@ RichTextLayoutPlan planRichTextForSlide({
     font: font,
     splitWithImage: splitWithImage,
   );
-  if (perSlide.length >= 6) perSlide.remove(perSlide.keys.first);
-  perSlide[key] = plan;
+  _richTextPlanCache.write(slide, key, plan);
   return plan;
 }
 

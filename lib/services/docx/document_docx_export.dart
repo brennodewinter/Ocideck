@@ -585,6 +585,11 @@ String _buildDocumentXml(
 /// letter die de huisstijl wérkelijk vraagt (`Aptos`), niet in de
 /// plaatsvervanger die het scherm toont (#2119). Word heeft die letter
 /// doorgaans zelf, en anders valt het terug zoals Word altijd terugvalt.
+/// DOCX telt lettergrootte in halve punten. 11 pt blijft 22, zoals de
+/// eerdere vaste waarde voor het standaardprofiel.
+int _bodyHalfPoints(ThemeProfile theme) =>
+    (clampDocumentBodyFontSize(theme.documentBodyFontSize) * 2).round();
+
 String _buildStylesXml(ThemeProfile theme) {
   final bodyFont = _rFonts(theme.exportFontFamily);
   final headingFont = theme.exportDocumentHeadingFontFamily;
@@ -597,18 +602,13 @@ String _buildStylesXml(ThemeProfile theme) {
   // papier hetzelfde blad toont als het scherm.
   final heading = hexRgbTriplet(theme.effectiveDocumentHeadingColor);
   final subheading = hexRgbTriplet(theme.effectiveDocumentSubheadingColor);
-  // De bodymaat van het profiel, in de halve punten die OOXML rekent (#2649).
-  // Koppen en bron-tekst schalen mee via documentFontScale — hun maten waren
-  // veelvouden van de 11-pt-body, dus die verhouding blijft staan.
-  final bodySz = (clampDocumentBodyFontSize(theme.documentBodyFontSize) * 2)
-      .round();
   final scale = theme.documentFontScale;
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
       '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
       '<w:docDefaults><w:rPrDefault><w:rPr>'
       '$bodyFont'
       '<w:color w:val="${hexRgbTriplet(theme.textColor)}"/>'
-      '<w:sz w:val="$bodySz"/></w:rPr></w:rPrDefault>'
+      '<w:sz w:val="${_bodyHalfPoints(theme)}"/></w:rPr></w:rPrDefault>'
       '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
       '</w:docDefaults>'
       '<w:style w:type="paragraph" w:default="1" w:styleId="Normal">'

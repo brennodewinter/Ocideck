@@ -661,6 +661,8 @@ const _dutchSourceAddIt = {
       'Le tue impostazioni erano danneggiate e sono state ripristinate.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Le tue impostazioni erano danneggiate e sono state ripristinate; una copia è in {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Il logo non è un\'immagine, oppure supera 8 MB. Scegli un PNG, JPEG, GIF o WebP più piccolo.',
   'Bezig met installeren': 'Installazione in corso',
   'Gevonden op schijf: {pad}': 'Trovato sul disco: {pad}',
   'Van schijf installeren': 'Installa dal disco',

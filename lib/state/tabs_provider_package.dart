@@ -332,17 +332,14 @@ Future<OpenResult> _openPackageFromBytes(
 
   try {
     deck = notifier._attachPackageAssets(deck, entries, mdEntry.name);
-    if (learningSession == null) {
-      // Een gewoon `.ocideck`-pakket draagt de stijl van de maker mee als
-      // `theme.json`; de afbeeldingsvelden wijzen naar `logos/`-leden die
-      // als `mem:`-assets landen — vandaar binnen hetzelfde budget-try.
-      // Draagt het pakket geen bruikbaar record, dan geldt het actieve
-      // profiel van de ontvanger (#2644).
-      final packagedTheme = packageThemeToMem(entries, mdEntry.name);
-      if (packagedTheme != null) {
-        deck = deck.copyWith(themeProfile: packagedTheme);
-        carriesPackagedProfile = true;
-      }
+    // Een `.ocideck`-pakket draagt de stijl van de maker mee als `theme.json`;
+    // de afbeeldingsvelden wijzen naar `logos/`-leden die als `mem:`-assets
+    // landen — vandaar binnen hetzelfde budget-try. Draagt het pakket geen
+    // bruikbaar record, dan blijft het deck zoals het binnenkwam (#2644).
+    final styled = applyCarriedStyleMembers(deck, entries);
+    if (!identical(styled, deck)) {
+      deck = styled;
+      carriesPackagedProfile = true;
     }
   } on WebAssetBudgetExceeded catch (e) {
     logWarning('TabsNotifier._openPackageFromBytes: webgeheugen vol', e);

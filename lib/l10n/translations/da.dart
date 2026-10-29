@@ -1617,6 +1617,8 @@ const _dutchSourceAddDa = <String, String>{
       'Dine indstillinger var beskadigede og er blevet nulstillet.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Dine indstillinger var beskadigede og er blevet nulstillet; en kopi ligger i {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logoet er ikke et billede, eller det er større end 8 MB. Vælg en mindre PNG, JPEG, GIF eller WebP.',
   'Bezig met installeren': 'Installerer',
   'Gevonden op schijf: {pad}': 'Fundet på disken: {pad}',
   'Van schijf installeren': 'Installér fra disk',

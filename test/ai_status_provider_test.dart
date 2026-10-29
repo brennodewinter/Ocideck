@@ -80,6 +80,19 @@ Future<ProviderContainer> _container({_FakeTransport? transport}) async {
   return c;
 }
 
+/// De ping is async; een kale `pump` laat hem soms nog onderweg. Kort
+/// genoeg dat de minuut-timer nog niet afgaat.
+Future<void> _pumpUntilCalls(
+  WidgetTester tester,
+  _FakeTransport transport,
+  int atLeast,
+) async {
+  for (var i = 0; i < 20 && transport.calls < atLeast; i++) {
+    await tester.pump(const Duration(milliseconds: 50));
+  }
+  expect(transport.calls, greaterThanOrEqualTo(atLeast));
+}
+
 /// Wacht op de echte endpoint-uitkomst, ook onder een drukke testsuite.
 Future<void> _settle(ProviderContainer c) async {
   final done = Completer<void>();
@@ -150,7 +163,7 @@ void main() {
     });
 
     testWidgets(
-      'een instellingswijziging laat de periodieke controle niet dood (#2635)',
+      'na een instellingswijziging blijft de periodieke controle lopen',
       (tester) async {
         SharedPreferences.setMockInitialValues({});
         final transport = _FakeTransport();
@@ -163,40 +176,33 @@ void main() {
         addTearDown(c.dispose);
         final sub = c.listen(aiStatusProvider, (_, _) {});
         addTearDown(sub.close);
-        await tester.pump();
-
         await c.read(settingsProvider.notifier).setAiSettings(_local);
-        await tester.pump();
-        // Eerste interval-tik: de periodieke controle loopt (de eerste
-        // asynchrone check kan dan nog onderweg zijn).
-        await tester.pump(kAiStatusRefreshInterval);
-        await tester.pump();
-        expect(transport.calls, greaterThanOrEqualTo(1));
+        await _pumpUntilCalls(tester, transport, 1);
+        final afterFirst = transport.calls;
 
-        // Herbouw de provider met een gewijzigde instelling — vóór de fix
-        // bleef de geannuleerde timer in `_timer` staan en kwam er nooit een
-        // nieuwe.
         await c
             .read(settingsProvider.notifier)
             .setAiSettings(_local.copyWith(model: 'ander-model'));
-        await tester.pump();
-        final callsAfterEdit = transport.calls;
+        await _pumpUntilCalls(tester, transport, afterFirst + 1);
+        final afterChange = transport.calls;
 
         await tester.pump(kAiStatusRefreshInterval);
         await tester.pump();
         expect(
           transport.calls,
-          greaterThan(callsAfterEdit),
-          reason: 'het interval loopt ook na de wijziging gewoon door',
+          greaterThan(afterChange),
+          reason:
+              'een herbouw mag de timer niet achterlaten; anders blijft het '
+              'lampje op de laatste uitkomst staan (#2635)',
         );
 
-        // De levende periodieke timer achterlaten breekt de test-hygiëne.
+        // De periodieke timer mag niet blijven hangen nadat de test stopt.
         await c
             .read(settingsProvider.notifier)
             .setAiSettings(const AiSettings(enabled: false));
-        // Riverpod's geplande herbouw draait op eigen 0-seconden-timers die
-        // elkaar weer aanmaken; pumpAndSettle spoelt de hele ketting leeg.
-        await tester.pumpAndSettle();
+        for (var i = 0; i < 5; i++) {
+          await tester.pump(const Duration(milliseconds: 1));
+        }
       },
     );
 

@@ -5825,12 +5825,17 @@ of inhoud. Presentatie toont alle bestaande lettertype-, kleur-, animatie-, logo
 footer- en slotdia-instellingen naast een echte 16:9-diaweergave. Een gekozen logo
 staat ook als miniatuur naast de bestandskiezer en is standaard hetzelfde voor
 presentaties en documenten. In de documentinstellingen kun je die koppeling uitzetten
-en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Daar stel je
+en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Op de webversie
+kies je het presentatielogo, het donkere logo en het documentlogo ook. De bytes blijven
+in het geheugen van deze browsersessie: ze zijn zichtbaar in de voorvertoning en gaan
+mee in een `.ocideck`-pakket of een `.ocideckstyle`-bestand. Een kale markdown-download
+bewaart ze niet; OciDeck waarschuwt daarvoor en biedt het pakket aan. Na het herladen
+van de pagina zijn die sessiebytes weg. Daar stel je
 ook de breedte van het documentlogo in van 32 tot 480 px; tot je die wijzigt volgt deze
 de maat van het presentatielogo. Daar stel je ook de **basislettergrootte** in, van
 9 tot 28 pt (standaard 11 pt): dat is de puntmaat van de broodtekst, dezelfde
-eenheid als de PDF. Het scherm zet die punten om naar CSS-pixels, zodat 11 pt op
-het scherm dezelfde fysieke maat is als 11 pt in de PDF. Daar staat ook de **kopkleur** van een document.
+eenheid als de PDF, Word (DOCX) en LibreOffice (ODT). Het scherm zet die punten om naar CSS-pixels, zodat 11 pt op
+het scherm dezelfde fysieke maat is als 11 pt in de PDF. Koppen in Word houden hun eigen maat; in LibreOffice blijven ze een percentage van de broodtekst. Daar staat ook de **kopkleur** van een document.
 Zet je die niet, dan blijft het zoals het altijd was: een hoofdstukkop (`#`) volgt
 de tekstkleur en een subkop (`##` en dieper) het accent. Zet je hem wél, dan
 dragen álle kopniveaus die ene kleur — het geval waarvoor hij bestaat is een
@@ -5872,10 +5877,16 @@ Bij de kleuren van het profiel staat ook de **tabelstijl**: de randstijl (*Lijne
 (horizontaal)* in de trant van een gezet boek, *Omrand (volledig)* of *Geen
 randen*), de randkleur, **zebrastrepen** met een eigen kleur, de **celopvulling**
 in px en een **accentlijn onder de koprij**. Het is huisstijl, geen opmaak per
-tabel: alle tabellen in een document of presentatie volgen hem, en omdat hij in
-het stijlprofiel zit, reist hij mee met het bestand — de ontvanger ziet dezelfde
-tabel als jij. De schrijfbewerker, de voorvertoning, de HTML-export en de
-LaTeX-export tekenen hem alle vier.
+tabel: alle tabellen in een document of presentatie volgen het stijlprofiel dat
+op dat moment geldt. Een kale `.md` draagt die tabelstijl niet. Wie zo'n bestand
+opent terwijl een ander stijlprofiel actief is, ziet de tabellen in dat lokale
+profiel, niet in de stijl van de afzender. Een `.ocideckstyle`-bestand draagt het
+hele profiel, inclusief de tabelstijl. Een `.ocideck`-pakket legt de stijl ernaast
+in `ocideck-style.json`: OciDeck gebruikt die voor dit deck en laat het globale
+profiel van de ontvanger staan. De CSS in het pakket is er voor Marp. Een ouder
+pakket zonder dat bestand volgt het lokale profiel. Zie
+[FILE_FORMAT](FILE_FORMAT.md). De schrijfbewerker, de voorvertoning, de HTML-export en de
+LaTeX-export tekenen de stijl die zo van toepassing is.
 
 Een tabel die breder is dan de ruimte die hij krijgt, wordt niet afgekapt en loopt
 ook niet buiten de pagina: de kolommen krijgen hun natuurlijke breedte zolang die

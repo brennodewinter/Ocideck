@@ -1617,6 +1617,8 @@ const _dutchSourceAddSl = <String, String>{
       'Vaše nastavitve so bile poškodovane in so bile ponastavljene.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Vaše nastavitve so bile poškodovane in so bile ponastavljene; kopija je v {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotip ni slika ali je večji od 8 MB. Izberite manjši PNG, JPEG, GIF ali WebP.',
   'Bezig met installeren': 'Nameščam',
   'Gevonden op schijf: {pad}': 'Najdeno na disku: {pad}',
   'Van schijf installeren': 'Namesti z diska',

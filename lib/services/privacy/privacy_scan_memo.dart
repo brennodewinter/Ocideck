@@ -1,6 +1,6 @@
 import 'dart:isolate';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '../../models/deck.dart';
@@ -8,28 +8,6 @@ import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import 'privacy_bulk_lexicon.dart';
 import 'privacy_scanner.dart';
-
-/// Stempel voor bevindingen die pas bij het uitlezen hun echte dia-index
-/// krijgen. Bewust géén [kDeckWidePrivacyIndex] — die waarde betekent
-/// "deckbreed" en mag op een slidebevinding nooit naar buiten lekken.
-const int _unindexedSlide = -2;
-
-class _SlideScanMemo {
-  /// De scanner die deze uitkomst maakte — op identiteit. Hij komt uit een
-  /// provider die opnieuw wordt gebouwd zodra een instelling wijzigt
-  /// (uitgezette regels, eigen identiteit, landpakketten), dus een andere
-  /// configuratie is per definitie een ander object en dus een misser. Dat is
-  /// beter dan de velden los in de sleutel leggen: vergeet je er later één,
-  /// dan blijft er stilletjes een verouderde bevinding hangen — en dát is bij
-  /// een privacycontrole de verkeerde fout.
-  final PrivacyScanner scanner;
-
-  /// Bevindingen gestempeld op [_unindexedSlide]; de echte dia-index wordt er
-  /// bij het samenvoegen van de deckscan op geschreven.
-  final PrivacyScanResult result;
-
-  const _SlideScanMemo(this.scanner, this.result);
-}
 
 /// Per-slide memoisatie van de privacyscan op dia-identiteit.
 ///
@@ -40,12 +18,51 @@ class _SlideScanMemo {
 /// geschreven via [PrivacyFinding.reindexed]. Een dia die bovenaan wordt
 /// ingevoegd ongeldigt daardoor geen enkele scan achter hem (#2622).
 ///
-/// Een `Expando` en geen LRU: de memo leeft precies zo lang als de dia zelf
-/// en kent geen capaciteitsklif — een sequentiële scan over meer dia's dan de
-/// oude 512-cap verdreef elke waarde vlak voordat die weer nodig was.
-Expando<_SlideScanMemo> _slideScanCache = Expando<_SlideScanMemo>(
-  'privacyScan',
+/// De sleutel is waterdicht doordat alles wat de uitkomst bepaalt erin zit:
+///
+///   * de **scanner** als object. Hij komt uit een provider die opnieuw wordt
+///     gebouwd zodra een instelling wijzigt (uitgezette regels, eigen identiteit,
+///     landpakketten), dus een andere configuratie is per definitie een ander
+///     object en dus een misser. Dat is beter dan de velden los in de sleutel
+///     leggen: vergeet je er later één, dan blijft er stilletjes een verouderde
+///     bevinding hangen — en dát is bij een privacycontrole de verkeerde fout.
+///   * de **dia** als object. `Slide` is onveranderlijk en elke bewerking levert
+///     een nieuw exemplaar op, dus identiteit is hier een geldige
+///     wijzigingsstempel.
+///
+/// De index zit er bewust niet in. Een globale LRU met de index in de sleutel
+/// viel boven 512 dia's volledig weg: één invoeging bovenaan maakte elke
+/// volgende dia een misser, en een sequentiële scan over meer dia's dan het
+/// plafond verdrong elk item vlak voordat het weer nodig was (#2622). De scan
+/// zelf hangt niet van de index af — die wordt alleen op de bevinding gezet —
+/// dus we scannen zonder index en schrijven hem pas bij het samenvoegen, zoals
+/// de kwaliteitscontrole dat met `reindexed` doet.
+///
+/// Het [Expando] is zwak: de memo verdwijnt met de dia, en groeit dus niet los
+/// van het geheugen dat het deck zelf al houdt.
+final Expando<_SlideScanMemo> _slideScanCache = Expando<_SlideScanMemo>(
+  'privacySlideScan',
 );
+
+/// Generatie van [clearPrivacyScanMemo]. Een test die de memo leegt, maakt
+/// bestaande dia's daarmee een misser zonder het Expando te hoeven aflopen.
+int _scanEpoch = 0;
+
+/// Hoe vaak een dia écht opnieuw gescand is sinds de laatste
+/// [clearPrivacyScanMemo]. Tests gebruiken dit om te zien dat een verschoven
+/// dia niet opnieuw gescand wordt.
+@visibleForTesting
+int privacyScanMemoMisses = 0;
+
+class _SlideScanMemo {
+  _SlideScanMemo(this.epoch, this.scanner, this.findings);
+
+  final int epoch;
+  final PrivacyScanner scanner;
+
+  /// Bevindingen zoals [PrivacyScanner.scanSlide] ze op index 0 oplevert.
+  final List<PrivacyFinding> findings;
+}
 
 /// De scan van één dia, uit de memo wanneer die er al is.
 PrivacyScanResult memoizedSlideScan(
@@ -53,14 +70,44 @@ PrivacyScanResult memoizedSlideScan(
   Slide slide,
   int index,
 ) {
-  var memo = _slideScanCache[slide];
-  if (memo == null || !identical(memo.scanner, scanner)) {
-    memo = _SlideScanMemo(scanner, scanner.scanSlide(slide, _unindexedSlide));
-    _slideScanCache[slide] = memo;
+  final cached = _slideScanCache[slide];
+  if (cached != null &&
+      cached.epoch == _scanEpoch &&
+      identical(cached.scanner, scanner)) {
+    return _atIndex(cached.findings, index);
   }
+  privacyScanMemoMisses++;
+  final scanned = scanner.scanSlide(slide, 0);
+  _slideScanCache[slide] = _SlideScanMemo(
+    _scanEpoch,
+    scanner,
+    scanned.findings,
+  );
+  return _atIndex(scanned.findings, index);
+}
+
+PrivacyScanResult _atIndex(List<PrivacyFinding> findings, int index) {
+  if (index == 0 || findings.isEmpty) return PrivacyScanResult(findings);
   return PrivacyScanResult([
-    for (final f in memo.result.findings) f.reindexed(index),
+    for (final finding in findings) _withIndex(finding, index),
   ]);
+}
+
+PrivacyFinding _withIndex(PrivacyFinding finding, int index) {
+  if (finding.slideIndex == index) return finding;
+  return PrivacyFinding(
+    ruleId: finding.ruleId,
+    family: finding.family,
+    confidence: finding.confidence,
+    slideIndex: index,
+    field: finding.field,
+    fragmentIndex: finding.fragmentIndex,
+    start: finding.start,
+    end: finding.end,
+    maskedSample: finding.maskedSample,
+    role: finding.role,
+    personRole: finding.personRole,
+  );
 }
 
 /// De scan van een heel deck, met de dia's uit de memo.
@@ -78,10 +125,11 @@ PrivacyScanResult memoizedDeckScan(PrivacyScanner scanner, Deck deck) {
   return PrivacyScanResult(findings);
 }
 
-/// Vergeet alle memo's. Alleen voor tests: in de app ruimt de `Expando` mee
-/// op met de dia's zelf.
-void clearPrivacyScanMemo() =>
-    _slideScanCache = Expando<_SlideScanMemo>('privacyScan');
+/// Leegt de memo. Alleen voor tests: in de app verdwijnt een entry met de dia.
+void clearPrivacyScanMemo() {
+  _scanEpoch++;
+  privacyScanMemoMisses = 0;
+}
 
 /// Meet de koude dia's van [slides] vooruit in een werk-isolate en legt de
 /// uitslag in dezelfde memo's die [memoizedSlideScan] leest (#2634).
@@ -107,21 +155,26 @@ Future<void> warmPrivacyScanMemo(
   final cold = [
     for (final slide in slides)
       if (_slideScanCache[slide] == null ||
+          _slideScanCache[slide]!.epoch != _scanEpoch ||
           !identical(_slideScanCache[slide]!.scanner, scanner))
         slide,
   ];
   if (cold.isEmpty) return;
-  List<PrivacyScanResult> scanSync() => [
-    for (final slide in cold) scanner.scanSlide(slide, _unindexedSlide),
+  // Dezelfde index-0-meting als [memoizedSlideScan]: de echte dia-index
+  // komt er pas bij het samenvoegen op via [_atIndex].
+  List<PrivacyFinding> scanFindings(Slide slide) =>
+      scanner.scanSlide(slide, 0).findings;
+  List<List<PrivacyFinding>> scanSync() => [
+    for (final slide in cold) scanFindings(slide),
   ];
   // `ServicesBinding.rootIsolateToken` is een nullable static — `null` zolang
   // er geen binding staat (headless test), en dan valt de pas op sync terug.
   final token = ServicesBinding.rootIsolateToken;
-  final List<PrivacyScanResult> results;
+  final List<List<PrivacyFinding>> results;
   if (kIsWeb || token == null) {
     results = scanSync();
   } else {
-    final scanned = await Isolate.run<(bool, List<PrivacyScanResult>)>(
+    final scanned = await Isolate.run<(bool, List<List<PrivacyFinding>>)>(
       () async {
         BackgroundIsolateBinaryMessenger.ensureInitialized(token);
         await PrivacyBulkLexicon.instance.ensureLoaded();
@@ -133,6 +186,6 @@ Future<void> warmPrivacyScanMemo(
     results = scanned.$1 ? scanned.$2 : scanSync();
   }
   for (var i = 0; i < cold.length; i++) {
-    _slideScanCache[cold[i]] = _SlideScanMemo(scanner, results[i]);
+    _slideScanCache[cold[i]] = _SlideScanMemo(_scanEpoch, scanner, results[i]);
   }
 }

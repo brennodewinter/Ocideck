@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/utils/visual_markdown_flush.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
@@ -541,6 +542,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Mermaid'));
     await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     final source = n.currentState.document!.source;
     expect(source, contains('```mermaid'));
@@ -560,6 +562,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Pagina-einde'));
     await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     final source = n.currentState.document!.source;
     // Een `---` op een eigen regel, met een witregel ervóór zodat het een
@@ -695,6 +698,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Inhoudsopgave'));
     await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     // Alleen de marker: de lijst zelf wordt bij export gegenereerd, zodat een
     // hernoemde kop geen verouderde inhoudsopgave in het bestand achterlaat.

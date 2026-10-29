@@ -1616,6 +1616,8 @@ const _dutchSourceAddSv = <String, String>{
       'Dina inställningar var skadade och har återställts.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Dina inställningar var skadade och har återställts; en kopia finns i {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotypen är ingen bild eller är större än 8 MB. Välj en mindre PNG, JPEG, GIF eller WebP.',
   'Bezig met installeren': 'Installerar',
   'Gevonden op schijf: {pad}': 'Hittad på disk: {pad}',
   'Van schijf installeren': 'Installera från disk',

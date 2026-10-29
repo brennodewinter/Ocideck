@@ -418,8 +418,14 @@ void main() {
       await tester.tap(text('Sluiten'));
       await tester.pumpAndSettle();
       await pumpUntil(tester, () {
-        final register = File(workspace.registerPath).readAsStringSync();
-        return register.contains('maker-check-sent');
+        try {
+          return File(
+            workspace.registerPath,
+          ).readAsStringSync().contains('maker-check-sent');
+        } on FileSystemException {
+          // Windows kan het bestand kort vergrendelen terwijl de schrijver sluit.
+          return false;
+        }
       });
       // Een latere schijfhandeling is pas klaar als de vorige is afgehandeld, ook wat
       // daarna in het venster gebeurt.

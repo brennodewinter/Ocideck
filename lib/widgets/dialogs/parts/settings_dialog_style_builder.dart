@@ -519,7 +519,7 @@ class _DocumentStyleBuilder {
             ),
             const SizedBox(width: 8),
             ElevatedButton.icon(
-              onPressed: _pickDocumentLogo,
+              onPressed: () => _pickDocumentLogo(owner),
               icon: const Icon(Icons.image_outlined, size: 16),
               label: Text(l10n.d('Kiezen')),
             ),
@@ -677,15 +677,6 @@ class _DocumentStyleBuilder {
       controlAffinity: ListTileControlAffinity.leading,
     ),
   ];
-
-  Future<void> _pickDocumentLogo() async {
-    final path = await owner._pickProfileImagePath();
-    if (!mounted || path == null) return;
-    _rebuild(() {
-      _themeProfile = _themeProfile.copyWith(documentLogoPath: path);
-      _profileTouched = true;
-    });
-  }
 
   /// Het presentatievlak: wat alleen een dia heeft — de titel- en sectiebalk,
   /// het dialogo, de footer, de slotdia en de animatieduur.

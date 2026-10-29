@@ -1617,6 +1617,8 @@ const _dutchSourceAddFi = <String, String>{
       'Asetuksesi olivat vioittuneet ja ne on palautettu.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Asetuksesi olivat vioittuneet ja ne on palautettu; kopio on kohteessa {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo ei ole kuva tai se on yli 8 MB. Valitse pienempi PNG, JPEG, GIF tai WebP.',
   'Bezig met installeren': 'Asennetaan',
   'Gevonden op schijf: {pad}': 'Löydetty levyltä: {pad}',
   'Van schijf installeren': 'Asenna levyltä',

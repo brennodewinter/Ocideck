@@ -49,6 +49,7 @@ Future<bool> saveDocumentWithDestination(
   WidgetRef ref,
   DocumentNotifier notifier,
 ) async {
+  notifier.flushPendingVisualEdit();
   final state = notifier.currentState;
   final document = state.document;
   if (document == null) return false;

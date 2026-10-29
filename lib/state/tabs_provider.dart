@@ -144,7 +144,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// dáárin nog een `mem:`-pad aanhaalt, blijft; de rest gaat weg. Onvolledig
   /// zou het beeld op een andere dia of een ongedaan-stap wegvagen, dus de
   /// verzameling wordt hier bewust breed opgebouwd.
-  ///
   /// Op desktop is de store leeg (afbeeldingen staan op schijf), dus dan haakt
   /// hij meteen af.
   void sweepWebAssets() {
@@ -163,15 +162,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     final clipboard = _ref.read(slideClipboardProvider);
     if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
-    // De opgeslagen stijlprofielen kunnen óók mem:-beelden dragen (een op web
-    // gekozen logo, #2640). Zij leven niet in een tabblad, dus zonder deze
-    // stap veegt de sweep een logo weg dat de huisstijl nog aanhaalt.
-    for (final profile in _settings.currentState.themeProfiles) {
-      for (final ref in profileImagePaths(profile)) {
-        final path = (ref ?? '').trim();
-        if (WebAssetStore.isMemPath(path)) live.add(path);
-      }
-    }
+    addOpenStyleMemoryPaths(_ref.read(settingsProvider).themeProfiles, live);
     WebAssetStore.retain(live);
   }
 
@@ -801,7 +792,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     return (deck: deck, failure: OpenResult.opened);
   }
 
-  /// Selecteer een bestaand tabblad; ongeldige indices veranderen niets.
   void selectTab(int index) => _selectTab(this, index);
 
   /// Sluit een tabblad en ruim daarna alle niet meer gebruikte webassets op.
@@ -819,6 +809,7 @@ void _closeTab(TabsNotifier notifier, int index) {
   final current = notifier.currentState;
   final session = current.tabs[index].learningSession;
   _cancelLearningExpiry(notifier, session);
+  _flushClosingDocument(current.tabs[index].content);
   if (current.tabs.length == 1) {
     final tab = current.tabs.first;
     tab.learningSession = null;

@@ -229,7 +229,7 @@ class SlideRasterizer {
       // De export rastert op [targetWidth] px — déárom is dat de decodegrens
       // (#2625): een bronfoto van 24 MP hoeft voor een 1920 px-pagina niet op
       // 4096 px gedecodeerd te worden.
-      decodeMaxEdge: decodeEdgeForDisplay(targetWidth.toDouble(), 1.0),
+      decodeMaxEdge: kExportImageDecodeEdge,
     );
 
     final results = <Uint8List>[];
@@ -562,7 +562,7 @@ class SlideRasterizer {
           : null;
       return memBytes != null
           ? cappedMemoryImage(memBytes)
-          : cappedFileImage(File(path));
+          : cappedFileImage(File(path), maxEdge: kExportImageDecodeEdge);
     }
 
     for (var i = 0; i < list.length; i += batchSize) {

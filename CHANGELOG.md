@@ -8,6 +8,18 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- **MITRE CWE bijgewerkt van 4.20 naar 5.0.** De volledige lijst telt nu 984
+  zwakheden (15 nieuw, geen enkele verdwenen). CWE 5.0 haalde de gangbare
+  namen uit de titels (`('SQL Injection')`, `('Path Traversal')`) en zette ze
+  alleen nog bij de Alternate Terms; de bouwer neemt die nu als zoektermen mee,
+  zodat "race condition" of "xss" in de CWE-kiezer nog steeds vindt wat het
+  vond. De eigen kern volgt de nieuwe MITRE-namen, en CWE-613 (Insufficient
+  Session Expiration), in 5.0 vervallen, is vervangen door CWE-1463 (time-out)
+  en CWE-1464 (sessie-invalidatie). De verouderingspoort telde een standaard
+  die zowel verouderd als onvolledig was dubbel; dat is één.
+
 ### Fixed
 
 - **`.ocideck`-pakketten dragen hun stijl mee (#2644, #2641–#2645).** Een
@@ -54,6 +66,9 @@ All notable changes to OciDeck are documented in this file.
   toetsaanslagpad, een `*Sync`-verbod in de UI-laag, en tellingen op de
   privacy- en split-run-memo's. De Windows-opstartmeting is een
   bewust uitgesteld vervolg (#2657).
+- **Typende documenten, grote decks en fotodia's blijven vlot (#2621, #2622, #2625, #2635).** In de visuele documentstand wacht de omzetting naar Markdown tot je even pauzeert, of tot opslaan, export, presenteren, zoeken of een standwissel de bron nodig heeft; de nummering van een lijst loopt in één gang door het document. Privacy- en layoutmemo's hangen aan de dia zelf, zodat een deck boven een paar honderd dia's niet bij elke aanslag alles opnieuw doet. Preview, presentator, beamer en export decoderen een foto op de grootte van het vak (1024, 2048 of 4096 px) in plaats van op bronresolutie; een GIF die daarin past blijft bewegen. Het AI-statuslampje hertikt ook nog nadat je één keer een instelling hebt gewijzigd.
+
+- **Logo en stijl reizen met het pakket, niet in de markdown (#2640–#2645, #2648–#2651).** Op de webversie kun je een presentatie-, donker en documentlogo kiezen; de bytes blijven in deze sessie en gaan mee in een pakket of een `.ocideckstyle`. Een kale download waarschuwt. Een opgeslagen project kopieert die logo's naast elkaar, ook als ze dezelfde bestandsnaam hebben. Een `.ocideck` legt de stijl in `ocideck-style.json` naast de markdown: OciDeck past hem toe op dat deck en laat het globale profiel staan. Oudere pakketten zonder dat bestand houden het lokale profiel. Annuleren in de instellingen gooit een nieuw of verwijderd stijlprofiel en een gewijzigde documentlay-out weer weg. De documentlettermaat geldt ook in DOCX en ODT. De Marp-CSS van een pakket neemt letter en tabelstijl van het profiel over.
 
 - **Gebruikershandleiding brak halverwege af op de forge (#2612).** Een
   plaatshouder `<title>` in lopende tekst las Forgejo als echte HTML-tag,

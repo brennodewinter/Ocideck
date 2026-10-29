@@ -661,6 +661,8 @@ const _dutchSourceAddEs = {
       'Tu configuración estaba dañada y se ha restablecido.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Tu configuración estaba dañada y se ha restablecido; hay una copia en {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'El logotipo no es una imagen o pesa más de 8 MB. Elija un PNG, JPEG, GIF o WebP más pequeño.',
   'Bezig met installeren': 'Instalando',
   'Gevonden op schijf: {pad}': 'Encontrado en el disco: {pad}',
   'Van schijf installeren': 'Instalar desde el disco',

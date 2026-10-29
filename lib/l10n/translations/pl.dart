@@ -1629,6 +1629,8 @@ const _dutchSourceAddPl = <String, String>{
       'Twoje ustawienia były uszkodzone i zostały przywrócone.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Twoje ustawienia były uszkodzone i zostały przywrócone; kopia znajduje się w {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo nie jest obrazem albo ma ponad 8 MB. Wybierz mniejszy plik PNG, JPEG, GIF lub WebP.',
   'Bezig met installeren': 'Trwa instalowanie',
   'Gevonden op schijf: {pad}': 'Znaleziono na dysku: {pad}',
   'Van schijf installeren': 'Zainstaluj z dysku',

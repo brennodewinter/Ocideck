@@ -664,6 +664,8 @@ const _dutchSourceAddDe = {
       'Deine Einstellungen waren beschädigt und wurden zurückgesetzt.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Deine Einstellungen waren beschädigt und wurden zurückgesetzt; eine Kopie liegt in {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Das Logo ist kein Bild oder größer als 8 MB. Wählen Sie ein kleineres PNG, JPEG, GIF oder WebP.',
   'Bezig met installeren': 'Wird installiert',
   'Gevonden op schijf: {pad}': 'Auf Datenträger gefunden: {pad}',
   'Van schijf installeren': 'Von Datenträger installieren',

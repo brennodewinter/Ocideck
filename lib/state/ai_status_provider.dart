@@ -70,9 +70,9 @@ class AiStatusNotifier extends Notifier<AiStatus> {
   AiStatus build() {
     final settings = ref.watch(settingsProvider.select((s) => s.aiSettings));
     final consent = ref.watch(consentProvider.select((s) => s.hasAccepted));
-    // De timer hoort bij déze build: annuleer én vergeet hem, anders maakt de
-    // `=` hieronder na een herbouw geen nieuwe en stopt de periodieke
-    // controle voorgoed (#2635).
+    // onDispose loopt ook bij een herbouw. Zonder de timer op null te zetten
+    // maakt `??=` daarna geen nieuwe, en de closure hield de generatie van de
+    // éérste build vast — na één instellingswijziging stopte de herting (#2635).
     ref.onDispose(() {
       _timer?.cancel();
       _timer = null;
@@ -95,9 +95,9 @@ class AiStatusNotifier extends Notifier<AiStatus> {
     // De gate laat toe: ping de endpoint en hertiek daarna rustig door. De
     // eerdere uitkomst blijft tijdens een herting staan — 'checking' flashen
     // bij elke interval tikt alleen maar onrust in.
-    _timer ??= Timer.periodic(
+    _timer = Timer.periodic(
       kAiStatusRefreshInterval,
-      (_) => unawaited(_check(generation)),
+      (_) => unawaited(_check(_generation)),
     );
     unawaited(_check(generation));
     return const AiStatus(AiAvailability.checking);

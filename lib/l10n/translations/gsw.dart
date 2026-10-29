@@ -1620,6 +1620,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Dini Istellige sind korrupt gsii und zruggsetzt worde.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Dini Istellige sind korrupt gsii und zruggsetzt worde; e Kopie lit in {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'S Logo isch keis Bild oder grösser als 8 MB. Nimm es chliners PNG, JPEG, GIF oder WebP.',
   'Bezig met installeren': 'Wird installiert',
   'Gevonden op schijf: {pad}': 'Uf Disk gfunde: {pad}',
   'Van schijf installeren': 'Von Disk installiere',

@@ -56,35 +56,13 @@ extension _SettingsColors on _SettingsDialogState {
         ),
       ),
       const SizedBox(height: 12),
-      _settingFieldRow(
+      _bulletMarkerField(
         context,
-        label: Text(
-          l10n.d('Opsommingsteken'),
-          style: const TextStyle(fontSize: 13),
-        ),
-        control: SegmentedButton<BulletMarker>(
-          segments: [
-            ButtonSegment(
-              value: BulletMarker.dot,
-              icon: const Icon(Icons.fiber_manual_record, size: 12),
-              label: Text(l10n.d('Stip')),
-            ),
-            ButtonSegment(
-              value: BulletMarker.paw,
-              icon: const Icon(Icons.pets, size: 16),
-              label: Text(l10n.d('Pootje')),
-            ),
-          ],
-          selected: {_themeProfile.bulletMarker},
-          showSelectedIcon: false,
-          style: const ButtonStyle(visualDensity: VisualDensity.compact),
-          onSelectionChanged: (selection) => _rebuild(() {
-            _themeProfile = _themeProfile.copyWith(
-              bulletMarker: selection.first,
-            );
-            _profileTouched = true;
-          }),
-        ),
+        profile: _themeProfile,
+        onChanged: (p) => _rebuild(() {
+          _themeProfile = p;
+          _profileTouched = true;
+        }),
       ),
       ..._checklistColorSettings(contrast),
       ..._tableColorSettings(contrast),
@@ -465,11 +443,9 @@ extension _SettingsColors on _SettingsDialogState {
   List<Widget> _slideLogoChildren() {
     final l10n = context.l10n;
     return [
-      // Op desktop is het logopad een bestandspad; op web zijn er geen
-      // paden en slaat de kiezer de bytes op als `mem:`-verwijzing (#2640).
-      // Die leeft alleen in deze browsersessie en reist mee in een
-      // pakketexport — daarvoor tonen we de naam en een korte melding, geen
-      // kapot pad.
+      // Op web komen de bytes in het sessiegeheugen (mem:). Een losse
+      // markdown-download bewaart die niet; een pakket wel. De knoppen staan
+      // daarom op elk platform.
       _themeColorAnchor(
         'logoPath',
         Row(
@@ -501,7 +477,7 @@ extension _SettingsColors on _SettingsDialogState {
             ),
             const SizedBox(width: 8),
             ElevatedButton.icon(
-              onPressed: _pickLogo,
+              onPressed: () => _pickPresentationLogo(this),
               icon: const Icon(Icons.image_outlined, size: 16),
               label: Text(l10n.d('Kiezen')),
             ),
@@ -588,7 +564,7 @@ extension _SettingsColors on _SettingsDialogState {
               ),
               const SizedBox(width: 8),
               ElevatedButton.icon(
-                onPressed: _pickLogoDark,
+                onPressed: () => _pickDarkPresentationLogo(this),
                 icon: const Icon(Icons.nights_stay_outlined, size: 16),
                 label: Text(l10n.d('Kiezen')),
               ),

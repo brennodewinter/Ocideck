@@ -664,6 +664,8 @@ const _dutchSourceAddFy = {
       'Jo ynstellingen wiene skansearre en binne weromset.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Jo ynstellingen wiene skansearre en binne weromset; in kopy stiet yn {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'It logo is gjin ôfbylding of grutter as 8 MB. Kies in lytser PNG, JPEG, GIF of WebP.',
   'Bezig met installeren': 'Oan it ynstallearjen',
   'Gevonden op schijf: {pad}': 'Fûn op skiif: {pad}',
   'Van schijf installeren': 'Fan skiif ynstallearje',

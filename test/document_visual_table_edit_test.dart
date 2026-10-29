@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart'
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
+import 'package:ocideck/utils/visual_markdown_flush.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
 import 'package:ocideck/widgets/editors/markdown_source_controller.dart';
@@ -87,7 +88,7 @@ Een alinea vooraf.
     // Cel 2 = de eerste cel van de gegevensrij (kop, kop, cel, cel).
     await tester.enterText(find.byType(TextField).at(2), tekst);
     await tester.pump();
-    await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
     return controller;
   }
 
@@ -204,7 +205,7 @@ Een alinea vooraf.
 
     await tester.enterText(find.widgetWithText(TextField, 'Aap'), 'Aapje');
     await tester.pump();
-    await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     expect(
       surface.scrollController.offset,
@@ -271,7 +272,7 @@ $rows
       ),
     );
     await tester.pump();
-    await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     final afterBackspace = tester.widget<TextField>(
       find.byType(TextField).last,

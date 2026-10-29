@@ -1636,6 +1636,8 @@ const _dutchSourceAddBg = <String, String>{
       'Вашите настройки бяха повредени и бяха нулирани.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Вашите настройки бяха повредени и бяха нулирани; копие има в {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Логото не е изображение или е по-голямо от 8 MB. Изберете по-малко PNG, JPEG, GIF или WebP.',
   'Bezig met installeren': 'Инсталиране',
   'Gevonden op schijf: {pad}': 'Намерено на диска: {pad}',
   'Van schijf installeren': 'Инсталиране от диска',

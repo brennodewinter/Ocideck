@@ -47,7 +47,10 @@ void main() {
         slideBackgroundColor: '#101010',
         textColor: '#FAFAFA',
         accentColor: '#FF8800',
-        bulletMarker: BulletMarker.paw,
+        bulletMarker: BulletMarker.customSvg,
+        customBulletSvg:
+            '<svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">'
+            '<path d="M0 0h10v10z"/></svg>',
         documentLogoSize: 224,
         documentBandTextColor: '#F8FAFC',
         documentBandBackgroundColor: '#172033',

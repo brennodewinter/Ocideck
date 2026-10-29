@@ -108,16 +108,16 @@ void main() {
     final before = container.read(settingsProvider).themeProfiles.length;
     await tester.tap(find.byIcon(Icons.add).first);
     await tester.pumpAndSettle();
-
-    // De werkkopie: de knop voegt aan het venster toe, nog niet aan de
-    // bewaarde verzameling.
-    expect(container.read(settingsProvider).themeProfiles, hasLength(before));
+    // Aanmaken zit in de werkkopie. De lijst in de instellingen groeit pas
+    // bij Opslaan, zodat Annuleren het nieuwe profiel weer laat vallen (#2648).
+    expect(container.read(settingsProvider).themeProfiles.length, before);
 
     await tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan'));
     await tester.pumpAndSettle();
+
     expect(
-      container.read(settingsProvider).themeProfiles,
-      hasLength(greaterThan(before)),
+      container.read(settingsProvider).themeProfiles.length,
+      greaterThan(before),
     );
   });
 

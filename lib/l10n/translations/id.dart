@@ -1617,6 +1617,8 @@ const _dutchSourceAddId = <String, String>{
       'Pengaturanmu rusak dan telah dipulihkan.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Pengaturanmu rusak dan telah dipulihkan; salinan ada di {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo ini bukan gambar atau lebih besar dari 8 MB. Pilih PNG, JPEG, GIF, atau WebP yang lebih kecil.',
   'Bezig met installeren': 'Menginstal',
   'Gevonden op schijf: {pad}': 'Ditemukan di disk: {pad}',
   'Van schijf installeren': 'Instal dari disk',

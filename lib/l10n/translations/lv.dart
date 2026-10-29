@@ -1615,6 +1615,8 @@ const _dutchSourceAddLv = <String, String>{
       'Jūsu iestatījumi bija bojāti un tie atjaunoti.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Jūsu iestatījumi bija bojāti un tie atjaunoti; kopija atrodas {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotips nav attēls vai ir lielāks par 8 MB. Izvēlieties mazāku PNG, JPEG, GIF vai WebP.',
   'Bezig met installeren': 'Instalē',
   'Gevonden op schijf: {pad}': 'Atrasts diskā: {pad}',
   'Van schijf installeren': 'Instalēt no diska',

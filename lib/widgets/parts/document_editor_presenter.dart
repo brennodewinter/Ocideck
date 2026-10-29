@@ -12,11 +12,11 @@ part of '../document_editor_screen.dart';
 /// presentatie-conversie is dit geen kopie maar de bron zelf; wat de sessie
 /// aan edits opleverde wordt bij het sluiten expliciet bewaard, als kopie
 /// bewaard of verworpen.
-Future<void> _presentDocumentSession(
-  BuildContext context,
-  WidgetRef ref,
-  String body,
-) async {
+Future<void> _presentDocumentSession(_DocumentEditorScreenState s) async {
+  s.ref.read(documentProvider.notifier).flushPendingVisualEdit();
+  final context = s.context;
+  final ref = s.ref;
+  final body = s._controller.text;
   final l10n = context.l10n;
   // Wijs de live-bewerkbare tabellen aan vóór de presentatie; zonder
   // aanwijzing staat alles lees-only (#2487: nooit impliciet).

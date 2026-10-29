@@ -1610,6 +1610,8 @@ const _dutchSourceAddEt = <String, String>{
       'Sinu seaded olid rikutud ja need on lähtestatud.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Sinu seaded olid rikutud ja need on lähtestatud; koopia asub kohas {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo ei ole pilt või on suurem kui 8 MB. Valige väiksem PNG, JPEG, GIF või WebP.',
   'Bezig met installeren': 'Installin',
   'Gevonden op schijf: {pad}': 'Kettalt leitud: {pad}',
   'Van schijf installeren': 'Installi kettalt',

@@ -1,11 +1,9 @@
 import 'package:path/path.dart' as p;
 
 import '../models/deck.dart';
-import '../models/settings.dart';
 import '../models/slide.dart';
 import 'file_service.dart' show PackageEntry;
 import 'image_service.dart';
-import 'package_theme_profile.dart';
 import 'pdf_evidence_service.dart';
 import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
@@ -125,40 +123,4 @@ Deck _attachPackageAssetsToMem(
       rewritePdfEvidence(rewriteMedia(rewriteSlideImagePaths(s, memPath))),
   ];
   return deck.copyWith(slides: slides);
-}
-
-/// Het `theme.json`-lid van een pakket, vertaald naar de leesbare vorm voor
-/// deze sessie: de afbeeldingsvelden wijzen naar `mem:`-paden van de
-/// meegeleverde `logos/`/`images`-leden. Geeft `null` als het pakket geen
-/// bruikbaar stijlrecord draagt — de aanroeper valt dan terug op het actieve
-/// profiel van de ontvanger (#2644).
-///
-/// Los van [attachPackageAssetsToMem] omdat de aanroeper het verschil moet
-/// weten tussen "pakket draagt een stijl" en "geen stijl mee" — alleen in
-/// het eerste geval mag de lokale profielkeuze worden vervangen.
-ThemeProfile? packageThemeToMem(List<PackageEntry> entries, String mdName) {
-  final mdDir = p.posix.dirname(mdName);
-  final byName = {for (final e in entries) p.posix.normalize(e.name): e.bytes};
-  final themeBytes = byName['theme.json'];
-  if (themeBytes == null) return null;
-  final raw = decodePackageThemeProfile(themeBytes);
-  if (raw == null) return null;
-  final resolved = resolvePackageProfilePaths(
-    raw,
-    resolve: (ref) {
-      final rel = p.posix.normalize(
-        mdDir == '.' ? ref : p.posix.join(mdDir, ref),
-      );
-      if (rel.startsWith('..')) return null; // buiten het pakket
-      final bytes = byName[rel];
-      if (bytes == null ||
-          bytes.isEmpty ||
-          bytes.length > ImageService.maxImageBytes ||
-          !ImageService.looksLikeImage(bytes)) {
-        return null;
-      }
-      return WebAssetStore.put(bytes, name: p.posix.basename(rel));
-    },
-  );
-  return resolved;
 }

@@ -55,7 +55,6 @@ import 'image_service.dart';
 import 'markdown_safety.dart';
 import 'markdown_service.dart';
 import 'open_file_channel.dart';
-import 'package_theme_profile.dart';
 import 'slide_image_refs.dart';
 import 'transcript_audio_copy.dart';
 import 'transcription/transcript_marker.dart';
@@ -64,6 +63,7 @@ import 'web_asset_store.dart';
 part 'file/file_service_net.dart';
 part 'file/file_service_open.dart';
 part 'file/file_service_package.dart';
+part 'file/file_service_carried_style.dart';
 part 'file/file_service_dossier.dart';
 part 'file/file_service_project.dart';
 part 'file/file_service_import.dart';
@@ -75,24 +75,7 @@ ThemeProfile _resolveBrandStripPath(
   ThemeProfile profile,
   String? projectPath,
   String? Function() homeDirectory,
-) {
-  final stripPath = profile.brandStripPath;
-  if (stripPath == null ||
-      stripPath.trim().isEmpty ||
-      isBundledAssetPath(stripPath) ||
-      kIsWeb ||
-      p.isAbsolute(stripPath)) {
-    return profile;
-  }
-  final bases = [?projectPath, ?homeDirectory()];
-  for (final base in bases) {
-    final candidate = p.normalize(p.join(base, stripPath));
-    if (File(candidate).existsSync()) {
-      return profile.copyWith(brandStripPath: candidate);
-    }
-  }
-  return profile;
-}
+) => _resolveProjectRelativeStylePaths(profile, projectPath, homeDirectory);
 
 /// Een afwijkend documentlogo ([ThemeProfile.documentLogoPath]) resolveert
 /// precies als de merkstrook: relatief t.o.v. het project, met de thuismap
@@ -235,13 +218,6 @@ class ScanHit {
     if (t != null && t.isNotEmpty) return t;
     return p.basenameWithoutExtension(fileName);
   }
-}
-
-class _LogoProjectAsset {
-  final ThemeProfile profile;
-  final String? cssUrl;
-
-  const _LogoProjectAsset(this.profile, this.cssUrl);
 }
 
 /// Eén lid van een `.ocideck`-pakket: archiefnaam plus uitgepakte bytes.
@@ -797,22 +773,20 @@ class FileService {
     // echt afgekapt bestand was de body al weg vóór wij hem lazen, en de
     // gebruiker ziet een lege presentatie.
 
-    // The file carries only content; apply the active style profile on open.
-    // One exception: a `theme.json` beside the `.md` — the form in which an
-    // `.ocideck` package ships its author's style (#2644). That profile
-    // belongs to *that* presentation; the recipient's active profile stays
-    // untouched. Only when reading from disk: carried-in bytes have no
-    // directory where such a sibling could live.
-    var theme = activeProfileFor(projectPath: parsed.projectPath);
-    var carriesPackagedProfile = false;
-    if (content == null && parsed.projectPath != null) {
-      final packaged = await _packagedThemeBeside(parsed.projectPath!);
-      if (packaged != null) {
-        theme = packaged;
-        carriesPackagedProfile = true;
-      }
-    }
-    final deck = parsed.copyWith(themeProfile: theme);
+    // Inhoud blijft in de markdown. Een pakket kan er een stijlsidecar
+    // naast leggen; zonder die sidecar geldt het actieve profiel.
+    final active = activeProfileFor(projectPath: parsed.projectPath);
+    final carried = await carriedProjectStyle(parsed.projectPath, active);
+    // `carriedProjectStyle` geeft de fallback-instantie zelf terug zolang er
+    // geen sidecar is; een ander object betekent dat deze presentatie haar
+    // eigen stijl meedraagt (#2644) en die bij opslaan van haar blijft.
+    final carriesPackagedProfile = !identical(carried, active);
+    final deck = parsed.copyWith(
+      themeProfile: resolveThemeProfile(
+        carried,
+        projectPath: parsed.projectPath,
+      ),
+    );
     final chartWarnings = <String>[];
     final skipped = <String>[];
     var hydrated = await _hydrateCharts(
@@ -845,35 +819,6 @@ class FileService {
       integrity: integrity,
       carriesPackagedProfile: carriesPackagedProfile,
     );
-  }
-
-  /// Het `theme.json`-record naast een geopende `.md` — de vorm waarin een
-  /// uitgepakt `.ocideck`-pakket zijn stijl meestuurt (#2644). De
-  /// afbeeldingsvelden mogen alleen binnen de projectmap wijzen; wat de
-  /// containment-weigert valt weg in plaats van een pad daarbuiten te volgen.
-  /// Onleesbaar of te groot is geen fout: het deck opent gewoon onder het
-  /// actieve profiel.
-  Future<ThemeProfile?> _packagedThemeBeside(String projectPath) async {
-    final file = File(p.join(projectPath, 'theme.json'));
-    try {
-      if (!await file.exists() || await file.length() > maxStyleProfileBytes) {
-        return null;
-      }
-      final raw = decodePackageThemeProfile(await file.readAsBytes());
-      if (raw == null) return null;
-      return resolvePackageProfilePaths(
-        raw,
-        resolve: (ref) =>
-            // Een verwijzing mét schema (`mem:`, `data:`, `http:`) hoort niet
-            // in een schijf-record; alleen een pad binnen de map volgen we.
-            Uri.tryParse(ref)?.hasScheme == true
-            ? null
-            : resolveContainedRealPath(ref, projectPath),
-      );
-    } catch (e) {
-      logWarning('FileService.openDeck: packaged theme unreadable', e);
-      return null;
-    }
   }
 
   /// Als [saveDeckAs], maar mét de grafiekdata-waarschuwingen.

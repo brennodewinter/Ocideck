@@ -2525,6 +2525,8 @@ const _dutchSourceAddTr = <String, String>{
       'Ayarlarınız bozuktu ve sıfırlandı.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Ayarlarınız bozuktu ve sıfırlandı; bir kopya {pad} konumunda.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo bir görsel değil ya da 8 MB\'den büyük. Daha küçük bir PNG, JPEG, GIF veya WebP seçin.',
   'Bezig met installeren': 'Kuruluyor',
   'Gevonden op schijf: {pad}': 'Diskte bulundu: {pad}',
   'Van schijf installeren': 'Diskten kur',

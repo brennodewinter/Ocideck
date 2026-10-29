@@ -63,11 +63,12 @@ extension _PresenterPlayback on _FullscreenPresenterState {
         version: imageVersionOf(resolved),
         projectPath: trusted ? null : widget.projectPath,
         // Dezelfde weergave-grens als de render zelf (#2625): een andere
-        // decodeEdge is een andere cachesleutel, en dan warmt de voorlezing
+        // maxEdge is een andere cachesleutel, en dan warmt de voorlezing
         // een entry die de getoonde decode nooit raakt. De presentator vult
-        // het venster, dus de vensterbreedte is hier de weergavemaat.
-        decodeEdge: decodeEdgeForDisplay(
+        // het venster, dus de venstermaat is hier de weergavemaat.
+        maxEdge: decodeEdgeForBox(
           MediaQuery.sizeOf(context).width,
+          MediaQuery.sizeOf(context).height,
           MediaQuery.devicePixelRatioOf(context),
         ),
       ),

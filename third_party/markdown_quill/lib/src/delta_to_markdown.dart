@@ -76,27 +76,35 @@ class DeltaToMarkdown extends Converter<Delta, String>
   /// which is responsible for special characters escaping, e.g.: `_` becomes `\_`
   final CustomContentHandler customContentHandler;
 
-  @override
-  String convert(Delta input) =>
-      convertDocument(Document.fromDelta(transform(input)));
+  /// Nummering van de lopende omzetting. Eén gang door het document, daarna
+  /// een lookup per lijstitem — niet per item het hele document af (#2621).
+  Map<Node, String>? _orderedPrefix;
 
-  /// Zet een bestaande [Document]-boom direct om (#2621): de aanroeper heeft
-  /// de boom al, en [convert] bouwde er per toetsaanslag een tweede via
-  /// `Document.fromDelta`.
-  ///
-  /// `transform` repareert delta's waar een blok-embed (horizontale streep,
-  /// tabel) midden op een tekstregel staat. In een echte Document-boom staat
-  /// zo'n embed altijd op een eigen regel, dus die reparatie is hier een
-  /// no-op die we bewust overslaan.
-  String convertDocument(Document document) {
-    _listNumbers = _indexListNumbers(document.root);
-    return document.root.accept(this).toString();
+  @override
+  String convert(Delta input) {
+    return _converting(this, () {
+      final newDelta = transform(input);
+      final quillDocument = Document.fromDelta(newDelta);
+      return quillDocument.root.accept(this).toString();
+    });
   }
 
-  /// Regel → genummerd-lijst-cijfer, één keer per omzetting berekend in
-  /// [_indexListNumbers]. De oude `_prefixNumber` liep per lijstitem het
-  /// hele document terug — O(lijstitems × documentlengte) per toetsaanslag.
-  Map<Node, int> _listNumbers = const {};
+  /// Zelfde omzetting als [convert], maar op de boom die de aanroeper al
+  /// heeft. [convert] bouwt eerst een tweede [Document] uit de delta; bij een
+  /// document van honderden pagina's is dat de dure helft (#2621).
+  String convertDocument(Document document) {
+    return _converting(this, () => document.root.accept(this).toString());
+  }
+
+  String _prefixFor(Node node) {
+    final cached = _orderedPrefix;
+    if (cached != null) return cached[node] ?? '1.';
+    final root = _findRoot(node);
+    if (root == null) return '1.';
+    final built = _orderedPrefixes(root);
+    _orderedPrefix = built;
+    return built[node] ?? '1.';
+  }
 
   final Map<String, _AttributeHandler> _blockAttrsHandlers = {
     Attribute.codeBlock.key: _AttributeHandler(
@@ -125,8 +133,7 @@ class DeltaToMarkdown extends Converter<Delta, String>
     ),
   };
 
-  // late: de handlers lezen [_listNumbers], dat per convert wordt gezet.
-  late final Map<String, _AttributeHandler> _lineAttrsHandlers = {
+  final Map<String, _AttributeHandler> _lineAttrsHandlers = {
     Attribute.header.key: _AttributeHandler(
       beforeContent: (attribute, node, output) {
         output
@@ -147,7 +154,7 @@ class DeltaToMarkdown extends Converter<Delta, String>
         final indent = '    ' * indentLevel;
         final String prefix;
         if (isNumbered) {
-          prefix = '${_listNumbers[node] ?? 1}. ';
+          prefix = '${_prefixNumber(node)} ';
         } else if (isChecked) {
           prefix = '- [x] ';
         } else if (isUnchecked) {
@@ -465,33 +472,56 @@ class CustomAttributeHandler {
   )? afterContent;
 }
 
-/// Eén gang door het document die per genummerd item zijn cijfer berekent —
-/// de voorwaartse equivalent van de oude terugwaartse scan in `_prefixNumber`
-/// (#2621). Zelfde semantiek: een item op niveau m breekt de telling van
-/// diepere niveaus; een niet-lijstregel op niveau 0 breekt álle tellingen; en
-/// een niet-lijstregel mét inspringing is lijstitem-inhoud en breekt niets
-/// (#1925). Opsommingstekens op het eigen niveau tellen niet mee maar
-/// verbreken de nummering óók niet.
-Map<Node, int> _indexListNumbers(Root root) {
-  final numbers = <Node, int>{};
-  final counters = <int, int>{};
+/// De converter die op dit moment een boom bewandelt. De lijstprefix wordt
+/// vanuit een closure in de veldinitialisatie aangeroepen, en die mag `this`
+/// niet vangen. Synchroon, en hersteld na afloop zodat een geneste omzetting
+/// de buitenste niet wist.
+DeltaToMarkdown? _convertingNow;
+
+String _converting(DeltaToMarkdown converter, String Function() body) {
+  final previous = _convertingNow;
+  _convertingNow = converter;
+  converter._orderedPrefix = null;
+  try {
+    return body();
+  } finally {
+    converter._orderedPrefix = null;
+    _convertingNow = previous;
+  }
+}
+
+String _prefixNumber(Node node) {
+  final converter = _convertingNow;
+  if (converter == null) return '1.';
+  return converter._prefixFor(node);
+}
+
+/// Eén voorwaartse gang die hetzelfde telt als de oude terugwandeling per
+/// item: een genummerd item op hetzelfde inspringniveau telt mee, een
+/// ongenummerd item op dat niveau niet (en breekt de reeks niet), een lijst
+/// op een ondieper niveau of een niet-lijst op niveau 0 breekt wél. Een
+/// niet-lijst mét inspringing hoort bij het item erboven en telt door
+/// (#1925).
+Map<Node, String> _orderedPrefixes(Root root) {
+  final result = <Node, String>{};
+  final counts = <int, int>{};
   for (final node in _toDocumentList(root)) {
     final indent = node.getAttrValueOr(Attribute.indent.key, 0);
     final listType = node.getAttrValueOr<String?>(Attribute.list.key, null);
     if (listType == null) {
-      if (indent == 0) counters.clear();
+      if (indent <= 0) counts.clear();
       continue;
     }
-    counters.removeWhere((level, _) => level > indent);
+    counts.removeWhere((level, _) => level > indent);
     if (listType == 'ordered') {
-      numbers[node] = (counters[indent] ?? 0) + 1;
-      counters[indent] = numbers[node]!;
+      final next = (counts[indent] ?? 0) + 1;
+      counts[indent] = next;
+      result[node] = '$next.';
     }
   }
-  return numbers;
+  return result;
 }
 
-/// Platte documentlijst in leesvolgorde; de basis van [_indexListNumbers].
 List<Node> _toDocumentList(Node node, {List<Node>? input}) {
   final output = input ?? <Node>[];
   List<Node>? children;
@@ -509,4 +539,11 @@ List<Node> _toDocumentList(Node node, {List<Node>? input}) {
     }
   }
   return output;
+}
+
+Root? _findRoot(Node? parent) {
+  if (parent is Root || parent == null) {
+    return parent as Root?;
+  }
+  return _findRoot(parent.parent);
 }

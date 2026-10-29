@@ -26,12 +26,14 @@ import '../../services/secret_store.dart';
 import '../../services/disk_traces.dart';
 import '../../services/export_metadata.dart';
 import '../../services/update_check_service.dart';
+import '../../models/asset_origin.dart';
 import '../../services/file_service.dart';
-import '../../services/git/outbox.dart';
-import '../../services/image_service.dart';
+import '../../services/style_logo_bytes.dart';
 import '../../services/web_asset_store.dart';
+import '../../services/git/outbox.dart';
 import '../../services/recovery_service.dart';
 import '../../utils/net_guard.dart';
+import '../../utils/sanitize_svg.dart';
 import 'certificate_trust_dialog.dart';
 import '../../models/local_cve_status.dart';
 import '../../services/cve/local_cve_database.dart';
@@ -59,7 +61,6 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/privacy_disposition.dart';
 import '../connection_status.dart';
-import '../editors/_editor_field.dart';
 import '../editors/advanced_section.dart';
 import '../document_page_chrome.dart';
 import '../language_flag.dart';
@@ -113,6 +114,7 @@ part 'parts/settings_dialog_document_fonts.dart';
 part 'parts/settings_dialog_style_preview.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
+part 'parts/settings_dialog_bullet_marker.dart';
 part 'parts/settings_dialog_table_style.dart';
 part 'parts/settings_dialog_profile.dart';
 part 'parts/settings_dialog_privacy.dart';
@@ -213,21 +215,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _footerText;
   late TextEditingController _closingSlideMarkdown;
 
-  /// De profielverzameling zoals het venster die bewerkt (#2648). Aanmaken,
-  /// importeren en verwijderen raken alleen deze lijst; pas Opslaan schrijft
-  /// hem weg, en Annuleren laat de bewaarde verzameling onaangeroerd.
-  late List<ThemeProfile> _themeProfiles;
-
-  /// De bewerkkopie van de documentopmaak — zelfde reden: een gewijzigde
-  /// marge of afgedwongen stijl hoort niet te gelden nadat je Annuleren kiest.
-  late String? _documentDefaultStyle;
-  late bool _documentStyleEnforced;
-  late bool _documentChapterPageBreak;
-  late double? _documentEditorMaxWidth;
-  late PageSizeSpec _documentPageSize;
-  late PageMargins _documentPageMargins;
-  late bool _documentCropMarks;
-
   /// De AI-backend (optioneel, standaard uit): velden, modus en API-sleutel.
   final AiForm _ai = AiForm();
 
@@ -244,6 +231,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
+
+  /// Werkkopie van de stijlprofielen. Aanmaken, verwijderen en importeren
+  /// raken de opgeslagen lijst pas bij Opslaan; Annuleren gooit deze weg.
+  late List<ThemeProfile> _styleProfiles;
+
+  /// Werkkopie van de documentlay-out. Dezelfde reden als [_styleProfiles].
+  late DocumentLayoutDraft _documentLayout;
 
   bool _stylePreviewShowsContent = true;
   _StyleSurface _styleSurface = _StyleSurface.general;
@@ -319,14 +313,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         .deck
         ?.themeProfile;
     _themeProfile = deckProfile ?? settings.themeProfile;
-    _themeProfiles = _availableStyleProfiles(settings.themeProfiles);
-    _documentDefaultStyle = settings.documentDefaultStyle;
-    _documentStyleEnforced = settings.documentStyleEnforced;
-    _documentChapterPageBreak = settings.documentChapterPageBreak;
-    _documentEditorMaxWidth = settings.documentEditorMaxWidth;
-    _documentPageSize = settings.documentPageSize;
-    _documentPageMargins = settings.documentPageMargins;
-    _documentCropMarks = settings.documentCropMarks;
     _appearanceProfile = settings.appAppearanceProfile;
     _originalAppearanceName = _appearanceProfile.name;
     _appearanceName = TextEditingController(text: _appearanceProfile.name);
@@ -336,6 +322,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _originalCockpitName = _cockpitScheme.name;
     _cockpitName = TextEditingController(text: _cockpitScheme.name);
     _cockpitVisualStyle = settings.cockpitVisualStyle;
+    _styleProfiles = [...settings.themeProfiles];
+    _documentLayout = DocumentLayoutDraft.from(settings);
     _originalName = _themeProfile.name;
     _profileName = TextEditingController(text: _themeProfile.name);
     _logoSize = TextEditingController(text: _themeProfile.logoSize.toString());
@@ -376,6 +364,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _libreplanBaseUrl.dispose();
     _libreplanUsername.dispose();
     _libreplanPassword.dispose();
+    forgetStyleEditorMemoryPins();
     super.dispose();
   }
 
@@ -384,7 +373,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// instance members of a State subclass), so they route through this wrapper.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  List<ThemeProfile> get _profiles => _themeProfiles;
+  List<ThemeProfile> get _profiles => _availableStyleProfiles(_styleProfiles);
 
   /// Alle lokale verbindingen, in lijstvolgorde — het startpunt voor de
   /// mapkiezers hieronder.
@@ -692,49 +681,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     if (result != null) setState(() => _exportDirectory = result);
   }
 
-  /// Kies een afbeelding voor een profielveld. Op desktop is dat het
-  /// bestandspad; op web levert de kiezer bytes die via [pickImageDetailed]
-  /// (zelfde type- en maatpoort als elke afbeeldingskeuze) als `mem:`-pad in
-  /// de store belanden (#2640). Een afwijzing meldt zich en laat het oude
-  /// beeld staan; annuleren blijft stil.
-  Future<String?> _pickProfileImagePath() async {
-    if (!supportsLocalProjectFolders) {
-      final outcome = await ImageService().pickImageDetailed();
-      if (mounted) reportImageImportFailure(context, outcome.failure);
-      return outcome.path;
-    }
-    final file = await FilePicker.pickFile(
-      dialogTitle: context.l10n.d('Logo kiezen'),
-      type: FileType.image,
-    );
-    return file?.path;
-  }
-
-  Future<void> _pickLogo() async {
-    final path = await _pickProfileImagePath();
-    if (!mounted || path == null) return;
-    setState(() {
-      // Een geïmporteerde merkstrook bevat het oude logo als onderdeel van
-      // haar bronbeeld. Bij een bewuste logowissel moet die gekoppelde strook
-      // verdwijnen, anders blijft het vorige merk alsnog op de dia staan.
-      _themeProfile = _themeProfile.copyWith(
-        logoPath: path,
-        clearBrandStrip: true,
-      );
-      _profileTouched = true;
-    });
-  }
-
-  Future<void> _pickLogoDark() async {
-    final path = await _pickProfileImagePath();
-    if (!mounted || path == null) return;
-    setState(() {
-      _themeProfile = _themeProfile.copyWith(logoDarkPath: path);
-      _profileTouched = true;
-    });
-  }
-
   void _selectProfile(String name) {
+    _commitEditedStyleProfile(this);
     _adoptProfile(_profiles.firstWhere((p) => p.name == name));
   }
 
@@ -752,20 +700,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _closingSlideMarkdown.text = profile.closingSlideMarkdown;
       _profileTouched = true;
     });
-  }
-
-  /// Unieke naam binnen de bewerkte verzameling — dezelfde regel als de
-  /// provider toepast, maar dan op de werkkopie, zodat een import of kopie al
-  /// voor Opslaan goed heet.
-  String _uniqueProfileName(String rawName) {
-    final base = rawName.trim().isEmpty ? 'Stijlprofiel' : rawName.trim();
-    final used = _themeProfiles.map((p) => p.name).toSet();
-    if (!used.contains(base)) return base;
-    var index = 2;
-    while (used.contains('$base $index')) {
-      index++;
-    }
-    return '$base $index';
+    rememberStyleEditorMemoryPins(profile);
   }
 
   /// Het profiel zoals het nú in de editor staat: [_themeProfile] plus de
@@ -785,7 +720,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   void _save() {
     _saved = true;
     final notifier = ref.read(settingsProvider.notifier);
-    final profile = _editedProfile();
     notifier.setConnections(
       _normalizedConnections(),
       discardPendingWorkFor: _discardPendingWorkFor,
@@ -796,22 +730,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       document: false,
       path: _presentationStartDirectory,
     );
-    // De bewerkte profielverzameling landt als geheel: aanmaken, importeren
-    // en verwijderen leefden alleen in de werkkopie (#2648).
-    final profiles = [
-      for (final p in _themeProfiles)
-        if (p.name == _originalName) profile else p,
-    ];
-    if (!profiles.contains(profile)) profiles.add(profile);
-    notifier.setThemeProfiles(profiles, selectedName: profile.name);
-    notifier
-      ..setDocumentDefaultStyle(_documentDefaultStyle)
-      ..setDocumentStyleEnforced(_documentStyleEnforced)
-      ..setDocumentChapterPageBreak(_documentChapterPageBreak)
-      ..setDocumentEditorMaxWidth(_documentEditorMaxWidth)
-      ..setDocumentPageSize(_documentPageSize)
-      ..setDocumentPageMargins(_documentPageMargins)
-      ..setDocumentCropMarks(_documentCropMarks);
+    _commitEditedStyleProfile(this);
+    replaceThemeProfiles(notifier, _styleProfiles, selectedName: _originalName);
+    _applyDocumentLayout(notifier, _documentLayout);
     _syncAppearanceEdits();
     notifier.setAppAppearanceProfiles(
       _appearanceProfiles,
@@ -836,7 +757,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     // per-deck profile the user set elsewhere).
     if (_profileTouched) {
       final deckN = ref.read(tabsProvider).current?.deckNotifierOrNull;
-      deckN?.updateThemeProfile(profile); // documenttab: geen deck, geen no-op
+      deckN?.updateThemeProfile(_themeProfile);
     }
 
     // De configuraties zijn hierboven als één lijst weggeschreven; hier blijven

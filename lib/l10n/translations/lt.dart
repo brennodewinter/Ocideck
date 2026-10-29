@@ -1623,6 +1623,8 @@ const _dutchSourceAddLt = <String, String>{
       'Jūsų nustatymai buvo sugadinti ir atstatyti.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Jūsų nustatymai buvo sugadinti ir atstatyti; kopija yra {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotipas nėra paveikslėlis arba yra didesnis nei 8 MB. Pasirinkite mažesnį PNG, JPEG, GIF arba WebP.',
   'Bezig met installeren': 'Diegiama',
   'Gevonden op schijf: {pad}': 'Rasta diske: {pad}',
   'Van schijf installeren': 'Diegti iš disko',

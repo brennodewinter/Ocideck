@@ -1632,6 +1632,8 @@ const _dutchSourceAddLa = <String, String>{
       'Optiones tuae corruptae erant et restitutae sunt.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Optiones tuae corruptae erant et restitutae sunt; exemplar in {pad} est.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Insigne non est imago aut maius est quam 8 MB. Elige PNG, JPEG, GIF vel WebP minus.',
   'Bezig met installeren': 'Instauratur',
   'Gevonden op schijf: {pad}': 'In disco inventum: {pad}',
   'Van schijf installeren': 'Ex disco instaura',

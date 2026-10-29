@@ -536,18 +536,15 @@ extension _SettingsGeneralTab on _SettingsDialogState {
 /// Documentmodus-stijl: de standaardstijl voor documenten zonder eigen
 /// `theme:`, en of die als huisstijl wordt afgedwongen. Puur weergave en
 /// export — deze keuze raakt geen enkel `.md`-bestand (alleen een per-document
-/// keuze in de editor doet dat, byte-chirurgisch).
-///
-/// De sectie werkt op de bewerkkopie van [owner] (#2648): pas Opslaan
-/// schrijft deze waarden weg, dus Annuleren laat documentweergave en export
-/// zoals ze waren. Top-level zodat de sectie niet meetelt voor het
-/// regelplafond van [_SettingsDialogState].
+/// keuze in de editor doet dat, byte-chirurgisch). Top-level zodat de sectie
+/// niet meetelt voor het regelplafond van [_SettingsDialogState].
 List<Widget> _documentStyleSection(
   _SettingsDialogState owner,
   AppLocalizations l10n,
 ) {
+  final layout = owner._documentLayout;
   final profileNames = [for (final p in owner._profiles) p.name];
-  final defaultStyle = owner._documentDefaultStyle;
+  final defaultStyle = layout.defaultStyle;
   // Een sinds verwijderd profiel mag de kiezer niet laten crashen.
   final value = profileNames.contains(defaultStyle) ? defaultStyle : null;
   return [
@@ -576,7 +573,8 @@ List<Widget> _documentStyleSection(
               DropdownMenuItem(value: name, child: Text(name)),
           ],
           onChanged: (name) => owner._rebuild(() {
-            owner._documentDefaultStyle = name;
+            layout.defaultStyle = name;
+            if (name == null) layout.styleEnforced = false;
           }),
         ),
       ),
@@ -585,12 +583,10 @@ List<Widget> _documentStyleSection(
     SwitchListTile(
       contentPadding: EdgeInsets.zero,
       dense: true,
-      value: owner._documentStyleEnforced,
+      value: layout.styleEnforced,
       onChanged: defaultStyle == null
           ? null
-          : (v) => owner._rebuild(() {
-              owner._documentStyleEnforced = v;
-            }),
+          : (v) => owner._rebuild(() => layout.styleEnforced = v),
       title: Text(
         l10n.d('Deze stijl afdwingen'),
         style: const TextStyle(fontSize: 13),
@@ -605,10 +601,8 @@ List<Widget> _documentStyleSection(
     SwitchListTile(
       contentPadding: EdgeInsets.zero,
       dense: true,
-      value: owner._documentChapterPageBreak,
-      onChanged: (v) => owner._rebuild(() {
-        owner._documentChapterPageBreak = v;
-      }),
+      value: layout.chapterPageBreak,
+      onChanged: (v) => owner._rebuild(() => layout.chapterPageBreak = v),
       title: Text(
         l10n.d('Nieuw hoofdstuk op een nieuwe pagina'),
         style: const TextStyle(fontSize: 13),
@@ -637,7 +631,7 @@ List<Widget> _documentStyleSection(
     ),
     const SizedBox(height: 8),
     DropdownButtonFormField<double?>(
-      initialValue: owner._documentEditorMaxWidth,
+      initialValue: layout.editorMaxWidth,
       // Zonder isExpanded meet de dropdown zich op zijn breedste label en
       // duwt dat een smalle kolom uit beeld.
       isExpanded: true,
@@ -653,9 +647,7 @@ List<Widget> _documentStyleSection(
         ),
         DropdownMenuItem(value: 1400, child: Text(l10n.d('Breed (1400 px)'))),
       ],
-      onChanged: (v) => owner._rebuild(() {
-        owner._documentEditorMaxWidth = v;
-      }),
+      onChanged: (v) => owner._rebuild(() => layout.editorMaxWidth = v),
     ),
     const SizedBox(height: 16),
     // Feature 3: paginamaat en marges voor export.
@@ -686,9 +678,9 @@ List<Widget> _documentStyleSection(
 /// reeksen maal elf nummers; die keuze uit elkaar trekken geeft alle 66 maten
 /// (met oriëntatie) zonder een dropdown van 66 regels.
 Widget _pageSizeControls(AppLocalizations l10n, _SettingsDialogState owner) {
-  final spec = owner._documentPageSize;
+  final spec = owner._documentLayout.pageSize;
   void set(PageSizeSpec next) => owner._rebuild(() {
-    owner._documentPageSize = next;
+    owner._documentLayout.pageSize = next;
   });
 
   return LayoutBuilder(
@@ -816,9 +808,9 @@ String _sizeItemLabel(PageSizeSpec spec) {
 
 /// De marge-controls: vier tekstvelden (top/onder/links/rechts in mm).
 Widget _pageMarginsControls(AppLocalizations l10n, _SettingsDialogState owner) {
-  final m = owner._documentPageMargins;
+  final m = owner._documentLayout.margins;
   void set(PageMargins next) => owner._rebuild(() {
-    owner._documentPageMargins = next;
+    owner._documentLayout.margins = next;
   });
   final fields = [
     _marginField(
@@ -877,7 +869,8 @@ Widget _pageMarginsControls(AppLocalizations l10n, _SettingsDialogState owner) {
 /// Bewust zonder snijtekens erbij: zie [PageMargins]. De uitleg noemt daarom
 /// alleen wat de afloop echt doet.
 Widget _printBleedControls(AppLocalizations l10n, _SettingsDialogState owner) {
-  final m = owner._documentPageMargins;
+  final layout = owner._documentLayout;
+  final m = layout.margins;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
@@ -885,9 +878,7 @@ Widget _printBleedControls(AppLocalizations l10n, _SettingsDialogState owner) {
       _marginField(
         l10n.d('Afloop voor de drukker (mm)'),
         m.bleedMm,
-        (v) => owner._rebuild(() {
-          owner._documentPageMargins = m.copyWith(bleedMm: v);
-        }),
+        (v) => owner._rebuild(() => layout.margins = m.copyWith(bleedMm: v)),
       ),
       const SizedBox(height: 4),
       Text(
@@ -898,12 +889,10 @@ Widget _printBleedControls(AppLocalizations l10n, _SettingsDialogState owner) {
       ),
       SwitchListTile(
         contentPadding: EdgeInsets.zero,
-        value: m.hasBleed && owner._documentCropMarks,
+        value: m.hasBleed && layout.cropMarks,
         // Zonder afloop wijzen snijtekens nergens naar.
         onChanged: m.hasBleed
-            ? (v) => owner._rebuild(() {
-                owner._documentCropMarks = v;
-              })
+            ? (v) => owner._rebuild(() => layout.cropMarks = v)
             : null,
         title: Text(l10n.d('Snijtekens'), style: const TextStyle(fontSize: 12)),
         subtitle: Text(
@@ -938,3 +927,38 @@ Widget _marginField(
     if (v != null && v >= 0 && v <= 100) onChanged(v);
   },
 );
+
+/// De documentlay-out zoals het venster hem toont. Opslaan schrijft hem weg;
+/// sluiten zonder opslaan laat de opgeslagen instellingen staan.
+class DocumentLayoutDraft {
+  DocumentLayoutDraft.from(AppSettings settings)
+    : defaultStyle = settings.documentDefaultStyle,
+      styleEnforced = settings.documentStyleEnforced,
+      chapterPageBreak = settings.documentChapterPageBreak,
+      editorMaxWidth = settings.documentEditorMaxWidth,
+      pageSize = settings.documentPageSize,
+      margins = settings.documentPageMargins,
+      cropMarks = settings.documentCropMarks;
+
+  String? defaultStyle;
+  bool styleEnforced;
+  bool chapterPageBreak;
+  double? editorMaxWidth;
+  PageSizeSpec pageSize;
+  PageMargins margins;
+  bool cropMarks;
+}
+
+/// Eén keer, bij Opslaan. Tot dan leeft de lay-out alleen in de werkkopie.
+void _applyDocumentLayout(
+  SettingsNotifier notifier,
+  DocumentLayoutDraft layout,
+) {
+  notifier.setDocumentDefaultStyle(layout.defaultStyle);
+  notifier.setDocumentStyleEnforced(layout.styleEnforced);
+  notifier.setDocumentChapterPageBreak(layout.chapterPageBreak);
+  notifier.setDocumentEditorMaxWidth(layout.editorMaxWidth);
+  notifier.setDocumentPageSize(layout.pageSize);
+  notifier.setDocumentPageMargins(layout.margins);
+  notifier.setDocumentCropMarks(layout.cropMarks);
+}

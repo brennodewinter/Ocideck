@@ -1635,6 +1635,8 @@ const _dutchSourceAddMt = <String, String>{
       'Is-settings tiegħek kienu korrotti u ġew restawrat.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Is-settings tiegħek kienu korrotti u ġew restawrat; kopja tinsab f {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Il-logo mhux stampa jew akbar minn 8 MB. Agħżel PNG, JPEG, GIF jew WebP iżgħar.',
   'Bezig met installeren': 'Qed ninstalla',
   'Gevonden op schijf: {pad}': 'Misjub fuq id-disk: {pad}',
   'Van schijf installeren': 'Installa mid-disk',

@@ -1621,6 +1621,8 @@ const _dutchSourceAddHr = <String, String>{
       'Vaše postavke bile su oštećene i vraćene su.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Vaše postavke bile su oštećene i vraćene su; kopija je u {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotip nije slika ili je veći od 8 MB. Odaberite manji PNG, JPEG, GIF ili WebP.',
   'Bezig met installeren': 'Instaliram',
   'Gevonden op schijf: {pad}': 'Pronađeno na disku: {pad}',
   'Van schijf installeren': 'Instaliraj s diska',

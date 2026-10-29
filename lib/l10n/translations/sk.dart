@@ -1623,6 +1623,8 @@ const _dutchSourceAddSk = <String, String>{
       'Vaše nastavenia boli poškodené a boli obnovené.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Vaše nastavenia boli poškodené a boli obnovené; kópia je v {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo nie je obrázok alebo je väčšie ako 8 MB. Vyberte menší PNG, JPEG, GIF alebo WebP.',
   'Bezig met installeren': 'Inštalujem',
   'Gevonden op schijf: {pad}': 'Nájdené na disku: {pad}',
   'Van schijf installeren': 'Inštalovať z disku',

@@ -345,6 +345,36 @@ void main() {
       run(availH: 61); // 6: different available height
       expect(calls, 6, reason: 'every distinct key must miss and recompute');
     });
+
+    test('een zevende geometrie verdringt de oudste, niet de recente', () {
+      final slide = Slide.create(SlideType.bullets);
+      var calls = 0;
+      double run(double width) => memoizedRenderLayout<double>(
+        slide: slide,
+        font: 'Roboto',
+        width: width,
+        availW: 80,
+        availH: 60,
+        compute: () {
+          calls++;
+          return width;
+        },
+      );
+      for (var width = 1.0; width <= 6; width++) {
+        run(width);
+      }
+      expect(calls, 6);
+      run(2);
+      expect(calls, 6, reason: 'een recente geometrie blijft een treffer');
+      run(7);
+      expect(calls, 7);
+      run(1);
+      expect(
+        calls,
+        8,
+        reason: 'de oudste van de zes viel weg toen de zevende erbij kwam',
+      );
+    });
   });
 
   group('splitBulletsIntoPages', () {

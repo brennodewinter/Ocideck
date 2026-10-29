@@ -333,6 +333,9 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#2429): import van ociserve_org_themes voor de themaregister-knop
   // in het profielonderdeel.
   // +1 (#2510): import van de transcriptie-modulekaart.
+  // +2 (#2616): de sanitize_svg-import voor de eigen-SVG-bulletkiezer en de
+  // part-directive voor settings_dialog_bullet_marker — de rij zelf staat daar
+  // als top-level hulp, niet in de klasse.
   'lib/widgets/dialogs/settings_dialog.dart':
       1125, // +53 (sweep #2648/#2640): bewerkkopieën voor
   // profielen en documentopmaak (Annuleren schrijft niets weg) en de
@@ -432,7 +435,8 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
       6375, // +62 (sweep #2648/#2640): bewerkkopieën van
   // profielen/documentopmaak en de web-logokiezer — extensies in de
-  // part-bestanden tellen mee.
+  // part-bestanden tellen mee. De #2616-bulletmarkerrij staat top-level en
+  // telt hier niet mee.
   // +78 (#1500): de tabelstijl-controls (randstijl, zebra, celopvulling,
   // accentlijn) en de paginamaat-/margecontrols. Ze staan in eigen parts
   // (settings_dialog_table_style.dart, settings_dialog_general.dart), maar
@@ -528,7 +532,9 @@ const Map<String, int> classSizeBaseline = {
   'lib/services/file_service.dart#FileService':
       3000, // +114 (sweep #2641–#2645/#2634): theme.json-ronde
   // in pakketten, logo-resolutie en scan-doorvoer — extensies in
-  // file_service_*.dart tellen mee.
+  // file_service_*.dart tellen mee. Ook de #2640-verhuizing van pakketstijl
+  // en logobotsing (file_service_carried_style/file_service_project) valt in
+  // die part-telling.
   // +2 (#2515): transcriptAudioPath langs
   // saveDocumentWithDestination — de bewaarkeuze bereikt de
   // media-kopie in file_service_open.

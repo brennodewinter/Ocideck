@@ -1645,6 +1645,8 @@ const _dutchSourceAddPt = <String, String>{
       'As tuas definições estavam corrompidas e foram repostas.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'As tuas definições estavam corrompidas e foram repostas; há uma cópia em {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'O logótipo não é uma imagem ou é maior do que 8 MB. Escolha um PNG, JPEG, GIF ou WebP mais pequeno.',
   'Bezig met installeren': 'A instalar',
   'Gevonden op schijf: {pad}': 'Encontrado no disco: {pad}',
   'Van schijf installeren': 'Instalar a partir do disco',

@@ -584,7 +584,8 @@ deze velden (met standaardwaarden):
 | `checklistCheckedColor` | `#2E7D64` | Vinkkleur van een afgevinkt checklist-item. |
 | `checklistUncheckedColor` | `#64748B` | Vakkleur van een niet-afgevinkt checklist-item. Haalt 4,8:1 op de standaard witte achtergrond en blijft boven 3:1 op een donkere, zodat het vakje zichtbaar is hoe de auteur zijn dia ook zet. *(Was `#CBD5E1` tot 2026-08-27; met 1,5:1 zakte dat door OciDecks eigen 3:1-ondergrens, waardoor elk deck met een checklist opende op een waarschuwing waar de auteur niets aan kon doen — #1818.)* |
 | `checklistStrikeThrough` | `true` | Zet de tekst van een afgevinkt item door. |
-| `bulletMarker` | `dot` | Standaardmarkering voor opsommingslijsten: `dot` of `paw` (een kattenpoot getekend in de accentkleur). Een slide kan die overschrijven (zie §8). |
+| `bulletMarker` | `dot` | Standaardmarkering voor opsommingslijsten: `dot`, `paw` (een kattenpoot getekend in de accentkleur) of `custom_svg`. Een slide kan die overschrijven (zie §8). |
+| `customBulletSvg` | `null` | Opgeschoonde inline SVG voor de markering `custom_svg`. De afbeelding zit in het stijlprofiel zodat zij overdraagbaar blijft; scripts, eventhandlers, animatie en externe URL's verdwijnen bij import. |
 | `tableTextColor` | = `textColor` | Tekstkleur in tabellen. |
 | `tableHeaderTextColor` | `#FFFFFF` | Tekstkleur van tabelkoptekst. |
 | `tableHeaderBackgroundColor` | = `accentColor` | Achtergrond van de koprij. |
@@ -3199,7 +3200,7 @@ serializer ze schrijft.)*
 | `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout van een `split`-slide. |
 | `<!-- ocideck_split_image_side: left -->` | Zet de zijafbeelding van een `split`-slide links. Afwezig = afbeelding rechts (§5). |
 | `<!-- ocideck_two_bullets_left/right[_title]: <base64url> -->` | **Vervallen (0.1.0).** Was de canonieke opslag voor de twee bulletkolommen; de zichtbare `<ul><li>` draagt ze nu (§5). Wordt nog uit oudere bestanden gelezen, verdwijnt bij het opslaan. |
-| `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide overschrijving van de bulletmarkering (bullets/two-bullets/bullets+image). Afwezig = neem de `bulletMarker` van het thema over (§3.2). |
+| `<!-- ocideck_bullet_marker: dot\|paw\|custom_svg -->` | Per-slide overschrijving van de bulletmarkering (bullets/two-bullets/bullets+image). Afwezig = neem de `bulletMarker` van het thema over (§3.2). `custom_svg` gebruikt de SVG uit het thema. |
 | `<!-- ocideck_image_focus: x,y -->` | Brandpunt voor het bijsnijden van het beeld (0..1 per as, `0.5,0.5` = midden) voor het beeld van de slide. Bepaalt welk deel in beeld blijft wanneer het plaatje wordt bijgesneden (fill/zoom, of een vast beeldpaneel). Alleen geschreven wanneer niet gecentreerd. |
 | `<!-- ocideck_image_focus2: x,y -->` | Hetzelfde, voor het **tweede** beeld van een twee-beelden-slide. Alleen geschreven wanneer niet gecentreerd. |
 | `<!-- ocideck_image_alt: text -->` | Per-gebruik WCAG-alt-tekst (toegankelijkheidsbeschrijving) voor het beeld van de slide. Krijgt de voorkeur boven het zichtbare bijschrift als schermlezerlabel. Alleen geschreven wanneer ingesteld; `-->` erin wordt geëscaped zoals sprekersnotities. |

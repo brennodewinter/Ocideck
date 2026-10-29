@@ -1632,6 +1632,8 @@ const _dutchSourceAddUk = <String, String>{
       'Ваші налаштування були пошкоджені та скинуті.',
   'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
       'Ваші налаштування були пошкоджені та скинуті; копія є в {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Логотип не є зображенням або більший за 8 МБ. Оберіть менший PNG, JPEG, GIF чи WebP.',
   'Bezig met installeren': 'Встановлюю',
   'Gevonden op schijf: {pad}': 'Знайдено на диску: {pad}',
   'Van schijf installeren': 'Встановити з диска',
