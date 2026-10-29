@@ -1,9 +1,9 @@
-import '../utils/lru_cache.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_format.dart';
 import '../utils/markdown_paste_cleanup.dart';
 import 'markdown_body_blocks.dart';
+import 'identity_slot_memo.dart';
 import 'slide_layout_metrics.dart';
 
 /// Target fill when splitting pages during layout planning.
@@ -308,12 +308,10 @@ RichTextLayoutPlan planRichTextLayout({
 /// De vier andere previews gebruikten `memoizedRenderLayout` al; de rijke tekst
 /// was de duurste van de vijf en als enige niet aangesloten. Sleutel op de dia
 /// (onveranderlijk, dus identiteit is een geldige wijzigingsstempel) plus alles
-/// wat de uitkomst verder bepaalt.
-final LruCache<
-  (Slide, ThemeProfile, String, double, double, double, bool),
-  RichTextLayoutPlan
->
-_richTextPlanCache = LruCache(256);
+/// wat de uitkomst verder bepaalt. Zelfde per-dia memo als de layoutschaal:
+/// een globale LRU viel weg zodra het deck groter was dan het plafond (#2622).
+final IdentitySlotMemo<Slide, RichTextLayoutPlan> _richTextPlanCache =
+    IdentitySlotMemo(6, 'richTextPlan');
 
 RichTextLayoutPlan planRichTextForSlide({
   required Slide slide,
@@ -324,8 +322,8 @@ RichTextLayoutPlan planRichTextForSlide({
   required String font,
   bool splitWithImage = false,
 }) {
-  final key = (slide, profile, font, w, availW, availH, splitWithImage);
-  final cached = _richTextPlanCache[key];
+  final key = (profile, font, w, availW, availH, splitWithImage);
+  final cached = _richTextPlanCache.read(slide, key);
   if (cached != null) return cached;
   final plan = _planRichTextForSlide(
     slide: slide,
@@ -336,7 +334,7 @@ RichTextLayoutPlan planRichTextForSlide({
     font: font,
     splitWithImage: splitWithImage,
   );
-  _richTextPlanCache[key] = plan;
+  _richTextPlanCache.write(slide, key, plan);
   return plan;
 }
 
