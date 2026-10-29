@@ -80,6 +80,19 @@ Future<ProviderContainer> _container({_FakeTransport? transport}) async {
   return c;
 }
 
+/// De ping is async; een kale `pump` laat hem soms nog onderweg. Kort
+/// genoeg dat de minuut-timer nog niet afgaat.
+Future<void> _pumpUntilCalls(
+  WidgetTester tester,
+  _FakeTransport transport,
+  int atLeast,
+) async {
+  for (var i = 0; i < 20 && transport.calls < atLeast; i++) {
+    await tester.pump(const Duration(milliseconds: 50));
+  }
+  expect(transport.calls, greaterThanOrEqualTo(atLeast));
+}
+
 /// Wacht op de echte endpoint-uitkomst, ook onder een drukke testsuite.
 Future<void> _settle(ProviderContainer c) async {
   final done = Completer<void>();
@@ -148,6 +161,50 @@ void main() {
       await tester.pump();
       expect(transport.calls, callsWhenDisabled);
     });
+
+    testWidgets(
+      'na een instellingswijziging blijft de periodieke controle lopen',
+      (tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final transport = _FakeTransport();
+        final c = ProviderContainer(
+          overrides: [
+            aiHttpTransportProvider.overrideWithValue(transport),
+            secretStoreProvider.overrideWithValue(_FakeSecretStore()),
+          ],
+        );
+        addTearDown(c.dispose);
+        final sub = c.listen(aiStatusProvider, (_, _) {});
+        addTearDown(sub.close);
+        await c.read(settingsProvider.notifier).setAiSettings(_local);
+        await _pumpUntilCalls(tester, transport, 1);
+        final afterFirst = transport.calls;
+
+        await c
+            .read(settingsProvider.notifier)
+            .setAiSettings(_local.copyWith(model: 'ander-model'));
+        await _pumpUntilCalls(tester, transport, afterFirst + 1);
+        final afterChange = transport.calls;
+
+        await tester.pump(kAiStatusRefreshInterval);
+        await tester.pump();
+        expect(
+          transport.calls,
+          greaterThan(afterChange),
+          reason:
+              'een herbouw mag de timer niet achterlaten; anders blijft het '
+              'lampje op de laatste uitkomst staan (#2635)',
+        );
+
+        // De periodieke timer mag niet blijven hangen nadat de test stopt.
+        await c
+            .read(settingsProvider.notifier)
+            .setAiSettings(const AiSettings(enabled: false));
+        for (var i = 0; i < 5; i++) {
+          await tester.pump(const Duration(milliseconds: 1));
+        }
+      },
+    );
 
     test('endpoint geeft fout → niet bereikbaar', () async {
       final transport = _FakeTransport(error: AiRequestException('network'));
