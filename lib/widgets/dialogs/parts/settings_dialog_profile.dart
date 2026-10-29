@@ -86,7 +86,15 @@ extension _SettingsProfile on _SettingsDialogState {
       ),
       IconButton(
         tooltip: l10n.d('Profiel verwijderen'),
-        onPressed: profiles.length <= 1 ? null : _deleteProfile,
+        // Niet op `profiles` (opgeslagen + ingebouwde) letten maar op de
+        // werkkopie: met één eigen profiel naast de ingebouwde was de knop
+        // klikbaar terwijl _deleteProfile weigert — en een ingebouwd profiel
+        // kun je sowieso niet verwijderen (#2662).
+        onPressed:
+            _styleProfiles.length > 1 &&
+                _styleProfiles.any((p) => p.name == _originalName)
+            ? _deleteProfile
+            : null,
         icon: const Icon(Icons.delete_outline, size: 18),
       ),
       // Organisatie-thema's (#2429): alleen voor wie bewust verbonden is.
