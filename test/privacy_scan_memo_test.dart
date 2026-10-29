@@ -109,6 +109,50 @@ void main() {
     expect(ids(deck, viaMemo), ids(deck, uit.scan(deck)));
   });
 
+  test('een deck van 1000 dia\'s blijft bij de tweede scan binnen 5 ms', () {
+    final slides = [
+      for (var i = 0; i < 1000; i++) bullets('dia $i zonder bijzonderheden'),
+    ];
+    final deck = deckOf(slides);
+    memoizedDeckScan(scanner, deck);
+    final missesAfterWarm = privacyScanMemoMisses;
+
+    final watch = Stopwatch()..start();
+    memoizedDeckScan(scanner, deck);
+    watch.stop();
+
+    expect(privacyScanMemoMisses, missesAfterWarm);
+    expect(
+      watch.elapsedMilliseconds,
+      lessThan(5),
+      reason: 'een warme scan van 1000 dia\'s duurde ${watch.elapsed}',
+    );
+  });
+
+  test('een dia bovenaan invoegen scant alleen die nieuwe dia opnieuw', () {
+    final slides = [
+      for (var i = 0; i < 40; i++) bullets('dia $i zonder bijzonderheden'),
+    ];
+    final gevoelig = bullets('BSN 728398242 van betrokkene');
+    slides.add(gevoelig);
+    final voor = deckOf(slides);
+    memoizedDeckScan(scanner, voor);
+    final misses = privacyScanMemoMisses;
+
+    final na = deckOf([bullets('nieuw bovenaan'), ...slides]);
+    final viaMemo = memoizedDeckScan(scanner, na);
+
+    expect(privacyScanMemoMisses - misses, 1);
+    expect(ids(na, viaMemo), ids(na, scanner.scan(na)));
+    expect(
+      viaMemo.findings
+          .where((f) => !f.isDeckWide)
+          .every((f) => f.slideIndex == slides.length),
+      isTrue,
+      reason: 'de verschoven dia houdt zijn bevinding, op de nieuwe index',
+    );
+  });
+
   test('herhaalde scans van hetzelfde deck blijven gelijk', () {
     final deck = deckOf([
       bullets('BSN 728398242'),

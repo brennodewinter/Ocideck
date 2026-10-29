@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/legacy.dart';
 
 import '../models/markdown_document.dart';
+import '../utils/visual_markdown_flush.dart';
 import '../services/document_integrity.dart';
 import '../services/slide_image_refs.dart';
 import '../services/web_asset_store.dart';
@@ -159,6 +160,13 @@ class DocumentState {
 class DocumentNotifier extends StateNotifier<DocumentState> {
   DocumentNotifier() : super(const DocumentState());
 
+  /// De open visuele editor bindt zich hier. Autosave en opslaan roepen
+  /// [flushPendingVisualEdit] aan vóór ze de bron lezen, anders mist een
+  /// aanslag binnen het uitstelvenster in het bestand (#2621).
+  final VisualMarkdownFlush visualFlush = VisualMarkdownFlush();
+
+  void flushPendingVisualEdit() => visualFlush.flush();
+
   /// Documenten zijn immutable (withSource maakt een nieuw exemplaar), dus dit
   /// zijn goedkope referenties. De `visualEdited`-vlag reist mee in de stapel,
   /// zodat undo/redo de vlag herstelt die bij dat document hoorde (#1672).
@@ -256,6 +264,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
 
   /// Draai de laatste (samengevoegde) bewerking terug.
   void undo() {
+    flushPendingVisualEdit();
     final current = state.document;
     if (current == null || _undoStack.isEmpty) return;
     _redoStack.add((current, state.visualEdited));
@@ -278,6 +287,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
 
   /// Voer een teruggedraaide bewerking opnieuw uit.
   void redo() {
+    flushPendingVisualEdit();
     final current = state.document;
     if (current == null || _redoStack.isEmpty) return;
     _undoStack.add((current, state.visualEdited));

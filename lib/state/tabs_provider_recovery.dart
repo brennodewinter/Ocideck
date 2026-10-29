@@ -5,6 +5,14 @@
 // getters op tab/notifier.
 part of 'tabs_provider.dart';
 
+/// De visuele pauze wegschrijven vóór het tabblad verdwijnt. Daarna is de
+/// editor weg en is een open timer zijn laatste aanslagen kwijt (#2621).
+void _flushClosingDocument(TabContent content) {
+  if (content case DocumentTabContent(:final documentNotifier)) {
+    documentNotifier.flushPendingVisualEdit();
+  }
+}
+
 /// Bouwt de herstel-momentopname van een presentatietabblad. Top-level (raakt
 /// geen [TabsNotifier]-veld, alleen publieke getters) om de klassenratchet niet
 /// te tarten; zie [TabsNotifier._autosaveTick].
@@ -82,6 +90,7 @@ void _autosaveDocument(
   Map<int, String> lastAutosaved,
 ) {
   if (!doc.mounted) return;
+  doc.flushPendingVisualEdit();
   final st = doc.currentState;
   if (!(st.isOpen && st.isDirty)) return;
   final source = st.document!.source;

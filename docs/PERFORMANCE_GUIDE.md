@@ -16,13 +16,15 @@ Images are the dominant memory cost, so decoding is bounded up front:
 
 | What | Limit | Source |
 |---|---|---|
-| Max image decode dimension (per axis) | **4096 px** | `lib/utils/image_limits.dart:16` (`kMaxImageDecodeDimension`) |
+| Max image decode dimension (per axis) | **4096 px** | `lib/utils/image_limits.dart` (`kMaxImageDecodeDimension`) |
 | Max in-memory image bytes | **64 MiB** *(bij het importeren, per bestand — niet een plafond voor alles wat tegelijk gedecodeerd in beeld staat)* | `lib/services/image_service.dart` (`maxImageBytes`) |
 | Web `mem:` asset store (all tabs together) | **256 MiB encoded bytes** | `lib/services/web_asset_store.dart` (`maxTotalBytes`) |
 | Max media (video/audio) bytes | **1 GiB** | `lib/services/image_service.dart` (`maxMediaBytes`) |
 | Luminance sampling decode | **48 × 48 px** | `lib/utils/image_luminance.dart:54` |
 | Carousel thumbnail / preview / full decode | `cacheWidth` **360 / 720 / 1000** | `image_carousel_picker_grid.dart`, `..._preview.dart` |
 | Slide-strip thumbnail decode | **512 px** langste zijde | `slide_thumbnail.dart` (`decodeMaxEdge`) |
+| Preview, presenter, beamer decode | **1024 / 2048 / 4096 px**, het vak × pixeldichtheid naar boven afgerond | `decodeEdgeForBox` |
+| Export-raster decode | **2048 px** | `kExportImageDecodeEdge` (uitvoer is 1920 px) |
 
 A decode allocates roughly `width × height × 4` bytes, so the 4096 px cap and the
 64 MiB byte ceiling are two views of the same worst case (4096² × 4 ≈ 64 MiB).
@@ -67,6 +69,10 @@ optimisation.
 ## Rendering
 
 - Slides render as native Flutter widgets for preview and presentation.
+- Per-slide layout, rich-text plans and the text privacy scan are memoised on
+  the slide object (`Expando`), not in a global LRU. A fixed global cap thrashed
+  once a deck was larger than that cap, because each keystroke reads every slide
+  in order. The layout and rich-text memos keep at most six geometries per slide.
 - Split-run boundaries and their shared text-fit scale are computed once per
   slide-list/theme/font revision and weakly cached (`lib/services/split_run.dart`).
   The slide strip, preview, presenter, audience window and raster export then do

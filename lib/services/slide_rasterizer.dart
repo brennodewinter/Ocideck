@@ -556,7 +556,7 @@ class SlideRasterizer {
           : null;
       return memBytes != null
           ? cappedMemoryImage(memBytes)
-          : cappedFileImage(File(path));
+          : cappedFileImage(File(path), maxEdge: kExportImageDecodeEdge);
     }
 
     for (var i = 0; i < list.length; i += batchSize) {
@@ -703,6 +703,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           scopeCia: widget.scopeCia,
           reportLanguage: widget.reportLanguage,
           improvementY01: widget.improvementY01,
+          decodeMaxEdge: kExportImageDecodeEdge,
         ),
       ),
     );
