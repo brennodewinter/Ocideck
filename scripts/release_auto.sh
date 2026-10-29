@@ -87,6 +87,8 @@
 #   scripts/release_auto.sh --skip-install [..]  # sla /Applications-vervanging over
 #   scripts/release_auto.sh --ondanks-fixes [..] # ga door langs ongemergede fix/*-
 #                                                # takken en open release-blockers
+#   scripts/release_auto.sh --supersede-untagged patch  # vervang een ongetagde
+#                                                # eerdere release door een patch
 #   scripts/release_auto.sh --resume vX.Y.Z      # hervat een onderbroken release
 #   scripts/release_auto.sh --status vX.Y.Z      # toon waar een release staat (read-only)
 
@@ -133,6 +135,7 @@ SKIP_INSTALL=0
 PRINT_VERSION=0
 PREFLIGHT_ONLY=0
 IGNORE_FIXES=0  # --ondanks-fixes: bekend herstelwerk bewust buiten deze release laten
+SUPERSEDE_UNTAGGED=0
 LEVEL=""
 RESUME_TAG=""   # --resume vX.Y.Z: sla fase 1+2 over, maak alleen fase 3 af
 BRANCH_OWNED=0  # alleen een door déze run gemaakte lokale branch mag worden opgeruimd
@@ -282,6 +285,7 @@ for arg in "$@"; do
     --preflight) PREFLIGHT_ONLY=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
     --skip-install) SKIP_INSTALL=1 ;;
     --ondanks-fixes) IGNORE_FIXES=1 ;;
+    --supersede-untagged) SUPERSEDE_UNTAGGED=1 ;;
     --print-version) PRINT_VERSION=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
     --resume) RESUME=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
     --status) STATUS=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
@@ -300,7 +304,7 @@ for arg in "$@"; do
       awk 'NR>1 && /^#/ { sub(/^# ?/, ""); print; next } NR>1 { exit }' \
         "${BASH_SOURCE[0]}"
       exit 0 ;;
-    *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --ondanks-fixes, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
+    *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --ondanks-fixes, --supersede-untagged, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
   esac
 done
 
@@ -1052,13 +1056,30 @@ fi
 # De release-branch hoort bij de tag; zowel de verse run als --resume gebruiken 'm.
 BRANCH="release/$TAG"
 
-# Een op main gemergede versiebump zonder tag is een half afgemaakte release. Een
-# volgende patch starten zou die toestand overslaan en onherstelbaar verhullen.
-if [ -z "$RESUME_TAG" ]; then
+# Een op main gemergede versiebump zonder tag is een half afgemaakte release.
+# Alleen een expliciete volgende patch mag die vervangen wanneer de eerdere
+# tag op geen van beide remotes bestaat; productwijzigingen maken --resume onveilig.
+assert_current_version_tag_state() {
+  local current_tag_refs mirror_tag_refs
   current_tag_refs="$(git ls-remote origin "refs/tags/v$CUR_VERSION" "refs/tags/v$CUR_VERSION^{}")" \
     || die "kon niet bewijzen dat de huidige main-versie v$CUR_VERSION is uitgebracht."
-  [ -n "$current_tag_refs" ] \
-    || die "origin/main draagt $CUR_VERSION, maar tag v$CUR_VERSION ontbreekt — rond eerst die release af met --resume v$CUR_VERSION."
+  if [ -z "$current_tag_refs" ]; then
+    [ "$SUPERSEDE_UNTAGGED" -eq 1 ] && [ "$LEVEL" = patch ] \
+      || die "origin/main draagt $CUR_VERSION, maar tag v$CUR_VERSION ontbreekt — rond eerst die release af met --resume v$CUR_VERSION, of start expliciet een nieuwe patch met --supersede-untagged."
+    mirror_tag_refs="$(git ls-remote mirror "refs/tags/v$CUR_VERSION" "refs/tags/v$CUR_VERSION^{}")" \
+      || die "kon niet bewijzen dat v$CUR_VERSION ook op de mirror ongetagd is."
+    [ -z "$mirror_tag_refs" ] \
+      || die "v$CUR_VERSION staat op de mirror; verplaats of vervang een bestaande tag nooit."
+    log "Ongetagde v$CUR_VERSION wordt vervangen door $TAG; beide remotes zijn ongetagd."
+  else
+    [ "$SUPERSEDE_UNTAGGED" -eq 0 ] \
+      || die "v$CUR_VERSION is al getagd; --supersede-untagged is hier niet nodig."
+  fi
+}
+if [ -z "$RESUME_TAG" ]; then
+  assert_current_version_tag_state
+elif [ "$SUPERSEDE_UNTAGGED" -eq 1 ]; then
+  die "combineer --supersede-untagged niet met --resume of --status."
 fi
 
 # --status vX.Y.Z: alleen rapporteren waar de release staat, dan stoppen. Read-only,
