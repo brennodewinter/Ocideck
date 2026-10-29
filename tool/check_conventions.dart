@@ -1591,6 +1591,55 @@ Iterable<String> _conflictMarkersIn(File file) sync* {
   }
 }
 
+// ── Rauwe-teksttag in Markdown — de rest van het bestand verdwijnt ──────────
+//
+// `<title>`, `<script>`, `<style>`, `<textarea>` en hun soortgenoten zijn in
+// HTML rauwe tekst: alles tot de sluittag hoort bij die tag. Een losse
+// `<title>` als plaatshouder in lopende tekst liet Forgejo daarom de hele rest
+// van het document inslikken (#2612): in USER_GUIDE ruim 1.400 regels,
+// waaronder de sectie waar de inhoudsopgave naar wees, en in ACCESSIBILITY
+// alles na de eerste alinea. De ingebouwde lezer toonde het wél, dus niemand in
+// de app zag het. In een codeblok of `code` is zo'n tag gewone tekst.
+final _rawTextTag = RegExp(
+  r'(?<!\\)<(script|style|title|textarea|xmp|iframe|noembed|noframes|noscript|plaintext)[\s>/]',
+  caseSensitive: false,
+);
+final _codeSpan = RegExp(r'(`+).*?\1');
+final _fence = RegExp(r'^ {0,3}(`{3,}|~{3,})(.*)$');
+
+/// Regelnummers per Markdownbestand met een rauwe-teksttag buiten code. Pure
+/// functie over pad → bron, zodat de regel met verzonnen bestanden te voeren is.
+Map<String, List<int>> rawTextTagsIn(Map<String, String> sources) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    final hits = <int>[];
+    String? fence;
+    final lines = raw.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      final m = _fence.firstMatch(lines[i]);
+      if (fence == null && m != null) {
+        fence = m.group(1);
+        continue;
+      }
+      if (fence != null) {
+        // Een sluithek: hetzelfde teken, minstens even lang, geen infotekst.
+        if (m != null &&
+            m.group(1)![0] == fence[0] &&
+            m.group(1)!.length >= fence.length &&
+            m.group(2)!.trim().isEmpty) {
+          fence = null;
+        }
+        continue;
+      }
+      if (_rawTextTag.hasMatch(lines[i].replaceAll(_codeSpan, ''))) {
+        hits.add(i + 1);
+      }
+    }
+    if (hits.isNotEmpty) perFile[path] = hits;
+  });
+  return perFile;
+}
+
 /// De tekstbestanden waarin een achtergebleven markering schade doet: alles wat
 /// meereist met de app of wat een bijdrager leest.
 Iterable<File> _textFilesToScan() sync* {
@@ -1682,8 +1731,13 @@ void main() {
   }
 
   final conflictHits = <String>[];
+  final markdownSources = <String, String>{};
   for (final file in _textFilesToScan()) {
     conflictHits.addAll(_conflictMarkersIn(file));
+    if (file.path.endsWith('.md')) {
+      markdownSources[file.path.replaceAll(r'\', '/')] = file
+          .readAsStringSync();
+    }
   }
 
   final classSizes = _classSizes();
@@ -1716,6 +1770,21 @@ void main() {
       'en haal de markeringen weg. Let op dat `git add -A` na het opschonen '
       'van één bestand de andere ongemoeid instageert:\n'
       '    ${conflictHits.join('\n    ')}',
+    );
+  }
+
+  final rawTextTags = rawTextTagsIn(markdownSources);
+  if (rawTextTags.isNotEmpty) {
+    final sites = [
+      for (final entry in rawTextTags.entries)
+        for (final line in entry.value) '${entry.key}:$line',
+    ];
+    failures.add(
+      'Een rauwe-teksttag (<title>, <script>, <style>, …) buiten code in '
+      '${sites.length} Markdownregel(s). Forgejo leest hem als echte HTML en '
+      'slikt de rest van het document in (#2612). Zet de plaatshouder tussen '
+      'backticks, of schrijf \\<title>:\n'
+      '    ${sites.join('\n    ')}',
     );
   }
 
