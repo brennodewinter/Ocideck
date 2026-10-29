@@ -268,16 +268,31 @@ extension _PresenterViews on _FullscreenPresenterState {
                           // notities en klok blijven zichtbaar.
                           if (_blank != _Blank.none)
                             Positioned.fill(child: _blankFill()),
-                          if (_progress > 0 && _blank == _Blank.none)
+                          if (_blank == _Blank.none)
+                            // De balk tikt 20× per seconde; alleen deze
+                            // builder herbouwt mee, niet de dia eronder
+                            // (#2633). In tijdmodus komt de waarde van de
+                            // sessieklok, anders van de doorschakeltimer.
                             Positioned(
                               bottom: 0,
                               left: 0,
                               right: 0,
-                              child: LinearProgressIndicator(
-                                value: _progress,
-                                backgroundColor: Colors.white12,
-                                color: _muted,
-                                minHeight: 3,
+                              height: 3,
+                              child: IgnorePointer(
+                                child: ValueListenableBuilder<double>(
+                                  valueListenable:
+                                      widget.presentationTiming.enabled
+                                      ? _timedSession.progress
+                                      : _progress,
+                                  builder: (context, p, _) => p > 0
+                                      ? LinearProgressIndicator(
+                                          value: p,
+                                          backgroundColor: Colors.white12,
+                                          color: _muted,
+                                          minHeight: 3,
+                                        )
+                                      : const SizedBox.shrink(),
+                                ),
                               ),
                             ),
                           if (_showQuestionWaitBadge)

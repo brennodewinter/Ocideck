@@ -74,7 +74,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     _onSlideShown();
     _advanceTimer?.cancel();
     _advanceTimer = null;
-    _rebuild(() => _progress = 0);
+    _progress.value = 0;
 
     // Auto-modus uit: nooit vanzelf wisselen.
     if (!_autoPlay || _tableEditMode) return;
@@ -89,7 +89,10 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     if (_index >= widget.slides.length - 1 && !_loop) return;
 
     final totalMs = (dur * 1000).round();
-    final startTime = DateTime.now();
+    // clock.now() in plaats van DateTime.now(): in productie identiek, in
+    // tests loopt de waarde mee met de fake klok zodat timer en verstreken
+    // tijd elkaar blijven volgen.
+    final startTime = clock.now();
 
     // Tick elke 50ms voor een vloeiende voortgangsbalk
     _advanceTimer = Timer.periodic(const Duration(milliseconds: 50), (t) {
@@ -97,9 +100,9 @@ extension _PresenterPlayback on _FullscreenPresenterState {
         t.cancel();
         return;
       }
-      final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+      final elapsed = clock.now().difference(startTime).inMilliseconds;
       final p = (elapsed / totalMs).clamp(0.0, 1.0);
-      _rebuild(() => _progress = p);
+      _progress.value = p;
       if (elapsed >= totalMs) {
         t.cancel();
         _autoAdvance();

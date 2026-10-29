@@ -459,4 +459,51 @@ void main() {
 
     await tester.pumpWidget(const SizedBox());
   });
+
+  testWidgets('auto-play progress bar ticks and the slide still advances', (
+    WidgetTester tester,
+  ) async {
+    // #2633: de voortgang leeft in een ValueNotifier zodat een tik alleen de
+    // balk herbouwt. Deze test bewijst het uiteinde: de balk loopt wél en de
+    // dia schakelt wél door na de ingestelde duur.
+    sizeUp(tester);
+    final List<Slide> timed = <Slide>[
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Snel', bullets: <String>['a'], advanceDuration: 1),
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Daarna', bullets: <String>['b']),
+    ];
+    await tester.pumpWidget(_host(timed));
+    await tester.pump();
+    expect(find.text('Snel'), findsOneWidget);
+    // De voortgangsbalk hangt aan de presentatorcockpit; P toont die view.
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyP);
+    await tester.pump();
+    // Vóór de eerste tik staat de balk er nog niet (_progress == 0).
+    expect(find.byType(LinearProgressIndicator), findsNothing);
+
+    await tester.pump(const Duration(milliseconds: 300));
+    final p1 = tester
+        .widget<LinearProgressIndicator>(find.byType(LinearProgressIndicator))
+        .value;
+    expect(p1, isNotNull);
+    expect(p1!, greaterThan(0));
+
+    await tester.pump(const Duration(milliseconds: 200));
+    final p2 = tester
+        .widget<LinearProgressIndicator>(find.byType(LinearProgressIndicator))
+        .value;
+    expect(p2!, greaterThan(p1));
+
+    // Na ~1 s schakelt de dia door. Dia twee heeft geen advanceDuration,
+    // dus verdwijnt de balk — bewijs dat _autoAdvance echt gelopen heeft
+    // ('Daarna' zelf staat al in het VOLGENDE-voorbeeld).
+    await tester.pump(const Duration(milliseconds: 700));
+    await tester.pump();
+    expect(find.byType(LinearProgressIndicator), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
 }
