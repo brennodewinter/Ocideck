@@ -197,7 +197,7 @@ import 'shell/presentation_import_action.dart';
 import 'shell/transcribe_file_action.dart';
 import 'shell/record_microphone_action.dart';
 import 'shell/record_system_action.dart';
-import 'shell/meeting_lifecycle.dart';
+import 'shell/quit_lifecycle.dart';
 import 'shell/recording_lifecycle.dart';
 import 'shell/workspace_body.dart';
 import 'panels/preview_panel.dart';
@@ -512,18 +512,55 @@ class _AppShellState extends ConsumerState<AppShell> {
     await ref
         .read(recoveryServiceProvider)
         .discardEach(ref.read(tabsProvider).tabs.map((t) => t.recoveryId));
-    // Wis lesinhoud en web-assets eerst lokaal. De servermelding is bewust
-    // best-effort: ook zonder netwerk mag afsluiten geen materiaal achterlaten.
+    // Wis lesinhoud en web-assets eerst lokaal. De rest is best-effort:
+    // elke stap is begrensd en foutdovend, en duurt de keten toch lang dan
+    // mag de gebruiker zelf kiezen om de rest over te slaan (#2631).
     final sessions = closeLearningTabsLocally(ref.read(tabsProvider.notifier));
-    for (final session in sessions) {
-      await ref.read(ociServeProvider.notifier).closeLessonSession(session);
+    final cleanup = runBestEffortQuitSteps(ref, sessions: sessions);
+    final slow = await cleanup
+        .then((_) => false)
+        .timeout(const Duration(seconds: 5), onTimeout: () => true);
+    if (slow) {
+      final quitAnyway = mounted ? await _confirmQuitAnyway() : true;
+      if (quitAnyway != false) {
+        // De resterende stappen mogen in de achtergrond doorlopen — het
+        // proces gaat toch weg.
+        unawaited(cleanup);
+        await quitApp();
+        return;
+      }
     }
-    // Opname en call stoppen vóór de native quit — zie de lifecycle-helpers.
-    await stopRecordingBeforeQuit(ref);
-    await leaveMeetingBeforeQuit(ref);
+    await cleanup;
     if (mounted) await settleUiBeforeNativeQuit(context);
     await quitApp();
   }
+
+  /// Toont zich pas als de opruimstappen langer dan ~5 s duren. Opgeslagen
+  /// werk is dan al veilig (herstelbestanden staan klaar en de tabs zijn
+  /// opgeslagen), dus "toch afsluiten" slaat alleen de resterende
+  /// opruimstap over — de server ruimt openstaande sessies zelf op.
+  Future<bool?> _confirmQuitAnyway() => showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(context.l10n.d('Afsluiten duurt lang')),
+      content: Text(
+        context.l10n.d(
+          'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; '
+          'nu afsluiten slaat de resterende stappen over.',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: Text(context.l10n.d('Wachten')),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: Text(context.l10n.d('Toch afsluiten')),
+        ),
+      ],
+    ),
+  );
 
   Future<_CloseChoice> _confirmSaveBeforeClose(String message) =>
       _confirmSaveBeforeCloseDialog(context, message);
