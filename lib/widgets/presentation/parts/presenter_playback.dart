@@ -34,6 +34,9 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       onError: (Object e, StackTrace? s) =>
           logWarning('presenter precache: afbeelding niet gelezen', e),
     );
+    // SVG wordt door SafeSvgImage/vector_graphics gecachet; het raster-
+    // ImageProvider-pad kan dit formaat niet voorlezen.
+    if (isSvgImagePath(path)) return;
     // Gebundelde (asset:) en in-memory (mem:) paden hebben geen
     // bestandsresolutie; op web bestaan File-paden sowieso niet.
     if (isBundledAssetPath(path)) {

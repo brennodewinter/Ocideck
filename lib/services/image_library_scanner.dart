@@ -47,6 +47,7 @@ class ImageLibraryScanner {
     '.heic',
     '.tiff',
     '.tif',
+    '.svg',
   };
 
   /// Mappen die niet naar afbeeldingen doorzocht worden: versiebeheer, build- en

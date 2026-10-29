@@ -585,8 +585,10 @@ Construct it with `ClassificationEnforcementPolicy.fromAppSettings(...)` or
 
 ### ImageService
 `lib/services/image_service.dart` — a concrete service (not an injectable
-interface) for importing and resolving images. Images are validated by magic
-bytes, not extension (`imageMimeFromBytes` accepts PNG, JPEG, GIF, BMP, WebP).
+interface) for importing and resolving images. Raster images are validated by
+magic bytes, not extension (`imageMimeFromBytes` accepts PNG, JPEG, GIF, BMP,
+WebP); SVG is parsed and sanitised through the renderer allow-list before it is
+stored.
 Key methods: `pickImage` / `pickImageDetailed` (→ `ImageImportOutcome`),
 `pasteImage` / `pasteImageDetailed`, `readSlideImageBytes`, `copyImagesToProject`,
 `copyMediaToProject`.

@@ -21,6 +21,7 @@ import '../../utils/log.dart';
 import '../../utils/project_path.dart';
 import '../../services/web_asset_store.dart';
 import '../../widgets/editors/callout_marker_helpers.dart';
+import '../safe_svg_image.dart';
 
 /// The crop choices the author made: the (possibly changed) zoom and the
 /// normalized focal point that decides which part of the picture stays in view.
@@ -96,7 +97,9 @@ String? rotatedCopyName(String currentName, int quarterTurns) {
 /// images are excluded so the editor never fetches through the SSRF gate just to
 /// crop; the caller hides the button for those.
 bool imageIsCroppable(String imagePath) =>
-    imagePath.isNotEmpty && !VideoSource.looksLikeUrl(imagePath);
+    imagePath.isNotEmpty &&
+    !VideoSource.looksLikeUrl(imagePath) &&
+    !isSvgImagePath(imagePath);
 
 /// Opens an interactive crop/reposition dialog for [imagePath] (resolved against
 /// [projectPath]). The stage mirrors exactly how the slide renders the image in

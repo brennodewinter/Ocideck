@@ -370,6 +370,108 @@ void main() {
     );
   });
 
+  group('SVG-import', () {
+    const unsafeSvg =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" '
+        'onload="evil()"><script>evil()</script><rect width="10" '
+        'height="10" fill="red"/></svg>';
+
+    test('accepteert SVG op inhoud en slaat alleen de veilige vorm op', () async {
+      final src = File(p.join(tmp.path, 'vector.svg'))
+        ..writeAsStringSync(unsafeSvg);
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      expect(await service.isAcceptableImageFile(src.path), isTrue);
+      final imported = await service.importIntoDeck(
+        src.path,
+        projectPath: project.path,
+      );
+      final stored = File(p.join(project.path, imported)).readAsStringSync();
+
+      expect(imported, 'images/vector.svg');
+      expect(stored, contains('<rect'));
+      expect(stored, isNot(contains('<script')));
+      expect(stored, isNot(contains('onload')));
+      expect(src.readAsStringSync(), unsafeSvg, reason: 'de bron blijft intact');
+    });
+
+    test('webbytes krijgen dezelfde validatie en opschoning', () {
+      final safe = ImageService.prepareImportedImageBytes(
+        Uint8List.fromList(unsafeSvg.codeUnits),
+        name: 'vector.svg',
+      );
+      expect(safe, isNotNull);
+      expect(String.fromCharCodes(safe!), contains('<rect'));
+      expect(String.fromCharCodes(safe), isNot(contains('<script')));
+      expect(
+        ImageService.prepareImportedImageBytes(
+          Uint8List.fromList('<svg><broken>'.codeUnits),
+          name: 'vector.svg',
+        ),
+        isNull,
+      );
+    });
+
+    test(
+      'weigert een ongeldige SVG zonder die in het project te schrijven',
+      () async {
+        final src = File(p.join(tmp.path, 'broken.svg'))
+          ..writeAsStringSync('<svg><broken>');
+        final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+        final imported = await service.importIntoDeck(
+          src.path,
+          projectPath: project.path,
+        );
+
+        expect(imported, src.path);
+        expect(Directory(p.join(project.path, 'images')).existsSync(), isFalse);
+      },
+    );
+
+    test('schoont een vertrouwde SVG opnieuw op bij projectopslag', () async {
+      final src = File(p.join(tmp.path, 'external.svg'))
+        ..writeAsStringSync(unsafeSvg);
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: src.path)],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
+
+      expect(out.single.imagePath, 'images/external.svg');
+      final stored = File(
+        p.join(project.path, 'images', 'external.svg'),
+      ).readAsStringSync();
+      expect(stored, contains('<rect'));
+      expect(stored, isNot(contains('<script')));
+      expect(stored, isNot(contains('onload')));
+    });
+
+    test('schoont ook een mem:-SVG opnieuw op bij projectopslag', () async {
+      addTearDown(WebAssetStore.clear);
+      final mem = WebAssetStore.put(
+        Uint8List.fromList(unsafeSvg.codeUnits),
+        name: 'remote.svg',
+      );
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: mem)],
+        project.path,
+      );
+
+      expect(out.single.imagePath, 'images/remote.svg');
+      final stored = File(
+        p.join(project.path, 'images', 'remote.svg'),
+      ).readAsStringSync();
+      expect(stored, contains('<rect'));
+      expect(stored, isNot(contains('<script')));
+      expect(stored, isNot(contains('onload')));
+    });
+  });
+
   group('copyImageToClipboard', () {
     test('returns false for an empty path', () async {
       expect(await service.copyImageToClipboard(''), isFalse);

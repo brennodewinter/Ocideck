@@ -19,6 +19,15 @@ void main() {
     return f;
   }
 
+  test('vindt SVG-vectorafbeeldingen in de Library', () async {
+    final svg = File(p.join(tmp.path, 'vector.svg'))
+      ..writeAsStringSync('<svg viewBox="0 0 10 10"><rect/></svg>');
+
+    final result = await ImageLibraryScanner.scan([tmp.path]);
+
+    expect(result.paths, contains(svg.path));
+  });
+
   test('caps the number of files and reports truncation', () async {
     for (var i = 0; i < 10; i++) {
       makeImg('pic$i.png');

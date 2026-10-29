@@ -111,7 +111,7 @@ OciDeck handhaaft strikte exportcontroles:
 - **Primair**: Markdown (.md) met Marp-formaatcompatibiliteit
 - **Pakketten**: .ocideck (pakketten in één bestand)
 - **Stijlprofielen**: .ocideckstyle voor het delen van thema's  
-- **Afbeeldingen**: PNG, JPEG, GIF, BMP, WebP (gevalideerd op inhoud/magic bytes, niet op bestandsextensie)
+- **Afbeeldingen**: PNG, JPEG, GIF, BMP, WebP (gevalideerd op magic bytes) en opgeschoonde SVG-vectorafbeeldingen (gevalideerd door XML-parsing)
 - **Video/audio**: Diverse formaten ondersteund via onderliggende bibliotheken
 - **Alleen importeren**: PowerPoint (.pptx), Apple Keynote (.key) en LibreOffice Impress (.odp), omgezet naar gewone OciDeck-decks achter de optionele importmodule. Alleen-lezen in één richting: OciDeck importeert deze, en exporteert PPTX, maar schrijft nooit .key of .odp. De conversie is standaard een best-effort, en bij het importeren van één bestand wordt per verliesgevoelige slide gevraagd of je die zo compleet mogelijk wilt behouden, alleen de afbeeldingen wilt behouden, of wilt overslaan — zie [Presentaties importeren](USER_GUIDE.md#importing-presentations-powerpoint-keynote-impress) in de gebruikershandleiding voor wat het wel en niet overleeft. *(Toegevoegd 2026-07-24.)*
 

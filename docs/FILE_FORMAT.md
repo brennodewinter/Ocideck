@@ -3582,7 +3582,7 @@ encrypted and unlocked that package themselves.
 
 | What | Accepted as | Cap | Constant |
 |---|---|---:|---|
-| Image (picked or pasted) | PNG, JPEG, GIF, BMP, WebP — validated by **magic bytes**, not by the file extension | 64 MiB | `ImageService.maxImageBytes` |
+| Image (picked or pasted) | PNG, JPEG, GIF, BMP, WebP — validated by **magic bytes** — or SVG, validated by XML parsing and stored only after the renderer allow-list removes scripts, event handlers, animation and external/data URLs | 64 MiB | `ImageService.maxImageBytes` |
 | Video / audio | Size-checked only; no magic-byte validation | 1 GiB | `ImageService.maxMediaBytes` |
 | Image offered to the face scan | As above | 24 MiB | `kFaceScanMaxBytes` |
 

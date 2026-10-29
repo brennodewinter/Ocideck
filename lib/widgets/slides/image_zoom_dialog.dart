@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/project_path.dart';
+import '../safe_svg_image.dart';
 
 /// Opens a full-screen, pan-and-zoomable view of [imagePath] (resolved against
 /// [projectPath]). Used by question slides so the audience can inspect a photo
@@ -23,6 +24,29 @@ Future<void> showImageZoomDialog(
   final memBytes = WebAssetStore.isMemPath(imagePath)
       ? WebAssetStore.bytesFor(imagePath)
       : null;
+  if (isSvgImagePath(imagePath)) {
+    final Widget vector;
+    if (memBytes != null) {
+      vector = SafeSvgImage.memory(
+        memBytes,
+        fit: BoxFit.contain,
+        errorBuilder: (_) => const _ZoomImageError(),
+      );
+    } else {
+      final resolved = resolveContainedRealPath(imagePath, projectPath);
+      if (resolved == null) return Future<void>.value();
+      vector = SafeSvgImage.file(
+        resolved,
+        fit: BoxFit.contain,
+        errorBuilder: (_) => const _ZoomImageError(),
+      );
+    }
+    return showDialog<void>(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.92),
+      builder: (_) => _ImageZoomView.vector(vector, caption: caption),
+    );
+  }
   final ImageProvider provider;
   if (memBytes != null) {
     provider = cappedMemoryImage(memBytes);
@@ -49,15 +73,20 @@ Future<void> showImageProviderZoomDialog(
   return showDialog<void>(
     context: context,
     barrierColor: Colors.black.withValues(alpha: 0.92),
-    builder: (_) => _ImageZoomView(image: image, caption: caption),
+    builder: (_) => _ImageZoomView.raster(image, caption: caption),
   );
 }
 
 class _ImageZoomView extends StatelessWidget {
-  final ImageProvider image;
+  final ImageProvider? image;
+  final Widget? vector;
   final String caption;
 
-  const _ImageZoomView({required this.image, required this.caption});
+  const _ImageZoomView.raster(this.image, {required this.caption})
+    : vector = null;
+
+  const _ImageZoomView.vector(this.vector, {required this.caption})
+    : image = null;
 
   @override
   Widget build(BuildContext context) {
@@ -82,15 +111,13 @@ class _ImageZoomView extends StatelessWidget {
                 minScale: 0.8,
                 maxScale: 6,
                 child: Center(
-                  child: Image(
-                    image: image,
-                    fit: BoxFit.contain,
-                    errorBuilder: (_, _, _) => const Icon(
-                      Icons.broken_image_outlined,
-                      color: Colors.white54,
-                      size: 64,
-                    ),
-                  ),
+                  child:
+                      vector ??
+                      Image(
+                        image: image!,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, _, _) => const _ZoomImageError(),
+                      ),
                 ),
               ),
             ),
@@ -139,4 +166,12 @@ class _ImageZoomView extends StatelessWidget {
       ),
     );
   }
+}
+
+class _ZoomImageError extends StatelessWidget {
+  const _ZoomImageError();
+
+  @override
+  Widget build(BuildContext context) =>
+      const Icon(Icons.broken_image_outlined, color: Colors.white54, size: 64);
 }

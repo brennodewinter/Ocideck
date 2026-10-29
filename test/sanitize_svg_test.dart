@@ -1,7 +1,127 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/sanitize_svg.dart';
 
 void main() {
+  test('import-SVG houdt alleen een opgeschoonde SVG-wortel over', () {
+    final safeBytes = sanitizeImportedSvgBytes(
+      utf8.encode(
+        '<?xml version="1.0"?><!DOCTYPE svg><svg viewBox="0 0 10 10" '
+        'onload="evil()"><script>evil()</script><rect width="10" '
+        'height="10"/></svg>',
+      ),
+    );
+
+    expect(safeBytes, isNotNull);
+    final safe = utf8.decode(safeBytes!);
+    expect(safe, startsWith('<svg'));
+    expect(safe, contains('<rect'));
+    expect(safe, isNot(contains('<!DOCTYPE')));
+    expect(safe, isNot(contains('<script')));
+    expect(safe, isNot(contains('onload')));
+  });
+
+  test('import-SVG weigert ongeldige XML en niet-UTF-8', () {
+    expect(sanitizeImportedSvgBytes(utf8.encode('<svg><rect></svg>')), isNull);
+    expect(sanitizeImportedSvgBytes(const [0xFF, 0xFE, 0xFD]), isNull);
+  });
+
+  test('import-SVG bewaart een begrensde ingebedde PNG', () {
+    // Alleen de PNG-header + IHDR-velden zijn voor de sanitizer relevant.
+    final png = <int>[
+      0x89,
+      0x50,
+      0x4E,
+      0x47,
+      0x0D,
+      0x0A,
+      0x1A,
+      0x0A,
+      0,
+      0,
+      0,
+      13,
+      0x49,
+      0x48,
+      0x44,
+      0x52,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+    ];
+    final uri = 'data:image/png;base64,${base64.encode(png)}';
+    final safe = utf8.decode(
+      sanitizeImportedSvgBytes(
+        utf8.encode('<svg><image href="$uri" width="1" height="1"/></svg>'),
+      )!,
+    );
+
+    expect(safe, contains('data:image/png;base64,'));
+  });
+
+  test('import-SVG weigert andere of buitensporig grote data-afbeeldingen', () {
+    final hugeHeader = <int>[
+      0x89,
+      0x50,
+      0x4E,
+      0x47,
+      0x0D,
+      0x0A,
+      0x1A,
+      0x0A,
+      0,
+      0,
+      0,
+      13,
+      0x49,
+      0x48,
+      0x44,
+      0x52,
+      0,
+      0,
+      0x20,
+      1,
+      0,
+      0,
+      0,
+      1,
+    ];
+    final hugeUri = 'data:image/png;base64,${base64.encode(hugeHeader)}';
+    final safe = utf8.decode(
+      sanitizeImportedSvgBytes(
+        utf8.encode(
+          '<svg><image href="$hugeUri"/><image href="data:text/html;base64,AA=="/></svg>',
+        ),
+      )!,
+    );
+
+    expect(safe, isNot(contains('data:image/png')));
+    expect(safe, isNot(contains('data:text/html')));
+  });
+
+  test('import-SVG verwijdert externe afbeeldings- en stijl-URL’s', () {
+    final safe = utf8.decode(
+      sanitizeImportedSvgBytes(
+        utf8.encode('''
+<svg>
+  <image href="https://example.invalid/tracker.png"/>
+  <rect style="fill:url(https://example.invalid/paint.svg)"/>
+  <circle cx="5" cy="5" r="4"/>
+</svg>
+'''),
+      )!,
+    );
+
+    expect(safe, contains('<circle'));
+    expect(safe, isNot(contains('https://')));
+  });
+
   test('custom bullet SVG strips active content and external URLs', () {
     final clean = sanitizeCustomBulletSvg('''
 <svg viewBox="0 0 10 10" onload="alert(1)">

@@ -155,6 +155,10 @@ void main() {
       expect(imageIsCroppable(''), isFalse);
     });
 
+    test('SVG blijft vector en krijgt geen raster-rotatie/cropdialoog', () {
+      expect(imageIsCroppable('images/vector.svg'), isFalse);
+    });
+
     test('een URL niet — bijsnijden mag geen ophaalactie worden', () {
       // Zou dit true zijn, dan haalde de editor het beeld door de SSRF-poort
       // op louter de wens om te kadreren.

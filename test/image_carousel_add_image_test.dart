@@ -79,6 +79,28 @@ void main() {
   });
 
   group('adoptImageFileIntoArchive', () {
+    test('SVG wordt opgeschoond voordat het archief het bewaart', () async {
+      final outside = Directory('${tempDir.path}/buiten')..createSync();
+      final src = File('${outside.path}/vector.svg')
+        ..writeAsStringSync(
+          '<svg viewBox="0 0 10 10" onload="evil()">'
+          '<script>evil()</script><circle cx="5" cy="5" r="4"/></svg>',
+        );
+      final archive = Directory('${tempDir.path}/archief')..createSync();
+
+      final added = await adoptImageFileIntoArchive(
+        src,
+        dest: archive,
+        archiveRoots: [archive.path],
+      );
+
+      expect(added, p.join(archive.path, 'vector.svg'));
+      final stored = File(added!).readAsStringSync();
+      expect(stored, contains('<circle'));
+      expect(stored, isNot(contains('<script')));
+      expect(stored, isNot(contains('onload')));
+    });
+
     test('kopieert een extern bestand het archief in', () async {
       final outside = Directory('${tempDir.path}/buiten')..createSync();
       final src = File('${outside.path}/foto.png')

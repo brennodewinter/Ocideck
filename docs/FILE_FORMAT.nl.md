@@ -3559,7 +3559,7 @@ dat pakket zelf versleuteld en ontgrendeld.
 
 | Wat | Geaccepteerd als | Plafond | Constante |
 |---|---|---:|---|
-| Beeld (gekozen of geplakt) | PNG, JPEG, GIF, BMP, WebP — gevalideerd op **magic bytes**, niet op de bestandsextensie | 64 MiB | `ImageService.maxImageBytes` |
+| Beeld (gekozen of geplakt) | PNG, JPEG, GIF, BMP, WebP — gevalideerd op **magic bytes** — of SVG, gevalideerd door XML-parsing en pas opgeslagen nadat de renderer-allow-list scripts, eventhandlers, animatie en externe/data-URL's verwijdert | 64 MiB | `ImageService.maxImageBytes` |
 | Video / audio | Alleen op grootte gecontroleerd; geen magic-byte-validatie | 1 GiB | `ImageService.maxMediaBytes` |
 | Beeld aangeboden aan de gezichtsscan | Als hierboven | 24 MiB | `kFaceScanMaxBytes` |
 

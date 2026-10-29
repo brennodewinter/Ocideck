@@ -18,6 +18,7 @@ import '../../../theme/app_theme.dart';
 import '../../../utils/bundled_asset.dart';
 import '../../../utils/image_limits.dart';
 import '../../../utils/project_path.dart';
+import '../../safe_svg_image.dart';
 import 'retrying_image.dart';
 
 /// Creates an [ImageProvider] from an image path, mirroring the resolution
@@ -25,6 +26,7 @@ import 'retrying_image.dart';
 /// dependency on that private function.
 ImageProvider? calloutImageProvider(String imagePath, String? projectPath) {
   if (imagePath.isEmpty) return null;
+  if (isSvgImagePath(imagePath)) return null;
   if (isBundledAssetPath(imagePath)) {
     return cappedBundledAssetImage(bundledAssetKey(imagePath));
   }

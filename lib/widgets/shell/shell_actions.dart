@@ -89,9 +89,11 @@ extension _DropActions on _AppShellState {
           kind == DroppedKind.document) {
         imports.add((bytes: bytes, name: file.name));
       } else {
-        if (bytes.isEmpty ||
-            bytes.length > ImageService.maxImageBytes ||
-            !ImageService.looksLikeImage(bytes)) {
+        final acceptedBytes = ImageService.prepareImportedImageBytes(
+          bytes,
+          name: file.name,
+        );
+        if (acceptedBytes == null) {
           logWarning(
             'AppShell._onWebFilesDropped: afbeelding geweigerd '
             '(te groot of geen afbeelding)',
@@ -99,7 +101,10 @@ extension _DropActions on _AppShellState {
           );
           continue;
         }
-        final outcome = ImageService.storeWebImage(bytes, name: file.name);
+        final outcome = ImageService.storeWebImage(
+          acceptedBytes,
+          name: file.name,
+        );
         final path = outcome.path;
         if (path != null) {
           images.add(path);

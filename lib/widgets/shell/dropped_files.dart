@@ -33,6 +33,7 @@ const droppedImageExtensions = {
   '.heic',
   '.tiff',
   '.tif',
+  '.svg',
 };
 
 /// Wat de drop met een bestand doet.

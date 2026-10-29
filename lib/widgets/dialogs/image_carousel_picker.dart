@@ -28,6 +28,7 @@ import '../../platform/platform_features.dart';
 import '../../utils/asset_destination.dart';
 import '../../utils/atomic_file.dart';
 import '../../utils/log.dart';
+import '../safe_svg_image.dart';
 import '../../theme/app_theme.dart';
 import 'ai_image_outbound_dialog.dart';
 
@@ -151,6 +152,7 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
     '.heic',
     '.tiff',
     '.tif',
+    '.svg',
   };
 
   /// All discovered images (newest first).
@@ -337,4 +339,29 @@ class _FileSizeState extends State<_FileSize> {
       ),
     );
   }
+}
+
+/// De gedeelde tekenroute voor raster- en vectorbeelden in de Library.
+/// SVG loopt altijd via [SafeSvgImage], ook wanneer het bestand handmatig in
+/// een bibliotheekmap is gezet en dus niet door de importknop kwam.
+Widget _libraryImage(
+  String path, {
+  required BoxFit fit,
+  required int maxEdge,
+  required WidgetBuilder errorBuilder,
+}) {
+  if (isSvgImagePath(path)) {
+    return SafeSvgImage.file(
+      path,
+      fit: fit,
+      width: double.infinity,
+      height: double.infinity,
+      errorBuilder: errorBuilder,
+    );
+  }
+  return Image(
+    image: boundedFileImage(File(path), maxEdge),
+    fit: fit,
+    errorBuilder: (context, error, stackTrace) => errorBuilder(context),
+  );
 }
