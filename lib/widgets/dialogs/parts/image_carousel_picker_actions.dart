@@ -693,7 +693,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
     }
     final picked = await FilePicker.pickFile(
       type: FileType.custom,
-      allowedExtensions: ImageService.supportedImageExtensions,
+      allowedExtensions: supportedImageExtensions,
       dialogTitle: l10n.d('Kies een afbeelding'),
     );
     final source = picked?.path;

@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 
 import '../services/image_service.dart';
 import '../services/web_asset_store.dart';
+import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
 import '../utils/sanitize_svg.dart';
 
@@ -132,8 +133,8 @@ class _SafeSvgImageState extends State<SafeSvgImage> {
             widget.errorBuilder(context);
       }
       if (data.embeddedPng case final png?) {
-        return Image.memory(
-          png,
+        return Image(
+          image: cappedMemoryImage(png),
           fit: widget.fit,
           alignment: widget.alignment,
           width: widget.width,

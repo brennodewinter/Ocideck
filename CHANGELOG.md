@@ -25,6 +25,19 @@ All notable changes to OciDeck are documented in this file.
 - **Windows-rookproef eist een venster.** De releaseproef keek alleen of het
   proces na 15 s nog leefde; hij wacht nu op de mijlpaal "eerste frame" in het
   logboek, en zet dat logboek bij een fout in het releaselog.
+- **SVG-vectorafbeeldingen in slides en de bibliotheek.** `.svg` kan nu
+  gekozen, gedropt en in de Image Library bewaard worden. Omdat SVG actief
+  XML is en geen magic bytes heeft, wordt elk bestand bij import volledig
+  geparseerd en door dezelfde allow-list gehaald die Mermaid-diagrammen al
+  gebruikten: scripts, eventhandlers, animatie, stylesheets en externe of
+  `data:`-URL's verdwijnen vóórdat het beeld een deck of stagingmap bereikt.
+  De enige `data:`-uitzondering is een begrensde base64-PNG (signatuur,
+  hooguit 8 MiB, hooguit 8192 px per zijde), zodat SVG-wrappers van Inkscape
+  en LibreOffice niet langer blanco renderen. Renderen loopt via
+  `SafeSvgImage`, dat de opschoning opnieuw uitvoert — ook voor bestanden
+  die handmatig in een bibliotheekmap zijn gezet. Onopgeslagen decks mogen
+  alleen beelden uit OciDecks eigen stagingmap tonen.
+
 ### Changed
 
 - **MITRE CWE bijgewerkt van 4.20 naar 5.0.** De volledige lijst telt nu 984

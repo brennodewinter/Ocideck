@@ -142,18 +142,7 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
 }
 
 class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
-  static const _exts = {
-    '.jpg',
-    '.jpeg',
-    '.png',
-    '.gif',
-    '.webp',
-    '.bmp',
-    '.heic',
-    '.tiff',
-    '.tif',
-    '.svg',
-  };
+  static final _exts = {for (final ext in supportedImageExtensions) '.$ext'};
 
   /// All discovered images (newest first).
   List<String> _images = [];

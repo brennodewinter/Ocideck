@@ -10,6 +10,8 @@ import 'package:ocideck/utils/project_path.dart';
 import 'package:ocideck/widgets/safe_svg_image.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/pump_until.dart';
+
 void main() {
   testWidgets('tekent een opgeschoonde SVG als vectorbeeld', (tester) async {
     final bytes = Uint8List.fromList(
@@ -84,21 +86,22 @@ void main() {
     final link = Link(p.join(images.path, 'escape.svg'))
       ..createSync(outside.path);
 
-    await tester.runAsync(() async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: SafeSvgImage.file(
-            link.path,
-            projectPath: project.path,
-            errorBuilder: (_) => const Text('kapot'),
-            errorBuilderWithCause: (_, error) =>
-                Text(error is ProjectEscapeException ? 'buiten' : 'kapot'),
-          ),
+    await tester.pumpWidget(
+      MaterialApp(
+        home: SafeSvgImage.file(
+          link.path,
+          projectPath: project.path,
+          errorBuilder: (_) => const Text('kapot'),
+          errorBuilderWithCause: (_, error) =>
+              Text(error is ProjectEscapeException ? 'buiten' : 'kapot'),
         ),
-      );
-      await Future<void>.delayed(const Duration(milliseconds: 100));
-      await tester.pump();
-    });
+      ),
+    );
+    await pumpUntil(
+      tester,
+      () => find.text('buiten').evaluate().isNotEmpty,
+      reason: 'een symlink-escape moet als buiten-de-deck renderen',
+    );
 
     expect(find.byType(SvgPicture), findsNothing);
     expect(find.text('buiten'), findsOneWidget);

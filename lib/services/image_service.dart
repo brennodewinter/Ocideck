@@ -23,6 +23,8 @@ import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 import '../utils/content_hash.dart';
 
+part 'image_service_svg.dart';
+
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de overige redenen
 /// verdienen uitleg in de UI in plaats van een stil mislukken.
@@ -68,21 +70,6 @@ class ImageService {
   static const maxImageBytes = 64 * 1024 * 1024; // 64 MiB
   static const maxMediaBytes = 1024 * 1024 * 1024; // 1 GiB
 
-  /// Bestandstypen die de beeldkiezer aanbiedt. SVG staat hier expliciet bij:
-  /// `FileType.image` laat vectorbeelden op meerdere platformen weg.
-  static const supportedImageExtensions = [
-    'jpg',
-    'jpeg',
-    'png',
-    'gif',
-    'webp',
-    'bmp',
-    'heic',
-    'tiff',
-    'tif',
-    'svg',
-  ];
-
   /// Zet gevalideerde webbytes in de appbrede store en vertaalt een vol
   /// geheugenbudget naar een uitkomst die de UI gericht kan uitleggen.
   static ImageImportOutcome storeWebImage(
@@ -97,21 +84,6 @@ class ImageService {
         ImageImportFailure.memoryBudgetExceeded,
       );
     }
-  }
-
-  /// Valideer bytes uit een padloze web-picker/drop en geef de vorm terug die
-  /// opgeslagen mag worden. Rasterbytes blijven identiek; SVG wordt geparseerd
-  /// en gesanitiseerd. De naam is bij SVG nodig omdat XML geen magic bytes
-  /// heeft en het uiteindelijke `mem:`-pad zelf geen extensie draagt.
-  static Uint8List? prepareImportedImageBytes(
-    Uint8List bytes, {
-    required String name,
-  }) {
-    if (bytes.isEmpty || bytes.length > maxImageBytes) return null;
-    if (p.extension(name).toLowerCase() == '.svg') {
-      return sanitizeImportedSvgBytes(bytes);
-    }
-    return _looksLikeImage(bytes) ? bytes : null;
   }
 
   /// True when [path] is within the size cap and its leading bytes match a
@@ -129,30 +101,11 @@ class ImageService {
         await raf.close();
       }
       if (p.extension(path).toLowerCase() != '.svg') return false;
-      return await _sanitizedSvgFileBytes(file) != null;
+      return await _sanitizedSvgBytesFromFile(file) != null;
     } catch (e) {
       logWarning('ImageService: image signature probe failed', e);
       return false;
     }
-  }
-
-  /// De opgeschoonde bytes van een SVG-bestand, of null voor een ongeldig,
-  /// te groot of niet-SVG bestand. Publiek voor de Library-opnameroute, die
-  /// dezelfde grens moet gebruiken als een rechtstreekse slide-import.
-  Future<Uint8List?> sanitizedSvgFileBytes(String path) async {
-    if (p.extension(path).toLowerCase() != '.svg') return null;
-    try {
-      return await _sanitizedSvgFileBytes(File(path));
-    } on FileSystemException catch (e) {
-      logWarning('ImageService: SVG read failed', e);
-      return null;
-    }
-  }
-
-  Future<Uint8List?> _sanitizedSvgFileBytes(File file) async {
-    final length = await file.length();
-    if (length <= 0 || length > maxImageBytes) return null;
-    return sanitizeImportedSvgBytes(await file.readAsBytes());
   }
 
   /// Whether [b] (a file's leading bytes) matches a known raster image
@@ -528,9 +481,7 @@ class ImageService {
     String subdir = 'images',
   }) async {
     final isSvg = p.extension(sourcePath).toLowerCase() == '.svg';
-    final safeSvg = isSvg
-        ? await sanitizedSvgFileBytes(sourcePath)
-        : null;
+    final safeSvg = isSvg ? await sanitizedSvgFileBytes(sourcePath) : null;
     if (isSvg && safeSvg == null) {
       logWarning('ImageService.importIntoDeck: invalid SVG rejected');
       return sourcePath;

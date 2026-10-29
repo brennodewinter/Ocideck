@@ -89,10 +89,7 @@ extension _DropActions on _AppShellState {
           kind == DroppedKind.document) {
         imports.add((bytes: bytes, name: file.name));
       } else {
-        final acceptedBytes = ImageService.prepareImportedImageBytes(
-          bytes,
-          name: file.name,
-        );
+        final acceptedBytes = prepareImportedImageBytes(bytes, name: file.name);
         if (acceptedBytes == null) {
           logWarning(
             'AppShell._onWebFilesDropped: afbeelding geweigerd '
