@@ -10,6 +10,8 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Logo en stijl reizen met het pakket, niet in de markdown (#2640–#2645, #2648–#2651).** Op de webversie kun je een presentatie-, donker en documentlogo kiezen; de bytes blijven in deze sessie en gaan mee in een pakket of een `.ocideckstyle`. Een kale download waarschuwt. Een opgeslagen project kopieert die logo's naast elkaar, ook als ze dezelfde bestandsnaam hebben. Een `.ocideck` legt de stijl in `ocideck-style.json` naast de markdown: OciDeck past hem toe op dat deck en laat het globale profiel staan. Oudere pakketten zonder dat bestand houden het lokale profiel. Annuleren in de instellingen gooit een nieuw of verwijderd stijlprofiel en een gewijzigde documentlay-out weer weg. De documentlettermaat geldt ook in DOCX en ODT. De Marp-CSS van een pakket neemt letter en tabelstijl van het profiel over.
+
 - **Gebruikershandleiding brak halverwege af op de forge (#2612).** Een
   plaatshouder `<title>` in lopende tekst las Forgejo als echte HTML-tag,
   waardoor alles erna als titeltekst wegviel: in USER_GUIDE ruim 1.400 regels,
