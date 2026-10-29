@@ -127,6 +127,8 @@ const Map<String, String> b = {
       // Nul, zodat de wachtpuntratchet in de vergelijkingen hieronder meedoet
       // als "al af" en de tellingen over hun eigen onderwerp blijven gaan.
       int vasteWacht = 0,
+      // Idem voor de sync-io-ratchet uit check_conventions.dart (#2636).
+      int syncIo = 0,
     }) =>
         '''
 const int catchUnderscoreBaseline = $katch;
@@ -145,6 +147,9 @@ ${List.generate(picker, (i) => "  'lib/een$i.dart': 'reden',").join('\n')}
 const int nosemgrepBaseline = $nosemgrep;
 const Map<String, int> fixedDelayBaseline = {
 ${List.generate(vasteWacht, (i) => "  'test/een\$i.dart': 1,").join('\n')}
+};
+const Map<String, int> syncIoBaseline = {
+${List.generate(syncIo, (i) => "  'lib/s$i.dart': 1,").join('\n')}
 };
 ''';
 
@@ -178,6 +183,8 @@ const int perFileFloorPercent = $bestandsvloer;
       int onsync = 0,
       // Idem voor de sjabloonratchet uit check_untranslated_templates.dart.
       int onvertaald = 0,
+      // Idem voor de sync-io-ratchet uit check_conventions.dart (#2636).
+      int syncIo = 0,
     }) => {
       'tool/check_conventions.dart': conventies(
         katch: katch,
@@ -185,6 +192,7 @@ const int perFileFloorPercent = $bestandsvloer;
         nosemgrep: nosemgrep,
         picker: picker,
         klassen: klassen,
+        syncIo: syncIo,
       ),
       'tool/check_method_length.dart': methodeLengte,
       'tool/coverage_summary.dart': dekking(

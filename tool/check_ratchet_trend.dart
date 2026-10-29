@@ -237,6 +237,13 @@ const List<Ratchet> ratchets = [
     wat: 'sjabloonregels die in het Engels bleven staan',
   ),
   Ratchet(
+    naam: 'syncIoBaseline',
+    bestand: 'tool/check_conventions.dart',
+    soort: RatchetSoort.omvang,
+    richting: Richting.omlaag,
+    wat: 'synchrone IO-aanroepen in UI-lagen (#2636)',
+  ),
+  Ratchet(
     naam: 'perFileFloorPercent',
     bestand: 'tool/coverage_summary.dart',
     soort: RatchetSoort.getal,
