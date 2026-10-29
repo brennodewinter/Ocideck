@@ -3113,13 +3113,32 @@ yet.
 ├── images/...                # all used images
 ├── data/...                  # linked chart data files (§6.4)
 ├── media/...                 # used video/audio
-├── logos/...                 # logo from the style profile
+├── logos/...                 # images from the style profile (logo, dark
+│                             #   variant, document logo, brand strip)
+├── theme.json                # the style profile the deck was exported with
 └── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
 ```
 
 The package carries the same `.marprc.yml` at its root as a saved project folder
 (§1.1), so extracting it and running `marp <title>.md` from the extracted folder
 loads the theme the same way. *(Added 2026-08-27, #1804.)*
+
+`theme.json` carries the **style profile** the presentation was exported with,
+so the look travels with the deck instead of the recipient's profile quietly
+taking over. The member holds one object with a `definition` key containing the
+same profile JSON as §3.2/§3.3. Images the profile references (slide logo, its
+dark variant, a distinct document logo, the brand strip) are packed as ordinary
+assets under `logos/`, and the corresponding `…Path` fields in `definition`
+point at those package-relative members; image references that cannot be packed
+(bundled `asset:` names keep their form) survive as they were.
+
+On open, OciDeck applies the packaged profile to the deck — the receiver sees
+the presentation the way the sender styled it. A package without a `theme.json`,
+or with one that does not parse to a usable profile, opens with the receiver's
+active profile exactly as before; the member is then ignored rather than half-
+applied. OciServe lesson packages (§7.2) are stricter: their profile may only
+reference bundled `asset:` images, never package-local files. *(Added
+2026-02-19, #2644.)*
 
 On import:
 
