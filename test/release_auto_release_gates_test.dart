@@ -115,6 +115,44 @@ resume_tag_target old
     expect(result.stdout.trim(), 'new');
   }, skip: skipOnWindows);
 
+  test('ongetagde release vervangen vereist expliciete patch en lege mirror', () {
+    const gitStub = r'''
+CUR_VERSION=9.9.9
+LEVEL=patch
+git() {
+  case "$1 $2" in
+    'ls-remote origin') return 0 ;;
+    'ls-remote mirror') [ "${MIRROR_TAGGED:-0}" -eq 0 ] || printf '%s\n' 'tag refs/tags/v9.9.9' ;;
+  esac
+}
+''';
+    final rejected = run(
+      '$gitStub\nSUPERSEDE_UNTAGGED=0\nassert_current_version_tag_state',
+      ['assert_current_version_tag_state'],
+    );
+    expect(rejected.exitCode, 42);
+    expect(rejected.stderr, contains('tag v9.9.9 ontbreekt'));
+
+    final allowed = run(
+      '$gitStub\nSUPERSEDE_UNTAGGED=1\nassert_current_version_tag_state',
+      ['assert_current_version_tag_state'],
+    );
+    expect(allowed.exitCode, 0, reason: allowed.stderr as String);
+
+    final minor = run(
+      '$gitStub\nSUPERSEDE_UNTAGGED=1\nLEVEL=minor\nassert_current_version_tag_state',
+      ['assert_current_version_tag_state'],
+    );
+    expect(minor.exitCode, 42);
+
+    final mirrorTagged = run(
+      '$gitStub\nSUPERSEDE_UNTAGGED=1\nMIRROR_TAGGED=1\nassert_current_version_tag_state',
+      ['assert_current_version_tag_state'],
+    );
+    expect(mirrorTagged.exitCode, 42);
+    expect(mirrorTagged.stderr, contains('staat op de mirror'));
+  }, skip: skipOnWindows);
+
   test('hervatten weigert nieuwe productcode sinds de release-merge', () {
     final result = run(
       r'''

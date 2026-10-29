@@ -701,6 +701,12 @@ tag push, the signing and the web deploy. The password is held only in memory
 and fed to `minisign` on standard input; the macOS notarisation leans on this
 Mac's keychain items and asks for nothing.
 
+If a version bump reached `main` but its tag was never created, the next release
+normally stops. When later product changes make resuming that untagged release
+unsafe, use `--supersede-untagged patch` for a new patch release. The script
+checks that the old version is untagged on both Forgejo and the GitHub mirror;
+it never moves an existing tag.
+
 *Before* the password it refuses to start while another Flutter or Dart process is
 working in this same worktree. Phase 1 builds clean, and a clean build begins with
 `flutter clean`; a `flutter run` you left open keeps refilling `.dart_tool`, which
