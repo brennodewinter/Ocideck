@@ -22,6 +22,18 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Webbundel vanaf `file://` toont uitleg in plaats van een dood scherm
+  (#2661).** `index.html` rechtstreeks in de browser openen gaf een console
+  vol CORS- en service-worker-fouten — de browser weigert wasm en modules
+  zonder http(s)-origin. De bundel detecteert dat nu en legt in het
+  laadscherm uit dat de map over HTTP geserveerd moet worden
+  (`python3 -m http.server`).
+
+- **Knop *Profiel verwijderen* uit wanneer er niets te verwijderen valt
+  (#2662).** Met één eigen stijlprofiel naast de ingebouwde was de knop
+  klikbaar maar deed hij niets; hij gaat nu uit bij één opgeslagen profiel
+  én bij een gekozen ingebouwd profiel.
+
 - **`.ocideck`-pakketten dragen hun stijl mee (#2644, #2641–#2645).** Een
   geëxporteerd pakket bevat nu `theme.json` met het volledige stijlprofiel;
   wie het pakket opent krijgt de stijl van de maker terug in plaats van zijn
