@@ -448,6 +448,12 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
     final coverage = privacyEnabled && deckLanguage.isNotEmpty
         ? privacyLexiconCoverage(deckLanguage)
         : PrivacyLexiconCoverage.covered;
+    // De beeldcontrole is de enige controle die merkbaar lang duurt. Zolang
+    // hij loopt staat hij hier mét teller — anders toont deze lijst "gedaan"
+    // terwijl de export-gate nog op de uitslag wacht.
+    final ({int done, int total})? imageScan = ref.watch(
+      imageFaceScanProgressProvider,
+    );
     return [
       Padding(
         padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
@@ -462,6 +468,34 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                 color: iconColor,
               ),
             ),
+            if (imageScan case final progress?)
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 12,
+                      height: 12,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: iconColor,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        '${l10n.d('Afbeeldingen nakijken op herkenbare gezichten')}: '
+                        '${progress.done}/${progress.total}',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                          color: iconColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             for (final check in slideQualityPerformedChecks(
               l10n,
               privacyEnabled: privacyEnabled,

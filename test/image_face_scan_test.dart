@@ -20,10 +20,16 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart' show getCrc32;
+import 'package:dartcv4/dartcv.dart'
+    show
+        IMREAD_COLOR,
+        IMREAD_REDUCED_COLOR_2,
+        IMREAD_REDUCED_COLOR_4,
+        IMREAD_REDUCED_COLOR_8;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/privacy/image_face_scan.dart';
 import 'package:ocideck/services/privacy/image_face_scan_io.dart'
-    show faceScanDimensionsWithinBudget;
+    show faceScanDecodeFlag, faceScanDimensionsWithinBudget;
 // Rechtstreeks, want op desktop kiest de voorwaardelijke import de native kant.
 import 'package:ocideck/services/privacy/image_face_scan_stub.dart';
 
@@ -300,6 +306,24 @@ void main() {
     test('telt niets, en gooit niet', () async {
       expect((await web.countFaces(Uint8List.fromList([1, 2, 3]))).faces, 0);
       web.dispose();
+    });
+  });
+
+  group('de gereduceerde decode', () {
+    // `faceScanDecodeFlag` kiest de sterkste IMREAD_REDUCED-stap die het
+    // gedecodeerde beeld nog op of boven de fijnste detectieschaal (1920
+    // breed) houdt. Dat is een pure functie: de keuze hoort ook zonder native
+    // laag bewezen te zijn, want een verkeerde kant kost óf geheugen (te
+    // groot gedecodeerd) óf kleine gezichten (te klein gedecodeerd).
+    test('reductie tot net boven de fijnste schaal', () {
+      expect(faceScanDecodeFlag(6000), IMREAD_REDUCED_COLOR_2);
+      expect(faceScanDecodeFlag(8000), IMREAD_REDUCED_COLOR_4);
+      expect(faceScanDecodeFlag(16000), IMREAD_REDUCED_COLOR_8);
+      // Precies op de grens mag nog een stap omlaag.
+      expect(faceScanDecodeFlag(3840), IMREAD_REDUCED_COLOR_2);
+      // Net eronder niet: dan zou de 1920-schaal verdwijnen.
+      expect(faceScanDecodeFlag(3839), IMREAD_COLOR);
+      expect(faceScanDecodeFlag(800), IMREAD_COLOR);
     });
   });
 }

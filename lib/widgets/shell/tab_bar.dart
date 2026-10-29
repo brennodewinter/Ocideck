@@ -366,6 +366,10 @@ Widget _tabScope(TabInfo tab) {
       themeLogoIssuesProvider.overrideWith(computeThemeLogoIssues),
       privacyRawScanProvider.overrideWith(computePrivacyRawScan),
       imagePrivacyRawIssuesProvider.overrideWith(computeImagePrivacyRawIssues),
+      // De voortgangsnotitie hoort bij de scan van déze tab: zonder eigen scope
+      // zou de teller van tab A die van tab B overschrijven (en de `finally`
+      // van A hem voor B leegmaken).
+      imageFaceScanProgressProvider.overrideWith((ref) => null),
       imagePrivacyIssuesProvider.overrideWith(computeImagePrivacyIssues),
       privacyScanProvider.overrideWith(computePrivacyScan),
       privacyQualityIssuesProvider.overrideWith(computePrivacyQualityIssues),
