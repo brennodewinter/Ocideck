@@ -62,6 +62,14 @@ extension _PresenterPlayback on _FullscreenPresenterState {
         File(resolved),
         version: imageVersionOf(resolved),
         projectPath: trusted ? null : widget.projectPath,
+        // Dezelfde weergave-grens als de render zelf (#2625): een andere
+        // decodeEdge is een andere cachesleutel, en dan warmt de voorlezing
+        // een entry die de getoonde decode nooit raakt. De presentator vult
+        // het venster, dus de vensterbreedte is hier de weergavemaat.
+        decodeEdge: decodeEdgeForDisplay(
+          MediaQuery.sizeOf(context).width,
+          MediaQuery.devicePixelRatioOf(context),
+        ),
       ),
     );
   }

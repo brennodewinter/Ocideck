@@ -26,10 +26,33 @@ const int kMaxImageDecodeDimension = 4096;
 /// voor over-cap afbeeldingen.
 const int kMaxImageFrames = 256;
 
+/// De vaste treden waarop de weergave-gebonden decodegrens eindigt
+/// (#2625). De trede — niet de exacte pixelmaat — is de cachesleutel, zodat
+/// een scherm dat 1840 px meet en een dat 1900 px meet dezelfde decode delen
+/// in plaats van elk een eigen 40-megabyte-entry te branden.
+const List<int> kDecodeEdgeSteps = [1024, 2048, 4096];
+
+/// De decodegrens die past bij een weergave van [displayWidth] logische
+/// pixels op [devicePixelRatio]: de eerste trede uit [kDecodeEdgeSteps] die
+/// de fysieke pixelmaat dekt, met [kMaxImageDecodeDimension] als plafond.
+/// Een oneindige of niet-positieve breedte levert het plafond — er is dan
+/// gewoon geen kleinere grens af te leiden.
+int decodeEdgeForDisplay(double displayWidth, double devicePixelRatio) {
+  if (!displayWidth.isFinite || displayWidth <= 0 || devicePixelRatio <= 0) {
+    return kMaxImageDecodeDimension;
+  }
+  final px = displayWidth * devicePixelRatio;
+  for (final step in kDecodeEdgeSteps) {
+    if (px <= step) return step;
+  }
+  return kMaxImageDecodeDimension;
+}
+
 /// The decode target for the memory cap. Returns `(null, null)` — i.e. decode at
-/// native resolution — whenever the image already fits within
-/// [kMaxImageDecodeDimension] on both axes, and only otherwise scales the
-/// longest side down to the cap (aspect ratio preserved).
+/// native resolution — whenever the image already fits within [cap] on both
+/// axes, and only otherwise scales the longest side down to the cap (aspect
+/// ratio preserved). [cap] is de decodegrens van dit oppervlak — standaard de
+/// decodeerbom-grens [kMaxImageDecodeDimension], per oppervlak lager (#2625).
 ///
 /// Decoding at native resolution within the cap is what lets **animated** images
 /// (GIF/WebP/APNG) keep every frame: a concrete decode target (as [ResizeImage]
@@ -37,18 +60,22 @@ const int kMaxImageFrames = 256;
 /// the resize path, which collapses an animated image to just its first frame.
 /// Over-cap images are still scaled down, so the decode-bomb defence is intact —
 /// such an image simply shows its first frame (a rare, safe trade-off).
-({int? width, int? height}) cappedDecodeTarget(int width, int height) {
+({int? width, int? height}) cappedDecodeTarget(
+  int width,
+  int height, [
+  int cap = kMaxImageDecodeDimension,
+]) {
   if (width <= 0 || height <= 0) return (width: null, height: null);
-  if (width <= kMaxImageDecodeDimension && height <= kMaxImageDecodeDimension) {
+  if (width <= cap && height <= cap) {
     return (width: null, height: null);
   }
   final aspect = width / height;
   if (width >= height) {
-    final targetHeight = (kMaxImageDecodeDimension / aspect).round();
-    return (width: kMaxImageDecodeDimension, height: math.max(1, targetHeight));
+    final targetHeight = (cap / aspect).round();
+    return (width: cap, height: math.max(1, targetHeight));
   }
-  final targetWidth = (kMaxImageDecodeDimension * aspect).round();
-  return (width: math.max(1, targetWidth), height: kMaxImageDecodeDimension);
+  final targetWidth = (cap * aspect).round();
+  return (width: math.max(1, targetWidth), height: cap);
 }
 
 /// An [ImageProvider] that caps the *decode* dimensions like [ResizeImage] but,
@@ -60,10 +87,9 @@ const int kMaxImageFrames = 256;
 /// [cacheKey] is the shared image-cache identity (a file path, the bytes object,
 /// …) so display, precache and export hit one cache entry. [loadBytes] fetches
 /// the encoded bytes lazily on decode. [decodeEdge] vervangt de vaste
-/// [kMaxImageDecodeDimension] door een per-weergave-grens én forceert altijd
-/// een concrete decodegrootte — de `ResizeImage`-semantiek van
-/// [boundedFileImage], die een animated image bewust tot zijn eerste frame
-/// samenvat.
+/// [kMaxImageDecodeDimension] door een per-weergave-grens (#2625) — met de
+/// `cappedDecodeTarget`-semantiek die bij een beeld onder de grens op natieve
+/// resolutie decodeert, zodat een animated image blijft animeren.
 @immutable
 class CappedImage extends ImageProvider<CappedImage> {
   const CappedImage(
@@ -110,16 +136,11 @@ class CappedImage extends ImageProvider<CappedImage> {
     final codec = await decode(
       buffer,
       getTargetSize: (int intrinsicWidth, int intrinsicHeight) {
-        final edge = decodeEdge;
-        if (edge != null) {
-          final target = _boundedDecodeTarget(
-            intrinsicWidth,
-            intrinsicHeight,
-            edge,
-          );
-          return ui.TargetImageSize(width: target.width, height: target.height);
-        }
-        final target = cappedDecodeTarget(intrinsicWidth, intrinsicHeight);
+        final target = cappedDecodeTarget(
+          intrinsicWidth,
+          intrinsicHeight,
+          decodeEdge ?? kMaxImageDecodeDimension,
+        );
         return ui.TargetImageSize(width: target.width, height: target.height);
       },
     );
@@ -168,25 +189,6 @@ int imageVersionOf(String path) => _imageVersions[path] ?? 0;
 void bumpImageVersion(String path) =>
     _imageVersions[path] = (_imageVersions[path] ?? 0) + 1;
 
-/// Altijd-concreet decode-doel dat binnen een [edge]×[edge]-vierkant past zonder
-/// op te schalen — het doel van `ResizeImage(policy: fit, allowUpscaling:
-/// false)`. Anders dan [cappedDecodeTarget] levert dit nóóit `(null, null)`:
-/// een concrete grootte stuurt de engine altijd het resize-pad op en vat een
-/// animated image daarmee tot zijn eerste frame samen — precies wat een
-/// miniatuur wil.
-({int width, int height}) _boundedDecodeTarget(
-  int width,
-  int height,
-  int edge,
-) {
-  if (width <= 0 || height <= 0) return (width: 1, height: 1);
-  final scale = math.min(1.0, edge / math.max(width, height));
-  return (
-    width: math.max(1, (width * scale).floor()),
-    height: math.max(1, (height * scale).floor()),
-  );
-}
-
 /// Leest [file] pas nadat de projectgrens is gecontroleerd — en leest dan het
 /// *reële* doelpad, zodat een tussen controle en open gewisselde symlink geen
 /// ontsnappende bytes kan leveren (TOCTOU). Werpt [ProjectEscapeException]
@@ -215,9 +217,9 @@ Future<Uint8List> readContainedImageBytes(
 ///
 /// Béide assen meegeven als `cacheWidth`/`cacheHeight` is niet de oplossing:
 /// dat gebruikt [ResizeImagePolicy.exact] en trekt de afbeelding scheef. De
-/// `decodeEdge` past daarentegen altijd-concreet binnen het vierkant, met
-/// behoud van verhouding — en vat een animated image tot zijn eerste frame
-/// samen, zoals de vorige `ResizeImage`-implementatie ook deed.
+/// `decodeEdge` past daarentegen binnen het vierkant met behoud van
+/// verhouding — op natieve resolutie onder de grens (animated blijft
+/// animeren), omlaag geschaald daarboven.
 ///
 /// [version] komt van [imageVersionOf] en forceert een cache-miss na
 /// [bumpImageVersion], zodat de miniatuur de nieuwe bytes toont. [projectPath]
@@ -243,13 +245,17 @@ ImageProvider boundedFileImage(
 /// de byte-lezing: één async realpath per decode in plaats van twee synchrone
 /// per build (#2624). Een ontsnappende symlink werpt [ProjectEscapeException]
 /// in de laadstroom — de errorBuilder tekent de `outsideDeck`-placeholder.
+/// [decodeEdge] is de per-weergave-decodegrens (#2625); null = de
+/// decodeerbom-grens [kMaxImageDecodeDimension].
 ImageProvider cappedFileImage(
   File file, {
   int version = 0,
   String? projectPath,
+  int? decodeEdge,
 }) => CappedImage(
   version == 0 ? file.path : '${file.path}#$version',
   () => readContainedImageBytes(file, projectPath),
+  decodeEdge: decodeEdge,
 );
 
 /// A capped-decode provider for in-memory image [bytes] (`mem:` paths from the

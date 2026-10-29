@@ -258,18 +258,12 @@ Widget _localFileImage(
   final version = imageVersionOf(resolved);
   return styled(
     RetryingImage(
-      image: maxEdge == null
-          ? cappedFileImage(
-              File(resolved),
-              version: version,
-              projectPath: projectPath,
-            )
-          : boundedFileImage(
-              File(resolved),
-              maxEdge,
-              version: version,
-              projectPath: projectPath,
-            ),
+      image: cappedFileImage(
+        File(resolved),
+        version: version,
+        projectPath: projectPath,
+        decodeEdge: maxEdge,
+      ),
       fit: fit,
       alignment: alignment,
       width: double.infinity,

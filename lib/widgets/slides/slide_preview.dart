@@ -528,59 +528,78 @@ class SlidePreviewWidget extends StatelessWidget {
     // The slide is a fixed-aspect design surface whose sizes all derive from
     // its width; interface text scaling must not reflow it (the auto-fit
     // measuring assumes unscaled text), so the canvas opts out.
-    return SlideAspectScope(
-      aspect: slideAspect,
-      child: MermaidRenderScope(
-        scrollable: scrollableMermaid,
-        viewController: mermaidViewController,
-        interactive: mermaidInteractive,
-        // Expliciete basis (param) gaat vóór op de ambient waarde (#2282).
-        child: DeckAssetScope(
-          deckUrl: remoteAssetBase ?? DeckAssetScope.maybeOf(context),
-          child: MediaQuery.withNoTextScaling(
-            child: _TableEditHost(
-              controller: presentationMode && slide.type == SlideType.table
-                  ? tableEditController
-                  : null,
-              child: _ChecklistInteractionHost(
-                // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
-                // schrijft de hele (zwartgelakte) slide terug. Zie
-                // [Slide.contentRedacted].
-                enabled:
-                    presentationMode &&
-                    onChecklistItemToggle != null &&
-                    !slide.contentRedacted,
-                onToggle: onChecklistItemToggle,
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: DefaultTextStyle(
-                    style: TextStyle(
-                      color: AppTheme.parseHexColor(themeProfile.textColor),
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.normal,
-                      fontStyle: FontStyle.normal,
-                    ),
-                    child: SlideLinkScope(
-                      onTapLink: onLinkTap,
-                      hasBottomTlp: hasBottomRightTlp,
-                      allowRemoteMedia: allowRemoteMedia,
-                      mediaRedacted: slide.mediaRedacted,
-                      decodeMaxEdge: decodeMaxEdge,
-                      marpStyle: marpStyle,
-                      slideText: AppTheme.parseHexColor(themeProfile.textColor),
-                      slideBackground: AppTheme.parseHexColor(
-                        themeProfile.slideBackgroundColor,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // De per-weergave-decodegrens (#2625): een expliciete [decodeMaxEdge]
+        // (slidestrook, overzichtsraster) wint; anders de eerste trede die de
+        // fysieke pixelmaat van díť vlak dekt. Zo decodet een telefoonfoto
+        // voor een 800 px-preview niet op 4096 px — een factor ~64 per dia op
+        // de beeldcache van presentator én beamer (aparte engines, elk met
+        // hun eigen 100 MB-imageCache). Een oppervlak zonder meetbare breedte
+        // houdt de 4096-plafond.
+        final effectiveDecodeEdge =
+            decodeMaxEdge ??
+            decodeEdgeForDisplay(
+              constraints.maxWidth,
+              MediaQuery.devicePixelRatioOf(context),
+            );
+        return SlideAspectScope(
+          aspect: slideAspect,
+          child: MermaidRenderScope(
+            scrollable: scrollableMermaid,
+            viewController: mermaidViewController,
+            interactive: mermaidInteractive,
+            // Expliciete basis (param) gaat vóór op de ambient waarde (#2282).
+            child: DeckAssetScope(
+              deckUrl: remoteAssetBase ?? DeckAssetScope.maybeOf(context),
+              child: MediaQuery.withNoTextScaling(
+                child: _TableEditHost(
+                  controller: presentationMode && slide.type == SlideType.table
+                      ? tableEditController
+                      : null,
+                  child: _ChecklistInteractionHost(
+                    // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
+                    // schrijft de hele (zwartgelakte) slide terug. Zie
+                    // [Slide.contentRedacted].
+                    enabled:
+                        presentationMode &&
+                        onChecklistItemToggle != null &&
+                        !slide.contentRedacted,
+                    onToggle: onChecklistItemToggle,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: DefaultTextStyle(
+                        style: TextStyle(
+                          color: AppTheme.parseHexColor(themeProfile.textColor),
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.normal,
+                          fontStyle: FontStyle.normal,
+                        ),
+                        child: SlideLinkScope(
+                          onTapLink: onLinkTap,
+                          hasBottomTlp: hasBottomRightTlp,
+                          allowRemoteMedia: allowRemoteMedia,
+                          mediaRedacted: slide.mediaRedacted,
+                          decodeMaxEdge: effectiveDecodeEdge,
+                          marpStyle: marpStyle,
+                          slideText: AppTheme.parseHexColor(
+                            themeProfile.textColor,
+                          ),
+                          slideBackground: AppTheme.parseHexColor(
+                            themeProfile.slideBackgroundColor,
+                          ),
+                          onEnableOnlineMedia: onEnableOnlineMedia,
+                          child: _buildSlide(slide.projectionWithViewLimit()),
+                        ),
                       ),
-                      onEnableOnlineMedia: onEnableOnlineMedia,
-                      child: _buildSlide(slide.projectionWithViewLimit()),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
