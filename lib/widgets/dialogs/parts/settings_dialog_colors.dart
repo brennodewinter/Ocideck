@@ -453,35 +453,126 @@ extension _SettingsColors on _SettingsDialogState {
     ];
   }
 
+  /// Wat er in de pad-box staat als het profielbeeld een `mem:`-pad is: de
+  /// kale uuid zegt de gebruiker niets, de gekozen bestandsnaam wel.
+  String _profileImageLabel(String raw) {
+    if (!WebAssetStore.isMemPath(raw)) return raw;
+    return WebAssetStore.nameFor(raw) ?? context.l10n.d('Gekozen afbeelding');
+  }
+
   /// Het logo op een *dia*. Het documentlogo staat los (het mag afwijken) en
   /// wordt in het documentvlak van de stijlbouwer gezet.
   List<Widget> _slideLogoChildren() {
     final l10n = context.l10n;
     return [
-      // Een logo wordt als pad in het themaprofiel bewaard, en zo'n pad bestaat
-      // in de browser niet: de bestandskiezer geeft daar een blob:-URL terug
-      // die na herladen nergens meer heen wijst. Dus verbergen we de hele
-      // logo-instelling op web, net als de andere kiezers (zie
-      // settings_dialog_storage.dart) — liever geen knop dan een knop die niet
-      // doet wat hij belooft. Footer en slotdia blijven wél staan; die hebben
-      // geen bestandssysteem nodig.
-      if (supportsLocalProjectFolders) ...[
+      // Op desktop is het logopad een bestandspad; op web zijn er geen
+      // paden en slaat de kiezer de bytes op als `mem:`-verwijzing (#2640).
+      // Die leeft alleen in deze browsersessie en reist mee in een
+      // pakketexport — daarvoor tonen we de naam en een korte melding, geen
+      // kapot pad.
+      _themeColorAnchor(
+        'logoPath',
+        Row(
+          children: [
+            Container(
+              key: const Key('style-logo-preview'),
+              width: 64,
+              height: 52,
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: AppTheme.slate100,
+                borderRadius: BorderRadius.circular(7),
+                border: Border.all(color: AppTheme.slate300),
+              ),
+              child: ThemeProfileLogo(
+                profile: _themeProfile,
+                width: 54,
+                height: 42,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: _pathBox(
+                _themeProfile.logoPath == null
+                    ? l10n.d('Geen logo ingesteld')
+                    : _profileImageLabel(_themeProfile.logoPath!),
+                muted: _themeProfile.logoPath == null,
+              ),
+            ),
+            const SizedBox(width: 8),
+            ElevatedButton.icon(
+              onPressed: _pickLogo,
+              icon: const Icon(Icons.image_outlined, size: 16),
+              label: Text(l10n.d('Kiezen')),
+            ),
+            if (_themeProfile.logoPath != null)
+              IconButton(
+                onPressed: () => _rebuild(() {
+                  _themeProfile = _withoutLogoAndBrandStrip(_themeProfile);
+                  _profileTouched = true;
+                }),
+                icon: const Icon(Icons.clear, size: 18),
+                tooltip: l10n.d('Verwijder logo'),
+              ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 18),
+      DropdownButtonFormField<String>(
+        isExpanded: true,
+        initialValue: _themeProfile.logoPosition,
+        decoration: InputDecoration(
+          labelText: l10n.d('Logo positie'),
+          isDense: true,
+        ),
+        items: [
+          DropdownMenuItem(
+            value: 'top-left',
+            child: Text(l10n.d('Linksboven')),
+          ),
+          DropdownMenuItem(
+            value: 'top-right',
+            child: Text(l10n.d('Rechtsboven')),
+          ),
+          DropdownMenuItem(
+            value: 'bottom-left',
+            child: Text(l10n.d('Linksonder')),
+          ),
+          DropdownMenuItem(
+            value: 'bottom-right',
+            child: Text(l10n.d('Rechtsonder')),
+          ),
+        ],
+        onChanged: (v) {
+          if (v != null) {
+            _rebuild(() {
+              _themeProfile = _themeProfile.copyWith(logoPosition: v);
+              _profileTouched = true;
+            });
+          }
+        },
+      ),
+      const SizedBox(height: 14),
+      // Donkere logo-variant: alleen zinnig met een lichte logo ingesteld.
+      // Gebundelde merken kiezen automatisch; dit veld is voor een eigen logo.
+      if (_themeProfile.logoPath != null) ...[
         _themeColorAnchor(
-          'logoPath',
+          'logoDarkPath',
           Row(
             children: [
               Container(
-                key: const Key('style-logo-preview'),
+                key: const Key('style-logo-dark-preview'),
                 width: 64,
                 height: 52,
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                  color: AppTheme.slate100,
+                  color: AppTheme.chartTooltipBg,
                   borderRadius: BorderRadius.circular(7),
-                  border: Border.all(color: AppTheme.slate300),
+                  border: Border.all(color: AppTheme.slate700),
                 ),
                 child: ThemeProfileLogo(
                   profile: _themeProfile,
+                  logoPath: _themeProfile.logoDarkPath,
                   width: 54,
                   height: 42,
                 ),
@@ -489,132 +580,56 @@ extension _SettingsColors on _SettingsDialogState {
               const SizedBox(width: 10),
               Expanded(
                 child: _pathBox(
-                  _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
-                  muted: _themeProfile.logoPath == null,
+                  _themeProfile.logoDarkPath == null
+                      ? l10n.d('Geen donker logo ingesteld')
+                      : _profileImageLabel(_themeProfile.logoDarkPath!),
+                  muted: _themeProfile.logoDarkPath == null,
                 ),
               ),
               const SizedBox(width: 8),
               ElevatedButton.icon(
-                onPressed: _pickLogo,
-                icon: const Icon(Icons.image_outlined, size: 16),
+                onPressed: _pickLogoDark,
+                icon: const Icon(Icons.nights_stay_outlined, size: 16),
                 label: Text(l10n.d('Kiezen')),
               ),
-              if (_themeProfile.logoPath != null)
+              if (_themeProfile.logoDarkPath != null)
                 IconButton(
                   onPressed: () => _rebuild(() {
-                    _themeProfile = _withoutLogoAndBrandStrip(_themeProfile);
+                    _themeProfile = _themeProfile.copyWith(clearLogoDark: true);
                     _profileTouched = true;
                   }),
                   icon: const Icon(Icons.clear, size: 18),
-                  tooltip: l10n.d('Verwijder logo'),
+                  tooltip: l10n.d('Verwijder donker logo'),
                 ),
             ],
           ),
         ),
-        const SizedBox(height: 18),
-        DropdownButtonFormField<String>(
-          isExpanded: true,
-          initialValue: _themeProfile.logoPosition,
+        const SizedBox(height: 14),
+      ],
+      SizedBox(
+        width: 160,
+        child: TextField(
+          controller: _logoSize,
           decoration: InputDecoration(
-            labelText: l10n.d('Logo positie'),
+            labelText: context.l10n.d('Logo px'),
             isDense: true,
           ),
-          items: [
-            DropdownMenuItem(
-              value: 'top-left',
-              child: Text(l10n.d('Linksboven')),
-            ),
-            DropdownMenuItem(
-              value: 'top-right',
-              child: Text(l10n.d('Rechtsboven')),
-            ),
-            DropdownMenuItem(
-              value: 'bottom-left',
-              child: Text(l10n.d('Linksonder')),
-            ),
-            DropdownMenuItem(
-              value: 'bottom-right',
-              child: Text(l10n.d('Rechtsonder')),
-            ),
-          ],
-          onChanged: (v) {
-            if (v != null) {
-              _rebuild(() {
-                _themeProfile = _themeProfile.copyWith(logoPosition: v);
-                _profileTouched = true;
-              });
-            }
-          },
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          onChanged: (_) => _rebuild(() => _profileTouched = true),
         ),
-        const SizedBox(height: 14),
-        // Donkere logo-variant: alleen zinnig met een lichte logo ingesteld.
-        // Gebundelde merken kiezen automatisch; dit veld is voor een eigen logo.
-        if (_themeProfile.logoPath != null) ...[
-          _themeColorAnchor(
-            'logoDarkPath',
-            Row(
-              children: [
-                Container(
-                  key: const Key('style-logo-dark-preview'),
-                  width: 64,
-                  height: 52,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: AppTheme.chartTooltipBg,
-                    borderRadius: BorderRadius.circular(7),
-                    border: Border.all(color: AppTheme.slate700),
-                  ),
-                  child: ThemeProfileLogo(
-                    profile: _themeProfile,
-                    logoPath: _themeProfile.logoDarkPath,
-                    width: 54,
-                    height: 42,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _pathBox(
-                    _themeProfile.logoDarkPath ??
-                        l10n.d('Geen donker logo ingesteld'),
-                    muted: _themeProfile.logoDarkPath == null,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                ElevatedButton.icon(
-                  onPressed: _pickLogoDark,
-                  icon: const Icon(Icons.nights_stay_outlined, size: 16),
-                  label: Text(l10n.d('Kiezen')),
-                ),
-                if (_themeProfile.logoDarkPath != null)
-                  IconButton(
-                    onPressed: () => _rebuild(() {
-                      _themeProfile = _themeProfile.copyWith(
-                        clearLogoDark: true,
-                      );
-                      _profileTouched = true;
-                    }),
-                    icon: const Icon(Icons.clear, size: 18),
-                    tooltip: l10n.d('Verwijder donker logo'),
-                  ),
-              ],
+      ),
+      if (!supportsLocalProjectFolders && _themeProfile.logoPath != null)
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text(
+            l10n.d(
+              'Dit logo leeft in deze browsersessie en verdwijnt na herladen. '
+              'Exporteer als pakket om het mee te nemen.',
             ),
-          ),
-          const SizedBox(height: 14),
-        ],
-        SizedBox(
-          width: 160,
-          child: TextField(
-            controller: _logoSize,
-            decoration: InputDecoration(
-              labelText: context.l10n.d('Logo px'),
-              isDense: true,
-            ),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            onChanged: (_) => _rebuild(() => _profileTouched = true),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
-      ],
     ];
   }
 

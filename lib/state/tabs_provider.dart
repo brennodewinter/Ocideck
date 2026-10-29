@@ -155,6 +155,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     final clipboard = _ref.read(slideClipboardProvider);
     if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
+    // De opgeslagen stijlprofielen kunnen óók mem:-beelden dragen (een op web
+    // gekozen logo, #2640). Zij leven niet in een tabblad, dus zonder deze
+    // stap veegt de sweep een logo weg dat de huisstijl nog aanhaalt.
+    for (final profile in _settings.currentState.themeProfiles) {
+      for (final ref in profileImagePaths(profile)) {
+        final path = (ref ?? '').trim();
+        if (WebAssetStore.isMemPath(path)) live.add(path);
+      }
+    }
     WebAssetStore.retain(live);
   }
 

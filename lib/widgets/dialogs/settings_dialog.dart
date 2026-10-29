@@ -28,6 +28,8 @@ import '../../services/export_metadata.dart';
 import '../../services/update_check_service.dart';
 import '../../services/file_service.dart';
 import '../../services/git/outbox.dart';
+import '../../services/image_service.dart';
+import '../../services/web_asset_store.dart';
 import '../../services/recovery_service.dart';
 import '../../utils/net_guard.dart';
 import 'certificate_trust_dialog.dart';
@@ -57,6 +59,7 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/privacy_disposition.dart';
 import '../connection_status.dart';
+import '../editors/_editor_field.dart';
 import '../editors/advanced_section.dart';
 import '../document_page_chrome.dart';
 import '../language_flag.dart';
@@ -667,47 +670,46 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     if (result != null) setState(() => _exportDirectory = result);
   }
 
-  Future<void> _pickLogo() async {
-    // De knop bestaat op web niet (zie _logoSectionChildren), maar de poort
-    // staat hier ook: op web levert pickFiles een blob:-URL in `path`, en die
-    // zou als logoPath in het themaprofiel belanden en na herladen nergens meer
-    // heen wijzen. Een stille, onherstelbare instelling is erger dan een
-    // ontbrekende knop.
-    if (!supportsLocalProjectFolders) return;
+  /// Kies een afbeelding voor een profielveld. Op desktop is dat het
+  /// bestandspad; op web levert de kiezer bytes die via [pickImageDetailed]
+  /// (zelfde type- en maatpoort als elke afbeeldingskeuze) als `mem:`-pad in
+  /// de store belanden (#2640). Een afwijzing meldt zich en laat het oude
+  /// beeld staan; annuleren blijft stil.
+  Future<String?> _pickProfileImagePath() async {
+    if (!supportsLocalProjectFolders) {
+      final outcome = await ImageService().pickImageDetailed();
+      if (mounted) reportImageImportFailure(context, outcome.failure);
+      return outcome.path;
+    }
     final file = await FilePicker.pickFile(
       dialogTitle: context.l10n.d('Logo kiezen'),
       type: FileType.image,
     );
-    if (!mounted) return;
-    final path = file?.path;
-    if (path != null) {
-      setState(() {
-        // Een geïmporteerde merkstrook bevat het oude logo als onderdeel van
-        // haar bronbeeld. Bij een bewuste logowissel moet die gekoppelde strook
-        // verdwijnen, anders blijft het vorige merk alsnog op de dia staan.
-        _themeProfile = _themeProfile.copyWith(
-          logoPath: path,
-          clearBrandStrip: true,
-        );
-        _profileTouched = true;
-      });
-    }
+    return file?.path;
+  }
+
+  Future<void> _pickLogo() async {
+    final path = await _pickProfileImagePath();
+    if (!mounted || path == null) return;
+    setState(() {
+      // Een geïmporteerde merkstrook bevat het oude logo als onderdeel van
+      // haar bronbeeld. Bij een bewuste logowissel moet die gekoppelde strook
+      // verdwijnen, anders blijft het vorige merk alsnog op de dia staan.
+      _themeProfile = _themeProfile.copyWith(
+        logoPath: path,
+        clearBrandStrip: true,
+      );
+      _profileTouched = true;
+    });
   }
 
   Future<void> _pickLogoDark() async {
-    if (!supportsLocalProjectFolders) return;
-    final file = await FilePicker.pickFile(
-      dialogTitle: context.l10n.d('Donker logo kiezen'),
-      type: FileType.image,
-    );
-    if (!mounted) return;
-    final path = file?.path;
-    if (path != null) {
-      setState(() {
-        _themeProfile = _themeProfile.copyWith(logoDarkPath: path);
-        _profileTouched = true;
-      });
-    }
+    final path = await _pickProfileImagePath();
+    if (!mounted || path == null) return;
+    setState(() {
+      _themeProfile = _themeProfile.copyWith(logoDarkPath: path);
+      _profileTouched = true;
+    });
   }
 
   void _selectProfile(String name) {

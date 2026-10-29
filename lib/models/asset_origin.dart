@@ -4,6 +4,7 @@ import '../services/asset_staging.dart';
 import '../services/slide_image_refs.dart';
 import '../services/web_asset_store.dart';
 import 'deck.dart';
+import 'settings.dart';
 import 'slide.dart';
 
 /// Waar de media van een slide vandaan komt, gezien vanuit de vraag die er
@@ -86,7 +87,7 @@ bool assetOriginNeedsAttention(AssetOrigin origin) => switch (origin) {
 /// schijftoegang — dezelfde regel als [classifyAssetPath].
 bool deckCarriesMemoryAssets(Deck deck) {
   bool mem(String path) => WebAssetStore.isMemPath(path.trim());
-  if (mem(deck.themeProfile.logoPath ?? '')) return true;
+  if (profileImagePaths(deck.themeProfile).nonNulls.any(mem)) return true;
   for (final s in deck.slides) {
     if (mem(s.videoPath) || mem(s.audioPath)) return true;
     if (slideImagePaths(s).any(mem)) return true;
@@ -112,12 +113,26 @@ void addSlideMemoryAssetPaths(Slide slide, Set<String> into) {
   }
 }
 
-/// Alle `mem:`-paden die [deck] aanhaalt (dia-media plus het logo). De sweep
-/// gebruikt dit per open deck; zie [WebAssetStore.retain].
+/// De afbeeldingsverwijzingen die een stijlprofiel kan dragen: het dia-logo,
+/// zijn donkere variant, een afwijkend documentlogo en de merkstrook. Losse
+/// helper omdat zowel de sweep als de mem-controle alle vier moet kennen —
+/// één ervan overslaan veegt dat beeld weg terwijl het profiel er nog naar
+/// wijst (#2640).
+Iterable<String?> profileImagePaths(ThemeProfile profile) => [
+  profile.logoPath,
+  profile.logoDarkPath,
+  profile.documentLogoPath,
+  profile.brandStripPath,
+];
+
+/// Alle `mem:`-paden die [deck] aanhaalt (dia-media plus de profielbeelden).
+/// De sweep gebruikt dit per open deck; zie [WebAssetStore.retain].
 Set<String> deckMemoryAssetPaths(Deck deck) {
   final paths = <String>{};
-  final logo = (deck.themeProfile.logoPath ?? '').trim();
-  if (WebAssetStore.isMemPath(logo)) paths.add(logo);
+  for (final ref in profileImagePaths(deck.themeProfile)) {
+    final path = (ref ?? '').trim();
+    if (WebAssetStore.isMemPath(path)) paths.add(path);
+  }
   for (final slide in deck.slides) {
     addSlideMemoryAssetPaths(slide, paths);
   }

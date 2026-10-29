@@ -488,7 +488,7 @@ class _DocumentStyleBuilder {
         contentPadding: EdgeInsets.zero,
         dense: true,
       ),
-      if (!shared && supportsLocalProjectFolders) ...[
+      if (!shared) ...[
         Row(
           children: [
             Container(
@@ -512,7 +512,7 @@ class _DocumentStyleBuilder {
             Expanded(
               child: owner._pathBox(
                 _themeProfile.documentLogoPath?.isNotEmpty == true
-                    ? _themeProfile.documentLogoPath!
+                    ? owner._profileImageLabel(_themeProfile.documentLogoPath!)
                     : l10n.d('Geen logo ingesteld'),
                 muted: _themeProfile.documentLogoPath?.isNotEmpty != true,
               ),
@@ -679,14 +679,8 @@ class _DocumentStyleBuilder {
   ];
 
   Future<void> _pickDocumentLogo() async {
-    if (!supportsLocalProjectFolders) return;
-    final file = await FilePicker.pickFile(
-      dialogTitle: context.l10n.d('Logo kiezen'),
-      type: FileType.image,
-    );
-    if (!mounted) return;
-    final path = file?.path;
-    if (path == null) return;
+    final path = await owner._pickProfileImagePath();
+    if (!mounted || path == null) return;
     _rebuild(() {
       _themeProfile = _themeProfile.copyWith(documentLogoPath: path);
       _profileTouched = true;
