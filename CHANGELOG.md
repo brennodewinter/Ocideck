@@ -8,6 +8,18 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- **MITRE CWE bijgewerkt van 4.20 naar 5.0.** De volledige lijst telt nu 984
+  zwakheden (15 nieuw, geen enkele verdwenen). CWE 5.0 haalde de gangbare
+  namen uit de titels (`('SQL Injection')`, `('Path Traversal')`) en zette ze
+  alleen nog bij de Alternate Terms; de bouwer neemt die nu als zoektermen mee,
+  zodat "race condition" of "xss" in de CWE-kiezer nog steeds vindt wat het
+  vond. De eigen kern volgt de nieuwe MITRE-namen, en CWE-613 (Insufficient
+  Session Expiration), in 5.0 vervallen, is vervangen door CWE-1463 (time-out)
+  en CWE-1464 (sessie-invalidatie). De verouderingspoort telde een standaard
+  die zowel verouderd als onvolledig was dubbel; dat is één.
+
 ### Fixed
 
 - **Gebruikershandleiding brak halverwege af op de forge (#2612).** Een
