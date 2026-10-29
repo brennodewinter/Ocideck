@@ -77,9 +77,8 @@ void main() {
       );
     });
 
-    test('isRenderPathContained blocks an escaping symlink but allows '
-        'genuine and missing files', () {
-      resetRenderContainedCache();
+    test('containedRealPathOrNull blocks an escaping symlink but allows '
+        'genuine and missing files', () async {
       Link(
         p.join(projectDir.path, 'images', 'sneaky.png'),
       ).createSync(outsideSecret.path);
@@ -87,20 +86,24 @@ void main() {
       final real = p.join(projectDir.path, 'images', 'real.png');
       final missing = p.join(projectDir.path, 'images', 'nope.png');
 
-      expect(isRenderPathContained(escape, projectDir.path), isFalse);
-      expect(isRenderPathContained(real, projectDir.path), isTrue);
+      expect(await containedRealPathOrNull(escape, projectDir.path), isNull);
+      // Het echte (symlink-gevolgde) pad komt terug, zodat de lezer de
+      // gecontroleerde locatie opent in plaats van het lexicale pad.
+      expect(
+        await containedRealPathOrNull(real, projectDir.path),
+        await File(real).resolveSymbolicLinks(),
+      );
       // Missing path is not a symlink escape — the normal load path handles it.
-      expect(isRenderPathContained(missing, projectDir.path), isTrue);
+      expect(await containedRealPathOrNull(missing, projectDir.path), missing);
     });
 
-    test('rechecks a path after it changes into an escaping symlink', () {
-      resetRenderContainedCache();
+    test('rechecks a path after it changes into an escaping symlink', () async {
       final mutable = p.join(projectDir.path, 'images', 'mutable.png');
 
-      expect(isRenderPathContained(mutable, projectDir.path), isTrue);
+      expect(await containedRealPathOrNull(mutable, projectDir.path), mutable);
       Link(mutable).createSync(outsideSecret.path);
 
-      expect(isRenderPathContained(mutable, projectDir.path), isFalse);
+      expect(await containedRealPathOrNull(mutable, projectDir.path), isNull);
     });
   });
 }

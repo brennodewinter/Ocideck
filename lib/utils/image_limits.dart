@@ -6,6 +6,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'project_path.dart';
+
 /// Upper bound on the decoded dimensions of a slide/background image.
 ///
 /// `ui.instantiateImageCodec` allocates ~`width × height × 4` bytes regardless
@@ -57,14 +59,24 @@ const int kMaxImageFrames = 256;
 ///
 /// [cacheKey] is the shared image-cache identity (a file path, the bytes object,
 /// …) so display, precache and export hit one cache entry. [loadBytes] fetches
-/// the encoded bytes lazily on decode.
+/// the encoded bytes lazily on decode. [decodeEdge] vervangt de vaste
+/// [kMaxImageDecodeDimension] door een per-weergave-grens én forceert altijd
+/// een concrete decodegrootte — de `ResizeImage`-semantiek van
+/// [boundedFileImage], die een animated image bewust tot zijn eerste frame
+/// samenvat.
 @immutable
 class CappedImage extends ImageProvider<CappedImage> {
-  const CappedImage(this.cacheKey, this.loadBytes, {this.scale = 1.0});
+  const CappedImage(
+    this.cacheKey,
+    this.loadBytes, {
+    this.scale = 1.0,
+    this.decodeEdge,
+  });
 
   final Object cacheKey;
   final Future<Uint8List> Function() loadBytes;
   final double scale;
+  final int? decodeEdge;
 
   @override
   Future<CappedImage> obtainKey(ImageConfiguration configuration) =>
@@ -98,6 +110,15 @@ class CappedImage extends ImageProvider<CappedImage> {
     final codec = await decode(
       buffer,
       getTargetSize: (int intrinsicWidth, int intrinsicHeight) {
+        final edge = decodeEdge;
+        if (edge != null) {
+          final target = _boundedDecodeTarget(
+            intrinsicWidth,
+            intrinsicHeight,
+            edge,
+          );
+          return ui.TargetImageSize(width: target.width, height: target.height);
+        }
         final target = cappedDecodeTarget(intrinsicWidth, intrinsicHeight);
         return ui.TargetImageSize(width: target.width, height: target.height);
       },
@@ -121,10 +142,11 @@ class CappedImage extends ImageProvider<CappedImage> {
   bool operator ==(Object other) =>
       other is CappedImage &&
       other.cacheKey == cacheKey &&
-      other.scale == scale;
+      other.scale == scale &&
+      other.decodeEdge == decodeEdge;
 
   @override
-  int get hashCode => Object.hash(cacheKey, scale);
+  int get hashCode => Object.hash(cacheKey, scale, decodeEdge);
 
   @override
   String toString() => 'CappedImage($cacheKey, scale: $scale)';
@@ -146,21 +168,41 @@ int imageVersionOf(String path) => _imageVersions[path] ?? 0;
 void bumpImageVersion(String path) =>
     _imageVersions[path] = (_imageVersions[path] ?? 0) + 1;
 
-/// [FileImage] met een versienummer in `==`/`hashCode`, zodat [ResizeImage]
-/// een andere cache-key krijgt na [bumpImageVersion] en opnieuw decodeert.
-class _VersionedFileImage extends FileImage {
-  final int version;
-  const _VersionedFileImage(super.file, {this.version = 0});
+/// Altijd-concreet decode-doel dat binnen een [edge]×[edge]-vierkant past zonder
+/// op te schalen — het doel van `ResizeImage(policy: fit, allowUpscaling:
+/// false)`. Anders dan [cappedDecodeTarget] levert dit nóóit `(null, null)`:
+/// een concrete grootte stuurt de engine altijd het resize-pad op en vat een
+/// animated image daarmee tot zijn eerste frame samen — precies wat een
+/// miniatuur wil.
+({int width, int height}) _boundedDecodeTarget(
+  int width,
+  int height,
+  int edge,
+) {
+  if (width <= 0 || height <= 0) return (width: 1, height: 1);
+  final scale = math.min(1.0, edge / math.max(width, height));
+  return (
+    width: math.max(1, (width * scale).floor()),
+    height: math.max(1, (height * scale).floor()),
+  );
+}
 
-  @override
-  bool operator ==(Object other) =>
-      other is _VersionedFileImage &&
-      other.file.path == file.path &&
-      other.version == version &&
-      other.scale == scale;
-
-  @override
-  int get hashCode => Object.hash(file.path, version, scale);
+/// Leest [file] pas nadat de projectgrens is gecontroleerd — en leest dan het
+/// *reële* doelpad, zodat een tussen controle en open gewisselde symlink geen
+/// ontsnappende bytes kan leveren (TOCTOU). Werpt [ProjectEscapeException]
+/// wanneer het pad ontsnapt; een gewone leesfout (missend bestand) blijft een
+/// `FileSystemException`.
+///
+/// Bij [projectPath] `null` — editor- of vertrouwde paden buiten een
+/// deckgrens — is er geen grens om af te dwingen en leest dit gewoon [file].
+Future<Uint8List> readContainedImageBytes(
+  File file,
+  String? projectPath,
+) async {
+  if (projectPath == null) return file.readAsBytes();
+  final real = await containedRealPathOrNull(file.path, projectPath);
+  if (real == null) throw ProjectEscapeException(file.path);
+  return File(real).readAsBytes();
 }
 
 /// Een miniatuur-provider die op béide assen begrensd is.
@@ -171,30 +213,43 @@ class _VersionedFileImage extends FileImage {
 /// die kiezer loopt de projectmap automatisch af, dus je hoefde het bestand niet
 /// eens aan te klikken.
 ///
-/// Béide meegeven aan `cacheWidth`/`cacheHeight` is niet de oplossing: dat
-/// gebruikt [ResizeImagePolicy.exact] en trekt de afbeelding scheef. Vandaar
-/// `fit`, dat binnen het vierkant past met behoud van verhouding.
+/// Béide assen meegeven als `cacheWidth`/`cacheHeight` is niet de oplossing:
+/// dat gebruikt [ResizeImagePolicy.exact] en trekt de afbeelding scheef. De
+/// `decodeEdge` past daarentegen altijd-concreet binnen het vierkant, met
+/// behoud van verhouding — en vat een animated image tot zijn eerste frame
+/// samen, zoals de vorige `ResizeImage`-implementatie ook deed.
 ///
 /// [version] komt van [imageVersionOf] en forceert een cache-miss na
-/// [bumpImageVersion], zodat de miniatuur de nieuwe bytes toont.
-ImageProvider boundedFileImage(File file, int maxEdge, {int version = 0}) =>
-    ResizeImage(
-      _VersionedFileImage(file, version: version),
-      width: maxEdge,
-      height: maxEdge,
-      policy: ResizeImagePolicy.fit,
-      allowUpscaling: false,
-    );
+/// [bumpImageVersion], zodat de miniatuur de nieuwe bytes toont. [projectPath]
+/// dwingt de deck-containment af *bij de byte-lezing*, niet bij de build —
+/// zie [readContainedImageBytes] (#2624).
+ImageProvider boundedFileImage(
+  File file,
+  int maxEdge, {
+  int version = 0,
+  String? projectPath,
+}) => CappedImage(
+  version == 0 ? file.path : '${file.path}#$version',
+  () => readContainedImageBytes(file, projectPath),
+  decodeEdge: maxEdge,
+);
 
 /// A capped-decode provider for a deck-supplied image **file**. Decodes at
 /// native resolution within [kMaxImageDecodeDimension] (so an animated GIF keeps
 /// animating) and only scales huge images down. Keyed by path like [FileImage].
 ///
 /// [version] komt van [imageVersionOf] en forceert een cache-miss na
-/// [bumpImageVersion].
-ImageProvider cappedFileImage(File file, {int version = 0}) => CappedImage(
+/// [bumpImageVersion]. [projectPath] verplaatst de symlink-containment naar
+/// de byte-lezing: één async realpath per decode in plaats van twee synchrone
+/// per build (#2624). Een ontsnappende symlink werpt [ProjectEscapeException]
+/// in de laadstroom — de errorBuilder tekent de `outsideDeck`-placeholder.
+ImageProvider cappedFileImage(
+  File file, {
+  int version = 0,
+  String? projectPath,
+}) => CappedImage(
   version == 0 ? file.path : '${file.path}#$version',
-  () => file.readAsBytes(),
+  () => readContainedImageBytes(file, projectPath),
 );
 
 /// A capped-decode provider for in-memory image [bytes] (`mem:` paths from the

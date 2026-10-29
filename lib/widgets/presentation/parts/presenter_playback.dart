@@ -48,15 +48,21 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       return;
     }
     if (kIsWeb) return;
+    // Zelfde lexicale resolutie + cachesleutel als de render, en dezelfde
+    // projectgrens-parameter: de containment zit sinds #2624 in de byte-lezing
+    // van de provider, dus precache moet die sleutel én die grens delen om de
+    // getoonde decode echt te warmen (het reële pad van
+    // resolveContainedRealPath zou een dode tweede sleutel warmen).
     final resolved = trusted
         ? resolveTrustedAssetPath(path, widget.projectPath)
-        : resolveContainedRealPath(path, widget.projectPath);
+        : resolveSlideAssetPath(path, widget.projectPath);
     if (resolved == null) return;
-    // Capped provider met dezelfde versie-key als de render, zodat het
-    // voorlezen ook echt de getoonde decode warmt — een gedraaide of
-    // bijgesneden afbeelding kreeg voorheen een dode versie-0 sleutel.
     precache(
-      cappedFileImage(File(resolved), version: imageVersionOf(resolved)),
+      cappedFileImage(
+        File(resolved),
+        version: imageVersionOf(resolved),
+        projectPath: trusted ? null : widget.projectPath,
+      ),
     );
   }
 

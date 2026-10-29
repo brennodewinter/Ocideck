@@ -21,12 +21,12 @@ import 'package:ocideck/utils/image_limits.dart';
 
 void main() {
   test('de gebonden variant vraagt echt een kleinere decode', () {
-    // ResizeImage draagt de grens; zonder deze assertie zou een
+    // De decodeEdge draagt de grens; zonder deze assertie zou een
     // implementatiewissel naar de ongebonden vorm stil doorgaan.
     final bounded = boundedFileImage(File('assets/images/cat-keiko.jpg'), 512);
-    expect(bounded, isA<ResizeImage>());
-    final resize = bounded as ResizeImage;
-    expect(resize.width == 512 || resize.height == 512, isTrue);
+    expect(bounded, isA<CappedImage>());
+    final capped = bounded as CappedImage;
+    expect(capped.decodeEdge, 512);
   });
 
   test('512 is fors kleiner dan de gewone decode-cap', () {
