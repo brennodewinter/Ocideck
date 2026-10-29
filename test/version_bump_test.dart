@@ -92,6 +92,7 @@ void main() {
     // at 0.3.0. That downgrade is not a canonical step, so it only passes as a
     // written-down, conscious exception — visible here and in the diff.
     expect(sanctionedTransitions, contains('1.2.1->0.3.0'));
+    expect(sanctionedTransitions, contains('0.7.2->0.7.4'));
     expect(isLegalTransition(const SemVer(1, 2, 1), '0.3.0'), isFalse);
   });
 
