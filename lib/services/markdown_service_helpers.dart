@@ -106,7 +106,7 @@ void _writeChecklistProgress(StringBuffer buf, Slide slide) {
   }
 }
 
-/// Per-slide bullet-marker comment (dot/paw).
+/// Per-slide bullet-marker comment (dot/paw/custom_svg).
 ///
 /// On a normal save, only an explicit per-slide override is written; absence
 /// means "inherit the theme default", keeping the override semantics intact.
@@ -124,13 +124,19 @@ void _writeBulletMarkerOverride(
 ) {
   final override = slide.bulletMarkerOverride;
   if (override != null) {
-    buf.writeln('<!-- ocideck_bullet_marker: ${override.name} -->');
+    buf.writeln(
+      '<!-- ocideck_bullet_marker: ${bulletMarkerToken(override)} -->',
+    );
     return;
   }
   if (forExport &&
       slide.listStyle == ListStyle.bullets &&
-      theme?.bulletMarker == BulletMarker.paw) {
-    buf.writeln('<!-- ocideck_bullet_marker: paw -->');
+      theme != null &&
+      theme.bulletMarker != BulletMarker.dot) {
+    buf.writeln(
+      '<!-- ocideck_bullet_marker: '
+      '${bulletMarkerToken(theme.bulletMarker)} -->',
+    );
   }
 }
 

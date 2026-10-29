@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
@@ -102,5 +103,37 @@ void main() {
 
     expect(find.text('• '), findsWidgets);
     expect(_pawCount(tester), 0);
+  });
+
+  testWidgets('a custom SVG theme renders one SVG marker per bullet', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(
+        slide,
+        profile: const ThemeProfile(
+          bulletMarker: BulletMarker.customSvg,
+          customBulletSvg:
+              '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>',
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byType(SvgPicture), findsNWidgets(2));
+    expect(find.text('• '), findsNothing);
+  });
+
+  testWidgets('a missing custom SVG safely falls back to dots', (tester) async {
+    await tester.pumpWidget(
+      _host(
+        slide,
+        profile: const ThemeProfile(bulletMarker: BulletMarker.customSvg),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('• '), findsWidgets);
+    expect(find.byType(SvgPicture), findsNothing);
   });
 }

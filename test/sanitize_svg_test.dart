@@ -2,6 +2,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/sanitize_svg.dart';
 
 void main() {
+  test('custom bullet SVG strips active content and external URLs', () {
+    final clean = sanitizeCustomBulletSvg('''
+<svg viewBox="0 0 10 10" onload="alert(1)">
+  <script>alert(1)</script>
+  <image href="https://example.invalid/tracker.png"/>
+  <rect style="fill:url(https://example.invalid/paint.svg)"/>
+  <circle cx="5" cy="5" r="4"/>
+</svg>
+''');
+
+    expect(clean, isNotNull);
+    expect(clean, contains('<circle'));
+    expect(clean, isNot(contains('<script')));
+    expect(clean, isNot(contains('onload')));
+    expect(clean, isNot(contains('https://')));
+  });
+
   test('keeps a simple SVG intact', () {
     const svg =
         '<svg xmlns="http://www.w3.org/2000/svg"><rect width="10"/></svg>';

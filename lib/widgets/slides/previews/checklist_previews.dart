@@ -227,6 +227,37 @@ class _ChecklistBulletRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final interaction = _ChecklistInteractionScope.maybeOf(context);
+    Widget markerWidget() {
+      if (listStyle == ListStyle.bullets && marker == BulletMarker.paw) {
+        return _PawMarker(
+          fontSize: fontSize,
+          color: AppTheme.parseHexColor(profile.accentColor),
+        );
+      }
+      if (listStyle == ListStyle.bullets &&
+          marker == BulletMarker.customSvg &&
+          profile.customBulletSvg != null) {
+        return _CustomSvgMarker(
+          fontSize: fontSize,
+          svg: profile.customBulletSvg!,
+        );
+      }
+      final label = bulletListMarker(
+        bullets,
+        itemIndex,
+        listStyle,
+        startNumber: startNumber,
+      );
+      return Text(
+        '$label ',
+        style: TextStyle(
+          fontSize: fontSize,
+          color: AppTheme.parseHexColor(profile.accentColor),
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    }
+
     Widget row(bool highlighted) => AnimatedContainer(
       key: ValueKey('checklist-preview-item-$column-$itemIndex'),
       duration: const Duration(milliseconds: 140),
@@ -255,20 +286,7 @@ class _ChecklistBulletRow extends StatelessWidget {
                       interaction?.enabled == true
                   ? SystemMouseCursors.click
                   : MouseCursor.defer,
-              child:
-                  marker == BulletMarker.paw && listStyle == ListStyle.bullets
-                  ? _PawMarker(
-                      fontSize: fontSize,
-                      color: AppTheme.parseHexColor(profile.accentColor),
-                    )
-                  : Text(
-                      '${bulletListMarker(bullets, itemIndex, listStyle, startNumber: startNumber)} ',
-                      style: TextStyle(
-                        fontSize: fontSize,
-                        color: AppTheme.parseHexColor(profile.accentColor),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+              child: markerWidget(),
             ),
           ),
           Expanded(
@@ -457,6 +475,30 @@ class _PawMarker extends StatelessWidget {
         height: fontSize * kBulletLineHeight,
         child: Center(
           child: CustomPaint(size: Size(paw, paw), painter: _PawPainter(color)),
+        ),
+      ),
+    );
+  }
+}
+
+/// A theme-provided SVG marker with the same advance and first-line alignment
+/// as the built-in dot and paw.
+class _CustomSvgMarker extends StatelessWidget {
+  final double fontSize;
+  final String svg;
+
+  const _CustomSvgMarker({required this.fontSize, required this.svg});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = fontSize * 0.66;
+    return Padding(
+      padding: EdgeInsets.only(right: fontSize * 0.30),
+      child: SizedBox(
+        width: size,
+        height: fontSize * kBulletLineHeight,
+        child: Center(
+          child: SvgPicture.string(svg, width: size, height: size),
         ),
       ),
     );

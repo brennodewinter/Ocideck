@@ -140,6 +140,9 @@ const Map<String, int> methodLengthBaseline = {
   // doorvoer in copyWith voor image callouts.
   // One more stored layout choice needs one parameter and one constructor field.
   'lib/models/slide.dart::Slide.copyWith': 174,
+  // +3 (#2616): customBulletSvg-parameter plus clear-vlag in copyWith — pure
+  // plumbing, hetzelfde patroon als Slide.copyWith hierboven.
+  'lib/models/settings.dart::ThemeProfile.copyWith': 158,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
