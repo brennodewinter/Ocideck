@@ -73,63 +73,235 @@ Future<String?> _materializeMemStyleAsset(
   return p.posix.join('logos', p.basename(destination.file.path));
 }
 
-Future<_LogoProjectAsset> _copyBrandStripAsset(
+/// Waar een profielafbeelding na het opslaan van een project staat.
+///
+/// [path] is gezet wanneer de bytes in `logos/` zijn beland. Blijft het leeg,
+/// dan houdt het profiel zijn oude pad: een ontbrekende bron mag een nog
+/// bruikbaar absoluut pad niet stil wissen.
+class _StoredStyleImage {
+  final String? path;
+
+  const _StoredStyleImage.kept() : path = null;
+
+  const _StoredStyleImage.stored(this.path);
+}
+
+/// Bewaart logo, donkere variant, documentlogo en merkstrook naast elkaar.
+///
+/// Twee bronnen met dezelfde bestandsnaam maar andere bytes krijgen een eigen
+/// naam (`brand_2.png`). Identieke bytes delen één bestand. `null` op het
+/// documentlogo blijft "gedeeld met de presentatie"; `''` blijft "bewust uit".
+Future<({ThemeProfile profile, String? logoCssUrl, String? brandCssUrl})>
+materializeProjectStyleImages(
   ThemeProfile profile,
-  String projectPath,
-  Future<String?> Function(String projectPath, String normalizedPath)
-  findExisting,
-) async {
-  final stripPath = profile.brandStripPath;
-  if (stripPath == null || stripPath.trim().isEmpty) {
-    return _LogoProjectAsset(profile, null);
-  }
-  if (WebAssetStore.isMemPath(stripPath)) {
-    final stored = await _materializeMemStyleAsset(
-      stripPath,
+  String projectPath, {
+  String? sourceProjectPath,
+}) async {
+  final logo = await _storeProjectStyleImage(
+    profile.logoPath,
+    projectPath,
+    sourceProjectPath: sourceProjectPath,
+    fallbackName: 'logo.png',
+  );
+  var next = logo.path == null
+      ? profile
+      : profile.copyWith(logoPath: logo.path);
+  final dark = await _storeProjectStyleImage(
+    next.logoDarkPath,
+    projectPath,
+    sourceProjectPath: sourceProjectPath,
+    fallbackName: 'logo-donker.png',
+  );
+  if (dark.path != null) next = next.copyWith(logoDarkPath: dark.path);
+  final documentPath = next.documentLogoPath;
+  if (documentPath != null && documentPath.trim().isNotEmpty) {
+    final document = await _storeProjectStyleImage(
+      documentPath,
       projectPath,
-      fallbackName: 'merkstrook.png',
+      sourceProjectPath: sourceProjectPath,
+      fallbackName: 'document-logo.png',
+    );
+    if (document.path != null) {
+      next = next.copyWith(documentLogoPath: document.path);
+    }
+  }
+  final strip = await _storeProjectStyleImage(
+    next.brandStripPath,
+    projectPath,
+    sourceProjectPath: sourceProjectPath,
+    fallbackName: 'merkstrook.png',
+  );
+  if (strip.path != null) next = next.copyWith(brandStripPath: strip.path);
+  return (
+    profile: next,
+    logoCssUrl: logo.path == null ? null : '../${logo.path}',
+    brandCssUrl: strip.path == null ? null : '../${strip.path}',
+  );
+}
+
+Future<_StoredStyleImage> _storeProjectStyleImage(
+  String? rawPath,
+  String projectPath, {
+  required String? sourceProjectPath,
+  required String fallbackName,
+}) async {
+  final path = rawPath?.trim();
+  if (path == null || path.isEmpty || isBundledAssetPath(path)) {
+    return const _StoredStyleImage.kept();
+  }
+  if (WebAssetStore.isMemPath(path)) {
+    final stored = await _materializeMemStyleAsset(
+      path,
+      projectPath,
+      fallbackName: fallbackName,
     );
     return stored == null
-        ? _LogoProjectAsset(profile, null)
-        : _LogoProjectAsset(
-            profile.copyWith(brandStripPath: stored),
-            '../$stored',
-          );
+        ? const _StoredStyleImage.kept()
+        : _StoredStyleImage.stored(stored);
   }
-  final normalized = stripPath.replaceAll('\\', '/');
-  final relative = p.posix.isRelative(normalized)
-      ? p.posix.normalize(normalized)
-      : null;
-  if (relative != null && relative.startsWith('logos/')) {
-    return _LogoProjectAsset(
-      profile.copyWith(brandStripPath: relative),
-      '../$relative',
-    );
-  }
-  var source = File(
-    p.isAbsolute(stripPath)
-        ? stripPath
-        : p.normalize(p.join(projectPath, stripPath)),
+  final bytes = await _readProjectStyleImage(
+    path,
+    projectPath,
+    sourceProjectPath,
   );
-  if (!await source.exists()) {
-    final fallback = await findExisting(projectPath, normalized);
-    if (fallback == null) return _LogoProjectAsset(profile, null);
-    source = File(fallback);
-  }
-  final filename = p.posix.basename(normalized);
-  if (filename.isEmpty || filename == '.' || filename == '..') {
-    return _LogoProjectAsset(profile, null);
-  }
-  final stored = p.posix.join('logos', filename);
-  final destination = File(p.join(projectPath, stored));
-  if (!p.equals(source.path, destination.path)) {
-    await destination.parent.create(recursive: true);
-    await source.copy(destination.path);
-  }
-  return _LogoProjectAsset(
-    profile.copyWith(brandStripPath: stored),
-    '../$stored',
+  if (bytes == null) return const _StoredStyleImage.kept();
+  final stored = await _writeStyleImageBytes(
+    bytes,
+    _styleImageFileName(path, fallbackName),
+    projectPath,
   );
+  return stored == null
+      ? const _StoredStyleImage.kept()
+      : _StoredStyleImage.stored(stored);
+}
+
+String _styleImageFileName(String path, String fallbackName) {
+  final base = p.posix.basename(path.replaceAll('\\', '/'));
+  if (base.isEmpty || base == '.' || base == '..') return fallbackName;
+  return p.extension(base).isEmpty ? '$base.png' : base;
+}
+
+Future<Uint8List?> _readProjectStyleImage(
+  String path,
+  String projectPath,
+  String? sourceProjectPath,
+) async {
+  final normalized = path.replaceAll('\\', '/');
+  final candidates = <String>[
+    if (p.isAbsolute(path)) path,
+    p.normalize(p.join(projectPath, path)),
+    if (sourceProjectPath != null) p.normalize(p.join(sourceProjectPath, path)),
+  ];
+  for (final candidate in candidates) {
+    final file = File(candidate);
+    if (await file.exists()) {
+      final bytes = await _styleImageBytes(file);
+      if (bytes != null) return bytes;
+    }
+  }
+  final fallback = await _findExistingProjectLogo(projectPath, normalized);
+  if (fallback == null) return null;
+  return _styleImageBytes(File(fallback));
+}
+
+/// Leest de bytes die het profiel al aanwijst. De kiezer heeft een
+/// niet-afbeelding al geweigerd; hier opnieuw op handtekening toetsen zou een
+/// bestaand logo (of een testbestand) als afwezig zien en het absolute pad
+/// laten staan, zodat het project niet meeneembaar is.
+Future<Uint8List?> _styleImageBytes(File file) async {
+  try {
+    final length = await file.length();
+    if (length <= 0 || length > FileService.maxStyleProfileLogoBytes) {
+      return null;
+    }
+    return await file.readAsBytes();
+  } on FileSystemException {
+    return null;
+  }
+}
+
+Future<String?> _writeStyleImageBytes(
+  List<int> bytes,
+  String filename,
+  String projectPath,
+) async {
+  final logosDir = await createContainedProjectDirectory(projectPath, 'logos');
+  final destination = await resolveAssetDestinationForBytes(
+    logosDir,
+    filename,
+    bytes,
+  );
+  if (destination == null) return null;
+  if (!destination.alreadyPresent) {
+    await writeBytesAtomic(destination.file, bytes);
+  }
+  return p.posix.join('logos', p.basename(destination.file.path));
+}
+
+/// Zoekt een al gekopieerd logobestand terug wanneer het opgeslagen pad zelf
+/// weg is — dezelfde volgorde als vóór de botsingsvrije kopie.
+Future<String?> _findExistingProjectLogo(
+  String projectPath,
+  String normalizedLogoPath,
+) async {
+  final filename = p.posix.basename(normalizedLogoPath);
+  if (filename.isEmpty || filename == '.' || filename == '..') return null;
+  final candidates = [
+    p.join(projectPath, 'logos', filename),
+    p.join(projectPath, 'images', filename),
+    p.join(projectPath, 'images', 'logo_$filename'),
+  ];
+  for (final candidate in candidates) {
+    if (await File(candidate).exists()) return candidate;
+  }
+  return null;
+}
+
+/// Relatieve `logos/`-paden van merkstrook en documentlogo worden absoluut
+/// gemaakt tegen het project, net als het presentatielogo. Een leeg
+/// documentlogo blijft leeg: dat is "bewust uit", niet "gedeeld".
+ThemeProfile _resolveProjectRelativeStylePaths(
+  ThemeProfile profile,
+  String? projectPath,
+  String? Function() homeDirectory,
+) {
+  final withStrip = _resolveOneRelativeStylePath(
+    profile,
+    profile.brandStripPath,
+    projectPath,
+    homeDirectory,
+    (next, path) => next.copyWith(brandStripPath: path),
+  );
+  return _resolveOneRelativeStylePath(
+    withStrip,
+    withStrip.documentLogoPath,
+    projectPath,
+    homeDirectory,
+    (next, path) => next.copyWith(documentLogoPath: path),
+  );
+}
+
+ThemeProfile _resolveOneRelativeStylePath(
+  ThemeProfile profile,
+  String? rawPath,
+  String? projectPath,
+  String? Function() homeDirectory,
+  ThemeProfile Function(ThemeProfile profile, String path) apply,
+) {
+  final path = rawPath?.trim();
+  if (path == null ||
+      path.isEmpty ||
+      isBundledAssetPath(path) ||
+      kIsWeb ||
+      p.isAbsolute(path)) {
+    return profile;
+  }
+  final bases = [?projectPath, ?homeDirectory()];
+  for (final base in bases) {
+    final candidate = p.normalize(p.join(base, path));
+    if (File(candidate).existsSync()) return apply(profile, candidate);
+  }
+  return profile;
 }
 
 String _brandStripCss(
@@ -175,6 +347,60 @@ section.logo-safe::before {
 $titleSubtitle''';
 }
 
+/// Een letterfamilienaam in een stylesheet. Alleen het tekenarsenaal dat de
+/// profielkiezer ook toelaat, zodat een naam de CSS niet kan sluiten.
+String _cssFontFamily(String family) {
+  final cleaned = family.replaceAll(RegExp(r'[^A-Za-z0-9 .,_-]'), '').trim();
+  final name = cleaned.isEmpty ? 'Arial' : cleaned;
+  return '"$name", sans-serif';
+}
+
+/// Tabelstijl van het profiel in de Marp-CSS. De standaard (omrand, geen
+/// zebra, geen kopaccent) blijft een volle tabel; een randloze of
+/// zebragestreepte keuze moet hier zichtbaar zijn, niet alleen in de app.
+String _marpTableCss(ThemeProfile profile) {
+  final border = switch (profile.tableBorderStyle) {
+    TableBorderStyle.boxed => 'border: 1px solid ${profile.tableBorderColor};',
+    TableBorderStyle.lined =>
+      'border: none; border-bottom: 1px solid ${profile.tableBorderColor};',
+    TableBorderStyle.none => 'border: none;',
+  };
+  final padding = profile.tableCellPaddingPx.toStringAsFixed(0);
+  final zebra = profile.tableZebraStriped
+      ? '''
+tbody tr:nth-child(even) td {
+  background: ${profile.tableZebraColor};
+}
+'''
+      : '';
+  final accent = profile.tableAccentHeaderBorder
+      ? '''
+thead th, tr:first-child th {
+  border-bottom: 2px solid ${profile.accentColor};
+}
+'''
+      : '';
+  return '''
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.72em;
+}
+
+th, td {
+  $border
+  padding: ${padding}px;
+  text-align: left;
+  color: ${profile.tableTextColor};
+}
+
+thead th, tr:first-child th {
+  background: ${profile.tableHeaderBackgroundColor};
+  color: ${profile.tableHeaderTextColor};
+}
+$zebra$accent''';
+}
+
 extension _FileServiceProject on FileService {
   Future<({Deck deck, List<String> chartWarnings})> _writeProject(
     Deck deck,
@@ -198,13 +424,13 @@ extension _FileServiceProject on FileService {
       sourceProjectPath: deck.projectPath,
     );
     var updatedDeck = deck.copyWith(slides: mediaSlides, projectPath: dir);
-    final logoAsset = await _copyLogoToProject(updatedDeck.themeProfile, dir);
-    final stripAsset = await _copyBrandStripAsset(
-      logoAsset.profile,
+    final styled = await materializeProjectStyleImages(
+      updatedDeck.themeProfile,
       dir,
-      _findExistingProjectLogo,
+      sourceProjectPath: deck.projectPath == dir ? null : deck.projectPath,
     );
-    updatedDeck = updatedDeck.copyWith(themeProfile: stripAsset.profile);
+    updatedDeck = updatedDeck.copyWith(themeProfile: styled.profile);
+    await refreshCarriedProjectStyle(dir, updatedDeck.themeProfile);
     await _writeImageCaptions(updatedDeck);
 
     final writtenTheme = await _writeTheme(
@@ -212,8 +438,8 @@ extension _FileServiceProject on FileService {
       updatedDeck.theme,
       updatedDeck.themeProfile,
       updatedDeck.marpStyle.footer,
-      logoAsset.cssUrl,
-      stripAsset.cssUrl,
+      styled.logoCssUrl,
+      styled.brandCssUrl,
       updatedDeck.slideSize,
     );
     // Marp CLI laadt een stylesheet naast de deck niet uit zichzelf; de
@@ -364,89 +590,6 @@ extension _FileServiceProject on FileService {
     );
   }
 
-  Future<_LogoProjectAsset> _copyLogoToProject(
-    ThemeProfile profile,
-    String projectPath,
-  ) async {
-    final logoPath = profile.logoPath;
-    if (logoPath == null || logoPath.trim().isEmpty) {
-      return _LogoProjectAsset(profile, null);
-    }
-
-    if (WebAssetStore.isMemPath(logoPath)) {
-      final storedPath = await _materializeMemStyleAsset(
-        logoPath,
-        projectPath,
-        fallbackName: 'logo.png',
-      );
-      return storedPath == null
-          ? _LogoProjectAsset(profile, null)
-          : _LogoProjectAsset(
-              profile.copyWith(logoPath: storedPath),
-              '../$storedPath',
-            );
-    }
-
-    final normalized = logoPath.replaceAll('\\', '/');
-    final relativeLogoPath = p.posix.isRelative(normalized)
-        ? p.posix.normalize(normalized)
-        : null;
-    if (relativeLogoPath != null && relativeLogoPath.startsWith('logos/')) {
-      return _LogoProjectAsset(
-        profile.copyWith(logoPath: relativeLogoPath),
-        '../$relativeLogoPath',
-      );
-    }
-
-    var sourcePath = p.isAbsolute(logoPath)
-        ? logoPath
-        : p.normalize(p.join(projectPath, logoPath));
-    var src = File(sourcePath);
-    if (!await src.exists()) {
-      final fallback = await _findExistingProjectLogo(projectPath, normalized);
-      if (fallback == null) {
-        return _LogoProjectAsset(profile, null);
-      }
-      sourcePath = fallback;
-      src = File(sourcePath);
-    }
-
-    final filename = p.posix.basename(normalized);
-    if (filename.isEmpty || filename == '.' || filename == '..') {
-      return _LogoProjectAsset(profile, null);
-    }
-
-    final relativePath = p.posix.join('logos', filename);
-    final dest = File(p.join(projectPath, relativePath));
-    if (!p.equals(src.path, dest.path)) {
-      await dest.parent.create(recursive: true);
-      await src.copy(dest.path);
-    }
-
-    return _LogoProjectAsset(
-      profile.copyWith(logoPath: relativePath),
-      '../$relativePath',
-    );
-  }
-
-  Future<String?> _findExistingProjectLogo(
-    String projectPath,
-    String normalizedLogoPath,
-  ) async {
-    final filename = p.posix.basename(normalizedLogoPath);
-    if (filename.isEmpty || filename == '.' || filename == '..') return null;
-
-    final candidates = [
-      p.join(projectPath, 'logos', filename),
-      p.join(projectPath, 'images', filename),
-      p.join(projectPath, 'images', 'logo_$filename'),
-    ];
-    for (final candidate in candidates) {
-      if (await File(candidate).exists()) return candidate;
-    }
-    return null;
-  }
-
   String _buildThemeCss(
     String base,
     ThemeProfile profile,
@@ -497,6 +640,7 @@ ${marpSizeDirective(slideSize)}
 section {
   background: ${profile.slideBackgroundColor};
   color: ${profile.textColor};
+  font-family: ${_cssFontFamily(profile.fontFamily)};
   position: relative;
 }
 
@@ -530,23 +674,7 @@ section.section h1 {
   color: ${profile.titleTextColor};
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 0.72em;
-}
-
-th, td {
-  border: 1px solid ${profile.accentColor};
-  padding: 0.22em 0.45em;
-  text-align: left;
-  color: ${profile.tableTextColor};
-}
-
-thead th, tr:first-child th {
-  background: ${profile.tableHeaderBackgroundColor};
-  color: ${profile.tableHeaderTextColor};
-}
+${_marpTableCss(profile)}
 $logoCss
 ''';
   }

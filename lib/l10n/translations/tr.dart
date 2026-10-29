@@ -2513,6 +2513,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo bir görsel değil ya da 8 MB\'den büyük. Daha küçük bir PNG, JPEG, GIF veya WebP seçin.',
   'Bezig met installeren': 'Kuruluyor',
   'Gevonden op schijf: {pad}': 'Diskte bulundu: {pad}',
   'Van schijf installeren': 'Diskten kur',

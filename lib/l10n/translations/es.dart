@@ -649,6 +649,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'El logotipo no es una imagen o pesa más de 8 MB. Elija un PNG, JPEG, GIF o WebP más pequeño.',
   'Bezig met installeren': 'Instalando',
   'Gevonden op schijf: {pad}': 'Encontrado en el disco: {pad}',
   'Van schijf installeren': 'Instalar desde el disco',

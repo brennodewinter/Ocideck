@@ -651,6 +651,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'E logo no ta un imágen òf e ta mas grandi ku 8 MB. Skohe un PNG, JPEG, GIF òf WebP mas chikí.',
   'Bezig met installeren': 'Ta instalando',
   'Gevonden op schijf: {pad}': 'Ha é den disk: {pad}',
   'Van schijf installeren': 'Instala for di disk',

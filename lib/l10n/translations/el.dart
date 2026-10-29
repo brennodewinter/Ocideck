@@ -1630,6 +1630,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Το λογότυπο δεν είναι εικόνα ή είναι μεγαλύτερο από 8 MB. Επιλέξτε μικρότερο PNG, JPEG, GIF ή WebP.',
   'Bezig met installeren': 'Γίνεται εγκατάσταση',
   'Gevonden op schijf: {pad}': 'Βρέθηκε στον δίσκο: {pad}',
   'Van schijf installeren': 'Εγκατάσταση από τον δίσκο',

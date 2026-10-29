@@ -340,6 +340,7 @@ Future<OpenResult> _openPackageFromBytes(
     );
   }
   deck = notifier._attachPackageChartData(deck, entries, mdEntry.name);
+  deck = applyCarriedStyleMembers(deck, entries);
   deck = notifier._attachPackageSidecars(deck, entries, mdEntry.name);
   if (!notifier.mounted) return OpenResult.unreadable;
   // Ná het aanhaken: wat het pakket wél meebracht is nu ingevuld, dus wat

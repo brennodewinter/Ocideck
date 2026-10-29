@@ -1617,6 +1617,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo nie jest obrazem albo ma ponad 8 MB. Wybierz mniejszy plik PNG, JPEG, GIF lub WebP.',
   'Bezig met installeren': 'Trwa instalowanie',
   'Gevonden op schijf: {pad}': 'Znaleziono na dysku: {pad}',
   'Van schijf installeren': 'Zainstaluj z dysku',

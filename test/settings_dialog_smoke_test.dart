@@ -124,15 +124,12 @@ void main() {
     expect(find.byType(SettingsDialog), findsOneWidget);
   });
 
-  // De logo-instelling staat sinds #506 achter `supportsLocalProjectFolders`,
-  // omdat een logo als pad in het themaprofiel wordt bewaard en de browser geen
-  // bruikbaar pad teruggeeft. Deze test dekt de dráaiende helft van die poort:
-  // op een platform mét bestandssysteem moet de instelling er gewoon zijn.
+  // De logo-instelling staat op elk platform. Op web gaan de bytes naar het
+  // sessiegeheugen; deze test draait met een bestandssysteem en ziet het pad.
   //
-  // De web-helft is hier structureel niet te toetsen: onder `flutter test` is
-  // `kIsWeb` altijd false, de vlag komt via een conditionele import zonder
-  // injectiepunt, en er is geen `--platform chrome`-doel. Die kant wordt door
-  // #505 bewaakt, met een statische regel in plaats van een test.
+  // De browserkiezer zelf is hier structureel niet te toetsen: onder
+  // `flutter test` is `kIsWeb` altijd false. De bytecontrole staat in
+  // logo_style_roundtrip_test.dart.
   testWidgets(
     'de logo-instelling staat er op een platform met bestandssysteem',
     (tester) async {
@@ -164,9 +161,9 @@ void main() {
       await tester.ensureVisible(find.text('Logo positie'));
       await tester.pumpAndSettle();
 
-      // Positie en grootte horen bij de logokeuze en staan er dus alleen als de
-      // poort openstaat. Het pad zelf is geen anker: standaard staat er al een
-      // logo ingesteld, dus de "geen logo"-tekst verschijnt nooit.
+      // Positie en grootte horen bij de logokeuze. Het pad zelf is geen anker:
+      // standaard staat er al een logo ingesteld, dus de "geen logo"-tekst
+      // verschijnt nooit.
       expect(find.text('Logo positie'), findsOneWidget);
       expect(find.text('Logo px'), findsOneWidget);
 

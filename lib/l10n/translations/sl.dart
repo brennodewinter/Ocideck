@@ -1605,6 +1605,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotip ni slika ali je večji od 8 MB. Izberite manjši PNG, JPEG, GIF ali WebP.',
   'Bezig met installeren': 'Nameščam',
   'Gevonden op schijf: {pad}': 'Najdeno na disku: {pad}',
   'Van schijf installeren': 'Namesti z diska',

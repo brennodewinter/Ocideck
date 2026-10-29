@@ -484,7 +484,9 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2886, // +2 (#2515): transcriptAudioPath langs
+      2821, // #2640: pakketstijl en logobotsing naar file_service_carried_style
+  // en file_service_project; 25 regels lucht boven de nieuwe telling.
+  // +2 (#2515): transcriptAudioPath langs
   // saveDocumentWithDestination — de bewaarkeuze bereikt de
   // media-kopie in file_service_open.
   // +7 (#2433): de slideSize-parameter langs _buildThemeCss en de

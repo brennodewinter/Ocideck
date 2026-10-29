@@ -106,9 +106,17 @@ void main() {
     final before = container.read(settingsProvider).themeProfiles.length;
     await tester.tap(find.byIcon(Icons.add).first);
     await tester.pumpAndSettle();
-    final after = container.read(settingsProvider).themeProfiles.length;
+    // Aanmaken zit in de werkkopie. De lijst in de instellingen groeit pas
+    // bij Opslaan, zodat Annuleren het nieuwe profiel weer laat vallen (#2648).
+    expect(container.read(settingsProvider).themeProfiles.length, before);
 
-    expect(after, greaterThan(before));
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan'));
+    await tester.pumpAndSettle();
+
+    expect(
+      container.read(settingsProvider).themeProfiles.length,
+      greaterThan(before),
+    );
   });
 
   testWidgets('"Profiel verwijderen" is ingeschakeld bij meerdere profielen', (

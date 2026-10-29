@@ -1621,6 +1621,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Sigla nu este o imagine sau este mai mare de 8 MB. Alegeți un PNG, JPEG, GIF sau WebP mai mic.',
   'Bezig met installeren': 'Se instalează',
   'Gevonden op schijf: {pad}': 'Găsit pe disc: {pad}',
   'Van schijf installeren': 'Instalați de pe disc',

@@ -63,6 +63,7 @@ import 'web_asset_store.dart';
 part 'file/file_service_net.dart';
 part 'file/file_service_open.dart';
 part 'file/file_service_package.dart';
+part 'file/file_service_carried_style.dart';
 part 'file/file_service_dossier.dart';
 part 'file/file_service_project.dart';
 part 'file/file_service_import.dart';
@@ -74,24 +75,7 @@ ThemeProfile _resolveBrandStripPath(
   ThemeProfile profile,
   String? projectPath,
   String? Function() homeDirectory,
-) {
-  final stripPath = profile.brandStripPath;
-  if (stripPath == null ||
-      stripPath.trim().isEmpty ||
-      isBundledAssetPath(stripPath) ||
-      kIsWeb ||
-      p.isAbsolute(stripPath)) {
-    return profile;
-  }
-  final bases = [?projectPath, ?homeDirectory()];
-  for (final base in bases) {
-    final candidate = p.normalize(p.join(base, stripPath));
-    if (File(candidate).existsSync()) {
-      return profile.copyWith(brandStripPath: candidate);
-    }
-  }
-  return profile;
-}
+) => _resolveProjectRelativeStylePaths(profile, projectPath, homeDirectory);
 
 /// Een bewerkbaar Markdown-bestand dat op schijf is gevonden: een presentatie
 /// ([deck] gevuld) of een plat document ([deck] null).
@@ -206,13 +190,6 @@ class ScanHit {
     if (t != null && t.isNotEmpty) return t;
     return p.basenameWithoutExtension(fileName);
   }
-}
-
-class _LogoProjectAsset {
-  final ThemeProfile profile;
-  final String? cssUrl;
-
-  const _LogoProjectAsset(this.profile, this.cssUrl);
 }
 
 /// Eén lid van een `.ocideck`-pakket: archiefnaam plus uitgepakte bytes.
@@ -753,9 +730,16 @@ class FileService {
     // echt afgekapt bestand was de body al weg vóór wij hem lazen, en de
     // gebruiker ziet een lege presentatie.
 
-    // The file carries only content; apply the active style profile on open.
+    // Inhoud blijft in de markdown. Een pakket kan er een stijlsidecar
+    // naast leggen; zonder die sidecar geldt het actieve profiel.
     final deck = parsed.copyWith(
-      themeProfile: activeProfileFor(projectPath: parsed.projectPath),
+      themeProfile: resolveThemeProfile(
+        await carriedProjectStyle(
+          parsed.projectPath,
+          activeProfileFor(projectPath: parsed.projectPath),
+        ),
+        projectPath: parsed.projectPath,
+      ),
     );
     final chartWarnings = <String>[];
     final skipped = <String>[];
