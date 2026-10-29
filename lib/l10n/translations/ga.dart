@@ -4522,7 +4522,6 @@ const _dutchSourceAddGa = <String, String>{
       'Athraigh an comhad ar an diosca ó d\'oscail tú é — is dócha i bhfuinneog eile nó ag clár eile. Má forscríobhann tú, cailltear na hathruithe sin.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Níl aisghabháil tuairteála ag obair faoi láthair — ní féidir scríobh chuig fillteán na haisghabhála. Sábháil do chuid oibre de láimh.',
-  'Donker logo kiezen': 'Roghnaigh logo dorcha',
   'Geen donker logo ingesteld': 'Níl logo dorcha socraithe',
   'Verwijder donker logo': 'Bain logo dorcha',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

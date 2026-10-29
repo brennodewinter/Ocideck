@@ -4453,7 +4453,6 @@ const _dutchSourceAddHr = <String, String>{
       'Datoteka na disku se promijenila otkad ste je otvorili — vjerojatno u drugom prozoru ili drugim programom. Prepisivanje odbacuje te promjene.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Oporavak nakon rušenja trenutno ne radi — mapa za oporavak nije zapisiva. Spremite svoj rad ručno.',
-  'Donker logo kiezen': 'Odaberi tamno logo',
   'Geen donker logo ingesteld': 'Nema postavljenog tamnog loga',
   'Verwijder donker logo': 'Ukloni tamno logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

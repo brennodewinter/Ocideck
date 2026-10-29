@@ -3551,7 +3551,6 @@ const _dutchSourceAddFr = {
       'Le fichier sur le disque a changé depuis que vous l\'avez ouvert — probablement dans une autre fenêtre ou par un autre programme. Écraser supprime ces modifications.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'La récupération après crash ne fonctionne pas — le dossier de récupération n\'est pas inscriptible. Enregistrez votre travail manuellement.',
-  'Donker logo kiezen': 'Choisir un logo sombre',
   'Geen donker logo ingesteld': 'Aucun logo sombre défini',
   'Verwijder donker logo': 'Supprimer le logo sombre',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

@@ -4458,7 +4458,6 @@ const _dutchSourceAddUk = <String, String>{
       'Файл на диску змінився з моменту відкриття — ймовірно, в іншому вікні або іншою програмою. Перезапис відкидає ці зміни.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Відновлення після збою зараз не працює — папку відновлення не можна записати. Збережіть свою роботу вручну.',
-  'Donker logo kiezen': 'Обрати темне лого',
   'Geen donker logo ingesteld': 'Темне лого не встановлено',
   'Verwijder donker logo': 'Видалити темне лого',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

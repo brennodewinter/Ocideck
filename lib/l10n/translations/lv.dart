@@ -4445,7 +4445,6 @@ const _dutchSourceAddLv = <String, String>{
       'Fails uz diska ir mainījies kopš jūs to atvērāt — droši vien citā logā vai ar citu programmu. Pārrakstīšana izmet šīs izmaiņas.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Avārijas atjaunošana šobrīd nedarbojas — atjaunošanas mape nav rakstāma. Saglabājiet savu darbu manuāli.',
-  'Donker logo kiezen': 'Izvēlēties tumšu logo',
   'Geen donker logo ingesteld': 'Nav iestatīts tumšs logo',
   'Verwijder donker logo': 'Noņemt tumšu logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

@@ -4527,7 +4527,6 @@ const _dutchSourceAddEl = <String, String>{
       'Το αρχείο στον δίσκο έχει αλλάξει από όταν το ανοίξατε — πιθανώς σε άλλο παράθυρο ή από άλλο πρόγραμμα. Η αντικατάσταση απορρίπτει αυτές τις αλλαγές.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Η ανάκτηση μετά από κατάρρευση δεν λειτουργεί τώρα — ο φάκελος ανάκτησης δεν είναι εγγράψιμος. Αποθηκεύστε τη δουλειά σας χειροκίνητα.',
-  'Donker logo kiezen': 'Επιλογή σκοτεινού λογοτύπου',
   'Geen donker logo ingesteld': 'Δεν ορίστηκε σκοτεινό λογότυπο',
   'Verwijder donker logo': 'Αφαίρεση σκοτεινού λογοτύπου',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

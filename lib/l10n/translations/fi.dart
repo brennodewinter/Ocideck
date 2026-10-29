@@ -4450,7 +4450,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tiedosto levyllä on muuttunut sen jälkeen kun avasit sen — todennäköisesti toisessa ikkunassa tai toisella ohjelmalla. Ylikirjoittaminen hävittää nämä muutokset.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Kaatumispalautus ei toimi nyt — palautuskansioon ei voi kirjoittaa. Tallenna työsi manuaalisesti.',
-  'Donker logo kiezen': 'Valitse tumma logo',
   'Geen donker logo ingesteld': 'Tummaa logoa ei asetettu',
   'Verwijder donker logo': 'Poista tumma logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

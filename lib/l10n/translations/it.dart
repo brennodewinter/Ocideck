@@ -3537,7 +3537,6 @@ const _dutchSourceAddIt = {
       'Il file su disco è cambiato da quando lo hai aperto — probabilmente in un\'altra finestra o da un altro programma. Sovrascrivere scarta quelle modifiche.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Il ripristino dopo crash non funziona ora — la cartella di ripristino non è scrivibile. Salva il lavoro manualmente.',
-  'Donker logo kiezen': 'Scegli logo scuro',
   'Geen donker logo ingesteld': 'Nessun logo scuro impostato',
   'Verwijder donker logo': 'Rimuovi logo scuro',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

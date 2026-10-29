@@ -4445,7 +4445,6 @@ const _dutchSourceAddId = <String, String>{
       'Berkas di disk telah berubah sejak Anda membukanya — mungkin di jendela lain atau oleh program lain. Menimpa membuang perubahan tersebut.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Pemulihan crash tidak berfungsi sekarang — folder pemulihan tidak dapat ditulis. Simpan pekerjaan Anda secara manual.',
-  'Donker logo kiezen': 'Pilih logo gelap',
   'Geen donker logo ingesteld': 'Logo gelap belum diatur',
   'Verwijder donker logo': 'Hapus logo gelap',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

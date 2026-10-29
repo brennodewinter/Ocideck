@@ -4472,7 +4472,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Die Datei uf de Feschtplatte hät sich sit em Öppnige gänderet — wohrschinli im ene andere Fänschter oder vo eme andere Programm. Überschrybe wirft die Änderige wäg.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Absturz-Widerherstellig funktioniere grad nöd — de Widerherstelligsordner isch nöd schribbar. Speichere dini Arbet vo Hand.',
-  'Donker logo kiezen': 'Dunkels Logo wääle',
   'Geen donker logo ingesteld': 'Kei dunkels Logo gstellt',
   'Verwijder donker logo': 'Dunkels Logo entferne',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

@@ -3656,7 +3656,6 @@ const _dutchSourceAddEn = {
       'The file on disk has changed since you opened it — probably in another window or by another program. Overwriting discards those changes.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Crash recovery is not working right now — the recovery folder is not writable. Save your work manually.',
-  'Donker logo kiezen': 'Choose dark logo',
   'Geen donker logo ingesteld': 'No dark logo set',
   'Verwijder donker logo': 'Remove dark logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

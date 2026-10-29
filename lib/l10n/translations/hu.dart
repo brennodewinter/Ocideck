@@ -4463,7 +4463,6 @@ const _dutchSourceAddHu = <String, String>{
       'A lemezen lévő fájl megváltozott azóta, hogy megnyitottad — valószínűleg egy másik ablakban vagy egy másik program által. Felülírás eldobja ezeket a módosításokat.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Az összeomlás utáni helyreállítás most nem működik — a helyreállítási mappa nem írható. Mentsd el a munkádat kézzel.',
-  'Donker logo kiezen': 'Sötét logo választása',
   'Geen donker logo ingesteld': 'Nincs sötét logo beállítva',
   'Verwijder donker logo': 'Sötét logo eltávolítása',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

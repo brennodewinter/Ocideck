@@ -4433,7 +4433,6 @@ const _dutchSourceAddCs = <String, String>{
       'Soubor na disku se změnil od doby, kdy jste jej otevřeli — pravděpodobně v jiném okně nebo jiným programem. Přepsání zahodí tyto změny.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Obnovení po pádu nyní nefunguje — složka obnovení není zapisovatelná. Uložte svou práci ručně.',
-  'Donker logo kiezen': 'Vybrat tmavé logo',
   'Geen donker logo ingesteld': 'Není nastaveno tmavé logo',
   'Verwijder donker logo': 'Odstranit tmavé logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

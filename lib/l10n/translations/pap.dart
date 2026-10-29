@@ -3501,7 +3501,6 @@ const _dutchSourceAddPap = {
       'E archivo riba disk a kambia for di bo a habrié — probablemente na otro bentana of pa otro programa. Sobreskirbi ta bai kuné esnan kambio ei.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Rekuperashon di crash no ta funshoná awor — e map di rekuperashon no ta skribí. Warda bo trabou manualmente.',
-  'Donker logo kiezen': 'Skoha logo skuru',
   'Geen donker logo ingesteld': 'Sin logo skuru establesí',
   'Verwijder donker logo': 'Kita logo skuru',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

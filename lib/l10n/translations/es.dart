@@ -3528,7 +3528,6 @@ const _dutchSourceAddEs = {
       'El archivo en el disco ha cambiado desde que lo abriste — probablemente en otra ventana o por otro programa. Sobrescribir descarta esos cambios.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'La recuperación tras cuelgue no funciona ahora — la carpeta de recuperación no se puede escribir. Guarda tu trabajo manualmente.',
-  'Donker logo kiezen': 'Elegir logo oscuro',
   'Geen donker logo ingesteld': 'Sin logo oscuro configurado',
   'Verwijder donker logo': 'Quitar logo oscuro',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

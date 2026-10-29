@@ -3501,7 +3501,6 @@ const _dutchSourceAddFy = {
       'It bestân op skiif is feroare sûnt jo it iepenen — wierskynlik yn in oar finster of troch in oar programma. Oerskriuwen smyt dy wizigingen wei.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Crashherstel wurket no net — de herstelmap is net skriuwber. Bewarje jo wurk mei de hân.',
-  'Donker logo kiezen': 'Donker logo kieze',
   'Geen donker logo ingesteld': 'Gjin donker logo ynsteld',
   'Verwijder donker logo': 'Donker logo fuortsmite',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
