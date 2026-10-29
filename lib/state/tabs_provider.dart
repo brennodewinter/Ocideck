@@ -99,6 +99,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final RecoveryService _recovery;
   final Map<int, StreamSubscription<Object?>> _subs = {};
 
+  /// Het laatst uitgezonden tabfeit per tabblad (label, vuil-stip, open,
+  /// pad) — de deck-luisteraar zendt alleen uit als dit verandert (#2623).
+  final Map<int, Object> _lastTabFacts = {};
+
   /// Laatst ge-autosavede deck per tab (op identiteit): het deck is immutable,
   /// dus zolang het object hetzelfde is, is er niets gewijzigd en kan de tick
   /// de volledige serialisatie + schrijfbeurt overslaan.
@@ -227,6 +231,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// simply garbage-collected on close.
   void _disposeTab(TabInfo tab) {
     _subs.remove(tab.id)?.cancel();
+    _lastTabFacts.remove(tab.id);
     _lastAutosavedDeck.remove(tab.id);
     _lastAutosavedMarkdownDraft.remove(tab.id);
     _lastAutosavedDocument.remove(tab.id);
@@ -264,6 +269,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
       if (!(st.isOpen && (st.isDirty || _markdownDraftFor(tab) != null))) {
         _recovery.discard(key);
       }
+      // Alleen uitzenden wanneer een tabfeit verandert — label, vuil-stip,
+      // open-status of bestandspad (#2623). De deck-stroom emittteert bij
+      // élke toetsaanslag, en elke emissie herbouwde voorheen de hele
+      // schil; wie de dia-inhoud nodig heeft, watcht het deck van zijn
+      // eigen tabblad al.
+      final fact = (tab.label, tab.isDirty, st.isOpen, st.filePath);
+      if (fact == _lastTabFacts[id]) return;
+      _lastTabFacts[id] = fact;
       state = state.copyWith(tabs: List.from(state.tabs));
     });
     return tab;
@@ -618,16 +631,21 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Een kopie met een voorgestelde naam bestaat nog nergens op schijf —
     // precies wat de dirty-stip en de herstelkopie zichtbaar maken (#2468).
     if (suggestedName != null) notifier.markDirty();
-    _subs[id] = notifier.stream.listen((st) {
-      if (!mounted) return;
-      if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
-      state = state.copyWith(tabs: List.from(state.tabs));
-    });
-    return TabInfo(
+    final tab = TabInfo(
       id: id,
       recoveryId: key,
       content: DocumentTabContent(notifier),
     );
+    _subs[id] = notifier.stream.listen((st) {
+      if (!mounted) return;
+      if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
+      // Zelfde tabfeit-poort als de deck-luisteraar hierboven (#2623).
+      final fact = (tab.label, tab.isDirty, st.isOpen, st.filePath);
+      if (fact == _lastTabFacts[id]) return;
+      _lastTabFacts[id] = fact;
+      state = state.copyWith(tabs: List.from(state.tabs));
+    });
+    return tab;
   }
 
   /// Zoek een byte-identieke kopie van het zojuist geopende bestand in de
