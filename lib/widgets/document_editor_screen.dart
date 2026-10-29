@@ -265,13 +265,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   }
 
   @override
-  void deactivate() {
-    // Dit element is nog actief; daarna mag ref.read de boom niet meer op.
-    ref.read(documentProvider.notifier).flushPendingVisualEdit();
-    super.deactivate();
-  }
-
-  @override
   void dispose() {
     _chrome.dispose();
     _find.dispose();

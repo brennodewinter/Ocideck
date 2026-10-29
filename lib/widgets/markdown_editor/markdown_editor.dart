@@ -454,14 +454,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 
   @override
-  void deactivate() {
-    // Deactivate loopt terwijl dit object nog mounted is; dispose niet meer.
-    // Een open timer zou de laatste aanslagen anders laten vallen (#2621).
-    _flushPendingVisualEdit();
-    super.deactivate();
-  }
-
-  @override
   void dispose() {
     _flushTimer?.cancel();
     _flushTimer = null;
@@ -606,7 +598,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       // zo één gang door het document (#2621).
       widget.onVisualContentPending?.call();
       _flushTimer?.cancel();
-      _flushTimer = Timer(kVisualMarkdownFlushDelay, _flushPendingVisualEdit);
+      // Alleen het document, waar de haak gezet is, wacht de pauze af.
+      // Notities zijn kort en schrijven nog in dezelfde beurt (#2621).
+      if (widget.pendingFlush == null) {
+        scheduleMicrotask(_flushPendingVisualEdit);
+      } else {
+        _flushTimer = Timer(kVisualMarkdownFlushDelay, _flushPendingVisualEdit);
+      }
     }
     // De caret is goedkoop en hoort meteen mee te lopen. De omzetting niet:
     // die wacht op de timer of op een expliciete flush.

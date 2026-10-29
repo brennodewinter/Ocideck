@@ -763,7 +763,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     return (deck: deck, failure: OpenResult.opened);
   }
 
-  /// Selecteer een bestaand tabblad; ongeldige indices veranderen niets.
   void selectTab(int index) => _selectTab(this, index);
 
   /// Sluit een tabblad en ruim daarna alle niet meer gebruikte webassets op.
@@ -781,6 +780,7 @@ void _closeTab(TabsNotifier notifier, int index) {
   final current = notifier.currentState;
   final session = current.tabs[index].learningSession;
   _cancelLearningExpiry(notifier, session);
+  _flushClosingDocument(current.tabs[index].content);
   if (current.tabs.length == 1) {
     final tab = current.tabs.first;
     tab.learningSession = null;
