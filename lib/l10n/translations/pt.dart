@@ -1633,6 +1633,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Diagnose': 'Diagnóstico',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'O OciDeck mantém neste computador um registo de erros, bloqueios e do arranque. Não contém conteúdo de apresentações nem de documentos, e os nomes de ficheiros ficam irreconhecíveis. O registo nunca sai deste computador por si só: partilhe-o apenas quando comunicar um problema.',
+  'Logmap openen': 'Abrir a pasta de registos',
+  'Diagnose kopiëren': 'Copiar o diagnóstico',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnóstico copiado para a área de transferência.',
+  'De logmap kon niet worden geopend.':
+      'Não foi possível abrir a pasta de registos.',
   'Afsluiten duurt lang': 'O encerramento está a demorar',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Um passo de limpeza responde lentamente. O teu trabalho guardado já está seguro; sair agora salta os passos restantes.',

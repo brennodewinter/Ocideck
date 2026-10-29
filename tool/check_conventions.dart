@@ -333,6 +333,8 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#2429): import van ociserve_org_themes voor de themaregister-knop
   // in het profielonderdeel.
   // +1 (#2510): import van de transcriptie-modulekaart.
+  // +1 (#2618): import van Diagnostics voor de kaart Diagnose; één regel lucht
+  // zodat een parallelle tak met één import niet meteen over het plafond gaat.
   // +2 (#2616): de sanitize_svg-import voor de eigen-SVG-bulletkiezer en de
   // part-directive voor settings_dialog_bullet_marker — de rij zelf staat daar
   // als top-level hulp, niet in de klasse.

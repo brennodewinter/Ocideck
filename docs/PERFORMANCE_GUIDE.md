@@ -276,6 +276,16 @@ local-save regression above — not export or UI latency. There is no broad
 automated throughput suite in CI; profile a specific slowdown with Flutter
 DevTools rather than treating the relative guard as a fixed budget.
 
+What a release build does record since #2618 is **freezes in the field**: the
+desktop log file gets one line whenever the UI isolate was unreachable for more
+than 500 ms beyond its 250 ms tick, with the work labels (`noteWork`) set in
+that window — face scan, document export, opening a deck, the Quill ↔ Markdown
+conversion, the split-run index, the privacy scan and the quality check. The
+start-up milestones (`opstart: …`, with milliseconds since `main`) say how long
+each step before the first frame took. That is observation, not a budget: it
+tells you where a user's machine stalled, and the fix still needs a measurement
+here.
+
 ## Best practices for users
 
 - **Images:** use appropriate resolutions (don't drop a 6000 px photo onto a

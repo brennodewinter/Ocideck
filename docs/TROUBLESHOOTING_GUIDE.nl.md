@@ -167,12 +167,38 @@ Een verkeerde verklaring kost meer tijd dan geen verklaring.
 
 ### Bouw- en opstartproblemen
 
-Er is geen installatieprogramma. OciDeck wordt vanuit de broncode gebouwd met de
-vastgezette Flutter-toolchain, dus wat elders een installatieprobleem zou zijn, is
-hier een bouwprobleem. *Gecorrigeerd 2026-07-21: deze sectie adviseerde vroeger
-"verwijder OciDeck volledig voordat je opnieuw installeert" en om achtergebleven
-configuratie in "toepassingsmappen" op te schonen — instructies voor een distributie
-die niet bestaat.*
+**Heb je een release geïnstalleerd** — het Windows-installatieprogramma, de
+macOS-app of een Linux-pakket — en start OciDeck niet, of loopt het vast terwijl
+je werkt:
+
+1. Start het opnieuw, open **Instellingen → Over OciDeck → Diagnose** en kies
+   **Diagnose kopiëren**. Dan staan de versie, je besturingssysteem en de laatste
+   200 regels van het lokale logboek op het klembord, opgemaakt om direct in een
+   issue te plakken. **Logmap openen** toont de bestanden zelf, als je die liever
+   meestuurt.
+2. Komt de app niet tot een venster, dan wordt het logboek toch geschreven; open
+   de map hieronder dan met de hand. De laatste `opstart:`-regel zegt welke stap
+   van de start werd gehaald. Een regel dat de vorige sessie *niet netjes is
+   afgesloten* betekent dat die vastliep, geforceerd werd beëindigd of met de
+   computer mee uitging. Een regel *UI-isolate … ms onbereikbaar* is een
+   vastloper, met het werk dat op dat moment liep.
+
+| Platform | Logmap |
+|---|---|
+| Windows | `%APPDATA%\Stichting LibreKAT\ocideck\logs` |
+| macOS | `~/Library/Application Support/com.dewinter.ocideck/logs` |
+| Linux | `~/.local/share/com.dewinter.ocideck/logs` (onder `$XDG_DATA_HOME` als die is gezet) |
+
+Het logboek bevat geen inhoud van decks of documenten en geen bestandsnamen; wat
+er wél in staat, beschrijft [PRIVACY.md](PRIVACY.md#what-stays-local).
+
+**Bouw je vanuit de broncode**, dan is een opstartprobleem meestal een
+bouwprobleem. *Gecorrigeerd 2026-10-29: deze sectie begon met "Er is geen
+installatieprogramma", wat niet meer klopt sinds het Windows-installatieprogramma
+en de release-pakketten voor macOS en Linux.* *Gecorrigeerd 2026-07-21: deze
+sectie adviseerde vroeger "verwijder OciDeck volledig voordat je opnieuw
+installeert" en om achtergebleven configuratie in "toepassingsmappen" op te
+schonen — instructies voor een distributie die toen niet bestond.*
 
 **Symptomen**:
 - De app start niet of loopt vast bij het opstarten
@@ -205,9 +231,16 @@ die niet bestaat.*
 ### Foutopsporingsprogramma's en logboeken
 
 1. **Toepassingslogboeken**: 
-   - OciDeck logt waarschuwingen en fouten naar de foutopsporingsconsole van het platform via
-     `dart:developer`. Er is geen voorkeur voor uitgebreid loggen en geen logbestand
-     op schijf — heb je de uitvoer nodig, draai dan een debugbouw vanuit een terminal.
+   - Op desktop schrijft OciDeck waarschuwingen, fouten, opstartmijlpalen en
+     vastlopers naar een lokaal logbestand: hooguit twee bestanden van 1 MiB, in
+     de logmap uit [Bouw- en opstartproblemen](#bouw--en-opstartproblemen).
+     Instellingen → Over OciDeck → Diagnose kopieert het einde ervan of opent de
+     map. Absolute paden en bestandsnamen worden vervangen door een korte hash
+     voordat er iets in het bestand komt.
+   - Dezelfde regels gaan, zoals voorheen, ook naar de foutopsporingsconsole via
+     `dart:developer`. Er is geen voorkeur voor uitgebreid loggen.
+     *Gecorrigeerd 2026-10-29: hier stond dat er geen logbestand op schijf was;
+     dat klopte tot #2618.*
 
 2. **Foutanalyse**:
    - Leg foutmeldingen met stacktraces vast waar mogelijk
@@ -281,9 +314,10 @@ die niet bestaat.*
 ### Systeeminformatie verzamelen
 
 1. **Basisinformatie verzamelen**:
-   - Noteer de commit waarvandaan je bouwde, je OS-versie en de Flutter/Dart-versies.
-     Er is geen OciDeck-versie om te noemen: er wordt niets uitgebracht, en
-     de app toont er geen.
+   - Noteer de OciDeck-versie (Instellingen → Over OciDeck, of de eerste regels
+     van *Diagnose kopiëren*), je OS-versie en — bij een eigen bouw — de commit en
+     de Flutter/Dart-versies. *Gecorrigeerd 2026-10-29: hier stond dat er geen
+     versie te noemen was; releases en de versieweergave bestaan al een tijd.*
    - Leg exacte foutmeldingen met tijdstempels vast  
    - Documenteer de stappen die je zette voordat het probleem optrad
 
@@ -296,11 +330,13 @@ die niet bestaat.*
 
 Bij het indienen van foutrapporten of ondersteuningsverzoeken:
 
-1. Voeg volledige foutmeldingen en stacktraces toe  
-2. Geef stapsgewijze instructies om het probleem te reproduceren
-3. Voeg relevante configuratiebestanden toe indien mogelijk
-4. Vermeld systeemspecificaties en omgevingsdetails
-5. Geef aan of het probleem zich bij alle bestanden voordoet of alleen bij specifieke
+1. Plak de uitvoer van **Diagnose kopiëren** (Instellingen → Over OciDeck); die
+   bevat de versie, het systeem en het recente logboek
+2. Voeg volledige foutmeldingen en stacktraces toe  
+3. Geef stapsgewijze instructies om het probleem te reproduceren
+4. Voeg relevante configuratiebestanden toe indien mogelijk
+5. Vermeld systeemspecificaties en omgevingsdetails
+6. Geef aan of het probleem zich bij alle bestanden voordoet of alleen bij specifieke
 
 ## Waar je een probleem meldt
 

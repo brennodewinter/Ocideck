@@ -7,6 +7,7 @@ import '../services/slide_quality/split_run_density_summary.dart';
 import '../services/slide_quality_analyzer.dart';
 import 'deck_provider.dart';
 import 'settings_provider.dart';
+import '../utils/log.dart';
 
 final slideQualityAnalyzerProvider = Provider<SlideQualityAnalyzer>(
   (ref) => SlideQualityAnalyzer(
@@ -46,6 +47,7 @@ final deckQualityProvider = Provider<SlideQualityResult>(computeDeckQuality);
 SlideQualityResult computeDeckQualityRaw(Ref ref) {
   final deck = ref.watch(deckProvider.select((state) => state.deck));
   if (deck == null) return const SlideQualityResult([]);
+  noteWork('kwaliteitscontrole');
   final result = ref.watch(slideQualityAnalyzerProvider).analyze(deck);
   if (!ref.watch(deckProvider.select(isUntouchedDeck))) return result;
   return SlideQualityResult([

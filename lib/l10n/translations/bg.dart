@@ -1624,6 +1624,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Diagnose': 'Диагностика',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck води на този компютър журнал за грешки, блокирания и стартиране. Той не съдържа съдържание от презентации или документи, а имената на файловете са направени неразпознаваеми. Журналът никога не напуска този компютър сам: споделяйте го само когато съобщавате за проблем.',
+  'Logmap openen': 'Отваряне на папката с журнали',
+  'Diagnose kopiëren': 'Копиране на диагностиката',
+  'Diagnose gekopieerd naar het klembord.':
+      'Диагностиката е копирана в клипборда.',
+  'De logmap kon niet worden geopend.':
+      'Папката с журнали не можа да бъде отворена.',
   'Afsluiten duurt lang': 'Излизането отнема много време',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Стъпка за почистване реагира бавно. Вашата записана работа вече е в безопасност; излизането сега пропуска останалите стъпки.',

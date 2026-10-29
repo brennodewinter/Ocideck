@@ -1605,6 +1605,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Diagnose': 'Diagnostiikka',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck pitää tällä tietokoneella lokia virheistä, jumittumisista ja käynnistyksestä. Se ei sisällä esitysten tai asiakirjojen sisältöä, ja tiedostonimet on tehty tunnistamattomiksi. Loki ei koskaan poistu tältä tietokoneelta itsestään: jaa se vain, kun ilmoitat ongelmasta.',
+  'Logmap openen': 'Avaa lokikansio',
+  'Diagnose kopiëren': 'Kopioi diagnostiikka',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnostiikka kopioitu leikepöydälle.',
+  'De logmap kon niet worden geopend.': 'Lokikansiota ei voitu avata.',
   'Afsluiten duurt lang': 'Sulkeminen kestää kauan',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Siivousvaihe reagoi hitaasti. Tallennettu työsi on jo turvassa; sulkeminen nyt ohittaa loput vaiheet.',

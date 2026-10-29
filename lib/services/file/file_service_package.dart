@@ -236,7 +236,7 @@ List<PackageEntry>? _decodePackageEntries(
     } on ExtractionLimitException {
       logWarning(
         'FileService.decodePackageEntries: entry exceeds decompression '
-        'limit (possible zip bomb): ${file.name}',
+        'limit (possible zip bomb): ${logName(file.name)}',
       );
       return null;
     } catch (e) {
@@ -250,7 +250,7 @@ List<PackageEntry>? _decodePackageEntries(
       }
       logWarning(
         'FileService.decodePackageEntries: unreadable entry skipped '
-        '(${file.name})',
+        '(${logName(file.name)})',
         e,
       );
       continue;

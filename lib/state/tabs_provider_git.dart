@@ -446,7 +446,7 @@ extension TabsNotifierGit on TabsNotifier {
         warnings: files.warnings,
       );
       if (queued != null) return queued;
-      logWarning('saveToGit: $deckDir niet opgeslagen', e);
+      logWarning('saveToGit: ${logName(deckDir)} niet opgeslagen', e);
       return GitSaveResult(
         status: GitSaveStatus.failed,
         message: e.message,

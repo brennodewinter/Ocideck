@@ -1606,6 +1606,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Diagnose': 'Diagnostika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck vede na tomto počítači protokol o chybách, zamrznutích a spouštění. Neobsahuje žádný obsah prezentací ani dokumentů a názvy souborů jsou nerozpoznatelné. Protokol nikdy sám neopustí tento počítač: sdílejte jej pouze tehdy, když hlásíte problém.',
+  'Logmap openen': 'Otevřít složku protokolů',
+  'Diagnose kopiëren': 'Kopírovat diagnostiku',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnostika zkopírována do schránky.',
+  'De logmap kon niet worden geopend.': 'Složku protokolů nelze otevřít.',
   'Afsluiten duurt lang': 'Ukončování trvá dlouho',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Krok úklidu reaguje pomalu. Vaše uložená práce je již v bezpečí; ukončení nyní přeskočí zbývající kroky.',

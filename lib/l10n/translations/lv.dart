@@ -1603,6 +1603,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Diagnose': 'Diagnostika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck šajā datorā glabā žurnālu par kļūdām, sastingšanu un palaišanu. Tajā nav prezentāciju vai dokumentu satura, un failu nosaukumi ir padarīti neatpazīstami. Žurnāls nekad pats neatstāj šo datoru: kopīgojiet to tikai tad, kad ziņojat par problēmu.',
+  'Logmap openen': 'Atvērt žurnāla mapi',
+  'Diagnose kopiëren': 'Kopēt diagnostiku',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnostika nokopēta starpliktuvē.',
+  'De logmap kon niet worden geopend.': 'Žurnāla mapi neizdevās atvērt.',
   'Afsluiten duurt lang': 'Aizvēršana ilgst ilgi',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Tīrīšanas solis reaģē lēni. Jūsu saglabātais darbs jau ir drošs; aizvēršana tagad izlaiž atlikušos soļus.',

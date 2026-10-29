@@ -3807,6 +3807,15 @@ de editorhelft ervan.
   herstelt de volledige gegroepeerde lijst, en de repositoryvoettekst blijft zichtbaar zelfs
   wanneer er niets overeenkomt. De zoekopdracht loopt over de documenten in je huidige
   interfacetaal.
+- **Diagnose** — *Instellingen → Over OciDeck → Diagnose* is waar je het lokale
+  logboek ophaalt als je een probleem meldt. **Diagnose kopiëren** zet de versie,
+  je besturingssysteem en de laatste 200 logregels op het klembord, opgemaakt om
+  direct in een issue te plakken; **Logmap openen** opent de map met de
+  bestanden. Het logboek bevat fouten, vastlopers en opstartstappen, niet de
+  inhoud van je decks of documenten, en bestandsnamen erin zijn vervangen door
+  een korte hash. Het verlaat je computer nooit vanzelf. Alleen op desktop; de
+  [probleemoplossingsgids](TROUBLESHOOTING_GUIDE.nl.md#bouw--en-opstartproblemen)
+  noemt waar de map staat als de app helemaal niet start.
 - **Toetsenbord** — de paneelscheiding tussen de dialijst en de editor kan met
   `Tab` worden gefocust en met `←`/`→` worden vergroot/verkleind; de dia-toevoegen-dialoog is volledig
   met het toetsenbord te bedienen.

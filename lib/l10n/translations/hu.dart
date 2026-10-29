@@ -1607,6 +1607,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Diagnose': 'Diagnosztika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'Az OciDeck ezen a számítógépen naplót vezet a hibákról, lefagyásokról és az indításról. Nem tartalmaz bemutatókból vagy dokumentumokból származó tartalmat, a fájlnevek pedig felismerhetetlenné vannak téve. A napló soha nem hagyja el magától ezt a számítógépet: csak akkor ossza meg, ha problémát jelent.',
+  'Logmap openen': 'Naplómappa megnyitása',
+  'Diagnose kopiëren': 'Diagnosztika másolása',
+  'Diagnose gekopieerd naar het klembord.': 'Diagnosztika a vágólapra másolva.',
+  'De logmap kon niet worden geopend.': 'A naplómappát nem sikerült megnyitni.',
   'Afsluiten duurt lang': 'A bezárás sokáig tart',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Egy takarítási lépés lassan reagál. A mentett munkád már biztonságban van; a mostani bezárás átugorja a fennmaradó lépéseket.',

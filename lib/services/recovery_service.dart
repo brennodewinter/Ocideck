@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/markdown_kind.dart';
 import '../utils/atomic_file.dart';
@@ -63,6 +65,12 @@ class RecoverySnapshot {
   /// wil bewaren moet ze apart meenemen.
   final String? annotations;
 
+  /// Welke app-sessie dit schreef (#2656). Alleen-informatief bij [toJson];
+  /// [RecoveryService.loadAll] gebruikt het om momentopnames van een
+  /// nóg-draaiend exemplaar over te slaan — dat werk is geen crash-rest.
+  /// Oude bestanden dragen geen sleutel en vallen terug op `null`.
+  final String? session;
+
   const RecoverySnapshot({
     required this.id,
     required this.savedAt,
@@ -78,6 +86,7 @@ class RecoverySnapshot {
     this.miauw,
     this.seal,
     this.annotations,
+    this.session,
   });
 
   Map<String, Object?> toJson() => {
@@ -96,6 +105,7 @@ class RecoverySnapshot {
     if (miauw != null) 'miauw': miauw,
     if (seal != null) 'seal': seal,
     if (annotations != null) 'annotations': annotations,
+    if (session != null) 'session': session,
   };
 
   static RecoverySnapshot fromJson(Map<String, Object?> json) {
@@ -115,6 +125,7 @@ class RecoverySnapshot {
       miauw: json['miauw'] as String?,
       seal: json['seal'] as String?,
       annotations: json['annotations'] as String?,
+      session: json['session'] as String?,
     );
   }
 }
@@ -128,8 +139,52 @@ class RecoveryService {
   /// gebruikt (path_provider).
   final Future<Directory> Function() _resolveDir;
 
-  RecoveryService({Directory? baseDir})
-    : _resolveDir = baseDir != null ? (() async => baseDir) : _defaultDir;
+  /// Levensvraag voor een vreemd sessielock (#2656). Tests injecteren een
+  /// staaltje; productie gebruikt [_lockIsLive] — de heartbeat-mtime.
+  final bool Function(File lock) _isLockLive;
+
+  RecoveryService({Directory? baseDir, bool Function(File lock)? isLockLive})
+    : _isLockLive = isLockLive ?? _lockIsLive,
+      _resolveDir = baseDir != null ? (() async => baseDir) : _defaultDir;
+
+  /// Identiteit van díze sessie, eigenaar van de eigen sessielock. Eén keer
+  /// uitgedeeld per proces; `null` tot de herstelmap voor het eerst geraakt
+  /// wordt.
+  String? _sessionId;
+  Future<void>? _sessionWrite;
+  Timer? _heartbeat;
+
+  /// Hoe vaak de eigenaar zijn sessielock ververst. Goedkoop (één `utimens`)
+  /// en vaak genoeg dat [_lockGrace] drie gemiste tikken toelaat.
+  static const _heartbeatInterval = Duration(seconds: 30);
+
+  /// Hoe vers een lock moet zijn om de eigenaar "levend" te rekenen. Ruimer
+  /// dan de tik-interval, zodat een uitgestelde timer (lapdesk-sleep, GC)
+  /// niet meteen doet alsof de eigenaar doodgevallen is.
+  ///
+  /// Waarom geen `kill(pid, 0)`/`tasklist`: een subproces is een verboden
+  /// uitzondering in deze repo (NetGuard-poort), en PID's worden hergebruikt.
+  /// ponytail: een langdurig gesuspendeerd exemplaar (>2,5 min) telt als dood
+  /// — zijn momentopnames worden dan aangeboden terwijl hij nog draait; de
+  /// veilige kant van de afweging, want verzwijgen is erger.
+  static const _lockGrace = Duration(minutes: 2, seconds: 30);
+
+  static bool _lockIsLive(File lock) {
+    try {
+      final age = DateTime.now().difference(lock.lastModifiedSync());
+      return age < _lockGrace;
+    } catch (e) {
+      // stat faalt = lock onleesbaar; de veilige kant is "eigenaar dood"
+      // behandelen — de momentopname wordt dan aangeboden in plaats van
+      // verzwegen.
+      return false;
+    }
+  }
+
+  /// Naam van het sessielock naast de momentopnames — herkenbaar aan de
+  /// `.lock`-staart zodat `*.json`-lezers hem niet als snapshot oppikken.
+  @visibleForTesting
+  static String sessionLockName(String sessionId) => 'session-$sessionId.lock';
 
   /// #1953: een schrijffout naar de herstelmap mag niet stil blijven. De eerste
   /// fout in een sessie (of de eerste ná een geslaagde schrijfbeurt) meldt zich
@@ -156,6 +211,44 @@ class RecoveryService {
       }
     }
     return dir;
+  }
+
+  /// Duidt deze sessie als eigenaar van de eigen momentopnames (#2656). Het
+  /// lock draagt ons PID ter diagnose; het levensbewijs is de heartbeat op de
+  /// mtime. Een restart die [loadAll] draait kan daarmee onderscheiden welke
+  /// resten van een nog-draaiend exemplaar zijn (overslaan) en welke van een
+  /// gestorvene (aanbieden). Schrijven is best-effort: zonder lock wordt ons
+  /// werk door een gecrashte-parallele start vroeg aangeboden — de kwade kant
+  /// van niet-schrijven is cosmetisch, niet verlies.
+  ///
+  /// Alleen [save] en [loadAll] duiden — de twee plekken waar eigenaarschap
+  /// productie- of beslis-waarde heeft. Een `discard`/`prune` die zelf ook een
+  /// lock zou schrijven, maakt van "wissen" per ongeluk "aanmaken".
+  Future<void> _ensureSession(Directory dir) {
+    if (_unavailable) return Future.value();
+    _sessionId ??= const Uuid().v4();
+    return _sessionWrite ??= () async {
+      try {
+        await writeStringAtomic(
+          File(p.join(dir.path, sessionLockName(_sessionId!))),
+          jsonEncode({
+            'pid': pid,
+            'startedAt': DateTime.now().toIso8601String(),
+          }),
+        );
+        _heartbeat ??= Timer.periodic(_heartbeatInterval, (_) {
+          try {
+            File(
+              p.join(dir.path, sessionLockName(_sessionId!)),
+            ).setLastModifiedSync(DateTime.now());
+          } catch (e) {
+            logWarning('RecoveryService: sessielock-heartbeat mislukt', e);
+          }
+        });
+      } catch (e) {
+        logWarning('RecoveryService: sessielock schrijven mislukt', e);
+      }
+    }();
   }
 
   File _file(Directory dir, String id) => File(p.join(dir.path, '$id.json'));
@@ -195,11 +288,14 @@ class RecoveryService {
     return _enqueue(snapshot.id, () async {
       try {
         final dir = await _dir();
+        await _ensureSession(dir);
         // Atomair: een crash midden in de autosave — precies het moment
         // waarvoor recovery bestaat — mag het vorige snapshot niet slopen.
+        // De sessiestempel komt van de dienst, niet van de aanroeper: welke
+        // sessie schreef is een feit, geen mening.
         await writeStringAtomic(
           _file(dir, snapshot.id),
-          jsonEncode(snapshot.toJson()),
+          jsonEncode({...snapshot.toJson(), 'session': _sessionId}),
         );
         _lastWriteFailed = false;
       } catch (e) {
@@ -304,6 +400,24 @@ class RecoveryService {
     await pruneOlderThan(defaultMaxAge);
     try {
       final dir = await _dir();
+      await _ensureSession(dir);
+      // Levende eigenaren (#2656): welke sessielocks zijn recent ververst?
+      // Een momentopname van zo'n eigenaar is geen crash-rest — het andere
+      // exemplaar beheert die zelf en veegt hem bij afsluiten weg. Locks van
+      // een gestorven eigenaar gaan hier al mee weg.
+      final liveSessions = <String>{};
+      for (final entry in dir.listSync()) {
+        if (entry is! File || !entry.path.endsWith('.lock')) continue;
+        try {
+          if (_isLockLive(entry)) {
+            liveSessions.add(p.basenameWithoutExtension(entry.path));
+          } else {
+            await entry.delete();
+          }
+        } catch (e) {
+          logWarning('RecoveryService.loadAll: sessielock lezen', e);
+        }
+      }
       final out = <RecoverySnapshot>[];
       for (final entry in dir.listSync()) {
         if (entry is File && entry.path.endsWith('.json')) {
@@ -312,7 +426,16 @@ class RecoveryService {
             if (data is! Map) {
               throw const FormatException('Recovery snapshot is not a map');
             }
-            out.add(RecoverySnapshot.fromJson(Map<String, Object?>.from(data)));
+            final snap = RecoverySnapshot.fromJson(
+              Map<String, Object?>.from(data),
+            );
+            final session = snap.session;
+            if (session != null &&
+                session != _sessionId &&
+                liveSessions.contains('session-$session')) {
+              continue;
+            }
+            out.add(snap);
           } catch (e, s) {
             logError('RecoveryService.loadAll: decode recovery snapshot', e, s);
           }
@@ -366,6 +489,26 @@ class RecoveryService {
     }
   }
 
+  /// Nette afsluiting: heartbeat stilleggen en het eigen sessielock weg
+  /// (#2656). Restanten van andere exemplaren blijft [loadAll] zelf opruimen.
+  /// Een crash laat het lock achter; de vervallen mtime maakt het dan alsnog
+  /// dood bij de volgende start.
+  Future<void> endSession() async {
+    _heartbeat?.cancel();
+    _heartbeat = null;
+    if (_unavailable) return;
+    final id = _sessionId;
+    if (id == null) return;
+    try {
+      final dir = await _resolveDir();
+      if (!dir.existsSync()) return;
+      final file = File(p.join(dir.path, sessionLockName(id)));
+      if (file.existsSync()) await file.delete();
+    } catch (e) {
+      logWarning('RecoveryService.endSession: sessielock wissen', e);
+    }
+  }
+
   /// Wis élk herstelbestand in de map, van welk venster ook. Alleen voor de
   /// uitdrukkelijke opruimknop in Instellingen → Privacy; een venster dat
   /// afsluit hoort [discardEach] te gebruiken.
@@ -374,8 +517,11 @@ class RecoveryService {
     try {
       final dir = await _dir();
       for (final entry in dir.listSync()) {
-        if (entry is File &&
-            (entry.path.endsWith('.json') || entry.path.endsWith('.tmp'))) {
+        if (entry is! File) continue;
+        final path = entry.path;
+        if (path.endsWith('.json') ||
+            path.endsWith('.tmp') ||
+            path.endsWith('.lock')) {
           try {
             await entry.delete();
           } catch (e) {
@@ -383,6 +529,11 @@ class RecoveryService {
           }
         }
       }
+      // Ons eigen sessielock ging mee weg — opnieuw duiden, anders zijn de
+      // momentopnames die deze sessie hierna schrijft voor een ander
+      // exemplaar "eigenaarloos" en alsnog aangeboden.
+      _sessionWrite = null;
+      await _ensureSession(dir);
     } catch (e) {
       logWarning('RecoveryService.clearAll: list recovery dir', e);
     }

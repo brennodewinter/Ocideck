@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/learning_session.dart';
+import '../../services/single_instance.dart';
 import '../../state/ociserve_provider.dart';
 import '../../utils/log.dart';
 import 'meeting_lifecycle.dart';
@@ -30,6 +31,13 @@ Future<void> runBestEffortQuitSteps(
   }
   await stopRecordingBeforeQuit(ref);
   await leaveMeetingBeforeQuit(ref);
+  // De enkel-exemplaar-socket op Linux (#2656): luisteraar dicht en het
+  // bestand weg, zodat de volgende start niet eerst het lijk hoeft te ruimen.
+  await boundedQuitStep(
+    () => activeSingleInstance?.dispose() ?? Future.value(),
+    label: 'enkel-exemplaar-socket',
+    budget: const Duration(seconds: 1),
+  );
 }
 
 /// Voer [step] uit als best-effort-afsluitstap: hooguit [budget] lang, en

@@ -1598,6 +1598,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Diagnose': 'Diagnostika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck peab selles arvutis logi vigade, hangumiste ja käivitamise kohta. See ei sisalda esitluste ega dokumentide sisu ning failinimed on muudetud tundmatuks. Logi ei lahku sellest arvutist kunagi iseenesest: jagage seda ainult siis, kui teatate probleemist.',
+  'Logmap openen': 'Ava logikaust',
+  'Diagnose kopiëren': 'Kopeeri diagnostika',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnostika kopeeriti lõikelauale.',
+  'De logmap kon niet worden geopend.': 'Logikausta ei õnnestunud avada.',
   'Afsluiten duurt lang': 'Sulgemine võtab kaua aega',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Koristusetapp reageerib aeglaselt. Sinu salvestatud töö on juba turvaline; kohe sulgemine jätab ülejäänud sammud vahele.',

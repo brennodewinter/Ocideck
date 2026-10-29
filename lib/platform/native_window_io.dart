@@ -3,6 +3,8 @@ import 'dart:ui' show Size;
 
 import 'package:nativeapi/nativeapi.dart';
 
+import '../utils/log.dart';
+
 /// De kleinste maat waarop de shell nog werkt.
 ///
 /// OciDeck's hoofdscherm is een drieluik — diastrook, editor, preview — en
@@ -50,9 +52,13 @@ void setWillCloseCallback(WillCloseCallback callback) {
 /// de toestemmingspoort — luistert er niemand naar de kruis-knop, dus dan zit
 /// een gebruiker die niet akkoord gaat klem (#1207). Deze route omzeilt de
 /// vensterbewaking: er is op de poort niets opgeslagen om te bewaken.
+///
+/// Vlak vóór het sluiten rondt [closeLog] het logbestand af en haalt de
+/// sessiemarkering weg: dit ís de nette afsluiting (#2618).
 Future<void> quitApp() async {
   if (!Platform.isMacOS && !Platform.isWindows && !Platform.isLinux) return;
   final window = WindowManager.instance.getCurrent();
   if (window == null) return;
+  await closeLog();
   WindowManager.instance.callOriginalClose(window.id);
 }

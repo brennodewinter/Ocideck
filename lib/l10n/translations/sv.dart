@@ -1604,6 +1604,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Diagnose': 'Diagnostik',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck för en logg på den här datorn över fel, frysningar och uppstart. Den innehåller inget innehåll från presentationer eller dokument, och filnamn görs oigenkännliga. Loggen lämnar aldrig den här datorn av sig själv: dela den bara när du rapporterar ett problem.',
+  'Logmap openen': 'Öppna loggmappen',
+  'Diagnose kopiëren': 'Kopiera diagnostik',
+  'Diagnose gekopieerd naar het klembord.': 'Diagnostik kopierad till urklipp.',
+  'De logmap kon niet worden geopend.': 'Loggmappen kunde inte öppnas.',
   'Afsluiten duurt lang': 'Avslutningen tar lång tid',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Ett städsteg svarar långsamt. Ditt sparade arbete är redan säkert; att avsluta nu hoppar över de återstående stegen.',

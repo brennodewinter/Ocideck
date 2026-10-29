@@ -652,6 +652,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Diagnose': 'Diagnose',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck führt auf diesem Computer ein Protokoll über Fehler, Hänger und den Programmstart. Es enthält keine Inhalte aus Präsentationen oder Dokumenten, und Dateinamen sind unkenntlich gemacht. Das Protokoll verlässt diesen Computer nie von selbst: Teilen Sie es nur, wenn Sie ein Problem melden.',
+  'Logmap openen': 'Protokollordner öffnen',
+  'Diagnose kopiëren': 'Diagnose kopieren',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnose in die Zwischenablage kopiert.',
+  'De logmap kon niet worden geopend.':
+      'Der Protokollordner konnte nicht geöffnet werden.',
   'Afsluiten duurt lang': 'Beenden dauert lange',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Ein Aufräumschritt reagiert träge. Deine gespeicherte Arbeit ist bereits sicher; ein Beenden jetzt überspringt die übrigen Schritte.',

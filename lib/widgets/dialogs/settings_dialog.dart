@@ -23,6 +23,7 @@ import '../../services/ai_client_service.dart';
 import '../../services/ai_security_gate.dart';
 import '../../services/libreplan/libreplan_client.dart';
 import '../../services/secret_store.dart';
+import '../../services/diagnostics/diagnostics.dart';
 import '../../services/disk_traces.dart';
 import '../../services/export_metadata.dart';
 import '../../services/update_check_service.dart';

@@ -1611,6 +1611,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Diagnose': 'Diagnostika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck šiame kompiuteryje veda klaidų, užstrigimų ir paleidimo žurnalą. Jame nėra pristatymų ar dokumentų turinio, o failų pavadinimai paversti neatpažįstamais. Žurnalas niekada pats nepalieka šio kompiuterio: bendrinkite jį tik pranešdami apie problemą.',
+  'Logmap openen': 'Atidaryti žurnalo aplanką',
+  'Diagnose kopiëren': 'Kopijuoti diagnostiką',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnostika nukopijuota į iškarpinę.',
+  'De logmap kon niet worden geopend.': 'Nepavyko atidaryti žurnalo aplanko.',
   'Afsluiten duurt lang': 'Uždarymas trunka ilgai',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Valymo žingsnis reaguoja lėtai. Jūsų išsaugotas darbas jau saugus; uždarymas dabar praleis likusius žingsnius.',

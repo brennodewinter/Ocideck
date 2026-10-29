@@ -8,6 +8,23 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Added
+
+- **Logboek en diagnose op desktop (#2618).** Een release-build liet tot nu
+  toe geen enkel spoor achter: alle foutmeldingen gingen naar een
+  ontwikkelaarsconsole die daar niet bestaat, dus "start niet" en "loopt vast"
+  waren niet te onderzoeken. OciDeck houdt nu een lokaal logboek bij in de
+  app-supportmap (`logs/`, hooguit twee bestanden van 1 MiB) met fouten,
+  opstartmijlpalen, vastlopers van meer dan een halve seconde met het werk dat
+  toen liep, en een melding wanneer de vorige sessie niet netjes werd
+  afgesloten. Paden en bestandsnamen worden vóór het wegschrijven vervangen
+  door een korte hash; inhoud van decks of documenten komt er niet in.
+  *Instellingen → Over OciDeck → Diagnose* kopieert versie, systeem en de
+  laatste 200 regels plakklaar voor een issue, of opent de logmap. Er gaat
+  niets vanzelf het netwerk op. *Alles terugzetten* wist het logboek mee.
+- **Windows-rookproef eist een venster.** De releaseproef keek alleen of het
+  proces na 15 s nog leefde; hij wacht nu op de mijlpaal "eerste frame" in het
+  logboek, en zet dat logboek bij een fout in het releaselog.
 ### Changed
 
 - **MITRE CWE bijgewerkt van 4.20 naar 5.0.** De volledige lijst telt nu 984
@@ -21,6 +38,28 @@ All notable changes to OciDeck are documented in this file.
   die zowel verouderd als onvolledig was dubbel; dat is één.
 
 ### Fixed
+
+- **Eén exemplaar op Linux + herstel per sessie (#2656).** Linux kreeg de
+  Windows-behandeling: een tweede start stuurt zijn bestandspaden via een
+  Unix-socket in `$XDG_RUNTIME_DIR` naar het draaiende exemplaar en stopt,
+  in plaats van een tweede venster met gedeelde herstel- en
+  voorkeursbestanden te openen. Daarnaast stempelt elke sessie zijn
+  herstelbestanden met een eigen sessielock; `loadAll` slaat momentopnames
+  van een nog-levende eigenaar over, zodat een tweede exemplaar nooit
+  "herstelpunten" van het eerste toont — en veegt locks van gestorven
+  eigenaren mee weg.
+
+- **Webbundel vanaf `file://` toont uitleg in plaats van een dood scherm
+  (#2661).** `index.html` rechtstreeks in de browser openen gaf een console
+  vol CORS- en service-worker-fouten — de browser weigert wasm en modules
+  zonder http(s)-origin. De bundel detecteert dat nu en legt in het
+  laadscherm uit dat de map over HTTP geserveerd moet worden
+  (`python3 -m http.server`).
+
+- **Knop *Profiel verwijderen* uit wanneer er niets te verwijderen valt
+  (#2662).** Met één eigen stijlprofiel naast de ingebouwde was de knop
+  klikbaar maar deed hij niets; hij gaat nu uit bij één opgeslagen profiel
+  én bij een gekozen ingebouwd profiel.
 
 - **`.ocideck`-pakketten dragen hun stijl mee (#2644, #2641–#2645).** Een
   geëxporteerd pakket bevat nu `theme.json` met het volledige stijlprofiel;

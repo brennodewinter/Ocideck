@@ -1605,6 +1605,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Diagnose': 'Diagnosticering',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck fører en log på denne computer over fejl, frysninger og opstart. Den indeholder intet indhold fra præsentationer eller dokumenter, og filnavne er gjort ukendelige. Loggen forlader aldrig denne computer af sig selv: del den kun, når du rapporterer et problem.',
+  'Logmap openen': 'Åbn logmappe',
+  'Diagnose kopiëren': 'Kopiér diagnosticering',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnosticering kopieret til udklipsholderen.',
+  'De logmap kon niet worden geopend.': 'Logmappen kunne ikke åbnes.',
   'Afsluiten duurt lang': 'Afslutningen tager lang tid',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Et oprydningstrin reagerer langsomt. Dit gemte arbejde er allerede sikkert; at afslutte nu springer de resterende trin over.',
