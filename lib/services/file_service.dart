@@ -798,11 +798,11 @@ class FileService {
     // gebruiker ziet een lege presentatie.
 
     // The file carries only content; apply the active style profile on open.
-    // Eén uitzondering: een `theme.json` naast de `.md` — de vorm waarin een
-    // `.ocideck`-pakket de stijl van de maker meestuurt (#2644). Dat profiel
-    // hoort bij díe presentatie; het actieve profiel van de ontvanger blijft
-    // wat hij is. Alleen bij lezen van schijf: meegeleverde bytes hebben geen
-    // map om zo'n broertje in te vinden.
+    // One exception: a `theme.json` beside the `.md` — the form in which an
+    // `.ocideck` package ships its author's style (#2644). That profile
+    // belongs to *that* presentation; the recipient's active profile stays
+    // untouched. Only when reading from disk: carried-in bytes have no
+    // directory where such a sibling could live.
     var theme = activeProfileFor(projectPath: parsed.projectPath);
     var carriesPackagedProfile = false;
     if (content == null && parsed.projectPath != null) {

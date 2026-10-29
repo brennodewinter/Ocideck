@@ -505,9 +505,9 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Security gate: every file that enters the app (open, recent, drag-drop,
     // URL/package import) is scanned before it is parsed. A presentation is
     // data only — if the file carries anything executable we refuse it and
-    // raise the alarm. De scan zit ín [openDeckDetailed], op exact de bytes
-    // die er geparseerd worden (fail-closed TOCTOU); de bevindingen reizen
-    // mee in het resultaat, dus dit pad leest en scant maar één keer (#2634).
+    // raise the alarm. The scan lives inside [openDeckDetailed], on the exact
+    // bytes being parsed (fail-closed TOCTOU); the findings ride along in the
+    // result, so this path reads and scans only once (#2634).
     final outcome = await _file.openDeckDetailed(path);
     if (outcome.failure == OpenFailure.unsafe) {
       if (mounted) {
