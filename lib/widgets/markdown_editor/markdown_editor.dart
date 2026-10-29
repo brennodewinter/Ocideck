@@ -233,6 +233,10 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   bool _syncingMarkdown = false;
   String _markdownSnapshot = '';
   bool _quillSyncScheduled = false;
+
+  /// Echte documentwijziging die nog niet naar de bron is geschreven.
+  /// Een cursorbeweging zet hem niet: de heen-en-terugweg is niet verliesvrij,
+  /// en een klik zou anders het hele document herschrijven.
   bool _quillContentSyncPending = false;
   Timer? _flushTimer;
 
@@ -240,15 +244,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// uitzag. Zie [_onQuillChanged]: een melding waarbij dit gelijk blijft is
   /// een cursorbeweging, geen bewerking.
   Delta? _lastQuillDelta;
-
-  /// Of de gebruiker in de visuele stand echt iets heeft gewijzigd.
-  ///
-  /// De heen-en-terugweg door de rijke-tekstlaag is niet verliesvrij: een
-  /// markdowntabel komt er als losse woorden uit en `\*` verliest zijn
-  /// backslash. Zonder deze vlag schreef alleen al het aanzetten en weer
-  /// uitzetten van de visuele stand die schade terug in de tekst. Wie niets
-  /// wijzigt, houdt nu letterlijk wat er stond.
-  bool _visualEdited = false;
 
   NotesEditorMode get _requestedMode => widget.mode ?? _mode;
 
@@ -512,7 +507,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     };
     _markdownSnapshot = widget.controller.text;
     _lastQuillDelta = _quillController!.document.toDelta();
-    _visualEdited = false;
     _quillController!.addListener(_onQuillChanged);
   }
 
@@ -574,7 +568,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       ChangeSource.local,
     );
     _lastQuillDelta = quill.document.toDelta();
-    _visualEdited = false;
     _syncingMarkdown = false;
   }
 
@@ -608,7 +601,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     final delta = quill.document.toDelta();
     if (delta != _lastQuillDelta) {
       _lastQuillDelta = delta;
-      _visualEdited = true;
       _quillContentSyncPending = true;
       // Vuil meteen, omzetting pas na een korte rust. Tien aanslagen delen
       // zo één gang door het document (#2621).
