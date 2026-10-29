@@ -403,10 +403,15 @@ String _odtStyles(ThemeProfile t) {
   final tableHeader = '#${hexRgbTriplet(t.tableHeaderBackgroundColor)}';
   final tableHeaderText = '#${hexRgbTriplet(t.tableHeaderTextColor)}';
   final tableText = '#${hexRgbTriplet(t.tableTextColor)}';
+  // De bodymaat van het profiel, absoluut in punten (#2649): ODF rekent een
+  // percentage uit tegen de applicatie-default (doorgaans 12 pt), niet tegen
+  // wat de huisstijl bedoelde. Koppen en vooropgemaakte tekst blijven
+  // percentages — die volgen de body vanzelf mee.
+  final bodyPt = _odtPt(clampDocumentBodyFontSize(t.documentBodyFontSize));
   return '''
 <style:default-style style:family="paragraph">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%" fo:text-align="start" style:justify-single-word="false"/>
-  <style:text-properties $bodyFont fo:font-size="100%" fo:color="$text" style:font-name-asian="Noto Sans CJK SC"/>
+  <style:text-properties $bodyFont fo:font-size="${bodyPt}pt" fo:color="$text" style:font-name-asian="Noto Sans CJK SC"/>
 </style:default-style>
 <style:style style:name="Standard" style:family="paragraph" style:class="text">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%"/>
@@ -495,6 +500,10 @@ String _odtStyles(ThemeProfile t) {
 </style:style>
 ''';
 }
+
+/// Punten in de vorm die ODF verwacht: `11` en `10.5`, nooit `11.0`.
+String _odtPt(double pt) =>
+    pt == pt.roundToDouble() ? pt.toInt().toString() : pt.toString();
 
 /// Voor tests: de ODT-bytes bouwen met vaste parameters.
 @visibleForTesting

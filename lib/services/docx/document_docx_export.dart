@@ -593,22 +593,28 @@ String _buildStylesXml(ThemeProfile theme) {
   // papier hetzelfde blad toont als het scherm.
   final heading = hexRgbTriplet(theme.effectiveDocumentHeadingColor);
   final subheading = hexRgbTriplet(theme.effectiveDocumentSubheadingColor);
+  // De bodymaat van het profiel, in de halve punten die OOXML rekent (#2649).
+  // Koppen en bron-tekst schalen mee via documentFontScale — hun maten waren
+  // veelvouden van de 11-pt-body, dus die verhouding blijft staan.
+  final bodySz = (clampDocumentBodyFontSize(theme.documentBodyFontSize) * 2)
+      .round();
+  final scale = theme.documentFontScale;
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
       '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
       '<w:docDefaults><w:rPrDefault><w:rPr>'
       '$bodyFont'
       '<w:color w:val="${hexRgbTriplet(theme.textColor)}"/>'
-      '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+      '<w:sz w:val="$bodySz"/></w:rPr></w:rPrDefault>'
       '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
       '</w:docDefaults>'
       '<w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
       '<w:name w:val="Normal"/><w:qFormat/></w:style>'
-      '${_headingStyle(1, 32, 240, heading, headingRFonts)}'
-      '${_headingStyle(2, 26, 240, subheading, headingRFonts)}'
-      '${_headingStyle(3, 22, 200, subheading, headingRFonts)}'
-      '${_headingStyle(4, 20, 200, subheading, headingRFonts)}'
-      '${_headingStyle(5, 18, 160, subheading, headingRFonts)}'
-      '${_headingStyle(6, 16, 160, subheading, headingRFonts)}'
+      '${_headingStyle(1, (32 * scale).round(), 240, heading, headingRFonts)}'
+      '${_headingStyle(2, (26 * scale).round(), 240, subheading, headingRFonts)}'
+      '${_headingStyle(3, (22 * scale).round(), 200, subheading, headingRFonts)}'
+      '${_headingStyle(4, (20 * scale).round(), 200, subheading, headingRFonts)}'
+      '${_headingStyle(5, (18 * scale).round(), 160, subheading, headingRFonts)}'
+      '${_headingStyle(6, (16 * scale).round(), 160, subheading, headingRFonts)}'
       '<w:style w:type="character" w:styleId="SourceText">'
       '<w:name w:val="Source Text"/><w:rPr>'
       '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
@@ -617,7 +623,7 @@ String _buildStylesXml(ThemeProfile theme) {
       '<w:name w:val="Preformatted Text"/><w:pPr>'
       '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
       '</w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
-      '<w:sz w:val="20"/></w:rPr></w:style>'
+      '<w:sz w:val="${(20 * scale).round()}"/></w:rPr></w:style>'
       // `w:spacing` vóór `w:ind`: CT_PPrBase schrijft die volgorde voor.
       '<w:style w:type="paragraph" w:styleId="Quote">'
       '<w:name w:val="Quote"/><w:pPr>'
