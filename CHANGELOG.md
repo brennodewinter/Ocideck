@@ -22,6 +22,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Eén exemplaar op Linux + herstel per sessie (#2656).** Linux kreeg de
+  Windows-behandeling: een tweede start stuurt zijn bestandspaden via een
+  Unix-socket in `$XDG_RUNTIME_DIR` naar het draaiende exemplaar en stopt,
+  in plaats van een tweede venster met gedeelde herstel- en
+  voorkeursbestanden te openen. Daarnaast stempelt elke sessie zijn
+  herstelbestanden met een eigen sessielock; `loadAll` slaat momentopnames
+  van een nog-levende eigenaar over, zodat een tweede exemplaar nooit
+  "herstelpunten" van het eerste toont — en veegt locks van gestorven
+  eigenaren mee weg.
+
 - **Webbundel vanaf `file://` toont uitleg in plaats van een dood scherm
   (#2661).** `index.html` rechtstreeks in de browser openen gaf een console
   vol CORS- en service-worker-fouten — de browser weigert wasm en modules

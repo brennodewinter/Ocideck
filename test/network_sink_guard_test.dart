@@ -467,6 +467,13 @@ void main() {
         // verzoek met alleen de valutacode uit. Op web zijn de browser (CORS)
         // en de pagina-CSP (`connect-src https:`) de gate.
         'lib/services/exchange_rate_service.dart',
+        // Enkel-exemplaar-doorgifte op Linux (#2656): `Socket.connect(` op een
+        // AF_UNIX-adres (`InternetAddressType.unix`) — lokaal IPC naar een
+        // bestand onder $XDG_RUNTIME_DIR, de tegenhanger van de Windows-mutex.
+        // Er is letterlijk geen IP-adres om naar uit te gaan: NetGuard's
+        // host-controle heeft hier niets om aan vast te pinnen, en de
+        // platformpoort in `main()` houdt de socket bovendien binnen Linux.
+        'lib/services/single_instance.dart',
       },
       guidance:
           'New network egress primitive (package:http, dio, or a raw socket). '

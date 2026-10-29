@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter/services.dart';
 import '../utils/log.dart';
+import 'single_instance.dart';
 
 /// Method channel gedeeld met de macOS-host: Finder-"Open met" binnenkomend, en
 /// de filterloze bestandskiezer uitgaand. Zie `macos/Runner/AppDelegate.swift`.
@@ -120,6 +122,14 @@ class OpenFileChannel {
 
   Future<void> start() async {
     // kIsWeb eerst: Platform.isMacOS is op web een dart:io-stub die gooit.
+    // Linux: geen hostkanaal maar de enkel-exemplaar-socket uit main() (#2656)
+    // — dezelfde onOpenFiles-route als WM_COPYDATA op Windows.
+    if (!kIsWeb && Platform.isLinux) {
+      activeSingleInstance?.onFiles = (paths) {
+        unawaited(onOpenFiles(paths));
+      };
+      return;
+    }
     // macOS: Finder-open-events; Windows: WM_COPYDATA van een tweede starter.
     if (kIsWeb || !(Platform.isMacOS || Platform.isWindows)) return;
     await activate();
