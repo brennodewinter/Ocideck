@@ -147,14 +147,14 @@ void main() {
     // Houd dezelfde cache-entry live tot ná het eerstvolgende frame. Dat is
     // precies de garantie die precacheImage aan de rasterizer geeft; de
     // expliciete listener maakt het moment van vrijgeven ook op Windows
-    // deterministisch voor deze toets.
+    // deterministisch voor deze toets. Sinds #2624 sleutelt de provider op
+    // het lexicale pad (de realpath-containment zit in de byte-lezing), dus
+    // hier warmen met precies dat pad.
     late ImageStream stream;
     late ImageStreamListener listener;
     await tester.runAsync(() async {
       final done = Completer<void>();
-      stream = cappedFileImage(
-        File(File(path).resolveSymbolicLinksSync()),
-      ).resolve(ImageConfiguration.empty);
+      stream = cappedFileImage(File(path)).resolve(ImageConfiguration.empty);
       listener = ImageStreamListener(
         (_, _) {
           if (!done.isCompleted) done.complete();
