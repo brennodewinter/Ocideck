@@ -234,11 +234,11 @@ Widget _resolvedImage(
 }
 
 /// Afbeelding van een gecontroleerd lokaal pad. Cap de decode zodat een
-/// enorm (mogelijk onbetrouwbaar) beeld het geheugen niet leegtrekt; zie
-/// cappedFileImage / kMaxImageDecodeDimension. De slidestrook zet
-/// daarbovenop een veel lagere grens via de scope — daar is een thumbnail
-/// van ~180 px breed, en op ware grootte kost één telefoonfoto bijna
-/// 49 MiB (#612).
+/// enorm (mogelijk onbetrouwbaar) beeld het geheugen niet leegtrekt. De
+/// strook houdt 512 px (#612). Andere oppervlakken ronden het vak af op
+/// 1024, 2048 of 4096, en een GIF die in die trede past blijft animeren
+/// (#2625). Een telefoonfoto op bronresolutie kost anders tientallen MiB
+/// per oppervlak.
 ///
 /// De version-teller forceert een cache-miss nadat een afbeelding op schijf
 /// is herschreven (bv. na rotatie in de crop-dialoog) — zonder dit blijft de
@@ -252,24 +252,27 @@ Widget _localFileImage(
   required Widget Function(Widget child) styled,
   required Widget Function(ImagePlaceholderReason reason) failed,
 }) {
-  final maxEdge = SlideLinkScope.decodeMaxEdgeOf(context);
   final version = imageVersionOf(resolved);
-  return styled(
-    RetryingImage(
-      image: maxEdge == null
-          ? cappedFileImage(File(resolved), version: version)
-          : boundedFileImage(File(resolved), maxEdge, version: version),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      semanticLabel: semanticLabel,
-      // Keep showing the previous frame while the next image decodes. Without
-      // this the widget paints nothing for a frame on a source change, which
-      // shows up as a black flash between slides — fatal when recording video.
-      gaplessPlayback: true,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+  return ResolvedDecodeImage(
+    explicitEdge: SlideLinkScope.decodeMaxEdgeOf(context),
+    imageFor: (plan) => plan.hardResize
+        ? boundedFileImage(File(resolved), plan.edge, version: version)
+        : cappedFileImage(File(resolved), version: version, maxEdge: plan.edge),
+    child: (image) => styled(
+      RetryingImage(
+        image: image,
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        semanticLabel: semanticLabel,
+        // Keep showing the previous frame while the next image decodes. Without
+        // this the widget paints nothing for a frame on a source change, which
+        // shows up as a black flash between slides — fatal when recording video.
+        gaplessPlayback: true,
+        errorBuilder: (context, error, stackTrace) =>
+            failed(ImagePlaceholderReason.missing),
+      ),
     ),
   );
 }
@@ -289,17 +292,21 @@ Widget? _memoryImage(
   if (!WebAssetStore.isMemPath(imagePath)) return null;
   final memBytes = WebAssetStore.bytesFor(imagePath);
   if (memBytes == null) return failed(ImagePlaceholderReason.memoryGone);
-  return styled(
-    Image(
-      image: cappedMemoryImage(memBytes),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+  return ResolvedDecodeImage(
+    explicitEdge: SlideLinkScope.decodeMaxEdgeOf(context),
+    imageFor: (plan) => cappedMemoryImage(memBytes, maxEdge: plan.edge),
+    child: (image) => styled(
+      Image(
+        image: image,
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        semanticLabel: semanticLabel,
+        errorBuilder: (context, error, stackTrace) =>
+            failed(ImagePlaceholderReason.missing),
+      ),
     ),
   );
 }

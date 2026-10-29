@@ -269,9 +269,9 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Bovengrens voor de decodeerresolutie van dia-afbeeldingen, in pixels op de
   /// langste zijde. Null = de gewone cap.
   ///
-  /// Alleen de slidestrook zet dit (#612). Preview, presentatiemodus en de
-  /// rasteraar tekenen op ware grootte en houden dus null: daar is de
-  /// resolutie het product.
+  /// De strook zet 512 (#612). Null: het vak kiest 1024, 2048 of 4096.
+  /// De rasteraar zet 2048, want de uitvoer is 1920 px. Een GIF die in de
+  /// trede past blijft animeren.
   final int? decodeMaxEdge;
 
   /// 1-gebaseerd slidenummer en totaal, voor footer-paginanummers en de
