@@ -103,6 +103,7 @@ same answer `make licenses` and the SBOM give.
 | `clock` | Injectable clock for time-dependent capture pacing — production behaves identically to `DateTime.now()` | Apache-2.0 |
 | `nativeapi` | Screen geometry and window control (replaces screen_retriever + window_manager) | MIT |
 | `shared_preferences` | Settings storage | BSD-3-Clause |
+| `shared_preferences_platform_interface` | Store registration for the atomic settings backend (atomic writes and corruption recovery) | BSD-3-Clause |
 | `flutter_secure_storage` | The WebDAV/Nextcloud password in the OS keychain | BSD-3-Clause |
 | `pasteboard` | Paste images from the clipboard | Apache-2.0 |
 | `pdf` | PDF export | Apache-2.0 |

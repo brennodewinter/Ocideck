@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.3+45",
-  "documentNamespace": "https://ocideck.app/spdx/8c20f76f-408f-5f1f-8a36-21dc0c5f1aad",
+  "documentNamespace": "https://ocideck.app/spdx/c9127fac-5c62-5a80-8804-219d231426d3",
   "creationInfo": {
-    "created": "2026-10-28T17:25:21.505946Z",
+    "created": "2026-10-29T09:22:24.129193Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -5037,7 +5037,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d98eccee97b86b09f9a8bc34510fa9b33972b34115a0183d3a2ba715c42d2020"
+          "checksumValue": "f967db974fbb36a62018c805c52954d27a0d35e42892e86d7b19749c1bc9f28a"
         }
       ],
       "sourceInfo": "Vendored from https://github.com/TarekkMA/markdown_quill/tree/49641654bd584c6f0fc398c2c91383cf13a3424b at commit 49641654bd584c6f0fc398c2c91383cf13a3424b.",
@@ -5354,6 +5354,11 @@
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-152-shared-preferences"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-156-shared-preferences-platform-interface"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
