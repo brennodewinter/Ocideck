@@ -256,10 +256,7 @@ void main() {
     );
     addTearDown(sub.close);
 
-    final deckNotifier = container
-        .read(tabsProvider)
-        .current!
-        .deckNotifier;
+    final deckNotifier = container.read(tabsProvider).current!.deckNotifier;
     deckNotifier.loadDeck(
       Deck(
         title: 'Deck',

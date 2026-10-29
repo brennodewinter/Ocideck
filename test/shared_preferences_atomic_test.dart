@@ -56,20 +56,20 @@ void main() {
     expect(all, isNot(contains('other.c')));
   });
 
-  test('setValue schrijft de hele map atomair (geen prefix aan de sleutel)',
-      () async {
-    final store = AtomicFilePreferencesStore(file: file);
-    expect(await store.setValue('int', 'flutter.n', 7), isTrue);
-    expect(await store.setValue('bool', 'flutter.b', false), isTrue);
-    final written = jsonDecode(await file.readAsString()) as Map;
-    expect(written['flutter.n'], 7);
-    expect(written['flutter.b'], false);
-  });
+  test(
+    'setValue schrijft de hele map atomair (geen prefix aan de sleutel)',
+    () async {
+      final store = AtomicFilePreferencesStore(file: file);
+      expect(await store.setValue('int', 'flutter.n', 7), isTrue);
+      expect(await store.setValue('bool', 'flutter.b', false), isTrue);
+      final written = jsonDecode(await file.readAsString()) as Map;
+      expect(written['flutter.n'], 7);
+      expect(written['flutter.b'], false);
+    },
+  );
 
   test('remove en clear schrappen alleen flutter-sleutels', () async {
-    await file.writeAsString(
-      jsonEncode({'flutter.a': 1, 'other.keep': 2}),
-    );
+    await file.writeAsString(jsonEncode({'flutter.a': 1, 'other.keep': 2}));
     final store = AtomicFilePreferencesStore(file: file);
     await store.remove('flutter.a');
     expect(await store.getAll(), isEmpty);

@@ -10,6 +10,51 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **`.ocideck`-pakketten dragen hun stijl mee (#2644, #2641–#2645).** Een
+  geëxporteerd pakket bevat nu `theme.json` met het volledige stijlprofiel;
+  wie het pakket opent krijgt de stijl van de maker terug in plaats van zijn
+  eigen standaard. Logo's die dezelfde bestandsnaam dragen botsen niet meer
+  onderling, `logoDarkPath` materialiseert ook als het alleen als bestand
+  bestond, en het documentlogo reist door zowel het project- als het
+  pakketpad. Op web kun je bovendien zelf een logo kiezen, bekijken,
+  vervangen en verwijderen — de keuze landt als `mem:`-asset, want een
+  bestandspad bestaat daar niet. Zie `docs/FILE_FORMAT.md` voor het lid.
+
+- **Instellingen → Annuleren schrijft niets meer weg (#2648).** De
+  stijlprofielen en de documentopmaak-sectie bewerken nu een kopie; pas
+  Opslaan committeert. Tot nu toe leefden die twee secties direct op de
+  provider, zodat Annuleren de aangebrachte wijzigingen alsnog bewaarde.
+
+- **Vloeiender op grotere decks en bij het starten (#2619–#2634).** Een
+  reeks kleine vaste oorzaken: gezichtsdetectie, documentexport
+  (PDF/DOCX/ODT/EPUB) en de koude kwaliteits- en privacyscan draaien niet
+  meer op de UI-isolate; afbeeldingen decoderen naar de weergavegrootte in
+  plaats van de volle resolutie; de symlink-controle zit niet meer in elke
+  opbouw; openen scant de privacy-inhoud eenmaal in plaats van driemaal;
+  Quill→Markdown-conversie en de tab-/miniatuurverversing lopen niet meer
+  per toetsaanslag; de doorspeelvoortgang herbouwt alleen de balk; en de
+  startup doet geen zwaar synchroon werk meer vóór het eerste frame.
+
+- **Instellingenbestand overleeft een corrupte schrijf (#2628).** De
+  eigen backend op Windows en Linux schrijft voortaan atomair en herstelt
+  bij een beschadigd bestand vanuit de bewaarde kopie, in plaats van stil
+  alle voorkeuren terug te zetten.
+
+- **Windows: één exemplaar en meegeleverde VC++-runtime (#2627, #2630).**
+  Een tweede `ocideck.exe`-aanroep — bijvoorbeeld dubbelklik op een `.md` —
+  geeft het bestand door aan het al draaiende venster in plaats van een
+  tweede app te starten. En de Windows-distributie levert de Microsoft
+  Visual C++ runtime voortaan app-lokaal mee, zodat een machine zonder
+  geïnstalleerde redistributable OciDeck toch start. Beide wijzigingen
+  zijn op macOS ontwikkeld en statisch bewezen; ze zijn **niet** op echte
+  Windows-hardware beproefd — zie `docs/KNOWN_LIMITATIONS.md`.
+
+- **Prestatiepoorten voor de toekomst (#2636).** De fixes hierboven staan
+  nu onder bewaking: schaaltoetsen voor de Markdown-conversie en het
+  toetsaanslagpad, een `*Sync`-verbod in de UI-laag, en tellingen op de
+  privacy- en split-run-memo's. De Windows-opstartmeting is een
+  bewust uitgesteld vervolg (#2657).
+
 - **Gebruikershandleiding brak halverwege af op de forge (#2612).** Een
   plaatshouder `<title>` in lopende tekst las Forgejo als echte HTML-tag,
   waardoor alles erna als titeltekst wegviel: in USER_GUIDE ruim 1.400 regels,

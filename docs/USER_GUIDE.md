@@ -3531,7 +3531,10 @@ Export to:
   is one it can reopen: if the assets together would push it past the 512 MB the
   importer accepts, the export stops with a message before it fills memory
   (*added 2026-08-01*). Use fewer or smaller images, videos or audio files if you
-  hit it.
+  hit it. **The style travels with it** (*added 2026-10-29, #2644*): the package
+  carries the active style profile as `theme.json`, plus the logo files it
+  references — so the recipient opens the deck in the house style you sent, not
+  in their own defaults.
 
 **Password-protecting a package (optional).** When you export a package, a dialog
 lets you switch on **AES-256 encryption** and set a password. Encryption is off by
@@ -6823,8 +6826,10 @@ find it.
   logo travels inside the file**, and so does a custom brand strip, so the profile
   arrives complete; local paths are deliberately left out. Built-in logos stay a
   reference. On the
-  web build a restored custom logo lives only until you reload the page (there is
-  no persistent file storage in the browser) — everything else in the profile
+  web build you can pick, view, replace and remove a custom logo as well — it is
+  kept in browser memory as a `mem:` asset, so like a restored logo it lives
+  only until you reload the page (there is no persistent file storage in the
+  browser) — everything else in the profile
   keeps working. Anything that isn't a valid profile file is refused with an
   explanation.
 - **App appearance** (a dark interface, the accent and panel colours, and the
