@@ -24,6 +24,7 @@ void main() {
     file.writeAsStringSync('''
 set -euo pipefail
 TAG=v9.9.9
+NEW_VERSION=9.9.9
 ${names.map(function).join('\n')}
 die() { printf 'STOP: %s\n' "\$1" >&2; exit 42; }
 log() { :; }
@@ -92,6 +93,45 @@ printf 'READY\n'
     );
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
     expect(result.stdout, contains('READY'));
+  }, skip: skipOnWindows);
+
+  test('hervatten tagt de nieuwe main na test- en catalogusreparatie', () {
+    final result = run(
+      r'''
+git() {
+  case "$*" in
+    'ls-remote origin refs/heads/main') printf '%s\n' 'new refs/heads/main' ;;
+    'merge-base --is-ancestor old new') return 0 ;;
+    'diff --name-only old new') printf '%s\n' 'test/form_maker_check_dialog_test.dart' 'scripts/release_auto.sh' 'assets/cwe/cwe_full.json' 'lib/services/reference_standards.dart' 'CONTRIBUTORS.md' ;;
+    'show new:pubspec.yaml') printf '%s\n' 'version: 9.9.9+45' ;;
+    *) return 1 ;;
+  esac
+}
+resume_tag_target old
+''',
+      ['resume_tag_target'],
+    );
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+    expect(result.stdout.trim(), 'new');
+  }, skip: skipOnWindows);
+
+  test('hervatten weigert nieuwe productcode sinds de release-merge', () {
+    final result = run(
+      r'''
+git() {
+  case "$*" in
+    'ls-remote origin refs/heads/main') printf '%s\n' 'new refs/heads/main' ;;
+    'merge-base --is-ancestor old new') return 0 ;;
+    'diff --name-only old new') printf '%s\n' 'lib/main.dart' ;;
+    *) return 1 ;;
+  esac
+}
+resume_tag_target old
+''',
+      ['resume_tag_target'],
+    );
+    expect(result.exitCode, 42);
+    expect(result.stderr, contains('een nieuwe release-PR is nodig'));
   }, skip: skipOnWindows);
 
   test('rode losse tagpoort verhindert fase 3', () {
