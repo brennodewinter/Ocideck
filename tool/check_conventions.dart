@@ -427,7 +427,8 @@ const Map<String, int> classSizeBaseline = {
       // −54: versiecheck-kaart is een eigen ConsumerWidget (_UpdateCheckCard)
       // en _aboutHeading/_aboutCard/_aboutLink staan top-level — gedrag uit de
       // klasse gehaald in plaats van het plafond op te rekken.
-      6287,
+      6242, // #2640: logokiezer en profielboekhouding naar top-level;
+  // 25 regels lucht boven de telling na die verhuizing.
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
