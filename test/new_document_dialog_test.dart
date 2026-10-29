@@ -7,6 +7,8 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/library_folder.dart';
 import 'package:ocideck/widgets/dialogs/new_document_dialog.dart';
 
+import 'support/pump_until.dart';
+
 /// De aanmaakdialoog voor een nieuw document (#2177): naam + mapkeuze, het
 /// volledige doelpad als live preview, "Nog niet opslaan" als klad-optie, en
 /// de naamconflict-waarschuwing.
@@ -225,12 +227,18 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextFormField), 'bestaand');
+    // De "bestaat al"-controle is een async schijfprobe (#2636); pumpUntil
+    // geeft de echte event-loop de ruimte tot de uitkomst de validator haalt.
+    await pumpUntil(
+      tester,
+      () => find
+          .text('Er bestaat al een bestand met deze naam in deze map.')
+          .evaluate()
+          .isNotEmpty,
+      reason: 'de bestaat-al-melding verscheen niet na de probe',
+    );
     await tester.tap(find.text('Aanmaken'));
     await tester.pumpAndSettle();
-    expect(
-      find.text('Er bestaat al een bestand met deze naam in deze map.'),
-      findsOneWidget,
-    );
     expect(popped, isFalse);
     // En het bestaande bestand is ongemoeid.
     expect(
@@ -238,9 +246,17 @@ void main() {
       'houd mij',
     );
 
-    // Een vrije naam gaat wél door.
+    // Een vrije naam gaat wél door: de probe maakt _takenPath leeg en de
+    // revalidatie wist de melding.
     await tester.enterText(find.byType(TextFormField), 'nieuw');
-    await tester.pumpAndSettle();
+    await pumpUntil(
+      tester,
+      () => find
+          .text('Er bestaat al een bestand met deze naam in deze map.')
+          .evaluate()
+          .isEmpty,
+      reason: 'de bestaat-al-melding verdween niet bij een vrije naam',
+    );
     await tester.tap(find.text('Aanmaken'));
     await tester.pumpAndSettle();
     expect(popped, isTrue);

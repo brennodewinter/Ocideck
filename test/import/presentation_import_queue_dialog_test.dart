@@ -103,6 +103,11 @@ void main() {
                   files: queue,
                   fileService: fileService,
                   initialDirectory: withTarget ? target.path : null,
+                  // De doelmap is elke keer een verse temp-dir — "niets staat
+                  // er al" is wat de schijfprobe óók zou zeggen, maar dan
+                  // synchroon, want echte dart:io-futures lopen onder deze
+                  // klok niet af (#2636 maakte de probe async).
+                  pathExists: (_) => false,
                 );
               },
               child: const Text('open'),
@@ -235,6 +240,7 @@ void main() {
                   files: items(['een']),
                   fileService: fileService,
                   initialDirectory: target.path,
+                  pathExists: (_) => false,
                 );
               },
               child: const Text('open'),
@@ -291,6 +297,7 @@ void main() {
         (bytes: pptxFixture(titel: 'twee'), name: 'twee.pptx'),
       ],
       targetDirectoryOverride: target.path,
+      pathExists: (_) => false,
     );
     await tester.pumpAndSettle();
     expect(find.text('Presentaties importeren'), findsOneWidget);

@@ -115,11 +115,20 @@ Future<List<SlideQualityIssue>> computeThemeLogoIssues(Ref ref) async {
   if (path == null || path.isEmpty) return const [];
 
   final assetKeys = isBundledAssetPath(path) ? await _bundledAssetKeys() : null;
+  // De schijfprobe loopt async; [themeLogoIssueFor] is bewust puur-synchroon
+  // en toetsbaar, dus de uitkomst voor een gewoon bestandspad wordt hier
+  // voorgerekend. De controle in de functie vraagt de probe alleen in deze
+  // tak, dus het predicaat hoeft het pad zelf niet meer te kennen (#2636).
+  final resolvedLogo =
+      kIsWeb || isBundledAssetPath(path) || WebAssetStore.isMemPath(path)
+      ? null
+      : resolveTrustedAssetPath(path, deck.projectPath);
+  final logoExists = resolvedLogo != null && await File(resolvedLogo).exists();
   final issue = themeLogoIssueFor(
     theme: theme,
     projectPath: deck.projectPath,
     bundledAssetExists: assetKeys?.contains ?? (_) => false,
-    fileExists: (resolved) => File(resolved).existsSync(),
+    fileExists: (_) => logoExists,
   );
   final darkIssue = themeLogoDarkIssueFor(theme);
   return [?issue, ?darkIssue];

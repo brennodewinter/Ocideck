@@ -269,7 +269,9 @@ class SlideQualityAnalyzer {
         SchedulerBinding? binding;
         try {
           binding = SchedulerBinding.instance;
-        } catch (_) {}
+        } on Object {
+          binding = null;
+        }
         if (binding != null) {
           await binding.scheduleTask<void>(() {}, Priority.idle);
         }
