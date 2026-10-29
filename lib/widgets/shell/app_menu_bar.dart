@@ -59,7 +59,7 @@ class AppMenuActions {
 /// heeft, precies zoals de sneltoetsen. Ze staan er omdat ze in het
 /// standaard-Xib-menu stonden dat deze balk vervangt — een menubalk toevoegen
 /// mag geen tekstbewerking wegnemen.
-class AppPlatformMenuBar extends StatelessWidget {
+class AppPlatformMenuBar extends StatefulWidget {
   final AppMenuActions actions;
 
   /// De handelingen van de werkruimte, of `null` zolang er geen presentatie
@@ -76,12 +76,52 @@ class AppPlatformMenuBar extends StatelessWidget {
   });
 
   @override
+  State<AppPlatformMenuBar> createState() => _AppPlatformMenuBarState();
+}
+
+class _AppPlatformMenuBarState extends State<AppPlatformMenuBar> {
+  List<PlatformMenuItem>? _menus;
+  Object? _signature;
+
+  @override
   Widget build(BuildContext context) {
-    if (defaultTargetPlatform != TargetPlatform.macOS || kIsWeb) return child;
-    return PlatformMenuBar(
-      menus: buildAppMenus(context.l10n, actions, deckActions),
-      child: child,
+    if (defaultTargetPlatform != TargetPlatform.macOS || kIsWeb) {
+      return widget.child;
+    }
+    final l10n = context.l10n;
+    // Alleen opnieuw bouwen — en dus serialiseren naar het platformkanaal —
+    // wanneer iets verandert dat het menu anders maakt (#2623): de taal, welke
+    // items een handler dragen, de en/disabled-vlaggen én de deck-callbacks
+    // zelf. Die laatsten zijn per tabblad ander werk (de werkruimte publiceert
+    // ze per tab), dus hun identiteit moet meewegen — anders zou "Opslaan"
+    // na een tabwissel nog het vorige tabblad bedienen. De stabiele
+    // app-handelingen (actions) sluiten om de langlevende shell-State en mogen
+    // verouderd zijn: de oude closure doet nog steeds hetzelfde.
+    final deck = widget.deckActions;
+    final signature = (
+      l10n.locale,
+      widget.actions.find == null,
+      widget.actions.findReplace == null,
+      deck == null,
+      deck?.save,
+      deck?.export,
+      deck?.present,
+      deck?.fullDeckPreview,
+      deck?.properties,
+      deck?.find,
+      deck?.findReplace,
+      deck?.commandPalette,
+      deck?.undo,
+      deck?.redo,
+      deck?.canUndo,
+      deck?.canRedo,
+      deck?.canExport,
     );
+    if (signature != _signature) {
+      _signature = signature;
+      _menus = buildAppMenus(l10n, widget.actions, widget.deckActions);
+    }
+    return PlatformMenuBar(menus: _menus!, child: widget.child);
   }
 }
 

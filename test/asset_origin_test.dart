@@ -144,6 +144,29 @@ void main() {
       expect(deckCarriesMemoryAssets(deck), isTrue);
     });
 
+    test(
+      'ook donker logo, documentlogo en merkstrook maken het deck vluchtig (#2640)',
+      () {
+        final fields = <ThemeProfile Function(String)>[
+          (m) => const ThemeProfile().copyWith(logoDarkPath: m),
+          (m) => const ThemeProfile().copyWith(documentLogoPath: m),
+          (m) => const ThemeProfile().copyWith(brandStripPath: m),
+        ];
+        for (var i = 0; i < fields.length; i++) {
+          final mem = WebAssetStore.put(
+            Uint8List.fromList([100 + i]),
+            name: 'veld$i.png',
+          );
+          final deck = deckWith(
+            Slide.create(SlideType.title),
+            theme: fields[i](mem),
+          );
+          expect(deckCarriesMemoryAssets(deck), isTrue);
+          expect(deckMemoryAssetPaths(deck), contains(mem));
+        }
+      },
+    );
+
     test('een mem:-afbeelding in de vrije tekst telt net zo goed mee', () {
       final mem = WebAssetStore.put(Uint8List(4), name: 'foto.png');
       final deck = deckWith(

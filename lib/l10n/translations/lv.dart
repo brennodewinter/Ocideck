@@ -1611,6 +1611,20 @@ const _dutchSourceAddLv = <String, String>{
   'Diagnose gekopieerd naar het klembord.':
       'Diagnostika nokopēta starpliktuvē.',
   'De logmap kon niet worden geopend.': 'Žurnāla mapi neizdevās atvērt.',
+  'Afsluiten duurt lang': 'Aizvēršana ilgst ilgi',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Tīrīšanas solis reaģē lēni. Jūsu saglabātais darbs jau ir drošs; aizvēršana tagad izlaiž atlikušos soļus.',
+  'Wachten': 'Gaidi',
+  'Toch afsluiten': 'Tomēr aizvērt',
+  'Gekozen afbeelding': 'Izvēlētais attēls',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Šis logotips dzīvo šajā pārlūka sesijā un pēc pārlādēšanas pazūd. Eksportē kā pakotni, lai to paņemtu līdzi.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Jūsu iestatījumi bija bojāti un tie atjaunoti.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Jūsu iestatījumi bija bojāti un tie atjaunoti; kopija atrodas {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotips nav attēls vai ir lielāks par 8 MB. Izvēlieties mazāku PNG, JPEG, GIF vai WebP.',
   'Bezig met installeren': 'Instalē',
   'Gevonden op schijf: {pad}': 'Atrasts diskā: {pad}',
   'Van schijf installeren': 'Instalēt no diska',

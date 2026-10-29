@@ -98,7 +98,7 @@ class _DocumentStyleBuilder {
 
   void _rebuild(VoidCallback fn) => owner._rebuild(fn);
   void _selectProfile(String name) => owner._selectProfile(name);
-  Future<void> _createProfile() => owner._createProfile();
+  void _createProfile() => owner._createProfile();
   Future<String?> _pickHexColor(String value) => owner._pickHexColor(value);
   Widget _sectionTitle(String title) => owner._sectionTitle(title);
   Widget _fontSection() => owner._fontSection();
@@ -488,7 +488,7 @@ class _DocumentStyleBuilder {
         contentPadding: EdgeInsets.zero,
         dense: true,
       ),
-      if (!shared && supportsLocalProjectFolders) ...[
+      if (!shared) ...[
         Row(
           children: [
             Container(
@@ -512,14 +512,14 @@ class _DocumentStyleBuilder {
             Expanded(
               child: owner._pathBox(
                 _themeProfile.documentLogoPath?.isNotEmpty == true
-                    ? _themeProfile.documentLogoPath!
+                    ? owner._profileImageLabel(_themeProfile.documentLogoPath!)
                     : l10n.d('Geen logo ingesteld'),
                 muted: _themeProfile.documentLogoPath?.isNotEmpty != true,
               ),
             ),
             const SizedBox(width: 8),
             ElevatedButton.icon(
-              onPressed: _pickDocumentLogo,
+              onPressed: () => _pickDocumentLogo(owner),
               icon: const Icon(Icons.image_outlined, size: 16),
               label: Text(l10n.d('Kiezen')),
             ),
@@ -677,21 +677,6 @@ class _DocumentStyleBuilder {
       controlAffinity: ListTileControlAffinity.leading,
     ),
   ];
-
-  Future<void> _pickDocumentLogo() async {
-    if (!supportsLocalProjectFolders) return;
-    final file = await FilePicker.pickFile(
-      dialogTitle: context.l10n.d('Logo kiezen'),
-      type: FileType.image,
-    );
-    if (!mounted) return;
-    final path = file?.path;
-    if (path == null) return;
-    _rebuild(() {
-      _themeProfile = _themeProfile.copyWith(documentLogoPath: path);
-      _profileTouched = true;
-    });
-  }
 
   /// Het presentatievlak: wat alleen een dia heeft — de titel- en sectiebalk,
   /// het dialogo, de footer, de slotdia en de animatieduur.

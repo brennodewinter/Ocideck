@@ -819,6 +819,20 @@ const _dutchSourceAddEn = {
   'Diagnose gekopieerd naar het klembord.':
       'Diagnostics copied to the clipboard.',
   'De logmap kon niet worden geopend.': 'The log folder could not be opened.',
+  'Afsluiten duurt lang': 'Quitting is taking a while',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'A cleanup step is slow to respond. Your saved work is already safe; quitting now skips the remaining steps.',
+  'Wachten': 'Wait',
+  'Toch afsluiten': 'Quit anyway',
+  'Gekozen afbeelding': 'Chosen image',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'This logo lives in this browser session and disappears on reload. Export as a package to keep it.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Your settings were corrupted and have been reset.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Your settings were corrupted and have been reset; a copy is in {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'The logo is not an image, or it is larger than 8 MB. Choose a smaller PNG, JPEG, GIF or WebP.',
   'Bezig met installeren': 'Installing',
   'Gevonden op schijf: {pad}': 'Found on disk: {pad}',
   'Van schijf installeren': 'Install from disk',

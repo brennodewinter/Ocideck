@@ -604,6 +604,12 @@ Future<DocumentExportOutcome> writeDocumentExport(
   String? outputPath,
   String? sourcePath,
   String? webFileName,
+  // De documentexportdialoog meldt hier zijn Annuleren. Getoetst vlak voor
+  // het wegschrijven: een lopende bouw in een isolate kun je niet
+  // coöperatief afbreken (ponytail: ceiling is doormeten-tot-klaar; upgrade
+  // path is een eigen isolate met kill()), maar de schrijfactie is de ene
+  // stap die echt onomkeerbaar is — die laten we bij annuleren vallen.
+  bool Function()? isCancelled,
 }) async {
   if (!deliversByDownload) {
     if (outputPath == null) return const DocumentExportCancelled();
@@ -649,6 +655,10 @@ Future<DocumentExportOutcome> writeDocumentExport(
     sourcePath: sourcePath,
     outputPath: deliversByDownload ? null : outputPath,
   );
+  // De bouw is klaar; schrijven is de ene stap die nog iets verandert in de
+  // wereld. Heeft de gebruiker ondertussen geannuleerd, dan gaan de bytes
+  // weg — er is niets weggeschreven om half achter te laten.
+  if (isCancelled?.call() == true) return const DocumentExportCancelled();
   if (deliversByDownload) {
     // Web: geen bestandssysteem — de bytes vertrekken als browserdownload.
     // `null` betekent dat de browser hem niet aannam; de schil zegt dat dan

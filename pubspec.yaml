@@ -131,6 +131,7 @@ dependencies:
       path: packages/network_guard
   timezone: ^0.11.1
   logger: ^2.8.0
+  shared_preferences_platform_interface: ^2.4.2
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.
 # De README waarschuwt: "even a module is excluded, its dart code is still

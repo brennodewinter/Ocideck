@@ -65,6 +65,7 @@ Future<void> importPresentation(
   PickedPresentation? fileOverride,
   List<PickedPresentation>? filesOverride,
   String? targetDirectoryOverride,
+  PathExistsProbe? pathExists,
 }) async {
   final proceed = await showPresentationImportWarning(context);
   if (!proceed || !context.mounted) return;
@@ -83,7 +84,13 @@ Future<void> importPresentation(
   if (picked == null || picked.isEmpty || !context.mounted) return;
 
   if (picked.length > 1) {
-    await _importQueue(context, ref, picked, targetDirectoryOverride);
+    await _importQueue(
+      context,
+      ref,
+      picked,
+      targetDirectoryOverride,
+      pathExists,
+    );
     return;
   }
   final chosen = picked.first;
@@ -534,6 +541,7 @@ Future<void> _importQueue(
   WidgetRef ref,
   List<PickedPresentation> picked,
   String? targetDirectoryOverride,
+  PathExistsProbe? pathExists,
 ) async {
   final l10n = context.l10n;
   final messenger = ScaffoldMessenger.of(context);
@@ -546,6 +554,7 @@ Future<void> _importQueue(
     fileService: ref.read(fileServiceProvider),
     initialDirectory:
         targetDirectoryOverride ?? ref.read(settingsProvider).homeDirectory,
+    pathExists: pathExists,
   );
   if (summary == null || summary.outcomes.isEmpty) return;
   messenger.showSnackBar(

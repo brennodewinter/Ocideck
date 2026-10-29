@@ -309,6 +309,23 @@ where, and what each claim's evidence is — lives in
 [TRANSCRIPTION_SETUP.md](TRANSCRIPTION_SETUP.md). *(Added 2026-10-26,
 #2523.)*
 
+## The Windows single-instance and runtime packaging are not hardware-proven
+
+Two #2627/#2630 changes reach Windows code that the development machines
+cannot exercise: the named-mutex single-instance check with `WM_COPYDATA`
+argument forwarding (a second `ocideck.exe report.md` hands the file to the
+running window instead of opening a second app), and the app-local Microsoft
+Visual C++ runtime DLLs (`msvcp140.dll`, `vcruntime140.dll`,
+`vcruntime140_1.dll`) that CMake now installs beside the executable for both
+the ZIP and the Inno installer. Both were written against the documented
+Win32 contracts and reviewed statically; the release smoke test verifies the
+runtime files land in the installed payload. What no machine here could do is
+prove the runtime behaviour on real Windows hardware — treat both as untested
+until a Windows run says otherwise, in line with the call and transcription
+entries above. The time-to-first-frame ceiling for Windows is likewise open
+(#2657): no milestone logging or baseline figure exists yet. *(Added
+2026-10-29.)*
+
 ## Browse… shows what the system file dialog shows
 
 Open → Browse… hands the choice to the operating system's own file dialog.

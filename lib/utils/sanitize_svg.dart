@@ -11,21 +11,50 @@ import 'log.dart';
 /// eerste de beste sequentiediagram half zou renderen zonder foutmelding. Wat
 /// hier wegvalt, viel bij de renderer óók al weg.
 String? sanitizeMermaidSvg(String svg) {
+  return _sanitizeSvg(svg, 'sanitizeMermaidSvg');
+}
+
+/// Maximum stored size for a custom bullet SVG. Bullet artwork is deliberately
+/// small; bounding it also keeps imported style profiles from turning into an
+/// unbounded XML parsing input.
+const int kMaxCustomBulletSvgChars = 256 * 1024;
+
+/// Sanitise user-supplied SVG artwork used as a bullet marker.
+///
+/// The result is safe for both `flutter_svg` and the inline data URI used by
+/// HTML export. External/data URLs, event handlers, scripts, animation and
+/// unsupported elements are removed by the same allow-list as Mermaid output.
+String? sanitizeCustomBulletSvg(String svg) {
+  if (svg.length > kMaxCustomBulletSvgChars) {
+    logWarning('sanitizeCustomBulletSvg: SVG exceeds the size limit');
+    return null;
+  }
+  return _sanitizeSvg(svg, 'sanitizeCustomBulletSvg', allowExternalUrls: false);
+}
+
+String? _sanitizeSvg(
+  String svg,
+  String logName, {
+  bool allowExternalUrls = true,
+}) {
   if (svg.trim().isEmpty || !svg.contains('<svg')) return null;
 
   final XmlDocument document;
   try {
     document = XmlDocument.parse(svg);
   } catch (e) {
-    logWarning('sanitizeMermaidSvg: SVG parse failed', e);
+    logWarning('$logName: SVG parse failed', e);
     return null;
   }
 
   final root = document.rootElement;
   if (root.name.local != 'svg') return null;
+  if (root.getAttribute('xmlns') == null) {
+    root.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  }
 
   final dropped = _Dropped();
-  _keepOnlyAllowed(root, dropped);
+  _keepOnlyAllowed(root, dropped, allowExternalUrls: allowExternalUrls);
   if (!dropped.isEmpty) {
     // Geweigerd, niet stil verdwenen. Een allow-list die zwijgt is niet te
     // onderhouden: gaat Mermaid ooit iets uitsturen dat hier niet in staat, dan
@@ -38,12 +67,14 @@ String? sanitizeMermaidSvg(String svg) {
     // het diagram zelf; het logbestand hoeft er niet nog een kopie van te
     // dragen.
     logWarning(
-      'sanitizeMermaidSvg: dropped ${dropped.elements} element(s) and '
+      '$logName: dropped ${dropped.elements} element(s) and '
       '${dropped.attributes} attribute(s) the renderer does not read',
     );
   }
 
-  return document.toXmlString(pretty: false);
+  // Serialize the SVG root only. Processing instructions and doctypes outside
+  // it are not drawing content and may carry stylesheet or entity URLs.
+  return root.toXmlString(pretty: false);
 }
 
 /// De elementen die `flutter_svg` werkelijk tekent.
@@ -115,7 +146,11 @@ class _Dropped {
   bool get isEmpty => elements == 0 && attributes == 0;
 }
 
-void _keepOnlyAllowed(XmlElement element, _Dropped dropped) {
+void _keepOnlyAllowed(
+  XmlElement element,
+  _Dropped dropped, {
+  required bool allowExternalUrls,
+}) {
   for (final child in element.childElements.toList()) {
     if (!_allowedElements.contains(child.name.local)) {
       // Met subboom en al, net als de renderer: een `<foreignObject>` waarvan
@@ -125,10 +160,14 @@ void _keepOnlyAllowed(XmlElement element, _Dropped dropped) {
       child.remove();
       continue;
     }
-    _keepOnlyAllowed(child, dropped);
+    _keepOnlyAllowed(child, dropped, allowExternalUrls: allowExternalUrls);
     if (_isEmptyDefs(child)) child.remove();
   }
-  _keepOnlyAllowedAttributes(element, dropped);
+  _keepOnlyAllowedAttributes(
+    element,
+    dropped,
+    allowExternalUrls: allowExternalUrls,
+  );
 }
 
 /// Een `<defs>` waar na het opschonen niets meer in zit.
@@ -151,7 +190,11 @@ bool _isEmptyDefs(XmlElement element) =>
       (node) => node is XmlText && node.value.trim().isEmpty,
     );
 
-void _keepOnlyAllowedAttributes(XmlElement element, _Dropped dropped) {
+void _keepOnlyAllowedAttributes(
+  XmlElement element,
+  _Dropped dropped, {
+  required bool allowExternalUrls,
+}) {
   for (final attr in element.attributes.toList()) {
     if (_isNamespaceDeclaration(attr)) continue;
     if (!_allowedAttributes.contains(attr.name.local)) {
@@ -162,7 +205,11 @@ void _keepOnlyAllowedAttributes(XmlElement element, _Dropped dropped) {
     // Tweede slot op de toegelaten waarden. De allow-list zegt welke attributen
     // gelezen worden, niet wat erin staat, en `href` en `style` dragen allebei
     // iets wat op een URL lijkt.
-    if (_hasUnsafeUrl(attr.value.trim())) {
+    final value = attr.value.trim();
+    if (_hasUnsafeUrl(value) ||
+        (!allowExternalUrls &&
+            ((attr.name.local == 'href' && !value.startsWith('#')) ||
+                _hasExternalUrlReference(value)))) {
       dropped.attributes++;
       element.attributes.remove(attr);
       continue;
@@ -173,6 +220,14 @@ void _keepOnlyAllowedAttributes(XmlElement element, _Dropped dropped) {
       if (cleaned != attr.value) attr.value = cleaned;
     }
   }
+}
+
+bool _hasExternalUrlReference(String value) {
+  final references = RegExp(
+    r'''url\(\s*['"]?([^'")\s]+)''',
+    caseSensitive: false,
+  ).allMatches(value);
+  return references.any((match) => !match.group(1)!.startsWith('#'));
 }
 
 /// Houdt alleen de `prop:waarde`-delen van een `style` over.

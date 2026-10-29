@@ -3,6 +3,25 @@
 // nullable-string-persist eronder; alle imports leven in het hoofdbestand.
 part of '../settings_provider.dart';
 
+/// Vervangt de stijlprofielen in één keer — de landing van het
+/// instellingenvenster bij Opslaan. Aanmaken en verwijderen blijven tot dan
+/// in de werkkopie van de dialoog.
+Future<void> replaceThemeProfiles(
+  SettingsNotifier notifier,
+  List<ThemeProfile> profiles, {
+  required String selectedName,
+}) async {
+  if (profiles.isEmpty) return;
+  final selected = profiles.any((profile) => profile.name == selectedName)
+      ? selectedName
+      : profiles.first.name;
+  notifier.currentState = notifier.currentState.copyWith(
+    themeProfiles: profiles,
+    selectedThemeProfileName: selected,
+  );
+  await notifier.persistThemeProfiles();
+}
+
 /// Voeg een profiel toe zonder de app-brede selectie te veranderen.
 Future<ThemeProfile> addThemeProfileWithoutSelection(
   SettingsNotifier notifier,

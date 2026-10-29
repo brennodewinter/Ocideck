@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import '../models/slide.dart';
 import '../models/slide_format.dart';
-import '../utils/lru_cache.dart';
+import 'identity_slot_memo.dart';
 import 'markdown_body_blocks.dart' as md_body;
 import 'text_measurement.dart';
 
@@ -23,20 +23,23 @@ export 'finding_header_metrics.dart'
 /// several TextPainter layouts (a few milliseconds) on every rebuild, and
 /// editing one slide rebuilds every visible thumbnail in the rail even though
 /// their slides never changed — same object identity. The key is
-/// (slide, font, width, availW, availH); a changed slide is a new object (never
-/// a stale hit) and a resize misses on the geometry. Capped with FIFO eviction
-/// so a long session can't grow it without bound (mirrors the image
-/// average-colour cache).
+/// (font, width, availW, availH); a changed slide is a new object (never a
+/// stale hit) and a resize misses on the geometry.
 ///
 /// A given slide is rendered by exactly one preview type, so each key always
 /// maps to the same value type — the `as T` cast on a hit is sound.
 ///
-/// LRU rather than insertion-order eviction so the on-screen working set (the
-/// thumbnails the user is actually looking at, re-read every frame) stays warm
-/// even once a long session has cycled more than the cache's capacity of
-/// distinct slide/geometry combinations through it.
-final LruCache<(Slide, String, double, double, double), Object>
-_renderLayoutCache = LruCache(512);
+/// Per dia, niet een globale LRU. Een plafond van 512 over het hele deck viel
+/// om zodra strook, preview, raster en presentator dezelfde dia's op meer
+/// breedtes lazen dan het plafond groot was: elke toetsaanslag miste dan alles
+/// (#2622). Zes sleutels per dia dekken die oppervlakken; de dia zelf begrenst
+/// hoe lang de memo leeft.
+const int _kRenderLayoutSlots = 6;
+
+final IdentitySlotMemo<Slide, Object> _renderLayoutCache = IdentitySlotMemo(
+  _kRenderLayoutSlots,
+  'renderLayout',
+);
 
 T memoizedRenderLayout<T extends Object>({
   required Slide slide,
@@ -46,11 +49,11 @@ T memoizedRenderLayout<T extends Object>({
   required double availH,
   required T Function() compute,
 }) {
-  final key = (slide, font, width, availW, availH);
-  final cached = _renderLayoutCache[key];
+  final key = (font, width, availW, availH);
+  final cached = _renderLayoutCache.read(slide, key);
   if (cached != null) return cached as T;
   final value = compute();
-  _renderLayoutCache[key] = value;
+  _renderLayoutCache.write(slide, key, value);
   return value;
 }
 

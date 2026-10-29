@@ -14,6 +14,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
@@ -95,9 +96,12 @@ final imagePrivacyIssuesProvider = FutureProvider<List<SlideQualityIssue>>(
 /// (HEIC, te groot) is óók stabiel per bestand en mag dus mee de cache in.
 ///
 /// LRU en begrensd zoals de tekst- en layoutmemo: een lange sessie met veel
-/// beeld houdt anders elk tussenresultaat vast.
+/// beeld houdt anders elk tussenresultaat vast. De grens is ruim — een
+/// gememoiseerde waarde is een int en een bool; een deck met honderden
+/// afbeeldingen mag de oudste inzendingen niet uit de cache duwen en daarmee
+/// elke deckwijziging weer echte stat- en scanwerk terugbrengen.
 final LruCache<(String, int, int), ImageFaceScanResult> _faceScanCache =
-    LruCache(256);
+    LruCache(8192);
 
 /// Leegt de beeldscan-memo. Alleen voor tests; in de app begrenst de LRU hem.
 void clearImageFaceScanMemo() => _faceScanCache.clear();
@@ -151,6 +155,18 @@ Future<ImageFaceScanResult?> _memoizedFaceScan(
 
 /// Top-level, zodat `AppShell` dezelfde berekening per tab kan overriden — zie
 /// `provider_scope_test.dart`.
+/// De voortgang van de beeldcontrole: hoeveel van de te scannen afbeeldingen
+/// al langs de detector zijn geweest, of `null` als er geen scan loopt.
+///
+/// De scan is achtergrondwerk dat voor de gebruiker onzichtbaar is — en dat
+/// bleek de echte pijn: met een deck vol foto's loopt de eerste scan minuten,
+/// en het paneel met uitgevoerde controles toonde die controle gewoon als
+/// "gedaan". De export-gate, die wél op de uitslag wacht, keek daarnaar alsof
+/// er niets liep. Dit providerpaar maakt "bezig" zichtbaar.
+final imageFaceScanProgressProvider = StateProvider<({int done, int total})?>(
+  (ref) => null,
+);
+
 Future<List<SlideQualityIssue>> computeImagePrivacyRawIssues(Ref ref) async {
   final enabled = ref.watch(
     settingsProvider.select(
@@ -167,9 +183,21 @@ Future<List<SlideQualityIssue>> computeImagePrivacyRawIssues(Ref ref) async {
   );
   if (!enabled) return const [];
 
-  final deck = ref.watch(deckProvider.select((s) => s.deck));
-  if (deck == null) return const [];
+  // Niet het deck zelf volgen maar een sleutel over het beeld-materiaal:
+  // `ref.watch(deckProvider)` herlevert deze functie bij élke toetsaanslag,
+  // en zonder stabiele sleutel kostte elke titelwijziging een nieuwe
+  // scanronde over álle afbeeldingen — inclusief File.stat per plaatje.
+  // Verandert de sleutel niet (alleen tekst getypt), dan blijft de provider
+  // gewoon liggen waar hij was.
+  final imageSetKey = ref.watch(
+    deckProvider.select((s) => _imageSetKey(s.deck)),
+  );
+  if (imageSetKey == null) return const [];
 
+  // De sleutel garandeert dat de beeldvelden gelijk zijn gebleven; het deck
+  // zelf kan een nieuwer exemplaar zijn (een titel wijzigde intussen) —
+  // `_imagesOf` geeft daarop dezelfde lijst terug.
+  final deck = ref.read(deckProvider).deck!;
   final images = _imagesOf(deck);
   if (images.isEmpty) return const [];
 
@@ -179,32 +207,46 @@ Future<List<SlideQualityIssue>> computeImagePrivacyRawIssues(Ref ref) async {
   // zodat een lege uitslag niet als "niets gevonden" leest.
   if (!scanner.isSupported) return const [];
 
+  final StateController<({int done, int total})?> progress = ref.read(
+    imageFaceScanProgressProvider.notifier,
+  );
+  progress.state = (done: 0, total: images.length);
   final service = ref.read(imageServiceProvider);
   final issues = <SlideQualityIssue>[];
-  for (final image in images) {
-    // Bewust serieel. Parallel decoderen van twintig foto's tegelijk piekt het
-    // geheugen van een presentatietool zonder dat iemand op de uitslag wacht:
-    // dit is een achtergrondcontrole, geen renderpad. De memo vangt de
-    // herhaling die deze provider bij élke toetsaanslag zou aanrichten.
-    final result = await _memoizedFaceScan(
-      scanner,
-      service,
-      image.path,
-      projectPath: deck.projectPath,
-    );
-    if (result == null) continue;
-    if (!result.readable) {
-      // Niet kunnen kijken is iets anders dan niets vinden. HEIC is het
-      // praktijkgeval: OpenCV leest het niet, en iPhone-foto's zijn standaard
-      // HEIC. Zonder deze melding zou een deck vol iPhone-portretten
-      // rapporteren dat er geen gezichten op staan.
-      issues.add(_unreadableIssueFor(image));
-      continue;
+  try {
+    var done = 0;
+    for (final image in images) {
+      // Gestopt of vervangen (provider ontdaan, container weg): dan is een
+      // halfresultaat beter dan doormeeten — de nieuwe berekening loopt zelf
+      // verder. `ref.mounted` is de enige eerlijke "ben ik nog relevant".
+      if (!ref.mounted) return issues;
+      // Bewust serieel. Parallel decoderen van twintig foto's tegelijk piekt
+      // het geheugen van een presentatietool zonder dat iemand op de uitslag
+      // wacht: dit is een achtergrondcontrole, geen renderpad.
+      final result = await _memoizedFaceScan(
+        scanner,
+        service,
+        image.path,
+        projectPath: deck.projectPath,
+      );
+      done++;
+      progress.state = (done: done, total: images.length);
+      if (result == null) continue;
+      if (!result.readable) {
+        // Niet kunnen kijken is iets anders dan niets vinden. HEIC is het
+        // praktijkgeval: OpenCV leest het niet, en iPhone-foto's zijn standaard
+        // HEIC. Zonder deze melding zou een deck vol iPhone-portretten
+        // rapporteren dat er geen gezichten op staan.
+        issues.add(_unreadableIssueFor(image));
+        continue;
+      }
+      if (result.faces <= 0) continue;
+      issues.add(_issueFor(image, result.faces));
     }
-    if (result.faces <= 0) continue;
-    issues.add(_issueFor(image, result.faces));
+    return issues;
+  } finally {
+    if (ref.mounted) progress.state = null;
   }
-  return issues;
 }
 
 /// Idem top-level voor de tab-scope. Leidt af uit [imagePrivacyRawIssuesProvider]
@@ -224,6 +266,29 @@ Future<List<SlideQualityIssue>> computeImagePrivacyIssues(Ref ref) async {
 }
 
 typedef _SlideImage = ({int slideIndex, String field, String path});
+
+/// De sleutel waar [computeImagePrivacyRawIssues] op her-evalueert: alles wat
+/// de scanlijst en de resolutie bepaalt, als één string. Verandert alleen de
+/// tekst van een dia, dan blijft deze sleutel gelijk en start er geen nieuwe
+/// scanronde — ook al emiteert `deckProvider` een nieuw deck.
+///
+/// In de sleutel: het projectpad (resolutie hangt eraan), en per getoonde
+/// afbeelding dia-index + veld + pad. `skipped` zit er impliciet in via de
+/// aanwezigheid van de inzending.
+String? _imageSetKey(Deck? deck) {
+  if (deck == null) return null;
+  final key = StringBuffer(deck.projectPath ?? '');
+  for (final image in _imagesOf(deck)) {
+    key
+      ..write('\u0000')
+      ..write(image.slideIndex)
+      ..write(':')
+      ..write(image.field)
+      ..write(':')
+      ..write(image.path);
+  }
+  return key.toString();
+}
 
 /// Elke afbeelding die werkelijk getoond wordt. Overgeslagen slides tellen niet
 /// mee — die worden ook niet geëxporteerd.

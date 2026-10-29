@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/utils/visual_markdown_flush.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
@@ -48,22 +49,24 @@ void main() {
     tester,
   ) async {
     final notifier = await pumpLargeDocument(tester);
-    final before = tester.widget<MarkdownNotesEditor>(
-      find.byType(MarkdownNotesEditor),
-    );
+    final before = tester.state(find.byType(MarkdownNotesEditor));
     final quill = tester
         .widget<WysiwygNotesField>(find.byType(WysiwygNotesField))
         .controller;
 
     quill.replaceText(0, 0, 'x', const TextSelection.collapsed(offset: 1));
     await tester.pump();
+    // De Quill→Markdown-terugschrijf is vertraagd (#2621): laat de rustpauze
+    // aflopen zodat de bron de aanslag bevat.
+    await tester.pump(const Duration(milliseconds: 400));
 
-    expect(notifier.currentState.document!.body, startsWith('xVoorwoord.'));
     expect(
-      tester.widget<MarkdownNotesEditor>(find.byType(MarkdownNotesEditor)),
+      tester.state(find.byType(MarkdownNotesEditor)),
       same(before),
-      reason: 'de providerupdate mag het hele schrijfvlak niet herbouwen',
+      reason: 'een aanslag mag het schrijfvlak niet meteen herbouwen',
     );
+    await tester.pump(kVisualMarkdownFlushDelay);
+    expect(notifier.currentState.document!.body, startsWith('xVoorwoord.'));
   });
 
   testWidgets('macOS-compositie schrijft één aanslag precies één keer', (
@@ -83,6 +86,7 @@ void main() {
     raw.updateEditingValue(composing);
     raw.updateEditingValue(composing.copyWith(composing: TextRange.empty));
     await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     expect(notifier.currentState.document!.body, startsWith('xVoorwoord.'));
     expect(notifier.currentState.document!.body, isNot(startsWith('xx')));
@@ -106,6 +110,7 @@ void main() {
       ),
     );
     await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     expect(tester.takeException(), isNull);
     expect(quill.document.toPlainText(), endsWith('x\n'));
@@ -130,6 +135,7 @@ void main() {
       ),
     );
     await tester.pump();
+    await tester.pump(kVisualMarkdownFlushDelay);
 
     expect(tester.takeException(), isNull);
     expect(notifier.currentState.document!.body, 'Kort');

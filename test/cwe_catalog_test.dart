@@ -129,6 +129,46 @@ void main() {
       expect(sql.recommendation.trim(), isNotEmpty);
     });
 
+    test('an asset alias is searchable after loading', () async {
+      // CWE 5.0 moved "('Race Condition')" out of CWE-362's name into its
+      // Alternate Terms; a tester still types the old name.
+      await catalog.ensureLoaded(
+        bundle: _FakeBundle(
+          jsonEncode([
+            {
+              'id': 362,
+              'name': 'Concurrent Execution using Shared Resource',
+              'description': 'd',
+              'aliases': ['Race Condition'],
+            },
+          ]),
+        ),
+      );
+      expect(catalog.search('race condition').map((e) => e.id), [362]);
+    });
+
+    test('the curated floor matches the committed MITRE asset', () {
+      // The floor wins over the asset per id, so a stale floor name hides the
+      // current MITRE one. CWE 5.0 renamed ten floor entries and deprecated
+      // CWE-613; this is what catches that at the next bump.
+      final raw = File('assets/cwe/cwe_full.json').readAsStringSync();
+      final asset = {
+        for (final m in cweEntriesFromAsset(jsonDecode(raw)))
+          (m['id'] as num).toInt(): m,
+      };
+      for (final floor in catalog.entries) {
+        final m = asset[floor.id];
+        expect(m, isNotNull, reason: 'CWE-${floor.id} not in the asset');
+        expect(floor.name, m!['name'], reason: 'CWE-${floor.id} name');
+        expect(
+          floor.aliases,
+          (m['aliases'] as List?) ?? const [],
+          reason: 'CWE-${floor.id} aliases',
+        );
+        expect(floor.name, isNot(startsWith('DEPRECATED')));
+      }
+    });
+
     test('the committed offline asset carries MITRE\'s attribution', () {
       // 969 MITRE names and descriptions used to ship as a bare JSON array:
       // nothing in the file said whose content it was, while MITRE's Terms of

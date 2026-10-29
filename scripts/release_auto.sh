@@ -2479,6 +2479,33 @@ assert_release_merge_tree() { # assert_release_merge_tree MERGE_SHA
   log "Merge-tree is bytegelijk aan de gekeurde release-head (${merge_tree:0:12})."
 }
 
+# Een reparatie van tests, releasepoort of verouderde CWE-referentiedata mag na
+# de release-PR landen; productcode vereist een nieuwe release-PR.
+# Tag dan de opnieuw gekeurde main, nooit stilzwijgend de oude release-merge.
+resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
+  local release="$1" current changed file version
+  current="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
+    || die "origin/main niet leesbaar vóór het hervatten; niets getagd."
+  [ -n "$current" ] || die "origin/main is leeg vóór het hervatten; niets getagd."
+  if [ "$current" = "$release" ]; then printf '%s\n' "$release"; return 0; fi
+  git merge-base --is-ancestor "$release" "$current" \
+    || die "origin/main is geen afstammeling van de release-merge; niets getagd."
+  changed="$(git diff --name-only "$release" "$current")" \
+    || die "wijzigingen sinds de release-merge niet leesbaar; niets getagd."
+  while IFS= read -r file; do
+    [ -n "$file" ] || continue
+    case "$file" in
+      test/*|scripts/release_auto.sh|assets/cwe/cwe_full.json|lib/services/reference_standards.dart|lib/services/cwe_catalog.dart|tool/build_cwe_catalog.dart|docs/LICENSE_COMPLIANCE.md|docs/design/PENTEST_MIAUW.md|CONTRIBUTORS.md) ;;
+      *) die "na de release-merge veranderde $file; een nieuwe release-PR is nodig vóór het taggen." ;;
+    esac
+  done <<<"$changed"
+  version="$(git show "$current:pubspec.yaml" 2>/dev/null \
+    | sed -n 's/^version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')"
+  [ "$version" = "$NEW_VERSION" ] \
+    || die "origin/main draagt versie ${version:-onbekend}, niet $NEW_VERSION; niets getagd."
+  printf '%s\n' "$current"
+}
+
 # De wekelijkse Windows-suite is geen mergepoort. Vóór de onomkeerbare tag
 # maken we haar voor precies de merge-commit alsnog een releasepoort.
 assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
@@ -2816,6 +2843,7 @@ resume_release() {
     || die "kon de merge-commit voor $TAG niet bepalen."
   git fetch --quiet origin \
     || die "kon de merge-commit niet ophalen voor de treecontrole. Niets getagd."
+  MERGE_SHA="$(resume_tag_target "$MERGE_SHA")"
   assert_release_merge_tree "$MERGE_SHA"
   tag_and_push "$MERGE_SHA"
   follow_ci

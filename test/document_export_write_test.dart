@@ -1058,6 +1058,25 @@ void main() {
       });
     });
 
+    test('isCancelled ná de bouw laat de schrijfstap vallen (#2629)', () async {
+      await withBundle((bundle) async {
+        final out = p.join(temp.path, 'geannuleerd.md');
+        final outcome = await writeDocumentExport(
+          bundle,
+          DocumentExportFormat.md,
+          html: MarpHtmlService(loadAsset: _diskLoader),
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
+          outputPath: out,
+          // De dialoog zet deze vlag zodra de gebruiker tijdens de bouw op
+          // Annuleren drukt; hier staat hij meteen aan — alsof de annulering
+          // al was gebeurd voordat de bytes klaar waren.
+          isCancelled: () => true,
+        );
+        expect(outcome, isA<DocumentExportCancelled>());
+        expect(await File(out).exists(), isFalse);
+      });
+    });
+
     test('sourcePath null → geen rebasing in md-bytes', () async {
       await withBundle((bundle) async {
         final bytes = await buildDocumentExportBytes(

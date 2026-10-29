@@ -786,7 +786,7 @@ class _WelcomeScreen extends ConsumerWidget {
       result,
       reason: ref.read(openFailureProvider),
     );
-    if (result == OpenResult.unreadable && !File(path).existsSync()) {
+    if (result == OpenResult.unreadable && !await File(path).exists()) {
       // Het bestand bestaat niet meer: opruimen i.p.v. blijven aanbieden.
       await ref.read(settingsProvider.notifier).removeRecentFile(path);
     }

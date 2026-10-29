@@ -3,7 +3,6 @@ part of '../fullscreen_presenter.dart';
 
 typedef _TimedSnapshot = ({
   int index,
-  double progress,
   int countdown,
   _TimedSessionPhase phase,
   bool audienceChanged,
@@ -50,7 +49,13 @@ class _TimedPresentationSession {
   Timer? _countdownTimer;
   int countdown = 3;
   int index = 0;
-  double progress = 0;
+
+  /// Voortgang 0..1 en resterende seconden gaan bewust niet via de snapshot:
+  /// ze veranderen 20× per seconde en horen daarom in een [ValueNotifier],
+  /// zodat alleen de klokbalk herbouwt en niet de hele presentatorweergave
+  /// (#2633).
+  final progress = ValueNotifier<double>(0);
+  final secondsLeft = ValueNotifier<int>(0);
 
   Duration get elapsed => controller.elapsed;
 
@@ -66,7 +71,8 @@ class _TimedPresentationSession {
     phase = _TimedSessionPhase.ready;
     countdown = 3;
     index = 0;
-    progress = 0;
+    progress.value = 0;
+    secondsLeft.value = 0;
     _emit(audienceChanged: true);
   }
 
@@ -80,7 +86,7 @@ class _TimedPresentationSession {
     phase = _TimedSessionPhase.countdown;
     countdown = 3;
     index = 0;
-    progress = 0;
+    progress.value = 0;
     _emit(audienceChanged: true);
     _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (countdown > 1) {
@@ -106,23 +112,26 @@ class _TimedPresentationSession {
     if (phase != _TimedSessionPhase.running) return;
     if (controller.isComplete) {
       _ticker?.cancel();
-      progress = 1;
+      progress.value = 1;
+      secondsLeft.value = 0;
       phase = _TimedSessionPhase.finished;
       _emit(audienceChanged: true);
       return;
     }
-    final nextIndex = controller.currentSlideIndex;
     final durationUs = config.slideDuration.inMicroseconds;
     final spentUs = durationUs <= 0
         ? 0
         : controller.elapsed.inMicroseconds % durationUs;
-    final nextProgress = durationUs <= 0
+    progress.value = durationUs <= 0
         ? 0.0
         : (spentUs / durationUs).clamp(0.0, 1.0);
-    final changed = nextIndex != index;
+    secondsLeft.value = secondsRemaining;
+    final nextIndex = controller.currentSlideIndex;
+    // Een diawissel is een echt feit voor de presentator én de beamer; een
+    // voortgangstik is dat niet en mag de volledige herbouw overslaan (#2633).
+    if (nextIndex == index) return;
     index = nextIndex;
-    progress = nextProgress;
-    _emit(audienceChanged: changed);
+    _emit(audienceChanged: true);
   }
 
   void togglePause() {
@@ -153,7 +162,6 @@ class _TimedPresentationSession {
 
   void _emit({required bool audienceChanged}) => onChanged((
     index: index,
-    progress: progress,
     countdown: countdown,
     phase: phase,
     audienceChanged: audienceChanged,
@@ -162,6 +170,8 @@ class _TimedPresentationSession {
   void dispose() {
     _ticker?.cancel();
     _countdownTimer?.cancel();
+    progress.dispose();
+    secondsLeft.dispose();
   }
 }
 
@@ -178,7 +188,6 @@ void _applyTimedSnapshot(
   final changed = next != state._index;
   state._rebuild(() {
     state._index = next;
-    state._progress = snapshot.progress;
     if (changed) {
       state._richTextPage = 0;
       state._menuCategory = 0;
@@ -218,7 +227,6 @@ class _TimedClockBar extends StatelessWidget {
     final total = timing.durationForSlides(
       timing.requiredSlides ?? state.widget.slides.length,
     );
-    final secondsRemaining = session.secondsRemaining;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -265,38 +273,48 @@ class _TimedClockBar extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: state._metric(
-                  l10n.d('Deze slide'),
-                  '$secondsRemaining ${l10n.d('sec')}',
-                  color: secondsRemaining <= 5
-                      ? AppTheme.amber600
-                      : Colors.white,
-                  size: 28,
+          // Voortgang en resttijd tikken 20× per seconde; alleen dit blokje
+          // herbouwt mee, niet de hele presentatorweergave (#2633).
+          ValueListenableBuilder<int>(
+            valueListenable: session.secondsLeft,
+            builder: (context, left, _) => Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: state._metric(
+                        l10n.d('Deze slide'),
+                        '$left ${l10n.d('sec')}',
+                        color: left <= 5 ? AppTheme.amber600 : Colors.white,
+                        size: 28,
+                      ),
+                    ),
+                    state._metric(
+                      l10n.d('Totaal'),
+                      '${_clock(session.elapsed)} / ${_clock(total)}',
+                      color: Colors.white70,
+                      align: CrossAxisAlignment.end,
+                      size: 18,
+                    ),
+                  ],
                 ),
-              ),
-              state._metric(
-                l10n.d('Totaal'),
-                '${_clock(session.elapsed)} / ${_clock(total)}',
-                color: Colors.white70,
-                align: CrossAxisAlignment.end,
-                size: 18,
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: LinearProgressIndicator(
-              value: session.progress,
-              minHeight: 4,
-              backgroundColor: Colors.white12,
-              color: secondsRemaining <= 5
-                  ? AppTheme.amber600
-                  : PresenterPalette.laserGreen,
+                const SizedBox(height: 12),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(999),
+                  child: ValueListenableBuilder<double>(
+                    valueListenable: session.progress,
+                    builder: (context, p, _) => LinearProgressIndicator(
+                      value: p,
+                      minHeight: 4,
+                      backgroundColor: Colors.white12,
+                      color: left <= 5
+                          ? AppTheme.amber600
+                          : PresenterPalette.laserGreen,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

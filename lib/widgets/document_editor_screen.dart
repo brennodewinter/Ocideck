@@ -349,13 +349,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// het nieuwe tabblad.
   Future<void> _convertToPresentation() => _convertDocumentToPresentation(this);
 
-  /// Presenteer dit document zoals hij is — de zelfde body, pagina voor
-  /// pagina, met live bewerken op vooraf aangewezen tabellen (#2487). De
-  /// aanwijsdialoog, de tweede-scherm-grens en de afsluitkeuze-afhandeling
-  /// staan in parts/document_editor_presenter.dart — ze raken geen veld
-  /// van de State.
-  Future<void> _presentDocument() =>
-      _presentDocumentSession(context, ref, _controller.text);
+  /// Presenteer de body pagina voor pagina (#2487). De dialoog staat in de part.
+  Future<void> _presentDocument() => _presentDocumentSession(this);
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
   ///
@@ -684,6 +679,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   );
 
   void _openFind({required bool showReplace}) {
+    ref.read(documentProvider.notifier).flushPendingVisualEdit();
     // Pagina's is alleen-lezen: zoeken heeft daar geen schrijfvlak. Ga naar
     // Bron, waar de zoekbalk en de markering hun plek hebben.
     if (_viewMode == _DocViewMode.pages) {
@@ -742,8 +738,9 @@ Future<DocumentExportOutcome> _writeDocumentExport(
   WidgetRef ref,
   BuildContext context,
   PrivacyExportProfile profile,
-  DocumentExportFormat format,
-) async {
+  DocumentExportFormat format, {
+  bool Function()? isCancelled,
+}) async {
   final state = ref.read(documentProvider);
   final document = state.document;
   if (document == null) return const DocumentExportCancelled();
@@ -873,6 +870,7 @@ Future<DocumentExportOutcome> _writeDocumentExport(
     outputPath: outputPath,
     sourcePath: filePath,
     webFileName: webFileName,
+    isCancelled: isCancelled,
   );
   return delivered;
 }

@@ -186,7 +186,7 @@ const iso9001BundledEdition = '2015';
 const iso42001BundledEdition = '2023';
 
 /// De CWE-lijst die `assets/cwe/cwe_full.json` weerspiegelt.
-const cweBundledVersion = '4.20';
+const cweBundledVersion = '5.0';
 
 /// Het MIAUW-schema dat `miauw_eis_catalog.dart` weerspiegelt. De methodologie
 /// voert geen releasenummers, dus we noteren een datum — en dat is de datum die

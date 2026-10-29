@@ -32,9 +32,10 @@ ImageProvider? calloutImageProvider(String imagePath, String? projectPath) {
     final bytes = WebAssetStore.bytesFor(imagePath);
     return bytes == null ? null : cappedMemoryImage(bytes);
   }
-  final resolved = resolveContainedRealPath(imagePath, projectPath);
+  final resolved = resolveSlideAssetPath(imagePath, projectPath);
   if (resolved == null) return null;
-  return cappedFileImage(File(resolved));
+  // De symlink-containment zit in de byte-lezing van de provider (#2624).
+  return cappedFileImage(File(resolved), projectPath: projectPath);
 }
 
 /// Zoek de intrinsieke maat van [provider] op en geef hem door aan [onSize],

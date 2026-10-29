@@ -1620,6 +1620,20 @@ const _dutchSourceAddSk = <String, String>{
       'Diagnostika bola skopírovaná do schránky.',
   'De logmap kon niet worden geopend.':
       'Priečinok denníka sa nepodarilo otvoriť.',
+  'Afsluiten duurt lang': 'Ukončenie trvá dlho',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Krok upratovania reaguje pomaly. Vaša uložená práca je už v bezpečí; ukončenie teraz preskočí zostávajúce kroky.',
+  'Wachten': 'Čakať',
+  'Toch afsluiten': 'Napriek tomu ukončiť',
+  'Gekozen afbeelding': 'Vybraný obrázok',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Toto logo žije v tejto relácii prehliadača a po opätovnom načítaní zmizne. Exportujte ako balík, aby ste si ho vzali so sebou.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Vaše nastavenia boli poškodené a boli obnovené.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Vaše nastavenia boli poškodené a boli obnovené; kópia je v {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo nie je obrázok alebo je väčšie ako 8 MB. Vyberte menší PNG, JPEG, GIF alebo WebP.',
   'Bezig met installeren': 'Inštalujem',
   'Gevonden op schijf: {pad}': 'Nájdené na disku: {pad}',
   'Van schijf installeren': 'Inštalovať z disku',

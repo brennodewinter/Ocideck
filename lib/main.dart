@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:ui' show AppExitResponse;
 
 import 'package:flutter/foundation.dart';
@@ -12,9 +13,11 @@ import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
 import 'services/bundled_licenses.dart';
 import 'services/privacy/privacy_bulk_lexicon.dart';
+import 'services/shared_preferences_atomic.dart';
 import 'services/asset_staging.dart';
 import 'services/diagnostics/diagnostics.dart';
 import 'services/disk_traces.dart';
+import 'services/single_instance.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
 
@@ -27,9 +30,41 @@ void main(List<String> args) {
     WidgetsFlutterBinding.ensureInitialized();
     _installErrorHandlers();
 
+    // Op Windows/Linux schrijft shared_preferences alles in één JSON-bestand
+    // met een niet-atomare write — een afgebroken schrijfbeurt liet elke
+    // volgende start op een FormatException vallen (#2628). De atomaire
+    // variant schrijft via rename en zet een onleesbaar bestand in
+    // quarantaine in plaats van opnieuw te falen. Vóór de eerste
+    // getInstance() registreren; op macOS/web is dit een no-op.
+    registerAtomicFilePreferences();
+
     // Het beamervenster is een eigen engine met een eigen logbestand; zie
     // Diagnostics.start.
     final audience = !kIsWeb && args.isNotEmpty && args.first == 'multi_window';
+
+    // Windows/Linux: een bestandsassociatie start de app met het pad als
+    // argument. Bewaar het; de shell opent het bij de eerste frame (macOS
+    // levert open-events via het ocideck/open_file-kanaal, niet via args).
+    if (!kIsWeb && !audience) {
+      pendingLaunchFiles.addAll(args.where(looksLikeDeckLaunchArg));
+    }
+
+    // Linux enkel-exemplaar (#2656): een tweede starter stuurt zijn paden via
+    // de Unix-socket naar de primaire en stopt hier, vóór het logbestand —
+    // een doorgestuurde instantie zou met een eigen sessiemarkering en een
+    // tweede schrijver op dezelfde logbestanden de primaire vertroebelen
+    // (vals "vorige sessie niet netjes afgesloten" plus gelijktijdige
+    // rotatie). Windows doet dit natief in de runner; macOS regelt exemplaren
+    // via het besturingssysteem.
+    if (!kIsWeb && !audience && Platform.isLinux) {
+      final guard = SingleInstanceGuard();
+      if (await guard.forwardToPrimary(pendingLaunchFiles)) {
+        // De primaire opent de paden; dit proces bezit niets om op te ruimen.
+        exit(0);
+      }
+      await guard.becomePrimary();
+      activeSingleInstance = guard;
+    }
 
     // Eerst het logbestand: wat hierna misgaat — ook een start die vastloopt —
     // moet erin staan. Daarna een mijlpaal na elke stap die de start kan
@@ -54,29 +89,45 @@ void main(List<String> args) {
       return;
     }
 
-    // Windows/Linux: een bestandsassociatie start de app met het pad als
-    // argument. Bewaar het; de shell opent het bij de eerste frame (macOS
-    // levert open-events via het ocideck/open_file-kanaal, niet via args).
-    if (!kIsWeb) {
-      pendingLaunchFiles.addAll(args.where(looksLikeDeckLaunchArg));
-    }
+    // De opstartwaakhond (#2626): op Windows toont het venster pas bij het
+    // eerste frame, dus alles wat daarvoor op de UI-isolate gebeurt is
+    // onzichtbaar wachten — onmiskenbaar van een crash. Loopt het eerste
+    // frame langer dan tien seconden op zich wachten, dan blijft er ten
+    // minste een spoor van waar het stopte.
+    final startupWatchdog = Timer(const Duration(seconds: 10), () {
+      logWarning('opstart: nog geen eerste frame na 10 s');
+    });
+
+    // Het gebundelde gezondheidslexicon start meteen: laden en ontleden
+    // (deels in een eigen isolate) is de langste opstartstap, en mag daarom
+    // niet op zijn beurt wachten. De `await` komt pas vlak vóór [runApp],
+    // zodat de garantie blijft dat de privacyscan nooit zonder lexicon
+    // draait (zie de toelichting hieronder).
+    final lexiconReady = PrivacyBulkLexicon.instance.ensureLoaded();
 
     // Bepaal de stagingmap voor media vóór de eerste frame: de UI moet
     // synchroon kunnen zien of een afbeelding daar staat (zie AssetStaging).
     await AssetStaging.initialize();
     logMilestone('mediastaging');
-    // Oude sessiemappen opruimen mag de start niet ophouden — het is
-    // huishouding, geen voorwaarde om te kunnen werken.
-    unawaited(AssetStaging.pruneStale());
-    // De zandbak waarin `git` draait (lege HOME, geen hooks van de gebruiker)
-    // bleef na afloop staan met wat git er zelf in achterliet. Bij het opstarten
-    // draait er zeker geen `git` van ons; dat is het veilige moment.
-    unawaited(DiskTraces().clearGitSandbox());
-    // Op Linux worden onze mappen met de gewone umask aangemaakt en kan elke
-    // andere lokale gebruiker meelezen. `docs/PRIVACY.md` belooft dat de
-    // herstelbestanden op de accountbescherming van het OS leunen; dit maakt
-    // die belofte daar waar.
-    unawaited(DiskTraces().restrictToOwner());
+
+    await configureNativeWindow();
+    logMilestone('venster');
+
+    // Huishouding start pas ná het eerste frame — het venster is dan
+    // zichtbaar en dit werk mag de event loop nooit ononderbroken bezetten.
+    // pruneStale zelf is sinds #2626 volledig async; de git-zandbak en de
+    // rechtenbeperking zijn eveneens best-effort.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      startupWatchdog.cancel();
+      // Oude sessiemappen opruimen.
+      unawaited(AssetStaging.pruneStale());
+      // De zandbak waarin `git` draait (lege HOME, geen hooks van de
+      // gebruiker) bleef na afloop staan met wat git er zelf in achterliet.
+      unawaited(DiskTraces().clearGitSandbox());
+      // Op Linux leunt de herstelbestand-bescherming op de
+      // accountbescherming van het OS (docs/PRIVACY.md).
+      unawaited(DiskTraces().restrictToOwner());
+    });
 
     // Het gebundelde gezondheidslexicon vóór de eerste frame, en bewust met
     // `await`. De privacyscan is synchroon en memoiseert per slide; zou dit
@@ -87,11 +138,8 @@ void main(List<String> args) {
     //
     // Faalt het laden, dan draait de scanner op de ingebakken vloer verder —
     // zie PrivacyBulkLexicon.
-    await PrivacyBulkLexicon.instance.ensureLoaded();
+    await lexiconReady;
     logMilestone('privacylexicon');
-
-    await configureNativeWindow();
-    logMilestone('venster');
 
     runApp(const ProviderScope(child: OciDeckApp()));
     _watchSession();

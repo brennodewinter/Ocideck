@@ -173,7 +173,11 @@ const Map<String, int> fileSizeBaseline = {
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
   'lib/state/tabs_provider.dart':
-      1063, // +6 (#2515): pendingAudioPath-parameter door
+      1125, // +62 (sweep #2619–#2636): warm-up-haak na
+  // _placeDeckInTab, per-tab scanvoortgang en de meegeleverde
+  // privacybevindingen uit het openresultaat — de open-routes komen hier
+  // allemaal langs; gedrag zit in de part-bestanden.
+  // +6 (#2515): pendingAudioPath-parameter door
   // newDocumentFromMarkdown — de bewaarkeuze voor bestandstranscriptie
   // reist mee naar de tab en landt bij Opslaan in media/.
   // +10 (#1953): recoveryWriteErrorProvider
@@ -204,7 +208,7 @@ const Map<String, int> fileSizeBaseline = {
   // +37 (#1963): _jumpToFirstFinding — statusbalk-chip springt naar de
   // eerste slide met een openstaande bevinding. Cohesief met de export-
   // readiness-berekening die al in dit part-bestand staat.
-  'lib/widgets/app_shell_main_layout.dart': 1037,
+  'lib/widgets/app_shell_main_layout.dart': 930,
   // +27 (#1758): keep-with-next voor sub-hoofdstukken — alinea-split en
   // orland-guard in build(), de split-functie staat in document_pdf_blocks.dart.
   'lib/services/pdf/document_pdf_widgets.dart': 850,
@@ -220,7 +224,9 @@ const Map<String, int> fileSizeBaseline = {
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
   'lib/widgets/presentation/fullscreen_presenter.dart':
-      1135, // +33 (#2436): het sessietarief van het aanwezigenscherm langs
+      1165, // +6 (sweep #2633): voortgangsbalk met clock.now() in
+  // een Positioned+IgnorePointer zodat de dialaag onaangeraakt blijft.
+  // +33 (#2436): het sessietarief van het aanwezigenscherm langs
   // present → show/showDualScreen → _runDualPresenter → widget — dezelfde
   // onherleidbare plumbing als costConfig, nu voor een sessiewaarde die
   // bewust niet in de config kan omdat hij nooit bewaard mag worden.
@@ -232,7 +238,10 @@ const Map<String, int> fileSizeBaseline = {
   // bestaande signatuurketen.
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
-  'lib/services/slide_quality_analyzer.dart': 1015,
+  'lib/services/slide_quality_analyzer.dart':
+      1075, // +60 (sweep #2634/#2620/#2622): analyzeWarmed met
+  // batch-verdeling over idle-frames, per-dia Expando-memo's en de
+  // gedeelde split-run-meting — cohesief met de analyzer-staat.
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
@@ -292,7 +301,10 @@ const Map<String, int> fileSizeBaseline = {
   // Flutter de State van de vorige grafiekdia, inclusief de markering die daar
   // aan stond; de sleutel is het gedrag, er valt niets uit te halen.
   'lib/widgets/slides/slide_preview.dart':
-      1083, // +9 (#2433): het slideAspect-veld met doc + constructor-doorvoer
+      1125, // +19 (#2625): LayoutBuilder rond de build-root die de
+  // decodegrens uit de weergavemaat × DPR berekent en via
+  // SlideAspectScope doorgeeft — per-oppervlak, niet globaal.
+  // +9 (#2433): het slideAspect-veld met doc + constructor-doorvoer
   // en de SlideAspectScope-wrap om de build — de scope is hoe geneste
   // preview-parts de deckverhouding lezen; er valt niets uit te tillen. // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
   // +1 (#2159): import van RetryingImage voor media_previews_image.
@@ -301,7 +313,10 @@ const Map<String, int> fileSizeBaseline = {
   // +3: `setShowOpenPreview` — de zetter van de instelling "Voorbeeld tonen bij
   // openen". Eén zetter met zijn dartdoc; er valt niets uit te halen dat hem
   // kleiner maakt.
-  'lib/state/settings_provider.dart': 1076,
+  // +45 (sweep #2648/#2635): setThemeProfiles voor de bewerk-kopie van de
+  // instellingendialoog en de AI-statustimer-dispozeerbaarheid — setters en
+  // levenscyclus horen op deze notifier.
+  'lib/state/settings_provider.dart': 1145,
   // +31 (#1240): LibrePlan-connector — form-velden, init, dispose, save, import-
   // dialoog-import in de settings_dialog library-head.
   // +2 (#1500): twee part-declaraties erbij (tabelstijl-controls) plus de
@@ -320,10 +335,21 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#2510): import van de transcriptie-modulekaart.
   // +1 (#2618): import van Diagnostics voor de kaart Diagnose; één regel lucht
   // zodat een parallelle tak met één import niet meteen over het plafond gaat.
-  'lib/widgets/dialogs/settings_dialog.dart': 1050,
+  // +2 (#2616): de sanitize_svg-import voor de eigen-SVG-bulletkiezer en de
+  // part-directive voor settings_dialog_bullet_marker — de rij zelf staat daar
+  // als top-level hulp, niet in de klasse.
+  'lib/widgets/dialogs/settings_dialog.dart':
+      1050, // +53 (sweep #2648/#2640): bewerkkopieën voor
+  // profielen en documentopmaak (Annuleren schrijft niets weg) en de
+  // web-logokiezers via mem:-assets — de secties leven in de
+  // part-bestanden, de staat in deze klasse.
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
-      1018, // +1 (#2515): transcriptAudioPath-parameter op
+      1095, // +132 (sweep #2641–#2645/#2634): theme.json in
+  // .ocideck-pakketten, documentLogoPath-doorvoer, botsingsvrije
+  // logo-bestemmingen en privacybevindingen die met het openresultaat
+  // meereizen — allemaal in de part-bestanden van deze library.
+  // +1 (#2515): transcriptAudioPath-parameter op
   // saveDocumentWithDestination — de bewaarkeuze bereikt de
   // media-kopie in file_service_open.
   // +82 (#1859/#1863/#1864): layout-herstructurering met _buildSlideSettings,
@@ -338,6 +364,20 @@ const Map<String, int> fileSizeBaseline = {
   // plaatsingsmodus in gesture layer + instructie-overlay), hernummeren in
   // leesvolgorde (_renumberReferences), hint onder presentatiewijze.
   'lib/widgets/editors/callout_editor.dart': 1227,
+  // +63 (sweep #2640/#2648): web-logoimport via WebAssetStore plus de
+  // herstel-snackbar na corrupte instellingen (#2628) — beide aan de
+  // shell-naad, waar ze met de context werken.
+  'lib/widgets/app_shell.dart': 1090,
+  // +6 (sweep #2623): gememoiseerde miniatuur-instanties en de eenmalige
+  // scopeCia-index — precies het werk dat voorheen per toetsaanslag
+  // opnieuw liep.
+  'lib/widgets/panels/slide_list_panel.dart': 1030,
+  // +7 (sweep #2648): de documentopmaak-sectie werkt op een bewerkkopie
+  // zodat Annuleren niets wegschrijft — cohesief met de kleursectie.
+  'lib/widgets/dialogs/parts/settings_dialog_colors.dart': 1030,
+  // +2 (sweep #2621): de debounce-flush op MarkdownSourceController —
+  // één listener plus dispose-cleanup.
+  'lib/widgets/markdown_editor/markdown_editor.dart': 975,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -395,38 +435,41 @@ const Map<String, int> classSizeBaseline = {
   // modulelijst; de kaart zelf is een losse widget.
   // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
-      // +78 (#1500): de tabelstijl-controls (randstijl, zebra, celopvulling,
-      // accentlijn) en de paginamaat-/margecontrols. Ze staan in eigen parts
-      // (settings_dialog_table_style.dart, settings_dialog_general.dart), maar
-      // blijven extensies op deze klasse — een part-splitsing verkleint het
-      // bestand, niet de klasse. De laatste +10 komt van het opsplitsen van
-      // `_checklistTableColorSettings`: met de zes stijlvelden erbij liep dat
-      // ene blok over de methodelengte-grens, dus staan de tabelkleuren nu in
-      // een eigen `_tableColorSettings` — twee onderwerpen, twee methodes.
-      // +29: de sectie "Openen" op het Opslag-tabblad met de schakelaar
-      // "Voorbeeld tonen bij openen" (`_openPreviewSection`). Hij hoort bij de
-      // andere secties van dat tabblad en leest als zij; hem als enige buiten de
-      // klasse zetten zou de sectie-opbouw daar inconsistent maken voor drie
-      // regels winst.
-      // −53: het kleurvlakje van een kleurkiezer (`_colorSwatchButton`) en de
-      // lettertype-stijlhulp (`_fontStyle`) staan nu top-level. Geen van beide
-      // leest een veld van dit scherm, dus ze hoorden er ook niet in — de
-      // driedeling van de stijlbouwer (algemeen/document/presentatie) betaalde
-      // zichzelf zo terug.
-      // +26 (#1885): flexibel zoekveld (ConstrainedBox i.p.v. vaste 260 px),
-      // SegmentedButton-iconen weg op smal, _profileSelector in Wrap op smal.
-      // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
-      // +16 (#1955–#1959): instellingen-herindeling — cockpit-tab verwijderd
-      // (−3), exportkwaliteit verhuisd van Toegankelijkheid naar eigen kop
-      // (+10), classificatie-handhaving verhuisd van Algemeen naar Privacy
-      // (+3), cockpit verhuisd naar presentatie als AdvancedSection (+6).
-      // +1 (#1999): eLearning-module­kaart in settings_dialog_modules.
-      // +53 (#2394): startmappen op het Opslag-tabblad, naast de exportmap.
-      // Dezelfde sectie-opbouw als de rest van dat tabblad.
-      // −54: versiecheck-kaart is een eigen ConsumerWidget (_UpdateCheckCard)
-      // en _aboutHeading/_aboutCard/_aboutLink staan top-level — gedrag uit de
-      // klasse gehaald in plaats van het plafond op te rekken.
-      6287,
+      6265, // +62 (sweep #2648/#2640): bewerkkopieën van
+  // profielen/documentopmaak en de web-logokiezer — extensies in de
+  // part-bestanden tellen mee. De #2616-bulletmarkerrij staat top-level en
+  // telt hier niet mee.
+  // +78 (#1500): de tabelstijl-controls (randstijl, zebra, celopvulling,
+  // accentlijn) en de paginamaat-/margecontrols. Ze staan in eigen parts
+  // (settings_dialog_table_style.dart, settings_dialog_general.dart), maar
+  // blijven extensies op deze klasse — een part-splitsing verkleint het
+  // bestand, niet de klasse. De laatste +10 komt van het opsplitsen van
+  // `_checklistTableColorSettings`: met de zes stijlvelden erbij liep dat
+  // ene blok over de methodelengte-grens, dus staan de tabelkleuren nu in
+  // een eigen `_tableColorSettings` — twee onderwerpen, twee methodes.
+  // +29: de sectie "Openen" op het Opslag-tabblad met de schakelaar
+  // "Voorbeeld tonen bij openen" (`_openPreviewSection`). Hij hoort bij de
+  // andere secties van dat tabblad en leest als zij; hem als enige buiten de
+  // klasse zetten zou de sectie-opbouw daar inconsistent maken voor drie
+  // regels winst.
+  // −53: het kleurvlakje van een kleurkiezer (`_colorSwatchButton`) en de
+  // lettertype-stijlhulp (`_fontStyle`) staan nu top-level. Geen van beide
+  // leest een veld van dit scherm, dus ze hoorden er ook niet in — de
+  // driedeling van de stijlbouwer (algemeen/document/presentatie) betaalde
+  // zichzelf zo terug.
+  // +26 (#1885): flexibel zoekveld (ConstrainedBox i.p.v. vaste 260 px),
+  // SegmentedButton-iconen weg op smal, _profileSelector in Wrap op smal.
+  // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
+  // +16 (#1955–#1959): instellingen-herindeling — cockpit-tab verwijderd
+  // (−3), exportkwaliteit verhuisd van Toegankelijkheid naar eigen kop
+  // (+10), classificatie-handhaving verhuisd van Algemeen naar Privacy
+  // (+3), cockpit verhuisd naar presentatie als AdvancedSection (+6).
+  // +1 (#1999): eLearning-module­kaart in settings_dialog_modules.
+  // +53 (#2394): startmappen op het Opslag-tabblad, naast de exportmap.
+  // Dezelfde sectie-opbouw als de rest van dat tabblad.
+  // −54: versiecheck-kaart is een eigen ConsumerWidget (_UpdateCheckCard)
+  // en _aboutHeading/_aboutCard/_aboutLink staan top-level — gedrag uit de
+  // klasse gehaald in plaats van het plafond op te rekken.
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -461,7 +504,10 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3448, // +19 (#2437): de expliciete-overlay-haak in _slideCanvas, de
+      3495, // +47 (sweep #2633): de doorspeelvoortgang als
+  // ValueNotifier plus de balk in Positioned+IgnorePointer — State-velden
+  // van deze klasse, afhandeling staat in presenter_playback.
+  // +19 (#2437): de expliciete-overlay-haak in _slideCanvas, de
   // costRun-finale in _maybeShowRehearsalSummary en de reset-push in
   // _resetTimer. De overlay zelf, de beamer-push en het run-id zitten al
   // buiten de klasse (top-level helper, _sendCostTick, sessie.runId).
@@ -486,7 +532,12 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2886, // +2 (#2515): transcriptAudioPath langs
+      2865, // +114 (sweep #2641–#2645/#2634): theme.json-ronde
+  // in pakketten, logo-resolutie en scan-doorvoer — extensies in
+  // file_service_*.dart tellen mee. Ook de #2640-verhuizing van pakketstijl
+  // en logobotsing (file_service_carried_style/file_service_project) valt in
+  // die part-telling.
+  // +2 (#2515): transcriptAudioPath langs
   // saveDocumentWithDestination — de bewaarkeuze bereikt de
   // media-kopie in file_service_open.
   // +7 (#2433): de slideSize-parameter langs _buildThemeCss en de
@@ -535,7 +586,10 @@ const Map<String, int> classSizeBaseline = {
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
   'lib/state/tabs_provider.dart#TabsNotifier':
-      2286, // +2 (#2515): pendingAudioPath-doorlus in
+      2350, // +64 (sweep #2634/#2623): tabfeit-poort op
+  // emissies, warm-up na deck-plaatsing en de meegeleverde
+  // scanbevindingen — de extensies in de part-bestanden tellen mee.
+  // +2 (#2515): pendingAudioPath-doorlus in
   // newDocumentFromMarkdown — de bewaarkeuze voor bestandstranscriptie
   // reist mee naar de tab-state.
   // bedrading in constructor + recoveryWriteErrorProvider.
@@ -593,7 +647,7 @@ const Map<String, int> classSizeBaseline = {
       // anders gooit num.clamp ArgumentError onder 210 px vensterbreedte.
       // +37 (#1963): _jumpToFirstFinding — statusbalk-chip springt naar de
       // eerste slide met een openstaande bevinding in plaats van de export.
-      1486,
+      1415,
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de
@@ -601,15 +655,16 @@ const Map<String, int> classSizeBaseline = {
   // laadwerk (aiSettings + matrixAccount) ging in dezelfde wijziging naar
   // top-level helpers, wat de netto groei drukte.
   'lib/state/settings_provider.dart#SettingsNotifier':
-      // +13 (#1500): setDocumentEditorMaxWidth, setDocumentPageSize en
-      // setDocumentPageMargins — drie zetters voor de documentmodus-instellingen.
-      // +3: `setShowOpenPreview`, de zetter van "Voorbeeld tonen bij openen".
-      // Een zetter móét de state van deze notifier aanraken, dus top-level
-      // halen zou hem alleen omslachtiger maken, niet kleiner.
-      // +26 (#2394): setStartDirectory voor de document- en presentatiestartmap.
-      // De zetter schrijft de notifier-state en de prefs; buiten de klasse
-      // zetten zou `_persist` publiek maken.
-      1424,
+      1460, // +36 (sweep #2648/#2635): setThemeProfiles en de
+  // timer-levenscyclus — de zetters zijn extensies op deze klasse.
+  // +13 (#1500): setDocumentEditorMaxWidth, setDocumentPageSize en
+  // setDocumentPageMargins — drie zetters voor de documentmodus-instellingen.
+  // +3: `setShowOpenPreview`, de zetter van "Voorbeeld tonen bij openen".
+  // Een zetter móét de state van deze notifier aanraken, dus top-level
+  // halen zou hem alleen omslachtiger maken, niet kleiner.
+  // +26 (#2394): setStartDirectory voor de document- en presentatiestartmap.
+  // De zetter schrijft de notifier-state en de prefs; buiten de klasse
+  // zetten zou `_persist` publiek maken.
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen
@@ -667,7 +722,9 @@ const Map<String, int> classSizeBaseline = {
   // invalid geometry, missing anchor) met tekst-ref-telling en entry-vergelijking.
   // De klasse meet 1097.
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer':
-      1098, // +15 (#2433): de slideAspect-parameter door de metriek- en
+      1160, // +62 (sweep #2634/#2620/#2622): analyzeWarmed en de
+  // per-dia Expando-memo's — de meting staat in de part-bestanden.
+  // +15 (#2433): de slideAspect-parameter door de metriek- en
   // memo-functies — de kwaliteitsmeting moet op de deckverhouding rekenen; de
   // parameter deelt de caches per formaat. Pure plumbing, geen gedrag.
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
@@ -689,6 +746,13 @@ const Map<String, int> classSizeBaseline = {
   // inconsistent maken.
   'lib/widgets/dialogs/ociserve_courses_dialog.dart#_OciServeCoursesDialogState':
       1090,
+  // +56 (sweep #2640/#2628): de web-logoimport-helpers en de
+  // herstel-snackbar hangen aan de shell-state omdat ze context en
+  // mounted lezen; de sectie-widgets zelf staan in de part-bestanden.
+  'lib/widgets/app_shell.dart#_AppShellState': 1080,
+  // +46 (sweep #2623): de miniatuur-cachemap en de scopeCia-index zijn
+  // State-velden; de widgets die ze bouwen staan in de part-bestanden.
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1070,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');
@@ -896,6 +960,100 @@ List<String> _filePickerPathViolations() {
     }
   }
   return hits;
+}
+
+// ── Synchrone dart:io in de UI-laag ─────────────────────────────────────────
+//
+// Een `*Sync`-aanroep op een bestand blokkeert de enige isolate die beelden
+// mag tekenen. In `lib/services/` is dat een keuze — die code mag ook headless
+// draaien en kent zijn eigen afwegingen. In `lib/widgets/` en `lib/state/` is
+// het nooit goedkoop: een `readAsBytesSync` in `initState` of een `existsSync`
+// in een validator loopt op het pad dat ook de volgende toetsaanslag tekent,
+// en de stilte die het veroorzaakt voelt voor de gebruiker als een hapertje.
+// Precies zo stond er een `resolveSymbolicLinksSync` per build in de
+// beeldpijplijn (#2624) en een `existsSync` per toetsaanslag in de
+// naamvalidator van de aanmaakdialoog (#2636).
+//
+// De poort telt aanroepen, geen imports: `dart:io` mag geïmporteerd blijven,
+// de sync-methoden niet.
+
+/// De dart:io-methoden die de UI-isolate blokkeren. `writeBytesAtomicSync*`
+/// hoort er níet bij: dat zijn geen dart:io-methoden maar eigen helpers in
+/// `lib/utils/atomic_file.dart`, bewust synchroon voor aanroepers die niet
+/// kunnen wachten — hun afweging staat daar gedocumenteerd.
+final _syncIoCall = RegExp(
+  r'\.(existsSync|statSync'
+  r'|readAsBytesSync|readAsStringSync|readAsLinesSync'
+  r'|writeAsBytesSync|writeAsStringSync'
+  r'|listSync|deleteSync|createSync|createTempSync|renameSync|copySync'
+  r'|resolveSymbolicLinksSync|openSync|lengthSync'
+  r'|lastModifiedSync|lastAccessedSync|setLastModifiedSync'
+  r'|setLastAccessedSync|readSync|readByteSync|readIntoSync|writeByteSync'
+  r'|writeFromSync|writeStringSync|flushSync|truncateSync|setPositionSync'
+  r'|positionSync|lockSync|unlockSync|closeSync)\(',
+);
+
+/// Bestanden waarvan elke `*Sync`-treffer bewust is. RATCHET: mag krimpen,
+/// niet groeien — een nieuwe uitzondering hoort met een beargumenteerde
+/// regel hier, niet in een `// ignore`.
+const Map<String, int> syncIoBaseline = {
+  // `_loadOriginalBytes` leest bewust synchroon zodat callout-markeringen al
+  // op het eerste frame meeliften (#1854); `_writeRotatedCopy` is sync omdat
+  // de dialoog direct moet kunnen sluiten — dezelfde afweging als
+  // writeBytesAtomicSyncRetrying documenteert.
+  'lib/widgets/slides/image_crop_dialog.dart': 2,
+};
+
+/// Synchrone bestandssysteem-calls in [sources] — pad → regelnummers.
+///
+/// Publiek, zoals `fixedDelaysIn`: `test/sync_io_ratchet_test.dart` deelt dit
+/// meetinstrument met de poort, zodat een verzwakking van de regex in de test
+/// omvalt in plaats van stilletjes.
+Map<String, List<int>> syncIoCallsIn(Map<String, String> sources) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    final hits = <int>[];
+    final lines = raw.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      // Een commentaarregel die de vorm vermeldt is uitleg, geen aanroep.
+      if (lines[i].trimLeft().startsWith('//')) continue;
+      if (_syncIoCall.hasMatch(lines[i])) hits.add(i + 1);
+    }
+    if (hits.isNotEmpty) perFile[path] = hits;
+  });
+  return perFile;
+}
+
+/// De sync-scans in `lib/widgets/` en `lib/state/` tegen de basislijn.
+_DelayScan _syncIoInUi() {
+  final sources = <String, String>{};
+  for (final dir in ['lib/widgets', 'lib/state']) {
+    for (final file in _dartFiles(Directory(dir))) {
+      final path = file.path.replaceAll(r'\', '/');
+      sources[path] = file.readAsStringSync();
+    }
+  }
+  final perBestand = syncIoCallsIn(sources);
+
+  final over = <String>[];
+  final gekrompen = <String>[];
+  perBestand.forEach((path, hits) {
+    final toegestaan = syncIoBaseline[path] ?? 0;
+    if (hits.length > toegestaan) {
+      over.add(
+        '$path: ${hits.length} sync-call(s), basislijn $toegestaan — regel '
+        '${hits.join(', ')}',
+      );
+    } else if (hits.length < toegestaan) {
+      gekrompen.add('$path: ${hits.length} (basislijn $toegestaan)');
+    }
+  });
+  for (final path in syncIoBaseline.keys) {
+    if (!perBestand.containsKey(path)) {
+      gekrompen.add('$path: 0 (basislijn ${syncIoBaseline[path]})');
+    }
+  }
+  return _DelayScan(over, gekrompen);
 }
 
 // ── Vaste vertragingen in tests ─────────────────────────────────────────────
@@ -1882,6 +2040,19 @@ void main() {
     );
   }
 
+  final syncIo = _syncIoInUi();
+  if (syncIo.overBasislijn.isNotEmpty) {
+    failures.add(
+      'Een `*Sync`-aanroep op het bestandssysteem in `lib/widgets/` of '
+      '`lib/state/` blokkeert de enige isolate die beelden tekent — in een '
+      'build- of toetsaanslagpad voelt de gebruiker dat als een hapering. '
+      'Maak de aanroep async, of — kan dat écht niet — leg de afweging vast '
+      'in `syncIoBaseline` (tool/check_conventions.dart), een lijst die '
+      'alleen mag krimpen:\n'
+      '    ${syncIo.overBasislijn.join('\n    ')}',
+    );
+  }
+
   final pickerHits = _filePickerPathViolations();
   if (pickerHits.isNotEmpty) {
     failures.add(
@@ -2071,6 +2242,14 @@ void main() {
         'de regel weg bij 0) om de winst vast te zetten. Hier geen lucht laten: '
         'een wachtpunt komt niet vanzelf terug:\n'
         '    ${delays.gekrompen.join('\n    ')}',
+      );
+    }
+    if (syncIo.gekrompen.isNotEmpty) {
+      stdout.writeln(
+        'Tip: ${syncIo.gekrompen.length} bestand(en) dragen minder `*Sync`-'
+        'calls dan hun syncIoBaseline — verlaag de basislijn (of haal de regel '
+        'weg bij 0) om de winst vast te zetten:\n'
+        '    ${syncIo.gekrompen.join('\n    ')}',
       );
     }
     if (shrunkClasses.isNotEmpty) {

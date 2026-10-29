@@ -9,10 +9,13 @@
 // geregistreerd staat in `tool/check_audience_boundary.dart`. Zo blijft er één
 // plek waar documentinhoud de map van de gebruiker verlaat.
 
+import 'dart:async';
 import 'dart:convert';
+import 'dart:isolate';
 import 'dart:math' as math;
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -229,40 +232,51 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     'subtitle': deck.description,
     'author': deck.author,
   };
-  var tablesTooWide = 0;
-  final bytes = await buildDocumentPdf(
-    blocks,
-    onTablesTooWide: (List<PdfTableBlock> tables) =>
-        tablesTooWide = tables.length,
-    style: style,
-    fonts: fonts,
-    verbatimLabel: labels.labelFor,
-    images: images,
-    graphics: graphics,
-    chrome: DocumentPdfChrome(
-      headerText: resolveDocumentChromeTemplate(
-        theme.documentHeaderText.trim(),
-        fields,
+  // De twee opmaakrondes plus `document.save()` zijn het zwaarste stuk van de
+  // export — op een document van honderd pagina's seconden puur CPU. Alles wat
+  // de UI-isolate zelf nodig had (afbeeldingen, grafieken, logo, lettertypen)
+  // is hierboven al tot bytes en structuren opgelost; vanaf hier is het puur
+  // rekenen en hoort het in een eigen isolate. De te-brede-tabellen komen als
+  // retourwaarde mee terug: een callback die `tablesTooWide` zou muteren,
+  // muteert binnen de isolate alleen de gekopieerde omgeving — de teller hier
+  // zou dan stil op nul blijven.
+  final (bytes, tooWideTables) = await _offloadPdfLayout(() async {
+    final tooWide = <PdfTableBlock>[];
+    final pdf = await buildDocumentPdf(
+      blocks,
+      onTablesTooWide: tooWide.addAll,
+      style: style,
+      fonts: fonts,
+      verbatimLabel: labels.labelFor,
+      images: images,
+      graphics: graphics,
+      chrome: DocumentPdfChrome(
+        headerText: resolveDocumentChromeTemplate(
+          theme.documentHeaderText.trim(),
+          fields,
+        ),
+        footerText: resolveDocumentChromeTemplate(
+          theme.documentFooterText.trim(),
+          fields,
+        ),
+        showPageNumbers: theme.documentShowPageNumbers,
+        tlpLabel: deck.tlp == TlpLevel.none ? '' : deck.tlp.label,
+        tlpColor: deck.tlp == TlpLevel.none
+            ? null
+            : PdfColor.fromInt(0xFF000000 | (deck.tlp.foreground & 0xFFFFFF)),
+        logo: logo,
+        logoAtTop: theme.documentLogoPosition.startsWith('top'),
+        logoAtRight: theme.documentLogoPosition.endsWith('right'),
+        logoWidth: logoWidth,
       ),
-      footerText: resolveDocumentChromeTemplate(
-        theme.documentFooterText.trim(),
-        fields,
-      ),
-      showPageNumbers: theme.documentShowPageNumbers,
-      tlpLabel: deck.tlp == TlpLevel.none ? '' : deck.tlp.label,
-      tlpColor: deck.tlp == TlpLevel.none
-          ? null
-          : PdfColor.fromInt(0xFF000000 | (deck.tlp.foreground & 0xFFFFFF)),
-      logo: logo,
-      logoAtTop: theme.documentLogoPosition.startsWith('top'),
-      logoAtRight: theme.documentLogoPosition.endsWith('right'),
-      logoWidth: logoWidth,
-    ),
-    pageSize: pageSize,
-    pageMargins: pageMargins,
-    cropMarks: cropMarks,
-    metadata: metadata,
-  );
+      pageSize: pageSize,
+      pageMargins: pageMargins,
+      cropMarks: cropMarks,
+      metadata: metadata,
+    );
+    return (pdf, tooWide);
+  });
+  final tablesTooWide = tooWideTables.length;
 
   return DocumentPdfResult(
     bytes,
@@ -535,4 +549,14 @@ String _textOf(List<PdfBlock> blocks) {
 
   walk(blocks);
   return buffer.toString();
+}
+
+/// Draait de PDF-opmaak van de UI-isolate af. Het argument is een closure
+/// (geen vooraf opgebouwde lijst) zodat de hele `_render`-keten — beide
+/// opmaakrondes én `document.save()` — in de werk-isolate loopt. Op het web
+/// bestaan isolates niet en is dit gewoon `Future.sync`, zoals
+/// `ExportService._offload` het ook doet.
+Future<R> _offloadPdfLayout<R>(FutureOr<R> Function() body) {
+  if (kIsWeb) return Future.sync(body);
+  return Isolate.run(body);
 }

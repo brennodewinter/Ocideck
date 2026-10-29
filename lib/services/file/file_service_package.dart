@@ -33,6 +33,7 @@ Future<void> _addThemeCssArchiveMembers(
     '  - themes/$themeName.css\n',
   );
   archive.add(ArchiveFile('.marprc.yml', cfgBytes.length, cfgBytes));
+  _addCarriedStyleMember(archive, profile);
 }
 
 ThemeProfile _profileWithPackageAssets(
@@ -40,11 +41,17 @@ ThemeProfile _profileWithPackageAssets(
   String? logoRel,
   String? logoDarkRel,
   String? brandStripRel,
-) => (logoRel != null || logoDarkRel != null || brandStripRel != null)
+  String? documentLogoRel,
+) =>
+    (logoRel != null ||
+        logoDarkRel != null ||
+        brandStripRel != null ||
+        documentLogoRel != null)
     ? profile.copyWith(
         logoPath: logoRel ?? profile.logoPath,
         logoDarkPath: logoDarkRel ?? profile.logoDarkPath,
         brandStripPath: brandStripRel ?? profile.brandStripPath,
+        documentLogoPath: documentLogoRel,
       )
     : profile;
 
@@ -55,6 +62,11 @@ class _PackedThemeAssets {
 
   const _PackedThemeAssets(this.profile, this.logoRel, this.brandStripRel);
 }
+
+/// Sidecar naast de markdown: de stijl van dit pakket, zonder lokale paden.
+const carriedStyleFileName = 'ocideck-style.json';
+
+const _carriedStyleMaxBytes = 256 * 1024;
 
 final _packageBackgroundUrl = RegExp(
   r'''url\(\s*(["']?)(.*?)\1\s*\)''',
@@ -97,11 +109,33 @@ Future<_PackedThemeAssets> _packThemeAssets(
     'logos',
     allowExternal: true,
   );
+  final documentLogoRel = await _packDocumentLogo(profile, addAsset);
   return _PackedThemeAssets(
-    _profileWithPackageAssets(profile, logoRel, logoDarkRel, brandStripRel),
+    _profileWithPackageAssets(
+      profile,
+      logoRel,
+      logoDarkRel,
+      brandStripRel,
+      documentLogoRel,
+    ),
     logoRel,
     brandStripRel,
   );
+}
+
+/// `null` laat een gedeeld documentlogo gedeeld. Een pad dat niet in het
+/// pakket past wordt `''` (bewust geen documentlogo) in plaats van een
+/// absoluut pad van de afzender.
+Future<String?> _packDocumentLogo(
+  ThemeProfile profile,
+  Future<String?> Function(String, String, {bool allowExternal}) addAsset,
+) async {
+  final path = profile.documentLogoPath;
+  if (path == null) return null;
+  if (path.trim().isEmpty) return '';
+  final packed = await addAsset(path, 'logos', allowExternal: true);
+  if (packed == null || packed.isEmpty) return '';
+  return packed;
 }
 
 Future<MarpStyle?> _packDeckBackground(
@@ -430,6 +464,9 @@ extension FileServicePackage on FileService {
     // eigen leden mee, zodat de `.md` in het pakket pure Marp blijft.
     _addSidecarMembers(archive, packDeck, _safeName(deck.title));
 
+    // Het stijlrecord van de maker reist mee als `ocideck-style.json`
+    // (`_addCarriedStyleMember` hieronder); Marp leest dat lid niet —
+    // daarvoor is de thema-CSS.
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
     await _addThemeCssArchiveMembers(
       this,

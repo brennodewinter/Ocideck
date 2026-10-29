@@ -63,6 +63,7 @@ import 'web_asset_store.dart';
 part 'file/file_service_net.dart';
 part 'file/file_service_open.dart';
 part 'file/file_service_package.dart';
+part 'file/file_service_carried_style.dart';
 part 'file/file_service_dossier.dart';
 part 'file/file_service_project.dart';
 part 'file/file_service_import.dart';
@@ -74,20 +75,31 @@ ThemeProfile _resolveBrandStripPath(
   ThemeProfile profile,
   String? projectPath,
   String? Function() homeDirectory,
+) => _resolveProjectRelativeStylePaths(profile, projectPath, homeDirectory);
+
+/// Een afwijkend documentlogo ([ThemeProfile.documentLogoPath]) resolveert
+/// precies als de merkstrook: relatief t.o.v. het project, met de thuismap
+/// als terugval voor een verhuisd project. '' en null zijn betekenisvolle
+/// toestanden ("bewust uit", "gedeeld met het presentatielogo") en blijven
+/// ongemoeid (#2641).
+ThemeProfile _resolveDocumentLogoPath(
+  ThemeProfile profile,
+  String? projectPath,
+  String? Function() homeDirectory,
 ) {
-  final stripPath = profile.brandStripPath;
-  if (stripPath == null ||
-      stripPath.trim().isEmpty ||
-      isBundledAssetPath(stripPath) ||
+  final docPath = profile.documentLogoPath;
+  if (docPath == null ||
+      docPath.trim().isEmpty ||
+      isBundledAssetPath(docPath) ||
       kIsWeb ||
-      p.isAbsolute(stripPath)) {
+      p.isAbsolute(docPath)) {
     return profile;
   }
   final bases = [?projectPath, ?homeDirectory()];
   for (final base in bases) {
-    final candidate = p.normalize(p.join(base, stripPath));
+    final candidate = p.normalize(p.join(base, docPath));
     if (File(candidate).existsSync()) {
-      return profile.copyWith(brandStripPath: candidate);
+      return profile.copyWith(documentLogoPath: candidate);
     }
   }
   return profile;
@@ -206,13 +218,6 @@ class ScanHit {
     if (t != null && t.isNotEmpty) return t;
     return p.basenameWithoutExtension(fileName);
   }
-}
-
-class _LogoProjectAsset {
-  final ThemeProfile profile;
-  final String? cssUrl;
-
-  const _LogoProjectAsset(this.profile, this.cssUrl);
 }
 
 /// Eén lid van een `.ocideck`-pakket: archiefnaam plus uitgepakte bytes.
@@ -385,7 +390,11 @@ class FileService {
         kIsWeb ||
         p.isAbsolute(logoPath)) {
       return _resolveBrandStripPath(
-        _resolveLogoDarkPath(profile, projectPath),
+        _resolveDocumentLogoPath(
+          _resolveLogoDarkPath(profile, projectPath),
+          projectPath,
+          _homeDirectory,
+        ),
         projectPath,
         _homeDirectory,
       );
@@ -396,9 +405,13 @@ class FileService {
       final candidate = p.normalize(p.join(base, logoPath));
       if (File(candidate).existsSync()) {
         return _resolveBrandStripPath(
-          _resolveLogoDarkPath(
-            profile.copyWith(logoPath: candidate),
+          _resolveDocumentLogoPath(
+            _resolveLogoDarkPath(
+              profile.copyWith(logoPath: candidate),
+              projectPath,
+            ),
             projectPath,
+            _homeDirectory,
           ),
           projectPath,
           _homeDirectory,
@@ -406,7 +419,11 @@ class FileService {
       }
     }
     return _resolveBrandStripPath(
-      _resolveLogoDarkPath(profile, projectPath),
+      _resolveDocumentLogoPath(
+        _resolveLogoDarkPath(profile, projectPath),
+        projectPath,
+        _homeDirectory,
+      ),
       projectPath,
       _homeDirectory,
     );
@@ -708,7 +725,10 @@ class FileService {
     // (the scan runs on the exact bytes each path parses next).
     final read = await _readAndScanMarkdown(filePath, content);
     if (read.failure != null) {
-      return DeckOpenResult.failed(read.failure!);
+      return DeckOpenResult.failed(
+        read.failure!,
+        safetyFindings: read.safetyFindings,
+      );
     }
     final raw = read.raw!;
     // Only open Marp/OciDeck presentations. Every deck declares `marp: true` in
@@ -753,9 +773,19 @@ class FileService {
     // echt afgekapt bestand was de body al weg vóór wij hem lazen, en de
     // gebruiker ziet een lege presentatie.
 
-    // The file carries only content; apply the active style profile on open.
+    // Inhoud blijft in de markdown. Een pakket kan er een stijlsidecar
+    // naast leggen; zonder die sidecar geldt het actieve profiel.
+    final active = activeProfileFor(projectPath: parsed.projectPath);
+    final carried = await carriedProjectStyle(parsed.projectPath, active);
+    // `carriedProjectStyle` geeft de fallback-instantie zelf terug zolang er
+    // geen sidecar is; een ander object betekent dat deze presentatie haar
+    // eigen stijl meedraagt (#2644) en die bij opslaan van haar blijft.
+    final carriesPackagedProfile = !identical(carried, active);
     final deck = parsed.copyWith(
-      themeProfile: activeProfileFor(projectPath: parsed.projectPath),
+      themeProfile: resolveThemeProfile(
+        carried,
+        projectPath: parsed.projectPath,
+      ),
     );
     final chartWarnings = <String>[];
     final skipped = <String>[];
@@ -787,6 +817,7 @@ class FileService {
       warnings: chartWarnings,
       skippedSidecars: skipped,
       integrity: integrity,
+      carriesPackagedProfile: carriesPackagedProfile,
     );
   }
 
@@ -933,19 +964,28 @@ class FileService {
   /// labelt alleen de logregels.
   ///
   /// Zonder BOM-vlag: wie bytes heeft, gebruikt [openDecodedDeck].
-  ({Deck? deck, OpenFailure? failure}) openDeckFromContent(
-    String raw, {
-    String? sourceName,
-  }) => openDecodedDeck((text: raw, hasBom: false), sourceName: sourceName);
+  ({
+    Deck? deck,
+    OpenFailure? failure,
+    List<MarkdownSafetyFinding>? safetyFindings,
+  })
+  openDeckFromContent(String raw, {String? sourceName}) =>
+      openDecodedDeck((text: raw, hasBom: false), sourceName: sourceName);
 
   /// Als [openDeckFromContent], voor tekst die uit bytes gedecodeerd is. De BOM
   /// reist mee in [decoded]: [Deck.fileHash] gaat over de bytes van het bestand,
   /// en zonder die vlag leest een verzegeld deck waar een ander programma een BOM
   /// voor zette ten onrechte als intact.
-  ({Deck? deck, OpenFailure? failure}) openDecodedDeck(
-    DecodedUtf8 decoded, {
-    String? sourceName,
-  }) {
+  ///
+  /// `safetyFindings` draagt de scanbevindingen bij `unsafe` mee terug, zodat
+  /// de aanroeper het alarm uit dezelfde scan voedt in plaats van de tekst
+  /// nog eens te scannen (#2634).
+  ({
+    Deck? deck,
+    OpenFailure? failure,
+    List<MarkdownSafetyFinding>? safetyFindings,
+  })
+  openDecodedDeck(DecodedUtf8 decoded, {String? sourceName}) {
     final raw = decoded.text;
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
@@ -954,7 +994,11 @@ class FileService {
         '(${findings.length} finding(s))',
         sourceName,
       );
-      return (deck: null, failure: OpenFailure.unsafe);
+      return (
+        deck: null,
+        failure: OpenFailure.unsafe,
+        safetyFindings: findings,
+      );
     }
     if (!_md.sniffFrontmatter(raw).marp) {
       logWarning(
@@ -962,10 +1006,16 @@ class FileService {
         '(no `marp: true` front matter)',
         sourceName,
       );
-      return (deck: null, failure: OpenFailure.notPresentation);
+      return (
+        deck: null,
+        failure: OpenFailure.notPresentation,
+        safetyFindings: null,
+      );
     }
     final parsed = _md.parseDeck(raw, hasBom: decoded.hasBom);
-    if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
+    if (parsed == null) {
+      return (deck: null, failure: OpenFailure.corrupt, safetyFindings: null);
+    }
     // Geen truncatie-check meer, om dezelfde reden als op het schijf-pad: een
     // lege body is een lege presentatie (#1909). Dit pad opende ook decks die
     // uit git of WebDAV terugkomen — dáár trof de weigering de gebruiker in
@@ -974,6 +1024,7 @@ class FileService {
     return (
       deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),
       failure: null,
+      safetyFindings: null,
     );
   }
 

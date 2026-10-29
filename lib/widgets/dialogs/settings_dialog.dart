@@ -27,10 +27,14 @@ import '../../services/diagnostics/diagnostics.dart';
 import '../../services/disk_traces.dart';
 import '../../services/export_metadata.dart';
 import '../../services/update_check_service.dart';
+import '../../models/asset_origin.dart';
 import '../../services/file_service.dart';
+import '../../services/style_logo_bytes.dart';
+import '../../services/web_asset_store.dart';
 import '../../services/git/outbox.dart';
 import '../../services/recovery_service.dart';
 import '../../utils/net_guard.dart';
+import '../../utils/sanitize_svg.dart';
 import 'certificate_trust_dialog.dart';
 import '../../models/local_cve_status.dart';
 import '../../services/cve/local_cve_database.dart';
@@ -111,6 +115,7 @@ part 'parts/settings_dialog_document_fonts.dart';
 part 'parts/settings_dialog_style_preview.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
+part 'parts/settings_dialog_bullet_marker.dart';
 part 'parts/settings_dialog_table_style.dart';
 part 'parts/settings_dialog_profile.dart';
 part 'parts/settings_dialog_privacy.dart';
@@ -228,6 +233,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
 
+  /// Werkkopie van de stijlprofielen. Aanmaken, verwijderen en importeren
+  /// raken de opgeslagen lijst pas bij Opslaan; Annuleren gooit deze weg.
+  late List<ThemeProfile> _styleProfiles;
+
+  /// Werkkopie van de documentlay-out. Dezelfde reden als [_styleProfiles].
+  late DocumentLayoutDraft _documentLayout;
+
   bool _stylePreviewShowsContent = true;
   _StyleSurface _styleSurface = _StyleSurface.general;
 
@@ -311,6 +323,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _originalCockpitName = _cockpitScheme.name;
     _cockpitName = TextEditingController(text: _cockpitScheme.name);
     _cockpitVisualStyle = settings.cockpitVisualStyle;
+    _styleProfiles = [...settings.themeProfiles];
+    _documentLayout = DocumentLayoutDraft.from(settings);
     _originalName = _themeProfile.name;
     _profileName = TextEditingController(text: _themeProfile.name);
     _logoSize = TextEditingController(text: _themeProfile.logoSize.toString());
@@ -351,6 +365,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _libreplanBaseUrl.dispose();
     _libreplanUsername.dispose();
     _libreplanPassword.dispose();
+    forgetStyleEditorMemoryPins();
     super.dispose();
   }
 
@@ -359,8 +374,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// instance members of a State subclass), so they route through this wrapper.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  List<ThemeProfile> get _profiles =>
-      _availableStyleProfiles(ref.watch(settingsProvider).themeProfiles);
+  List<ThemeProfile> get _profiles => _availableStyleProfiles(_styleProfiles);
 
   /// Alle lokale verbindingen, in lijstvolgorde — het startpunt voor de
   /// mapkiezers hieronder.
@@ -668,50 +682,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     if (result != null) setState(() => _exportDirectory = result);
   }
 
-  Future<void> _pickLogo() async {
-    // De knop bestaat op web niet (zie _logoSectionChildren), maar de poort
-    // staat hier ook: op web levert pickFiles een blob:-URL in `path`, en die
-    // zou als logoPath in het themaprofiel belanden en na herladen nergens meer
-    // heen wijzen. Een stille, onherstelbare instelling is erger dan een
-    // ontbrekende knop.
-    if (!supportsLocalProjectFolders) return;
-    final file = await FilePicker.pickFile(
-      dialogTitle: context.l10n.d('Logo kiezen'),
-      type: FileType.image,
-    );
-    if (!mounted) return;
-    final path = file?.path;
-    if (path != null) {
-      setState(() {
-        // Een geïmporteerde merkstrook bevat het oude logo als onderdeel van
-        // haar bronbeeld. Bij een bewuste logowissel moet die gekoppelde strook
-        // verdwijnen, anders blijft het vorige merk alsnog op de dia staan.
-        _themeProfile = _themeProfile.copyWith(
-          logoPath: path,
-          clearBrandStrip: true,
-        );
-        _profileTouched = true;
-      });
-    }
-  }
-
-  Future<void> _pickLogoDark() async {
-    if (!supportsLocalProjectFolders) return;
-    final file = await FilePicker.pickFile(
-      dialogTitle: context.l10n.d('Donker logo kiezen'),
-      type: FileType.image,
-    );
-    if (!mounted) return;
-    final path = file?.path;
-    if (path != null) {
-      setState(() {
-        _themeProfile = _themeProfile.copyWith(logoDarkPath: path);
-        _profileTouched = true;
-      });
-    }
-  }
-
   void _selectProfile(String name) {
+    _commitEditedStyleProfile(this);
     _adoptProfile(_profiles.firstWhere((p) => p.name == name));
   }
 
@@ -729,6 +701,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _closingSlideMarkdown.text = profile.closingSlideMarkdown;
       _profileTouched = true;
     });
+    rememberStyleEditorMemoryPins(profile);
   }
 
   /// Het profiel zoals het nú in de editor staat: [_themeProfile] plus de
@@ -748,7 +721,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   void _save() {
     _saved = true;
     final notifier = ref.read(settingsProvider.notifier);
-    final profile = _editedProfile();
     notifier.setConnections(
       _normalizedConnections(),
       discardPendingWorkFor: _discardPendingWorkFor,
@@ -759,7 +731,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       document: false,
       path: _presentationStartDirectory,
     );
-    notifier.saveThemeProfile(profile, previousName: _originalName);
+    _commitEditedStyleProfile(this);
+    replaceThemeProfiles(notifier, _styleProfiles, selectedName: _originalName);
+    _applyDocumentLayout(notifier, _documentLayout);
     _syncAppearanceEdits();
     notifier.setAppAppearanceProfiles(
       _appearanceProfiles,
@@ -784,7 +758,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     // per-deck profile the user set elsewhere).
     if (_profileTouched) {
       final deckN = ref.read(tabsProvider).current?.deckNotifierOrNull;
-      deckN?.updateThemeProfile(profile); // documenttab: geen deck, geen no-op
+      deckN?.updateThemeProfile(_themeProfile);
     }
 
     // De configuraties zijn hierboven als één lijst weggeschreven; hier blijven

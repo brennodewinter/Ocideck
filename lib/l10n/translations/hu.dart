@@ -1614,6 +1614,20 @@ const _dutchSourceAddHu = <String, String>{
   'Diagnose kopiëren': 'Diagnosztika másolása',
   'Diagnose gekopieerd naar het klembord.': 'Diagnosztika a vágólapra másolva.',
   'De logmap kon niet worden geopend.': 'A naplómappát nem sikerült megnyitni.',
+  'Afsluiten duurt lang': 'A bezárás sokáig tart',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Egy takarítási lépés lassan reagál. A mentett munkád már biztonságban van; a mostani bezárás átugorja a fennmaradó lépéseket.',
+  'Wachten': 'Várj',
+  'Toch afsluiten': 'Bezárás mégis',
+  'Gekozen afbeelding': 'Kiválasztott kép',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Ez a logó ebben a böngészőmunkamenetben él, és újratöltéskor eltűnik. Csomagként exportáld, hogy magaddal vidd.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'A beállításaid sérültek, és vissza lettek állítva.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'A beállításaid sérültek, és vissza lettek állítva; egy másolat itt található: {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'A logó nem kép, vagy nagyobb mint 8 MB. Válasszon kisebb PNG, JPEG, GIF vagy WebP fájlt.',
   'Bezig met installeren': 'Telepítés folyamatban',
   'Gevonden op schijf: {pad}': 'Lemezén található: {pad}',
   'Van schijf installeren': 'Telepítés lemezről',

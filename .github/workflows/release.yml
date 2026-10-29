@@ -245,7 +245,12 @@ jobs:
           }
 
           # 2. Payload en associaties: precies wat de installer belooft.
-          foreach ($f in @('ocideck.exe', 'flutter_windows.dll', 'data\app.so', 'unins000.exe')) {
+          #    De VC++-runtime staat er bij omdat deze runner hem wél heeft
+          #    (Visual Studio) maar een schone Windows-installatie niet —
+          #    een missende msvcp140 is precies de klasse fout die hier
+          #    onzichtbaar zou blijven (#2630).
+          foreach ($f in @('ocideck.exe', 'flutter_windows.dll', 'data\app.so', 'unins000.exe',
+                          'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll')) {
             if (-not (Test-Path "$doel\$f")) {
               throw "Payload ontbreekt na installatie: $doel\$f"
             }

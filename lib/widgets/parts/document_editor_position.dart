@@ -37,6 +37,7 @@ class _DocPosition {
   /// het eerste zichtbare blok — dat na de opbouw expliciet in beeld komt.
   void changeViewMode(_DocViewMode mode) {
     if (mode == _state._viewMode) return;
+    _state.ref.read(documentProvider.notifier).flushPendingVisualEdit();
     if (_state._viewMode == _DocViewMode.visual ||
         _state._viewMode == _DocViewMode.source) {
       final offset = _viewAnchor().clamp(0, _state._controller.text.length);

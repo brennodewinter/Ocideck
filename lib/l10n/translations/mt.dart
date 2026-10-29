@@ -1631,6 +1631,20 @@ const _dutchSourceAddMt = <String, String>{
   'Diagnose gekopieerd naar het klembord.':
       'Id-dijanjostika ġiet ikkupjata fil-clipboard.',
   'De logmap kon niet worden geopend.': 'Il-folder tal-log ma setax jinfetaħ.',
+  'Afsluiten duurt lang': 'L-għeluq qed jieħu żmien twil',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Pass tat-tindif qed jirreaġixxi bil-mod. X-xogħol salvat tiegħek diġà sikur; toħroġ issa taqbeż il-passi li jifdal.',
+  'Wachten': 'Stenna',
+  'Toch afsluiten': 'Oħroġ xorta',
+  'Gekozen afbeelding': 'Stampa magħżula',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Dan il-logo jgħix f\'din is-sessjoni tal-browser u jisparixxi wara rikarigu. Esporta bħala pakkett biex tieħu miegħek.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Is-settings tiegħek kienu korrotti u ġew restawrat.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Is-settings tiegħek kienu korrotti u ġew restawrat; kopja tinsab f {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Il-logo mhux stampa jew akbar minn 8 MB. Agħżel PNG, JPEG, GIF jew WebP iżgħar.',
   'Bezig met installeren': 'Qed ninstalla',
   'Gevonden op schijf: {pad}': 'Misjub fuq id-disk: {pad}',
   'Van schijf installeren': 'Installa mid-disk',

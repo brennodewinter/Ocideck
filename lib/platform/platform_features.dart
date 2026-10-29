@@ -14,6 +14,11 @@ bool get isDesktopNative => impl.isDesktopNative;
 /// de runner loopt in plaats van via het pasteboard-pakket (#758).
 bool get isLinuxDesktop => impl.isLinuxDesktop;
 
+/// Windows of Linux — de twee desktops waar `shared_preferences` alles in
+/// één JSON-bestand schrijft (en waar [AtomicFilePreferencesStore] voor in
+/// de plaats komt, #2628). macOS gebruikt NSUserDefaults.
+bool get isFilePrefsDesktop => impl.isFilePrefsDesktop;
+
 /// Whether this platform *could* run a native `git` subprocess at all — the
 /// cheap, synchronous pre-check before the real runtime probe
 /// (`nativeGitVersionProvider`, which actually invokes `git`). False on web and

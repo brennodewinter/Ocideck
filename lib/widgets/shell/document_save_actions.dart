@@ -49,6 +49,7 @@ Future<bool> saveDocumentWithDestination(
   WidgetRef ref,
   DocumentNotifier notifier,
 ) async {
+  notifier.flushPendingVisualEdit();
   final state = notifier.currentState;
   final document = state.document;
   if (document == null) return false;
@@ -365,9 +366,12 @@ _compareDocumentConflict(
   final disk = result.document;
   if (disk == null) {
     if (result.failure == OpenFailure.unsafe) {
-      final findings = await files.scanForUnsafeMarkdown(path);
-      ref.read(importSecurityAlarmProvider.notifier).state =
-          ImportSecurityAlarm(path: path, findings: findings);
+      ref
+          .read(importSecurityAlarmProvider.notifier)
+          .state = ImportSecurityAlarm(
+        path: path,
+        findings: result.safetyFindings ?? const [],
+      );
     } else {
       showErrorSnackBar(
         ScaffoldMessenger.of(context),
@@ -485,10 +489,9 @@ Future<void> _reloadFromDisk(
     return;
   }
   if (result.failure == OpenFailure.unsafe) {
-    final findings = await files.scanForUnsafeMarkdown(path);
     ref.read(importSecurityAlarmProvider.notifier).state = ImportSecurityAlarm(
       path: path,
-      findings: findings,
+      findings: result.safetyFindings ?? const [],
     );
     return;
   }

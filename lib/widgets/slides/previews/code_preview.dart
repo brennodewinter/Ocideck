@@ -34,7 +34,11 @@ class _CodePreview extends StatelessWidget {
       text: TextSpan(text: text.isEmpty ? ' ' : text, style: style),
       textDirection: TextDirection.ltr,
     )..layout();
-    return _measureCache[key] = painter.size;
+    try {
+      return _measureCache[key] = painter.size;
+    } finally {
+      painter.dispose();
+    }
   }
 
   @override

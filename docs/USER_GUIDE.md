@@ -3531,7 +3531,10 @@ Export to:
   is one it can reopen: if the assets together would push it past the 512 MB the
   importer accepts, the export stops with a message before it fills memory
   (*added 2026-08-01*). Use fewer or smaller images, videos or audio files if you
-  hit it.
+  hit it. **The style travels with it** (*added 2026-10-29, #2644*): the package
+  carries the active style profile as `theme.json`, plus the logo files it
+  references — so the recipient opens the deck in the house style you sent, not
+  in their own defaults.
 
 **Password-protecting a package (optional).** When you export a package, a dialog
 lets you switch on **AES-256 encryption** and set a password. Encryption is off by
@@ -5796,8 +5799,16 @@ preview. Presentation restores the complete font, colour, animation, logo, foote
 closing-slide controls beside a real 16:9 slide preview. A selected logo is shown next
 to the file chooser and is shared by presentations and documents by default. In the
 document controls you can unlink it and choose a different document logo, or deliberately
-use no document logo. The document logo width can be set from 32 to 480 px and follows
-the presentation logo size until changed. The same controls set its position, the
+use no document logo. On the web build you can also pick the presentation logo, the
+dark logo and the document logo. The bytes stay in this browser session: they show in
+the preview and travel in an `.ocideck` package or an `.ocideckstyle` file. A bare
+Markdown download does not keep them; OciDeck warns and offers the package. Reloading
+the page drops those session bytes. The document logo width can be set from 32 to 480 px and follows
+the presentation logo size until changed. The **body size** is 9 to 28 pt (11 pt by
+default): the point size of the body text, the same unit as the PDF, Word (DOCX) and
+LibreOffice (ODT). The screen turns those points into CSS pixels, so 11 pt on screen
+is the same physical size as 11 pt in the PDF. Word headings keep their own size;
+LibreOffice headings stay a percentage of the body. The same controls also set the document-logo position, the
 **header**, **footer text** and **page numbers**. Header and footer accept several lines
 and inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `~~strike~~` and links).
 Their shared text and background colours can be set independently; until changed,
@@ -5833,10 +5844,16 @@ The profile's colours also carry the **table style**: the border style (*Lijnen
 (volledig)* fully boxed, or *Geen randen* no borders at all), the border colour,
 **zebra striping** with a colour of its own, the **cell padding** in px, and an
 **accent rule under the header row**. It is a house style, not per-table
-formatting: every table in a document or presentation follows it, and because it
-sits in the style profile it travels with the file — the recipient sees the table
-you styled. The writing surface, the preview, the HTML export and the LaTeX
-export all draw it.
+formatting: every table in a document or presentation follows the style profile
+that applies at that moment. A bare `.md` does not carry that table style. Someone
+who opens it while a different profile is active sees the tables in that local
+profile, not in the sender's style. An `.ocideckstyle` file carries the whole
+profile, including the table style. An `.ocideck` package puts the style beside
+the markdown in `ocideck-style.json`: OciDeck uses it for this deck and leaves the
+recipient's global profile alone. The CSS in the package is there for Marp. An
+older package without that file follows the local profile. See
+[FILE_FORMAT](FILE_FORMAT.md). The writing surface, the preview, the HTML export and the LaTeX
+export draw whichever style applies.
 
 A table wider than the space it is given is neither cut off nor allowed to run
 off the page: the columns take their natural widths as long as they fit, and are
@@ -6832,8 +6849,10 @@ find it.
   logo travels inside the file**, and so does a custom brand strip, so the profile
   arrives complete; local paths are deliberately left out. Built-in logos stay a
   reference. On the
-  web build a restored custom logo lives only until you reload the page (there is
-  no persistent file storage in the browser) — everything else in the profile
+  web build you can pick, view, replace and remove a custom logo as well — it is
+  kept in browser memory as a `mem:` asset, so like a restored logo it lives
+  only until you reload the page (there is no persistent file storage in the
+  browser) — everything else in the profile
   keeps working. Anything that isn't a valid profile file is refused with an
   explanation.
 - **App appearance** (a dark interface, the accent and panel colours, and the

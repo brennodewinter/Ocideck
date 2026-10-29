@@ -715,6 +715,24 @@ void main() {}
       expect(html, isNot(contains('class="slide paw-bullets"')));
     });
 
+    test('a custom SVG theme embeds and selects the custom marker', () async {
+      const customTheme = ThemeProfile(
+        bulletMarker: BulletMarker.customSvg,
+        customBulletSvg:
+            '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>',
+      );
+      final html = await exportHtml([
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Punten', bullets: const ['Een']),
+      ], customTheme);
+
+      expect(html, contains('<section class="slide custom-svg-bullets">'));
+      expect(html, contains('.slide.custom-svg-bullets ul{list-style:none'));
+      expect(html, contains('data:image/svg+xml'));
+      expect(html, contains('%3Csvg'));
+    });
+
     test('checklist and numbered slides never get paws', () async {
       final checklist = await exportHtml([
         Slide.create(SlideType.bullets).copyWith(

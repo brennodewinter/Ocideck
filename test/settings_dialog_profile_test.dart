@@ -26,7 +26,9 @@ void main() {
   Future<ProviderContainer> openAppearanceTab(
     WidgetTester tester, {
     Size surfaceSize = const Size(1500, 1100),
+    Map<String, Object> prefs = const {},
   }) async {
+    SharedPreferences.setMockInitialValues(prefs);
     await tester.binding.setSurfaceSize(surfaceSize);
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -34,19 +36,26 @@ void main() {
       ProviderScope(
         child: MaterialApp(
           home: Scaffold(
-            body: Builder(
-              builder: (context) => ElevatedButton(
-                onPressed: () => SettingsDialog.show(
-                  context,
-                  initialSection: SettingsSection.presentation,
-                ),
-                child: const Text('open'),
-              ),
+            // De watch triggert _load vóór de tik op 'open': het dialoog
+            // leest zijn werkkopie eenmalig uit de provider in initState, en
+            // zonder watch zou die uit de nog ongeladen beginstaat komen.
+            body: Consumer(
+              builder: (context, ref, _) {
+                ref.watch(settingsProvider);
+                return ElevatedButton(
+                  onPressed: () => SettingsDialog.show(
+                    context,
+                    initialSection: SettingsSection.presentation,
+                  ),
+                  child: const Text('open'),
+                );
+              },
             ),
           ),
         ),
       ),
     );
+    await tester.pumpAndSettle();
 
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
@@ -99,16 +108,26 @@ void main() {
     expect(find.byType(SettingsDialog), findsOneWidget);
   });
 
-  testWidgets('"Nieuw profiel" maakt een profiel aan', (tester) async {
+  testWidgets('"Nieuw profiel" maakt pas bij Opslaan een profiel aan (#2648)', (
+    tester,
+  ) async {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);
 
     final before = container.read(settingsProvider).themeProfiles.length;
     await tester.tap(find.byIcon(Icons.add).first);
     await tester.pumpAndSettle();
-    final after = container.read(settingsProvider).themeProfiles.length;
+    // Aanmaken zit in de werkkopie. De lijst in de instellingen groeit pas
+    // bij Opslaan, zodat Annuleren het nieuwe profiel weer laat vallen (#2648).
+    expect(container.read(settingsProvider).themeProfiles.length, before);
 
-    expect(after, greaterThan(before));
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan'));
+    await tester.pumpAndSettle();
+
+    expect(
+      container.read(settingsProvider).themeProfiles.length,
+      greaterThan(before),
+    );
   });
 
   testWidgets('"Profiel verwijderen" is ingeschakeld bij meerdere profielen', (
@@ -126,6 +145,47 @@ void main() {
     );
     expect(btn.onPressed, isNotNull);
   });
+
+  // #2662: met één eigen profiel was de knop klikbaar omdat hij op de
+  // zichtbare lijst (opgeslagen + ingebouwde) keek, terwijl _deleteProfile op
+  // de werkkopie weigert. Een klikbare knop die niets doet is erger dan een
+  // uitgeschakelde.
+  testWidgets(
+    '"Profiel verwijderen" is uit bij één eigen profiel of een ingebouwd profiel',
+    (tester) async {
+      // Eén opgeslagen profiel; de ingebouwde vullen de zichtbare lijst aan.
+      final container = await openAppearanceTab(
+        tester,
+        prefs: {
+          'themeProfiles': jsonEncode([
+            const ThemeProfile(name: 'Eigen huisstijl').toJson(),
+          ]),
+          'selectedThemeProfileName': 'Eigen huisstijl',
+        },
+      );
+      addTearDown(container.dispose);
+
+      IconButton delete() => tester.widget<IconButton>(
+        find.ancestor(
+          of: find.byTooltip('Profiel verwijderen'),
+          matching: find.byType(IconButton),
+        ),
+      );
+
+      // Eén opgeslagen profiel: de ingebouwde profielen tellen niet mee.
+      expect(delete().onPressed, isNull);
+
+      // Tweede eigen profiel aanmaken en dan een ingebouwd kiezen: ook dat is
+      // niet te verwijderen, dus de knop gaat weer uit.
+      await tester.tap(find.byIcon(Icons.add).first);
+      await tester.pumpAndSettle();
+      expect(delete().onPressed, isNotNull);
+
+      await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
+      await tester.pumpAndSettle();
+      expect(delete().onPressed, isNull);
+    },
+  );
 
   testWidgets('Vigilis-profiel kleurt de documentpreview direct', (
     tester,

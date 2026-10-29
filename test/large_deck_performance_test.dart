@@ -8,6 +8,8 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/models/markdown_writing_suggestion.dart';
+import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:path/path.dart' as p;
 
 import 'support/fastest_of.dart';
@@ -357,5 +359,163 @@ void main() {
         );
       },
     );
+
+    test('markdownFromDocument schaalt niet superlineair met het document', () {
+      // 300 pagina's mag niet meer dan 2,5× kosten van 150. Lineair ligt op
+      // 2×; de oude nummering liep per lijstitem het hele document af en kwam
+      // op 2,5–3,4× uit (#2621).
+      String pages(int count) {
+        final buffer = StringBuffer();
+        for (var i = 1; i <= count; i++) {
+          buffer
+            ..writeln('# Pagina $i')
+            ..writeln()
+            ..writeln(
+              'Een alinea met **nadruk** en een [koppeling](https://example.com/$i).',
+            )
+            ..writeln()
+            ..writeln('1. Eerste punt van pagina $i')
+            ..writeln('2. Tweede punt met wat extra woorden')
+            ..writeln('3. Derde punt')
+            ..writeln('4. Vierde punt')
+            ..writeln('5. Vijfde punt')
+            ..writeln('6. Zesde punt')
+            ..writeln('7. Zevende punt')
+            ..writeln('8. Achtste punt')
+            ..writeln();
+          if (i.isEven) {
+            buffer
+              ..writeln('| A | B | C | D |')
+              ..writeln('| --- | --- | --- | --- |');
+            for (var row = 0; row < 4; row++) {
+              buffer.writeln('| $i | $row | cel | tekst |');
+            }
+            buffer.writeln();
+          }
+          if (i != count) buffer.writeln('---\n');
+        }
+        return buffer.toString();
+      }
+
+      final small = MarkdownQuillCodec.documentFromMarkdown(pages(150));
+      final large = MarkdownQuillCodec.documentFromMarkdown(pages(300));
+      MarkdownQuillCodec.markdownFromDocument(small);
+      MarkdownQuillCodec.markdownFromDocument(large);
+
+      var lowest = double.infinity;
+      for (var attempt = 0; attempt < 3; attempt++) {
+        final smallTime = fastestOf(
+          3,
+          () => MarkdownQuillCodec.markdownFromDocument(small),
+        );
+        final largeTime = fastestOf(
+          3,
+          () => MarkdownQuillCodec.markdownFromDocument(large),
+        );
+        final ratio = largeTime.inMicroseconds / smallTime.inMicroseconds;
+        if (ratio < lowest) lowest = ratio;
+      }
+      expect(
+        lowest,
+        lessThan(2.5),
+        reason:
+            '300 pagina\'s kostten ${lowest.toStringAsFixed(2)}× zoveel als '
+            '150; meer dan 2,5× wijst op superlineair gedrag',
+      );
+    });
+  });
+
+  group('Schaal- en toetsaanslagpoorten (#2636)', () {
+    /// Gelijk-werkmeting zoals bij de parse-poort hierboven: N kleine
+    /// doorlopen doen precies evenveel werk als één grote zolang het
+    /// algoritme lineair is; de verhouding valt dan om 1 en bij
+    /// kwadratisch gedrag om de schaalfactor.
+    test('markdownFromDocument op 300 pagina\'s schaalt lineair', () {
+      String bron(int paginas) => List.generate(
+        paginas,
+        (i) =>
+            '# Deel $i\n\nEen alinea met wat tekst.\n\n- punt $i-a\n- punt $i-b',
+      ).join('\n\n---\n\n');
+
+      final doc150 = MarkdownQuillCodec.documentFromMarkdown(bron(150));
+      final doc300 = MarkdownQuillCodec.documentFromMarkdown(bron(300));
+
+      // Opwarmen: eerste run betaalt JIT- en cachekosten.
+      MarkdownQuillCodec.markdownFromDocument(doc150);
+      MarkdownQuillCodec.markdownFromDocument(doc300);
+
+      var laagste = double.infinity;
+      for (var poging = 0; poging < 3; poging++) {
+        final klein = fastestOf(3, () {
+          MarkdownQuillCodec.markdownFromDocument(doc150);
+          MarkdownQuillCodec.markdownFromDocument(doc150);
+        });
+        final groot = fastestOf(
+          3,
+          () => MarkdownQuillCodec.markdownFromDocument(doc300),
+        );
+        final verhouding = groot.inMicroseconds / klein.inMicroseconds;
+        if (verhouding < laagste) laagste = verhouding;
+      }
+
+      // Bij factor 2 ligt lineair op 1x en kwadratisch op 2x; 1,5x zit
+      // daar midden tussenin.
+      expect(
+        laagste,
+        lessThan(1.5),
+        reason:
+            '300 pagina\'s converteren kostte ${laagste.toStringAsFixed(2)}x '
+            'zoveel als 2× 150 pagina\'s; meer dan 1,5x wijst op superlineair '
+            'gedrag in de visueel→markdown-conversie',
+      );
+    });
+
+    test('werk per toetsaanslag schaalt lineair met de documentgrootte', () {
+      // Wat `_onDocumentChanged` in de deck-editor per toetsaanslag doet: het
+      // bronmodel herparsen en de schrijfstijlinspectie draaien. De validatie
+      // en compat-check zijn gedebounced en tellen hier niet mee — zie
+      // markdown_editor_field_test.
+      String bron(int paginas) => List.generate(
+        paginas,
+        (i) => '# Deel $i\n\n- punt $i-a\n- punt $i-b',
+      ).join('\n\n---\n\n');
+
+      void toetsaanslag(String source, MarkdownSourceDocument doc) {
+        // Eén toetsaanslag = tekst gewijzigd → reparse + inspectie, zoals
+        // `_onDocumentChanged` dat doet.
+        final next = doc.reparse('$source x');
+        inspectMarkdownWriting(next.source);
+      }
+
+      final bron75 = bron(75);
+      final bron300 = bron(300);
+      final doc75 = MarkdownSourceDocument.parse(bron75);
+      final doc300 = MarkdownSourceDocument.parse(bron300);
+
+      toetsaanslag(bron75, doc75);
+      toetsaanslag(bron300, doc300);
+
+      var laagste = double.infinity;
+      for (var poging = 0; poging < 3; poging++) {
+        final klein = fastestOf(3, () {
+          for (var i = 0; i < 4; i++) {
+            toetsaanslag(bron75, doc75);
+          }
+        });
+        final groot = fastestOf(3, () => toetsaanslag(bron300, doc300));
+        final verhouding = groot.inMicroseconds / klein.inMicroseconds;
+        if (verhouding < laagste) laagste = verhouding;
+      }
+
+      expect(
+        laagste,
+        lessThan(2.5),
+        reason:
+            'een toetsaanslag op 300 pagina\'s kostte '
+            '${laagste.toStringAsFixed(2)}x zoveel als 4× een toetsaanslag '
+            'op 75 pagina\'s; meer dan 2,5x wijst op superlineair '
+            'per-toetsaanslag-werk (#2621 was hier de fix)',
+      );
+    });
   });
 }

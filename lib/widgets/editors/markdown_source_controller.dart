@@ -27,6 +27,21 @@ class MarkdownSourceController extends TextEditingController {
 
   MarkdownSourceController({super.text});
 
+  /// Loopt vóór elke lezing van [value]/[text]/[selection] (#2621).
+  ///
+  /// De visuele stand schrijft zijn Quill-wijzigingen met een rustpauze terug
+  /// naar deze controller; deze haak — door de notes-editor gezet op
+  /// `flushPendingVisualEdit` — dwingt die terugschrijf af vóór de lezing.
+  /// Zo is de bron vers voor élke lezer (opslaan, autosave, export, zoeken)
+  /// zonder dat elke aanroep een eigen flush-punt hoeft te kennen.
+  VoidCallback? onBeforeRead;
+
+  @override
+  TextEditingValue get value {
+    onBeforeRead?.call();
+    return super.value;
+  }
+
   void showSearchMatches(List<TextMatchRange> matches, int activeIndex) {
     final indexed = <({TextMatchRange range, int original})>[
       for (var index = 0; index < matches.length; index++)

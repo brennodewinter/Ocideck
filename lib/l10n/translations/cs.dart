@@ -1614,6 +1614,20 @@ const _dutchSourceAddCs = <String, String>{
   'Diagnose gekopieerd naar het klembord.':
       'Diagnostika zkopírována do schránky.',
   'De logmap kon niet worden geopend.': 'Složku protokolů nelze otevřít.',
+  'Afsluiten duurt lang': 'Ukončování trvá dlouho',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Krok úklidu reaguje pomalu. Vaše uložená práce je již v bezpečí; ukončení nyní přeskočí zbývající kroky.',
+  'Wachten': 'Čekat',
+  'Toch afsluiten': 'Přesto ukončit',
+  'Gekozen afbeelding': 'Vybraný obrázek',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Toto logo žije v této relaci prohlížeče a po opětovném načtení zmizí. Exportujte jako balíček, abyste si ho vzali s sebou.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Vaše nastavení byla poškozená a byla obnovena.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Vaše nastavení byla poškozená a byla obnovena; kopie je v {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo není obrázek, nebo je větší než 8 MB. Vyberte menší PNG, JPEG, GIF nebo WebP.',
   'Bezig met installeren': 'Instaluji',
   'Gevonden op schijf: {pad}': 'Nalezeno na disku: {pad}',
   'Van schijf installeren': 'Instalovat z disku',

@@ -1628,6 +1628,20 @@ const _dutchSourceAddLa = <String, String>{
   'Diagnose gekopieerd naar het klembord.':
       'Diagnosis in tabulam transcripta est.',
   'De logmap kon niet worden geopend.': 'Plica actorum aperiri non potuit.',
+  'Afsluiten duurt lang': 'Exitus diu durat',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Gradus purgationis tarde respondet. Opus tuum servatum iam tutum est; nunc exire reliquos gradus omittit.',
+  'Wachten': 'Exspecta',
+  'Toch afsluiten': 'Nihilominus exi',
+  'Gekozen afbeelding': 'Imago electa',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Hoc insigne in hac sessione navigatricis vivit et post relectionem evanescit. Ut fascem exporta ut tecum feras.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Optiones tuae corruptae erant et restitutae sunt.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Optiones tuae corruptae erant et restitutae sunt; exemplar in {pad} est.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Insigne non est imago aut maius est quam 8 MB. Elige PNG, JPEG, GIF vel WebP minus.',
   'Bezig met installeren': 'Instauratur',
   'Gevonden op schijf: {pad}': 'In disco inventum: {pad}',
   'Van schijf installeren': 'Ex disco instaura',

@@ -526,7 +526,12 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       }
       final scales = [
         for (var k = start; k <= end; k++)
-          _memoizedRunScale(slides[k], theme, font, slideAspect),
+          memoizedSplitRunMemberScale(
+            slides[k],
+            theme,
+            font,
+            slideAspect: slideAspect,
+          ),
       ];
       final drag = splitRunDrag(scales, warningScale: kTextDensityWarningScale);
       if (drag != null) {
@@ -556,29 +561,6 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       }
       i = end + 1;
     }
-  }
-
-  double _memoizedRunScale(
-    Slide slide,
-    ThemeProfile theme,
-    String font,
-    double slideAspect,
-  ) {
-    final cached = _runScaleCache[slide];
-    if (cached != null &&
-        cached.font == font &&
-        identical(cached.theme, theme) &&
-        cached.slideAspect == slideAspect) {
-      return cached.scale;
-    }
-    final scale = splitRunMemberScale(
-      slide,
-      theme,
-      font,
-      slideAspect: slideAspect,
-    );
-    _runScaleCache[slide] = _RunScaleMemo(font, theme, slideAspect, scale);
-    return scale;
   }
 }
 

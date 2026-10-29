@@ -1633,6 +1633,20 @@ const _dutchSourceAddBg = <String, String>{
       'Диагностиката е копирана в клипборда.',
   'De logmap kon niet worden geopend.':
       'Папката с журнали не можа да бъде отворена.',
+  'Afsluiten duurt lang': 'Излизането отнема много време',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Стъпка за почистване реагира бавно. Вашата записана работа вече е в безопасност; излизането сега пропуска останалите стъпки.',
+  'Wachten': 'Изчакай',
+  'Toch afsluiten': 'Все пак излез',
+  'Gekozen afbeelding': 'Избрано изображение',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Това лого живее в тази сесия на браузъра и изчезва след презареждане. Експортирай като пакет, за да го вземеш.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Вашите настройки бяха повредени и бяха нулирани.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Вашите настройки бяха повредени и бяха нулирани; копие има в {pad}.',
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Логото не е изображение или е по-голямо от 8 MB. Изберете по-малко PNG, JPEG, GIF или WebP.',
   'Bezig met installeren': 'Инсталиране',
   'Gevonden op schijf: {pad}': 'Намерено на диска: {pad}',
   'Van schijf installeren': 'Инсталиране от диска',

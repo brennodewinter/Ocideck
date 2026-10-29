@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:path/path.dart' as p;
@@ -99,8 +100,10 @@ typedef DeckWriter = Future<void> Function(Deck deck, String filePath);
 
 /// Of er op dit pad al iets staat. Zelfde reden als [DeckWriter]: het
 /// bestandssysteem hoort niet in deze laag thuis, maar botsingsvrij benoemen
-/// wél — dat is de regel die getoetst moet kunnen worden.
-typedef PathExistsProbe = bool Function(String path);
+/// wél — dat is de regel die getoetst moet kunnen worden. `FutureOr` zodat de
+/// aanroeper een échte schijfprobe (async) mag leveren én een test zijn
+/// synchrone `Set.contains` behoudt.
+typedef PathExistsProbe = FutureOr<bool> Function(String path);
 
 /// Bestandsnaam-veilige stam voor een deck, dezelfde sanering als
 /// `FileService.saveDeckAsDetailed` gebruikt voor de voorinvulling: alles wat
@@ -222,7 +225,7 @@ class BulkImportRunner {
       if (deck == null) {
         return BulkImportOutcome.failed(item.name, failure: result.failure);
       }
-      final path = _allocatePath(
+      final path = await _allocatePath(
         targetDirectory,
         deck.title.isNotEmpty ? deck.title : stemOfFileName(item.name),
         claimed,
@@ -252,12 +255,16 @@ class BulkImportRunner {
   /// achter. Bewust een koppelteken en geen ` (2)` zoals bij de importmappen:
   /// de saneerder haalt haakjes juist wég uit een naam, en die er daarna weer
   /// in zetten leest als een tweede regel.
-  String _allocatePath(String directory, String title, Set<String> claimed) {
+  Future<String> _allocatePath(
+    String directory,
+    String title,
+    Set<String> claimed,
+  ) async {
     final base = safeDeckFileStem(title);
     var candidate = base;
     var next = 2;
     while (claimed.contains(candidate.toLowerCase()) ||
-        pathExists(p.join(directory, '$candidate.md'))) {
+        await pathExists(p.join(directory, '$candidate.md'))) {
       candidate = '$base-$next';
       next++;
     }

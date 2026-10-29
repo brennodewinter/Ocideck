@@ -311,6 +311,7 @@ Future<OpenResult> _openPackageFromBytes(
   );
   var deck = gated.deck;
   if (deck == null) return gated.failure;
+  var carriesPackagedProfile = false;
   if (learningSession != null) {
     final anchors = deck.slides.map((slide) => slide.anchor.trim()).toList();
     if (anchors.isEmpty ||
@@ -331,6 +332,15 @@ Future<OpenResult> _openPackageFromBytes(
 
   try {
     deck = notifier._attachPackageAssets(deck, entries, mdEntry.name);
+    // Een `.ocideck`-pakket draagt de stijl van de maker mee als `theme.json`;
+    // de afbeeldingsvelden wijzen naar `logos/`-leden die als `mem:`-assets
+    // landen — vandaar binnen hetzelfde budget-try. Draagt het pakket geen
+    // bruikbaar record, dan blijft het deck zoals het binnenkwam (#2644).
+    final styled = applyCarriedStyleMembers(deck, entries);
+    if (!identical(styled, deck)) {
+      deck = styled;
+      carriesPackagedProfile = true;
+    }
   } on WebAssetBudgetExceeded catch (e) {
     logWarning('TabsNotifier._openPackageFromBytes: webgeheugen vol', e);
     return _failOpen(
@@ -348,12 +358,15 @@ Future<OpenResult> _openPackageFromBytes(
   final initialIndex = initialAnchor == null
       ? 0
       : deck.slides.indexWhere((slide) => slide.anchor == initialAnchor);
+  await warmDeckAnalysisBeforePlace(notifier, deck);
+  if (!notifier.mounted) return OpenResult.unreadable;
   _placeDeckInTab(
     notifier,
     deck,
     remoteOrigin: remoteOrigin,
     learningSession: learningSession,
     index: initialIndex < 0 ? 0 : initialIndex,
+    preserveThemeProfile: carriesPackagedProfile,
   );
   return OpenResult.opened;
 }

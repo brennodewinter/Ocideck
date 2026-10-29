@@ -25,16 +25,16 @@
 //   docProps/app.xml           (app-naam)
 
 import 'dart:convert';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 
 import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
-import '../../models/settings.dart' show ThemeProfile;
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
 import '../pdf/document_pdf_export.dart'
@@ -160,7 +160,11 @@ Future<Uint8List> buildDocumentExportDocx(
     );
   }
 
-  return ZipEncoder().encodeBytes(archive);
+  // Dart-deflate over alle XML en media is CPU-werk van seconden op een groot
+  // document — niet op de UI-isolate. Het archief bouwen mag blijven waar het
+  // is: dat is geheugenwerk, geen compressie.
+  if (kIsWeb) return ZipEncoder().encodeBytes(archive);
+  return Isolate.run(() => ZipEncoder().encodeBytes(archive));
 }
 
 /// Het resultaat van de media-voorbereiding: de body met opgeloste sentinels,
@@ -581,6 +585,11 @@ String _buildDocumentXml(
 /// letter die de huisstijl wérkelijk vraagt (`Aptos`), niet in de
 /// plaatsvervanger die het scherm toont (#2119). Word heeft die letter
 /// doorgaans zelf, en anders valt het terug zoals Word altijd terugvalt.
+/// DOCX telt lettergrootte in halve punten. 11 pt blijft 22, zoals de
+/// eerdere vaste waarde voor het standaardprofiel.
+int _bodyHalfPoints(ThemeProfile theme) =>
+    (clampDocumentBodyFontSize(theme.documentBodyFontSize) * 2).round();
+
 String _buildStylesXml(ThemeProfile theme) {
   final bodyFont = _rFonts(theme.exportFontFamily);
   final headingFont = theme.exportDocumentHeadingFontFamily;
@@ -593,22 +602,26 @@ String _buildStylesXml(ThemeProfile theme) {
   // papier hetzelfde blad toont als het scherm.
   final heading = hexRgbTriplet(theme.effectiveDocumentHeadingColor);
   final subheading = hexRgbTriplet(theme.effectiveDocumentSubheadingColor);
+  // Koppen schalen met de body (dezelfde verhouding als de ODT-percentages,
+  // het scherm en de HTML-/PDF-export), anders haalt een grote bodytekst
+  // zijn eigen kop in.
+  final scale = theme.documentFontScale;
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
       '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
       '<w:docDefaults><w:rPrDefault><w:rPr>'
       '$bodyFont'
       '<w:color w:val="${hexRgbTriplet(theme.textColor)}"/>'
-      '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+      '<w:sz w:val="${_bodyHalfPoints(theme)}"/></w:rPr></w:rPrDefault>'
       '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
       '</w:docDefaults>'
       '<w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
       '<w:name w:val="Normal"/><w:qFormat/></w:style>'
-      '${_headingStyle(1, 32, 240, heading, headingRFonts)}'
-      '${_headingStyle(2, 26, 240, subheading, headingRFonts)}'
-      '${_headingStyle(3, 22, 200, subheading, headingRFonts)}'
-      '${_headingStyle(4, 20, 200, subheading, headingRFonts)}'
-      '${_headingStyle(5, 18, 160, subheading, headingRFonts)}'
-      '${_headingStyle(6, 16, 160, subheading, headingRFonts)}'
+      '${_headingStyle(1, (32 * scale).round(), 240, heading, headingRFonts)}'
+      '${_headingStyle(2, (26 * scale).round(), 240, subheading, headingRFonts)}'
+      '${_headingStyle(3, (22 * scale).round(), 200, subheading, headingRFonts)}'
+      '${_headingStyle(4, (20 * scale).round(), 200, subheading, headingRFonts)}'
+      '${_headingStyle(5, (18 * scale).round(), 160, subheading, headingRFonts)}'
+      '${_headingStyle(6, (16 * scale).round(), 160, subheading, headingRFonts)}'
       '<w:style w:type="character" w:styleId="SourceText">'
       '<w:name w:val="Source Text"/><w:rPr>'
       '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
@@ -617,7 +630,7 @@ String _buildStylesXml(ThemeProfile theme) {
       '<w:name w:val="Preformatted Text"/><w:pPr>'
       '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
       '</w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
-      '<w:sz w:val="20"/></w:rPr></w:style>'
+      '<w:sz w:val="${(20 * scale).round()}"/></w:rPr></w:style>'
       // `w:spacing` vóór `w:ind`: CT_PPrBase schrijft die volgorde voor.
       '<w:style w:type="paragraph" w:styleId="Quote">'
       '<w:name w:val="Quote"/><w:pPr>'

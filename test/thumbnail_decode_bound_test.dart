@@ -7,11 +7,10 @@
 // Op desktop is dat een geheugengrafiek die niemand ziet. Op web valt de tab
 // om, en web is de demo-route.
 //
-// Wat hier bewaakt wordt is de grens én zijn beperktheid: alléén de strook
-// verkleint. Preview, presentatiemodus en de rasteraar tekenen op ware grootte,
-// want daar ís de resolutie het product — een export op 512 px zou een
-// stilzwijgende kwaliteitsval zijn die veel erger is dan het geheugen dat we
-// besparen.
+// Wat hier bewaakt wordt is de miniatuurgrens: de strook blijft op 512.
+// Preview, presentator en beamer ronden hun vak af op 1024/2048/4096, en de
+// export op 2048 — niet op 512, want dat zou een stilzwijgende kwaliteitsval
+// zijn die veel erger is dan het geheugen dat we besparen (#2625).
 
 import 'dart:io';
 

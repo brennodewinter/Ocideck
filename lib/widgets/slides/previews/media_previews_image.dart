@@ -214,17 +214,12 @@ Widget _resolvedImage(
               : ImagePlaceholderReason.outsideDeck,
         );
   }
-  // Block a project-internal symlink that points outside the project (cached,
-  // so the per-frame cost is O(1) after the first render of each image).
-  if (!trustedAsset &&
-      projectPath != null &&
-      !isRenderPathContained(resolved, projectPath)) {
-    return _imagePlaceholder(context, ImagePlaceholderReason.outsideDeck);
-  }
-
   return _localFileImage(
     context,
     resolved,
+    // Een vertrouwd asset (thema-logo) is app-config en kan bewust búiten het
+    // project liggen; voor de rest dwingt de loader de deckgrens af.
+    projectPath: trustedAsset ? null : projectPath,
     fit: fit,
     alignment: alignment,
     semanticLabel: semanticLabel,
@@ -234,42 +229,65 @@ Widget _resolvedImage(
 }
 
 /// Afbeelding van een gecontroleerd lokaal pad. Cap de decode zodat een
-/// enorm (mogelijk onbetrouwbaar) beeld het geheugen niet leegtrekt; zie
-/// cappedFileImage / kMaxImageDecodeDimension. De slidestrook zet
-/// daarbovenop een veel lagere grens via de scope — daar is een thumbnail
-/// van ~180 px breed, en op ware grootte kost één telefoonfoto bijna
-/// 49 MiB (#612).
+/// enorm (mogelijk onbetrouwbaar) beeld het geheugen niet leegtrekt. De
+/// strook houdt 512 px (#612). Andere oppervlakken ronden het vak af op
+/// 1024, 2048 of 4096, en een GIF die in die trede past blijft animeren
+/// (#2625). Een telefoonfoto op bronresolutie kost anders tientallen MiB
+/// per oppervlak.
 ///
 /// De version-teller forceert een cache-miss nadat een afbeelding op schijf
 /// is herschreven (bv. na rotatie in de crop-dialoog) — zonder dit blijft de
 /// Image-widget de oude decode tonen omdat de provider `==` niet verandert.
+///
+/// De symlink-containment zit *in* de byte-lezing van de provider
+/// ([readContainedImageBytes]): één async realpath per decode in plaats van
+/// twee synchrone per build (#2624). Een pad dat het project ontsnapt werpt
+/// daar [ProjectEscapeException], die hier de `outsideDeck`-placeholder kiest
+/// — hetzelfde zichtbare antwoord als de oude build-tijd-controle.
 Widget _localFileImage(
   BuildContext context,
   String resolved, {
+  String? projectPath,
   required BoxFit fit,
   required Alignment alignment,
   required String? semanticLabel,
   required Widget Function(Widget child) styled,
   required Widget Function(ImagePlaceholderReason reason) failed,
 }) {
-  final maxEdge = SlideLinkScope.decodeMaxEdgeOf(context);
   final version = imageVersionOf(resolved);
-  return styled(
-    RetryingImage(
-      image: maxEdge == null
-          ? cappedFileImage(File(resolved), version: version)
-          : boundedFileImage(File(resolved), maxEdge, version: version),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      semanticLabel: semanticLabel,
-      // Keep showing the previous frame while the next image decodes. Without
-      // this the widget paints nothing for a frame on a source change, which
-      // shows up as a black flash between slides — fatal when recording video.
-      gaplessPlayback: true,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+  return ResolvedDecodeImage(
+    explicitEdge: SlideLinkScope.decodeMaxEdgeOf(context),
+    imageFor: (plan) => plan.hardResize
+        ? boundedFileImage(
+            File(resolved),
+            plan.edge,
+            version: version,
+            projectPath: projectPath,
+          )
+        : cappedFileImage(
+            File(resolved),
+            version: version,
+            projectPath: projectPath,
+            maxEdge: plan.edge,
+          ),
+    child: (image) => styled(
+      RetryingImage(
+        image: image,
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        semanticLabel: semanticLabel,
+        // Keep showing the previous frame while the next image decodes. Without
+        // this the widget paints nothing for a frame on a source change, which
+        // shows up as a black flash between slides — fatal when recording video.
+        gaplessPlayback: true,
+        errorBuilder: (context, error, stackTrace) => failed(
+          error is ProjectEscapeException
+              ? ImagePlaceholderReason.outsideDeck
+              : ImagePlaceholderReason.missing,
+        ),
+      ),
     ),
   );
 }
@@ -289,17 +307,21 @@ Widget? _memoryImage(
   if (!WebAssetStore.isMemPath(imagePath)) return null;
   final memBytes = WebAssetStore.bytesFor(imagePath);
   if (memBytes == null) return failed(ImagePlaceholderReason.memoryGone);
-  return styled(
-    Image(
-      image: cappedMemoryImage(memBytes),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+  return ResolvedDecodeImage(
+    explicitEdge: SlideLinkScope.decodeMaxEdgeOf(context),
+    imageFor: (plan) => cappedMemoryImage(memBytes, maxEdge: plan.edge),
+    child: (image) => styled(
+      Image(
+        image: image,
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        semanticLabel: semanticLabel,
+        errorBuilder: (context, error, stackTrace) =>
+            failed(ImagePlaceholderReason.missing),
+      ),
     ),
   );
 }
