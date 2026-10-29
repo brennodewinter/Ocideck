@@ -136,7 +136,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// dáárin nog een `mem:`-pad aanhaalt, blijft; de rest gaat weg. Onvolledig
   /// zou het beeld op een andere dia of een ongedaan-stap wegvagen, dus de
   /// verzameling wordt hier bewust breed opgebouwd.
-  ///
   /// Op desktop is de store leeg (afbeeldingen staan op schijf), dus dan haakt
   /// hij meteen af.
   void sweepWebAssets() {
@@ -155,6 +154,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     final clipboard = _ref.read(slideClipboardProvider);
     if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
+    addOpenStyleMemoryPaths(_ref.read(settingsProvider).themeProfiles, live);
     WebAssetStore.retain(live);
   }
 

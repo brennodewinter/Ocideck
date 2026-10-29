@@ -1624,6 +1624,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Логото не е изображение или е по-голямо от 8 MB. Изберете по-малко PNG, JPEG, GIF или WebP.',
   'Bezig met installeren': 'Инсталиране',
   'Gevonden op schijf: {pad}': 'Намерено на диска: {pad}',
   'Van schijf installeren': 'Инсталиране от диска',

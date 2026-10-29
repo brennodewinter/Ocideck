@@ -1635,6 +1635,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Ní íomhá an lógó, nó tá sé níos mó ná 8 MB. Roghnaigh PNG, JPEG, GIF nó WebP níos lú.',
   'Bezig met installeren': 'Á shuiteáil',
   'Gevonden op schijf: {pad}': 'Aimsithe ar dhiosca: {pad}',
   'Van schijf installeren': 'Suiteáil ó dhiosca',

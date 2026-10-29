@@ -1611,6 +1611,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logotipas nėra paveikslėlis arba yra didesnis nei 8 MB. Pasirinkite mažesnį PNG, JPEG, GIF arba WebP.',
   'Bezig met installeren': 'Diegiama',
   'Gevonden op schijf: {pad}': 'Rasta diske: {pad}',
   'Van schijf installeren': 'Diegti iš disko',

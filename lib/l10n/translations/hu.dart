@@ -1607,6 +1607,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'A logó nem kép, vagy nagyobb mint 8 MB. Válasszon kisebb PNG, JPEG, GIF vagy WebP fájlt.',
   'Bezig met installeren': 'Telepítés folyamatban',
   'Gevonden op schijf: {pad}': 'Lemezén található: {pad}',
   'Van schijf installeren': 'Telepítés lemezről',

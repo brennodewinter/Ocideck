@@ -133,15 +133,21 @@ extension _SettingsProfile on _SettingsDialogState {
   }
 
   void _deleteProfile() {
-    ref.read(settingsProvider.notifier).deleteThemeProfile(_themeProfile.name);
-    _adoptProfile(ref.read(settingsProvider).themeProfile);
+    if (_styleProfiles.length <= 1) return;
+    final removing = _originalName;
+    _styleProfiles = [
+      for (final profile in _styleProfiles)
+        if (profile.name != removing) profile,
+    ];
+    _adoptProfile(_styleProfiles.first);
   }
 
   Future<void> _createProfile() async {
-    final created = await ref
-        .read(settingsProvider.notifier)
-        .createThemeProfile(base: _themeProfile);
-    if (!mounted) return;
+    _commitEditedStyleProfile(this);
+    final created = _themeProfile.copyWith(
+      name: _uniqueStyleName(this, 'Nieuw profiel'),
+    );
+    _styleProfiles = [..._styleProfiles, created];
     _adoptProfile(created);
   }
 
@@ -196,14 +202,12 @@ extension _SettingsProfile on _SettingsDialogState {
     }
 
     final imported = outcome.profile!;
-    // previousName matcht bewust geen bestaand profiel: het profiel wordt
-    // toegevoegd (met een unieke naam) in plaats van er een te overschrijven.
-    await ref
-        .read(settingsProvider.notifier)
-        .saveThemeProfile(imported, previousName: '');
-    if (!mounted) return;
-
-    final saved = ref.read(settingsProvider).themeProfile;
+    // De naam wordt uniek in de werkkopie. Opslaan schrijft de lijst pas weg;
+    // tot dan mag Annuleren het geïmporteerde profiel weer laten vallen.
+    final saved = imported.copyWith(
+      name: _uniqueStyleName(this, imported.name),
+    );
+    _styleProfiles = [..._styleProfiles, saved];
     _adoptProfile(saved);
 
     final renamed = saved.name != imported.name;
@@ -216,6 +220,138 @@ extension _SettingsProfile on _SettingsDialogState {
     ].join(' ');
     messenger.showSnackBar(SnackBar(content: Text(message)));
   }
+}
+
+/// Zet de editor terug in de werkkopie. Top-level: de dialoogklasse zit tegen
+/// haar plafond, en dit is boekhouding van de lijst, geen widget.
+void _commitEditedStyleProfile(_SettingsDialogState state) {
+  final edited = state._editedProfile();
+  final name = _uniqueStyleName(
+    state,
+    edited.name,
+    except: state._originalName,
+  );
+  final stored = edited.copyWith(name: name);
+  final index = state._styleProfiles.indexWhere(
+    (p) => p.name == state._originalName,
+  );
+  if (index < 0) {
+    state._styleProfiles = [...state._styleProfiles, stored];
+  } else {
+    state._styleProfiles = [
+      for (var i = 0; i < state._styleProfiles.length; i++)
+        if (i == index) stored else state._styleProfiles[i],
+    ];
+  }
+  state._originalName = name;
+  state._themeProfile = stored;
+  state._profileName.text = name;
+}
+
+String _uniqueStyleName(
+  _SettingsDialogState state,
+  String raw, {
+  String? except,
+}) {
+  final base = raw.trim().isEmpty ? 'Stijlprofiel' : raw.trim();
+  final used = state._styleProfiles
+      .map((profile) => profile.name)
+      .where((name) => name != except)
+      .toSet();
+  if (!used.contains(base)) return base;
+  var index = 2;
+  while (used.contains('$base $index')) {
+    index++;
+  }
+  return '$base $index';
+}
+
+Future<void> _pickPresentationLogo(_SettingsDialogState state) =>
+    _pickStyleLogo(
+      state,
+      dialogTitle: state.context.l10n.d('Logo kiezen'),
+      // Een geïmporteerde merkstrook bevat het oude logo. Bij een bewuste
+      // wissel moet die strook weg, anders blijft het vorige merk staan.
+      apply: (path) =>
+          state._themeProfile.copyWith(logoPath: path, clearBrandStrip: true),
+    );
+
+Future<void> _pickDarkPresentationLogo(_SettingsDialogState state) =>
+    _pickStyleLogo(
+      state,
+      dialogTitle: state.context.l10n.d('Donker logo kiezen'),
+      apply: (path) => state._themeProfile.copyWith(logoDarkPath: path),
+    );
+
+Future<void> _pickDocumentLogo(_SettingsDialogState state) => _pickStyleLogo(
+  state,
+  dialogTitle: state.context.l10n.d('Logo kiezen'),
+  apply: (path) => state._themeProfile.copyWith(documentLogoPath: path),
+);
+
+/// Desktop bewaart het pad. Web leest bytes: `PlatformFile.path` bestaat
+/// daar niet en een blob-adres zou na herladen nergens heen wijzen.
+/// [supportsLocalProjectFolders] is die grens.
+Future<void> _pickStyleLogo(
+  _SettingsDialogState state, {
+  required String dialogTitle,
+  required ThemeProfile Function(String path) apply,
+}) async {
+  final file = await FilePicker.pickFile(
+    dialogTitle: dialogTitle,
+    type: FileType.image,
+  );
+  if (!state.mounted || file == null) return;
+  final length = await file.length();
+  if (!state.mounted) return;
+  if (length == null ||
+      length <= 0 ||
+      length > FileService.maxStyleProfileLogoBytes) {
+    _reportRejectedStyleLogo(state);
+    return;
+  }
+  final Uint8List bytes;
+  try {
+    bytes = await file.readAsBytes();
+  } catch (e) {
+    logWarning('SettingsDialog: logo lezen mislukt', e);
+    if (state.mounted) _reportRejectedStyleLogo(state);
+    return;
+  }
+  if (!state.mounted || styleLogoFromBytes(bytes) == null) {
+    if (state.mounted) _reportRejectedStyleLogo(state);
+    return;
+  }
+  final String path;
+  if (!supportsLocalProjectFolders) {
+    try {
+      final name = file.name.trim().isEmpty ? 'logo.png' : file.name;
+      path = WebAssetStore.put(bytes, name: name);
+    } on WebAssetBudgetExceeded {
+      if (state.mounted) _reportRejectedStyleLogo(state);
+      return;
+    }
+  } else {
+    final picked = file.path;
+    if (picked == null) return;
+    path = picked;
+  }
+  state._rebuild(() {
+    state._themeProfile = apply(path);
+    state._profileTouched = true;
+    rememberStyleEditorMemoryPins(state._themeProfile);
+  });
+}
+
+void _reportRejectedStyleLogo(_SettingsDialogState state) {
+  final l10n = state.context.l10n;
+  showErrorSnackBar(
+    ScaffoldMessenger.of(state.context),
+    l10n,
+    l10n.d(
+      'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.',
+    ),
+  );
 }
 
 /// Exporteert [profile] en meldt de uitkomst aan de gebruiker.

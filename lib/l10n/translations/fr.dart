@@ -652,6 +652,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Le logo n\'est pas une image, ou il dépasse 8 Mo. Choisissez un PNG, JPEG, GIF ou WebP plus petit.',
   'Bezig met installeren': 'Installation en cours',
   'Gevonden op schijf: {pad}': 'Trouvé sur le disque : {pad}',
   'Van schijf installeren': 'Installer depuis le disque',

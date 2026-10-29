@@ -392,6 +392,16 @@ String _odtFontFaceDecls(Set<String> families) {
 /// de lopende tekst, [ThemeProfile.exportDocumentHeadingFontFamily] voor de
 /// koppen — de letter die de huisstijl vraagt, niet de plaatsvervanger van
 /// het scherm.
+/// De lopende tekst in punten. Koppen blijven een percentage daarvan, zodat
+/// ze meeschalen zonder een tweede absolute maat te krijgen. Een hele punt
+/// schrijft `11pt`, een halve `11.5pt`.
+String _odtBodyPoints(ThemeProfile theme) {
+  final text = clampDocumentBodyFontSize(
+    theme.documentBodyFontSize,
+  ).toStringAsFixed(1);
+  return text.endsWith('.0') ? text.substring(0, text.length - 2) : text;
+}
+
 String _odtStyles(ThemeProfile t) {
   final bodyFont = 'style:font-name="${xmlAttr(t.exportFontFamily)}"';
   final headingFont =
@@ -406,7 +416,7 @@ String _odtStyles(ThemeProfile t) {
   return '''
 <style:default-style style:family="paragraph">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%" fo:text-align="start" style:justify-single-word="false"/>
-  <style:text-properties $bodyFont fo:font-size="100%" fo:color="$text" style:font-name-asian="Noto Sans CJK SC"/>
+  <style:text-properties $bodyFont fo:font-size="${_odtBodyPoints(t)}pt" fo:color="$text" style:font-name-asian="Noto Sans CJK SC"/>
 </style:default-style>
 <style:style style:name="Standard" style:family="paragraph" style:class="text">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%"/>

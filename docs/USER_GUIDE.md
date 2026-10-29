@@ -5787,8 +5787,16 @@ preview. Presentation restores the complete font, colour, animation, logo, foote
 closing-slide controls beside a real 16:9 slide preview. A selected logo is shown next
 to the file chooser and is shared by presentations and documents by default. In the
 document controls you can unlink it and choose a different document logo, or deliberately
-use no document logo. The document logo width can be set from 32 to 480 px and follows
-the presentation logo size until changed. The same controls set its position, the
+use no document logo. On the web build you can also pick the presentation logo, the
+dark logo and the document logo. The bytes stay in this browser session: they show in
+the preview and travel in an `.ocideck` package or an `.ocideckstyle` file. A bare
+Markdown download does not keep them; OciDeck warns and offers the package. Reloading
+the page drops those session bytes. The document logo width can be set from 32 to 480 px and follows
+the presentation logo size until changed. The **body size** is 9 to 28 pt (11 pt by
+default): the point size of the body text, the same unit as the PDF, Word (DOCX) and
+LibreOffice (ODT). The screen turns those points into CSS pixels, so 11 pt on screen
+is the same physical size as 11 pt in the PDF. Word headings keep their own size;
+LibreOffice headings stay a percentage of the body. The same controls also set the document-logo position, the
 **header**, **footer text** and **page numbers**. Header and footer accept several lines
 and inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `~~strike~~` and links).
 Their shared text and background colours can be set independently; until changed,
@@ -5824,10 +5832,16 @@ The profile's colours also carry the **table style**: the border style (*Lijnen
 (volledig)* fully boxed, or *Geen randen* no borders at all), the border colour,
 **zebra striping** with a colour of its own, the **cell padding** in px, and an
 **accent rule under the header row**. It is a house style, not per-table
-formatting: every table in a document or presentation follows it, and because it
-sits in the style profile it travels with the file — the recipient sees the table
-you styled. The writing surface, the preview, the HTML export and the LaTeX
-export all draw it.
+formatting: every table in a document or presentation follows the style profile
+that applies at that moment. A bare `.md` does not carry that table style. Someone
+who opens it while a different profile is active sees the tables in that local
+profile, not in the sender's style. An `.ocideckstyle` file carries the whole
+profile, including the table style. An `.ocideck` package puts the style beside
+the markdown in `ocideck-style.json`: OciDeck uses it for this deck and leaves the
+recipient's global profile alone. The CSS in the package is there for Marp. An
+older package without that file follows the local profile. See
+[FILE_FORMAT](FILE_FORMAT.md). The writing surface, the preview, the HTML export and the LaTeX
+export draw whichever style applies.
 
 A table wider than the space it is given is neither cut off nor allowed to run
 off the page: the columns take their natural widths as long as they fit, and are

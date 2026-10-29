@@ -70,8 +70,9 @@ my_presentation/
 │   └── .ocideck_captions.json      # caption sidecar (see §6.1)
 ├── data/                           # linked chart data files (see §6.4)
 │   └── revenue.json
-├── logos/                          # copied logo and optional brand strip from the style profile
+├── logos/                          # presentation logo, optional dark variant, optional document logo, optional brand strip
 │   ├── logo.png
+│   ├── logo-donker.png             # only when a dark variant was chosen
 │   └── brand-strip.png
 ├── media/                          # video/audio, created on save (see §7)
 └── themes/
@@ -3114,13 +3115,32 @@ yet.
 ├── images/...                # all used images
 ├── data/...                  # linked chart data files (§6.4)
 ├── media/...                 # used video/audio
-├── logos/...                 # logo from the style profile
-└── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
+├── logos/...                 # presentation logo, dark variant, document logo, brand strip
+├── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
+└── ocideck-style.json        # this deck's style, beside the markdown (§7)
 ```
 
 The package carries the same `.marprc.yml` at its root as a saved project folder
 (§1.1), so extracting it and running `marp <title>.md` from the extracted folder
 loads the theme the same way. *(Added 2026-08-27, #1804.)*
+
+`ocideck-style.json` is the style of **this** package, not a change to the
+recipient's global profile. OciDeck applies it only to the deck it opens. A
+package written before this file existed has no sidecar and keeps using the
+recipient's active profile. The JSON is a `ThemeProfile` (§3.2) whose image
+paths are `logos/…` or a bundled `asset:`. An absolute path, a `..` segment, or
+a path outside `logos/` is dropped; a document logo that cannot be packed
+becomes `""` (deliberately no document logo) rather than the sender's path.
+`null` on `documentLogoPath` still means "share the presentation logo". The
+CSS and the `logos/` members stay in the package for Marp CLI. On the web build
+the logo bytes become session `mem:` paths after the same image check (type and
+at most 8 MiB); they do not survive a reload. Saving an unpacked package
+refreshes the sidecar when it is already there. An ordinary project save does
+not create one: a bare `.md` still carries no style.
+
+Two different images that share a file name get different names in `logos/`
+(`logo.png`, then `logo_2.png`). Identical bytes share one file. The same rule
+holds for the dark variant, the document logo and the brand strip.
 
 On import:
 

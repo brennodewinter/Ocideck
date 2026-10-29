@@ -1608,6 +1608,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'S Logo isch keis Bild oder grösser als 8 MB. Nimm es chliners PNG, JPEG, GIF oder WebP.',
   'Bezig met installeren': 'Wird installiert',
   'Gevonden op schijf: {pad}': 'Uf Disk gfunde: {pad}',
   'Van schijf installeren': 'Von Disk installiere',

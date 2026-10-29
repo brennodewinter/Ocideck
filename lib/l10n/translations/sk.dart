@@ -1611,6 +1611,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
+      'Logo nie je obrázok alebo je väčšie ako 8 MB. Vyberte menší PNG, JPEG, GIF alebo WebP.',
   'Bezig met installeren': 'Inštalujem',
   'Gevonden op schijf: {pad}': 'Nájdené na disku: {pad}',
   'Van schijf installeren': 'Inštalovať z disku',

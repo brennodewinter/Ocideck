@@ -34,7 +34,6 @@ import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
-import '../../models/settings.dart' show ThemeProfile;
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
 import '../pdf/document_pdf_export.dart'
@@ -581,6 +580,11 @@ String _buildDocumentXml(
 /// letter die de huisstijl wérkelijk vraagt (`Aptos`), niet in de
 /// plaatsvervanger die het scherm toont (#2119). Word heeft die letter
 /// doorgaans zelf, en anders valt het terug zoals Word altijd terugvalt.
+/// DOCX telt lettergrootte in halve punten. 11 pt blijft 22, zoals de
+/// eerdere vaste waarde voor het standaardprofiel.
+int _bodyHalfPoints(ThemeProfile theme) =>
+    (clampDocumentBodyFontSize(theme.documentBodyFontSize) * 2).round();
+
 String _buildStylesXml(ThemeProfile theme) {
   final bodyFont = _rFonts(theme.exportFontFamily);
   final headingFont = theme.exportDocumentHeadingFontFamily;
@@ -598,7 +602,7 @@ String _buildStylesXml(ThemeProfile theme) {
       '<w:docDefaults><w:rPrDefault><w:rPr>'
       '$bodyFont'
       '<w:color w:val="${hexRgbTriplet(theme.textColor)}"/>'
-      '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+      '<w:sz w:val="${_bodyHalfPoints(theme)}"/></w:rPr></w:rPrDefault>'
       '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
       '</w:docDefaults>'
       '<w:style w:type="paragraph" w:default="1" w:styleId="Normal">'

@@ -4,6 +4,7 @@ import '../services/asset_staging.dart';
 import '../services/slide_image_refs.dart';
 import '../services/web_asset_store.dart';
 import 'deck.dart';
+import 'settings.dart';
 import 'slide.dart';
 
 /// Waar de media van een slide vandaan komt, gezien vanuit de vraag die er
@@ -86,7 +87,7 @@ bool assetOriginNeedsAttention(AssetOrigin origin) => switch (origin) {
 /// schijftoegang — dezelfde regel als [classifyAssetPath].
 bool deckCarriesMemoryAssets(Deck deck) {
   bool mem(String path) => WebAssetStore.isMemPath(path.trim());
-  if (mem(deck.themeProfile.logoPath ?? '')) return true;
+  if (_profileMemoryPaths(deck.themeProfile).isNotEmpty) return true;
   for (final s in deck.slides) {
     if (mem(s.videoPath) || mem(s.audioPath)) return true;
     if (slideImagePaths(s).any(mem)) return true;
@@ -112,14 +113,52 @@ void addSlideMemoryAssetPaths(Slide slide, Set<String> into) {
   }
 }
 
-/// Alle `mem:`-paden die [deck] aanhaalt (dia-media plus het logo). De sweep
-/// gebruikt dit per open deck; zie [WebAssetStore.retain].
+/// `mem:`-paden van een stijlprofiel die de sweep niet mag opruimen zolang
+/// de stijleditor ze nog toont. De dialoog vult deze verzameling; sluiten
+/// zonder opslaan maakt hem leeg.
+final styleEditorMemoryPins = <String>{};
+
+void rememberStyleEditorMemoryPins(ThemeProfile profile) {
+  styleEditorMemoryPins
+    ..clear()
+    ..addAll(_profileMemoryPaths(profile));
+}
+
+void forgetStyleEditorMemoryPins() => styleEditorMemoryPins.clear();
+
+/// Alle `mem:`-paden die [deck] aanhaalt (dia-media plus elk profiellogo).
+/// De sweep gebruikt dit per open deck; zie [WebAssetStore.retain].
 Set<String> deckMemoryAssetPaths(Deck deck) {
   final paths = <String>{};
-  final logo = (deck.themeProfile.logoPath ?? '').trim();
-  if (WebAssetStore.isMemPath(logo)) paths.add(logo);
+  paths.addAll(_profileMemoryPaths(deck.themeProfile));
   for (final slide in deck.slides) {
     addSlideMemoryAssetPaths(slide, paths);
+  }
+  return paths;
+}
+
+/// Profielen uit de instellingen en de open stijleditor horen bij de sweep,
+/// ook als geen open deck dat logo op dit moment tekent.
+void addOpenStyleMemoryPaths(
+  Iterable<ThemeProfile> profiles,
+  Set<String> into,
+) {
+  for (final profile in profiles) {
+    into.addAll(_profileMemoryPaths(profile));
+  }
+  into.addAll(styleEditorMemoryPins);
+}
+
+Set<String> _profileMemoryPaths(ThemeProfile profile) {
+  final paths = <String>{};
+  for (final path in [
+    profile.logoPath,
+    profile.logoDarkPath,
+    profile.documentLogoPath,
+    profile.brandStripPath,
+  ]) {
+    final trimmed = path?.trim() ?? '';
+    if (WebAssetStore.isMemPath(trimmed)) paths.add(trimmed);
   }
   return paths;
 }
