@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import '../models/slide.dart';
 import '../models/slide_format.dart';
-import '../utils/lru_cache.dart';
 import 'markdown_body_blocks.dart' as md_body;
 import 'text_measurement.dart';
 
@@ -22,21 +21,23 @@ export 'finding_header_metrics.dart'
 /// exact geometry it was laid out at. A preview recomputes this fit through
 /// several TextPainter layouts (a few milliseconds) on every rebuild, and
 /// editing one slide rebuilds every visible thumbnail in the rail even though
-/// their slides never changed — same object identity. The key is
-/// (slide, font, width, availW, availH); a changed slide is a new object (never
-/// a stale hit) and a resize misses on the geometry. Capped with FIFO eviction
-/// so a long session can't grow it without bound (mirrors the image
-/// average-colour cache).
+/// their slides never changed — same object identity. The per-slide key is
+/// (font, width, availW, availH); a changed slide is a new object (never a
+/// stale hit) and a resize misses on the geometry.
 ///
 /// A given slide is rendered by exactly one preview type, so each key always
 /// maps to the same value type — the `as T` cast on a hit is sound.
 ///
-/// LRU rather than insertion-order eviction so the on-screen working set (the
-/// thumbnails the user is actually looking at, re-read every frame) stays warm
-/// even once a long session has cycled more than the cache's capacity of
-/// distinct slide/geometry combinations through it.
-final LruCache<(Slide, String, double, double, double), Object>
-_renderLayoutCache = LruCache(512);
+/// Expando per dia i.p.v. een globale LRU (#2622): de memo leeft precies zo
+/// lang als de dia, en een sequentiële scan over meer dia's dan de oude
+/// capaciteit verdreef bij LRU elke waarde vlak voordat die weer nodig was
+/// (100% misses boven de cap). Binnen de dia een klein mapje per geometrie —
+/// een dia komt op hooguit een handvol breedtes voor (strook, preview,
+/// overzicht, presentator, beamer) — met een plafond van 6 en FIFO-verdringing.
+final Expando<Map<(String, double, double, double), Object>>
+_renderLayoutCache = Expando<Map<(String, double, double, double), Object>>(
+  'renderLayout',
+);
 
 T memoizedRenderLayout<T extends Object>({
   required Slide slide,
@@ -46,11 +47,14 @@ T memoizedRenderLayout<T extends Object>({
   required double availH,
   required T Function() compute,
 }) {
-  final key = (slide, font, width, availW, availH);
-  final cached = _renderLayoutCache[key];
+  final perSlide = _renderLayoutCache[slide] ??=
+      <(String, double, double, double), Object>{};
+  final key = (font, width, availW, availH);
+  final cached = perSlide[key];
   if (cached != null) return cached as T;
   final value = compute();
-  _renderLayoutCache[key] = value;
+  if (perSlide.length >= 6) perSlide.remove(perSlide.keys.first);
+  perSlide[key] = value;
   return value;
 }
 

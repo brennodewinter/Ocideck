@@ -1,38 +1,45 @@
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
-import '../../utils/lru_cache.dart';
 import 'privacy_scanner.dart';
 
-/// Per-slide memoisatie van de privacyscan.
+/// Stempel voor bevindingen die pas bij het uitlezen hun echte dia-index
+/// krijgen. Bewust géén [kDeckWidePrivacyIndex] — die waarde betekent
+/// "deckbreed" en mag op een slidebevinding nooit naar buiten lekken.
+const int _unindexedSlide = -2;
+
+class _SlideScanMemo {
+  /// De scanner die deze uitkomst maakte — op identiteit. Hij komt uit een
+  /// provider die opnieuw wordt gebouwd zodra een instelling wijzigt
+  /// (uitgezette regels, eigen identiteit, landpakketten), dus een andere
+  /// configuratie is per definitie een ander object en dus een misser. Dat is
+  /// beter dan de velden los in de sleutel leggen: vergeet je er later één,
+  /// dan blijft er stilletjes een verouderde bevinding hangen — en dát is bij
+  /// een privacycontrole de verkeerde fout.
+  final PrivacyScanner scanner;
+
+  /// Bevindingen gestempeld op [_unindexedSlide]; de echte dia-index wordt er
+  /// bij het samenvoegen van de deckscan op geschreven.
+  final PrivacyScanResult result;
+
+  const _SlideScanMemo(this.scanner, this.result);
+}
+
+/// Per-slide memoisatie van de privacyscan op dia-identiteit.
 ///
-/// [PrivacyScanner.scanSlide] bestond hier al voor — het doc-commentaar noemt
-/// letterlijk "voor de per-slide memoisatie in de provider" — maar werd nergens
-/// aangeroepen. De provider draaide `scan(deck)`, dus élke aanslag scande het
-/// hele deck opnieuw: gemeten ~1,07 ms per dia, en dus 208 ms bij 200 dia's en
-/// 519 ms bij 500. Er verandert bij een aanslag precies één dia.
+/// `Slide` is onveranderlijk en elke bewerking levert een nieuw exemplaar op,
+/// dus identiteit is een geldige wijzigingsstempel — een gewijzigde dia mist,
+/// alle andere raken. De dia-**index** zit bewust níét in de sleutel: hij
+/// staat alleen op elke bevinding gestempeld en wordt bij het samenvoegen
+/// geschreven via [PrivacyFinding.reindexed]. Een dia die bovenaan wordt
+/// ingevoegd ongeldigt daardoor geen enkele scan achter hem (#2622).
 ///
-/// De sleutel is waterdicht doordat alles wat de uitkomst bepaalt erin zit:
-///
-///   * de **scanner** als object. Hij komt uit een provider die opnieuw wordt
-///     gebouwd zodra een instelling wijzigt (uitgezette regels, eigen identiteit,
-///     landpakketten), dus een andere configuratie is per definitie een ander
-///     object en dus een misser. Dat is beter dan de velden los in de sleutel
-///     leggen: vergeet je er later één, dan blijft er stilletjes een verouderde
-///     bevinding hangen — en dát is bij een privacycontrole de verkeerde fout.
-///   * de **dia** als object. `Slide` is onveranderlijk en elke bewerking levert
-///     een nieuw exemplaar op, dus identiteit is hier een geldige
-///     wijzigingsstempel (dezelfde redenering als bij `memoizedRenderLayout` en
-///     bij de opslagrace in `deck_provider.dart`).
-///   * de **index**, want die reist mee in elke bevinding. Een dia die van plek
-///     verschuift krijgt daardoor een verse scan in plaats van bevindingen die
-///     naar de oude positie wijzen.
-///
-/// LRU en niet onbegrensd: een lange sessie met veel bewerkingen zou anders elk
-/// tussenresultaat vasthouden. 512 is ruim genoeg voor het werkende venster van
-/// een groot deck, en volgt de maat die de layoutmemo al hanteert.
-final LruCache<(PrivacyScanner, Slide, int), PrivacyScanResult>
-_slideScanCache = LruCache(512);
+/// Een `Expando` en geen LRU: de memo leeft precies zo lang als de dia zelf
+/// en kent geen capaciteitsklif — een sequentiële scan over meer dia's dan de
+/// oude 512-cap verdreef elke waarde vlak voordat die weer nodig was.
+Expando<_SlideScanMemo> _slideScanCache = Expando<_SlideScanMemo>(
+  'privacyScan',
+);
 
 /// De scan van één dia, uit de memo wanneer die er al is.
 PrivacyScanResult memoizedSlideScan(
@@ -40,12 +47,14 @@ PrivacyScanResult memoizedSlideScan(
   Slide slide,
   int index,
 ) {
-  final key = (scanner, slide, index);
-  final cached = _slideScanCache[key];
-  if (cached != null) return cached;
-  final value = scanner.scanSlide(slide, index);
-  _slideScanCache[key] = value;
-  return value;
+  var memo = _slideScanCache[slide];
+  if (memo == null || !identical(memo.scanner, scanner)) {
+    memo = _SlideScanMemo(scanner, scanner.scanSlide(slide, _unindexedSlide));
+    _slideScanCache[slide] = memo;
+  }
+  return PrivacyScanResult([
+    for (final f in memo.result.findings) f.reindexed(index),
+  ]);
 }
 
 /// De scan van een heel deck, met de dia's uit de memo.
@@ -63,5 +72,7 @@ PrivacyScanResult memoizedDeckScan(PrivacyScanner scanner, Deck deck) {
   return PrivacyScanResult(findings);
 }
 
-/// Leegt de memo. Alleen voor tests: in de app zorgt de LRU voor de begrenzing.
-void clearPrivacyScanMemo() => _slideScanCache.clear();
+/// Vergeet alle memo's. Alleen voor tests: in de app ruimt de `Expando` mee
+/// op met de dia's zelf.
+void clearPrivacyScanMemo() =>
+    _slideScanCache = Expando<_SlideScanMemo>('privacyScan');

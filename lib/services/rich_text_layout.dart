@@ -1,4 +1,3 @@
-import '../utils/lru_cache.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_format.dart';
@@ -309,11 +308,19 @@ RichTextLayoutPlan planRichTextLayout({
 /// was de duurste van de vijf en als enige niet aangesloten. Sleutel op de dia
 /// (onveranderlijk, dus identiteit is een geldige wijzigingsstempel) plus alles
 /// wat de uitkomst verder bepaalt.
-final LruCache<
-  (Slide, ThemeProfile, String, double, double, double, bool),
-  RichTextLayoutPlan
+/// Expando per dia i.p.v. een globale LRU (#2622): de memo leeft zo lang als
+/// de dia en kent geen capaciteitsklif bij sequentiële scans. Binnen de dia
+/// een klein mapje per (profiel, font, geometrie) — plafond 6, FIFO.
+final Expando<
+  Map<(ThemeProfile, String, double, double, double, bool), RichTextLayoutPlan>
 >
-_richTextPlanCache = LruCache(256);
+_richTextPlanCache =
+    Expando<
+      Map<
+        (ThemeProfile, String, double, double, double, bool),
+        RichTextLayoutPlan
+      >
+    >('richTextPlan');
 
 RichTextLayoutPlan planRichTextForSlide({
   required Slide slide,
@@ -324,8 +331,13 @@ RichTextLayoutPlan planRichTextForSlide({
   required String font,
   bool splitWithImage = false,
 }) {
-  final key = (slide, profile, font, w, availW, availH, splitWithImage);
-  final cached = _richTextPlanCache[key];
+  final perSlide = _richTextPlanCache[slide] ??=
+      <
+        (ThemeProfile, String, double, double, double, bool),
+        RichTextLayoutPlan
+      >{};
+  final key = (profile, font, w, availW, availH, splitWithImage);
+  final cached = perSlide[key];
   if (cached != null) return cached;
   final plan = _planRichTextForSlide(
     slide: slide,
@@ -336,7 +348,8 @@ RichTextLayoutPlan planRichTextForSlide({
     font: font,
     splitWithImage: splitWithImage,
   );
-  _richTextPlanCache[key] = plan;
+  if (perSlide.length >= 6) perSlide.remove(perSlide.keys.first);
+  perSlide[key] = plan;
   return plan;
 }
 

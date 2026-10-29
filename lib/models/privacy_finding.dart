@@ -167,6 +167,23 @@ class PrivacyFinding {
 
   bool get isDeckWide => slideIndex == kDeckWidePrivacyIndex;
 
+  /// Dezelfde bevinding op een andere diapositie — voor de per-dia-memo,
+  /// die de dia-index niet in zijn sleutel heeft maar pas bij het samenvoegen
+  /// van de deckscan op elke bevinding stempelt (#2622).
+  PrivacyFinding reindexed(int index) => PrivacyFinding(
+    ruleId: ruleId,
+    family: family,
+    confidence: confidence,
+    slideIndex: index,
+    field: field,
+    fragmentIndex: fragmentIndex,
+    start: start,
+    end: end,
+    maskedSample: maskedSample,
+    role: role,
+    personRole: personRole,
+  );
+
   /// Dezelfde bevinding, geëscaleerd door de co-occurrence-escalator.
   ///
   /// Twee dingen veranderen tegelijk, en dat is geen toeval — het is dezelfde
