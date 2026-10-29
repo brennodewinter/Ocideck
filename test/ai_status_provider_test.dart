@@ -149,6 +149,57 @@ void main() {
       expect(transport.calls, callsWhenDisabled);
     });
 
+    testWidgets(
+      'een instellingswijziging laat de periodieke controle niet dood (#2635)',
+      (tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final transport = _FakeTransport();
+        final c = ProviderContainer(
+          overrides: [
+            aiHttpTransportProvider.overrideWithValue(transport),
+            secretStoreProvider.overrideWithValue(_FakeSecretStore()),
+          ],
+        );
+        addTearDown(c.dispose);
+        final sub = c.listen(aiStatusProvider, (_, _) {});
+        addTearDown(sub.close);
+        await tester.pump();
+
+        await c.read(settingsProvider.notifier).setAiSettings(_local);
+        await tester.pump();
+        // Eerste interval-tik: de periodieke controle loopt (de eerste
+        // asynchrone check kan dan nog onderweg zijn).
+        await tester.pump(kAiStatusRefreshInterval);
+        await tester.pump();
+        expect(transport.calls, greaterThanOrEqualTo(1));
+
+        // Herbouw de provider met een gewijzigde instelling — vóór de fix
+        // bleef de geannuleerde timer in `_timer` staan en kwam er nooit een
+        // nieuwe.
+        await c
+            .read(settingsProvider.notifier)
+            .setAiSettings(_local.copyWith(model: 'ander-model'));
+        await tester.pump();
+        final callsAfterEdit = transport.calls;
+
+        await tester.pump(kAiStatusRefreshInterval);
+        await tester.pump();
+        expect(
+          transport.calls,
+          greaterThan(callsAfterEdit),
+          reason: 'het interval loopt ook na de wijziging gewoon door',
+        );
+
+        // De levende periodieke timer achterlaten breekt de test-hygiëne.
+        await c
+            .read(settingsProvider.notifier)
+            .setAiSettings(const AiSettings(enabled: false));
+        // Riverpod's geplande herbouw draait op eigen 0-seconden-timers die
+        // elkaar weer aanmaken; pumpAndSettle spoelt de hele ketting leeg.
+        await tester.pumpAndSettle();
+      },
+    );
+
     test('endpoint geeft fout → niet bereikbaar', () async {
       final transport = _FakeTransport(error: AiRequestException('network'));
       final c = await _container(transport: transport);

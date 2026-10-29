@@ -70,7 +70,13 @@ class AiStatusNotifier extends Notifier<AiStatus> {
   AiStatus build() {
     final settings = ref.watch(settingsProvider.select((s) => s.aiSettings));
     final consent = ref.watch(consentProvider.select((s) => s.hasAccepted));
-    ref.onDispose(() => _timer?.cancel());
+    // De timer hoort bij déze build: annuleer én vergeet hem, anders maakt de
+    // `=` hieronder na een herbouw geen nieuwe en stopt de periodieke
+    // controle voorgoed (#2635).
+    ref.onDispose(() {
+      _timer?.cancel();
+      _timer = null;
+    });
     final generation = ++_generation;
 
     if (!settings.enabled) {
