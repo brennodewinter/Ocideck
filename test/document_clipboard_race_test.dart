@@ -12,6 +12,7 @@ import 'package:ocideck/platform/clipboard_html.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/state/deck_provider.dart' show imageServiceProvider;
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/utils/visual_markdown_flush.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -235,6 +236,8 @@ void main() {
 
       // Niets geplakt, wel de melding dat de plek veranderde — en de 'X'
       // die er zelf bij kwam staat er nog (genormaliseerde afsluiter).
+      // De omzetting wacht een korte pauze; de melding komt eerder.
+      await tester.pump(kVisualMarkdownFlushDelay);
       expect(
         notifier.currentState.document!.body,
         'XEerste zin.\n\nTweede zin.',

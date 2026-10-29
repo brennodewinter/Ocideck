@@ -241,10 +241,6 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     );
   }
 
-  /// Het bewerkbare oppervlak van de Visuele modus. De notes-editor toont zelf de
-  /// passende opmaakbalk: de Quill-balk in de rijke-tekstweergave, of de
-  /// markdown-opmaakbalk + waarschuwing wanneer de bron een niet-verliesvrije
-  /// constructie bevat en hij terugvalt op bewerkbare brontekst.
   Widget _wysiwygEditor(ThemeData theme) => MarkdownNotesEditor(
     controller: _controller,
     focusNode: _editorFocus,
@@ -257,9 +253,8 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     showModeToggle: false,
     mode: NotesEditorMode.visual,
     surfaceStyle: NotesSurfaceStyle.document,
-    // Schrijfbreedte is een keuze. De pagina-einden trokken die vroeger naar
-    // het vel, zodat "volledige breedte" niets deed. De einden volgen nu de
-    // gekozen stand en worden daarbuiten niet getekend.
+    // Schrijfbreedte is een keuze; de einden volgen hem. Vroeger trokken ze
+    // de breedte naar het vel, zodat "volledige breedte" niets deed.
     documentMaxWidth: _documentWriteWidth(ref),
     editorKey: _visualEditorKey,
     onDiscreteVisualEdit: () => _expectVisualInsert = true,

@@ -265,6 +265,13 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   }
 
   @override
+  void deactivate() {
+    // Dit element is nog actief; daarna mag ref.read de boom niet meer op.
+    ref.read(documentProvider.notifier).flushPendingVisualEdit();
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
     _chrome.dispose();
     _find.dispose();
@@ -349,11 +356,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// het nieuwe tabblad.
   Future<void> _convertToPresentation() => _convertDocumentToPresentation(this);
 
-  /// Presenteer dit document zoals hij is — de zelfde body, pagina voor
-  /// pagina, met live bewerken op vooraf aangewezen tabellen (#2487). De
-  /// aanwijsdialoog, de tweede-scherm-grens en de afsluitkeuze-afhandeling
-  /// staan in parts/document_editor_presenter.dart — ze raken geen veld
-  /// van de State.
+  /// Presenteer de body pagina voor pagina (#2487). De dialoog staat in de part.
   Future<void> _presentDocument() => _presentDocumentSession(this);
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.

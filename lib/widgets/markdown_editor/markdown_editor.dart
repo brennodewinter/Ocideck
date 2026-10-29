@@ -639,7 +639,14 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (markdown == _markdownSnapshot) return;
     _syncingMarkdown = true;
     _markdownSnapshot = markdown;
-    widget.controller.value = _valueWithClampedSelection(markdown);
+    // TearDown gooit de controller weg vóór het unmounten. De bewerking
+    // heeft dan geen bestemming meer; de melding zelf is het probleem niet.
+    try {
+      widget.controller.value = _valueWithClampedSelection(markdown);
+    } on FlutterError {
+      _syncingMarkdown = false;
+      return;
+    }
     _syncingMarkdown = false;
   }
 
