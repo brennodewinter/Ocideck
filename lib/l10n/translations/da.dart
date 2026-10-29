@@ -1605,6 +1605,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afsluiten duurt lang': 'Afslutningen tager lang tid',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Et oprydningstrin reagerer langsomt. Dit gemte arbejde er allerede sikkert; at afslutte nu springer de resterende trin over.',
+  'Wachten': 'Vent',
+  'Toch afsluiten': 'Afslut alligevel',
+  'Gekozen afbeelding': 'Valgt billede',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Dette logo lever i denne browsersession og forsvinder ved genindlæsning. Eksportér som pakke for at tage det med.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Dine indstillinger var beskadigede og er blevet nulstillet.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Dine indstillinger var beskadigede og er blevet nulstillet; en kopi ligger i {pad}.',
   'Bezig met installeren': 'Installerer',
   'Gevonden op schijf: {pad}': 'Fundet på disken: {pad}',
   'Van schijf installeren': 'Installér fra disk',

@@ -1633,6 +1633,18 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afsluiten duurt lang': 'O encerramento está a demorar',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Um passo de limpeza responde lentamente. O teu trabalho guardado já está seguro; sair agora salta os passos restantes.',
+  'Wachten': 'Aguardar',
+  'Toch afsluiten': 'Sair mesmo assim',
+  'Gekozen afbeelding': 'Imagem escolhida',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Este logótipo vive nesta sessão do navegador e desaparece ao recarregar. Exporta como pacote para o levar contigo.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'As tuas definições estavam corrompidas e foram repostas.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'As tuas definições estavam corrompidas e foram repostas; há uma cópia em {pad}.',
   'Bezig met installeren': 'A instalar',
   'Gevonden op schijf: {pad}': 'Encontrado no disco: {pad}',
   'Van schijf installeren': 'Instalar a partir do disco',

@@ -1605,6 +1605,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afsluiten duurt lang': 'Sulkeminen kestää kauan',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Siivousvaihe reagoi hitaasti. Tallennettu työsi on jo turvassa; sulkeminen nyt ohittaa loput vaiheet.',
+  'Wachten': 'Odota',
+  'Toch afsluiten': 'Sulje silti',
+  'Gekozen afbeelding': 'Valittu kuva',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Tämä logo elää tässä selainistunnossa ja katoaa uudelleenladattaessa. Vie pakettina viedäksesi sen mukaasi.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Asetuksesi olivat vioittuneet ja ne on palautettu.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Asetuksesi olivat vioittuneet ja ne on palautettu; kopio on kohteessa {pad}.',
   'Bezig met installeren': 'Asennetaan',
   'Gevonden op schijf: {pad}': 'Löydetty levyltä: {pad}',
   'Van schijf installeren': 'Asenna levyltä',

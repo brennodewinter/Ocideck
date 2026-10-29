@@ -545,8 +545,7 @@ class _AppShellState extends ConsumerState<AppShell> {
       title: Text(context.l10n.d('Afsluiten duurt lang')),
       content: Text(
         context.l10n.d(
-          'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; '
-          'nu afsluiten slaat de resterende stappen over.',
+          'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.',
         ),
       ),
       actions: [
@@ -892,9 +891,11 @@ class _AppShellState extends ConsumerState<AppShell> {
                 ? context.l10n.d(
                     'Je instellingen waren beschadigd en zijn teruggezet.',
                   )
-                : context.l10n.d(
-                    'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in $path.',
-                  ),
+                : context.l10n
+                      .d(
+                        'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.',
+                      )
+                      .replaceAll('{pad}', path),
           ),
         ),
       );

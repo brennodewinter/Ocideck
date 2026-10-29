@@ -1624,6 +1624,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afsluiten duurt lang': 'Излизането отнема много време',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Стъпка за почистване реагира бавно. Вашата записана работа вече е в безопасност; излизането сега пропуска останалите стъпки.',
+  'Wachten': 'Изчакай',
+  'Toch afsluiten': 'Все пак излез',
+  'Gekozen afbeelding': 'Избрано изображение',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Това лого живее в тази сесия на браузъра и изчезва след презареждане. Експортирай като пакет, за да го вземеш.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Вашите настройки бяха повредени и бяха нулирани.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Вашите настройки бяха повредени и бяха нулирани; копие има в {pad}.',
   'Bezig met installeren': 'Инсталиране',
   'Gevonden op schijf: {pad}': 'Намерено на диска: {pad}',
   'Van schijf installeren': 'Инсталиране от диска',

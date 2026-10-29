@@ -624,8 +624,7 @@ extension _SettingsColors on _SettingsDialogState {
           padding: const EdgeInsets.only(top: 8),
           child: Text(
             l10n.d(
-              'Dit logo leeft in deze browsersessie en verdwijnt na herladen. '
-              'Exporteer als pakket om het mee te nemen.',
+              'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),

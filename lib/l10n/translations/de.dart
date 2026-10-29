@@ -652,6 +652,18 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Afsluiten duurt lang': 'Beenden dauert lange',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Ein Aufräumschritt reagiert träge. Deine gespeicherte Arbeit ist bereits sicher; ein Beenden jetzt überspringt die übrigen Schritte.',
+  'Wachten': 'Warten',
+  'Toch afsluiten': 'Trotzdem beenden',
+  'Gekozen afbeelding': 'Ausgewähltes Bild',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Dieses Logo lebt in dieser Browsersitzung und verschwindet nach dem Neuladen. Als Paket exportieren, um es mitzunehmen.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Deine Einstellungen waren beschädigt und wurden zurückgesetzt.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Deine Einstellungen waren beschädigt und wurden zurückgesetzt; eine Kopie liegt in {pad}.',
   'Bezig met installeren': 'Wird installiert',
   'Gevonden op schijf: {pad}': 'Auf Datenträger gefunden: {pad}',
   'Van schijf installeren': 'Von Datenträger installieren',

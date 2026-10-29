@@ -1609,6 +1609,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afsluiten duurt lang': 'Izlazak dugo traje',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Korak čišćenja reagira sporo. Vaš spremljeni rad već je na sigurnom; izlazak sada preskače preostale korake.',
+  'Wachten': 'Pričekaj',
+  'Toch afsluiten': 'Ipak izađi',
+  'Gekozen afbeelding': 'Odabrana slika',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Ovaj logo živi u ovoj sesiji preglednika i nestaje nakon ponovnog učitavanja. Izvezi kao paket da ga poneseš.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Vaše postavke bile su oštećene i vraćene su.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Vaše postavke bile su oštećene i vraćene su; kopija je u {pad}.',
   'Bezig met installeren': 'Instaliram',
   'Gevonden op schijf: {pad}': 'Pronađeno na disku: {pad}',
   'Van schijf installeren': 'Instaliraj s diska',

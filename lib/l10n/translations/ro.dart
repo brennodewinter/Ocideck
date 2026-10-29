@@ -1621,6 +1621,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afsluiten duurt lang': 'Închiderea durează mult',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Un pas de curățare răspunde încet. Munca ta salvată este deja în siguranță; ieșirea acum sare peste pașii rămași.',
+  'Wachten': 'Așteaptă',
+  'Toch afsluiten': 'Ieși totuși',
+  'Gekozen afbeelding': 'Imagine aleasă',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Acest logo trăiește în această sesiune de browser și dispare la reîncărcare. Exportă ca pachet pentru a-l lua cu tine.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Setările tale erau corupte și au fost resetate.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Setările tale erau corupte și au fost resetate; o copie se află în {pad}.',
   'Bezig met installeren': 'Se instalează',
   'Gevonden op schijf: {pad}': 'Găsit pe disc: {pad}',
   'Van schijf installeren': 'Instalați de pe disc',

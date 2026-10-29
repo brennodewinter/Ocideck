@@ -2513,6 +2513,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afsluiten duurt lang': 'Kapatma uzun sürüyor',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Bir temizlik adımı yavaş yanıt veriyor. Kaydedilmiş çalışmanız zaten güvende; şimdi kapatmak kalan adımları atlar.',
+  'Wachten': 'Bekle',
+  'Toch afsluiten': 'Yine de kapat',
+  'Gekozen afbeelding': 'Seçilen resim',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Bu logo bu tarayıcı oturumunda yaşar ve yeniden yüklendiğinde kaybolur. Yanınızda götürmek için paket olarak dışa aktarın.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Ayarlarınız bozuktu ve sıfırlandı.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Ayarlarınız bozuktu ve sıfırlandı; bir kopya {pad} konumunda.',
   'Bezig met installeren': 'Kuruluyor',
   'Gevonden op schijf: {pad}': 'Diskte bulundu: {pad}',
   'Van schijf installeren': 'Diskten kur',

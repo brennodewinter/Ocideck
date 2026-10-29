@@ -652,6 +652,18 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afsluiten duurt lang': 'La fermeture prend du temps',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Une étape de nettoyage répond lentement. Votre travail enregistré est déjà en sécurité ; quitter maintenant saute les étapes restantes.',
+  'Wachten': 'Attendre',
+  'Toch afsluiten': 'Quitter quand même',
+  'Gekozen afbeelding': 'Image choisie',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Ce logo vit dans cette session du navigateur et disparaît au rechargement. Exportez en paquet pour l\'emporter.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Vos paramètres étaient corrompus et ont été réinitialisés.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Vos paramètres étaient corrompus et ont été réinitialisés ; une copie se trouve dans {pad}.',
   'Bezig met installeren': 'Installation en cours',
   'Gevonden op schijf: {pad}': 'Trouvé sur le disque : {pad}',
   'Van schijf installeren': 'Installer depuis le disque',

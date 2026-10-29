@@ -1604,6 +1604,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afsluiten duurt lang': 'Avslutningen tar lång tid',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Ett städsteg svarar långsamt. Ditt sparade arbete är redan säkert; att avsluta nu hoppar över de återstående stegen.',
+  'Wachten': 'Vänta',
+  'Toch afsluiten': 'Avsluta ändå',
+  'Gekozen afbeelding': 'Vald bild',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Den här logotypen lever i den här webbläsarsessionen och försvinner vid omladdning. Exportera som paket för att ta med den.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Dina inställningar var skadade och har återställts.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Dina inställningar var skadade och har återställts; en kopia finns i {pad}.',
   'Bezig met installeren': 'Installerar',
   'Gevonden op schijf: {pad}': 'Hittad på disk: {pad}',
   'Van schijf installeren': 'Installera från disk',

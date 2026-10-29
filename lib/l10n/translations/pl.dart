@@ -1617,6 +1617,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afsluiten duurt lang': 'Zamykanie trwa długo',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Krok porządkowania reaguje wolno. Twoja zapisana praca jest już bezpieczna; zamknięcie teraz pominie pozostałe kroki.',
+  'Wachten': 'Czekaj',
+  'Toch afsluiten': 'Zamknij mimo to',
+  'Gekozen afbeelding': 'Wybrany obraz',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'To logo żyje w tej sesji przeglądarki i znika po przeładowaniu. Wyeksportuj jako pakiet, aby je zabrać.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Twoje ustawienia były uszkodzone i zostały przywrócone.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Twoje ustawienia były uszkodzone i zostały przywrócone; kopia znajduje się w {pad}.',
   'Bezig met installeren': 'Trwa instalowanie',
   'Gevonden op schijf: {pad}': 'Znaleziono na dysku: {pad}',
   'Van schijf installeren': 'Zainstaluj z dysku',

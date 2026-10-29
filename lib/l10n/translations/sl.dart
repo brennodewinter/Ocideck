@@ -1605,6 +1605,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afsluiten duurt lang': 'Izhod traja dolgo',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Korak čiščenja se odziva počasi. Vaše shranjeno delo je že varno; izhod zdaj preskoči preostale korake.',
+  'Wachten': 'Počakaj',
+  'Toch afsluiten': 'Kljub temu zapusti',
+  'Gekozen afbeelding': 'Izbrana slika',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Ta logotip živi v tej seji brskalnika in po ponovnem naloženju izgine. Izvozi kot paket, da ga vzameš s seboj.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Vaše nastavitve so bile poškodovane in so bile ponastavljene.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Vaše nastavitve so bile poškodovane in so bile ponastavljene; kopija je v {pad}.',
   'Bezig met installeren': 'Nameščam',
   'Gevonden op schijf: {pad}': 'Najdeno na disku: {pad}',
   'Van schijf installeren': 'Namesti z diska',
