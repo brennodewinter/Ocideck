@@ -71,6 +71,18 @@ Future<void> warmDeckAnalysisBeforePlace(
   Deck deck,
 ) async {
   final ref = notifier._ref;
+  // Onder `flutter test` landen `Isolate.run` en `scheduleTask` nooit: de
+  // nep-async-klok voert geen echte event loop uit terwijl de aanroeper
+  // await. Synchroon warmen geeft dezelfde memo's en eindstaat, zonder
+  // deadlock. [isFlutterTest] dekt web-tests af — daar geldt `kIsWeb` en
+  // is `Platform` onleesbaar.
+  if (isFlutterTest) {
+    if (ref.read(settingsProvider.select((s) => s.privacyChecksEnabled))) {
+      memoizedDeckScan(ref.read(privacyScannerProvider), deck);
+    }
+    ref.read(slideQualityAnalyzerProvider).analyze(deck);
+    return;
+  }
   var privacyWarm = Future<void>.value();
   if (ref.read(settingsProvider.select((s) => s.privacyChecksEnabled))) {
     privacyWarm = warmPrivacyScanMemo(
