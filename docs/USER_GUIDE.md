@@ -3709,6 +3709,15 @@ the editor half of it.
   that tab's banner opens it too. Contributed and would like to be listed? Add
   yourself in your first pull request. Named there and would rather not be?
   Write to stichting@librekat.nl and it comes off — no reason needed.
+- **Diagnostics** — *Settings → Over OciDeck → Diagnose* is where you fetch
+  the local log when you report a problem. **Diagnose kopiëren** puts the
+  version, your operating system and the last 200 log lines on the clipboard,
+  formatted to paste straight into an issue; **Logmap openen** opens the folder
+  with the files. The log holds errors, freezes and start-up steps, not the
+  content of your decks or documents, and file names in it are replaced by a
+  short hash. It never leaves your computer by itself. Desktop only; the
+  [Troubleshooting guide](TROUBLESHOOTING_GUIDE.md#build-and-startup-problems)
+  lists where the folder is when the app does not start at all.
 - **Keyboard** — the panel divider between the slide list and the editor can be
   focused with `Tab` and resized with `←`/`→`; the add-slide dialog is fully
   keyboard-operable.

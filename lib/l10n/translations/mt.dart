@@ -1623,6 +1623,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Diagnose': 'Dijanjostika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck iżomm log fuq dan il-kompjuter ta’ żbalji, waqfiet u tal-bidu. Ma fih l-ebda kontenut minn preżentazzjonijiet jew dokumenti, u l-ismijiet tal-fajls isiru mhux rikonoxxibbli. Il-log qatt ma jitlaq minn dan il-kompjuter waħdu: aqsmu biss meta tirrapporta problema.',
+  'Logmap openen': 'Iftaħ il-folder tal-log',
+  'Diagnose kopiëren': 'Ikkopja d-dijanjostika',
+  'Diagnose gekopieerd naar het klembord.':
+      'Id-dijanjostika ġiet ikkupjata fil-clipboard.',
+  'De logmap kon niet worden geopend.': 'Il-folder tal-log ma setax jinfetaħ.',
   'Afsluiten duurt lang': 'L-għeluq qed jieħu żmien twil',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Pass tat-tindif qed jirreaġixxi bil-mod. X-xogħol salvat tiegħek diġà sikur; toħroġ issa taqbeż il-passi li jifdal.',

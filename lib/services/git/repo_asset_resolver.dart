@@ -52,7 +52,7 @@ Future<Deck> resolveRepoAssetsToMem(
           bytes.length > ImageService.maxMediaBytes ||
           ImageService.mediaMimeFromBytes(bytes.take(16).toList()) == null) {
         logWarning(
-          'resolveRepoAssetsToMem: media geweigerd ($sourceName) — geen '
+          'resolveRepoAssetsToMem: media geweigerd (${logName(sourceName)}) — geen '
           'bekende container of buiten de grens',
         );
         return null;
@@ -76,7 +76,10 @@ Future<Deck> resolveRepoAssetsToMem(
       memFor[reference] = staged;
       return staged;
     } on GitForgeException catch (e) {
-      logWarning('resolveRepoAssetsToMem: media onbereikbaar ($sourceName)', e);
+      logWarning(
+        'resolveRepoAssetsToMem: media onbereikbaar (${logName(sourceName)})',
+        e,
+      );
       return null;
     }
   }
@@ -103,7 +106,10 @@ Future<Deck> resolveRepoAssetsToMem(
       pendingWebAssets[reference] = (bytes: bytes, name: name);
       return null;
     } on GitForgeException catch (e) {
-      logWarning('resolveRepoAssetsToMem: asset onbereikbaar ($sourceName)', e);
+      logWarning(
+        'resolveRepoAssetsToMem: asset onbereikbaar (${logName(sourceName)})',
+        e,
+      );
       return null;
     }
   }

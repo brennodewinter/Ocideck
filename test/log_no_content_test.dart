@@ -47,7 +47,44 @@ String? _eersteArgument(String bron, int open) {
   return null;
 }
 
+/// Variabelen die een bestandsnaam, een relatief pad of een gebruikersnaam
+/// dragen. Sinds #2618 staat een logregel ook in een bestand dat een gebruiker
+/// met ons deelt; een absoluut pad haalt `redactPaths` eruit, maar een kale
+/// naam of `decks/ontslag-jan` is voor een patroon een gewoon woord. Zulke
+/// waarden gaan door `logName(…)`.
+final _naamdragers = RegExp(
+  r'\$\{?(?:file\.name|entry\.path|deckDir|commit\.deckDir|sourceName|'
+  r'username|settings\.username|name)\b(?![.(])',
+);
+
 void main() {
+  test('geen logmelding draagt een kale bestandsnaam of gebruikersnaam', () {
+    final lib = Directory('${Directory.current.path}/lib');
+    final aanroep = RegExp(r'\blog(?:Warning|Error|Info)\s*\(');
+    final overtredingen = <String>[];
+    for (final f in lib.listSync(recursive: true).whereType<File>()) {
+      if (!f.path.endsWith('.dart')) continue;
+      final bron = f.readAsStringSync();
+      for (final m in aanroep.allMatches(bron)) {
+        final arg = _eersteArgument(bron, m.end - 1);
+        if (arg == null) continue;
+        for (final hit in _naamdragers.allMatches(arg)) {
+          final regel = '\n'.allMatches(bron.substring(0, m.start)).length + 1;
+          overtredingen.add(
+            '${f.path.split('/lib/').last}:$regel interpoleert "${hit[0]}"',
+          );
+        }
+      }
+    }
+    expect(
+      overtredingen..sort(),
+      isEmpty,
+      reason:
+          'zet een bestandsnaam of relatief pad in een logmelding via '
+          'logName(…), en laat een gebruikersnaam weg (zie lib/utils/log.dart)',
+    );
+  });
+
   test('geen logmelding draagt de inhoud van een deck of een bestand', () {
     final lib = Directory('${Directory.current.path}/lib');
     expect(lib.existsSync(), isTrue, reason: lib.path);

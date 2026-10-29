@@ -244,6 +244,18 @@ void main() {
     expect(sandbox.existsSync(), isFalse);
   });
 
+  test('de logbestanden gaan weg, de lopende sessiemarkering blijft', () async {
+    final logs = Directory('${support.path}/logs')..createSync();
+    for (final name in ['ocideck.log', 'ocideck.1.log', 'beamer.log']) {
+      File('${logs.path}/$name').writeAsStringSync('regel\n');
+    }
+    final marker = File('${logs.path}/ocideck.sessie')
+      ..writeAsStringSync('gestart\n');
+
+    expect(await traces.clearLogs(), 3);
+    expect(logs.listSync().map((e) => e.path), [marker.path]);
+  });
+
   test('alles terugzetten wist elke werkkopie en de hele wachtrij', () async {
     workingCopy('git_clone', slug);
     workingCopy('git_mirror', 'een-andere-repo');
@@ -466,6 +478,8 @@ void main() {
       workingCopy('git_clone', slug);
       Directory('${support.path}/style_logos').createSync();
       File('${support.path}/style_logos/logo.png').writeAsBytesSync([1]);
+      Directory('${support.path}/logs').createSync();
+      File('${support.path}/logs/ocideck.log').writeAsStringSync('regel\n');
       final notifier = await loaded();
       await notifier.addRecentFile('/klanten/politie/incident.md');
       await notifier.setLanguageCode('de');
@@ -476,6 +490,7 @@ void main() {
       expect(notifier.state.languageCode, 'nl');
       expect(Directory('${support.path}/git_clone').existsSync(), isFalse);
       expect(Directory('${support.path}/style_logos').existsSync(), isFalse);
+      expect(File('${support.path}/logs/ocideck.log').existsSync(), isFalse);
       final prefs = await SharedPreferences.getInstance();
       expect(prefs.getKeys(), isEmpty);
     });

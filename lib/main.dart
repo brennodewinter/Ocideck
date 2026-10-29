@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' show AppExitResponse;
 
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
@@ -14,6 +15,7 @@ import 'services/bundled_licenses.dart';
 import 'services/privacy/privacy_bulk_lexicon.dart';
 import 'services/shared_preferences_atomic.dart';
 import 'services/asset_staging.dart';
+import 'services/diagnostics/diagnostics.dart';
 import 'services/disk_traces.dart';
 import 'services/single_instance.dart';
 import 'utils/log.dart';
@@ -23,7 +25,7 @@ void main(List<String> args) {
   // Run the whole app inside a guarded zone so that no uncaught error — from a
   // build, a platform callback, or an async gap — can disappear without a trace
   // or leave the UI wedged mid-presentation. Everything is logged via the
-  // existing dart:developer sink (quiet in release).
+  // dart:developer stream and, on desktop, the local log file (#2618).
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     _installErrorHandlers();
@@ -36,33 +38,25 @@ void main(List<String> args) {
     // getInstance() registreren; op macOS/web is dit een no-op.
     registerAtomicFilePreferences();
 
-    // De fonts, het gezichtsmodel en de gebundelde JavaScript zijn geen
-    // Dart-pakketten, dus Flutter's eigen NOTICES-asset kent ze niet. Ze hier
-    // aanmelden zorgt dat de licentiepagina ze wél toont — OFL-1.1 §2 laat een
-    // lettertype alleen meereizen mét zijn licentie.
-    BundledLicenses.register();
-
-    if (!kIsWeb && args.isNotEmpty && args.first == 'multi_window') {
-      final raw = args.length >= 3 ? args[2] : '';
-      final parsed = raw.isEmpty ? const <String, dynamic>{} : jsonDecode(raw);
-      final map = Map<String, dynamic>.from(parsed as Map);
-      runApp(AudienceWindowApp(args: map));
-      return;
-    }
+    // Het beamervenster is een eigen engine met een eigen logbestand; zie
+    // Diagnostics.start.
+    final audience = !kIsWeb && args.isNotEmpty && args.first == 'multi_window';
 
     // Windows/Linux: een bestandsassociatie start de app met het pad als
     // argument. Bewaar het; de shell opent het bij de eerste frame (macOS
     // levert open-events via het ocideck/open_file-kanaal, niet via args).
-    if (!kIsWeb) {
+    if (!kIsWeb && !audience) {
       pendingLaunchFiles.addAll(args.where(looksLikeDeckLaunchArg));
     }
 
     // Linux enkel-exemplaar (#2656): een tweede starter stuurt zijn paden via
-    // de Unix-socket naar de primaire en stopt hier, vóór elk zwaar werk —
-    // het venster verschijnt pas bij het eerste frame, dus vroeg genoeg is
-    // dit helemaal onzichtbaar. (Windows doet dit natief in de runner; macOS
-    // regelt exemplaren via het besturingssysteem.)
-    if (!kIsWeb && Platform.isLinux) {
+    // de Unix-socket naar de primaire en stopt hier, vóór het logbestand —
+    // een doorgestuurde instantie zou met een eigen sessiemarkering en een
+    // tweede schrijver op dezelfde logbestanden de primaire vertroebelen
+    // (vals "vorige sessie niet netjes afgesloten" plus gelijktijdige
+    // rotatie). Windows doet dit natief in de runner; macOS regelt exemplaren
+    // via het besturingssysteem.
+    if (!kIsWeb && !audience && Platform.isLinux) {
       final guard = SingleInstanceGuard();
       if (await guard.forwardToPrimary(pendingLaunchFiles)) {
         // De primaire opent de paden; dit proces bezit niets om op te ruimen.
@@ -70,6 +64,29 @@ void main(List<String> args) {
       }
       await guard.becomePrimary();
       activeSingleInstance = guard;
+    }
+
+    // Eerst het logbestand: wat hierna misgaat — ook een start die vastloopt —
+    // moet erin staan. Daarna een mijlpaal na elke stap die de start kan
+    // ophouden; de laatste mijlpaal in het log zegt waar het bleef hangen.
+    await Diagnostics.start(
+      name: audience ? 'beamer' : 'ocideck',
+      session: !audience,
+    );
+    logMilestone('main');
+
+    // De fonts, het gezichtsmodel en de gebundelde JavaScript zijn geen
+    // Dart-pakketten, dus Flutter's eigen NOTICES-asset kent ze niet. Ze hier
+    // aanmelden zorgt dat de licentiepagina ze wél toont — OFL-1.1 §2 laat een
+    // lettertype alleen meereizen mét zijn licentie.
+    BundledLicenses.register();
+
+    if (audience) {
+      final raw = args.length >= 3 ? args[2] : '';
+      final parsed = raw.isEmpty ? const <String, dynamic>{} : jsonDecode(raw);
+      final map = Map<String, dynamic>.from(parsed as Map);
+      runApp(AudienceWindowApp(args: map));
+      return;
     }
 
     // De opstartwaakhond (#2626): op Windows toont het venster pas bij het
@@ -91,8 +108,10 @@ void main(List<String> args) {
     // Bepaal de stagingmap voor media vóór de eerste frame: de UI moet
     // synchroon kunnen zien of een afbeelding daar staat (zie AssetStaging).
     await AssetStaging.initialize();
+    logMilestone('mediastaging');
 
     await configureNativeWindow();
+    logMilestone('venster');
 
     // Huishouding start pas ná het eerste frame — het venster is dan
     // zichtbaar en dit werk mag de event loop nooit ononderbroken bezetten.
@@ -120,9 +139,36 @@ void main(List<String> args) {
     // Faalt het laden, dan draait de scanner op de ingebakken vloer verder —
     // zie PrivacyBulkLexicon.
     await lexiconReady;
+    logMilestone('privacylexicon');
 
     runApp(const ProviderScope(child: OciDeckApp()));
+    _watchSession();
   }, (error, stack) => logError('Uncaught zone error', error, stack));
+}
+
+/// Na `runApp`: het eerste frame als mijlpaal, en een nette afsluiting die het
+/// logbestand afrondt.
+void _watchSession() {
+  unawaited(
+    WidgetsBinding.instance.waitUntilFirstFrameRasterized.then((_) {
+      logMilestone('eerste frame');
+      Diagnostics.firstFrameShown();
+    }),
+  );
+  // Elke afsluiting via het venster loopt langs `quitApp`, dat het log al
+  // afrondt. Cmd+Q op macOS niet: dat gaat via `NSApplication.terminate`, en het
+  // OS vraagt het framework of het mag. Het antwoord blijft wat het zonder deze
+  // luisteraar ook was (`exit`). Op Windows en Linux bewust niet: daar kan het
+  // vragen vóór de sluitbewaking van de shell komen, en een geannuleerd
+  // afsluiten zou dan de sessiemarkering al hebben weggehaald.
+  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.macOS) {
+    AppLifecycleListener(
+      onExitRequested: () async {
+        await closeLog();
+        return AppExitResponse.exit;
+      },
+    );
+  }
 }
 
 /// Route framework- and platform-level errors through [logError] while keeping

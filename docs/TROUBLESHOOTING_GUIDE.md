@@ -1,6 +1,6 @@
 # OciDeck — Troubleshooting Guide
 
-> **Status:** procedure, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current · **Status last reviewed:** 2026-10-29 · **Published by:** Stichting LibreKAT
 
 This document provides solutions for common issues and problems users may encounter while using OciDeck.
 
@@ -162,12 +162,37 @@ invent one. A wrong explanation costs more time than none.
 
 ### Build and Startup Problems
 
-There is no installer. OciDeck is built from source with the pinned Flutter
-toolchain, so what would elsewhere be an installation problem is a build problem
-here. *Corrected 2026-07-21: this section used to advise "completely uninstall
-OciDeck before reinstalling" and to clear residual configuration in
-"application directories" — instructions for a distribution that does not
-exist.*
+**If you installed a release** — the Windows installer, the macOS app or a Linux
+package — and OciDeck does not start, or freezes while you work:
+
+1. Start it again, open **Settings → About OciDeck → Diagnostics** and choose
+   **Copy diagnostics**. That puts the version, your operating system and the
+   last 200 lines of the local log on the clipboard, formatted to paste straight
+   into an issue. **Open log folder** shows the files themselves, if you would
+   rather attach them.
+2. If the app does not get as far as a window, the log is written anyway; open
+   the folder below by hand. The last `opstart:` line says which step of the
+   start was reached. A line saying the previous session *is niet netjes
+   afgesloten* means that run froze, was force-quit, or went down with the
+   computer. A line *UI-isolate … ms onbereikbaar* is a freeze, with the work
+   that was running at the time.
+
+| Platform | Log folder |
+|---|---|
+| Windows | `%APPDATA%\Stichting LibreKAT\ocideck\logs` |
+| macOS | `~/Library/Application Support/com.dewinter.ocideck/logs` |
+| Linux | `~/.local/share/com.dewinter.ocideck/logs` (under `$XDG_DATA_HOME` if set) |
+
+The log holds no deck or document content and no file names; what it does hold
+is described in [PRIVACY.md](PRIVACY.md#what-stays-local).
+
+**If you build from source**, a start-up problem is usually a build problem.
+*Corrected 2026-10-29: this section opened with "There is no installer", which
+stopped being true when the Windows installer and the macOS and Linux release
+packages shipped.* *Corrected 2026-07-21: this section used to advise
+"completely uninstall OciDeck before reinstalling" and to clear residual
+configuration in "application directories" — instructions for a distribution
+that did not exist then.*
 
 **Symptoms**:
 - The app fails to start or crashes on launch
@@ -200,9 +225,15 @@ exist.*
 ### Debugging Tools and Logs
 
 1. **Application Logging**: 
-   - OciDeck logs warnings and errors to the platform debug console via
-     `dart:developer`. There is no verbose-logging preference and no log file
-     on disk — if you need the output, run a debug build from a terminal.
+   - On desktop, OciDeck writes warnings, errors, start-up milestones and
+     freezes to a local log file: at most two files of 1 MiB each, in the log
+     folder listed under [Build and Startup Problems](#build-and-startup-problems).
+     Settings → About OciDeck → Diagnostics copies the tail of it or opens the
+     folder. Absolute paths and file names are replaced by a short hash before
+     anything reaches the file.
+   - The same records also go to the debug console via `dart:developer`, as
+     before. There is no verbose-logging preference. *Corrected 2026-10-29:
+     this said there was no log file on disk, which was true until #2618.*
 
 2. **Error Analysis**:
    - Capture error messages with stack traces when possible
@@ -276,9 +307,11 @@ exist.*
 ### System Information Collection
 
 1. **Basic Info Gathering**:
-   - Note the commit you built from, your OS version, and the Flutter/Dart
-     versions. There is no OciDeck version to quote: nothing is released, and
-     the app does not display one.
+   - Note the OciDeck version (Settings → About OciDeck, or the first lines of
+     *Copy diagnostics*), your OS version, and — for a build from source — the
+     commit and the Flutter/Dart versions. *Corrected 2026-10-29: this said
+     there was no version to quote; releases and the version display have
+     existed for a while.*
    - Capture exact error messages with timestamps  
    - Document steps taken before the issue occurred
 
@@ -291,11 +324,13 @@ exist.*
 
 When submitting bug reports or support requests:
 
-1. Include complete error messages and stack traces  
-2. Provide step-by-step instructions to reproduce the issue
-3. Attach relevant configuration files if possible
-4. Mention system specifications and environment details
-5. Specify whether the problem occurs with all files or just specific ones
+1. Paste the output of **Copy diagnostics** (Settings → About OciDeck); it
+   carries the version, the system and the recent log
+2. Include complete error messages and stack traces  
+3. Provide step-by-step instructions to reproduce the issue
+4. Attach relevant configuration files if possible
+5. Mention system specifications and environment details
+6. Specify whether the problem occurs with all files or just specific ones
 
 ## Where to report a problem
 

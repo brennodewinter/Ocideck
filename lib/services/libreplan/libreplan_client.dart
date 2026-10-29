@@ -188,7 +188,7 @@ class LibreplanClient {
       // Log base URL + username, niet de response body (bevat projectdata).
       logWarning(
         'LibreplanClient.fetch($servicePath): '
-        'HTTP ${result.statusCode} for ${settings.host} as ${settings.username}',
+        'HTTP ${result.statusCode} for ${settings.host}',
         null,
       );
       throw LibreplanRequestException('HTTP ${result.statusCode}');

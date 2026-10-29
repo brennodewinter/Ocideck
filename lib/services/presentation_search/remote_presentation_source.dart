@@ -84,7 +84,7 @@ class RemotePresentationSource implements PresentationSource {
           entries = await client.list(dir);
         } catch (e) {
           logWarning(
-            'RemotePresentationSource: map onleesbaar ($label: $dir)',
+            'RemotePresentationSource: map onleesbaar ($label: ${logName(dir)})',
             e,
           );
           continue;
@@ -119,7 +119,7 @@ class RemotePresentationSource implements PresentationSource {
         raw = utf8.decode(bytes);
       } on FormatException catch (e) {
         logWarning(
-          'RemotePresentationSource: geen geldige UTF-8 (${entry.path})',
+          'RemotePresentationSource: geen geldige UTF-8 (${logName(entry.path)})',
           e,
         );
         return null;
@@ -135,7 +135,10 @@ class RemotePresentationSource implements PresentationSource {
     } on WebAssetBudgetExceeded {
       rethrow;
     } catch (e) {
-      logWarning('RemotePresentationSource: onleesbaar (${entry.path})', e);
+      logWarning(
+        'RemotePresentationSource: onleesbaar (${logName(entry.path)})',
+        e,
+      );
       return null;
     }
   }
@@ -156,7 +159,7 @@ class RemotePresentationSource implements PresentationSource {
         raw = utf8.decode(mdEntry.bytes);
       } on FormatException catch (e) {
         logWarning(
-          'RemotePresentationSource: pakket-md niet UTF-8 (${entry.path})',
+          'RemotePresentationSource: pakket-md niet UTF-8 (${logName(entry.path)})',
           e,
         );
         return null;
@@ -176,7 +179,7 @@ class RemotePresentationSource implements PresentationSource {
       rethrow;
     } catch (e) {
       logWarning(
-        'RemotePresentationSource: pakket onleesbaar (${entry.path})',
+        'RemotePresentationSource: pakket onleesbaar (${logName(entry.path)})',
         e,
       );
       return null;

@@ -82,7 +82,7 @@ Future<Uint8List?> readDroppedBytes(DropItem file) async {
   try {
     return await file.readAsBytes();
   } catch (e, s) {
-    logError('drop: bytes lezen mislukt voor ${file.name}', e, s);
+    logError('drop: bytes lezen mislukt voor ${logName(file.name)}', e, s);
     return null;
   }
 }

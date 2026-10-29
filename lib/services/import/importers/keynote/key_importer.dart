@@ -250,7 +250,7 @@ class KeyImporter extends Importer {
         final decompressed = snappy.decompressIwaStream(bytes);
         objects.addAll(archive.parse(decompressed));
       } on Object catch (e) {
-        logError('KeyImporter: kon $name niet decoderen', e);
+        logError('KeyImporter: kon ${logName(name)} niet decoderen', e);
         continue;
       }
       if (objects.length > budget.maxIwaObjects) {

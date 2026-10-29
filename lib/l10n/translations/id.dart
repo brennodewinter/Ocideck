@@ -1605,6 +1605,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Diagnose': 'Diagnostik',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck menyimpan log di komputer ini tentang kesalahan, macet, dan proses mulai. Log ini tidak berisi konten presentasi atau dokumen, dan nama berkas dibuat tidak dapat dikenali. Log tidak pernah meninggalkan komputer ini dengan sendirinya: bagikan hanya saat Anda melaporkan masalah.',
+  'Logmap openen': 'Buka folder log',
+  'Diagnose kopiëren': 'Salin diagnostik',
+  'Diagnose gekopieerd naar het klembord.': 'Diagnostik disalin ke papan klip.',
+  'De logmap kon niet worden geopend.': 'Folder log tidak dapat dibuka.',
   'Afsluiten duurt lang': 'Keluar memakan waktu lama',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Langkah pembersihan merespons dengan lambat. Pekerjaanmu yang tersimpan sudah aman; keluar sekarang melewati langkah yang tersisa.',

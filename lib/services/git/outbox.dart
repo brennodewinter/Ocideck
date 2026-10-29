@@ -175,7 +175,7 @@ class Outbox {
       final json = jsonDecode(raw) as Map<String, Object?>;
       return PendingCommit.fromJson(json);
     } catch (e) {
-      logError('Outbox: wachtende commit onleesbaar ($deckDir)', e);
+      logError('Outbox: wachtende commit onleesbaar (${logName(deckDir)})', e);
       return null;
     }
   }

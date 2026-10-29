@@ -92,7 +92,10 @@ class GitPresentationSource implements PresentationSource {
         content: raw,
       );
     } on GitForgeException catch (e) {
-      logWarning('GitPresentationSource: deck onleesbaar ($deckDir)', e);
+      logWarning(
+        'GitPresentationSource: deck onleesbaar (${logName(deckDir)})',
+        e,
+      );
       return null;
     }
   }

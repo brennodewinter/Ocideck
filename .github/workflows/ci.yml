@@ -345,6 +345,19 @@ jobs:
         shell: bash
         run: flutter test integration_test/native_face_scan_test.dart -d windows
 
+      # Het logbestand (#2618) in de échte app-supportmap. Op Windows is dit de
+      # enige plek waar %APPDATA%, de virusscanner en de rotatie (hernoemen over
+      # een bestaand bestand) samenkomen; de release-rookproef leunt erop dat
+      # de mijlpaal "eerste frame" daar landt.
+      - name: Logbestand-integratietest (macOS)
+        if: runner.os == 'macOS'
+        run: flutter test integration_test/diagnostics_log_test.dart -d macos
+
+      - name: Logbestand-integratietest (Windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: flutter test integration_test/diagnostics_log_test.dart -d windows
+
       - name: Test
         run: flutter test --test-randomize-ordering-seed random --exclude-tags golden
 

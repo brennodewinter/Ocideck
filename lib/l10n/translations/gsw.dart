@@ -1608,6 +1608,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Diagnose': 'Diagnose',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck füehrt uf däm Computer es Protokoll über Fehler, Hänger und de Start. Es stoht kei Inhalt vo Präsentatione oder Dokumänt drin, und Dateinäme sind unkänntlich gmacht. S Protokoll verlaat dä Computer nie vo sälber: Teiled Sie s nur, wänn Sie es Problem mälde.',
+  'Logmap openen': 'Protokollordner öffne',
+  'Diagnose kopiëren': 'Diagnose kopiere',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnose i d Zwüscheablag kopiert.',
+  'De logmap kon niet worden geopend.':
+      'De Protokollordner het nöd chöne gööffnet wärde.',
   'Afsluiten duurt lang': 'S Beende duurt lang',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'En Ufruumschritt reagiert trööge. Dis gspicherets Werk isch scho sicher; jetz beende überspringt die übrige Schritt.',

@@ -2513,6 +2513,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Diagnose': 'Tanılama',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck bu bilgisayarda hatalar, donmalar ve başlatma hakkında bir günlük tutar. Günlükte sunumlardan veya belgelerden içerik bulunmaz ve dosya adları tanınmaz hale getirilir. Günlük bu bilgisayardan asla kendiliğinden çıkmaz: yalnızca bir sorun bildirirken paylaşın.',
+  'Logmap openen': 'Günlük klasörünü aç',
+  'Diagnose kopiëren': 'Tanılamayı kopyala',
+  'Diagnose gekopieerd naar het klembord.': 'Tanılama panoya kopyalandı.',
+  'De logmap kon niet worden geopend.': 'Günlük klasörü açılamadı.',
   'Afsluiten duurt lang': 'Kapatma uzun sürüyor',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Bir temizlik adımı yavaş yanıt veriyor. Kaydedilmiş çalışmanız zaten güvende; şimdi kapatmak kalan adımları atlar.',

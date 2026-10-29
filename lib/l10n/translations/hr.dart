@@ -1609,6 +1609,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Diagnose': 'Dijagnostika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck na ovom računalu vodi zapisnik o pogreškama, zastojima i pokretanju. U njemu nema sadržaja prezentacija ni dokumenata, a nazivi datoteka učinjeni su neprepoznatljivima. Zapisnik nikada sam ne napušta ovo računalo: podijelite ga samo kada prijavljujete problem.',
+  'Logmap openen': 'Otvori mapu zapisnika',
+  'Diagnose kopiëren': 'Kopiraj dijagnostiku',
+  'Diagnose gekopieerd naar het klembord.':
+      'Dijagnostika je kopirana u međuspremnik.',
+  'De logmap kon niet worden geopend.': 'Mapu zapisnika nije moguće otvoriti.',
   'Afsluiten duurt lang': 'Izlazak dugo traje',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Korak čišćenja reagira sporo. Vaš spremljeni rad već je na sigurnom; izlazak sada preskače preostale korake.',

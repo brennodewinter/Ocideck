@@ -1209,6 +1209,8 @@ also declares them, but see the [CI note](#continuous-integration).)
 
   In dezelfde geest draait `integration_test/document_pdf_graphics_test.dart` de échte renderers achter de tekeningen in een document-PDF: mermaid en MathJax wonen in een verborgen WebView, en die bestaat onder `flutter test` niet — daar valt alles stil terug op de bron, dus een groene suite zegt daar niets over de functie zelf. Draaien met `flutter test integration_test/document_pdf_graphics_test.dart -d macos`. Hij schrijft de PDF naar de tijdelijke map, zodat er ook met eigen ogen naar te kijken valt.
 
+  En `integration_test/diagnostics_log_test.dart` (#2618) draait het logbestand als echte app in de échte app-supportmap: mijlpalen, eerste frame, een kunstmatige blokkade van 800 ms die één stallregel oplevert, en een nette afsluiting die de sessiemarkering weghaalt. De unit-tests (`test/log_file_test.dart`, `test/log_sink_test.dart`, `test/ui_stall_watch_test.dart`) bewijzen rotatie, sanering en de melder in een tijdelijke map; wat ze niet zien, is Windows — `%APPDATA%`, de virusscanner, hernoemen over een bestaand bestand. Daarom draait de spiegel-CI hem op macOS en Windows. De Windows-rookproef in `release.yml` leunt erop: hij wacht tot 60 s op de mijlpaal `opstart: eerste frame` in het geïnstalleerde logbestand en zet het log bij een fout in het releaselog — een proces dat leeft maar nooit een frame tekent, is voor de gebruiker "de app start niet".
+
 ### `make coverage`
 - **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
   then `dart run tool/coverage_summary.dart --min=80 --require-instrumented`.

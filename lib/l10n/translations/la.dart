@@ -1620,6 +1620,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Diagnose': 'Diagnosis',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck in hoc computatro acta servat errorum, haesitationum et initii. Nullum contentum praesentationum vel documentorum continet, et nomina fasciculorum ignota redduntur. Acta numquam sua sponte hunc computatrum relinquunt: communica ea tantum cum difficultatem nuntias.',
+  'Logmap openen': 'Aperi plicam actorum',
+  'Diagnose kopiëren': 'Diagnosin exscribe',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnosis in tabulam transcripta est.',
+  'De logmap kon niet worden geopend.': 'Plica actorum aperiri non potuit.',
   'Afsluiten duurt lang': 'Exitus diu durat',
   'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
       'Gradus purgationis tarde respondet. Opus tuum servatum iam tutum est; nunc exire reliquos gradus omittit.',

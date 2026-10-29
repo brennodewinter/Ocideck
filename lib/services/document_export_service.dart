@@ -36,6 +36,7 @@ import 'privacy/privacy_own_identity.dart';
 import 'privacy/privacy_export_policy.dart';
 import 'risk_bowtie_diagram.dart';
 import '../utils/document_front_matter.dart';
+import '../utils/log.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
@@ -629,6 +630,7 @@ Future<DocumentExportOutcome> writeDocumentExport(
   // De bouwwaarschuwingen verzamelen we hier, zodat ze blijvend in het
   // resultaat kunnen landen in plaats van onderweg te vervliegen (#2467).
   final warnings = <DocumentExportWarning>[];
+  noteWork('documentexport ${format.name}');
   final bytes = await buildDocumentExportBytes(
     bundle,
     format,
