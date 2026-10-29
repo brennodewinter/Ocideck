@@ -35,7 +35,6 @@ import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
-import '../../models/settings.dart' show ThemeProfile;
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
 import '../pdf/document_pdf_export.dart'
