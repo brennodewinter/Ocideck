@@ -213,6 +213,21 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _footerText;
   late TextEditingController _closingSlideMarkdown;
 
+  /// De profielverzameling zoals het venster die bewerkt (#2648). Aanmaken,
+  /// importeren en verwijderen raken alleen deze lijst; pas Opslaan schrijft
+  /// hem weg, en Annuleren laat de bewaarde verzameling onaangeroerd.
+  late List<ThemeProfile> _themeProfiles;
+
+  /// De bewerkkopie van de documentopmaak — zelfde reden: een gewijzigde
+  /// marge of afgedwongen stijl hoort niet te gelden nadat je Annuleren kiest.
+  late String? _documentDefaultStyle;
+  late bool _documentStyleEnforced;
+  late bool _documentChapterPageBreak;
+  late double? _documentEditorMaxWidth;
+  late PageSizeSpec _documentPageSize;
+  late PageMargins _documentPageMargins;
+  late bool _documentCropMarks;
+
   /// De AI-backend (optioneel, standaard uit): velden, modus en API-sleutel.
   final AiForm _ai = AiForm();
 
@@ -304,6 +319,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         .deck
         ?.themeProfile;
     _themeProfile = deckProfile ?? settings.themeProfile;
+    _themeProfiles = _availableStyleProfiles(settings.themeProfiles);
+    _documentDefaultStyle = settings.documentDefaultStyle;
+    _documentStyleEnforced = settings.documentStyleEnforced;
+    _documentChapterPageBreak = settings.documentChapterPageBreak;
+    _documentEditorMaxWidth = settings.documentEditorMaxWidth;
+    _documentPageSize = settings.documentPageSize;
+    _documentPageMargins = settings.documentPageMargins;
+    _documentCropMarks = settings.documentCropMarks;
     _appearanceProfile = settings.appAppearanceProfile;
     _originalAppearanceName = _appearanceProfile.name;
     _appearanceName = TextEditingController(text: _appearanceProfile.name);
@@ -361,8 +384,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// instance members of a State subclass), so they route through this wrapper.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  List<ThemeProfile> get _profiles =>
-      _availableStyleProfiles(ref.watch(settingsProvider).themeProfiles);
+  List<ThemeProfile> get _profiles => _themeProfiles;
 
   /// Alle lokale verbindingen, in lijstvolgorde — het startpunt voor de
   /// mapkiezers hieronder.
@@ -732,6 +754,20 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     });
   }
 
+  /// Unieke naam binnen de bewerkte verzameling — dezelfde regel als de
+  /// provider toepast, maar dan op de werkkopie, zodat een import of kopie al
+  /// voor Opslaan goed heet.
+  String _uniqueProfileName(String rawName) {
+    final base = rawName.trim().isEmpty ? 'Stijlprofiel' : rawName.trim();
+    final used = _themeProfiles.map((p) => p.name).toSet();
+    if (!used.contains(base)) return base;
+    var index = 2;
+    while (used.contains('$base $index')) {
+      index++;
+    }
+    return '$base $index';
+  }
+
   /// Het profiel zoals het nú in de editor staat: [_themeProfile] plus de
   /// velden die nog in hun controller leven. Opslaan én exporteren gaan hier
   /// doorheen, zodat je exporteert wat je ziet.
@@ -760,7 +796,22 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       document: false,
       path: _presentationStartDirectory,
     );
-    notifier.saveThemeProfile(profile, previousName: _originalName);
+    // De bewerkte profielverzameling landt als geheel: aanmaken, importeren
+    // en verwijderen leefden alleen in de werkkopie (#2648).
+    final profiles = [
+      for (final p in _themeProfiles)
+        if (p.name == _originalName) profile else p,
+    ];
+    if (!profiles.contains(profile)) profiles.add(profile);
+    notifier.setThemeProfiles(profiles, selectedName: profile.name);
+    notifier
+      ..setDocumentDefaultStyle(_documentDefaultStyle)
+      ..setDocumentStyleEnforced(_documentStyleEnforced)
+      ..setDocumentChapterPageBreak(_documentChapterPageBreak)
+      ..setDocumentEditorMaxWidth(_documentEditorMaxWidth)
+      ..setDocumentPageSize(_documentPageSize)
+      ..setDocumentPageMargins(_documentPageMargins)
+      ..setDocumentCropMarks(_documentCropMarks);
     _syncAppearanceEdits();
     notifier.setAppAppearanceProfiles(
       _appearanceProfiles,

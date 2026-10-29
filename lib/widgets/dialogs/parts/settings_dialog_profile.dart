@@ -133,15 +133,29 @@ extension _SettingsProfile on _SettingsDialogState {
   }
 
   void _deleteProfile() {
-    ref.read(settingsProvider.notifier).deleteThemeProfile(_themeProfile.name);
-    _adoptProfile(ref.read(settingsProvider).themeProfile);
+    // Alleen in de werkkopie (#2648): Opslaan schrijft de lijst weg,
+    // Annuleren laat het profiel staan. De terugval is het eerste overgebleven
+    // profiel — dezelfde keuze als de provider na verwijderen maakte.
+    final remaining = [
+      for (final p in _themeProfiles)
+        if (p.name != _themeProfile.name) p,
+    ];
+    // In het naamveld getypte naam die nergens bij hoort: niets te
+    // verwijderen, en zeker niet stilletjes het bewerkte profiel inwisselen.
+    if (remaining.length == _themeProfiles.length) return;
+    _rebuild(() {
+      _themeProfiles
+        ..clear()
+        ..addAll(remaining);
+    });
+    _adoptProfile(remaining.first);
   }
 
-  Future<void> _createProfile() async {
-    final created = await ref
-        .read(settingsProvider.notifier)
-        .createThemeProfile(base: _themeProfile);
-    if (!mounted) return;
+  void _createProfile() {
+    final created = _themeProfile.copyWith(
+      name: _uniqueProfileName('Nieuw profiel'),
+    );
+    _rebuild(() => _themeProfiles.add(created));
     _adoptProfile(created);
   }
 
@@ -196,14 +210,10 @@ extension _SettingsProfile on _SettingsDialogState {
     }
 
     final imported = outcome.profile!;
-    // previousName matcht bewust geen bestaand profiel: het profiel wordt
-    // toegevoegd (met een unieke naam) in plaats van er een te overschrijven.
-    await ref
-        .read(settingsProvider.notifier)
-        .saveThemeProfile(imported, previousName: '');
-    if (!mounted) return;
-
-    final saved = ref.read(settingsProvider).themeProfile;
+    // De werkkopie (#2648): geïmporteerd betekent nog niet bewaard — Annuleren
+    // laat de verzameling zoals die was.
+    final saved = imported.copyWith(name: _uniqueProfileName(imported.name));
+    _rebuild(() => _themeProfiles.add(saved));
     _adoptProfile(saved);
 
     final renamed = saved.name != imported.name;

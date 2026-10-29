@@ -770,6 +770,26 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     return created;
   }
 
+  /// Vervangt de profielverzameling als geheel — de bewerkkopie van het
+  /// instellingenvenster die bij Opslaan in één keer landt (#2648). Net als
+  /// bij [setAppAppearanceProfiles] is dit de laatste poort voor de schijf:
+  /// namen worden hier nog eens uniek gemaakt, en een [selectedName] die er
+  /// niet bij hoort valt terug op het eerste profiel.
+  Future<void> setThemeProfiles(
+    List<ThemeProfile> profiles, {
+    required String selectedName,
+  }) async {
+    final unique = _uniqueProfiles(profiles);
+    final selected = unique.any((profile) => profile.name == selectedName)
+        ? selectedName
+        : unique.first.name;
+    state = state.copyWith(
+      themeProfiles: unique,
+      selectedThemeProfileName: selected,
+    );
+    await persistThemeProfiles();
+  }
+
   Future<void> deleteThemeProfile(String name) async {
     if (state.themeProfiles.length <= 1) return;
     final profiles = state.themeProfiles.where((p) => p.name != name).toList();

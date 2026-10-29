@@ -98,7 +98,7 @@ class _DocumentStyleBuilder {
 
   void _rebuild(VoidCallback fn) => owner._rebuild(fn);
   void _selectProfile(String name) => owner._selectProfile(name);
-  Future<void> _createProfile() => owner._createProfile();
+  void _createProfile() => owner._createProfile();
   Future<String?> _pickHexColor(String value) => owner._pickHexColor(value);
   Widget _sectionTitle(String title) => owner._sectionTitle(title);
   Widget _fontSection() => owner._fontSection();

@@ -45,7 +45,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         const SizedBox(height: 16),
         ..._marpCompatSettings(),
         const SizedBox(height: 16),
-        ..._documentStyleSection(ref, l10n),
+        ..._documentStyleSection(this, l10n),
       ],
     );
   }
@@ -536,12 +536,18 @@ extension _SettingsGeneralTab on _SettingsDialogState {
 /// Documentmodus-stijl: de standaardstijl voor documenten zonder eigen
 /// `theme:`, en of die als huisstijl wordt afgedwongen. Puur weergave en
 /// export — deze keuze raakt geen enkel `.md`-bestand (alleen een per-document
-/// keuze in de editor doet dat, byte-chirurgisch). Top-level zodat de sectie
-/// niet meetelt voor het regelplafond van [_SettingsDialogState].
-List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
-  final settings = ref.watch(settingsProvider);
-  final profileNames = [for (final p in settings.themeProfiles) p.name];
-  final defaultStyle = settings.documentDefaultStyle;
+/// keuze in de editor doet dat, byte-chirurgisch).
+///
+/// De sectie werkt op de bewerkkopie van [owner] (#2648): pas Opslaan
+/// schrijft deze waarden weg, dus Annuleren laat documentweergave en export
+/// zoals ze waren. Top-level zodat de sectie niet meetelt voor het
+/// regelplafond van [_SettingsDialogState].
+List<Widget> _documentStyleSection(
+  _SettingsDialogState owner,
+  AppLocalizations l10n,
+) {
+  final profileNames = [for (final p in owner._profiles) p.name];
+  final defaultStyle = owner._documentDefaultStyle;
   // Een sinds verwijderd profiel mag de kiezer niet laten crashen.
   final value = profileNames.contains(defaultStyle) ? defaultStyle : null;
   return [
@@ -569,8 +575,9 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
             for (final name in profileNames)
               DropdownMenuItem(value: name, child: Text(name)),
           ],
-          onChanged: (name) =>
-              ref.read(settingsProvider.notifier).setDocumentDefaultStyle(name),
+          onChanged: (name) => owner._rebuild(() {
+            owner._documentDefaultStyle = name;
+          }),
         ),
       ),
     ),
@@ -578,11 +585,12 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
     SwitchListTile(
       contentPadding: EdgeInsets.zero,
       dense: true,
-      value: settings.documentStyleEnforced,
+      value: owner._documentStyleEnforced,
       onChanged: defaultStyle == null
           ? null
-          : (v) =>
-                ref.read(settingsProvider.notifier).setDocumentStyleEnforced(v),
+          : (v) => owner._rebuild(() {
+              owner._documentStyleEnforced = v;
+            }),
       title: Text(
         l10n.d('Deze stijl afdwingen'),
         style: const TextStyle(fontSize: 13),
@@ -597,9 +605,10 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
     SwitchListTile(
       contentPadding: EdgeInsets.zero,
       dense: true,
-      value: settings.documentChapterPageBreak,
-      onChanged: (v) =>
-          ref.read(settingsProvider.notifier).setDocumentChapterPageBreak(v),
+      value: owner._documentChapterPageBreak,
+      onChanged: (v) => owner._rebuild(() {
+        owner._documentChapterPageBreak = v;
+      }),
       title: Text(
         l10n.d('Nieuw hoofdstuk op een nieuwe pagina'),
         style: const TextStyle(fontSize: 13),
@@ -628,7 +637,7 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
     ),
     const SizedBox(height: 8),
     DropdownButtonFormField<double?>(
-      initialValue: settings.documentEditorMaxWidth,
+      initialValue: owner._documentEditorMaxWidth,
       // Zonder isExpanded meet de dropdown zich op zijn breedste label en
       // duwt dat een smalle kolom uit beeld.
       isExpanded: true,
@@ -644,8 +653,9 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
         ),
         DropdownMenuItem(value: 1400, child: Text(l10n.d('Breed (1400 px)'))),
       ],
-      onChanged: (v) =>
-          ref.read(settingsProvider.notifier).setDocumentEditorMaxWidth(v),
+      onChanged: (v) => owner._rebuild(() {
+        owner._documentEditorMaxWidth = v;
+      }),
     ),
     const SizedBox(height: 16),
     // Feature 3: paginamaat en marges voor export.
@@ -661,11 +671,11 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
       style: const TextStyle(fontSize: 11),
     ),
     const SizedBox(height: 8),
-    _pageSizeControls(l10n, ref, settings),
+    _pageSizeControls(l10n, owner),
     const SizedBox(height: 8),
-    _pageMarginsControls(l10n, ref, settings),
+    _pageMarginsControls(l10n, owner),
     const SizedBox(height: 8),
-    _printBleedControls(l10n, ref, settings),
+    _printBleedControls(l10n, owner),
   ];
 }
 
@@ -675,14 +685,11 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
 /// C, maar wie op B1 of C6 drukt kwam er niet. ISO 216 is een raster van drie
 /// reeksen maal elf nummers; die keuze uit elkaar trekken geeft alle 66 maten
 /// (met oriëntatie) zonder een dropdown van 66 regels.
-Widget _pageSizeControls(
-  AppLocalizations l10n,
-  WidgetRef ref,
-  AppSettings settings,
-) {
-  final spec = settings.documentPageSize;
-  final notifier = ref.read(settingsProvider.notifier);
-  void set(PageSizeSpec next) => notifier.setDocumentPageSize(next);
+Widget _pageSizeControls(AppLocalizations l10n, _SettingsDialogState owner) {
+  final spec = owner._documentPageSize;
+  void set(PageSizeSpec next) => owner._rebuild(() {
+    owner._documentPageSize = next;
+  });
 
   return LayoutBuilder(
     builder: (context, constraints) {
@@ -808,33 +815,31 @@ String _sizeItemLabel(PageSizeSpec spec) {
 }
 
 /// De marge-controls: vier tekstvelden (top/onder/links/rechts in mm).
-Widget _pageMarginsControls(
-  AppLocalizations l10n,
-  WidgetRef ref,
-  AppSettings settings,
-) {
-  final m = settings.documentPageMargins;
-  final notifier = ref.read(settingsProvider.notifier);
+Widget _pageMarginsControls(AppLocalizations l10n, _SettingsDialogState owner) {
+  final m = owner._documentPageMargins;
+  void set(PageMargins next) => owner._rebuild(() {
+    owner._documentPageMargins = next;
+  });
   final fields = [
     _marginField(
       l10n.d('Boven (mm)'),
       m.topMm,
-      (v) => notifier.setDocumentPageMargins(m.copyWith(topMm: v)),
+      (v) => set(m.copyWith(topMm: v)),
     ),
     _marginField(
       l10n.d('Onder (mm)'),
       m.bottomMm,
-      (v) => notifier.setDocumentPageMargins(m.copyWith(bottomMm: v)),
+      (v) => set(m.copyWith(bottomMm: v)),
     ),
     _marginField(
       l10n.d('Links (mm)'),
       m.leftMm,
-      (v) => notifier.setDocumentPageMargins(m.copyWith(leftMm: v)),
+      (v) => set(m.copyWith(leftMm: v)),
     ),
     _marginField(
       l10n.d('Rechts (mm)'),
       m.rightMm,
-      (v) => notifier.setDocumentPageMargins(m.copyWith(rightMm: v)),
+      (v) => set(m.copyWith(rightMm: v)),
     ),
   ];
   // Vier velden naast elkaar passen alleen op een ruime kolom. Bij een smal
@@ -871,13 +876,8 @@ Widget _pageMarginsControls(
 ///
 /// Bewust zonder snijtekens erbij: zie [PageMargins]. De uitleg noemt daarom
 /// alleen wat de afloop echt doet.
-Widget _printBleedControls(
-  AppLocalizations l10n,
-  WidgetRef ref,
-  AppSettings settings,
-) {
-  final m = settings.documentPageMargins;
-  final notifier = ref.read(settingsProvider.notifier);
+Widget _printBleedControls(AppLocalizations l10n, _SettingsDialogState owner) {
+  final m = owner._documentPageMargins;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
@@ -885,7 +885,9 @@ Widget _printBleedControls(
       _marginField(
         l10n.d('Afloop voor de drukker (mm)'),
         m.bleedMm,
-        (v) => notifier.setDocumentPageMargins(m.copyWith(bleedMm: v)),
+        (v) => owner._rebuild(() {
+          owner._documentPageMargins = m.copyWith(bleedMm: v);
+        }),
       ),
       const SizedBox(height: 4),
       Text(
@@ -896,10 +898,12 @@ Widget _printBleedControls(
       ),
       SwitchListTile(
         contentPadding: EdgeInsets.zero,
-        value: m.hasBleed && settings.documentCropMarks,
+        value: m.hasBleed && owner._documentCropMarks,
         // Zonder afloop wijzen snijtekens nergens naar.
         onChanged: m.hasBleed
-            ? (v) => ref.read(settingsProvider.notifier).setDocumentCropMarks(v)
+            ? (v) => owner._rebuild(() {
+                owner._documentCropMarks = v;
+              })
             : null,
         title: Text(l10n.d('Snijtekens'), style: const TextStyle(fontSize: 12)),
         subtitle: Text(

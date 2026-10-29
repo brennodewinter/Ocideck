@@ -99,16 +99,26 @@ void main() {
     expect(find.byType(SettingsDialog), findsOneWidget);
   });
 
-  testWidgets('"Nieuw profiel" maakt een profiel aan', (tester) async {
+  testWidgets('"Nieuw profiel" maakt pas bij Opslaan een profiel aan (#2648)', (
+    tester,
+  ) async {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);
 
     final before = container.read(settingsProvider).themeProfiles.length;
     await tester.tap(find.byIcon(Icons.add).first);
     await tester.pumpAndSettle();
-    final after = container.read(settingsProvider).themeProfiles.length;
 
-    expect(after, greaterThan(before));
+    // De werkkopie: de knop voegt aan het venster toe, nog niet aan de
+    // bewaarde verzameling.
+    expect(container.read(settingsProvider).themeProfiles, hasLength(before));
+
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan'));
+    await tester.pumpAndSettle();
+    expect(
+      container.read(settingsProvider).themeProfiles,
+      hasLength(greaterThan(before)),
+    );
   });
 
   testWidgets('"Profiel verwijderen" is ingeschakeld bij meerdere profielen', (
