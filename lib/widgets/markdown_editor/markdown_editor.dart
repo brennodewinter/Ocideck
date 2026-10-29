@@ -7,6 +7,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
 import '../../utils/footnote_embed_syntax.dart';
+import '../../utils/visual_markdown_flush.dart';
 import '../../utils/markdown_caret_map.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_typing_shortcuts.dart';
@@ -110,6 +111,14 @@ class MarkdownNotesEditor extends StatefulWidget {
   /// Optioneel: vang plakken af (afbeelding/tabel) vóór de standaard tekstplak.
   final Future<bool> Function()? tryConsumePaste;
 
+  /// De documentlaag roept [VisualMarkdownFlush.flush] aan vóór ze de bron
+  /// leest. Leeg bij een notitieveld dat zijn controller meteen zelf bijhoudt.
+  final VisualMarkdownFlush? pendingFlush;
+
+  /// Meteen bij een echte tekstwijziging, nog vóór de uitgestelde omzetting.
+  /// Zo wordt de tab vuil zonder op het hele document te wachten.
+  final VoidCallback? onVisualContentPending;
+
   /// Wanneer gezet: de Afbeelding-knop in de markdown-opmaakbalk opent de
   /// kiezer i.p.v. een placeholder in de bron te zetten.
   final VoidCallback? onInsertImage;
@@ -151,6 +160,8 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.insertFootnoteLabel,
     this.tryConsumePaste,
     this.onInsertImage,
+    this.pendingFlush,
+    this.onVisualContentPending,
   });
 
   /// Convenience constructor using discrete color/style parameters.
@@ -223,6 +234,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   String _markdownSnapshot = '';
   bool _quillSyncScheduled = false;
   bool _quillContentSyncPending = false;
+  Timer? _flushTimer;
 
   /// Het Quill-document zoals het er bij de laatste *inhoudelijke* melding
   /// uitzag. Zie [_onQuillChanged]: een melding waarbij dit gelijk blijft is
@@ -251,6 +263,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   @override
   void initState() {
     super.initState();
+    widget.pendingFlush?.bind(_flushPendingVisualEdit);
     _mode = widget.initialMode;
     _markdownSnapshot = widget.controller.text;
     if (widget.focusNode == null) {
@@ -264,6 +277,10 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   @override
   void didUpdateWidget(MarkdownNotesEditor oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (!identical(widget.pendingFlush, oldWidget.pendingFlush)) {
+      oldWidget.pendingFlush?.bind(null);
+      widget.pendingFlush?.bind(_flushPendingVisualEdit);
+    }
     final target = _requestedMode;
     if (target == NotesEditorMode.visual && _quillController == null) {
       _openVisualEditor();
@@ -442,7 +459,18 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 
   @override
+  void deactivate() {
+    // Deactivate loopt terwijl dit object nog mounted is; dispose niet meer.
+    // Een open timer zou de laatste aanslagen anders laten vallen (#2621).
+    _flushPendingVisualEdit();
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
+    _flushTimer?.cancel();
+    _flushTimer = null;
+    widget.pendingFlush?.bind(null);
     _closeVisualEditor(flush: false);
     _ownedFocusNode?.dispose();
     super.dispose();
@@ -518,7 +546,10 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (quill == null) return;
     _quillSyncScheduled = false;
     if (flush) {
-      _flushQuillToController(quill);
+      _flushPendingVisualEdit();
+    } else {
+      _flushTimer?.cancel();
+      _flushTimer = null;
     }
     quill.removeListener(_onQuillChanged);
     quill.dispose();
@@ -544,19 +575,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     );
     _lastQuillDelta = quill.document.toDelta();
     _visualEdited = false;
-    _syncingMarkdown = false;
-  }
-
-  void _flushQuillToController(QuillController quill) {
-    if (!_visualEdited) return;
-    final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
-    if (markdown == widget.controller.text) {
-      _markdownSnapshot = markdown;
-      return;
-    }
-    _syncingMarkdown = true;
-    _markdownSnapshot = markdown;
-    widget.controller.value = _valueWithClampedSelection(markdown);
     _syncingMarkdown = false;
   }
 
@@ -592,16 +610,20 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       _lastQuillDelta = delta;
       _visualEdited = true;
       _quillContentSyncPending = true;
+      // Vuil meteen, omzetting pas na een korte rust. Tien aanslagen delen
+      // zo één gang door het document (#2621).
+      widget.onVisualContentPending?.call();
+      _flushTimer?.cancel();
+      _flushTimer = Timer(kVisualMarkdownFlushDelay, _flushPendingVisualEdit);
     }
-    // Verlaat eerst de native tekstcallback. Vooral op macOS moet de volgende
-    // composing-update niet wachten op serialisatie van het hele document.
-    // Meerdere Quill-meldingen in dezelfde event-loop delen één terugschrijf.
+    // De caret is goedkoop en hoort meteen mee te lopen. De omzetting niet:
+    // die wacht op de timer of op een expliciete flush.
     if (_quillSyncScheduled) return;
     _quillSyncScheduled = true;
-    scheduleMicrotask(_flushPendingQuillChange);
+    scheduleMicrotask(_emitVisualCaret);
   }
 
-  void _flushPendingQuillChange() {
+  void _emitVisualCaret() {
     _quillSyncScheduled = false;
     if (!mounted || _syncingMarkdown) return;
     final quill = _quillController;
@@ -609,7 +631,17 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     final plain = quill.document.toPlainText();
     final caret = quill.selection.isValid ? quill.selection.baseOffset : 0;
     widget.onVisualCaret?.call(plain, caret.clamp(0, plain.length));
-    if (!_quillContentSyncPending) return;
+  }
+
+  /// Schrijf de open visuele bewerking nu naar de bron. Aanroepers die de
+  /// bron nodig hebben (opslaan, export, presenteren, zoeken, standwissel)
+  /// doen dit vóór ze die lezen; de timer doet hetzelfde na een pauze.
+  void _flushPendingVisualEdit() {
+    _flushTimer?.cancel();
+    _flushTimer = null;
+    if (!mounted || _syncingMarkdown) return;
+    final quill = _quillController;
+    if (quill == null || !_quillContentSyncPending) return;
     _quillContentSyncPending = false;
     final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
     if (markdown == _markdownSnapshot) return;

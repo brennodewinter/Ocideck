@@ -8,6 +8,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:path/path.dart' as p;
 
 import 'support/fastest_of.dart';
@@ -357,5 +358,69 @@ void main() {
         );
       },
     );
+
+    test('markdownFromDocument schaalt niet superlineair met het document', () {
+      // 300 pagina's mag niet meer dan 2,5× kosten van 150. Lineair ligt op
+      // 2×; de oude nummering liep per lijstitem het hele document af en kwam
+      // op 2,5–3,4× uit (#2621).
+      String pages(int count) {
+        final buffer = StringBuffer();
+        for (var i = 1; i <= count; i++) {
+          buffer
+            ..writeln('# Pagina $i')
+            ..writeln()
+            ..writeln(
+              'Een alinea met **nadruk** en een [koppeling](https://example.com/$i).',
+            )
+            ..writeln()
+            ..writeln('1. Eerste punt van pagina $i')
+            ..writeln('2. Tweede punt met wat extra woorden')
+            ..writeln('3. Derde punt')
+            ..writeln('4. Vierde punt')
+            ..writeln('5. Vijfde punt')
+            ..writeln('6. Zesde punt')
+            ..writeln('7. Zevende punt')
+            ..writeln('8. Achtste punt')
+            ..writeln();
+          if (i.isEven) {
+            buffer
+              ..writeln('| A | B | C | D |')
+              ..writeln('| --- | --- | --- | --- |');
+            for (var row = 0; row < 4; row++) {
+              buffer.writeln('| $i | $row | cel | tekst |');
+            }
+            buffer.writeln();
+          }
+          if (i != count) buffer.writeln('---\n');
+        }
+        return buffer.toString();
+      }
+
+      final small = MarkdownQuillCodec.documentFromMarkdown(pages(150));
+      final large = MarkdownQuillCodec.documentFromMarkdown(pages(300));
+      MarkdownQuillCodec.markdownFromDocument(small);
+      MarkdownQuillCodec.markdownFromDocument(large);
+
+      var lowest = double.infinity;
+      for (var attempt = 0; attempt < 3; attempt++) {
+        final smallTime = fastestOf(
+          3,
+          () => MarkdownQuillCodec.markdownFromDocument(small),
+        );
+        final largeTime = fastestOf(
+          3,
+          () => MarkdownQuillCodec.markdownFromDocument(large),
+        );
+        final ratio = largeTime.inMicroseconds / smallTime.inMicroseconds;
+        if (ratio < lowest) lowest = ratio;
+      }
+      expect(
+        lowest,
+        lessThan(2.5),
+        reason:
+            '300 pagina\'s kostten ${lowest.toStringAsFixed(2)}× zoveel als '
+            '150; meer dan 2,5× wijst op superlineair gedrag',
+      );
+    });
   });
 }

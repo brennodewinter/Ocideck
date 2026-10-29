@@ -82,6 +82,7 @@ void _autosaveDocument(
   Map<int, String> lastAutosaved,
 ) {
   if (!doc.mounted) return;
+  doc.flushPendingVisualEdit();
   final st = doc.currentState;
   if (!(st.isOpen && st.isDirty)) return;
   final source = st.document!.source;

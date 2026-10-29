@@ -354,8 +354,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// aanwijsdialoog, de tweede-scherm-grens en de afsluitkeuze-afhandeling
   /// staan in parts/document_editor_presenter.dart — ze raken geen veld
   /// van de State.
-  Future<void> _presentDocument() =>
-      _presentDocumentSession(context, ref, _controller.text);
+  Future<void> _presentDocument() => _presentDocumentSession(this);
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
   ///
@@ -684,6 +683,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   );
 
   void _openFind({required bool showReplace}) {
+    ref.read(documentProvider.notifier).flushPendingVisualEdit();
     // Pagina's is alleen-lezen: zoeken heeft daar geen schrijfvlak. Ga naar
     // Bron, waar de zoekbalk en de markering hun plek hebben.
     if (_viewMode == _DocViewMode.pages) {

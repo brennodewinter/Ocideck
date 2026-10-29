@@ -257,11 +257,9 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     showModeToggle: false,
     mode: NotesEditorMode.visual,
     surfaceStyle: NotesSurfaceStyle.document,
-    // Op welke breedte je schrijft is een keuze, geen bijverschijnsel van de
-    // pagina-einden. Dat was het wél: de einden trokken de breedte naar die van
-    // het vel, en omdat ze standaard aanstaan deed de instelling "volledige
-    // breedte" niets. Nu kiest de gebruiker de stand en volgen de einden hem —
-    // op paginabreedte kloppen ze, daarbuiten worden ze niet getekend.
+    // Schrijfbreedte is een keuze. De pagina-einden trokken die vroeger naar
+    // het vel, zodat "volledige breedte" niets deed. De einden volgen nu de
+    // gekozen stand en worden daarbuiten niet getekend.
     documentMaxWidth: _documentWriteWidth(ref),
     editorKey: _visualEditorKey,
     onDiscreteVisualEdit: () => _expectVisualInsert = true,
@@ -278,8 +276,10 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     findSelectionStart: _findSelectionStart,
     findSelectionEnd: _findSelectionEnd,
     onVisualCaret: _syncOutlineToVisualCaret,
+    pendingFlush: ref.read(documentProvider.notifier).visualFlush,
+    onVisualContentPending: () =>
+        ref.read(documentProvider.notifier).markDirty(),
     tryConsumePaste: _smartPaste,
-    // Afbeelding-knop → carrousel, geen `![beschrijving](pad-of-url)`-dump.
     onInsertImage: () => unawaited(_insertImage()),
   );
 
@@ -582,6 +582,7 @@ bool _pasteInlineAtVisualCaret(
 /// wegschrijft. De bron zelf blijft ongemoeid — export is een afgeleid
 /// bestand.
 Future<void> _exportDocument(_DocumentEditorScreenState s) async {
+  s.ref.read(documentProvider.notifier).flushPendingVisualEdit();
   final state = s.ref.read(documentProvider);
   final document = state.document;
   if (document == null) return;
@@ -601,6 +602,7 @@ Future<void> _exportDocument(_DocumentEditorScreenState s) async {
 Future<void> _convertDocumentToPresentation(
   _DocumentEditorScreenState s,
 ) async {
+  s.ref.read(documentProvider.notifier).flushPendingVisualEdit();
   final state = s.ref.read(documentProvider);
   // De body zonder het stijl-frontmatter-blok: de `theme:`-regel is geen
   // slide-inhoud. Een presentatie krijgt zijn eigen thema; de documentstijl
