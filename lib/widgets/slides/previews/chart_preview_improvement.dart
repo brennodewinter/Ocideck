@@ -363,6 +363,7 @@ class _HistogramPainter extends CustomPainter {
         textDirection: TextDirection.ltr,
       )..layout();
       tp.paint(canvas, Offset(plot.left, plot.top - 16));
+      tp.dispose();
     }
   }
 
@@ -698,6 +699,7 @@ class _MainEffectsPainter extends CustomPainter {
         textDirection: TextDirection.ltr,
       )..layout(maxWidth: slot - 4);
       tp.paint(canvas, Offset(cx - tp.width / 2, plot.bottom + 4));
+      tp.dispose();
     }
   }
 
@@ -787,6 +789,7 @@ class _InteractionPainter extends CustomPainter {
         textDirection: TextDirection.ltr,
       )..layout(maxWidth: slot - 2);
       tp.paint(canvas, Offset(cx - tp.width / 2, plot.bottom + 2));
+      tp.dispose();
     }
   }
 
@@ -867,6 +870,7 @@ class _ProbabilityPlotPainter extends CustomPainter {
         textDirection: TextDirection.ltr,
       )..layout();
       tp.paint(canvas, Offset(plot.left, plot.top - 4));
+      tp.dispose();
     }
   }
 

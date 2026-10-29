@@ -35,7 +35,11 @@ double measureTextHeight(
     ),
     textDirection: TextDirection.ltr,
   )..layout(maxWidth: maxWidth.isFinite ? maxWidth : double.infinity);
-  return painter.height;
+  try {
+    return painter.height;
+  } finally {
+    painter.dispose();
+  }
 }
 
 double measureTextWidth(
@@ -44,7 +48,17 @@ double measureTextWidth(
   bool bold = false,
   String? fontFamily,
 }) {
-  return _painterFor(text, fontSize, bold: bold, fontFamily: fontFamily).width;
+  final painter = _painterFor(
+    text,
+    fontSize,
+    bold: bold,
+    fontFamily: fontFamily,
+  );
+  try {
+    return painter.width;
+  } finally {
+    painter.dispose();
+  }
 }
 
 /// Breedte van het breedste ondeelbare woord in [text].
@@ -65,12 +79,18 @@ double measureTextWordWidth(
   final key = '$fontFamily|$fontSize|$bold|$text';
   final hit = _wordWidthCache[key];
   if (hit != null) return hit;
-  final width = _painterFor(
+  final painter = _painterFor(
     text,
     fontSize,
     bold: bold,
     fontFamily: fontFamily,
-  ).minIntrinsicWidth;
+  );
+  final double width;
+  try {
+    width = painter.minIntrinsicWidth;
+  } finally {
+    painter.dispose();
+  }
   // Bij overschrijding in één keer leeggooien in plaats van per element
   // verdringen: een LRU-boekhouding kost hier meer dan de hermeting die hij
   // bespaart, en een tabelherbouw vult de cache meteen weer met wat hij nodig

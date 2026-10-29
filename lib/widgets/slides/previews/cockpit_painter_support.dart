@@ -259,6 +259,7 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
       canvas,
       Offset(center.dx - painter.width / 2, center.dy - painter.height / 2),
     );
+    painter.dispose();
   }
 
   void _text(
@@ -308,5 +309,6 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
       _ => offset.dy,
     };
     painter.paint(canvas, Offset(dx, dy));
+    painter.dispose();
   }
 }

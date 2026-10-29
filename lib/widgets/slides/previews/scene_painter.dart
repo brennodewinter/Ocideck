@@ -88,6 +88,7 @@ class ScenePainter extends CustomPainter {
             maxLines: node.maxWidth == null ? 1 : null,
           )..layout(maxWidth: node.maxWidth ?? double.infinity);
           tp.paint(canvas, Offset(node.x, node.y - tp.height * 0.8));
+          tp.dispose();
         case SceneImageRef():
           // Image decoding belongs to the host; engines that need images pass
           // a resolved backend. Until then draw a placeholder frame.
