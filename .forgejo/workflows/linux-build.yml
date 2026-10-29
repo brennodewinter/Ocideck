@@ -156,7 +156,7 @@ jobs:
       - name: Linux-pakketten bouwen
         env:
           APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
-          APPIMAGETOOL_SHA256: 95cbe7cce9717fce90c484e34052ee7c7f1d7635b33c12525b4776826a7d29b6
+          APPIMAGETOOL_SHA256: 793fca0ce4bcc309dc65d3f66669f58e3755643e4dadbe03932e7b436128494f
           OUT: dist
         run: make package-linux VERSION="$VERSIE"
 
