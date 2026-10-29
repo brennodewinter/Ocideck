@@ -55,6 +55,7 @@ import 'image_service.dart';
 import 'markdown_safety.dart';
 import 'markdown_service.dart';
 import 'open_file_channel.dart';
+import 'package_theme_profile.dart';
 import 'slide_image_refs.dart';
 import 'transcript_audio_copy.dart';
 import 'transcription/transcript_marker.dart';
@@ -88,6 +89,34 @@ ThemeProfile _resolveBrandStripPath(
     final candidate = p.normalize(p.join(base, stripPath));
     if (File(candidate).existsSync()) {
       return profile.copyWith(brandStripPath: candidate);
+    }
+  }
+  return profile;
+}
+
+/// Een afwijkend documentlogo ([ThemeProfile.documentLogoPath]) resolveert
+/// precies als de merkstrook: relatief t.o.v. het project, met de thuismap
+/// als terugval voor een verhuisd project. '' en null zijn betekenisvolle
+/// toestanden ("bewust uit", "gedeeld met het presentatielogo") en blijven
+/// ongemoeid (#2641).
+ThemeProfile _resolveDocumentLogoPath(
+  ThemeProfile profile,
+  String? projectPath,
+  String? Function() homeDirectory,
+) {
+  final docPath = profile.documentLogoPath;
+  if (docPath == null ||
+      docPath.trim().isEmpty ||
+      isBundledAssetPath(docPath) ||
+      kIsWeb ||
+      p.isAbsolute(docPath)) {
+    return profile;
+  }
+  final bases = [?projectPath, ?homeDirectory()];
+  for (final base in bases) {
+    final candidate = p.normalize(p.join(base, docPath));
+    if (File(candidate).existsSync()) {
+      return profile.copyWith(documentLogoPath: candidate);
     }
   }
   return profile;
@@ -385,7 +414,11 @@ class FileService {
         kIsWeb ||
         p.isAbsolute(logoPath)) {
       return _resolveBrandStripPath(
-        _resolveLogoDarkPath(profile, projectPath),
+        _resolveDocumentLogoPath(
+          _resolveLogoDarkPath(profile, projectPath),
+          projectPath,
+          _homeDirectory,
+        ),
         projectPath,
         _homeDirectory,
       );
@@ -396,9 +429,13 @@ class FileService {
       final candidate = p.normalize(p.join(base, logoPath));
       if (File(candidate).existsSync()) {
         return _resolveBrandStripPath(
-          _resolveLogoDarkPath(
-            profile.copyWith(logoPath: candidate),
+          _resolveDocumentLogoPath(
+            _resolveLogoDarkPath(
+              profile.copyWith(logoPath: candidate),
+              projectPath,
+            ),
             projectPath,
+            _homeDirectory,
           ),
           projectPath,
           _homeDirectory,
@@ -406,7 +443,11 @@ class FileService {
       }
     }
     return _resolveBrandStripPath(
-      _resolveLogoDarkPath(profile, projectPath),
+      _resolveDocumentLogoPath(
+        _resolveLogoDarkPath(profile, projectPath),
+        projectPath,
+        _homeDirectory,
+      ),
       projectPath,
       _homeDirectory,
     );
@@ -754,9 +795,21 @@ class FileService {
     // gebruiker ziet een lege presentatie.
 
     // The file carries only content; apply the active style profile on open.
-    final deck = parsed.copyWith(
-      themeProfile: activeProfileFor(projectPath: parsed.projectPath),
-    );
+    // Eén uitzondering: een `theme.json` naast de `.md` — de vorm waarin een
+    // `.ocideck`-pakket de stijl van de maker meestuurt (#2644). Dat profiel
+    // hoort bij díe presentatie; het actieve profiel van de ontvanger blijft
+    // wat hij is. Alleen bij lezen van schijf: meegeleverde bytes hebben geen
+    // map om zo'n broertje in te vinden.
+    var theme = activeProfileFor(projectPath: parsed.projectPath);
+    var carriesPackagedProfile = false;
+    if (content == null && parsed.projectPath != null) {
+      final packaged = await _packagedThemeBeside(parsed.projectPath!);
+      if (packaged != null) {
+        theme = packaged;
+        carriesPackagedProfile = true;
+      }
+    }
+    final deck = parsed.copyWith(themeProfile: theme);
     final chartWarnings = <String>[];
     final skipped = <String>[];
     var hydrated = await _hydrateCharts(
@@ -787,7 +840,37 @@ class FileService {
       warnings: chartWarnings,
       skippedSidecars: skipped,
       integrity: integrity,
+      carriesPackagedProfile: carriesPackagedProfile,
     );
+  }
+
+  /// Het `theme.json`-record naast een geopende `.md` — de vorm waarin een
+  /// uitgepakt `.ocideck`-pakket zijn stijl meestuurt (#2644). De
+  /// afbeeldingsvelden mogen alleen binnen de projectmap wijzen; wat de
+  /// containment-weigert valt weg in plaats van een pad daarbuiten te volgen.
+  /// Onleesbaar of te groot is geen fout: het deck opent gewoon onder het
+  /// actieve profiel.
+  Future<ThemeProfile?> _packagedThemeBeside(String projectPath) async {
+    final file = File(p.join(projectPath, 'theme.json'));
+    try {
+      if (!await file.exists() || await file.length() > maxStyleProfileBytes) {
+        return null;
+      }
+      final raw = decodePackageThemeProfile(await file.readAsBytes());
+      if (raw == null) return null;
+      return resolvePackageProfilePaths(
+        raw,
+        resolve: (ref) =>
+            // Een verwijzing mét schema (`mem:`, `data:`, `http:`) hoort niet
+            // in een schijf-record; alleen een pad binnen de map volgen we.
+            Uri.tryParse(ref)?.hasScheme == true
+            ? null
+            : resolveContainedRealPath(ref, projectPath),
+      );
+    } catch (e) {
+      logWarning('FileService.openDeck: packaged theme unreadable', e);
+      return null;
+    }
   }
 
   /// Als [saveDeckAs], maar mét de grafiekdata-waarschuwingen.

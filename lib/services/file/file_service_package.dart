@@ -40,11 +40,17 @@ ThemeProfile _profileWithPackageAssets(
   String? logoRel,
   String? logoDarkRel,
   String? brandStripRel,
-) => (logoRel != null || logoDarkRel != null || brandStripRel != null)
+  String? documentLogoRel,
+) =>
+    (logoRel != null ||
+        logoDarkRel != null ||
+        brandStripRel != null ||
+        documentLogoRel != null)
     ? profile.copyWith(
         logoPath: logoRel ?? profile.logoPath,
         logoDarkPath: logoDarkRel ?? profile.logoDarkPath,
         brandStripPath: brandStripRel ?? profile.brandStripPath,
+        documentLogoPath: documentLogoRel ?? profile.documentLogoPath,
       )
     : profile;
 
@@ -97,8 +103,19 @@ Future<_PackedThemeAssets> _packThemeAssets(
     'logos',
     allowExternal: true,
   );
+  final documentLogoRel = await addAsset(
+    profile.documentLogoPath ?? '',
+    'logos',
+    allowExternal: true,
+  );
   return _PackedThemeAssets(
-    _profileWithPackageAssets(profile, logoRel, logoDarkRel, brandStripRel),
+    _profileWithPackageAssets(
+      profile,
+      logoRel,
+      logoDarkRel,
+      brandStripRel,
+      documentLogoRel,
+    ),
     logoRel,
     brandStripRel,
   );
@@ -429,6 +446,20 @@ extension FileServicePackage on FileService {
     // De lagen naast de markdown (inkt, notities, MIAUW-dispositie) reizen als
     // eigen leden mee, zodat de `.md` in het pakket pure Marp blijft.
     _addSidecarMembers(archive, packDeck, _safeName(deck.title));
+
+    // Het stijlrecord van de maker reist mee als `theme.json` — dezelfde vorm
+    // als bij een OciServe-lespakket. Bij het openen geldt dit profiel voor
+    // díe presentatie, zonder het globale actieve profiel van de ontvanger
+    // te wijzigen (#2644). Alleen paden die de ontvanger kan betekenen
+    // (gebundeld of pakket-relatief) gaan het record in. Marp leest dit lid
+    // niet; daarvoor is de thema-CSS hieronder.
+    final themeJson = utf8.encode(
+      jsonEncode(<String, Object?>{
+        'name': profile.name,
+        'definition': packageProfileForThemeJson(profile).toJson(),
+      }),
+    );
+    archive.add(ArchiveFile('theme.json', themeJson.length, themeJson));
 
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
     await _addThemeCssArchiveMembers(

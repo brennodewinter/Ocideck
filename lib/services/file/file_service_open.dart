@@ -18,6 +18,7 @@ class DeckOpenResult {
     this.warnings = const <String>[],
     this.skippedSidecars = const <String>[],
     this.integrity,
+    this.carriesPackagedProfile = false,
   });
 
   /// Het geopende deck, of null bij een weigering.
@@ -38,13 +39,19 @@ class DeckOpenResult {
   /// wanneer het deck niet verzegeld is of niet van schijf is geopend.
   final IntegrityStatus? integrity;
 
+  /// Of het deck zijn stijlprofiel uit een meegereisd `theme.json`-record
+  /// kreeg (uitgepakt `.ocideck`-pakket, #2644). Dan mag de tab-route het
+  /// actieve profiel van de ontvanger er niet overheen zetten.
+  final bool carriesPackagedProfile;
+
   /// Een weigering, met de reden.
   const DeckOpenResult.failed(OpenFailure reason)
     : deck = null,
       failure = reason,
       warnings = const <String>[],
       skippedSidecars = const <String>[],
-      integrity = null;
+      integrity = null,
+      carriesPackagedProfile = false;
 }
 
 /// Wat [FileServiceDocumentOpen.openDocumentDetailed] oplevert: het geopende

@@ -73,63 +73,88 @@ Future<String?> _materializeMemStyleAsset(
   return p.posix.join('logos', p.basename(destination.file.path));
 }
 
+/// Kopieert één profielafbeelding (logo, donkere variant, documentlogo of
+/// merkstrook) naar `logos/` in de projectmap en geeft het project-relatieve
+/// pad terug — of `null` als er niets bruikbaars te bewaren is (geen pad, een
+/// onvindbare bron). Een pad dat al `logos/…` in het project is blijft
+/// ongemoeid.
+///
+/// Botsingsregel (#2645): [resolveAssetDestination] deelt de naam alleen met
+/// een bestand dat dezelfde bytes heeft; verschillende inhoud onder dezelfde
+/// bestandsnaam krijgt een oplopend achtervoegsel. Zo kan een merkstrook nooit
+/// stil over het hoeklogo heen schrijven (of omgekeerd).
+Future<String?> _storeProfileImage(
+  String projectPath,
+  String? rawPath, {
+  required String fallbackName,
+  String? sourceProjectPath,
+  required Future<String?> Function(String projectPath, String normalizedPath)
+  findExisting,
+}) async {
+  final raw = rawPath?.trim();
+  if (raw == null || raw.isEmpty) return null;
+  if (WebAssetStore.isMemPath(raw)) {
+    return _materializeMemStyleAsset(
+      raw,
+      projectPath,
+      fallbackName: fallbackName,
+    );
+  }
+  final normalized = raw.replaceAll('\\', '/');
+  final relative = p.posix.isRelative(normalized)
+      ? p.posix.normalize(normalized)
+      : null;
+  // Algematerialiseerd én het doel is nog datzelfde project: niets te doen.
+  // Alleen bij een her-opslag in dezelfde map mag de verwijzing zo blijven —
+  // staat de doelmap ergens anders, dan wijst `logos/…` daar mogelijk naar een
+  // totaal ander bestand, dus materialiseren we vanuit de bron (#2642).
+  if (relative != null &&
+      relative.startsWith('logos/') &&
+      (sourceProjectPath == null || p.equals(sourceProjectPath, projectPath)) &&
+      await File(p.join(projectPath, relative)).exists()) {
+    return relative;
+  }
+  // Relatieve paden horen bij het brondproject, absolute staan op zichzelf.
+  final sourceBase = sourceProjectPath ?? projectPath;
+  var source = File(
+    p.isAbsolute(raw) ? raw : p.normalize(p.join(sourceBase, raw)),
+  );
+  if (!await source.exists()) {
+    final fallback = await findExisting(sourceBase, normalized);
+    if (fallback == null) return null;
+    source = File(fallback);
+  }
+  final filename = p.posix.basename(normalized);
+  if (filename.isEmpty || filename == '.' || filename == '..') return null;
+  final logosDir = await createContainedProjectDirectory(projectPath, 'logos');
+  final destination = await resolveAssetDestination(logosDir, filename, source);
+  if (destination == null) return null;
+  if (!destination.alreadyPresent) {
+    await source.copy(destination.file.path);
+  }
+  return p.posix.join('logos', p.basename(destination.file.path));
+}
+
 Future<_LogoProjectAsset> _copyBrandStripAsset(
   ThemeProfile profile,
   String projectPath,
   Future<String?> Function(String projectPath, String normalizedPath)
-  findExisting,
-) async {
-  final stripPath = profile.brandStripPath;
-  if (stripPath == null || stripPath.trim().isEmpty) {
-    return _LogoProjectAsset(profile, null);
-  }
-  if (WebAssetStore.isMemPath(stripPath)) {
-    final stored = await _materializeMemStyleAsset(
-      stripPath,
-      projectPath,
-      fallbackName: 'merkstrook.png',
-    );
-    return stored == null
-        ? _LogoProjectAsset(profile, null)
-        : _LogoProjectAsset(
-            profile.copyWith(brandStripPath: stored),
-            '../$stored',
-          );
-  }
-  final normalized = stripPath.replaceAll('\\', '/');
-  final relative = p.posix.isRelative(normalized)
-      ? p.posix.normalize(normalized)
-      : null;
-  if (relative != null && relative.startsWith('logos/')) {
-    return _LogoProjectAsset(
-      profile.copyWith(brandStripPath: relative),
-      '../$relative',
-    );
-  }
-  var source = File(
-    p.isAbsolute(stripPath)
-        ? stripPath
-        : p.normalize(p.join(projectPath, stripPath)),
+  findExisting, {
+  String? sourceProjectPath,
+}) async {
+  final stored = await _storeProfileImage(
+    projectPath,
+    profile.brandStripPath,
+    fallbackName: 'merkstrook.png',
+    sourceProjectPath: sourceProjectPath,
+    findExisting: findExisting,
   );
-  if (!await source.exists()) {
-    final fallback = await findExisting(projectPath, normalized);
-    if (fallback == null) return _LogoProjectAsset(profile, null);
-    source = File(fallback);
-  }
-  final filename = p.posix.basename(normalized);
-  if (filename.isEmpty || filename == '.' || filename == '..') {
-    return _LogoProjectAsset(profile, null);
-  }
-  final stored = p.posix.join('logos', filename);
-  final destination = File(p.join(projectPath, stored));
-  if (!p.equals(source.path, destination.path)) {
-    await destination.parent.create(recursive: true);
-    await source.copy(destination.path);
-  }
-  return _LogoProjectAsset(
-    profile.copyWith(brandStripPath: stored),
-    '../$stored',
-  );
+  return stored == null
+      ? _LogoProjectAsset(profile, null)
+      : _LogoProjectAsset(
+          profile.copyWith(brandStripPath: stored),
+          '../$stored',
+        );
 }
 
 String _brandStripCss(
@@ -198,11 +223,21 @@ extension _FileServiceProject on FileService {
       sourceProjectPath: deck.projectPath,
     );
     var updatedDeck = deck.copyWith(slides: mediaSlides, projectPath: dir);
-    final logoAsset = await _copyLogoToProject(updatedDeck.themeProfile, dir);
-    final stripAsset = await _copyBrandStripAsset(
+    final logoAsset = await _copyLogoToProject(
+      updatedDeck.themeProfile,
+      dir,
+      sourceProjectPath: deck.projectPath,
+    );
+    final secondary = await _copySecondaryProfileImages(
       logoAsset.profile,
       dir,
+      sourceProjectPath: deck.projectPath,
+    );
+    final stripAsset = await _copyBrandStripAsset(
+      secondary,
+      dir,
       _findExistingProjectLogo,
+      sourceProjectPath: deck.projectPath,
     );
     updatedDeck = updatedDeck.copyWith(themeProfile: stripAsset.profile);
     await _writeImageCaptions(updatedDeck);
@@ -366,67 +401,53 @@ extension _FileServiceProject on FileService {
 
   Future<_LogoProjectAsset> _copyLogoToProject(
     ThemeProfile profile,
-    String projectPath,
-  ) async {
-    final logoPath = profile.logoPath;
-    if (logoPath == null || logoPath.trim().isEmpty) {
-      return _LogoProjectAsset(profile, null);
-    }
-
-    if (WebAssetStore.isMemPath(logoPath)) {
-      final storedPath = await _materializeMemStyleAsset(
-        logoPath,
-        projectPath,
-        fallbackName: 'logo.png',
-      );
-      return storedPath == null
-          ? _LogoProjectAsset(profile, null)
-          : _LogoProjectAsset(
-              profile.copyWith(logoPath: storedPath),
-              '../$storedPath',
-            );
-    }
-
-    final normalized = logoPath.replaceAll('\\', '/');
-    final relativeLogoPath = p.posix.isRelative(normalized)
-        ? p.posix.normalize(normalized)
-        : null;
-    if (relativeLogoPath != null && relativeLogoPath.startsWith('logos/')) {
-      return _LogoProjectAsset(
-        profile.copyWith(logoPath: relativeLogoPath),
-        '../$relativeLogoPath',
-      );
-    }
-
-    var sourcePath = p.isAbsolute(logoPath)
-        ? logoPath
-        : p.normalize(p.join(projectPath, logoPath));
-    var src = File(sourcePath);
-    if (!await src.exists()) {
-      final fallback = await _findExistingProjectLogo(projectPath, normalized);
-      if (fallback == null) {
-        return _LogoProjectAsset(profile, null);
-      }
-      sourcePath = fallback;
-      src = File(sourcePath);
-    }
-
-    final filename = p.posix.basename(normalized);
-    if (filename.isEmpty || filename == '.' || filename == '..') {
-      return _LogoProjectAsset(profile, null);
-    }
-
-    final relativePath = p.posix.join('logos', filename);
-    final dest = File(p.join(projectPath, relativePath));
-    if (!p.equals(src.path, dest.path)) {
-      await dest.parent.create(recursive: true);
-      await src.copy(dest.path);
-    }
-
-    return _LogoProjectAsset(
-      profile.copyWith(logoPath: relativePath),
-      '../$relativePath',
+    String projectPath, {
+    String? sourceProjectPath,
+  }) async {
+    final stored = await _storeProfileImage(
+      projectPath,
+      profile.logoPath,
+      fallbackName: 'logo.png',
+      sourceProjectPath: sourceProjectPath,
+      findExisting: _findExistingProjectLogo,
     );
+    return stored == null
+        ? _LogoProjectAsset(profile, null)
+        : _LogoProjectAsset(profile.copyWith(logoPath: stored), '../$stored');
+  }
+
+  /// De donkere variant en het afwijkende documentlogo reizen via dezelfde
+  /// `logos/`-route als het gewone logo mee (#2641/#2642). Ze hebben geen
+  /// CSS-url nodig — de presentatie- en documentweergave lezen het
+  /// profielveld zelf. Een veld dat niet bewaard kan worden blijft zoals het
+  /// was (null, leeg of onoplosbaar), net als bij het gewone logo.
+  Future<ThemeProfile> _copySecondaryProfileImages(
+    ThemeProfile profile,
+    String projectPath, {
+    String? sourceProjectPath,
+  }) async {
+    var result = profile;
+    final darkRel = await _storeProfileImage(
+      projectPath,
+      result.logoDarkPath,
+      fallbackName: 'logo-donker.png',
+      sourceProjectPath: sourceProjectPath,
+      findExisting: _findExistingProjectLogo,
+    );
+    if (darkRel != null) {
+      result = result.copyWith(logoDarkPath: darkRel);
+    }
+    final docRel = await _storeProfileImage(
+      projectPath,
+      result.documentLogoPath,
+      fallbackName: 'documentlogo.png',
+      sourceProjectPath: sourceProjectPath,
+      findExisting: _findExistingProjectLogo,
+    );
+    if (docRel != null) {
+      result = result.copyWith(documentLogoPath: docRel);
+    }
+    return result;
   }
 
   Future<String?> _findExistingProjectLogo(

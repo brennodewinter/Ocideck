@@ -311,6 +311,7 @@ Future<OpenResult> _openPackageFromBytes(
   );
   var deck = gated.deck;
   if (deck == null) return gated.failure;
+  var carriesPackagedProfile = false;
   if (learningSession != null) {
     final anchors = deck.slides.map((slide) => slide.anchor.trim()).toList();
     if (anchors.isEmpty ||
@@ -331,6 +332,18 @@ Future<OpenResult> _openPackageFromBytes(
 
   try {
     deck = notifier._attachPackageAssets(deck, entries, mdEntry.name);
+    if (learningSession == null) {
+      // Een gewoon `.ocideck`-pakket draagt de stijl van de maker mee als
+      // `theme.json`; de afbeeldingsvelden wijzen naar `logos/`-leden die
+      // als `mem:`-assets landen — vandaar binnen hetzelfde budget-try.
+      // Draagt het pakket geen bruikbaar record, dan geldt het actieve
+      // profiel van de ontvanger (#2644).
+      final packagedTheme = packageThemeToMem(entries, mdEntry.name);
+      if (packagedTheme != null) {
+        deck = deck.copyWith(themeProfile: packagedTheme);
+        carriesPackagedProfile = true;
+      }
+    }
   } on WebAssetBudgetExceeded catch (e) {
     logWarning('TabsNotifier._openPackageFromBytes: webgeheugen vol', e);
     return _failOpen(
@@ -354,6 +367,7 @@ Future<OpenResult> _openPackageFromBytes(
     remoteOrigin: remoteOrigin,
     learningSession: learningSession,
     index: initialIndex < 0 ? 0 : initialIndex,
+    preserveThemeProfile: carriesPackagedProfile,
   );
   return OpenResult.opened;
 }

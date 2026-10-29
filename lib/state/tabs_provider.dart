@@ -505,7 +505,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (!mounted) return OpenResult.unreadable;
     _reportOpenOutcome(_ref, outcome);
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
-    _placeDeckInTab(this, deck, filePath: path, index: index);
+    _placeDeckInTab(
+      this,
+      deck,
+      filePath: path,
+      index: index,
+      preserveThemeProfile: outcome.carriesPackagedProfile,
+    );
     await _settings.addRecentFile(
       path,
       slideCount: deck.slides.length,

@@ -13,6 +13,7 @@ void _placeDeckInTab(
   int index = 0,
   String? remoteOrigin,
   LearningSessionRef? learningSession,
+  bool preserveThemeProfile = false,
 }) {
   final state = notifier.currentState;
   final current = state.current;
@@ -32,9 +33,10 @@ void _placeDeckInTab(
     deck.copyWith(remoteAssetBase: remoteDeckUrlOrNull(remoteOrigin)),
     filePath: filePath,
     remoteOrigin: remoteOrigin,
-    // Het serverpakket bevat de bij publicatie bevroren huisstijl; de gewone
-    // openroute blijft de actieve gebruikersinstelling volgen.
-    preserveThemeProfile: learningSession != null,
+    // Het server- of `.ocideck`-pakket bevat de bij publicatie bevroren
+    // huisstijl; de gewone openroute blijft de actieve gebruikersinstelling
+    // volgen.
+    preserveThemeProfile: preserveThemeProfile || learningSession != null,
   );
   tab.learningSession = learningSession;
   tab.editorNotifier.select(index);
