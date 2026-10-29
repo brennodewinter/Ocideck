@@ -880,6 +880,37 @@ class _AppShellState extends ConsumerState<AppShell> {
       );
     });
 
+    // Een beschadigd instellingenbestand is in quarantaine gezet en de app
+    // draait op standaardwaarden (#2628). De quarantaine gebeurde bij het
+    // laden van de prefs — vóórdat deze listener kan bestaan — dus de
+    // eerste melding lezen we ook als waarde, niet alleen als overgang.
+    void showCorruptionNotice(String path) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            path.isEmpty
+                ? context.l10n.d(
+                    'Je instellingen waren beschadigd en zijn teruggezet.',
+                  )
+                : context.l10n.d(
+                    'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in $path.',
+                  ),
+          ),
+        ),
+      );
+      ref.read(settingsCorruptionNoticeProvider.notifier).state = null;
+    }
+
+    final pendingCorruption = ref.read(settingsCorruptionNoticeProvider);
+    if (pendingCorruption != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) showCorruptionNotice(pendingCorruption);
+      });
+    }
+    ref.listen(settingsCorruptionNoticeProvider, (_, path) {
+      if (path != null) showCorruptionNotice(path);
+    });
+
     // Een geheim kon niet in de sleutelhanger worden bewaard. Apart van de
     // melding hierboven, want hier komt de fout later terug vermomd als een
     // afgewezen wachtwoord — zeg er daarom bij wat er straks gebeurt.

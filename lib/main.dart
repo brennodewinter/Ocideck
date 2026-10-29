@@ -11,6 +11,7 @@ import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
 import 'services/bundled_licenses.dart';
 import 'services/privacy/privacy_bulk_lexicon.dart';
+import 'services/shared_preferences_atomic.dart';
 import 'services/asset_staging.dart';
 import 'services/disk_traces.dart';
 import 'utils/log.dart';
@@ -24,6 +25,14 @@ void main(List<String> args) {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     _installErrorHandlers();
+
+    // Op Windows/Linux schrijft shared_preferences alles in één JSON-bestand
+    // met een niet-atomare write — een afgebroken schrijfbeurt liet elke
+    // volgende start op een FormatException vallen (#2628). De atomaire
+    // variant schrijft via rename en zet een onleesbaar bestand in
+    // quarantaine in plaats van opnieuw te falen. Vóór de eerste
+    // getInstance() registreren; op macOS/web is dit een no-op.
+    registerAtomicFilePreferences();
 
     // De fonts, het gezichtsmodel en de gebundelde JavaScript zijn geen
     // Dart-pakketten, dus Flutter's eigen NOTICES-asset kent ze niet. Ze hier

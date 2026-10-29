@@ -2,6 +2,8 @@ bool get isDesktopNative => false;
 
 bool get isLinuxDesktop => false;
 
+bool get isFilePrefsDesktop => false;
+
 bool get supportsNativeGit => false;
 
 bool get supportsDualScreenPresenter => false;
