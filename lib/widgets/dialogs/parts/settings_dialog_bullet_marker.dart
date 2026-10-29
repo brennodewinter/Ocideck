@@ -100,7 +100,7 @@ Future<String?> _pickCustomBulletSvgFile(BuildContext context) async {
     context,
   ).showSnackBar(SnackBar(content: Text(context.l10n.d(message))));
 
-  final length = file.lengthSync() ?? await file.length();
+  final length = await file.length();
   if (!context.mounted) return null;
   if (length == null || length > kMaxCustomBulletSvgChars) {
     reject('Dit bestand is te groot om te openen.');

@@ -4461,6 +4461,7 @@ const _dutchSourceAddSl = <String, String>{
       'Datoteka na disku se je spremenila, odkar ste jo odprli — verjetno v drugem oknu ali z drugim programom. Prepis zavrže te spremembe.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Obnovitev po zrušitvi zdaj ne deluje — mapa za obnovitev ni zapisljiva. Ročno shrani svoje delo.',
+  'Donker logo kiezen': 'Izberi temno logotip',
   'Geen donker logo ingesteld': 'Ni nastavljenega temnega logotipa',
   'Verwijder donker logo': 'Odstrani temno logotip',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

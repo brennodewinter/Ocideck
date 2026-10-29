@@ -233,7 +233,7 @@ void main() {
   );
 
   test(
-    'een .ocideck-pakket draagt de stijl mee als theme.json (#2644)',
+    'een .ocideck-pakket draagt de stijl mee als ocideck-style.json (#2644)',
     () async {
       final logo = image(srcA, 'logo.png', _pngA);
       final deck = Deck(
@@ -250,11 +250,11 @@ void main() {
       );
 
       final members = await file.buildPackageMembers(deck);
-      final themeJson = members['theme.json'];
+      final themeJson = members['ocideck-style.json'];
       expect(themeJson, isNotNull);
       final decoded =
           jsonDecode(utf8.decode(themeJson!)) as Map<String, Object?>;
-      expect(decoded['definition'], isA<Map<String, Object?>>());
+      expect(decoded['accentColor'], '#AA0000');
 
       // Openen bij een ontvanger met een ander actief profiel: de stijl van de
       // maker geldt, de logopaden wijzen in de uitgepakte map.
@@ -279,7 +279,10 @@ void main() {
       ]) {
         expect(rel, isNotNull);
         expect(p.isAbsolute(rel!), isTrue);
-        expect(p.isWithin(projectDir, rel), isTrue);
+        expect(
+          p.isWithin(projectDir, File(rel).resolveSymbolicLinksSync()),
+          isTrue,
+        );
         expect(File(rel).existsSync(), isTrue);
       }
     },

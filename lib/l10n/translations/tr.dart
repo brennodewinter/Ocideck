@@ -5345,6 +5345,7 @@ const _dutchSourceAddTr = <String, String>{
       'Diskteki dosya, açtığınızdan beri değişti — muhtemelen başka bir pencerede veya başka bir program tarafından. Üzerine yazmak bu değişiklikleri atar.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Çöküş kurtarma şu an çalışmıyor — kurtarma klasörü yazılabilir değil. Çalışmanızı manuel olarak kaydedin.',
+  'Donker logo kiezen': 'Koyu logo seç',
   'Geen donker logo ingesteld': 'Koyu logo ayarlanmadı',
   'Verwijder donker logo': 'Koyu logoyu kaldır',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

@@ -3554,6 +3554,7 @@ const _dutchSourceAddDe = {
       'Die Datei auf der Festplatte hat sich seit dem Öffnen geändert — wahrscheinlich in einem anderen Fenster oder von einem anderen Programm. Überschreiben verwirft diese Änderungen.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Absturzwiederherstellung funktioniert derzeit nicht — der Wiederherstellungsordner ist nicht beschreibbar. Speichere deine Arbeit manuell.',
+  'Donker logo kiezen': 'Dunkles Logo wählen',
   'Geen donker logo ingesteld': 'Kein dunkles Logo eingestellt',
   'Verwijder donker logo': 'Dunkles Logo entfernen',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

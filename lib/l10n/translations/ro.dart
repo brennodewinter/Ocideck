@@ -4517,6 +4517,7 @@ const _dutchSourceAddRo = <String, String>{
       'Fișierul de pe disc s-a schimbat de când l-ai deschis — probabil într-o altă fereastră sau de un alt program. Suprascrierea aruncă acele modificări.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Recuperarea după crash nu funcționează acum — dosarul de recuperare nu este inscriptibil. Salvează-ți munca manual.',
+  'Donker logo kiezen': 'Alege logo întunecat',
   'Geen donker logo ingesteld': 'Niciun logo întunecat setat',
   'Verwijder donker logo': 'Șterge logo întunecat',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

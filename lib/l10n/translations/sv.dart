@@ -4461,6 +4461,7 @@ const _dutchSourceAddSv = <String, String>{
       'Filen på disken har ändrats sedan du öppnade den — förmodligen i ett annat fönster eller av ett annat program. Att skriva över kastar dessa ändringar.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Kraschåterställning fungerar inte just nu — återställningsmappen är inte skrivbar. Spara ditt arbete manuellt.',
+  'Donker logo kiezen': 'Välj mörkt logo',
   'Geen donker logo ingesteld': 'Inget mörkt logo valt',
   'Verwijder donker logo': 'Ta bort mörkt logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

@@ -4517,6 +4517,7 @@ const _dutchSourceAddPt = <String, String>{
       'O arquivo no disco mudou desde que você o abriu — provavelmente em outra janela ou por outro programa. Substituir descarta essas alterações.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'A recuperação de crash não está funcionando agora — a pasta de recuperação não é gravável. Salve seu trabalho manualmente.',
+  'Donker logo kiezen': 'Escolher logo escuro',
   'Geen donker logo ingesteld': 'Sem logo escuro definido',
   'Verwijder donker logo': 'Remover logo escuro',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

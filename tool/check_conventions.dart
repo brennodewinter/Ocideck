@@ -337,13 +337,13 @@ const Map<String, int> fileSizeBaseline = {
   // part-directive voor settings_dialog_bullet_marker — de rij zelf staat daar
   // als top-level hulp, niet in de klasse.
   'lib/widgets/dialogs/settings_dialog.dart':
-      1125, // +53 (sweep #2648/#2640): bewerkkopieën voor
+      1050, // +53 (sweep #2648/#2640): bewerkkopieën voor
   // profielen en documentopmaak (Annuleren schrijft niets weg) en de
   // web-logokiezers via mem:-assets — de secties leven in de
   // part-bestanden, de staat in deze klasse.
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
-      1150, // +132 (sweep #2641–#2645/#2634): theme.json in
+      1095, // +132 (sweep #2641–#2645/#2634): theme.json in
   // .ocideck-pakketten, documentLogoPath-doorvoer, botsingsvrije
   // logo-bestemmingen en privacybevindingen die met het openresultaat
   // meereizen — allemaal in de part-bestanden van deze library.
@@ -375,7 +375,7 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/dialogs/parts/settings_dialog_colors.dart': 1030,
   // +2 (sweep #2621): de debounce-flush op MarkdownSourceController —
   // één listener plus dispose-cleanup.
-  'lib/widgets/markdown_editor/markdown_editor.dart': 1025,
+  'lib/widgets/markdown_editor/markdown_editor.dart': 975,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -433,7 +433,7 @@ const Map<String, int> classSizeBaseline = {
   // modulelijst; de kaart zelf is een losse widget.
   // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
-      6375, // +62 (sweep #2648/#2640): bewerkkopieën van
+      6265, // +62 (sweep #2648/#2640): bewerkkopieën van
   // profielen/documentopmaak en de web-logokiezer — extensies in de
   // part-bestanden tellen mee. De #2616-bulletmarkerrij staat top-level en
   // telt hier niet mee.
@@ -530,7 +530,7 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      3000, // +114 (sweep #2641–#2645/#2634): theme.json-ronde
+      2865, // +114 (sweep #2641–#2645/#2634): theme.json-ronde
   // in pakketten, logo-resolutie en scan-doorvoer — extensies in
   // file_service_*.dart tellen mee. Ook de #2640-verhuizing van pakketstijl
   // en logobotsing (file_service_carried_style/file_service_project) valt in

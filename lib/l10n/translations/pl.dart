@@ -4490,6 +4490,7 @@ const _dutchSourceAddPl = <String, String>{
       'Plik na dysku zmienił się od czasu jego otwarcia — prawdopodobnie w innym oknie lub przez inny program. Nadpisanie odrzuca te zmiany.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Odzyskiwanie po awarii teraz nie działa — folder odzyskiwania nie jest zapisywalny. Zapisz swoją pracę ręcznie.',
+  'Donker logo kiezen': 'Wybierz ciemne logo',
   'Geen donker logo ingesteld': 'Brak ustawionego ciemnego logo',
   'Verwijder donker logo': 'Usuń ciemne logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

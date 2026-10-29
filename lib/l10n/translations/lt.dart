@@ -4466,6 +4466,7 @@ const _dutchSourceAddLt = <String, String>{
       'Failas diske pasikeitė nuo tada, kai jį atvėrėte — tikriausiai kitame lange arba kita programa. Perrašymas išmeta tuos pakeitimus.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Avarinis atstatymas dabar neveikia — atstatymo aplankas nėra įrašomas. Išsaugokite savo darbą rankiniu būdu.',
+  'Donker logo kiezen': 'Pasirinkti tamsų logotipą',
   'Geen donker logo ingesteld': 'Tamsus logotipas nenustatytas',
   'Verwijder donker logo': 'Pašalinti tamsų logotipą',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

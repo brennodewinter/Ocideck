@@ -4451,6 +4451,7 @@ const _dutchSourceAddEt = <String, String>{
       'Kettal olev fail on muutunud alates selle avamisest — arvatavasti teises aknas või teise programmiga. Ülekirjutamine viskab need muudatused minema.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Krahhi taastamine ei tööta praegu — taastamiskausta ei saa kirjutada. Salvesta oma töö käsitsi.',
+  'Donker logo kiezen': 'Vali tume logo',
   'Geen donker logo ingesteld': 'Tume logo pole seatud',
   'Verwijder donker logo': 'Eemalda tume logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

@@ -19,6 +19,7 @@ void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
   const eigen = ThemeProfile(name: 'Eigen huisstijl');
+  const tweede = ThemeProfile(name: 'Tweede huisstijl');
 
   late ProviderContainer container;
 
@@ -110,7 +111,7 @@ void main() {
         tester,
         section: SettingsSection.presentation,
         prefs: {
-          'themeProfiles': jsonEncode([eigen.toJson()]),
+          'themeProfiles': jsonEncode([eigen.toJson(), tweede.toJson()]),
           'selectedThemeProfileName': 'Eigen huisstijl',
         },
       );
@@ -126,11 +127,13 @@ void main() {
     });
 
     testWidgets('Opslaan na verwijderen is het profiel weg', (tester) async {
+      // Twee profielen: het enige opgeslagen profiel is niet te verwijderen
+      // (replaceThemeProfiles weigert een lege verzameling).
       await openDialog(
         tester,
         section: SettingsSection.presentation,
         prefs: {
-          'themeProfiles': jsonEncode([eigen.toJson()]),
+          'themeProfiles': jsonEncode([eigen.toJson(), tweede.toJson()]),
           'selectedThemeProfileName': 'Eigen huisstijl',
         },
       );

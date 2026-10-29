@@ -4479,6 +4479,7 @@ const _dutchSourceAddLa = <String, String>{
       'Fasciculus in disco mutatus est ex quo aperuisti — probabiliter in alia fenestra aut ab alio programma. Superscribere eas mutationes abiicit.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Restauratio post ruinam nunc non operatur — dossier restitutionis inscribi non potest. Opus tuum manualiter serva.',
+  'Donker logo kiezen': 'Elige logotypum obscurum',
   'Geen donker logo ingesteld': 'Nullum logotypum obscurum positum',
   'Verwijder donker logo': 'Tolle logotypum obscurum',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

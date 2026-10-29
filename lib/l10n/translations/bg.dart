@@ -4497,6 +4497,7 @@ const _dutchSourceAddBg = <String, String>{
       'Файлът на диска се е променил откакто го отворихте — вероятно в друг прозорец или от друга програма. Презаписването отхвърля тези промени.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Възстановяването след срив не работи в момента — папката за възстановяване не е достъпна за запис. Запазете работата си ръчно.',
+  'Donker logo kiezen': 'Избери тъмно лого',
   'Geen donker logo ingesteld': 'Няма зададено тъмно лого',
   'Verwijder donker logo': 'Премахни тъмно лого',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':

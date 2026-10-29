@@ -4519,6 +4519,7 @@ const _dutchSourceAddMt = <String, String>{
       'Il-fajl fuq id-disk nbidel minn meta ftaħtu — probabbilment f\'window ieħor jew minn programm ieħor. L-overwrite tarmi dawk it-tibdiliet.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Ir-rikupru wara crash mhu jaħdimx issa — il-folder ta\' rikupru mhuwiex jista\' jinkiteb. Salvax xogħol tiegħek manwalment.',
+  'Donker logo kiezen': 'Agħżel logo skur',
   'Geen donker logo ingesteld': 'L-ebda logo skur mhux issettjat',
   'Verwijder donker logo': 'Neħħi logo skur',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
