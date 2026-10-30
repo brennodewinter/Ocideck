@@ -577,10 +577,7 @@ void main() {
     testWidgets('een werkmap waar niet te schrijven valt wordt gemeld', (
       tester,
     ) async {
-      await tester.runAsync(() async {
-        await Directory(root).create(recursive: true);
-        await File(p.join(root, 'submissions')).writeAsString('geen map');
-      });
+      await tester.runAsync(() => Directory(root).create(recursive: true));
       final picks = _Picks()
         ..form = kook
         ..packages = [(name: 'goed.zip', bytes: zipOf())];
@@ -591,6 +588,10 @@ void main() {
         text('Formulier toegevoegd: kook · v1.'),
       );
       await settleIo(tester, text('kook · v1'));
+      // Maak alleen het opslagdoel ongeldig nadat het formulier is toegevoegd.
+      await tester.runAsync(
+        () => File(p.join(root, 'submissions')).writeAsString('geen map'),
+      );
       await tapAndWait(
         tester,
         text('Pakketten binnenhalen…'),
