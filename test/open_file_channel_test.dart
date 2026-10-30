@@ -7,7 +7,7 @@ import 'package:ocideck/services/open_file_channel.dart';
 /// De kanaallogica achter Finder-"Open met" en de filterloze macOS-kiezer
 /// (ocideck/open_file), getest via [OpenFileChannel.activate] /
 /// [pickUnfilteredMacFile] zodat hij op elk platform onder de dekking valt —
-/// [OpenFileChannel.start] zelf gaat alleen op macOS echt aan.
+/// [OpenFileChannel.start] zelf gaat op macOS en Windows echt aan.
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
   const channel = kOpenFileChannel;
@@ -101,17 +101,19 @@ void main() {
     },
   );
 
-  test('start doet buiten macOS niets, ook niet registreren', () async {
+  test('start registreert op macOS en Windows, niet op Linux', () async {
     final ofc = OpenFileChannel((paths) async => opened.add(paths));
     await ofc.start();
-    if (Platform.isMacOS) {
-      // Op macOS is start() wél actief; de koude start was leeg.
-      expect(opened, isEmpty);
-    } else {
-      // Geen registratie: een openFiles van de host bereikt niemand.
-      await hostCalls('openFiles', ['f.md']);
-      expect(opened, isEmpty);
-    }
+    expect(opened, isEmpty);
+    await hostCalls('openFiles', ['f.md']);
+    expect(
+      opened,
+      Platform.isMacOS || Platform.isWindows
+          ? [
+              ['f.md'],
+            ]
+          : isEmpty,
+    );
   });
 
   test('pickUnfilteredMacFile stuurt titel en startmap mee', () async {
