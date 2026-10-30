@@ -32,16 +32,10 @@
 # en moet niet als zodanig gelezen worden.
 name: ci
 
-# **Draait op een tag, niet op elke PR (#790).** CI is hiermee géén
-# samenvoegpoort maar een uitbrengpoort: valt hij op een tag om, dan staat het
-# probleem al op main. De borging vóór main is volledig `make check` op de
-# machine van de committer — zie CONTRIBUTING.md en docs/CHECKS.md.
-#
-# `workflow_dispatch` blijft, zodat een tak alsnog door de poort kan zonder een
-# tag te hoeven zetten.
+# De releasekandidaat draait deze poort vóór de tag in release.yml. Deze
+# zelfstandige diagnose is op afroep beschikbaar; een tweede, flakerende
+# herhaling na de tag mag de gepubliceerde versie niet meer blokkeren.
 on:
-  push:
-    tags: ['v*']
   workflow_dispatch:
 
 jobs:

@@ -402,13 +402,10 @@ void main() {
       );
     });
 
-    test('the installer is built with the version from the tag', () {
-      // Not from pubspec.yaml: the forge fetches by a name derived from the tag,
-      // so a tag that is momentarily ahead of pubspec would produce a file the
-      // forge cannot find.
+    test('the installer is built with the candidate version', () {
       expect(
         mirrorYaml.contains(
-          r'VERSION="${GITHUB_REF_NAME#v}" bash scripts/build_windows_installer.sh',
+          r'VERSION="${RELEASE_TAG#v}" bash scripts/build_windows_installer.sh',
         ),
         isTrue,
         reason:
@@ -468,7 +465,7 @@ void main() {
       for (final field in ['tag_commit', 'run_id', 'sha256']) {
         expect(attest, contains(field), reason: 'Attestation lost `$field`.');
       }
-      expect(attest, contains(r'$GITHUB_SHA'));
+      expect(attest, contains(r'$RELEASE_SHA'));
       expect(attest, contains(r'$GITHUB_RUN_ID'));
       expect(attest, contains('sha256sum'));
     });
@@ -524,7 +521,7 @@ void main() {
     test('the artifact hand-off is not narrowed to the zip', () {
       expect(
         RegExp(
-          r'path:\s*ocideck-windows-x64-\*\s*$',
+          r'path:\s*\|\s*ocideck-windows-x64-\*',
           multiLine: true,
         ).hasMatch(forgeYaml),
         isTrue,
@@ -562,12 +559,12 @@ void main() {
     // location, dead binary, dirty uninstall) used to publish green. The smoke
     // step runs the real installer on the Windows runner before the publish
     // step — delete a check here and the corresponding failure mode ships again.
-    test('the mirror smoke-tests the installer before publishing it', () {
+    test('the mirror smoke-tests the installer before uploading it', () {
       final smokeAt = mirrorYaml.indexOf(
         '- name: "Smoke-test: installeren, starten, verwijderen"',
       );
       final publishAt = mirrorYaml.indexOf(
-        "- name: Publish to the mirror's release",
+        '- name: Bewaar Windows-cohort voor de forge',
       );
       expect(
         smokeAt,
@@ -578,7 +575,7 @@ void main() {
         smokeAt,
         lessThan(publishAt),
         reason:
-            'The publish step runs before the installer smoke-test — a broken '
+            'The upload step runs before the installer smoke-test — a broken '
             'installer would ship again.',
       );
     });
@@ -780,7 +777,7 @@ void main() {
             'failed build.',
       );
       expect(
-        mirrorYaml.contains('Alleen op een tag'),
+        mirrorYaml.contains("if: \${{ inputs.mode == 'candidate' }}"),
         isTrue,
         reason:
             'workflow_dispatch accepts any ref; without the tag guard a '
@@ -803,21 +800,26 @@ void main() {
       );
     });
 
+    test('the mirror creates no release', () {
+      expect(mirrorYaml, isNot(contains('gh release create')));
+      expect(mirrorYaml, isNot(contains('gh release upload')));
+    });
+
     test(
-      'the mirror release stays draft; only the canonical release is public',
+      'a Windows candidate builds the exact commit without creating a release',
       () {
-        final publish = mirrorYaml.substring(
-          mirrorYaml.indexOf("- name: Publish to the mirror's release"),
+        expect(mirrorYaml, contains('options: [candidate, publish]'));
+        expect(
+          mirrorYaml,
+          contains('ref: \${{ inputs.commit_sha || github.sha }}'),
         );
         expect(
-          RegExp(
-            r'gh release create[^\n]*(?:\\\n[^\n]*)*--draft',
-          ).hasMatch(publish),
-          isTrue,
-          reason:
-              'Windows assets must remain a private draft on the mirror; the '
-              'complete canonical Forge release is the public distribution.',
+          mirrorYaml,
+          contains(r'test "$(git rev-parse HEAD)" = "$RELEASE_SHA"'),
         );
+        expect(mirrorYaml, contains("if: \${{ inputs.mode == 'candidate' }}"));
+        expect(mirrorYaml, contains('tag-check:'));
+        expect(mirrorYaml, contains('name: ocideck-windows-cohort'));
       },
     );
 
@@ -910,7 +912,7 @@ void main() {
           if (steps is! YamlList) continue;
           for (final s in steps) {
             if (s is YamlMap && s['name'] == stepName) {
-              return s['run'].toString();
+              return s['run'].toString().replaceAll(r'${{ inputs.mode }}', 'candidate');
             }
           }
         }
@@ -983,13 +985,13 @@ case "\$url" in
   */runs?per_page=*)
     RC=\$((RC+1)); echo "\$RC" > "\$RC_FILE"
     if [ "$staleActiveRunAtRedispatch" = true ] && [ "\$RC" -ge 2 ] && [ "\$RC" -lt 7 ]; then
-      printf '{"workflow_runs":[{"id":100,"head_branch":"v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/oud-actief"}]}\\n'
+      printf '{"workflow_runs":[{"id":100,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/oud-actief"}]}\\n'
     elif [ "\$RC" -lt ${staleActiveRunAtRedispatch ? 7 : newRunAfterPolls ?? 9999} ]; then
-      printf '{"workflow_runs":[{"id":100,"head_branch":"v9.9.9","status":"completed","conclusion":"failure","html_url":"https://gh/oud"}]}\\n'
+      printf '{"workflow_runs":[{"id":100,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"completed","conclusion":"failure","html_url":"https://gh/oud"}]}\\n'
     elif [ "\$RC" -lt 5 ]; then
-      printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/nieuw"}]}\\n'
+      printf '{"workflow_runs":[{"id":102,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/nieuw"}]}\\n'
     else
-      printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
+      printf '{"workflow_runs":[{"id":102,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
     fi ;;
   */actions/runs/102/artifacts?per_page=*)
     [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || { printf '{"artifacts":[]}\n'; exit 0; }
@@ -1015,6 +1017,8 @@ exit 0
             'FAKE_DIR': dir.path,
             'GITHUB_REF_NAME': 'v9.9.9',
             'GITHUB_SHA': 'deadbeef',
+            'RELEASE_TAG': 'v9.9.9',
+            'RELEASE_SHA': 'deadbeef',
             'GH_DISPATCH_TOKEN': 'x',
           },
         );

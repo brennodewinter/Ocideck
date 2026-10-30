@@ -21,18 +21,11 @@
 
 name: CI
 
-# Draait op een tag, niet op elke push of PR (#958). Dit was ooit `push:
-# branches: ["**"]` + `pull_request:` — de hele zevendelige pijplijn op élke
-# commit, ongeacht wat er wijzigde. Dat maakte deze spiegel een tweede
-# faalmail-bron. De échte samenvoegpoort is `make check-full` op de machine van
-# de committer; ook Forgejo herhaalt de statische, scan- en webdoelen niet meer
-# automatisch per PR. Deze spiegel voegt daar per PR niets aan toe, alleen
-# lasten. Zelfde keuze als `.forgejo/workflows/ci.yml` (#790): CI is een
-# uitbrengpoort, geen samenvoegpoort. `workflow_dispatch` blijft, zodat een tak
-# alsnog handmatig door de volledige pijplijn kan zonder een tag te zetten.
+# De releasekandidaat wordt vóór de tag volledig getoetst op de forge, inclusief
+# een echte Windows-bouw op deze spiegel. Deze losse diagnose blijft handmatig
+# beschikbaar; na de tag herhalen we geen suite die de versie alsnog kan
+# blokkeren op een niet-reproduceerbare fout.
 on:
-  push:
-    tags: ["v*"]
   workflow_dispatch:
 
 # Least privilege: the default GITHUB_TOKEN grants far more than these jobs

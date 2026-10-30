@@ -3,11 +3,8 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaml/yaml.dart';
 
-/// Regressies voor #2321: de golden-poort (macos-gate) voor een releasetag
-/// mag nooit door gewone main-concurrency worden geannuleerd. In v0.6.14 werd
-/// run 5477 (poging 2, voor de tagcommit) vóór de start weggeveegd toen een
-/// ongerelateerde PR naar main merge — de groep `macos-gate-refs/heads/main`
-/// werd gedeeld. De poort draait nu óók op v*-tags, in een eigen ref-groep.
+/// De releasekandidaat toetst goldens vóór de tag. De losse macOS-poort is
+/// nog het post-merge vangnet voor gewone main-wijzigingen.
 void main() {
   final workflow = File('.forgejo/workflows/macos-gate.yml');
   final yaml = loadYaml(workflow.readAsStringSync());
@@ -15,41 +12,30 @@ void main() {
       ? 'release_auto.sh draait alleen op macOS/Linux, niet onder Windows Git Bash'
       : null;
 
-  test('de golden-poort draait ook op releasetags, niet alleen op main', () {
+  test('goldens draaien op de kandidaat vóór de tag', () {
     final on = yaml['on'] as YamlMap;
     final push = on['push'] as YamlMap;
-    final tags = (push['tags'] as YamlList).map((e) => '$e').toList();
-    expect(
-      tags,
-      contains('v*'),
-      reason:
-          'zonder tag-trigger heeft de poort van een releasecommit alleen een '
-          'main-run — en die deelt zijn concurrencygroep met elke merge (#2321)',
-    );
+    expect(push['tags'], isNull);
     final branches = (push['branches'] as YamlList).map((e) => '$e').toList();
     expect(branches, contains('main'), reason: 'de post-merge vangnet blijft');
+    final release = File('.forgejo/workflows/release.yml').readAsStringSync();
+    expect(release, contains('make test-golden'));
   });
 
-  test('de concurrencygroep scheidt tagrefs van branchrefs', () {
+  test('de concurrencygroep volgt de main-ref', () {
     final concurrency = yaml['concurrency'] as YamlMap;
     final group = '${concurrency['group']}';
-    // De groep moet de volledige ref dragen: refs/tags/v0.6.14 en
-    // refs/heads/main vallen zo in verschillende groepen, dus een main-push
-    // annuleert nooit een lopende of wachtende poort voor een releasetag.
+    // Een nieuwe main-push mag een oude vangnetrun annuleren.
     expect(
       group,
       contains('github.ref'),
-      reason:
-          'alleen met de volledige ref in de sleutel scheidt de groep een '
-          'tagrun van main-churn (#2321)',
+      reason: 'de groep volgt de ref van de getoetste main-versie',
     );
     expect(group, isNot(contains('head_commit')));
     expect(
       concurrency['cancel-in-progress'],
       isTrue,
-      reason:
-          'binnen één ref mag de nieuwste run de oude vervangen — de isolatie '
-          'zit in de ref-sleutel, niet in het uitschakelen van annuleren',
+      reason: 'binnen main mag de nieuwste vangnetrun de oude vervangen',
     );
   });
 
