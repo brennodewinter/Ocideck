@@ -133,9 +133,9 @@ RELEASE_CI_TIMEOUT_MIN=1
 api() {
   case "$2" in
     '/actions/runs?limit=100&page=1&workflow_id=release.yml')
-      printf '%s\n' '{"workflow_runs":[{"id":123,"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch"}]}' ;;
+      printf '%s\n' '{"workflow_runs":[{"id":123,"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":""}]}' ;;
     '/actions/runs/123')
-      printf '%s\n' '{"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch","status":"failure"}' ;;
+      printf '%s\n' '{"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"","status":"failure"}' ;;
   esac
 }
 release_candidate_run abcdef 123
