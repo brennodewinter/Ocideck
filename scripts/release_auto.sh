@@ -2616,7 +2616,7 @@ release_candidate_run() { # release_candidate_run MERGE_SHA [RUN_ID]; zet CANDID
   if [ -z "$run_id" ]; then
     runs="$(api GET '/actions/runs?limit=100&page=1&workflow_id=release.yml')" \
       || die "kandidaatruns niet leesbaar — niets getagd."
-    run_id="$(jq -r --arg sha "$merge" '[.workflow_runs[]? | select(.workflow_id == "release.yml" and .commit_sha == $sha and .prettyref == "main" and .event == "workflow_dispatch")] | sort_by(.id) | last | .id // empty' <<<"$runs")"
+    run_id="$(jq -r --arg sha "$merge" '[.workflow_runs[]? | select(.workflow_id == "release.yml" and .commit_sha == $sha and .prettyref == "main" and (.event == "workflow_dispatch" or .event == ""))] | sort_by(.id) | last | .id // empty' <<<"$runs")"
     if [ -n "$run_id" ]; then
       state="$(api GET "/actions/runs/$run_id" | jq -r '.status // "unknown"')" \
         || die "kandidaatrun $run_id niet leesbaar — niets getagd."
@@ -2636,7 +2636,7 @@ release_candidate_run() { # release_candidate_run MERGE_SHA [RUN_ID]; zet CANDID
   log "Kandidaatbouw $run_id op ${merge:0:12} volgen."
   deadline=$((SECONDS + RELEASE_CI_TIMEOUT_MIN * 60))
   while [ "$SECONDS" -lt "$deadline" ]; do
-    state="$(api GET "/actions/runs/$run_id" | jq -r --arg sha "$merge" 'if .workflow_id != "release.yml" or .commit_sha != $sha or .prettyref != "main" or .event != "workflow_dispatch" then "wrong-run" else .status // "unknown" end')" \
+    state="$(api GET "/actions/runs/$run_id" | jq -r --arg sha "$merge" 'if .workflow_id != "release.yml" or .commit_sha != $sha or .prettyref != "main" or (.event != "workflow_dispatch" and .event != "") then "wrong-run" else .status // "unknown" end')" \
       || die "kandidaatbouw $run_id niet leesbaar — niets getagd."
     case "$state" in
       success) break ;;
