@@ -620,7 +620,8 @@ Windows candidate artifact. See [CHECKS.md](CHECKS.md#continuous-integration).
 ## Cutting a release
 
 Release time limits must retain generous margins: native builds have four
-hours, complete Linux and Windows test jobs have five hours, and the Windows
+hours, package installation probes also have four hours, complete Linux and
+Windows test jobs have five hours, and the Windows
 artifact collector allows another 90 minutes for queuing and transfer. The
 local orchestrator allows 12 hours for prerequisite gates and 16 hours for the
 complete candidate chain. These are safety ceilings, not expected durations.

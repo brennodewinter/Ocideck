@@ -4,6 +4,7 @@ library;
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yaml/yaml.dart';
 
 /// Guards Phase 1 of the Linux install route (#1227): the release ships an
 /// AppImage, a .deb and an .rpm next to the tarball, built by
@@ -140,6 +141,25 @@ void main() {
   });
 
   group('the consumer probes gate publication (#2315)', () {
+    test('every package probe retains a generous installation budget', () {
+      for (final workflow in [releaseYaml, preTagYaml]) {
+        final jobs = (loadYaml(workflow) as YamlMap)['jobs'] as YamlMap;
+        final probes = jobs.entries.where(
+          (entry) => (entry.key as String).startsWith('consumer-'),
+        );
+        expect(probes, isNotEmpty);
+        for (final probe in probes) {
+          expect(
+            (probe.value as YamlMap)['timeout-minutes'],
+            greaterThanOrEqualTo(240),
+            reason:
+                '${probe.key} must allow cold runtime installation, artifact '
+                'transfer and validation under runner load.',
+          );
+        }
+      }
+    });
+
     // The build image carries every -dev package, so a missing runtime
     // dependency in a package manifest can never surface there — v0.4.9
     // shipped without Ayatana that way. Each consumer job therefore runs in

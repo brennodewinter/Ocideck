@@ -665,7 +665,7 @@ jobs:
     runs-on: docker
     # Dezelfde schone Ubuntu-proef als linux-build: geef apt ook na de tag
     # genoeg tijd voordat de eigenlijke startproef van 20 seconden begint.
-    timeout-minutes: 60
+    timeout-minutes: 240
     # Zelfde pin als deploy-web; kaal Ubuntu, géén bouwgereedschap.
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
@@ -706,7 +706,7 @@ jobs:
     needs: linux-debian12
     if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
-    timeout-minutes: 60
+    timeout-minutes: 240
     container:
       image: debian:12-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
     steps:
@@ -746,7 +746,7 @@ jobs:
     needs: linux
     if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
-    timeout-minutes: 20
+    timeout-minutes: 240
     # Kaal Fedora: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
     # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
     container:
@@ -779,7 +779,7 @@ jobs:
     needs: linux
     if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
-    timeout-minutes: 60
+    timeout-minutes: 240
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
@@ -825,7 +825,7 @@ jobs:
     needs: linux
     if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
-    timeout-minutes: 90
+    timeout-minutes: 240
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
