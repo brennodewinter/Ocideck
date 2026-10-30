@@ -912,7 +912,10 @@ void main() {
           if (steps is! YamlList) continue;
           for (final s in steps) {
             if (s is YamlMap && s['name'] == stepName) {
-              return s['run'].toString().replaceAll(r'${{ inputs.mode }}', 'candidate');
+              return s['run'].toString().replaceAll(
+                r'${{ inputs.mode }}',
+                'candidate',
+              );
             }
           }
         }

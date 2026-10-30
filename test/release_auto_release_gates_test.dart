@@ -199,7 +199,10 @@ release_candidate_run abcdef
       lessThan(push.indexOf(r'git push --quiet origin "$TAG"')),
     );
     expect(push, contains(r'ensure_candidate_publication "$mergesha"'));
-    expect(function('follow_ci'), contains('if ! tag_has_candidate; then wait_tag_gates; fi'));
+    expect(
+      function('follow_ci'),
+      contains('if ! tag_has_candidate; then wait_tag_gates; fi'),
+    );
   });
 
   test('hervatten tagt de nieuwe main na test- en catalogusreparatie', () {
