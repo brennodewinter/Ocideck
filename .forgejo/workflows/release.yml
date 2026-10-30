@@ -1,4 +1,4 @@
-# De release-keten van OciDeck: één tag, vier platformen en een live webversie.
+# De release-keten van OciDeck: eerst alle platformen, daarna pas een tag.
 #
 # Draait op de forge (Pawprint) en dat is met opzet: de forge is de bron, en de
 # downloads horen te staan waar de broncode staat. Eén uitzondering — Windows.
@@ -9,19 +9,17 @@
 # het STARTEN wel — `windows-ophalen` dispatcht sinds v0.3.6 de spiegel-build
 # actief via `GH_DISPATCH_TOKEN` i.p.v. te hopen dat de tag-push hem triggert.
 #
-# Wat er ontstaat bij `git push origin v0.1.0`:
+# Een kandidaat op main bouwt en controleert eerst alle bestanden:
 #
-#   web      → geharde bundel, plus de live deploy naar ocideck.librekat.nl
+#   web      → geharde bundel
 #   linux    → x64-bundel als tar.gz
 #   linux-debian12 → native x86-64-bundel gebouwd in Debian 12
 #   macos    → .app als zip (op de Mac-runner)
 #   windows  → opgehaald van de spiegel
-#   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS.
-#              De release blijft draft (#2311): pas nadat release_auto.sh de
-#              SHA256SUMS lokaal heeft getekend én die handtekening heeft
-#              geverifieerd, wordt hij gepubliceerd. Diezelfde stap dispatcht
-#              dan website-downloads.yml, dat de download-verwijzingen in de
-#              website-repo bijwerkt (die repo zet zichzelf live).
+# Pas na een groene kandidaat maakt release_auto.sh een geannoteerde tag met
+# het kandidaat-runnummer. De tag-push haalt exact die gecontroleerde bytes op,
+# maakt een draft release en laat ondertekening en de publieke stap aan het
+# lokale script. De webdemo en downloadpagina volgen na publicatie.
 #
 # Ondertekening: de macOS-app wordt op de Mac-runner getekend en genotariseerd
 # (Developer ID + notarytool; zie de macos-job en docs/BUILD.md). Een stabiele
@@ -35,18 +33,34 @@ name: release
 on:
   push:
     tags: ["v*"]
-  # Handmatig starten kan, maar alleen op een tag-ref: een release die naar een
-  # branch wijst heeft geen betekenis, en de versienaam komt hier uit de ref.
+  # Een kandidaat draait op main; een herstart van publicatie op de tag.
   workflow_dispatch:
+    inputs:
+      mode:
+        description: candidate or publish
+        required: true
+        type: choice
+        options: [candidate, publish]
+      version:
+        description: The future release tag
+        required: false
+        type: string
+      commit_sha:
+        description: Exact commit to build before tagging
+        required: false
+        type: string
+      candidate_run_id:
+        description: Verified candidate run containing release bytes
+        required: false
+        type: string
+
+env:
+  RELEASE_TAG: ${{ inputs.version || github.ref_name }}
+  RELEASE_SHA: ${{ inputs.commit_sha || github.sha }}
 
 jobs:
-  # De poort vóór het bouwen (#1893). `ci.yml` en `release.yml` vuren allebei
-  # onafhankelijk op `v*`-tags; zonder deze gate bouwt en publiceert de
-  # releaseketen gewoon door als `ci.yml` rood is. Cross-workflow `needs` is
-  # in Forgejo onbetrouwbaar, dus draait de poort hier zelf — zelfde
-  # `make check-no-coverage` als `ci.yml`, op dezelfde Mac-runner. Dubbel
-  # uitgevoerd op een tag, maar dat is het punt: een tag die de poort niet
-  # haalt mag geen artefact de deur uit sturen.
+  # De volledige poort draait op de kandidaat vóór de tag. Na de tag wordt
+  # alleen het vastgelegde kandidaatbewijs gecontroleerd en gepubliceerd.
   gate:
     name: Poort (vóór het bouwen)
     runs-on: macos
@@ -54,13 +68,29 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.ref }}
 
       - name: Release-invoer valideren
         run: |
           set -eu
-          TAG="$GITHUB_REF_NAME"
+          TAG="$RELEASE_TAG"
           SEMVER_RE='^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(\.(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?$'
-          if [ "${GITHUB_REF_TYPE:-}" != "tag" ] || ! printf '%s\n' "$TAG" | grep -Eq "$SEMVER_RE"; then
+          if [ "${{ inputs.mode }}" = candidate ]; then
+            test "${GITHUB_REF_TYPE:-}" = branch && test "$GITHUB_REF_NAME" = main || {
+              echo "Kandidaat moet vanaf main worden gestart." >&2; exit 1;
+            }
+            test "$(git rev-parse HEAD)" = "$RELEASE_SHA" || {
+              echo "Kandidaatcheckout wijkt af van opgegeven commit." >&2; exit 1;
+            }
+          elif [ "${GITHUB_REF_TYPE:-}" != tag ] || [ "$TAG" != "$GITHUB_REF_NAME" ] || [ "$(git rev-parse "$TAG^{}")" != "$(git rev-parse HEAD)" ]; then
+            echo "Publicatie moet op de exacte tagcommit draaien." >&2; exit 1
+          elif [ "$(git cat-file -t "refs/tags/$TAG")" != tag ]; then
+            echo "Release-tag mist het kandidaatattest." >&2; exit 1
+          else
+            RID="$(git cat-file -p "refs/tags/$TAG" | sed -n 's/^Candidate-Run: \([0-9][0-9]*\)$/\1/p')"
+            case "$RID" in ''|*[!0-9]*) echo "Release-tag mist een geldig kandidaat-runnummer." >&2; exit 1 ;; esac
+          fi
+          if ! printf '%s\n' "$TAG" | grep -Eq "$SEMVER_RE"; then
             echo "Ongeldige release-ref '$TAG': verwacht v<major>.<minor>.<patch> met optionele SemVer-prerelease." >&2
             exit 1
           fi
@@ -79,14 +109,19 @@ jobs:
           echo "Release-invoer klopt: $TAG (pubspec $PUBSPEC_VERSION)."
 
       - name: Afhankelijkheden ophalen
+        if: ${{ inputs.mode == 'candidate' }}
         run: flutter pub get --enforce-lockfile
 
       - name: De poort
-        run: make check-no-coverage
+        if: ${{ inputs.mode == 'candidate' }}
+        run: |
+          make check-no-coverage
+          make test-golden
 
   web:
     name: Web bouwen
     needs: gate
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     # Voorgebakken CI-image i.p.v. kaal ubuntu (#1170): OS, node, de
     # build-toolchain (cmake/build-essential voor de dartcv4-OpenCV-hook, #870) en
@@ -101,14 +136,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
-
-      - name: Alleen op een tag
-        run: |
-          test "${{ github.ref_type }}" = "tag" || {
-            echo "Deze workflow hoort op een tag te draaien, niet op '${{ github.ref_name }}'." >&2
-            echo "Start hem opnieuw met een tag-ref, of push een tag." >&2
-            exit 1
-          }
+          ref: ${{ inputs.commit_sha || github.sha }}
 
       # De werkkopie is van een andere uid dan root; zonder dit weigert git en
       # falen stappen die git aanroepen. Op het kale image deed de Flutter-
@@ -157,7 +185,7 @@ jobs:
 
       - name: Bundel inpakken
         run: |
-          VERSIE="${GITHUB_REF_NAME#v}"
+          VERSIE="${RELEASE_TAG#v}"
           tar -C build/web -czf "ocideck-web-$VERSIE.tar.gz" .
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
@@ -169,115 +197,10 @@ jobs:
           name: ocideck-web
           path: ocideck-web-${{ env.VERSIE }}.tar.gz
 
-  deploy-web:
-    name: Webversie live zetten
-    needs: web
-    # Alleen een échte versie gaat live. Een semver-voorloper (`v0.1.0-rc1`,
-    # alles met een streepje) bouwt en publiceert wél, maar laat
-    # ocideck.librekat.nl met rust — anders is er geen manier om deze hele
-    # keten één keer te oefenen zonder de publieke demo te raken.
-    if: ${{ !contains(github.ref_name, '-') }}
-    runs-on: docker
-    container:
-      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
-    steps:
-      # Eerst kijken of de deploy-secrets er zijn. Zo niet, dan slaat deze job
-      # netjes over — hij faalt er NIET op. Dat is nu de bedoeling: de webversie
-      # wordt voorlopig met de hand gedeployd (`make deploy-web`). Een hard
-      # `exit 1` zou bij elke echte tag een rode job + faalmail geven terwijl de
-      # release verder compleet publiceert (de desktop-downloads hangen niet aan
-      # de webhost). Zet beide secrets zodra het automatisch mag; dan zet deze
-      # job de webversie weer vanzelf live. De check staat vooraan zodat we bij
-      # overslaan geen flutter-toolchain optuigen voor niets.
-      - name: Zijn de deploy-secrets aanwezig?
-        id: check
-        env:
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
-        run: |
-          if [ -n "${DEPLOY_SSH_KEY:-}" ] && [ -n "${DEPLOY_KNOWN_HOSTS:-}" ]; then
-            echo "deploy=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "deploy=false" >> "$GITHUB_OUTPUT"
-            echo "Geen DEPLOY_SSH_KEY/DEPLOY_KNOWN_HOSTS ingesteld — de webversie wordt"
-            echo "niet automatisch live gezet. Dat is nu de bedoeling: deployen gebeurt"
-            echo "met de hand (make deploy-web, zie docs/HOSTING.md). De release zelf"
-            echo "publiceert hoe dan ook compleet; deze job slaat alleen de live-stap over."
-            # De job-conclusie is verder gewoon 'success', en dan leest een groene
-            # job als "web staat live" terwijl er niets gedeployd is. Zet de skip
-            # daarom zichtbaar op de run-samenvatting, niet alleen in de staplog.
-            {
-              echo "### ⏭️ Web NIET live gezet"
-              echo ""
-              echo "De release-artefacten (incl. de webbundel als download) zijn compleet,"
-              echo "maar \`ocideck.librekat.nl\` is **niet** automatisch bijgewerkt:"
-              echo "\`DEPLOY_SSH_KEY\`/\`DEPLOY_KNOWN_HOSTS\` ontbreken (bewust)."
-              echo ""
-              echo "Zet de webversie met de hand live: \`make deploy-web\` (zie docs/HOSTING.md)."
-            } >> "$GITHUB_STEP_SUMMARY"
-          fi
-
-      - name: Gereedschap installeren
-        if: steps.check.outputs.deploy == 'true'
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq openssh-client
-
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        if: steps.check.outputs.deploy == 'true'
-        with:
-          persist-credentials: false
-
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        if: steps.check.outputs.deploy == 'true'
-        with:
-          name: ocideck-web
-
-      # Bewust de gedownloade bundel uitpakken in plaats van opnieuw te bouwen:
-      # dan deployt deze job precies het artefact dat straks ook als download
-      # aan de release hangt. Twee keer bouwen zou twee bundels opleveren die
-      # niemand meer naast elkaar legt.
-      - name: Bundel uitpakken op de plek waar het script hem verwacht
-        if: steps.check.outputs.deploy == 'true'
-        run: |
-          VERSIE="${GITHUB_REF_NAME#v}"
-          mkdir -p build/web
-          tar -C build/web -xzf "ocideck-web-$VERSIE.tar.gz"
-
-      # Voor `pack_web_release.dart --check`: die verifieert dat SHA256SUMS
-      # precies de bestanden beschrijft die er liggen — nu dus over de bundel
-      # zoals hij door de artifactopslag is gekomen, niet zoals hij is gebouwd.
-      - uses: ./.forgejo/actions/flutter
-        if: steps.check.outputs.deploy == 'true'
-
-      - name: Afhankelijkheden ophalen
-        if: steps.check.outputs.deploy == 'true'
-        run: flutter pub get --enforce-lockfile
-
-      - name: Sleutel klaarzetten
-        if: steps.check.outputs.deploy == 'true'
-        env:
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
-        run: |
-          set -eu
-          mkdir -p ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          # Geen ssh-keyscan: dat vertrouwt de sleutel die je op dat moment
-          # krijgt, en dat is precies de aanname die een man-in-the-middle
-          # nodig heeft. De hostsleutel hoort vooraf vast te liggen.
-          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-
-      - name: Live zetten
-        if: steps.check.outputs.deploy == 'true'
-        run: scripts/deploy_web.sh
-
   linux:
     name: Linux bouwen
     needs: gate
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     # Voorgebakken CI-image i.p.v. kaal ubuntu (#1170): toolchain + Flutter +
     # Linux-desktop-precache zitten erin. Het image is echter voor de TEST-gates
@@ -308,6 +231,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
 
       - name: De werkkopie vertrouwen
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -354,7 +278,7 @@ jobs:
         # nooit mee. Alles landt in dist/ zodat één artifact zowel de tarball als
         # de pakketten draagt en ze in `publiceren` weer samen in dist/ komen.
         run: |
-          VERSIE="${GITHUB_REF_NAME#v}"
+          VERSIE="${RELEASE_TAG#v}"
           mkdir -p dist
           tar -C build/linux/x64/release \
             --transform "s,^bundle,ocideck-$VERSIE," \
@@ -398,6 +322,7 @@ jobs:
   linux-debian12:
     name: Linux bouwen op Debian 12
     needs: gate
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     timeout-minutes: 180
     steps:
@@ -408,6 +333,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
       - name: Docker-daemon vinden
         id: dockerd
         run: |
@@ -425,7 +351,7 @@ jobs:
             sleep 2
           done
           docker -H "$DOCKER_DAEMON" info >/dev/null
-          scripts/build_debian12_release.sh "${GITHUB_REF_NAME#v}"
+          scripts/build_debian12_release.sh "${RELEASE_TAG#v}"
       - name: Artifact bewaren
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
@@ -435,6 +361,7 @@ jobs:
   macos:
     name: macOS bouwen
     needs: gate
+    if: ${{ inputs.mode == 'candidate' }}
     # Host-modus op de aangemelde Mac (mac-brenno): de toolchain van die
     # machine, die `make check-toolchain` daar al bewaakt. Staat de Mac uit,
     # dan wacht deze job tot hij er weer is.
@@ -443,6 +370,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get --enforce-lockfile
@@ -454,7 +382,7 @@ jobs:
         # signing als expliciet ongetekende build verder mag.
         run: |
           set -eu
-          case "$GITHUB_REF_NAME" in
+          case "$RELEASE_TAG" in
             *-*) STABIEL=false ;;
             *)   STABIEL=true ;;
           esac
@@ -482,7 +410,7 @@ jobs:
           APP=$(find build/macos/Build/Products/Release -maxdepth 1 -type d -name '*.app' -print -quit)
           test -n "$APP" || { echo "Geen gebouwde macOS-app gevonden." >&2; exit 1; }
           if [ "${MACOS_SIGNED:-false}" != true ]; then
-            case "$GITHUB_REF_NAME" in
+            case "$RELEASE_TAG" in
               *-*) echo "Ongetekende prerelease: signingcontroles niet van toepassing." ;;
               *) echo "Stabiele macOS-build is niet als getekend gemarkeerd." >&2; exit 1 ;;
             esac
@@ -496,7 +424,7 @@ jobs:
         # ditto bewaart symlinks en resource forks — een .app die door een
         # gewone zip gaat, start niet meer.
         run: |
-          VERSIE="${GITHUB_REF_NAME#v}"
+          VERSIE="${RELEASE_TAG#v}"
           APP=$(ls -d build/macos/Build/Products/Release/*.app | head -1)
           test -n "$APP"
           ditto -c -k --keepParent "$APP" "ocideck-macos-$VERSIE.zip"
@@ -511,6 +439,7 @@ jobs:
   windows-ophalen:
     name: Windows ophalen van de spiegel
     needs: gate
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     # De poll-lus hieronder is op 90 minuten begrensd. De buitenmuur laat ook
     # ruimte voor containerstart, dispatch en de laatste download (max 5 min).
@@ -539,7 +468,7 @@ jobs:
         shell: bash
         run: |
           set -u
-          TAG="${GITHUB_REF_NAME}"
+          TAG="$RELEASE_TAG"
           VERSIE="${TAG#v}"
           # Twee bestanden sinds #1583: de zip én de installer. Ze komen uit
           # dezelfde spiegel-run, dus ze verschijnen samen — maar de controle
@@ -593,7 +522,7 @@ jobs:
             local rid="${1:-}" z e
             z="$(sha256sum "${BESTANDEN[0]}" | cut -d' ' -f1)"
             e="$(sha256sum "${BESTANDEN[1]}" | cut -d' ' -f1)"
-            jq -e --arg commit "$GITHUB_SHA" --arg z "$z" --arg e "$e" --arg rid "$rid" \
+          jq -e --arg commit "$RELEASE_SHA" --arg z "$z" --arg e "$e" --arg rid "$rid" \
               '.tag_commit == $commit
                and .sha256.zip == $z and .sha256.installer == $e
                and ($rid == "" or .run_id == ($rid | tonumber))' \
@@ -602,8 +531,16 @@ jobs:
           gh_api() { curl -fsS --connect-timeout 15 --max-time 60 \
             -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
             -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
-          dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
-            -d "{\"ref\":\"$TAG\"}"; }
+          dispatch() {
+            if [ "${{ inputs.mode }}" = candidate ]; then
+              gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
+                -d "$(jq -nc --arg tag "$TAG" --arg sha "$RELEASE_SHA" \
+                  '{ref:"main", inputs:{mode:"candidate",version:$tag,commit_sha:$sha}}')"
+            else
+              gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
+                -d "{\"ref\":\"$TAG\"}"
+            fi
+          }
           # Laatste run van de Windows-workflow op DEZE tag:
           # "status|conclusion|url|run_id". Het scheidingsteken bewaart ook een
           # lege conclusion zolang een run loopt; awk op spaties zou dan het
@@ -611,8 +548,11 @@ jobs:
           # De run-id is de exacte toets voor
           # "hoort deze run bij deze poging" (zie BASE_RID hieronder) én voor
           # de cohortcontrole: het paar moet uit precies die run komen.
-          run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=10" \
-            | jq -r --arg t "$TAG" 'first(.workflow_runs[] | select(.head_branch==$t))
+          run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=30" \
+            | jq -r --arg t "$TAG" --arg mode "${{ inputs.mode }}" \
+                'first(.workflow_runs[] | select(if $mode == "candidate" then
+                  .head_branch == "main" and .display_title == ("Windows candidate " + $t)
+                else .head_branch == $t end))
                 // {} | "\(.status // "")|\(.conclusion // "")|\(.html_url // "")|\(.id // "")"'; }
 
           # #2 idempotent: staat het asset er al (push-event vuurde wél, of een
@@ -706,7 +646,9 @@ jobs:
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: ocideck-windows
-          path: ocideck-windows-x64-*
+          path: |
+            ocideck-windows-x64-*
+            ocideck-windows-cohort-*.json
 
   # De consumentproeven hieronder pakken wat de bouw niet kan: het
   # ocideck-ci-image draagt alle -dev-pakketten, dus een ontbrekende
@@ -719,6 +661,7 @@ jobs:
   consumer-deb:
     name: .deb proef op een schone Ubuntu
     needs: linux
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     # Dezelfde schone Ubuntu-proef als linux-build: geef apt ook na de tag
     # genoeg tijd voordat de eigenlijke startproef van 20 seconden begint.
@@ -739,7 +682,7 @@ jobs:
           set -eu
           export DEBIAN_FRONTEND=noninteractive
           apt-get install -y --no-install-recommends xvfb fonts-dejavu-core
-          apt-get install -y "./dist/ocideck-linux-amd64-${GITHUB_REF_NAME#v}.deb"
+          apt-get install -y "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb"
           # Declares de control minder dan de binary linkt, dan toont ldd
           # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
           if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
@@ -761,6 +704,7 @@ jobs:
   consumer-debian12:
     name: Debian 12-archief proef op een schone Debian 12
     needs: linux-debian12
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     timeout-minutes: 60
     container:
@@ -781,7 +725,7 @@ jobs:
             xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
             libayatana-appindicator3-1 libgles2 libegl1 libpulse0
           mkdir -p /tmp/ocideck-test
-          tar -xzf "dist/ocideck-linux-debian12-x86_64-${GITHUB_REF_NAME#v}.tar.gz" -C /tmp/ocideck-test
+          tar -xzf "dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
           cd /tmp/ocideck-test/ocideck-linux-debian12-*
           test -x ./ocideck
           if ldd ./ocideck | grep 'not found'; then
@@ -800,6 +744,7 @@ jobs:
   consumer-rpm:
     name: .rpm proef op een schone Fedora
     needs: linux
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     timeout-minutes: 20
     # Kaal Fedora: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
@@ -815,7 +760,7 @@ jobs:
         run: |
           set -eu
           dnf install -y --setopt=install_weak_deps=False xorg-x11-server-Xvfb dejavu-sans-fonts
-          dnf install -y "./dist/ocideck-linux-x86_64-${GITHUB_REF_NAME#v}.rpm"
+          dnf install -y "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm"
           if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
             echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
             exit 1
@@ -832,6 +777,7 @@ jobs:
   consumer-appimage:
     name: AppImage proef op een schone Ubuntu
     needs: linux
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     timeout-minutes: 60
     container:
@@ -877,6 +823,7 @@ jobs:
   consumer-flatpak:
     name: Flatpak installatie en inhoud op een schone Ubuntu
     needs: linux
+    if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     timeout-minutes: 90
     container:
@@ -895,7 +842,7 @@ jobs:
           apt-get install -y --no-install-recommends flatpak
           flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
           flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
-          flatpak --user install -y --noninteractive --bundle "dist/ocideck-linux-x86_64-${GITHUB_REF_NAME#v}.flatpak"
+          flatpak --user install -y --noninteractive --bundle "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak"
           app="$(flatpak --user info --show-location com.dewinter.ocideck)"
           flatpak --user info --show-metadata com.dewinter.ocideck | grep -Fx 'runtime=org.gnome.Platform/x86_64/50'
           test -x "$app/files/bin/ocideck"
@@ -904,11 +851,73 @@ jobs:
           test -x "$app/files/libexec/git-core/git-remote-https"
           sh -n "$app/files/bin/ocideck"
           (cd "$app/files" && sha256sum -c share/doc/ocideck-flatpak/FILES.sha256)
-          cmp "$app/files/share/doc/ocideck-flatpak/components.cdx.json" "dist/ocideck-linux-x86_64-${GITHUB_REF_NAME#v}.flatpak.cdx.json"
+          cmp "$app/files/share/doc/ocideck-flatpak/components.cdx.json" "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak.cdx.json"
+
+  candidate:
+    name: Kandidaat volledig verpakken
+    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage, consumer-flatpak]
+    if: ${{ inputs.mode == 'candidate' }}
+    runs-on: docker
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.commit_sha }}
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-web, path: dist }
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux, path: dist }
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux-debian12, path: dist }
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-macos, path: dist }
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-windows, path: dist }
+      - name: Cohort, bestanden en checksums controleren
+        run: |
+          set -eu
+          VERSIE="${RELEASE_TAG#v}"
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          COHORT="dist/ocideck-windows-cohort-$VERSIE.json"
+          test -f "$COHORT"
+          jq -e --arg sha "$RELEASE_SHA" \
+            --arg zip "$(sha256sum "dist/ocideck-windows-x64-$VERSIE.zip" | cut -d' ' -f1)" \
+            --arg exe "$(sha256sum "dist/ocideck-windows-x64-setup-$VERSIE.exe" | cut -d' ' -f1)" \
+            '.tag_commit == $sha and .sha256.zip == $zip and .sha256.installer == $exe and (.run_id | type == "number")' \
+            "$COHORT" >/dev/null
+          jq -n --arg version "$RELEASE_TAG" --arg commit "$RELEASE_SHA" \
+            --argjson windows_run_id "$(jq -r .run_id "$COHORT")" \
+            '{version:$version, commit:$commit, windows_run_id:$windows_run_id}' \
+            > candidate-manifest.json
+          rm "$COHORT"
+          cp sbom/ocideck.cdx.json "dist/ocideck-$VERSIE.cdx.json"
+          cp sbom/ocideck.spdx.json "dist/ocideck-$VERSIE.spdx.json"
+          printf '%s\n' \
+            "ocideck-$VERSIE.cdx.json" "ocideck-$VERSIE.spdx.json" \
+            "ocideck-web-$VERSIE.tar.gz" "ocideck-linux-x64-$VERSIE.tar.gz" \
+            "ocideck-linux-debian12-x86_64-$VERSIE.tar.gz" \
+            "ocideck-linux-amd64-$VERSIE.deb" "ocideck-linux-x86_64-$VERSIE.rpm" \
+            "ocideck-linux-x86_64-$VERSIE.AppImage" \
+            "ocideck-linux-x86_64-$VERSIE.flatpak" \
+            "ocideck-linux-x86_64-$VERSIE.flatpak.cdx.json" \
+            "ocideck-macos-$VERSIE.zip" "ocideck-windows-x64-$VERSIE.zip" \
+            "ocideck-windows-x64-setup-$VERSIE.exe" | LC_ALL=C sort > /tmp/expected
+          find dist -maxdepth 1 -type f -exec basename {} \; | LC_ALL=C sort > /tmp/actual
+          diff -u /tmp/expected /tmp/actual
+          (cd dist && sha256sum ./* > SHA256SUMS && sha256sum -c SHA256SUMS)
+          tar -czf "ocideck-release-candidate-$RELEASE_TAG.tar.gz" candidate-manifest.json dist/*
+      - name: Kandidaat bewaren
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: ocideck-release-candidate
+          path: ocideck-release-candidate-${{ env.RELEASE_TAG }}.tar.gz
 
   publiceren:
     name: Release publiceren
-    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage, consumer-flatpak]
+    needs: gate
+    if: ${{ github.event_name == 'push' || inputs.mode == 'publish' }}
     runs-on: docker
     # Deze job muteeert buiten ons gebaande pad: elke call draagt daarom een
     # connect- én responstime-out (de curl-flags in de stappen; een endpoint dat
@@ -925,54 +934,44 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          ref: ${{ github.ref }}
 
-      # Downloaden naar `dist`, niet `assets`: de checkout hierboven brengt de
-      # repo mee, en die heeft een top-level `assets/` met submappen (fonts,
-      # images, templates, …). Zou je de release-bestanden dáárin zetten, dan
-      # struikelt de `sha256sum ./*` in de Checksums-stap over die mappen
-      # ("Is a directory", exit 1) en wordt er niets gepubliceerd. `dist`
-      # bestaat niet in de repo en botst dus met niets. Niet terugdraaien.
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: ocideck-web, path: dist }
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: ocideck-linux, path: dist }
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: ocideck-linux-debian12, path: dist }
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: ocideck-macos, path: dist }
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: ocideck-windows, path: dist }
-
-      # De SBOM hoort bij de exacte build die je uitlevert (CRA, Verordening
-      # (EU) 2024/2847, bijlage I deel II §1). Hij staat gecommit in de repo en
-      # `make sbom-verify` bewaakt in elke `make check` dat hij niet verouderd
-      # is, dus hier volstaat meenemen — met de versie in de naam, zodat twee
-      # gedownloade SBOM's niet dezelfde naam dragen.
-      - name: SBOM meeverpakken
+      - name: Geverifieerde kandidaat ophalen
+        env:
+          RUN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           set -eu
-          VERSIE="${GITHUB_REF_NAME#v}"
-          cp sbom/ocideck.cdx.json  "dist/ocideck-$VERSIE.cdx.json"
-          cp sbom/ocideck.spdx.json "dist/ocideck-$VERSIE.spdx.json"
-
-      # Eén lijst over alles wat aan deze release hangt. Wat dit wel is: een
-      # controle dat je hebt wat er lag. Wat dit niet is: een handtekening —
-      # wie de lijst zelf niet vertrouwt, heeft er niets aan. Die handtekening
-      # zit er wél, maar buiten deze workflow: de manifest wordt ná publicatie
-      # lokaal en met de hand getekend met minisign (`make sign-release`), zodat
-      # de private sleutel niet als secret op de runner hoeft te staan. Het
-      # resultaat, `SHA256SUMS.minisig`, wordt daarna aan de release gehangen —
-      # zie docs/BUILD.md §"Signing the release manifest".
-      - name: Checksums
-        run: |
-          set -eu
-          cd dist
-          # Naar een bestand buiten de map en dan pas naar binnen: `sha256sum
-          # ./* > SHA256SUMS` neemt bij een hérstart de lijst van de vorige
-          # poging in zichzelf mee, want die staat er dan al.
-          sha256sum ./* > /tmp/SHA256SUMS
-          mv /tmp/SHA256SUMS SHA256SUMS
-          cat SHA256SUMS
+          TOKEN="${RELEASE_TOKEN:-$RUN_TOKEN}"
+          RID="$(git cat-file -p "refs/tags/$GITHUB_REF_NAME" | sed -n 's/^Candidate-Run: \([0-9][0-9]*\)$/\1/p')"
+          case "$RID" in ''|*[!0-9]*) echo "Ongeldig kandidaat-runnummer." >&2; exit 1 ;; esac
+          if [ "${{ inputs.mode }}" = publish ] && [ "$RID" != "${{ inputs.candidate_run_id }}" ]; then
+            echo "Herstart vraagt een ander kandidaat-runnummer dan de vaste tag." >&2; exit 1
+          fi
+          API="${GITHUB_SERVER_URL}/api/v1/repos/${GITHUB_REPOSITORY}"
+          curl -fsS --connect-timeout 15 --max-time 60 \
+            -H "Authorization: token $TOKEN" "$API/actions/runs/$RID" > /tmp/candidate-run.json
+          jq -e --arg sha "$(git rev-parse HEAD)" \
+            '.workflow_id == "release.yml" and .commit_sha == $sha and .status == "success"' \
+            /tmp/candidate-run.json >/dev/null
+          curl -fsS --connect-timeout 15 --max-time 60 \
+            -H "Authorization: token $TOKEN" "$API/actions/runs/$RID/artifacts" > /tmp/artifacts.json
+          URL="$(jq -r 'first(.[] | select(.name == "ocideck-release-candidate" and .expired == false) | .archive_download_url) // empty' /tmp/artifacts.json)"
+          case "$URL" in "$GITHUB_SERVER_URL"/*) ;; *) echo "Kandidaat-URL ontbreekt of wijst buiten de forge." >&2; exit 1 ;; esac
+          curl -fsSL --connect-timeout 15 --max-time 300 \
+            -H "Authorization: token $TOKEN" "$URL" -o /tmp/candidate-artifact.zip
+          test "$(unzip -Z1 /tmp/candidate-artifact.zip | wc -l | tr -d ' ')" = 1
+          unzip -p /tmp/candidate-artifact.zip "ocideck-release-candidate-$GITHUB_REF_NAME.tar.gz" > /tmp/candidate.tar.gz
+          test -s /tmp/candidate.tar.gz
+          if tar -tzf /tmp/candidate.tar.gz | grep -E '^/|(^|/)\.\.(/|$)' ; then
+            echo "Onveilig pad in kandidaatbundel." >&2; exit 1
+          fi
+          tar -xzf /tmp/candidate.tar.gz
+          jq -e --arg version "$GITHUB_REF_NAME" --arg commit "$(git rev-parse HEAD)" \
+            '.version == $version and .commit == $commit and (.windows_run_id | type == "number")' \
+            candidate-manifest.json >/dev/null
+          (cd dist && sha256sum -c SHA256SUMS)
+          echo "Kandidaatrun $RID voor $GITHUB_REF_NAME@$(git rev-parse HEAD) geverifieerd."
 
       - name: Releasetekst opmaken
         run: |

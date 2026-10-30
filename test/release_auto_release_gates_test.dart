@@ -95,6 +95,116 @@ printf 'READY\n'
     expect(result.stdout, contains('READY'));
   }, skip: skipOnWindows);
 
+  test('rode Windows-native bouw stopt vóór de tag na groene suite', () {
+    final result = run(
+      r'''
+git() {
+  case "$1 $2" in
+    'remote get-url') printf '%s\n' 'git@github.com:owner/repo.git' ;;
+    'ls-remote origin'|'ls-remote mirror') printf '%s\n' 'abcdef refs/heads/main' ;;
+  esac
+}
+gh() {
+  case "$1 $2" in
+    'run list')
+      case "$*" in
+        *windows-native-check.yml*) printf '%s\n' '[{"databaseId":78,"headSha":"abcdef","status":"completed","conclusion":"failure"}]' ;;
+        *) printf '%s\n' '[{"databaseId":77,"headSha":"abcdef","status":"completed","conclusion":"success"}]' ;;
+      esac ;;
+    'run view')
+      case "$3" in
+        78) printf '%s\n' '{"headSha":"abcdef","status":"completed","conclusion":"failure"}' ;;
+        *) printf '%s\n' '{"headSha":"abcdef","status":"completed","conclusion":"success"}' ;;
+      esac ;;
+  esac
+}
+assert_windows_merge_gate abcdef
+''',
+      ['assert_windows_merge_gate'],
+    );
+    expect(result.exitCode, 42);
+    expect(result.stderr, contains('Windows-bouw op merge abcdef is failure'));
+  }, skip: skipOnWindows);
+
+  test('mislukte volledige kandidaatbouw verbruikt geen tag', () {
+    final result = run(
+      r'''
+RELEASE_CI_TIMEOUT_MIN=1
+api() {
+  case "$2" in
+    '/actions/runs?limit=100&page=1&workflow_id=release.yml')
+      printf '%s\n' '{"workflow_runs":[{"id":123,"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch"}]}' ;;
+    '/actions/runs/123')
+      printf '%s\n' '{"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch","status":"failure"}' ;;
+  esac
+}
+release_candidate_run abcdef 123
+''',
+      ['release_candidate_run'],
+    );
+    expect(result.exitCode, 42);
+    expect(result.stderr, contains('kandidaatbouw 123 is failure'));
+  }, skip: skipOnWindows);
+
+  test('een mislukte kandidaat krijgt bij hervatten een nieuwe poging', () {
+    final result = run(
+      r'''
+RELEASE_CI_TIMEOUT_MIN=1
+api() {
+  case "$1 $2" in
+    'GET /actions/runs?limit=100&page=1&workflow_id=release.yml')
+      printf '%s\n' '{"workflow_runs":[{"id":123,"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch"}]}' ;;
+    'GET /actions/runs/123') printf '%s\n' '{"status":"failure"}' ;;
+    'POST /actions/workflows/release.yml/dispatches') printf '%s\n' '{"id":124}' ;;
+    'GET /actions/runs/124')
+      printf '%s\n' '{"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch","status":"failure"}' ;;
+  esac
+}
+release_candidate_run abcdef
+''',
+      ['release_candidate_run'],
+    );
+    expect(result.exitCode, 42);
+    expect(result.stderr, contains('kandidaatbouw 124 is failure'));
+  }, skip: skipOnWindows);
+
+  test('groene kandidaatrun zonder downloadbare bundel verbruikt geen tag', () {
+    final result = run(
+      r'''
+RELEASE_CI_TIMEOUT_MIN=1
+api() {
+  case "$2" in
+    '/actions/runs?limit=100&page=1&workflow_id=release.yml')
+      printf '%s\n' '{"workflow_runs":[{"id":123,"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch"}]}' ;;
+    '/actions/runs/123')
+      printf '%s\n' '{"workflow_id":"release.yml","commit_sha":"abcdef","prettyref":"main","event":"workflow_dispatch","status":"success"}' ;;
+    '/actions/runs/123/artifacts?per_page=100')
+      printf '%s\n' '[]' ;;
+  esac
+}
+release_candidate_run abcdef
+''',
+      ['release_candidate_run'],
+    );
+    expect(result.exitCode, 42);
+    expect(result.stderr, contains('geen uniek, geldig kandidaatarchief'));
+  }, skip: skipOnWindows);
+
+  test('de tagpush volgt pas na de volledige kandidaatcontrole', () {
+    final push = function('tag_and_push');
+    expect(push, contains(r'release_candidate_run "$mergesha"'));
+    expect(push, contains(r'Candidate-Run: $CANDIDATE_RUN_ID'));
+    expect(
+      push.indexOf(r'release_candidate_run "$mergesha"'),
+      lessThan(push.indexOf(r'git push --quiet origin "$TAG"')),
+    );
+    expect(push, contains(r'ensure_candidate_publication "$mergesha"'));
+    expect(
+      function('follow_ci'),
+      contains('if ! tag_has_candidate; then wait_tag_gates; fi'),
+    );
+  });
+
   test('hervatten tagt de nieuwe main na test- en catalogusreparatie', () {
     final result = run(
       r'''

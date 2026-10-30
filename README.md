@@ -253,7 +253,7 @@ and it also indexes the design documents. The current-state documents:
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
 | [Audit response](AUDIT_RESPONSE.md) | Point-by-point response to the external code audits, each verdict weighed against the code |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
-| [Changelog](CHANGELOG.md) | Notable changes (nothing is released yet) |
+| [Changelog](CHANGELOG.md) | Notable changes and release history |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
 | [Compliance attestation](COMPLIANCE.md) | Voluntary security attestation (ORC WG light-weight checklist), including the rows we cannot tick |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
@@ -309,9 +309,12 @@ demand; the desktop bundles (`linux-build.yml`, `macos-build.yml`) run after a
 merge that can break them, and on demand. See
 [`docs/CHECKS.md`](docs/CHECKS.md).
 
-A `v*` tag runs `.forgejo/workflows/release.yml`: web, macOS and Linux builds
-here, the Windows build on the GitHub mirror, and all of them published as one
-release with the SBOM and `SHA256SUMS` — see
+The release script first starts `.forgejo/workflows/release.yml` as a candidate
+on the exact merged `main` commit. Its checks, all platform builds, consumer
+tests, checksums and manifest must pass before the script creates a version tag.
+The tag records the verified candidate run; publication reuses those same
+artifacts, then the script signs the manifest and updates the web demo, download
+page and Homebrew tap — see
 [`docs/BUILD.md`](docs/BUILD.md#cutting-a-release). Apart from that Windows lane,
 the workflow files under `.github/` are reference definitions; Forgejo reads
 `.forgejo/workflows/` instead.

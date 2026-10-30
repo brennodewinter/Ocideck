@@ -6,8 +6,9 @@
 # naar github.com/brennodewinter/Ocideck, en dit bestand is het enige dat daar
 # iets doet — één platform, verder niets.
 #
-# De Windows-assets blijven hier draft. De forge haalt ze met zijn bestaande
-# GitHub-token op; alleen de complete, canonieke Forge-release wordt publiek.
+# De kandidaatbouw bewaart zip, installer en cohort als Actions-artifact. De
+# forge haalt die gecontroleerde bytes op voordat er een tag bestaat. Een
+# latere tag-push controleert alleen de bronversie en bouwt niets opnieuw.
 #
 # De volledige release — álle platformen, de SBOM en SHA256SUMS — staat op de
 # forge: https://pawprint.vigilis.online/LibreKAT/Ocideck/releases
@@ -20,25 +21,40 @@ on:
   push:
     tags: ["v*"]
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Build without publishing a tag
+        required: false
+        type: choice
+        options: [candidate, publish]
+      version:
+        description: Future release tag
+        required: false
+        type: string
+      commit_sha:
+        description: Exact commit to build
+        required: false
+        type: string
 
-# Least privilege, met één uitzondering: `contents: write` is nodig om de
-# release aan te maken en het bestand eraan te hangen. Verder leest deze
-# workflow alleen.
+run-name: Windows ${{ inputs.mode == 'candidate' && 'candidate' || 'release' }} ${{ inputs.version || github.ref_name }}
+
+env:
+  RELEASE_TAG: ${{ inputs.version || github.ref_name }}
+  RELEASE_SHA: ${{ inputs.commit_sha || github.sha }}
+
+# De kandidaatbouw leest broncode en bewaart alleen een Actions-artifact.
 permissions:
-  contents: write
+  contents: read
 
-# De tag-push en de actieve dispatch vanaf de forge (windows-ophalen) kunnen
-# allebei een run starten. Zonder groep bouwen die twee tegelijk en uploaden ze
-# om beurten dezelfde twee assets. In de wachtrij zetten (géén cancel: een
-# geannuleerde run laat op de tag precies de conclusie achter die windows-ophalen
-# als vals doodvonnis kan lezen).
+# Twee dispatches voor dezelfde kandidaat mogen niet door elkaar bouwen.
 concurrency:
-  group: windows-release-${{ github.ref }}
+  group: windows-release-${{ inputs.version || github.ref }}
   cancel-in-progress: false
 
 jobs:
   windows:
     name: Build Windows
+    if: ${{ inputs.mode == 'candidate' }}
     # dartcv4 2.x levert OpenCV via native-assets build-hooks (CMake) in plaats
     # van een voorgebouwd pack, dus de MSVC-compatibiliteit die de windows-2022
     # pin noodzakelijk maakte is niet meer van toepassing (#870).
@@ -48,20 +64,20 @@ jobs:
     # standaard opgemaakt. De bouw zelf duurt ~20-35 min; 90 is ruim.
     timeout-minutes: 90
     steps:
-      # workflow_dispatch accepteert elke ref. Alles hieronder leidt zijn
-      # bestandsnamen af uit "${GITHUB_REF_NAME#v}"; op main gedraaid zou dat
-      # een neprelease "main" op de spiegel zetten. Dezelfde wacht staat aan de
-      # forgekant.
-      - name: Alleen op een tag
-        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
-        run: |
-          echo "Deze workflow hoort alleen op een v*-tag te draaien (nu: $GITHUB_REF)." >&2
-          exit 1
-
       - name: Checkout
         uses: actions/checkout@v5
         with:
           persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
+
+      - name: Kandidateninvoer valideren
+        shell: bash
+        run: |
+          set -eu
+          test "$GITHUB_REF_NAME" = main
+          test "$RELEASE_TAG" != main
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          test "$(sed -n 's/^version:[[:space:]]*//p' pubspec.yaml | cut -d+ -f1)" = "${RELEASE_TAG#v}"
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -184,7 +200,7 @@ jobs:
       # een naamsverschil is precies het soort hoofdpijn dat hier niet hoort.
       - name: Installer bouwen
         shell: bash
-        run: VERSION="${GITHUB_REF_NAME#v}" bash scripts/build_windows_installer.sh
+        run: VERSION="${RELEASE_TAG#v}" bash scripts/build_windows_installer.sh
 
       # De bestandsnamen zijn een afspraak, geen smaak: de release-workflow op de
       # forge haalt exact deze bestanden op. Verander je ze hier, verander ze dan
@@ -194,7 +210,7 @@ jobs:
         shell: bash
         run: |
           set -eu
-          VERSIE="${GITHUB_REF_NAME#v}"
+          VERSIE="${RELEASE_TAG#v}"
           # In één versiemap ocideck-<versie>/, niet los in de huidige map:
           # anders spatte de zip bij het uitpakken over de map waarin je stond
           # (issue #904). 7z kent geen hernoem-bij-inpakken, dus eerst een
@@ -320,84 +336,23 @@ jobs:
           }
           Write-Host "Smoke-test groen: $setup installeert, start en ruimt schoon op."
 
-      - name: Publish to the mirror's release
+      - name: Cohortattest voor de forge
         shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
-          # Twee bestanden sinds #1583: de zip (uitpakken, niets aan je machine
-          # veranderd) en de installer (snelkoppeling, associaties, nette
-          # de-installatie). De zip blijft canoniek; de installer is een tweede
-          # deur naar hetzelfde huis. Beide moeten er staan — een release met maar
-          # één van de twee is een halve release, dus geen `|| true` hier.
-          BESTANDEN=(
-            "ocideck-windows-x64-$VERSIE.zip"
-            "ocideck-windows-x64-setup-$VERSIE.exe"
-          )
-          for f in "${BESTANDEN[@]}"; do
-            [ -f "$f" ] || { echo "Verwacht bestand ontbreekt: $f" >&2; exit 1; }
-          done
+          VERSIE="${RELEASE_TAG#v}"
+          BESTANDEN=("ocideck-windows-x64-$VERSIE.zip" "ocideck-windows-x64-setup-$VERSIE.exe")
+          for f in "${BESTANDEN[@]}"; do test -f "$f"; done
           # Cohortattest (#2313): één bestand dat bewijst dat zip en installer
           # uit DEZE run komen — tagcommit, run-id en beide sha256's. De forge
           # accepteert het paar alleen als dit klopt; een halve upload (de zip
           # vervangen, de installer niet) kan dan nooit als één cohort gelden.
-          jq -n --arg commit "$GITHUB_SHA" --argjson run "$GITHUB_RUN_ID" \
+          jq -n --arg commit "$RELEASE_SHA" --argjson run "$GITHUB_RUN_ID" \
             --arg zip "$(sha256sum "${BESTANDEN[0]}" | cut -d' ' -f1)" \
             --arg installer "$(sha256sum "${BESTANDEN[1]}" | cut -d' ' -f1)" \
             '{tag_commit: $commit, run_id: $run,
               sha256: {zip: $zip, installer: $installer}}' \
             > "ocideck-windows-cohort-$VERSIE.json"
-          BESTANDEN+=("ocideck-windows-cohort-$VERSIE.json")
-          # Mét releasetekst en niet stilzwijgend: wie hier via een zoekmachine
-          # binnenkomt moet meteen zien dat dit één platform is en waar de rest
-          # staat. Bestaat de release al (hertrigger), dan de bestanden alleen
-          # vervangen.
-          NOTES=$(cat <<EOF
-          Windows build lane for OciDeck $GITHUB_REF_NAME.
-
-          This mirror exists to build the Windows artifact; the project itself
-          lives at <https://pawprint.vigilis.online/LibreKAT/Ocideck>.
-
-          **The complete release** — macOS, Windows, Linux, the web bundle, the
-          SBOM and \`SHA256SUMS\` — is published there:
-          <https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/tag/$GITHUB_REF_NAME>
-
-          Two downloads: \`ocideck-windows-x64-$VERSIE.zip\` (unpack and run,
-          nothing is installed) and \`ocideck-windows-x64-setup-$VERSIE.exe\` (an
-          installer with a Start menu shortcut, file associations and a clean
-          uninstall). Neither updates itself. The \`ocideck-windows-cohort-*\`
-          JSON is not a download — it attests to the forge that the two files
-          came from this exact build run.
-
-          Both are unsigned, so SmartScreen will warn: choose **More info**
-          → **Run anyway**. Verify your download against \`SHA256SUMS\` in the
-          release linked above.
-          EOF
-          )
-          # Een streepje = semver-voorloper (`v0.1.0-rc1`, waarmee de keten
-          # geoefend wordt); die hoort hier net zo goed als prerelease te staan
-          # als aan de forgekant.
-          case "$GITHUB_REF_NAME" in
-            *-*) VOORLOPER=(--prerelease) ;;
-            *)   VOORLOPER=() ;;
-          esac
-          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            [ "$(gh release view "$GITHUB_REF_NAME" --json isDraft --jq .isDraft)" = true ] || {
-              echo "Bestaande spiegelrelease is publiek; weiger ongekeurde assets te vervangen." >&2
-              exit 1
-            }
-            gh release upload "$GITHUB_REF_NAME" "${BESTANDEN[@]}" --clobber
-          else
-            gh release create "$GITHUB_REF_NAME" "${BESTANDEN[@]}" \
-              --title "OciDeck $GITHUB_REF_NAME (Windows build)" \
-              --notes "$NOTES" --draft "${VOORLOPER[@]}"
-          fi
-          # De Homebrew-cask wordt uitsluitend vanuit de canonieke forge-release
-          # bijgewerkt (`.forgejo/workflows/release.yml`), die naar de tap op de
-          # eigen forge pusht. De GitHub-spiegel van de tap volgt via een
-          # push-mirror — geen tweede release-job hier, anders pushen twee ketens
-          # dezelfde cask en botsen ze. Zie issue #1227.
 
       - name: Bewaar Windows-cohort voor de forge
         uses: actions/upload-artifact@v4
@@ -408,3 +363,18 @@ jobs:
             ocideck-windows-x64-setup-${{ env.VERSIE }}.exe
             ocideck-windows-cohort-${{ env.VERSIE }}.json
           if-no-files-found: error
+
+  tag-check:
+    name: Tag controleren zonder nieuwe build
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Tag wijst naar de voorbereide bronversie
+        shell: bash
+        run: |
+          set -eu
+          test "$GITHUB_REF_TYPE" = tag
+          test "$(sed -n 's/^version:[[:space:]]*//p' pubspec.yaml | cut -d+ -f1)" = "${GITHUB_REF_NAME#v}"

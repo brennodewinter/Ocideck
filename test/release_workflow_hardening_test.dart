@@ -42,6 +42,9 @@ void main() {
         expect(run, contains('pubspec.yaml'));
         expect(run, contains(r'PUBSPEC_VERSION%%+*'));
         expect(run, contains(r'TAG#v'));
+        expect(run, contains(r'TAG="$RELEASE_TAG"'));
+        expect(run, contains(r'git rev-parse HEAD'));
+        expect(run, contains(r'$RELEASE_SHA'));
         expect(
           gateSteps.indexOf(validation),
           lessThan(
@@ -55,6 +58,125 @@ void main() {
       },
     );
   });
+
+  test('een tag start geen bouw en een kandidaat publiceert niets', () {
+    final dispatch =
+        ((workflow['on'] as YamlMap)['workflow_dispatch'] as YamlMap)['inputs']
+            as YamlMap;
+    expect(
+      dispatch.keys,
+      containsAll(['mode', 'version', 'commit_sha', 'candidate_run_id']),
+    );
+
+    final gate = jobs['gate'] as YamlMap;
+    final validation =
+        ((gate['steps'] as YamlList).cast<YamlMap>()).firstWhere(
+              (step) => step['name'] == 'Release-invoer valideren',
+            )['run']
+            as String;
+    expect(validation, contains('inputs.mode'));
+    expect(validation, contains('candidate'));
+    expect(validation, contains('GITHUB_REF_TYPE'));
+    expect(validation, contains('git rev-parse HEAD'));
+    expect(validation, contains('git cat-file -t'));
+    expect(validation, contains('Candidate-Run:'));
+
+    for (final name in [
+      'web',
+      'linux',
+      'linux-debian12',
+      'macos',
+      'windows-ophalen',
+      'consumer-deb',
+      'consumer-debian12',
+      'consumer-rpm',
+      'consumer-appimage',
+      'consumer-flatpak',
+    ]) {
+      expect(
+        (jobs[name] as YamlMap)['if'],
+        contains("inputs.mode == 'candidate'"),
+        reason: '$name mag niet na een tagpush opnieuw bouwen',
+      );
+    }
+    expect(jobs.keys, isNot(contains('deploy-web')));
+    expect(
+      (jobs['publiceren'] as YamlMap)['if'],
+      contains("github.event_name == 'push' || inputs.mode == 'publish'"),
+    );
+    expect(jobs.keys, contains('candidate'));
+
+    final candidate = jobs['candidate'] as YamlMap;
+    expect(candidate['if'], contains("inputs.mode == 'candidate'"));
+    final candidateSteps = (candidate['steps'] as YamlList).cast<YamlMap>();
+    final checks =
+        candidateSteps.firstWhere(
+              (step) =>
+                  step['name'] == 'Cohort, bestanden en checksums controleren',
+            )['run']
+            as String;
+    expect(checks, contains('candidate-manifest.json'));
+    expect(checks, contains('windows_run_id'));
+    expect(checks, contains('diff -u /tmp/expected /tmp/actual'));
+    expect(checks, contains('sha256sum -c SHA256SUMS'));
+    expect(checks, contains(r'ocideck-release-candidate-$RELEASE_TAG.tar.gz'));
+    expect(
+      candidateSteps.any(
+        (step) =>
+            (step['with'] as YamlMap?)?['name'] == 'ocideck-release-candidate',
+      ),
+      isTrue,
+    );
+    expect(
+      candidateSteps.map((step) => step['run']).whereType<String>().join('\n'),
+      isNot(contains('/releases')),
+      reason: 'Een kandidaat mag vóór de tag geen release aanmaken',
+    );
+  });
+
+  test(
+    'publicatie gebruikt uitsluitend de geslaagde kandidaat van dezelfde tagcommit',
+    () {
+      final publishSteps =
+          ((jobs['publiceren'] as YamlMap)['steps'] as YamlList)
+              .cast<YamlMap>();
+      final fetch = publishSteps.firstWhere(
+        (step) => step['name'] == 'Geverifieerde kandidaat ophalen',
+      );
+      final run = fetch['run'] as String;
+      expect(run, contains('inputs.candidate_run_id'));
+      expect(run, contains('git cat-file -p'));
+      expect(run, contains('Candidate-Run:'));
+      expect(run, contains('Herstart vraagt een ander kandidaat-runnummer'));
+      expect(run, contains(r'$API/actions/runs/$RID'));
+      expect(run, contains(r'.commit_sha == $sha'));
+      expect(run, contains('.status == "success"'));
+      expect(run, contains('ocideck-release-candidate'));
+      expect(run, contains('.expired == false'));
+      expect(run, contains(r'.version == $version and .commit == $commit'));
+      expect(run, contains('sha256sum -c SHA256SUMS'));
+      expect(
+        publishSteps.indexOf(fetch),
+        lessThan(
+          publishSteps.indexWhere(
+            (step) =>
+                step['name'] == 'Release aanmaken en bestanden eraan hangen',
+          ),
+        ),
+      );
+      expect(
+        publishSteps.where(
+          (step) =>
+              (step['uses'] as String?)?.startsWith(
+                'actions/download-artifact@',
+              ) ??
+              false,
+        ),
+        isEmpty,
+        reason: 'Publicatie mag geen artefacten uit haar eigen tagrun ophalen',
+      );
+    },
+  );
 
   group('reproduceerbare en minimaal bevoegde bouw', () {
     test('iedere checkout laat geen schrijfcredential achter', () {

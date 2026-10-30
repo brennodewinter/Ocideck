@@ -8,9 +8,6 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
-## [0.7.4] — 2026-10-29
-
-
 ### Added
 
 - **Logboek en diagnose op desktop (#2618).** Een release-build liet tot nu
@@ -43,104 +40,6 @@ All notable changes to OciDeck are documented in this file.
 - **Eigen SVG-bullets.** Een stijlprofiel kan een opgeschoond SVG-teken als
   bullet gebruiken; per dia blijft de keuze tussen stip, pootje en eigen teken
   beschikbaar. De keuze reist mee met het stijlprofiel en werkt ook in Marp-export.
-
-### Changed
-
-- **MITRE CWE bijgewerkt van 4.20 naar 5.0.** De volledige lijst telt nu 984
-  zwakheden (15 nieuw, geen enkele verdwenen). CWE 5.0 haalde de gangbare
-  namen uit de titels (`('SQL Injection')`, `('Path Traversal')`) en zette ze
-  alleen nog bij de Alternate Terms; de bouwer neemt die nu als zoektermen mee,
-  zodat "race condition" of "xss" in de CWE-kiezer nog steeds vindt wat het
-  vond. De eigen kern volgt de nieuwe MITRE-namen, en CWE-613 (Insufficient
-  Session Expiration), in 5.0 vervallen, is vervangen door CWE-1463 (time-out)
-  en CWE-1464 (sessie-invalidatie). De verouderingspoort telde een standaard
-  die zowel verouderd als onvolledig was dubbel; dat is één.
-
-### Fixed
-
-- **Eén exemplaar op Linux + herstel per sessie (#2656).** Linux kreeg de
-  Windows-behandeling: een tweede start stuurt zijn bestandspaden via een
-  Unix-socket in `$XDG_RUNTIME_DIR` naar het draaiende exemplaar en stopt,
-  in plaats van een tweede venster met gedeelde herstel- en
-  voorkeursbestanden te openen. Daarnaast stempelt elke sessie zijn
-  herstelbestanden met een eigen sessielock; `loadAll` slaat momentopnames
-  van een nog-levende eigenaar over, zodat een tweede exemplaar nooit
-  "herstelpunten" van het eerste toont — en veegt locks van gestorven
-  eigenaren mee weg.
-
-- **Webbundel vanaf `file://` toont uitleg in plaats van een dood scherm
-  (#2661).** `index.html` rechtstreeks in de browser openen gaf een console
-  vol CORS- en service-worker-fouten — de browser weigert wasm en modules
-  zonder http(s)-origin. De bundel detecteert dat nu en legt in het
-  laadscherm uit dat de map over HTTP geserveerd moet worden
-  (`python3 -m http.server`).
-
-- **Knop *Profiel verwijderen* uit wanneer er niets te verwijderen valt
-  (#2662).** Met één eigen stijlprofiel naast de ingebouwde was de knop
-  klikbaar maar deed hij niets; hij gaat nu uit bij één opgeslagen profiel
-  én bij een gekozen ingebouwd profiel.
-
-- **Instellingen → Annuleren schrijft niets meer weg (#2648).** De
-  stijlprofielen en de documentopmaak-sectie bewerken nu een kopie; pas
-  Opslaan committeert. Tot nu toe leefden die twee secties direct op de
-  provider, zodat Annuleren de aangebrachte wijzigingen alsnog bewaarde.
-
-- **Vloeiender op grotere decks en bij het starten (#2619–#2634).** Een
-  reeks kleine vaste oorzaken: gezichtsdetectie, documentexport
-  (PDF/DOCX/ODT/EPUB) en de koude kwaliteits- en privacyscan draaien niet
-  meer op de UI-isolate; afbeeldingen decoderen naar de weergavegrootte in
-  plaats van de volle resolutie; de symlink-controle zit niet meer in elke
-  opbouw; openen scant de privacy-inhoud eenmaal in plaats van driemaal;
-  Quill→Markdown-conversie en de tab-/miniatuurverversing lopen niet meer
-  per toetsaanslag; de doorspeelvoortgang herbouwt alleen de balk; en de
-  startup doet geen zwaar synchroon werk meer vóór het eerste frame.
-
-- **Instellingenbestand overleeft een corrupte schrijf (#2628).** De
-  eigen backend op Windows en Linux schrijft voortaan atomair en herstelt
-  bij een beschadigd bestand vanuit de bewaarde kopie, in plaats van stil
-  alle voorkeuren terug te zetten.
-- **Linux-pakketten missen PulseAudio niet meer.** De runtime-afhankelijkheid
-  staat nu in de releasepakketten; v0.7.3 was hiervoor voorbereid maar is niet
-  gepubliceerd.
-
-- **Windows: één exemplaar en meegeleverde VC++-runtime (#2627, #2630).**
-  Een tweede `ocideck.exe`-aanroep — bijvoorbeeld dubbelklik op een `.md` —
-  geeft het bestand door aan het al draaiende venster in plaats van een
-  tweede app te starten. En de Windows-distributie levert de Microsoft
-  Visual C++ runtime voortaan app-lokaal mee, zodat een machine zonder
-  geïnstalleerde redistributable OciDeck toch start. Beide wijzigingen
-  zijn op macOS ontwikkeld en statisch bewezen; ze zijn **niet** op echte
-  Windows-hardware beproefd — zie `docs/KNOWN_LIMITATIONS.md`.
-
-- **Prestatiepoorten voor de toekomst (#2636).** De fixes hierboven staan
-  nu onder bewaking: schaaltoetsen voor de Markdown-conversie en het
-  toetsaanslagpad, een `*Sync`-verbod in de UI-laag, en tellingen op de
-  privacy- en split-run-memo's. De Windows-opstartmeting is een
-  bewust uitgesteld vervolg (#2657).
-- **Typende documenten, grote decks en fotodia's blijven vlot (#2621, #2622, #2625, #2635).** In de visuele documentstand wacht de omzetting naar Markdown tot je even pauzeert, of tot opslaan, export, presenteren, zoeken of een standwissel de bron nodig heeft; de nummering van een lijst loopt in één gang door het document. Privacy- en layoutmemo's hangen aan de dia zelf, zodat een deck boven een paar honderd dia's niet bij elke aanslag alles opnieuw doet. Preview, presentator, beamer en export decoderen een foto op de grootte van het vak (1024, 2048 of 4096 px) in plaats van op bronresolutie; een GIF die daarin past blijft bewegen. Het AI-statuslampje hertikt ook nog nadat je één keer een instelling hebt gewijzigd.
-
-- **Logo en stijl reizen met het pakket, niet in de markdown (#2640–#2645, #2648–#2651).** Op de webversie kun je een presentatie-, donker en documentlogo kiezen; de bytes blijven in deze sessie en gaan mee in een pakket of een `.ocideckstyle`. Een kale download waarschuwt. Een opgeslagen project kopieert die logo's naast elkaar, ook als ze dezelfde bestandsnaam hebben. Een `.ocideck` legt de stijl in `ocideck-style.json` naast de markdown: OciDeck past hem toe op dat deck en laat het globale profiel staan. Oudere pakketten zonder dat bestand houden het lokale profiel. Annuleren in de instellingen gooit een nieuw of verwijderd stijlprofiel en een gewijzigde documentlay-out weer weg. De documentlettermaat geldt ook in DOCX en ODT. De Marp-CSS van een pakket neemt letter en tabelstijl van het profiel over.
-
-- **Gebruikershandleiding brak halverwege af op de forge (#2612).** Een
-  plaatshouder `<title>` in lopende tekst las Forgejo als echte HTML-tag,
-  waardoor alles erna als titeltekst wegviel: in USER_GUIDE ruim 1.400 regels,
-  waaronder *Theming and language* waar de inhoudsopgave naar wees, en in
-  ACCESSIBILITY alles na de eerste alinea. In de ingebouwde lezer was het
-  zichtbaar, op de repositorypagina niet. De plaatshouders staan nu tussen
-  backticks (ook in de Nederlandse versies), en `check-conventions` weigert
-  voortaan zo'n rauwe-teksttag (`<title>`, `<script>`, `<style>`, …) buiten
-  code in elk Markdownbestand. Met dank aan Jeroen Hermans voor de melding.
-
-## [0.7.2] — 2026-10-28
-
-### Changed
-
-- Fix Windows mic capture header order
-
-## [0.7.1] — 2026-10-27
-
-
-### Added
 
 - **Plakken zonder opmaak (`Shift+Cmd/Ctrl+V`, #2608).** In de
   documenteditor — Visueel én Bron — en overal waar `Cmd/Ctrl+V` de slimme
@@ -393,7 +292,113 @@ All notable changes to OciDeck are documented in this file.
   waar het platform schermbeeld kan vastleggen: desktop en — zodra die route
   open gaat — web; niet op mobiel.
 
+- **Een geïmporteerd document heet meteen naar zijn bron.** Bij het importeren
+  van een `.docx` of `.odt` — en bij het omzetten van een presentatie naar een
+  document — draagt het nieuwe tabblad de naam van waar de inhoud vandaan
+  kwam: 'Offerte ACME' in plaats van 'Nieuw'. Het tabblad is meteen
+  gemarkeerd als onopgeslagen (de conversie staat nog nergens op schijf) en
+  'Opslaan als' stelt `Offerte ACME.md` voor. Het oorspronkelijke kantoor-
+  bestand wordt nooit aangeraakt.
+
+- **Mermaid-diagrammen in de ODT-export zijn weer plaatjes.** Een
+  ````mermaid`-blok eindigde als ontsnapte brontekst in het `.odt`-bestand.
+  De export rasteriseert het diagram nu naar een scherpe PNG in `Pictures/`,
+  met de stijlkleuren van het deck — zoals de DOCX- en PDF-export dat al
+  deden. Lukt de render niet, dan blijft de bron als letterlijke tekst
+  zichtbaar in plaats van te verdwijnen.
+
+### Changed
+
+- **MITRE CWE bijgewerkt van 4.20 naar 5.0.** De volledige lijst telt nu 984
+  zwakheden (15 nieuw, geen enkele verdwenen). CWE 5.0 haalde de gangbare
+  namen uit de titels (`('SQL Injection')`, `('Path Traversal')`) en zette ze
+  alleen nog bij de Alternate Terms; de bouwer neemt die nu als zoektermen mee,
+  zodat "race condition" of "xss" in de CWE-kiezer nog steeds vindt wat het
+  vond. De eigen kern volgt de nieuwe MITRE-namen, en CWE-613 (Insufficient
+  Session Expiration), in 5.0 vervallen, is vervangen door CWE-1463 (time-out)
+  en CWE-1464 (sessie-invalidatie). De verouderingspoort telde een standaard
+  die zowel verouderd als onvolledig was dubbel; dat is één.
+
+- Fix Windows mic capture header order
+
 ### Fixed
+
+- **Windows-releasebouw hersteld.** De extensiecontrole zet de uitkomst van
+  `std::tolower` expliciet terug naar `char`, zodat de MSVC-bouw met strenge
+  waarschuwingen weer slaagt.
+
+- **Eén exemplaar op Linux + herstel per sessie (#2656).** Linux kreeg de
+  Windows-behandeling: een tweede start stuurt zijn bestandspaden via een
+  Unix-socket in `$XDG_RUNTIME_DIR` naar het draaiende exemplaar en stopt,
+  in plaats van een tweede venster met gedeelde herstel- en
+  voorkeursbestanden te openen. Daarnaast stempelt elke sessie zijn
+  herstelbestanden met een eigen sessielock; `loadAll` slaat momentopnames
+  van een nog-levende eigenaar over, zodat een tweede exemplaar nooit
+  "herstelpunten" van het eerste toont — en veegt locks van gestorven
+  eigenaren mee weg.
+
+- **Webbundel vanaf `file://` toont uitleg in plaats van een dood scherm
+  (#2661).** `index.html` rechtstreeks in de browser openen gaf een console
+  vol CORS- en service-worker-fouten — de browser weigert wasm en modules
+  zonder http(s)-origin. De bundel detecteert dat nu en legt in het
+  laadscherm uit dat de map over HTTP geserveerd moet worden
+  (`python3 -m http.server`).
+
+- **Knop *Profiel verwijderen* uit wanneer er niets te verwijderen valt
+  (#2662).** Met één eigen stijlprofiel naast de ingebouwde was de knop
+  klikbaar maar deed hij niets; hij gaat nu uit bij één opgeslagen profiel
+  én bij een gekozen ingebouwd profiel.
+
+- **Instellingen → Annuleren schrijft niets meer weg (#2648).** De
+  stijlprofielen en de documentopmaak-sectie bewerken nu een kopie; pas
+  Opslaan committeert. Tot nu toe leefden die twee secties direct op de
+  provider, zodat Annuleren de aangebrachte wijzigingen alsnog bewaarde.
+
+- **Vloeiender op grotere decks en bij het starten (#2619–#2634).** Een
+  reeks kleine vaste oorzaken: gezichtsdetectie, documentexport
+  (PDF/DOCX/ODT/EPUB) en de koude kwaliteits- en privacyscan draaien niet
+  meer op de UI-isolate; afbeeldingen decoderen naar de weergavegrootte in
+  plaats van de volle resolutie; de symlink-controle zit niet meer in elke
+  opbouw; openen scant de privacy-inhoud eenmaal in plaats van driemaal;
+  Quill→Markdown-conversie en de tab-/miniatuurverversing lopen niet meer
+  per toetsaanslag; de doorspeelvoortgang herbouwt alleen de balk; en de
+  startup doet geen zwaar synchroon werk meer vóór het eerste frame.
+
+- **Instellingenbestand overleeft een corrupte schrijf (#2628).** De
+  eigen backend op Windows en Linux schrijft voortaan atomair en herstelt
+  bij een beschadigd bestand vanuit de bewaarde kopie, in plaats van stil
+  alle voorkeuren terug te zetten.
+- **Linux-pakketten missen PulseAudio niet meer.** De runtime-afhankelijkheid
+  staat nu in de releasepakketten; v0.7.3 was hiervoor voorbereid maar is niet
+  gepubliceerd.
+
+- **Windows: één exemplaar en meegeleverde VC++-runtime (#2627, #2630).**
+  Een tweede `ocideck.exe`-aanroep — bijvoorbeeld dubbelklik op een `.md` —
+  geeft het bestand door aan het al draaiende venster in plaats van een
+  tweede app te starten. En de Windows-distributie levert de Microsoft
+  Visual C++ runtime voortaan app-lokaal mee, zodat een machine zonder
+  geïnstalleerde redistributable OciDeck toch start. Beide wijzigingen
+  zijn op macOS ontwikkeld en statisch bewezen; ze zijn **niet** op echte
+  Windows-hardware beproefd — zie `docs/KNOWN_LIMITATIONS.md`.
+
+- **Prestatiepoorten voor de toekomst (#2636).** De fixes hierboven staan
+  nu onder bewaking: schaaltoetsen voor de Markdown-conversie en het
+  toetsaanslagpad, een `*Sync`-verbod in de UI-laag, en tellingen op de
+  privacy- en split-run-memo's. De Windows-opstartmeting is een
+  bewust uitgesteld vervolg (#2657).
+- **Typende documenten, grote decks en fotodia's blijven vlot (#2621, #2622, #2625, #2635).** In de visuele documentstand wacht de omzetting naar Markdown tot je even pauzeert, of tot opslaan, export, presenteren, zoeken of een standwissel de bron nodig heeft; de nummering van een lijst loopt in één gang door het document. Privacy- en layoutmemo's hangen aan de dia zelf, zodat een deck boven een paar honderd dia's niet bij elke aanslag alles opnieuw doet. Preview, presentator, beamer en export decoderen een foto op de grootte van het vak (1024, 2048 of 4096 px) in plaats van op bronresolutie; een GIF die daarin past blijft bewegen. Het AI-statuslampje hertikt ook nog nadat je één keer een instelling hebt gewijzigd.
+
+- **Logo en stijl reizen met het pakket, niet in de markdown (#2640–#2645, #2648–#2651).** Op de webversie kun je een presentatie-, donker en documentlogo kiezen; de bytes blijven in deze sessie en gaan mee in een pakket of een `.ocideckstyle`. Een kale download waarschuwt. Een opgeslagen project kopieert die logo's naast elkaar, ook als ze dezelfde bestandsnaam hebben. Een `.ocideck` legt de stijl in `ocideck-style.json` naast de markdown: OciDeck past hem toe op dat deck en laat het globale profiel staan. Oudere pakketten zonder dat bestand houden het lokale profiel. Annuleren in de instellingen gooit een nieuw of verwijderd stijlprofiel en een gewijzigde documentlay-out weer weg. De documentlettermaat geldt ook in DOCX en ODT. De Marp-CSS van een pakket neemt letter en tabelstijl van het profiel over.
+
+- **Gebruikershandleiding brak halverwege af op de forge (#2612).** Een
+  plaatshouder `<title>` in lopende tekst las Forgejo als echte HTML-tag,
+  waardoor alles erna als titeltekst wegviel: in USER_GUIDE ruim 1.400 regels,
+  waaronder *Theming and language* waar de inhoudsopgave naar wees, en in
+  ACCESSIBILITY alles na de eerste alinea. In de ingebouwde lezer was het
+  zichtbaar, op de repositorypagina niet. De plaatshouders staan nu tussen
+  backticks (ook in de Nederlandse versies), en `check-conventions` weigert
+  voortaan zo'n rauwe-teksttag (`<title>`, `<script>`, `<style>`, …) buiten
+  code in elk Markdownbestand. Met dank aan Jeroen Hermans voor de melding.
 
 - **De andere kant van de call ziet en hoort u nu echt (#2541).** De echte
   macOS-proef met een tweede deelnemer wees uit dat OciDeck wel ontving maar
@@ -486,22 +491,21 @@ All notable changes to OciDeck are documented in this file.
   nu gecorrigeerd, en past de rij nergens meer dan scrollt hij horizontaal in
   plaats van de editor onder zijn minimum te drukken; de statusbalk en de
   Opmaak-knop krimpen op hun beurt mee in plaats van over te lopen.
-### Added
 
-- **Een geïmporteerd document heet meteen naar zijn bron.** Bij het importeren
-  van een `.docx` of `.odt` — en bij het omzetten van een presentatie naar een
-  document — draagt het nieuwe tabblad de naam van waar de inhoud vandaan
-  kwam: 'Offerte ACME' in plaats van 'Nieuw'. Het tabblad is meteen
-  gemarkeerd als onopgeslagen (de conversie staat nog nergens op schijf) en
-  'Opslaan als' stelt `Offerte ACME.md` voor. Het oorspronkelijke kantoor-
-  bestand wordt nooit aangeraakt.
+## [0.7.4] — 2026-10-30 — Withdrawn (never distributed)
 
-- **Mermaid-diagrammen in de ODT-export zijn weer plaatjes.** Een
-  ````mermaid`-blok eindigde als ontsnapte brontekst in het `.odt`-bestand.
-  De export rasteriseert het diagram nu naar een scherpe PNG in `Pictures/`,
-  met de stijlkleuren van het deck — zoals de DOCX- en PDF-export dat al
-  deden. Lukt de render niet, dan blijft de bron als letterlijke tekst
-  zichtbaar in plaats van te verdwijnen.
+De tag bestaat op de forge en de mirror, maar er is geen gepubliceerde release
+met distributiebestanden. De beschreven wijzigingen staan onder *Unreleased*.
+
+## [0.7.2] — 2026-10-28 — Withdrawn (never distributed)
+
+De tag bestaat op de forge en de mirror, maar er is geen gepubliceerde release
+met distributiebestanden. De beschreven wijziging staat onder *Unreleased*.
+
+## [0.7.1] — 2026-10-28 — Withdrawn (never distributed)
+
+De tag bestaat op de forge en de mirror, maar er is geen gepubliceerde release
+met distributiebestanden. De beschreven wijzigingen staan onder *Unreleased*.
 
 ## [0.7.0] — 2026-10-17
 

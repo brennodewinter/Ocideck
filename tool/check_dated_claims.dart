@@ -152,13 +152,13 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
     '17.5 minutes': 2,
     '19 seconds': 1,
     '2 seconds': 0,
-    '2.5 minutes': 1,
+    '2.5 minutes': 0,
     '21 min': 1,
     '22 minutes': 0,
     '29 minutes': 1,
     '33 min': 2,
     '46 minute': 2,
-    '46 minutes': 1,
+    '46 minutes': 0,
     '51 minutes': 2,
     '54 minutes': 1,
     // De dagkosten van de oude per-merge-cadence (7,6 merges maal 51 minuten),
@@ -169,21 +169,17 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
   },
   'CONTRIBUTING.md': {'2.5 minutes': 1, '22 minutes': 1},
   'docs/BUILD.md': {
-    '17.5 minutes': 1,
-    '2.5 minute': 1,
-    '2.5 minutes': 1,
-    '22 minutes': 1,
-    // De release-CI-wacht: de standaardcaps (240 en 300), de duur van "Linux
-    // bouwen" bij v0.6.5 (~50) en de oude vaste cap (60) die die run afbrak.
-    // Geschiedenis en een instelling, geen belofte over hoe lang de keten
-    // morgen duurt; de cap is uitdrukkelijk een vangnet.
-    '240 min': 1,
+    '17.5 minutes': 0,
+    '2.5 minute': 0,
+    '2.5 minutes': 0,
+    '22 minutes': 0,
+    '240 min': 0,
     '30 minutes': 2,
     '45 minute': 1,
-    '50 min': 1,
-    '60 min': 1,
-    '300 min': 1,
-    'half an hour': 1,
+    '50 min': 0,
+    '60 min': 0,
+    '300 min': 0,
+    'half an hour': 0,
   },
 };
 

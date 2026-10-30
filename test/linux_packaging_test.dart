@@ -194,7 +194,7 @@ void main() {
       // packages that would mask a missing runtime dependency.
       final section = releaseYaml.substring(
         releaseYaml.indexOf('  consumer-deb:'),
-        releaseYaml.indexOf('  publiceren:'),
+        releaseYaml.indexOf('  candidate:'),
       );
       expect(
         section.contains('pawprint.vigilis.online/librekat/ocideck-ci'),
@@ -336,15 +336,11 @@ void main() {
       }
     });
 
-    test('publiceren needs all four consumer probes', () {
+    test('candidate needs all four consumer probes', () {
       final needs = RegExp(
-        r'  publiceren:\n    name: [^\n]+\n    needs: \[([^\]]+)\]',
+        r'  candidate:\n    name: [^\n]+\n    needs: \[([^\]]+)\]',
       ).firstMatch(releaseYaml)?.group(1);
-      expect(
-        needs,
-        isNotNull,
-        reason: 'Cannot read the publiceren needs line.',
-      );
+      expect(needs, isNotNull, reason: 'Cannot read the candidate needs line.');
       for (final job in [
         'consumer-deb',
         'consumer-rpm',
@@ -355,7 +351,7 @@ void main() {
           needs,
           contains(job),
           reason:
-              'publiceren no longer waits for `$job` — a broken package could '
+              'candidate no longer waits for `$job` — a broken package could '
               'be published untested (#2315).',
         );
       }

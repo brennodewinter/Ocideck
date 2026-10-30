@@ -69,6 +69,7 @@ sleep() { :; }
 # krijgen eigen regressietests in release_auto_release_gates_test.dart.
 assert_release_ci_secrets() { :; }
 assert_windows_merge_gate() { :; }
+release_candidate_run() { CANDIDATE_RUN_ID=123; }
 git() {
   printf '%s\\n' "\$*" >> "\$GITCALLS"
   case "\$*" in
@@ -84,11 +85,13 @@ git() {
         absent) return 0 ;;
         fail) return 2 ;;
       esac ;;
+    'ls-remote mirror refs/tags/v9.9.9 refs/tags/v9.9.9^{}') return 0 ;;
+    'ls-remote origin refs/heads/main') printf 'deadbeef refs/heads/main\n' ;;
     'fetch --quiet origin') return 0 ;;
     'cat-file -e deadbeef^{commit}') return 0 ;;
     'show deadbeef:pubspec.yaml') printf 'version: 9.9.9\\n' ;;
     'tag -d v9.9.9') return 0 ;;
-    'tag -a v9.9.9 -m OciDeck v9.9.9 deadbeef') return 0 ;;
+    'tag -a v9.9.9 -m OciDeck v9.9.9 -m Candidate-Run: 123 deadbeef') return 0 ;;
     'rev-list -n 1 v9.9.9') printf 'deadbeef\\n' ;;
     'push --quiet origin v9.9.9') return "\$PUSH_RC" ;;
     'remote get-url mirror') return 1 ;;

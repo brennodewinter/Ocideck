@@ -512,21 +512,12 @@ than a hand-picked file list, and the absence of any downloader or `[Code]`
 section. Whether the installer *actually installs* is still a manual check on a
 Windows machine — nothing verifies that automatically.
 
-**The release builds it too** (#1583). The forge has no Windows machine, but the
-mirror does: `.github/workflows/release.yml` on github.com builds the Windows
-artifacts on every `v*` tag and publishes them as release assets, and the forge's
-`windows-ophalen` job pulls both back with `curl` before anything is hashed. So a
-tag now produces the installer alongside the zip, without a hand step. Locally the
-two commands above remain the way to build and inspect one.
-
-That lane runs `bash scripts/build_windows_installer.sh` directly rather than the
-`make` target, because `make` is not reliably present on that runner — which is
-why the packager is a script and the `make` target only wraps it. Inno Setup is
-not preinstalled on `windows-latest` either (Server 2022 shipped it, Server 2025
-does not), so the job downloads it from the publisher's own GitHub release,
-pinned twice: by version (`INNOSETUP_VERSION`, mirrored in
-`.github/pinned-ci-versions.json` so `make check-pins` notices it ageing) and by
-sha256, so replaced bytes fail loudly instead of building quietly.
+**The release candidate builds it too.** The forge has no Windows runner, so
+`.github/workflows/release.yml` builds the Windows zip and installer on the
+GitHub mirror for the exact merged commit and stores them as Actions artifacts.
+The forge fetches and verifies those bytes before a version tag exists. The
+tag-triggered publication reuses the verified candidate; it does not build a
+second Windows binary.
 
 **Why the installer is built before the zip.** The packager signs `ocideck.exe`
 and the DLLs *in place* when a certificate is configured. Zip first and you ship a
@@ -614,59 +605,17 @@ step anyway: a set nobody watches is how this went wrong the first time.
 
 ## CI
 
-> **Since 2026-07-23 the forge has an Actions runner.** The quality gate runs
-> **on a `v*` tag** (`.forgejo/workflows/ci.yml`, #751/#790) — not per pull
-> request. A gate run cost 22 minutes on the server's runner against 2.5 minutes
-> locally, and that wait per PR did not earn its keep next to a `make check`
-> every committer already runs before pushing. The honest consequence: CI is no
-> longer a merge gate but a **release** gate. If it fails on a tag, the problem
-> is already on `main`, and the assurance before `main` is — with one deliberate
-> exception — entirely the committer's local run. That exception is
-> `.forgejo/workflows/scans.yml` (#778): the secret and SAST scans do run on
-> every pull request, because they cost seconds rather than minutes and
-> because a credential found after the merge is in the history for good.
->
-> Two later changes shaped what that gate is. It runs `make check-no-coverage`
-> rather than `make check` (#796): the whole suite, without the coverage
-> instrumentation that cost ~39% CPU — so the coverage floors are enforced
-> locally and nowhere else. And since #797 it runs on the registered **Mac**
-> runner rather than in a container on the server, because the 46-vs-2.5-minute
-> gap was measured to be the machine (four cores of a 2018 Xeon against an M5
-> Max), not the steps. `check-toolchain` runs inside the gate either way and
-> still demands channel `stable`, the official origin, and equality with the
-> pin.
->
-> What that costs: the suite no longer runs on Linux by default. The Linux gate
-> moved to `.forgejo/workflows/linux-gate.yml`, nightly and on demand;
-> `release_auto.sh` starts and follows it itself before a release. Dispatch it
-> yourself when a change touches paths, subprocesses or `git` invocations.
-> The pinned-toolchain and pub caches live there, where an install actually
-> happens.
->
-> `.forgejo/workflows/linux-build.yml` and `.forgejo/workflows/macos-build.yml`
-> produce the Linux and macOS desktop bundles **on demand only**
-> (`workflow_dispatch`, since #790). They used to run on every push to `main`,
-> which cost 17.5 minutes of runner time per merge while `release.yml` on the
-> GitHub mirror already builds all three platforms on every `v*` tag. Building
-> the same thing twice buys no extra assurance: the gate is what stops a
-> regression, packaging afterwards is not. The macOS job runs on a registered
-> Mac runner (host mode — Apple licenses macOS for Apple hardware only, so that
-> job cannot run on the Linux server; when the Mac is offline the run waits). `make check-full` and the Windows/web bundles remain
-> local: run the first before dependency or web-facing changes, and build
-> those bundles on their target OS. See
-> [CHECKS.md](CHECKS.md#continuous-integration).
+Before a merge, run `make check-full` locally on the exact pull-request head.
+The Forgejo Linux gate runs nightly and on demand; the release script requires
+its success on the exact `main` commit. The Mac golden gate still runs after
+merges to `main`. The standalone Forgejo `ci.yml` and GitHub `ci.yml` are
+available for manual diagnosis and do not automatically run on a release tag.
 
-`.github/workflows/ci.yml` *declares* the quality gate on Ubuntu for every push
-and pull request (plus `flutter test` on macOS and Windows). It does not build
-native binaries; it validates formatting, static analysis, and the test suite
-(which are platform-independent).
-
-`.github/workflows/release.yml` is the one file on the mirror that really runs:
-it builds the **Windows** artifact, which the forge has no machine for. The
-GitHub workflows pin **Flutter 3.47.7** (stable), and
-`make check-toolchain` fails if any version claim drifts from `.tool-versions`.
-
-For the full check reference, see [`CHECKS.md`](CHECKS.md).
+The release candidate is the final, blocking gate: `release_auto.sh` dispatches
+`.forgejo/workflows/release.yml` on the exact merged commit before tagging. Its
+Mac gate runs `make check-no-coverage` and `make test-golden`; the remaining jobs
+build and check every supported distribution. The GitHub mirror supplies the
+Windows candidate artifact. See [CHECKS.md](CHECKS.md#continuous-integration).
 
 ## Cutting a release
 
@@ -791,12 +740,15 @@ one on `main` when the nightly schedule has not seen that commit yet. A red or
 persistently unreadable run remains a hard stop. Phase 1 repeats the check after
 its final fetch, so it never branches from a newer, untested tip.
 
-After the release PR merges and before the tag, the script waits until
-`mirror/main` equals that exact merge commit, then runs the GitHub Windows
-suite on it and requires success. A red, missing, or unreadable result leaves
-the release untagged and can be retried with `--resume vX.Y.Z`. After the tag,
-the separate Forgejo `ci.yml`, macOS golden gate, and GitHub tag CI must also
-finish green before phase 3 publishes the release.
+After the release PR merges, the script waits for `mirror/main` to equal
+that exact merge commit and checks the GitHub Windows suite and native build.
+It then starts the Forgejo candidate workflow on that same commit, waits for
+all jobs to finish and downloads and verifies its 13 release assets,
+`SHA256SUMS` and manifest. Any failure leaves the release untagged; retry with
+`--resume vX.Y.Z`. Only then does it create an annotated tag recording the
+candidate run. The tag-triggered workflow validates that record and publishes
+the candidate's unchanged bytes as a draft release. The local script signs
+the manifest, makes the release public and updates the downstream sites and tap.
 The script's wait exceeds the Windows job limit, so the job can report its
 terminal result before the release gives up.
 
@@ -830,70 +782,21 @@ records and CC-BY-SA-4.0 licence. Development is therefore visible and
 machine-checked without silently becoming the stable bundle. A moved path or
 schema stops the release; a normal new development commit does not.
 
-Then it always runs `make bump-scanner-pins`
-(idempotent) so the CI scanners (gitleaks/trufflehog/semgrep) ride to their latest
-upstream automatically instead of blocking a release — a bump, if any, becomes its
-own commit on the release branch; then the four-place version bump, `make sbom`,
-`make check-release`, `make build-release`, `make notarize-macos`, seal
-verification and the `/Applications` swap; **Phase 2** branch → *if the scanners
-were bumped, publish a new scans image first* (dispatch `ci-image-scans` on the
-branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) →
-PR → wait for the gate (up to `OCIDECK_GATE_TIMEOUT_MIN`, default 300 min: `linux-gate`
-runs the full suite per-PR on a capacity-1 serial runner and can queue, so the wait
-prints progress rather than giving up at 30) → merge — refused unless
-`origin/main` still sits on the exact base the gate audited (the merge-base of
-the branch against main); on drift the script stops before merging or tagging
-and tells you to merge `origin/main` into the release branch, re-gate, and
-`--resume` → tag → push to origin **and**
-mirror → poll the release CI until every job is done (up to
-`OCIDECK_RELEASE_CI_TIMEOUT_MIN`, default 240 min: the tag chain takes a good two
-hours — v0.6.4 2h05, v0.6.5 2h14, with `Linux bouwen` alone around 50 min — and
-the old fixed 60 min cut the v0.6.5 run off mid-build while every job was
-running or green; while a job visibly runs, waiting is never wrong, a hung job
-is cut by the runner's own 2 h timeout, and a heartbeat every ten minutes shows
-the wait is alive; a red `gate` from ci.yml on the same tag is reported as the
-test run beside the chain that it is, not as a failed release job) →
-**Phase 3** the web demo
-*first* — it depends only on the web bundle, so a signing or platform failure
-never leaves it on the old version. When the site already serves the release
-version — because the release CI's own `Webversie live zetten` job had the
-deploy secrets and did the work — the local `make deploy-web` is skipped. When
-it does run, it builds from the *working tree*, which is not by itself the tag:
-a `--resume` of v0.6.5 ran a day later on `main` with four merges the tag did
-not carry, and only a coincidentally red `sbom-verify` kept that code from going
-live as v0.6.5. So Phase 3 checks the tag out itself (fetching it from `origin`
-first if this clone lacks it) and refuses only when it *cannot*: a dirty working
-tree, an untracked file in the way, or a local tag that does not match `origin`'s
-— the local ref must provably be the pushed one before any `deploy-web` build may
-run. Up to v0.6.8 it merely demanded that
-`HEAD` already be the tag, which a release that lands as a merge commit can
-never satisfy — the tag sits on the merge, the working tree on the release
-branch merged into it — so every fresh run stranded here and had to be checked
-out and resumed by hand. After the deploy, sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
-(waiting quietly for `publiceren` to attach it rather than printing every expected
-404), read both public files back and verify them with `minisign`, watch the
-dispatch the separate
-website-downloads workflow (or follow the one already running — a second
-publication alongside a live external deploy is never allowed), and then poll
-the public LibreKAT download page until its release links really point at the
-new tag. The job status alone is deliberately not accepted as proof: a deploy
-can return success while writing to a server that public DNS does not serve.
-If the bounded wait expires the run state decides the verdict: a still-running
-deploy is reported as still-running (never as a wrong host), a failed run gets
-the manual-fallback advice, and only a green run plus a stale page points at
-the DNS/host check. Because checking the tag out leaves the working tree on a
-detached `HEAD`, the chain puts it back on the branch the release started from
-when it finishes — a failure there is reported, never fatal to a release that is
-already out. The same finish removes the local release branch this run created
-once merge and tag are proven: even when the deploy never detached `HEAD` (the
-CI had already taken the demo live) the run ends back on the starting branch,
-and anything blocking the switch — a dirty tree, a worktree lock — is reported
-rather than carried along or discarded. `--resume` never deletes a branch it did
-not create. Phase 3 refuses to start while any job for the tag is still
-active. A timed-out CI wait stops the chain instead of falling through, and
-`--resume` follows the existing jobs before it signs. An absent manifest causes
-one automatic retry only after the previous run is terminal and has a failed job;
-it never introduces a second writer alongside a running or fully green release.
+Then it runs `make bump-scanner-pins` (idempotent), commits any pin changes
+on the release branch, bumps the version, generates the SBOM, runs
+`make check-release`, builds and notarises locally, and verifies the seal.
+Phase 2 opens the release PR, waits for all required checks on its exact head
+and merges only if `main` still matches the checked base. It waits for the
+mirror, checks the Windows suite and native build, and runs the full Forgejo
+candidate on the exact merge SHA. The candidate archive must contain all 13
+expected assets, `SHA256SUMS` and its manifest, with matching digests. Only
+then does the script annotate and push the tag to origin and mirror. The
+subsequent workflow checks the annotation and publishes those same bytes as
+a draft release. Phase 3 signs `SHA256SUMS`, verifies the public files, makes
+the release public, deploys the web demo, updates the download page and
+Homebrew tap, and checks the served results. If the publication stops after
+a tag push, `--resume vX.Y.Z` continues the same tag and candidate; it never
+moves a pushed tag.
 
 The standalone `make bump-scanner-pins` does the same edit outside a release
 (manifest + every workflow's `*_VERSION` env + the pre-baked scans image tag, in
@@ -942,15 +845,15 @@ branch cannot miscompute the bump; `--preflight` rehearses every precondition.
 This is the fully-unattended increment the
 guided `make release` deliberately left to a proven follow-up.
 
-### The tag-driven chain
+### Candidate build, then tag and publication
 
-One tag produces everything. `git push origin v0.1.0` starts
-`.forgejo/workflows/release.yml`, and about half an hour later there is a
-release at
-<https://pawprint.vigilis.online/LibreKAT/Ocideck/releases> carrying the web
-bundle, the macOS app, the Linux packages (tarball plus AppImage, `.deb` and
-`.rpm`), the Windows app, both SBOM formats and a `SHA256SUMS` over all of them —
-and <https://ocideck.librekat.nl/> is serving that same web bundle.
+Run `scripts/release_auto.sh` for the full sequence. It builds and verifies
+the complete candidate on the exact merged `main` commit before reserving a
+version tag. The annotated tag records the successful candidate run. The tag
+starts publication of those already checked assets as a draft release; the
+local script signs the manifest and completes the public release, web demo,
+download page and Homebrew tap. If anything stops after the tag, resume that
+same version with `scripts/release_auto.sh --resume vX.Y.Z`.
 
 ### What runs where, and why
 
@@ -997,8 +900,8 @@ module is the one of `cnativeapi`'s four pkg-config requirements that
 `libgtk-3-dev` does not pull in, which is why its absence only surfaced at
 `v0.4.9` — as a CMake error before a single file was compiled.
 Both jobs share the gates' `pub`/`dartcv` `actions/cache` keys: `linux-gate`
-populates them on every push to `main` — a scope a tag build can read — so the
-expensive dartcv OpenCV compile is restored *warm* at tag time instead of rebuilt
+populates them on every push to `main` — a scope the candidate build can read —
+so the expensive dartcv OpenCV compile is restored *warm* in the candidate instead of rebuilt
 from scratch. A cache miss is fail-open (it just rebuilds, as before). Together
 this cut the Linux build from about seventy minutes at `v0.2.0` to under twenty at
 the `v0.2.1-rc1` rehearsal (#1170, #1172).
@@ -1178,31 +1081,15 @@ git commit -am "ocideck-bin <version>" && git push aur master
 
 ### Before you tag
 
-1. `make check-release` green on `main`. This is the **ready-for-tagging** pass:
-   `make check-full` as a hard gate, then an advisory ZAP/DAST scan of the live
-   host. The DAST step never reddens the command — weigh its findings and, if
-   real, file them as an issue (this is how #849 was found) before you tag. It is
-   the last moment a finding can hold a release back instead of ending up live.
-   Also run `make linux-gate` and glance at open `security`/`privacy` issues.
-2. `make catalogs-outdated` — a release carries its bundled reference data for a
-   year, so this is the moment to notice upstream moved.
-3. `CHANGELOG.md`: turn the `## [0.1.0] — unreleased` heading into the version
-   and date you are about to cut.
-4. `pubspec.yaml`: `version:` matches the tag.
-
-Then:
-
-```bash
-git tag -a v0.1.0 -m "OciDeck 0.1.0" && git push origin v0.1.0
-```
-
-### Rehearsing it safely
-
-A tag with a hyphen in it (`v0.1.0-rc1` — a semver pre-release) runs the whole
-chain, publishes a release marked **prerelease**, and **skips the live
-deployment**. Use that to exercise the pipeline end to end without touching
-`ocideck.librekat.nl` or making the download button point at a rehearsal. Delete
-the tag and the release afterwards; the real tag then behaves normally.
+Use `scripts/release_auto.sh` for a release. It runs `make check-release`,
+checks bundled reference data, updates the changelog and version on a release
+branch, validates the pull request, and builds the full candidate on the exact
+merged commit. The script will not create a version tag until the candidate's
+platform artifacts, consumer checks, manifest and checksums are verified.
+`scripts/release_auto.sh --preflight` checks the available tooling and signing
+setup without changing the release. If a candidate fails, fix the cause and
+resume the same untagged version; do not create a rehearsal tag or delete and
+reuse a pushed tag.
 
 ### The website downloads update themselves
 
@@ -1278,10 +1165,10 @@ certificate never leaves the machine. Set it up once on the runner:
    # enter the login password when prompted — do not put it on the command line
    ```
 
-Rehearse before trusting it: push a pre-release tag (`v0.1.3-rc1`) — it runs the
-whole chain, publishes a **prerelease**, and skips the live web deploy (see
-[Rehearsing it safely](#rehearsing-it-safely)). Watch the `macos` job sign and
-notarise, then delete the tag and the rehearsal release.
+Rehearse the candidate route before trusting it: start the release candidate
+on the exact `main` commit and inspect the Mac signing and notarisation job.
+Do not push a rehearsal tag merely to discover a build failure; every pushed
+tag is permanent release history.
 
 ### Signing status of the published artifacts
 
@@ -1344,7 +1231,7 @@ the key is rotated. Add one with
 `minisign -C -s ~/.minisign/ocideck-release.key`; `make sign-release` then prompts
 for it at signing time.
 
-Per release, after the workflow has published the tag:
+Per release, after the candidate has been tagged and its draft release is complete:
 
 1. Wait until **every** Forgejo Actions job for that tag is terminal. Do not use
    the mere presence of `SHA256SUMS` as proof: a publishing job may still replace

@@ -17,8 +17,7 @@ waits for duplicated status checks.
 Server automation remains where it adds different evidence: the fast Mac golden
 gate checks the actual `main` after each merge, the Linux suite runs nightly,
 native builds run after relevant changes, time-degrading checks run on a
-schedule, a toolchain change rehearses all platforms, and tags run the release
-gate. See [Continuous integration](#continuous-integration).
+schedule, a toolchain change rehearses all platforms, and a release candidate runs the full release gate before a tag exists. See [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
 ## The one command
@@ -115,12 +114,10 @@ make check-full   # check + licenses + sbom-verify + deps-check + check-web + de
 
 ### `make check-release`
 
-The **ready-for-tagging** pass. Run it by hand right before `git push origin
-v*`, because pushing the tag is what triggers the whole release chain
-([`release.yml`](../.forgejo/workflows/release.yml)) — build, publish, live
-deploy — and this is the last moment a finding can hold a release back instead
-of ending up live.
-
+The local release pass runs before the candidate is built. It can still
+stop a release without consuming a version tag. The unattended
+`release_auto.sh` route runs it and then waits for the candidate workflow on
+the exact merged `main` commit; only a verified candidate can be tagged.
 ```sh
 make check-release   # check-full (blocking) + an advisory ZAP/DAST scan of the live host
 ```
@@ -307,9 +304,8 @@ it (see [`make coverage`](#make-coverage)).
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
-localization and security guards listed below. The CI runner runs the same gate, but on a `v*` tag rather
-than per pull request (#790), so your local run is the answer that matters
-before a merge — CI only confirms it again at release time.
+localization and security guards listed below. The release candidate runs `make check-no-coverage` and the Mac golden suite
+before any tag; your local `make check-full` remains the gate before a merge.
 
 ---
 
@@ -421,8 +417,7 @@ now the only passing state.
 not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
-is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner on a
-`v*` tag (#790/#796/#797). Before a merge the authoritative result is local
+is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner for a release candidate before tagging. Before a merge the authoritative result is local
 `make check-full` on the named head commit. The static, scan and web workflows
 remain manually startable when a second environment is useful.
 
@@ -1276,8 +1271,9 @@ also declares them, but see the [CI note](#continuous-integration).)
   of `make coverage` + `make coverage-per-file`. The full suite still runs, in
   randomised order; only the instrumentation is gone.
 - **Covers:** exactly `make check` minus the two coverage floors.
-- **Where it is used:** `.forgejo/workflows/ci.yml`, on a `v*` tag. Nowhere
-  else — **do not use it in place of `make check` in your own working copy.**
+- **Where it is used:** the pre-tag candidate gate in
+  `.forgejo/workflows/release.yml` and manual `.forgejo/workflows/ci.yml`.
+  **Do not use it in place of `make check` in your own working copy.**
 - **Why it exists:** `flutter test --coverage` keeps a VM-Service connection
   open per test until the run ends, and that is both the slowest phase and the
   one that parallelises worst. Measured on the runner (task 661): 33 min 49 s of
@@ -1308,8 +1304,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   request** (#1118). It is the part of the gate fast enough to run per pull
   request on the server without the clock argument that moved the full gate to a
   tag.
-- **Why it exists:** while the full gate runs only on a `v*` tag and the Linux
-  gate only on demand, these static ratchets ran nowhere between releases — so
+- **Why it exists:** while the full candidate gate runs before tagging and the Linux
+  gate runs nightly or on demand, these static ratchets ran nowhere between releases — so
   `main` drifted silently red (files, classes, a method and registrations over
   their ceiling, uncaught until someone tried to land a fix on top, #1118). This
   target puts the fast half of the gate back on the pull request, where an
@@ -1595,7 +1591,7 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Advisory, not a gate — but part of the pre-tag pass.** It stays out of
   `check`/`check-full`, but [`make check-release`](#make-check-release) runs it
   once, advisory and non-blocking, against the live host — the quality slag you
-  run by hand before `git push origin v*`. That timing is the point: a finding
+  run before the release candidate is tagged. That timing is the point: a finding
   before the tag can still hold back a release, whereas a scan after deploy only
   speaks once the site is already live. A finding is for a human to weigh and, if
   real, file as an issue (this is how #849 came to be). Only if no container
@@ -1792,9 +1788,8 @@ For focused work, run only the relevant slice instead of the whole suite:
   since #1988: `macos-gate.yml` runs `make test-golden` on every push to `main`
   on the Mac-runner — a post-merge vangnet that een sub-promille renderlaag-
   verschuiving binnen minuten ziet in plaats van pas wanneer iemand lokaal `make
-  check` draait. Since #2321 it also runs on `v*` tag pushes, in a ref-scoped
-  concurrency group that a `main` push can never cancel — so the released commit
-  carries its own golden proof. Geen required PR-check, want de Mac-runner staat
+  check` draait. The release candidate also runs the goldens on the exact
+  merged commit before a tag is made. Geen required PR-check, want de Mac-runner staat
   niet altijd aan en de goldens zijn machine-specifiek.)
 
   *Corrected 2026-07-22 (#617): this said "each slide type" while the file
@@ -1973,27 +1968,13 @@ that reaches beyond `build/test_cache`.
 > workflow — see below for what that buys and what it costs. The sections below
 > describe the workflows that run, then what the remaining GitHub file *declares*.
 
-### `.forgejo/workflows/ci.yml` — the release gate, on a `v*` tag
-- **gate** — runs on the registered **Mac** runner (`runs-on: macos`, host
-  mode) since #797: `flutter pub get`, then
-  [`make check-no-coverage`](#make-check-no-coverage). Host mode means the job
-  uses the machine's own pinned toolchain, so nothing is installed and nothing
-  is cached here; `check-toolchain` still runs inside the gate and still demands
-  channel `stable`, official provenance and equality with the pin — "it is my
-  own machine" is not a check.
-- **Why the Mac.** Measured (#796): the same gate took 46 minutes in a container
-  on the server against 2.5 minutes on the Mac. That factor is the machine, not
-  the steps — four physical cores of a 2018 Xeon D-2123IT, 3.8× slower per core
-  than an M5 Max. The toolchain cache, dropping coverage and lowering runner
-  capacity each took minutes off; this takes off an order of magnitude.
-- **What it costs, twice over.** First: the suite no longer runs on Linux
-  anywhere by default — and that is a real gap, because `git` 2.43 on Ubuntu
-  24.04 does not know `--end-of-options`, and no Mac will ever surface that. The
-  Linux gate is not deleted but moved to `linux-gate.yml`, on demand. Second:
-  the release gate now depends on one physical machine owned by one person. When
-  that Mac is off the run waits — the tag still lands, the gate arrives later.
-  Better than a gate nobody waits for, but this is not a server-class
-  arrangement and should not be read as one.
+### `.forgejo/workflows/ci.yml` — manual diagnostic gate
+- **gate** — available through `workflow_dispatch` on the registered Mac
+  runner; runs `make check-no-coverage` with the pinned toolchain. It no longer
+  runs automatically on a release tag. The candidate gate in `release.yml`
+  runs that check and `make test-golden` before a tag can be created.
+- The Linux suite remains in `linux-gate.yml`, nightly and on demand. The
+  release script checks its exact `main` commit before preparing a release.
 
 ### `.forgejo/workflows/scans.yml` — secrets and SAST, on demand
 - **scans** — runs on the prebaked scan image
@@ -2004,7 +1985,7 @@ that reaches beyond `build/test_cache`.
   only). The commands are the Makefile targets, not re-typed copies of what they
   do — a contributor's local run and CI are then the same run by construction.
 - **Why it is its own workflow rather than a second job in `ci.yml`.** `on:` is
-  per workflow, and `ci.yml` fires on a `v*` tag. A job there would first scan
+  per workflow, and `ci.yml` is now available for manual diagnosis. A job there would first scan
   once the secret was already on `main` with a tag around it.
 - **Why it is manual.** `make check-full` runs both scans locally before merge,
   including full-history secret detection. Repeating them automatically on the
@@ -2117,8 +2098,8 @@ that reaches beyond `build/test_cache`.
   is a small download.
 - **Why it exists (#1888-tail).** `make check-web` is the only check that looks
   at a *built* bundle, and it lived in `check-full` on the committer's machine
-  and in `release.yml` on a `v*` tag. Between those two, nothing ever built the
-  web. #1888's dotfile sweep kept only what `releaseArtefacten` names — a list
+  and in the pre-tag candidate in `release.yml`. Historically, nothing
+  built the web between a local check and a tag. #1888's dotfile sweep kept only what `releaseArtefacten` names — a list
   describing what the packing step *adds*, not what the bundle *contains* — and
   the two dotfiles that belong there come from `web/`, copied by `flutter build
   web`. So `build/web/.htaccess` (header-form hardening, #849) and
@@ -2324,8 +2305,8 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   older than `docs/`), and uploads the bundle as the `ocideck-linux-x64` run
   artifact. This is a build, not a gate: it proves the Linux target compiles and
   packages, nothing more. #790 took it off every push to `main` — 17.5 minutes
-  of runner time per merge, while `release.yml` on the mirror builds all three
-  platforms on every `v*` tag anyway. That argument held for the *packaging* and
+  of runner time per merge. Historically, the mirror release built all three
+  platforms only after a `v*` tag. That argument held for the *packaging* and
   not for the *building*: no gate builds a desktop app, so a native break first
   surfaced at tag time, which is exactly how `v0.4.9` ended up with no release
   (see [`make check-linux-deps`](#make-check-linux-deps)). It therefore runs
@@ -2371,7 +2352,7 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   chain — and Windows has the same history as Linux here (an MSVC clash with
   dartcv4's prebuilt OpenCV once forced a `windows-2022` pin, #870).
 - It builds and throws the result away: this is a check, not a delivery. The
-  bundle users get still comes from `release.yml`, on a tag.
+  candidate bundle users get is built by `release.yml` before tagging.
 
 The three path filters are themselves guarded by
 `test/native_build_triggers_test.dart`: a build that no longer fires guards
@@ -2405,55 +2386,32 @@ every list because a *bare* pin bump touches neither pubspec file.
   is asserted against `.tool-versions` by `check_toolchain`, like every
   workflow that names one.
 
-### `.forgejo/workflows/release.yml` — on a version tag (`v*`)
-One canonical SemVer tag, one release. The `gate` job first requires an exact
-`v<major>.<minor>.<patch>` tag (optionally with a canonical SemVer prerelease),
-checks it against `pubspec.yaml` while ignoring only Flutter's `+build` number,
-resolves with `--enforce-lockfile`, and runs `make check-no-coverage`. No build
-job starts before that gate is green.
+### `.forgejo/workflows/release.yml` — candidate first, publication second
+The release script dispatches `mode=candidate` on `main` with the future version
+and exact merge commit. The Mac gate checks the canonical version, runs
+`make check-no-coverage` and `make test-golden`, then the workflow builds and
+checks web, Linux, Debian 12, macOS and Windows artifacts and runs consumer
+tests. It stores the 13 release assets, `SHA256SUMS` and a manifest as one
+candidate archive. A failed build or check leaves the version untagged.
 
-| Job | Runner | Result |
-| --- | --- | --- |
-| `web` | docker | `make check-web` — hardened bundle **and** its verification |
-| `deploy-web` | docker | that same artifact live on the static host, via `scripts/deploy_web.sh` |
-| `linux` | docker | `ocideck-linux-x64-<versie>.tar.gz` |
-| `macos` | macos | signed, notarised and Gatekeeper-verified `ocideck-macos-<versie>.zip` (`ditto`, not a plain zip); a stable tag fails closed without signing/notary configuration |
-| `windows-ophalen` | docker | waits for the mirror's public release asset and `curl`s it |
-| `publiceren` | docker | a Forgejo release with all four, both SBOM formats and `SHA256SUMS` |
+The script downloads and verifies that archive before creating an annotated
+tag containing `Candidate-Run: <run id>`. The tag-triggered run validates the
+annotation, version and commit, then publishes the archived bytes as a draft
+Forgejo release. It does not rebuild the platforms. The local script signs
+`SHA256SUMS`, makes the release public and updates the web demo, download page
+and Homebrew tap. If publication stops after tagging, `--resume vX.Y.Z` retries
+with the same tag and candidate; a pushed tag must never be moved.
 
-`deploy-web` unpacks the *downloaded artifact* rather than rebuilding: what goes
-live is then byte-identical to what hangs off the release. It needs the
-`DEPLOY_SSH_KEY` and `DEPLOY_KNOWN_HOSTS` secrets ([HOSTING.md](HOSTING.md#automatic-deployment-on-a-tag));
-without them the live step is visibly skipped while the downloadable release
-continues.
+### `.github/workflows/release.yml` — Windows candidate on the mirror
+The Forgejo candidate dispatches the Windows build on the exact `main` commit.
+GitHub stores its zip, installer and cohort as an Actions artifact for the
+forge to fetch and verify before tagging. A subsequent tag push validates the
+version and does not rebuild or publish a separate GitHub release asset.
 
-Publishing needs no secret: Forgejo injects a per-run token that may create
-releases. A `RELEASE_TOKEN` secret overrides it if that ever changes.
-Every external Action is commit-SHA-pinned and every build container is
-digest-pinned. On a rerun, an existing asset is reused only when its downloaded
-SHA-256 matches; a changed asset is uploaded and verified before the old id is
-removed. The final audit requires exactly one copy of every expected asset.
-
-### `.github/workflows/release.yml` — the Windows lane, on a version tag (`v*`)
-The only file on the mirror that executes. Builds `flutter build windows
---release` on `windows-2022` (the newest image's MSVC is incompatible with
-dartcv4's prebuilt OpenCV pack) and publishes it as a **public GitHub release
-asset** — not a build artifact, which would need a token even on a public
-repository and would expire after ninety days. The forge picks that URL up with
-plain `curl`, so no GitHub credential is stored on the self-hosted runner.
-
-### `.github/workflows/ci.yml` — declared on a version tag (`v*`)
-- **On a `v*` tag, or `workflow_dispatch`** (#958) — until 2026-07-29 this
-  declared `push: branches: ["**"]` plus `pull_request:`, so the full
-  seven-job pipeline below fired on every commit to every branch and every
-  pull request on the mirror, regardless of what changed. That made the
-  mirror a **second failure-mail source** for work the forge already did: the
-  real merge gate is `make check-full` on the committer's own machine. Per PR,
-  this mirror added load without adding signal. Brought in line with
-  [`.forgejo/workflows/ci.yml`](#forgejoworkflowsciyml--the-release-gate-on-a-v-tag)
-  (#790): CI is a release gate, not a merge gate. `workflow_dispatch` stays, so
-  a branch can still go through the full pipeline by hand without cutting a
-  tag.
+### `.github/workflows/ci.yml` — manual diagnostics on the mirror
+- **Trigger:** `workflow_dispatch` only. The full mirror pipeline can be
+  started on a branch for diagnosis without consuming a release tag. The
+  release candidate's own Mac, Linux and Windows checks gate publication.
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
   `make check-conventions`, `make check-audience-boundary`,
