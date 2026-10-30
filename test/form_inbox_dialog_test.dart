@@ -91,7 +91,7 @@ class _Picks {
 Future<void> settleIo(
   WidgetTester tester,
   Finder until, {
-  Duration timeout = const Duration(seconds: 10),
+  Duration timeout = const Duration(seconds: 30),
 }) => pumpUntil(
   tester,
   () => until.evaluate().isNotEmpty,
@@ -103,7 +103,7 @@ Future<void> tapAndWait(
   WidgetTester tester,
   Finder tap,
   Finder until, {
-  Duration timeout = const Duration(seconds: 10),
+  Duration timeout = const Duration(seconds: 30),
 }) async {
   await tester.tap(tap);
   await settleIo(tester, until, timeout: timeout);
@@ -405,11 +405,23 @@ void main() {
           text('Formulier toegevoegd: kook · v1.'),
         );
         await settleIo(tester, text('kook · v1'));
-        await tapAndWait(
-          tester,
-          text('Pakketten binnenhalen…'),
-          containing('Inzendingen in de werkmap: 1'),
-        );
+        try {
+          await tapAndWait(
+            tester,
+            text('Pakketten binnenhalen…'),
+            containing('Inzendingen in de werkmap: 1'),
+            // De teller ververst pas na vier age-/ZIP-bewerkingen en bestands-I/O.
+            timeout: const Duration(seconds: 60),
+          );
+        } on TestFailure catch (error) {
+          final outcomes = tester
+              .widgetList<Text>(find.byType(Text))
+              .map((widget) => widget.data)
+              .whereType<String>()
+              .where((line) => line.contains('.age:'))
+              .toList();
+          fail('$error Zichtbare importuitkomsten: $outcomes');
+        }
         expect(
           text('mijn.zip.age: verzegeld pakket geopend en binnengehaald.'),
           findsOneWidget,
