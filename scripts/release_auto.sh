@@ -111,23 +111,14 @@ DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de livev
 # website-workflow kan groen zijn terwijl rsync naar een host gaat waar DNS niet
 # naar wijst; daarom is ook hier de pagina die bezoekers krijgen de waarheid.
 WEBSITE_URL="${OCIDECK_WEBSITE_URL:-https://librekat.nl/nl/ocideck/}"
-# De poort-wachttijd (minuten). De linux-gate duurde op 08-10-2026 onder volle
-# runnerbelasting 81 min; de v0.7.0-preflight naderde de oude grens terwijl
-# tests nog liepen. 300 min geeft de Linux-job (max 180 min) ook ruimte om
-# achter een andere volledige run op de serial-runner te wachten (81 min is
-# gemeten). De release start de handmatige workflows zelf en volgt hun taken;
-# sinds #2194 leveren ze bewust geen automatische PR-statuscontexten meer. Zie
-# wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
-GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-300}"
-# De wachttijd op de release-CI ná de tag (minuten). Die keten duurt ruim twee
-# uur: v0.6.4 2u05 en v0.6.5 2u14 (gate ~12 → Poort ~12 → macOS ~15 naast
-# Linux ~50 en web ~45 → publiceren → website). De oude vaste 60 min brak de
-# v0.6.5-run midden in "Linux bouwen" af terwijl elke job liep of groen was, en
-# schoof fase 3 naar --resume. Zolang een job zichtbaar draait is wachten nooit
-# fout; een job die écht hangt kapt de runner zelf af (timeout 2 uur). Deze cap
-# is dus een vangnet tegen een keten die nooit terminaal wordt, niet de
-# verwachte duur. Overschrijfbaar via OCIDECK_RELEASE_CI_TIMEOUT_MIN.
-RELEASE_CI_TIMEOUT_MIN="${OCIDECK_RELEASE_CI_TIMEOUT_MIN:-240}"
+# Ruime veiligheidsmarges: koude native builds krijgen 240 min plus hun
+# installatieproeven; de poortwachter laat ook ruimte voor runnerwachtrijen.
+# Dit zijn bovengrenzen, geen verwachte looptijden. Maak een buitenste
+# wachttijd nooit korter dan de onderliggende jobs plus wachtrij en overdracht.
+GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-720}"
+# Volledige kandidaatketen: kwaliteitspoort, parallelle platformbouwen,
+# installatieproeven, archief en overdracht. Ook bij belasting ruim wachten.
+RELEASE_CI_TIMEOUT_MIN="${OCIDECK_RELEASE_CI_TIMEOUT_MIN:-960}"
 
 DRY_RUN=0
 SKIP_INSTALL=0
@@ -2403,7 +2394,7 @@ ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
 }
 
 # linux-gate draait de volledige suite op de capacity-1 serial-runner (81 min
-# gemeten onder volle belasting op 08-10-2026). Vandaar GATE_TIMEOUT_MIN (300)
+# gemeten onder volle belasting op 08-10-2026). Vandaar GATE_TIMEOUT_MIN (720)
 # mét voortgang. Een geaccepteerde dispatch die na vijf minuten nog geen RUN
 # opleverde is een registratieprobleem — een queued run zonder runner-taak is
 # via /actions/runs wél zichtbaar — geen reden om de overige wachttijd
@@ -2602,8 +2593,8 @@ assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
       queued|in_progress|waiting|pending|requested) ;;
       *) die "$label op merge ${merge:0:12} is $state (run $run_id) — niets getagd." ;;
     esac
-    [ "$SECONDS" -lt $((start + 9000)) ] \
-      || die "$label op merge ${merge:0:12} bleef langer dan 150 min actief — niets getagd."
+    [ "$SECONDS" -lt $((start + 21600)) ] \
+      || die "$label op merge ${merge:0:12} bleef langer dan 360 min actief — niets getagd."
     sleep 30
   done
   done
@@ -2836,7 +2827,7 @@ tag_and_push() { # tag_and_push MERGE_SHA
 # echt niet groen werd.
 follow_ci() {
   STEP="release-CI volgen"
-  local cap="${RELEASE_CI_TIMEOUT_MIN:-240}"
+  local cap="${RELEASE_CI_TIMEOUT_MIN:-960}"
   local timeout_seconds="${RELEASE_CI_TIMEOUT_SECONDS:-$((cap * 60))}"
   section "Fase 2 — release-CI volgen (tot alle jobs klaar zijn, max ${cap} min)"
   local prev="" running=0 unchanged=0 unreadable=0

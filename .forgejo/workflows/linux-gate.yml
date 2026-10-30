@@ -102,7 +102,7 @@ jobs:
     # de v0.7.0-preflight al 110 min. Houd ruimte
     # voor de volledige suite, maar stop een echte hang vóór release_auto's
     # ruimere grens van 300 min.
-    timeout-minutes: 180
+    timeout-minutes: 300
     env:
       PUB_CACHE: /home/ubuntu/.pub-cache
       # De volle suite belast de runner genoeg om losse schijf-I/O-tests over

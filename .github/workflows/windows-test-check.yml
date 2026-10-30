@@ -53,7 +53,7 @@ jobs:
     # Run 39179149143 had alle 13.741 tests afgerond maar werd op de oude
     # 75-minutengrens tijdens de afronding geannuleerd. Geef ook een koude
     # cache en post-job-opruiming tijd om terminaal succes te melden.
-    timeout-minutes: 120
+    timeout-minutes: 300
     steps:
       - name: Checkout
         uses: actions/checkout@v5

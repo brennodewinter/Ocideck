@@ -56,7 +56,7 @@ jobs:
     # De bouw duurt ~20-35 min. Ruim, maar begrensd: een stap die op een venster
     # wacht dat niemand kan wegklikken maakte in v0.4.7-rc1 bijna de volle zes
     # standaarduren op (zie release.yml).
-    timeout-minutes: 90
+    timeout-minutes: 240
     steps:
       - name: Checkout
         uses: actions/checkout@v5

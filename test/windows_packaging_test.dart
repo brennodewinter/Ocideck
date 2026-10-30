@@ -793,6 +793,15 @@ void main() {
       final polls = int.parse(
         RegExp(r'for POGING in \$\(seq 1 (\d+)\)').firstMatch(job)!.group(1)!,
       );
+      final build = int.parse(
+        RegExp(r'timeout-minutes:\s*(\d+)').firstMatch(mirrorYaml)!.group(1)!,
+      );
+      expect(build, greaterThanOrEqualTo(240));
+      expect(
+        polls,
+        greaterThanOrEqualTo(build + 90),
+        reason: 'The forge must allow the full Windows build plus queue time.',
+      );
       expect(
         outer,
         greaterThan(polls + 5),
