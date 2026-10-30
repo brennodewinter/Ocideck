@@ -31,8 +31,9 @@
 #     deploy-host (ssh) en een minisign proef-tekening — alles wat later
 #     onherroepelijk nodig is, faalt hier vroeg i.p.v. pas ná de tag.
 #   FASE 2 (naar de CI-straat + bewaken)
-#     branch+PR → poort groen → merge → tag → push origin+mirror → release-CI
-#       eens per ~minuut volgen tot alle jobs klaar zijn
+#     branch+PR → poort groen → merge → volledige kandidaatbouw op exact die
+#       commit → alle bestanden teruglezen en toetsen → pas dan tag+push →
+#       de forge publiceert precies de kandidaatbytes als draft
 #   FASE 3 (verspreiden, pas ná groene CI)
 #     make deploy-web (webdemo, onafhankelijk van de platform-artefacten)
 #       → SHA256SUMS tekenen (minisign) + aanhangen → release publiceren
@@ -54,11 +55,9 @@
 #     zodat main schoon blijft (de bump wordt gecommit vóór de poort, niet als losse
 #     werkboom-edit). Repareer en draai opnieuw — vers als fase 1 nog niet af was, of
 #     `--resume vX.Y.Z` als de PR al open stond.
-#   * Faalt er iets NÁ de tag-push, dan staat de tag vast. Herstel de oorzaak en
-#     maak DEZELFDE tag af met `--resume vX.Y.Z`. Alleen als een uitgebracht
-#     artefact zélf fout is snijd je de VOLGENDE patch-tag; her-tag nooit (dat
-#     degradeert de mirror-Windows-release tot draft en laat `windows-ophalen`
-#     eeuwig wachten).
+#   * Faalt er iets NÁ de tag-push, dan staat de tag vast. De forge kan de
+#     geverifieerde kandidaat zelfstandig als draft aanhangen; herstel een
+#     publicatiefout met DEZELFDE tag en `--resume vX.Y.Z`. Her-tag nooit.
 #   * Verloopt de tag-PUSH zelf onzeker (het antwoord of de teruglezing valt
 #     weg), dan kan de tag er al staan: de branch blijft bewust staan en de
 #     route is read-only `--status` gevolgd door `--resume` van dezelfde tag —
@@ -398,6 +397,10 @@ remote_tag_commit() { # remote_tag_commit REMOTE
     END { print (peeled != "" ? peeled : direct) }'
 }
 
+tag_has_candidate() {
+  git cat-file -p "refs/tags/$TAG" 2>/dev/null | grep -qE '^Candidate-Run: [0-9]+$'
+}
+
 # De nieuwste workflowrun van één workflow op één ref, als "id|status".
 # /actions/runs kent een run zodra hij bestaat — ook queued of nog zonder
 # runner-taak. Dat is precies wat /actions/tasks niet kan: die toont alleen
@@ -425,7 +428,11 @@ latest_workflow_run() { # latest_workflow_run WORKFLOW_ID REF
 # de runstatus — een wachtende run is actief, niet afwezig.
 release_ci_snapshot() {
   local run jobs
-  run="$(latest_workflow_run release.yml "$TAG")" || return 2
+  if [ -n "${PUBLISH_RUN_ID:-}" ]; then
+    run="$(api GET "/actions/runs/$PUBLISH_RUN_ID" | jq -r '"\(.id)|\(.status)"')" || return 2
+  else
+    run="$(latest_workflow_run release.yml "$TAG")" || return 2
+  fi
   [ -n "$run" ] || return 0
   jobs="$(api GET "/actions/runs/${run%%|*}/jobs" \
     | jq -r 'group_by(.name) | map(sort_by([.attempt // 0, .id]) | .[-1])[]
@@ -467,7 +474,11 @@ release_ci_completion_seen() { # release_ci_completion_seen SNAPSHOT
 }
 
 release_ci_has_failure() { # release_ci_has_failure SNAPSHOT
-  printf '%s\n' "$1" | grep -qE '^(failure|cancelled|skipped|error)\|'
+  printf '%s\n' "$1" | grep -qE '^(failure|cancelled|error)\|' && return 0
+  # De publish-dispatch slaat de al geslaagde kandidaat-bouwjobs bewust over.
+  # Alleen een geslaagde eindjob bewijst dat zo'n skip verwacht was.
+  printf '%s\n' "$1" | grep -q '^success|Release publiceren|' && return 1
+  printf '%s\n' "$1" | grep -q '^skipped|'
 }
 
 # De golden-poort op de tag zelf. macos-gate draait sinds #2321 óók op v*-tags,
@@ -796,7 +807,7 @@ cmd_status() {
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
   local has_sums=0 manifest_complete=0 sig_valid=0 web_live=0 website_live=0 tap_live=0 ci_stable=0
-  local live="" website_version="" mgate_ok=0 tag_gates_ok=0 tag_gate_failed=0
+  local live="" website_version="" mgate_ok=0 tag_gates_ok=0 tag_gate_failed=0 candidate_release=0
   local prnum="" prstate=""
   local probe_dir probe_fn probe pids="" n_done deadline
   local st_branch st_pr st_tag_o st_tag_m st_release st_ci st_mgate st_tag_gates st_web st_site st_tap
@@ -861,6 +872,11 @@ cmd_status() {
   [ "$st_site" = 0 ] && website_version="$d_site"
   [ "$st_mgate" = 1 ] && mgate_ok=1
   [ "$st_tag_gates" = 1 ] && tag_gates_ok=1
+  if tag_has_candidate; then
+    candidate_release=1
+    mgate_ok=1
+    tag_gates_ok=1
+  fi
   if [ "$st_tag_gates" = 0 ]; then
     case "$d_tag_gates" in
       *failure*|*cancelled*|*skipped*|*error*|*timed_out*|*action_required*|*stale*)
@@ -891,19 +907,25 @@ cmd_status() {
   else
     mark "$pr_merged" "$prdesc"
   fi
-  mark3 "$st_tag_o" "$d_tag_o" "tag $TAG op origin (start de Forgejo-release-CI)"
+  mark3 "$st_tag_o" "$d_tag_o" "tag $TAG op origin (publiceert de gevalideerde kandidaat)"
   if [ "$st_tag_m" = 'nomirror' ]; then
-    mark 0 "mirror-remote beschikbaar (nodig voor de Windows-build)"
+    mark 0 "mirror-remote beschikbaar (nodig voor dezelfde bronidentiteit)"
   else
-    mark3 "$st_tag_m" "$d_tag_m" "tag $TAG op mirror (start de Windows-build)"
+    mark3 "$st_tag_m" "$d_tag_m" "tag $TAG op mirror"
   fi
   mark3 "$st_release" "$d_release" "release aangemaakt op de forge"
   mark3 "$st_ci" "$d_ci" "release-CI terminaal groen; geen actieve schrijver"
-  mark3 "$st_tag_gates" "$d_tag_gates" "Forgejo- en GitHub-tagpoorten groen"
+  if [ "$candidate_release" -eq 1 ]; then
+    mark 1 "volledige kwaliteitspoort vóór de tag op de kandidaatcommit"
+  else
+    mark3 "$st_tag_gates" "$d_tag_gates" "Forgejo- en GitHub-tagpoorten groen"
+  fi
   # De golden-poort op de tag (#2321): geen releasejob, maar wél de enige plek
   # waar de goldens van de uitgebrachte commit bewezen worden. Een afwezige of
   # geannuleerde tagrun mag niet onzichtbaar blijven.
-  if [ "$st_mgate" = '?' ]; then
+  if [ "$candidate_release" -eq 1 ]; then
+    mark 1 "macOS-bouw en installatieproef vóór de tag voltooid"
+  elif [ "$st_mgate" = '?' ]; then
     mark3 '?' "$d_mgate" "macos-gate (goldens) op $TAG"
   elif [ -z "$d_mgate" ]; then
     mark 0 "macos-gate (goldens) op $TAG: geen tagrun gevonden"
@@ -2527,14 +2549,14 @@ resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
   printf '%s\n' "$current"
 }
 
-# De wekelijkse Windows-suite is geen mergepoort. Vóór de onomkeerbare tag
-# maken we haar voor precies de merge-commit alsnog een releasepoort.
+# De Windows-suite en native bouw zijn geen verplichte mergepoorten. Vóór de
+# onomkeerbare tag toetsen we beide op precies de merge-commit.
 assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
-  local merge="$1" repo mirror_sha origin_sha runs run_id baseline_id state start=$SECONDS
+  local merge="$1" repo mirror_sha origin_sha runs run_id baseline_id state workflow label start=$SECONDS
   repo="$(git remote get-url mirror | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')"
   [[ "$repo" =~ ^[^/]+/[^/]+$ ]] || die "GitHub-mirrorrepo niet betrouwbaar bepaald — niets getagd."
   command -v gh >/dev/null || die "gh ontbreekt — Windows-suite vóór de tag niet te starten."
-  section "Windows-suite op de merge-commit vóór de tag"
+  section "Windows-suite en -bouw op de merge-commit vóór de tag"
   while :; do
     origin_sha="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
       || die "origin/main niet leesbaar vóór de Windows-poort."
@@ -2547,18 +2569,19 @@ assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
       || die "mirror/main bereikte merge ${merge:0:12} niet binnen 15 min — niets getagd."
     sleep 20
   done
-  runs="$(gh run list -R "$repo" --workflow windows-test-check.yml --branch main \
-    --event workflow_dispatch --limit 100 \
+  for workflow in windows-test-check.yml windows-native-check.yml; do
+  label="Windows-suite"
+  [ "$workflow" = windows-native-check.yml ] && label="Windows-bouw"
+  runs="$(gh run list -R "$repo" --workflow "$workflow" --branch main --limit 100 \
     --json databaseId,headSha,status,conclusion)" \
     || die "GitHub Windows-runlijst niet leesbaar — niets getagd."
   run_id="$(jq -r --arg sha "$merge" '[.[] | select(.headSha == $sha)] | sort_by(.databaseId) | last | .databaseId // empty' <<<"$runs")"
   if [ -z "$run_id" ]; then
     baseline_id="$(jq -r '[.[].databaseId] | max // 0' <<<"$runs")"
-    gh workflow run windows-test-check.yml -R "$repo" --ref main >/dev/null \
-      || die "Windows-suite op mirror/main kon niet worden gestart — niets getagd."
+    gh workflow run "$workflow" -R "$repo" --ref main >/dev/null \
+      || die "$label op mirror/main kon niet worden gestart — niets getagd."
     for _ in $(seq 1 30); do
-      runs="$(gh run list -R "$repo" --workflow windows-test-check.yml --branch main \
-        --event workflow_dispatch --limit 100 \
+      runs="$(gh run list -R "$repo" --workflow "$workflow" --branch main --limit 100 \
         --json databaseId,headSha,status,conclusion)" \
         || die "nieuwe GitHub Windows-run niet leesbaar — niets getagd."
       run_id="$(jq -r --arg sha "$merge" --argjson before "$baseline_id" \
@@ -2568,29 +2591,136 @@ assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
     done
     [ -n "$run_id" ] || die "GitHub Windows-dispatch niet aan exacte merge-commit te koppelen — niets getagd."
   fi
-  log "Windows-suite run $run_id op ${merge:0:12} volgen."
+  log "$label run $run_id op ${merge:0:12} volgen."
   start=$SECONDS
   while :; do
     state="$(gh run view "$run_id" -R "$repo" --json headSha,status,conclusion \
       | jq -r --arg sha "$merge" 'if .headSha != $sha then "wrong-sha" elif .status == "completed" then .conclusion else .status end')" \
       || die "Windows-run $run_id niet leesbaar — niets getagd."
     case "$state" in
-      success) log "Windows-suite op merge ${merge:0:12} groen (run $run_id)."; return 0 ;;
+      success) log "$label op merge ${merge:0:12} groen (run $run_id)."; break ;;
       queued|in_progress|waiting|pending|requested) ;;
-      *) die "Windows-suite op merge ${merge:0:12} is $state (run $run_id) — niets getagd." ;;
+      *) die "$label op merge ${merge:0:12} is $state (run $run_id) — niets getagd." ;;
     esac
     [ "$SECONDS" -lt $((start + 9000)) ] \
-      || die "Windows-suite op merge ${merge:0:12} bleef langer dan 150 min actief — niets getagd."
+      || die "$label op merge ${merge:0:12} bleef langer dan 150 min actief — niets getagd."
     sleep 30
+  done
   done
 }
 
-# De mirror-tag (GitHub-spiegel) is een eigen faalpunt naast origin: de origin-push
-# start de Forgejo-CI, maar de Windows-build op de spiegel start pas als de tag ÓÓK
-# op de mirror staat (windows-ophalen dispatcht met --ref $TAG). Idempotent: staat de
-# tag al op de mirror, dan doet dit niets — zo repareert --resume alsnog een mislukte
-# mirror-push, óók als origin de tag al heeft (waar de vroegere early-return de
-# mirror-push oversloeg en de Windows-build eeuwig liet wachten).
+# Een tag is pas toegestaan nadat precies de te publiceren bytes op de
+# merge-commit gebouwd, beproefd en uit de CI-opslag teruggelezen zijn.
+release_candidate_run() { # release_candidate_run MERGE_SHA [RUN_ID]; zet CANDIDATE_RUN_ID
+  local merge="$1" runs run_id="${2:-}" response state deadline archive url bundle manifest files expected
+  if [ -z "$run_id" ]; then
+    runs="$(api GET '/actions/runs?limit=100&page=1&workflow_id=release.yml')" \
+      || die "kandidaatruns niet leesbaar — niets getagd."
+    run_id="$(jq -r --arg sha "$merge" '[.workflow_runs[]? | select(.workflow_id == "release.yml" and .commit_sha == $sha and .prettyref == "main" and .event == "workflow_dispatch")] | sort_by(.id) | last | .id // empty' <<<"$runs")"
+    if [ -n "$run_id" ]; then
+      state="$(api GET "/actions/runs/$run_id" | jq -r '.status // "unknown"')" \
+        || die "kandidaatrun $run_id niet leesbaar — niets getagd."
+      case "$state" in
+        failure|cancelled|error|skipped) run_id="" ;;
+      esac
+    fi
+  fi
+  if [ -z "$run_id" ]; then
+    response="$(api POST '/actions/workflows/release.yml/dispatches' \
+      -H 'Content-Type: application/json' \
+      -d "$(jq -n --arg sha "$merge" --arg version "$TAG" '{ref:"main",return_run_info:true,inputs:{mode:"candidate",commit_sha:$sha,version:$version}}')")" \
+      || die "kandidaatbouw kon niet starten — niets getagd."
+    run_id="$(jq -r '.id // empty' <<<"$response")"
+    [ -n "$run_id" ] || die "kandidaatbouw gestart zonder herleidbare run-id — niets getagd; controleer de forge."
+  fi
+  log "Kandidaatbouw $run_id op ${merge:0:12} volgen."
+  deadline=$((SECONDS + RELEASE_CI_TIMEOUT_MIN * 60))
+  while [ "$SECONDS" -lt "$deadline" ]; do
+    state="$(api GET "/actions/runs/$run_id" | jq -r --arg sha "$merge" 'if .workflow_id != "release.yml" or .commit_sha != $sha or .prettyref != "main" or .event != "workflow_dispatch" then "wrong-run" else .status // "unknown" end')" \
+      || die "kandidaatbouw $run_id niet leesbaar — niets getagd."
+    case "$state" in
+      success) break ;;
+      failure|cancelled|error|skipped|wrong-run) die "kandidaatbouw $run_id is $state — niets getagd." ;;
+    esac
+    sleep 30
+  done
+  [ "$state" = success ] || die "kandidaatbouw $run_id niet op tijd groen — niets getagd."
+  url="$(api GET "/actions/runs/$run_id/artifacts?per_page=100" \
+    | jq -r '[.[]? | select(.name == "ocideck-release-candidate" and .expired == false)] | if length == 1 then .[0].archive_download_url else empty end')" \
+    || die "kandidaatarchief van run $run_id niet leesbaar — niets getagd."
+  [ -n "$url" ] || die "run $run_id heeft geen uniek, geldig kandidaatarchief — niets getagd."
+  archive="$(mktemp -d)"
+  trap 'rm -rf "$archive"' EXIT
+  curl -fsSL --connect-timeout 15 --max-time 600 \
+    --config <(printf 'header = "Authorization: token %s"\n' "$TOKEN") \
+    -o "$archive/artifact.zip" "$url" \
+    || die "kandidaatarchief van run $run_id niet downloadbaar — niets getagd."
+  bundle="ocideck-release-candidate-$TAG.tar.gz"
+  [ "$(unzip -Z1 "$archive/artifact.zip")" = "$bundle" ] \
+    || die "kandidaatarchief van run $run_id bevat onverwachte bestanden — niets getagd."
+  unzip -p "$archive/artifact.zip" "$bundle" >"$archive/$bundle" \
+    || die "kandidaatbundel van run $run_id niet uitpakbaar — niets getagd."
+  files="$(tar -tzf "$archive/$bundle" | sed '/\/$/d' | LC_ALL=C sort)" \
+    || die "kandidaatbundel van run $run_id beschadigd — niets getagd."
+  expected="$( { printf '%s\n' candidate-manifest.json dist/SHA256SUMS; expected_release_assets | sed 's#^#dist/#'; } | LC_ALL=C sort)"
+  [ "$files" = "$expected" ] || die "kandidaatbundel bevat niet precies de verwachte releasebestanden — niets getagd."
+  tar -xzf "$archive/$bundle" -C "$archive" \
+    || die "kandidaatbundel van run $run_id niet uitpakbaar — niets getagd."
+  manifest="$archive/candidate-manifest.json"
+  jq -e --arg sha "$merge" --arg version "$TAG" '.commit == $sha and .version == $version and (.windows_run_id | type == "number")' "$manifest" >/dev/null \
+    || die "kandidaatbewijs hoort niet bij $TAG op $merge — niets getagd."
+  verify_release_manifest "$archive/dist/SHA256SUMS" \
+    || die "kandidaat-checksumlijst heeft ontbrekende of onverwachte assets — niets getagd."
+  (cd "$archive/dist" && shasum -a 256 -c SHA256SUMS >/dev/null) \
+    || die "kandidaatbestanden wijken af van SHA256SUMS — niets getagd."
+  rm -rf "$archive"
+  trap - EXIT
+  CANDIDATE_RUN_ID="$run_id"
+}
+
+ensure_candidate_publication() { # ensure_candidate_publication MERGE_SHA
+  local merge="$1" runs run_id response status candidate_id origin_tag_object local_tag_object
+  # Een hervatting leest eerst het bestaande bewijs terug. Zonder dat bewijs
+  # starten we na een tag geen tweede bouwer of publiceerder op goed geluk.
+  origin_tag_object="$(git ls-remote origin "refs/tags/$TAG" | awk 'NR==1 {print $1}')" \
+    || die "tagobject op origin niet leesbaar — geen tweede schrijver gestart."
+  local_tag_object="$(git rev-parse "refs/tags/$TAG")" \
+    || die "lokaal tagobject niet leesbaar — geen tweede schrijver gestart."
+  [ "$origin_tag_object" = "$local_tag_object" ] \
+    || die "lokaal tagobject wijkt af van origin — gebruik eerst de oorspronkelijke tag; geen tweede schrijver gestart."
+  candidate_id="$(git cat-file -p "refs/tags/$TAG" | sed -n 's/^Candidate-Run: \([0-9][0-9]*\)$/\1/p' | head -1)" \
+    || die "tagbewijs voor $TAG niet leesbaar — geen tweede schrijver gestart."
+  [ -n "$candidate_id" ] || die "tag $TAG bevat geen kandidaatbewijs — geen automatische publicatie gestart."
+  release_candidate_run "$merge" "$candidate_id"
+  runs="$(api GET '/actions/runs?limit=100&page=1&workflow_id=release.yml')" \
+    || die "publicatieruns niet leesbaar — hervat dezelfde tag later."
+  run_id="$(jq -r --arg tag "$TAG" --arg sha "$merge" '[.workflow_runs[]? | select(.workflow_id == "release.yml" and .prettyref == $tag and .commit_sha == $sha)] | sort_by(.id) | last | .id // empty' <<<"$runs")"
+  if [ -n "$run_id" ]; then
+    status="$(api GET "/actions/runs/$run_id" | jq -r '.status // "unknown"')" \
+      || die "publicatierun $run_id niet leesbaar — geen tweede schrijver gestart."
+    case "$status" in
+      success|queued|waiting|pending|running|in_progress)
+        PUBLISH_RUN_ID="$run_id"
+        log "Publicatierun $run_id voor $TAG bestaat al; geen tweede schrijver gestart."
+        return 0 ;;
+      failure|cancelled|error|skipped)
+        log "Eerdere publicatierun $run_id is $status; nieuwe poging met dezelfde kandidaat." ;;
+      *) die "publicatierun $run_id heeft onbekende status $status — geen tweede schrijver gestart." ;;
+    esac
+  fi
+  response="$(api POST '/actions/workflows/release.yml/dispatches' \
+    -H 'Content-Type: application/json' \
+    -d "$(jq -n --arg ref "$TAG" --arg candidate "$CANDIDATE_RUN_ID" '{ref:$ref,return_run_info:true,inputs:{mode:"publish",candidate_run_id:$candidate}}')")" \
+    || die "publicatie van kandidaat $CANDIDATE_RUN_ID kon niet starten — hervat dezelfde tag later."
+  run_id="$(jq -r '.id // empty' <<<"$response")"
+  [ -n "$run_id" ] || die "publicatie-dispatch heeft geen herleidbare run-id — controleer $TAG en hervat zonder nieuwe tag."
+  PUBLISH_RUN_ID="$run_id"
+  log "Publicatie van gevalideerde kandidaat $CANDIDATE_RUN_ID gestart (run $run_id)."
+}
+
+# De mirror-tag is een eigen faalpunt naast origin. De Windows-kandidaat is al
+# gebouwd vóór de tag; de mirror-tag houdt bron en release-identiteit gelijk.
+# Idempotent: --resume herstelt een ontbrekende mirror-tag alsnog.
 ensure_mirror_tag() {
   git remote get-url mirror >/dev/null 2>&1 || return 0
   local expected mirror_sha rc=0
@@ -2618,7 +2748,7 @@ ensure_mirror_tag() {
       || die "mirror-push meldde succes, maar $TAG is niet terug te lezen."
     assert_tag_commit mirror "$mirror_sha" "$expected"
   fi
-  log "Tag $TAG naar de mirror gepusht — de Windows-build kan starten."
+  log "Tag $TAG naar de mirror gepusht."
 }
 
 # Tag op de merge-commit en push naar origin + mirror. Idempotent per remote: staat
@@ -2627,7 +2757,7 @@ ensure_mirror_tag() {
 # mirror-push faalde, en --resume moet een ontbrekende mirror-tag alsnog kunnen
 # zetten. De 8-seconden-bail vóór de origin-push is het punt-van-geen-terugkeer.
 tag_and_push() { # tag_and_push MERGE_SHA
-  local mergesha="$1" i origin_sha rc=0
+  local mergesha="$1" i origin_sha mirror_sha rc=0 mirror_rc=0
   STEP="tag pushen"
   origin_sha="$(remote_tag_commit origin)" || rc=$?
   if [ "$rc" -eq 0 ]; then
@@ -2635,9 +2765,16 @@ tag_and_push() { # tag_and_push MERGE_SHA
     log "Tag $TAG stond al op origin — niet opnieuw taggen."
     TAG_PUSHED=1
     ensure_mirror_tag
+    ensure_candidate_publication "$mergesha"
     return 0
   fi
   [ "$rc" -eq 1 ] || die "kon niet betrouwbaar vaststellen of $TAG al op origin staat."
+  mirror_sha="$(remote_tag_commit mirror)" || mirror_rc=$?
+  if [ "$mirror_rc" -eq 0 ]; then
+    assert_tag_commit mirror "$mirror_sha" "$mergesha"
+  else
+    [ "$mirror_rc" -eq 1 ] || die "kon vóór de origin-push niet betrouwbaar vaststellen of $TAG al op de mirror staat."
+  fi
   # De merge-commit is server-side gemaakt (REST-merge in merge_pr) en zit dus nog
   # niet in onze lokale objectdatabase; 'git tag -a' zou er anders op stuklopen met
   # 'fatal: bad object type' — precies waarop de v0.4.1-release brak. Haal 'm op
@@ -2657,11 +2794,14 @@ tag_and_push() { # tag_and_push MERGE_SHA
     || die "merge-commit $mergesha draagt versie '${tagged_version:-onbekend}', niet $NEW_VERSION — dit is niet de release-commit. Niets getagd; controleer de PR."
   assert_release_ci_secrets
   assert_windows_merge_gate "$mergesha"
+  release_candidate_run "$mergesha"
+  [ "$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" = "$mergesha" ] \
+    || die "origin/main verschoof tijdens de kandidaatbouw — tag $TAG niet automatisch."
   section "Fase 2 — tag $TAG pushen (de publieke release-keten start hierna)"
   log "Ctrl-C binnen 8 seconden om af te breken (hierna is de tag onherroepelijk)."
   for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'
   git tag -d "$TAG" >/dev/null 2>&1 || true   # een stale lokale tag van een vorige poging opruimen
-  git tag -a "$TAG" -m "OciDeck $TAG" "$mergesha"
+  git tag -a "$TAG" -m "OciDeck $TAG" -m "Candidate-Run: $CANDIDATE_RUN_ID" "$mergesha"
   assert_tag_commit lokaal "$(git rev-list -n 1 "$TAG")" "$mergesha"
   # Vanaf de eerste pushpoging is de toestand remote-onzeker: de server kan de
   # tag accepteren terwijl het antwoord óf de teruglezing wegvalt. Tot de tag
@@ -2750,7 +2890,9 @@ follow_ci() {
   if release_ci_has_failure "$snap"; then
     die "release-CI voor $TAG bevat een gefaalde of overgeslagen job — niets publiceren; herstel en hervat dezelfde tag."
   fi
-  wait_tag_gates
+  # De kandidaat heeft de volledige poort op de exacte commit al doorlopen.
+  # Een tweede, mogelijk flakerende test na het taggen mag geen versie verbranden.
+  if ! tag_has_candidate; then wait_tag_gates; fi
 }
 
 # Alle tag-poorten zijn releasevoorwaarden, ook wanneer release.yml zelf groen
@@ -2825,6 +2967,10 @@ resume_release() {
       || die "tag $TAG op origin draagt versie ${tagged_version:-onbekend}, niet $NEW_VERSION."
     log "Tag $TAG staat al op origin — mirror-tag borgen, dan fase 3 (deploy-web + tekenen)."
     ensure_mirror_tag
+    if git show "$origin_tag:.forgejo/workflows/release.yml" 2>/dev/null \
+        | grep -q 'ocideck-release-candidate'; then
+      ensure_candidate_publication "$origin_tag"
+    fi
     follow_ci
     phase3; finish; return 0
   fi
