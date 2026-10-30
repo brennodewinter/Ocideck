@@ -53,7 +53,9 @@ bool LooksLikeDeckFile(const std::string& arg) {
   if (dot == std::string::npos) return false;
   std::string ext = arg.substr(dot);
   std::transform(ext.begin(), ext.end(), ext.begin(),
-                 [](unsigned char c) { return std::tolower(c); });
+                 [](unsigned char c) {
+                   return static_cast<char>(std::tolower(c));
+                 });
   return ext == ".md" || ext == ".ocideck" || ext == ".zip";
 }
 
