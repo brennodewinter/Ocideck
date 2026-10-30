@@ -2928,8 +2928,8 @@ wait_tag_gates() {
           die "een tagpoort op $TAG is $state (Forgejo $fg, macOS $mg, GitHub $gh_id/$gh_state) — niets publiceren; herstel en hervat dezelfde tag." ;;
       esac
     done
-    [ "$SECONDS" -lt $((start + 7200)) ] \
-      || die "tagpoorten op $TAG niet alle groen binnen 120 min (Forgejo $fg, macOS $mg, GitHub $gh_id/$gh_state) — niets publiceren."
+    [ "$SECONDS" -lt $((start + 43200)) ] \
+      || die "tagpoorten op $TAG niet alle groen binnen 720 min (Forgejo $fg, macOS $mg, GitHub $gh_id/$gh_state) — niets publiceren."
     sleep 30
   done
 }
