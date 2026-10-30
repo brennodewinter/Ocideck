@@ -8,6 +8,7 @@ import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/services/disk_traces.dart';
 import 'package:ocideck/services/git/outbox.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -253,7 +254,9 @@ void main() {
       ..writeAsStringSync('gestart\n');
 
     expect(await traces.clearLogs(), 3);
-    expect(logs.listSync().map((e) => e.path), [marker.path]);
+    expect(logs.listSync().map((e) => p.normalize(e.path)), [
+      p.normalize(marker.path),
+    ]);
   });
 
   test('alles terugzetten wist elke werkkopie en de hele wachtrij', () async {
