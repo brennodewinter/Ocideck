@@ -1611,6 +1611,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Slovo „{woord}“ stojí dvakrát za sebou.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Tento riadok obsahuje {aantal} slov; zvážte jeho rozdelenie.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Pred zverejnením nahraďte dočasný ukážkový text.',
   'Diagnose': 'Diagnostika',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck vedie na tomto počítači denník chýb, zamrznutí a spúšťania. Neobsahuje žiadny obsah prezentácií ani dokumentov a názvy súborov sú nerozpoznateľné. Denník nikdy sám neopustí tento počítač: zdieľajte ho len vtedy, keď hlásite problém.',

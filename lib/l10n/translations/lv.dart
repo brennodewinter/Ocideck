@@ -1603,6 +1603,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Vārds „{woord}“ ir divreiz pēc kārtas.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Šajā rindā ir {aantal} vārdi; apsveriet tās sadalīšanu.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Pirms publicēšanas aizstājiet pagaidu parauga tekstu.',
   'Diagnose': 'Diagnostika',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck šajā datorā glabā žurnālu par kļūdām, sastingšanu un palaišanu. Tajā nav prezentāciju vai dokumentu satura, un failu nosaukumi ir padarīti neatpazīstami. Žurnāls nekad pats neatstāj šo datoru: kopīgojiet to tikai tad, kad ziņojat par problēmu.',

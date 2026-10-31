@@ -19,12 +19,25 @@ import '../utils/log.dart';
 /// Alles in Dart, bewust: dezelfde code toetst op macOS (unix-sockets werken
 /// daar identiek) terwijl hij alleen op Linux aanstaat.
 class SingleInstanceGuard {
-  SingleInstanceGuard({String? socketPath})
-    : socketPath = socketPath ?? defaultSocketPath();
+  SingleInstanceGuard({
+    String? socketPath,
+    this.replyTimeout = const Duration(seconds: 2),
+  }) : socketPath = socketPath ?? defaultSocketPath();
 
   final String socketPath;
+
+  /// Hoe lang een tweede starter op `ok` van de primaire wacht. Langer dan
+  /// dit is een hangende primaire, geen geslaagde overdracht (#2679).
+  final Duration replyTimeout;
+
   ServerSocket? _server;
   void Function(List<String> paths)? _onFiles;
+  void Function()? _onActivate;
+  bool _activatePending = false;
+
+  /// De verbinding kwam tot stand, maar de primaire stuurde geen `ok`.
+  /// De aanroeper mag dan niet doen alsof de overdracht slaagde.
+  bool primaryDidNotAnswer = false;
 
   /// Paden die aankwamen terwijl de UI-handler er nog niet was: de socket
   /// bindt vroeg in `main()`, de shell hangt haar opener pas ná de eerste
@@ -41,6 +54,25 @@ class SingleInstanceGuard {
     handler(drained);
   }
 
+  /// Een tweede start zonder pad — menu, dock, `.desktop` — moet het
+  /// bestaande venster naar voren halen. De handler komt pas met de shell;
+  /// een bericht in die kloof blijft één keer liggen.
+  set onActivate(void Function() handler) {
+    _onActivate = handler;
+    if (!_activatePending) return;
+    _activatePending = false;
+    handler();
+  }
+
+  void _requestActivate() {
+    final handler = _onActivate;
+    if (handler == null) {
+      _activatePending = true;
+      return;
+    }
+    handler();
+  }
+
   /// De socket waarop de primaire luistert. `$XDG_RUNTIME_DIR` is per
   /// gebruiker en op tmpfs — precies de grens die de mutex op Windows ook
   /// hanteert. Valt die weg (sommige servers/ssh zonder logind), dan
@@ -54,15 +86,18 @@ class SingleInstanceGuard {
     return p.join(Directory.systemTemp.path, 'ocideck-$user.sock');
   }
 
-  /// `true` wanneer een primaire leefde en de paden is overgedragen — de
-  /// aanroeper stopt dan zonder `runApp`. `false` = geen primaire gevonden.
+  /// `true` alleen als de primaire `ok` terugstuurde. Een lege [paths] is
+  /// een echte start zonder bestand: de primaire haalt dan alleen het
+  /// venster naar voren. Geen antwoord binnen [replyTimeout] is een
+  /// hangende primaire — dan `false`, zodat deze start niet stil verdwijnt.
   Future<bool> forwardToPrimary(List<String> paths) async {
+    primaryDidNotAnswer = false;
     final Socket socket;
     try {
       socket = await Socket.connect(
         InternetAddress(socketPath, type: InternetAddressType.unix),
         0,
-        timeout: const Duration(seconds: 2),
+        timeout: replyTimeout,
       );
     } catch (e) {
       // Connect geweigerd = het normale pad: geen primaire → deze starter
@@ -70,14 +105,33 @@ class SingleInstanceGuard {
       return false;
     }
     try {
-      socket.add(utf8.encode(paths.where(looksLikeDeckLaunchArg).join('\n')));
+      // Eerste regel is het aantal paden. De primaire weet dan wanneer het
+      // bericht af is en kan `ok` terugsturen zonder dat wij de socket
+      // eerst sluiten — die heeft geen halve sluiting.
+      final lines = paths.where(looksLikeDeckLaunchArg).toList();
+      final payload = StringBuffer('${lines.length}\n');
+      for (final line in lines) {
+        payload.writeln(line);
+      }
+      socket.write(payload.toString());
       await socket.flush();
+      final reply = await utf8.decoder
+          .bind(socket)
+          .join()
+          .timeout(replyTimeout);
+      final ok = reply.contains('ok');
+      if (!ok) primaryDidNotAnswer = true;
+      return ok;
+    } on TimeoutException {
+      primaryDidNotAnswer = true;
+      return false;
     } catch (e) {
+      primaryDidNotAnswer = true;
       logWarning('SingleInstanceGuard: paden doorsturen mislukt', e);
+      return false;
     } finally {
-      await socket.close();
+      socket.destroy();
     }
-    return true;
   }
 
   /// Word de primaire: bind de socket en dien inkomende paden aan [onFiles]
@@ -102,17 +156,25 @@ class SingleInstanceGuard {
       return;
     }
     _server!.listen((connection) async {
-      final body = await utf8.decoder.bind(connection).join();
-      final paths = [
-        for (final line in body.split('\n'))
-          if (looksLikeDeckLaunchArg(line.trim())) line.trim(),
-      ];
-      if (paths.isEmpty) return;
-      final handler = _onFiles;
-      if (handler == null) {
-        _pending.addAll(paths);
-      } else {
-        handler(paths);
+      try {
+        final paths = await _readFramedPaths(connection);
+        // Elk bericht, ook een leeg, haalt het venster naar voren. Een
+        // tweede start zonder bestand deed hiervoor niets zichtbaars.
+        _requestActivate();
+        if (paths.isNotEmpty) {
+          final handler = _onFiles;
+          if (handler == null) {
+            _pending.addAll(paths);
+          } else {
+            handler(paths);
+          }
+        }
+        connection.write('ok\n');
+        await connection.flush();
+      } catch (e) {
+        logWarning('SingleInstanceGuard: bericht van tweede starter', e);
+      } finally {
+        await connection.close();
       }
     });
   }
@@ -145,3 +207,30 @@ class SingleInstanceGuard {
 /// op web, op niet-Linux, en in de beamer- en tweede-starter-paden — alleen de
 /// primaire van de hoofdapp leeft hier.
 SingleInstanceGuard? activeSingleInstance;
+
+/// Leest één geframed bericht: `aantal\n` en daarna precies zoveel regels.
+Future<List<String>> _readFramedPaths(Socket connection) async {
+  final buffer = StringBuffer();
+  final incoming = utf8.decoder.bind(connection);
+  await for (final chunk in incoming) {
+    buffer.write(chunk);
+    final parsed = _framedPaths(buffer.toString());
+    if (parsed != null) return parsed;
+  }
+  return _framedPaths(buffer.toString()) ?? const [];
+}
+
+/// `null` zolang de kop of de beloofde regels er nog niet zijn.
+List<String>? _framedPaths(String text) {
+  final nl = text.indexOf('\n');
+  if (nl < 0) return null;
+  final count = int.tryParse(text.substring(0, nl));
+  if (count == null || count < 0) return null;
+  if (count == 0) return const [];
+  final lines = text.substring(nl + 1).split('\n');
+  if (lines.length < count + 1) return null;
+  return [
+    for (final line in lines.take(count))
+      if (looksLikeDeckLaunchArg(line.trim())) line.trim(),
+  ];
+}

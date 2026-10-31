@@ -675,7 +675,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   final List<int> _jumpHistory = [];
   late FocusNode _focusNode;
   Timer? _advanceTimer;
-  Timer? _clockTimer;
   Timer? _fullscreenGuard;
 
   /// Voortgang 0..1 voor de balk onder de huidige dia. Een tik verandert
@@ -949,16 +948,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         return null;
       });
     }
-    // Tik elke seconde, maar herbouw alleen in presenter view (klok/teller).
-    _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (!mounted) return;
-      if (_presenterView || widget.presentationTiming.enabled) setState(() {});
-      if (_userNotesMode) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) _userNotesFocusNode.requestFocus();
-        });
-      }
-    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
       _loadDisplays();
@@ -993,7 +982,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _advanceTimer?.cancel();
     _progress.dispose();
     _timedSession.dispose();
-    _clockTimer?.cancel();
     _fullscreenGuard?.cancel();
     _typedTimer?.cancel();
     _fixFlashTimer?.cancel();

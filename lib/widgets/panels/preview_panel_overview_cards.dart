@@ -262,11 +262,18 @@ class _OverviewSlideCard extends StatelessWidget {
                 ),
               ),
             Expanded(
-              child: Text(
-                '${index + 1}. $title',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.w600),
+              // De titel hoort bij de kaartklik. Het vinkvak en de sleepgreep
+              // ernaast niet: een pointer-down daar is een eigen gebaar, en
+              // een selectie op dat moment zou een blok tot één dia
+              // inkrimpen vóór het vinkvak of de sleep eraan toe komt.
+              child: Listener(
+                onPointerDown: (_) => onSelect(),
+                child: Text(
+                  '${index + 1}. $title',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
               ),
             ),
             if (!readOnly)
@@ -353,7 +360,6 @@ class _OverviewSlideCard extends StatelessWidget {
           customSemanticsActions: readOnly ? const {} : _semanticActions(l10n),
           onTap: onSelect,
           child: GestureDetector(
-            onTap: onSelect,
             onDoubleTap: onOpen,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 120),
@@ -377,40 +383,46 @@ class _OverviewSlideCard extends StatelessWidget {
                   Column(
                     children: [
                       Expanded(
-                        child: ExcludeSemantics(
-                          child: RepaintBoundary(
-                            child: SlidePreviewWidget(
-                              slideAspect: slideAspectRatio(deck.slideSize),
-                              slide: slide,
-                              projectPath: deck.projectPath,
-                              themeProfile: deck.themeProfile,
-                              deckMarpStyle: deck.marpStyle,
-                              cockpitColorScheme: settings.cockpitColorScheme,
-                              allowRemoteMedia: settings.allowRemoteMedia,
-                              slideNumber: index + 1,
-                              slideCount: deck.slides.length,
-                              fitScaleOverride: sharedSplitFitScale(
-                                deck.slides,
-                                index,
-                                deck.themeProfile,
-                                deck.themeProfile.fontFamily,
+                        // Zelfde reden als bij de titel: de voorvertoning
+                        // selecteert meteen, het vinkvak en de greep in de
+                        // voettekst blijven hun eigen gebaar.
+                        child: Listener(
+                          onPointerDown: (_) => onSelect(),
+                          child: ExcludeSemantics(
+                            child: RepaintBoundary(
+                              child: SlidePreviewWidget(
                                 slideAspect: slideAspectRatio(deck.slideSize),
+                                slide: slide,
+                                projectPath: deck.projectPath,
+                                themeProfile: deck.themeProfile,
+                                deckMarpStyle: deck.marpStyle,
+                                cockpitColorScheme: settings.cockpitColorScheme,
+                                allowRemoteMedia: settings.allowRemoteMedia,
+                                slideNumber: index + 1,
+                                slideCount: deck.slides.length,
+                                fitScaleOverride: sharedSplitFitScale(
+                                  deck.slides,
+                                  index,
+                                  deck.themeProfile,
+                                  deck.themeProfile.fontFamily,
+                                  slideAspect: slideAspectRatio(deck.slideSize),
+                                ),
+                                splitRunPosition: splitRunPositionFor(
+                                  deck.slides,
+                                  index,
+                                ),
+                                numberStart: numberStart,
+                                scopeCia: scopeCia,
+                                reportLanguage: deck.language,
+                                improvementY01: deck.improvementY01Metric,
+                                tlp: deck.tlp,
+                                organization: deck.organization,
+                                deckSignature: deck.signature,
+                                sealedAt: deck.finalized ? deck.sealAt : '',
+                                showClassificationWatermark:
+                                    settings.classificationWatermarkEnabled,
+                                decodeMaxEdge: 512,
                               ),
-                              splitRunPosition: splitRunPositionFor(
-                                deck.slides,
-                                index,
-                              ),
-                              numberStart: numberStart,
-                              scopeCia: scopeCia,
-                              reportLanguage: deck.language,
-                              improvementY01: deck.improvementY01Metric,
-                              tlp: deck.tlp,
-                              organization: deck.organization,
-                              deckSignature: deck.signature,
-                              sealedAt: deck.finalized ? deck.sealAt : '',
-                              showClassificationWatermark:
-                                  settings.classificationWatermarkEnabled,
-                              decodeMaxEdge: 512,
                             ),
                           ),
                         ),

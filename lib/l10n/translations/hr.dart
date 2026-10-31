@@ -1609,6 +1609,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Riječ „{woord}“ stoji dvaput zaredom.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Ovaj redak sadrži {aantal} riječi; razmislite o dijeljenju.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Prije objave zamijenite privremeni ogledni tekst.',
   'Diagnose': 'Dijagnostika',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck na ovom računalu vodi zapisnik o pogreškama, zastojima i pokretanju. U njemu nema sadržaja prezentacija ni dokumenata, a nazivi datoteka učinjeni su neprepoznatljivima. Zapisnik nikada sam ne napušta ovo računalo: podijelite ga samo kada prijavljujete problem.',

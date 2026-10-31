@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cstdio>
 #include <cwchar>
 #include <string>
 #include <vector>
@@ -59,24 +60,63 @@ bool LooksLikeDeckFile(const std::string& arg) {
   return ext == ".md" || ext == ".ocideck" || ext == ".zip";
 }
 
-// Stuurt de te openen bestanden van een tweede starter naar het primaire
-// venster via WM_COPYDATA ('\n'-gescheiden UTF-8 — '\n' kan niet in een
-// Windows-bestandsnaam voorkomen).
-void SendLaunchArgsTo(HWND primary, const std::vector<std::string>& args) {
+// Stuurt de te openen bestanden naar het primaire venster en haalt het naar
+// voren. `true` alleen als het venster binnen twee seconden antwoordt.
+// SendMessage zonder time-out hing de tweede starter onzichtbaar vast als de
+// UI-thread van de primaire bezet was (#2679).
+bool HandoffToPrimary(HWND primary, const std::vector<std::string>& args) {
   std::string payload;
   for (const auto& arg : args) {
     if (!LooksLikeDeckFile(arg)) continue;
     if (!payload.empty()) payload.push_back('\n');
     payload += arg;
   }
-  if (payload.empty()) return;
   COPYDATASTRUCT data{};
-  data.dwData = kOpenFilesCopyDataId;
-  data.cbData = static_cast<DWORD>(payload.size());
-  data.lpData = const_cast<char*>(payload.data());
-  // SendMessage, nooit PostMessage: WM_COPYDATA vereist dat de verzender de
-  // buffer vasthoudt tot de ontvanger klaar is.
-  ::SendMessageW(primary, WM_COPYDATA, 0, reinterpret_cast<LPARAM>(&data));
+  LPARAM lparam = 0;
+  UINT message = WM_NULL;
+  if (!payload.empty()) {
+    data.dwData = kOpenFilesCopyDataId;
+    data.cbData = static_cast<DWORD>(payload.size());
+    data.lpData = const_cast<char*>(payload.data());
+    lparam = reinterpret_cast<LPARAM>(&data);
+    message = WM_COPYDATA;
+  }
+  DWORD_PTR result = 0;
+  // De buffer van WM_COPYDATA moet blijven bestaan tot deze aanroep terug is.
+  // De time-out dekt dat: bij een hangende ontvanger keren we terug zonder
+  // dat de tweede starter zelf blijft hangen.
+  const LRESULT sent = ::SendMessageTimeoutW(
+      primary, message, 0, lparam, SMTO_ABORTIFHUNG | SMTO_BLOCK, 2000,
+      &result);
+  if (sent == 0) return false;
+  DWORD pid = 0;
+  ::GetWindowThreadProcessId(primary, &pid);
+  if (pid != 0) ::AllowSetForegroundWindow(pid);
+  ::ShowWindow(primary, SW_RESTORE);
+  ::SetForegroundWindow(primary);
+  return true;
+}
+
+// Het primaire venster bestaat pas ná Create. Tijdens opstarten of
+// afsluiten is de mutex er al wel, en een tweede starter zou anders stil
+// stoppen (#2679).
+HWND PollPrimaryWindow() {
+  for (int attempt = 0; attempt < 10; ++attempt) {
+    if (HWND found = FindPrimaryInstanceWindow()) return found;
+    ::Sleep(300);
+  }
+  return nullptr;
+}
+
+// Opnieuw proberen wacht nog een ronde. Annuleren stopt deze starter;
+// stil EXIT_SUCCESS zonder venster of melding is precies de klacht.
+bool UserWantsRetry(const wchar_t* why) {
+  std::fwprintf(stderr, L"ocideck: tweede start: %s\n", why);
+  std::fflush(stderr);
+  const int answer = ::MessageBoxW(
+      nullptr, L"OciDeck is nog bezig met opstarten of afsluiten.", L"OciDeck",
+      MB_RETRYCANCEL | MB_ICONINFORMATION | MB_SETFOREGROUND);
+  return answer == IDRETRY;
 }
 
 }  // namespace
@@ -105,13 +145,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
         ::CreateMutexW(nullptr, TRUE, kSingleInstanceMutexName);
     if (single_instance_mutex != nullptr &&
         ::GetLastError() == ERROR_ALREADY_EXISTS) {
-      if (HWND primary = FindPrimaryInstanceWindow()) {
-        SendLaunchArgsTo(primary, command_line_arguments);
-        DWORD pid = 0;
-        ::GetWindowThreadProcessId(primary, &pid);
-        if (pid != 0) ::AllowSetForegroundWindow(pid);
-        ::ShowWindow(primary, SW_RESTORE);
-        ::SetForegroundWindow(primary);
+      for (;;) {
+        HWND primary = PollPrimaryWindow();
+        if (primary != nullptr &&
+            HandoffToPrimary(primary, command_line_arguments)) {
+          break;
+        }
+        const wchar_t* why = primary == nullptr
+                                 ? L"geen primair venster na het wachten"
+                                 : L"het primaire venster antwoordde niet";
+        if (!UserWantsRetry(why)) break;
       }
       ::CloseHandle(single_instance_mutex);
       return EXIT_SUCCESS;

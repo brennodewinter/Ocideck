@@ -1617,6 +1617,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Słowo „{woord}” występuje dwa razy z rzędu.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Ten wiersz zawiera {aantal} słów; rozważ jego podział.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Zastąp tymczasowy tekst przykładowy przed publikacją.',
   'Diagnose': 'Diagnostyka',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck prowadzi na tym komputerze dziennik błędów, zawieszeń i uruchamiania. Nie zawiera on treści prezentacji ani dokumentów, a nazwy plików są nierozpoznawalne. Dziennik nigdy sam nie opuszcza tego komputera: udostępnij go tylko wtedy, gdy zgłaszasz problem.',

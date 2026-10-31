@@ -234,6 +234,7 @@ extension _PresenterViews on _FullscreenPresenterState {
   // ── Presenter view (slide + volgende + notities + tijd) ──────────────────
 
   Widget _buildPresenterView(BuildContext context) {
+    debugPresenterViewBuilds++;
     final l10n = context.l10n;
     final total = widget.slides.length;
     final slide = widget.slides[_index.clamp(0, total - 1)];

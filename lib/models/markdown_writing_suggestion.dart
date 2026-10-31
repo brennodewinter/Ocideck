@@ -3,19 +3,26 @@ enum MarkdownWritingSuggestionKind { repeatedWord, longSentence, placeholder }
 class MarkdownWritingSuggestion {
   final MarkdownWritingSuggestionKind kind;
   final int line;
-  final String message;
+
+  /// Waarden voor de vertaalde melding, bijvoorbeeld `woord` of `aantal`.
+  final Map<String, String> args;
 
   const MarkdownWritingSuggestion({
     required this.kind,
     required this.line,
-    required this.message,
+    this.args = const {},
   });
 }
+
+/// Hoe vaak [inspectMarkdownWriting] liep. Tests lezen dit om te zien dat een
+/// toetsaanslag de scan niet meteen start (#2681).
+int debugMarkdownWritingInspectionCount = 0;
 
 /// Fast, language-independent checks that can run on every source edit. This is
 /// intentionally not a grammar oracle: it reports objective editing smells and
 /// leaves spelling/grammar to a language-specific provider later.
 List<MarkdownWritingSuggestion> inspectMarkdownWriting(String markdown) {
+  debugMarkdownWritingInspectionCount++;
   final suggestions = <MarkdownWritingSuggestion>[];
   final lines = markdown.split('\n');
   var fenced = false;
@@ -41,8 +48,7 @@ List<MarkdownWritingSuggestion> inspectMarkdownWriting(String markdown) {
           MarkdownWritingSuggestion(
             kind: MarkdownWritingSuggestionKind.repeatedWord,
             line: index + 1,
-            message:
-                'Het woord “${words[word]}” staat twee keer achter elkaar.',
+            args: {'woord': words[word]},
           ),
         );
         break;
@@ -53,8 +59,7 @@ List<MarkdownWritingSuggestion> inspectMarkdownWriting(String markdown) {
         MarkdownWritingSuggestion(
           kind: MarkdownWritingSuggestionKind.longSentence,
           line: index + 1,
-          message:
-              'Deze regel bevat ${words.length} woorden; overweeg hem op te splitsen.',
+          args: {'aantal': '${words.length}'},
         ),
       );
     }
@@ -65,8 +70,6 @@ List<MarkdownWritingSuggestion> inspectMarkdownWriting(String markdown) {
         MarkdownWritingSuggestion(
           kind: MarkdownWritingSuggestionKind.placeholder,
           line: index + 1,
-          message:
-              'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.',
         ),
       );
     }

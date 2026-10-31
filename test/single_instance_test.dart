@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -76,6 +77,54 @@ void main() {
     await Future<void>.delayed(const Duration(milliseconds: 50));
     expect(received, hasLength(1));
   });
+
+  test('een lege start activeert de primaire (#2679)', () async {
+    await guard.becomePrimary();
+    var activated = 0;
+    guard.onActivate = () => activated++;
+    final received = <List<String>>[];
+    guard.onFiles = received.add;
+
+    final second = SingleInstanceGuard(socketPath: socketPath);
+    expect(await second.forwardToPrimary(const []), isTrue);
+    expect(activated, 1);
+    expect(received, isEmpty);
+  });
+
+  test('activatie vóór de handler blijft één keer liggen (#2679)', () async {
+    await guard.becomePrimary();
+    final second = SingleInstanceGuard(socketPath: socketPath);
+    expect(await second.forwardToPrimary(const []), isTrue);
+
+    var activated = 0;
+    guard.onActivate = () => activated++;
+    expect(activated, 1);
+  });
+
+  test(
+    'een primaire die niet antwoordt geeft binnen de time-out false (#2679)',
+    () async {
+      // De Windows-spiegel (poll, time-out, dialoog) staat in
+      // windows/runner/main.cpp en draait niet onder flutter test.
+      final server = await ServerSocket.bind(
+        InternetAddress(socketPath, type: InternetAddressType.unix),
+        0,
+      );
+      addTearDown(server.close);
+      server.listen((connection) async {
+        await utf8.decoder.bind(connection).join();
+      });
+
+      final second = SingleInstanceGuard(
+        socketPath: socketPath,
+        replyTimeout: const Duration(milliseconds: 200),
+      );
+      final watch = Stopwatch()..start();
+      expect(await second.forwardToPrimary(const []), isFalse);
+      expect(second.primaryDidNotAnswer, isTrue);
+      expect(watch.elapsed, lessThan(const Duration(seconds: 2)));
+    },
+  );
 
   test('forwardToPrimary is false zonder luisteraar', () async {
     final second = SingleInstanceGuard(socketPath: socketPath);

@@ -1635,6 +1635,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Tá an focal “{woord}” faoi dhó as a chéile.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Tá {aantal} focal sa líne seo; smaoinigh ar í a roinnt.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Cuir téacs sealadach an tsampla in ionad sula bhfoilsíonn tú.',
   'Diagnose': 'Diagnóisic',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'Coinníonn OciDeck logchomhad ar an ríomhaire seo d’earráidí, de reonna agus den tosú. Níl aon ábhar ó chur i láthair ná ó dhoiciméid ann, agus déantar ainmneacha comhad do-aitheanta. Ní fhágann an logchomhad an ríomhaire seo riamh as a stuaim féin: ná roinn é ach amháin nuair a thuairiscíonn tú fadhb.',

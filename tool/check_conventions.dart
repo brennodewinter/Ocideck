@@ -982,7 +982,7 @@ List<String> _filePickerPathViolations() {
 /// `lib/utils/atomic_file.dart`, bewust synchroon voor aanroepers die niet
 /// kunnen wachten — hun afweging staat daar gedocumenteerd.
 final _syncIoCall = RegExp(
-  r'\.(existsSync|statSync'
+  r'\.(existsSync|statSync|typeSync|isDirectorySync|isFileSync|isLinkSync'
   r'|readAsBytesSync|readAsStringSync|readAsLinesSync'
   r'|writeAsBytesSync|writeAsStringSync'
   r'|listSync|deleteSync|createSync|createTempSync|renameSync|copySync'
@@ -1024,10 +1024,17 @@ Map<String, List<int>> syncIoCallsIn(Map<String, String> sources) {
   return perFile;
 }
 
-/// De sync-scans in `lib/widgets/` en `lib/state/` tegen de basislijn.
+/// De sync-scans in `lib/widgets/`, `lib/state/` en de kwaliteitscontrole
+/// tegen de basislijn. De kwaliteitsronde loopt op de UI-isolate bij het
+/// typen (#2685); `lib/services/slide_quality/` telt daarom mee. De huidige
+/// stand is de basislijn: nul aanroepen, dus een nieuwe `*Sync` daar valt.
 _DelayScan _syncIoInUi() {
   final sources = <String, String>{};
-  for (final dir in ['lib/widgets', 'lib/state']) {
+  for (final dir in [
+    'lib/widgets',
+    'lib/state',
+    'lib/services/slide_quality',
+  ]) {
     for (final file in _dartFiles(Directory(dir))) {
       final path = file.path.replaceAll(r'\', '/');
       sources[path] = file.readAsStringSync();

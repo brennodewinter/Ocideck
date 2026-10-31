@@ -7,12 +7,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/utils/project_path.dart';
+import 'package:ocideck/utils/sanitize_svg.dart';
 import 'package:ocideck/widgets/safe_svg_image.dart';
 import 'package:path/path.dart' as p;
 
 import 'support/pump_until.dart';
 
 void main() {
+  setUp(debugResetSvgCache);
+
   testWidgets('tekent een opgeschoonde SVG als vectorbeeld', (tester) async {
     final bytes = Uint8List.fromList(
       '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>'.codeUnits,
@@ -106,4 +109,81 @@ void main() {
     expect(find.byType(SvgPicture), findsNothing);
     expect(find.text('buiten'), findsOneWidget);
   });
+
+  testWidgets('hetzelfde bestand wordt maar één keer opgeschoond (#2682)', (
+    tester,
+  ) async {
+    debugResetSvgCache();
+    final tmp = Directory.systemTemp.createTempSync('ocideck_svg_cache');
+    addTearDown(() => tmp.deleteSync(recursive: true));
+    final file = File(p.join(tmp.path, 'teken.svg'))
+      ..writeAsStringSync(
+        '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>',
+      );
+
+    Widget image() => SafeSvgImage.file(
+      file.path,
+      width: 40,
+      height: 40,
+      errorBuilder: (_) => const Text('kapot'),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(home: Column(children: [image(), image()])),
+    );
+    await pumpUntil(
+      tester,
+      () => find.byType(SvgPicture).evaluate().length == 2,
+    );
+
+    expect(debugImportedSvgSanitizeCount, 1);
+  });
+
+  testWidgets(
+    'wisselen van dia met dezelfde SVG toont geen leeg vlak (#2682)',
+    (tester) async {
+      debugResetSvgCache();
+      final tmp = Directory.systemTemp.createTempSync('ocideck_svg_switch');
+      addTearDown(() => tmp.deleteSync(recursive: true));
+      final file = File(p.join(tmp.path, 'teken.svg'))
+        ..writeAsStringSync(
+          '<svg viewBox="0 0 10 10"><rect width="10" height="10"/></svg>',
+        );
+      var slide = 0;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: StatefulBuilder(
+            builder: (context, setState) => Column(
+              children: [
+                TextButton(
+                  onPressed: () => setState(() => slide += 1),
+                  child: const Text('volgende'),
+                ),
+                KeyedSubtree(
+                  key: ValueKey(slide),
+                  child: SafeSvgImage.file(
+                    file.path,
+                    width: 40,
+                    height: 40,
+                    errorBuilder: (_) => const Text('kapot'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      await pumpUntil(
+        tester,
+        () => find.byType(SvgPicture).evaluate().isNotEmpty,
+      );
+
+      await tester.tap(find.text('volgende'));
+      await tester.pump();
+
+      expect(find.byType(SvgPicture), findsOneWidget);
+      expect(find.text('kapot'), findsNothing);
+    },
+  );
 }

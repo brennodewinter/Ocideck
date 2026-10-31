@@ -1605,6 +1605,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Ordet „{woord}“ står to gange i træk.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Denne linje indeholder {aantal} ord; overvej at dele den.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Erstat den midlertidige eksempeltekst, før du udgiver.',
   'Diagnose': 'Diagnosticering',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck fører en log på denne computer over fejl, frysninger og opstart. Den indeholder intet indhold fra præsentationer eller dokumenter, og filnavne er gjort ukendelige. Loggen forlader aldrig denne computer af sig selv: del den kun, når du rapporterer et problem.',

@@ -8,7 +8,6 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
-import 'package:ocideck/models/markdown_writing_suggestion.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:path/path.dart' as p;
 
@@ -472,19 +471,17 @@ void main() {
 
     test('werk per toetsaanslag schaalt lineair met de documentgrootte', () {
       // Wat `_onDocumentChanged` in de deck-editor per toetsaanslag doet: het
-      // bronmodel herparsen en de schrijfstijlinspectie draaien. De validatie
-      // en compat-check zijn gedebounced en tellen hier niet mee — zie
-      // markdown_editor_field_test.
+      // bronmodel herparsen. De schrijftips, de validatie en de compat-check
+      // zijn gedebounced en tellen hier niet mee (#2681).
       String bron(int paginas) => List.generate(
         paginas,
         (i) => '# Deel $i\n\n- punt $i-a\n- punt $i-b',
       ).join('\n\n---\n\n');
 
       void toetsaanslag(String source, MarkdownSourceDocument doc) {
-        // Eén toetsaanslag = tekst gewijzigd → reparse + inspectie, zoals
-        // `_onDocumentChanged` dat doet.
-        final next = doc.reparse('$source x');
-        inspectMarkdownWriting(next.source);
+        // Eén toetsaanslag = tekst gewijzigd → reparse, zoals
+        // `_onDocumentChanged` dat nu doet.
+        doc.reparse('$source x');
       }
 
       final bron75 = bron(75);

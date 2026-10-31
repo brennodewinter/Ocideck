@@ -651,6 +651,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'E palabra “{woord}” ta dos biaha tras di otro.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'E liña aki tin {aantal} palabra; konsiderá di dividí e.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Remplasá e teksto di ehempel temporal promé ku bo publiká.',
   'Diagnose': 'Diagnóstiko',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck ta warda riba e kompiuter aki un registro di eror, blokeo i di arankamentu. E no ta kontené ningun kontenido di presentashon òf dokumento, i nòmbernan di archivo ta hasí inrekonosibel. E registro nunka ta sali di e kompiuter aki di su mes: kompartié solamente ora bo ta reportá un problema.',

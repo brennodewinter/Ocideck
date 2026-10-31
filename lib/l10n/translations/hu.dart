@@ -1607,6 +1607,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'A „{woord}” szó kétszer áll egymás után.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Ez a sor {aantal} szót tartalmaz; érdemes lehet felosztani.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'A közzététel előtt cseréld le az ideiglenes mintaszöveget.',
   'Diagnose': 'Diagnosztika',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'Az OciDeck ezen a számítógépen naplót vezet a hibákról, lefagyásokról és az indításról. Nem tartalmaz bemutatókból vagy dokumentumokból származó tartalmat, a fájlnevek pedig felismerhetetlenné vannak téve. A napló soha nem hagyja el magától ezt a számítógépet: csak akkor ossza meg, ha problémát jelent.',

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter/services.dart';
+import '../platform/native_window.dart' show focusPrimaryWindow;
 import '../utils/log.dart';
 import 'single_instance.dart';
 
@@ -125,6 +126,12 @@ class OpenFileChannel {
     // Linux: geen hostkanaal maar de enkel-exemplaar-socket uit main() (#2656)
     // — dezelfde onOpenFiles-route als WM_COPYDATA op Windows.
     if (!kIsWeb && Platform.isLinux) {
+      // Elk bericht van een tweede starter, ook zonder pad, haalt dit
+      // venster naar voren. Zonder dat deed een start via het menu niets
+      // zichtbaars zolang de eerste app al draaide (#2679).
+      activeSingleInstance?.onActivate = () {
+        unawaited(focusPrimaryWindow());
+      };
       activeSingleInstance?.onFiles = (paths) {
         unawaited(onOpenFiles(paths));
       };

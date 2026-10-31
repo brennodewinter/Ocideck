@@ -166,9 +166,7 @@ void _checkCalloutClip(
   if (isBundledAssetPath(slide.imagePath)) return; // asset: — niet op schijf
   if (WebAssetStore.isMemPath(slide.imagePath)) return; // mem: — in-memory
 
-  final resolved = resolveContainedRealPath(slide.imagePath, projectPath);
-  if (resolved == null) return;
-  final dims = readImageDimensions(resolved);
+  final dims = _calloutImageSize(slide.imagePath, projectPath);
   if (dims == null) {
     return; // niet-leesbaar of onbekend formaat → geen valse positief
   }
@@ -216,6 +214,15 @@ void _checkCalloutClip(
       }
     }
   }
+}
+
+/// Beeldmaat voor de clip-check. De kop wordt per pad gecachet in
+/// [readImageDimensions], zodat een toetsaanslag in de bullets het bestand
+/// niet opnieuw opent (#2685).
+ImageDimensions? _calloutImageSize(String imagePath, String projectPath) {
+  final resolved = resolveContainedRealPath(imagePath, projectPath);
+  if (resolved == null) return null;
+  return readImageDimensions(resolved);
 }
 
 /// Herkent een `(A)`-calloutmarkering in slidetekst. Eén hoofdletter tussen

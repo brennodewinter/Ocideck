@@ -1605,6 +1605,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Sana ”{woord}” esiintyy kahdesti peräkkäin.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Tällä rivillä on {aantal} sanaa; harkitse sen jakamista.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Korvaa väliaikainen esimerkkiteksti ennen julkaisua.',
   'Diagnose': 'Diagnostiikka',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck pitää tällä tietokoneella lokia virheistä, jumittumisista ja käynnistyksestä. Se ei sisällä esitysten tai asiakirjojen sisältöä, ja tiedostonimet on tehty tunnistamattomiksi. Loki ei koskaan poistu tältä tietokoneelta itsestään: jaa se vain, kun ilmoitat ongelmasta.',

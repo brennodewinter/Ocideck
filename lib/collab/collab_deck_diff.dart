@@ -43,6 +43,9 @@ List<DeckOp> deckDiffToOps(
   for (final slide in after.slides) {
     final old = beforeById[slide.id];
     if (old == null) continue; // a new slide — carried whole by InsertSlide
+    // Ongewijzigd object: de veldlus (109 velden) slaan we over. Een
+    // toetsaanslag raakt één dia; de rest is hetzelfde exemplaar (#2680).
+    if (identical(old, slide)) continue;
     for (final field in SlideField.values) {
       final now = slideFieldValue(slide, field);
       if (!_valuesEqual(slideFieldValue(old, field), now)) {
@@ -129,6 +132,9 @@ List<DeckOp> _reorderOps(
   }
   return ops;
 }
+
+/// Zelfde vergelijking als de diff: lijsten op inhoud, de rest met `==`.
+bool collabValuesEqual(Object? a, Object? b) => _valuesEqual(a, b);
 
 bool _valuesEqual(Object? a, Object? b) {
   if (a is List && b is List) {

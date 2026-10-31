@@ -1623,6 +1623,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Il-kelma “{woord}” tidher darbtejn wara xulxin.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Din il-linja fiha {aantal} kelmiet; ikkunsidra taqsamha.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Ibdel it-test temporanju tal-eżempju qabel tippubblika.',
   'Diagnose': 'Dijanjostika',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck iżomm log fuq dan il-kompjuter ta’ żbalji, waqfiet u tal-bidu. Ma fih l-ebda kontenut minn preżentazzjonijiet jew dokumenti, u l-ismijiet tal-fajls isiru mhux rikonoxxibbli. Il-log qatt ma jitlaq minn dan il-kompjuter waħdu: aqsmu biss meta tirrapporta problema.',

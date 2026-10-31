@@ -257,7 +257,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     }
     _observedText = _ctrl.text;
     _sourceDocument = _sourceDocument.reparse(_ctrl.text);
-    _writingSuggestions = inspectMarkdownWriting(_ctrl.text);
+    // De schrijftips scannen de hele bron. Dat hoort niet in de toetsaanslag:
+    // dezelfde timer als de validatie doet het 350 ms later (#2681).
     widget.onDraftChanged?.call(_ctrl.text);
     _reportActiveSourceSlide();
     _validation = null;
@@ -283,9 +284,11 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     _validationTimer = Timer(const Duration(milliseconds: 350), () {
       if (!mounted) return;
       final result = _validator.validate(_ctrl.text);
+      final suggestions = inspectMarkdownWriting(_ctrl.text);
       setState(() {
         _validation = result;
         _lastValidation = result;
+        _writingSuggestions = suggestions;
         if (_marpCompatEnabled) _lastCompat = _computeCompat();
         _validationPending = false;
       });
@@ -592,6 +595,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   }
 
   Future<void> _showWritingSuggestions() async {
+    // De lijst in de balk mag 350 ms achterlopen. De dialoog zelf toont wat
+    // er nú staat, niet het beeld van de vorige aanslag.
+    final fresh = inspectMarkdownWriting(_ctrl.text);
+    if (mounted) setState(() => _writingSuggestions = fresh);
     await showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -607,7 +614,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               return ListTile(
                 dense: true,
                 leading: const Icon(Icons.tips_and_updates_outlined, size: 18),
-                title: Text(suggestion.message),
+                title: Text(_writingSuggestionLabel(ctx, suggestion)),
                 subtitle: Text('${ctx.l10n.d('Regel')} ${suggestion.line}'),
                 onTap: () {
                   Navigator.pop(ctx);
@@ -626,6 +633,29 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         ],
       ),
     );
+  }
+
+  String _writingSuggestionLabel(
+    BuildContext context,
+    MarkdownWritingSuggestion suggestion,
+  ) {
+    final l10n = context.l10n;
+    switch (suggestion.kind) {
+      case MarkdownWritingSuggestionKind.repeatedWord:
+        return l10n
+            .d('Het woord “{woord}” staat twee keer achter elkaar.')
+            .replaceAll('{woord}', suggestion.args['woord'] ?? '');
+      case MarkdownWritingSuggestionKind.longSentence:
+        return l10n
+            .d(
+              'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.',
+            )
+            .replaceAll('{aantal}', suggestion.args['aantal'] ?? '');
+      case MarkdownWritingSuggestionKind.placeholder:
+        return l10n.d(
+          'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.',
+        );
+    }
   }
 
   KeyEventResult _handleEscape(FocusNode node, KeyEvent event) {

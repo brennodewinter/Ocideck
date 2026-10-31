@@ -9,6 +9,7 @@ import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/services/slide_quality_analyzer.dart';
+import 'package:ocideck/utils/image_dimensions.dart';
 
 void main() {
   late Directory tmp;
@@ -202,6 +203,46 @@ void main() {
       isEmpty,
     );
   });
+
+  test(
+    'een tweede analyse met alleen andere bullets leest de beeldkop één keer (#2685)',
+    () {
+      debugResetImageDimensionCache();
+      final path = writeWidePng();
+      Slide slide(String bullet) =>
+          Slide.create(SlideType.bulletsImage).copyWith(
+            anchor: 'test',
+            bullets: [bullet],
+            imagePath: path,
+            callouts: const [
+              ImageCallout(
+                reference: 'A',
+                targets: [CalloutPoint(0.05, 0.5)],
+                description: 'links',
+              ),
+            ],
+          );
+      Deck deck(String bullet) =>
+          Deck(title: 'test', projectPath: tmp.path, slides: [slide(bullet)]);
+
+      final first = analyzer.analyze(deck('punt (A)'));
+      final second = analyzer.analyze(deck('ander punt (A)'));
+
+      expect(debugImageDimensionFileReads, 1);
+      expect(
+        second.issues.where(
+          (i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView,
+        ),
+        hasLength(
+          first.issues
+              .where(
+                (i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView,
+              )
+              .length,
+        ),
+      );
+    },
+  );
 }
 
 /// Bouw een minimale geldige PNG met de gegeven afmetingen.
