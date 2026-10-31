@@ -92,6 +92,14 @@ extension _PresenterNotes on _FullscreenPresenterState {
     }
   }
 
+  /// Tab naar Sluiten blijft staan. Alleen als de focus het paneel verlaat
+  /// halen we het notitieveld terug (#2683).
+  void _restoreNotesFocus(bool focused) {
+    if (!focused && _userNotesMode && mounted) {
+      _userNotesFocusNode.requestFocus();
+    }
+  }
+
   /// Lokaal paneel voor gebruikersnotities (ontvanger/cursist); nooit op beamer.
   Widget _buildUserNotesOverlay() {
     final l10n = context.l10n;
@@ -108,13 +116,7 @@ extension _PresenterNotes on _FullscreenPresenterState {
       bottom: 24,
       width: 360,
       child: Focus(
-        onFocusChange: (focused) {
-          // Alleen terughalen als de focus het paneel verlaat. Tab naar
-          // Sluiten blijft daar staan (#2683).
-          if (!focused && _userNotesMode && mounted) {
-            _userNotesFocusNode.requestFocus();
-          }
-        },
+        onFocusChange: _restoreNotesFocus,
         child: Material(
           color: Colors.transparent,
           child: Container(
