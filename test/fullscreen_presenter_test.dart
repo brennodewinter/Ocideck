@@ -1995,5 +1995,75 @@ void main() {
         findsNothing,
       );
     });
+
+    testWidgets('een kloktik herbouwt de dia niet (#2683)', (tester) async {
+      tester.view.physicalSize = const Size(1400, 900);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      debugPresenterViewBuilds = 0;
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: const [
+            ...GlobalMaterialLocalizations.delegates,
+            FlutterQuillLocalizations.delegate,
+          ],
+          home: FullscreenPresenter(
+            slides: [
+              Slide.create(
+                SlideType.bullets,
+              ).copyWith(title: 'Een', bullets: ['a']),
+            ],
+            projectPath: null,
+            themeProfile: const ThemeProfile(),
+            initialIndex: 0,
+            rehearsalMode: true,
+          ),
+        ),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      final built = debugPresenterViewBuilds;
+      expect(built, greaterThan(0));
+
+      await tester.pump(const Duration(seconds: 3));
+
+      expect(debugPresenterViewBuilds, built);
+    });
+
+    testWidgets(
+      'Tab naar Sluiten in de notities blijft daar na een kloktik (#2683)',
+      (tester) async {
+        tester.view.physicalSize = const Size(1400, 900);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        await tester.pumpWidget(
+          _host([
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Een', bullets: ['a']),
+          ]),
+        );
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+        await sendControlKey(tester, LogicalKeyboardKey.keyN);
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+
+        final close = find.byTooltip('Sluiten');
+        expect(close, findsOneWidget);
+        await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+        await tester.pump();
+
+        expect(Focus.of(tester.element(close)).hasFocus, isTrue);
+
+        await tester.pump(const Duration(seconds: 2));
+
+        expect(Focus.of(tester.element(close)).hasFocus, isTrue);
+      },
+    );
   });
 }

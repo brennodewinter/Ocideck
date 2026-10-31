@@ -107,124 +107,139 @@ extension _PresenterNotes on _FullscreenPresenterState {
       right: 24,
       bottom: 24,
       width: 360,
-      child: Material(
-        color: Colors.transparent,
-        child: Container(
-          decoration: BoxDecoration(
-            color: bg,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accent, width: 2),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 24,
-                offset: Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.edit_note_outlined, color: accent, size: 22),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                l10n.d('Mijn notities'),
-                                style: TextStyle(
-                                  fontFamily: profile.fontFamily,
-                                  color: fg,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              if (showPageLabel)
+      child: Focus(
+        onFocusChange: (focused) {
+          // Alleen terughalen als de focus het paneel verlaat. Tab naar
+          // Sluiten blijft daar staan (#2683).
+          if (!focused && _userNotesMode && mounted) {
+            _userNotesFocusNode.requestFocus();
+          }
+        },
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: bg,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: accent, width: 2),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 24,
+                  offset: Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.edit_note_outlined,
+                            color: accent,
+                            size: 22,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Text(
-                                  '${l10n.d('Pagina')} ${_richTextPage + 1} / $pageCount',
+                                  l10n.d('Mijn notities'),
                                   style: TextStyle(
                                     fontFamily: profile.fontFamily,
-                                    color: fg.withValues(alpha: 0.55),
+                                    color: fg,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                if (showPageLabel)
+                                  Text(
+                                    '${l10n.d('Pagina')} ${_richTextPage + 1} / $pageCount',
+                                    style: TextStyle(
+                                      fontFamily: profile.fontFamily,
+                                      color: fg.withValues(alpha: 0.55),
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                Text(
+                                  l10n.d('PgUp/PgDn bladert door de slides'),
+                                  style: TextStyle(
+                                    fontFamily: profile.fontFamily,
+                                    color: fg.withValues(alpha: 0.45),
                                     fontSize: 11,
                                   ),
                                 ),
-                              Text(
-                                l10n.d('PgUp/PgDn bladert door de slides'),
-                                style: TextStyle(
-                                  fontFamily: profile.fontFamily,
-                                  color: fg.withValues(alpha: 0.45),
-                                  fontSize: 11,
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 4),
-                        IconButton(
-                          tooltip: l10n.d('Sluiten'),
-                          onPressed: _closeUserNotesMode,
-                          icon: Icon(
-                            Icons.close,
-                            color: fg.withValues(alpha: 0.6),
+                          const SizedBox(width: 4),
+                          IconButton(
+                            tooltip: l10n.d('Sluiten'),
+                            onPressed: _closeUserNotesMode,
+                            icon: Icon(
+                              Icons.close,
+                              color: fg.withValues(alpha: 0.6),
+                            ),
+                            visualDensity: VisualDensity.compact,
                           ),
-                          visualDensity: VisualDensity.compact,
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: NotesModeToggle(
+                          mode: _userNotesEditorMode,
+                          onModeChanged: (mode) =>
+                              _rebuild(() => _userNotesEditorMode = mode),
+                          style: NotesModeToggleStyle.compact,
+                          foregroundColor: fg,
+                          accentColor: accent,
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: NotesModeToggle(
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(height: 1, color: accent.withValues(alpha: 0.35)),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                    child: KeyedSubtree(
+                      key: const ValueKey('presenter-user-notes'),
+                      child: MarkdownNotesEditor(
+                        key: ValueKey(
+                          'presenter-user-notes-${slide.id}-p$_richTextPage',
+                        ),
+                        controller: _userNoteCtrl!,
+                        focusNode: _userNotesFocusNode,
                         mode: _userNotesEditorMode,
                         onModeChanged: (mode) =>
                             _rebuild(() => _userNotesEditorMode = mode),
-                        style: NotesModeToggleStyle.compact,
-                        foregroundColor: fg,
-                        accentColor: accent,
+                        showModeToggle: false,
+                        expand: true,
+                        compactToolbar: true,
+                        editorTheme: MarkdownEditorTheme.presenterOverlay(
+                          panelBackground: bg,
+                          panelText: fg,
+                          accent: accent,
+                          fontFamily: profile.fontFamily,
+                        ),
+                        hintText: l10n.d(
+                          'Gebruikersnotities voor deze slide...',
+                        ),
+                        minLines: 8,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(height: 1, color: accent.withValues(alpha: 0.35)),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                  child: KeyedSubtree(
-                    key: const ValueKey('presenter-user-notes'),
-                    child: MarkdownNotesEditor(
-                      key: ValueKey(
-                        'presenter-user-notes-${slide.id}-p$_richTextPage',
-                      ),
-                      controller: _userNoteCtrl!,
-                      focusNode: _userNotesFocusNode,
-                      mode: _userNotesEditorMode,
-                      onModeChanged: (mode) =>
-                          _rebuild(() => _userNotesEditorMode = mode),
-                      showModeToggle: false,
-                      expand: true,
-                      compactToolbar: true,
-                      editorTheme: MarkdownEditorTheme.presenterOverlay(
-                        panelBackground: bg,
-                        panelText: fg,
-                        accent: accent,
-                        fontFamily: profile.fontFamily,
-                      ),
-                      hintText: l10n.d('Gebruikersnotities voor deze slide...'),
-                      minLines: 8,
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

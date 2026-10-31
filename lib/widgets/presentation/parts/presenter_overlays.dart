@@ -2,6 +2,41 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+/// Hoe vaak de presentatorweergave (inclusief de dia) werd opgebouwd.
+/// Een kloktik mag dit niet verhogen (#2683).
+int debugPresenterViewBuilds = 0;
+
+/// Herbouwt alleen de klokbalk. De dia ernaast blijft staan (#2683).
+class _PresenterClockTick extends StatefulWidget {
+  const _PresenterClockTick({required this.builder});
+
+  final WidgetBuilder builder;
+
+  @override
+  State<_PresenterClockTick> createState() => _PresenterClockTickState();
+}
+
+class _PresenterClockTickState extends State<_PresenterClockTick> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.builder(context);
+}
+
 /// De regels van het sneltoets-overzicht: links het toetsopschrift, rechts wat
 /// het doet.
 ///
@@ -294,6 +329,12 @@ extension _PresenterOverlays on _FullscreenPresenterState {
 
   Widget _buildClockBar() {
     if (widget.presentationTiming.enabled) return _timedClockBar(this);
+    // De klok tikt in haar eigen widget. Een setState op de presentator
+    // herbouwde elke seconde ook de dia (#2683).
+    return _PresenterClockTick(builder: (_) => _rehearsalClockBar());
+  }
+
+  Widget _rehearsalClockBar() {
     final l10n = context.l10n;
     final elapsed = _rehearsal.elapsed;
     final remaining = _rehearsal.remaining;
