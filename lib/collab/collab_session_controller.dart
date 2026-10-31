@@ -151,29 +151,23 @@ class CollabSessionController {
   void _dropPendingMatchedBy(Deck sessionDeck) {
     if (_inflight.isEmpty) return;
     final byId = {for (final slide in sessionDeck.slides) slide.id: slide};
-    final done = <String>[];
-    for (final entry in _inflight.entries) {
-      final parts = entry.key.split('\u0000');
+    for (final key in _inflight.keys.toList()) {
+      final parts = key.split('\u0000');
       if (parts.length != 2) continue;
       final slide = byId[parts[0]];
       if (slide == null) continue;
-      final field = SlideField.values.where((f) => f.name == parts[1]);
-      if (field.isEmpty) continue;
-      final sent = entry.value;
-      final now = slideFieldValue(slide, field.first);
-      final index = sent.indexWhere((v) => collabValuesEqual(v, now));
-      if (index < 0) continue;
-      done.add(entry.key);
-    }
-    for (final key in done) {
+      SlideField? found;
+      for (final candidate in SlideField.values) {
+        if (candidate.name == parts[1]) found = candidate;
+      }
+      final field = found;
+      if (field == null) continue;
       final sent = _inflight[key]!;
-      final slide = byId[key.split('\u0000').first]!;
-      final field = SlideField.values.firstWhere(
-        (f) => f.name == key.split('\u0000')[1],
+      final index = sent.indexWhere(
+        (v) => collabValuesEqual(v, slideFieldValue(slide, field)),
       );
-      final now = slideFieldValue(slide, field);
-      final index = sent.indexWhere((v) => collabValuesEqual(v, now));
-      if (index >= 0) sent.removeRange(0, index + 1);
+      if (index < 0) continue;
+      sent.removeRange(0, index + 1);
       if (sent.isEmpty) _clearField(key);
     }
   }

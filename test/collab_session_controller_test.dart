@@ -412,6 +412,16 @@ void main() {
         expect(guest.deck.slides.single.title, 'abc');
         expect(host.deck.slides.single.title, 'abc');
 
+        host.edit(
+          Deck(
+            title: 'd',
+            slides: [slide('a', title: 'xyz')],
+          ),
+        );
+        await _sync([host, guest]);
+
+        expect(guest.deck.slides.single.title, 'xyz');
+
         await host.dispose();
         await guest.dispose();
       },
