@@ -53,6 +53,7 @@ class _Profile extends AsrServerProfileNotifier {
 /// het `vosk-ws-1`-protocol in het klein.
 class LiveStubServer {
   final frames = <dynamic>[];
+  final firstBinaryFrame = Completer<void>();
   HttpServer? _http;
   final wsConnections = <WebSocket>[];
 
@@ -67,6 +68,11 @@ class LiveStubServer {
           wsConnections.add(ws);
           ws.listen((frame) {
             frames.add(frame);
+            if (frame is List<int> &&
+                frame.isNotEmpty &&
+                !firstBinaryFrame.isCompleted) {
+              firstBinaryFrame.complete();
+            }
             ws.add('{"partial":"hal"}');
           });
         }
@@ -269,23 +275,55 @@ void main() {
     final session = await _joinFakeCall();
     final notifier = c.read(callRecordingProvider.notifier)..bind(session);
     notifier.setNotice(true);
+    final liveReady = Completer<void>();
+    final statusSubscription = c.listen(liveServerStatusProvider, (_, next) {
+      if (next == LiveServerStatus.live && !liveReady.isCompleted) {
+        liveReady.complete();
+      }
+    });
+    addTearDown(statusSubscription.close);
+    final partialReady = Completer<void>();
+    final partialSubscription = c.listen(provisionalCaptionProvider, (_, next) {
+      if (next.text.isNotEmpty && !partialReady.isCompleted) {
+        partialReady.complete();
+      }
+    });
+    addTearDown(partialSubscription.close);
     await notifier.start(
       liveConsent: const ServerConsent.liveSession('127.0.0.1'),
     );
-    await until(
-      () => c.read(liveServerStatusProvider) == LiveServerStatus.live,
+    await liveReady.future.timeout(
+      const Duration(seconds: 30),
+      onTimeout: () => throw TestFailure(
+        'callaudio-verbinding bleef ${c.read(liveServerStatusProvider)}; '
+        'captureStarts=${session.captureStarts}, frames=${server.frames.length}',
+      ),
     );
     expect(session.captureStarts, 1);
 
     // Eén remote brok → de mixer emiteert een 20 ms-tick → die gaat als
     // binair frame de socket op, zijn echo komt als voorlopige tekst terug.
+    final tickSeen = Completer<void>();
+    final tickSubscription = c.listen(callRecordingProvider, (_, next) {
+      if (next.capturedChunks > 0 && !tickSeen.isCompleted) tickSeen.complete();
+    });
+    addTearDown(tickSubscription.close);
     session.captureController!.add(_callChunk());
-    await until(
-      () =>
-          server.frames.any((f) => f is List<int> && f.isNotEmpty) &&
-          c.read(callRecordingProvider).capturedChunks > 0,
+    await Future.wait([
+      server.firstBinaryFrame.future,
+      tickSeen.future,
+      partialReady.future,
+    ]).timeout(
+      const Duration(seconds: 30),
+      onTimeout: () => throw TestFailure(
+        'callaudio-mix ontbrak: '
+        'frames=${server.frames.map((f) => f.runtimeType).toList()}, '
+        'ticks=${c.read(callRecordingProvider).capturedChunks}, '
+        'fase=${c.read(callRecordingProvider).phase}, '
+        'live=${c.read(liveServerStatusProvider)}',
+      ),
     );
-    await until(() => c.read(provisionalCaptionProvider).text.isNotEmpty);
+    expect(c.read(provisionalCaptionProvider).text, 'hal');
 
     await notifier.stop();
     expect(c.read(liveServerStatusProvider), LiveServerStatus.off);

@@ -61,8 +61,9 @@ jobs:
     runs-on: windows-latest
     # De rc1-les in één regel: een stap die op een venster wacht dat niemand kan
     # wegklikken liep 1u52m door en had zonder ingrijpen de volle zes uur
-    # standaard opgemaakt. De bouw zelf duurt ~20-35 min; 90 is ruim.
-    timeout-minutes: 90
+    # standaard opgemaakt. Geef koude native builds, upload en belasting
+    # vier uur; de forge-poller laat daarbovenop wachtrijruimte vrij.
+    timeout-minutes: 240
     steps:
       - name: Checkout
         uses: actions/checkout@v5

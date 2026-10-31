@@ -619,6 +619,15 @@ Windows candidate artifact. See [CHECKS.md](CHECKS.md#continuous-integration).
 
 ## Cutting a release
 
+Release time limits must retain generous margins: native builds have four
+hours, complete Linux and Windows test jobs have five hours, and the Windows
+artifact collector allows another 90 minutes for queuing and transfer. The
+local orchestrator allows 12 hours for prerequisite gates and 16 hours for the
+complete candidate chain. These are safety ceilings, not expected durations.
+Keep at least twice the observed cold-run duration available, including
+packaging, artifact uploads and cache writes. An outer watcher must also cover
+its inner jobs and runner queues; never shorten it to the expected build time.
+
 ### `make release TAG=vX.Y.Z` — the orchestrator (#1161)
 
 `make release TAG=vX.Y.Z` (a thin wrapper over `scripts/release.sh`) runs the

@@ -43,6 +43,7 @@ void main() {
       // anders staat het auditdossier niet in het opdrachtenpalet.
       'app_consent_accepted': true,
       'secModuleEnabled': true,
+      'privacyImageFaceDetection': false,
     });
     tmp = Directory.systemTemp.createTempSync('ocideck_shell_export');
     asked = [];
@@ -365,6 +366,7 @@ void main() {
     SharedPreferences.setMockInitialValues({
       'app_consent_accepted': true,
       'secModuleEnabled': true,
+      'privacyImageFaceDetection': false,
       // Beleid: exporteren mag alleen mét een TLP-niveau. Het testdeck heeft er
       // geen, dus het pakket hoort niet eens aan het wachtwoorddialoog toe te
       // komen. ARCHITECTURE.md noemt het pakket met name: geen enkel formaat
@@ -400,6 +402,7 @@ void main() {
     SharedPreferences.setMockInitialValues({
       'app_consent_accepted': true,
       'secModuleEnabled': true,
+      'privacyImageFaceDetection': false,
       'requireClassificationOnExport': true,
     });
     final base = sampleDeck();
@@ -487,6 +490,8 @@ void main() {
       SharedPreferences.setMockInitialValues({
         'app_consent_accepted': true,
         'secModuleEnabled': true,
+        // Deze test meet de classificatiepoort, niet de achtergrond-beeldscan.
+        'privacyImageFaceDetection': false,
         if (rule == 'verplichte classificatie' ||
             rule == 'classificatie alleen op dia')
           'requireClassificationOnExport': true,

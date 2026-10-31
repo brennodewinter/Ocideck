@@ -324,7 +324,7 @@ jobs:
     needs: gate
     if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
-    timeout-minutes: 180
+    timeout-minutes: 240
     steps:
       - name: Docker-gereedschap installeren
         run: |
@@ -441,9 +441,9 @@ jobs:
     needs: gate
     if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
-    # De poll-lus hieronder is op 90 minuten begrensd. De buitenmuur laat ook
-    # ruimte voor containerstart, dispatch en de laatste download (max 5 min).
-    timeout-minutes: 120
+    # De Windows-bouw krijgt 240 min; de poll-lus geeft daarnaast 90 min
+    # voor wachtrij en overdracht. De job heeft nog 30 min extra marge.
+    timeout-minutes: 360
     # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: dit image draagt
     # al node/curl/ca-certificates/jq (zie .forgejo/ci-image/Dockerfile) en staat
     # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
@@ -592,7 +592,7 @@ jobs:
           # gelijktijdig gestarte run tonen vóór de eigen dispatch zichtbaar is;
           # die opnieuw dispatchen zet een tweede build in de wachtrij.
           LAST_URL=""
-          for POGING in $(seq 1 90); do
+          for POGING in $(seq 1 330); do
             rid=""
             if [ -n "${GH_DISPATCH_TOKEN:-}" ]; then
               info="$(run_status || true)"
@@ -634,7 +634,7 @@ jobs:
             fi
             sleep 60
           done
-          echo "Na 90 minuten geen coherent cohort op $TAG (laatste run: ${LAST_URL:-onbekend})." >&2
+          echo "Na 330 minuten geen coherent cohort op $TAG (laatste run: ${LAST_URL:-onbekend})." >&2
           echo "Hertrigger deze release-workflow zodra de Windows-build groen is." >&2
           exit 1
 

@@ -169,6 +169,10 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
   },
   'CONTRIBUTING.md': {'2.5 minutes': 1, '22 minutes': 1},
   'docs/BUILD.md': {
+    // Geconfigureerde veiligheidsgrenzen, geen beloofde of gemeten looptijden.
+    '12 hours': 1,
+    '16 hours': 1,
+    '90 minutes': 1,
     '17.5 minutes': 0,
     '2.5 minute': 0,
     '2.5 minutes': 0,

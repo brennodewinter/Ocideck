@@ -8,6 +8,18 @@ void main() {
       ? 'release_auto.sh draait alleen op macOS/Linux, niet onder Windows Git Bash'
       : null;
 
+  test('release watchers retain generous build and runner queue margins', () {
+    final gate = int.parse(
+      RegExp(r'GATE_TIMEOUT_MIN:-([0-9]+)').firstMatch(source)!.group(1)!,
+    );
+    final candidate = int.parse(
+      RegExp(r'RELEASE_CI_TIMEOUT_MIN:-([0-9]+)').firstMatch(source)!.group(1)!,
+    );
+    expect(gate, greaterThanOrEqualTo(720));
+    expect(candidate, greaterThanOrEqualTo(gate + 240));
+    expect(source, contains('start + 21600'));
+  });
+
   String function(String name) {
     final lines = source.split('\n');
     final start = lines.indexWhere((line) => line.startsWith('$name() {'));
