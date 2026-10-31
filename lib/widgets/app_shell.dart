@@ -11,7 +11,9 @@ import 'package:path/path.dart' as p;
 
 import '../l10n/export_block_localization.dart';
 import '../platform/launch_files.dart';
-import '../platform/native_window.dart' show setWillCloseCallback, quitApp;
+import '../platform/native_window.dart'
+    show quitApp, setAppExitHandler, setWillCloseCallback;
+import 'shell/macos_exit_guard.dart';
 import '../platform/native_shortcut_channel.dart';
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
@@ -254,6 +256,10 @@ class _AppShellState extends ConsumerState<AppShell> {
   late final NativeShortcutChannel _nativeShortcuts;
   bool _closeInProgress = false;
 
+  /// Luistert op macOS naar Cmd+Q, Dock-Stop en uitloggen. Die route slaat
+  /// de willClose-hook over (#2678).
+  AppLifecycleListener? _macosExitListener;
+
   /// Het tabblad waar de zichtbare Informatieveiligheid-melding bij hoort, of
   /// null als er geen staat. De melding is niet zomaar een mededeling maar een
   /// uitspraak over déze presentatie, dus hij mag een tabwissel of het sluiten
@@ -270,6 +276,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     super.initState();
     logMilestone('shell');
     setWillCloseCallback(_onWillClose);
+    _macosExitListener = installMacosExitGuard(_onWillClose);
     _nativeShortcuts = NativeShortcutChannel(
       () => _requestDocumentFind(showReplace: true),
     )..start();
@@ -468,6 +475,8 @@ class _AppShellState extends ConsumerState<AppShell> {
 
   @override
   void dispose() {
+    _macosExitListener?.dispose();
+    setAppExitHandler(null);
     setWillCloseCallback(() {});
     _nativeShortcuts.dispose();
     super.dispose();

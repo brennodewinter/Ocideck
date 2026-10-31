@@ -1,4 +1,4 @@
-import 'dart:ui' show Size;
+import 'dart:ui' show AppExitResponse, Size;
 
 /// Op web is er geen minimum venstergrootte — het browservenster is wat het is.
 const Size minimumWindowSize = Size(0, 0);
@@ -12,3 +12,12 @@ void setWillCloseCallback(void Function() callback) {}
 Future<void> quitApp() async {}
 
 Future<void> configureNativeWindow() async {}
+
+/// Op web is er geen `System.requestAppExit` vanuit een app-menu.
+void setAppExitHandler(void Function()? handler) {}
+
+/// Op web neemt de shell de afsluitvraag nooit over.
+bool get hasAppExitHandler => false;
+
+/// Op web komt dit verzoek niet voor; `exit` houdt de aanroep geldig.
+Future<AppExitResponse> respondToAppExitRequest() async => AppExitResponse.exit;

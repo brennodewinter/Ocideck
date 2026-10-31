@@ -10,7 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 import 'platform/launch_files.dart';
-import 'platform/native_window.dart';
+import 'platform/native_window.dart'
+    show configureNativeWindow, hasAppExitHandler;
 import 'services/bundled_licenses.dart';
 import 'services/privacy/privacy_bulk_lexicon.dart';
 import 'services/shared_preferences_atomic.dart';
@@ -156,14 +157,17 @@ void _watchSession() {
     }),
   );
   // Elke afsluiting via het venster loopt langs `quitApp`, dat het log al
-  // afrondt. Cmd+Q op macOS niet: dat gaat via `NSApplication.terminate`, en het
-  // OS vraagt het framework of het mag. Het antwoord blijft wat het zonder deze
-  // luisteraar ook was (`exit`). Op Windows en Linux bewust niet: daar kan het
-  // vragen vóór de sluitbewaking van de shell komen, en een geannuleerd
-  // afsluiten zou dan de sessiemarkering al hebben weggehaald.
+  // afrondt. Cmd+Q op macOS gaat via `NSApplication.terminate` en komt niet
+  // langs de willClose-hook. De shell beantwoordt dat verzoek zelf zodra ze
+  // er is (#2678). Deze luisteraar blijft voor de toestemmingspoort: daar is
+  // geen shell en geen opgeslagen werk, en Cmd+Q moet nog steeds weg kunnen
+  // (#1207). Op Windows en Linux bewust niet: daar kan het vragen vóór de
+  // sluitbewaking van de shell komen, en een geannuleerd afsluiten zou dan
+  // de sessiemarkering al hebben weggehaald.
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.macOS) {
     AppLifecycleListener(
       onExitRequested: () async {
+        if (hasAppExitHandler) return AppExitResponse.exit;
         await closeLog();
         return AppExitResponse.exit;
       },
