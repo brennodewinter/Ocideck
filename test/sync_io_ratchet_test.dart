@@ -68,6 +68,18 @@ void f() {
   });
 
   group('de blinde vlekken', () {
+    test('typeSync en isFileSync zijn dart:io en vallen', () {
+      final hits = meet('''
+void f() {
+  FileSystemEntity.typeSync(path);
+  File(path).statSync().type;
+  FileSystemEntity.isFileSync(path);
+  FileSystemEntity.isDirectorySync(path);
+  FileSystemEntity.isLinkSync(path);
+}
+''');
+      expect(hits['lib/widgets/x.dart'], hasLength(5));
+    });
     test('een commentaarregel die de methode noemt is geen aanroep', () {
       final hits = meet('''
 // Gebruik geen File(path).existsSync() hier — dat blokkeert de isolate.

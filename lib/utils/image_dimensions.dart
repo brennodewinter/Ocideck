@@ -21,30 +21,77 @@ class ImageDimensions {
 /// Header reads are bounded because dimensions never require the image body.
 const int kMaxImageHeaderBytes = 1024 * 1024;
 
+/// Hoe vaak de bestandskop echt werd gelezen. Een cache-treffer telt niet
+/// mee (#2685).
+int debugImageDimensionFileReads = 0;
+
+void debugResetImageDimensionCache() {
+  debugImageDimensionFileReads = 0;
+  _dimensionCache.clear();
+}
+
+class _CachedDimensions {
+  const _CachedDimensions(this.mtimeMs, this.length, this.dims);
+  final int mtimeMs;
+  final int length;
+  final ImageDimensions? dims;
+}
+
+final Map<String, _CachedDimensions> _dimensionCache = {};
+
 /// Reads the pixel dimensions of the image at [path] from its header only.
 /// Returns null when the file is missing, unreadable, or an unsupported format.
+///
+/// Herhaalde vragen voor hetzelfde bestand — een kwaliteitsronde per
+/// toetsaanslag — lezen de kop niet opnieuw zolang stempel en grootte gelijk
+/// blijven (#2685).
 ImageDimensions? readImageDimensions(String path) {
   try {
-    final file = File(path);
-    if (!file.existsSync()) return null;
-    if (FileSystemEntity.typeSync(path, followLinks: true) !=
-        FileSystemEntityType.file) {
-      return null;
+    final stat = File(path).statSync();
+    if (stat.type != FileSystemEntityType.file) return null;
+    final cached = _touchDimensions(path);
+    if (cached != null &&
+        cached.mtimeMs == stat.modified.millisecondsSinceEpoch &&
+        cached.length == stat.size) {
+      return cached.dims;
     }
-    final length = file.lengthSync();
-    final handle = file.openSync();
-    late final Uint8List bytes;
-    try {
-      bytes = handle.readSync(
-        length < kMaxImageHeaderBytes ? length : kMaxImageHeaderBytes,
-      );
-    } finally {
-      handle.closeSync();
-    }
-    return imageDimensionsFromBytes(bytes);
+    debugImageDimensionFileReads++;
+    final dims = _readHeader(path, stat.size);
+    _storeDimensions(
+      path,
+      _CachedDimensions(stat.modified.millisecondsSinceEpoch, stat.size, dims),
+    );
+    return dims;
   } catch (e) {
     logError('readImageDimensions: failed to read $path', e);
     return null;
+  }
+}
+
+ImageDimensions? _readHeader(String path, int length) {
+  final handle = File(path).openSync();
+  try {
+    final bytes = handle.readSync(
+      length < kMaxImageHeaderBytes ? length : kMaxImageHeaderBytes,
+    );
+    return imageDimensionsFromBytes(bytes);
+  } finally {
+    handle.closeSync();
+  }
+}
+
+_CachedDimensions? _touchDimensions(String path) {
+  final hit = _dimensionCache.remove(path);
+  if (hit == null) return null;
+  _dimensionCache[path] = hit;
+  return hit;
+}
+
+void _storeDimensions(String path, _CachedDimensions entry) {
+  _dimensionCache.remove(path);
+  _dimensionCache[path] = entry;
+  if (_dimensionCache.length > 256) {
+    _dimensionCache.remove(_dimensionCache.keys.first);
   }
 }
 
