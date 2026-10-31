@@ -30,6 +30,8 @@ All notable changes to OciDeck are documented in this file.
   en haalt de focus niet meer weg uit *Mijn notities*.
 - **Diaoverzicht en beeldkiezer.** Een enkele klik selecteert meteen. Een
   dubbelklik opent of kiest nog steeds.
+- **Calloutbeelden.** De kwaliteitsronde leest de afbeeldingskop niet opnieuw
+  wanneer alleen de tekst van de dia veranderde.
 
 ## [0.7.5] — 2026-10-30
 

@@ -12,6 +12,8 @@ import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
+
 /// Cmd+Q, Dock-Stop en uitloggen op macOS gaan via
 /// `System.requestAppExit`, niet via de willClose-hook van het venster.
 /// Zonder een luisteraar in de shell sluit de app meteen: geen vraag over
@@ -88,15 +90,17 @@ void main() {
         );
 
         // Schijf en endOfFrame lopen alleen door als het verzoek zelf
-        // buiten de nep-klok start.
+        // buiten de nep-klok start. Daarna wachten we tot quitApp écht
+        // liep, niet op een vaste adempauze.
         late final AppExitResponse response;
         await tester.runAsync(() async {
           response = await tester.binding.handleRequestAppExit();
-          for (var i = 0; i < 200 && debugQuitAppCalls == 0; i++) {
-            await tester.pump(const Duration(milliseconds: 20));
-            await Future<void>.delayed(const Duration(milliseconds: 20));
-          }
         });
+        await pumpUntil(
+          tester,
+          () => debugQuitAppCalls > 0,
+          reason: 'quitApp liep niet na een schoon afsluitverzoek',
+        );
         expect(response, AppExitResponse.cancel);
         expect(find.text('Niet-opgeslagen wijzigingen'), findsNothing);
 
