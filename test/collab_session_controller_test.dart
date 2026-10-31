@@ -317,5 +317,104 @@ void main() {
       await host.dispose();
       await guest.dispose();
     });
+
+    test(
+      'een eigen aanslag bij de host schrijft het deck niet terug (#2680)',
+      () async {
+        final store = InMemoryCollabLogStore();
+        final baseline = Deck(
+          title: 'd',
+          slides: [slide('a', title: 'old')],
+        );
+        final launch = await hostCollabSession(
+          store: store,
+          deck: baseline,
+          participantId: 'host',
+          pollInterval: _noTick,
+        );
+        var deck = baseline;
+        var writes = 0;
+        final ctrl = CollabSessionController(
+          session: launch.session,
+          readDeck: () => deck,
+          writeDeck: (d) {
+            deck = d;
+            writes++;
+          },
+        );
+        writes = 0;
+        deck = Deck(
+          title: 'd',
+          slides: [slide('a', title: 'abc')],
+        );
+        ctrl.onLocalEdit(deck);
+        expect(writes, 0);
+        expect(deck.slides.single.title, 'abc');
+        await launch.coordinator.dispose();
+        await ctrl.dispose();
+      },
+    );
+
+    test(
+      'een gast houdt nieuwere tekst als een oudere echo eerder aankomt (#2680)',
+      () async {
+        final store = InMemoryCollabLogStore();
+        final baseline = Deck(
+          title: 'd',
+          slides: [slide('a', title: '')],
+        );
+        final host = _Tab(
+          Deck(
+            title: 'd',
+            slides: [slide('a', title: '')],
+          ),
+          await hostCollabSession(
+            store: store,
+            deck: baseline,
+            participantId: 'host',
+            pollInterval: _noTick,
+          ),
+        );
+        final guest = _Tab(
+          Deck(
+            title: 'd',
+            slides: [slide('a', title: '')],
+          ),
+          await joinCollabSession(
+            store: store,
+            localDeck: Deck(
+              title: 'd',
+              slides: [slide('a', title: '')],
+            ),
+            participantId: 'guest',
+            pollInterval: _noTick,
+          ),
+        );
+        await pumpEventQueue();
+
+        guest.edit(
+          Deck(
+            title: 'd',
+            slides: [slide('a', title: 'a')],
+          ),
+        );
+        guest.edit(
+          Deck(
+            title: 'd',
+            slides: [slide('a', title: 'abc')],
+          ),
+        );
+        // Twee indieningen hangen aan dezelfde schrijfketen. Eén sync kan
+        // de tweede nog missen; de volgende haalt haar op.
+        await _sync([host, guest]);
+        await _sync([host, guest]);
+
+        expect(guest.deck.slides.single.title, 'abc');
+        expect(host.deck.slides.single.title, 'abc');
+
+        await host.dispose();
+        await guest.dispose();
+      },
+    );
   });
 }

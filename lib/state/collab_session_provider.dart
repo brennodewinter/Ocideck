@@ -17,7 +17,9 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:uuid/uuid.dart';
 
 import '../collab/collab.dart';
+import '../models/deck.dart';
 import 'deck_provider.dart';
+import 'editor_provider.dart';
 import 'tabs_provider.dart';
 import 'webdav_provider.dart';
 
@@ -178,7 +180,14 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     _controller = CollabSessionController(
       session: session,
       readDeck: () => deckNotifier.currentState.deck ?? session.deck,
-      writeDeck: deckNotifier.applyCollabDeck,
+      writeDeck: (deck) {
+        final before = deckNotifier.currentState.deck;
+        final index = _ref.read(editorProvider).selectedIndex;
+        deckNotifier.applyCollabDeck(
+          deck,
+          bumpRevision: _selectedSlideChanged(before, deck, index),
+        );
+      },
     );
     _deckSub = deckNotifier.stream.listen((deckState) {
       final deck = deckState.deck;
@@ -246,6 +255,16 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     _tab?.collabSession = null;
     super.dispose();
   }
+}
+
+/// De editor hermount alleen als de dia die open staat in de merge veranderde.
+/// Een andere dia leest bij de selectiewissel opnieuw (#2680).
+bool _selectedSlideChanged(Deck? before, Deck after, int index) {
+  if (before == null || before.slides.length != after.slides.length) {
+    return true;
+  }
+  if (index < 0 || index >= after.slides.length) return true;
+  return !identical(before.slides[index], after.slides[index]);
 }
 
 /// Whether the collaboration chat panel is open. App-wide (one tab's session is

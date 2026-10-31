@@ -747,12 +747,15 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// edit, not a collaborator's), but it bumps [DeckState.revision] so the
   /// editor's cached text fields re-read the incoming change, and marks the deck
   /// dirty so it is saved. A no-op when no deck is open.
-  void applyCollabDeck(Deck deck) {
+  void applyCollabDeck(Deck deck, {bool bumpRevision = true}) {
     if (state.deck == null) return;
+    // Alleen de dia die open staat hoeft de editor te hermonteren. Een
+    // wijziging op een andere dia leest de editor bij de volgende selectie
+    // alsnog; een revisie-ophoging bij elke echo kost de focus (#2680).
     state = state.copyWith(
       deck: deck,
       isDirty: true,
-      revision: state.revision + 1,
+      revision: bumpRevision ? state.revision + 1 : state.revision,
     );
   }
 
