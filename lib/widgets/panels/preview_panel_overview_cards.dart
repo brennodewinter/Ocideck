@@ -262,11 +262,18 @@ class _OverviewSlideCard extends StatelessWidget {
                 ),
               ),
             Expanded(
-              child: Text(
-                '${index + 1}. $title',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.w600),
+              // De titel hoort bij de kaartklik. Het vinkvak en de sleepgreep
+              // ernaast niet: een pointer-down daar is een eigen gebaar, en
+              // een selectie op dat moment zou een blok tot één dia
+              // inkrimpen vóór het vinkvak of de sleep eraan toe komt.
+              child: Listener(
+                onPointerDown: (_) => onSelect(),
+                child: Text(
+                  '${index + 1}. $title',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
               ),
             ),
             if (!readOnly)
@@ -352,32 +359,35 @@ class _OverviewSlideCard extends StatelessWidget {
               '${l10n.d('Slide')} ${index + 1}/${deck.slides.length}: $title',
           customSemanticsActions: readOnly ? const {} : _semanticActions(l10n),
           onTap: onSelect,
-          child: Listener(
-            onPointerDown: (_) => onSelect(),
-            child: GestureDetector(
-              onDoubleTap: onOpen,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 120),
-                decoration: BoxDecoration(
-                  color: colorScheme.surface,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: borderColor, width: 2),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(
-                        alpha: selected ? 0.34 : 0.18,
-                      ),
-                      blurRadius: selected ? 14 : 8,
-                      offset: const Offset(0, 4),
+          child: GestureDetector(
+            onDoubleTap: onOpen,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 120),
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: borderColor, width: 2),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(
+                      alpha: selected ? 0.34 : 0.18,
                     ),
-                  ],
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: Stack(
-                  children: [
-                    Column(
-                      children: [
-                        Expanded(
+                    blurRadius: selected ? 14 : 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Expanded(
+                        // Zelfde reden als bij de titel: de voorvertoning
+                        // selecteert meteen, het vinkvak en de greep in de
+                        // voettekst blijven hun eigen gebaar.
+                        child: Listener(
+                          onPointerDown: (_) => onSelect(),
                           child: ExcludeSemantics(
                             child: RepaintBoundary(
                               child: SlidePreviewWidget(
@@ -416,39 +426,39 @@ class _OverviewSlideCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        _footer(context, title, colorScheme),
-                      ],
-                    ),
-                    if (outsideTimedFormat)
-                      Positioned(
-                        top: 8,
-                        right: 8,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: colorScheme.errorContainer,
-                            borderRadius: BorderRadius.circular(999),
+                      ),
+                      _footer(context, title, colorScheme),
+                    ],
+                  ),
+                  if (outsideTimedFormat)
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: colorScheme.errorContainer,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            child: Text(
-                              l10n.d('Buiten het format'),
-                              style: TextStyle(
-                                color: colorScheme.onErrorContainer,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w700,
-                              ),
+                          child: Text(
+                            l10n.d('Buiten het format'),
+                            style: TextStyle(
+                              color: colorScheme.onErrorContainer,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
                       ),
-                    // De markering hangt aan de kaartrand — de kaart zelf is
-                    // geen dropdoel meer.
-                    ..._insertMarkers(colorScheme),
-                  ],
-                ),
+                    ),
+                  // De markering hangt aan de kaartrand — de kaart zelf is
+                  // geen dropdoel meer.
+                  ..._insertMarkers(colorScheme),
+                ],
               ),
             ),
           ),
