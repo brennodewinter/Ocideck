@@ -1598,6 +1598,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Sõna „{woord}“ seisab kaks korda järjest.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'See rida sisaldab {aantal} sõna; kaalu selle poolitamist.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Asenda ajutine näidistekst enne avaldamist.',
   'Diagnose': 'Diagnostika',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck peab selles arvutis logi vigade, hangumiste ja käivitamise kohta. See ei sisalda esitluste ega dokumentide sisu ning failinimed on muudetud tundmatuks. Logi ei lahku sellest arvutist kunagi iseenesest: jagage seda ainult siis, kui teatate probleemist.',

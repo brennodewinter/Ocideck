@@ -1624,6 +1624,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Думата „{woord}“ стои два пъти подред.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Този ред съдържа {aantal} думи; обмислете да го разделите.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Заменете временния примерен текст преди публикуване.',
   'Diagnose': 'Диагностика',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck води на този компютър журнал за грешки, блокирания и стартиране. Той не съдържа съдържание от презентации или документи, а имената на файловете са направени неразпознаваеми. Журналът никога не напуска този компютър сам: споделяйте го само когато съобщавате за проблем.',

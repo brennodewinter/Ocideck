@@ -1630,6 +1630,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Η λέξη «{woord}» εμφανίζεται δύο φορές στη σειρά.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Αυτή η γραμμή περιέχει {aantal} λέξεις· σκέψου να τη χωρίσεις.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Αντικατάστησε το προσωρινό κείμενο παραδείγματος πριν δημοσιεύσεις.',
   'Diagnose': 'Διαγνωστικά',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'Το OciDeck τηρεί σε αυτόν τον υπολογιστή ένα αρχείο καταγραφής σφαλμάτων, παγωμάτων και εκκίνησης. Δεν περιέχει περιεχόμενο από παρουσιάσεις ή έγγραφα, και τα ονόματα αρχείων γίνονται μη αναγνωρίσιμα. Το αρχείο καταγραφής δεν φεύγει ποτέ μόνο του από αυτόν τον υπολογιστή: κοινοποιήστε το μόνο όταν αναφέρετε ένα πρόβλημα.',

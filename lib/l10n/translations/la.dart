@@ -1620,6 +1620,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Verbum “{woord}” bis deinceps stat.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Hic versus {aantal} verba continet; eum dividere cogita.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Antequam edas, textum exempli temporalem repone.',
   'Diagnose': 'Diagnosis',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck in hoc computatro acta servat errorum, haesitationum et initii. Nullum contentum praesentationum vel documentorum continet, et nomina fasciculorum ignota redduntur. Acta numquam sua sponte hunc computatrum relinquunt: communica ea tantum cum difficultatem nuntias.',

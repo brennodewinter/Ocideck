@@ -1621,6 +1621,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Cuvântul „{woord}” apare de două ori la rând.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Acest rând conține {aantal} cuvinte; ia în considerare să-l împarți.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Înlocuiește textul exemplu temporar înainte de publicare.',
   'Diagnose': 'Diagnosticare',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck ține pe acest computer un jurnal al erorilor, blocajelor și pornirii. Nu conține conținut din prezentări sau documente, iar numele fișierelor sunt făcute de nerecunoscut. Jurnalul nu părăsește niciodată de la sine acest computer: partajați-l doar când raportați o problemă.',

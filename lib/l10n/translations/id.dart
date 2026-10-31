@@ -1605,6 +1605,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Kata “{woord}” muncul dua kali berturut-turut.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Baris ini berisi {aantal} kata; pertimbangkan untuk membaginya.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Ganti teks contoh sementara sebelum menerbitkan.',
   'Diagnose': 'Diagnostik',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck menyimpan log di komputer ini tentang kesalahan, macet, dan proses mulai. Log ini tidak berisi konten presentasi atau dokumen, dan nama berkas dibuat tidak dapat dikenali. Log tidak pernah meninggalkan komputer ini dengan sendirinya: bagikan hanya saat Anda melaporkan masalah.',

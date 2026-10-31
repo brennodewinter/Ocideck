@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/state/editor_provider.dart';
+import 'package:ocideck/models/markdown_writing_suggestion.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
 import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 
@@ -195,6 +196,36 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 600));
       expect(find.text('Geen syntaxproblemen gevonden'), findsOneWidget);
       expect(tester.getTopLeft(field).dy, atRest);
+    },
+  );
+
+  testWidgets(
+    'een toetsaanslag in een groot deck scant de schrijftips niet meteen (#2681)',
+    (tester) async {
+      tester.view.physicalSize = const Size(1600, 1000);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      final source = List.generate(
+        600,
+        (i) => '# Deel $i\n\n- punt $i',
+      ).join('\n\n---\n\n');
+      debugMarkdownWritingInspectionCount = 0;
+      await tester.pumpWidget(_host(content: source, onApply: (_) {}));
+      final afterOpen = debugMarkdownWritingInspectionCount;
+
+      final field = tester.widget<TextField>(find.byType(TextField).last);
+      field.controller!.text = '${field.controller!.text}\ndit dit';
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
+
+      expect(debugMarkdownWritingInspectionCount, afterOpen);
+      expect(find.textContaining('schrijftips'), findsNothing);
+
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(debugMarkdownWritingInspectionCount, afterOpen + 1);
+      expect(find.textContaining('schrijftips'), findsOneWidget);
     },
   );
 }

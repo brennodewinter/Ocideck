@@ -2513,6 +2513,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      '“{woord}” sözcüğü art arda iki kez geçiyor.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Bu satır {aantal} sözcük içeriyor; bölmeyi düşünün.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Yayımlamadan önce geçici örnek metni değiştirin.',
   'Diagnose': 'Tanılama',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck bu bilgisayarda hatalar, donmalar ve başlatma hakkında bir günlük tutar. Günlükte sunumlardan veya belgelerden içerik bulunmaz ve dosya adları tanınmaz hale getirilir. Günlük bu bilgisayardan asla kendiliğinden çıkmaz: yalnızca bir sorun bildirirken paylaşın.',

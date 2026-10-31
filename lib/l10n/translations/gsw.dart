@@ -1608,6 +1608,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'S Wort „{woord}“ stoht zweimol hinerenand.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Die Ziile het {aantal} Wörter; überleg, si z teile.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Ersetz de vorläufig Platzhaltertext, bevor du veröffentlichsch.',
   'Diagnose': 'Diagnose',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck füehrt uf däm Computer es Protokoll über Fehler, Hänger und de Start. Es stoht kei Inhalt vo Präsentatione oder Dokumänt drin, und Dateinäme sind unkänntlich gmacht. S Protokoll verlaat dä Computer nie vo sälber: Teiled Sie s nur, wänn Sie es Problem mälde.',

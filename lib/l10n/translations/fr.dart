@@ -652,6 +652,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Het woord “{woord}” staat twee keer achter elkaar.':
+      'Le mot « {woord} » apparaît deux fois de suite.',
+  'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
+      'Cette ligne contient {aantal} mots ; envisage de la scinder.',
+  'Vervang de tijdelijke voorbeeldtekst voordat je publiceert.':
+      'Remplace le texte d\'exemple temporaire avant de publier.',
   'Diagnose': 'Diagnostic',
   'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
       'OciDeck tient sur cet ordinateur un journal des erreurs, des blocages et du démarrage. Il ne contient aucun contenu de présentations ou de documents, et les noms de fichiers sont rendus méconnaissables. Le journal ne quitte jamais cet ordinateur de lui-même : ne le partagez que lorsque vous signalez un problème.',
