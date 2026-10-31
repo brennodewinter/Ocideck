@@ -8,6 +8,29 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- **Afsluiten op macOS.** Cmd+Q, Stop in het Dock en uitloggen liepen langs de
+  vraag om niet-opgeslagen werk. Die vraag komt nu ook dan, net als bij het
+  sluiten van het venster. Zonder de shell (de toestemmingspoort) sluit de app
+  nog steeds meteen.
+- **Een tweede start.** Op Windows wacht een tweede start tot het eerste
+  venster er is, en vraagt daarna om opnieuw te proberen of te annuleren als
+  dat venster niet antwoordt. Annuleren start geen tweede exemplaar. Op Linux
+  komt een lege tweede start naar het bestaande venster; antwoordt dat niet,
+  dan gaat de nieuwe start zelf verder en schrijft dat in het logboek.
+- **Samenwerken.** Een eigen toetsaanslag zet de cursor niet meer terug naar
+  het begin, en een oudere echo overschrijft nieuwere tekst niet.
+- **Markdown-bron.** Schrijftips over een groot deck lopen niet meer bij elke
+  toetsaanslag; ze volgen dezelfde korte wacht als de syntaxcontrole. De
+  meldingen zijn vertaald.
+- **SVG-beelden.** Een diawissel flitst niet meer leeg: het opgeschoonde beeld
+  blijft staan en wordt niet bij elke weergave opnieuw gelezen.
+- **Presentator.** De klok tikt zonder de dia elke seconde opnieuw te bouwen,
+  en haalt de focus niet meer weg uit *Mijn notities*.
+- **Diaoverzicht en beeldkiezer.** Een enkele klik selecteert meteen. Een
+  dubbelklik opent of kiest nog steeds.
+
 ## [0.7.5] — 2026-10-30
 
 
