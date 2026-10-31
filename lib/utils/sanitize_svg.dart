@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:xml/xml.dart';
@@ -17,6 +18,14 @@ String? sanitizeMermaidSvg(String svg) {
   return _sanitizeSvg(svg, 'sanitizeMermaidSvg');
 }
 
+/// Hoe vaak een geïmporteerde SVG écht door de allow-list ging. Een cache-hit
+/// telt niet mee; tests lezen dit om een tweede mount te controleren (#2682).
+int debugImportedSvgSanitizeCount = 0;
+
+/// Boven deze grootte saneert [sanitizeImportedSvgForDisplay] op een
+/// achtergrond-isolate, zodat de UI-isolate niet vastloopt op de XML-parse.
+const int kSvgSanitizeInlineMaxBytes = 256 * 1024;
+
 /// Validate and sanitise an SVG selected as a slide or Library image.
 ///
 /// Unlike raster formats, SVG has no useful magic-byte signature: it is XML
@@ -24,7 +33,8 @@ String? sanitizeMermaidSvg(String svg) {
 /// complete, size-bounded document is therefore its content check. The output
 /// contains only the root `<svg>` tree, so processing instructions, comments
 /// and a possible doctype do not travel into the deck.
-Uint8List? sanitizeImportedSvgBytes(List<int> bytes) {
+Uint8List? sanitizeImportedSvgBytes(List<int> bytes, {bool count = true}) {
+  if (count) debugImportedSvgSanitizeCount++;
   if (bytes.isEmpty) return null;
   final String source;
   try {
@@ -40,6 +50,39 @@ Uint8List? sanitizeImportedSvgBytes(List<int> bytes) {
     allowEmbeddedPng: true,
   );
   return safe == null ? null : Uint8List.fromList(utf8.encode(safe));
+}
+
+/// Het gesaneerde resultaat. [embeddedPng] is hetzelfde object bij een
+/// cache-hit, zodat de rasterdecode niet opnieuw begint.
+class SanitizedImportedSvg {
+  const SanitizedImportedSvg(this.svg, this.embeddedPng);
+
+  final String svg;
+  final Uint8List? embeddedPng;
+}
+
+/// Allow-list plus de ingesloten PNG, als de SVG niets anders tekent.
+///
+/// Top-level zodat [sanitizeImportedSvgForDisplay] hem in een isolate kan
+/// draaien. [count] is false op die worker: de teller hoort bij de aanroeper.
+SanitizedImportedSvg? sanitizedImportedSvg(
+  List<int> bytes, {
+  bool count = true,
+}) {
+  final safe = sanitizeImportedSvgBytes(bytes, count: count);
+  if (safe == null) return null;
+  final svg = utf8.decode(safe);
+  return SanitizedImportedSvg(svg, extractSoleEmbeddedPng(svg));
+}
+
+/// Saneert [bytes]. Kleine SVG's blijven op deze isolate; grotere gaan naar
+/// een worker. De aanroeper cachet het resultaat.
+Future<SanitizedImportedSvg?> sanitizeImportedSvgForDisplay(Uint8List bytes) {
+  if (bytes.length <= kSvgSanitizeInlineMaxBytes) {
+    return Future<SanitizedImportedSvg?>.value(sanitizedImportedSvg(bytes));
+  }
+  debugImportedSvgSanitizeCount++;
+  return Isolate.run(() => sanitizedImportedSvg(bytes, count: false));
 }
 
 /// Maximum stored size for a custom bullet SVG. Bullet artwork is deliberately
