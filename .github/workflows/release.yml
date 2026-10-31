@@ -134,8 +134,8 @@ jobs:
       - name: Inno Setup installeren (gepind)
         shell: pwsh
         env:
-          INNOSETUP_VERSION: 7.1.0
-          INNOSETUP_SHA256: 0362a383ed217d4c4239b5933866dd96d3eb2102737da92f80f6057a4b40df2f
+          INNOSETUP_VERSION: 7.1.1
+          INNOSETUP_SHA256: 8a5a6711c3766a6e5fb74f280ba0e3551e719ce94538d901fdbd1f8f9920b3f0
         run: |
           $ErrorActionPreference = 'Stop'
           $bestand = "innosetup-$env:INNOSETUP_VERSION-x64.exe"
