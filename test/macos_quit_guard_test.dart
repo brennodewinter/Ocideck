@@ -26,16 +26,8 @@ void main() {
 
   tearDown(debugResetAppExitForTest);
 
-  /// De override moet in de test zelf gezet worden: de binding controleert
-  /// hem aan het eind van de testcallback, vóór de tearDown van de groep.
-  void useMacos() {
-    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
-    addTearDown(() => debugDefaultTargetPlatformOverride = null);
-  }
-
   Future<ProviderContainer> pumpShell(WidgetTester tester) async {
     debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
-    addTearDown(() => debugDefaultTargetPlatformOverride = null);
     await tester.binding.setSurfaceSize(const Size(1600, 1000));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
@@ -43,59 +35,77 @@ void main() {
     return ProviderScope.containerOf(tester.element(find.byType(AppShell)));
   }
 
+  Future<void> onMacos(
+    WidgetTester tester,
+    Future<void> Function(ProviderContainer container) body,
+  ) async {
+    final container = await pumpShell(tester);
+    try {
+      await body(container);
+    } finally {
+      // De binding controleert deze vlag ná de testcallback en vóór
+      // addTearDown. Hij moet dus hier al weg zijn.
+      debugDefaultTargetPlatformOverride = null;
+    }
+  }
+
   testWidgets(
     'vuil tabblad: een afsluitverzoek annuleert en toont de opslaan-dialoog (#2678)',
     (tester) async {
-      useMacos();
-      final container = await pumpShell(tester);
-      final tab = container.read(tabsProvider).current!;
-      tab.deckNotifier.loadDeck(
-        Deck(title: 'Concept', slides: [Slide.create(SlideType.title)]),
-        isDirty: true,
-      );
-      await tester.pump();
+      await onMacos(tester, (container) async {
+        final tab = container.read(tabsProvider).current!;
+        tab.deckNotifier.loadDeck(
+          Deck(title: 'Concept', slides: [Slide.create(SlideType.title)]),
+          isDirty: true,
+        );
+        await tester.pump();
 
-      final response = await tester.binding.handleRequestAppExit();
-      expect(response, AppExitResponse.cancel);
+        final response = await tester.binding.handleRequestAppExit();
+        expect(response, AppExitResponse.cancel);
 
-      await tester.pump();
-      expect(find.text('Niet-opgeslagen wijzigingen'), findsOneWidget);
+        await tester.pump();
+        expect(find.text('Niet-opgeslagen wijzigingen'), findsOneWidget);
 
-      // Een tweede verzoek terwijl de dialoog open staat start geen tweede
-      // bewaking: de eerste dialoog blijft de enige.
-      final again = await tester.binding.handleRequestAppExit();
-      expect(again, AppExitResponse.cancel);
-      await tester.pump();
-      expect(find.text('Niet-opgeslagen wijzigingen'), findsOneWidget);
-      debugDefaultTargetPlatformOverride = null;
+        // Een tweede verzoek terwijl de dialoog open staat start geen tweede
+        // bewaking: de eerste dialoog blijft de enige.
+        final again = await tester.binding.handleRequestAppExit();
+        expect(again, AppExitResponse.cancel);
+        await tester.pump();
+        expect(find.text('Niet-opgeslagen wijzigingen'), findsOneWidget);
+      });
     },
   );
 
   testWidgets(
     'schoon tabblad: een afsluitverzoek annuleert en loopt door naar quitApp (#2678)',
     (tester) async {
-      useMacos();
-      await pumpShell(tester);
+      await onMacos(tester, (_) async {
+        expect(
+          hasAppExitHandler,
+          isTrue,
+          reason:
+              'platform=$defaultTargetPlatform quitApp-aanroepen=$debugQuitAppCalls',
+        );
 
-      // De opruimstappen raken de schijf en wachten op een frame. Beide
-      // lopen alleen door als het verzoek zélf buiten de nep-klok start.
-      late final AppExitResponse response;
-      await tester.runAsync(() async {
-        response = await tester.binding.handleRequestAppExit();
-        for (var i = 0; i < 200 && debugQuitAppCalls == 0; i++) {
-          await tester.pump(const Duration(milliseconds: 20));
-          await Future<void>.delayed(const Duration(milliseconds: 20));
-        }
+        // Schijf en endOfFrame lopen alleen door als het verzoek zelf
+        // buiten de nep-klok start.
+        late final AppExitResponse response;
+        await tester.runAsync(() async {
+          response = await tester.binding.handleRequestAppExit();
+          for (var i = 0; i < 200 && debugQuitAppCalls == 0; i++) {
+            await tester.pump(const Duration(milliseconds: 20));
+            await Future<void>.delayed(const Duration(milliseconds: 20));
+          }
+        });
+        expect(response, AppExitResponse.cancel);
+        expect(find.text('Niet-opgeslagen wijzigingen'), findsNothing);
+
+        // Het sluiten van het laatste venster vraagt nog eens om terminate.
+        // Die tweede vraag moet door, anders blijft de app na doorgaan open.
+        final followUp = await tester.binding.handleRequestAppExit();
+        expect(followUp, AppExitResponse.exit);
+        expect(debugQuitAppCalls, 1);
       });
-      expect(response, AppExitResponse.cancel);
-      expect(find.text('Niet-opgeslagen wijzigingen'), findsNothing);
-      expect(debugQuitAppCalls, 1);
-
-      // Het sluiten van het laatste venster vraagt nog eens om terminate.
-      // Die tweede vraag moet door, anders blijft de app na doorgaan open.
-      final followUp = await tester.binding.handleRequestAppExit();
-      expect(followUp, AppExitResponse.exit);
-      debugDefaultTargetPlatformOverride = null;
     },
   );
 }
