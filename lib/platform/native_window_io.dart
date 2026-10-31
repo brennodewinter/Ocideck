@@ -92,6 +92,16 @@ Future<void> configureNativeWindow() async {
   });
 }
 
+/// Haalt het primaire venster naar voren. Een tweede Linux-start zonder
+/// bestand heeft geen ander zichtbaar effect (#2679).
+Future<void> focusPrimaryWindow() async {
+  if (!Platform.isLinux) return;
+  final window = WindowManager.instance.getCurrent();
+  if (window == null) return;
+  window.show();
+  window.focus();
+}
+
 /// Registreert de callback die bij het sluiten van het venster wordt
 /// aangeroepen. De shell gebruikt dit om niet-opgeslagen werk te bewaken.
 void setWillCloseCallback(WillCloseCallback callback) {

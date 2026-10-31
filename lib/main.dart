@@ -57,12 +57,18 @@ void main(List<String> args) {
     // (vals "vorige sessie niet netjes afgesloten" plus gelijktijdige
     // rotatie). Windows doet dit natief in de runner; macOS regelt exemplaren
     // via het besturingssysteem.
+    var primaryHung = false;
     if (!kIsWeb && !audience && Platform.isLinux) {
       final guard = SingleInstanceGuard();
       if (await guard.forwardToPrimary(pendingLaunchFiles)) {
-        // De primaire opent de paden; dit proces bezit niets om op te ruimen.
+        // De primaire opent de paden of haalt het venster naar voren; dit
+        // proces bezit niets om op te ruimen.
         exit(0);
       }
+      // Geen `ok`: er was geen primaire, of die hing. In het tweede geval
+      // niet stil stoppen — deze start gaat zelf verder, anders ziet de
+      // gebruiker niets (#2679). Het logbestand bestaat hier nog niet.
+      primaryHung = guard.primaryDidNotAnswer;
       await guard.becomePrimary();
       activeSingleInstance = guard;
     }
@@ -75,6 +81,12 @@ void main(List<String> args) {
       session: !audience,
     );
     logMilestone('main');
+    if (primaryHung) {
+      logWarning(
+        'enkel-exemplaar',
+        'de primaire antwoordde niet; deze start gaat zelf verder',
+      );
+    }
 
     // De fonts, het gezichtsmodel en de gebundelde JavaScript zijn geen
     // Dart-pakketten, dus Flutter's eigen NOTICES-asset kent ze niet. Ze hier
