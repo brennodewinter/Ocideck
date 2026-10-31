@@ -352,101 +352,103 @@ class _OverviewSlideCard extends StatelessWidget {
               '${l10n.d('Slide')} ${index + 1}/${deck.slides.length}: $title',
           customSemanticsActions: readOnly ? const {} : _semanticActions(l10n),
           onTap: onSelect,
-          child: GestureDetector(
-            onTap: onSelect,
-            onDoubleTap: onOpen,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 120),
-              decoration: BoxDecoration(
-                color: colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: borderColor, width: 2),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(
-                      alpha: selected ? 0.34 : 0.18,
+          child: Listener(
+            onPointerDown: (_) => onSelect(),
+            child: GestureDetector(
+              onDoubleTap: onOpen,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 120),
+                decoration: BoxDecoration(
+                  color: colorScheme.surface,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: borderColor, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(
+                        alpha: selected ? 0.34 : 0.18,
+                      ),
+                      blurRadius: selected ? 14 : 8,
+                      offset: const Offset(0, 4),
                     ),
-                    blurRadius: selected ? 14 : 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      Expanded(
-                        child: ExcludeSemantics(
-                          child: RepaintBoundary(
-                            child: SlidePreviewWidget(
-                              slideAspect: slideAspectRatio(deck.slideSize),
-                              slide: slide,
-                              projectPath: deck.projectPath,
-                              themeProfile: deck.themeProfile,
-                              deckMarpStyle: deck.marpStyle,
-                              cockpitColorScheme: settings.cockpitColorScheme,
-                              allowRemoteMedia: settings.allowRemoteMedia,
-                              slideNumber: index + 1,
-                              slideCount: deck.slides.length,
-                              fitScaleOverride: sharedSplitFitScale(
-                                deck.slides,
-                                index,
-                                deck.themeProfile,
-                                deck.themeProfile.fontFamily,
+                  ],
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Expanded(
+                          child: ExcludeSemantics(
+                            child: RepaintBoundary(
+                              child: SlidePreviewWidget(
                                 slideAspect: slideAspectRatio(deck.slideSize),
+                                slide: slide,
+                                projectPath: deck.projectPath,
+                                themeProfile: deck.themeProfile,
+                                deckMarpStyle: deck.marpStyle,
+                                cockpitColorScheme: settings.cockpitColorScheme,
+                                allowRemoteMedia: settings.allowRemoteMedia,
+                                slideNumber: index + 1,
+                                slideCount: deck.slides.length,
+                                fitScaleOverride: sharedSplitFitScale(
+                                  deck.slides,
+                                  index,
+                                  deck.themeProfile,
+                                  deck.themeProfile.fontFamily,
+                                  slideAspect: slideAspectRatio(deck.slideSize),
+                                ),
+                                splitRunPosition: splitRunPositionFor(
+                                  deck.slides,
+                                  index,
+                                ),
+                                numberStart: numberStart,
+                                scopeCia: scopeCia,
+                                reportLanguage: deck.language,
+                                improvementY01: deck.improvementY01Metric,
+                                tlp: deck.tlp,
+                                organization: deck.organization,
+                                deckSignature: deck.signature,
+                                sealedAt: deck.finalized ? deck.sealAt : '',
+                                showClassificationWatermark:
+                                    settings.classificationWatermarkEnabled,
+                                decodeMaxEdge: 512,
                               ),
-                              splitRunPosition: splitRunPositionFor(
-                                deck.slides,
-                                index,
-                              ),
-                              numberStart: numberStart,
-                              scopeCia: scopeCia,
-                              reportLanguage: deck.language,
-                              improvementY01: deck.improvementY01Metric,
-                              tlp: deck.tlp,
-                              organization: deck.organization,
-                              deckSignature: deck.signature,
-                              sealedAt: deck.finalized ? deck.sealAt : '',
-                              showClassificationWatermark:
-                                  settings.classificationWatermarkEnabled,
-                              decodeMaxEdge: 512,
                             ),
                           ),
                         ),
-                      ),
-                      _footer(context, title, colorScheme),
-                    ],
-                  ),
-                  if (outsideTimedFormat)
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: colorScheme.errorContainer,
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          child: Text(
-                            l10n.d('Buiten het format'),
-                            style: TextStyle(
-                              color: colorScheme.onErrorContainer,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
+                        _footer(context, title, colorScheme),
+                      ],
                     ),
-                  // De markering hangt aan de kaartrand — de kaart zelf is
-                  // geen dropdoel meer.
-                  ..._insertMarkers(colorScheme),
-                ],
+                    if (outsideTimedFormat)
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: colorScheme.errorContainer,
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            child: Text(
+                              l10n.d('Buiten het format'),
+                              style: TextStyle(
+                                color: colorScheme.onErrorContainer,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    // De markering hangt aan de kaartrand — de kaart zelf is
+                    // geen dropdoel meer.
+                    ..._insertMarkers(colorScheme),
+                  ],
+                ),
               ),
             ),
           ),
