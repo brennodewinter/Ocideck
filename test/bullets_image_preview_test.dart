@@ -67,8 +67,16 @@ void main() {
           ),
         );
 
-        // Let the file image decode and paint.
-        await Future<void>.delayed(const Duration(milliseconds: 300));
+        // Wacht op de gebruikte decoder; 300 ms bewijst onder CI-last niets.
+        final images = tester.widgetList<Image>(find.byType(Image)).toList();
+        expect(images, isNotEmpty);
+        for (final image in images) {
+          await precacheImage(
+            image.image,
+            tester.element(find.byWidget(image)),
+            onError: (error, stack) => Error.throwWithStackTrace(error, stack!),
+          ).timeout(const Duration(seconds: 60));
+        }
         await tester.pump();
 
         final boundary =
