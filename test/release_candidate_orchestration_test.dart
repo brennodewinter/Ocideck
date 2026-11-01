@@ -50,8 +50,9 @@ void main() {
         File(
           '${dist.path}/SHA256SUMS',
         ).writeAsStringSync('$digest  payload.bin\n');
-        if (scenario == 'archive-mismatch')
+        if (scenario == 'archive-mismatch') {
           payload.writeAsStringSync('changed after test');
+        }
         File('${dir.path}/candidate-manifest.json').writeAsStringSync(
           jsonEncode({
             'commit': sha,
@@ -129,7 +130,7 @@ gh() {
   case "\$1 \$2" in
     'run list') printf '[{"databaseId":77,"headSha":"%s","status":"completed","conclusion":"success"}]\\n' "\$SHA" ;;
     'run view')
-      [ -f \"\$FIXTURE/candidate-checked\" ] || die windows-wait-before-candidate
+      [ -f "\$FIXTURE/candidate-checked" ] || die windows-wait-before-candidate
       local actual="\$SHA" status=success
       [ "\$SCENARIO" != wrong-windows-sha ] || actual="\$CHANGED"
       [ "\$SCENARIO" != suite-failure ] || status=failure
@@ -141,7 +142,7 @@ api() {
   case "\$2" in
     /actions/runs\\?*) printf '{"workflow_runs":[{"id":123,"workflow_id":"release.yml","commit_sha":"%s","prettyref":"%s","event":"workflow_dispatch"}]}\\n' "\$SHA" "\$REF" ;;
     /actions/runs/123)
-      touch \"\$FIXTURE/candidate-checked\"
+      touch "\$FIXTURE/candidate-checked"
       local actual="\$SHA" status=success runref="\$REF"
       [ "\$SCENARIO" != wrong-candidate-ref ] || runref=main
       case "\$SCENARIO" in candidate-failure|consumer-failure) status=failure ;; wrong-candidate-sha) actual="\$CHANGED" ;; esac

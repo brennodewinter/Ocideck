@@ -280,8 +280,8 @@ resume_tag_target old
   ]) {
     test('explicit repair candidate selection: $scenario', () {
       final result = run(
-        'SCENARIO=$scenario\n' +
-            r'''
+        'SCENARIO=$scenario\n'
+        r'''
 CANDIDATE=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 RELEASE=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 HEAD=cccccccccccccccccccccccccccccccccccccccc
