@@ -9,7 +9,7 @@
 # het STARTEN wel — `windows-ophalen` dispatcht sinds v0.3.6 de spiegel-build
 # actief via `GH_DISPATCH_TOKEN` i.p.v. te hopen dat de tag-push hem triggert.
 #
-# Een kandidaat op main bouwt en controleert eerst alle bestanden:
+# Een kandidaat op een vaste commitbranch bouwt en controleert eerst alle bestanden:
 #
 #   web      → geharde bundel
 #   linux    → x64-bundel als tar.gz
@@ -33,7 +33,7 @@ name: release
 on:
   push:
     tags: ["v*"]
-  # Een kandidaat draait op main; een herstart van publicatie op de tag.
+  # Een kandidaat draait op zijn vaste commitbranch; publicatie op de tag.
   workflow_dispatch:
     inputs:
       mode:
@@ -76,8 +76,10 @@ jobs:
           TAG="$RELEASE_TAG"
           SEMVER_RE='^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(\.(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?$'
           if [ "${{ inputs.mode }}" = candidate ]; then
-            test "${GITHUB_REF_TYPE:-}" = branch && test "$GITHUB_REF_NAME" = main || {
-              echo "Kandidaat moet vanaf main worden gestart." >&2; exit 1;
+            printf '%s\n' "$RELEASE_SHA" | grep -Eq '^[0-9a-f]{40}$'
+            CANDIDATE_REF="codex/release-candidate-${RELEASE_TAG}-${RELEASE_SHA}"
+            test "${GITHUB_REF_TYPE:-}" = branch && test "$GITHUB_REF_NAME" = "$CANDIDATE_REF" && test "$GITHUB_SHA" = "$RELEASE_SHA" || {
+              echo "Kandidaat moet vanaf de vaste commitbranch worden gestart." >&2; exit 1;
             }
             test "$(git rev-parse HEAD)" = "$RELEASE_SHA" || {
               echo "Kandidaatcheckout wijkt af van opgegeven commit." >&2; exit 1;
@@ -290,17 +292,12 @@ jobs:
         # naast de rauwe tarball een AppImage, een .deb en een .rpm — losse assets
         # aan de release, geen store en geen sandbox. appimagetool zit in geen
         # distro, dus het pakketscript haalt het op en toetst het tegen deze
-        # sha256. De hash ÍS de pin: draait de `continuous`-build upstream weg, dan
-        # faalt de download hier hoorbaar in plaats van stil een ander binary te
-        # draaien. Sinds #2324 vergelijkt de pre-flight van release_auto deze pin
-        # vóór de tag met de officiële asset-digest uit de GitHub-release-API —
-        # zo bleek een verplaatste upstream niet meer pas in dèze job. Daarom
-        # staat appimagetool niet als *_VERSION in de pin-manifest (een
-        # content-hash veroudert niet in stilte); bij een sha-mismatch: haal de
-        # nieuwe digest uit de GitHub-release-API en werk hem hier bij.
+        # sha256. Een vaste officiële versie voorkomt wijzigingen tijdens een
+        # release; de hash controleert de daadwerkelijk gedownloade bytes.
+        # De pre-flight vergelijkt beide met de officiële GitHub-release-API.
         env:
-          APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
-          APPIMAGETOOL_SHA256: ac7fd56feade6002c2f57db39587113275d351fce911a5fbb29ea84cd0666cab
+          APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage
+          APPIMAGETOOL_SHA256: ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0
           OUT: dist
         run: make package-linux VERSION="$VERSIE"
 
@@ -535,7 +532,8 @@ jobs:
             if [ "${{ inputs.mode }}" = candidate ]; then
               gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
                 -d "$(jq -nc --arg tag "$TAG" --arg sha "$RELEASE_SHA" \
-                  '{ref:"main", inputs:{mode:"candidate",version:$tag,commit_sha:$sha}}')"
+                  --arg ref "codex/release-candidate-${TAG}-${RELEASE_SHA}" \
+                  '{ref:$ref, inputs:{mode:"candidate",version:$tag,commit_sha:$sha}}')"
             else
               gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
                 -d "{\"ref\":\"$TAG\"}"
@@ -549,9 +547,9 @@ jobs:
           # "hoort deze run bij deze poging" (zie BASE_RID hieronder) én voor
           # de cohortcontrole: het paar moet uit precies die run komen.
           run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=30" \
-            | jq -r --arg t "$TAG" --arg mode "${{ inputs.mode }}" \
+            | jq -r --arg t "$TAG" --arg sha "$RELEASE_SHA" --arg mode "${{ inputs.mode }}" \
                 'first(.workflow_runs[] | select(if $mode == "candidate" then
-                  .head_branch == "main" and .display_title == ("Windows candidate " + $t)
+                  .head_branch == ("codex/release-candidate-" + $t + "-" + $sha) and .head_sha == $sha and .display_title == ("Windows candidate " + $t)
                 else .head_branch == $t end))
                 // {} | "\(.status // "")|\(.conclusion // "")|\(.html_url // "")|\(.id // "")"'; }
 
@@ -951,8 +949,10 @@ jobs:
           API="${GITHUB_SERVER_URL}/api/v1/repos/${GITHUB_REPOSITORY}"
           curl -fsS --connect-timeout 15 --max-time 60 \
             -H "Authorization: token $TOKEN" "$API/actions/runs/$RID" > /tmp/candidate-run.json
-          jq -e --arg sha "$(git rev-parse HEAD)" \
-            '.workflow_id == "release.yml" and .commit_sha == $sha and .status == "success"' \
+          # Oudere tags attesteren kandidaten op main; RID en commit liggen al vast in de tag.
+          jq -e --arg sha "$(git rev-parse HEAD)" --arg tag "$GITHUB_REF_NAME" \
+            '.workflow_id == "release.yml" and .commit_sha == $sha and .status == "success"
+             and (.prettyref == ("codex/release-candidate-" + $tag + "-" + $sha) or .prettyref == "main")' \
             /tmp/candidate-run.json >/dev/null
           curl -fsS --connect-timeout 15 --max-time 60 \
             -H "Authorization: token $TOKEN" "$API/actions/runs/$RID/artifacts" > /tmp/artifacts.json
