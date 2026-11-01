@@ -21,10 +21,18 @@ void main() {
 
   /// Start een loopbackserver die elke upgrade aanvaardt; het verzoek en
   /// de binnenkomende frames staan voor de test klaar.
-  Future<({Uri url, List<HttpRequest> seen, List<dynamic> frames})>
+  Future<
+    ({
+      Uri url,
+      List<HttpRequest> seen,
+      List<dynamic> frames,
+      Future<void> firstTwoFrames,
+    })
+  >
   start() async {
     final seen = <HttpRequest>[];
     final frames = <dynamic>[];
+    final firstTwoFrames = Completer<void>();
     server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
     unawaited(
       server!.forEach((req) async {
@@ -33,6 +41,7 @@ void main() {
           final ws = await WebSocketTransformer.upgrade(req);
           ws.listen((frame) {
             frames.add(frame);
+            if (frames.length == 2) firstTwoFrames.complete();
             // Elk inkomend frame krijgt een protocolantwoord terug —
             // zo is de inkomende richting écht te testen.
             ws.add('{"partial":"echo"}');
@@ -47,6 +56,7 @@ void main() {
       url: Uri.parse('ws://127.0.0.1:${server!.port}'),
       seen: seen,
       frames: frames,
+      firstTwoFrames: firstTwoFrames.future,
     );
   }
 
@@ -70,7 +80,8 @@ void main() {
       // Tekst- en binair frame komen bij de server aan.
       socket.sendText('{"config":{}}');
       socket.sendBytes(Uint8List.fromList([1, 2, 3]));
-      await pumpEventQueue();
+      // Eventqueue-rondes bewijzen niet dat echte socket-I/O is aangekomen.
+      await t.firstTwoFrames.timeout(const Duration(seconds: 60));
       expect(t.frames, contains('{"config":{}}'));
       expect(
         t.frames.any(
