@@ -809,6 +809,14 @@ Homebrew tap, and checks the served results. If the publication stops after
 a tag push, `--resume vX.Y.Z` continues the same tag and candidate; it never
 moves a pushed tag.
 
+When a real product correction is required before an untagged release can
+pass, use a newly reviewed release PR for that same version. After its exact
+head passes the full local gate, all CI terminates, and its normal merge is
+verified, select it explicitly with `--resume vX.Y.Z --release-pr <number>`.
+The title must match that version and the PR must be merged into `main`.
+Automatic selection still refuses multiple matching release PRs. This option
+cannot change an already published tag and does not bypass candidate checks.
+
 For a reviewed repair to release tooling or packaging after the release PR has
 merged, an operator can explicitly select the merged repair commit with
 `--resume vX.Y.Z --candidate-sha <full commit SHA>`. This is an untagged-only
