@@ -13,6 +13,9 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Ouderdom van wisselkoersen.** De waarschuwing telt kalenderdagen. Een
+  wintertijdwisseling markeert een koers van precies zeven dagen oud niet
+  langer één uur te vroeg als verouderd.
 - **Afsluiten op macOS.** Cmd+Q, Stop in het Dock en uitloggen liepen langs de
   vraag om niet-opgeslagen werk. Die vraag komt nu ook dan, net als bij het
   sluiten van het venster. Zonder de shell (de toestemmingspoort) sluit de app

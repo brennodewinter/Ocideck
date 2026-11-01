@@ -26,7 +26,8 @@ ExchangeRate _rate(String code, int micros, {String date = '2026-10-15'}) =>
     );
 
 String _isoDaysAgo(int days) {
-  final d = DateTime.now().subtract(Duration(days: days));
+  final now = DateTime.now();
+  final d = DateTime(now.year, now.month, now.day - days);
   return '${d.year}-${d.month.toString().padLeft(2, '0')}-'
       '${d.day.toString().padLeft(2, '0')}';
 }
@@ -66,14 +67,33 @@ void main() {
       expect(_rate('USD', 892220).microsLabel, '0,89222');
     });
 
-    test(
-      'een koers van een week oud of ouder is verouderd, een verse niet',
-      () {
-        expect(_rate('USD', 1, date: _isoDaysAgo(1)).isStale, isFalse);
-        expect(_rate('USD', 1, date: _isoDaysAgo(7)).isStale, isFalse);
-        expect(_rate('USD', 1, date: _isoDaysAgo(9)).isStale, isTrue);
-      },
-    );
+    test('alleen een koers ouder dan een week is verouderd', () {
+      expect(_rate('USD', 1, date: _isoDaysAgo(1)).isStale, isFalse);
+      expect(_rate('USD', 1, date: _isoDaysAgo(7)).isStale, isFalse);
+      expect(_rate('USD', 1, date: _isoDaysAgo(9)).isStale, isTrue);
+    });
+
+    test('de weekgrens telt kalenderdagen bij winter- en zomertijd', () {
+      for (final boundary in [
+        (source: '2026-10-25', seventh: DateTime(2026, 11, 1, 23, 59)),
+        (source: '2026-03-29', seventh: DateTime(2026, 4, 5, 23, 59)),
+        (source: '2025-12-25', seventh: DateTime(2026, 1, 1, 23, 59)),
+        (source: '2024-02-23', seventh: DateTime(2024, 3, 1, 23, 59)),
+      ]) {
+        final rate = _rate('USD', 1, date: boundary.source);
+        expect(
+          rate.isStaleAt(boundary.seventh),
+          isFalse,
+          reason: boundary.source,
+        );
+        final eighth = DateTime(
+          boundary.seventh.year,
+          boundary.seventh.month,
+          boundary.seventh.day + 1,
+        );
+        expect(rate.isStaleAt(eighth), isTrue, reason: boundary.source);
+      }
+    });
 
     test('een onleesbare peildatum geldt als verouderd, niet als vers', () {
       expect(_rate('USD', 1, date: 'gisteren').isStale, isTrue);

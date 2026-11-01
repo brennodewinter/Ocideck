@@ -90,6 +90,7 @@
 #                                                # eerdere release door een patch
 #   scripts/release_auto.sh --resume vX.Y.Z      # hervat een onderbroken release
 #     --candidate-sha FULL40                    # kies expliciet een gemergde reparatie
+#     --release-pr NUMMER                       # kies een gemergde releaseherziening vóór tag
 #   scripts/release_auto.sh --status vX.Y.Z      # toon waar een release staat (read-only)
 
 set -Eeuo pipefail
@@ -272,7 +273,14 @@ LEVEL_COUNT=0
 TAG_COUNT=0
 CANDIDATE_SHA=""
 EXPECT_CANDIDATE_SHA=0
+RELEASE_PR=""
+EXPECT_RELEASE_PR=0
 for arg in "$@"; do
+  if [ "$EXPECT_RELEASE_PR" -eq 1 ]; then
+    [[ "$arg" =~ ^[1-9][0-9]*$ ]] || die "--release-pr verwacht een positief PR-nummer."
+    RELEASE_PR="$arg"; EXPECT_RELEASE_PR=0
+    continue
+  fi
   if [ "$EXPECT_CANDIDATE_SHA" -eq 1 ]; then
     [[ "$arg" =~ ^[0-9a-f]{40}$ ]] || die "--candidate-sha verwacht precies 40 kleine hextekens."
     CANDIDATE_SHA="$arg"; EXPECT_CANDIDATE_SHA=0
@@ -285,6 +293,9 @@ for arg in "$@"; do
     --ondanks-fixes) IGNORE_FIXES=1 ;;
     --supersede-untagged) SUPERSEDE_UNTAGGED=1 ;;
     --print-version) PRINT_VERSION=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
+    --release-pr)
+      [ -z "$RELEASE_PR" ] || die "geef slechts één --release-pr."
+      EXPECT_RELEASE_PR=1 ;;
     --candidate-sha)
       [ -z "$CANDIDATE_SHA" ] || die "geef slechts één --candidate-sha."
       EXPECT_CANDIDATE_SHA=1 ;;
@@ -309,6 +320,11 @@ for arg in "$@"; do
   esac
 done
 
+[ "$EXPECT_RELEASE_PR" -eq 0 ] || die "--release-pr mist het PR-nummer."
+[ -z "$RELEASE_PR" ] || [ "$RESUME" -eq 1 ] \
+  || die "--release-pr mag uitsluitend samen met --resume vX.Y.Z."
+[ -z "$RELEASE_PR" ] || [ -z "$CANDIDATE_SHA" ] \
+  || die "combineer --release-pr niet met --candidate-sha."
 [ "$EXPECT_CANDIDATE_SHA" -eq 0 ] || die "--candidate-sha mist de volledige commit-SHA."
 [ -z "$CANDIDATE_SHA" ] || [ "$RESUME" -eq 1 ] \
   || die "--candidate-sha mag uitsluitend samen met --resume vX.Y.Z."
@@ -2236,7 +2252,24 @@ finish() {
 # branchnaam is dan weg. Echoot "nummer|state|merged|head_sha|merge_commit_sha"
 # of niets als er (nog) geen PR is.
 find_release_pr() {
-  local json matches count
+  local json matches count remote refs
+  if [ -n "${RELEASE_PR:-}" ]; then
+    for remote in origin mirror; do
+      refs="$(git ls-remote "$remote" "refs/tags/$TAG" "refs/tags/$TAG^{}")" \
+        || die "kon publieke tag op $remote niet betrouwbaar controleren."
+      [ -z "$refs" ] || die "--release-pr mag niet na een publieke tag op $remote."
+    done
+    json="$(api GET "/pulls/$RELEASE_PR")" \
+      || die "kon expliciete release-PR #$RELEASE_PR niet betrouwbaar lezen."
+    printf '%s' "$json" | jq -er --arg n "$RELEASE_PR" --arg t "chore(release): versie $NEW_VERSION" '
+      select((.number | tostring) == $n and .title == $t
+        and .base.ref == "main" and .merged == true and .state == "closed"
+        and (.head.sha | test("^[0-9a-f]{40}$"))
+        and (.merge_commit_sha | test("^[0-9a-f]{40}$")))
+      | "\(.number)|\(.state)|\(.merged)|\(.head.sha)|\(.merge_commit_sha)"' \
+      || die "expliciete release-PR moet een gemergde releaseherziening voor $NEW_VERSION naar main zijn."
+    return 0
+  fi
   json="$(api GET "/pulls?state=all&limit=100")" \
     || die "kon bestaande release-PR's niet betrouwbaar lezen — maak geen duplicaat."
   matches="$(printf '%s' "$json" | jq -cer --arg t "chore(release): versie $NEW_VERSION" --arg b "$BRANCH" \
@@ -3069,6 +3102,7 @@ resume_release() {
   local origin_tag rc=0 tagged_version
   origin_tag="$(remote_tag_commit origin)" || rc=$?
   if [ "$rc" -eq 0 ]; then
+    [ -z "${RELEASE_PR:-}" ] || die "--release-pr mag niet na publicatie van $TAG."
     [ -z "$CANDIDATE_SHA" ] || die "--candidate-sha mag niet na publicatie van $TAG."
     TAG_PUSHED=1
     if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
