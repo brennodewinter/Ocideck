@@ -42,7 +42,10 @@ class _TreePreview extends StatelessWidget {
       width: w,
       height: w / aspect,
       child: CustomPaint(
-        painter: ScenePainter(scene),
+        painter: ScenePainter(
+          scene,
+          fontFamily: profile.fontFamily.isEmpty ? null : profile.fontFamily,
+        ),
         size: Size(w, w / aspect),
       ),
     );
