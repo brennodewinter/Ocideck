@@ -8,6 +8,9 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.6] — 2026-11-01
+
+
 ### Fixed
 
 - **Afsluiten op macOS.** Cmd+Q, Stop in het Dock en uitloggen liepen langs de
