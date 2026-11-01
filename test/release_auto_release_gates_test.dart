@@ -224,7 +224,7 @@ git() {
   case "$*" in
     'ls-remote origin refs/heads/main') printf '%s\n' 'new refs/heads/main' ;;
     'merge-base --is-ancestor old new') return 0 ;;
-    'diff --name-only old new') printf '%s\n' 'test/form_maker_check_dialog_test.dart' 'scripts/release_auto.sh' 'assets/cwe/cwe_full.json' 'lib/services/reference_standards.dart' 'CONTRIBUTORS.md' ;;
+    'diff --name-only old new') printf '%s\n' 'test/form_maker_check_dialog_test.dart' 'scripts/release_auto.sh' '.github/workflows/windows-test-check.yml' 'assets/cwe/cwe_full.json' 'lib/services/reference_standards.dart' 'CONTRIBUTORS.md' ;;
     'show new:pubspec.yaml') printf '%s\n' 'version: 9.9.9+45' ;;
     *) return 1 ;;
   esac

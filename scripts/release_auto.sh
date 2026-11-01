@@ -2529,7 +2529,7 @@ resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
   while IFS= read -r file; do
     [ -n "$file" ] || continue
     case "$file" in
-      test/*|scripts/release_auto.sh|assets/cwe/cwe_full.json|lib/services/reference_standards.dart|lib/services/cwe_catalog.dart|tool/build_cwe_catalog.dart|docs/LICENSE_COMPLIANCE.md|docs/design/PENTEST_MIAUW.md|CONTRIBUTORS.md) ;;
+      test/*|scripts/release_auto.sh|.github/workflows/windows-test-check.yml|assets/cwe/cwe_full.json|lib/services/reference_standards.dart|lib/services/cwe_catalog.dart|tool/build_cwe_catalog.dart|docs/LICENSE_COMPLIANCE.md|docs/design/PENTEST_MIAUW.md|CONTRIBUTORS.md) ;;
       *) die "na de release-merge veranderde $file; een nieuwe release-PR is nodig vóór het taggen." ;;
     esac
   done <<<"$changed"
