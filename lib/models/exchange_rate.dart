@@ -43,10 +43,17 @@ class ExchangeRate {
   /// De ECB publiceert op werkdagen een nieuwe referentiekoers; een koers
   /// ouder dan een week wordt als verouderd gemarkeerd — zichtbaar, want een
   /// stille oude koers lijkt dan actueel.
-  bool get isStale {
+  bool get isStale => isStaleAt(DateTime.now());
+
+  /// Vergelijk lokale kalenderdagen: een zomertijdwisseling verandert de
+  /// leeftijd van een datum niet. [now] maakt de weekgrens toetsbaar.
+  bool isStaleAt(DateTime now) {
     final then = DateTime.tryParse(date);
     if (then == null) return true;
-    return DateTime.now().difference(then).inDays > 7;
+    final localNow = now.toLocal();
+    final today = DateTime.utc(localNow.year, localNow.month, localNow.day);
+    final sourceDay = DateTime.utc(then.year, then.month, then.day);
+    return today.difference(sourceDay).inDays > 7;
   }
 
   /// De koers als kommagetal met zes decimalen, voor de invoercontrole.
