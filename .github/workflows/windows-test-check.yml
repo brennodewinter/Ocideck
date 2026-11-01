@@ -81,10 +81,12 @@ jobs:
           # Begrens de belasting en schrijf ook bij een runnerbreuk bewijs.
           (
             while true; do
-              powershell.exe -NoProfile -Command '$os = Get-CimInstance Win32_OperatingSystem; Write-Output ("Runner memory: free={0}MB total={1}MB" -f [math]::Round($os.FreePhysicalMemory / 1024), [math]::Round($os.TotalVisibleMemorySize / 1024)); Get-Process flutter_tester,dart -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,WorkingSet64,CPU | Format-Table -AutoSize'
+              powershell.exe -NoProfile -Command '$os = Get-CimInstance Win32_OperatingSystem; Write-Output ("Runner memory: free={0}MB total={1}MB" -f [math]::Round($os.FreePhysicalMemory / 1024), [math]::Round($os.TotalVisibleMemorySize / 1024)); Get-Process flutter_tester,dart -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,WorkingSet64,CPU | Format-Table -AutoSize; exit 0'
               sleep 30
             done
           ) &
           monitor_pid=$!
           trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
+          # Isoleer de terugkerende laatste testgroep vóór de volledige suite.
+          flutter test --concurrency=1 test/shell_present_and_close_test.dart test/shell_s3_actions_test.dart
           flutter test --concurrency=2 --test-randomize-ordering-seed random --exclude-tags golden
