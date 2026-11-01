@@ -6,11 +6,13 @@ class _TreePreview extends StatelessWidget {
   final Slide slide;
   final double w;
   final String languageCode;
+  final ThemeProfile profile;
 
   const _TreePreview({
     required this.slide,
     required this.w,
     required this.languageCode,
+    required this.profile,
   });
 
   @override
@@ -20,19 +22,28 @@ class _TreePreview extends StatelessWidget {
         ? kDefaultTreeTemplateId
         : slide.improvementTemplateId;
     final template = treeTemplateById(templateId);
+    final aspect = SlideAspectScope.of(context);
+    const sceneW = 960.0;
     final scene = buildTreeScene(
       bullets: slide.bullets,
       layout: treeLayoutOf(slide),
       measurer: const ApproximateTextMeasurer(),
       title: slide.title,
       guidance: template?.guidance(lang) ?? '',
+      palette: treePaletteFromTheme(
+        background: profile.slideBackgroundColor,
+        text: profile.textColor,
+        accent: profile.accentColor,
+      ),
+      width: sceneW,
+      height: sceneW / aspect,
     );
     return SizedBox(
       width: w,
-      height: w / SlideAspectScope.of(context),
+      height: w / aspect,
       child: CustomPaint(
         painter: ScenePainter(scene),
-        size: Size(w, w / SlideAspectScope.of(context)),
+        size: Size(w, w / aspect),
       ),
     );
   }

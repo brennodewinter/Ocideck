@@ -1,9 +1,13 @@
 // Tree / fishbone engine → Scene (PROCESS_IMPROVEMENT §3.3).
 library;
 
+import 'dart:math' as math;
+
 import '../../models/slide.dart';
 import '../scene/scene.dart';
 import 'tree_spec.dart';
+
+part 'tree_layout_hierarchy.dart';
 
 class TreePalette {
   const TreePalette({
@@ -12,6 +16,8 @@ class TreePalette {
     this.rule = '#CBD5E1',
     this.accent = '#003399',
     this.bone = '#334155',
+    this.box = '#F4F7FB',
+    this.onAccent = '#FFFFFF',
   });
 
   final String ink;
@@ -19,6 +25,46 @@ class TreePalette {
   final String rule;
   final String accent;
   final String bone;
+
+  /// Vulling van een knoop. Los van de dia-achtergrond, zodat de kaart
+  /// leesbaar blijft wanneer de dia zelf licht of donker is.
+  final String box;
+
+  /// Tekst op [accent] — wit op een donker accent, donker op een licht accent.
+  final String onAccent;
+}
+
+/// Palet dat de dia-kleuren volgt. De kaart is alleen een lichte afwijking
+/// van de dia-achtergrond, zodat [text] leesbaar blijft op de kaart én in de
+/// titel. Een vaste lichte kaart zou op een donkere dia witte tekst op wit
+/// zetten.
+TreePalette treePaletteFromTheme({
+  required String background,
+  required String text,
+  required String accent,
+}) {
+  if (_hexChannel(background, 0) == null ||
+      _hexChannel(text, 0) == null ||
+      _hexChannel(accent, 0) == null) {
+    return TreePalette(ink: text, accent: accent);
+  }
+  final dark = _relativeLuminance(background) < 0.45;
+  final box = dark
+      ? _mixHex(background, '#FFFFFF', 0.10)
+      : _mixHex(background, '#E4EAF3', 0.72);
+  final rule = dark
+      ? _mixHex(background, '#FFFFFF', 0.34)
+      : _mixHex(accent, background, 0.78);
+  final onAccent = _relativeLuminance(accent) < 0.30 ? '#FFFFFF' : '#0F172A';
+  return TreePalette(
+    ink: text,
+    muted: _mixHex(text, background, 0.38),
+    rule: rule,
+    accent: accent,
+    bone: dark ? _mixHex(text, background, 0.25) : '#334155',
+    box: box,
+    onAccent: onAccent,
+  );
 }
 
 Scene buildTreeScene({
@@ -63,56 +109,21 @@ Scene _tree({
   required double height,
 }) {
   final nodes = <SceneNode>[];
-  const margin = 32.0;
-  var y = margin;
-
-  if (title.trim().isNotEmpty) {
-    nodes.add(
-      SceneText(
-        x: margin,
-        y: y + 24,
-        text: title.trim(),
-        fontSize: 26,
-        fill: palette.ink,
-        fontWeight: 700,
-      ),
-    );
-    y += 36;
-  }
-  if (guidance.isNotEmpty) {
-    nodes.add(
-      SceneText(
-        x: margin,
-        y: y + 12,
-        text: guidance,
-        fontSize: 12,
-        fill: palette.muted,
-      ),
-    );
-    y += 22;
-  }
-
-  const fontSize = 14.0;
-  final lineH = measurer.lineHeight(fontSize: fontSize);
-  for (final b in bullets) {
-    if (y > height - margin) break;
-    final level = bulletLevel(b);
-    final text = bulletText(b).trim();
-    if (text.isEmpty) continue;
-    final x = margin + level * 28.0;
-    nodes.add(
-      SceneText(
-        x: x,
-        y: y + fontSize,
-        text: '• $text',
-        fontSize: fontSize,
-        fill: palette.ink,
-        fontWeight: level == 0 ? 600 : 400,
-      ),
-    );
-    y += lineH + 4;
-  }
-
+  final top = _paintTreeHeader(
+    nodes,
+    title: title,
+    guidance: guidance,
+    palette: palette,
+  );
+  _paintHierarchy(
+    nodes: nodes,
+    bullets: bullets,
+    measurer: measurer,
+    palette: palette,
+    top: top,
+    width: width,
+    height: height,
+  );
   return Scene(width: width, height: height, nodes: nodes);
 }
 
@@ -246,4 +257,45 @@ Scene _fishbone({
   }
 
   return Scene(width: width, height: height, nodes: nodes);
+}
+
+int? _hexChannel(String hex, int index) {
+  var h = hex.trim();
+  if (h.startsWith('#')) h = h.substring(1);
+  if (h.length == 3) {
+    h = h.split('').map((c) => '$c$c').join();
+  }
+  if (h.length < 6) return null;
+  return int.tryParse(h.substring(index * 2, index * 2 + 2), radix: 16);
+}
+
+double _relativeLuminance(String hex) {
+  final channels = [
+    _hexChannel(hex, 0),
+    _hexChannel(hex, 1),
+    _hexChannel(hex, 2),
+  ];
+  if (channels.any((c) => c == null)) return 1;
+  double linear(int channel) {
+    final s = channel / 255;
+    return s <= 0.04045
+        ? s / 12.92
+        : math.pow((s + 0.055) / 1.055, 2.4).toDouble();
+  }
+
+  return 0.2126 * linear(channels[0]!) +
+      0.7152 * linear(channels[1]!) +
+      0.0722 * linear(channels[2]!);
+}
+
+String _mixHex(String a, String b, double t) {
+  String channel(int index) {
+    final from = _hexChannel(a, index);
+    final to = _hexChannel(b, index);
+    if (from == null || to == null) return '00';
+    final mixed = (from + (to - from) * t).round().clamp(0, 255);
+    return mixed.toRadixString(16).padLeft(2, '0');
+  }
+
+  return '#${channel(0)}${channel(1)}${channel(2)}'.toUpperCase();
 }

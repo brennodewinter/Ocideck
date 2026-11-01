@@ -60,15 +60,20 @@ String renderTreeSlide(String slideMarkdown, {ThemeProfile? theme}) {
   final layout = layoutToken.isNotEmpty
       ? treeLayoutFromToken(layoutToken)
       : template?.defaultLayout ?? TreeLayout.tree;
-  final ink = theme?.textColor ?? '#0F172A';
-  final accent = theme?.accentColor ?? '#003399';
+  final palette = theme == null
+      ? const TreePalette()
+      : treePaletteFromTheme(
+          background: theme.slideBackgroundColor,
+          text: theme.textColor,
+          accent: theme.accentColor,
+        );
   final scene = buildTreeScene(
     bullets: bullets,
     layout: layout,
     measurer: const ApproximateTextMeasurer(),
     title: title,
     guidance: template?.guidance('en') ?? '',
-    palette: TreePalette(ink: ink, accent: accent, bone: ink),
+    palette: palette,
   );
   final svg = sceneToSvg(scene);
   final chrome = [

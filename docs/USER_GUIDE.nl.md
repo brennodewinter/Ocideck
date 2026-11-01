@@ -4407,8 +4407,10 @@ CTQ-boom, of Ishikawa); diepte is leidende tabs op elk opsommingsteken. Markeer 
 inline als `**X-01**` (of `**Y-01**` voor CTQ). Op schijf is de slide een opsommingslijst
 plus `<!-- ocideck_template: five-whys -->` en `<!-- ocideck_layout: tree -->`
 (of `fishbone`). De motor legt één Scene op; preview en HTML-export tekenen
-dezelfde SVG. Een deck dat al een boom bevat, opent en rendert altijd, module aan
-of uit — dezelfde regel als matrix en canvas.
+dezelfde SVG. De boomlay-out vult de dia met kaarten en pijlen: een keten
+zoals 5× Why daalt diagonaal af, een vertakte boom spreidt de kinderen. De
+visgraat blijft een visgraat. Een deck dat al een boom bevat, opent en rendert altijd,
+module aan of uit — dezelfde regel als matrix en canvas.
 
 **Flowslides.** Met de module aan biedt de slide-toevoegen-kiezer ook
 **Flow** — een processchema, swimlane of VSM. Kies een sjabloon (processchema,
