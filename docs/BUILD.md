@@ -750,10 +750,12 @@ one on `main` when the nightly schedule has not seen that commit yet. A red or
 persistently unreadable run remains a hard stop. Phase 1 repeats the check after
 its final fetch, so it never branches from a newer, untested tip.
 
-After the release PR merges, the script waits for `mirror/main` to equal
-that exact merge commit and checks the GitHub Windows suite and native build.
-It then starts the Forgejo candidate workflow on that same commit, waits for
-all jobs to finish and downloads and verifies its 13 release assets,
+After the release PR merges, the script creates a candidate branch named
+`codex/release-candidate-<tag>-<full commit SHA>` on both remotes. Creation is
+conditional on absence; an existing branch must already contain that exact SHA.
+The Windows checks and Forgejo candidate build use this fixed ref, so later
+changes to `main` do not invalidate their evidence. Before tagging, the script
+checks both refs again, waits for all required results and verifies the 13 assets,
 `SHA256SUMS` and manifest. Any failure leaves the release untagged; retry with
 `--resume vX.Y.Z`. Only then does it create an annotated tag recording the
 candidate run. The tag-triggered workflow validates that record and publishes
@@ -796,9 +798,8 @@ Then it runs `make bump-scanner-pins` (idempotent), commits any pin changes
 on the release branch, bumps the version, generates the SBOM, runs
 `make check-release`, builds and notarises locally, and verifies the seal.
 Phase 2 opens the release PR, waits for all required checks on its exact head
-and merges only if `main` still matches the checked base. It waits for the
-mirror, checks the Windows suite and native build, and runs the full Forgejo
-candidate on the exact merge SHA. The candidate archive must contain all 13
+and merges only if `main` still matches the checked base. It fixes the merge SHA on candidate branches on both remotes, checks the Windows
+suite and native build, and runs the full Forgejo candidate on that exact SHA. The candidate archive must contain all 13
 expected assets, `SHA256SUMS` and its manifest, with matching digests. Only
 then does the script annotate and push the tag to origin and mirror. The
 subsequent workflow checks the annotation and publishes those same bytes as
@@ -807,6 +808,17 @@ the release public, deploys the web demo, updates the download page and
 Homebrew tap, and checks the served results. If the publication stops after
 a tag push, `--resume vX.Y.Z` continues the same tag and candidate; it never
 moves a pushed tag.
+
+For a reviewed repair to release tooling or packaging after the release PR has
+merged, an operator can explicitly select the merged repair commit with
+`--resume vX.Y.Z --candidate-sha <full commit SHA>`. This is an untagged-only
+route: the original release must be its ancestor, the pubspec must be byte-equal,
+product files must remain unchanged, and the repair merge must match its merged
+PR head. Only the named release workflows and existing non-runtime repair paths
+are eligible. Workflow changes still require review and the full local gate;
+unchanged product files alone do not prove unchanged validation. All Windows,
+platform, consumer and artifact checks run against the selected fixed candidate
+before any public tag is created.
 
 The standalone `make bump-scanner-pins` does the same edit outside a release
 (manifest + every workflow's `*_VERSION` env + the pre-baked scans image tag, in
@@ -858,8 +870,8 @@ guided `make release` deliberately left to a proven follow-up.
 ### Candidate build, then tag and publication
 
 Run `scripts/release_auto.sh` for the full sequence. It builds and verifies
-the complete candidate on the exact merged `main` commit before reserving a
-version tag. The annotated tag records the successful candidate run. The tag
+the complete candidate on a fixed branch containing the exact merged commit
+before reserving a version tag. Later `main` commits do not move this candidate. The annotated tag records the successful candidate run. The tag
 starts publication of those already checked assets as a draft release; the
 local script signs the manifest and completes the public release, web demo,
 download page and Homebrew tap. If anything stops after the tag, resume that

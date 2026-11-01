@@ -89,6 +89,7 @@
 #   scripts/release_auto.sh --supersede-untagged patch  # vervang een ongetagde
 #                                                # eerdere release door een patch
 #   scripts/release_auto.sh --resume vX.Y.Z      # hervat een onderbroken release
+#     --candidate-sha FULL40                    # kies expliciet een gemergde reparatie
 #   scripts/release_auto.sh --status vX.Y.Z      # toon waar een release staat (read-only)
 
 set -Eeuo pipefail
@@ -269,7 +270,14 @@ STATUS=0
 MODE_COUNT=0
 LEVEL_COUNT=0
 TAG_COUNT=0
+CANDIDATE_SHA=""
+EXPECT_CANDIDATE_SHA=0
 for arg in "$@"; do
+  if [ "$EXPECT_CANDIDATE_SHA" -eq 1 ]; then
+    [[ "$arg" =~ ^[0-9a-f]{40}$ ]] || die "--candidate-sha verwacht precies 40 kleine hextekens."
+    CANDIDATE_SHA="$arg"; EXPECT_CANDIDATE_SHA=0
+    continue
+  fi
   case "$arg" in
     --dry-run) DRY_RUN=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
     --preflight) PREFLIGHT_ONLY=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
@@ -277,6 +285,9 @@ for arg in "$@"; do
     --ondanks-fixes) IGNORE_FIXES=1 ;;
     --supersede-untagged) SUPERSEDE_UNTAGGED=1 ;;
     --print-version) PRINT_VERSION=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
+    --candidate-sha)
+      [ -z "$CANDIDATE_SHA" ] || die "geef slechts één --candidate-sha."
+      EXPECT_CANDIDATE_SHA=1 ;;
     --resume) RESUME=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
     --status) STATUS=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
     patch|minor|major) LEVEL="$arg"; LEVEL_COUNT=$((LEVEL_COUNT + 1)) ;;
@@ -294,10 +305,13 @@ for arg in "$@"; do
       awk 'NR>1 && /^#/ { sub(/^# ?/, ""); print; next } NR>1 { exit }' \
         "${BASH_SOURCE[0]}"
       exit 0 ;;
-    *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --ondanks-fixes, --supersede-untagged, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
+    *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --ondanks-fixes, --supersede-untagged, --status vX.Y.Z, --resume vX.Y.Z [--candidate-sha FULL40], patch, minor of major)" ;;
   esac
 done
 
+[ "$EXPECT_CANDIDATE_SHA" -eq 0 ] || die "--candidate-sha mist de volledige commit-SHA."
+[ -z "$CANDIDATE_SHA" ] || [ "$RESUME" -eq 1 ] \
+  || die "--candidate-sha mag uitsluitend samen met --resume vX.Y.Z."
 [ "$MODE_COUNT" -le 1 ] \
   || die "combineer niet meerdere modi (--dry-run, --preflight, --print-version, --resume, --status)."
 [ "$LEVEL_COUNT" -le 1 ] || die "geef precies één niveau: patch, minor of major."
@@ -2513,9 +2527,9 @@ assert_release_merge_tree() { # assert_release_merge_tree MERGE_SHA
   log "Merge-tree is bytegelijk aan de gekeurde release-head (${merge_tree:0:12})."
 }
 
-# Een reparatie van tests, releasepoort of verouderde CWE-referentiedata mag na
-# de release-PR landen; productcode vereist een nieuwe release-PR.
-# Tag dan de opnieuw gekeurde main, nooit stilzwijgend de oude release-merge.
+# Automatisch hervatten laat alleen bestaande niet-productreparaties toe.
+# Een gemergde verpakkingsreparatie vereist expliciete --candidate-sha-selectie;
+# productwijzigingen mogen via geen van beide routes ongemerkt meekomen.
 resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
   local release="$1" current changed file version
   current="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
@@ -2530,7 +2544,7 @@ resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
     [ -n "$file" ] || continue
     case "$file" in
       test/*|scripts/release_auto.sh|.github/workflows/windows-test-check.yml|assets/cwe/cwe_full.json|lib/services/reference_standards.dart|lib/services/cwe_catalog.dart|tool/build_cwe_catalog.dart|docs/LICENSE_COMPLIANCE.md|docs/design/PENTEST_MIAUW.md|CONTRIBUTORS.md) ;;
-      *) die "na de release-merge veranderde $file; een nieuwe release-PR is nodig vóór het taggen." ;;
+      *) die "na de release-merge veranderde $file; automatisch hervatten is niet toegestaan; alleen een gekeurde verpakkingsreparatie kan expliciet via --candidate-sha worden geselecteerd." ;;
     esac
   done <<<"$changed"
   version="$(git show "$current:pubspec.yaml" 2>/dev/null \
@@ -2540,39 +2554,114 @@ resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
   printf '%s\n' "$current"
 }
 
+# Een expliciet gekozen reparatie mag uitsluitend verpakkings- en poortbestanden raken.
+select_repair_candidate() { # select_repair_candidate RELEASE_MERGE_SHA CANDIDATE_SHA
+  local release="$1" candidate="$2" remote refs ref actual current parents head proof file changed release_spec candidate_spec
+  for remote in origin mirror; do
+    refs="$(git ls-remote "$remote" "refs/tags/$TAG")" \
+      || die "releasetag op $remote niet leesbaar; kandidaat niet geselecteerd."
+    [ -z "$refs" ] || die "--candidate-sha mag niet na een publieke tag op $remote."
+  done
+  git merge-base --is-ancestor "$release" "$candidate" \
+    || die "gekozen kandidaat is geen afstammeling van de oorspronkelijke release-merge."
+  release_spec="$(git rev-parse "$release:pubspec.yaml")" \
+    || die "oorspronkelijke pubspec.yaml niet leesbaar."
+  candidate_spec="$(git rev-parse "$candidate:pubspec.yaml")" \
+    || die "pubspec.yaml van de kandidaat niet leesbaar."
+  [ "$release_spec" = "$candidate_spec" ] \
+    || die "gekozen kandidaat wijzigt pubspec.yaml; geen verpakkingsreparatie."
+  assert_release_merge_tree "$candidate" >&2
+  parents="$(git show -s --format='%P' "$candidate")"
+  head="$(awk '{print $2}' <<<"$parents")"
+  proof="$(api GET "/commits/$candidate/pull")" \
+    || die "gemergde reparatie-PR voor kandidaat niet aantoonbaar."
+  jq -e --arg sha "$candidate" --arg head "$head" \
+    '.merged == true and .merge_commit_sha == $sha and .head.sha == $head and (.number | type == "number")' <<<"$proof" >/dev/null \
+    || die "gekozen kandidaat is niet de exacte merge van een aantoonbaar gemergde reparatie-PR."
+  changed="$(git diff --name-only "$release" "$candidate")" \
+    || die "wijzigingen van de kandidaat niet leesbaar."
+  while IFS= read -r file; do
+    [ -n "$file" ] || continue
+    case "$file" in
+      test/*|scripts/release_auto.sh|.github/workflows/windows-test-check.yml|docs/LICENSE_COMPLIANCE.md|docs/design/PENTEST_MIAUW.md|CONTRIBUTORS.md|docs/BUILD.md|.forgejo/workflows/release.yml|.forgejo/workflows/linux-build.yml|.github/workflows/release.yml) ;;
+      *) die "gekozen kandidaat wijzigt $file buiten de toegestane verpakkingsreparatie." ;;
+    esac
+  done <<<"$changed"
+  ref="$(candidate_ref "$candidate")"
+  refs=0
+  for remote in origin mirror; do
+    actual="$(git ls-remote "$remote" "refs/heads/$ref" | awk 'NR==1 {print $1}')" \
+      || die "vaste kandidaatref op $remote niet leesbaar."
+    if [ -n "$actual" ]; then
+      [ "$actual" = "$candidate" ] || die "vaste kandidaatref op $remote verschoof."
+      refs=$((refs + 1))
+    fi
+  done
+  if [ "$refs" -ne 2 ]; then
+    current="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
+      || die "origin/main niet leesbaar bij kandidaatselectie."
+    [ "$current" = "$candidate" ] || die "nieuwe kandidaat moet bij selectie exact origin/main zijn."
+  fi
+  printf '%s\n' "$candidate"
+}
+
+candidate_ref() { # candidate_ref SHA
+  [[ "$1" =~ ^[0-9a-f]{40}$ ]] || die "ongeldige kandidaatcommit — niets getagd."
+  printf 'codex/release-candidate-%s-%s\n' "$TAG" "$1"
+}
+
+assert_candidate_refs() { # assert_candidate_refs SHA
+  local sha="$1" ref remote actual
+  ref="$(candidate_ref "$sha")"
+  for remote in origin mirror; do
+    actual="$(git ls-remote "$remote" "refs/heads/$ref" | awk 'NR==1 {print $1}')" \
+      || die "kandidaatref op $remote niet leesbaar — niets getagd."
+    [ "$actual" = "$sha" ] \
+      || die "kandidaatref op $remote ontbreekt of verschoof — niets getagd."
+  done
+}
+
+ensure_candidate_refs() { # ensure_candidate_refs SHA
+  local sha="$1" ref remote actual
+  ref="$(candidate_ref "$sha")"
+  for remote in origin mirror; do
+    actual="$(git ls-remote "$remote" "refs/heads/$ref" | awk 'NR==1 {print $1}')" \
+      || die "kandidaatref op $remote niet leesbaar — niets getagd."
+    if [ -z "$actual" ]; then
+      # De lege lease staat uitsluitend aanmaken toe, ook bij gelijktijdige pushes.
+      git push --quiet --force-with-lease="refs/heads/$ref:" "$remote" "$sha:refs/heads/$ref" \
+        || log "Kandidaatpush naar $remote niet bevestigd; controleer de teruglezing."
+    else
+      [ "$actual" = "$sha" ] \
+        || die "bestaande kandidaatref op $remote wijst naar een andere commit — niets gewijzigd."
+    fi
+  done
+  assert_candidate_refs "$sha"
+}
+
 # De Windows-suite en native bouw zijn geen verplichte mergepoorten. Vóór de
 # onomkeerbare tag toetsen we beide op precies de merge-commit.
 assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
-  local merge="$1" repo mirror_sha origin_sha runs run_id baseline_id state workflow label start=$SECONDS
+  local merge="$1" repo ref runs run_id baseline_id state workflow label start
+  ref="$(candidate_ref "$merge")"
+  ensure_candidate_refs "$merge"
   repo="$(git remote get-url mirror | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')"
   [[ "$repo" =~ ^[^/]+/[^/]+$ ]] || die "GitHub-mirrorrepo niet betrouwbaar bepaald — niets getagd."
   command -v gh >/dev/null || die "gh ontbreekt — Windows-suite vóór de tag niet te starten."
-  section "Windows-suite en -bouw op de merge-commit vóór de tag"
-  while :; do
-    origin_sha="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
-      || die "origin/main niet leesbaar vóór de Windows-poort."
-    [ "$origin_sha" = "$merge" ] \
-      || die "origin/main verschoof na de release-merge — tag $TAG niet automatisch."
-    mirror_sha="$(git ls-remote mirror refs/heads/main | awk 'NR==1 {print $1}')" \
-      || die "mirror/main niet leesbaar vóór de Windows-poort."
-    [ "$mirror_sha" = "$merge" ] && break
-    [ "$SECONDS" -lt $((start + 900)) ] \
-      || die "mirror/main bereikte merge ${merge:0:12} niet binnen 15 min — niets getagd."
-    sleep 20
-  done
+  section "Windows-suite en -bouw op de vaste kandidaat vóór de tag"
   for workflow in windows-test-check.yml windows-native-check.yml; do
   label="Windows-suite"
   [ "$workflow" = windows-native-check.yml ] && label="Windows-bouw"
-  runs="$(gh run list -R "$repo" --workflow "$workflow" --branch main --limit 100 \
+  runs="$(gh run list -R "$repo" --workflow "$workflow" --branch "$ref" --limit 100 \
     --json databaseId,headSha,status,conclusion)" \
     || die "GitHub Windows-runlijst niet leesbaar — niets getagd."
   run_id="$(jq -r --arg sha "$merge" '[.[] | select(.headSha == $sha)] | sort_by(.databaseId) | last | .databaseId // empty' <<<"$runs")"
   if [ -z "$run_id" ]; then
     baseline_id="$(jq -r '[.[].databaseId] | max // 0' <<<"$runs")"
-    gh workflow run "$workflow" -R "$repo" --ref main >/dev/null \
-      || die "$label op mirror/main kon niet worden gestart — niets getagd."
+    gh workflow run "$workflow" -R "$repo" --ref "$ref" >/dev/null \
+      || die "$label op de vaste kandidaat kon niet worden gestart — niets getagd."
     for _ in $(seq 1 30); do
-      runs="$(gh run list -R "$repo" --workflow "$workflow" --branch main --limit 100 \
+      runs="$(gh run list -R "$repo" --workflow "$workflow" --branch "$ref" --limit 100 \
         --json databaseId,headSha,status,conclusion)" \
         || die "nieuwe GitHub Windows-run niet leesbaar — niets getagd."
       run_id="$(jq -r --arg sha "$merge" --argjson before "$baseline_id" \
@@ -2581,6 +2670,20 @@ assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
       sleep 10
     done
     [ -n "$run_id" ] || die "GitHub Windows-dispatch niet aan exacte merge-commit te koppelen — niets getagd."
+  fi
+  if [ "$workflow" = windows-test-check.yml ]; then WINDOWS_SUITE_RUN_ID="$run_id"; else WINDOWS_NATIVE_RUN_ID="$run_id"; fi
+  done
+  [ "${2:-}" = start ] || wait_windows_merge_gate "$merge"
+}
+
+wait_windows_merge_gate() { # wait_windows_merge_gate MERGE_SHA
+  local merge="$1" repo workflow label run_id state start
+  repo="$(git remote get-url mirror | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')"
+  for workflow in windows-test-check.yml windows-native-check.yml; do
+  if [ "$workflow" = windows-test-check.yml ]; then
+    label="Windows-suite"; run_id="$WINDOWS_SUITE_RUN_ID"
+  else
+    label="Windows-bouw"; run_id="$WINDOWS_NATIVE_RUN_ID"
   fi
   log "$label run $run_id op ${merge:0:12} volgen."
   start=$SECONDS
@@ -2603,11 +2706,32 @@ assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
 # Een tag is pas toegestaan nadat precies de te publiceren bytes op de
 # merge-commit gebouwd, beproefd en uit de CI-opslag teruggelezen zijn.
 release_candidate_run() { # release_candidate_run MERGE_SHA [RUN_ID]; zet CANDIDATE_RUN_ID
-  local merge="$1" runs run_id="${2:-}" response state deadline archive url bundle manifest files expected
+  local merge="$1" ref runs run_id="${2:-}" response state deadline archive url bundle manifest files expected
+  local recorded_ref origin_object local_object attested_run
+  ref="$(candidate_ref "$merge")"
+  if [ -n "$run_id" ]; then
+    recorded_ref="$(api GET "/actions/runs/$run_id" | jq -r '.prettyref // empty')" \
+      || die "bestaand kandidaatbewijs niet leesbaar — geen nieuwe bouwer gestart."
+    if [ "$recorded_ref" = main ]; then
+      # Alleen een bestaande publieke tag mag het oorspronkelijke main-bewijs behouden.
+      assert_tag_commit origin "$(remote_tag_commit origin)" "$merge"
+      origin_object="$(git ls-remote origin "refs/tags/$TAG" | awk 'NR==1 {print $1}')" \
+        || die "oorspronkelijk tagobject niet leesbaar."
+      local_object="$(git rev-parse "refs/tags/$TAG")" \
+        || die "oorspronkelijke lokale tag ontbreekt."
+      [ -n "$origin_object" ] && [ "$origin_object" = "$local_object" ] \
+        || die "lokaal kandidaatbewijs wijkt af van de publieke tag."
+      attested_run="$(git cat-file -p "refs/tags/$TAG" | sed -n 's/^Candidate-Run: \([0-9][0-9]*\)$/\1/p' | head -1)"
+      [ "$attested_run" = "$run_id" ] \
+        || die "kandidaatrun is niet door de publieke tag bevestigd."
+      ref=main
+    fi
+  fi
+  [ "$ref" = main ] || assert_candidate_refs "$merge"
   if [ -z "$run_id" ]; then
-    runs="$(api GET '/actions/runs?limit=100&page=1&workflow_id=release.yml')" \
+    runs="$(api GET "/actions/runs?limit=100&page=1&workflow_id=release.yml&head_sha=$merge")" \
       || die "kandidaatruns niet leesbaar — niets getagd."
-    run_id="$(jq -r --arg sha "$merge" '[.workflow_runs[]? | select(.workflow_id == "release.yml" and .commit_sha == $sha and .prettyref == "main" and (.event == "workflow_dispatch" or .event == ""))] | sort_by(.id) | last | .id // empty' <<<"$runs")"
+    run_id="$(jq -r --arg sha "$merge" --arg ref "$ref" '[.workflow_runs[]? | select(.workflow_id == "release.yml" and .commit_sha == $sha and .prettyref == $ref and (.event == "workflow_dispatch" or .event == ""))] | sort_by(.id) | last | .id // empty' <<<"$runs")"
     if [ -n "$run_id" ]; then
       state="$(api GET "/actions/runs/$run_id" | jq -r '.status // "unknown"')" \
         || die "kandidaatrun $run_id niet leesbaar — niets getagd."
@@ -2619,7 +2743,7 @@ release_candidate_run() { # release_candidate_run MERGE_SHA [RUN_ID]; zet CANDID
   if [ -z "$run_id" ]; then
     response="$(api POST '/actions/workflows/release.yml/dispatches' \
       -H 'Content-Type: application/json' \
-      -d "$(jq -n --arg sha "$merge" --arg version "$TAG" '{ref:"main",return_run_info:true,inputs:{mode:"candidate",commit_sha:$sha,version:$version}}')")" \
+      -d "$(jq -n --arg sha "$merge" --arg ref "$ref" --arg version "$TAG" '{ref:$ref,return_run_info:true,inputs:{mode:"candidate",commit_sha:$sha,version:$version}}')")" \
       || die "kandidaatbouw kon niet starten — niets getagd."
     run_id="$(jq -r '.id // empty' <<<"$response")"
     [ -n "$run_id" ] || die "kandidaatbouw gestart zonder herleidbare run-id — niets getagd; controleer de forge."
@@ -2627,7 +2751,7 @@ release_candidate_run() { # release_candidate_run MERGE_SHA [RUN_ID]; zet CANDID
   log "Kandidaatbouw $run_id op ${merge:0:12} volgen."
   deadline=$((SECONDS + RELEASE_CI_TIMEOUT_MIN * 60))
   while [ "$SECONDS" -lt "$deadline" ]; do
-    state="$(api GET "/actions/runs/$run_id" | jq -r --arg sha "$merge" 'if .workflow_id != "release.yml" or .commit_sha != $sha or .prettyref != "main" or (.event != "workflow_dispatch" and .event != "") then "wrong-run" else .status // "unknown" end')" \
+    state="$(api GET "/actions/runs/$run_id" | jq -r --arg sha "$merge" --arg ref "$ref" 'if .workflow_id != "release.yml" or .commit_sha != $sha or .prettyref != $ref or (.event != "workflow_dispatch" and .event != "") then "wrong-run" else .status // "unknown" end')" \
       || die "kandidaatbouw $run_id niet leesbaar — niets getagd."
     case "$state" in
       success) break ;;
@@ -2784,10 +2908,10 @@ tag_and_push() { # tag_and_push MERGE_SHA
   [ "$tagged_version" = "$NEW_VERSION" ] \
     || die "merge-commit $mergesha draagt versie '${tagged_version:-onbekend}', niet $NEW_VERSION — dit is niet de release-commit. Niets getagd; controleer de PR."
   assert_release_ci_secrets
-  assert_windows_merge_gate "$mergesha"
+  assert_windows_merge_gate "$mergesha" start
   release_candidate_run "$mergesha"
-  [ "$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" = "$mergesha" ] \
-    || die "origin/main verschoof tijdens de kandidaatbouw — tag $TAG niet automatisch."
+  wait_windows_merge_gate "$mergesha"
+  assert_candidate_refs "$mergesha"
   section "Fase 2 — tag $TAG pushen (de publieke release-keten start hierna)"
   log "Ctrl-C binnen 8 seconden om af te breken (hierna is de tag onherroepelijk)."
   for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'
@@ -2945,6 +3069,7 @@ resume_release() {
   local origin_tag rc=0 tagged_version
   origin_tag="$(remote_tag_commit origin)" || rc=$?
   if [ "$rc" -eq 0 ]; then
+    [ -z "$CANDIDATE_SHA" ] || die "--candidate-sha mag niet na publicatie van $TAG."
     TAG_PUSHED=1
     if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
       assert_tag_commit lokaal "$(git rev-list -n 1 "$TAG")" "$origin_tag"
@@ -3001,7 +3126,11 @@ resume_release() {
     || die "kon de merge-commit voor $TAG niet bepalen."
   git fetch --quiet origin \
     || die "kon de merge-commit niet ophalen voor de treecontrole. Niets getagd."
-  MERGE_SHA="$(resume_tag_target "$MERGE_SHA")"
+  if [ -n "$CANDIDATE_SHA" ]; then
+    MERGE_SHA="$(select_repair_candidate "$MERGE_SHA" "$CANDIDATE_SHA")"
+  else
+    MERGE_SHA="$(resume_tag_target "$MERGE_SHA")"
+  fi
   assert_release_merge_tree "$MERGE_SHA"
   tag_and_push "$MERGE_SHA"
   follow_ci

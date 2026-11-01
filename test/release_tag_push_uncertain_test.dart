@@ -69,6 +69,8 @@ sleep() { :; }
 # krijgen eigen regressietests in release_auto_release_gates_test.dart.
 assert_release_ci_secrets() { :; }
 assert_windows_merge_gate() { :; }
+wait_windows_merge_gate() { :; }
+assert_candidate_refs() { :; }
 release_candidate_run() { CANDIDATE_RUN_ID=123; }
 git() {
   printf '%s\\n' "\$*" >> "\$GITCALLS"

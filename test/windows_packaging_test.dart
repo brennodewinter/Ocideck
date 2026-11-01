@@ -997,13 +997,13 @@ case "\$url" in
   */runs?per_page=*)
     RC=\$((RC+1)); echo "\$RC" > "\$RC_FILE"
     if [ "$staleActiveRunAtRedispatch" = true ] && [ "\$RC" -ge 2 ] && [ "\$RC" -lt 7 ]; then
-      printf '{"workflow_runs":[{"id":100,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/oud-actief"}]}\\n'
+      printf '{"workflow_runs":[{"id":100,"head_branch":"codex/release-candidate-v9.9.9-deadbeef","head_sha":"deadbeef","display_title":"Windows candidate v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/oud-actief"}]}\\n'
     elif [ "\$RC" -lt ${staleActiveRunAtRedispatch ? 7 : newRunAfterPolls ?? 9999} ]; then
-      printf '{"workflow_runs":[{"id":100,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"completed","conclusion":"failure","html_url":"https://gh/oud"}]}\\n'
+      printf '{"workflow_runs":[{"id":100,"head_branch":"codex/release-candidate-v9.9.9-deadbeef","head_sha":"deadbeef","display_title":"Windows candidate v9.9.9","status":"completed","conclusion":"failure","html_url":"https://gh/oud"}]}\\n'
     elif [ "\$RC" -lt 5 ]; then
-      printf '{"workflow_runs":[{"id":102,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/nieuw"}]}\\n'
+      printf '{"workflow_runs":[{"id":102,"head_branch":"codex/release-candidate-v9.9.9-deadbeef","head_sha":"deadbeef","display_title":"Windows candidate v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/nieuw"}]}\\n'
     else
-      printf '{"workflow_runs":[{"id":102,"head_branch":"main","display_title":"Windows candidate v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
+      printf '{"workflow_runs":[{"id":102,"head_branch":"codex/release-candidate-v9.9.9-deadbeef","head_sha":"deadbeef","display_title":"Windows candidate v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
     fi ;;
   */actions/runs/102/artifacts?per_page=*)
     [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || { printf '{"artifacts":[]}\n'; exit 0; }

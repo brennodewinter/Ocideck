@@ -75,8 +75,10 @@ jobs:
         shell: bash
         run: |
           set -eu
-          test "$GITHUB_REF_NAME" = main
-          test "$RELEASE_TAG" != main
+          printf '%s\n' "$RELEASE_SHA" | grep -Eq '^[0-9a-f]{40}$'
+          test "$GITHUB_REF_TYPE" = branch
+          test "$GITHUB_REF_NAME" = "codex/release-candidate-${RELEASE_TAG}-${RELEASE_SHA}"
+          test "$GITHUB_SHA" = "$RELEASE_SHA"
           test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
           test "$(sed -n 's/^version:[[:space:]]*//p' pubspec.yaml | cut -d+ -f1)" = "${RELEASE_TAG#v}"
 

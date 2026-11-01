@@ -79,14 +79,27 @@ void main() {
         match,
         isNotNull,
         reason:
-            'The Linux job must pin appimagetool by sha256 (a rolling upstream '
-            'tag, so the hash is the pin). Missing APPIMAGETOOL_SHA256 (#1227).',
+            'The Linux job must verify the versioned appimagetool asset by sha256. '
+            'Missing APPIMAGETOOL_SHA256 (#1227).',
       );
       expect(
         releaseYaml.contains('APPIMAGETOOL_URL:'),
         isTrue,
         reason: 'appimagetool has a sha256 but no URL to fetch from.',
       );
+    });
+
+    test('both Linux routes use the same versioned appimagetool asset', () {
+      const url =
+          'https://github.com/AppImage/appimagetool/releases/download/'
+          '1.9.1/appimagetool-x86_64.AppImage';
+      const digest =
+          'ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0';
+      for (final workflow in [releaseYaml, preTagYaml]) {
+        expect(workflow, contains('APPIMAGETOOL_URL: $url'));
+        expect(workflow, contains('APPIMAGETOOL_SHA256: $digest'));
+        expect(workflow, isNot(contains('/download/continuous/')));
+      }
     });
 
     test('every package the job makes is uploaded as an artifact', () {
