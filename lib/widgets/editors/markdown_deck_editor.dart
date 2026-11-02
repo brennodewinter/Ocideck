@@ -12,6 +12,7 @@ import '../../models/markdown_source_document.dart';
 import '../../models/markdown_writing_suggestion.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/marp_compatibility.dart';
+import '../../services/deck_source_checks.dart';
 import '../../services/markdown_validator.dart';
 import '../../services/marp_compatibility.dart';
 import '../../state/deck_provider.dart';
@@ -281,18 +282,26 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   void _scheduleValidation() {
     _validationTimer?.cancel();
     _validationPending = true;
-    _validationTimer = Timer(const Duration(milliseconds: 350), () {
-      if (!mounted) return;
-      final result = _validator.validate(_ctrl.text);
-      final suggestions = inspectMarkdownWriting(_ctrl.text);
-      setState(() {
-        _validation = result;
-        _lastValidation = result;
-        _writingSuggestions = suggestions;
-        if (_marpCompatEnabled) _lastCompat = _computeCompat();
+    // De bundel draait op een achtergrond-isolate (#2713): drie volledig-
+    // bronscans van samen ~42 ms op een groot deck hoorden niet op de
+    // UI-thread, ook niet pas na de debounce. Een verlopen ronde (er was
+    // alweer getypt, of de widget is weg) wordt bij afgifte weggegooid.
+    final args = (
+      source: _ctrl.text,
+      compatContext: _marpCompatEnabled ? _compatContext : null,
+      deckScope: widget.scope == MarkdownScope.deck,
+    );
+    _validationTimer = scheduleDeckChecks(
+      args: args,
+      current: () => mounted && _ctrl.text == args.source,
+      onResult: (bundle) => setState(() {
+        _validation = bundle.validation;
+        _lastValidation = bundle.validation;
+        _writingSuggestions = bundle.suggestions;
+        if (bundle.compat != null) _lastCompat = bundle.compat;
         _validationPending = false;
-      });
-    });
+      }),
+    );
   }
 
   void _openFind({required bool showReplace}) =>
