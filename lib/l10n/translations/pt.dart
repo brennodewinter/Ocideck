@@ -1633,6 +1633,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Ga naar de brontabel': 'Ir para a tabela de origem',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Esta tabela é uma cópia da tabela de origem "{bron}". Edite a origem e escolha Atualizar, ou desvincule a vista como instantâneo.',
   'Quizvragen': 'Perguntas do questionário',
   'Met vragen': 'Com perguntas',
   'Zonder vragen': 'Sem perguntas',

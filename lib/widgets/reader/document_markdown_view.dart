@@ -512,7 +512,27 @@ class DocumentMarkdownView extends StatelessWidget {
   /// Splits [markdown] into ordered block descriptors. Deterministic and free of
   /// any BuildContext, so [build] (widgets) and [blockTexts] (search text) share
   /// one classification and can never drift apart.
+  ///
+  /// Gecachet op de bron zelf: dezelfde tekst wordt meermalen per seconde
+  /// opgebouwd (caret, thema, instellingen) zonder te veranderen, en elke
+  /// rebuild een volledige wandeling door de bron laten doen was verspilling
+  /// (#2711). De laatste parses blijven hangen zodat wisselende weergaven
+  /// (Bron-preview, embeds) elkaar niet uitstoten.
+  static final Map<String, List<_Block>> _parseCache = {};
+
   static List<_Block> _parse(String markdown) {
+    final cached = _parseCache.remove(markdown);
+    if (cached != null) {
+      _parseCache[markdown] = cached;
+      return cached;
+    }
+    final blocks = _parseUncached(markdown);
+    _parseCache[markdown] = blocks;
+    if (_parseCache.length > 12) _parseCache.remove(_parseCache.keys.first);
+    return blocks;
+  }
+
+  static List<_Block> _parseUncached(String markdown) {
     // De definities van de voetnoten zijn geen alinea's: ze staan waar de
     // auteur ze parkeerde, en de noot hoort onderaan het vel of achterin.
     // Hier eruit, zodat élke ingang (weergave, zoektekst, pagina-einden,

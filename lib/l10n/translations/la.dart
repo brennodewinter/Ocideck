@@ -1620,6 +1620,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Ga naar de brontabel': 'Ad tabulam fontem vade',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Haec tabula exemplum tabulae fontis "{bron}" est. Fontem ede et Renovare elige, aut conspectum ut imaginem seiunge.',
   'Quizvragen': 'Quaestiones certaminis',
   'Met vragen': 'Cum quaestionibus',
   'Zonder vragen': 'Sine quaestionibus',

@@ -1609,6 +1609,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Ga naar de brontabel': 'Idi na izvornu tablicu',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Ova tablica je preslik izvorne tablice "{bron}". Uredite izvor i odaberite Osvježi, ili odvojite prikaz kao snimku.',
   'Quizvragen': 'Pitanja kviza',
   'Met vragen': 'S pitanjima',
   'Zonder vragen': 'Bez pitanja',

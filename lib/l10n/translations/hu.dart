@@ -1607,6 +1607,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Ga naar de brontabel': 'Ugrás a forrástáblához',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Ez a táblázat a "{bron}" forrástábla másolata. Szerkessze a forrást és válassza a Frissítés lehetőséget, vagy válassza le a nézetet pillanatképként.',
   'Quizvragen': 'Kvízkérdések',
   'Met vragen': 'Kérdésekkel',
   'Zonder vragen': 'Kérdések nélkül',

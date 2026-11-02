@@ -811,6 +811,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Ga naar de brontabel': 'Go to the source table',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'This table is a copy of the source table "{bron}". Edit the source and choose Refresh, or detach the view as a snapshot.',
   'Quizvragen': 'Quiz questions',
   'Met vragen': 'With questions',
   'Zonder vragen': 'Without questions',

@@ -1608,6 +1608,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Ga naar de brontabel': 'Zur Quelltabälle gaa',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Die Tabälle isch e Abschrift vo de Quelltabälle "{bron}". Bearbeit d Quell und wehl Verfrische, oder löös d Aasicht als Momentufnahm ab.',
   'Quizvragen': 'Quizfroge',
   'Met vragen': 'Mit Froge',
   'Zonder vragen': 'Ohni Froge',

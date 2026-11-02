@@ -1620,6 +1620,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Ga naar de brontabel': 'Перейти до вихідної таблиці',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Ця таблиця є копією вихідної таблиці "{bron}". Відредагуйте джерело й виберіть Оновити або від\'єднайте подання як знімок.',
   'Quizvragen': 'Запитання вікторини',
   'Met vragen': 'Із запитаннями',
   'Zonder vragen': 'Без запитань',

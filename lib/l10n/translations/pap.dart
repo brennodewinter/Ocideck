@@ -651,6 +651,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Ga naar de brontabel': 'Bai na e tabela fuente',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'E tabela aki ta un kopia di e tabela fuente "{bron}". Editá e fuente i skohe Refresh, òf deskonektá e vista komo snapshot.',
   'Quizvragen': 'Preguntanan di kuis',
   'Met vragen': 'Ku preguntanan',
   'Zonder vragen': 'Sin preguntanan',

@@ -175,6 +175,69 @@ Een alinea vooraf.
     expect(terug, contains('| R-1 | Sensor valt uit | 7 | 3 |'));
   });
 
+  testWidgets('een tik op een gekoppelde weergave legt uit en biedt wegen', (
+    tester,
+  ) async {
+    const viewSource = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea rev=3 next=4 cols=id,failure,s_n -->
+| ID | Faalwijze | S n |
+|---|---|---|
+| R-1 | Sensor valt uit | 3 |
+
+<!-- ocideck:view v1 source=hoofd projection=netto gen=3 cols=id,failure,s_n -->
+| ID | Faalwijze | S n |
+|---|---|---|
+| R-1 | Sensor valt uit | 3 |
+''';
+    await pumpEditor(tester, viewSource);
+
+    // Een tik op de weergave-tabel opent uitleg in plaats van niets (#2709).
+    await tester.tap(find.text('R-1').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Gekoppelde weergave'), findsWidgets);
+    expect(find.text('Ga naar de brontabel'), findsOneWidget);
+    expect(find.text('Loskoppelen als momentopname'), findsWidgets);
+
+    // "Ga naar de brontabel" zet de cursor op het brontabel-embed.
+    await tester.tap(find.text('Ga naar de brontabel'));
+    await tester.pumpAndSettle();
+    final controller = tester
+        .widget<WysiwygNotesField>(find.byType(WysiwygNotesField))
+        .controller;
+    expect(controller.selection.isValid, isTrue);
+  });
+
+  testWidgets('loskoppelen vanuit de uitleg maakt een bewerkbare tabel', (
+    tester,
+  ) async {
+    const viewSource = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea rev=3 next=4 cols=id,failure,s_n -->
+| ID | Faalwijze | S n |
+|---|---|---|
+| R-1 | Sensor valt uit | 3 |
+
+<!-- ocideck:view v1 source=hoofd projection=netto gen=3 cols=id,failure,s_n -->
+| ID | Faalwijze | S n |
+|---|---|---|
+| R-1 | Sensor valt uit | 3 |
+''';
+    final controller = await pumpEditor(tester, viewSource);
+
+    await tester.tap(find.text('R-1').last);
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.text('Loskoppelen als momentopname'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final terug = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(terug, isNot(contains('<!-- ocideck:view')));
+    expect(terug, contains('<!-- ocideck:risks'));
+  });
+
   testWidgets('berekening toevoegen schrijft een calc-marker en rekent', (
     tester,
   ) async {

@@ -1623,6 +1623,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Ga naar de brontabel': 'Mur fit-tabella sors',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Din it-tabella hija kopja tat-tabella sors "{bron}". Editja s-sors u agħżel Aġġorna, jew skonnettja l-vista bħala stampa tal-mument.',
   'Quizvragen': 'Mistoqsijiet tal-kwizz',
   'Met vragen': 'Bil-mistoqsijiet',
   'Zonder vragen': 'Mingħajr mistoqsijiet',
