@@ -2513,6 +2513,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Quizvragen': 'Kısa sınav soruları',
+  'Met vragen': 'Sorularla',
+  'Zonder vragen': 'Sorular olmadan',
+  'Alleen vragen': 'Yalnızca sorular',
+  'De quizvragen gaan mee in dit bestand.': 'Kısa sınav soruları bu dosyada.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Bu dosya kısa sınav sorularını atlar. Ad -zonder-vragen ile biter.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Bu dosya yalnızca kısa sınav sorularını içerir. Ad -vragen ile biter.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       '“{woord}” sözcüğü art arda iki kez geçiyor.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

@@ -811,6 +811,16 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Quizvragen': 'Quiz questions',
+  'Met vragen': 'With questions',
+  'Zonder vragen': 'Without questions',
+  'Alleen vragen': 'Questions only',
+  'De quizvragen gaan mee in dit bestand.':
+      'The quiz questions are included in this file.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'This file leaves the quiz questions out. The name ends in -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'This file contains only the quiz questions. The name ends in -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'The word “{woord}” appears twice in a row.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

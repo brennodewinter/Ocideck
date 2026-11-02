@@ -1617,6 +1617,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Quizvragen': 'Pytania quizu',
+  'Met vragen': 'Z pytaniami',
+  'Zonder vragen': 'Bez pytań',
+  'Alleen vragen': 'Tylko pytania',
+  'De quizvragen gaan mee in dit bestand.': 'Pytania quizu są w tym pliku.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Ten plik pomija pytania quizu. Nazwa kończy się na -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Ten plik zawiera tylko pytania quizu. Nazwa kończy się na -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Słowo „{woord}” występuje dwa razy z rzędu.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

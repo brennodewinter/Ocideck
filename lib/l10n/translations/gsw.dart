@@ -1608,6 +1608,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Quizvragen': 'Quizfroge',
+  'Met vragen': 'Mit Froge',
+  'Zonder vragen': 'Ohni Froge',
+  'Alleen vragen': 'Nur Froge',
+  'De quizvragen gaan mee in dit bestand.':
+      'D Quizfroge sind i dere Datei drin.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Die Datei laat d Quizfroge wäg. De Name ändet uf -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Die Datei hät nur d Quizfroge. De Name ändet uf -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'S Wort „{woord}“ stoht zweimol hinerenand.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

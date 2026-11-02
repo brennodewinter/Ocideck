@@ -1604,6 +1604,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Quizvragen': 'Quizfrågor',
+  'Met vragen': 'Med frågor',
+  'Zonder vragen': 'Utan frågor',
+  'Alleen vragen': 'Bara frågor',
+  'De quizvragen gaan mee in dit bestand.':
+      'Quizfrågorna ingår i den här filen.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Den här filen utelämnar quizfrågorna. Namnet slutar på -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Den här filen innehåller bara quizfrågorna. Namnet slutar på -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Ordet ”{woord}” står två gånger i rad.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

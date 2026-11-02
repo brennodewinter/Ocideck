@@ -29,12 +29,14 @@ void main() {
     Deck deck, {
     PrivacyExportProfile profile = PrivacyExportProfile.full,
     bool includeDetail = true,
+    QuestionExport questions = QuestionExport.included,
     bool expandPages = true,
   }) => buildExportBundle(
     deck,
     deck.slides,
     profile: profile,
     includeDetail: includeDetail,
+    questions: questions,
     expandPages: expandPages,
     disabledRules: const {},
     ownIdentity: OwnIdentity.empty,
@@ -118,5 +120,52 @@ void main() {
     expect(bundle.manifest.entries, isNotEmpty);
     // Geen waarden in het manifest — dat is het hele punt ervan.
     expect(bundle.manifest.toPrettyJson(), isNot(contains('12345678')));
+  });
+
+  Deck les() => Deck(
+    title: 'Les',
+    slides: [
+      Slide.create(SlideType.bullets).copyWith(title: 'De uitleg'),
+      Slide.create(SlideType.question).copyWith(title: 'De toets'),
+      Slide.create(
+        SlideType.question,
+      ).copyWith(title: 'De verdieping', isDetail: true),
+    ],
+  );
+
+  test('zonder vragen blijft de uitleg staan en verdwijnt de quiz', () {
+    final bundle = bundleVan(les(), questions: QuestionExport.omitted);
+    expect(bundle.audience.deck.slides.map((s) => s.title), ['De uitleg']);
+    expect(bundle.markdown, contains('De uitleg'));
+    expect(bundle.markdown, isNot(contains('De toets')));
+    expect(bundle.markdown, isNot(contains('De verdieping')));
+  });
+
+  test('alleen de vragen laat de uitleg uit het bestand', () {
+    final bundle = bundleVan(les(), questions: QuestionExport.only);
+    expect(bundle.audience.deck.slides.map((s) => s.title), [
+      'De toets',
+      'De verdieping',
+    ]);
+    expect(bundle.markdown, isNot(contains('De uitleg')));
+    expect(bundle.markdown, contains('De toets'));
+  });
+
+  test('de gewone export houdt uitleg en vragen bij elkaar', () {
+    expect(bundleVan(les()).audience.deck.slides, hasLength(3));
+    expect(QuestionExport.included.fileSuffix, isEmpty);
+    expect(QuestionExport.omitted.fileSuffix, '-zonder-vragen');
+    expect(QuestionExport.only.fileSuffix, '-vragen');
+  });
+
+  test('een vraagdia met verdieping valt uit de beknopte vragenexport', () {
+    // Diepgang en quizvragen zijn twee assen. Alleen de vragen vragen haalt
+    // een verdiepingsvraag niet terug in de beknopte versie.
+    final bundle = bundleVan(
+      les(),
+      includeDetail: false,
+      questions: QuestionExport.only,
+    );
+    expect(bundle.audience.deck.slides.map((s) => s.title), ['De toets']);
   });
 }

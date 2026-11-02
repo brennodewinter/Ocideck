@@ -123,6 +123,10 @@ class ExportService {
     /// versie krijgt een achtervoegsel: de volledige uitvoer heet zoals hij
     /// altijd al heette.
     bool includeDetail = true,
+
+    /// Of de quizvragen in deze uitvoer zitten. Alleen een afwijking van de
+    /// gewone export krijgt een achtervoegsel.
+    QuestionExport questions = QuestionExport.included,
   }) async {
     final refusal = _gateOrRefuse(
       tlp: tlp,
@@ -172,6 +176,7 @@ class ExportService {
     final fileName =
         '$prefix${p.basenameWithoutExtension(deckPath)}'
         '${privacyProfile.fileSuffix}${includeDetail ? '' : '-beknopt'}'
+        '${questions.fileSuffix}'
         '${docMeta.fileSuffix}$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {

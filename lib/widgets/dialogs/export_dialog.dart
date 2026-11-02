@@ -38,8 +38,7 @@ class ExportDialog extends StatefulWidget {
   /// kiest — en het dialoog de bron níét mag hebben (dat is de projectiegrens).
   /// De functie sluit in de shell om de bron heen; het dialoog kan er alleen
   /// `AudienceDeck`s uit halen.
-  final ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
-  bundleFor;
+  final ExportBundleFor bundleFor;
 
   /// Of dit deck überhaupt privacybevindingen heeft. Zo niet, dan heeft de keuze
   /// tussen "volledig" en "geredigeerd" geen betekenis en tonen we hem niet.
@@ -49,6 +48,11 @@ class ExportDialog extends StatefulWidget {
   /// verdiepingsslides als gewone. Zo niet, dan levert "beknopt" hetzelfde
   /// bestand of een leeg deck, en tonen we de keuze niet.
   final bool hasDepthChoice;
+
+  /// Of er een keuze over quizvragen te maken valt: het deck heeft zowel een
+  /// vraagdia als een andere dia die het publiek bereikt. Anders levert een
+  /// van de opties hetzelfde bestand of een leeg deck.
+  final bool hasQuestionChoice;
 
   final CockpitColorScheme cockpitColorScheme;
   final ExportService exportService;
@@ -90,6 +94,7 @@ class ExportDialog extends StatefulWidget {
     required this.bundleFor,
     this.hasPrivacyFindings = false,
     this.hasDepthChoice = false,
+    this.hasQuestionChoice = false,
     this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.exportService,
     this.initialFormat,
@@ -106,10 +111,10 @@ class ExportDialog extends StatefulWidget {
   static Future<void> show(
     BuildContext context, {
     required String deckPath,
-    required ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
-    bundleFor,
+    required ExportBundleFor bundleFor,
     bool hasPrivacyFindings = false,
     bool hasDepthChoice = false,
+    bool hasQuestionChoice = false,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required ExportService exportService,
     ExportFormat? initialFormat,
@@ -131,6 +136,7 @@ class ExportDialog extends StatefulWidget {
         bundleFor: bundleFor,
         hasPrivacyFindings: hasPrivacyFindings,
         hasDepthChoice: hasDepthChoice,
+        hasQuestionChoice: hasQuestionChoice,
         cockpitColorScheme: cockpitColorScheme,
         exportService: exportService,
         initialFormat: initialFormat,
@@ -210,13 +216,20 @@ class _ExportDialogState extends State<ExportDialog> {
   /// wat hij zonder deze keuze ook zou zijn geweest.
   bool _includeDetail = true;
 
+  /// Of de quizvragen meegaan. Standaard wel, om dezelfde reden.
+  QuestionExport _questions = QuestionExport.included;
+
   late ExportBundle _bundle = widget.bundleFor(
     _profile,
     includeDetail: _includeDetail,
+    questions: _questions,
   );
 
-  void _rebuild() =>
-      _bundle = widget.bundleFor(_profile, includeDetail: _includeDetail);
+  void _rebuild() => _bundle = widget.bundleFor(
+    _profile,
+    includeDetail: _includeDetail,
+    questions: _questions,
+  );
 
   void _selectProfile(PrivacyExportProfile profile) {
     if (profile == _profile) return;
@@ -230,6 +243,14 @@ class _ExportDialogState extends State<ExportDialog> {
     if (includeDetail == _includeDetail) return;
     setState(() {
       _includeDetail = includeDetail;
+      _rebuild();
+    });
+  }
+
+  void _selectQuestions(QuestionExport questions) {
+    if (questions == _questions) return;
+    setState(() {
+      _questions = questions;
       _rebuild();
     });
   }
@@ -487,6 +508,7 @@ class _ExportDialogState extends State<ExportDialog> {
       redactionManifest: _bundle.manifest,
       privacyProfile: _profile,
       includeDetail: _includeDetail,
+      questions: _questions,
       privacySummary: _bundle.privacySummary,
       privacyPolicy: widget.privacyPolicy,
       privacyAcknowledged: true,
@@ -801,6 +823,7 @@ class _ExportDialogState extends State<ExportDialog> {
         _aiDraftNotice(l10n),
         _manifestNotice(l10n),
         if (widget.hasDepthChoice) _depthSelector(l10n),
+        if (widget.hasQuestionChoice) _questionSelector(l10n),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
         // verfijning en staat daarom achter een inklapbare kop (open zodra
         // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).

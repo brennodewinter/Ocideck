@@ -1609,6 +1609,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Quizvragen': 'Pitanja kviza',
+  'Met vragen': 'S pitanjima',
+  'Zonder vragen': 'Bez pitanja',
+  'Alleen vragen': 'Samo pitanja',
+  'De quizvragen gaan mee in dit bestand.': 'Pitanja kviza su u ovoj datoteci.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Ova datoteka izostavlja pitanja kviza. Naziv završava na -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Ova datoteka sadrži samo pitanja kviza. Naziv završava na -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Riječ „{woord}“ stoji dvaput zaredom.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

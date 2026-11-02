@@ -42,6 +42,7 @@ const _hasIssues = SlideQualityResult([
 ExportBundle _emptyBundle(
   PrivacyExportProfile profile, {
   bool includeDetail = true,
+  QuestionExport questions = QuestionExport.included,
 }) => ExportBundle(
   audience: PrivacyProjection.forAudience(
     const Deck(title: 'Test'),

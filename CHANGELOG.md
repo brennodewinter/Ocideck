@@ -8,6 +8,13 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Added
+
+- **Quizvragen bij de export.** In het exportdialoog kun je vraagdia's
+  meenemen, weglaten of als eigen bestand exporteren. De bestandsnaam krijgt
+  dan `-zonder-vragen` of `-vragen`. Het deck zelf, de presentatie en een
+  pakket blijven de vragen bevatten.
+
 ### Changed
 
 - **Boomslides.** Een boom (zoals 5× Why) vult de dia met kaarten en pijlen

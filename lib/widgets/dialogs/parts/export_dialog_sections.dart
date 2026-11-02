@@ -54,6 +54,62 @@ extension _ExportDialogSections on _ExportDialogState {
     );
   }
 
+  /// Gaan de quizvragen mee, blijven ze weg, of is dit bestand alleen de vragen?
+  ///
+  /// Los van diepgang: een hand-out voor de zaal is iets anders dan het
+  /// vragenblad voor de docent. De standaard laat de naam ongemoeid.
+  Widget _questionSelector(AppLocalizations l10n) {
+    final hint = switch (_questions) {
+      QuestionExport.included => l10n.d(
+        'De quizvragen gaan mee in dit bestand.',
+      ),
+      QuestionExport.omitted => l10n.d(
+        'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.',
+      ),
+      QuestionExport.only => l10n.d(
+        'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.',
+      ),
+    };
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Quizvragen'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          SegmentedButton<QuestionExport>(
+            segments: [
+              ButtonSegment(
+                value: QuestionExport.included,
+                label: Text(l10n.d('Met vragen')),
+                icon: const Icon(Icons.quiz_outlined, size: 15),
+              ),
+              ButtonSegment(
+                value: QuestionExport.omitted,
+                label: Text(l10n.d('Zonder vragen')),
+                icon: const Icon(Icons.playlist_remove_outlined, size: 15),
+              ),
+              ButtonSegment(
+                value: QuestionExport.only,
+                label: Text(l10n.d('Alleen vragen')),
+                icon: const Icon(Icons.fact_check_outlined, size: 15),
+              ),
+            ],
+            selected: {_questions},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (s) => _selectQuestions(s.first),
+          ),
+          const SizedBox(height: 4),
+          Text(hint, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
+        ],
+      ),
+    );
+  }
+
   /// Voor wie is deze export?
   ///
   /// Eén bron, twee versies. Dat is de kern van het pentestrapport-scenario: de

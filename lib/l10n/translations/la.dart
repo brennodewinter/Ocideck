@@ -1620,6 +1620,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Quizvragen': 'Quaestiones certaminis',
+  'Met vragen': 'Cum quaestionibus',
+  'Zonder vragen': 'Sine quaestionibus',
+  'Alleen vragen': 'Solae quaestiones',
+  'De quizvragen gaan mee in dit bestand.':
+      'Quaestiones certaminis in hac scheda insunt.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Haec scheda quaestiones certaminis omittit. Nomen in -zonder-vragen desinit.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Haec scheda solas quaestiones certaminis continet. Nomen in -vragen desinit.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Verbum “{woord}” bis deinceps stat.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

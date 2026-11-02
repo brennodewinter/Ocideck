@@ -1603,6 +1603,16 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Quizvragen': 'Viktorīnas jautājumi',
+  'Met vragen': 'Ar jautājumiem',
+  'Zonder vragen': 'Bez jautājumiem',
+  'Alleen vragen': 'Tikai jautājumi',
+  'De quizvragen gaan mee in dit bestand.':
+      'Viktorīnas jautājumi ir šajā datnē.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Šī datne izlaiž viktorīnas jautājumus. Nosaukums beidzas ar -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Šī datne satur tikai viktorīnas jautājumus. Nosaukums beidzas ar -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Vārds „{woord}“ ir divreiz pēc kārtas.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

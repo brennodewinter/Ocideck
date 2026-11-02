@@ -1623,6 +1623,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Quizvragen': 'Mistoqsijiet tal-kwizz',
+  'Met vragen': 'Bil-mistoqsijiet',
+  'Zonder vragen': 'Mingħajr mistoqsijiet',
+  'Alleen vragen': 'Mistoqsijiet biss',
+  'De quizvragen gaan mee in dit bestand.':
+      'Il-mistoqsijiet tal-kwizz jinsabu f\'dan il-fajl.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Dan il-fajl iħalli barra l-mistoqsijiet tal-kwizz. L-isem jispiċċa b\'-zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Dan il-fajl fih biss il-mistoqsijiet tal-kwizz. L-isem jispiċċa b\'-vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Il-kelma “{woord}” tidher darbtejn wara xulxin.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

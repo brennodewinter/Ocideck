@@ -23,6 +23,7 @@
 - [Privacy check](#privacy-check)
 - [What to do with a finding](#what-to-do-with-a-finding)
 - [Depth — a management version and a technical one](#depth--a-management-version-and-a-technical-one)
+- [Quiz questions apart from the presentation](#quiz-questions-apart-from-the-presentation)
 - [Two versions from one source](#two-versions-from-one-source)
 - [Redaction — leaving data out](#redaction--leaving-data-out)
 - [Presenting](#presenting)
@@ -2949,6 +2950,28 @@ is a property of what you hand over, and discovering halfway through a talk that
 your deck is missing slides is not an improvement. If you want to present the
 short version, export it and present that.
 
+## Quiz questions apart from the presentation
+
+A **question** slide is a quiz. In the export dialog you can include those
+slides, leave them out, or export them as their own file. The choice appears
+only when the deck has both a question slide and another slide that reaches
+the audience; otherwise one option would produce the same file, or an empty
+one.
+
+| Choice | What comes out | Filename |
+| --- | --- | --- |
+| **With questions** | The presentation as it is. This is the default. | unchanged |
+| **Without questions** | The same export, without the quiz slides. | ends in `-zonder-vragen` |
+| **Questions only** | Only the quiz slides. | ends in `-vragen` |
+
+The deck file itself does not change. Presenting still shows the questions, and
+a package contains them too: that is the source someone reopens. If you want
+both files, export twice. The suffixes make a mix-up visible.
+
+A question slide marked as depth drops out of the condensed export, including
+when you ask for **Questions only**. Depth and quiz questions are two separate
+choices.
+
 ## Two versions from one source
 
 When a deck holds findings, the export dialog asks **who this export is for**:
@@ -3595,7 +3618,7 @@ single one reaches every reader:
 | PDF **Subject** / PPTX `dc:subject` | appended after the title: `TLP:GREEN — My deck — contains AI-drafted text that no human has checked` |
 | HTML `<head>` | `<meta name="ai-generated">` with that same marking, plus `<meta name="ai-generated-slides">` with the number of slides it applies to |
 | HTML page | a fixed banner at the top, directly under the TLP banner when the deck is classified and in its place when it is not |
-| Filename | `-ai-concept` before the extension, after `-geredigeerd` and `-beknopt` |
+| Filename | `-ai-concept` before the extension, after `-geredigeerd`, `-beknopt` and, when chosen, `-zonder-vragen` or `-vragen` |
 
 The keyword and the Subject note are deliberately **not** translated: they are
 fields a tool reads, not sentences on screen, and a value that changes with the

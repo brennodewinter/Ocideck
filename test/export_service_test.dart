@@ -12,6 +12,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
+import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/export_metadata.dart';
@@ -646,6 +647,41 @@ void main() {
     expect(html, startsWith('<!doctype html>'));
     expect(html, contains('# Titel'));
   });
+
+  test(
+    'een vragenexport krijgt het achtervoegsel in de bestandsnaam',
+    () async {
+      final htmlService = ExportService(
+        htmlService: MarpHtmlService(loadAsset: (a) => File(a).readAsString()),
+      );
+      final audience = bundleFor(const Deck(title: 'Les'), markdown: '# Les\n');
+
+      final alleen = await htmlService.export(
+        deckPath(),
+        ExportFormat.html,
+        const [],
+        audience: audience,
+        questions: QuestionExport.only,
+      );
+      final zonder = await htmlService.export(
+        deckPath(),
+        ExportFormat.html,
+        const [],
+        audience: audience,
+        questions: QuestionExport.omitted,
+      );
+      final mee = await htmlService.export(
+        deckPath(),
+        ExportFormat.html,
+        const [],
+        audience: audience,
+      );
+
+      expect(p.basename(alleen.outputPath!), endsWith('-vragen.html'));
+      expect(p.basename(zonder.outputPath!), endsWith('-zonder-vragen.html'));
+      expect(p.basename(mee.outputPath!), isNot(contains('vragen')));
+    },
+  );
 
   test('HTML export fails without Markdown', () async {
     final r = await service.export(deckPath(), ExportFormat.html, const []);

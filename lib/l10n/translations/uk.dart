@@ -1620,6 +1620,16 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Quizvragen': 'Запитання вікторини',
+  'Met vragen': 'Із запитаннями',
+  'Zonder vragen': 'Без запитань',
+  'Alleen vragen': 'Лише запитання',
+  'De quizvragen gaan mee in dit bestand.':
+      'Запитання вікторини є в цьому файлі.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Цей файл пропускає запитання вікторини. Назва закінчується на -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Цей файл містить лише запитання вікторини. Назва закінчується на -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Слово «{woord}» стоїть двічі поспіль.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

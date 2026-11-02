@@ -1605,6 +1605,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Quizvragen': 'Visakysymykset',
+  'Met vragen': 'Kysymysten kanssa',
+  'Zonder vragen': 'Ilman kysymyksiä',
+  'Alleen vragen': 'Vain kysymykset',
+  'De quizvragen gaan mee in dit bestand.':
+      'Visakysymykset ovat tässä tiedostossa.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Tämä tiedosto jättää visakysymykset pois. Nimi päättyy -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Tämä tiedosto sisältää vain visakysymykset. Nimi päättyy -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Sana ”{woord}” esiintyy kahdesti peräkkäin.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

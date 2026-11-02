@@ -116,6 +116,7 @@ void main() {
     ExportBundle bundleFor(
       PrivacyExportProfile profile, {
       bool includeDetail = true,
+      QuestionExport questions = QuestionExport.included,
     }) => ExportBundle(
       audience: PrivacyProjection.forAudience(deck, profile: profile),
       markdown: '# ${deck.title}\n',

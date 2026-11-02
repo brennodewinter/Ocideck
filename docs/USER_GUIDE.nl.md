@@ -27,6 +27,7 @@
 - [Privacycontrole](#privacycontrole)
 - [Wat te doen met een bevinding](#wat-te-doen-met-een-bevinding)
 - [Diepgang — een managementversie en een technische](#diepgang--een-managementversie-en-een-technische)
+- [Quizvragen apart van de presentatie](#quizvragen-apart-van-de-presentatie)
 - [Twee versies uit één bron](#twee-versies-uit-n-bron)
 - [Redactie — gegevens weglaten](#redactie--gegevens-weglaten)
 - [Presenteren](#presenteren)
@@ -3051,6 +3052,27 @@ een eigenschap van wat je overhandigt, en halverwege een talk ontdekken dat je d
 dia's mist is geen verbetering. Als je de korte versie wilt presenteren, exporteer
 hem en presenteer die.
 
+## Quizvragen apart van de presentatie
+
+Een dia van het type **vraag** is een quiz. In het exportdialoog kun je die
+dia's meenemen, weglaten, of als eigen bestand exporteren. De keuze verschijnt
+alleen als het deck zowel een vraagdia als een andere dia heeft die het publiek
+bereikt; anders zou een optie hetzelfde bestand opleveren, of een leeg.
+
+| Keuze | Wat eruit komt | Bestandsnaam |
+| --- | --- | --- |
+| **Met vragen** | De presentatie zoals hij is. Dit is de standaard. | ongewijzigd |
+| **Zonder vragen** | Dezelfde export, zonder de quizdia's. | eindigt op `-zonder-vragen` |
+| **Alleen vragen** | Alleen de quizdia's. | eindigt op `-vragen` |
+
+Het deckbestand zelf verandert niet. Presenteren toont de vragen nog steeds, en
+een pakket bevat ze ook: dat is de bron die iemand heropent. Wie beide
+bestanden wil, exporteert twee keer. De achtervoegsels maken de verwisseling
+zichtbaar.
+
+Een vraagdia die als verdieping is gemarkeerd valt in de beknopte export weg,
+ook bij **Alleen vragen**. Diepgang en quizvragen zijn twee aparte keuzes.
+
 ## Twee versies uit één bron
 
 Als een deck bevindingen bevat, vraagt het exportdialoog **voor wie deze export
@@ -3699,7 +3721,7 @@ enkele bereikt elke lezer:
 | PDF-**Onderwerp** / PPTX `dc:subject` | toegevoegd na de titel: `TLP:GREEN — My deck — contains AI-drafted text that no human has checked` |
 | HTML `<head>` | `<meta name="ai-generated">` met diezelfde markering, plus `<meta name="ai-generated-slides">` met het aantal dia's waarop het van toepassing is |
 | HTML-pagina | een vaste banner bovenaan, direct onder de TLP-banner wanneer het deck geclassificeerd is en in plaats daarvan wanneer dat niet zo is |
-| Bestandsnaam | `-ai-concept` voor de extensie, na `-geredigeerd` en `-beknopt` |
+| Bestandsnaam | `-ai-concept` voor de extensie, na `-geredigeerd`, `-beknopt` en eventueel `-zonder-vragen` of `-vragen` |
 
 Het trefwoord en de onderwerpsnotitie worden met opzet **niet** vertaald: het zijn
 velden die een tool leest, geen zinnen op het scherm, en een waarde die met de

@@ -1611,6 +1611,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Quizvragen': 'Kvízové otázky',
+  'Met vragen': 'S otázkami',
+  'Zonder vragen': 'Bez otázok',
+  'Alleen vragen': 'Iba otázky',
+  'De quizvragen gaan mee in dit bestand.': 'Kvízové otázky sú v tomto súbore.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Tento súbor vynecháva kvízové otázky. Názov končí na -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Tento súbor obsahuje iba kvízové otázky. Názov končí na -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Slovo „{woord}“ stojí dvakrát za sebou.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

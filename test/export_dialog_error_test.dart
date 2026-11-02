@@ -49,6 +49,7 @@ class _ThrowingExportService extends ExportService {
     bool privacyAcknowledged = false,
     Object? privacyProfile,
     bool includeDetail = true,
+    QuestionExport questions = QuestionExport.included,
     String interfaceLanguageCode = 'nl',
   }) async {
     throw const FileSystemException('schijf vol');
@@ -58,6 +59,7 @@ class _ThrowingExportService extends ExportService {
 ExportBundle _bundleFor(
   PrivacyExportProfile profile, {
   bool includeDetail = true,
+  QuestionExport questions = QuestionExport.included,
 }) => ExportBundle(
   audience: PrivacyProjection.forAudience(
     const Deck(title: 'Test'),
