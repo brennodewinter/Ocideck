@@ -142,6 +142,7 @@ make() {
   fi
 }
 minisign() { return ${signatureValid ? 0 : 1}; }
+deploy_web_if_needed() { :; }
 homebrew_tap_current() { return 0; }
 api() {
   local method="\$1" path="\$2"
@@ -356,20 +357,16 @@ printf 'DOOR\\n'
       skip: skipOnWindows,
     );
 
-    test(
-      'stale pagina + groene run: pas dan is de host/DNS-route de conclusie',
-      () {
-        final (result, calls) = runPhase3(
-          signatureValid: true,
-          websiteRun: 'success',
-          pageLive: false,
-        );
-        final output = '${result.stdout}\n${result.stderr}';
-        expect(result.exitCode, isNot(0), reason: output);
-        expect(output, contains('naar welke host'));
-        expect(calls, isNot(contains(dispatch)));
-      },
-      skip: skipOnWindows,
-    );
+    test('groene repository-update bewijst de aparte publicatie nog niet', () {
+      final (result, calls) = runPhase3(
+        signatureValid: true,
+        websiteRun: 'success',
+        pageLive: false,
+      );
+      final output = '${result.stdout}\n${result.stderr}';
+      expect(result.exitCode, isNot(0), reason: output);
+      expect(output, contains('afzonderlijke websitepublicatie'));
+      expect(calls, isNot(contains(dispatch)));
+    }, skip: skipOnWindows);
   });
 }

@@ -2034,8 +2034,11 @@ phase3() {
   # Prereleases raken de productiesite bewust niet — die wacht is er niet.
   if [[ "$TAG" != *-* ]]; then
     local website_version="" website_live=0 website_deadline
-    website_deadline=$((SECONDS + 6 * 60))
-    for _ in $(seq 1 24); do
+    local website_wait="${WEBSITE_WAIT_SECONDS:-2700}"
+    [[ "$website_wait" =~ ^[1-9][0-9]*$ ]] || die "WEBSITE_WAIT_SECONDS moet een positief geheel aantal seconden zijn."
+    log "Wachten op de afzonderlijke websitepublicatie (maximaal $website_wait seconden)."
+    website_deadline=$((SECONDS + website_wait))
+    for _ in $(seq 1 $((website_wait / 15 + 1))); do
       [ "$SECONDS" -lt "$website_deadline" ] || break
       website_version="$(live_website_version || true)"
       if website_has_expected_downloads; then
@@ -2053,7 +2056,7 @@ phase3() {
       [ -n "$wrun_after" ] && wst="${wrun_after#*|}"
       case "$wst" in
         success)
-          die "de website-downloads-run claimt groen, maar $WEBSITE_URL toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG — controleer naar welke host librekat.nl wijst, publiceer de website daar en hervat: scripts/release_auto.sh --resume $TAG" ;;
+          die "de website-repository is bijgewerkt, maar de afzonderlijke websitepublicatie is nog niet publiek bevestigd: $WEBSITE_URL toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG — controleer de deploy-workflow van de website en hervat: scripts/release_auto.sh --resume $TAG" ;;
         failure|cancelled|skipped|error)
           die "de website-downloads-run faalde (run ${wrun_after%%|*}, status $wst) — werk de downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite) en hervat: scripts/release_auto.sh --resume $TAG" ;;
         "")
