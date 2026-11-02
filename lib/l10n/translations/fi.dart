@@ -1605,6 +1605,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Ga naar de brontabel': 'Siirry lähdetaulukkoon',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Tämä taulukko on kopio lähdetaulukosta "{bron}". Muokkaa lähdettä ja valitse Päivitä, tai irrota näkymä tilannevedoksena.',
   'Quizvragen': 'Visakysymykset',
   'Met vragen': 'Kysymysten kanssa',
   'Zonder vragen': 'Ilman kysymyksiä',

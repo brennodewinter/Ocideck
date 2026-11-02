@@ -1635,6 +1635,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Ga naar de brontabel': 'Téigh go dtí an tábla foinse',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Is cóip den tábla foinse "{bron}" é an tábla seo. Cuir an foinse in eagar agus roghnaigh Athnuachan, nó dícheangail an t-amharc mar ghrianghraf.',
   'Quizvragen': 'Ceisteanna tráth na gceist',
   'Met vragen': 'Le ceisteanna',
   'Zonder vragen': 'Gan ceisteanna',

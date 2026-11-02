@@ -1624,6 +1624,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Ga naar de brontabel': 'Към изходната таблица',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Тази таблица е копие на изходната таблица "{bron}". Редактирайте източника и изберете Обновяване, или откачете изгледа като моментна снимка.',
   'Quizvragen': 'Въпроси от теста',
   'Met vragen': 'С въпроси',
   'Zonder vragen': 'Без въпроси',

@@ -1611,6 +1611,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Ga naar de brontabel': 'Prejsť na zdrojovú tabuľku',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Táto tabuľka je opis zdrojovej tabuľky "{bron}". Upravte zdroj a zvoľte Obnoviť, alebo odpojte zobrazenie ako snímku.',
   'Quizvragen': 'Kvízové otázky',
   'Met vragen': 'S otázkami',
   'Zonder vragen': 'Bez otázok',

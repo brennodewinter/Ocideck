@@ -652,6 +652,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Ga naar de brontabel': 'Zur Quelltabelle gehen',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Diese Tabelle ist eine Abschrift der Quelltabelle "{bron}". Bearbeite die Quelle und wähle Aktualisieren, oder löse die Ansicht als Momentaufnahme ab.',
   'Quizvragen': 'Quizfragen',
   'Met vragen': 'Mit Fragen',
   'Zonder vragen': 'Ohne Fragen',

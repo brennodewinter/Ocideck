@@ -1621,6 +1621,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Ga naar de brontabel': 'Mergi la tabelul sursă',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Acest tabel este o copie a tabelului sursă "{bron}". Editați sursa și alegeți Reîmprospătare, sau detașați vizualizarea ca instantaneu.',
   'Quizvragen': 'Întrebări de quiz',
   'Met vragen': 'Cu întrebări',
   'Zonder vragen': 'Fără întrebări',

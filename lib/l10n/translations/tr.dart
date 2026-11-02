@@ -2513,6 +2513,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Ga naar de brontabel': 'Kaynak tabloya git',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Bu tablo, "{bron}" kaynak tablosunun bir kopyasıdır. Kaynağı düzenleyip Yenile\'yi seçin ya da görünümü anlık görüntü olarak ayırın.',
   'Quizvragen': 'Kısa sınav soruları',
   'Met vragen': 'Sorularla',
   'Zonder vragen': 'Sorular olmadan',
