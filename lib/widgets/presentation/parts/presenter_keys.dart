@@ -87,9 +87,9 @@ extension _PresenterKeys on _FullscreenPresenterState {
     bool control = false,
     bool shift = false,
   }) {
-    if (_searchOpen) return KeyEventResult.handled;
+    if (_searchSession.isOpen) return KeyEventResult.handled;
     if ((meta || control) && key == LogicalKeyboardKey.keyF) {
-      unawaited(_openSearch());
+      unawaited(_searchSession.open(this));
       return KeyEventResult.handled;
     }
 

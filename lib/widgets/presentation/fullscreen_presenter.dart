@@ -696,7 +696,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Presenter view (notities, klok, volgende slide) vs. publieksweergave.
   bool _presenterView = false;
-  bool _searchOpen = false;
   final _searchSession = _PresenterSearchSession();
 
   /// Blanco scherm (zwart/wit) tijdens het presenteren.

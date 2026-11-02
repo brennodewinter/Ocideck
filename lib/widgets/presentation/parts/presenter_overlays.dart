@@ -454,7 +454,10 @@ extension _PresenterOverlays on _FullscreenPresenterState {
         ),
         Tooltip(
           message: labelWithShortcut(l10n, 'Zoeken', 'F'),
-          child: _NavButton(icon: Icons.search, onTap: _openSearch),
+          child: _NavButton(
+            icon: Icons.search,
+            onTap: () => _searchSession.open(this),
+          ),
         ),
         if (_displays.length > 1) ...[
           Tooltip(

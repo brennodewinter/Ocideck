@@ -3,14 +3,21 @@ part of '../fullscreen_presenter.dart';
 
 typedef _PresenterSearchPage = ({Slide slide, int index, int page});
 
-extension _PresenterSearch on _FullscreenPresenterState {
-  Future<void> _openSearch() async {
-    if (_searchOpen) return;
-    if (!_dual || widget.audience!.isClosed) {
-      ScaffoldMessenger.of(context).showSnackBar(
+class _PresenterSearchSession {
+  bool isOpen = false;
+  String query = '';
+  bool notes = false;
+  int selected = 0;
+  bool entered = false;
+  int wrapDirection = 0;
+
+  Future<void> open(_FullscreenPresenterState state) async {
+    if (isOpen) return;
+    if (!state._dual || state.widget.audience!.isClosed) {
+      ScaffoldMessenger.of(state.context).showSnackBar(
         SnackBar(
           content: Text(
-            context.l10n.d(
+            state.context.l10n.d(
               'Start met een apart presentatorvenster om privé te zoeken.',
             ),
           ),
@@ -19,26 +26,26 @@ extension _PresenterSearch on _FullscreenPresenterState {
       return;
     }
     // Ook doorgestuurde clickertoetsen mogen tijdens zoeken niet navigeren.
-    _searchOpen = true;
-    _autoPlay = false;
-    _advanceTimer?.cancel();
-    _progress.value = 0;
-    if (_timedSession.phase == _TimedSessionPhase.countdown) {
-      _timedSession.prepare();
+    isOpen = true;
+    state._autoPlay = false;
+    state._advanceTimer?.cancel();
+    state._progress.value = 0;
+    if (state._timedSession.phase == _TimedSessionPhase.countdown) {
+      state._timedSession.prepare();
     } else {
-      _timedSession.pauseIfRunning();
+      state._timedSession.pauseIfRunning();
     }
     final pages = <_PresenterSearchPage>[];
-    for (var i = 0; i < widget.slides.length; i++) {
-      final slide = widget.slides[i];
+    for (var i = 0; i < state.widget.slides.length; i++) {
+      final slide = state.widget.slides[i];
       if (!slideReachesAudience(
         slide,
-        presentationTlp: widget.tlp,
+        presentationTlp: state.widget.tlp,
         includeDetail: true,
       )) {
         continue;
       }
-      final plan = _richTextPlanFor(slide);
+      final plan = state._richTextPlanFor(slide);
       if (plan == null || plan.pageCount <= 1) {
         pages.add((slide: slide, index: i, page: 0));
       } else {
@@ -58,44 +65,36 @@ extension _PresenterSearch on _FullscreenPresenterState {
     }
     try {
       final target = await showDialog<_PresenterSearchPage>(
-        context: context,
+        context: state.context,
         builder: (_) => _PresenterSearchDialog(
           pages: pages,
-          canShow: !_timedManualAdvanceBlocked(this),
-          session: _searchSession,
+          canShow: !_timedManualAdvanceBlocked(state),
+          session: this,
         ),
       );
-      if (!mounted) return;
+      if (!state.mounted) return;
       // De publicatieactie toetst de bestaande sessie- en projectiegrenzen opnieuw.
       if (target != null &&
-          !widget.audience!.isClosed &&
-          !_timedManualAdvanceBlocked(this) &&
-          target.index < widget.slides.length &&
-          widget.slides[target.index].id == target.slide.id &&
+          !state.widget.audience!.isClosed &&
+          !_timedManualAdvanceBlocked(state) &&
+          target.index < state.widget.slides.length &&
+          state.widget.slides[target.index].id == target.slide.id &&
           slideReachesAudience(
-            widget.slides[target.index],
-            presentationTlp: widget.tlp,
+            state.widget.slides[target.index],
+            presentationTlp: state.widget.tlp,
             includeDetail: true,
           )) {
-        _jumpTo(target.index);
-        if (target.page > 0) _setRichTextPage(target.page);
+        state._jumpTo(target.index);
+        if (target.page > 0) state._setRichTextPage(target.page);
       }
     } finally {
-      _searchOpen = false;
-      if (mounted) {
-        _rebuild(() {});
-        _focusNode.requestFocus();
+      isOpen = false;
+      if (state.mounted) {
+        state._rebuild(() {});
+        state._focusNode.requestFocus();
       }
     }
   }
-}
-
-class _PresenterSearchSession {
-  String query = '';
-  bool notes = false;
-  int selected = 0;
-  bool entered = false;
-  int wrapDirection = 0;
 }
 
 class _PresenterSearchDialog extends StatefulWidget {

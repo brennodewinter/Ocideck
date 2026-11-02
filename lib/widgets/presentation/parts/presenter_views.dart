@@ -43,6 +43,33 @@ Widget? _costOverlayFor(
   );
 }
 
+Widget _presenterPreviewLayout(
+  bool compact,
+  double aspect, {
+  required Widget child,
+}) => compact
+    ? AspectRatio(aspectRatio: aspect, child: child)
+    : Expanded(child: child);
+
+Widget _presenterPanelLayout(bool compact, Widget current, Widget sidebar) {
+  if (compact) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [current, const SizedBox(height: 20), sidebar],
+      ),
+    );
+  }
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Expanded(flex: 3, child: current),
+      const SizedBox(width: 20),
+      SizedBox(width: 400, child: sidebar),
+    ],
+  );
+}
+
 extension _PresenterViews on _FullscreenPresenterState {
   /// A slide in the deck's aspect sized to fit within the given constraints.
   Widget _slideCanvas(Slide slide) {
@@ -238,8 +265,7 @@ extension _PresenterViews on _FullscreenPresenterState {
     final l10n = context.l10n;
     final total = widget.slides.length;
     final slide = widget.slides[_index.clamp(0, total - 1)];
-    final hasNext = _index < total - 1;
-    final nextSlide = hasNext ? widget.slides[_index + 1] : null;
+    final nextSlide = _index < total - 1 ? widget.slides[_index + 1] : null;
 
     return Container(
       color: PresenterPalette.bgDeepest,
@@ -247,15 +273,14 @@ extension _PresenterViews on _FullscreenPresenterState {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final compact = constraints.maxWidth < 1000;
-          Widget mainPreview({required Widget child}) => compact
-              ? AspectRatio(aspectRatio: widget.slideAspect, child: child)
-              : Expanded(child: child);
           final current = Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _SectionLabel(l10n.d('HUIDIGE SLIDE')),
               const SizedBox(height: 8),
-              mainPreview(
+              _presenterPreviewLayout(
+                compact,
+                widget.slideAspect,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: GestureDetector(
@@ -336,22 +361,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                 Expanded(child: _buildNotes(slide)),
             ],
           );
-          if (compact) {
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [current, const SizedBox(height: 20), sidebar],
-              ),
-            );
-          }
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(flex: 3, child: current),
-              const SizedBox(width: 20),
-              SizedBox(width: 400, child: sidebar),
-            ],
-          );
+          return _presenterPanelLayout(compact, current, sidebar);
         },
       ),
     );
