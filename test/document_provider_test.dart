@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/widgets/shell/document_save_actions.dart';
 
 void main() {
   test('geladen document is schoon en behoudt bron + pad', () {
@@ -107,5 +108,55 @@ void main() {
     // Redo de visuele edit → visualEdited weer true.
     n.redo();
     expect(n.currentState.visualEdited, isTrue);
+  });
+
+  // Regressie #2720: een opslag die blokkeerde terwijl er verder getypt werd,
+  // mocht niet schoon melden — de vervolgschrijfactie zet de nieuwe bron op
+  // schijf.
+  group('saveDocumentUntilCurrent (#2720)', () {
+    test('schrijft opnieuw als de bron tijdens de await veranderde', () async {
+      final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('v1'));
+      n.edit('v2');
+      final written = <String>[];
+      final result = await saveDocumentUntilCurrent(
+        notifier: n,
+        first: n.currentState.document!,
+        write: (doc) async {
+          // Tijdens deze "schijfactie" typt de gebruiker verder.
+          if (written.isEmpty) n.edit('v3');
+          written.add(doc.source);
+          return doc;
+        },
+      );
+      expect(result!.source, 'v3');
+      expect(written, ['v2', 'v3']);
+      // De aanroeper mag pas schoon melden als live == result — hier klopt dat.
+      expect(n.currentState.document!.source, result.source);
+    });
+
+    test(
+      'meldt niet-geschreven bron terug zodat de aanroeper vuil laat',
+      () async {
+        final n = DocumentNotifier()
+          ..loadDocument(MarkdownDocument.parse('v1'));
+        n.edit('v2');
+        var calls = 0;
+        final result = await saveDocumentUntilCurrent(
+          notifier: n,
+          first: n.currentState.document!,
+          maxAttempts: 2,
+          write: (doc) async {
+            calls++;
+            n.edit('v${2 + calls}'); // elke schijfactie wordt ingehaald
+            return doc;
+          },
+        );
+        expect(calls, 2);
+        // De levende bron is nieuwer dan wat geschreven kon worden: de
+        // aanroeper meldt NIET schoon (isDirty blijft, herstelkopie blijft).
+        expect(n.currentState.document!.source, isNot(result!.source));
+        expect(n.currentState.isDirty, isTrue);
+      },
+    );
   });
 }
