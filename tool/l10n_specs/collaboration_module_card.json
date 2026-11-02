@@ -1,0 +1,36 @@
+{
+  "additions": {
+    "Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.": {
+      "en": "Collaborate live on a presentation stored on a WebDAV server. Off by default. Edits travel through a working folder next to the deck on the same server — without encryption by OciDeck.",
+      "it": "Lavora dal vivo su una presentazione su un server WebDAV. Disattivato per impostazione predefinita. Le modifiche passano attraverso una cartella di lavoro accanto al deck sullo stesso server — senza crittografia da parte di OciDeck.",
+      "de": "Arbeite live an einer Präsentation auf einem WebDAV-Server zusammen. Standardmäßig aus. Bearbeitungen reisen über einen Arbeitsordner neben dem Deck auf demselben Server — ohne Verschlüsselung durch OciDeck.",
+      "fr": "Travaillez en direct sur une présentation stockée sur un serveur WebDAV. Désactivé par défaut. Les modifications passent par un dossier de travail à côté du deck sur le même serveur — sans chiffrement par OciDeck.",
+      "es": "Trabaje en directo en una presentación en un servidor WebDAV. Desactivado por defecto. Las ediciones viajan por una carpeta de trabajo junto al deck en el mismo servidor — sin cifrado por parte de OciDeck.",
+      "fy": "Wurkje live oan in presintaasje op in WebDAV-server. Standert út. Bewurkingen reizgje fia in wurkmap njonken it deck op deselde server — sûner fersifering troch OciDeck.",
+      "pap": "Trabaha en vivo riba un presentashon riba un sirvidor WebDAV. Desaktipá pa defekto. Edishonnan ta biaha via un carpeta di trabou banda di e deck riba e mesun sirvidor — sin enkripshon pa OciDeck.",
+      "la": "In praesentatione in servo WebDAV posita una vive labora. Explicite activate. Mutationes per folderium laboris iuxta fasciculum in eodem servo transeunt — sine encryptione ab OciDeck.",
+      "id": "Bekerja secara langsung pada presentasi di server WebDAV. Nonaktif secara default. Suntingan berpindah melalui folder kerja di samping deck pada server yang sama — tanpa enkripsi oleh OciDeck.",
+      "pl": "Pracuj na żywo nad prezentacją na serwerze WebDAV. Domyślnie wyłączone. Zmiany przechodzą przez folder roboczy obok decku na tym samym serwerze — bez szyfrowania przez OciDeck.",
+      "uk": "Працюйте наживо над презентацією на сервері WebDAV. Вимкнено за замовчуванням. Зміни передаються через робочу папку поруч із деком на тому ж сервері — без шифрування з боку OciDeck.",
+      "gsw": "Schaff live a ere Präsentation uf eme WebDAV-Server. Standardmässig us. Bearbeite gö über e Arbeitsordner näbem Deck uf em gliche Server — ohni Verschlüsselig dur OciDeck.",
+      "el": "Συνεργαστείτε ζωντανά σε μια παρουσίαση σε διακομιστή WebDAV. Απενεργοποιημένο από προεπιλογή. Οι αλλαγές ταξιδεύουν μέσω ενός φακέλου εργασίας δίπλα στο deck στον ίδιο διακομιστή — χωρίς κρυπτογράφηση από το OciDeck.",
+      "da": "Samarbejd live om en præsentation på en WebDAV-server. Slået fra som standard. Redigeringer rejser via en arbejdsmappe ved siden af decket på samme server — uden kryptering fra OciDeck.",
+      "sv": "Arbeta live på en presentation på en WebDAV-server. Avstängt som standard. Redigeringar reser via en arbetsmapp bredvid decket på samma server — utan kryptering från OciDeck.",
+      "hr": "Radite uživo na prezentaciji na WebDAV poslužitelju. Zadano isključeno. Izmjene putuju kroz radnu mapu pokraj decka na istom poslužitelju — bez enkripcije od strane OciDecka.",
+      "cs": "Pracujte živě na prezentaci na serveru WebDAV. Ve výchozím nastavení vypnuto. Úpravy cestují přes pracovní složku vedle decku na stejném serveru — bez šifrování ze strany OciDeck.",
+      "fi": "Työskentele reaaliajassa WebDAV-palvelimella olevan esityksen parissa. Oletuksena pois päältä. Muutokset kulkevat deckin vieressä olevan työkansion kautta samalla palvelimella — ilman OciDeckin salausta.",
+      "bg": "Работете на живо върху презентация на WebDAV сървър. Изключено по подразбиране. Редакциите пътуват през работна папка до дека на същия сървър — без криптиране от OciDeck.",
+      "lv": "Strādājiet tiešraidē pie prezentācijas WebDAV serverī. Pēc noklusējuma izslēgts. Labojumi ceļo caur darba mapi blakus dekam uz tā paša servera — bez OciDeck šifrēšanas.",
+      "lt": "Dirbkite tiesiogiai prie WebDAV serveryje esančios pateikties. Pagal numatymą išjungta. Pakeitimai keliauja per darbinį aplanką šalia deko tame pačiame serveryje — be OciDeck šifravimo.",
+      "mt": "Ħdem live fuq preżentazzjoni fuq server WebDAV. Mitfi b'mod awtomatiku. L-editji jivvjaġġaw permezz ta' folder tax-xogħol ħdejn id-deck fuq l-istess server — mingħajr encryption minn OciDeck.",
+      "et": "Töötage reaalajas WebDAV-serveris oleva esitluse kallal. Vaikimisi välja lülitatud. Muudatused liiguvad deki kõrval oleva töökausta kaudu samal serveril — ilma OciDecki krüpteerimiseta.",
+      "hu": "Dolgozzon élőben egy WebDAV-kiszolgálón lévő prezentáción. Alapértelmezetten ki. A módosítások a deck melletti munkamappán keresztül utaznak ugyanazon a kiszolgálón — OciDeck-titkosítás nélkül.",
+      "ga": "Déan comhoibriú beo ar chur i láthair ar fhreastalaí WebDAV. Múchta de réir réamhshocraithe. Taistealaíonn na hathruithe trí fhillteán oibre in aice leis an deck ar an bhfreastalaí céanna — gan chriptiú ag OciDeck.",
+      "pt": "Trabalhe ao vivo numa apresentação num servidor WebDAV. Desativado por predefinição. As edições viajam por uma pasta de trabalho junto ao deck no mesmo servidor — sem encriptação por parte do OciDeck.",
+      "ro": "Lucrați live la o prezentare pe un server WebDAV. Dezactivat implicit. Modificările călătoresc printr-un dosar de lucru de lângă deck pe același server — fără criptare de către OciDeck.",
+      "sl": "Sodelujte v živo pri predstavitvi na strežniku WebDAV. Privzeto izklopljeno. Spremembe potujejo prek delovne mape poleg decka na istem strežniku — brez šifriranja s strani OciDeck.",
+      "sk": "Pracujte naživo na prezentácii na serveri WebDAV. Predvolene vypnuté. Úpravy cestujú cez pracovný priečinok vedľa decku na rovnakom serveri — bez šifrovania zo strany OciDeck.",
+      "tr": "Bir WebDAV sunucusundaki sunumda canlı çalışın. Varsayılan olarak kapalı. Düzenlemeler aynı sunucudaki deck'in yanındaki çalışma klasörü üzerinden gider — OciDeck şifrelemesi olmadan."
+    }
+  }
+}

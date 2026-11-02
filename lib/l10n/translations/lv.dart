@@ -1603,6 +1603,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Strādājiet tiešraidē pie prezentācijas WebDAV serverī. Pēc noklusējuma izslēgts. Labojumi ceļo caur darba mapi blakus dekam uz tā paša servera — bez OciDeck šifrēšanas.',
   'Ga naar de brontabel': 'Doties uz avota tabulu',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Šī tabula ir avota tabulas "{bron}" kopija. Rediģējiet avotu un izvēlieties Atsvaidzināt, vai atvienojiet skatu kā momentuzņēmumu.',
@@ -5285,8 +5287,6 @@ const _dutchSourceAddLv = <String, String>{
       'failus nevarēja droši pārskatīt',
   'nieuw gescand': 'tikko skenēts',
   'Realtime samenwerken': 'Sadarbība reāllaikā',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Sadarbojieties tiešsaistē pie prezentācijas caur šifrētu retranslatoru. Pēc noklusējuma izslēgts. Saturs tiek pilnībā (end-to-end) šifrēts ar OciDeck paša atslēgām; serveris redz tikai šifrētus datus.',
   'Chat': 'Tērzēšana',
   'Chat sluiten': 'Aizvērt tērzēšanu',
   'Bericht…': 'Ziņa…',

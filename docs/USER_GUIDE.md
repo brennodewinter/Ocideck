@@ -713,29 +713,13 @@ stuck: a co-author who wants to keep their own copy can **leave the session** �
 saving is theirs again immediately — or **export a package** (`.ocideck`), which
 carries the full editable deck and its images regardless of who owns the session.
 
-**Verifying who you work with.** In a realtime session, the palette offers
-**“Deelnemers verifiëren”**: it lists every device with a **fingerprint** — a
-readable rendering of that device's identity key. Compare a co-author's
-fingerprint over a channel you trust (read it aloud, or send it a way you know is
-theirs); if it matches, mark the device **verified**. That verification is
-remembered, so the same device stays verified in later sessions and does not ask
-again. If a device you verified before ever shows up with a *different* identity,
-OciDeck flags it as **mismatch** — the sign that something is impersonating your
-co-author, and a reason to break off the session rather than dismiss it. While any
-device is still unverified, a slim banner above the workspace reminds you, and one
-tap opens the comparison. *(Added 2026-08-01.)*
-
-**Keeping your identity when you switch devices.** Your device has its own
-collaboration identity — the thing co-authors verify. It lives only on this
-device, so a new device normally starts fresh (and shows up as unverified to
-everyone who had verified you). To carry the *same* identity over, open
-*Settings → Realtime samenwerken → Identiteit & herstelsleutel* and **show the
-recovery key** — a short grouped code. Save it somewhere safe, such as your
-password manager; it is the only way to restore this identity, so keep it and
-share it with no one. On the new device, open the same place and **restore** from
-that key: co-authors who verified you before recognise your fingerprint again.
-Removing the Matrix account also removes this identity and your saved
-verifications from the keychain. *(Added 2026-08-01.)*
+*(Removed 2026-11-03: two paragraphs here described participant verification
+with fingerprints and an identity recovery key under *Settings → Realtime
+samenwerken*, and mentioned removing a Matrix account. That route is designed
+in `design/SELF_ENCRYPTED_RELAY.md` but not built — none of those commands or
+settings exists in the app. The session above, over the WebDAV folder beside
+the deck, is what OciDeck does today, and it carries no OciDeck-level
+encryption.)*
 
 **Table cell edits do not sync.** When you edit a cell in a table slide during
 a session, that change does not reach the other participants — the title and

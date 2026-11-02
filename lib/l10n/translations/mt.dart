@@ -1623,6 +1623,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Ħdem live fuq preżentazzjoni fuq server WebDAV. Mitfi b\'mod awtomatiku. L-editji jivvjaġġaw permezz ta\' folder tax-xogħol ħdejn id-deck fuq l-istess server — mingħajr encryption minn OciDeck.',
   'Ga naar de brontabel': 'Mur fit-tabella sors',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Din it-tabella hija kopja tat-tabella sors "{bron}". Editja s-sors u agħżel Aġġorna, jew skonnettja l-vista bħala stampa tal-mument.',
@@ -5354,8 +5356,6 @@ const _dutchSourceAddMt = <String, String>{
       'non è stato possibile rivedere i file in modo sicuro',
   'nieuw gescand': 'appena scansionato',
   'Realtime samenwerken': 'Kollaborazzjoni f\'ħin reali',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Ikkollabora fil-ħin reali fuq preżentazzjoni permezz ta\' relay ikkriptat. Mitfi b\'mod prestabilit. Il-kontenut jiġi kkriptat minn tarf sa tarf biċ-ċwievet ta\' OciDeck stess; is-server jara biss data kkriptata.',
   'Chat': 'Chat',
   'Chat sluiten': 'Agħlaq iċ-chat',
   'Bericht…': 'Messaġġ…',

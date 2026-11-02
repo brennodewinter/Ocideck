@@ -36,7 +36,7 @@ class CollaborationModuleCard extends ConsumerWidget {
             ),
             subtitle: Text(
               l10n.d(
-                'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.',
+                'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),

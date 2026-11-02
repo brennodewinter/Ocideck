@@ -1617,6 +1617,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Pracuj na żywo nad prezentacją na serwerze WebDAV. Domyślnie wyłączone. Zmiany przechodzą przez folder roboczy obok decku na tym samym serwerze — bez szyfrowania przez OciDeck.',
   'Ga naar de brontabel': 'Przejdź do tabeli źródłowej',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ta tabela jest kopią tabeli źródłowej "{bron}". Edytuj źródło i wybierz Odśwież, albo odłącz widok jako migawkę.',
@@ -5320,8 +5322,6 @@ const _dutchSourceAddPl = <String, String>{
       'plików nie można było bezpiecznie przeglądać',
   'nieuw gescand': 'nowo zeskanowane',
   'Realtime samenwerken': 'Współpraca w czasie rzeczywistym',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Współpracuj na żywo nad prezentacją przez zaszyfrowany przekaźnik. Domyślnie wyłączone. Treść jest szyfrowana end-to-end własnymi kluczami OciDeck; serwer widzi tylko zaszyfrowane dane.',
   'Chat': 'Czat',
   'Chat sluiten': 'Zamknij czat',
   'Bericht…': 'Wiadomość…',

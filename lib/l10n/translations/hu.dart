@@ -1607,6 +1607,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Dolgozzon élőben egy WebDAV-kiszolgálón lévő prezentáción. Alapértelmezetten ki. A módosítások a deck melletti munkamappán keresztül utaznak ugyanazon a kiszolgálón — OciDeck-titkosítás nélkül.',
   'Ga naar de brontabel': 'Ugrás a forrástáblához',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ez a táblázat a "{bron}" forrástábla másolata. Szerkessze a forrást és válassza a Frissítés lehetőséget, vagy válassza le a nézetet pillanatképként.',
@@ -5308,8 +5310,6 @@ const _dutchSourceAddHu = <String, String>{
       'a fájlokat nem lehetett biztonságosan áttekinteni',
   'nieuw gescand': 'újonnan szkennelve',
   'Realtime samenwerken': 'Valós idejű együttműködés',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Működj együtt élőben egy bemutatón egy titkosított továbbítón keresztül. Alapértelmezetten kikapcsolva. A tartalom végponttól végpontig titkosított OciDeck saját kulcsaival; a kiszolgáló csak titkosított adatokat lát.',
   'Chat': 'Csevegés',
   'Chat sluiten': 'Csevegés bezárása',
   'Bericht…': 'Üzenet…',

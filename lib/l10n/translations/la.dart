@@ -1620,6 +1620,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'In praesentatione in servo WebDAV posita una vive labora. Explicite activate. Mutationes per folderium laboris iuxta fasciculum in eodem servo transeunt — sine encryptione ab OciDeck.',
   'Ga naar de brontabel': 'Ad tabulam fontem vade',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Haec tabula exemplum tabulae fontis "{bron}" est. Fontem ede et Renovare elige, aut conspectum ut imaginem seiunge.',
@@ -5314,8 +5316,6 @@ const _dutchSourceAddLa = <String, String>{
       'non è stato possibile rivedere i file in modo sicuro',
   'nieuw gescand': 'appena scansionato',
   'Realtime samenwerken': 'Collaboratio tempore reali',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'In praesentatione viva per relatorem cifratum collabora. Implicite inactivum. Contentus a fine ad finem clavibus propriis OciDeck cifratur; servitor tantum data cifrata videt.',
   'Chat': 'Colloquium',
   'Chat sluiten': 'Claude colloquium',
   'Bericht…': 'Nuntius…',

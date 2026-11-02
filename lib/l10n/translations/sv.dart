@@ -1604,6 +1604,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Arbeta live på en presentation på en WebDAV-server. Avstängt som standard. Redigeringar reser via en arbetsmapp bredvid decket på samma server — utan kryptering från OciDeck.',
   'Ga naar de brontabel': 'Gå till källtabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Den här tabellen är en avskrift av källtabellen "{bron}". Redigera källan och välj Uppdatera, eller koppla loss vyn som en ögonblicksbild.',
@@ -5288,8 +5290,6 @@ const _dutchSourceAddSv = <String, String>{
       'filer kunde inte granskas säkert',
   'nieuw gescand': 'nyskannade',
   'Realtime samenwerken': 'Samarbete i realtid',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Samarbeta live på en presentation via ett krypterat relä. Av som standard. Innehållet krypteras änd-till-änd med OciDecks egna nycklar; servern ser bara krypterade data.',
   'Chat': 'Chatt',
   'Chat sluiten': 'Stäng chatten',
   'Bericht…': 'Meddelande…',

@@ -1598,6 +1598,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Töötage reaalajas WebDAV-serveris oleva esitluse kallal. Vaikimisi välja lülitatud. Muudatused liiguvad deki kõrval oleva töökausta kaudu samal serveril — ilma OciDecki krüpteerimiseta.',
   'Ga naar de brontabel': 'Mine lähtetabelisse',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'See tabel on lähtetabeli "{bron}" koopia. Muuda lähtetabelit ja vali Värskenda või ühenda vaade hetkepildina lahti.',
@@ -5279,8 +5281,6 @@ const _dutchSourceAddEt = <String, String>{
       'faile ei saanud ohutult üle vaadata',
   'nieuw gescand': 'äsja skaneeritud',
   'Realtime samenwerken': 'Reaalajas koostöö',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Tee esitluse kallal reaalajas koostööd krüpteeritud edastaja kaudu. Vaikimisi väljas. Sisu krüpteeritakse otsast otsani OciDecki enda võtmetega; server näeb ainult krüpteeritud andmeid.',
   'Chat': 'Vestlus',
   'Chat sluiten': 'Sulge vestlus',
   'Bericht…': 'Sõnum…',

@@ -1608,6 +1608,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Schaff live a ere Präsentation uf eme WebDAV-Server. Standardmässig us. Bearbeite gö über e Arbeitsordner näbem Deck uf em gliche Server — ohni Verschlüsselig dur OciDeck.',
   'Ga naar de brontabel': 'Zur Quelltabälle gaa',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Die Tabälle isch e Abschrift vo de Quelltabälle "{bron}". Bearbeit d Quell und wehl Verfrische, oder löös d Aasicht als Momentufnahm ab.',
@@ -5314,8 +5316,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Dateien konnten nicht sicher überprüft werden',
   'nieuw gescand': 'neu gescannt',
   'Realtime samenwerken': 'Echtziit-Zämmenarbet',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Schaff live zäme an ere Präsentation über es verschlüsslets Wiiterleitigsglid. Standardmässig us. Dr Inhalt wird Änd-zu-Änd mit OciDeck sine eigene Schlüssel verschlüsslet; dr Server gseht nu verschlüsselti Date.',
   'Chat': 'Chat',
   'Chat sluiten': 'Chat zuemache',
   'Bericht…': 'Nachricht…',

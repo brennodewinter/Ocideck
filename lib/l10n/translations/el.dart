@@ -1630,6 +1630,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Συνεργαστείτε ζωντανά σε μια παρουσίαση σε διακομιστή WebDAV. Απενεργοποιημένο από προεπιλογή. Οι αλλαγές ταξιδεύουν μέσω ενός φακέλου εργασίας δίπλα στο deck στον ίδιο διακομιστή — χωρίς κρυπτογράφηση από το OciDeck.',
   'Ga naar de brontabel': 'Μετάβαση στον πίνακα προέλευσης',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Αυτός ο πίνακας είναι αντίγραφο του πίνακα προέλευσης "{bron}". Επεξεργαστείτε την προέλευση και επιλέξτε Ανανέωση, ή αποσυνδέστε την προβολή ως στιγμιότυπο.',
@@ -5380,8 +5382,6 @@ const _dutchSourceAddEl = <String, String>{
       'Τα αρχεία δεν ήταν δυνατό να ελεγχθούν με ασφάλεια',
   'nieuw gescand': 'πρόσφατα σαρώθηκε',
   'Realtime samenwerken': 'Συνεργασία σε πραγματικό χρόνο',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Συνεργαστείτε ζωντανά σε μια παρουσίαση μέσω ενός κρυπτογραφημένου αναμεταδότη. Ανενεργό από προεπιλογή. Το περιεχόμενο κρυπτογραφείται από άκρο σε άκρο με τα δικά κλειδιά του OciDeck· ο διακομιστής βλέπει μόνο κρυπτογραφημένα δεδομένα.',
   'Chat': 'Συνομιλία',
   'Chat sluiten': 'Κλείσιμο συνομιλίας',
   'Bericht…': 'Μήνυμα…',

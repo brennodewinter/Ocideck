@@ -1605,6 +1605,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Sodelujte v živo pri predstavitvi na strežniku WebDAV. Privzeto izklopljeno. Spremembe potujejo prek delovne mape poleg decka na istem strežniku — brez šifriranja s strani OciDeck.',
   'Ga naar de brontabel': 'Pojdi na izvorno tabelo',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ta tabela je odpis izvorne tabele "{bron}". Uredite vir in izberite Osveži, ali ločite pogled kot posnetek.',
@@ -5285,8 +5287,6 @@ const _dutchSourceAddSl = <String, String>{
       'datotek ni bilo mogoče varno pregledati',
   'nieuw gescand': 'na novo skenirano',
   'Realtime samenwerken': 'Sodelovanje v realnem času',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Sodelujte v živo pri predstavitvi prek šifriranega posrednika. Privzeto izklopljeno. Vsebina je šifrirana od konca do konca z lastnimi ključi OciDecka; strežnik vidi samo šifrirane podatke.',
   'Chat': 'Klepet',
   'Chat sluiten': 'Zapri klepet',
   'Bericht…': 'Sporočilo…',

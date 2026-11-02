@@ -759,31 +759,13 @@ opslaan is meteen weer aan hem — of **een pakket exporteren** (`.ocideck`), da
 volledige bewerkbare deck en zijn afbeeldingen meedraagt, ongeacht wie de sessie
 bezit.
 
-**Verifiëren met wie je werkt.** In een realtime-sessie biedt het palet
-**“Deelnemers verifiëren”**: het somt elk apparaat op met een **vingerafdruk** — een
-leesbare weergave van de identiteitssleutel van dat apparaat. Vergelijk de
-vingerafdruk van een co-auteur via een kanaal dat je vertrouwt (lees hem hardop voor,
-of stuur hem op een manier waarvan je weet dat die van hen is); als hij overeenkomt,
-markeer het apparaat als **geverifieerd**. Die verificatie wordt onthouden, zodat
-hetzelfde apparaat in latere sessies geverifieerd blijft en niet opnieuw vraagt. Als
-een apparaat dat je eerder verifieerde ooit opduikt met een *andere* identiteit,
-markeert OciDeck het als **mismatch** — het teken dat iets zich voordoet als je
-co-auteur, en een reden om de sessie af te breken in plaats van het weg te klikken.
-Zolang een apparaat nog niet is geverifieerd, herinnert een smalle banner boven de
-werkruimte je eraan, en één tik opent de vergelijking. *(Toegevoegd 2026-08-01.)*
-
-**Je identiteit behouden wanneer je van apparaat wisselt.** Je apparaat heeft zijn
-eigen samenwerkingsidentiteit — datgene wat co-auteurs verifiëren. Die leeft alleen op
-dit apparaat, dus een nieuw apparaat begint normaal gesproken opnieuw (en verschijnt
-als niet-geverifieerd voor iedereen die je had geverifieerd). Om *dezelfde* identiteit
-mee te nemen, open je *Instellingen → Realtime samenwerken → Identiteit &
-herstelsleutel* en **toon de herstelsleutel** — een korte gegroepeerde code. Bewaar
-hem ergens veilig, zoals in je wachtwoordmanager; het is de enige manier om deze
-identiteit te herstellen, dus bewaar hem en deel hem met niemand. Op het nieuwe
-apparaat open je dezelfde plek en **herstel** je vanuit die sleutel: co-auteurs die je
-eerder verifieerden herkennen je vingerafdruk weer. Het Matrix-account verwijderen
-verwijdert ook deze identiteit en je opgeslagen verificaties uit de sleutelbos.
-*(Toegevoegd 2026-08-01.)*
+*(Verwijderd 2026-11-03: hier stonden twee alinea's over het verifiëren van
+deelnemers met vingerafdrukken en een identiteitsherstelsleutel onder
+*Instellingen → Realtime samenwerken*, en over het verwijderen van een
+Matrix-account. Die route is ontworpen in `design/SELF_ENCRYPTED_RELAY.md`
+maar niet gebouwd — geen van die commando's of instellingen bestaat in de
+app. De sessie hierboven, via de WebDAV-map naast het deck, is wat OciDeck
+vandaag doet, en die kent geen versleuteling door OciDeck.)*
 
 **Tabelcel-bewerkingen synchroniseren niet.** Als je een cel in een tabeldia
 bewerkt tijdens een sessie, komt die wijziging niet aan bij de andere deelnemers

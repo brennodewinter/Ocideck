@@ -651,6 +651,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Trabaha en vivo riba un presentashon riba un sirvidor WebDAV. Desaktipá pa defekto. Edishonnan ta biaha via un carpeta di trabou banda di e deck riba e mesun sirvidor — sin enkripshon pa OciDeck.',
   'Ga naar de brontabel': 'Bai na e tabela fuente',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'E tabela aki ta un kopia di e tabela fuente "{bron}". Editá e fuente i skohe Refresh, òf deskonektá e vista komo snapshot.',
@@ -4344,8 +4346,6 @@ const _dutchSourceAddPap = {
       'Los archivos no se pudieron revisar de forma segura.',
   'nieuw gescand': 'recién escaneado',
   'Realtime samenwerken': 'Kolaborashon na tempu real',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Kolaborá na bibo riba un presentashon via un relè enkriptá. Apagá pa defekto. E kontenido ta wòrdu enkriptá end-to-end ku OciDeck su mes yabinan; e server ta mira solamente datos enkriptá.',
   'Chat': 'Chat',
   'Chat sluiten': 'Sera chat',
   'Bericht…': 'Mensahe…',

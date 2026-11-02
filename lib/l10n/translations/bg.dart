@@ -1624,6 +1624,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Работете на живо върху презентация на WebDAV сървър. Изключено по подразбиране. Редакциите пътуват през работна папка до дека на същия сървър — без криптиране от OciDeck.',
   'Ga naar de brontabel': 'Към изходната таблица',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Тази таблица е копие на изходната таблица "{bron}". Редактирайте източника и изберете Обновяване, или откачете изгледа като моментна снимка.',
@@ -5330,8 +5332,6 @@ const _dutchSourceAddBg = <String, String>{
       'файлове не можаха да бъдат прегледани безопасно',
   'nieuw gescand': 'наскоро сканиран',
   'Realtime samenwerken': 'Съвместна работа в реално време',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Работете съвместно на живо върху презентация чрез криптиран препредавател. По подразбиране изключено. Съдържанието се криптира от край до край със собствените ключове на OciDeck; сървърът вижда само криптирани данни.',
   'Chat': 'Чат',
   'Chat sluiten': 'Затвори чата',
   'Bericht…': 'Съобщение…',

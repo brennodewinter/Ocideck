@@ -652,6 +652,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Wurkje live oan in presintaasje op in WebDAV-server. Standert út. Bewurkingen reizgje fia in wurkmap njonken it deck op deselde server — sûner fersifering troch OciDeck.',
   'Ga naar de brontabel': 'Gean nei de boarnetabel',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Dizze tabel is in ôfskrift fan de boarnetabel "{bron}". Bewurkje de boarne en kies Fernije, of untkeppelje de werjefte as momintopname.',
@@ -4345,8 +4347,6 @@ const _dutchSourceAddFy = {
       'bestannen koenen net feilich beoardiele wurde',
   'nieuw gescand': 'nij scand',
   'Realtime samenwerken': 'Realtime gearwurkje',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Wurkje live gear oan in presintaasje fia in fersifere trochjefte. Standert út. De ynhâld wurdt end-to-end fersifere mei OciDeck syn eigen kaaien; de server sjocht allinne fersifere gegevens.',
   'Chat': 'Chat',
   'Chat sluiten': 'Chat slute',
   'Bericht…': 'Berjocht…',

@@ -1611,6 +1611,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Dirbkite tiesiogiai prie WebDAV serveryje esančios pateikties. Pagal numatymą išjungta. Pakeitimai keliauja per darbinį aplanką šalia deko tame pačiame serveryje — be OciDeck šifravimo.',
   'Ga naar de brontabel': 'Eiti į šaltinio lentelę',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ši lentelė yra šaltinio lentelės "{bron}" kopija. Redaguokite šaltinį ir pasirinkite Atnaujinti, arba atjunkite rodinį kaip momentinę kopiją.',
@@ -5293,8 +5295,6 @@ const _dutchSourceAddLt = <String, String>{
       'failų nepavyko saugiai peržiūrėti',
   'nieuw gescand': 'naujai nuskaitytas',
   'Realtime samenwerken': 'Bendradarbiavimas tikruoju laiku',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Bendradarbiaukite tiesiogiai rengdami pristatymą per šifruotą perdavimo tašką. Pagal numatytuosius nustatymus išjungta. Turinys šifruojamas nuo galo iki galo pačios OciDeck raktais; serveris mato tik šifruotus duomenis.',
   'Chat': 'Pokalbis',
   'Chat sluiten': 'Užverti pokalbį',
   'Bericht…': 'Žinutė…',

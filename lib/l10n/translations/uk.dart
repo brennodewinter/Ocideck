@@ -1620,6 +1620,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Працюйте наживо над презентацією на сервері WebDAV. Вимкнено за замовчуванням. Зміни передаються через робочу папку поруч із деком на тому ж сервері — без шифрування з боку OciDeck.',
   'Ga naar de brontabel': 'Перейти до вихідної таблиці',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ця таблиця є копією вихідної таблиці "{bron}". Відредагуйте джерело й виберіть Оновити або від\'єднайте подання як знімок.',
@@ -5302,8 +5304,6 @@ const _dutchSourceAddUk = <String, String>{
       'Файли не можна безпечно переглянути',
   'nieuw gescand': 'щойно відскановані',
   'Realtime samenwerken': 'Співпраця в реальному часі',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Співпрацюйте наживо над презентацією через зашифрований ретранслятор. Типово вимкнено. Вміст шифрується наскрізно власними ключами OciDeck; сервер бачить лише зашифровані дані.',
   'Chat': 'Чат',
   'Chat sluiten': 'Закрити чат',
   'Bericht…': 'Повідомлення…',

@@ -1605,6 +1605,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Bekerja secara langsung pada presentasi di server WebDAV. Nonaktif secara default. Suntingan berpindah melalui folder kerja di samping deck pada server yang sama — tanpa enkripsi oleh OciDeck.',
   'Ga naar de brontabel': 'Buka tabel sumber',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tabel ini adalah salinan tabel sumber "{bron}". Edit sumbernya dan pilih Segarkan, atau lepaskan tampilan sebagai snapshot.',
@@ -5286,8 +5288,6 @@ const _dutchSourceAddId = <String, String>{
       'file tidak dapat ditinjau dengan aman',
   'nieuw gescand': 'baru dipindai',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Berkolaborasi secara langsung pada presentasi melalui relai terenkripsi. Nonaktif secara bawaan. Kontennya dienkripsi ujung ke ujung dengan kunci milik OciDeck sendiri; server hanya melihat data terenkripsi.',
   'Chat': 'Obrolan',
   'Chat sluiten': 'Tutup obrolan',
   'Bericht…': 'Pesan…',
