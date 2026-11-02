@@ -22,6 +22,7 @@ class MarkdownFindBar extends StatefulWidget {
   final VoidCallback onReplaceAll;
   final VoidCallback onClose;
   final List<String> resultContexts;
+  final List<String> resultLocations;
   final ValueChanged<int>? onSelectMatch;
   final int wrapDirection;
 
@@ -42,6 +43,7 @@ class MarkdownFindBar extends StatefulWidget {
     required this.onReplaceAll,
     required this.onClose,
     this.resultContexts = const [],
+    this.resultLocations = const [],
     this.onSelectMatch,
     this.wrapDirection = 0,
   });
@@ -55,6 +57,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
   late final TextEditingController _replaceCtrl;
   late final FocusNode _queryFocus;
   late final FocusNode _replaceFocus;
+  final _resultScroll = ScrollController();
 
   @override
   void initState() {
@@ -92,6 +95,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
     _replaceCtrl.dispose();
     _queryFocus.dispose();
     _replaceFocus.dispose();
+    _resultScroll.dispose();
     super.dispose();
   }
 
@@ -165,6 +169,18 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
   }
 
   Widget _contextText(String text) {
+    final fullContext = text;
+    final first = findAllMatches(
+      text,
+      widget.query,
+      caseSensitive: widget.caseSensitive,
+    ).firstOrNull;
+    if (first != null &&
+        first.start > 4 &&
+        MediaQuery.sizeOf(context).width < 560 &&
+        MediaQuery.textScalerOf(context).scale(16) > 20) {
+      text = '…${text.substring(first.start - 4)}';
+    }
     final matches = findAllMatches(
       text,
       widget.query,
@@ -188,8 +204,73 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
     spans.add(TextSpan(text: text.substring(end)));
     return Text.rich(
       TextSpan(children: spans),
+      semanticsLabel: fullContext,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  Widget _queryAndNavigation(AppLocalizations l10n, bool hasMatches) {
+    final field = Focus(
+      onKeyEvent: _handleQueryKey,
+      child: TextField(
+        controller: _queryCtrl,
+        focusNode: _queryFocus,
+        onChanged: widget.onQueryChanged,
+        style: const TextStyle(fontSize: 13),
+        decoration: InputDecoration(
+          hintText: l10n.d('Zoeken naar'),
+          prefixIcon: const Icon(Icons.search, size: 18),
+          isDense: true,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 8,
+          ),
+          border: const OutlineInputBorder(),
+          filled: true,
+          fillColor: AppTheme.paper,
+        ),
+      ),
+    );
+    final navigation = Row(
+      children: [
+        IconButton(
+          tooltip: l10n.d('Vorige'),
+          icon: const Icon(Icons.keyboard_arrow_up, size: 20),
+          visualDensity: VisualDensity.compact,
+          onPressed: hasMatches ? () => _navigate(widget.onPrevious) : null,
+        ),
+        IconButton(
+          tooltip: l10n.d('Volgende'),
+          icon: const Icon(Icons.keyboard_arrow_down, size: 20),
+          visualDensity: VisualDensity.compact,
+          onPressed: hasMatches ? () => _navigate(widget.onNext) : null,
+        ),
+        Expanded(child: Semantics(liveRegion: true, child: _statusText(l10n))),
+        IconButton(
+          tooltip: l10n.t('close'),
+          icon: const Icon(Icons.close, size: 18),
+          visualDensity: VisualDensity.compact,
+          onPressed: widget.onClose,
+        ),
+      ],
+    );
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 560) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [field, navigation],
+          );
+        }
+        return Row(
+          children: [
+            Expanded(child: field),
+            const SizedBox(width: 4),
+            Expanded(child: navigation),
+          ],
+        );
+      },
     );
   }
 
@@ -206,59 +287,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Focus(
-                    onKeyEvent: _handleQueryKey,
-                    child: TextField(
-                      controller: _queryCtrl,
-                      focusNode: _queryFocus,
-                      onChanged: widget.onQueryChanged,
-                      style: const TextStyle(fontSize: 13),
-                      decoration: InputDecoration(
-                        hintText: l10n.d('Zoeken naar'),
-                        prefixIcon: const Icon(Icons.search, size: 18),
-                        isDense: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 8,
-                        ),
-                        border: const OutlineInputBorder(),
-                        filled: true,
-                        fillColor: AppTheme.paper,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 4),
-                IconButton(
-                  tooltip: l10n.d('Vorige'),
-                  icon: const Icon(Icons.keyboard_arrow_up, size: 20),
-                  visualDensity: VisualDensity.compact,
-                  onPressed: hasMatches
-                      ? () => _navigate(widget.onPrevious)
-                      : null,
-                ),
-                IconButton(
-                  tooltip: l10n.d('Volgende'),
-                  icon: const Icon(Icons.keyboard_arrow_down, size: 20),
-                  visualDensity: VisualDensity.compact,
-                  onPressed: hasMatches ? () => _navigate(widget.onNext) : null,
-                ),
-                const SizedBox(width: 4),
-                Flexible(
-                  child: Semantics(liveRegion: true, child: _statusText(l10n)),
-                ),
-                const SizedBox(width: 4),
-                IconButton(
-                  tooltip: l10n.t('close'),
-                  icon: const Icon(Icons.close, size: 18),
-                  visualDensity: VisualDensity.compact,
-                  onPressed: widget.onClose,
-                ),
-              ],
-            ),
+            _queryAndNavigation(l10n, hasMatches),
             if (widget.wrapDirection != 0)
               Semantics(
                 liveRegion: true,
@@ -270,23 +299,36 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
               ),
             if (widget.resultContexts.isNotEmpty)
               ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 112),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: widget.resultContexts.length,
-                  itemBuilder: (context, index) => ListTile(
-                    dense: true,
-                    selected: index == widget.matchIndex,
-                    leading: Icon(
-                      index == widget.matchIndex
-                          ? Icons.arrow_right
-                          : Icons.search,
-                      size: 18,
+                constraints: BoxConstraints(
+                  maxHeight: 112 * MediaQuery.textScalerOf(context).scale(1),
+                ),
+                child: Scrollbar(
+                  controller: _resultScroll,
+                  thumbVisibility: true,
+                  child: ListView.builder(
+                    controller: _resultScroll,
+                    shrinkWrap: true,
+                    itemCount: widget.resultContexts.length,
+                    itemBuilder: (context, index) => ListTile(
+                      dense: true,
+                      selected: index == widget.matchIndex,
+                      leading: Icon(
+                        index == widget.matchIndex
+                            ? Icons.arrow_right
+                            : Icons.search,
+                        size: 18,
+                      ),
+                      title: _contextText(widget.resultContexts[index]),
+                      subtitle: index < widget.resultLocations.length
+                          ? Text(
+                              widget.resultLocations[index],
+                              style: const TextStyle(fontSize: 11),
+                            )
+                          : null,
+                      onTap: widget.onSelectMatch == null
+                          ? null
+                          : () => _navigate(() => widget.onSelectMatch!(index)),
                     ),
-                    title: _contextText(widget.resultContexts[index]),
-                    onTap: widget.onSelectMatch == null
-                        ? null
-                        : () => _navigate(() => widget.onSelectMatch!(index)),
                   ),
                 ),
               ),
