@@ -23,8 +23,7 @@ String chartSemanticsLabel(AppLocalizations l10n, ChartSpec spec) {
     ChartType.combo => l10n.d('Combo'),
     ChartType.waterfall => l10n.d('Waterval'),
     ChartType.heatmap => l10n.d('Heatmap'),
-    ChartType.horizontalStackedBar =>
-      l10n.d('Horizontale gestapelde staaf'),
+    ChartType.horizontalStackedBar => l10n.d('Horizontale gestapelde staaf'),
     ChartType.bullet => l10n.d('Norm en prestatie'),
     ChartType.controlChart => l10n.d('Regelkaart'),
     ChartType.histogram => l10n.d('Histogram'),
