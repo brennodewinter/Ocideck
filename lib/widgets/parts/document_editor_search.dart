@@ -21,26 +21,10 @@ extension _DocumentEditorSearch on _DocumentEditorScreenState {
       _find.close();
       _editorFocus.requestFocus();
     },
-    resultContexts: _documentSearchContexts(),
+    resultContexts: _documentSearchContexts(_find),
     onSelectMatch: _find.selectMatch,
     wrapDirection: _find.wrapDirection,
   );
-
-  List<String> _documentSearchContexts() {
-    if (_find.matches.isEmpty) return const [];
-    final projection = _find.projection;
-    final outline = buildMarkdownOutline(_controller.text);
-    return [
-      for (final match in _find.matches)
-        () {
-          final chapter = activeOutlineIndexForOffset(outline, match.start);
-          final location = chapter < 0
-              ? ''
-              : '${visibleMarkdownText(outline[chapter].title)} · ';
-          return '$location${projection.context(match)}';
-        }(),
-    ];
-  }
 
   void _openFind({required bool showReplace}) {
     ref.read(documentProvider.notifier).flushPendingVisualEdit();
@@ -132,4 +116,20 @@ extension _DocumentEditorSearch on _DocumentEditorScreenState {
     onCollapsedChanged: (v) => _rebuild(() => _outlineCollapsed = v),
     onSelect: _scrollToHeading,
   );
+}
+
+List<String> _documentSearchContexts(FindReplaceSession findSession) {
+  if (findSession.matches.isEmpty) return const [];
+  final projection = findSession.projection;
+  final outline = buildMarkdownOutline(findSession.controller.text);
+  return [
+    for (final match in findSession.matches)
+      () {
+        final chapter = activeOutlineIndexForOffset(outline, match.start);
+        final location = chapter < 0
+            ? ''
+            : '${visibleMarkdownText(outline[chapter].title)} · ';
+        return '$location${projection.context(match)}';
+      }(),
+  ];
 }

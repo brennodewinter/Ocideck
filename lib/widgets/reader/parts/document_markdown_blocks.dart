@@ -741,3 +741,28 @@ class _TranscriptMarkerLine extends StatelessWidget {
     );
   }
 }
+
+Widget _documentListRow(
+  _Theme t,
+  _ListLine it,
+  Widget Function(String text) buildText,
+) {
+  final row = Padding(
+    padding: EdgeInsets.only(left: 4 + it.depth * 20.0, bottom: 4),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        it.checked == null
+            ? _bulletMarker(t, it)
+            : _checkMarker(t, checked: it.checked!),
+        Expanded(child: buildText(it.text)),
+      ],
+    ),
+  );
+  if (it.checked == null) return row;
+  // Announce the box as a checkbox with its state, so a screen reader says
+  // "checked"/"unchecked" instead of reading out a decorative icon. Using the
+  // semantics flag rather than a label keeps this translated by the platform,
+  // which is the only way it stays right in all thirty languages.
+  return Semantics(checked: it.checked, child: row);
+}

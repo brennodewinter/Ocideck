@@ -743,30 +743,12 @@ class DocumentMarkdownView extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [for (final it in items) _listRow(t, it)],
-      ),
-    );
-  }
-
-  Widget _listRow(_Theme t, _ListLine it) {
-    final row = Padding(
-      padding: EdgeInsets.only(left: 4 + it.depth * 20.0, bottom: 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          it.checked == null
-              ? _bulletMarker(t, it)
-              : _checkMarker(t, checked: it.checked!),
-          Expanded(child: _inline(it.text, t.body, t)),
+          for (final it in items)
+            _documentListRow(t, it, (text) => _inline(text, t.body, t)),
         ],
       ),
     );
-    if (it.checked == null) return row;
-    // Announce the box as a checkbox with its state, so a screen reader says
-    // "checked"/"unchecked" instead of reading out a decorative icon. Using the
-    // semantics flag rather than a label keeps this translated by the platform,
-    // which is the only way it stays right in all thirty languages.
-    return Semantics(checked: it.checked, child: row);
   }
 
   Widget _blockQuote(_Theme t, String text) => Container(
