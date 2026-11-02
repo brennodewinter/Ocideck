@@ -1,10 +1,14 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/rendering.dart';
 import 'package:ocideck/widgets/reader/document_search_overlay.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/reader/table_edit_controller.dart';
 import 'package:ocideck/widgets/reader/table_editable_cell.dart';
 import 'package:ocideck/theme/app_theme.dart';
+import 'package:ocideck/utils/deck_text_search.dart';
+import 'package:ocideck/utils/text_search.dart';
+import 'package:ocideck/widgets/editors/deck_search_target.dart';
 
 void main() {
   testWidgets(
@@ -108,6 +112,119 @@ void main() {
         isNull,
         reason: 'er zijn twee zichtbare treffers, niet vier',
       );
+    },
+  );
+
+  testWidgets(
+    'presentatie zoeken toont exacte tweede opgemaakte treffer onderin lange cel',
+    (tester) async {
+      tester.view.physicalSize = const Size(320, 640);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final source =
+          '**kat** ${List.filled(140, 'gewone tekst').join(' ')} **kat**';
+      final editor = TableEditController(
+        rows: [
+          [source],
+        ],
+        alignments: [],
+        onChanged: (_, _) {},
+      );
+      editor.cellController(0, 0).searchFieldId = 'tableRows.0.0';
+      final scroll = ScrollController();
+      final queryFocus = FocusNode();
+      addTearDown(editor.dispose);
+      addTearDown(scroll.dispose);
+      addTearDown(queryFocus.dispose);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Column(
+              children: [
+                TextField(focusNode: queryFocus, autofocus: true),
+                Expanded(
+                  child: DeckSearchTarget(
+                    match: DeckTextMatch(
+                      slideId: 'dia-1',
+                      slideIndex: 0,
+                      fieldId: 'tableRows.0.0',
+                      fieldLabel: 'Tabel',
+                      text: source,
+                      range: TextMatchRange(
+                        source.lastIndexOf('kat'),
+                        source.lastIndexOf('kat') + 3,
+                      ),
+                      context: 'kat',
+                    ),
+                    signal: 1,
+                    child: SingleChildScrollView(
+                      controller: scroll,
+                      child: SizedBox(
+                        width: 200,
+                        child: TableEditableCell(
+                          editor: editor,
+                          row: 0,
+                          column: 0,
+                          style: const TextStyle(fontSize: 16),
+                          pad: 4,
+                          caretColor: AppTheme.accent,
+                          linkColor: AppTheme.accent,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        scroll.offset,
+        greaterThan(500),
+        reason: tester
+            .widgetList<DocumentSearchOverlay>(
+              find.byType(DocumentSearchOverlay),
+            )
+            .map(
+              (overlay) =>
+                  '${overlay.query}/${overlay.activeIndex}/${overlay.revealSignal}',
+            )
+            .join(','),
+      );
+      final highlight = tester.getRect(
+        find.byKey(const Key('document-search-highlight')),
+      );
+      expect(highlight.center.dy, inInclusiveRange(70, 630));
+      final paragraph = tester.renderObject<RenderParagraph>(
+        find
+            .byWidgetPredicate(
+              (widget) =>
+                  widget is RichText &&
+                  widget.text.toPlainText().startsWith('kat gewone tekst'),
+            )
+            .first,
+      );
+      final plain = paragraph.text.toPlainText();
+      final glyph = paragraph
+          .getBoxesForSelection(
+            TextSelection(
+              baseOffset: plain.lastIndexOf('kat'),
+              extentOffset: plain.length,
+            ),
+          )
+          .single
+          .toRect();
+      expect(highlight.width, closeTo(glyph.width + 4, .01));
+      expect(queryFocus.hasFocus, isTrue);
+      expect(editor.cellController(0, 0).text, source);
+      expect(
+        editor.cellController(0, 0).selection,
+        const TextSelection.collapsed(offset: -1),
+      );
+      expect(tester.takeException(), isNull);
     },
   );
 

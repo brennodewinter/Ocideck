@@ -512,20 +512,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 onLaunchUrl: widget.onTapLink,
                 // De vastgepinde Quill-versie biedt alleen hier toegang tot lijstnummering.
                 // ignore: experimental_member_use
-                customLeadingBlockBuilder: (_, config) {
-                  if (config.index == null) return null;
-                  return ExcludeDocumentSearch(
-                    child: QuillNumberPoint(
-                      index: config.getIndexNumberByIndent!,
-                      indentLevelCounts: config.indentLevelCounts,
-                      count: config.count,
-                      style: config.style!,
-                      attrs: config.attrs,
-                      width: config.width!,
-                      padding: config.padding!,
-                    ),
-                  );
-                },
+                customLeadingBlockBuilder: _searchLeading,
                 // De tabelcellen verwerken hun eigen taps en tekstfocus.
                 // Quill ziet dezelfde tik; zijn caret voor de gehele embed
                 // zou een lang document anders naar een andere rij scrollen.
@@ -595,6 +582,21 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget? _searchLeading(Node node, LeadingConfig config) {
+    if (config.index == null) return null;
+    return ExcludeDocumentSearch(
+      child: QuillNumberPoint(
+        index: config.getIndexNumberByIndent!,
+        indentLevelCounts: config.indentLevelCounts,
+        count: config.count,
+        style: config.style!,
+        attrs: config.attrs,
+        width: config.width!,
+        padding: config.padding!,
       ),
     );
   }

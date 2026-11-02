@@ -4,6 +4,8 @@ import '../markdown_editor/embedded_field_actions.dart';
 import '../slides/inline_markdown.dart';
 import 'table_edit_controller.dart';
 import 'document_search_overlay.dart';
+import '../editors/deck_search_target.dart';
+import '../../utils/text_search.dart';
 
 /// Eén invulbare cel binnen de gerenderde tabel.
 ///
@@ -55,6 +57,25 @@ class TableEditableCell extends StatelessWidget {
   Widget build(BuildContext context) {
     final focus = editor.focusNode(row, column);
     final editing = editor.activeCell == (row: row, col: column);
+    final controller = editor.cellController(row, column);
+    final target = DeckSearchTarget.of(context);
+    final match = target?.matches(controller.searchFieldId) == true
+        ? target!.match
+        : null;
+    final projection = match == null
+        ? null
+        : VisibleMarkdownText(controller.text);
+    final query = match == null
+        ? ''
+        : projection!.text.substring(
+            projection.visibleOffsetOf(match.range.start),
+            projection.visibleOffsetOf(match.range.end),
+          );
+    final activeIndex = match == null
+        ? -1
+        : projection!
+              .matches(query)
+              .indexWhere((range) => range.start == match.range.start);
     // De cel staat in de visuele editor binnen een Quill-embed; zonder deze
     // wikkel voert Quill de tekstbewerking van deze cel uit, met de inhoud van
     // het hele document. Zie [EmbeddedFieldActions] (#1565).
@@ -88,14 +109,20 @@ class TableEditableCell extends StatelessWidget {
                 // veld zegt dit al.
                 IgnorePointer(
                   child: ExcludeSemantics(
-                    child: Padding(
-                      padding: _padding,
-                      child: InlineMarkdownText(
-                        editor.cellController(row, column).text,
-                        style: style,
-                        linkColor: linkColor,
-                        codeBackground: codeBackground,
-                        textAlign: textAlign,
+                    child: DocumentSearchOverlay(
+                      query: query,
+                      activeIndex: activeIndex,
+                      revealSignal: target?.signal ?? 0,
+                      revealIntoView: true,
+                      child: Padding(
+                        padding: _padding,
+                        child: InlineMarkdownText(
+                          editor.cellController(row, column).text,
+                          style: style,
+                          linkColor: linkColor,
+                          codeBackground: codeBackground,
+                          textAlign: textAlign,
+                        ),
                       ),
                     ),
                   ),

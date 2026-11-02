@@ -14,8 +14,10 @@ class DocumentSearchOverlay extends StatefulWidget {
     this.caseSensitive = false,
     this.onActiveRect,
     this.revealSignal = 0,
+    this.revealIntoView = false,
   });
 
+  final bool revealIntoView;
   final int revealSignal;
   final Widget child;
   final String query;
@@ -29,6 +31,8 @@ class DocumentSearchOverlay extends StatefulWidget {
 
 class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
   final _content = GlobalKey();
+  final _activeHighlight = GlobalKey();
+  int _revealedSignal = 0;
   List<Rect> _boxes = const [];
 
   @override
@@ -46,10 +50,11 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
             child: widget.child,
           ),
         ),
-        for (final box in _boxes)
+        for (var i = 0; i < _boxes.length; i++)
           Positioned.fromRect(
-            rect: box.inflate(2),
+            rect: _boxes[i].inflate(2),
             child: IgnorePointer(
+              key: i == 0 ? _activeHighlight : null,
               child: DecoratedBox(
                 key: const Key('document-search-highlight'),
                 decoration: BoxDecoration(
@@ -107,6 +112,17 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
     widget.onActiveRect?.call(
       boxes.isEmpty ? null : boxes.reduce((a, b) => a.expandToInclude(b)),
     );
+    if (widget.revealIntoView &&
+        boxes.isNotEmpty &&
+        widget.revealSignal != _revealedSignal) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || widget.revealSignal == _revealedSignal) return;
+        final target = _activeHighlight.currentContext;
+        if (target == null) return;
+        _revealedSignal = widget.revealSignal;
+        Scrollable.ensureVisible(target, alignment: .5);
+      });
+    }
     if (_sameRects(boxes, _boxes)) return;
     setState(() => _boxes = boxes);
   }
