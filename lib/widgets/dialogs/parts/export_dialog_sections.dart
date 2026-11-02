@@ -11,159 +11,16 @@
 part of '../export_dialog.dart';
 
 extension _ExportDialogSections on _ExportDialogState {
-  /// Hoeveel detail wil deze lezer?
-  ///
-  /// De derde as naast classificatie en redactie, en bewust een eigen keuze:
-  /// TLP zegt wíé het mag zien, redactie wélke gegevens eruit mogen, en dit
-  /// hoevéél detail erbij hoort. Een slide kan prima openbaar zijn en tóch meer
-  /// zijn dan waarvoor een managementpubliek kwam.
-  ///
-  /// Net als het profiel landt de keuze in de bestandsnaam (`…-beknopt.pdf`),
-  /// om dezelfde reden: een verwisseling moet je kunnen zien.
-  Widget _depthSelector(AppLocalizations l10n) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d('Hoeveel detail?'),
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 6),
-          SegmentedButton<bool>(
-            segments: [
-              ButtonSegment(
-                value: true,
-                label: Text(l10n.d('Met verdieping')),
-                icon: const Icon(Icons.unfold_more, size: 15),
-              ),
-              ButtonSegment(
-                value: false,
-                label: Text(l10n.d('Beknopt')),
-                icon: const Icon(Icons.unfold_less, size: 15),
-              ),
-            ],
-            selected: {_includeDetail},
-            showSelectedIcon: false,
-            style: const ButtonStyle(visualDensity: VisualDensity.compact),
-            onSelectionChanged: (s) => _selectDepth(s.first),
-          ),
-        ],
-      ),
-    );
-  }
+  // De knoppen zelf zijn eigen widgets. Een extensie telt mee voor het
+  // klasseplafond, en deze dialoog zat daar al tegenaan.
+  Widget _depthSelector() =>
+      _DepthChoice(includeDetail: _includeDetail, onChanged: _selectDepth);
 
-  /// Gaan de quizvragen mee, blijven ze weg, of is dit bestand alleen de vragen?
-  ///
-  /// Los van diepgang: een hand-out voor de zaal is iets anders dan het
-  /// vragenblad voor de docent. De standaard laat de naam ongemoeid.
-  Widget _questionSelector(AppLocalizations l10n) {
-    final hint = switch (_questions) {
-      QuestionExport.included => l10n.d(
-        'De quizvragen gaan mee in dit bestand.',
-      ),
-      QuestionExport.omitted => l10n.d(
-        'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.',
-      ),
-      QuestionExport.only => l10n.d(
-        'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.',
-      ),
-    };
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d('Quizvragen'),
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 6),
-          SegmentedButton<QuestionExport>(
-            segments: [
-              ButtonSegment(
-                value: QuestionExport.included,
-                label: Text(l10n.d('Met vragen')),
-                icon: const Icon(Icons.quiz_outlined, size: 15),
-              ),
-              ButtonSegment(
-                value: QuestionExport.omitted,
-                label: Text(l10n.d('Zonder vragen')),
-                icon: const Icon(Icons.playlist_remove_outlined, size: 15),
-              ),
-              ButtonSegment(
-                value: QuestionExport.only,
-                label: Text(l10n.d('Alleen vragen')),
-                icon: const Icon(Icons.fact_check_outlined, size: 15),
-              ),
-            ],
-            selected: {_questions},
-            showSelectedIcon: false,
-            style: const ButtonStyle(visualDensity: VisualDensity.compact),
-            onSelectionChanged: (s) => _selectQuestions(s.first),
-          ),
-          const SizedBox(height: 4),
-          Text(hint, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
-        ],
-      ),
-    );
-  }
+  Widget _questionSelector() =>
+      _QuestionChoice(questions: _questions, onChanged: _selectQuestions);
 
-  /// Voor wie is deze export?
-  ///
-  /// Eén bron, twee versies. Dat is de kern van het pentestrapport-scenario: de
-  /// opdrachtgever moet de bevinding kúnnen natrekken, dus die krijgt alles; de
-  /// bredere kring krijgt hetzelfde rapport met de persoonsgegevens eruit.
-  ///
-  /// Het profiel staat in de bestandsnaam (`…-geredigeerd.pdf`). Dat is niet
-  /// cosmetisch: de duurste fout die je met deze feature kunt maken, is het
-  /// volledige exemplaar naar de brede kring sturen. Een verwisseling moet je
-  /// kunnen *zien*, niet hoeven onthouden.
-  Widget _profileSelector(AppLocalizations l10n) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d('Voor wie is deze export?'),
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 6),
-          SegmentedButton<PrivacyExportProfile>(
-            segments: [
-              ButtonSegment(
-                value: PrivacyExportProfile.full,
-                label: Text(l10n.d('Volledig')),
-                icon: const Icon(Icons.lock_open_outlined, size: 15),
-              ),
-              ButtonSegment(
-                value: PrivacyExportProfile.redacted,
-                label: Text(l10n.d('Geredigeerd')),
-                icon: const Icon(Icons.visibility_off_outlined, size: 15),
-              ),
-            ],
-            selected: {_profile},
-            showSelectedIcon: false,
-            style: const ButtonStyle(visualDensity: VisualDensity.compact),
-            onSelectionChanged: (s) => _selectProfile(s.first),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            _profile == PrivacyExportProfile.full
-                ? l10n.d(
-                    'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.',
-                  )
-                : l10n.d(
-                    'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.',
-                  ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget _profileSelector() =>
+      _AudienceChoice(profile: _profile, onChanged: _selectProfile);
 
   /// De balk boven de exportknoppen als er niets te melden valt.
   ///
@@ -267,6 +124,177 @@ extension _ExportDialogSections on _ExportDialogState {
                 padding: EdgeInsets.zero,
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Hoeveel detail wil deze lezer?
+///
+/// De derde as naast classificatie en redactie: TLP zegt wíé het mag zien,
+/// redactie wélke gegevens eruit mogen, en dit hoevéél detail erbij hoort.
+/// De keuze landt in de bestandsnaam (`…-beknopt.pdf`).
+class _DepthChoice extends StatelessWidget {
+  const _DepthChoice({required this.includeDetail, required this.onChanged});
+
+  final bool includeDetail;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Hoeveel detail?'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          SegmentedButton<bool>(
+            segments: [
+              ButtonSegment(
+                value: true,
+                label: Text(l10n.d('Met verdieping')),
+                icon: const Icon(Icons.unfold_more, size: 15),
+              ),
+              ButtonSegment(
+                value: false,
+                label: Text(l10n.d('Beknopt')),
+                icon: const Icon(Icons.unfold_less, size: 15),
+              ),
+            ],
+            selected: {includeDetail},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (s) => onChanged(s.first),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Gaan de quizvragen mee, blijven ze weg, of is dit bestand alleen de vragen?
+///
+/// Los van diepgang: een hand-out voor de zaal is iets anders dan het
+/// vragenblad voor de docent. De standaard laat de naam ongemoeid.
+class _QuestionChoice extends StatelessWidget {
+  const _QuestionChoice({required this.questions, required this.onChanged});
+
+  final QuestionExport questions;
+  final ValueChanged<QuestionExport> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final hint = switch (questions) {
+      QuestionExport.included => l10n.d(
+        'De quizvragen gaan mee in dit bestand.',
+      ),
+      QuestionExport.omitted => l10n.d(
+        'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.',
+      ),
+      QuestionExport.only => l10n.d(
+        'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.',
+      ),
+    };
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Quizvragen'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          SegmentedButton<QuestionExport>(
+            segments: [
+              ButtonSegment(
+                value: QuestionExport.included,
+                label: Text(l10n.d('Met vragen')),
+                icon: const Icon(Icons.quiz_outlined, size: 15),
+              ),
+              ButtonSegment(
+                value: QuestionExport.omitted,
+                label: Text(l10n.d('Zonder vragen')),
+                icon: const Icon(Icons.playlist_remove_outlined, size: 15),
+              ),
+              ButtonSegment(
+                value: QuestionExport.only,
+                label: Text(l10n.d('Alleen vragen')),
+                icon: const Icon(Icons.fact_check_outlined, size: 15),
+              ),
+            ],
+            selected: {questions},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (s) => onChanged(s.first),
+          ),
+          const SizedBox(height: 4),
+          Text(hint, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
+        ],
+      ),
+    );
+  }
+}
+
+/// Voor wie is deze export?
+///
+/// Eén bron, twee versies. De opdrachtgever krijgt alles; de bredere kring
+/// krijgt het geredigeerde exemplaar. Het profiel staat in de bestandsnaam.
+class _AudienceChoice extends StatelessWidget {
+  const _AudienceChoice({required this.profile, required this.onChanged});
+
+  final PrivacyExportProfile profile;
+  final ValueChanged<PrivacyExportProfile> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Voor wie is deze export?'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          SegmentedButton<PrivacyExportProfile>(
+            segments: [
+              ButtonSegment(
+                value: PrivacyExportProfile.full,
+                label: Text(l10n.d('Volledig')),
+                icon: const Icon(Icons.lock_open_outlined, size: 15),
+              ),
+              ButtonSegment(
+                value: PrivacyExportProfile.redacted,
+                label: Text(l10n.d('Geredigeerd')),
+                icon: const Icon(Icons.visibility_off_outlined, size: 15),
+              ),
+            ],
+            selected: {profile},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (s) => onChanged(s.first),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            profile == PrivacyExportProfile.full
+                ? l10n.d(
+                    'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.',
+                  )
+                : l10n.d(
+                    'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.',
+                  ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ],
       ),

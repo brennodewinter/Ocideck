@@ -819,11 +819,11 @@ class _ExportDialogState extends State<ExportDialog> {
           ),
         ),
         const SizedBox(height: 8),
-        if (widget.hasPrivacyFindings) _profileSelector(l10n),
+        if (widget.hasPrivacyFindings) _profileSelector(),
         _aiDraftNotice(l10n),
         _manifestNotice(l10n),
-        if (widget.hasDepthChoice) _depthSelector(l10n),
-        if (widget.hasQuestionChoice) _questionSelector(l10n),
+        if (widget.hasDepthChoice) _depthSelector(),
+        if (widget.hasQuestionChoice) _questionSelector(),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
         // verfijning en staat daarom achter een inklapbare kop (open zodra
         // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).
