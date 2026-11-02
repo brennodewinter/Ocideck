@@ -532,8 +532,13 @@ since — for that, the commit is still what matters. Fixes land on the default
 development branch. The latest release and the default branch are both
 supported; fixes target the latest release plus that branch.
 
+One tag misleads a semver sort: `v1.2.1` (2026-08-04) was created by accident
+and abandoned — there is no release under that number, and the release chain
+ignores it. Follow the releases feed, not the highest tag.
+
 *(Corrected 2026-07-28: this said "There is no released version yet" and
-"There are no releases" — true until `0.1.0` on 2026-07-25, stale since.)*
+"There are no releases" — true until `0.1.0` on 2026-07-25, stale since.
+Corrected 2026-11-03: added the `v1.2.1` caveat.)*
 
 ## Finding this the standard way
 
@@ -639,7 +644,7 @@ followed, stated with its limits (verified against the forge on 2026-07-22).
 | Feed | URL | What it carries today |
 |---|---|---|
 | **Releases** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/releases.rss` | Tagged releases (`0.1.0`, `0.1.1`, …) with notes, SBOM and `SHA256SUMS` |
-| **Tags** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/tags.rss` | Release tags (`v0.1.0`, `v0.1.1`, …) plus `archive/git-mirror`, which is an archived branch and not a version |
+| **Tags** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/tags.rss` | Release tags (`v0.1.0`, `v0.1.1`, …) plus `archive/git-mirror`, which is an archived branch and not a version, and `v1.2.1` — a tag fired by accident on 2026-08-04 and abandoned, not a release |
 | **Repository activity** | `https://pawprint.vigilis.online/LibreKAT/Ocideck.rss` | Everything — pushes, comments, branch deletions. Real, and mostly noise |
 
 **The releases feed is the one to subscribe to**: the day it carries a new
