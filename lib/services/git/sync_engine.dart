@@ -94,6 +94,21 @@ class SyncEngine {
     for (final commit in await outbox.pending()) {
       out.add(await _flush(commit, prepare));
     }
+    for (final deckDir in outbox.corruptDeckDirs) {
+      // Onleesbare wachtrij-sleutel: blijft staan (de werkkopie kan het deck
+      // nog bevatten), maar telt wél mee als mislukt — "gesynchroniseerd" was
+      // hier een leugen (#2723).
+      logWarning('SyncEngine.flush: wachtrij-sleutel onleesbaar ($deckDir)');
+      out.add(
+        SyncOutcome(
+          deckDir: deckDir,
+          status: SyncStatus.failed,
+          message:
+              'De wachtrij-vermelding van $deckDir is onleesbaar en is niet '
+              'meegenomen; de werkkopie is onaangeroerd gebleven.',
+        ),
+      );
+    }
     return out;
   }
 

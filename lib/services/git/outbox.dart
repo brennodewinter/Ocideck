@@ -180,9 +180,17 @@ class Outbox {
     }
   }
 
+  /// Deckmappen waarvan de wachtrij-sleutel bij de laatste [pending] niet
+  /// decodeerde. Een afgekapte JSON (crash midden in het schrijven) telde
+  /// vroeger als "niets in de wachtrij" — badge op 0, stille sync klaar —
+  /// terwijl het werk gewoon nergens heen ging (#2723). Nu worden ze apart
+  /// gemeld, zodat de flush ze kan laten staan en wél kan mislukken.
+  final List<String> corruptDeckDirs = [];
+
   /// Alles wat wacht, op deckmap gesorteerd zodat een flush voorspelbaar loopt.
   Future<List<PendingCommit>> pending() async {
     final prefs = await _prefs();
+    corruptDeckDirs.clear();
     final out = <PendingCommit>[];
     for (final key in prefs.getKeys().toList()..sort()) {
       if (!key.startsWith(_scopedPrefix)) continue;
@@ -191,7 +199,13 @@ class Outbox {
       // repo's oppikken — precies de vermenging die dit moet uitsluiten.
       if (scope.isEmpty && rest.contains('::')) continue;
       final commit = await forDeck(rest);
-      if (commit != null) out.add(commit);
+      if (commit != null) {
+        out.add(commit);
+      } else {
+        // De sleutel bestaat — `null` is hier per definitie "onleesbaar",
+        // en onleesbaar is niet afwezig.
+        corruptDeckDirs.add(rest);
+      }
     }
     return out;
   }
@@ -242,5 +256,6 @@ class Outbox {
     return removed;
   }
 
-  Future<bool> get isEmpty async => (await pending()).isEmpty;
+  Future<bool> get isEmpty async =>
+      (await pending()).isEmpty && corruptDeckDirs.isEmpty;
 }

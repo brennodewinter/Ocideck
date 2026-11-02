@@ -37,6 +37,20 @@ void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
   group('Outbox', () {
+    test(
+      'een onleesbare sleutel telt niet als leeg en wordt gemeld (#2723)',
+      () async {
+        final prefs = await SharedPreferences.getInstance();
+        // Afgekapt JSON zoals na een crash midden in het schrijven.
+        await prefs.setString('git_outbox::decks/kapot', '{');
+        final outbox = Outbox(prefs: prefs);
+
+        expect(await outbox.pending(), isEmpty);
+        expect(await outbox.isEmpty, isFalse);
+        expect(outbox.corruptDeckDirs, ['decks/kapot']);
+      },
+    );
+
     test('twee repo\'s met hetzelfde deck raken elkaar niet', () async {
       final a = Outbox(scope: klantA.storageSlug);
       final b = Outbox(scope: klantB.storageSlug);
