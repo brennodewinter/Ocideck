@@ -36,11 +36,6 @@ set -Eeuo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-for cmd in dart git shasum tar du cut uname scp ssh curl cmp; do
-  command -v "$cmd" >/dev/null 2>&1 \
-    || { echo "Ontbrekend commando: $cmd" >&2; exit 1; }
-done
-
 HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-40edd80f.vps.ovh.net}"
 WEBROOT="${OCIDECK_DEPLOY_ROOT:-/var/www/ocideck}"
 OWNER="${OCIDECK_DEPLOY_OWNER:-ubuntu:ubuntu}"
@@ -63,6 +58,19 @@ while (( $# )); do
   esac
   shift
 done
+
+for cmd in dart git shasum tar du cut uname cmp; do
+  command -v "$cmd" >/dev/null 2>&1 \
+    || { echo "Ontbrekend commando: $cmd" >&2; exit 1; }
+done
+
+# Een droge proef gebruikt geen netwerkcommando's; een echte deploy wel.
+if (( ! DRY_RUN )); then
+  for cmd in scp ssh curl; do
+    command -v "$cmd" >/dev/null 2>&1 \
+      || { echo "Ontbrekend commando: $cmd" >&2; exit 1; }
+  done
+fi
 
 log() { printf '\n== %s ==\n' "$1"; }
 
