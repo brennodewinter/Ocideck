@@ -53,6 +53,39 @@ void main() {
   );
 
   for (final placement in FootnotePlacement.values) {
+    testWidgets(
+      'meerregelige gebruikte noot blijft bereikbaar naast orphan bij $placement',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(1100, 350));
+        addTearDown(() => tester.binding.setSurfaceSize(null));
+        const source =
+            'Begin.\n\n---\n\nEen noot[^a].\n\n[^orphan]: belangrijke passage\n\n[^a]: belangrijke\n    passage';
+        final projected = VisibleMarkdownText(
+          source,
+          includeUnreferencedFootnotes: false,
+        );
+        expect(projected.matches('belangrijke passage'), hasLength(1));
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PagedDocumentView(
+                markdown: source,
+                pageSize: PageSizeSpec.a4,
+                margins: const PageMargins(),
+                footnotePlacement: placement,
+                searchQuery: 'belangrijke passage',
+                searchMatchIndex: 0,
+                searchRevealSignal: 1,
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(_visibleSearchHighlights(tester), isNotEmpty);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
     testWidgets('nootinhoud krijgt exacte markering en reveal bij $placement', (
       tester,
     ) async {

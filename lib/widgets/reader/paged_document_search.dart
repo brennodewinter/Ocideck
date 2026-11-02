@@ -223,7 +223,10 @@ Map<String, TextMatchRange> _noteSourceRanges(String source) {
 /// Een klik op Volgende verandert geen bron: projectie en treffers blijven geldig.
 class _PagedSearchText {
   _PagedSearchText(String source)
-    : projection = VisibleMarkdownText(source),
+    : projection = VisibleMarkdownText(
+        source,
+        includeUnreferencedFootnotes: false,
+      ),
       ranges = _noteSourceRanges(source),
       notes = documentFootnotes(source);
   final VisibleMarkdownText projection;

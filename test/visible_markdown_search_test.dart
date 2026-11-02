@@ -10,6 +10,54 @@ void main() {
     expect(visibleMarkdownText('# ###'), '');
   });
 
+  test('meerregelige noten volgen getrimde rendertekst en bronbereiken', () {
+    const source =
+        'Een noot[^a].\n\n[^a]: **belangrijke**\n    passage en\n\tmeer tekst';
+    final projection = VisibleMarkdownText(source);
+    final match = projection.matches('belangrijke passage en meer').single;
+    expect(
+      source.substring(match.start, match.end),
+      'belangrijke**\n    passage en\n\tmeer',
+    );
+    expect(
+      projection.context(match),
+      contains('belangrijke passage en meer tekst'),
+    );
+    expect(
+      VisibleMarkdownText('Een noot[^a].\n\n[^a]: eerste\n    - tweede').text,
+      contains('eerste - tweede'),
+    );
+    expect(
+      VisibleMarkdownText(
+        'Een noot[^a].\n\n[^a]: eerste\n    | tweede [^b] |',
+      ).matches('| tweede [^b] |'),
+      hasLength(1),
+    );
+  });
+
+  test('alleen de paginaprojectie verbergt ongebruikte definities', () {
+    const source =
+        'Een gebruikte noot[^a].\n\n[^orphan]: verborgenanker\n    vervolganker\n\n[^a]: zichtbaaranker';
+    final editable = VisibleMarkdownText(source);
+    final rendered = VisibleMarkdownText(
+      source,
+      includeUnreferencedFootnotes: false,
+    );
+    expect(editable.matches('verborgenanker vervolganker'), hasLength(1));
+    expect(rendered.matches('verborgenanker'), isEmpty);
+    expect(rendered.matches('vervolganker'), isEmpty);
+    final hit = rendered.matches('zichtbaaranker').single;
+    expect(source.substring(hit.start, hit.end), 'zichtbaaranker');
+    const code = '```text\n[^orphan]: letterlijk\n```';
+    expect(
+      VisibleMarkdownText(
+        code,
+        includeUnreferencedFootnotes: false,
+      ).matches('[^orphan]'),
+      hasLength(1),
+    );
+  });
+
   test('softbreaks vormen een zichtbare frase met exacte bronposities', () {
     const source = 'Een **belangrijke**\n  [passage](https://example.invalid).';
     final match = findVisibleMarkdownMatches(

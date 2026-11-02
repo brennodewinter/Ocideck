@@ -1,6 +1,7 @@
 import 'package:markdown/markdown.dart' as md;
 
 import 'inline_markdown.dart';
+import 'footnotes.dart';
 import 'markdown_blocks.dart';
 import 'markdown_paste_cleanup.dart' show markdownEscapedPunctuation;
 import 'text_search.dart';
@@ -8,7 +9,10 @@ import 'text_search.dart';
 /// Een leesprojectie met bronposities: opmaak valt weg, zichtbare tekst blijft.
 /// Vervangen gebruikt bewust de afzonderlijke, strengere beschermgrenzen.
 class VisibleMarkdownText {
-  VisibleMarkdownText(String source) {
+  VisibleMarkdownText(
+    String source, {
+    bool includeUnreferencedFootnotes = true,
+  }) {
     final output = StringBuffer();
     var base = 0;
     MarkdownFence? fence;
@@ -18,14 +22,15 @@ class VisibleMarkdownText {
       r'^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)',
     ).hasMatch(source);
     var lineNumber = 0;
-    final softBreaks = _softBreaks(source);
+    final notes = _footnoteSearchLines(source, includeUnreferencedFootnotes);
+    final softBreaks = {..._softBreaks(source), ...notes.softBreaks};
     var previousSoft = false;
     for (final line in source.split('\n')) {
       final isMetadata = metadata;
       if (lineNumber++ > 0 && line.trim() == '---') metadata = false;
       final opening = markdownFenceOpen(line.trim());
-      if (isMetadata) {
-        // Frontmatter is bestandsinstelling, geen zichtbare tekst.
+      if (isMetadata || notes.hidden.contains(lineNumber - 1)) {
+        // Metadata en niet-gerenderde nootdefinities zijn geen zichtbare tekst.
       } else if (fence != null) {
         if (fence.closes(line.trim())) {
           fence = null;
@@ -62,24 +67,11 @@ class VisibleMarkdownText {
             allowed.fillRange(labelStart, labelEnd, false);
           }
         }
-        final footnoteDefinition = RegExp(
-          r'^\s*\[\^[^\]\n]+\]:[ \t]*',
-        ).matchAsPrefix(line);
-        if (footnoteDefinition != null) {
-          allowed.fillRange(0, footnoteDefinition.end, false);
-        }
-        for (final match in _footnote.allMatches(line)) {
-          allowed.fillRange(match.start, match.end, false);
-        }
-        if (line.trim().startsWith('|')) {
-          for (var i = 0; i < line.length; i++) {
-            if (line[i] == '|' && (i == 0 || line[i - 1] != r'\')) {
-              allowed[i] = false;
-            }
-          }
-        }
-        final marker = _blockMarker.matchAsPrefix(line);
-        if (marker != null) allowed.fillRange(0, marker.end, false);
+        _maskReadableMarkers(
+          line,
+          allowed,
+          notes.lines.contains(lineNumber - 1),
+        );
         final filtered = StringBuffer();
         final positions = <int>[];
         for (var i = 0; i < line.length; i++) {
@@ -93,7 +85,9 @@ class VisibleMarkdownText {
           line,
           positions,
           trimLeading: previousSoft,
-          hasNextLine: base + line.length < source.length,
+          hasNextLine:
+              !notes.lines.contains(lineNumber - 1) &&
+              base + line.length < source.length,
         );
         final visible = parseInlineRuns(raw).map((run) => run.text).join();
         final inlineVisible = _inlineSyntaxMask(raw);
@@ -155,6 +149,28 @@ class VisibleMarkdownText {
       offsets.removeLast();
       _ends.removeLast();
     }
+  }
+
+  /// Voetnootinhoud heeft alleen inline-opmaak; haar '-' is geen lijstmarker.
+  void _maskReadableMarkers(String line, List<bool> allowed, bool noteLine) {
+    final footnoteDefinition = _footnoteDefinitionStart.matchAsPrefix(line);
+    if (footnoteDefinition != null) {
+      allowed.fillRange(0, footnoteDefinition.end, false);
+    }
+    if (!noteLine) {
+      for (final match in _footnote.allMatches(line)) {
+        allowed.fillRange(match.start, match.end, false);
+      }
+    }
+    if (!noteLine && line.trim().startsWith('|')) {
+      for (var i = 0; i < line.length; i++) {
+        if (line[i] == '|' && (i == 0 || line[i - 1] != r'\')) {
+          allowed[i] = false;
+        }
+      }
+    }
+    final marker = noteLine ? null : _blockMarker.matchAsPrefix(line);
+    if (marker != null) allowed.fillRange(0, marker.end, false);
   }
 
   late final String text;
@@ -363,4 +379,52 @@ String searchMatchContext(
   int radius = 45,
 }) {
   return VisibleMarkdownText(source).context(match, radius: radius);
+}
+
+final _footnoteDefinitionStart = RegExp(r'^ {0,3}\[\^([^\]\s]+)\]:[ \t]*');
+
+/// De canonieke noottekst voegt getrimde vervolgregels met spaties samen.
+/// Alleen de paginalezer verbergt ongebruikte definities; Quill bewaart een
+/// bewerkbare ongebruikte notenregel, dus de algemene bronprojectie doet dat eveneens.
+({Set<int> softBreaks, Set<int> lines, Set<int> hidden}) _footnoteSearchLines(
+  String source,
+  bool includeUnreferenced,
+) {
+  final softBreaks = <int>{};
+  final noteLines = <int>{};
+  final hidden = <int>{};
+  final used = includeUnreferenced
+      ? const <String>{}
+      : documentFootnotes(source).map((note) => note.label).toSet();
+  final seen = <String>{};
+  final lines = source.split('\n');
+  MarkdownFence? fence;
+  for (var i = 0; i < lines.length; i++) {
+    final line = lines[i];
+    if (fence != null) {
+      if (fence.closes(line.trim())) fence = null;
+      continue;
+    }
+    if (markdownFenceOpen(line.trim()) case final opening?) {
+      fence = opening;
+      continue;
+    }
+    final definition = _footnoteDefinitionStart.matchAsPrefix(line);
+    if (definition == null) continue;
+    final label = definition[1]!;
+    final visible =
+        includeUnreferenced || (used.contains(label) && !seen.contains(label));
+    seen.add(label);
+    final start = i;
+    while (i + 1 < lines.length &&
+        lines[i + 1].trim().isNotEmpty &&
+        (lines[i + 1].startsWith('    ') || lines[i + 1].startsWith('\t'))) {
+      softBreaks.add(i++);
+    }
+    for (var n = start; n <= i; n++) {
+      noteLines.add(n);
+      if (!visible) hidden.add(n);
+    }
+  }
+  return (softBreaks: softBreaks, lines: noteLines, hidden: hidden);
 }
