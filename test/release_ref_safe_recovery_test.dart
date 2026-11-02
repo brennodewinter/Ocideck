@@ -51,20 +51,6 @@ void main() {
     );
   }, skip: skipOnWindows);
 
-  String allFunctionDefinitions() {
-    final lines = File(script).readAsStringSync().split('\n');
-    final out = <String>[];
-    final open = RegExp(r'^[a-zA-Z_][a-zA-Z0-9_]*\(\)\s*\{');
-    for (var i = 0; i < lines.length; i++) {
-      if (!open.hasMatch(lines[i])) continue;
-      for (; i < lines.length; i++) {
-        out.add(lines[i]);
-        if (RegExp(r'^\}\s*$').hasMatch(lines[i])) break;
-      }
-    }
-    return out.join('\n');
-  }
-
   /// Draait de fallback vanaf "main" met gemockte git/make/curl. De fake-git
   /// levert scannerpins ALLEEN voor de release-ref; leest de helper ze
   /// ergens anders vandaan, dan faalt de run. Geeft (resultaat, log) terug.
