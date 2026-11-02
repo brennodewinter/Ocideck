@@ -408,6 +408,50 @@ void main() {
     expect(find.text('Gereed: 70'), findsOneWidget);
   });
 
+  testWidgets('a hovered slice pops its outer edge out by kPieHoverScale', (
+    tester,
+  ) async {
+    // Pie and donut reach the same pop: the scale applies to the outer edge,
+    // not to the ring thickness — a donut used to pop only ~5% (#2700).
+    for (final type in [ChartType.pie, ChartType.donut]) {
+      await tester.pumpWidget(
+        _host(
+          ChartSpec(
+            type: type,
+            x: const ['Gereed', 'Open'],
+            series: const [
+              ChartSeries(name: 'Status', data: [70, 30]),
+            ],
+          ),
+        ),
+      );
+      await tester.pump();
+
+      double outerEdge() {
+        final data = tester.widget<PieChart>(find.byType(PieChart)).data;
+        return data.centerSpaceRadius + data.sections.first.radius;
+      }
+
+      final resting = outerEdge();
+      final pie = tester.widget<PieChart>(find.byType(PieChart));
+      final section = pie.data.sections.first;
+      pie.data.pieTouchData.touchCallback!(
+        const FlPointerHoverEvent(PointerHoverEvent()),
+        PieTouchResponse(
+          touchLocation: Offset.zero,
+          touchedSection: PieTouchedSection(section, 0, 0, section.radius),
+        ),
+      );
+      await tester.pump();
+
+      expect(
+        outerEdge(),
+        closeTo(resting * kPieHoverScale, 0.01),
+        reason: '$type',
+      );
+    }
+  });
+
   testWidgets('bar chart draws the configured min/max bound lines', (
     tester,
   ) async {
@@ -1424,8 +1468,24 @@ void main() {
 
     test('the outer radius grows with the box until it caps', () {
       // Fill-driven in a small box, capped in a large one.
-      expect(radialChartRadii(200, 800, donut: false).outer, 200 * 0.45);
+      expect(radialChartRadii(200, 800, donut: false).outer, 200 * 0.43);
       expect(radialChartRadii(4000, 800, donut: false).outer, 800 * 0.18);
+    });
+
+    test('the hover pop stays inside the clip bound', () {
+      // The ClipRect cuts at half the shortest side; a hovered slice's outer
+      // edge (outer × kPieHoverScale) must stay under it — fill range, just
+      // past the cap threshold, and far beyond it.
+      for (final available in [100.0, 200.0, 340.0, 4000.0]) {
+        for (final donut in [false, true]) {
+          final r = radialChartRadii(available, 800, donut: donut);
+          expect(
+            r.outer * kPieHoverScale,
+            lessThan(available / 2),
+            reason: 'available=$available donut=$donut',
+          );
+        }
+      }
     });
 
     test('the donut hole uses the shared kDonutHoleFraction', () {
