@@ -169,11 +169,10 @@ Future<void> warmPrivacyScanMemo(
   List<List<PrivacyFinding>> scanSync() => [
     for (final slide in cold) scanFindings(slide),
   ];
-  // `ServicesBinding.rootIsolateToken` is een nullable static — `null` zolang
-  // er geen binding staat (headless test), en dan valt de pas op sync terug.
-  final token = ServicesBinding.rootIsolateToken;
+  // De token-getter gooit op web; kies de synchrone route vóór die aanroep.
+  final token = kIsWeb ? null : ServicesBinding.rootIsolateToken;
   final List<List<PrivacyFinding>> results;
-  if (kIsWeb || token == null) {
+  if (token == null) {
     results = scanSync();
   } else {
     final scanned = await Isolate.run<(bool, List<List<PrivacyFinding>>)>(
