@@ -1620,6 +1620,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Unum fasciculum HTML cum vero textu, titulis et textibus alternis, quod in omni navigatore sine interrete aperitur — cum tabulis, mathematica, mermaid et diagrammatibus.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'In praesentatione in servo WebDAV posita una vive labora. Explicite activate. Mutationes per folderium laboris iuxta fasciculum in eodem servo transeunt — sine encryptione ab OciDeck.',
   'Ga naar de brontabel': 'Ad tabulam fontem vade',
@@ -4907,8 +4909,6 @@ const _dutchSourceAddLa = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Exportatio exemplum obliteratum accipienti creat. Archetypum tuum bytis fidele Servando conservas.',
   'Exporteren…': 'Exportare…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Unus fasciculus HTML accessibilis qui in quolibet navigatro sine interrete aperitur, cum tabulis, mathematica, mermaid et diagrammatibus.',
   'Het thema en de opmaak per dia (_class).':
       'Thema et forma per paginam (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':

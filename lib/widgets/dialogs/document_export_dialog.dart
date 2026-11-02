@@ -519,7 +519,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
             'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.',
           ),
           DocumentExportFormat.html => l10n.d(
-            'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.',
+            'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.',
           ),
           DocumentExportFormat.pdf => l10n.d(
             'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.',

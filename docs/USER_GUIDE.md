@@ -5920,9 +5920,12 @@ Saving the original remains available.
   is switched off (under Beveiliging), the dialog says so plainly: a redacted
   copy has then not actually been checked for personal data.
 - **Which format** — **Markdown (`.md`)** is a redacted copy of the plain text
-  that opens in any Markdown reader; **HTML** is one self-contained, accessible
-  HTML file that opens in any browser without internet, with its tables, maths,
-  Mermaid diagrams and charts rendered in place; **PDF** is a finished sheet with
+  that opens in any Markdown reader; **HTML** is one self-contained
+  HTML file with real text, headings and alt texts that opens in any browser
+  without internet, with its tables, maths, Mermaid diagrams and charts
+  rendered in place — the file has not been audited for accessibility, so the
+  promise stops at what it is, not what it conforms to *(corrected
+  2026-11-03)*; **PDF** is a finished sheet with
   a real text layer (see below); **LaTeX (`.tex`)** is a LaTeX
   `article` document — maths (`$...$` / `$$...$$`) passes through natively, and
   images are referenced by relative path (keep them next to the `.tex`). Task

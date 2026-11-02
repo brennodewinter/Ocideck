@@ -1603,6 +1603,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Viena HTML datne ar īstu tekstu, virsrakstiem un alternatīvajiem tekstiem, kas atveras jebkurā pārlūkā bez interneta — ar tabulām, matemātiku, mermaid un diagrammām.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Strādājiet tiešraidē pie prezentācijas WebDAV serverī. Pēc noklusējuma izslēgts. Labojumi ceļo caur darba mapi blakus dekam uz tā paša servera — bez OciDeck šifrēšanas.',
   'Ga naar de brontabel': 'Doties uz avota tabulu',
@@ -4884,8 +4886,6 @@ const _dutchSourceAddLv = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Eksports izveido aizklātu kopiju saņēmējam. Savu baitam uzticīgo oriģinālu saglabājat ar Saglabāt.',
   'Exporteren…': 'Eksportēt…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Viens piekļūstams HTML fails, kas atveras jebkurā pārlūkā bez interneta, ar tabulām, matemātiku, mermaid un diagrammām.',
   'Het thema en de opmaak per dia (_class).':
       'Motīvs un formatējums katram slaidam (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':

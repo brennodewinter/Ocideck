@@ -1624,6 +1624,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Един HTML файл с реален текст, заглавия и алтернативни текстове, който се отваря във всеки браузър без интернет — с таблици, математика, mermaid и графики.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Работете на живо върху презентация на WebDAV сървър. Изключено по подразбиране. Редакциите пътуват през работна папка до дека на същия сървър — без криптиране от OciDeck.',
   'Ga naar de brontabel': 'Към изходната таблица',
@@ -4923,8 +4925,6 @@ const _dutchSourceAddBg = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Експортът създава заличено копие за получател. Своя байтово точен оригинал запазвате със Запази.',
   'Exporteren…': 'Експортиране…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Един достъпен HTML файл, който се отваря във всеки браузър без интернет, с таблици, математика, mermaid и диаграми.',
   'Het thema en de opmaak per dia (_class).':
       'Темата и оформлението за всеки слайд (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':

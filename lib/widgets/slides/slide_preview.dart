@@ -21,6 +21,7 @@ import 'previews/callout_overlay.dart';
 import 'previews/retrying_image.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../services/chart_semantics_label.dart';
 import '../../services/improvement/canvas_layout.dart';
 import '../../services/improvement/canvas_slide.dart';
 import '../../services/improvement/canvas_spec.dart';

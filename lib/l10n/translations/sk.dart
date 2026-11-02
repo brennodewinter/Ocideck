@@ -1611,6 +1611,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Jeden súbor HTML so skutočným textom, nadpismi a alternatívnymi textami, ktorý sa otvorí v akomkoľvek prehliadači bez internetu — s tabuľkami, matematikou, mermaid a grafmi.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Pracujte naživo na prezentácii na serveri WebDAV. Predvolene vypnuté. Úpravy cestujú cez pracovný priečinok vedľa decku na rovnakom serveri — bez šifrovania zo strany OciDeck.',
   'Ga naar de brontabel': 'Prejsť na zdrojovú tabuľku',
@@ -4886,8 +4888,6 @@ const _dutchSourceAddSk = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Export vytvorí začiernenú kópiu pre príjemcu. Svoj bajtovo verný originál uchováte pomocou Uložiť.',
   'Exporteren…': 'Exportovať…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Jeden prístupný súbor HTML, ktorý sa otvorí v každom prehliadači bez internetu, s tabuľkami, matematikou, mermaidom a grafmi.',
   'Het thema en de opmaak per dia (_class).':
       'Motív a formátovanie jednotlivých snímok (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':

@@ -1633,6 +1633,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Um ficheiro HTML com texto real, cabeçalhos e textos alternativos, que abre em qualquer navegador sem internet — com tabelas, matemática, mermaid e gráficos.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Trabalhe ao vivo numa apresentação num servidor WebDAV. Desativado por predefinição. As edições viajam por uma pasta de trabalho junto ao deck no mesmo servidor — sem encriptação por parte do OciDeck.',
   'Ga naar de brontabel': 'Ir para a tabela de origem',
@@ -4945,8 +4947,6 @@ const _dutchSourceAddPt = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'A exportação cria uma cópia ocultada para um destinatário. O seu original fiel aos bytes guarda-o com Guardar.',
   'Exporteren…': 'Exportar…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Um único ficheiro HTML acessível que abre em qualquer navegador sem internet, com tabelas, matemática, mermaid e gráficos.',
   'Het thema en de opmaak per dia (_class).':
       'O tema e a formatação por diapositivo (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':

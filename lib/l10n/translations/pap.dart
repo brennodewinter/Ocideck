@@ -651,6 +651,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Un archivo HTML ku teksto real, kabeseranan i tekstonan alternativo, ku ta habri den kualke browser sin internet — ku tablanan, matemátika, mermaid i gráfikonan.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Trabaha en vivo riba un presentashon riba un sirvidor WebDAV. Desaktipá pa defekto. Edishonnan ta biaha via un carpeta di trabou banda di e deck riba e mesun sirvidor — sin enkripshon pa OciDeck.',
   'Ga naar de brontabel': 'Bai na e tabela fuente',
@@ -3942,8 +3944,6 @@ const _dutchSourceAddPap = {
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Eksportá ta traha un kopia redaktá pa un risibidó. Bo original fiel na byte bo ta warda ku Warda.',
   'Exporteren…': 'Eksportá…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Un solo dokumento HTML aksesibel ku ta habri den kualke browser sin internet, ku tabel, matemátika, mermaid i gráfiko.',
   'Het thema en de opmaak per dia (_class).':
       'E tema i e formato pa kada slide (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':

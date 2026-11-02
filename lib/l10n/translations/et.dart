@@ -1598,6 +1598,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Üks HTML-fail tõelise teksti, pealkirjade ja alt-tekstidega, mis avaneb igas brauseris ilma internetita — tabelite, matemaatika, mermaidi ja diagrammidega.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Töötage reaalajas WebDAV-serveris oleva esitluse kallal. Vaikimisi välja lülitatud. Muudatused liiguvad deki kõrval oleva töökausta kaudu samal serveril — ilma OciDecki krüpteerimiseta.',
   'Ga naar de brontabel': 'Mine lähtetabelisse',
@@ -4877,8 +4879,6 @@ const _dutchSourceAddEt = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Eksport loob toimetatud koopia saajale. Baiditäpse originaali säilitad käsuga Salvesta.',
   'Exporteren…': 'Ekspordi…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Üks juurdepääsetav HTML-fail, mis avaneb igas brauseris ilma internetita, koos tabelite, matemaatika, mermaidi ja diagrammidega.',
   'Het thema en de opmaak per dia (_class).':
       'Teema ja slaidipõhine vormindus (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':

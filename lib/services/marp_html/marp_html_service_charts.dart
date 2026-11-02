@@ -22,8 +22,16 @@ String _chartSvg(
   ImprovementY01Metric y01 = ImprovementY01Metric.empty,
   String? background,
 }) {
+  // A bare SVG is to a screen reader a nameless image; the same label the
+  // editor's Semantics node carries rides along as role + <title> (#2732).
+  final label = chartSemanticsLabel(
+    const AppLocalizations(Locale('nl')),
+    spec,
+  );
   if (!spec.hasInlineData) {
-    return '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg"></svg>';
+    return '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" '
+        'role="img" aria-label="${MarpHtmlService._htmlAttr(label)}">'
+        '<title>${_esc(label)}</title></svg>';
   }
   // The chart sits on the slide background when exported, but on the app's card
   // in the document view — [background] lets that caller say where it actually
@@ -34,7 +42,9 @@ String _chartSvg(
   final b = StringBuffer()
     ..write(
       '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" '
-      'font-family="inherit" width="100%">',
+      'font-family="inherit" width="100%" role="img" '
+      'aria-label="${MarpHtmlService._htmlAttr(label)}">'
+      '<title>${_esc(label)}</title>',
     );
   if (spec.title.isNotEmpty) {
     final title = spec.title.length > 52

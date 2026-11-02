@@ -5960,9 +5960,12 @@ kan nog wel.
   privacycontrole uitstaat (onder Beveiliging), zegt het venster dat ronduit: een
   geredigeerde kopie is dan niet daadwerkelijk op persoonsgegevens gecontroleerd.
 - **Welk formaat** — **Markdown (`.md`)** is een geredigeerde kopie van de platte
-  tekst die in elke Markdown-lezer opent; **HTML** is één op zichzelf staand,
-  toegankelijk HTML-bestand dat in elke browser opent zonder internet, met zijn
-  tabellen, wiskunde, Mermaid-diagrammen en grafieken ter plekke gerenderd;
+  tekst die in elke Markdown-lezer opent; **HTML** is één op zichzelf staand
+  HTML-bestand met echte tekst, koppen en alt-teksten dat in elke browser opent
+  zonder internet, met zijn tabellen, wiskunde, Mermaid-diagrammen en grafieken
+  ter plekke gerenderd — het bestand is niet op toegankelijkheid getoetst, dus
+  de belofte houdt op bij wat het is, niet bij waar het aan voldoet
+  *(gecorrigeerd 2026-11-03)*;
   **PDF** is een afgewerkt vel met een echte tekstlaag (zie hieronder);
   **LaTeX (`.tex`)** is een LaTeX-`article`-document — wiskunde (`$...$` /
   `$$...$$`) gaat er ongewijzigd doorheen, en afbeeldingen worden met een relatief

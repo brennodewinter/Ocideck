@@ -409,6 +409,29 @@ void main() {}
     expect(html, contains('#FFCC00'));
   });
 
+  test('chart SVG carries a text alternative like the editor (#2732)', () {
+    const slide = '''
+```chart
+{
+  "type": "pie",
+  "title": "Verdeling",
+  "x": ["Team A", "Team B"],
+  "series": [
+    {"name": "Gereed", "data": [70, 40]}
+  ]
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    expect(html, contains('role="img"'));
+    expect(html, contains('aria-label="'));
+    expect(html, contains('<title>Grafiek (Cirkel): Verdeling'));
+    expect(html, contains('Team A 70'));
+    expect(html, contains('Team B 40'));
+  });
+
   test('pie chart SVG renders at most two series', () {
     const slide = '''
 ```chart
@@ -428,7 +451,9 @@ void main() {}
 
     expect(html, contains('Een'));
     expect(html, contains('Twee'));
-    expect(html, isNot(contains('Drie')));
+    // Alleen de getekende reeksen tellen: de derde staat wel in het
+    // tekstalternatief (dat het hele spec beschrijft) maar tekent geen taart.
+    expect(html, isNot(contains('>Drie<')));
   });
 
   test('a donut hole matches the app render fraction (kDonutHoleFraction)', () {

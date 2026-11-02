@@ -1623,6 +1623,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Fajl HTML wieħed b\'test veru, intestaturi u testi alternattivi, li jiftaħ fi kwalunkwe browser mingħajr internet — b\'tabelli, matematika, mermaid u graffs.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Ħdem live fuq preżentazzjoni fuq server WebDAV. Mitfi b\'mod awtomatiku. L-editji jivvjaġġaw permezz ta\' folder tax-xogħol ħdejn id-deck fuq l-istess server — mingħajr encryption minn OciDeck.',
   'Ga naar de brontabel': 'Mur fit-tabella sors',
@@ -4947,8 +4949,6 @@ const _dutchSourceAddMt = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'L-esportazzjoni toħloq kopja rediġuta għal riċevitur. L-oriġinal tiegħek fidil għall-bytes iżżommu bl-Issejvja.',
   'Exporteren…': 'Esporta…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Fajl HTML wieħed aċċessibbli li jinfetaħ f\'kull browser bla internet, bit-tabelli, il-matematika, il-mermaid u l-graffs.',
   'Het thema en de opmaak per dia (_class).':
       'It-tema u l-formattazzjoni għal kull slajd (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
