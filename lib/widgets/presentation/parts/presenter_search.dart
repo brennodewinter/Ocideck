@@ -153,40 +153,6 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
       _scroll.jumpTo(0);
     }
 
-    Widget result(int i, {bool preview = false}) {
-      final match = matches[i];
-      final page = widget.pages[match.slideIndex];
-      final spans = <TextSpan>[];
-      var cursor = 0;
-      for (final range in findAllMatches(match.context, session.query)) {
-        spans.add(TextSpan(text: match.context.substring(cursor, range.start)));
-        spans.add(
-          TextSpan(
-            text: match.context.substring(range.start, range.end),
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
-            ),
-          ),
-        );
-        cursor = range.end;
-      }
-      spans.add(TextSpan(text: match.context.substring(cursor)));
-      return ListTile(
-        selected: i == index,
-        title: Text(
-          '${l10n.d('Slide')} ${page.index + 1} · ${l10n.d(match.fieldLabel)}${page.page > 0 ? ' · ${l10n.d('Pagina')} ${page.page + 1}' : ''}',
-        ),
-        subtitle: Text.rich(TextSpan(children: spans)),
-        onTap: preview
-            ? null
-            : () => setState(() {
-                session.selected = i;
-                session.entered = true;
-              }),
-      );
-    }
-
     return Focus(
       onKeyEvent: (_, event) {
         if (event is KeyDownEvent &&
@@ -214,45 +180,7 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    CallbackShortcuts(
-                      bindings: {
-                        const SingleActivator(LogicalKeyboardKey.enter): () =>
-                            step(1),
-                        const SingleActivator(
-                          LogicalKeyboardKey.enter,
-                          shift: true,
-                        ): () =>
-                            step(-1),
-                        const SingleActivator(
-                          LogicalKeyboardKey.numpadEnter,
-                        ): () =>
-                            step(1),
-                        const SingleActivator(
-                          LogicalKeyboardKey.numpadEnter,
-                          shift: true,
-                        ): () =>
-                            step(-1),
-                      },
-                      child: TextField(
-                        key: const ValueKey('presenter-search-query'),
-                        controller: _query,
-                        autofocus: true,
-                        textInputAction: TextInputAction.search,
-                        onEditingComplete: () {},
-                        decoration: InputDecoration(
-                          labelText: l10n.d('Zoeken'),
-                        ),
-                        onChanged: (value) => setState(() {
-                          session.query = value;
-                          session.selected = 0;
-                          session.entered = false;
-                          session.wrapDirection = 0;
-                        }),
-                        onSubmitted: (_) => step(
-                          HardwareKeyboard.instance.isShiftPressed ? -1 : 1,
-                        ),
-                      ),
-                    ),
+                    _queryField(step),
                     CheckboxListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text(l10n.d('Ook in sprekersnotities')),
@@ -304,14 +232,19 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
                     if (selected != null)
                       Semantics(
                         liveRegion: true,
-                        child: result(index, preview: true),
+                        child: _result(
+                          matches[index],
+                          index,
+                          index,
+                          preview: true,
+                        ),
                       ),
                   ],
                 ),
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  (_, i) => result(i),
+                  (_, i) => _result(matches[i], i, index),
                   childCount: matches.length,
                 ),
               ),
@@ -332,6 +265,80 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _queryField(ValueChanged<int> step) {
+    final l10n = context.l10n;
+    final session = widget.session;
+    return CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.enter): () => step(1),
+        const SingleActivator(LogicalKeyboardKey.enter, shift: true): () =>
+            step(-1),
+        const SingleActivator(LogicalKeyboardKey.numpadEnter): () => step(1),
+        const SingleActivator(
+          LogicalKeyboardKey.numpadEnter,
+          shift: true,
+        ): () =>
+            step(-1),
+      },
+      child: TextField(
+        key: const ValueKey('presenter-search-query'),
+        controller: _query,
+        autofocus: true,
+        textInputAction: TextInputAction.search,
+        onEditingComplete: () {},
+        decoration: InputDecoration(labelText: l10n.d('Zoeken')),
+        onChanged: (value) => setState(() {
+          session.query = value;
+          session.selected = 0;
+          session.entered = false;
+          session.wrapDirection = 0;
+        }),
+        onSubmitted: (_) =>
+            step(HardwareKeyboard.instance.isShiftPressed ? -1 : 1),
+      ),
+    );
+  }
+
+  Widget _result(
+    DeckTextMatch match,
+    int i,
+    int index, {
+    bool preview = false,
+  }) {
+    final l10n = context.l10n;
+    final session = widget.session;
+    final page = widget.pages[match.slideIndex];
+    final spans = <TextSpan>[];
+    var cursor = 0;
+    for (final range in findAllMatches(match.context, session.query)) {
+      spans.add(TextSpan(text: match.context.substring(cursor, range.start)));
+      spans.add(
+        TextSpan(
+          text: match.context.substring(range.start, range.end),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
+          ),
+        ),
+      );
+      cursor = range.end;
+    }
+    spans.add(TextSpan(text: match.context.substring(cursor)));
+    return ListTile(
+      selected: i == index,
+      title: Text(
+        '${l10n.d('Slide')} ${page.index + 1} · ${l10n.d(match.fieldLabel)}${page.page > 0 ? ' · ${l10n.d('Pagina')} ${page.page + 1}' : ''}',
+      ),
+      subtitle: Text.rich(TextSpan(children: spans)),
+      onTap: preview
+          ? null
+          : () => setState(() {
+              session.selected = i;
+              session.entered = true;
+            }),
     );
   }
 }

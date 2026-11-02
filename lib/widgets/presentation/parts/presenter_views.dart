@@ -326,51 +326,7 @@ extension _PresenterViews on _FullscreenPresenterState {
               const SizedBox(height: 16),
               _SectionLabel(l10n.d('VOLGENDE')),
               const SizedBox(height: 8),
-              AspectRatio(
-                aspectRatio: widget.slideAspect,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: nextSlide != null
-                      ? Container(
-                          color: Colors.black,
-                          child: SlidePreviewWidget(
-                            slideAspect: widget.slideAspect,
-                            slide: nextSlide,
-                            projectPath: widget.projectPath,
-                            themeProfile: widget.themeProfile,
-                            deckMarpStyle: widget.marpStyle,
-                            cockpitColorScheme: widget.cockpitColorScheme,
-                            allowRemoteMedia: widget.allowRemoteMedia,
-                            tlp: widget.tlp,
-                            organization: widget.organization,
-                            showClassificationWatermark:
-                                widget.showClassificationWatermark,
-                            presentationMode: true,
-                            scopeCia: deckScopeCiaIndex(widget.slides),
-                            fitScaleOverride: sharedSplitFitScale(
-                              widget.slides,
-                              _index + 1,
-                              widget.themeProfile,
-                              widget.themeProfile.fontFamily,
-                              slideAspect: widget.slideAspect,
-                            ),
-                            splitRunPosition: splitRunPositionFor(
-                              widget.slides,
-                              _index + 1,
-                            ),
-                            improvementY01: widget.improvementY01,
-                          ),
-                        )
-                      : Container(
-                          color: PresenterPalette.bg2,
-                          alignment: Alignment.center,
-                          child: Text(
-                            l10n.d('Einde van de presentatie'),
-                            style: const TextStyle(color: _muted, fontSize: 13),
-                          ),
-                        ),
-                ),
-              ),
+              _nextSlidePreview(nextSlide),
               const SizedBox(height: 16),
               _SectionLabel(l10n.d('NOTITIES')),
               const SizedBox(height: 8),
@@ -397,6 +353,55 @@ extension _PresenterViews on _FullscreenPresenterState {
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget _nextSlidePreview(Slide? nextSlide) {
+    final l10n = context.l10n;
+    return AspectRatio(
+      aspectRatio: widget.slideAspect,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(6),
+        child: nextSlide != null
+            ? Container(
+                color: Colors.black,
+                child: SlidePreviewWidget(
+                  slideAspect: widget.slideAspect,
+                  slide: nextSlide,
+                  projectPath: widget.projectPath,
+                  themeProfile: widget.themeProfile,
+                  deckMarpStyle: widget.marpStyle,
+                  cockpitColorScheme: widget.cockpitColorScheme,
+                  allowRemoteMedia: widget.allowRemoteMedia,
+                  tlp: widget.tlp,
+                  organization: widget.organization,
+                  showClassificationWatermark:
+                      widget.showClassificationWatermark,
+                  presentationMode: true,
+                  scopeCia: deckScopeCiaIndex(widget.slides),
+                  fitScaleOverride: sharedSplitFitScale(
+                    widget.slides,
+                    _index + 1,
+                    widget.themeProfile,
+                    widget.themeProfile.fontFamily,
+                    slideAspect: widget.slideAspect,
+                  ),
+                  splitRunPosition: splitRunPositionFor(
+                    widget.slides,
+                    _index + 1,
+                  ),
+                  improvementY01: widget.improvementY01,
+                ),
+              )
+            : Container(
+                color: PresenterPalette.bg2,
+                alignment: Alignment.center,
+                child: Text(
+                  l10n.d('Einde van de presentatie'),
+                  style: const TextStyle(color: _muted, fontSize: 13),
+                ),
+              ),
       ),
     );
   }
