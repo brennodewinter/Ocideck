@@ -649,6 +649,16 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Quizvragen': 'Domande del quiz',
+  'Met vragen': 'Con le domande',
+  'Zonder vragen': 'Senza le domande',
+  'Alleen vragen': 'Solo le domande',
+  'De quizvragen gaan mee in dit bestand.':
+      'Le domande del quiz sono in questo file.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Questo file omette le domande del quiz. Il nome finisce con -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Questo file contiene solo le domande del quiz. Il nome finisce con -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'La parola «{woord}» compare due volte di seguito.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

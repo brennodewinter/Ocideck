@@ -651,6 +651,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Quizvragen': 'Preguntanan di kuis',
+  'Met vragen': 'Ku preguntanan',
+  'Zonder vragen': 'Sin preguntanan',
+  'Alleen vragen': 'Solamente preguntanan',
+  'De quizvragen gaan mee in dit bestand.':
+      'E preguntanan di kuis ta den e fail aki.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'E fail aki laga e preguntanan di kuis afó. E nòmber ta kaba ku -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'E fail aki tin solamente e preguntanan di kuis. E nòmber ta kaba ku -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'E palabra “{woord}” ta dos biaha tras di otro.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

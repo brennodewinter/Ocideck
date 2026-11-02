@@ -1621,6 +1621,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Quizvragen': 'Întrebări de quiz',
+  'Met vragen': 'Cu întrebări',
+  'Zonder vragen': 'Fără întrebări',
+  'Alleen vragen': 'Doar întrebări',
+  'De quizvragen gaan mee in dit bestand.':
+      'Întrebările de quiz sunt în acest fișier.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Acest fișier omite întrebările de quiz. Numele se termină cu -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Acest fișier conține doar întrebările de quiz. Numele se termină cu -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Cuvântul „{woord}” apare de două ori la rând.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

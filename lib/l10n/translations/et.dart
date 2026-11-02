@@ -1598,6 +1598,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Quizvragen': 'Viktoriiniküsimused',
+  'Met vragen': 'Küsimustega',
+  'Zonder vragen': 'Küsimusteta',
+  'Alleen vragen': 'Ainult küsimused',
+  'De quizvragen gaan mee in dit bestand.':
+      'Viktoriiniküsimused on selles failis.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'See fail jätab viktoriiniküsimused välja. Nimi lõpeb -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'See fail sisaldab ainult viktoriiniküsimusi. Nimi lõpeb -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Sõna „{woord}“ seisab kaks korda järjest.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

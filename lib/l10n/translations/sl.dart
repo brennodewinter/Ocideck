@@ -1605,6 +1605,16 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Quizvragen': 'Vprašanja kviza',
+  'Met vragen': 'Z vprašanji',
+  'Zonder vragen': 'Brez vprašanj',
+  'Alleen vragen': 'Samo vprašanja',
+  'De quizvragen gaan mee in dit bestand.':
+      'Vprašanja kviza so v tej datoteki.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Ta datoteka izpusti vprašanja kviza. Ime se konča z -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Ta datoteka vsebuje samo vprašanja kviza. Ime se konča z -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Beseda „{woord}“ stoji dvakrat zaporedoma.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

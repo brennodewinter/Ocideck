@@ -41,6 +41,7 @@ const _qualityError = SlideQualityResult([
 ExportBundle _emptyBundle(
   PrivacyExportProfile profile, {
   bool includeDetail = true,
+  QuestionExport questions = QuestionExport.included,
 }) => _bundleOf(const Deck(title: 'Test'), profile);
 
 ExportBundle _bundleOf(Deck deck, PrivacyExportProfile profile) => ExportBundle(
@@ -112,6 +113,7 @@ void main() {
     ExportBundle bundleMetManifest(
       PrivacyExportProfile profile, {
       bool includeDetail = true,
+      QuestionExport questions = QuestionExport.included,
     }) => ExportBundle(
       audience: PrivacyProjection.forAudience(
         const Deck(title: 'Test'),
@@ -136,8 +138,7 @@ void main() {
 
     Future<void> toon(
       WidgetTester tester,
-      ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
-      bundleFor, {
+      ExportBundleFor bundleFor, {
       ExportService? service,
     }) => tester.pumpWidget(
       MaterialApp(
@@ -193,6 +194,7 @@ void main() {
       ExportBundle bundle(
         PrivacyExportProfile profile, {
         bool includeDetail = true,
+        QuestionExport questions = QuestionExport.included,
       }) {
         final original = bundleMetManifest(profile);
         return ExportBundle(
@@ -225,6 +227,7 @@ void main() {
     ExportBundle bundelMetAiVeld(
       PrivacyExportProfile profile, {
       bool includeDetail = true,
+      QuestionExport questions = QuestionExport.included,
     }) => ExportBundle(
       audience: PrivacyProjection.forAudience(
         Deck(
@@ -242,21 +245,18 @@ void main() {
       privacySummary: PrivacyExportSummary.empty,
     );
 
-    Future<void> toon(
-      WidgetTester tester,
-      ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
-      bundleFor,
-    ) => tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ExportDialog(
-            deckPath: '/tmp/deck.md',
-            bundleFor: bundleFor,
-            exportService: ExportService(),
+    Future<void> toon(WidgetTester tester, ExportBundleFor bundleFor) =>
+        tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ExportDialog(
+                deckPath: '/tmp/deck.md',
+                bundleFor: bundleFor,
+                exportService: ExportService(),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        );
 
     testWidgets('meldt het achtervoegsel voordat het bestand er is', (
       tester,
@@ -365,8 +365,12 @@ void main() {
           home: Scaffold(
             body: ExportDialog(
               deckPath: '/tmp/deck.md',
-              bundleFor: (profile, {bool includeDetail = true}) =>
-                  _bundleOf(Deck(title: 'Test', tlp: tlp), profile),
+              bundleFor:
+                  (
+                    profile, {
+                    bool includeDetail = true,
+                    QuestionExport questions = QuestionExport.included,
+                  }) => _bundleOf(Deck(title: 'Test', tlp: tlp), profile),
               exportService: ExportService(),
               enforcementPolicy: policy,
             ),
@@ -404,5 +408,55 @@ void main() {
       expect(find.textContaining('TLP:AMBER'), findsOneWidget);
       expect(find.textContaining('geen drempel'), findsNothing);
     });
+  });
+
+  testWidgets('de vragenkeuze verschijnt alleen als er iets te kiezen valt', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 1200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    QuestionExport? seen;
+
+    ExportBundle bundle(
+      PrivacyExportProfile profile, {
+      bool includeDetail = true,
+      QuestionExport questions = QuestionExport.included,
+    }) {
+      seen = questions;
+      return _emptyBundle(profile);
+    }
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ExportDialog(
+            deckPath: '/tmp/deck.md',
+            bundleFor: bundle,
+            exportService: ExportService(),
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Quizvragen'), findsNothing);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ExportDialog(
+            deckPath: '/tmp/deck.md',
+            bundleFor: bundle,
+            hasQuestionChoice: true,
+            exportService: ExportService(),
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Met vragen'), findsOneWidget);
+    final alleen = find.text('Alleen vragen');
+    await tester.ensureVisible(alleen);
+    await tester.tap(alleen);
+    await tester.pump();
+    expect(seen, QuestionExport.only);
+    expect(find.textContaining('-vragen'), findsOneWidget);
   });
 }

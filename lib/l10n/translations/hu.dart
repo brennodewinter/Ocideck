@@ -1607,6 +1607,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Quizvragen': 'Kvízkérdések',
+  'Met vragen': 'Kérdésekkel',
+  'Zonder vragen': 'Kérdések nélkül',
+  'Alleen vragen': 'Csak a kérdések',
+  'De quizvragen gaan mee in dit bestand.':
+      'A kvízkérdések ebben a fájlban vannak.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Ez a fájl kihagyja a kvízkérdéseket. A név -zonder-vragen végű.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Ez a fájl csak a kvízkérdéseket tartalmazza. A név -vragen végű.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'A „{woord}” szó kétszer áll egymás után.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

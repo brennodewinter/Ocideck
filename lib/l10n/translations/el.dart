@@ -1630,6 +1630,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Quizvragen': 'Ερωτήσεις κουίζ',
+  'Met vragen': 'Με ερωτήσεις',
+  'Zonder vragen': 'Χωρίς ερωτήσεις',
+  'Alleen vragen': 'Μόνο ερωτήσεις',
+  'De quizvragen gaan mee in dit bestand.':
+      'Οι ερωτήσεις του κουίζ περιλαμβάνονται σε αυτό το αρχείο.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Αυτό το αρχείο παραλείπει τις ερωτήσεις του κουίζ. Το όνομα τελειώνει σε -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Αυτό το αρχείο περιέχει μόνο τις ερωτήσεις του κουίζ. Το όνομα τελειώνει σε -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Η λέξη «{woord}» εμφανίζεται δύο φορές στη σειρά.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

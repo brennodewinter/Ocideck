@@ -24,6 +24,36 @@ import 'privacy/privacy_scanner.dart';
 import 'privacy/redaction_manifest_service.dart';
 import 'rich_text_layout.dart';
 
+/// Hoe de quizvragen in deze export zitten.
+///
+/// Een keuze van de export, geen eigenschap van het deck. Het bestand op
+/// schijf houdt elke vraagdia, en presenteren toont ze ook. Alleen de kopie
+/// die de deur uitgaat verandert. De standaard is die kopie zoals hij altijd
+/// al was: dan blijft een bestaande bestandsnaam staan.
+enum QuestionExport {
+  included,
+  omitted,
+  only;
+
+  /// Leeg zolang de vragen meegaan. Een afwijking hoort in de naam, om
+  /// dezelfde reden als `-beknopt`: de verkeerde versie versturen moet je
+  /// kunnen zien.
+  String get fileSuffix => switch (this) {
+    QuestionExport.included => '',
+    QuestionExport.omitted => '-zonder-vragen',
+    QuestionExport.only => '-vragen',
+  };
+}
+
+/// De fabriek die het exportdialoog vasthoudt. Eén type, zodat een nieuwe
+/// keuze niet op de helft van de aanroepers blijft liggen.
+typedef ExportBundleFor =
+    ExportBundle Function(
+      PrivacyExportProfile profile, {
+      bool includeDetail,
+      QuestionExport questions,
+    });
+
 /// Eén doelgroepprofiel, uitgewerkt.
 class ExportBundle {
   /// Het geprojecteerde deck: pixels, notities, metadata.
@@ -69,6 +99,21 @@ List<Slide> _expandForExport(List<Slide> slides, Deck deck) =>
       deck.themeProfile,
     );
 
+List<Slide> _slidesForQuestionExport(
+  List<Slide> slides,
+  QuestionExport questions,
+) => switch (questions) {
+  QuestionExport.included => slides,
+  QuestionExport.omitted => [
+    for (final slide in slides)
+      if (slide.type != SlideType.question) slide,
+  ],
+  QuestionExport.only => [
+    for (final slide in slides)
+      if (slide.type == SlideType.question) slide,
+  ],
+};
+
 /// Eén exportbundel: het geprojecteerde deck plus alles wat daaruit volgt.
 ///
 /// Hoort hier en niet in de shell: dit is exportlogica, geen schermlogica. De
@@ -79,6 +124,10 @@ ExportBundle buildExportBundle(
   List<Slide> slides, {
   required PrivacyExportProfile profile,
   required bool includeDetail,
+
+  /// Of de quizvragen meegaan. Standaard wel, zodat een export zonder deze
+  /// keuze dezelfde dia's houdt als voorheen.
+  QuestionExport questions = QuestionExport.included,
 
   /// Of de dia-paginering wordt uitgeklapt vóór de projectie. `true` voor elk
   /// oppervlak dat dia's toont; `false` voor een doorlopend document.
@@ -91,12 +140,15 @@ ExportBundle buildExportBundle(
   required Set<String> regions,
   required MarkdownService markdownService,
 }) {
-  // De beknopte versie laat de verdiepingsslides weg. Filteren gebeurt vóór
-  // de paginering: een overlopende bevinding die in drie slides uiteenvalt
-  // erft zijn verdiepingsvlag, en die drie horen samen te blijven.
-  final chosen = includeDetail
+  // Verdieping en quizvragen zijn twee assen. Eerst de diepgang, dan de
+  // vragen: een vraagdia die als verdieping is gemarkeerd valt in de
+  // beknopte export weg, ook wanneer je alleen de vragen vraagt. Filteren
+  // gebeurt vóór de paginering, zodat de pagina's van één dia bij elkaar
+  // blijven.
+  final byDepth = includeDetail
       ? slides
       : slides.where((s) => !s.isDetail).toList();
+  final chosen = _slidesForQuestionExport(byDepth, questions);
 
   // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog aan:
   // de rasterizer, de markdown voor de HTML-export, de PPTX-notities en de

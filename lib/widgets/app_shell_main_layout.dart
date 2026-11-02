@@ -657,6 +657,20 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final hasDepthChoice =
         slides.any((s) => s.isDetail) && slides.any((s) => !s.isDetail);
 
+    // Zelfde grens als de diepgang: alleen tonen als beide kanten een bestand
+    // opleveren dat niet leeg is en niet hetzelfde als de andere. De
+    // afsluitdia telt niet mee; die voegt de export zelf toe.
+    final reachable = deck.slides.where(
+      (s) => slideReachesAudience(
+        s,
+        presentationTlp: deck.tlp,
+        includeDetail: true,
+      ),
+    );
+    final hasQuestionChoice =
+        reachable.any((s) => s.type == SlideType.question) &&
+        reachable.any((s) => s.type != SlideType.question);
+
     await ExportDialog.show(
       context,
       // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
@@ -668,6 +682,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       initialFormat: format,
       hasPrivacyFindings: hasPrivacyFindings,
       hasDepthChoice: hasDepthChoice,
+      hasQuestionChoice: hasQuestionChoice,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
       exportService: widget.exportService,
       enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
@@ -878,8 +893,7 @@ Future<void> _createDeckFromDialog(
 ///
 /// Top-level en geen methode: hij raakt geen enkel veld van de state, en
 /// `_MainLayoutState` zit tegen zijn plafond (`classSizeBaseline`).
-ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
-_exportBundleFactory({
+ExportBundleFor _exportBundleFactory({
   required Deck deck,
   required List<Slide> slides,
   required Set<String> disabledRules,
@@ -887,17 +901,21 @@ _exportBundleFactory({
   required Set<String> regions,
   required MarkdownService markdownService,
 }) =>
-    (PrivacyExportProfile profile, {bool includeDetail = true}) =>
-        buildExportBundle(
-          deck,
-          slides,
-          profile: profile,
-          includeDetail: includeDetail,
-          // Een presentatie-export rasteriseert en somt dia's op, dus hier
-          // wordt de dia-paginering wél uitgeklapt (#1589).
-          expandPages: true,
-          disabledRules: disabledRules,
-          ownIdentity: ownIdentity,
-          regions: regions,
-          markdownService: markdownService,
-        );
+    (
+      PrivacyExportProfile profile, {
+      bool includeDetail = true,
+      QuestionExport questions = QuestionExport.included,
+    }) => buildExportBundle(
+      deck,
+      slides,
+      profile: profile,
+      includeDetail: includeDetail,
+      questions: questions,
+      // Een presentatie-export rasteriseert en somt dia's op, dus hier
+      // wordt de dia-paginering wél uitgeklapt (#1589).
+      expandPages: true,
+      disabledRules: disabledRules,
+      ownIdentity: ownIdentity,
+      regions: regions,
+      markdownService: markdownService,
+    );

@@ -1611,6 +1611,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Quizvragen': 'Viktorinos klausimai',
+  'Met vragen': 'Su klausimais',
+  'Zonder vragen': 'Be klausimų',
+  'Alleen vragen': 'Tik klausimai',
+  'De quizvragen gaan mee in dit bestand.':
+      'Viktorinos klausimai yra šiame faile.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Šis failas praleidžia viktorinos klausimus. Pavadinimas baigiasi -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Šiame faile yra tik viktorinos klausimai. Pavadinimas baigiasi -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Žodis „{woord}“ kartojasi du kartus iš eilės.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

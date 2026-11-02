@@ -652,6 +652,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Quizvragen': 'Kwisfragen',
+  'Met vragen': 'Mei fragen',
+  'Zonder vragen': 'Sûnder fragen',
+  'Alleen vragen': 'Allinne fragen',
+  'De quizvragen gaan mee in dit bestand.':
+      'De kwisfragen geane mei yn dit bestân.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Dit bestân slacht de kwisfragen oer. De namme einiget op -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Dit bestân befettet allinne de kwisfragen. De namme einiget op -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'It wurd “{woord}” stiet twa kear efterinoar.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

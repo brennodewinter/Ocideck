@@ -1605,6 +1605,16 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Quizvragen': 'Quizspørgsmål',
+  'Met vragen': 'Med spørgsmål',
+  'Zonder vragen': 'Uden spørgsmål',
+  'Alleen vragen': 'Kun spørgsmål',
+  'De quizvragen gaan mee in dit bestand.':
+      'Quizspørgsmålene er med i denne fil.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Denne fil springer quizspørgsmålene over. Navnet ender på -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Denne fil indeholder kun quizspørgsmålene. Navnet ender på -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Ordet „{woord}“ står to gange i træk.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

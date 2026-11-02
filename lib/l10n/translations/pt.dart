@@ -1633,6 +1633,16 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Quizvragen': 'Perguntas do questionário',
+  'Met vragen': 'Com perguntas',
+  'Zonder vragen': 'Sem perguntas',
+  'Alleen vragen': 'Só perguntas',
+  'De quizvragen gaan mee in dit bestand.':
+      'As perguntas do questionário vão neste ficheiro.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Este ficheiro deixa de fora as perguntas do questionário. O nome termina em -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Este ficheiro contém só as perguntas do questionário. O nome termina em -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'A palavra «{woord}» aparece duas vezes seguidas.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

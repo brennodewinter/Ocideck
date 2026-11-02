@@ -1605,6 +1605,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Quizvragen': 'Pertanyaan kuis',
+  'Met vragen': 'Dengan pertanyaan',
+  'Zonder vragen': 'Tanpa pertanyaan',
+  'Alleen vragen': 'Hanya pertanyaan',
+  'De quizvragen gaan mee in dit bestand.':
+      'Pertanyaan kuis ikut dalam berkas ini.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Berkas ini melewatkan pertanyaan kuis. Namanya berakhiran -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Berkas ini hanya berisi pertanyaan kuis. Namanya berakhiran -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Kata “{woord}” muncul dua kali berturut-turut.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

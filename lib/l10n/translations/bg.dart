@@ -1624,6 +1624,16 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Quizvragen': 'Въпроси от теста',
+  'Met vragen': 'С въпроси',
+  'Zonder vragen': 'Без въпроси',
+  'Alleen vragen': 'Само въпроси',
+  'De quizvragen gaan mee in dit bestand.':
+      'Въпросите от теста са в този файл.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Този файл пропуска въпросите от теста. Името завършва на -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Този файл съдържа само въпросите от теста. Името завършва на -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Думата „{woord}“ стои два пъти подред.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':

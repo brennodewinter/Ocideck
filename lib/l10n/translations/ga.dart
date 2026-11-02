@@ -1635,6 +1635,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Quizvragen': 'Ceisteanna tráth na gceist',
+  'Met vragen': 'Le ceisteanna',
+  'Zonder vragen': 'Gan ceisteanna',
+  'Alleen vragen': 'Ceisteanna amháin',
+  'De quizvragen gaan mee in dit bestand.':
+      'Tá na ceisteanna tráth na gceist sa chomhad seo.',
+  'Dit bestand slaat de quizvragen over. De naam eindigt op -zonder-vragen.':
+      'Fágann an comhad seo na ceisteanna tráth na gceist ar lár. Críochnaíonn an t-ainm le -zonder-vragen.',
+  'Dit bestand bevat alleen de quizvragen. De naam eindigt op -vragen.':
+      'Níl sa chomhad seo ach na ceisteanna tráth na gceist. Críochnaíonn an t-ainm le -vragen.',
   'Het woord “{woord}” staat twee keer achter elkaar.':
       'Tá an focal “{woord}” faoi dhó as a chéile.',
   'Deze regel bevat {aantal} woorden; overweeg hem op te splitsen.':
