@@ -25,7 +25,7 @@
 #     → momentopname referentiedata bijwerken als upstream bewoog zónder dat de
 #       gegenereerde catalogus verandert (verschuift de INHOUD wél, dan stopt het)
 #     → bump (pubspec+kOciDeckVersion+CHANGELOG) → make sbom → committen
-#     → make check-release → make build-release → make notarize-macos
+#     → make check-release → make notarize-macos
 #     → zegel verifiëren → de nieuwe .app in /Applications zetten
 #   PRE-FLIGHT (ná het wachtwoord, vóór elke mutatie): forge-token, mirror-remote,
 #     deploy-host (ssh) en een minisign proef-tekening — alles wat later
@@ -1347,7 +1347,7 @@ show_plan() {
   Keten (onbewaakt na het wachtwoord):
     FASE 1  verouderingsgate → scanner-pins bumpen → [momentopname referentiedata]
             → bump → make sbom → committen
-            → make check-release → build + notarize → zegel → /Applications
+            → make check-release → notarize → zegel → /Applications
     FASE 2  [scans-image publiceren als pins gebumpt] → PR → poort groen → merge
             → tag $TAG → push origin+mirror → CI volgen
     FASE 3  make deploy-web → SHA256SUMS tekenen + aanhangen → publiceren
@@ -3582,12 +3582,8 @@ section "Fase 1 — volledige poort (make check-release)"
 make check-release
 log "make check-release groen."
 
-STEP="make build-release"
-section "Fase 1 — bouwen, tekenen, notariseren"
-make build-release
-# Eigen STEP: notarize-macos is een andere stap met andere faaloorzaken (schone
-# bouw, zegel, notary-profiel). Onder één label meldde de trap "make
-# build-release" terwijl het notariseren viel — dat stuurt de diagnose verkeerd.
+section "Fase 1 — schoon bouwen, tekenen, notariseren"
+# Notariseren bouwt schoon; een voorafgaande build wordt daardoor weggegooid.
 STEP="make notarize-macos"
 make notarize-macos
 APP="$(find build/macos/Build/Products/Release -maxdepth 1 -name '*.app' 2>/dev/null | head -1)"
