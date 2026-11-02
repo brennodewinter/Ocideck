@@ -40,7 +40,10 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
     _title.addTextListener(_emitTitle);
   }
 

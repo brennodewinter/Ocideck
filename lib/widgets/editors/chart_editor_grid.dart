@@ -301,6 +301,11 @@ extension _ChartEditorGrid on _ChartEditorState {
   }) {
     return _ChartGridCell(
       key: key,
+      searchFieldId: gridRow == 0
+          ? 'chart.series.${gridCol - 1}'
+          : gridCol == 0
+          ? 'chart.x.${gridRow - 1}'
+          : null,
       focusNode: _ChartGridKeys.focus(this, gridRow, gridCol),
       value: value,
       enabled: enabled,
@@ -567,6 +572,7 @@ class _ChartGridCell extends StatefulWidget {
   const _ChartGridCell({
     super.key,
     required this.focusNode,
+    this.searchFieldId,
     required this.value,
     required this.enabled,
     required this.onChanged,
@@ -577,6 +583,7 @@ class _ChartGridCell extends StatefulWidget {
   });
 
   final FocusNode focusNode;
+  final String? searchFieldId;
   final String value;
   final bool enabled;
   final ValueChanged<String> onChanged;
@@ -591,17 +598,21 @@ class _ChartGridCell extends StatefulWidget {
 }
 
 class _ChartGridCellState extends State<_ChartGridCell> {
-  late final TextEditingController _ctrl;
+  late final EditorTextController _ctrl;
 
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: widget.value);
+    _ctrl = EditorTextController(
+      text: widget.value,
+      searchFieldId: widget.searchFieldId,
+    );
   }
 
   @override
   void didUpdateWidget(covariant _ChartGridCell oldWidget) {
     super.didUpdateWidget(oldWidget);
+    _ctrl.searchFieldId = widget.searchFieldId;
     if (oldWidget.value != widget.value && _ctrl.text != widget.value) {
       _ctrl.text = widget.value;
     }

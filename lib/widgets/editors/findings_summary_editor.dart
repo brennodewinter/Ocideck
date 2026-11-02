@@ -54,7 +54,7 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = newController(spec.title, _emit);
+    _title = newController(spec.title, _emit, searchFieldId: 'title');
     _counts = {
       for (final band in FindingsSummarySpec.order)
         band: newController('${spec.countOf(band)}', _emit),

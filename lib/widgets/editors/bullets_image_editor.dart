@@ -69,7 +69,10 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
     _title.addTextListener(_emit);
     _listStyle = widget.slide.listStyle;
     _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
@@ -78,6 +81,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     _continuesSplit = widget.slide.continuesSplit;
     _richText = EditorTextController(
       text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
+      searchFieldId: 'customMarkdown',
     );
     _richText.addTextListener(_emit);
     _bullets = BulletSet(widget.slide.bullets, _emit);

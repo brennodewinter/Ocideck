@@ -45,10 +45,19 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
     _title.addTextListener(_emit);
-    _heading1 = EditorTextController(text: widget.slide.columnTitle1);
-    _heading2 = EditorTextController(text: widget.slide.columnTitle2);
+    _heading1 = EditorTextController(
+      text: widget.slide.columnTitle1,
+      searchFieldId: 'columnTitle1',
+    );
+    _heading2 = EditorTextController(
+      text: widget.slide.columnTitle2,
+      searchFieldId: 'columnTitle2',
+    );
     _heading1.addTextListener(_emit);
     _heading2.addTextListener(_emit);
     _listStyle = widget.slide.listStyle == ListStyle.richText
@@ -58,7 +67,7 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
     _showChecklistProgress = widget.slide.showChecklistProgress;
     _continuesSplit = widget.slide.continuesSplit;
     _left = BulletSet(widget.slide.bullets, _emit);
-    _right = BulletSet(widget.slide.bullets2, _emit);
+    _right = BulletSet(widget.slide.bullets2, _emit, searchField: 'bullets2');
   }
 
   void _emit() {

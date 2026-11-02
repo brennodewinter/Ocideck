@@ -52,8 +52,12 @@ class _SectionEditorState extends ConsumerState<SectionEditor>
   @override
   void initState() {
     super.initState();
-    _title = newController(widget.slide.title, _emit);
-    _subtitle = newController(widget.slide.subtitle, _emit);
+    _title = newController(widget.slide.title, _emit, searchFieldId: 'title');
+    _subtitle = newController(
+      widget.slide.subtitle,
+      _emit,
+      searchFieldId: 'subtitle',
+    );
     if (widget.slide.imageSize > 0) _zoomBeforeFill = widget.slide.imageSize;
   }
 

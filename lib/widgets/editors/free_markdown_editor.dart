@@ -26,7 +26,10 @@ class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
   @override
   void initState() {
     super.initState();
-    _ctrl = EditorTextController(text: widget.slide.customMarkdown);
+    _ctrl = EditorTextController(
+      text: widget.slide.customMarkdown,
+      searchFieldId: 'customMarkdown',
+    );
     _ctrl.addTextListener(_emit);
   }
 

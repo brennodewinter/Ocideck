@@ -85,7 +85,8 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = EditorTextController(text: spec.title)..addTextListener(_emit);
+    _title = EditorTextController(text: spec.title, searchFieldId: 'title')
+      ..addTextListener(_emit);
     _entries = spec.entries.map((e) => _EntryControllers(e, _emit)).toList();
     // A fresh slide carries only the header, because blank rows have no
     // business on disk. The editor hands out the first one to fill in.
@@ -139,6 +140,12 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _entries.length; i++) {
+      _entries[i].label.searchFieldId = 'tableRows.${i + 1}.0';
+      _entries[i].value.searchFieldId = 'tableRows.${i + 1}.1';
+      _entries[i].previous.searchFieldId = 'tableRows.${i + 1}.2';
+      _entries[i].unit.searchFieldId = 'tableRows.${i + 1}.3';
+    }
     final l10n = context.l10n;
     final full = _entries.length >= scorecardMaxEntries;
     return editorScrollList(

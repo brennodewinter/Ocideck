@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/question.dart';
 import '../../services/image_service.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 import '_editor_field.dart';
 
 /// Editor voor het matching-vraagtype. Aparte widget zodat _QuestionEditorState
@@ -96,6 +97,7 @@ class MatchingKindEditor extends StatelessWidget {
           child: _LabeledField(
             label: '${l10n.d('Links')} ${i + 1}',
             value: pairs[i].left,
+            searchFieldId: 'question.pairs.$i.left',
             onChanged: (v) {
               final next = [...pairs];
               next[i] = pairs[i].copyWith(left: v);
@@ -111,6 +113,7 @@ class MatchingKindEditor extends StatelessWidget {
           child: _LabeledField(
             label: '${l10n.d('Rechts')} ${i + 1}',
             value: pairs[i].right,
+            searchFieldId: 'question.pairs.$i.right',
             onChanged: (v) {
               final next = [...pairs];
               next[i] = pairs[i].copyWith(right: v);
@@ -139,6 +142,7 @@ class MatchingKindEditor extends StatelessWidget {
           child: _LabeledField(
             label: '${l10n.d('Afleider')} ${i + 1}',
             value: distractors[i],
+            searchFieldId: 'question.distractors.$i',
             onChanged: (v) {
               final next = [...distractors];
               next[i] = v;
@@ -311,6 +315,7 @@ class FillInKindEditor extends StatelessWidget {
               child: _LabeledField(
                 label: l10n.d('Placeholder'),
                 value: field.placeholder,
+                searchFieldId: 'question.fields.$i',
                 onChanged: (value) {
                   final next = [...fields];
                   next[i] = field.copyWith(placeholder: value);
@@ -319,6 +324,17 @@ class FillInKindEditor extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: 6),
+        _LabeledField(
+          label: l10n.d('Eenheid'),
+          value: field.unit,
+          searchFieldId: 'question.fields.$i.unit',
+          onChanged: (value) {
+            final next = [...fields];
+            next[i] = field.copyWith(unit: value);
+            onFieldsChanged(next);
+          },
         ),
       ],
     );
@@ -491,6 +507,7 @@ class HotspotKindEditor extends StatelessWidget {
               child: _LabeledField(
                 label: l10n.d('Label (optioneel)'),
                 value: region.label,
+                searchFieldId: 'question.regions.$i',
                 onChanged: (value) {
                   final next = [...regions];
                   next[i] = region.copyWith(label: value);
@@ -540,37 +557,60 @@ class HotspotKindEditor extends StatelessWidget {
 }
 
 /// Een eenvoudig gelabeld tekstveld met onChanged.
-class _LabeledField extends StatelessWidget {
+class _LabeledField extends StatefulWidget {
+  final String? searchFieldId;
   final String label;
   final String value;
   final ValueChanged<String> onChanged;
 
   const _LabeledField({
+    this.searchFieldId,
     required this.label,
     required this.value,
     required this.onChanged,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: AppTheme.slate500,
-          ),
-        ),
-        const SizedBox(height: 5),
-        TextField(
-          controller: TextEditingController(text: value),
-          onChanged: onChanged,
-          maxLines: 1,
-        ),
-      ],
-    );
+  State<_LabeledField> createState() => _LabeledFieldState();
+}
+
+class _LabeledFieldState extends State<_LabeledField> {
+  late final EditorTextController _controller = EditorTextController(
+    text: widget.value,
+    searchFieldId: widget.searchFieldId,
+  );
+
+  @override
+  void didUpdateWidget(_LabeledField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller.searchFieldId = widget.searchFieldId;
+    if (widget.value != _controller.text) _controller.text = widget.value;
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        widget.label,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: AppTheme.slate500,
+        ),
+      ),
+      const SizedBox(height: 5),
+      TextField(
+        controller: _controller,
+        onChanged: widget.onChanged,
+        maxLines: 1,
+      ),
+    ],
+  );
 }

@@ -87,10 +87,14 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _standard = EditorTextController(text: spec.standardLabel)
-      ..addTextListener(_emit);
-    _scope = EditorTextController(text: widget.slide.checklistScope)
-      ..addTextListener(_emit);
+    _standard = EditorTextController(
+      text: spec.standardLabel,
+      searchFieldId: 'title',
+    )..addTextListener(_emit);
+    _scope = EditorTextController(
+      text: widget.slide.checklistScope,
+      searchFieldId: 'checklistScope',
+    )..addTextListener(_emit);
     _rows = spec.rows.map((r) => _RowControllers(r, _emit)).toList();
     if (_rows.isEmpty) _rows = [_RowControllers(const ChecklistRow(), _emit)];
   }
@@ -160,6 +164,12 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _rows.length; i++) {
+      _rows[i].id.searchFieldId = 'tableRows.${i + 1}.0';
+      _rows[i].test.searchFieldId = 'tableRows.${i + 1}.1';
+      _rows[i].finding.searchFieldId = 'tableRows.${i + 1}.3';
+      _rows[i].note.searchFieldId = 'tableRows.${i + 1}.4';
+    }
     final l10n = context.l10n;
     final deck = ref.watch(deckProvider.select((s) => s.deck));
     final templates = ref.watch(

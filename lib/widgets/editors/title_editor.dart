@@ -49,9 +49,17 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
   @override
   void initState() {
     super.initState();
-    _title = newController(widget.slide.title, _emit);
-    _subtitle = newController(widget.slide.subtitle, _emit);
-    _details = newController(widget.slide.customMarkdown, _emit);
+    _title = newController(widget.slide.title, _emit, searchFieldId: 'title');
+    _subtitle = newController(
+      widget.slide.subtitle,
+      _emit,
+      searchFieldId: 'subtitle',
+    );
+    _details = newController(
+      widget.slide.customMarkdown,
+      _emit,
+      searchFieldId: 'customMarkdown',
+    );
     if (widget.slide.imageSize > 0) _zoomBeforeFill = widget.slide.imageSize;
   }
 

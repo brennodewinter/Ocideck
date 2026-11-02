@@ -164,7 +164,8 @@ class TableEditController extends ChangeNotifier {
     for (final row in _cells) [for (final cell in row) cell.text],
   ];
 
-  EditorTextController cellController(int r, int c) => _cells[r][c];
+  EditorTextController cellController(int r, int c) =>
+      _cells[r][c]..searchFieldId = 'tableRows.$r.$c';
   FocusNode focusNode(int r, int c) => _nodes[r][c];
 
   /// Neemt [raw] over als raster, rechthoekig gemaakt op de langste rij. Een

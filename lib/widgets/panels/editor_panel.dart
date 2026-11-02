@@ -29,6 +29,8 @@ import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../dialogs/add_slide_dialog.dart';
 import '../editors/slide_editor_registry.dart';
+import '../editors/deck_search_workspace.dart';
+import '../editors/deck_search_target.dart';
 import '../editors/slide_type_help.dart';
 import '../panels/slide_quality_panel.dart';
 import '../editors/markdown_deck_editor.dart';
@@ -43,8 +45,16 @@ part 'editor_panel_slide_settings.dart';
 part 'editor_panel_view_limit.dart';
 part 'editor_panel_notes.dart';
 
-class EditorPanel extends ConsumerWidget {
+class EditorPanel extends StatelessWidget {
   const EditorPanel({super.key});
+
+  @override
+  Widget build(BuildContext context) =>
+      const DeckSearchWorkspace(child: _EditorPanelContent());
+}
+
+class _EditorPanelContent extends ConsumerWidget {
+  const _EditorPanelContent();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

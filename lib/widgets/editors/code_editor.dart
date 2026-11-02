@@ -57,11 +57,17 @@ class _CodeEditorState extends State<CodeEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
     _title.addTextListener(
       () => widget.onUpdate(widget.slide.copyWith(title: _title.text)),
     );
-    _code = EditorTextController(text: widget.slide.customMarkdown);
+    _code = EditorTextController(
+      text: widget.slide.customMarkdown,
+      searchFieldId: 'customMarkdown',
+    );
     _code.addTextListener(
       () => widget.onUpdate(widget.slide.copyWith(customMarkdown: _code.text)),
     );

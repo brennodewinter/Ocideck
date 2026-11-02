@@ -87,8 +87,14 @@ class _QuestionEditorState extends State<QuestionEditor> {
     _hasValidAnswerCount = spec.hasValidAnswerCount;
     _sourceAnswerCount = spec.sourceAnswerCount;
     _sourceAnswerLimit = spec.answerCountLimit;
-    _title = EditorTextController(text: widget.slide.title);
-    _prompt = EditorTextController(text: spec.prompt);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
+    _prompt = EditorTextController(
+      text: spec.prompt,
+      searchFieldId: 'question.prompt',
+    );
     _timeLimit = EditorTextController(
       text: spec.timeLimitSeconds > 0 ? '${spec.timeLimitSeconds}' : '',
     );
@@ -240,6 +246,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _answers.length; i++) {
+      _answers[i].searchFieldId = 'question.answers.$i';
+    }
     final l10n = context.l10n;
     if (!_hasValidAnswerCount) return _invalidAnswerCountNotice(l10n);
     final isTrueFalse = _kind == QuestionKind.trueFalse;
