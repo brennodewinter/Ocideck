@@ -6,7 +6,8 @@ OciDeck is a privacy-first Marp presentation builder for desktop and web, with n
 application backend — everything runs locally. This folder holds the project
 documentation. Start here and jump to what you need.
 
-> **Status:** alpha — releases are tagged (latest `0.1.1`, 2026-07-27). See
+> **Status:** alpha — releases are tagged; the releases feed on the forge
+> carries the latest. See
 > [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and
 > [`../SECURITY.md`](../SECURITY.md) under *Supported versions*.
 >

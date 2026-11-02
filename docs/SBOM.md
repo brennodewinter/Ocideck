@@ -265,7 +265,7 @@ primary product.)*
 | §1 — SBOM in a commonly used, machine-readable format, covering ≥ top-level deps | `sbom/ocideck.cdx.json` (CycloneDX 1.6) + `sbom/ocideck.spdx.json` (SPDX 2.3), covering **all** components **and the relations between them** — see above |
 | §1 — identify and document components | Generated from `pubspec.lock` / `MANIFEST.json` / `pubspec.yaml`; completeness, graph reachability and supplier presence enforced by `test/sbom_test.dart` |
 | §2 — address and remediate vulnerabilities without delay | `make deps-check` queries [OSV](https://osv.dev) for the vendored JS bundles; the CycloneDX SBOM feeds external scanners (Dependency-Track / osv-scanner) for the Dart/Flutter graph |
-| Keeping the documentation up to date | `make sbom-verify` staleness gate in the test suite (`make check`); reproducible resolution via the committed `pubspec.lock` (`--enforce-lockfile` is declared in the CI workflow, which is not currently running) |
+| Keeping the documentation up to date | `make sbom-verify` staleness gate in the test suite (`make check`); reproducible resolution via the committed `pubspec.lock` (`--enforce-lockfile` is declared in the CI workflows on the Forgejo Actions runner) |
 
 ## See also
 

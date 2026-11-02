@@ -181,8 +181,10 @@ wholly inside a browser tab. Areas of particular interest:
 
 `make deps-check` queries OSV for every pinned bundle in
 `assets/web_export/MANIFEST.json`; it is part of `make check-full`, which the
-committer runs before a dependency or web-facing change (the CI workflow that
-also declares it does not currently run — the remote is Forgejo with no runner).
+committer runs before a dependency or web-facing change. On the Forgejo
+Actions runner the daily time-degrading checks repeat the same OSV query
+(`time-degrading-checks.yml`), and `scans.yml` repeats the secret and SAST
+scans on manual dispatch.
 As of the last review all
 pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.12, mermaid 11.16.0,
 MathJax 3.2.2) carry **no known advisories**. One tracked (non-urgent)
@@ -523,7 +525,10 @@ OS-level process isolation. The `com.apple.security.cs.allow-jit` entitlement in
 
 ## Supported versions
 
-Releases are tagged (latest `0.1.1`, 2026-07-27). The app displays its version
+Releases are tagged — the latest is always the top of the
+[releases feed](#subscribing-rather-than-remembering-to-look), deliberately
+not restated here (the version named in this spot went stale twice already).
+The app displays its version
 under **Settings → Over OciDeck**, but the version number only changes when
 someone bumps `pubspec.yaml`, which does not happen on every commit, so many
 different commits on the default branch can show the same number. Quoting it

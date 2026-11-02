@@ -770,11 +770,11 @@ than a formal mock framework — see the `dev_dependencies` in `pubspec.yaml`.
 
 ## Compatibility
 
-OciDeck has never tagged a release and has no versioning scheme, so there is no
-version these interfaces are stable *against* — see
-[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md). They are internal and change freely
-between commits; the `.md`/Marp on-disk format is the stable contract and is
-documented in [`docs/FILE_FORMAT.md`](FILE_FORMAT.md).
+These interfaces are stable against no release — they are internal and change
+freely between commits; see [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md). The
+`.md`/Marp on-disk format is the stable contract and is documented in
+[`docs/FILE_FORMAT.md`](FILE_FORMAT.md). *(Corrected 2026-11-03: this claimed
+OciDeck had never tagged a release — releases exist since `0.1.0`.)*
 
 *(Corrected 2026-07-22: this read "pre-release (currently 0.1.0)", which reads as
 a version claim. `0.1.0+1` is a string in `pubspec.yaml`; no tag carries it and

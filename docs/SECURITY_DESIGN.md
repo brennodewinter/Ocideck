@@ -5,15 +5,18 @@
 This document describes the security design principles and the concrete
 mechanisms that enforce them. Where a mechanism is implemented, the source is
 cited so the claim can be checked against the code — the code is the source of
-truth. OciDeck has never tagged a release, so there is no version to which this
-description is fixed — it describes the default branch, and details may change;
-but the invariants below are enforced by the `make check` / `make check-full`
-gate, not just documented. (Since 2026-07-23 the Forgejo instance has an Actions
-runner. The release gate runs `make check-no-coverage` on a `v*` tag
-(#790/#796/#797); the secret and SAST scans run on every pull request
-(`scans.yml`, #778); `make check` and `make check-full` otherwise remain the
-committer's local run. The workflows under `.github/` are reference definitions
-for a GitHub mirror and do not execute there.)
+truth. Releases are tagged (see `SECURITY.md`, *Supported versions*), but this
+document is not fixed to one — it describes the default branch, and details may
+change; the invariants below are enforced by the `make check` /
+`make check-full` gate, not just documented. (The Forgejo instance has an
+Actions runner. The release gate runs `make check-no-coverage` on a `v*` tag
+(#790/#796/#797); the secret and SAST scans (`scans.yml`, #778) and the static
+gate run on manual dispatch, and the time-degrading checks run daily;
+`make check` and `make check-full` otherwise remain the committer's local run.
+The workflows under `.github/` are reference definitions for a GitHub mirror
+and do not execute there. Corrected 2026-11-03: this said the scans ran on
+every pull request — that trigger was removed when `make check-full` became
+the committer-side gate, and it said no release had ever been tagged.)
 
 ## Overview
 
