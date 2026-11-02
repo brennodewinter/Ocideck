@@ -766,3 +766,50 @@ Widget _documentListRow(
   // which is the only way it stays right in all thirty languages.
   return Semantics(checked: it.checked, child: row);
 }
+
+({int end, _Block block})? _documentFenceAt(List<String> lines, int index) {
+  final fence = markdownFenceOpen(lines[index].trim());
+  if (fence == null) return null;
+  final start = index + 1;
+  var end = start;
+  while (end < lines.length && !fence.closes(lines[end].trim())) {
+    end++;
+  }
+  final code = lines.sublist(start, end).join('\n');
+  return (
+    end: end < lines.length ? end + 1 : end,
+    block: _Block(switch (fence.language) {
+      'mermaid' => _Kind.mermaid,
+      'chart' => _Kind.chart,
+      _ => _Kind.code,
+    }, text: code),
+  );
+}
+
+({int end, _Block block}) _documentQuoteAt(List<String> lines, int index) {
+  final quote = <String>[];
+  var end = index;
+  while (end < lines.length && lines[end].trimLeft().startsWith('>')) {
+    quote.add(lines[end].trimLeft().replaceFirst(RegExp(r'^>\s?'), ''));
+    end++;
+  }
+  return (end: end, block: _Block(_Kind.quote, text: quote.join('\n')));
+}
+
+({int end, _Block block}) _documentListAt(List<String> lines, int index) {
+  final items = <_ListLine>[];
+  var end = index;
+  while (end < lines.length) {
+    final item = _listItem(lines[end]);
+    if (item != null) {
+      items.add(item);
+      end++;
+      continue;
+    }
+    // Een soft-wrap hoort bij het voorafgaande item, tot een leegte of nieuw blok.
+    if (items.isEmpty || !_isParagraphLine(lines[end])) break;
+    items[items.length - 1] = items.last.continued(lines[end].trim());
+    end++;
+  }
+  return (end: end, block: _Block(_Kind.list, items: items));
+}

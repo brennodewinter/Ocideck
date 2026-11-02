@@ -553,26 +553,9 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // Fenced block: ``` … ``` (or ~~~). The info string after the opening
-      // fence selects the renderer: `mermaid` is drawn as a diagram, everything
-      // else is a monospace code block.
-      final fence = markdownFenceOpen(trimmed);
-      if (fence != null) {
-        final lang = fence.language;
-        final start = i + 1;
-        var end = start;
-        while (end < lines.length && !fence.closes(lines[end].trim())) {
-          end++;
-        }
-        final code = lines.sublist(start, end).join('\n');
-        blocks.add(
-          _Block(switch (lang) {
-            'mermaid' => _Kind.mermaid,
-            'chart' => _Kind.chart,
-            _ => _Kind.code,
-          }, text: code),
-        );
-        i = end < lines.length ? end + 1 : end;
+      if (_documentFenceAt(lines, i) case final parsed?) {
+        blocks.add(parsed.block);
+        i = parsed.end;
         continue;
       }
 
@@ -632,38 +615,17 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // Block quote: one or more consecutive `> ` lines.
       if (trimmed.startsWith('>')) {
-        final quote = <String>[];
-        while (i < lines.length && lines[i].trimLeft().startsWith('>')) {
-          quote.add(lines[i].trimLeft().replaceFirst(RegExp(r'^>\s?'), ''));
-          i++;
-        }
-        blocks.add(_Block(_Kind.quote, text: quote.join('\n')));
+        final parsed = _documentQuoteAt(lines, i);
+        blocks.add(parsed.block);
+        i = parsed.end;
         continue;
       }
 
-      // List (bulleted or numbered): consecutive item lines, indent = nesting.
       if (_listItem(line) != null) {
-        final items = <_ListLine>[];
-        while (i < lines.length) {
-          final item = _listItem(lines[i]);
-          if (item != null) {
-            items.add(item);
-            i++;
-            continue;
-          }
-          // Een regel die in de bron is afgebroken hoort nog bij het item
-          // erboven (CommonMark noemt dat een lazy continuation). Zonder deze
-          // tak eindigde de lijst hier en werd de rest van de zin een losse
-          // alinea: zonder bolletje, op de linkermarge, met de lijst in tweeën.
-          // Een lege regel sluit de lijst wél af, en een regel die zelf een
-          // blok begint (kop, streep, citaat, tabel, fence) ook.
-          if (items.isEmpty || !_isParagraphLine(lines[i])) break;
-          items[items.length - 1] = items.last.continued(lines[i].trim());
-          i++;
-        }
-        blocks.add(_Block(_Kind.list, items: items));
+        final parsed = _documentListAt(lines, i);
+        blocks.add(parsed.block);
+        i = parsed.end;
         continue;
       }
 
