@@ -687,8 +687,8 @@ not skip deployment: the live bundle manifest must also match exactly. The
 existing atomic server swap, rollback and live-content checks still apply.
 
 The download-page update commits to the website repository; its separate deploy
-workflow runs asynchronously. Release automation waits up to 45 minutes for the
-actual public download links (`WEBSITE_WAIT_SECONDS`), without starting a second
+workflow runs asynchronously. Release automation waits for the actual public download links within the
+configured `WEBSITE_WAIT_SECONDS` deadline, without starting a second
 publication or treating the repository update as proof that the site is live.
 
 `--status` runs its probes in parallel under one fixed total deadline
