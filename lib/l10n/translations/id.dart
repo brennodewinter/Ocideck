@@ -1605,6 +1605,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Ga naar de brontabel': 'Buka tabel sumber',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Tabel ini adalah salinan tabel sumber "{bron}". Edit sumbernya dan pilih Segarkan, atau lepaskan tampilan sebagai snapshot.',
   'Quizvragen': 'Pertanyaan kuis',
   'Met vragen': 'Dengan pertanyaan',
   'Zonder vragen': 'Tanpa pertanyaan',

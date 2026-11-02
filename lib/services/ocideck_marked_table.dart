@@ -41,7 +41,7 @@ class OciMarkedTable {
   /// De tabelregels: kop, scheidingsrij en body.
   final List<String> tableLines;
 
-  const OciMarkedTable({
+  OciMarkedTable({
     required this.blockStart,
     required this.markerEnd,
     required this.tableStart,
@@ -81,7 +81,13 @@ class OciMarkedTable {
   }
 
   /// De gedecodeerde tabel: eerste rij de koppen, daarna de body-rijen.
-  List<List<String>> get decodedRows => decodeMarkdownTableRows(tableLines);
+  /// Luie memo: toegangen als `bodyRows.length` in een lus en
+  /// `contractRows[i]` per rij decoden anders de hele tabel opnieuw per
+  /// aanroep — dat maakte de kwaliteitscontrole kwadratisch in het
+  /// aantal rijen (#2710).
+  late final List<List<String>> decodedRows = decodeMarkdownTableRows(
+    tableLines,
+  );
 
   List<String> get headerCells {
     final rows = decodedRows;
@@ -91,7 +97,7 @@ class OciMarkedTable {
   /// Alleen de body-rijen (zonder kop). Een ragged rij krijgt geen padding —
   /// de contractlaag meldt die via de kwaliteitscontrole, niet door stil
   /// aan te vullen.
-  List<List<String>> get bodyRows => decodedRows.skip(1).toList();
+  late final List<List<String>> bodyRows = decodedRows.skip(1).toList();
 
   /// De kolomindex van contract-sleutel [key], of `-1` als `cols=` hem niet
   /// noemt. Cellen voorbij [cols].length zijn vrije auteurskolommen en
@@ -112,7 +118,7 @@ class OciMarkedTable {
   /// Elke body-rij als `sleutel → cel` over de gedeelde prefix van
   /// [cols] en de rijbreedte. Vrije kolommen voorbij `cols=` en ontbrekende
   /// cellen blijven zichtbaar via [bodyRows] zelf.
-  List<Map<String, String>> get contractRows => [
+  late final List<Map<String, String>> contractRows = [
     for (final row in bodyRows)
       {for (var c = 0; c < cols.length && c < row.length; c++) cols[c]: row[c]},
   ];

@@ -1606,6 +1606,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Ga naar de brontabel': 'Přejít na zdrojovou tabulku',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Tato tabulka je opis zdrojové tabulky "{bron}". Upravte zdroj a zvolte Obnovit, nebo odpojte zobrazení jako snímek.',
   'Quizvragen': 'Kvízové otázky',
   'Met vragen': 'S otázkami',
   'Zonder vragen': 'Bez otázek',

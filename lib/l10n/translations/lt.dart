@@ -1611,6 +1611,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Ga naar de brontabel': 'Eiti į šaltinio lentelę',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Ši lentelė yra šaltinio lentelės "{bron}" kopija. Redaguokite šaltinį ir pasirinkite Atnaujinti, arba atjunkite rodinį kaip momentinę kopiją.',
   'Quizvragen': 'Viktorinos klausimai',
   'Met vragen': 'Su klausimais',
   'Zonder vragen': 'Be klausimų',

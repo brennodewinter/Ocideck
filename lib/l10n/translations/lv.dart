@@ -1603,6 +1603,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Ga naar de brontabel': 'Doties uz avota tabulu',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Šī tabula ir avota tabulas "{bron}" kopija. Rediģējiet avotu un izvēlieties Atsvaidzināt, vai atvienojiet skatu kā momentuzņēmumu.',
   'Quizvragen': 'Viktorīnas jautājumi',
   'Met vragen': 'Ar jautājumiem',
   'Zonder vragen': 'Bez jautājumiem',

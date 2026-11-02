@@ -1598,6 +1598,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Ga naar de brontabel': 'Mine lähtetabelisse',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'See tabel on lähtetabeli "{bron}" koopia. Muuda lähtetabelit ja vali Värskenda või ühenda vaade hetkepildina lahti.',
   'Quizvragen': 'Viktoriiniküsimused',
   'Met vragen': 'Küsimustega',
   'Zonder vragen': 'Küsimusteta',

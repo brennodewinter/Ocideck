@@ -254,6 +254,18 @@ void main() {
       );
     });
 
+    test('gedecodeerde rijen worden één keer berekend (#2710)', () {
+      const source =
+          '<!-- ocideck:risks v1 id=hoofd cols=id,failure -->\n'
+          '| ID | Faalwijze |\n|---|---|\n| R-001 | Klep hangt |\n';
+      final t = scanOciMarkedTables(source).tables.single;
+      // Herhaalde toegang — zoals een lus over rijen — deelt dezelfde
+      // memo in plaats van de tabel telkens opnieuw te decoderen.
+      expect(identical(t.decodedRows, t.decodedRows), isTrue);
+      expect(identical(t.bodyRows, t.bodyRows), isTrue);
+      expect(identical(t.contractRows, t.contractRows), isTrue);
+    });
+
     test('het voorbeelddossier overleeft een ongemoeide rondreis', () {
       final source = File(
         'docs/design/examples/risk-dossier.md',

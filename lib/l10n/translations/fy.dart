@@ -652,6 +652,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Ga naar de brontabel': 'Gean nei de boarnetabel',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Dizze tabel is in ôfskrift fan de boarnetabel "{bron}". Bewurkje de boarne en kies Fernije, of untkeppelje de werjefte as momintopname.',
   'Quizvragen': 'Kwisfragen',
   'Met vragen': 'Mei fragen',
   'Zonder vragen': 'Sûnder fragen',

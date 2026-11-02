@@ -1630,6 +1630,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Ga naar de brontabel': 'Μετάβαση στον πίνακα προέλευσης',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Αυτός ο πίνακας είναι αντίγραφο του πίνακα προέλευσης "{bron}". Επεξεργαστείτε την προέλευση και επιλέξτε Ανανέωση, ή αποσυνδέστε την προβολή ως στιγμιότυπο.',
   'Quizvragen': 'Ερωτήσεις κουίζ',
   'Met vragen': 'Με ερωτήσεις',
   'Zonder vragen': 'Χωρίς ερωτήσεις',

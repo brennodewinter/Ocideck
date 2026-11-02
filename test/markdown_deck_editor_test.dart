@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/models/markdown_writing_suggestion.dart';
+import 'package:ocideck/services/deck_source_checks.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
 import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 
@@ -37,6 +38,13 @@ Future<void> sendControlKey(WidgetTester tester, LogicalKeyboardKey key) async {
 }
 
 void main() {
+  // De inspectieronde draait productie op een achtergrond-isolate (#2713);
+  // in widgettests valt zo'n resultaat niet binnen pump()-tijden, dus loopt
+  // de bundel hier synchroon mee.
+  setUpAll(() {
+    deckChecksRunner = (args) async => deckSourceChecks(args);
+  });
+
   testWidgets('large deck builds only visible line numbers while scrolling', (
     tester,
   ) async {

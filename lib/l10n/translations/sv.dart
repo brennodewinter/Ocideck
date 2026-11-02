@@ -1604,6 +1604,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Ga naar de brontabel': 'Gå till källtabellen',
+  'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
+      'Den här tabellen är en avskrift av källtabellen "{bron}". Redigera källan och välj Uppdatera, eller koppla loss vyn som en ögonblicksbild.',
   'Quizvragen': 'Quizfrågor',
   'Met vragen': 'Med frågor',
   'Zonder vragen': 'Utan frågor',

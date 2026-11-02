@@ -741,12 +741,12 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
             table != null)
           _bowtieDiagramView(context, table)
         else
-          _cachedTableView(source, isView),
+          _cachedTableView(source, isView, carrier),
       ],
     );
   }
 
-  Widget _cachedTableView(String source, bool isView) {
+  Widget _cachedTableView(String source, bool isView, OciTableMarker? carrier) {
     final editor = isView ? null : _editor;
     if (_tableView == null ||
         _renderedSource != source ||
@@ -765,7 +765,80 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
         onSortTableColumn: isView ? null : _sort,
       );
     }
+    // De cellen van een weergave zijn bewust geen invoervelden (D2), maar een
+    // dooie tik legde ook niets uit — dat las als een kapotte tabel (#2709).
+    if (isView && carrier != null) {
+      return GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => unawaited(_explainLinkedView(carrier)),
+        child: _tableView!,
+      );
+    }
     return _tableView!;
+  }
+
+  /// Tik op een gekoppelde weergave: leg uit waar de data woont en bied de
+  /// twee wegen die er zijn — de brontabel opzoeken, of de afschrijving
+  /// loskoppelen tot een gewone (bewerkbare) tabel.
+  Future<void> _explainLinkedView(OciTableMarker carrier) async {
+    final l10n = context.l10n;
+    final sourceId = carrier.attr('source') ?? '';
+    final action = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.d('Gekoppelde weergave')),
+        content: Text(
+          l10n
+              .d(
+                'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.',
+              )
+              .replaceAll('{bron}', sourceId),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.t('close')),
+          ),
+          if (sourceId.isNotEmpty)
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, 'source'),
+              child: Text(l10n.d('Ga naar de brontabel')),
+            ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, 'detach'),
+            child: Text(l10n.d('Loskoppelen als momentopname')),
+          ),
+        ],
+      ),
+    );
+    if (!mounted) return;
+    if (action == 'detach') return _detach();
+    if (action == 'source') _revealSourceTable(sourceId);
+  }
+
+  /// Zet de documentcursor op de embed van de brontabel met `id=<sourceId>`,
+  /// zodat Quill die in beeld schuift. Een weergave zonder vindbare bron
+  /// laat de cursor gewoon staan — de kwaliteitscontrole meldt die staat al.
+  void _revealSourceTable(String sourceId) {
+    final controller = widget.embedContext.controller;
+    var offset = 0;
+    for (final op in controller.document.toDelta().toList()) {
+      final data = op.data;
+      final block = data is Map
+          ? data[EmbeddableOciMarkedTable.blockType]
+          : null;
+      if (block is String) {
+        final found = scanOciMarkedTables(block).tables.firstOrNull;
+        if (found?.id == sourceId && found?.kind != OciMarkerKinds.view) {
+          controller.updateSelection(
+            TextSelection.collapsed(offset: offset),
+            ChangeSource.local,
+          );
+          return;
+        }
+      }
+      offset += op.length ?? 0;
+    }
   }
 
   /// De diagram-stand van #2496: het afgeleide Mermaid-plaatje boven de
