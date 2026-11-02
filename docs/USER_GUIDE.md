@@ -4302,8 +4302,10 @@ CTQ tree, or Ishikawa); depth is leading tabs on each bullet. Mark root causes
 inline as `**X-01**` (or `**Y-01**` for CTQ). On disk the slide is a bullet list
 plus `<!-- ocideck_template: five-whys -->` and `<!-- ocideck_layout: tree -->`
 (or `fishbone`). The engine lays out one Scene; preview and HTML export draw the
-same SVG. A deck that already contains a tree always opens and renders, module on
-or off — same rule as matrix and canvas.
+same SVG. The tree layout fills the slide with cards and arrows: a chain such
+as 5× Why descends on a diagonal, and a branching tree spreads its children.
+Fishbone stays a fishbone. A deck that already contains a tree always opens and renders,
+module on or off — same rule as matrix and canvas.
 
 **Flow slides.** With the module on, the add-slide picker also offers
 **Flow** — a process map, swimlane or VSM. Pick a template (process map,

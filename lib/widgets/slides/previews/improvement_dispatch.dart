@@ -13,7 +13,12 @@ extension _ImprovementPreviewDispatch on SlidePreviewWidget {
       case SlideType.canvas:
         return _CanvasPreview(slide: slide, w: w, languageCode: reportLanguage);
       case SlideType.tree:
-        return _TreePreview(slide: slide, w: w, languageCode: reportLanguage);
+        return _TreePreview(
+          slide: slide,
+          w: w,
+          languageCode: reportLanguage,
+          profile: themeProfile,
+        );
       case SlideType.flow:
         return _FlowPreview(slide: slide, w: w, languageCode: reportLanguage);
       case SlideType.phaseGate:

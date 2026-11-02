@@ -730,7 +730,7 @@ the data an improvement project collects — a tight spread far from zero.
 - `canvas_layout.dart` — the canvas engine: `buildCanvasScene` turns a template + regions into a `Scene` once for both backends.
 - `tree_spec.dart` — `TreeTemplate` / `TreeLayout` / bundled templates (5× Why, CTQ, Ishikawa). Templates are NL/EN data, not `d()` strings.
 - `tree_slide.dart` — bridge between a `tree` slide and golden-thread ids (`**X-01**`, `**Y-01**`), layout token, and starter bullets.
-- `tree_layout.dart` — the tree engine: `buildTreeScene` turns nested bullets into a `Scene` once for both backends.
+- `tree_layout.dart` — the tree engine: `buildTreeScene` turns nested bullets into a `Scene` once for both backends. The `tree` layout draws that hierarchy as cards and connectors across the slide (`tree_layout_hierarchy.dart`): a short chain, the 5× Why shape, descends on a diagonal so a 16:9 frame is actually used; a branching tree spreads children beside or below their parent. Fishbone stays its own painter. `treePaletteFromTheme` tints the cards from the slide background so the same text colour stays readable in light and dark. The Markdown on disk is still the nested list.
 - `flow_spec.dart` — `FlowTemplate` / `FlowLayout` / bundled templates (process map, swimlane, VSM) and step attributes. Templates are NL/EN data, not `d()` strings.
 - `flow_slide.dart` — bridge between a `flow` slide and the model: bullet steps with `::` attributes, template id, and layout token.
 - `flow_layout.dart` — the flow engine: `buildFlowScene` turns steps into a `Scene` once for both backends.

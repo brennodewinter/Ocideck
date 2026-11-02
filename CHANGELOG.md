@@ -8,6 +8,13 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- **Boomslides.** Een boom (zoals 5× Why) vult de dia met kaarten en pijlen
+  in plaats van inspringende bullets die bovenaan blijven staan. Een keten
+  daalt diagonaal af; een vertakte boom spreidt de kinderen. Op schijf blijft
+  het een geneste lijst. De visgraat is ongewijzigd.
+
 ## [0.7.6] — 2026-11-01
 
 

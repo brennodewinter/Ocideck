@@ -7,9 +7,13 @@ import '../../../theme/app_theme.dart';
 /// (PROCESS_IMPROVEMENT.md §7). Layout maths live in the engines; this only
 /// draws what they already decided.
 class ScenePainter extends CustomPainter {
-  ScenePainter(this.scene);
+  ScenePainter(this.scene, {this.fontFamily});
 
   final Scene scene;
+
+  /// Lettertype van de dia. Zonder dit valt de scene terug op het
+  /// platformletter, terwijl de rest van de dia het profielletter gebruikt.
+  final String? fontFamily;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -78,6 +82,7 @@ class ScenePainter extends CustomPainter {
               text: node.text,
               style: TextStyle(
                 color: AppTheme.parseHexColor(node.fill),
+                fontFamily: fontFamily,
                 fontSize: node.fontSize,
                 fontWeight:
                     FontWeight.values[((node.fontWeight / 100).round() - 1)
@@ -104,7 +109,8 @@ class ScenePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant ScenePainter old) => old.scene != scene;
+  bool shouldRepaint(covariant ScenePainter old) =>
+      old.scene != scene || old.fontFamily != fontFamily;
 }
 
 /// Widget wrapper so [ScenePainter] stays reachable from the widget tree /
