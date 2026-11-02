@@ -122,6 +122,34 @@ void main() {
       },
     );
 
+    // #2721: een `true` op "de schrijfbeurt is achterhaald" liet de aanroeper
+    // sluiten én de herstelkopie wissen terwijl het nieuwere deck alleen in
+    // het geheugen stond. Nu schrijft de lus door tot de schijf de levende
+    // deck bevat.
+    test(
+      'typing during a write re-saves the newer deck instead of reporting done (#2721)',
+      () async {
+        final md = MarkdownService();
+        final gate = Completer<void>();
+        final fs = _BlockingFileService(gate, md);
+        final n = DeckNotifier(md, fs);
+        n.loadDeck(_deck(), filePath: '/tmp/x.md');
+        n.addSlide(SlideType.bullets);
+
+        final first = n.save(); // blocks on the gate
+        n.addSlide(SlideType.bullets); // typed while the write was waiting
+        gate.complete();
+
+        expect(await first, isTrue);
+        expect(
+          fs.calls,
+          2,
+          reason: 'the stale write is followed by a write of the live deck',
+        );
+        expect(n.state.isDirty, isFalse);
+      },
+    );
+
     test(
       'a second save during a save is not re-run if the deck is already clean (#1952)',
       () async {
@@ -278,7 +306,7 @@ void main() {
 
   group('editing while a save is in flight', () {
     test(
-      'typing during the write is not rolled back, and stays dirty',
+      'typing during the write is not rolled back, and is saved through',
       () async {
         final gate = Completer<void>();
         final md = MarkdownService();
@@ -300,8 +328,9 @@ void main() {
         );
         expect(
           n.state.isDirty,
-          isTrue,
-          reason: 'the newer edits are not on disk, so the deck is still dirty',
+          isFalse,
+          reason:
+              '#2721: de lus schrijft door tot de schijf de levende deck bevat',
         );
       },
     );
