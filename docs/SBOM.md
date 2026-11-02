@@ -260,7 +260,7 @@ primary product.)*
 
 ## CRA mapping
 
-| CRA requirement (Annex I, Part II) | Where OciDeck satisfies it |
+| CRA item (Annex I, Part II) | Where this is done |
 | --- | --- |
 | §1 — SBOM in a commonly used, machine-readable format, covering ≥ top-level deps | `sbom/ocideck.cdx.json` (CycloneDX 1.6) + `sbom/ocideck.spdx.json` (SPDX 2.3), covering **all** components **and the relations between them** — see above |
 | §1 — identify and document components | Generated from `pubspec.lock` / `MANIFEST.json` / `pubspec.yaml`; completeness, graph reachability and supplier presence enforced by `test/sbom_test.dart` |

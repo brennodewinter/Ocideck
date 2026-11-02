@@ -1805,6 +1805,40 @@ Map<String, List<int>> rawTextTagsIn(Map<String, String> sources) {
   return perFile;
 }
 
+// ── CRA-plichtstaal in Markdown — een "vereist"-zin is een fabrikantenclaim ──
+//
+// Het positiebesluit (`assurance/CRA-2024-2847-positie.md`, #532) schrijft
+// voor: de Cyberweerbaarheidsverordening beschrijven ("as described in"),
+// nooit alsof zij iets van OciDeck vereist ("the SBOM the CRA requires",
+// "required by the CRA"). Zo'n zin wordt in een vragenlijst teruggeciteerd
+// als fabrikantenplicht — precies wat het besluit uitsluit (#2717). Een regel
+// die de wet zelf citeert noemt haar plichtsdrager ("manufacturer") en valt
+// hierbuiten; CHANGELOG.md is historie en wordt niet herschreven.
+final _craClaimedDuty = RegExp(
+  r'(cyber resilience act.{0,200}\brequir|\brequir\w*.{0,200}cyber resilience act|cyberweerbaarheidsverordening.{0,200}vereist|vereist.{0,200}cyberweerbaarheidsverordening)',
+  caseSensitive: false,
+);
+final _craDutyBearer = RegExp(r'manufacturer|fabrikant', caseSensitive: false);
+
+/// Regelnummers per Markdownbestand met een CRA-plichtzin. Pure functie over
+/// pad → bron, zodat de regel met verzonnen bestanden te voeren is.
+Map<String, List<int>> craDutyClaimsIn(Map<String, String> sources) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    if (path == 'CHANGELOG.md') return;
+    final hits = <int>[];
+    final lines = raw.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      final l = lines[i];
+      if (_craClaimedDuty.hasMatch(l) && !_craDutyBearer.hasMatch(l)) {
+        hits.add(i + 1);
+      }
+    }
+    if (hits.isNotEmpty) perFile[path] = hits;
+  });
+  return perFile;
+}
+
 /// De tekstbestanden waarin een achtergebleven markering schade doet: alles wat
 /// meereist met de app of wat een bijdrager leest.
 Iterable<File> _textFilesToScan() sync* {
@@ -1949,6 +1983,23 @@ void main() {
       '${sites.length} Markdownregel(s). Forgejo leest hem als echte HTML en '
       'slikt de rest van het document in (#2612). Zet de plaatshouder tussen '
       'backticks, of schrijf \\<title>:\n'
+      '    ${sites.join('\n    ')}',
+    );
+  }
+
+  final craDutyClaims = craDutyClaimsIn(markdownSources);
+  if (craDutyClaims.isNotEmpty) {
+    final sites = [
+      for (final entry in craDutyClaims.entries)
+        for (final line in entry.value) '${entry.key}:$line',
+    ];
+    failures.add(
+      'Een CRA-"vereist"-zin stelt een plicht alsof die voor OciDeck geldt '
+      '(${sites.length} regel(s)). Het positiebesluit '
+      '(assurance/CRA-2024-2847-positie.md) schrijft "as described in" voor, '
+      'nooit "required by" — zo\'n zin wordt elders als fabrikantenplicht '
+      'teruggeciteerd. Citeer je de wet zelf, noem dan haar plichtsdrager '
+      '("manufacturer"):\n'
       '    ${sites.join('\n    ')}',
     );
   }

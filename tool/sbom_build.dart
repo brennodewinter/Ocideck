@@ -1140,8 +1140,8 @@ String toMarkdown(Inventory inv) {
     'This is **${inv.root.name} ${inv.root.version}** (licence '
     '${inv.root.license}) and every third-party component it ships '
     '(${inv.components.length} in total), direct and transitive — the '
-    'inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I '
-    'Part II §1) requires.\n',
+    'inventory as described in the EU Cyber Resilience Act (Reg. (EU) '
+    '2024/2847, Annex I Part II §1).\n',
   );
   b.writeln(
     'The JSON documents carry **${inv.edgeCount} dependency relations** between '
