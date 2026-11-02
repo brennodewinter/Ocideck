@@ -217,7 +217,11 @@ const _artifactPrimitives = [
 ];
 
 final _rawDeckParam = RegExp(r'\b(Deck|List<Slide>)\b');
-final _projectedParam = RegExp(r'\b(AudienceDeck|ExportBundle)\b');
+// `ExportBundleFor` is de fabriek die alleen een ExportBundle teruggeeft.
+// De dialoog noemt dat type, niet de klasse zelf; de grens is dezelfde.
+final _projectedParam = RegExp(
+  r'\b(AudienceDeck|ExportBundle|ExportBundleFor)\b',
+);
 
 class _SurfaceScanner extends RecursiveAstVisitor<void> {
   _SurfaceScanner(this.path, this.source);
@@ -345,6 +349,8 @@ void main() {
     if (surface.kind != SurfaceKind.audience) return;
     // `ExportBundle` telt ook: die is niet te maken zonder een AudienceDeck
     // (zie zijn constructor), dus de grens houdt transitief stand.
+    // `ExportBundleFor` is diezelfde bundel, als de fabriek die het dialoog
+    // vasthoudt.
     if (!_projectedParam.hasMatch(params)) {
       problems.add('$key: eist geen AudienceDeck of ExportBundle');
     }
