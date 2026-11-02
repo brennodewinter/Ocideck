@@ -236,7 +236,8 @@ String buildBeamerMarkdown({
 }) => MarkdownService().generateDeck(
   Deck(
     title: 'Presentatie',
-    slides: slides,
+    // Notities blijven lokaal; ook de transportkopie bevat alleen publieksinhoud.
+    slides: [for (final slide in slides) slide.copyWith(notes: '')],
     projectPath: projectPath,
     themeProfile: themeProfile,
     tlp: tlp,

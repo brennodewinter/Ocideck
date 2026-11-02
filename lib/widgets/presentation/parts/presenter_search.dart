@@ -1,6 +1,10 @@
 // Part of the fullscreen_presenter library — see ../fullscreen_presenter.dart.
 part of '../fullscreen_presenter.dart';
 
+/// Telt alleen echte herberekeningen, los van selecties en focustikken.
+@visibleForTesting
+int debugPresenterSearchRecomputations = 0;
+
 typedef _PresenterSearchPage = ({Slide slide, int index, int page});
 
 class _PresenterSearchSession {
@@ -114,6 +118,29 @@ class _PresenterSearchDialog extends StatefulWidget {
 class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
   late final _query = TextEditingController(text: widget.session.query);
   final _scroll = ScrollController();
+  ({List<_PresenterSearchPage> pages, String query, bool notes})? _searchKey;
+  List<DeckTextMatch> _matches = const [];
+
+  List<DeckTextMatch> _searchMatches() {
+    final session = widget.session;
+    final key = (
+      pages: widget.pages,
+      query: session.query,
+      notes: session.notes,
+    );
+    if (_searchKey == key) return _matches;
+    assert(() {
+      debugPresenterSearchRecomputations++;
+      return true;
+    }());
+    final matches = searchDeckText(
+      Deck(title: '', slides: [for (final page in widget.pages) page.slide]),
+      session.query,
+      includeNotes: session.notes,
+    );
+    _searchKey = key;
+    return _matches = matches;
+  }
 
   @override
   void dispose() {
@@ -126,11 +153,7 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final session = widget.session;
-    final matches = searchDeckText(
-      Deck(title: '', slides: [for (final p in widget.pages) p.slide]),
-      session.query,
-      includeNotes: session.notes,
-    );
+    final matches = _searchMatches();
     final index = session.selected.clamp(
       0,
       matches.isEmpty ? 0 : matches.length - 1,
