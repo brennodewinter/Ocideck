@@ -458,6 +458,12 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
   }
 }
 
+/// How far a hovered pie/donut slice pops out, as a multiplier on its resting
+/// OUTER edge (not on the ring thickness — that made a donut pop ~5% while a
+/// pie popped 8%). Kept next to [radialChartRadii] because that margin exists
+/// to give this pop its headroom inside the surrounding ClipRect.
+const double kPieHoverScale = 1.15;
+
 /// Outer, ring and centre-hole radii for a pie/donut in a box whose shortest
 /// side is [available]. fl_chart draws a section's outer edge at
 /// `centerSpaceRadius + section.radius` (pie_chart_painter.dart), so both types
@@ -474,10 +480,10 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
   double w, {
   required bool donut,
 }) {
-  // Fill ~90% of the box (diameter 2·0.45·available); the small margin leaves
-  // room for the 8% hover-enlarge without clipping. The cap keeps a lone pie on
+  // Fill ~86% of the box (diameter 2·0.43·available); the margin leaves room
+  // for the kPieHoverScale pop without clipping. The cap keeps a lone pie on
   // a very wide plot from ballooning.
-  final outer = (available * 0.45).clamp(w * 0.03, w * 0.18);
+  final outer = (available * 0.43).clamp(w * 0.03, w * 0.18);
   // The donut hole fraction is shared with the HTML/SVG export (chart.dart), so
   // the same donut keeps the same proportions in the app, the PDF and the HTML.
   final hole = donut ? outer * kDonutHoleFraction : 0.0;

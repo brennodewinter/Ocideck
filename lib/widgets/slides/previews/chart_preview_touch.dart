@@ -292,7 +292,14 @@ class _HoverPieChartState extends State<_HoverPieChart> {
                     title: widget.showLabels && widget.values[i] / total >= 0.08
                         ? '${(widget.values[i] / total * 100).round()}%'
                         : '',
-                    radius: widget.radius * (hovered == i ? 1.08 : 1),
+                    // The pop scales the outer edge (hole + ring), not the ring
+                    // alone, so a donut slice reaches out just as far as a pie
+                    // slice instead of only thickening around its fixed hole.
+                    radius: hovered == i
+                        ? (widget.radius + widget.centerSpaceRadius) *
+                                  kPieHoverScale -
+                              widget.centerSpaceRadius
+                        : widget.radius,
                     titleStyle: widget.titleStyle.copyWith(
                       color: widget.labelColors[i],
                     ),
