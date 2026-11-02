@@ -1609,6 +1609,8 @@ const _dutchSourceAddFi = <String, String>{
       'Yksi HTML-tiedosto, jossa on aitoa tekstiä, otsikoita ja alt-tekstejä ja joka avautuu missä tahansa selaimessa ilman internetiä — taulukoiden, matematiikan, mermaidin ja kaavioiden kanssa.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Työskentele reaaliajassa WebDAV-palvelimella olevan esityksen parissa. Oletuksena pois päältä. Muutokset kulkevat deckin vieressä olevan työkansion kautta samalla palvelimella — ilman OciDeckin salausta.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'API-avain kulkee vain https-yhteydellä tai tähän laitteeseen — käytä https:ää tai jätä avain tyhjäksi',
   'Ga naar de brontabel': 'Siirry lähdetaulukkoon',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tämä taulukko on kopio lähdetaulukosta "{bron}". Muokkaa lähdettä ja valitse Päivitä, tai irrota näkymä tilannevedoksena.',

@@ -1602,6 +1602,8 @@ const _dutchSourceAddEt = <String, String>{
       'Üks HTML-fail tõelise teksti, pealkirjade ja alt-tekstidega, mis avaneb igas brauseris ilma internetita — tabelite, matemaatika, mermaidi ja diagrammidega.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Töötage reaalajas WebDAV-serveris oleva esitluse kallal. Vaikimisi välja lülitatud. Muudatused liiguvad deki kõrval oleva töökausta kaudu samal serveril — ilma OciDecki krüpteerimiseta.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'API-võti liigub ainult üle https-i või sellesse seadmesse — kasuta https-i või jäta võti tühjaks',
   'Ga naar de brontabel': 'Mine lähtetabelisse',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'See tabel on lähtetabeli "{bron}" koopia. Muuda lähtetabelit ja vali Värskenda või ühenda vaade hetkepildina lahti.',

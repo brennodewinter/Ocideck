@@ -1615,6 +1615,8 @@ const _dutchSourceAddLt = <String, String>{
       'Vienas HTML failas su tikru tekstu, antraštėmis ir alternatyviaisiais tekstais, kuris atsidaro bet kurioje naršyklėje be interneto — su lentelėmis, matematika, mermaid ir grafikais.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Dirbkite tiesiogiai prie WebDAV serveryje esančios pateikties. Pagal numatymą išjungta. Pakeitimai keliauja per darbinį aplanką šalia deko tame pačiame serveryje — be OciDeck šifravimo.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'API raktas siunčiamas tik per https arba į šį įrenginį — naudokite https arba palikite raktą tuščią',
   'Ga naar de brontabel': 'Eiti į šaltinio lentelę',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ši lentelė yra šaltinio lentelės "{bron}" kopija. Redaguokite šaltinį ir pasirinkite Atnaujinti, arba atjunkite rodinį kaip momentinę kopiją.',

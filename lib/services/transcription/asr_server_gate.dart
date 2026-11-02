@@ -53,6 +53,12 @@ enum AsrGateDenial {
   /// een https-pagina — de browser blokkeert dat gegarandeerd, dus wij
   /// weigeren eerder en eerlijker.
   insecureHttpOnWeb,
+
+  /// Er staat een API-sleutel, maar de route gaat onversleuteld (`http`/`ws`)
+  /// naar een ander apparaat. Meesturen zet hem leesbaar op het netwerk; hem
+  /// stil weglaten levert een 401 die naar de sleutel wijst. De poort zelf
+  /// kent de sleutel niet, de engines leggen deze reden op (#2758).
+  keyNeedsTls,
 }
 
 /// Besluit van de poort.
@@ -78,6 +84,16 @@ final class AsrGateDeny extends AsrGateDecision {
 /// De egresspoort voor ASR-serververzoeken.
 final class AsrServerGate {
   AsrServerGate._();
+
+  /// Of een API-sleutel over [allow] mee mag (#2758): alleen versleuteld
+  /// (`https`/`wss`), of naar dit apparaat zelf — de loopbackroute, die het
+  /// transport tot loopback beperkt, of een loopback-literal. Dezelfde regel
+  /// als `AiClientService`, die kale `http` buiten loopback al weigerde.
+  static bool keyMayTravel(AsrGateAllow allow) =>
+      allow.uri.scheme == 'https' ||
+      allow.uri.scheme == 'wss' ||
+      allow.strategy == AiResolveStrategy.loopbackDirect ||
+      isLiteralLoopbackHost(allow.uri.host);
 
   /// Beslist of een verzoek naar `profile.baseUrl` mag vertrekken en hoe.
   static AsrGateDecision evaluate(

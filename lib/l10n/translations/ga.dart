@@ -1639,6 +1639,8 @@ const _dutchSourceAddGa = <String, String>{
       'Comhad HTML amháin le fíorthéacs, ceannteidil agus téacsanna alt a osclaíonn in aon bhrabhsálaí gan idirlíon — le táblaí, matamaitic, mermaid agus cairteacha.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Déan comhoibriú beo ar chur i láthair ar fhreastalaí WebDAV. Múchta de réir réamhshocraithe. Taistealaíonn na hathruithe trí fhillteán oibre in aice leis an deck ar an bhfreastalaí céanna — gan chriptiú ag OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Ní théann eochair API ach thar https nó chuig an ngléas seo féin — úsáid https nó fág an eochair folamh',
   'Ga naar de brontabel': 'Téigh go dtí an tábla foinse',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Is cóip den tábla foinse "{bron}" é an tábla seo. Cuir an foinse in eagar agus roghnaigh Athnuachan, nó dícheangail an t-amharc mar ghrianghraf.',

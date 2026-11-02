@@ -653,6 +653,8 @@ const _dutchSourceAddIt = {
       'Un file HTML con testo reale, intestazioni e testi alternativi, che si apre in qualsiasi browser senza internet — con tabelle, matematica, mermaid e grafici.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Lavora dal vivo su una presentazione su un server WebDAV. Disattivato per impostazione predefinita. Le modifiche passano attraverso una cartella di lavoro accanto al deck sullo stesso server — senza crittografia da parte di OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Una chiave API viaggia solo tramite https o verso questo dispositivo — usa https o lascia vuota la chiave',
   'Ga naar de brontabel': 'Vai alla tabella sorgente',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Questa tabella è una copia della tabella sorgente "{bron}". Modifica la sorgente e scegli Aggiorna, oppure scollega la vista come istantanea.',

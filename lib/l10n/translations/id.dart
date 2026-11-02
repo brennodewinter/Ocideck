@@ -1609,6 +1609,8 @@ const _dutchSourceAddId = <String, String>{
       'Satu berkas HTML dengan teks asli, judul, dan teks alt, yang terbuka di browser mana pun tanpa internet — dengan tabel, matematika, mermaid, dan grafik.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Bekerja secara langsung pada presentasi di server WebDAV. Nonaktif secara default. Suntingan berpindah melalui folder kerja di samping deck pada server yang sama — tanpa enkripsi oleh OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Kunci API hanya dikirim lewat https atau ke perangkat ini sendiri — gunakan https atau kosongkan kuncinya',
   'Ga naar de brontabel': 'Buka tabel sumber',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tabel ini adalah salinan tabel sumber "{bron}". Edit sumbernya dan pilih Segarkan, atau lepaskan tampilan sebagai snapshot.',

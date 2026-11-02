@@ -103,7 +103,12 @@ Beide serverroutes lopen via één **ASR-serverprofiel** (*Instellingen
 basis-URL, een weergavenaam, een optioneel apart *live-endpoint* en de
 opt-ins hieronder. Een API-sleutel, wanneer de server die vraagt, leeft
 in de systeemkeychain — nooit in de instellingenblob — en reist alleen
-in de `Authorization`-header, en alleen op `https`-endpoints.
+in de `Authorization`-header, en alleen over `https`/`wss` of naar deze
+machine zelf. Staat er een sleutel, dan wordt een kale `http`/`ws`-route
+naar een ander apparaat geweigerd voordat er iets vertrekt, in plaats
+van de sleutel leesbaar over het netwerk te sturen. *(Rechtgezet
+03-11-2026, #2758: deze zin beloofde al alleen `https`, maar de sleutel
+ging ook over kale `http` naar een LAN-server.)*
 
 Drie bestemmingstiers, elk met een eigen zichtbare toestemming:
 

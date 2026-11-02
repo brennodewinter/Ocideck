@@ -113,7 +113,7 @@ class AsrLiveServerEngine implements TranscriptionEngine {
       socket = await transport.connect(
         url: decision.uri,
         strategy: decision.strategy,
-        headers: await _headers(),
+        headers: await _headers(decision),
       );
       socket.sendText(buildLiveConfigFrame(sampleRate: liveSampleRate));
       socket.sendText(liveEofFrame);
@@ -139,6 +139,11 @@ class AsrLiveServerEngine implements TranscriptionEngine {
       return const AsrServerProbe(
         status: AsrProbeStatus.unreachable,
         detail: 'geen protocolantwoord',
+      );
+    } on _KeyNeedsTls {
+      return AsrServerProbe(
+        status: AsrProbeStatus.refused,
+        detail: AsrGateDenial.keyNeedsTls.name,
       );
     } finally {
       await socket?.close();
@@ -195,8 +200,11 @@ class AsrLiveServerEngine implements TranscriptionEngine {
         socket = await transport.connect(
           url: decision.uri,
           strategy: decision.strategy,
-          headers: await _headers(),
+          headers: await _headers(decision),
         );
+      } on _KeyNeedsTls catch (e) {
+        finishError(e);
+        return;
       } on Object {
         finishError(const ServerRefused('live-verbinding mislukt'));
         return;
@@ -378,17 +386,28 @@ class AsrLiveServerEngine implements TranscriptionEngine {
       final socket = await transport.connect(
         url: allow.uri,
         strategy: allow.strategy,
-        headers: await _headers(),
+        headers: await _headers(allow),
       );
       _socket = socket;
       return socket;
+    } on _KeyNeedsTls {
+      rethrow;
     } on Object {
       throw const ServerRefused('live-verbinding mislukt');
     }
   }
 
-  Future<Map<String, String>> _headers() async {
+  /// Zie `AsrServerEngine._headers`: de sleutel gaat alleen over `wss`, of
+  /// naar dit apparaat (#2758).
+  Future<Map<String, String>> _headers(AsrGateAllow allow) async {
     final key = (await _apiKeyReader())?.trim() ?? '';
-    return {if (key.isNotEmpty) 'authorization': 'Bearer $key'};
+    if (key.isEmpty) return const {};
+    if (!AsrServerGate.keyMayTravel(allow)) throw const _KeyNeedsTls();
+    return {'authorization': 'Bearer $key'};
   }
+}
+
+/// Een sleutel die over kale `ws` naar een ander apparaat zou gaan.
+class _KeyNeedsTls extends ServerRefused {
+  const _KeyNeedsTls() : super('egress geweigerd: keyNeedsTls');
 }

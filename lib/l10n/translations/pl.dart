@@ -1621,6 +1621,8 @@ const _dutchSourceAddPl = <String, String>{
       'Jeden plik HTML z prawdziwym tekstem, nagłówkami i tekstami alternatywnymi, który otwiera się w każdej przeglądarce bez internetu — z tabelami, matematyką, mermaid i wykresami.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Pracuj na żywo nad prezentacją na serwerze WebDAV. Domyślnie wyłączone. Zmiany przechodzą przez folder roboczy obok decku na tym samym serwerze — bez szyfrowania przez OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Klucz API jest przesyłany tylko przez https lub do tego urządzenia — użyj https albo zostaw klucz pusty',
   'Ga naar de brontabel': 'Przejdź do tabeli źródłowej',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ta tabela jest kopią tabeli źródłowej "{bron}". Edytuj źródło i wybierz Odśwież, albo odłącz widok jako migawkę.',

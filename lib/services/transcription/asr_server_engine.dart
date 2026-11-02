@@ -128,7 +128,7 @@ class AsrServerEngine implements TranscriptionEngine {
             url: allow.uri,
             strategy: allow.strategy,
             body: null,
-            headers: await _headers(),
+            headers: await _headers(allow),
             timeout: const Duration(seconds: 20),
           )
           .done;
@@ -146,6 +146,11 @@ class AsrServerEngine implements TranscriptionEngine {
       return AsrServerProbe(
         status: AsrProbeStatus.unreachable,
         detail: e.message,
+      );
+    } on _KeyNeedsTls {
+      return AsrServerProbe(
+        status: AsrProbeStatus.refused,
+        detail: AsrGateDenial.keyNeedsTls.name,
       );
     }
   }
@@ -166,6 +171,7 @@ class AsrServerEngine implements TranscriptionEngine {
         consent.audioPath != audio.path) {
       throw const ConsentRequired('serverupload niet bevestigd voor deze taak');
     }
+    final auth = await _headers(allow);
 
     final bytes = await audioReader(audio.path);
     if (bytes.length > maxUploadBytes) {
@@ -178,7 +184,7 @@ class AsrServerEngine implements TranscriptionEngine {
       strategy: allow.strategy,
       headers: {
         'content-type': 'multipart/form-data; boundary=$_boundary',
-        ...await _headers(),
+        ...auth,
       },
       body: buildMultipartBody(
         fields: {
@@ -236,9 +242,14 @@ class AsrServerEngine implements TranscriptionEngine {
     return decision as AsrGateAllow;
   }
 
-  Future<Map<String, String>> _headers() async {
+  /// De `Authorization`-header, of geen. De sleutel gaat alleen mee waar
+  /// [AsrServerGate.keyMayTravel] het toestaat; anders vertrekt er niets en
+  /// gooit dit [_KeyNeedsTls] (#2758).
+  Future<Map<String, String>> _headers(AsrGateAllow allow) async {
     final key = (await _apiKeyReader())?.trim() ?? '';
-    return {if (key.isNotEmpty) 'authorization': 'Bearer $key'};
+    if (key.isEmpty) return const {};
+    if (!AsrServerGate.keyMayTravel(allow)) throw const _KeyNeedsTls();
+    return {'authorization': 'Bearer $key'};
   }
 
   /// `…/base` + `inference` — dezelfde padvorming als `AiClientService`.
@@ -256,6 +267,13 @@ class AsrServerEngine implements TranscriptionEngine {
     final name = idx >= 0 ? path.substring(idx + 1) : path;
     return name.isEmpty ? 'audio.wav' : name;
   }
+}
+
+/// Een sleutel die over kale `http` naar een ander apparaat zou gaan. Een
+/// [ServerRefused] met de gecodeerde reden, zodat elke bestaande vangst hem
+/// als weigering ziet en de probe hem kan benoemen.
+class _KeyNeedsTls extends ServerRefused {
+  const _KeyNeedsTls() : super('egress geweigerd: keyNeedsTls');
 }
 
 /// Vaste multipart-boundary. Geen geheim — deterministisch maakt de body in

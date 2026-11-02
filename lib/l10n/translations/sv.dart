@@ -1608,6 +1608,8 @@ const _dutchSourceAddSv = <String, String>{
       'En HTML-fil med riktig text, rubriker och alt-texter som öppnas i vilken webbläsare som helst utan internet — med tabeller, matematik, mermaid och diagram.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Arbeta live på en presentation på en WebDAV-server. Avstängt som standard. Redigeringar reser via en arbetsmapp bredvid decket på samma server — utan kryptering från OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'En API-nyckel skickas bara över https eller till den här enheten — använd https eller lämna nyckeln tom',
   'Ga naar de brontabel': 'Gå till källtabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Den här tabellen är en avskrift av källtabellen "{bron}". Redigera källan och välj Uppdatera, eller koppla loss vyn som en ögonblicksbild.',

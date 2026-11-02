@@ -1624,6 +1624,8 @@ const _dutchSourceAddUk = <String, String>{
       'Один HTML-файл зі справжнім текстом, заголовками та альтернативними текстами, що відкривається в будь-якому браузері без інтернету — з таблицями, формулами, mermaid та графіками.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Працюйте наживо над презентацією на сервері WebDAV. Вимкнено за замовчуванням. Зміни передаються через робочу папку поруч із деком на тому ж сервері — без шифрування з боку OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Ключ API передається лише через https або на цей пристрій — використайте https або залиште ключ порожнім',
   'Ga naar de brontabel': 'Перейти до вихідної таблиці',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ця таблиця є копією вихідної таблиці "{bron}". Відредагуйте джерело й виберіть Оновити або від\'єднайте подання як знімок.',

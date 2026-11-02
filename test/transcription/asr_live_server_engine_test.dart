@@ -444,4 +444,54 @@ void main() {
       expect(denied.connectCount, 0);
     });
   });
+
+  group('de sleutel alleen over wss of naar dit apparaat (#2758)', () {
+    AsrServerProfile lan(String liveUrl) => AsrServerProfile(
+      enabled: true,
+      mode: AsrServerMode.lan,
+      trustedInternal: true,
+      baseUrl: 'http://192.168.1.20:8080',
+      liveUrl: liveUrl,
+    );
+    const lanOptions = TranscriptionOptions(
+      serverConsent: ServerConsent.liveSession('192.168.1.20'),
+    );
+    Future<String?> key() async => 'sk-test';
+
+    test(
+      'kale ws naar het LAN mét sleutel: geen socket, wel de reden',
+      () async {
+        final t = FakeLiveTransport();
+        final live = engine(
+          t,
+          profile: lan('ws://192.168.1.20:2700'),
+          apiKeyReader: key,
+        );
+        final probe = await live.probeLive();
+        expect(probe.status, AsrProbeStatus.refused);
+        expect(probe.detail, 'keyNeedsTls');
+        await expectLater(
+          live.transcribeLive(const Stream.empty(), options: lanOptions),
+          emitsError(
+            isA<ServerRefused>().having(
+              (e) => e.message,
+              'message',
+              contains('keyNeedsTls'),
+            ),
+          ),
+        );
+        expect(t.connectCount, 0);
+      },
+    );
+
+    test('wss naar het LAN draagt de sleutel', () async {
+      final t = FakeLiveTransport();
+      engine(t, profile: lan('wss://192.168.1.20:2700'), apiKeyReader: key)
+          .transcribeLive(const Stream.empty(), options: lanOptions)!
+          .listen((_) {});
+      final socket = await opened(t);
+      expect(t.lastHeaders, {'authorization': 'Bearer sk-test'});
+      await socket.serverCloses();
+    });
+  });
 }
