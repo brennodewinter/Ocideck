@@ -6570,6 +6570,8 @@ searchable prose.
 - Click a result to show that occurrence. In a presentation this selects the
   slide and opens the relevant text field; in a document it brings the passage
   into view in **Visual**, **Source** or **Pages**, without switching views.
+  **Pages** searches the footnotes shown on the page. An unused footnote
+  definition is still searchable in **Visual** and **Source**.
 - The first **Enter** after typing opens the first result; further **Enter**
   and **Shift + Enter** go forward and back. The buttons do the same thing.
 - **Esc** closes search. Searching and jumping do not edit the file or add an
