@@ -115,10 +115,19 @@ extension _MarkdownParseDirectives on MarkdownService {
   /// checklist/title-image/title-colour/bullet-marker), accumulating presenter
   /// notes from any non-directive comment. Returns the stripped body plus all
   /// the decoded directive values.
-  _BlockDirectives _parseBlockDirectives(String block) {
+  _BlockDirectives _parseBlockDirectives(
+    String block, {
+    bool preserveOffsets = false,
+    void Function(Match)? onNote,
+  }) {
     final classDirective = _stripClassDirective(block);
     final cssClass = classDirective.cssClass;
-    var remaining = classDirective.remaining;
+    var remaining = preserveOffsets
+        ? block.replaceFirstMapped(
+            _reClassDirective,
+            (match) => match.group(0)!.replaceAll(RegExp(r'[^\r\n]'), ' '),
+          )
+        : classDirective.remaining;
 
     // Extract presenter notes and advance timing from HTML comments
     final notesBuffer = StringBuffer();
@@ -159,7 +168,10 @@ extension _MarkdownParseDirectives on MarkdownService {
       final raw = m.group(1)!;
       final content = raw.trim();
       // Meerregelig is altijd een notitieblok — richtlijnen passen op één regel.
-      if (raw.contains('\n')) return _takeNote(notesBuffer, content);
+      if (raw.contains('\n')) {
+        onNote?.call(m);
+        return _takeNote(notesBuffer, content);
+      }
       if (content.startsWith('advance:')) {
         advanceDuration = _parseAdvanceDuration(content);
       } else if (content == 'skip') {
@@ -267,6 +279,7 @@ extension _MarkdownParseDirectives on MarkdownService {
         }
         // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
         if (_isTailNote(source.substring(m.end))) {
+          onNote?.call(m);
           return _takeNote(notesBuffer, content);
         }
         return m.group(0)!;
@@ -401,4 +414,36 @@ List<bool> _parseNumCols(String raw) {
     result[i] = true;
   }
   return result;
+}
+
+extension MarkdownSpeakerNoteRanges on MarkdownService {
+  /// Dezelfde notitieherkenning als importeren, met posities in de ongewijzigde bron.
+  List<({int start, int end})> speakerNoteSourceRanges(String block) {
+    if (requiresWholeMarpBlockPreservation(block)) return const [];
+    final ranges = <({int start, int end})>[];
+    final focus = _parseImageFocus(block);
+    final alt = _parseImageAlt(focus.block);
+    final lifted = _parseFindingLink(alt.block).block;
+    final retained = <String, int>{};
+    for (final match in _reHtmlComment.allMatches(lifted)) {
+      retained.update(match.group(0)!, (count) => count + 1, ifAbsent: () => 1);
+    }
+    final positioned = block.replaceAllMapped(_reHtmlComment, (match) {
+      final raw = match.group(0)!;
+      final count = retained[raw] ?? 0;
+      if (count > 0) {
+        retained[raw] = count - 1;
+        return raw;
+      }
+      return raw.replaceAll(RegExp(r'[^\r\n]'), ' ');
+    });
+    _parseBlockDirectives(
+      positioned,
+      preserveOffsets: true,
+      onNote: (match) {
+        ranges.add((start: match.start + 4, end: match.end - 3));
+      },
+    );
+    return ranges;
+  }
 }

@@ -675,3 +675,63 @@ class _IssueTile extends StatelessWidget {
     );
   }
 }
+
+String _searchResultContext(
+  _MarkdownDeckEditorState state,
+  TextMatchRange match,
+) {
+  var slideNumber = state.widget.slideNumber;
+  if (!state.widget.isSlideScope) {
+    for (final block in state._sourceDocument.blocks) {
+      if (block.start > match.start) break;
+      slideNumber = block.slideNumber;
+    }
+  }
+  return '${state.context.l10n.d('Dia')} $slideNumber — ${_sourceSearchIndex(state).context(match)}';
+}
+
+DeckSourceSearchIndex _sourceSearchIndex(_MarkdownDeckEditorState state) {
+  final index = state._searchIndex;
+  if (index != null &&
+      index.source == state._ctrl.text &&
+      index.includeNotes == state._searchNotes) {
+    return index;
+  }
+  return state._searchIndex = DeckSourceSearchIndex(
+    state._ctrl.text,
+    includeNotes: state._searchNotes,
+  );
+}
+
+void _jumpToSourceRange(_MarkdownDeckEditorState state, TextMatchRange range) {
+  state._ctrl.selection = TextSelection(
+    baseOffset: range.start,
+    extentOffset: range.end,
+  );
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (!state.mounted) return;
+    void visit(Element element) {
+      if (element.widget case EditableText(:final controller)) {
+        if (identical(controller, state._ctrl)) {
+          final editable =
+              (element as StatefulElement).state as EditableTextState;
+          editable.bringIntoView(TextPosition(offset: range.end));
+          return;
+        }
+      }
+      element.visitChildren(visit);
+    }
+
+    state.context.visitChildElements(visit);
+  });
+}
+
+Widget _sourceNotesOption(_MarkdownDeckEditorState state) => CheckboxListTile(
+  dense: true,
+  title: Text(state.context.l10n.d('Ook in sprekersnotities')),
+  value: state._searchNotes,
+  onChanged: (value) {
+    state._searchNotes = value ?? false;
+    state._find.recount();
+  },
+);
