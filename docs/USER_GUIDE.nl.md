@@ -4450,6 +4450,22 @@ phase-gate`). Gebruik hem bij DMAIC-fasegrenzen om scope, stakeholder-
 akkoord en go/no-go vast te leggen vóór de volgende sectie. Hij serialiseert als een gewone
 opsommingsslide en blokkeert de export nooit uit zichzelf.
 
+**Ganttslides.** Met de module aan biedt de slide-toevoegen-kiezer ook
+**Gantt** — een projectplanning opgeslagen als gewone Markdown-tabel, zodat
+de planning in elke Marp-lezer leesbaar blijft. Vijf kolommen: **Taak** (de
+taaknaam; `Milestone: <naam>` markeert een mijlpaal zonder duur), **Start**
+(een ISO-datum, of leeg als de taak van een andere afhangt), **Duur** (een
+getal met `d`, `w` of `h` — `12d`, `3w`, `40h`), **Voortgang** (`done`,
+`active` of `crit`) en **Afhankelijk van** (kommagescheiden taaknamen,
+getekend als `after`-afhankelijkheden). De granulariteit van de tijdas reist
+mee in een commentaar (`<!-- ocideck_gantt_scale: auto|day|week|month -->`),
+en `<!-- ocideck_gantt_sections: true -->` maakt van een taak genaamd `## …`
+een sectiekop. Een **LibrePlan-import** vult dezelfde tabel en kapt af op 30
+taken. Het Mermaid-diagram wordt afgeleid als de slide wordt getekend — een
+taak zonder oplosbare start of duur valt uit het diagram in plaats van het
+te breken. Een deck dat al een gantt bevat, opent en rendert altijd, module
+aan of uit — dezelfde regel als matrix, canvas, boom en flow.
+
 **Projectkader en gouden draad (Fase 7).** Een deck kan zijn
 verbeterkader declareren (`dmaic`, `dmadv`, `kaizen`, `a3`, `8d`) en de primaire
 metriek **Y-01** in platte front-matter-sleutels: `ocideck_improvement_y01` (naam) plus

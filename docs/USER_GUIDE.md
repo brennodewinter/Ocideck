@@ -4346,6 +4346,22 @@ phase-gate`). Use it at DMAIC phase boundaries to record scope, stakeholder
 sign-off and go/no-go before the next section. It serialises like an ordinary
 bullet slide and never blocks export on its own.
 
+**Gantt slides.** With the module on, the add-slide picker also offers
+**Gantt** — a project schedule stored as a plain Markdown table, so the
+planning stays readable in any Marp reader. Five columns: **Taak** (the task
+name; `Milestone: <name>` marks a zero-length milestone), **Start** (an ISO
+date, or empty when the task depends on another), **Duur** (a number with
+`d`, `w` or `h` — `12d`, `3w`, `40h`), **Voortgang** (`done`, `active` or
+`crit`) and **Afhankelijk van** (comma-separated task names, drawn as `after`
+dependencies). The time-axis granularity rides in a comment
+(`<!-- ocideck_gantt_scale: auto|day|week|month -->`), and
+`<!-- ocideck_gantt_sections: true -->` turns a task named `## …` into a
+section heading. A **LibrePlan import** fills the same table and truncates at
+30 tasks. The Mermaid diagram is derived when the slide is drawn — a task
+without a resolvable start or duration is left out of the diagram rather
+than breaking it. A deck that already contains a gantt always opens and
+renders, module on or off — same rule as matrix, canvas, tree and flow.
+
 **Project framework and golden thread (Phase 7).** A deck can declare its
 improvement framework (`dmaic`, `dmadv`, `kaizen`, `a3`, `8d`) and the primary
 **Y-01** metric in flat front-matter keys: `ocideck_improvement_y01` (name) plus
