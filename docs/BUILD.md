@@ -675,19 +675,21 @@ the other process and start again. `scripts/notarize_macos.sh` checks the same
 invariant directly (is `.dart_tool` actually gone?) so it also holds when you run
 that script by hand.
 
-Phase 3 puts the web demo live, and decides that by **asking the site**, not by
-reading a job status. `version.json` in the deployed bundle names the version
-that is actually served; the chain compares it with the release version and,
-when they differ, moves the working tree onto the tag commit itself — `make
-deploy-web` builds from the working tree, so that is the only way the bundle is
-the tag's code and not whatever the tree happens to hold — and reads the site
-again afterwards to confirm the new version is being served. The release CI's *Webversie live zetten*
-job is deliberately **not** evidence: with `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS`
-absent — they are, the demo is deployed by hand — it records the skip on the run
-summary and ends green, so a real tag does not produce a red job and a failure
-mail. Reading that green as "deployed" left `ocideck.librekat.nl` on 0.6.4 for
-both v0.6.5 and v0.6.6. `--status <tag>` reports the live version on its own
-line for the same reason.
+Automatic releases run `make check-release` and then the clean notarization
+build. They do not run `make build-release` in between: notarization would
+immediately discard that build. The manual target remains available.
+
+Phase 3 deploys the exact web archive from the validated release. It checks the
+complete release manifest, the archive's SHA256, safe archive paths and file
+types, and the embedded version before using `deploy_web.sh --bundle-dir`.
+No local web rebuild or checkout is needed. A matching live version alone does
+not skip deployment: the live bundle manifest must also match exactly. The
+existing atomic server swap, rollback and live-content checks still apply.
+
+The download-page update commits to the website repository; its separate deploy
+workflow runs asynchronously. Release automation waits up to 45 minutes for the
+actual public download links (`WEBSITE_WAIT_SECONDS`), without starting a second
+publication or treating the repository update as proof that the site is live.
 
 `--status` runs its probes in parallel under one fixed total deadline
 (`STATUS_TOTAL_SECONDS`, default 60 s). Every probe reports independently —

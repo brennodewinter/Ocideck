@@ -2,17 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// Gedragsregressie voor de gestrande fase 3 van `scripts/release_auto.sh`.
-///
-/// De release-PR landt op main met een **merge-commit**, en de tag komt op die
-/// merge-commit te staan. De werkboom staat op dat moment nog op de
-/// release-branch — de tweede ouder van die merge. Twee verschillende commits,
-/// met dezelfde inhoud. Fase 3 eiste dat `HEAD` de tag-commit wás en stierf
-/// anders, dus strandde élke verse release op de webdemo: v0.6.8 moest met de
-/// hand worden uitgecheckt vóór `--resume` hem live kon zetten.
-///
-/// Deze test bouwt die geschiedenis met echt git na en laat de echte bashfunctie
-/// erop los. Alleen de buitenwereld (de live site en `make`) is gemockt.
+/// Release-archieven worden onafhankelijk van de lokale werkboom gedeployd.
 void main() {
   const script = 'scripts/release_auto.sh';
   final skipOnWindows = Platform.isWindows
@@ -65,8 +55,6 @@ void main() {
       'release/v9.9.9',
     ]);
     git(repo, ['tag', '-a', 'v9.9.9', '-m', 'OciDeck v9.9.9']);
-    // ensure_worktree_on_tag bewijst sinds #2295 dat de lokale tag díe van
-    // origin is; deze zelf-verwijzende remote maakt die teruglezing echt.
     git(repo, ['remote', 'add', 'origin', repo.path]);
     // Waar fase 2 de operator achterlaat: op de release-branch, niet op de tag.
     git(repo, ['checkout', '--quiet', 'release/v9.9.9']);
@@ -85,8 +73,7 @@ void main() {
     ref,
   ], workingDirectory: repo.path).stdout.toString().trim();
 
-  /// Draait de echte bashfuncties in de meegegeven repo. `make` en de live site
-  /// zijn gemockt; `make` noteert op welke commit hij zou bouwen.
+  /// Draait de echte bashfuncties met gemockte archief- en publicatiegrenzen.
   ProcessResult runInRepo(Directory repo, String mocksAndCall) {
     final harness = File('${repo.path}/.harness.sh');
     harness.writeAsStringSync('''
@@ -99,7 +86,9 @@ STEP=test
 ${allFunctionDefinitions()}
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
-make() { printf 'MAKE %s op %s\\n' "\$*" "\$(git rev-parse HEAD)"; }
+prepare_release_web_bundle() { printf 'manifest-A\\n' >"\$1/SHA256SUMS"; }
+live_web_bundle_matches() { return 0; }
+invoke_web_deploy() { printf 'DEPLOY %s\\n' "\$1"; : > .al-gedeployd; }
 $mocksAndCall
 ''');
     File(
@@ -108,75 +97,39 @@ $mocksAndCall
     return Process.runSync('bash', [harness.path], workingDirectory: repo.path);
   }
 
-  test(
-    'deploy-web bouwt vanaf de tag, ook als de werkboom op de release-branch staat',
-    () {
-      final repo = releaseRepoAfterMerge();
-      final branchHead = headOf(repo);
-      final tagCommit = revOf(repo, 'v9.9.9');
-      expect(
-        branchHead,
-        isNot(tagCommit),
-        reason: 'de opstelling moet juist een merge-commit nabootsen',
-      );
+  test('deploy-web gebruikt het releasearchief en behoudt de lokale branch', () {
+    final repo = releaseRepoAfterMerge();
+    final branchHead = headOf(repo);
+    final tagCommit = revOf(repo, 'v9.9.9');
+    expect(
+      branchHead,
+      isNot(tagCommit),
+      reason: 'de opstelling moet juist een merge-commit nabootsen',
+    );
 
-      // De demo draait nog de vorige versie, daarna de nieuwe: zo loopt de
-      // functie door de deploy heen en niet langs de vroege terugkeer. De
-      // teller staat in een bestand omdat elke aanroep in een subshell valt.
-      final result = runInRepo(repo, '''
+    // De demo draait nog de vorige versie, daarna de nieuwe: zo loopt de
+    // functie door de deploy heen en niet langs de vroege terugkeer. De
+    // teller staat in een bestand omdat elke aanroep in een subshell valt.
+    final result = runInRepo(repo, '''
 live_web_version() {
   if [ -f .al-gedeployd ]; then printf '9.9.9'; else printf '9.9.8'; fi
 }
-make() { printf 'MAKE %s op %s\\n' "\$*" "\$(git rev-parse HEAD)"; : > .al-gedeployd; }
 deploy_web_if_needed
 ''');
 
-      expect(
-        result.exitCode,
-        0,
-        reason:
-            'fase 3 hoort de werkboom zelf op de tag te zetten in plaats van '
-            'te stranden:\n${result.stdout}${result.stderr}',
-      );
-      expect(result.stdout, contains('MAKE deploy-web op $tagCommit'));
-      expect(
-        headOf(repo),
-        tagCommit,
-        reason: 'de bundel moet van de tag-commit komen',
-      );
-    },
-    skip: skipOnWindows,
-  );
-
-  test(
-    'een niet-gecommitte wijziging stopt fase 3 in plaats van hem weg te gooien',
-    () {
-      final repo = releaseRepoAfterMerge();
-      File(
-        '${repo.path}/pubspec.yaml',
-      ).writeAsStringSync('version: 9.9.9-vuil\n');
-
-      final result = runInRepo(repo, '''
-live_web_version() { printf '9.9.8'; }
-deploy_web_if_needed
-''');
-
-      expect(result.exitCode, isNot(0));
-      expect(result.stderr, contains('niet schoon'));
-      expect(
-        result.stdout,
-        isNot(contains('MAKE deploy-web')),
-        reason: 'met vuile werkboom mag er niets gepubliceerd worden',
-      );
-      expect(
-        File('${repo.path}/pubspec.yaml').readAsStringSync(),
-        contains('9.9.9-vuil'),
-        reason:
-            'het script mag andermans werk nooit onder de checkout wegwerken',
-      );
-    },
-    skip: skipOnWindows,
-  );
+    expect(
+      result.exitCode,
+      0,
+      reason:
+          'fase 3 hoort het releasearchief te publiceren:\n${result.stdout}${result.stderr}',
+    );
+    expect(result.stdout, contains('DEPLOY '));
+    expect(
+      headOf(repo),
+      branchHead,
+      reason: 'een releasearchief vereist geen checkout',
+    );
+  }, skip: skipOnWindows);
 
   test('na afloop staat de werkboom weer op de tak waar de release begon', () {
     final repo = releaseRepoAfterMerge();
@@ -210,7 +163,7 @@ deploy_web_if_needed
 ''');
 
     expect(result.exitCode, 0, reason: '${result.stdout}${result.stderr}');
-    expect(result.stdout, isNot(contains('MAKE deploy-web')));
+    expect(result.stdout, isNot(contains('DEPLOY ')));
     expect(
       headOf(repo),
       branchHead,
@@ -355,12 +308,15 @@ TAG_PUSHED=1
 BRANCH_PUSHED=0
 trap 'on_err $LINENO' ERR
 live_web_version() { printf '9.9.8'; }
-make() { return 1; }
+invoke_web_deploy() { return 1; }
 deploy_web_if_needed
 ''');
 
     expect(result.exitCode, isNot(0));
-    expect(result.stderr, contains('FOUT in stap "deploy-web"'));
+    expect(
+      result.stderr,
+      contains('deploy-web van de geverifieerde releasebundel faalde'),
+    );
     expect(
       result.stderr,
       isNot(contains('FOUT in stap "werkboom op de tag zetten"')),

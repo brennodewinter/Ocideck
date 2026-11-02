@@ -1718,89 +1718,110 @@ preflight() {
 }
 
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
-# De webdemo alleen lokaal bouwen en deployen als hij nog niet live staat, en
-# dan alleen vanaf de commit die de tag draagt.
-
-# `make deploy-web` bouwt uit de wérkboom, en die staat na fase 2 nooit op de tag:
-# de release-PR landt met een merge-commit, de tag gaat op díe commit, en de
-# werkboom blijft op de release-branch staan — de tweede ouder ervan. Twee
-# verschillende commits, doorgaans met exact dezelfde inhoud.
-#
-# Fase 3 eiste alleen dat HEAD de tag-commit wás en stierf anders. Dat maakte van
-# een terechte voorwaarde een onhaalbare: zolang de PR met een merge-commit landt
-# (v0.6.5 t/m v0.6.8 deden dat alle vier) kán HEAD de tag niet zijn, dus strandde
-# élke verse release hier en moest de operator met de hand uitchecken en
-# hervatten. De voorwaarde blijft — er mag geen andere code als $TAG live gaan —
-# maar het script haalt 'm nu zelf, in plaats van de operator ernaartoe te sturen.
-ensure_worktree_on_tag() {
-  STEP="werkboom op de tag zetten"
-  # Op een andere machine, of na opruiming, kan de tag lokaal ontbreken; --resume
-  # moet ook vanaf een verse kloon kunnen deployen.
-  if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
-    git fetch --quiet --force origin "refs/tags/$TAG:refs/tags/$TAG" \
-      || die "kon tag $TAG niet lokaal krijgen — zonder de tag-commit zou deploy-web andere code als $TAG publiceren. Is origin bereikbaar?"
-  fi
-  # De lokale tag moet bewijsbaar díe van origin zijn (#2295): een afwijkende
-  # lokale ref zou deploy-web andere code als $TAG laten publiceren.
-  local tag_sha origin_sha rc=0
-  origin_sha="$(remote_tag_commit origin)" || rc=$?
-  [ "$rc" -eq 0 ] \
-    || die "kon de origin-tag $TAG niet teruglezen — zonder dat bewijs is geen veilige deploy-web mogelijk."
-  tag_sha="$(git rev-list -n 1 "$TAG")"
-  [ "$tag_sha" = "$origin_sha" ] \
-    || die "lokale tag $TAG (${tag_sha:0:12}) wijkt af van origin (${origin_sha:0:12}) — een releasetag verplaats je nooit; herstel de lokale ref naar de origin-tag en hervat: scripts/release_auto.sh --resume $TAG"
-  [ "$tag_sha" != "$(git rev-parse HEAD)" ] || return 0
-  # Nooit andermans werk onder de checkout vandaan trekken: liever stoppen met een
-  # melding dan een niet-gecommitte wijziging meenemen of weggooien.
-  if ! git diff --quiet || ! git diff --cached --quiet \
-      || [ -n "$(git ls-files --others --exclude-standard)" ]; then
-    die "werkboom niet schoon — fase 3 zet 'm daarom niet op $TAG (nooit 'git stash' in deze repo delen). Commit of herstel de wijzigingen en hervat: scripts/release_auto.sh --resume $TAG"
-  fi
-  git checkout --quiet --detach "$TAG" \
-    || die "kon $TAG niet uitchecken — ligt er een niet-gevolgd bestand in de weg? Ruim dat op en hervat: scripts/release_auto.sh --resume $TAG"
-  log "Werkboom op $TAG gezet; deploy-web bouwt nu precies de code van de tag."
+# De geauthenticeerde release en haar kandidaatbewijs zijn de bron, niet een
+# nieuwe lokale bouw die ondanks dezelfde versie andere bytes kan opleveren.
+prepare_release_web_bundle() { # DEST (lege map)
+  local dest="$1" work rid assets sums_url web_url
+  work="$(dirname "$dest")"
+  rid="$(api GET "/releases/tags/$TAG" | jq -er '.id')" || return 1
+  assets="$(api GET "/releases/$rid/assets")" || return 1
+  sums_url="$(printf '%s' "$assets" | jq -er '[.[] | select(.name == "SHA256SUMS")] | if length == 1 then .[0].browser_download_url else error("manifest ontbreekt of dubbel") end')" || return 1
+  web_url="$(printf '%s' "$assets" | jq -er --arg name "ocideck-web-$NEW_VERSION.tar.gz" '[.[] | select(.name == $name)] | if length == 1 then .[0].browser_download_url else error("webbundel ontbreekt of dubbel") end')" || return 1
+  download_release_asset "$sums_url" "$work/SHA256SUMS" || return 1
+  verify_release_manifest "$work/SHA256SUMS" || return 1
+  download_release_asset "$web_url" "$work/web.tar.gz" || return 1
+  python3 - "$work/web.tar.gz" "$work/SHA256SUMS" "$dest" "$NEW_VERSION" <<'PYWEB'
+import hashlib, json, pathlib, shutil, sys, tarfile
+archive, sums, destination, version = sys.argv[1:]
+name = f"ocideck-web-{version}.tar.gz"
+expected = [line.split()[0] for line in pathlib.Path(sums).read_text().splitlines()
+            if line.split()[-1].removeprefix("./") == name]
+if len(expected) != 1 or hashlib.sha256(pathlib.Path(archive).read_bytes()).hexdigest() != expected[0]:
+    raise SystemExit("webbundel wijkt af van SHA256SUMS")
+root = pathlib.Path(destination)
+with tarfile.open(archive, "r:gz") as bundle:
+    seen = set()
+    members = bundle.getmembers()
+    for member in members:
+        path = pathlib.PurePosixPath(member.name)
+        if path.is_absolute() or ".." in path.parts or not (member.isdir() or member.isfile()):
+            raise SystemExit("onveilig pad of bestandstype in webbundel")
+        if path in seen:
+            raise SystemExit("dubbel pad in webbundel")
+        seen.add(path)
+    for member in members:
+        target = root / member.name
+        if member.isdir():
+            target.mkdir(parents=True, exist_ok=True)
+        else:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with bundle.extractfile(member) as source, target.open("wb") as output:
+                shutil.copyfileobj(source, output)
+if json.loads((root / "version.json").read_text()).get("version") != version:
+    raise SystemExit("webbundel bevat een andere versie")
+PYWEB
 }
 
-# Of de demo "nog niet live staat" is bewust geen jobstatus. De CI-job *Webversie
-# live zetten* meldt `success` óók wanneer hij niets deed: ontbreken
-# `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS` — en die ontbreken met opzet, de demo
-# gaat met de hand live — dan slaat de job de deploy over en eindigt groen,
-# zodat een echte tag geen rode job en faalmail geeft. Deze functie las die
-# groene status een release lang als bewijs, waardoor v0.6.5 en v0.6.6 de demo
-# op 0.6.4 lieten staan terwijl de keten "klaar" meldde.
+live_web_bundle_matches() {
+  curl -fsSL --connect-timeout 10 --max-time 30 "$DEPLOY_URL/SHA256SUMS" \
+    | cmp -s - "$1/SHA256SUMS" || return 1
+  python3 - "$1/SHA256SUMS" "$DEPLOY_URL" <<'PYLIVE'
+import concurrent.futures, hashlib, pathlib, sys, urllib.parse, urllib.request
+manifest, base_url = sys.argv[1:]
+entries = []
+for line in pathlib.Path(manifest).read_text().splitlines():
+    digest, name = line.split(maxsplit=1)
+    entries.append((digest, name.removeprefix("*").removeprefix("./")))
+
+def matches(entry):
+    digest, name = entry
+    url = base_url.rstrip("/") + "/" + urllib.parse.quote(name, safe="/")
+    try:
+        actual = hashlib.sha256()
+        with urllib.request.urlopen(url, timeout=30) as response:
+            while chunk := response.read(1024 * 1024):
+                actual.update(chunk)
+        return actual.hexdigest() == digest
+    except (OSError, ValueError):
+        return False
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+    if not entries or not all(pool.map(matches, entries)):
+        raise SystemExit("publieke webbestanden wijken af van de releasebundel")
+PYLIVE
+}
+
+invoke_web_deploy() {
+  scripts/deploy_web.sh --bundle-dir "$1"
+}
+
 deploy_web_if_needed() {
-  local tag_sha head_sha live
+  local work bundle live
+  work="$(mktemp -d)" || return 1
+  bundle="$work/bundle"
+  mkdir "$bundle"
+  if ! prepare_release_web_bundle "$bundle"; then
+    rm -rf "$work"
+    die "de uitgebrachte webbundel voor $TAG kon niet worden geverifieerd; bouw of publiceer geen vervanging."
+  fi
   live="$(live_web_version || true)"
-  if [ "$live" = "$NEW_VERSION" ]; then
-    log "De webdemo op $DEPLOY_URL draait al $NEW_VERSION; lokaal deploy-web overgeslagen."
+  if [ "$live" = "$NEW_VERSION" ] && live_web_bundle_matches "$bundle"; then
+    rm -rf "$work"
+    log "De webdemo op $DEPLOY_URL bevat al exact de webbundel van $TAG; deploy overgeslagen."
     return 0
   fi
-  if [ -n "$live" ]; then
-    log "De webdemo op $DEPLOY_URL draait nog $live; die moet naar $NEW_VERSION."
-  else
-    log "Kon de versie op $DEPLOY_URL niet lezen; deploy-web draait, de verificatie hieronder beslist."
-  fi
-  ensure_worktree_on_tag
-  # Naconditie, geen instructie meer aan de operator: ensure_worktree_on_tag is
-  # hierboven geslaagd of gestorven, dus dit hóórt te kloppen. Het blijft staan
-  # omdat "wat we publiceren is de tag" de enige bewering is die deze stap doet,
-  # en die meet je liever dan dat je 'm aanneemt.
-  tag_sha="$(git rev-list -n 1 "$TAG" 2>/dev/null || true)"
-  head_sha="$(git rev-parse HEAD 2>/dev/null || true)"
-  if [ -z "$tag_sha" ] || [ "$tag_sha" != "$head_sha" ]; then
-    die "de werkboom staat ná het uitchecken nog steeds niet op $TAG (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Onderzoek de repotoestand en hervat: scripts/release_auto.sh --resume $TAG"
-  fi
-  # ensure_worktree_on_tag gebruikt voor zijn eigen melding tijdelijk een
-  # specifiekere stapnaam. Zet de buitenste stap terug, zodat een echte
-  # deployfout niet opnieuw als "werkboom op de tag zetten" wordt gemeld.
   STEP="deploy-web"
-  make deploy-web
-  # Meten, niet aannemen: `deploy_web.sh` verifieert zijn eigen bundel, maar
-  # alleen dit zegt dat de bezoeker de nieuwe versie krijgt.
+  if ! invoke_web_deploy "$bundle"; then
+    rm -rf "$work"
+    die "deploy-web van de geverifieerde releasebundel faalde; hervat dezelfde tag."
+  fi
   live="$(live_web_version || true)"
-  [ "$live" = "$NEW_VERSION" ] \
-    || die "deploy-web is gedraaid, maar $DEPLOY_URL meldt ${live:-geen leesbare versie} in plaats van $NEW_VERSION — kijk op de host voor de wissel en hervat daarna: scripts/release_auto.sh --resume $TAG"
-  log "deploy-web klaar; $DEPLOY_URL draait $NEW_VERSION."
+  if [ "$live" != "$NEW_VERSION" ] || ! live_web_bundle_matches "$bundle"; then
+    rm -rf "$work"
+    die "deploy-web is gedraaid, maar de publieke versie of bundel wijkt af van $TAG; hervat dezelfde tag."
+  fi
+  rm -rf "$work"
+  log "deploy-web klaar; $DEPLOY_URL bevat exact de webbundel van $TAG."
 }
 
 phase3() {
@@ -1812,16 +1833,8 @@ phase3() {
     die "release-CI voor $TAG eindigde met failure/cancelled/skipped/error — deploy of teken niets; herstel de job en hervat daarna dezelfde tag."
   fi
 
-  # #10: eerst de webdemo. Die hangt alleen aan de web-bundel, niet aan de
-  # platform-artefacten of de handtekening — dus een teken- of platformfout mag
-  # de demo nooit op de oude versie laten staan.
-  #
-  # Maar `make deploy-web` bouwt uit de wérkboom, en die is niet per se de tag.
-  # Een --resume van v0.6.5 draaide een dag later op main, mét vier merges die
-  # niet in die tag zaten; alleen een toevallig rode sbom-verify hield tegen dat
-  # die code als "v0.6.5" live ging. Daarom bouwt de lokale route alleen vanaf
-  # de tag-commit, en beslist `version.json` op de live site of er überhaupt
-  # gedeployd moet worden — de CI-job zegt daar niets over (zie hieronder).
+  # De kandidaat is volledig getoetst; publiceer haar webbytes ook als een
+  # latere onderteken- of platformstap nog aandacht nodig heeft.
   STEP="deploy-web"
   section "Fase 3 — webversie live zetten"
   deploy_web_if_needed

@@ -44,6 +44,7 @@ REPO_SLUG=LibreKAT/Ocideck
 TOKEN=test-token
 MINISIGN_PW=test-password
 TMP=
+RELEASE_CI_TIMEOUT_MIN=960
 STEP=test
 snap=
 ${allFunctionDefinitions()}
@@ -406,6 +407,7 @@ cmd_status
     });
     final result = runReleaseHarness('''
 MUTATIONS=${mutations.path}
+RELEASE_CI_TIMEOUT_MIN=0
 section() { :; }
 log() { :; }
 sleep() { :; }
@@ -551,12 +553,8 @@ follow_ci
     expect(result.stderr, contains('niets publiceren'));
   }, skip: skipOnWindows);
 
-  // Fase 3 bouwt de webdemo uit de wérkboom. Een --resume van v0.6.5 draaide
-  // een dag later op main mét merges die niet in de tag zaten; alleen een
-  // toevallig rode sbom-verify hield tegen dat die code als v0.6.5 live ging.
-  // Of er gedeployd moet worden, beslist de live `version.json` — niet de
-  // CI-job *Webversie live zetten*, die ook groen meldt als hij niets deed.
-  //
+  // De downloadbare releasebundel bepaalt de bytes van de demo. Alleen
+  // overeenkomende versie én manifest mogen een deploy overslaan.
   // [liveVersion] is wat de site vóór de deploy meldt (leeg = niet leesbaar),
   // [deployedVersion] wat hij erna meldt (standaard: de deploy werkt).
   ProcessResult runDeployWeb({
@@ -565,6 +563,8 @@ follow_ci
     String tagSha = 'tagsha000',
     String? deployedVersion,
     String snapshotJobs = '',
+    bool matchingManifest = true,
+    bool bundleFails = false,
   }) {
     final calls = File(
       '${Directory.systemTemp.path}/ocideck-deploy-web-$pid.log',
@@ -582,16 +582,25 @@ CALLS=${calls.path}
 LIVE=${live.path}
 log() { printf '%s\\n' "\$1"; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
-# De site: leeg bestand = onbereikbaar (curl faalt), anders een version.json.
+prepare_release_web_bundle() {
+  ${bundleFails ? 'die "releasearchief ontbreekt"' : ':'}
+  printf 'manifest-A\\n' >"\$1/SHA256SUMS"
+}
+# De echte byteverificatie heeft afzonderlijke HTTP-regressietests.
+live_web_bundle_matches() {
+  [ -f "\$CALLS" ] || ${matchingManifest ? 'return 0' : 'return 1'}
+}
 curl() {
+  case "\${*: -1}" in */SHA256SUMS*)
+    if [ -f "\$CALLS" ]; then printf 'manifest-A\\n'; else printf '${matchingManifest ? 'manifest-A' : 'manifest-B'}\\n'; fi
+    return 0 ;; esac
   v="\$(cat "\$LIVE")"
   [ -n "\$v" ] || return 22
   printf '{"app_name":"ocideck","version":"%s","build_number":"1"}\\n' "\$v"
 }
-make() {
-  printf 'make %s\\n' "\$*" >>"\$CALLS"
-  [ "\$1" = deploy-web ] && printf '%s' '${deployedVersion ?? "9.9.9"}' >"\$LIVE"
-  return 0
+invoke_web_deploy() {
+  printf 'archive deploy\\n' >>"\$CALLS"
+  printf '%s' '${deployedVersion ?? "9.9.9"}' >"\$LIVE"
 }
 git() {
   case "\$1" in
@@ -615,7 +624,7 @@ api() {
 deploy_web_if_needed
 echo "DOOR"
 ''');
-    // De make-aanroepen reizen mee in stderr van het resultaat, zodat één
+    // De deploy-aanroepen reizen mee in stderr van het resultaat, zodat één
     // ProcessResult volstaat.
     final made = calls.existsSync() ? calls.readAsStringSync() : '';
     return ProcessResult(r.pid, r.exitCode, r.stdout, '${r.stderr}$made');
@@ -624,9 +633,9 @@ echo "DOOR"
   test('fase 3 deployt niet als de demo de release al draait', () {
     final r = runDeployWeb(liveVersion: '9.9.9', headSha: 'ergens-op-main');
     expect(r.exitCode, 0, reason: r.stderr as String);
-    expect(r.stdout, contains('draait al 9.9.9'));
+    expect(r.stdout, contains('al exact de webbundel'));
     expect(r.stdout, endsWith('DOOR\n'));
-    expect(r.stderr, isNot(contains('make deploy-web')));
+    expect(r.stderr, isNot(contains('archive deploy')));
   }, skip: skipOnWindows);
 
   test('een groene CI-job is geen bewijs: een oude demo wordt gedeployd', () {
@@ -639,34 +648,35 @@ echo "DOOR"
           '{"name":"Webversie live zetten","status":"success","id":1,"attempt":1}',
     );
     expect(r.exitCode, 0, reason: r.stderr as String);
-    expect(r.stdout, contains('draait nog 0.6.4'));
-    expect(r.stderr, contains('make deploy-web'));
-    expect(r.stdout, contains('draait 9.9.9'));
+    expect(r.stderr, contains('archive deploy'));
+    expect(r.stdout, contains('exact de webbundel'));
   }, skip: skipOnWindows);
 
-  // Sinds fase 3 de werkboom zélf op de tag zet (de release-PR landt met een
-  // merge-commit, dus HEAD kán de tag niet zijn) is "HEAD is niet de tag" geen
-  // reden meer om te stoppen — mislukken van die verhuizing wél. Deze stub-git
-  // weigert `diff` en `checkout`, precies het geval waarin niets gepubliceerd mag
-  // worden. De geslaagde route staat in release_auto_deploy_tag_test.dart, op een
-  // echte repo met een echte merge-commit.
-  test(
-    'fase 3 publiceert niets als de werkboom niet op de tag te krijgen is',
-    () {
-      final r = runDeployWeb(liveVersion: '0.6.4', headSha: 'ergens-op-main');
-      expect(r.exitCode, 1);
-      expect(r.stderr, contains('DIE:'));
-      expect(r.stderr, contains('--resume v9.9.9'));
-      expect(r.stderr, isNot(contains('make deploy-web')));
-    },
-    skip: skipOnWindows,
-  );
+  test('dezelfde versie met een ander manifest wordt opnieuw gedeployd', () {
+    final r = runDeployWeb(
+      liveVersion: '9.9.9',
+      headSha: 'ergens-op-main',
+      matchingManifest: false,
+    );
+    expect(r.exitCode, 0, reason: r.stderr as String);
+    expect(r.stderr, contains('archive deploy'));
+  }, skip: skipOnWindows);
 
-  test('een onleesbare site laat fase 3 vanaf de tag deployen', () {
+  test('zonder geverifieerd releasearchief wordt niets gepubliceerd', () {
+    final r = runDeployWeb(
+      liveVersion: '9.9.9',
+      headSha: 'ergens-op-main',
+      bundleFails: true,
+    );
+    expect(r.exitCode, isNot(0));
+    expect(r.stderr, contains('releasearchief ontbreekt'));
+    expect(r.stderr, isNot(contains('archive deploy')));
+  }, skip: skipOnWindows);
+
+  test('een onleesbare site laat fase 3 het releasearchief deployen', () {
     final r = runDeployWeb(liveVersion: '', headSha: 'tagsha000');
     expect(r.exitCode, 0, reason: r.stderr as String);
-    expect(r.stdout, contains('niet lezen'));
-    expect(r.stderr, contains('make deploy-web'));
+    expect(r.stderr, contains('archive deploy'));
   }, skip: skipOnWindows);
 
   test('een deploy die de demo niet verzet, laat fase 3 vallen', () {
@@ -676,8 +686,8 @@ echo "DOOR"
       deployedVersion: '0.6.4',
     );
     expect(r.exitCode, 1);
-    expect(r.stderr, contains('make deploy-web'));
-    expect(r.stderr, contains('meldt 0.6.4 in plaats van 9.9.9'));
+    expect(r.stderr, contains('archive deploy'));
+    expect(r.stderr, contains('publieke versie of bundel wijkt af'));
   }, skip: skipOnWindows);
 
   test('fase 3 herdispatcht niet zolang dezelfde release-CI nog actief is', () {
@@ -734,6 +744,7 @@ phase3
 CALLS=${calls.path}
 TRACE=${trace.path}
 DISPATCHED=${dispatched.path}
+deploy_web_if_needed() { :; }
 section() { :; }
 log() { :; }
 sleep() { :; }
@@ -817,6 +828,7 @@ phase3
     final result = runReleaseHarness('''
 TRACE=${trace.path}
 SUM_DOWNLOADS=0
+deploy_web_if_needed() { :; }
 section() { :; }
 log() { :; }
 sleep() { :; }
