@@ -108,4 +108,18 @@ Een **sprekersnotitie** met geheim.
       }
     },
   );
+  test('escaped page markers do not hide subsequent source notes', () {
+    const source = r'''# Dia
+<!--
+<!-- ocideck_page:1 --\>
+Eerste passage.
+<!-- ocideck_page:2 --\>
+Tweede passage.
+-->
+''';
+    final index = DeckSourceSearchIndex(source, includeNotes: true);
+    final match = index.matches('Tweede passage').single;
+    expect(source.substring(match.start, match.end), 'Tweede passage');
+    expect(index.matches('ocideck_page'), isEmpty);
+  });
 }

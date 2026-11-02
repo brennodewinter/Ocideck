@@ -51,7 +51,14 @@ class DeckSourceSearchIndex {
           _notes.add((
             start: start,
             end: end,
-            projection: VisibleMarkdownText(source.substring(start, end)),
+            projection: VisibleMarkdownText(
+              source
+                  .substring(start, end)
+                  .replaceAllMapped(
+                    RegExp(r'<!--[\s\S]*?--\\>'),
+                    (match) => ' ' * match.group(0)!.length,
+                  ),
+            ),
           ));
         }
       }
