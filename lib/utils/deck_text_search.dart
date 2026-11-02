@@ -82,12 +82,18 @@ Iterable<DeckTextField> slideTextFields(
         final step = parseFlowBullet(s.bullets[i]);
         yield _field(
           'bullets.$i',
-          'Bullets links',
+          'Tekst',
           text,
           visibleRanges: _flowTextRanges(text, step.title, step.lane),
         );
       } else {
-        yield _field('bullets.$i', 'Bullets links', text);
+        yield _field(
+          'bullets.$i',
+          s.type.bulletColumns == BulletColumns.two
+              ? 'Bullets links'
+              : 'Bullets',
+          text,
+        );
       }
     }
     if (s.type.bulletColumns == BulletColumns.two) {
