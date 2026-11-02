@@ -240,7 +240,8 @@ void main() {
       DateTime.now().subtract(const Duration(days: 40)),
     );
 
-    final removed = await service.pruneOlderThan(const Duration(days: 30));
+    final svc = RecoveryService(baseDir: tempDir, isLockLive: (_) => false);
+    final removed = await svc.pruneOlderThan(const Duration(days: 30));
     expect(removed, 1);
 
     final remaining = await service.loadAll();
@@ -248,12 +249,15 @@ void main() {
   });
 
   test('loadAll prunes snapshots older than the default max age', () async {
-    await service.save(snap('ancient'));
+    // isLockLive: false — anders telt de eigen sessie als levend (#2722) en
+    // blijft haar momentopname juist bewust staan.
+    final svc = RecoveryService(baseDir: tempDir, isLockLive: (_) => false);
+    await svc.save(snap('ancient'));
     File(
       '${tempDir.path}/ancient.json',
     ).setLastModifiedSync(DateTime.now().subtract(const Duration(days: 400)));
 
-    expect(await service.loadAll(), isEmpty);
+    expect(await svc.loadAll(), isEmpty);
   });
 
   test('save leaves no .tmp residue behind', () async {
@@ -428,6 +432,42 @@ void main() {
       await other.loadAll();
       expect(lock.existsSync(), isFalse);
     });
+
+    test(
+      'een oude momentopname van een levende sessie overleeft de prune (#2722)',
+      () async {
+        foreignLock('levend');
+        final snap = foreignSnapshot('levend', 'levend');
+        snap.setLastModifiedSync(
+          DateTime.now().subtract(const Duration(days: 40)),
+        );
+
+        final other = RecoveryService(
+          baseDir: tempDir,
+          isLockLive: (_) => true,
+        );
+        expect(await other.pruneOlderThan(const Duration(days: 30)), 0);
+        expect(snap.existsSync(), isTrue);
+      },
+    );
+
+    test(
+      'een even oude momentopname van een dode sessie gaat weg (#2722)',
+      () async {
+        foreignLock('dood');
+        final snap = foreignSnapshot('dood', 'dood');
+        snap.setLastModifiedSync(
+          DateTime.now().subtract(const Duration(days: 40)),
+        );
+
+        final other = RecoveryService(
+          baseDir: tempDir,
+          isLockLive: (_) => false,
+        );
+        expect(await other.pruneOlderThan(const Duration(days: 30)), 1);
+        expect(snap.existsSync(), isFalse);
+      },
+    );
 
     test('een levend sessielock blijft staan', () async {
       final lock = foreignLock('vreemd');
