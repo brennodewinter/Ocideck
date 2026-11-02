@@ -301,11 +301,7 @@ extension _ChartEditorGrid on _ChartEditorState {
   }) {
     return _ChartGridCell(
       key: key,
-      searchFieldId: gridRow == 0
-          ? 'chart.series.${gridCol - 1}'
-          : gridCol == 0
-          ? 'chart.x.${gridRow - 1}'
-          : null,
+      searchFieldId: _chartSearchField(gridRow, gridCol),
       focusNode: _ChartGridKeys.focus(this, gridRow, gridCol),
       value: value,
       enabled: enabled,
@@ -674,3 +670,9 @@ class _ChartGridCellState extends State<_ChartGridCell> {
     );
   }
 }
+
+String? _chartSearchField(int row, int column) => row == 0
+    ? 'chart.series.${column - 1}'
+    : column == 0
+    ? 'chart.x.${row - 1}'
+    : null;

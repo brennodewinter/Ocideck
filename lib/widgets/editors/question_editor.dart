@@ -87,14 +87,10 @@ class _QuestionEditorState extends State<QuestionEditor> {
     _hasValidAnswerCount = spec.hasValidAnswerCount;
     _sourceAnswerCount = spec.sourceAnswerCount;
     _sourceAnswerLimit = spec.answerCountLimit;
-    _title = EditorTextController(
-      text: widget.slide.title,
-      searchFieldId: 'title',
-    );
-    _prompt = EditorTextController(
-      text: spec.prompt,
-      searchFieldId: 'question.prompt',
-    );
+    _title = EditorTextController(text: widget.slide.title)
+      ..searchFieldId = 'title';
+    _prompt = EditorTextController(text: spec.prompt)
+      ..searchFieldId = 'question.prompt';
     _timeLimit = EditorTextController(
       text: spec.timeLimitSeconds > 0 ? '${spec.timeLimitSeconds}' : '',
     );
@@ -142,11 +138,8 @@ class _QuestionEditorState extends State<QuestionEditor> {
   /// gedrag is identiek.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  EditorTextController _makeCtrl(String text) {
-    final c = EditorTextController(text: text);
-    c.addTextListener(_emit);
-    return c;
-  }
+  EditorTextController _makeCtrl(String text) =>
+      EditorTextController(text: text)..addTextListener(_emit);
 
   QuestionSpec _buildSpec() => QuestionSpec(
     kind: _kind,
@@ -246,9 +239,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
 
   @override
   Widget build(BuildContext context) {
-    for (var i = 0; i < _answers.length; i++) {
-      _answers[i].searchFieldId = 'question.answers.$i';
-    }
+    _nameQuestionAnswers(_answers);
     final l10n = context.l10n;
     if (!_hasValidAnswerCount) return _invalidAnswerCountNotice(l10n);
     final isTrueFalse = _kind == QuestionKind.trueFalse;
@@ -861,5 +852,11 @@ class _QuestionEditorState extends State<QuestionEditor> {
         ),
       ],
     );
+  }
+}
+
+void _nameQuestionAnswers(List<EditorTextController> answers) {
+  for (var i = 0; i < answers.length; i++) {
+    answers[i].searchFieldId = 'question.answers.$i';
   }
 }

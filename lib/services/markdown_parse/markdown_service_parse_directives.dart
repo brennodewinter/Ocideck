@@ -428,28 +428,34 @@ List<bool> _parseNumCols(String raw) {
 
 extension MarkdownSpeakerNoteRanges on MarkdownService {
   /// Dezelfde notitieherkenning als importeren, met posities in de ongewijzigde bron.
-  List<({int start, int end})> speakerNoteSourceRanges(String block) {
-    if (requiresWholeMarpBlockPreservation(block)) return const [];
-    final ranges = <({int start, int end})>[];
-    final focus = _parseImageFocus(block);
-    final alt = _parseImageAlt(focus.block);
-    final lifted = _parseFindingLink(alt.block).block;
-    final retained = <String, int>{};
-    for (final match in _reHtmlComment.allMatches(lifted)) {
-      retained.update(match.group(0)!, (count) => count + 1, ifAbsent: () => 1);
-    }
-    final positioned = block.replaceAllMapped(_reHtmlComment, (match) {
-      final raw = match.group(0)!;
-      final count = retained[raw] ?? 0;
-      if (count > 0) {
-        retained[raw] = count - 1;
-        return raw;
-      }
-      return raw.replaceAll(RegExp(r'[^\r\n]'), ' ');
-    });
-    _parseBlockDirectives(positioned, (match) {
-      ranges.add((start: match.start + 4, end: match.end - 3));
-    });
-    return ranges;
+  List<({int start, int end})> speakerNoteSourceRanges(String block) =>
+      _speakerNoteSourceRanges(this, block);
+}
+
+List<({int start, int end})> _speakerNoteSourceRanges(
+  MarkdownService parser,
+  String block,
+) {
+  if (requiresWholeMarpBlockPreservation(block)) return const [];
+  final ranges = <({int start, int end})>[];
+  final focus = parser._parseImageFocus(block);
+  final alt = parser._parseImageAlt(focus.block);
+  final lifted = parser._parseFindingLink(alt.block).block;
+  final retained = <String, int>{};
+  for (final match in _reHtmlComment.allMatches(lifted)) {
+    retained.update(match.group(0)!, (count) => count + 1, ifAbsent: () => 1);
   }
+  final positioned = block.replaceAllMapped(_reHtmlComment, (match) {
+    final raw = match.group(0)!;
+    final count = retained[raw] ?? 0;
+    if (count > 0) {
+      retained[raw] = count - 1;
+      return raw;
+    }
+    return raw.replaceAll(RegExp(r'[^\r\n]'), ' ');
+  });
+  parser._parseBlockDirectives(positioned, (match) {
+    ranges.add((start: match.start + 4, end: match.end - 3));
+  });
+  return ranges;
 }
