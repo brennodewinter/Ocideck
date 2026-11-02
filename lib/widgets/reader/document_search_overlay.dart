@@ -15,8 +15,15 @@ class DocumentSearchOverlay extends StatefulWidget {
     this.onActiveRect,
     this.revealSignal = 0,
     this.revealIntoView = false,
+    this.geometry,
+    this.measure = true,
+    this.paintBounds,
   });
 
+  /// Zichtbare paginakopieën tekenen de gedeelde meting zonder opnieuw te zoeken.
+  final DocumentSearchGeometry? geometry;
+  final bool measure;
+  final Rect? paintBounds;
   final bool revealIntoView;
   final int revealSignal;
   final Widget child;
@@ -36,23 +43,71 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
   List<Rect> _boxes = const [];
 
   @override
+  void initState() {
+    super.initState();
+    if (!widget.measure) widget.geometry?.addListener(_geometryChanged);
+  }
+
+  @override
+  void didUpdateWidget(DocumentSearchOverlay oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.geometry != widget.geometry ||
+        oldWidget.measure != widget.measure) {
+      oldWidget.geometry?.removeListener(_geometryChanged);
+      if (!widget.measure) widget.geometry?.addListener(_geometryChanged);
+    }
+  }
+
+  List<Rect> _paintedBoxes = const [];
+
+  List<Rect> get _paintBoxes {
+    final boxes = widget.geometry?.boxes ?? _boxes;
+    final bounds = widget.paintBounds;
+    return bounds == null
+        ? boxes
+        : boxes.where((box) => box.overlaps(bounds)).toList();
+  }
+
+  void _geometryChanged() {
+    final boxes = _paintBoxes;
+    if (mounted &&
+        (!_sameRects(boxes, _paintedBoxes) ||
+            (boxes.isNotEmpty && widget.geometry?.pendingReveal == true))) {
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.geometry?.removeListener(_geometryChanged);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
+    if (widget.measure) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
+    }
+    final boxes = _paintBoxes;
+    _paintedBoxes = boxes;
+    if (!widget.measure) _revealBoxes(boxes);
     return Stack(
       children: [
         KeyedSubtree(
           key: _content,
           child: NotificationListener<ScrollNotification>(
             onNotification: (_) {
-              WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
+              if (widget.measure) {
+                WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
+              }
               return false;
             },
             child: widget.child,
           ),
         ),
-        for (var i = 0; i < _boxes.length; i++)
+        for (var i = 0; i < boxes.length; i++)
           Positioned.fromRect(
-            rect: _boxes[i].inflate(2),
+            rect: boxes[i].inflate(2),
             child: IgnorePointer(
               key: i == 0 ? _activeHighlight : null,
               child: DecoratedBox(
@@ -108,23 +163,41 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
       object.visitChildren(visit);
     }
 
-    if (widget.query.isNotEmpty) visit(root);
+    if (widget.query.isNotEmpty && widget.activeIndex >= 0) visit(root);
     widget.onActiveRect?.call(
       boxes.isEmpty ? null : boxes.reduce((a, b) => a.expandToInclude(b)),
     );
-    if (widget.revealIntoView &&
-        boxes.isNotEmpty &&
-        widget.revealSignal != _revealedSignal) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted || widget.revealSignal == _revealedSignal) return;
-        final target = _activeHighlight.currentContext;
-        if (target == null) return;
-        _revealedSignal = widget.revealSignal;
-        Scrollable.ensureVisible(target, alignment: .5);
-      });
+    _revealBoxes(boxes);
+    if (widget.geometry case final geometry?) {
+      geometry.update(boxes, revealSignal: widget.revealSignal);
+      return;
     }
     if (_sameRects(boxes, _boxes)) return;
     setState(() => _boxes = boxes);
+  }
+
+  void _revealBoxes(List<Rect> boxes) {
+    final signal = widget.geometry?.revealSignal ?? widget.revealSignal;
+    if (widget.revealIntoView &&
+        boxes.isNotEmpty &&
+        (widget.geometry?.pendingReveal ?? (signal != _revealedSignal))) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted ||
+            (widget.geometry != null
+                ? !widget.geometry!.pendingReveal
+                : signal == _revealedSignal)) {
+          return;
+        }
+        if (signal != (widget.geometry?.revealSignal ?? widget.revealSignal)) {
+          return;
+        }
+        final target = _activeHighlight.currentContext;
+        if (target == null) return;
+        _revealedSignal = signal;
+        widget.geometry?.completeReveal();
+        Scrollable.ensureVisible(target, alignment: .5);
+      });
+    }
   }
 
   bool _sameRects(List<Rect> a, List<Rect> b) =>
@@ -142,3 +215,32 @@ class ExcludeDocumentSearch extends SingleChildRenderObjectWidget {
 }
 
 class _RenderExcludeDocumentSearch extends RenderProxyBox {}
+
+/// Eén tekstmeting kan door alle geknipte paginaweergaven worden hergebruikt.
+class DocumentSearchGeometry extends ChangeNotifier {
+  List<Rect> _boxes = const [];
+  List<Rect> get boxes => _boxes;
+
+  int revealSignal = 0;
+  bool _pendingReveal = false;
+  bool get pendingReveal => _pendingReveal;
+
+  void completeReveal() => _pendingReveal = false;
+
+  void update(List<Rect> boxes, {int revealSignal = 0}) {
+    if (revealSignal == this.revealSignal &&
+        boxes.length == _boxes.length &&
+        List.generate(
+          boxes.length,
+          (i) => boxes[i] == _boxes[i],
+        ).every((v) => v)) {
+      return;
+    }
+    if (this.revealSignal != revealSignal) {
+      _pendingReveal = revealSignal != 0 && boxes.isNotEmpty;
+    }
+    this.revealSignal = revealSignal;
+    _boxes = List.unmodifiable(boxes);
+    notifyListeners();
+  }
+}

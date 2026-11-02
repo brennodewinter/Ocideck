@@ -231,6 +231,7 @@ Widget _footnoteList(
   _Theme t,
   List<Footnote> notes, {
   Key? key,
+  Widget Function(Footnote, Widget)? noteWrapper,
 }) {
   final style = t.body.copyWith(
     // Kleiner dan de bodytekst: een noot is een terzijde, en op papier is dat
@@ -252,35 +253,42 @@ Widget _footnoteList(
         ),
         const SizedBox(height: 6),
         for (final note in notes)
-          Padding(
-            padding: const EdgeInsets.only(top: 3),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 22,
-                  child: Text(
-                    '${note.number}',
-                    style: style.copyWith(
-                      color: t.marker,
-                      fontFeatures: const [FontFeature.tabularFigures()],
+          (noteWrapper ?? _plainFootnote)(
+            note,
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 22,
+                    child: ExcludeDocumentSearch(
+                      child: Text(
+                        '${note.number}',
+                        style: style.copyWith(
+                          color: t.marker,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: InlineMarkdownText(
-                    note.text,
-                    style: style,
-                    linkColor: t.link,
+                  Expanded(
+                    child: InlineMarkdownText(
+                      note.text,
+                      style: style,
+                      linkColor: t.link,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
       ],
     ),
   );
 }
+
+Widget _plainFootnote(Footnote note, Widget child) => child;
 
 /// De voetnoten van een document als los tekenbaar blok, in dezelfde maat en
 /// stijl als waarin ze achterin een doorlopende weergave staan.
@@ -293,15 +301,21 @@ class DocumentFootnotesView extends StatelessWidget {
   const DocumentFootnotesView({
     super.key,
     required this.notes,
+    this.noteWrapper,
     this.themeProfile,
   });
 
   final List<Footnote> notes;
+  final Widget Function(Footnote, Widget)? noteWrapper;
   final ThemeProfile? themeProfile;
 
   @override
-  Widget build(BuildContext context) =>
-      _footnoteList(context, _Theme(Theme.of(context), themeProfile), notes);
+  Widget build(BuildContext context) => _footnoteList(
+    context,
+    _Theme(Theme.of(context), themeProfile),
+    notes,
+    noteWrapper: noteWrapper,
+  );
 }
 
 /// De lettergrootte van een kop op niveau [level], bij een bodytekst van

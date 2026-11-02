@@ -12,6 +12,8 @@ import '../../models/settings.dart'
 import '../../services/document_footnote_setup.dart';
 import '../../services/document_pagination.dart';
 import '../../utils/footnotes.dart';
+import '../../utils/text_search.dart';
+import '../../utils/markdown_blocks.dart';
 import '../../theme/app_theme.dart';
 import '../document_page_chrome.dart';
 import 'document_markdown_view.dart';
@@ -101,12 +103,23 @@ class PagedDocumentView extends StatefulWidget {
 
 class _PagedDocumentViewState extends State<PagedDocumentView> {
   final _searchScroll = ScrollController();
-  Rect? _searchRect;
-  int _revealedSignal = -1;
-
+  Widget? _pageLayout;
+  Widget? _documentBody;
+  Widget? _measureBody;
+  final _searchGeometry = DocumentSearchGeometry();
+  final _noteGeometry = <String, DocumentSearchGeometry>{};
+  late _PagedSearchText _searchText = _PagedSearchText(widget.markdown);
+  late _PagedSearchSelection _searchSelection = _pagedSearchSelection(
+    widget,
+    _searchText,
+  );
   @override
   void dispose() {
     _searchScroll.dispose();
+    _searchGeometry.dispose();
+    for (final geometry in _noteGeometry.values) {
+      geometry.dispose();
+    }
     super.dispose();
   }
 
@@ -138,17 +151,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   late var _timelinePagination = documentTimelinePaginationData(
     widget.markdown,
   );
-
-  /// Of het document afbeeldingsblokken bevat. Alleen dan blijft de meetboom
-  /// gemonteerd na de eerste ronde — een afbeelding decodeert asynchroon, dus
-  /// zijn hoogte komt pas later binnen. Een document zonder afbeeldingen heeft
-  /// alleen synchrone blokken (tekst, tabellen, code), en voor die volstaat een
-  /// eenmalige meting: de boom hoeft niet te blijven staan.
-  ///
-  /// Niet `late final`: na het invoegen van de eerste afbeelding of een
-  /// gewijzigd projectPath (waardoor een relatief beeld al of niet resolveert)
-  /// moet opnieuw bepaald worden of de meetboom moet blijven staan (#1652).
-  late bool _hasImages = _containsImageBlock(widget.markdown);
 
   /// Of de noten onderaan het blad komen te staan. Achterin is geen aparte
   /// tekenroute: dan lopen ze gewoon als laatste blokken in de tekststroom mee
@@ -252,12 +254,22 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   @override
   void didUpdateWidget(PagedDocumentView old) {
     super.didUpdateWidget(old);
+    if (widget.scale != old.scale ||
+        widget.tlp != old.tlp ||
+        widget.fields != old.fields ||
+        (_notesOnPage && widget.searchRevealSignal != old.searchRevealSignal)) {
+      _pageLayout = null;
+    }
+    if (widget.markdown != old.markdown) {
+      _searchText = _PagedSearchText(widget.markdown);
+    }
     if (widget.searchQuery != old.searchQuery ||
         widget.searchMatchIndex != old.searchMatchIndex ||
+        widget.searchCaseSensitive != old.searchCaseSensitive ||
+        widget.footnotePlacement != old.footnotePlacement ||
         widget.markdown != old.markdown) {
-      _searchRect = null;
+      _searchSelection = _pagedSearchSelection(widget, _searchText);
     }
-    if (widget.scale != old.scale) _revealedSignal = -1;
     // Andere tekst, vel, of projectpad betekent opnieuw meten; de oude einden
     // slaan dan nergens meer op. Het projectpad meeswegen: een relatief beeld
     // resolveert al of niet afhankelijk van de basis, en dan verandert de
@@ -269,12 +281,14 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         widget.chapterPageBreak != old.chapterPageBreak ||
         widget.footnotePlacement != old.footnotePlacement ||
         widget.projectPath != old.projectPath) {
+      _pageLayout = null;
+      _documentBody = null;
+      _measureBody = null;
       _blockHeights = null;
       _measuring.clear();
       _notes = documentFootnotes(widget.markdown);
       _blockTexts = DocumentMarkdownView.blockTexts(widget.markdown);
       _timelinePagination = documentTimelinePaginationData(widget.markdown);
-      _hasImages = _containsImageBlock(widget.markdown);
     }
   }
 
@@ -353,18 +367,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   @override
   Widget build(BuildContext context) {
     final heights = _blockHeights;
-    // Bevat het document afbeeldingen, dan blijft de meetboom buiten beeld
-    // staan — een afbeelding decodeert asynchroon, dus haar hoogte komt pas na
-    // de eerste ronde binnen. Stond de boom dan al af, dan bleef de paginering
-    // op de placeholder-hoogte staan en rotte stil: de einden wezen naar een
-    // regel tekst waar inmiddels een afbeelding van een paar centimeter staat.
-    // Nu hermeet de boom zodra een blokhoogte verandert (zie [_onMeasured]), en
-    // de vellen erboven volgen. Zonder afbeeldingen zijn alle blokken synchroon
-    // en volstaat een eenmalige meting: de boom hoeft niet te blijven staan.
-    if (!_hasImages) {
-      if (heights == null) return _measure();
-      return _pages(heights);
-    }
+    // De meetboom blijft warm: zoekletters veranderen alleen de geometrie,
+    // niet opnieuw alle tekstwidgets. Ook asynchroon geladen beelden blijven
+    // zo hun actuele blokhoogte aan de paginaverdeling doorgeven.
     return Stack(
       fit: StackFit.expand,
       children: [_measure(), if (heights != null) _pages(heights)],
@@ -374,30 +379,21 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// De vellen, opgebouwd uit de gemeten hoogtes. Bestaat als aparte methode
   /// omdat [build] de meetboom er altijd onder laat staan.
   Widget _pages(List<double> heights) {
-    final document = DocumentSearchOverlay(
-      query: widget.searchQuery,
-      activeIndex: widget.searchMatchIndex,
-      caseSensitive: widget.searchCaseSensitive,
-      onActiveRect: (rect) {
-        if (rect != null && rect != _searchRect) {
-          setState(() => _searchRect = rect);
-        }
-      },
-      child: DocumentMarkdownView(
-        widget.markdown,
-        maxTextWidth: null,
-        themeProfile: widget.profile,
-        chartTheme: widget.profile,
-        // Een `---` is hier het pagina-einde zelf; hem ook tekenen zou elk vers
-        // vel met een streep laten openen.
-        hideRules: true,
-        // Onderaan het blad tekent dít scherm ze, per vel; achterin lopen ze
-        // gewoon als laatste blokken in de stroom mee.
-        footnotesAtEnd: !_notesOnPage,
-        // Een breed diagram schaalt af op de vaste kolombreedte, net als in de
-        // PDF — een schuifbalk snijdt hier af op een vel.
-        scaleMermaidToFit: true,
-      ),
+    if (_pageLayout case final cached?) return cached;
+    final document = _documentBody ??= DocumentMarkdownView(
+      widget.markdown,
+      maxTextWidth: null,
+      themeProfile: widget.profile,
+      chartTheme: widget.profile,
+      // Een `---` is hier het pagina-einde zelf; hem ook tekenen zou elk vers
+      // vel met een streep laten openen.
+      hideRules: true,
+      // Onderaan het blad tekent dít scherm ze, per vel; achterin lopen ze
+      // gewoon als laatste blokken in de stroom mee.
+      footnotesAtEnd: !_notesOnPage,
+      // Een breed diagram schaalt af op de vaste kolombreedte, net als in de
+      // PDF — een schuifbalk snijdt hier af op een vel.
+      scaleMermaidToFit: true,
     );
     final offsets = documentPageOffsets(
       blockHeights: heights,
@@ -428,7 +424,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       continuationBlocks: _timelinePagination.continuationBlocks,
       continuableBlocks: _timelinePagination.blocks,
     );
-    return LayoutBuilder(
+    return _pageLayout = LayoutBuilder(
       builder: (context, constraints) {
         // Een vel dat breder is dan het venster zou onbereikbaar zijn: de
         // vellen staan in een verticale rol, dus er is geen horizontale
@@ -438,9 +434,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         final (sheetW, _) = _sheetPx;
         final room = constraints.maxWidth - 32;
         final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) _revealSearch(offsets, fit);
-        });
         return SingleChildScrollView(
           controller: _searchScroll,
           // Ingezoomd wordt het vel breder dan het venster. Zonder deze tweede,
@@ -492,83 +485,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     );
   }
 
-  /// Rendert het document één keer buiten beeld op de tekstbreedte van de
-  /// pagina, met een meter om elk blok. Buiten het venster in plaats van in een
-  /// `Offstage`: die meet zijn kind niet gegarandeerd uit, en zonder meting
-  /// komt er nooit een pagina.
-  Widget _measure() {
-    final blockCount = _blockTexts.length;
-    // De noten meten in dezelfde ronde mee, elk apart: alleen zo weet de
-    // paginaverdeling hoeveel ruimte er onder een blad weg moet. Ze krijgen
-    // indexen áchter de blokken, zodat één teller volstaat.
-    final notes = _notesOnPage ? _notes : const <Footnote>[];
-    // Eindnoten (achterin het document) meten als één extra blok: de
-    // DocumentMarkdownView tekent ze buiten de blockWrapper, dus de gewone
-    // blokmeting ziet ze niet. Zonder deze extra meting vallen lange eindnoten
-    // voorbij de laatste berekende pagina en worden ze afgeknipt (#1653).
-    final endnotes = !_notesOnPage && _notes.isNotEmpty
-        ? _notes
-        : const <Footnote>[];
-    final total = blockCount + notes.length + (endnotes.isNotEmpty ? 1 : 0);
-    return ClipRect(
-      child: Stack(
-        children: [
-          const SizedBox.expand(),
-          Positioned(
-            left: -1e5,
-            top: 0,
-            width: _contentWidthPx,
-            child: IgnorePointer(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DocumentMarkdownView(
-                    widget.markdown,
-                    maxTextWidth: null,
-                    themeProfile: widget.profile,
-                    chartTheme: widget.profile,
-                    hideRules: true,
-                    footnotesAtEnd: !_notesOnPage,
-                    scaleMermaidToFit: true,
-                    blockWrapper: (index, block) => _MeasuredBlock(
-                      index: index,
-                      onMeasured: (i, height) =>
-                          _onMeasured(i, height, blockCount, total),
-                      child: block,
-                    ),
-                  ),
-                  for (var n = 0; n < notes.length; n++)
-                    _MeasuredBlock(
-                      index: blockCount + n,
-                      onMeasured: (i, height) =>
-                          _onMeasured(i, height, blockCount, total),
-                      // Eén noot per meting: de scheidingslijn en de tussenruimte
-                      // horen bij het vel, niet bij de noot, en die zitten in
-                      // [_noteGapPx].
-                      child: DocumentFootnotesView(
-                        notes: [notes[n]],
-                        themeProfile: widget.profile,
-                      ),
-                    ),
-                  if (endnotes.isNotEmpty)
-                    _MeasuredBlock(
-                      index: blockCount + notes.length,
-                      onMeasured: (i, height) =>
-                          _onMeasured(i, height, blockCount, total),
-                      child: DocumentFootnotesView(
-                        notes: endnotes,
-                        themeProfile: widget.profile,
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   void _onMeasured(int index, double height, int blockCount, int total) {
     if (!mounted) return;
     // Geen slot: een afbeelding die na de eerste ronde decodeert, verandert de
@@ -599,6 +515,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       return;
     }
     setState(() {
+      _pageLayout = null;
       _blockHeights = heights;
       _noteHeights = noteHeights;
     });
@@ -734,7 +651,14 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
                 child: RepaintBoundary(
                   child: Transform.translate(
                     offset: Offset(0, -offset),
-                    child: SizedBox(width: _contentWidthPx, child: document),
+                    child: SizedBox(
+                      width: _contentWidthPx,
+                      child: _paintSearchDocument(
+                        document,
+                        offset,
+                        windowHeight,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -762,12 +686,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
               // vraagt. Tot dan scrollt het nootvlak binnen het tekstvlak met
               // een duidelijke doorgang-markering — nooit stil afknippen, want
               // dan denkt de lezer dat de offerte compleet is (#2469).
-              child: _FootnotePane(
-                notes: notes,
-                themeProfile: widget.profile,
-                overflowing: _footnoteOverflow(notes),
-                maxHeight: _contentHeightPx,
-              ),
+              child: _searchFootnotePane(notes),
             ),
           if (widget.margins.hasBleed)
             Positioned.fill(
@@ -907,10 +826,16 @@ class _FootnotePane extends StatefulWidget {
     required this.notes,
     required this.overflowing,
     required this.maxHeight,
+    this.searchLabel,
+    this.searchGeometry,
+    this.searchSignal = 0,
     this.themeProfile,
   });
 
   final List<Footnote> notes;
+  final String? searchLabel;
+  final DocumentSearchGeometry? searchGeometry;
+  final int searchSignal;
   final bool overflowing;
 
   /// Hooguit het tekstvlak: de ClipRect houdt de inhoud op het papier; het
@@ -964,6 +889,17 @@ class _FootnotePaneState extends State<_FootnotePane> {
                 DocumentFootnotesView(
                   notes: widget.notes,
                   themeProfile: widget.themeProfile,
+                  noteWrapper: (note, child) => DocumentSearchOverlay(
+                    query: '',
+                    activeIndex: -1,
+                    measure: false,
+                    revealIntoView: true,
+                    revealSignal: widget.searchSignal,
+                    geometry: note.label == widget.searchLabel
+                        ? widget.searchGeometry
+                        : null,
+                    child: child,
+                  ),
                 ),
               ],
             ),
@@ -973,18 +909,3 @@ class _FootnotePaneState extends State<_FootnotePane> {
     );
   }
 }
-
-/// Of de markdown een regel bevat die precies één afbeelding is — dezelfde
-/// herkenning als `document_markdown_blocks._parseImageLine`. Alleen dan heeft
-/// de paginaweergave de meetboom nodig om te blijven staan: een afbeelding
-/// decodeert asynchroon, en pas als haar hoogte binnenkomt klopt het pagina-einde.
-bool _containsImageBlock(String markdown) {
-  for (final line in markdown.split('\n')) {
-    if (_imageLinePattern.hasMatch(line.trim())) return true;
-  }
-  return false;
-}
-
-///zelfde patroon als `document_markdown_blocks._imageLinePattern` — zie daar
-/// voor de ondersteuning van angle-bracket en ontsnapte haakjes.
-final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\((.+)\)$');
