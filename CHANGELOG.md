@@ -20,6 +20,11 @@ All notable changes to OciDeck are documented in this file.
   Validatie, schrijftips en de Marp-controle kwamen niet, en de balk bleef op
   "Controleren…" staan. Op het web draait de ronde nu op de main thread;
   native blijft hij op een achtergrond-isolate (#2764).
+- **Zoeken en springen.** Zoekresultaten krijgen tekstcontext en een directe
+  sprong naar de gevonden passage. Documenten houden hun huidige weergave;
+  presentaties openen het juiste tekstveld. De eerste Enter opent de eerste
+  treffer en zichtbare linktekst blijft vindbaar zonder linkdoelen te wijzigen.
+
 - **Presentaties openen op het web.** De privacyscan vraagt in de browser
   geen desktop-isolate meer op. Daardoor openen de proefpresentatielink en
   URL-import weer zonder de misleidende CORS-foutmelding.
@@ -53,6 +58,10 @@ All notable changes to OciDeck are documented in this file.
   live-verbinding. Duur, meter en teller blijven zichtbaar en leesbaar (#2757).
 
 ### Added
+
+- **Privé zoeken tijdens presenteren.** Met een apart publieksvenster kun je
+  passages en optioneel sprekersnotities terugvinden. Het publiek blijft op de
+  huidige dia totdat je bewust *Toon dia* kiest; automatisch doorspelen pauzeert.
 
 - **Quizvragen bij de export.** In het exportdialoog kun je vraagdia's
   meenemen, weglaten of als eigen bestand exporteren. De bestandsnaam krijgt

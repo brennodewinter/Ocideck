@@ -15,7 +15,7 @@
 | `Ctrl/Cmd + Z` | Undo |
 | `Ctrl/Cmd + Shift + Z` | Redo |
 | `Ctrl + Y` | Redo (alternative) |
-| `Ctrl/Cmd + F` | Find (presentation: dialog in Visual, in-editor bar in Markdown; document: in-editor bar regardless of where the tab has focus) |
+| `Ctrl/Cmd + F` | Search the open presentation or document and jump to an occurrence, keeping the current view |
 | `Ctrl/Cmd + H` | Find & replace (presentation: dialog in Visual, in-editor bar in Markdown; document: in-editor bar regardless of where the tab has focus) |
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
 | `Ctrl/Cmd + Shift + V` (in a document) | Paste without formatting: only the plain-text clipboard, no image, table or HTML conversion |
@@ -88,10 +88,10 @@ on the last-applied slide fields.
 | `Ctrl/Cmd + K` | Insert a link around the selection |
 | `Ctrl/Cmd + Space` | Open the searchable insert and formatting commands |
 | `Tab` / `Shift + Tab` | Indent / outdent the selected source lines |
-| `Enter` / `Shift + Enter` (in find field) | Next / previous match |
+| `Enter` / `Shift + Enter` (in find field) | First Enter opens the first proposed match; then next / previous match |
 | `Esc` | Close find bar |
 
-The find bar also offers previous/next buttons, a match counter (`1 / 3`), a
+The find bar also offers previous/next buttons, a match counter (for example, “Match 1 of 3”), a
 case-sensitivity toggle, **Replace** (current match), and **Replace all**. In the
 source field itself, Enter continues a bullet, numbered list or quote; brackets
 and parentheses pair automatically, and a third backtick opens a fenced block.
@@ -141,6 +141,7 @@ View & timing:
 
 | Shortcut | Action |
 | --- | --- |
+| `Ctrl/Cmd + F` | Private search when a separate audience window is open. Result selection stays private; **Show slide** publishes the chosen slide. Escape closes search only |
 | `P` | Toggle presenter view (notes, clock, countdown, per-slide timer, next slide) |
 | `F` | Fix the quality problem on the current slide in place — split an overfull slide (the overflow becomes continuation pages) or cut multi-sentence bullets apart. Works single- and dual-screen; a redacted slide is left untouched, and a slide with nothing to fix shows a brief note |
 | `N` · `Ctrl/Cmd + N` | Toggle **my notes** panel (recipient/course notes; local only, never on beamer). Inside the panel a bare `N` types a letter, so only `Ctrl/Cmd + N` (or `Esc`) closes it |
