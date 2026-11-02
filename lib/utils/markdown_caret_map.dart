@@ -1,4 +1,4 @@
-import 'inline_markdown.dart' show stripInlineMarkdown;
+import 'visible_markdown_search.dart';
 
 /// Vertaalt een cursorpositie heen en weer tussen de Markdown-bron en de platte
 /// tekst van de visuele (rijke-tekst) editor.
@@ -46,7 +46,9 @@ class MarkdownCaretMap {
       }
       if (fenced) {
         // In een codeblok staat er letterlijk wat er staat.
-        rows.add(_Row.text(start, line.length, 0, line, visualAt));
+        rows.add(
+          _Row.text(start, line.length, 0, line, visualAt, literal: true),
+        );
         visualAt += line.length + 1;
         continue;
       }
@@ -157,12 +159,14 @@ class _Row {
     : sourceSkip = 0,
       body = '',
       visible = '',
+      _literal = false,
       object = false;
 
   _Row.object(this.sourceStart, this.sourceLength, this.visualStart)
     : sourceSkip = 0,
       body = '',
       visible = '',
+      _literal = false,
       object = true;
 
   _Row.text(
@@ -170,10 +174,13 @@ class _Row {
     this.sourceLength,
     this.sourceSkip,
     this.body,
-    this.visualStart,
-  ) : visible = stripInlineMarkdown(body),
-      object = false;
+    this.visualStart, {
+    bool literal = false,
+  }) : visible = literal ? body : visibleMarkdownText(body),
+       _literal = literal,
+       object = false;
 
+  final bool _literal;
   final int sourceStart;
   final int sourceLength;
 
@@ -202,12 +209,16 @@ class _Row {
   /// nog voor tekst aanzag.
   late final List<int> _steps = () {
     final steps = List<int>.filled(body.length + 1, 0);
+    final positions = _literal
+        ? List.generate(body.length, (i) => i)
+        : VisibleMarkdownText(body).offsets;
     var seen = 0;
-    for (var i = 0; i < body.length; i++) {
+    for (var i = 0; i <= body.length; i++) {
+      while (seen < positions.length && positions[seen] < i) {
+        seen++;
+      }
       steps[i] = seen;
-      if (seen < visible.length && body[i] == visible[seen]) seen++;
     }
-    steps[body.length] = seen;
     return steps;
   }();
 

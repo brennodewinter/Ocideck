@@ -31,6 +31,21 @@ void main() {
       '\n'
       'Slot van het stuk.\n';
 
+  test('zoekbereiken volgen inline opmaak en herhaalde linklabels exact', () {
+    const source =
+        'een **belangrijke** passage en [belangrijke](belangrijke.invalid) passage';
+    final map = MarkdownCaretMap.of(source);
+    final plain = MarkdownQuillCodec.documentFromMarkdown(source).toPlainText();
+    final start = source.indexOf('belangrijke');
+    final end = source.indexOf(' passage') + ' passage'.length;
+    expect(
+      plain.substring(map.visualOffsetOf(start), map.visualOffsetOf(end)),
+      'belangrijke passage',
+    );
+    final second = source.lastIndexOf(' passage');
+    expect(map.visualOffsetOf(second), plain.lastIndexOf(' passage'));
+  });
+
   group('MarkdownCaretMap volgt de echte omzetting', () {
     final plat = MarkdownQuillCodec.documentFromMarkdown(bron).toPlainText();
     final kaart = MarkdownCaretMap.of(bron);

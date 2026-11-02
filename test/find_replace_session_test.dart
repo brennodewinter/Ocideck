@@ -82,12 +82,12 @@ void main() {
       find.next();
 
       expect(find.matchCount, 2);
-      expect(find.matchIndex, 1);
-      expect(revealed.last.start, 4);
+      expect(find.matchIndex, 0);
+      expect(revealed.last.start, 0);
       clock.elapse(const Duration(milliseconds: 160));
       expect(
         find.matchIndex,
-        1,
+        0,
         reason: 'de oude timer mag niet terugspringen',
       );
     });
@@ -301,24 +301,38 @@ void main() {
     });
   });
 
-  test('zoeken telt alleen proza — geen links, comments of code (#2137)', () {
-    final find = sessionFor(
-      'Management Team komt bijeen.\n\n'
-      '[Management Team](Management Team.md)\n\n'
-      '<!-- Management Team overlegt maandag. -->\n\n'
-      '```chart\nlabel: Management Team\n```\n\n'
-      '![Management Team](team.png)\n',
-    );
-    find.open(showReplace: false);
-    find.setQuery('Management Team');
+  test(
+    'zoeken vindt linklabels en houdt comments en specs verborgen (#2706)',
+    () {
+      final find = sessionFor(
+        'Management Team komt bijeen.\n\n'
+        '[Management Team](Management Team.md)\n\n'
+        '<!-- Management Team overlegt maandag. -->\n\n'
+        '```chart\nlabel: Management Team\n```\n\n'
+        '![Management Team](team.png)\n',
+      );
+      find.open(showReplace: false);
+      find.setQuery('Management Team');
 
-    expect(
-      find.matchCount,
-      1,
-      reason:
-          'alleen de lopende tekst telt; links, afbeeldingen, comments '
-          'en fenced code zijn machinesyntax',
-    );
+      expect(
+        find.matchCount,
+        2,
+        reason: 'linklabels zijn zichtbaar, doelen en specs niet',
+      );
+    },
+  );
+
+  test('zoeken geeft geen schrijfrecht op linklabels of code', () {
+    const source = '[kat](https://kat.invalid)\n\n```dart\nkat\n```';
+    final find = sessionFor(source)..open(showReplace: false);
+    find.setQuery('kat');
+    expect(find.matchCount, 2);
+    find.setReplacement('hond');
+    find.replaceCurrent();
+    find.replaceAll();
+    expect(controller.text, source);
+    find.open(showReplace: true);
+    expect(find.matchCount, 0);
   });
 
   test('alles vervangen laat machinesyntax ongemoeid (#2137)', () {

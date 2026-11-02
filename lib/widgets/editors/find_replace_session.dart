@@ -27,11 +27,20 @@ class FindReplaceSession {
     required this.controller,
     required this.onChanged,
     required this.onReveal,
+    this.searchMatches,
   });
 
   /// De broneditor waarop gezocht wordt. De sessie leest `text`, schrijft hem
   /// bij een vervanging, en zet de markering met `showSearchMatches`.
   final MarkdownSourceController controller;
+
+  /// Een gastheer met gestructureerde bron koppelt leesbare waarden aan bronposities.
+  final List<TextMatchRange> Function(
+    String source,
+    String query, {
+    bool caseSensitive,
+  })?
+  searchMatches;
 
   /// De gastheer vragen zichzelf opnieuw op te bouwen. Wordt aangeroepen ná de
   /// mutatie, zodat de opbouw de nieuwe stand ziet.
@@ -73,6 +82,23 @@ class FindReplaceSession {
 
   /// De gevonden plek waar de cursor nu op staat, of -1 als er geen is.
   int get matchIndex => _matchIndex;
+
+  List<TextMatchRange> get matches => _matches;
+
+  bool _revealed = false;
+  bool get hasRevealedMatch => _revealed;
+  int wrapDirection = 0;
+  String? _projectionSource;
+  VisibleMarkdownText? _projection;
+
+  /// Eén projectie per tekstversie; een nieuwe zoekletter ontleedt niet opnieuw.
+  VisibleMarkdownText get projection {
+    if (_projectionSource != controller.text) {
+      _projectionSource = controller.text;
+      _projection = VisibleMarkdownText(controller.text);
+    }
+    return _projection!;
+  }
 
   /// Open de balk. [showReplace] bepaalt of het vervangveld meekomt; de eerste
   /// treffer wordt meteen aangewezen, zodat je niet nog een keer hoeft te
@@ -138,15 +164,21 @@ class FindReplaceSession {
     if (_refreshTimer?.isActive == true) _refreshMatches();
   }
 
-  /// Treffers in de lopende tekst van [controller.text]: machinesyntax
-  /// (links, comments, code, voetnootmarkeringen) is gemaskeerd — die telt
-  /// niet mee en mag vervangen nooit stil herschrijven (#2137).
-  List<TextMatchRange> _proseMatches() => findAllMatches(
-    controller.text,
-    _query,
-    caseSensitive: _caseSensitive,
-    protectedRanges: markdownNonTextRanges(controller.text),
-  );
+  /// Zoeken volgt zichtbare inhoud. Vervangen houdt de oorspronkelijke
+  /// beschermgrenzen voor links en machinespecificaties (#2137).
+  List<TextMatchRange> _proseMatches() => !_showReplace
+      ? searchMatches?.call(
+              controller.text,
+              _query,
+              caseSensitive: _caseSensitive,
+            ) ??
+            projection.matches(_query, caseSensitive: _caseSensitive)
+      : findAllMatches(
+          controller.text,
+          _query,
+          caseSensitive: _caseSensitive,
+          protectedRanges: markdownNonTextRanges(controller.text),
+        );
 
   /// De zoekvraag zoals die in het zoekveld wordt getypt: telt de treffers
   /// bij, maar springt niet naar de eerste treffer — anders trekt elke
@@ -154,6 +186,8 @@ class FindReplaceSession {
   /// zoekterm niet invullen (#1760).
   void onQueryFieldChanged(String value) {
     _query = value;
+    wrapDirection = 0;
+    _revealed = false;
     _scheduleRefresh(resetMatch: true);
   }
 
@@ -202,7 +236,10 @@ class FindReplaceSession {
     // treffer om naartoe te gaan, en de weergave verslepen zonder dat er iets
     // te zien is, leest als een editor die uit zichzelf wegloopt.
     final index = jumpIndex;
-    if (_visible && index != null) onReveal(matches[index]);
+    if (_visible && index != null) {
+      _revealed = true;
+      onReveal(matches[index]);
+    }
   }
 
   /// Bijwerken terwijl er getypt wordt: de teller loopt mee, maar de cursor
@@ -217,7 +254,9 @@ class FindReplaceSession {
   void next() {
     _flushPendingRefresh();
     if (_matches.isEmpty) return;
-    _matchIndex = nextMatchIndex(_matchIndex, _matches.length);
+    wrapDirection = _revealed && _matchIndex == _matches.length - 1 ? 1 : 0;
+    _matchIndex = _revealed ? nextMatchIndex(_matchIndex, _matches.length) : 0;
+    _revealed = true;
     onChanged();
     syncHighlights();
     onReveal(_matches[_matchIndex]);
@@ -227,16 +266,32 @@ class FindReplaceSession {
   void previous() {
     _flushPendingRefresh();
     if (_matches.isEmpty) return;
-    _matchIndex = previousMatchIndex(_matchIndex, _matches.length);
+    wrapDirection = _revealed && _matchIndex == 0 ? -1 : 0;
+    _matchIndex = _revealed
+        ? previousMatchIndex(_matchIndex, _matches.length)
+        : _matches.length - 1;
+    _revealed = true;
     onChanged();
     syncHighlights();
     onReveal(_matches[_matchIndex]);
+  }
+
+  /// Rechtstreeks kiezen laat de zoekvraag en het document ongemoeid.
+  void selectMatch(int index) {
+    _flushPendingRefresh();
+    if (index < 0 || index >= _matches.length) return;
+    _matchIndex = index;
+    _revealed = true;
+    onChanged();
+    syncHighlights();
+    onReveal(_matches[index]);
   }
 
   /// Vervang de treffer waar de cursor op staat en tel opnieuw. De cursor
   /// blijft op dezelfde plek in de rij staan, zodat herhaald vervangen door de
   /// tekst heen loopt in plaats van steeds terug naar het begin te gaan.
   void replaceCurrent() {
+    if (!_showReplace) return;
     _flushPendingRefresh();
     if (_matchIndex < 0 || _matchIndex >= _matches.length) return;
     final match = _matches[_matchIndex];
@@ -258,6 +313,7 @@ class FindReplaceSession {
   /// de oude posities slaan nergens meer op en een nieuwe telling zou de cursor
   /// door het hele document laten springen.
   void replaceAll() {
+    if (!_showReplace) return;
     _flushPendingRefresh();
     if (_query.isEmpty) return;
     final before = controller.selection;
