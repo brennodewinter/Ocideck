@@ -4,6 +4,7 @@ library;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -71,14 +72,16 @@ void main() {
           ], workingDirectory: dir.path).exitCode,
           0,
         );
-        expect(
-          Process.runSync('zip', [
-            '-q',
-            'artifact.zip',
-            bundle,
-          ], workingDirectory: dir.path).exitCode,
-          0,
-        );
+        final artifact = Archive()
+          ..addFile(
+            ArchiveFile.bytes(
+              bundle,
+              File('${dir.path}/$bundle').readAsBytesSync(),
+            ),
+          );
+        File(
+          '${dir.path}/artifact.zip',
+        ).writeAsBytesSync(ZipEncoder().encode(artifact));
         final harness = File('${dir.path}/harness.sh')
           ..writeAsStringSync('''
 set -euo pipefail
