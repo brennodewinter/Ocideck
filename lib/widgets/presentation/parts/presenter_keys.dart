@@ -87,6 +87,12 @@ extension _PresenterKeys on _FullscreenPresenterState {
     bool control = false,
     bool shift = false,
   }) {
+    if (_searchOpen) return KeyEventResult.handled;
+    if ((meta || control) && key == LogicalKeyboardKey.keyF) {
+      unawaited(_openSearch());
+      return KeyEventResult.handled;
+    }
+
     // Cmd+W / Ctrl+W sluit de presentatie, net als het sluiten van een venster
     // elders in het systeem — werkt in elke modus, ongeacht overlays.
     if ((meta || control) && key == LogicalKeyboardKey.keyW) {

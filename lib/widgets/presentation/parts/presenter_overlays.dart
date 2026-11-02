@@ -447,6 +447,11 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           message: labelWithShortcut(l10n, 'Slide-overzicht', 'G'),
           child: _NavButton(icon: Icons.grid_view_rounded, onTap: _toggleGrid),
         ),
+        const SizedBox(width: 8),
+        Tooltip(
+          message: labelWithShortcut(l10n, 'Zoeken', 'F'),
+          child: _NavButton(icon: Icons.search, onTap: _openSearch),
+        ),
         if (_displays.length > 1) ...[
           const SizedBox(width: 8),
           Tooltip(
