@@ -224,6 +224,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Markdown-bron ([_controller].text) — dat is in beide modi dezelfde tekst,
   /// dus de teller klopt ongeacht of je in Visueel of Bron zoekt.
   late final FindReplaceSession _find;
+  late final _DocumentSearchIndex _searchIndex = _DocumentSearchIndex(this);
 
   /// Signaal + Markdown-bereik voor de visuele stand: zet de Quill-cursor op de
   /// match. In de Bron-stand zet [_jumpToMatch] de controller-selectie direct;
@@ -246,6 +247,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ref.read(documentProvider).document?.body ?? '',
     );
     _controller = MarkdownSourceController(text: initialBody);
+    _chrome.observeControllerValue(_controller.value);
     // Eén luisteraar vangt élke body-wijziging in de controller — typen én de
     // opmaak-knoppenbalk (die de controller rechtstreeks muteert en dus geen
     // onChanged afvuurt). Zo stroomt alles langs dezelfde weg naar de notifier.
@@ -256,6 +258,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         if (mounted) setState(() {});
       },
       onReveal: _jumpToMatch,
+      searchMatches: _searchIndex.matches,
     );
     // Bevat de body al bij het openen een constructie die de visuele editor niet
     // verliesvrij aankan, dan start direct in de Bron-modus. De gebruiker hoeft
@@ -288,6 +291,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// wanneer alleen de selectie/cursor verschoof (body gelijk) — anders zou een
   /// simpele cursorbeweging een lege bewerking worden.
   void _onControllerChanged() {
+    if (!_chrome.observeControllerValue(_controller.value)) return;
     if (_applyingExternal) return;
     _chrome.schedule();
     final body = _controller.text;

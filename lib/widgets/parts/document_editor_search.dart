@@ -21,13 +21,16 @@ extension _DocumentEditorSearch on _DocumentEditorScreenState {
       _find.close();
       _editorFocus.requestFocus();
     },
-    resultContexts: _documentSearchContexts(_find),
+    resultContexts: _searchIndex.contexts(_find),
     onSelectMatch: _find.selectMatch,
     wrapDirection: _find.wrapDirection,
   );
 
   void _openFind({required bool showReplace}) {
     ref.read(documentProvider.notifier).flushPendingVisualEdit();
+    if (showReplace && _viewMode == _DocViewMode.pages) {
+      _changeViewMode(_DocViewMode.source);
+    }
     _find.open(showReplace: showReplace);
   }
 
@@ -118,18 +121,47 @@ extension _DocumentEditorSearch on _DocumentEditorScreenState {
   );
 }
 
-List<String> _documentSearchContexts(FindReplaceSession findSession) {
-  if (findSession.matches.isEmpty) return const [];
-  final projection = findSession.projection;
-  final outline = buildMarkdownOutline(findSession.controller.text);
-  return [
-    for (final match in findSession.matches)
-      () {
-        final chapter = activeOutlineIndexForOffset(outline, match.start);
-        final location = chapter < 0
-            ? ''
-            : '${visibleMarkdownText(outline[chapter].title)} · ';
-        return '$location${projection.context(match)}';
-      }(),
-  ];
+/// Cachet dezelfde inhoudsprojectie als het actieve documentoppervlak.
+class _DocumentSearchIndex {
+  _DocumentSearchIndex(this.owner);
+  final _DocumentEditorScreenState owner;
+  String? _source;
+  bool? _pages;
+  VisibleMarkdownText? _projection;
+
+  VisibleMarkdownText get projection {
+    final source = owner._controller.text;
+    final pages = owner._viewMode == _DocViewMode.pages;
+    if (_source != source || _pages != pages) {
+      _source = source;
+      _pages = pages;
+      _projection = VisibleMarkdownText(
+        source,
+        includeUnreferencedFootnotes: !pages,
+      );
+    }
+    return _projection!;
+  }
+
+  List<TextMatchRange> matches(
+    String source,
+    String query, {
+    bool caseSensitive = false,
+  }) => projection.matches(query, caseSensitive: caseSensitive);
+
+  List<String> contexts(FindReplaceSession findSession) {
+    if (findSession.matches.isEmpty) return const [];
+    final projection = this.projection;
+    final outline = buildMarkdownOutline(findSession.controller.text);
+    return [
+      for (final match in findSession.matches)
+        () {
+          final chapter = activeOutlineIndexForOffset(outline, match.start);
+          final location = chapter < 0
+              ? ''
+              : '${visibleMarkdownText(outline[chapter].title)} · ';
+          return '$location${projection.context(match)}';
+        }(),
+    ];
+  }
 }

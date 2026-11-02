@@ -242,6 +242,25 @@ class FindReplaceSession {
     }
   }
 
+  /// Een ander leesoppervlak kan verborgen inhoud weglaten. Bewaar een
+  /// gekozen bronbereik, nooit alleen zijn oude rang, en spring niet zelf.
+  void refreshSearchScope({bool? showReplace}) {
+    _refreshTimer?.cancel();
+    _resetMatchAfterTyping = false;
+    final previous =
+        _revealed && _matchIndex >= 0 && _matchIndex < _matches.length
+        ? _matches[_matchIndex]
+        : null;
+    _showReplace = showReplace ?? _showReplace;
+    _matches = _proseMatches();
+    final kept = previous == null ? -1 : _matches.indexOf(previous);
+    _revealed = kept >= 0;
+    _matchIndex = kept >= 0 ? kept : (_matches.isEmpty ? -1 : 0);
+    wrapDirection = 0;
+    onChanged();
+    syncHighlights();
+  }
+
   /// Bijwerken terwijl er getypt wordt: de teller loopt mee, maar de cursor
   /// springt niet — anders zou de editor je tijdens het typen wegtrekken van
   /// waar je bezig bent.

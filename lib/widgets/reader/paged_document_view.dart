@@ -424,8 +424,29 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       continuationBlocks: _timelinePagination.continuationBlocks,
       continuableBlocks: _timelinePagination.blocks,
     );
+    double? cachedWidth;
+    ThemeData? cachedTheme;
+    Locale? cachedLocale;
+    TextScaler? cachedScaler;
+    Widget? cachedContent;
     return _pageLayout = LayoutBuilder(
       builder: (context, constraints) {
+        final theme = Theme.of(context);
+        final locale = Localizations.localeOf(context);
+        final scaler = MediaQuery.textScalerOf(context);
+        // Zoekresultaten en rondloopfeedback veranderen alleen de viewport-
+        // hoogte. Het papier past op breedte: behoud de dure vellenboom.
+        if (cachedWidth == constraints.maxWidth &&
+            cachedTheme == theme &&
+            cachedLocale == locale &&
+            cachedScaler == scaler &&
+            cachedContent != null) {
+          return cachedContent!;
+        }
+        cachedWidth = constraints.maxWidth;
+        cachedTheme = theme;
+        cachedLocale = locale;
+        cachedScaler = scaler;
         // Een vel dat breder is dan het venster zou onbereikbaar zijn: de
         // vellen staan in een verticale rol, dus er is geen horizontale
         // schuifbalk om naar de rechterhelft te gaan. A0 staat gewoon in de
@@ -434,7 +455,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         final (sheetW, _) = _sheetPx;
         final room = constraints.maxWidth - 32;
         final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
-        return SingleChildScrollView(
+        return cachedContent = SingleChildScrollView(
           controller: _searchScroll,
           // Ingezoomd wordt het vel breder dan het venster. Zonder deze tweede,
           // horizontale rol zou de rechterhelft niet alleen onbereikbaar zijn

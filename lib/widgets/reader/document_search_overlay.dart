@@ -135,7 +135,10 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
     final boxes = <Rect>[];
     var ordinal = 0;
     void visit(RenderObject object) {
-      if (object is _RenderExcludeDocumentSearch) return;
+      if (object is _RenderExcludeDocumentSearch ||
+          ordinal > widget.activeIndex) {
+        return;
+      }
       if (object is RenderParagraph || object is RenderEditable) {
         final box = object as RenderBox;
         if (!box.hasSize) return;
@@ -158,6 +161,7 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
               ? object.getBoxesForSelection(selection)
               : (object as RenderEditable).getBoxesForSelection(selection);
           boxes.addAll(found.map((box) => box.toRect().shift(origin)));
+          break;
         }
       }
       object.visitChildren(visit);

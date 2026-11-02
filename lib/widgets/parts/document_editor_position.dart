@@ -49,6 +49,11 @@ class _DocPosition {
     }
     _state._rebuild(() => _state._viewMode = mode);
     final find = _state._find;
+    if (find.visible) {
+      find.refreshSearchScope(
+        showReplace: mode == _DocViewMode.pages ? false : null,
+      );
+    }
     if (find.visible && find.hasRevealedMatch && find.matches.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_state.mounted) _state._jumpToMatch(find.matches[find.matchIndex]);
