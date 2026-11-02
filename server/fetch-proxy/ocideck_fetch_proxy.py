@@ -278,6 +278,9 @@ class Handler(BaseHTTPRequestHandler):
         path = parsed.path or "/"
         if parsed.query:
             path += "?" + parsed.query
+        # Zodra de 200 met headers weg is, kan een fout geen eigen antwoord
+        # meer krijgen: dat zou als tweede statusregel in de body belanden.
+        streaming = False
         try:
             conn = conn_cls(pinned, parsed.hostname, port)
             try:
@@ -315,6 +318,7 @@ class Handler(BaseHTTPRequestHandler):
                     self.send_header("Transfer-Encoding", "chunked")
                     chunked = True
                 self.end_headers()
+                streaming = True
 
                 total = 0
                 while True:
@@ -342,6 +346,13 @@ class Handler(BaseHTTPRequestHandler):
             finally:
                 conn.close()
         except (OSError, ssl.SSLError, http.client.HTTPException):
+            if streaming:
+                # De bron viel halverwege weg. Verbinding kappen, net als bij
+                # MAX_BYTES: de client ziet een afgebroken antwoord, niet een
+                # 502 midden in de bytes en een verbinding die blijft hangen
+                # (#2755).
+                self.close_connection = True
+                return
             # Bronhost/route defect of TLS-weigering: één neutrale melding,
             # zonder de (mogelijk gevoelige) doel-URL te echoën.
             try:
