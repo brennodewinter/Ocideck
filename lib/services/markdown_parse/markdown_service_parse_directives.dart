@@ -75,9 +75,32 @@ typedef _BlockDirectives = ({
 bool _isTailNote(String tail) =>
     tail.replaceAll(_reHtmlComment, '').trim().isEmpty;
 
-String _takeNote(StringBuffer notes, String content) {
+typedef _NoteSpan = void Function(Match);
+
+String _takeNote(
+  StringBuffer notes,
+  String content, [
+  _NoteSpan? note,
+  Match? match,
+]) {
+  if (match != null) note?.call(match);
   notes.write(notes.isEmpty ? content : '\n$content');
   return '';
+}
+
+({String cssClass, String remaining}) _classForNoteScan(
+  String block,
+  _NoteSpan? note,
+) {
+  final parsed = _stripClassDirective(block);
+  if (note == null) return parsed;
+  return (
+    cssClass: parsed.cssClass,
+    remaining: block.replaceFirstMapped(
+      _reClassDirective,
+      (match) => match.group(0)!.replaceAll(RegExp(r'[^\r\n]'), ' '),
+    ),
+  );
 }
 
 ({String cssClass, String remaining}) _stripClassDirective(String block) {
@@ -115,19 +138,10 @@ extension _MarkdownParseDirectives on MarkdownService {
   /// checklist/title-image/title-colour/bullet-marker), accumulating presenter
   /// notes from any non-directive comment. Returns the stripped body plus all
   /// the decoded directive values.
-  _BlockDirectives _parseBlockDirectives(
-    String block, {
-    bool preserveOffsets = false,
-    void Function(Match)? onNote,
-  }) {
-    final classDirective = _stripClassDirective(block);
+  _BlockDirectives _parseBlockDirectives(String block, [_NoteSpan? note]) {
+    final classDirective = _classForNoteScan(block, note);
     final cssClass = classDirective.cssClass;
-    var remaining = preserveOffsets
-        ? block.replaceFirstMapped(
-            _reClassDirective,
-            (match) => match.group(0)!.replaceAll(RegExp(r'[^\r\n]'), ' '),
-          )
-        : classDirective.remaining;
+    var remaining = classDirective.remaining;
 
     // Extract presenter notes and advance timing from HTML comments
     final notesBuffer = StringBuffer();
@@ -168,10 +182,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       final raw = m.group(1)!;
       final content = raw.trim();
       // Meerregelig is altijd een notitieblok — richtlijnen passen op één regel.
-      if (raw.contains('\n')) {
-        onNote?.call(m);
-        return _takeNote(notesBuffer, content);
-      }
+      if (raw.contains('\n')) return _takeNote(notesBuffer, content, note, m);
       if (content.startsWith('advance:')) {
         advanceDuration = _parseAdvanceDuration(content);
       } else if (content == 'skip') {
@@ -279,8 +290,7 @@ extension _MarkdownParseDirectives on MarkdownService {
         }
         // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
         if (_isTailNote(source.substring(m.end))) {
-          onNote?.call(m);
-          return _takeNote(notesBuffer, content);
+          return _takeNote(notesBuffer, content, note, m);
         }
         return m.group(0)!;
       }
@@ -437,13 +447,9 @@ extension MarkdownSpeakerNoteRanges on MarkdownService {
       }
       return raw.replaceAll(RegExp(r'[^\r\n]'), ' ');
     });
-    _parseBlockDirectives(
-      positioned,
-      preserveOffsets: true,
-      onNote: (match) {
-        ranges.add((start: match.start + 4, end: match.end - 3));
-      },
-    );
+    _parseBlockDirectives(positioned, (match) {
+      ranges.add((start: match.start + 4, end: match.end - 3));
+    });
     return ranges;
   }
 }

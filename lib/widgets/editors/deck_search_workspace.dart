@@ -11,6 +11,7 @@ import 'deck_search_highlight.dart';
 import 'editor_text_controller.dart';
 import 'markdown_find_bar.dart';
 import '../markdown_editor/markdown_editor.dart';
+import '../markdown_editor/wysiwyg_notes_field.dart';
 import '../panels/preview_panel.dart';
 import '../reader/document_search_overlay.dart';
 
@@ -43,6 +44,7 @@ class _DeckSearchWorkspaceState extends ConsumerState<DeckSearchWorkspace> {
 
   void _search() {
     final deck = ref.read(deckProvider).deck;
+    _wrapDirection = 0;
     final identity = _target?.identity;
     _matches = deck == null
         ? const []
@@ -138,6 +140,14 @@ class _DeckSearchWorkspaceState extends ConsumerState<DeckSearchWorkspace> {
                 ? controller.searchFieldId
                 : SearchFieldAnchor.fieldOf(element)) ==
             match.fieldId) {
+          void findFocus(Element child) {
+            if (child.widget case WysiwygNotesField(:final focusNode)) {
+              _targetFocus = focusNode;
+            }
+            child.visitChildren(findFocus);
+          }
+
+          element.visitChildren(findFocus);
           Scrollable.ensureVisible(element, alignment: 0.25);
         }
       }
@@ -198,7 +208,10 @@ class _DeckSearchWorkspaceState extends ConsumerState<DeckSearchWorkspace> {
               for (final match in _matches)
                 '${l10n.d('Dia')} ${match.slideIndex + 1} · ${l10n.d(match.fieldLabel)} — ${match.context}',
             ],
-            onSelectMatch: _choose,
+            onSelectMatch: (index) {
+              _wrapDirection = 0;
+              _choose(index);
+            },
             wrapDirection: _wrapDirection,
             query: _query,
             replace: '',
