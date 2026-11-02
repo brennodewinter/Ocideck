@@ -1636,6 +1636,19 @@ const _dutchSourceAddBg = <String, String>{
   'Ga naar de brontabel': 'Към изходната таблица',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Тази таблица е копие на изходната таблица "{bron}". Редактирайте източника и изберете Обновяване, или откачете изгледа като моментна снимка.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'За лично търсене започнете с отделен прозорец за презентатора.',
+  'Privé zoeken': 'Лично търсене',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Публиката вижда текущия слайд, докато не изберете Покажи слайд. Автоматичното възпроизвеждане е на пауза. Споделяйте само прозореца за публиката, а не целия работен плот.',
+  'Ook in sprekersnotities': 'Търсене и в бележките на лектора',
+  'Typ om te zoeken': 'Въведете текст за търсене',
+  'Toon dia': 'Покажи слайд',
+  'Verder vanaf het begin': 'Продължаване от началото',
+  'Verder vanaf het einde': 'Продължаване от края',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Няма резултати. Опитайте с по-кратък текст за търсене.',
+  'Treffer {n} van {m}': 'Съвпадение {n} от {m}',
   'Quizvragen': 'Въпроси от теста',
   'Met vragen': 'С въпроси',
   'Zonder vragen': 'Без въпроси',

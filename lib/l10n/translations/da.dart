@@ -1617,6 +1617,19 @@ const _dutchSourceAddDa = <String, String>{
   'Ga naar de brontabel': 'Gå til kildetabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Denne tabel er en afskrift af kildetabellen "{bron}". Rediger kilden og vælg Opdater, eller kobl visningen fra som et øjebliksbillede.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Start med et separat præsentatørvindue for at søge privat.',
+  'Privé zoeken': 'Privat søgning',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publikum bliver på det aktuelle dias, indtil du vælger Vis dias. Automatisk afspilning er sat på pause. Del kun publikums vindue, ikke hele skrivebordet.',
+  'Ook in sprekersnotities': 'Søg også i talernoter',
+  'Typ om te zoeken': 'Skriv for at søge',
+  'Toon dia': 'Vis dias',
+  'Verder vanaf het begin': 'Fortsætter fra begyndelsen',
+  'Verder vanaf het einde': 'Fortsætter fra slutningen',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Ingen resultater. Prøv en kortere søgetekst.',
+  'Treffer {n} van {m}': 'Træffer {n} af {m}',
   'Quizvragen': 'Quizspørgsmål',
   'Met vragen': 'Med spørgsmål',
   'Zonder vragen': 'Uden spørgsmål',

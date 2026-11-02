@@ -663,6 +663,19 @@ const _dutchSourceAddPap = {
   'Ga naar de brontabel': 'Bai na e tabela fuente',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'E tabela aki ta un kopia di e tabela fuente "{bron}". Editá e fuente i skohe Refresh, òf deskonektá e vista komo snapshot.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Kuminsá ku un bentana separá pa presentadó pa buska privadamente.',
+  'Privé zoeken': 'Buska privadamente',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'E públiko ta keda riba e diapositiva aktual te bo skohe Mustra diapositiva. Reprodukshon outomátiko ta na pousa. Kompartí solamente e bentana di públiko, no henter bo desktop.',
+  'Ook in sprekersnotities': 'Buska tambe den nota di oradó',
+  'Typ om te zoeken': 'Tipea pa buska',
+  'Toon dia': 'Mustra diapositiva',
+  'Verder vanaf het begin': 'Kontinuá for di prinsipio',
+  'Verder vanaf het einde': 'Kontinuá for di final',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'No tin resultado. Purba un teksto di búskeda mas kòrtiku.',
+  'Treffer {n} van {m}': 'Resultado {n} di {m}',
   'Quizvragen': 'Preguntanan di kuis',
   'Met vragen': 'Ku preguntanan',
   'Zonder vragen': 'Sin preguntanan',

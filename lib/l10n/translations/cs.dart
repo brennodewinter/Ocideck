@@ -1618,6 +1618,19 @@ const _dutchSourceAddCs = <String, String>{
   'Ga naar de brontabel': 'Přejít na zdrojovou tabulku',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tato tabulka je opis zdrojové tabulky "{bron}". Upravte zdroj a zvolte Obnovit, nebo odpojte zobrazení jako snímek.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Pro soukromé hledání spusťte prezentaci se samostatným oknem přednášejícího.',
+  'Privé zoeken': 'Soukromé hledání',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publikum uvidí aktuální snímek, dokud nezvolíte Zobrazit snímek. Automatické přehrávání je pozastaveno. Sdílejte pouze okno pro publikum, nikoli celou plochu.',
+  'Ook in sprekersnotities': 'Hledat i v poznámkách přednášejícího',
+  'Typ om te zoeken': 'Zadejte hledaný text',
+  'Toon dia': 'Zobrazit snímek',
+  'Verder vanaf het begin': 'Pokračování od začátku',
+  'Verder vanaf het einde': 'Pokračování od konce',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Žádné výsledky. Zkuste kratší hledaný text.',
+  'Treffer {n} van {m}': 'Výskyt {n} z {m}',
   'Quizvragen': 'Kvízové otázky',
   'Met vragen': 'S otázkami',
   'Zonder vragen': 'Bez otázek',

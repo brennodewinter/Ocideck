@@ -1610,6 +1610,19 @@ const _dutchSourceAddEt = <String, String>{
   'Ga naar de brontabel': 'Mine lähtetabelisse',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'See tabel on lähtetabeli "{bron}" koopia. Muuda lähtetabelit ja vali Värskenda või ühenda vaade hetkepildina lahti.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Privaatseks otsinguks alusta eraldi esinejavaatega aknas.',
+  'Privé zoeken': 'Privaatne otsing',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publik näeb praegust slaidi, kuni valid Näita slaidi. Automaatne esitus on peatatud. Jaga ainult publiku akent, mitte kogu töölauda.',
+  'Ook in sprekersnotities': 'Otsi ka esineja märkmetest',
+  'Typ om te zoeken': 'Otsimiseks kirjuta',
+  'Toon dia': 'Näita slaidi',
+  'Verder vanaf het begin': 'Jätkatakse algusest',
+  'Verder vanaf het einde': 'Jätkatakse lõpust',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Tulemusi pole. Proovi lühemat otsinguteksti.',
+  'Treffer {n} van {m}': 'Vaste {n}/{m}',
   'Quizvragen': 'Viktoriiniküsimused',
   'Met vragen': 'Küsimustega',
   'Zonder vragen': 'Küsimusteta',

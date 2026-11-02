@@ -1623,6 +1623,19 @@ const _dutchSourceAddLt = <String, String>{
   'Ga naar de brontabel': 'Eiti į šaltinio lentelę',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ši lentelė yra šaltinio lentelės "{bron}" kopija. Redaguokite šaltinį ir pasirinkite Atnaujinti, arba atjunkite rodinį kaip momentinę kopiją.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Norėdami ieškoti privačiai, pradėkite su atskiru pranešėjo langu.',
+  'Privé zoeken': 'Privati paieška',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Auditorija matys dabartinę skaidrę, kol pasirinksite Rodyti skaidrę. Automatinis atkūrimas pristabdytas. Bendrinkite tik auditorijos langą, o ne visą darbalaukį.',
+  'Ook in sprekersnotities': 'Ieškoti ir pranešėjo pastabose',
+  'Typ om te zoeken': 'Rašykite, kad ieškotumėte',
+  'Toon dia': 'Rodyti skaidrę',
+  'Verder vanaf het begin': 'Tęsiama nuo pradžios',
+  'Verder vanaf het einde': 'Tęsiama nuo pabaigos',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Rezultatų nėra. Pabandykite trumpesnį paieškos tekstą.',
+  'Treffer {n} van {m}': 'Atitikmuo {n} iš {m}',
   'Quizvragen': 'Viktorinos klausimai',
   'Met vragen': 'Su klausimais',
   'Zonder vragen': 'Be klausimų',

@@ -1615,6 +1615,19 @@ const _dutchSourceAddLv = <String, String>{
   'Ga naar de brontabel': 'Doties uz avota tabulu',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Šī tabula ir avota tabulas "{bron}" kopija. Rediģējiet avotu un izvēlieties Atsvaidzināt, vai atvienojiet skatu kā momentuzņēmumu.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Lai meklētu privāti, sāciet ar atsevišķu prezentētāja logu.',
+  'Privé zoeken': 'Privāta meklēšana',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Auditorija redz pašreizējo slaidu, līdz izvēlaties Rādīt slaidu. Automātiskā atskaņošana ir apturēta. Kopīgojiet tikai auditorijas logu, nevis visu darbvirsmu.',
+  'Ook in sprekersnotities': 'Meklēt arī runātāja piezīmēs',
+  'Typ om te zoeken': 'Rakstiet, lai meklētu',
+  'Toon dia': 'Rādīt slaidu',
+  'Verder vanaf het begin': 'Turpināt no sākuma',
+  'Verder vanaf het einde': 'Turpināt no beigām',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Nav rezultātu. Mēģiniet īsāku meklēšanas tekstu.',
+  'Treffer {n} van {m}': 'Atbilstība {n} no {m}',
   'Quizvragen': 'Viktorīnas jautājumi',
   'Met vragen': 'Ar jautājumiem',
   'Zonder vragen': 'Bez jautājumiem',

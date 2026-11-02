@@ -1619,6 +1619,19 @@ const _dutchSourceAddHu = <String, String>{
   'Ga naar de brontabel': 'Ugrás a forrástáblához',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ez a táblázat a "{bron}" forrástábla másolata. Szerkessze a forrást és válassza a Frissítés lehetőséget, vagy válassza le a nézetet pillanatképként.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Privát kereséshez indíts külön előadói ablakot.',
+  'Privé zoeken': 'Privát keresés',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'A közönség az aktuális diát látja, amíg ki nem választod a Dia megjelenítése lehetőséget. Az automatikus lejátszás szünetel. Csak a közönség ablakát oszd meg, ne a teljes asztalt.',
+  'Ook in sprekersnotities': 'Keresés az előadói jegyzetekben is',
+  'Typ om te zoeken': 'Írj be keresési szöveget',
+  'Toon dia': 'Dia megjelenítése',
+  'Verder vanaf het begin': 'Folytatás az elejétől',
+  'Verder vanaf het einde': 'Folytatás a végétől',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Nincs találat. Próbálj rövidebb keresési szöveget.',
+  'Treffer {n} van {m}': '{n}. találat, összesen {m}',
   'Quizvragen': 'Kvízkérdések',
   'Met vragen': 'Kérdésekkel',
   'Zonder vragen': 'Kérdések nélkül',

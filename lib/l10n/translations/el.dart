@@ -1642,6 +1642,19 @@ const _dutchSourceAddEl = <String, String>{
   'Ga naar de brontabel': 'Μετάβαση στον πίνακα προέλευσης',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Αυτός ο πίνακας είναι αντίγραφο του πίνακα προέλευσης "{bron}". Επεξεργαστείτε την προέλευση και επιλέξτε Ανανέωση, ή αποσυνδέστε την προβολή ως στιγμιότυπο.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Ξεκινήστε με ξεχωριστό παράθυρο παρουσιαστή για ιδιωτική αναζήτηση.',
+  'Privé zoeken': 'Ιδιωτική αναζήτηση',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Το κοινό παραμένει στην τρέχουσα διαφάνεια μέχρι να επιλέξετε Εμφάνιση διαφάνειας. Η αυτόματη αναπαραγωγή έχει τεθεί σε παύση. Μοιραστείτε μόνο το παράθυρο του κοινού, όχι ολόκληρη την επιφάνεια εργασίας.',
+  'Ook in sprekersnotities': 'Αναζήτηση και στις σημειώσεις ομιλητή',
+  'Typ om te zoeken': 'Πληκτρολογήστε για αναζήτηση',
+  'Toon dia': 'Εμφάνιση διαφάνειας',
+  'Verder vanaf het begin': 'Συνέχεια από την αρχή',
+  'Verder vanaf het einde': 'Συνέχεια από το τέλος',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Δεν υπάρχουν αποτελέσματα. Δοκιμάστε μικρότερο κείμενο αναζήτησης.',
+  'Treffer {n} van {m}': 'Αντιστοιχία {n} από {m}',
   'Quizvragen': 'Ερωτήσεις κουίζ',
   'Met vragen': 'Με ερωτήσεις',
   'Zonder vragen': 'Χωρίς ερωτήσεις',

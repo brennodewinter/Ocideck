@@ -1633,6 +1633,19 @@ const _dutchSourceAddRo = <String, String>{
   'Ga naar de brontabel': 'Mergi la tabelul sursă',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Acest tabel este o copie a tabelului sursă "{bron}". Editați sursa și alegeți Reîmprospătare, sau detașați vizualizarea ca instantaneu.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Pornește cu o fereastră separată pentru prezentator ca să cauți în privat.',
+  'Privé zoeken': 'Căutare privată',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publicul rămâne la diapozitivul curent până alegi Afișează diapozitivul. Redarea automată este întreruptă. Partajează doar fereastra publicului, nu întregul desktop.',
+  'Ook in sprekersnotities': 'Caută și în notițele prezentatorului',
+  'Typ om te zoeken': 'Tastează pentru a căuta',
+  'Toon dia': 'Afișează diapozitivul',
+  'Verder vanaf het begin': 'Continuare de la început',
+  'Verder vanaf het einde': 'Continuare de la sfârșit',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Niciun rezultat. Încearcă un text de căutare mai scurt.',
+  'Treffer {n} van {m}': 'Rezultatul {n} din {m}',
   'Quizvragen': 'Întrebări de quiz',
   'Met vragen': 'Cu întrebări',
   'Zonder vragen': 'Fără întrebări',

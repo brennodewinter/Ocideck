@@ -1616,6 +1616,19 @@ const _dutchSourceAddSv = <String, String>{
   'Ga naar de brontabel': 'Gå till källtabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Den här tabellen är en avskrift av källtabellen "{bron}". Redigera källan och välj Uppdatera, eller koppla loss vyn som en ögonblicksbild.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Starta med ett separat presentatörsfönster för att söka privat.',
+  'Privé zoeken': 'Privat sökning',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publiken ser den aktuella bilden tills du väljer Visa bild. Automatisk uppspelning är pausad. Dela bara publikfönstret, inte hela skrivbordet.',
+  'Ook in sprekersnotities': 'Sök även i talaranteckningar',
+  'Typ om te zoeken': 'Skriv för att söka',
+  'Toon dia': 'Visa bild',
+  'Verder vanaf het begin': 'Fortsätter från början',
+  'Verder vanaf het einde': 'Fortsätter från slutet',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Inga resultat. Prova en kortare söktext.',
+  'Treffer {n} van {m}': 'Träff {n} av {m}',
   'Quizvragen': 'Quizfrågor',
   'Met vragen': 'Med frågor',
   'Zonder vragen': 'Utan frågor',

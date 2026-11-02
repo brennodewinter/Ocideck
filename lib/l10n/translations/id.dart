@@ -1617,6 +1617,19 @@ const _dutchSourceAddId = <String, String>{
   'Ga naar de brontabel': 'Buka tabel sumber',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tabel ini adalah salinan tabel sumber "{bron}". Edit sumbernya dan pilih Segarkan, atau lepaskan tampilan sebagai snapshot.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Mulai dengan jendela penyaji terpisah untuk mencari secara pribadi.',
+  'Privé zoeken': 'Pencarian pribadi',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Audiens tetap melihat slide saat ini hingga Anda memilih Tampilkan slide. Pemutaran otomatis dijeda. Bagikan hanya jendela audiens, bukan seluruh desktop.',
+  'Ook in sprekersnotities': 'Cari juga dalam catatan pembicara',
+  'Typ om te zoeken': 'Ketik untuk mencari',
+  'Toon dia': 'Tampilkan slide',
+  'Verder vanaf het begin': 'Melanjutkan dari awal',
+  'Verder vanaf het einde': 'Melanjutkan dari akhir',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Tidak ada hasil. Coba teks pencarian yang lebih pendek.',
+  'Treffer {n} van {m}': 'Kecocokan {n} dari {m}',
   'Quizvragen': 'Pertanyaan kuis',
   'Met vragen': 'Dengan pertanyaan',
   'Zonder vragen': 'Tanpa pertanyaan',

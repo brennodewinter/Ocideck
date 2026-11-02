@@ -1647,6 +1647,19 @@ const _dutchSourceAddGa = <String, String>{
   'Ga naar de brontabel': 'Téigh go dtí an tábla foinse',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Is cóip den tábla foinse "{bron}" é an tábla seo. Cuir an foinse in eagar agus roghnaigh Athnuachan, nó dícheangail an t-amharc mar ghrianghraf.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Tosaigh le fuinneog ar leith don láithreoir chun cuardach príobháideach a dhéanamh.',
+  'Privé zoeken': 'Cuardach príobháideach',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Fanann an lucht féachana ar an sleamhnán reatha go dtí go roghnaíonn tú Taispeáin an sleamhnán. Tá an uathsheinm ar sos. Comhroinn fuinneog an lucht féachana amháin, seachas do dheasc iomlán.',
+  'Ook in sprekersnotities': 'Cuardaigh sna nótaí cainteora freisin',
+  'Typ om te zoeken': 'Clóscríobh chun cuardach a dhéanamh',
+  'Toon dia': 'Taispeáin an sleamhnán',
+  'Verder vanaf het begin': 'Ag leanúint ón tús',
+  'Verder vanaf het einde': 'Ag leanúint ón deireadh',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Gan torthaí. Bain triail as téacs cuardaigh níos giorra.',
+  'Treffer {n} van {m}': 'Toradh {n} de {m}',
   'Quizvragen': 'Ceisteanna tráth na gceist',
   'Met vragen': 'Le ceisteanna',
   'Zonder vragen': 'Gan ceisteanna',

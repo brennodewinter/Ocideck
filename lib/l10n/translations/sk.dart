@@ -1623,6 +1623,19 @@ const _dutchSourceAddSk = <String, String>{
   'Ga naar de brontabel': 'Prejsť na zdrojovú tabuľku',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Táto tabuľka je opis zdrojovej tabuľky "{bron}". Upravte zdroj a zvoľte Obnoviť, alebo odpojte zobrazenie ako snímku.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Ak chcete hľadať súkromne, spustite prezentáciu so samostatným oknom prednášajúceho.',
+  'Privé zoeken': 'Súkromné hľadanie',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publikum uvidí aktuálnu snímku, kým nezvolíte Zobraziť snímku. Automatické prehrávanie je pozastavené. Zdieľajte iba okno pre publikum, nie celú pracovnú plochu.',
+  'Ook in sprekersnotities': 'Hľadať aj v poznámkach prednášajúceho',
+  'Typ om te zoeken': 'Zadajte hľadaný text',
+  'Toon dia': 'Zobraziť snímku',
+  'Verder vanaf het begin': 'Pokračovanie od začiatku',
+  'Verder vanaf het einde': 'Pokračovanie od konca',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Žiadne výsledky. Skúste kratší hľadaný text.',
+  'Treffer {n} van {m}': 'Výskyt {n} z {m}',
   'Quizvragen': 'Kvízové otázky',
   'Met vragen': 'S otázkami',
   'Zonder vragen': 'Bez otázok',

@@ -1635,6 +1635,19 @@ const _dutchSourceAddMt = <String, String>{
   'Ga naar de brontabel': 'Mur fit-tabella sors',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Din it-tabella hija kopja tat-tabella sors "{bron}". Editja s-sors u agħżel Aġġorna, jew skonnettja l-vista bħala stampa tal-mument.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Ibda b’tieqa separata għall-preżentatur biex tfittex fil-privat.',
+  'Privé zoeken': 'Tfittxija privata',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'L-udjenza tibqa’ tara s-slajd attwali sakemm tagħżel Uri s-slajd. Id-daqq awtomatiku huwa mwaqqaf temporanjament. Aqsam biss it-tieqa tal-udjenza, mhux id-desktop kollu.',
+  'Ook in sprekersnotities': 'Fittex ukoll fin-noti tal-kelliem',
+  'Typ om te zoeken': 'Ikteb biex tfittex',
+  'Toon dia': 'Uri s-slajd',
+  'Verder vanaf het begin': 'Kompli mill-bidu',
+  'Verder vanaf het einde': 'Kompli mit-tmiem',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Ebda riżultat. Ipprova test iqsar għat-tfittxija.',
+  'Treffer {n} van {m}': 'Riżultat {n} minn {m}',
   'Quizvragen': 'Mistoqsijiet tal-kwizz',
   'Met vragen': 'Bil-mistoqsijiet',
   'Zonder vragen': 'Mingħajr mistoqsijiet',

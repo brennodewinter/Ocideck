@@ -823,6 +823,19 @@ const _dutchSourceAddEn = {
   'Ga naar de brontabel': 'Go to the source table',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'This table is a copy of the source table "{bron}". Edit the source and choose Refresh, or detach the view as a snapshot.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Start with a separate presenter window to search privately.',
+  'Privé zoeken': 'Private search',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'The audience stays on the current slide until you choose Show slide. Autoplay is paused. Share only the audience window, not your entire desktop.',
+  'Ook in sprekersnotities': 'Include speaker notes',
+  'Typ om te zoeken': 'Type to search',
+  'Toon dia': 'Show slide',
+  'Verder vanaf het begin': 'Continuing from the beginning',
+  'Verder vanaf het einde': 'Continuing from the end',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'No results. Try a shorter search term.',
+  'Treffer {n} van {m}': 'Match {n} of {m}',
   'Quizvragen': 'Quiz questions',
   'Met vragen': 'With questions',
   'Zonder vragen': 'Without questions',
