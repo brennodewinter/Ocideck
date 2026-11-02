@@ -330,7 +330,7 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
     return ListTile(
       selected: i == index,
       title: Text(
-        '${l10n.d('Slide')} ${page.index + 1} · ${l10n.d(match.fieldLabel)}${page.page > 0 ? ' · ${l10n.d('Pagina')} ${page.page + 1}' : ''}',
+        '${l10n.d('Slide')} ${page.index + 1} · ${deckSearchLocation(l10n, match)}${page.page > 0 ? ' · ${l10n.d('Pagina')} ${page.page + 1}' : ''}',
       ),
       subtitle: Text.rich(TextSpan(children: spans)),
       onTap: preview

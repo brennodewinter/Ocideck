@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/deck_search_localization.dart';
 import '../../models/deck.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
@@ -204,9 +205,10 @@ class _DeckSearchWorkspaceState extends ConsumerState<DeckSearchWorkspace> {
                 EditorMode.visual) ...[
           MarkdownFindBar(
             key: ValueKey(_openSignal),
-            resultContexts: [
+            resultContexts: [for (final match in _matches) match.context],
+            resultLocations: [
               for (final match in _matches)
-                '${l10n.d('Dia')} ${match.slideIndex + 1} · ${l10n.d(match.fieldLabel)} — ${match.context}',
+                '${l10n.d('Dia')} ${match.slideIndex + 1} · ${deckSearchLocation(l10n, match)}',
             ],
             onSelectMatch: (index) {
               _wrapDirection = 0;

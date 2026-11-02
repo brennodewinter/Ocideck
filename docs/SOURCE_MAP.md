@@ -1276,6 +1276,8 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 
 ## `lib/l10n/` — localization
 
+- `deck_search_localization.dart` — Translates search locations and distinguishes repeated table cells, columns and list fields without exposing storage keys.
+
 - `app_localizations.dart` — `AppLocalizations` class + delegate; legt de
   OciDeck-vertalingen als productlaag over AppFoundation `app_localizations`.
   De foundation bezit de 31 taalnamen, materiaal-terugval en gedeelde

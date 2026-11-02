@@ -73,7 +73,7 @@ Iterable<DeckTextField> slideTextFields(
       s.type == SlideType.tree ||
       s.type == SlideType.flow) {
     if (s.type.bulletColumns == BulletColumns.two) {
-      yield _field('columnTitle1', 'Kolomtitel links', s.columnTitle1);
+      yield _field('columnTitle1', 'Kop', s.columnTitle1);
     }
     for (var i = 0; i < s.bullets.length; i++) {
       final text = _bulletText(s.bullets[i]);
@@ -82,18 +82,22 @@ Iterable<DeckTextField> slideTextFields(
         final step = parseFlowBullet(s.bullets[i]);
         yield _field(
           'bullets.$i',
-          'Tekst links',
+          'Bullets links',
           text,
           visibleRanges: _flowTextRanges(text, step.title, step.lane),
         );
       } else {
-        yield _field('bullets.$i', 'Tekst links', text);
+        yield _field('bullets.$i', 'Bullets links', text);
       }
     }
     if (s.type.bulletColumns == BulletColumns.two) {
-      yield _field('columnTitle2', 'Kolomtitel rechts', s.columnTitle2);
+      yield _field('columnTitle2', 'Kop', s.columnTitle2);
       for (var i = 0; i < s.bullets2.length; i++) {
-        yield _field('bullets2.$i', 'Tekst rechts', _bulletText(s.bullets2[i]));
+        yield _field(
+          'bullets2.$i',
+          'Bullets rechts',
+          _bulletText(s.bullets2[i]),
+        );
       }
     }
   }
@@ -110,7 +114,7 @@ Iterable<DeckTextField> slideTextFields(
   }.contains(s.type)) {
     yield _field('imageCaption', 'Bijschrift', s.imageCaption);
     if (s.type == SlideType.twoImages || s.type == SlideType.title) {
-      yield _field('imageCaption2', 'Bijschrift rechts', s.imageCaption2);
+      yield _field('imageCaption2', 'Bijschrift', s.imageCaption2);
     }
   }
   yield* _tableFields(s);

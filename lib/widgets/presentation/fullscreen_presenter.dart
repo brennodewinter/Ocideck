@@ -54,6 +54,7 @@ import '../../utils/shortcut_label.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
+import '../../l10n/deck_search_localization.dart';
 import '../../utils/inline_markdown.dart';
 import '../../utils/deck_text_search.dart';
 import '../../utils/text_search.dart';
