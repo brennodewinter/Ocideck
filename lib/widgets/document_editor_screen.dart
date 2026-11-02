@@ -615,7 +615,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onInsertSpacer: _insertSpacer,
     onInsertFootnote: _insertFootnote,
     onInsertRiskDossier: () => unawaited(_insertRiskDossier()),
-    riskQualityCount: riskQualityFindings(_controller.text).findings.length,
+    riskQualityCount: riskQualityBadgeCount(_controller.text),
     onRiskQuality: () => unawaited(_openRiskQuality(this)),
     footnotesAtEnd:
         documentFootnotePlacement(_pageSetupSource(ref)) ==

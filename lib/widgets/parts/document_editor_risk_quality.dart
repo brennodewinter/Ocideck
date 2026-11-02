@@ -4,6 +4,22 @@
 // bevinding. De controle leest; herstel is altijd een menselijke keuze.
 part of '../document_editor_screen.dart';
 
+/// De bevindingenteller van de werkbalk: dezelfde bron geeft dezelfde
+/// uitslag, en een rebuild zonder tekstwijziging (caret, thema, venster)
+/// hoort de volledige dossierscan niet opnieuw te betalen (#2710).
+/// Toen de scan ook nog per rij decodéerde kostte typen in een
+/// risico-document tientallen milliseconden per rebuild.
+String _qualityBadgeSource = '';
+int _qualityBadgeCount = 0;
+
+int riskQualityBadgeCount(String source) {
+  if (source != _qualityBadgeSource) {
+    _qualityBadgeSource = source;
+    _qualityBadgeCount = riskQualityFindings(source).findings.length;
+  }
+  return _qualityBadgeCount;
+}
+
 /// Open het bevindingenoverzicht. Hergescand bij elke open én na elke
 /// herstelactie — dezelfde pure toets als de exportpoort, dus wat hier staat
 /// is wat de export straks ook vindt.
