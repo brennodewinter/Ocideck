@@ -50,8 +50,8 @@ const Map<String, int> methodLengthBaseline = {
   // +10 (#2496): de `<!-- ocideck:* -->`-marker-run in de parse-loop. De loop
   // zelf staat in de top-level _skipOciMarkers-helper; wat rest is de
   // herkenning plus de delegatie.
-  'lib/widgets/reader/document_markdown_view.dart::DocumentMarkdownView._parse':
-      180,
+  'lib/widgets/reader/document_markdown_view.dart::DocumentMarkdownView._parseUncached':
+      180, // hernoemd op main door #2711 (cache-laag): zelfde methode.
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
