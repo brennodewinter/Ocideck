@@ -666,6 +666,12 @@ model.
 - **Recovery snapshots** are written atomically to a per-user app-support
   directory, are **not** encrypted (they inherit OS user-account file
   protections), and are pruned after 7 days.
+- **Log files** (`logs/ocideck.log`, `ocideck.1.log`, `beamer.log`,
+  `beamer.1.log` on desktop) hold diagnostic records — operation names,
+  sanitised errors, session versions; no deck content — capped at 1 MiB each
+  and wiped by the *reset to initial state* button. A leftover
+  `ocideck.sessie` marker flags a previous session that did not end cleanly.
+  See §14.
 
 ## 10. Trusted-internal opt-in
 
@@ -862,36 +868,65 @@ that file.
 
 ## 14. What is logged
 
-*Added 2026-07-22.* A short section because there is little to describe, which is
-itself the point.
+*Added 2026-07-22. Corrected 2026-11-03: this section claimed OciDeck writes
+no log file — true until the desktop diagnostics of 0.7.5 (#2618), stale
+since.*
 
 **Where it goes.** Everything routes through `logError` / `logWarning` in
-`lib/utils/log.dart`, which calls `dart:developer`'s logging stream. That stream
-is read by DevTools and the VM service. It is **not stdout**, so a release build
-prints nothing, and there is **no log file**: OciDeck writes no log to disk, ships
-no log rotation, and has nothing to configure. Attach a debugger and you see the
-records; do not, and they go nowhere. A `check_conventions` ratchet forbids raw
-`print()` anywhere in `lib/`, so this is the only route.
+`lib/utils/log.dart`, which calls `dart:developer`'s logging stream **and** a
+`LogSink`. On a desktop build that sink is a local log file:
+`<app-support>/logs/ocideck.log`, plus `beamer.log` for the presenter window,
+which runs in its own engine and would otherwise rotate the same file. On web
+there is no sink — a browser build writes no file. A `check_conventions`
+ratchet forbids raw `print()` anywhere in `lib/`, so this is the only route.
+
+**Ceiling and rotation.** A flight recorder, not an archive: each name keeps at
+most two files of 1 MiB — `ocideck.log` and, after one rotation,
+`ocideck.1.log`. Anything older is overwritten; there is no retention period
+and no audit trail, and this section does not promise one — the cap and the
+delete button are the behaviour. Lines up to the first frame are written
+synchronously, because a start-up that stalls on synchronous work would
+otherwise lose exactly the lines that say where it stalled; after the first
+frame they are batched in the background so a warning in a build path never
+makes the UI wait on the disk.
+
+**Session marker.** The main window drops `ocideck.sessie` beside the log at
+start-up and removes it on a clean exit. A marker still present at the next
+start means the previous session hung, was force-quit or went down with the
+machine — and a warning saying so is logged.
 
 **What is in a record.** An operation description (`'openDeck: read annotation
 sidecar'`), a severity — 900 for a handled fallback, 1000 for an unexpected
-failure, mirroring `package:logging` — and the caught error object. Deck content
-is **not** logged, by rule and by mechanism. The rule is the doc comment on that
-file: pass an operation description and the error, never file or deck contents.
-The mechanism is `_safeError`, and it exists because the rule alone was not
-enough: `FormatException.toString()` embeds a slice of the text it failed to
-parse, and `jsonDecode` sets that text to exactly what was being parsed — so a
-malformed slide field wrote the slide's content, special-category personal data
-included, into the log while every call site was obeying the rule. `_safeError`
-reduces a `FormatException` to its message and offset and drops the rest.
+failure, mirroring `package:logging` — and the caught error object, plus the
+OciDeck and OS version at the head of each session. Deck content is **not**
+logged, by rule and by mechanism. The rule is the doc comment on that file:
+pass an operation description and the error, never file or deck contents. The
+mechanisms are `_safeError` and `redactPaths`, and they exist because the rule
+alone was not enough: `FormatException.toString()` embeds a slice of the text
+it failed to parse, and `jsonDecode` sets that text to exactly what was being
+parsed — so a malformed slide field wrote the slide's content,
+special-category personal data included, into the log while every call site
+was obeying the rule. `_safeError` reduces a `FormatException` to its message
+and offset and drops the rest; `redactPaths` replaces every absolute path and
+file name with a short hash (`<pad#1a2b3c4d.md>`), because a path can carry a
+user name and a file name, and this file is the thing a user shares when
+reporting a bug. Names of self-configured storage connections and server
+addresses stay legible — they are the user's own choices, needed to read the
+record.
 
-**Retention and access.** None and none, respectively: there is nothing to
-retain, so there is no retention period, no purge, and no access control to
-describe. The one exception is not a log at all — crash-recovery snapshots, which
-*do* hold full deck content in plaintext under app-support and are pruned after
-seven days. They are documented in `SECURITY.md` under *Crash-recovery
-snapshots*, and they are the thing to look at when the question is really "what
-of my deck is on this disk".
+**Retention and access.** The file inherits the OS user-account protections of
+the app-support folder, like the user's other files. It never leaves the
+device by itself — no telemetry route touches it. *Settings → Beveiliging →
+Reset everything to its initial state* wipes the log files along with the
+other traces. *Settings → Over OciDeck* offers *Logmap openen* and *Diagnose
+kopiëren*, which copies the last 200 lines to the clipboard; sharing that is
+the one way the content leaves the device, and it is the user's call.
+
+The crash-recovery snapshots remain the bigger plaintext-on-disk story: they
+*do* hold full deck content under app-support and are pruned after seven days.
+They are documented in `SECURITY.md` under *Crash-recovery snapshots*, and
+they are the thing to look at when the question is really "what of my deck is
+on this disk".
 
 ## Standards this design draws on
 
