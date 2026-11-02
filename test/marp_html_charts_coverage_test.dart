@@ -666,7 +666,7 @@ void main() {
       expect(html, contains('…</text>'));
       // The full 80-char title is not emitted verbatim as drawn text; the
       // aria-label may carry it for screen readers (#2732).
-      expect(html, isNot(contains('>' + title + '<')));
+      expect(html, isNot(contains('>$title<')));
     });
 
     test('a titled chart shifts the plot area down (title branch)', () {
