@@ -49,6 +49,17 @@ void main() {
   tearDown(() => tijdelijk.deleteSync(recursive: true));
 
   group('andere bundel via opdrachtregel', () {
+    Map<String, String> zonderDeployCommando() {
+      final omgeving = File('${tijdelijk.path}/zonder-deploy.sh')
+        ..writeAsStringSync(r'''
+command() {
+  case "$*" in '-v scp'|'-v ssh'|'-v curl') return 1 ;; esac
+  builtin command "$@"
+}
+''');
+      return {'BASH_ENV': omgeving.path};
+    }
+
     test(
       'controle en dry-run gebruiken de opgegeven map met spaties',
       () async {
@@ -64,27 +75,34 @@ void main() {
           '--check',
           '--bundle-dir',
           gekozen.path,
-        ]);
+        ], environment: zonderDeployCommando());
         expect(controle.exitCode, 0, reason: '${controle.stderr}');
         final deploy = await Process.run('bash', [
           'scripts/deploy_web.sh',
           '--dry-run',
           '--bundle-dir',
           gekozen.path,
-        ]);
+        ], environment: zonderDeployCommando());
         expect(deploy.exitCode, 0, reason: '${deploy.stderr}');
         expect(deploy.stdout, contains('Dry run'));
         expect(
           File('${gekozen.path}/$checksumBestand').readAsStringSync(),
           manifest,
         );
+        final live = await Process.run('bash', [
+          'scripts/deploy_web.sh',
+          '--bundle-dir',
+          gekozen.path,
+        ], environment: zonderDeployCommando());
+        expect(live.exitCode, 1);
+        expect(live.stderr, contains('Ontbrekend commando: scp'));
         File('${gekozen.path}/index.html').writeAsStringSync('gewijzigd');
         final ongeldig = await Process.run('bash', [
           'scripts/deploy_web.sh',
           '--dry-run',
           '--bundle-dir',
           gekozen.path,
-        ]);
+        ], environment: zonderDeployCommando());
         expect(ongeldig.exitCode, 1);
         expect(ongeldig.stderr, contains('index.html wijkt af'));
         expect(ongeldig.stdout, isNot(contains('Dry run')));
