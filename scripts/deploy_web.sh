@@ -24,6 +24,7 @@
 #   make build-web && scripts/deploy_web.sh
 #   scripts/deploy_web.sh --dry-run          toon wat er zou gebeuren
 #   scripts/deploy_web.sh --keep-backup      ruim de vorige versie niet op
+#   scripts/deploy_web.sh --bundle-dir PATH  gebruik een andere geverifieerde bundel
 #
 # Instelbaar via de omgeving (de standaarden zijn de publieke webdemo):
 #   OCIDECK_DEPLOY_HOST   ssh-doel                     ubuntu@vps-40edd80f.vps.ovh.net
@@ -47,13 +48,20 @@ LIVE_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"
 
 DRY_RUN=0
 KEEP_BACKUP=0
-for arg in "$@"; do
-  case "$arg" in
+BUNDLE_DIR="build/web"
+while (( $# )); do
+  case "$1" in
     --dry-run) DRY_RUN=1 ;;
     --keep-backup) KEEP_BACKUP=1 ;;
+    --bundle-dir)
+      if (( $# < 2 )) || [[ -z "$2" || "$2" == -* ]]; then
+        echo "--bundle-dir vereist een pad." >&2; exit 2
+      fi
+      BUNDLE_DIR="$2"; shift ;;
     -h|--help) sed -n '3,30p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
-    *) echo "Onbekende optie: $arg" >&2; exit 2 ;;
+    *) echo "Onbekende optie: $1" >&2; exit 2 ;;
   esac
+  shift
 done
 
 log() { printf '\n== %s ==\n' "$1"; }
@@ -69,16 +77,16 @@ SSH_OPTS=(-o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
 # --- 1. Is er iets te deployen, en klopt het? --------------------------------
 
 log "Bundel controleren"
-if [[ ! -f build/web/index.html ]]; then
-  echo "Geen build/web/index.html — draai eerst 'make build-web'." >&2
+if [[ ! -f "$BUNDLE_DIR/index.html" ]]; then
+  echo "Geen $BUNDLE_DIR/index.html — draai eerst 'make build-web'." >&2
   exit 1
 fi
 # Dezelfde controle die `make check-web` doet: de checksumlijst moet exact de
 # bestanden beschrijven die er liggen. Vangt zowel een half afgebroken build
 # als een bestand dat er ná het inpakken bij is gekomen.
-dart run tool/pack_web_release.dart --check
+dart run tool/pack_web_release.dart --check --bundle-dir "$BUNDLE_DIR"
 
-BUNDLE_SHA="$(shasum -a 256 build/web/SHA256SUMS | cut -d' ' -f1)"
+BUNDLE_SHA="$(shasum -a 256 "$BUNDLE_DIR/SHA256SUMS" | cut -d' ' -f1)"
 echo "SHA256SUMS: $BUNDLE_SHA"
 
 # Wie deployt wat. Niet als poort maar als vermelding: bij een probleem op de
@@ -110,7 +118,7 @@ TAR_OPTS=()
 if [[ "$(uname -s)" == "Darwin" ]]; then
   TAR_OPTS=(--no-mac-metadata --no-xattrs --no-fflags)
 fi
-tar "${TAR_OPTS[@]}" -C build/web -czf "$TMP_TARBALL" .
+tar "${TAR_OPTS[@]}" -C "$BUNDLE_DIR" -czf "$TMP_TARBALL" .
 echo "Tarball:    $(du -h "$TMP_TARBALL" | cut -f1)"
 
 if (( DRY_RUN )); then
@@ -242,7 +250,7 @@ if ! curl -fsSL --connect-timeout 10 --max-time 30 "$LIVE_URL/index.html" -o "$R
   exit 1
 fi
 
-if ! cmp -s "$REMOTE_INDEX" build/web/index.html; then
+if ! cmp -s "$REMOTE_INDEX" "$BUNDLE_DIR/index.html"; then
   echo "De live index.html verschilt van de bundel die net is neergezet." >&2
   echo "Waarschijnlijk een cache ertussen. De backup blijft staan; controleer" >&2
   echo "de site; de live map wordt nu teruggerold." >&2
@@ -253,7 +261,7 @@ echo "index.html live en identiek aan de bundel."
 
 # De SHA256SUMS-lijst reist mee in de bundel, dus die is óók op te halen. Dat
 # is de sterkere controle: hij dekt elk bestand, niet alleen de pagina.
-if curl -fsSL --connect-timeout 10 --max-time 30 "$LIVE_URL/SHA256SUMS" | cmp -s - build/web/SHA256SUMS; then
+if curl -fsSL --connect-timeout 10 --max-time 30 "$LIVE_URL/SHA256SUMS" | cmp -s - "$BUNDLE_DIR/SHA256SUMS"; then
   echo "SHA256SUMS live en identiek — de hele bundel staat er goed op."
 else
   echo "Let op: /SHA256SUMS wijkt af of is niet bereikbaar." >&2

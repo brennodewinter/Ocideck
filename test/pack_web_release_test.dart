@@ -48,6 +48,77 @@ void main() {
 
   tearDown(() => tijdelijk.deleteSync(recursive: true));
 
+  group('andere bundel via opdrachtregel', () {
+    test(
+      'controle en dry-run gebruiken de opgegeven map met spaties',
+      () async {
+        final gekozen = Directory('${tijdelijk.path}/release bundel');
+        bundel.renameSync(gekozen.path);
+        expect(pak(gekozen, wortel), isEmpty);
+        final manifest = File(
+          '${gekozen.path}/$checksumBestand',
+        ).readAsStringSync();
+        final controle = await Process.run('dart', [
+          'run',
+          'tool/pack_web_release.dart',
+          '--check',
+          '--bundle-dir',
+          gekozen.path,
+        ]);
+        expect(controle.exitCode, 0, reason: '${controle.stderr}');
+        final deploy = await Process.run('bash', [
+          'scripts/deploy_web.sh',
+          '--dry-run',
+          '--bundle-dir',
+          gekozen.path,
+        ]);
+        expect(deploy.exitCode, 0, reason: '${deploy.stderr}');
+        expect(deploy.stdout, contains('Dry run'));
+        expect(
+          File('${gekozen.path}/$checksumBestand').readAsStringSync(),
+          manifest,
+        );
+        File('${gekozen.path}/index.html').writeAsStringSync('gewijzigd');
+        final ongeldig = await Process.run('bash', [
+          'scripts/deploy_web.sh',
+          '--dry-run',
+          '--bundle-dir',
+          gekozen.path,
+        ]);
+        expect(ongeldig.exitCode, 1);
+        expect(ongeldig.stderr, contains('index.html wijkt af'));
+        expect(ongeldig.stdout, isNot(contains('Dry run')));
+      },
+    );
+
+    test('ontbrekende paden en onbekende opties worden afgewezen', () async {
+      for (final argumenten in [
+        ['--bundle-dir'],
+        ['--bundle-dir', '--dry-run'],
+        ['--onbekend'],
+      ]) {
+        for (final opdracht in [
+          ['dart', 'run', 'tool/pack_web_release.dart'],
+          ['bash', 'scripts/deploy_web.sh'],
+        ]) {
+          final resultaat = await Process.run(opdracht.first, [
+            ...opdracht.skip(1),
+            ...argumenten,
+          ]);
+          expect(resultaat.exitCode, 2, reason: '${resultaat.stderr}');
+        }
+      }
+      final schrijven = await Process.run('dart', [
+        'run',
+        'tool/pack_web_release.dart',
+        '--bundle-dir',
+        bundel.path,
+      ]);
+      expect(schrijven.exitCode, 2);
+      expect(schrijven.stderr, contains('alleen samen met --check'));
+    });
+  });
+
   group('inpakken', () {
     test('elk artefact belandt in de bundel en de lijst dekt alles', () {
       expect(pak(bundel, wortel), isEmpty);

@@ -1053,6 +1053,16 @@ void main() {
     );
   });
 
+  test('automatische release gooit geen voorafgaande lokale bouw weg', () {
+    final src = File(script).readAsStringSync();
+    expect(
+      src,
+      isNot(contains(RegExp(r'^make build-release\s*$', multiLine: true))),
+    );
+    expect(src, contains(RegExp(r'^make check-release\s*$', multiLine: true)));
+    expect(src, contains(RegExp(r'^make notarize-macos\s*$', multiLine: true)));
+  });
+
   test('bouwen en notariseren melden zich als aparte stap', () {
     // Onder één STEP-label meldde de ERR-trap "make build-release" terwijl het
     // notariseren viel; dat stuurt de diagnose naar de verkeerde stap.

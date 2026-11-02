@@ -32,6 +32,7 @@ void main() {
     required String websiteVersion,
     String websiteRun = '',
     bool tapCurrent = true,
+    bool delayedPublication = false,
   }) {
     final dir = Directory.systemTemp.createTempSync('ocideck-release-website-');
     addTearDown(() => dir.deleteSync(recursive: true));
@@ -68,7 +69,14 @@ snap=
 ${allFunctionDefinitions()}
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
-sleep() { :; }
+SLEEP_COUNT=0
+sleep() {
+  SLEEP_COUNT=\$((SLEEP_COUNT + 1))
+  if [ "${delayedPublication ? 1 : 0}" = 1 ] && [ "\$SLEEP_COUNT" = 25 ]; then
+    sed 's/9.9.8/9.9.9/g' '${page.path}' > '${page.path}.new'
+    mv '${page.path}.new' '${page.path}'
+  fi
+}
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
 make() {
   if [ "\$1" = sign-release ]; then
@@ -80,6 +88,7 @@ make() {
   fi
 }
 minisign() { return 0; }
+deploy_web_if_needed() { :; }
 homebrew_tap_current() { [ "\$TAP_CURRENT" = 1 ]; }
 api() {
   local method="\$1" path="\$2"
@@ -144,8 +153,7 @@ printf 'DOOR\\n'
     'groene website-job is onvoldoende als de publieke pagina achterloopt',
     () {
       // De website-run zelf is groen — toch mag een achterlopende publieke
-      // pagina nooit als "klaar" gelden (#2302: pas díe combinatie mag als
-      // host/DNS-verwijzing verschijnen).
+      // pagina nooit als "klaar" gelden; de aparte deploy kan nog lopen.
       final result = runPhase3(websiteVersion: '9.9.8', websiteRun: 'success');
       final output = '${result.stdout}\n${result.stderr}';
 
@@ -157,6 +165,17 @@ printf 'DOOR\\n'
     },
     skip: skipOnWindows,
   );
+
+  test('wacht op de aparte websitepublicatie na een groene bump-job', () {
+    final result = runPhase3(
+      websiteVersion: '9.9.8',
+      websiteRun: 'success',
+      delayedPublication: true,
+    );
+    final output = '${result.stdout}\n${result.stderr}';
+    expect(result.exitCode, 0, reason: output);
+    expect(output, contains('DOOR'));
+  }, skip: skipOnWindows);
 
   test('fase 3 rondt af als de publieke pagina naar de release verwijst', () {
     final result = runPhase3(websiteVersion: '9.9.9');

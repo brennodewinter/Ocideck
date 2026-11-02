@@ -10,6 +10,7 @@
 // Gebruik:
 //   dart run tool/pack_web_release.dart            na `flutter build web`
 //   dart run tool/pack_web_release.dart --check     controleer een klaargezette bundel
+//   dart run tool/pack_web_release.dart --check --bundle-dir PATH
 //
 // Wat dit NIET is: een handtekening. Zie [checksumUitleg] en docs/BUILD.md —
 // een lijst die naast de bundel ligt bewijst dat je hebt wat er lag, niet van
@@ -108,13 +109,38 @@ const String checksumUitleg =
     'kan vervangen, kan de lijst vervangen.';
 
 Future<void> main(List<String> args) async {
-  final bundel = Directory('build/web');
+  var bundelPad = 'build/web';
+  var check = false;
+  var andereBundel = false;
+  for (var i = 0; i < args.length; i++) {
+    switch (args[i]) {
+      case '--check':
+        check = true;
+      case '--bundle-dir':
+        if (i + 1 == args.length ||
+            args[i + 1].isEmpty ||
+            args[i + 1].startsWith('-')) {
+          stderr.writeln('--bundle-dir vereist een pad.');
+          exit(2);
+        }
+        bundelPad = args[++i];
+        andereBundel = true;
+      default:
+        stderr.writeln('Onbekende optie: ${args[i]}');
+        exit(2);
+    }
+  }
+  if (andereBundel && !check) {
+    stderr.writeln('--bundle-dir kan alleen samen met --check.');
+    exit(2);
+  }
+  final bundel = Directory(bundelPad);
   if (!bundel.existsSync()) {
-    stderr.writeln('build/web niet gevonden — draai eerst `make build-web`.');
+    stderr.writeln('$bundelPad niet gevonden — draai eerst `make build-web`.');
     exit(2);
   }
 
-  if (args.contains('--check')) {
+  if (check) {
     final klachten = controleer(bundel);
     if (klachten.isEmpty) {
       stdout.writeln(
