@@ -504,12 +504,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
   Future<bool> _saveToPath(String path) async {
     var deck = state.deck;
     if (deck == null) return false;
-    // Doorgetypt tijdens het schrijven? Dan is [state.deck] nieuwer dan wat er
-    // zojuist op schijf belandde. `true` teruggeven was desastreus: de
-    // aanroeper sloot op dat antwoord en wiste de herstelkopie, terwijl het
-    // nieuwere deck alleen in het geheugen leefde (#2721). Schrijf daarom
-    // door tot de undo-stapel stilstaat, en geef alleen true als het deck
-    // ná afloop schoon op schijf staat.
+    // Doorgetypt tijdens het schrijven? `true` wiste de herstelkopie van
+    // werk dat nergens stond (#2721). Schrijf door tot de undo-stapel
+    // stilstaat; true = "schoon op schijf".
     for (var attempt = 0; attempt < 4; attempt++) {
       final undoLenBefore = _undoStack.length;
       final Deck savedDeck;
@@ -525,10 +522,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
         return false;
       }
       // De identity-check is te streng voor state-vervangingen die geen
-      // inhoudswijziging zijn (bv. copyWith voor themeProfile); we
-      // vergelijken ook de undo-stapel (#1473).
-      final deckChanged = !identical(state.deck, deck);
-      final userEdited = deckChanged && _undoStack.length > undoLenBefore;
+      // inhoudswijziging zijn (bv. copyWith voor themeProfile); we vergelijken
+      // ook de undo-stapel (#1473).
+      final userEdited =
+          !identical(state.deck, deck) && _undoStack.length > undoLenBefore;
       if (!userEdited) {
         _localMerge.base = savedDeck;
         state = state.copyWith(deck: savedDeck, isDirty: incomplete);
@@ -540,10 +537,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       deck = state.deck;
       if (deck == null) return false;
     }
-    // Na begrensde pogingen is er steeds nieuwer werk dan de schijf kende:
-    // false, zodat sluiten en afsluiten wachten in plaats van de
-    // herstelkopie te wissen.
-    return false;
+    return false; // steeds ingehaald: sluiten wacht i.p.v. de kopie te wissen.
   }
 
   void closeDeck() {

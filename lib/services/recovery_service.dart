@@ -380,8 +380,9 @@ class RecoveryService {
           if (_isLockLive(entry)) {
             liveSessions.add(p.basenameWithoutExtension(entry.path));
           }
-        } catch (_) {
+        } catch (e) {
           // Onleesbare lock telt als niet-levend: de leeftijdsregel geldt.
+          logWarning('RecoveryService.pruneOlderThan: sessielock lezen', e);
         }
       }
       for (final entry in dir.listSync()) {
@@ -423,7 +424,8 @@ class RecoveryService {
       final data = jsonDecodeGuarded(await file.readAsString());
       final session = data is Map ? data['session'] : null;
       return session is String && liveSessions.contains('session-$session');
-    } catch (_) {
+    } catch (e) {
+      logWarning('RecoveryService.pruneOlderThan: sessie lezen', e);
       return false;
     }
   }
