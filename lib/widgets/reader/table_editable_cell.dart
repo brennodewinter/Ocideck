@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../markdown_editor/embedded_field_actions.dart';
 import '../slides/inline_markdown.dart';
 import 'table_edit_controller.dart';
+import 'document_search_overlay.dart';
 
 /// Eén invulbare cel binnen de gerenderde tabel.
 ///
@@ -77,7 +78,10 @@ class TableEditableCell extends StatelessWidget {
             // hoger uitkwam dan het tekstveld.
             fit: StackFit.passthrough,
             children: [
-              _field(focus, hideText: !editing),
+              if (editing)
+                _field(focus, hideText: false)
+              else
+                ExcludeDocumentSearch(child: _field(focus, hideText: true)),
               if (!editing)
                 // Doorklikbaar: de tik hoort bij het veld eronder, dat er de
                 // cursor van krijgt. En onhoorbaar voor de schermlezer, want het

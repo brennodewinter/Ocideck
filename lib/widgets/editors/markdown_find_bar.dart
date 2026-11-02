@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../utils/text_search.dart';
 import '../../theme/app_theme.dart';
 
 /// In-editor find (and optional replace) bar for markdown mode.
@@ -20,6 +21,9 @@ class MarkdownFindBar extends StatefulWidget {
   final VoidCallback onReplaceCurrent;
   final VoidCallback onReplaceAll;
   final VoidCallback onClose;
+  final List<String> resultContexts;
+  final ValueChanged<int>? onSelectMatch;
+  final int wrapDirection;
 
   const MarkdownFindBar({
     super.key,
@@ -37,6 +41,9 @@ class MarkdownFindBar extends StatefulWidget {
     required this.onReplaceCurrent,
     required this.onReplaceAll,
     required this.onClose,
+    this.resultContexts = const [],
+    this.onSelectMatch,
+    this.wrapDirection = 0,
   });
 
   @override
@@ -90,11 +97,12 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
 
   KeyEventResult _handleQueryKey(FocusNode node, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
-    if (event.logicalKey == LogicalKeyboardKey.enter) {
+    if (event.logicalKey == LogicalKeyboardKey.enter ||
+        event.logicalKey == LogicalKeyboardKey.numpadEnter) {
       if (HardwareKeyboard.instance.isShiftPressed) {
-        widget.onPrevious();
+        _navigate(widget.onPrevious);
       } else {
-        widget.onNext();
+        _navigate(widget.onNext);
       }
       return KeyEventResult.handled;
     }
@@ -125,11 +133,16 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
     return KeyEventResult.ignored;
   }
 
+  void _navigate(VoidCallback action) {
+    action();
+    _queryFocus.requestFocus();
+  }
+
   Widget _statusText(AppLocalizations l10n) {
     if (widget.query.isEmpty) return const SizedBox.shrink();
     if (widget.matchCount == 0) {
       return Text(
-        l10n.d('Geen resultaten'),
+        l10n.d('Geen resultaten. Probeer een kortere zoektekst.'),
         style: TextStyle(
           fontSize: 11,
           color: AppTheme.slate400,
@@ -137,14 +150,46 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
         ),
       );
     }
-    final current = widget.matchIndex + 1;
+    final current = (widget.matchIndex + 1).clamp(1, widget.matchCount);
     return Text(
-      '$current / ${widget.matchCount}',
+      l10n
+          .d('Treffer {n} van {m}')
+          .replaceAll('{n}', '$current')
+          .replaceAll('{m}', '${widget.matchCount}'),
       style: TextStyle(
         fontSize: 11,
         color: AppTheme.accentFg,
         fontWeight: FontWeight.w600,
       ),
+    );
+  }
+
+  Widget _contextText(String text) {
+    final matches = findAllMatches(
+      text,
+      widget.query,
+      caseSensitive: widget.caseSensitive,
+    );
+    final spans = <TextSpan>[];
+    var end = 0;
+    for (final match in matches) {
+      spans.add(TextSpan(text: text.substring(end, match.start)));
+      spans.add(
+        TextSpan(
+          text: text.substring(match.start, match.end),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
+          ),
+        ),
+      );
+      end = match.end;
+    }
+    spans.add(TextSpan(text: text.substring(end)));
+    return Text.rich(
+      TextSpan(children: spans),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -191,16 +236,20 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
                   tooltip: l10n.d('Vorige'),
                   icon: const Icon(Icons.keyboard_arrow_up, size: 20),
                   visualDensity: VisualDensity.compact,
-                  onPressed: hasMatches ? widget.onPrevious : null,
+                  onPressed: hasMatches
+                      ? () => _navigate(widget.onPrevious)
+                      : null,
                 ),
                 IconButton(
                   tooltip: l10n.d('Volgende'),
                   icon: const Icon(Icons.keyboard_arrow_down, size: 20),
                   visualDensity: VisualDensity.compact,
-                  onPressed: hasMatches ? widget.onNext : null,
+                  onPressed: hasMatches ? () => _navigate(widget.onNext) : null,
                 ),
                 const SizedBox(width: 4),
-                _statusText(l10n),
+                Flexible(
+                  child: Semantics(liveRegion: true, child: _statusText(l10n)),
+                ),
                 const SizedBox(width: 4),
                 IconButton(
                   tooltip: l10n.t('close'),
@@ -210,6 +259,37 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
                 ),
               ],
             ),
+            if (widget.wrapDirection != 0)
+              Semantics(
+                liveRegion: true,
+                child: Text(
+                  widget.wrapDirection > 0
+                      ? l10n.d('Verder vanaf het begin')
+                      : l10n.d('Verder vanaf het einde'),
+                ),
+              ),
+            if (widget.resultContexts.isNotEmpty)
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 112),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: widget.resultContexts.length,
+                  itemBuilder: (context, index) => ListTile(
+                    dense: true,
+                    selected: index == widget.matchIndex,
+                    leading: Icon(
+                      index == widget.matchIndex
+                          ? Icons.arrow_right
+                          : Icons.search,
+                      size: 18,
+                    ),
+                    title: _contextText(widget.resultContexts[index]),
+                    onTap: widget.onSelectMatch == null
+                        ? null
+                        : () => _navigate(() => widget.onSelectMatch!(index)),
+                  ),
+                ),
+              ),
             if (widget.showReplace) ...[
               const SizedBox(height: 6),
               Row(
@@ -259,9 +339,11 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onChanged: (v) => widget.onCaseSensitiveChanged(v ?? false),
                 ),
-                Text(
-                  l10n.d('Hoofdlettergevoelig'),
-                  style: const TextStyle(fontSize: 12),
+                Flexible(
+                  child: Text(
+                    l10n.d('Hoofdlettergevoelig'),
+                    style: const TextStyle(fontSize: 12),
+                  ),
                 ),
               ],
             ),

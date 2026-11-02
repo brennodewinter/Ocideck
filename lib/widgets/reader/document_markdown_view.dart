@@ -36,6 +36,7 @@ import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import '../markdown_editor/table_sort_actions.dart' show TableSortIntent;
 import 'doc_mermaid_view.dart';
+import 'document_search_overlay.dart';
 import 'table_edit_controller.dart';
 import 'table_edit_scaffold.dart';
 import 'table_editable_cell.dart';

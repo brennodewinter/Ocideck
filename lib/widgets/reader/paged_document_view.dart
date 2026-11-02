@@ -15,6 +15,9 @@ import '../../utils/footnotes.dart';
 import '../../theme/app_theme.dart';
 import '../document_page_chrome.dart';
 import 'document_markdown_view.dart';
+import 'document_search_overlay.dart';
+
+part 'paged_document_search.dart';
 
 /// Millimeters naar beeldpunten. 96 dpi is de CSS-referentie (1 inch = 96 px),
 /// dus dit is dezelfde maat als waarin de HTML-export haar pagina uitmeet — een
@@ -60,8 +63,16 @@ class PagedDocumentView extends StatefulWidget {
     this.footnotePlacement = FootnotePlacement.page,
     this.tlp = TlpLevel.none,
     this.fields = const {},
+    this.searchQuery = '',
+    this.searchMatchIndex = -1,
+    this.searchCaseSensitive = false,
+    this.searchRevealSignal = 0,
   });
 
+  final String searchQuery;
+  final int searchMatchIndex;
+  final bool searchCaseSensitive;
+  final int searchRevealSignal;
   final String markdown;
   final PageSizeSpec pageSize;
   final PageMargins margins;
@@ -89,6 +100,16 @@ class PagedDocumentView extends StatefulWidget {
 }
 
 class _PagedDocumentViewState extends State<PagedDocumentView> {
+  final _searchScroll = ScrollController();
+  Rect? _searchRect;
+  int _revealedSignal = -1;
+
+  @override
+  void dispose() {
+    _searchScroll.dispose();
+    super.dispose();
+  }
+
   /// De gemeten hoogte per blok, of `null` zolang er nog niet gemeten is. Tot
   /// dat moment staat er een meetopstelling buiten beeld in plaats van een
   /// weergave.
@@ -231,6 +252,12 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   @override
   void didUpdateWidget(PagedDocumentView old) {
     super.didUpdateWidget(old);
+    if (widget.searchQuery != old.searchQuery ||
+        widget.searchMatchIndex != old.searchMatchIndex ||
+        widget.markdown != old.markdown) {
+      _searchRect = null;
+    }
+    if (widget.scale != old.scale) _revealedSignal = -1;
     // Andere tekst, vel, of projectpad betekent opnieuw meten; de oude einden
     // slaan dan nergens meer op. Het projectpad meeswegen: een relatief beeld
     // resolveert al of niet afhankelijk van de basis, en dan verandert de
@@ -347,20 +374,30 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// De vellen, opgebouwd uit de gemeten hoogtes. Bestaat als aparte methode
   /// omdat [build] de meetboom er altijd onder laat staan.
   Widget _pages(List<double> heights) {
-    final document = DocumentMarkdownView(
-      widget.markdown,
-      maxTextWidth: null,
-      themeProfile: widget.profile,
-      chartTheme: widget.profile,
-      // Een `---` is hier het pagina-einde zelf; hem ook tekenen zou elk vers
-      // vel met een streep laten openen.
-      hideRules: true,
-      // Onderaan het blad tekent dít scherm ze, per vel; achterin lopen ze
-      // gewoon als laatste blokken in de stroom mee.
-      footnotesAtEnd: !_notesOnPage,
-      // Een breed diagram schaalt af op de vaste kolombreedte, net als in de
-      // PDF — een schuifbalk snijdt hier af op een vel.
-      scaleMermaidToFit: true,
+    final document = DocumentSearchOverlay(
+      query: widget.searchQuery,
+      activeIndex: widget.searchMatchIndex,
+      caseSensitive: widget.searchCaseSensitive,
+      onActiveRect: (rect) {
+        if (rect != null && rect != _searchRect) {
+          setState(() => _searchRect = rect);
+        }
+      },
+      child: DocumentMarkdownView(
+        widget.markdown,
+        maxTextWidth: null,
+        themeProfile: widget.profile,
+        chartTheme: widget.profile,
+        // Een `---` is hier het pagina-einde zelf; hem ook tekenen zou elk vers
+        // vel met een streep laten openen.
+        hideRules: true,
+        // Onderaan het blad tekent dít scherm ze, per vel; achterin lopen ze
+        // gewoon als laatste blokken in de stroom mee.
+        footnotesAtEnd: !_notesOnPage,
+        // Een breed diagram schaalt af op de vaste kolombreedte, net als in de
+        // PDF — een schuifbalk snijdt hier af op een vel.
+        scaleMermaidToFit: true,
+      ),
     );
     final offsets = documentPageOffsets(
       blockHeights: heights,
@@ -401,7 +438,11 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         final (sheetW, _) = _sheetPx;
         final room = constraints.maxWidth - 32;
         final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _revealSearch(offsets, fit);
+        });
         return SingleChildScrollView(
+          controller: _searchScroll,
           // Ingezoomd wordt het vel breder dan het venster. Zonder deze tweede,
           // horizontale rol zou de rechterhelft niet alleen onbereikbaar zijn
           // maar ook een overloopfout geven — de vellen staan in een verticale

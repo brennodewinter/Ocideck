@@ -110,6 +110,8 @@ part 'parts/document_editor_chrome_coordinator.dart';
 part 'parts/document_fields_dialog.dart';
 part 'parts/document_editor_form.dart';
 part 'parts/document_editor_layouts.dart';
+part 'parts/document_editor_pages.dart';
+part 'parts/document_editor_search.dart';
 part 'parts/document_info_strip.dart';
 part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
@@ -352,52 +354,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Presenteer de body pagina voor pagina (#2487). De dialoog staat in de part.
   Future<void> _presentDocument() => _presentDocumentSession(this);
 
-  /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
-  ///
-  /// Visueel: cursor in de notes-editor (markdown-offset of Quill-titel).
-  /// Bron: cursor in de bron-editor + anker in de live weergave (docs-lezer-
-  /// mechanisme).
-  void _scrollToHeading(MarkdownOutlineEntry entry) {
-    // Het overzicht leeft op de bódy — de tekst die de controller bewerkt.
-    // Op de source (mét stijl-frontmatter) uitgerekende offsets landen een
-    // frontmatter-lengte te ver (#2465).
-    final body = _controller.text;
-    final outline = buildMarkdownOutline(body);
-    final outlineIndex = outline.indexWhere(
-      (e) => e.offset == entry.offset && e.title == entry.title,
-    );
-    final offset = entry.offset.clamp(0, _controller.text.length);
-    _controller.selection = TextSelection.collapsed(offset: offset);
-    _editorFocus.requestFocus();
-    setState(() {
-      _activeOutlineIndex = outlineIndex;
-      _revealMarkdownOffset = entry.offset;
-      _revealTitle = entry.title;
-      _revealSignal++;
-    });
-
-    if (_viewMode != _DocViewMode.source) return;
-    // headingBlockIndex op de body, niet op de source: de preview rendert de
-    // body, en frontmatter-blokken (thematische ---, sleutelregels) tellen
-    // anders mee en verschuiven het bloknummer (#1670).
-    final index = DocumentMarkdownView.headingBlockIndex(
-      body,
-      headingSlug(entry.title),
-    );
-    if (index < 0) return;
-    setState(() => _anchorBlockIndex = index);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final ctx = _anchorKey.currentContext;
-      if (ctx == null) return;
-      Scrollable.ensureVisible(
-        ctx,
-        alignment: 0.08,
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeInOut,
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     ref.listen(
@@ -435,6 +391,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           selection: TextSelection.collapsed(offset: prevOffset),
         );
         _applyingExternal = false;
+        _find.refreshWhileTyping();
         setState(() {});
         // Alleen een wijziging van buiten hoeft hier opnieuw gecontroleerd te
         // worden. Gewoon typen is hierboven al door dezelfde poort gegaan;
@@ -519,6 +476,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                       projectPath: _documentProjectPath(ref),
                       tlp: documentTlp,
                       fields: fields,
+                      findSession: _find,
+                      searchRevealSignal: _findSelectionSignal,
                     ),
                   },
                 ),
@@ -658,75 +617,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ),
     zoom: settings.documentEditorZoom,
     onZoomChanged: (zoom) => _setDocumentZoom(ref, zoom),
-  );
-
-  Widget _findBar() => MarkdownFindBar(
-    key: ValueKey('doc-find-${_find.showReplace}'),
-    query: _find.query,
-    replace: _find.replacement,
-    caseSensitive: _find.caseSensitive,
-    showReplace: _find.showReplace,
-    matchCount: _find.matchCount,
-    matchIndex: _find.matchIndex,
-    onQueryChanged: _find.onQueryFieldChanged,
-    onReplaceChanged: _find.setReplacement,
-    onCaseSensitiveChanged: _find.setCaseSensitive,
-    onNext: _find.next,
-    onPrevious: _find.previous,
-    onReplaceCurrent: _find.replaceCurrent,
-    onReplaceAll: _find.replaceAll,
-    onClose: _find.close,
-  );
-
-  void _openFind({required bool showReplace}) {
-    ref.read(documentProvider.notifier).flushPendingVisualEdit();
-    // Pagina's is alleen-lezen: zoeken heeft daar geen schrijfvlak. Ga naar
-    // Bron, waar de zoekbalk en de markering hun plek hebben.
-    if (_viewMode == _DocViewMode.pages) {
-      setState(() => _viewMode = _DocViewMode.source);
-      // Ook dit is een standwissel: de caret moet daarna in beeld liggen,
-      // niet bovenaan het document (#2322).
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) _revealAnchor();
-      });
-    }
-    _find.open(showReplace: showReplace);
-  }
-
-  /// Spring naar een treffer. In Bron staat de selectie direct op de controller
-  /// (met zoekmarkering eromheen); in Visueel leeft de cursor in Quill en
-  /// vragen we [MarkdownNotesEditor] via een signaal om hem erheen te verplaatsen.
-  void _jumpToMatch(TextMatchRange match) {
-    if (_viewMode == _DocViewMode.source) {
-      _controller.selection = TextSelection(
-        baseOffset: match.start,
-        extentOffset: match.end,
-      );
-      // Dezelfde garantie als bij een standwissel: de trefferregel komt
-      // echt in beeld, niet alleen de logische cursor (#2322).
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) _revealAnchor();
-      });
-      return;
-    }
-    setState(() {
-      _findSelectionStart = match.start;
-      _findSelectionEnd = match.end;
-      _findSelectionSignal++;
-    });
-  }
-
-  /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library
-  /// ([_documentOutlineRail]); het scherm levert alleen de stand en wat er bij
-  /// een tik moet gebeuren.
-  Widget _outlineRail(ThemeData theme, String source) => _documentOutlineRail(
-    context,
-    theme,
-    source,
-    collapsed: _outlineCollapsed,
-    activeIndex: _activeOutlineIndex,
-    onCollapsedChanged: (v) => setState(() => _outlineCollapsed = v),
-    onSelect: _scrollToHeading,
   );
 }
 

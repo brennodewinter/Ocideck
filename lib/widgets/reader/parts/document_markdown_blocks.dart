@@ -681,13 +681,15 @@ final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\((.+)\)$');
 
 /// Het opsommingsteken of nummer vóór een lijstregel. Top-level, want het
 /// leest alleen het thema en de regel — niets van de weergave zelf.
-Widget _bulletMarker(_Theme t, _ListLine it) => SizedBox(
-  width: it.ordered ? 24 : 18,
-  child: Text(
-    it.ordered ? '${it.number}.' : '•',
-    style: t.body.copyWith(
-      fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
-      color: it.ordered ? t.body.color : t.marker,
+Widget _bulletMarker(_Theme t, _ListLine it) => ExcludeDocumentSearch(
+  child: SizedBox(
+    width: it.ordered ? 24 : 18,
+    child: Text(
+      it.ordered ? '${it.number}.' : '•',
+      style: t.body.copyWith(
+        fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
+        color: it.ordered ? t.body.color : t.marker,
+      ),
     ),
   ),
 );

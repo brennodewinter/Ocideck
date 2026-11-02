@@ -16,6 +16,7 @@ import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
+import 'package:ocideck/widgets/reader/paged_document_view.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -1159,6 +1160,118 @@ void main() {
     fail('geen sneltoets gebonden aan ${key.keyLabel}');
   }
 
+  for (final mode in ["Pagina's", 'Visueel']) {
+    testWidgets('$mode: zoeken blijft staan en toont de treffer buiten beeld', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final source =
+          '${List.generate(45, (i) => 'Alinea $i met veel gewone tekst.').join('\n\n')}\n\nSlot met **zoekdoel** en een tweede zoekdoel.';
+      final notifier = DocumentNotifier()
+        ..loadDocument(MarkdownDocument.parse(source));
+      await tester.pumpWidget(harness(notifier));
+      await tester.pumpAndSettle();
+      if (mode == "Pagina's") {
+        await tester.tap(find.text("Pagina's"));
+        await tester.pumpAndSettle();
+      }
+      await tester.tap(find.byTooltip('Zoeken'));
+      await tester.pumpAndSettle();
+      final query = find
+          .descendant(
+            of: find.byType(MarkdownFindBar),
+            matching: find.byType(TextField),
+          )
+          .first;
+      await tester.enterText(query, 'zoekdoel');
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.pumpAndSettle();
+      expect(tester.widget<TextField>(query).focusNode!.hasFocus, isTrue);
+      expect(find.text('Treffer 1 van 2'), findsOneWidget);
+      if (mode == "Pagina's") {
+        expect(find.byType(PagedDocumentView), findsOneWidget);
+        final scroll = tester
+            .widgetList<SingleChildScrollView>(
+              find.descendant(
+                of: find.byType(PagedDocumentView),
+                matching: find.byType(SingleChildScrollView),
+              ),
+            )
+            .firstWhere((view) => view.controller != null)
+            .controller!;
+        expect(scroll.offset, greaterThan(100));
+      } else {
+        final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+        expect(quill.scrollController.offset, greaterThan(100));
+        final plain = quill.controller.document.toPlainText();
+        final selection = quill.controller.selection;
+        expect(plain.substring(selection.start, selection.end), 'zoekdoel');
+      }
+      expect(notifier.currentState.document!.body, source);
+      expect(notifier.currentState.isDirty, isFalse);
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.pumpAndSettle();
+      expect(find.text('Treffer 2 van 2'), findsOneWidget);
+      expect(tester.widget<TextField>(query).focusNode!.hasFocus, isTrue);
+      if (mode == "Pagina's") {
+        await tester.tap(find.text('Visueel'));
+        await tester.pumpAndSettle();
+        final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+        final plain = quill.controller.document.toPlainText();
+        expect(quill.controller.selection.start, plain.lastIndexOf('zoekdoel'));
+        expect(quill.scrollController.offset, greaterThan(100));
+        expect(find.text('Treffer 2 van 2'), findsOneWidget);
+      }
+    });
+  }
+
+  testWidgets('Visueel: twee tabeltreffers tonen elk hun eigen cel buiten beeld', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final source =
+        '${List.filled(40, 'Gewone alinea.').join('\n\n')}\n\n| Kolom |\n| --- |\n| kat |\n| een tweede kat |';
+    final notifier = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse(source));
+    await tester.pumpWidget(harness(notifier));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Zoeken'));
+    await tester.pumpAndSettle();
+    final query = find
+        .descendant(
+          of: find.byType(MarkdownFindBar),
+          matching: find.byType(TextField),
+        )
+        .first;
+    await tester.enterText(query, 'kat');
+    await tester.pumpAndSettle();
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    final first = tester.getRect(
+      find.byKey(const Key('document-search-highlight')).first,
+    );
+    expect(
+      first.center.dy,
+      inInclusiveRange(250, 780),
+      reason:
+          'scroll=${tester.widget<QuillEditor>(find.byType(QuillEditor)).scrollController.offset}, max=${tester.widget<QuillEditor>(find.byType(QuillEditor)).scrollController.position.maxScrollExtent}',
+    );
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    final second = tester.getRect(
+      find.byKey(const Key('document-search-highlight')).first,
+    );
+    expect(second.center.dy, inInclusiveRange(250, 780));
+    expect(second, isNot(first));
+    expect(find.text('Treffer 2 van 2'), findsOneWidget);
+    expect(tester.widget<TextField>(query).focusNode!.hasFocus, isTrue);
+    expect(notifier.currentState.document!.body, source);
+    expect(notifier.currentState.isDirty, isFalse);
+  });
+
   testWidgets('Bron: zoeken telt matches en Volgende springt', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -1182,16 +1295,19 @@ void main() {
     await tester.pumpAndSettle();
 
     // Twee treffers, de eerste geselecteerd: "1 / 2".
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Treffer 1 van 2'), findsOneWidget);
 
     await tester.tap(find.byTooltip('Volgende'));
     await tester.pumpAndSettle();
-    expect(find.text('2 / 2'), findsOneWidget);
+    expect(find.text('Treffer 1 van 2'), findsOneWidget);
+    await tester.tap(find.byTooltip('Volgende'));
+    await tester.pumpAndSettle();
+    expect(find.text('Treffer 2 van 2'), findsOneWidget);
 
     // Terug naar de eerste.
     await tester.tap(find.byTooltip('Vorige'));
     await tester.pumpAndSettle();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Treffer 1 van 2'), findsOneWidget);
   });
 
   testWidgets('Bron: Ctrl+F opent de zoekbalk', (tester) async {
@@ -1362,7 +1478,7 @@ void main() {
     await tester.enterText(queryField, 'kat');
     await tester.pumpAndSettle();
     // Hoofdletterongevoelig: drie treffers.
-    expect(find.text('1 / 3'), findsOneWidget);
+    expect(find.text('Treffer 1 van 3'), findsOneWidget);
 
     // Aan zetten: alleen de twee kleine-lettervarianten.
     await tester.tap(
@@ -1372,7 +1488,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Treffer 1 van 2'), findsOneWidget);
   });
 
   testWidgets('Visueel: zoeken telt matches op de bron', (tester) async {
@@ -1397,12 +1513,15 @@ void main() {
         .first;
     await tester.enterText(queryField, 'alpha');
     await tester.pumpAndSettle();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Treffer 1 van 2'), findsOneWidget);
 
     // Volgende springt de Quill-cursor naar de tweede treffer zonder crash.
     await tester.tap(find.byTooltip('Volgende'));
     await tester.pumpAndSettle();
-    expect(find.text('2 / 2'), findsOneWidget);
+    expect(find.text('Treffer 1 van 2'), findsOneWidget);
+    await tester.tap(find.byTooltip('Volgende'));
+    await tester.pumpAndSettle();
+    expect(find.text('Treffer 2 van 2'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

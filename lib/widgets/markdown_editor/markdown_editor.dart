@@ -7,8 +7,12 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
 import '../../utils/footnote_embed_syntax.dart';
+import '../editors/deck_search_target.dart';
+import '../editors/editor_text_controller.dart';
+import '../reader/document_search_overlay.dart';
 import '../../utils/visual_markdown_flush.dart';
 import '../../utils/markdown_caret_map.dart';
+import '../../utils/text_search.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_typing_shortcuts.dart';
 import '../../utils/markdown_paste_cleanup.dart';
@@ -24,6 +28,8 @@ export 'markdown_editor_theme.dart';
 export 'markdown_editor_toolbar.dart';
 export 'notes_editor_mode.dart';
 export 'notes_mode_toggle.dart';
+
+part 'markdown_editor_search.dart';
 
 /// How the editor paints its chrome.
 ///
@@ -80,6 +86,9 @@ class MarkdownNotesEditor extends StatefulWidget {
   final int findSelectionSignal;
   final int? findSelectionStart;
   final int? findSelectionEnd;
+  final String findQuery;
+  final int findMatchIndex;
+  final bool findCaseSensitive;
 
   /// Caret in Quill-modus (platte-tekst-offset + documenttekst), zodat de
   /// Overzicht-rail mee kan lopen. In markdown-modus luistert de ouder naar
@@ -153,6 +162,9 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.findSelectionSignal = 0,
     this.findSelectionStart,
     this.findSelectionEnd,
+    this.findQuery = '',
+    this.findMatchIndex = -1,
+    this.findCaseSensitive = false,
     this.onVisualCaret,
     this.insertSignal = 0,
     this.insertMarkdownBlock,
@@ -233,6 +245,8 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   bool _syncingMarkdown = false;
   String _markdownSnapshot = '';
   bool _quillSyncScheduled = false;
+  int _deckFindSignal = -1;
+  int _visualFindRevealedSignal = 0;
 
   /// Echte documentwijziging die nog niet naar de bron is geschreven.
   /// Een cursorbeweging zet hem niet: de heen-en-terugweg is niet verliesvrij,
@@ -267,6 +281,26 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (_requestedMode == NotesEditorMode.visual) {
       _openVisualEditor();
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final target = DeckSearchTarget.of(context);
+    final controller = widget.controller;
+    if (target == null ||
+        controller is! EditorTextController ||
+        !target.matches(controller.searchFieldId) ||
+        target.signal == _deckFindSignal) {
+      return;
+    }
+    _deckFindSignal = target.signal;
+    final range = target.match!.range;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _deckFindSignal == target.signal) {
+        _revealFindSelection(range.start, range.end);
+      }
+    });
   }
 
   @override
@@ -424,9 +458,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
 
   /// Zet de cursor op een zoekmatch. In markdown-modus direct op de controller;
   /// in de visuele stand vertaalt [MarkdownCaretMap] de Markdown-offsets naar de
-  /// platte tekst van Quill en selecteert het bereik. De vertaling is per regel
-  /// exact voor gewone tekst — opmaaktekens binnen een woord kunnen de selectie
-  /// een teken verschuiven, maar het woord en de regel kloppen.
+  /// platte tekst van Quill en selecteert het bereik. De zoekbalk behoudt focus.
   void _revealFindSelection(int? start, int? end) {
     if (start == null) return;
     final s = start.clamp(0, widget.controller.text.length);
@@ -436,7 +468,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         baseOffset: s,
         extentOffset: e,
       );
-      _focusNode.requestFocus();
       return;
     }
     final quill = _quillController;
@@ -449,7 +480,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       TextSelection(baseOffset: vStart, extentOffset: vEnd),
       ChangeSource.local,
     );
-    _focusNode.requestFocus();
     widget.onVisualCaret?.call(plain, vStart);
   }
 
@@ -782,28 +812,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     widget.controller.value = TextEditingValue(
       text: next,
       selection: TextSelection.collapsed(offset: start + text.length),
-    );
-  }
-
-  Widget _buildVisualField() {
-    final quill = _quillController;
-    final scroll = _scrollController;
-    if (quill == null || scroll == null) {
-      return const SizedBox.shrink();
-    }
-    return WysiwygNotesField(
-      controller: quill,
-      scrollController: scroll,
-      focusNode: _focusNode,
-      editorTheme: widget.editorTheme,
-      hintText: widget.hintText,
-      expand: widget.expand,
-      contentPadding: widget.contentPadding,
-      bordered: _fieldBordered,
-      tryConsumePaste: widget.tryConsumePaste,
-      editorKey: widget.editorKey,
-      onDiscreteVisualEdit: widget.onDiscreteVisualEdit,
-      onTapLink: widget.onTapLink,
     );
   }
 
