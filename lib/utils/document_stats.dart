@@ -37,6 +37,23 @@ final _reHasLetterOrDigit = RegExp(r'[\p{L}\p{N}]', unicode: true);
 /// afbeeldingsmarkup verwijderd zodat paden niet als woorden meetellen.
 /// Afbeeldingen: `![…](…)`-verwijzingen, exclusief `![bg`-achtergronden (Marp).
 DocumentStats computeDocumentStats(String body) {
+  final cached = _statsCache.remove(body);
+  if (cached != null) {
+    _statsCache[body] = cached;
+    return cached;
+  }
+  final stats = _computeDocumentStats(body);
+  _statsCache[body] = stats;
+  if (_statsCache.length > 8) _statsCache.remove(_statsCache.keys.first);
+  return stats;
+}
+
+/// De telling zelf; [computeDocumentStats] hergebruikt de uitslag voor een
+/// ongewijzigde bron — de informatiestrook herbouwt mee met elke caret en
+/// hoeft dan niet telkens het hele document te tellen (#2711).
+final Map<String, DocumentStats> _statsCache = {};
+
+DocumentStats _computeDocumentStats(String body) {
   final outline = buildMarkdownOutline(body);
   var chapters = 0;
   var sections = 0;
