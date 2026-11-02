@@ -98,7 +98,9 @@ class SyncEngine {
       // Onleesbare wachtrij-sleutel: blijft staan (de werkkopie kan het deck
       // nog bevatten), maar telt wél mee als mislukt — "gesynchroniseerd" was
       // hier een leugen (#2723).
-      logWarning('SyncEngine.flush: wachtrij-sleutel onleesbaar ($deckDir)');
+      logWarning(
+        'SyncEngine.flush: wachtrij-sleutel onleesbaar (${logName(deckDir)})',
+      );
       out.add(
         SyncOutcome(
           deckDir: deckDir,

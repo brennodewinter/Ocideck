@@ -624,11 +624,12 @@ void main() {
           ],
         ),
       );
-      // Only the first six series names appear in the legend.
-      expect(html, contains('S0'));
-      expect(html, contains('S5'));
-      expect(html, isNot(contains('S6')));
-      expect(html, isNot(contains('S7')));
+      // Only the first six series names appear in the drawn legend —
+      // the full set may still sit in the aria-label (#2732).
+      expect(html, contains('>S0<'));
+      expect(html, contains('>S5<'));
+      expect(html, isNot(contains('>S6<')));
+      expect(html, isNot(contains('>S7<')));
     });
 
     test('pie legend wraps labels over multiple rows and clamps at three', () {
@@ -663,8 +664,9 @@ void main() {
         ),
       );
       expect(html, contains('…</text>'));
-      // The full 80-char title is not emitted verbatim.
-      expect(html, isNot(contains(title)));
+      // The full 80-char title is not emitted verbatim as drawn text; the
+      // aria-label may carry it for screen readers (#2732).
+      expect(html, isNot(contains('>' + title + '<')));
     });
 
     test('a titled chart shifts the plot area down (title branch)', () {
@@ -792,13 +794,8 @@ void main() {
     test('a source-only block (stripped inline data) renders an empty SVG', () {
       final html = _renderRaw('{"type":"bar","source":"data/omzet.csv"}');
       // hasInlineData is false → the placeholder empty SVG, no bars.
-      expect(
-        html,
-        contains(
-          '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">'
-          '</svg>',
-        ),
-      );
+      expect(html, contains('<svg viewBox="0 0 800 450"'));
+      expect(html, contains('</svg>'));
       expect(html, isNot(contains('<rect')));
     });
 

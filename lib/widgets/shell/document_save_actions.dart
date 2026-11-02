@@ -63,7 +63,14 @@ Future<MarkdownDocument?> saveDocumentUntilCurrent({
   var attempts = 1;
   while (latest != null && attempts < maxAttempts) {
     final live = notifier.currentState.document;
-    if (live == null || live.source == latest.source) return latest;
+    // Geen bewerking sinds de vorige beurt (de Visueel-route schrijft een
+    // gepatchte variant van `sent` — de live bron wijkt dan bewust af), óf
+    // de schijfversie staat al in de notifier (#2720).
+    if (live == null ||
+        live.source == first.source ||
+        live.source == latest.source) {
+      return latest;
+    }
     attempts++;
     final again = await write(live);
     if (again == null) return latest;
@@ -125,13 +132,22 @@ Future<bool> saveDocumentWithDestination(
     }
     final written = await saveDocumentUntilCurrent(
       notifier: notifier,
-      first: documentToSave,
-      write: (doc) => saveDocument(
-        doc,
-        path,
-        sourceProjectPath: state.projectPath ?? p.dirname(path),
-        transcriptAudioPath: state.pendingAudioPath,
-      ),
+      first: document,
+      // Elke schrijfbeurt patcht de live bron opnieuw op de opgeslagen basis:
+      // de Visueel-ronde levert een genormaliseerde bron, maar de schijf moet
+      // de werkelijke bewerkingen krijgen (#1613) — óók bij de herhaling.
+      write: (doc) {
+        final s = notifier.currentState;
+        final toSave = s.visualEdited && s.savedSource != null
+            ? _patchVisualSave(doc, s.savedSource!)
+            : doc;
+        return saveDocument(
+          toSave,
+          path,
+          sourceProjectPath: s.projectPath ?? p.dirname(path),
+          transcriptAudioPath: s.pendingAudioPath,
+        );
+      },
     );
     if (written != null) {
       // Werk de notifier bij met de versie zoals die op schijf staat —

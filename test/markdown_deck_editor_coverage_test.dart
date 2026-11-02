@@ -145,7 +145,14 @@ void main() {
     await tester.pumpWidget(_host(content: _validDeck));
 
     await tester.enterText(find.byType(TextField).last, _invalidDeck);
+    // Fake-tijd vuurt de debounce; sinds #2737 post de inspectie-isolate zijn
+    // antwoord pas in échte tijd terug — runAsync laat die binnenkomen.
     await tester.pump(const Duration(milliseconds: 400));
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 800));
+      await tester.pump();
+    });
+    await tester.pumpAndSettle();
 
     expect(find.byTooltip('Problemen gevonden'), findsOneWidget);
     expect(find.byWidgetPredicate(isIssueHighlightLayer), findsOneWidget);

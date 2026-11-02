@@ -61,10 +61,17 @@ Widget _host(String content) => ProviderScope(
   ),
 );
 
-/// De validatie-debounce is een echte Timer; `pumpAndSettle` laat hem niet
-/// lopen zolang er geen frames gepland zijn — dus expliciet tijd verderzetten.
+/// De validatie-debounce is een echte Timer én draait sinds #2737 op een
+/// achtergrond-isolate; `pumpAndSettle` laat geen van beide lopen zolang er
+/// geen frames gepland zijn — dus expliciet échte tijd verderzetten.
 Future<void> _settle(WidgetTester tester) async {
+  // Fake-tijd: de debounce-timer laten vuren (start de isolate).
   await tester.pump(const Duration(milliseconds: 400));
+  // Échte tijd: de isolate zijn antwoord laten posten.
+  await tester.runAsync(() async {
+    await Future<void>.delayed(const Duration(milliseconds: 800));
+    await tester.pump();
+  });
   await tester.pumpAndSettle();
 }
 

@@ -532,7 +532,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
         // #1951: na succesvolle opslaan, onthoud de nieuwe mtime zodat de
         // volgende opslaan-controle geen vals positief geeft.
         await _localMerge.recordMtime();
-        return !incomplete;
+        // incomplete (grafiekwaarschuwingen): het deck staat wél op schijf,
+        // alleen de databestanden niet — dat is het #1950-contract: true,
+        // terwijl isDirty het tabblad vuil houdt.
+        return true;
       }
       deck = state.deck;
       if (deck == null) return false;
