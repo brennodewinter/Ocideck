@@ -8,6 +8,12 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- **Presentaties openen op het web.** De privacyscan vraagt in de browser
+  geen desktop-isolate meer op. Daardoor openen de proefpresentatielink en
+  URL-import weer zonder de misleidende CORS-foutmelding.
+
 ### Added
 
 - **Quizvragen bij de export.** In het exportdialoog kun je vraagdia's

@@ -26,6 +26,14 @@ Run `make help` for a one-line summary of every target.
 make check        # format-check + analyze + conventions + method-length + dead-code + coverage + per-file floor
 ```
 
+The browser privacy-scan regression needs an actual Chrome runtime; the native
+suite skips this browser-only test. Run it explicitly when changing scan warm-up
+or its platform guards:
+
+```sh
+flutter test --platform chrome test/privacy_scan_memo_web_test.dart
+```
+
 > **Prerequisite: `cmake` on your `PATH`.** Since the move to `dartcv4` for
 > on-device face detection (#870), the native OpenCV binding is built through a
 > native-assets build hook, and that hook runs on **every** `dart run` and
