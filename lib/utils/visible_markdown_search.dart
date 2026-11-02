@@ -1,3 +1,5 @@
+import 'package:markdown/markdown.dart' as md;
+
 import 'inline_markdown.dart';
 import 'markdown_blocks.dart';
 import 'markdown_paste_cleanup.dart' show markdownEscapedPunctuation;
@@ -16,6 +18,8 @@ class VisibleMarkdownText {
       r'^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)',
     ).hasMatch(source);
     var lineNumber = 0;
+    final softBreaks = _softBreaks(source);
+    var previousSoft = false;
     for (final line in source.split('\n')) {
       final isMetadata = metadata;
       if (lineNumber++ > 0 && line.trim() == '---') metadata = false;
@@ -58,6 +62,12 @@ class VisibleMarkdownText {
             allowed.fillRange(labelStart, labelEnd, false);
           }
         }
+        final footnoteDefinition = RegExp(
+          r'^\s*\[\^[^\]\n]+\]:[ \t]*',
+        ).matchAsPrefix(line);
+        if (footnoteDefinition != null) {
+          allowed.fillRange(0, footnoteDefinition.end, false);
+        }
         for (final match in _footnote.allMatches(line)) {
           allowed.fillRange(match.start, match.end, false);
         }
@@ -78,7 +88,13 @@ class VisibleMarkdownText {
             positions.add(base + i);
           }
         }
-        final raw = filtered.toString();
+        final raw = _inlineSearchSource(
+          filtered.toString(),
+          line,
+          positions,
+          trimLeading: previousSoft,
+          hasNextLine: base + line.length < source.length,
+        );
         final visible = parseInlineRuns(raw).map((run) => run.text).join();
         final inlineVisible = _inlineSyntaxMask(raw);
         final entities = _entity.allMatches(raw).toList(growable: false);
@@ -126,7 +142,9 @@ class VisibleMarkdownText {
           cursor = index + 1;
         }
       }
-      output.write('\n');
+      final soft = fence == null && softBreaks.contains(lineNumber - 1);
+      output.write(soft ? ' ' : '\n');
+      previousSoft = soft;
       offsets.add(base + line.length);
       _ends.add(base + line.length + 1);
       base += line.length + 1;
@@ -246,6 +264,82 @@ class VisibleMarkdownText {
   static final _blockMarker = RegExp(
     r'^\s*(?:#{1,6}\s+|>\s?|[-*+]\s+|\d+[.)]\s+)',
   );
+}
+
+// Pas alleen de inline-bron aan; de bronposities reizen met weggehaalde
+// beginspaties mee, zodat een treffer over een softbreak exact blijft.
+String _inlineSearchSource(
+  String raw,
+  String line,
+  List<int> positions, {
+  required bool trimLeading,
+  required bool hasNextLine,
+}) {
+  if (RegExp(r'^ {0,3}#{1,6}(?:[ \t]|$)').hasMatch(line)) {
+    final closing = RegExp(r'(?:^|[ \t]+)#+[ \t]*$').firstMatch(raw);
+    if (closing != null) raw = raw.substring(0, closing.start);
+  }
+  raw = raw.trimRight();
+  if (trimLeading) {
+    final skip = raw.length - raw.trimLeft().length;
+    raw = raw.substring(skip);
+    positions.removeRange(0, skip);
+  }
+  if (hasNextLine && raw.endsWith(r'\') && _trailingEscape(line)) {
+    raw = raw.substring(0, raw.length - 1);
+  }
+  return raw;
+}
+
+bool _trailingEscape(String line) =>
+    (RegExp(r'\\+$').firstMatch(line)?.group(0)?.length ?? 0).isOdd;
+
+// Gebruik de CommonMark-blokregels voor alinea-continuaties: een fysieke
+// newline binnen één alinea wordt een spatie, een nieuwe kop/lijst/code niet.
+Set<int> _softBreaks(String source) {
+  final sourceLines = source.split('\n');
+  final quotePrefix = RegExp(r'^ {0,3}(?:>[ \t]?)+');
+  final quoteDepths = [
+    for (final line in sourceLines)
+      '>'.allMatches(quotePrefix.stringMatch(line) ?? '').length,
+  ];
+  final lines = [
+    for (final line in sourceLines) md.Line(line.replaceFirst(quotePrefix, '')),
+  ];
+  final parser = md.BlockParser(
+    lines,
+    md.Document(extensionSet: md.ExtensionSet.gitHubFlavored),
+  );
+  final result = <int>{};
+  var paragraph = false;
+  MarkdownFence? fence;
+  for (var i = 0; i < lines.length; i++) {
+    final line = lines[i].content;
+    final opening = markdownFenceOpen(line.trim());
+    if (fence != null) {
+      if (fence.closes(line.trim())) fence = null;
+      paragraph = false;
+    } else if (opening != null) {
+      fence = opening;
+      paragraph = false;
+    } else if (!paragraph) {
+      final syntax = parser.blockSyntaxes.firstWhere(
+        (syntax) => syntax.canParse(parser),
+      );
+      paragraph = syntax is md.ParagraphSyntax || syntax is md.ListSyntax;
+    }
+    parser.advance();
+    if (parser.isDone) break;
+    final continues =
+        paragraph &&
+        quoteDepths[i + 1] <= quoteDepths[i] &&
+        const md.ParagraphSyntax().interruptedBy(parser) == null;
+    if (continues && !line.endsWith('  ') && !_trailingEscape(line)) {
+      result.add(i);
+    }
+    paragraph = continues;
+  }
+  return result;
 }
 
 /// Zoek letterlijk in de leesprojectie en vertaal terug naar Markdown-posities.

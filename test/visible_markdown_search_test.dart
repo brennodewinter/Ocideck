@@ -2,6 +2,61 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/text_search.dart';
 
 void main() {
+  test('ATX-sluithek en voetnootdefinitiemarker zijn onzichtbare syntax', () {
+    const source = '# Titel ###\n\n[^a]: zichtbare voetnoot';
+    expect(findVisibleMarkdownMatches(source, '#'), isEmpty);
+    expect(findVisibleMarkdownMatches(source, ':'), isEmpty);
+    expect(findVisibleMarkdownMatches(source, 'zichtbare voetnoot').length, 1);
+    expect(visibleMarkdownText('# ###'), '');
+  });
+
+  test('softbreaks vormen een zichtbare frase met exacte bronposities', () {
+    const source = 'Een **belangrijke**\n  [passage](https://example.invalid).';
+    final match = findVisibleMarkdownMatches(
+      source,
+      'belangrijke passage',
+    ).single;
+    expect(
+      source.substring(match.start, match.end),
+      'belangrijke**\n  [passage',
+    );
+    expect(visibleMarkdownText(source), 'Een belangrijke passage.');
+    expect(
+      findVisibleMarkdownMatches(
+        '> belangrijke\n> passage',
+        'belangrijke passage',
+      ).length,
+      1,
+    );
+    expect(
+      findVisibleMarkdownMatches(
+        '- belangrijke\n  passage',
+        'belangrijke passage',
+      ).length,
+      1,
+    );
+  });
+
+  test('harde regeleinden, blokgrenzen en code worden niet samengevoegd', () {
+    expect(visibleMarkdownText(r'een\'), r'een\');
+    for (final source in [
+      'een  \npassage',
+      'een\\\npassage',
+      'een\n\npassage',
+      '# een\npassage',
+      'een\n> passage',
+      '- een\n- passage',
+      '~~~text\neen\npassage\n~~~',
+      '```text\neen\npassage\n```',
+    ]) {
+      expect(
+        findVisibleMarkdownMatches(source, 'een passage'),
+        isEmpty,
+        reason: source,
+      );
+    }
+  });
+
   test('zichtbare frase over opmaak heen behoudt exacte bronposities', () {
     const source = 'een **belangrijke** passage en échte 🐈 tekst';
     final found = findVisibleMarkdownMatches(source, 'belangrijke passage');

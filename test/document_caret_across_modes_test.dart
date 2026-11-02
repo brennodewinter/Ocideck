@@ -75,6 +75,52 @@ void main() {
     expect(map.visualOffsetOf(source.indexOf('Slot')), plain.indexOf('Slot'));
   });
 
+  test('softbreak-frases en tekst erna hebben exacte codecposities', () {
+    for (final source in [
+      'Een **belangrijke**\n  [passage](https://example.invalid).\n\nSlot',
+      'Een **belangrijke**  \npassage.\n\nSlot',
+      'Een **belangrijke**\\\npassage.\n\nSlot',
+    ]) {
+      final map = MarkdownCaretMap.of(source);
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        source,
+      ).toPlainText();
+      for (final word in ['belangrijke', 'passage', 'Slot']) {
+        expect(
+          map.visualOffsetOf(source.indexOf(word)),
+          plain.indexOf(word),
+          reason: '$word in $source',
+        );
+      }
+    }
+  });
+
+  test('ATX-sluithek en beide fencevarianten volgen de echte codec', () {
+    for (final prefix in [
+      '# Titel #\n\n',
+      '~~~text\na **letterlijk**  \n~~~\n\n',
+      '````text\na\n```\nb\n````\n\n',
+    ]) {
+      final source = '${prefix}Een **belangrijke** passage.';
+      final map = MarkdownCaretMap.of(source);
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        source,
+      ).toPlainText();
+      final start = source.indexOf('Een **');
+      final end = source.indexOf(' passage.') + ' passage'.length;
+      expect(
+        plain.substring(map.visualOffsetOf(start), map.visualOffsetOf(end)),
+        'Een belangrijke passage',
+        reason: source,
+      );
+      expect(
+        map.sourceOffsetOf(plain.indexOf('belangrijke')),
+        source.indexOf('belangrijke'),
+        reason: source,
+      );
+    }
+  });
+
   group('MarkdownCaretMap volgt de echte omzetting', () {
     final plat = MarkdownQuillCodec.documentFromMarkdown(bron).toPlainText();
     final kaart = MarkdownCaretMap.of(bron);

@@ -1,3 +1,4 @@
+import 'markdown_blocks.dart';
 import 'visible_markdown_search.dart';
 
 /// Vertaalt een cursorpositie heen en weer tussen de Markdown-bron en de platte
@@ -32,24 +33,24 @@ class MarkdownCaretMap {
     final rows = <_Row>[];
     var sourceAt = 0;
     var visualAt = 0;
-    var fenced = false;
+    MarkdownFence? fence;
 
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
       final start = sourceAt;
       sourceAt += line.length + 1; // +1 voor het regeleinde
 
-      if (_fencePattern.hasMatch(line)) {
-        fenced = !fenced;
-        rows.add(_Row.hidden(start, line.length, visualAt));
-        continue;
-      }
-      if (fenced) {
-        // In een codeblok staat er letterlijk wat er staat.
+      if (fence != null && !fence.closes(line.trim())) {
         rows.add(
           _Row.text(start, line.length, 0, line, visualAt, literal: true),
         );
         visualAt += line.length + 1;
+        continue;
+      }
+      final opening = markdownFenceOpen(line.trim());
+      if (fence != null || opening != null) {
+        fence = fence == null ? opening : null;
+        rows.add(_Row.hidden(start, line.length, visualAt));
         continue;
       }
       if (line.trim().isEmpty) {
@@ -74,10 +75,20 @@ class MarkdownCaretMap {
         continue;
       }
 
-      final skip = _blockMarkerLength(line);
-      rows.add(
-        _Row.text(start, line.length, skip, line.substring(skip), visualAt),
-      );
+      var skip = _blockMarkerLength(line);
+      // Ook op een doorlopende alinearegel laat CommonMark beginspaties weg.
+      while (skip < line.length && line[skip] == ' ') {
+        skip++;
+      }
+      var body = line.substring(skip);
+      if (RegExp(r'^ {0,3}#{1,6}(?:[ \t]|$)').hasMatch(line)) {
+        body = body.replaceFirst(RegExp(r'(?:^|[ \t]+)#+[ \t]*$'), '');
+      }
+      if (i + 1 < lines.length &&
+          (RegExp(r'\\+$').firstMatch(body)?.group(0)?.length ?? 0).isOdd) {
+        body = body.substring(0, body.length - 1);
+      }
+      rows.add(_Row.text(start, line.length, skip, body, visualAt));
       visualAt += rows.last.visualLength + 1;
     }
     return MarkdownCaretMap._(rows, visualAt);
@@ -123,7 +134,6 @@ class MarkdownCaretMap {
     return best;
   }
 
-  static final _fencePattern = RegExp(r'^\s*```');
   static final _rulePattern = RegExp(r'^\s*(-{3,}|\*{3,}|_{3,})\s*$');
   static final _tableRowPattern = RegExp(r'^\s*\|');
 
