@@ -46,6 +46,35 @@ void main() {
     expect(map.visualOffsetOf(second), plain.lastIndexOf(' passage'));
   });
 
+  test(
+    'alinea-eindspaties verschuiven latere geformatteerde zoekselectie niet',
+    () {
+      final source =
+          '${List.generate(30, (i) => '## Hoofdstuk $i\n\nEen lange alinea met gewone tekst. ').join('\n\n')}\n\n## Slot\n\nEen **belangrijke** [passage](https://example.invalid). Zoekanker staat hier tweemaal: zoekanker.';
+      final map = MarkdownCaretMap.of(source);
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        source,
+      ).toPlainText();
+      final start = source.lastIndexOf('Een **belangrijke**');
+      final end = source.indexOf('](https://example.invalid)', start);
+      expect(
+        plain.substring(map.visualOffsetOf(start), map.visualOffsetOf(end)),
+        'Een belangrijke passage',
+      );
+      expect(
+        map.visualOffsetOf(start),
+        plain.indexOf('Een belangrijke passage'),
+      );
+    },
+  );
+
+  test('zichtbare code behoudt eindspaties in de positiekaart', () {
+    const source = '```text\na **letterlijk**  \n```\n\nSlot';
+    final map = MarkdownCaretMap.of(source);
+    final plain = MarkdownQuillCodec.documentFromMarkdown(source).toPlainText();
+    expect(map.visualOffsetOf(source.indexOf('Slot')), plain.indexOf('Slot'));
+  });
+
   group('MarkdownCaretMap volgt de echte omzetting', () {
     final plat = MarkdownQuillCodec.documentFromMarkdown(bron).toPlainText();
     final kaart = MarkdownCaretMap.of(bron);

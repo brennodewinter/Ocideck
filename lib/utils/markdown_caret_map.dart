@@ -11,12 +11,12 @@ import 'visible_markdown_search.dart';
 /// visuele editor zet elk blok op een eigen regel, laat lege bronregels weg, en
 /// vervangt een tabel, een scheidingslijn of een afbeelding door één
 /// objectteken. Binnen een regel wordt geteld met dezelfde inline-ontleder die
-/// de weergave gebruikt ([stripInlineMarkdown]), zodat `**vet**` aan de ene kant
+/// de weergave gebruikt ([visibleMarkdownText]), zodat `**vet**` aan de ene kant
 /// vier tekens langer is dan aan de andere en de kolom toch klopt.
 ///
-/// Precisie tot op het teken is niet het doel en niet altijd haalbaar — sta je
-/// middenin een opmaakteken, dan landt de cursor aan het begin daarvan. De
-/// regel en het woord kloppen, en dat is wat "dezelfde plek" betekent.
+/// Binnen tekst volgt de kaart de zichtbare tekens, zonder alinea-eindspaties
+/// die CommonMark weglaat. Een atomair blok zoals een tabel blijft één
+/// objectpositie; de celweergave brengt haar eigen teksttreffer exact in beeld.
 class MarkdownCaretMap {
   MarkdownCaretMap._(this._rows, this.visualLength);
 
@@ -169,6 +169,7 @@ class _Row {
       _literal = false,
       object = true;
 
+  // CommonMark verwijdert alinea-eindspaties; meet die niet als Quill-tekst.
   _Row.text(
     this.sourceStart,
     this.sourceLength,
@@ -176,7 +177,7 @@ class _Row {
     this.body,
     this.visualStart, {
     bool literal = false,
-  }) : visible = literal ? body : visibleMarkdownText(body),
+  }) : visible = literal ? body : visibleMarkdownText(body).trimRight(),
        _literal = literal,
        object = false;
 
@@ -211,7 +212,7 @@ class _Row {
     final steps = List<int>.filled(body.length + 1, 0);
     final positions = _literal
         ? List.generate(body.length, (i) => i)
-        : VisibleMarkdownText(body).offsets;
+        : VisibleMarkdownText(body).offsets.take(visible.length).toList();
     var seen = 0;
     for (var i = 0; i <= body.length; i++) {
       while (seen < positions.length && positions[seen] < i) {

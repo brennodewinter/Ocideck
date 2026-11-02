@@ -1167,7 +1167,7 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
       final source =
-          '${List.generate(45, (i) => 'Alinea $i met veel gewone tekst.').join('\n\n')}\n\nSlot met **zoekdoel** en een tweede zoekdoel.';
+          '${List.generate(45, (i) => 'Alinea $i met veel gewone tekst. ').join('\n\n')}\n\nSlot met **zoekdoel** en een tweede zoekdoel.';
       final notifier = DocumentNotifier()
         ..loadDocument(MarkdownDocument.parse(source));
       await tester.pumpWidget(harness(notifier));
