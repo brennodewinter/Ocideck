@@ -817,6 +817,9 @@ const _dutchSourceAddEn = {
       'Collaborate live on a presentation stored on a WebDAV server. Off by default. Edits travel through a working folder next to the deck on the same server — without encryption by OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'An API key only travels over https or to this device itself — use https or leave the key empty',
+  '{model} verwijderen': 'Delete {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'The model ({grootte}) is removed from this computer. To transcribe locally again, you download it again.',
   'Ga naar de brontabel': 'Go to the source table',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'This table is a copy of the source table "{bron}". Edit the source and choose Refresh, or detach the view as a snapshot.',

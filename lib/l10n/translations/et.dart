@@ -1604,6 +1604,9 @@ const _dutchSourceAddEt = <String, String>{
       'Töötage reaalajas WebDAV-serveris oleva esitluse kallal. Vaikimisi välja lülitatud. Muudatused liiguvad deki kõrval oleva töökausta kaudu samal serveril — ilma OciDecki krüpteerimiseta.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'API-võti liigub ainult üle https-i või sellesse seadmesse — kasuta https-i või jäta võti tühjaks',
+  '{model} verwijderen': 'Kustuta {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Mudel ({grootte}) eemaldatakse sellest arvutist. Et uuesti kohapeal transkribeerida, laadid selle uuesti alla.',
   'Ga naar de brontabel': 'Mine lähtetabelisse',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'See tabel on lähtetabeli "{bron}" koopia. Muuda lähtetabelit ja vali Värskenda või ühenda vaade hetkepildina lahti.',

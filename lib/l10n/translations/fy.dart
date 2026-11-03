@@ -658,6 +658,9 @@ const _dutchSourceAddFy = {
       'Wurkje live oan in presintaasje op in WebDAV-server. Standert út. Bewurkingen reizgje fia in wurkmap njonken it deck op deselde server — sûner fersifering troch OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'In API-kaai giet allinnich oer https of nei dit apparaat sels — brûk https of lit de kaai leech',
+  '{model} verwijderen': '{model} fuortsmite',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'It model ({grootte}) ferdwynt fan dizze kompjûter. Om wer lokaal te transkribearjen, helje jo it opnij binnen.',
   'Ga naar de brontabel': 'Gean nei de boarnetabel',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Dizze tabel is in ôfskrift fan de boarnetabel "{bron}". Bewurkje de boarne en kies Fernije, of untkeppelje de werjefte as momintopname.',

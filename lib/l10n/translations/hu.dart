@@ -1613,6 +1613,9 @@ const _dutchSourceAddHu = <String, String>{
       'Dolgozzon élőben egy WebDAV-kiszolgálón lévő prezentáción. Alapértelmezetten ki. A módosítások a deck melletti munkamappán keresztül utaznak ugyanazon a kiszolgálón — OciDeck-titkosítás nélkül.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Az API-kulcs csak https-en vagy erre az eszközre kerül el — használj https-t, vagy hagyd üresen a kulcsot',
+  '{model} verwijderen': '{model} törlése',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'A modell ({grootte}) eltűnik erről a számítógépről. Ha újra helyben szeretnél átírni, újra le kell töltened.',
   'Ga naar de brontabel': 'Ugrás a forrástáblához',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ez a táblázat a "{bron}" forrástábla másolata. Szerkessze a forrást és válassza a Frissítés lehetőséget, vagy válassza le a nézetet pillanatképként.',

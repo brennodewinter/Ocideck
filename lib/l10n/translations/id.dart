@@ -1611,6 +1611,9 @@ const _dutchSourceAddId = <String, String>{
       'Bekerja secara langsung pada presentasi di server WebDAV. Nonaktif secara default. Suntingan berpindah melalui folder kerja di samping deck pada server yang sama — tanpa enkripsi oleh OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Kunci API hanya dikirim lewat https atau ke perangkat ini sendiri — gunakan https atau kosongkan kuncinya',
+  '{model} verwijderen': 'Hapus {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Model ({grootte}) dihapus dari komputer ini. Untuk mentranskripsi secara lokal lagi, Anda perlu mengunduhnya kembali.',
   'Ga naar de brontabel': 'Buka tabel sumber',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tabel ini adalah salinan tabel sumber "{bron}". Edit sumbernya dan pilih Segarkan, atau lepaskan tampilan sebagai snapshot.',

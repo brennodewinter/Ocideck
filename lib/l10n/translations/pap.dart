@@ -657,6 +657,9 @@ const _dutchSourceAddPap = {
       'Trabaha en vivo riba un presentashon riba un sirvidor WebDAV. Desaktipá pa defekto. Edishonnan ta biaha via un carpeta di trabou banda di e deck riba e mesun sirvidor — sin enkripshon pa OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Un yabi di API ta biaha djis via https òf pa e aparato aki mes — usa https òf laga e yabi bashí',
+  '{model} verwijderen': 'Kita {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'E modelo ({grootte}) ta disparsé for di e kompiuter aki. Pa transkribí lokalmente atrobe, bo ta baha e di nobo.',
   'Ga naar de brontabel': 'Bai na e tabela fuente',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'E tabela aki ta un kopia di e tabela fuente "{bron}". Editá e fuente i skohe Refresh, òf deskonektá e vista komo snapshot.',

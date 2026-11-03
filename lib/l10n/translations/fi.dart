@@ -1611,6 +1611,9 @@ const _dutchSourceAddFi = <String, String>{
       'Työskentele reaaliajassa WebDAV-palvelimella olevan esityksen parissa. Oletuksena pois päältä. Muutokset kulkevat deckin vieressä olevan työkansion kautta samalla palvelimella — ilman OciDeckin salausta.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'API-avain kulkee vain https-yhteydellä tai tähän laitteeseen — käytä https:ää tai jätä avain tyhjäksi',
+  '{model} verwijderen': 'Poista {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Malli ({grootte}) poistetaan tältä tietokoneelta. Jotta voit taas transkriboida paikallisesti, lataat sen uudelleen.',
   'Ga naar de brontabel': 'Siirry lähdetaulukkoon',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tämä taulukko on kopio lähdetaulukosta "{bron}". Muokkaa lähdettä ja valitse Päivitä, tai irrota näkymä tilannevedoksena.',

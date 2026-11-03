@@ -2519,6 +2519,9 @@ const _dutchSourceAddTr = <String, String>{
       'Bir WebDAV sunucusundaki sunumda canlı çalışın. Varsayılan olarak kapalı. Düzenlemeler aynı sunucudaki deck\'in yanındaki çalışma klasörü üzerinden gider — OciDeck şifrelemesi olmadan.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Bir API anahtarı yalnızca https üzerinden veya bu cihazın kendisine gider — https kullanın ya da anahtarı boş bırakın',
+  '{model} verwijderen': '{model} sil',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Model ({grootte}) bu bilgisayardan kaldırılır. Yeniden yerel olarak transkripsiyon yapmak için onu tekrar indirirsiniz.',
   'Ga naar de brontabel': 'Kaynak tabloya git',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Bu tablo, "{bron}" kaynak tablosunun bir kopyasıdır. Kaynağı düzenleyip Yenile\'yi seçin ya da görünümü anlık görüntü olarak ayırın.',

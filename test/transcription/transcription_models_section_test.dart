@@ -22,6 +22,8 @@ import 'package:ocideck/state/transcription_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings/transcription_models_section.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../support/pump_until.dart';
+
 void main() {
   late Directory temp;
   late _SpyStore store;
@@ -141,6 +143,39 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Niet geïnstalleerd'), findsOneWidget);
     expect(File('${temp.path}/ggml-test.bin').existsSync(), isFalse);
+  });
+
+  testWidgets('verwijderen vraagt eerst, en Annuleren laat het staan (#2759)', (
+    tester,
+  ) async {
+    final file = File('${temp.path}/ggml-test.bin')..writeAsBytesSync(bytes);
+    await tester.pumpWidget(app());
+    await refresh(tester);
+    await tester.pumpAndSettle();
+    final delete = find.byTooltip('Whisper test verwijderen');
+    expect(delete, findsOneWidget);
+
+    await tester.tap(delete);
+    await tester.pumpAndSettle();
+    expect(find.byType(AlertDialog), findsOneWidget);
+    await tester.tap(find.text('Annuleren'));
+    await tester.pumpAndSettle();
+    expect(find.byType(AlertDialog), findsNothing);
+    expect(file.existsSync(), isTrue, reason: 'Annuleren mag niets wissen');
+
+    await tester.tap(delete);
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.text('Verwijderen'),
+      ),
+    );
+    await pumpUntil(
+      tester,
+      () => !file.existsSync(),
+      reason: 'bevestigen wist het model niet',
+    );
   });
 
   testWidgets('een model op schijf opent als Geïnstalleerd', (tester) async {

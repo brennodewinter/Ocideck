@@ -1617,6 +1617,9 @@ const _dutchSourceAddLt = <String, String>{
       'Dirbkite tiesiogiai prie WebDAV serveryje esančios pateikties. Pagal numatymą išjungta. Pakeitimai keliauja per darbinį aplanką šalia deko tame pačiame serveryje — be OciDeck šifravimo.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'API raktas siunčiamas tik per https arba į šį įrenginį — naudokite https arba palikite raktą tuščią',
+  '{model} verwijderen': 'Ištrinti {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Modelis ({grootte}) pašalinamas iš šio kompiuterio. Kad vėl transkribuotumėte vietoje, turėsite jį atsisiųsti iš naujo.',
   'Ga naar de brontabel': 'Eiti į šaltinio lentelę',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ši lentelė yra šaltinio lentelės "{bron}" kopija. Redaguokite šaltinį ir pasirinkite Atnaujinti, arba atjunkite rodinį kaip momentinę kopiją.',
