@@ -524,17 +524,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
       // De identity-check is te streng voor state-vervangingen die geen
       // inhoudswijziging zijn (bv. copyWith voor themeProfile); we vergelijken
       // ook de undo-stapel (#1473).
-      final userEdited =
-          !identical(state.deck, deck) && _undoStack.length > undoLenBefore;
-      if (!userEdited) {
+      if (identical(state.deck, deck) || _undoStack.length <= undoLenBefore) {
         _localMerge.base = savedDeck;
         state = state.copyWith(deck: savedDeck, isDirty: incomplete);
         // #1951: na succesvolle opslaan, onthoud de nieuwe mtime zodat de
         // volgende opslaan-controle geen vals positief geeft.
         await _localMerge.recordMtime();
-        // incomplete (grafiekwaarschuwingen): het deck staat wél op schijf,
-        // alleen de databestanden niet — dat is het #1950-contract: true,
-        // terwijl isDirty het tabblad vuil houdt.
+        // #1950: grafiekwaarschuwingen houden het tabblad vuil, maar het deck
+        // staat wél op schijf — opslaan is gelukt.
         return true;
       }
       deck = state.deck;

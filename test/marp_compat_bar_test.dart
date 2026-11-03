@@ -7,6 +7,8 @@ import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
+
 /// Een schoon Marp-deck: groene balk.
 const _cleanDeck = '''
 ---
@@ -64,14 +66,17 @@ Widget _host(String content) => ProviderScope(
 /// De validatie-debounce is een echte Timer én draait sinds #2737 op een
 /// achtergrond-isolate; `pumpAndSettle` laat geen van beide lopen zolang er
 /// geen frames gepland zijn — dus expliciet échte tijd verderzetten.
-Future<void> _settle(WidgetTester tester) async {
+Future<void> _settle(WidgetTester tester, [Finder? bar]) async {
   // Fake-tijd: de debounce-timer laten vuren (start de isolate).
   await tester.pump(const Duration(milliseconds: 400));
-  // Échte tijd: de isolate zijn antwoord laten posten.
-  await tester.runAsync(() async {
-    await Future<void>.delayed(const Duration(milliseconds: 800));
-    await tester.pump();
-  });
+  // Échte tijd: wacht op de uitkomst die de test beweert — geen gok (#2737).
+  if (bar != null) {
+    await pumpUntil(
+      tester,
+      () => bar.evaluate().isNotEmpty,
+      reason: 'de Marp-balk kwam niet op',
+    );
+  }
   await tester.pumpAndSettle();
 }
 
@@ -83,30 +88,30 @@ void main() {
 
   testWidgets('schoon deck toont groene Marp-compatibel-balk', (tester) async {
     await tester.pumpWidget(_host(_cleanDeck));
-    await _settle(tester);
+    await _settle(tester, find.text('Marp · Geen syntaxproblemen gevonden'));
     expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsOneWidget);
     expect(find.text('Accepteren voor dit deck'), findsNothing);
   });
 
   testWidgets('gedegradeerd deck toont oranje balk', (tester) async {
     await tester.pumpWidget(_host(_degradedDeck));
-    await _settle(tester);
+    await _settle(tester, find.textContaining('waarschuwing'));
     expect(find.textContaining('waarschuwing'), findsOneWidget);
     expect(find.textContaining('geaccepteerd'), findsNothing);
   });
 
   testWidgets('rood deck biedt geen acceptatie aan', (tester) async {
     await tester.pumpWidget(_host(_brokenDeck));
-    await _settle(tester);
+    await _settle(tester, find.textContaining('Marp · Probleem'));
     expect(find.textContaining('Marp · Probleem'), findsOneWidget);
     expect(find.text('Accepteren voor dit deck'), findsNothing);
   });
 
   testWidgets('uitgeklapte bevindingen springen naar de regel', (tester) async {
     await tester.pumpWidget(_host(_degradedDeck));
-    await _settle(tester);
+    await _settle(tester, find.textContaining('waarschuwing'));
     await tester.tap(find.textContaining('waarschuwing'));
-    await _settle(tester);
+    await _settle(tester, find.textContaining('Niet overgenomen'));
     expect(find.textContaining('Niet overgenomen'), findsWidgets);
   });
 
@@ -138,7 +143,7 @@ void main() {
     await container
         .read(settingsProvider.notifier)
         .setMarpCompatChecksEnabled(true);
-    await _settle(tester);
+    await _settle(tester, find.text('Marp · Geen syntaxproblemen gevonden'));
 
     expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsOneWidget);
   });
@@ -148,7 +153,7 @@ void main() {
   ) async {
     final semantics = tester.ensureSemantics();
     await tester.pumpWidget(_host(_cleanDeck));
-    await _settle(tester);
+    await _settle(tester, find.text('Marp · Geen syntaxproblemen gevonden'));
 
     await tester.enterText(find.byType(TextField), '$_cleanDeck\n');
     await tester.pump();

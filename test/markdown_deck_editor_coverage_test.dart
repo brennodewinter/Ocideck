@@ -8,6 +8,8 @@ import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
 import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 
+import 'support/pump_until.dart';
+
 /// A clean deck that the validator accepts without warnings or errors.
 const _validDeck = '# Titel\n\nEen gewone paragraaf zonder problemen.';
 
@@ -145,14 +147,14 @@ void main() {
     await tester.pumpWidget(_host(content: _validDeck));
 
     await tester.enterText(find.byType(TextField).last, _invalidDeck);
-    // Fake-tijd vuurt de debounce; sinds #2737 post de inspectie-isolate zijn
-    // antwoord pas in échte tijd terug — runAsync laat die binnenkomen.
+    // Fake-tijd vuurt de debounce; sinds #2737 post de inspectie-isolate
+    // zijn antwoord pas in échte tijd terug — wacht op de uitkomst.
     await tester.pump(const Duration(milliseconds: 400));
-    await tester.runAsync(() async {
-      await Future<void>.delayed(const Duration(milliseconds: 800));
-      await tester.pump();
-    });
-    await tester.pumpAndSettle();
+    await pumpUntil(
+      tester,
+      () => find.byTooltip('Problemen gevonden').evaluate().isNotEmpty,
+      reason: 'de validatie markte de bron niet',
+    );
 
     expect(find.byTooltip('Problemen gevonden'), findsOneWidget);
     expect(find.byWidgetPredicate(isIssueHighlightLayer), findsOneWidget);
