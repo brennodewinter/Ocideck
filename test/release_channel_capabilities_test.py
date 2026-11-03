@@ -45,6 +45,7 @@ class CapabilitiesTest(TestCase):
 
     def test_first_error_is_found_before_long_successful_tail(self):
         self.assertEqual(subject.first_failure('before\n::error::first\n' + 'ok\n' * 10000)['line'], 2)
+        self.assertEqual(subject.first_failure('2026-11-03T17:29:35Z Traceback (most recent call last):\n' + 'cleanup\n' * 10000)['line'], 1)
 
     def test_missing_times_are_unknown_not_zero(self):
         self.assertIsNone(subject.timing({})['queue_seconds'])

@@ -75,7 +75,7 @@ def timing(run):
             'comparison': 'same source/controller/channel and cache regime only; incidents and manual waits are separate'}
 
 
-ERROR = re.compile(r'::error::|##\[error\]|❌|\[E\]|Unhandled exception|^.*FAILED(?:\s|$)')
+ERROR = re.compile(r'::error::|##\[error\]|❌|\[E\]|Unhandled exception|Traceback \(most recent call last\):|^.*FAILED(?:\s|$)')
 
 
 def first_failure(content):
