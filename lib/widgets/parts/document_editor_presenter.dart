@@ -2,11 +2,10 @@
 //
 // De documentpresentatie van #2487 zoals de editor hem start: de
 // tweede-scherm-grens en de afhandeling van de afsluitkeuze. Tabellen
-// starten lees-only; bewerkbaar maken doet de presentator per tabel
-// (#2743). Top-level
-// functies — ze raken geen veld van de State, dus ze horen ook niet in de
-// klasse te tellen; de State houdt alleen de dunne `_presentDocument`-
-// delegator vast.
+// starten alleen-lezen; bewerkbaar maken doet de presentator per tabel
+// (#2743). Allemaal top-level-functies — ze raken geen veld van de
+// State, dus ze horen ook niet in de klasse te tellen; de State houdt
+// alleen de dunne `_presentDocument`-delegator vast.
 part of '../document_editor_screen.dart';
 
 /// De presentatie-route van #2487. In tegenstelling tot de document→
@@ -19,8 +18,8 @@ Future<void> _presentDocumentSession(_DocumentEditorScreenState s) async {
   final ref = s.ref;
   final body = s._controller.text;
   // #2743: geen aanwijsdialoog vóór de eerste pagina meer — presenteren
-  // opent meteen, tabellen starten lees-only en worden per tabel in de
-  // sessie bewerkbaar via "Deze tabel bewerken".
+  // opent meteen, tabellen starten alleen-lezen en worden per tabel in
+  // de sessie bewerkbaar via "Deze tabel bewerken".
   const editable = <int>{};
   final settings = ref.read(settingsProvider);
   final doc = ref.read(documentProvider);
