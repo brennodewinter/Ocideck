@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/deck_source_checks.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
@@ -58,6 +59,10 @@ Future<void> _sendControlKey(
 }
 
 void main() {
+  setUpAll(() {
+    deckChecksRunner = (args) async => deckSourceChecks(args);
+  });
+
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   testWidgets('Toepassen applies clean markdown and leaves markdown mode', (
