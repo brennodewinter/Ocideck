@@ -65,6 +65,9 @@ const Map<String, int> methodLengthBaseline = {
   // +1 (#2753): het clearbare documentPdfFontPath-paar op het bestaande
   // clearX-patroon — het veld zelf staat in het instellingenpakket.
   'lib/models/parts/app_settings.dart::AppSettings.copyWith': 151,
+  // +3 (#2749): de tableRows-case — één regel per veld, zoals de
+  // andere zestig velden die deze switch zelf afhandelt.
+  'lib/collab/deck_op.dart::_slideWithField': 203,
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
       154, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
