@@ -40,6 +40,11 @@ class _Staging implements RecordingStaging {
   Future<List<String>> listSessionDirs() async => const [];
 }
 
+class _MemoryStaging extends _Staging {
+  @override
+  Future<String?> createSessionDir() async => null;
+}
+
 class _Profile extends AsrServerProfileNotifier {
   _Profile(this.profile);
 
@@ -330,11 +335,10 @@ void main() {
   });
 
   test('de tikteller publiceert eens per vijftig tikken (#2760)', () async {
-    // Echte tijd, geen widgettest: de mixer pacet op de klok en schrijft elke
-    // tik naar schijf, en onder een nepklok kwam er zo maar één tik per
-    // zestien pumps door.
+    // Echte klok voor de mixer; de teller heeft geen schijf nodig. De
+    // duurzame WAV wordt apart getoetst in de callaudio-opnametest hieronder.
     final c = ProviderContainer(
-      overrides: [recordingStagingProvider.overrideWithValue(_DirStaging())],
+      overrides: [recordingStagingProvider.overrideWithValue(_MemoryStaging())],
     );
     addTearDown(c.dispose);
     final session = await _joinFakeCall();
