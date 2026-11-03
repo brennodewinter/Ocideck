@@ -22,7 +22,7 @@ if [[ -e "${destination}" || -e "${destination}.tar.gz" ]]; then
   exit 1
 fi
 
-flutter --version
+dart run tool/check_toolchain.dart
 flutter pub get --enforce-lockfile
 flutter build linux --release
 

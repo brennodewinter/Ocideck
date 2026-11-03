@@ -1,7 +1,7 @@
 # Alleen handmatig; maakt kandidaatbestanden, nooit tags of publieke releases.
 name: Onafhankelijke releasekandidaat
 concurrency:
-  group: release-channel-${{ inputs.tag }}-${{ inputs.channel }}
+  group: release-channel-${{ (inputs.channel == 'macos' || inputs.channel == 'windows') && inputs.channel || 'linux-web-server' }}
   cancel-in-progress: false
 on:
   workflow_dispatch:
@@ -37,6 +37,7 @@ jobs:
     outputs:
       completed: ${{ steps.windows.outputs.completed }}
     container:
+      options: --cpus 2 --memory ${{ inputs.channel == 'windows' && '4g' || '8g' }}
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -219,6 +220,7 @@ jobs:
     # Het image bevat alleen testgereedschap; pakketdependencies blijven een echte proef.
     timeout-minutes: 175
     container:
+      options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
     steps:
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -256,6 +258,7 @@ jobs:
     runs-on: docker
     timeout-minutes: 175
     container:
+      options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
     steps:
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -290,6 +293,7 @@ jobs:
     # Alleen testgereedschap vooraf: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
     # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
     container:
+      options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
     steps:
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -319,6 +323,7 @@ jobs:
     runs-on: docker
     timeout-minutes: 175
     container:
+      options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
     steps:
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -355,6 +360,7 @@ jobs:
     runs-on: docker
     timeout-minutes: 175
     container:
+      options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
     steps:
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -382,6 +388,7 @@ jobs:
     runs-on: docker
     timeout-minutes: 175
     container:
+      options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
     steps:
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -413,6 +420,7 @@ jobs:
     if: ${{ always() && (needs.build.result == 'success' || needs.build-macos.result == 'success') && ((inputs.channel == 'macos' && needs.build-macos.outputs.completed == 'true') || (inputs.channel == 'windows' && needs.build.outputs.completed == 'true') || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-debian12.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
     runs-on: docker
     container:
+      options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0

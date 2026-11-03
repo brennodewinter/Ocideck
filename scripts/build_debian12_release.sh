@@ -15,13 +15,13 @@ FLUTTER_VERSION="$(awk '$1 == "flutter" { print $2; exit }' "$ROOT/.tool-version
 DOCKER=(docker)
 if [[ -n "${DOCKER_DAEMON:-}" ]]; then DOCKER+=(-H "$DOCKER_DAEMON"); fi
 IMAGE="ocideck-debian12-builder:flutter-$FLUTTER_VERSION"
-"${DOCKER[@]}" build --platform linux/amd64 \
+DOCKER_BUILDKIT=0 "${DOCKER[@]}" build --platform linux/amd64 --cpu-quota 200000 --cpu-period 100000 --memory 8g \
   --build-arg "FLUTTER_VERSION=$FLUTTER_VERSION" \
   --build-arg TARGETARCH=amd64 \
   -t "$IMAGE" "$ROOT/scripts/debian12_builder"
 
-CID="$("${DOCKER[@]}" create --platform linux/amd64 \
-  --env HOME=/tmp/build-home "$IMAGE")"
+CID="$("${DOCKER[@]}" create --platform linux/amd64 --cpus 2 --memory 8g \
+  --env CMAKE_BUILD_PARALLEL_LEVEL=2 --env HOME=/tmp/build-home "$IMAGE")"
 trap '"${DOCKER[@]}" rm -f "$CID" >/dev/null 2>&1 || true' EXIT
 # A worktree's .git file points to a host path that does not exist in Docker.
 git -C "$ROOT" archive HEAD | "${DOCKER[@]}" cp - "$CID:/src"

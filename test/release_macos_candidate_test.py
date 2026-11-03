@@ -47,6 +47,8 @@ class MacCandidateTest(unittest.TestCase):
         return home, cache, root, source, archive, args
 
     def source_command(self, arguments, _cwd):
+        if arguments == ['make', 'check-toolchain']:
+            return ''
         if arguments[:3] == ['git', 'rev-parse', 'HEAD']:
             return SHA
         if arguments[:2] == ['git', 'show']:
@@ -54,6 +56,22 @@ class MacCandidateTest(unittest.TestCase):
         if arguments[:2] == ['git', 'status']:
             return ''
         raise AssertionError('unexpected source operation: ' + repr(arguments))
+
+    def test_wrong_live_sdk_stops_fresh_candidate_before_signing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home, _, _, _, _, args = self.candidate(directory, state=False)
+            def command(arguments, cwd):
+                if arguments == ['make', 'check-toolchain']:
+                    raise subprocess.CalledProcessError(1, arguments)
+                return self.source_command(arguments, cwd)
+            with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
+                 patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
+                 patch.object(mac, 'command', side_effect=command), patch.object(mac, 'preflight') as preflight, \
+                 patch.object(mac.subprocess, 'run') as build:
+                with self.assertRaises(subprocess.CalledProcessError):
+                    mac.run(args)
+            preflight.assert_not_called()
+            build.assert_not_called()
 
     def test_pending_apple_receipt_continues_same_submission_and_finishes_consumer(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -63,7 +81,7 @@ class MacCandidateTest(unittest.TestCase):
                 raise subprocess.CalledProcessError(1, arguments)
             with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
                  patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
-                 patch.object(mac, 'command', side_effect=self.source_command), patch.object(mac, 'preflight'), \
+                 patch.object(mac, 'command', side_effect=self.source_command) as commands, patch.object(mac, 'preflight'), \
                  patch.object(mac.subprocess, 'run', side_effect=pending), patch.object(mac, 'consume') as consume:
                 result = mac.run(args)
             self.assertEqual('pending', result['outcome'])
@@ -78,7 +96,7 @@ class MacCandidateTest(unittest.TestCase):
                 return SimpleNamespace(returncode=0)
             with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
                  patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
-                 patch.object(mac, 'command', side_effect=self.source_command), patch.object(mac, 'preflight'), \
+                 patch.object(mac, 'command', side_effect=self.source_command) as commands, patch.object(mac, 'preflight'), \
                  patch.object(mac, 'continuation_state', return_value=original) as proof, \
                  patch.object(mac.subprocess, 'run', side_effect=accepted), patch.object(mac, 'consume') as consume:
                 completed = mac.run(args)
@@ -88,6 +106,8 @@ class MacCandidateTest(unittest.TestCase):
             self.assertEqual((20, 21, 'attempt-1'), proof.call_args.args[-3:])
             consume.assert_called_once()
             self.assertEqual(archive.read_bytes(), (args.dist / 'ocideck-macos-1.2.3.zip').read_bytes())
+
+            self.assertNotIn(['make', 'check-toolchain'], [call.args[0] for call in commands.call_args_list])
 
     def test_continuation_refuses_missing_or_modified_saved_submission_before_keychain(self):
         for mutate in ('missing', 'changed'):

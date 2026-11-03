@@ -170,6 +170,8 @@ def run(args):
         mode = ['--resume-notary'] if state.exists() else []
         environment = {key: value for key, value in os.environ.items()
                        if not any(secret in key.upper() for secret in ('TOKEN', 'SECRET', 'PASSWORD'))}
+        if not mode:
+            command(['make', 'check-toolchain'], root)
         preflight(controller, root, environment)
         operation = dict(schema=1, operation_id=args.operation_id, tag=args.tag, sha=args.sha,
             ref=wanted_operation['frozen_ref'], forge_run_id=args.forge_run_id,

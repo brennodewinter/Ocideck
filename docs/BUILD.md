@@ -1700,3 +1700,28 @@ Runtime budgets, measured preparation costs and unresolved infrastructure causes
 are recorded in [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md). Historical
 Windows communication loss and crawler involvement have not been established
 as causes by the available evidence.
+
+### Noodzakelijke controles en hergebruik per kanaal
+
+| Poort | Plaats en afhankelijkheid | Bewijsidentiteit / wanneer opnieuw |
+| --- | --- | --- |
+| Bronkwaliteit: static, scans en gekozen platformpoort | Vóór publicatie; macOS ook vóór toegang tot ondertekening | Alle vereiste taken terminaal groen op dezelfde bron-SHA; bronwijziging vereist nieuw bewijs |
+| Actuele SDK | Vóór iedere nieuwe Linux/web-bouw: `make check-toolchain`; Debian 12 controleert de SDK in zijn eigen bouwcontainer; macOS vóór een nieuwe bouw | De werkelijk gebruikte Flutter-installatie moet overeenkomen met de bronpin en officiële stable-toolchain; geen vervanging door een cache-hit of eerdere CI |
+| Gekozen kanaal bouwen | Alleen na bron-/ref-/versiecontrole en SDK-poort; Windows gebruikt de bestaande eigen native route | Vaste kandidaatref, bron-SHA, controller-SHA en operatie; een andere bron/controller geeft nieuw bewijs |
+| Native consument | Na de bouw, uitsluitend het gekozen pakketprofiel; macOS en Windows via hun eigen adapter | Exact gebouwde archiefbytes; een ander archief vereist een nieuwe consumentenproef |
+| Kanaalbewijs en ondertekening | Na succesvolle bouw en alle toepasselijke consumenten | Manifest, SHA256SUMS en handtekening binden bron, controller, kanaal en bestanden |
+| Publieke bestanden | Na verificatie van alle voorgaande poorten | Lees dezelfde bytes terug; geen herbouw bij promotie |
+| Website, webdemo en Homebrew | Na geauthenticeerde publieke bestanden, alleen toepasselijke oppervlakken | Duurzaam fasejournaal en daadwerkelijke URL-/hashcontrole; andere OS-rijen veranderen dit bewijs niet |
+
+Een voortzetting van een bekende macOS-notarisatie gebruikt de bewaarde indiening en
+archiefbytes. Daarvoor is geen nieuwe SDK-poort nodig: er wordt niets opnieuw
+gebouwd. Onbekende schrijfacties vereisen eerst reconciliatie; opnieuw starten is
+geen vervanging voor bewijs.
+
+De onafhankelijke Linux/web-workflows delen één wachtrij zonder annulering. Elke
+bouwcontainer krijgt 2 CPU en 8 GiB; de Windows-orchestrator krijgt 2 CPU en 4 GiB.
+Consumenten en bewijsjobs krijgen 2 CPU en 4 GiB. De afzonderlijke Debian 12-daemon
+krijgt dezelfde 2 CPU/8 GiB bij zowel imagebouw als containeruitvoering; CMake krijgt
+twee parallelle compilatietaken. Dit is toelatingsbeleid met bestaande bouwmarge,
+geen gemeten maximum of garantie voor de gehele server: andere CI deelt capaciteit.
+Mac- en Windows-runners behouden hun eigen kanaalwachtrij en native begrenzingen.

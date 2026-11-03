@@ -22,6 +22,11 @@ PY
 [[ "$(sed -n 's/^version: \([^+]*\).*/\1/p' pubspec.yaml)" == "${TAG#v}" ]] || { echo 'Bronversie wijkt af' >&2; exit 1; }
 # Nieuwe jobwerkmap vereist: oude bestanden mogen niet als bouwresultaat meetellen.
 [[ ! -e dist ]] || { echo 'dist moet afwezig zijn' >&2; exit 1; }
+# Twee compilatietaken binnen de containerquota; Debian controleert zijn eigen SDK.
+export CMAKE_BUILD_PARALLEL_LEVEL=2
+if [[ "$CHANNEL" != linux-debian12 ]]; then
+  make check-toolchain
+fi
 case "$CHANNEL" in
   web)
     make check-web
