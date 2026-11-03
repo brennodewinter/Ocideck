@@ -1620,6 +1620,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Аудиторія бачить цей слайд на іншому екрані.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Інший екран не бере участі. Слайди на цьому екрані.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Екрани не помінялися. Нотатки ще тут.',
+  'Notities aan of uit': 'Нотатки увімкнено або вимкнено',
+  'Zet de notities op het andere scherm': 'Перенести нотатки на інший екран',
   'Terug naar de dia\'s': 'Назад до слайдів',
   'Verder typen': 'Продовжити друкувати',
   'Terug zonder deze wijzigingen': 'Назад без цих змін',

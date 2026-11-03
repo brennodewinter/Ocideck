@@ -1605,6 +1605,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Peserta melihat slide ini di layar lainnya.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Layar lain tidak ikut. Slidenya ada di layar ini.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Layar tidak ditukar. Catatan masih di sini.',
+  'Notities aan of uit': 'Catatan aktif atau nonaktif',
+  'Zet de notities op het andere scherm': 'Pindahkan catatan ke layar lain',
   'Terug naar de dia\'s': 'Kembali ke slide',
   'Verder typen': 'Lanjut mengetik',
   'Terug zonder deze wijzigingen': 'Kembali tanpa perubahan ini',

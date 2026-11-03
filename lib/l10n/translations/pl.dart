@@ -1617,6 +1617,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Publiczność widzi ten slajd na drugim ekranie.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Drugi ekran nie uczestniczy. Slajdy są na tym ekranie.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekrany nie zostały zamienione. Notatki są nadal tutaj.',
+  'Notities aan of uit': 'Notatki włączone lub wyłączone',
+  'Zet de notities op het andere scherm': 'Przenieś notatki na drugi ekran',
   'Terug naar de dia\'s': 'Wróć do slajdów',
   'Verder typen': 'Pisz dalej',
   'Terug zonder deze wijzigingen': 'Wróć bez tych zmian',

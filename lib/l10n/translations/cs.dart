@@ -1606,6 +1606,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Publikum vidí tento snímek na druhé obrazovce.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Druhá obrazovka se neúčastní. Snímky jsou na této obrazovce.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Obrazovky nebyly prohozeny. Poznámky jsou stále zde.',
+  'Notities aan of uit': 'Poznámky zapnuté nebo vypnuté',
+  'Zet de notities op het andere scherm':
+      'Přesuňte poznámky na druhou obrazovku',
   'Terug naar de dia\'s': 'Zpět na slajdy',
   'Verder typen': 'Psát dál',
   'Terug zonder deze wijzigingen': 'Zpět bez těchto změn',

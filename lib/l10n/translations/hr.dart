@@ -1609,6 +1609,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Dvorana vidi ovaj slajd na drugom zaslonu.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Drugi zaslon ne sudjeluje. Slajdovi su na ovom zaslonu.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Zasloni nisu zamijenjeni. Bilješke su još uvijek ovdje.',
+  'Notities aan of uit': 'Bilješke uključene ili isključene',
+  'Zet de notities op het andere scherm': 'Stavi bilješke na drugi zaslon',
   'Terug naar de dia\'s': 'Natrag na slajdove',
   'Verder typen': 'Nastavi tipkati',
   'Terug zonder deze wijzigingen': 'Natrag bez ovih izmjena',

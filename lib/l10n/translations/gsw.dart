@@ -1608,6 +1608,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'De Saal gseet die Foli uf em andere Bildschirm.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'De ander Bildschirm macht nid mit. Die Folie sind uf däm Bildschirm.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'D\'Bildschirm sind nid gwächslet worde. D\'Notize sind no do.',
+  'Notities aan of uit': 'Notize aa oder us',
+  'Zet de notities op het andere scherm': 'Die Notize ufs andere Bildschirm',
   'Terug naar de dia\'s': 'Zrugg zu de Folie',
   'Verder typen': 'Witerschribe',
   'Terug zonder deze wijzigingen': 'Zrugg ohni die Änderige',

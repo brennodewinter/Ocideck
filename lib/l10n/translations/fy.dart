@@ -652,6 +652,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De zaal ziet deze dia op het andere scherm.':
+      'De seal sjocht dizze dia op it oare skerm.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'It oare skerm docht net mei. De dia\'s steane op dit skerm.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'De skermen binne net wiksele. De notysjes steane noch hjir.',
+  'Notities aan of uit': 'Notysjes oan of út',
+  'Zet de notities op het andere scherm': 'Set de notysjes op it oare skerm',
   'Terug naar de dia\'s': 'Werom nei de dia\'s',
   'Verder typen': 'Fierder typje',
   'Terug zonder deze wijzigingen': 'Werom sûnder dizze wizigingen',

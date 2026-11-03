@@ -649,6 +649,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'De zaal ziet deze dia op het andere scherm.':
+      'Il pubblico vede questa diapositiva sull\'altro schermo.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'L\'altro schermo non partecipa. Le diapositive sono su questo schermo.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Gli schermi non sono stati scambiati. Le note sono ancora qui.',
+  'Notities aan of uit': 'Note attive o disattivate',
+  'Zet de notities op het andere scherm': 'Sposta le note sull\'altro schermo',
   'Terug naar de dia\'s': 'Torna alle diapositive',
   'Verder typen': 'Continua a scrivere',
   'Terug zonder deze wijzigingen': 'Torna senza queste modifiche',

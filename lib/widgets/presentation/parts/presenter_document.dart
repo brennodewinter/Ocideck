@@ -532,10 +532,10 @@ class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
                   '${widget.audience == null
                       ? ''
                       : _syncOk == null
-                      ? ' · ${l10n.d('beamer')}…'
+                      ? ' · ${l10n.d('het andere scherm')}…'
                       : _syncOk!
-                      ? ' · ${l10n.d('beamer')} ✓'
-                      : ' · ${l10n.d('beamer: niet bereikbaar')}'}',
+                      ? ' · ${l10n.d('het andere scherm')} ✓'
+                      : ' · ${l10n.d('ander scherm: niet bereikbaar')}'}',
                 ),
               ),
               Positioned(

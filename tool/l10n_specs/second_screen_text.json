@@ -1,0 +1,80 @@
+{
+  "additions": {
+    "De zaal ziet deze dia op het andere scherm.": {
+      "en": "The audience sees this slide on the other screen.", "it": "Il pubblico vede questa diapositiva sull'altro schermo.",
+      "de": "Das Publikum sieht diese Folie auf dem anderen Bildschirm.", "fr": "Le public voit cette diapositive sur l'autre écran.",
+      "es": "El público ve esta diapositiva en la otra pantalla.", "fy": "De seal sjocht dizze dia op it oare skerm.",
+      "pap": "E sala ta mirá e slajt aki riba e otro pantaya.", "la": "Audientes hanc imaginem in altero scrinione vident.",
+      "id": "Peserta melihat slide ini di layar lainnya.", "pl": "Publiczność widzi ten slajd na drugim ekranie.",
+      "uk": "Аудиторія бачить цей слайд на іншому екрані.", "gsw": "De Saal gseet die Foli uf em andere Bildschirm.",
+      "el": "Το κοινό βλέπει αυτή τη διαφάνεια στην άλλη οθόνη.", "da": "Salen ser dette slide på den anden skærm.",
+      "sv": "Publiken ser den här bilden på den andra skärmen.", "hr": "Dvorana vidi ovaj slajd na drugom zaslonu.",
+      "cs": "Publikum vidí tento snímek na druhé obrazovce.", "fi": "Yleisö näkee tämän dian toisella näytöllä.",
+      "bg": "Публиката вижда този слайд на другия екран.", "lv": "Zāle redz šo slaidu uz otra ekrāna.",
+      "lt": "Salė mato šią skaidrę kitame ekrane.", "mt": "Is-sala tara din l-islejd fuq l-iskrin l-ieħor.",
+      "et": "Saal näeb seda slaidi teisel ekraanil.", "hu": "A közönség ezt a diát a másik képernyőn látja.",
+      "ga": "Feiceann an lucht féachana an sleamhnán seo ar an scáileán eile.", "pt": "A plateia vê este diapositivo no outro ecrã.",
+      "ro": "Sala vede acest diapozitiv pe celălalt ecran.", "sl": "Dvornana vidi ta slide na drugem zaslonu.",
+      "sk": "Publikum vidí túto snímku na druhej obrazovke.", "tr": "İzleyiciler bu slaytı diğer ekranda görüyor."
+    },
+    "Het andere scherm doet niet mee. De dia's staan op dit scherm.": {
+      "en": "The other screen is not taking part. The slides are on this screen.", "it": "L'altro schermo non partecipa. Le diapositive sono su questo schermo.",
+      "de": "Der andere Bildschirm macht nicht mit. Die Folien sind auf diesem Bildschirm.", "fr": "L'autre écran ne participe pas. Les diapositives sont sur cet écran.",
+      "es": "La otra pantalla no participa. Las diapositivas están en esta pantalla.", "fy": "It oare skerm docht net mei. De dia's steane op dit skerm.",
+      "pap": "E otro pantaya no ta partisipá. E slajtnan ta riba e pantaya aki.", "la": "Alterum scrinium non participat. Imagines in hoc scrinione sunt.",
+      "id": "Layar lain tidak ikut. Slidenya ada di layar ini.", "pl": "Drugi ekran nie uczestniczy. Slajdy są na tym ekranie.",
+      "uk": "Інший екран не бере участі. Слайди на цьому екрані.", "gsw": "De ander Bildschirm macht nid mit. Die Folie sind uf däm Bildschirm.",
+      "el": "Η άλλη οθόνη δεν συμμετέχει. Οι διαφάνειες είναι σε αυτή την οθόνη.", "da": "Den anden skærm deltager ikke. Slidesne er på denne skærm.",
+      "sv": "Den andra skärmen deltar inte. Bilderna är på den här skärmen.", "hr": "Drugi zaslon ne sudjeluje. Slajdovi su na ovom zaslonu.",
+      "cs": "Druhá obrazovka se neúčastní. Snímky jsou na této obrazovce.", "fi": "Toinen näyttö ei ole mukana. Diat ovat tällä näytöllä.",
+      "bg": "Другият екран не участва. Слайдовете са на този екран.", "lv": "Otrais ekrāns nepiedalās. Slaidi ir uz šī ekrāna.",
+      "lt": "Kitas ekranas nedalyvauja. Skaidrės yra šiame ekrane.", "mt": "L-iskrin l-ieħor mhux qed jieħu sehem. L-islejds huma fuq dan l-iskrin.",
+      "et": "Teine ekraan ei osale. Slaidid on sellel ekraanil.", "hu": "A másik képernyő nem vesz részt. A diák ezen a képernyőn vannak.",
+      "ga": "Níl an scáileán eile rannpháirteach. Tá na sleamhnáin ar an scáileán seo.", "pt": "O outro ecrã não participa. Os diapositivos estão neste ecrã.",
+      "ro": "Celălalt ecran nu participă. Diapozitivele sunt pe acest ecran.", "sl": "Drugi zaslon ne sodeluje. Slajdi so na tem zaslonu.",
+      "sk": "Druhá obrazovka neparticipuje. Snímky sú na tejto obrazovke.", "tr": "Diğer ekran katılmıyor. Slaytlar bu ekranda."
+    },
+    "De schermen zijn niet gewisseld. De notities staan nog hier.": {
+      "en": "The screens were not swapped. The notes are still here.", "it": "Gli schermi non sono stati scambiati. Le note sono ancora qui.",
+      "de": "Die Bildschirme wurden nicht getauscht. Die Notizen sind noch hier.", "fr": "Les écrans n'ont pas été échangés. Les notes sont toujours ici.",
+      "es": "Las pantallas no se han intercambiado. Las notas siguen aquí.", "fy": "De skermen binne net wiksele. De notysjes steane noch hjir.",
+      "pap": "E pantayanan no a wissel. E notanan ta inda aki.", "la": "Scrinia non commutata sunt. Annotationes adhuc hic stant.",
+      "id": "Layar tidak ditukar. Catatan masih di sini.", "pl": "Ekrany nie zostały zamienione. Notatki są nadal tutaj.",
+      "uk": "Екрани не помінялися. Нотатки ще тут.", "gsw": "D'Bildschirm sind nid gwächslet worde. D'Notize sind no do.",
+      "el": "Οι οθόνες δεν εναλλάχθηκαν. Οι σημειώσεις είναι ακόμη εδώ.", "da": "Skærmene blev ikke byttet. Noterne er stadig her.",
+      "sv": "Skärmarna byttes inte. Anteckningarna finns kvar här.", "hr": "Zasloni nisu zamijenjeni. Bilješke su još uvijek ovdje.",
+      "cs": "Obrazovky nebyly prohozeny. Poznámky jsou stále zde.", "fi": "Näyttöjä ei vaihdettu. Muistiinpanot ovat edelleen täällä.",
+      "bg": "Екраните не бяха разменени. Бележките са още тук.", "lv": "Ekrāni netika samainīti. Piezīmes joprojām ir šeit.",
+      "lt": "Ekranai nebuvo sukeisti. Užrašai vis dar čia.", "mt": "L-iskrinjiet ma ġewx ikkambjati. In-noti għadhom hawn.",
+      "et": "Ekraane ei vahetatud. Märkmed on ikka siin.", "hu": "A képernyők nem lettek felcserélve. A jegyzetek még itt vannak.",
+      "ga": "Níor malartaíodh na scáileáin. Tá na nótaí fós anseo.", "pt": "Os ecrãs não foram trocados. As notas ainda estão aqui.",
+      "ro": "Ecranele nu au fost schimbate. Notițele sunt încă aici.", "sl": "Zaslona se nista zamenjala. Zapiski so še tukaj.",
+      "sk": "Obrazovky sa nevymenili. Poznámky sú stále tu.", "tr": "Ekranlar değiştirilmedi. Notlar hâlâ burada."
+    },
+    "Notities aan of uit": {
+      "en": "Notes on or off", "it": "Note attive o disattivate", "de": "Notizen an oder aus",
+      "fr": "Notes activées ou désactivées", "es": "Notas activadas o desactivadas", "fy": "Notysjes oan of út",
+      "pap": "Notanan ativá òf no", "la": "Annotationes inpositae an exemptae", "id": "Catatan aktif atau nonaktif",
+      "pl": "Notatki włączone lub wyłączone", "uk": "Нотатки увімкнено або вимкнено", "gsw": "Notize aa oder us",
+      "el": "Σημειώσεις ενεργές ή ανενεργές", "da": "Noter til eller fra", "sv": "Anteckningar på eller av",
+      "hr": "Bilješke uključene ili isključene", "cs": "Poznámky zapnuté nebo vypnuté", "fi": "Muistiinpanot päällä tai pois",
+      "bg": "Бележки включени или изключени", "lv": "Piezīmes ieslēgtas vai izslēgtas", "lt": "Užrašai įjungti arba išjungti",
+      "mt": "Noti mixgħula jew mitfi", "et": "Märkmed sees või väljas", "hu": "Jegyzetek be- vagy kikapcsolva",
+      "ga": "Nótaí ar siúl nó as", "pt": "Notas ligadas ou desligadas", "ro": "Notițe pornite sau oprite",
+      "sl": "Zapiski vklopljeni ali izklopljeni", "sk": "Poznámky zapnuté alebo vypnuté", "tr": "Notlar açık veya kapalı"
+    },
+    "Zet de notities op het andere scherm": {
+      "en": "Put the notes on the other screen", "it": "Sposta le note sull'altro schermo",
+      "de": "Die Notizen auf den anderen Bildschirm legen", "fr": "Mettre les notes sur l'autre écran",
+      "es": "Poner las notas en la otra pantalla", "fy": "Set de notysjes op it oare skerm",
+      "pap": "Pone e notanan riba e otro pantaya", "la": "Annotationes in alterum scrinium pone", "id": "Pindahkan catatan ke layar lain",
+      "pl": "Przenieś notatki na drugi ekran", "uk": "Перенести нотатки на інший екран", "gsw": "Die Notize ufs andere Bildschirm",
+      "el": "Βάλτε τις σημειώσεις στην άλλη οθόνη", "da": "Sæt noterne på den anden skærm", "sv": "Lägg anteckningarna på den andra skärmen",
+      "hr": "Stavi bilješke na drugi zaslon", "cs": "Přesuňte poznámky na druhou obrazovku", "fi": "Aseta muistiinpanot toiselle näytölle",
+      "bg": "Сложи бележките на другия екран", "lv": "Novietojiet piezīmes uz otra ekrāna", "lt": "Padėkite užrašus ant kito ekrano",
+      "mt": "Poġġi n-noti fuq l-iskrin l-ieħor", "et": "Pange märkmed teisele ekraanile", "hu": "Tegye a jegyzeteket a másik képernyőre",
+      "ga": "Cuir na nótaí ar an scáileán eile", "pt": "Colocar as notas no outro ecrã", "ro": "Pune notițele pe celălalt ecran",
+      "sl": "Postavi zapiske na drugi zaslon", "sk": "Premeňte poznámky na druhú obrazovku", "tr": "Notları diğer ekrana taşı"
+    }
+  }
+}

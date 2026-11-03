@@ -1604,6 +1604,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Publiken ser den här bilden på den andra skärmen.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Den andra skärmen deltar inte. Bilderna är på den här skärmen.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Skärmarna byttes inte. Anteckningarna finns kvar här.',
+  'Notities aan of uit': 'Anteckningar på eller av',
+  'Zet de notities op het andere scherm':
+      'Lägg anteckningarna på den andra skärmen',
   'Terug naar de dia\'s': 'Tillbaka till bilderna',
   'Verder typen': 'Fortsätt skriva',
   'Terug zonder deze wijzigingen': 'Tillbaka utan dessa ändringar',

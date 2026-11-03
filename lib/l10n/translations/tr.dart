@@ -2513,6 +2513,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'İzleyiciler bu slaytı diğer ekranda görüyor.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Diğer ekran katılmıyor. Slaytlar bu ekranda.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekranlar değiştirilmedi. Notlar hâlâ burada.',
+  'Notities aan of uit': 'Notlar açık veya kapalı',
+  'Zet de notities op het andere scherm': 'Notları diğer ekrana taşı',
   'Terug naar de dia\'s': 'Slaytlara dön',
   'Verder typen': 'Yazmaya devam et',
   'Terug zonder deze wijzigingen': 'Bu değişiklikler olmadan geri dön',

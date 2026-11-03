@@ -1607,6 +1607,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'A közönség ezt a diát a másik képernyőn látja.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'A másik képernyő nem vesz részt. A diák ezen a képernyőn vannak.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'A képernyők nem lettek felcserélve. A jegyzetek még itt vannak.',
+  'Notities aan of uit': 'Jegyzetek be- vagy kikapcsolva',
+  'Zet de notities op het andere scherm':
+      'Tegye a jegyzeteket a másik képernyőre',
   'Terug naar de dia\'s': 'Vissza a diákhoz',
   'Verder typen': 'Gépelés folytatása',
   'Terug zonder deze wijzigingen': 'Vissza e módosítások nélkül',

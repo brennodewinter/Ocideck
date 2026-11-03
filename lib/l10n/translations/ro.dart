@@ -1621,6 +1621,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Sala vede acest diapozitiv pe celălalt ecran.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Celălalt ecran nu participă. Diapozitivele sunt pe acest ecran.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ecranele nu au fost schimbate. Notițele sunt încă aici.',
+  'Notities aan of uit': 'Notițe pornite sau oprite',
+  'Zet de notities op het andere scherm': 'Pune notițele pe celălalt ecran',
   'Terug naar de dia\'s': 'Înapoi la diapozitive',
   'Verder typen': 'Continuă să tastezi',
   'Terug zonder deze wijzigingen': 'Înapoi fără aceste modificări',

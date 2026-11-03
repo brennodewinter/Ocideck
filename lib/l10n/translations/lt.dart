@@ -1611,6 +1611,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Salė mato šią skaidrę kitame ekrane.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Kitas ekranas nedalyvauja. Skaidrės yra šiame ekrane.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekranai nebuvo sukeisti. Užrašai vis dar čia.',
+  'Notities aan of uit': 'Užrašai įjungti arba išjungti',
+  'Zet de notities op het andere scherm': 'Padėkite užrašus ant kito ekrano',
   'Terug naar de dia\'s': 'Atgal į skaidres',
   'Verder typen': 'Rašyti toliau',
   'Terug zonder deze wijzigingen': 'Grįžti be šių pakeitimų',

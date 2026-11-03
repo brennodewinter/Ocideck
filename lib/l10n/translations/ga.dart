@@ -1635,6 +1635,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Feiceann an lucht féachana an sleamhnán seo ar an scáileán eile.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Níl an scáileán eile rannpháirteach. Tá na sleamhnáin ar an scáileán seo.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Níor malartaíodh na scáileáin. Tá na nótaí fós anseo.',
+  'Notities aan of uit': 'Nótaí ar siúl nó as',
+  'Zet de notities op het andere scherm': 'Cuir na nótaí ar an scáileán eile',
   'Terug naar de dia\'s': 'Ar ais go dtí na sleamhnáin',
   'Verder typen': 'Lean ar aghaidh ag clóscríobh',
   'Terug zonder deze wijzigingen': 'Ar ais gan na hathruithe seo',

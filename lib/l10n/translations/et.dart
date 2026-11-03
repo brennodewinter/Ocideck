@@ -1598,6 +1598,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Saal näeb seda slaidi teisel ekraanil.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Teine ekraan ei osale. Slaidid on sellel ekraanil.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekraane ei vahetatud. Märkmed on ikka siin.',
+  'Notities aan of uit': 'Märkmed sees või väljas',
+  'Zet de notities op het andere scherm': 'Pange märkmed teisele ekraanile',
   'Terug naar de dia\'s': 'Tagasi slaidide juurde',
   'Verder typen': 'Kirjuta edasi',
   'Terug zonder deze wijzigingen': 'Tagasi ilma nende muudatusteta',

@@ -652,6 +652,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'De zaal ziet deze dia op het andere scherm.':
+      'Le public voit cette diapositive sur l\'autre écran.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'L\'autre écran ne participe pas. Les diapositives sont sur cet écran.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Les écrans n\'ont pas été échangés. Les notes sont toujours ici.',
+  'Notities aan of uit': 'Notes activées ou désactivées',
+  'Zet de notities op het andere scherm': 'Mettre les notes sur l\'autre écran',
   'Terug naar de dia\'s': 'Retour aux diapositives',
   'Verder typen': 'Continuer à taper',
   'Terug zonder deze wijzigingen': 'Retour sans ces modifications',

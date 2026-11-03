@@ -1624,6 +1624,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Публиката вижда този слайд на другия екран.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Другият екран не участва. Слайдовете са на този екран.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Екраните не бяха разменени. Бележките са още тук.',
+  'Notities aan of uit': 'Бележки включени или изключени',
+  'Zet de notities op het andere scherm': 'Сложи бележките на другия екран',
   'Terug naar de dia\'s': 'Обратно към слайдовете',
   'Verder typen': 'Продължи да пишеш',
   'Terug zonder deze wijzigingen': 'Назад без тези промени',

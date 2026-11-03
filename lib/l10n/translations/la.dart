@@ -1620,6 +1620,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Audientes hanc imaginem in altero scrinione vident.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Alterum scrinium non participat. Imagines in hoc scrinione sunt.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Scrinia non commutata sunt. Annotationes adhuc hic stant.',
+  'Notities aan of uit': 'Annotationes inpositae an exemptae',
+  'Zet de notities op het andere scherm':
+      'Annotationes in alterum scrinium pone',
   'Terug naar de dia\'s': 'Ad imagines revertere',
   'Verder typen': 'Perge scribere',
   'Terug zonder deze wijzigingen': 'Revertere sine his mutationibus',

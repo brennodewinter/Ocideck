@@ -1605,6 +1605,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Yleisö näkee tämän dian toisella näytöllä.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Toinen näyttö ei ole mukana. Diat ovat tällä näytöllä.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Näyttöjä ei vaihdettu. Muistiinpanot ovat edelleen täällä.',
+  'Notities aan of uit': 'Muistiinpanot päällä tai pois',
+  'Zet de notities op het andere scherm':
+      'Aseta muistiinpanot toiselle näytölle',
   'Terug naar de dia\'s': 'Takaisin dioihin',
   'Verder typen': 'Jatka kirjoittamista',
   'Terug zonder deze wijzigingen': 'Palaa ilman näitä muutoksia',

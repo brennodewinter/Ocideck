@@ -1605,6 +1605,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Dvornana vidi ta slide na drugem zaslonu.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Drugi zaslon ne sodeluje. Slajdi so na tem zaslonu.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Zaslona se nista zamenjala. Zapiski so še tukaj.',
+  'Notities aan of uit': 'Zapiski vklopljeni ali izklopljeni',
+  'Zet de notities op het andere scherm': 'Postavi zapiske na drugi zaslon',
   'Terug naar de dia\'s': 'Nazaj na slide',
   'Verder typen': 'Tipkaj naprej',
   'Terug zonder deze wijzigingen': 'Nazaj brez teh sprememb',

@@ -55,13 +55,13 @@ List<(String, String)> _helpOverlayRows(
   ('${l10n.d('cijfers')} + Enter', l10n.d('Naar slidenummer')),
   ('Home · End', l10n.d('Eerste · laatste slide')),
   ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
-  ('P', l10n.d('Presenter view (notities, klok)')),
+  ('P', l10n.d('Notities aan of uit')),
   ('F', l10n.d('Probleem op deze dia oplossen')),
   // De binding is `control || meta` (presenter_keys.dart), dus stond hier
   // voor Mac-gebruikers het verkeerde: Cmd+N werkt ook. Nu uit dezelfde
   // bron als elke andere sneltoets in de app (#803).
   ('N · ${shortcutLabel(l10n, 'N')}', l10n.d('Mijn notities aan/uit')),
-  ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
+  ('S', l10n.d('Zet de notities op het andere scherm')),
   ('B · W', l10n.d('Zwart · wit scherm')),
   ('D · T · Shift+E', l10n.d('Pen · markeerstift · gum')),
   ('E', l10n.d('Tabel bewerken (op tabeldia)')),
@@ -482,11 +482,18 @@ extension _PresenterOverlays on _FullscreenPresenterState {
             fontWeight: FontWeight.w600,
           ),
         ),
-        Text(
-          l10n.d(
-            _displays.length > 1
-                ? 'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
-                : 'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
+        const SizedBox(width: 16),
+        Expanded(
+          child: Text(
+            l10n.d(
+              _displays.length > 1
+                  ? 'P notities · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
+                  : 'P notities · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
+            ),
+            textAlign: TextAlign.right,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(color: _muted, fontSize: 11),
           ),
           textAlign: TextAlign.right,
           maxLines: 1,

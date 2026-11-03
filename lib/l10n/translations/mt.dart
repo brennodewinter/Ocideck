@@ -1623,6 +1623,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Is-sala tara din l-islejd fuq l-iskrin l-ieħor.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'L-iskrin l-ieħor mhux qed jieħu sehem. L-islejds huma fuq dan l-iskrin.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'L-iskrinjiet ma ġewx ikkambjati. In-noti għadhom hawn.',
+  'Notities aan of uit': 'Noti mixgħula jew mitfi',
+  'Zet de notities op het andere scherm': 'Poġġi n-noti fuq l-iskrin l-ieħor',
   'Terug naar de dia\'s': 'Lura lejn l-islejds',
   'Verder typen': 'Kompli ttajpja',
   'Terug zonder deze wijzigingen': 'Mur lura mingħajr dawn il-bidliet',

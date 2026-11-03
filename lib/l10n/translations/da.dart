@@ -1605,6 +1605,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Salen ser dette slide på den anden skærm.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Den anden skærm deltager ikke. Slidesne er på denne skærm.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Skærmene blev ikke byttet. Noterne er stadig her.',
+  'Notities aan of uit': 'Noter til eller fra',
+  'Zet de notities op het andere scherm': 'Sæt noterne på den anden skærm',
   'Terug naar de dia\'s': 'Tilbage til slides',
   'Verder typen': 'Fortsæt med at skrive',
   'Terug zonder deze wijzigingen': 'Tilbage uden disse ændringer',

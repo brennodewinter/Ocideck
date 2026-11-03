@@ -651,6 +651,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De zaal ziet deze dia op het andere scherm.':
+      'E sala ta mirá e slajt aki riba e otro pantaya.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'E otro pantaya no ta partisipá. E slajtnan ta riba e pantaya aki.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'E pantayanan no a wissel. E notanan ta inda aki.',
+  'Notities aan of uit': 'Notanan ativá òf no',
+  'Zet de notities op het andere scherm': 'Pone e notanan riba e otro pantaya',
   'Terug naar de dia\'s': 'Bai bèk na e slajtnan',
   'Verder typen': 'Kontinua skirbi',
   'Terug zonder deze wijzigingen': 'Bai bèk sin e kambionan aki',

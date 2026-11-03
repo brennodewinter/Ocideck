@@ -649,6 +649,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De zaal ziet deze dia op het andere scherm.':
+      'El público ve esta diapositiva en la otra pantalla.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'La otra pantalla no participa. Las diapositivas están en esta pantalla.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Las pantallas no se han intercambiado. Las notas siguen aquí.',
+  'Notities aan of uit': 'Notas activadas o desactivadas',
+  'Zet de notities op het andere scherm': 'Poner las notas en la otra pantalla',
   'Terug naar de dia\'s': 'Volver a las diapositivas',
   'Verder typen': 'Seguir escribiendo',
   'Terug zonder deze wijzigingen': 'Volver sin estos cambios',

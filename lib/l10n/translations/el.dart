@@ -1630,6 +1630,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Το κοινό βλέπει αυτή τη διαφάνεια στην άλλη οθόνη.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Η άλλη οθόνη δεν συμμετέχει. Οι διαφάνειες είναι σε αυτή την οθόνη.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Οι οθόνες δεν εναλλάχθηκαν. Οι σημειώσεις είναι ακόμη εδώ.',
+  'Notities aan of uit': 'Σημειώσεις ενεργές ή ανενεργές',
+  'Zet de notities op het andere scherm':
+      'Βάλτε τις σημειώσεις στην άλλη οθόνη',
   'Terug naar de dia\'s': 'Πίσω στις διαφάνειες',
   'Verder typen': 'Συνέχεια πληκτρολόγησης',
   'Terug zonder deze wijzigingen': 'Επιστροφή χωρίς αυτές τις αλλαγές',

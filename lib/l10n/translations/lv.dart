@@ -1603,6 +1603,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Zāle redz šo slaidu uz otra ekrāna.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Otrais ekrāns nepiedalās. Slaidi ir uz šī ekrāna.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekrāni netika samainīti. Piezīmes joprojām ir šeit.',
+  'Notities aan of uit': 'Piezīmes ieslēgtas vai izslēgtas',
+  'Zet de notities op het andere scherm': 'Novietojiet piezīmes uz otra ekrāna',
   'Terug naar de dia\'s': 'Atpakaļ uz slaidiem',
   'Verder typen': 'Rakstīt tālāk',
   'Terug zonder deze wijzigingen': 'Atpakaļ bez šīm izmaiņām',

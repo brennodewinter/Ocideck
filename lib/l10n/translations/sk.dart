@@ -1611,6 +1611,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'Publikum vidí túto snímku na druhej obrazovke.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Druhá obrazovka neparticipuje. Snímky sú na tejto obrazovke.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Obrazovky sa nevymenili. Poznámky sú stále tu.',
+  'Notities aan of uit': 'Poznámky zapnuté alebo vypnuté',
+  'Zet de notities op het andere scherm':
+      'Premeňte poznámky na druhú obrazovku',
   'Terug naar de dia\'s': 'Späť na snímky',
   'Verder typen': 'Písať ďalej',
   'Terug zonder deze wijzigingen': 'Späť bez týchto zmien',

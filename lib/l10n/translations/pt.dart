@@ -1633,6 +1633,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De zaal ziet deze dia op het andere scherm.':
+      'A plateia vê este diapositivo no outro ecrã.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'O outro ecrã não participa. Os diapositivos estão neste ecrã.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Os ecrãs não foram trocados. As notas ainda estão aqui.',
+  'Notities aan of uit': 'Notas ligadas ou desligadas',
+  'Zet de notities op het andere scherm': 'Colocar as notas no outro ecrã',
   'Terug naar de dia\'s': 'Voltar aos diapositivos',
   'Verder typen': 'Continuar a escrever',
   'Terug zonder deze wijzigingen': 'Voltar sem estas alterações',
