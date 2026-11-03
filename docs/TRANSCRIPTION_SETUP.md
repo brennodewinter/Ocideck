@@ -162,8 +162,14 @@ exactly which bytes go where under which consent.
 
 ## Storage, retention and wiping
 
-- **Staged recordings** live in the app's staging folder for seven days
-  after you choose *keep*, then are swept. On web there is no folder:
+- **Staged recordings** live in the app's staging folder,
+  `transcription/recordings/` in the application-support folder, and
+  are swept seven days after the recording started. Not in the
+  operating system's temporary folder: macOS clears that after three
+  days and many Linux systems on every restart, before the seven days
+  are up. *(Corrected 2026-11-03, #2761: until then the staging sat in
+  the temporary folder, and this line counted the days from *keep*.)*
+  On web there is no folder:
   recording and manifest stay in the tab as `mem:` assets and a reload
   loses them — the save flow warns before that happens.
 - **Call provenance** rides along as `sources.json` next to the

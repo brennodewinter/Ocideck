@@ -26,6 +26,11 @@ All notable changes to OciDeck are documented in this file.
   `https` beloofde. De sleutel gaat nu alleen over `https`/`wss` of naar dit
   apparaat; anders weigert OciDeck met een melding die zegt wat je kunt doen
   (#2758).
+- **Bewaarde opnames halen hun zeven dagen.** De opname-staging stond in de
+  tijdelijke map van het besturingssysteem. macOS wist die na drie dagen, en
+  een Linux met tmpfs-`/tmp` bij elke herstart, ook na een vastgelopen call.
+  De staging staat nu in de app-supportmap (`transcription/recordings/`), en
+  wat er nog in de oude map lag verhuist bij de eerste start mee (#2761).
 
 ### Added
 

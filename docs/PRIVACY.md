@@ -111,11 +111,13 @@ machine (desktop) or in your browser tab (web). This includes:
   the snapshots above, and saving the deck moves the files to the project folder.
 - **Recordings (Transcriptie en opname).** The optional transcription module —
   off by default, switched on under Settings → Uitbreidingen — treats a
-  recording the same way a staged image is treated: while a session runs, the
-  durable file is written to a per-session folder under the operating system's
-  temporary directory, on Linux restricted to your own account like the
-  snapshot folders. A recording that never reaches a saved transcript is
-  swept on startup after 7 days; the transcript's own save flow decides
+  recording much like a staged image: while a session runs, the durable file is
+  written to a per-session folder under `transcription/recordings/` in the
+  application-support folder, on Linux restricted to your own account like the
+  snapshot folders. Not the temporary directory, as a staged image: the
+  operating system clears that sooner than the seven days a recording is kept
+  for recovery (#2761). A recording that never reaches a saved transcript is
+  swept on startup seven days after it started; the transcript's own save flow decides
   explicitly whether the original moves into `media/` beside the `.md` or is
   deleted. In the browser build there is no staging folder at all — the
   recording lives in memory and dies with the tab. A recording started
