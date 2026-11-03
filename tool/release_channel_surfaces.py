@@ -187,7 +187,7 @@ class DownloadRows(HTMLParser):
             return
         index = len(self.stack) - 1 - self.stack[::-1].index(tag)
         self.stack = self.stack[:index]
-        if self.active and tag == 'li' and len(self.stack) == self.active[1]:
+        if self.active and len(self.stack) <= self.active[1]:
             self.active = None
 
     def handle_startendtag(self, tag, attrs):

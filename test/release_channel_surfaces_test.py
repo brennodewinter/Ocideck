@@ -43,6 +43,7 @@ class PublicSurfacesTest(unittest.TestCase):
         text = '<html><body><ul><li data-ocideck-download=macos><p>copy<a class=product-action-primary data-ocideck-download-primary href=https://release/mac>Download</a><li>other</ul></body></html>'
         proof = {'pages': dict.fromkeys(surfaces.LANGUAGES, 'a' * 64)}
         surfaces.verify_pages(proof, expected, lambda _: text.encode())
+        surfaces.verify_pages(proof, expected, lambda _: text.replace('<li>other', '').encode())
 
     def archive(self, root, names):
         path = root / 'bundle.tar.gz'
