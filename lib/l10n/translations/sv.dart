@@ -1604,6 +1604,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze tabel bewerken': 'Redigera den här tabellen',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} rapporteras inte längre i någon presentation. Du kan slå på det igen under Säkerhet.',
   'Niet melden': 'Rapportera inte',

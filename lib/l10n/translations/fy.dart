@@ -652,6 +652,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze tabel bewerken': 'Dizze tabel bewurkje',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} wurdt dan yn gjin ien presintaasje mear meld. Weromsette kin by Befeiliging.',
   'Niet melden': 'Net melde',

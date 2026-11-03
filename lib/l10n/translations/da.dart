@@ -1605,6 +1605,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Deze tabel bewerken': 'Rediger denne tabel',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} vil ikke længere blive rapporteret i nogen præsentation. Du kan slå det til igen under Sikkerhed.',
   'Niet melden': 'Meld ikke',

@@ -1603,6 +1603,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze tabel bewerken': 'Rediģēt šo tabulu',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} vairs netiks ziņots nevienā prezentācijā. To varat atgriezt sadaļā Drošība.',
   'Niet melden': 'Neziņot',

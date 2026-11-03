@@ -1608,6 +1608,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze tabel bewerken': 'Die Tabelle bearbeite',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} wird denn in keiner Präsentation meh gmäldet. Zrüggsetze chaschs under Sicherheit.',
   'Niet melden': 'Nid mälde',

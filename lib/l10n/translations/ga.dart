@@ -1635,6 +1635,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze tabel bewerken': 'Cuir an tábla seo in eagar',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       'Ní thuairisceofar {regel} in aon chur i láthair níos mó. Is féidir é a chur ar ais faoi Slándáil.',
   'Niet melden': 'Ná tuairiscigh',

@@ -1611,6 +1611,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze tabel bewerken': 'Redaguoti šią lentelę',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} nebebus pranešta jokioje prezentacijoje. Galite atstatyti skiltyje Saugumas.',
   'Niet melden': 'Nepranešti',

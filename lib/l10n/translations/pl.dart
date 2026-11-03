@@ -1617,6 +1617,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze tabel bewerken': 'Edytuj tę tabelę',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} nie będzie już zgłaszane w żadnej prezentacji. Możesz je przywrócić w Bezpieczeństwie.',
   'Niet melden': 'Nie zgłaszaj',

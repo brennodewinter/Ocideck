@@ -651,6 +651,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze tabel bewerken': 'Editá e tabla aki',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} lo no wordu raportá mas den niun presentashon. Bo por bolbe aktiv\'é na Seguridat.',
   'Niet melden': 'No raportá',

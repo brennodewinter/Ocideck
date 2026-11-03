@@ -1605,6 +1605,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze tabel bewerken': 'Muokkaa tätä taulukkoa',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} ei enää ilmoiteta missään esityksessä. Voit ottaa sen takaisin käyttöön Tietoturva-kohdassa.',
   'Niet melden': 'Älä ilmoita',

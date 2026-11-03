@@ -1623,6 +1623,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze tabel bewerken': 'Editja din it-tabella',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} mhux se jibqa\' jiġi rrappurtat f\'ebda preżentazzjoni. Tista\' tattiva mill-ġdid taħt Sigurtà.',
   'Niet melden': 'Tagħmilx rapport',

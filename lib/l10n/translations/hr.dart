@@ -1609,6 +1609,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Deze tabel bewerken': 'Uredi ovu tablicu',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} se više neće prijavljivati ni u jednoj prezentaciji. Možeš ga vratiti pod Sigurnost.',
   'Niet melden': 'Ne prijavljuj',

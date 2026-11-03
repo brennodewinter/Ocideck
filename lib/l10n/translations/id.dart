@@ -1605,6 +1605,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze tabel bewerken': 'Edit tabel ini',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} tidak akan lagi dilaporkan di presentasi mana pun. Anda bisa mengaktifkannya kembali di Keamanan.',
   'Niet melden': 'Jangan laporkan',

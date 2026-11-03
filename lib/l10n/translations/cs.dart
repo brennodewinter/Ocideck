@@ -1606,6 +1606,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze tabel bewerken': 'Upravit tuto tabulku',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} se pak nebude hlásit v žádné prezentaci. Zpět to zapnete v Zabezpečení.',
   'Niet melden': 'Nehlásit',

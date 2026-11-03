@@ -1,0 +1,16 @@
+{
+  "additions": {
+    "Deze tabel bewerken": {
+      "en": "Edit this table", "it": "Modifica questa tabella", "de": "Diese Tabelle bearbeiten",
+      "fr": "Modifier ce tableau", "es": "Editar esta tabla", "fy": "Dizze tabel bewurkje",
+      "pap": "Editá e tabla aki", "la": "Tabulam hanc recensere", "id": "Edit tabel ini",
+      "pl": "Edytuj tę tabelę", "uk": "Редагувати цю таблицю", "gsw": "Die Tabelle bearbeite",
+      "el": "Επεξεργασία αυτού του πίνακα", "da": "Rediger denne tabel", "sv": "Redigera den här tabellen",
+      "hr": "Uredi ovu tablicu", "cs": "Upravit tuto tabulku", "fi": "Muokkaa tätä taulukkoa",
+      "bg": "Редактирай тази таблица", "lv": "Rediģēt šo tabulu", "lt": "Redaguoti šią lentelę",
+      "mt": "Editja din it-tabella", "et": "Muuda seda tabelit", "hu": "Táblázat szerkesztése",
+      "ga": "Cuir an tábla seo in eagar", "pt": "Editar esta tabela", "ro": "Editează acest tabel",
+      "sl": "Uredi to tabelo", "sk": "Upraviť túto tabuľku", "tr": "Bu tabloyu düzenle"
+    }
+  }
+}

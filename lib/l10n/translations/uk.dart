@@ -1620,6 +1620,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze tabel bewerken': 'Редагувати цю таблицю',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} більше не повідомлятиметься в жодній презентації. Ви можете повернути це в Безпеці.',
   'Niet melden': 'Не повідомляти',

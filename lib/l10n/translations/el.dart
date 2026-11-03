@@ -1630,6 +1630,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze tabel bewerken': 'Επεξεργασία αυτού του πίνακα',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} δεν θα αναφέρεται πλέον σε καμία παρουσίαση. Μπορείτε να το επαναφέρετε στην Ασφάλεια.',
   'Niet melden': 'Να μην αναφέρεται',

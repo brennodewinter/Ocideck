@@ -1620,6 +1620,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze tabel bewerken': 'Tabulam hanc recensere',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} in nulla prorsus praesentatione amplius nuntiabitur. Apud Securitatem restituere potes.',
   'Niet melden': 'Non nuntiare',

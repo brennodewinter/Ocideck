@@ -1624,6 +1624,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze tabel bewerken': 'Редактирай тази таблица',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} вече няма да се отчита в никоя презентация. Можете да го върнете от Сигурност.',
   'Niet melden': 'Не отчитай',

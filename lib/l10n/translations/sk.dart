@@ -1611,6 +1611,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze tabel bewerken': 'Upraviť túto tabuľku',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} sa už nebude hlásiť v žiadnej prezentácii. Späť ho zapnete v Zabezpečení.',
   'Niet melden': 'Nehlásiť',

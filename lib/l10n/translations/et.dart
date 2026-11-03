@@ -1598,6 +1598,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze tabel bewerken': 'Muuda seda tabelit',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} ei teavitata enam üheski esitluses. Saate selle tagasi panna Turvalisuse alt.',
   'Niet melden': 'Ära teavita',

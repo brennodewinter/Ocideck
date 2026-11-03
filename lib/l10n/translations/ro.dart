@@ -1621,6 +1621,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze tabel bewerken': 'Editează acest tabel',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} nu va mai fi raportat în nicio prezentare. Îl puteți reactiva la Securitate.',
   'Niet melden': 'Nu raporta',

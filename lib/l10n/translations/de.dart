@@ -652,6 +652,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze tabel bewerken': 'Diese Tabelle bearbeiten',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} wird dann in keiner Präsentation mehr gemeldet. Unter Sicherheit kannst du es wieder aktivieren.',
   'Niet melden': 'Nicht melden',

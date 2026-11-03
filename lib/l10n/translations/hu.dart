@@ -1607,6 +1607,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze tabel bewerken': 'Táblázat szerkesztése',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} ezután egyetlen prezentációban sem lesz jelentve. A Biztonság alatt visszakapcsolhatja.',
   'Niet melden': 'Ne jelentse',
