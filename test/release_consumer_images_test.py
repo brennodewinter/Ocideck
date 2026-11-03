@@ -157,6 +157,10 @@ if sys.argv[1:3]==['image','inspect']:
             git('checkout', '--', 'scripts/release_consumers/deb.Dockerfile')
             (source / 'scripts/release_consumers/untracked').write_text('extra input')
             self.assertNotEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
+            (source / 'scripts/release_consumers/untracked').unlink()
+            (source / '.git/info/exclude').write_text('scripts/release_consumers/ignored\n')
+            (source / 'scripts/release_consumers/ignored').write_text('hidden Docker context input')
+            self.assertNotEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
             self.assertFalse(output.exists())
             self.assertEqual(calls.read_bytes(), before)
 
