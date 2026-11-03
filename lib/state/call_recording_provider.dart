@@ -66,6 +66,13 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
   StreamSubscription<RecordingEvent>? _recordingEvents;
   var _starting = false;
 
+  /// Tikken van de lopende opname. [state] krijgt de teller bij de eerste
+  /// tik en daarna eens per [_ticksPerPublish] (#2760): een tik is 20 ms, en
+  /// een nieuwe toestand per tik bouwde banner en callpaneel vijftig keer per
+  /// seconde opnieuw, voor een getal dat niemand zo snel leest.
+  var _ticks = 0;
+  static const _ticksPerPublish = 50;
+
   @override
   CallRecordingState build() {
     ref.listen(transcriptionEnabledProvider, (prev, next) {
@@ -114,7 +121,8 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     final next = phaseAfterCallRecordingStart(state.phase);
     if (next == state.phase) return;
     _starting = true;
-    state = state.copyWith(phase: next);
+    _ticks = 0;
+    state = state.copyWith(phase: next, capturedChunks: 0);
     try {
       // Dezelfde duurzame, begrensde pipeline als de microfoonopname
       // (#2529): staging, schijfcontrole, crashherstel en de live-route
@@ -225,7 +233,10 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
   /// provider — hier telt alleen wat de gebruiker mag volgen.
   void _onLiveTick(AudioChunk tick) {
     if (!ref.mounted) return;
-    state = state.copyWith(capturedChunks: state.capturedChunks + 1);
+    _ticks++;
+    if (_ticks == 1 || _ticks % _ticksPerPublish == 0) {
+      state = state.copyWith(capturedChunks: _ticks);
+    }
   }
 
   void _onRecordingEvent(RecordingEvent event) {

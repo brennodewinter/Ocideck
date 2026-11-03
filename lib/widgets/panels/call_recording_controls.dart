@@ -178,13 +178,14 @@ class CallRecordingBanner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final recorded = ref.watch(callRecordingProvider);
+    // Alleen de fase: de tikteller hoort deze strook niet te herbouwen.
+    final phase = ref.watch(callRecordingProvider.select((s) => s.phase));
     final show =
-        recorded.phase == CallRecordingPhase.bezig ||
-        recorded.phase == CallRecordingPhase.stoppen;
+        phase == CallRecordingPhase.bezig ||
+        phase == CallRecordingPhase.stoppen;
     if (!show) return const SizedBox.shrink();
     final l10n = context.l10n;
-    final text = recorded.phase == CallRecordingPhase.stoppen
+    final text = phase == CallRecordingPhase.stoppen
         ? l10n.d('Opname stopt…')
         : l10n.d('OciDeck neemt deze vergadering op.');
     return Semantics(
