@@ -81,6 +81,17 @@ class PublicSurfacesTest(unittest.TestCase):
                 self.assertFalse((root / 'out').exists())
                 self.assertLess(archive.stat().st_size, 1024)
 
+    def test_sparse_pax_body_is_rejected_before_sparse_map_read(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            info = tarfile.TarInfo('sparse')
+            info.pax_headers = {'GNU.sparse.major': '1', 'GNU.sparse.minor': '0'}
+            archive = root / 'sparse.tar.gz'
+            archive.write_bytes(gzip.compress(info.tobuf(format=tarfile.PAX_FORMAT)))
+            with self.assertRaisesRegex(ValueError, 'sparse web archive metadata'):
+                surfaces.extract_web(archive, root / 'out', '1.2.3')
+            self.assertFalse((root / 'out').exists())
+
     def test_member_limit_stops_before_reading_next_body(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
