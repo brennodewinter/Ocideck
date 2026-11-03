@@ -20,6 +20,13 @@ fi
 
 TAG="$1"
 OUTPUT_FILE="${2:-}"
+CHANNEL=""
+if [ "$#" -gt 2 ]; then
+  [ "$#" -eq 4 ] && [ "$3" = --channel ] && [ "$4" = macos ] || {
+    echo "Usage: $0 <tag> [output-file] [--channel macos]" >&2; exit 2;
+  }
+  CHANNEL=macos
+fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 
@@ -42,7 +49,8 @@ MACOS_ASSET="ocideck-macos-$VERSION.zip"
 MACOS_URL="$RELEASE_BASE_URL/$MACOS_ASSET"
 
 TMPDIR="$(mktemp -d)"
-trap 'rm -rf "$TMPDIR"' EXIT
+trap 'rm -rf "$TMPDIR"; [ -z "${PENDING:-}" ] || rm -f "$PENDING"' EXIT
+SUMS_NAME="SHA256SUMS${CHANNEL:+.macos}"
 
 if [ -n "${SHA256SUMS_FILE:-}" ]; then
   SOURCE_SUMS="$SHA256SUMS_FILE"
@@ -59,9 +67,9 @@ if [ -n "${SHA256SUMS_FILE:-}" ]; then
   cp "$SOURCE_SIGNATURE" "$TMPDIR/SHA256SUMS.minisig"
 else
   curl -fsSL --retry 2 --connect-timeout 10 --max-time 60 \
-    -o "$TMPDIR/SHA256SUMS" "$RELEASE_BASE_URL/SHA256SUMS"
+    -o "$TMPDIR/SHA256SUMS" "$RELEASE_BASE_URL/$SUMS_NAME"
   curl -fsSL --retry 2 --connect-timeout 10 --max-time 60 \
-    -o "$TMPDIR/SHA256SUMS.minisig" "$RELEASE_BASE_URL/SHA256SUMS.minisig"
+    -o "$TMPDIR/SHA256SUMS.minisig" "$RELEASE_BASE_URL/$SUMS_NAME.minisig"
 fi
 SUMS="$TMPDIR/SHA256SUMS"
 SIGNATURE="$TMPDIR/SHA256SUMS.minisig"
@@ -78,6 +86,53 @@ command -v minisign >/dev/null 2>&1 || {
 if ! minisign -Vm "$SUMS" -x "$SIGNATURE" -p "$PUBKEY" -q; then
   echo "SHA256SUMS.minisig verification failed; refusing to update the Homebrew cask." >&2
   exit 1
+fi
+
+if [ "$CHANNEL" = macos ]; then
+  if [ -n "${CHANNEL_MANIFEST_FILE:-}" ]; then
+    cp "$CHANNEL_MANIFEST_FILE" "$TMPDIR/channel-manifest-macos.json"
+    cp "${CHANNEL_MANIFEST_FILE}.minisig" "$TMPDIR/channel-manifest-macos.json.minisig"
+  else
+    for name in channel-manifest-macos.json channel-manifest-macos.json.minisig; do
+      curl -fsSL --connect-timeout 10 --max-time 60 -o "$TMPDIR/$name" "$RELEASE_BASE_URL/$name"
+    done
+  fi
+  minisign -Vm "$TMPDIR/channel-manifest-macos.json" -p "$PUBKEY" -q
+  python3 - "$TMPDIR/channel-manifest-macos.json" "$SUMS" "$TAG" "$VERSION" <<'PYCHANNEL'
+import json, re, sys
+from pathlib import Path
+def unique(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('duplicate manifest field')
+        result[key] = value
+    return result
+manifest, sums, tag, version = sys.argv[1:]
+data = json.loads(Path(manifest).read_text(), object_pairs_hook=unique)
+if not re.fullmatch(r'v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)', tag):
+    raise SystemExit('macOS channel requires a canonical stable tag')
+fields = {'schema', 'tag', 'version', 'source', 'controller_sha', 'channel', 'run_id', 'files'}
+if not isinstance(data, dict) or set(data) != fields:
+    raise SystemExit('invalid macOS manifest fields')
+if type(data['schema']) is not int or data['schema'] != 1 or data['tag'] != tag or data['version'] != version or data['channel'] != 'macos':
+    raise SystemExit('macOS channel identity mismatch')
+for field in ('source', 'controller_sha'):
+    if not isinstance(data[field], str) or not re.fullmatch(r'[0-9a-f]{40}', data[field]) or data[field] == '0' * 40:
+        raise SystemExit('invalid macOS provenance')
+if not isinstance(data['run_id'], str) or not re.fullmatch(r'[1-9][0-9]*', data['run_id']):
+    raise SystemExit('invalid macOS run')
+files = data['files']
+asset = f'ocideck-macos-{version}.zip'
+allowed = {asset, f'ocideck-{version}.cdx.json', f'ocideck-{version}.spdx.json'}
+if not isinstance(files, dict) or asset not in files or not set(files) <= allowed:
+    raise SystemExit('invalid macOS assets')
+if any(not isinstance(v, str) or not re.fullmatch(r'[0-9a-f]{64}', v) for v in files.values()):
+    raise SystemExit('invalid macOS asset hash')
+expected = ''.join(f'{digest}  {name}\n' for name, digest in sorted(files.items()))
+if Path(sums).read_text() != expected:
+    raise SystemExit('signed macOS manifest and checksums differ')
+PYCHANNEL
 fi
 
 # Match the asset by its bare name, tolerating the leading "./" that
@@ -101,11 +156,14 @@ if [ ! -f "$TEMPLATE_FILE" ]; then
   exit 1
 fi
 
+PENDING="$(mktemp "$(dirname "$OUTPUT_FILE")/.ocideck-cask.XXXXXX")"
 sed \
   -e "s|{{VERSION}}|$VERSION|g" \
   -e "s|{{TAG}}|$TAG|g" \
   -e "s|{{MACOS_URL}}|$MACOS_URL|g" \
   -e "s|{{MACOS_SHA256}}|$MACOS_SHA|g" \
-  "$TEMPLATE_FILE" > "$OUTPUT_FILE"
+  "$TEMPLATE_FILE" > "$PENDING"
+mv -f "$PENDING" "$OUTPUT_FILE"
+PENDING=""
 
 echo "Wrote $OUTPUT_FILE"
