@@ -161,11 +161,12 @@ class _ChartPreviewState extends State<_ChartPreview>
   void _maybeAnimateIn() {
     _entrance.stop();
     // #2733: beweging uit = meteen de eindstand, zoals cockpit en tijdlijn.
-    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    // Het veld leest de MediaQuery in didChangeDependencies — deze methode
+    // loopt al in initState, waar er nog geen inherited widgets zijn.
     if (!presentationMode ||
         !_spec.hasInlineData ||
         !_spec.animateOnEnter ||
-        reduceMotion) {
+        _reduceMotion) {
       _grow = 1;
       _chartAnimDuration = Duration.zero;
       _entrance.value = 1;
