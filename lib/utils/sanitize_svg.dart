@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:isolate';
-import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:xml/xml.dart';
 
 import 'log.dart';
@@ -22,7 +22,7 @@ String? sanitizeMermaidSvg(String svg) {
 /// telt niet mee; tests lezen dit om een tweede mount te controleren (#2682).
 int debugImportedSvgSanitizeCount = 0;
 
-/// Boven deze grootte saneert [sanitizeImportedSvgForDisplay] op een
+/// Boven deze grootte saneert [sanitizeImportedSvgForDisplay] native op een
 /// achtergrond-isolate, zodat de UI-isolate niet vastloopt op de XML-parse.
 const int kSvgSanitizeInlineMaxBytes = 256 * 1024;
 
@@ -75,10 +75,11 @@ SanitizedImportedSvg? sanitizedImportedSvg(
   return SanitizedImportedSvg(svg, extractSoleEmbeddedPng(svg));
 }
 
-/// Saneert [bytes]. Kleine SVG's blijven op deze isolate; grotere gaan naar
-/// een worker. De aanroeper cachet het resultaat.
+/// Saneert [bytes]. Kleine SVG's blijven op deze isolate; grotere gaan native
+/// naar een worker. Het web kent geen `Isolate.run` en saneert alles op de
+/// main thread (#2789). De aanroeper cachet het resultaat.
 Future<SanitizedImportedSvg?> sanitizeImportedSvgForDisplay(Uint8List bytes) {
-  if (bytes.length <= kSvgSanitizeInlineMaxBytes) {
+  if (kIsWeb || bytes.length <= kSvgSanitizeInlineMaxBytes) {
     return Future<SanitizedImportedSvg?>.value(sanitizedImportedSvg(bytes));
   }
   debugImportedSvgSanitizeCount++;

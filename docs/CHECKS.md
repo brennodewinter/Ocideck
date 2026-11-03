@@ -28,12 +28,13 @@ make check        # format-check + analyze + conventions + method-length + dead-
 
 The browser regressions need an actual Chrome runtime; the native suite skips
 the browser-only tests. Run them explicitly when changing privacy-scan warm-up,
-the source-editor check round (`lib/services/deck_source_checks.dart`) or their
-platform guards:
+the source-editor check round (`lib/services/deck_source_checks.dart`), SVG
+sanitising (`lib/utils/sanitize_svg.dart`) or their platform guards:
 
 ```sh
 flutter test --platform chrome test/privacy_scan_memo_web_test.dart \
-  test/markdown_deck_editor_web_test.dart test/deck_source_checks_test.dart
+  test/markdown_deck_editor_web_test.dart test/deck_source_checks_test.dart \
+  test/sanitize_svg_test.dart
 ```
 
 `deck_source_checks_test.dart` runs natively as well: there it proves the check
@@ -390,7 +391,7 @@ now the only passing state.
 | --- | --- | :---: | :---: | :---: | --- |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size, FilePicker-gate & fixed-delay ratchets | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size, FilePicker-gate & fixed-delay ratchets; `Isolate.run` web gate | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ | local (`check-full`) |
@@ -563,6 +564,15 @@ also declares them, but see the [CI note](#continuous-integration).)
     conditional import with no injection point, and there is no
     `--platform chrome` target — so a widget test sits green around the broken
     branch. That is how the buttons in issue #150 came back as #506.
+  - **`Isolate.run` behind a platform gate** — every `Isolate.run` call in
+    `lib/` needs `kIsWeb` (or one of the flags above) in the same method,
+    using the same window as the FilePicker rule. On the web the call compiles
+    but throws at run time (`dart:isolate is not supported on dart4web`). The
+    source-editor check round (#2764) and the sanitising of large imported
+    SVGs (#2789) broke this way, while the exports already used
+    `kIsWeb ? Future.sync(body) : Isolate.run(body)`. Comment lines and
+    `_io.dart` halves of a conditional import are skipped. There is no
+    baseline: the rule landed with zero violations.
   - **fixed-delay ratchet for tests** (`fixedDelayBaseline`) — `runAsync(() =>
     Future.delayed(const Duration(milliseconds: 80)))` waits on a guess about
     how long real work takes on this machine, not on the result. Such a test
