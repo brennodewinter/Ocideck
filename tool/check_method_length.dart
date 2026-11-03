@@ -58,6 +58,10 @@ const Map<String, int> methodLengthBaseline = {
   // preview waar de draaiing zich op afspeelt; uitbesteden zou de
   // knop-status los van de stage-state trekken.
   'lib/widgets/slides/image_crop_dialog.dart::_ImageCropDialogState.build': 153,
+  // +8 (#2741): de verduidelijkte schermteksten (andere-scherm-zinnen en
+  // de stille-fallback-meldingen) — ze horen bij dezelfde beslisboom.
+  'lib/widgets/presentation/fullscreen_presenter.dart::FullscreenPresenter.showDualScreen':
+      158,
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
       154, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
