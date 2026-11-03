@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -63,7 +64,7 @@ class ConsumerImagesTest(unittest.TestCase):
             artifact.write_bytes(b'existing verified fixture')
             docker = directory / 'docker'
             calls = directory / 'calls'
-            docker.write_text('#!/bin/sh\ncat > "$DOCKER_CALLS"\n')
+            docker.write_text('#!/bin/sh\ncase " $* " in *" --interactive "*) cat > "$DOCKER_CALLS";; *) exit 0;; esac\n')
             docker.chmod(0o700)
             env = dict(os.environ, PATH=str(directory) + os.pathsep + os.environ['PATH'], DOCKER_CALLS=str(calls))
             command = ['bash', str(ROOT / 'scripts/probe_release_consumer_image.sh'), 'deb',
@@ -119,12 +120,23 @@ if sys.argv[1:3]==['image','inspect']:
             calls = directory / 'calls'
             output = directory / 'images.json'
             env = dict(os.environ, PATH=str(directory) + os.pathsep + os.environ['PATH'], DOCKER_CALLS=str(calls))
-            command = ['bash', str(ROOT / 'scripts/build_release_consumer_images.sh'), 'registry.invalid/test', 'b' * 40, str(output)]
+            source = directory / 'source'
+            (source / 'scripts').mkdir(parents=True)
+            shutil.copyfile(ROOT / 'scripts/build_release_consumer_images.sh', source / 'scripts/build_release_consumer_images.sh')
+            shutil.copytree(ROOT / 'scripts/release_consumers', source / 'scripts/release_consumers')
+            def git(*args):
+                return subprocess.check_output(['git', '-C', str(source), *args], stderr=subprocess.DEVNULL, text=True).strip()
+            git('init', '-q')
+            git('add', '.')
+            git('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'verified source')
+            revision = git('rev-parse', 'HEAD')
+            command = ['bash', str(source / 'scripts/build_release_consumer_images.sh'), 'registry.invalid/test', revision, str(output)]
             result = subprocess.run(command, env=env, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             receipt = json.loads(output.read_text())
             self.assertEqual(set(receipt['images']), set(PROFILES))
             self.assertTrue(all(re.fullmatch(r'registry.invalid/test/ocideck-consumer-[a-z0-9]+@sha256:a{64}', image) for image in receipt['images'].values()))
+            self.assertEqual(receipt['source'], revision)
             recorded = [json.loads(line) for line in calls.read_text().splitlines()]
             self.assertEqual(sum(call[0] == 'push' for call in recorded), 6)
             for call in recorded:
@@ -135,6 +147,19 @@ if sys.argv[1:3]==['image','inspect']:
             before = calls.read_bytes()
             self.assertNotEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
             self.assertEqual(calls.read_bytes(), before)
+            output.unlink()
+            command[-2] = 'b' * 40
+            self.assertNotEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
+            command[-2] = revision
+            recipe = source / 'scripts/release_consumers/deb.Dockerfile'
+            recipe.write_text(recipe.read_text() + '\n# modified context\n')
+            self.assertNotEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
+            git('checkout', '--', 'scripts/release_consumers/deb.Dockerfile')
+            (source / 'scripts/release_consumers/untracked').write_text('extra input')
+            self.assertNotEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
+            self.assertFalse(output.exists())
+            self.assertEqual(calls.read_bytes(), before)
+
 
 
 if __name__ == '__main__':

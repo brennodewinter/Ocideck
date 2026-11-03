@@ -38,7 +38,7 @@ if profile=='flatpak':
     copy_verified(sbom,sbom_hash,str(pathlib.Path(target).parent/'components.cdx.json'))
 PY
 # This is an explicit infrastructure smoke test, not an automatic release retry.
-docker run --rm --platform linux/amd64 --cpus 2 --memory 4g \
+docker run --interactive --rm --platform linux/amd64 --cpus 2 --memory 4g \
   --mount "type=bind,source=$WORK,target=/dist,readonly" "$IMAGE" bash -s -- "$PROFILE" "$VERSION" <<'PROBE'
 set -euo pipefail
 profile="$1"

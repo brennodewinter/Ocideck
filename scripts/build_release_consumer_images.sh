@@ -8,6 +8,10 @@ OUTPUT="${3:?new output JSON required}"
 [[ "$REVISION" =~ ^[0-9a-f]{40}$ && "$REVISION" != 0000000000000000000000000000000000000000 ]] || exit 2
 [[ ! -e "$OUTPUT" ]] || { echo 'Output exists; preserve the previous image receipt' >&2; exit 1; }
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+# A revision label must describe the actual build context, not operator input.
+[[ "$(git -C "$ROOT" rev-parse HEAD)" == "$REVISION" ]] || { echo 'Build from the requested Git revision' >&2; exit 1; }
+[[ -z "$(git -C "$ROOT" status --porcelain --untracked-files=all -- scripts/build_release_consumer_images.sh scripts/release_consumers)" ]] || { echo 'Consumer build context must be clean' >&2; exit 1; }
+[[ -z "$(git -C "$ROOT" ls-files --others --ignored --exclude-standard -- scripts/release_consumers)" ]] || { echo 'Ignored files in consumer build context' >&2; exit 1; }
 WORK="$(mktemp -d)"
 trap 'rm -rf -- "$WORK"' EXIT
 for profile in deb rpm tar debian12 appimage flatpak; do

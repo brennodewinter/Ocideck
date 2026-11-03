@@ -1083,7 +1083,9 @@ consumer. It does not use Ubuntu native-hook caches. The Linux worker needs
 access to the same Docker builder daemon used by the existing complete-release
 Debian 12 job. Missing daemon access stops that selected channel.
 
-Consumer image recipes live in `scripts/release_consumers/`. Refresh them only
+Consumer image recipes live in `scripts/release_consumers/`. Run the image builder from a clean Git checkout at the requested full revision;
+a bare source archive cannot establish the revision label. Existing published
+digests remain usable without rebuilding when this admission check changes. Refresh them only
 on the infrastructure builder with `scripts/build_release_consumer_images.sh
 REGISTRY FULL_SOURCE_SHA NEW_RECEIPT.json`. That explicit command builds and
 pushes six amd64 profiles, checks tools and reads registry digests back. It is
