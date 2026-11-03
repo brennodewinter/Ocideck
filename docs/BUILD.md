@@ -1727,3 +1727,23 @@ begrenzen beide Linux-bouwroutes bovendien de echte Ninja-opdracht met `-j2`
 via een tijdelijke PATH-wrapper, uitsluitend tijdens de bouw. Dit is toelatingsbeleid met bestaande bouwmarge,
 geen gemeten maximum of garantie voor de gehele server: andere CI deelt capaciteit.
 Mac- en Windows-runners behouden hun eigen kanaalwachtrij en native begrenzingen.
+
+### Versieoverzicht vóór de volgende OS-stap
+
+Gebruik het alleen-lezen versieoverzicht met het expliciet beoogde bereik:
+
+```sh
+python3 tool/release_channel_controller.py overview \
+  --state-dir /duurzame/opslag/release \
+  --tag vX.Y.Z --sha VOLLEDIGE_BRON_SHA \
+  --expected-channels macos windows linux-deb web
+```
+
+Het overzicht toont alle negen kanalen en controleert per opgeslagen operatie
+opnieuw dezelfde versie, bron en remote toestand. Ontbrekende lokale gegevens
+betekenen `unknown`, niet dat een kanaal publiek ontbreekt. `partial` en
+`complete` gelden voor het expliciet gekozen bereik; een nog lopende bouw of
+alleen geüploade assets telt niet als volledig publiek gecontroleerd. De verse
+controle verifieert ondertekende releasebytes en toepasselijke website-, web- en
+Homebrew-verwijzingen. Zij kan daarom bestanden downloaden en netwerkverkeer
+veroorzaken. Het commando start geen bouw, plaatsing of publicatie.
