@@ -1628,6 +1628,8 @@ const _dutchSourceAddBg = <String, String>{
       'Един HTML файл с реален текст, заглавия и алтернативни текстове, който се отваря във всеки браузър без интернет — с таблици, математика, mermaid и графики.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Работете на живо върху презентация на WebDAV сървър. Изключено по подразбиране. Редакциите пътуват през работна папка до дека на същия сървър — без криптиране от OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'API ключът се изпраща само през https или към това устройство — използвайте https или оставете ключа празен',
   'Ga naar de brontabel': 'Към изходната таблица',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Тази таблица е копие на изходната таблица "{bron}". Редактирайте източника и изберете Обновяване, или откачете изгледа като моментна снимка.',

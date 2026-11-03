@@ -1625,6 +1625,8 @@ const _dutchSourceAddRo = <String, String>{
       'Un fișier HTML cu text real, titluri și texte alternative, care se deschide în orice browser fără internet — cu tabele, matematică, mermaid și grafice.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Lucrați live la o prezentare pe un server WebDAV. Dezactivat implicit. Modificările călătoresc printr-un dosar de lucru de lângă deck pe același server — fără criptare de către OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'O cheie API circulă doar prin https sau către acest dispozitiv — folosește https sau lasă cheia goală',
   'Ga naar de brontabel': 'Mergi la tabelul sursă',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Acest tabel este o copie a tabelului sursă "{bron}". Editați sursa și alegeți Reîmprospătare, sau detașați vizualizarea ca instantaneu.',

@@ -1609,6 +1609,8 @@ const _dutchSourceAddDa = <String, String>{
       'Én HTML-fil med rigtig tekst, overskrifter og alt-tekster, som åbner i enhver browser uden internet — med tabeller, matematik, mermaid og diagrammer.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Samarbejd live om en præsentation på en WebDAV-server. Slået fra som standard. Redigeringer rejser via en arbejdsmappe ved siden af decket på samme server — uden kryptering fra OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'En API-nøgle sendes kun over https eller til denne enhed selv — brug https, eller lad nøglen være tom',
   'Ga naar de brontabel': 'Gå til kildetabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Denne tabel er en afskrift af kildetabellen "{bron}". Rediger kilden og vælg Opdater, eller kobl visningen fra som et øjebliksbillede.',

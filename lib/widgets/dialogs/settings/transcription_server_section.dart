@@ -423,6 +423,9 @@ class _TranscriptionServerSectionState
       AsrGateDenial.insecureHttpOnWeb => l10n.d(
         'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres',
       ),
+      AsrGateDenial.keyNeedsTls => l10n.d(
+        'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg',
+      ),
     };
   }
 

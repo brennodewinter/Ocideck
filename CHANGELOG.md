@@ -21,6 +21,11 @@ All notable changes to OciDeck are documented in this file.
   weg, dan schreef het hulppunt een tweede antwoord (`502`) midden in de
   bytes van het eerste en liet het de verbinding open; de import hing. Het
   kapt de verbinding nu, zodat de app een afgebroken download ziet (#2755).
+- **API-sleutel van de ASR-server alleen versleuteld.** Een LAN-profiel op kale
+  `http` of `ws` stuurde de sleutel leesbaar mee, terwijl de handleiding alleen
+  `https` beloofde. De sleutel gaat nu alleen over `https`/`wss` of naar dit
+  apparaat; anders weigert OciDeck met een melding die zegt wat je kunt doen
+  (#2758).
 
 ### Added
 

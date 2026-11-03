@@ -1609,6 +1609,8 @@ const _dutchSourceAddSl = <String, String>{
       'Ena datoteka HTML s pravim besedilom, naslovi in nadomestnimi besedili, ki se odpre v katerem koli brskalniku brez interneta — s tabelami, matematiko, mermaid in grafikoni.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Sodelujte v živo pri predstavitvi na strežniku WebDAV. Privzeto izklopljeno. Spremembe potujejo prek delovne mape poleg decka na istem strežniku — brez šifriranja s strani OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Ključ API potuje samo prek https ali na to napravo — uporabite https ali pustite ključ prazen',
   'Ga naar de brontabel': 'Pojdi na izvorno tabelo',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ta tabela je odpis izvorne tabele "{bron}". Uredite vir in izberite Osveži, ali ločite pogled kot posnetek.',

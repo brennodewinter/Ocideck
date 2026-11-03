@@ -655,6 +655,8 @@ const _dutchSourceAddPap = {
       'Un archivo HTML ku teksto real, kabeseranan i tekstonan alternativo, ku ta habri den kualke browser sin internet — ku tablanan, matemátika, mermaid i gráfikonan.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Trabaha en vivo riba un presentashon riba un sirvidor WebDAV. Desaktipá pa defekto. Edishonnan ta biaha via un carpeta di trabou banda di e deck riba e mesun sirvidor — sin enkripshon pa OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Un yabi di API ta biaha djis via https òf pa e aparato aki mes — usa https òf laga e yabi bashí',
   'Ga naar de brontabel': 'Bai na e tabela fuente',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'E tabela aki ta un kopia di e tabela fuente "{bron}". Editá e fuente i skohe Refresh, òf deskonektá e vista komo snapshot.',

@@ -1611,6 +1611,8 @@ const _dutchSourceAddHu = <String, String>{
       'Egy HTML-fájl valódi szöveggel, címsorokkal és alt-szövegekkel, amely minden böngészőben megnyílik internet nélkül — táblázatokkal, matematikával, mermaiddel és grafikonokkal.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Dolgozzon élőben egy WebDAV-kiszolgálón lévő prezentáción. Alapértelmezetten ki. A módosítások a deck melletti munkamappán keresztül utaznak ugyanazon a kiszolgálón — OciDeck-titkosítás nélkül.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Az API-kulcs csak https-en vagy erre az eszközre kerül el — használj https-t, vagy hagyd üresen a kulcsot',
   'Ga naar de brontabel': 'Ugrás a forrástáblához',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ez a táblázat a "{bron}" forrástábla másolata. Szerkessze a forrást és válassza a Frissítés lehetőséget, vagy válassza le a nézetet pillanatképként.',

@@ -1612,6 +1612,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Ei HTML-Datei mit echtem Text, Überschrifte und Alt-Täxte, wo in jedem Browser ohni Internet uufgoht — mit Tabelle, Formle, Mermaid und Diagramme.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Schaff live a ere Präsentation uf eme WebDAV-Server. Standardmässig us. Bearbeite gö über e Arbeitsordner näbem Deck uf em gliche Server — ohni Verschlüsselig dur OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'En API-Schlüssel gaht nume über https oder a das Gerät sälber — nimm https oder lah de Schlüssel läär',
   'Ga naar de brontabel': 'Zur Quelltabälle gaa',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Die Tabälle isch e Abschrift vo de Quelltabälle "{bron}". Bearbeit d Quell und wehl Verfrische, oder löös d Aasicht als Momentufnahm ab.',

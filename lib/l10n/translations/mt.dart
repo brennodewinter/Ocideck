@@ -1627,6 +1627,8 @@ const _dutchSourceAddMt = <String, String>{
       'Fajl HTML wieħed b\'test veru, intestaturi u testi alternattivi, li jiftaħ fi kwalunkwe browser mingħajr internet — b\'tabelli, matematika, mermaid u graffs.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Ħdem live fuq preżentazzjoni fuq server WebDAV. Mitfi b\'mod awtomatiku. L-editji jivvjaġġaw permezz ta\' folder tax-xogħol ħdejn id-deck fuq l-istess server — mingħajr encryption minn OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Ċavetta API tgħaddi biss fuq https jew lejn dan l-apparat innifsu — uża https jew ħalli ċ-ċavetta vojta',
   'Ga naar de brontabel': 'Mur fit-tabella sors',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Din it-tabella hija kopja tat-tabella sors "{bron}". Editja s-sors u agħżel Aġġorna, jew skonnettja l-vista bħala stampa tal-mument.',

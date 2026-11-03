@@ -97,7 +97,12 @@ Extensions → Transcription and recording*). The profile holds a base
 URL, a display name, an optional separate *live endpoint*, and the
 opt-ins below. An API key, when the server needs one, lives in the
 system keychain — never in the settings blob — and travels only in the
-`Authorization` header, and only on `https` endpoints.
+`Authorization` header, and only over `https`/`wss` or to this machine
+itself. With a key set, a plain `http`/`ws` route to another host is
+refused before anything is sent, rather than putting the key on the
+network in the clear. *(Corrected 2026-11-03, #2758: this sentence
+already promised `https`-only, but the key also went out over plain
+`http` to a LAN server.)*
 
 Three destination tiers, each with its own visible consent:
 

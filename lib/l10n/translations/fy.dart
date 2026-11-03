@@ -656,6 +656,8 @@ const _dutchSourceAddFy = {
       'Ien HTML-bestân mei echte tekst, koppen en alt-teksten, dat yn elke browser iepent sûnder ynternet — mei tabellen, wiskunde, mermaid en grafiken.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Wurkje live oan in presintaasje op in WebDAV-server. Standert út. Bewurkingen reizgje fia in wurkmap njonken it deck op deselde server — sûner fersifering troch OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'In API-kaai giet allinnich oer https of nei dit apparaat sels — brûk https of lit de kaai leech',
   'Ga naar de brontabel': 'Gean nei de boarnetabel',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Dizze tabel is in ôfskrift fan de boarnetabel "{bron}". Bewurkje de boarne en kies Fernije, of untkeppelje de werjefte as momintopname.',

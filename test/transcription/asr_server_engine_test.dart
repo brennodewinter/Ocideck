@@ -277,6 +277,67 @@ void main() {
     });
   });
 
+  group('de sleutel alleen over TLS of naar dit apparaat (#2758)', () {
+    AsrServerEngine lanEngine(
+      FakeTransport t, {
+      String url = 'http://192.168.1.20:8080',
+      String? key = 's3cr3t',
+    }) => AsrServerEngine(
+      profile: AsrServerProfile(
+        enabled: true,
+        mode: AsrServerMode.lan,
+        trustedInternal: true,
+        baseUrl: url,
+        name: 'lan',
+      ),
+      transport: t,
+      audioReader: (p) async => fakeAudio(),
+      apiKeyReader: () async => key,
+    );
+    const lanOptions = TranscriptionOptions(
+      serverConsent: ServerConsent(host: '192.168.1.20', audioPath: 'mem:a1'),
+    );
+
+    test('kale http naar het LAN mét sleutel vertrekt niet', () async {
+      final t = FakeTransport();
+      await expectLater(
+        lanEngine(t).transcribe(ref, lanOptions),
+        throwsA(
+          isA<ServerRefused>().having(
+            (e) => e.message,
+            'message',
+            contains('keyNeedsTls'),
+          ),
+        ),
+      );
+      expect(t.method, isNull, reason: 'er mag niets verstuurd zijn');
+    });
+
+    test('de probe benoemt de reden en verstuurt niets', () async {
+      final t = FakeTransport();
+      final probe = await lanEngine(t).probe();
+      expect(probe.status, AsrProbeStatus.refused);
+      expect(probe.detail, 'keyNeedsTls');
+      expect(t.method, isNull);
+    });
+
+    test('kale http naar het LAN zonder sleutel werkt als vanouds', () async {
+      final t = FakeTransport();
+      await lanEngine(t, key: null).transcribe(ref, lanOptions);
+      expect(t.method, 'POST');
+      expect(t.headers!.keys, isNot(contains('authorization')));
+    });
+
+    test('https naar het LAN draagt de sleutel', () async {
+      final t = FakeTransport();
+      await lanEngine(
+        t,
+        url: 'https://192.168.1.20:8443',
+      ).transcribe(ref, lanOptions);
+      expect(t.headers!['authorization'], 'Bearer s3cr3t');
+    });
+  });
+
   test('de batchserver heeft geen live-route', () async {
     final caps = await engine(FakeTransport()).capabilities();
     expect(caps.streaming, isFalse);

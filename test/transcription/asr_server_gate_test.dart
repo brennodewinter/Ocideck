@@ -274,4 +274,19 @@ void main() {
       expect(a!.strategy, AiResolveStrategy.publicGuarded);
     });
   });
+
+  test('een sleutel reist alleen versleuteld of naar dit apparaat (#2758)', () {
+    bool travels(String url, AiResolveStrategy strategy) =>
+        AsrServerGate.keyMayTravel(AsrGateAllow(Uri.parse(url), strategy));
+    const lan = AiResolveStrategy.trustedPrivate;
+    expect(travels('http://192.168.1.20:8080', lan), isFalse);
+    expect(travels('ws://192.168.1.20:2700', lan), isFalse);
+    expect(travels('https://192.168.1.20:8443', lan), isTrue);
+    expect(travels('wss://192.168.1.20:2700', lan), isTrue);
+    expect(travels('http://127.0.0.1:8080', lan), isTrue);
+    expect(
+      travels('http://localhost:8080', AiResolveStrategy.loopbackDirect),
+      isTrue,
+    );
+  });
 }

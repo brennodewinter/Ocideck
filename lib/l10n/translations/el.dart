@@ -1634,6 +1634,8 @@ const _dutchSourceAddEl = <String, String>{
       'Ένα αρχείο HTML με πραγματικό κείμενο, επικεφαλίδες και εναλλακτικά κείμενα, που ανοίγει σε οποιοδήποτε πρόγραμμα περιήγησης χωρίς διαδίκτυο — με πίνακες, μαθηματικά, mermaid και γραφήματα.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
       'Συνεργαστείτε ζωντανά σε μια παρουσίαση σε διακομιστή WebDAV. Απενεργοποιημένο από προεπιλογή. Οι αλλαγές ταξιδεύουν μέσω ενός φακέλου εργασίας δίπλα στο deck στον ίδιο διακομιστή — χωρίς κρυπτογράφηση από το OciDeck.',
+  'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
+      'Ένα κλειδί API ταξιδεύει μόνο μέσω https ή προς αυτήν τη συσκευή — χρησιμοποιήστε https ή αφήστε το κλειδί κενό',
   'Ga naar de brontabel': 'Μετάβαση στον πίνακα προέλευσης',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Αυτός ο πίνακας είναι αντίγραφο του πίνακα προέλευσης "{bron}". Επεξεργαστείτε την προέλευση και επιλέξτε Ανανέωση, ή αποσυνδέστε την προβολή ως στιγμιότυπο.',
