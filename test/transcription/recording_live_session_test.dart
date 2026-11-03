@@ -40,9 +40,25 @@ class _Staging implements RecordingStaging {
   Future<List<String>> listSessionDirs() async => const [];
 }
 
-class _MemoryStaging extends _Staging {
+/// Geen stagingmap: de `stagingDir==null`-route (_mixMem) van de callopname,
+/// zonder schijf — de web-productieroute, hier op native te maken (#2792).
+class _NullStaging implements RecordingStaging {
+  const _NullStaging();
+
   @override
   Future<String?> createSessionDir() async => null;
+
+  @override
+  Future<void> discardDir(String? dir) async {}
+
+  @override
+  Future<void> sweep({required Duration maxAge}) async {}
+
+  @override
+  Future<void> discardAll() async {}
+
+  @override
+  Future<List<String>> listSessionDirs() async => const [];
 }
 
 class _Profile extends AsrServerProfileNotifier {
@@ -335,10 +351,17 @@ void main() {
   });
 
   test('de tikteller publiceert eens per vijftig tikken (#2760)', () async {
-    // Echte klok voor de mixer; de teller heeft geen schijf nodig. De
-    // duurzame WAV wordt apart getoetst in de callaudio-opnametest hieronder.
+    // Echte tijd, geen widgettest: de mixer pacet op de klok en schrijft elke
+    // tik naar schijf, en onder een nepklok kwam er zo maar één tik per
+    // zestien pumps door.
+    // #2792: de geheugenroute (stagingDir=null) i.p.v. _DirStaging — deze
+    // test bewijst de publicatiefrequentie, niet de WAV-opslag (die hebben
+    // eigen proeven hieronder), en vijftig tikken met honderd flushes
+    // maakten de uitslag afhankelijk van schijfsnelheid.
     final c = ProviderContainer(
-      overrides: [recordingStagingProvider.overrideWithValue(_MemoryStaging())],
+      overrides: [
+        recordingStagingProvider.overrideWithValue(const _NullStaging()),
+      ],
     );
     addTearDown(c.dispose);
     final session = await _joinFakeCall();
