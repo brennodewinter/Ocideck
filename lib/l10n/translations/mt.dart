@@ -1623,6 +1623,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Onderteken git-commits': 'Iffirma l-git commits',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Iffirma l-commits bil-muftieħ li git diġà juża fuq din il-magna.',
+  'getekend en gecontroleerd': 'iffirmat u verifikat',
+  'getekend (hier niet te controleren)':
+      'iffirmat (ma jistax jiġi vverifikat hawn)',
+  'ongetekend': 'mhux iffirmat',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} f\'dan il-{veld}. Iftaħ ir-rapport u l-biċċa tkun magħżula fit-test.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

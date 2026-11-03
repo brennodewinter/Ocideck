@@ -652,6 +652,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Onderteken git-commits': 'Signer les commits git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Signer les commits avec la clé que git utilise déjà sur cette machine.',
+  'getekend en gecontroleerd': 'signé et vérifié',
+  'getekend (hier niet te controleren)': 'signé (non vérifiable ici)',
+  'ongetekend': 'non signé',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} dans ce {veld}. Ouvrez la notification, le passage est alors sélectionné dans le texte.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

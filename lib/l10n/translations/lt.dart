@@ -1611,6 +1611,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Onderteken git-commits': 'Pasirašyti git įrašus',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Pasirašykite įrašus raktu, kurį git jau naudoja šiame kompiuteryje.',
+  'getekend en gecontroleerd': 'pasirašyta ir patikrinta',
+  'getekend (hier niet te controleren)': 'pasirašyta (čia negalima patikrinti)',
+  'ongetekend': 'nepasirašyta',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} šiame {veld}. Atidarykite pranešimą — fragmentas bus pažymėtas tekste.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

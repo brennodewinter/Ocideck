@@ -652,6 +652,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Onderteken git-commits': 'Git-commits ûndertekenje',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Teken commits mei de kaai dy\'t git op dizze masine al brûkt.',
+  'getekend en gecontroleerd': 'tekene en kontrolearre',
+  'getekend (hier niet te controleren)': 'tekene (hjir net te kontrolearjen)',
+  'ongetekend': 'ûntekene',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} yn dizze {veld}. Iepenje de melding, dan stiet it stik selektearre yn de tekst.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

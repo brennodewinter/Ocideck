@@ -1620,6 +1620,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Onderteken git-commits': 'Підписувати git-коміти',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Підписуйте коміти ключем, яким git уже користується на цій машині.',
+  'getekend en gecontroleerd': 'підписано та перевірено',
+  'getekend (hier niet te controleren)': 'підписано (тут не перевірити)',
+  'ongetekend': 'непідписано',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} у цьому {veld}. Відкрийте повідомлення — фрагмент буде виділено в тексті.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

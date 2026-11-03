@@ -1605,6 +1605,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Onderteken git-commits': 'Allekirjoita git-commitit',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Allekirjoita commitit avaimella, jota git jo käyttää tällä koneella.',
+  'getekend en gecontroleerd': 'allekirjoitettu ja varmennettu',
+  'getekend (hier niet te controleren)':
+      'allekirjoitettu (ei varmennettavissa täällä)',
+  'ongetekend': 'allekirjoittamaton',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} tässä {veld}. Avaa ilmoitus, niin kohta on valittuna tekstissä.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

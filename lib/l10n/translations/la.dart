@@ -1620,6 +1620,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Onderteken git-commits': 'Commititiones git subsigna',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Commititiones clave subsigna qua git in hac machina iam utitur.',
+  'getekend en gecontroleerd': 'subsignatum et probatum',
+  'getekend (hier niet te controleren)': 'subsignatum (hic non probandum)',
+  'ongetekend': 'non subsignatum',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} in hoc {veld}. Nuntium aperi, tum pars in textu electa stat.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

@@ -1608,6 +1608,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Onderteken git-commits': 'Git-Commits signiere',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Signier Commits mit em Schlüssel, wo git uf däre Maschine scho bruucht.',
+  'getekend en gecontroleerd': 'signiert und verifiziert',
+  'getekend (hier niet te controleren)': 'signiert (da nöd verifizierbar)',
+  'ongetekend': 'usigniert',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} in däre {veld}. Mach d\'Mäldig uf, denn isch s\'Stück im Text markiert.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

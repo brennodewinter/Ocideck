@@ -1635,6 +1635,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Onderteken git-commits': 'Sínigh commitanna git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Sínigh commits leis an eochair a úsáideann git cheana féin ar an meaisín seo.',
+  'getekend en gecontroleerd': 'sínithe agus deimhnithe',
+  'getekend (hier niet te controleren)':
+      'sínithe (ní féidir a dheimhniú anseo)',
+  'ongetekend': 'gan shíniú',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} sa {veld} seo. Oscail an fógra agus tá an píosa roghnaithe sa téacs.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

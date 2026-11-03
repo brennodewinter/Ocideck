@@ -1624,6 +1624,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Onderteken git-commits': 'Подписване на git комити',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Подписвайте комитите с ключа, който git вече използва на тази машина.',
+  'getekend en gecontroleerd': 'подписано и проверено',
+  'getekend (hier niet te controleren)':
+      'подписано (не може да се провери тук)',
+  'ongetekend': 'неподписано',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} в това {veld}. Отворете съобщението и парчето е избрано в текста.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

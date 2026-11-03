@@ -280,6 +280,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       minRequiredExportTlpKey: prefs.getString('minRequiredExportTlp'),
       requireClassificationOnExport:
           prefs.getBool('requireClassificationOnExport') ?? false,
+      // #2750: commits ondertekenen met user.signingkey — standaard uit.
+      gitSignCommits: prefs.getBool('gitSignCommits') ?? false,
       classificationWatermarkEnabled:
           prefs.getBool('classificationWatermarkEnabled') ?? false,
       // Standaard AAN: een privacycontrole die je eerst moet aanzetten, helpt
@@ -537,6 +539,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   // het regelplafond van deze klasse.
   Future<void> setRequireClassificationOnExport(bool enabled) =>
       _applyRequireClassificationOnExport(this, enabled);
+
+  Future<void> setGitSignCommits(bool enabled) async {
+    state = state.copyWith(gitSignCommits: enabled);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('gitSignCommits', enabled);
+  }
 
   // Documentmodus-stijl — het echte werk staat top-level in
   // parts/settings_provider_document_style.dart, zodat het niet meetelt voor

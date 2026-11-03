@@ -20,10 +20,11 @@ import 'outbox.dart';
 /// deze hook die om naar `repo:`-verwijzingen en levert de bijbehorende blobs,
 /// zodat de commit compleet is. Gooit [GitForgeException] als het poolen de
 /// forge nodig heeft en die er niet is — dan blijft het deck in de wachtrij.
-typedef DeckFilePreparer = Future<Map<String, Uint8List>> Function(
-  PendingCommit commit,
-  Map<String, Uint8List> stored,
-);
+typedef DeckFilePreparer =
+    Future<Map<String, Uint8List>> Function(
+      PendingCommit commit,
+      Map<String, Uint8List> stored,
+    );
 
 /// Hoe één deck uit de wachtrij afliep.
 enum SyncStatus {

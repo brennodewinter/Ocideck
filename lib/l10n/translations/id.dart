@@ -1605,6 +1605,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Onderteken git-commits': 'Tandatangani commit git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Tandatangani commit dengan kunci yang sudah dipakai git di mesin ini.',
+  'getekend en gecontroleerd': 'ditandatangani dan diverifikasi',
+  'getekend (hier niet te controleren)':
+      'ditandatangani (tidak dapat diverifikasi di sini)',
+  'ongetekend': 'tidak ditandatangani',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} di {veld} ini. Buka temuannya, maka bagian itu terseleksi dalam teks.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

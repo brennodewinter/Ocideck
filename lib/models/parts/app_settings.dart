@@ -195,6 +195,9 @@ class AppSettings {
   /// Standaard uit. Kan samen met [minRequiredExportTlpKey] worden gebruikt.
   final bool requireClassificationOnExport;
 
+  /// #2750: git-commits ondertekenen met `user.signingkey`. Standaard uit.
+  final bool gitSignCommits;
+
   /// Diagonaal classificatie-watermerk op slides (fase 2). Standaard uit.
   final bool classificationWatermarkEnabled;
 
@@ -410,6 +413,7 @@ class AppSettings {
     this.maxReleaseExportTlpKey,
     this.minRequiredExportTlpKey,
     this.requireClassificationOnExport = false,
+    this.gitSignCommits = false,
     this.classificationWatermarkEnabled = false,
     this.privacyChecksEnabled = true,
     this.privacyImageFaceDetection = true,
@@ -531,6 +535,7 @@ class AppSettings {
     String? maxReleaseExportTlpKey,
     String? minRequiredExportTlpKey,
     bool? requireClassificationOnExport,
+    bool? gitSignCommits,
     bool? classificationWatermarkEnabled,
     bool? privacyChecksEnabled,
     bool? privacyImageFaceDetection,
@@ -616,6 +621,7 @@ class AppSettings {
           : (minRequiredExportTlpKey ?? this.minRequiredExportTlpKey),
       requireClassificationOnExport:
           requireClassificationOnExport ?? this.requireClassificationOnExport,
+      gitSignCommits: gitSignCommits ?? this.gitSignCommits,
       classificationWatermarkEnabled:
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,

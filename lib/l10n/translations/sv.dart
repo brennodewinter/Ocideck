@@ -1604,6 +1604,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Onderteken git-commits': 'Signera git-commits',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Signera commits med den nyckel git redan använder på den här maskinen.',
+  'getekend en gecontroleerd': 'signerat och verifierat',
+  'getekend (hier niet te controleren)': 'signerat (kan inte verifieras här)',
+  'ongetekend': 'osignerat',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} i detta {veld}. Öppna meddelandet så är stycket markerat i texten.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

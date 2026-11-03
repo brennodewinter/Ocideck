@@ -651,6 +651,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Onderteken git-commits': 'Firma e commitnan di git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Firma commitnan ku e klave ku git ta usa riba e makina aki.',
+  'getekend en gecontroleerd': 'firmá i kontrolá',
+  'getekend (hier niet te controleren)': 'firmá (no por kontrolá aki)',
+  'ongetekend': 'no firmá',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} den e {veld} aki. Habri e rapòrt i e parti keda selesioná den e teksto.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

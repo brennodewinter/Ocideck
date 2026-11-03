@@ -1617,6 +1617,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Onderteken git-commits': 'Podpisuj commity gita',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Podpisuj commity kluczem, którego git już używa na tym komputerze.',
+  'getekend en gecontroleerd': 'podpisane i zweryfikowane',
+  'getekend (hier niet te controleren)':
+      'podpisane (nie do zweryfikowania tutaj)',
+  'ongetekend': 'niepodpisane',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} w tym {veld}. Otwórz zgłoszenie, a fragment będzie zaznaczony w tekście.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

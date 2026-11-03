@@ -1630,6 +1630,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Onderteken git-commits': 'Υπογραφή commit git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Υπογράψτε τα commit με το κλειδί που το git ήδη χρησιμοποιεί σε αυτό το μηχάνημα.',
+  'getekend en gecontroleerd': 'υπογεγραμμένο και επαληθευμένο',
+  'getekend (hier niet te controleren)': 'υπογεγραμμένο (μη επαληθεύσιμο εδώ)',
+  'ongetekend': 'μη υπογεγραμμένο',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} σε αυτό το {veld}. Ανοίξτε την ειδοποίηση και το τμήμα επιλέγεται στο κείμενο.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

@@ -1607,6 +1607,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Onderteken git-commits': 'Git-commitok aláírása',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Írja alá a commitokat azzal a kulccsal, amelyet a git már használ ezen a gépen.',
+  'getekend en gecontroleerd': 'aláírt és ellenőrzött',
+  'getekend (hier niet te controleren)': 'aláírt (itt nem ellenőrizhető)',
+  'ongetekend': 'aláíratlan',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} ebben a {veld}. Nyissa meg a jelzést, és a rész ki van jelölve a szövegben.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

@@ -2513,6 +2513,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Onderteken git-commits': 'Git commit\'lerini imzala',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Commit\'leri git\'in bu makinede zaten kullandığı anahtarla imzalayın.',
+  'getekend en gecontroleerd': 'imzalı ve doğrulanmış',
+  'getekend (hier niet te controleren)': 'imzalı (burada doğrulanamaz)',
+  'ongetekend': 'imzasız',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       'Bu {veld} içinde {regel}. Bildirimi açın, parça metinde seçili olur.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

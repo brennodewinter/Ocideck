@@ -1621,6 +1621,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Onderteken git-commits': 'Semnează commiturile git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Semnați commiturile cu cheia pe care git o folosește deja pe această mașină.',
+  'getekend en gecontroleerd': 'semnat și verificat',
+  'getekend (hier niet te controleren)': 'semnat (neverificabil aici)',
+  'ongetekend': 'nesemnat',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} în acest {veld}. Deschideți notificarea și fragmentul este selectat în text.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

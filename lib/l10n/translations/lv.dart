@@ -1603,6 +1603,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Onderteken git-commits': 'Parakstīt git komītus',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Parakstiet komītus ar atslēgu, ko git jau izmanto šajā mašīnā.',
+  'getekend en gecontroleerd': 'parakstīts un pārbaudīts',
+  'getekend (hier niet te controleren)': 'parakstīts (šeit nevar pārbaudīt)',
+  'ongetekend': 'neparakstīts',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} šajā {veld}. Atveriet paziņojumu, tad fragments ir atlasīts tekstā.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

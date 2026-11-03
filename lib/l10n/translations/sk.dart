@@ -1611,6 +1611,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Onderteken git-commits': 'Podpisovať git commity',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Podpisujte commity kľúčom, ktorý git na tomto počítači už používa.',
+  'getekend en gecontroleerd': 'podpísané a overené',
+  'getekend (hier niet te controleren)': 'podpísané (tu sa nedá overiť)',
+  'ongetekend': 'nepodpísané',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} v tomto {veld}. Otvorte hlásenie a časť je označená v texte.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

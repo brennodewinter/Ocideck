@@ -1605,6 +1605,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Onderteken git-commits': 'Underskriv git-commits',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Underskriv commits med den nøgle, git allerede bruger på denne maskine.',
+  'getekend en gecontroleerd': 'underskrevet og verificeret',
+  'getekend (hier niet te controleren)':
+      'underskrevet (kan ikke verificeres her)',
+  'ongetekend': 'ikke underskrevet',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} i denne {veld}. Åbn meddelelsen, så er stykket markeret i teksten.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

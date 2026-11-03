@@ -1605,6 +1605,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Onderteken git-commits': 'Podpisuj git commit-e',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Podpisujte commit-e s ključem, ki ga git že uporablja na tem računalniku.',
+  'getekend en gecontroleerd': 'podpisano in preverjeno',
+  'getekend (hier niet te controleren)':
+      'podpisano (tukaj ni mogoče preveriti)',
+  'ongetekend': 'nepodpisano',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} v tem {veld}. Odprite obvestilo in del je izbran v besedilu.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

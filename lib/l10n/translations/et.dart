@@ -1598,6 +1598,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Onderteken git-commits': 'Allkirjasta git-commitid',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Allkirjasta commitid võtmega, mida git juba sellel masinal kasutab.',
+  'getekend en gecontroleerd': 'allkirjastatud ja kontrollitud',
+  'getekend (hier niet te controleren)':
+      'allkirjastatud (siin ei saa kontrollida)',
+  'ongetekend': 'allkirjastamata',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} selles {veld}. Avage teavitus, siis on tekstis lõik valitud.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

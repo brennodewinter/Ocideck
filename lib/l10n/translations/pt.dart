@@ -1633,6 +1633,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Onderteken git-commits': 'Assinar commits do git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Assine os commits com a chave que o git já usa nesta máquina.',
+  'getekend en gecontroleerd': 'assinado e verificado',
+  'getekend (hier niet te controleren)': 'assinado (não verificável aqui)',
+  'ongetekend': 'não assinado',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} neste {veld}. Abra o aviso e o trecho fica selecionado no texto.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':

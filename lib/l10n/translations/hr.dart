@@ -1609,6 +1609,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Onderteken git-commits': 'Potpiši git commitove',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Potpiši commitove ključem koji git već koristi na ovom računalu.',
+  'getekend en gecontroleerd': 'potpisano i provjereno',
+  'getekend (hier niet te controleren)':
+      'potpisano (ovdje se ne može provjeriti)',
+  'ongetekend': 'nepotpisano',
   '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
       '{regel} u ovoj {veld}. Otvori obavijest i dio je označen u tekstu.',
   '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
