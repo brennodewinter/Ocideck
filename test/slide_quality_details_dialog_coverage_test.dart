@@ -104,7 +104,7 @@ void main() {
                   SlideQualityAction(
                     label: 'Splits',
                     icon: Icons.call_split,
-                    run: () => ran = true,
+                    run: (_) => ran = true,
                   ),
                 ]
               : const [],
