@@ -111,7 +111,13 @@ class ConsumerImagesTest(unittest.TestCase):
             directory = Path(temporary)
             docker = directory / 'docker'
             docker.write_text('''#!/usr/bin/env python3
-import json,os,sys
+import json,os,sys,pathlib
+if sys.argv[1]=='push' and not pathlib.Path(os.environ['MUTATE_MARKER']).exists():
+ pathlib.Path(os.environ['MUTATE_RECIPE']).write_text('# MUTATED AFTER SOURCE CHECK\\n')
+ pathlib.Path(os.environ['MUTATE_MARKER']).touch()
+if sys.argv[1]=='build':
+ context=pathlib.Path(sys.argv[-1])
+ assert 'MUTATED' not in (context/'rpm.Dockerfile').read_text()
 with open(os.environ['DOCKER_CALLS'],'a') as f:f.write(json.dumps(sys.argv[1:])+'\\n')
 if sys.argv[1:3]==['image','inspect']:
  print(json.dumps([sys.argv[3].rsplit(':',1)[0]+'@sha256:'+'a'*64]))
@@ -130,6 +136,7 @@ if sys.argv[1:3]==['image','inspect']:
             git('add', '.')
             git('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'verified source')
             revision = git('rev-parse', 'HEAD')
+            env.update(MUTATE_RECIPE=str(source / 'scripts/release_consumers/rpm.Dockerfile'), MUTATE_MARKER=str(directory / 'mutated'))
             command = ['bash', str(source / 'scripts/build_release_consumer_images.sh'), 'registry.invalid/test', revision, str(output)]
             result = subprocess.run(command, env=env, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -137,6 +144,8 @@ if sys.argv[1:3]==['image','inspect']:
             self.assertEqual(set(receipt['images']), set(PROFILES))
             self.assertTrue(all(re.fullmatch(r'registry.invalid/test/ocideck-consumer-[a-z0-9]+@sha256:a{64}', image) for image in receipt['images'].values()))
             self.assertEqual(receipt['source'], revision)
+            self.assertIn('MUTATED', (source / 'scripts/release_consumers/rpm.Dockerfile').read_text())
+            git('checkout', '--', 'scripts/release_consumers/rpm.Dockerfile')
             recorded = [json.loads(line) for line in calls.read_text().splitlines()]
             self.assertEqual(sum(call[0] == 'push' for call in recorded), 6)
             for call in recorded:

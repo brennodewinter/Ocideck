@@ -14,11 +14,15 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 [[ -z "$(git -C "$ROOT" ls-files --others --ignored --exclude-standard -- scripts/release_consumers)" ]] || { echo 'Ignored files in consumer build context' >&2; exit 1; }
 WORK="$(mktemp -d)"
 trap 'rm -rf -- "$WORK"' EXIT
+# Keep all six builds on one immutable snapshot even if another checkout changes.
+git -C "$ROOT" archive "$REVISION" scripts/release_consumers | tar -xf - -C "$WORK"
+CONTEXT="$WORK/scripts/release_consumers"
+[[ -z "$(find "$CONTEXT" -type l -print -quit)" ]] || { echo 'Consumer context contains symlinks' >&2; exit 1; }
 for profile in deb rpm tar debian12 appimage flatpak; do
   image="$REGISTRY/ocideck-consumer-$profile:$REVISION"
   DOCKER_BUILDKIT=0 docker build --platform linux/amd64 \
     --cpu-period 100000 --cpu-quota 200000 --memory 4g --build-arg "SOURCE_REVISION=$REVISION" \
-    -f "$ROOT/scripts/release_consumers/$profile.Dockerfile" -t "$image" "$ROOT/scripts/release_consumers"
+    -f "$CONTEXT/$profile.Dockerfile" -t "$image" "$CONTEXT"
   docker run --rm --platform linux/amd64 "$image" sh -ec \
     'test -s /usr/share/ocideck-consumer/packages.txt; command -v node; command -v sha256sum'
   # Registry credentials come from Docker's credential store; never argv or Git.
