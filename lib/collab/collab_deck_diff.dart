@@ -195,6 +195,7 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.skipped => slide.skipped,
     SlideField.isDetail => slide.isDetail,
     SlideField.tableEditable => slide.tableEditable,
+    SlideField.tableRows => slide.tableRows,
     SlideField.tableMarkOverdue => slide.tableMarkOverdue,
     SlideField.videoStartMs => slide.videoStartMs,
     SlideField.videoEndMs => slide.videoEndMs,
