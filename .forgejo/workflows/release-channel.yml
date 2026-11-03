@@ -1,5 +1,8 @@
 # Alleen handmatig; maakt kandidaatbestanden, nooit tags of publieke releases.
 name: Onafhankelijke releasekandidaat
+concurrency:
+  group: release-channel-${{ inputs.tag }}-${{ inputs.channel }}
+  cancel-in-progress: false
 on:
   workflow_dispatch:
     inputs:

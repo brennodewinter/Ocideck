@@ -1557,6 +1557,12 @@ The experimental operation CLI is `tool/release_channel_controller.py`. Use
 `plan`, then `start` with `--state-dir`, `--tag`, `--sha`, `--controller-sha` and
 `--channel`. `start` saves a random operation ID and immutable source,
 controller, channel and frozen-ref identity before its single workflow dispatch.
+The supported CLI route first creates a unique remote build-claim branch for
+that version and channel. An existing claim, a lost create response or a changed
+`main` blocks dispatch. The claim stays until `hervat` or `stop` has confirmed
+the exact Forgejo run and all owned Windows children terminal; its release uses
+a durable one-shot delete intent, so an uncertain delete is never repeated.
+Direct manual workflow dispatch does not carry this ownership guarantee.
 `status` reads the saved operation and remote jobs without changing state;
 `hervat` records the observed run and never dispatches again. If the dispatch
 response is lost and no exact operation ID appears in Forgejo, the state stays

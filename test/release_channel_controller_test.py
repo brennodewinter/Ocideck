@@ -4,6 +4,7 @@ import io
 from pathlib import Path
 import sys
 import tempfile
+from urllib.parse import unquote
 from types import SimpleNamespace
 import unittest
 import zipfile
@@ -17,11 +18,14 @@ class FakeForge:
     def __init__(self, run=None):
         self.run = run
         self.posts = []
+        self.branches = {}
         self.jobs = [{'name': 'build', 'status': 'success', 'started_at': 'now', 'completed_at': 'later'}]
 
     def get(self, path):
         if path == '/git/refs/heads/main':
             return {'ref': 'refs/heads/main', 'object': {'sha': 'b' * 40}}
+        if path.startswith('/branches/'):
+            return self.branches[unquote(path.removeprefix('/branches/'))]
         if path.startswith('/actions/runs?'):
             return {'workflow_runs': [] if self.run is None else [{'id': self.run['id']}]}
         if path.endswith('/jobs'):
@@ -46,6 +50,18 @@ class FakeForge:
             self.run['status'] = 'cancelled'
         return None
 
+    def branch_mutation(self, path, method, payload=None, expected=201):
+        if method == 'POST':
+            name = payload['new_branch_name']
+            if name in self.branches:
+                raise ValueError('Forgejo branch HTTP 409')
+            branch = {'name': name, 'commit': {'id': payload['old_ref_name']}}
+            self.branches[name] = branch
+            return branch
+        name = unquote(path.removeprefix('/branches/'))
+        del self.branches[name]
+        return None
+
 
 class ControllerTest(unittest.TestCase):
     def setUp(self):
@@ -54,6 +70,10 @@ class ControllerTest(unittest.TestCase):
         self.args = SimpleNamespace(state_dir=Path(self.temp.name), tag='v0.7.7', sha='a' * 40,
             controller_sha='b' * 40, channel='web', operation_id='ab12cd34')
         self.wanted = control.identity(self.args)
+
+    def reserve_claimed(self, api):
+        control.reserve(self.args)
+        control.claim(self.args, api, self.wanted)
 
     def run_info(self, status='running', **inputs):
         values = {'operation_id': self.args.operation_id, 'tag': self.args.tag,
@@ -64,8 +84,9 @@ class ControllerTest(unittest.TestCase):
             'commit_sha': self.args.controller_sha, 'prettyref': 'main',
             'trigger_event': 'workflow_dispatch',
             'event_payload': json.dumps({'inputs': values, 'ref': 'main'}),
-            'status': status, 'created_at': '2026-11-03T08:00:00Z',
-            'updated_at': '2026-11-03T08:01:00Z'}
+            'status': status, 'created': '2026-11-03T08:00:00Z',
+            'updated': '2026-11-03T08:01:00Z', 'started': '2026-11-03T08:00:05Z',
+            'stopped': '2026-11-03T08:01:00Z', 'duration': 55}
 
     def test_start_persists_identity_before_one_dispatch(self):
         api = FakeForge()
@@ -123,12 +144,58 @@ class ControllerTest(unittest.TestCase):
         self.assertEqual([], api.posts)
         self.assertEqual(self.wanted, control.read_operation(self.args))
 
+    def test_two_state_directories_share_one_remote_build_claim(self):
+        api = FakeForge()
+        control.start(self.args, api)
+        second = SimpleNamespace(**vars(self.args))
+        second.state_dir = self.args.state_dir / 'other-host'
+        second.operation_id = 'other-op'
+        with self.assertRaisesRegex(ValueError, '409'):
+            control.start(second, api)
+        self.assertEqual(1, len(api.posts))
+        self.assertFalse(control.claim_path(second, 'owned').exists())
+
+    def test_unknown_create_never_dispatches_or_claims_ownership(self):
+        api = FakeForge()
+        original = api.branch_mutation
+        def lost(path, method, payload=None, expected=201):
+            result = original(path, method, payload, expected)
+            if method == 'POST':
+                raise ValueError('lost 201 response')
+            return result
+        api.branch_mutation = lost
+        with self.assertRaisesRegex(ValueError, 'lost 201'):
+            control.start(self.args, api)
+        self.assertTrue(control.claim_path(self.args, 'intent').is_file())
+        self.assertFalse(control.claim_path(self.args, 'owned').exists())
+        self.assertEqual([], api.posts)
+
+    def test_unknown_delete_never_repeats_against_recreated_claim(self):
+        api = FakeForge(self.run_info('success'))
+        self.reserve_claimed(api)
+        original = api.branch_mutation
+        def lost(path, method, payload=None, expected=201):
+            result = original(path, method, payload, expected)
+            if method == 'DELETE':
+                raise ValueError('lost 204 response')
+            return result
+        api.branch_mutation = lost
+        with self.assertRaisesRegex(ValueError, 'lost 204'):
+            control.hervat(self.args, api)
+        branch = control.claim_name(self.wanted)
+        api.branches[branch] = {'name': branch, 'commit': {'id': self.args.controller_sha}}
+        with self.assertRaisesRegex(ValueError, 'never repeat DELETE'):
+            control.hervat(self.args, api)
+        self.assertIn(branch, api.branches)
+
     def test_exact_reconciliation_and_history(self):
         api = FakeForge(self.run_info('success'))
-        control.reserve(self.args)
+        self.reserve_claimed(api)
         result = control.hervat(self.args, api)
         self.assertEqual('success', result['build_metadata'])
         self.assertEqual('unverified', result['artifact_bytes'])
+        self.assertEqual('2026-11-03T08:00:05Z', result['runs'][0]['started'])
+        self.assertEqual(55, result['runs'][0]['duration'])
         history = control.release_journal.read(self.args.state_dir / self.args.tag / 'web.json')['events']
         self.assertEqual(['started', 'completed', 'started', 'completed'], [e['state'] for e in history])
         self.assertEqual('build', history[-1]['phase'])
@@ -139,7 +206,7 @@ class ControllerTest(unittest.TestCase):
             {'name': 'build', 'status': 'success', 'started_at': 'first', 'completed_at': 'second'},
             {'name': 'evidence', 'status': 'failure', 'started_at': 'third', 'completed_at': 'fourth'},
         ]
-        control.reserve(self.args)
+        self.reserve_claimed(api)
         result = control.hervat(self.args, api)
         self.assertEqual({'job': 'evidence', 'status': 'failure',
                           'started_at': 'third', 'completed_at': 'fourth'},
@@ -168,7 +235,7 @@ class ControllerTest(unittest.TestCase):
 
     def test_stop_only_exact_run_and_confirms_terminal(self):
         api = FakeForge(self.run_info())
-        control.reserve(self.args)
+        self.reserve_claimed(api)
         result = control.stop(self.args, api)
         self.assertEqual([(control.WORKFLOW and '/actions/runs/42/cancel', {})], api.posts)
         self.assertEqual('cancelled', result['runs'][0]['status'])
@@ -179,7 +246,7 @@ class ControllerTest(unittest.TestCase):
         run = self.run_info()
         run['commit_sha'] = 'c' * 40
         api = FakeForge(run)
-        control.reserve(self.args)
+        self.reserve_claimed(api)
         with self.assertRaisesRegex(ValueError, 'different run identity'):
             control.status(self.args, api)
         result = control.stop(self.args, api)
@@ -217,6 +284,30 @@ class ControllerTest(unittest.TestCase):
         self.assertEqual(command[command.index('--controller-sha') + 1], self.args.controller_sha)
         self.assertEqual([], result['github']['runs'])
 
+    def test_windows_unknown_child_proof_keeps_remote_build_claim(self):
+        self.args.channel = 'windows'
+        self.wanted = control.identity(self.args)
+        api = FakeForge(self.run_info('success'))
+        self.reserve_claimed(api)
+        with patch.object(control.subprocess, 'run', return_value=SimpleNamespace(
+                stdout=json.dumps({'terminal': False, 'unknown': True, 'runs': []}), returncode=2)):
+            control.hervat(self.args, api)
+        self.assertIn(control.claim_name(self.wanted), api.branches)
+        self.assertFalse(control.claim_path(self.args, 'release-intent').exists())
+
+    def test_windows_reused_green_children_release_remote_build_claim(self):
+        self.args.channel = 'windows'
+        self.wanted = control.identity(self.args)
+        api = FakeForge(self.run_info('success'))
+        self.reserve_claimed(api)
+        green = {'terminal': True, 'unknown': False, 'selected_verified': True,
+                 'selected_runs': {'release.yml': 20, 'windows-test-check.yml': 10}, 'runs': []}
+        with patch.object(control.subprocess, 'run', return_value=SimpleNamespace(
+                stdout=json.dumps(green), returncode=0)):
+            control.hervat(self.args, api)
+        self.assertNotIn(control.claim_name(self.wanted), api.branches)
+        self.assertTrue(control.claim_path(self.args, 'release-completed').is_file())
+
     def test_windows_publication_rejects_vacuous_terminal_result(self):
         self.args.channel = 'windows'
         self.args.run_id = 42
@@ -245,8 +336,8 @@ class ControllerTest(unittest.TestCase):
     def test_windows_stop_before_gh_dispatch_uses_closed_remote_journal(self):
         self.args.channel = 'windows'
         self.wanted = control.identity(self.args)
-        control.reserve(self.args)
         api = FakeForge(self.run_info())
+        self.reserve_claimed(api)
         with patch.object(control.subprocess, 'run', return_value=SimpleNamespace(returncode=0)) as called:
             result = control.stop(self.args, api)
         command = called.call_args.args[0]

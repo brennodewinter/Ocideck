@@ -90,6 +90,67 @@ class Forgejo:
             raise ValueError('Windows journal archive too large')
         return data
 
+    def branch_mutation(self, path, method, payload=None, expected=201):
+        request = Request(self.base + path, data=None if payload is None else json.dumps(payload).encode(),
+                          headers={'Authorization': 'token ' + self._token,
+                                   'Content-Type': 'application/json'}, method=method)
+        try:
+            with self._opener.open(request, timeout=30) as response:
+                if response.status != expected:
+                    raise ValueError('unexpected Forgejo branch response')
+                body = response.read(65537)
+        except HTTPError as error:
+            raise ValueError('Forgejo branch HTTP ' + str(error.code)) from None
+        if len(body) > 65536:
+            raise ValueError('Forgejo branch response too large')
+        return json.loads(body, object_pairs_hook=release_channel.no_duplicates) if body else None
+
+
+def claim_name(wanted):
+    return 'codex/release-build-lock-' + wanted['tag'] + '-' + wanted['channel']
+
+
+def claim_path(args, suffix):
+    return operation_path(args).parent / (args.channel + '-claim-' + suffix + '.json')
+
+
+def claim(args, api, wanted):
+    branch = claim_name(wanted)
+    intent = claim_path(args, 'intent')
+    owned = claim_path(args, 'owned')
+    receipt = dict(wanted, branch=branch)
+    release_channel.immutable_write(intent, release_channel.encoded(receipt))
+    # A lost 201 may have created the branch. Only this exact response grants ownership.
+    created = api.branch_mutation('/branches', 'POST',
+        {'new_branch_name': branch, 'old_ref_name': wanted['controller']}, 201)
+    if (not isinstance(created, dict) or created.get('name') != branch
+            or created.get('commit', {}).get('id') != wanted['controller']):
+        raise ValueError('remote build claim ownership not proven')
+    release_channel.immutable_write(owned, release_channel.encoded(receipt))
+
+
+def release_claim(args, api, wanted):
+    owned = claim_path(args, 'owned')
+    intent = claim_path(args, 'release-intent')
+    complete = claim_path(args, 'release-completed')
+    receipt = dict(wanted, branch=claim_name(wanted))
+    if owned.is_symlink() or not owned.is_file() or json.loads(owned.read_text(), object_pairs_hook=release_channel.no_duplicates) != receipt:
+        raise ValueError('build claim ownership receipt missing or changed')
+    if complete.exists() or complete.is_symlink():
+        if complete.is_symlink() or json.loads(complete.read_text(), object_pairs_hook=release_channel.no_duplicates) != receipt:
+            raise ValueError('build claim release receipt differs')
+        return
+    if intent.exists() or intent.is_symlink():
+        raise ValueError('build claim release outcome unknown; never repeat DELETE')
+    branch_path = '/branches/' + quote(receipt['branch'], safe='')
+    remote = api.get(branch_path)
+    if (not isinstance(remote, dict) or remote.get('name') != receipt['branch']
+            or remote.get('commit', {}).get('id') != wanted['controller']):
+        raise ValueError('remote build claim changed; never delete')
+    release_channel.immutable_write(intent, release_channel.encoded(receipt))
+    api.branch_mutation(branch_path, 'DELETE', expected=204)
+    release_channel.immutable_write(complete, release_channel.encoded(receipt))
+
 
 def windows_state(api, wanted, run_id):
     artifacts = api.get('/actions/runs/' + str(run_id) + '/artifacts')
@@ -189,6 +250,9 @@ def runs(api, wanted, allow_controller_drift=False):
             if type(run_id) is not int or run_id <= 0 or run_id in seen:
                 raise ValueError('invalid or duplicate Forgejo run ID')
             seen.add(run_id)
+            summary_inputs = payload(summary).get('inputs')
+            if isinstance(summary_inputs, dict) and summary_inputs.get('operation_id') != wanted['operation_id']:
+                continue
             detail = api.get('/actions/runs/' + str(run_id))
             if not isinstance(detail, dict) or detail.get('id') != run_id:
                 raise ValueError('Forgejo run readback differs')
@@ -224,7 +288,9 @@ def snapshot(api, wanted):
                              'started_at': job.get('started_at'), 'completed_at': job.get('completed_at')}
                             for job in work if job.get('status') in {'failure', 'error', 'cancelled'}), None)
         entries.append({'id': run['id'], 'status': run.get('status'),
-                        'created_at': run.get('created_at'), 'updated_at': run.get('updated_at'),
+                        'created': run.get('created'), 'updated': run.get('updated'),
+                        'started': run.get('started'), 'stopped': run.get('stopped'),
+                        'duration': run.get('duration'),
                         'jobs': work, 'first_error': first_error})
     return {'operation_id': wanted['operation_id'], 'runs': entries,
             'build_metadata': 'success' if len(entries) == 1 and entries[0]['status'] == 'success' else 'unproven',
@@ -245,6 +311,7 @@ def start(args, api):
     if (not isinstance(main, dict) or main.get('ref') != 'refs/heads/main'
             or main.get('object', {}).get('sha') != args.controller_sha):
         raise ValueError('main moved from reserved controller SHA; dispatch not attempted')
+    claim(args, api, wanted)
     api.post('/actions/workflows/' + WORKFLOW + '/dispatches',
              {'ref': 'main', 'inputs': {'tag': args.tag, 'source_sha': args.sha,
                 'frozen_ref': wanted['frozen_ref'], 'channel': args.channel,
@@ -260,6 +327,8 @@ def status(args, api):
         raise ValueError('saved journal missing')
     result['history'] = release_journal.read(journal)['events']
     result['dispatch'] = 'unknown' if not result['runs'] else 'found'
+    result['build_claim'] = ('released' if claim_path(args, 'release-completed').is_file()
+                             else 'owned' if claim_path(args, 'owned').is_file() else 'unproven')
     publication = next((event for event in reversed(result['history'])
                         if event['phase'] == 'publish'), None)
     if publication is not None:
@@ -298,6 +367,10 @@ def hervat(args, api):
     if len(result['runs']) != 1:
         raise ValueError('multiple runs for one operation; inspect before resuming')
     save_observation(args, result)
+    if (result['runs'][0]['status'] in TERMINAL
+            and (args.channel != 'windows' or (result.get('github', {}).get('terminal') is True
+                                                and result['github'].get('unknown') is False))):
+        release_claim(args, api, read_operation(args))
     return result
 
 
@@ -368,6 +441,7 @@ def stop(args, api):
                     state.write_bytes(content)
                     if subprocess.run(command + ['--state', str(state)], timeout=960).returncode:
                         raise ValueError('owned GitHub runs not confirmed terminal; stop remains blocked')
+            release_claim(args, api, wanted)
             return result
         time.sleep(5)
     raise ValueError('cancel requested but terminal Forgejo state not confirmed')
