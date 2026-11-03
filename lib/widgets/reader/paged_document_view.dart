@@ -135,6 +135,33 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// De gemeten hoogte van elke voetnoot, in dezelfde volgorde als [_notes].
   List<double>? _noteHeights;
 
+  /// De verticale rol van de vellenkolom — nodig om te weten welk vel in
+  /// beeld is.
+  final ScrollController _pageScroll = ScrollController();
+
+  /// Welke vellen echt gebouwd worden (eerste..laatste index, inclusief
+  /// marge); `null` betekent "nog niet berekend", dan bouwt alleen vel 0.
+  /// #2725: elk vel bouwde het volledige document — 40 vellen was 40× een
+  /// volledige layout plus een meetboom.
+  (int, int)? _visiblePages;
+
+  /// Laatst gebruikte `fit` en bijschrifthoogte — de scrollluisteraar rekent
+  /// daarmee de zichtbare range zonder opnieuw te meten.
+  double _lastFit = 1.0;
+  double _lastCaptionHeight = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageScroll.addListener(_scheduleVisibleUpdate);
+  }
+
+  @override
+  void dispose() {
+    _pageScroll.dispose();
+    super.dispose();
+  }
+
   /// De voetnoten van dit document, genummerd in leesvolgorde — één keer
   /// ontleed per tekst, niet per opbouw. Het ontleden loopt het hele document
   /// door, en dat drie keer per frame doen is werk dat niets oplevert.
@@ -472,28 +499,30 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
                   children: [
                     const SizedBox(height: 16),
                     for (var i = 0; i < offsets.length; i++) ...[
-                      _sheet(
-                        context,
-                        document,
-                        offsets[i],
-                        // Waar dít vel ophoudt: bij het begin van het volgende, niet
-                        // een volle paginahoogte verder. Een blok dat niet meer paste
-                        // is doorgeschoven, en dan hoort de onderkant van dit vel wit
-                        // te blijven in plaats van de eerste regels van dat blok
-                        // doormidden te tonen.
-                        i + 1 < offsets.length
-                            ? offsets[i + 1] - offsets[i]
-                            : _contentHeightPx,
-                        i + 1,
-                        offsets.length,
-                        fit,
-                        notesPerPage[i],
-                        switch (timelineContinuationPages[i]) {
-                          final block? =>
-                            _timelinePagination.markerLabels[block] ?? '',
-                          null => null,
-                        },
-                      ),
+                      _isVisiblePage(i)
+                          ? _sheet(
+                              context,
+                              document,
+                              offsets[i],
+                              // Waar dít vel ophoudt: bij het begin van het volgende, niet
+                              // een volle paginahoogte verder. Een blok dat niet meer paste
+                              // is doorgeschoven, en dan hoort de onderkant van dit vel wit
+                              // te blijven in plaats van de eerste regels van dat blok
+                              // doormidden te tonen.
+                              i + 1 < offsets.length
+                                  ? offsets[i + 1] - offsets[i]
+                                  : _contentHeightPx,
+                              i + 1,
+                              offsets.length,
+                              fit,
+                              notesPerPage[i],
+                              switch (timelineContinuationPages[i]) {
+                                final block? =>
+                                  _timelinePagination.markerLabels[block] ?? '',
+                                null => null,
+                              },
+                            )
+                          : _sheetPlaceholder(i, offsets.length, fit),
                       const SizedBox(height: 16),
                     ],
                   ],
@@ -764,6 +793,84 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         ],
       ),
     );
+  }
+
+  /// Of vel [index] echt in de boom moet: binnen de viewport plus een vel
+  /// marge, of vóór de eerste meting (dan is alleen vel 0 zeker).
+  bool _isVisiblePage(int index) {
+    final range = _visiblePages;
+    if (range == null) return index == 0;
+    return index >= range.$1 && index <= range.$2;
+  }
+
+  /// Exact dezelfde buitenkant als [_sheet] — dezelfde vellumvang, dezelfde
+  /// bijschrifttext — zodat de scrollgeometrie niet verspringt wanneer een
+  /// vel de viewport in- of uitgaat (#2725). Alleen de dure documentbinnen-
+  /// kant (het volledige document in een uitgesneden venster) ontbreekt.
+  Widget _sheetPlaceholder(int index, int pageCount, double fit) {
+    final theme = Theme.of(context);
+    final (sheetW, sheetH) = _sheetPx;
+    final label = context.l10n
+        .d('Pagina {n} van {m}')
+        .replaceAll('{n}', '${index + 1}')
+        .replaceAll('{m}', '$pageCount');
+    return Semantics(
+      label: label,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            key: Key('document-sheet-placeholder-$index'),
+            width: sheetW * widget.scale * fit,
+            height: sheetH * widget.scale * fit,
+          ),
+          const SizedBox(height: 4),
+          ExcludeSemantics(
+            child: Text(
+              label,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// De hoogte van één bijschriftregel in [labelSmall] — nodig voor de
+  /// stride tussen twee vellen.
+  double _measureCaption(BuildContext context, String label) {
+    final painter = TextPainter(
+      text: TextSpan(
+        text: label,
+        style: Theme.of(context).textTheme.labelSmall,
+      ),
+      textDirection: Directionality.of(context),
+      maxLines: 1,
+    )..layout();
+    return painter.height;
+  }
+
+  /// Reken na deze frame uit welke vellen in beeld staan — de viewport is
+  /// tijdens build nog niet bekend.
+  void _scheduleVisibleUpdate() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_pageScroll.hasClients) return;
+      final position = _pageScroll.position;
+      final (sheetW, sheetH) = _sheetPx;
+      // Stap per vel: vellumvang + 4 + bijschrift + tussenruimte van 16.
+      final stride =
+          sheetH * widget.scale * _lastFit + 4 + _lastCaptionHeight + 16;
+      if (stride <= 0) return;
+      final first = ((position.pixels - 16) / stride).floor() - 1;
+      final last =
+          ((position.pixels + position.viewportDimension - 16) / stride).ceil();
+      final range = (first.clamp(0, double.infinity).toInt(), last);
+      if (range != _visiblePages) {
+        setState(() => _visiblePages = range);
+      }
+    });
   }
 
   /// Staat in de bovenmarge en verandert daardoor de gemeten documentstroom

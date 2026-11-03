@@ -262,12 +262,25 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
   int get pendingRenders => _pendingRenders;
 
   /// Returns SVG markup or `null` when rendering fails.
+  ///
+  /// Loop er al een render van dezelfde bron, dan deelt de aanroep diens
+  /// toekomst — een document in paginastand vraagt hetzelfde diagram voor
+  /// elk vel tegelijk, en dan is N× de WebView-wachtrij in pure verspilling
+  /// (#2725).
   Future<String?> render(String source) {
+    final key = '${_RenderKind.mermaid.name}:${source.trim()}';
+    final running = _inFlight[key];
+    if (running != null) return running;
     _pendingRenders++;
     final future =
-        debugRenderOverride?.call(source) ??
-        _enqueue(source, _RenderKind.mermaid);
-    return future.whenComplete(() => _pendingRenders--);
+        (debugRenderOverride?.call(source) ??
+                _enqueue(source, _RenderKind.mermaid))
+            .whenComplete(() {
+              _inFlight.remove(key);
+              _pendingRenders--;
+            });
+    _inFlight[key] = future;
+    return future;
   }
 
   /// Zet een TeX-formule om in zelfstandige SVG, of `null` als dat niet lukt.
@@ -297,16 +310,27 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
     final key = '${kind.name}:$source0';
     final cached = _cache[key];
     if (cached != null) return SynchronousFuture(cached);
+    // Dezelfde bron staat al in de wachtrij of in de WebView: deel die toekomst
+    // in plaats van een tweede reis te plannen (#2725).
+    final running = _inFlight[key];
+    if (running != null) return running;
 
     final completer = Completer<String?>();
+    final future = completer.future.whenComplete(() => _inFlight.remove(key));
+    _inFlight[key] = future;
     _queue.add(_PendingRender(source0, kind, completer));
     _pumpQueue();
-    return completer.future;
+    return future;
   }
 
   // Bounded so a long session with many distinct diagrams cannot grow the
   // cache without limit; rendered SVGs can each be tens of KB.
   final LruCache<String, String> _cache = LruCache(128);
+
+  /// Renders die nog lopen, op hun cache-sleutel (`<soort>:<bron>`): N widgets
+  /// met hetzelfde diagram delen één toekomst in plaats van N× de wachtrij in
+  /// te gaan (#2725).
+  final Map<String, Future<String?>> _inFlight = {};
 
   void _pumpQueue() {
     if (_busy || _queue.isEmpty) return;

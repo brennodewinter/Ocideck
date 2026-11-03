@@ -87,6 +87,11 @@ optimisation.
   text fit are measured once per content/size/style revision and reused while
   reveal animation frames only update paint and opacity.
 - Mermaid diagrams render to sanitised inline SVG via a shared WebView.
+  In-flight renders deduplicate by source text: N widgets asking the same
+  diagram share one future instead of N WebView round trips (#2725).
+- The paged document view mounts only the sheets in and around the viewport
+  plus the one off-screen measurement tree; off-screen pages keep an exactly
+  equal placeholder so scroll geometry does not shift (#2725).
 - Video plays through a shared media host so only one heavy player is live.
 - A Marp background may keep every authored image filter for lossless Markdown,
   but Flutter and HTML apply at most **32 filters**. This bounds Flutter's
