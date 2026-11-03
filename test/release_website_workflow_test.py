@@ -34,8 +34,21 @@ class WebsiteWorkflowTest(unittest.TestCase):
                                       ('v01.2.3', 'web', False), ('v1.2.3; touch /tmp/no', 'all', False),
                                       ('v1.2.3', 'windows; true', False), ('v1.2.3-rc1', 'all', False)]:
             with self.subTest(tag=tag, channel=channel):
-                result = subprocess.run(['bash', '-c', body], env={'RELEASE_TAG': tag, 'CHANNEL': channel})
+                result = subprocess.run(['bash', '-c', body], env={'RELEASE_TAG': tag, 'CHANNEL': channel,
+                    'OPERATION_ID': '', 'OCIDECK_EXPECTED_CURRENT_TAG': ''})
                 self.assertEqual(result.returncode == 0, success)
+
+    def test_rollback_requires_canonical_current_tag_and_operation(self):
+        text = (ROOT / '.forgejo/workflows/website-downloads.yml').read_text()
+        body = text.split('run: |', 1)[1].split('      - name:', 1)[0]
+        body = '\n'.join(line[10:] for line in body.splitlines())
+        for current, operation, success in [('v1.2.4', 'restore-1', True),
+                ('v1.2.4', '', False), ('v01.2.4', 'restore-1', False),
+                ('v1.2.4', 'x; true', False)]:
+            result = subprocess.run(['bash', '-c', body], env={
+                'RELEASE_TAG': 'v1.2.3', 'CHANNEL': 'macos',
+                'OPERATION_ID': operation, 'OCIDECK_EXPECTED_CURRENT_TAG': current})
+            self.assertEqual(result.returncode == 0, success)
 
     def test_main_runs_are_selected_by_exact_tag_and_legacy_all_channel(self):
         text = (ROOT / 'scripts/release_auto.sh').read_text()
