@@ -17,13 +17,13 @@ on:
         required: false
       channel:
         type: choice
-        options: [windows, web, linux-tar, linux-deb, linux-rpm, linux-appimage, linux-flatpak]
+        options: [macos, windows, web, linux-tar, linux-deb, linux-rpm, linux-appimage, linux-flatpak]
         required: true
 env:
   RELEASE_TAG: ${{ inputs.tag }}
 jobs:
   build:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' && inputs.channel != 'macos' }}
     runs-on: docker
     timeout-minutes: 960
     container:
@@ -116,6 +116,36 @@ jobs:
           name: windows-operation-${{ inputs.operation_id }}
           path: controller/build/windows-operation.json
           if-no-files-found: warn
+          retention-days: 90
+
+  build-macos:
+    name: build-macos
+    if: ${{ github.ref == 'refs/heads/main' && inputs.channel == 'macos' }}
+    runs-on: ocideck-macos-arm64
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      - name: Vaste macOS-bron controleren, bouwen en notarisatie hervatten
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          FROZEN_REF: ${{ inputs.frozen_ref }}
+        run: |
+          set -eu
+          test "$FROZEN_REF" = "codex/release-candidate-$RELEASE_TAG-$SOURCE_SHA"
+          cd controller
+          test "$(git ls-remote --exit-code origin "refs/heads/$FROZEN_REF" | awk '{print $1}')" = "$SOURCE_SHA"
+          git fetch --no-tags origin "$FROZEN_REF"
+          python3 tool/release_macos_candidate.py --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --controller "$PWD" --dist "$GITHUB_WORKSPACE/source/dist"
+      - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
+        with:
+          name: channel-build
+          path: source/dist/*
+          if-no-files-found: error
           retention-days: 90
 
   consumer-deb:
@@ -319,8 +349,8 @@ jobs:
 
 
   evidence:
-    needs: [build, consumer-deb, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]
-    if: ${{ always() && needs.build.result == 'success' && (inputs.channel == 'windows' || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
+    needs: [build, build-macos, consumer-deb, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]
+    if: ${{ always() && (needs.build.result == 'success' || needs.build-macos.result == 'success') && (inputs.channel == 'macos' || inputs.channel == 'windows' || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
     runs-on: docker
     container:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2

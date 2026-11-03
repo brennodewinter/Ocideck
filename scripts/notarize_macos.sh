@@ -38,7 +38,14 @@ set -Eeuo pipefail
 # --resume-notary kan met --no-package; de opgeslagen app en inzendzip zijn vereist.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT_DIR"
+SOURCE_ROOT="$ROOT_DIR"
+if [[ "${1:-}" == --source-root ]]; then
+  SOURCE_ROOT="${2:?source root required}"
+  shift 2
+  [[ "$SOURCE_ROOT" = /* && -d "$SOURCE_ROOT" && ! -L "$SOURCE_ROOT" ]] || exit 2
+fi
+cd "$SOURCE_ROOT"
+git rev-parse --show-toplevel >/dev/null
 
 IDENTITY="${OCIDECK_SIGN_IDENTITY:-Developer ID Application: Brenno de Winter (AMT83P4B3L)}"
 PROFILE="${OCIDECK_NOTARY_PROFILE:-ocideck-notary}"
@@ -166,7 +173,7 @@ if ! mkdir "$NOTARY_DIR/script.lock" 2>/dev/null; then
 fi
 trap 'rmdir "$NOTARY_DIR/script.lock" 2>/dev/null || true' EXIT
 if [[ $RESUME_NOTARY -eq 0 ]]; then
-  python3 tool/notary_submission.py guard --state-dir "$NOTARY_DIR"
+  python3 "$ROOT_DIR/tool/notary_submission.py" guard --state-dir "$NOTARY_DIR"
   if [[ -e "$STATE" || -L "$STATE" ]]; then
     echo "Voor deze bron bestaat een inzending; gebruik --resume-notary." >&2
     exit 1
@@ -453,7 +460,7 @@ fi
 section "Notarisatie volgen en ticket stapelen"
 NOTARY_MODE=submit
 [[ $RESUME_NOTARY -eq 0 ]] || NOTARY_MODE=resume
-python3 tool/notary_submission.py "$NOTARY_MODE" --state "$STATE" --archive "$ZIP" --app "$APP" \
+python3 "$ROOT_DIR/tool/notary_submission.py" "$NOTARY_MODE" --state "$STATE" --archive "$ZIP" --app "$APP" \
   --profile "$PROFILE" --keychain "$KEYCHAIN" --identity "$IDENTITY"
 spctl -a -t exec -vvv "$APP"
 
@@ -582,7 +589,7 @@ fi
 section "Verspreidbaar pakket schrijven"
 VERSION="$(awk -F'[ +]' '/^version:/{print $2; exit}' pubspec.yaml)"
 DIST_ZIP="$DIST_DIR/OciDeck-${VERSION}-macos.zip"
-python3 tool/notary_submission.py package --state "$STATE" --archive "$ZIP" --app "$APP" \
+python3 "$ROOT_DIR/tool/notary_submission.py" package --state "$STATE" --archive "$ZIP" --app "$APP" \
   --profile "$PROFILE" --keychain "$KEYCHAIN" --identity "$IDENTITY" --package "$DIST_ZIP"
 
 section "Klaar"

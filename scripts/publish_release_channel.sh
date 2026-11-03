@@ -200,7 +200,7 @@ def main():
 
     # A successful build is not proof that this source passed its quality gates.
     quality_runs = {}
-    workflows = ('static-gate.yml', 'scans.yml') if args.channel == 'windows' else ('static-gate.yml', 'scans.yml', 'linux-gate.yml')
+    workflows = ('static-gate.yml', 'scans.yml') if args.channel == 'windows' else ('static-gate.yml', 'scans.yml', 'macos-gate.yml' if args.channel == 'macos' else 'linux-gate.yml')
     for workflow in workflows:
         latest = None
         seen = set()
@@ -241,7 +241,7 @@ def main():
     jobs = data('/actions/runs/' + args.run_id + '/jobs')
     if not isinstance(jobs, list) or not jobs or any(j.get('status') not in ('success', 'skipped') for j in jobs):
         raise ValueError('candidate jobs are not terminal green')
-    if not all(any(j.get('name') == name and j.get('status') == 'success' for j in jobs) for name in ('build', 'evidence')):
+    if not all(any(j.get('name') == name and j.get('status') == 'success' for j in jobs) for name in (('build-macos' if args.channel == 'macos' else 'build'), 'evidence')):
         raise ValueError('build/evidence job proof missing')
     consumer_names = {
         'linux-deb': '.deb proef op een schone Ubuntu',
@@ -256,6 +256,9 @@ def main():
         windows_runs = verify_windows(GitHub(), root, dist, args.tag, args.sha,
             'codex/release-candidate-' + args.tag + '-' + args.sha)
         print('Verified exact-source Windows runs: ' + json.dumps(windows_runs, sort_keys=True), file=sys.stderr)
+    elif args.channel == 'macos':
+        if not any(j.get('name') == 'build-macos' and j.get('status') == 'success' for j in jobs):
+            raise ValueError('macOS signed archive consumer proof missing')
     elif args.channel != 'web':
         selected = consumer_names.get(args.channel)
         if not selected or not any(j.get('name') == selected and j.get('status') == 'success' for j in jobs):
