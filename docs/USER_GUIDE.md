@@ -3410,6 +3410,13 @@ mirrored) display. Notes:
   It works whichever screen you touch, and moving to another slide clears it.
 - On macOS the "external" screen is the one without the menu bar.
 
+### Text alternative for a diagram
+
+For a screen reader a Mermaid diagram is otherwise a silent picture. Give it a
+text alternative in the source: `accTitle:` for the short name and `accDescr:`
+for the description. Without those lines the app falls back to the diagram
+type and the first content lines.
+
 ### Zooming a large diagram
 
 A big Mermaid diagram (a detailed flowchart, a wide Gantt) shows at a readable
