@@ -1609,6 +1609,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Njihova razina strožija je od razine prezentacije. Povećaj razinu prezentacije ili smanji razinu slajda.',
+  'Niveau van de presentatie': 'Razina prezentacije',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Povećaj razinu prezentacije ili smanji razinu slajda.',
   'De zaal ziet deze dia op het andere scherm.':
       'Dvorana vidi ovaj slajd na drugom zaslonu.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

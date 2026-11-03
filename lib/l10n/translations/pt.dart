@@ -1633,6 +1633,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'O seu nível é mais estrito do que o da apresentação. Suba o nível da apresentação ou baixe o nível do diapositivo.',
+  'Niveau van de presentatie': 'Nível da apresentação',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Suba o nível da apresentação ou baixe o nível do diapositivo.',
   'De zaal ziet deze dia op het andere scherm.':
       'A plateia vê este diapositivo no outro ecrã.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

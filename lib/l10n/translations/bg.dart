@@ -1624,6 +1624,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Тяхното ниво е по-строго от това на презентацията. Повишете нивото на презентацията или понижете нивото на слайда.',
+  'Niveau van de presentatie': 'Ниво на презентацията',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Повишете нивото на презентацията или понижете нивото на слайда.',
   'De zaal ziet deze dia op het andere scherm.':
       'Публиката вижда този слайд на другия екран.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

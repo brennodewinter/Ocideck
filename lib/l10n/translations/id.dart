@@ -1605,6 +1605,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Tingkat mereka lebih ketat daripada presentasi. Naikkan tingkat presentasi, atau turunkan tingkat slidenya.',
+  'Niveau van de presentatie': 'Tingkat presentasi',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Naikkan tingkat presentasi, atau turunkan tingkat slidenya.',
   'De zaal ziet deze dia op het andere scherm.':
       'Peserta melihat slide ini di layar lainnya.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

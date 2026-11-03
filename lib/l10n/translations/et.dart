@@ -1598,6 +1598,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Nende tase on rangem kui esitluse oma. Tõstke esitluse taset või langetage slaidi taset.',
+  'Niveau van de presentatie': 'Esitluse tase',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Tõstke esitluse taset või langetage slaidi taset.',
   'De zaal ziet deze dia op het andere scherm.':
       'Saal näeb seda slaidi teisel ekraanil.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

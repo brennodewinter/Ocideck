@@ -652,6 +652,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Har nivo is strjender dan dat fan de presintaasje. Set it nivo fan de presintaasje heger, of ferleech it nivo fan de dia.',
+  'Niveau van de presentatie': 'Nivo fan de presintaasje',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Set it nivo fan de presintaasje heger, of ferleech it nivo fan de dia.',
   'De zaal ziet deze dia op het andere scherm.':
       'De seal sjocht dizze dia op it oare skerm.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

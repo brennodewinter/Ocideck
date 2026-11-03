@@ -1605,6 +1605,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Niiden taso on tiukempi kuin esityksen. Nosta esityksen tasoa tai laske dian tasoa.',
+  'Niveau van de presentatie': 'Esityksen taso',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Nosta esityksen tasoa tai laske dian tasoa.',
   'De zaal ziet deze dia op het andere scherm.':
       'Yleisö näkee tämän dian toisella näytöllä.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

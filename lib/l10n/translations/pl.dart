@@ -1617,6 +1617,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Ich poziom jest surowszy niż poziom prezentacji. Podnieś poziom prezentacji lub obniż poziom slajdu.',
+  'Niveau van de presentatie': 'Poziom prezentacji',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Podnieś poziom prezentacji lub obniż poziom slajdu.',
   'De zaal ziet deze dia op het andere scherm.':
       'Publiczność widzi ten slajd na drugim ekranie.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

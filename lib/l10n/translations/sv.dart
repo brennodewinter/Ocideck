@@ -1604,6 +1604,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Deras nivå är strängare än presentationens. Höj presentationens nivå, eller sänk bildens nivå.',
+  'Niveau van de presentatie': 'Presentationens nivå',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Höj presentationens nivå, eller sänk bildens nivå.',
   'De zaal ziet deze dia op het andere scherm.':
       'Publiken ser den här bilden på den andra skärmen.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

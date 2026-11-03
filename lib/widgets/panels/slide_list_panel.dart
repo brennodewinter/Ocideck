@@ -11,6 +11,7 @@ import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';
+import '../dialogs/tlp_audience_action.dart';
 import '../../models/slide_format.dart';
 import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
@@ -848,7 +849,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           // gevolg is hetzelfde en de oorzaak niet.
           if (withheldCount > 0) ...[
             const SizedBox(height: 6),
-            _WithheldBanner(count: withheldCount),
+            _WithheldBanner(
+              count: withheldCount,
+              onLevelChanged: (level) =>
+                  unawaited(applyPresentationTlp(context, ref, level)),
+            ),
           ],
           // Bulk-actiebalk bij een meervoudige selectie.
           if (multiSelectionCount > 0) ...[

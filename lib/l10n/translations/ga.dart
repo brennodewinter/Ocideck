@@ -1635,6 +1635,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Tá a leibhéal níos déine ná leibhéal na cur i láthair. Ardait leibhéal na cur i láthair, nó ísligh leibhéal an tsleamhnáin.',
+  'Niveau van de presentatie': 'Leibhéal na cur i láthair',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Ardait leibhéal na cur i láthair, nó ísligh leibhéal an tsleamhnáin.',
   'De zaal ziet deze dia op het andere scherm.':
       'Feiceann an lucht féachana an sleamhnán seo ar an scáileán eile.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

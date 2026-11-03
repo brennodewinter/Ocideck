@@ -1620,6 +1620,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Niveus eorum severior est quam praesentationis. Tolle niveum praesentationis aut minue niveum imaginis.',
+  'Niveau van de presentatie': 'Niveus praesentationis',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Tolle niveum praesentationis aut minue niveum imaginis.',
   'De zaal ziet deze dia op het andere scherm.':
       'Audientes hanc imaginem in altero scrinione vident.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

@@ -652,6 +652,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Ihr Niveau ist strenger als das der Präsentation. Erhöhe das Niveau der Präsentation oder senke das der Folie.',
+  'Niveau van de presentatie': 'Niveau der Präsentation',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Erhöhe das Niveau der Präsentation oder senke das der Folie.',
   'De zaal ziet deze dia op het andere scherm.':
       'Das Publikum sieht diese Folie auf dem anderen Bildschirm.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

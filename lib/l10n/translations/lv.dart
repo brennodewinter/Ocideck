@@ -1603,6 +1603,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'To līmenis ir stingrāks nekā prezentācijas līmenis. Paaugstiniet prezentācijas līmeni vai pazeminiet slaida līmeni.',
+  'Niveau van de presentatie': 'Prezentācijas līmenis',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Paaugstiniet prezentācijas līmeni vai pazeminiet slaida līmeni.',
   'De zaal ziet deze dia op het andere scherm.':
       'Zāle redz šo slaidu uz otra ekrāna.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

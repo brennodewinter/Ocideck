@@ -1607,6 +1607,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Szintjük szigorúbb, mint a prezentációé. Emelje a prezentáció szintjét, vagy csökkentse a dia szintjét.',
+  'Niveau van de presentatie': 'A prezentáció szintje',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Emelje a prezentáció szintjét, vagy csökkentse a dia szintjét.',
   'De zaal ziet deze dia op het andere scherm.':
       'A közönség ezt a diát a másik képernyőn látja.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

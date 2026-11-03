@@ -1623,6 +1623,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Il-livell tagħhom huwa iktar strett minn dak tal-preżentazzjoni. Għola l-livell tal-preżentazzjoni, jew naqqas dak tal-islejd.',
+  'Niveau van de presentatie': 'Livell tal-preżentazzjoni',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Għola l-livell tal-preżentazzjoni, jew naqqas dak tal-islejd.',
   'De zaal ziet deze dia op het andere scherm.':
       'Is-sala tara din l-islejd fuq l-iskrin l-ieħor.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

@@ -2513,6 +2513,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Bunların seviyesi sunumunkinden daha katı. Sunumun seviyesini yükseltin veya slaytın seviyesini düşürün.',
+  'Niveau van de presentatie': 'Sunum seviyesi',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Sunumun seviyesini yükseltin veya slaytın seviyesini düşürün.',
   'De zaal ziet deze dia op het andere scherm.':
       'İzleyiciler bu slaytı diğer ekranda görüyor.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

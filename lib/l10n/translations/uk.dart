@@ -1620,6 +1620,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Їхній рівень строгіший, ніж у презентації. Підвищте рівень презентації або знизьте рівень слайда.',
+  'Niveau van de presentatie': 'Рівень презентації',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Підвищте рівень презентації або знизьте рівень слайда.',
   'De zaal ziet deze dia op het andere scherm.':
       'Аудиторія бачить цей слайд на іншому екрані.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

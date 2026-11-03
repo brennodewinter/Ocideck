@@ -1621,6 +1621,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Nivelul lor este mai strict decât cel al prezentării. Ridicați nivelul prezentării sau coborâți nivelul diapozitivului.',
+  'Niveau van de presentatie': 'Nivelul prezentării',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Ridicați nivelul prezentării sau coborâți nivelul diapozitivului.',
   'De zaal ziet deze dia op het andere scherm.':
       'Sala vede acest diapozitiv pe celălalt ecran.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

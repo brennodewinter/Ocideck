@@ -1608,6 +1608,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Ihres Niveau isch strenger als das vo de Präsentation. Setz s\'Niveau vo de Präsentation höcher, oder senk das vo de Foli.',
+  'Niveau van de presentatie': 'Niveau vo de Präsentation',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Setz s\'Niveau vo de Präsentation höcher, oder senk das vo de Foli.',
   'De zaal ziet deze dia op het andere scherm.':
       'De Saal gseet die Foli uf em andere Bildschirm.',
   'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':

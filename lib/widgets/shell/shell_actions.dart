@@ -824,20 +824,32 @@ String emptyAudienceReason(
   if (withheld && skipped) {
     return forExport
         ? l10n.d(
-            'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.',
-          )
+                'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.',
+              ) +
+              l10n.d(
+                ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.',
+              )
         : l10n.d(
-            'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.',
-          );
+                'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.',
+              ) +
+              l10n.d(
+                ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.',
+              );
   }
   if (withheld) {
     return forExport
         ? l10n.d(
-            'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.',
-          )
+                'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.',
+              ) +
+              l10n.d(
+                ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.',
+              )
         : l10n.d(
-            'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.',
-          );
+                'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.',
+              ) +
+              l10n.d(
+                ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.',
+              );
   }
   return forExport
       ? l10n.d('Alle slides zijn overgeslagen — niets om te exporteren.')
