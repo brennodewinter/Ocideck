@@ -1810,7 +1810,10 @@ For focused work, run only the relevant slice instead of the whole suite:
   theme colours) without depending on glyph rendering. The PNGs are pixel- and
   **platform-specific**, so they are tagged `golden` and **excluded from the
   default suite** — run them on **one** platform. `make test-golden` compares;
-  `make test-golden UPDATE=1` accepts an intentional visual change. (Gated in CI
+  `make test-golden UPDATE=1` accepts an intentional visual change. The target
+  runs `flutter test test/golden --tags golden`, so it loads only the golden
+  directory. Keep golden-tagged tests there; `macos_gate_concurrency_test.dart`
+  guards literal tags outside that directory. (Gated in CI
   since #1988: `macos-gate.yml` runs `make test-golden` on every push to `main`
   on the Mac-runner — a post-merge vangnet that een sub-promille renderlaag-
   verschuiving binnen minuten ziet in plaats van pas wanneer iemand lokaal `make
@@ -2538,3 +2541,13 @@ existed. It deliberately does **not** demand equality with the pin: that would
 make the only development machine unable to run the gate at all, and a gate that
 blocks everything gets switched off rather than fixed. A deviation is printed
 loudly on every run instead.
+
+### Full-gate shell checker
+
+`make check-full` checks ShellCheck **0.11.0** before the expensive test suite.
+Use the same version locally and on the validation worker; distribution packages
+may still provide 0.9.0 and produce different findings. The official Linux x64
+0.11.0 archive SHA-256 is
+`8c3be12b05d5c177a04c29e3c78ce89ac86f1595681cab149b65b97c4e227198`.
+Verify this digest before installing the archive; a version mismatch is an
+environment failure, not a reason to suppress findings.

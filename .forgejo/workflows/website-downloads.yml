@@ -1,49 +1,145 @@
-# Website-downloads bijwerken na een gepubliceerde release.
-#
-# Dit was ooit de laatste job van release.yml, maar sinds #2311 mag dat niet
-# meer: de release blijft draft tot release_auto.sh lokaal heeft getekend en
-# gepubliceerd — deze job kan dus niet via `needs: publiceren` lopen, want zijn
-# bump-script leest de PUBLIEKE release-URL's en die bestaan pas ná het
-# draft-vlag weg is. Daarom is dit een eigen workflow die release_auto.sh
-# dispatcht op de tag zodra de release echt gepubliceerd is, met een handmatige
-# dispatch als reserve. Geen trigger op tag-push: een draft zou hem alleen maar
-# rood laten lopen.
-#
-# Deze job werkt alléén de website-repository bij: bump -> commit -> push. Het
-# live zetten is bewust níet de taak van de releaseketen — de website-repo
-# publiceert zichzelf via een eigen deploy-workflow (.forgejo/workflows/
-# deploy.yml in die repo). Faalt deze job, dan is de release al gepubliceerd en
-# valt de website terug op de handmatige route (scripts/bump-ocideck.sh +
-# commit + push in de website-repo; de deploy-workflow zet daarna live).
+# The website owns deployment; this job only validates and updates its source.
 name: website-downloads
-
 on:
   workflow_dispatch:
-
+    inputs:
+      tag:
+        description: Published stable release tag
+        required: true
+        type: string
+      channel:
+        description: Download channel, or all for the legacy complete release
+        required: false
+        default: all
+        type: string
+      operation_id:
+        description: Durable caller nonce, empty for legacy invocation
+        required: false
+        default: ""
+        type: string
+      expected_current_tag:
+        description: Optional selected-channel pointer guard for an explicit rollback
+        required: false
+        default: ""
+        type: string
+concurrency:
+  group: website-downloads-source
+  cancel-in-progress: false
 jobs:
   website-downloads:
     name: Website-downloads bijwerken
-    # Op de aangemelde Mac (mac-brenno): die heeft SSH-toegang tot de
-    # website-repo en de tooling van het bump-script. Geen prereleases (zoals
-    # deploy-web) — een -rc raakt de productiesite niet.
-    if: ${{ !contains(github.ref_name, '-') }}
-    runs-on: macos
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: docker
+    timeout-minutes: 60
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
     steps:
-      - name: Website-repo naar deze release bijwerken
+      - name: Validate publication inputs
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          CHANNEL: ${{ inputs.channel }}
+          OPERATION_ID: ${{ inputs.operation_id }}
+          OCIDECK_EXPECTED_CURRENT_TAG: ${{ inputs.expected_current_tag }}
+        shell: bash
         run: |
-          set -Eeuo pipefail
-          export GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentitiesOnly=yes -i $HOME/.ssh/id_rsa"
-          VERSIE="${GITHUB_REF_NAME#v}"
-          WT="$(mktemp -d)"
-          git clone ssh://git@pawprint.vigilis.online:2222/LibreKAT/website.git "$WT"
-          cd "$WT"
-          git config user.name "OciDeck release"
-          git config user.email "release@librekat.nl"
-          scripts/bump-ocideck.sh "$VERSIE"
-          if git diff --quiet; then
-            echo "Website staat al op $VERSIE — niets te pushen."
-            exit 0
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || exit 2
+          [[ -z "$OPERATION_ID" || "$OPERATION_ID" =~ ^[A-Za-z0-9_-]{1,100}$ ]] || exit 2
+          [[ -z "$OCIDECK_EXPECTED_CURRENT_TAG" || "$OCIDECK_EXPECTED_CURRENT_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || exit 2
+          [[ -z "$OCIDECK_EXPECTED_CURRENT_TAG" || -n "$OPERATION_ID" ]] || exit 2
+          case "$CHANNEL" in all|macos|windows|web|linux-tar|linux-debian12|linux-deb|linux-rpm|linux-appimage|linux-flatpak) ;; *) exit 2;; esac
+      - name: Install pinned website tools
+        env:
+          HUGO_SHA256: 787f100057328824f38c6ad7c87ff10d6451ae0a7bc39cedaad0dd2bcde17e53
+        run: |
+          set -eu
+          apt-get update
+          apt-get install -y --no-install-recommends git openssh-client ca-certificates curl minisign python3
+          curl --fail --location --proto '=https' --proto-redir '=https' --max-time 240 -o /tmp/hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v0.168.0/hugo_extended_0.168.0_linux-amd64.tar.gz
+          printf '%s  /tmp/hugo.tar.gz\n' "$HUGO_SHA256" | sha256sum -c -
+          tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin hugo
+      - name: Validate and update website source
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          CHANNEL: ${{ inputs.channel }}
+          OPERATION_ID: ${{ inputs.operation_id }}
+          OCIDECK_EXPECTED_CURRENT_TAG: ${{ inputs.expected_current_tag }}
+          WEBSITE_KEY: ${{ secrets.WEBSITE_REPO_KEY_V1 }}
+          WEBSITE_KNOWN_HOSTS: ${{ secrets.WEBSITE_REPO_KNOWN_HOSTS_V1 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +x
+          test -n "$WEBSITE_KEY"
+          test -n "$WEBSITE_KNOWN_HOSTS"
+          umask 077
+          RECEIPT_DIR="$PWD/website-public-receipt"
+          mkdir -p "$RECEIPT_DIR"
+          export RECEIPT_DIR
+          WORK="$(mktemp -d)"
+          trap 'rm -rf -- "$WORK"' EXIT
+          chmod 700 "$WORK"
+          printf '%s\n' "$WEBSITE_KEY" > "$WORK/key"
+          printf '%s\n' "$WEBSITE_KNOWN_HOSTS" > "$WORK/known_hosts"
+          unset WEBSITE_KEY WEBSITE_KNOWN_HOSTS
+          cat > "$WORK/config" <<CONFIG
+          Host website-source
+            HostName pawprint.vigilis.online
+            Port 2222
+            User git
+            IdentityFile "$WORK/key"
+            UserKnownHostsFile "$WORK/known_hosts"
+            StrictHostKeyChecking yes
+            BatchMode yes
+            IdentitiesOnly yes
+          CONFIG
+          printf -v GIT_SSH_COMMAND 'ssh -F %q' "$WORK/config"
+          export GIT_SSH_COMMAND
+          git clone --depth 1 --single-branch --branch main ssh://website-source/LibreKAT/website.git "$WORK/website"
+          cd "$WORK/website"
+          BASE="$(git rev-parse HEAD)"
+          VERSION="${RELEASE_TAG#v}"
+          if [ "$CHANNEL" = all ]; then
+            scripts/bump-ocideck.sh "$VERSION"
+          else
+            scripts/bump-ocideck.sh "$VERSION" "$CHANNEL"
           fi
-          git commit -aqm "OciDeck $VERSIE: downloads bijwerken (automatisch bij release)"
-          git push origin main
-          echo "Website-repo bijgewerkt naar $VERSIE — de deploy-workflow van die repo zet het live."
+          test -z "$(git diff --name-only -- . ':!hugo.toml')"
+          test -z "$(git ls-files --others --exclude-standard)"
+          hugo --minify --cleanDestinationDir
+          python3 scripts/improve_public_output.py
+          python3 scripts/check_i18n_parity.py
+          python3 -m unittest discover -s scripts -p test_bump_ocideck_channel.py
+          git diff --check
+          test -z "$(git diff --name-only -- . ':!hugo.toml')"
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$BASE"
+          if git diff --quiet -- hugo.toml; then
+            echo 'Website source already matches; live publication still needs verification.'
+          else
+          git config user.name 'OciDeck release'
+          git config user.email release@librekat.nl
+          git add hugo.toml
+          git commit -m "OciDeck $RELEASE_TAG: $CHANNEL downloads"
+          git push origin HEAD:refs/heads/main
+          fi
+          WEBSITE_COMMIT="$(git rev-parse HEAD)"
+          export WEBSITE_COMMIT
+          python3 - <<'PYRECEIPT'
+          import hashlib, json, os, pathlib
+          pages = {}
+          for language in ('nl', 'en', 'de', 'es', 'fr', 'it', 'pl', 'pt', 'uk'):
+              path = pathlib.Path('public') / language / 'ocideck/index.html'
+              pages[language] = hashlib.sha256(path.read_bytes()).hexdigest()
+          value = dict(tag=os.environ['RELEASE_TAG'], channel=os.environ['CHANNEL'],
+                       operation_id=os.environ['OPERATION_ID'], commit=os.environ['WEBSITE_COMMIT'], pages=pages)
+          (pathlib.Path(os.environ['RECEIPT_DIR']) / 'website-public.json').write_text(json.dumps(value, sort_keys=True) + '\n')
+          PYRECEIPT
+      - name: Preserve exact website source and expected public pages
+        if: ${{ inputs.operation_id != '' }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: website-public-${{ inputs.operation_id }}
+          path: website-public-receipt/website-public.json
+          if-no-files-found: error
+          retention-days: 90

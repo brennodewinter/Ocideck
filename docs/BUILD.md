@@ -448,6 +448,22 @@ profile `ocideck-notary`; override with `OCIDECK_SIGN_IDENTITY` /
 `scripts/notarize_macos.sh --skip-build` signs and notarises whatever is already
 in `build/` without rebuilding.
 
+After an interrupted submission, keep the same worktree, commit, `build/`
+contents, signing identity and keychain profile, then run
+`scripts/notarize_macos.sh --resume-notary` (add `--no-package` when CI packages
+the app). The saved submission ID and archive hash live under
+`git rev-parse --git-path ocideck-notary`; resuming neither rebuilds nor submits
+again. A new clean build is blocked while an unfinished transaction exists.
+Stapling and packaging interruptions also resume from the preserved bytes.
+Do not remove this metadata or the original submission archive to bypass a
+failure. If submission returned no trustworthy ID, reconcile Apple's history
+manually before any new submission. A leftover `script.lock` requires checking
+that the previous process has stopped before removing that lock directory.
+
+The recovery tests use simulated Apple commands. An actual resumed Apple
+submission on a separate Mac remains required before claiming this route is
+operational; the user's laptop is not a fallback runner.
+
 When the preflight (`--preflight`, also run by `release_auto.sh`) reports a
 `notarytool` failure it shows Apple's real output and routes the fix to the
 cause (#2296): a **403 about a required agreement** means the Account Holder
@@ -516,7 +532,7 @@ Windows machine — nothing verifies that automatically.
 `.github/workflows/release.yml` builds the Windows zip and installer on the
 GitHub mirror for the exact merged commit and stores them as Actions artifacts.
 The forge fetches and verifies those bytes before a version tag exists. The
-tag-triggered publication reuses the verified candidate; it does not build a
+explicitly dispatched publication reuses the verified candidate; it does not build a
 second Windows binary.
 
 **Why the installer is built before the zip.** The packager signs `ocideck.exe`
@@ -760,7 +776,7 @@ changes to `main` do not invalidate their evidence. Before tagging, the script
 checks both refs again, waits for all required results and verifies the 13 assets,
 `SHA256SUMS` and manifest. Any failure leaves the release untagged; retry with
 `--resume vX.Y.Z`. Only then does it create an annotated tag recording the
-candidate run. The tag-triggered workflow validates that record and publishes
+candidate run. The explicitly dispatched workflow validates that record and publishes
 the candidate's unchanged bytes as a draft release. The local script signs
 the manifest, makes the release public and updates the downstream sites and tap.
 The script's wait exceeds the Windows job limit, so the job can report its
@@ -818,6 +834,159 @@ verified, select it explicitly with `--resume vX.Y.Z --release-pr <number>`.
 The title must match that version and the PR must be merged into `main`.
 Automatic selection still refuses multiple matching release PRs. This option
 cannot change an already published tag and does not bypass candidate checks.
+
+A fresh release freezes `origin/main` into a version-specific
+`codex/release-base-vX.Y.Z` branch before expensive checks. The release PR targets
+that base; advancing main does not widen the release. A conflicting existing base
+is an error, never a reason to replace it.
+
+For an existing untagged maintenance release, select its separate base explicitly:
+`--resume vX.Y.Z --release-base codex/release-base-vX.Y.Z --release-pr <number>`.
+The exact release PR may be open or merged into that base. The base must remain
+frozen before merge and point exactly to the approved merge afterward. This
+keeps newer main changes out without moving main or a published tag. Never
+change the selected base to make a failed proof pass. After a public tag, resume
+that tag without the selection flags.
+
+`tool/release_channel.py create` and `verify` provide local per-channel byte
+manifests for macOS, Windows, web and the Linux formats. They accept a fixed tag,
+full source SHA, channel and exact asset set. Existing evidence cannot be
+replaced with different bytes. These manifests do not by themselves attest build
+provenance or publish a channel; the workflow and signing integration must also
+verify the originating run before publication. `make check-release-channels`
+checks tampering and invalid inputs without building the application.
+
+The manual `release-channel.yml` workflow builds one selected channel from an
+exact frozen candidate ref: web, macOS, Windows or one of six Linux profiles
+(tar, Debian 12, deb, rpm, AppImage and Flatpak). The original dispatch runs from
+trusted main; authenticated continuations use the retained controller claim ref.
+Source identity is checked before candidate code executes. Only a successful
+selected consumer probe can produce its candidate manifest. Artifacts are
+retained for 90 days; retention is not durable archival.
+
+`tool/release_journal.py --journal <durable-path> init` binds a journal to the
+version, source, channel and workflow hash. Explicit `record` events preserve
+phase starts, outcomes and evidence hashes. `verify-evidence` checks stored bytes
+before reuse. Its lock serializes journal writes; the release controller must
+hold a separate lease across external side effects. Keep journals and referenced
+evidence on durable storage, not in `/tmp`. A stopped or failed phase is never
+retried automatically. Use `tool/release_channel_control.py` for publication with a durable state directory:
+pass `--tag`, `--sha`, `--controller-sha`, `--channel`, `--run-id`, `--dist`,
+`--evidence`, `--state-dir` and `--release-id`. Initial publication additionally
+requires explicit `--create-release --release-id auto`. After inspecting an
+interrupted **draft**, use those same two flags again with all original tag,
+source, controller, channel, run and candidate arguments. `auto` looks up the
+release by the unchanged tag; an existing draft is reused, not recreated.
+Without `--create-release`, a numeric release ID is accepted only for an already
+public release. A draft returning nonzero from `--status` therefore means it is
+not yet publicly verified, not that another release should be created. Never
+resume while an earlier publisher or orphan remote lease still owns the work.
+Sign both the channel
+manifest and its checksum file with minisign first. The controller holds a
+version-wide lease across the publisher and records the returned proof. A killed
+publisher is stopped before the local lease is released; an interrupted started
+phase requires inspection and an explicit cancellation record before resumption.
+A local receipt never replaces fresh public readback.
+
+Before any publication mutation, the publisher also requires successful
+`static-gate.yml`, `scans.yml` and `linux-gate.yml` runs on the exact source SHA,
+with every job successful. It inspects paginated history and selects the latest
+run for each workflow; a newer pending or failed run blocks an older green one.
+This reuses recorded source checks instead of substituting build success for
+quality evidence. Missing or unreadable evidence blocks publication.
+
+A tag push no longer starts the legacy all-platform publisher. The existing
+controller dispatches its publication explicitly after candidate checks. Initial
+channel publication also requires the source to carry the same safe publication
+workflow as the trusted controller; old sources with tag-triggered publication
+are refused. This prevents two different publication paths from writing together.
+The independent workflow has candidate paths for web, macOS, Windows and six
+Linux profiles. Windows delegates to GitHub native builds and consumer tests;
+macOS uses the dedicated Apple runner and retained notarisation submission.
+
+#### Recovery state while the independent route awaits operational proof (2026-11-03)
+
+The independent channel route is **not yet an operationally proven release cycle**. The
+implemented pieces are: exact source and channel manifests
+(`tool/release_channel.py`), candidate workflows for all listed channels,
+bounded Windows/macOS continuation, a fail-closed operation CLI, an append-only
+evidence journal, a local version-wide controller lock,
+a remote lock branch in `publish_release_channel.sh`, public asset readback,
+and a public baseline check (`tool/release_baseline.py`). The baseline reads the
+highest non-abandoned tag from both remotes and requires a public release with a
+valid signed channel manifest and matching source version before allowing the
+next version. It does not repair a failed release. Independent build and
+consumer adapters now exist for macOS and Debian 12 as well. Their presence
+does not supply independent per-channel availability proof for a new release.
+Native CI, the full repository gate and an end-to-end release for the new route
+are still pending.
+Do not infer readiness or an ETA from the existence of these files.
+
+The current publisher is a child process of the local controller. It validates
+the successful exact controller run and its build/evidence jobs, the selected
+consumer job, signed manifest and checksum file. Before any tag or release
+write, it streams the candidate into a private durable
+`<state-dir>/<tag>/<channel>-candidate/{dist,evidence}` directory using
+atomic writes and filesystem sync. A failed or interrupted publish retains
+those verified bytes; the controller can reuse them if the original download
+is gone. It then creates the fixed tag and a **draft** release, uploads only
+the selected channel's signed files, and reads every upload back through the
+forge. Only after all selected files match does it change the draft to public
+and read the public release and assets back. Its local receipt records that
+verified outcome, but is not a substitute for a fresh public readback.
+
+The remote lock is `codex/release-publish-lock-<tag>` at the controller SHA. Only a successful
+branch-create response proves ownership. An uncertain create, upload or delete
+response requires remote inspection. The controller stops its own child process
+group on interruption before releasing its local lock; **do not kill unrelated
+release, runner or upload processes**. The remote lock has no automatic expiry
+or takeover. An orphan is an operator incident: read its branch, commit, run,
+release and journal state before any deletion. The publisher requires configured `origin` and `mirror` remotes and checks
+their exact tag targets. If the mirror tag is absent, publication fetches the
+annotated tag from origin into `FETCH_HEAD` and pushes it to the mirror without
+force; an uncertain push is followed by a read-only remote check. A differing
+existing tag stops publication. The receipt records the mirror source SHA.
+`--status` verifies both remote tags without changing Git refs, journal or
+lease state. The tag can already exist while its release is still **draft**
+and its asset set is incomplete. A failure before the public flip leaves that draft and the
+remote lease for inspection; it must resume the same version and source. This
+removes the deliberate public-empty-release interval for the selected channel,
+but it does **not** prove every platform is available. The public flip and
+recovery behavior still need native CI and end-to-end evidence before this can
+be called an approved stable-release route. A durable detached publisher worker
+with an independent lease and explicit hand-off remains a pending contract;
+the current local process/branch pair does not prove survivability across host
+loss.
+
+**Stop and inspect:** keep the release monitor paused and do not restart live
+`v0.7.7`. First read `scripts/release_auto.sh --status v0.7.7`, the
+publication controller's read-only `--status` flag (with its original tag, source, run,
+channel, state directory and release arguments), the exact Forgejo candidate
+and publisher jobs, both remote tag refs, the public release and asset list, the remote lock branch, and the durable state directory. Use
+`tool/release_journal.py --journal <path> status` and `verify-evidence` on each
+relevant journal; compare its tag, source, channel and workflow digest with the
+candidate run and signed files. An event left at `started` is *unknown*, not a
+failed phase to rerun: inspect whether its child/remote write completed, and
+record an explicit `cancelled` transition only after that investigation. Keep
+any verified public asset and its receipt. Resume only the same version from
+verified source and persisted candidate evidence; never move a pushed tag,
+silently replace a named asset, launch a second publisher, or delete an
+apparent orphan lock before reading its owner and remote effects. A tag
+annotated `Release-Mode: channels` belongs to this controller: the legacy
+`release_auto.sh --resume` refuses it. A public release of one channel proves
+only that channel's signed metadata and bytes; it is not a complete multi-OS
+release. If the evidence is missing or the public
+bytes conflict, stop and repair the specific defect before any further write.
+
+Track the remaining failure classes in issues
+[#2773–#2787](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues):
+credential availability and least-privilege phase boundaries; candidate artifact
+expiry versus durable storage; queued or unavailable runners and capacity;
+cache state and execution context; toolchain pins; clocks, network failures and
+uncertain API writes; Apple signing/notarisation; Windows native builds; and
+web demo, download page and package-channel convergence. Each gate needs an
+exact-commit terminal result and public readback where applicable. None of these
+is evidence of success merely because a dispatch was accepted.
 
 For a reviewed repair to release tooling or packaging after the release PR has
 merged, an operator can explicitly select the merged repair commit with
@@ -898,6 +1067,78 @@ same version with `scripts/release_auto.sh --resume vX.Y.Z`.
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
 
+The `website-downloads.yml` source updater is dispatched on trusted `main`,
+with explicit `tag` and `channel` inputs. Use `all` only for the legacy complete
+release; a selected channel calls the website's existing selected-row updater.
+The old complete-release caller now dispatches this main workflow with
+`channel=all` and reconciles runs using their recorded inputs. Historical tag
+runs remain readable during resume.
+
+This job runs on the Linux worker. It needs `WEBSITE_REPO_KEY_V1` (a separate
+write key limited to `LibreKAT/website`) and `WEBSITE_REPO_KNOWN_HOSTS_V1` for
+`pawprint.vigilis.online:2222`. Provision these explicitly; do not copy the Mac's
+personal key or the website deployment key. Credentials live in a private
+short-lived SSH directory with strict host verification. Before pushing only
+`hugo.toml`, the job runs pinned Hugo 0.168.0, output improvements, language
+parity and the website channel tests. Concurrent website-main changes stop the
+update; no force push or automatic merge is attempted.
+
+The website's own Linux deploy workflow publishes that source commit. A green
+source-update job therefore does not yet prove the download page is live. The
+channel controller must separately follow deployment and check the selected
+public rows. Web-demo and Homebrew publication are separate follow-up phases;
+this updater does not implement them.
+Linux format selection includes `linux-debian12`, which invokes the existing
+Debian 12 builder and retains its own Debian 12 extract/link/20-second start
+consumer. It does not use Ubuntu native-hook caches. The Linux worker needs
+access to the same Docker builder daemon used by the existing complete-release
+Debian 12 job. Missing daemon access stops that selected channel.
+
+Consumer image recipes live in `scripts/release_consumers/`. Run the image builder from a clean Git checkout at the requested full revision;
+a bare source archive cannot establish the revision label. Existing published
+digests remain usable without rebuilding when this admission check changes. Refresh them only
+on the infrastructure builder with `scripts/build_release_consumer_images.sh
+REGISTRY FULL_SOURCE_SHA NEW_RECEIPT.json`. That explicit command builds and
+pushes six amd64 profiles, checks tools and reads registry digests back. It is
+never invoked by a release. Record actual image digests in the channel workflow
+before adopting a refresh; a locally successful image build is insufficient.
+Each image preserves installed package versions; Flatpak also records the exact
+GNOME 50 runtime commit. Keep normal Flatpak signature verification enabled.
+
+The deb/rpm profiles deliberately contain test tools but no OciDeck runtime
+libraries: the package manager must resolve the artifact's declared runtime
+dependencies. Preinstalling those libraries could hide a broken Depends or
+Requires declaration. Tar and AppImage profiles explicitly supply the desktop
+runtime they require. Prepared images do not replace the artifact's installation,
+link, start or Flatpak content checks. Cold/warm timings and actual refreshed
+image/install results must still be recorded on the Linux worker; no speedup is
+claimed from recipes alone.
+
+The independent `release-channel.yml` route accepts `windows` and builds only
+Windows. It reuses the GitHub candidate build (including installer install,
+launch and uninstall checks) and the complete Windows test suite. Linux builds
+and Linux quality jobs do not block this channel; exact-source static and scan
+checks remain mandatory. `GH_DISPATCH_TOKEN` must be available to the Forge
+worker and publishing host. Signing keys stay on the publishing host.
+
+Before dispatch or acceptance, the frozen source's two GitHub workflow files
+must match the trusted controller definitions byte for byte. Older frozen
+sources with different definitions are refused. ZIP, installer, source SBOMs and
+the cohort record are verified together; the cohort is part of the signed
+Windows channel manifest. This route does not establish Windows execution proof
+until the real GitHub jobs have completed successfully.
+
+Each new operation supplies a unique `operation_id`. The worker records dispatch
+intent before sending it and uploads `windows-operation-<operation_id>` even on
+failure when cleanup can execute. `tool/release_windows_candidate.py status`
+and `cancel --wait-terminal` reconcile only runs with that marker and the exact
+source, ref and workflow. An empty list or missing final journal is an unknown
+outcome, not proof that cancellation finished. Stop the Forge worker before
+using its closed journal as evidence that it cannot dispatch more runs. Host
+loss or SIGKILL may require explicit reconciliation; no automatic redispatch is
+performed after a lost response. Previously running work owned by another
+operation is never cancelled by this operation.
+
 The Windows cohort travels back as an authenticated **GitHub Actions build
 artifact** from the exact successful Windows run. The mirror also keeps a draft
 GitHub release, but only the complete, canonical Forge release is published.
@@ -951,29 +1192,25 @@ before a hash is read or a cask is written. It is
 **macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
 tracked separately (#1227).
 
-- **Where it runs: in the tap, not here.** The tap updates *itself*.
-  `.forgejo/workflows/update-cask.yml` in `LibreKAT/homebrew-ocideck` runs every
-  30 minutes (and on `workflow_dispatch`), reads the newest non-prerelease from
-  this repo's public API, fetches `scripts/update_homebrew_cask.sh`,
-  `homebrew/ocideck.rb.tmpl` and `minisign.pub` **at that tag** over
-  `raw/<path>?ref=<tag>`,
-  regenerates `Casks/ocideck.rb` and pushes — with the per-run Actions token
-  Forgejo mints for that repository. Nothing is committed when the cask is
-  already current, so the half-hourly schedule does not produce noise.
+- **Where it runs: in the tap.** `update-cask.yml` in
+  `LibreKAT/homebrew-ocideck` accepts an explicit `tag`, `operation_id` and
+  `pin`. The channel controller reconciles that exact run and its receipt, then
+  verifies the public cask's URL and SHA-256 against the signed macOS manifest.
+  The half-hourly schedule selects the newest stable release with complete
+  macOS evidence; a Windows-only release cannot advance the cask.
+- **Trusted updater, fixed signing key.** The tap reads one current OciDeck
+  `main` SHA and fetches the generator, verifier, template and abandoned-tag
+  policy at that exact commit. It never executes scripts from a release tag.
+  The tap's committed `minisign.pub` must match the OciDeck signing key.
+  Legacy complete releases use signed `SHA256SUMS`; independent macOS releases
+  require the signed channel manifest and channel checksum list.
+- **Rollback stays selected.** An explicit rollback sets the tap's persistent
+  macOS hold (`pin=true`). Scheduled runs preserve that target. An explicit
+  normal publication clears the hold (`pin=false`). Only the cask and policy
+  may change; a concurrent tap-main change stops the push. No tag or release
+  asset is overwritten. A receipt records the exact committed cask hash even
+  when no source change was necessary.
 
-  Neither `release.yml` writes the cask any more. Until v0.4.8 the forge chain
-  pushed it across with a personal token in `HOMEBREW_TAP_TOKEN`; the forge
-  refused that token after an upgrade (HTTP 401) and the tap sat three releases
-  behind before anyone noticed. Turning it around removed the secret entirely.
-  The cost is that the cask trails a release by up to 30 minutes instead of
-  updating within the run — irrelevant for a tap, since `brew update` is on the
-  user's own clock, and worth it to be rid of a credential that expires.
-- **This repo only supplies the building blocks**, and that coupling is silent:
-  the tap fetches those three paths **by name**, from another repository. Rename
-  or move any of them and the tap quietly keeps serving the previous release.
-  There is no gate here that can see it, so
-  `test/homebrew_cask_verify_test.dart` pins all three paths; if you move them,
-  update the workflow in the tap in the same change.
 - **Tap topology: the forge is the source, GitHub is the backup.** The tap lives
   on our own forge as the canonical repo, **mirrored to GitHub** (a Forgejo
   push-mirror on the tap repo). Homebrew's one-argument shorthand
@@ -998,7 +1235,9 @@ tracked separately (#1227).
 - **The tap is read back, not assumed.** A workflow that runs green still says
   nothing about what is actually in the tap, so `scripts/verify_homebrew_cask.sh`
   re-reads `Casks/ocideck.rb` over the same public URL Homebrew itself uses and
-  compares its `version` to the release. That check is the daily one below; run it
+  compares its `version` to the release. Channel publication also supplies
+  `--expected-url` and `--expected-sha256`, including mirror identity when
+  requested. The version-only daily check is below; run it
   by hand at any time, and without a tag it checks the newest release:
 
   ```bash
@@ -1127,17 +1366,19 @@ reuse a pushed tag.
 
 The OciDeck page on **librekat.nl** carries a per-platform download panel
 (version, date, size, and the Linux verification hash) pointing at this release's
-assets. The `website-downloads` job keeps it current automatically: after
-`publiceren`, on the Mac runner, it clones the website repository and runs
-`scripts/bump-ocideck.sh <version>` there — which reads the new verification hash
-and the release date straight from the published release, so nothing is retyped —
-then commits and pushes. That push starts the website repository's own deploy
-workflow, which runs `./publiceersite`. Prereleases are skipped. Finally,
-`release_auto.sh` reads the public OciDeck page back and accepts completion only
-when its download links contain the new tag. A failure cannot undo the published
-release, but it does stop the script from calling the whole release complete; the
-manual fallback is `scripts/bump-ocideck.sh <version>`, commit and push, then
-`./publiceersite` in the website repository.
+assets. The `website-downloads.yml` source updater runs on a Linux Docker runner from
+trusted `main`. The legacy `release_auto.sh` dispatches it after verified
+publication; an independent channel uses the explicit `public` action. It clones
+the website repository and runs `scripts/bump-ocideck.sh <version> [channel]`
+there, checks the generated pages, then commits and pushes the source change.
+That push starts the website repository's own Linux deploy workflow. A green
+source update is therefore separate from live publication: the channel controller
+checks the selected primary download rows in all nine public languages, while
+the legacy script checks its complete-release tag links. Prereleases are skipped.
+A website failure leaves the published release assets intact and blocks claiming
+that public publication is complete. The manual fallback runs the same updater
+in the authoritative website repository, commits and pushes, and follows that
+repository's deployment to terminal success and public readback.
 
 The README download line and the librekat.nl download panel themselves were added
 when the first release (`0.1.0`) existed; nothing one-time is left here.
@@ -1367,3 +1608,155 @@ introducing a brand-new key under pressure:
 
 Either way the reserve private key lives offline and never on a runner, same as
 the primary.
+
+### Independent release operation CLI (experimental)
+
+The experimental operation CLI is `tool/release_channel_controller.py`. Use
+`plan`, then `start` with `--state-dir`, `--tag`, `--sha`, `--controller-sha` and
+`--channel`. `start` saves a random operation ID and immutable source,
+controller, channel and frozen-ref identity before its single workflow dispatch.
+The supported CLI route first creates a unique remote build-claim branch for
+that version and channel. An existing claim, a lost create response or a changed
+`main` blocks the original dispatch. Pending work retains its claim. After
+a continuation the create-only claim ref remains as durable controller proof,
+including after DONE: publication and later public readback verify that exact
+ref still points at the original controller SHA. It locks only the same version
+and channel. Do not clean it as an ordinary merged branch. Explicit `stop` may
+release the claim after terminal worker/Windows-child proof; that blocks further
+continuation/publication and retains the local journal and CI evidence. An
+uncertain one-shot claim DELETE is never repeated.
+Direct manual workflow dispatch does not carry this ownership guarantee.
+`status` reads the saved operation and remote jobs without changing state;
+`hervat` records the observed run. For Windows/macOS with an authenticated
+`pending` receipt and a terminal worker it explicitly starts one continuation,
+using the original create-only claim branch and controller SHA even when main
+has advanced. Each continuation has its own saved attempt nonce and exact
+predecessor; a lost response is reconciled by readback, never another POST.
+Windows polls for at most 20 minutes and collects for at most 30 minutes within
+a 90-minute Forgejo job. Other Docker channels use 175 minutes, below the
+measured three-hour runner limit; an earlier complete Linux build/consumer
+cycle took 124m48s, which is context for the margin rather than a proven cold
+build maximum. It retains the exact GitHub run IDs; collect performs
+no GitHub dispatch or cancellation. macOS resumes only the existing saved
+submission and bytes, then finishes consumer checks and upload. A successful
+short worker with `outcome=pending` is never build/publication success and keeps
+the original claim. If the original dispatch response is lost and no exact
+operation ID appears in Forgejo, the state stays unknown. `stop` cancels only runs with that exact workflow input and waits for
+terminal readback; Windows also needs terminal proof from its own GitHub helper.
+For Windows, the CLI reads the operation journal from the exact Forgejo
+run artifact and binds its run ID, controller SHA, source and operation ID before
+accepting a reused green GitHub run or a no-dispatch stop. A missing or unsafe
+artifact leaves the state unknown.
+The `publish` action delegates to the existing channel publisher and requires
+already signed manifest and checksum evidence. Build success is metadata only:
+neither asset bytes nor a public release are proved by a green build run.
+The CLI does not make signing keys available on a runner, so publication still
+requires a separate trusted signing step. Keep `--state-dir` on durable storage.
+
+The dedicated Mac cache serializes admission and execution for all candidates.
+It admits at most two candidate trees, reserves 16 GiB of additional free space
+per invocation and refuses admission when current cache bytes plus that reserve
+exceed the 32 GiB cache budget. These are conservative operator policy budgets,
+not a measured maximum build footprint; calibrate them on the designated Mac
+before increasing capacity. Refusal preserves every pending submission/archive
+and asks for evidence archiving and a capacity review; it never deletes them.
+
+
+### Publieke vervolgstappen per kanaal
+
+Na `release_channel_controller.py publish` bevestigt alleen de forge de immutable
+releasebytes. Het afzonderlijke commando `public` gebruikt dezelfde identiteit,
+`--run-id`, `--dist` en `--evidence`, verifieert die publieke bytes opnieuw en
+registreert elke toepasselijke publieke fase in het bestaande journaal.
+Website-updates hebben een eigen eenmalige operation-ID; een verloren antwoord
+leidt tot inspectie van die ID, nooit een tweede dispatch. Hervat `public` om de
+terminale bronupdate en exacte website-deploycommit te controleren. Historische
+paginahashes blijven bewijs van die bouw; de actuele controle vergelijkt in alle
+negen talen uitsluitend de primaire rijen van het gekozen kanaal met zijn
+getekende manifest. Een legitieme update van een ander OS blokkeert dit niet. Een opgeslagen voltooiing in `status` heet uitdrukkelijk
+`recorded_completed_live_unverified`; alleen een nieuwe readback is live bewijs.
+
+Voor web wordt uitsluitend het getekende kanaalarchief gebruikt, begrensd en
+zonder links uitgepakt, intern gecontroleerd en met `deploy_web.sh --bundle-dir`
+geplaatst. Ieder publiek manifestbestand wordt via HTTP nagehasht (maximaal acht
+gelijktijdige verzoeken). De rootconfiguratie `.htaccess` blijft in de getekende
+bundel en het manifest; `deploy_web.sh --verify-server-config-only --bundle-dir PAD`
+leest haar via dezelfde strikt gecontroleerde SSH-host en webroot terug. Deze
+modus voert geen upload, wissel of opruiming uit en bindt de reguliere
+configuratiebytes aan hetzelfde live manifest. `.well-known/security.txt` blijft
+via HTTP gecontroleerd. `deploy_web.sh --preflight-only` controleert bundel, tools en de
+alleen-lezen SSH-vereisten vóór het duurzame deploy-intent, zonder opnieuw in te
+pakken of te uploaden. Na herstel van zo'n preflightfout kunnen dezelfde bytes
+regulier worden geplaatst. Na een werkelijk gestarte of onzekere deploy wordt
+uitsluitend live gereconcilieerd. Een
+ontbrekende of afwijkende livefile blokkeert hervatten zonder blinde herdeploy.
+Voor macOS moet ook de publieke Homebrew-verwijzing exact URL en SHA256 dragen.
+De tap-update moet eerst terminaal klaar zijn; een groene forge-upload alleen
+betekent geen volledige macOS-publicatie. `rollback --rollback-from vMAJOR.MINOR.PATCH` is de expliciete verwijzingsrollback:
+`--tag` en de kandidaatargumenten benoemen de reeds gepubliceerde, strikt oudere,
+getekende doelversie. Eerst worden die publieke releasebytes opnieuw gelezen en
+geverifieerd; geen artefact of tag wordt gewijzigd. De geselecteerde live
+verwijzingen moeten nog de opgegeven oorspronkelijke versie bevatten, of het
+oudere doel wanneer een eigen duurzaam rollback-intent al bestaat. Andere
+OS-verwijzingen blijven staan. Rollbackfasen krijgen afzonderlijke journaalnamen
+`rollback-from-<versie>-<fase>`. MacOS-rollback zet bovendien een blijvende
+Homebrew-policy-pin; de volgende reguliere kanaalpublicatie wist die pin.
+
+Homebrew wordt met één duurzame nonce op de vertrouwde tap-main aangeroepen;
+verloren dispatchantwoorden worden uitsluitend op die nonce gereconcilieerd.
+De exacte terminale taprun, caskhash en publieke URL/SHA256 worden nagelezen.
+De websitebronworkflow mag op een latere main staan, mits zijn definitie exact
+bytegelijk is aan de lokaal beoordeelde workflow; die nieuwe controller-SHA wordt
+vóór dispatch opgeslagen. Een nieuwere andere updater wordt geweigerd.
+
+Runtime budgets, measured preparation costs and unresolved infrastructure causes
+are recorded in [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md). Historical
+Windows communication loss and crawler involvement have not been established
+as causes by the available evidence.
+
+### Noodzakelijke controles en hergebruik per kanaal
+
+| Poort | Plaats en afhankelijkheid | Bewijsidentiteit / wanneer opnieuw |
+| --- | --- | --- |
+| Bronkwaliteit: static, scans en gekozen platformpoort | Vóór publicatie; macOS ook vóór toegang tot ondertekening | Alle vereiste taken terminaal groen op dezelfde bron-SHA; bronwijziging vereist nieuw bewijs |
+| Actuele SDK | Vóór iedere nieuwe Linux/web-bouw: `make check-toolchain`; Debian 12 controleert de SDK in zijn eigen bouwcontainer; macOS vóór een nieuwe bouw | De werkelijk gebruikte Flutter-installatie moet overeenkomen met de bronpin en officiële stable-toolchain; geen vervanging door een cache-hit of eerdere CI |
+| Gekozen kanaal bouwen | Alleen na bron-/ref-/versiecontrole en SDK-poort; Windows gebruikt de bestaande eigen native route | Vaste kandidaatref, bron-SHA, controller-SHA en operatie; een andere bron/controller geeft nieuw bewijs |
+| Native consument | Na de bouw, uitsluitend het gekozen pakketprofiel; macOS en Windows via hun eigen adapter | Exact gebouwde archiefbytes; een ander archief vereist een nieuwe consumentenproef |
+| Kanaalbewijs en ondertekening | Na succesvolle bouw en alle toepasselijke consumenten | Manifest, SHA256SUMS en handtekening binden bron, controller, kanaal en bestanden |
+| Publieke bestanden | Na verificatie van alle voorgaande poorten | Lees dezelfde bytes terug; geen herbouw bij promotie |
+| Website, webdemo en Homebrew | Na geauthenticeerde publieke bestanden, alleen toepasselijke oppervlakken | Duurzaam fasejournaal en daadwerkelijke URL-/hashcontrole; andere OS-rijen veranderen dit bewijs niet |
+
+Een voortzetting van een bekende macOS-notarisatie gebruikt de bewaarde indiening en
+archiefbytes. Daarvoor is geen nieuwe SDK-poort nodig: er wordt niets opnieuw
+gebouwd. Onbekende schrijfacties vereisen eerst reconciliatie; opnieuw starten is
+geen vervanging voor bewijs.
+
+De onafhankelijke Linux/web-workflows delen één wachtrij zonder annulering. Elke
+bouwcontainer krijgt 2 CPU en 8 GiB; de Windows-orchestrator krijgt 2 CPU en 4 GiB.
+Consumenten en bewijsjobs krijgen 2 CPU en 4 GiB. De afzonderlijke Debian 12-daemon
+krijgt dezelfde 2 CPU/8 GiB bij zowel imagebouw als containeruitvoering; CMake krijgt
+twee parallelle compilatietaken. Omdat Flutter Ninja rechtstreeks aanroept,
+begrenzen beide Linux-bouwroutes bovendien de echte Ninja-opdracht met `-j2`
+via een tijdelijke PATH-wrapper, uitsluitend tijdens de bouw. Dit is toelatingsbeleid met bestaande bouwmarge,
+geen gemeten maximum of garantie voor de gehele server: andere CI deelt capaciteit.
+Mac- en Windows-runners behouden hun eigen kanaalwachtrij en native begrenzingen.
+
+### Versieoverzicht vóór de volgende OS-stap
+
+Gebruik het alleen-lezen versieoverzicht met het expliciet beoogde bereik:
+
+```sh
+python3 tool/release_channel_controller.py overview \
+  --state-dir /duurzame/opslag/release \
+  --tag vX.Y.Z --sha VOLLEDIGE_BRON_SHA \
+  --expected-channels macos windows linux-deb web
+```
+
+Het overzicht toont alle negen kanalen en controleert per opgeslagen operatie
+opnieuw dezelfde versie, bron en remote toestand. Ontbrekende lokale gegevens
+betekenen `unknown`, niet dat een kanaal publiek ontbreekt. `partial` en
+`complete` gelden voor het expliciet gekozen bereik; een nog lopende bouw of
+alleen geüploade assets telt niet als volledig publiek gecontroleerd. De verse
+controle verifieert ondertekende releasebytes en toepasselijke website-, web- en
+Homebrew-verwijzingen. Zij kan daarom bestanden downloaden en netwerkverkeer
+veroorzaken. Het commando start geen bouw, plaatsing of publicatie.

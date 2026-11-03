@@ -17,7 +17,7 @@
 #   macos    → .app als zip (op de Mac-runner)
 #   windows  → opgehaald van de spiegel
 # Pas na een groene kandidaat maakt release_auto.sh een geannoteerde tag met
-# het kandidaat-runnummer. De tag-push haalt exact die gecontroleerde bytes op,
+# het kandidaat-runnummer. De expliciete publicatiedispatch haalt exact die gecontroleerde bytes op,
 # maakt een draft release en laat ondertekening en de publieke stap aan het
 # lokale script. De webdemo en downloadpagina volgen na publicatie.
 #
@@ -30,9 +30,8 @@
 # platform aan, zolang dat platform ongetekend is.
 name: release
 
+# Alleen expliciet dispatchen: een kanaaltag mag geen tweede publicatieschrijver starten.
 on:
-  push:
-    tags: ["v*"]
   # Een kandidaat draait op zijn vaste commitbranch; publicatie op de tag.
   workflow_dispatch:
     inputs:

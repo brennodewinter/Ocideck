@@ -228,11 +228,11 @@ coverage-per-file:
 #   make test-golden UPDATE=1        # accept the new rendering
 test-golden:
 	@echo "== OciDeck check: golden (visual regression) =="
-	@echo "Command: flutter test --tags golden $(if $(UPDATE),--update-goldens,)"
+	@echo "Command: flutter test test/golden --tags golden $(TEST_JOBS_FLAG) $(if $(UPDATE),--update-goldens,)"
 	@echo "Covers: SlidePreviewWidget layout/structure/colour per slide type."
 	@echo "Failure means: a slide renders differently — inspect the *_testImage diff,"
 	@echo "        then re-run with UPDATE=1 if the change is intentional."
-	$(RAISE_FDS) flutter test --tags golden $(if $(UPDATE),--update-goldens,) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test test/golden --tags golden $(TEST_JOBS_FLAG) $(if $(UPDATE),--update-goldens,) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Mutation check for the "dead/untested boolean-operand" bug class that line
 # coverage and `dart analyze` both miss: an `||`/`&&` operand that can never be
@@ -410,6 +410,7 @@ shellcheck:
 	@echo "        silently matches nothing, an exit code swallowed by a pipe."
 	@echo "        Dart has a compiler and an analyzer for this; shell has this."
 	@command -v shellcheck >/dev/null 2>&1 || { echo "shellcheck not found — install it (macOS: brew install shellcheck)"; exit 2; }
+	@shellcheck --version | grep -qx "version: 0.11.0" || { echo "ShellCheck 0.11.0 required; check the validation environment before running the full gate."; exit 2; }
 	shellcheck scripts/*.sh
 
 check-secrets:
@@ -1465,7 +1466,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-linux-impeller check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
+STATIC_GATES := check-release-channels format-check analyze check-toolchain check-linux-deps check-linux-impeller check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus
@@ -1560,7 +1561,7 @@ check-registrations:
 check-full:
 	@scripts/gate_lock.sh $(MAKE) check-full-locked
 
-check-full-locked: check-locked check-l10n-orphans check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated check-marp
+check-full-locked: shellcheck check-locked check-l10n-orphans check-secrets sast licenses sbom-verify deps-check check-web deps-outdated check-marp
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, dependency freshness, and real-Marp theme loading."
 
@@ -1641,3 +1642,7 @@ ci-image-scans-publish:
 	  -t $(SCANS_IMAGE_REPO):$(SCANS_IMAGE_TAG) \
 	  -f .forgejo/ci-image/scans.Dockerfile .forgejo/ci-image
 	@echo "== Gepubliceerd. Zet het package op publiek als dat nog niet zo is. =="
+
+.PHONY: check-release-channels
+check-release-channels:
+	@python3 -m unittest discover -s test -p 'release_*_test.py'

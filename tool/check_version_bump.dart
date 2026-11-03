@@ -20,7 +20,9 @@
 // (`git describe --tags --abbrev=0`, matched against `v*`). When the version in
 // pubspec equals that baseline there is no bump in progress and the gate is a
 // no-op — normal development and feature branches never trip it; it fires only
-// on the commit that actually changes the version.
+// on the commit that actually changes the version. A changed version also
+// follows stable maintenance tags outside that ancestry; intentionally abandoned
+// versions are derived from the documented downgrade exceptions below.
 //
 // **A pre-release tag is not a release**, and the baseline skips it. The repo
 // cuts test tags like `v0.4.7-rc1` to exercise one build lane without
@@ -148,6 +150,58 @@ String? lastReleasedVersion({String? workingDirectory}) {
   }
 }
 
+int compareVersions(SemVer a, SemVer b) {
+  for (final pair in [
+    (a.major, b.major),
+    (a.minor, b.minor),
+    (a.patch, b.patch),
+  ]) {
+    final order = pair.$1.compareTo(pair.$2);
+    if (order != 0) return order;
+  }
+  return 0;
+}
+
+/// A maintenance release may be published outside main's ancestry. Unchanged
+/// development keeps its reachable baseline; a new bump must follow all reserved tags.
+String? versionBaseline(String currentVersion, {String? workingDirectory}) {
+  final reachable = lastReleasedVersion(workingDirectory: workingDirectory);
+  if (reachable == currentVersion) return reachable;
+  final abandoned = <String>{
+    for (final transition in sanctionedTransitions)
+      if (compareVersions(
+            SemVer.tryParse(transition.split('->').first)!,
+            SemVer.tryParse(transition.split('->').last)!,
+          ) >
+          0)
+        transition.split('->').first,
+  };
+  try {
+    final result = Process.runSync('git', [
+      'tag',
+      '--list',
+      'v*',
+    ], workingDirectory: workingDirectory);
+    if (result.exitCode != 0) return reachable;
+    final versions =
+        (result.stdout as String)
+            .split('\n')
+            .where(
+              (tag) => RegExp(
+                r'^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$',
+              ).hasMatch(tag),
+            )
+            .map((tag) => tag.substring(1))
+            .where((v) => !abandoned.contains(v))
+            .map((v) => SemVer.tryParse(v)!)
+            .toList()
+          ..sort(compareVersions);
+    return versions.isEmpty ? reachable : versions.last.toString();
+  } on ProcessException {
+    return reachable;
+  }
+}
+
 void main(List<String> args) {
   const pubspecPath = 'pubspec.yaml';
   final rawVersion = readPubspecVersion(pubspecPath);
@@ -160,7 +214,7 @@ void main(List<String> args) {
     exit(1);
   }
 
-  final baselineRaw = lastReleasedVersion();
+  final baselineRaw = versionBaseline(current.toString());
   if (baselineRaw == null) {
     stdout.writeln(
       'check-version-bump: no release tag reachable — cannot determine the '

@@ -36,7 +36,7 @@ MIRROR_GRACE_HOURS="${MIRROR_GRACE_HOURS:-24}"
 
 usage() {
   cat <<'USAGE'
-Usage: verify_homebrew_cask.sh [--mirror] [tag]
+Usage: verify_homebrew_cask.sh [--mirror] [--expected-url URL --expected-sha256 SHA256] [tag]
 
   tag        release tag to check against (default: the newest release)
   --mirror   also check the GitHub mirror of the tap, tolerating a lag of
@@ -46,9 +46,13 @@ USAGE
 
 CHECK_MIRROR=0
 TAG=""
+EXPECTED_URL=""
+EXPECTED_SHA256=""
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --mirror) CHECK_MIRROR=1 ;;
+    --expected-url) [ "$#" -ge 2 ] || exit 2; EXPECTED_URL="$2"; shift ;;
+    --expected-sha256) [ "$#" -ge 2 ] || exit 2; EXPECTED_SHA256="$2"; shift ;;
     -h|--help) usage; exit 0 ;;
     -*) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
     *) TAG="$1" ;;
@@ -128,6 +132,30 @@ fi
 
 echo "Tap $SOURCE is on $FOUND, matching $TAG."
 
+# Channel callers supply these values only after verifying the signed manifest.
+verify_identity() {
+if [ -n "$EXPECTED_URL$EXPECTED_SHA256" ]; then
+  [ -n "$EXPECTED_URL" ] && [[ "$EXPECTED_SHA256" =~ ^[0-9a-f]{64}$ ]] || {
+    echo "Both an exact URL and lowercase SHA256 are required." >&2; exit 2;
+  }
+  printf '%s\n' "$1" | python3 -c '
+import re, sys
+from urllib.parse import urlsplit
+expected_url, expected_sha = sys.argv[1:]
+url = urlsplit(expected_url)
+if url.scheme != "https" or not url.hostname or url.username or url.password or url.query or url.fragment:
+    raise SystemExit("Expected cask URL must be credential-free HTTPS")
+text = sys.stdin.read()
+for field, expected in (("url", expected_url), ("sha256", expected_sha)):
+    values = re.findall(r"^\s*" + field + r"\s+\"([^\"]+)\"\s*$", text, re.M)
+    if values != [expected]:
+        raise SystemExit("Cask " + field + " differs from the signed macOS channel")
+' "$EXPECTED_URL" "$EXPECTED_SHA256"
+fi
+
+}
+verify_identity "$CASK"
+
 if [ "$CHECK_MIRROR" = 0 ]; then
   exit 0
 fi
@@ -154,6 +182,7 @@ fi
 MIRROR_FOUND="$(printf '%s\n' "$MIRROR_CASK" | cask_version)"
 
 if [ "$MIRROR_FOUND" = "$EXPECTED" ]; then
+  verify_identity "$MIRROR_CASK"
   echo "Mirror $MIRROR_SOURCE is on $MIRROR_FOUND too."
   exit 0
 fi
