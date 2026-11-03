@@ -138,6 +138,33 @@ class ControllerTest(unittest.TestCase):
         self.assertEqual('found', result['dispatch'])
         self.assertEqual('unverified', result['publication'])
 
+    def test_windows_status_does_not_trust_local_unproven_state(self):
+        self.args.channel = 'windows'
+        self.wanted = control.identity(self.args)
+        control.reserve(self.args)
+        (self.args.state_dir / self.args.tag / 'downloaded-windows-operation.json').write_text('{}')
+        api = FakeForge(self.run_info('success'))
+        with patch.object(control.subprocess, 'run', return_value=SimpleNamespace(
+                stdout=json.dumps({'terminal': True, 'unknown': False, 'runs': []}), returncode=0)) as called:
+            result = control.status(self.args, api)
+        command = called.call_args.args[0]
+        self.assertNotIn('--state', command)
+        self.assertEqual(command[command.index('--forge-run-id') + 1], '42')
+        self.assertEqual(command[command.index('--controller-sha') + 1], self.args.controller_sha)
+        self.assertEqual([], result['github']['runs'])
+
+    def test_windows_publication_rejects_vacuous_terminal_result(self):
+        self.args.channel = 'windows'
+        self.args.run_id = 42
+        self.wanted = control.identity(self.args)
+        control.reserve(self.args)
+        api = FakeForge(self.run_info('success'))
+        with patch.object(control, 'status', return_value={
+                'runs': [{'id': 42, 'status': 'success'}],
+                'github': {'terminal': True, 'unknown': False, 'runs': []}}):
+            with self.assertRaisesRegex(ValueError, 'not proven terminal green'):
+                control.publish(self.args, api)
+
 
 if __name__ == '__main__':
     unittest.main()

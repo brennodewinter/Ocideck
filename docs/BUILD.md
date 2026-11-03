@@ -891,22 +891,24 @@ controller dispatches its publication explicitly after candidate checks. Initial
 channel publication also requires the source to carry the same safe publication
 workflow as the trusted controller; old sources with tag-triggered publication
 are refused. This prevents two different publication paths from writing together.
-The independent workflow currently covers web and five Linux formats only.
+The independent workflow has candidate paths for web, five Linux formats and
+Windows. Its Windows path delegates to GitHub native builds and consumer tests.
 
-#### Recovery state while the independent route is unfinished (2026-11-03)
+#### Recovery state while the independent route awaits operational proof (2026-11-03)
 
-The independent channel route is **not a completed release controller**. The
+The independent channel route is **not yet an operationally proven release cycle**. The
 implemented pieces are: exact source and channel manifests
-(`tool/release_channel.py`), a manual candidate workflow for web and five Linux
-formats, an append-only evidence journal, a local version-wide controller lock,
+(`tool/release_channel.py`), a candidate workflow for web, five Linux formats
+and Windows, a fail-closed operation CLI, an append-only evidence journal, a local version-wide controller lock,
 a remote lock branch in `publish_release_channel.sh`, public asset readback,
 and a public baseline check (`tool/release_baseline.py`). The baseline reads the
 highest non-abandoned tag from both remotes and requires a public release with a
 valid signed channel manifest and matching source version before allowing the
-next version. It does not repair a failed release. macOS, Windows and Debian 12
+next version. It does not repair a failed release. macOS and Debian 12
 have **no independent channel build and consumer route yet**. The existing full
 candidate route does not supply independent per-channel availability proof.
-Native CI and the full repository gate for the new route are still pending.
+Native CI, the full repository gate and an end-to-end release for the new route
+are still pending.
 Do not infer readiness or an ETA from the existence of these files.
 
 The current publisher is a child process of the local controller. It validates

@@ -219,10 +219,11 @@ def status(args, api):
         if helper.is_file():
             command = [sys.executable, str(helper), 'status', '--tag', args.tag,
                        '--sha', args.sha, '--ref', wanted['frozen_ref'],
-                       '--operation-id', args.operation_id]
-            saved = operation_path(args).parent / 'downloaded-windows-operation.json'
-            if saved.is_file() and not saved.is_symlink():
-                command += ['--state', str(saved)]
+                       '--operation-id', args.operation_id, '--controller-sha', args.controller_sha]
+            if len(result['runs']) == 1:
+                command += ['--forge-run-id', str(result['runs'][0]['id'])]
+            # A local file is not authenticated evidence from this Forgejo run.
+            # Without a verified downloaded journal, require both GH workflows visible.
             response = subprocess.run(command, capture_output=True, text=True, timeout=120)
             try:
                 result['github'] = json.loads(response.stdout, object_pairs_hook=release_channel.no_duplicates)
@@ -283,8 +284,9 @@ def stop(args, api):
             raise ValueError('new matching run appeared during stop; inspect all owned runs')
         if all(run.get('status') in TERMINAL for run in latest):
             result = snapshot(api, wanted)
-            if len(result['runs']) == 1:
-                save_observation(args, result)
+            if len(result['runs']) != 1:
+                raise ValueError('multiple runs for one operation; stop cannot prove one owner')
+            save_observation(args, result)
             # Only a terminal Forgejo worker cannot dispatch more dependent jobs.
             if args.channel == 'windows':
                 helper = Path(__file__).with_name('release_windows_candidate.py')
@@ -292,10 +294,8 @@ def stop(args, api):
                     raise ValueError('Windows ownership helper missing; GitHub state remains unknown')
                 command = [sys.executable, str(helper), 'cancel', '--tag', args.tag, '--sha', args.sha,
                            '--ref', wanted['frozen_ref'], '--operation-id', args.operation_id,
+                           '--forge-run-id', str(latest[0]['id']), '--controller-sha', args.controller_sha,
                            '--wait-terminal']
-                saved = operation_path(args).parent / 'downloaded-windows-operation.json'
-                if saved.is_file() and not saved.is_symlink():
-                    command += ['--state', str(saved)]
                 if subprocess.run(command, timeout=960).returncode:
                     raise ValueError('owned GitHub runs not confirmed terminal; stop remains blocked')
             return result
@@ -307,8 +307,13 @@ def publish(args, api):
     result = status(args, api)
     if len(result['runs']) != 1 or result['runs'][0]['status'] != 'success' or str(result['runs'][0]['id']) != str(args.run_id):
         raise ValueError('exact operation build is not terminal green')
-    if args.channel == 'windows' and result.get('github', {}).get('status') != 'success':
-        raise ValueError('dependent Windows run is not proven terminal green')
+    if args.channel == 'windows':
+        github = result.get('github', {})
+        if (github.get('unknown') is not False or github.get('terminal') is not True
+                or len(github.get('runs', [])) != 2
+                or any(run.get('status') != 'completed' or run.get('conclusion') != 'success'
+                       for run in github['runs'])):
+            raise ValueError('dependent Windows runs are not proven terminal green')
     if not getattr(args, 'dist', None) or not getattr(args, 'evidence', None):
         raise ValueError('signed candidate files are required; ready for signing, not publication')
     manifest = args.evidence / ('channel-manifest-' + args.channel + '.json')
