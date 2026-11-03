@@ -158,7 +158,28 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
   final choice = await PackageEncryptDialog.show(context);
   if (choice == null || !context.mounted) return;
   final password = choice.encrypt ? choice.password : null;
-  final index = buildAuditDossier(deck, evidenceHashes: hashes);
+  // #2747: het dossier draagt óók de geredigeerde afleiding en haar
+  // commitment-manifest zonder salts — dan kan de auditor de redacties
+  // controleren zonder de verificatiesleutels in handen te krijgen.
+  final settings = ref.read(settingsProvider);
+  final redactedBundle = buildExportBundle(
+    deck,
+    deck.slides,
+    profile: PrivacyExportProfile.redacted,
+    includeDetail: true,
+    expandPages: true,
+    disabledRules: settings.privacyDisabledRules,
+    ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+    regions: settings.privacyRegions,
+    markdownService: MarkdownService(),
+  );
+  final manifest = redactedBundle.manifest;
+  final hasRedactions = !manifest.isEmpty;
+  final index = buildAuditDossier(
+    deck,
+    evidenceHashes: hashes,
+    redactionCount: manifest.entries.length,
+  );
   final fileService = ref.read(fileServiceProvider);
   try {
     final String? dest;
@@ -166,6 +187,10 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
       dest = await fileService.downloadDossier(
         deck,
         dossierIndex: index,
+        redactedMarkdown: hasRedactions ? redactedBundle.markdown : null,
+        redactionManifestJson: hasRedactions
+            ? manifest.withoutSalts.toPrettyJson()
+            : null,
         password: password,
       );
     } else {
@@ -175,6 +200,10 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
         deck,
         picked,
         dossierIndex: index,
+        redactedMarkdown: hasRedactions ? redactedBundle.markdown : null,
+        redactionManifestJson: hasRedactions
+            ? manifest.withoutSalts.toPrettyJson()
+            : null,
         password: password,
       );
       dest = picked;
