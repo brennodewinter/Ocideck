@@ -258,13 +258,12 @@ List<SlideQualityIssue> slideBadgeIssues(
 
 /// Zet de acceptatie van deze slide aan of uit.
 ///
-/// #2738: "Ongedaan maken" zette niets terug bij `shield`/`redact` — de badge
-/// leek te liegen. Nu zet hij terug naar de bewuste basis: geen keuze
-/// (`null`, erft de deck-stand "waarschuwen"). Dat is géén stille
-/// `accept`: de bevinding blijft staan en export waarschuwt weer, precies
-/// wat "nog geen keuze" betekent. De persoonsgegevens komen niet zomaar
-/// terug in de export — ze zijn dan weer óngeremd gegevens met een
-/// actieve melding, als vóór de keuze.
+/// Bij privacy draait dit **alleen** `accept` terug. Staat de slide op `redact`
+/// of `shield`, dan blijft hij staan: die standen doen iets met de gegevens zelf
+/// of met de ontvanger, en dat met een dubbelklik ongedaan maken zou zwart
+/// gelakte persoonsgegevens weer in de export zetten zonder dat iemand erom
+/// vroeg. Die keuze hoort in het instellingenpaneel van de slide thuis, waar je
+/// ziet wat je kiest.
 void toggleSlideBadgeAcceptance(
   WidgetRef ref,
   int slideIndex,
@@ -295,7 +294,6 @@ void toggleSlideBadgeAcceptance(
   );
   if (effective == PrivacyDisposition.shield ||
       effective == PrivacyDisposition.redact) {
-    notifier.updateSlide(slideIndex, slide.copyWith(clearPrivacy: true));
     return;
   }
   notifier.updateSlide(

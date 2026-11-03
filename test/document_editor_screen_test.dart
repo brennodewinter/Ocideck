@@ -1100,7 +1100,7 @@ void main() {
     expect(find.text('Blokkerende fouten'), findsNothing);
   });
 
-  testWidgets('presentatie-aanwijzing: vink een tabel aan en annuleer', (
+  testWidgets('presenteren opent direct, zonder aanwijsdialoog (#2743)', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
@@ -1122,15 +1122,12 @@ void main() {
     await tester.tap(find.text('Presenteer document…'));
     await tester.pumpAndSettle();
 
-    // De aanwijsdialoog somt de tabellen van het document op.
-    expect(find.text('Presenteer document'), findsOneWidget);
-    expect(find.textContaining('Tabel 1'), findsOneWidget);
-    await tester.tap(find.byType(CheckboxListTile));
-    await tester.pump();
-    await tester.tap(find.text('Annuleren'));
-    await tester.pumpAndSettle();
-
-    // Geannuleerd: geen presentatie, het document staat ongemoeid.
+    // Geen aanwijsdialoog meer: de presentatie gaat direct open. Tabellen
+    // staan alleen-lezen en worden per tabel bewerkbaar in de sessie (#2743).
+    // De sessieroute zelf draait niet headless (wakelock/schermgrenzen), dus
+    // blijft de toets op de afwezige aanwijzing en het ongemoeide document.
+    expect(find.byType(CheckboxListTile), findsNothing);
+    expect(find.textContaining('Tabel 1'), findsNothing);
     expect(n.currentState.document!.source, contains('| R-1 |'));
   });
 
