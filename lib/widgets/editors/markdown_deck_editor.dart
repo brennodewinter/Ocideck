@@ -282,10 +282,11 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   void _scheduleValidation() {
     _validationTimer?.cancel();
     _validationPending = true;
-    // De bundel draait op een achtergrond-isolate (#2713): drie volledig-
-    // bronscans van samen ~42 ms op een groot deck hoorden niet op de
-    // UI-thread, ook niet pas na de debounce. Een verlopen ronde (er was
-    // alweer getypt, of de widget is weg) wordt bij afgifte weggegooid.
+    // De bundel draait native op een achtergrond-isolate (#2713): drie
+    // volledig-bronscans van samen ~42 ms op een groot deck hoorden niet op de
+    // UI-thread, ook niet pas na de debounce; op web blijft hij op de main
+    // thread (#2764). Een verlopen ronde (er was alweer getypt, of de widget
+    // is weg) wordt bij afgifte weggegooid.
     final args = (
       source: _ctrl.text,
       compatContext: _marpCompatEnabled ? _compatContext : null,

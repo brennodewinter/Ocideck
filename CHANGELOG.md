@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Broncontrole werkt op het web.** In de browser liep de controle van de
+  broneditor na elke typpauze stuk op `Isolate.run`, dat het web niet kent.
+  Validatie, schrijftips en de Marp-controle kwamen niet, en de balk bleef op
+  "Controleren…" staan. Op het web draait de ronde nu op de main thread;
+  native blijft hij op een achtergrond-isolate (#2764).
 - **Presentaties openen op het web.** De privacyscan vraagt in de browser
   geen desktop-isolate meer op. Daardoor openen de proefpresentatielink en
   URL-import weer zonder de misleidende CORS-foutmelding.

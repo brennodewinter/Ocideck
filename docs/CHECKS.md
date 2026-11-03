@@ -26,13 +26,20 @@ Run `make help` for a one-line summary of every target.
 make check        # format-check + analyze + conventions + method-length + dead-code + coverage + per-file floor
 ```
 
-The browser privacy-scan regression needs an actual Chrome runtime; the native
-suite skips this browser-only test. Run it explicitly when changing scan warm-up
-or its platform guards:
+The browser regressions need an actual Chrome runtime; the native suite skips
+the browser-only tests. Run them explicitly when changing privacy-scan warm-up,
+the source-editor check round (`lib/services/deck_source_checks.dart`) or their
+platform guards:
 
 ```sh
-flutter test --platform chrome test/privacy_scan_memo_web_test.dart
+flutter test --platform chrome test/privacy_scan_memo_web_test.dart \
+  test/markdown_deck_editor_web_test.dart test/deck_source_checks_test.dart
 ```
+
+`deck_source_checks_test.dart` runs natively as well: there it proves the check
+round still leaves the UI isolate. In the browser it proves the round completes
+on the main thread instead of throwing on `Isolate.run` after the debounce
+(#2764). It makes no off-thread claim for the web.
 
 > **Prerequisite: `cmake` on your `PATH`.** Since the move to `dartcv4` for
 > on-device face detection (#870), the native OpenCV binding is built through a
