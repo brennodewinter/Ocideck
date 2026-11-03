@@ -316,7 +316,11 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
     if (running != null) return running;
 
     final completer = Completer<String?>();
-    final future = completer.future.whenComplete(() => _inFlight.remove(key));
+    // Blokhaak, geen pijl: `remove` geeft déze toekomst terug en
+    // `whenComplete` zou daar weer op wachten — een circulaire hang (#2725).
+    final future = completer.future.whenComplete(() {
+      _inFlight.remove(key);
+    });
     _inFlight[key] = future;
     _queue.add(_PendingRender(source0, kind, completer));
     _pumpQueue();
