@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +16,6 @@ import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
 import '../parts/document_export_pdf_support.dart';
 import 'dialog_shell.dart';
-import '../../state/settings_provider.dart';
 import 'export_failure_text.dart';
 
 /// Toon de reden wanneer het classificatiebeleid documentexport weigert.
@@ -169,10 +167,19 @@ class DocumentExportDialog extends StatefulWidget {
   /// controleert de inhoud alsnog tegen de exportregel.
   final bool privacyChecksEnabled;
 
+  /// #2753: het door de auteur aangewezen lettertypebestand, of `null`.
+  /// Het dialoog zelf kent geen provider — de aanroeper draagt beide kanten
+  /// van de instelling aan. Zonder [onPdfFontPathChanged] is de hele rij
+  /// onzichtbaar (losstaande build, zoals in tests).
+  final String? pdfFontPath;
+  final ValueChanged<String?>? onPdfFontPathChanged;
+
   const DocumentExportDialog({
     super.key,
     required this.onExport,
     required this.privacyChecksEnabled,
+    this.pdfFontPath,
+    this.onPdfFontPathChanged,
   });
 
   static Future<void> show(
@@ -184,11 +191,15 @@ class DocumentExportDialog extends StatefulWidget {
     })
     onExport,
     required bool privacyChecksEnabled,
+    String? pdfFontPath,
+    ValueChanged<String?>? onPdfFontPathChanged,
   }) => showDialog(
     context: context,
     builder: (_) => DocumentExportDialog(
       onExport: onExport,
       privacyChecksEnabled: privacyChecksEnabled,
+      pdfFontPath: pdfFontPath,
+      onPdfFontPathChanged: onPdfFontPathChanged,
     ),
   );
 
@@ -550,67 +561,57 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
   /// gekozen, en zonder aanwijzing blijft het huidige gedrag met de melding
   /// over ontbrekende tekens.
   Widget _pdfFontRow(AppLocalizations l10n) {
-    return Consumer(
-      builder: (context, ref, _) {
-        final path = ref.watch(settingsProvider).documentPdfFontPath;
-        return Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    if (widget.onPdfFontPathChanged == null) return const SizedBox.shrink();
+    final path = widget.pdfFontPath;
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Extra lettertype voor ontbrekende tekens'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 4),
+          Row(
             children: [
-              Text(
-                l10n.d('Extra lettertype voor ontbrekende tekens'),
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+              Expanded(
+                child: Text(
+                  path ?? l10n.d('Geen lettertypebestand gekozen'),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
                 ),
               ),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      path ?? l10n.d('Geen lettertypebestand gekozen'),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+              TextButton(
+                onPressed: () async {
+                  final file = await FilePicker.pickFile(
+                    dialogTitle: l10n.d(
+                      'Extra lettertype voor ontbrekende tekens',
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      final file = await FilePicker.pickFile(
-                        dialogTitle: l10n.d(
-                          'Extra lettertype voor ontbrekende tekens',
-                        ),
-                        type: FileType.custom,
-                        allowedExtensions: ['ttf', 'otf', 'ttc'],
-                      );
-                      if (file?.path == null) return;
-                      await ref
-                          .read(settingsProvider.notifier)
-                          .setDocumentPdfFontPath(file!.path);
-                    },
-                    child: Text(l10n.d('Kies bestand…')),
-                  ),
-                  if (path != null)
-                    TextButton(
-                      onPressed: () => ref
-                          .read(settingsProvider.notifier)
-                          .setDocumentPdfFontPath(null),
-                      child: Text(l10n.d('Verwijderen')),
-                    ),
-                ],
+                    type: FileType.custom,
+                    allowedExtensions: ['ttf', 'otf', 'ttc'],
+                  );
+                  if (file?.path == null) return;
+                  widget.onPdfFontPathChanged!(file!.path);
+                },
+                child: Text(l10n.d('Kies bestand…')),
               ),
-              Text(
-                l10n.d(
-                  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.',
+              if (path != null)
+                TextButton(
+                  onPressed: () => widget.onPdfFontPathChanged!(null),
+                  child: Text(l10n.d('Verwijderen')),
                 ),
-                style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-              ),
             ],
           ),
-        );
-      },
+          Text(
+            l10n.d(
+              'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+        ],
+      ),
     );
   }
 

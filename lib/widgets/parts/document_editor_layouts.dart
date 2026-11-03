@@ -588,6 +588,11 @@ Future<void> _exportDocument(_DocumentEditorScreenState s) async {
   await DocumentExportDialog.show(
     s.context,
     privacyChecksEnabled: settings.privacyChecksEnabled,
+    // #2753: het auteursgekozen lettertype gaat heen; de schrijfweg terug
+    // loopt via de bestaande instellingen-notifier.
+    pdfFontPath: settings.documentPdfFontPath,
+    onPdfFontPathChanged: (path) =>
+        s.ref.read(settingsProvider.notifier).setDocumentPdfFontPath(path),
     onExport: (profile, format, {required isCancelled}) => _writeDocumentExport(
       s.ref,
       s.context,
