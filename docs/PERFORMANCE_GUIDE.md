@@ -92,6 +92,9 @@ optimisation.
 - The paged document view mounts only the sheets in and around the viewport
   plus the one off-screen measurement tree; off-screen pages keep an exactly
   equal placeholder so scroll geometry does not shift (#2725).
+- Slide rasterisation precaches per slide inside the capture loop, so only
+  ~1 slide's images are live at once; the remaining imageCache cap during
+  export is 1 GiB — far above one slide but below a whole photo deck (#2726).
 - Video plays through a shared media host so only one heavy player is live.
 - A Marp background may keep every authored image filter for lossless Markdown,
   but Flutter and HTML apply at most **32 filters**. This bounds Flutter's
