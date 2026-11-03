@@ -495,10 +495,6 @@ extension _PresenterOverlays on _FullscreenPresenterState {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: _muted, fontSize: 11),
           ),
-          textAlign: TextAlign.right,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: _muted, fontSize: 11),
         ),
         IconButton(
           tooltip: l10n.d('Afsluiten (Escape)'),
