@@ -11,6 +11,8 @@ import stat
 import subprocess
 import sys
 import tempfile
+import tarfile
+from types import SimpleNamespace
 import time
 import zipfile
 from urllib.error import HTTPError
@@ -473,6 +475,95 @@ def status(args, api):
     return result
 
 
+def overview_readback(args):
+    """Read public bytes again without dispatching or saving public-phase receipts."""
+    import release_channel_surfaces as surfaces
+    state = args.state_dir.resolve() / args.tag
+    args.status = True
+    command = release_channel_control.publisher_command(args, Path(__file__).resolve().parent.parent,
+        state, state / (args.channel + '-published.json'))
+    response = subprocess.run(command, capture_output=True, text=True, timeout=3600)
+    if response.returncode:
+        raise ValueError('signed public asset readback is unavailable or differs')
+    result = {'assets': 'verified', 'public': 'unknown'}
+    try:
+        if args.channel == 'web':
+            archive = args.dist / ('ocideck-web-' + args.tag[1:] + '.tar.gz')
+            with tempfile.TemporaryDirectory(prefix='web-overview-') as temporary:
+                bundle = Path(temporary) / 'bundle'
+                surfaces.extract_web(archive, bundle, args.tag[1:])
+                surfaces.verify_web(bundle)
+        else:
+            _, receipt = surfaces.phase_paths(args, 'website')
+            proof = surfaces.read_json(receipt)
+            if proof.get('tag') != args.tag or proof.get('channel') != args.channel:
+                raise ValueError('website receipt identity differs')
+            surfaces.verify_pages(proof, surfaces.selected_urls(args))
+            if args.channel == 'macos':
+                manifest = surfaces.read_json(args.evidence / 'channel-manifest-macos.json')
+                name = 'ocideck-macos-' + args.tag[1:] + '.zip'
+                url = 'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/' + args.tag + '/' + name
+                command = ['bash', str(Path(__file__).resolve().parent.parent / 'scripts/verify_homebrew_cask.sh'),
+                    '--expected-url', url, '--expected-sha256', manifest['files'][name], args.tag]
+                if subprocess.run(command, capture_output=True, text=True, timeout=120).returncode:
+                    raise ValueError('live Homebrew cask is unavailable or differs')
+        result['public'] = 'verified'
+    except (ValueError, OSError, TypeError, KeyError, tarfile.TarError, subprocess.TimeoutExpired) as error:
+        result['blocker'] = str(error)
+    return result
+
+
+def overview(args, api):
+    """Show every channel; complete applies only to the explicitly expected scope."""
+    expected = args.expected_channels
+    if not expected or len(set(expected)) != len(expected) or not set(expected) <= release_channel.CHANNELS.keys():
+        raise ValueError('expected channels must be explicit, unique and known')
+    import release_channel_surfaces as surfaces
+    channels = {}
+    for channel in release_channel.CHANNELS:
+        release_channel.identity(args.tag, args.sha, channel)
+        entry = {'expected': channel in expected, 'state': 'unknown', 'assets': 'unknown', 'public': 'unknown'}
+        channels[channel] = entry
+        try:
+            stage = args.state_dir.resolve() / args.tag / (channel + '-candidate')
+            local = surfaces.read_json(stage.parent / (channel + '-operation.json'))
+            selected = SimpleNamespace(**dict(vars(args), channel=channel, controller_sha=local['controller'],
+                operation_id=local['operation_id'], dist=stage / 'dist', evidence=stage / 'evidence',
+                release_id='auto', create_release=False, status=True))
+            read_operation(selected)
+            observed = status(selected, api)
+            entry['controller'] = selected.controller_sha
+            if not observed['runs']:
+                entry['blocker'] = 'dispatch outcome unknown; no remote absence is proven'
+                continue
+            run = observed['runs'][-1]
+            entry['run_id'] = run['id']
+            if run['status'] not in TERMINAL:
+                entry['state'] = 'running'
+            elif run.get('outcome') == 'pending':
+                entry['state'] = 'pending'
+            elif run['status'] == 'cancelled':
+                entry['state'] = 'cancelled'
+            elif run['status'] in ('failure', 'error'):
+                entry['state'] = 'failed'
+            elif observed['build_metadata'] == 'success':
+                entry['state'] = 'verified'
+                selected.run_id = str(run['id'])
+                entry.update(overview_readback(selected))
+                if entry['public'] == 'verified':
+                    entry['state'] = 'published'
+                elif entry['assets'] == 'verified':
+                    entry['state'] = 'assets_published'
+        except (ValueError, OSError, TypeError, KeyError, zipfile.BadZipFile, subprocess.TimeoutExpired) as error:
+            entry['blocker'] = str(error)
+    published = [channel for channel, entry in channels.items() if entry['state'] == 'published']
+    count = len(set(expected) & set(published))
+    return {'tag': args.tag, 'source': args.sha, 'expected_channels': expected,
+            'checked_at': datetime.now(timezone.utc).isoformat(), 'channels': channels,
+            'published_channels': published,
+            'publication': 'complete' if count == len(expected) else 'partial' if count else 'unverified'}
+
+
 def attempt_path(args, previous_run_id):
     return operation_path(args).parent / (args.channel + '-continue-' + str(previous_run_id) + '.json')
 
@@ -656,10 +747,13 @@ def publish(args, api):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['capabilities', 'plan', 'start', 'status', 'stop', 'hervat', 'publish', 'public', 'rollback'])
+    parser.add_argument('command', choices=['capabilities', 'plan', 'start', 'status', 'overview', 'stop', 'hervat', 'publish', 'public', 'rollback'])
     parser.add_argument('--state-dir', type=Path, required=True)
-    for name in ('tag', 'sha', 'controller-sha', 'channel'):
+    for name in ('tag', 'sha'):
         parser.add_argument('--' + name, required=True)
+    for name in ('controller-sha', 'channel'):
+        parser.add_argument('--' + name)
+    parser.add_argument('--expected-channels', nargs='+', choices=list(release_channel.CHANNELS))
     parser.add_argument('--rollback-from')
     parser.add_argument('--operation-id')
     parser.add_argument('--phase', choices=['build', 'assets', 'website'], default='build')
@@ -669,15 +763,22 @@ def main():
     parser.add_argument('--dist', type=Path)
     parser.add_argument('--evidence', type=Path)
     args = parser.parse_args()
+    if args.command == 'overview':
+        if not args.expected_channels:
+            parser.error('overview requires explicit --expected-channels')
+    elif not args.channel or not args.controller_sha:
+        parser.error('--channel and --controller-sha are required for this command')
     if args.command == 'start':
         args.operation_id = args.operation_id or uuid4().hex
-    elif args.command not in ('plan', 'capabilities') and not args.operation_id:
+    elif args.command not in ('plan', 'capabilities', 'overview') and not args.operation_id:
         path = operation_path(args)
         if path.is_symlink() or not path.is_file():
             parser.error('saved operation ID missing')
         args.operation_id = json.loads(path.read_text(), object_pairs_hook=release_channel.no_duplicates).get('operation_id')
     try:
-        if args.command == 'capabilities':
+        if args.command == 'overview':
+            result = overview(args, Forgejo())
+        elif args.command == 'capabilities':
             args.operation_id = args.operation_id or 'planned'
             result = capabilities.inspect(Forgejo(), identity(args), args.phase)
         elif args.command == 'plan':
