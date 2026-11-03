@@ -448,6 +448,22 @@ profile `ocideck-notary`; override with `OCIDECK_SIGN_IDENTITY` /
 `scripts/notarize_macos.sh --skip-build` signs and notarises whatever is already
 in `build/` without rebuilding.
 
+After an interrupted submission, keep the same worktree, commit, `build/`
+contents, signing identity and keychain profile, then run
+`scripts/notarize_macos.sh --resume-notary` (add `--no-package` when CI packages
+the app). The saved submission ID and archive hash live under
+`git rev-parse --git-path ocideck-notary`; resuming neither rebuilds nor submits
+again. A new clean build is blocked while an unfinished transaction exists.
+Stapling and packaging interruptions also resume from the preserved bytes.
+Do not remove this metadata or the original submission archive to bypass a
+failure. If submission returned no trustworthy ID, reconcile Apple's history
+manually before any new submission. A leftover `script.lock` requires checking
+that the previous process has stopped before removing that lock directory.
+
+The recovery tests use simulated Apple commands. An actual resumed Apple
+submission on a separate Mac remains required before claiming this route is
+operational; the user's laptop is not a fallback runner.
+
 When the preflight (`--preflight`, also run by `release_auto.sh`) reports a
 `notarytool` failure it shows Apple's real output and routes the fix to the
 cause (#2296): a **403 about a required agreement** means the Account Holder
