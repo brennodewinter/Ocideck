@@ -652,6 +652,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Terug naar de dia\'s': 'Retour aux diapositives',
+  'Verder typen': 'Continuer à taper',
+  'Terug zonder deze wijzigingen': 'Retour sans ces modifications',
+  'Toepassen en terug': 'Appliquer et retourner',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Vos modifications n\'ont pas encore été appliquées.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Modifications non appliquées : appliquez, jetez ou restez ici.',
   'Deze tabel bewerken': 'Modifier ce tableau',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} ne sera plus signalé dans aucune présentation. Vous pouvez le réactiver dans Sécurité.',

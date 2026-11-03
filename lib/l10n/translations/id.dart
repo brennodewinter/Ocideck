@@ -1605,6 +1605,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Terug naar de dia\'s': 'Kembali ke slide',
+  'Verder typen': 'Lanjut mengetik',
+  'Terug zonder deze wijzigingen': 'Kembali tanpa perubahan ini',
+  'Toepassen en terug': 'Terapkan dan kembali',
+  'Je wijzigingen zijn nog niet toegepast.': 'Perubahanmu belum diterapkan.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Perubahan belum diterapkan: terapkan, buang, atau tetap di sini.',
   'Deze tabel bewerken': 'Edit tabel ini',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} tidak akan lagi dilaporkan di presentasi mana pun. Anda bisa mengaktifkannya kembali di Keamanan.',

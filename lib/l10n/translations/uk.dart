@@ -1620,6 +1620,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Terug naar de dia\'s': 'Назад до слайдів',
+  'Verder typen': 'Продовжити друкувати',
+  'Terug zonder deze wijzigingen': 'Назад без цих змін',
+  'Toepassen en terug': 'Застосувати й повернутися',
+  'Je wijzigingen zijn nog niet toegepast.': 'Ваші зміни ще не застосовано.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Незастосовані зміни: застосуйте, відкиньте або залиштеся.',
   'Deze tabel bewerken': 'Редагувати цю таблицю',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} більше не повідомлятиметься в жодній презентації. Ви можете повернути це в Безпеці.',

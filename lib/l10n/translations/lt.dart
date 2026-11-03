@@ -1611,6 +1611,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Terug naar de dia\'s': 'Atgal į skaidres',
+  'Verder typen': 'Rašyti toliau',
+  'Terug zonder deze wijzigingen': 'Grįžti be šių pakeitimų',
+  'Toepassen en terug': 'Taikyti ir grįžti',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Jūsų pakeitimai dar nepritaikyti.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nepritaikyti pakeitimai: taikykite, atmeskite arba likite čia.',
   'Deze tabel bewerken': 'Redaguoti šią lentelę',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} nebebus pranešta jokioje prezentacijoje. Galite atstatyti skiltyje Saugumas.',

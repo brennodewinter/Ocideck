@@ -811,6 +811,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Terug naar de dia\'s': 'Back to the slides',
+  'Verder typen': 'Keep typing',
+  'Terug zonder deze wijzigingen': 'Return without these changes',
+  'Toepassen en terug': 'Apply and return',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Your changes have not been applied yet.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Unapplied changes: apply, discard, or stay here.',
   'Deze tabel bewerken': 'Edit this table',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} will then no longer be reported in any presentation. You can turn it back on under Security.',

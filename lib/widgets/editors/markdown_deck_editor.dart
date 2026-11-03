@@ -413,13 +413,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               ),
               child: Text(l10n.d('Terug naar editor')),
             ),
-            TextButton(
-              onPressed: () => Navigator.pop(
-                ctx,
-                const _ApplyChoiceResult(_ApplyChoice.cancel),
-              ),
-              child: Text(l10n.t('cancel')),
-            ),
+
             ElevatedButton(
               onPressed: () => Navigator.pop(
                 ctx,
@@ -456,31 +450,40 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       widget.onExitMarkdown();
       return;
     }
-    final discard = await showDialog<bool>(
+    // #2742: drie keuzes i.p.v. alleen verwerpen — "Toepassen en terug" is
+    // de voorgeselecteerde knop, verder typen of terug zonder deze tekst.
+    final choice = await showDialog<int>(
       context: context,
       builder: (ctx) {
         final l10n = ctx.l10n;
         return AlertDialog(
           title: Text(l10n.d('Niet-toegepaste wijzigingen')),
-          content: Text(
-            l10n.d(
-              'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?',
-            ),
-          ),
+          content: Text(l10n.d('Je wijzigingen zijn nog niet toegepast.')),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(ctx, false),
-              child: Text(l10n.d('Doorgaan met bewerken')),
+              onPressed: () => Navigator.pop(ctx, 0),
+              child: Text(l10n.d('Verder typen')),
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(ctx, true),
-              child: Text(l10n.d('Wijzigingen verwerpen')),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, 1),
+              child: Text(l10n.d('Terug zonder deze wijzigingen')),
+            ),
+            FilledButton(
+              autofocus: true,
+              onPressed: () => Navigator.pop(ctx, 2),
+              child: Text(l10n.d('Toepassen en terug')),
             ),
           ],
         );
       },
     );
-    if (discard == true && mounted) widget.onExitMarkdown();
+    if (!mounted) return;
+    if (choice == 1) {
+      widget.onExitMarkdown();
+    } else if (choice == 2) {
+      await _applyMarkdown();
+      widget.onExitMarkdown();
+    }
   }
 
   void _formatSelection(String before, String after) {
@@ -525,12 +528,34 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   void _requestScopeChange(MarkdownScope scope) {
     if (scope == widget.scope) return;
     if (_isDirty) {
+      final l10n = context.l10n;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            context.l10n.d(
-              'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.',
-            ),
+          content: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.d(
+                    'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.',
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  _applyMarkdown();
+                  widget.onScopeChanged(scope);
+                },
+                child: Text(l10n.d('Toepassen')),
+              ),
+              TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  widget.onScopeChanged(scope);
+                },
+                child: Text(l10n.d('Verwerpen')),
+              ),
+            ],
           ),
         ),
       );
@@ -905,7 +930,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
           ),
           TextButton(
             onPressed: _requestExitMarkdown,
-            child: Text(l10n.t('cancel')),
+            child: Text(l10n.d('Terug naar de dia\'s')),
           ),
         ],
       ),

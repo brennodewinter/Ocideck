@@ -651,6 +651,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Terug naar de dia\'s': 'Bai bèk na e slajtnan',
+  'Verder typen': 'Kontinua skirbi',
+  'Terug zonder deze wijzigingen': 'Bai bèk sin e kambionan aki',
+  'Toepassen en terug': 'Apliká i bai bèk',
+  'Je wijzigingen zijn nog niet toegepast.': 'Bo kambionan ainda no a apliká.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Kambionan no apliká: apliká, lag\'é bai òf keda aki.',
   'Deze tabel bewerken': 'Editá e tabla aki',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} lo no wordu raportá mas den niun presentashon. Bo por bolbe aktiv\'é na Seguridat.',

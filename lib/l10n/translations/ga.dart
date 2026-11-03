@@ -1635,6 +1635,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Terug naar de dia\'s': 'Ar ais go dtí na sleamhnáin',
+  'Verder typen': 'Lean ar aghaidh ag clóscríobh',
+  'Terug zonder deze wijzigingen': 'Ar ais gan na hathruithe seo',
+  'Toepassen en terug': 'Cuir i bhfeidhm agus fill',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Níor cuireadh do hathruithe i bhfeidhm go fóill.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Athruithe neamhfheidhmithe: cuir i bhfeidhm, caith amú nó fan anseo.',
   'Deze tabel bewerken': 'Cuir an tábla seo in eagar',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       'Ní thuairisceofar {regel} in aon chur i láthair níos mó. Is féidir é a chur ar ais faoi Slándáil.',

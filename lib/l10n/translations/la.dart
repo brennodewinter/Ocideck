@@ -1620,6 +1620,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Terug naar de dia\'s': 'Ad imagines revertere',
+  'Verder typen': 'Perge scribere',
+  'Terug zonder deze wijzigingen': 'Revertere sine his mutationibus',
+  'Toepassen en terug': 'Adhibe et revertere',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Mutationes tuae nondum adhibitae sunt.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Mutationes non adhibitae: adhibe, abiice aut hic mane.',
   'Deze tabel bewerken': 'Tabulam hanc recensere',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} in nulla prorsus praesentatione amplius nuntiabitur. Apud Securitatem restituere potes.',

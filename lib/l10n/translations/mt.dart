@@ -1623,6 +1623,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Terug naar de dia\'s': 'Lura lejn l-islejds',
+  'Verder typen': 'Kompli ttajpja',
+  'Terug zonder deze wijzigingen': 'Mur lura mingħajr dawn il-bidliet',
+  'Toepassen en terug': 'Applika u mur lura',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Il-bidliet tiegħek għadhom ma ġewx applikati.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Bidliet mhux applikati: applika, armi, jew ibqa\' hawn.',
   'Deze tabel bewerken': 'Editja din it-tabella',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} mhux se jibqa\' jiġi rrappurtat f\'ebda preżentazzjoni. Tista\' tattiva mill-ġdid taħt Sigurtà.',

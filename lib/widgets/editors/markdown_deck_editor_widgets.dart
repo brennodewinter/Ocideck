@@ -385,7 +385,7 @@ class _MarkdownOutlineButton extends StatelessWidget {
   }
 }
 
-enum _ApplyChoice { edit, cancel, applyAnyway }
+enum _ApplyChoice { edit, applyAnyway }
 
 class _ApplyChoiceResult {
   final _ApplyChoice choice;

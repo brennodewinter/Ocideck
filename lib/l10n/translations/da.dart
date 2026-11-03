@@ -1605,6 +1605,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Terug naar de dia\'s': 'Tilbage til slides',
+  'Verder typen': 'Fortsæt med at skrive',
+  'Terug zonder deze wijzigingen': 'Tilbage uden disse ændringer',
+  'Toepassen en terug': 'Anvend og gå tilbage',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Dine ændringer er ikke anvendt endnu.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Ikke-anvendte ændringer: anvend, kassér eller bliv her.',
   'Deze tabel bewerken': 'Rediger denne tabel',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} vil ikke længere blive rapporteret i nogen præsentation. Du kan slå det til igen under Sikkerhed.',

@@ -1633,6 +1633,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Terug naar de dia\'s': 'Voltar aos diapositivos',
+  'Verder typen': 'Continuar a escrever',
+  'Terug zonder deze wijzigingen': 'Voltar sem estas alterações',
+  'Toepassen en terug': 'Aplicar e voltar',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'As suas alterações ainda não foram aplicadas.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Alterações não aplicadas: aplique, descarte ou fique aqui.',
   'Deze tabel bewerken': 'Editar esta tabela',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} deixará de ser reportado em qualquer apresentação. Pode reativá-lo em Segurança.',

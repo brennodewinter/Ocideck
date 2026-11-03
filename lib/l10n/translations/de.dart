@@ -652,6 +652,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Terug naar de dia\'s': 'Zurück zu den Folien',
+  'Verder typen': 'Weiterschreiben',
+  'Terug zonder deze wijzigingen': 'Zurück ohne diese Änderungen',
+  'Toepassen en terug': 'Anwenden und zurück',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Deine Änderungen wurden noch nicht angewendet.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nicht angewendete Änderungen: anwenden, verwerfen oder hier bleiben.',
   'Deze tabel bewerken': 'Diese Tabelle bearbeiten',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} wird dann in keiner Präsentation mehr gemeldet. Unter Sicherheit kannst du es wieder aktivieren.',

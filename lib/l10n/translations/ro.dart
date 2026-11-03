@@ -1621,6 +1621,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Terug naar de dia\'s': 'Înapoi la diapozitive',
+  'Verder typen': 'Continuă să tastezi',
+  'Terug zonder deze wijzigingen': 'Înapoi fără aceste modificări',
+  'Toepassen en terug': 'Aplică și înapoi',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Modificările tale nu au fost încă aplicate.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Modificări neaplicate: aplică, aruncă sau rămâi aici.',
   'Deze tabel bewerken': 'Editează acest tabel',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} nu va mai fi raportat în nicio prezentare. Îl puteți reactiva la Securitate.',

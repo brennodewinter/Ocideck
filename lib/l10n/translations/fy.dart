@@ -652,6 +652,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Terug naar de dia\'s': 'Werom nei de dia\'s',
+  'Verder typen': 'Fierder typje',
+  'Terug zonder deze wijzigingen': 'Werom sûnder dizze wizigingen',
+  'Toepassen en terug': 'Tapasse en werom',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Jo wizigingen binne noch net tapast.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Net-tapaste wizigingen: tapas, werp fuort of bliuw hjir.',
   'Deze tabel bewerken': 'Dizze tabel bewurkje',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} wurdt dan yn gjin ien presintaasje mear meld. Weromsette kin by Befeiliging.',

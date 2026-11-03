@@ -1605,6 +1605,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Terug naar de dia\'s': 'Takaisin dioihin',
+  'Verder typen': 'Jatka kirjoittamista',
+  'Terug zonder deze wijzigingen': 'Palaa ilman näitä muutoksia',
+  'Toepassen en terug': 'Käytä ja palaa',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Muutoksiasi ei ole vielä käytetty.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Käyttämättömät muutokset: käytä, hylkää tai jää tähän.',
   'Deze tabel bewerken': 'Muokkaa tätä taulukkoa',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} ei enää ilmoiteta missään esityksessä. Voit ottaa sen takaisin käyttöön Tietoturva-kohdassa.',

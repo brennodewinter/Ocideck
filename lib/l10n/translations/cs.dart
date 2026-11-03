@@ -1606,6 +1606,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Terug naar de dia\'s': 'Zpět na slajdy',
+  'Verder typen': 'Psát dál',
+  'Terug zonder deze wijzigingen': 'Zpět bez těchto změn',
+  'Toepassen en terug': 'Použít a zpět',
+  'Je wijzigingen zijn nog niet toegepast.': 'Vaše změny ještě nebyly použity.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nepoužité změny: použijte, zahoďte, nebo zůstaňte zde.',
   'Deze tabel bewerken': 'Upravit tuto tabulku',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} se pak nebude hlásit v žádné prezentaci. Zpět to zapnete v Zabezpečení.',

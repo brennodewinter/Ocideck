@@ -1603,6 +1603,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Terug naar de dia\'s': 'Atpakaļ uz slaidiem',
+  'Verder typen': 'Rakstīt tālāk',
+  'Terug zonder deze wijzigingen': 'Atpakaļ bez šīm izmaiņām',
+  'Toepassen en terug': 'Lietot un atgriezties',
+  'Je wijzigingen zijn nog niet toegepast.': 'Jūsu izmaiņas vēl nav lietotas.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nelietotās izmaiņas: lietojiet, izmetiet vai palieciet šeit.',
   'Deze tabel bewerken': 'Rediģēt šo tabulu',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} vairs netiks ziņots nevienā prezentācijā. To varat atgriezt sadaļā Drošība.',

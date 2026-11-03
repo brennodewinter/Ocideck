@@ -1630,6 +1630,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Terug naar de dia\'s': 'Πίσω στις διαφάνειες',
+  'Verder typen': 'Συνέχεια πληκτρολόγησης',
+  'Terug zonder deze wijzigingen': 'Επιστροφή χωρίς αυτές τις αλλαγές',
+  'Toepassen en terug': 'Εφαρμογή και επιστροφή',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Οι αλλαγές σας δεν έχουν εφαρμοστεί ακόμη.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Μη εφαρμοσμένες αλλαγές: εφαρμόστε, απορρίψτε ή μείνετε εδώ.',
   'Deze tabel bewerken': 'Επεξεργασία αυτού του πίνακα',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} δεν θα αναφέρεται πλέον σε καμία παρουσίαση. Μπορείτε να το επαναφέρετε στην Ασφάλεια.',

@@ -649,6 +649,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Terug naar de dia\'s': 'Volver a las diapositivas',
+  'Verder typen': 'Seguir escribiendo',
+  'Terug zonder deze wijzigingen': 'Volver sin estos cambios',
+  'Toepassen en terug': 'Aplicar y volver',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Tus cambios aún no se han aplicado.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Cambios sin aplicar: aplica, descarta o quédate aquí.',
   'Deze tabel bewerken': 'Editar esta tabla',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} dejará de notificarse en todas las presentaciones. Puedes reactivarlo en Seguridad.',

@@ -1617,6 +1617,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Terug naar de dia\'s': 'Wróć do slajdów',
+  'Verder typen': 'Pisz dalej',
+  'Terug zonder deze wijzigingen': 'Wróć bez tych zmian',
+  'Toepassen en terug': 'Zastosuj i wróć',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Twoje zmiany nie zostały jeszcze zastosowane.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Niezastosowane zmiany: zastosuj, odrzuć albo zostań tutaj.',
   'Deze tabel bewerken': 'Edytuj tę tabelę',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} nie będzie już zgłaszane w żadnej prezentacji. Możesz je przywrócić w Bezpieczeństwie.',

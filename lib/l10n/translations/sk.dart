@@ -1611,6 +1611,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Terug naar de dia\'s': 'Späť na snímky',
+  'Verder typen': 'Písať ďalej',
+  'Terug zonder deze wijzigingen': 'Späť bez týchto zmien',
+  'Toepassen en terug': 'Použiť a späť',
+  'Je wijzigingen zijn nog niet toegepast.': 'Vaše zmeny ešte neboli použité.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nepoužité zmeny: použite, zahoďte alebo ostaňte tu.',
   'Deze tabel bewerken': 'Upraviť túto tabuľku',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} sa už nebude hlásiť v žiadnej prezentácii. Späť ho zapnete v Zabezpečení.',

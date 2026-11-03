@@ -1609,6 +1609,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Terug naar de dia\'s': 'Natrag na slajdove',
+  'Verder typen': 'Nastavi tipkati',
+  'Terug zonder deze wijzigingen': 'Natrag bez ovih izmjena',
+  'Toepassen en terug': 'Primijeni i natrag',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Tvoje izmjene još nisu primijenjene.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Neprimijenjene izmjene: primijeni, odbaci ili ostani ovdje.',
   'Deze tabel bewerken': 'Uredi ovu tablicu',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} se više neće prijavljivati ni u jednoj prezentaciji. Možeš ga vratiti pod Sigurnost.',

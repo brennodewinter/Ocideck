@@ -1605,6 +1605,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Terug naar de dia\'s': 'Nazaj na slide',
+  'Verder typen': 'Tipkaj naprej',
+  'Terug zonder deze wijzigingen': 'Nazaj brez teh sprememb',
+  'Toepassen en terug': 'Uporabi in nazaj',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Vaše spremembe še niso uveljavljene.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Neuveljavljene spremembe: uveljavi, zavrzi ali ostani tukaj.',
   'Deze tabel bewerken': 'Uredi to tabelo',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} se ne bo več poročal v nobeni predstavitvi. Nazaj ga vključite pri Varnost.',

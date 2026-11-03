@@ -1598,6 +1598,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Terug naar de dia\'s': 'Tagasi slaidide juurde',
+  'Verder typen': 'Kirjuta edasi',
+  'Terug zonder deze wijzigingen': 'Tagasi ilma nende muudatusteta',
+  'Toepassen en terug': 'Rakenda ja tagasi',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Teie muudatusi pole veel rakendatud.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Rakendamata muudatused: rakendage, visake ära või jääge siia.',
   'Deze tabel bewerken': 'Muuda seda tabelit',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} ei teavitata enam üheski esitluses. Saate selle tagasi panna Turvalisuse alt.',

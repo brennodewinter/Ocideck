@@ -1608,6 +1608,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Terug naar de dia\'s': 'Zrugg zu de Folie',
+  'Verder typen': 'Witerschribe',
+  'Terug zonder deze wijzigingen': 'Zrugg ohni die Änderige',
+  'Toepassen en terug': 'Aawände und zrugg',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Dini Änderige sind no nid aagwändet.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nid aagwändeti Änderige: aawände, verwerfe od bliib do.',
   'Deze tabel bewerken': 'Die Tabelle bearbeite',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} wird denn in keiner Präsentation meh gmäldet. Zrüggsetze chaschs under Sicherheit.',

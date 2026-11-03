@@ -2513,6 +2513,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Terug naar de dia\'s': 'Slaytlara dön',
+  'Verder typen': 'Yazmaya devam et',
+  'Terug zonder deze wijzigingen': 'Bu değişiklikler olmadan geri dön',
+  'Toepassen en terug': 'Uygula ve dön',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Değişiklikleriniz henüz uygulanmadı.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Uygulanmamış değişiklikler: uygulayın, atın ya da burada kalın.',
   'Deze tabel bewerken': 'Bu tabloyu düzenle',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} artık hiçbir sunumda bildirilmeyecek. Güvenlik altından geri açabilirsiniz.',

@@ -1607,6 +1607,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Terug naar de dia\'s': 'Vissza a diákhoz',
+  'Verder typen': 'Gépelés folytatása',
+  'Terug zonder deze wijzigingen': 'Vissza e módosítások nélkül',
+  'Toepassen en terug': 'Alkalmazás és vissza',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'A módosításait még nem alkalmazta.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Alkalmazatlan módosítások: alkalmazza, dobja el vagy maradjon itt.',
   'Deze tabel bewerken': 'Táblázat szerkesztése',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} ezután egyetlen prezentációban sem lesz jelentve. A Biztonság alatt visszakapcsolhatja.',

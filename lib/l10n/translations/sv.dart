@@ -1604,6 +1604,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Terug naar de dia\'s': 'Tillbaka till bilderna',
+  'Verder typen': 'Fortsätt skriva',
+  'Terug zonder deze wijzigingen': 'Tillbaka utan dessa ändringar',
+  'Toepassen en terug': 'Tillämpa och gå tillbaka',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Dina ändringar har inte tillämpats ännu.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Ej tillämpade ändringar: tillämpa, kassera eller stanna här.',
   'Deze tabel bewerken': 'Redigera den här tabellen',
   '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
       '{regel} rapporteras inte längre i någon presentation. Du kan slå på det igen under Säkerhet.',
