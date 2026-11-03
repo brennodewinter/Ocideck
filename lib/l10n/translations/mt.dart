@@ -15,8 +15,6 @@ const _stringsMt = {
   'more': 'Aktar',
   'export': 'Esporta',
   'exportReady': 'Esporta (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Issejvja l-preżentazzjoni qabel ma tesporta',
-  'exportNeedsClean': 'Issejvja l-bidliet tiegħek qabel ma tesporta',
   'saved': 'Issejvjat',
   'unsaved': 'Mhux issejvjat',
   'unsavedChanges': 'Issejvja l-bidliet (Ctrl/Cmd+S)',
@@ -694,7 +692,6 @@ const _dutchSourceMt = {
   'Slide-overzicht': 'Ħarsa ġenerali tal-slides',
   'Slide-overzicht (pijltjes + Enter)':
       'Ħarsa ġenerali tal-slides (vleġeġ + Enter)',
-  'Presenter view (notities, klok)': 'Veduta tal-preżentatur (noti, arloġġ)',
   'Scherm wisselen (meerdere schermen)': 'Biddel l-iskrin (diversi skrins)',
   'Zwart · wit scherm': 'Skrin iswed · abjad',
   'Automatische modus aan/uit': 'Modalità awtomatika mixgħula/mitfija',
@@ -718,11 +715,6 @@ const _dutchSourceMt = {
       'Noti għar-riċevitur waqt kors',
   'Mijn notities aan/uit': 'Ixgħel/itfi n-noti tiegħi',
   'Wissel scherm (S)': 'Biddel l-iskrin (S)',
-  'Kon niet van scherm wisselen.': 'Ma stajniex naqilbu l-iskrins.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P pubbliku · H leġġenda · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P pubbliku · H leġġenda · S skrin · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
   'pijltjes + Enter of klik om te springen':
       'vleġeġ + Enter jew ikklikkja biex taqbeż',
   'Afsluiten (Escape)': 'Oħroġ (Escape)',
@@ -2419,12 +2411,9 @@ const _dutchSourceAddMt = <String, String>{
   'Bewaren als kopie': 'Issejvja bħala kopja',
   'Bewaren in document': 'Issejvja fid-dokument',
   'beamer': 'proġettur',
-  'beamer: niet bereikbaar': 'proġettur: mhux milħuq',
   'Bewerken sluiten (Esc)': 'Agħlaq l-editjar (Esc)',
   'Presenteer document…': 'Ippreżenta d-dokument…',
   'Presenteer document': 'Ippreżenta d-dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Immarka liema tabelli jistgħu jiġu editjati direttament matul il-preżentazzjoni. Il-kontenut l-ieħor kollu jibqa biss għall-qari.',
   'Extra ruimte': 'Spazju żejjed',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Din in-nota hi itwal mill-paġna — skrollja għall-bqija',
@@ -5269,8 +5258,6 @@ const _dutchSourceAddMt = <String, String>{
   'Markdown-broneditor': 'Editur tas-sors Markdown',
   'Niet toegepast': 'Mhux applikat',
   'Niet-toegepaste wijzigingen': 'Bidliet mhux applikati',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Applika jew irrifjuta bidliet kurrenti qabel taqleb l-ambitu.',
   'Problemen gevonden': 'Problemi misjuba',
   'Schrijftips': 'Kitba pariri',
   'Snel herstellen': 'Jirkupra malajr',
@@ -6524,8 +6511,6 @@ const _dutchSourceAddMt = <String, String>{
   '1 slide achtergehouden door haar TLP':
       'Slide 1 inżamm minħabba t-TLP tiegħu',
   'slides achtergehouden door hun TLP': 'slides miżmuma minħabba t-TLP tagħhom',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Dawn is-slides ma jitteħdux waqt il-preżentazzjoni, l-esportazzjoni jew fil-pakkett. Għolli l-livell TLP tal-preżentazzjoni f\'Informazzjoni tal-preżentazzjoni biex tinkludihom.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Is-slides kollha huma miżmuma minħabba l-klassifikazzjoni TLP tagħhom — m\'hemm xejn x\'juri.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7279,8 +7264,6 @@ const _dutchSourceAddMt = <String, String>{
   'seksuele geaardheid': 'orjentazzjoni sesswali',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' F\'din is-slide hemm ukoll dettall li jidentifika, allura dan jista\' jintrabat ma\' persuna.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Kategorija speċjali ta\' data personali (GDPR art. 9/10)',
   'gezondheidsgegeven': 'data dwar is-saħħa',
   'strafrechtelijk gegeven': 'data kriminali',
   'religie of levensovertuiging': 'reliġjon jew twemmin',
@@ -7341,8 +7324,6 @@ const _dutchSourceAddMt = <String, String>{
   'PERSOONSGEGEVENS': 'DATA PERSONALI',
   'Volg de presentatie': 'Segwi l-preżentazzjoni',
   'Weglaten uit tonen en exporteren': 'Ħalli barra mill-wiri u l-esportazzjoni',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Ikkunsidra li tirrediġih b\'[[parentesi kwadri doppji]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Mingħajr kuntest fit-test, dan forsi lanqas huwa data personali.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

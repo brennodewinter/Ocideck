@@ -14,8 +14,6 @@ const _stringsBg = {
   'more': 'Още',
   'export': 'Експортиране',
   'exportReady': 'Експортиране (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Запазете презентацията, преди да експортирате',
-  'exportNeedsClean': 'Запазете промените, преди да експортирате',
   'saved': 'Запазено',
   'unsaved': 'Незапазено',
   'unsavedChanges': 'Запазване на промените (Ctrl/Cmd+S)',
@@ -695,7 +693,6 @@ const _dutchSourceBg = {
   'Slide-overzicht': 'Преглед на слайдовете',
   'Slide-overzicht (pijltjes + Enter)':
       'Преглед на слайдовете (стрелки + Enter)',
-  'Presenter view (notities, klok)': 'Изглед за водещ (бележки, часовник)',
   'Scherm wisselen (meerdere schermen)': 'Смяна на екрана (няколко екрана)',
   'Zwart · wit scherm': 'Черен · бял екран',
   'Automatische modus aan/uit': 'Автоматичен режим вкл./изкл.',
@@ -719,11 +716,6 @@ const _dutchSourceBg = {
       'Бележки за получателя по време на курс',
   'Mijn notities aan/uit': 'Моите бележки вкл./изкл.',
   'Wissel scherm (S)': 'Смяна на екрана (S)',
-  'Kon niet van scherm wisselen.': 'Не беше възможно да се сменят екраните.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · H легенда · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · H легенда · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
   'pijltjes + Enter of klik om te springen':
       'стрелки + Enter или клик за прескачане',
   'Afsluiten (Escape)': 'Изход (Escape)',
@@ -2413,12 +2405,9 @@ const _dutchSourceAddBg = <String, String>{
   'Bewaren als kopie': 'Запази като копие',
   'Bewaren in document': 'Запази в документа',
   'beamer': 'проектор',
-  'beamer: niet bereikbaar': 'проектор: недостъпен',
   'Bewerken sluiten (Esc)': 'Затвори редактирането (Esc)',
   'Presenteer document…': 'Представи документа…',
   'Presenteer document': 'Представи документа',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Отметнете кои таблици могат да се редактират на живо по време на презентацията. Всичко останало остава само за четене.',
   'Extra ruimte': 'Допълнително пространство',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Тази бележка е по-дълга от страницата — превъртете за останалото',
@@ -5246,8 +5235,6 @@ const _dutchSourceAddBg = <String, String>{
   'Markdown-broneditor': 'Редактор на източника Markdown',
   'Niet toegepast': 'Не се прилага',
   'Niet-toegepaste wijzigingen': 'Неприложени промени',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Приложете или отхвърлете текущите промени, преди да смените обхвата.',
   'Problemen gevonden': 'Открити проблеми',
   'Schrijftips': 'Съвети за писане',
   'Snel herstellen': 'Възстановявайте се бързо',
@@ -6495,8 +6482,6 @@ const _dutchSourceAddBg = <String, String>{
       'Задържан: класифициран по-строго от презентацията',
   '1 slide achtergehouden door haar TLP': '1 слайд задържан заради своя TLP',
   'slides achtergehouden door hun TLP': 'слайда задържани заради своя TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Тези слайдове не се включват при представяне, експортиране или в пакета. Повишете нивото TLP на презентацията в Информация за презентацията, за да ги включите.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Всички слайдове са задържани заради своята TLP класификация — няма какво да се покаже.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7246,8 +7231,6 @@ const _dutchSourceAddBg = <String, String>{
   'seksuele geaardheid': 'сексуална ориентация',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' На този слайд има и идентифициращо данно, така че това е проследимо до лице.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Специална категория лични данни (GDPR чл. 9/10)',
   'gezondheidsgegeven': 'данни за здравето',
   'strafrechtelijk gegeven': 'данни за съдимост',
   'religie of levensovertuiging': 'религия или убеждения',
@@ -7308,8 +7291,6 @@ const _dutchSourceAddBg = <String, String>{
   'PERSOONSGEGEVENS': 'ЛИЧНИ ДАННИ',
   'Volg de presentatie': 'Като презентацията',
   'Weglaten uit tonen en exporteren': 'Заличаване при показване и експорт',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Обмислете да го заличите с [[двойни квадратни скоби]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Без контекст в текста това може изобщо да не е лични данни.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

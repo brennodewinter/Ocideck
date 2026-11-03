@@ -114,7 +114,7 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text('Annuleren'));
+    await tester.tap(find.text('Terug naar de dia\'s'));
     await tester.pump();
 
     expect(exited, isTrue);
@@ -131,12 +131,12 @@ void main() {
     await tester.pump();
     expect(find.byTooltip('Niet toegepast'), findsOneWidget);
 
-    await tester.tap(find.text('Annuleren'));
+    await tester.tap(find.text('Terug naar de dia\'s'));
     await tester.pumpAndSettle();
     expect(find.text('Niet-toegepaste wijzigingen'), findsOneWidget);
     expect(exited, isFalse);
 
-    await tester.tap(find.text('Wijzigingen verwerpen'));
+    await tester.tap(find.text('Terug zonder deze wijzigingen'));
     await tester.pumpAndSettle();
     expect(exited, isTrue);
   });

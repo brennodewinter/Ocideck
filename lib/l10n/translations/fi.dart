@@ -14,8 +14,6 @@ const _stringsFi = {
   'more': 'Lisää',
   'export': 'Vie',
   'exportReady': 'Vie (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Tallenna esitys ennen vientiä',
-  'exportNeedsClean': 'Tallenna muutokset ennen vientiä',
   'saved': 'Tallennettu',
   'unsaved': 'Tallentamaton',
   'unsavedChanges': 'Tallenna muutokset (Ctrl/Cmd+S)',
@@ -687,7 +685,6 @@ const _dutchSourceFi = {
   'Eerste · laatste slide': 'Ensimmäinen · viimeinen dia',
   'Slide-overzicht': 'Diakatsaus',
   'Slide-overzicht (pijltjes + Enter)': 'Diakatsaus (nuolet + Enter)',
-  'Presenter view (notities, klok)': 'Esittäjänäkymä (muistiinpanot, kello)',
   'Scherm wisselen (meerdere schermen)': 'Vaihda näyttöä (useita näyttöjä)',
   'Zwart · wit scherm': 'Musta · valkoinen näyttö',
   'Automatische modus aan/uit': 'Automaattinen tila päälle/pois',
@@ -711,11 +708,6 @@ const _dutchSourceFi = {
       'Muistiinpanot vastaanottajalle kurssin aikana',
   'Mijn notities aan/uit': 'Näytä omat muistiinpanot päälle/pois',
   'Wissel scherm (S)': 'Vaihda näyttöä (S)',
-  'Kon niet van scherm wisselen.': 'Näyttöä ei voitu vaihtaa.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P yleisö · H legenda · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P yleisö · H legenda · S näyttö · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
   'pijltjes + Enter of klik om te springen':
       'nuolet + Enter tai napsauta siirtyäksesi',
   'Afsluiten (Escape)': 'Poistu (Escape)',
@@ -2394,12 +2386,9 @@ const _dutchSourceAddFi = <String, String>{
   'Bewaren als kopie': 'Tallenna kopiona',
   'Bewaren in document': 'Tallenna asiakirjaan',
   'beamer': 'projektori',
-  'beamer: niet bereikbaar': 'projektori: ei tavoitettavissa',
   'Bewerken sluiten (Esc)': 'Sulje muokkaus (Esc)',
   'Presenteer document…': 'Esitä asiakirja…',
   'Presenteer document': 'Esitä asiakirja',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Valitse, mitä taulukoita saa muokata livenä esityksen aikana. Kaikki muu sisältö pysyy vain luku -tilassa.',
   'Extra ruimte': 'Lisätilaa',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tämä viite on sivua pidempi — vieritä nähdäksesi lopun',
@@ -5208,8 +5197,6 @@ const _dutchSourceAddFi = <String, String>{
   'Markdown-broneditor': 'Markdown-lähdeeditori',
   'Niet toegepast': 'Ei käytössä',
   'Niet-toegepaste wijzigingen': 'Käyttämättömät muutokset',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Ota käyttöön tai hylkää nykyiset muutokset ennen laajuuksien vaihtamista.',
   'Problemen gevonden': 'Ongelmia löydetty',
   'Schrijftips': 'Kirjoitusvinkkejä',
   'Snel herstellen': 'Toivu nopeasti',
@@ -6447,8 +6434,6 @@ const _dutchSourceAddFi = <String, String>{
       'Pidätetty: luokiteltu tiukemmin kuin esitys',
   '1 slide achtergehouden door haar TLP': '1 dia pidätetty sen TLP:n vuoksi',
   'slides achtergehouden door hun TLP': 'diaa pidätetty niiden TLP:n vuoksi',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Nämä diat jäävät pois esitettäessä, vietäessä ja paketista. Nosta esityksen TLP-tasoa kohdassa Esityksen tiedot, jotta ne tulevat mukaan.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Kaikki diat on pidätetty niiden TLP-luokituksen vuoksi, joten näytettävää ei ole.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7196,8 +7181,6 @@ const _dutchSourceAddFi = <String, String>{
   'seksuele geaardheid': 'seksuaalinen suuntautuminen',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Tässä diassa on myös yksilöivä tieto, joten tämä on yhdistettävissä henkilöön.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Erityinen henkilötietoryhmä (GDPR art. 9/10)',
   'gezondheidsgegeven': 'terveystieto',
   'strafrechtelijk gegeven': 'rikostieto',
   'religie of levensovertuiging': 'uskonto tai vakaumus',
@@ -7258,8 +7241,6 @@ const _dutchSourceAddFi = <String, String>{
   'PERSOONSGEGEVENS': 'HENKILÖTIETOJA',
   'Volg de presentatie': 'Seuraa esitystä',
   'Weglaten uit tonen en exporteren': 'Jätä pois näytöstä ja viennistä',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Harkitse sen peittämistä [[kaksoishakasulkeilla]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Ilman asiayhteyttä tekstissä tämä ei ehkä ole henkilötieto lainkaan.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

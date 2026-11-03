@@ -14,8 +14,6 @@ const _stringsHu = {
   'more': 'Továbbiak',
   'export': 'Exportálás',
   'exportReady': 'Exportálás (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Az exportáláshoz először mentse a bemutatót',
-  'exportNeedsClean': 'Az exportáláshoz először mentse a módosításokat',
   'saved': 'Mentve',
   'unsaved': 'Nincs mentve',
   'unsavedChanges': 'Módosítások mentése (Ctrl/Cmd+S)',
@@ -688,7 +686,6 @@ const _dutchSourceHu = {
   'Eerste · laatste slide': 'Első · utolsó dia',
   'Slide-overzicht': 'Diaáttekintés',
   'Slide-overzicht (pijltjes + Enter)': 'Diaáttekintés (nyilak + Enter)',
-  'Presenter view (notities, klok)': 'Előadói nézet (jegyzetek, óra)',
   'Scherm wisselen (meerdere schermen)': 'Képernyőváltás (több kijelző)',
   'Zwart · wit scherm': 'Fekete · fehér képernyő',
   'Automatische modus aan/uit': 'Automatikus mód be/ki',
@@ -712,11 +709,6 @@ const _dutchSourceHu = {
       'Jegyzetek a résztvevőnek egy tanfolyam során',
   'Mijn notities aan/uit': 'Saját jegyzeteim be/ki',
   'Wissel scherm (S)': 'Képernyőváltás (S)',
-  'Kon niet van scherm wisselen.': 'Nem sikerült képernyőt váltani.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · H jelmagyarázat · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · H jelmagyarázat · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
   'pijltjes + Enter of klik om te springen':
       'nyilak + Enter vagy kattintás az ugráshoz',
   'Afsluiten (Escape)': 'Kilépés (Escape)',
@@ -2395,12 +2387,9 @@ const _dutchSourceAddHu = <String, String>{
   'Bewaren als kopie': 'Mentés másolatként',
   'Bewaren in document': 'Mentés a dokumentumba',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nem érhető el',
   'Bewerken sluiten (Esc)': 'Szerkesztés bezárása (Esc)',
   'Presenteer document…': 'Dokumentum prezentálása…',
   'Presenteer document': 'Dokumentum prezentálása',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Jelölje be, mely táblázatok szerkeszthetők élőben a prezentáció alatt. Minden más tartalom írásvédett marad.',
   'Extra ruimte': 'Extra térköz',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ez a jegyzet hosszabb az oldalnál — görgessen a folytatásért',
@@ -5226,8 +5215,6 @@ const _dutchSourceAddHu = <String, String>{
   'Markdown-broneditor': 'Markdown forrásszerkesztő',
   'Niet toegepast': 'Nincs alkalmazva',
   'Niet-toegepaste wijzigingen': 'Nem alkalmazott módosítások',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'A hatókör váltása előtt alkalmazza vagy utasítsa el a jelenlegi módosításokat.',
   'Problemen gevonden': 'Problémák találhatók',
   'Schrijftips': 'Írási tippek',
   'Snel herstellen': 'Gyorsan felépülni',
@@ -6466,8 +6453,6 @@ const _dutchSourceAddHu = <String, String>{
       'Visszatartva: szigorúbb besorolású, mint a prezentáció',
   '1 slide achtergehouden door haar TLP': '1 dia visszatartva a TLP-je miatt',
   'slides achtergehouden door hun TLP': 'dia visszatartva a TLP-jük miatt',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Ezek a diák nem kerülnek bele a bemutatóba, az exportba, sem a csomagba. Emeld meg a prezentáció TLP-szintjét a Prezentáció adatainál, hogy bekerüljenek.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Minden dia vissza van tartva a TLP-besorolása miatt – nincs mit megjeleníteni.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7216,8 +7201,6 @@ const _dutchSourceAddHu = <String, String>{
   'seksuele geaardheid': 'szexuális irányultság',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Ezen a dián azonosító adat is szerepel, tehát ez visszavezethető egy személyre.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Személyes adatok különleges kategóriája (GDPR 9/10. cikk)',
   'gezondheidsgegeven': 'egészségügyi adat',
   'strafrechtelijk gegeven': 'büntetőjogi adat',
   'religie of levensovertuiging': 'vallás vagy meggyőződés',
@@ -7278,8 +7261,6 @@ const _dutchSourceAddHu = <String, String>{
   'PERSOONSGEGEVENS': 'SZEMÉLYES ADATOK',
   'Volg de presentatie': 'Az előadás szerint',
   'Weglaten uit tonen en exporteren': 'Kihagyás a megjelenítésből és exportból',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Fontold meg a kitakarását [[dupla szögletes zárójellel]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' A szövegben lévő kontextus nélkül lehet, hogy ez nem is személyes adat.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

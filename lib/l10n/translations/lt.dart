@@ -14,8 +14,6 @@ const _stringsLt = {
   'more': 'Daugiau',
   'export': 'Eksportuoti',
   'exportReady': 'Eksportuoti (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Prieš eksportuodami įrašykite prezentaciją',
-  'exportNeedsClean': 'Prieš eksportuodami įrašykite pakeitimus',
   'saved': 'Įrašyta',
   'unsaved': 'Neįrašyta',
   'unsavedChanges': 'Įrašyti pakeitimus (Ctrl/Cmd+S)',
@@ -691,7 +689,6 @@ const _dutchSourceLt = {
   'Eerste · laatste slide': 'Pirma · paskutinė skaidrė',
   'Slide-overzicht': 'Skaidrių apžvalga',
   'Slide-overzicht (pijltjes + Enter)': 'Skaidrių apžvalga (rodyklės + Enter)',
-  'Presenter view (notities, klok)': 'Pranešėjo rodinys (pastabos, laikrodis)',
   'Scherm wisselen (meerdere schermen)': 'Perjungti ekraną (keli ekranai)',
   'Zwart · wit scherm': 'Juodas · baltas ekranas',
   'Automatische modus aan/uit': 'Automatinis režimas įjungtas/išjungtas',
@@ -715,11 +712,6 @@ const _dutchSourceLt = {
       'Pastabos gavėjui kurso metu',
   'Mijn notities aan/uit': 'Įjungti/išjungti mano pastabas',
   'Wissel scherm (S)': 'Perjungti ekraną (S)',
-  'Kon niet van scherm wisselen.': 'Nepavyko perjungti ekranų.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · H legenda · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · H legenda · S ekranas · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'rodyklės + Enter arba spustelėkite, kad peršoktumėte',
   'Afsluiten (Escape)': 'Išeiti (Escape)',
@@ -2397,12 +2389,9 @@ const _dutchSourceAddLt = <String, String>{
   'Bewaren als kopie': 'Išsaugoti kaip kopiją',
   'Bewaren in document': 'Išsaugoti dokumente',
   'beamer': 'projektorius',
-  'beamer: niet bereikbaar': 'projektorius: nepasiekiamas',
   'Bewerken sluiten (Esc)': 'Uždaryti redagavimą (Esc)',
   'Presenteer document…': 'Pristatyti dokumentą…',
   'Presenteer document': 'Pristatyti dokumentą',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Pažymėkite, kurias lenteles galima redaguoti tiesiogiai pristatymo metu. Visas kitas turinys lieka tik skaitymui.',
   'Extra ruimte': 'Papildoma erdvė',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ši pastaba ilgesnė už puslapį — slinkite likusiai daliai',
@@ -5210,8 +5199,6 @@ const _dutchSourceAddLt = <String, String>{
   'Markdown-broneditor': 'Markdown šaltinio redaktorius',
   'Niet toegepast': 'Netaikoma',
   'Niet-toegepaste wijzigingen': 'Netaikomi pakeitimai',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Prieš perjungdami taikymo sritį, pritaikykite arba atmeskite dabartinius pakeitimus.',
   'Problemen gevonden': 'Rastos problemos',
   'Schrijftips': 'Rašymo patarimai',
   'Snel herstellen': 'Greitai atsigauti',
@@ -6452,8 +6439,6 @@ const _dutchSourceAddLt = <String, String>{
       'Sulaikyta: klasifikuota griežčiau nei pristatymas',
   '1 slide achtergehouden door haar TLP': '1 skaidrė sulaikyta dėl jos TLP',
   'slides achtergehouden door hun TLP': 'skaidrės sulaikytos dėl jų TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Šios skaidrės neįtraukiamos pristatant, eksportuojant ar į paketą. Padidinkite pristatymo TLP lygį skiltyje Pristatymo informacija, kad jos būtų įtrauktos.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Visos skaidrės sulaikytos dėl jų TLP klasifikacijos — nėra ką rodyti.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7202,8 +7187,6 @@ const _dutchSourceAddLt = <String, String>{
   'seksuele geaardheid': 'seksualinė orientacija',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Šioje skaidrėje yra ir identifikuojantis duomuo, todėl tai galima susieti su asmeniu.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Ypatinga asmens duomenų kategorija (BDAR 9/10 str.)',
   'gezondheidsgegeven': 'sveikatos duomenys',
   'strafrechtelijk gegeven': 'baudžiamosios teisės duomenys',
   'religie of levensovertuiging': 'religija ar įsitikinimai',
@@ -7264,8 +7247,6 @@ const _dutchSourceAddLt = <String, String>{
   'PERSOONSGEGEVENS': 'ASMENS DUOMENYS',
   'Volg de presentatie': 'Kaip pristatyme',
   'Weglaten uit tonen en exporteren': 'Praleisti rodant ir eksportuojant',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Apsvarstyk galimybę tai paslėpti [[dvigubais laužtiniais skliaustais]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Be konteksto tekste tai gali visai nebūti asmens duomenys.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

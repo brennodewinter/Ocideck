@@ -14,8 +14,6 @@ const _stringsEt = {
   'more': 'Rohkem',
   'export': 'Ekspordi',
   'exportReady': 'Ekspordi (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Enne eksportimist salvesta esitlus',
-  'exportNeedsClean': 'Enne eksportimist salvesta muudatused',
   'saved': 'Salvestatud',
   'unsaved': 'Salvestamata',
   'unsavedChanges': 'Salvesta muudatused (Ctrl/Cmd+S)',
@@ -688,7 +686,6 @@ const _dutchSourceEt = {
   'Eerste · laatste slide': 'Esimene · viimane slaid',
   'Slide-overzicht': 'Slaidide ülevaade',
   'Slide-overzicht (pijltjes + Enter)': 'Slaidide ülevaade (nooled + Enter)',
-  'Presenter view (notities, klok)': 'Esitleja vaade (märkmed, kell)',
   'Scherm wisselen (meerdere schermen)': 'Vaheta ekraani (mitu ekraani)',
   'Zwart · wit scherm': 'Must · valge ekraan',
   'Automatische modus aan/uit': 'Automaatrežiim sees/väljas',
@@ -712,11 +709,6 @@ const _dutchSourceEt = {
       'Märkmed vastuvõtjale kursuse ajal',
   'Mijn notities aan/uit': 'Minu märkmed sees/väljas',
   'Wissel scherm (S)': 'Vaheta ekraani (S)',
-  'Kon niet van scherm wisselen.': 'Ekraani ei õnnestunud vahetada.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H legend · G ülevaade · B/W must/valge · R aeg · Esc stopp',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H legend · S ekraan · G ülevaade · B/W must/valge · R aeg · Esc stopp',
   'pijltjes + Enter of klik om te springen':
       'nooled + Enter või klõps hüppamiseks',
   'Afsluiten (Escape)': 'Välju (Escape)',
@@ -2386,12 +2378,9 @@ const _dutchSourceAddEt = <String, String>{
   'Bewaren als kopie': 'Salvesta koopiana',
   'Bewaren in document': 'Salvesta dokumenti',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: pole kättesaadav',
   'Bewerken sluiten (Esc)': 'Sulge redigeerimine (Esc)',
   'Presenteer document…': 'Esitle dokumenti…',
   'Presenteer document': 'Esitle dokumenti',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Märgi, milliseid tabeleid võib esitluse ajal reaalajas redigeerida. Kõik muu sisu jääb kirjutuskaitstuks.',
   'Extra ruimte': 'Lisaruum',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'See märkus on leheküljest pikem — keri ülejäänu jaoks',
@@ -5196,8 +5185,6 @@ const _dutchSourceAddEt = <String, String>{
   'Markdown-broneditor': 'Markdowni allika redaktor',
   'Niet toegepast': 'Ei rakendata',
   'Niet-toegepaste wijzigingen': 'Rakendamata muudatused',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Enne ulatuse vahetamist rakendage või lükake praegused muudatused tagasi.',
   'Problemen gevonden': 'Probleemid leitud',
   'Schrijftips': 'Kirjutamise näpunäited',
   'Snel herstellen': 'Kiiresti taastuda',
@@ -6433,8 +6420,6 @@ const _dutchSourceAddEt = <String, String>{
       'Kinni peetud: klassifitseeritud rangemalt kui esitlus',
   '1 slide achtergehouden door haar TLP': '1 slaid peeti kinni selle TLP tõttu',
   'slides achtergehouden door hun TLP': 'slaidi peeti kinni nende TLP tõttu',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Neid slaide ei võeta kaasa esitamisel, eksportimisel ega paketti. Tõsta esitluse teabes esitluse TLP-taset, et need kaasa võtta.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Kõik slaidid on nende TLP-klassifikatsiooni tõttu kinni peetud — pole midagi näidata.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7180,8 +7165,6 @@ const _dutchSourceAddEt = <String, String>{
   'seksuele geaardheid': 'seksuaalne sättumus',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Sellel slaidil on ka tuvastav andmeühik, seega on see seostatav isikuga.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Isikuandmete eriliik (GDPR art 9/10)',
   'gezondheidsgegeven': 'terviseandmed',
   'strafrechtelijk gegeven': 'karistusandmed',
   'religie of levensovertuiging': 'usk või veendumus',
@@ -7242,8 +7225,6 @@ const _dutchSourceAddEt = <String, String>{
   'PERSOONSGEGEVENS': 'ISIKUANDMED',
   'Volg de presentatie': 'Järgi esitlust',
   'Weglaten uit tonen en exporteren': 'Jäta kuvamisest ja ekspordist välja',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Kaalu selle peitmist [[topeltnurksulgudega]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Ilma kontekstita tekstis ei pruugi see üldse olla isikuandmed.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

@@ -14,8 +14,6 @@ const _stringsPl = {
   'more': 'Więcej',
   'export': 'Eksportuj',
   'exportReady': 'Eksportuj (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Zapisz prezentację przed eksportem',
-  'exportNeedsClean': 'Zapisz zmiany przed eksportem',
   'saved': 'Zapisano',
   'unsaved': 'Niezapisane',
   'unsavedChanges': 'Zapisz zmiany (Ctrl/Cmd+S)',
@@ -692,7 +690,6 @@ const _dutchSourcePl = {
   'Eerste · laatste slide': 'Pierwszy · ostatni slajd',
   'Slide-overzicht': 'Przegląd slajdów',
   'Slide-overzicht (pijltjes + Enter)': 'Przegląd slajdów (strzałki + Enter)',
-  'Presenter view (notities, klok)': 'Widok prezentera (notatki, zegar)',
   'Scherm wisselen (meerdere schermen)': 'Przełącz ekran (wiele ekranów)',
   'Zwart · wit scherm': 'Czarny · biały ekran',
   'Automatische modus aan/uit': 'Tryb automatyczny wł./wył.',
@@ -716,11 +713,6 @@ const _dutchSourcePl = {
       'Notatki dla odbiorcy podczas kursu',
   'Mijn notities aan/uit': 'Przełącz moje notatki wł./wył.',
   'Wissel scherm (S)': 'Przełącz ekran (S)',
-  'Kon niet van scherm wisselen.': 'Nie udało się przełączyć ekranów.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publiczność · H legenda · G przegląd · B/W czarny/biały · R czas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publiczność · H legenda · S ekran · G przegląd · B/W czarny/biały · R czas · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'strzałki + Enter lub kliknij, aby przejść',
   'Afsluiten (Escape)': 'Zakończ (Escape)',
@@ -2407,12 +2399,9 @@ const _dutchSourceAddPl = <String, String>{
   'Bewaren als kopie': 'Zapisz jako kopię',
   'Bewaren in document': 'Zapisz w dokumencie',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nieosiągalny',
   'Bewerken sluiten (Esc)': 'Zakończ edycję (Esc)',
   'Presenteer document…': 'Prezentuj dokument…',
   'Presenteer document': 'Prezentuj dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Zaznacz, które tabele mogą być edytowane na żywo podczas prezentacji. Cała pozostała treść pozostaje tylko do odczytu.',
   'Extra ruimte': 'Dodatkowa przestrzeń',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta przypis jest dłuższy niż strona — przewiń, by zobaczyć resztę',
@@ -5238,8 +5227,6 @@ const _dutchSourceAddPl = <String, String>{
   'Markdown-broneditor': 'Edytor źródeł Markdown',
   'Niet toegepast': 'Nie zastosowano',
   'Niet-toegepaste wijzigingen': 'Niezastosowane zmiany',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Zastosuj lub odrzuć bieżące zmiany przed przełączeniem zakresów.',
   'Problemen gevonden': 'Znaleziono problemy',
   'Schrijftips': 'Wskazówki dotyczące pisania',
   'Snel herstellen': 'Szybko wyzdrowiej',
@@ -6482,8 +6469,6 @@ const _dutchSourceAddPl = <String, String>{
       'Wstrzymany: sklasyfikowany surowiej niż prezentacja',
   '1 slide achtergehouden door haar TLP': '1 slajd wstrzymany przez swój TLP',
   'slides achtergehouden door hun TLP': 'slajdy wstrzymane przez ich TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Te slajdy nie trafiają do prezentacji, eksportu ani pakietu. Podnieś poziom TLP prezentacji w Informacjach o prezentacji, aby je uwzględnić.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Wszystkie slajdy są wstrzymane przez ich klasyfikację TLP, więc nie ma nic do pokazania.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7230,8 +7215,6 @@ const _dutchSourceAddPl = <String, String>{
   'seksuele geaardheid': 'orientacja seksualna',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tym slajdzie jest też dana identyfikująca, więc można to powiązać z osobą.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Szczególna kategoria danych osobowych (RODO art. 9/10)',
   'gezondheidsgegeven': 'dane o zdrowiu',
   'strafrechtelijk gegeven': 'dane karne',
   'religie of levensovertuiging': 'religia lub światopogląd',
@@ -7292,8 +7275,6 @@ const _dutchSourceAddPl = <String, String>{
   'PERSOONSGEGEVENS': 'DANE OSOBOWE',
   'Volg de presentatie': 'Jak w prezentacji',
   'Weglaten uit tonen en exporteren': 'Pomiń przy wyświetlaniu i eksporcie',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Rozważ zredagowanie tego przez [[podwójne nawiasy kwadratowe]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Bez kontekstu w tekście to może wcale nie być dana osobowa.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

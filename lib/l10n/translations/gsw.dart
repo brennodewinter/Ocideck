@@ -14,8 +14,6 @@ const _stringsGsw = {
   'more': 'Mee',
   'export': 'Exportiere',
   'exportReady': 'Exportiere (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Speicher d Präsentation zerscht zum exportiere',
-  'exportNeedsClean': 'Speicher dini Änderige zerscht zum exportiere',
   'saved': 'Gspeicheret',
   'unsaved': 'Nöd gspeicheret',
   'unsavedChanges': 'Änderige speichere (Ctrl/Cmd+S)',
@@ -691,7 +689,6 @@ const _dutchSourceGsw = {
   'Eerste · laatste slide': 'Erschti · letschti Slide',
   'Slide-overzicht': 'Slide-Übersicht',
   'Slide-overzicht (pijltjes + Enter)': 'Slide-Übersicht (Pfyl + Enter)',
-  'Presenter view (notities, klok)': 'Präsentatorvyou (Notize, Uhr)',
   'Scherm wisselen (meerdere schermen)':
       'Bildschirm wächsle (mehreri Bildschirm)',
   'Zwart · wit scherm': 'Schwarze · wysse Bildschirm',
@@ -715,11 +712,6 @@ const _dutchSourceGsw = {
       'Notize für de Empfänger während eme Kurs',
   'Mijn notities aan/uit': 'Mini Notize aa/us',
   'Wissel scherm (S)': 'Bildschirm wächsle (S)',
-  'Kon niet van scherm wisselen.': 'Het d Bildschirm nöd chöne wächsle.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P Publikum · H Legändi · G Übersicht · B/W schwarz/wyss · R Zit · Esc Stopp',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P Publikum · H Legändi · S Bildschirm · G Übersicht · B/W schwarz/wyss · R Zit · Esc Stopp',
   'pijltjes + Enter of klik om te springen':
       'Pfyl + Enter oder klicke zum Springe',
   'Afsluiten (Escape)': 'Verlah (Escape)',
@@ -2395,12 +2387,9 @@ const _dutchSourceAddGsw = <String, String>{
   'Bewaren als kopie': 'Als Kopie spichere',
   'Bewaren in document': 'Im Dokumänt spichere',
   'beamer': 'Beamer',
-  'beamer: niet bereikbaar': 'Beamer: nöd erreichbar',
   'Bewerken sluiten (Esc)': 'Bearbeite beände (Esc)',
   'Presenteer document…': 'Dokumänt präsentiere…',
   'Presenteer document': 'Dokumänt präsentiere',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Häckele aa, welli Tabälle während de Präsentation live bearbeitet wärde dörfed. Alli ander Inhalt blybed nume lesbar.',
   'Extra ruimte': 'Zuesätzliche Abstand',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Die Anmerkig isch länger als s Blatt — für de Rescht scrolle',
@@ -5230,8 +5219,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Markdown-broneditor': 'Markdown-Quelleneditor',
   'Niet toegepast': 'Nicht angewendet',
   'Niet-toegepaste wijzigingen': 'Nicht angewendete Änderungen',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Übernehmen Sie aktuelle Änderungen oder lehnen Sie sie ab, bevor Sie den Bereich wechseln.',
   'Problemen gevonden': 'Probleme gefunden',
   'Schrijftips': 'Schreibtipps',
   'Snel herstellen': 'Erholen Sie sich schnell',
@@ -6469,8 +6456,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Zrugghalte: strenger klassifiziert als d Präsentation',
   '1 slide achtergehouden door haar TLP': '1 Slide wäg sim TLP zrugghalte',
   'slides achtergehouden door hun TLP': 'Slides wäg ihrem TLP zrugghalte',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Die Slides chömed bim Präsentiere, Exportiere und im Paket nöd mit. Erhöh under Präsentationsinfo s TLP-Niveau vo de Präsentation, zum si mitznäh.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Alli Slides sind wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum zeige.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7216,8 +7201,6 @@ const _dutchSourceAddGsw = <String, String>{
   'seksuele geaardheid': 'sexuelli Orientierig',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Uf dere Folie staht au es identifizierends Datum, drum isch das ere Person zuezordne.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Bsunderi Kategorie vo Persoonedate (DSGVO Art. 9/10)',
   'gezondheidsgegeven': 'Gsundheitsdate',
   'strafrechtelijk gegeven': 'strafrächtlichs Datum',
   'religie of levensovertuiging': 'Religion oder Wältaschauig',
@@ -7278,8 +7261,6 @@ const _dutchSourceAddGsw = <String, String>{
   'PERSOONSGEGEVENS': 'PERSOONEDATE',
   'Volg de presentatie': 'De Präsentation folge',
   'Weglaten uit tonen en exporteren': 'Us Azeig und Export wegglah',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Überleg der, öb du s mit [[doppleti eckigi Chlammere]] schwärze wotsch.',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Ohni Kontext im Täxt isch das villicht gar kes Persoonedatum.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

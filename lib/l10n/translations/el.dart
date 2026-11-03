@@ -14,8 +14,6 @@ const _stringsEl = {
   'more': 'Περισσότερα',
   'export': 'Εξαγωγή',
   'exportReady': 'Εξαγωγή (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Αποθηκεύστε την παρουσίαση πριν την εξαγωγή',
-  'exportNeedsClean': 'Αποθηκεύστε τις αλλαγές σας πριν την εξαγωγή',
   'saved': 'Αποθηκεύτηκε',
   'unsaved': 'Μη αποθηκευμένο',
   'unsavedChanges': 'Αποθήκευση αλλαγών (Ctrl/Cmd+S)',
@@ -696,7 +694,6 @@ const _dutchSourceEl = {
   'Eerste · laatste slide': 'Πρώτη · τελευταία διαφάνεια',
   'Slide-overzicht': 'Επισκόπηση διαφανειών',
   'Slide-overzicht (pijltjes + Enter)': 'Επισκόπηση διαφανειών (βέλη + Enter)',
-  'Presenter view (notities, klok)': 'Προβολή παρουσιαστή (σημειώσεις, ρολόι)',
   'Scherm wisselen (meerdere schermen)': 'Εναλλαγή οθόνης (πολλαπλές οθόνες)',
   'Zwart · wit scherm': 'Μαύρη · λευκή οθόνη',
   'Automatische modus aan/uit': 'Αυτόματη λειτουργία ναι/όχι',
@@ -721,11 +718,6 @@ const _dutchSourceEl = {
       'Σημειώσεις για τον παραλήπτη κατά τη διάρκεια ενός μαθήματος',
   'Mijn notities aan/uit': 'Εναλλαγή των σημειώσεών μου ναι/όχι',
   'Wissel scherm (S)': 'Εναλλαγή οθόνης (S)',
-  'Kon niet van scherm wisselen.': 'Δεν ήταν δυνατή η εναλλαγή οθονών.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · H υπόμνημα · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · H υπόμνημα · S οθόνη · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
   'pijltjes + Enter of klik om te springen': 'βέλη + Enter ή κλικ για μετάβαση',
   'Afsluiten (Escape)': 'Έξοδος (Escape)',
   'Sluiten (G of Esc)': 'Κλείσιμο (G ή Esc)',
@@ -2431,12 +2423,9 @@ const _dutchSourceAddEl = <String, String>{
   'Bewaren als kopie': 'Αποθήκευση ως αντίγραφο',
   'Bewaren in document': 'Αποθήκευση στο έγγραφο',
   'beamer': 'προβολέας',
-  'beamer: niet bereikbaar': 'προβολέας: μη προσβάσιμος',
   'Bewerken sluiten (Esc)': 'Κλείσιμο επεξεργασίας (Esc)',
   'Presenteer document…': 'Παρουσίαση εγγράφου…',
   'Presenteer document': 'Παρουσίαση εγγράφου',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Επιλέξτε ποιοι πίνακες μπορούν να επεξεργαστούν ζωντανά κατά την παρουσίαση. Όλο το υπόλοιπο περιεχόμενο παραμένει μόνο για ανάγνωση.',
   'Extra ruimte': 'Επιπλέον χώρος',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Αυτή η σημείωση είναι μακρύτερη από τη σελίδα — κύλιση για τα υπόλοιπα',
@@ -5296,8 +5285,6 @@ const _dutchSourceAddEl = <String, String>{
   'Markdown-broneditor': 'Πρόγραμμα επεξεργασίας πηγών Markdown',
   'Niet toegepast': 'Δεν εφαρμόζεται',
   'Niet-toegepaste wijzigingen': 'Μη εφαρμοσμένες αλλαγές',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Εφαρμόστε ή απορρίψτε τις τρέχουσες αλλαγές πριν αλλάξετε το εύρος.',
   'Problemen gevonden': 'Βρέθηκαν προβλήματα',
   'Schrijftips': 'Συμβουλές γραφής',
   'Snel herstellen': 'Ανάρρωση γρήγορα',
@@ -6552,8 +6539,6 @@ const _dutchSourceAddEl = <String, String>{
       '1 διαφάνεια παρακρατείται λόγω του TLP της',
   'slides achtergehouden door hun TLP':
       'διαφάνειες παρακρατούνται λόγω του TLP τους',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Αυτές οι διαφάνειες δεν συμπεριλαμβάνονται στην παρουσίαση, στην εξαγωγή ούτε στο πακέτο. Αυξήστε το επίπεδο TLP της παρουσίασης στις Πληροφορίες παρουσίασης για να τις συμπεριλάβετε.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Όλες οι διαφάνειες παρακρατούνται λόγω της ταξινόμησης TLP τους, οπότε δεν υπάρχει τίποτα να εμφανιστεί.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7310,8 +7295,6 @@ const _dutchSourceAddEl = <String, String>{
   'seksuele geaardheid': 'σεξουαλικός προσανατολισμός',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Σε αυτή τη διαφάνεια υπάρχει και ένα στοιχείο ταυτοποίησης, άρα αυτό ανάγεται σε πρόσωπο.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Ειδική κατηγορία προσωπικών δεδομένων (GDPR άρθρο 9/10)',
   'gezondheidsgegeven': 'δεδομένο υγείας',
   'strafrechtelijk gegeven': 'ποινικό δεδομένο',
   'religie of levensovertuiging': 'θρησκεία ή πεποιθήσεις',
@@ -7372,8 +7355,6 @@ const _dutchSourceAddEl = <String, String>{
   'PERSOONSGEGEVENS': 'ΠΡΟΣΩΠΙΚΑ ΔΕΔΟΜΕΝΑ',
   'Volg de presentatie': 'Ακολούθησε την παρουσίαση',
   'Weglaten uit tonen en exporteren': 'Παράλειψη από προβολή και εξαγωγή',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Σκέψου να το αποκρύψεις με [[διπλές αγκύλες]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Χωρίς συμφραζόμενα στο κείμενο, ίσως να μην είναι καν προσωπικό δεδομένο.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

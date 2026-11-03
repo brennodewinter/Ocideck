@@ -14,8 +14,6 @@ const _stringsHr = {
   'more': 'Više',
   'export': 'Izvoz',
   'exportReady': 'Izvezi (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Spremite prezentaciju prije izvoza',
-  'exportNeedsClean': 'Spremite promjene prije izvoza',
   'saved': 'Spremljeno',
   'unsaved': 'Nespremljeno',
   'unsavedChanges': 'Spremi promjene (Ctrl/Cmd+S)',
@@ -688,7 +686,6 @@ const _dutchSourceHr = {
   'Eerste · laatste slide': 'Prvi · zadnji slajd',
   'Slide-overzicht': 'Pregled slajdova',
   'Slide-overzicht (pijltjes + Enter)': 'Pregled slajdova (strelice + Enter)',
-  'Presenter view (notities, klok)': 'Prikaz voditelja (bilješke, sat)',
   'Scherm wisselen (meerdere schermen)': 'Prebaci zaslon (više zaslona)',
   'Zwart · wit scherm': 'Crni · bijeli zaslon',
   'Automatische modus aan/uit': 'Automatski način uklj./isklj.',
@@ -712,11 +709,6 @@ const _dutchSourceHr = {
       'Bilješke za primatelja tijekom tečaja',
   'Mijn notities aan/uit': 'Uklj./isklj. moje bilješke',
   'Wissel scherm (S)': 'Prebaci zaslon (S)',
-  'Kon niet van scherm wisselen.': 'Nije moguće prebaciti zaslone.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publika · H legenda · G pregled · B/W crno/bijelo · R vrijeme · Esc zaustavi',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publika · H legenda · S zaslon · G pregled · B/W crno/bijelo · R vrijeme · Esc zaustavi',
   'pijltjes + Enter of klik om te springen':
       'strelice + Enter ili klik za skok',
   'Afsluiten (Escape)': 'Izlaz (Escape)',
@@ -2394,12 +2386,9 @@ const _dutchSourceAddHr = <String, String>{
   'Bewaren als kopie': 'Spremi kao kopiju',
   'Bewaren in document': 'Spremi u dokument',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nedostupan',
   'Bewerken sluiten (Esc)': 'Zatvori uređivanje (Esc)',
   'Presenteer document…': 'Prezentiraj dokument…',
   'Presenteer document': 'Prezentiraj dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Označite koje se tablice smiju uređivati uživo tijekom prezentacije. Sav ostali sadržaj ostaje samo za čitanje.',
   'Extra ruimte': 'Dodatni prostor',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ova bilješka duža je od stranice — klizite za ostatak',
@@ -5209,8 +5198,6 @@ const _dutchSourceAddHr = <String, String>{
   'Markdown-broneditor': 'Markdown uređivač izvora',
   'Niet toegepast': 'Nije primijenjeno',
   'Niet-toegepaste wijzigingen': 'Neprimijenjene promjene',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Primijenite ili odbacite trenutne promjene prije prebacivanja opsega.',
   'Problemen gevonden': 'Pronađeni problemi',
   'Schrijftips': 'Savjeti za pisanje',
   'Snel herstellen': 'Brzo se oporavi',
@@ -6443,8 +6430,6 @@ const _dutchSourceAddHr = <String, String>{
       'Zadržano: klasificirano strože od prezentacije',
   '1 slide achtergehouden door haar TLP': '1 slajd zadržan zbog svog TLP-a',
   'slides achtergehouden door hun TLP': 'slajdova zadržano zbog njihova TLP-a',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Ovi se slajdovi ne uključuju pri prezentiranju, izvozu ni u paketu. Povisite razinu TLP prezentacije u Informacijama o prezentaciji da biste ih uključili.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Svi su slajdovi zadržani zbog svoje TLP klasifikacije pa nema što prikazati.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7190,8 +7175,6 @@ const _dutchSourceAddHr = <String, String>{
   'seksuele geaardheid': 'seksualna orijentacija',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na ovom slajdu nalazi se i identifikacijski podatak, pa je ovo povezivo s osobom.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Posebna kategorija osobnih podataka (GDPR čl. 9/10)',
   'gezondheidsgegeven': 'podatak o zdravlju',
   'strafrechtelijk gegeven': 'kaznenopravni podatak',
   'religie of levensovertuiging': 'vjera ili uvjerenje',
@@ -7252,8 +7235,6 @@ const _dutchSourceAddHr = <String, String>{
   'PERSOONSGEGEVENS': 'OSOBNI PODACI',
   'Volg de presentatie': 'Prati prezentaciju',
   'Weglaten uit tonen en exporteren': 'Izostavi iz prikaza i izvoza',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Razmisli o redigiranju pomoću [[dvostrukih uglatih zagrada]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Bez konteksta u tekstu ovo možda uopće nije osobni podatak.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

@@ -14,8 +14,6 @@ const _stringsSv = {
   'more': 'Mer',
   'export': 'Exportera',
   'exportReady': 'Exportera (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Spara presentationen innan du exporterar',
-  'exportNeedsClean': 'Spara dina ändringar innan du exporterar',
   'saved': 'Sparad',
   'unsaved': 'Osparad',
   'unsavedChanges': 'Spara ändringar (Ctrl/Cmd+S)',
@@ -687,7 +685,6 @@ const _dutchSourceSv = {
   'Eerste · laatste slide': 'Första · sista bilden',
   'Slide-overzicht': 'Bildöversikt',
   'Slide-overzicht (pijltjes + Enter)': 'Bildöversikt (pilar + Enter)',
-  'Presenter view (notities, klok)': 'Presentatörsvy (anteckningar, klocka)',
   'Scherm wisselen (meerdere schermen)': 'Byt skärm (flera skärmar)',
   'Zwart · wit scherm': 'Svart · vit skärm',
   'Automatische modus aan/uit': 'Automatiskt läge på/av',
@@ -711,11 +708,6 @@ const _dutchSourceSv = {
       'Anteckningar för mottagaren under en kurs',
   'Mijn notities aan/uit': 'Växla mina anteckningar på/av',
   'Wissel scherm (S)': 'Byt skärm (S)',
-  'Kon niet van scherm wisselen.': 'Kunde inte byta skärm.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H teckenförklaring · G översikt · B/W svart/vit · R tid · Esc stopp',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H teckenförklaring · S skärm · G översikt · B/W svart/vit · R tid · Esc stopp',
   'pijltjes + Enter of klik om te springen':
       'pilar + Enter eller klicka för att hoppa',
   'Afsluiten (Escape)': 'Avsluta (Escape)',
@@ -2390,12 +2382,9 @@ const _dutchSourceAddSv = <String, String>{
   'Bewaren als kopie': 'Spara som kopia',
   'Bewaren in document': 'Spara i dokumentet',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: ej nåbar',
   'Bewerken sluiten (Esc)': 'Stäng redigering (Esc)',
   'Presenteer document…': 'Presentera dokument…',
   'Presenteer document': 'Presentera dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Markera vilka tabeller som får redigeras live under presentationen. Allt annat innehåll förblir skrivskyddat.',
   'Extra ruimte': 'Extra utrymme',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Den här noten är längre än sidan — scrolla för resten',
@@ -5206,8 +5195,6 @@ const _dutchSourceAddSv = <String, String>{
   'Markdown-broneditor': 'Markdown källredigerare',
   'Niet toegepast': 'Inte tillämpat',
   'Niet-toegepaste wijzigingen': 'Ej tillämpade ändringar',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Tillämpa eller avvisa aktuella ändringar innan du byter scope.',
   'Problemen gevonden': 'Problem hittades',
   'Schrijftips': 'Skrivtips',
   'Snel herstellen': 'Återhämta dig snabbt',
@@ -6442,8 +6429,6 @@ const _dutchSourceAddSv = <String, String>{
       'Undanhållen: klassificerad strängare än presentationen',
   '1 slide achtergehouden door haar TLP': '1 bild undanhållen av sin TLP',
   'slides achtergehouden door hun TLP': 'bilder undanhållna av sin TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'De här bilderna följer inte med vid presentation, export eller i paketet. Höj presentationens TLP-nivå under Presentationsinfo för att få med dem.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Alla bilder är undanhållna av sin TLP-klassificering, så det finns inget att visa.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7188,8 +7173,6 @@ const _dutchSourceAddSv = <String, String>{
   'seksuele geaardheid': 'sexuell läggning',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' På den här bilden finns även en identifierande uppgift, så detta kan kopplas till en person.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Särskild kategori av personuppgifter (GDPR art. 9/10)',
   'gezondheidsgegeven': 'hälsouppgift',
   'strafrechtelijk gegeven': 'straffrättslig uppgift',
   'religie of levensovertuiging': 'religion eller övertygelse',
@@ -7250,8 +7233,6 @@ const _dutchSourceAddSv = <String, String>{
   'PERSOONSGEGEVENS': 'PERSONUPPGIFTER',
   'Volg de presentatie': 'Följ presentationen',
   'Weglaten uit tonen en exporteren': 'Utelämna från visning och export',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Överväg att maska det med [[dubbla hakparenteser]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Utan sammanhang i texten är detta kanske inte en personuppgift alls.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

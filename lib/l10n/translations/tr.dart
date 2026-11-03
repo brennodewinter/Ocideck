@@ -14,8 +14,6 @@ const _stringsTr = {
   'more': 'Daha fazla',
   'export': 'Dışa aktar',
   'exportReady': 'Dışa aktar (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Dışa aktarmak için sunumu önce kaydedin',
-  'exportNeedsClean': 'Dışa aktarmak için değişikliklerinizi önce kaydedin',
   'saved': 'Kaydedildi',
   'unsaved': 'Kaydedilmedi',
   'unsavedChanges': 'Değişiklikleri kaydet (Ctrl/Cmd+S)',
@@ -681,7 +679,6 @@ const _dutchSourceTr = {
   'Slide-overzicht': 'Slayt genel görünümü',
   'Slide-overzicht (pijltjes + Enter)':
       'Slayt genel görünümü (ok tuşları + Enter)',
-  'Presenter view (notities, klok)': 'Sunucu görünümü (notlar, saat)',
   'Scherm wisselen (meerdere schermen)': 'Ekran değiştir (birden fazla ekran)',
   'Zwart · wit scherm': 'Siyah · beyaz ekran',
   'Automatische modus aan/uit': 'Otomatik mod açık/kapalı',
@@ -703,11 +700,6 @@ const _dutchSourceTr = {
       'Kurs sırasında alıcı için notlar',
   'Mijn notities aan/uit': 'Notlarım açık/kapalı',
   'Wissel scherm (S)': 'Ekran değiştir (S)',
-  'Kon niet van scherm wisselen.': 'Ekran değiştirilemedi.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · H açıklama · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · H açıklama · S ekran · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
   'pijltjes + Enter of klik om te springen':
       'atlamak için ok tuşları + Enter veya tıklama',
   'Afsluiten (Escape)': 'Çıkış (Escape)',
@@ -1529,8 +1521,6 @@ const _dutchSourceTr = {
   'seksuele geaardheid': 'cinsel yönelim',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Bu slaytta kimlik belirleyici bir veri de var, dolayısıyla bu bir kişiye kadar izlenebilir.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Özel nitelikli kişisel veri (GDPR md. 9/10)',
   'gezondheidsgegeven': 'sağlık verisi',
   'strafrechtelijk gegeven': 'ceza hukuku verisi',
   'religie of levensovertuiging': 'din veya inanç',
@@ -1591,8 +1581,6 @@ const _dutchSourceTr = {
   'PERSOONSGEGEVENS': 'KİŞİSEL VERİLER',
   'Volg de presentatie': 'Sunumu takip et',
   'Weglaten uit tonen en exporteren': 'Gösterimden ve dışa aktarmadan çıkar',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Bunu [[çift köşeli parantez]] ile redakte etmeyi düşünün.',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Metinde bağlam olmadan bu bir kişisel veri olmayabilir.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
@@ -3287,12 +3275,9 @@ const _dutchSourceAddTr = <String, String>{
   'Bewaren als kopie': 'Kopya olarak kaydet',
   'Bewaren in document': 'Belgeye kaydet',
   'beamer': 'projektör',
-  'beamer: niet bereikbaar': 'projektör: erişilemez',
   'Bewerken sluiten (Esc)': 'Düzenlemeyi kapat (Esc)',
   'Presenteer document…': 'Belgeyi sun…',
   'Presenteer document': 'Belgeyi sun',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Sunum sırasında hangi tabloların canlı düzenlenebileceğini işaretleyin. Diğer tüm içerik salt okunur kalır.',
   'Extra ruimte': 'Ekstra boşluk',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Bu not sayfadan uzun — kalanı için kaydırın',
@@ -6083,8 +6068,6 @@ const _dutchSourceAddTr = <String, String>{
   'Markdown-broneditor': 'Markdown kaynak düzenleyicisi',
   'Niet toegepast': 'Uygulanmadı',
   'Niet-toegepaste wijzigingen': 'Uygulanmayan değişiklikler',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Kapsamları değiştirmeden önce mevcut değişiklikleri uygulayın veya reddedin.',
   'Problemen gevonden': 'Bulunan sorunlar',
   'Schrijftips': 'Yazma ipuçları',
   'Snel herstellen': 'Hızlı bir şekilde kurtarın',
@@ -7311,8 +7294,6 @@ const _dutchSourceAddTr = <String, String>{
   '1 slide achtergehouden door haar TLP':
       '1 slayt TLP\'si nedeniyle alıkonuldu',
   'slides achtergehouden door hun TLP': 'slayt TLP\'si nedeniyle alıkonuldu',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Bu slaytlar sunumda, dışa aktarımda ve pakette yer almaz. Bunları da dahil etmek için Sunum bilgisi bölümünde sunumun TLP düzeyini yükseltin.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Tüm slaytlar TLP sınıflandırmaları nedeniyle alıkonuldu — gösterilecek bir şey yok.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':

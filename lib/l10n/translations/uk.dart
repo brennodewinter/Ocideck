@@ -15,8 +15,6 @@ const _stringsUk = {
   'more': 'Більше',
   'export': 'Експорт',
   'exportReady': 'Експорт (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Збережіть презентацію перед експортом',
-  'exportNeedsClean': 'Збережіть зміни перед експортом',
   'saved': 'Збережено',
   'unsaved': 'Не збережено',
   'unsavedChanges': 'Зберегти зміни (Ctrl/Cmd+S)',
@@ -696,7 +694,6 @@ const _dutchSourceUk = {
   'Eerste · laatste slide': 'Перший · останній слайд',
   'Slide-overzicht': 'Огляд слайдів',
   'Slide-overzicht (pijltjes + Enter)': 'Огляд слайдів (стрілки + Enter)',
-  'Presenter view (notities, klok)': 'Вигляд доповідача (нотатки, годинник)',
   'Scherm wisselen (meerdere schermen)': 'Змінити екран (кілька екранів)',
   'Zwart · wit scherm': 'Чорний · білий екран',
   'Automatische modus aan/uit': 'Автоматичний режим увімк./вимк.',
@@ -720,11 +717,6 @@ const _dutchSourceUk = {
       'Нотатки для отримувача під час курсу',
   'Mijn notities aan/uit': 'Увімкнути/вимкнути мої нотатки',
   'Wissel scherm (S)': 'Змінити екран (S)',
-  'Kon niet van scherm wisselen.': 'Не вдалося змінити екрани.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P аудиторія · H легенда · G огляд · B/W чорний/білий · R час · Esc стоп',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P аудиторія · H легенда · S екран · G огляд · B/W чорний/білий · R час · Esc стоп',
   'pijltjes + Enter of klik om te springen':
       'стрілки + Enter або клік, щоб перейти',
   'Afsluiten (Escape)': 'Вийти (Escape)',
@@ -2406,12 +2398,9 @@ const _dutchSourceAddUk = <String, String>{
   'Bewaren als kopie': 'Зберегти як копію',
   'Bewaren in document': 'Зберегти в документі',
   'beamer': 'проєктор',
-  'beamer: niet bereikbaar': 'проєктор: недоступний',
   'Bewerken sluiten (Esc)': 'Закрити редагування (Esc)',
   'Presenteer document…': 'Презентувати документ…',
   'Presenteer document': 'Презентувати документ',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Позначте, які таблиці можна редагувати наживо під час презентації. Увесь інший вміст лишається лише для читання.',
   'Extra ruimte': 'Додатковий простір',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ця примітка довша за сторінку — прокрутіть для решти',
@@ -5218,8 +5207,6 @@ const _dutchSourceAddUk = <String, String>{
   'Markdown-broneditor': 'Редактор коду Markdown',
   'Niet toegepast': 'Не застосовується',
   'Niet-toegepaste wijzigingen': 'Незастосовані зміни',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Застосуйте або відхиліть поточні зміни перед перемиканням областей.',
   'Problemen gevonden': 'Проблеми знайдено',
   'Schrijftips': 'Написання підказок',
   'Snel herstellen': 'Швидко одужувати',
@@ -6454,8 +6441,6 @@ const _dutchSourceAddUk = <String, String>{
       'Приховано: класифіковано суворіше за презентацію',
   '1 slide achtergehouden door haar TLP': '1 слайд приховано через його TLP',
   'slides achtergehouden door hun TLP': 'слайдів приховано через їхній TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Ці слайди не потрапляють у показ, експорт чи пакет. Підвищте рівень TLP презентації у відомостях про презентацію, щоб їх включити.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Усі слайди приховано через їхню класифікацію TLP, тож немає чого показувати.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7204,8 +7189,6 @@ const _dutchSourceAddUk = <String, String>{
   'seksuele geaardheid': 'сексуальна орієнтація',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' На цьому слайді є також ідентифікуючі дані, тож це можна пов\'язати з особою.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Особлива категорія персональних даних (GDPR ст. 9/10)',
   'gezondheidsgegeven': 'дані про здоров\'я',
   'strafrechtelijk gegeven': 'дані про судимість',
   'religie of levensovertuiging': 'релігія або переконання',
@@ -7266,8 +7249,6 @@ const _dutchSourceAddUk = <String, String>{
   'PERSOONSGEGEVENS': 'ПЕРСОНАЛЬНІ ДАНІ',
   'Volg de presentatie': 'Як у презентації',
   'Weglaten uit tonen en exporteren': 'Вилучити з показу та експорту',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Розгляньте можливість приховати це за [[подвійними квадратними дужками]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Без контексту в тексті це може взагалі не бути персональними даними.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

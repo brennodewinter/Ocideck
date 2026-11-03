@@ -14,8 +14,6 @@ const _stringsPap = {
   'more': 'Mas',
   'export': 'Eksportá',
   'exportReady': 'Eksportá (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Warda e presentashon promé ku eksportá',
-  'exportNeedsClean': 'Warda bo kambionan promé ku eksportá',
   'saved': 'Wardá',
   'unsaved': 'No wardá',
   'unsavedChanges': 'Warda kambionan (Ctrl/Cmd+S)',
@@ -555,7 +553,6 @@ const _dutchSourcePap = {
   'Eerste · laatste slide': 'Promé · último slide',
   'Slide-overzicht': 'Resumen di slides',
   'Slide-overzicht (pijltjes + Enter)': 'Resumen di slides (flecha + Enter)',
-  'Presenter view (notities, klok)': 'Presenter view (notanan, oloshi)',
   'Scherm wisselen (meerdere schermen)': 'Kambia pantalla (mas pantalla)',
   'Zwart · wit scherm': 'Pantalla pretu · blanku',
   'Automatische modus aan/uit': 'Modo outomátiko on/off',
@@ -576,11 +573,6 @@ const _dutchSourcePap = {
       'Notanan pa e destinataro durante un kurso',
   'Mijn notities aan/uit': 'Mi notanan on/off',
   'Wissel scherm (S)': 'Kambia pantalla (S)',
-  'Kon niet van scherm wisselen.': 'No por a kambia pantalla.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P públiko · H legenda · G resumen · B/W pretu/blanku · R tempu · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P públiko · H legenda · S pantalla · G resumen · B/W pretu/blanku · R tempu · Esc stop',
   'Akkoord gaan': 'Akuerdo',
   'Licentie (EUPL 1.2)': 'Lisencia (EUPL 1.2)',
   'Toestemming intrekken': 'Retirá Aprobashon',
@@ -1441,12 +1433,9 @@ const _dutchSourceAddPap = {
   'Bewaren als kopie': 'Gardá komo kopia',
   'Bewaren in document': 'Gardá den e dokumento',
   'beamer': 'proyektor',
-  'beamer: niet bereikbaar': 'proyektor: no alkansebel',
   'Bewerken sluiten (Esc)': 'Sera edishon (Esc)',
   'Presenteer document…': 'Presentá e dokumento…',
   'Presenteer document': 'Presentá e dokumento',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Marká kua tablanan por wòrdu editá na bibu durante e presentashon. Tur otro kontenido keda di solo lesamentu.',
   'Extra ruimte': 'Espasio ekstra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'E nota aki ta mas largu ku e página — skrol pa e resto',
@@ -4260,8 +4249,6 @@ const _dutchSourceAddPap = {
   'Markdown-broneditor': 'Editor di fuente Markdown',
   'Niet toegepast': 'No apliká',
   'Niet-toegepaste wijzigingen': 'Kambionan no apliká',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Apliká òf deskartá e kambionan aktual promé ku bo kambia e alkanse.',
   'Problemen gevonden': 'Problemanan hañá',
   'Schrijftips': 'Konsehonan pa skirbi',
   'Snel herstellen': 'Drecha lihé',
@@ -5520,8 +5507,6 @@ const _dutchSourceAddPap = {
       'Retené: klasifiká mas strikto ku e presentashon',
   '1 slide achtergehouden door haar TLP': '1 lámina retené pa su TLP',
   'slides achtergehouden door hun TLP': 'lámina retené pa nan TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'E slidenan aki no ta bai huntu ora di presentá, eksportá ni den e paket. Halsa e nivel TLP di e presentashon na Info di presentashon pa hiba nan huntu.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Tur lámina ta retené pa nan klasifikashon TLP — no tin nada pa mustra.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -6269,8 +6254,6 @@ const _dutchSourceAddPap = {
   'seksuele geaardheid': 'orientashon seksual',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Riba e slide aki tin tambe un dato identifikatorio, pues esaki ta trasabel na un persona.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Kategoria spesial di dato personal (GDPR art. 9/10)',
   'gezondheidsgegeven': 'dato di salú',
   'strafrechtelijk gegeven': 'dato penal',
   'religie of levensovertuiging': 'religion òf konvikshon',
@@ -6332,8 +6315,6 @@ const _dutchSourceAddPap = {
   'PERSOONSGEGEVENS': 'DATOS PERSONAL',
   'Volg de presentatie': 'Sigui e presentashon',
   'Weglaten uit tonen en exporteren': 'Laga afó di mustra i eksportá',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Konsiderá redaktá esaki ku [[dòbel blokhaki]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Sin konteksto den e teksto, kisas esaki no ta un dato personal.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

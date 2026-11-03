@@ -14,8 +14,6 @@ const _stringsId = {
   'more': 'Lainnya',
   'export': 'Ekspor',
   'exportReady': 'Ekspor (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Simpan presentasi terlebih dahulu untuk mengekspor',
-  'exportNeedsClean': 'Simpan perubahan Anda terlebih dahulu untuk mengekspor',
   'saved': 'Tersimpan',
   'unsaved': 'Belum disimpan',
   'unsavedChanges': 'Simpan perubahan (Ctrl/Cmd+S)',
@@ -686,7 +684,6 @@ const _dutchSourceId = {
   'Eerste · laatste slide': 'Slide pertama · terakhir',
   'Slide-overzicht': 'Ikhtisar slide',
   'Slide-overzicht (pijltjes + Enter)': 'Ikhtisar slide (panah + Enter)',
-  'Presenter view (notities, klok)': 'Tampilan pembicara (catatan, jam)',
   'Scherm wisselen (meerdere schermen)': 'Ganti layar (beberapa layar)',
   'Zwart · wit scherm': 'Layar hitam · putih',
   'Automatische modus aan/uit': 'Mode otomatis nyala/mati',
@@ -710,11 +707,6 @@ const _dutchSourceId = {
       'Catatan untuk penerima selama kursus',
   'Mijn notities aan/uit': 'Aktifkan/nonaktifkan catatan saya',
   'Wissel scherm (S)': 'Ganti layar (S)',
-  'Kon niet van scherm wisselen.': 'Tidak dapat mengganti layar.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audiens · H legenda · G ikhtisar · B/W hitam/putih · R waktu · Esc berhenti',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audiens · H legenda · S layar · G ikhtisar · B/W hitam/putih · R waktu · Esc berhenti',
   'pijltjes + Enter of klik om te springen':
       'panah + Enter atau klik untuk melompat',
   'Afsluiten (Escape)': 'Keluar (Escape)',
@@ -2392,12 +2384,9 @@ const _dutchSourceAddId = <String, String>{
   'Bewaren als kopie': 'Simpan sebagai salinan',
   'Bewaren in document': 'Simpan di dokumen',
   'beamer': 'proyektor',
-  'beamer: niet bereikbaar': 'proyektor: tidak terjangkau',
   'Bewerken sluiten (Esc)': 'Tutup penyuntingan (Esc)',
   'Presenteer document…': 'Presentasikan dokumen…',
   'Presenteer document': 'Presentasikan dokumen',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Centang tabel mana yang boleh disunting langsung selama presentasi. Semua konten lain tetap hanya-baca.',
   'Extra ruimte': 'Ruang ekstra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Catatan ini lebih panjang dari halaman — gulir untuk sisanya',
@@ -5204,8 +5193,6 @@ const _dutchSourceAddId = <String, String>{
   'Markdown-broneditor': 'Editor sumber penurunan harga',
   'Niet toegepast': 'Tidak diterapkan',
   'Niet-toegepaste wijzigingen': 'Perubahan yang belum diterapkan',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Terapkan atau tolak perubahan saat ini sebelum berpindah cakupan.',
   'Problemen gevonden': 'Masalah ditemukan',
   'Schrijftips': 'Tip menulis',
   'Snel herstellen': 'Pulihkan dengan cepat',
@@ -6450,8 +6437,6 @@ const _dutchSourceAddId = <String, String>{
       'Ditahan: diklasifikasikan lebih ketat daripada presentasi',
   '1 slide achtergehouden door haar TLP': '1 slide ditahan oleh TLP-nya',
   'slides achtergehouden door hun TLP': 'slide ditahan oleh TLP-nya',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Slide ini tidak ikut saat presentasi, ekspor, atau dalam paket. Naikkan tingkat TLP presentasi di Info presentasi agar ikut disertakan.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Semua slide ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang ditampilkan.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7197,8 +7182,6 @@ const _dutchSourceAddId = <String, String>{
   'seksuele geaardheid': 'orientasi seksual',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Slide ini juga memuat data pengenal, jadi hal ini dapat ditelusuri ke seseorang.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Kategori khusus data pribadi (GDPR pasal 9/10)',
   'gezondheidsgegeven': 'data kesehatan',
   'strafrechtelijk gegeven': 'data pidana',
   'religie of levensovertuiging': 'agama atau keyakinan',
@@ -7259,8 +7242,6 @@ const _dutchSourceAddId = <String, String>{
   'PERSOONSGEGEVENS': 'DATA PRIBADI',
   'Volg de presentatie': 'Ikuti presentasi',
   'Weglaten uit tonen en exporteren': 'Hilangkan dari tampilan dan ekspor',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Pertimbangkan untuk meredaksinya dengan [[kurung siku ganda]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Tanpa konteks dalam teks, ini mungkin bukan data pribadi.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

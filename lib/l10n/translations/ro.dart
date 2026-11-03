@@ -15,8 +15,6 @@ const _stringsRo = {
   'more': 'Mai multe',
   'export': 'Exportă',
   'exportReady': 'Exportă (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Salvează prezentarea înainte de a exporta',
-  'exportNeedsClean': 'Salvează modificările înainte de a exporta',
   'saved': 'Salvat',
   'unsaved': 'Nesalvat',
   'unsavedChanges': 'Salvează modificările (Ctrl/Cmd+S)',
@@ -692,7 +690,6 @@ const _dutchSourceRo = {
   'Slide-overzicht': 'Prezentare generală a slide-urilor',
   'Slide-overzicht (pijltjes + Enter)':
       'Prezentare generală a slide-urilor (săgeți + Enter)',
-  'Presenter view (notities, klok)': 'Vizualizare prezentator (note, ceas)',
   'Scherm wisselen (meerdere schermen)': 'Schimbă ecranul (mai multe ecrane)',
   'Zwart · wit scherm': 'Ecran negru · alb',
   'Automatische modus aan/uit': 'Mod automat activat/dezactivat',
@@ -716,11 +713,6 @@ const _dutchSourceRo = {
       'Note pentru destinatar în timpul unui curs',
   'Mijn notities aan/uit': 'Comută notele mele',
   'Wissel scherm (S)': 'Schimbă ecranul (S)',
-  'Kon niet van scherm wisselen.': 'Nu s-a putut schimba ecranul.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · H legendă · G prezentare · B/W negru/alb · R timp · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · H legendă · S ecran · G prezentare · B/W negru/alb · R timp · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'săgeți + Enter sau clic pentru a sări',
   'Afsluiten (Escape)': 'Ieșire (Escape)',
@@ -2414,12 +2406,9 @@ const _dutchSourceAddRo = <String, String>{
   'Bewaren als kopie': 'Salvează ca copie',
   'Bewaren in document': 'Salvează în document',
   'beamer': 'proiector',
-  'beamer: niet bereikbaar': 'proiector: indisponibil',
   'Bewerken sluiten (Esc)': 'Închide editarea (Esc)',
   'Presenteer document…': 'Prezintă documentul…',
   'Presenteer document': 'Prezintă documentul',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Bifați care tabele pot fi editate live în timpul prezentării. Tot celălalt conținut rămâne doar pentru citire.',
   'Extra ruimte': 'Spațiu suplimentar',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Această notă este mai lungă decât pagina — derulați pentru rest',
@@ -5263,8 +5252,6 @@ const _dutchSourceAddRo = <String, String>{
   'Markdown-broneditor': 'Editor sursă Markdown',
   'Niet toegepast': 'Nu se aplică',
   'Niet-toegepaste wijzigingen': 'Modificări neaplicate',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Aplicați sau respingeți modificările curente înainte de a schimba domeniul de aplicare.',
   'Problemen gevonden': 'Probleme găsite',
   'Schrijftips': 'Sfaturi de scriere',
   'Snel herstellen': 'Recuperează-te repede',
@@ -6516,8 +6503,6 @@ const _dutchSourceAddRo = <String, String>{
       '1 slide reținut din cauza TLP-ului său',
   'slides achtergehouden door hun TLP':
       'slide-uri reținute din cauza TLP-ului lor',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Aceste slide-uri nu sunt incluse la prezentare, la export sau în pachet. Ridicați nivelul TLP al prezentării în Informații prezentare pentru a le include.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Toate slide-urile sunt reținute din cauza clasificării lor TLP — nimic de afișat.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7272,8 +7257,6 @@ const _dutchSourceAddRo = <String, String>{
   'seksuele geaardheid': 'orientare sexuală',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Pe acest diapozitiv există și o dată identificatoare, deci aceasta este atribuibilă unei persoane.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Categorie specială de date cu caracter personal (GDPR art. 9/10)',
   'gezondheidsgegeven': 'dată privind sănătatea',
   'strafrechtelijk gegeven': 'dată penală',
   'religie of levensovertuiging': 'religie sau convingere',
@@ -7334,8 +7317,6 @@ const _dutchSourceAddRo = <String, String>{
   'PERSOONSGEGEVENS': 'DATE PERSONALE',
   'Volg de presentatie': 'Urmează prezentarea',
   'Weglaten uit tonen en exporteren': 'Omite din afișare și export',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Ia în calcul redactarea cu [[paranteze drepte duble]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Fără context în text, este posibil să nu fie deloc o dată cu caracter personal.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

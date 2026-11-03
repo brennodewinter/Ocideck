@@ -15,8 +15,6 @@ const _stringsLa = {
   'more': 'Plura',
   'export': 'Exportare',
   'exportReady': 'Exportare (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Praesentationem prius serva ut exportes',
-  'exportNeedsClean': 'Mutationes tuas prius serva ut exportes',
   'saved': 'Servatum',
   'unsaved': 'Non servatum',
   'unsavedChanges': 'Mutationes servare (Ctrl/Cmd+S)',
@@ -692,7 +690,6 @@ const _dutchSourceLa = {
   'Slide-overzicht': 'Conspectus laminarum',
   'Slide-overzicht (pijltjes + Enter)':
       'Conspectus laminarum (sagittae + Enter)',
-  'Presenter view (notities, klok)': 'Visio oratoris (notae, horologium)',
   'Scherm wisselen (meerdere schermen)':
       'Schermata permutare (plura schermata)',
   'Zwart · wit scherm': 'Schermum nigrum · album',
@@ -716,11 +713,6 @@ const _dutchSourceLa = {
       'Notae pro accipiente durante cursu',
   'Mijn notities aan/uit': 'Notas meas activare/inactivare',
   'Wissel scherm (S)': 'Schermum permutare (S)',
-  'Kon niet van scherm wisselen.': 'Schermata permutari non potuerunt.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorium · H legenda · G conspectus · B/W nigrum/album · R tempus · Esc sistere',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorium · H legenda · S schermum · G conspectus · B/W nigrum/album · R tempus · Esc sistere',
   'pijltjes + Enter of klik om te springen':
       'sagittae + Enter aut ictus ad saliendum',
   'Afsluiten (Escape)': 'Exire (Escape)',
@@ -2409,12 +2401,9 @@ const _dutchSourceAddLa = <String, String>{
   'Bewaren als kopie': 'Serva ut exemplar',
   'Bewaren in document': 'Serva in documento',
   'beamer': 'projectorium',
-  'beamer: niet bereikbaar': 'projectorium: non pervenibile',
   'Bewerken sluiten (Esc)': 'Claude recensionem (Esc)',
   'Presenteer document…': 'Praesenta documentum…',
   'Presenteer document': 'Praesenta documentum',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Elige quae tabulae per praesentationem vivae mutari possint. Cetera omnia legenda tantum manent.',
   'Extra ruimte': 'Spatium extra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Haec nota longior est quam pagina — volumen verte pro reliquo',
@@ -5228,8 +5217,6 @@ const _dutchSourceAddLa = <String, String>{
   'Markdown-broneditor': 'Editor fontis Markdown',
   'Niet toegepast': 'Non applicantur',
   'Niet-toegepaste wijzigingen': 'Unapplied mutationes',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Applicare vel rejicere current mutationes ante commutatione scopes.',
   'Problemen gevonden': 'Problemata invenerunt',
   'Schrijftips': 'Scribere tips',
   'Snel herstellen': 'Recuperet cito',
@@ -6465,8 +6452,6 @@ const _dutchSourceAddLa = <String, String>{
       'Retentum: severius quam praesentatio classificatum',
   '1 slide achtergehouden door haar TLP': '1 scida propter TLP suum retenta',
   'slides achtergehouden door hun TLP': 'scidae propter TLP suum retentae',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Hae scidae in praesentatione, exportatione et fasciculo omittuntur. Gradum TLP praesentationis in Informatione praesentationis auge ut includantur.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Omnes paginae classificatione TLP sua retinentur, itaque nihil est quod ostendatur.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7209,8 +7194,6 @@ const _dutchSourceAddLa = <String, String>{
   'seksuele geaardheid': 'propensio sexualis',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' In hac pagina etiam datum identificans est, itaque hoc ad personam referri potest.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Genus speciale datorum personalium (GDPR art. 9/10)',
   'gezondheidsgegeven': 'datum valetudinis',
   'strafrechtelijk gegeven': 'datum criminale',
   'religie of levensovertuiging': 'religio vel persuasio',
@@ -7271,8 +7254,6 @@ const _dutchSourceAddLa = <String, String>{
   'PERSOONSGEGEVENS': 'DATA PERSONALIA',
   'Volg de presentatie': 'Praesentationem sequi',
   'Weglaten uit tonen en exporteren': 'Ex ostensione et exportatione omittere',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Considera id obliterare per [[duplices uncos quadratos]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Sine contextu in textu, hoc fortasse datum personale non est.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

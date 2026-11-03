@@ -14,8 +14,6 @@ const _stringsIt = {
   'more': 'Altro',
   'export': 'Esporta',
   'exportReady': 'Esporta (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Salva la presentazione prima di esportare',
-  'exportNeedsClean': 'Salva le modifiche prima di esportare',
   'saved': 'Salvata',
   'unsaved': 'Non salvata',
   'unsavedChanges': 'Salva modifiche (Ctrl/Cmd+S)',
@@ -559,7 +557,6 @@ const _dutchSourceIt = {
   'Eerste · laatste slide': 'Prima · ultima slide',
   'Slide-overzicht': 'Panoramica slide',
   'Slide-overzicht (pijltjes + Enter)': 'Panoramica slide (frecce + Enter)',
-  'Presenter view (notities, klok)': 'Vista relatore (note, orologio)',
   'Scherm wisselen (meerdere schermen)': 'Cambia schermo (piu schermi)',
   'Zwart · wit scherm': 'Schermo nero · bianco',
   'Automatische modus aan/uit': 'Modalita automatica on/off',
@@ -572,10 +569,6 @@ const _dutchSourceIt = {
   'Verstreken': 'Trascorso',
   'Klok': 'Orologio',
   'Wissel scherm (S)': 'Cambia schermo (S)',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P pubblico · H legenda · G panoramica · B/W nero/bianco · R tempo · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P pubblico · H legenda · S schermo · G panoramica · B/W nero/bianco · R tempo · Esc stop',
   'Akkoord gaan': 'Accetto',
   'Licentie (EUPL 1.2)': 'Licenza (EUPL 1.2)',
   'Toestemming intrekken': 'Revoca consenso',
@@ -1448,12 +1441,9 @@ const _dutchSourceAddIt = {
   'Bewaren als kopie': 'Salva come copia',
   'Bewaren in document': 'Salva nel documento',
   'beamer': 'proiettore',
-  'beamer: niet bereikbaar': 'proiettore: non raggiungibile',
   'Bewerken sluiten (Esc)': 'Chiudi modifica (Esc)',
   'Presenteer document…': 'Presenta il documento…',
   'Presenteer document': 'Presenta il documento',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Seleziona quali tabelle possono essere modificate dal vivo durante la presentazione. Tutti gli altri contenuti restano di sola lettura.',
   'Extra ruimte': 'Spazio extra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Questa nota è più lunga della pagina — scorri per il resto',
@@ -4301,8 +4291,6 @@ const _dutchSourceAddIt = {
   'Markdown-broneditor': 'Editor di origine Markdown',
   'Niet toegepast': 'Non applicato',
   'Niet-toegepaste wijzigingen': 'Modifiche non applicate',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Applicare o rifiutare le modifiche correnti prima di cambiare ambito.',
   'Problemen gevonden': 'Problemi riscontrati',
   'Schrijftips': 'Suggerimenti per la scrittura',
   'Snel herstellen': 'Recupera rapidamente',
@@ -5574,8 +5562,6 @@ const _dutchSourceAddIt = {
   '1 slide achtergehouden door haar TLP':
       '1 diapositiva trattenuta dal suo TLP',
   'slides achtergehouden door hun TLP': 'diapositive trattenute dal loro TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Queste diapositive non vengono incluse durante la presentazione, l\'esportazione o nel pacchetto. Alza il livello TLP della presentazione in Info presentazione per includerle.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Tutte le diapositive sono trattenute dalla loro classificazione TLP: non c\'è nulla da mostrare.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -6331,8 +6317,6 @@ const _dutchSourceAddIt = {
   'seksuele geaardheid': 'orientamento sessuale',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Questa diapositiva contiene anche un dato identificativo, quindi è riconducibile a una persona.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Categoria particolare di dati personali (GDPR art. 9/10)',
   'gezondheidsgegeven': 'dato sanitario',
   'strafrechtelijk gegeven': 'dato giudiziario',
   'religie of levensovertuiging': 'religione o convinzioni',
@@ -6394,8 +6378,6 @@ const _dutchSourceAddIt = {
   'Volg de presentatie': 'Segui la presentazione',
   'Weglaten uit tonen en exporteren':
       'Ometti dalla visualizzazione e dall\'esportazione',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Valuta di oscurarlo con [[doppie parentesi quadre]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Senza contesto nel testo, potrebbe non essere affatto un dato personale.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
@@ -6976,7 +6958,6 @@ const _dutchSourceAddIt = {
   'Kies een map met presentaties om te beginnen.':
       'Scegli una cartella con presentazioni per iniziare.',
   'Kon dit pakket niet importeren.': 'Impossibile importare questo pacchetto.',
-  'Kon niet van scherm wisselen.': 'Impossibile cambiare schermo.',
   'Kon van deze URL geen presentatie ophalen.':
       'Impossibile recuperare una presentazione da questo URL.',
   'Kopieer afbeelding naar klembord': 'Copia immagine negli appunti',

@@ -14,8 +14,6 @@ const _stringsDa = {
   'more': 'Mere',
   'export': 'Eksportér',
   'exportReady': 'Eksportér (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Gem præsentationen, før du eksporterer',
-  'exportNeedsClean': 'Gem dine ændringer, før du eksporterer',
   'saved': 'Gemt',
   'unsaved': 'Ikke gemt',
   'unsavedChanges': 'Gem ændringer (Ctrl/Cmd+S)',
@@ -690,7 +688,6 @@ const _dutchSourceDa = {
   'Eerste · laatste slide': 'Første · sidste slide',
   'Slide-overzicht': 'Slideoversigt',
   'Slide-overzicht (pijltjes + Enter)': 'Slideoversigt (piletaster + Enter)',
-  'Presenter view (notities, klok)': 'Præsentatorvisning (noter, ur)',
   'Scherm wisselen (meerdere schermen)': 'Skift skærm (flere skærme)',
   'Zwart · wit scherm': 'Sort · hvid skærm',
   'Automatische modus aan/uit': 'Automatisk tilstand til/fra',
@@ -713,11 +710,6 @@ const _dutchSourceDa = {
       'Noter til modtageren under et kursus',
   'Mijn notities aan/uit': 'Slå mine noter til/fra',
   'Wissel scherm (S)': 'Skift skærm (S)',
-  'Kon niet van scherm wisselen.': 'Kunne ikke skifte skærm.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · H legende · G oversigt · B/W sort/hvid · R tid · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · H legende · S skærm · G oversigt · B/W sort/hvid · R tid · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'piletaster + Enter eller klik for at springe',
   'Afsluiten (Escape)': 'Afslut (Escape)',
@@ -2392,12 +2384,9 @@ const _dutchSourceAddDa = <String, String>{
   'Bewaren als kopie': 'Gem som kopi',
   'Bewaren in document': 'Gem i dokumentet',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: ikke tilgængelig',
   'Bewerken sluiten (Esc)': 'Luk redigering (Esc)',
   'Presenteer document…': 'Præsentér dokument…',
   'Presenteer document': 'Præsentér dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Markér hvilke tabeller der må redigeres live under præsentationen. Alt andet indhold forbliver skrivebeskyttet.',
   'Extra ruimte': 'Ekstra mellemrum',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Denne note er længere end siden — rul for resten',
@@ -5206,8 +5195,6 @@ const _dutchSourceAddDa = <String, String>{
   'Markdown-broneditor': 'Markdown kildeeditor',
   'Niet toegepast': 'Ikke anvendt',
   'Niet-toegepaste wijzigingen': 'Ikke-anvendte ændringer',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Anvend eller afvis aktuelle ændringer, før du skifter scope.',
   'Problemen gevonden': 'Problemer fundet',
   'Schrijftips': 'Skrivetips',
   'Snel herstellen': 'Kom sig hurtigt',
@@ -6444,8 +6431,6 @@ const _dutchSourceAddDa = <String, String>{
       'Tilbageholdt: klassificeret strengere end præsentationen',
   '1 slide achtergehouden door haar TLP': '1 slide tilbageholdt af sit TLP',
   'slides achtergehouden door hun TLP': 'slides tilbageholdt af deres TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Disse slides kommer ikke med ved præsentation, eksport eller i pakken. Hæv præsentationens TLP-niveau under Præsentationsinfo for at få dem med.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Alle slides er tilbageholdt af deres TLP-klassifikation, så der er intet at vise.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7188,8 +7173,6 @@ const _dutchSourceAddDa = <String, String>{
   'seksuele geaardheid': 'seksuel orientering',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' På denne slide står også en identificerende oplysning, så dette kan føres tilbage til en person.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Særlig kategori af personoplysninger (GDPR art. 9/10)',
   'gezondheidsgegeven': 'helbredsoplysning',
   'strafrechtelijk gegeven': 'strafferetlig oplysning',
   'religie of levensovertuiging': 'religion eller overbevisning',
@@ -7250,8 +7233,6 @@ const _dutchSourceAddDa = <String, String>{
   'PERSOONSGEGEVENS': 'PERSONOPLYSNINGER',
   'Volg de presentatie': 'Følg præsentationen',
   'Weglaten uit tonen en exporteren': 'Udelad fra visning og eksport',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Overvej at redigere det bort med [[dobbelte kantede parenteser]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Uden kontekst i teksten er dette måske slet ikke en personoplysning.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

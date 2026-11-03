@@ -14,8 +14,6 @@ const _stringsLv = {
   'more': 'Vairāk',
   'export': 'Eksportēt',
   'exportReady': 'Eksportēt (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Vispirms saglabājiet prezentāciju, lai eksportētu',
-  'exportNeedsClean': 'Vispirms saglabājiet izmaiņas, lai eksportētu',
   'saved': 'Saglabāts',
   'unsaved': 'Nesaglabāts',
   'unsavedChanges': 'Saglabāt izmaiņas (Ctrl/Cmd+S)',
@@ -687,8 +685,6 @@ const _dutchSourceLv = {
   'Eerste · laatste slide': 'Pirmais · pēdējais slaids',
   'Slide-overzicht': 'Slaidu pārskats',
   'Slide-overzicht (pijltjes + Enter)': 'Slaidu pārskats (bultiņas + Enter)',
-  'Presenter view (notities, klok)':
-      'Prezentētāja skats (piezīmes, pulkstenis)',
   'Scherm wisselen (meerdere schermen)': 'Pārslēgt ekrānu (vairāki ekrāni)',
   'Zwart · wit scherm': 'Melns · balts ekrāns',
   'Automatische modus aan/uit': 'Automātiskais režīms ieslēgts/izslēgts',
@@ -711,11 +707,6 @@ const _dutchSourceLv = {
       'Piezīmes saņēmējam kursa laikā',
   'Mijn notities aan/uit': 'Pārslēgt manas piezīmes ieslēgt/izslēgt',
   'Wissel scherm (S)': 'Pārslēgt ekrānu (S)',
-  'Kon niet van scherm wisselen.': 'Neizdevās pārslēgt ekrānus.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · H leģenda · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · H leģenda · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
   'pijltjes + Enter of klik om te springen':
       'bultiņas + Enter vai klikšķis, lai pārlēktu',
   'Afsluiten (Escape)': 'Iziet (Escape)',
@@ -2385,12 +2376,9 @@ const _dutchSourceAddLv = <String, String>{
   'Bewaren als kopie': 'Saglabāt kā kopiju',
   'Bewaren in document': 'Saglabāt dokumentā',
   'beamer': 'projektors',
-  'beamer: niet bereikbaar': 'projektors: nav sasniedzams',
   'Bewerken sluiten (Esc)': 'Aizvērt rediģēšanu (Esc)',
   'Presenteer document…': 'Prezentēt dokumentu…',
   'Presenteer document': 'Prezentēt dokumentu',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Atzīmējiet, kuras tabulas prezentācijas laikā drīkst rediģēt tiešraidē. Viss pārējais saturs paliek tikai lasāms.',
   'Extra ruimte': 'Papildu vieta',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Šī piezīme ir garāka par lapu — ritiniet, lai redzētu pārējo',
@@ -5200,8 +5188,6 @@ const _dutchSourceAddLv = <String, String>{
   'Markdown-broneditor': 'Markdown avota redaktors',
   'Niet toegepast': 'Nav piemērots',
   'Niet-toegepaste wijzigingen': 'Nepielietotās izmaiņas',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Pirms tvēruma maiņas lietojiet vai noraidiet pašreizējās izmaiņas.',
   'Problemen gevonden': 'Problēmas atrastas',
   'Schrijftips': 'Rakstīšanas padomi',
   'Snel herstellen': 'Ātri atgūties',
@@ -6437,8 +6423,6 @@ const _dutchSourceAddLv = <String, String>{
       'Aizturēts: klasificēts stingrāk nekā prezentācija',
   '1 slide achtergehouden door haar TLP': '1 slaids aizturēts tā TLP dēļ',
   'slides achtergehouden door hun TLP': 'slaidi aizturēti to TLP dēļ',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Šie slaidi netiek iekļauti prezentējot, eksportējot vai pakotnē. Paaugstiniet prezentācijas TLP līmeni sadaļā Prezentācijas informācija, lai tos iekļautu.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Visi slaidi ir aizturēti to TLP klasifikācijas dēļ — nav ko rādīt.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7184,8 +7168,6 @@ const _dutchSourceAddLv = <String, String>{
   'seksuele geaardheid': 'seksuālā orientācija',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Šajā slaidā ir arī identificējošs dats, tāpēc to var attiecināt uz personu.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Īpaša personas datu kategorija (VDAR 9./10. pants)',
   'gezondheidsgegeven': 'veselības dati',
   'strafrechtelijk gegeven': 'krimināltiesību dati',
   'religie of levensovertuiging': 'reliģija vai pārliecība',
@@ -7246,8 +7228,6 @@ const _dutchSourceAddLv = <String, String>{
   'PERSOONSGEGEVENS': 'PERSONAS DATI',
   'Volg de presentatie': 'Sekot prezentācijai',
   'Weglaten uit tonen en exporteren': 'Izlaist no rādīšanas un eksporta',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Apsver to aizklāt ar [[dubultajām kvadrātiekavām]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Bez konteksta tekstā tie, iespējams, nemaz nav personas dati.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

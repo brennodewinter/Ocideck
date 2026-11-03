@@ -15,8 +15,6 @@ const _stringsSk = {
   'more': 'Viac',
   'export': 'Exportovať',
   'exportReady': 'Exportovať (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Pred exportom prezentáciu najprv uložte',
-  'exportNeedsClean': 'Pred exportom najprv uložte zmeny',
   'saved': 'Uložené',
   'unsaved': 'Neuložené',
   'unsavedChanges': 'Uložiť zmeny (Ctrl/Cmd+S)',
@@ -689,8 +687,6 @@ const _dutchSourceSk = {
   'Eerste · laatste slide': 'Prvá · posledná snímka',
   'Slide-overzicht': 'Prehľad snímok',
   'Slide-overzicht (pijltjes + Enter)': 'Prehľad snímok (šípky + Enter)',
-  'Presenter view (notities, klok)':
-      'Zobrazenie prednášajúceho (poznámky, hodiny)',
   'Scherm wisselen (meerdere schermen)':
       'Prepnúť obrazovku (viacero obrazoviek)',
   'Zwart · wit scherm': 'Čierna · biela obrazovka',
@@ -715,11 +711,6 @@ const _dutchSourceSk = {
       'Poznámky pre príjemcu počas kurzu',
   'Mijn notities aan/uit': 'Prepnúť moje poznámky zap./vyp.',
   'Wissel scherm (S)': 'Prepnúť obrazovku (S)',
-  'Kon niet van scherm wisselen.': 'Nepodarilo sa prepnúť obrazovku.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · H legenda · G prehľad · B/W čierna/biela · R čas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · H legenda · S obrazovka · G prehľad · B/W čierna/biela · R čas · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'šípky + Enter alebo kliknutím preskočíte',
   'Afsluiten (Escape)': 'Ukončiť (Escape)',
@@ -2393,12 +2384,9 @@ const _dutchSourceAddSk = <String, String>{
   'Bewaren als kopie': 'Uložiť ako kópiu',
   'Bewaren in document': 'Uložiť do dokumentu',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nedostupný',
   'Bewerken sluiten (Esc)': 'Zavrieť úpravy (Esc)',
   'Presenteer document…': 'Prezentovať dokument…',
   'Presenteer document': 'Prezentovať dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Začiarknite, ktoré tabuľky môžu byť počas prezentácie upravované naživo. Všetok ostatný obsah zostane iba na čítanie.',
   'Extra ruimte': 'Priestor navyše',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Táto poznámka je dlhšia ako stránka — posuňte sa pre zvyšok',
@@ -5202,8 +5190,6 @@ const _dutchSourceAddSk = <String, String>{
   'Markdown-broneditor': 'Editor zdroja Markdown',
   'Niet toegepast': 'Neuplatňuje sa',
   'Niet-toegepaste wijzigingen': 'Neaplikované zmeny',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Pred prepnutím rozsahov použite alebo odmietnite aktuálne zmeny.',
   'Problemen gevonden': 'Našli sa problémy',
   'Schrijftips': 'Tipy na písanie',
   'Snel herstellen': 'Rýchlo sa zotavte',
@@ -6440,8 +6426,6 @@ const _dutchSourceAddSk = <String, String>{
       'Zadržané: klasifikované prísnejšie než prezentácia',
   '1 slide achtergehouden door haar TLP': '1 snímka zadržaná kvôli svojmu TLP',
   'slides achtergehouden door hun TLP': 'snímok zadržaných kvôli ich TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Tieto snímky sa nedostanú do prezentácie, exportu ani balíka. Zvýšte úroveň TLP prezentácie v Informáciách o prezentácii, aby sa zahrnuli.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Všetky snímky sú zadržané kvôli svojej klasifikácii TLP — nie je čo zobraziť.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7186,8 +7170,6 @@ const _dutchSourceAddSk = <String, String>{
   'seksuele geaardheid': 'sexuálna orientácia',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tejto snímke je aj identifikačný údaj, takže to možno priradiť konkrétnej osobe.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Osobitná kategória osobných údajov (GDPR čl. 9/10)',
   'gezondheidsgegeven': 'údaj o zdraví',
   'strafrechtelijk gegeven': 'údaj trestnej povahy',
   'religie of levensovertuiging': 'náboženstvo alebo presvedčenie',
@@ -7248,8 +7230,6 @@ const _dutchSourceAddSk = <String, String>{
   'PERSOONSGEGEVENS': 'OSOBNÉ ÚDAJE',
   'Volg de presentatie': 'Podľa prezentácie',
   'Weglaten uit tonen en exporteren': 'Vynechať zo zobrazenia aj exportu',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Zváž začiernenie pomocou [[dvojitých hranatých zátvoriek]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Bez kontextu v texte to nemusí byť osobný údaj vôbec.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

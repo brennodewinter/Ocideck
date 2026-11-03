@@ -14,8 +14,6 @@ const _stringsSl = {
   'more': 'Več',
   'export': 'Izvozi',
   'exportReady': 'Izvozi (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Pred izvozom najprej shranite predstavitev',
-  'exportNeedsClean': 'Pred izvozom najprej shranite spremembe',
   'saved': 'Shranjeno',
   'unsaved': 'Neshranjeno',
   'unsavedChanges': 'Shrani spremembe (Ctrl/Cmd+S)',
@@ -686,7 +684,6 @@ const _dutchSourceSl = {
   'Slide-overzicht': 'Pregled diapozitivov',
   'Slide-overzicht (pijltjes + Enter)':
       'Pregled diapozitivov (puščice + Enter)',
-  'Presenter view (notities, klok)': 'Pogled predavatelja (opombe, ura)',
   'Scherm wisselen (meerdere schermen)': 'Preklop zaslona (več zaslonov)',
   'Zwart · wit scherm': 'Črn · bel zaslon',
   'Automatische modus aan/uit': 'Samodejni način vklop/izklop',
@@ -710,11 +707,6 @@ const _dutchSourceSl = {
       'Opombe za prejemnika med tečajem',
   'Mijn notities aan/uit': 'Vklop/izklop mojih opomb',
   'Wissel scherm (S)': 'Preklop zaslona (S)',
-  'Kon niet van scherm wisselen.': 'Zaslona ni bilo mogoče preklopiti.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · H legenda · G pregled · B/W črno/belo · R čas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · H legenda · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'puščice + Enter ali klik za preskok',
   'Afsluiten (Escape)': 'Izhod (Escape)',
@@ -2389,12 +2381,9 @@ const _dutchSourceAddSl = <String, String>{
   'Bewaren als kopie': 'Shrani kot kopijo',
   'Bewaren in document': 'Shrani v dokument',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nedosegljiv',
   'Bewerken sluiten (Esc)': 'Zapri urejanje (Esc)',
   'Presenteer document…': 'Predstavi dokument…',
   'Presenteer document': 'Predstavi dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Označite, katere tabele je med predstavitvijo dovoljeno urejati v živo. Vsa druga vsebina ostane samo za branje.',
   'Extra ruimte': 'Dodaten prostor',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta opomba je daljša od strani — drsite za preostanek',
@@ -5202,8 +5191,6 @@ const _dutchSourceAddSl = <String, String>{
   'Markdown-broneditor': 'Markdown urejevalnik vira',
   'Niet toegepast': 'Ni uporabljeno',
   'Niet-toegepaste wijzigingen': 'Neuporabljene spremembe',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Uporabite ali zavrnite trenutne spremembe, preden preklopite obsege.',
   'Problemen gevonden': 'Najdene težave',
   'Schrijftips': 'Nasveti za pisanje',
   'Snel herstellen': 'Hitro si opomore',
@@ -6443,8 +6430,6 @@ const _dutchSourceAddSl = <String, String>{
       '1 diapozitiv zadržan zaradi svojega TLP',
   'slides achtergehouden door hun TLP':
       'diapozitivov zadržanih zaradi njihovega TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Te prosojnice ne gredo zraven pri predstavljanju, izvozu ali v paketu. Zvišajte raven TLP predstavitve v Informacijah o predstavitvi, da jih vključite.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Vsi diapozitivi so zadržani zaradi svoje klasifikacije TLP — ni kaj prikazati.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7191,8 +7176,6 @@ const _dutchSourceAddSl = <String, String>{
   'seksuele geaardheid': 'spolna usmerjenost',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tej prosojnici je tudi identifikacijski podatek, zato je to mogoče povezati z osebo.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Posebna vrsta osebnih podatkov (GDPR čl. 9/10)',
   'gezondheidsgegeven': 'zdravstveni podatek',
   'strafrechtelijk gegeven': 'kazenskopravni podatek',
   'religie of levensovertuiging': 'vera ali prepričanje',
@@ -7253,8 +7236,6 @@ const _dutchSourceAddSl = <String, String>{
   'PERSOONSGEGEVENS': 'OSEBNI PODATKI',
   'Volg de presentatie': 'Sledi predstavitvi',
   'Weglaten uit tonen en exporteren': 'Izpusti iz prikaza in izvoza',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Razmisli o prekritju z [[dvojnimi oglatimi oklepaji]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Brez konteksta v besedilu to morda sploh ni osebni podatek.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

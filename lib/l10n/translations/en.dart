@@ -14,8 +14,6 @@ const _stringsEn = {
   'more': 'More',
   'export': 'Export',
   'exportReady': 'Export (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Save the presentation before exporting',
-  'exportNeedsClean': 'Save your changes before exporting',
   'saved': 'Saved',
   'unsaved': 'Unsaved',
   'unsavedChanges': 'Save changes (Ctrl/Cmd+S)',
@@ -681,7 +679,6 @@ const _dutchSourceEn = {
   'Eerste · laatste slide': 'First · last slide',
   'Slide-overzicht': 'Slide overview',
   'Slide-overzicht (pijltjes + Enter)': 'Slide overview (arrows + Enter)',
-  'Presenter view (notities, klok)': 'Presenter view (notes, clock)',
   'Scherm wisselen (meerdere schermen)': 'Switch screen (multiple displays)',
   'Zwart · wit scherm': 'Black · white screen',
   'Automatische modus aan/uit': 'Automatic mode on/off',
@@ -703,11 +700,6 @@ const _dutchSourceEn = {
       'Notes for the recipient during a course',
   'Mijn notities aan/uit': 'Toggle my notes on/off',
   'Wissel scherm (S)': 'Switch screen (S)',
-  'Kon niet van scherm wisselen.': 'Could not switch screens.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audience · H legend · G overview · B/W black/white · R time · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audience · H legend · S screen · G overview · B/W black/white · R time · Esc stop',
   'pijltjes + Enter of klik om te springen': 'arrows + Enter or click to jump',
   'Afsluiten (Escape)': 'Exit (Escape)',
   'Sluiten (G of Esc)': 'Close (G or Esc)',
@@ -1592,12 +1584,9 @@ const _dutchSourceAddEn = {
   'Bewaren als kopie': 'Save as copy',
   'Bewaren in document': 'Save in document',
   'beamer': 'projector',
-  'beamer: niet bereikbaar': 'projector: unreachable',
   'Bewerken sluiten (Esc)': 'Stop editing (Esc)',
   'Presenteer document…': 'Present document…',
   'Presenteer document': 'Present document',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Select which tables may be edited live during the presentation. All other content stays read-only.',
   'Extra ruimte': 'Extra space',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'This note is longer than the page — scroll for the rest',
@@ -4413,8 +4402,6 @@ const _dutchSourceAddEn = {
   'Markdown-broneditor': 'Markdown source editor',
   'Niet toegepast': 'Not applied',
   'Niet-toegepaste wijzigingen': 'Unapplied changes',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Apply or reject current changes before switching scopes.',
   'Problemen gevonden': 'Problems found',
   'Schrijftips': 'Writing tips',
   'Snel herstellen': 'Recover quickly',
@@ -5652,8 +5639,6 @@ const _dutchSourceAddEn = {
       'Withheld: classified more strictly than the presentation',
   '1 slide achtergehouden door haar TLP': '1 slide withheld by its TLP',
   'slides achtergehouden door hun TLP': 'slides withheld by their TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'These slides are left out when presenting, exporting or packaging. Raise the presentation\'s TLP level under Presentation info to include them.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'All slides are withheld by their TLP classification, so there is nothing to show.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -6396,8 +6381,6 @@ const _dutchSourceAddEn = {
   'seksuele geaardheid': 'sexual orientation',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' This slide also carries an identifying detail, so this is traceable to a person.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Special category of personal data (GDPR art. 9/10)',
   'gezondheidsgegeven': 'health data',
   'strafrechtelijk gegeven': 'criminal-law data',
   'religie of levensovertuiging': 'religion or belief',
@@ -6458,8 +6441,6 @@ const _dutchSourceAddEn = {
   'PERSOONSGEGEVENS': 'PERSONAL DATA',
   'Volg de presentatie': 'Follow the presentation',
   'Weglaten uit tonen en exporteren': 'Leave out of display and export',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Consider redacting it with [[double square brackets]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Without context in the text, this may not be personal data at all.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
