@@ -135,6 +135,7 @@ final nativeGitMirrorProvider = FutureProvider.family<NativeGitMirror?, String>(
       git: ref.watch(gitCliProvider),
       config: config,
       token: token,
+      signCommits: ref.watch(settingsProvider).gitSignCommits,
     );
   },
 );

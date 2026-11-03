@@ -4,6 +4,7 @@ import 'package:flutter_math_fork/flutter_math.dart';
 
 import '../../utils/inline_markdown.dart';
 import '../reader/document_search_overlay.dart';
+import '../../utils/text_direction.dart';
 
 /// De widgetkant van de inline-markdown: opmaak mét klikbare links. Het parsen
 /// en de opmaak zelf staan in `utils/inline_markdown.dart`, zodat de headless
@@ -177,6 +178,9 @@ class _InlineMarkdownTextState extends State<InlineMarkdownText> {
       textAlign: widget.textAlign,
       overflow: widget.overflow,
       softWrap: widget.softWrap,
+      // #2752: de alinearichting volgt het eerste sterke teken — een Arabisch
+      // of Hebreeuws blok leest rtl zonder de schil te spiegelen.
+      textDirection: paragraphTextDirection(widget.text),
     );
   }
 }

@@ -14,8 +14,6 @@ const _stringsGa = {
   'more': 'Tuilleadh',
   'export': 'Easpórtáil',
   'exportReady': 'Easpórtáil (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Sábháil an láithreoireacht ar dtús chun easpórtáil',
-  'exportNeedsClean': 'Sábháil do chuid athruithe ar dtús chun easpórtáil',
   'saved': 'Sábháilte',
   'unsaved': 'Gan sábháil',
   'unsavedChanges': 'Sábháil athruithe (Ctrl/Cmd+S)',
@@ -699,9 +697,6 @@ const _dutchSourceGa = {
   'Slide-overzicht': 'Forbhreathnú sleamhnán',
   'Slide-overzicht (pijltjes + Enter)':
       'Forbhreathnú sleamhnán (saigheada + Enter)',
-  'Presenter view (notities, klok)': 'Amharc an láithreora (nótaí, clog)',
-  'Scherm wisselen (meerdere schermen)':
-      'Athraigh scáileán (scáileáin iomadúla)',
   'Zwart · wit scherm': 'Scáileán dubh · bán',
   'Automatische modus aan/uit': 'Mód uathoibríoch as/air',
   'Herhalen (loop) aan/uit': 'Athdhéan (lúb) as/air',
@@ -724,11 +719,6 @@ const _dutchSourceGa = {
       'Nótaí don fhaighteoir le linn cúrsa',
   'Mijn notities aan/uit': 'Scoránaigh mo nótaí as/air',
   'Wissel scherm (S)': 'Athraigh scáileán (S)',
-  'Kon niet van scherm wisselen.': 'Níorbh fhéidir scáileáin a athrú.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P lucht féachana · H finscéal · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P lucht féachana · H finscéal · S scáileán · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
   'pijltjes + Enter of klik om te springen':
       'saigheada + Enter nó cliceáil chun léim',
   'Afsluiten (Escape)': 'Imigh (Escape)',
@@ -1635,6 +1625,60 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Cló breise do charachtair ar iarraidh',
+  'Geen lettertypebestand gekozen': 'Níor roghnaíodh aon chomhad cló',
+  'Kies bestand…': 'Roghnaigh comhad…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Ní théann ach fo-thacar den chomhad seo isteach sa PDF. Caithfidh ceadúnas an chomhaid ionchorprú a cheadú; ní dhéanann OciDeck é a sheiceáil agus ní íoslódálann sé aon rud.',
+  'Bijzonder persoonsgegeven': 'Sonraí pearsanta ar leith',
+  'Dia {n} van {m}': 'Sleamhnán {n} as {m}',
+  'ander scherm: niet bereikbaar': 'scáileán eile: níl sé bhfeighil',
+  'het andere scherm': 'an scáileán eile',
+  'Dit mag blijven': 'Féadfaidh sé seo fanacht',
+  'Waarschuw de ontvanger': 'Tabhair foláireamh don fhaighteoir',
+  'Laat dit weg bij tonen en exporteren':
+      'Fág seo amach agus é á thaispeáint agus á onnmhairiú',
+  'Ga naar de eerste dia zonder keuze':
+      'Téigh go dtí an chéad shleamhnán gan rogha',
+  'Onderteken git-commits': 'Sínigh commitanna git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Sínigh commits leis an eochair a úsáideann git cheana féin ar an meaisín seo.',
+  'getekend en gecontroleerd': 'sínithe agus deimhnithe',
+  'getekend (hier niet te controleren)':
+      'sínithe (ní féidir a dheimhniú anseo)',
+  'ongetekend': 'gan shíniú',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} sa {veld} seo. Oscail an fógra agus tá an píosa roghnaithe sa téacs.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Oscail an fógra agus tá an píosa roghnaithe sa téacs.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Tá a leibhéal níos déine ná leibhéal na cur i láthair. Ardait leibhéal na cur i láthair, nó ísligh leibhéal an tsleamhnáin.',
+  'Niveau van de presentatie': 'Leibhéal na cur i láthair',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Ardait leibhéal na cur i láthair, nó ísligh leibhéal an tsleamhnáin.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Feiceann an lucht féachana an sleamhnán seo ar an scáileán eile.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Níl an scáileán eile rannpháirteach. Tá na sleamhnáin ar an scáileán seo.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Níor malartaíodh na scáileáin. Tá na nótaí fós anseo.',
+  'Notities aan of uit': 'Nótaí ar siúl nó as',
+  'Zet de notities op het andere scherm': 'Cuir na nótaí ar an scáileán eile',
+  'Terug naar de dia\'s': 'Ar ais go dtí na sleamhnáin',
+  'Verder typen': 'Lean ar aghaidh ag clóscríobh',
+  'Terug zonder deze wijzigingen': 'Ar ais gan na hathruithe seo',
+  'Toepassen en terug': 'Cuir i bhfeidhm agus fill',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Níor cuireadh do hathruithe i bhfeidhm go fóill.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Athruithe neamhfheidhmithe: cuir i bhfeidhm, caith amú nó fan anseo.',
+  'Deze tabel bewerken': 'Cuir an tábla seo in eagar',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      'Ní thuairisceofar {regel} in aon chur i láthair níos mó. Is féidir é a chur ar ais faoi Slándáil.',
+  'Niet melden': 'Ná tuairiscigh',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Sábháil ar dtús. Ansin is féidir leat easpórtáil.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Comhad HTML amháin le fíorthéacs, ceannteidil agus téacsanna alt a osclaíonn in aon bhrabhsálaí gan idirlíon — le táblaí, matamaitic, mermaid agus cairteacha.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -2377,12 +2421,9 @@ const _dutchSourceAddGa = <String, String>{
   'Bewaren als kopie': 'Sábháil mar chóip',
   'Bewaren in document': 'Sábháil sa doiciméad',
   'beamer': 'teilgeoir',
-  'beamer: niet bereikbaar': 'teilgeoir: nach bhfuil rochtan air',
   'Bewerken sluiten (Esc)': 'Dún an t-eagarthóireacht (Esc)',
   'Presenteer document…': 'Cur an doiciméad i láthair…',
   'Presenteer document': 'Cur an doiciméad i láthair',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Marcáil na táblaí is féidir a chur in eagar beo le linn an chur i láthair. Fanann gach ábhar eile inléite amháin.',
   'Extra ruimte': 'Spás breise',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tá an nóta seo níos faide ná an leathanach — scrollaigh don chuid eile',
@@ -5237,8 +5278,6 @@ const _dutchSourceAddGa = <String, String>{
   'Markdown-broneditor': 'Markdown eagarthóir foinse',
   'Niet toegepast': 'Ní chuirtear i bhfeidhm',
   'Niet-toegepaste wijzigingen': 'Athruithe neamhfheidhmithe',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Cuir athruithe reatha i bhfeidhm nó diúltaigh dóibh sula n-athraítear scóip.',
   'Problemen gevonden': 'Fadhbanna aimsithe',
   'Schrijftips': 'Leideanna scríbhneoireachta',
   'Snel herstellen': 'Ghnóthú go tapa',
@@ -6494,8 +6533,6 @@ const _dutchSourceAddGa = <String, String>{
       'Coinnithe siar: aicmithe níos déine ná an cur i láthair',
   '1 slide achtergehouden door haar TLP': '1 sleamhnán coinnithe siar ag a TLP',
   'slides achtergehouden door hun TLP': 'sleamhnáin coinnithe siar ag a TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Fágtar na sleamhnáin seo ar lár agus tú ag cur i láthair, ag easpórtáil nó sa phacáiste. Ardaigh leibhéal TLP an chur i láthair in Eolas an chur i láthair chun iad a chur san áireamh.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Coinnítear gach sleamhnán siar de bharr a n-aicmithe TLP — níl aon rud le taispeáint.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7250,8 +7287,6 @@ const _dutchSourceAddGa = <String, String>{
   'seksuele geaardheid': 'claonadh gnéasach',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Tá sonra aitheantais ar an sleamhnán seo freisin, mar sin tá sé inrianaithe chuig duine.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Catagóir speisialta sonraí pearsanta (RGCS airt. 9/10)',
   'gezondheidsgegeven': 'sonraí sláinte',
   'strafrechtelijk gegeven': 'sonraí coiriúla',
   'religie of levensovertuiging': 'reiligiún nó creideamh',
@@ -7313,8 +7348,6 @@ const _dutchSourceAddGa = <String, String>{
   'Volg de presentatie': 'Lean an láithreoireacht',
   'Weglaten uit tonen en exporteren':
       'Fág ar lár ón taispeáint agus ón easpórtáil',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Smaoinigh ar é a fholú le [[lúibíní cearnacha dúbailte]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Gan comhthéacs sa téacs, seans nach sonraí pearsanta é seo ar chor ar bith.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

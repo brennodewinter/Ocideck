@@ -529,7 +529,7 @@ void main() {
       await present(
         tester,
         until: () => find
-            .text(
+            .textContaining(
               'Alle slides zijn achtergehouden door hun TLP-classificatie — '
               'niets om te tonen.',
             )

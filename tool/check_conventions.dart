@@ -209,6 +209,20 @@ const Map<String, int> fileSizeBaseline = {
   // eerste slide met een openstaande bevinding. Cohesief met de export-
   // readiness-berekening die al in dit part-bestand staat.
   'lib/widgets/app_shell_main_layout.dart': 930,
+  // +69 (#2725): luie velmontage — de rol, de controller en de
+  // placeholder-hoogtebepaling. De opsplitsing naar part-bestanden zou de
+  // vel-geometrie (fit, bijschrift, stride) in drie stukken hakken die
+  // elkaar moeten blijven kloppen.
+  'lib/widgets/reader/paged_document_view.dart': 1069,
+  // +38 (#2729): de uniforme toetsenborduitweg (Escape/Ctrl+Tab) en de
+  // laatste-cel-uitgang per rooster. De handlers horen bij de velden die
+  // ze verlaten; uitbesteden zou ze van de focuscontext scheiden.
+  // +36 (#2742): de smale-venster-tak met knoppen op een tweede
+  // regel — de scrollbare variant bleek slechter bereikbaar en flex binnen
+  // een scrollblad kan niet, dus het is een echte layouttak.
+  'lib/widgets/editors/markdown_deck_editor.dart': 1075,
+  // +1: rebase op de zoeklaag van #2791 — de zoekbalk-voet in de editor
+  // groeide één regel mee.
   // +27 (#1758): keep-with-next voor sub-hoofdstukken — alinea-split en
   // orland-guard in build(), de split-functie staat in document_pdf_blocks.dart.
   'lib/services/pdf/document_pdf_widgets.dart': 850,
@@ -507,7 +521,11 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3495, // +47 (sweep #2633): de doorspeelvoortgang als
+      3522, // +17 (#2733/#2741): tegel-semantiek in het
+  // presenter-raster en de verduidelijkt-schermteksten — zinnen die bij
+  // deze State's schermtoestand horen. +10: rebase op de zoek-eindtoestand
+  // van #2791 — de zoekvelden landden in deze State.
+  // +47 (sweep #2633): de doorspeelvoortgang als
   // ValueNotifier plus de balk in Positioned+IgnorePointer — State-velden
   // van deze klasse, afhandeling staat in presenter_playback.
   // +19 (#2437): de expliciete-overlay-haak in _slideCanvas, de
@@ -535,7 +553,7 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2865, // +114 (sweep #2641–#2645/#2634): theme.json-ronde
+      2874, // +114 (sweep #2641–#2645/#2634): theme.json-ronde
   // in pakketten, logo-resolutie en scan-doorvoer — extensies in
   // file_service_*.dart tellen mee. Ook de #2640-verhuizing van pakketstijl
   // en logobotsing (file_service_carried_style/file_service_project) valt in
@@ -576,7 +594,9 @@ const Map<String, int> classSizeBaseline = {
   // chart_preview_legend.dart — plot-hover benadrukt de legenda, wat zeven
   // params kostte in plaats van 160 extensie-regels. De klasse meet 3048;
   // ~25 regels lucht voor twee PR's die tegelijk in dit bestand werken.
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3007,
+  // +16 (#2733): _reduceMotion-veld en didChangeDependencies, zodat de
+  // grafiek de besturingssysteem-voorkeur voor minder beweging volgt.
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3024,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   // Verlaagd van 2235 naar 2232: de klasse meet 2227.

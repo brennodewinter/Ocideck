@@ -54,6 +54,17 @@ const Map<String, int> methodLengthBaseline = {
       180, // hernoemd op main door #2711 (cache-laag): zelfde methode.
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
+  // +3 (#2728): de twee draaiknoppen met busy-aanduiding — ze horen bij de
+  // preview waar de draaiing zich op afspeelt; uitbesteden zou de
+  // knop-status los van de stage-state trekken.
+  'lib/widgets/slides/image_crop_dialog.dart::_ImageCropDialogState.build': 153,
+  // +8 (#2741): de verduidelijkte schermteksten (andere-scherm-zinnen en
+  // de stille-fallback-meldingen) — ze horen bij dezelfde beslisboom.
+  'lib/widgets/presentation/fullscreen_presenter.dart::FullscreenPresenter.showDualScreen':
+      158,
+  // +1 (#2753): het clearbare documentPdfFontPath-paar op het bestaande
+  // clearX-patroon — het veld zelf staat in het instellingenpakket.
+  'lib/models/parts/app_settings.dart::AppSettings.copyWith': 151,
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
       154, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
@@ -170,7 +181,8 @@ const Map<String, int> methodLengthBaseline = {
   // switch, één case per veld, niet uit te tillen.
   // +9 (#1824): callouts, calloutPresentation, calloutReveal — drie nieuwe
   // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
-  'lib/collab/deck_op.dart::_slideWithField': 200,
+  // +3 (#2749): de tableRows-case — zelfde vorm, één regel per veld.
+  'lib/collab/deck_op.dart::_slideWithField': 203,
   // +8 (#2628): prefs-lezing fail-closed afvangen + quarantaine-herstel van
   // de atomische store; de decode-stappen zelf blijven één lineair blok.
   'lib/state/settings_provider.dart::SettingsNotifier._load': 165,

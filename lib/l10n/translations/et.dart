@@ -14,8 +14,6 @@ const _stringsEt = {
   'more': 'Rohkem',
   'export': 'Ekspordi',
   'exportReady': 'Ekspordi (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Enne eksportimist salvesta esitlus',
-  'exportNeedsClean': 'Enne eksportimist salvesta muudatused',
   'saved': 'Salvestatud',
   'unsaved': 'Salvestamata',
   'unsavedChanges': 'Salvesta muudatused (Ctrl/Cmd+S)',
@@ -688,8 +686,6 @@ const _dutchSourceEt = {
   'Eerste · laatste slide': 'Esimene · viimane slaid',
   'Slide-overzicht': 'Slaidide ülevaade',
   'Slide-overzicht (pijltjes + Enter)': 'Slaidide ülevaade (nooled + Enter)',
-  'Presenter view (notities, klok)': 'Esitleja vaade (märkmed, kell)',
-  'Scherm wisselen (meerdere schermen)': 'Vaheta ekraani (mitu ekraani)',
   'Zwart · wit scherm': 'Must · valge ekraan',
   'Automatische modus aan/uit': 'Automaatrežiim sees/väljas',
   'Herhalen (loop) aan/uit': 'Kordamine (silmus) sees/väljas',
@@ -712,11 +708,6 @@ const _dutchSourceEt = {
       'Märkmed vastuvõtjale kursuse ajal',
   'Mijn notities aan/uit': 'Minu märkmed sees/väljas',
   'Wissel scherm (S)': 'Vaheta ekraani (S)',
-  'Kon niet van scherm wisselen.': 'Ekraani ei õnnestunud vahetada.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H legend · G ülevaade · B/W must/valge · R aeg · Esc stopp',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H legend · S ekraan · G ülevaade · B/W must/valge · R aeg · Esc stopp',
   'pijltjes + Enter of klik om te springen':
       'nooled + Enter või klõps hüppamiseks',
   'Afsluiten (Escape)': 'Välju (Escape)',
@@ -1598,6 +1589,59 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Lisafont puuduvate tähtede jaoks',
+  'Geen lettertypebestand gekozen': 'Fontifaili pole valitud',
+  'Kies bestand…': 'Vali fail…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'PDF-i lisatakse ainult osa sellest failist. Faili litsents peab lubama lisamist; OciDeck ei kontrolli seda ega lae midagi alla.',
+  'Bijzonder persoonsgegeven': 'Erikategooria isikuandmed',
+  'Dia {n} van {m}': 'Slaid {n} / {m}',
+  'ander scherm: niet bereikbaar': 'teine ekraan: pole kättesaadav',
+  'het andere scherm': 'teine ekraan',
+  'Dit mag blijven': 'See võib jääda',
+  'Waarschuw de ontvanger': 'Hoiata saajat',
+  'Laat dit weg bij tonen en exporteren':
+      'Jäta see välja kuvamisel ja eksportimisel',
+  'Ga naar de eerste dia zonder keuze': 'Mine esimesele slaidile ilma valikuta',
+  'Onderteken git-commits': 'Allkirjasta git-commitid',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Allkirjasta commitid võtmega, mida git juba sellel masinal kasutab.',
+  'getekend en gecontroleerd': 'allkirjastatud ja kontrollitud',
+  'getekend (hier niet te controleren)':
+      'allkirjastatud (siin ei saa kontrollida)',
+  'ongetekend': 'allkirjastamata',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} selles {veld}. Avage teavitus, siis on tekstis lõik valitud.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Avage teavitus, siis on tekstis lõik valitud.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Nende tase on rangem kui esitluse oma. Tõstke esitluse taset või langetage slaidi taset.',
+  'Niveau van de presentatie': 'Esitluse tase',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Tõstke esitluse taset või langetage slaidi taset.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Saal näeb seda slaidi teisel ekraanil.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Teine ekraan ei osale. Slaidid on sellel ekraanil.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekraane ei vahetatud. Märkmed on ikka siin.',
+  'Notities aan of uit': 'Märkmed sees või väljas',
+  'Zet de notities op het andere scherm': 'Pange märkmed teisele ekraanile',
+  'Terug naar de dia\'s': 'Tagasi slaidide juurde',
+  'Verder typen': 'Kirjuta edasi',
+  'Terug zonder deze wijzigingen': 'Tagasi ilma nende muudatusteta',
+  'Toepassen en terug': 'Rakenda ja tagasi',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Teie muudatusi pole veel rakendatud.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Rakendamata muudatused: rakendage, visake ära või jääge siia.',
+  'Deze tabel bewerken': 'Muuda seda tabelit',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} ei teavitata enam üheski esitluses. Saate selle tagasi panna Turvalisuse alt.',
+  'Niet melden': 'Ära teavita',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Salvestage kõigepealt. Seejärel saate eksportida.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Üks HTML-fail tõelise teksti, pealkirjade ja alt-tekstidega, mis avaneb igas brauseris ilma internetita — tabelite, matemaatika, mermaidi ja diagrammidega.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -2333,12 +2377,9 @@ const _dutchSourceAddEt = <String, String>{
   'Bewaren als kopie': 'Salvesta koopiana',
   'Bewaren in document': 'Salvesta dokumenti',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: pole kättesaadav',
   'Bewerken sluiten (Esc)': 'Sulge redigeerimine (Esc)',
   'Presenteer document…': 'Esitle dokumenti…',
   'Presenteer document': 'Esitle dokumenti',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Märgi, milliseid tabeleid võib esitluse ajal reaalajas redigeerida. Kõik muu sisu jääb kirjutuskaitstuks.',
   'Extra ruimte': 'Lisaruum',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'See märkus on leheküljest pikem — keri ülejäänu jaoks',
@@ -5143,8 +5184,6 @@ const _dutchSourceAddEt = <String, String>{
   'Markdown-broneditor': 'Markdowni allika redaktor',
   'Niet toegepast': 'Ei rakendata',
   'Niet-toegepaste wijzigingen': 'Rakendamata muudatused',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Enne ulatuse vahetamist rakendage või lükake praegused muudatused tagasi.',
   'Problemen gevonden': 'Probleemid leitud',
   'Schrijftips': 'Kirjutamise näpunäited',
   'Snel herstellen': 'Kiiresti taastuda',
@@ -6380,8 +6419,6 @@ const _dutchSourceAddEt = <String, String>{
       'Kinni peetud: klassifitseeritud rangemalt kui esitlus',
   '1 slide achtergehouden door haar TLP': '1 slaid peeti kinni selle TLP tõttu',
   'slides achtergehouden door hun TLP': 'slaidi peeti kinni nende TLP tõttu',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Neid slaide ei võeta kaasa esitamisel, eksportimisel ega paketti. Tõsta esitluse teabes esitluse TLP-taset, et need kaasa võtta.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Kõik slaidid on nende TLP-klassifikatsiooni tõttu kinni peetud — pole midagi näidata.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7127,8 +7164,6 @@ const _dutchSourceAddEt = <String, String>{
   'seksuele geaardheid': 'seksuaalne sättumus',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Sellel slaidil on ka tuvastav andmeühik, seega on see seostatav isikuga.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Isikuandmete eriliik (GDPR art 9/10)',
   'gezondheidsgegeven': 'terviseandmed',
   'strafrechtelijk gegeven': 'karistusandmed',
   'religie of levensovertuiging': 'usk või veendumus',
@@ -7189,8 +7224,6 @@ const _dutchSourceAddEt = <String, String>{
   'PERSOONSGEGEVENS': 'ISIKUANDMED',
   'Volg de presentatie': 'Järgi esitlust',
   'Weglaten uit tonen en exporteren': 'Jäta kuvamisest ja ekspordist välja',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Kaalu selle peitmist [[topeltnurksulgudega]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Ilma kontekstita tekstis ei pruugi see üldse olla isikuandmed.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

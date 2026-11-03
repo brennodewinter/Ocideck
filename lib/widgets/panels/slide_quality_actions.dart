@@ -2,9 +2,11 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/slide_quality_localization.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
+import '../../models/privacy_disposition.dart';
 import '../../services/privacy/privacy_scanner.dart';
 import '../../state/privacy_provider.dart';
 import '../../models/slide_quality.dart';
@@ -40,14 +42,48 @@ List<SlideQualityAction> _privacyActions(
       SlideQualityAction(
         label: l10n.d('Deze is beoordeeld en mag blijven'),
         icon: Icons.done_outline,
-        run: () => _setAside(ref, deck, issue, span),
+        run: (_) => _setAside(ref, deck, issue, span),
       ),
+    // #2738: dezelfde drie woorden overal — melding, palet, badge en het
+    // geblokkeerde exportvenster noemen de keuze gelijk.
+    if (deck != null && !issue.isDeckWide && issue.slideIndex >= 0)
+      ..._slideDispositionActions(l10n, ref, deck, issue),
     SlideQualityAction(
       label: l10n.d('Deze regel nooit meer melden'),
       icon: Icons.notifications_off_outlined,
-      run: () => ref
-          .read(settingsProvider.notifier)
-          .setPrivacyRuleEnabled(rule, false),
+      // #2744: één tik zette deze regel wereldwijd uit zonder waarschuwing.
+      // De bevestiging noemt de regel en de weg terug; Annuleren is de
+      // voorgeselecteerde knop.
+      run: (ctx) async {
+        final name = privacyRuleLabel(l10n, rule);
+        final go = await showDialog<bool>(
+          context: ctx,
+          builder: (dctx) => AlertDialog(
+            content: Text(
+              l10n
+                  .d(
+                    '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.',
+                  )
+                  .replaceAll('{regel}', name),
+            ),
+            actions: [
+              TextButton(
+                autofocus: true,
+                onPressed: () => Navigator.pop(dctx, false),
+                child: Text(l10n.t('cancel')),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(dctx, true),
+                child: Text(l10n.d('Niet melden')),
+              ),
+            ],
+          ),
+        );
+        if (go != true) return;
+        await ref
+            .read(settingsProvider.notifier)
+            .setPrivacyRuleEnabled(rule, false);
+      },
     ),
   ];
 }
@@ -86,6 +122,45 @@ void _setAside(
   if (updated != null) ref.read(deckProvider.notifier).setDismissals(updated);
 }
 
+/// #2738: de drie keuzes op de melding zelf — dezelfde woorden als in de
+/// dia-instellingen, op de badge en in het geblokkeerde exportvenster.
+/// "Nog geen keuze" blijft de standaard: geen knop zet iets dat de
+/// gebruiker niet aanklikte.
+List<SlideQualityAction> _slideDispositionActions(
+  AppLocalizations l10n,
+  WidgetRef ref,
+  Deck deck,
+  SlideQualityIssue issue,
+) {
+  final i = issue.slideIndex;
+  if (i < 0 || i >= deck.slides.length) return const [];
+  SlideQualityAction act(String label, IconData icon, PrivacyDisposition d) =>
+      SlideQualityAction(
+        label: label,
+        icon: icon,
+        run: (_) => ref
+            .read(deckProvider.notifier)
+            .updateSlide(i, deck.slides[i].copyWith(privacy: d)),
+      );
+  return [
+    act(
+      l10n.d('Dit mag blijven'),
+      Icons.check_circle_outline,
+      PrivacyDisposition.accept,
+    ),
+    act(
+      l10n.d('Waarschuw de ontvanger'),
+      Icons.campaign_outlined,
+      PrivacyDisposition.shield,
+    ),
+    act(
+      l10n.d('Laat dit weg bij tonen en exporteren'),
+      Icons.block_outlined,
+      PrivacyDisposition.redact,
+    ),
+  ];
+}
+
 /// Eén concrete vervolgactie bij een kwaliteitsmelding: het "doen"-knopje
 /// naast de melding, zodat de assistent niet alleen signaleert maar ook
 /// meteen de oplossing aanbiedt ("Splits deze slide", "Verhoog contrast",
@@ -93,7 +168,8 @@ void _setAside(
 class SlideQualityAction {
   final String label;
   final IconData icon;
-  final VoidCallback run;
+  // Een actie die een dialoog wil tonen, gebruikt deze context (#2744).
+  final void Function(BuildContext context) run;
 
   const SlideQualityAction({
     required this.label,
@@ -123,7 +199,7 @@ SlideQualityAction? detachSplitPageAction({
   return SlideQualityAction(
     label: l10n.d('Haal volle pagina uit de reeks'),
     icon: Icons.link_off,
-    run: () => ref.read(deckProvider.notifier).detachSplitPage(offender),
+    run: (_) => ref.read(deckProvider.notifier).detachSplitPage(offender),
   );
 }
 
@@ -171,7 +247,7 @@ List<SlideQualityAction> buildSlideQualityActions({
         SlideQualityAction(
           label: l10n.d('Verhoog contrast'),
           icon: Icons.auto_fix_high,
-          run: () => ref
+          run: (_) => ref
               .read(deckProvider.notifier)
               .updateSlide(issue.slideIndex, applyTitleContrastFix(slide, fix)),
         ),
@@ -189,7 +265,7 @@ List<SlideQualityAction> buildSlideQualityActions({
             ? l10n.d('Voeg alt-tekst toe')
             : l10n.d('Voeg beschrijving toe'),
         icon: Icons.edit_note,
-        run: navigate,
+        run: (_) => navigate(),
       ),
     );
   }
@@ -210,7 +286,7 @@ List<SlideQualityAction> buildSlideQualityActions({
       SlideQualityAction(
         label: l10n.d('Splits slide'),
         icon: Icons.call_split,
-        run: () {
+        run: (_) {
           ref.read(deckProvider.notifier).splitSlide(index);
           ref.read(editorProvider.notifier).select(index + 1);
         },
@@ -228,7 +304,7 @@ List<SlideQualityAction> buildSlideQualityActions({
       SlideQualityAction(
         label: l10n.d('Splits tabel'),
         icon: Icons.call_split,
-        run: () {
+        run: (_) {
           ref.read(deckProvider.notifier).splitTableSlide(index);
           ref.read(editorProvider.notifier).select(index + 1);
         },
@@ -247,7 +323,7 @@ List<SlideQualityAction> buildSlideQualityActions({
       SlideQualityAction(
         label: l10n.d('Zinnen naar losse bullets'),
         icon: Icons.format_list_bulleted,
-        run: () => ref
+        run: (_) => ref
             .read(deckProvider.notifier)
             .updateSlide(
               issue.slideIndex,
@@ -275,7 +351,7 @@ List<SlideQualityAction> buildSlideQualityActions({
       SlideQualityAction(
         label: l10n.d('Uitleg naar notities'),
         icon: Icons.notes,
-        run: () => ref
+        run: (_) => ref
             .read(deckProvider.notifier)
             .updateSlide(
               issue.slideIndex,
@@ -305,12 +381,12 @@ SlideQualityAction _deckWideAction(
     return SlideQualityAction(
       label: l10n.d('Open presentatiegegevens'),
       icon: Icons.info_outline,
-      run: navigate,
+      run: (_) => navigate(),
     );
   }
   return SlideQualityAction(
     label: l10n.d('Open kleurinstellingen'),
     icon: Icons.palette_outlined,
-    run: navigate,
+    run: (_) => navigate(),
   );
 }

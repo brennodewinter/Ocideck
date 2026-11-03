@@ -63,12 +63,19 @@ class GitLogEntry {
   /// nooit een claim over "het deck").
   final bool pushed;
 
+  /// De `git log --format=%G?`-status: `G` getekend en gecontroleerd,
+  /// `B`/`E`/`R`/`U`/`X`/`Y` getekend maar hier niet te controleren (of
+  /// mislukt), `N` ongetekend — de UI noemt precies wat wel en niet klopt
+  /// (#2750). `''` als git geen status gaf.
+  final String signatureStatus;
+
   const GitLogEntry({
     required this.sha,
     required this.subject,
     required this.author,
     required this.date,
     required this.pushed,
+    this.signatureStatus = '',
   });
 
   String get shortSha => sha.length >= 7 ? sha.substring(0, 7) : sha;

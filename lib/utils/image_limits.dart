@@ -388,10 +388,13 @@ ImageProvider cappedMemoryImage(
 /// voor `asset:`-paden (méégebundelde logo's van ingebouwde stijlprofielen).
 /// Gebundelde assets zijn vertrouwd en statisch, dus [ResizeImage] volstaat;
 /// de cap houdt alle logopaden uniform en gratis veilig.
-ImageProvider cappedBundledAssetImage(String assetKey) => ResizeImage(
+ImageProvider cappedBundledAssetImage(
+  String assetKey, {
+  int maxEdge = kMaxImageDecodeDimension,
+}) => ResizeImage(
   AssetImage(assetKey),
-  width: kMaxImageDecodeDimension,
-  height: kMaxImageDecodeDimension,
+  width: maxEdge,
+  height: maxEdge,
   policy: ResizeImagePolicy.fit,
   allowUpscaling: false,
 );

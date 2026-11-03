@@ -54,7 +54,11 @@ Future<void> _movePresenterToDisplay(
     if (state.mounted) {
       ScaffoldMessenger.of(state.context).showSnackBar(
         SnackBar(
-          content: Text(state.context.l10n.d('Kon niet van scherm wisselen.')),
+          content: Text(
+            state.context.l10n.d(
+              'De schermen zijn niet gewisseld. De notities staan nog hier.',
+            ),
+          ),
         ),
       );
     }

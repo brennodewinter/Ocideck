@@ -90,7 +90,7 @@ void main() {
 
     expect(find.widgetWithText(TextField, 'CONCEPT'), findsOneWidget);
     expect(
-      find.textContaining('Pas de huidige wijzigingen eerst toe'),
+      find.textContaining('Ongepaste wijzigingen: pas toe'),
       findsOneWidget,
     );
   });

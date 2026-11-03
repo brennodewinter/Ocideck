@@ -15,8 +15,6 @@ const _stringsSk = {
   'more': 'Viac',
   'export': 'Exportovať',
   'exportReady': 'Exportovať (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Pred exportom prezentáciu najprv uložte',
-  'exportNeedsClean': 'Pred exportom najprv uložte zmeny',
   'saved': 'Uložené',
   'unsaved': 'Neuložené',
   'unsavedChanges': 'Uložiť zmeny (Ctrl/Cmd+S)',
@@ -689,10 +687,6 @@ const _dutchSourceSk = {
   'Eerste · laatste slide': 'Prvá · posledná snímka',
   'Slide-overzicht': 'Prehľad snímok',
   'Slide-overzicht (pijltjes + Enter)': 'Prehľad snímok (šípky + Enter)',
-  'Presenter view (notities, klok)':
-      'Zobrazenie prednášajúceho (poznámky, hodiny)',
-  'Scherm wisselen (meerdere schermen)':
-      'Prepnúť obrazovku (viacero obrazoviek)',
   'Zwart · wit scherm': 'Čierna · biela obrazovka',
   'Automatische modus aan/uit': 'Automatický režim zap./vyp.',
   'Herhalen (loop) aan/uit': 'Opakovanie (slučka) zap./vyp.',
@@ -715,11 +709,6 @@ const _dutchSourceSk = {
       'Poznámky pre príjemcu počas kurzu',
   'Mijn notities aan/uit': 'Prepnúť moje poznámky zap./vyp.',
   'Wissel scherm (S)': 'Prepnúť obrazovku (S)',
-  'Kon niet van scherm wisselen.': 'Nepodarilo sa prepnúť obrazovku.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · H legenda · G prehľad · B/W čierna/biela · R čas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · H legenda · S obrazovka · G prehľad · B/W čierna/biela · R čas · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'šípky + Enter alebo kliknutím preskočíte',
   'Afsluiten (Escape)': 'Ukončiť (Escape)',
@@ -1611,6 +1600,57 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Dodatočné písmo pre chýbajúce znaky',
+  'Geen lettertypebestand gekozen': 'Nevybraný žiadny súbor písma',
+  'Kies bestand…': 'Vybrať súbor…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Do PDF sa vkladá len podmnožina tohto súboru. Licencia súboru musí vkladanie povolovať; OciDeck to nekontroluje a nič nesťahuje.',
+  'Bijzonder persoonsgegeven': 'Osobný údaj osobitnej kategórie',
+  'Dia {n} van {m}': 'Snímka {n} z {m}',
+  'ander scherm: niet bereikbaar': 'druhá obrazovka: nedostupná',
+  'het andere scherm': 'druhá obrazovka',
+  'Dit mag blijven': 'Toto môže zostať',
+  'Waarschuw de ontvanger': 'Varuj príjemcu',
+  'Laat dit weg bij tonen en exporteren': 'Vynechať pri zobrazení a exporte',
+  'Ga naar de eerste dia zonder keuze': 'Prejsť na prvý snímok bez rozhodnutia',
+  'Onderteken git-commits': 'Podpisovať git commity',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Podpisujte commity kľúčom, ktorý git na tomto počítači už používa.',
+  'getekend en gecontroleerd': 'podpísané a overené',
+  'getekend (hier niet te controleren)': 'podpísané (tu sa nedá overiť)',
+  'ongetekend': 'nepodpísané',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} v tomto {veld}. Otvorte hlásenie a časť je označená v texte.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Otvorte hlásenie a časť je označená v texte.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Ich úroveň je prísnejšia ako úroveň prezentácie. Zvýšte úroveň prezentácie alebo znížte úroveň snímky.',
+  'Niveau van de presentatie': 'Úroveň prezentácie',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Zvýšte úroveň prezentácie alebo znížte úroveň snímky.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Publikum vidí túto snímku na druhej obrazovke.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Druhá obrazovka neparticipuje. Snímky sú na tejto obrazovke.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Obrazovky sa nevymenili. Poznámky sú stále tu.',
+  'Notities aan of uit': 'Poznámky zapnuté alebo vypnuté',
+  'Zet de notities op het andere scherm':
+      'Premeňte poznámky na druhú obrazovku',
+  'Terug naar de dia\'s': 'Späť na snímky',
+  'Verder typen': 'Písať ďalej',
+  'Terug zonder deze wijzigingen': 'Späť bez týchto zmien',
+  'Toepassen en terug': 'Použiť a späť',
+  'Je wijzigingen zijn nog niet toegepast.': 'Vaše zmeny ešte neboli použité.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nepoužité zmeny: použite, zahoďte alebo ostaňte tu.',
+  'Deze tabel bewerken': 'Upraviť túto tabuľku',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} sa už nebude hlásiť v žiadnej prezentácii. Späť ho zapnete v Zabezpečení.',
+  'Niet melden': 'Nehlásiť',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Najprv uložte. Potom môžete exportovať.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Jeden súbor HTML so skutočným textom, nadpismi a alternatívnymi textami, ktorý sa otvorí v akomkoľvek prehliadači bez internetu — s tabuľkami, matematikou, mermaid a grafmi.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -2342,12 +2382,9 @@ const _dutchSourceAddSk = <String, String>{
   'Bewaren als kopie': 'Uložiť ako kópiu',
   'Bewaren in document': 'Uložiť do dokumentu',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nedostupný',
   'Bewerken sluiten (Esc)': 'Zavrieť úpravy (Esc)',
   'Presenteer document…': 'Prezentovať dokument…',
   'Presenteer document': 'Prezentovať dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Začiarknite, ktoré tabuľky môžu byť počas prezentácie upravované naživo. Všetok ostatný obsah zostane iba na čítanie.',
   'Extra ruimte': 'Priestor navyše',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Táto poznámka je dlhšia ako stránka — posuňte sa pre zvyšok',
@@ -5151,8 +5188,6 @@ const _dutchSourceAddSk = <String, String>{
   'Markdown-broneditor': 'Editor zdroja Markdown',
   'Niet toegepast': 'Neuplatňuje sa',
   'Niet-toegepaste wijzigingen': 'Neaplikované zmeny',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Pred prepnutím rozsahov použite alebo odmietnite aktuálne zmeny.',
   'Problemen gevonden': 'Našli sa problémy',
   'Schrijftips': 'Tipy na písanie',
   'Snel herstellen': 'Rýchlo sa zotavte',
@@ -6389,8 +6424,6 @@ const _dutchSourceAddSk = <String, String>{
       'Zadržané: klasifikované prísnejšie než prezentácia',
   '1 slide achtergehouden door haar TLP': '1 snímka zadržaná kvôli svojmu TLP',
   'slides achtergehouden door hun TLP': 'snímok zadržaných kvôli ich TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Tieto snímky sa nedostanú do prezentácie, exportu ani balíka. Zvýšte úroveň TLP prezentácie v Informáciách o prezentácii, aby sa zahrnuli.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Všetky snímky sú zadržané kvôli svojej klasifikácii TLP — nie je čo zobraziť.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7135,8 +7168,6 @@ const _dutchSourceAddSk = <String, String>{
   'seksuele geaardheid': 'sexuálna orientácia',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tejto snímke je aj identifikačný údaj, takže to možno priradiť konkrétnej osobe.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Osobitná kategória osobných údajov (GDPR čl. 9/10)',
   'gezondheidsgegeven': 'údaj o zdraví',
   'strafrechtelijk gegeven': 'údaj trestnej povahy',
   'religie of levensovertuiging': 'náboženstvo alebo presvedčenie',
@@ -7197,8 +7228,6 @@ const _dutchSourceAddSk = <String, String>{
   'PERSOONSGEGEVENS': 'OSOBNÉ ÚDAJE',
   'Volg de presentatie': 'Podľa prezentácie',
   'Weglaten uit tonen en exporteren': 'Vynechať zo zobrazenia aj exportu',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Zváž začiernenie pomocou [[dvojitých hranatých zátvoriek]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Bez kontextu v texte to nemusí byť osobný údaj vôbec.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

@@ -592,6 +592,16 @@ class FullscreenPresenter extends StatefulWidget {
 
     if (audience == null || audienceHandle == null) {
       if (context.mounted) {
+        // #2741: geen stille terugval — zeg dat de zaal dit scherm deelt.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.l10n.d(
+                "Het andere scherm doet niet mee. De dia's staan op dit scherm.",
+              ),
+            ),
+          ),
+        );
         return await show(
           context,
           slides: slides,
@@ -739,8 +749,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   PresentationCostSession? _costSession;
 
   /// Getypte cijfers om naar een slidenummer te springen (leeg = niet actief).
+  /// #2733: blijft staan tot Enter, Backspace of Escape hem wist — geen
+  /// reset-timer die halverwege typen stil weggooit.
   String _typed = '';
-  Timer? _typedTimer;
 
   /// Doeltijd-invoermodus (toets K): cijfers worden als MMSS gelezen i.p.v. als
   /// slidenummer. [_targetTyped] houdt de invoer tot Enter/Esc.
@@ -862,6 +873,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   @override
   void initState() {
     super.initState();
+    // #2741: met twee schermen hoort de zaal de dia te zien — zeg in één
+    // regel waar hij staat in plaats van het stil te laten.
+    if (widget.audience != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.l10n.d('De zaal ziet deze dia op het andere scherm.'),
+            ),
+          ),
+        );
+      });
+    }
     _index = widget.presentationTiming.enabled ? 0 : widget.initialIndex;
     _timedSession = _TimedPresentationSession(
       config: widget.presentationTiming,
@@ -988,7 +1013,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _progress.dispose();
     _timedSession.dispose();
     _fullscreenGuard?.cancel();
-    _typedTimer?.cancel();
     _fixFlashTimer?.cancel();
     _questionTimer?.cancel();
     _audienceSync.dispose();

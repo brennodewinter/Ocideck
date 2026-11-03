@@ -24,6 +24,9 @@ Future<NativeGitMirror?> createNativeGitMirror({
   required GitRepoConfig config,
   required String token,
   String? baseDir,
+
+  /// #2750: commits ondertekenen met `user.signingkey`. Standaard uit.
+  bool signCommits = false,
 }) async {
   final worktree = baseDir != null
       ? Directory(baseDir)
@@ -39,6 +42,7 @@ Future<NativeGitMirror?> createNativeGitMirror({
     config: config,
     token: token,
     worktree: worktree,
+    signCommits: signCommits,
   );
 }
 
@@ -74,6 +78,7 @@ class _NativeGitMirror implements NativeGitMirror {
     required this._config,
     required this._token,
     required Directory worktree,
+    this._signCommits = false,
   }) : _worktree = worktree,
        _guarded = DraftMirror(store: FileDraftStore(baseDir: worktree));
 
@@ -81,6 +86,9 @@ class _NativeGitMirror implements NativeGitMirror {
   final GitRepoConfig _config;
   final String _token;
   final Directory _worktree;
+
+  /// #2750: commits ondertekenen met `user.signingkey` — standaard uit.
+  final bool _signCommits;
 
   /// De gewone opslagcontract-methodes lenen we van een [DraftMirror] over de
   /// werkboom: die past de deckmap-guards toe en slaagt zo voor exact hetzelfde
@@ -796,7 +804,15 @@ class _NativeGitMirror implements NativeGitMirror {
     final msgFile = File(p.join(_worktree.path, '.git', 'OCIDECK_COMMITMSG'));
     await writeBytesAtomic(msgFile, Uint8List.fromList(utf8.encode(message)));
     try {
-      await _run(['commit', '--cleanup=verbatim', '--file=${msgFile.path}']);
+      // #2750: ondertekenen via de sleutel die git op deze machine al
+      // gebruikt (user.signingkey, SSH of GPG). Faalt het tekenen, dan
+      // faalt de commit zichtbaar — geen stille ongetekende commit.
+      await _run([
+        ...(_signCommits ? const ['-c', 'commit.gpgsign=true'] : const []),
+        'commit',
+        '--cleanup=verbatim',
+        '--file=${msgFile.path}',
+      ]);
     } finally {
       if (await msgFile.exists()) await msgFile.delete();
     }
@@ -816,7 +832,7 @@ class _NativeGitMirror implements NativeGitMirror {
       res = await _run([
         'log',
         '--max-count=$limit',
-        '--format=%H%x1f%s%x1f%an%x1f%aI',
+        '--format=%H%x1f%s%x1f%an%x1f%aI%x1f%G?',
         '--',
         deckDir,
       ]);
@@ -835,6 +851,7 @@ class _NativeGitMirror implements NativeGitMirror {
           author: parts[2],
           date: DateTime.tryParse(parts[3]),
           pushed: !unpushed.contains(parts[0]),
+          signatureStatus: parts.length > 4 ? parts[4] : '',
         ),
       );
     }

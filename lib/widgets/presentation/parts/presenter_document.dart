@@ -156,6 +156,10 @@ class DocumentPresenterScreen extends StatefulWidget {
 }
 
 class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
+  /// Welke tabellen deze sessie live bewerkt mogen worden — start als de
+  /// aangewezen set, groeit per tabel via "Deze tabel bewerken" (#2743).
+  late final Set<int> _editable = {...widget.editableTables};
+
   late String _source = widget.body;
   late List<DocumentPageRange> _pages = documentPresentationPages(
     _source,
@@ -202,7 +206,7 @@ class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
   /// De eerste op deze pagina bewerkbare tabel, of `null`.
   int? get _editableOnPage {
     for (final o in _tablesOnPage(_page)) {
-      if (widget.editableTables.contains(o)) return o;
+      if (_editable.contains(o)) return o;
     }
     return null;
   }
@@ -220,14 +224,26 @@ class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
       _exitEdit();
       return;
     }
-    final ordinal = _editableOnPage;
+    // #2743: een nog niet-aangewezen tabel wordt bij de eerste bewerkings-
+    // tik deze sessie bewerkbaar — de aanwijsdialoog vóór presenteren is weg.
+    var ordinal = _editableOnPage;
     if (ordinal == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.d('Geen bewerkbare tabel op deze pagina'))),
-      );
-      return;
+      final tables = _tablesOnPage(_page);
+      if (tables.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.d('Geen bewerkbare tabel op deze pagina')),
+          ),
+        );
+        return;
+      }
+      ordinal = tables.first;
     }
-    final range = DocumentMarkdownView.nthTableBlockRange(_source, ordinal);
+    final o = ordinal;
+    if (!_editable.contains(o)) {
+      setState(() => _editable.add(o));
+    }
+    final range = DocumentMarkdownView.nthTableBlockRange(_source, o);
     if (range == null) return;
     final lines = _source.split('\n');
     final table = decodeMarkdownTableWithAlignment(
@@ -236,11 +252,10 @@ class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
     final editor = TableEditController(
       rows: table.rows,
       alignments: table.alignments,
-      onChanged: (rows, alignments) =>
-          _applyTableEdit(ordinal, rows, alignments),
+      onChanged: (rows, alignments) => _applyTableEdit(o, rows, alignments),
     );
     setState(() {
-      _editOrdinal = ordinal;
+      _editOrdinal = o;
       _editor = editor;
     });
     // De cel-velden vangen Esc en Cmd/Ctrl+Z zelf af vóór de Focus-keten —
@@ -517,10 +532,10 @@ class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
                   '${widget.audience == null
                       ? ''
                       : _syncOk == null
-                      ? ' · ${l10n.d('beamer')}…'
+                      ? ' · ${l10n.d('het andere scherm')}…'
                       : _syncOk!
-                      ? ' · ${l10n.d('beamer')} ✓'
-                      : ' · ${l10n.d('beamer: niet bereikbaar')}'}',
+                      ? ' · ${l10n.d('het andere scherm')} ✓'
+                      : ' · ${l10n.d('ander scherm: niet bereikbaar')}'}',
                 ),
               ),
               Positioned(
@@ -528,12 +543,15 @@ class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
                 bottom: 14,
                 child: Row(
                   children: [
-                    if (_editableOnPage != null)
+                    if (_editableOnPage != null ||
+                        _tablesOnPage(_page).isNotEmpty)
                       _actionChip(
                         context,
                         editing
                             ? l10n.d('Bewerken sluiten (Esc)')
-                            : l10n.d('Tabel bewerken (E)'),
+                            : _editableOnPage != null
+                            ? l10n.d('Tabel bewerken (E)')
+                            : l10n.d('Deze tabel bewerken'),
                         editing ? Icons.edit_note_rounded : Icons.edit_outlined,
                         _toggleEdit,
                         active: editing,

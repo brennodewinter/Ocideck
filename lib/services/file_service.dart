@@ -16,6 +16,7 @@ import 'package:flutter/services.dart' show MissingPluginException, rootBundle;
 import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
 import '../models/markdown_document.dart';
+import '../models/redaction_manifest.dart';
 import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/seal_record.dart';

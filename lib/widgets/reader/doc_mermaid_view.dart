@@ -5,7 +5,8 @@ import '../../services/mermaid_render_service.dart';
 import '../../services/mermaid_theme.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/sanitize_svg.dart';
-import '../slides/mermaid_diagram.dart' show MermaidRenderer;
+import '../slides/mermaid_diagram.dart'
+    show MermaidRenderer, mermaidSemanticLabel;
 
 /// Draws a ```mermaid fenced block in the in-app documentation reader, instead
 /// of leaving its source sitting as monospace text (which is what the reader did
@@ -118,7 +119,13 @@ class _DocMermaidViewState extends State<DocMermaidView> {
           // sizeless SVG can't be laid out in the vertical column without a
           // height, so it falls through to the source rather than collapsing.
           if (safe != null && size != null) {
-            return _diagram(context, safe, size);
+            return Semantics(
+              // #2731: label uit de bron (accTitle/accDescr of het
+              // diagramtype), niet uit de SVG — de sanitizer stript
+              // title/desc/aria bewust. De SVG zelf blijft uit de semantiek.
+              label: mermaidSemanticLabel(_effectiveSource),
+              child: ExcludeSemantics(child: _diagram(context, safe, size)),
+            );
           }
         }
         if (snap.connectionState != ConnectionState.done) return _loading();

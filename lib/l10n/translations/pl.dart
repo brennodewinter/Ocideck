@@ -14,8 +14,6 @@ const _stringsPl = {
   'more': 'Więcej',
   'export': 'Eksportuj',
   'exportReady': 'Eksportuj (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Zapisz prezentację przed eksportem',
-  'exportNeedsClean': 'Zapisz zmiany przed eksportem',
   'saved': 'Zapisano',
   'unsaved': 'Niezapisane',
   'unsavedChanges': 'Zapisz zmiany (Ctrl/Cmd+S)',
@@ -692,8 +690,6 @@ const _dutchSourcePl = {
   'Eerste · laatste slide': 'Pierwszy · ostatni slajd',
   'Slide-overzicht': 'Przegląd slajdów',
   'Slide-overzicht (pijltjes + Enter)': 'Przegląd slajdów (strzałki + Enter)',
-  'Presenter view (notities, klok)': 'Widok prezentera (notatki, zegar)',
-  'Scherm wisselen (meerdere schermen)': 'Przełącz ekran (wiele ekranów)',
   'Zwart · wit scherm': 'Czarny · biały ekran',
   'Automatische modus aan/uit': 'Tryb automatyczny wł./wył.',
   'Herhalen (loop) aan/uit': 'Powtarzanie (pętla) wł./wył.',
@@ -716,11 +712,6 @@ const _dutchSourcePl = {
       'Notatki dla odbiorcy podczas kursu',
   'Mijn notities aan/uit': 'Przełącz moje notatki wł./wył.',
   'Wissel scherm (S)': 'Przełącz ekran (S)',
-  'Kon niet van scherm wisselen.': 'Nie udało się przełączyć ekranów.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publiczność · H legenda · G przegląd · B/W czarny/biały · R czas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publiczność · H legenda · S ekran · G przegląd · B/W czarny/biały · R czas · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'strzałki + Enter lub kliknij, aby przejść',
   'Afsluiten (Escape)': 'Zakończ (Escape)',
@@ -1617,6 +1608,60 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Dodatkowa czcionka dla brakujących znaków',
+  'Geen lettertypebestand gekozen': 'Nie wybrano pliku czcionki',
+  'Kies bestand…': 'Wybierz plik…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Do pliku PDF osadzany jest tylko podzbiór tego pliku. Licencja pliku musi zezwalać na osadzanie; OciDeck tego nie sprawdza i niczego nie pobiera.',
+  'Bijzonder persoonsgegeven': 'Dane osobowe kategorii szczególnej',
+  'Dia {n} van {m}': 'Slajd {n} z {m}',
+  'ander scherm: niet bereikbaar': 'drugi ekran: niedostępny',
+  'het andere scherm': 'drugi ekran',
+  'Dit mag blijven': 'To może zostać',
+  'Waarschuw de ontvanger': 'Ostrzeż odbiorcę',
+  'Laat dit weg bij tonen en exporteren':
+      'Pomiń to przy pokazywaniu i eksporcie',
+  'Ga naar de eerste dia zonder keuze':
+      'Przejdź do pierwszego slajdu bez decyzji',
+  'Onderteken git-commits': 'Podpisuj commity gita',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Podpisuj commity kluczem, którego git już używa na tym komputerze.',
+  'getekend en gecontroleerd': 'podpisane i zweryfikowane',
+  'getekend (hier niet te controleren)':
+      'podpisane (nie do zweryfikowania tutaj)',
+  'ongetekend': 'niepodpisane',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} w tym {veld}. Otwórz zgłoszenie, a fragment będzie zaznaczony w tekście.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Otwórz zgłoszenie, a fragment będzie zaznaczony w tekście.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Ich poziom jest surowszy niż poziom prezentacji. Podnieś poziom prezentacji lub obniż poziom slajdu.',
+  'Niveau van de presentatie': 'Poziom prezentacji',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Podnieś poziom prezentacji lub obniż poziom slajdu.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Publiczność widzi ten slajd na drugim ekranie.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Drugi ekran nie uczestniczy. Slajdy są na tym ekranie.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekrany nie zostały zamienione. Notatki są nadal tutaj.',
+  'Notities aan of uit': 'Notatki włączone lub wyłączone',
+  'Zet de notities op het andere scherm': 'Przenieś notatki na drugi ekran',
+  'Terug naar de dia\'s': 'Wróć do slajdów',
+  'Verder typen': 'Pisz dalej',
+  'Terug zonder deze wijzigingen': 'Wróć bez tych zmian',
+  'Toepassen en terug': 'Zastosuj i wróć',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Twoje zmiany nie zostały jeszcze zastosowane.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Niezastosowane zmiany: zastosuj, odrzuć albo zostań tutaj.',
+  'Deze tabel bewerken': 'Edytuj tę tabelę',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} nie będzie już zgłaszane w żadnej prezentacji. Możesz je przywrócić w Bezpieczeństwie.',
+  'Niet melden': 'Nie zgłaszaj',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Najpierw zapisz. Potem możesz wyeksportować.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Jeden plik HTML z prawdziwym tekstem, nagłówkami i tekstami alternatywnymi, który otwiera się w każdej przeglądarce bez internetu — z tabelami, matematyką, mermaid i wykresami.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -2353,12 +2398,9 @@ const _dutchSourceAddPl = <String, String>{
   'Bewaren als kopie': 'Zapisz jako kopię',
   'Bewaren in document': 'Zapisz w dokumencie',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nieosiągalny',
   'Bewerken sluiten (Esc)': 'Zakończ edycję (Esc)',
   'Presenteer document…': 'Prezentuj dokument…',
   'Presenteer document': 'Prezentuj dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Zaznacz, które tabele mogą być edytowane na żywo podczas prezentacji. Cała pozostała treść pozostaje tylko do odczytu.',
   'Extra ruimte': 'Dodatkowa przestrzeń',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta przypis jest dłuższy niż strona — przewiń, by zobaczyć resztę',
@@ -5184,8 +5226,6 @@ const _dutchSourceAddPl = <String, String>{
   'Markdown-broneditor': 'Edytor źródeł Markdown',
   'Niet toegepast': 'Nie zastosowano',
   'Niet-toegepaste wijzigingen': 'Niezastosowane zmiany',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Zastosuj lub odrzuć bieżące zmiany przed przełączeniem zakresów.',
   'Problemen gevonden': 'Znaleziono problemy',
   'Schrijftips': 'Wskazówki dotyczące pisania',
   'Snel herstellen': 'Szybko wyzdrowiej',
@@ -6428,8 +6468,6 @@ const _dutchSourceAddPl = <String, String>{
       'Wstrzymany: sklasyfikowany surowiej niż prezentacja',
   '1 slide achtergehouden door haar TLP': '1 slajd wstrzymany przez swój TLP',
   'slides achtergehouden door hun TLP': 'slajdy wstrzymane przez ich TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Te slajdy nie trafiają do prezentacji, eksportu ani pakietu. Podnieś poziom TLP prezentacji w Informacjach o prezentacji, aby je uwzględnić.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Wszystkie slajdy są wstrzymane przez ich klasyfikację TLP, więc nie ma nic do pokazania.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7176,8 +7214,6 @@ const _dutchSourceAddPl = <String, String>{
   'seksuele geaardheid': 'orientacja seksualna',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tym slajdzie jest też dana identyfikująca, więc można to powiązać z osobą.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Szczególna kategoria danych osobowych (RODO art. 9/10)',
   'gezondheidsgegeven': 'dane o zdrowiu',
   'strafrechtelijk gegeven': 'dane karne',
   'religie of levensovertuiging': 'religia lub światopogląd',
@@ -7238,8 +7274,6 @@ const _dutchSourceAddPl = <String, String>{
   'PERSOONSGEGEVENS': 'DANE OSOBOWE',
   'Volg de presentatie': 'Jak w prezentacji',
   'Weglaten uit tonen en exporteren': 'Pomiń przy wyświetlaniu i eksporcie',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Rozważ zredagowanie tego przez [[podwójne nawiasy kwadratowe]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Bez kontekstu w tekście to może wcale nie być dana osobowa.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

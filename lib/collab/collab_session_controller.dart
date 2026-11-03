@@ -75,6 +75,7 @@ class CollabSessionController {
   void onLocalEdit(Deck newLocal) {
     if (_disposed || _applyingRemote) return;
     final ops = deckDiffToOps(session.deck, newLocal, authorId: participantId);
+
     for (final op in ops) {
       _rememberPending(op);
       session.submit(op);
@@ -119,6 +120,7 @@ class CollabSessionController {
           if (_shouldApply(op)) op,
       ];
       if (applicable.isEmpty) return;
+
       writeDeck(applicable.fold(local, applyOp));
     } finally {
       _applyingRemote = false;

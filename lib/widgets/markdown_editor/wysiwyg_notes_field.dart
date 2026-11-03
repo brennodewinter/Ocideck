@@ -20,6 +20,7 @@ import '../reader/document_markdown_view.dart'
 import 'divider_embed_builder.dart';
 import 'footnote_embed_builder.dart';
 import 'markdown_editor_theme.dart';
+import 'chart_embed_builder.dart';
 import 'mermaid_embed_builder.dart';
 import 'form_block_embed_builder.dart';
 import 'pentest_block_embed_builder.dart';
@@ -565,6 +566,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   const SpacerEmbedBuilder(),
                   const TranscriptEmbedBuilder(),
                   const MermaidEmbedBuilder(),
+                  const ChartEmbedBuilder(),
                   const PentestBlockEmbedBuilder(),
                   const FormBlockEmbedBuilder(),
                   const SourceFragmentEmbedBuilder(),

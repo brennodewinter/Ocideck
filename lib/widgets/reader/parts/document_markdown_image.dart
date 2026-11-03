@@ -40,26 +40,34 @@ class DocumentImageScope extends InheritedWidget {
 /// [ImageProvider] voor documentweergave, of `null` wanneer het niet oplost.
 ///
 /// Hergebruikt dezelfde decode-grenzen als slides (`cappedFileImage`,
-/// `cappedMemoryImage`, `cappedBundledAssetImage` — 4096 px / 64 MiB), dus een
-/// document met twintig foto's eet het geheugen niet op. De pad-resolutie is
-/// project-contained (`resolveSlideAssetPath`): een documentpad is invoer, geen
-/// instructie, en een onvertrouwd document kan zo niet willekeurige bestanden
-/// buiten zijn map lezen. Fail-closed: een ontbrekend of onoplosbaar pad geeft
-/// `null`, en de aanroeper toont het merkteken in plaats van een leeg vlak.
+/// `cappedMemoryImage`, `cappedBundledAssetImage` — 4096 px / 64 MiB), maar
+/// dan op de kolombreedte: [maxEdge] komt uit `decodeEdgeForBox` en kiest de
+/// trede 1024 / 2048 / 4096 die bij het vak hoort (#2727). Zonder die trede
+/// decodeerde elke foto op 4096² ≈ 64 MiB — twintig foto's in één rapport
+/// was dan ~1,3 GiB aan levende bitmaps.
+/// De pad-resolutie is project-contained (`resolveSlideAssetPath`): een
+/// documentpad is invoer, geen instructie, en een onvertrouwd document kan
+/// zo niet willekeurige bestanden buiten zijn map lezen. Fail-closed: een
+/// ontbrekend of onoplosbaar pad geeft `null`, en de aanroeper toont het
+/// merkteken in plaats van een leeg vlak.
 ///
 /// Op web bestaat geen bestandssysteem: alleen `mem:` (via [WebAssetStore]) en
 /// `asset:` (gebundeld) lossen op. Die grens staat in de gids, niet als raadsel.
-ImageProvider? documentImageProvider(String source, String? projectPath) {
+ImageProvider? documentImageProvider(
+  String source,
+  String? projectPath, {
+  int maxEdge = kMaxImageDecodeDimension,
+}) {
   if (source.isEmpty) return null;
   // Gebundeld asset (ingebouwde stijlprofielen): rendert op elk platform.
   if (isBundledAssetPath(source)) {
-    return cappedBundledAssetImage(bundledAssetKey(source));
+    return cappedBundledAssetImage(bundledAssetKey(source), maxEdge: maxEdge);
   }
   // mem: (webversie): bytes in de WebAssetStore in plaats van een bestand.
   if (WebAssetStore.isMemPath(source)) {
     final bytes = WebAssetStore.bytesFor(source);
     if (bytes == null) return null; // weg na een paginaherlaad
-    return cappedMemoryImage(bytes);
+    return cappedMemoryImage(bytes, maxEdge: maxEdge);
   }
   // Lokaal bestand (desktop): project-contained, met de symlink-grens die slides
   // ook bewaken. Op web komt een bestandspad hier nooit aan — `resolveSlideAssetPath`
@@ -73,6 +81,7 @@ ImageProvider? documentImageProvider(String source, String? projectPath) {
     File(resolved),
     version: imageVersionOf(resolved),
     projectPath: projectPath,
+    maxEdge: maxEdge,
   );
 }
 
@@ -111,18 +120,20 @@ class _DocumentImageState extends State<DocumentImage> {
   bool _failed = false;
   ImageStream? _stream;
   ImageStreamListener? _listener;
-  bool _resolved = false;
+
+  /// De decode-trede uit `decodeEdgeForBox` voor het laatst opgeloste vak —
+  /// verandert de trede (resize, andere zoom), dan wordt de provider opnieuw
+  /// opgelost (#2727).
+  int _edge = kMaxImageDecodeDimension;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     // _resolve gebruikt createLocalImageConfiguration(context), wat MediaQuery
     // nodig heeft — dat is in initState nog niet beschikbaar. didChangeDependencies
-    // is de eerste plek waar context veilig is.
-    if (!_resolved) {
-      _resolved = true;
-      _resolve();
-    }
+    // is de eerste plek waar context veilig is. De echte oplossing wacht op
+    // build: de kolombreedte bepaalt de decode-trede en die is hier nog niet
+    // bekend.
   }
 
   @override
@@ -137,7 +148,11 @@ class _DocumentImageState extends State<DocumentImage> {
   }
 
   void _resolve() {
-    final provider = documentImageProvider(widget.source, widget.projectPath);
+    final provider = documentImageProvider(
+      widget.source,
+      widget.projectPath,
+      maxEdge: _edge,
+    );
     if (provider == null) {
       _provider = null;
       return;
@@ -181,6 +196,35 @@ class _DocumentImageState extends State<DocumentImage> {
 
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Dezelfde tredes als de dia's: decodeer op kolombreedte, niet op de
+        // bomgrens. De eerste build lost pas op als het vak bekend is —
+        // zo komt er nooit een 4096-decode voorbij die meteen vervangen wordt
+        // door de echte trede (#2727).
+        final edge = decodeEdgeForBox(
+          constraints.maxWidth,
+          constraints.maxHeight.isFinite
+              ? constraints.maxHeight
+              : constraints.maxWidth,
+          MediaQuery.devicePixelRatioOf(context),
+        );
+        if (edge != _edge) {
+          _edge = edge;
+          _discardStream();
+          _provider = null;
+          _aspectRatio = null;
+          _failed = false;
+          _resolve();
+        } else if (_provider == null && _stream == null && !_failed) {
+          _resolve();
+        }
+        return _buildImage(context);
+      },
+    );
+  }
+
+  Widget _buildImage(BuildContext context) {
     final provider = _provider;
     // Pad lost niet op, of de decodering faalde: het merkteken, niet leeg.
     // Een ontbrekend bestand hoort zichtbaar te zijn.

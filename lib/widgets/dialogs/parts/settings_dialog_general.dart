@@ -266,6 +266,22 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(
+            l10n.d('Onderteken git-commits'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Teken commits met de sleutel die git op deze machine al gebruikt.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          value: settings.gitSignCommits,
+          onChanged: (value) =>
+              ref.read(settingsProvider.notifier).setGitSignCommits(value),
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
             l10n.d('Classificatie-watermerk'),
             style: const TextStyle(fontSize: 13),
           ),

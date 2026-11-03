@@ -18,6 +18,46 @@ import '../../utils/sanitize_svg.dart';
 /// opmaak wordt geweigerd.
 typedef MermaidRenderer = Future<String?> Function(String source);
 
+/// Het semantische label van een Mermaid-diagram, uit de bron gelezen
+/// (#2731): `accTitle:`/`accDescr:` als de auteur die zette, anders het
+/// diagramtype met de eerste inhoudsregels. Nooit uit de gegenereerde SVG —
+/// de sanitizer stript `title`/`desc`/`aria-*` bewust en die keuze blijft.
+String mermaidSemanticLabel(String source, {int maxContentLines = 4}) {
+  String? accTitle;
+  String? accDescr;
+  String? diagramType;
+  final content = <String>[];
+  for (final raw in source.split('\n')) {
+    final line = raw.trim();
+    if (line.isEmpty) continue;
+    if (line.startsWith('accTitle:')) {
+      accTitle = line.substring('accTitle:'.length).trim();
+      continue;
+    }
+    if (line.startsWith('accDescr:')) {
+      accDescr = line.substring('accDescr:'.length).trim();
+      continue;
+    }
+    if (line.startsWith('accDescr')) {
+      // Blokvorm `accDescr { ... }` overslaan we net als commentaar — de
+      // eenregelige variant hierboven dekt wat Mermaid zelf aanbiedt.
+      continue;
+    }
+    if (line.startsWith('%')) continue; // commentaar
+    diagramType ??= line;
+    if (diagramType != line && content.length < maxContentLines) {
+      content.add(line);
+    }
+  }
+  final title = accTitle ?? '';
+  final descr = accDescr ?? '';
+  if (title.isNotEmpty || descr.isNotEmpty) {
+    return [title, descr].where((s) => s.isNotEmpty).join(' — ');
+  }
+  final base = diagramType ?? 'diagram';
+  return content.isEmpty ? base : '$base — ${content.join(', ')}';
+}
+
 /// De grootste zoomfactor voor een mermaid-diagram in de presentatie.
 const double kMermaidMaxZoom = 5.0;
 
@@ -361,16 +401,24 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
       );
     }
 
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(vertical: w * 0.008),
-      padding: EdgeInsets.all(w * 0.012),
-      decoration: BoxDecoration(
-        color: AppTheme.nearWhite,
-        borderRadius: BorderRadius.circular(w * 0.008),
-        border: Border.all(color: AppTheme.ghBorder),
+    return Semantics(
+      // #2731: voor een schermlezer is het diagram anders een naamloze
+      // afbeelding — het label komt uit de bron (accTitle/accDescr of het
+      // diagramtype), de SVG zelf blijft weg uit de semantische boom.
+      label: mermaidSemanticLabel(widget.source),
+      child: ExcludeSemantics(
+        child: Container(
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(vertical: w * 0.008),
+          padding: EdgeInsets.all(w * 0.012),
+          decoration: BoxDecoration(
+            color: AppTheme.nearWhite,
+            borderRadius: BorderRadius.circular(w * 0.008),
+            border: Border.all(color: AppTheme.ghBorder),
+          ),
+          child: content,
+        ),
       ),
-      child: content,
     );
   }
 

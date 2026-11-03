@@ -18,6 +18,12 @@ extension FileServiceDossier on FileService {
     Deck deck, {
     required String dossierIndex,
     List<int>? reportPdf,
+
+    /// #2747: de geredigeerde afleiding en haar commitment-manifest zónder
+    /// salts — dan kan een auditor de redacties controleren zonder de
+    /// verificatiesleutels in handen te krijgen.
+    String? redactedMarkdown,
+    String? redactionManifestJson,
   }) async {
     // Start from the ordinary package (report `.md` + all assets + evidence
     // images) and add the audit sidecars.
@@ -26,6 +32,18 @@ extension FileServiceDossier on FileService {
     archive.add(ArchiveFile(kAuditDossierFileName, index.length, index));
     if (reportPdf != null && reportPdf.isNotEmpty) {
       archive.add(ArchiveFile(dossierReportName, reportPdf.length, reportPdf));
+    }
+    if (redactedMarkdown != null) {
+      final bytes = utf8.encode(redactedMarkdown);
+      archive.add(ArchiveFile('report-geredigeerd.md', bytes.length, bytes));
+    }
+    if (redactionManifestJson != null) {
+      final bytes = utf8.encode(redactionManifestJson);
+      // Dezelfde suffix als bij een gewone export: het verschil met
+      // '-redaction-keys.json' ís de beveiliging, dus blijft hij herkenbaar.
+      archive.add(
+        ArchiveFile('report$kRedactionManifestSuffix', bytes.length, bytes),
+      );
     }
     return archive;
   }
@@ -37,12 +55,16 @@ extension FileServiceDossier on FileService {
     Deck deck, {
     required String dossierIndex,
     List<int>? reportPdf,
+    String? redactedMarkdown,
+    String? redactionManifestJson,
     String? password,
   }) async {
     final archive = await _buildDossierArchive(
       deck,
       dossierIndex: dossierIndex,
       reportPdf: reportPdf,
+      redactedMarkdown: redactedMarkdown,
+      redactionManifestJson: redactionManifestJson,
     );
     final pw = (password != null && password.isNotEmpty) ? password : null;
     if (kIsWeb) return ZipEncoder(password: pw).encodeBytes(archive);
@@ -55,12 +77,16 @@ extension FileServiceDossier on FileService {
     String destPath, {
     required String dossierIndex,
     List<int>? reportPdf,
+    String? redactedMarkdown,
+    String? redactionManifestJson,
     String? password,
   }) async {
     final bytes = await buildDossierBytes(
       deck,
       dossierIndex: dossierIndex,
       reportPdf: reportPdf,
+      redactedMarkdown: redactedMarkdown,
+      redactionManifestJson: redactionManifestJson,
       password: password,
     );
     await writeBytesAtomic(File(destPath), bytes);
@@ -73,12 +99,16 @@ extension FileServiceDossier on FileService {
     Deck deck, {
     required String dossierIndex,
     List<int>? reportPdf,
+    String? redactedMarkdown,
+    String? redactionManifestJson,
     String? password,
   }) async {
     final bytes = await buildDossierBytes(
       deck,
       dossierIndex: dossierIndex,
       reportPdf: reportPdf,
+      redactedMarkdown: redactedMarkdown,
+      redactionManifestJson: redactionManifestJson,
       password: password,
     );
     final name = _dossierFileName(deck);
@@ -103,11 +133,15 @@ extension FileServiceDossier on FileService {
     Deck deck, {
     required String dossierIndex,
     List<int>? reportPdf,
+    String? redactedMarkdown,
+    String? redactionManifestJson,
   }) async {
     final archive = await _buildDossierArchive(
       deck,
       dossierIndex: dossierIndex,
       reportPdf: reportPdf,
+      redactedMarkdown: redactedMarkdown,
+      redactionManifestJson: redactionManifestJson,
     );
     return _flatMembers(archive);
   }

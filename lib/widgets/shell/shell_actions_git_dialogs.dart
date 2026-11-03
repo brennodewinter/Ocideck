@@ -47,7 +47,7 @@ class _GitHistoryDialog extends StatelessWidget {
                       ),
                     ),
                     title: Text(
-                      e.subject,
+                      '${e.subject}${_signatureSuffix(l10n, e.signatureStatus)}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 13),
@@ -843,4 +843,21 @@ class _GitSaveDialogState extends State<_GitSaveDialog> {
       ],
     );
   }
+}
+
+/// De ondertekenstatus uit `git log %G?` (#2750). G is de enige die hier echt
+/// gecontroleerd is; de rest zegt getekend maar niet te verifiëren — dat is
+/// geen bevestiging.
+String _signatureSuffix(AppLocalizations l10n, String status) {
+  return switch (status) {
+    'G' => ' · ${l10n.d('getekend en gecontroleerd')}',
+    'B' ||
+    'U' ||
+    'X' ||
+    'Y' ||
+    'R' ||
+    'E' => ' · ${l10n.d('getekend (hier niet te controleren)')}',
+    'N' => ' · ${l10n.d('ongetekend')}',
+    _ => '',
+  };
 }

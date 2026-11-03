@@ -14,8 +14,6 @@ const _stringsLv = {
   'more': 'Vairāk',
   'export': 'Eksportēt',
   'exportReady': 'Eksportēt (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Vispirms saglabājiet prezentāciju, lai eksportētu',
-  'exportNeedsClean': 'Vispirms saglabājiet izmaiņas, lai eksportētu',
   'saved': 'Saglabāts',
   'unsaved': 'Nesaglabāts',
   'unsavedChanges': 'Saglabāt izmaiņas (Ctrl/Cmd+S)',
@@ -687,9 +685,6 @@ const _dutchSourceLv = {
   'Eerste · laatste slide': 'Pirmais · pēdējais slaids',
   'Slide-overzicht': 'Slaidu pārskats',
   'Slide-overzicht (pijltjes + Enter)': 'Slaidu pārskats (bultiņas + Enter)',
-  'Presenter view (notities, klok)':
-      'Prezentētāja skats (piezīmes, pulkstenis)',
-  'Scherm wisselen (meerdere schermen)': 'Pārslēgt ekrānu (vairāki ekrāni)',
   'Zwart · wit scherm': 'Melns · balts ekrāns',
   'Automatische modus aan/uit': 'Automātiskais režīms ieslēgts/izslēgts',
   'Herhalen (loop) aan/uit': 'Atkārtot (cilpa) ieslēgts/izslēgts',
@@ -711,11 +706,6 @@ const _dutchSourceLv = {
       'Piezīmes saņēmējam kursa laikā',
   'Mijn notities aan/uit': 'Pārslēgt manas piezīmes ieslēgt/izslēgt',
   'Wissel scherm (S)': 'Pārslēgt ekrānu (S)',
-  'Kon niet van scherm wisselen.': 'Neizdevās pārslēgt ekrānus.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · H leģenda · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · H leģenda · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
   'pijltjes + Enter of klik om te springen':
       'bultiņas + Enter vai klikšķis, lai pārlēktu',
   'Afsluiten (Escape)': 'Iziet (Escape)',
@@ -1603,6 +1593,56 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Papildu fonts trūkstošajām rakstzīmēm',
+  'Geen lettertypebestand gekozen': 'Fonta fails nav izvēlēts',
+  'Kies bestand…': 'Izvēlēties failu…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'PDF failā tiek iegults tikai šī faila apakškopa. Faila licencei ir jāatļauj iegulšana; OciDeck to nepārbauda un neko nelejupielādē.',
+  'Bijzonder persoonsgegeven': 'Īpašas kategorijas personas dati',
+  'Dia {n} van {m}': 'Slaidi {n} no {m}',
+  'ander scherm: niet bereikbaar': 'otrs ekrāns: nepieejams',
+  'het andere scherm': 'otrais ekrāns',
+  'Dit mag blijven': 'Tas var palikt',
+  'Waarschuw de ontvanger': 'Brīdini saņēmēju',
+  'Laat dit weg bij tonen en exporteren': 'Izlaist to rādot un eksportējot',
+  'Ga naar de eerste dia zonder keuze': 'Doties uz pirmo slaidu bez izvēles',
+  'Onderteken git-commits': 'Parakstīt git komītus',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Parakstiet komītus ar atslēgu, ko git jau izmanto šajā mašīnā.',
+  'getekend en gecontroleerd': 'parakstīts un pārbaudīts',
+  'getekend (hier niet te controleren)': 'parakstīts (šeit nevar pārbaudīt)',
+  'ongetekend': 'neparakstīts',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} šajā {veld}. Atveriet paziņojumu, tad fragments ir atlasīts tekstā.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Atveriet paziņojumu, tad fragments ir atlasīts tekstā.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'To līmenis ir stingrāks nekā prezentācijas līmenis. Paaugstiniet prezentācijas līmeni vai pazeminiet slaida līmeni.',
+  'Niveau van de presentatie': 'Prezentācijas līmenis',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Paaugstiniet prezentācijas līmeni vai pazeminiet slaida līmeni.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Zāle redz šo slaidu uz otra ekrāna.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Otrais ekrāns nepiedalās. Slaidi ir uz šī ekrāna.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekrāni netika samainīti. Piezīmes joprojām ir šeit.',
+  'Notities aan of uit': 'Piezīmes ieslēgtas vai izslēgtas',
+  'Zet de notities op het andere scherm': 'Novietojiet piezīmes uz otra ekrāna',
+  'Terug naar de dia\'s': 'Atpakaļ uz slaidiem',
+  'Verder typen': 'Rakstīt tālāk',
+  'Terug zonder deze wijzigingen': 'Atpakaļ bez šīm izmaiņām',
+  'Toepassen en terug': 'Lietot un atgriezties',
+  'Je wijzigingen zijn nog niet toegepast.': 'Jūsu izmaiņas vēl nav lietotas.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nelietotās izmaiņas: lietojiet, izmetiet vai palieciet šeit.',
+  'Deze tabel bewerken': 'Rediģēt šo tabulu',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} vairs netiks ziņots nevienā prezentācijā. To varat atgriezt sadaļā Drošība.',
+  'Niet melden': 'Neziņot',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Vispirms saglabājiet. Pēc tam varat eksportēt.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Viena HTML datne ar īstu tekstu, virsrakstiem un alternatīvajiem tekstiem, kas atveras jebkurā pārlūkā bez interneta — ar tabulām, matemātiku, mermaid un diagrammām.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -2335,12 +2375,9 @@ const _dutchSourceAddLv = <String, String>{
   'Bewaren als kopie': 'Saglabāt kā kopiju',
   'Bewaren in document': 'Saglabāt dokumentā',
   'beamer': 'projektors',
-  'beamer: niet bereikbaar': 'projektors: nav sasniedzams',
   'Bewerken sluiten (Esc)': 'Aizvērt rediģēšanu (Esc)',
   'Presenteer document…': 'Prezentēt dokumentu…',
   'Presenteer document': 'Prezentēt dokumentu',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Atzīmējiet, kuras tabulas prezentācijas laikā drīkst rediģēt tiešraidē. Viss pārējais saturs paliek tikai lasāms.',
   'Extra ruimte': 'Papildu vieta',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Šī piezīme ir garāka par lapu — ritiniet, lai redzētu pārējo',
@@ -5150,8 +5187,6 @@ const _dutchSourceAddLv = <String, String>{
   'Markdown-broneditor': 'Markdown avota redaktors',
   'Niet toegepast': 'Nav piemērots',
   'Niet-toegepaste wijzigingen': 'Nepielietotās izmaiņas',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Pirms tvēruma maiņas lietojiet vai noraidiet pašreizējās izmaiņas.',
   'Problemen gevonden': 'Problēmas atrastas',
   'Schrijftips': 'Rakstīšanas padomi',
   'Snel herstellen': 'Ātri atgūties',
@@ -6387,8 +6422,6 @@ const _dutchSourceAddLv = <String, String>{
       'Aizturēts: klasificēts stingrāk nekā prezentācija',
   '1 slide achtergehouden door haar TLP': '1 slaids aizturēts tā TLP dēļ',
   'slides achtergehouden door hun TLP': 'slaidi aizturēti to TLP dēļ',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Šie slaidi netiek iekļauti prezentējot, eksportējot vai pakotnē. Paaugstiniet prezentācijas TLP līmeni sadaļā Prezentācijas informācija, lai tos iekļautu.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Visi slaidi ir aizturēti to TLP klasifikācijas dēļ — nav ko rādīt.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7134,8 +7167,6 @@ const _dutchSourceAddLv = <String, String>{
   'seksuele geaardheid': 'seksuālā orientācija',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Šajā slaidā ir arī identificējošs dats, tāpēc to var attiecināt uz personu.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Īpaša personas datu kategorija (VDAR 9./10. pants)',
   'gezondheidsgegeven': 'veselības dati',
   'strafrechtelijk gegeven': 'krimināltiesību dati',
   'religie of levensovertuiging': 'reliģija vai pārliecība',
@@ -7196,8 +7227,6 @@ const _dutchSourceAddLv = <String, String>{
   'PERSOONSGEGEVENS': 'PERSONAS DATI',
   'Volg de presentatie': 'Sekot prezentācijai',
   'Weglaten uit tonen en exporteren': 'Izlaist no rādīšanas un eksporta',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Apsver to aizklāt ar [[dubultajām kvadrātiekavām]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Bez konteksta tekstā tie, iespējams, nemaz nav personas dati.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

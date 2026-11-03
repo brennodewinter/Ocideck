@@ -766,6 +766,8 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     );
   }
 
+  /// Of vel [index] echt in de boom moet: binnen de viewport plus een vel
+  /// marge, of vóór de eerste meting (dan is alleen vel 0 zeker).
   /// Staat in de bovenmarge en verandert daardoor de gemeten documentstroom
   /// niet; de eerste kaart op het vel tekent de rail zelf opnieuw.
   Widget _timelineContinuationLabel(

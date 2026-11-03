@@ -171,42 +171,95 @@ class _SkipBanner extends StatelessWidget {
 class _WithheldBanner extends StatelessWidget {
   final int count;
 
-  const _WithheldBanner({required this.count});
+  /// Zet het presentatieniveau — dezelfde ingang als de TLP-chip in de
+  /// titelbalk (#2740).
+  final ValueChanged<TlpLevel> onLevelChanged;
+
+  const _WithheldBanner({required this.count, required this.onLevelChanged});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Tooltip(
-      message: l10n.d(
-        'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.',
+    // #2740: de uitleg stond alleen in een tooltip die bovendien naar
+    // Presentatie-info wees — dat venster heeft geen TLP-veld. Nu staat de
+    // zin zichtbaar in de balk, met dezelfde keuzelijst als de chip.
+    return Container(
+      padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
+      decoration: BoxDecoration(
+        color: AppTheme.badgeErrorOverlay.withValues(alpha: 0.2),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: AppTheme.badgeErrorOverlay),
       ),
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
-        decoration: BoxDecoration(
-          color: AppTheme.badgeErrorOverlay.withValues(alpha: 0.2),
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: AppTheme.badgeErrorOverlay),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.lock_outline, size: 13, color: Colors.white),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Text(
-                count == 1
-                    ? l10n.d('1 slide achtergehouden door haar TLP')
-                    : '$count ${l10n.d('slides achtergehouden door hun TLP')}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.lock_outline, size: 13, color: Colors.white),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  count == 1
+                      ? l10n.d('1 slide achtergehouden door haar TLP')
+                      : '$count ${l10n.d('slides achtergehouden door hun TLP')}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: 3),
+          Text(
+            l10n.d(
+              'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.',
             ),
-          ],
-        ),
+            style: const TextStyle(color: Colors.white, fontSize: 10),
+          ),
+          const SizedBox(height: 4),
+          // Geen PopupMenuButton hier: zijn TapRegion dekt in de zijbalk
+          // de tegels eronder en vangt elke tik af. InkWell + showMenu
+          // levert dezelfde keuzelijst zonder die laag (#2740).
+          TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.white.withValues(alpha: 0.15),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              textStyle: const TextStyle(fontSize: 11),
+            ),
+            onPressed: () => _showLevelMenu(context),
+            child: Text(l10n.d('Niveau van de presentatie')),
+          ),
+        ],
       ),
     );
+  }
+
+  void _showLevelMenu(BuildContext context) {
+    final box = context.findRenderObject()! as RenderBox;
+    final overlay =
+        Overlay.of(context).context.findRenderObject()! as RenderBox;
+    showMenu<TlpLevel>(
+      context: context,
+      position: RelativeRect.fromRect(
+        box.localToGlobal(Offset.zero) & box.size,
+        Offset.zero & overlay.size,
+      ),
+      items: [
+        for (final level in TlpLevel.values)
+          PopupMenuItem<TlpLevel>(
+            height: 32,
+            value: level,
+            child: Text(level.label, style: const TextStyle(fontSize: 12.5)),
+          ),
+      ],
+    ).then((level) {
+      if (level != null) onLevelChanged(level);
+    });
   }
 }
 

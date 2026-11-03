@@ -307,13 +307,12 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _typed += d;
       if (_typed.length > 4) _typed = _typed.substring(_typed.length - 4);
     });
-    _typedTimer?.cancel();
-    _typedTimer = Timer(const Duration(milliseconds: 2500), _clearTyped);
+    // #2733: geen reset-timer meer — wie tussen twee cijfers even nodig heeft,
+    // landde anders stil op de verkeerde dia. De invoer blijft staan tot
+    // Enter, Backspace of Escape hem wist.
   }
 
   void _clearTyped() {
-    _typedTimer?.cancel();
-    _typedTimer = null;
     if (_typed.isNotEmpty) _rebuild(() => _typed = '');
   }
 

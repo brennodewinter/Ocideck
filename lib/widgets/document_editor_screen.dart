@@ -757,7 +757,7 @@ Future<DocumentExportOutcome> _writeDocumentExport(
     // ongemoeid liggen.
     pdfLabels: documentPdfLabels(l10n),
     pdfFallbackFonts: format == DocumentExportFormat.pdf
-        ? await loadPdfFallbackFonts()
+        ? await loadPdfFallbackFonts(userFontPath: settings.documentPdfFontPath)
         : const [],
     renderMermaid: renderMermaidForPdf,
     renderMath: renderMathForPdf,

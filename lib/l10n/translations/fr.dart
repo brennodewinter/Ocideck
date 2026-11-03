@@ -14,8 +14,6 @@ const _stringsFr = {
   'more': 'Plus',
   'export': 'Exporter',
   'exportReady': 'Exporter (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Enregistrez la présentation avant d’exporter',
-  'exportNeedsClean': 'Enregistrez vos modifications avant d’exporter',
   'saved': 'Enregistré',
   'unsaved': 'Non enregistré',
   'unsavedChanges': 'Enregistrer les modifications (Ctrl/Cmd+S)',
@@ -563,8 +561,6 @@ const _dutchSourceFr = {
   'Eerste · laatste slide': 'Premiere · derniere diapositive',
   'Slide-overzicht': 'Vue d’ensemble',
   'Slide-overzicht (pijltjes + Enter)': 'Vue d’ensemble (fleches + Entree)',
-  'Presenter view (notities, klok)': 'Vue presentateur (notes, horloge)',
-  'Scherm wisselen (meerdere schermen)': 'Changer d’ecran (plusieurs ecrans)',
   'Zwart · wit scherm': 'Ecran noir · blanc',
   'Automatische modus aan/uit': 'Mode automatique active/desactive',
   'Herhalen (loop) aan/uit': 'Boucle activee/desactivee',
@@ -576,10 +572,6 @@ const _dutchSourceFr = {
   'Verstreken': 'Écoulé',
   'Klok': 'Horloge',
   'Wissel scherm (S)': 'Changer d’ecran (S)',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · H legende · G vue d’ensemble · B/W noir/blanc · R temps · Esc arret',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · H legende · S ecran · G vue d’ensemble · B/W noir/blanc · R temps · Esc arret',
   'Akkoord gaan': 'Accepter',
   'Licentie (EUPL 1.2)': 'Licence (EUPL 1.2)',
   'Toestemming intrekken': 'Révoquer le consentement',
@@ -652,6 +644,59 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Extra lettertype voor ontbrekende tekens':
+      'Police supplémentaire pour les caractères manquants',
+  'Geen lettertypebestand gekozen': 'Aucun fichier de police choisi',
+  'Kies bestand…': 'Choisir un fichier…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Seul un sous-ensemble de ce fichier est incorporé dans le PDF. La licence du fichier doit autoriser l\'incorporation ; OciDeck ne la vérifie pas et ne télécharge rien.',
+  'Bijzonder persoonsgegeven': 'Donnée personnelle sensible',
+  'Dia {n} van {m}': 'Diapositive {n} sur {m}',
+  'ander scherm: niet bereikbaar': 'autre écran : inaccessible',
+  'het andere scherm': 'l\'autre écran',
+  'Dit mag blijven': 'Ceci peut rester',
+  'Waarschuw de ontvanger': 'Avertir le destinataire',
+  'Laat dit weg bij tonen en exporteren':
+      'L\'omettre à l\'affichage et à l\'export',
+  'Ga naar de eerste dia zonder keuze':
+      'Aller à la première diapositive sans choix',
+  'Onderteken git-commits': 'Signer les commits git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Signer les commits avec la clé que git utilise déjà sur cette machine.',
+  'getekend en gecontroleerd': 'signé et vérifié',
+  'getekend (hier niet te controleren)': 'signé (non vérifiable ici)',
+  'ongetekend': 'non signé',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} dans ce {veld}. Ouvrez la notification, le passage est alors sélectionné dans le texte.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Ouvrez la notification, le passage est alors sélectionné dans le texte.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Leur niveau est plus strict que celui de la présentation. Augmentez le niveau de la présentation ou baissez celui de la diapositive.',
+  'Niveau van de presentatie': 'Niveau de la présentation',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Augmentez le niveau de la présentation ou baissez celui de la diapositive.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Le public voit cette diapositive sur l\'autre écran.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'L\'autre écran ne participe pas. Les diapositives sont sur cet écran.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Les écrans n\'ont pas été échangés. Les notes sont toujours ici.',
+  'Notities aan of uit': 'Notes activées ou désactivées',
+  'Zet de notities op het andere scherm': 'Mettre les notes sur l\'autre écran',
+  'Terug naar de dia\'s': 'Retour aux diapositives',
+  'Verder typen': 'Continuer à taper',
+  'Terug zonder deze wijzigingen': 'Retour sans ces modifications',
+  'Toepassen en terug': 'Appliquer et retourner',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Vos modifications n\'ont pas encore été appliquées.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Modifications non appliquées : appliquez, jetez ou restez ici.',
+  'Deze tabel bewerken': 'Modifier ce tableau',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} ne sera plus signalé dans aucune présentation. Vous pouvez le réactiver dans Sécurité.',
+  'Niet melden': 'Ne pas signaler',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Enregistrez d\'abord. Vous pourrez ensuite exporter.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Un fichier HTML avec du vrai texte, des titres et des textes alternatifs, qui s\'ouvre dans tout navigateur sans internet — avec tableaux, mathématiques, mermaid et graphiques.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1396,12 +1441,9 @@ const _dutchSourceAddFr = {
   'Bewaren als kopie': 'Enregistrer comme copie',
   'Bewaren in document': 'Enregistrer dans le document',
   'beamer': 'vidéoprojecteur',
-  'beamer: niet bereikbaar': 'vidéoprojecteur : inaccessible',
   'Bewerken sluiten (Esc)': 'Fermer l\'édition (Échap)',
   'Presenteer document…': 'Présenter le document…',
   'Presenteer document': 'Présenter le document',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Cochez les tableaux qui peuvent être modifiés en direct pendant la présentation. Tout le reste reste en lecture seule.',
   'Extra ruimte': 'Espace supplémentaire',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Cette note est plus longue que la page — faites défiler pour la suite',
@@ -4269,8 +4311,6 @@ const _dutchSourceAddFr = {
   'Markdown-broneditor': 'Éditeur de sources Markdown',
   'Niet toegepast': 'Non appliqué',
   'Niet-toegepaste wijzigingen': 'Modifications non appliquées',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Appliquez ou rejetez les modifications actuelles avant de changer de portée.',
   'Problemen gevonden': 'Problèmes trouvés',
   'Schrijftips': 'Conseils d\'écriture',
   'Snel herstellen': 'Récupérez rapidement',
@@ -5536,8 +5576,6 @@ const _dutchSourceAddFr = {
       'Retenue : classification plus stricte que celle de la présentation',
   '1 slide achtergehouden door haar TLP': '1 diapositive retenue par son TLP',
   'slides achtergehouden door hun TLP': 'diapositives retenues par leur TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Ces diapositives sont exclues lors de la présentation, de l\'exportation et du paquet. Augmentez le niveau TLP de la présentation dans Infos de présentation pour les inclure.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Toutes les diapositives sont retenues par leur classification TLP — rien à afficher.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -6294,8 +6332,6 @@ const _dutchSourceAddFr = {
   'seksuele geaardheid': 'orientation sexuelle',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Cette diapositive contient aussi une donnée identifiante, ceci est donc rattachable à une personne.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Catégorie particulière de données personnelles (RGPD art. 9/10)',
   'gezondheidsgegeven': 'donnée de santé',
   'strafrechtelijk gegeven': 'donnée pénale',
   'religie of levensovertuiging': 'religion ou conviction',
@@ -6357,8 +6393,6 @@ const _dutchSourceAddFr = {
   'PERSOONSGEGEVENS': 'DONNÉES PERSONNELLES',
   'Volg de presentatie': 'Suivre la présentation',
   'Weglaten uit tonen en exporteren': 'Omettre de l\'affichage et de l\'export',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Envisage de le caviarder avec [[doubles crochets]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Sans contexte dans le texte, ce n\'est peut-être pas une donnée personnelle.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
@@ -6944,7 +6978,6 @@ const _dutchSourceAddFr = {
   'Kies een map met presentaties om te beginnen.':
       'Choisissez un dossier de présentations pour commencer.',
   'Kon dit pakket niet importeren.': 'Impossible d\'importer ce paquet.',
-  'Kon niet van scherm wisselen.': 'Impossible de changer d\'écran.',
   'Kon van deze URL geen presentatie ophalen.':
       'Impossible de récupérer une présentation depuis cette URL.',
   'Kopieer afbeelding naar klembord': 'Copier l\'image dans le presse-papiers',

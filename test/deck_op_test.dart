@@ -59,6 +59,13 @@ _slideCases = {
     value: ['<!-- _future: value -->'],
     read: (s) => s.preservedMarpLines,
   ),
+  SlideField.tableRows: (
+    value: [
+      ['h1', 'h2'],
+      ['r1', 'r2'],
+    ],
+    read: (s) => s.tableRows,
+  ),
   SlideField.marpStyle: (
     value: const MarpStyle(color: '#123456'),
     read: (s) => s.marpStyle,

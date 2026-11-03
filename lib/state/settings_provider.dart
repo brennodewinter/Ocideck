@@ -280,6 +280,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       minRequiredExportTlpKey: prefs.getString('minRequiredExportTlp'),
       requireClassificationOnExport:
           prefs.getBool('requireClassificationOnExport') ?? false,
+      // #2750: commits ondertekenen met user.signingkey — standaard uit.
+      gitSignCommits: prefs.getBool('gitSignCommits') ?? false,
+      // #2753: een lettertype van de eigen machine voor tekens die de
+      // gebundelde snedes niet hebben; alleen een subset gaat in de PDF.
+      documentPdfFontPath: prefs.getString('documentPdfFontPath'),
       classificationWatermarkEnabled:
           prefs.getBool('classificationWatermarkEnabled') ?? false,
       // Standaard AAN: een privacycontrole die je eerst moet aanzetten, helpt
@@ -537,6 +542,24 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   // het regelplafond van deze klasse.
   Future<void> setRequireClassificationOnExport(bool enabled) =>
       _applyRequireClassificationOnExport(this, enabled);
+
+  Future<void> setDocumentPdfFontPath(String? path) async {
+    state = path == null
+        ? state.copyWith(clearDocumentPdfFontPath: true)
+        : state.copyWith(documentPdfFontPath: path);
+    final prefs = await SharedPreferences.getInstance();
+    if (path == null) {
+      await prefs.remove('documentPdfFontPath');
+    } else {
+      await prefs.setString('documentPdfFontPath', path);
+    }
+  }
+
+  Future<void> setGitSignCommits(bool enabled) async {
+    state = state.copyWith(gitSignCommits: enabled);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('gitSignCommits', enabled);
+  }
 
   // Documentmodus-stijl — het echte werk staat top-level in
   // parts/settings_provider_document_style.dart, zodat het niet meetelt voor

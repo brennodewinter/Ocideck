@@ -351,6 +351,13 @@ String _renderSections(
   MarpStyle deckMarpStyle = const MarpStyle(),
   List<MarpStyle> slideMarpStyles = const [],
   List<Slide> slides = const [],
+
+  /// #2748: het deckniveau voor de per-dia TLP-badge en het watermerk —
+  /// `effectiveTlp` lost de slide-override op zoals de app die toont.
+  TlpLevel deckTlp = TlpLevel.none,
+
+  /// De organisatie voor het watermerk, zoals de app hem toont.
+  String organization = '',
 }) {
   final exportY01 = MarpHtmlService._y01FromExportMarkdown(markdown);
   if (continuous) {
@@ -412,9 +419,46 @@ String _renderSections(
       ..write(_guardMarkdown(_marpChromeSource('header', localStyle.header)))
       ..write(_guardMarkdown(renderedBlocks))
       ..write(_guardMarkdown(_marpChromeSource('footer', localStyle.footer)))
-      ..write('</script></section>');
+      ..write('</script>')
+      // #2748: de classificatie- en privacymarkering uit de app én de PDF
+      // reisde niet mee met de HTML — wie naar dia 12 scrolt of één sectie
+      // printte, zag niets. Nu tekst en CSS: doorzoekbaar en één keer
+      // voorgelezen; het watermerk is decoratief (`aria-hidden`).
+      ..write(_slideMarkingHtml(slideObj, deckTlp, organization))
+      ..write('</section>');
   }
   return sections.toString();
+}
+
+/// De per-dia markering van #2748, uit dezelfde bron als de app: het
+/// effectieve TLP (`effectiveTlp`) en de privacy-shield (`PrivacyDisposition`).
+/// Alles tekst en CSS — geen afbeelding, zodat de markering leesbaar en
+/// doorzoekbaar blijft en in elke sectie meeprint.
+String _slideMarkingHtml(Slide? slide, TlpLevel deckTlp, String organization) {
+  if (slide == null) return '';
+  final tlp = effectiveTlp(deckTlp: deckTlp, slideTlp: slide.tlp);
+  final b = StringBuffer();
+  if (tlp != TlpLevel.none) {
+    final fg =
+        '#${tlp.foreground.toRadixString(16).padLeft(8, '0').substring(2)}';
+    final org = organization.trim();
+    final watermark = org.isEmpty ? tlp.label : '${tlp.label} · $org';
+    b.write(
+      '<div class="ocideck-tlp-watermark" aria-hidden="true"'
+      ' style="color:$fg">${MarpHtmlService._htmlText(watermark)}</div>',
+    );
+    b.write(
+      '<div class="ocideck-tlp-badge" style="color:$fg">'
+      '${MarpHtmlService._htmlText(tlp.label)}</div>',
+    );
+  }
+  if (slide.privacy == PrivacyDisposition.shield) {
+    b.write(
+      '<div class="ocideck-privacy-badge" role="img" '
+      'aria-label="PERSOONSGEGEVENS">PERSOONSGEGEVENS</div>',
+    );
+  }
+  return b.toString();
 }
 
 /// Neutraliseert `</script` in échte JavaScript.

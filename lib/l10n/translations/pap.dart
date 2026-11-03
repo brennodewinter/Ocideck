@@ -14,8 +14,6 @@ const _stringsPap = {
   'more': 'Mas',
   'export': 'Eksportá',
   'exportReady': 'Eksportá (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Warda e presentashon promé ku eksportá',
-  'exportNeedsClean': 'Warda bo kambionan promé ku eksportá',
   'saved': 'Wardá',
   'unsaved': 'No wardá',
   'unsavedChanges': 'Warda kambionan (Ctrl/Cmd+S)',
@@ -555,8 +553,6 @@ const _dutchSourcePap = {
   'Eerste · laatste slide': 'Promé · último slide',
   'Slide-overzicht': 'Resumen di slides',
   'Slide-overzicht (pijltjes + Enter)': 'Resumen di slides (flecha + Enter)',
-  'Presenter view (notities, klok)': 'Presenter view (notanan, oloshi)',
-  'Scherm wisselen (meerdere schermen)': 'Kambia pantalla (mas pantalla)',
   'Zwart · wit scherm': 'Pantalla pretu · blanku',
   'Automatische modus aan/uit': 'Modo outomátiko on/off',
   'Herhalen (loop) aan/uit': 'Ripití (loop) on/off',
@@ -576,11 +572,6 @@ const _dutchSourcePap = {
       'Notanan pa e destinataro durante un kurso',
   'Mijn notities aan/uit': 'Mi notanan on/off',
   'Wissel scherm (S)': 'Kambia pantalla (S)',
-  'Kon niet van scherm wisselen.': 'No por a kambia pantalla.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P públiko · H legenda · G resumen · B/W pretu/blanku · R tempu · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P públiko · H legenda · S pantalla · G resumen · B/W pretu/blanku · R tempu · Esc stop',
   'Akkoord gaan': 'Akuerdo',
   'Licentie (EUPL 1.2)': 'Lisencia (EUPL 1.2)',
   'Toestemming intrekken': 'Retirá Aprobashon',
@@ -651,6 +642,58 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Extra lettertype voor ontbrekende tekens':
+      'Tipo di letra ekstra pa karakternan falta',
+  'Geen lettertypebestand gekozen': 'Ningun archivo di fuente elegí',
+  'Kies bestand…': 'Skohe archivo…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Solamente un subset di e archivo aki ta bai den e PDF. E lisensia di e archivo mester permiti embed; OciDeck no ta kontrolá eso i no ta baha nada.',
+  'Bijzonder persoonsgegeven': 'Dato personal sensitivo',
+  'Dia {n} van {m}': 'Diapositiva {n} di {m}',
+  'ander scherm: niet bereikbaar': 'otro pantaya: no alcanzable',
+  'het andere scherm': 'e otro pantaya',
+  'Dit mag blijven': 'Eso por keda',
+  'Waarschuw de ontvanger': 'Avvertí e risibidó',
+  'Laat dit weg bij tonen en exporteren':
+      'Laga esaki afoora ora di mustra i eksporta',
+  'Ga naar de eerste dia zonder keuze':
+      'Bai na e promé diapositiva sin desishon',
+  'Onderteken git-commits': 'Firma e commitnan di git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Firma commitnan ku e klave ku git ta usa riba e makina aki.',
+  'getekend en gecontroleerd': 'firmá i kontrolá',
+  'getekend (hier niet te controleren)': 'firmá (no por kontrolá aki)',
+  'ongetekend': 'no firmá',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} den e {veld} aki. Habri e rapòrt i e parti keda selesioná den e teksto.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Habri e rapòrt i e parti keda selesioná den e teksto.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Nan nivel ta mas estricto ku e di e presentashon. Sube e nivel di e presentashon, òf baha e di e slajt.',
+  'Niveau van de presentatie': 'Nivel di e presentashon',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Sube e nivel di e presentashon, òf baha e di e slajt.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'E sala ta mirá e slajt aki riba e otro pantaya.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'E otro pantaya no ta partisipá. E slajtnan ta riba e pantaya aki.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'E pantayanan no a wissel. E notanan ta inda aki.',
+  'Notities aan of uit': 'Notanan ativá òf no',
+  'Zet de notities op het andere scherm': 'Pone e notanan riba e otro pantaya',
+  'Terug naar de dia\'s': 'Bai bèk na e slajtnan',
+  'Verder typen': 'Kontinua skirbi',
+  'Terug zonder deze wijzigingen': 'Bai bèk sin e kambionan aki',
+  'Toepassen en terug': 'Apliká i bai bèk',
+  'Je wijzigingen zijn nog niet toegepast.': 'Bo kambionan ainda no a apliká.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Kambionan no apliká: apliká, lag\'é bai òf keda aki.',
+  'Deze tabel bewerken': 'Editá e tabla aki',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} lo no wordu raportá mas den niun presentashon. Bo por bolbe aktiv\'é na Seguridat.',
+  'Niet melden': 'No raportá',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Wardá promé. Despues bo por ekspotá.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Un archivo HTML ku teksto real, kabeseranan i tekstonan alternativo, ku ta habri den kualke browser sin internet — ku tablanan, matemátika, mermaid i gráfikonan.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1389,12 +1432,9 @@ const _dutchSourceAddPap = {
   'Bewaren als kopie': 'Gardá komo kopia',
   'Bewaren in document': 'Gardá den e dokumento',
   'beamer': 'proyektor',
-  'beamer: niet bereikbaar': 'proyektor: no alkansebel',
   'Bewerken sluiten (Esc)': 'Sera edishon (Esc)',
   'Presenteer document…': 'Presentá e dokumento…',
   'Presenteer document': 'Presentá e dokumento',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Marká kua tablanan por wòrdu editá na bibu durante e presentashon. Tur otro kontenido keda di solo lesamentu.',
   'Extra ruimte': 'Espasio ekstra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'E nota aki ta mas largu ku e página — skrol pa e resto',
@@ -4208,8 +4248,6 @@ const _dutchSourceAddPap = {
   'Markdown-broneditor': 'Editor di fuente Markdown',
   'Niet toegepast': 'No apliká',
   'Niet-toegepaste wijzigingen': 'Kambionan no apliká',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Apliká òf deskartá e kambionan aktual promé ku bo kambia e alkanse.',
   'Problemen gevonden': 'Problemanan hañá',
   'Schrijftips': 'Konsehonan pa skirbi',
   'Snel herstellen': 'Drecha lihé',
@@ -5468,8 +5506,6 @@ const _dutchSourceAddPap = {
       'Retené: klasifiká mas strikto ku e presentashon',
   '1 slide achtergehouden door haar TLP': '1 lámina retené pa su TLP',
   'slides achtergehouden door hun TLP': 'lámina retené pa nan TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'E slidenan aki no ta bai huntu ora di presentá, eksportá ni den e paket. Halsa e nivel TLP di e presentashon na Info di presentashon pa hiba nan huntu.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Tur lámina ta retené pa nan klasifikashon TLP — no tin nada pa mustra.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -6217,8 +6253,6 @@ const _dutchSourceAddPap = {
   'seksuele geaardheid': 'orientashon seksual',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Riba e slide aki tin tambe un dato identifikatorio, pues esaki ta trasabel na un persona.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Kategoria spesial di dato personal (GDPR art. 9/10)',
   'gezondheidsgegeven': 'dato di salú',
   'strafrechtelijk gegeven': 'dato penal',
   'religie of levensovertuiging': 'religion òf konvikshon',
@@ -6280,8 +6314,6 @@ const _dutchSourceAddPap = {
   'PERSOONSGEGEVENS': 'DATOS PERSONAL',
   'Volg de presentatie': 'Sigui e presentashon',
   'Weglaten uit tonen en exporteren': 'Laga afó di mustra i eksportá',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Konsiderá redaktá esaki ku [[dòbel blokhaki]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Sin konteksto den e teksto, kisas esaki no ta un dato personal.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

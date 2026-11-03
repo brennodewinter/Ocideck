@@ -1,3 +1,4 @@
+import 'dart:io' show File;
 // Wat de PDF-export van een document nodig heeft uit de schil: de gebundelde
 // lettersnede voor tekens buiten Latin-1, de vertaalde teksten, en de zin die de
 // gebruiker te zien krijgt als er iets níet gezet kon worden.
@@ -6,6 +7,7 @@
 // Flutter-vrij zijn (zie `lib/services/pdf/`): het laden van een asset en het
 // opzoeken van een vertaling zijn juist wél schilwerk, en horen dus hier.
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 
 import '../../l10n/app_localizations.dart';
@@ -47,7 +49,13 @@ import '../../services/pdf/document_pdf_export.dart';
 /// Lukt het laden van een font niet, dan gaat de export gewoon door met wat er
 /// wél is: [DocumentPdfResult] meldt dan welke tekens ontbreken, en de schil
 /// zegt dat tegen de gebruiker.
-Future<List<ByteData>> loadPdfFallbackFonts() async {
+Future<List<ByteData>> loadPdfFallbackFonts({
+  /// #2753: een lettertypebestand dat de auteur zelf op de eigen machine
+  /// aanwees, voor tekens die de gebundelde snedes niet hebben. Alleen een
+  /// subset gaat mee in de PDF; de licentie van het bestand moet insluiten
+  /// toestaan — dat staat in het exportdialoog, OciDeck controleert het niet.
+  String? userFontPath,
+}) async {
   const paths = [
     'assets/fonts/Roboto-Variable.ttf',
     'assets/fonts/Inter-Variable.ttf',
@@ -61,6 +69,14 @@ Future<List<ByteData>> loadPdfFallbackFonts() async {
       // Eén font dat niet laadt mag de export niet kosten; de melding over
       // ontbrekende tekens vertelt de gebruiker vanzelf wat er dan mist.
       continue;
+    }
+  }
+  if (userFontPath != null && !kIsWeb) {
+    try {
+      fonts.add(ByteData.sublistView(await File(userFontPath).readAsBytes()));
+    } on Exception {
+      // Idem als een gebundeld font dat niet laadt: de export gaat door
+      // met wat er wél is en de ontbrekende-tekensmelding vertelt de rest.
     }
   }
   return fonts;

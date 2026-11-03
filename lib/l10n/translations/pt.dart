@@ -15,8 +15,6 @@ const _stringsPt = {
   'more': 'Mais',
   'export': 'Exportar',
   'exportReady': 'Exportar (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Guarde a apresentação antes de exportar',
-  'exportNeedsClean': 'Guarde as alterações antes de exportar',
   'saved': 'Guardado',
   'unsaved': 'Não guardado',
   'unsavedChanges': 'Guardar alterações (Ctrl/Cmd+S)',
@@ -700,8 +698,6 @@ const _dutchSourcePt = {
   'Slide-overzicht': 'Vista geral dos slides',
   'Slide-overzicht (pijltjes + Enter)':
       'Vista geral dos slides (setas + Enter)',
-  'Presenter view (notities, klok)': 'Vista do apresentador (notas, relógio)',
-  'Scherm wisselen (meerdere schermen)': 'Mudar de ecrã (vários ecrãs)',
   'Zwart · wit scherm': 'Ecrã preto · branco',
   'Automatische modus aan/uit': 'Modo automático ligado/desligado',
   'Herhalen (loop) aan/uit': 'Repetir (ciclo) ligado/desligado',
@@ -724,11 +720,6 @@ const _dutchSourcePt = {
       'Notas para o destinatário durante um curso',
   'Mijn notities aan/uit': 'Ativar/desativar as minhas notas',
   'Wissel scherm (S)': 'Mudar de ecrã (S)',
-  'Kon niet van scherm wisselen.': 'Não foi possível mudar de ecrã.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P público · H legenda · G vista geral · B/W preto/branco · R tempo · Esc parar',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P público · H legenda · S ecrã · G vista geral · B/W preto/branco · R tempo · Esc parar',
   'pijltjes + Enter of klik om te springen':
       'setas + Enter ou clique para saltar',
   'Afsluiten (Escape)': 'Sair (Escape)',
@@ -1633,6 +1624,58 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Tipo de letra extra para caracteres em falta',
+  'Geen lettertypebestand gekozen':
+      'Nenhum ficheiro de tipo de letra escolhido',
+  'Kies bestand…': 'Escolher ficheiro…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Apenas um subconjunto deste ficheiro é incorporado no PDF. A licença do ficheiro tem de permitir a incorporação; o OciDeck não a verifica e não transfere nada.',
+  'Bijzonder persoonsgegeven': 'Dados pessoais de categoria especial',
+  'Dia {n} van {m}': 'Slide {n} de {m}',
+  'ander scherm: niet bereikbaar': 'outro ecrã: não acessível',
+  'het andere scherm': 'o outro ecrã',
+  'Dit mag blijven': 'Isto pode ficar',
+  'Waarschuw de ontvanger': 'Avisar o destinatário',
+  'Laat dit weg bij tonen en exporteren': 'Omitir isto ao mostrar e exportar',
+  'Ga naar de eerste dia zonder keuze': 'Ir para o primeiro slide sem decisão',
+  'Onderteken git-commits': 'Assinar commits do git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Assine os commits com a chave que o git já usa nesta máquina.',
+  'getekend en gecontroleerd': 'assinado e verificado',
+  'getekend (hier niet te controleren)': 'assinado (não verificável aqui)',
+  'ongetekend': 'não assinado',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} neste {veld}. Abra o aviso e o trecho fica selecionado no texto.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Abra o aviso e o trecho fica selecionado no texto.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'O seu nível é mais estrito do que o da apresentação. Suba o nível da apresentação ou baixe o nível do diapositivo.',
+  'Niveau van de presentatie': 'Nível da apresentação',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Suba o nível da apresentação ou baixe o nível do diapositivo.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'A plateia vê este diapositivo no outro ecrã.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'O outro ecrã não participa. Os diapositivos estão neste ecrã.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Os ecrãs não foram trocados. As notas ainda estão aqui.',
+  'Notities aan of uit': 'Notas ligadas ou desligadas',
+  'Zet de notities op het andere scherm': 'Colocar as notas no outro ecrã',
+  'Terug naar de dia\'s': 'Voltar aos diapositivos',
+  'Verder typen': 'Continuar a escrever',
+  'Terug zonder deze wijzigingen': 'Voltar sem estas alterações',
+  'Toepassen en terug': 'Aplicar e voltar',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'As suas alterações ainda não foram aplicadas.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Alterações não aplicadas: aplique, descarte ou fique aqui.',
+  'Deze tabel bewerken': 'Editar esta tabela',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} deixará de ser reportado em qualquer apresentação. Pode reativá-lo em Segurança.',
+  'Niet melden': 'Não reportar',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Guarde primeiro. Depois pode exportar.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Um ficheiro HTML com texto real, cabeçalhos e textos alternativos, que abre em qualquer navegador sem internet — com tabelas, matemática, mermaid e gráficos.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -2375,12 +2418,9 @@ const _dutchSourceAddPt = <String, String>{
   'Bewaren als kopie': 'Guardar como cópia',
   'Bewaren in document': 'Guardar no documento',
   'beamer': 'projetor',
-  'beamer: niet bereikbaar': 'projetor: inacessível',
   'Bewerken sluiten (Esc)': 'Fechar edição (Esc)',
   'Presenteer document…': 'Apresentar documento…',
   'Presenteer document': 'Apresentar documento',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Selecione que tabelas podem ser editadas ao vivo durante a apresentação. Todo o resto permanece apenas de leitura.',
   'Extra ruimte': 'Espaço extra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Esta nota é mais longa que a página — deslize para o resto',
@@ -5213,8 +5253,6 @@ const _dutchSourceAddPt = <String, String>{
   'Markdown-broneditor': 'Editor de fonte Markdown',
   'Niet toegepast': 'Não aplicado',
   'Niet-toegepaste wijzigingen': 'Alterações não aplicadas',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Aplique ou rejeite as alterações atuais antes de mudar de escopo.',
   'Problemen gevonden': 'Problemas encontrados',
   'Schrijftips': 'Dicas de escrita',
   'Snel herstellen': 'Recupere rapidamente',
@@ -6464,8 +6502,6 @@ const _dutchSourceAddPt = <String, String>{
       'Retido: classificado de forma mais estrita do que a apresentação',
   '1 slide achtergehouden door haar TLP': '1 slide retido pelo seu TLP',
   'slides achtergehouden door hun TLP': 'slides retidos pelo seu TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Estes slides não seguem ao apresentar, ao exportar nem no pacote. Aumente o nível TLP da apresentação em Informação da apresentação para os incluir.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Todos os slides estão retidos pela sua classificação TLP — nada para mostrar.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7216,8 +7252,6 @@ const _dutchSourceAddPt = <String, String>{
   'seksuele geaardheid': 'orientação sexual',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Este diapositivo contém também um dado identificativo, pelo que isto é atribuível a uma pessoa.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Categoria especial de dados pessoais (RGPD art. 9.º/10.º)',
   'gezondheidsgegeven': 'dado de saúde',
   'strafrechtelijk gegeven': 'dado penal',
   'religie of levensovertuiging': 'religião ou convicção',
@@ -7279,8 +7313,6 @@ const _dutchSourceAddPt = <String, String>{
   'PERSOONSGEGEVENS': 'DADOS PESSOAIS',
   'Volg de presentatie': 'Seguir a apresentação',
   'Weglaten uit tonen en exporteren': 'Omitir da apresentação e exportação',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Considera ocultá-lo com [[parênteses retos duplos]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Sem contexto no texto, isto pode nem sequer ser um dado pessoal.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

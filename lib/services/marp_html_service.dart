@@ -19,6 +19,7 @@ import '../models/discoveries_spec.dart';
 import '../models/findings_summary_spec.dart';
 import '../models/question.dart';
 import '../models/deck.dart';
+import '../models/privacy_disposition.dart';
 import '../models/improvement_y01.dart';
 import '../models/marp_style.dart';
 import '../models/menu.dart';
@@ -234,6 +235,8 @@ class MarpHtmlService {
           parsedDeck?.slides.map((slide) => slide.marpStyle).toList() ??
           const [],
       slides: parsedDeck?.slides ?? const [],
+      deckTlp: docMeta.tlp,
+      organization: docMeta.organization,
     );
 
     // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde
