@@ -1,10 +1,12 @@
 """Offline fault tests for one release operation; no dispatch reaches a forge."""
 import json
+import io
 from pathlib import Path
 import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
+import zipfile
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tool'))
@@ -18,11 +20,25 @@ class FakeForge:
         self.jobs = [{'name': 'build', 'status': 'success', 'started_at': 'now', 'completed_at': 'later'}]
 
     def get(self, path):
+        if path == '/git/refs/heads/main':
+            return {'ref': 'refs/heads/main', 'object': {'sha': 'b' * 40}}
         if path.startswith('/actions/runs?'):
             return {'workflow_runs': [] if self.run is None else [{'id': self.run['id']}]}
         if path.endswith('/jobs'):
             return self.jobs
+        if path.endswith('/artifacts'):
+            return [{'id': 7, 'name': 'windows-operation-ab12cd34', 'expired': False}]
         return self.run
+
+    def artifact(self, _artifact_id):
+        state = dict(schema=1, operation_id='ab12cd34', tag='v0.7.7', sha='a' * 40,
+                     ref='codex/release-candidate-v0.7.7-' + 'a' * 40,
+                     dispatch_intents=[], closed=True, forge_run_id=42,
+                     controller_sha='b' * 40, selected_runs={})
+        output = io.BytesIO()
+        with zipfile.ZipFile(output, 'w') as archive:
+            archive.writestr('windows-operation.json', json.dumps(state))
+        return output.getvalue()
 
     def post(self, path, payload):
         self.posts.append((path, payload))
@@ -67,6 +83,17 @@ class ControllerTest(unittest.TestCase):
             control.start(self.args, api)
         self.assertEqual(1, len(api.posts))
 
+    def test_reservation_serializes_same_operation_before_file_exists(self):
+        original = control.release_channel.immutable_write
+        def overlap(path, content):
+            with self.assertRaisesRegex(ValueError, 'locked'):
+                control.reserve(self.args)
+            return original(path, content)
+        with patch.object(control.release_channel, 'immutable_write', side_effect=overlap):
+            control.reserve(self.args)
+        with self.assertRaisesRegex(ValueError, 'already reserved'):
+            control.reserve(self.args)
+
     def test_lost_post_and_empty_listing_never_redispatch(self):
         api = FakeForge()
         def lost(*_):
@@ -78,6 +105,23 @@ class ControllerTest(unittest.TestCase):
             control.hervat(self.args, api)
         with self.assertRaisesRegex(ValueError, 'unknown'):
             control.stop(self.args, api)
+
+    def test_main_moved_before_dispatch_keeps_reservation_without_post(self):
+        api = FakeForge()
+        original = api.get
+        checks = 0
+        def moved(path):
+            nonlocal checks
+            if path == '/git/refs/heads/main':
+                checks += 1
+                if checks == 2:
+                    return {'ref': 'refs/heads/main', 'object': {'sha': 'c' * 40}}
+            return original(path)
+        api.get = moved
+        with self.assertRaisesRegex(ValueError, 'main moved'):
+            control.start(self.args, api)
+        self.assertEqual([], api.posts)
+        self.assertEqual(self.wanted, control.read_operation(self.args))
 
     def test_exact_reconciliation_and_history(self):
         api = FakeForge(self.run_info('success'))
@@ -107,6 +151,14 @@ class ControllerTest(unittest.TestCase):
         proof = next(iter(history[-1]['evidence']))
         self.assertEqual(result['runs'][0], json.loads(Path(proof).read_text()))
 
+    def test_skipped_other_channels_are_not_first_errors(self):
+        api = FakeForge(self.run_info('success'))
+        api.jobs = [{'name': 'unused consumer', 'status': 'skipped'},
+                    {'name': 'evidence', 'status': 'success'}]
+        control.reserve(self.args)
+        result = control.status(self.args, api)
+        self.assertIsNone(result['runs'][0]['first_error'])
+
     def test_conflicting_id_fails_closed_and_does_not_cancel(self):
         api = FakeForge(self.run_info('running', source_sha='c' * 40))
         control.reserve(self.args)
@@ -123,6 +175,18 @@ class ControllerTest(unittest.TestCase):
         self.assertEqual('cancelled', control.release_journal.read(
             self.args.state_dir / self.args.tag / 'web.json')['events'][-1]['state'])
 
+    def test_post_race_wrong_controller_can_only_be_stopped_by_exact_nonce(self):
+        run = self.run_info()
+        run['commit_sha'] = 'c' * 40
+        api = FakeForge(run)
+        control.reserve(self.args)
+        with self.assertRaisesRegex(ValueError, 'different run identity'):
+            control.status(self.args, api)
+        result = control.stop(self.args, api)
+        self.assertEqual('cancelled', result['runs'][0]['status'])
+        self.assertEqual('c' * 40, result['runs'][0]['controller_sha'])
+        self.assertEqual(['/actions/runs/42/cancel'], [path for path, _ in api.posts])
+
     def test_status_is_read_only_when_unreserved(self):
         with self.assertRaisesRegex(ValueError, 'no saved operation'):
             control.status(self.args, FakeForge())
@@ -138,7 +202,7 @@ class ControllerTest(unittest.TestCase):
         self.assertEqual('found', result['dispatch'])
         self.assertEqual('unverified', result['publication'])
 
-    def test_windows_status_does_not_trust_local_unproven_state(self):
+    def test_windows_status_uses_exact_remote_artifact(self):
         self.args.channel = 'windows'
         self.wanted = control.identity(self.args)
         control.reserve(self.args)
@@ -148,7 +212,7 @@ class ControllerTest(unittest.TestCase):
                 stdout=json.dumps({'terminal': True, 'unknown': False, 'runs': []}), returncode=0)) as called:
             result = control.status(self.args, api)
         command = called.call_args.args[0]
-        self.assertNotIn('--state', command)
+        self.assertIn('--state', command)
         self.assertEqual(command[command.index('--forge-run-id') + 1], '42')
         self.assertEqual(command[command.index('--controller-sha') + 1], self.args.controller_sha)
         self.assertEqual([], result['github']['runs'])
@@ -161,9 +225,33 @@ class ControllerTest(unittest.TestCase):
         api = FakeForge(self.run_info('success'))
         with patch.object(control, 'status', return_value={
                 'runs': [{'id': 42, 'status': 'success'}],
-                'github': {'terminal': True, 'unknown': False, 'runs': []}}):
+                'github': {'terminal': True, 'unknown': False, 'runs': [],
+                           'selected_verified': False, 'selected_runs': {}}}):
             with self.assertRaisesRegex(ValueError, 'not proven terminal green'):
                 control.publish(self.args, api)
+
+    def test_windows_artifact_provenance_and_zip_are_strict(self):
+        api = FakeForge(self.run_info('success'))
+        content = control.windows_state(api, self.wanted, 42)
+        self.assertEqual(42, json.loads(content)['forge_run_id'])
+        with patch.object(api, 'artifact', return_value=b'not a ZIP'):
+            with self.assertRaises(zipfile.BadZipFile):
+                control.windows_state(api, self.wanted, 42)
+        original = api.artifact
+        with patch.object(api, 'get', return_value=[{'id': 7, 'name': 'windows-operation-other', 'expired': False}]):
+            with self.assertRaisesRegex(ValueError, 'unavailable'):
+                control.windows_state(api, self.wanted, 42)
+
+    def test_windows_stop_before_gh_dispatch_uses_closed_remote_journal(self):
+        self.args.channel = 'windows'
+        self.wanted = control.identity(self.args)
+        control.reserve(self.args)
+        api = FakeForge(self.run_info())
+        with patch.object(control.subprocess, 'run', return_value=SimpleNamespace(returncode=0)) as called:
+            result = control.stop(self.args, api)
+        command = called.call_args.args[0]
+        self.assertIn('--state', command)
+        self.assertEqual('cancelled', result['runs'][0]['status'])
 
 
 if __name__ == '__main__':

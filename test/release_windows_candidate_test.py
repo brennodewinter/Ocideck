@@ -206,7 +206,7 @@ class WindowsCandidateTest(unittest.TestCase):
                 self.api.runs['release.yml'][0]['conclusion'] = 'cancelled'
             return result
         state = Path(self.temp.name) / 'closed.json'
-        state.write_text(json.dumps(dict(schema=1, operation_id='op-test', tag=TAG, sha=SHA, ref=REF, dispatch_intents=['release.yml'], closed=True, forge_run_id=123, controller_sha=SHA)))
+        state.write_text(json.dumps(dict(schema=1, operation_id='op-test', tag=TAG, sha=SHA, ref=REF, dispatch_intents=['release.yml'], closed=True, forge_run_id=123, controller_sha=SHA, selected_runs={})))
         with patch.object(self.api, 'data', side_effect=cancel):
             result = windows.cancel_owned(self.api, SHA, REF, 'op-test', wait=True, state=state, forge_run_id=123, controller_sha=SHA)
         self.assertTrue(result['terminal'])
@@ -236,7 +236,7 @@ class WindowsCandidateTest(unittest.TestCase):
         self.api.new_run('release.yml', 'op-test')
         self.assertFalse(windows.cancel_owned(self.api, SHA, REF, 'op-test')['terminal'])
         state = Path(self.temp.name) / 'closed.json'
-        saved = dict(schema=1, operation_id='op-test', tag=TAG, sha=SHA, ref=REF, dispatch_intents=[], closed=False, forge_run_id=123, controller_sha=SHA)
+        saved = dict(schema=1, operation_id='op-test', tag=TAG, sha=SHA, ref=REF, dispatch_intents=[], closed=False, forge_run_id=123, controller_sha=SHA, selected_runs={})
         state.write_text(json.dumps(saved))
         self.assertTrue(windows.owned_status(self.api, SHA, REF, 'op-test', state, 123, SHA)['unknown'])
         saved['closed'] = True
@@ -246,6 +246,19 @@ class WindowsCandidateTest(unittest.TestCase):
         state.write_text(json.dumps(saved))
         with self.assertRaisesRegex(ValueError, 'identity differs'):
             windows.owned_status(self.api, SHA, REF, 'op-test', state, 123, SHA)
+
+    def test_closed_journal_proves_reused_green_runs_without_owned_dispatch(self):
+        for workflow in windows.WORKFLOWS:
+            self.api.new_run(workflow)
+        state = Path(self.temp.name) / 'closed.json'
+        state.write_text(json.dumps(dict(schema=1, operation_id='op-test', tag=TAG,
+            sha=SHA, ref=REF, dispatch_intents=[], closed=True, forge_run_id=123,
+            controller_sha=SHA, selected_runs={'release.yml': 20, 'windows-test-check.yml': 10})))
+        result = windows.owned_status(self.api, SHA, REF, 'op-test', state, 123, SHA)
+        self.assertTrue(result['terminal'])
+        self.assertFalse(result['unknown'])
+        self.assertTrue(result['selected_verified'])
+        self.assertEqual([], result['runs'])
 
     def test_transport_keeps_credentials_and_signed_urls_out_of_arguments(self):
         secret = 'token-private'

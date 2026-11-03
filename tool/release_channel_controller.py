@@ -2,13 +2,17 @@
 """Operate one independent release channel; uncertain dispatches are never retried."""
 import argparse
 from datetime import datetime, timezone
+import io
 import json
 import os
 from pathlib import Path
 import re
+import stat
 import subprocess
 import sys
+import tempfile
 import time
+import zipfile
 from urllib.error import HTTPError
 from urllib.parse import quote, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
@@ -72,6 +76,43 @@ class Forgejo:
     def post(self, path, payload):
         return self.request(path, payload)
 
+    def artifact(self, artifact_id):
+        if type(artifact_id) is not int or artifact_id <= 0:
+            raise ValueError('invalid Forgejo artifact ID')
+        request = Request(self.base + f'/actions/artifacts/{artifact_id}/zip',
+                          headers={'Authorization': 'token ' + self._token})
+        with self._opener.open(request, timeout=30) as response:
+            if response.status != 200:
+                raise ValueError('Windows journal artifact download failed')
+            data = response.read(131073)
+        if len(data) > 131072:
+            raise ValueError('Windows journal archive too large')
+        return data
+
+
+def windows_state(api, wanted, run_id):
+    artifacts = api.get('/actions/runs/' + str(run_id) + '/artifacts')
+    name = 'windows-operation-' + wanted['operation_id']
+    matches = [value for value in artifacts if isinstance(value, dict)
+               and value.get('name') == name and value.get('expired') is False]
+    if len(matches) != 1:
+        raise ValueError('exact Windows operation artifact unavailable')
+    archive = api.artifact(matches[0].get('id'))
+    with zipfile.ZipFile(io.BytesIO(archive)) as zipped:
+        entries = zipped.infolist()
+        if (len(entries) != 1 or entries[0].filename != 'windows-operation.json'
+                or entries[0].is_dir() or entries[0].file_size > 65536
+                or stat.S_IFMT(entries[0].external_attr >> 16) not in (0, stat.S_IFREG)):
+            raise ValueError('unsafe Windows operation artifact')
+        content = zipped.read(entries[0])
+    state = json.loads(content, object_pairs_hook=release_channel.no_duplicates)
+    if (not isinstance(state, dict) or state.get('operation_id') != wanted['operation_id']
+            or state.get('tag') != wanted['tag'] or state.get('sha') != wanted['source']
+            or state.get('ref') != wanted['frozen_ref'] or state.get('forge_run_id') != run_id
+            or state.get('controller_sha') != wanted['controller'] or state.get('closed') is not True):
+        raise ValueError('Windows operation provenance differs')
+    return content
+
 
 def identity(args):
     release_channel.identity(args.tag, args.sha, args.channel)
@@ -100,15 +141,16 @@ def read_operation(args):
 def reserve(args):
     path = operation_path(args)
     path.parent.mkdir(parents=True, exist_ok=True)
-    if path.exists() or path.is_symlink():
-        raise ValueError('operation already reserved; use hervat, never start again')
-    data = identity(args)
-    release_channel.immutable_write(path, release_channel.encoded(data))
-    journal = path.parent / (args.channel + '.json')
-    from types import SimpleNamespace
-    release_journal.initialize(SimpleNamespace(journal=journal, tag=args.tag, sha=args.sha,
-        channel=args.channel, workflow=Path(__file__).resolve().parent.parent / '.forgejo/workflows/release-channel.yml'))
-    release_journal.record(SimpleNamespace(journal=journal, phase='dispatch', state='started', evidence=[path]))
+    with release_journal.locked(path):
+        if path.exists() or path.is_symlink():
+            raise ValueError('operation already reserved; use hervat, never start again')
+        data = identity(args)
+        release_channel.immutable_write(path, release_channel.encoded(data))
+        journal = path.parent / (args.channel + '.json')
+        from types import SimpleNamespace
+        release_journal.initialize(SimpleNamespace(journal=journal, tag=args.tag, sha=args.sha,
+            channel=args.channel, workflow=Path(__file__).resolve().parent.parent / '.forgejo/workflows/release-channel.yml'))
+        release_journal.record(SimpleNamespace(journal=journal, phase='dispatch', state='started', evidence=[path]))
     return data
 
 
@@ -133,11 +175,11 @@ def run_matches(run, wanted):
             and inputs.get('channel') == wanted['channel'])
 
 
-def runs(api, wanted):
+def runs(api, wanted, allow_controller_drift=False):
     found = []
     seen = set()
     for page in range(1, 51):
-        response = api.get(f'/actions/runs?limit=100&page={page}&workflow_id={WORKFLOW}&head_sha={wanted["controller"]}')
+        response = api.get(f'/actions/runs?limit=100&page={page}&workflow_id={WORKFLOW}')
         values = response.get('workflow_runs') if isinstance(response, dict) else None
         if not isinstance(values, list) or len(values) > 100:
             raise ValueError('invalid Forgejo run listing')
@@ -155,7 +197,7 @@ def runs(api, wanted):
                 raise ValueError('operation ID reused with conflicting release identity')
             if run_matches(detail, wanted):
                 if (detail.get('workflow_id') not in (WORKFLOW, '.forgejo/workflows/' + WORKFLOW)
-                        or detail.get('commit_sha') != wanted['controller']
+                        or (not allow_controller_drift and detail.get('commit_sha') != wanted['controller'])
                         or detail.get('prettyref') not in ('main', 'refs/heads/main')
                         or detail.get('trigger_event') != 'workflow_dispatch'):
                     raise ValueError('operation ID belongs to a different run identity')
@@ -179,7 +221,7 @@ def snapshot(api, wanted):
         work = jobs(api, run)
         first_error = next(({'job': job.get('name'), 'status': job.get('status'),
                              'started_at': job.get('started_at'), 'completed_at': job.get('completed_at')}
-                            for job in work if job.get('status') in TERMINAL - {'success'}), None)
+                            for job in work if job.get('status') in {'failure', 'error', 'cancelled'}), None)
         entries.append({'id': run['id'], 'status': run.get('status'),
                         'created_at': run.get('created_at'), 'updated_at': run.get('updated_at'),
                         'jobs': work, 'first_error': first_error})
@@ -189,11 +231,19 @@ def snapshot(api, wanted):
 
 
 def start(args, api):
+    main = api.get('/git/refs/heads/main')
+    if (not isinstance(main, dict) or main.get('ref') != 'refs/heads/main'
+            or main.get('object', {}).get('sha') != args.controller_sha):
+        raise ValueError('main differs from requested controller SHA; dispatch not attempted')
     # The durable file and journal are fsynced before the one external POST.
     wanted = reserve(args)
     print(json.dumps({'operation_id': args.operation_id, 'state': 'reserved'}, sort_keys=True), flush=True)
     if runs(api, wanted):
         raise ValueError('operation already reached Forgejo; use hervat')
+    main = api.get('/git/refs/heads/main')
+    if (not isinstance(main, dict) or main.get('ref') != 'refs/heads/main'
+            or main.get('object', {}).get('sha') != args.controller_sha):
+        raise ValueError('main moved from reserved controller SHA; dispatch not attempted')
     api.post('/actions/workflows/' + WORKFLOW + '/dispatches',
              {'ref': 'main', 'inputs': {'tag': args.tag, 'source_sha': args.sha,
                 'frozen_ref': wanted['frozen_ref'], 'channel': args.channel,
@@ -220,17 +270,21 @@ def status(args, api):
             command = [sys.executable, str(helper), 'status', '--tag', args.tag,
                        '--sha', args.sha, '--ref', wanted['frozen_ref'],
                        '--operation-id', args.operation_id, '--controller-sha', args.controller_sha]
-            if len(result['runs']) == 1:
-                command += ['--forge-run-id', str(result['runs'][0]['id'])]
-            # A local file is not authenticated evidence from this Forgejo run.
-            # Without a verified downloaded journal, require both GH workflows visible.
-            response = subprocess.run(command, capture_output=True, text=True, timeout=120)
             try:
+                if len(result['runs']) != 1 or result['runs'][0]['status'] not in TERMINAL:
+                    raise ValueError('Forgejo worker is not terminal')
+                run_id = result['runs'][0]['id']
+                content = windows_state(api, wanted, run_id)
+                with tempfile.TemporaryDirectory(prefix='windows-operation-') as directory:
+                    state = Path(directory) / 'windows-operation.json'
+                    state.write_bytes(content)
+                    response = subprocess.run(command + ['--forge-run-id', str(run_id),
+                        '--state', str(state)], capture_output=True, text=True, timeout=120)
                 result['github'] = json.loads(response.stdout, object_pairs_hook=release_channel.no_duplicates)
-            except (ValueError, TypeError):
-                result['github'] = {'status': 'unknown'}
-            if response.returncode or not isinstance(result['github'], dict):
-                result['github'] = {'status': 'unknown'}
+                if response.returncode or not isinstance(result['github'], dict):
+                    result['github'] = {'status': 'unknown'}
+            except (ValueError, TypeError, OSError, zipfile.BadZipFile) as error:
+                result['github'] = {'status': 'unknown', 'reason': str(error)}
         else:
             result['github'] = {'status': 'unknown', 'reason': 'Windows helper unavailable'}
     return result
@@ -271,7 +325,7 @@ def save_observation(args, result):
 
 def stop(args, api):
     wanted = read_operation(args)
-    found = runs(api, wanted)
+    found = runs(api, wanted, allow_controller_drift=True)
     if not found:
         raise ValueError('dispatch outcome unknown; no run is not proof of absence')
     for run in found:
@@ -279,14 +333,19 @@ def stop(args, api):
             api.post('/actions/runs/' + str(run['id']) + '/cancel', {})
     deadline = time.monotonic() + 900
     while time.monotonic() < deadline:
-        latest = runs(api, wanted)
+        latest = runs(api, wanted, allow_controller_drift=True)
         if {r['id'] for r in latest} != {r['id'] for r in found}:
             raise ValueError('new matching run appeared during stop; inspect all owned runs')
         if all(run.get('status') in TERMINAL for run in latest):
-            result = snapshot(api, wanted)
+            result = snapshot(api, wanted) if latest[0].get('commit_sha') == wanted['controller'] else {
+                'operation_id': wanted['operation_id'], 'runs': [
+                    {'id': run['id'], 'status': run.get('status'), 'controller_sha': run.get('commit_sha')}
+                    for run in latest], 'build_metadata': 'unproven',
+                'artifact_bytes': 'unverified', 'publication': 'unverified'}
             if len(result['runs']) != 1:
                 raise ValueError('multiple runs for one operation; stop cannot prove one owner')
-            save_observation(args, result)
+            if latest[0].get('commit_sha') == wanted['controller']:
+                save_observation(args, result)
             # Only a terminal Forgejo worker cannot dispatch more dependent jobs.
             if args.channel == 'windows':
                 helper = Path(__file__).with_name('release_windows_candidate.py')
@@ -296,8 +355,18 @@ def stop(args, api):
                            '--ref', wanted['frozen_ref'], '--operation-id', args.operation_id,
                            '--forge-run-id', str(latest[0]['id']), '--controller-sha', args.controller_sha,
                            '--wait-terminal']
-                if subprocess.run(command, timeout=960).returncode:
-                    raise ValueError('owned GitHub runs not confirmed terminal; stop remains blocked')
+                try:
+                    content = windows_state(api, wanted, latest[0]['id'])
+                except (ValueError, OSError, zipfile.BadZipFile) as error:
+                    # Still request cancellation of visible owned GH runs. Without
+                    # the authenticated journal, absence cannot prove completion.
+                    subprocess.run(command, timeout=960)
+                    raise ValueError('Windows journal unavailable; stop remains unknown: ' + str(error)) from error
+                with tempfile.TemporaryDirectory(prefix='windows-operation-') as directory:
+                    state = Path(directory) / 'windows-operation.json'
+                    state.write_bytes(content)
+                    if subprocess.run(command + ['--state', str(state)], timeout=960).returncode:
+                        raise ValueError('owned GitHub runs not confirmed terminal; stop remains blocked')
             return result
         time.sleep(5)
     raise ValueError('cancel requested but terminal Forgejo state not confirmed')
@@ -310,9 +379,8 @@ def publish(args, api):
     if args.channel == 'windows':
         github = result.get('github', {})
         if (github.get('unknown') is not False or github.get('terminal') is not True
-                or len(github.get('runs', [])) != 2
-                or any(run.get('status') != 'completed' or run.get('conclusion') != 'success'
-                       for run in github['runs'])):
+                or github.get('selected_verified') is not True
+                or set(github.get('selected_runs', {})) != {'release.yml', 'windows-test-check.yml'}):
             raise ValueError('dependent Windows runs are not proven terminal green')
     if not getattr(args, 'dist', None) or not getattr(args, 'evidence', None):
         raise ValueError('signed candidate files are required; ready for signing, not publication')

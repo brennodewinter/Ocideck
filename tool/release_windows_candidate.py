@@ -204,7 +204,7 @@ def operation_state(state, sha, ref, operation_id):
     if state.is_symlink() or not state.is_file() or state.stat().st_size > 65536:
         raise ValueError('unsafe Windows operation journal')
     saved = json.loads(state.read_text(), object_pairs_hook=no_duplicates)
-    fields = {'schema', 'operation_id', 'tag', 'sha', 'ref', 'dispatch_intents', 'closed', 'forge_run_id', 'controller_sha'}
+    fields = {'schema', 'operation_id', 'tag', 'sha', 'ref', 'dispatch_intents', 'closed', 'forge_run_id', 'controller_sha', 'selected_runs'}
     if (not isinstance(saved, dict) or set(saved) != fields or type(saved['schema']) is not int
             or saved['schema'] != 1 or type(saved['forge_run_id']) is not int or saved['forge_run_id'] < 0
             or not isinstance(saved['controller_sha'], str)
@@ -213,6 +213,9 @@ def operation_state(state, sha, ref, operation_id):
             or saved['operation_id'] != operation_id or type(saved['closed']) is not bool
             or ref != 'codex/release-candidate-' + saved['tag'] + '-' + sha
             or not isinstance(saved['dispatch_intents'], list)
+            or not isinstance(saved['selected_runs'], dict)
+            or not set(saved['selected_runs']).issubset(WORKFLOWS)
+            or any(type(value) is not int or value <= 0 for value in saved['selected_runs'].values())
             or any(not isinstance(name, str) or name not in WORKFLOWS for name in saved['dispatch_intents'])
             or len(set(saved['dispatch_intents'])) != len(saved['dispatch_intents'])):
         raise ValueError('Windows operation journal identity differs')
@@ -227,8 +230,23 @@ def owned_status(api, sha, ref, operation_id, state=None, forge_run_id=None, con
     expected = set(saved['dispatch_intents']) if bound else set(WORKFLOWS)
     visible = {run['path'].rsplit('/', 1)[1] for run in runs}
     unknown = not expected.issubset(visible)
+    selected = saved['selected_runs'] if bound else {}
+    selected_verified = bool(bound and set(selected) == set(WORKFLOWS))
+    if selected_verified:
+        for workflow, run_id in selected.items():
+            run = latest(api, workflow, sha, ref)
+            if run is None or run['id'] != run_id:
+                selected_verified = False
+                break
+            try:
+                successful(api, run)
+            except ValueError:
+                selected_verified = False
+                break
     return {'operation_id': operation_id, 'terminal': not unknown and all(run.get('status') == 'completed' for run in runs),
             'unknown': unknown,
+            'selected_verified': selected_verified,
+            'selected_runs': selected if bound else {},
             'runs': [{'id': run['id'], 'status': run.get('status'), 'conclusion': run.get('conclusion')} for run in runs]}
 
 
@@ -259,7 +277,7 @@ def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, c
     if dist.exists():
         raise ValueError('Windows candidate dist must not exist')
     state = state.absolute()
-    wanted = {'schema': 1, 'operation_id': operation_id, 'tag': tag, 'sha': sha, 'ref': ref, 'dispatch_intents': [], 'closed': False, 'forge_run_id': forge_run_id, 'controller_sha': controller_sha}
+    wanted = {'schema': 1, 'operation_id': operation_id, 'tag': tag, 'sha': sha, 'ref': ref, 'dispatch_intents': [], 'closed': False, 'forge_run_id': forge_run_id, 'controller_sha': controller_sha, 'selected_runs': {}}
     with locked(state):
         if state.exists() or state.is_symlink():
             if state.is_symlink() or not state.is_file() or state.stat().st_size > 65536:
@@ -320,6 +338,8 @@ def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sbo
         raise ValueError('Windows candidate deadline expired; existing runs are preserved')
     for run in runs.values():
         successful(api, run)
+    saved['selected_runs'] = {workflow: run['id'] for workflow, run in runs.items()}
+    atomic_write(state, saved)
     artifacts = pages(api, '/actions/runs/' + str(runs['release.yml']['id']) + '/artifacts', 'artifacts')
     artifacts = [artifact for artifact in artifacts if artifact.get('name') == 'ocideck-windows-cohort' and artifact.get('expired') is False]
     if len(artifacts) != 1 or type(artifacts[0].get('id')) is not int or artifacts[0]['id'] <= 0:

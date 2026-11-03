@@ -1562,6 +1562,10 @@ controller, channel and frozen-ref identity before its single workflow dispatch.
 response is lost and no exact operation ID appears in Forgejo, the state stays
 unknown. `stop` cancels only runs with that exact workflow input and waits for
 terminal readback; Windows also needs terminal proof from its own GitHub helper.
+For Windows, the CLI reads the closed operation journal from the exact Forgejo
+run artifact and binds its run ID, controller SHA, source and operation ID before
+accepting a reused green GitHub run or a no-dispatch stop. A missing or unsafe
+artifact leaves the state unknown.
 The `publish` action delegates to the existing channel publisher and requires
 already signed manifest and checksum evidence. Build success is metadata only:
 neither asset bytes nor a public release are proved by a green build run.
