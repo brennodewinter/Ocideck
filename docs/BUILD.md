@@ -1632,14 +1632,20 @@ releasebytes. Het afzonderlijke commando `public` gebruikt dezelfde identiteit,
 registreert elke toepasselijke publieke fase in het bestaande journaal.
 Website-updates hebben een eigen eenmalige operation-ID; een verloren antwoord
 leidt tot inspectie van die ID, nooit een tweede dispatch. Hervat `public` om de
-terminale bronupdate, exacte website-deploycommit en alle negen live pagina's te
-vergelijken. Een opgeslagen voltooiing in `status` heet uitdrukkelijk
+terminale bronupdate en exacte website-deploycommit te controleren. Historische
+paginahashes blijven bewijs van die bouw; de actuele controle vergelijkt in alle
+negen talen uitsluitend de primaire rijen van het gekozen kanaal met zijn
+getekende manifest. Een legitieme update van een ander OS blokkeert dit niet. Een opgeslagen voltooiing in `status` heet uitdrukkelijk
 `recorded_completed_live_unverified`; alleen een nieuwe readback is live bewijs.
 
 Voor web wordt uitsluitend het getekende kanaalarchief gebruikt, begrensd en
 zonder links uitgepakt, intern gecontroleerd en met `deploy_web.sh --bundle-dir`
 geplaatst. Iedere live manifestfile wordt nagehasht (maximaal acht gelijktijdige
-verzoeken); na een onderbroken deploy wordt eerst live gereconcilieerd. Een
+verzoeken). `deploy_web.sh --preflight-only` controleert bundel, tools en de
+alleen-lezen SSH-vereisten vóór het duurzame deploy-intent, zonder opnieuw in te
+pakken of te uploaden. Na herstel van zo'n preflightfout kunnen dezelfde bytes
+regulier worden geplaatst. Na een werkelijk gestarte of onzekere deploy wordt
+uitsluitend live gereconcilieerd. Een
 ontbrekende of afwijkende livefile blokkeert hervatten zonder blinde herdeploy.
 Voor macOS moet ook de publieke Homebrew-verwijzing exact URL en SHA256 dragen.
 De tap-update moet eerst terminaal klaar zijn; een groene forge-upload alleen

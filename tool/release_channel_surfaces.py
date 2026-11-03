@@ -288,6 +288,12 @@ WEB_METADATA_TOTAL_LIMIT = 8 * 1024**2
 
 
 class BoundedWebMember(tarfile.TarInfo):
+    def _proc_gnusparse_00(self, *_args):
+        raise ValueError('sparse web archive metadata is not supported')
+
+    _proc_gnusparse_01 = _proc_gnusparse_00
+    _proc_gnusparse_10 = _proc_gnusparse_00
+
     def _proc_member(self, archive):
         count = getattr(archive, '_web_count', 0) + 1
         archive._web_count = count

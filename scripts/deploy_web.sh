@@ -22,6 +22,7 @@
 #
 # Gebruik:
 #   make build-web && scripts/deploy_web.sh
+#   scripts/deploy_web.sh --preflight-only controleer zonder inpakken/uploaden
 #   scripts/deploy_web.sh --dry-run          toon wat er zou gebeuren
 #   scripts/deploy_web.sh --keep-backup      ruim de vorige versie niet op
 #   scripts/deploy_web.sh --bundle-dir PATH  gebruik een andere geverifieerde bundel
