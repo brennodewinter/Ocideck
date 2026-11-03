@@ -17,6 +17,11 @@ on:
         required: false
         default: ""
         type: string
+      expected_current_tag:
+        description: Optional selected-channel pointer guard for an explicit rollback
+        required: false
+        default: ""
+        type: string
 concurrency:
   group: website-downloads-source
   cancel-in-progress: false
@@ -34,11 +39,14 @@ jobs:
           RELEASE_TAG: ${{ inputs.tag }}
           CHANNEL: ${{ inputs.channel }}
           OPERATION_ID: ${{ inputs.operation_id }}
+          OCIDECK_EXPECTED_CURRENT_TAG: ${{ inputs.expected_current_tag }}
         shell: bash
         run: |
           set -euo pipefail
           [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || exit 2
           [[ -z "$OPERATION_ID" || "$OPERATION_ID" =~ ^[A-Za-z0-9_-]{1,100}$ ]] || exit 2
+          [[ -z "$OCIDECK_EXPECTED_CURRENT_TAG" || "$OCIDECK_EXPECTED_CURRENT_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || exit 2
+          [[ -z "$OCIDECK_EXPECTED_CURRENT_TAG" || -n "$OPERATION_ID" ]] || exit 2
           case "$CHANNEL" in all|macos|windows|web|linux-tar|linux-debian12|linux-deb|linux-rpm|linux-appimage|linux-flatpak) ;; *) exit 2;; esac
       - name: Install pinned website tools
         env:
@@ -55,6 +63,7 @@ jobs:
           RELEASE_TAG: ${{ inputs.tag }}
           CHANNEL: ${{ inputs.channel }}
           OPERATION_ID: ${{ inputs.operation_id }}
+          OCIDECK_EXPECTED_CURRENT_TAG: ${{ inputs.expected_current_tag }}
           WEBSITE_KEY: ${{ secrets.WEBSITE_REPO_KEY_V1 }}
           WEBSITE_KNOWN_HOSTS: ${{ secrets.WEBSITE_REPO_KNOWN_HOSTS_V1 }}
         shell: bash

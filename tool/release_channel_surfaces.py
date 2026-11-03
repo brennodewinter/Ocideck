@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Resume public pointers only after the immutable channel publisher's readback."""
 from concurrent.futures import ThreadPoolExecutor
+import base64
 from hashlib import sha256
 import io
+from html.parser import HTMLParser
 import json
 from pathlib import Path, PurePosixPath
 import re
@@ -44,7 +46,13 @@ def fetch(url, limit=32 * 1024 * 1024):
     return content
 
 
+def scoped_phase(args, phase):
+    origin = getattr(args, 'rollback_from', None)
+    return ('rollback-from-' + origin + '-' + phase) if origin else phase
+
+
 def phase_paths(args, phase):
+    phase = scoped_phase(args, phase)
     state = args.state_dir.resolve() / args.tag
     return state / (args.channel + '-' + phase + '-intent.json'), state / (args.channel + '-' + phase + '-completed.json')
 
@@ -53,6 +61,7 @@ def save(args, phase, value):
     _, receipt = phase_paths(args, phase)
     release_channel.immutable_write(receipt, release_channel.encoded(value))
     journal = receipt.parent / (args.channel + '.json')
+    phase = scoped_phase(args, phase)
     current = release_journal.read(journal)
     previous = next((e for e in reversed(current['events']) if e['phase'] == phase), None)
     if previous is None:
@@ -66,7 +75,7 @@ def begin(args, phase, value):
     intent, _ = phase_paths(args, phase)
     release_channel.immutable_write(intent, release_channel.encoded(value))
     release_journal.record(SimpleNamespace(journal=intent.parent / (args.channel + '.json'),
-                                         phase=phase, state='started', evidence=[intent]))
+                                         phase=scoped_phase(args, phase), state='started', evidence=[intent]))
 
 
 def public_status(args):
@@ -89,7 +98,7 @@ def public_status(args):
     return result
 
 
-def matching_runs(api, nonce, tag, channel, controller):
+def matching_runs(api, nonce, tag, channel, controller, expected_current=''):
     from release_channel_controller import payload
     matches = []
     for page in range(1, 51):
@@ -102,7 +111,12 @@ def matching_runs(api, nonce, tag, channel, controller):
                 continue
             run = api.get('/actions/runs/' + str(summary['id']))
             inputs = payload(run).get('inputs', {})
-            if (inputs != {'tag': tag, 'channel': channel, 'operation_id': nonce}
+            expected_inputs = {'tag': tag, 'channel': channel, 'operation_id': nonce}
+            if expected_current:
+                expected_inputs['expected_current_tag'] = expected_current
+            if inputs.get('expected_current_tag') == '':
+                inputs = {key: value for key, value in inputs.items() if key != 'expected_current_tag'}
+            if (inputs != expected_inputs
                     or run.get('commit_sha') != controller
                     or run.get('trigger_event') != 'workflow_dispatch'
                     or run.get('workflow_id') not in (WORKFLOW, '.forgejo/workflows/' + WORKFLOW)):
@@ -142,20 +156,42 @@ def verify_pages(data, get=fetch):
 
 def website(args, api):
     intent, _ = phase_paths(args, 'website')
-    nonce = args.operation_id + '-website'
-    wanted = {'tag': args.tag, 'channel': args.channel, 'operation_id': nonce, 'controller': args.controller_sha}
-    found = matching_runs(api, nonce, args.tag, args.channel, args.controller_sha)
+    rollback_from = getattr(args, 'rollback_from', '') or ''
+    nonce = (sha256((args.operation_id + rollback_from).encode()).hexdigest()[:32]
+             if rollback_from else args.operation_id) + '-website'
+    wanted = {'tag': args.tag, 'channel': args.channel, 'operation_id': nonce}
+    if rollback_from:
+        wanted['expected_current_tag'] = rollback_from
     if not intent.exists():
+        # Main may advance after the immutable build. Only an identical reviewed
+        # updater definition may acquire the new public-pointer controller.
+        main = api.get('/git/refs/heads/main')
+        controller = main.get('object', {}).get('sha', '')
+        if not re.fullmatch('[0-9a-f]{40}', controller):
+            raise ValueError('website controller main SHA unavailable')
+        definition = api.get('/contents/.forgejo/workflows/' + WORKFLOW + '?ref=' + controller)
+        local = Path(__file__).resolve().parent.parent / '.forgejo/workflows' / WORKFLOW
+        if (definition.get('encoding') != 'base64'
+                or base64.b64decode(definition.get('content', ''), validate=False) != local.read_bytes()):
+            raise ValueError('current website workflow differs from reviewed controller')
+        found = matching_runs(api, nonce, args.tag, args.channel, controller, rollback_from)
         if found:
             raise ValueError('website operation exists without local ownership receipt')
-        main = api.get('/git/refs/heads/main')
-        if main.get('object', {}).get('sha') != args.controller_sha:
-            raise ValueError('website controller main moved; no dispatch attempted')
+        wanted['controller'] = controller
         begin(args, 'website', wanted)
+        if api.get('/git/refs/heads/main').get('object', {}).get('sha') != controller:
+            raise ValueError('website controller main moved; intent remains unknown, never redispatch')
         api.post('/actions/workflows/' + WORKFLOW + '/dispatches',
-                 {'ref': 'main', 'inputs': {key: wanted[key] for key in ('tag', 'channel', 'operation_id')}})
+                 {'ref': 'main', 'inputs': {key: value for key, value in wanted.items() if key != 'controller'}})
         raise ValueError('website dispatched; use public again to reconcile terminal deployment')
-    if read_json(intent) != wanted or len(found) != 1:
+    saved = read_json(intent)
+    if any(saved.get(key) != value for key, value in wanted.items()):
+        raise ValueError('website publication intent identity differs')
+    controller = saved.get('controller', '')
+    if not re.fullmatch('[0-9a-f]{40}', controller):
+        raise ValueError('website controller identity missing')
+    found = matching_runs(api, nonce, args.tag, args.channel, controller, rollback_from)
+    if len(found) != 1:
         raise ValueError('website dispatch unknown or ambiguous; never repeat POST')
     run = found[0]
     work = api.get('/actions/runs/' + str(run['id']) + '/jobs')
@@ -244,6 +280,7 @@ def public(args, api):
     if not args.dist or not args.evidence or not args.run_id:
         raise ValueError('public phases require exact signed candidate and run ID')
     release_channel.identity(args.tag, args.sha, args.channel)
+    validate_rollback(args)
     root = Path(__file__).resolve().parent.parent
     state = args.state_dir.resolve() / args.tag
     # Reauthenticate public immutable bytes and signatures on every resume.
@@ -252,17 +289,12 @@ def public(args, api):
         raise ValueError('public signed asset readback failed')
     release_channel_control_paths(args, state)
     with release_journal.locked(state / (args.channel + '-public')):
+        if getattr(args, 'rollback_from', None):
+            check_rollback_pointer(args)
         if args.channel != 'web':
             result = {'website': website(args, api)}
             if args.channel == 'macos':
-                manifest = read_json(args.evidence / 'channel-manifest-macos.json')
-                name = 'ocideck-macos-' + args.tag[1:] + '.zip'
-                url = 'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/' + args.tag + '/' + name
-                command = ['bash', str(root / 'scripts/verify_homebrew_cask.sh'), '--expected-url', url,
-                           '--expected-sha256', manifest['files'][name], args.tag]
-                if subprocess.run(command, timeout=120).returncode:
-                    raise ValueError('Homebrew exact pointer not verified; run tap channel update then resume public')
-                result['homebrew'] = save(args, 'homebrew', {'tag': args.tag, 'channel': args.channel, 'url': url, 'sha256': manifest['files'][name]})
+                result['homebrew'] = homebrew(args, root)
             return result
         archive = args.dist / ('ocideck-web-' + args.tag[1:] + '.tar.gz')
         # Reconstruct from authenticated archive on every invocation, never trust
@@ -285,6 +317,162 @@ def public(args, api):
             return {'web': save(args, 'web', wanted)}
 
 
+
+
+def validate_rollback(args):
+    previous = getattr(args, 'rollback_from', None)
+    if previous is None:
+        return
+    release_channel.identity(previous, args.sha, args.channel)
+    target = tuple(map(int, args.tag[1:].split('.')))
+    current = tuple(map(int, previous[1:].split('.')))
+    if target >= current:
+        raise ValueError('rollback target must be strictly older than rollback-from')
+
+
+class Links(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.urls = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            self.urls.extend(value for key, value in attrs if key == 'href' and value)
+
+
+def page_tags(content, channel):
+    parser = Links()
+    parser.feed(content.decode('utf-8'))
+    names = release_channel.CHANNELS[channel]
+    tags = set()
+    seen = set()
+    for pattern in names:
+        if pattern.endswith('.json'):
+            continue
+        regex = re.escape(pattern).replace(r'\{v\}', r'([0-9]+\.[0-9]+\.[0-9]+)')
+        for url in parser.urls:
+            match = re.fullmatch(r'https://pawprint\.vigilis\.online/LibreKAT/Ocideck/releases/download/(v[0-9]+\.[0-9]+\.[0-9]+)/' + regex, url)
+            if match:
+                if match[1] != 'v' + match[2]:
+                    raise ValueError('download URL tag and filename disagree')
+                seen.add(pattern)
+                tags.add(match[1])
+    expected = {name for name in names if not name.endswith('.json')}
+    if seen != expected:
+        raise ValueError('selected download rows unavailable for rollback')
+    return tags
+
+
+def check_rollback_pointer(args, get=fetch):
+    phase = 'web' if args.channel == 'web' else 'website'
+    intent, _ = phase_paths(args, phase)
+    allowed = {args.rollback_from}
+    if intent.is_file() and not intent.is_symlink():
+        recorded = read_json(intent)
+        if recorded.get('tag') != args.tag or recorded.get('channel') != args.channel:
+            raise ValueError('rollback intent identity differs')
+        allowed.add(args.tag)
+    if args.channel == 'web':
+        value = json.loads(get('https://ocideck.librekat.nl/version.json'), object_pairs_hook=release_channel.no_duplicates)
+        tags = {'v' + value.get('version', '')}
+    else:
+        tags = set()
+        for language in LANGUAGES:
+            path = '/ocideck/' if language == 'nl' else '/' + language + '/ocideck/'
+            tags.update(page_tags(get('https://librekat.nl' + path), args.channel))
+    if not tags or not tags <= allowed:
+        raise ValueError('current public pointer differs from explicit rollback-from or owned target')
+    if args.channel == 'macos':
+        tap_intent, _ = phase_paths(args, 'homebrew')
+        tap_allowed = {args.rollback_from}
+        if tap_intent.is_file() and not tap_intent.is_symlink():
+            saved = read_json(tap_intent)
+            if saved.get('tag') != args.tag or saved.get('channel') != args.channel:
+                raise ValueError('Homebrew rollback intent identity differs')
+            tap_allowed.add(args.tag)
+        cask = get('https://pawprint.vigilis.online/LibreKAT/homebrew-ocideck/raw/branch/main/Casks/ocideck.rb').decode('utf-8')
+        versions = re.findall(r'^\s*version "([0-9]+\.[0-9]+\.[0-9]+)"', cask, re.M)
+        urls = re.findall(r'^\s*url "([^"\n]+)"', cask, re.M)
+        if len(versions) != 1 or len(urls) != 1 or 'v' + versions[0] not in tap_allowed:
+            raise ValueError('Homebrew current pointer differs from rollback-from or owned target')
+        tag = 'v' + versions[0]
+        expected = 'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/' + tag + '/ocideck-macos-' + versions[0] + '.zip'
+        if urls[0] != expected:
+            raise ValueError('Homebrew current download URL differs')
+
+
+
+def homebrew(args, root):
+    from release_channel_controller import Forgejo, payload
+    manifest = read_json(args.evidence / 'channel-manifest-macos.json')
+    name = 'ocideck-macos-' + args.tag[1:] + '.zip'
+    url = 'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/' + args.tag + '/' + name
+    command = ['bash', str(root / 'scripts/verify_homebrew_cask.sh'), '--expected-url', url,
+               '--expected-sha256', manifest['files'][name], args.tag]
+    pin = bool(getattr(args, 'rollback_from', None))
+    nonce = sha256((args.operation_id + (getattr(args, 'rollback_from', '') or '') + '-homebrew').encode()).hexdigest()[:40]
+    intent, _ = phase_paths(args, 'homebrew')
+    wanted = {'tag': args.tag, 'channel': args.channel, 'operation_id': nonce, 'pin': 'true' if pin else 'false'}
+    api = Forgejo('https://pawprint.vigilis.online/api/v1/repos/LibreKAT/homebrew-ocideck')
+    workflow = 'update-cask.yml'
+    if not intent.exists():
+        # Even an already-correct cask needs the policy transaction: rollback
+        # must pin it and a later normal publication must clear that hold.
+        main = api.get('/git/refs/heads/main')['object']['sha']
+        if not re.fullmatch('[0-9a-f]{40}', main):
+            raise ValueError('invalid Homebrew controller commit')
+        wanted['controller'] = main
+        begin(args, 'homebrew', wanted)
+        if api.get('/git/refs/heads/main').get('object', {}).get('sha') != main:
+            raise ValueError('Homebrew main moved; intent remains unknown, never redispatch')
+        api.post('/actions/workflows/' + workflow + '/dispatches',
+                 {'ref': 'main', 'inputs': {key: wanted[key] for key in ('tag', 'operation_id', 'pin')}})
+        raise ValueError('Homebrew dispatched; resume public after terminal tap update')
+    saved = read_json(intent)
+    if any(saved.get(key) != value for key, value in wanted.items()):
+        raise ValueError('Homebrew dispatch intent differs')
+    matches = []
+    for page in range(1, 51):
+        listing = api.get(f'/actions/runs?workflow_id={workflow}&limit=100&page={page}')['workflow_runs']
+        for run in listing:
+            if payload(run).get('inputs', {}).get('operation_id') != nonce:
+                continue
+            detail = api.get('/actions/runs/' + str(run['id']))
+            if (detail.get('commit_sha') != saved['controller']
+                    or detail.get('workflow_id') not in (workflow, '.forgejo/workflows/' + workflow)
+                    or detail.get('trigger_event') != 'workflow_dispatch'
+                    or payload(detail).get('inputs') != {key: wanted[key] for key in ('tag', 'operation_id', 'pin')}):
+                raise ValueError('Homebrew operation provenance differs')
+            matches.append(detail)
+        if len(listing) < 100:
+            break
+    else:
+        raise ValueError('Homebrew run inspection bound exceeded')
+    if len(matches) != 1:
+        raise ValueError('Homebrew dispatch unknown or ambiguous; never repeat POST')
+    run = matches[0]
+    jobs = api.get('/actions/runs/' + str(run['id']) + '/jobs')
+    if run.get('status') != 'success' or not jobs or any(job.get('status') != 'success' for job in jobs):
+        raise ValueError('Homebrew update is not terminal green')
+    artifacts = api.get('/actions/runs/' + str(run['id']) + '/artifacts')
+    artifacts = [item for item in artifacts if item.get('name') == 'homebrew-channel-' + nonce and item.get('expired') is False]
+    if len(artifacts) != 1:
+        raise ValueError('Homebrew policy receipt missing')
+    with zipfile.ZipFile(io.BytesIO(api.artifact(artifacts[0]['id']))) as zipped:
+        members = zipped.infolist()
+        if (len(members) != 1 or members[0].filename != 'homebrew-channel.json'
+                or members[0].file_size > 65536 or members[0].is_dir()
+                or stat.S_IFMT(members[0].external_attr >> 16) not in (0, stat.S_IFREG)):
+            raise ValueError('unsafe Homebrew receipt')
+        proof = json.loads(zipped.read(members[0]), object_pairs_hook=release_channel.no_duplicates)
+    if (proof.get('tag') != args.tag or proof.get('operation_id') != nonce
+            or proof.get('pinned') is not pin or not re.fullmatch('[0-9a-f]{40}', proof.get('commit', ''))
+            or not re.fullmatch('[0-9a-f]{64}', proof.get('cask_sha256', ''))):
+        raise ValueError('Homebrew policy receipt identity differs')
+    cask = fetch('https://pawprint.vigilis.online/LibreKAT/homebrew-ocideck/raw/commit/' + proof['commit'] + '/Casks/ocideck.rb')
+    if sha256(cask).hexdigest() != proof['cask_sha256'] or subprocess.run(command, timeout=120).returncode:
+        raise ValueError('Homebrew exact public cask not verified')
+    return save(args, 'homebrew', dict(proof, channel=args.channel, url=url, sha256=manifest['files'][name], run_id=run['id']))
 
 def release_channel_control_publish(args):
     import release_channel_control

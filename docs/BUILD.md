@@ -1620,6 +1620,19 @@ verzoeken); na een onderbroken deploy wordt eerst live gereconcilieerd. Een
 ontbrekende of afwijkende livefile blokkeert hervatten zonder blinde herdeploy.
 Voor macOS moet ook de publieke Homebrew-verwijzing exact URL en SHA256 dragen.
 De tap-update moet eerst terminaal klaar zijn; een groene forge-upload alleen
-betekent geen volledige macOS-publicatie. Een verwijzingsrollback is een aparte,
-expliciete beheerhandeling met opnieuw geverifieerde oudere getekende bytes;
-deze controller beweert geen automatische rollback tussen publieke kanalen.
+betekent geen volledige macOS-publicatie. `rollback --rollback-from vMAJOR.MINOR.PATCH` is de expliciete verwijzingsrollback:
+`--tag` en de kandidaatargumenten benoemen de reeds gepubliceerde, strikt oudere,
+getekende doelversie. Eerst worden die publieke releasebytes opnieuw gelezen en
+geverifieerd; geen artefact of tag wordt gewijzigd. De geselecteerde live
+verwijzingen moeten nog de opgegeven oorspronkelijke versie bevatten, of het
+oudere doel wanneer een eigen duurzaam rollback-intent al bestaat. Andere
+OS-verwijzingen blijven staan. Rollbackfasen krijgen afzonderlijke journaalnamen
+`rollback-from-<versie>-<fase>`. MacOS-rollback zet bovendien een blijvende
+Homebrew-policy-pin; de volgende reguliere kanaalpublicatie wist die pin.
+
+Homebrew wordt met één duurzame nonce op de vertrouwde tap-main aangeroepen;
+verloren dispatchantwoorden worden uitsluitend op die nonce gereconcilieerd.
+De exacte terminale taprun, caskhash en publieke URL/SHA256 worden nagelezen.
+De websitebronworkflow mag op een latere main staan, mits zijn definitie exact
+bytegelijk is aan de lokaal beoordeelde workflow; die nieuwe controller-SHA wordt
+vóór dispatch opgeslagen. Een nieuwere andere updater wordt geweigerd.

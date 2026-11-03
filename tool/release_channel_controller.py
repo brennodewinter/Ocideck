@@ -502,10 +502,11 @@ def publish(args, api):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['plan', 'start', 'status', 'stop', 'hervat', 'publish', 'public'])
+    parser.add_argument('command', choices=['plan', 'start', 'status', 'stop', 'hervat', 'publish', 'public', 'rollback'])
     parser.add_argument('--state-dir', type=Path, required=True)
     for name in ('tag', 'sha', 'controller-sha', 'channel'):
         parser.add_argument('--' + name, required=True)
+    parser.add_argument('--rollback-from')
     parser.add_argument('--operation-id')
     parser.add_argument('--run-id')
     parser.add_argument('--release-id', default='auto')
@@ -524,8 +525,12 @@ def main():
         if args.command == 'plan':
             args.operation_id = args.operation_id or 'planned'
             result = {'identity': identity(args), 'action': 'read-only plan; no operation reserved'}
-        elif args.command == 'public':
+        elif args.command in ('public', 'rollback'):
             import release_channel_surfaces
+            if args.command == 'rollback' and not args.rollback_from:
+                raise ValueError('rollback requires --rollback-from CURRENT_TAG')
+            if args.command == 'public' and args.rollback_from:
+                raise ValueError('use explicit rollback command with rollback-from')
             result = release_channel_surfaces.public(args, Forgejo())
         elif args.command == 'publish':
             return publish(args, Forgejo())
