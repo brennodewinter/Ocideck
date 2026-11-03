@@ -78,7 +78,10 @@ class _TimelineEditorState extends State<TimelineEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
     _title.addTextListener(_emit);
     _layout = widget.slide.timelineLayout;
     _reveal = widget.slide.timelineReveal;
@@ -201,6 +204,11 @@ class _TimelineEditorState extends State<TimelineEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _rows.length; i++) {
+      _rows[i].marker.searchFieldId = 'timeline.$i.marker';
+      _rows[i].title.searchFieldId = 'timeline.$i.title';
+      _rows[i].description.searchFieldId = 'timeline.$i.description';
+    }
     final l10n = context.l10n;
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,

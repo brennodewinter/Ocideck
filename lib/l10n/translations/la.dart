@@ -1632,6 +1632,19 @@ const _dutchSourceAddLa = <String, String>{
   'Ga naar de brontabel': 'Ad tabulam fontem vade',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Haec tabula exemplum tabulae fontis "{bron}" est. Fontem ede et Renovare elige, aut conspectum ut imaginem seiunge.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Ad quaerendum privatim, incipe cum fenestra oratoris separata.',
+  'Privé zoeken': 'Quaerere privatim',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Auditores paginam praesentem vident donec Paginam ostendere eligis. Progressio automatica intermissa est. Solam fenestram auditorum communica, non totum spatium operis.',
+  'Ook in sprekersnotities': 'Etiam in adnotationibus oratoris quaerere',
+  'Typ om te zoeken': 'Scribe ad quaerendum',
+  'Toon dia': 'Paginam ostendere',
+  'Verder vanaf het begin': 'Ab initio pergitur',
+  'Verder vanaf het einde': 'A fine pergitur',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Nihil inventum. Verba breviora quaere.',
+  'Treffer {n} van {m}': 'Locus {n} ex {m}',
   'Quizvragen': 'Quaestiones certaminis',
   'Met vragen': 'Cum quaestionibus',
   'Zonder vragen': 'Sine quaestionibus',

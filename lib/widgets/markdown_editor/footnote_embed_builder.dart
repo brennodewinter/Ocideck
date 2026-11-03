@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/footnote_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
+import '../reader/document_search_overlay.dart';
 import 'embedded_field_actions.dart';
 
 /// De volgnummers van de voetnoten in [document], op leesvolgorde.
@@ -45,18 +46,20 @@ class FootnoteRefEmbedBuilder extends EmbedBuilder {
     )[label];
     final style = DefaultTextStyle.of(context).style;
     final scheme = Theme.of(context).colorScheme;
-    return Transform.translate(
-      // Een merkteken hoort hoog op de regel te staan; zonder deze verschuiving
-      // zakt de kleinere letter naar de basislijn en leest hij als een getal in
-      // de tekst.
-      offset: Offset(0, -(style.fontSize ?? 15) * 0.35),
-      child: Text(
-        '${number ?? label}',
-        style: style.copyWith(
-          fontSize: (style.fontSize ?? 15) * 0.72,
-          height: 1,
-          color: scheme.primary,
-          fontFeatures: const [FontFeature.tabularFigures()],
+    return ExcludeDocumentSearch(
+      child: Transform.translate(
+        // Een merkteken hoort hoog op de regel te staan; zonder deze verschuiving
+        // zakt de kleinere letter naar de basislijn en leest hij als een getal in
+        // de tekst.
+        offset: Offset(0, -(style.fontSize ?? 15) * 0.35),
+        child: Text(
+          '${number ?? label}',
+          style: style.copyWith(
+            fontSize: (style.fontSize ?? 15) * 0.72,
+            height: 1,
+            color: scheme.primary,
+            fontFeatures: const [FontFeature.tabularFigures()],
+          ),
         ),
       ),
     );
@@ -139,14 +142,16 @@ class _FootnoteRow extends StatelessWidget {
           ),
           SizedBox(
             width: 22,
-            child: Text(
-              // Geen nummer betekent: er verwijst niets (meer) naar deze noot.
-              // Dan het label tonen, want dat is het enige aanknopingspunt om
-              // hem terug te vinden in de tekst.
-              number == null ? label : '$number',
-              style: _noteStyle(context).copyWith(
-                color: number == null ? scheme.error : scheme.primary,
-                fontFeatures: const [FontFeature.tabularFigures()],
+            child: ExcludeDocumentSearch(
+              child: Text(
+                // Geen nummer betekent: er verwijst niets (meer) naar deze noot.
+                // Dan het label tonen, want dat is het enige aanknopingspunt om
+                // hem terug te vinden in de tekst.
+                number == null ? label : '$number',
+                style: _noteStyle(context).copyWith(
+                  color: number == null ? scheme.error : scheme.primary,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
               ),
             ),
           ),

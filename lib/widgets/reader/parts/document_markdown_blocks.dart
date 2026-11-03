@@ -231,6 +231,7 @@ Widget _footnoteList(
   _Theme t,
   List<Footnote> notes, {
   Key? key,
+  Widget Function(Footnote, Widget)? noteWrapper,
 }) {
   final style = t.body.copyWith(
     // Kleiner dan de bodytekst: een noot is een terzijde, en op papier is dat
@@ -252,35 +253,42 @@ Widget _footnoteList(
         ),
         const SizedBox(height: 6),
         for (final note in notes)
-          Padding(
-            padding: const EdgeInsets.only(top: 3),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 22,
-                  child: Text(
-                    '${note.number}',
-                    style: style.copyWith(
-                      color: t.marker,
-                      fontFeatures: const [FontFeature.tabularFigures()],
+          (noteWrapper ?? _plainFootnote)(
+            note,
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 22,
+                    child: ExcludeDocumentSearch(
+                      child: Text(
+                        '${note.number}',
+                        style: style.copyWith(
+                          color: t.marker,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: InlineMarkdownText(
-                    note.text,
-                    style: style,
-                    linkColor: t.link,
+                  Expanded(
+                    child: InlineMarkdownText(
+                      note.text,
+                      style: style,
+                      linkColor: t.link,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
       ],
     ),
   );
 }
+
+Widget _plainFootnote(Footnote note, Widget child) => child;
 
 /// De voetnoten van een document als los tekenbaar blok, in dezelfde maat en
 /// stijl als waarin ze achterin een doorlopende weergave staan.
@@ -293,15 +301,21 @@ class DocumentFootnotesView extends StatelessWidget {
   const DocumentFootnotesView({
     super.key,
     required this.notes,
+    this.noteWrapper,
     this.themeProfile,
   });
 
   final List<Footnote> notes;
+  final Widget Function(Footnote, Widget)? noteWrapper;
   final ThemeProfile? themeProfile;
 
   @override
-  Widget build(BuildContext context) =>
-      _footnoteList(context, _Theme(Theme.of(context), themeProfile), notes);
+  Widget build(BuildContext context) => _footnoteList(
+    context,
+    _Theme(Theme.of(context), themeProfile),
+    notes,
+    noteWrapper: noteWrapper,
+  );
 }
 
 /// De lettergrootte van een kop op niveau [level], bij een bodytekst van
@@ -681,13 +695,15 @@ final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\((.+)\)$');
 
 /// Het opsommingsteken of nummer vóór een lijstregel. Top-level, want het
 /// leest alleen het thema en de regel — niets van de weergave zelf.
-Widget _bulletMarker(_Theme t, _ListLine it) => SizedBox(
-  width: it.ordered ? 24 : 18,
-  child: Text(
-    it.ordered ? '${it.number}.' : '•',
-    style: t.body.copyWith(
-      fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
-      color: it.ordered ? t.body.color : t.marker,
+Widget _bulletMarker(_Theme t, _ListLine it) => ExcludeDocumentSearch(
+  child: SizedBox(
+    width: it.ordered ? 24 : 18,
+    child: Text(
+      it.ordered ? '${it.number}.' : '•',
+      style: t.body.copyWith(
+        fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
+        color: it.ordered ? t.body.color : t.marker,
+      ),
     ),
   ),
 );
@@ -738,4 +754,76 @@ class _TranscriptMarkerLine extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _documentListRow(
+  _Theme t,
+  _ListLine it,
+  Widget Function(String text) buildText,
+) {
+  final row = Padding(
+    padding: EdgeInsets.only(left: 4 + it.depth * 20.0, bottom: 4),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        it.checked == null
+            ? _bulletMarker(t, it)
+            : _checkMarker(t, checked: it.checked!),
+        Expanded(child: buildText(it.text)),
+      ],
+    ),
+  );
+  if (it.checked == null) return row;
+  // Announce the box as a checkbox with its state, so a screen reader says
+  // "checked"/"unchecked" instead of reading out a decorative icon. Using the
+  // semantics flag rather than a label keeps this translated by the platform,
+  // which is the only way it stays right in all thirty languages.
+  return Semantics(checked: it.checked, child: row);
+}
+
+({int end, _Block block})? _documentFenceAt(List<String> lines, int index) {
+  final fence = markdownFenceOpen(lines[index].trim());
+  if (fence == null) return null;
+  final start = index + 1;
+  var end = start;
+  while (end < lines.length && !fence.closes(lines[end].trim())) {
+    end++;
+  }
+  final code = lines.sublist(start, end).join('\n');
+  return (
+    end: end < lines.length ? end + 1 : end,
+    block: _Block(switch (fence.language) {
+      'mermaid' => _Kind.mermaid,
+      'chart' => _Kind.chart,
+      _ => _Kind.code,
+    }, text: code),
+  );
+}
+
+({int end, _Block block}) _documentQuoteAt(List<String> lines, int index) {
+  final quote = <String>[];
+  var end = index;
+  while (end < lines.length && lines[end].trimLeft().startsWith('>')) {
+    quote.add(lines[end].trimLeft().replaceFirst(RegExp(r'^>\s?'), ''));
+    end++;
+  }
+  return (end: end, block: _Block(_Kind.quote, text: quote.join('\n')));
+}
+
+({int end, _Block block}) _documentListAt(List<String> lines, int index) {
+  final items = <_ListLine>[];
+  var end = index;
+  while (end < lines.length) {
+    final item = _listItem(lines[end]);
+    if (item != null) {
+      items.add(item);
+      end++;
+      continue;
+    }
+    // Een soft-wrap hoort bij het voorafgaande item, tot een leegte of nieuw blok.
+    if (items.isEmpty || !_isParagraphLine(lines[end])) break;
+    items[items.length - 1] = items.last.continued(lines[end].trim());
+    end++;
+  }
+  return (end: end, block: _Block(_Kind.list, items: items));
 }

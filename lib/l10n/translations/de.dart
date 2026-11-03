@@ -664,6 +664,19 @@ const _dutchSourceAddDe = {
   'Ga naar de brontabel': 'Zur Quelltabelle gehen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Diese Tabelle ist eine Abschrift der Quelltabelle "{bron}". Bearbeite die Quelle und wähle Aktualisieren, oder löse die Ansicht als Momentaufnahme ab.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Starte mit einem separaten Referentenfenster, um privat zu suchen.',
+  'Privé zoeken': 'Private Suche',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Das Publikum sieht die aktuelle Folie, bis du Folie zeigen wählst. Die automatische Wiedergabe ist pausiert. Teile nur das Publikumsfenster, nicht deinen gesamten Desktop.',
+  'Ook in sprekersnotities': 'Auch in Vortragsnotizen suchen',
+  'Typ om te zoeken': 'Zum Suchen tippen',
+  'Toon dia': 'Folie zeigen',
+  'Verder vanaf het begin': 'Weiter ab dem Anfang',
+  'Verder vanaf het einde': 'Weiter ab dem Ende',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Keine Ergebnisse. Versuche einen kürzeren Suchtext.',
+  'Treffer {n} van {m}': 'Treffer {n} von {m}',
   'Quizvragen': 'Quizfragen',
   'Met vragen': 'Mit Fragen',
   'Zonder vragen': 'Ohne Fragen',

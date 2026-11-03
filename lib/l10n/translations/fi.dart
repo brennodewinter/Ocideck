@@ -1617,6 +1617,19 @@ const _dutchSourceAddFi = <String, String>{
   'Ga naar de brontabel': 'Siirry lähdetaulukkoon',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tämä taulukko on kopio lähdetaulukosta "{bron}". Muokkaa lähdettä ja valitse Päivitä, tai irrota näkymä tilannevedoksena.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Aloita erillisellä esittäjän ikkunalla, jotta voit hakea yksityisesti.',
+  'Privé zoeken': 'Yksityinen haku',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Yleisö näkee nykyisen dian, kunnes valitset Näytä dia. Automaattinen toisto on keskeytetty. Jaa vain yleisön ikkuna, älä koko työpöytää.',
+  'Ook in sprekersnotities': 'Hae myös puhujan muistiinpanoista',
+  'Typ om te zoeken': 'Kirjoita hakuteksti',
+  'Toon dia': 'Näytä dia',
+  'Verder vanaf het begin': 'Jatketaan alusta',
+  'Verder vanaf het einde': 'Jatketaan lopusta',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Ei tuloksia. Kokeile lyhyempää hakutekstiä.',
+  'Treffer {n} van {m}': 'Osuma {n}/{m}',
   'Quizvragen': 'Visakysymykset',
   'Met vragen': 'Kysymysten kanssa',
   'Zonder vragen': 'Ilman kysymyksiä',

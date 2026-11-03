@@ -3250,6 +3250,23 @@ die het scherm noemde. Iemand die voor het eerst presenteerde moest gokken, voor
 een publiek, wat het slechtst denkbare moment is om te gokken. (Het balkje toonde
 oorspronkelijk ook het dianummer; dat is verwijderd in #864.)*
 
+### Een passage zoeken tijdens het presenteren
+
+Gebruik **Zoeken** of `Ctrl/Cmd + F` in het presentatorvenster wanneer er een
+apart publieksvenster is. Typ een frase, lees de tekst rond de resultaten en
+kies het gewenste voorkomen. Resultaten bekijken blijft privé: het publiek
+blijft op de huidige dia. Pas **Toon dia** verandert de dia op het
+publieksvenster. Een resultaat op een vervolgpagina van een lange dia opent die
+pagina. Sprekersnotities worden alleen meegenomen als je dat uitdrukkelijk aanzet.
+
+Zoeken openen pauzeert het automatisch doorschakelen. **Esc** sluit alleen de
+zoekfunctie; automatisch doorschakelen blijft gepauzeerd totdat je het bewust
+hervat. Op een venster dat uitsluitend voor het publiek is, kun je niet zoeken.
+Deel het publieksvenster, niet je hele bureaublad: OciDeck kan een privévenster
+niet verbergen in een schermdeling waar dat venster in zit. De bestaande regels
+voor classificatie, redactie en navigatie bij tijdgebonden presentaties blijven
+gelden.
+
 ### PechaKucha en Ignite: twintig vaste dia's
 
 Maak van een deck een PechaKucha of Ignite door in de **markdown-modus** het
@@ -5506,6 +5523,11 @@ stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
   in de bron wilt zien of zetten. Precisie tot op het teken is niet altijd
   haalbaar; sta je middenin een opmaakteken, dan landt de cursor aan het begin
   daarvan. *(Toegevoegd 2026-08-19.)*
+- **Zoeken werkt in de huidige weergave.** Ctrl/Cmd+F opent zoeken ook als de
+  tabbladenbalk of werkbalk de focus heeft. Kies een resultaat om de passage in
+  Visueel, Bron of Pagina's in beeld te brengen. Ctrl/Cmd+H opent de aparte
+  vervangroute; vervangen houdt de cursor en de weergave bij de plek waar je
+  werkte.
 - **Plakken houdt de structuur uit een webeditor.** Cmd/Ctrl+V in Visueel en Bron
   kiest nog steeds eerst een afbeelding, dan een spreadsheet-tabel. Daarna leest
   het de **HTML**-variant van het klembord wanneer een webpagina die heeft gezet
@@ -6582,25 +6604,43 @@ lokale Unicode-tekens, dus deze functie doet geen enkele netwerkoproep. Syntaxis
 OciDeck niet modelleert blijft ongewijzigd in de Markdown staan en blijft beschikbaar
 om in de bron te bewerken.
 
-### Zoeken & vervangen
+### Tekst zoeken en ernaartoe springen
 
-Markdown-modus heeft een **zoekbalk in de bewerker** (IDE-stijl) die de live
-markdown-buffer doorzoekt — inclusief front matter, `\n---\n`-scheidingen, HTML-commentaar, en
-elke tekst die je nog niet hebt teruggetoepast op het deck. Dit staat los van het
-dialoog **Find & replace** in de visuele modus (`Ctrl/Cmd + H`), dat
-individuele slidevelden doorzoekt.
+Gebruik **Zoeken** of `Ctrl/Cmd + F` om tekst te vinden in de geopende
+presentatie of het geopende document. Het zoekveld houdt de focus terwijl je
+typt. Resultaten tonen een korte passage en de plaats ervan, zodat je het
+gewenste voorkomen kunt kiezen zonder elke bijpassende dia zelf te openen.
+Zoeken is letterlijk en standaard niet hoofdlettergevoelig. Een frase mag over
+inline-opmaak heen lopen; zichtbare linkteksten en code zijn doorzoekbaar.
+Linkdoelen, commentaar en ingebedde machinespecificaties zijn geen gewone
+tekstresultaten. Zoeken volgt de geschreven inhoud; gegenereerde
+interfacelabels, berekende totalen en verborgen antwoordsleutels zijn geen
+zoekbare lopende tekst. Front matter en dia-scheidingen tellen evenmin als
+gewone tekstresultaten.
 
-- **`Ctrl/Cmd + F`** — open de zoekbalk en focus het zoekveld.
-- **`Ctrl/Cmd + H`** — open de zoekbalk met de vervangregel zichtbaar.
-- **Enter** / **Shift + Enter** (in het zoekveld) — spring naar de volgende of
-  vorige match (loopt rond).
-- **Esc** — sluit de zoekbalk.
+- Klik op een resultaat om dat voorkomen te tonen. In een presentatie selecteert
+  dit de dia en opent het bijbehorende tekstveld. In een document komt de
+  passage in **Visueel**, **Bron** of **Pagina's** in beeld, zonder van weergave
+  te wisselen. **Pagina's** doorzoekt de voetnoten die op de pagina worden
+  getoond. Een ongebruikte voetnootdefinitie blijft in **Visueel** en **Bron**
+  doorzoekbaar.
+- De eerste **Enter** na het typen opent het eerste resultaat. Met volgende
+  **Enter**- en **Shift + Enter**-toetsen ga je vooruit en terug. De knoppen doen
+  hetzelfde.
+- **Esc** sluit zoeken. Zoeken en springen veranderen het bestand niet en voegen
+  geen stap toe aan de geschiedenis voor ongedaan maken. De zoekstand blijft
+  lokaal bij de geopende bewerksessie.
+- Zoeken in een presentatie sluit sprekersnotities standaard uit. Zet **Ook in
+  sprekersnotities** aan om ze mee te nemen; zulke resultaten vermelden dat het
+  om notities gaat.
 
-De balk toont een matchteller (`1 / 3`), vorige/volgende-knoppen, een hoofdlettergevoeligheids-
-schakelaar, **Replace** (alleen de huidige match), en **Replace all**. Elke match wordt
-in de bewerker geselecteerd zodat je snel naar een slidetitel, scheiding, of
-andere sectie kunt springen. Je kunt zoeken ook openen via het menu **More** (⋯) terwijl je in
-markdown-modus bent.
+**Vervangen is een aparte handeling.** `Ctrl/Cmd + H` opent de bestaande
+vervangroute. De zoekbalken voor Markdown en documenten bieden het vervangen van
+de huidige treffer of alle treffers. Beschermde Markdowngebieden blijven
+beschermd: een zichtbare linktekst of code kunnen vinden geeft geen toestemming
+om het linkdoel of een machinespecificatie te herschrijven. Het vervangvenster
+in de visuele presentatiebewerker werkt nog steeds op diavelden. Controleer een
+vervanging voordat je opslaat.
 
 ### Syntaxcontrole
 

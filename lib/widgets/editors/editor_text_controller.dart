@@ -18,9 +18,13 @@ import 'package:flutter/widgets.dart';
 /// cursorwissel weten, anders beweegt de cursor niet mee op het scherm. Alleen
 /// wie [addTextListener] gebruikt, krijgt de stroom zonder cursorruis.
 class EditorTextController extends TextEditingController {
-  EditorTextController({super.text}) : _lastText = text ?? '' {
+  EditorTextController({super.text, this.searchFieldId})
+    : _lastText = text ?? '' {
     super.addListener(_dispatchTextChange);
   }
+
+  /// Identiteit van het inhoudsveld, onafhankelijk van toevallig gelijke tekst.
+  String? searchFieldId;
 
   String _lastText;
   final List<VoidCallback> _textListeners = [];

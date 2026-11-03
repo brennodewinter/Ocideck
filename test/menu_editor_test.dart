@@ -8,8 +8,16 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/menu_blocks.dart';
 import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/widgets/editors/editor_text_controller.dart';
 import 'package:ocideck/widgets/editors/menu_editor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+Finder _field(String id) => find.byWidgetPredicate(
+  (widget) =>
+      widget is TextField &&
+      widget.controller is EditorTextController &&
+      (widget.controller! as EditorTextController).searchFieldId == id,
+);
 
 // Fase 3 van #1162: de editor van het keuze-menu-diatype. Getoetst zoals de
 // gebruiker hem bedient — een blok toevoegen, een label typen, een doeldia kiezen.
@@ -66,13 +74,19 @@ void main() {
     await tester.pumpAndSettle();
     expect(b.container.read(deckProvider).deck!.slides[0].bullets.length, 1);
 
-    await tester.enterText(find.byType(TextField).first, 'Prijzen');
+    await tester.enterText(_field('menu.0.label'), 'Prijzen');
     await tester.pumpAndSettle();
     final blocks = menuBlocksFor(
       b.container.read(deckProvider).deck!.slides[0].bullets,
     );
     expect(blocks.first.label, 'Prijzen');
     expect(blocks.first.hasTarget, isFalse);
+
+    await tester.enterText(_field('title'), 'Keuzemenu');
+    await tester.pumpAndSettle();
+    final updated = b.container.read(deckProvider).deck!.slides[0];
+    expect(updated.title, 'Keuzemenu');
+    expect(menuBlocksFor(updated.bullets).first.label, 'Prijzen');
   });
 
   testWidgets('een doeldia kiezen kent de doeldia een anker toe', (
@@ -126,9 +140,9 @@ void main() {
 
     await tester.tap(find.text('Blok toevoegen'));
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).at(0), 'Prijzen');
+    await tester.enterText(_field('menu.0.label'), 'Prijzen');
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).at(1), 'Wat het kost');
+    await tester.enterText(_field('menu.0.description'), 'Wat het kost');
     await tester.pumpAndSettle();
 
     final block = menuBlocksFor(
@@ -147,7 +161,7 @@ void main() {
 
     await tester.tap(find.text('Blok toevoegen'));
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).at(0), 'Prijzen');
+    await tester.enterText(_field('menu.0.label'), 'Prijzen');
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('Categorie toevoegen'));
@@ -173,7 +187,7 @@ void main() {
 
     await tester.tap(find.text('Blok toevoegen'));
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).at(0), 'Prijzen');
+    await tester.enterText(_field('menu.0.label'), 'Prijzen');
     await tester.pumpAndSettle();
     await tester.tap(find.text('Categorie toevoegen'));
     await tester.pumpAndSettle();

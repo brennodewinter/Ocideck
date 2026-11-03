@@ -1620,6 +1620,19 @@ const _dutchSourceAddGsw = <String, String>{
   'Ga naar de brontabel': 'Zur Quelltabälle gaa',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Die Tabälle isch e Abschrift vo de Quelltabälle "{bron}". Bearbeit d Quell und wehl Verfrische, oder löös d Aasicht als Momentufnahm ab.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Start mit eme separate Referäntefänschter, zum privat sueche.',
+  'Privé zoeken': 'Privati Suechi',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'S Publikum bliibt uf de aktuelle Folie, bis du Folie zeige wählsch. S automatische Abspiele isch pausiert. Teil nume s Publikumsfänschter, nöd din ganze Desktop.',
+  'Ook in sprekersnotities': 'Au i de Referänte-Notize sueche',
+  'Typ om te zoeken': 'Zum Sueche tippe',
+  'Toon dia': 'Folie zeige',
+  'Verder vanaf het begin': 'Wiiter vom Afang aa',
+  'Verder vanaf het einde': 'Wiiter vom Änd aa',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Kei Resultat. Probier en chürzere Suechtext.',
+  'Treffer {n} van {m}': 'Träffer {n} vo {m}',
   'Quizvragen': 'Quizfroge',
   'Met vragen': 'Mit Froge',
   'Zonder vragen': 'Ohni Froge',

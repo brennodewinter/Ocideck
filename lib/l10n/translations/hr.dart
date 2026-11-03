@@ -1621,6 +1621,19 @@ const _dutchSourceAddHr = <String, String>{
   'Ga naar de brontabel': 'Idi na izvornu tablicu',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ova tablica je preslik izvorne tablice "{bron}". Uredite izvor i odaberite Osvježi, ili odvojite prikaz kao snimku.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Za privatno pretraživanje pokrenite prezentaciju s odvojenim prozorom izlagača.',
+  'Privé zoeken': 'Privatno pretraživanje',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publika ostaje na trenutačnom slajdu dok ne odaberete Prikaži slajd. Automatska reprodukcija je pauzirana. Dijelite samo prozor za publiku, a ne cijelu radnu površinu.',
+  'Ook in sprekersnotities': 'Pretraži i bilješke izlagača',
+  'Typ om te zoeken': 'Upišite tekst za pretraživanje',
+  'Toon dia': 'Prikaži slajd',
+  'Verder vanaf het begin': 'Nastavak od početka',
+  'Verder vanaf het einde': 'Nastavak od kraja',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Nema rezultata. Pokušajte s kraćim tekstom.',
+  'Treffer {n} van {m}': 'Podudaranje {n} od {m}',
   'Quizvragen': 'Pitanja kviza',
   'Met vragen': 'S pitanjima',
   'Zonder vragen': 'Bez pitanja',

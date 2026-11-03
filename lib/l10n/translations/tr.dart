@@ -2525,6 +2525,19 @@ const _dutchSourceAddTr = <String, String>{
   'Ga naar de brontabel': 'Kaynak tabloya git',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Bu tablo, "{bron}" kaynak tablosunun bir kopyasıdır. Kaynağı düzenleyip Yenile\'yi seçin ya da görünümü anlık görüntü olarak ayırın.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Özel arama için ayrı bir sunucu penceresiyle başlatın.',
+  'Privé zoeken': 'Özel arama',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Slaydı göster seçeneğini kullanana kadar izleyiciler geçerli slaytta kalır. Otomatik oynatma duraklatıldı. Masaüstünüzün tamamını değil, yalnızca izleyici penceresini paylaşın.',
+  'Ook in sprekersnotities': 'Konuşmacı notlarında da ara',
+  'Typ om te zoeken': 'Aramak için yazın',
+  'Toon dia': 'Slaydı göster',
+  'Verder vanaf het begin': 'Baştan devam ediliyor',
+  'Verder vanaf het einde': 'Sondan devam ediliyor',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Sonuç yok. Daha kısa bir arama metni deneyin.',
+  'Treffer {n} van {m}': '{m} eşleşmeden {n}. eşleşme',
   'Quizvragen': 'Kısa sınav soruları',
   'Met vragen': 'Sorularla',
   'Zonder vragen': 'Sorular olmadan',

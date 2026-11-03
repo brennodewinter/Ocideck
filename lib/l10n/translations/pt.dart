@@ -1645,6 +1645,19 @@ const _dutchSourceAddPt = <String, String>{
   'Ga naar de brontabel': 'Ir para a tabela de origem',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Esta tabela é uma cópia da tabela de origem "{bron}". Edite a origem e escolha Atualizar, ou desvincule a vista como instantâneo.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Inicie com uma janela do apresentador separada para pesquisar em privado.',
+  'Privé zoeken': 'Pesquisa privada',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'O público continua no diapositivo atual até escolher Mostrar diapositivo. A reprodução automática está em pausa. Partilhe apenas a janela do público, não todo o ambiente de trabalho.',
+  'Ook in sprekersnotities': 'Incluir notas do apresentador',
+  'Typ om te zoeken': 'Escreva para pesquisar',
+  'Toon dia': 'Mostrar diapositivo',
+  'Verder vanaf het begin': 'A continuar a partir do início',
+  'Verder vanaf het einde': 'A continuar a partir do fim',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Sem resultados. Experimente um texto de pesquisa mais curto.',
+  'Treffer {n} van {m}': 'Ocorrência {n} de {m}',
   'Quizvragen': 'Perguntas do questionário',
   'Met vragen': 'Com perguntas',
   'Zonder vragen': 'Sem perguntas',

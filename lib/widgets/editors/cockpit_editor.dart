@@ -5,6 +5,7 @@ import '../../models/cockpit.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import 'advanced_section.dart';
+import 'editor_text_controller.dart';
 import 'animation_duration_control.dart';
 
 /// Dutch source labels for the meter types; translated at display time via
@@ -58,7 +59,10 @@ class _CockpitEditorState extends State<CockpitEditor> {
   void initState() {
     super.initState();
     _spec = CockpitSpec.parse(widget.slide.customMarkdown);
-    _titleController = TextEditingController(text: widget.slide.title);
+    _titleController = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
   }
 
   @override
@@ -388,6 +392,7 @@ class _MeterCard extends StatelessWidget {
           width: 180,
           label: l10n.d('Label'),
           value: meter.label,
+          searchFieldId: 'cockpit.$index.label',
           onChanged: (value) => onChanged(meter.copyWith(label: value)),
         ),
         if (type != CockpitMeterType.horizon &&
@@ -403,6 +408,7 @@ class _MeterCard extends StatelessWidget {
             width: 84,
             label: l10n.d('Eenheid'),
             value: meter.unit,
+            searchFieldId: 'cockpit.$index.unit',
             onChanged: (value) => onChanged(meter.copyWith(unit: value)),
           ),
         if (type == CockpitMeterType.horizon) ...[
@@ -431,6 +437,7 @@ class _MeterCard extends StatelessWidget {
             width: 130,
             label: l10n.d('Markeringslabel'),
             value: meter.markerLabel,
+            searchFieldId: 'cockpit.$index.markerLabel',
             onChanged: (value) => onChanged(meter.copyWith(markerLabel: value)),
           ),
         ],
@@ -490,10 +497,12 @@ class _TextField extends StatefulWidget {
   final double width;
   final String label;
   final String value;
+  final String? searchFieldId;
   final ValueChanged<String> onChanged;
 
   const _TextField({
     required this.width,
+    this.searchFieldId,
     required this.label,
     required this.value,
     required this.onChanged,
@@ -504,17 +513,21 @@ class _TextField extends StatefulWidget {
 }
 
 class _TextFieldState extends State<_TextField> {
-  late final TextEditingController _controller;
+  late final EditorTextController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.value);
+    _controller = EditorTextController(
+      text: widget.value,
+      searchFieldId: widget.searchFieldId,
+    );
   }
 
   @override
   void didUpdateWidget(_TextField oldWidget) {
     super.didUpdateWidget(oldWidget);
+    _controller.searchFieldId = widget.searchFieldId;
     if (widget.value != oldWidget.value && widget.value != _controller.text) {
       _controller.text = widget.value;
     }

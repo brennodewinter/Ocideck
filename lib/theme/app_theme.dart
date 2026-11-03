@@ -497,10 +497,24 @@ class AppTheme {
       foundation.inlineCodeBackground(textColor);
 
   static ThemeData fromProfile(AppAppearanceProfile profile) {
-    return const foundation.AppThemeBuilder(
+    final theme = const foundation.AppThemeBuilder(
       styleFocusIndicators: false,
       styleFilledButtons: false,
     ).build(profile);
+    final buttonStyle = theme.elevatedButtonTheme.style;
+    // De gedeelde builder overschrijft het gekozen interfacelettertype.
+    return theme.copyWith(
+      textTheme: theme.textTheme.apply(fontFamily: profile.fontFamily),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: buttonStyle?.copyWith(
+          textStyle: WidgetStateProperty.resolveWith(
+            (states) => buttonStyle.textStyle
+                ?.resolve(states)
+                ?.copyWith(fontFamily: profile.fontFamily),
+          ),
+        ),
+      ),
+    );
   }
 
   static ThemeData get light => fromProfile(AppAppearanceProfile.basic);

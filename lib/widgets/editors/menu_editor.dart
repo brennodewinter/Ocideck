@@ -10,6 +10,7 @@ import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/inline_markdown.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 part 'menu_editor_block.dart';
 
@@ -47,30 +48,38 @@ class MenuEditor extends ConsumerStatefulWidget {
 const double _menuCategoryInset = 22;
 
 class _MenuEditorState extends ConsumerState<MenuEditor> {
+  late final EditorTextController _title;
+
   /// Tekstvelden per blok, in dezelfde volgorde als [_blocks] — dus dwars door
   /// de categorieën heen doorgeteld. Bij invoegen, verwijderen en verplaatsen
   /// schuiven ze met de blokken mee, zodat de cursor nooit in een ander veld
   /// belandt.
-  final _labels = <TextEditingController>[];
-  final _descriptions = <TextEditingController>[];
+  final _labels = <EditorTextController>[];
+  final _descriptions = <EditorTextController>[];
 
   /// Tekstveld per categorienaam.
-  final _categoryNames = <TextEditingController>[];
+  final _categoryNames = <EditorTextController>[];
 
   @override
   void initState() {
     super.initState();
+    _title =
+        EditorTextController(text: widget.slide.title, searchFieldId: 'title')
+          ..addTextListener(
+            () => widget.onUpdate(widget.slide.copyWith(title: _title.text)),
+          );
     for (final b in _blocks) {
-      _labels.add(TextEditingController(text: b.label));
-      _descriptions.add(TextEditingController(text: b.description));
+      _labels.add(EditorTextController(text: b.label));
+      _descriptions.add(EditorTextController(text: b.description));
     }
     for (final c in _categories) {
-      _categoryNames.add(TextEditingController(text: c.label));
+      _categoryNames.add(EditorTextController(text: c.label));
     }
   }
 
   @override
   void dispose() {
+    _title.dispose();
     for (final c in [..._labels, ..._descriptions, ..._categoryNames]) {
       c.dispose();
     }
@@ -121,8 +130,8 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
       label: categories[cat].label,
       blocks: [...categories[cat].blocks, const MenuBlock()],
     );
-    _labels.insert(flat, TextEditingController());
-    _descriptions.insert(flat, TextEditingController());
+    _labels.insert(flat, EditorTextController());
+    _descriptions.insert(flat, EditorTextController());
     _writeCategories(categories);
     setState(() {});
   }
@@ -173,7 +182,7 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
       _categoryNames[0].text = categories[0].label;
     }
     categories.add(MenuCategory(label: name));
-    _categoryNames.add(TextEditingController(text: name));
+    _categoryNames.add(EditorTextController(text: name));
     _writeCategories(categories);
     setState(() {});
   }
@@ -213,10 +222,10 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
     }
     _labels
       ..clear()
-      ..addAll(blocks.map((b) => TextEditingController(text: b.label)));
+      ..addAll(blocks.map((b) => EditorTextController(text: b.label)));
     _descriptions
       ..clear()
-      ..addAll(blocks.map((b) => TextEditingController(text: b.description)));
+      ..addAll(blocks.map((b) => EditorTextController(text: b.description)));
   }
 
   Future<void> _pickImage(int flat) async {
@@ -249,9 +258,19 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
       _resyncControllers(categories);
     }
 
+    for (var i = 0; i < _labels.length; i++) {
+      _labels[i].searchFieldId = 'menu.$i.label';
+      _descriptions[i].searchFieldId = 'menu.$i.description';
+    }
+    for (var i = 0; i < _categoryNames.length; i++) {
+      _categoryNames[i].searchFieldId = 'menuCategory.$i';
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        EditorField(label: 'Titel', controller: _title),
+        const SizedBox(height: 12),
         _layoutPicker(l10n),
         const SizedBox(height: 16),
         for (var c = 0; c < categories.length; c++)
@@ -284,7 +303,7 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
     }
     _categoryNames
       ..clear()
-      ..addAll(categories.map((c) => TextEditingController(text: c.label)));
+      ..addAll(categories.map((c) => EditorTextController(text: c.label)));
     _rebuildControllersFrom(categories);
   }
 

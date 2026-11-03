@@ -81,7 +81,7 @@ class _AssetOverviewEditorState extends State<AssetOverviewEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = EditorTextController(text: spec.title)
+    _title = EditorTextController(text: spec.title, searchFieldId: 'title')
       ..addTextListener(_onChanged);
     _groups = spec.groups.map((g) => _GroupControllers(g, _onChanged)).toList();
     if (_groups.isEmpty) {
@@ -142,6 +142,13 @@ class _AssetOverviewEditorState extends State<AssetOverviewEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _groups.length; i++) {
+      _groups[i].name.searchFieldId = 'tableRows.${i + 1}.0';
+      _groups[i].total.searchFieldId = 'tableRows.${i + 1}.1';
+      _groups[i].atRisk.searchFieldId = 'tableRows.${i + 1}.2';
+      _groups[i].newlyFound.searchFieldId = 'tableRows.${i + 1}.3';
+      _groups[i].unowned.searchFieldId = 'tableRows.${i + 1}.4';
+    }
     final l10n = context.l10n;
     final full = _groups.length >= assetOverviewMaxGroups;
     final spec = _current;

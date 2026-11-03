@@ -1629,6 +1629,19 @@ const _dutchSourceAddPl = <String, String>{
   'Ga naar de brontabel': 'Przejdź do tabeli źródłowej',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ta tabela jest kopią tabeli źródłowej "{bron}". Edytuj źródło i wybierz Odśwież, albo odłącz widok jako migawkę.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Aby wyszukiwać prywatnie, rozpocznij z osobnym oknem prezentera.',
+  'Privé zoeken': 'Wyszukiwanie prywatne',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publiczność nadal widzi bieżący slajd, dopóki nie wybierzesz Pokaż slajd. Automatyczne odtwarzanie jest wstrzymane. Udostępniaj tylko okno publiczności, a nie cały pulpit.',
+  'Ook in sprekersnotities': 'Uwzględnij notatki prelegenta',
+  'Typ om te zoeken': 'Wpisz tekst, aby wyszukać',
+  'Toon dia': 'Pokaż slajd',
+  'Verder vanaf het begin': 'Kontynuowanie od początku',
+  'Verder vanaf het einde': 'Kontynuowanie od końca',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Brak wyników. Spróbuj krótszego tekstu.',
+  'Treffer {n} van {m}': 'Dopasowanie {n} z {m}',
   'Quizvragen': 'Pytania quizu',
   'Met vragen': 'Z pytaniami',
   'Zonder vragen': 'Bez pytań',

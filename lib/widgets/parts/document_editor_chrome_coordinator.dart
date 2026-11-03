@@ -10,8 +10,16 @@ class _DocumentEditorChromeCoordinator {
   final _DocumentEditorScreenState owner;
   final ValueNotifier<(bool, bool)> historyAvailability;
   Timer? _timer;
+  TextEditingValue? _controllerValue;
   String? _visualPlain;
   int _visualOffset = 0;
+
+  /// Zoekmarkering meldt dezelfde waarde opnieuw; dat is geen caretbeweging.
+  bool observeControllerValue(TextEditingValue value) {
+    if (_controllerValue == value) return false;
+    _controllerValue = value;
+    return true;
+  }
 
   void schedule() {
     _timer?.cancel();

@@ -1632,6 +1632,19 @@ const _dutchSourceAddUk = <String, String>{
   'Ga naar de brontabel': 'Перейти до вихідної таблиці',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ця таблиця є копією вихідної таблиці "{bron}". Відредагуйте джерело й виберіть Оновити або від\'єднайте подання як знімок.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Щоб шукати приватно, почніть з окремого вікна доповідача.',
+  'Privé zoeken': 'Приватний пошук',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Аудиторія бачить поточний слайд, доки ви не виберете Показати слайд. Автоматичне відтворення призупинено. Поширюйте лише вікно аудиторії, а не весь робочий стіл.',
+  'Ook in sprekersnotities': 'Шукати також у нотатках доповідача',
+  'Typ om te zoeken': 'Введіть текст для пошуку',
+  'Toon dia': 'Показати слайд',
+  'Verder vanaf het begin': 'Продовження від початку',
+  'Verder vanaf het einde': 'Продовження від кінця',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Немає результатів. Спробуйте коротший текст для пошуку.',
+  'Treffer {n} van {m}': 'Збіг {n} із {m}',
   'Quizvragen': 'Запитання вікторини',
   'Met vragen': 'Із запитаннями',
   'Zonder vragen': 'Без запитань',

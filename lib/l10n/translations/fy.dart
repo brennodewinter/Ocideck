@@ -664,6 +664,19 @@ const _dutchSourceAddFy = {
   'Ga naar de brontabel': 'Gean nei de boarnetabel',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Dizze tabel is in ôfskrift fan de boarnetabel "{bron}". Bewurkje de boarne en kies Fernije, of untkeppelje de werjefte as momintopname.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Begjin mei in apart presintatorfinster om privee te sykjen.',
+  'Privé zoeken': 'Privee sykje',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'It publyk bliuwt op de hjoeddeiske dia oantsto Dia sjen litte kiest. Automatysk ôfspyljen is ûnderbrutsen. Diel allinnich it publyksfinster, net dyn hiele buroblêd.',
+  'Ook in sprekersnotities': 'Ek yn sprekkersnotysjes sykje',
+  'Typ om te zoeken': 'Typ om te sykjen',
+  'Toon dia': 'Dia sjen litte',
+  'Verder vanaf het begin': 'Fierder fan it begjin ôf',
+  'Verder vanaf het einde': 'Fierder fan de ein ôf',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Gjin resultaten. Besykje in koartere syktekst.',
+  'Treffer {n} van {m}': 'Treffer {n} fan {m}',
   'Quizvragen': 'Kwisfragen',
   'Met vragen': 'Mei fragen',
   'Zonder vragen': 'Sûnder fragen',

@@ -19,6 +19,7 @@ import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../utils/text_search.dart';
+import '../../utils/deck_source_search.dart';
 import '../markdown_editor/markdown_editor_actions.dart';
 import '../markdown_editor/markdown_editor_theme.dart';
 import '../markdown_editor/markdown_editor_toolbar.dart';
@@ -116,6 +117,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   /// met de documenteditor; dit scherm levert alleen de controller en waar de
   /// cursor naartoe springt.
   late final FindReplaceSession _find;
+  DeckSourceSearchIndex? _searchIndex;
+  bool _searchNotes = false;
 
   @override
   void initState() {
@@ -131,7 +134,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       onChanged: () {
         if (mounted) setState(() {});
       },
-      onReveal: _jumpToRange,
+      onReveal: (range) => _jumpToSourceRange(this, range),
+      searchMatches: (source, query, {caseSensitive = false}) =>
+          _sourceSearchIndex(this).matches(query, caseSensitive: caseSensitive),
     );
     _scrollController = ScrollController();
     _editorFocusNode = FocusNode();
@@ -223,7 +228,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       if (target != null) {
         final targetStart = target.start;
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) _jumpToRange(TextMatchRange(targetStart, targetStart));
+          if (mounted) {
+            _jumpToSourceRange(this, TextMatchRange(targetStart, targetStart));
+          }
         });
       }
     }
@@ -350,24 +357,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     for (var i = 0; i < index; i++) {
       offset += lines[i].length + 1;
     }
-    _jumpToRange(TextMatchRange(offset, offset + lines[index].length));
-  }
-
-  void _jumpToRange(TextMatchRange range) {
-    _ctrl.selection = TextSelection(
-      baseOffset: range.start,
-      extentOffset: range.end,
+    _jumpToSourceRange(
+      this,
+      TextMatchRange(offset, offset + lines[index].length),
     );
-    final textBefore = _ctrl.text.substring(0, range.start);
-    final line = '\n'.allMatches(textBefore).length;
-    final target = line * _lineHeight;
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(
-        target.clamp(0.0, _scrollController.position.maxScrollExtent),
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOut,
-      );
-    }
   }
 
   Future<bool> _confirmApplyWithIssues(
@@ -799,6 +792,12 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 showReplace: _find.showReplace,
                 matchCount: _find.matchCount,
                 matchIndex: _find.matchIndex,
+                resultContexts: [
+                  for (final match in _find.matches)
+                    _searchResultContext(this, match),
+                ],
+                onSelectMatch: _find.selectMatch,
+                wrapDirection: _find.wrapDirection,
                 onQueryChanged: _find.onQueryFieldChanged,
                 onReplaceChanged: _find.setReplacement,
                 onCaseSensitiveChanged: _find.setCaseSensitive,
@@ -808,6 +807,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 onReplaceAll: _find.replaceAll,
                 onClose: _find.close,
               ),
+            if (_find.visible && !_find.showReplace) _sourceNotesOption(this),
             const Divider(height: 1),
             _editorArea(lineCount, issueLines),
           ],

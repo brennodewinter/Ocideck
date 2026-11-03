@@ -54,7 +54,10 @@ import '../../utils/shortcut_label.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
+import '../../l10n/deck_search_localization.dart';
 import '../../utils/inline_markdown.dart';
+import '../../utils/deck_text_search.dart';
+import '../../utils/text_search.dart';
 import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
 import '../slides/previews/slide_preview_support.dart';
@@ -83,6 +86,7 @@ part 'parts/presenter_playback.dart';
 part 'parts/presenter_displays.dart';
 part 'parts/presenter_navigation.dart';
 part 'parts/presenter_keys.dart';
+part 'parts/presenter_search.dart';
 part 'parts/presenter_notes.dart';
 part 'parts/presenter_overlays.dart';
 part 'parts/presenter_document.dart';
@@ -692,6 +696,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Presenter view (notities, klok, volgende slide) vs. publieksweergave.
   bool _presenterView = false;
+  final _searchSession = _PresenterSearchSession();
 
   /// Blanco scherm (zwart/wit) tijdens het presenteren.
   _Blank _blank = _Blank.none;

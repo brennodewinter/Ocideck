@@ -661,6 +661,19 @@ const _dutchSourceAddEs = {
   'Ga naar de brontabel': 'Ir a la tabla de origen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Esta tabla es una copia de la tabla de origen "{bron}". Edite el origen y elija Actualizar, o desvincule la vista como instantánea.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Inicia con una ventana de presentador separada para buscar en privado.',
+  'Privé zoeken': 'Búsqueda privada',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'El público sigue viendo la diapositiva actual hasta que elijas Mostrar diapositiva. La reproducción automática está en pausa. Comparte solo la ventana del público, no todo el escritorio.',
+  'Ook in sprekersnotities': 'Incluir notas del presentador',
+  'Typ om te zoeken': 'Escribe para buscar',
+  'Toon dia': 'Mostrar diapositiva',
+  'Verder vanaf het begin': 'Continuando desde el principio',
+  'Verder vanaf het einde': 'Continuando desde el final',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'No hay resultados. Prueba con un texto más corto.',
+  'Treffer {n} van {m}': 'Coincidencia {n} de {m}',
   'Quizvragen': 'Preguntas del cuestionario',
   'Met vragen': 'Con preguntas',
   'Zonder vragen': 'Sin preguntas',

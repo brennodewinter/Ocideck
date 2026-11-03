@@ -370,11 +370,13 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                 visualDensity: VisualDensity.compact,
               ),
               const SizedBox(width: 4),
-              _metric(
-                l10n.d('Klok'),
-                _fmtClock(DateTime.now()),
-                color: Colors.white70,
-                align: CrossAxisAlignment.end,
+              Expanded(
+                child: _metric(
+                  l10n.d('Klok'),
+                  _fmtClock(DateTime.now()),
+                  color: Colors.white70,
+                  align: CrossAxisAlignment.end,
+                ),
               ),
             ],
           ),
@@ -394,12 +396,14 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                   size: 20,
                 ),
               ),
-              _metric(
-                l10n.d('Deze slide'),
-                _fmtElapsed(slideElapsed),
-                color: Colors.white70,
-                align: CrossAxisAlignment.end,
-                size: 20,
+              Expanded(
+                child: _metric(
+                  l10n.d('Deze slide'),
+                  _fmtElapsed(slideElapsed),
+                  color: Colors.white70,
+                  align: CrossAxisAlignment.end,
+                  size: 20,
+                ),
               ),
             ],
           ),
@@ -422,7 +426,10 @@ extension _PresenterOverlays on _FullscreenPresenterState {
     final richTextPlan = _richTextPlanFor(_currentSlide);
     final richTextPages = richTextPlan?.pageCount ?? 1;
     final hasRichTextPages = richTextPages > 1;
-    return Row(
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         _NavButton(
           icon: Icons.chevron_left,
@@ -432,7 +439,6 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ? _prev
               : null,
         ),
-        const SizedBox(width: 8),
         _NavButton(
           icon: Icons.chevron_right,
           onTap:
@@ -442,13 +448,18 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ? _next
               : null,
         ),
-        const SizedBox(width: 8),
         Tooltip(
           message: labelWithShortcut(l10n, 'Slide-overzicht', 'G'),
           child: _NavButton(icon: Icons.grid_view_rounded, onTap: _toggleGrid),
         ),
+        Tooltip(
+          message: labelWithShortcut(l10n, 'Zoeken', 'F'),
+          child: _NavButton(
+            icon: Icons.search,
+            onTap: () => _searchSession.open(this),
+          ),
+        ),
         if (_displays.length > 1) ...[
-          const SizedBox(width: 8),
           Tooltip(
             message: l10n.d('Wissel scherm (S)'),
             child: _NavButton(
@@ -459,11 +470,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
         ],
         // Microfoon-doorvoer (#2158): desktop-only, want de WebRTC-loopback is
         // daar de gedragen route; web heeft zijn eigen afweging (apart issue).
-        if (isDesktopNative) ...[
-          const SizedBox(width: 8),
-          _micButton(this, l10n),
-        ],
-        const SizedBox(width: 16),
+        if (isDesktopNative) _micButton(this, l10n),
         Text(
           hasRichTextPages
               ? '${l10n.d('Slide')} ${_index + 1} / $total'
@@ -475,21 +482,17 @@ extension _PresenterOverlays on _FullscreenPresenterState {
             fontWeight: FontWeight.w600,
           ),
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Text(
-            l10n.d(
-              _displays.length > 1
-                  ? 'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
-                  : 'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
-            ),
-            textAlign: TextAlign.right,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: _muted, fontSize: 11),
+        Text(
+          l10n.d(
+            _displays.length > 1
+                ? 'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
+                : 'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
           ),
+          textAlign: TextAlign.right,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: _muted, fontSize: 11),
         ),
-        const SizedBox(width: 12),
         IconButton(
           tooltip: l10n.d('Afsluiten (Escape)'),
           onPressed: _exit,

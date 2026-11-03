@@ -36,6 +36,7 @@ import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import '../markdown_editor/table_sort_actions.dart' show TableSortIntent;
 import 'doc_mermaid_view.dart';
+import 'document_search_overlay.dart';
 import 'table_edit_controller.dart';
 import 'table_edit_scaffold.dart';
 import 'table_editable_cell.dart';
@@ -552,26 +553,9 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // Fenced block: ``` … ``` (or ~~~). The info string after the opening
-      // fence selects the renderer: `mermaid` is drawn as a diagram, everything
-      // else is a monospace code block.
-      final fence = markdownFenceOpen(trimmed);
-      if (fence != null) {
-        final lang = fence.language;
-        final start = i + 1;
-        var end = start;
-        while (end < lines.length && !fence.closes(lines[end].trim())) {
-          end++;
-        }
-        final code = lines.sublist(start, end).join('\n');
-        blocks.add(
-          _Block(switch (lang) {
-            'mermaid' => _Kind.mermaid,
-            'chart' => _Kind.chart,
-            _ => _Kind.code,
-          }, text: code),
-        );
-        i = end < lines.length ? end + 1 : end;
+      if (_documentFenceAt(lines, i) case final parsed?) {
+        blocks.add(parsed.block);
+        i = parsed.end;
         continue;
       }
 
@@ -631,38 +615,17 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // Block quote: one or more consecutive `> ` lines.
       if (trimmed.startsWith('>')) {
-        final quote = <String>[];
-        while (i < lines.length && lines[i].trimLeft().startsWith('>')) {
-          quote.add(lines[i].trimLeft().replaceFirst(RegExp(r'^>\s?'), ''));
-          i++;
-        }
-        blocks.add(_Block(_Kind.quote, text: quote.join('\n')));
+        final parsed = _documentQuoteAt(lines, i);
+        blocks.add(parsed.block);
+        i = parsed.end;
         continue;
       }
 
-      // List (bulleted or numbered): consecutive item lines, indent = nesting.
       if (_listItem(line) != null) {
-        final items = <_ListLine>[];
-        while (i < lines.length) {
-          final item = _listItem(lines[i]);
-          if (item != null) {
-            items.add(item);
-            i++;
-            continue;
-          }
-          // Een regel die in de bron is afgebroken hoort nog bij het item
-          // erboven (CommonMark noemt dat een lazy continuation). Zonder deze
-          // tak eindigde de lijst hier en werd de rest van de zin een losse
-          // alinea: zonder bolletje, op de linkermarge, met de lijst in tweeën.
-          // Een lege regel sluit de lijst wél af, en een regel die zelf een
-          // blok begint (kop, streep, citaat, tabel, fence) ook.
-          if (items.isEmpty || !_isParagraphLine(lines[i])) break;
-          items[items.length - 1] = items.last.continued(lines[i].trim());
-          i++;
-        }
-        blocks.add(_Block(_Kind.list, items: items));
+        final parsed = _documentListAt(lines, i);
+        blocks.add(parsed.block);
+        i = parsed.end;
         continue;
       }
 
@@ -742,30 +705,12 @@ class DocumentMarkdownView extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [for (final it in items) _listRow(t, it)],
-      ),
-    );
-  }
-
-  Widget _listRow(_Theme t, _ListLine it) {
-    final row = Padding(
-      padding: EdgeInsets.only(left: 4 + it.depth * 20.0, bottom: 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          it.checked == null
-              ? _bulletMarker(t, it)
-              : _checkMarker(t, checked: it.checked!),
-          Expanded(child: _inline(it.text, t.body, t)),
+          for (final it in items)
+            _documentListRow(t, it, (text) => _inline(text, t.body, t)),
         ],
       ),
     );
-    if (it.checked == null) return row;
-    // Announce the box as a checkbox with its state, so a screen reader says
-    // "checked"/"unchecked" instead of reading out a decorative icon. Using the
-    // semantics flag rather than a label keeps this translated by the platform,
-    // which is the only way it stays right in all thirty languages.
-    return Semantics(checked: it.checked, child: row);
   }
 
   Widget _blockQuote(_Theme t, String text) => Container(

@@ -348,7 +348,8 @@ void main() {
   });
 
   testWidgets('find bar navigates between matches', (tester) async {
-    await tester.pumpWidget(_host(content: 'alpha beta alpha gamma alpha'));
+    const source = 'alpha beta alpha gamma alpha';
+    await tester.pumpWidget(_host(content: source));
 
     await tester.tap(find.byType(TextField).last);
     await tester.pump();
@@ -357,15 +358,36 @@ void main() {
 
     await tester.enterText(find.byType(TextField).first, 'alpha');
     await tester.pumpAndSettle();
-    expect(find.text('1 / 3'), findsOneWidget);
+    final sourceController = tester
+        .widget<EditableText>(find.byType(EditableText).last)
+        .controller;
+    expect(find.text('Treffer 1 van 3'), findsOneWidget);
+
+    // Typen stelt de eerste treffer voor; pas navigeren wijst die echt aan.
+    await tester.tap(find.byTooltip('Volgende'));
+    await tester.pump();
+    expect(find.text('Treffer 1 van 3'), findsOneWidget);
+    expect(
+      sourceController.selection,
+      const TextSelection(baseOffset: 0, extentOffset: 5),
+    );
 
     await tester.tap(find.byTooltip('Volgende'));
     await tester.pump();
-    expect(find.text('2 / 3'), findsOneWidget);
+    expect(find.text('Treffer 2 van 3'), findsOneWidget);
+    expect(
+      sourceController.selection,
+      const TextSelection(baseOffset: 11, extentOffset: 16),
+    );
 
     await tester.tap(find.byTooltip('Vorige'));
     await tester.pump();
-    expect(find.text('1 / 3'), findsOneWidget);
+    expect(find.text('Treffer 1 van 3'), findsOneWidget);
+    expect(
+      sourceController.selection,
+      const TextSelection(baseOffset: 0, extentOffset: 5),
+    );
+    expect(sourceController.text, source);
   });
 
   testWidgets('moving the source cursor selects the matching slide', (
@@ -389,7 +411,8 @@ void main() {
   });
 
   testWidgets('case-sensitive toggle recounts matches', (tester) async {
-    await tester.pumpWidget(_host(content: 'Alpha alpha ALPHA'));
+    const source = 'Alpha alpha ALPHA';
+    await tester.pumpWidget(_host(content: source));
 
     await tester.tap(find.byType(TextField).last);
     await tester.pump();
@@ -398,12 +421,25 @@ void main() {
 
     await tester.enterText(find.byType(TextField).first, 'alpha');
     await tester.pumpAndSettle();
-    expect(find.text('1 / 3'), findsOneWidget);
+    final sourceController = tester
+        .widget<EditableText>(find.byType(EditableText).last)
+        .controller;
+    expect(find.text('Treffer 1 van 3'), findsOneWidget);
 
-    // The case-sensitivity toggle is the only checkbox in this editor.
-    await tester.tap(find.byType(Checkbox));
+    // De notitieoptie heeft een eigen checkbox buiten de gedeelde zoekbalk.
+    final caseSensitive = find.descendant(
+      of: find.byType(MarkdownFindBar),
+      matching: find.byType(Checkbox),
+    );
+    expect(caseSensitive, findsOneWidget);
+    await tester.tap(caseSensitive);
     await tester.pumpAndSettle();
-    expect(find.text('1 / 1'), findsOneWidget);
+    expect(find.text('Treffer 1 van 1'), findsOneWidget);
+    expect(
+      sourceController.selection,
+      const TextSelection(baseOffset: 6, extentOffset: 11),
+    );
+    expect(sourceController.text, source);
   });
 
   testWidgets('replace current match swaps only the active occurrence', (
