@@ -253,6 +253,36 @@ class ControllerTest(unittest.TestCase):
         self.assertIn('--state', command)
         self.assertEqual('cancelled', result['runs'][0]['status'])
 
+    def test_publish_reuses_staged_evidence_and_preserves_lower_verdict(self):
+        self.args.run_id = 42
+        self.args.release_id = 'auto'
+        self.args.create_release = True
+        self.args.dist = self.args.state_dir / 'lost-dist'
+        self.args.evidence = self.args.state_dir / 'lost-evidence'
+        stage = self.args.state_dir / self.args.tag / 'web-candidate'
+        (stage / 'dist').mkdir(parents=True)
+        (stage / 'evidence').mkdir()
+        for name in ('channel-manifest-web.json', 'SHA256SUMS.web',
+                     'channel-manifest-web.json.minisig', 'SHA256SUMS.web.minisig'):
+            (stage / 'evidence' / name).write_text('signed-test-evidence')
+        success = {'runs': [{'id': 42, 'status': 'success'}]}
+        with patch.object(control, 'status', return_value=success), \
+             patch.object(control.subprocess, 'run', return_value=SimpleNamespace(returncode=0)) as lower:
+            self.assertEqual(0, control.publish(self.args, FakeForge()))
+        command = lower.call_args.args[0]
+        self.assertEqual((stage / 'dist').resolve(), Path(command[command.index('--dist') + 1]))
+        self.assertEqual((stage / 'evidence').resolve(), Path(command[command.index('--evidence') + 1]))
+        (stage / 'evidence' / 'SHA256SUMS.web.minisig').unlink()
+        with patch.object(control, 'status', return_value=success), \
+             patch.object(control.subprocess, 'run') as lower:
+            with self.assertRaisesRegex(ValueError, 'signed evidence missing'):
+                control.publish(self.args, FakeForge())
+            lower.assert_not_called()
+        (stage / 'evidence' / 'SHA256SUMS.web.minisig').write_text('tampered')
+        with patch.object(control, 'status', return_value=success), \
+             patch.object(control.subprocess, 'run', return_value=SimpleNamespace(returncode=1)):
+            self.assertEqual(1, control.publish(self.args, FakeForge()))
+
 
 if __name__ == '__main__':
     unittest.main()

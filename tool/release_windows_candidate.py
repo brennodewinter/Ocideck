@@ -4,6 +4,7 @@ import argparse
 import base64
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -33,6 +34,10 @@ class GitHub:
         self.authorization = 'header = "Authorization: Bearer ' + token + '"\n'
 
     def request(self, url, output, payload=None, authenticated=True, redirect=False):
+        remaining = getattr(self, 'deadline', None)
+        remaining = None if remaining is None else remaining - time.monotonic()
+        if remaining is not None and remaining <= 0:
+            raise TimeoutError('Windows cancellation deadline reached')
         parsed = urlsplit(url)
         if parsed.scheme != 'https' or parsed.username or parsed.password or parsed.fragment or any(c in url for c in '\r\n"\\'):
             raise ValueError('invalid GitHub request URL')
@@ -43,7 +48,7 @@ class GitHub:
         config = 'url = "' + url + '"\n'
         if authenticated:
             config += self.authorization
-        command = ['curl', '--config', '-', '--silent', '--show-error', '--connect-timeout', '15', '--max-time', '300',
+        command = ['curl', '--config', '-', '--silent', '--show-error', '--connect-timeout', '15', '--max-time', str(min(300, max(1, math.ceil(remaining))) if remaining is not None else 300),
                    '--proto', '=https', '--max-filesize', str(MAX_ARCHIVE if redirect or not authenticated else 2097152),
                    '--output', str(output), '--write-out', '%{http_code}', '--header', 'Accept: application/vnd.github+json']
         headers = Path(str(output) + '.headers')
@@ -55,9 +60,9 @@ class GitHub:
             with tempfile.NamedTemporaryFile() as body:
                 body.write(json.dumps(payload).encode()); body.flush()
                 command[-1] = '@' + body.name
-                result = subprocess.run(command, input=config.encode(), capture_output=True, timeout=330)
+                result = subprocess.run(command, input=config.encode(), capture_output=True, timeout=min(330, remaining) if remaining is not None else 330)
         else:
-            result = subprocess.run(command, input=config.encode(), capture_output=True, timeout=330)
+            result = subprocess.run(command, input=config.encode(), capture_output=True, timeout=min(330, remaining) if remaining is not None else 330)
         if result.returncode:
             raise ValueError('GitHub request failed; reconcile existing runs before retry')
         if redirect and result.stdout in (b'301', b'302', b'303', b'307', b'308'):
@@ -85,6 +90,8 @@ class GitHub:
 def pages(api, path, key):
     values = []
     for page in range(1, 101):
+        if getattr(api, 'deadline', None) is not None and time.monotonic() >= api.deadline:
+            raise TimeoutError('Windows cancellation deadline reached')
         response = api.data(path + ('&' if '?' in path else '?') + 'per_page=100&page=' + str(page))
         current = response.get(key) if isinstance(response, dict) else None
         if not isinstance(current, list) or len(current) > 100 or any(not isinstance(value, dict) for value in current):
@@ -253,19 +260,39 @@ def owned_status(api, sha, ref, operation_id, state=None, forge_run_id=None, con
 def cancel_owned(api, sha, ref, operation_id, wait=False, state=None, forge_run_id=None, controller_sha=None):
     deadline = time.monotonic() + (15 * 60 if wait else 0)
     attempted = set()
-    while True:
-        for run in owned_runs(api, sha, ref, operation_id):
-            if run.get('status') != 'completed' and run['id'] not in attempted:
-                attempted.add(run['id'])
-                try:
-                    api.data('/actions/runs/' + str(run['id']) + '/cancel', {})
-                except ValueError:
-                    # A lost response is reconciled by GET; never repeat the mutation.
-                    pass
-        result = owned_status(api, sha, ref, operation_id, state, forge_run_id, controller_sha)
-        if result['terminal'] or not wait or time.monotonic() >= deadline:
-            return result
-        time.sleep(10)
+    previous_deadline = getattr(api, 'deadline', None)
+    if wait:
+        api.deadline = deadline
+    try:
+        while True:
+            if wait and time.monotonic() >= deadline:
+                raise TimeoutError('Windows cancellation deadline reached')
+            for run in owned_runs(api, sha, ref, operation_id):
+                if wait and time.monotonic() >= deadline:
+                    raise TimeoutError('Windows cancellation deadline reached')
+                if run.get('status') != 'completed' and run['id'] not in attempted:
+                    attempted.add(run['id'])
+                    try:
+                        api.data('/actions/runs/' + str(run['id']) + '/cancel', {})
+                    except ValueError:
+                        # A lost response is reconciled by GET; never repeat the mutation.
+                        pass
+            result = owned_status(api, sha, ref, operation_id, state, forge_run_id, controller_sha)
+            if result['terminal'] or not wait:
+                return result
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError('Windows cancellation deadline reached')
+            time.sleep(min(10, remaining))
+    except (TimeoutError, subprocess.TimeoutExpired):
+        return {'operation_id': operation_id, 'terminal': False, 'unknown': True,
+                'reason': 'Windows cancellation deadline reached', 'runs': []}
+    finally:
+        if previous_deadline is None:
+            if hasattr(api, 'deadline'):
+                del api.deadline
+        else:
+            api.deadline = previous_deadline
 
 
 def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, controller_sha=''):

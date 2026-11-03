@@ -260,6 +260,26 @@ class WindowsCandidateTest(unittest.TestCase):
         self.assertTrue(result['selected_verified'])
         self.assertEqual([], result['runs'])
 
+    def test_cancel_deadline_bounds_slow_api_and_never_claims_terminal(self):
+        clock = [0.0]
+        calls = []
+        def slow_data(path, payload=None):
+            remaining = self.api.deadline - clock[0]
+            calls.append((path, remaining))
+            clock[0] += min(250, remaining)
+            if remaining < 250:
+                raise TimeoutError('request reached deadline')
+            return {'workflow_runs': []}
+        with patch.object(windows.time, 'monotonic', side_effect=lambda: clock[0]), \
+             patch.object(windows.time, 'sleep', side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)), \
+             patch.object(self.api, 'data', side_effect=slow_data):
+            result = windows.cancel_owned(self.api, SHA, REF, 'op-test', wait=True)
+        self.assertEqual(900, clock[0])
+        self.assertFalse(result['terminal'])
+        self.assertTrue(result['unknown'])
+        self.assertTrue(calls)
+        self.assertFalse(hasattr(self.api, 'deadline'))
+
     def test_transport_keeps_credentials_and_signed_urls_out_of_arguments(self):
         secret = 'token-private'
         signed_url = 'https://production.blob.core.windows.net/archive?credential=private'

@@ -19,6 +19,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 from uuid import uuid4
 
 import release_channel
+import release_channel_control
 import release_journal
 
 API = 'https://pawprint.vigilis.online/api/v1/repos/LibreKAT/Ocideck'
@@ -384,6 +385,7 @@ def publish(args, api):
             raise ValueError('dependent Windows runs are not proven terminal green')
     if not getattr(args, 'dist', None) or not getattr(args, 'evidence', None):
         raise ValueError('signed candidate files are required; ready for signing, not publication')
+    release_channel_control.select_candidate_paths(args, args.state_dir.resolve() / args.tag)
     manifest = args.evidence / ('channel-manifest-' + args.channel + '.json')
     sums = args.evidence / ('SHA256SUMS.' + args.channel)
     if any(not path.is_file() or path.is_symlink() for path in (manifest, sums, Path(str(manifest) + '.minisig'), Path(str(sums) + '.minisig'))):

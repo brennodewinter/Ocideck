@@ -34,12 +34,18 @@ def stop(_number, _frame):
     raise KeyboardInterrupt
 
 
-def publisher_command(args, root, state, receipt):
+def select_candidate_paths(args, state):
     stage = state / (args.channel + '-candidate')
     if not args.dist.exists() and (stage / 'dist').is_dir():
         args.dist = stage / 'dist'
     if not args.evidence.exists() and (stage / 'evidence').is_dir():
         args.evidence = stage / 'evidence'
+    return args
+
+
+def publisher_command(args, root, state, receipt):
+    select_candidate_paths(args, state)
+    stage = state / (args.channel + '-candidate')
     command = ['bash', str(root / 'scripts/publish_release_channel.sh')]
     for name in ('release_id', 'run_id', 'tag', 'sha', 'controller_sha', 'channel', 'dist', 'evidence'):
         command += ['--' + name.replace('_', '-'), str(getattr(args, name))]
