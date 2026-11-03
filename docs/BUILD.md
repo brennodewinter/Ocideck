@@ -856,12 +856,13 @@ provenance or publish a channel; the workflow and signing integration must also
 verify the originating run before publication. `make check-release-channels`
 checks tampering and invalid inputs without building the application.
 
-The manual `release-channel.yml` workflow builds web or one Linux format from
-an exact frozen candidate ref. The workflow runs from main and checks the source
-before executing candidate code. Only a successful selected consumer probe can
-produce its candidate manifest. Artifacts are retained for 90 days; retention
-is not durable archival. Independent macOS, Windows and Debian 12 publication
-is not yet supported by this workflow.
+The manual `release-channel.yml` workflow builds one selected channel from an
+exact frozen candidate ref: web, macOS, Windows or one of six Linux profiles
+(tar, Debian 12, deb, rpm, AppImage and Flatpak). The original dispatch runs from
+trusted main; authenticated continuations use the retained controller claim ref.
+Source identity is checked before candidate code executes. Only a successful
+selected consumer probe can produce its candidate manifest. Artifacts are
+retained for 90 days; retention is not durable archival.
 
 `tool/release_journal.py --journal <durable-path> init` binds a journal to the
 version, source, channel and workflow hash. Explicit `record` events preserve
@@ -891,22 +892,24 @@ controller dispatches its publication explicitly after candidate checks. Initial
 channel publication also requires the source to carry the same safe publication
 workflow as the trusted controller; old sources with tag-triggered publication
 are refused. This prevents two different publication paths from writing together.
-The independent workflow has candidate paths for web, five Linux formats and
-Windows. Its Windows path delegates to GitHub native builds and consumer tests.
+The independent workflow has candidate paths for web, macOS, Windows and six
+Linux profiles. Windows delegates to GitHub native builds and consumer tests;
+macOS uses the dedicated Apple runner and retained notarisation submission.
 
 #### Recovery state while the independent route awaits operational proof (2026-11-03)
 
 The independent channel route is **not yet an operationally proven release cycle**. The
 implemented pieces are: exact source and channel manifests
-(`tool/release_channel.py`), a candidate workflow for web, five Linux formats
-and Windows, a fail-closed operation CLI, an append-only evidence journal, a local version-wide controller lock,
+(`tool/release_channel.py`), candidate workflows for all listed channels,
+bounded Windows/macOS continuation, a fail-closed operation CLI, an append-only
+evidence journal, a local version-wide controller lock,
 a remote lock branch in `publish_release_channel.sh`, public asset readback,
 and a public baseline check (`tool/release_baseline.py`). The baseline reads the
 highest non-abandoned tag from both remotes and requires a public release with a
 valid signed channel manifest and matching source version before allowing the
-next version. It does not repair a failed release. macOS and Debian 12
-have **no independent channel build and consumer route yet**. The existing full
-candidate route does not supply independent per-channel availability proof.
+next version. It does not repair a failed release. Independent build and
+consumer adapters now exist for macOS and Debian 12 as well. Their presence
+does not supply independent per-channel availability proof for a new release.
 Native CI, the full repository gate and an end-to-end release for the new route
 are still pending.
 Do not infer readiness or an ETA from the existence of these files.
@@ -949,7 +952,7 @@ loss.
 
 **Stop and inspect:** keep the release monitor paused and do not restart live
 `v0.7.7`. First read `scripts/release_auto.sh --status v0.7.7`, the
-channel controller's read-only `--status` (with its original tag, source, run,
+channel controller's read-only `status` action (with its original tag, source, run,
 channel, state directory and release arguments), the exact Forgejo candidate
 and publisher jobs, both remote tag refs, the public release and asset list, the remote lock branch, and the durable state directory. Use
 `tool/release_journal.py --journal <path> status` and `verify-evidence` on each
