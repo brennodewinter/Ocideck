@@ -1523,3 +1523,20 @@ introducing a brand-new key under pressure:
 
 Either way the reserve private key lives offline and never on a runner, same as
 the primary.
+
+### Independent release operation CLI (experimental)
+
+The experimental operation CLI is `tool/release_channel_controller.py`. Use
+`plan`, then `start` with `--state-dir`, `--tag`, `--sha`, `--controller-sha` and
+`--channel`. `start` saves a random operation ID and immutable source,
+controller, channel and frozen-ref identity before its single workflow dispatch.
+`status` reads the saved operation and remote jobs without changing state;
+`hervat` records the observed run and never dispatches again. If the dispatch
+response is lost and no exact operation ID appears in Forgejo, the state stays
+unknown. `stop` cancels only runs with that exact workflow input and waits for
+terminal readback; Windows also needs terminal proof from its own GitHub helper.
+The `publish` action delegates to the existing channel publisher and requires
+already signed manifest and checksum evidence. Build success is metadata only:
+neither asset bytes nor a public release are proved by a green build run.
+The CLI does not make signing keys available on a runner, so publication still
+requires a separate trusted signing step. Keep `--state-dir` on durable storage.
