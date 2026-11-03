@@ -652,6 +652,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Bewarje earst. Dêrnei kinne jo eksportearje.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Ien HTML-bestân mei echte tekst, koppen en alt-teksten, dat yn elke browser iepent sûnder ynternet — mei tabellen, wiskunde, mermaid en grafiken.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

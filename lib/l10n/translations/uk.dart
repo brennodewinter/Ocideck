@@ -1620,6 +1620,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Спочатку збережіть. Потім ви зможете експортувати.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Один HTML-файл зі справжнім текстом, заголовками та альтернативними текстами, що відкривається в будь-якому браузері без інтернету — з таблицями, формулами, mermaid та графіками.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

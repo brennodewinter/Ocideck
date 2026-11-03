@@ -1620,6 +1620,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Serva primum. Deinde exportare potes.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Unum fasciculum HTML cum vero textu, titulis et textibus alternis, quod in omni navigatore sine interrete aperitur — cum tabulis, mathematica, mermaid et diagrammatibus.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

@@ -1623,6 +1623,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Issejvja l-ewwel. Imbagħad tista\' tesporta.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Fajl HTML wieħed b\'test veru, intestaturi u testi alternattivi, li jiftaħ fi kwalunkwe browser mingħajr internet — b\'tabelli, matematika, mermaid u graffs.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

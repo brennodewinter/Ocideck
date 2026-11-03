@@ -1611,6 +1611,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Pirmiausia išsaugokite. Tada galėsite eksportuoti.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Vienas HTML failas su tikru tekstu, antraštėmis ir alternatyviaisiais tekstais, kuris atsidaro bet kurioje naršyklėje be interneto — su lentelėmis, matematika, mermaid ir grafikais.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

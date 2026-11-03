@@ -1605,6 +1605,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Simpan dulu. Setelah itu Anda bisa mengekspor.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Satu berkas HTML dengan teks asli, judul, dan teks alt, yang terbuka di browser mana pun tanpa internet — dengan tabel, matematika, mermaid, dan grafik.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

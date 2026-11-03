@@ -1608,6 +1608,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Zerschd speichere. Derno chasch exportiere.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Ei HTML-Datei mit echtem Text, Überschrifte und Alt-Täxte, wo in jedem Browser ohni Internet uufgoht — mit Tabelle, Formle, Mermaid und Diagramme.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

@@ -1624,6 +1624,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Първо запазете. След това можете да експортирате.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Един HTML файл с реален текст, заглавия и алтернативни текстове, който се отваря във всеки браузър без интернет — с таблици, математика, mermaid и графики.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

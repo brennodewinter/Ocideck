@@ -1603,6 +1603,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Vispirms saglabājiet. Pēc tam varat eksportēt.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Viena HTML datne ar īstu tekstu, virsrakstiem un alternatīvajiem tekstiem, kas atveras jebkurā pārlūkā bez interneta — ar tabulām, matemātiku, mermaid un diagrammām.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

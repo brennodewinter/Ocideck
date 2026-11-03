@@ -1605,6 +1605,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Tallenna ensin. Sen jälkeen voit viedä.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Yksi HTML-tiedosto, jossa on aitoa tekstiä, otsikoita ja alt-tekstejä ja joka avautuu missä tahansa selaimessa ilman internetiä — taulukoiden, matematiikan, mermaidin ja kaavioiden kanssa.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

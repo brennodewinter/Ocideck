@@ -651,6 +651,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Wardá promé. Despues bo por ekspotá.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Un archivo HTML ku teksto real, kabeseranan i tekstonan alternativo, ku ta habri den kualke browser sin internet — ku tablanan, matemátika, mermaid i gráfikonan.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':

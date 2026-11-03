@@ -300,12 +300,10 @@ class _ExportReadinessChip extends StatelessWidget {
         ),
       ),
       ExportReadinessStatus.needsSave => (
-        l10n.d('Nog opslaan nodig'),
+        l10n.d('Opslaan'),
         Icons.save_outlined,
         amber,
-        deckState.filePath == null
-            ? l10n.t('exportNeedsSave')
-            : l10n.t('exportNeedsClean'),
+        l10n.d('Eerst opslaan. Daarna kun je exporteren.'),
       ),
       ExportReadinessStatus.blockedByClassification => (
         l10n.d('TLP blokkeert export'),
@@ -891,7 +889,7 @@ class _TlpChip extends StatelessWidget {
           if (!isSet) Icon(Icons.shield_outlined, size: 14, color: onBar),
           if (!isSet) const SizedBox(width: 5),
           Text(
-            isSet ? tlp.label : l10n.d('TLP'),
+            isSet ? tlp.label : l10n.d('Delen'),
             style: TextStyle(
               color: isSet ? fg : onBar,
               fontSize: 11.5,

@@ -1605,6 +1605,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Najprej shranite. Nato lahko izvozite.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Ena datoteka HTML s pravim besedilom, naslovi in nadomestnimi besedili, ki se odpre v katerem koli brskalniku brez interneta — s tabelami, matematiko, mermaid in grafikoni.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
