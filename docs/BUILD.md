@@ -1355,17 +1355,19 @@ reuse a pushed tag.
 
 The OciDeck page on **librekat.nl** carries a per-platform download panel
 (version, date, size, and the Linux verification hash) pointing at this release's
-assets. The `website-downloads` job keeps it current automatically: after
-`publiceren`, on the Mac runner, it clones the website repository and runs
-`scripts/bump-ocideck.sh <version>` there — which reads the new verification hash
-and the release date straight from the published release, so nothing is retyped —
-then commits and pushes. That push starts the website repository's own deploy
-workflow, which runs `./publiceersite`. Prereleases are skipped. Finally,
-`release_auto.sh` reads the public OciDeck page back and accepts completion only
-when its download links contain the new tag. A failure cannot undo the published
-release, but it does stop the script from calling the whole release complete; the
-manual fallback is `scripts/bump-ocideck.sh <version>`, commit and push, then
-`./publiceersite` in the website repository.
+assets. The `website-downloads.yml` source updater runs on a Linux Docker runner from
+trusted `main`. The legacy `release_auto.sh` dispatches it after verified
+publication; an independent channel uses the explicit `public` action. It clones
+the website repository and runs `scripts/bump-ocideck.sh <version> [channel]`
+there, checks the generated pages, then commits and pushes the source change.
+That push starts the website repository's own Linux deploy workflow. A green
+source update is therefore separate from live publication: the channel controller
+checks the selected primary download rows in all nine public languages, while
+the legacy script checks its complete-release tag links. Prereleases are skipped.
+A website failure leaves the published release assets intact and blocks claiming
+that public publication is complete. The manual fallback runs the same updater
+in the authoritative website repository, commits and pushes, and follows that
+repository's deployment to terminal success and public readback.
 
 The README download line and the librekat.nl download panel themselves were added
 when the first release (`0.1.0`) existed; nothing one-time is left here.

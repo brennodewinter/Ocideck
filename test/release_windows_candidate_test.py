@@ -311,6 +311,97 @@ class WindowsCandidateTest(unittest.TestCase):
         self.assertFalse(proof['terminal'])
         self.assertFalse(proof['selected_verified'])
 
+    def test_newly_dispatched_run_may_be_missing_from_first_listing(self):
+        original = self.api.data
+        missing = [False]
+        clock = [0.0]
+        def delayed(path, payload=None):
+            result = original(path, payload)
+            if payload is not None and path.endswith('/dispatches'):
+                for values in self.api.runs.values():
+                    for run in values:
+                        run.update(status='in_progress', conclusion=None)
+            dispatched = sum(body is not None and name.endswith('/dispatches') for name, body in self.api.calls)
+            if dispatched == 2 and '/runs?' in path and not missing[0]:
+                missing[0] = True
+                return {'workflow_runs': []}
+            return result
+        def visible_after_wait(seconds):
+            clock[0] += seconds
+            saved = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+            self.assertFalse(saved['closed'])
+            self.assertEqual(['windows-test-check.yml', 'release.yml'], saved['dispatch_intents'])
+            for values in self.api.runs.values():
+                for run in values:
+                    run.update(status='completed', conclusion='success')
+        with patch.object(self.api, 'data', side_effect=delayed), \
+             patch.object(windows.time, 'monotonic', side_effect=lambda: clock[0]), \
+             patch.object(windows.time, 'sleep', side_effect=visible_after_wait):
+            result = windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+                Path(self.temp.name) / 'operation.json', 123, SHA)
+        self.assertTrue(missing[0])
+        self.assertEqual(30, clock[0])
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, result)
+        self.assertEqual(2, sum(body is not None and path.endswith('/dispatches') for path, body in self.api.calls))
+        self.assertFalse(any(path.endswith('/cancel') for path, _ in self.api.calls))
+
+    def test_missing_visibility_reaches_pending_without_losing_known_run_ids(self):
+        original = self.api.data
+        clock = [0.0]
+        def invisible(path, payload=None):
+            result = original(path, payload)
+            dispatched = sum(body is not None and name.endswith('/dispatches') for name, body in self.api.calls)
+            if dispatched == 2 and '/runs?' in path and 'windows-test-check.yml' in path:
+                return {'workflow_runs': []}
+            if payload is not None and path.endswith('/dispatches'):
+                for values in self.api.runs.values():
+                    for run in values:
+                        run.update(status='in_progress', conclusion=None)
+            return result
+        with patch.object(self.api, 'data', side_effect=invisible), \
+             patch.object(windows.time, 'monotonic', side_effect=lambda: clock[0]), \
+             patch.object(windows.time, 'sleep', side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)):
+            result = windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+                Path(self.temp.name) / 'operation.json', 123, SHA)
+        self.assertEqual('pending', result['status'])
+        saved = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+        self.assertFalse(saved['closed'])
+        self.assertEqual({'release.yml': 20}, saved['selected_runs'])
+        self.assertEqual(20 * 60, clock[0])
+        self.assertFalse(any(path.endswith('/cancel') for path, _ in self.api.calls))
+
+    def test_ambiguous_or_wrong_identity_is_not_missing_visibility(self):
+        for invalid in ('duplicate', 'wrong_sha'):
+            self.api = FakeGitHub(ROOT)
+            self.api.new_run('release.yml', 'op-test')
+            if invalid == 'duplicate':
+                self.api.runs['release.yml'].append(dict(self.api.runs['release.yml'][0], id=21))
+            else:
+                self.api.runs['release.yml'][0]['head_sha'] = 'b' * 40
+            saved = dict(operation_id='op-test', tag=TAG, selected_runs={})
+            with self.subTest(invalid=invalid), self.assertRaisesRegex(ValueError, 'unavailable or ambiguous|identity differs'):
+                windows.selected_runs(self.api, SHA, REF, saved, allow_missing=True)
+
+    def test_collect_preserves_bound_ids_when_a_listing_temporarily_loses_one(self):
+        self.pending_fetch()
+        previous = (Path(self.temp.name) / 'operation.json').read_bytes()
+        self.api.calls.clear()
+        original = self.api.data
+        clock = [0.0]
+        def invisible(path, payload=None):
+            result = original(path, payload)
+            return {'workflow_runs': []} if 'release.yml/runs?' in path else result
+        import release_channel_controller as control
+        with patch.object(control, 'Forgejo'), patch.object(control, 'continuation_state', return_value=previous), \
+             patch.object(self.api, 'data', side_effect=invisible), \
+             patch.object(windows.time, 'monotonic', side_effect=lambda: clock[0]), \
+             patch.object(windows.time, 'sleep', side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)):
+            result = windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+                Path(self.temp.name) / 'continuation.json', 124, SHA, True, 123, 'attempt-1')
+        self.assertEqual('pending', result['status'])
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, result['selected_runs'])
+        self.assertFalse(any(payload is not None for _, payload in self.api.calls))
+
     def test_collect_uses_original_ids_after_pending_without_any_mutation(self):
         self.pending_fetch()
         original = (Path(self.temp.name) / 'operation.json').read_bytes()

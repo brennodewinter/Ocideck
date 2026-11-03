@@ -362,12 +362,15 @@ def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, c
                 del api.deadline
 
 
-def selected_runs(api, sha, ref, saved):
+def selected_runs(api, sha, ref, saved, allow_missing=False):
     result = {}
     for workflow in WORKFLOWS:
         values = pages(api, '/actions/workflows/' + workflow + '/runs?branch=' + quote(ref, safe='') + '&event=workflow_dispatch', 'workflow_runs')
         chosen = saved['selected_runs'].get(workflow)
         matches = [run for run in values if (run.get('id') == chosen if chosen else owned_run(run, saved['operation_id']))]
+        if not matches and allow_missing:
+            result[workflow] = None
+            continue
         if len(matches) != 1:
             raise ValueError('Windows selected run unavailable or ambiguous; no dispatch allowed')
         run = matches[0]
@@ -407,8 +410,8 @@ def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sbo
             atomic_write(state, saved)
     try:
         while True:
-            runs = selected_runs(api, sha, ref, saved)
-            saved['selected_runs'] = {workflow: run['id'] for workflow, run in runs.items()}
+            runs = selected_runs(api, sha, ref, saved, allow_missing=True)
+            saved['selected_runs'].update({workflow: run['id'] for workflow, run in runs.items() if run is not None})
             atomic_write(state, saved)
             if any(run and run.get('status') == 'completed' and run.get('conclusion') != 'success' for run in runs.values()):
                 raise ValueError('Windows candidate failed; no automatic rerun')
