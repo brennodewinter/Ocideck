@@ -501,10 +501,19 @@ class AppTheme {
       styleFocusIndicators: false,
       styleFilledButtons: false,
     ).build(profile);
-    // De gedeelde builder levert een eigen TextTheme met Roboto. Dat mag het
-    // gekozen interfacelettertype niet overschrijven; kleuren en maten blijven.
+    final buttonStyle = theme.elevatedButtonTheme.style;
+    // De gedeelde builder overschrijft het gekozen interfacelettertype.
     return theme.copyWith(
       textTheme: theme.textTheme.apply(fontFamily: profile.fontFamily),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: buttonStyle?.copyWith(
+          textStyle: WidgetStateProperty.resolveWith(
+            (states) => buttonStyle.textStyle
+                ?.resolve(states)
+                ?.copyWith(fontFamily: profile.fontFamily),
+          ),
+        ),
+      ),
     );
   }
 

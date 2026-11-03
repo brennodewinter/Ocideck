@@ -18,7 +18,25 @@ void main() {
           final theme = AppTheme.fromProfile(profile);
           expect(theme.colorScheme, original.colorScheme);
           expect(theme.dialogTheme, original.dialogTheme);
-          expect(theme.elevatedButtonTheme, original.elevatedButtonTheme);
+          final button = theme.elevatedButtonTheme.style!;
+          final originalButton = original.elevatedButtonTheme.style!;
+          expect(
+            button.copyWith(textStyle: originalButton.textStyle),
+            originalButton,
+          );
+          for (final states in [
+            <WidgetState>{},
+            {WidgetState.hovered},
+            {WidgetState.disabled},
+            {WidgetState.focused},
+          ]) {
+            expect(
+              button.textStyle!.resolve(states),
+              originalButton.textStyle!
+                  .resolve(states)
+                  ?.copyWith(fontFamily: family),
+            );
+          }
           expect(theme.filledButtonTheme, original.filledButtonTheme);
           for (final role in _roles) {
             expect(

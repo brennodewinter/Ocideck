@@ -114,6 +114,10 @@ void main() {
         matching: find.byType(ElevatedButton),
       );
       expect(action, findsOneWidget);
+      final actionText = tester.widget<RichText>(
+        find.descendant(of: action, matching: find.byType(RichText)).first,
+      );
+      expect(actionText.text.style?.fontFamily, profile.fontFamily);
       final material = tester.widget<Material>(
         find.descendant(of: action, matching: find.byType(Material)).first,
       );
