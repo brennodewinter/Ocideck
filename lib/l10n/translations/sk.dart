@@ -687,8 +687,6 @@ const _dutchSourceSk = {
   'Eerste · laatste slide': 'Prvá · posledná snímka',
   'Slide-overzicht': 'Prehľad snímok',
   'Slide-overzicht (pijltjes + Enter)': 'Prehľad snímok (šípky + Enter)',
-  'Scherm wisselen (meerdere schermen)':
-      'Prepnúť obrazovku (viacero obrazoviek)',
   'Zwart · wit scherm': 'Čierna · biela obrazovka',
   'Automatische modus aan/uit': 'Automatický režim zap./vyp.',
   'Herhalen (loop) aan/uit': 'Opakovanie (slučka) zap./vyp.',

@@ -553,7 +553,6 @@ const _dutchSourcePap = {
   'Eerste · laatste slide': 'Promé · último slide',
   'Slide-overzicht': 'Resumen di slides',
   'Slide-overzicht (pijltjes + Enter)': 'Resumen di slides (flecha + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Kambia pantalla (mas pantalla)',
   'Zwart · wit scherm': 'Pantalla pretu · blanku',
   'Automatische modus aan/uit': 'Modo outomátiko on/off',
   'Herhalen (loop) aan/uit': 'Ripití (loop) on/off',

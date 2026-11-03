@@ -318,10 +318,8 @@ class TableEditController extends ChangeNotifier {
       }
       final next = nextTableCell(r, c, rowCount, colCount);
       if (next == null) {
-        // #2729: Tab op de laatste cel verlaat het rooster — wie met het
-        // toetsenbord werkt moet eruit kunnen. Enter mag de rij nog steeds
-        // bijmaken (hieronder).
-        focusNode(r, c).nextFocus();
+        insertRowAt(rowCount);
+        _focusAfterRebuild(rowCount - 1, 0);
       } else {
         focusCell(next.row, next.col);
       }

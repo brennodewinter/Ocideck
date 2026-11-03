@@ -561,7 +561,6 @@ const _dutchSourceFr = {
   'Eerste · laatste slide': 'Premiere · derniere diapositive',
   'Slide-overzicht': 'Vue d’ensemble',
   'Slide-overzicht (pijltjes + Enter)': 'Vue d’ensemble (fleches + Entree)',
-  'Scherm wisselen (meerdere schermen)': 'Changer d’ecran (plusieurs ecrans)',
   'Zwart · wit scherm': 'Ecran noir · blanc',
   'Automatische modus aan/uit': 'Mode automatique active/desactive',
   'Herhalen (loop) aan/uit': 'Boucle activee/desactivee',

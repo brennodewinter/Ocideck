@@ -690,7 +690,6 @@ const _dutchSourcePl = {
   'Eerste · laatste slide': 'Pierwszy · ostatni slajd',
   'Slide-overzicht': 'Przegląd slajdów',
   'Slide-overzicht (pijltjes + Enter)': 'Przegląd slajdów (strzałki + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Przełącz ekran (wiele ekranów)',
   'Zwart · wit scherm': 'Czarny · biały ekran',
   'Automatische modus aan/uit': 'Tryb automatyczny wł./wył.',
   'Herhalen (loop) aan/uit': 'Powtarzanie (pętla) wł./wył.',

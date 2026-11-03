@@ -557,7 +557,6 @@ const _dutchSourceIt = {
   'Eerste · laatste slide': 'Prima · ultima slide',
   'Slide-overzicht': 'Panoramica slide',
   'Slide-overzicht (pijltjes + Enter)': 'Panoramica slide (frecce + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Cambia schermo (piu schermi)',
   'Zwart · wit scherm': 'Schermo nero · bianco',
   'Automatische modus aan/uit': 'Modalita automatica on/off',
   'Herhalen (loop) aan/uit': 'Ripetizione (loop) on/off',

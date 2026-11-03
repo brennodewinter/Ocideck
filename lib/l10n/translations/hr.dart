@@ -686,7 +686,6 @@ const _dutchSourceHr = {
   'Eerste · laatste slide': 'Prvi · zadnji slajd',
   'Slide-overzicht': 'Pregled slajdova',
   'Slide-overzicht (pijltjes + Enter)': 'Pregled slajdova (strelice + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Prebaci zaslon (više zaslona)',
   'Zwart · wit scherm': 'Crni · bijeli zaslon',
   'Automatische modus aan/uit': 'Automatski način uklj./isklj.',
   'Herhalen (loop) aan/uit': 'Ponavljanje (petlja) uklj./isklj.',

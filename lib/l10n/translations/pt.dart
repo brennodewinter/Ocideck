@@ -698,7 +698,6 @@ const _dutchSourcePt = {
   'Slide-overzicht': 'Vista geral dos slides',
   'Slide-overzicht (pijltjes + Enter)':
       'Vista geral dos slides (setas + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Mudar de ecrã (vários ecrãs)',
   'Zwart · wit scherm': 'Ecrã preto · branco',
   'Automatische modus aan/uit': 'Modo automático ligado/desligado',
   'Herhalen (loop) aan/uit': 'Repetir (ciclo) ligado/desligado',

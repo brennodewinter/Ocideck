@@ -685,7 +685,6 @@ const _dutchSourceLv = {
   'Eerste · laatste slide': 'Pirmais · pēdējais slaids',
   'Slide-overzicht': 'Slaidu pārskats',
   'Slide-overzicht (pijltjes + Enter)': 'Slaidu pārskats (bultiņas + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Pārslēgt ekrānu (vairāki ekrāni)',
   'Zwart · wit scherm': 'Melns · balts ekrāns',
   'Automatische modus aan/uit': 'Automātiskais režīms ieslēgts/izslēgts',
   'Herhalen (loop) aan/uit': 'Atkārtot (cilpa) ieslēgts/izslēgts',

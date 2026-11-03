@@ -686,7 +686,6 @@ const _dutchSourceHu = {
   'Eerste · laatste slide': 'Első · utolsó dia',
   'Slide-overzicht': 'Diaáttekintés',
   'Slide-overzicht (pijltjes + Enter)': 'Diaáttekintés (nyilak + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Képernyőváltás (több kijelző)',
   'Zwart · wit scherm': 'Fekete · fehér képernyő',
   'Automatische modus aan/uit': 'Automatikus mód be/ki',
   'Herhalen (loop) aan/uit': 'Ismétlés (loop) be/ki',

@@ -560,8 +560,6 @@ const _dutchSourceDe = {
   'Eerste · laatste slide': 'Erste · letzte Folie',
   'Slide-overzicht': 'Folienübersicht',
   'Slide-overzicht (pijltjes + Enter)': 'Folienübersicht (Pfeile + Enter)',
-  'Scherm wisselen (meerdere schermen)':
-      'Bildschirm wechseln (mehrere Bildschirme)',
   'Zwart · wit scherm': 'Schwarzer · weißer Bildschirm',
   'Automatische modus aan/uit': 'Automatikmodus ein/aus',
   'Herhalen (loop) aan/uit': 'Wiederholen (Loop) ein/aus',

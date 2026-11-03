@@ -690,8 +690,6 @@ const _dutchSourceLa = {
   'Slide-overzicht': 'Conspectus laminarum',
   'Slide-overzicht (pijltjes + Enter)':
       'Conspectus laminarum (sagittae + Enter)',
-  'Scherm wisselen (meerdere schermen)':
-      'Schermata permutare (plura schermata)',
   'Zwart · wit scherm': 'Schermum nigrum · album',
   'Automatische modus aan/uit': 'Modus automaticus activus/inactivus',
   'Herhalen (loop) aan/uit': 'Iteratio (loop) activa/inactiva',

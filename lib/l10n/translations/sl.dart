@@ -684,7 +684,6 @@ const _dutchSourceSl = {
   'Slide-overzicht': 'Pregled diapozitivov',
   'Slide-overzicht (pijltjes + Enter)':
       'Pregled diapozitivov (puščice + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Preklop zaslona (več zaslonov)',
   'Zwart · wit scherm': 'Črn · bel zaslon',
   'Automatische modus aan/uit': 'Samodejni način vklop/izklop',
   'Herhalen (loop) aan/uit': 'Ponavljanje (zanka) vklop/izklop',

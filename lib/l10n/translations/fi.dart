@@ -685,7 +685,6 @@ const _dutchSourceFi = {
   'Eerste · laatste slide': 'Ensimmäinen · viimeinen dia',
   'Slide-overzicht': 'Diakatsaus',
   'Slide-overzicht (pijltjes + Enter)': 'Diakatsaus (nuolet + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Vaihda näyttöä (useita näyttöjä)',
   'Zwart · wit scherm': 'Musta · valkoinen näyttö',
   'Automatische modus aan/uit': 'Automaattinen tila päälle/pois',
   'Herhalen (loop) aan/uit': 'Toisto (silmukka) päälle/pois',

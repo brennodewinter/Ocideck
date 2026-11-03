@@ -685,7 +685,6 @@ const _dutchSourceSv = {
   'Eerste · laatste slide': 'Första · sista bilden',
   'Slide-overzicht': 'Bildöversikt',
   'Slide-overzicht (pijltjes + Enter)': 'Bildöversikt (pilar + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Byt skärm (flera skärmar)',
   'Zwart · wit scherm': 'Svart · vit skärm',
   'Automatische modus aan/uit': 'Automatiskt läge på/av',
   'Herhalen (loop) aan/uit': 'Upprepa (loop) på/av',

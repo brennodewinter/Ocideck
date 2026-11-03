@@ -690,7 +690,6 @@ const _dutchSourceRo = {
   'Slide-overzicht': 'Prezentare generală a slide-urilor',
   'Slide-overzicht (pijltjes + Enter)':
       'Prezentare generală a slide-urilor (săgeți + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Schimbă ecranul (mai multe ecrane)',
   'Zwart · wit scherm': 'Ecran negru · alb',
   'Automatische modus aan/uit': 'Mod automat activat/dezactivat',
   'Herhalen (loop) aan/uit': 'Repetare (buclă) activat/dezactivat',

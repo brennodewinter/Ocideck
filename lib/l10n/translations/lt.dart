@@ -689,7 +689,6 @@ const _dutchSourceLt = {
   'Eerste · laatste slide': 'Pirma · paskutinė skaidrė',
   'Slide-overzicht': 'Skaidrių apžvalga',
   'Slide-overzicht (pijltjes + Enter)': 'Skaidrių apžvalga (rodyklės + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Perjungti ekraną (keli ekranai)',
   'Zwart · wit scherm': 'Juodas · baltas ekranas',
   'Automatische modus aan/uit': 'Automatinis režimas įjungtas/išjungtas',
   'Herhalen (loop) aan/uit': 'Kartoti (ciklas) įjungta/išjungta',

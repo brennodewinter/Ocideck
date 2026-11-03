@@ -554,7 +554,6 @@ const _dutchSourceFy = {
   'Eerste · laatste slide': 'Earste · lêste slide',
   'Slide-overzicht': 'Slide-oersjoch',
   'Slide-overzicht (pijltjes + Enter)': 'Slide-oersjoch (pylken + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Skerm wikselje (mear skermen)',
   'Zwart · wit scherm': 'Swart · wyt skerm',
   'Automatische modus aan/uit': 'Automatyske modus oan/út',
   'Herhalen (loop) aan/uit': 'Werhelje (loop) oan/út',

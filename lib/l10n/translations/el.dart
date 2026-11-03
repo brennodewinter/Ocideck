@@ -694,7 +694,6 @@ const _dutchSourceEl = {
   'Eerste · laatste slide': 'Πρώτη · τελευταία διαφάνεια',
   'Slide-overzicht': 'Επισκόπηση διαφανειών',
   'Slide-overzicht (pijltjes + Enter)': 'Επισκόπηση διαφανειών (βέλη + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Εναλλαγή οθόνης (πολλαπλές οθόνες)',
   'Zwart · wit scherm': 'Μαύρη · λευκή οθόνη',
   'Automatische modus aan/uit': 'Αυτόματη λειτουργία ναι/όχι',
   'Herhalen (loop) aan/uit': 'Επανάληψη (βρόχος) ναι/όχι',

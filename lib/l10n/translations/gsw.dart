@@ -689,8 +689,6 @@ const _dutchSourceGsw = {
   'Eerste · laatste slide': 'Erschti · letschti Slide',
   'Slide-overzicht': 'Slide-Übersicht',
   'Slide-overzicht (pijltjes + Enter)': 'Slide-Übersicht (Pfyl + Enter)',
-  'Scherm wisselen (meerdere schermen)':
-      'Bildschirm wächsle (mehreri Bildschirm)',
   'Zwart · wit scherm': 'Schwarze · wysse Bildschirm',
   'Automatische modus aan/uit': 'Automatische Modus aa/us',
   'Herhalen (loop) aan/uit': 'Wiederhole (Loop) aa/us',

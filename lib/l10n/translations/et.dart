@@ -686,7 +686,6 @@ const _dutchSourceEt = {
   'Eerste · laatste slide': 'Esimene · viimane slaid',
   'Slide-overzicht': 'Slaidide ülevaade',
   'Slide-overzicht (pijltjes + Enter)': 'Slaidide ülevaade (nooled + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Vaheta ekraani (mitu ekraani)',
   'Zwart · wit scherm': 'Must · valge ekraan',
   'Automatische modus aan/uit': 'Automaatrežiim sees/väljas',
   'Herhalen (loop) aan/uit': 'Kordamine (silmus) sees/väljas',

@@ -693,7 +693,6 @@ const _dutchSourceBg = {
   'Slide-overzicht': 'Преглед на слайдовете',
   'Slide-overzicht (pijltjes + Enter)':
       'Преглед на слайдовете (стрелки + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Смяна на екрана (няколко екрана)',
   'Zwart · wit scherm': 'Черен · бял екран',
   'Automatische modus aan/uit': 'Автоматичен режим вкл./изкл.',
   'Herhalen (loop) aan/uit': 'Повтаряне (цикъл) вкл./изкл.',

@@ -688,7 +688,6 @@ const _dutchSourceDa = {
   'Eerste · laatste slide': 'Første · sidste slide',
   'Slide-overzicht': 'Slideoversigt',
   'Slide-overzicht (pijltjes + Enter)': 'Slideoversigt (piletaster + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Skift skærm (flere skærme)',
   'Zwart · wit scherm': 'Sort · hvid skærm',
   'Automatische modus aan/uit': 'Automatisk tilstand til/fra',
   'Herhalen (loop) aan/uit': 'Gentag (loop) til/fra',

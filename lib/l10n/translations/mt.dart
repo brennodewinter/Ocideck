@@ -692,7 +692,6 @@ const _dutchSourceMt = {
   'Slide-overzicht': 'Ħarsa ġenerali tal-slides',
   'Slide-overzicht (pijltjes + Enter)':
       'Ħarsa ġenerali tal-slides (vleġeġ + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Biddel l-iskrin (diversi skrins)',
   'Zwart · wit scherm': 'Skrin iswed · abjad',
   'Automatische modus aan/uit': 'Modalità awtomatika mixgħula/mitfija',
   'Herhalen (loop) aan/uit': 'Ripetizzjoni (loop) mixgħula/mitfija',

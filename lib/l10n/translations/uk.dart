@@ -694,7 +694,6 @@ const _dutchSourceUk = {
   'Eerste · laatste slide': 'Перший · останній слайд',
   'Slide-overzicht': 'Огляд слайдів',
   'Slide-overzicht (pijltjes + Enter)': 'Огляд слайдів (стрілки + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Змінити екран (кілька екранів)',
   'Zwart · wit scherm': 'Чорний · білий екран',
   'Automatische modus aan/uit': 'Автоматичний режим увімк./вимк.',
   'Herhalen (loop) aan/uit': 'Повтор (цикл) увімк./вимк.',

@@ -679,7 +679,6 @@ const _dutchSourceTr = {
   'Slide-overzicht': 'Slayt genel görünümü',
   'Slide-overzicht (pijltjes + Enter)':
       'Slayt genel görünümü (ok tuşları + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Ekran değiştir (birden fazla ekran)',
   'Zwart · wit scherm': 'Siyah · beyaz ekran',
   'Automatische modus aan/uit': 'Otomatik mod açık/kapalı',
   'Herhalen (loop) aan/uit': 'Tekrar (döngü) açık/kapalı',

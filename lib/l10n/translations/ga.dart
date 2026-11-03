@@ -697,8 +697,6 @@ const _dutchSourceGa = {
   'Slide-overzicht': 'Forbhreathnú sleamhnán',
   'Slide-overzicht (pijltjes + Enter)':
       'Forbhreathnú sleamhnán (saigheada + Enter)',
-  'Scherm wisselen (meerdere schermen)':
-      'Athraigh scáileán (scáileáin iomadúla)',
   'Zwart · wit scherm': 'Scáileán dubh · bán',
   'Automatische modus aan/uit': 'Mód uathoibríoch as/air',
   'Herhalen (loop) aan/uit': 'Athdhéan (lúb) as/air',

@@ -684,7 +684,6 @@ const _dutchSourceId = {
   'Eerste · laatste slide': 'Slide pertama · terakhir',
   'Slide-overzicht': 'Ikhtisar slide',
   'Slide-overzicht (pijltjes + Enter)': 'Ikhtisar slide (panah + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Ganti layar (beberapa layar)',
   'Zwart · wit scherm': 'Layar hitam · putih',
   'Automatische modus aan/uit': 'Mode otomatis nyala/mati',
   'Herhalen (loop) aan/uit': 'Ulangi (loop) nyala/mati',

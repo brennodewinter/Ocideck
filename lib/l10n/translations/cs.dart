@@ -686,7 +686,6 @@ const _dutchSourceCs = {
   'Eerste · laatste slide': 'První · poslední snímek',
   'Slide-overzicht': 'Přehled snímků',
   'Slide-overzicht (pijltjes + Enter)': 'Přehled snímků (šipky + Enter)',
-  'Scherm wisselen (meerdere schermen)': 'Přepnout obrazovku (více obrazovek)',
   'Zwart · wit scherm': 'Černá · bílá obrazovka',
   'Automatische modus aan/uit': 'Automatický režim zap./vyp.',
   'Herhalen (loop) aan/uit': 'Opakování (smyčka) zap./vyp.',
