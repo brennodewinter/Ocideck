@@ -1179,29 +1179,25 @@ before a hash is read or a cask is written. It is
 **macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
 tracked separately (#1227).
 
-- **Where it runs: in the tap, not here.** The tap updates *itself*.
-  `.forgejo/workflows/update-cask.yml` in `LibreKAT/homebrew-ocideck` runs every
-  30 minutes (and on `workflow_dispatch`), reads the newest non-prerelease from
-  this repo's public API, fetches `scripts/update_homebrew_cask.sh`,
-  `homebrew/ocideck.rb.tmpl` and `minisign.pub` **at that tag** over
-  `raw/<path>?ref=<tag>`,
-  regenerates `Casks/ocideck.rb` and pushes — with the per-run Actions token
-  Forgejo mints for that repository. Nothing is committed when the cask is
-  already current, so the half-hourly schedule does not produce noise.
+- **Where it runs: in the tap.** `update-cask.yml` in
+  `LibreKAT/homebrew-ocideck` accepts an explicit `tag`, `operation_id` and
+  `pin`. The channel controller reconciles that exact run and its receipt, then
+  verifies the public cask's URL and SHA-256 against the signed macOS manifest.
+  The half-hourly schedule selects the newest stable release with complete
+  macOS evidence; a Windows-only release cannot advance the cask.
+- **Trusted updater, fixed signing key.** The tap reads one current OciDeck
+  `main` SHA and fetches the generator, verifier, template and abandoned-tag
+  policy at that exact commit. It never executes scripts from a release tag.
+  The tap's committed `minisign.pub` must match the OciDeck signing key.
+  Legacy complete releases use signed `SHA256SUMS`; independent macOS releases
+  require the signed channel manifest and channel checksum list.
+- **Rollback stays selected.** An explicit rollback sets the tap's persistent
+  macOS hold (`pin=true`). Scheduled runs preserve that target. An explicit
+  normal publication clears the hold (`pin=false`). Only the cask and policy
+  may change; a concurrent tap-main change stops the push. No tag or release
+  asset is overwritten. A receipt records the exact committed cask hash even
+  when no source change was necessary.
 
-  Neither `release.yml` writes the cask any more. Until v0.4.8 the forge chain
-  pushed it across with a personal token in `HOMEBREW_TAP_TOKEN`; the forge
-  refused that token after an upgrade (HTTP 401) and the tap sat three releases
-  behind before anyone noticed. Turning it around removed the secret entirely.
-  The cost is that the cask trails a release by up to 30 minutes instead of
-  updating within the run — irrelevant for a tap, since `brew update` is on the
-  user's own clock, and worth it to be rid of a credential that expires.
-- **This repo only supplies the building blocks**, and that coupling is silent:
-  the tap fetches those three paths **by name**, from another repository. Rename
-  or move any of them and the tap quietly keeps serving the previous release.
-  There is no gate here that can see it, so
-  `test/homebrew_cask_verify_test.dart` pins all three paths; if you move them,
-  update the workflow in the tap in the same change.
 - **Tap topology: the forge is the source, GitHub is the backup.** The tap lives
   on our own forge as the canonical repo, **mirrored to GitHub** (a Forgejo
   push-mirror on the tap repo). Homebrew's one-argument shorthand
@@ -1226,7 +1222,9 @@ tracked separately (#1227).
 - **The tap is read back, not assumed.** A workflow that runs green still says
   nothing about what is actually in the tap, so `scripts/verify_homebrew_cask.sh`
   re-reads `Casks/ocideck.rb` over the same public URL Homebrew itself uses and
-  compares its `version` to the release. That check is the daily one below; run it
+  compares its `version` to the release. Channel publication also supplies
+  `--expected-url` and `--expected-sha256`, including mirror identity when
+  requested. The version-only daily check is below; run it
   by hand at any time, and without a tag it checks the newest release:
 
   ```bash
