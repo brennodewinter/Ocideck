@@ -135,7 +135,7 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
     final boxes = <Rect>[];
     var ordinal = 0;
     void visit(RenderObject object) {
-      if (object is _RenderExcludeDocumentSearch ||
+      if ((object is _RenderExcludeDocumentSearch && object.exclude) ||
           ordinal > widget.activeIndex) {
         return;
       }
@@ -211,14 +211,29 @@ class _DocumentSearchOverlayState extends State<DocumentSearchOverlay> {
 
 /// Gegenereerde nummering en onzichtbare invoerlagen zijn geen documenttekst.
 class ExcludeDocumentSearch extends SingleChildRenderObjectWidget {
-  const ExcludeDocumentSearch({super.key, required super.child});
+  const ExcludeDocumentSearch({
+    super.key,
+    required super.child,
+    this.exclude = true,
+  });
+
+  final bool exclude;
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      _RenderExcludeDocumentSearch();
+      _RenderExcludeDocumentSearch(exclude);
+
+  @override
+  void updateRenderObject(
+    BuildContext context,
+    covariant _RenderExcludeDocumentSearch renderObject,
+  ) => renderObject.exclude = exclude;
 }
 
-class _RenderExcludeDocumentSearch extends RenderProxyBox {}
+class _RenderExcludeDocumentSearch extends RenderProxyBox {
+  _RenderExcludeDocumentSearch(this.exclude);
+  bool exclude;
+}
 
 /// Eén tekstmeting kan door alle geknipte paginaweergaven worden hergebruikt.
 class DocumentSearchGeometry extends ChangeNotifier {

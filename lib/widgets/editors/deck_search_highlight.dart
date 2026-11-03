@@ -48,7 +48,7 @@ class _SearchPainter extends CustomPainter {
     canvas.clipRect(Offset.zero & size);
     void visit(Element element) {
       if (element.widget case Offstage(offstage: true)) return;
-      if (element.widget is ExcludeDocumentSearch) return;
+      if (element.widget case ExcludeDocumentSearch(exclude: true)) return;
       if (element.widget case EditableText(:final controller)) {
         if ((controller is EditorTextController
                     ? controller.searchFieldId

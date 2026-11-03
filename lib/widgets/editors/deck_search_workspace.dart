@@ -122,8 +122,10 @@ class _DeckSearchWorkspaceState extends ConsumerState<DeckSearchWorkspace> {
           );
           final state = (element as StatefulElement).state as EditableTextState;
           _targetFocus = state.widget.focusNode;
-          if (element.findAncestorWidgetOfExactType<ExcludeDocumentSearch>() ==
-              null) {
+          if (element
+                  .findAncestorWidgetOfExactType<ExcludeDocumentSearch>()
+                  ?.exclude !=
+              true) {
             Scrollable.ensureVisible(element, alignment: 0.25);
             state.bringIntoView(TextPosition(offset: match.range.end));
           }

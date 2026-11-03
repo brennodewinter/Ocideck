@@ -99,10 +99,10 @@ class TableEditableCell extends StatelessWidget {
             // hoger uitkwam dan het tekstveld.
             fit: StackFit.passthrough,
             children: [
-              if (editing)
-                _field(focus, hideText: false)
-              else
-                ExcludeDocumentSearch(child: _field(focus, hideText: true)),
+              ExcludeDocumentSearch(
+                exclude: !editing,
+                child: _field(focus, hideText: !editing),
+              ),
               if (!editing)
                 // Doorklikbaar: de tik hoort bij het veld eronder, dat er de
                 // cursor van krijgt. En onhoorbaar voor de schermlezer, want het
