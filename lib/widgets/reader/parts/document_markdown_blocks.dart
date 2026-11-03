@@ -739,3 +739,48 @@ class _TranscriptMarkerLine extends StatelessWidget {
     );
   }
 }
+
+List<int>? _nthTableBlockRange(String source, int ordinal) {
+  final lines = source.split('\n');
+  var seen = 0;
+  var i = 0;
+  while (i < lines.length) {
+    final fence = markdownFenceOpen(lines[i].trim());
+    if (fence != null) {
+      var end = i + 1;
+      while (end < lines.length && !fence.closes(lines[end].trim())) {
+        end++;
+      }
+      i = end < lines.length ? end + 1 : end;
+      continue;
+    }
+    // Een tijdlijnmarker + de tabel eronder is in de weergave een
+    // `_Kind.timeline`, geen `_Kind.table` — die hele blokgroep overslaan,
+    // anders loopt de ordinaal uit de pas met de weergave (#1662).
+    if (lines[i].trim() == documentTimelineMarker &&
+        i + 2 < lines.length &&
+        isMarkdownTableLine(lines[i + 1]) &&
+        isMarkdownTableDelimiterRow(lines[i + 2])) {
+      var end = i + 3;
+      while (end < lines.length && isMarkdownTableLine(lines[end])) {
+        end++;
+      }
+      i = end;
+      continue;
+    }
+    if (isMarkdownTableLine(lines[i]) &&
+        i + 1 < lines.length &&
+        isMarkdownTableDelimiterRow(lines[i + 1])) {
+      var j = i + 2;
+      while (j < lines.length && isMarkdownTableLine(lines[j])) {
+        j++;
+      }
+      if (seen == ordinal) return [i, j];
+      seen++;
+      i = j;
+      continue;
+    }
+    i++;
+  }
+  return null;
+}
