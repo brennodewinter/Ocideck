@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
+import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
 import 'model_download.dart';
 import 'model_store.dart';
@@ -162,15 +163,18 @@ class IoModelDownloader implements ModelDownloader {
     } on ModelDownloadException catch (e) {
       await _removeQuietly(part);
       handle._fail(e);
-    } on SocketException catch (e) {
+    } on FileSystemException catch (e) {
       await _removeQuietly(part);
       handle._fail(
-        ModelDownloadException(ModelDownloadFailure.networkFailed, e.message),
+        ModelDownloadException(ModelDownloadFailure.ioFailed, e.message),
       );
-    } on HttpException catch (e) {
+    } on IOException catch (e) {
+      // Socket, HTTP én TLS. Een HandshakeException (een proxy die TLS
+      // openbreekt, een verlopen certificaat) is een TlsException en geen
+      // SocketException; die liep hier eerst langs elke vangst (#2756).
       await _removeQuietly(part);
       handle._fail(
-        ModelDownloadException(ModelDownloadFailure.networkFailed, e.message),
+        ModelDownloadException(ModelDownloadFailure.networkFailed, '$e'),
       );
     } on TimeoutException {
       await _removeQuietly(part);
@@ -180,10 +184,14 @@ class IoModelDownloader implements ModelDownloader {
           'de transfer stond te lang stil',
         ),
       );
-    } on FileSystemException catch (e) {
+    } on Object catch (e, s) {
+      // `_run` draait unawaited: een fout die hier niet landt, laat `done`
+      // nooit aflopen. Dan staat de modelkaart voorgoed op "bezig" en weigert
+      // de manager elke volgende download tot een herstart (#2756).
+      logError('ModelDownloader: onverwachte fout', e, s);
       await _removeQuietly(part);
       handle._fail(
-        ModelDownloadException(ModelDownloadFailure.ioFailed, e.message),
+        ModelDownloadException(ModelDownloadFailure.networkFailed, '$e'),
       );
     }
   }
