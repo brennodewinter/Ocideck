@@ -9,6 +9,7 @@ import 'form_block_embed_syntax.dart';
 import 'image_embed_syntax.dart';
 import 'list_block_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
+import 'chart_embed_syntax.dart';
 import 'mermaid_embed_syntax.dart';
 import 'pentest_block_embed_syntax.dart';
 import 'source_fragment_embed_syntax.dart';
@@ -78,6 +79,8 @@ class MarkdownQuillCodec {
       // ```mermaid-fence een gewoon codeblok en tekende de visuele editor
       // als enige weergave het diagram niet (#1920).
       MermaidFenceSyntax(),
+      // Zelfde route voor de ```chart-fence (#2751).
+      ChartFenceSyntax(),
       FootnoteDefSyntax(),
       EmbeddableTableSyntax(),
     ],
@@ -101,6 +104,7 @@ class MarkdownQuillCodec {
       EmbeddableSpacer.spacerType: EmbeddableSpacer.fromMdSyntax,
       EmbeddableTranscript.transcriptType: EmbeddableTranscript.fromMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.fromMdSyntax,
+      EmbeddableChart.chartType: EmbeddableChart.fromMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.fromMdSyntax,
       EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.fromMdSyntax,
@@ -119,6 +123,7 @@ class MarkdownQuillCodec {
       EmbeddableSpacer.spacerType: EmbeddableSpacer.toMdSyntax,
       EmbeddableTranscript.transcriptType: EmbeddableTranscript.toMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.toMdSyntax,
+      EmbeddableChart.chartType: EmbeddableChart.toMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,
       EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.toMdSyntax,
