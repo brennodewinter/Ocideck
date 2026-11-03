@@ -873,7 +873,15 @@ evidence on durable storage, not in `/tmp`. A stopped or failed phase is never
 retried automatically. Use `tool/release_channel_control.py` for publication with a durable state directory:
 pass `--tag`, `--sha`, `--controller-sha`, `--channel`, `--run-id`, `--dist`,
 `--evidence`, `--state-dir` and `--release-id`. Initial publication additionally
-requires explicit `--create-release --release-id auto`. Sign both the channel
+requires explicit `--create-release --release-id auto`. After inspecting an
+interrupted **draft**, use those same two flags again with all original tag,
+source, controller, channel, run and candidate arguments. `auto` looks up the
+release by the unchanged tag; an existing draft is reused, not recreated.
+Without `--create-release`, a numeric release ID is accepted only for an already
+public release. A draft returning nonzero from `--status` therefore means it is
+not yet publicly verified, not that another release should be created. Never
+resume while an earlier publisher or orphan remote lease still owns the work.
+Sign both the channel
 manifest and its checksum file with minisign first. The controller holds a
 version-wide lease across the publisher and records the returned proof. A killed
 publisher is stopped before the local lease is released; an interrupted started
@@ -952,7 +960,7 @@ loss.
 
 **Stop and inspect:** keep the release monitor paused and do not restart live
 `v0.7.7`. First read `scripts/release_auto.sh --status v0.7.7`, the
-channel controller's read-only `status` action (with its original tag, source, run,
+publication controller's read-only `--status` flag (with its original tag, source, run,
 channel, state directory and release arguments), the exact Forgejo candidate
 and publisher jobs, both remote tag refs, the public release and asset list, the remote lock branch, and the durable state directory. Use
 `tool/release_journal.py --journal <path> status` and `verify-evidence` on each
