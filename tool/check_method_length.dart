@@ -62,6 +62,9 @@ const Map<String, int> methodLengthBaseline = {
   // de stille-fallback-meldingen) — ze horen bij dezelfde beslisboom.
   'lib/widgets/presentation/fullscreen_presenter.dart::FullscreenPresenter.showDualScreen':
       158,
+  // +1 (#2753): het clearbare documentPdfFontPath-paar op het bestaande
+  // clearX-patroon — het veld zelf staat in het instellingenpakket.
+  'lib/models/parts/app_settings.dart::AppSettings.copyWith': 151,
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
       154, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
