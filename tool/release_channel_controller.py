@@ -21,6 +21,7 @@ from uuid import uuid4
 import release_channel
 import release_channel_control
 import release_journal
+import release_channel_capabilities as capabilities
 
 API = 'https://pawprint.vigilis.online/api/v1/repos/LibreKAT/Ocideck'
 WORKFLOW = 'release-channel.yml'
@@ -89,6 +90,19 @@ class Forgejo:
         if len(data) > 131072:
             raise ValueError('Windows journal archive too large')
         return data
+
+    def job_log(self, job_id):
+        if type(job_id) is not int or job_id <= 0:
+            raise ValueError('invalid Forgejo job ID')
+        request = Request(self.base + f'/actions/jobs/{job_id}/logs',
+                          headers={'Authorization': 'token ' + self._token})
+        with self._opener.open(request, timeout=30) as response:
+            if response.status != 200:
+                raise ValueError('job log unavailable')
+            body = response.read(20 * 1024 * 1024 + 1)
+        if len(body) > 20 * 1024 * 1024:
+            raise ValueError('job log exceeds whole-log inspection bound')
+        return body.decode('utf-8', errors='replace').replace(self._token, '[redacted]')
 
     def branch_mutation(self, path, method, payload=None, expected=201):
         request = Request(self.base + path, data=None if payload is None else json.dumps(payload).encode(),
@@ -312,10 +326,20 @@ def snapshot(api, wanted):
         first_error = next(({'job': job.get('name'), 'status': job.get('status'),
                              'started_at': job.get('started_at'), 'completed_at': job.get('completed_at')}
                             for job in work if job.get('status') in {'failure', 'error', 'cancelled'}), None)
-        entries.append({'id': run['id'], 'status': run.get('status'),
+        log_errors = []
+        for job in work:
+            if job.get('status') in ('running', 'failure', 'error'):
+                try:
+                    log_errors.append({'job': job.get('name'),
+                                       'first_failure': capabilities.first_failure(api.job_log(job.get('id'))),
+                                       'inspection': 'whole bounded log'})
+                except (ValueError, OSError, AttributeError) as error:
+                    log_errors.append({'job': job.get('name'), 'inspection': 'unknown',
+                                       'reason': str(error)})
+        entries.append({'log_errors': log_errors, 'id': run['id'], 'status': run.get('status'),
                         'created': run.get('created'), 'updated': run.get('updated'),
                         'started': run.get('started'), 'stopped': run.get('stopped'),
-                        'duration': run.get('duration'),
+                        'duration': run.get('duration'), 'timing': capabilities.timing(run),
                         'jobs': work, 'first_error': first_error})
     return {'operation_id': wanted['operation_id'], 'runs': entries,
             'build_metadata': 'success' if len(entries) == 1 and entries[0]['status'] == 'success' else 'unproven',
@@ -327,6 +351,9 @@ def start(args, api):
     if (not isinstance(main, dict) or main.get('ref') != 'refs/heads/main'
             or main.get('object', {}).get('sha') != args.controller_sha):
         raise ValueError('main differs from requested controller SHA; dispatch not attempted')
+    readiness = capabilities.inspect(api, identity(args))
+    if not readiness['ready']:
+        raise ValueError('; '.join(readiness['blockers']))
     # The durable file and journal are fsynced before the one external POST.
     wanted = reserve(args)
     print(json.dumps({'operation_id': args.operation_id, 'state': 'reserved'}, sort_keys=True), flush=True)
@@ -474,6 +501,9 @@ def stop(args, api):
 
 
 def publish(args, api):
+    readiness = capabilities.inspect(api, identity(args), 'assets')
+    if not readiness['ready']:
+        raise ValueError('; '.join(readiness['blockers']))
     result = status(args, api)
     if len(result['runs']) != 1 or result['runs'][0]['status'] != 'success' or str(result['runs'][0]['id']) != str(args.run_id):
         raise ValueError('exact operation build is not terminal green')
@@ -502,12 +532,13 @@ def publish(args, api):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['plan', 'start', 'status', 'stop', 'hervat', 'publish', 'public', 'rollback'])
+    parser.add_argument('command', choices=['capabilities', 'plan', 'start', 'status', 'stop', 'hervat', 'publish', 'public', 'rollback'])
     parser.add_argument('--state-dir', type=Path, required=True)
     for name in ('tag', 'sha', 'controller-sha', 'channel'):
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--rollback-from')
     parser.add_argument('--operation-id')
+    parser.add_argument('--phase', choices=['build', 'assets', 'website'], default='build')
     parser.add_argument('--run-id')
     parser.add_argument('--release-id', default='auto')
     parser.add_argument('--create-release', action='store_true')
@@ -516,13 +547,16 @@ def main():
     args = parser.parse_args()
     if args.command == 'start':
         args.operation_id = args.operation_id or uuid4().hex
-    elif args.command != 'plan' and not args.operation_id:
+    elif args.command not in ('plan', 'capabilities') and not args.operation_id:
         path = operation_path(args)
         if path.is_symlink() or not path.is_file():
             parser.error('saved operation ID missing')
         args.operation_id = json.loads(path.read_text(), object_pairs_hook=release_channel.no_duplicates).get('operation_id')
     try:
-        if args.command == 'plan':
+        if args.command == 'capabilities':
+            args.operation_id = args.operation_id or 'planned'
+            result = capabilities.inspect(Forgejo(), identity(args), args.phase)
+        elif args.command == 'plan':
             args.operation_id = args.operation_id or 'planned'
             result = {'identity': identity(args), 'action': 'read-only plan; no operation reserved'}
         elif args.command in ('public', 'rollback'):

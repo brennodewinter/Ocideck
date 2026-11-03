@@ -23,6 +23,14 @@ class FakeForge:
         self.jobs = [{'name': 'build', 'status': 'success', 'started_at': 'now', 'completed_at': 'later'}]
 
     def get(self, path):
+        if path == '':
+            return {'permissions': {'push': True}}
+        if path.startswith('/actions/runners?'):
+            return [{'status': 'active', 'labels': ['docker']}]
+        if path.startswith('/actions/secrets?'):
+            return [{'name': 'GH_DISPATCH_TOKEN'}]
+        if path.startswith('/git/refs/heads/codex%2F'):
+            return {'object': {'sha': 'a' * 40}}
         if path == '/git/refs/heads/main':
             return {'ref': 'refs/heads/main', 'object': {'sha': 'b' * 40}}
         if path.startswith('/branches/'):
@@ -88,6 +96,16 @@ class ControllerTest(unittest.TestCase):
             'status': status, 'created': '2026-11-03T08:00:00Z',
             'updated': '2026-11-03T08:01:00Z', 'started': '2026-11-03T08:00:05Z',
             'stopped': '2026-11-03T08:01:00Z', 'duration': 55}
+
+    def test_unknown_capability_never_reserves_or_dispatches(self):
+        api = FakeForge()
+        original = api.get
+        api.get = lambda path: (_ for _ in ()).throw(ValueError('HTTP 403')) if path == '' else original(path)
+        with self.assertRaisesRegex(ValueError, 'capability metadata unavailable'):
+            control.start(self.args, api)
+        self.assertFalse(api.posts)
+        self.assertFalse(api.branches)
+        self.assertFalse(control.operation_path(self.args).exists())
 
     def test_start_persists_identity_before_one_dispatch(self):
         api = FakeForge()

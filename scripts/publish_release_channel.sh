@@ -82,6 +82,8 @@ def main():
     spec = importlib.util.spec_from_file_location('release_channel', root / 'tool/release_channel.py')
     channel = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(channel)
+    sys.path.insert(0, str(root / 'tool'))
+    from release_channel_capabilities import require_space
     channel.identity(args.tag, args.sha, args.channel)
     if not re.fullmatch(r'[0-9a-f]{40}', args.controller_sha) or args.controller_sha == '0' * 40:
         raise ValueError('invalid controller SHA')
@@ -307,6 +309,8 @@ def main():
         lease_owned = True
 
     with tempfile.TemporaryDirectory(prefix='ocideck-publish-') as temp:
+        require_space(Path(temp).resolve() if args.verify_only else Path(args.staging_dir),
+                      sum(file.stat().st_size for file in files))
         stage = private_directory(Path(temp).resolve() / 'verification' if args.verify_only else Path(args.staging_dir))
         staged_dist = private_directory(stage / 'dist')
         staged_evidence = private_directory(stage / 'evidence')
