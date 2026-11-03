@@ -129,7 +129,7 @@ jobs:
           import hashlib, json, os, pathlib
           pages = {}
           for language in ('nl', 'en', 'de', 'es', 'fr', 'it', 'pl', 'pt', 'uk'):
-              path = pathlib.Path('public') / ('' if language == 'nl' else language) / 'ocideck/index.html'
+              path = pathlib.Path('public') / language / 'ocideck/index.html'
               pages[language] = hashlib.sha256(path.read_bytes()).hexdigest()
           value = dict(tag=os.environ['RELEASE_TAG'], channel=os.environ['CHANNEL'],
                        operation_id=os.environ['OPERATION_ID'], commit=os.environ['WEBSITE_COMMIT'], pages=pages)

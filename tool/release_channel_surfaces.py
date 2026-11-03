@@ -61,7 +61,7 @@ def save(args, phase, value):
     _, receipt = phase_paths(args, phase)
     release_channel.immutable_write(receipt, release_channel.encoded(value))
     journal = receipt.parent / (args.channel + '.json')
-    phase = scoped_phase(args, phase)
+    phase = scoped_phase(args, phase).replace('.', '_')
     current = release_journal.read(journal)
     previous = next((e for e in reversed(current['events']) if e['phase'] == phase), None)
     if previous is None:
@@ -75,7 +75,7 @@ def begin(args, phase, value):
     intent, _ = phase_paths(args, phase)
     release_channel.immutable_write(intent, release_channel.encoded(value))
     release_journal.record(SimpleNamespace(journal=intent.parent / (args.channel + '.json'),
-                                         phase=scoped_phase(args, phase), state='started', evidence=[intent]))
+                                         phase=scoped_phase(args, phase).replace('.', '_'), state='started', evidence=[intent]))
 
 
 def public_status(args):
@@ -147,11 +147,80 @@ def website_receipt(api, run_id, nonce, tag, channel):
     return data
 
 
-def verify_pages(data, get=fetch):
-    for language, digest in data['pages'].items():
-        path = '/ocideck/' if language == 'nl' else '/' + language + '/ocideck/'
-        if sha256(get('https://librekat.nl' + path)).hexdigest() != digest:
-            raise ValueError('live download page differs: ' + language)
+ROW_KEYS = {'macos': ('macos',), 'windows': ('windows', 'windows_installer'),
+            'linux-tar': ('linux_tar',), 'linux-debian12': ('linux_debian12',),
+            'linux-deb': ('linux_deb',), 'linux-rpm': ('linux_rpm',),
+            'linux-appimage': ('linux_appimage',), 'linux-flatpak': ('linux_flatpak',)}
+
+
+class DownloadRows(HTMLParser):
+    def __init__(self, keys):
+        super().__init__()
+        self.keys, self.rows, self.stack = set(keys), {}, []
+        self.active = None
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'li' and 'li' in self.stack:
+            index = len(self.stack) - 1 - self.stack[::-1].index('li')
+            if not any(item in ('ul', 'ol') for item in self.stack[index + 1:]):
+                self.stack = self.stack[:index]
+                if self.active and index == self.active[1]:
+                    self.active = None
+        attributes = dict(attrs)
+        if len(attributes) != len(attrs):
+            raise ValueError('duplicate download HTML attributes')
+        if tag == 'li' and attributes.get('data-ocideck-download') in self.keys:
+            key = attributes['data-ocideck-download']
+            if key in self.rows or self.active is not None:
+                raise ValueError('duplicate or nested selected download row')
+            self.rows[key] = []
+            self.active = (key, len(self.stack))
+        if tag == 'a' and self.active and 'product-action-primary' in attributes.get('class', '').split():
+            if 'data-ocideck-download-primary' not in attributes:
+                raise ValueError('selected primary download marker missing')
+            self.rows[self.active[0]].append(attributes.get('href'))
+        if tag not in {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}:
+            self.stack.append(tag)
+
+    def handle_endtag(self, tag):
+        if tag not in self.stack:
+            return
+        index = len(self.stack) - 1 - self.stack[::-1].index(tag)
+        self.stack = self.stack[:index]
+        if self.active and tag == 'li' and len(self.stack) == self.active[1]:
+            self.active = None
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if self.stack and self.stack[-1] == tag:
+            self.handle_endtag(tag)
+
+
+def selected_urls(args):
+    manifest = read_json(args.evidence / ('channel-manifest-' + args.channel + '.json'))
+    if (manifest.get('tag') != args.tag or manifest.get('channel') != args.channel
+            or manifest.get('source') != args.sha or manifest.get('controller_sha') != args.controller_sha):
+        raise ValueError('selected website manifest identity differs')
+    names = [name.format(v=args.tag[1:]) for name in release_channel.CHANNELS[args.channel]
+             if not name.endswith('.json')]
+    if not set(names) <= manifest.get('files', {}).keys():
+        raise ValueError('selected primary downloads absent from signed manifest')
+    return {key: 'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/' + args.tag + '/' + name
+            for key, name in zip(ROW_KEYS[args.channel], names)}
+
+
+def verify_pages(data, expected, get=fetch):
+    # Historical full-page hashes remain provenance; another OS may legitimately
+    # change those pages before this channel's own readback or later resume.
+    if set(data['pages']) != set(LANGUAGES):
+        raise ValueError('historical page provenance incomplete')
+    for language in LANGUAGES:
+        path = '/' + language + '/ocideck/'
+        parser = DownloadRows(expected)
+        parser.feed(get('https://librekat.nl' + path).decode('utf-8'))
+        parser.close()
+        if parser.active or parser.rows != {key: [url] for key, url in expected.items()}:
+            raise ValueError('selected live primary downloads differ: ' + language)
 
 
 def website(args, api):
@@ -208,26 +277,55 @@ def website(args, api):
     work = site.get('/actions/runs/' + str(deploy['id']) + '/jobs')
     if deploy.get('status') != 'success' or not work or any(job.get('status') != 'success' for job in work):
         raise ValueError('website deployment is not terminal green')
-    verify_pages(proof)
+    verify_pages(proof, selected_urls(args))
     return save(args, 'website', dict(proof, deploy_run_id=deploy['id']))
+
+
+WEB_MEMBER_LIMIT = 100000
+WEB_DATA_LIMIT = 4 * 1024**3
+WEB_METADATA_LIMIT = 1024**2
+WEB_METADATA_TOTAL_LIMIT = 8 * 1024**2
+
+
+class BoundedWebMember(tarfile.TarInfo):
+    def _proc_member(self, archive):
+        count = getattr(archive, '_web_count', 0) + 1
+        archive._web_count = count
+        if count > WEB_MEMBER_LIMIT:
+            raise ValueError('web archive has too many members')
+        metadata = self.type in (tarfile.XHDTYPE, tarfile.XGLTYPE, tarfile.SOLARIS_XHDTYPE,
+                                 tarfile.GNUTYPE_LONGNAME, tarfile.GNUTYPE_LONGLINK)
+        if metadata:
+            total = getattr(archive, '_web_metadata', 0) + self.size
+            if self.size > WEB_METADATA_LIMIT or total > WEB_METADATA_TOTAL_LIMIT:
+                raise ValueError('web archive metadata exceeds budget')
+            archive._web_metadata = total
+        elif not (self.isdir() or self.isfile()) or self.type == tarfile.GNUTYPE_SPARSE:
+            raise ValueError('unsafe web archive member type')
+        elif self.size < 0 or self.size > WEB_DATA_LIMIT:
+            raise ValueError('web archive exceeds storage budget')
+        return super()._proc_member(archive)
 
 
 def extract_web(archive, destination, version):
     if destination.exists():
         raise ValueError('web extraction destination must be absent')
-    with tarfile.open(archive, 'r:gz') as bundle:
-        members = bundle.getmembers()
+    with tarfile.open(archive, 'r:gz', tarinfo=BoundedWebMember) as bundle:
+        members = []
         seen, total = set(), 0
-        if len(members) > 100000:
-            raise ValueError('web archive has too many members')
-        for member in members:
+        for member in bundle:
+            if len(members) >= WEB_MEMBER_LIMIT:
+                raise ValueError('web archive has too many members')
             path = PurePosixPath(member.name)
             if (path.is_absolute() or '..' in path.parts or str(path) in seen
                     or not (member.isdir() or member.isfile()) or member.size < 0):
                 raise ValueError('unsafe or duplicate web archive member')
             seen.add(str(path))
             total += member.size
-        if total > 4 * 1024**3 or shutil.disk_usage(destination.parent).free < total + 128 * 1024**2:
+            if total > WEB_DATA_LIMIT:
+                raise ValueError('web archive exceeds storage budget')
+            members.append(member)
+        if total > WEB_DATA_LIMIT or shutil.disk_usage(destination.parent).free < total + 128 * 1024**2:
             raise ValueError('web archive exceeds storage budget')
         destination.mkdir(mode=0o700)
         for member in members:
@@ -310,6 +408,8 @@ def public(args, api):
                     raise ValueError('web publication intent differs')
                 verify_web(bundle)
             else:
+                if subprocess.run(['bash', str(root / 'scripts/deploy_web.sh'), '--preflight-only', '--bundle-dir', str(bundle)], timeout=300).returncode:
+                    raise ValueError('web preflight failed before any deploy intent; repair and retry same bytes')
                 begin(args, 'web', wanted)
                 if subprocess.run(['bash', str(root / 'scripts/deploy_web.sh'), '--bundle-dir', str(bundle)], timeout=2700).returncode:
                     raise ValueError('web deployment interrupted or failed; inspect before resume; never blindly redeploy')
@@ -378,7 +478,7 @@ def check_rollback_pointer(args, get=fetch):
     else:
         tags = set()
         for language in LANGUAGES:
-            path = '/ocideck/' if language == 'nl' else '/' + language + '/ocideck/'
+            path = '/' + language + '/ocideck/'
             tags.update(page_tags(get('https://librekat.nl' + path), args.channel))
     if not tags or not tags <= allowed:
         raise ValueError('current public pointer differs from explicit rollback-from or owned target')

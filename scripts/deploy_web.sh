@@ -42,11 +42,13 @@ OWNER="${OCIDECK_DEPLOY_OWNER:-ubuntu:ubuntu}"
 LIVE_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"
 
 DRY_RUN=0
+PREFLIGHT_ONLY=0
 KEEP_BACKUP=0
 BUNDLE_DIR="build/web"
 while (( $# )); do
   case "$1" in
     --dry-run) DRY_RUN=1 ;;
+    --preflight-only) PREFLIGHT_ONLY=1 ;;
     --keep-backup) KEEP_BACKUP=1 ;;
     --bundle-dir)
       if (( $# < 2 )) || [[ -z "$2" || "$2" == -* ]]; then
@@ -82,6 +84,12 @@ log() { printf '\n== %s ==\n' "$1"; }
 SSH_OPTS=(-o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
   -o ServerAliveInterval=15 -o ServerAliveCountMax=2)
 
+preflight_host() {
+  ssh "${SSH_OPTS[@]}" "$HOST" \
+    "command -v flock python3 sudo tar >/dev/null && sudo -n true && python3 -c 'import ctypes; assert hasattr(ctypes.CDLL(None), \"renameat2\")'" \
+    || { echo "Deploy-host mist wachtwoordloze sudo, flock, python3, tar of renameat2." >&2; exit 1; }
+}
+
 # --- 1. Is er iets te deployen, en klopt het? --------------------------------
 
 log "Bundel controleren"
@@ -104,6 +112,12 @@ DESCRIBE="$(git describe --tags --always --dirty 2>/dev/null || echo 'onbekend')
 echo "Broncode:   $DESCRIBE"
 if [[ "$DESCRIBE" == *-dirty ]]; then
   echo "Let op: deze bundel komt uit een werkkopie met ongecommitte wijzigingen." >&2
+fi
+
+if (( PREFLIGHT_ONLY )); then
+  preflight_host
+  echo "Preflight geslaagd; geen remote mutatie uitgevoerd."
+  exit 0
 fi
 
 STAMP="$(date -u +%Y%m%d-%H%M%S)"
@@ -138,9 +152,9 @@ fi
 
 # De wissel mag niet pas halverwege ontdekken dat de host een vereiste mist.
 # Deze proef verandert niets op de host en loopt vóór uploaden en uitpakken.
-ssh "${SSH_OPTS[@]}" "$HOST" \
-  "command -v flock python3 sudo tar >/dev/null && sudo -n true && python3 -c 'import ctypes; assert hasattr(ctypes.CDLL(None), \"renameat2\")'" \
-  || { echo "Deploy-host mist wachtwoordloze sudo, flock, python3, tar of renameat2." >&2; exit 1; }
+preflight_host
+
+
 
 # --- 2. Uploaden ------------------------------------------------------------
 
