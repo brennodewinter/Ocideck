@@ -13,7 +13,7 @@ class CapabilitiesTest(TestCase):
     def api(self, channel='linux-rpm', secrets=()):
         wanted = {'channel': channel, 'source': 'a' * 40, 'frozen_ref': 'frozen'}
         responses = {'': {'permissions': {'push': True}},
-                     '/actions/runners?limit=100&page=1': [{'status': 'active', 'labels': ['docker:docker://pinned']}],
+                     '/actions/runners?visible=true&limit=100&page=1': [{'status': 'active', 'labels': ['docker:docker://pinned']}],
                      '/actions/secrets?page=1&limit=100': [{'name': name} for name in secrets],
                      '/git/refs/heads/frozen': {'object': {'sha': 'a' * 40}}}
         return SimpleNamespace(get=lambda path: responses[path]), wanted

@@ -21,7 +21,7 @@ def inspect(api, wanted, phase='build'):
         if not isinstance(repository, dict) or repository.get('permissions', {}).get('push') is not True:
             blockers.append('repository write permission not proven')
         if phase != 'assets':
-            runners = api.get('/actions/runners?limit=100&page=1')
+            runners = api.get('/actions/runners?visible=true&limit=100&page=1')
             if not isinstance(runners, list) or len(runners) >= 100:
                 raise ValueError('runner inventory incomplete')
             available = [runner for runner in runners if isinstance(runner, dict)
