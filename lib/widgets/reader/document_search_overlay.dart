@@ -224,10 +224,8 @@ class ExcludeDocumentSearch extends SingleChildRenderObjectWidget {
       _RenderExcludeDocumentSearch(exclude);
 
   @override
-  void updateRenderObject(
-    BuildContext context,
-    covariant _RenderExcludeDocumentSearch renderObject,
-  ) => renderObject.exclude = exclude;
+  void updateRenderObject(BuildContext context, RenderObject renderObject) =>
+      (renderObject as _RenderExcludeDocumentSearch).exclude = exclude;
 }
 
 class _RenderExcludeDocumentSearch extends RenderProxyBox {
