@@ -9,14 +9,60 @@ truth. Releases are tagged (see `SECURITY.md`, *Supported versions*), but this
 document is not fixed to one — it describes the default branch, and details may
 change; the invariants below are enforced by the `make check` /
 `make check-full` gate, not just documented. (The Forgejo instance has an
-Actions runner. The release gate runs `make check-no-coverage` on a `v*` tag
-(#790/#796/#797); the secret and SAST scans (`scans.yml`, #778) and the static
-gate run on manual dispatch, and the time-degrading checks run daily;
+Actions runner. The candidate gate runs `make check-no-coverage` before
+tagging; the secret and SAST scans (`scans.yml`, #778) and the static gate run
+on manual dispatch, and the time-degrading checks run daily;
 `make check` and `make check-full` otherwise remain the committer's local run.
 The workflows under `.github/` are reference definitions for a GitHub mirror
 and do not execute there. Corrected 2026-11-03: this said the scans ran on
 every pull request — that trigger was removed when `make check-full` became
 the committer-side gate, and it said no release had ever been tagged.)
+
+## Release publication boundary (2026-11-03)
+
+The current independent-channel work is a guarded prototype, not an approved
+stable-release path. A candidate uses a frozen source SHA; local manifests bind
+version, source, controller, channel, run and byte hashes. The journal records
+explicit phase transitions and hashes its evidence; a local controller lock
+serializes its writer and a remote branch lock is intended to serialize writes
+to one public version. The publisher verifies signed evidence and exact-run
+provenance, durably stages candidate bytes before tagging, creates a draft
+release, reads every selected signed asset back, and only then flips the draft
+to public and checks public readback again. The next-version
+baseline requires a public, signed channel and matching tags on both remotes.
+These are implemented primitives; the macOS, Windows and Debian 12 independent
+build/consumer routes and a durable publisher-worker hand-off are not.
+
+The publisher checks `origin` and `mirror` tag targets before the public
+release flip. An absent mirror tag is copied from the exact annotated origin
+tag without force, and an uncertain push is read back; an existing conflicting
+tag is never moved. The receipt records the mirror source SHA. Status mode
+checks both remotes without Git, journal or lease mutations.
+
+A journal entry at `started` after interruption is ambiguous. An uncertain
+remote lock creation or upload may have succeeded despite a local error, and a
+remote lock may outlive its controller. Recovery therefore requires a human to
+inspect remote lock ownership, public release/assets and journal evidence
+before recording cancellation or deleting a lock. The tag can exist with an
+incomplete **draft** release, which must be recovered under the same tag; this is not a public release. A public release
+currently proves only the selected channel's signed metadata and bytes, not
+all operating systems. The local controller can reuse its durable staged
+candidate if the original artifact expires, but its child-process and remote
+branch lease still need native CI and interruption/recovery proof. A detached
+publisher worker is not yet implemented. No release should be declared
+complete from local receipts or job success alone. The live `v0.7.7` release
+must not be restarted under this unfinished route, and its monitor remains paused. Tags annotated
+`Release-Mode: channels` are rejected by legacy `release_auto.sh --resume`;
+only the channel controller may verify or continue them.
+
+The open hardening work is tracked in
+[#2773–#2787](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues):
+credential phases; artifact retention and durable storage; runner queue and
+capacity; cache context; pinned tools; time and network uncertainty; Apple
+signing, Windows and Debian 12 native proof; and web, download and package
+channels. These dependencies can fail independently. Release acceptance
+requires terminal checks on the exact source and externally observed bytes,
+including signature verification and public readback.
 
 ## Overview
 

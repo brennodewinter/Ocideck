@@ -516,7 +516,7 @@ Windows machine — nothing verifies that automatically.
 `.github/workflows/release.yml` builds the Windows zip and installer on the
 GitHub mirror for the exact merged commit and stores them as Actions artifacts.
 The forge fetches and verifies those bytes before a version tag exists. The
-tag-triggered publication reuses the verified candidate; it does not build a
+explicitly dispatched publication reuses the verified candidate; it does not build a
 second Windows binary.
 
 **Why the installer is built before the zip.** The packager signs `ocideck.exe`
@@ -760,7 +760,7 @@ changes to `main` do not invalidate their evidence. Before tagging, the script
 checks both refs again, waits for all required results and verifies the 13 assets,
 `SHA256SUMS` and manifest. Any failure leaves the release untagged; retry with
 `--resume vX.Y.Z`. Only then does it create an annotated tag recording the
-candidate run. The tag-triggered workflow validates that record and publishes
+candidate run. The explicitly dispatched workflow validates that record and publishes
 the candidate's unchanged bytes as a draft release. The local script signs
 the manifest, makes the release public and updates the downstream sites and tap.
 The script's wait exceeds the Windows job limit, so the job can report its
@@ -853,7 +853,104 @@ phase starts, outcomes and evidence hashes. `verify-evidence` checks stored byte
 before reuse. Its lock serializes journal writes; the release controller must
 hold a separate lease across external side effects. Keep journals and referenced
 evidence on durable storage, not in `/tmp`. A stopped or failed phase is never
-retried automatically. These primitives do not yet replace the legacy controller.
+retried automatically. Use `tool/release_channel_control.py` for publication with a durable state directory:
+pass `--tag`, `--sha`, `--controller-sha`, `--channel`, `--run-id`, `--dist`,
+`--evidence`, `--state-dir` and `--release-id`. Initial publication additionally
+requires explicit `--create-release --release-id auto`. Sign both the channel
+manifest and its checksum file with minisign first. The controller holds a
+version-wide lease across the publisher and records the returned proof. A killed
+publisher is stopped before the local lease is released; an interrupted started
+phase requires inspection and an explicit cancellation record before resumption.
+A local receipt never replaces fresh public readback.
+
+A tag push no longer starts the legacy all-platform publisher. The existing
+controller dispatches its publication explicitly after candidate checks. Initial
+channel publication also requires the source to carry the same safe publication
+workflow as the trusted controller; old sources with tag-triggered publication
+are refused. This prevents two different publication paths from writing together.
+The independent workflow currently covers web and five Linux formats only.
+
+#### Recovery state while the independent route is unfinished (2026-11-03)
+
+The independent channel route is **not a completed release controller**. The
+implemented pieces are: exact source and channel manifests
+(`tool/release_channel.py`), a manual candidate workflow for web and five Linux
+formats, an append-only evidence journal, a local version-wide controller lock,
+a remote lock branch in `publish_release_channel.sh`, public asset readback,
+and a public baseline check (`tool/release_baseline.py`). The baseline reads the
+highest non-abandoned tag from both remotes and requires a public release with a
+valid signed channel manifest and matching source version before allowing the
+next version. It does not repair a failed release. macOS, Windows and Debian 12
+have **no independent channel build and consumer route yet**. The existing full
+candidate route does not supply independent per-channel availability proof.
+Native CI and the full repository gate for the new route are still pending.
+Do not infer readiness or an ETA from the existence of these files.
+
+The current publisher is a child process of the local controller. It validates
+the successful exact controller run and its build/evidence jobs, the selected
+consumer job, signed manifest and checksum file. Before any tag or release
+write, it streams the candidate into a private durable
+`<state-dir>/<tag>/<channel>-candidate/{dist,evidence}` directory using
+atomic writes and filesystem sync. A failed or interrupted publish retains
+those verified bytes; the controller can reuse them if the original download
+is gone. It then creates the fixed tag and a **draft** release, uploads only
+the selected channel's signed files, and reads every upload back through the
+forge. Only after all selected files match does it change the draft to public
+and read the public release and assets back. Its local receipt records that
+verified outcome, but is not a substitute for a fresh public readback.
+
+The remote lock is `codex/release-publish-lock-<tag>` at the controller SHA. Only a successful
+branch-create response proves ownership. An uncertain create, upload or delete
+response requires remote inspection. The controller stops its own child process
+group on interruption before releasing its local lock; **do not kill unrelated
+release, runner or upload processes**. The remote lock has no automatic expiry
+or takeover. An orphan is an operator incident: read its branch, commit, run,
+release and journal state before any deletion. The publisher requires configured `origin` and `mirror` remotes and checks
+their exact tag targets. If the mirror tag is absent, publication fetches the
+annotated tag from origin into `FETCH_HEAD` and pushes it to the mirror without
+force; an uncertain push is followed by a read-only remote check. A differing
+existing tag stops publication. The receipt records the mirror source SHA.
+`--status` verifies both remote tags without changing Git refs, journal or
+lease state. The tag can already exist while its release is still **draft**
+and its asset set is incomplete. A failure before the public flip leaves that draft and the
+remote lease for inspection; it must resume the same version and source. This
+removes the deliberate public-empty-release interval for the selected channel,
+but it does **not** prove every platform is available. The public flip and
+recovery behavior still need native CI and end-to-end evidence before this can
+be called an approved stable-release route. A durable detached publisher worker
+with an independent lease and explicit hand-off remains a pending contract;
+the current local process/branch pair does not prove survivability across host
+loss.
+
+**Stop and inspect:** keep the release monitor paused and do not restart live
+`v0.7.7`. First read `scripts/release_auto.sh --status v0.7.7`, the
+channel controller's read-only `--status` (with its original tag, source, run,
+channel, state directory and release arguments), the exact Forgejo candidate
+and publisher jobs, both remote tag refs, the public release and asset list, the remote lock branch, and the durable state directory. Use
+`tool/release_journal.py --journal <path> status` and `verify-evidence` on each
+relevant journal; compare its tag, source, channel and workflow digest with the
+candidate run and signed files. An event left at `started` is *unknown*, not a
+failed phase to rerun: inspect whether its child/remote write completed, and
+record an explicit `cancelled` transition only after that investigation. Keep
+any verified public asset and its receipt. Resume only the same version from
+verified source and persisted candidate evidence; never move a pushed tag,
+silently replace a named asset, launch a second publisher, or delete an
+apparent orphan lock before reading its owner and remote effects. A tag
+annotated `Release-Mode: channels` belongs to this controller: the legacy
+`release_auto.sh --resume` refuses it. A public release of one channel proves
+only that channel's signed metadata and bytes; it is not a complete multi-OS
+release. If the evidence is missing or the public
+bytes conflict, stop and repair the specific defect before any further write.
+
+Track the remaining failure classes in issues
+[#2773–#2787](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues):
+credential availability and least-privilege phase boundaries; candidate artifact
+expiry versus durable storage; queued or unavailable runners and capacity;
+cache state and execution context; toolchain pins; clocks, network failures and
+uncertain API writes; Apple signing/notarisation; Windows native builds; and
+web demo, download page and package-channel convergence. Each gate needs an
+exact-commit terminal result and public readback where applicable. None of these
+is evidence of success merely because a dispatch was accepted.
 
 For a reviewed repair to release tooling or packaging after the release PR has
 merged, an operator can explicitly select the merged repair commit with

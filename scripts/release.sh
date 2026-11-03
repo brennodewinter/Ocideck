@@ -2,7 +2,7 @@
 #
 # One orchestrating command for cutting an OciDeck release (#1161): validate,
 # prepare and build locally first, then — once everything local is green — hand
-# off to the tag-driven CI chain and the distribution steps. The human role is
+# off to the explicitly dispatched candidate/publication chain and the distribution steps. The human role is
 # to watch the outcome and confirm the interactive trust points (Developer-ID /
 # notarisation and minisign passwords).
 #
@@ -114,32 +114,18 @@ phase1_local() {
 
 # ── Phases 2 & 3 — the irreversible, outward steps (guided, not auto-fired) ──
 guide_remaining() {
-  local version="${TAG#v}"
   cat <<EOF
 
-== Phase 2 — tag → CI, then watch (run when Phase 1 is green) ==
-The tag drives the whole CI chain (.forgejo/workflows/release.yml: web, linux,
-macos, windows-ophalen, publiceren, website-downloads). A pushed v* tag is
-NEVER moved — a failed release becomes the next patch tag, not a re-tag.
+== Publicatie — expliciet vanuit de geteste kandidaat ==
+Deze oudere helper eindigt na de lokale voorbereiding. Een tagpush start geen
+publicatie meer. Publiceer de hier gebouwde bestanden niet handmatig.
 
-  1. Replace the installed app once the local build is verified:
-       # close the running app first (check with pgrep, not osascript's exit code)
-       ditto build/macos/Build/Products/Release/OciDeck.app /Applications/OciDeck.app
-  2. Push the tag to origin (forge) AND the GitHub mirror (Windows builds there):
-       git push origin $TAG && git push mirror $TAG
-  3. Watch the release run once a minute until every job is done (REST route that
-     works on this instance — GET /releases?limit=N filtered by tag_name, and
-     actions/runs/{id}/jobs for status; /releases/tags/{tag} is unreliable here).
+Gebruik de vastgelegde kandidaatroute in docs/BUILD.md. Voor een bestaande
+release-PR hervat scripts/release_auto.sh --resume $TAG. Voor onafhankelijke
+kanaalpublicatie gebruikt de controller uitsluitend ondertekend kandidaatbewijs.
+Een bestaande releasetag wordt nooit verplaatst; herstel en hervat dezelfde tag.
+Installeer de lokale app pas nadat de gevraagde publieke controles slagen.
 
-== Phase 3 — distribute (run only after CI is green) ==
-  4. Sign the manifest and attach it:
-       make sign-release SHA256SUMS=<downloaded SHA256SUMS>
-  5. LibreKAT website: the website-downloads CI job runs scripts/bump-ocideck.sh
-     $version + ./publiceersite; if it was skipped/failed, run that by hand in the
-     website repo.
-  6. Web live where CI does not (deploy secrets unset): make deploy-web.
-
-See docs/BUILD.md § "Cutting a release" for the why behind each step.
 EOF
 }
 

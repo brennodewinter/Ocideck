@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import stat
 import sys
+import tempfile
 
 CHANNELS = {
     'macos': ['ocideck-macos-{v}.zip'],
@@ -81,12 +82,24 @@ def encoded(value):
 
 
 def immutable_write(path, content):
+    with tempfile.NamedTemporaryFile(dir=path.parent, prefix='.manifest-', delete=False) as stream:
+        pending = Path(stream.name)
+        stream.write(content)
+        stream.flush()
+        os.fsync(stream.fileno())
     try:
-        with path.open('xb') as stream:
-            stream.write(content)
-    except FileExistsError:
-        if path.is_symlink() or not path.is_file() or path.read_bytes() != content:
-            raise ValueError('refusing to replace existing evidence: ' + str(path))
+        try:
+            os.link(pending, path)
+        except FileExistsError:
+            if path.is_symlink() or not path.is_file() or path.read_bytes() != content:
+                raise ValueError('refusing to replace existing evidence: ' + str(path))
+        directory = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
+    finally:
+        pending.unlink()
 
 
 def create(args):

@@ -48,6 +48,49 @@ ${function('find_release_pr')}
 find_release_pr
 ''';
 
+  test('maintenance status reads the selected PR and rejects a wrong base', () {
+    final temp = Directory.systemTemp.createTempSync('release-status-');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    final output = '${temp.path}/status';
+    for (final selectedBase in [base, 'unrelated']) {
+      final body =
+          '''
+set -euo pipefail
+RELEASE_PR=42
+RELEASE_BASE='$base'
+NEW_VERSION=0.7.7
+api() { [ "\$2" = /pulls/42 ] || exit 99; printf '%s' '${jsonEncode({
+            ...valid,
+            'base': {'ref': selectedBase},
+          })}'; }
+${function('status_probe_pr')}
+status_probe_pr '$output'
+''';
+      expect(run(body).exitCode, 0);
+      final result = File(output).readAsStringSync();
+      expect(
+        result,
+        selectedBase == base
+            ? '1|42|open|false\n'
+            : '?|Forgejo-API onleesbaar\n',
+      );
+    }
+  }, skip: skip);
+
+  test('a channel tag cannot restart the legacy release controller', () {
+    for (final annotation in ['Release-Mode: channels', 'Candidate-Run: 123']) {
+      final result = run('''
+set -euo pipefail
+TAG=v0.7.7
+die() { exit 42; }
+git() { printf '%s\\n' '$annotation'; }
+${function('assert_legacy_release_mode')}
+assert_legacy_release_mode
+''');
+      expect(result.exitCode, annotation.contains('channels') ? 42 : 0);
+    }
+  }, skip: skip);
+
   test('maintenance selector accepts exact open and merged release PRs', () {
     final open = run(selector(valid));
     expect(open.exitCode, 0, reason: '${open.stderr}');
@@ -252,11 +295,13 @@ printf '%s' "\$RELEASE_BASE"
     ProcessResult resolve(
       Map<String, Object?> pr, {
       String selected = 'main',
+      bool explicit = false,
     }) => run('''
 set -euo pipefail
 TAG=v0.7.7
 NEW_VERSION=0.7.7
 RELEASE_BASE='$selected'
+RELEASE_BASE_SET=${explicit ? 1 : 0}
 die() { exit 42; }
 api() { printf '%s' '${jsonEncode(pr)}'; }
 ${function('resolve_release_base')}
@@ -292,6 +337,7 @@ printf '%s' "\$RELEASE_BASE"
       expect(resolve({...frozenPr, ...change}).exitCode, 42, reason: '$change');
     }
     expect(resolve(frozenPr, selected: base).exitCode, 42);
+    expect(resolve(frozenPr, explicit: true).exitCode, 42);
   }, skip: skip);
 
   test('CLI defaults to main and validates maintenance-only arguments', () {

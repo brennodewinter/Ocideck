@@ -675,10 +675,18 @@ status_probe_branch() {
 
 status_probe_pr() {
   local pr rc=0
-  pr="$(api GET "/pulls?state=all&limit=50" 2>/dev/null \
-    | jq -r --arg t "chore(release): versie $NEW_VERSION" \
-        '[.[] | select(.title == $t)][0] // empty | "\(.number)|\(.state)|\(.merged)"' \
-    2>/dev/null)" || rc=$?
+  if [ -n "${RELEASE_PR:-}" ]; then
+    pr="$(api GET "/pulls/$RELEASE_PR" 2>/dev/null \
+      | jq -er --arg n "$RELEASE_PR" --arg t "chore(release): versie $NEW_VERSION" --arg b "${RELEASE_BASE:-main}" '
+          select((.number|tostring)==$n and .title==$t and .base.ref==$b
+            and (.head.sha|type=="string" and test("^[0-9a-f]{40}$")))
+          | "\(.number)|\(.state)|\(.merged)"' 2>/dev/null)" || rc=$?
+  else
+    pr="$(api GET "/pulls?state=all&limit=50" 2>/dev/null \
+      | jq -r --arg t "chore(release): versie $NEW_VERSION" \
+          '[.[] | select(.title == $t)][0] // empty | "\(.number)|\(.state)|\(.merged)"' \
+      2>/dev/null)" || rc=$?
+  fi
   if [ "$rc" -ne 0 ]; then printf '?|Forgejo-API onleesbaar\n' >"$1"
   elif [ -n "$pr" ]; then printf '1|%s\n' "$pr" >"$1"
   else printf '0\n' >"$1"; fi
@@ -1067,7 +1075,21 @@ if [ "$PRINT_VERSION" -eq 0 ] && [ -z "$RESUME_TAG" ]; then
   fi
 fi
 
-IFS='.' read -r MAJ MIN PAT <<<"$CUR_VERSION"
+VERSION_BASE="$CUR_VERSION"
+BUILD_BASE="$CUR_BUILD"
+PUBLIC_BASE_TAG=""
+# Alleen echte verse runs lezen publicatiebewijs; hermetische plan/toetsmodi blijven lokaal.
+if [ "$PRINT_VERSION" -eq 0 ] && [ "$DRY_RUN" -eq 0 ] && [ -z "$RESUME_TAG" ] && [ "$SUPERSEDE_UNTAGGED" -eq 0 ]; then
+  need_cmd minisign
+  baseline="$(python3 "$ROOT_DIR/tool/release_baseline.py" \
+    --current-version "$CUR_VERSION" --current-build "$CUR_BUILD" \
+    --repo "$ROOT_DIR" --api "$FORGE_API/repos/$REPO_SLUG" --public-key "$ROOT_DIR/minisign.pub")" \
+    || die "publicatiebasis niet bewezen — hervat een onafgemaakte tag; sla geen versie over."
+  VERSION_BASE="$(jq -er '.version' <<<"$baseline")"
+  BUILD_BASE="$(jq -er '.build' <<<"$baseline")"
+  PUBLIC_BASE_TAG="$(jq -er '.tag' <<<"$baseline")"
+fi
+IFS='.' read -r MAJ MIN PAT <<<"$VERSION_BASE"
 PATCH_V="$MAJ.$MIN.$((PAT + 1))"
 MINOR_V="$MAJ.$((MIN + 1)).0"
 MAJOR_V="$((MAJ + 1)).0.0"
@@ -1079,7 +1101,7 @@ choose_level() {
   if [ "$PREFLIGHT_ONLY" -eq 1 ]; then LEVEL="patch"; return 0; fi
   cat <<MENU
 
-  OciDeck staat op $CUR_VERSION+$CUR_BUILD. Welke release?
+  Bronversie: $CUR_VERSION+$CUR_BUILD. Publicatiebasis: $VERSION_BASE+$BUILD_BASE. Welke release?
 
     1) Kleine release / fix   → $PATCH_V   (patch)
     2) Functionele release    → $MINOR_V   (minor)
@@ -1108,7 +1130,7 @@ else
     minor) NEW_VERSION="$MINOR_V" ;;
     major) NEW_VERSION="$MAJOR_V" ;;
   esac
-  NEW_BUILD=$((CUR_BUILD + 1))
+  NEW_BUILD=$((BUILD_BASE + 1))
   TAG="v$NEW_VERSION"
 fi
 
@@ -1178,7 +1200,7 @@ last_distributed_tag() {
     return 0
   done < <(git tag --merged HEAD --sort=-version:refname --list 'v*')
 }
-LAST_TAG="$(last_distributed_tag)"
+LAST_TAG="${PUBLIC_BASE_TAG:-$(last_distributed_tag)}"
 TODAY="$(date +%Y-%m-%d)"
 
 changelog_has_section() { grep -q "^## \[$NEW_VERSION\]" CHANGELOG.md; }
@@ -2311,7 +2333,7 @@ find_release_pr() {
             or (.merged == false and .state == "open" and .head.ref == $branch) end)
         and (if .merged == true then (.merge_commit_sha | type == "string" and test("^[0-9a-f]{40}$"))
           else (.merge_commit_sha == null or .merge_commit_sha == "") end))
-      | "\(.number)|\(.state)|\(.merged)|\(.head.sha)|\(.merge_commit_sha)"' \
+      | "\(.number)|\(.state)|\(.merged)|\(.head.sha)|\(.merge_commit_sha // "")"' \
       || die "expliciete release-PR moet bij versie $NEW_VERSION en basis $selected_base horen."
     return 0
   fi
@@ -2585,7 +2607,7 @@ resolve_release_base() { # resolve_release_base PR HEAD_SHA
     select((.number|tostring)==$n and .title==$title and .head.sha==$sha) | .base.ref' <<<"$proof")" \
     || die "release-PR-identiteit wijkt af."
   if [ "$base" != "${RELEASE_BASE:-main}" ]; then
-    [ "${RELEASE_BASE:-main}" = main ] && [ "$base" = "codex/release-base-$TAG" ] \
+    [ "${RELEASE_BASE_SET:-0}" -eq 0 ] && [ "${RELEASE_BASE:-main}" = main ] && [ "$base" = "codex/release-base-$TAG" ] \
       || die "release-PR heeft een andere basis dan geselecteerd."
     RELEASE_BASE="$base"
   fi
@@ -3185,6 +3207,12 @@ wait_tag_gates() {
 # --resume: hervat een onderbroken release vanaf het punt waar het bleef. Kijkt wat
 # er al op de forge staat en doet alleen de rest; fase 1 (bouwen) wordt niet
 # overgedaan — die zit al in de gepushte branch/PR als we hier iets vinden.
+assert_legacy_release_mode() {
+  if git cat-file -p "refs/tags/$TAG" 2>/dev/null | grep -qxF 'Release-Mode: channels'; then
+    die "$TAG gebruikt kanaalpublicatie — hervat of controleer met tool/release_channel_control.py, niet met de volledige releaseketen."
+  fi
+}
+
 resume_release() {
   section "Hervatten — $TAG"
   # Wat we hervatten staat al op origin; een fout onderweg hoort dus ook hier
@@ -3202,6 +3230,7 @@ resume_release() {
       git fetch --quiet origin "refs/tags/$TAG:refs/tags/$TAG" \
         || die "kon bestaande tag $TAG niet lokaal ophalen."
     fi
+    assert_legacy_release_mode
     tagged_version="$(git show "$origin_tag:pubspec.yaml" 2>/dev/null \
       | sed -n 's/^version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')"
     [ "$tagged_version" = "$NEW_VERSION" ] \

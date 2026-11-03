@@ -10,6 +10,9 @@ void main() {
         '.forgejo/workflows/release-channel.yml',
       ).readAsStringSync();
       expect(workflow, contains('workflow_dispatch:'));
+      final legacy = File('.forgejo/workflows/release.yml').readAsStringSync();
+      expect(legacy, isNot(contains('  push:')));
+      expect(legacy, contains('workflow_dispatch:'));
       expect(workflow, isNot(contains('push:')));
       expect(workflow, isNot(contains('runs-on: macos')));
       expect(workflow, contains('name: channel-candidate-'));
@@ -24,6 +27,15 @@ void main() {
       expect(workflow, isNot(contains('make package-linux')));
       expect(workflow, contains("github.ref == 'refs/heads/main'"));
       expect(workflow, contains('retention-days: 90'));
+      expect(workflow, contains('channel-native-linux-x64-'));
+      for (final input in [
+        'source/.tool-versions',
+        'source/pubspec.lock',
+        'source/third_party/**',
+        'controller/.forgejo/workflows/release-channel.yml',
+      ]) {
+        expect(workflow, contains(input));
+      }
       expect(
         workflow.indexOf('Vaste bron controleren'),
         lessThan(workflow.indexOf('path: source')),

@@ -49,6 +49,18 @@ jobs:
           persist-credentials: false
           ref: ${{ inputs.source_sha }}
           path: source
+      - name: Pub-cache voor de vastgelegde toolchain
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: /root/.pub-cache
+          key: channel-pub-linux-x64-${{ hashFiles('source/.tool-versions', 'source/pubspec.lock') }}
+      - name: Native hooks voor dezelfde bronafhankelijkheden en bouwomgeving
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            source/.dart_tool/hooks_runner
+            source/build/native_assets
+          key: channel-native-linux-x64-${{ hashFiles('source/.tool-versions', 'source/pubspec.lock', 'source/packages/**', 'source/third_party/**', 'source/hook/**', 'controller/.forgejo/workflows/release-channel.yml') }}
       - name: Bouwgereedschap voor het gekozen kanaal
         env:
           CHANNEL: ${{ inputs.channel }}

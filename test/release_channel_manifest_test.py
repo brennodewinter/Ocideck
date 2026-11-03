@@ -6,6 +6,7 @@ from pathlib import Path
 import tempfile
 from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 SPEC = importlib.util.spec_from_file_location('release_channel', Path(__file__).resolve().parents[1] / 'tool/release_channel.py')
 channel = importlib.util.module_from_spec(SPEC)
@@ -110,6 +111,15 @@ class ChannelManifestTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             channel.create(self.args)
         self.assertEqual(before, self.args.output.read_bytes())
+
+    def test_interruption_before_atomic_link_leaves_no_partial_manifest(self):
+        with patch.object(channel.os, 'link', side_effect=OSError('simulated interruption')):
+            with self.assertRaises(OSError):
+                channel.create(self.args)
+        self.assertFalse(self.args.output.exists())
+        self.assertFalse(list(self.base.glob('.manifest-*')))
+        channel.create(self.args)
+        self.assertEqual(channel.verify(self.args)['source'], self.args.sha)
 
     def test_strict_identifiers(self):
         for key, values in [('tag', ['v01.2.3', '../v0.7.7', '0.7.7']),

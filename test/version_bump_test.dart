@@ -149,6 +149,19 @@ void main() {
       );
     });
 
+    test('een onderhoudstag buiten main telt voor de volgende bump', () {
+      git(['tag', 'v0.7.6']);
+      git(['checkout', '-b', 'maintenance']);
+      File('${repo.path}/leeg.txt').writeAsStringSync('maintenance\n');
+      git(['commit', '-am', 'maintenance']);
+      git(['tag', 'v0.7.7']);
+      git(['tag', 'v1.2.1']);
+      git(['checkout', 'main']);
+      expect(versionBaseline('0.7.6', workingDirectory: repo.path), '0.7.6');
+      expect(versionBaseline('0.7.8', workingDirectory: repo.path), '0.7.7');
+      expect(isLegalTransition(SemVer.tryParse('0.7.7')!, '0.7.9'), isFalse);
+    });
+
     test('alleen proeftags: geen basislijn, dus geen oordeel', () {
       git(['tag', 'v0.5.0-rc1']);
 
