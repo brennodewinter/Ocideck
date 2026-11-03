@@ -519,9 +519,10 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3512, // +17 (#2733/#2741): tegel-semantiek in het
+      3522, // +17 (#2733/#2741): tegel-semantiek in het
   // presenter-raster en de verduidelijkt-schermteksten — zinnen die bij
-  // deze State's schermtoestand horen.
+  // deze State's schermtoestand horen. +10: rebase op de zoek-eindtoestand
+  // van #2791 — de zoekvelden landden in deze State.
   // +47 (sweep #2633): de doorspeelvoortgang als
   // ValueNotifier plus de balk in Positioned+IgnorePointer — State-velden
   // van deze klasse, afhandeling staat in presenter_playback.
