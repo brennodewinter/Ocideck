@@ -497,10 +497,15 @@ class AppTheme {
       foundation.inlineCodeBackground(textColor);
 
   static ThemeData fromProfile(AppAppearanceProfile profile) {
-    return const foundation.AppThemeBuilder(
+    final theme = const foundation.AppThemeBuilder(
       styleFocusIndicators: false,
       styleFilledButtons: false,
     ).build(profile);
+    // De gedeelde builder levert een eigen TextTheme met Roboto. Dat mag het
+    // gekozen interfacelettertype niet overschrijven; kleuren en maten blijven.
+    return theme.copyWith(
+      textTheme: theme.textTheme.apply(fontFamily: profile.fontFamily),
+    );
   }
 
   static ThemeData get light => fromProfile(AppAppearanceProfile.basic);

@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 
 Future<void> _chord(
@@ -17,7 +18,11 @@ Future<void> _chord(
   await tester.pumpAndSettle();
 }
 
-Future<void> _host(WidgetTester tester, List<Slide> slides) async {
+Future<void> _host(
+  WidgetTester tester,
+  List<Slide> slides, {
+  ThemeData? theme,
+}) async {
   tester.view.physicalSize = const Size(1400, 1000);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
@@ -35,6 +40,7 @@ Future<void> _host(WidgetTester tester, List<Slide> slides) async {
   );
   await tester.pumpWidget(
     MaterialApp(
+      theme: theme,
       home: FullscreenPresenter(
         slides: slides,
         projectPath: null,
@@ -51,6 +57,75 @@ Future<void> _host(WidgetTester tester, List<Slide> slides) async {
 }
 
 void main() {
+  for (final profile in [
+    AppAppearanceProfile.basic,
+    AppAppearanceProfile.dark,
+    AppAppearanceProfile.basic.copyWith(
+      name: 'Eigen zoekstijl',
+      primaryColor: '#472D73',
+      accentColor: '#BD325A',
+      surfaceColor: '#FFF6E0',
+      textColor: '#234631',
+      mutedTextColor: '#765630',
+      fontFamily: 'Lora',
+    ),
+  ]) {
+    testWidgets('privézoeken behoudt gekozen appstijl ${profile.name}', (
+      tester,
+    ) async {
+      final theme = AppTheme.fromProfile(profile);
+      final palette = AppPalette.of(theme);
+      await _host(tester, [
+        Slide.create(SlideType.bullets).copyWith(title: 'zoekanker eerste'),
+        Slide.create(SlideType.bullets).copyWith(title: 'zoekanker tweede'),
+      ], theme: theme);
+      await _chord(
+        tester,
+        LogicalKeyboardKey.controlLeft,
+        LogicalKeyboardKey.keyF,
+      );
+      final field = find.byKey(const ValueKey('presenter-search-query'));
+      await tester.enterText(field, 'zoekanker');
+      await tester.pumpAndSettle();
+      expect(Theme.of(tester.element(field)).brightness, theme.brightness);
+      expect(
+        Theme.of(tester.element(field)).dialogTheme.backgroundColor,
+        AppTheme.parseHexColor(profile.surfaceColor),
+      );
+      final editable = tester.widget<EditableText>(
+        find.descendant(of: field, matching: find.byType(EditableText)),
+      );
+      expect(editable.focusNode.hasFocus, isTrue);
+      final snippets = tester
+          .widgetList<RichText>(
+            find.descendant(
+              of: find.byType(AlertDialog),
+              matching: find.byType(RichText),
+            ),
+          )
+          .where((text) => text.text.toPlainText() == 'zoekanker eerste');
+      expect(snippets, isNotEmpty);
+      for (final snippet in snippets) {
+        expect(snippet.text.style?.color, palette.mutedText);
+        expect(snippet.text.style?.fontFamily, profile.fontFamily);
+      }
+      final action = find.ancestor(
+        of: find.text('Toon dia'),
+        matching: find.byType(ElevatedButton),
+      );
+      expect(action, findsOneWidget);
+      final material = tester.widget<Material>(
+        find.descendant(of: action, matching: find.byType(Material)).first,
+      );
+      expect(material.color, AppTheme.parseHexColor(profile.accentColor));
+      expect(
+        material.shape,
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+      );
+      await tester.pumpWidget(const SizedBox());
+    });
+  }
+
   for (final platform in [TargetPlatform.macOS, TargetPlatform.windows]) {
     testWidgets(
       '$platform native find and select-all keep editing shortcuts working',

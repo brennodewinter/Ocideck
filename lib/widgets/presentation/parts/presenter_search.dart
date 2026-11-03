@@ -278,7 +278,7 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
             onPressed: () => Navigator.pop(context),
             child: Text(l10n.d('Sluiten')),
           ),
-          FilledButton(
+          ElevatedButton(
             onPressed: selected == null || !widget.canShow
                 ? null
                 : () =>
@@ -332,6 +332,8 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
   }) {
     final l10n = context.l10n;
     final session = widget.session;
+    final theme = Theme.of(context);
+    final palette = AppPalette.of(theme);
     final page = widget.pages[match.slideIndex];
     final spans = <TextSpan>[];
     var cursor = 0;
@@ -351,10 +353,16 @@ class _PresenterSearchDialogState extends State<_PresenterSearchDialog> {
     spans.add(TextSpan(text: match.context.substring(cursor)));
     return ListTile(
       selected: i == index,
+      textColor: theme.textTheme.bodyLarge?.color,
+      selectedColor: palette.accentInk,
+      titleTextStyle: theme.textTheme.bodyLarge,
       title: Text(
         '${l10n.d('Slide')} ${page.index + 1} · ${deckSearchLocation(l10n, match)}${page.page > 0 ? ' · ${l10n.d('Pagina')} ${page.page + 1}' : ''}',
       ),
-      subtitle: Text.rich(TextSpan(children: spans)),
+      subtitle: Text.rich(
+        TextSpan(children: spans),
+        style: theme.textTheme.bodyMedium?.copyWith(color: palette.mutedText),
+      ),
       onTap: preview
           ? null
           : () => setState(() {

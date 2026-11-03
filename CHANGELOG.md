@@ -62,6 +62,8 @@ All notable changes to OciDeck are documented in this file.
 - **Privé zoeken tijdens presenteren.** Met een apart publieksvenster kun je
   passages en optioneel sprekersnotities terugvinden. Het publiek blijft op de
   huidige dia totdat je bewust *Toon dia* kiest; automatisch doorspelen pauzeert.
+  Het zoekvenster volgt de gekozen appstijl, inclusief kleuren, knopvorm en
+  lettertype. Aangepaste applettertypen worden weer doorgegeven aan het thema.
 
 - **Quizvragen bij de export.** In het exportdialoog kun je vraagdia's
   meenemen, weglaten of als eigen bestand exporteren. De bestandsnaam krijgt
