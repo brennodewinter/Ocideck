@@ -38,6 +38,9 @@ void main() {
 set -uo pipefail
 STEP=
 MINISIGN_PW=old
+RESUME_TAG=
+PREFLIGHT_ONLY=0
+freeze_release_source() { printf 'freeze\\n'; }
 read_token() { printf 'token\\n'; }
 assert_no_pending_fixes() { printf 'blockers\\n'; }
 assert_nightly_main_gate() { printf 'nightly\\n'; }
@@ -47,7 +50,8 @@ $topLevel
     final result = Process.runSync('bash', [harness.path]);
     final calls = (result.stdout as String).trim().split('\n');
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
-    expect(calls.indexOf('preflight'), lessThan(calls.indexOf('nightly')));
+    expect(calls.indexOf('preflight'), lessThan(calls.indexOf('freeze')));
+    expect(calls.indexOf('freeze'), lessThan(calls.indexOf('nightly')));
   }, skip: skipOnWindows);
 
   test('de ververste main-tip wordt vóór de fase-1-checkout herkeurd', () {

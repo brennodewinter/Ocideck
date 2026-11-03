@@ -2622,7 +2622,7 @@ assert_release_base_frozen() {
   [ -n "$base" ] && [ -n "$now" ] \
     || die "kon de gekeurde releasebasis niet bepalen — niets gemerged."
   [ "$now" = "$base" ] \
-    || die "origin/$selected_base schoof door (${base:0:12} → ${now:0:12}) — behoud de geteste inhoud via een aparte onderhoudsbasis; voeg nieuwe inhoud uitsluitend bewust toe. Niets gemerged, niets getagd."
+    || die "origin/$selected_base schoof door (${base:0:12} → ${now:0:12}) — behoud de geteste inhoud via een aparte onderhoudsbasis; voeg nieuwe inhoud uitsluitend bewust toe. Controleer de basis en hervat met --resume $TAG. Niets gemerged, niets getagd."
   log "Gekeurde base bevroren op ${base:0:12} — merge heeft geen ongeziene base."
 }
 

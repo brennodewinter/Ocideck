@@ -1,6 +1,7 @@
 @TestOn('vm')
 library;
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -39,6 +40,16 @@ void main() {
     String fakeMain = 'ba5e1',
     bool merged = false,
   }) {
+    final head = 'a' * 40;
+    final pr = {
+      'number': 7,
+      'state': merged ? 'closed' : 'open',
+      'merged': merged,
+      'base': {'ref': 'main'},
+      'head': {'sha': head, 'ref': 'release/v9.9.9', 'label': 'release/v9.9.9'},
+      'merge_commit_sha': merged ? 'b' * 40 : null,
+      'title': 'chore(release): versie 9.9.9',
+    };
     final dir = Directory.systemTemp.createTempSync('base-freeze-');
     addTearDown(() => dir.deleteSync(recursive: true));
     final mutations = File('${dir.path}/mutations.log');
@@ -65,9 +76,8 @@ api() {
     printf '%s %s\\n' "\$method" "\$path" >>"\$MUTATIONS"
   fi
   case "\$method \$path" in
-    'GET /pulls?state=all&limit=100')
-      printf '%s\\n' '[{"number":7,"state":"open","merged":$merged,"head":{"sha":"h","ref":"release/v9.9.9","label":"release/v9.9.9"},"merge_commit_sha":null,"title":"chore(release): versie 9.9.9"}]'
-      ;;
+    'GET /pulls/7') printf '%s\\n' '${jsonEncode(pr)}' ;;
+    'GET /pulls?state=all&limit=100') printf '%s\\n' '${jsonEncode([pr])}' ;;
     *) printf '%s\\n' '{}' ;;
   esac
 }
@@ -82,7 +92,7 @@ git() {
     *) printf 'git onverwacht: %s\\n' "\$*" >&2; exit 9 ;;
   esac
 }
-merge_pr 7 deadbeef
+merge_pr 7 '$head'
 printf 'DOOR\\n'
 ''');
     final result = Process.runSync('bash', [
