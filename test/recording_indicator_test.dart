@@ -93,6 +93,33 @@ void main() {
     expect(stop, hasLength(1));
   });
 
+  testWidgets('wat tikt staat buiten de live region (#2757)', (tester) async {
+    await startMic();
+    await pump(tester);
+    await tester.pump();
+
+    final live = find.byWidgetPredicate(
+      (w) => w is Semantics && w.properties.liveRegion == true,
+    );
+    expect(live, findsWidgets);
+    for (final s in tester.widgetList<Semantics>(live)) {
+      // Het label is de bron, nooit de duur die elke seconde verspringt.
+      expect(s.properties.label ?? '', isNot(contains(':0')));
+    }
+    // De regel met de duur en de niveaumeter (per audioblok) mogen geen
+    // nazaat van een live region zijn: dan kondigt een schermlezer ze aan.
+    expect(
+      find.descendant(of: live, matching: find.textContaining(' · ')),
+      findsNothing,
+    );
+    expect(
+      find.descendant(of: live, matching: find.byType(LinearProgressIndicator)),
+      findsNothing,
+    );
+    // De duurregel zelf blijft er, en blijft leesbaar.
+    expect(find.textContaining('Opname loopt: Microfoon · '), findsOneWidget);
+  });
+
   testWidgets('Stop breekt de capture af en doet de strook verdwijnen', (
     tester,
   ) async {

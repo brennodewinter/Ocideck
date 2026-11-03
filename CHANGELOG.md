@@ -35,6 +35,12 @@ All notable changes to OciDeck are documented in this file.
   het certificaat vervangt, liet de modelkaart voorgoed op "bezig" staan. Elke
   volgende download bleef daarna geweigerd tot een herstart. Zo'n fout heet nu
   een netwerkfout en ruimt het deelbestand op (#2756).
+- **Opnamestroken overspoelen een schermlezer niet meer.** De strook "Opname
+  loopt" was in zijn geheel een live region, en daarin tikten de duur (elke
+  seconde), de niveaumeter (per audioblok) en in het callpaneel de
+  brokkenteller (vijftig keer per seconde). Een schermlezer kondigde dat
+  allemaal aan. Nu is alleen de melding zelf live, en een statuswissel van de
+  live-verbinding. Duur, meter en teller blijven zichtbaar en leesbaar (#2757).
 
 ### Added
 

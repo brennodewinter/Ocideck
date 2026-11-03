@@ -55,9 +55,13 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
         '${l10n.d('Opname loopt')}: ${_sourceLabel(handle.kinds, l10n)}';
     final duration = _formatDuration(handle.elapsed);
     final caption = ref.watch(provisionalCaptionProvider);
+    // Geen live region om de hele strook: een live region kondigt elke
+    // wijziging aan, en hier tikken de duur elke seconde en de niveaumeter per
+    // audioblok. Alleen wat een melding waard is, is live — dát er een opname
+    // loopt, en een statuswissel eronder. De rest blijft gewoon leesbaar voor
+    // wie ernaartoe navigeert (#2757).
     return Semantics(
-      liveRegion: true,
-      label: '$running, $duration',
+      container: true,
       child: Material(
         color: AppTheme.dangerFg.withValues(alpha: 0.10),
         child: Container(
@@ -71,14 +75,22 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
             children: [
               Row(
                 children: [
-                  Icon(
-                    Icons.fiber_manual_record,
-                    size: 14,
-                    color: AppTheme.dangerFg,
+                  Semantics(
+                    liveRegion: true,
+                    label: running,
+                    child: Icon(
+                      Icons.fiber_manual_record,
+                      size: 14,
+                      color: AppTheme.dangerFg,
+                    ),
                   ),
                   const SizedBox(width: 8),
+                  // Een niveaumeter, geen voortgang: als "voortgang, 37%"
+                  // voorgelezen zegt hij niets.
                   if (handle.kinds.contains(CaptureSourceKind.microphone))
-                    _levelMark(ref.watch(micLevelProvider)),
+                    ExcludeSemantics(
+                      child: _levelMark(ref.watch(micLevelProvider)),
+                    ),
                   Expanded(
                     child: Text(
                       '$running · $duration',
@@ -117,9 +129,12 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
                   ),
                 ),
               if (caption.lagging)
-                Text(
-                  l10n.d('De tekst loopt achter. De opname zelf gaat door.'),
-                  style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+                Semantics(
+                  liveRegion: true,
+                  child: Text(
+                    l10n.d('De tekst loopt achter. De opname zelf gaat door.'),
+                    style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+                  ),
                 ),
             ],
           ),
@@ -139,6 +154,19 @@ Widget _liveStatusRow(WidgetRef ref, AppLocalizations l10n) {
   if (status == LiveServerStatus.off) return const SizedBox.shrink();
   final host =
       ref.read(recordingSessionProvider.notifier).liveSessionHost ?? '?';
+  // Een statuswissel — opgezet, live, verbroken — is wél een melding waard.
+  return Semantics(
+    liveRegion: true,
+    child: _liveStatusContent(ref, l10n, status, host),
+  );
+}
+
+Widget _liveStatusContent(
+  WidgetRef ref,
+  AppLocalizations l10n,
+  LiveServerStatus status,
+  String host,
+) {
   return switch (status) {
     LiveServerStatus.off => const SizedBox.shrink(),
     LiveServerStatus.connecting => Padding(

@@ -281,6 +281,24 @@ void main() {
       () => container.read(callRecordingProvider).capturedChunks == 1,
       reason: 'de mixer emiteerde geen tick',
     );
+    // De statusregel is live, de tikkende teller eronder niet (#2757).
+    // Eerst meten, pas na het stoppen toetsen: een verwachting die hier
+    // faalt, liet anders de opname doorlopen en de hele suite hangen.
+    await tester.pump();
+    final live = find.byWidgetPredicate(
+      (w) => w is Semantics && w.properties.liveRegion == true,
+    );
+    final liveStatus = find
+        .descendant(of: live, matching: find.textContaining('OciDeck'))
+        .evaluate()
+        .length;
+    final liveCounter = find
+        .descendant(
+          of: live,
+          matching: find.textContaining('Ontvangen brokken'),
+        )
+        .evaluate()
+        .length;
     // Geen host gebonden, geen live-serverstatus — de voorlopige route
     // staat uit terwijl de duurzame opname gewoon doortelt.
     expect(
@@ -296,6 +314,8 @@ void main() {
       () => container.read(recordingSessionProvider) == null,
       reason: 'de opname stopte niet',
     );
+    expect(liveStatus, greaterThan(0), reason: 'de statusregel is niet live');
+    expect(liveCounter, 0, reason: 'de brokkenteller staat in een live region');
   });
 
   testWidgets(
