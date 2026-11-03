@@ -71,10 +71,12 @@ void main() {
     expect(find.text('gewone tekst'), findsOneWidget);
   });
 
-  testWidgets('E zonder aanwijzing opent niets, met aanwijzing wel', (
+  testWidgets('E wijst de tabel op de pagina aan en opent haar (#2743)', (
     tester,
   ) async {
-    // Geen aanwijzing: E mag de tabel nooit impliciet bewerkbaar maken.
+    // Zonder vooraf-aanwijzing is E zélf de bewuste opt-in per tabel: de
+    // toetsaanslag is de aanwijzing, de tabel wordt impliciet nooit
+    // bewerkbaar.
     await tester.pumpWidget(
       _host(
         const DocumentPresenterScreen(
@@ -88,9 +90,9 @@ void main() {
     await tester.pump();
     await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
     await tester.pumpAndSettle();
-    expect(find.byType(TextField), findsNothing);
+    expect(find.widgetWithText(TextField, 'Brand'), findsOneWidget);
 
-    // Wél aangewezen: E opent de bewerkmodus van de tabel.
+    // Opgeslagen als aangewezen: dezelfde tabel is meteen bewerkbaar.
     await tester.pumpWidget(
       _host(
         const DocumentPresenterScreen(

@@ -61,25 +61,32 @@ Future<QueuedSave> queueDeckSave(
   final deckFiles = mirrorDeckFiles(deck, deckDir: deckDir, md: md);
   // De `mem:`-bytes leven in het geheugen; parkeer ze in de werkkopie zodat
   // een gesloten tab of een herlaad ze niet wegveegt vóór de commit (#2724).
+  // Best-effort: sommige werkkopieën bergen alleen tekst — weigert die de
+  // bytes, dan gaan ze alleen mee zolang dit proces leeft (de oude stand).
+  final parked = <String, Uint8List>{};
   final deckMd = deckFiles[p.posix.join(deckDir, deckRepoFileName)];
   if (deckMd != null) {
     for (final memPath in _memPathsOf(utf8.decode(deckMd))) {
       final bytes = WebAssetStore.bytesFor(memPath);
       if (bytes != null) {
-        deckFiles[_parkedAssetPath(deckDir, memPath)] = bytes;
+        parked[_parkedAssetPath(deckDir, memPath)] = bytes;
       }
     }
   }
+  // De webwerkkopie kan mogelijk geen binaire bytes bergen: weigert hij de
+  // geparkeerde assets, dan valt het deck terug op de oude stand — de
+  // mem:-bytes reizen alleen mee zolang dit proces leeft.
   try {
-    await mirror.writeDeck(deckDir, deckFiles);
-  } on DraftStoreUnsupported catch (e) {
-    // De webwerkkopie kan dit deck niet bergen (te groot of niet-tekst). De
-    // uitzondering is géén GitForgeException, dus zonder deze vangst liep hij
-    // ongevangen door: geen melding, en niets in de wachtrij, terwijl de
-    // desktop netjes "gaat mee zodra er weer verbinding is" toont. De
-    // uitzondering draagt al een gebruikersgerichte tekst; die geven we terug.
-    logWarning('queueDeckSave: webwerkkopie weigert het deck', e);
-    return (queued: false, refusal: e.message);
+    await mirror.writeDeck(deckDir, {...deckFiles, ...parked});
+  } on DraftStoreUnsupported {
+    try {
+      await mirror.writeDeck(deckDir, deckFiles);
+    } on DraftStoreUnsupported catch (e) {
+      // De uitzondering draagt al een gebruikersgerichte tekst; die geven
+      // we terug in plaats van hem ongevangen door te laten lopen.
+      logWarning('queueDeckSave: webwerkkopie weigert het deck', e);
+      return (queued: false, refusal: e.message);
+    }
   }
   await outbox.enqueue(
     PendingCommit(

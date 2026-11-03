@@ -119,7 +119,7 @@ void main() {
 
     expect(find.byIcon(Icons.upload_file_outlined), findsNothing);
     // De chip zelf is er nog: een net geladen deck moet eerst opgeslagen.
-    expect(find.text(l10n.d('Nog opslaan nodig')), findsOneWidget);
+    expect(find.text(l10n.d('Opslaan')), findsOneWidget);
   });
 
   testWidgets(
