@@ -459,6 +459,22 @@ latest_workflow_run() { # latest_workflow_run WORKFLOW_ID REF
         | sort_by(.id) | .[-1] // empty | "\(.id)|\(.status)"'
 }
 
+# New website updates run trusted main; identify their explicit release inputs.
+# Legacy tag runs remain readable while old complete releases are resumed.
+latest_website_download_run() {
+  local runs ids id detail
+  runs="$(api GET "/actions/runs?limit=50&page=1&workflow_id=website-downloads.yml")" || return 1
+  ids="$(jq -r '[.workflow_runs[]? | select(.workflow_id == "website-downloads.yml")] | sort_by(.id) | reverse | .[] | if .prettyref == "main" then .id else empty end' <<<"$runs")" || return 1
+  for id in $ids; do
+    detail="$(api GET "/actions/runs/$id")" || return 1
+    if jq -e --arg tag "$TAG" '.workflow_id == "website-downloads.yml" and .prettyref == "main" and .event_payload.inputs.tag == $tag and .event_payload.inputs.channel == "all"' <<<"$detail" >/dev/null; then
+      jq -r '"\(.id)|\(.status)"' <<<"$detail"
+      return
+    fi
+  done
+  jq -r --arg tag "$TAG" '[.workflow_runs[]? | select(.workflow_id == "website-downloads.yml" and .prettyref == $tag)] | sort_by(.id) | .[-1] // empty | "\(.id)|\(.status)"' <<<"$runs"
+}
+
 # Eén bron voor de actuele toestand van deze tag. Zowel de gewone route als
 # --resume en fase 3 gebruiken hem, zodat geen van die paden een nog schrijvende
 # release-run voor "klaar" kan aanzien.
@@ -2055,13 +2071,13 @@ phase3() {
       log "Prerelease $TAG: website-downloads wordt niet bijgewerkt." ;;
     *)
       local wrun wrc=0
-      wrun="$(latest_workflow_run website-downloads.yml "$TAG" 2>/dev/null)" || wrc=$?
+      wrun="$(latest_website_download_run 2>/dev/null)" || wrc=$?
       if [ "$wrc" -ne 0 ]; then
         log "LET OP: kon de website-downloads-runs niet lezen — geen nieuwe dispatch terwijl een actieve deploy niet uit te sluiten is; de publieke naconditie hieronder beslist."
       elif [ -z "$wrun" ]; then
         if api POST "/actions/workflows/website-downloads.yml/dispatches" \
           -H 'Content-Type: application/json' \
-          -d "{\"ref\":\"$TAG\"}" -o /dev/null; then
+          -d "{\"ref\":\"main\",\"inputs\":{\"tag\":\"$TAG\",\"channel\":\"all\"}}" -o /dev/null; then
           log "website-downloads-workflow gedispatcht op $TAG."
         else
           log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
@@ -2073,7 +2089,7 @@ phase3() {
           failure|cancelled|skipped|error)
             if api POST "/actions/workflows/website-downloads.yml/dispatches" \
               -H 'Content-Type: application/json' \
-              -d "{\"ref\":\"$TAG\"}" -o /dev/null; then
+              -d "{\"ref\":\"main\",\"inputs\":{\"tag\":\"$TAG\",\"channel\":\"all\"}}" -o /dev/null; then
               log "eerdere website-downloads-run was terminaal-rood; opnieuw gedispatcht op $TAG."
             else
               log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
@@ -2111,7 +2127,7 @@ phase3() {
       # release — nooit als "verkeerde host" presenteren, en er staat bewust
       # geen tweede publicatie naast (#2302).
       local wrun_after wst=""
-      wrun_after="$(latest_workflow_run website-downloads.yml "$TAG" 2>/dev/null || true)"
+      wrun_after="$(latest_website_download_run 2>/dev/null || true)"
       [ -n "$wrun_after" ] && wst="${wrun_after#*|}"
       case "$wst" in
         success)

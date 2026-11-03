@@ -1056,6 +1056,28 @@ same version with `scripts/release_auto.sh --resume vX.Y.Z`.
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
 
+The `website-downloads.yml` source updater is dispatched on trusted `main`,
+with explicit `tag` and `channel` inputs. Use `all` only for the legacy complete
+release; a selected channel calls the website's existing selected-row updater.
+The old complete-release caller now dispatches this main workflow with
+`channel=all` and reconciles runs using their recorded inputs. Historical tag
+runs remain readable during resume.
+
+This job runs on the Linux worker. It needs `WEBSITE_REPO_KEY_V1` (a separate
+write key limited to `LibreKAT/website`) and `WEBSITE_REPO_KNOWN_HOSTS_V1` for
+`pawprint.vigilis.online:2222`. Provision these explicitly; do not copy the Mac's
+personal key or the website deployment key. Credentials live in a private
+short-lived SSH directory with strict host verification. Before pushing only
+`hugo.toml`, the job runs pinned Hugo 0.168.0, output improvements, language
+parity and the website channel tests. Concurrent website-main changes stop the
+update; no force push or automatic merge is attempted.
+
+The website's own Linux deploy workflow publishes that source commit. A green
+source-update job therefore does not yet prove the download page is live. The
+channel controller must separately follow deployment and check the selected
+public rows. Web-demo and Homebrew publication are separate follow-up phases;
+this updater does not implement them.
+
 The independent `release-channel.yml` route accepts `windows` and builds only
 Windows. It reuses the GitHub candidate build (including installer install,
 launch and uninstall checks) and the complete Windows test suite. Linux builds
