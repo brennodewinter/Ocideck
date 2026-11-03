@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Grote SVG's tonen op het web.** Een geïmporteerde SVG boven 256 KB ging in
+  de browser naar `Isolate.run`, dat het web niet kent, en verscheen als fout.
+  Het web saneert hem nu op de main thread; native blijft dat op een
+  achtergrond-isolate. Een conventieregel weigert voortaan elke `Isolate.run`
+  zonder platformpoort (#2789).
 - **Broncontrole werkt op het web.** In de browser liep de controle van de
   broneditor na elke typpauze stuk op `Isolate.run`, dat het web niet kent.
   Validatie, schrijftips en de Marp-controle kwamen niet, en de balk bleef op

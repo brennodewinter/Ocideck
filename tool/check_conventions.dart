@@ -967,6 +967,40 @@ List<String> _filePickerPathViolations() {
   return hits;
 }
 
+// ── Isolate.run zonder webpoort ─────────────────────────────────────────────
+//
+// `Isolate.run` compileert voor het web, maar gooit daar pas bij aanroep
+// ("dart:isolate is not supported on dart4web"). Zo liepen de broncontrole van
+// de broneditor (#2764) en de sanering van grote SVG's (#2789) stuk, terwijl de
+// exports er al `kIsWeb ? Future.sync(body) : Isolate.run(body)` voor hadden.
+// Een test vangt het niet: onder `flutter test` is `kIsWeb` altijd false, en
+// widgettests vervangen zo'n runner vaak door een synchrone variant. Een
+// `_io.dart`-helft van een conditionele import komt nooit op het web.
+final _isolateRun = RegExp(r'\bIsolate\.run\b');
+
+/// `Isolate.run`-aanroepen in `lib/` zonder platformpoort in dezelfde methode.
+List<String> _isolateRunViolations() {
+  final hits = <String>[];
+  for (final file in Directory('lib').listSync(recursive: true)) {
+    if (file is! File || !file.path.endsWith('.dart')) continue;
+    if (file.path.endsWith('_io.dart')) continue;
+    final source = file.readAsStringSync();
+    for (final match in _isolateRun.allMatches(source)) {
+      final lineStart = source.lastIndexOf('\n', match.start) + 1;
+      if (source
+          .substring(lineStart, match.start)
+          .trimLeft()
+          .startsWith('//')) {
+        continue;
+      }
+      if (_gatedBefore(source, match.start)) continue;
+      final line = '\n'.allMatches(source.substring(0, match.start)).length + 1;
+      hits.add('${file.path}:$line');
+    }
+  }
+  return hits;
+}
+
 // ── Synchrone dart:io in de UI-laag ─────────────────────────────────────────
 //
 // Een `*Sync`-aanroep op een bestand blokkeert de enige isolate die beelden
@@ -2131,6 +2165,17 @@ void main() {
     );
   }
 
+  final isolateHits = _isolateRunViolations();
+  if (isolateHits.isNotEmpty) {
+    failures.add(
+      '`Isolate.run` zonder platformpoort. Het web kent geen isolates: de '
+      'aanroep compileert, maar gooit pas bij uitvoering (#2764, #2789). Draai '
+      'op het web op de main thread, zoals `ExportService._offload`: '
+      '`kIsWeb ? Future.sync(body) : Isolate.run(body)`:\n'
+      '    ${isolateHits.join('\n    ')}',
+    );
+  }
+
   if (layerViolations.isNotEmpty) {
     failures.add(
       'De laagrichting is doorbroken in ${layerViolations.length} '
@@ -2266,7 +2311,8 @@ void main() {
       '${modelUiImports.length}; layer direction clean; file sizes within '
       'ceilings; class sizes within ceilings (max $maxClassLines, '
       '${classSizeBaseline.length} baselined); FilePicker paths gated '
-      '(baseline ${filePickerPathBaseline.length}); vaste wachtpunten in '
+      '(baseline ${filePickerPathBaseline.length}); Isolate.run gated; vaste '
+      'wachtpunten in '
       'test/ binnen de basislijn (${fixedDelayBaseline.length} bestand(en)); '
       'geen handgeplakte paden in expects; geen BSD-mktemp in scripts/.',
     );

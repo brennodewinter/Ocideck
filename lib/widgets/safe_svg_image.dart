@@ -215,7 +215,7 @@ class _SafeSvgImageState extends State<SafeSvgImage> {
   }
 }
 
-/// Boven deze grootte schoont [sanitizeImportedSvgForDisplay] op een
+/// Boven deze grootte schoont [sanitizeImportedSvgForDisplay] native op een
 /// achtergrond-isolate. De cache hier houdt het resultaat vast (#2682).
 const int _maxSvgCacheBytes = 32 * 1024 * 1024;
 
