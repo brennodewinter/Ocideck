@@ -14,6 +14,7 @@ class WebsiteWorkflowTest(unittest.TestCase):
         for expected in ("github.ref == 'refs/heads/main'", 'runs-on: docker',
                          'WEBSITE_REPO_KEY_V1', 'WEBSITE_REPO_KNOWN_HOSTS_V1',
                          'StrictHostKeyChecking yes', 'Port 2222', 'chmod 700',
+                         'git clone --depth 1 --single-branch --branch main',
                          'trap ', 'scripts/bump-ocideck.sh "$VERSION" "$CHANNEL"',
                          'python3 scripts/improve_public_output.py',
                          'python3 scripts/check_i18n_parity.py',

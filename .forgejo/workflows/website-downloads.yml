@@ -75,7 +75,7 @@ jobs:
           CONFIG
           printf -v GIT_SSH_COMMAND 'ssh -F %q' "$WORK/config"
           export GIT_SSH_COMMAND
-          git clone --single-branch --branch main ssh://website-source/LibreKAT/website.git "$WORK/website"
+          git clone --depth 1 --single-branch --branch main ssh://website-source/LibreKAT/website.git "$WORK/website"
           cd "$WORK/website"
           BASE="$(git rev-parse HEAD)"
           VERSION="${RELEASE_TAG#v}"
