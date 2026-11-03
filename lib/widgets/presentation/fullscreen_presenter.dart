@@ -739,8 +739,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   PresentationCostSession? _costSession;
 
   /// Getypte cijfers om naar een slidenummer te springen (leeg = niet actief).
+  /// #2733: blijft staan tot Enter, Backspace of Escape hem wist — geen
+  /// reset-timer die halverwege typen stil weggooit.
   String _typed = '';
-  Timer? _typedTimer;
 
   /// Doeltijd-invoermodus (toets K): cijfers worden als MMSS gelezen i.p.v. als
   /// slidenummer. [_targetTyped] houdt de invoer tot Enter/Esc.
@@ -988,7 +989,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _progress.dispose();
     _timedSession.dispose();
     _fullscreenGuard?.cancel();
-    _typedTimer?.cancel();
     _fixFlashTimer?.cancel();
     _questionTimer?.cancel();
     _audienceSync.dispose();

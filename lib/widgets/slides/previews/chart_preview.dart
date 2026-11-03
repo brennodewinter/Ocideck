@@ -80,6 +80,10 @@ class _ChartPreviewState extends State<_ChartPreview>
   /// Transform). Disposed on unmount, so it never leaks a pending timer.
   late final AnimationController _entrance;
 
+  /// De OS-bewegingsvoorkeur zolang deze dia gemonteerd is — bij een wissel
+  /// springt [_maybeAnimateIn] meteen naar de eindstand (#2733).
+  bool _reduceMotion = false;
+
   @override
   void initState() {
     super.initState();
@@ -127,6 +131,13 @@ class _ChartPreviewState extends State<_ChartPreview>
       _hoverController = controller;
       _hoverController?.addListener(_onExternalHover);
     }
+    // #2733: volg de bewegingsvoorkeur mee — schakelt de gebruiker beweging
+    // uit terwijl de dia er staat, dan springt hij naar de eindstand.
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    if (reduceMotion != _reduceMotion) {
+      _reduceMotion = reduceMotion;
+      _maybeAnimateIn();
+    }
   }
 
   /// The other screen moved its pointer: repaint so this chart shows the mirrored
@@ -149,7 +160,12 @@ class _ChartPreviewState extends State<_ChartPreview>
   /// duration. In the editor/thumbnails values are final and nothing animates.
   void _maybeAnimateIn() {
     _entrance.stop();
-    if (!presentationMode || !_spec.hasInlineData || !_spec.animateOnEnter) {
+    // #2733: beweging uit = meteen de eindstand, zoals cockpit en tijdlijn.
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    if (!presentationMode ||
+        !_spec.hasInlineData ||
+        !_spec.animateOnEnter ||
+        reduceMotion) {
       _grow = 1;
       _chartAnimDuration = Duration.zero;
       _entrance.value = 1;

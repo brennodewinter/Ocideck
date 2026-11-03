@@ -124,7 +124,7 @@ Navigation:
 | `→` · `Space` · `Page Down` · click | Next slide |
 | `←` · `Page Up` | Previous slide |
 | `Enter` | Next slide (or jump, if a number was typed) |
-| digits, then `Enter` | Jump to that slide number |
+| digits, then `Enter` | Jump to that slide number — the typed number stays until `Enter`, `Backspace` or `Esc` clears it |
 | `Backspace` | Erase the last digit of a typed slide number |
 | `Home` · `End` | First · last slide |
 | `G` | Slide-grid overview (arrows + `Enter` to jump) |

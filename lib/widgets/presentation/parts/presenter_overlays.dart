@@ -595,85 +595,96 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       borderWidth = 1;
     }
 
-    return GestureDetector(
-      onTap: () => _jumpTo(i),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => _setGridCursor(i),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: borderColor, width: borderWidth),
-                  boxShadow: isCursor
-                      ? [
-                          BoxShadow(
-                            color: Colors.white.withValues(alpha: 0.25),
-                            blurRadius: 16,
-                          ),
-                        ]
-                      : null,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: AspectRatio(
-                    aspectRatio: widget.slideAspect,
-                    child: SlidePreviewWidget(
-                      slideAspect: widget.slideAspect,
-                      slide: widget.slides[i],
-                      projectPath: widget.projectPath,
-                      themeProfile: widget.themeProfile,
-                      deckMarpStyle: widget.marpStyle,
-                      cockpitColorScheme: widget.cockpitColorScheme,
-                      allowRemoteMedia: widget.allowRemoteMedia,
-                      tlp: widget.tlp,
-                      organization: widget.organization,
-                      showClassificationWatermark:
-                          widget.showClassificationWatermark,
-                      scopeCia: deckScopeCiaIndex(widget.slides),
-                      reportLanguage: widget.reportLanguage,
-                      fitScaleOverride: sharedSplitFitScale(
-                        widget.slides,
-                        i,
-                        widget.themeProfile,
-                        widget.themeProfile.fontFamily,
+    // #2733: het raster was voor een schermlezer losse tekst. Nu is elke tegel
+    // een benoemde knop — "dia 7 van 12" — met de huidige dia als geselecteerd.
+    final l10n = context.l10n;
+    return Semantics(
+      button: true,
+      selected: isCurrent,
+      label: l10n
+          .d('Dia {n} van {m}')
+          .replaceAll('{n}', '${i + 1}')
+          .replaceAll('{m}', '${widget.slides.length}'),
+      child: GestureDetector(
+        onTap: () => _jumpTo(i),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => _setGridCursor(i),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: borderColor, width: borderWidth),
+                    boxShadow: isCursor
+                        ? [
+                            BoxShadow(
+                              color: Colors.white.withValues(alpha: 0.25),
+                              blurRadius: 16,
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: AspectRatio(
+                      aspectRatio: widget.slideAspect,
+                      child: SlidePreviewWidget(
                         slideAspect: widget.slideAspect,
+                        slide: widget.slides[i],
+                        projectPath: widget.projectPath,
+                        themeProfile: widget.themeProfile,
+                        deckMarpStyle: widget.marpStyle,
+                        cockpitColorScheme: widget.cockpitColorScheme,
+                        allowRemoteMedia: widget.allowRemoteMedia,
+                        tlp: widget.tlp,
+                        organization: widget.organization,
+                        showClassificationWatermark:
+                            widget.showClassificationWatermark,
+                        scopeCia: deckScopeCiaIndex(widget.slides),
+                        reportLanguage: widget.reportLanguage,
+                        fitScaleOverride: sharedSplitFitScale(
+                          widget.slides,
+                          i,
+                          widget.themeProfile,
+                          widget.themeProfile.fontFamily,
+                          slideAspect: widget.slideAspect,
+                        ),
+                        splitRunPosition: splitRunPositionFor(widget.slides, i),
+                        improvementY01: widget.improvementY01,
                       ),
-                      splitRunPosition: splitRunPositionFor(widget.slides, i),
-                      improvementY01: widget.improvementY01,
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${i + 1}',
-                  style: TextStyle(
-                    color: (isCursor || isCurrent) ? Colors.white : _muted,
-                    fontSize: 12,
-                    fontWeight: (isCursor || isCurrent)
-                        ? FontWeight.w700
-                        : FontWeight.w400,
+              const SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${i + 1}',
+                    style: TextStyle(
+                      color: (isCursor || isCurrent) ? Colors.white : _muted,
+                      fontSize: 12,
+                      fontWeight: (isCursor || isCurrent)
+                          ? FontWeight.w700
+                          : FontWeight.w400,
+                    ),
                   ),
-                ),
-                if (isCurrent) ...[
-                  const SizedBox(width: 5),
-                  const Icon(
-                    Icons.play_arrow_rounded,
-                    size: 13,
-                    color: AppTheme.blue400,
-                  ),
+                  if (isCurrent) ...[
+                    const SizedBox(width: 5),
+                    const Icon(
+                      Icons.play_arrow_rounded,
+                      size: 13,
+                      color: AppTheme.blue400,
+                    ),
+                  ],
                 ],
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

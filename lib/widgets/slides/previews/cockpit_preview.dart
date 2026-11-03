@@ -59,11 +59,14 @@ class _CockpitPreviewState extends State<_CockpitPreview>
 
   void _maybeStart() {
     final spec = _spec;
+    // #2733: wie beweging uitzet krijgt meteen de eindstand — dezelfde
+    // voorwaarde als de tijdlijn (`MediaQuery.disableAnimations`).
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
     // null override = inherit the theme's shared activation duration.
     final ms = (spec.animationDurationMs ?? widget.profile.animationDurationMs)
         .clamp(cockpitMinAnimationDurationMs, cockpitMaxAnimationDurationMs);
     _controller.duration = Duration(milliseconds: ms);
-    if (widget.presentationMode && spec.animateOnEnter) {
+    if (widget.presentationMode && spec.animateOnEnter && !reduceMotion) {
       _controller.forward(from: 0);
     } else {
       _controller.value = 1;
