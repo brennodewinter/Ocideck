@@ -17,6 +17,10 @@ All notable changes to OciDeck are documented in this file.
   `server/fetch-proxy/` bevatte de volledige deck-URL, ook een token in de
   query, terwijl HOSTING.md beloofde dat die erbuiten bleef. Elke regel noemt nu
   alleen methode, status en grootte (#2754).
+- **Fetch-hulppunt breekt netjes af.** Viel de bron halverwege een doorgifte
+  weg, dan schreef het hulppunt een tweede antwoord (`502`) midden in de
+  bytes van het eerste en liet het de verbinding open; de import hing. Het
+  kapt de verbinding nu, zodat de app een afgebroken download ziet (#2755).
 
 ### Added
 
