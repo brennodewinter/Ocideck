@@ -253,6 +253,7 @@ and it also indexes the design documents. The current-state documents:
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
 | [Audit response](AUDIT_RESPONSE.md) | Point-by-point response to the external code audits, each verdict weighed against the code |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
+| [Release operations](docs/RELEASE_OPERATIONS.md) | Operating, stopping and resuming independent release channels |
 | [Changelog](CHANGELOG.md) | Notable changes and release history |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
 | [Compliance attestation](COMPLIANCE.md) | Voluntary security attestation (ORC WG light-weight checklist), including the rows we cannot tick |
