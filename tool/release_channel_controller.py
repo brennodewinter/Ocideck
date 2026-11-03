@@ -130,6 +130,11 @@ def claim(args, api, wanted):
 
 
 def release_claim(args, api, wanted):
+    with release_journal.locked(claim_path(args, 'release-lease')):
+        return _release_claim_locked(args, api, wanted)
+
+
+def _release_claim_locked(args, api, wanted):
     owned = claim_path(args, 'owned')
     intent = claim_path(args, 'release-intent')
     complete = claim_path(args, 'release-completed')
@@ -150,6 +155,26 @@ def release_claim(args, api, wanted):
     release_channel.immutable_write(intent, release_channel.encoded(receipt))
     api.branch_mutation(branch_path, 'DELETE', expected=204)
     release_channel.immutable_write(complete, release_channel.encoded(receipt))
+
+
+def claim_status(args, wanted):
+    receipt = dict(wanted, branch=claim_name(wanted))
+    owned = claim_path(args, 'owned')
+    intent = claim_path(args, 'release-intent')
+    completed = claim_path(args, 'release-completed')
+    def valid(path):
+        return (not path.is_symlink() and path.is_file() and path.stat().st_size <= 4096
+                and json.loads(path.read_text(), object_pairs_hook=release_channel.no_duplicates) == receipt)
+    try:
+        if owned.is_symlink() or (owned.exists() and not valid(owned)):
+            return 'unknown'
+        if completed.exists() or completed.is_symlink():
+            return 'released' if valid(owned) and valid(completed) and valid(intent) else 'unknown'
+        if intent.exists() or intent.is_symlink():
+            return 'release_unknown' if valid(owned) and valid(intent) else 'unknown'
+        return 'owned' if valid(owned) else 'unproven'
+    except (ValueError, OSError, TypeError):
+        return 'unknown'
 
 
 def windows_state(api, wanted, run_id):
@@ -327,8 +352,7 @@ def status(args, api):
         raise ValueError('saved journal missing')
     result['history'] = release_journal.read(journal)['events']
     result['dispatch'] = 'unknown' if not result['runs'] else 'found'
-    result['build_claim'] = ('released' if claim_path(args, 'release-completed').is_file()
-                             else 'owned' if claim_path(args, 'owned').is_file() else 'unproven')
+    result['build_claim'] = claim_status(args, wanted)
     publication = next((event for event in reversed(result['history'])
                         if event['phase'] == 'publish'), None)
     if publication is not None:

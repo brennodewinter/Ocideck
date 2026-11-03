@@ -4,6 +4,7 @@ import io
 from pathlib import Path
 import sys
 import tempfile
+import threading
 from urllib.parse import unquote
 from types import SimpleNamespace
 import unittest
@@ -188,6 +189,49 @@ class ControllerTest(unittest.TestCase):
             control.hervat(self.args, api)
         self.assertIn(branch, api.branches)
 
+    def test_concurrent_release_claim_cannot_delete_recreated_same_sha(self):
+        api = FakeForge()
+        self.reserve_claimed(api)
+        entered = threading.Event()
+        proceed = threading.Event()
+        original_get = api.get
+        deletions = []
+        original_mutation = api.branch_mutation
+        def paused_get(path):
+            if path.startswith('/branches/'):
+                entered.set()
+                self.assertTrue(proceed.wait(5))
+            return original_get(path)
+        def mutation(path, method, payload=None, expected=201):
+            if method == 'DELETE':
+                deletions.append(path)
+            return original_mutation(path, method, payload, expected)
+        api.get = paused_get
+        api.branch_mutation = mutation
+        outcomes = []
+        def release():
+            try:
+                control.release_claim(self.args, api, self.wanted)
+                outcomes.append('released')
+            except ValueError as error:
+                outcomes.append(str(error))
+        first = threading.Thread(target=release)
+        second = threading.Thread(target=release)
+        first.start()
+        self.assertTrue(entered.wait(5))
+        second.start()
+        second.join(5)
+        proceed.set()
+        first.join(5)
+        self.assertFalse(first.is_alive() or second.is_alive())
+        self.assertEqual(1, len(deletions))
+        self.assertTrue(any('locked' in outcome for outcome in outcomes))
+        branch = control.claim_name(self.wanted)
+        api.branches[branch] = {'name': branch, 'commit': {'id': self.args.controller_sha}}
+        control.release_claim(self.args, api, self.wanted)
+        self.assertEqual(1, len(deletions))
+        self.assertIn(branch, api.branches)
+
     def test_exact_reconciliation_and_history(self):
         api = FakeForge(self.run_info('success'))
         self.reserve_claimed(api)
@@ -268,6 +312,17 @@ class ControllerTest(unittest.TestCase):
         self.assertEqual(before, journal.read_bytes())
         self.assertEqual('found', result['dispatch'])
         self.assertEqual('unverified', result['publication'])
+
+    def test_status_rejects_wrong_or_symlinked_claim_receipt(self):
+        api = FakeForge(self.run_info())
+        self.reserve_claimed(api)
+        owned = control.claim_path(self.args, 'owned')
+        self.assertEqual('owned', control.status(self.args, api)['build_claim'])
+        owned.write_text('{}')
+        self.assertEqual('unknown', control.status(self.args, api)['build_claim'])
+        owned.unlink()
+        owned.symlink_to(control.claim_path(self.args, 'intent'))
+        self.assertEqual('unknown', control.status(self.args, api)['build_claim'])
 
     def test_windows_status_uses_exact_remote_artifact(self):
         self.args.channel = 'windows'
