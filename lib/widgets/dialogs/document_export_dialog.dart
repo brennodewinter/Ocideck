@@ -597,7 +597,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
                       onPressed: () => ref
                           .read(settingsProvider.notifier)
                           .setDocumentPdfFontPath(null),
-                      child: Text(l10n.t('delete')),
+                      child: Text(l10n.d('Verwijderen')),
                     ),
                 ],
               ),
