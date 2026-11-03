@@ -28,6 +28,11 @@ class FakeAPI:
 
 
 class MacCandidateTest(unittest.TestCase):
+    def setUp(self):
+        disk = patch.object(mac.shutil, 'disk_usage', return_value=SimpleNamespace(free=100 * 1024**3))
+        disk.start()
+        self.addCleanup(disk.stop)
+
     def candidate(self, directory, state=True):
         home = Path(directory)
         cache = home / 'Library/Caches/OciDeck-macos-candidates'
