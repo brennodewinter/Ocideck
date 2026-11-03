@@ -16,7 +16,14 @@ void main() {
       expect(workflow, isNot(contains('push:')));
       expect(workflow, isNot(contains('runs-on: macos')));
       expect(workflow, contains('name: channel-candidate-'));
-      for (final channel in ['deb', 'debian12', 'rpm', 'appimage', 'flatpak', 'tar']) {
+      for (final channel in [
+        'deb',
+        'debian12',
+        'rpm',
+        'appimage',
+        'flatpak',
+        'tar',
+      ]) {
         expect(
           workflow,
           contains("needs.consumer-$channel.result == 'success'"),
