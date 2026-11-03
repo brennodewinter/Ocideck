@@ -167,11 +167,11 @@ Future<FakeMeetingSession> _joinFakeCall() async {
 var _callSeq = 0;
 
 /// Eén remote brok van precies één mix-tick (640 B 16 kHz mono).
-CallAudioChunk _callChunk() => CallAudioChunk(
+CallAudioChunk _callChunk({DateTime? at}) => CallAudioChunk(
   participantId: 'zij',
   role: CallAudioRole.remote,
   trackId: 'zij-audio',
-  at: DateTime.now().add(Duration(seconds: _callSeq++)),
+  at: at ?? DateTime.now().add(Duration(seconds: _callSeq++)),
   pcm: Uint8List(callAudioTickBytes),
   sampleRateHz: 16000,
 );
@@ -327,6 +327,50 @@ void main() {
 
     await notifier.stop();
     expect(c.read(liveServerStatusProvider), LiveServerStatus.off);
+  });
+
+  test('de tikteller publiceert eens per vijftig tikken (#2760)', () async {
+    // Echte tijd, geen widgettest: de mixer pacet op de klok en schrijft elke
+    // tik naar schijf, en onder een nepklok kwam er zo maar één tik per
+    // zestien pumps door.
+    final c = ProviderContainer(
+      overrides: [recordingStagingProvider.overrideWithValue(_DirStaging())],
+    );
+    addTearDown(c.dispose);
+    final session = await _joinFakeCall();
+    final notifier = c.read(callRecordingProvider.notifier)..bind(session);
+    notifier.setNotice(true);
+    final published = <int>[];
+    final sub = c.listen(
+      callRecordingProvider.select((s) => s.capturedChunks),
+      (_, next) => published.add(next),
+    );
+    addTearDown(sub.close);
+    await notifier.start();
+    // De tikken zelf, zoals de mixer ze uitgeeft.
+    var ticks = 0;
+    final tickSub = c
+        .read(recordingSessionProvider)!
+        .liveChunks!
+        .listen((_) => ticks++);
+    addTearDown(tickSub.cancel);
+
+    final start = DateTime.now();
+    for (var i = 0; i < 60; i++) {
+      session.captureController!.add(
+        _callChunk(at: start.add(Duration(milliseconds: 20 * i))),
+      );
+    }
+    await until(() => ticks >= 50);
+    await Future<void>.delayed(Duration.zero);
+
+    // Eén publicatie bij de eerste tik en daarna één per vijftig — niet één
+    // per tik van 20 ms, wat vijftig herbouwingen per seconde was.
+    final shown = published.where((n) => n > 0).toList();
+    expect(shown.first, 1);
+    expect(shown.length, lessThanOrEqualTo(ticks ~/ 50 + 1));
+    expect(shown.skip(1), everyElement(predicate<int>((n) => n % 50 == 0)));
+    await notifier.stop();
   });
 
   test('callaudio zonder consent: geen socket en geen bytes — wel een duurzame '

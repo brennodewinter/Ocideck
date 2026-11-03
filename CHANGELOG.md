@@ -45,6 +45,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Callopname rekent zuiniger.** Tijdens een callopname kreeg de app vijftig
+  keer per seconde een nieuwe toestand, alleen om de teller "Ontvangen brokken"
+  op te hogen. Banner en callpaneel werden daardoor continu opnieuw gebouwd.
+  De teller loopt nu eens per seconde mee, de banner kijkt alleen naar de fase,
+  en een nieuwe opname begint weer bij nul (#2760).
 - **Boomslides.** Een boom (zoals 5× Why) vult de dia met kaarten en pijlen
   in plaats van inspringende bullets die bovenaan blijven staan. Een keten
   daalt diagonaal af; een vertakte boom spreidt de kinderen. Op schijf blijft
