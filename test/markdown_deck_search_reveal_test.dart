@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/services/deck_source_checks.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
 import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 
@@ -10,6 +11,11 @@ void main() {
   testWidgets(
     'search reveals end of a long wrapped source line using rendered geometry',
     (tester) async {
+      // De validatie-isolate valt buiten de widgettestklok. Zoals in de
+      // broneditorsuite draait deze onafhankelijke scan hier synchroon mee.
+      final originalRunner = deckChecksRunner;
+      deckChecksRunner = (args) async => deckSourceChecks(args);
+      addTearDown(() => deckChecksRunner = originalRunner);
       AppLocalizations.setActiveLanguageCode('nl');
       await tester.binding.setSurfaceSize(const Size(1200, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
