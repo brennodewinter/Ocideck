@@ -443,8 +443,9 @@ class _ChartGridKeys {
     }
     final next = nextTableCell(row, col, rows(s), cols(s));
     if (next == null) {
-      s._pendingChartFocus = (row: s._xLabels.length + 1, col: 0);
-      s._addRow();
+      // #2729: Tab op de laatste cel verlaat het rooster in plaats van een
+      // rij bij te maken — de toetsenbordgebruiker moet eruit kunnen.
+      _ChartGridKeys.focus(s, row, col).nextFocus();
     } else if (!(next.row == 0 && next.col == 0)) {
       _focusCell(s, next.row, next.col);
     }

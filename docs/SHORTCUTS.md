@@ -20,7 +20,7 @@
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
 | `Ctrl/Cmd + Shift + V` (in a document) | Paste without formatting: only the plain-text clipboard, no image, table or HTML conversion |
 | `Ctrl/Cmd + C` (in a table cell, with no selection) | Copy the whole grid as TSV |
-| `Tab` / `Shift + Tab` (in a table cell) | Next / previous cell; `Tab` on the last cell grows a row |
+| `Tab` / `Shift + Tab` (in a table cell) | Next / previous cell; `Tab` on the last cell leaves the grid |
 | `Enter` / `Shift + Enter` (in a table cell) | Cell below (grows the table at the bottom) / line break in the cell |
 | `Ctrl/Cmd + +` · `Ctrl/Cmd + -` (document mode) | Zoom the writing surface in · out |
 | `Ctrl/Cmd + 0` (document mode) | Back to actual size |
@@ -88,6 +88,7 @@ on the last-applied slide fields.
 | `Ctrl/Cmd + K` | Insert a link around the selection |
 | `Ctrl/Cmd + Space` | Open the searchable insert and formatting commands |
 | `Tab` / `Shift + Tab` | Indent / outdent the selected source lines |
+| `Esc` · `Ctrl/Cmd + Tab` (in an edit field or grid) | Leave the field: focus moves to the next panel — since `Tab` is an editing command there, this is the way out |
 | `Enter` / `Shift + Enter` (in find field) | First Enter opens the first proposed match; then next / previous match |
 | `Esc` | Close find bar |
 
@@ -199,7 +200,7 @@ highlighted when on — that toggles editing with a mouse/clicker, just like `E`
 | --- | --- |
 | `E` · pencil icon | Toggle table editing |
 | `←` · `→` · `↑` · `↓` | Move the text cursor inside the focused cell |
-| `Tab` · `⇧Tab` | Move to the next · previous cell (a new row is added past the last cell) |
+| `Tab` · `⇧Tab` | Move to the next · previous cell (past the last cell `Tab` leaves the grid; `Enter` still adds a row) |
 | `Esc` | Leave table editing |
 
 `Esc` is layered: it first closes the **my notes** panel (`Ctrl/Cmd + N`), then

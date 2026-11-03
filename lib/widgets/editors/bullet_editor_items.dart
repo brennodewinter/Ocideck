@@ -364,6 +364,16 @@ class BulletEditorRow extends StatelessWidget {
       bullets.paste(mutate, index);
       return KeyEventResult.handled;
     }
+    // #2729: één uitweg die overal geldt — Tab is hier indenteren, dus de
+    // toetsenbordgebruiker heeft Escape en Ctrl/Cmd+Tab nodig om het veld
+    // te verlaten.
+    if (event.logicalKey == LogicalKeyboardKey.escape ||
+        (event.logicalKey == LogicalKeyboardKey.tab &&
+            (HardwareKeyboard.instance.isControlPressed ||
+                HardwareKeyboard.instance.isMetaPressed))) {
+      FocusManager.instance.primaryFocus?.nextFocus();
+      return KeyEventResult.handled;
+    }
     return KeyEventResult.ignored;
   }
 }

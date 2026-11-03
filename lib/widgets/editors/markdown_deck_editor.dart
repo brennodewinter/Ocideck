@@ -661,14 +661,24 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     }
   }
 
+  /// Ctrl/Cmd+Tab: naar de volgende focusbare plek — de Tab-zelf springt
+  /// hier immers niet verder, hij springt tekst in.
+  void _focusNextPanel() => FocusManager.instance.primaryFocus?.nextFocus();
+
   KeyEventResult _handleEscape(FocusNode node, KeyEvent event) {
-    if (!_find.visible) return KeyEventResult.ignored;
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
-    if (event.logicalKey == LogicalKeyboardKey.escape) {
+    if (event.logicalKey != LogicalKeyboardKey.escape) {
+      return KeyEventResult.ignored;
+    }
+    if (_find.visible) {
       _find.close();
       return KeyEventResult.handled;
     }
-    return KeyEventResult.ignored;
+    // #2729: zonder open zoekbalk is Escape dé uitweg — Tab is hier een
+    // bewerkingscommando (inspringen), dus wie met het toetsenbord in het
+    // veld zit kan anders niet bij een volgend paneel komen.
+    node.nextFocus();
+    return KeyEventResult.handled;
   }
 
   @override
@@ -728,6 +738,12 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             MarkdownEditorActions.indentSelection(_ctrl),
         const SingleActivator(LogicalKeyboardKey.tab, shift: true): () =>
             MarkdownEditorActions.outdentSelection(_ctrl),
+        // Uit het bewerkveld zonder de tekst te wijzigen (#2729): Ctrl/Cmd+Tab
+        // springt naar de volgende focusbare plek, net als Escape.
+        const SingleActivator(LogicalKeyboardKey.tab, control: true):
+            _focusNextPanel,
+        const SingleActivator(LogicalKeyboardKey.tab, meta: true):
+            _focusNextPanel,
       },
       child: Focus(
         onKeyEvent: _handleEscape,
