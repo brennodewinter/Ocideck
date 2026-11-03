@@ -166,6 +166,25 @@ class PublishTests(unittest.TestCase):
         self.assertNotIn('secret-test-token', result.stdout + result.stderr)
         return result
 
+    def test_debian12_requires_its_own_successful_consumer(self):
+        self.channel = 'linux-debian12'
+        for path in [*self.dist.iterdir(), *self.proof.iterdir()]:
+            path.unlink()
+        (self.dist / 'ocideck-linux-debian12-x86_64-0.7.7.tar.gz').write_bytes(b'Debian 12 native archive')
+        subprocess.run(['python3', str(ROOT / 'tool/release_channel.py'), 'create', '--tag', 'v0.7.7',
+                        '--sha', SHA, '--controller-sha', CONTROLLER, '--channel', self.channel, '--run-id', '9',
+                        '--dist', str(self.dist), '--output', str(self.proof / 'channel-manifest-linux-debian12.json')],
+                       check=True, capture_output=True)
+        for name in ('channel-manifest-linux-debian12.json', 'SHA256SUMS.linux-debian12'):
+            (self.proof / (name + '.minisig')).write_bytes(b'signature')
+        result = self.run_publish()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('selected consumer proof missing', result.stderr)
+        self.assertFalse(self.state['assets'])
+        self.state['jobs'].append({'name': 'Debian 12-archief proef op een schone Debian 12', 'status': 'success'})
+        result = self.run_publish()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def configure_windows(self):
         self.channel = 'windows'
         for path in [*self.dist.iterdir(), *self.proof.iterdir()]:

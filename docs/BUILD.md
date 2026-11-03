@@ -1077,6 +1077,29 @@ source-update job therefore does not yet prove the download page is live. The
 channel controller must separately follow deployment and check the selected
 public rows. Web-demo and Homebrew publication are separate follow-up phases;
 this updater does not implement them.
+Linux format selection includes `linux-debian12`, which invokes the existing
+Debian 12 builder and retains its own Debian 12 extract/link/20-second start
+consumer. It does not use Ubuntu native-hook caches. The Linux worker needs
+access to the same Docker builder daemon used by the existing complete-release
+Debian 12 job. Missing daemon access stops that selected channel.
+
+Consumer image recipes live in `scripts/release_consumers/`. Refresh them only
+on the infrastructure builder with `scripts/build_release_consumer_images.sh
+REGISTRY FULL_SOURCE_SHA NEW_RECEIPT.json`. That explicit command builds and
+pushes six amd64 profiles, checks tools and reads registry digests back. It is
+never invoked by a release. Record actual image digests in the channel workflow
+before adopting a refresh; a locally successful image build is insufficient.
+Each image preserves installed package versions; Flatpak also records the exact
+GNOME 50 runtime commit. Keep normal Flatpak signature verification enabled.
+
+The deb/rpm profiles deliberately contain test tools but no OciDeck runtime
+libraries: the package manager must resolve the artifact's declared runtime
+dependencies. Preinstalling those libraries could hide a broken Depends or
+Requires declaration. Tar and AppImage profiles explicitly supply the desktop
+runtime they require. Prepared images do not replace the artifact's installation,
+link, start or Flatpak content checks. Cold/warm timings and actual refreshed
+image/install results must still be recorded on the Linux worker; no speedup is
+claimed from recipes alone.
 
 The independent `release-channel.yml` route accepts `windows` and builds only
 Windows. It reuses the GitHub candidate build (including installer install,

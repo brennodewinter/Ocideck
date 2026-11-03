@@ -28,6 +28,29 @@ class ConsumerImagesTest(unittest.TestCase):
         self.assertIn('org.gnome.Platform/x86_64/50', flatpak)
         self.assertIn('--show-commit', flatpak)
 
+    def test_debian12_uses_existing_builder_without_other_format_builds(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            (directory / 'scripts').mkdir()
+            (directory / 'bin').mkdir()
+            (directory / 'pubspec.yaml').write_text('version: 9.9.9+1\n')
+            sha = 'b' * 40
+            builder = directory / 'scripts/build_debian12_release.sh'
+            builder.write_text('#!/bin/sh\nset -eu\nmkdir dist\nprintf "%s" "$1" > dist/debian12-called\n')
+            builder.chmod(0o700)
+            git = directory / 'bin/git'
+            git.write_text('#!/bin/sh\ncase "$1" in rev-parse) echo ' + sha + ';; ls-remote) echo "' + sha + ' ref";; *) exit 2;; esac\n')
+            git.chmod(0o700)
+            env = dict(os.environ, PATH=str(directory / 'bin') + os.pathsep + os.environ['PATH'])
+            command = ['bash', str(ROOT / 'scripts/build_release_channel.sh'), 'v9.9.9', sha,
+                       'codex/release-candidate-v9.9.9-' + sha, 'linux-debian12']
+            result = subprocess.run(command, cwd=directory, env=env, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual((directory / 'dist/debian12-called').read_text(), '9.9.9')
+            repeated = subprocess.run(command, cwd=directory, env=env, capture_output=True, text=True)
+            self.assertNotEqual(repeated.returncode, 0)
+            self.assertIn('dist moet afwezig', repeated.stderr)
+
     def test_build_receipt_contains_registry_readback_digests(self):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)

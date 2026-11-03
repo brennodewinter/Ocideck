@@ -17,7 +17,7 @@ on:
         required: false
       channel:
         type: choice
-        options: [macos, windows, web, linux-tar, linux-deb, linux-rpm, linux-appimage, linux-flatpak]
+        options: [macos, windows, web, linux-debian12, linux-tar, linux-deb, linux-rpm, linux-appimage, linux-flatpak]
         required: true
 env:
   RELEASE_TAG: ${{ inputs.tag }}
@@ -64,13 +64,13 @@ jobs:
           FROZEN_REF: ${{ inputs.frozen_ref }}
         run: python3 controller/tool/release_windows_candidate.py fetch --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --ref "$FROZEN_REF" --root controller --dist source/dist --operation-id "$OPERATION_ID" --state controller/build/windows-operation.json --forge-run-id "${{ github.run_id }}" --controller-sha "${{ github.sha }}"
       - name: Pub-cache voor de vastgelegde toolchain
-        if: ${{ inputs.channel != 'windows' }}
+        if: ${{ inputs.channel != 'windows' && inputs.channel != 'linux-debian12' }}
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: /root/.pub-cache
           key: channel-pub-linux-x64-${{ hashFiles('source/.tool-versions', 'source/pubspec.lock') }}
       - name: Native hooks voor dezelfde bronafhankelijkheden en bouwomgeving
-        if: ${{ inputs.channel != 'windows' }}
+        if: ${{ inputs.channel != 'windows' && inputs.channel != 'linux-debian12' }}
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: |
@@ -88,10 +88,25 @@ jobs:
             apt-get update
             apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev file
             case "$CHANNEL" in
+              linux-debian12) apt-get install -y --no-install-recommends docker.io iproute2 ;;
               linux-rpm) apt-get install -y --no-install-recommends rpm ;;
               linux-flatpak) apt-get install -y --no-install-recommends flatpak ;;
             esac
           fi
+      - name: Debian 12 builder-daemon vinden
+        if: ${{ inputs.channel == 'linux-debian12' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          GW="$(ip -4 route show default | awk '{print $3; exit}')"
+          test -n "$GW"
+          DOCKER_DAEMON="tcp://$GW:2375"
+          for i in $(seq 1 30); do
+            docker -H "$DOCKER_DAEMON" info >/dev/null 2>&1 && break
+            sleep 2
+          done
+          docker -H "$DOCKER_DAEMON" info >/dev/null
+          echo "DOCKER_DAEMON=$DOCKER_DAEMON" >> "$GITHUB_ENV"
       - name: Gekozen kanaal bouwen en bron controleren
         if: ${{ inputs.channel != 'windows' }}
         env:
@@ -191,6 +206,46 @@ jobs:
             exit 1
           fi
 
+
+  consumer-debian12:
+    name: Debian 12-archief proef op een schone Debian 12
+    needs: build
+    if: ${{ inputs.channel == 'linux-debian12' }}
+    runs-on: docker
+    timeout-minutes: 240
+    container:
+      image: debian:12-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: channel-build, path: dist }
+      - name: Uitpakken, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends \
+            xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
+            libayatana-appindicator3-1 libgles2 libegl1 libpulse0
+          mkdir -p /tmp/ocideck-test
+          tar -xzf "dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
+          cd /tmp/ocideck-test/ocideck-linux-debian12-*
+          test -x ./ocideck
+          if ldd ./ocideck | grep 'not found'; then
+            echo "Het Debian 12-archief mist een runtimebibliotheek." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a ./ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
 
   consumer-rpm:
     name: .rpm proef op een schone Fedora
@@ -349,8 +404,8 @@ jobs:
 
 
   evidence:
-    needs: [build, build-macos, consumer-deb, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]
-    if: ${{ always() && (needs.build.result == 'success' || needs.build-macos.result == 'success') && (inputs.channel == 'macos' || inputs.channel == 'windows' || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
+    needs: [build, build-macos, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]
+    if: ${{ always() && (needs.build.result == 'success' || needs.build-macos.result == 'success') && (inputs.channel == 'macos' || inputs.channel == 'windows' || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-debian12.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
     runs-on: docker
     container:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2

@@ -246,6 +246,7 @@ def main():
     if not all(any(j.get('name') == name and j.get('status') == 'success' for j in jobs) for name in (('build-macos' if args.channel == 'macos' else 'build'), 'evidence')):
         raise ValueError('build/evidence job proof missing')
     consumer_names = {
+        'linux-debian12': 'Debian 12-archief proef op een schone Debian 12',
         'linux-deb': '.deb proef op een schone Ubuntu',
         'linux-rpm': '.rpm proef op een schone Fedora',
         'linux-appimage': 'AppImage proef op een schone Ubuntu',

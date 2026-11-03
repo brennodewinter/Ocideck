@@ -13,7 +13,7 @@ if not re.fullmatch(r'v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)',
     raise ValueError('invalid tag')
 if not re.fullmatch(r'[0-9a-f]{40}', sha) or sha == '0' * 40:
     raise ValueError('source must be a nonzero full lowercase commit SHA')
-if channel not in ('web', 'linux-tar', 'linux-deb', 'linux-rpm', 'linux-appimage', 'linux-flatpak'):
+if channel not in ('web', 'linux-debian12', 'linux-tar', 'linux-deb', 'linux-rpm', 'linux-appimage', 'linux-flatpak'):
     raise ValueError('unsupported independent channel')
 PY
 [[ "$REF" == "codex/release-candidate-${TAG}-${SHA}" ]] || { echo 'Onjuiste vaste kandidaatref' >&2; exit 1; }
@@ -27,6 +27,9 @@ case "$CHANNEL" in
     make check-web
     mkdir dist
     tar -C build/web -czf "dist/ocideck-web-${TAG#v}.tar.gz" .
+    ;;
+  linux-debian12)
+    scripts/build_debian12_release.sh "${TAG#v}"
     ;;
   linux-tar|linux-deb|linux-rpm|linux-appimage|linux-flatpak)
     make build-linux
