@@ -651,6 +651,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} lo no wordu raportá mas den niun presentashon. Bo por bolbe aktiv\'é na Seguridat.',
+  'Niet melden': 'No raportá',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Wardá promé. Despues bo por ekspotá.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

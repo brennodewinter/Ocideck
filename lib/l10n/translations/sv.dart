@@ -1604,6 +1604,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} rapporteras inte längre i någon presentation. Du kan slå på det igen under Säkerhet.',
+  'Niet melden': 'Rapportera inte',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Spara först. Sedan kan du exportera.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

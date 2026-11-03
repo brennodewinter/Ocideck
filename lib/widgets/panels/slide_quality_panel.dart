@@ -192,7 +192,7 @@ class SplitRunDetachChip extends ConsumerWidget {
     return Tooltip(
       message: '${action.label}\n\n${formatSlideQualityIssue(l10n, issue)}',
       child: InkWell(
-        onTap: action.run,
+        onTap: () => action.run(context),
         borderRadius: BorderRadius.circular(6),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
@@ -737,7 +737,7 @@ class _QualityIssueTile extends StatelessWidget {
                         children: [
                           for (final action in actions)
                             TextButton.icon(
-                              onPressed: action.run,
+                              onPressed: () => action.run(context),
                               icon: Icon(action.icon, size: 13),
                               label: Text(action.label),
                               style: TextButton.styleFrom(

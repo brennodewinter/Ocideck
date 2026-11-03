@@ -1608,6 +1608,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} wird denn in keiner Präsentation meh gmäldet. Zrüggsetze chaschs under Sicherheit.',
+  'Niet melden': 'Nid mälde',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Zerschd speichere. Derno chasch exportiere.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

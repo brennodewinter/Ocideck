@@ -1617,6 +1617,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} nie będzie już zgłaszane w żadnej prezentacji. Możesz je przywrócić w Bezpieczeństwie.',
+  'Niet melden': 'Nie zgłaszaj',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Najpierw zapisz. Potem możesz wyeksportować.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

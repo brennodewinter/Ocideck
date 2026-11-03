@@ -811,6 +811,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} will then no longer be reported in any presentation. You can turn it back on under Security.',
+  'Niet melden': 'Do not report',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Save first. Then you can export.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

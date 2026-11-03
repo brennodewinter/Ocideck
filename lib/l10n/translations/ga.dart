@@ -1635,6 +1635,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      'Ní thuairisceofar {regel} in aon chur i láthair níos mó. Is féidir é a chur ar ais faoi Slándáil.',
+  'Niet melden': 'Ná tuairiscigh',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Sábháil ar dtús. Ansin is féidir leat easpórtáil.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

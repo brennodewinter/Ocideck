@@ -1611,6 +1611,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} sa už nebude hlásiť v žiadnej prezentácii. Späť ho zapnete v Zabezpečení.',
+  'Niet melden': 'Nehlásiť',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Najprv uložte. Potom môžete exportovať.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

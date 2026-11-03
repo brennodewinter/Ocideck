@@ -1609,6 +1609,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} se više neće prijavljivati ni u jednoj prezentaciji. Možeš ga vratiti pod Sigurnost.',
+  'Niet melden': 'Ne prijavljuj',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Najprije spremi. Zatim možeš izvesti.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

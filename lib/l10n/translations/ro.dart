@@ -1621,6 +1621,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} nu va mai fi raportat în nicio prezentare. Îl puteți reactiva la Securitate.',
+  'Niet melden': 'Nu raporta',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Salvează întâi. Apoi poți exporta.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

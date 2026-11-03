@@ -2513,6 +2513,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} artık hiçbir sunumda bildirilmeyecek. Güvenlik altından geri açabilirsiniz.',
+  'Niet melden': 'Bildirme',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Önce kaydedin. Sonra dışa aktarabilirsiniz.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

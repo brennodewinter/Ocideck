@@ -1623,6 +1623,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} mhux se jibqa\' jiġi rrappurtat f\'ebda preżentazzjoni. Tista\' tattiva mill-ġdid taħt Sigurtà.',
+  'Niet melden': 'Tagħmilx rapport',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Issejvja l-ewwel. Imbagħad tista\' tesporta.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

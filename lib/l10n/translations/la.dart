@@ -1620,6 +1620,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} in nulla prorsus praesentatione amplius nuntiabitur. Apud Securitatem restituere potes.',
+  'Niet melden': 'Non nuntiare',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Serva primum. Deinde exportare potes.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

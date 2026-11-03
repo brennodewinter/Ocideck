@@ -1603,6 +1603,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} vairs netiks ziņots nevienā prezentācijā. To varat atgriezt sadaļā Drošība.',
+  'Niet melden': 'Neziņot',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Vispirms saglabājiet. Pēc tam varat eksportēt.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

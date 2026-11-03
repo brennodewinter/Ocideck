@@ -1605,6 +1605,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} ei enää ilmoiteta missään esityksessä. Voit ottaa sen takaisin käyttöön Tietoturva-kohdassa.',
+  'Niet melden': 'Älä ilmoita',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Tallenna ensin. Sen jälkeen voit viedä.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

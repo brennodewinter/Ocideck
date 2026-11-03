@@ -1630,6 +1630,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} δεν θα αναφέρεται πλέον σε καμία παρουσίαση. Μπορείτε να το επαναφέρετε στην Ασφάλεια.',
+  'Niet melden': 'Να μην αναφέρεται',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Αποθηκεύστε πρώτα. Μετά μπορείτε να εξάγετε.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

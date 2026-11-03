@@ -1624,6 +1624,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} вече няма да се отчита в никоя презентация. Можете да го върнете от Сигурност.',
+  'Niet melden': 'Не отчитай',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Първо запазете. След това можете да експортирате.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

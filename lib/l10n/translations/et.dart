@@ -1598,6 +1598,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} ei teavitata enam üheski esitluses. Saate selle tagasi panna Turvalisuse alt.',
+  'Niet melden': 'Ära teavita',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Salvestage kõigepealt. Seejärel saate eksportida.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

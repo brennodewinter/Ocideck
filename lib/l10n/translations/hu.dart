@@ -1607,6 +1607,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} ezután egyetlen prezentációban sem lesz jelentve. A Biztonság alatt visszakapcsolhatja.',
+  'Niet melden': 'Ne jelentse',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Előbb mentse el. Utána exportálhat.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

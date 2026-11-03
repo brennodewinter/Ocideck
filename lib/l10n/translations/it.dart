@@ -649,6 +649,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} non verrà più segnalato in nessuna presentazione. Puoi riattivarlo in Sicurezza.',
+  'Niet melden': 'Non segnalare',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Salva prima. Poi puoi esportare.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

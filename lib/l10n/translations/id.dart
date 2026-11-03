@@ -1605,6 +1605,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} tidak akan lagi dilaporkan di presentasi mana pun. Anda bisa mengaktifkannya kembali di Keamanan.',
+  'Niet melden': 'Jangan laporkan',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Simpan dulu. Setelah itu Anda bisa mengekspor.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

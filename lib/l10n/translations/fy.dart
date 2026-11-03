@@ -652,6 +652,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} wurdt dan yn gjin ien presintaasje mear meld. Weromsette kin by Befeiliging.',
+  'Niet melden': 'Net melde',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Bewarje earst. Dêrnei kinne jo eksportearje.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

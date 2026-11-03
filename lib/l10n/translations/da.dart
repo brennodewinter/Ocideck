@@ -1605,6 +1605,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} vil ikke længere blive rapporteret i nogen præsentation. Du kan slå det til igen under Sikkerhed.',
+  'Niet melden': 'Meld ikke',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Gem først. Derefter kan du eksportere.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':

@@ -1620,6 +1620,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} більше не повідомлятиметься в жодній презентації. Ви можете повернути це в Безпеці.',
+  'Niet melden': 'Не повідомляти',
   'Eerst opslaan. Daarna kun je exporteren.':
       'Спочатку збережіть. Потім ви зможете експортувати.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
