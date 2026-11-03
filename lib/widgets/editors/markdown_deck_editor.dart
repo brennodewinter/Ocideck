@@ -861,24 +861,42 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     return Container(
       color: AppTheme.warnSurface,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Row(
-        children: [
-          // Niet-interactief status-badge: het <>-icoon met het woord 'Bron'
-          // maakt duidelijk dat je in de rauwe markdown-bron zit — een label,
-          // geen knop (#1187). Een kale icoon las tussen de echte icoonknoppen
-          // in deze balk als iets klikbaars. Hetzelfde woord 'Bron' als de chip
-          // die hierheen leidt, dus instap en bestemming dragen één signaal.
-          Icon(Icons.code, size: 14, color: AppTheme.warningFg),
-          const SizedBox(width: 5),
-          Text(
-            l10n.d('Bron'),
-            style: TextStyle(
-              fontSize: 11.5,
-              fontWeight: FontWeight.w600,
-              color: AppTheme.warningFg,
-            ),
+      // Bij ~880px en smaller past de knoppenreeks niet meer — scrollen houdt
+      // alle knoppen bereikbaar in plaats van ze weg te duwen (#2742).
+      child: LayoutBuilder(
+        builder: (context, box) => box.maxWidth < 880
+            ? SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: _modeBannerRow(l10n, scrollable: true),
+              )
+            : _modeBannerRow(l10n),
+      ),
+    );
+  }
+
+  Widget _modeBannerRow(AppLocalizations l10n, {bool scrollable = false}) {
+    return Row(
+      // In de scroll-balk krimpt de rij om zijn inhoud — een flex-kind mag
+      // dan niet meer op eindige breedte rekenen.
+      mainAxisSize: scrollable ? MainAxisSize.min : MainAxisSize.max,
+      children: [
+        // Niet-interactief status-badge: het <>-icoon met het woord 'Bron'
+        // maakt duidelijk dat je in de rauwe markdown-bron zit — een label,
+        // geen knop (#1187). Een kale icoon las tussen de echte icoonknoppen
+        // in deze balk als iets klikbaars. Hetzelfde woord 'Bron' als de chip
+        // die hierheen leidt, dus instap en bestemming dragen één signaal.
+        Icon(Icons.code, size: 14, color: AppTheme.warningFg),
+        const SizedBox(width: 5),
+        Text(
+          l10n.d('Bron'),
+          style: TextStyle(
+            fontSize: 11.5,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.warningFg,
           ),
-          const SizedBox(width: 10),
+        ),
+        const SizedBox(width: 10),
+        if (!scrollable)
           Flexible(
             child: _MarkdownScopeToggle(
               scope: widget.scope,
@@ -887,53 +905,56 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               onChanged: _requestScopeChange,
             ),
           ),
-          const Spacer(),
-          _DocumentStatus(
-            dirty: _isDirty,
-            validationPending: _validationPending,
-            validation: _validation,
-            onPressed: _isDirty ? _showSourceDiff : null,
+        if (scrollable)
+          _MarkdownScopeToggle(
+            scope: widget.scope,
+            slideNumber: widget.slideNumber,
+            slideCount: widget.slideCount,
+            onChanged: _requestScopeChange,
           ),
-          const SizedBox(width: 6),
-          _MarkdownOutlineButton(
-            entries: _sourceDocument.outline,
-            onSelected: _jumpToLine,
-          ),
-          IconButton(
-            onPressed: _openCommandPalette,
-            icon: const Icon(Icons.add_circle_outline, size: 16),
-            tooltip: l10n.d('Invoegen of opmaken (Ctrl/Cmd+Spatie)'),
-            visualDensity: VisualDensity.compact,
-            color: AppTheme.warningFg,
-          ),
-          // Zoeken zat er al — op Ctrl/Cmd+F, en via het menu en de
-          // opdrachtenbalk — maar nergens zichtbaar in de markdown-weergave
-          // zelf. Zonder knop weet niemand dat het kan: "in markdown kan ik niet
-          // zoeken" was de klacht, terwijl de balk er wél was. Een icoonknop en
-          // geen tekstknop, want de kopregel is smal: het vergrootglas is een
-          // vertrouwd zoek-signaal en de tooltip vertelt de rest.
-          IconButton(
-            onPressed: () => _openFind(showReplace: false),
-            icon: const Icon(Icons.search, size: 16),
-            tooltip: l10n.d('Zoeken'),
-            visualDensity: VisualDensity.compact,
-            color: AppTheme.warningFg,
-          ),
-          TextButton.icon(
-            onPressed: _runValidation,
-            icon: const Icon(Icons.rule, size: 16),
-            label: Text(l10n.d('Controleren')),
-          ),
-          TextButton(
-            onPressed: _applyMarkdown,
-            child: Text(l10n.d('Toepassen')),
-          ),
-          TextButton(
-            onPressed: _requestExitMarkdown,
-            child: Text(l10n.d('Terug naar de dia\'s')),
-          ),
-        ],
-      ),
+        if (!scrollable) const Spacer(),
+        _DocumentStatus(
+          dirty: _isDirty,
+          validationPending: _validationPending,
+          validation: _validation,
+          onPressed: _isDirty ? _showSourceDiff : null,
+        ),
+        const SizedBox(width: 6),
+        _MarkdownOutlineButton(
+          entries: _sourceDocument.outline,
+          onSelected: _jumpToLine,
+        ),
+        IconButton(
+          onPressed: _openCommandPalette,
+          icon: const Icon(Icons.add_circle_outline, size: 16),
+          tooltip: l10n.d('Invoegen of opmaken (Ctrl/Cmd+Spatie)'),
+          visualDensity: VisualDensity.compact,
+          color: AppTheme.warningFg,
+        ),
+        // Zoeken zat er al — op Ctrl/Cmd+F, en via het menu en de
+        // opdrachtenbalk — maar nergens zichtbaar in de markdown-weergave
+        // zelf. Zonder knop weet niemand dat het kan: "in markdown kan ik niet
+        // zoeken" was de klacht, terwijl de balk er wél was. Een icoonknop en
+        // geen tekstknop, want de kopregel is smal: het vergrootglas is een
+        // vertrouwd zoek-signaal en de tooltip vertelt de rest.
+        IconButton(
+          onPressed: () => _openFind(showReplace: false),
+          icon: const Icon(Icons.search, size: 16),
+          tooltip: l10n.d('Zoeken'),
+          visualDensity: VisualDensity.compact,
+          color: AppTheme.warningFg,
+        ),
+        TextButton.icon(
+          onPressed: _runValidation,
+          icon: const Icon(Icons.rule, size: 16),
+          label: Text(l10n.d('Controleren')),
+        ),
+        TextButton(onPressed: _applyMarkdown, child: Text(l10n.d('Toepassen'))),
+        TextButton(
+          onPressed: _requestExitMarkdown,
+          child: Text(l10n.d('Terug naar de dia\'s')),
+        ),
+      ],
     );
   }
 
