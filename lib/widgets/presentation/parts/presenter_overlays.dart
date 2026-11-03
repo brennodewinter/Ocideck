@@ -483,18 +483,18 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           ),
         ),
         const SizedBox(width: 16),
-        Expanded(
-          child: Text(
-            l10n.d(
-              _displays.length > 1
-                  ? 'P notities · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
-                  : 'P notities · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
-            ),
-            textAlign: TextAlign.right,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: _muted, fontSize: 11),
+        // De rij is een Wrap (smalle vensters breken om) — geen Expanded:
+        // een Wrap-kind heeft geen flex, de tekst maat eigen breedte.
+        Text(
+          l10n.d(
+            _displays.length > 1
+                ? 'P notities · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
+                : 'P notities · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
           ),
+          textAlign: TextAlign.right,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: _muted, fontSize: 11),
         ),
         IconButton(
           tooltip: l10n.d('Afsluiten (Escape)'),
