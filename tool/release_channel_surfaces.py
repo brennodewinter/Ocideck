@@ -436,37 +436,21 @@ def validate_rollback(args):
         raise ValueError('rollback target must be strictly older than rollback-from')
 
 
-class Links(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.urls = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == 'a':
-            self.urls.extend(value for key, value in attrs if key == 'href' and value)
-
-
-def page_tags(content, channel):
-    parser = Links()
+def primary_tags(content, channel, allowed):
+    parser = DownloadRows(ROW_KEYS[channel])
     parser.feed(content.decode('utf-8'))
-    names = release_channel.CHANNELS[channel]
-    tags = set()
-    seen = set()
-    for pattern in names:
-        if pattern.endswith('.json'):
-            continue
-        regex = re.escape(pattern).replace(r'\{v\}', r'([0-9]+\.[0-9]+\.[0-9]+)')
-        for url in parser.urls:
-            match = re.fullmatch(r'https://pawprint\.vigilis\.online/LibreKAT/Ocideck/releases/download/(v[0-9]+\.[0-9]+\.[0-9]+)/' + regex, url)
-            if match:
-                if match[1] != 'v' + match[2]:
-                    raise ValueError('download URL tag and filename disagree')
-                seen.add(pattern)
-                tags.add(match[1])
-    expected = {name for name in names if not name.endswith('.json')}
-    if seen != expected:
-        raise ValueError('selected download rows unavailable for rollback')
-    return tags
+    names = [name for name in release_channel.CHANNELS[channel] if not name.endswith('.json')]
+    result = set()
+    if parser.active or set(parser.rows) != set(ROW_KEYS[channel]):
+        raise ValueError('selected rollback primary rows missing')
+    for key, pattern in zip(ROW_KEYS[channel], names):
+        urls = parser.rows[key]
+        matches = {tag for tag in allowed if urls == [
+            'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/' + tag + '/' + pattern.format(v=tag[1:])]}
+        if len(matches) != 1:
+            raise ValueError('selected rollback primary URL differs')
+        result.update(matches)
+    return result
 
 
 def check_rollback_pointer(args, get=fetch):
@@ -485,7 +469,7 @@ def check_rollback_pointer(args, get=fetch):
         tags = set()
         for language in LANGUAGES:
             path = '/' + language + '/ocideck/'
-            tags.update(page_tags(get('https://librekat.nl' + path), args.channel))
+            tags.update(primary_tags(get('https://librekat.nl' + path), args.channel, allowed))
     if not tags or not tags <= allowed:
         raise ValueError('current public pointer differs from explicit rollback-from or owned target')
     if args.channel == 'macos':

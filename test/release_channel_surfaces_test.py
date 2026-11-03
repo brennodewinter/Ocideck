@@ -227,13 +227,16 @@ class PublicSurfacesTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'current public pointer'):
                 surfaces.check_rollback_pointer(args, lambda _: b'{"version":"1.2.5"}')
 
-    def test_download_row_guard_rejects_wrong_or_incomplete_channel(self):
-        content = b'<a href="https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/v1.2.4/ocideck-linux-x64-1.2.4.tar.gz">Linux</a>'
-        self.assertEqual(surfaces.page_tags(content, 'linux-tar'), {'v1.2.4'})
-        with self.assertRaisesRegex(ValueError, 'unavailable'):
-            surfaces.page_tags(content, 'windows')
-        with self.assertRaisesRegex(ValueError, 'disagree'):
-            surfaces.page_tags(content.replace(b'download/v1.2.4/', b'download/v1.2.3/'), 'linux-tar')
+    def test_rollback_primary_guard_rejects_hidden_correct_links(self):
+        url = 'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/v1.2.4/ocideck-linux-x64-1.2.4.tar.gz'
+        content = self.row('linux_tar', url)
+        self.assertEqual(surfaces.primary_tags(content.encode(), 'linux-tar', {'v1.2.4'}), {'v1.2.4'})
+        for bad in (content.replace('pawprint.vigilis.online', 'evil.invalid') + '<a hidden href="' + url + '">correct hidden</a>',
+                    content + self.row('linux_tar', url),
+                    content.replace('v1.2.4/', 'v1.2.3/')):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                surfaces.primary_tags(bad.encode(), 'linux-tar', {'v1.2.4'})
+
 
     def test_homebrew_lost_dispatch_response_is_never_repeated(self):
         with tempfile.TemporaryDirectory() as directory:
