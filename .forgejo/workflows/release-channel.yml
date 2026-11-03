@@ -1,0 +1,306 @@
+# Alleen handmatig; maakt kandidaatbestanden, nooit tags of publieke releases.
+name: Onafhankelijke releasekandidaat
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+      source_sha:
+        required: true
+      frozen_ref:
+        required: true
+      channel:
+        type: choice
+        options: [web, linux-tar, linux-deb, linux-rpm, linux-appimage, linux-flatpak]
+        required: true
+env:
+  RELEASE_TAG: ${{ inputs.tag }}
+jobs:
+  build:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: docker
+    timeout-minutes: 960
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      - name: Vaste bron controleren voor broncode wordt uitgevoerd
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          FROZEN_REF: ${{ inputs.frozen_ref }}
+          CHANNEL: ${{ inputs.channel }}
+        run: |
+          set -eu
+          cd controller
+          git config --global --add safe.directory "$PWD"
+          python3 - "$RELEASE_TAG" "$SOURCE_SHA" "$CHANNEL" <<'PYGUARD'
+          import sys
+          from tool.release_channel import identity
+          identity(*sys.argv[1:])
+          PYGUARD
+          test "$FROZEN_REF" = "codex/release-candidate-$RELEASE_TAG-$SOURCE_SHA"
+          test "$(git ls-remote --exit-code origin "refs/heads/$FROZEN_REF" | awk '{print $1}')" = "$SOURCE_SHA"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.source_sha }}
+          path: source
+      - name: Bouwgereedschap voor het gekozen kanaal
+        env:
+          CHANNEL: ${{ inputs.channel }}
+        run: |
+          set -eu
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/source"
+          if [ "$CHANNEL" != web ]; then
+            apt-get update
+            apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev file
+            case "$CHANNEL" in
+              linux-rpm) apt-get install -y --no-install-recommends rpm ;;
+              linux-flatpak) apt-get install -y --no-install-recommends flatpak ;;
+            esac
+          fi
+      - name: Gekozen kanaal bouwen en bron controleren
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          FROZEN_REF: ${{ inputs.frozen_ref }}
+          CHANNEL: ${{ inputs.channel }}
+          APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage
+          APPIMAGETOOL_SHA256: ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0
+        run: |
+          cd source
+          bash ../controller/scripts/build_release_channel.sh "$RELEASE_TAG" "$SOURCE_SHA" "$FROZEN_REF" "$CHANNEL"
+      - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
+        with:
+          name: channel-build
+          path: source/dist/*
+          if-no-files-found: error
+          retention-days: 90
+
+  consumer-deb:
+    name: .deb proef op een schone Ubuntu
+    needs: build
+    if: ${{ inputs.channel == 'linux-deb' }}
+    runs-on: docker
+    # Dezelfde schone Ubuntu-proef als linux-build: geef apt ook na de tag
+    # genoeg tijd voordat de eigenlijke startproef van 20 seconden begint.
+    timeout-minutes: 240
+    # Zelfde pin als deploy-web; kaal Ubuntu, géén bouwgereedschap.
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: channel-build, path: dist }
+      - name: Installeren, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends xvfb fonts-dejavu-core
+          apt-get install -y "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb"
+          # Declares de control minder dan de binary linkt, dan toont ldd
+          # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
+          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
+            echo "Het .deb dekt niet alle runtimebibliotheken van de binary." >&2
+            exit 1
+          fi
+          # Startproef: onder Xvfb moet de app opkomen en draaien blijven.
+          # timeout geeft 124 als hij de volle 20 s overleefde; een crash of
+          # direct wegvallen geeft iets anders en is dus rood.
+          set +e
+          timeout 20 xvfb-run -a ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
+
+  consumer-rpm:
+    name: .rpm proef op een schone Fedora
+    needs: build
+    if: ${{ inputs.channel == 'linux-rpm' }}
+    runs-on: docker
+    timeout-minutes: 240
+    # Kaal Fedora: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
+    # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
+    container:
+      image: fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814
+    steps:
+      - name: Node voor de artefactactie
+        run: dnf install -y --setopt=install_weak_deps=False nodejs
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: channel-build, path: dist }
+      - name: Installeren, linken en starten
+        run: |
+          set -eu
+          dnf install -y --setopt=install_weak_deps=False xorg-x11-server-Xvfb dejavu-sans-fonts
+          dnf install -y "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm"
+          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
+            echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
+
+  consumer-appimage:
+    name: AppImage proef op een schone Ubuntu
+    needs: build
+    if: ${{ inputs.channel == 'linux-appimage' }}
+    runs-on: docker
+    timeout-minutes: 240
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: channel-build, path: dist }
+      - name: Uitpakken, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          # Een AppImage bundelt geen GTK: de runtimebibliotheken hieronder
+          # zijn wat een gewone desktop al heeft. Geen -dev-pakketten, geen
+          # toolchain — het beeld blijft consumentachtig.
+          apt-get install -y --no-install-recommends \
+            xvfb fonts-dejavu-core \
+            libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1 \
+            libgles2 libegl1
+          cd dist
+          chmod +x ocideck-linux-x86_64-*.AppImage
+          ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
+          test -x squashfs-root/ocideck
+          # De binary vindt zijn eigen lib/ via $ORIGIN (zie packaging/linux/
+          # AppRun); wat ldd als "not found" toont, ontbreekt dus echt.
+          if ldd squashfs-root/ocideck | grep 'not found'; then
+            echo "De AppImage mist een runtimebibliotheek." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a squashfs-root/AppRun
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "De AppImage kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
+
+  consumer-flatpak:
+    name: Flatpak installatie en inhoud op een schone Ubuntu
+    needs: build
+    if: ${{ inputs.channel == 'linux-flatpak' }}
+    runs-on: docker
+    timeout-minutes: 240
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: channel-build, path: dist }
+      - name: Installeren en inhoud controleren
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends flatpak
+          flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
+          flatpak --user install -y --noninteractive --bundle "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak"
+          app="$(flatpak --user info --show-location com.dewinter.ocideck)"
+          flatpak --user info --show-metadata com.dewinter.ocideck | grep -Fx 'runtime=org.gnome.Platform/x86_64/50'
+          test -x "$app/files/bin/ocideck"
+          test -x "$app/files/bin/git"
+          test -x "$app/files/lib/ocideck/ocideck"
+          test -x "$app/files/libexec/git-core/git-remote-https"
+          sh -n "$app/files/bin/ocideck"
+          (cd "$app/files" && sha256sum -c share/doc/ocideck-flatpak/FILES.sha256)
+          cmp "$app/files/share/doc/ocideck-flatpak/components.cdx.json" "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak.cdx.json"
+
+
+  consumer-tar:
+    name: Linux-tar-archief proef op een schone Linux-tar
+    needs: build
+    if: ${{ inputs.channel == 'linux-tar' }}
+    runs-on: docker
+    timeout-minutes: 240
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: channel-build, path: dist }
+      - name: Uitpakken, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends \
+            xvfb xauth fonts-dejavu-core libgtk-3-0t64 libsecret-1-0 liblzma5 \
+            libayatana-appindicator3-1 libgles2 libegl1 libpulse0
+          mkdir -p /tmp/ocideck-test
+          tar -xzf "dist/ocideck-linux-x64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
+          cd /tmp/ocideck-test/ocideck-*
+          test -x ./ocideck
+          if ldd ./ocideck | grep 'not found'; then
+            echo "Het Linux-tar-archief mist een runtimebibliotheek." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a ./ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
+
+  evidence:
+    needs: [build, consumer-deb, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]
+    if: ${{ always() && needs.build.result == 'success' && (inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
+    runs-on: docker
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a
+        with: { name: channel-build, path: dist }
+      - name: Exacte kanaalbytes vastleggen
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          CHANNEL: ${{ inputs.channel }}
+        run: python3 tool/release_channel.py create --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --channel "$CHANNEL" --run-id "$GITHUB_RUN_ID" --dist dist --output "dist/channel-manifest-$CHANNEL.json"
+      - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
+        with:
+          name: channel-candidate-${{ inputs.channel }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 90

@@ -5,7 +5,7 @@
       "uses": "actions/checkout",
       "version": "v4.4.0",
       "sha": "11d5960a326750d5838078e36cf38b85af677262",
-      "workflows": [".forgejo/workflows/release.yml"],
+      "workflows": [".forgejo/workflows/release.yml", ".forgejo/workflows/release-channel.yml"],
       "purpose": "Checks out release source without trusting a mutable major tag.",
       "source": "github_ref",
       "api": "https://api.github.com/repos/actions/checkout/git/ref/tags/v4"
@@ -23,7 +23,7 @@
       "uses": "actions/upload-artifact",
       "version": "v3.2.1",
       "sha": "ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5",
-      "workflows": [".forgejo/workflows/release.yml"],
+      "workflows": [".forgejo/workflows/release.yml", ".forgejo/workflows/release-channel.yml"],
       "purpose": "Uploads build artifacts through the Forgejo-compatible v3 protocol without trusting its mutable major tag.",
       "source": "github_ref",
       "api": "https://api.github.com/repos/actions/upload-artifact/git/ref/tags/v3"
@@ -32,7 +32,7 @@
       "uses": "actions/download-artifact",
       "version": "v3.0.2",
       "sha": "9bc31d5ccc31df68ecc42ccf4149144866c47d8a",
-      "workflows": [".forgejo/workflows/release.yml"],
+      "workflows": [".forgejo/workflows/release.yml", ".forgejo/workflows/release-channel.yml"],
       "purpose": "Downloads build artifacts through the Forgejo-compatible v3 protocol without trusting its mutable major tag.",
       "source": "github_ref",
       "api": "https://api.github.com/repos/actions/download-artifact/git/ref/tags/v3"

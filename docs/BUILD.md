@@ -819,6 +819,42 @@ The title must match that version and the PR must be merged into `main`.
 Automatic selection still refuses multiple matching release PRs. This option
 cannot change an already published tag and does not bypass candidate checks.
 
+A fresh release freezes `origin/main` into a version-specific
+`codex/release-base-vX.Y.Z` branch before expensive checks. The release PR targets
+that base; advancing main does not widen the release. A conflicting existing base
+is an error, never a reason to replace it.
+
+For an existing untagged maintenance release, select its separate base explicitly:
+`--resume vX.Y.Z --release-base codex/release-base-vX.Y.Z --release-pr <number>`.
+The exact release PR may be open or merged into that base. The base must remain
+frozen before merge and point exactly to the approved merge afterward. This
+keeps newer main changes out without moving main or a published tag. Never
+change the selected base to make a failed proof pass. After a public tag, resume
+that tag without the selection flags.
+
+`tool/release_channel.py create` and `verify` provide local per-channel byte
+manifests for macOS, Windows, web and the Linux formats. They accept a fixed tag,
+full source SHA, channel and exact asset set. Existing evidence cannot be
+replaced with different bytes. These manifests do not by themselves attest build
+provenance or publish a channel; the workflow and signing integration must also
+verify the originating run before publication. `make check-release-channels`
+checks tampering and invalid inputs without building the application.
+
+The manual `release-channel.yml` workflow builds web or one Linux format from
+an exact frozen candidate ref. The workflow runs from main and checks the source
+before executing candidate code. Only a successful selected consumer probe can
+produce its candidate manifest. Artifacts are retained for 90 days; retention
+is not durable archival. Independent macOS, Windows and Debian 12 publication
+is not yet supported by this workflow.
+
+`tool/release_journal.py --journal <durable-path> init` binds a journal to the
+version, source, channel and workflow hash. Explicit `record` events preserve
+phase starts, outcomes and evidence hashes. `verify-evidence` checks stored bytes
+before reuse. Its lock serializes journal writes; the release controller must
+hold a separate lease across external side effects. Keep journals and referenced
+evidence on durable storage, not in `/tmp`. A stopped or failed phase is never
+retried automatically. These primitives do not yet replace the legacy controller.
+
 For a reviewed repair to release tooling or packaging after the release PR has
 merged, an operator can explicitly select the merged repair commit with
 `--resume vX.Y.Z --candidate-sha <full commit SHA>`. This is an untagged-only

@@ -41,6 +41,10 @@
 #     De webdemo gaat bewust EERST: ze hangt alleen aan de web-bundel, dus een
 #     teken- of platformfout laat de demo nooit op de oude versie staan.
 #
+# Een geteste onderhoudsrelease kan met een expliciete basis hervatten:
+#   --resume vX.Y.Z --release-base codex/release-base-vX.Y.Z --release-pr NUMMER
+# De PR moet exact die basis en release-head noemen. Main blijft daarbij intact.
+#
 # HERSTARTBAAR (--resume vX.Y.Z): breekt de keten af — een time-out op de poort,
 # een netwerkhik of een gefaalde upstream CI-job — dan hervat je met
 # `scripts/release_auto.sh --resume vX.Y.Z` vanaf precies het punt waar het bleef.
@@ -275,7 +279,17 @@ CANDIDATE_SHA=""
 EXPECT_CANDIDATE_SHA=0
 RELEASE_PR=""
 EXPECT_RELEASE_PR=0
+RELEASE_BASE="main"
+EXPECT_RELEASE_BASE=0
+RELEASE_BASE_SET=0
 for arg in "$@"; do
+  if [ "$EXPECT_RELEASE_BASE" -eq 1 ]; then
+    if ! [[ "$arg" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]*$ ]] || ! git check-ref-format "refs/heads/$arg" >/dev/null 2>&1; then
+      die "--release-base verwacht een geldige branchnaam."
+    fi
+    RELEASE_BASE="$arg"; EXPECT_RELEASE_BASE=0
+    continue
+  fi
   if [ "$EXPECT_RELEASE_PR" -eq 1 ]; then
     [[ "$arg" =~ ^[1-9][0-9]*$ ]] || die "--release-pr verwacht een positief PR-nummer."
     RELEASE_PR="$arg"; EXPECT_RELEASE_PR=0
@@ -293,6 +307,9 @@ for arg in "$@"; do
     --ondanks-fixes) IGNORE_FIXES=1 ;;
     --supersede-untagged) SUPERSEDE_UNTAGGED=1 ;;
     --print-version) PRINT_VERSION=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
+    --release-base)
+      [ "$RELEASE_BASE_SET" -eq 0 ] || die "geef slechts één --release-base."
+      RELEASE_BASE_SET=1; EXPECT_RELEASE_BASE=1 ;;
     --release-pr)
       [ -z "$RELEASE_PR" ] || die "geef slechts één --release-pr."
       EXPECT_RELEASE_PR=1 ;;
@@ -320,8 +337,15 @@ for arg in "$@"; do
   esac
 done
 
+[ "$EXPECT_RELEASE_BASE" -eq 0 ] || die "--release-base mist de branchnaam."
+[ "$RELEASE_BASE_SET" -eq 0 ] || [ "$RESUME" -eq 1 ] || [ "$STATUS" -eq 1 ] \
+  || die "--release-base mag uitsluitend met --resume of --status."
+[ "$RELEASE_BASE" = main ] || [ -n "$RELEASE_PR" ] \
+  || die "een onderhoudsbasis vereist een expliciete --release-pr."
+[ "$RELEASE_BASE" = main ] || [ -z "$CANDIDATE_SHA" ] \
+  || die "combineer een onderhoudsbasis niet met --candidate-sha."
 [ "$EXPECT_RELEASE_PR" -eq 0 ] || die "--release-pr mist het PR-nummer."
-[ -z "$RELEASE_PR" ] || [ "$RESUME" -eq 1 ] \
+[ -z "$RELEASE_PR" ] || [ "$RESUME" -eq 1 ] || { [ "$STATUS" -eq 1 ] && [ "$RELEASE_BASE" != main ]; } \
   || die "--release-pr mag uitsluitend samen met --resume vX.Y.Z."
 [ -z "$RELEASE_PR" ] || [ -z "$CANDIDATE_SHA" ] \
   || die "combineer --release-pr niet met --candidate-sha."
@@ -2269,6 +2293,7 @@ finish() {
 # of niets als er (nog) geen PR is.
 find_release_pr() {
   local json matches count remote refs
+  local selected_base="${RELEASE_BASE:-main}"
   if [ -n "${RELEASE_PR:-}" ]; then
     for remote in origin mirror; do
       refs="$(git ls-remote "$remote" "refs/tags/$TAG" "refs/tags/$TAG^{}")" \
@@ -2277,13 +2302,17 @@ find_release_pr() {
     done
     json="$(api GET "/pulls/$RELEASE_PR")" \
       || die "kon expliciete release-PR #$RELEASE_PR niet betrouwbaar lezen."
-    printf '%s' "$json" | jq -er --arg n "$RELEASE_PR" --arg t "chore(release): versie $NEW_VERSION" '
+    printf '%s' "$json" | jq -er --arg n "$RELEASE_PR" --arg t "chore(release): versie $NEW_VERSION" --arg base "$selected_base" --arg branch "$BRANCH" '
       select((.number | tostring) == $n and .title == $t
-        and .base.ref == "main" and .merged == true and .state == "closed"
-        and (.head.sha | test("^[0-9a-f]{40}$"))
-        and (.merge_commit_sha | test("^[0-9a-f]{40}$")))
+        and .base.ref == $base
+        and (.head.sha | type == "string" and test("^[0-9a-f]{40}$"))
+        and (if $base == "main" then .merged == true and .state == "closed"
+          else (.merged == true and .state == "closed")
+            or (.merged == false and .state == "open" and .head.ref == $branch) end)
+        and (if .merged == true then (.merge_commit_sha | type == "string" and test("^[0-9a-f]{40}$"))
+          else (.merge_commit_sha == null or .merge_commit_sha == "") end))
       | "\(.number)|\(.state)|\(.merged)|\(.head.sha)|\(.merge_commit_sha)"' \
-      || die "expliciete release-PR moet een gemergde releaseherziening voor $NEW_VERSION naar main zijn."
+      || die "expliciete release-PR moet bij versie $NEW_VERSION en basis $selected_base horen."
     return 0
   fi
   json="$(api GET "/pulls?state=all&limit=100")" \
@@ -2308,7 +2337,7 @@ open_or_find_pr() {
     return 0
   fi
   api POST /pulls -H 'Content-Type: application/json' \
-    -d "$(jq -n --arg b main --arg h "$BRANCH" --arg t "chore(release): versie $NEW_VERSION" \
+    -d "$(jq -n --arg b "${RELEASE_BASE:-main}" --arg h "$BRANCH" --arg t "chore(release): versie $NEW_VERSION" \
           '{base:$b, head:$h, title:$t, body:"Geautomatiseerde release-bump door scripts/release_auto.sh (#1161)."}')" \
     | jq -r '.number'
 }
@@ -2525,21 +2554,59 @@ wait_gate() { # wait_gate SHA PR_NUMBER
 # gekeurd zijn. De merge-base van branch en main ÍS het vastgelegde
 # vertrekpunt: alleen als origin/main er nog exact op staat is de getagde
 # tree de gekeurde boom.
+# De bron wordt vóór dure controles op een aparte, uitsluitend aanmaakbare ref gezet.
+freeze_release_source() {
+  local source ref actual
+  source="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
+    || die "main niet betrouwbaar leesbaar vóór bronfreeze."
+  [[ "$source" =~ ^[0-9a-f]{40}$ ]] && [ "$source" != 0000000000000000000000000000000000000000 ] \
+    || die "ongeldige broncommit vóór bronfreeze."
+  ref="codex/release-base-$TAG"
+  actual="$(git ls-remote origin "refs/heads/$ref" | awk 'NR==1 {print $1}')" \
+    || die "bestaande releasebasis niet leesbaar."
+  if [ -z "$actual" ]; then
+    git push --quiet --force-with-lease="refs/heads/$ref:" origin "$source:refs/heads/$ref" \
+      || log "Aanmaakantwoord ontbreekt; releasebasis teruglezen."
+  else
+    [ "$actual" = "$source" ] || die "releasebasis bestaat al op andere inhoud; hervat die release bewust."
+  fi
+  actual="$(git ls-remote origin "refs/heads/$ref" | awk 'NR==1 {print $1}')" \
+    || die "releasebasis niet terug te lezen."
+  [ "$actual" = "$source" ] || die "releasebasis wijkt af van de gekozen bron."
+  RELEASE_BASE="$ref"
+  git fetch origin "$RELEASE_BASE" --quiet || die "vaste releasebasis niet op te halen."
+  log "Releasebron vast op $source ($RELEASE_BASE); latere main-wijzigingen blijven erbuiten."
+}
+
+resolve_release_base() { # resolve_release_base PR HEAD_SHA
+  local proof base
+  proof="$(api GET "/pulls/$1")" || die "releasebasis van PR niet betrouwbaar leesbaar."
+  base="$(jq -er --arg n "$1" --arg sha "$2" --arg title "chore(release): versie $NEW_VERSION" '
+    select((.number|tostring)==$n and .title==$title and .head.sha==$sha) | .base.ref' <<<"$proof")" \
+    || die "release-PR-identiteit wijkt af."
+  if [ "$base" != "${RELEASE_BASE:-main}" ]; then
+    [ "${RELEASE_BASE:-main}" = main ] && [ "$base" = "codex/release-base-$TAG" ] \
+      || die "release-PR heeft een andere basis dan geselecteerd."
+    RELEASE_BASE="$base"
+  fi
+}
+
 assert_release_base_frozen() {
-  local base now
-  git fetch origin main "$BRANCH" --quiet 2>/dev/null \
-    || die "kon origin/main en $BRANCH niet verversen vóór de merge — base-toestand onbekend, niets gemerged."
-  base="$(git merge-base "origin/$BRANCH" origin/main 2>/dev/null || true)"
-  now="$(git rev-parse origin/main 2>/dev/null || true)"
+  local base now selected_base="${RELEASE_BASE:-main}"
+  git fetch origin "$selected_base" "$BRANCH" --quiet 2>/dev/null \
+    || die "kon releasebasis en $BRANCH niet verversen — niets gemerged."
+  base="$(git merge-base "origin/$BRANCH" "origin/$selected_base" 2>/dev/null || true)"
+  now="$(git rev-parse "origin/$selected_base" 2>/dev/null || true)"
   [ -n "$base" ] && [ -n "$now" ] \
-    || die "kon de gekeurde base van $BRANCH niet bepalen — mergen gestopt, niets gemerged."
+    || die "kon de gekeurde releasebasis niet bepalen — niets gemerged."
   [ "$now" = "$base" ] \
-    || die "origin/main schoof door (${base:0:12} → ${now:0:12}) sinds $BRANCH werd gekeurd — de servermerge zou nooit gebouwde base-commits in de getagde tree meenemen. Herstel: merge origin/main in $BRANCH, push, laat de poort opnieuw groen worden en hervat met: scripts/release_auto.sh --resume $TAG. Niets gemerged, niets getagd."
+    || die "origin/$selected_base schoof door (${base:0:12} → ${now:0:12}) — behoud de geteste inhoud via een aparte onderhoudsbasis; voeg nieuwe inhoud uitsluitend bewust toe. Niets gemerged, niets getagd."
   log "Gekeurde base bevroren op ${base:0:12} — merge heeft geen ongeziene base."
 }
 
 merge_pr() { # merge_pr PR_NUMBER HEAD_SHA
   local pr="$1" head="$2" st
+  resolve_release_base "$pr" "$head"
   STEP="mergen"
   st="$(find_release_pr)"
   if [ -n "$st" ] && [ "$(printf '%s' "$st" | cut -d'|' -f3)" = "true" ]; then
@@ -2581,6 +2648,14 @@ assert_release_merge_tree() { # assert_release_merge_tree MERGE_SHA
 # productwijzigingen mogen via geen van beide routes ongemerkt meekomen.
 resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
   local release="$1" current changed file version
+  if [ "${RELEASE_BASE:-main}" != main ]; then
+    current="$(git ls-remote origin "refs/heads/$RELEASE_BASE" | awk 'NR==1 {print $1}')" \
+      || die "onderhoudsbasis niet leesbaar — niets getagd."
+    [ -n "$current" ] && [ "$current" = "$release" ] \
+      || die "onderhoudsbasis wijkt af van de goedgekeurde release-merge — niets getagd."
+    printf '%s\n' "$release"
+    return 0
+  fi
   current="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
     || die "origin/main niet leesbaar vóór het hervatten; niets getagd."
   [ -n "$current" ] || die "origin/main is leeg vóór het hervatten; niets getagd."
@@ -3148,6 +3223,7 @@ resume_release() {
     merged="$(printf '%s' "$st" | cut -d'|' -f3)"
     headsha="$(printf '%s' "$st" | cut -d'|' -f4)"
     mergesha="$(printf '%s' "$st" | cut -d'|' -f5)"
+    resolve_release_base "$num" "$headsha"
     if [ "$merged" = "true" ]; then
       log "PR #$num is gemerged, maar de tag ontbreekt — taggen en verder."
       MERGE_SHA="$mergesha"
@@ -3286,8 +3362,8 @@ assert_nightly_main_gate() {
   # geworden main-run zegt niets meer over díe inhoud.
   [ -z "$RESUME_TAG" ] || return 0
   acquire_main_gate_lock
-  local main_sha
-  main_sha="$(git rev-parse --verify origin/main 2>/dev/null)" \
+  local main_sha source_ref="${RELEASE_BASE:-main}"
+  main_sha="$(git rev-parse --verify "origin/$source_ref" 2>/dev/null)" \
     || die_main_gate "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
   # De lijst-route geeft geen commit_sha; die staat op de detail-GET per run.
   # Alleen een run op exact de main-tip bewijst de kandidaatbasis. Een groene
@@ -3301,7 +3377,7 @@ assert_nightly_main_gate() {
     polls=$((polls + 1))
     found=""; rsha=""; rstatus=""; rurl=""; lookup_failed=0
     ids="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs?limit=50&page=1&workflow_id=linux-gate.yml" 2>/dev/null \
-      | jq -r '
+      | jq -r --arg ref "$source_ref" '
           if (.workflow_runs | type) != "array" then error("workflow_runs is geen array")
           elif any(.workflow_runs[];
               type != "object"
@@ -3310,7 +3386,7 @@ assert_nightly_main_gate() {
               or (.prettyref | type) != "string")
           then error("ongeldige workflow-run")
           else [.workflow_runs[]
-            | select(.workflow_id == "linux-gate.yml" and .prettyref == "main")
+            | select(.workflow_id == "linux-gate.yml" and .prettyref == $ref)
             | .id] | sort | reverse | .[]
           end' 2>/dev/null)" \
       || lookup_failed=1
@@ -3349,7 +3425,7 @@ assert_nightly_main_gate() {
         registration_deadline=$((SECONDS + 5 * 60))
         if resp="$(api POST '/actions/workflows/linux-gate.yml/dispatches' \
           -H 'Content-Type: application/json' \
-          -d "$(jq -n --arg r main '{ref:$r, return_run_info:true}')")"; then
+          -d "$(jq -n --arg r "$source_ref" '{ref:$r, return_run_info:true}')")"; then
           dispatch_id="$(printf '%s' "$resp" | jq -r '.id // empty' 2>/dev/null || true)"
           log "Geen linux-gate op de huidige main-tip; zelf gestart${dispatch_id:+ (run $dispatch_id)}."
         else
@@ -3409,6 +3485,7 @@ MINISIGN_PW=""
 # linux-gate op main. Bij een rode gate hoeft de gebruiker daardoor niet na
 # lang wachten alsnog voor invoer terug te komen.
 preflight
+if [ -z "$RESUME_TAG" ] && [ "$PREFLIGHT_ONLY" -eq 0 ]; then freeze_release_source; fi
 assert_nightly_main_gate
 
 # --preflight: hier houdt de repetitie op. Alles wat een release onderweg nodig
