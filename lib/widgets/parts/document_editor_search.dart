@@ -26,13 +26,8 @@ extension _DocumentEditorSearch on _DocumentEditorScreenState {
     wrapDirection: _find.wrapDirection,
   );
 
-  void _openFind({required bool showReplace}) {
-    ref.read(documentProvider.notifier).flushPendingVisualEdit();
-    if (showReplace && _viewMode == _DocViewMode.pages) {
-      _changeViewMode(_DocViewMode.source);
-    }
-    _find.open(showReplace: showReplace);
-  }
+  void _openFind({required bool showReplace}) =>
+      _searchIndex.open(showReplace: showReplace);
 
   /// Spring naar een treffer. In Bron staat de selectie direct op de controller
   /// (met zoekmarkering eromheen); in Visueel leeft de cursor in Quill en
@@ -128,6 +123,14 @@ class _DocumentSearchIndex {
   String? _source;
   bool? _pages;
   VisibleMarkdownText? _projection;
+
+  void open({required bool showReplace}) {
+    owner.ref.read(documentProvider.notifier).flushPendingVisualEdit();
+    if (showReplace && owner._viewMode == _DocViewMode.pages) {
+      owner._changeViewMode(_DocViewMode.source);
+    }
+    owner._find.open(showReplace: showReplace);
+  }
 
   VisibleMarkdownText get projection {
     final source = owner._controller.text;
