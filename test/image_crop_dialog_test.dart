@@ -10,6 +10,8 @@ import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/widgets/slides/image_crop_dialog.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/pump_until.dart';
+
 /// Het bijsnijdvenster: slepen kiest welk deel van de afbeelding op de dia
 /// zichtbaar blijft.
 ///
@@ -100,9 +102,18 @@ void main() {
     return uitkomst;
   }
 
-  Future<void> klaar(WidgetTester tester) async {
+  Future<void> klaar(
+    WidgetTester tester,
+    List<ImageCropResult?> uitkomst,
+  ) async {
     await tester.tap(find.widgetWithText(FilledButton, 'Klaar'));
-    await tester.pumpAndSettle();
+    // Klaar wacht de draaibeurt op een achtergrond-isolate af (#2728): die
+    // komt alleen vooruit in echte tijd, niet in pompen.
+    await pumpUntil(
+      tester,
+      () => uitkomst.isNotEmpty,
+      reason: 'de dialoog sloot niet',
+    );
   }
 
   // De naamregel van optie A (IMAGE_ROTATION.md §8.3). Hij is puur en dus
@@ -171,7 +182,7 @@ void main() {
     tester,
   ) async {
     final uitkomst = await open(tester, focalX: 0.25, focalY: 0.75);
-    await klaar(tester);
+    await klaar(tester, uitkomst);
 
     final r = uitkomst.single!;
     expect(r.focalX, 0.25);
@@ -193,7 +204,7 @@ void main() {
 
     await tester.tap(find.widgetWithText(TextButton, 'Herstel'));
     await tester.pumpAndSettle();
-    await klaar(tester);
+    await klaar(tester, uitkomst);
 
     expect(uitkomst.single!.focalX, 0.5);
     expect(uitkomst.single!.focalY, 0.5);
@@ -216,7 +227,7 @@ void main() {
       Offset(kader.width * 0.25, kader.height * 0.25),
     );
     await tester.pumpAndSettle();
-    await klaar(tester);
+    await klaar(tester, uitkomst);
 
     final r = uitkomst.single!;
     // Naar rechts trekken toont de linkerrand: het brandpunt schuift naar
@@ -241,7 +252,7 @@ void main() {
       Offset(-kader.width * 5, -kader.height * 5),
     );
     await tester.pumpAndSettle();
-    await klaar(tester);
+    await klaar(tester, uitkomst);
 
     expect(uitkomst.single!.focalX, 1.0);
     expect(uitkomst.single!.focalY, 1.0);
@@ -255,7 +266,7 @@ void main() {
     expect(find.byType(Slider), findsOneWidget);
     await tester.drag(find.byType(Slider), const Offset(60, 0));
     await tester.pumpAndSettle();
-    await klaar(tester);
+    await klaar(tester, uitkomst);
 
     expect(
       uitkomst.single!.imageSize,
@@ -282,7 +293,7 @@ void main() {
     expect(find.byType(Slider), findsOneWidget);
     await tester.drag(find.byType(Slider), const Offset(60, 0));
     await tester.pumpAndSettle();
-    await klaar(tester);
+    await klaar(tester, uitkomst);
 
     expect(
       uitkomst.single!.imageSize,
@@ -300,7 +311,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(TextButton, 'Herstel'));
     await tester.pumpAndSettle();
-    await klaar(tester);
+    await klaar(tester, uitkomst);
 
     expect(
       uitkomst.single!.imageSize,
@@ -402,10 +413,23 @@ void main() {
       final origBytes = File(foto).readAsBytesSync();
       final uitkomst = await open(tester);
 
-      expect(find.byIcon(Icons.rotate_right), findsOneWidget);
+      await pumpUntil(
+        tester,
+        () => find.byIcon(Icons.rotate_right).evaluate().isNotEmpty,
+        reason: 'de draaiknop verscheen niet',
+      );
       await tester.tap(find.byIcon(Icons.rotate_right));
-      await tester.pumpAndSettle();
-      await klaar(tester);
+      // Eerste draaibeurt afwachten — de knop staat uit zolang hij loopt.
+      await pumpUntil(
+        tester,
+        () =>
+            tester
+                .widget<TextButton>(find.widgetWithText(TextButton, 'Rechtsom'))
+                .onPressed !=
+            null,
+        reason: 'de draaibeurt kwam niet klaar',
+      );
+      await klaar(tester, uitkomst);
 
       expect(
         lastRotationWriteFailure,
@@ -437,7 +461,7 @@ void main() {
       tester,
     ) async {
       final uitkomst = await open(tester);
-      await klaar(tester);
+      await klaar(tester, uitkomst);
 
       expect(uitkomst.single!.rotatedImagePath, isNull);
       expect(Directory(tmp.path).listSync().map((e) => p.basename(e.path)), [
@@ -451,12 +475,17 @@ void main() {
       final origBytes = File(foto).readAsBytesSync();
       final uitkomst = await open(tester);
 
+      await pumpUntil(
+        tester,
+        () => find.byIcon(Icons.rotate_right).evaluate().isNotEmpty,
+        reason: 'de draaiknop verscheen niet',
+      );
       await tester.tap(find.byIcon(Icons.rotate_right));
       await tester.pumpAndSettle();
       // Herstel zou de rotatie moeten terugdraaien.
       await tester.tap(find.widgetWithText(TextButton, 'Herstel'));
       await tester.pumpAndSettle();
-      await klaar(tester);
+      await klaar(tester, uitkomst);
 
       // Zonder rotatie wordt er niets geschreven en verschuift de dia niet.
       expect(File(foto).readAsBytesSync(), equals(origBytes));
@@ -474,13 +503,34 @@ void main() {
       original.setPixelRgb(1, 2, 0, 0, 255); // rechtsonder: blauw
       File(foto).writeAsBytesSync(img.encodePng(original));
 
-      await open(tester);
+      final uitkomst = await open(tester);
 
+      await pumpUntil(
+        tester,
+        () => find.byIcon(Icons.rotate_right).evaluate().isNotEmpty,
+        reason: 'de draaiknop verscheen niet',
+      );
       await tester.tap(find.byIcon(Icons.rotate_right));
-      await tester.pumpAndSettle();
+      await pumpUntil(
+        tester,
+        () =>
+            tester
+                .widget<TextButton>(find.widgetWithText(TextButton, 'Rechtsom'))
+                .onPressed !=
+            null,
+        reason: 'de eerste draaibeurt kwam niet klaar',
+      );
       await tester.tap(find.byIcon(Icons.rotate_right));
-      await tester.pumpAndSettle();
-      await klaar(tester);
+      await pumpUntil(
+        tester,
+        () =>
+            tester
+                .widget<TextButton>(find.widgetWithText(TextButton, 'Rechtsom'))
+                .onPressed !=
+            null,
+        reason: 'de tweede draaibeurt kwam niet klaar',
+      );
+      await klaar(tester, uitkomst);
 
       // Eerst de reden, dan de pixels. Zonder deze regel meldt een mislukte
       // schrijfbeurt zich als "verwacht blauw, kreeg rood" — waar of niet,
@@ -519,6 +569,11 @@ void main() {
     ) async {
       await open(tester);
 
+      await pumpUntil(
+        tester,
+        () => find.byIcon(Icons.rotate_right).evaluate().isNotEmpty,
+        reason: 'de draaiknop verscheen niet',
+      );
       expect(
         find.textContaining('gedraaide kopie naast het origineel'),
         findsOneWidget,
@@ -573,8 +628,13 @@ void main() {
         ),
       ],
     );
-    // Extra pump om de image-stream te laten aflopen en _intrinsic te vullen.
-    await tester.pumpAndSettle(const Duration(seconds: 1));
+    // Wacht tot de preview zijn intrinsieke maat heeft — pas dan tekenen de
+    // markeringen. De bytes laden asynchroon (#2728).
+    await pumpUntil(
+      tester,
+      () => find.text('A').evaluate().isNotEmpty,
+      reason: 'de callout-markeringen verschenen niet',
+    );
 
     // Beide reference-letters moeten als markeringen zichtbaar zijn.
     expect(find.text('A'), findsWidgets);
