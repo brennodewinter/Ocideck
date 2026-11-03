@@ -15,6 +15,14 @@ on:
       operation_id:
         description: Ownership marker for cancellation and recovery
         required: false
+      attempt_id:
+        description: Explicit continuation nonce, empty for the original attempt
+        required: false
+        default: ""
+      previous_run_id:
+        description: Exact terminal predecessor with retained pending evidence
+        required: false
+        default: ""
       channel:
         type: choice
         options: [macos, windows, web, linux-debian12, linux-tar, linux-deb, linux-rpm, linux-appimage, linux-flatpak]
@@ -23,9 +31,11 @@ env:
   RELEASE_TAG: ${{ inputs.tag }}
 jobs:
   build:
-    if: ${{ github.ref == 'refs/heads/main' && inputs.channel != 'macos' }}
+    if: ${{ inputs.channel != 'macos' && ((github.ref == 'refs/heads/main' && inputs.attempt_id == '') || (inputs.channel == 'windows' && inputs.attempt_id != '' && inputs.previous_run_id != '' && github.ref == format('refs/heads/codex/release-build-lock-{0}-{1}', inputs.tag, inputs.channel))) }}
     runs-on: docker
-    timeout-minutes: 960
+    timeout-minutes: ${{ inputs.channel == 'windows' && 90 || 175 }}
+    outputs:
+      completed: ${{ steps.windows.outputs.completed }}
     container:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
     steps:
@@ -56,13 +66,28 @@ jobs:
           ref: ${{ inputs.source_sha }}
           path: source
       - name: Windows-kandidaat en volledige Windows-suite volgen
+        id: windows
         if: ${{ inputs.channel == 'windows' }}
         env:
           GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
           OPERATION_ID: ${{ inputs.operation_id }}
           SOURCE_SHA: ${{ inputs.source_sha }}
           FROZEN_REF: ${{ inputs.frozen_ref }}
-        run: python3 controller/tool/release_windows_candidate.py fetch --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --ref "$FROZEN_REF" --root controller --dist source/dist --operation-id "$OPERATION_ID" --state controller/build/windows-operation.json --forge-run-id "${{ github.run_id }}" --controller-sha "${{ github.sha }}"
+          FORGEJO_TOKEN: ${{ github.token }}
+          ATTEMPT_ID: ${{ inputs.attempt_id }}
+          PREVIOUS_RUN_ID: ${{ inputs.previous_run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mode=fetch
+          continuation=()
+          if [ -n "$ATTEMPT_ID" ]; then
+            [[ "$ATTEMPT_ID" =~ ^[A-Za-z0-9_-]{1,80}$ && "$PREVIOUS_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+            mode=collect
+            continuation=(--previous-run-id "$PREVIOUS_RUN_ID" --attempt-id "$ATTEMPT_ID")
+          fi
+          python3 controller/tool/release_windows_candidate.py "$mode" --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --ref "$FROZEN_REF" --root controller --dist source/dist --operation-id "$OPERATION_ID" --state controller/build/windows-operation.json --forge-run-id "${{ github.run_id }}" --controller-sha "${{ github.sha }}" "${continuation[@]}"
+          echo "completed=$(python3 -c 'import json; print(str(json.load(open("controller/build/windows-operation.json"))["outcome"] == "completed").lower())')" >> "$GITHUB_OUTPUT"
       - name: Pub-cache voor de vastgelegde toolchain
         if: ${{ inputs.channel != 'windows' && inputs.channel != 'linux-debian12' }}
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
@@ -119,6 +144,7 @@ jobs:
           cd source
           bash ../controller/scripts/build_release_channel.sh "$RELEASE_TAG" "$SOURCE_SHA" "$FROZEN_REF" "$CHANNEL"
       - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        if: ${{ inputs.channel != 'windows' || steps.windows.outputs.completed == 'true' }}
         with:
           name: channel-build
           path: source/dist/*
@@ -135,9 +161,11 @@ jobs:
 
   build-macos:
     name: build-macos
-    if: ${{ github.ref == 'refs/heads/main' && inputs.channel == 'macos' }}
+    if: ${{ inputs.channel == 'macos' && ((github.ref == 'refs/heads/main' && inputs.attempt_id == '') || (inputs.attempt_id != '' && inputs.previous_run_id != '' && github.ref == format('refs/heads/codex/release-build-lock-{0}-{1}', inputs.tag, inputs.channel))) }}
     runs-on: ocideck-macos-arm64
     timeout-minutes: 240
+    outputs:
+      completed: ${{ steps.macos.outputs.completed }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -145,22 +173,42 @@ jobs:
           ref: ${{ github.sha }}
           path: controller
       - name: Vaste macOS-bron controleren, bouwen en notarisatie hervatten
+        id: macos
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
           FROZEN_REF: ${{ inputs.frozen_ref }}
+          OPERATION_ID: ${{ inputs.operation_id }}
+          ATTEMPT_ID: ${{ inputs.attempt_id }}
+          PREVIOUS_RUN_ID: ${{ inputs.previous_run_id }}
+        shell: bash
         run: |
-          set -eu
+          set -euo pipefail
           test "$FROZEN_REF" = "codex/release-candidate-$RELEASE_TAG-$SOURCE_SHA"
           cd controller
           test "$(git ls-remote --exit-code origin "refs/heads/$FROZEN_REF" | awk '{print $1}')" = "$SOURCE_SHA"
           git fetch --no-tags origin "$FROZEN_REF"
-          python3 tool/release_macos_candidate.py --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --controller "$PWD" --dist "$GITHUB_WORKSPACE/source/dist"
+          continuation=()
+          if [ -n "$ATTEMPT_ID" ]; then
+            [[ "$ATTEMPT_ID" =~ ^[A-Za-z0-9_-]{1,80}$ && "$PREVIOUS_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+            continuation=(--previous-run-id "$PREVIOUS_RUN_ID" --attempt-id "$ATTEMPT_ID")
+          fi
+          python3 tool/release_macos_candidate.py --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --controller "$PWD" --dist "$GITHUB_WORKSPACE/source/dist" --operation-id "$OPERATION_ID" --forge-run-id "$GITHUB_RUN_ID" --result build/macos-operation.json "${continuation[@]}"
+          echo "completed=$(python3 -c 'import json; print(str(json.load(open("build/macos-operation.json"))["outcome"] == "completed").lower())')" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
+        if: ${{ steps.macos.outputs.completed == 'true' }}
         with:
           name: channel-build
           path: source/dist/*
           if-no-files-found: error
+          retention-days: 90
+      - name: Preserve macOS submission ownership
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
+        with:
+          name: macos-operation-${{ inputs.operation_id }}
+          path: controller/build/macos-operation.json
+          if-no-files-found: warn
           retention-days: 90
 
   consumer-deb:
@@ -169,7 +217,7 @@ jobs:
     if: ${{ inputs.channel == 'linux-deb' }}
     runs-on: docker
     # Het image bevat alleen testgereedschap; pakketdependencies blijven een echte proef.
-    timeout-minutes: 240
+    timeout-minutes: 175
     container:
       image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
     steps:
@@ -206,7 +254,7 @@ jobs:
     needs: build
     if: ${{ inputs.channel == 'linux-debian12' }}
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 175
     container:
       image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
     steps:
@@ -238,7 +286,7 @@ jobs:
     needs: build
     if: ${{ inputs.channel == 'linux-rpm' }}
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 175
     # Alleen testgereedschap vooraf: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
     # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
     container:
@@ -269,7 +317,7 @@ jobs:
     needs: build
     if: ${{ inputs.channel == 'linux-appimage' }}
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 175
     container:
       image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
     steps:
@@ -305,7 +353,7 @@ jobs:
     needs: build
     if: ${{ inputs.channel == 'linux-flatpak' }}
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 175
     container:
       image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
     steps:
@@ -332,7 +380,7 @@ jobs:
     needs: build
     if: ${{ inputs.channel == 'linux-tar' }}
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 175
     container:
       image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
     steps:
@@ -362,7 +410,7 @@ jobs:
 
   evidence:
     needs: [build, build-macos, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]
-    if: ${{ always() && (needs.build.result == 'success' || needs.build-macos.result == 'success') && (inputs.channel == 'macos' || inputs.channel == 'windows' || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-debian12.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
+    if: ${{ always() && (needs.build.result == 'success' || needs.build-macos.result == 'success') && ((inputs.channel == 'macos' && needs.build-macos.outputs.completed == 'true') || (inputs.channel == 'windows' && needs.build.outputs.completed == 'true') || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-debian12.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
     runs-on: docker
     container:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2

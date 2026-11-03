@@ -280,6 +280,91 @@ class WindowsCandidateTest(unittest.TestCase):
         self.assertTrue(calls)
         self.assertFalse(hasattr(self.api, 'deadline'))
 
+    def pending_fetch(self):
+        clock = [0.0]
+        original = self.api.data
+        def pending(path, payload=None):
+            result = original(path, payload)
+            if payload is not None and path.endswith('/dispatches'):
+                for values in self.api.runs.values():
+                    for run in values:
+                        run.update(status='in_progress', conclusion=None)
+            return result
+        with patch.object(self.api, 'data', side_effect=pending), \
+             patch.object(windows.time, 'monotonic', side_effect=lambda: clock[0]), \
+             patch.object(windows.time, 'sleep', side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)):
+            result = windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+                Path(self.temp.name) / 'operation.json', 123, SHA)
+        self.assertEqual(20 * 60, clock[0])
+        return result
+
+    def test_bounded_wait_preserves_pending_ids_without_cancel_or_close(self):
+        self.assertEqual('pending', self.pending_fetch()['status'])
+        saved = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+        self.assertFalse(saved['closed'])
+        self.assertEqual('pending', saved['outcome'])
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, saved['selected_runs'])
+        self.assertFalse(self.dist.exists())
+        self.assertFalse(any(path.endswith('/cancel') for path, _ in self.api.calls))
+        proof = windows.owned_status(self.api, SHA, REF, 'op-test', Path(self.temp.name) / 'operation.json', 123, SHA)
+        self.assertFalse(proof['unknown'])
+        self.assertFalse(proof['terminal'])
+        self.assertFalse(proof['selected_verified'])
+
+    def test_collect_uses_original_ids_after_pending_without_any_mutation(self):
+        self.pending_fetch()
+        original = (Path(self.temp.name) / 'operation.json').read_bytes()
+        for values in self.api.runs.values():
+            values[0].update(status='completed', conclusion='success')
+            values.append(dict(values[0], id=values[0]['id'] + 100, status='in_progress', conclusion=None))
+        self.api.calls.clear()
+        import release_channel_controller as control
+        with patch.object(control, 'Forgejo'), patch.object(control, 'continuation_state', return_value=original) as proof:
+            result = windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+                Path(self.temp.name) / 'continuation.json', 124, SHA, True, 123, 'attempt-1')
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, result)
+        self.assertEqual((123, 124, 'attempt-1'), proof.call_args.args[-3:])
+        self.assertFalse(any(payload is not None for _, payload in self.api.calls))
+        saved = json.loads((Path(self.temp.name) / 'continuation.json').read_text())
+        self.assertEqual(124, saved['forge_run_id'])
+        self.assertEqual('completed', saved['outcome'])
+
+    def test_collect_unknown_dispatch_never_posts(self):
+        self.pending_fetch()
+        original = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+        original['selected_runs'].pop('release.yml')
+        self.api.calls.clear()
+        import release_channel_controller as control
+        with patch.object(control, 'Forgejo'), patch.object(control, 'continuation_state', return_value=json.dumps(original).encode()):
+            with self.assertRaisesRegex(ValueError, 'dispatch remains unknown'):
+                windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+                    Path(self.temp.name) / 'continuation.json', 124, SHA, True, 123, 'attempt-1')
+        self.assertFalse(any(payload is not None for _, payload in self.api.calls))
+
+    def test_cli_collect_reaches_readonly_continuation_not_verify(self):
+        arguments = ['release_windows_candidate.py', 'collect', '--tag', TAG, '--sha', SHA, '--ref', REF,
+            '--root', str(ROOT), '--dist', str(self.dist), '--state', str(Path(self.temp.name) / 'state.json'),
+            '--operation-id', 'op-test', '--forge-run-id', '124', '--controller-sha', SHA,
+            '--previous-run-id', '123', '--attempt-id', 'attempt-1']
+        with patch.object(sys, 'argv', arguments), patch.object(windows, 'GitHub', return_value=self.api), \
+             patch.object(windows, 'fetch', return_value={'status': 'pending'}) as fetch, \
+             patch.object(windows, 'verify') as verify:
+            self.assertEqual(0, windows.main())
+        self.assertEqual((True, 123, 'attempt-1'), fetch.call_args.args[-3:])
+        verify.assert_not_called()
+
+    def test_changed_persisted_identity_is_refused_before_collect_mutation(self):
+        self.pending_fetch()
+        original = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+        original['sha'] = 'b' * 40
+        self.api.calls.clear()
+        import release_channel_controller as control
+        with patch.object(control, 'Forgejo'), patch.object(control, 'continuation_state', return_value=json.dumps(original).encode()):
+            with self.assertRaisesRegex(ValueError, 'journal identity differs'):
+                windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+                    Path(self.temp.name) / 'continuation.json', 124, SHA, True, 123, 'attempt-1')
+        self.assertFalse(any(payload is not None for _, payload in self.api.calls))
+
     def test_transport_keeps_credentials_and_signed_urls_out_of_arguments(self):
         secret = 'token-private'
         signed_url = 'https://production.blob.core.windows.net/archive?credential=private'

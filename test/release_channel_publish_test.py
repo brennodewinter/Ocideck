@@ -79,6 +79,7 @@ if ('/tags/' in u and '/releases/tags/' not in u and not s.get('tag_exists',True
     state_path.write_text(json.dumps(s));Path(args[args.index('--output')+1]).write_bytes(b'{}');print('404',end='');sys.exit()
 if '/contents/' in u: out=json.dumps({'sha':s.get('workflow_blob_bad',s['workflow_blob'])}).encode()
 elif '/branches/codex%2Frelease-publish-lock-' in u: out=json.dumps({'commit':{'id':s['run']['commit_sha']}}).encode()
+elif '/branches/codex%2Frelease-build-lock-' in u: out=json.dumps(s.get('continuation_branch',{})).encode()
 elif '/branches/' in u: out=json.dumps({'commit':{'id':s.get('branch_sha',s['tag_sha'])}}).encode()
 elif '/releases/tags/' in u: out=json.dumps({'id':7,'tag_name':'v0.7.7','draft':s.get('draft',False)}).encode()
 elif '/download/' in u:
@@ -94,6 +95,7 @@ elif '/actions/runs/' in u and u.endswith('/jobs') and not u.endswith('/9/jobs')
     out=json.dumps(s.get('quality_jobs',[{'name':'quality','status':'success'}])).encode()
 elif u.endswith('/actions/runs/9/jobs'): out=json.dumps(s['jobs']).encode()
 elif u.endswith('/actions/runs/9'): out=json.dumps(s['run']).encode()
+elif '/actions/runs/' in u and u.rsplit('/',1)[1] in s.get('predecessors',{}): out=json.dumps(s['predecessors'][u.rsplit('/',1)[1]]).encode()
 elif '/releases/7/assets?limit=' in u:
     page=int(parse_qs(urlsplit(u).query)['page'][0]);out=json.dumps(s['assets'][(page-1)*50:page*50]).encode()
 elif u.endswith('/releases/7'): out=json.dumps({'id':7,'tag_name':'v0.7.7','draft':s.get('draft',False)}).encode()
@@ -223,6 +225,53 @@ class PublishTests(unittest.TestCase):
         self.assertEqual(9, len(self.state['assets']))
         self.assertFalse(any('workflow_id=linux-gate.yml' in url for url in self.state['calls']))
         self.assertTrue(any('/actions/workflows/windows-test-check.yml/runs?' in url for url in self.state['calls']))
+
+    def configure_continuation(self):
+        self.configure_windows()
+        branch = 'codex/release-build-lock-v0.7.7-windows'
+        inputs = dict(tag='v0.7.7', source_sha=SHA, channel='windows', operation_id='same-operation',
+                      frozen_ref='codex/release-candidate-v0.7.7-' + SHA)
+        self.state['predecessors'] = {'8': dict(id=8, commit_sha=CONTROLLER, status='success',
+            workflow_id='release-channel.yml', prettyref='main', trigger_event='workflow_dispatch',
+            event_payload={'ref': 'main', 'inputs': dict(inputs)})}
+        self.state['run'].update(prettyref=branch, trigger_event='workflow_dispatch',
+            event_payload={'ref': branch, 'inputs': dict(inputs, attempt_id='attempt-one', previous_run_id='8')})
+        self.state['continuation_branch'] = dict(name=branch, commit={'id': CONTROLLER})
+
+    def test_exact_pinned_continuation_chain_can_publish_same_source_bytes(self):
+        self.configure_continuation()
+        result = self.run_publish()
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual(9, len(self.state['assets']))
+        self.assertTrue(any('/actions/runs/8' in url for url in self.state['calls']))
+
+    def test_continuation_chain_rejects_unknown_wrong_or_active_predecessor_before_writes(self):
+        for mutation in ('unknown', 'source', 'controller', 'active', 'operation', 'nonce', 'ref', 'pin'):
+            with self.subTest(mutation=mutation):
+                self.setUp()
+                self.configure_continuation()
+                current = self.state['run']
+                predecessor = self.state['predecessors']['8']
+                if mutation == 'unknown':
+                    current['event_payload']['inputs']['previous_run_id'] = '7'
+                elif mutation == 'source':
+                    predecessor['event_payload']['inputs']['source_sha'] = '3' * 40
+                elif mutation == 'controller':
+                    predecessor['commit_sha'] = '3' * 40
+                elif mutation == 'active':
+                    predecessor['status'] = 'running'
+                elif mutation == 'operation':
+                    predecessor['event_payload']['inputs']['operation_id'] = 'another-operation'
+                elif mutation == 'nonce':
+                    current['event_payload']['inputs']['attempt_id'] = ''
+                elif mutation == 'ref':
+                    current['event_payload']['ref'] = 'some-other-branch'
+                else:
+                    self.state['continuation_branch']['commit']['id'] = '3' * 40
+                result = self.run_publish()
+                self.assertNotEqual(0, result.returncode)
+                self.assertEqual([], self.state['assets'])
+                self.assertEqual(0, self.state.get('lease_posts', 0))
 
     def test_windows_pending_suite_blocks_publication(self):
         self.configure_windows()

@@ -1604,16 +1604,33 @@ The experimental operation CLI is `tool/release_channel_controller.py`. Use
 controller, channel and frozen-ref identity before its single workflow dispatch.
 The supported CLI route first creates a unique remote build-claim branch for
 that version and channel. An existing claim, a lost create response or a changed
-`main` blocks dispatch. The claim stays until `hervat` or `stop` has confirmed
-the exact Forgejo run and all owned Windows children terminal; its release uses
-a durable one-shot delete intent, so an uncertain delete is never repeated.
+`main` blocks the original dispatch. Pending work retains its claim. After
+a continuation the create-only claim ref remains as durable controller proof,
+including after DONE: publication and later public readback verify that exact
+ref still points at the original controller SHA. It locks only the same version
+and channel. Do not clean it as an ordinary merged branch. Explicit `stop` may
+release the claim after terminal worker/Windows-child proof; that blocks further
+continuation/publication and retains the local journal and CI evidence. An
+uncertain one-shot claim DELETE is never repeated.
 Direct manual workflow dispatch does not carry this ownership guarantee.
 `status` reads the saved operation and remote jobs without changing state;
-`hervat` records the observed run and never dispatches again. If the dispatch
-response is lost and no exact operation ID appears in Forgejo, the state stays
-unknown. `stop` cancels only runs with that exact workflow input and waits for
+`hervat` records the observed run. For Windows/macOS with an authenticated
+`pending` receipt and a terminal worker it explicitly starts one continuation,
+using the original create-only claim branch and controller SHA even when main
+has advanced. Each continuation has its own saved attempt nonce and exact
+predecessor; a lost response is reconciled by readback, never another POST.
+Windows polls for at most 20 minutes and collects for at most 30 minutes within
+a 90-minute Forgejo job. Other Docker channels use 175 minutes, below the
+measured three-hour runner limit; an earlier complete Linux build/consumer
+cycle took 124m48s, which is context for the margin rather than a proven cold
+build maximum. It retains the exact GitHub run IDs; collect performs
+no GitHub dispatch or cancellation. macOS resumes only the existing saved
+submission and bytes, then finishes consumer checks and upload. A successful
+short worker with `outcome=pending` is never build/publication success and keeps
+the original claim. If the original dispatch response is lost and no exact
+operation ID appears in Forgejo, the state stays unknown. `stop` cancels only runs with that exact workflow input and waits for
 terminal readback; Windows also needs terminal proof from its own GitHub helper.
-For Windows, the CLI reads the closed operation journal from the exact Forgejo
+For Windows, the CLI reads the operation journal from the exact Forgejo
 run artifact and binds its run ID, controller SHA, source and operation ID before
 accepting a reused green GitHub run or a no-dispatch stop. A missing or unsafe
 artifact leaves the state unknown.
@@ -1622,6 +1639,14 @@ already signed manifest and checksum evidence. Build success is metadata only:
 neither asset bytes nor a public release are proved by a green build run.
 The CLI does not make signing keys available on a runner, so publication still
 requires a separate trusted signing step. Keep `--state-dir` on durable storage.
+
+The dedicated Mac cache serializes admission and execution for all candidates.
+It admits at most two candidate trees, reserves 16 GiB of additional free space
+per invocation and refuses admission when current cache bytes plus that reserve
+exceed the 32 GiB cache budget. These are conservative operator policy budgets,
+not a measured maximum build footprint; calibrate them on the designated Mac
+before increasing capacity. Refusal preserves every pending submission/archive
+and asks for evidence archiving and a capacity review; it never deletes them.
 
 
 ### Publieke vervolgstappen per kanaal

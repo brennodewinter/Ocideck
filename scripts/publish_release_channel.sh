@@ -239,7 +239,49 @@ def main():
     if run.get('workflow_id') not in ('release-channel.yml', '.forgejo/workflows/release-channel.yml'):
         raise ValueError('unexpected candidate workflow')
     if run.get('prettyref') not in ('main', 'refs/heads/main'):
-        raise ValueError('candidate controller did not run on main')
+        branch = 'codex/release-build-lock-' + args.tag + '-' + args.channel
+        if args.channel not in ('windows', 'macos') or run.get('prettyref') not in (branch, 'refs/heads/' + branch):
+            raise ValueError('candidate controller did not run on main or its exact continuation claim')
+        pinned = data('/branches/' + quote(branch, safe=''))
+        if pinned.get('name') != branch or pinned.get('commit', {}).get('id') != args.controller_sha:
+            raise ValueError('continuation controller claim ref differs')
+        current, operation, attempts = run, None, set()
+        for _ in range(100):
+            event = current.get('event_payload', {})
+            event = json.loads(event, object_pairs_hook=channel.no_duplicates) if isinstance(event, str) else event
+            inputs = event.get('inputs', {}) if isinstance(event, dict) else {}
+            nonce = inputs.get('operation_id', '')
+            if (current.get('commit_sha') != args.controller_sha
+                    or current.get('workflow_id') not in ('release-channel.yml', '.forgejo/workflows/release-channel.yml')
+                    or current.get('trigger_event') != 'workflow_dispatch'
+                    or not re.fullmatch('[A-Za-z0-9_-]{1,80}', nonce)
+                    or (operation is not None and nonce != operation)
+                    or inputs.get('tag') != args.tag or inputs.get('source_sha') != args.sha
+                    or inputs.get('channel') != args.channel
+                    or inputs.get('frozen_ref') != 'codex/release-candidate-' + args.tag + '-' + args.sha):
+                raise ValueError('continuation chain source/controller/operation identity differs')
+            operation = nonce
+            attempt = inputs.get('attempt_id', '')
+            if not attempt:
+                if (current.get('prettyref') not in ('main', 'refs/heads/main')
+                        or event.get('ref') not in ('main', 'refs/heads/main')):
+                    raise ValueError('continuation chain has no original main controller')
+                break
+            if (not re.fullmatch('[A-Za-z0-9_-]{1,80}', attempt) or attempt in attempts
+                    or current.get('prettyref') not in (branch, 'refs/heads/' + branch)
+                    or event.get('ref') not in (branch, 'refs/heads/' + branch)
+                    or not re.fullmatch('[1-9][0-9]*', str(inputs.get('previous_run_id', '')))):
+                raise ValueError('continuation attempt nonce/ref/predecessor differs')
+            attempts.add(attempt)
+            previous_id = int(inputs['previous_run_id'])
+            if type(current.get('id')) is not int or previous_id >= current['id']:
+                raise ValueError('continuation predecessor is not earlier')
+            current = data('/actions/runs/' + str(previous_id))
+            if (current.get('id') != previous_id
+                    or current.get('status') not in ('success', 'failure', 'cancelled', 'skipped', 'error')):
+                raise ValueError('continuation predecessor is not terminal')
+        else:
+            raise ValueError('continuation chain exceeds inspection bound')
     jobs = data('/actions/runs/' + args.run_id + '/jobs')
     if not isinstance(jobs, list) or not jobs or any(j.get('status') not in ('success', 'skipped') for j in jobs):
         raise ValueError('candidate jobs are not terminal green')

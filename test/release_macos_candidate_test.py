@@ -1,6 +1,9 @@
 """macOS signing boundaries without building or contacting Apple."""
 import sys
+import json
 from pathlib import Path
+import tempfile
+from types import SimpleNamespace
 import unittest
 import subprocess
 from unittest.mock import patch
@@ -25,6 +28,125 @@ class FakeAPI:
 
 
 class MacCandidateTest(unittest.TestCase):
+    def candidate(self, directory, state=True):
+        home = Path(directory)
+        cache = home / 'Library/Caches/OciDeck-macos-candidates'
+        cache.mkdir(parents=True, mode=0o700)
+        root = cache / SHA
+        (root / '.git/ocideck-notary').mkdir(parents=True)
+        source = root / '.git/ocideck-notary' / (SHA + '.submission.json')
+        if state:
+            source.write_text(json.dumps({'submission_id': 'same-apple-id', 'status': 'pending'}))
+        (cache / (SHA + '.controller.json')).write_text(json.dumps(dict(source_sha=SHA, controller_sha=SHA, tag='v1.2.3')))
+        archive = root / 'build/macos/dist/OciDeck-1.2.3-macos.zip'
+        archive.parent.mkdir(parents=True)
+        archive.write_bytes(b'same candidate archive')
+        args = SimpleNamespace(tag='v1.2.3', sha=SHA, controller_sha=SHA, controller=home / 'controller',
+            operation_id='operation-1', forge_run_id=20, previous_run_id=None, attempt_id=None,
+            result=home / 'result/macos-operation.json', dist=home / 'dist')
+        return home, cache, root, source, archive, args
+
+    def source_command(self, arguments, _cwd):
+        if arguments[:3] == ['git', 'rev-parse', 'HEAD']:
+            return SHA
+        if arguments[:2] == ['git', 'show']:
+            return 'version: 1.2.3+1\n'
+        if arguments[:2] == ['git', 'status']:
+            return ''
+        raise AssertionError('unexpected source operation: ' + repr(arguments))
+
+    def test_pending_apple_receipt_continues_same_submission_and_finishes_consumer(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home, _, _, source, archive, args = self.candidate(directory)
+            def pending(arguments, **_kwargs):
+                self.assertIn('--resume-notary', arguments)
+                raise subprocess.CalledProcessError(1, arguments)
+            with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
+                 patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
+                 patch.object(mac, 'command', side_effect=self.source_command), patch.object(mac, 'preflight'), \
+                 patch.object(mac.subprocess, 'run', side_effect=pending), patch.object(mac, 'consume') as consume:
+                result = mac.run(args)
+            self.assertEqual('pending', result['outcome'])
+            self.assertEqual('same-apple-id', result['submission_id'])
+            consume.assert_not_called()
+            original = args.result.read_bytes()
+            args.forge_run_id, args.previous_run_id, args.attempt_id = 21, 20, 'attempt-1'
+            def accepted(arguments, **_kwargs):
+                self.assertIn('--resume-notary', arguments)
+                self.assertNotIn('--skip-build', arguments)
+                source.write_text(json.dumps({'submission_id': 'same-apple-id', 'status': 'stapled'}))
+                return SimpleNamespace(returncode=0)
+            with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
+                 patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
+                 patch.object(mac, 'command', side_effect=self.source_command), patch.object(mac, 'preflight'), \
+                 patch.object(mac, 'continuation_state', return_value=original) as proof, \
+                 patch.object(mac.subprocess, 'run', side_effect=accepted), patch.object(mac, 'consume') as consume:
+                completed = mac.run(args)
+            self.assertEqual('completed', completed['outcome'])
+            self.assertEqual('same-apple-id', completed['submission_id'])
+            self.assertEqual(21, completed['forge_run_id'])
+            self.assertEqual((20, 21, 'attempt-1'), proof.call_args.args[-3:])
+            consume.assert_called_once()
+            self.assertEqual(archive.read_bytes(), (args.dist / 'ocideck-macos-1.2.3.zip').read_bytes())
+
+    def test_continuation_refuses_missing_or_modified_saved_submission_before_keychain(self):
+        for mutate in ('missing', 'changed'):
+            with self.subTest(mutate=mutate), tempfile.TemporaryDirectory() as directory:
+                home, _, _, source, _, args = self.candidate(directory)
+                _, digest = mac.saved_notary(source)
+                proof = json.dumps(dict(outcome='pending', submission_id='same-apple-id', notary_sha256=digest)).encode()
+                if mutate == 'missing':
+                    source.unlink()
+                else:
+                    source.write_text(json.dumps({'submission_id': 'different-id', 'status': 'pending'}))
+                args.previous_run_id, args.attempt_id = 19, 'attempt-1'
+                with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
+                     patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
+                     patch.object(mac, 'command', side_effect=self.source_command), \
+                     patch.object(mac, 'continuation_state', return_value=proof), patch.object(mac, 'preflight') as preflight:
+                    with self.assertRaisesRegex(ValueError, 'saved macOS submission'):
+                        mac.run(args)
+                preflight.assert_not_called()
+
+    def test_storage_refusal_preserves_pending_proof_and_blocks_build(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home, _, _, source, archive, args = self.candidate(directory)
+            before = (source.read_bytes(), archive.read_bytes())
+            args.sha = 'b' * 40
+            with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
+                 patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
+                 patch.object(mac, 'command', side_effect=self.source_command) as command, patch.object(mac, 'preflight') as preflight, \
+                 patch.object(mac.shutil, 'disk_usage', return_value=SimpleNamespace(free=0)):
+                with self.assertRaisesRegex(ValueError, 'cache admission refused'):
+                    mac.run(args)
+            preflight.assert_not_called()
+            self.assertEqual([['git', 'rev-parse', 'HEAD']], [call.args[0] for call in command.call_args_list])
+            self.assertEqual(before, (source.read_bytes(), archive.read_bytes()))
+
+    def test_existing_cache_bytes_count_against_admission_budget(self):
+        with tempfile.TemporaryDirectory() as directory:
+            cache = Path(directory)
+            (cache / 'retained-proof').write_bytes(b'preserve')
+            with patch.object(mac, 'CACHE_BUDGET', 8), patch.object(mac, 'CANDIDATE_RESERVE', 2):
+                with self.assertRaisesRegex(ValueError, 'cache admission refused'):
+                    mac.admission(cache, cache / SHA)
+            self.assertEqual(b'preserve', (cache / 'retained-proof').read_bytes())
+
+    def test_cache_wide_admission_limit_and_lease_precede_clone(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home, cache, _, source, archive, args = self.candidate(directory)
+            (cache / ('b' * 40)).mkdir()
+            with self.assertRaisesRegex(ValueError, 'maximum two candidates'):
+                mac.admission(cache, cache / ('c' * 40))
+            with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
+                 patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
+                 patch.object(mac, 'command', side_effect=self.source_command), patch.object(mac, 'preflight') as preflight, \
+                 mac.locked(cache / 'admission'):
+                with self.assertRaisesRegex(ValueError, 'locked'):
+                    mac.run(args)
+            preflight.assert_not_called()
+            self.assertTrue(source.is_file() and archive.is_file())
+
     def test_all_exact_source_quality_gates_required(self):
         self.assertEqual(set(mac.quality(FakeAPI(), SHA)), {'static-gate.yml', 'scans.yml', 'macos-gate.yml'})
 

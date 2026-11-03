@@ -24,6 +24,8 @@ from release_journal import atomic_write, locked
 REPO = 'brennodewinter/Ocideck'
 WORKFLOWS = ('windows-test-check.yml', 'release.yml')
 MAX_ARCHIVE = 4 * 1024 * 1024 * 1024
+POLL_SECONDS = 20 * 60
+COLLECT_SECONDS = 30 * 60
 
 
 class GitHub:
@@ -64,6 +66,8 @@ class GitHub:
         else:
             result = subprocess.run(command, input=config.encode(), capture_output=True, timeout=min(330, remaining) if remaining is not None else 330)
         if result.returncode:
+            if getattr(self, 'deadline', None) is not None and time.monotonic() >= self.deadline:
+                raise TimeoutError('Windows phase deadline reached')
             raise ValueError('GitHub request failed; reconcile existing runs before retry')
         if redirect and result.stdout in (b'301', b'302', b'303', b'307', b'308'):
             locations = re.findall(r'^location:\s*(.*?)\s*$', headers.read_text(), re.I | re.M)
@@ -212,7 +216,7 @@ def operation_state(state, sha, ref, operation_id):
         raise ValueError('unsafe Windows operation journal')
     saved = json.loads(state.read_text(), object_pairs_hook=no_duplicates)
     fields = {'schema', 'operation_id', 'tag', 'sha', 'ref', 'dispatch_intents', 'closed', 'forge_run_id', 'controller_sha', 'selected_runs'}
-    if (not isinstance(saved, dict) or set(saved) != fields or type(saved['schema']) is not int
+    if (not isinstance(saved, dict) or set(saved) - {'outcome'} != fields or type(saved['schema']) is not int
             or saved['schema'] != 1 or type(saved['forge_run_id']) is not int or saved['forge_run_id'] < 0
             or not isinstance(saved['controller_sha'], str)
             or (saved['controller_sha'] != '' and (not re.fullmatch(r'[0-9a-f]{40}', saved['controller_sha']) or saved['controller_sha'] == '0' * 40))
@@ -226,30 +230,29 @@ def operation_state(state, sha, ref, operation_id):
             or any(not isinstance(name, str) or name not in WORKFLOWS for name in saved['dispatch_intents'])
             or len(set(saved['dispatch_intents'])) != len(saved['dispatch_intents'])):
         raise ValueError('Windows operation journal identity differs')
+    if saved.get('outcome', 'completed' if saved['closed'] else 'pending') not in ('pending', 'completed', 'failed'):
+        raise ValueError('invalid Windows operation outcome')
     return saved
 
 
 def owned_status(api, sha, ref, operation_id, state=None, forge_run_id=None, controller_sha=None):
     runs = owned_runs(api, sha, ref, operation_id)
     saved = operation_state(state, sha, ref, operation_id) if state else None
-    bound = bool(saved and saved['closed'] and forge_run_id and controller_sha
+    bound = bool(saved and (saved['closed'] or (saved.get('outcome') == 'pending' and set(saved['selected_runs']) == set(WORKFLOWS)))
+                 and forge_run_id and controller_sha
                  and saved['forge_run_id'] == forge_run_id and saved['controller_sha'] == controller_sha)
     expected = set(saved['dispatch_intents']) if bound else set(WORKFLOWS)
     visible = {run['path'].rsplit('/', 1)[1] for run in runs}
     unknown = not expected.issubset(visible)
     selected = saved['selected_runs'] if bound else {}
-    selected_verified = bool(bound and set(selected) == set(WORKFLOWS))
+    selected_verified = bool(bound and saved['closed'] and saved.get('outcome', 'completed') == 'completed'
+                             and set(selected) == set(WORKFLOWS))
     if selected_verified:
-        for workflow, run_id in selected.items():
-            run = latest(api, workflow, sha, ref)
-            if run is None or run['id'] != run_id:
-                selected_verified = False
-                break
-            try:
+        try:
+            for run in selected_runs(api, sha, ref, saved).values():
                 successful(api, run)
-            except ValueError:
-                selected_verified = False
-                break
+        except ValueError:
+            selected_verified = False
     return {'operation_id': operation_id, 'terminal': not unknown and all(run.get('status') == 'completed' for run in runs),
             'unknown': unknown,
             'selected_verified': selected_verified,
@@ -295,17 +298,31 @@ def cancel_owned(api, sha, ref, operation_id, wait=False, state=None, forge_run_
             api.deadline = previous_deadline
 
 
-def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, controller_sha=''):
+def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, controller_sha='', collect=False, previous_run_id=None, attempt_id=None):
     if type(forge_run_id) is not int or forge_run_id < 0 or (controller_sha and (not re.fullmatch(r'[0-9a-f]{40}', controller_sha) or controller_sha == '0' * 40)):
         raise ValueError('invalid Forge operation provenance')
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,80}', operation_id):
         raise ValueError('Windows candidate requires an operation ID')
-    sboms = source_contract(api, root, tag, sha, ref)
+    api.deadline = time.monotonic() + POLL_SECONDS
+    try:
+        sboms = source_contract(api, root, tag, sha, ref)
+    except BaseException:
+        del api.deadline
+        raise
     if dist.exists():
         raise ValueError('Windows candidate dist must not exist')
     state = state.absolute()
     wanted = {'schema': 1, 'operation_id': operation_id, 'tag': tag, 'sha': sha, 'ref': ref, 'dispatch_intents': [], 'closed': False, 'forge_run_id': forge_run_id, 'controller_sha': controller_sha, 'selected_runs': {}}
     with locked(state):
+        if collect and not state.exists():
+            from release_channel_controller import Forgejo, continuation_state
+            previous = json.loads(continuation_state(Forgejo(), dict(operation_id=operation_id, tag=tag,
+                source=sha, controller=controller_sha, frozen_ref=ref, channel='windows'), previous_run_id,
+                forge_run_id, attempt_id), object_pairs_hook=no_duplicates)
+            if set(previous['selected_runs']) != set(WORKFLOWS):
+                raise ValueError('Windows dispatch remains unknown; exact upstream IDs missing')
+            previous.update(forge_run_id=forge_run_id, closed=False, outcome='pending')
+            atomic_write(state, previous)
         if state.exists() or state.is_symlink():
             if state.is_symlink() or not state.is_file() or state.stat().st_size > 65536:
                 raise ValueError('unsafe Windows operation journal')
@@ -315,26 +332,62 @@ def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, c
             if saved['closed']:
                 raise ValueError('Windows operation is closed; use a new explicit operation')
         else:
+            if collect:
+                raise ValueError('collect requires authenticated previous operation state')
             saved = wanted
             atomic_write(state, saved)
         try:
-            result = fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sboms)
-            saved['closed'] = True
+            result = fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sboms, collect)
+            saved['closed'] = result is not None
+            saved['outcome'] = 'completed' if saved['closed'] else 'pending'
             atomic_write(state, saved)
-            return result
+            return result if result is not None else {'status': 'pending', 'selected_runs': saved['selected_runs']}
+        except (TimeoutError, subprocess.TimeoutExpired):
+            saved.update(closed=False, outcome='pending')
+            atomic_write(state, saved)
+            return {'status': 'pending', 'selected_runs': saved['selected_runs']}
         except BaseException:
             # SIGKILL/host loss cannot run this handler; the parent reconciles the same marker from Forge event inputs.
             saved['closed'] = True
+            saved['outcome'] = 'failed'
             atomic_write(state, saved)
-            try:
-                cancel_owned(api, sha, ref, operation_id, state=state)
-            except (ValueError, OSError, KeyError, TypeError):
-                pass
+            if not collect:
+                try:
+                    cancel_owned(api, sha, ref, operation_id, state=state)
+                except (ValueError, OSError, KeyError, TypeError):
+                    pass
             raise
+        finally:
+            if hasattr(api, 'deadline'):
+                del api.deadline
 
 
-def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sboms):
+def selected_runs(api, sha, ref, saved):
+    result = {}
     for workflow in WORKFLOWS:
+        values = pages(api, '/actions/workflows/' + workflow + '/runs?branch=' + quote(ref, safe='') + '&event=workflow_dispatch', 'workflow_runs')
+        chosen = saved['selected_runs'].get(workflow)
+        matches = [run for run in values if (run.get('id') == chosen if chosen else owned_run(run, saved['operation_id']))]
+        if len(matches) != 1:
+            raise ValueError('Windows selected run unavailable or ambiguous; no dispatch allowed')
+        run = matches[0]
+        if (type(run.get('id')) is not int or run['id'] <= 0 or run.get('head_sha') != sha
+                or run.get('head_branch') != ref or run.get('event') != 'workflow_dispatch'
+                or run.get('path') != '.github/workflows/' + workflow):
+            raise ValueError('Windows selected run identity differs')
+        title = 'Windows candidate ' + saved['tag']
+        if workflow == 'release.yml' and not re.fullmatch(re.escape(title) + r'(?: \[operation:[A-Za-z0-9_-]{1,80}\])?', str(run.get('display_title', ''))):
+            raise ValueError('Windows selected release run is not a candidate')
+        result[workflow] = run
+    return result
+
+
+def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sboms, collect=False):
+    for workflow in WORKFLOWS:
+        if collect:
+            if workflow not in saved['selected_runs']:
+                raise ValueError('collect requires exact existing Windows IDs')
+            continue
         run = latest(api, workflow, sha, ref)
         if workflow in saved['dispatch_intents']:
             matches = [value for value in owned_runs(api, sha, ref, operation_id) if value['path'] == '.github/workflows/' + workflow]
@@ -349,20 +402,25 @@ def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sbo
             inputs = {'mode': 'candidate', 'version': tag, 'commit_sha': sha} if workflow == 'release.yml' else {}
             inputs['operation_id'] = operation_id
             api.data('/actions/workflows/' + workflow + '/dispatches', {'ref': ref, 'inputs': inputs})
-    deadline = time.monotonic() + 15 * 3600
-    while time.monotonic() < deadline:
-        runs = {workflow: latest(api, workflow, sha, ref) for workflow in WORKFLOWS}
-        own = owned_runs(api, sha, ref, operation_id)
-        for workflow in saved['dispatch_intents']:
-            matches = [run for run in own if run['path'] == '.github/workflows/' + workflow]
-            runs[workflow] = max(matches, key=lambda run: run['id']) if matches else None
-        if any(run and run.get('status') == 'completed' and run.get('conclusion') != 'success' for run in runs.values()):
-            raise ValueError('Windows candidate failed; no automatic rerun')
-        if all(run and run.get('status') == 'completed' for run in runs.values()):
-            break
-        time.sleep(30)
-    else:
-        raise ValueError('Windows candidate deadline expired; existing runs are preserved')
+        if run is not None:
+            saved['selected_runs'][workflow] = run['id']
+            atomic_write(state, saved)
+    try:
+        while True:
+            runs = selected_runs(api, sha, ref, saved)
+            saved['selected_runs'] = {workflow: run['id'] for workflow, run in runs.items()}
+            atomic_write(state, saved)
+            if any(run and run.get('status') == 'completed' and run.get('conclusion') != 'success' for run in runs.values()):
+                raise ValueError('Windows candidate failed; no automatic rerun')
+            if all(run and run.get('status') == 'completed' for run in runs.values()):
+                break
+            remaining = api.deadline - time.monotonic()
+            if remaining <= 0:
+                return None
+            time.sleep(min(30, remaining))
+    except (TimeoutError, subprocess.TimeoutExpired):
+        return None
+    api.deadline = time.monotonic() + COLLECT_SECONDS
     for run in runs.values():
         successful(api, run)
     saved['selected_runs'] = {workflow: run['id'] for workflow, run in runs.items()}
@@ -392,7 +450,8 @@ def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sbo
             shutil.copyfile(staging / name, dist / name)
         for kind, content in sboms.items():
             (dist / f'ocideck-{version}.{kind}.json').write_bytes(content)
-    return verify(api, root, dist, tag, sha, ref)
+    verify_cohort(dist, tag, sha, runs['release.yml']['id'])
+    return saved['selected_runs']
 
 
 def stop(_number, _frame):
@@ -401,7 +460,7 @@ def stop(_number, _frame):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('fetch', 'verify', 'cancel', 'status'))
+    parser.add_argument('mode', choices=('fetch', 'collect', 'verify', 'cancel', 'status'))
     for name in ('tag', 'sha', 'ref'):
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--root', type=Path)
@@ -410,6 +469,8 @@ def main():
     parser.add_argument('--state', type=Path)
     parser.add_argument('--forge-run-id', type=int)
     parser.add_argument('--controller-sha')
+    parser.add_argument('--previous-run-id', type=int)
+    parser.add_argument('--attempt-id')
     parser.add_argument('--wait-terminal', action='store_true')
     args = parser.parse_args()
     try:
@@ -426,11 +487,12 @@ def main():
             return 0 if result['terminal'] else 2
         if args.root is None or args.dist is None:
             raise ValueError('candidate verification requires root and dist')
-        if args.mode == 'fetch':
+        if args.mode in ('fetch', 'collect'):
             if args.operation_id is None or args.state is None:
                 raise ValueError('fetch requires operation-id and durable state path')
             signal.signal(signal.SIGTERM, stop)
-            result = fetch(api, args.root, args.dist, args.tag, args.sha, args.ref, args.operation_id, args.state, args.forge_run_id or 0, args.controller_sha or '')
+            result = fetch(api, args.root, args.dist, args.tag, args.sha, args.ref, args.operation_id, args.state,
+                           args.forge_run_id or 0, args.controller_sha or '', args.mode == 'collect', args.previous_run_id, args.attempt_id)
         else:
             result = verify(api, args.root, args.dist, args.tag, args.sha, args.ref)
         print(json.dumps(result, sort_keys=True))

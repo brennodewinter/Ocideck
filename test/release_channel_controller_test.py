@@ -417,7 +417,9 @@ class ControllerTest(unittest.TestCase):
             with self.assertRaises(zipfile.BadZipFile):
                 control.windows_state(api, self.wanted, 42)
         original = api.artifact
-        with patch.object(api, 'get', return_value=[{'id': 7, 'name': 'windows-operation-other', 'expired': False}]):
+        original_get = api.get
+        with patch.object(api, 'get', side_effect=lambda path: [{'id': 7, 'name': 'windows-operation-other', 'expired': False}]
+                          if path.endswith('/artifacts') else original_get(path)):
             with self.assertRaisesRegex(ValueError, 'unavailable'):
                 control.windows_state(api, self.wanted, 42)
 

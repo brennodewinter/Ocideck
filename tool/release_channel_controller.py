@@ -199,28 +199,65 @@ def claim_status(args, wanted):
         return 'unknown'
 
 
-def windows_state(api, wanted, run_id):
+def worker_state(api, wanted, run_id, channel):
+    if type(run_id) is not int or run_id <= 0:
+        raise ValueError('invalid previous Forgejo run ID')
+    run = api.get('/actions/runs/' + str(run_id))
+    if (not isinstance(run, dict) or run.get('id') != run_id or not run_matches(run, wanted)
+            or run.get('commit_sha') != wanted['controller'] or run.get('status') not in TERMINAL
+            or run.get('workflow_id') not in (WORKFLOW, '.forgejo/workflows/' + WORKFLOW)
+            or run.get('trigger_event') != 'workflow_dispatch'):
+        raise ValueError('previous worker run identity differs or is not terminal')
     artifacts = api.get('/actions/runs/' + str(run_id) + '/artifacts')
-    name = 'windows-operation-' + wanted['operation_id']
+    name = channel + '-operation-' + wanted['operation_id']
     matches = [value for value in artifacts if isinstance(value, dict)
                and value.get('name') == name and value.get('expired') is False]
     if len(matches) != 1:
-        raise ValueError('exact Windows operation artifact unavailable')
+        raise ValueError('exact ' + channel + ' operation artifact unavailable')
     archive = api.artifact(matches[0].get('id'))
     with zipfile.ZipFile(io.BytesIO(archive)) as zipped:
         entries = zipped.infolist()
-        if (len(entries) != 1 or entries[0].filename != 'windows-operation.json'
+        if (len(entries) != 1 or entries[0].filename != channel + '-operation.json'
                 or entries[0].is_dir() or entries[0].file_size > 65536
                 or stat.S_IFMT(entries[0].external_attr >> 16) not in (0, stat.S_IFREG)):
-            raise ValueError('unsafe Windows operation artifact')
+            raise ValueError('unsafe ' + channel + ' operation artifact')
         content = zipped.read(entries[0])
     state = json.loads(content, object_pairs_hook=release_channel.no_duplicates)
     if (not isinstance(state, dict) or state.get('operation_id') != wanted['operation_id']
             or state.get('tag') != wanted['tag'] or state.get('sha') != wanted['source']
             or state.get('ref') != wanted['frozen_ref'] or state.get('forge_run_id') != run_id
-            or state.get('controller_sha') != wanted['controller'] or state.get('closed') is not True):
-        raise ValueError('Windows operation provenance differs')
+            or state.get('controller_sha') != wanted['controller']):
+        raise ValueError('worker operation provenance differs')
     return content
+
+
+def windows_state(api, wanted, run_id):
+    return worker_state(api, wanted, run_id, 'windows')
+
+
+def macos_state(api, wanted, run_id):
+    content = worker_state(api, wanted, run_id, 'macos')
+    saved = json.loads(content, object_pairs_hook=release_channel.no_duplicates)
+    if (saved.get('outcome') not in ('pending', 'completed', 'failed')
+            or saved.get('schema') != 1
+            or (saved.get('submission_id') is not None and (not isinstance(saved['submission_id'], str)
+                or not saved['submission_id'] or not re.fullmatch('[0-9a-f]{64}', saved.get('notary_sha256', ''))))):
+        raise ValueError('macOS operation receipt differs')
+    return content
+
+
+def continuation_state(api, wanted, previous_run_id, current_run_id, attempt_id):
+    if (type(previous_run_id) is not int or previous_run_id <= 0 or type(current_run_id) is not int
+            or current_run_id <= previous_run_id or not OPERATION_RE.fullmatch(attempt_id or '')):
+        raise ValueError('invalid continuation attempt provenance')
+    current = api.get('/actions/runs/' + str(current_run_id))
+    inputs = payload(current).get('inputs', {})
+    if (not run_matches(current, wanted) or current.get('commit_sha') != wanted['controller']
+            or current.get('workflow_id') not in (WORKFLOW, '.forgejo/workflows/' + WORKFLOW)
+            or current.get('trigger_event') != 'workflow_dispatch'
+            or inputs.get('attempt_id') != attempt_id or inputs.get('previous_run_id') != str(previous_run_id)):
+        raise ValueError('current continuation run identity differs')
+    return (windows_state if wanted['channel'] == 'windows' else macos_state)(api, wanted, previous_run_id)
 
 
 def identity(args):
@@ -275,7 +312,9 @@ def run_matches(run, wanted):
     inputs = event.get('inputs')
     if not isinstance(inputs, dict):
         return False
-    return (event.get('ref') in ('main', 'refs/heads/main')
+    continuation = inputs.get('attempt_id', '')
+    refs = (claim_name(wanted), 'refs/heads/' + claim_name(wanted)) if continuation else ('main', 'refs/heads/main')
+    return (event.get('ref') in refs
             and event.get('workflow') in (None, WORKFLOW, '.forgejo/workflows/' + WORKFLOW)
             and inputs.get('operation_id') == wanted['operation_id']
             and inputs.get('tag') == wanted['tag']
@@ -310,12 +349,12 @@ def runs(api, wanted, allow_controller_drift=False):
             if run_matches(detail, wanted):
                 if (detail.get('workflow_id') not in (WORKFLOW, '.forgejo/workflows/' + WORKFLOW)
                         or (not allow_controller_drift and detail.get('commit_sha') != wanted['controller'])
-                        or detail.get('prettyref') not in ('main', 'refs/heads/main')
+                        or detail.get('prettyref') not in ('main', 'refs/heads/main', claim_name(wanted), 'refs/heads/' + claim_name(wanted))
                         or detail.get('trigger_event') != 'workflow_dispatch'):
                     raise ValueError('operation ID belongs to a different run identity')
                 found.append(detail)
         if len(values) < 100:
-            return found
+            return sorted(found, key=lambda run: run['id'])
     raise ValueError('Forgejo run history exceeds inspection bound')
 
 
@@ -344,13 +383,22 @@ def snapshot(api, wanted):
                 except (ValueError, OSError, AttributeError) as error:
                     log_errors.append({'job': job.get('name'), 'inspection': 'unknown',
                                        'reason': str(error)})
+        outcome = 'completed' if run.get('status') == 'success' else 'unknown'
+        if wanted['channel'] in ('windows', 'macos'):
+            try:
+                content = (windows_state if wanted['channel'] == 'windows' else macos_state)(api, wanted, run['id'])
+                state = json.loads(content, object_pairs_hook=release_channel.no_duplicates)
+                outcome = state.get('outcome', 'completed' if state.get('closed') else 'pending')
+            except (ValueError, OSError, KeyError, TypeError, zipfile.BadZipFile):
+                outcome = 'unknown'
         entries.append({'log_errors': log_errors, 'id': run['id'], 'status': run.get('status'),
+                        'outcome': outcome, 'inputs': payload(run).get('inputs', {}),
                         'created': run.get('created'), 'updated': run.get('updated'),
                         'started': run.get('started'), 'stopped': run.get('stopped'),
                         'duration': run.get('duration'), 'timing': capabilities.timing(run),
                         'jobs': work, 'first_error': first_error})
     return {'operation_id': wanted['operation_id'], 'runs': entries,
-            'build_metadata': 'success' if len(entries) == 1 and entries[0]['status'] == 'success' else 'unproven',
+            'build_metadata': 'success' if entries and entries[-1]['status'] == 'success' and entries[-1]['outcome'] == 'completed' else 'unproven',
             'artifact_bytes': 'unverified', 'publication': 'unverified'}
 
 
@@ -382,6 +430,7 @@ def start(args, api):
 def status(args, api):
     wanted = read_operation(args)
     result = snapshot(api, wanted)
+    validate_attempts(args, result['runs'])
     journal = operation_path(args).parent / (args.channel + '.json')
     if not journal.is_file() or journal.is_symlink():
         raise ValueError('saved journal missing')
@@ -394,6 +443,8 @@ def status(args, api):
     if publication is not None:
         result['publication'] = ('recorded_' + publication['state']
                                  + '_public_bytes_unverified')
+    if len(result['runs']) > 1 and result['build_claim'] != 'owned':
+        result['publication'] = 'blocked_missing_continuation_controller_claim'
     if args.channel == 'windows':
         helper = Path(__file__).with_name('release_windows_candidate.py')
         if helper.is_file():
@@ -401,9 +452,9 @@ def status(args, api):
                        '--sha', args.sha, '--ref', wanted['frozen_ref'],
                        '--operation-id', args.operation_id, '--controller-sha', args.controller_sha]
             try:
-                if len(result['runs']) != 1 or result['runs'][0]['status'] not in TERMINAL:
+                if not result['runs'] or result['runs'][-1]['status'] not in TERMINAL:
                     raise ValueError('Forgejo worker is not terminal')
-                run_id = result['runs'][0]['id']
+                run_id = result['runs'][-1]['id']
                 content = windows_state(api, wanted, run_id)
                 with tempfile.TemporaryDirectory(prefix='windows-operation-') as directory:
                     state = Path(directory) / 'windows-operation.json'
@@ -422,14 +473,75 @@ def status(args, api):
     return result
 
 
+def attempt_path(args, previous_run_id):
+    return operation_path(args).parent / (args.channel + '-continue-' + str(previous_run_id) + '.json')
+
+
+def continuable(run):
+    return (run['status'] in TERMINAL and (run.get('outcome') == 'pending'
+            or (run.get('outcome') == 'completed' and run['status'] != 'success')))
+
+
+def validate_attempts(args, entries):
+    if not entries:
+        return
+    if entries[0].get('inputs', {}).get('attempt_id'):
+        raise ValueError('original operation run unavailable')
+    for previous, current in zip(entries, entries[1:]):
+        path = attempt_path(args, previous['id'])
+        if path.is_symlink() or not path.is_file() or path.stat().st_size > 4096:
+            raise ValueError('unowned or ambiguous continuation run')
+        saved = json.loads(path.read_text(), object_pairs_hook=release_channel.no_duplicates)
+        attempt = saved.get('attempt_id', '')
+        expected = dict(identity(args), previous_run_id=previous['id'], attempt_id=attempt)
+        inputs = current.get('inputs', {})
+        if (saved != expected or not OPERATION_RE.fullmatch(attempt)
+                or inputs.get('attempt_id') != attempt or inputs.get('previous_run_id') != str(previous['id'])
+                or not continuable(previous)):
+            raise ValueError('continuation identity or predecessor differs')
+
+
+def continue_attempt(args, api, result):
+    wanted = read_operation(args)
+    with release_journal.locked(operation_path(args).with_suffix('.continuation')):
+        current = result['runs'][-1]
+        if claim_status(args, wanted) != 'owned':
+            raise ValueError('continuation requires the original owned build claim')
+        branch = claim_name(wanted)
+        remote = api.get('/branches/' + quote(branch, safe=''))
+        if remote.get('name') != branch or remote.get('commit', {}).get('id') != wanted['controller']:
+            raise ValueError('continuation controller claim ref differs')
+        proof = json.loads((windows_state if args.channel == 'windows' else macos_state)(
+            api, wanted, current['id']), object_pairs_hook=release_channel.no_duplicates)
+        if args.channel == 'windows' and set(proof.get('selected_runs', {})) != {'release.yml', 'windows-test-check.yml'}:
+            raise ValueError('Windows continuation needs exact known upstream IDs')
+        if args.channel == 'macos' and not proof.get('submission_id'):
+            raise ValueError('macOS continuation needs a known existing submission')
+        path = attempt_path(args, current['id'])
+        if path.exists() or path.is_symlink():
+            raise ValueError('continuation dispatch outcome unknown; never repeat POST')
+        attempt = uuid4().hex
+        receipt = dict(wanted, previous_run_id=current['id'], attempt_id=attempt)
+        release_channel.immutable_write(path, release_channel.encoded(receipt))
+        api.post('/actions/workflows/' + WORKFLOW + '/dispatches', {'ref': branch, 'inputs': {
+            'tag': args.tag, 'source_sha': args.sha, 'frozen_ref': wanted['frozen_ref'], 'channel': args.channel,
+            'operation_id': args.operation_id, 'attempt_id': attempt, 'previous_run_id': str(current['id'])}})
+        resumed = status(args, api)
+        resumed['continuation'] = 'found' if len(resumed['runs']) > len(result['runs']) else 'unknown'
+        return resumed
+
+
 def hervat(args, api):
     result = status(args, api)
     if not result['runs']:
         raise ValueError('dispatch outcome unknown; never redispatch this operation ID')
-    if len(result['runs']) != 1:
-        raise ValueError('multiple runs for one operation; inspect before resuming')
     save_observation(args, result)
-    if (result['runs'][0]['status'] in TERMINAL
+    current = result['runs'][-1]
+    if args.channel in ('windows', 'macos') and continuable(current):
+        return continue_attempt(args, api, result)
+    if (current['status'] in TERMINAL
+            and (args.channel not in ('windows', 'macos') or current.get('outcome') in ('completed', 'failed'))
+            and len(result['runs']) == 1
             and (args.channel != 'windows' or (result.get('github', {}).get('terminal') is True
                                                 and result['github'].get('unknown') is False))):
         release_claim(args, api, read_operation(args))
@@ -441,7 +553,7 @@ def save_observation(args, result):
     from hashlib import sha256
     from types import SimpleNamespace
     journal = operation_path(args).parent / (args.channel + '.json')
-    run = result['runs'][0]
+    run = result['runs'][-1]
     content = release_channel.encoded(run)
     proof = journal.parent / f"{args.channel}-run-{run['id']}-{sha256(content).hexdigest()[:16]}.json"
     release_channel.immutable_write(proof, content)
@@ -451,11 +563,13 @@ def save_observation(args, result):
         release_journal.record(SimpleNamespace(journal=journal, phase='dispatch', state='completed', evidence=[proof]))
     current = release_journal.read(journal)
     last_build = next((e for e in reversed(current['events']) if e['phase'] == 'build'), None)
-    if last_build is None:
+    if last_build is None or (last_build['state'] in ('failed', 'cancelled')
+            and str(proof.resolve()) not in last_build['evidence']):
         release_journal.record(SimpleNamespace(journal=journal, phase='build', state='started', evidence=[proof]))
         last_build = {'state': 'started'}
-    if last_build['state'] == 'started' and run['status'] in TERMINAL:
-        state = 'completed' if run['status'] == 'success' else 'cancelled' if run['status'] == 'cancelled' else 'failed'
+    if (last_build['state'] == 'started' and run['status'] in TERMINAL and run.get('outcome') != 'pending'
+            and not (run['status'] == 'success' and run.get('outcome') == 'unknown')):
+        state = 'completed' if run['status'] == 'success' and run.get('outcome', 'completed') == 'completed' else 'cancelled' if run['status'] == 'cancelled' else 'failed'
         release_journal.record(SimpleNamespace(journal=journal, phase='build', state=state, evidence=[proof]))
 
 
@@ -478,9 +592,8 @@ def stop(args, api):
                     {'id': run['id'], 'status': run.get('status'), 'controller_sha': run.get('commit_sha')}
                     for run in latest], 'build_metadata': 'unproven',
                 'artifact_bytes': 'unverified', 'publication': 'unverified'}
-            if len(result['runs']) != 1:
-                raise ValueError('multiple runs for one operation; stop cannot prove one owner')
-            if latest[0].get('commit_sha') == wanted['controller']:
+            validate_attempts(args, result['runs'])
+            if latest[-1].get('commit_sha') == wanted['controller']:
                 save_observation(args, result)
             # Only a terminal Forgejo worker cannot dispatch more dependent jobs.
             if args.channel == 'windows':
@@ -489,10 +602,10 @@ def stop(args, api):
                     raise ValueError('Windows ownership helper missing; GitHub state remains unknown')
                 command = [sys.executable, str(helper), 'cancel', '--tag', args.tag, '--sha', args.sha,
                            '--ref', wanted['frozen_ref'], '--operation-id', args.operation_id,
-                           '--forge-run-id', str(latest[0]['id']), '--controller-sha', args.controller_sha,
+                           '--forge-run-id', str(latest[-1]['id']), '--controller-sha', args.controller_sha,
                            '--wait-terminal']
                 try:
-                    content = windows_state(api, wanted, latest[0]['id'])
+                    content = windows_state(api, wanted, latest[-1]['id'])
                 except (ValueError, OSError, zipfile.BadZipFile) as error:
                     # Still request cancellation of visible owned GH runs. Without
                     # the authenticated journal, absence cannot prove completion.
@@ -514,7 +627,9 @@ def publish(args, api):
     if not readiness['ready']:
         raise ValueError('; '.join(readiness['blockers']))
     result = status(args, api)
-    if len(result['runs']) != 1 or result['runs'][0]['status'] != 'success' or str(result['runs'][0]['id']) != str(args.run_id):
+    if (not result['runs'] or result['runs'][-1]['status'] != 'success'
+            or result['runs'][-1].get('outcome', 'completed') != 'completed'
+            or str(result['runs'][-1]['id']) != str(args.run_id)):
         raise ValueError('exact operation build is not terminal green')
     if args.channel == 'windows':
         github = result.get('github', {})
