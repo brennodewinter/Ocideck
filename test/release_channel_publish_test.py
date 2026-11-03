@@ -65,6 +65,14 @@ elif '/releases/tags/' in u: out=json.dumps({'id':7,'tag_name':'v0.7.7','draft':
 elif '/download/' in u:
     name=u.rsplit('/',1)[1]; out=base64.b64decode(next(a['bytes'] for a in s['assets'] if a['name']==name))
 elif '/tags/' in u: out=json.dumps({'commit':{'sha':s['tag_sha']}}).encode()
+elif '/actions/runs?' in u:
+    query=parse_qs(urlsplit(u).query);workflow=query['workflow_id'][0]
+    assert query['head_sha']==['1'*40]
+    pages=s.get('quality_pages',{}).get(workflow)
+    values=pages[int(query['page'][0])-1] if pages else s['quality_runs'].get(workflow,[])
+    out=json.dumps({'workflow_runs':values}).encode()
+elif '/actions/runs/' in u and u.endswith('/jobs') and not u.endswith('/9/jobs'):
+    out=json.dumps(s.get('quality_jobs',[{'name':'quality','status':'success'}])).encode()
 elif u.endswith('/actions/runs/9/jobs'): out=json.dumps(s['jobs']).encode()
 elif u.endswith('/actions/runs/9'): out=json.dumps(s['run']).encode()
 elif '/releases/7/assets?limit=' in u:
@@ -123,6 +131,9 @@ class PublishTests(unittest.TestCase):
         for file in bin_dir.iterdir():
             file.chmod(0o755)
         self.state = {'assets': [], 'calls': [], 'tag_sha': SHA, 'run': {'id': 9, 'commit_sha': CONTROLLER, 'status': 'success', 'workflow_id': 'release-channel.yml', 'prettyref': 'main'}, 'jobs': [{'name': 'build', 'status': 'success'}, {'name': 'evidence', 'status': 'success'}, {'name': 'consumer-rpm', 'status': 'skipped'}]}
+        self.state['quality_runs'] = {workflow: [{'id': index + 100, 'commit_sha': SHA,
+            'workflow_id': workflow, 'status': 'success'}]
+            for index, workflow in enumerate(('static-gate.yml', 'scans.yml', 'linux-gate.yml'))}
         workflow = (ROOT / '.forgejo/workflows/release.yml').read_bytes()
         self.state['workflow_blob'] = hashlib.sha1(b'blob ' + str(len(workflow)).encode() + b'\0' + workflow).hexdigest()
         self.state_file = self.path / 'state.json'
@@ -148,6 +159,37 @@ class PublishTests(unittest.TestCase):
         self.state['jobs'][0]['status'] = 'running'
         self.assertNotEqual(self.run_publish().returncode, 0)
         self.assertEqual(self.state['assets'], [])
+
+    def test_source_quality_is_required_before_any_public_write(self):
+        original = json.loads(json.dumps(self.state))
+        for problem in ('missing', 'different_sha', 'different_workflow', 'invalid_id', 'newer_pending', 'skipped_job', 'failed_job'):
+            with self.subTest(problem=problem):
+                self.state = json.loads(json.dumps(original))
+                values = self.state['quality_runs']['linux-gate.yml']
+                if problem == 'missing':
+                    values.clear()
+                elif problem == 'different_sha':
+                    values[0]['commit_sha'] = CONTROLLER
+                elif problem == 'different_workflow':
+                    values[0]['workflow_id'] = 'release-channel.yml'
+                elif problem == 'invalid_id':
+                    values[0]['id'] = True
+                elif problem == 'newer_pending':
+                    values.append(dict(values[0], id=999, status='running'))
+                else:
+                    self.state['quality_jobs'] = [{'name': 'quality', 'status': 'skipped' if problem == 'skipped_job' else 'failure'}]
+                self.assertNotEqual(self.run_publish().returncode, 0)
+                self.assertEqual([], self.state['assets'])
+                self.assertFalse(self.state.get('lease_posts'))
+                self.assertFalse(self.state.get('tag_posts'))
+
+    def test_source_quality_inspects_later_pages_before_selecting_latest(self):
+        workflow = 'linux-gate.yml'
+        first = [dict(self.state['quality_runs'][workflow][0], id=index, status='failure')
+                 for index in range(200, 300)]
+        self.state['quality_pages'] = {workflow: [first, [dict(first[0], id=301, status='success')]]}
+        self.assertEqual(0, self.run_publish().returncode)
+        self.assertTrue(any('page=2&' in url and 'workflow_id=linux-gate.yml' in url for url in self.state['calls']))
 
     def test_wrong_source_or_controller_rejected(self):
         self.state['tag_sha'] = '3' * 40

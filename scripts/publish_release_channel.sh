@@ -198,6 +198,38 @@ def main():
         body = request(path, missing=missing)
         return None if body is None else json.loads(body, object_pairs_hook=channel.no_duplicates)
 
+    # A successful build is not proof that this source passed its quality gates.
+    quality_runs = {}
+    for workflow in ('static-gate.yml', 'scans.yml', 'linux-gate.yml'):
+        latest = None
+        seen = set()
+        for page in range(1, 21):
+            response = data('/actions/runs?limit=100&page=' + str(page)
+                            + '&head_sha=' + args.sha + '&workflow_id=' + workflow)
+            values = response.get('workflow_runs') if isinstance(response, dict) else None
+            if not isinstance(values, list) or len(values) > 100:
+                raise ValueError('invalid source quality response')
+            for value in values:
+                if (not isinstance(value, dict) or type(value.get('id')) is not int or value['id'] <= 0
+                        or value['id'] in seen or value.get('commit_sha') != args.sha
+                        or value.get('workflow_id') not in (workflow, '.forgejo/workflows/' + workflow)):
+                    raise ValueError('source quality run identity differs')
+                seen.add(value['id'])
+                if latest is None or value['id'] > latest['id']:
+                    latest = value
+            if len(values) < 100:
+                break
+        else:
+            raise ValueError('source quality history exceeds inspection bound')
+        if latest is None or latest.get('status') != 'success':
+            raise ValueError('latest exact-source quality gate is not successful: ' + workflow)
+        quality_jobs = data('/actions/runs/' + str(latest['id']) + '/jobs')
+        if (not isinstance(quality_jobs, list) or not quality_jobs
+                or any(not isinstance(job, dict) or job.get('status') != 'success' for job in quality_jobs)):
+            raise ValueError('source quality jobs are not all successful: ' + workflow)
+        quality_runs[workflow] = latest['id']
+    print('Verified exact-source quality runs: ' + json.dumps(quality_runs, sort_keys=True), file=sys.stderr)
+
     run = data('/actions/runs/' + args.run_id)
     if str(run.get('id')) != args.run_id or run.get('commit_sha') != args.controller_sha or run.get('status') != 'success':
         raise ValueError('candidate run is not successful on exact source')

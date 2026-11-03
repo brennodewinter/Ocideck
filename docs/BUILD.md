@@ -863,6 +863,13 @@ publisher is stopped before the local lease is released; an interrupted started
 phase requires inspection and an explicit cancellation record before resumption.
 A local receipt never replaces fresh public readback.
 
+Before any publication mutation, the publisher also requires successful
+`static-gate.yml`, `scans.yml` and `linux-gate.yml` runs on the exact source SHA,
+with every job successful. It inspects paginated history and selects the latest
+run for each workflow; a newer pending or failed run blocks an older green one.
+This reuses recorded source checks instead of substituting build success for
+quality evidence. Missing or unreadable evidence blocks publication.
+
 A tag push no longer starts the legacy all-platform publisher. The existing
 controller dispatches its publication explicitly after candidate checks. Initial
 channel publication also requires the source to carry the same safe publication
