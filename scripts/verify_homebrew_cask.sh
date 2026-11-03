@@ -36,7 +36,7 @@ MIRROR_GRACE_HOURS="${MIRROR_GRACE_HOURS:-24}"
 
 usage() {
   cat <<'USAGE'
-Usage: verify_homebrew_cask.sh [--mirror] [tag]
+Usage: verify_homebrew_cask.sh [--mirror] [--expected-url URL --expected-sha256 SHA256] [tag]
 
   tag        release tag to check against (default: the newest release)
   --mirror   also check the GitHub mirror of the tap, tolerating a lag of
@@ -133,11 +133,12 @@ fi
 echo "Tap $SOURCE is on $FOUND, matching $TAG."
 
 # Channel callers supply these values only after verifying the signed manifest.
+verify_identity() {
 if [ -n "$EXPECTED_URL$EXPECTED_SHA256" ]; then
   [ -n "$EXPECTED_URL" ] && [[ "$EXPECTED_SHA256" =~ ^[0-9a-f]{64}$ ]] || {
     echo "Both an exact URL and lowercase SHA256 are required." >&2; exit 2;
   }
-  printf '%s\n' "$CASK" | python3 -c '
+  printf '%s\n' "$1" | python3 -c '
 import re, sys
 from urllib.parse import urlsplit
 expected_url, expected_sha = sys.argv[1:]
@@ -151,6 +152,9 @@ for field, expected in (("url", expected_url), ("sha256", expected_sha)):
         raise SystemExit("Cask " + field + " differs from the signed macOS channel")
 ' "$EXPECTED_URL" "$EXPECTED_SHA256"
 fi
+
+}
+verify_identity "$CASK"
 
 if [ "$CHECK_MIRROR" = 0 ]; then
   exit 0
@@ -178,6 +182,7 @@ fi
 MIRROR_FOUND="$(printf '%s\n' "$MIRROR_CASK" | cask_version)"
 
 if [ "$MIRROR_FOUND" = "$EXPECTED" ]; then
+  verify_identity "$MIRROR_CASK"
   echo "Mirror $MIRROR_SOURCE is on $MIRROR_FOUND too."
   exit 0
 fi

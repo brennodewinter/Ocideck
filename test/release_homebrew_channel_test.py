@@ -86,6 +86,22 @@ class HomebrewChannelTest(unittest.TestCase):
         self.assertNotEqual(self.verify(digest='d' * 64).returncode, 0)
         self.assertNotEqual(self.verify(url='https://example.org/wrong.zip').returncode, 0)
 
+    def test_matching_mirror_version_requires_exact_signed_identity(self):
+        self.assertEqual(self.generate().returncode, 0)
+        mirror = self.out.with_name('mirror.rb')
+        mirror.write_text(self.out.read_text().replace(self.digest, 'd' * 64))
+        command = ['bash', str(self.root / 'scripts/verify_homebrew_cask.sh'),
+                   '--mirror', '--expected-sha256', self.digest,
+                   '--expected-url',
+                   'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/v9.8.7/ocideck-macos-9.8.7.zip',
+                   'v9.8.7']
+        env = dict(self.env, CASK_FILE=str(self.out), MIRROR_CASK_FILE=str(mirror))
+        result = subprocess.run(command, env=env, capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Cask sha256 differs', result.stderr)
+        mirror.write_text(self.out.read_text())
+        self.assertEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
+
     def test_unknown_asset_and_duplicate_manifest_key_are_rejected(self):
         self.data['files']['other.zip'] = 'd' * 64
         self.write_evidence()
