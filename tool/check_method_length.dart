@@ -54,6 +54,10 @@ const Map<String, int> methodLengthBaseline = {
       180, // hernoemd op main door #2711 (cache-laag): zelfde methode.
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
+  // +3 (#2728): de twee draaiknoppen met busy-aanduiding — ze horen bij de
+  // preview waar de draaiing zich op afspeelt; uitbesteden zou de
+  // knop-status los van de stage-state trekken.
+  'lib/widgets/slides/image_crop_dialog.dart::_ImageCropDialogState.build': 153,
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
       154, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
