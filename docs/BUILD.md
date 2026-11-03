@@ -1657,3 +1657,8 @@ De exacte terminale taprun, caskhash en publieke URL/SHA256 worden nagelezen.
 De websitebronworkflow mag op een latere main staan, mits zijn definitie exact
 bytegelijk is aan de lokaal beoordeelde workflow; die nieuwe controller-SHA wordt
 vóór dispatch opgeslagen. Een nieuwere andere updater wordt geweigerd.
+
+Runtime budgets, measured preparation costs and unresolved infrastructure causes
+are recorded in [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md). Historical
+Windows communication loss and crawler involvement have not been established
+as causes by the available evidence.
