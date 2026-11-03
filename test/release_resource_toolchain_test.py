@@ -37,6 +37,43 @@ if sys.argv[1]=='check-toolchain': sys.exit(1)
                              [[['check-toolchain'], '2']])
             self.assertFalse((root / 'dist').exists())
 
+    def test_both_linux_routes_limit_actual_direct_ninja_invocation(self):
+        for nested in (False, True):
+            with self.subTest(debian12=nested), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                (root / 'bin').mkdir()
+                (root / 'pubspec.yaml').write_text('version: 1.2.3+1\n')
+                (root / 'scripts').mkdir()
+                import shutil
+                shutil.copy(ROOT / 'scripts/run_release_linux_build.sh', root / 'scripts')
+                binaries = {
+                    'git': '#!/bin/sh\necho ' + SHA + '\n',
+                    'dart': '#!/bin/sh\nexit 0\n',
+                    'ninja': "#!/usr/bin/env python3\nimport json,os,sys\nopen(os.environ['CALLS'],'a').write(json.dumps(sys.argv[1:])+'\\n')\n",
+                    'make': '#!/bin/sh\n[ "$1" = check-toolchain ] && exit 0\nninja -C build install -j99\nexit 17\n',
+                    'flutter': '#!/bin/sh\n[ "$1" = pub ] && exit 0\nninja -C build install -j99\nexit 17\n',
+                }
+                for name, source in binaries.items():
+                    executable = root / 'bin' / name
+                    executable.write_text(source)
+                    executable.chmod(0o700)
+                calls = root / 'calls'
+                environment = dict(os.environ, PATH=str(root / 'bin') + ':' + os.environ['PATH'],
+                                   HOME=str(root), CALLS=str(calls))
+                if nested:
+                    command = ['bash', str(ROOT / 'scripts/debian12_builder/container-build.sh')]
+                else:
+                    command = ['bash', str(ROOT / 'scripts/build_release_channel.sh'), 'v1.2.3',
+                               SHA, 'codex/release-candidate-v1.2.3-' + SHA, 'linux-tar']
+                result = subprocess.run(command, cwd=root, env=environment, capture_output=True)
+                self.assertEqual(result.returncode, 17, result.stderr)
+                self.assertEqual(json.loads(calls.read_text()),
+                                 ['-j2', '-C', 'build', 'install'])
+                # De wrapper verandert alleen zijn subprocess, niet het omringende PATH.
+                calls.unlink()
+                subprocess.run(['ninja', '--version'], env=environment, check=True)
+                self.assertEqual(json.loads(calls.read_text()), ['--version'])
+
     def test_every_docker_job_has_quota_and_linux_channels_share_queue(self):
         text = (ROOT / '.forgejo/workflows/release-channel.yml').read_text()
         self.assertIn("|| 'linux-web-server'", text)

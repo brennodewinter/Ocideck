@@ -1722,6 +1722,8 @@ De onafhankelijke Linux/web-workflows delen één wachtrij zonder annulering. El
 bouwcontainer krijgt 2 CPU en 8 GiB; de Windows-orchestrator krijgt 2 CPU en 4 GiB.
 Consumenten en bewijsjobs krijgen 2 CPU en 4 GiB. De afzonderlijke Debian 12-daemon
 krijgt dezelfde 2 CPU/8 GiB bij zowel imagebouw als containeruitvoering; CMake krijgt
-twee parallelle compilatietaken. Dit is toelatingsbeleid met bestaande bouwmarge,
+twee parallelle compilatietaken. Omdat Flutter Ninja rechtstreeks aanroept,
+begrenzen beide Linux-bouwroutes bovendien de echte Ninja-opdracht met `-j2`
+via een tijdelijke PATH-wrapper, uitsluitend tijdens de bouw. Dit is toelatingsbeleid met bestaande bouwmarge,
 geen gemeten maximum of garantie voor de gehele server: andere CI deelt capaciteit.
 Mac- en Windows-runners behouden hun eigen kanaalwachtrij en native begrenzingen.

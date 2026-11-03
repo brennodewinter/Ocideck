@@ -24,7 +24,7 @@ fi
 
 dart run tool/check_toolchain.dart
 flutter pub get --enforce-lockfile
-flutter build linux --release
+bash scripts/run_release_linux_build.sh flutter build linux --release
 
 bundle="build/linux/x64/release/bundle"
 if [[ "$(uname -m)" == "aarch64" ]]; then

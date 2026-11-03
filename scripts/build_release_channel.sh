@@ -37,7 +37,7 @@ case "$CHANNEL" in
     scripts/build_debian12_release.sh "${TAG#v}"
     ;;
   linux-tar|linux-deb|linux-rpm|linux-appimage|linux-flatpak)
-    make build-linux
+    bash "$(dirname "$0")/run_release_linux_build.sh" make build-linux
     mkdir dist
     if [[ "$CHANNEL" == linux-tar ]]; then
       tar -C build/linux/x64/release --transform "s,^bundle,ocideck-${TAG#v}," -czf "dist/ocideck-linux-x64-${TAG#v}.tar.gz" bundle
