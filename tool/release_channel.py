@@ -12,7 +12,7 @@ import tempfile
 
 CHANNELS = {
     'macos': ['ocideck-macos-{v}.zip'],
-    'windows': ['ocideck-windows-x64-{v}.zip', 'ocideck-windows-x64-setup-{v}.exe'],
+    'windows': ['ocideck-windows-x64-{v}.zip', 'ocideck-windows-x64-setup-{v}.exe', 'ocideck-windows-cohort-{v}.json'],
     'web': ['ocideck-web-{v}.tar.gz'],
     'linux-tar': ['ocideck-linux-x64-{v}.tar.gz'],
     'linux-debian12': ['ocideck-linux-debian12-x86_64-{v}.tar.gz'],

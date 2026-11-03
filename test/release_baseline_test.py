@@ -121,6 +121,7 @@ class ReleaseBaselineTest(unittest.TestCase):
     def test_global_signed_manifest_exact_assets(self):
         version = '0.7.7'
         names = {n.format(v=version) for templates in baseline.CHANNELS.values() for n in templates}
+        names.discard('ocideck-windows-cohort-0.7.7.json')
         names |= {'ocideck-0.7.7.cdx.json', 'ocideck-0.7.7.spdx.json'}
         assets = {n: {'browser_download_url': 'https://forge.invalid/' + n} for n in names | {'SHA256SUMS', 'SHA256SUMS.minisig'}}
         body = ''.join('c' * 64 + '  ./' + n + '\n' for n in sorted(names)).encode()

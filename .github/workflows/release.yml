@@ -22,6 +22,10 @@ on:
     tags: ["v*"]
   workflow_dispatch:
     inputs:
+      operation_id:
+        description: Ownership marker for cancellation and recovery
+        required: false
+        type: string
       mode:
         description: Build without publishing a tag
         required: false
@@ -36,7 +40,7 @@ on:
         required: false
         type: string
 
-run-name: Windows ${{ inputs.mode == 'candidate' && 'candidate' || 'release' }} ${{ inputs.version || github.ref_name }}
+run-name: Windows ${{ inputs.mode == 'candidate' && 'candidate' || 'release' }} ${{ inputs.version || github.ref_name }}${{ inputs.operation_id && format(' [operation:{0}]', inputs.operation_id) || '' }}
 
 env:
   RELEASE_TAG: ${{ inputs.version || github.ref_name }}

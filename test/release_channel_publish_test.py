@@ -1,5 +1,6 @@
 """Publication transport tests: no network, signing service or release mutation."""
 import json
+import base64
 import hashlib
 import os
 from pathlib import Path
@@ -17,9 +18,27 @@ from pathlib import Path
 from urllib.parse import urlsplit,parse_qs
 args=sys.argv[1:]
 assert 'secret-test-token' not in ' '.join(args)
-assert 'secret-test-token' in sys.stdin.read()
+config=sys.stdin.read()
+assert 'secret-test-token' in config
 state_path=Path(os.environ['FAKE_STATE']); s=json.loads(state_path.read_text())
-u=next(a for a in args if a.startswith('https://')); s['calls'].append(u)
+u=next((a for a in args if a.startswith('https://')),None)
+if u is None:
+    import re
+    u=re.search(r'^url = "([^\n]+)"',config,re.M).group(1)
+s['calls'].append(u)
+if u.startswith('https://api.github.com/'):
+    path=urlsplit(u).path
+    if '/git/ref/heads/' in path:
+        out={'ref':'refs/heads/codex/release-candidate-v0.7.7-'+('1'*40),'object':{'sha':'1'*40}}
+    elif '/contents/' in path:
+        name=path.split('/contents/',1)[1];out={'encoding':'base64','content':s['github_files'][name]}
+    elif '/actions/workflows/' in path:
+        workflow=path.split('/actions/workflows/',1)[1].split('/',1)[0];out={'workflow_runs':s['github_runs'][workflow]}
+    elif path.endswith('/jobs'):
+        rid=path.split('/runs/',1)[1].split('/',1)[0];out={'jobs':s['github_jobs'][rid]}
+    else:sys.exit(22)
+    state_path.write_text(json.dumps(s));Path(args[args.index('--output')+1]).write_text(json.dumps(out));print('200',end='');sys.exit()
+
 if '--request' in args and args[args.index('--request')+1]=='DELETE':
     assert '/branches/' in u;s['locked']=False;s['unlock_count']=s.get('unlock_count',0)+1
     state_path.write_text(json.dumps(s));Path(args[args.index('--output')+1]).write_bytes(b'');print('204',end='');sys.exit()
@@ -114,6 +133,7 @@ class PublishTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.path = Path(self.temp.name).resolve()
+        self.channel = 'web'
         self.dist = self.path / 'dist'
         self.proof = self.path / 'evidence'
         self.dist.mkdir()
@@ -141,10 +161,64 @@ class PublishTests(unittest.TestCase):
 
     def run_publish(self):
         self.state_file.write_text(json.dumps(self.state))
-        result = subprocess.run(['bash', str(ROOT / 'scripts/publish_release_channel.sh'), '--release-id', 'auto' if getattr(self, 'create', False) or getattr(self, 'auto_status', False) else '7', '--run-id', '9', '--tag', 'v0.7.7', '--sha', SHA, '--controller-sha', CONTROLLER, '--channel', 'web', '--dist', str(self.dist), '--evidence', str(self.proof), '--receipt', str(self.path / 'receipt.json'), '--staging-dir', str(self.path / 'sealed')] + (['--create-release'] if getattr(self, 'create', False) else []) + (['--verify-only'] if getattr(self, 'verify_only', False) else []), env=self.env, capture_output=True, text=True)
+        result = subprocess.run(['bash', str(ROOT / 'scripts/publish_release_channel.sh'), '--release-id', 'auto' if getattr(self, 'create', False) or getattr(self, 'auto_status', False) else '7', '--run-id', '9', '--tag', 'v0.7.7', '--sha', SHA, '--controller-sha', CONTROLLER, '--channel', self.channel, '--dist', str(self.dist), '--evidence', str(self.proof), '--receipt', str(self.path / 'receipt.json'), '--staging-dir', str(self.path / 'sealed')] + (['--create-release'] if getattr(self, 'create', False) else []) + (['--verify-only'] if getattr(self, 'verify_only', False) else []), env=self.env, capture_output=True, text=True)
         self.state = json.loads(self.state_file.read_text())
         self.assertNotIn('secret-test-token', result.stdout + result.stderr)
         return result
+
+    def configure_windows(self):
+        self.channel = 'windows'
+        for path in [*self.dist.iterdir(), *self.proof.iterdir()]:
+            path.unlink()
+        zip_bytes, installer_bytes = b'zip bytes', b'installer bytes'
+        (self.dist / 'ocideck-windows-x64-0.7.7.zip').write_bytes(zip_bytes)
+        (self.dist / 'ocideck-windows-x64-setup-0.7.7.exe').write_bytes(installer_bytes)
+        (self.dist / 'ocideck-windows-cohort-0.7.7.json').write_text(json.dumps({'tag_commit': SHA, 'run_id': 20,
+            'sha256': {'zip': hashlib.sha256(zip_bytes).hexdigest(), 'installer': hashlib.sha256(installer_bytes).hexdigest()}}))
+        self.state['github_files'] = {'.github/workflows/' + name: base64.b64encode((ROOT / '.github/workflows' / name).read_bytes()).decode()
+                                     for name in ('release.yml', 'windows-test-check.yml')}
+        self.state['github_files']['pubspec.yaml'] = base64.b64encode(b'version: 0.7.7+49\n').decode()
+        for kind, content in [('cdx', {'metadata': {'component': {'version': '0.7.7+49'}}}),
+                              ('spdx', {'packages': [{'name': 'ocideck', 'versionInfo': '0.7.7+49'}]})]:
+            body = json.dumps(content).encode()
+            (self.dist / ('ocideck-0.7.7.' + kind + '.json')).write_bytes(body)
+            self.state['github_files']['sbom/ocideck.' + kind + '.json'] = base64.b64encode(body).decode()
+        self.state['github_runs'], self.state['github_jobs'] = {}, {}
+        for workflow, rid, name in [('release.yml', 20, 'Build Windows'), ('windows-test-check.yml', 10, 'Test (windows-2022)')]:
+            self.state['github_runs'][workflow] = [{'id': rid, 'head_sha': SHA, 'head_branch': 'codex/release-candidate-v0.7.7-' + SHA,
+                'event': 'workflow_dispatch', 'path': '.github/workflows/' + workflow, 'display_title': 'Windows candidate v0.7.7',
+                'status': 'completed', 'conclusion': 'success'}]
+            self.state['github_jobs'][str(rid)] = [{'name': name, 'status': 'completed', 'conclusion': 'success'}]
+        self.state['quality_runs'].pop('linux-gate.yml')
+        subprocess.run(['python3', str(ROOT / 'tool/release_channel.py'), 'create', '--tag', 'v0.7.7', '--sha', SHA,
+            '--controller-sha', CONTROLLER, '--channel', 'windows', '--run-id', '9', '--dist', str(self.dist),
+            '--output', str(self.proof / 'channel-manifest-windows.json')], check=True, capture_output=True)
+        for name in ('channel-manifest-windows.json', 'SHA256SUMS.windows'):
+            (self.proof / (name + '.minisig')).write_bytes(b'signature')
+        self.env['GH_DISPATCH_TOKEN'] = 'secret-test-token'
+
+    def test_windows_requires_own_suite_native_and_cohort_not_linux_gate(self):
+        self.configure_windows()
+        result = self.run_publish()
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual(9, len(self.state['assets']))
+        self.assertFalse(any('workflow_id=linux-gate.yml' in url for url in self.state['calls']))
+        self.assertTrue(any('/actions/workflows/windows-test-check.yml/runs?' in url for url in self.state['calls']))
+
+    def test_windows_pending_suite_blocks_publication(self):
+        self.configure_windows()
+        self.state['github_runs']['windows-test-check.yml'][0]['status'] = 'in_progress'
+        self.state['github_runs']['windows-test-check.yml'][0]['conclusion'] = None
+        result = self.run_publish()
+        self.assertNotEqual(0, result.returncode)
+        self.assertEqual([], self.state['assets'])
+
+    def test_windows_changed_workflow_blocks_publication(self):
+        self.configure_windows()
+        self.state['github_files']['.github/workflows/release.yml'] = base64.b64encode(b'unsafe workflow').decode()
+        result = self.run_publish()
+        self.assertNotEqual(0, result.returncode)
+        self.assertEqual([], self.state['assets'])
 
     def test_lost_post_reconciles_and_repeat_reuses_identical_bytes(self):
         self.state['lost_post'] = True

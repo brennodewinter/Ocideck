@@ -200,7 +200,8 @@ def main():
 
     # A successful build is not proof that this source passed its quality gates.
     quality_runs = {}
-    for workflow in ('static-gate.yml', 'scans.yml', 'linux-gate.yml'):
+    workflows = ('static-gate.yml', 'scans.yml') if args.channel == 'windows' else ('static-gate.yml', 'scans.yml', 'linux-gate.yml')
+    for workflow in workflows:
         latest = None
         seen = set()
         for page in range(1, 21):
@@ -249,7 +250,13 @@ def main():
         'linux-flatpak': 'Flatpak installatie en inhoud op een schone Ubuntu',
         'linux-tar': 'Linux-tar-archief proef op een schone Linux-tar',
     }
-    if args.channel != 'web':
+    if args.channel == 'windows':
+        sys.path.insert(0, str(root / 'tool'))
+        from release_windows_candidate import GitHub, verify as verify_windows
+        windows_runs = verify_windows(GitHub(), root, dist, args.tag, args.sha,
+            'codex/release-candidate-' + args.tag + '-' + args.sha)
+        print('Verified exact-source Windows runs: ' + json.dumps(windows_runs, sort_keys=True), file=sys.stderr)
+    elif args.channel != 'web':
         selected = consumer_names.get(args.channel)
         if not selected or not any(j.get('name') == selected and j.get('status') == 'success' for j in jobs):
             raise ValueError('selected consumer proof missing')

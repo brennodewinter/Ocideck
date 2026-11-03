@@ -1054,6 +1054,31 @@ same version with `scripts/release_auto.sh --resume vX.Y.Z`.
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
 
+The independent `release-channel.yml` route accepts `windows` and builds only
+Windows. It reuses the GitHub candidate build (including installer install,
+launch and uninstall checks) and the complete Windows test suite. Linux builds
+and Linux quality jobs do not block this channel; exact-source static and scan
+checks remain mandatory. `GH_DISPATCH_TOKEN` must be available to the Forge
+worker and publishing host. Signing keys stay on the publishing host.
+
+Before dispatch or acceptance, the frozen source's two GitHub workflow files
+must match the trusted controller definitions byte for byte. Older frozen
+sources with different definitions are refused. ZIP, installer, source SBOMs and
+the cohort record are verified together; the cohort is part of the signed
+Windows channel manifest. This route does not establish Windows execution proof
+until the real GitHub jobs have completed successfully.
+
+Each new operation supplies a unique `operation_id`. The worker records dispatch
+intent before sending it and uploads `windows-operation-<operation_id>` even on
+failure when cleanup can execute. `tool/release_windows_candidate.py status`
+and `cancel --wait-terminal` reconcile only runs with that marker and the exact
+source, ref and workflow. An empty list or missing final journal is an unknown
+outcome, not proof that cancellation finished. Stop the Forge worker before
+using its closed journal as evidence that it cannot dispatch more runs. Host
+loss or SIGKILL may require explicit reconciliation; no automatic redispatch is
+performed after a lost response. Previously running work owned by another
+operation is never cancelled by this operation.
+
 The Windows cohort travels back as an authenticated **GitHub Actions build
 artifact** from the exact successful Windows run. The mirror also keeps a draft
 GitHub release, but only the complete, canonical Forge release is published.

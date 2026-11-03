@@ -119,7 +119,9 @@ def asset_listing(transport, release_id):
 def public_proof(transport, assets, tag, sha, key):
     version = tag[1:]
     shared = {f'ocideck-{version}.cdx.json', f'ocideck-{version}.spdx.json'}
-    all_names = {template.format(v=version) for names in CHANNELS.values() for template in names} | shared
+    # Legacy all-platform releases predate the independently published Windows cohort.
+    all_names = ({template.format(v=version) for names in CHANNELS.values() for template in names}
+                 - {f'ocideck-windows-cohort-{version}.json'}) | shared
 
     def read(name):
         if name not in assets:

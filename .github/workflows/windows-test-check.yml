@@ -36,6 +36,13 @@ on:
     # plaats van verspreid.
     - cron: "47 6 * * 1"
   workflow_dispatch:
+    inputs:
+      operation_id:
+        description: Ownership marker for cancellation and recovery
+        required: false
+        type: string
+
+run-name: Windows test suite ${{ github.ref_name }}${{ inputs.operation_id && format(' [operation:{0}]', inputs.operation_id) || '' }}
 
 # Deze workflow leest alleen; hij publiceert niets.
 permissions:
