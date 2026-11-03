@@ -165,15 +165,24 @@ class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
     server_version = "OciDeckFetchProxy/1"
 
-    def log_message(self, fmt, *args):  # geen URL's in de log (privacy)
-        # BaseHTTPRequestHandler includes the complete request target in
-        # ``args``. The target is user data and can contain a bearer query
-        # token, so keep only the method in the access log.
-        safe_args = list(args)
-        if len(safe_args) >= 3:
-            request_line = str(safe_args[2])
-            safe_args[2] = request_line.split(" ", 1)[0] or "?"
-        sys.stderr.write("fetch-proxy: %s\n" % (fmt % tuple(safe_args)))
+    # Geen URL's in het log (privacy). De doel-URL is gebruikersdata en kan een
+    # token in de query dragen. BaseHTTPRequestHandler schrijft de hele
+    # verzoekregel weg — in `log_request` als eerste argument, en bij een
+    # onleesbare regel ook in het bericht van `send_error` → `log_error`. Daarom
+    # bepalen deze twee zelf wat er naar buiten gaat, in plaats van achteraf in
+    # `log_message` te raden welk argument de regel is. Dat raden zat ernaast:
+    # het verving de grootte en liet de URL staan (#2754).
+    def log_request(self, code="-", size="-"):
+        code = getattr(code, "value", code)
+        sys.stderr.write("fetch-proxy: %s %s %s\n" % (self.command or "-", code, size))
+
+    def log_error(self, fmt, *args):
+        # send_error meldt "code %d, message %s": de code volgt al via
+        # log_request, en het bericht kan de verzoekregel bevatten. Van elke
+        # andere fout alleen de vaste tekst vóór het eerste argument.
+        if fmt.startswith("code %d"):
+            return
+        sys.stderr.write("fetch-proxy: fout: %s\n" % fmt.split("%", 1)[0].strip(" :(,"))
 
     def _refuse(self, code: int, reason: str):
         body = reason.encode("utf-8")

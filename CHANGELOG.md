@@ -13,6 +13,10 @@ All notable changes to OciDeck are documented in this file.
 - **Presentaties openen op het web.** De privacyscan vraagt in de browser
   geen desktop-isolate meer op. Daardoor openen de proefpresentatielink en
   URL-import weer zonder de misleidende CORS-foutmelding.
+- **Fetch-hulppunt logt geen URL's meer.** Het toegangslog van
+  `server/fetch-proxy/` bevatte de volledige deck-URL, ook een token in de
+  query, terwijl HOSTING.md beloofde dat die erbuiten bleef. Elke regel noemt nu
+  alleen methode, status en grootte (#2754).
 
 ### Added
 
