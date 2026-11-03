@@ -3515,6 +3515,13 @@ gespiegeld) scherm. Opmerkingen:
   andere dia gaan wist het.
 - Op macOS is het "externe" scherm het scherm zonder de menubalk.
 
+### Tekstalternatief voor een diagram
+
+Voor een schermlezer is een Mermaid-diagram verder een zwijgend plaatje. Geef
+het een tekstalternatief mee in de bron: `accTitle:` voor de korte naam en
+`accDescr:` voor de beschrijving. Zonder die regels valt de app terug op het
+diagramtype en de eerste inhoudsregels.
+
 ### Een groot diagram inzoomen
 
 Een groot Mermaid-diagram (een gedetailleerde stroomdiagram, een brede Gantt) verschijnt op een
