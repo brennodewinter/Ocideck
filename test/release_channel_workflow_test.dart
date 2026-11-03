@@ -30,7 +30,12 @@ void main() {
         );
       }
       expect(workflow, contains('timeout 20 xvfb-run'));
-      expect(workflow, contains('flatpak --user install'));
+      expect(
+        workflow,
+        contains(
+          'flatpak --system install -y --noninteractive --no-deps --no-related --bundle',
+        ),
+      );
       expect(workflow, isNot(contains('make package-linux')));
       expect(workflow, contains("github.ref == 'refs/heads/main'"));
       expect(workflow, contains('retention-days: 90'));

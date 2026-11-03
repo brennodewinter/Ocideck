@@ -90,7 +90,7 @@ class WindowsCandidateTest(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.dist = Path(self.temp.name) / 'dist'
+        self.dist = Path(self.temp.name).resolve() / 'dist'
         self.api = FakeGitHub(ROOT)
 
     def fetch(self):
@@ -106,6 +106,91 @@ class WindowsCandidateTest(unittest.TestCase):
         self.assertEqual(5, len(list(self.dist.iterdir())))
         self.assertEqual(self.api.files['sbom/ocideck.cdx.json'], (self.dist / 'ocideck-0.7.7.cdx.json').read_bytes())
         self.assertEqual(result, windows.verify(self.api, ROOT, self.dist, TAG, SHA, REF))
+
+    def assert_storage_pending_and_collectable(self, result):
+        self.assertEqual('pending', result['status'])
+        self.assertFalse(self.dist.exists())
+        saved = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+        self.assertFalse(saved['closed'])
+        self.assertEqual('pending', saved['outcome'])
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, saved['selected_runs'])
+        self.assertFalse(any(path.endswith('/cancel') for path, _ in self.api.calls))
+        self.api.calls.clear()
+        result = windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test',
+            Path(self.temp.name) / 'operation.json', collect=True)
+        self.assertEqual(saved['selected_runs'], result)
+        self.assertFalse(any(payload is not None for _, payload in self.api.calls))
+        self.assertEqual(result, windows.verify(self.api, ROOT, self.dist, TAG, SHA, REF))
+
+    def test_space_admission_stops_before_download_and_preserves_selected_ids(self):
+        import release_channel_capabilities as capabilities
+        with patch.object(capabilities.shutil, 'disk_usage', return_value=SimpleNamespace(free=0)), \
+             patch.object(self.api, 'download', wraps=self.api.download) as download:
+            result = self.fetch()
+        download.assert_not_called()
+        self.assert_storage_pending_and_collectable(result)
+
+    def test_output_space_admission_stops_before_copy_and_preserves_selected_ids(self):
+        import release_channel_capabilities as capabilities
+        original = capabilities.require_space
+        def admission(path, size):
+            if Path(path) == self.dist:
+                raise ValueError('insufficient staging space: injected destination')
+            return original(path, size)
+        with patch.object(capabilities, 'require_space', side_effect=admission), \
+             patch.object(windows.shutil, 'copyfile') as copy:
+            result = self.fetch()
+        copy.assert_not_called()
+        self.assert_storage_pending_and_collectable(result)
+
+    def test_partial_copy_disk_full_and_interruption_leave_no_dist_and_can_collect(self):
+        import errno
+        for failure in (OSError(errno.ENOSPC, 'injected disk full'), KeyboardInterrupt()):
+            with self.subTest(failure=type(failure).__name__):
+                def interrupted(source, target):
+                    Path(target).write_bytes(b'partial')
+                    raise failure
+                with patch.object(windows.shutil, 'copyfile', side_effect=interrupted):
+                    result = self.fetch()
+                self.assertFalse(list(self.dist.parent.glob('.windows-output-*')))
+                self.assert_storage_pending_and_collectable(result)
+                import shutil
+                shutil.rmtree(self.dist)
+                (Path(self.temp.name) / 'operation.json').unlink()
+                self.api = FakeGitHub(ROOT)
+
+    def test_output_collision_and_concurrent_writer_fail_closed(self):
+        from release_journal import locked
+        with locked(self.dist):
+            with self.assertRaisesRegex(ValueError, 'already locked'):
+                self.fetch()
+        self.assertFalse(self.dist.exists())
+        saved = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+        self.assertEqual('failed', saved['outcome'])
+        self.assertTrue(saved['closed'])
+        self.assertFalse(list(self.dist.parent.glob('.windows-output-*')))
+
+    def test_integrity_failure_still_closes_operation_without_publishing_dist(self):
+        self.api.payloads['ocideck-windows-x64-0.7.7.zip'] = b'corrupt archive'
+        with self.assertRaisesRegex(ValueError, 'cohort bytes differ'):
+            self.fetch()
+        saved = json.loads((Path(self.temp.name) / 'operation.json').read_text())
+        self.assertTrue(saved['closed'])
+        self.assertEqual('failed', saved['outcome'])
+        self.assertFalse(self.dist.exists())
+
+    def test_existing_dist_and_dangling_symlink_remain_untouched(self):
+        self.dist.mkdir()
+        sentinel = self.dist / 'owner-file'
+        sentinel.write_bytes(b'preserve')
+        with self.assertRaisesRegex(ValueError, 'dist must not exist'):
+            self.fetch()
+        self.assertEqual(b'preserve', sentinel.read_bytes())
+        sentinel.unlink(); self.dist.rmdir()
+        self.dist.symlink_to(self.dist.parent / 'absent')
+        with self.assertRaisesRegex(ValueError, 'dist must not exist'):
+            self.fetch()
+        self.assertTrue(self.dist.is_symlink())
 
     def test_pending_newer_suite_is_not_replaced_by_old_success(self):
         self.fetch()

@@ -2,6 +2,7 @@
 """Reuse the existing Windows candidate build and suite on an immutable ref."""
 import argparse
 import base64
+import errno
 import hashlib
 import json
 import math
@@ -26,6 +27,20 @@ WORKFLOWS = ('windows-test-check.yml', 'release.yml')
 MAX_ARCHIVE = 4 * 1024 * 1024 * 1024
 POLL_SECONDS = 20 * 60
 COLLECT_SECONDS = 30 * 60
+
+
+class CollectionStoragePending(Exception):
+    """Known upstream IDs remain reusable after a local storage interruption."""
+
+
+def collection_space(path, size):
+    from release_channel_capabilities import require_space
+    try:
+        require_space(path, size)
+    except ValueError as error:
+        if not str(error).startswith('insufficient staging space:'):
+            raise
+        raise CollectionStoragePending(str(error)) from error
 
 
 class GitHub:
@@ -309,7 +324,7 @@ def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, c
     except BaseException:
         del api.deadline
         raise
-    if dist.exists():
+    if dist.exists() or dist.is_symlink():
         raise ValueError('Windows candidate dist must not exist')
     state = state.absolute()
     wanted = {'schema': 1, 'operation_id': operation_id, 'tag': tag, 'sha': sha, 'ref': ref, 'dispatch_intents': [], 'closed': False, 'forge_run_id': forge_run_id, 'controller_sha': controller_sha, 'selected_runs': {}}
@@ -342,7 +357,7 @@ def fetch(api, root, dist, tag, sha, ref, operation_id, state, forge_run_id=0, c
             saved['outcome'] = 'completed' if saved['closed'] else 'pending'
             atomic_write(state, saved)
             return result if result is not None else {'status': 'pending', 'selected_runs': saved['selected_runs']}
-        except (TimeoutError, subprocess.TimeoutExpired):
+        except (TimeoutError, subprocess.TimeoutExpired, CollectionStoragePending):
             saved.update(closed=False, outcome='pending')
             atomic_write(state, saved)
             return {'status': 'pending', 'selected_runs': saved['selected_runs']}
@@ -434,26 +449,45 @@ def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sbo
         raise ValueError('missing or ambiguous Windows cohort artifact')
     version = tag[1:]
     names = {f'ocideck-windows-x64-{version}.zip', f'ocideck-windows-x64-setup-{version}.exe', f'ocideck-windows-cohort-{version}.json'}
-    with tempfile.TemporaryDirectory(prefix='windows-cohort-') as directory:
-        staging = Path(directory)
-        archive = staging / 'artifact.zip'
-        api.download(artifacts[0]['id'], archive)
-        with zipfile.ZipFile(archive) as zipped:
-            entries = zipped.infolist()
-            if (len(entries) != len(names) or {entry.filename for entry in entries} != names
-                    or sum(entry.file_size for entry in entries) > MAX_ARCHIVE
-                    or any(entry.is_dir() or stat.S_IFMT(entry.external_attr >> 16) not in (0, stat.S_IFREG) for entry in entries)):
-                raise ValueError('unsafe Windows artifact members')
-            for entry in entries:
-                with zipped.open(entry) as source, (staging / entry.filename).open('xb') as output:
-                    shutil.copyfileobj(source, output)
-        verify_cohort(staging, tag, sha, runs['release.yml']['id'])
-        dist.mkdir(parents=True)
-        for name in names:
-            shutil.copyfile(staging / name, dist / name)
-        for kind, content in sboms.items():
-            (dist / f'ocideck-{version}.{kind}.json').write_bytes(content)
-    verify_cohort(dist, tag, sha, runs['release.yml']['id'])
+    try:
+        with tempfile.TemporaryDirectory(prefix='windows-cohort-') as directory:
+            staging = Path(directory).resolve()
+            archive = staging / 'artifact.zip'
+            collection_space(staging, MAX_ARCHIVE)
+            api.download(artifacts[0]['id'], archive)
+            with zipfile.ZipFile(archive) as zipped:
+                entries = zipped.infolist()
+                size = sum(entry.file_size for entry in entries)
+                if (len(entries) != len(names) or {entry.filename for entry in entries} != names
+                        or size > MAX_ARCHIVE
+                        or any(entry.is_dir() or stat.S_IFMT(entry.external_attr >> 16) not in (0, stat.S_IFREG) for entry in entries)):
+                    raise ValueError('unsafe Windows artifact members')
+                collection_space(staging, size)
+                for entry in entries:
+                    with zipped.open(entry) as source, (staging / entry.filename).open('xb') as output:
+                        shutil.copyfileobj(source, output)
+            verify_cohort(staging, tag, sha, runs['release.yml']['id'])
+            collection_space(dist, size + sum(len(content) for content in sboms.values()))
+            dist.parent.mkdir(parents=True, exist_ok=True)
+            with tempfile.TemporaryDirectory(prefix='.windows-output-', dir=dist.parent) as directory:
+                output = Path(directory) / 'dist'
+                output.mkdir()
+                for name in names:
+                    shutil.copyfile(staging / name, output / name)
+                for kind, content in sboms.items():
+                    (output / f'ocideck-{version}.{kind}.json').write_bytes(content)
+                verify_cohort(output, tag, sha, runs['release.yml']['id'])
+                # Cooperating writers use the same lease; never replace an existing output.
+                with locked(dist):
+                    if dist.exists() or dist.is_symlink():
+                        raise ValueError('Windows candidate dist must not exist')
+                    output.rename(dist)
+    except KeyboardInterrupt as error:
+        raise CollectionStoragePending('Windows collection interrupted') from error
+    except OSError as error:
+        if error.errno not in (errno.ENOSPC, errno.EDQUOT, errno.EINTR):
+            raise
+        raise CollectionStoragePending('Windows collection storage unavailable') from error
     return saved['selected_runs']
 
 
