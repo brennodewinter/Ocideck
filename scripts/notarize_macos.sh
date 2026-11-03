@@ -34,7 +34,8 @@ set -Eeuo pipefail
 #   scripts/notarize_macos.sh              # schoon bouwen, tekenen, notariseren, staplen, verpakken
 #   scripts/notarize_macos.sh --skip-build # de bestaande build/-uitvoer gebruiken (geen herbouw)
 #   scripts/notarize_macos.sh --no-package # stop na staplen (CI verpakt zelf onder de release-naam)
-# De twee vlaggen zijn combineerbaar en volgordeonafhankelijk.
+#   scripts/notarize_macos.sh --resume-notary # bewaarde inzending volgen, niet herbouwen/tekenen/inzenden
+# --resume-notary kan met --no-package; de opgeslagen app en inzendzip zijn vereist.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
@@ -55,14 +56,21 @@ ZIP="$DIST_DIR/OciDeck.zip"
 SKIP_BUILD=0
 NO_PACKAGE=0
 PREFLIGHT=0
+RESUME_NOTARY=0
 for arg in "$@"; do
   case "$arg" in
     --skip-build) SKIP_BUILD=1 ;;
     --no-package) NO_PACKAGE=1 ;;
     --preflight) PREFLIGHT=1 ;;
+    --resume-notary) RESUME_NOTARY=1 ;;
     *) echo "Onbekende optie: $arg" >&2; exit 2 ;;
   esac
 done
+
+if [[ $RESUME_NOTARY -eq 1 && ( $SKIP_BUILD -eq 1 || $PREFLIGHT -eq 1 ) ]]; then
+  echo "Combineer --resume-notary alleen met --no-package." >&2
+  exit 2
+fi
 
 section() { printf '\n== %s ==\n' "$1"; }
 require_cmd() {
@@ -103,14 +111,18 @@ notary_failure_advice() { # notary_failure_advice NOTARY_OUTPUT (stderr)
   echo "Dit script tekent een macOS-app en draait dus op macOS." >&2
   exit 1
 }
-require_cmd flutter
+require_cmd python3
+require_cmd git
+if [[ $RESUME_NOTARY -eq 0 ]]; then require_cmd flutter; fi
 require_cmd xcrun
 require_cmd codesign
 require_cmd ditto
 require_cmd security
 # Nodig voor het normaliseren van het PDFium-framework, verderop.
-require_cmd otool
-require_cmd install_name_tool
+if [[ $RESUME_NOTARY -eq 0 ]]; then
+  require_cmd otool
+  require_cmd install_name_tool
+fi
 
 # Vroeg en duidelijk stoppen als de identiteit ontbreekt. Anders faalt codesign
 # pas halverwege met een cryptische melding, na een build van minuten.
@@ -143,6 +155,22 @@ if [[ $PREFLIGHT -eq 1 ]]; then
   echo "Pre-flight OK: identiteit '$IDENTITY' aanwezig, notary-profiel '$PROFILE' geldig."
   exit 0
 fi
+
+# Git-werkboommetadata blijft bestaan bij flutter clean; de lease dekt ook bouwen/tekenen.
+NOTARY_DIR="$(git rev-parse --git-path ocideck-notary)"
+STATE="$NOTARY_DIR/$(git rev-parse HEAD).submission.json"
+mkdir -p "$NOTARY_DIR" "$(dirname "$STATE")"
+if ! mkdir "$NOTARY_DIR/script.lock" 2>/dev/null; then
+  echo "Een notarisatierun is actief of onderbroken; controleer script.lock voordat je hem handmatig opruimt." >&2
+  exit 1
+fi
+trap 'rmdir "$NOTARY_DIR/script.lock" 2>/dev/null || true' EXIT
+if [[ $RESUME_NOTARY -eq 0 ]]; then
+  python3 tool/notary_submission.py guard --state-dir "$NOTARY_DIR"
+  if [[ -e "$STATE" || -L "$STATE" ]]; then
+    echo "Voor deze bron bestaat een inzending; gebruik --resume-notary." >&2
+    exit 1
+  fi
 
 if [[ $SKIP_BUILD -eq 0 ]]; then
   # Schoon bouwen. Incrementeel bouwen breekt stil het zegel van App.framework,
@@ -412,26 +440,21 @@ codesign --force --options runtime --timestamp \
 section "Handtekening lokaal verifiëren"
 codesign --verify --deep --strict --verbose=2 "$APP"
 
-# Zippen en notariseren. --wait blokkeert tot Apple klaar is; bij afkeuring
-# halen we het logboek op zodat de reden zichtbaar is en niet in de melding
-# "Invalid" verdwijnt.
-section "Notariseren bij Apple (wachten op uitslag)"
+# Bewaar de oorspronkelijke inzendzip; expliciet hervatten bouwt/tekent/zipt niets opnieuw.
+section "Inzendzip vastleggen"
 mkdir -p "$DIST_DIR"
-rm -f "$ZIP"
-ditto -c -k --keepParent "$APP" "$ZIP"
-OUT="$(xcrun notarytool submit "$ZIP" --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" --wait 2>&1)" || true
-echo "$OUT"
-if ! grep -q "status: Accepted" <<<"$OUT"; then
-  SUBID="$(awk -F': ' '/^  id:/{print $2; exit}' <<<"$OUT")"
-  echo "Notarisatie niet geaccepteerd." >&2
-  [[ -n "$SUBID" ]] && xcrun notarytool log "$SUBID" --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" >&2 || true
+if [[ -e "$ZIP" || -L "$ZIP" ]]; then
+  echo "Inzendzip bestaat al; bewaar hem en hervat de bijbehorende inzending." >&2
   exit 1
 fi
+ditto -c -k --keepParent "$APP" "$ZIP"
+fi
 
-# Ticket in de app stapelen, zodat ook een offline Mac de notarisatie ziet.
-section "Ticket stapelen en eindcontrole"
-xcrun stapler staple "$APP"
-xcrun stapler validate "$APP"
+section "Notarisatie volgen en ticket stapelen"
+NOTARY_MODE=submit
+[[ $RESUME_NOTARY -eq 0 ]] || NOTARY_MODE=resume
+python3 tool/notary_submission.py "$NOTARY_MODE" --state "$STATE" --archive "$ZIP" --app "$APP" \
+  --profile "$PROFILE" --keychain "$KEYCHAIN" --identity "$IDENTITY"
 spctl -a -t exec -vvv "$APP"
 
 # ---------------------------------------------------------------------------
@@ -544,8 +567,7 @@ opstartproef() {
 
 opstartproef
 
-# De notarisatie-zip ging vóór het staplen de deur uit; die hebben we niet meer nodig.
-rm -f "$ZIP"
+# De oorspronkelijke inzendzip blijft liggen voor exact hervatten en diagnose.
 
 # In CI verpakt de workflow zelf onder de release-artefactnaam; dan stoppen we
 # hier, mét een gestapelde app op schijf.
@@ -560,9 +582,8 @@ fi
 section "Verspreidbaar pakket schrijven"
 VERSION="$(awk -F'[ +]' '/^version:/{print $2; exit}' pubspec.yaml)"
 DIST_ZIP="$DIST_DIR/OciDeck-${VERSION}-macos.zip"
-rm -f "$DIST_ZIP"
-ditto -c -k --keepParent "$APP" "$DIST_ZIP"
-( cd "$DIST_DIR" && shasum -a 256 "$(basename "$DIST_ZIP")" > SHA256SUMS )
+python3 tool/notary_submission.py package --state "$STATE" --archive "$ZIP" --app "$APP" \
+  --profile "$PROFILE" --keychain "$KEYCHAIN" --identity "$IDENTITY" --package "$DIST_ZIP"
 
 section "Klaar"
 echo "Genotariseerde app  : $APP"
