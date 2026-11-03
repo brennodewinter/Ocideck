@@ -12,6 +12,11 @@ on:
         required: false
         default: all
         type: string
+      operation_id:
+        description: Durable caller nonce, empty for legacy invocation
+        required: false
+        default: ""
+        type: string
 concurrency:
   group: website-downloads-source
   cancel-in-progress: false
@@ -28,10 +33,12 @@ jobs:
         env:
           RELEASE_TAG: ${{ inputs.tag }}
           CHANNEL: ${{ inputs.channel }}
+          OPERATION_ID: ${{ inputs.operation_id }}
         shell: bash
         run: |
           set -euo pipefail
           [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || exit 2
+          [[ -z "$OPERATION_ID" || "$OPERATION_ID" =~ ^[A-Za-z0-9_-]{1,100}$ ]] || exit 2
           case "$CHANNEL" in all|macos|windows|web|linux-tar|linux-debian12|linux-deb|linux-rpm|linux-appimage|linux-flatpak) ;; *) exit 2;; esac
       - name: Install pinned website tools
         env:
@@ -47,6 +54,7 @@ jobs:
         env:
           RELEASE_TAG: ${{ inputs.tag }}
           CHANNEL: ${{ inputs.channel }}
+          OPERATION_ID: ${{ inputs.operation_id }}
           WEBSITE_KEY: ${{ secrets.WEBSITE_REPO_KEY_V1 }}
           WEBSITE_KNOWN_HOSTS: ${{ secrets.WEBSITE_REPO_KNOWN_HOSTS_V1 }}
         shell: bash
@@ -56,6 +64,9 @@ jobs:
           test -n "$WEBSITE_KEY"
           test -n "$WEBSITE_KNOWN_HOSTS"
           umask 077
+          RECEIPT_DIR="$PWD/website-public-receipt"
+          mkdir -p "$RECEIPT_DIR"
+          export RECEIPT_DIR
           WORK="$(mktemp -d)"
           trap 'rm -rf -- "$WORK"' EXIT
           chmod 700 "$WORK"
@@ -96,10 +107,29 @@ jobs:
           test "$(git rev-parse origin/main)" = "$BASE"
           if git diff --quiet -- hugo.toml; then
             echo 'Website source already matches; live publication still needs verification.'
-            exit 0
-          fi
+          else
           git config user.name 'OciDeck release'
           git config user.email release@librekat.nl
           git add hugo.toml
           git commit -m "OciDeck $RELEASE_TAG: $CHANNEL downloads"
           git push origin HEAD:refs/heads/main
+          fi
+          export WEBSITE_COMMIT="$(git rev-parse HEAD)"
+          python3 - <<'PYRECEIPT'
+          import hashlib, json, os, pathlib
+          pages = {}
+          for language in ('nl', 'en', 'de', 'es', 'fr', 'it', 'pl', 'pt', 'uk'):
+              path = pathlib.Path('public') / ('' if language == 'nl' else language) / 'ocideck/index.html'
+              pages[language] = hashlib.sha256(path.read_bytes()).hexdigest()
+          value = dict(tag=os.environ['RELEASE_TAG'], channel=os.environ['CHANNEL'],
+                       operation_id=os.environ['OPERATION_ID'], commit=os.environ['WEBSITE_COMMIT'], pages=pages)
+          (pathlib.Path(os.environ['RECEIPT_DIR']) / 'website-public.json').write_text(json.dumps(value, sort_keys=True) + '\n')
+          PYRECEIPT
+      - name: Preserve exact website source and expected public pages
+        if: ${{ inputs.operation_id != '' }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: website-public-${{ inputs.operation_id }}
+          path: website-public-receipt/website-public.json
+          if-no-files-found: error
+          retention-days: 90

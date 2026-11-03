@@ -381,6 +381,8 @@ def status(args, api):
                 result['github'] = {'status': 'unknown', 'reason': str(error)}
         else:
             result['github'] = {'status': 'unknown', 'reason': 'Windows helper unavailable'}
+    import release_channel_surfaces
+    result['public_surfaces'] = release_channel_surfaces.public_status(args)
     return result
 
 
@@ -500,7 +502,7 @@ def publish(args, api):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['plan', 'start', 'status', 'stop', 'hervat', 'publish'])
+    parser.add_argument('command', choices=['plan', 'start', 'status', 'stop', 'hervat', 'publish', 'public'])
     parser.add_argument('--state-dir', type=Path, required=True)
     for name in ('tag', 'sha', 'controller-sha', 'channel'):
         parser.add_argument('--' + name, required=True)
@@ -522,6 +524,9 @@ def main():
         if args.command == 'plan':
             args.operation_id = args.operation_id or 'planned'
             result = {'identity': identity(args), 'action': 'read-only plan; no operation reserved'}
+        elif args.command == 'public':
+            import release_channel_surfaces
+            result = release_channel_surfaces.public(args, Forgejo())
         elif args.command == 'publish':
             return publish(args, Forgejo())
         else:

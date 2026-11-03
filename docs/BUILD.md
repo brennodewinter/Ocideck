@@ -1599,3 +1599,27 @@ already signed manifest and checksum evidence. Build success is metadata only:
 neither asset bytes nor a public release are proved by a green build run.
 The CLI does not make signing keys available on a runner, so publication still
 requires a separate trusted signing step. Keep `--state-dir` on durable storage.
+
+
+### Publieke vervolgstappen per kanaal
+
+Na `release_channel_controller.py publish` bevestigt alleen de forge de immutable
+releasebytes. Het afzonderlijke commando `public` gebruikt dezelfde identiteit,
+`--run-id`, `--dist` en `--evidence`, verifieert die publieke bytes opnieuw en
+registreert elke toepasselijke publieke fase in het bestaande journaal.
+Website-updates hebben een eigen eenmalige operation-ID; een verloren antwoord
+leidt tot inspectie van die ID, nooit een tweede dispatch. Hervat `public` om de
+terminale bronupdate, exacte website-deploycommit en alle negen live pagina's te
+vergelijken. Een opgeslagen voltooiing in `status` heet uitdrukkelijk
+`recorded_completed_live_unverified`; alleen een nieuwe readback is live bewijs.
+
+Voor web wordt uitsluitend het getekende kanaalarchief gebruikt, begrensd en
+zonder links uitgepakt, intern gecontroleerd en met `deploy_web.sh --bundle-dir`
+geplaatst. Iedere live manifestfile wordt nagehasht (maximaal acht gelijktijdige
+verzoeken); na een onderbroken deploy wordt eerst live gereconcilieerd. Een
+ontbrekende of afwijkende livefile blokkeert hervatten zonder blinde herdeploy.
+Voor macOS moet ook de publieke Homebrew-verwijzing exact URL en SHA256 dragen.
+De tap-update moet eerst terminaal klaar zijn; een groene forge-upload alleen
+betekent geen volledige macOS-publicatie. Een verwijzingsrollback is een aparte,
+expliciete beheerhandeling met opnieuw geverifieerde oudere getekende bytes;
+deze controller beweert geen automatische rollback tussen publieke kanalen.
