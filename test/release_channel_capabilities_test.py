@@ -50,6 +50,18 @@ class CapabilitiesTest(TestCase):
         self.assertIsNone(subject.timing({})['queue_seconds'])
         self.assertEqual(subject.timing({'created': '2026-11-03T10:00:00Z', 'started': '2026-11-03T10:00:02Z'})['queue_seconds'], 2)
 
+    def test_phase_wall_time_preserves_original_start_and_unknown_wait(self):
+        events = [{'phase': 'build', 'state': 'started', 'at': '2026-11-03T10:00:00+00:00'},
+                  {'phase': 'build', 'state': 'failed', 'at': '2026-11-03T10:02:00+00:00'},
+                  {'phase': 'build', 'state': 'started', 'at': '2026-11-03T11:00:00+00:00'}]
+        value = subject.history_timing(events)
+        self.assertEqual(value['original_start'], events[0]['at'])
+        self.assertEqual(value['phases'][0]['wall_seconds'], 120)
+        self.assertEqual(value['phases'][0]['state'], 'failed')
+        self.assertIsNone(value['phases'][1]['wall_seconds'])
+        self.assertIsNone(value['manual_wait_seconds'])
+        self.assertIsNone(value['active_machine_seconds'])
+
     def test_space_and_symlink_rejected_before_writing(self):
         with tempfile.TemporaryDirectory() as directory:
             directory = str(Path(directory).resolve())

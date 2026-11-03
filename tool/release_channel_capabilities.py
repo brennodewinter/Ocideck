@@ -84,3 +84,22 @@ def first_failure(content):
         if ERROR.search(line):
             return {'line': number, 'message': line[:1000]}
     return None
+
+
+def history_timing(events):
+    """Report recorded phase wall time; never infer CPU time or manual wait."""
+    pending, phases = {}, []
+    for event in events:
+        phase = event['phase']
+        if event['state'] == 'started':
+            pending[phase] = event['at']
+        elif phase in pending:
+            start = pending.pop(phase)
+            phases.append({'phase': phase, 'state': event['state'], 'started': start,
+                           'stopped': event['at'], 'wall_seconds': elapsed(start, event['at'])})
+    phases.extend({'phase': phase, 'state': 'unfinished', 'started': start,
+                   'stopped': None, 'wall_seconds': None} for phase, start in pending.items())
+    return {'original_start': events[0]['at'] if events else None, 'phases': phases,
+            'active_machine_seconds': None, 'manual_wait_seconds': None,
+            'note': 'Phase wall time includes waiting; overlapping phases must not be added. '
+                    'Missing incident, repair or manual-wait evidence remains unknown.'}

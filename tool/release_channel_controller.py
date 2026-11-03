@@ -378,6 +378,7 @@ def status(args, api):
     if not journal.is_file() or journal.is_symlink():
         raise ValueError('saved journal missing')
     result['history'] = release_journal.read(journal)['events']
+    result['history_timing'] = capabilities.history_timing(result['history'])
     result['dispatch'] = 'unknown' if not result['runs'] else 'found'
     result['build_claim'] = claim_status(args, wanted)
     publication = next((event for event in reversed(result['history'])
