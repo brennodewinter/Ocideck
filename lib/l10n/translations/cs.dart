@@ -1612,6 +1612,9 @@ const _dutchSourceAddCs = <String, String>{
       'Pracujte živě na prezentaci na serveru WebDAV. Ve výchozím nastavení vypnuto. Úpravy cestují přes pracovní složku vedle decku na stejném serveru — bez šifrování ze strany OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Klíč API se posílá jen přes https nebo do tohoto zařízení — použijte https, nebo klíč nechte prázdný',
+  '{model} verwijderen': 'Smazat {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Model ({grootte}) zmizí z tohoto počítače. Chcete-li znovu přepisovat místně, stáhnete si ho znovu.',
   'Ga naar de brontabel': 'Přejít na zdrojovou tabulku',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tato tabulka je opis zdrojové tabulky "{bron}". Upravte zdroj a zvolte Obnovit, nebo odpojte zobrazení jako snímek.',

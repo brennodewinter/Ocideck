@@ -56,6 +56,10 @@ All notable changes to OciDeck are documented in this file.
   op te hogen. Banner en callpaneel werden daardoor continu opnieuw gebouwd.
   De teller loopt nu eens per seconde mee, de banner kijkt alleen naar de fase,
   en een nieuwe opname begint weer bij nul (#2760).
+- **Whisper-model verwijderen vraagt eerst.** Eén tik op het prullenbakje wiste
+  een geverifieerd model van tot 1,5 GB meteen. Nu vraagt een dialoog het
+  eerst, met de naam en de grootte erbij; Annuleren laat het model staan. De
+  knop noemt voor een schermlezer ook welk model hij verwijdert (#2759).
 - **Boomslides.** Een boom (zoals 5× Why) vult de dia met kaarten en pijlen
   in plaats van inspringende bullets die bovenaan blijven staan. Een keten
   daalt diagonaal af; een vertakte boom spreidt de kinderen. Op schijf blijft

@@ -1609,6 +1609,9 @@ const _dutchSourceAddLv = <String, String>{
       'Strādājiet tiešraidē pie prezentācijas WebDAV serverī. Pēc noklusējuma izslēgts. Labojumi ceļo caur darba mapi blakus dekam uz tā paša servera — bez OciDeck šifrēšanas.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'API atslēga tiek sūtīta tikai pa https vai uz šo pašu ierīci — izmanto https vai atstāj atslēgu tukšu',
+  '{model} verwijderen': 'Dzēst {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Modelis ({grootte}) tiek izdzēsts no šī datora. Lai atkal transkribētu lokāli, tas būs jālejupielādē vēlreiz.',
   'Ga naar de brontabel': 'Doties uz avota tabulu',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Šī tabula ir avota tabulas "{bron}" kopija. Rediģējiet avotu un izvēlieties Atsvaidzināt, vai atvienojiet skatu kā momentuzņēmumu.',

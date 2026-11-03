@@ -658,6 +658,9 @@ const _dutchSourceAddDe = {
       'Arbeite live an einer Präsentation auf einem WebDAV-Server zusammen. Standardmäßig aus. Bearbeitungen reisen über einen Arbeitsordner neben dem Deck auf demselben Server — ohne Verschlüsselung durch OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Ein API-Schlüssel wird nur über https oder an dieses Gerät selbst gesendet — verwende https oder lass den Schlüssel leer',
+  '{model} verwijderen': '{model} löschen',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Das Modell ({grootte}) wird von diesem Computer entfernt. Um wieder lokal zu transkribieren, lädst du es erneut herunter.',
   'Ga naar de brontabel': 'Zur Quelltabelle gehen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Diese Tabelle ist eine Abschrift der Quelltabelle "{bron}". Bearbeite die Quelle und wähle Aktualisieren, oder löse die Ansicht als Momentaufnahme ab.',

@@ -1626,6 +1626,9 @@ const _dutchSourceAddLa = <String, String>{
       'In praesentatione in servo WebDAV posita una vive labora. Explicite activate. Mutationes per folderium laboris iuxta fasciculum in eodem servo transeunt — sine encryptione ab OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Clavis API tantum per https vel ad hoc ipsum instrumentum mittitur — https adhibe vel clavem vacuam relinque',
+  '{model} verwijderen': '{model} dele',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Exemplar ({grootte}) ex hoc computatro removetur. Ut iterum loci transcribas, id rursus depromes.',
   'Ga naar de brontabel': 'Ad tabulam fontem vade',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Haec tabula exemplum tabulae fontis "{bron}" est. Fontem ede et Renovare elige, aut conspectum ut imaginem seiunge.',

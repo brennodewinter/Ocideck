@@ -62,7 +62,9 @@ downloadomvang — het nauwkeurige model vraagt ~2 GB vrij terwijl het
 draait. Modellen staan in de app-supportmap (IndexedDB op web, die de
 browser onder opslagdruk mag opruimen — dat rapporteert als afwezig,
 nooit als corruptie, en je downloadt opnieuw). De instellingenkaart
-verwijdert ze weer; er is geen andere verwijderroute te vinden.
+verwijdert ze weer, na een vraag — die noemt het model en zijn
+grootte, en *Annuleren* laat het staan; er is geen andere verwijderroute
+te vinden.
 
 **Heb je het bestand al?** Op desktop scant de instellingenkaart ook een
 paar bekende plekken — `~/Downloads`, een `~/whisper.cpp`-checkout, de

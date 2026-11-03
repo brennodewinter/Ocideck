@@ -1630,6 +1630,9 @@ const _dutchSourceAddBg = <String, String>{
       'Работете на живо върху презентация на WebDAV сървър. Изключено по подразбиране. Редакциите пътуват през работна папка до дека на същия сървър — без криптиране от OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'API ключът се изпраща само през https или към това устройство — използвайте https или оставете ключа празен',
+  '{model} verwijderen': 'Изтрий {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Моделът ({grootte}) се премахва от този компютър. За да транскрибирате отново локално, ще трябва да го изтеглите пак.',
   'Ga naar de brontabel': 'Към изходната таблица',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Тази таблица е копие на изходната таблица "{bron}". Редактирайте източника и изберете Обновяване, или откачете изгледа като моментна снимка.',

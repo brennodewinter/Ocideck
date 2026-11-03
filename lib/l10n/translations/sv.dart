@@ -1610,6 +1610,9 @@ const _dutchSourceAddSv = <String, String>{
       'Arbeta live på en presentation på en WebDAV-server. Avstängt som standard. Redigeringar reser via en arbetsmapp bredvid decket på samma server — utan kryptering från OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'En API-nyckel skickas bara över https eller till den här enheten — använd https eller lämna nyckeln tom',
+  '{model} verwijderen': 'Ta bort {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Modellen ({grootte}) tas bort från den här datorn. För att transkribera lokalt igen laddar du ner den på nytt.',
   'Ga naar de brontabel': 'Gå till källtabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Den här tabellen är en avskrift av källtabellen "{bron}". Redigera källan och välj Uppdatera, eller koppla loss vyn som en ögonblicksbild.',

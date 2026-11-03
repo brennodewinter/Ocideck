@@ -1614,6 +1614,9 @@ const _dutchSourceAddGsw = <String, String>{
       'Schaff live a ere Präsentation uf eme WebDAV-Server. Standardmässig us. Bearbeite gö über e Arbeitsordner näbem Deck uf em gliche Server — ohni Verschlüsselig dur OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'En API-Schlüssel gaht nume über https oder a das Gerät sälber — nimm https oder lah de Schlüssel läär',
+  '{model} verwijderen': '{model} lösche',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'S Modell ({grootte}) verschwindet vo dem Computer. Zum wieder lokal transkribiere, muesch es nomal abelade.',
   'Ga naar de brontabel': 'Zur Quelltabälle gaa',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Die Tabälle isch e Abschrift vo de Quelltabälle "{bron}". Bearbeit d Quell und wehl Verfrische, oder löös d Aasicht als Momentufnahm ab.',

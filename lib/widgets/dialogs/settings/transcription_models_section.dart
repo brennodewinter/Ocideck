@@ -231,14 +231,18 @@ class _ModelRow extends ConsumerWidget {
           // ruimte naast een drieregelige titel en faalt de tile-layout.
           Align(
             alignment: AlignmentDirectional.centerEnd,
-            child: _action(manager, installed),
+            child: _action(context, manager, installed),
           ),
         ],
       ),
     );
   }
 
-  Widget _action(TranscriptionModelManager manager, bool installed) {
+  Widget _action(
+    BuildContext context,
+    TranscriptionModelManager manager,
+    bool installed,
+  ) {
     if (status.downloading) {
       return IconButton(
         tooltip: l10n.d('Afbreken'),
@@ -250,10 +254,13 @@ class _ModelRow extends ConsumerWidget {
     // en het label tonen dat er iets staat te lopen.
     if (status.installing) return const SizedBox.shrink();
     if (installed) {
+      // De modelnaam in het label: drie rijen met elk "Verwijderen" zeggen
+      // een schermlezer niet wélk model.
+      final name = '${l10n.d('Whisper')} ${model.id}';
       return IconButton(
-        tooltip: l10n.d('Verwijderen'),
+        tooltip: l10n.d('{model} verwijderen').replaceAll('{model}', name),
         icon: const Icon(Icons.delete_outline, size: 18),
-        onPressed: () => manager.delete(model),
+        onPressed: () => _confirmDelete(context, manager, name),
       );
     }
     final candidate = status.externalCandidate;
@@ -303,6 +310,41 @@ class _ModelRow extends ConsumerWidget {
     ),
     ModelDownloadFailure.ioFailed => l10n.d('schrijffout op schijf'),
   };
+
+  /// Eerst vragen (#2759). Verwijderen gooit een geverifieerde download van
+  /// 141 MB tot 1,5 GB weg; één mis-tik op dit kleine knopje kostte een
+  /// nieuwe download, en op een netwerk met datalimiet of achter een
+  /// bedrijfsproxy lukt die niet altijd. Annuleren laat het model staan.
+  Future<void> _confirmDelete(
+    BuildContext context,
+    TranscriptionModelManager manager,
+    String name,
+  ) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.d('{model} verwijderen').replaceAll('{model}', name)),
+        content: Text(
+          l10n
+              .d(
+                'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.',
+              )
+              .replaceAll('{grootte}', _formatBytes(model.downloadBytes)),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.d('Annuleren')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.d('Verwijderen')),
+          ),
+        ],
+      ),
+    );
+    if (confirmed == true) await manager.delete(model);
+  }
 
   static String _formatBytes(int bytes) {
     if (bytes >= 1 << 30) {

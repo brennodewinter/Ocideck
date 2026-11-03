@@ -57,8 +57,9 @@ enough to present. Peak memory roughly tracks the download size — the
 accurate model asks for ~2 GB free while it runs. Models live in the
 app-support folder (IndexedDB on web, which the browser may evict under
 storage pressure — that reports as absent, never as corruption, and you
-download again). The settings card deletes them again; there is no other
-removal path to find.
+download again). The settings card deletes them again, after asking
+first — the dialog names the model and its size, and *Cancel* keeps it;
+there is no other removal path to find.
 
 **Already have the file?** On desktop the settings card also scans a few
 well-known locations — `~/Downloads`, a `~/whisper.cpp` checkout, the

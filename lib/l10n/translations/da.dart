@@ -1611,6 +1611,9 @@ const _dutchSourceAddDa = <String, String>{
       'Samarbejd live om en præsentation på en WebDAV-server. Slået fra som standard. Redigeringer rejser via en arbejdsmappe ved siden af decket på samme server — uden kryptering fra OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'En API-nøgle sendes kun over https eller til denne enhed selv — brug https, eller lad nøglen være tom',
+  '{model} verwijderen': 'Slet {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Modellen ({grootte}) fjernes fra denne computer. For at transskribere lokalt igen skal du hente den på ny.',
   'Ga naar de brontabel': 'Gå til kildetabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Denne tabel er en afskrift af kildetabellen "{bron}". Rediger kilden og vælg Opdater, eller kobl visningen fra som et øjebliksbillede.',

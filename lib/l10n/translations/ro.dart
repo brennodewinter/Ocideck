@@ -1627,6 +1627,9 @@ const _dutchSourceAddRo = <String, String>{
       'Lucrați live la o prezentare pe un server WebDAV. Dezactivat implicit. Modificările călătoresc printr-un dosar de lucru de lângă deck pe același server — fără criptare de către OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'O cheie API circulă doar prin https sau către acest dispozitiv — folosește https sau lasă cheia goală',
+  '{model} verwijderen': 'Șterge {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Modelul ({grootte}) dispare de pe acest computer. Pentru a transcrie din nou local, îl descarci din nou.',
   'Ga naar de brontabel': 'Mergi la tabelul sursă',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Acest tabel este o copie a tabelului sursă "{bron}". Editați sursa și alegeți Reîmprospătare, sau detașați vizualizarea ca instantaneu.',

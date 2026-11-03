@@ -1639,6 +1639,9 @@ const _dutchSourceAddPt = <String, String>{
       'Trabalhe ao vivo numa apresentação num servidor WebDAV. Desativado por predefinição. As edições viajam por uma pasta de trabalho junto ao deck no mesmo servidor — sem encriptação por parte do OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Uma chave de API só viaja por https ou para este próprio dispositivo — use https ou deixe a chave vazia',
+  '{model} verwijderen': 'Eliminar {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'O modelo ({grootte}) é removido deste computador. Para voltar a transcrever localmente, terá de o transferir de novo.',
   'Ga naar de brontabel': 'Ir para a tabela de origem',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Esta tabela é uma cópia da tabela de origem "{bron}". Edite a origem e escolha Atualizar, ou desvincule a vista como instantâneo.',

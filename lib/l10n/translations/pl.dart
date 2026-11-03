@@ -1623,6 +1623,9 @@ const _dutchSourceAddPl = <String, String>{
       'Pracuj na żywo nad prezentacją na serwerze WebDAV. Domyślnie wyłączone. Zmiany przechodzą przez folder roboczy obok decku na tym samym serwerze — bez szyfrowania przez OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Klucz API jest przesyłany tylko przez https lub do tego urządzenia — użyj https albo zostaw klucz pusty',
+  '{model} verwijderen': 'Usuń {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Model ({grootte}) zostanie usunięty z tego komputera. Aby znów transkrybować lokalnie, pobierzesz go ponownie.',
   'Ga naar de brontabel': 'Przejdź do tabeli źródłowej',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ta tabela jest kopią tabeli źródłowej "{bron}". Edytuj źródło i wybierz Odśwież, albo odłącz widok jako migawkę.',

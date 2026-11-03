@@ -1626,6 +1626,9 @@ const _dutchSourceAddUk = <String, String>{
       'Працюйте наживо над презентацією на сервері WebDAV. Вимкнено за замовчуванням. Зміни передаються через робочу папку поруч із деком на тому ж сервері — без шифрування з боку OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Ключ API передається лише через https або на цей пристрій — використайте https або залиште ключ порожнім',
+  '{model} verwijderen': 'Видалити {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Модель ({grootte}) буде видалено з цього комп\'ютера. Щоб знову транскрибувати локально, доведеться завантажити її ще раз.',
   'Ga naar de brontabel': 'Перейти до вихідної таблиці',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ця таблиця є копією вихідної таблиці "{bron}". Відредагуйте джерело й виберіть Оновити або від\'єднайте подання як знімок.',

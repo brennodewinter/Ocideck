@@ -1636,6 +1636,9 @@ const _dutchSourceAddEl = <String, String>{
       'Συνεργαστείτε ζωντανά σε μια παρουσίαση σε διακομιστή WebDAV. Απενεργοποιημένο από προεπιλογή. Οι αλλαγές ταξιδεύουν μέσω ενός φακέλου εργασίας δίπλα στο deck στον ίδιο διακομιστή — χωρίς κρυπτογράφηση από το OciDeck.',
   'Een API-sleutel gaat alleen over https of naar dit apparaat zelf — gebruik https of laat de sleutel leeg':
       'Ένα κλειδί API ταξιδεύει μόνο μέσω https ή προς αυτήν τη συσκευή — χρησιμοποιήστε https ή αφήστε το κλειδί κενό',
+  '{model} verwijderen': 'Διαγραφή {model}',
+  'Het model ({grootte}) verdwijnt van deze computer. Om weer lokaal te transcriberen, haal je het opnieuw binnen.':
+      'Το μοντέλο ({grootte}) αφαιρείται από αυτόν τον υπολογιστή. Για να κάνετε ξανά τοπική μεταγραφή, θα πρέπει να το κατεβάσετε ξανά.',
   'Ga naar de brontabel': 'Μετάβαση στον πίνακα προέλευσης',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Αυτός ο πίνακας είναι αντίγραφο του πίνακα προέλευσης "{bron}". Επεξεργαστείτε την προέλευση και επιλέξτε Ανανέωση, ή αποσυνδέστε την προβολή ως στιγμιότυπο.',
