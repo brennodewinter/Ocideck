@@ -1620,6 +1620,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} у цьому {veld}. Відкрийте повідомлення — фрагмент буде виділено в тексті.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Відкрийте повідомлення — фрагмент буде виділено в тексті.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Їхній рівень строгіший, ніж у презентації. Підвищте рівень презентації або знизьте рівень слайда.',
   'Niveau van de presentatie': 'Рівень презентації',

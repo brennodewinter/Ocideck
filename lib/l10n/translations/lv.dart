@@ -1603,6 +1603,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} šajā {veld}. Atveriet paziņojumu, tad fragments ir atlasīts tekstā.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Atveriet paziņojumu, tad fragments ir atlasīts tekstā.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'To līmenis ir stingrāks nekā prezentācijas līmenis. Paaugstiniet prezentācijas līmeni vai pazeminiet slaida līmeni.',
   'Niveau van de presentatie': 'Prezentācijas līmenis',

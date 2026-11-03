@@ -1605,6 +1605,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} di {veld} ini. Buka temuannya, maka bagian itu terseleksi dalam teks.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Buka temuannya, maka bagian itu terseleksi dalam teks.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Tingkat mereka lebih ketat daripada presentasi. Naikkan tingkat presentasi, atau turunkan tingkat slidenya.',
   'Niveau van de presentatie': 'Tingkat presentasi',

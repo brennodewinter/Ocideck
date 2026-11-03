@@ -1605,6 +1605,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} tässä {veld}. Avaa ilmoitus, niin kohta on valittuna tekstissä.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Avaa ilmoitus, niin kohta on valittuna tekstissä.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Niiden taso on tiukempi kuin esityksen. Nosta esityksen tasoa tai laske dian tasoa.',
   'Niveau van de presentatie': 'Esityksen taso',

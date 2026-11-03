@@ -652,6 +652,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} yn dizze {veld}. Iepenje de melding, dan stiet it stik selektearre yn de tekst.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Iepenje de melding, dan stiet it stik selektearre yn de tekst.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Har nivo is strjender dan dat fan de presintaasje. Set it nivo fan de presintaasje heger, of ferleech it nivo fan de dia.',
   'Niveau van de presentatie': 'Nivo fan de presintaasje',

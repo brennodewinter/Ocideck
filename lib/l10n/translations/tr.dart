@@ -2513,6 +2513,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      'Bu {veld} içinde {regel}. Bildirimi açın, parça metinde seçili olur.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Bildirimi açın, parça metinde seçili olur.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Bunların seviyesi sunumunkinden daha katı. Sunumun seviyesini yükseltin veya slaytın seviyesini düşürün.',
   'Niveau van de presentatie': 'Sunum seviyesi',

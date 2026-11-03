@@ -1624,6 +1624,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} в това {veld}. Отворете съобщението и парчето е избрано в текста.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Отворете съобщението и парчето е избрано в текста.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Тяхното ниво е по-строго от това на презентацията. Повишете нивото на презентацията или понижете нивото на слайда.',
   'Niveau van de presentatie': 'Ниво на презентацията',

@@ -1611,6 +1611,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} šiame {veld}. Atidarykite pranešimą — fragmentas bus pažymėtas tekste.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Atidarykite pranešimą — fragmentas bus pažymėtas tekste.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Jų lygis grieštesnis nei prezentacijos. Padidinkite prezentacijos lygį arba sumažinkite skaidrės lygį.',
   'Niveau van de presentatie': 'Prezentacijos lygis',

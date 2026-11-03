@@ -1620,6 +1620,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} in hoc {veld}. Nuntium aperi, tum pars in textu electa stat.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Nuntium aperi, tum pars in textu electa stat.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Niveus eorum severior est quam praesentationis. Tolle niveum praesentationis aut minue niveum imaginis.',
   'Niveau van de presentatie': 'Niveus praesentationis',

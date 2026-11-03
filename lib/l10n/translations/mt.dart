@@ -1623,6 +1623,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} f\'dan il-{veld}. Iftaħ ir-rapport u l-biċċa tkun magħżula fit-test.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Iftaħ ir-rapport u l-biċċa tkun magħżula fit-test.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Il-livell tagħhom huwa iktar strett minn dak tal-preżentazzjoni. Għola l-livell tal-preżentazzjoni, jew naqqas dak tal-islejd.',
   'Niveau van de presentatie': 'Livell tal-preżentazzjoni',

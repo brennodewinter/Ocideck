@@ -1604,6 +1604,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} i detta {veld}. Öppna meddelandet så är stycket markerat i texten.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Öppna meddelandet så är stycket markerat i texten.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Deras nivå är strängare än presentationens. Höj presentationens nivå, eller sänk bildens nivå.',
   'Niveau van de presentatie': 'Presentationens nivå',

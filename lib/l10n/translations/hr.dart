@@ -1609,6 +1609,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} u ovoj {veld}. Otvori obavijest i dio je označen u tekstu.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Otvori obavijest i dio je označen u tekstu.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Njihova razina strožija je od razine prezentacije. Povećaj razinu prezentacije ili smanji razinu slajda.',
   'Niveau van de presentatie': 'Razina prezentacije',

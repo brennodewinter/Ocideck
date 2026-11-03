@@ -1608,6 +1608,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} in däre {veld}. Mach d\'Mäldig uf, denn isch s\'Stück im Text markiert.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Mach d\'Mäldig uf, denn isch s\'Stück im Text markiert.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Ihres Niveau isch strenger als das vo de Präsentation. Setz s\'Niveau vo de Präsentation höcher, oder senk das vo de Foli.',
   'Niveau van de presentatie': 'Niveau vo de Präsentation',

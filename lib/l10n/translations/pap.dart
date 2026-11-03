@@ -651,6 +651,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} den e {veld} aki. Habri e rapòrt i e parti keda selesioná den e teksto.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Habri e rapòrt i e parti keda selesioná den e teksto.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Nan nivel ta mas estricto ku e di e presentashon. Sube e nivel di e presentashon, òf baha e di e slajt.',
   'Niveau van de presentatie': 'Nivel di e presentashon',

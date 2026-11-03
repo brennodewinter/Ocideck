@@ -1607,6 +1607,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} ebben a {veld}. Nyissa meg a jelzést, és a rész ki van jelölve a szövegben.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Nyissa meg a jelzést, és a rész ki van jelölve a szövegben.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Szintjük szigorúbb, mint a prezentációé. Emelje a prezentáció szintjét, vagy csökkentse a dia szintjét.',
   'Niveau van de presentatie': 'A prezentáció szintje',

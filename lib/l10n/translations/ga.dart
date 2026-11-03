@@ -1635,6 +1635,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} sa {veld} seo. Oscail an fógra agus tá an píosa roghnaithe sa téacs.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Oscail an fógra agus tá an píosa roghnaithe sa téacs.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Tá a leibhéal níos déine ná leibhéal na cur i láthair. Ardait leibhéal na cur i láthair, nó ísligh leibhéal an tsleamhnáin.',
   'Niveau van de presentatie': 'Leibhéal na cur i láthair',

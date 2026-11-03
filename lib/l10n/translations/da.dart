@@ -1605,6 +1605,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} i denne {veld}. Åbn meddelelsen, så er stykket markeret i teksten.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Åbn meddelelsen, så er stykket markeret i teksten.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Deres niveau er strengere end præsentationens. Hæv præsentationens niveau, eller sænk slideniveauet.',
   'Niveau van de presentatie': 'Præsentationens niveau',

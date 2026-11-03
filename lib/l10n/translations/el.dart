@@ -1630,6 +1630,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} σε αυτό το {veld}. Ανοίξτε την ειδοποίηση και το τμήμα επιλέγεται στο κείμενο.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Ανοίξτε την ειδοποίηση και το τμήμα επιλέγεται στο κείμενο.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Το επίπεδό τους είναι αυστηρότερο από αυτό της παρουσίασης. Ανεβάστε το επίπεδο της παρουσίασης ή κατεβάστε αυτό της διαφάνειας.',
   'Niveau van de presentatie': 'Επίπεδο της παρουσίασης',

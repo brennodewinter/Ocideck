@@ -1598,6 +1598,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} selles {veld}. Avage teavitus, siis on tekstis lõik valitud.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Avage teavitus, siis on tekstis lõik valitud.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Nende tase on rangem kui esitluse oma. Tõstke esitluse taset või langetage slaidi taset.',
   'Niveau van de presentatie': 'Esitluse tase',

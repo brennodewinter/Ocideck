@@ -1605,6 +1605,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} v tem {veld}. Odprite obvestilo in del je izbran v besedilu.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Odprite obvestilo in del je izbran v besedilu.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Njihova stopnja je strožja od stopnje predstavitve. Povečajte stopnjo predstavitve ali znižajte stopnjo slajda.',
   'Niveau van de presentatie': 'Stopnja predstavitve',

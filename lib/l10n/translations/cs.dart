@@ -1606,6 +1606,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} v tomto {veld}. Otevřete hlášení a část je označena v textu.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Otevřete hlášení a část je označena v textu.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Jejich úroveň je přísnější než úroveň prezentace. Zvyšte úroveň prezentace, nebo snižte úroveň snímku.',
   'Niveau van de presentatie': 'Úroveň prezentace',

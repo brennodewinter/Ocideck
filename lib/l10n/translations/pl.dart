@@ -1617,6 +1617,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} w tym {veld}. Otwórz zgłoszenie, a fragment będzie zaznaczony w tekście.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Otwórz zgłoszenie, a fragment będzie zaznaczony w tekście.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Ich poziom jest surowszy niż poziom prezentacji. Podnieś poziom prezentacji lub obniż poziom slajdu.',
   'Niveau van de presentatie': 'Poziom prezentacji',

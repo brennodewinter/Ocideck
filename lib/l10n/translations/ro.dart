@@ -1621,6 +1621,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} în acest {veld}. Deschideți notificarea și fragmentul este selectat în text.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Deschideți notificarea și fragmentul este selectat în text.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Nivelul lor este mai strict decât cel al prezentării. Ridicați nivelul prezentării sau coborâți nivelul diapozitivului.',
   'Niveau van de presentatie': 'Nivelul prezentării',

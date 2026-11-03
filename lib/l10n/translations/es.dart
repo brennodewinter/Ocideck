@@ -649,6 +649,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} en este {veld}. Abre el aviso y el fragmento queda seleccionado en el texto.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Abre el aviso y el fragmento queda seleccionado en el texto.',
   'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
       'Su nivel es más estricto que el de la presentación. Sube el nivel de la presentación o baja el de la diapositiva.',
   'Niveau van de presentatie': 'Nivel de la presentación',
