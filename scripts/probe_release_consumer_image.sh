@@ -17,18 +17,22 @@ trap 'rm -rf -- "$WORK"' EXIT
 python3 - "$ARTIFACT" "$EXPECTED_SHA" "$WORK/artifact" "$PROFILE" "$SBOM" "$SBOM_SHA" <<'PY'
 import hashlib,pathlib,shutil,sys
 source,expected,target,profile,sbom,sbom_hash=sys.argv[1:]
+def digest(path):
+    value=hashlib.sha256()
+    with open(path,'rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024),b''):
+            value.update(block)
+    return value.hexdigest()
 def copy_verified(source, expected, target):
     path=pathlib.Path(source)
     if path.is_symlink() or not path.is_file():
         raise SystemExit('artifact is not regular')
-    with path.open('rb') as stream:
-        actual=hashlib.file_digest(stream,'sha256').hexdigest()
+    actual=digest(path)
     if actual!=expected:
         raise SystemExit('artifact differs from verified hash')
     shutil.copyfile(path,target)
-    with open(target,'rb') as stream:
-        if hashlib.file_digest(stream,'sha256').hexdigest()!=expected:
-            raise SystemExit('artifact changed while staging')
+    if digest(target)!=expected:
+        raise SystemExit('artifact changed while staging')
 copy_verified(source,expected,target)
 if profile=='flatpak':
     copy_verified(sbom,sbom_hash,str(pathlib.Path(target).parent/'components.cdx.json'))
