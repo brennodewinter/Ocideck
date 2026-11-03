@@ -15,6 +15,21 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tool'))
 import release_channel_controller as control
 
 
+class ExactRefResponseTest(unittest.TestCase):
+    def test_real_forgejo_list_response_and_encoded_branch(self):
+        api = object.__new__(control.Forgejo)
+        api.request = lambda _: [{'ref': 'refs/heads/codex/base', 'object': {'sha': 'a' * 40}}]
+        self.assertEqual(api.get('/git/refs/heads/codex%2Fbase')['object']['sha'], 'a' * 40)
+
+    def test_empty_prefix_matches_and_ambiguous_response_rejected(self):
+        api = object.__new__(control.Forgejo)
+        exact = {'ref': 'refs/heads/main', 'object': {'sha': 'a' * 40}}
+        for response in ([], [dict(exact, ref='refs/heads/main-old')], [exact, exact]):
+            api.request = lambda _, value=response: value
+            with self.subTest(response=response), self.assertRaises(ValueError):
+                api.get('/git/refs/heads/main')
+
+
 class FakeForge:
     def __init__(self, run=None):
         self.run = run

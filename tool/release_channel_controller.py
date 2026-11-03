@@ -14,7 +14,7 @@ import tempfile
 import time
 import zipfile
 from urllib.error import HTTPError
-from urllib.parse import quote, urlsplit
+from urllib.parse import unquote, quote, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 from uuid import uuid4
 
@@ -73,7 +73,15 @@ class Forgejo:
         return json.loads(body, object_pairs_hook=release_channel.no_duplicates) if body else None
 
     def get(self, path):
-        return self.request(path)
+        value = self.request(path)
+        if path.startswith('/git/refs/'):
+            expected = 'refs/' + unquote(path.removeprefix('/git/refs/'))
+            values = value if isinstance(value, list) else [value]
+            if (len(values) != 1 or not isinstance(values[0], dict)
+                    or values[0].get('ref') != expected):
+                raise ValueError('Forgejo exact ref readback differs or is ambiguous')
+            return values[0]
+        return value
 
     def post(self, path, payload):
         return self.request(path, payload)
