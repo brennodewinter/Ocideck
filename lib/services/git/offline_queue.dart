@@ -27,6 +27,7 @@ import 'draft_store.dart';
 import 'git_forge.dart';
 import 'outbox.dart';
 import 'repo_asset_resolver.dart';
+import '../web_asset_store.dart';
 
 /// Hoe [queueDeckSave] afliep.
 ///
@@ -58,6 +59,17 @@ Future<QueuedSave> queueDeckSave(
   String? forkFrom,
 }) async {
   final deckFiles = mirrorDeckFiles(deck, deckDir: deckDir, md: md);
+  // De `mem:`-bytes leven in het geheugen; parkeer ze in de werkkopie zodat
+  // een gesloten tab of een herlaad ze niet wegveegt vóór de commit (#2724).
+  final deckMd = deckFiles[p.posix.join(deckDir, deckRepoFileName)];
+  if (deckMd != null) {
+    for (final memPath in _memPathsOf(utf8.decode(deckMd))) {
+      final bytes = WebAssetStore.bytesFor(memPath);
+      if (bytes != null) {
+        deckFiles[_parkedAssetPath(deckDir, memPath)] = bytes;
+      }
+    }
+  }
   try {
     await mirror.writeDeck(deckDir, deckFiles);
   } on DraftStoreUnsupported catch (e) {
@@ -111,13 +123,47 @@ Future<Map<String, Uint8List>> poolPendingDeck(
     read: (path) async => stored[path],
   );
 
+  final resolveFromDisk = repoAssetBytes(deck.projectPath);
   final files = await buildDeckRepoFiles(
     sidecars.deck,
     md: md,
     pool: AssetPool(forge: forge, branch: commit.branch),
     deckDir: commit.deckDir,
     read: (path) async => stored[path],
-    resolveBytes: repoAssetBytes(deck.projectPath),
+    // Eerst de kopie die [queueDeckSave] parkeerde — die overleeft een
+    // gesloten tab en een herstart, het geheugen niet.
+    resolveBytes: (path) async =>
+        stored[_parkedAssetPath(commit.deckDir, path)] ??
+        await resolveFromDisk(path),
   );
+  final lost = files.warnings.where(WebAssetStore.isMemPath).toList();
+  if (lost.isNotEmpty) throw PendingAssetsLost(commit.deckDir, lost);
   return files.upserts;
+}
+
+/// Een `mem:`-verwijzing in `deck.md` (afbeelding, video of audio die alleen
+/// in het geheugen bestond).
+final _memRef = RegExp('${WebAssetStore.scheme}[A-Za-z0-9._-]+');
+
+Set<String> _memPathsOf(String markdown) =>
+    _memRef.allMatches(markdown).map((m) => m.group(0)!).toSet();
+
+/// Waar [queueDeckSave] de bytes van een `mem:`-pad in de werkkopie parkeert.
+/// De mapnaam is bewust geen asset-directory: dit is transport, geen inhoud —
+/// `buildDeckRepoFiles` schrijft hem nooit terug naar de forge.
+String _parkedAssetPath(String deckDir, String memPath) =>
+    p.posix.join(deckDir, 'mem', Uri.encodeComponent(memPath));
+
+/// De `mem:`-afbeeldingen van een wachtend deck bestaan niet meer — niet in
+/// het geheugen en niet geparkeerd. De commit weigert: een dode verwijzing
+/// pushen en "gesynchroniseerd" melden was precies het stille dataverlies
+/// uit #2724.
+class PendingAssetsLost implements Exception {
+  const PendingAssetsLost(this.deckDir, this.paths);
+
+  final String deckDir;
+  final List<String> paths;
+
+  @override
+  String toString() => 'PendingAssetsLost($deckDir): ${paths.join(', ')}';
 }

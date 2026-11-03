@@ -211,5 +211,71 @@ void main() {
       );
       expect(utf8.decode(notes!), contains('losse aantekening die mee moet'));
     });
+
+    test('parkeert de mem:-bytes in de werkkopie (#2724)', () async {
+      final bytes = Uint8List.fromList([
+        0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, //
+        ...List.filled(64, 7),
+      ]);
+      final mem = WebAssetStore.put(bytes, name: 'geparkeerd.png');
+      await queue(
+        Deck(
+          title: 'Met plaatje',
+          slides: [Slide.create(SlideType.image).copyWith(imagePath: mem)],
+        ),
+      );
+
+      // De werkkopie draagt de bytes, onafhankelijk van het geheugen.
+      WebAssetStore.clear();
+      final stored = await mirror.readDeck(deckDir);
+      expect(
+        stored.keys.where((k) => k.startsWith('$deckDir/mem/')),
+        hasLength(1),
+      );
+
+      // En het poolen haalt ze daar alsnog vandaan.
+      final forge = FakeForge(
+        FakeRepo(branches: {'main': 'commit-main'}, files: {}),
+      );
+      final pooled = await poolPendingDeck(forge, commit, stored, md: md);
+      final markdown = utf8.decode(pooled['$deckDir/$deckRepoFileName']!);
+      expect(markdown, contains('repo:'));
+      expect(markdown, isNot(contains(mem)));
+    });
+
+    test('een verdwenen mem:-afbeelding weigert de commit (#2724)', () async {
+      final mem = WebAssetStore.put(
+        Uint8List.fromList([
+          0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, //
+          ...List.filled(64, 7),
+        ]),
+        name: 'verloren.png',
+      );
+      await queue(
+        Deck(
+          title: 'Met plaatje',
+          slides: [Slide.create(SlideType.image).copyWith(imagePath: mem)],
+        ),
+      );
+      // Simuleer "tab gesloten voor het parkeren": geheugen én parkeerplaats
+      // leeg — de wachtrij staat dan met een dode verwijzing.
+      WebAssetStore.clear();
+      final stored = await mirror.readDeck(deckDir)
+        ..removeWhere((k, v) => k.startsWith('$deckDir/mem/'));
+
+      final forge = FakeForge(
+        FakeRepo(branches: {'main': 'commit-main'}, files: {}),
+      );
+      expect(
+        () => poolPendingDeck(forge, commit, stored, md: md),
+        throwsA(
+          isA<PendingAssetsLost>().having(
+            (e) => e.paths,
+            'paths',
+            contains(mem),
+          ),
+        ),
+      );
+    });
   });
 }

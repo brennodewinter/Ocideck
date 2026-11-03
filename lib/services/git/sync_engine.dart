@@ -7,6 +7,7 @@ import 'deck_mirror.dart';
 import 'deck_repo_serializer.dart';
 import 'draft_store.dart';
 import 'git_forge.dart';
+import 'offline_queue.dart' show PendingAssetsLost;
 import 'outbox.dart';
 
 /// Bewerkt de opgeslagen deckbestanden vlak vóór de commit, en geeft de
@@ -19,11 +20,10 @@ import 'outbox.dart';
 /// deze hook die om naar `repo:`-verwijzingen en levert de bijbehorende blobs,
 /// zodat de commit compleet is. Gooit [GitForgeException] als het poolen de
 /// forge nodig heeft en die er niet is — dan blijft het deck in de wachtrij.
-typedef DeckFilePreparer =
-    Future<Map<String, Uint8List>> Function(
-      PendingCommit commit,
-      Map<String, Uint8List> stored,
-    );
+typedef DeckFilePreparer = Future<Map<String, Uint8List>> Function(
+  PendingCommit commit,
+  Map<String, Uint8List> stored,
+);
 
 /// Hoe één deck uit de wachtrij afliep.
 enum SyncStatus {
@@ -245,6 +245,18 @@ class SyncEngine {
         deckDir: commit.deckDir,
         status: SyncStatus.committed,
         sha: result.sha,
+      );
+    } on PendingAssetsLost catch (e) {
+      // De mem:-afbeeldingen van dit deck zijn verdwenen — tab gesloten,
+      // herstart, en de parkeerplaats was er niet of ook leeg. De wachtrij
+      // blijft staan: de markdown is er nog en de bytes kunnen met een
+      // nieuwe upload alsnog mee (#2724).
+      return SyncOutcome(
+        deckDir: commit.deckDir,
+        status: SyncStatus.failed,
+        message:
+            'Afbeelding(en) ${e.paths.join(", ")} zijn niet meer '
+            'beschikbaar; deze opslag is niet gesynchroniseerd.',
       );
     } on GitConflictException catch (e) {
       // Blijft staan: het werk is niet weg, het kan alleen niet zó landen.
