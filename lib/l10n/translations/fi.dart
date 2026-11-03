@@ -1605,6 +1605,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Yksi HTML-tiedosto, jossa on aitoa tekstiä, otsikoita ja alt-tekstejä ja joka avautuu missä tahansa selaimessa ilman internetiä — taulukoiden, matematiikan, mermaidin ja kaavioiden kanssa.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Työskentele reaaliajassa WebDAV-palvelimella olevan esityksen parissa. Oletuksena pois päältä. Muutokset kulkevat deckin vieressä olevan työkansion kautta samalla palvelimella — ilman OciDeckin salausta.',
   'Ga naar de brontabel': 'Siirry lähdetaulukkoon',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tämä taulukko on kopio lähdetaulukosta "{bron}". Muokkaa lähdettä ja valitse Päivitä, tai irrota näkymä tilannevedoksena.',
@@ -4887,8 +4891,6 @@ const _dutchSourceAddFi = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Vienti luo peitetyn kopion vastaanottajalle. Tavutarkan alkuperäisen säilytät Tallenna-toiminnolla.',
   'Exporteren…': 'Vie…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Yksi saavutettava HTML-tiedosto, joka avautuu missä tahansa selaimessa ilman internetiä, sisältäen taulukot, matematiikan, mermaidin ja kaaviot.',
   'Het thema en de opmaak per dia (_class).':
       'Teema ja diakohtainen muotoilu (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5289,8 +5291,6 @@ const _dutchSourceAddFi = <String, String>{
       'tiedostoja ei voitu tarkistaa turvallisesti',
   'nieuw gescand': 'juuri skannattu',
   'Realtime samenwerken': 'Reaaliaikainen yhteistyö',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Tee reaaliaikaista yhteistyötä esityksestä salatun välittäjän kautta. Oletuksena pois päältä. Sisältö salataan päästä päähän OciDeckin omilla avaimilla; palvelin näkee vain salattua tietoa.',
   'Chat': 'Chat',
   'Chat sluiten': 'Sulje chat',
   'Bericht…': 'Viesti…',

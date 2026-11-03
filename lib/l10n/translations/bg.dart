@@ -1624,6 +1624,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Един HTML файл с реален текст, заглавия и алтернативни текстове, който се отваря във всеки браузър без интернет — с таблици, математика, mermaid и графики.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Работете на живо върху презентация на WebDAV сървър. Изключено по подразбиране. Редакциите пътуват през работна папка до дека на същия сървър — без криптиране от OciDeck.',
   'Ga naar de brontabel': 'Към изходната таблица',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Тази таблица е копие на изходната таблица "{bron}". Редактирайте източника и изберете Обновяване, или откачете изгледа като моментна снимка.',
@@ -4921,8 +4925,6 @@ const _dutchSourceAddBg = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Експортът създава заличено копие за получател. Своя байтово точен оригинал запазвате със Запази.',
   'Exporteren…': 'Експортиране…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Един достъпен HTML файл, който се отваря във всеки браузър без интернет, с таблици, математика, mermaid и диаграми.',
   'Het thema en de opmaak per dia (_class).':
       'Темата и оформлението за всеки слайд (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5330,8 +5332,6 @@ const _dutchSourceAddBg = <String, String>{
       'файлове не можаха да бъдат прегледани безопасно',
   'nieuw gescand': 'наскоро сканиран',
   'Realtime samenwerken': 'Съвместна работа в реално време',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Работете съвместно на живо върху презентация чрез криптиран препредавател. По подразбиране изключено. Съдържанието се криптира от край до край със собствените ключове на OciDeck; сървърът вижда само криптирани данни.',
   'Chat': 'Чат',
   'Chat sluiten': 'Затвори чата',
   'Bericht…': 'Съобщение…',

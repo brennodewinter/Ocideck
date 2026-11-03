@@ -1609,6 +1609,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Jedna HTML datoteka s pravim tekstom, naslovima i alt-tekstovima koja se otvara u bilo kojem pregledniku bez interneta — s tablicama, matematikom, mermaid i grafikonima.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Radite uživo na prezentaciji na WebDAV poslužitelju. Zadano isključeno. Izmjene putuju kroz radnu mapu pokraj decka na istom poslužitelju — bez enkripcije od strane OciDecka.',
   'Ga naar de brontabel': 'Idi na izvornu tablicu',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ova tablica je preslik izvorne tablice "{bron}". Uredite izvor i odaberite Osvježi, ili odvojite prikaz kao snimku.',
@@ -4889,8 +4893,6 @@ const _dutchSourceAddHr = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Izvoz stvara redigiranu kopiju za primatelja. Svoj bajtno vjeran izvornik čuvate pomoću Spremi.',
   'Exporteren…': 'Izvezi…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Jedna pristupačna HTML datoteka koja se otvara u svakom pregledniku bez interneta, s tablicama, matematikom, mermaidom i grafikonima.',
   'Het thema en de opmaak per dia (_class).':
       'Tema i oblikovanje po slajdu (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5292,8 +5294,6 @@ const _dutchSourceAddHr = <String, String>{
       'datotek ni bilo mogoče varno pregledati',
   'nieuw gescand': 'na novo skenirano',
   'Realtime samenwerken': 'Suradnja u stvarnom vremenu',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Surađujte uživo na prezentaciji putem šifriranog prijenosnika. Zadano isključeno. Sadržaj je end-to-end šifriran vlastitim ključevima OciDecka; poslužitelj vidi samo šifrirane podatke.',
   'Chat': 'Razgovor',
   'Chat sluiten': 'Zatvori razgovor',
   'Bericht…': 'Poruka…',

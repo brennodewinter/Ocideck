@@ -759,31 +759,13 @@ opslaan is meteen weer aan hem — of **een pakket exporteren** (`.ocideck`), da
 volledige bewerkbare deck en zijn afbeeldingen meedraagt, ongeacht wie de sessie
 bezit.
 
-**Verifiëren met wie je werkt.** In een realtime-sessie biedt het palet
-**“Deelnemers verifiëren”**: het somt elk apparaat op met een **vingerafdruk** — een
-leesbare weergave van de identiteitssleutel van dat apparaat. Vergelijk de
-vingerafdruk van een co-auteur via een kanaal dat je vertrouwt (lees hem hardop voor,
-of stuur hem op een manier waarvan je weet dat die van hen is); als hij overeenkomt,
-markeer het apparaat als **geverifieerd**. Die verificatie wordt onthouden, zodat
-hetzelfde apparaat in latere sessies geverifieerd blijft en niet opnieuw vraagt. Als
-een apparaat dat je eerder verifieerde ooit opduikt met een *andere* identiteit,
-markeert OciDeck het als **mismatch** — het teken dat iets zich voordoet als je
-co-auteur, en een reden om de sessie af te breken in plaats van het weg te klikken.
-Zolang een apparaat nog niet is geverifieerd, herinnert een smalle banner boven de
-werkruimte je eraan, en één tik opent de vergelijking. *(Toegevoegd 2026-08-01.)*
-
-**Je identiteit behouden wanneer je van apparaat wisselt.** Je apparaat heeft zijn
-eigen samenwerkingsidentiteit — datgene wat co-auteurs verifiëren. Die leeft alleen op
-dit apparaat, dus een nieuw apparaat begint normaal gesproken opnieuw (en verschijnt
-als niet-geverifieerd voor iedereen die je had geverifieerd). Om *dezelfde* identiteit
-mee te nemen, open je *Instellingen → Realtime samenwerken → Identiteit &
-herstelsleutel* en **toon de herstelsleutel** — een korte gegroepeerde code. Bewaar
-hem ergens veilig, zoals in je wachtwoordmanager; het is de enige manier om deze
-identiteit te herstellen, dus bewaar hem en deel hem met niemand. Op het nieuwe
-apparaat open je dezelfde plek en **herstel** je vanuit die sleutel: co-auteurs die je
-eerder verifieerden herkennen je vingerafdruk weer. Het Matrix-account verwijderen
-verwijdert ook deze identiteit en je opgeslagen verificaties uit de sleutelbos.
-*(Toegevoegd 2026-08-01.)*
+*(Verwijderd 2026-11-03: hier stonden twee alinea's over het verifiëren van
+deelnemers met vingerafdrukken en een identiteitsherstelsleutel onder
+*Instellingen → Realtime samenwerken*, en over het verwijderen van een
+Matrix-account. Die route is ontworpen in `design/SELF_ENCRYPTED_RELAY.md`
+maar niet gebouwd — geen van die commando's of instellingen bestaat in de
+app. De sessie hierboven, via de WebDAV-map naast het deck, is wat OciDeck
+vandaag doet, en die kent geen versleuteling door OciDeck.)*
 
 **Tabelcel-bewerkingen synchroniseren niet.** Als je een cel in een tabeldia
 bewerkt tijdens een sessie, komt die wijziging niet aan bij de andere deelnemers
@@ -4450,6 +4432,22 @@ phase-gate`). Gebruik hem bij DMAIC-fasegrenzen om scope, stakeholder-
 akkoord en go/no-go vast te leggen vóór de volgende sectie. Hij serialiseert als een gewone
 opsommingsslide en blokkeert de export nooit uit zichzelf.
 
+**Ganttslides.** Met de module aan biedt de slide-toevoegen-kiezer ook
+**Gantt** — een projectplanning opgeslagen als gewone Markdown-tabel, zodat
+de planning in elke Marp-lezer leesbaar blijft. Vijf kolommen: **Taak** (de
+taaknaam; `Milestone: <naam>` markeert een mijlpaal zonder duur), **Start**
+(een ISO-datum, of leeg als de taak van een andere afhangt), **Duur** (een
+getal met `d`, `w` of `h` — `12d`, `3w`, `40h`), **Voortgang** (`done`,
+`active` of `crit`) en **Afhankelijk van** (kommagescheiden taaknamen,
+getekend als `after`-afhankelijkheden). De granulariteit van de tijdas reist
+mee in een commentaar (`<!-- ocideck_gantt_scale: auto|day|week|month -->`),
+en `<!-- ocideck_gantt_sections: true -->` maakt van een taak genaamd `## …`
+een sectiekop. Een **LibrePlan-import** vult dezelfde tabel en kapt af op 30
+taken. Het Mermaid-diagram wordt afgeleid als de slide wordt getekend — een
+taak zonder oplosbare start of duur valt uit het diagram in plaats van het
+te breken. Een deck dat al een gantt bevat, opent en rendert altijd, module
+aan of uit — dezelfde regel als matrix, canvas, boom en flow.
+
 **Projectkader en gouden draad (Fase 7).** Een deck kan zijn
 verbeterkader declareren (`dmaic`, `dmadv`, `kaizen`, `a3`, `8d`) en de primaire
 metriek **Y-01** in platte front-matter-sleutels: `ocideck_improvement_y01` (naam) plus
@@ -5962,9 +5960,12 @@ kan nog wel.
   privacycontrole uitstaat (onder Beveiliging), zegt het venster dat ronduit: een
   geredigeerde kopie is dan niet daadwerkelijk op persoonsgegevens gecontroleerd.
 - **Welk formaat** — **Markdown (`.md`)** is een geredigeerde kopie van de platte
-  tekst die in elke Markdown-lezer opent; **HTML** is één op zichzelf staand,
-  toegankelijk HTML-bestand dat in elke browser opent zonder internet, met zijn
-  tabellen, wiskunde, Mermaid-diagrammen en grafieken ter plekke gerenderd;
+  tekst die in elke Markdown-lezer opent; **HTML** is één op zichzelf staand
+  HTML-bestand met echte tekst, koppen en alt-teksten dat in elke browser opent
+  zonder internet, met zijn tabellen, wiskunde, Mermaid-diagrammen en grafieken
+  ter plekke gerenderd — het bestand is niet op toegankelijkheid getoetst, dus
+  de belofte houdt op bij wat het is, niet bij waar het aan voldoet
+  *(gecorrigeerd 2026-11-03)*;
   **PDF** is een afgewerkt vel met een echte tekstlaag (zie hieronder);
   **LaTeX (`.tex`)** is een LaTeX-`article`-document — wiskunde (`$...$` /
   `$$...$$`) gaat er ongewijzigd doorheen, en afbeeldingen worden met een relatief

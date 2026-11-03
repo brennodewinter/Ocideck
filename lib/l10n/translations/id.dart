@@ -1605,6 +1605,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Satu berkas HTML dengan teks asli, judul, dan teks alt, yang terbuka di browser mana pun tanpa internet — dengan tabel, matematika, mermaid, dan grafik.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Bekerja secara langsung pada presentasi di server WebDAV. Nonaktif secara default. Suntingan berpindah melalui folder kerja di samping deck pada server yang sama — tanpa enkripsi oleh OciDeck.',
   'Ga naar de brontabel': 'Buka tabel sumber',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Tabel ini adalah salinan tabel sumber "{bron}". Edit sumbernya dan pilih Segarkan, atau lepaskan tampilan sebagai snapshot.',
@@ -4883,8 +4887,6 @@ const _dutchSourceAddId = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Ekspor membuat salinan yang diredaksi untuk penerima. Dokumen asli Anda yang setia-byte disimpan dengan Simpan.',
   'Exporteren…': 'Ekspor…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Satu berkas HTML yang mudah diakses dan terbuka di browser mana pun tanpa internet, dengan tabel, matematika, mermaid, dan grafik.',
   'Het thema en de opmaak per dia (_class).':
       'Tema dan format per slide (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5286,8 +5288,6 @@ const _dutchSourceAddId = <String, String>{
       'file tidak dapat ditinjau dengan aman',
   'nieuw gescand': 'baru dipindai',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Berkolaborasi secara langsung pada presentasi melalui relai terenkripsi. Nonaktif secara bawaan. Kontennya dienkripsi ujung ke ujung dengan kunci milik OciDeck sendiri; server hanya melihat data terenkripsi.',
   'Chat': 'Obrolan',
   'Chat sluiten': 'Tutup obrolan',
   'Bericht…': 'Pesan…',

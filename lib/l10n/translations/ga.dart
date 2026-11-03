@@ -1635,6 +1635,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Comhad HTML amháin le fíorthéacs, ceannteidil agus téacsanna alt a osclaíonn in aon bhrabhsálaí gan idirlíon — le táblaí, matamaitic, mermaid agus cairteacha.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Déan comhoibriú beo ar chur i láthair ar fhreastalaí WebDAV. Múchta de réir réamhshocraithe. Taistealaíonn na hathruithe trí fhillteán oibre in aice leis an deck ar an bhfreastalaí céanna — gan chriptiú ag OciDeck.',
   'Ga naar de brontabel': 'Téigh go dtí an tábla foinse',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Is cóip den tábla foinse "{bron}" é an tábla seo. Cuir an foinse in eagar agus roghnaigh Athnuachan, nó dícheangail an t-amharc mar ghrianghraf.',
@@ -4964,8 +4968,6 @@ const _dutchSourceAddGa = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Cruthaíonn an easpórtáil cóip fholaithe do fhaighteoir. Coinníonn tú do bhunchóip dhílis do na bearta le Sábháil.',
   'Exporteren…': 'Easpórtáil…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Comhad HTML inrochtana amháin a osclaíonn in aon bhrabhsálaí gan idirlíon, le táblaí, matamaitic, mermaid agus cairteacha.',
   'Het thema en de opmaak per dia (_class).':
       'An téama agus an fhormáidiú de réir sleamhnáin (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5374,8 +5376,6 @@ const _dutchSourceAddGa = <String, String>{
       'níorbh fhéidir na comhaid a athbhreithniú go sábháilte',
   'nieuw gescand': 'nua-scagtha',
   'Realtime samenwerken': 'Comhoibriú fíor-ama',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Comhoibrigh beo ar láithreoireacht trí athsheachadán criptithe. Múchta de réir réamhshocraithe. Déantar an t-ábhar a chriptiú ó cheann go ceann le heochracha OciDeck féin; ní fheiceann an freastalaí ach sonraí criptithe.',
   'Chat': 'Comhrá',
   'Chat sluiten': 'Dún an comhrá',
   'Bericht…': 'Teachtaireacht…',

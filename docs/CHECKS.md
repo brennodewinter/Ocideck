@@ -934,8 +934,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   `pubspec.yaml` version *including the build number* (`X.Y.Z+B`). `make sbom`
   writes that string into all three at once, so a file that lacks it was not
   regenerated.
-- **Why it exists:** the SBOM records the project version (the CRA wants "which
-  version is this inventory for"), so a version bump makes it stale.
+- **Why it exists:** the SBOM records the project version (the CRA mapping
+  asks which version this inventory is for), so a version bump makes it stale.
   `sbom_test` already catches that — but only as a full regenerate-and-diff
   flutter test in `make check-registrations`, which
   is outside the fast `make check-static` subset. The `1.2.1 → 0.3.0` bump
@@ -1337,8 +1337,9 @@ also declares them, but see the [CI note](#continuous-integration).)
 
 ### `make sbom` / `make sbom-verify`
 - **Runs:** `dart run tool/generate_sbom.dart` (and `--check` for `sbom-verify`).
-- **Covers:** the Software Bill of Materials the EU Cyber Resilience Act
-  (Reg. (EU) 2024/2847, Annex I Part II §1) requires. `make sbom` regenerates
+- **Covers:** the Software Bill of Materials as described in the EU Cyber
+  Resilience Act
+  (Reg. (EU) 2024/2847, Annex I Part II §1). `make sbom` regenerates
   `sbom/ocideck.cdx.json` (CycloneDX 1.6) and `sbom/ocideck.spdx.json`
   (SPDX 2.3) from the files that are already the source of truth. `make
   sbom-verify` regenerates in memory and fails if the committed SBOM drifted

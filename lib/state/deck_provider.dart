@@ -502,37 +502,42 @@ class DeckNotifier extends StateNotifier<DeckState> {
   }
 
   Future<bool> _saveToPath(String path) async {
-    final deck = state.deck;
+    var deck = state.deck;
     if (deck == null) return false;
-    final undoLenBefore = _undoStack.length;
-    final Deck savedDeck;
-    var incomplete = false;
-    try {
-      final written = await _file.saveDeckDetailed(deck, path);
-      savedDeck = written.deck;
-      incomplete = _reportChartWarnings(written.chartWarnings);
-    } catch (e, s) {
-      logError('DeckNotifier._saveToPath: write deck', e, s);
-      // Keep isDirty so the work still counts as unsaved.
-      state = state.copyWith(error: 'Opslaan mislukt:\n$path\n$e');
-      return false;
+    // Doorgetypt tijdens het schrijven? `true` wiste de herstelkopie van
+    // werk dat nergens stond (#2721). Schrijf door tot de undo-stapel
+    // stilstaat; true = "schoon op schijf".
+    for (var attempt = 0; attempt < 4; attempt++) {
+      final undoLenBefore = _undoStack.length;
+      final Deck savedDeck;
+      var incomplete = false;
+      try {
+        final written = await _file.saveDeckDetailed(deck!, path);
+        savedDeck = written.deck;
+        incomplete = _reportChartWarnings(written.chartWarnings);
+      } catch (e, s) {
+        logError('DeckNotifier._saveToPath: write deck', e, s);
+        // Keep isDirty so the work still counts as unsaved.
+        state = state.copyWith(error: 'Opslaan mislukt:\n$path\n$e');
+        return false;
+      }
+      // De identity-check is te streng voor state-vervangingen die geen
+      // inhoudswijziging zijn (bv. copyWith voor themeProfile); we vergelijken
+      // ook de undo-stapel (#1473).
+      if (identical(state.deck, deck) || _undoStack.length <= undoLenBefore) {
+        _localMerge.base = savedDeck;
+        state = state.copyWith(deck: savedDeck, isDirty: incomplete);
+        // #1951: na succesvolle opslaan, onthoud de nieuwe mtime zodat de
+        // volgende opslaan-controle geen vals positief geeft.
+        await _localMerge.recordMtime();
+        // #1950: grafiekwaarschuwingen houden het tabblad vuil, maar het deck
+        // staat wél op schijf — opslaan is gelukt.
+        return true;
+      }
+      deck = state.deck;
+      if (deck == null) return false;
     }
-    // Doorgetypt tijdens het schrijven? Dan is [state.deck] nieuwer dan wat er
-    // zojuist op schijf belandde. Terugzetten gooit dat werk stil weg, en
-    // "schoon" melden wist ook de herstelkopie — het bestaat dan nergens meer.
-    //
-    // De identity-check is te streng voor state-vervangingen die geen
-    // inhoudswijziging zijn (bv. copyWith voor themeProfile); we vergelijken
-    // ook de undo-stapel (#1473).
-    final deckChanged = !identical(state.deck, deck);
-    final userEdited = deckChanged && _undoStack.length > undoLenBefore;
-    if (userEdited) return true;
-    _localMerge.base = savedDeck;
-    state = state.copyWith(deck: savedDeck, isDirty: incomplete);
-    // #1951: na succesvolle opslaan, onthoud de nieuwe mtime zodat de
-    // volgende opslaan-controle geen vals positief geeft.
-    await _localMerge.recordMtime();
-    return true;
+    return false; // steeds ingehaald: sluiten wacht i.p.v. de kopie te wissen.
   }
 
   void closeDeck() {

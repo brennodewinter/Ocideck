@@ -420,7 +420,10 @@ const Map<String, int> classSizeBaseline = {
   // +23 (#1647): Setext-kopherkenning in _parse — _isSetextUnderline helper
   // en de check in de paragraaf-fallback. Cohesief met de _parse-lus.
   // +5 (#1921): scaleMermaidToFit parameter for paginated Mermaid scaling.
-  'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1036,
+  // +18 (drift op main via #2711, blokparse-cache): dit bestand liep op
+  // main al over de oude grens — de basislijn loopt achter, geen nieuwe
+  // groei in deze tak.
+  'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1054,
   // −78 (#1707): find/replace-staat naar FindReplaceSession. Wat de klasse aan
   // die methoden hield was `_controller` (gaat mee als parameter), `_viewMode`
   // (blijft hier: alleen de gastheer weet of de cursor in de bron of in Quill
@@ -573,7 +576,7 @@ const Map<String, int> classSizeBaseline = {
   // chart_preview_legend.dart — plot-hover benadrukt de legenda, wat zeven
   // params kostte in plaats van 160 extensie-regels. De klasse meet 3048;
   // ~25 regels lucht voor twee PR's die tegelijk in dit bestand werken.
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3073,
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3007,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   // Verlaagd van 2235 naar 2232: de klasse meet 2227.
@@ -678,7 +681,9 @@ const Map<String, int> classSizeBaseline = {
   // _mutate-callsite; de permutatie-detectie staat in
   // table_row_permutation.dart.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1464, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
+      1469, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
+  // +5 (#2721): de schrijflus in _saveToPath die doorschrijft tot de schijf
+  // de levende deck bevat — hoort bij de opslaginvariant van deze klasse.
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
@@ -1805,6 +1810,40 @@ Map<String, List<int>> rawTextTagsIn(Map<String, String> sources) {
   return perFile;
 }
 
+// ── CRA-plichtstaal in Markdown — een "vereist"-zin is een fabrikantenclaim ──
+//
+// Het positiebesluit (`assurance/CRA-2024-2847-positie.md`, #532) schrijft
+// voor: de Cyberweerbaarheidsverordening beschrijven ("as described in"),
+// nooit alsof zij iets van OciDeck vereist ("the SBOM the CRA requires",
+// "required by the CRA"). Zo'n zin wordt in een vragenlijst teruggeciteerd
+// als fabrikantenplicht — precies wat het besluit uitsluit (#2717). Een regel
+// die de wet zelf citeert noemt haar plichtsdrager ("manufacturer") en valt
+// hierbuiten; CHANGELOG.md is historie en wordt niet herschreven.
+final _craClaimedDuty = RegExp(
+  r'(cyber resilience act.{0,200}\brequir|\brequir\w*.{0,200}cyber resilience act|cyberweerbaarheidsverordening.{0,200}vereist|vereist.{0,200}cyberweerbaarheidsverordening)',
+  caseSensitive: false,
+);
+final _craDutyBearer = RegExp(r'manufacturer|fabrikant', caseSensitive: false);
+
+/// Regelnummers per Markdownbestand met een CRA-plichtzin. Pure functie over
+/// pad → bron, zodat de regel met verzonnen bestanden te voeren is.
+Map<String, List<int>> craDutyClaimsIn(Map<String, String> sources) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    if (path.endsWith('CHANGELOG.md')) return;
+    final hits = <int>[];
+    final lines = raw.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      final l = lines[i];
+      if (_craClaimedDuty.hasMatch(l) && !_craDutyBearer.hasMatch(l)) {
+        hits.add(i + 1);
+      }
+    }
+    if (hits.isNotEmpty) perFile[path] = hits;
+  });
+  return perFile;
+}
+
 /// De tekstbestanden waarin een achtergebleven markering schade doet: alles wat
 /// meereist met de app of wat een bijdrager leest.
 Iterable<File> _textFilesToScan() sync* {
@@ -1949,6 +1988,23 @@ void main() {
       '${sites.length} Markdownregel(s). Forgejo leest hem als echte HTML en '
       'slikt de rest van het document in (#2612). Zet de plaatshouder tussen '
       'backticks, of schrijf \\<title>:\n'
+      '    ${sites.join('\n    ')}',
+    );
+  }
+
+  final craDutyClaims = craDutyClaimsIn(markdownSources);
+  if (craDutyClaims.isNotEmpty) {
+    final sites = [
+      for (final entry in craDutyClaims.entries)
+        for (final line in entry.value) '${entry.key}:$line',
+    ];
+    failures.add(
+      'Een CRA-"vereist"-zin stelt een plicht alsof die voor OciDeck geldt '
+      '(${sites.length} regel(s)). Het positiebesluit '
+      '(assurance/CRA-2024-2847-positie.md) schrijft "as described in" voor, '
+      'nooit "required by" — zo\'n zin wordt elders als fabrikantenplicht '
+      'teruggeciteerd. Citeer je de wet zelf, noem dan haar plichtsdrager '
+      '("manufacturer"):\n'
       '    ${sites.join('\n    ')}',
     );
   }

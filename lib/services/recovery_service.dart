@@ -369,6 +369,22 @@ class RecoveryService {
     try {
       final dir = await _dir();
       final now = DateTime.now();
+      // Levende sessielocks (#2722): een momentopname van een exemplaar dat
+      // nog draait is geen crash-rest. Een vuil tabblad dat zeven dagen niet
+      // verandert schrijft niets nieuws weg — de momentopname is identiek —
+      // en zou hier toch zijn enige veiligheidskopie verliezen.
+      final liveSessions = <String>{};
+      for (final entry in dir.listSync()) {
+        if (entry is! File || !entry.path.endsWith('.lock')) continue;
+        try {
+          if (_isLockLive(entry)) {
+            liveSessions.add(p.basenameWithoutExtension(entry.path));
+          }
+        } catch (e) {
+          // Onleesbare lock telt als niet-levend: de leeftijdsregel geldt.
+          logWarning('RecoveryService.pruneOlderThan: sessielock lezen', e);
+        }
+      }
       for (final entry in dir.listSync()) {
         // Een `.tmp` is het restant van een atomaire write die een crash niet
         // haalde; net zo goed plaintext-residu, dus dezelfde houdbaarheid. De
@@ -380,7 +396,8 @@ class RecoveryService {
         }
         try {
           final age = now.difference(entry.statSync().modified);
-          if (age > maxAge) {
+          if (age > maxAge &&
+              !(await _belongsToLiveSession(entry, liveSessions))) {
             await entry.delete();
             removed++;
           }
@@ -392,6 +409,25 @@ class RecoveryService {
       logWarning('RecoveryService.pruneOlderThan: list recovery dir', e);
     }
     return removed;
+  }
+
+  /// Of [file] een momentopname is van een sessie met een levend lock —
+  /// die hoort bij een exemplaar dat nog draait, niet bij een crash-rest.
+  /// `.tmp`-resten en onleesbare of sessieloze bestanden tellen niet mee:
+  /// voor hen geldt de gewone leeftijdsregel.
+  Future<bool> _belongsToLiveSession(
+    File file,
+    Set<String> liveSessions,
+  ) async {
+    if (liveSessions.isEmpty || !file.path.endsWith('.json')) return false;
+    try {
+      final data = jsonDecodeGuarded(await file.readAsString());
+      final session = data is Map ? data['session'] : null;
+      return session is String && liveSessions.contains('session-$session');
+    } catch (e) {
+      logWarning('RecoveryService.pruneOlderThan: sessie lezen', e);
+      return false;
+    }
   }
 
   Future<List<RecoverySnapshot>> loadAll() async {

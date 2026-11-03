@@ -1,15 +1,18 @@
 # OciDeck — Migration Guide
 
-> **Status:** current-state — two releases, no breaking changes yet · **Status last reviewed:** 2026-07-28 · **Published by:** Stichting LibreKAT
+> **Status:** current-state — releases are tagged, no breaking format changes recorded yet · **Status last reviewed:** 2026-07-28 · **Published by:** Stichting LibreKAT
 
 ## No migration steps between releases yet
 
-Releases are tagged (latest `0.1.1`, 2026-07-27). The file format did not
+Releases are tagged; the releases feed on the forge carries the latest —
+the number is deliberately not restated here. The file format did not
 change between `0.1.0` and `0.1.1`, so every deck written by `0.1.0` opens
 unchanged. There are no migration paths to record yet — no breaking format
 changes, no conversion tooling. [SECURITY.md](../SECURITY.md) says the same
 under *Supported versions*; if the two ever disagree, that one is about which
-versions get fixes and this one is about file compatibility.
+versions get fixes and this one is about file compatibility. *(Corrected
+2026-11-03: the "latest" named `0.1.1`, stale within weeks — and again after
+the next release. The feed cannot lag, a number can.)*
 
 *(Corrected 2026-07-28: this said "OciDeck has never tagged a release" and
 "there is no versioning or release scheme" — true until `0.1.0` on

@@ -2513,6 +2513,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'İnternetsiz her tarayıcıda açılan, gerçek metin, başlıklar ve alt metinler içeren tek bir HTML dosyası — tablolar, matematik, mermaid ve grafiklerle.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Bir WebDAV sunucusundaki sunumda canlı çalışın. Varsayılan olarak kapalı. Düzenlemeler aynı sunucudaki deck\'in yanındaki çalışma klasörü üzerinden gider — OciDeck şifrelemesi olmadan.',
   'Ga naar de brontabel': 'Kaynak tabloya git',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Bu tablo, "{bron}" kaynak tablosunun bir kopyasıdır. Kaynağı düzenleyip Yenile\'yi seçin ya da görünümü anlık görüntü olarak ayırın.',
@@ -5765,8 +5769,6 @@ const _dutchSourceAddTr = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Dışa aktarma, bir alıcı için redakte edilmiş bir kopya oluşturur. Bayta sadık orijinalinizi Kaydet ile saklarsınız.',
   'Exporteren…': 'Dışa aktar…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Tablolar, matematik, mermaid ve grafiklerle birlikte internet olmadan herhangi bir tarayıcıda açılan tek, erişilebilir bir HTML dosyası.',
   'Het thema en de opmaak per dia (_class).':
       'Tema ve slayt başına biçimlendirme (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -6166,8 +6168,6 @@ const _dutchSourceAddTr = <String, String>{
       'dosyalar güvenli bir şekilde incelenemedi',
   'nieuw gescand': 'yeni tarandı',
   'Realtime samenwerken': 'Gerçek zamanlı iş birliği',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Bir sunumda şifreli bir aktarıcı aracılığıyla canlı iş birliği yapın. Varsayılan olarak kapalı. İçerik OciDeck\'in kendi anahtarlarıyla uçtan uca şifrelenir; sunucu yalnızca şifreli veriyi görür.',
   'Chat': 'Sohbet',
   'Chat sluiten': 'Sohbeti kapat',
   'Bericht…': 'Mesaj…',

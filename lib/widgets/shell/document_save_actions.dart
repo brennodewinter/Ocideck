@@ -44,6 +44,44 @@ import 'open_failure_message.dart';
 /// Quill → Markdown round-trip — not byte-faithful to what was on disk. In that
 /// case, we patch the user's actual edits onto the original source instead of
 /// overwriting it with the normalized round-trip (#1613).
+/// Schrijft [first] weg via [write] en herhaalt dat zolang de levende bron
+/// tijdens het schrijven opnieuw veranderde. Een opslag die "gelukt"
+/// terugkeerde terwijl er nieuwere tekst leefde, markeerde het tabblad
+/// schoon en wiste zo de herstelkopie van werk dat nergens stond (#2720).
+///
+/// Geeft de laatst weggeschreven versie, of `null` toen het schrijven
+/// faalde. De aanroeper mag pas schoon melden als de levende bron na
+/// afloop gelijk is aan `result.source` — anders staat er nieuwer werk
+/// dan wat op schijf staat.
+Future<MarkdownDocument?> saveDocumentUntilCurrent({
+  required DocumentNotifier notifier,
+  required MarkdownDocument first,
+  required Future<MarkdownDocument?> Function(MarkdownDocument doc) write,
+  int maxAttempts = 4,
+}) async {
+  var latest = await write(first);
+  var attempts = 1;
+  while (latest != null && attempts < maxAttempts) {
+    final live = notifier.currentState.document;
+    // Geen bewerking sinds de vorige beurt (de Visueel-route schrijft een
+    // gepatchte variant van `sent` — de live bron wijkt dan bewust af), óf
+    // de schijfversie staat al in de notifier (#2720).
+    if (live == null ||
+        live.source == first.source ||
+        live.source == latest.source) {
+      return latest;
+    }
+    attempts++;
+    final again = await write(live);
+    if (again == null) return latest;
+    // De schijfversie kan van de aangeboden afwijken (mem: → images/),
+    // leg die normalisatie ook in de notifier vast.
+    if (again.source != live.source) notifier.replaceSource(again.source);
+    latest = again;
+  }
+  return latest;
+}
+
 Future<bool> saveDocumentWithDestination(
   BuildContext context,
   WidgetRef ref,
@@ -92,11 +130,24 @@ Future<bool> saveDocumentWithDestination(
           break; // overwrite: ga door met opslaan.
       }
     }
-    final written = await saveDocument(
-      documentToSave,
-      path,
-      sourceProjectPath: state.projectPath ?? p.dirname(path),
-      transcriptAudioPath: state.pendingAudioPath,
+    final written = await saveDocumentUntilCurrent(
+      notifier: notifier,
+      first: document,
+      // Elke schrijfbeurt patcht de live bron opnieuw op de opgeslagen basis:
+      // de Visueel-ronde levert een genormaliseerde bron, maar de schijf moet
+      // de werkelijke bewerkingen krijgen (#1613) — óók bij de herhaling.
+      write: (doc) {
+        final s = notifier.currentState;
+        final toSave = s.visualEdited && s.savedSource != null
+            ? _patchVisualSave(doc, s.savedSource!)
+            : doc;
+        return saveDocument(
+          toSave,
+          path,
+          sourceProjectPath: s.projectPath ?? p.dirname(path),
+          transcriptAudioPath: s.pendingAudioPath,
+        );
+      },
     );
     if (written != null) {
       // Werk de notifier bij met de versie zoals die op schijf staat —
@@ -104,6 +155,12 @@ Future<bool> saveDocumentWithDestination(
       // schijf en conflict-hash over één bron lopen (#2120).
       if (written.source != document.source) {
         notifier.replaceSource(written.source);
+      }
+      final live = notifier.currentState.document;
+      if (live != null && live.source != written.source) {
+        // Er staat nieuwer werk dan wat op schijf kon komen: vuil laten
+        // zodat de herstelkopie blijft en sluiten wacht (#2720).
+        return false;
       }
       notifier.markSaved(
         filePath: path,

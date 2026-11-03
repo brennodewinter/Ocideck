@@ -181,8 +181,10 @@ wholly inside a browser tab. Areas of particular interest:
 
 `make deps-check` queries OSV for every pinned bundle in
 `assets/web_export/MANIFEST.json`; it is part of `make check-full`, which the
-committer runs before a dependency or web-facing change (the CI workflow that
-also declares it does not currently run — the remote is Forgejo with no runner).
+committer runs before a dependency or web-facing change. On the Forgejo
+Actions runner the daily time-degrading checks repeat the same OSV query
+(`time-degrading-checks.yml`), and `scans.yml` repeats the secret and SAST
+scans on manual dispatch.
 As of the last review all
 pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.12, mermaid 11.16.0,
 MathJax 3.2.2) carry **no known advisories**. One tracked (non-urgent)
@@ -523,7 +525,10 @@ OS-level process isolation. The `com.apple.security.cs.allow-jit` entitlement in
 
 ## Supported versions
 
-Releases are tagged (latest `0.1.1`, 2026-07-27). The app displays its version
+Releases are tagged — the latest is always the top of the
+[releases feed](#subscribing-rather-than-remembering-to-look), deliberately
+not restated here (the version named in this spot went stale twice already).
+The app displays its version
 under **Settings → Over OciDeck**, but the version number only changes when
 someone bumps `pubspec.yaml`, which does not happen on every commit, so many
 different commits on the default branch can show the same number. Quoting it
@@ -532,8 +537,13 @@ since — for that, the commit is still what matters. Fixes land on the default
 development branch. The latest release and the default branch are both
 supported; fixes target the latest release plus that branch.
 
+One tag misleads a semver sort: `v1.2.1` (2026-08-04) was created by accident
+and abandoned — there is no release under that number, and the release chain
+ignores it. Follow the releases feed, not the highest tag.
+
 *(Corrected 2026-07-28: this said "There is no released version yet" and
-"There are no releases" — true until `0.1.0` on 2026-07-25, stale since.)*
+"There are no releases" — true until `0.1.0` on 2026-07-25, stale since.
+Corrected 2026-11-03: added the `v1.2.1` caveat.)*
 
 ## Finding this the standard way
 
@@ -639,7 +649,7 @@ followed, stated with its limits (verified against the forge on 2026-07-22).
 | Feed | URL | What it carries today |
 |---|---|---|
 | **Releases** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/releases.rss` | Tagged releases (`0.1.0`, `0.1.1`, …) with notes, SBOM and `SHA256SUMS` |
-| **Tags** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/tags.rss` | Release tags (`v0.1.0`, `v0.1.1`, …) plus `archive/git-mirror`, which is an archived branch and not a version |
+| **Tags** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/tags.rss` | Release tags (`v0.1.0`, `v0.1.1`, …) plus `archive/git-mirror`, which is an archived branch and not a version, and `v1.2.1` — a tag fired by accident on 2026-08-04 and abandoned, not a release |
 | **Repository activity** | `https://pawprint.vigilis.online/LibreKAT/Ocideck.rss` | Everything — pushes, comments, branch deletions. Real, and mostly noise |
 
 **The releases feed is the one to subscribe to**: the day it carries a new

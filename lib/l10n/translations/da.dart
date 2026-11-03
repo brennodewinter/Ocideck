@@ -1605,6 +1605,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Én HTML-fil med rigtig tekst, overskrifter og alt-tekster, som åbner i enhver browser uden internet — med tabeller, matematik, mermaid og diagrammer.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Samarbejd live om en præsentation på en WebDAV-server. Slået fra som standard. Redigeringer rejser via en arbejdsmappe ved siden af decket på samme server — uden kryptering fra OciDeck.',
   'Ga naar de brontabel': 'Gå til kildetabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Denne tabel er en afskrift af kildetabellen "{bron}". Rediger kilden og vælg Opdater, eller kobl visningen fra som et øjebliksbillede.',
@@ -4883,8 +4887,6 @@ const _dutchSourceAddDa = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Eksport laver en redigeret kopi til en modtager. Dit byte-tro original beholder du med Gem.',
   'Exporteren…': 'Eksportér…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Én tilgængelig HTML-fil, der åbner i enhver browser uden internet, med tabeller, matematik, mermaid og diagrammer.',
   'Het thema en de opmaak per dia (_class).':
       'Temaet og formateringen pr. dias (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5288,8 +5290,6 @@ const _dutchSourceAddDa = <String, String>{
       'filer kunne ikke gennemses sikkert',
   'nieuw gescand': 'nyscannet',
   'Realtime samenwerken': 'Samarbejde i realtid',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Samarbejd live om en præsentation via et krypteret relæ. Slået fra som standard. Indholdet krypteres ende-til-ende med OciDecks egne nøgler; serveren ser kun krypterede data.',
   'Chat': 'Chat',
   'Chat sluiten': 'Luk chat',
   'Bericht…': 'Besked…',

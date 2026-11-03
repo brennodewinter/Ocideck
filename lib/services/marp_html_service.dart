@@ -9,6 +9,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../l10n/app_localizations.dart';
 import '../models/asset_overview_spec.dart';
 import '../models/chart.dart';
+import 'chart_semantics_label.dart';
 import '../models/image_callout.dart';
 import 'improvement/chart_derivation.dart';
 import '../models/checklist_spec.dart';

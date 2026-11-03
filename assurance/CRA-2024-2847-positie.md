@@ -194,3 +194,35 @@ geval, niet als een ongeldig geval.
 
 Bij elk van deze zes is de vraag niet "geldt het nu wel", maar: **wat verandert
 er feitelijk, en klopt de eerste alinea dan nog.**
+
+## De publieke webdemo — gedateerde aanvulling (2026-11-03)
+
+Sinds dit besluit is vastgesteld, erkent de repo zelf een publieke instantie:
+`ocideck.librekat.nl` serveert een build van de webapp, gratis, zonder
+accounts, en er worden geen decks geüpload — alles draait in de tab van de
+bezoeker. Wel draagt die origin de fetch-proxy (`/fetch-proxy?url=…`): de URL
+die een bezoeker daar importeert, wordt door de server van de stichting
+opgehaald, binnen de SSRF-regels uit `server/fetch-proxy/`. `COMPLIANCE.md`
+en `docs/PRIVACY.md` beschrijven wat die server ziet.
+
+**Waarom dit naar het huidige oordeel geen aanbieden op de markt is.** Er
+wordt niets aangeboden dat iemand afneemt: geen betaling, geen account, geen
+bewaring van decks van anderen. De demo is een kopie van dezelfde opensource
+software, uitgegeven zoals die ook via de forge en de releases uitgaat. De
+fetch-proxy haalt bytes op namens de bezoeker en bewaart ze niet; dat is een
+technische doorgave van hetzelfde programma, geen dienst waarvoor de bezoeker
+afnemer wordt.
+
+**Wanneer deze alinea ongeldig wordt.** Dezelfde feiten die hierboven bij
+"opnieuw op tafel" staan, plus: accounts of inlog op de demo, het bewaren (of
+kunnen bewaren) van decks van bezoekers op de server, betaling of een
+gesponsorde inzet, of een fetch-proxy die groeit tot een dienst met eigen
+afspraken — beschikbaarheidsbeloftes, quota, logging buiten de technische
+noodzaak.
+
+**Wat nog openstaat voor juridische weging.** Of een gratis gehoste
+instantie met fetch-proxy alsnog "commerciële activiteit" of "aanbieden op
+de markt" kan zijn, en of de stichting via de proxy onder de AVG
+verwerkingsverantwoordelijke is voor wat er doorheen gaat. Dit staat hier als
+open punt, niet als beslechte vraag: de conclusie hierboven blijft de huidige
+werkaanname, geen uitspraak dat het anders onmogelijk is.

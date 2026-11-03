@@ -6,7 +6,8 @@ OciDeck is a privacy-first Marp presentation builder for desktop and web, with n
 application backend — everything runs locally. This folder holds the project
 documentation. Start here and jump to what you need.
 
-> **Status:** alpha — releases are tagged (latest `0.1.1`, 2026-07-27). See
+> **Status:** alpha — releases are tagged; the releases feed on the forge
+> carries the latest. See
 > [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and
 > [`../SECURITY.md`](../SECURITY.md) under *Supported versions*.
 >
@@ -86,7 +87,7 @@ they live in the repository. See [How these documents are maintained](#how-these
 | [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not — OciDeck does not speak MCP, and MCP is not how a model is attached. To attach one, see *AI assistance (optional)* in [USER_GUIDE.md](USER_GUIDE.md#ai-assistance-optional). |
 | [OCIWACHT.md](design/OCIWACHT.md) | The privacy scanner design, **in Dutch**, with a per-section delivered/open table at the top. At 2,668 lines it is the largest of the three Dutch documents. |
 | [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historical: the agentic build plan for the pentest/AI work. Executed; kept as a worked example, not a queue. |
-| [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Design proposal, unbuilt: a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |
+| [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Implemented (Phases 0–10, with the honesty notes in the doc): a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |
 | [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |
 | [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
 | [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Design proposal, unbuilt: encrypted report distribution to a recipient who has minimal friction — double-click and view. The distribution side of the OpenKAT integration. |

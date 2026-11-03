@@ -811,6 +811,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'One HTML file with real text, headings and alt texts that opens in any browser without internet — with tables, maths, mermaid and charts.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Collaborate live on a presentation stored on a WebDAV server. Off by default. Edits travel through a working folder next to the deck on the same server — without encryption by OciDeck.',
   'Ga naar de brontabel': 'Go to the source table',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'This table is a copy of the source table "{bron}". Edit the source and choose Refresh, or detach the view as a snapshot.',
@@ -4094,8 +4098,6 @@ const _dutchSourceAddEn = {
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Exporting makes a redacted copy for a recipient. You keep your byte-faithful original with Save.',
   'Exporteren…': 'Export…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'One accessible HTML file that opens in any browser without internet, with tables, math, mermaid and charts.',
   'Het thema en de opmaak per dia (_class).':
       'The theme and the per-slide styling (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -4495,8 +4497,6 @@ const _dutchSourceAddEn = {
       'files could not be safely reviewed',
   'nieuw gescand': 'newly scanned',
   'Realtime samenwerken': 'Real-time collaboration',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Collaborate live on a presentation through an encrypted relay. Off by default. The content is end-to-end encrypted with OciDeck\'s own keys; the server only sees encrypted data.',
   'Chat': 'Chat',
   'Chat sluiten': 'Close chat',
   'Bericht…': 'Message…',

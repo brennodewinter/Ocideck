@@ -649,6 +649,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Un file HTML con testo reale, intestazioni e testi alternativi, che si apre in qualsiasi browser senza internet — con tabelle, matematica, mermaid e grafici.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Lavora dal vivo su una presentazione su un server WebDAV. Disattivato per impostazione predefinita. Le modifiche passano attraverso una cartella di lavoro accanto al deck sullo stesso server — senza crittografia da parte di OciDeck.',
   'Ga naar de brontabel': 'Vai alla tabella sorgente',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Questa tabella è una copia della tabella sorgente "{bron}". Modifica la sorgente e scegli Aggiorna, oppure scollega la vista come istantanea.',
@@ -3976,8 +3980,6 @@ const _dutchSourceAddIt = {
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'L\'esportazione crea una copia oscurata per un destinatario. L\'originale fedele ai byte lo conservi con Salva.',
   'Exporteren…': 'Esporta…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Un unico file HTML accessibile che si apre in qualsiasi browser senza internet, con tabelle, matematica, mermaid e grafici.',
   'Het thema en de opmaak per dia (_class).':
       'Il tema e la formattazione per diapositiva (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -4386,8 +4388,6 @@ const _dutchSourceAddIt = {
       'non è stato possibile rivedere i file in modo sicuro',
   'nieuw gescand': 'appena scansionato',
   'Realtime samenwerken': 'Collaborazione in tempo reale',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Collabora dal vivo a una presentazione tramite un inoltro cifrato. Disattivato per impostazione predefinita. Il contenuto è cifrato end-to-end con le chiavi di OciDeck; il server vede solo dati cifrati.',
   'Chat': 'Chat',
   'Chat sluiten': 'Chiudi chat',
   'Bericht…': 'Messaggio…',

@@ -1621,6 +1621,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Un fișier HTML cu text real, titluri și texte alternative, care se deschide în orice browser fără internet — cu tabele, matematică, mermaid și grafice.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Lucrați live la o prezentare pe un server WebDAV. Dezactivat implicit. Modificările călătoresc printr-un dosar de lucru de lângă deck pe același server — fără criptare de către OciDeck.',
   'Ga naar de brontabel': 'Mergi la tabelul sursă',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Acest tabel este o copie a tabelului sursă "{bron}". Editați sursa și alegeți Reîmprospătare, sau detașați vizualizarea ca instantaneu.',
@@ -4942,8 +4946,6 @@ const _dutchSourceAddRo = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Exportul creează o copie redactată pentru un destinatar. Originalul tău fidel octeților îl păstrezi cu Salvare.',
   'Exporteren…': 'Exportă…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Un singur fișier HTML accesibil care se deschide în orice browser fără internet, cu tabele, matematică, mermaid și grafice.',
   'Het thema en de opmaak per dia (_class).':
       'Tema și formatarea pentru fiecare diapozitiv (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5352,8 +5354,6 @@ const _dutchSourceAddRo = <String, String>{
       'fișierele nu au putut fi examinate în siguranță',
   'nieuw gescand': 'nou scanat',
   'Realtime samenwerken': 'Colaborare în timp real',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Colaborează în direct la o prezentare printr-un releu criptat. Dezactivat implicit. Conținutul este criptat cap la cap cu cheile proprii OciDeck; serverul vede doar date criptate.',
   'Chat': 'Chat',
   'Chat sluiten': 'Închide chatul',
   'Bericht…': 'Mesaj…',

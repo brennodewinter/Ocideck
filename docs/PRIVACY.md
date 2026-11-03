@@ -29,12 +29,17 @@ technical mechanisms behind these guarantees, see
   turning on the AI assistant. Three paths are the exception, and two of them you
   do not choose in the moment: the **CORS fallback** on the web build (used
   automatically, without a separate prompt), an **embedded YouTube or Vimeo
-  video** (the service is contacted when the slide plays), and the **CVE lookup**
-  if you switch it on. The table below is complete; it has ten rows, not three.
+  video** (the service is contacted when the slide plays), the **CVE lookup**
+  if you switch it on, and the desktop **version check** if you enable it (off
+  by default; a manual check always works). The table below names every
+  destination the app can reach.
   *(Corrected 2026-07-22: this bullet said "the only data … is data you
   explicitly send", which was already contradicted 170 lines further down. The
   summary is the paragraph most people actually read, so it was wrong exactly
-  where it counted most.)*
+  where it counted most. Corrected 2026-11-03: this claimed the table was
+  "complete" at ten rows; it had grown to 25 and still missed the version
+  check and the LibrePlan connector. The count is gone — a number goes stale
+  with the next row.)*
 - **You control sharing** through privacy scanning (OciWacht), redaction, and TLP
   classification before anything is exported.
 
@@ -285,6 +290,8 @@ against accessing internal/private network addresses.
 | **Live transcription via an ASR server** (only with the session-consent checkbox that names the receiving host, and only offered after a successful protocol probe) | The running recording's audio chunks, streamed over the live endpoint's WebSocket (`vosk-ws-1` protocol) for as long as you record; ticking the box is consent for that one session, never a standing permission. The protocol probe sends no audio. A dropped connection loses the provisional text only — nothing reconnects or re-sends by itself. A browser WebSocket cannot carry the API-key header, so a key-protected live server is honestly unreachable there instead of silently unauthenticated | The live endpoint on the same configured server profile |
 | **Video meeting (Jitsi)** (module off by default; the link check is the first contact and asks first) | Preflight: the deployment's `config.js` plus XMPP discovery. On join: signalling (XMPP over WebSocket — the room name, your generated nickname and, on an authenticated deployment, the credential you enter) to the server, and **the call media itself** — microphone, camera and screen share as SRTP — to that deployment's videobridge. Media is not end-to-end encrypted; it is decrypted on the videobridge like on every standard Jitsi setup, and the panel says so. The desktop app pins the server identity for signalling; the browser cannot, so there trust rests on `https`/`wss` and your own server choice. An internal (private-network) server needs the explicit *trusted internal server* confirmation per server | The Jitsi deployment in the link you pasted — server and videobridge may be the same host or announced separately; the panel lists the real media destinations |
 | **Cost mode — exchange rate** (you press *Fetch*, only for a currency other than the euro) | One request per currency, containing only the currency code (`/v1/latest?base=<code>&symbols=EUR`). The service sees your IP address. No presentation data, amounts, rates or attendee input is sent | `api.frankfurter.dev` (the European Central Bank's reference rates) |
+| **Version check** (off by default, desktop only) | One GET to the release index; a version tag comes back, nothing about you or your deck is sent. At most one request per 24 hours when the setting is on; *Controleer nu* under *Settings → Over OciDeck* always works, setting or not | `pawprint.vigilis.online`, the project's own forge, run by the publisher — deliberately not a setting |
+| **LibrePlan connector** (off by default) | Read-only GET requests for project schedules, resources and timesheets | The LibrePlan server you configured |
 | **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
 | **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |
 
@@ -316,11 +323,15 @@ naming them is the only honest way to keep the sentence above true:
 ### The servers the publisher runs
 
 Everything above goes to a service you chose, or to a video platform you
-embedded. Two destinations are different, and both are operated by **Stichting
+embedded. Three destinations are different, and all are operated by **Stichting
 LibreKAT**, the same foundation that publishes OciDeck: `cveapi.librekat.nl`,
-the default mirror for CVE lookups, and `ocideck.librekat.nl`, the public web
-demo. The first you reach from your own copy of the app; the second *is* a copy
-of the app, served by the publisher.
+the default mirror for CVE lookups; `ocideck.librekat.nl`, the public web
+demo; and `pawprint.vigilis.online`, the project's forge, which the optional
+version check contacts (and which also serves the releases, their notes and
+their SBOM). The first you reach from your own copy of the app; the second
+*is* a copy of the app, served by the publisher; the third sees at most one
+GET a day, only if you switched the check on — and it is the same host the
+app itself came from.
 
 #### `cveapi.librekat.nl` — the CVE mirror
 

@@ -2,8 +2,8 @@
 // machine-readable formats — CycloneDX 1.6 JSON and SPDX 2.3 JSON — covering
 // every shipped component (Dart/Flutter packages direct + transitive, vendored
 // JS/CSS export bundles, vendored plugin forks, bundled fonts, and the pinned
-// build SDKs). This is the artefact the EU Cyber Resilience Act (Regulation
-// (EU) 2024/2847), Annex I, Part II §1, requires manufacturers to draw up.
+// build SDKs). This is the artefact as described in the EU Cyber Resilience
+// Act (Regulation (EU) 2024/2847), Annex I, Part II §1.
 //
 //   dart run tool/generate_sbom.dart            (or: make sbom)
 //       Regenerate sbom/ocideck.cdx.json and sbom/ocideck.spdx.json.

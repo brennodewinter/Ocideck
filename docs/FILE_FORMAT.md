@@ -1982,6 +1982,36 @@ never stored:
 - Pick & pack :: process :: pt=35m; lt=3d
 ```
 
+**Gantt** (`gantt`) — a project schedule for the optional **Procesverbetering**
+module, stored as a plain Markdown table so the planning stays a readable
+schedule in any Marp reader. The Mermaid gantt DSL is derived when the slide
+is drawn and never stored — the table is the truth. Five positional columns:
+
+- **Taak** — the task name. `Milestone: <name>` marks a zero-length milestone;
+  with `<!-- ocideck_gantt_sections: true -->` a name starting `## ` becomes a
+  Mermaid `section` heading instead of a task.
+- **Start** — an ISO date `YYYY-MM-DD`, or empty when `Afhankelijk van`
+  supplies the start as `after` references (a dependency wins over the date).
+- **Duur** — a number with unit `d`, `w` or `h`: `12d`, `3w`, `40h`.
+- **Voortgang** — `done`, `active` or `crit`; anything else draws a plain bar.
+- **Afhankelijk van** — comma-separated task names, resolved to `after`
+  dependencies at render time; an unknown name is dropped, not an error.
+
+A task without a resolvable start, or a non-milestone without a valid
+duration, is left out of the diagram rather than failing the render.
+`<!-- ocideck_gantt_scale: auto|day|week|month -->` sets the axis
+granularity. The LibrePlan importer truncates at 30 tasks (`ganttMaxTasks`).
+
+```markdown
+<!-- _class: gantt -->
+# Planning
+| Taak | Start | Duur | Voortgang | Afhankelijk van |
+| --- | --- | --- | --- | --- |
+| Intake | 2026-11-02 | 5d | done | |
+| Ontwerp | | 10d | active | Intake |
+| Milestone: livegang | 2026-12-01 | | | Ontwerp |
+```
+
 **Findings summary** (`findings-summary`) — a management overview of how many
 findings fall in each CVSS severity band, stored as a normal Markdown table (like
 `checklist` / `scope-matrix`) so it round-trips losslessly. The heading is the

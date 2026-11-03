@@ -1607,6 +1607,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
+      'Egy HTML-fájl valódi szöveggel, címsorokkal és alt-szövegekkel, amely minden böngészőben megnyílik internet nélkül — táblázatokkal, matematikával, mermaiddel és grafikonokkal.',
+  'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
+      'Dolgozzon élőben egy WebDAV-kiszolgálón lévő prezentáción. Alapértelmezetten ki. A módosítások a deck melletti munkamappán keresztül utaznak ugyanazon a kiszolgálón — OciDeck-titkosítás nélkül.',
   'Ga naar de brontabel': 'Ugrás a forrástáblához',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ez a táblázat a "{bron}" forrástábla másolata. Szerkessze a forrást és válassza a Frissítés lehetőséget, vagy válassza le a nézetet pillanatképként.',
@@ -4902,8 +4906,6 @@ const _dutchSourceAddHu = <String, String>{
   'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
       'Az exportálás kitakart másolatot készít egy címzettnek. A bájthű eredetit a Mentés paranccsal őrzöd meg.',
   'Exporteren…': 'Exportálás…',
-  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'Egyetlen akadálymentes HTML-fájl, amely internet nélkül bármely böngészőben megnyílik, táblázatokkal, matematikával, mermaiddel és diagramokkal.',
   'Het thema en de opmaak per dia (_class).':
       'A téma és a diánkénti formázás (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -5308,8 +5310,6 @@ const _dutchSourceAddHu = <String, String>{
       'a fájlokat nem lehetett biztonságosan áttekinteni',
   'nieuw gescand': 'újonnan szkennelve',
   'Realtime samenwerken': 'Valós idejű együttműködés',
-  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
-      'Működj együtt élőben egy bemutatón egy titkosított továbbítón keresztül. Alapértelmezetten kikapcsolva. A tartalom végponttól végpontig titkosított OciDeck saját kulcsaival; a kiszolgáló csak titkosított adatokat lát.',
   'Chat': 'Csevegés',
   'Chat sluiten': 'Csevegés bezárása',
   'Bericht…': 'Üzenet…',
