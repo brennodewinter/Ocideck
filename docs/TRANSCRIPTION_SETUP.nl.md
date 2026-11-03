@@ -173,8 +173,14 @@ welke toestemming.
 
 ## Opslag, bewaring en wissen
 
-- **Gestage opnames** staan zeven dagen in de stagingmap van de app
-  nadat je *bewaren* kiest, en worden dan opgeruimd. Op web is er geen
+- **Gestage opnames** staan in de stagingmap van de app,
+  `transcription/recordings/` in de app-supportmap, en worden zeven
+  dagen na het begin van de opname opgeruimd. Niet in de tijdelijke map
+  van het besturingssysteem: macOS leegt die na drie dagen en veel
+  Linux-systemen bij elke herstart, vóór de zeven dagen om zijn.
+  *(Rechtgezet 03-11-2026, #2761: tot dan stond de staging in de
+  tijdelijke map, en telde deze regel de dagen vanaf *bewaren*.)* Op web
+  is er geen
   map: opname en manifest blijven in de tab als `mem:`-assets en een
   reload verliest ze — de bewaarflow waarschuwt daarvoor.
 - **Callprovenance** reist mee als `sources.json` naast de opname (als

@@ -89,6 +89,61 @@ void main() {
     expect(root.existsSync(), isFalse);
   });
 
+  group('wortel onder app-support, niet onder de OS-temp (#2761)', () {
+    late Directory support;
+    late Directory temp;
+    late IoRecordingStaging fromPlatform;
+
+    setUp(() {
+      support = Directory(p.join(root.path, 'support'))..createSync();
+      temp = Directory(p.join(root.path, 'temp'))..createSync();
+      fromPlatform = IoRecordingStaging(
+        supportDir: () async => support,
+        tempDir: () async => temp,
+      );
+    });
+
+    test('een nieuwe sessie landt onder de supportmap', () async {
+      final dir = (await fromPlatform.createSessionDir())!;
+      expect(
+        p.isWithin(p.join(support.path, 'transcription', 'recordings'), dir),
+        isTrue,
+        reason: dir,
+      );
+      expect(p.isWithin(temp.path, dir), isFalse);
+    });
+
+    test('een bewaarde opname uit de oude tempwortel verhuist mee', () async {
+      final legacy = Directory(
+        p.join(
+          temp.path,
+          IoRecordingStaging.legacyRootDirName,
+          '1700000000000',
+        ),
+      )..createSync(recursive: true);
+      final wav = File(p.join(legacy.path, 'opname.wav'))
+        ..writeAsBytesSync([0, 1, 2]);
+      final recordedAt = DateTime(2026, 11, 1, 9, 30);
+      wav.setLastModifiedSync(recordedAt);
+
+      final dirs = await fromPlatform.listSessionDirs();
+
+      expect(dirs, hasLength(1));
+      expect(p.basename(dirs.single), '1700000000000');
+      expect(p.isWithin(support.path, dirs.single), isTrue);
+      final moved = File(p.join(dirs.single, 'opname.wav'));
+      expect(moved.readAsBytesSync(), [0, 1, 2]);
+      // De lijst sorteert op de wijzigingstijd; de verhuizing laat die staan.
+      expect(moved.lastModifiedSync(), recordedAt);
+      expect(
+        Directory(
+          p.join(temp.path, IoRecordingStaging.legacyRootDirName),
+        ).existsSync(),
+        isFalse,
+      );
+    });
+  });
+
   group('web-stub (§3.2 "Web")', () {
     test('elke call is een eerlijke no-op', () async {
       const s = stub.NoopRecordingStaging();

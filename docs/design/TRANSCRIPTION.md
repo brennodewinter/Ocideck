@@ -272,10 +272,13 @@ maps them; a label the engine cannot support is absent, never guessed.
   *requires* re-encoding. A `combinatie` source keeps its channels separate
   where the platform delivers them (§2.2).
 - **Lifecycle.** Recording lands in the per-session **staging folder** under
-  the OS temp directory — the same staging a picked image gets before first
-  save (FILE_FORMAT.md §1), so the bytes are safe from the moment recording
-  starts, and the ordinary save-time copy moves them into `media/` because
-  the layout already matches. Until the transcript is saved, the recording is
+  the application-support directory (`transcription/recordings/`) — the same
+  layout a picked image gets before first save (FILE_FORMAT.md §1), so the
+  bytes are safe from the moment recording starts. *(Changed 2026-11-03,
+  #2761: it was the OS temp directory, which macOS clears after three days and
+  a tmpfs `/tmp` on every restart — shorter than the recovery period below.)*
+  The ordinary save-time copy still moves them into `media/` because the
+  layout already matches. Until the transcript is saved, the recording is
   *not yet saved* and marked as such; staging cleanup shares the 7-day
   recovery period, so a crash cannot orphan a recording before recovery has
   had its chance, and recovery can offer the staged audio the same way it

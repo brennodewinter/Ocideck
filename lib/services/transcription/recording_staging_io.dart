@@ -1,8 +1,14 @@
 // Desktop-versie van [RecordingStaging]: een map per sessie onder de
-// OS-temp, vergelijkbaar met hoe [RecoveryService] zijn herstelmap onder
-// de support-directory houdt. Audio is gevoeliger dan een platte tekst —
-// op Linux krijgt de wortelmap daarom dezelfde `700`-hardening als de
-// recoverymap, want temp is op veel opstellingen voor iedereen leesbaar.
+// app-supportmap, naast de herstelmap van [RecoveryService]. Audio is
+// gevoeliger dan een platte tekst — op Linux krijgt de wortelmap daarom
+// dezelfde `700`-hardening als de recoverymap.
+//
+// Niet de OS-temp, waar hij tot #2761 stond: een opname moet de zeven
+// hersteldagen halen, en de temp haalt die niet. macOS' dirhelper wist
+// `/var/folders/…/T` dagelijks voor alles ouder dan drie dagen, en op
+// Linux is `/tmp` vaak tmpfs, die bij een herstart leeg is — precies na
+// de vastgelopen call waarvoor het herstel bestaat. Een vergadering neem
+// je niet opnieuw op.
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
@@ -17,32 +23,90 @@ import 'recording_staging_stub.dart';
 // re-export is [RecordingStaging] daardoor onzichtbaar.
 export 'recording_staging_stub.dart' show RecordingStaging;
 
-/// Staging op het bestandssysteem: `<temp>/ocideck-recordings/<sessie>/`.
-/// [baseDir] is de testinjectie — productie laat hem op de echte tempmap
-/// staan.
+/// Staging op het bestandssysteem:
+/// `<support>/transcription/recordings/<sessie>/`. [baseDir] is de
+/// testinjectie voor de wortel zelf; [supportDir] en [tempDir] vervangen
+/// path_provider, zodat de verhuizing uit de oude tempwortel te toetsen is.
 class IoRecordingStaging implements RecordingStaging {
-  IoRecordingStaging({Directory? baseDir})
-    : _resolveRoot = baseDir != null ? (() async => baseDir) : _defaultRoot;
+  IoRecordingStaging({
+    Directory? baseDir,
+    Future<Directory> Function()? supportDir,
+    Future<Directory> Function()? tempDir,
+  }) : _resolveRoot = baseDir != null
+           ? (() async => baseDir)
+           : _supportRoot(
+               supportDir ?? getApplicationSupportDirectory,
+               tempDir ?? getTemporaryDirectory,
+             );
 
   final Future<Directory> Function() _resolveRoot;
 
-  static const rootDirName = 'ocideck-recordings';
+  /// De naam van de oude wortel onder de OS-temp (vóór #2761).
+  static const legacyRootDirName = 'ocideck-recordings';
 
-  static Future<Directory> _defaultRoot() async {
-    final temp = await getTemporaryDirectory();
-    return Directory(p.join(temp.path, rootDirName));
+  /// De wortel onder app-support, één keer opgezocht. Die eerste keer neemt
+  /// hij de sessies van een oude tempwortel over, zodat een update geen
+  /// bewaarde opname kwijtraakt.
+  static Future<Directory> Function() _supportRoot(
+    Future<Directory> Function() support,
+    Future<Directory> Function() temp,
+  ) {
+    Future<Directory>? once;
+    return () => once ??= () async {
+      final root = Directory(
+        p.join((await support()).path, 'transcription', 'recordings'),
+      );
+      try {
+        final legacy = Directory(
+          p.join((await temp()).path, legacyRootDirName),
+        );
+        if (await legacy.exists()) await _adoptLegacy(legacy, root);
+      } catch (e) {
+        logWarning('RecordingStaging: oude tempstaging niet overgezet', e);
+      }
+      return root;
+    }();
+  }
+
+  /// Verhuist elke sessiemap uit [legacy] naar [root]. Een `rename` waar dat
+  /// kan; over een schijfgrens (tmpfs) kopiëren, mét wijzigingstijd, want de
+  /// lijst sorteert daarop. Een map die al bestaat blijft liggen.
+  static Future<void> _adoptLegacy(Directory legacy, Directory root) async {
+    await _ensureRoot(root);
+    await for (final entity in legacy.list()) {
+      if (entity is! Directory) continue;
+      final target = Directory(p.join(root.path, p.basename(entity.path)));
+      if (await target.exists()) continue;
+      try {
+        await entity.rename(target.path);
+      } on FileSystemException {
+        await target.create();
+        await for (final file in entity.list()) {
+          if (file is! File) continue;
+          final copy = await file.copy(
+            p.join(target.path, p.basename(file.path)),
+          );
+          await copy.setLastModified(await file.lastModified());
+        }
+        await entity.delete(recursive: true);
+      }
+    }
+    await legacy.delete();
+  }
+
+  static Future<void> _ensureRoot(Directory root) async {
+    if (root.existsSync()) return;
+    await root.create(recursive: true);
+    if (Platform.isLinux && !await chmodPath('700', root.path)) {
+      throw const FileSystemException(
+        'Opname-staging kon niet op eigenaar-alleen worden gezet',
+      );
+    }
   }
 
   Future<Directory> _root() async {
     final root = await _resolveRoot();
-    if (!root.existsSync()) {
-      await root.create(recursive: true);
-      if (Platform.isLinux && !await chmodPath('700', root.path)) {
-        throw const FileSystemException(
-          'Opname-staging kon niet op eigenaar-alleen worden gezet',
-        );
-      }
-    }
+    await _ensureRoot(root);
     return root;
   }
 
