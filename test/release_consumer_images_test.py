@@ -28,6 +28,32 @@ class ConsumerImagesTest(unittest.TestCase):
         self.assertIn('org.gnome.Platform/x86_64/50', flatpak)
         self.assertIn('--show-commit', flatpak)
 
+    def test_image_probe_rejects_corrupt_bytes_before_docker_and_preserves_checks(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            artifact = directory / 'archive'
+            artifact.write_bytes(b'existing verified fixture')
+            docker = directory / 'docker'
+            calls = directory / 'calls'
+            docker.write_text('#!/bin/sh\ncat > "$DOCKER_CALLS"\n')
+            docker.chmod(0o700)
+            env = dict(os.environ, PATH=str(directory) + os.pathsep + os.environ['PATH'], DOCKER_CALLS=str(calls))
+            command = ['bash', str(ROOT / 'scripts/probe_release_consumer_image.sh'), 'deb',
+                       'registry.invalid/consumer@sha256:' + 'a' * 64, '9.9.9', str(artifact), '0' * 64]
+            result = subprocess.run(command, env=env, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(calls.exists())
+            import hashlib
+            command[-1] = hashlib.sha256(artifact.read_bytes()).hexdigest()
+            result = subprocess.run(command, env=env, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            probe = calls.read_text()
+            self.assertLess(probe.index('ldconfig -p'), probe.index('apt-get install'))
+            self.assertIn("grep 'not found'", probe)
+            self.assertIn('timeout 20 xvfb-run', probe)
+            self.assertIn('--no-deps --no-related --bundle', probe)
+            self.assertIn('FILES.sha256', probe)
+
     def test_debian12_uses_existing_builder_without_other_format_builds(self):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -73,6 +99,11 @@ if sys.argv[1:3]==['image','inspect']:
             self.assertTrue(all(re.fullmatch(r'registry.invalid/test/ocideck-consumer-[a-z0-9]+@sha256:a{64}', image) for image in receipt['images'].values()))
             recorded = [json.loads(line) for line in calls.read_text().splitlines()]
             self.assertEqual(sum(call[0] == 'push' for call in recorded), 6)
+            for call in recorded:
+                if call[0] == 'build':
+                    self.assertIn('--cpu-quota', call)
+                    self.assertEqual(call[call.index('--cpu-quota') + 1], '200000')
+                    self.assertEqual(call[call.index('--memory') + 1], '4g')
             before = calls.read_bytes()
             self.assertNotEqual(subprocess.run(command, env=env, capture_output=True).returncode, 0)
             self.assertEqual(calls.read_bytes(), before)

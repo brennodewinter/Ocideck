@@ -12,7 +12,8 @@ WORK="$(mktemp -d)"
 trap 'rm -rf -- "$WORK"' EXIT
 for profile in deb rpm tar debian12 appimage flatpak; do
   image="$REGISTRY/ocideck-consumer-$profile:$REVISION"
-  docker build --platform linux/amd64 --build-arg "SOURCE_REVISION=$REVISION" \
+  DOCKER_BUILDKIT=0 docker build --platform linux/amd64 \
+    --cpu-period 100000 --cpu-quota 200000 --memory 4g --build-arg "SOURCE_REVISION=$REVISION" \
     -f "$ROOT/scripts/release_consumers/$profile.Dockerfile" -t "$image" "$ROOT/scripts/release_consumers"
   docker run --rm --platform linux/amd64 "$image" sh -ec \
     'test -s /usr/share/ocideck-consumer/packages.txt; command -v node; command -v sha256sum'
