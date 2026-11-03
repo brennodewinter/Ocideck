@@ -2521,3 +2521,13 @@ existed. It deliberately does **not** demand equality with the pin: that would
 make the only development machine unable to run the gate at all, and a gate that
 blocks everything gets switched off rather than fixed. A deviation is printed
 loudly on every run instead.
+
+### Full-gate shell checker
+
+`make check-full` checks ShellCheck **0.11.0** before the expensive test suite.
+Use the same version locally and on the validation worker; distribution packages
+may still provide 0.9.0 and produce different findings. The official Linux x64
+0.11.0 archive SHA-256 is
+`8c3be12b05d5c177a04c29e3c78ce89ac86f1595681cab149b65b97c4e227198`.
+Verify this digest before installing the archive; a version mismatch is an
+environment failure, not a reason to suppress findings.

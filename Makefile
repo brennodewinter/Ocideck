@@ -410,6 +410,7 @@ shellcheck:
 	@echo "        silently matches nothing, an exit code swallowed by a pipe."
 	@echo "        Dart has a compiler and an analyzer for this; shell has this."
 	@command -v shellcheck >/dev/null 2>&1 || { echo "shellcheck not found — install it (macOS: brew install shellcheck)"; exit 2; }
+	@shellcheck --version | grep -qx "version: 0.11.0" || { echo "ShellCheck 0.11.0 required; check the validation environment before running the full gate."; exit 2; }
 	shellcheck scripts/*.sh
 
 check-secrets:
@@ -1560,7 +1561,7 @@ check-registrations:
 check-full:
 	@scripts/gate_lock.sh $(MAKE) check-full-locked
 
-check-full-locked: check-locked check-l10n-orphans check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated check-marp
+check-full-locked: shellcheck check-locked check-l10n-orphans check-secrets sast licenses sbom-verify deps-check check-web deps-outdated check-marp
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, dependency freshness, and real-Marp theme loading."
 
