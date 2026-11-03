@@ -651,6 +651,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Extra lettertype voor ontbrekende tekens':
+      'Tipo di letra ekstra pa karakternan falta',
+  'Geen lettertypebestand gekozen': 'Ningun archivo di fuente elegí',
+  'Kies bestand…': 'Skohe archivo…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Solamente un subset di e archivo aki ta bai den e PDF. E lisensia di e archivo mester permiti embed; OciDeck no ta kontrolá eso i no ta baha nada.',
   'Bijzonder persoonsgegeven': 'Dato personal sensitivo',
   'Dia {n} van {m}': 'Diapositiva {n} di {m}',
   'ander scherm: niet bereikbaar': 'otro pantaya: no alcanzable',

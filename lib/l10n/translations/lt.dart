@@ -1611,6 +1611,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Papildomas šriftas trūkstantiems simboliams',
+  'Geen lettertypebestand gekozen': 'Šrifto failas nepasirinktas',
+  'Kies bestand…': 'Pasirinkti failą…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Į PDF įterpiama tik šio failo dalis. Failo licencija turi leisti įterpimą; OciDeck to netikrina ir nieko neatsisiunčia.',
   'Bijzonder persoonsgegeven': 'Specialios kategorijos asmens duomenys',
   'Dia {n} van {m}': 'Skaidrė {n} iš {m}',
   'ander scherm: niet bereikbaar': 'kitas ekranas: nepasiekiamas',

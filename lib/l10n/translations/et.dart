@@ -1598,6 +1598,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Lisafont puuduvate tähtede jaoks',
+  'Geen lettertypebestand gekozen': 'Fontifaili pole valitud',
+  'Kies bestand…': 'Vali fail…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'PDF-i lisatakse ainult osa sellest failist. Faili litsents peab lubama lisamist; OciDeck ei kontrolli seda ega lae midagi alla.',
   'Bijzonder persoonsgegeven': 'Erikategooria isikuandmed',
   'Dia {n} van {m}': 'Slaid {n} / {m}',
   'ander scherm: niet bereikbaar': 'teine ekraan: pole kättesaadav',

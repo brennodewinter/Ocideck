@@ -652,6 +652,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Extra lettertype voor ontbrekende tekens':
+      'Ekstra lettertype foar ûntbrekkende tekens',
+  'Geen lettertypebestand gekozen': 'Gjin lettertypebestân keazen',
+  'Kies bestand…': 'Kies bestân…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Allinne in subset fan dit bestân giet mei yn de PDF. De lisinsje fan it bestân moat ynsluten tastean; OciDeck kontrolearret dat net en downloadet neat.',
   'Bijzonder persoonsgegeven': 'Bysûnder persoansgegeven',
   'Dia {n} van {m}': 'Dia {n} fan {m}',
   'ander scherm: niet bereikbaar': 'oar skerm: net berikber',

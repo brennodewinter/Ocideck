@@ -811,6 +811,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Extra lettertype voor ontbrekende tekens':
+      'Extra font for missing characters',
+  'Geen lettertypebestand gekozen': 'No font file selected',
+  'Kies bestand…': 'Choose file…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Only a subset of this file is embedded in the PDF. The file\'s license must allow embedding; OciDeck does not check that and downloads nothing.',
   'Bijzonder persoonsgegeven': 'Special-category personal data',
   'Dia {n} van {m}': 'Slide {n} of {m}',
   'ander scherm: niet bereikbaar': 'other screen: unreachable',

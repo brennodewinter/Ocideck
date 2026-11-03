@@ -1620,6 +1620,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Додатковий шрифт для відсутніх символів',
+  'Geen lettertypebestand gekozen': 'Файл шрифту не вибрано',
+  'Kies bestand…': 'Вибрати файл…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Лише підмножина цього файла вбудовується в PDF. Ліцензія файла має дозволяти вбудовування; OciDeck це не перевіряє і нічого не завантажує.',
   'Bijzonder persoonsgegeven': 'Персональні дані особливої категорії',
   'Dia {n} van {m}': 'Слайд {n} з {m}',
   'ander scherm: niet bereikbaar': 'інший екран: недоступний',

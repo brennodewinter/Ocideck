@@ -1603,6 +1603,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Papildu fonts trūkstošajām rakstzīmēm',
+  'Geen lettertypebestand gekozen': 'Fonta fails nav izvēlēts',
+  'Kies bestand…': 'Izvēlēties failu…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'PDF failā tiek iegults tikai šī faila apakškopa. Faila licencei ir jāatļauj iegulšana; OciDeck to nepārbauda un neko nelejupielādē.',
   'Bijzonder persoonsgegeven': 'Īpašas kategorijas personas dati',
   'Dia {n} van {m}': 'Slaidi {n} no {m}',
   'ander scherm: niet bereikbaar': 'otrs ekrāns: nepieejams',

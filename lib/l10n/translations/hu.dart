@@ -1607,6 +1607,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Extra betűtípus a hiányzó karakterekhez',
+  'Geen lettertypebestand gekozen': 'Nincs betűtípus-fájl kiválasztva',
+  'Kies bestand…': 'Fájl kiválasztása…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'A fájlnak csak egy részhalmaza kerül be a PDF-be. A fájl licence engedélyeznie kell a beágyazást; az OciDeck ezt nem ellenőrzi, és semmit sem tölt le.',
   'Bijzonder persoonsgegeven': 'Különleges személyes adat',
   'Dia {n} van {m}': 'Dia {n} / {m}',
   'ander scherm: niet bereikbaar': 'másik képernyő: nem elérhető',

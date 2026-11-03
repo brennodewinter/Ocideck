@@ -1624,6 +1624,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Допълнителен шрифт за липсващи знаци',
+  'Geen lettertypebestand gekozen': 'Не е избран шрифтов файл',
+  'Kies bestand…': 'Избери файл…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Само подмножество от този файл се вгражда в PDF. Лицензът на файла трябва да позволява вграждане; OciDeck не го проверява и не изтегля нищо.',
   'Bijzonder persoonsgegeven': 'Лични данни от специална категория',
   'Dia {n} van {m}': 'Слайд {n} от {m}',
   'ander scherm: niet bereikbaar': 'друг екран: недостъпен',

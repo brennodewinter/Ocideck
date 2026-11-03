@@ -1623,6 +1623,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Font żejjed għal karattri nieqsa',
+  'Geen lettertypebestand gekozen': 'L-ebda fajl ta\' font magħżul',
+  'Kies bestand…': 'Agħżel fajl…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Biss sottosett ta\' dan il-fajl jidhul fil-PDF. Il-liċenzja tal-fajl trid tippermetti l-inkorporazzjoni; OciDeck ma jivverifikax dan u ma jniżżel xejn.',
   'Bijzonder persoonsgegeven': 'Dejta personali sensittiva',
   'Dia {n} van {m}': 'Slide {n} minn {m}',
   'ander scherm: niet bereikbaar': 'skrin ieħor: mhux jista\' jintlaħaq',

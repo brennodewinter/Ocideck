@@ -1604,6 +1604,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Extra typsnitt för saknade tecken',
+  'Geen lettertypebestand gekozen': 'Ingen typsnittsfil vald',
+  'Kies bestand…': 'Välj fil…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Endast en delmängd av denna fil bäddas in i PDF:en. Filens licens måste tillåta inbäddning; OciDeck kontrollerar inte det och laddar inte ner något.',
   'Bijzonder persoonsgegeven': 'Känsliga personuppgifter',
   'Dia {n} van {m}': 'Bild {n} av {m}',
   'ander scherm: niet bereikbaar': 'annan skärm: inte nåbar',

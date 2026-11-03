@@ -1609,6 +1609,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Dodatni font za znakove koji nedostaju',
+  'Geen lettertypebestand gekozen': 'Nije odabran fontovni file',
+  'Kies bestand…': 'Odaberi datoteku…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Samo podskup ove datoteke ugrađuje se u PDF. Licenca datoteke mora dopuštati ugrađivanje; OciDeck to ne provjerava i ništa ne preuzima.',
   'Bijzonder persoonsgegeven': 'Osobni podatak posebne kategorije',
   'Dia {n} van {m}': 'Slajd {n} od {m}',
   'ander scherm: niet bereikbaar': 'drugi zaslon: nedostupan',

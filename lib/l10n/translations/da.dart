@@ -1605,6 +1605,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Ekstra skrifttype til manglende tegn',
+  'Geen lettertypebestand gekozen': 'Ingen skrifttypefil valgt',
+  'Kies bestand…': 'Vælg fil…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Kun en delmængde af denne fil indlejres i PDF\'en. Filens licens skal tillade indlejring; OciDeck kontrollerer det ikke og downloader intet.',
   'Bijzonder persoonsgegeven': 'Særlige personoplysninger',
   'Dia {n} van {m}': 'Dias {n} af {m}',
   'ander scherm: niet bereikbaar': 'anden skærm: ikke tilgængelig',

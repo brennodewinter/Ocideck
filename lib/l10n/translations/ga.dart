@@ -1635,6 +1635,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Cló breise do charachtair ar iarraidh',
+  'Geen lettertypebestand gekozen': 'Níor roghnaíodh aon chomhad cló',
+  'Kies bestand…': 'Roghnaigh comhad…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Ní théann ach fo-thacar den chomhad seo isteach sa PDF. Caithfidh ceadúnas an chomhaid ionchorprú a cheadú; ní dhéanann OciDeck é a sheiceáil agus ní íoslódálann sé aon rud.',
   'Bijzonder persoonsgegeven': 'Sonraí pearsanta ar leith',
   'Dia {n} van {m}': 'Sleamhnán {n} as {m}',
   'ander scherm: niet bereikbaar': 'scáileán eile: níl sé bhfeighil',

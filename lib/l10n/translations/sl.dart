@@ -1605,6 +1605,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Dodatna pisava za manjkajoče znake',
+  'Geen lettertypebestand gekozen': 'Datoteka s pisavo ni izbrana',
+  'Kies bestand…': 'Izberi datoteko…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'V PDF se vgradi samo podmnožica te datoteke. Licenca datoteke mora dovoljevati vgradnjo; OciDeck tega ne preverja in ničesar ne prenese.',
   'Bijzonder persoonsgegeven': 'Osebni podatek posebne kategorije',
   'Dia {n} van {m}': 'Diapozitiv {n} od {m}',
   'ander scherm: niet bereikbaar': 'drugi zaslon: nedostopen',

@@ -2513,6 +2513,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Eksik karakterler için ek yazı tipi',
+  'Geen lettertypebestand gekozen': 'Yazı tipi dosyası seçilmedi',
+  'Kies bestand…': 'Dosya seç…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Bu dosyanın yalnızca bir alt kümesi PDF\'e gömülür. Dosyanın lisansı gömmeye izin vermelidir; OciDeck bunu kontrol etmez ve hiçbir şey indirmez.',
   'Bijzonder persoonsgegeven': 'Özel kategorili kişisel veri',
   'Dia {n} van {m}': '{m} slayttan {n}.',
   'ander scherm: niet bereikbaar': 'diğer ekran: erişilemez',

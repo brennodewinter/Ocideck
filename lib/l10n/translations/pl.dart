@@ -1617,6 +1617,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Dodatkowa czcionka dla brakujących znaków',
+  'Geen lettertypebestand gekozen': 'Nie wybrano pliku czcionki',
+  'Kies bestand…': 'Wybierz plik…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Do pliku PDF osadzany jest tylko podzbiór tego pliku. Licencja pliku musi zezwalać na osadzanie; OciDeck tego nie sprawdza i niczego nie pobiera.',
   'Bijzonder persoonsgegeven': 'Dane osobowe kategorii szczególnej',
   'Dia {n} van {m}': 'Slajd {n} z {m}',
   'ander scherm: niet bereikbaar': 'drugi ekran: niedostępny',

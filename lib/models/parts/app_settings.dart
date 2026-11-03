@@ -198,6 +198,10 @@ class AppSettings {
   /// #2750: git-commits ondertekenen met `user.signingkey`. Standaard uit.
   final bool gitSignCommits;
 
+  /// #2753: een lettertypebestand van de eigen machine voor tekens die de
+  /// gebundelde snedes niet hebben. Alleen een subset gaat mee in de PDF.
+  final String? documentPdfFontPath;
+
   /// Diagonaal classificatie-watermerk op slides (fase 2). Standaard uit.
   final bool classificationWatermarkEnabled;
 
@@ -414,6 +418,7 @@ class AppSettings {
     this.minRequiredExportTlpKey,
     this.requireClassificationOnExport = false,
     this.gitSignCommits = false,
+    this.documentPdfFontPath,
     this.classificationWatermarkEnabled = false,
     this.privacyChecksEnabled = true,
     this.privacyImageFaceDetection = true,
@@ -536,6 +541,8 @@ class AppSettings {
     String? minRequiredExportTlpKey,
     bool? requireClassificationOnExport,
     bool? gitSignCommits,
+    String? documentPdfFontPath,
+    bool clearDocumentPdfFontPath = false,
     bool? classificationWatermarkEnabled,
     bool? privacyChecksEnabled,
     bool? privacyImageFaceDetection,
@@ -622,6 +629,9 @@ class AppSettings {
       requireClassificationOnExport:
           requireClassificationOnExport ?? this.requireClassificationOnExport,
       gitSignCommits: gitSignCommits ?? this.gitSignCommits,
+      documentPdfFontPath: clearDocumentPdfFontPath
+          ? null
+          : (documentPdfFontPath ?? this.documentPdfFontPath),
       classificationWatermarkEnabled:
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,

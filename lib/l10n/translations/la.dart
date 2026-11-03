@@ -1620,6 +1620,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Typus extra pro litteris absentibus',
+  'Geen lettertypebestand gekozen': 'Nullum typi file electum',
+  'Kies bestand…': 'File elige…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Solum pars huius file in PDF includitur. Licentia file inclusionem permittere debet; OciDeck hoc non verificat et nihil depromit.',
   'Bijzonder persoonsgegeven': 'Datum personale speciale',
   'Dia {n} van {m}': 'Tabula {n} ex {m}',
   'ander scherm: niet bereikbaar': 'altera tabella: inaccessibilis',

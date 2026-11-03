@@ -1621,6 +1621,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Font suplimentar pentru caracterele lipsă',
+  'Geen lettertypebestand gekozen': 'Niciun fișier de font ales',
+  'Kies bestand…': 'Alegeți fișier…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Doar un subset din acest fișier este încorporat în PDF. Licența fișierului trebuie să permită încorporarea; OciDeck nu o verifică și nu descarcă nimic.',
   'Bijzonder persoonsgegeven': 'Date personale din categorii speciale',
   'Dia {n} van {m}': 'Diapozitivul {n} din {m}',
   'ander scherm: niet bereikbaar': 'alt ecran: inaccesibil',

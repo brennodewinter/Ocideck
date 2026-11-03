@@ -1633,6 +1633,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Tipo de letra extra para caracteres em falta',
+  'Geen lettertypebestand gekozen':
+      'Nenhum ficheiro de tipo de letra escolhido',
+  'Kies bestand…': 'Escolher ficheiro…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Apenas um subconjunto deste ficheiro é incorporado no PDF. A licença do ficheiro tem de permitir a incorporação; o OciDeck não a verifica e não transfere nada.',
   'Bijzonder persoonsgegeven': 'Dados pessoais de categoria especial',
   'Dia {n} van {m}': 'Slide {n} de {m}',
   'ander scherm: niet bereikbaar': 'outro ecrã: não acessível',

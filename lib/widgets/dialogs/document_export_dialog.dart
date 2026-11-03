@@ -1,4 +1,6 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,6 +17,7 @@ import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
 import '../parts/document_export_pdf_support.dart';
 import 'dialog_shell.dart';
+import '../../state/settings_provider.dart';
 import 'export_failure_text.dart';
 
 /// Toon de reden wanneer het classificatiebeleid documentexport weigert.
@@ -537,7 +540,77 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
             'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.',
           ),
         }, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
+        if (_format == DocumentExportFormat.pdf) _pdfFontRow(l10n),
       ],
+    );
+  }
+
+  /// #2753: de auteur wijst een lettertypebestand van de eigen machine aan
+  /// voor tekens die de gebundelde snedes niet hebben — standaard niets
+  /// gekozen, en zonder aanwijzing blijft het huidige gedrag met de melding
+  /// over ontbrekende tekens.
+  Widget _pdfFontRow(AppLocalizations l10n) {
+    return Consumer(
+      builder: (context, ref, _) {
+        final path = ref.watch(settingsProvider).documentPdfFontPath;
+        return Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d('Extra lettertype voor ontbrekende tekens'),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      path ?? l10n.d('Geen lettertypebestand gekozen'),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      final file = await FilePicker.pickFile(
+                        dialogTitle: l10n.d(
+                          'Extra lettertype voor ontbrekende tekens',
+                        ),
+                        type: FileType.custom,
+                        allowedExtensions: ['ttf', 'otf', 'ttc'],
+                      );
+                      if (file?.path == null) return;
+                      await ref
+                          .read(settingsProvider.notifier)
+                          .setDocumentPdfFontPath(file!.path);
+                    },
+                    child: Text(l10n.d('Kies bestand…')),
+                  ),
+                  if (path != null)
+                    TextButton(
+                      onPressed: () => ref
+                          .read(settingsProvider.notifier)
+                          .setDocumentPdfFontPath(null),
+                      child: Text(l10n.t('delete')),
+                    ),
+                ],
+              ),
+              Text(
+                l10n.d(
+                  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.',
+                ),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

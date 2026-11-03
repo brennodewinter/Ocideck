@@ -1606,6 +1606,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Dodatečné písmo pro chybějící znaky',
+  'Geen lettertypebestand gekozen': 'Nevybrán žádný soubor písma',
+  'Kies bestand…': 'Vybrat soubor…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Do PDF se vkládá pouze podmnožina tohoto souboru. Licence souboru musí vkládání povolovat; OciDeck to nekontroluje a nic nestahuje.',
   'Bijzonder persoonsgegeven': 'Zvláštní osobní údaj',
   'Dia {n} van {m}': 'Snímek {n} z {m}',
   'ander scherm: niet bereikbaar': 'druhá obrazovka: nedostupná',

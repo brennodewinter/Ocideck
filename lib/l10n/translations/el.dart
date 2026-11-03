@@ -1630,6 +1630,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Επιπλέον γραμματοσειρά για χαρακτήρες που λείπουν',
+  'Geen lettertypebestand gekozen': 'Δεν επιλέχθηκε αρχείο γραμματοσειράς',
+  'Kies bestand…': 'Επιλογή αρχείου…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Μόνο ένα υποσύνολο αυτού του αρχείου ενσωματώνεται στο PDF. Η άδεια του αρχείου πρέπει να επιτρέπει την ενσωμάτωση· το OciDeck δεν την ελέγχει και δεν κατεβάζει τίποτα.',
   'Bijzonder persoonsgegeven': 'Δεδομένο προσωπικού ειδικής κατηγορίας',
   'Dia {n} van {m}': 'Διαφάνεια {n} από {m}',
   'ander scherm: niet bereikbaar': 'άλλη οθόνη: μη προσβάσιμη',

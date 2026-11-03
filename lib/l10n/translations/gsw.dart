@@ -1608,6 +1608,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Zuesätzlechi Schrift für fehlende Zeiche',
+  'Geen lettertypebestand gekozen': 'Kai Schriftdaatei gwählt',
+  'Kies bestand…': 'Daatei wähle…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Nur e Unteermängi vo dere Daatei gaat i d\'PDF. D\'Lizänz vo de Daatei mues s\'Ybette erlaube; OciDeck prüeft das nöd und ladet nüüt.',
   'Bijzonder persoonsgegeven': 'Bsunders personebezogns Datum',
   'Dia {n} van {m}': 'Folie {n} vo {m}',
   'ander scherm: niet bereikbaar': 'anders Chäbeli: nöd erreichbar',

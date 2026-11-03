@@ -1605,6 +1605,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Fonta tambahan untuk karakter yang hilang',
+  'Geen lettertypebestand gekozen': 'Tidak ada file fonta dipilih',
+  'Kies bestand…': 'Pilih file…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Hanya sebagian dari file ini yang disematkan ke PDF. Lisensi file harus mengizinkan penyematan; OciDeck tidak memeriksanya dan tidak mengunduh apa pun.',
   'Bijzonder persoonsgegeven': 'Data pribadi kategori khusus',
   'Dia {n} van {m}': 'Slide {n} dari {m}',
   'ander scherm: niet bereikbaar': 'layar lain: tidak terjangkau',

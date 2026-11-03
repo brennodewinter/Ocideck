@@ -1605,6 +1605,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Lisäfontti puuttuville merkeille',
+  'Geen lettertypebestand gekozen': 'Fonttitiedostoa ei valittu',
+  'Kies bestand…': 'Valitse tiedosto…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Vain osajoukko tästä tiedostosta upotetaan PDF-tiedostoon. Tiedoston lisenssin on sallittava upotus; OciDeck ei tarkista sitä eikä lataa mitään.',
   'Bijzonder persoonsgegeven': 'Arkaluonteinen henkilötieto',
   'Dia {n} van {m}': 'Dia {n} / {m}',
   'ander scherm: niet bereikbaar': 'toinen näyttö: ei tavoitettavissa',

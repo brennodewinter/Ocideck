@@ -652,6 +652,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Extra lettertype voor ontbrekende tekens':
+      'Police supplémentaire pour les caractères manquants',
+  'Geen lettertypebestand gekozen': 'Aucun fichier de police choisi',
+  'Kies bestand…': 'Choisir un fichier…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Seul un sous-ensemble de ce fichier est incorporé dans le PDF. La licence du fichier doit autoriser l\'incorporation ; OciDeck ne la vérifie pas et ne télécharge rien.',
   'Bijzonder persoonsgegeven': 'Donnée personnelle sensible',
   'Dia {n} van {m}': 'Diapositive {n} sur {m}',
   'ander scherm: niet bereikbaar': 'autre écran : inaccessible',
