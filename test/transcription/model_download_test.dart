@@ -182,6 +182,61 @@ void main() {
     });
   });
 
+  group('elke fout laat de download aflopen (#2756)', () {
+    Matcher fails(ModelDownloadFailure failure) => throwsA(
+      isA<ModelDownloadException>().having(
+        (e) => e.failure,
+        'failure',
+        failure,
+      ),
+    );
+
+    test('een TLS-weigering bij het verbinden is een netwerkfout', () async {
+      final dl = createTestModelDownloader(
+        (_) async => throw const HandshakeException('certificaat onbekend'),
+      );
+      await expectLater(
+        dl.start(model, dest).done.timeout(const Duration(seconds: 5)),
+        fails(ModelDownloadFailure.networkFailed),
+      );
+    });
+
+    test('een TLS-breuk halverwege ruimt het deelbestand op', () async {
+      final body = StreamController<List<int>>();
+      final dl = createTestModelDownloader(
+        (_) async => ModelFetchResult(
+          statusCode: 200,
+          contentLength: model.downloadBytes,
+          body: body.stream,
+        ),
+      );
+      final done = dl.start(model, dest).done;
+      body.add(bytes.sublist(0, 100));
+      final part = File('${dest.path}.part');
+      for (var i = 0; i < 200 && !await part.exists(); i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 10));
+      }
+      expect(await part.exists(), isTrue, reason: 'anders bewijst dit niets');
+      body.addError(const TlsException('verbinding verbroken'));
+      await expectLater(
+        done.timeout(const Duration(seconds: 5)),
+        fails(ModelDownloadFailure.networkFailed),
+      );
+      expect(await File('${dest.path}.part').exists(), isFalse);
+      await body.close();
+    });
+
+    test('een onverwachte fout hangt niet', () async {
+      final dl = createTestModelDownloader(
+        (_) async => throw StateError('onverwacht'),
+      );
+      await expectLater(
+        dl.start(model, dest).done.timeout(const Duration(seconds: 5)),
+        throwsA(isA<ModelDownloadException>()),
+      );
+    });
+  });
+
   group('voortgang en annulering', () {
     test('voortgang loopt mee met de bytes', () async {
       final (fetch: fetch, visited: _) = fetchWith([serve(bytes)]);

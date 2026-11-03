@@ -31,6 +31,10 @@ All notable changes to OciDeck are documented in this file.
   een Linux met tmpfs-`/tmp` bij elke herstart, ook na een vastgelopen call.
   De staging staat nu in de app-supportmap (`transcription/recordings/`), en
   wat er nog in de oude map lag verhuist bij de eerste start mee (#2761).
+- **Modeldownload loopt altijd af.** Een TLS-fout, zoals een bedrijfsproxy die
+  het certificaat vervangt, liet de modelkaart voorgoed op "bezig" staan. Elke
+  volgende download bleef daarna geweigerd tot een herstart. Zo'n fout heet nu
+  een netwerkfout en ruimt het deelbestand op (#2756).
 
 ### Added
 
