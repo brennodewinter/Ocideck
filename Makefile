@@ -228,11 +228,11 @@ coverage-per-file:
 #   make test-golden UPDATE=1        # accept the new rendering
 test-golden:
 	@echo "== OciDeck check: golden (visual regression) =="
-	@echo "Command: flutter test --tags golden $(if $(UPDATE),--update-goldens,)"
+	@echo "Command: flutter test test/golden --tags golden $(if $(UPDATE),--update-goldens,)"
 	@echo "Covers: SlidePreviewWidget layout/structure/colour per slide type."
 	@echo "Failure means: a slide renders differently — inspect the *_testImage diff,"
 	@echo "        then re-run with UPDATE=1 if the change is intentional."
-	$(RAISE_FDS) flutter test --tags golden $(if $(UPDATE),--update-goldens,) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test test/golden --tags golden $(if $(UPDATE),--update-goldens,) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Mutation check for the "dead/untested boolean-operand" bug class that line
 # coverage and `dart analyze` both miss: an `||`/`&&` operand that can never be

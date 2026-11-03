@@ -22,6 +22,30 @@ void main() {
     expect(release, contains('make test-golden'));
   });
 
+  test('golden-tags blijven binnen de gerichte golden-map', () {
+    final goldenTag = RegExp(
+      r'''@Tags\s*\([^)]*['"]golden['"]|tags\s*:\s*(?:const\s*)?(?:[\[{][^\]}]*)?['"]golden['"]''',
+    );
+    const marker = 'golden';
+    expect(goldenTag.hasMatch("@Tags(['$marker'])"), isTrue);
+    expect(goldenTag.hasMatch("test('x', () {}, tags: ['$marker']);"), isTrue);
+    expect(goldenTag.hasMatch("group('x', () {}, tags: '$marker');"), isTrue);
+    expect(goldenTag.hasMatch("@Tags(['integration'])"), isFalse);
+
+    final misplaced = <String>[];
+    for (final file in Directory('test').listSync(recursive: true)) {
+      if (file is! File || !file.path.endsWith('_test.dart')) continue;
+      final path = file.path.replaceAll(r'\', '/');
+      if (path.startsWith('test/golden/')) continue;
+      if (goldenTag.hasMatch(file.readAsStringSync())) misplaced.add(path);
+    }
+    expect(
+      misplaced,
+      isEmpty,
+      reason: 'make test-golden zoekt alleen binnen test/golden/',
+    );
+  });
+
   test('de concurrencygroep volgt de main-ref', () {
     final concurrency = yaml['concurrency'] as YamlMap;
     final group = '${concurrency['group']}';

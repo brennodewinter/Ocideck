@@ -1810,7 +1810,10 @@ For focused work, run only the relevant slice instead of the whole suite:
   theme colours) without depending on glyph rendering. The PNGs are pixel- and
   **platform-specific**, so they are tagged `golden` and **excluded from the
   default suite** — run them on **one** platform. `make test-golden` compares;
-  `make test-golden UPDATE=1` accepts an intentional visual change. (Gated in CI
+  `make test-golden UPDATE=1` accepts an intentional visual change. The target
+  runs `flutter test test/golden --tags golden`, so it loads only the golden
+  directory. Keep golden-tagged tests there; `macos_gate_concurrency_test.dart`
+  guards literal tags outside that directory. (Gated in CI
   since #1988: `macos-gate.yml` runs `make test-golden` on every push to `main`
   on the Mac-runner — a post-merge vangnet that een sub-promille renderlaag-
   verschuiving binnen minuten ziet in plaats van pas wanneer iemand lokaal `make
