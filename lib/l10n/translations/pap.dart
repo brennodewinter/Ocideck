@@ -651,6 +651,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bijzonder persoonsgegeven': 'Dato personal sensitivo',
+  'Dia {n} van {m}': 'Diapositiva {n} di {m}',
+  'ander scherm: niet bereikbaar': 'otro pantaya: no alcanzable',
+  'het andere scherm': 'e otro pantaya',
+  'Dit mag blijven': 'Eso por keda',
+  'Waarschuw de ontvanger': 'Avvertí e risibidó',
+  'Laat dit weg bij tonen en exporteren':
+      'Laga esaki afoora ora di mustra i eksporta',
+  'Ga naar de eerste dia zonder keuze':
+      'Bai na e promé diapositiva sin desishon',
   'Onderteken git-commits': 'Firma e commitnan di git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Firma commitnan ku e klave ku git ta usa riba e makina aki.',

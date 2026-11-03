@@ -1621,6 +1621,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bijzonder persoonsgegeven': 'Date personale din categorii speciale',
+  'Dia {n} van {m}': 'Diapozitivul {n} din {m}',
+  'ander scherm: niet bereikbaar': 'alt ecran: inaccesibil',
+  'het andere scherm': 'celălalt ecran',
+  'Dit mag blijven': 'Acesta poate rămâne',
+  'Waarschuw de ontvanger': 'Avertizați destinatarul',
+  'Laat dit weg bij tonen en exporteren': 'Omite-l la afișare și export',
+  'Ga naar de eerste dia zonder keuze':
+      'Mergi la primul diapozitiv fără alegere',
   'Onderteken git-commits': 'Semnează commiturile git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Semnați commiturile cu cheia pe care git o folosește deja pe această mașină.',

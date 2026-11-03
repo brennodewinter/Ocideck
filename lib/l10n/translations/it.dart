@@ -649,6 +649,16 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bijzonder persoonsgegeven': 'Dato personale particolare',
+  'Dia {n} van {m}': 'Diapositiva {n} di {m}',
+  'ander scherm: niet bereikbaar': 'altro schermo: non raggiungibile',
+  'het andere scherm': 'l\'altro schermo',
+  'Dit mag blijven': 'Questo può restare',
+  'Waarschuw de ontvanger': 'Avvisa il destinatario',
+  'Laat dit weg bij tonen en exporteren':
+      'Omettilo nella visualizzazione e nell\'esportazione',
+  'Ga naar de eerste dia zonder keuze':
+      'Vai alla prima diapositiva senza scelta',
   'Onderteken git-commits': 'Firma i commit git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Firma i commit con la chiave che git usa già su questa macchina.',

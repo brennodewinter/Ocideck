@@ -1607,6 +1607,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bijzonder persoonsgegeven': 'Különleges személyes adat',
+  'Dia {n} van {m}': 'Dia {n} / {m}',
+  'ander scherm: niet bereikbaar': 'másik képernyő: nem elérhető',
+  'het andere scherm': 'a másik képernyő',
+  'Dit mag blijven': 'Ez maradhat',
+  'Waarschuw de ontvanger': 'Figyelmeztesse a címzettet',
+  'Laat dit weg bij tonen en exporteren':
+      'Hagyja ki ezt megjelenítéskor és exportáláskor',
+  'Ga naar de eerste dia zonder keuze': 'Ugrás az első dia választás nélkül',
   'Onderteken git-commits': 'Git-commitok aláírása',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Írja alá a commitokat azzal a kulccsal, amelyet a git már használ ezen a gépen.',

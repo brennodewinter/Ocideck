@@ -1603,6 +1603,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bijzonder persoonsgegeven': 'Īpašas kategorijas personas dati',
+  'Dia {n} van {m}': 'Slaidi {n} no {m}',
+  'ander scherm: niet bereikbaar': 'otrs ekrāns: nepieejams',
+  'het andere scherm': 'otrais ekrāns',
+  'Dit mag blijven': 'Tas var palikt',
+  'Waarschuw de ontvanger': 'Brīdini saņēmēju',
+  'Laat dit weg bij tonen en exporteren': 'Izlaist to rādot un eksportējot',
+  'Ga naar de eerste dia zonder keuze': 'Doties uz pirmo slaidu bez izvēles',
   'Onderteken git-commits': 'Parakstīt git komītus',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Parakstiet komītus ar atslēgu, ko git jau izmanto šajā mašīnā.',

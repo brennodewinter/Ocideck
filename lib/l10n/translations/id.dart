@@ -1605,6 +1605,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bijzonder persoonsgegeven': 'Data pribadi kategori khusus',
+  'Dia {n} van {m}': 'Slide {n} dari {m}',
+  'ander scherm: niet bereikbaar': 'layar lain: tidak terjangkau',
+  'het andere scherm': 'layar lainnya',
+  'Dit mag blijven': 'Ini boleh tetap',
+  'Waarschuw de ontvanger': 'Peringatkan penerima',
+  'Laat dit weg bij tonen en exporteren':
+      'Hilangkan ini saat menampilkan dan mengekspor',
+  'Ga naar de eerste dia zonder keuze':
+      'Pergi ke slide pertama tanpa keputusan',
   'Onderteken git-commits': 'Tandatangani commit git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Tandatangani commit dengan kunci yang sudah dipakai git di mesin ini.',

@@ -1620,6 +1620,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bijzonder persoonsgegeven': 'Персональні дані особливої категорії',
+  'Dia {n} van {m}': 'Слайд {n} з {m}',
+  'ander scherm: niet bereikbaar': 'інший екран: недоступний',
+  'het andere scherm': 'інший екран',
+  'Dit mag blijven': 'Це може залишитися',
+  'Waarschuw de ontvanger': 'Попередити отримувача',
+  'Laat dit weg bij tonen en exporteren':
+      'Пропускати це при показі та експорті',
+  'Ga naar de eerste dia zonder keuze': 'Перейти до першого слайда без рішення',
   'Onderteken git-commits': 'Підписувати git-коміти',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Підписуйте коміти ключем, яким git уже користується на цій машині.',

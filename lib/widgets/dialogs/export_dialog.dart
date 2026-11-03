@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide_quality.dart';
@@ -11,6 +12,9 @@ import '../../models/privacy_disposition.dart';
 import '../../models/redaction_manifest.dart';
 import '../../services/export_bundle.dart';
 import '../../services/privacy/privacy_export_policy.dart';
+import '../../state/privacy_provider.dart';
+import '../../state/deck_provider.dart';
+import '../../state/editor_provider.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
@@ -315,7 +319,17 @@ class _ExportDialogState extends State<ExportDialog> {
             onPressed: () => Navigator.pop(ctx, false),
             child: Text(l10n.t('cancel')),
           ),
-          if (!decision.hardBlocked)
+          if (decision.hardBlocked)
+            // #2738: een blokkade zonder uitweg is een dood spoor. De knop
+            // brengt de auteur naar de eerste dia zonder keuze.
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(ctx, false);
+                _goToFirstUndecidedSlide(ctx);
+              },
+              child: Text(l10n.d('Ga naar de eerste dia zonder keuze')),
+            )
+          else
             ElevatedButton(
               onPressed: () => Navigator.pop(ctx, true),
               child: Text(l10n.d('Toch exporteren')),
@@ -923,5 +937,45 @@ class _WebRedactionKeysDownload extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+/// #2738: de blokkade kreeg een uitweg — spring naar de eerste dia die nog
+/// geen privacykeuze heeft, zodat de keuze daar gemaakt kan worden in
+/// plaats van dat de export alleen stopt. De dialoog is een
+/// `StatefulWidget` zonder `ref`; `ProviderScope.containerOf` levert de
+/// container zonder van een build af te hangen.
+void _goToFirstUndecidedSlide(BuildContext context) {
+  final container = ProviderScope.containerOf(context, listen: false);
+  final findings = container.read(privacyRawScanProvider).findings;
+  final deck = container.read(deckProvider).deck;
+  if (deck == null) return;
+  // De eerste bevinding op een dia zonder bewuste stand: dat is waar de
+  // keuze ontbreekt — niet per se de eerste bevinding in de lijst.
+  for (final finding in findings) {
+    if (finding.isDeckWide ||
+        finding.slideIndex < 0 ||
+        finding.slideIndex >= deck.slides.length) {
+      continue;
+    }
+    final slide = deck.slides[finding.slideIndex];
+    final effective = effectivePrivacyDisposition(
+      deck: deck.privacy,
+      slide: slide.privacy,
+    );
+    if (effective == PrivacyDisposition.warn) {
+      container
+          .read(editorProvider.notifier)
+          .selectWithQualityField(
+            finding.slideIndex,
+            finding.field,
+            span: SlideQualitySpan(
+              start: finding.start,
+              end: finding.end,
+              fragmentIndex: finding.fragmentIndex,
+            ),
+          );
+      return;
+    }
   }
 }

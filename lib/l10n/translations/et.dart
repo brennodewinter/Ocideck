@@ -1598,6 +1598,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bijzonder persoonsgegeven': 'Erikategooria isikuandmed',
+  'Dia {n} van {m}': 'Slaid {n} / {m}',
+  'ander scherm: niet bereikbaar': 'teine ekraan: pole kättesaadav',
+  'het andere scherm': 'teine ekraan',
+  'Dit mag blijven': 'See võib jääda',
+  'Waarschuw de ontvanger': 'Hoiata saajat',
+  'Laat dit weg bij tonen en exporteren':
+      'Jäta see välja kuvamisel ja eksportimisel',
+  'Ga naar de eerste dia zonder keuze': 'Mine esimesele slaidile ilma valikuta',
   'Onderteken git-commits': 'Allkirjasta git-commitid',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Allkirjasta commitid võtmega, mida git juba sellel masinal kasutab.',

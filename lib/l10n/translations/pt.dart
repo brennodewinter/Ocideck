@@ -1633,6 +1633,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bijzonder persoonsgegeven': 'Dados pessoais de categoria especial',
+  'Dia {n} van {m}': 'Slide {n} de {m}',
+  'ander scherm: niet bereikbaar': 'outro ecrã: não acessível',
+  'het andere scherm': 'o outro ecrã',
+  'Dit mag blijven': 'Isto pode ficar',
+  'Waarschuw de ontvanger': 'Avisar o destinatário',
+  'Laat dit weg bij tonen en exporteren': 'Omitir isto ao mostrar e exportar',
+  'Ga naar de eerste dia zonder keuze': 'Ir para o primeiro slide sem decisão',
   'Onderteken git-commits': 'Assinar commits do git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Assine os commits com a chave que o git já usa nesta máquina.',

@@ -1623,6 +1623,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bijzonder persoonsgegeven': 'Dejta personali sensittiva',
+  'Dia {n} van {m}': 'Slide {n} minn {m}',
+  'ander scherm: niet bereikbaar': 'skrin ieħor: mhux jista\' jintlaħaq',
+  'het andere scherm': 'l-iskrin l-ieħor',
+  'Dit mag blijven': 'Dan jista\' jibqa\'',
+  'Waarschuw de ontvanger': 'Twissi lill-riċevitur',
+  'Laat dit weg bij tonen en exporteren':
+      'Ħalli dan barra meta turih u tesportah',
+  'Ga naar de eerste dia zonder keuze': 'Mur fl-ewwel slide mingħajr deċiżjoni',
   'Onderteken git-commits': 'Iffirma l-git commits',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Iffirma l-commits bil-muftieħ li git diġà juża fuq din il-magna.',

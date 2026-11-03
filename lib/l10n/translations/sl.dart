@@ -1605,6 +1605,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bijzonder persoonsgegeven': 'Osebni podatek posebne kategorije',
+  'Dia {n} van {m}': 'Diapozitiv {n} od {m}',
+  'ander scherm: niet bereikbaar': 'drugi zaslon: nedostopen',
+  'het andere scherm': 'drugi zaslon',
+  'Dit mag blijven': 'To lahko ostane',
+  'Waarschuw de ontvanger': 'Opozori prejemnika',
+  'Laat dit weg bij tonen en exporteren': 'Izpusti to pri prikazu in izvozu',
+  'Ga naar de eerste dia zonder keuze': 'Pojdi na prvi diapozitiv brez izbire',
   'Onderteken git-commits': 'Podpisuj git commit-e',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Podpisujte commit-e s ključem, ki ga git že uporablja na tem računalniku.',

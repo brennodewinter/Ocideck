@@ -1620,6 +1620,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bijzonder persoonsgegeven': 'Datum personale speciale',
+  'Dia {n} van {m}': 'Tabula {n} ex {m}',
+  'ander scherm: niet bereikbaar': 'altera tabella: inaccessibilis',
+  'het andere scherm': 'altera tabella',
+  'Dit mag blijven': 'Hoc manere potest',
+  'Waarschuw de ontvanger': 'Accipientem mone',
+  'Laat dit weg bij tonen en exporteren': 'Hoc ostendendo et exportando omitte',
+  'Ga naar de eerste dia zonder keuze': 'Ad primam tabulam sine electione vade',
   'Onderteken git-commits': 'Commititiones git subsigna',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Commititiones clave subsigna qua git in hac machina iam utitur.',

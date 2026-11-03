@@ -1605,6 +1605,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bijzonder persoonsgegeven': 'Arkaluonteinen henkilötieto',
+  'Dia {n} van {m}': 'Dia {n} / {m}',
+  'ander scherm: niet bereikbaar': 'toinen näyttö: ei tavoitettavissa',
+  'het andere scherm': 'toinen näyttö',
+  'Dit mag blijven': 'Tämä saa jäädä',
+  'Waarschuw de ontvanger': 'Varoita vastaanottajaa',
+  'Laat dit weg bij tonen en exporteren':
+      'Jätä tämä pois näytettäessä ja vietäessä',
+  'Ga naar de eerste dia zonder keuze':
+      'Siirry ensimmäiseen diaan ilman päätöstä',
   'Onderteken git-commits': 'Allekirjoita git-commitit',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Allekirjoita commitit avaimella, jota git jo käyttää tällä koneella.',

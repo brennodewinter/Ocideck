@@ -652,6 +652,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bijzonder persoonsgegeven': 'Bysûnder persoansgegeven',
+  'Dia {n} van {m}': 'Dia {n} fan {m}',
+  'ander scherm: niet bereikbaar': 'oar skerm: net berikber',
+  'het andere scherm': 'it oare skerm',
+  'Dit mag blijven': 'Dit mei bliuwe',
+  'Waarschuw de ontvanger': 'Warskôgje de ûntfanger',
+  'Laat dit weg bij tonen en exporteren':
+      'Lit dit wei by toanen en eksportearjen',
+  'Ga naar de eerste dia zonder keuze': 'Gean nei de earste dia sûnder kar',
   'Onderteken git-commits': 'Git-commits ûndertekenje',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Teken commits mei de kaai dy\'t git op dizze masine al brûkt.',

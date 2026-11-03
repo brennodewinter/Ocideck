@@ -1611,6 +1611,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bijzonder persoonsgegeven': 'Specialios kategorijos asmens duomenys',
+  'Dia {n} van {m}': 'Skaidrė {n} iš {m}',
+  'ander scherm: niet bereikbaar': 'kitas ekranas: nepasiekiamas',
+  'het andere scherm': 'kitas ekranas',
+  'Dit mag blijven': 'Tai gali likti',
+  'Waarschuw de ontvanger': 'Įspėk gavėją',
+  'Laat dit weg bij tonen en exporteren':
+      'Praleisti tai rodant ir eksportuojant',
+  'Ga naar de eerste dia zonder keuze': 'Eiti į pirmą skaidrę be sprendimo',
   'Onderteken git-commits': 'Pasirašyti git įrašus',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Pasirašykite įrašus raktu, kurį git jau naudoja šiame kompiuteryje.',

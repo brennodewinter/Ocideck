@@ -6,6 +6,7 @@ import '../../l10n/slide_quality_localization.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
+import '../../models/privacy_disposition.dart';
 import '../../services/privacy/privacy_scanner.dart';
 import '../../state/privacy_provider.dart';
 import '../../models/slide_quality.dart';
@@ -43,6 +44,10 @@ List<SlideQualityAction> _privacyActions(
         icon: Icons.done_outline,
         run: (_) => _setAside(ref, deck, issue, span),
       ),
+    // #2738: dezelfde drie woorden overal — melding, palet, badge en het
+    // geblokkeerde exportvenster noemen de keuze gelijk.
+    if (deck != null && !issue.isDeckWide && issue.slideIndex >= 0)
+      ..._slideDispositionActions(l10n, ref, deck, issue),
     SlideQualityAction(
       label: l10n.d('Deze regel nooit meer melden'),
       icon: Icons.notifications_off_outlined,
@@ -115,6 +120,45 @@ void _setAside(
     DateTime.now(),
   );
   if (updated != null) ref.read(deckProvider.notifier).setDismissals(updated);
+}
+
+/// #2738: de drie keuzes op de melding zelf — dezelfde woorden als in de
+/// dia-instellingen, op de badge en in het geblokkeerde exportvenster.
+/// "Nog geen keuze" blijft de standaard: geen knop zet iets dat de
+/// gebruiker niet aanklikte.
+List<SlideQualityAction> _slideDispositionActions(
+  AppLocalizations l10n,
+  WidgetRef ref,
+  Deck deck,
+  SlideQualityIssue issue,
+) {
+  final i = issue.slideIndex;
+  if (i < 0 || i >= deck.slides.length) return const [];
+  SlideQualityAction act(String label, IconData icon, PrivacyDisposition d) =>
+      SlideQualityAction(
+        label: label,
+        icon: icon,
+        run: (_) => ref
+            .read(deckProvider.notifier)
+            .updateSlide(i, deck.slides[i].copyWith(privacy: d)),
+      );
+  return [
+    act(
+      l10n.d('Dit mag blijven'),
+      Icons.check_circle_outline,
+      PrivacyDisposition.accept,
+    ),
+    act(
+      l10n.d('Waarschuw de ontvanger'),
+      Icons.campaign_outlined,
+      PrivacyDisposition.shield,
+    ),
+    act(
+      l10n.d('Laat dit weg bij tonen en exporteren'),
+      Icons.block_outlined,
+      PrivacyDisposition.redact,
+    ),
+  ];
 }
 
 /// Eén concrete vervolgactie bij een kwaliteitsmelding: het "doen"-knopje

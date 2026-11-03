@@ -1606,6 +1606,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bijzonder persoonsgegeven': 'Zvláštní osobní údaj',
+  'Dia {n} van {m}': 'Snímek {n} z {m}',
+  'ander scherm: niet bereikbaar': 'druhá obrazovka: nedostupná',
+  'het andere scherm': 'druhá obrazovka',
+  'Dit mag blijven': 'Toto může zůstat',
+  'Waarschuw de ontvanger': 'Varuj příjemce',
+  'Laat dit weg bij tonen en exporteren': 'Vynechat při zobrazení a exportu',
+  'Ga naar de eerste dia zonder keuze': 'Přejít na první snímek bez rozhodnutí',
   'Onderteken git-commits': 'Podepisovat git commity',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Podepisujte commity klíčem, který git na tomto počítači již používá.',

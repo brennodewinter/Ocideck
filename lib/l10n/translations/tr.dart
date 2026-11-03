@@ -2513,6 +2513,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bijzonder persoonsgegeven': 'Özel kategorili kişisel veri',
+  'Dia {n} van {m}': '{m} slayttan {n}.',
+  'ander scherm: niet bereikbaar': 'diğer ekran: erişilemez',
+  'het andere scherm': 'diğer ekran',
+  'Dit mag blijven': 'Bu kalabilir',
+  'Waarschuw de ontvanger': 'Alıcıyı uyar',
+  'Laat dit weg bij tonen en exporteren':
+      'Gösterirken ve dışa aktarırken bunu atla',
+  'Ga naar de eerste dia zonder keuze': 'Kararsız ilk slayda git',
   'Onderteken git-commits': 'Git commit\'lerini imzala',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Commit\'leri git\'in bu makinede zaten kullandığı anahtarla imzalayın.',

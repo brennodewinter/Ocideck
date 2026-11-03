@@ -811,6 +811,16 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bijzonder persoonsgegeven': 'Special-category personal data',
+  'Dia {n} van {m}': 'Slide {n} of {m}',
+  'ander scherm: niet bereikbaar': 'other screen: unreachable',
+  'het andere scherm': 'the other screen',
+  'Dit mag blijven': 'This may stay',
+  'Waarschuw de ontvanger': 'Warn the recipient',
+  'Laat dit weg bij tonen en exporteren':
+      'Leave this out when showing and exporting',
+  'Ga naar de eerste dia zonder keuze':
+      'Go to the first slide without a decision',
   'Onderteken git-commits': 'Sign git commits',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Sign commits with the key git already uses on this machine.',

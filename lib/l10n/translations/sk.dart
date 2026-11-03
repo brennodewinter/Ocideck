@@ -1611,6 +1611,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bijzonder persoonsgegeven': 'Osobný údaj osobitnej kategórie',
+  'Dia {n} van {m}': 'Snímka {n} z {m}',
+  'ander scherm: niet bereikbaar': 'druhá obrazovka: nedostupná',
+  'het andere scherm': 'druhá obrazovka',
+  'Dit mag blijven': 'Toto môže zostať',
+  'Waarschuw de ontvanger': 'Varuj príjemcu',
+  'Laat dit weg bij tonen en exporteren': 'Vynechať pri zobrazení a exporte',
+  'Ga naar de eerste dia zonder keuze': 'Prejsť na prvý snímok bez rozhodnutia',
   'Onderteken git-commits': 'Podpisovať git commity',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Podpisujte commity kľúčom, ktorý git na tomto počítači už používa.',

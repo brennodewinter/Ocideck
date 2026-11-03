@@ -1630,6 +1630,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bijzonder persoonsgegeven': 'Δεδομένο προσωπικού ειδικής κατηγορίας',
+  'Dia {n} van {m}': 'Διαφάνεια {n} από {m}',
+  'ander scherm: niet bereikbaar': 'άλλη οθόνη: μη προσβάσιμη',
+  'het andere scherm': 'η άλλη οθόνη',
+  'Dit mag blijven': 'Αυτό μπορεί να μείνει',
+  'Waarschuw de ontvanger': 'Προειδοποίησε τον παραλήπτη',
+  'Laat dit weg bij tonen en exporteren':
+      'Άφησέ το εκτός κατά την εμφάνιση και την εξαγωγή',
+  'Ga naar de eerste dia zonder keuze':
+      'Μετάβαση στη πρώτη διαφάνεια χωρίς επιλογή',
   'Onderteken git-commits': 'Υπογραφή commit git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Υπογράψτε τα commit με το κλειδί που το git ήδη χρησιμοποιεί σε αυτό το μηχάνημα.',

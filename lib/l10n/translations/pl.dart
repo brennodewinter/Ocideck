@@ -1617,6 +1617,16 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bijzonder persoonsgegeven': 'Dane osobowe kategorii szczególnej',
+  'Dia {n} van {m}': 'Slajd {n} z {m}',
+  'ander scherm: niet bereikbaar': 'drugi ekran: niedostępny',
+  'het andere scherm': 'drugi ekran',
+  'Dit mag blijven': 'To może zostać',
+  'Waarschuw de ontvanger': 'Ostrzeż odbiorcę',
+  'Laat dit weg bij tonen en exporteren':
+      'Pomiń to przy pokazywaniu i eksporcie',
+  'Ga naar de eerste dia zonder keuze':
+      'Przejdź do pierwszego slajdu bez decyzji',
   'Onderteken git-commits': 'Podpisuj commity gita',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Podpisuj commity kluczem, którego git już używa na tym komputerze.',

@@ -1604,6 +1604,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bijzonder persoonsgegeven': 'Känsliga personuppgifter',
+  'Dia {n} van {m}': 'Bild {n} av {m}',
+  'ander scherm: niet bereikbaar': 'annan skärm: inte nåbar',
+  'het andere scherm': 'den andra skärmen',
+  'Dit mag blijven': 'Detta får stanna',
+  'Waarschuw de ontvanger': 'Varna mottagaren',
+  'Laat dit weg bij tonen en exporteren':
+      'Lämna bort detta vid visning och export',
+  'Ga naar de eerste dia zonder keuze': 'Gå till första bilden utan beslut',
   'Onderteken git-commits': 'Signera git-commits',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Signera commits med den nyckel git redan använder på den här maskinen.',

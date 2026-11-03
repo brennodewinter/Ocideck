@@ -1609,6 +1609,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bijzonder persoonsgegeven': 'Osobni podatak posebne kategorije',
+  'Dia {n} van {m}': 'Slajd {n} od {m}',
+  'ander scherm: niet bereikbaar': 'drugi zaslon: nedostupan',
+  'het andere scherm': 'drugi zaslon',
+  'Dit mag blijven': 'Ovo smije ostati',
+  'Waarschuw de ontvanger': 'Upozori primatelja',
+  'Laat dit weg bij tonen en exporteren': 'Izostavi ovo pri prikazu i izvozu',
+  'Ga naar de eerste dia zonder keuze': 'Idi na prvi slajd bez odluke',
   'Onderteken git-commits': 'Potpiši git commitove',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Potpiši commitove ključem koji git već koristi na ovom računalu.',

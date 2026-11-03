@@ -1605,6 +1605,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bijzonder persoonsgegeven': 'Særlige personoplysninger',
+  'Dia {n} van {m}': 'Dias {n} af {m}',
+  'ander scherm: niet bereikbaar': 'anden skærm: ikke tilgængelig',
+  'het andere scherm': 'den anden skærm',
+  'Dit mag blijven': 'Dette må blive',
+  'Waarschuw de ontvanger': 'Advar modtageren',
+  'Laat dit weg bij tonen en exporteren': 'Udelad dette ved visning og eksport',
+  'Ga naar de eerste dia zonder keuze':
+      'Gå til det første dias uden beslutning',
   'Onderteken git-commits': 'Underskriv git-commits',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Underskriv commits med den nøgle, git allerede bruger på denne maskine.',

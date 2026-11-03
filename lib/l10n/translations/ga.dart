@@ -1635,6 +1635,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bijzonder persoonsgegeven': 'Sonraí pearsanta ar leith',
+  'Dia {n} van {m}': 'Sleamhnán {n} as {m}',
+  'ander scherm: niet bereikbaar': 'scáileán eile: níl sé bhfeighil',
+  'het andere scherm': 'an scáileán eile',
+  'Dit mag blijven': 'Féadfaidh sé seo fanacht',
+  'Waarschuw de ontvanger': 'Tabhair foláireamh don fhaighteoir',
+  'Laat dit weg bij tonen en exporteren':
+      'Fág seo amach agus é á thaispeáint agus á onnmhairiú',
+  'Ga naar de eerste dia zonder keuze':
+      'Téigh go dtí an chéad shleamhnán gan rogha',
   'Onderteken git-commits': 'Sínigh commitanna git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Sínigh commits leis an eochair a úsáideann git cheana féin ar an meaisín seo.',

@@ -649,6 +649,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bijzonder persoonsgegeven': 'Dato personal de categoría especial',
+  'Dia {n} van {m}': 'Diapositiva {n} de {m}',
+  'ander scherm: niet bereikbaar': 'otra pantalla: no accesible',
+  'het andere scherm': 'la otra pantalla',
+  'Dit mag blijven': 'Esto puede quedarse',
+  'Waarschuw de ontvanger': 'Avisar al destinatario',
+  'Laat dit weg bij tonen en exporteren': 'Omitirlo al mostrar y exportar',
+  'Ga naar de eerste dia zonder keuze':
+      'Ir a la primera diapositiva sin decisión',
   'Onderteken git-commits': 'Firmar commits de git',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Firmar los commits con la clave que git ya usa en esta máquina.',

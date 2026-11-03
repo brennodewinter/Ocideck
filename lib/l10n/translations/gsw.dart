@@ -1608,6 +1608,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bijzonder persoonsgegeven': 'Bsunders personebezogns Datum',
+  'Dia {n} van {m}': 'Folie {n} vo {m}',
+  'ander scherm: niet bereikbaar': 'anders Chäbeli: nöd erreichbar',
+  'het andere scherm': 's\'ander Chäbeli',
+  'Dit mag blijven': 'Das darf bliibe',
+  'Waarschuw de ontvanger': 'Empfänger warne',
+  'Laat dit weg bij tonen en exporteren': 'Bim Zaige und Exportiere wäglah',
+  'Ga naar de eerste dia zonder keuze': 'Gang zu de erste Dia ohni Entscheid',
   'Onderteken git-commits': 'Git-Commits signiere',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Signier Commits mit em Schlüssel, wo git uf däre Maschine scho bruucht.',

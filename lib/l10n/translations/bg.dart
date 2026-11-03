@@ -1624,6 +1624,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bijzonder persoonsgegeven': 'Лични данни от специална категория',
+  'Dia {n} van {m}': 'Слайд {n} от {m}',
+  'ander scherm: niet bereikbaar': 'друг екран: недостъпен',
+  'het andere scherm': 'другият екран',
+  'Dit mag blijven': 'Това може да остане',
+  'Waarschuw de ontvanger': 'Предупреди получателя',
+  'Laat dit weg bij tonen en exporteren':
+      'Пропусни това при показване и експортиране',
+  'Ga naar de eerste dia zonder keuze': 'Към първия слайд без решение',
   'Onderteken git-commits': 'Подписване на git комити',
   'Teken commits met de sleutel die git op deze machine al gebruikt.':
       'Подписвайте комитите с ключа, който git вече използва на тази машина.',
