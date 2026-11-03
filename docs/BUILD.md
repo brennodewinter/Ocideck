@@ -1670,8 +1670,13 @@ getekende manifest. Een legitieme update van een ander OS blokkeert dit niet. Ee
 
 Voor web wordt uitsluitend het getekende kanaalarchief gebruikt, begrensd en
 zonder links uitgepakt, intern gecontroleerd en met `deploy_web.sh --bundle-dir`
-geplaatst. Iedere live manifestfile wordt nagehasht (maximaal acht gelijktijdige
-verzoeken). `deploy_web.sh --preflight-only` controleert bundel, tools en de
+geplaatst. Ieder publiek manifestbestand wordt via HTTP nagehasht (maximaal acht
+gelijktijdige verzoeken). De rootconfiguratie `.htaccess` blijft in de getekende
+bundel en het manifest; `deploy_web.sh --verify-server-config-only --bundle-dir PAD`
+leest haar via dezelfde strikt gecontroleerde SSH-host en webroot terug. Deze
+modus voert geen upload, wissel of opruiming uit en bindt de reguliere
+configuratiebytes aan hetzelfde live manifest. `.well-known/security.txt` blijft
+via HTTP gecontroleerd. `deploy_web.sh --preflight-only` controleert bundel, tools en de
 alleen-lezen SSH-vereisten vóór het duurzame deploy-intent, zonder opnieuw in te
 pakken of te uploaden. Na herstel van zo'n preflightfout kunnen dezelfde bytes
 regulier worden geplaatst. Na een werkelijk gestarte of onzekere deploy wordt

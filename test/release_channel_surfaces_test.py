@@ -126,6 +126,39 @@ class PublicSurfacesTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'exact files'):
                 surfaces.web_files(root)
 
+    def test_server_config_is_read_back_privately_but_public_files_stay_http_verified(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            files = {'.htaccess': b'Require all denied\n', 'main.js': b'web app',
+                     '.well-known/security.txt': b'Contact: mailto:security@example.test\n'}
+            for name, content in files.items():
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(content)
+            hashes = {name: hashlib.sha256(content).hexdigest() for name, content in files.items()}
+            (root / 'SHA256SUMS').write_text(''.join(digest + '  ' + name + '\n' for name, digest in hashes.items()))
+            requested = []
+            def get(url):
+                name = url.removeprefix('https://ocideck.librekat.nl/')
+                requested.append(name)
+                if name == '.htaccess':
+                    raise ValueError('HTTP403: server configuration is intentionally private')
+                return (root / name).read_bytes()
+            with patch.object(surfaces.subprocess, 'run', return_value=SimpleNamespace(returncode=0)) as readback:
+                self.assertEqual(surfaces.verify_web(root, get), hashes)
+                self.assertIn('--verify-server-config-only', readback.call_args.args[0])
+            self.assertNotIn('.htaccess', requested)
+            self.assertIn('.well-known/security.txt', requested)
+            for bad in ('main.js', '.well-known/security.txt'):
+                with self.subTest(bad=bad), patch.object(surfaces.subprocess, 'run', return_value=SimpleNamespace(returncode=0)):
+                    def corrupt(url):
+                        return b'corrupt' if url.endswith('/' + bad) else get(url)
+                    with self.assertRaisesRegex(ValueError, 'live web bytes'):
+                        surfaces.verify_web(root, corrupt)
+            with patch.object(surfaces.subprocess, 'run', return_value=SimpleNamespace(returncode=1)):
+                with self.assertRaisesRegex(ValueError, 'server configuration'):
+                    surfaces.verify_web(root, get)
+
     def test_redirect_or_insecure_url_is_not_public_proof(self):
         for url in ('http://librekat.nl/ocideck/', 'https://user@librekat.nl/ocideck/'):
             with self.assertRaisesRegex(ValueError, 'HTTPS'):

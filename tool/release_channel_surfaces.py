@@ -371,11 +371,18 @@ def verify_web(bundle, get=fetch):
     files = web_files(bundle)
     if get('https://ocideck.librekat.nl/SHA256SUMS') != (bundle / 'SHA256SUMS').read_bytes():
         raise ValueError('live web checksum list differs')
+    # Apache must not serve its configuration. Keep its signed manifest entry,
+    # but authenticate those bytes through the same SSH route as deployment.
+    if '.htaccess' in files:
+        helper = Path(__file__).resolve().parent.parent / 'scripts/deploy_web.sh'
+        if subprocess.run(['bash', str(helper), '--verify-server-config-only',
+                           '--bundle-dir', str(bundle)], timeout=120).returncode:
+            raise ValueError('live web server configuration differs or is unavailable')
     def check(entry):
         name, digest = entry
         return sha256(get('https://ocideck.librekat.nl/' + quote(name, safe='/'))).hexdigest() == digest
     with ThreadPoolExecutor(max_workers=8) as workers:
-        if not all(workers.map(check, files.items())):
+        if not all(workers.map(check, ((name, digest) for name, digest in files.items() if name != '.htaccess'))):
             raise ValueError('live web bytes differ')
     return files
 

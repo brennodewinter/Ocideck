@@ -23,6 +23,7 @@
 # Gebruik:
 #   make build-web && scripts/deploy_web.sh
 #   scripts/deploy_web.sh --preflight-only controleer zonder inpakken/uploaden
+#   scripts/deploy_web.sh --verify-server-config-only lees private liveconfig
 #   scripts/deploy_web.sh --dry-run          toon wat er zou gebeuren
 #   scripts/deploy_web.sh --keep-backup      ruim de vorige versie niet op
 #   scripts/deploy_web.sh --bundle-dir PATH  gebruik een andere geverifieerde bundel
@@ -44,12 +45,14 @@ LIVE_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"
 
 DRY_RUN=0
 PREFLIGHT_ONLY=0
+VERIFY_SERVER_CONFIG_ONLY=0
 KEEP_BACKUP=0
 BUNDLE_DIR="build/web"
 while (( $# )); do
   case "$1" in
     --dry-run) DRY_RUN=1 ;;
     --preflight-only) PREFLIGHT_ONLY=1 ;;
+    --verify-server-config-only) VERIFY_SERVER_CONFIG_ONLY=1 ;;
     --keep-backup) KEEP_BACKUP=1 ;;
     --bundle-dir)
       if (( $# < 2 )) || [[ -z "$2" || "$2" == -* ]]; then
@@ -62,13 +65,22 @@ while (( $# )); do
   shift
 done
 
-for cmd in dart git shasum tar du cut uname cmp; do
+if (( VERIFY_SERVER_CONFIG_ONLY )); then
+  if (( DRY_RUN || PREFLIGHT_ONLY )); then
+    echo "Alleen-lezen configuratiecontrole kan niet met andere modi worden gecombineerd." >&2
+    exit 2
+  fi
+  REQUIRED_COMMANDS=(python3 ssh)
+else
+  REQUIRED_COMMANDS=(dart git shasum tar du cut uname cmp python3)
+fi
+for cmd in "${REQUIRED_COMMANDS[@]}"; do
   command -v "$cmd" >/dev/null 2>&1 \
     || { echo "Ontbrekend commando: $cmd" >&2; exit 1; }
 done
 
 # Een droge proef gebruikt geen netwerkcommando's; een echte deploy wel.
-if (( ! DRY_RUN )); then
+if (( ! DRY_RUN && ! VERIFY_SERVER_CONFIG_ONLY )); then
   for cmd in scp ssh curl; do
     command -v "$cmd" >/dev/null 2>&1 \
       || { echo "Ontbrekend commando: $cmd" >&2; exit 1; }
@@ -84,6 +96,64 @@ log() { printf '\n== %s ==\n' "$1"; }
 # hoort een sleutel met wachtwoord uit de ssh-agent gewoon te werken.
 SSH_OPTS=(-o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
   -o ServerAliveInterval=15 -o ServerAliveCountMax=2)
+
+verify_server_config() {
+  # Python quotes the remote arguments and checks both regular files through
+  # one directory descriptor, so a symlink or concurrent root swap cannot mix
+  # a different configuration with the expected bundle manifest.
+  python3 - "$BUNDLE_DIR" "$HOST" "$WEBROOT" "${SSH_OPTS[@]}" <<'PY'
+import hashlib, os, re, shlex, stat, subprocess, sys
+
+def digest(path, limit, directory):
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
+    with os.fdopen(fd, 'rb') as stream:
+        if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+            raise ValueError('server configuration evidence must be regular')
+        content = stream.read(limit + 1)
+    if len(content) > limit:
+        raise ValueError('server configuration evidence exceeds bound')
+    return hashlib.sha256(content).hexdigest(), content
+
+bundle, host, webroot = sys.argv[1:4]
+directory = os.open(bundle, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+try:
+    manifest_hash, manifest = digest('SHA256SUMS', 32 * 1024**2, directory)
+    config_hash, _ = digest('.htaccess', 1024**2, directory)
+finally:
+    os.close(directory)
+matches = []
+for line in manifest.decode().splitlines():
+    value, name = line.split(maxsplit=1)
+    name = name.removeprefix('*').removeprefix('./')
+    if name == '.htaccess':
+        matches.append(value)
+if matches != [config_hash] or not re.fullmatch('[0-9a-f]{64}', config_hash):
+    raise ValueError('server configuration differs from bundle manifest')
+remote = '''import hashlib, os, stat, sys
+root = os.open(sys.argv[1], os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+try:
+    for name, expected, limit in [('SHA256SUMS', sys.argv[2], 32 * 1024**2),
+                                  ('.htaccess', sys.argv[3], 1024**2)]:
+        fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=root)
+        with os.fdopen(fd, 'rb') as stream:
+            if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+                raise ValueError('live server configuration evidence must be regular')
+            content = stream.read(limit + 1)
+        if len(content) > limit or hashlib.sha256(content).hexdigest() != expected:
+            raise ValueError('live server configuration or manifest differs')
+finally:
+    os.close(root)
+'''
+command = ['ssh', *sys.argv[4:], '--', host,
+           'python3 - ' + shlex.join([webroot, manifest_hash, config_hash])]
+sys.exit(subprocess.run(command, input=remote.encode(), timeout=90).returncode)
+PY
+}
+
+if (( VERIFY_SERVER_CONFIG_ONLY )); then
+  verify_server_config
+  exit 0
+fi
 
 preflight_host() {
   ssh "${SSH_OPTS[@]}" "$HOST" \
@@ -289,6 +359,12 @@ if curl -fsSL --connect-timeout 10 --max-time 30 "$LIVE_URL/SHA256SUMS" | cmp -s
 else
   echo "Let op: /SHA256SUMS wijkt af of is niet bereikbaar." >&2
   echo "De live map wordt teruggerold." >&2
+  rollback_remote
+  exit 1
+fi
+
+if [[ -e "$BUNDLE_DIR/.htaccess" ]] && ! verify_server_config; then
+  echo "Private serverconfiguratie wijkt af of is onbereikbaar; live map wordt teruggerold." >&2
   rollback_remote
   exit 1
 fi
