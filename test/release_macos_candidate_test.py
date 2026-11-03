@@ -2,6 +2,7 @@
 import sys
 from pathlib import Path
 import unittest
+import subprocess
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tool'))
@@ -68,6 +69,22 @@ class MacCandidateTest(unittest.TestCase):
                     patch.object(mac.subprocess, 'run', return_value=type('Result', (), {'returncode': 1})()):
                 with self.assertRaises(ValueError):
                     mac.source_trusted(Path('/unused'), 'v1.2.3', SHA)
+
+    def test_locked_private_key_blocks_before_notary_or_build(self):
+        with patch.object(mac.shutil, 'copyfile'), patch.object(mac.subprocess, 'run',
+                side_effect=subprocess.CalledProcessError(1, ['codesign'])) as run:
+            with self.assertRaises(subprocess.CalledProcessError):
+                mac.preflight(Path('/controller'), Path('/source'), {})
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(run.call_args.args[0][0], 'codesign')
+            self.assertIn('--timestamp=none', run.call_args.args[0])
+
+    def test_signing_probe_then_apple_profile_checked_before_build(self):
+        with patch.object(mac.shutil, 'copyfile'), patch.object(mac.subprocess, 'run') as run:
+            mac.preflight(Path('/controller'), Path('/source'), {})
+            self.assertEqual(run.call_count, 2)
+            self.assertIn('--preflight', run.call_args.args[0])
+            self.assertEqual(run.call_args.kwargs['cwd'], Path('/source'))
 
     def test_trusted_notary_script_uses_external_source_and_own_helper(self):
         root = Path(__file__).resolve().parents[1]

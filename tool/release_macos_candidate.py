@@ -62,6 +62,20 @@ def source_trusted(root, tag, sha):
         raise ValueError('maintenance merge tree differs from tested head')
 
 
+def preflight(controller, root, environment):
+    # An installed certificate alone does not prove background private-key access.
+    with tempfile.TemporaryDirectory(prefix='ocideck-signing-check-') as directory:
+        probe = Path(directory) / 'probe'
+        shutil.copyfile('/usr/bin/true', probe)
+        subprocess.run(['codesign', '--force', '--timestamp=none', '--sign',
+                        environment.get('OCIDECK_SIGN_IDENTITY',
+                            'Developer ID Application: Brenno de Winter (AMT83P4B3L)'), str(probe)],
+                       env=environment, check=True, capture_output=True, timeout=120)
+    subprocess.run(['bash', str(controller / 'scripts/notarize_macos.sh'),
+                    '--source-root', str(root), '--preflight'], cwd=root,
+                   env=environment, check=True, timeout=240)
+
+
 def consume(archive, directory):
     command(['ditto', '-x', '-k', str(archive), str(directory)], directory)
     app = directory / 'OciDeck.app'
@@ -107,6 +121,7 @@ def run(args):
         mode = ['--resume-notary'] if state.exists() else []
         environment = {key: value for key, value in os.environ.items()
                        if not any(secret in key.upper() for secret in ('TOKEN', 'SECRET', 'PASSWORD'))}
+        preflight(controller, root, environment)
         subprocess.run(['bash', str(controller / 'scripts/notarize_macos.sh'), '--source-root', str(root), *mode],
                        cwd=root, env=environment, check=True, timeout=14000)
         archive = root / f'build/macos/dist/OciDeck-{version}-macos.zip'
