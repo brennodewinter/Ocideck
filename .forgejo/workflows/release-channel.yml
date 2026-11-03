@@ -168,25 +168,19 @@ jobs:
     needs: build
     if: ${{ inputs.channel == 'linux-deb' }}
     runs-on: docker
-    # Dezelfde schone Ubuntu-proef als linux-build: geef apt ook na de tag
-    # genoeg tijd voordat de eigenlijke startproef van 20 seconden begint.
+    # Het image bevat alleen testgereedschap; pakketdependencies blijven een echte proef.
     timeout-minutes: 240
-    # Zelfde pin als deploy-web; kaal Ubuntu, géén bouwgereedschap.
     container:
-      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
     steps:
-      - name: Node voor de artefactactie
-        run: |
-          set -eu
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Installeren, linken en starten
         run: |
           set -eu
           export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends xvfb fonts-dejavu-core
+          # Alleen het echte pakket en zijn gedeclareerde dependencies installeren.
+          apt-get update
           apt-get install -y "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb"
           # Declares de control minder dan de binary linkt, dan toont ldd
           # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
@@ -214,22 +208,14 @@ jobs:
     runs-on: docker
     timeout-minutes: 240
     container:
-      image: debian:12-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
     steps:
-      - name: Node voor de artefactactie
-        run: |
-          set -eu
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Uitpakken, linken en starten
         run: |
           set -eu
           export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends \
-            xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
-            libayatana-appindicator3-1 libgles2 libegl1 libpulse0
           mkdir -p /tmp/ocideck-test
           tar -xzf "dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
           cd /tmp/ocideck-test/ocideck-linux-debian12-*
@@ -253,19 +239,16 @@ jobs:
     if: ${{ inputs.channel == 'linux-rpm' }}
     runs-on: docker
     timeout-minutes: 240
-    # Kaal Fedora: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
+    # Alleen testgereedschap vooraf: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
     # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
     container:
-      image: fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
     steps:
-      - name: Node voor de artefactactie
-        run: dnf install -y --setopt=install_weak_deps=False nodejs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Installeren, linken en starten
         run: |
           set -eu
-          dnf install -y --setopt=install_weak_deps=False xorg-x11-server-Xvfb dejavu-sans-fonts
           dnf install -y "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm"
           if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
             echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
@@ -288,26 +271,15 @@ jobs:
     runs-on: docker
     timeout-minutes: 240
     container:
-      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
     steps:
-      - name: Node voor de artefactactie
-        run: |
-          set -eu
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Uitpakken, linken en starten
         run: |
           set -eu
           export DEBIAN_FRONTEND=noninteractive
-          # Een AppImage bundelt geen GTK: de runtimebibliotheken hieronder
-          # zijn wat een gewone desktop al heeft. Geen -dev-pakketten, geen
-          # toolchain — het beeld blijft consumentachtig.
-          apt-get install -y --no-install-recommends \
-            xvfb fonts-dejavu-core \
-            libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1 \
-            libgles2 libegl1
+          # De gepinde desktop-runtime staat al in het consumerimage.
           cd dist
           chmod +x ocideck-linux-x86_64-*.AppImage
           ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
@@ -335,24 +307,17 @@ jobs:
     runs-on: docker
     timeout-minutes: 240
     container:
-      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
     steps:
-      - name: Node voor de artefactactie
-        run: |
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Installeren en inhoud controleren
         run: |
           set -eu
           export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends flatpak
-          flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-          flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
-          flatpak --user install -y --noninteractive --bundle "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak"
-          app="$(flatpak --user info --show-location com.dewinter.ocideck)"
-          flatpak --user info --show-metadata com.dewinter.ocideck | grep -Fx 'runtime=org.gnome.Platform/x86_64/50'
+          flatpak --system install -y --noninteractive --no-deps --no-related --bundle "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak"
+          app="$(flatpak --system info --show-location com.dewinter.ocideck)"
+          flatpak --system info --show-metadata com.dewinter.ocideck | grep -Fx 'runtime=org.gnome.Platform/x86_64/50'
           test -x "$app/files/bin/ocideck"
           test -x "$app/files/bin/git"
           test -x "$app/files/lib/ocideck/ocideck"
@@ -369,22 +334,14 @@ jobs:
     runs-on: docker
     timeout-minutes: 240
     container:
-      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
     steps:
-      - name: Node voor de artefactactie
-        run: |
-          set -eu
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Uitpakken, linken en starten
         run: |
           set -eu
           export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends \
-            xvfb xauth fonts-dejavu-core libgtk-3-0t64 libsecret-1-0 liblzma5 \
-            libayatana-appindicator3-1 libgles2 libegl1 libpulse0
           mkdir -p /tmp/ocideck-test
           tar -xzf "dist/ocideck-linux-x64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
           cd /tmp/ocideck-test/ocideck-*

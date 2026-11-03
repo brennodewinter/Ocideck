@@ -12,6 +12,34 @@ PROFILES = ('deb', 'rpm', 'tar', 'debian12', 'appimage', 'flatpak')
 
 
 class ConsumerImagesTest(unittest.TestCase):
+    def test_published_image_receipt_matches_workflow_and_recipes(self):
+        import hashlib
+        receipt = json.loads((ROOT / 'scripts/release_consumers/images.json').read_text())
+        self.assertEqual(receipt['schema'], 1)
+        self.assertEqual(set(receipt['images']), set(PROFILES))
+        self.assertRegex(receipt['source'], r'^[0-9a-f]{40}$')
+        self.assertRegex(receipt['provenance']['helper_sha256'], r'^[0-9a-f]{64}$')
+        workflow = (ROOT / '.forgejo/workflows/release-channel.yml').read_text()
+        for profile in PROFILES:
+            with self.subTest(profile=profile):
+                section = re.search(r'  consumer-' + profile + r':\n(.*?)(?=\n  [a-z][a-z0-9-]*:|\Z)', workflow, re.S).group(1)
+                self.assertIn('image: ' + receipt['images'][profile], section)
+                self.assertRegex(receipt['images'][profile], r'^pawprint\.vigilis\.online/librekat/ocideck-consumer-' + profile + r'@sha256:[0-9a-f]{64}$')
+                recipe = (ROOT / 'scripts/release_consumers' / (profile + '.Dockerfile')).read_bytes()
+                self.assertEqual(hashlib.sha256(recipe).hexdigest(), receipt['provenance']['recipes_sha256'][profile])
+                self.assertNotIn('Node voor de artefactactie', section)
+                if profile in ('deb', 'rpm'):
+                    self.assertIn('install -y "./dist/ocideck-linux-', section)
+                else:
+                    self.assertNotIn('apt-get install', section)
+                if profile == 'flatpak':
+                    self.assertIn('flatpak --system install -y --noninteractive --no-deps --no-related --bundle', section)
+                    self.assertIn('FILES.sha256', section)
+                    self.assertIn('components.cdx.json', section)
+                else:
+                    self.assertIn("grep 'not found'", section)
+                    self.assertIn('timeout 20 xvfb-run', section)
+
     def test_pinned_bases_and_captured_tool_versions(self):
         for profile in PROFILES:
             with self.subTest(profile=profile):

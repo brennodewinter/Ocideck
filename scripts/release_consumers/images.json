@@ -1,0 +1,34 @@
+{
+  "images": {
+    "appimage": "pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e",
+    "deb": "pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c",
+    "debian12": "pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab",
+    "flatpak": "pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf",
+    "rpm": "pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f",
+    "tar": "pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d"
+  },
+  "provenance": {
+    "artifact_install_probe": "not performed; requires fixed stdin forwarding",
+    "checks": [
+      "packages.txt present",
+      "node command available",
+      "sha256sum command available",
+      "registry push",
+      "registry pull and exact RepoDigests readback"
+    ],
+    "finished_at": "2026-11-03T17:45:13Z",
+    "helper_sha256": "35a090c7d7c34dfb48961541865ea831ab07881870447780ff85280d8f149f41",
+    "recipes_sha256": {
+      "appimage": "64647c58f73f33c6e2b8835712e9a0cc0f07daacc2ebe14cde09ad1b4b567209",
+      "deb": "1de26d6cb085a13d31ebef400f913d14b4e7392a638993fb0454d55ccf5397f8",
+      "debian12": "2d2ce6926fddfbdc60f9bd3b8445c897a4d2fd83194e9a32c277eefa4cd16021",
+      "flatpak": "d27cb86da5f07c14c0001e7b0609c2afc06cc93c7a6489d712bdbfa2f493647c",
+      "rpm": "e4c35bcd5af0b4141b91f625199cb213c8607554fa4dc9a4ee444266d33efb04",
+      "tar": "d12b439fe8ed868216ef53d9c44bf754cf8260c43b917a1dbe3cc7e2387e890a"
+    },
+    "source_archive_sha256": "08fa53f3cab6ba6bc72fafe85d3d72083dfa8bd313e86128d3f4d272fc6af6bf",
+    "started_at": "2026-11-03T17:14:10Z"
+  },
+  "schema": 1,
+  "source": "3f0d6019ff0bc4f1c94069698655b2cc1000f3c8"
+}
