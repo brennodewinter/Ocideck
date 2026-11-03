@@ -114,7 +114,8 @@ jobs:
           git commit -m "OciDeck $RELEASE_TAG: $CHANNEL downloads"
           git push origin HEAD:refs/heads/main
           fi
-          export WEBSITE_COMMIT="$(git rev-parse HEAD)"
+          WEBSITE_COMMIT="$(git rev-parse HEAD)"
+          export WEBSITE_COMMIT
           python3 - <<'PYRECEIPT'
           import hashlib, json, os, pathlib
           pages = {}

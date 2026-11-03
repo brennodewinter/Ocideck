@@ -10,6 +10,7 @@ import shutil
 import stat
 import subprocess
 import tarfile
+import tempfile
 from types import SimpleNamespace
 from urllib.parse import quote, urlsplit
 from urllib.request import Request, build_opener
@@ -264,22 +265,25 @@ def public(args, api):
                 result['homebrew'] = save(args, 'homebrew', {'tag': args.tag, 'channel': args.channel, 'url': url, 'sha256': manifest['files'][name]})
             return result
         archive = args.dist / ('ocideck-web-' + args.tag[1:] + '.tar.gz')
-        bundle = state / 'web-public-bundle'
-        if not bundle.exists():
+        # Reconstruct from authenticated archive on every invocation, never trust
+        # an old mutable extraction after a crash or operator edit.
+        with tempfile.TemporaryDirectory(prefix='web-public-', dir=state) as temporary:
+            bundle = Path(temporary) / 'bundle'
             extract_web(archive, bundle, args.tag[1:])
-        files = web_files(bundle)
-        intent, _ = phase_paths(args, 'web')
-        wanted = {'tag': args.tag, 'channel': args.channel, 'archive_sha256': release_channel.file_hash(archive), 'files': files}
-        if intent.exists():
-            if read_json(intent) != wanted:
-                raise ValueError('web publication intent differs')
-            verify_web(bundle)
-        else:
-            begin(args, 'web', wanted)
-            if subprocess.run(['bash', str(root / 'scripts/deploy_web.sh'), '--bundle-dir', str(bundle)], timeout=2700).returncode:
-                raise ValueError('web deployment interrupted or failed; inspect before resume; never blindly redeploy')
-            verify_web(bundle)
-        return {'web': save(args, 'web', wanted)}
+            files = web_files(bundle)
+            intent, _ = phase_paths(args, 'web')
+            wanted = {'tag': args.tag, 'channel': args.channel, 'archive_sha256': release_channel.file_hash(archive), 'files': files}
+            if intent.exists():
+                if read_json(intent) != wanted:
+                    raise ValueError('web publication intent differs')
+                verify_web(bundle)
+            else:
+                begin(args, 'web', wanted)
+                if subprocess.run(['bash', str(root / 'scripts/deploy_web.sh'), '--bundle-dir', str(bundle)], timeout=2700).returncode:
+                    raise ValueError('web deployment interrupted or failed; inspect before resume; never blindly redeploy')
+                verify_web(bundle)
+            return {'web': save(args, 'web', wanted)}
+
 
 
 def release_channel_control_publish(args):
