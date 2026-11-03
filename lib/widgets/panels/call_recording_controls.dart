@@ -85,12 +85,14 @@ class _CallRecordingSectionState extends ConsumerState<CallRecordingSection> {
     final l10n = context.l10n;
     final notifier = ref.read(callRecordingProvider.notifier);
     final message = _message(l10n, offer.message);
+    // De live region zit op de statusregel, niet om de hele sectie: tijdens
+    // een opname tikt hieronder de brokkenteller, en alles in een live region
+    // wordt aangekondigd (#2757).
+    final live =
+        recorded.phase == CallRecordingPhase.bezig ||
+        recorded.phase == CallRecordingPhase.fout;
     return Semantics(
       container: true,
-      liveRegion:
-          recorded.phase == CallRecordingPhase.bezig ||
-          recorded.phase == CallRecordingPhase.fout,
-      label: message,
       child: Material(
         type: MaterialType.transparency,
         child: Padding(
@@ -106,9 +108,12 @@ class _CallRecordingSectionState extends ConsumerState<CallRecordingSection> {
                 ),
               ),
               if (message.isNotEmpty)
-                Text(
-                  message,
-                  style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+                Semantics(
+                  liveRegion: live,
+                  child: Text(
+                    message,
+                    style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+                  ),
                 ),
               if (recorded.providerIndicatesRecording)
                 Text(
