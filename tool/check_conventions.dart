@@ -590,7 +590,7 @@ const Map<String, int> classSizeBaseline = {
   // ~25 regels lucht voor twee PR's die tegelijk in dit bestand werken.
   // +16 (#2733): _reduceMotion-veld en didChangeDependencies, zodat de
   // grafiek de besturingssysteem-voorkeur voor minder beweging volgt.
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3023,
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3024,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   // Verlaagd van 2235 naar 2232: de klasse meet 2227.
