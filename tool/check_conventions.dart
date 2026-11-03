@@ -217,7 +217,10 @@ const Map<String, int> fileSizeBaseline = {
   // +38 (#2729): de uniforme toetsenborduitweg (Escape/Ctrl+Tab) en de
   // laatste-cel-uitgang per rooster. De handlers horen bij de velden die
   // ze verlaten; uitbesteden zou ze van de focuscontext scheiden.
-  'lib/widgets/editors/markdown_deck_editor.dart': 1038,
+  // +36 (#2742): de smale-venster-tak met knoppen op een tweede
+  // regel — de scrollbare variant bleek slechter bereikbaar en flex binnen
+  // een scrollblad kan niet, dus het is een echte layouttak.
+  'lib/widgets/editors/markdown_deck_editor.dart': 1074,
   // +27 (#1758): keep-with-next voor sub-hoofdstukken — alinea-split en
   // orland-guard in build(), de split-functie staat in document_pdf_blocks.dart.
   'lib/services/pdf/document_pdf_widgets.dart': 850,
