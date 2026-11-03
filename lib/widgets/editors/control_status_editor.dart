@@ -92,7 +92,8 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = EditorTextController(text: spec.heading)..addTextListener(_emit);
+    _title = EditorTextController(text: spec.heading, searchFieldId: 'title')
+      ..addTextListener(_emit);
     _rows = spec.rows.map((r) => _RowControllers(r, _emit)).toList();
     if (_rows.isEmpty) {
       _rows = [_RowControllers(const ControlStatusRow(), _emit)];
@@ -136,6 +137,14 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _rows.length; i++) {
+      _rows[i].id.searchFieldId = 'tableRows.${i + 1}.0';
+      _rows[i].control.searchFieldId = 'tableRows.${i + 1}.1';
+      _rows[i].owner.searchFieldId = 'tableRows.${i + 1}.4';
+      _rows[i].target.searchFieldId = 'tableRows.${i + 1}.5';
+      _rows[i].evidence.searchFieldId = 'tableRows.${i + 1}.6';
+      _rows[i].note.searchFieldId = 'tableRows.${i + 1}.7';
+    }
     final l10n = context.l10n;
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,

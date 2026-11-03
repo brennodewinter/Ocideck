@@ -62,7 +62,11 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
         ref.read(deckProvider).deck?.signature ?? const DocumentSignature();
     _date = sig.date;
     _imagePath = sig.imagePath;
-    _title = newController(widget.slide.title, _emitTitle);
+    _title = newController(
+      widget.slide.title,
+      _emitTitle,
+      searchFieldId: 'title',
+    );
     _statement = newController(sig.statement, _emitSignature);
     _name = newController(sig.name, _emitSignature);
     _role = newController(sig.role, _emitSignature);

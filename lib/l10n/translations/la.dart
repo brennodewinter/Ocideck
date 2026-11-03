@@ -15,8 +15,6 @@ const _stringsLa = {
   'more': 'Plura',
   'export': 'Exportare',
   'exportReady': 'Exportare (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Praesentationem prius serva ut exportes',
-  'exportNeedsClean': 'Mutationes tuas prius serva ut exportes',
   'saved': 'Servatum',
   'unsaved': 'Non servatum',
   'unsavedChanges': 'Mutationes servare (Ctrl/Cmd+S)',
@@ -692,9 +690,6 @@ const _dutchSourceLa = {
   'Slide-overzicht': 'Conspectus laminarum',
   'Slide-overzicht (pijltjes + Enter)':
       'Conspectus laminarum (sagittae + Enter)',
-  'Presenter view (notities, klok)': 'Visio oratoris (notae, horologium)',
-  'Scherm wisselen (meerdere schermen)':
-      'Schermata permutare (plura schermata)',
   'Zwart · wit scherm': 'Schermum nigrum · album',
   'Automatische modus aan/uit': 'Modus automaticus activus/inactivus',
   'Herhalen (loop) aan/uit': 'Iteratio (loop) activa/inactiva',
@@ -716,11 +711,6 @@ const _dutchSourceLa = {
       'Notae pro accipiente durante cursu',
   'Mijn notities aan/uit': 'Notas meas activare/inactivare',
   'Wissel scherm (S)': 'Schermum permutare (S)',
-  'Kon niet van scherm wisselen.': 'Schermata permutari non potuerunt.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorium · H legenda · G conspectus · B/W nigrum/album · R tempus · Esc sistere',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorium · H legenda · S schermum · G conspectus · B/W nigrum/album · R tempus · Esc sistere',
   'pijltjes + Enter of klik om te springen':
       'sagittae + Enter aut ictus ad saliendum',
   'Afsluiten (Escape)': 'Exire (Escape)',
@@ -1620,6 +1610,58 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Typus extra pro litteris absentibus',
+  'Geen lettertypebestand gekozen': 'Nullum typi file electum',
+  'Kies bestand…': 'File elige…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Solum pars huius file in PDF includitur. Licentia file inclusionem permittere debet; OciDeck hoc non verificat et nihil depromit.',
+  'Bijzonder persoonsgegeven': 'Datum personale speciale',
+  'Dia {n} van {m}': 'Tabula {n} ex {m}',
+  'ander scherm: niet bereikbaar': 'altera tabella: inaccessibilis',
+  'het andere scherm': 'altera tabella',
+  'Dit mag blijven': 'Hoc manere potest',
+  'Waarschuw de ontvanger': 'Accipientem mone',
+  'Laat dit weg bij tonen en exporteren': 'Hoc ostendendo et exportando omitte',
+  'Ga naar de eerste dia zonder keuze': 'Ad primam tabulam sine electione vade',
+  'Onderteken git-commits': 'Commititiones git subsigna',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Commititiones clave subsigna qua git in hac machina iam utitur.',
+  'getekend en gecontroleerd': 'subsignatum et probatum',
+  'getekend (hier niet te controleren)': 'subsignatum (hic non probandum)',
+  'ongetekend': 'non subsignatum',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} in hoc {veld}. Nuntium aperi, tum pars in textu electa stat.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Nuntium aperi, tum pars in textu electa stat.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Niveus eorum severior est quam praesentationis. Tolle niveum praesentationis aut minue niveum imaginis.',
+  'Niveau van de presentatie': 'Niveus praesentationis',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Tolle niveum praesentationis aut minue niveum imaginis.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Audientes hanc imaginem in altero scrinione vident.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Alterum scrinium non participat. Imagines in hoc scrinione sunt.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Scrinia non commutata sunt. Annotationes adhuc hic stant.',
+  'Notities aan of uit': 'Annotationes inpositae an exemptae',
+  'Zet de notities op het andere scherm':
+      'Annotationes in alterum scrinium pone',
+  'Terug naar de dia\'s': 'Ad imagines revertere',
+  'Verder typen': 'Perge scribere',
+  'Terug zonder deze wijzigingen': 'Revertere sine his mutationibus',
+  'Toepassen en terug': 'Adhibe et revertere',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Mutationes tuae nondum adhibitae sunt.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Mutationes non adhibitae: adhibe, abiice aut hic mane.',
+  'Deze tabel bewerken': 'Tabulam hanc recensere',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} in nulla prorsus praesentatione amplius nuntiabitur. Apud Securitatem restituere potes.',
+  'Niet melden': 'Non nuntiare',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Serva primum. Deinde exportare potes.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Unum fasciculum HTML cum vero textu, titulis et textibus alternis, quod in omni navigatore sine interrete aperitur — cum tabulis, mathematica, mermaid et diagrammatibus.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1632,6 +1674,19 @@ const _dutchSourceAddLa = <String, String>{
   'Ga naar de brontabel': 'Ad tabulam fontem vade',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Haec tabula exemplum tabulae fontis "{bron}" est. Fontem ede et Renovare elige, aut conspectum ut imaginem seiunge.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Ad quaerendum privatim, incipe cum fenestra oratoris separata.',
+  'Privé zoeken': 'Quaerere privatim',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Auditores paginam praesentem vident donec Paginam ostendere eligis. Progressio automatica intermissa est. Solam fenestram auditorum communica, non totum spatium operis.',
+  'Ook in sprekersnotities': 'Etiam in adnotationibus oratoris quaerere',
+  'Typ om te zoeken': 'Scribe ad quaerendum',
+  'Toon dia': 'Paginam ostendere',
+  'Verder vanaf het begin': 'Ab initio pergitur',
+  'Verder vanaf het einde': 'A fine pergitur',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Nihil inventum. Verba breviora quaere.',
+  'Treffer {n} van {m}': 'Locus {n} ex {m}',
   'Quizvragen': 'Quaestiones certaminis',
   'Met vragen': 'Cum quaestionibus',
   'Zonder vragen': 'Sine quaestionibus',
@@ -2344,12 +2399,9 @@ const _dutchSourceAddLa = <String, String>{
   'Bewaren als kopie': 'Serva ut exemplar',
   'Bewaren in document': 'Serva in documento',
   'beamer': 'projectorium',
-  'beamer: niet bereikbaar': 'projectorium: non pervenibile',
   'Bewerken sluiten (Esc)': 'Claude recensionem (Esc)',
   'Presenteer document…': 'Praesenta documentum…',
   'Presenteer document': 'Praesenta documentum',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Elige quae tabulae per praesentationem vivae mutari possint. Cetera omnia legenda tantum manent.',
   'Extra ruimte': 'Spatium extra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Haec nota longior est quam pagina — volumen verte pro reliquo',
@@ -5163,8 +5215,6 @@ const _dutchSourceAddLa = <String, String>{
   'Markdown-broneditor': 'Editor fontis Markdown',
   'Niet toegepast': 'Non applicantur',
   'Niet-toegepaste wijzigingen': 'Unapplied mutationes',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Applicare vel rejicere current mutationes ante commutatione scopes.',
   'Problemen gevonden': 'Problemata invenerunt',
   'Schrijftips': 'Scribere tips',
   'Snel herstellen': 'Recuperet cito',
@@ -6400,8 +6450,6 @@ const _dutchSourceAddLa = <String, String>{
       'Retentum: severius quam praesentatio classificatum',
   '1 slide achtergehouden door haar TLP': '1 scida propter TLP suum retenta',
   'slides achtergehouden door hun TLP': 'scidae propter TLP suum retentae',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Hae scidae in praesentatione, exportatione et fasciculo omittuntur. Gradum TLP praesentationis in Informatione praesentationis auge ut includantur.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Omnes paginae classificatione TLP sua retinentur, itaque nihil est quod ostendatur.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7144,8 +7192,6 @@ const _dutchSourceAddLa = <String, String>{
   'seksuele geaardheid': 'propensio sexualis',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' In hac pagina etiam datum identificans est, itaque hoc ad personam referri potest.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Genus speciale datorum personalium (GDPR art. 9/10)',
   'gezondheidsgegeven': 'datum valetudinis',
   'strafrechtelijk gegeven': 'datum criminale',
   'religie of levensovertuiging': 'religio vel persuasio',
@@ -7206,8 +7252,6 @@ const _dutchSourceAddLa = <String, String>{
   'PERSOONSGEGEVENS': 'DATA PERSONALIA',
   'Volg de presentatie': 'Praesentationem sequi',
   'Weglaten uit tonen en exporteren': 'Ex ostensione et exportatione omittere',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Considera id obliterare per [[duplices uncos quadratos]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Sine contextu in textu, hoc fortasse datum personale non est.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

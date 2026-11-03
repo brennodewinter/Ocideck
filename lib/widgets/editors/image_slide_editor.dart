@@ -40,7 +40,7 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
   @override
   void initState() {
     super.initState();
-    _title = newController(widget.slide.title, _emit);
+    _title = newController(widget.slide.title, _emit, searchFieldId: 'title');
   }
 
   void _emit() => widget.onUpdate(widget.slide.copyWith(title: _title.text));

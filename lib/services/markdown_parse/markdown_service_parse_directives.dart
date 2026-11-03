@@ -75,9 +75,32 @@ typedef _BlockDirectives = ({
 bool _isTailNote(String tail) =>
     tail.replaceAll(_reHtmlComment, '').trim().isEmpty;
 
-String _takeNote(StringBuffer notes, String content) {
+typedef _NoteSpan = void Function(Match);
+
+String _takeNote(
+  StringBuffer notes,
+  String content, [
+  _NoteSpan? note,
+  Match? match,
+]) {
+  if (match != null) note?.call(match);
   notes.write(notes.isEmpty ? content : '\n$content');
   return '';
+}
+
+({String cssClass, String remaining}) _classForNoteScan(
+  String block,
+  _NoteSpan? note,
+) {
+  final parsed = _stripClassDirective(block);
+  if (note == null) return parsed;
+  return (
+    cssClass: parsed.cssClass,
+    remaining: block.replaceFirstMapped(
+      _reClassDirective,
+      (match) => match.group(0)!.replaceAll(RegExp(r'[^\r\n]'), ' '),
+    ),
+  );
 }
 
 ({String cssClass, String remaining}) _stripClassDirective(String block) {
@@ -115,8 +138,8 @@ extension _MarkdownParseDirectives on MarkdownService {
   /// checklist/title-image/title-colour/bullet-marker), accumulating presenter
   /// notes from any non-directive comment. Returns the stripped body plus all
   /// the decoded directive values.
-  _BlockDirectives _parseBlockDirectives(String block) {
-    final classDirective = _stripClassDirective(block);
+  _BlockDirectives _parseBlockDirectives(String block, [_NoteSpan? note]) {
+    final classDirective = _classForNoteScan(block, note);
     final cssClass = classDirective.cssClass;
     var remaining = classDirective.remaining;
 
@@ -159,7 +182,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       final raw = m.group(1)!;
       final content = raw.trim();
       // Meerregelig is altijd een notitieblok — richtlijnen passen op één regel.
-      if (raw.contains('\n')) return _takeNote(notesBuffer, content);
+      if (raw.contains('\n')) return _takeNote(notesBuffer, content, note, m);
       if (content.startsWith('advance:')) {
         advanceDuration = _parseAdvanceDuration(content);
       } else if (content == 'skip') {
@@ -267,7 +290,7 @@ extension _MarkdownParseDirectives on MarkdownService {
         }
         // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
         if (_isTailNote(source.substring(m.end))) {
-          return _takeNote(notesBuffer, content);
+          return _takeNote(notesBuffer, content, note, m);
         }
         return m.group(0)!;
       }
@@ -401,4 +424,38 @@ List<bool> _parseNumCols(String raw) {
     result[i] = true;
   }
   return result;
+}
+
+extension MarkdownSpeakerNoteRanges on MarkdownService {
+  /// Dezelfde notitieherkenning als importeren, met posities in de ongewijzigde bron.
+  List<({int start, int end})> speakerNoteSourceRanges(String block) =>
+      _speakerNoteSourceRanges(this, block);
+}
+
+List<({int start, int end})> _speakerNoteSourceRanges(
+  MarkdownService parser,
+  String block,
+) {
+  if (requiresWholeMarpBlockPreservation(block)) return const [];
+  final ranges = <({int start, int end})>[];
+  final focus = parser._parseImageFocus(block);
+  final alt = parser._parseImageAlt(focus.block);
+  final lifted = parser._parseFindingLink(alt.block).block;
+  final retained = <String, int>{};
+  for (final match in _reHtmlComment.allMatches(lifted)) {
+    retained.update(match.group(0)!, (count) => count + 1, ifAbsent: () => 1);
+  }
+  final positioned = block.replaceAllMapped(_reHtmlComment, (match) {
+    final raw = match.group(0)!;
+    final count = retained[raw] ?? 0;
+    if (count > 0) {
+      retained[raw] = count - 1;
+      return raw;
+    }
+    return raw.replaceAll(RegExp(r'[^\r\n]'), ' ');
+  });
+  parser._parseBlockDirectives(positioned, (match) {
+    ranges.add((start: match.start + 4, end: match.end - 3));
+  });
+  return ranges;
 }

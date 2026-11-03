@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/question.dart';
 import '../../theme/app_theme.dart';
+import 'deck_search_target.dart';
 
 /// Samengevouwen sectie voor scoring, feedback, pogingen en metadata
 /// (#2003, #2004, #2005, #2008). Default ingeklapt — de meeste vragen
@@ -67,8 +68,13 @@ class _QuestionAdvancedFieldsState extends State<QuestionAdvancedFields> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final search = DeckSearchTarget.of(context);
+    final field = search?.match?.fieldId ?? '';
+    final found =
+        field.startsWith('question.feedback.') || field == 'question.hints';
     return ExpansionTile(
-      initiallyExpanded: _expanded,
+      key: ValueKey(found ? search!.signal : 0),
+      initiallyExpanded: found || _expanded,
       onExpansionChanged: (v) {
         setState(() => _expanded = v);
         widget.onExpansionChanged(v);
@@ -246,6 +252,7 @@ class _QuestionAdvancedFieldsState extends State<QuestionAdvancedFields> {
           (v) {
             widget.onFeedbackChanged(widget.feedback.copyWith(correct: v));
           },
+          searchFieldId: 'question.feedback.correct',
           maxLines: 2,
         ),
         const SizedBox(height: 8),
@@ -256,6 +263,7 @@ class _QuestionAdvancedFieldsState extends State<QuestionAdvancedFields> {
           (v) {
             widget.onFeedbackChanged(widget.feedback.copyWith(wrong: v));
           },
+          searchFieldId: 'question.feedback.wrong',
           maxLines: 2,
         ),
         const SizedBox(height: 8),
@@ -266,14 +274,20 @@ class _QuestionAdvancedFieldsState extends State<QuestionAdvancedFields> {
           (v) {
             widget.onFeedbackChanged(widget.feedback.copyWith(partial: v));
           },
+          searchFieldId: 'question.feedback.partial',
           maxLines: 2,
         ),
         const SizedBox(height: 8),
-        _labeledTextField(l10n.d('Bij timeout'), widget.feedback.timeout, '', (
-          v,
-        ) {
-          widget.onFeedbackChanged(widget.feedback.copyWith(timeout: v));
-        }, maxLines: 2),
+        _labeledTextField(
+          l10n.d('Bij timeout'),
+          widget.feedback.timeout,
+          '',
+          (v) {
+            widget.onFeedbackChanged(widget.feedback.copyWith(timeout: v));
+          },
+          maxLines: 2,
+          searchFieldId: 'question.feedback.timeout',
+        ),
       ],
     );
   }
@@ -287,21 +301,24 @@ class _QuestionAdvancedFieldsState extends State<QuestionAdvancedFields> {
           style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 6),
-        TextFormField(
-          initialValue: widget.hints.join('\n'),
-          maxLines: 3,
-          decoration: InputDecoration(
-            isDense: true,
-            border: const OutlineInputBorder(),
-            hintText: l10n.d('Eerste hint\nTweede hint'),
+        SearchFieldAnchor(
+          fieldId: 'question.hints',
+          child: TextFormField(
+            initialValue: widget.hints.join('\n'),
+            maxLines: 3,
+            decoration: InputDecoration(
+              isDense: true,
+              border: const OutlineInputBorder(),
+              hintText: l10n.d('Eerste hint\nTweede hint'),
+            ),
+            onChanged: (v) {
+              final lines = v
+                  .split('\n')
+                  .where((l) => l.trim().isNotEmpty)
+                  .toList();
+              widget.onHintsChanged(lines);
+            },
           ),
-          onChanged: (v) {
-            final lines = v
-                .split('\n')
-                .where((l) => l.trim().isNotEmpty)
-                .toList();
-            widget.onHintsChanged(lines);
-          },
         ),
       ],
     );
@@ -435,21 +452,25 @@ class _QuestionAdvancedFieldsState extends State<QuestionAdvancedFields> {
     String hint,
     ValueChanged<String> onChanged, {
     int maxLines = 1,
+    String? searchFieldId,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: const TextStyle(fontSize: 13)),
         const SizedBox(height: 4),
-        TextFormField(
-          initialValue: initial,
-          maxLines: maxLines,
-          decoration: InputDecoration(
-            isDense: true,
-            border: const OutlineInputBorder(),
-            hintText: hint,
+        SearchFieldAnchor(
+          fieldId: searchFieldId,
+          child: TextFormField(
+            initialValue: initial,
+            maxLines: maxLines,
+            decoration: InputDecoration(
+              isDense: true,
+              border: const OutlineInputBorder(),
+              hintText: hint,
+            ),
+            onChanged: onChanged,
           ),
-          onChanged: onChanged,
         ),
       ],
     );

@@ -27,6 +27,7 @@ import '../dialogs/cwe_picker.dart';
 import '../dialogs/maswe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
+import 'deck_search_target.dart';
 import 'markdown_editor_field.dart';
 import 'ai_suggest_field.dart';
 import '../../platform/platform_features.dart';
@@ -104,19 +105,21 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     super.initState();
     final spec = FindingSpec.parse(widget.slide.customMarkdown);
     _aiFields = {...widget.slide.aiAssistedFields};
-    _heading = newController(spec.heading, _onChanged);
+    TextEditingController field(String text, String name) =>
+        newController(text, _onChanged, searchFieldId: 'finding.$name');
+    _heading = field(spec.heading, 'heading');
     _findingId = newController(widget.slide.findingId, _onChanged);
-    _scope = newController(spec.scopeObject, _onChanged);
-    _cvss = newController(spec.cvssVector, _onChanged);
-    _cwe = newController(_composeCwe(spec), _onChanged);
-    _maswe = newController(spec.masweId, _onChanged);
-    _cve = newController(spec.cveIds.join(', '), _onChanged);
-    _description = newController(spec.description, _onChanged);
-    _confirmation = newController(spec.confirmation, _onChanged);
-    _impact = newController(spec.impact, _onChanged);
-    _recommendation = newController(spec.recommendation, _onChanged);
+    _scope = field(spec.scopeObject, 'scopeObject');
+    _cvss = field(spec.cvssVector, 'cvssVector');
+    _cwe = field(_composeCwe(spec), 'cwe');
+    _maswe = field(spec.masweId, 'masweId');
+    _cve = field(spec.cveIds.join(', '), 'cveIds');
+    _description = field(spec.description, 'description');
+    _confirmation = field(spec.confirmation, 'confirmation');
+    _impact = field(spec.impact, 'impact');
+    _recommendation = field(spec.recommendation, 'recommendation');
     _retest = spec.retest;
-    _retestNote = newController(spec.retestNote, _onChanged);
+    _retestNote = field(spec.retestNote, 'retestNote');
     _testId = spec.testId;
   }
 
@@ -892,23 +895,26 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       children: [
         label,
         const SizedBox(height: 5),
-        DropdownButtonFormField<String>(
-          initialValue: _testId,
-          isDense: true,
-          items: [
-            DropdownMenuItem(value: '', child: Text(l10n.d('Geen'))),
-            for (final t in tests)
-              DropdownMenuItem(
-                value: t.id,
-                child: Text(
-                  t.test.isEmpty ? t.id : '${t.id} — ${t.test}',
-                  overflow: TextOverflow.ellipsis,
+        SearchFieldAnchor(
+          fieldId: 'finding.testId',
+          child: DropdownButtonFormField<String>(
+            initialValue: _testId,
+            isDense: true,
+            items: [
+              DropdownMenuItem(value: '', child: Text(l10n.d('Geen'))),
+              for (final t in tests)
+                DropdownMenuItem(
+                  value: t.id,
+                  child: Text(
+                    t.test.isEmpty ? t.id : '${t.id} — ${t.test}',
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-            if (currentOutsideList)
-              DropdownMenuItem(value: _testId, child: Text(_testId)),
-          ],
-          onChanged: (v) => _pickTest(v ?? ''),
+              if (currentOutsideList)
+                DropdownMenuItem(value: _testId, child: Text(_testId)),
+            ],
+            onChanged: (v) => _pickTest(v ?? ''),
+          ),
         ),
       ],
     );

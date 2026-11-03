@@ -1,9 +1,25 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/sanitize_svg.dart';
 
 void main() {
+  // Draait native én in de browser
+  // (`flutter test --platform chrome test/sanitize_svg_test.dart`): boven de
+  // drempel koos de sanering `Isolate.run`, dat het web niet kent.
+  test('een SVG boven de inline-drempel wordt ook gesaneerd', () async {
+    final big = Uint8List.fromList(
+      utf8.encode(
+        '<svg viewBox="0 0 10 10"><rect width="10" height="10"/>'
+        '<!--${'x' * kSvgSanitizeInlineMaxBytes}--></svg>',
+      ),
+    );
+    expect(big.length, greaterThan(kSvgSanitizeInlineMaxBytes));
+    final out = await sanitizeImportedSvgForDisplay(big);
+    expect(out?.svg, contains('<rect'));
+  });
+
   test('import-SVG houdt alleen een opgeschoonde SVG-wortel over', () {
     final safeBytes = sanitizeImportedSvgBytes(
       utf8.encode(

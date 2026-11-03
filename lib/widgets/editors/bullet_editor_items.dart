@@ -17,13 +17,22 @@ class BulletSet {
   static const maxLevel = kMaxIndentButtonLevel;
 
   final VoidCallback emit;
-  late final List<EditorTextController> controllers;
+  late final List<EditorTextController> _controllers;
+  final String searchField;
+
+  List<EditorTextController> get controllers {
+    for (var i = 0; i < _controllers.length; i++) {
+      _controllers[i].searchFieldId = '$searchField.$i';
+    }
+    return _controllers;
+  }
+
   late final List<int> levels;
   late final List<bool> checked;
   late final List<bool> headings;
   late final List<FocusNode> focusNodes;
 
-  BulletSet(List<String> raw, this.emit) {
+  BulletSet(List<String> raw, this.emit, {this.searchField = 'bullets'}) {
     final items = raw.isEmpty ? [''] : raw;
     headings = items.map(isGroupHeading).toList();
     levels = items
@@ -34,7 +43,7 @@ class BulletSet {
           (item) => isGroupHeading(item) ? false : checklistItemChecked(item),
         )
         .toList();
-    controllers = items
+    _controllers = items
         .map(
           (item) => _makeController(
             isGroupHeading(item)
@@ -353,6 +362,16 @@ class BulletEditorRow extends StatelessWidget {
         (HardwareKeyboard.instance.isMetaPressed ||
             HardwareKeyboard.instance.isControlPressed)) {
       bullets.paste(mutate, index);
+      return KeyEventResult.handled;
+    }
+    // #2729: één uitweg die overal geldt — Tab is hier indenteren, dus de
+    // toetsenbordgebruiker heeft Escape en Ctrl/Cmd+Tab nodig om het veld
+    // te verlaten.
+    if (event.logicalKey == LogicalKeyboardKey.escape ||
+        (event.logicalKey == LogicalKeyboardKey.tab &&
+            (HardwareKeyboard.instance.isControlPressed ||
+                HardwareKeyboard.instance.isMetaPressed))) {
+      FocusManager.instance.primaryFocus?.nextFocus();
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;

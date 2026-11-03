@@ -14,8 +14,6 @@ const _stringsHu = {
   'more': 'Továbbiak',
   'export': 'Exportálás',
   'exportReady': 'Exportálás (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Az exportáláshoz először mentse a bemutatót',
-  'exportNeedsClean': 'Az exportáláshoz először mentse a módosításokat',
   'saved': 'Mentve',
   'unsaved': 'Nincs mentve',
   'unsavedChanges': 'Módosítások mentése (Ctrl/Cmd+S)',
@@ -688,8 +686,6 @@ const _dutchSourceHu = {
   'Eerste · laatste slide': 'Első · utolsó dia',
   'Slide-overzicht': 'Diaáttekintés',
   'Slide-overzicht (pijltjes + Enter)': 'Diaáttekintés (nyilak + Enter)',
-  'Presenter view (notities, klok)': 'Előadói nézet (jegyzetek, óra)',
-  'Scherm wisselen (meerdere schermen)': 'Képernyőváltás (több kijelző)',
   'Zwart · wit scherm': 'Fekete · fehér képernyő',
   'Automatische modus aan/uit': 'Automatikus mód be/ki',
   'Herhalen (loop) aan/uit': 'Ismétlés (loop) be/ki',
@@ -712,11 +708,6 @@ const _dutchSourceHu = {
       'Jegyzetek a résztvevőnek egy tanfolyam során',
   'Mijn notities aan/uit': 'Saját jegyzeteim be/ki',
   'Wissel scherm (S)': 'Képernyőváltás (S)',
-  'Kon niet van scherm wisselen.': 'Nem sikerült képernyőt váltani.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · H jelmagyarázat · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · H jelmagyarázat · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
   'pijltjes + Enter of klik om te springen':
       'nyilak + Enter vagy kattintás az ugráshoz',
   'Afsluiten (Escape)': 'Kilépés (Escape)',
@@ -1607,6 +1598,59 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Extra betűtípus a hiányzó karakterekhez',
+  'Geen lettertypebestand gekozen': 'Nincs betűtípus-fájl kiválasztva',
+  'Kies bestand…': 'Fájl kiválasztása…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'A fájlnak csak egy részhalmaza kerül be a PDF-be. A fájl licence engedélyeznie kell a beágyazást; az OciDeck ezt nem ellenőrzi, és semmit sem tölt le.',
+  'Bijzonder persoonsgegeven': 'Különleges személyes adat',
+  'Dia {n} van {m}': 'Dia {n} / {m}',
+  'ander scherm: niet bereikbaar': 'másik képernyő: nem elérhető',
+  'het andere scherm': 'a másik képernyő',
+  'Dit mag blijven': 'Ez maradhat',
+  'Waarschuw de ontvanger': 'Figyelmeztesse a címzettet',
+  'Laat dit weg bij tonen en exporteren':
+      'Hagyja ki ezt megjelenítéskor és exportáláskor',
+  'Ga naar de eerste dia zonder keuze': 'Ugrás az első dia választás nélkül',
+  'Onderteken git-commits': 'Git-commitok aláírása',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Írja alá a commitokat azzal a kulccsal, amelyet a git már használ ezen a gépen.',
+  'getekend en gecontroleerd': 'aláírt és ellenőrzött',
+  'getekend (hier niet te controleren)': 'aláírt (itt nem ellenőrizhető)',
+  'ongetekend': 'aláíratlan',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} ebben a {veld}. Nyissa meg a jelzést, és a rész ki van jelölve a szövegben.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Nyissa meg a jelzést, és a rész ki van jelölve a szövegben.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Szintjük szigorúbb, mint a prezentációé. Emelje a prezentáció szintjét, vagy csökkentse a dia szintjét.',
+  'Niveau van de presentatie': 'A prezentáció szintje',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Emelje a prezentáció szintjét, vagy csökkentse a dia szintjét.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'A közönség ezt a diát a másik képernyőn látja.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'A másik képernyő nem vesz részt. A diák ezen a képernyőn vannak.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'A képernyők nem lettek felcserélve. A jegyzetek még itt vannak.',
+  'Notities aan of uit': 'Jegyzetek be- vagy kikapcsolva',
+  'Zet de notities op het andere scherm':
+      'Tegye a jegyzeteket a másik képernyőre',
+  'Terug naar de dia\'s': 'Vissza a diákhoz',
+  'Verder typen': 'Gépelés folytatása',
+  'Terug zonder deze wijzigingen': 'Vissza e módosítások nélkül',
+  'Toepassen en terug': 'Alkalmazás és vissza',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'A módosításait még nem alkalmazta.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Alkalmazatlan módosítások: alkalmazza, dobja el vagy maradjon itt.',
+  'Deze tabel bewerken': 'Táblázat szerkesztése',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} ezután egyetlen prezentációban sem lesz jelentve. A Biztonság alatt visszakapcsolhatja.',
+  'Niet melden': 'Ne jelentse',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Előbb mentse el. Utána exportálhat.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Egy HTML-fájl valódi szöveggel, címsorokkal és alt-szövegekkel, amely minden böngészőben megnyílik internet nélkül — táblázatokkal, matematikával, mermaiddel és grafikonokkal.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1619,6 +1663,19 @@ const _dutchSourceAddHu = <String, String>{
   'Ga naar de brontabel': 'Ugrás a forrástáblához',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ez a táblázat a "{bron}" forrástábla másolata. Szerkessze a forrást és válassza a Frissítés lehetőséget, vagy válassza le a nézetet pillanatképként.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Privát kereséshez indíts külön előadói ablakot.',
+  'Privé zoeken': 'Privát keresés',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'A közönség az aktuális diát látja, amíg ki nem választod a Dia megjelenítése lehetőséget. Az automatikus lejátszás szünetel. Csak a közönség ablakát oszd meg, ne a teljes asztalt.',
+  'Ook in sprekersnotities': 'Keresés az előadói jegyzetekben is',
+  'Typ om te zoeken': 'Írj be keresési szöveget',
+  'Toon dia': 'Dia megjelenítése',
+  'Verder vanaf het begin': 'Folytatás az elejétől',
+  'Verder vanaf het einde': 'Folytatás a végétől',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Nincs találat. Próbálj rövidebb keresési szöveget.',
+  'Treffer {n} van {m}': '{n}. találat, összesen {m}',
   'Quizvragen': 'Kvízkérdések',
   'Met vragen': 'Kérdésekkel',
   'Zonder vragen': 'Kérdések nélkül',
@@ -2329,12 +2386,9 @@ const _dutchSourceAddHu = <String, String>{
   'Bewaren als kopie': 'Mentés másolatként',
   'Bewaren in document': 'Mentés a dokumentumba',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nem érhető el',
   'Bewerken sluiten (Esc)': 'Szerkesztés bezárása (Esc)',
   'Presenteer document…': 'Dokumentum prezentálása…',
   'Presenteer document': 'Dokumentum prezentálása',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Jelölje be, mely táblázatok szerkeszthetők élőben a prezentáció alatt. Minden más tartalom írásvédett marad.',
   'Extra ruimte': 'Extra térköz',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ez a jegyzet hosszabb az oldalnál — görgessen a folytatásért',
@@ -5160,8 +5214,6 @@ const _dutchSourceAddHu = <String, String>{
   'Markdown-broneditor': 'Markdown forrásszerkesztő',
   'Niet toegepast': 'Nincs alkalmazva',
   'Niet-toegepaste wijzigingen': 'Nem alkalmazott módosítások',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'A hatókör váltása előtt alkalmazza vagy utasítsa el a jelenlegi módosításokat.',
   'Problemen gevonden': 'Problémák találhatók',
   'Schrijftips': 'Írási tippek',
   'Snel herstellen': 'Gyorsan felépülni',
@@ -6400,8 +6452,6 @@ const _dutchSourceAddHu = <String, String>{
       'Visszatartva: szigorúbb besorolású, mint a prezentáció',
   '1 slide achtergehouden door haar TLP': '1 dia visszatartva a TLP-je miatt',
   'slides achtergehouden door hun TLP': 'dia visszatartva a TLP-jük miatt',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Ezek a diák nem kerülnek bele a bemutatóba, az exportba, sem a csomagba. Emeld meg a prezentáció TLP-szintjét a Prezentáció adatainál, hogy bekerüljenek.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Minden dia vissza van tartva a TLP-besorolása miatt – nincs mit megjeleníteni.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7150,8 +7200,6 @@ const _dutchSourceAddHu = <String, String>{
   'seksuele geaardheid': 'szexuális irányultság',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Ezen a dián azonosító adat is szerepel, tehát ez visszavezethető egy személyre.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Személyes adatok különleges kategóriája (GDPR 9/10. cikk)',
   'gezondheidsgegeven': 'egészségügyi adat',
   'strafrechtelijk gegeven': 'büntetőjogi adat',
   'religie of levensovertuiging': 'vallás vagy meggyőződés',
@@ -7212,8 +7260,6 @@ const _dutchSourceAddHu = <String, String>{
   'PERSOONSGEGEVENS': 'SZEMÉLYES ADATOK',
   'Volg de presentatie': 'Az előadás szerint',
   'Weglaten uit tonen en exporteren': 'Kihagyás a megjelenítésből és exportból',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Fontold meg a kitakarását [[dupla szögletes zárójellel]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' A szövegben lévő kontextus nélkül lehet, hogy ez nem is személyes adat.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

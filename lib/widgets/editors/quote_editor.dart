@@ -41,8 +41,12 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
   @override
   void initState() {
     super.initState();
-    _quote = newController(widget.slide.quote, _emit);
-    _author = newController(widget.slide.quoteAuthor, _emit);
+    _quote = newController(widget.slide.quote, _emit, searchFieldId: 'quote');
+    _author = newController(
+      widget.slide.quoteAuthor,
+      _emit,
+      searchFieldId: 'quoteAuthor',
+    );
   }
 
   void _emit() {

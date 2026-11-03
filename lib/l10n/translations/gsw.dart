@@ -14,8 +14,6 @@ const _stringsGsw = {
   'more': 'Mee',
   'export': 'Exportiere',
   'exportReady': 'Exportiere (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Speicher d Präsentation zerscht zum exportiere',
-  'exportNeedsClean': 'Speicher dini Änderige zerscht zum exportiere',
   'saved': 'Gspeicheret',
   'unsaved': 'Nöd gspeicheret',
   'unsavedChanges': 'Änderige speichere (Ctrl/Cmd+S)',
@@ -691,9 +689,6 @@ const _dutchSourceGsw = {
   'Eerste · laatste slide': 'Erschti · letschti Slide',
   'Slide-overzicht': 'Slide-Übersicht',
   'Slide-overzicht (pijltjes + Enter)': 'Slide-Übersicht (Pfyl + Enter)',
-  'Presenter view (notities, klok)': 'Präsentatorvyou (Notize, Uhr)',
-  'Scherm wisselen (meerdere schermen)':
-      'Bildschirm wächsle (mehreri Bildschirm)',
   'Zwart · wit scherm': 'Schwarze · wysse Bildschirm',
   'Automatische modus aan/uit': 'Automatische Modus aa/us',
   'Herhalen (loop) aan/uit': 'Wiederhole (Loop) aa/us',
@@ -715,11 +710,6 @@ const _dutchSourceGsw = {
       'Notize für de Empfänger während eme Kurs',
   'Mijn notities aan/uit': 'Mini Notize aa/us',
   'Wissel scherm (S)': 'Bildschirm wächsle (S)',
-  'Kon niet van scherm wisselen.': 'Het d Bildschirm nöd chöne wächsle.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P Publikum · H Legändi · G Übersicht · B/W schwarz/wyss · R Zit · Esc Stopp',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P Publikum · H Legändi · S Bildschirm · G Übersicht · B/W schwarz/wyss · R Zit · Esc Stopp',
   'pijltjes + Enter of klik om te springen':
       'Pfyl + Enter oder klicke zum Springe',
   'Afsluiten (Escape)': 'Verlah (Escape)',
@@ -1608,6 +1598,57 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Zuesätzlechi Schrift für fehlende Zeiche',
+  'Geen lettertypebestand gekozen': 'Kai Schriftdaatei gwählt',
+  'Kies bestand…': 'Daatei wähle…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Nur e Unteermängi vo dere Daatei gaat i d\'PDF. D\'Lizänz vo de Daatei mues s\'Ybette erlaube; OciDeck prüeft das nöd und ladet nüüt.',
+  'Bijzonder persoonsgegeven': 'Bsunders personebezogns Datum',
+  'Dia {n} van {m}': 'Folie {n} vo {m}',
+  'ander scherm: niet bereikbaar': 'anders Chäbeli: nöd erreichbar',
+  'het andere scherm': 's\'ander Chäbeli',
+  'Dit mag blijven': 'Das darf bliibe',
+  'Waarschuw de ontvanger': 'Empfänger warne',
+  'Laat dit weg bij tonen en exporteren': 'Bim Zaige und Exportiere wäglah',
+  'Ga naar de eerste dia zonder keuze': 'Gang zu de erste Dia ohni Entscheid',
+  'Onderteken git-commits': 'Git-Commits signiere',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Signier Commits mit em Schlüssel, wo git uf däre Maschine scho bruucht.',
+  'getekend en gecontroleerd': 'signiert und verifiziert',
+  'getekend (hier niet te controleren)': 'signiert (da nöd verifizierbar)',
+  'ongetekend': 'usigniert',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} in däre {veld}. Mach d\'Mäldig uf, denn isch s\'Stück im Text markiert.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Mach d\'Mäldig uf, denn isch s\'Stück im Text markiert.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Ihres Niveau isch strenger als das vo de Präsentation. Setz s\'Niveau vo de Präsentation höcher, oder senk das vo de Foli.',
+  'Niveau van de presentatie': 'Niveau vo de Präsentation',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Setz s\'Niveau vo de Präsentation höcher, oder senk das vo de Foli.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'De Saal gseet die Foli uf em andere Bildschirm.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'De ander Bildschirm macht nid mit. Die Folie sind uf däm Bildschirm.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'D\'Bildschirm sind nid gwächslet worde. D\'Notize sind no do.',
+  'Notities aan of uit': 'Notize aa oder us',
+  'Zet de notities op het andere scherm': 'Die Notize ufs andere Bildschirm',
+  'Terug naar de dia\'s': 'Zrugg zu de Folie',
+  'Verder typen': 'Witerschribe',
+  'Terug zonder deze wijzigingen': 'Zrugg ohni die Änderige',
+  'Toepassen en terug': 'Aawände und zrugg',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Dini Änderige sind no nid aagwändet.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Nid aagwändeti Änderige: aawände, verwerfe od bliib do.',
+  'Deze tabel bewerken': 'Die Tabelle bearbeite',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} wird denn in keiner Präsentation meh gmäldet. Zrüggsetze chaschs under Sicherheit.',
+  'Niet melden': 'Nid mälde',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Zerschd speichere. Derno chasch exportiere.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Ei HTML-Datei mit echtem Text, Überschrifte und Alt-Täxte, wo in jedem Browser ohni Internet uufgoht — mit Tabelle, Formle, Mermaid und Diagramme.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1620,6 +1661,19 @@ const _dutchSourceAddGsw = <String, String>{
   'Ga naar de brontabel': 'Zur Quelltabälle gaa',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Die Tabälle isch e Abschrift vo de Quelltabälle "{bron}". Bearbeit d Quell und wehl Verfrische, oder löös d Aasicht als Momentufnahm ab.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Start mit eme separate Referäntefänschter, zum privat sueche.',
+  'Privé zoeken': 'Privati Suechi',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'S Publikum bliibt uf de aktuelle Folie, bis du Folie zeige wählsch. S automatische Abspiele isch pausiert. Teil nume s Publikumsfänschter, nöd din ganze Desktop.',
+  'Ook in sprekersnotities': 'Au i de Referänte-Notize sueche',
+  'Typ om te zoeken': 'Zum Sueche tippe',
+  'Toon dia': 'Folie zeige',
+  'Verder vanaf het begin': 'Wiiter vom Afang aa',
+  'Verder vanaf het einde': 'Wiiter vom Änd aa',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Kei Resultat. Probier en chürzere Suechtext.',
+  'Treffer {n} van {m}': 'Träffer {n} vo {m}',
   'Quizvragen': 'Quizfroge',
   'Met vragen': 'Mit Froge',
   'Zonder vragen': 'Ohni Froge',
@@ -2331,12 +2385,9 @@ const _dutchSourceAddGsw = <String, String>{
   'Bewaren als kopie': 'Als Kopie spichere',
   'Bewaren in document': 'Im Dokumänt spichere',
   'beamer': 'Beamer',
-  'beamer: niet bereikbaar': 'Beamer: nöd erreichbar',
   'Bewerken sluiten (Esc)': 'Bearbeite beände (Esc)',
   'Presenteer document…': 'Dokumänt präsentiere…',
   'Presenteer document': 'Dokumänt präsentiere',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Häckele aa, welli Tabälle während de Präsentation live bearbeitet wärde dörfed. Alli ander Inhalt blybed nume lesbar.',
   'Extra ruimte': 'Zuesätzliche Abstand',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Die Anmerkig isch länger als s Blatt — für de Rescht scrolle',
@@ -5166,8 +5217,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Markdown-broneditor': 'Markdown-Quelleneditor',
   'Niet toegepast': 'Nicht angewendet',
   'Niet-toegepaste wijzigingen': 'Nicht angewendete Änderungen',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Übernehmen Sie aktuelle Änderungen oder lehnen Sie sie ab, bevor Sie den Bereich wechseln.',
   'Problemen gevonden': 'Probleme gefunden',
   'Schrijftips': 'Schreibtipps',
   'Snel herstellen': 'Erholen Sie sich schnell',
@@ -6405,8 +6454,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Zrugghalte: strenger klassifiziert als d Präsentation',
   '1 slide achtergehouden door haar TLP': '1 Slide wäg sim TLP zrugghalte',
   'slides achtergehouden door hun TLP': 'Slides wäg ihrem TLP zrugghalte',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Die Slides chömed bim Präsentiere, Exportiere und im Paket nöd mit. Erhöh under Präsentationsinfo s TLP-Niveau vo de Präsentation, zum si mitznäh.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Alli Slides sind wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum zeige.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7152,8 +7199,6 @@ const _dutchSourceAddGsw = <String, String>{
   'seksuele geaardheid': 'sexuelli Orientierig',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Uf dere Folie staht au es identifizierends Datum, drum isch das ere Person zuezordne.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Bsunderi Kategorie vo Persoonedate (DSGVO Art. 9/10)',
   'gezondheidsgegeven': 'Gsundheitsdate',
   'strafrechtelijk gegeven': 'strafrächtlichs Datum',
   'religie of levensovertuiging': 'Religion oder Wältaschauig',
@@ -7214,8 +7259,6 @@ const _dutchSourceAddGsw = <String, String>{
   'PERSOONSGEGEVENS': 'PERSOONEDATE',
   'Volg de presentatie': 'De Präsentation folge',
   'Weglaten uit tonen en exporteren': 'Us Azeig und Export wegglah',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Überleg der, öb du s mit [[doppleti eckigi Chlammere]] schwärze wotsch.',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Ohni Kontext im Täxt isch das villicht gar kes Persoonedatum.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

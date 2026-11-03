@@ -3151,6 +3151,21 @@ that the screen mentioned. Someone presenting for the first time had to guess, i
 front of an audience, which is the worst possible moment to be guessing. (The bar
 originally also showed the slide number; that was removed in #864.)*
 
+### Finding a passage while presenting
+
+With a separate audience window, use **Search** or `Ctrl/Cmd + F` in the
+presenter window. Type a phrase, read the result context and select the result
+you need. Browsing results is private: the audience stays on the current slide.
+Only **Show slide** changes the audience slide. A result on a later page of a
+long slide opens that page. Speaker notes are an explicit opt-in.
+
+Opening search pauses automatic advance. Closing it with **Esc** closes only
+search and leaves automatic advance paused; resume it deliberately when ready.
+Search is unavailable on an audience-only surface. Share the audience window,
+not the whole desktop: OciDeck cannot hide a private window from a screen share
+that includes that window. The existing classification, redaction and timed
+presentation navigation rules still apply.
+
 ### PechaKucha and Ignite: twenty fixed slides
 
 Make a deck a PechaKucha or Ignite in **Markdown mode** by adding its format
@@ -3394,6 +3409,13 @@ mirrored) display. Notes:
   one and shows its tooltip; hovering on the beamer does the same on your laptop.
   It works whichever screen you touch, and moving to another slide clears it.
 - On macOS the "external" screen is the one without the menu bar.
+
+### Text alternative for a diagram
+
+For a screen reader a Mermaid diagram is otherwise a silent picture. Give it a
+text alternative in the source: `accTitle:` for the short name and `accDescr:`
+for the description. Without those lines the app falls back to the diagram
+type and the first content lines.
 
 ### Zooming a large diagram
 
@@ -5537,10 +5559,10 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   something in the source *at one spot*. Character-exact precision is not always
   possible; if you sit inside a formatting marker the caret lands at its start.
   *(Added 2026-08-19.)*
-- **Find and replace works from anywhere in the document tab.** Ctrl/Cmd+F
-  opens Find and Ctrl/Cmd+H opens Find and replace, even when the tab bar or
-  toolbar still has focus. Replacing text keeps the caret and view at the place
-  where you were working instead of returning to the top.
+- **Search works in the current view.** Ctrl/Cmd+F opens search even when the
+  tab bar or toolbar has focus. Choose a result to bring its passage into view
+  in Visual, Source or Pages. Ctrl/Cmd+H opens the separate replacement route;
+  replacing text keeps the caret and view near the place you were working.
 - **Paste keeps structure from a web editor.** Cmd/Ctrl+V in Visual and Source
   still prefers an image, then a spreadsheet table. After that it reads the
   **HTML** variant of the clipboard when a web page put one there (nested lists,
@@ -6540,25 +6562,36 @@ front matter, so it remains readable and editable in any text editor. When the
 style places a logo in a bottom corner, a visible footer moves that logo to the
 same top corner on screen and in exports. A full-width brand strip stays fixed.
 
-### Find & replace
+### Finding text and jumping to it
 
-Markdown mode has an **in-editor find bar** (IDE-style) that searches the live
-markdown buffer — including front matter, `\n---\n` separators, HTML comments, and
-any text you have not yet applied back to the deck. This is separate from the
-**Find & replace** dialog in visual mode (`Ctrl/Cmd + H`), which searches
-individual slide fields.
+Use **Search** or `Ctrl/Cmd + F` to find text in the presentation or document
+that is open. The search field keeps focus while you type. Results show a short
+passage and its location, so you can choose the occurrence you need instead of
+opening every matching slide yourself. Search is literal and case-insensitive
+by default. A phrase can cross inline formatting, and visible link labels and
+code are searchable; link destinations, comments and embedded machine
+specifications are not ordinary text results. Search follows authored content;
+generated interface labels, calculated totals and hidden answer keys are not
+searchable prose.
 
-- **`Ctrl/Cmd + F`** — open the find bar and focus the search field.
-- **`Ctrl/Cmd + H`** — open the find bar with the replace row visible.
-- **Enter** / **Shift + Enter** (in the find field) — jump to the next or
-  previous match (wraps around).
-- **Esc** — close the find bar.
+- Click a result to show that occurrence. In a presentation this selects the
+  slide and opens the relevant text field; in a document it brings the passage
+  into view in **Visual**, **Source** or **Pages**, without switching views.
+  **Pages** searches the footnotes shown on the page. An unused footnote
+  definition is still searchable in **Visual** and **Source**.
+- The first **Enter** after typing opens the first result; further **Enter**
+  and **Shift + Enter** go forward and back. The buttons do the same thing.
+- **Esc** closes search. Searching and jumping do not edit the file or add an
+  undo step. Search state stays local to the open editing session.
+- Presentation search excludes speaker notes by default. Turn on **Also in
+  speaker notes** to include them; those results say that they are notes.
 
-The bar shows a match counter (`1 / 3`), previous/next buttons, a case-sensitivity
-toggle, **Replace** (current match only), and **Replace all**. Each match is
-selected in the editor so you can jump quickly to a slide title, separator, or
-other section. You can also open find from the **More** menu (⋯) while in
-markdown mode.
+**Replacing is a separate action.** `Ctrl/Cmd + H` opens the existing replace
+route. The Markdown and document find bars offer current-match and all-match
+replacement. Their protected Markdown regions stay protected: finding a
+visible link label or code does not grant permission to rewrite its target or
+machine specification. The visual presentation replacement dialog still works
+on slide fields. Review a replacement before saving it.
 
 ### Syntax check
 

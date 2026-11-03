@@ -70,6 +70,15 @@ html,body{margin:0;padding:0}
 .slide .mermaid-error-label{font-size:16px;font-weight:600;margin:.7em 0 .2em;opacity:.8;color:#7F1D1D}
 .slide .mermaid-error-detail,.slide .mermaid-error-source{margin:0;padding:10px 12px;background:rgba(255,255,255,.65);border:0;border-radius:4px;font-size:15px;line-height:1.35;white-space:pre-wrap;overflow:auto;max-height:220px;color:#7F1D1D}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
+/* #2748: de per-dia markering uit de app, als tekst en CSS — dezelfde
+   classificatie en privacy-waarschuwing als de app en de PDF dragen. */
+.slide{position:relative}
+.ocideck-tlp-badge{position:absolute;right:2.5%;bottom:2.2%;background:#000;padding:.35em .7em;font:700 1.1em/1.2 monospace;letter-spacing:.05em;z-index:10}
+.ocideck-privacy-badge{position:absolute;left:2.5%;bottom:2.2%;background:#000;color:#ffc000;padding:.35em .7em;font:700 1.1em/1.2 monospace;letter-spacing:.06em;z-index:10}
+.ocideck-tlp-watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 6em/1 monospace;letter-spacing:.03em;opacity:.12;transform:rotate(-20deg);pointer-events:none;z-index:5}
+/* #2752: de alinearichting volgt het eerste sterke teken — wat
+   dir="auto" in HTML doet en wat de editor en de dia-preview doen. */
+.slide p,.slide li,.slide h1,.slide h2,.slide h3,.slide h4,.slide td,.slide th,.slide blockquote{unicode-bidi:plaintext}
 /* Documentmodus (§11.2): één doorlopende leesbare pagina i.p.v. losse 16:9-dia's.
    Alleen de layout hier — géén 16:9-kader, geen vaste hoogte; de kleuren komen
    uit het thema ([_themedDocumentCss]) of [_defaultThemeCss]. */

@@ -31,6 +31,96 @@ void main() {
       '\n'
       'Slot van het stuk.\n';
 
+  test('zoekbereiken volgen inline opmaak en herhaalde linklabels exact', () {
+    const source =
+        'een **belangrijke** passage en [belangrijke](belangrijke.invalid) passage';
+    final map = MarkdownCaretMap.of(source);
+    final plain = MarkdownQuillCodec.documentFromMarkdown(source).toPlainText();
+    final start = source.indexOf('belangrijke');
+    final end = source.indexOf(' passage') + ' passage'.length;
+    expect(
+      plain.substring(map.visualOffsetOf(start), map.visualOffsetOf(end)),
+      'belangrijke passage',
+    );
+    final second = source.lastIndexOf(' passage');
+    expect(map.visualOffsetOf(second), plain.lastIndexOf(' passage'));
+  });
+
+  test(
+    'alinea-eindspaties verschuiven latere geformatteerde zoekselectie niet',
+    () {
+      final source =
+          '${List.generate(30, (i) => '## Hoofdstuk $i\n\nEen lange alinea met gewone tekst. ').join('\n\n')}\n\n## Slot\n\nEen **belangrijke** [passage](https://example.invalid). Zoekanker staat hier tweemaal: zoekanker.';
+      final map = MarkdownCaretMap.of(source);
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        source,
+      ).toPlainText();
+      final start = source.lastIndexOf('Een **belangrijke**');
+      final end = source.indexOf('](https://example.invalid)', start);
+      expect(
+        plain.substring(map.visualOffsetOf(start), map.visualOffsetOf(end)),
+        'Een belangrijke passage',
+      );
+      expect(
+        map.visualOffsetOf(start),
+        plain.indexOf('Een belangrijke passage'),
+      );
+    },
+  );
+
+  test('zichtbare code behoudt eindspaties in de positiekaart', () {
+    const source = '```text\na **letterlijk**  \n```\n\nSlot';
+    final map = MarkdownCaretMap.of(source);
+    final plain = MarkdownQuillCodec.documentFromMarkdown(source).toPlainText();
+    expect(map.visualOffsetOf(source.indexOf('Slot')), plain.indexOf('Slot'));
+  });
+
+  test('softbreak-frases en tekst erna hebben exacte codecposities', () {
+    for (final source in [
+      'Een **belangrijke**\n  [passage](https://example.invalid).\n\nSlot',
+      'Een **belangrijke**  \npassage.\n\nSlot',
+      'Een **belangrijke**\\\npassage.\n\nSlot',
+    ]) {
+      final map = MarkdownCaretMap.of(source);
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        source,
+      ).toPlainText();
+      for (final word in ['belangrijke', 'passage', 'Slot']) {
+        expect(
+          map.visualOffsetOf(source.indexOf(word)),
+          plain.indexOf(word),
+          reason: '$word in $source',
+        );
+      }
+    }
+  });
+
+  test('ATX-sluithek en beide fencevarianten volgen de echte codec', () {
+    for (final prefix in [
+      '# Titel #\n\n',
+      '~~~text\na **letterlijk**  \n~~~\n\n',
+      '````text\na\n```\nb\n````\n\n',
+    ]) {
+      final source = '${prefix}Een **belangrijke** passage.';
+      final map = MarkdownCaretMap.of(source);
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        source,
+      ).toPlainText();
+      final start = source.indexOf('Een **');
+      final end = source.indexOf(' passage.') + ' passage'.length;
+      expect(
+        plain.substring(map.visualOffsetOf(start), map.visualOffsetOf(end)),
+        'Een belangrijke passage',
+        reason: source,
+      );
+      expect(
+        map.sourceOffsetOf(plain.indexOf('belangrijke')),
+        source.indexOf('belangrijke'),
+        reason: source,
+      );
+    }
+  });
+
   group('MarkdownCaretMap volgt de echte omzetting', () {
     final plat = MarkdownQuillCodec.documentFromMarkdown(bron).toPlainText();
     final kaart = MarkdownCaretMap.of(bron);

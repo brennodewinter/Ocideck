@@ -10,4 +10,5 @@ Future<NativeGitMirror?> createNativeGitMirror({
   required GitRepoConfig config,
   required String token,
   String? baseDir,
+  bool signCommits = false,
 }) async => null;

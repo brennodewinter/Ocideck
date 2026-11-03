@@ -11,6 +11,7 @@ import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';
+import '../dialogs/tlp_audience_action.dart';
 import '../../models/slide_format.dart';
 import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
@@ -73,6 +74,9 @@ class SlideListPanel extends ConsumerStatefulWidget {
 }
 
 class _SlideListPanelState extends ConsumerState<SlideListPanel> {
+  /// Of het paneel zelf toetsenbordfocus heeft — dan mag Delete de selectie
+  /// wissen, en dan mag de gebruiker dat óók zien (#2730).
+  bool _focused = false;
   String _query = '';
   final _searchController = TextEditingController();
   final _scrollController = ScrollController();
@@ -725,11 +729,23 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       focusNode: _focusNode,
       autofocus: true,
       onKeyEvent: _onKey,
+      // #2730: het paneel kan focus hebben terwijl niets dat laat zien —
+      // Delete wist dan een dia zonder dat er een ring was. Toon dezelfde
+      // accentrand als de scheidingsbalk zolang het paneel focus heeft.
+      onFocusChange: (focused) => setState(() => _focused = focused),
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: _focusNode.requestFocus,
         child: Container(
-          color: Theme.of(context).extension<AppPalette>()!.panel,
+          decoration: BoxDecoration(
+            color: Theme.of(context).extension<AppPalette>()!.panel,
+            border: Border.all(
+              color: _focused
+                  ? Theme.of(context).colorScheme.secondary
+                  : Colors.transparent,
+              width: 2,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -833,7 +849,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           // gevolg is hetzelfde en de oorzaak niet.
           if (withheldCount > 0) ...[
             const SizedBox(height: 6),
-            _WithheldBanner(count: withheldCount),
+            _WithheldBanner(
+              count: withheldCount,
+              onLevelChanged: (level) =>
+                  unawaited(applyPresentationTlp(context, ref, level)),
+            ),
           ],
           // Bulk-actiebalk bij een meervoudige selectie.
           if (multiSelectionCount > 0) ...[

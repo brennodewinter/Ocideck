@@ -40,8 +40,10 @@ class _FlowEditorState extends ConsumerState<FlowEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title)
-      ..addTextListener(_emit);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    )..addTextListener(_emit);
     _templateId = widget.slide.improvementTemplateId.isEmpty
         ? kDefaultFlowTemplateId
         : widget.slide.improvementTemplateId;
@@ -173,6 +175,9 @@ class _FlowEditorState extends ConsumerState<FlowEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _bullets.length; i++) {
+      _bullets[i].searchFieldId = 'bullets.$i';
+    }
     final l10n = context.l10n;
     final lang = Localizations.localeOf(context).languageCode;
     final body = Column(

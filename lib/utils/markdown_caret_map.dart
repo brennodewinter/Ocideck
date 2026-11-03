@@ -1,4 +1,5 @@
-import 'inline_markdown.dart' show stripInlineMarkdown;
+import 'markdown_blocks.dart';
+import 'visible_markdown_search.dart';
 
 /// Vertaalt een cursorpositie heen en weer tussen de Markdown-bron en de platte
 /// tekst van de visuele (rijke-tekst) editor.
@@ -11,12 +12,12 @@ import 'inline_markdown.dart' show stripInlineMarkdown;
 /// visuele editor zet elk blok op een eigen regel, laat lege bronregels weg, en
 /// vervangt een tabel, een scheidingslijn of een afbeelding door één
 /// objectteken. Binnen een regel wordt geteld met dezelfde inline-ontleder die
-/// de weergave gebruikt ([stripInlineMarkdown]), zodat `**vet**` aan de ene kant
+/// de weergave gebruikt ([visibleMarkdownText]), zodat `**vet**` aan de ene kant
 /// vier tekens langer is dan aan de andere en de kolom toch klopt.
 ///
-/// Precisie tot op het teken is niet het doel en niet altijd haalbaar — sta je
-/// middenin een opmaakteken, dan landt de cursor aan het begin daarvan. De
-/// regel en het woord kloppen, en dat is wat "dezelfde plek" betekent.
+/// Binnen tekst volgt de kaart de zichtbare tekens, zonder alinea-eindspaties
+/// die CommonMark weglaat. Een atomair blok zoals een tabel blijft één
+/// objectpositie; de celweergave brengt haar eigen teksttreffer exact in beeld.
 class MarkdownCaretMap {
   MarkdownCaretMap._(this._rows, this.visualLength);
 
@@ -32,22 +33,24 @@ class MarkdownCaretMap {
     final rows = <_Row>[];
     var sourceAt = 0;
     var visualAt = 0;
-    var fenced = false;
+    MarkdownFence? fence;
 
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
       final start = sourceAt;
       sourceAt += line.length + 1; // +1 voor het regeleinde
 
-      if (_fencePattern.hasMatch(line)) {
-        fenced = !fenced;
-        rows.add(_Row.hidden(start, line.length, visualAt));
+      if (fence != null && !fence.closes(line.trim())) {
+        rows.add(
+          _Row.text(start, line.length, 0, line, visualAt, literal: true),
+        );
+        visualAt += line.length + 1;
         continue;
       }
-      if (fenced) {
-        // In een codeblok staat er letterlijk wat er staat.
-        rows.add(_Row.text(start, line.length, 0, line, visualAt));
-        visualAt += line.length + 1;
+      final opening = markdownFenceOpen(line.trim());
+      if (fence != null || opening != null) {
+        fence = fence == null ? opening : null;
+        rows.add(_Row.hidden(start, line.length, visualAt));
         continue;
       }
       if (line.trim().isEmpty) {
@@ -72,10 +75,20 @@ class MarkdownCaretMap {
         continue;
       }
 
-      final skip = _blockMarkerLength(line);
-      rows.add(
-        _Row.text(start, line.length, skip, line.substring(skip), visualAt),
-      );
+      var skip = _blockMarkerLength(line);
+      // Ook op een doorlopende alinearegel laat CommonMark beginspaties weg.
+      while (skip < line.length && line[skip] == ' ') {
+        skip++;
+      }
+      var body = line.substring(skip);
+      if (RegExp(r'^ {0,3}#{1,6}(?:[ \t]|$)').hasMatch(line)) {
+        body = body.replaceFirst(RegExp(r'(?:^|[ \t]+)#+[ \t]*$'), '');
+      }
+      if (i + 1 < lines.length &&
+          (RegExp(r'\\+$').firstMatch(body)?.group(0)?.length ?? 0).isOdd) {
+        body = body.substring(0, body.length - 1);
+      }
+      rows.add(_Row.text(start, line.length, skip, body, visualAt));
       visualAt += rows.last.visualLength + 1;
     }
     return MarkdownCaretMap._(rows, visualAt);
@@ -121,7 +134,6 @@ class MarkdownCaretMap {
     return best;
   }
 
-  static final _fencePattern = RegExp(r'^\s*```');
   static final _rulePattern = RegExp(r'^\s*(-{3,}|\*{3,}|_{3,})\s*$');
   static final _tableRowPattern = RegExp(r'^\s*\|');
 
@@ -157,23 +169,29 @@ class _Row {
     : sourceSkip = 0,
       body = '',
       visible = '',
+      _literal = false,
       object = false;
 
   _Row.object(this.sourceStart, this.sourceLength, this.visualStart)
     : sourceSkip = 0,
       body = '',
       visible = '',
+      _literal = false,
       object = true;
 
+  // CommonMark verwijdert alinea-eindspaties; meet die niet als Quill-tekst.
   _Row.text(
     this.sourceStart,
     this.sourceLength,
     this.sourceSkip,
     this.body,
-    this.visualStart,
-  ) : visible = stripInlineMarkdown(body),
-      object = false;
+    this.visualStart, {
+    bool literal = false,
+  }) : visible = literal ? body : visibleMarkdownText(body).trimRight(),
+       _literal = literal,
+       object = false;
 
+  final bool _literal;
   final int sourceStart;
   final int sourceLength;
 
@@ -202,12 +220,16 @@ class _Row {
   /// nog voor tekst aanzag.
   late final List<int> _steps = () {
     final steps = List<int>.filled(body.length + 1, 0);
+    final positions = _literal
+        ? List.generate(body.length, (i) => i)
+        : VisibleMarkdownText(body).offsets.take(visible.length).toList();
     var seen = 0;
-    for (var i = 0; i < body.length; i++) {
+    for (var i = 0; i <= body.length; i++) {
+      while (seen < positions.length && positions[seen] < i) {
+        seen++;
+      }
       steps[i] = seen;
-      if (seen < visible.length && body[i] == visible[seen]) seen++;
     }
-    steps[body.length] = seen;
     return steps;
   }();
 

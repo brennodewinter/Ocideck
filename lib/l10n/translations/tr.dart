@@ -14,8 +14,6 @@ const _stringsTr = {
   'more': 'Daha fazla',
   'export': 'Dışa aktar',
   'exportReady': 'Dışa aktar (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Dışa aktarmak için sunumu önce kaydedin',
-  'exportNeedsClean': 'Dışa aktarmak için değişikliklerinizi önce kaydedin',
   'saved': 'Kaydedildi',
   'unsaved': 'Kaydedilmedi',
   'unsavedChanges': 'Değişiklikleri kaydet (Ctrl/Cmd+S)',
@@ -681,8 +679,6 @@ const _dutchSourceTr = {
   'Slide-overzicht': 'Slayt genel görünümü',
   'Slide-overzicht (pijltjes + Enter)':
       'Slayt genel görünümü (ok tuşları + Enter)',
-  'Presenter view (notities, klok)': 'Sunucu görünümü (notlar, saat)',
-  'Scherm wisselen (meerdere schermen)': 'Ekran değiştir (birden fazla ekran)',
   'Zwart · wit scherm': 'Siyah · beyaz ekran',
   'Automatische modus aan/uit': 'Otomatik mod açık/kapalı',
   'Herhalen (loop) aan/uit': 'Tekrar (döngü) açık/kapalı',
@@ -703,11 +699,6 @@ const _dutchSourceTr = {
       'Kurs sırasında alıcı için notlar',
   'Mijn notities aan/uit': 'Notlarım açık/kapalı',
   'Wissel scherm (S)': 'Ekran değiştir (S)',
-  'Kon niet van scherm wisselen.': 'Ekran değiştirilemedi.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · H açıklama · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · H açıklama · S ekran · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
   'pijltjes + Enter of klik om te springen':
       'atlamak için ok tuşları + Enter veya tıklama',
   'Afsluiten (Escape)': 'Çıkış (Escape)',
@@ -1529,8 +1520,6 @@ const _dutchSourceTr = {
   'seksuele geaardheid': 'cinsel yönelim',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Bu slaytta kimlik belirleyici bir veri de var, dolayısıyla bu bir kişiye kadar izlenebilir.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Özel nitelikli kişisel veri (GDPR md. 9/10)',
   'gezondheidsgegeven': 'sağlık verisi',
   'strafrechtelijk gegeven': 'ceza hukuku verisi',
   'religie of levensovertuiging': 'din veya inanç',
@@ -1591,8 +1580,6 @@ const _dutchSourceTr = {
   'PERSOONSGEGEVENS': 'KİŞİSEL VERİLER',
   'Volg de presentatie': 'Sunumu takip et',
   'Weglaten uit tonen en exporteren': 'Gösterimden ve dışa aktarmadan çıkar',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Bunu [[çift köşeli parantez]] ile redakte etmeyi düşünün.',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Metinde bağlam olmadan bu bir kişisel veri olmayabilir.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
@@ -2513,6 +2500,58 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Eksik karakterler için ek yazı tipi',
+  'Geen lettertypebestand gekozen': 'Yazı tipi dosyası seçilmedi',
+  'Kies bestand…': 'Dosya seç…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Bu dosyanın yalnızca bir alt kümesi PDF\'e gömülür. Dosyanın lisansı gömmeye izin vermelidir; OciDeck bunu kontrol etmez ve hiçbir şey indirmez.',
+  'Bijzonder persoonsgegeven': 'Özel kategorili kişisel veri',
+  'Dia {n} van {m}': '{m} slayttan {n}.',
+  'ander scherm: niet bereikbaar': 'diğer ekran: erişilemez',
+  'het andere scherm': 'diğer ekran',
+  'Dit mag blijven': 'Bu kalabilir',
+  'Waarschuw de ontvanger': 'Alıcıyı uyar',
+  'Laat dit weg bij tonen en exporteren':
+      'Gösterirken ve dışa aktarırken bunu atla',
+  'Ga naar de eerste dia zonder keuze': 'Kararsız ilk slayda git',
+  'Onderteken git-commits': 'Git commit\'lerini imzala',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Commit\'leri git\'in bu makinede zaten kullandığı anahtarla imzalayın.',
+  'getekend en gecontroleerd': 'imzalı ve doğrulanmış',
+  'getekend (hier niet te controleren)': 'imzalı (burada doğrulanamaz)',
+  'ongetekend': 'imzasız',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      'Bu {veld} içinde {regel}. Bildirimi açın, parça metinde seçili olur.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Bildirimi açın, parça metinde seçili olur.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Bunların seviyesi sunumunkinden daha katı. Sunumun seviyesini yükseltin veya slaytın seviyesini düşürün.',
+  'Niveau van de presentatie': 'Sunum seviyesi',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Sunumun seviyesini yükseltin veya slaytın seviyesini düşürün.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'İzleyiciler bu slaytı diğer ekranda görüyor.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Diğer ekran katılmıyor. Slaytlar bu ekranda.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Ekranlar değiştirilmedi. Notlar hâlâ burada.',
+  'Notities aan of uit': 'Notlar açık veya kapalı',
+  'Zet de notities op het andere scherm': 'Notları diğer ekrana taşı',
+  'Terug naar de dia\'s': 'Slaytlara dön',
+  'Verder typen': 'Yazmaya devam et',
+  'Terug zonder deze wijzigingen': 'Bu değişiklikler olmadan geri dön',
+  'Toepassen en terug': 'Uygula ve dön',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Değişiklikleriniz henüz uygulanmadı.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Uygulanmamış değişiklikler: uygulayın, atın ya da burada kalın.',
+  'Deze tabel bewerken': 'Bu tabloyu düzenle',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} artık hiçbir sunumda bildirilmeyecek. Güvenlik altından geri açabilirsiniz.',
+  'Niet melden': 'Bildirme',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Önce kaydedin. Sonra dışa aktarabilirsiniz.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'İnternetsiz her tarayıcıda açılan, gerçek metin, başlıklar ve alt metinler içeren tek bir HTML dosyası — tablolar, matematik, mermaid ve grafiklerle.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -2525,6 +2564,19 @@ const _dutchSourceAddTr = <String, String>{
   'Ga naar de brontabel': 'Kaynak tabloya git',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Bu tablo, "{bron}" kaynak tablosunun bir kopyasıdır. Kaynağı düzenleyip Yenile\'yi seçin ya da görünümü anlık görüntü olarak ayırın.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Özel arama için ayrı bir sunucu penceresiyle başlatın.',
+  'Privé zoeken': 'Özel arama',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Slaydı göster seçeneğini kullanana kadar izleyiciler geçerli slaytta kalır. Otomatik oynatma duraklatıldı. Masaüstünüzün tamamını değil, yalnızca izleyici penceresini paylaşın.',
+  'Ook in sprekersnotities': 'Konuşmacı notlarında da ara',
+  'Typ om te zoeken': 'Aramak için yazın',
+  'Toon dia': 'Slaydı göster',
+  'Verder vanaf het begin': 'Baştan devam ediliyor',
+  'Verder vanaf het einde': 'Sondan devam ediliyor',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Sonuç yok. Daha kısa bir arama metni deneyin.',
+  'Treffer {n} van {m}': '{m} eşleşmeden {n}. eşleşme',
   'Quizvragen': 'Kısa sınav soruları',
   'Met vragen': 'Sorularla',
   'Zonder vragen': 'Sorular olmadan',
@@ -3222,12 +3274,9 @@ const _dutchSourceAddTr = <String, String>{
   'Bewaren als kopie': 'Kopya olarak kaydet',
   'Bewaren in document': 'Belgeye kaydet',
   'beamer': 'projektör',
-  'beamer: niet bereikbaar': 'projektör: erişilemez',
   'Bewerken sluiten (Esc)': 'Düzenlemeyi kapat (Esc)',
   'Presenteer document…': 'Belgeyi sun…',
   'Presenteer document': 'Belgeyi sun',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Sunum sırasında hangi tabloların canlı düzenlenebileceğini işaretleyin. Diğer tüm içerik salt okunur kalır.',
   'Extra ruimte': 'Ekstra boşluk',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Bu not sayfadan uzun — kalanı için kaydırın',
@@ -6018,8 +6067,6 @@ const _dutchSourceAddTr = <String, String>{
   'Markdown-broneditor': 'Markdown kaynak düzenleyicisi',
   'Niet toegepast': 'Uygulanmadı',
   'Niet-toegepaste wijzigingen': 'Uygulanmayan değişiklikler',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Kapsamları değiştirmeden önce mevcut değişiklikleri uygulayın veya reddedin.',
   'Problemen gevonden': 'Bulunan sorunlar',
   'Schrijftips': 'Yazma ipuçları',
   'Snel herstellen': 'Hızlı bir şekilde kurtarın',
@@ -7246,8 +7293,6 @@ const _dutchSourceAddTr = <String, String>{
   '1 slide achtergehouden door haar TLP':
       '1 slayt TLP\'si nedeniyle alıkonuldu',
   'slides achtergehouden door hun TLP': 'slayt TLP\'si nedeniyle alıkonuldu',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Bu slaytlar sunumda, dışa aktarımda ve pakette yer almaz. Bunları da dahil etmek için Sunum bilgisi bölümünde sunumun TLP düzeyini yükseltin.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Tüm slaytlar TLP sınıflandırmaları nedeniyle alıkonuldu — gösterilecek bir şey yok.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':

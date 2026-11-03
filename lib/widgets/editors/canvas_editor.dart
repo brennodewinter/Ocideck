@@ -8,6 +8,7 @@ import '../../services/improvement/canvas_spec.dart';
 import '../../services/improvement_ai_service.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'deck_search_target.dart';
 import 'improvement_ai_suggest_field.dart';
 import 'markdown_editor_field.dart';
 import 'editor_text_controller.dart';
@@ -42,8 +43,10 @@ class _CanvasEditorState extends ConsumerState<CanvasEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title)
-      ..addTextListener(_emit);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    )..addTextListener(_emit);
     _templateId = widget.slide.improvementTemplateId.isEmpty
         ? kDefaultCanvasTemplateId
         : widget.slide.improvementTemplateId;
@@ -185,11 +188,14 @@ class _CanvasEditorState extends ConsumerState<CanvasEditor> {
         ),
         const SizedBox(height: 12),
         for (final r in _regions) ...[
-          Text(
-            r.headingLabel(lang, _templateId),
-            style: Theme.of(
-              context,
-            ).textTheme.labelLarge?.copyWith(color: AppTheme.accentFg),
+          SearchFieldAnchor(
+            fieldId: 'canvas.${r.key}.heading',
+            child: Text(
+              r.headingLabel(lang, _templateId),
+              style: Theme.of(
+                context,
+              ).textTheme.labelLarge?.copyWith(color: AppTheme.accentFg),
+            ),
           ),
           const SizedBox(height: 4),
           MarkdownEditorField(
@@ -223,7 +229,8 @@ class _RegionControllers {
     this.heading,
     String body,
     VoidCallback onChanged,
-  ) : body = EditorTextController(text: body)..addTextListener(onChanged);
+  ) : body = EditorTextController(text: body, searchFieldId: 'canvas.$key.body')
+        ..addTextListener(onChanged);
 
   final String key;
   final String heading;

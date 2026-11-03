@@ -1372,7 +1372,7 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.keyH);
     await tester.pump();
     expect(find.text('Toetsenlegenda'), findsOneWidget);
-    expect(find.text('Scherm wisselen (meerdere schermen)'), findsOneWidget);
+    expect(find.text('Zet de notities op het andere scherm'), findsOneWidget);
 
     await tester.sendKeyEvent(LogicalKeyboardKey.escape);
     await tester.pump();

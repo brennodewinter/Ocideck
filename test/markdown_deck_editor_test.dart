@@ -112,7 +112,7 @@ void main() {
     await tester.enterText(find.byType(TextField).first, 'alpha');
     await tester.pumpAndSettle();
 
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Treffer 1 van 2'), findsOneWidget);
   });
 
   testWidgets('replace all updates live markdown text', (tester) async {

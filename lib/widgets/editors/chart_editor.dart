@@ -145,7 +145,10 @@ class _ChartEditorState extends State<ChartEditor> {
     _animateOnEnter = spec.animateOnEnter;
     _animationOverrideMs = spec.animationDurationMs;
     _showSliceLabels = spec.showSliceLabels;
-    _title = EditorTextController(text: spec.title);
+    _title = EditorTextController(
+      text: spec.title,
+      searchFieldId: 'chart.title',
+    );
     _title.addTextListener(_emit);
     _targets = EditorTextController(text: _fmtList(spec.targets));
     _bands = EditorTextController(text: _fmtList(spec.bands));

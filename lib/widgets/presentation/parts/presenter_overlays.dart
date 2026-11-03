@@ -55,13 +55,13 @@ List<(String, String)> _helpOverlayRows(
   ('${l10n.d('cijfers')} + Enter', l10n.d('Naar slidenummer')),
   ('Home · End', l10n.d('Eerste · laatste slide')),
   ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
-  ('P', l10n.d('Presenter view (notities, klok)')),
+  ('P', l10n.d('Notities aan of uit')),
   ('F', l10n.d('Probleem op deze dia oplossen')),
   // De binding is `control || meta` (presenter_keys.dart), dus stond hier
   // voor Mac-gebruikers het verkeerde: Cmd+N werkt ook. Nu uit dezelfde
   // bron als elke andere sneltoets in de app (#803).
   ('N · ${shortcutLabel(l10n, 'N')}', l10n.d('Mijn notities aan/uit')),
-  ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
+  ('S', l10n.d('Zet de notities op het andere scherm')),
   ('B · W', l10n.d('Zwart · wit scherm')),
   ('D · T · Shift+E', l10n.d('Pen · markeerstift · gum')),
   ('E', l10n.d('Tabel bewerken (op tabeldia)')),
@@ -370,11 +370,13 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                 visualDensity: VisualDensity.compact,
               ),
               const SizedBox(width: 4),
-              _metric(
-                l10n.d('Klok'),
-                _fmtClock(DateTime.now()),
-                color: Colors.white70,
-                align: CrossAxisAlignment.end,
+              Expanded(
+                child: _metric(
+                  l10n.d('Klok'),
+                  _fmtClock(DateTime.now()),
+                  color: Colors.white70,
+                  align: CrossAxisAlignment.end,
+                ),
               ),
             ],
           ),
@@ -394,12 +396,14 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                   size: 20,
                 ),
               ),
-              _metric(
-                l10n.d('Deze slide'),
-                _fmtElapsed(slideElapsed),
-                color: Colors.white70,
-                align: CrossAxisAlignment.end,
-                size: 20,
+              Expanded(
+                child: _metric(
+                  l10n.d('Deze slide'),
+                  _fmtElapsed(slideElapsed),
+                  color: Colors.white70,
+                  align: CrossAxisAlignment.end,
+                  size: 20,
+                ),
               ),
             ],
           ),
@@ -422,7 +426,10 @@ extension _PresenterOverlays on _FullscreenPresenterState {
     final richTextPlan = _richTextPlanFor(_currentSlide);
     final richTextPages = richTextPlan?.pageCount ?? 1;
     final hasRichTextPages = richTextPages > 1;
-    return Row(
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         _NavButton(
           icon: Icons.chevron_left,
@@ -432,7 +439,6 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ? _prev
               : null,
         ),
-        const SizedBox(width: 8),
         _NavButton(
           icon: Icons.chevron_right,
           onTap:
@@ -442,13 +448,18 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ? _next
               : null,
         ),
-        const SizedBox(width: 8),
         Tooltip(
           message: labelWithShortcut(l10n, 'Slide-overzicht', 'G'),
           child: _NavButton(icon: Icons.grid_view_rounded, onTap: _toggleGrid),
         ),
+        Tooltip(
+          message: labelWithShortcut(l10n, 'Zoeken', 'F'),
+          child: _NavButton(
+            icon: Icons.search,
+            onTap: () => _searchSession.open(this),
+          ),
+        ),
         if (_displays.length > 1) ...[
-          const SizedBox(width: 8),
           Tooltip(
             message: l10n.d('Wissel scherm (S)'),
             child: _NavButton(
@@ -459,11 +470,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
         ],
         // Microfoon-doorvoer (#2158): desktop-only, want de WebRTC-loopback is
         // daar de gedragen route; web heeft zijn eigen afweging (apart issue).
-        if (isDesktopNative) ...[
-          const SizedBox(width: 8),
-          _micButton(this, l10n),
-        ],
-        const SizedBox(width: 16),
+        if (isDesktopNative) _micButton(this, l10n),
         Text(
           hasRichTextPages
               ? '${l10n.d('Slide')} ${_index + 1} / $total'
@@ -476,20 +483,19 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           ),
         ),
         const SizedBox(width: 16),
-        Expanded(
-          child: Text(
-            l10n.d(
-              _displays.length > 1
-                  ? 'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
-                  : 'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
-            ),
-            textAlign: TextAlign.right,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: _muted, fontSize: 11),
+        // De rij is een Wrap (smalle vensters breken om) — geen Expanded:
+        // een Wrap-kind heeft geen flex, de tekst maat eigen breedte.
+        Text(
+          l10n.d(
+            _displays.length > 1
+                ? 'P notities · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
+                : 'P notities · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
           ),
+          textAlign: TextAlign.right,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: _muted, fontSize: 11),
         ),
-        const SizedBox(width: 12),
         IconButton(
           tooltip: l10n.d('Afsluiten (Escape)'),
           onPressed: _exit,
@@ -592,85 +598,96 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       borderWidth = 1;
     }
 
-    return GestureDetector(
-      onTap: () => _jumpTo(i),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => _setGridCursor(i),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: borderColor, width: borderWidth),
-                  boxShadow: isCursor
-                      ? [
-                          BoxShadow(
-                            color: Colors.white.withValues(alpha: 0.25),
-                            blurRadius: 16,
-                          ),
-                        ]
-                      : null,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: AspectRatio(
-                    aspectRatio: widget.slideAspect,
-                    child: SlidePreviewWidget(
-                      slideAspect: widget.slideAspect,
-                      slide: widget.slides[i],
-                      projectPath: widget.projectPath,
-                      themeProfile: widget.themeProfile,
-                      deckMarpStyle: widget.marpStyle,
-                      cockpitColorScheme: widget.cockpitColorScheme,
-                      allowRemoteMedia: widget.allowRemoteMedia,
-                      tlp: widget.tlp,
-                      organization: widget.organization,
-                      showClassificationWatermark:
-                          widget.showClassificationWatermark,
-                      scopeCia: deckScopeCiaIndex(widget.slides),
-                      reportLanguage: widget.reportLanguage,
-                      fitScaleOverride: sharedSplitFitScale(
-                        widget.slides,
-                        i,
-                        widget.themeProfile,
-                        widget.themeProfile.fontFamily,
+    // #2733: het raster was voor een schermlezer losse tekst. Nu is elke tegel
+    // een benoemde knop — "dia 7 van 12" — met de huidige dia als geselecteerd.
+    final l10n = context.l10n;
+    return Semantics(
+      button: true,
+      selected: isCurrent,
+      label: l10n
+          .d('Dia {n} van {m}')
+          .replaceAll('{n}', '${i + 1}')
+          .replaceAll('{m}', '${widget.slides.length}'),
+      child: GestureDetector(
+        onTap: () => _jumpTo(i),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => _setGridCursor(i),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: borderColor, width: borderWidth),
+                    boxShadow: isCursor
+                        ? [
+                            BoxShadow(
+                              color: Colors.white.withValues(alpha: 0.25),
+                              blurRadius: 16,
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: AspectRatio(
+                      aspectRatio: widget.slideAspect,
+                      child: SlidePreviewWidget(
                         slideAspect: widget.slideAspect,
+                        slide: widget.slides[i],
+                        projectPath: widget.projectPath,
+                        themeProfile: widget.themeProfile,
+                        deckMarpStyle: widget.marpStyle,
+                        cockpitColorScheme: widget.cockpitColorScheme,
+                        allowRemoteMedia: widget.allowRemoteMedia,
+                        tlp: widget.tlp,
+                        organization: widget.organization,
+                        showClassificationWatermark:
+                            widget.showClassificationWatermark,
+                        scopeCia: deckScopeCiaIndex(widget.slides),
+                        reportLanguage: widget.reportLanguage,
+                        fitScaleOverride: sharedSplitFitScale(
+                          widget.slides,
+                          i,
+                          widget.themeProfile,
+                          widget.themeProfile.fontFamily,
+                          slideAspect: widget.slideAspect,
+                        ),
+                        splitRunPosition: splitRunPositionFor(widget.slides, i),
+                        improvementY01: widget.improvementY01,
                       ),
-                      splitRunPosition: splitRunPositionFor(widget.slides, i),
-                      improvementY01: widget.improvementY01,
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${i + 1}',
-                  style: TextStyle(
-                    color: (isCursor || isCurrent) ? Colors.white : _muted,
-                    fontSize: 12,
-                    fontWeight: (isCursor || isCurrent)
-                        ? FontWeight.w700
-                        : FontWeight.w400,
+              const SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${i + 1}',
+                    style: TextStyle(
+                      color: (isCursor || isCurrent) ? Colors.white : _muted,
+                      fontSize: 12,
+                      fontWeight: (isCursor || isCurrent)
+                          ? FontWeight.w700
+                          : FontWeight.w400,
+                    ),
                   ),
-                ),
-                if (isCurrent) ...[
-                  const SizedBox(width: 5),
-                  const Icon(
-                    Icons.play_arrow_rounded,
-                    size: 13,
-                    color: AppTheme.blue400,
-                  ),
+                  if (isCurrent) ...[
+                    const SizedBox(width: 5),
+                    const Icon(
+                      Icons.play_arrow_rounded,
+                      size: 13,
+                      color: AppTheme.blue400,
+                    ),
+                  ],
                 ],
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

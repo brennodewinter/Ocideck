@@ -46,8 +46,10 @@ class _MatrixEditorState extends State<MatrixEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title)
-      ..addTextListener(_emit);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    )..addTextListener(_emit);
     _templateId = widget.slide.improvementTemplateId.isEmpty
         ? kDefaultImprovementTemplateId
         : widget.slide.improvementTemplateId;

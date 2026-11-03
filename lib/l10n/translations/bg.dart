@@ -14,8 +14,6 @@ const _stringsBg = {
   'more': 'Още',
   'export': 'Експортиране',
   'exportReady': 'Експортиране (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Запазете презентацията, преди да експортирате',
-  'exportNeedsClean': 'Запазете промените, преди да експортирате',
   'saved': 'Запазено',
   'unsaved': 'Незапазено',
   'unsavedChanges': 'Запазване на промените (Ctrl/Cmd+S)',
@@ -695,8 +693,6 @@ const _dutchSourceBg = {
   'Slide-overzicht': 'Преглед на слайдовете',
   'Slide-overzicht (pijltjes + Enter)':
       'Преглед на слайдовете (стрелки + Enter)',
-  'Presenter view (notities, klok)': 'Изглед за водещ (бележки, часовник)',
-  'Scherm wisselen (meerdere schermen)': 'Смяна на екрана (няколко екрана)',
   'Zwart · wit scherm': 'Черен · бял екран',
   'Automatische modus aan/uit': 'Автоматичен режим вкл./изкл.',
   'Herhalen (loop) aan/uit': 'Повтаряне (цикъл) вкл./изкл.',
@@ -719,11 +715,6 @@ const _dutchSourceBg = {
       'Бележки за получателя по време на курс',
   'Mijn notities aan/uit': 'Моите бележки вкл./изкл.',
   'Wissel scherm (S)': 'Смяна на екрана (S)',
-  'Kon niet van scherm wisselen.': 'Не беше възможно да се сменят екраните.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · H легенда · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · H легенда · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
   'pijltjes + Enter of klik om te springen':
       'стрелки + Enter или клик за прескачане',
   'Afsluiten (Escape)': 'Изход (Escape)',
@@ -1624,6 +1615,59 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Допълнителен шрифт за липсващи знаци',
+  'Geen lettertypebestand gekozen': 'Не е избран шрифтов файл',
+  'Kies bestand…': 'Избери файл…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Само подмножество от този файл се вгражда в PDF. Лицензът на файла трябва да позволява вграждане; OciDeck не го проверява и не изтегля нищо.',
+  'Bijzonder persoonsgegeven': 'Лични данни от специална категория',
+  'Dia {n} van {m}': 'Слайд {n} от {m}',
+  'ander scherm: niet bereikbaar': 'друг екран: недостъпен',
+  'het andere scherm': 'другият екран',
+  'Dit mag blijven': 'Това може да остане',
+  'Waarschuw de ontvanger': 'Предупреди получателя',
+  'Laat dit weg bij tonen en exporteren':
+      'Пропусни това при показване и експортиране',
+  'Ga naar de eerste dia zonder keuze': 'Към първия слайд без решение',
+  'Onderteken git-commits': 'Подписване на git комити',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Подписвайте комитите с ключа, който git вече използва на тази машина.',
+  'getekend en gecontroleerd': 'подписано и проверено',
+  'getekend (hier niet te controleren)':
+      'подписано (не може да се провери тук)',
+  'ongetekend': 'неподписано',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} в това {veld}. Отворете съобщението и парчето е избрано в текста.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Отворете съобщението и парчето е избрано в текста.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Тяхното ниво е по-строго от това на презентацията. Повишете нивото на презентацията или понижете нивото на слайда.',
+  'Niveau van de presentatie': 'Ниво на презентацията',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Повишете нивото на презентацията или понижете нивото на слайда.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Публиката вижда този слайд на другия екран.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Другият екран не участва. Слайдовете са на този екран.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Екраните не бяха разменени. Бележките са още тук.',
+  'Notities aan of uit': 'Бележки включени или изключени',
+  'Zet de notities op het andere scherm': 'Сложи бележките на другия екран',
+  'Terug naar de dia\'s': 'Обратно към слайдовете',
+  'Verder typen': 'Продължи да пишеш',
+  'Terug zonder deze wijzigingen': 'Назад без тези промени',
+  'Toepassen en terug': 'Приложи и върни се',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Промените ви още не са приложени.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Неприложени промени: приложете, отхвърлете или останете тук.',
+  'Deze tabel bewerken': 'Редактирай тази таблица',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} вече няма да се отчита в никоя презентация. Можете да го върнете от Сигурност.',
+  'Niet melden': 'Не отчитай',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Първо запазете. След това можете да експортирате.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Един HTML файл с реален текст, заглавия и алтернативни текстове, който се отваря във всеки браузър без интернет — с таблици, математика, mermaid и графики.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1636,6 +1680,19 @@ const _dutchSourceAddBg = <String, String>{
   'Ga naar de brontabel': 'Към изходната таблица',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Тази таблица е копие на изходната таблица "{bron}". Редактирайте източника и изберете Обновяване, или откачете изгледа като моментна снимка.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'За лично търсене започнете с отделен прозорец за презентатора.',
+  'Privé zoeken': 'Лично търсене',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Публиката вижда текущия слайд, докато не изберете Покажи слайд. Автоматичното възпроизвеждане е на пауза. Споделяйте само прозореца за публиката, а не целия работен плот.',
+  'Ook in sprekersnotities': 'Търсене и в бележките на лектора',
+  'Typ om te zoeken': 'Въведете текст за търсене',
+  'Toon dia': 'Покажи слайд',
+  'Verder vanaf het begin': 'Продължаване от началото',
+  'Verder vanaf het einde': 'Продължаване от края',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Няма резултати. Опитайте с по-кратък текст за търсене.',
+  'Treffer {n} van {m}': 'Съвпадение {n} от {m}',
   'Quizvragen': 'Въпроси от теста',
   'Met vragen': 'С въпроси',
   'Zonder vragen': 'Без въпроси',
@@ -2347,12 +2404,9 @@ const _dutchSourceAddBg = <String, String>{
   'Bewaren als kopie': 'Запази като копие',
   'Bewaren in document': 'Запази в документа',
   'beamer': 'проектор',
-  'beamer: niet bereikbaar': 'проектор: недостъпен',
   'Bewerken sluiten (Esc)': 'Затвори редактирането (Esc)',
   'Presenteer document…': 'Представи документа…',
   'Presenteer document': 'Представи документа',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Отметнете кои таблици могат да се редактират на живо по време на презентацията. Всичко останало остава само за четене.',
   'Extra ruimte': 'Допълнително пространство',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Тази бележка е по-дълга от страницата — превъртете за останалото',
@@ -5180,8 +5234,6 @@ const _dutchSourceAddBg = <String, String>{
   'Markdown-broneditor': 'Редактор на източника Markdown',
   'Niet toegepast': 'Не се прилага',
   'Niet-toegepaste wijzigingen': 'Неприложени промени',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Приложете или отхвърлете текущите промени, преди да смените обхвата.',
   'Problemen gevonden': 'Открити проблеми',
   'Schrijftips': 'Съвети за писане',
   'Snel herstellen': 'Възстановявайте се бързо',
@@ -6429,8 +6481,6 @@ const _dutchSourceAddBg = <String, String>{
       'Задържан: класифициран по-строго от презентацията',
   '1 slide achtergehouden door haar TLP': '1 слайд задържан заради своя TLP',
   'slides achtergehouden door hun TLP': 'слайда задържани заради своя TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Тези слайдове не се включват при представяне, експортиране или в пакета. Повишете нивото TLP на презентацията в Информация за презентацията, за да ги включите.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Всички слайдове са задържани заради своята TLP класификация — няма какво да се покаже.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7180,8 +7230,6 @@ const _dutchSourceAddBg = <String, String>{
   'seksuele geaardheid': 'сексуална ориентация',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' На този слайд има и идентифициращо данно, така че това е проследимо до лице.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Специална категория лични данни (GDPR чл. 9/10)',
   'gezondheidsgegeven': 'данни за здравето',
   'strafrechtelijk gegeven': 'данни за съдимост',
   'religie of levensovertuiging': 'религия или убеждения',
@@ -7242,8 +7290,6 @@ const _dutchSourceAddBg = <String, String>{
   'PERSOONSGEGEVENS': 'ЛИЧНИ ДАННИ',
   'Volg de presentatie': 'Като презентацията',
   'Weglaten uit tonen en exporteren': 'Заличаване при показване и експорт',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Обмислете да го заличите с [[двойни квадратни скоби]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Без контекст в текста това може изобщо да не е лични данни.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

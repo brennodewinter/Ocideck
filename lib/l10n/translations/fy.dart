@@ -14,8 +14,6 @@ const _stringsFy = {
   'more': 'Mear',
   'export': 'Eksportearje',
   'exportReady': 'Eksportearje (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Bewarje de presintaasje earst om te eksportearjen',
-  'exportNeedsClean': 'Bewarje dyn wizigingen earst om te eksportearjen',
   'saved': 'Bewarre',
   'unsaved': 'Net bewarre',
   'unsavedChanges': 'Wizigingen bewarje (Ctrl/Cmd+S)',
@@ -556,8 +554,6 @@ const _dutchSourceFy = {
   'Eerste · laatste slide': 'Earste · lêste slide',
   'Slide-overzicht': 'Slide-oersjoch',
   'Slide-overzicht (pijltjes + Enter)': 'Slide-oersjoch (pylken + Enter)',
-  'Presenter view (notities, klok)': 'Presenter view (notysjes, klok)',
-  'Scherm wisselen (meerdere schermen)': 'Skerm wikselje (mear skermen)',
   'Zwart · wit scherm': 'Swart · wyt skerm',
   'Automatische modus aan/uit': 'Automatyske modus oan/út',
   'Herhalen (loop) aan/uit': 'Werhelje (loop) oan/út',
@@ -577,11 +573,6 @@ const _dutchSourceFy = {
       'Notysjes foar de ûntfanger tidens in kursus',
   'Mijn notities aan/uit': 'Myn notysjes oan/út',
   'Wissel scherm (S)': 'Skerm wikselje (S)',
-  'Kon niet van scherm wisselen.': 'Koe net fan skerm wikselje.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publyk · H leginda · G oersjoch · B/W swart/wyt · R tiid · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publyk · H leginda · S skerm · G oersjoch · B/W swart/wyt · R tiid · Esc stop',
   'Akkoord gaan': 'Akseptyf gean',
   'Licentie (EUPL 1.2)': 'Lisintse (EUPL 1.2)',
   'Toestemming intrekken': 'Tastimming yntrekke',
@@ -652,6 +643,58 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Extra lettertype voor ontbrekende tekens':
+      'Ekstra lettertype foar ûntbrekkende tekens',
+  'Geen lettertypebestand gekozen': 'Gjin lettertypebestân keazen',
+  'Kies bestand…': 'Kies bestân…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Allinne in subset fan dit bestân giet mei yn de PDF. De lisinsje fan it bestân moat ynsluten tastean; OciDeck kontrolearret dat net en downloadet neat.',
+  'Bijzonder persoonsgegeven': 'Bysûnder persoansgegeven',
+  'Dia {n} van {m}': 'Dia {n} fan {m}',
+  'ander scherm: niet bereikbaar': 'oar skerm: net berikber',
+  'het andere scherm': 'it oare skerm',
+  'Dit mag blijven': 'Dit mei bliuwe',
+  'Waarschuw de ontvanger': 'Warskôgje de ûntfanger',
+  'Laat dit weg bij tonen en exporteren':
+      'Lit dit wei by toanen en eksportearjen',
+  'Ga naar de eerste dia zonder keuze': 'Gean nei de earste dia sûnder kar',
+  'Onderteken git-commits': 'Git-commits ûndertekenje',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Teken commits mei de kaai dy\'t git op dizze masine al brûkt.',
+  'getekend en gecontroleerd': 'tekene en kontrolearre',
+  'getekend (hier niet te controleren)': 'tekene (hjir net te kontrolearjen)',
+  'ongetekend': 'ûntekene',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} yn dizze {veld}. Iepenje de melding, dan stiet it stik selektearre yn de tekst.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Iepenje de melding, dan stiet it stik selektearre yn de tekst.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Har nivo is strjender dan dat fan de presintaasje. Set it nivo fan de presintaasje heger, of ferleech it nivo fan de dia.',
+  'Niveau van de presentatie': 'Nivo fan de presintaasje',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Set it nivo fan de presintaasje heger, of ferleech it nivo fan de dia.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'De seal sjocht dizze dia op it oare skerm.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'It oare skerm docht net mei. De dia\'s steane op dit skerm.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'De skermen binne net wiksele. De notysjes steane noch hjir.',
+  'Notities aan of uit': 'Notysjes oan of út',
+  'Zet de notities op het andere scherm': 'Set de notysjes op it oare skerm',
+  'Terug naar de dia\'s': 'Werom nei de dia\'s',
+  'Verder typen': 'Fierder typje',
+  'Terug zonder deze wijzigingen': 'Werom sûnder dizze wizigingen',
+  'Toepassen en terug': 'Tapasse en werom',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Jo wizigingen binne noch net tapast.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Net-tapaste wizigingen: tapas, werp fuort of bliuw hjir.',
+  'Deze tabel bewerken': 'Dizze tabel bewurkje',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} wurdt dan yn gjin ien presintaasje mear meld. Weromsette kin by Befeiliging.',
+  'Niet melden': 'Net melde',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Bewarje earst. Dêrnei kinne jo eksportearje.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Ien HTML-bestân mei echte tekst, koppen en alt-teksten, dat yn elke browser iepent sûnder ynternet — mei tabellen, wiskunde, mermaid en grafiken.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -664,6 +707,19 @@ const _dutchSourceAddFy = {
   'Ga naar de brontabel': 'Gean nei de boarnetabel',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Dizze tabel is in ôfskrift fan de boarnetabel "{bron}". Bewurkje de boarne en kies Fernije, of untkeppelje de werjefte as momintopname.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Begjin mei in apart presintatorfinster om privee te sykjen.',
+  'Privé zoeken': 'Privee sykje',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'It publyk bliuwt op de hjoeddeiske dia oantsto Dia sjen litte kiest. Automatysk ôfspyljen is ûnderbrutsen. Diel allinnich it publyksfinster, net dyn hiele buroblêd.',
+  'Ook in sprekersnotities': 'Ek yn sprekkersnotysjes sykje',
+  'Typ om te zoeken': 'Typ om te sykjen',
+  'Toon dia': 'Dia sjen litte',
+  'Verder vanaf het begin': 'Fierder fan it begjin ôf',
+  'Verder vanaf het einde': 'Fierder fan de ein ôf',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Gjin resultaten. Besykje in koartere syktekst.',
+  'Treffer {n} van {m}': 'Treffer {n} fan {m}',
   'Quizvragen': 'Kwisfragen',
   'Met vragen': 'Mei fragen',
   'Zonder vragen': 'Sûnder fragen',
@@ -1372,12 +1428,9 @@ const _dutchSourceAddFy = {
   'Bewaren als kopie': 'Bewarje as kopy',
   'Bewaren in document': 'Bewarje yn dokumint',
   'beamer': 'beamer',
-  'beamer: niet bereikbaar': 'beamer: net berikber',
   'Bewerken sluiten (Esc)': 'Bewurken slute (Esc)',
   'Presenteer document…': 'Presintearje dokumint…',
   'Presenteer document': 'Presintearje dokumint',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Finkje oan hokker tabellen tidens de presintaasje live bewurke wurde meie. Al oare ynhâld bliuwt allinnich-lêzen.',
   'Extra ruimte': 'Ekstra romte',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Dizze noat is langer as it blêd — skrol foar de rest',
@@ -4196,8 +4249,6 @@ const _dutchSourceAddFy = {
   'Markdown-broneditor': 'Markdown boarne bewurker',
   'Niet toegepast': 'Net tapast',
   'Niet-toegepaste wijzigingen': 'Net tapaste feroarings',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Aktuele wizigingen tapasse of ôfwize foardat jo berikken wikselje.',
   'Problemen gevonden': 'Problemen fûn',
   'Schrijftips': 'Skriuwtips',
   'Snel herstellen': 'Herstellen fluch',
@@ -5447,8 +5498,6 @@ const _dutchSourceAddFy = {
       'Efterhâlden: strenger klassifisearre as de presintaasje',
   '1 slide achtergehouden door haar TLP': '1 dia efterhâlden troch har TLP',
   'slides achtergehouden door hun TLP': 'dia\'s efterhâlden troch harren TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Dizze slides geane net mei by it presintearjen, eksportearjen of yn it pakket. Ferheegje it TLP-nivo fan de presintaasje by Presintaasje-ynfo om se mei te nimmen.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Alle dia\'s binne efterhâlden troch harren TLP-klassifikaasje — neat om sjen te litten.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -6192,8 +6241,6 @@ const _dutchSourceAddFy = {
   'seksuele geaardheid': 'seksuele oanstriid',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Op dizze dia stiet ek in identifisearjend gegeven, dus dit is werom te lieden ta in persoan.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Bysûnder persoansgegeven (AVG art. 9/10)',
   'gezondheidsgegeven': 'sûnensgegeven',
   'strafrechtelijk gegeven': 'strafrjochtlik gegeven',
   'religie of levensovertuiging': 'religy of libbensoertsjûging',
@@ -6254,8 +6301,6 @@ const _dutchSourceAddFy = {
   'PERSOONSGEGEVENS': 'PERSOANSGEGEVENS',
   'Volg de presentatie': 'Folgje de presintaasje',
   'Weglaten uit tonen en exporteren': 'Weilitte út toanen en eksportearjen',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Oerweagje it te redigearjen mei [[dûbele blokhaken]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Sûnder kontekst yn \'e tekst is dit mooglik gjin persoansgegeven.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

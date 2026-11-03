@@ -20,12 +20,14 @@ import '../reader/document_markdown_view.dart'
 import 'divider_embed_builder.dart';
 import 'footnote_embed_builder.dart';
 import 'markdown_editor_theme.dart';
+import 'chart_embed_builder.dart';
 import 'mermaid_embed_builder.dart';
 import 'form_block_embed_builder.dart';
 import 'pentest_block_embed_builder.dart';
 import 'ocideck_table_embed_builder.dart';
 import 'table_embed_builder.dart';
 import 'table_embed_binding.dart';
+import '../reader/document_search_overlay.dart';
 import 'source_fragment_embed_builder.dart';
 import 'spacer_embed_builder.dart';
 import 'toc_embed_builder.dart';
@@ -509,6 +511,9 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               scrollController: widget.scrollController,
               config: QuillEditorConfig(
                 onLaunchUrl: widget.onTapLink,
+                // De vastgepinde Quill-versie biedt alleen hier toegang tot lijstnummering.
+                // ignore: experimental_member_use
+                customLeadingBlockBuilder: _searchLeading,
                 // De tabelcellen verwerken hun eigen taps en tekstfocus.
                 // Quill ziet dezelfde tik; zijn caret voor de gehele embed
                 // zou een lang document anders naar een andere rij scrollen.
@@ -561,6 +566,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   const SpacerEmbedBuilder(),
                   const TranscriptEmbedBuilder(),
                   const MermaidEmbedBuilder(),
+                  const ChartEmbedBuilder(),
                   const PentestBlockEmbedBuilder(),
                   const FormBlockEmbedBuilder(),
                   const SourceFragmentEmbedBuilder(),
@@ -578,6 +584,21 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget? _searchLeading(Node node, LeadingConfig config) {
+    if (config.index == null) return null;
+    return ExcludeDocumentSearch(
+      child: QuillNumberPoint(
+        index: config.getIndexNumberByIndent!,
+        indentLevelCounts: config.indentLevelCounts,
+        count: config.count,
+        style: config.style!,
+        attrs: config.attrs,
+        width: config.width!,
+        padding: config.padding!,
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:isolate';
 
+import 'package:flutter/foundation.dart';
+
 import '../models/markdown_validation.dart';
 import '../models/markdown_writing_suggestion.dart';
 import '../models/marp_compatibility.dart';
@@ -24,8 +26,8 @@ typedef DeckCheckResult = ({
 /// wanneer de instelling aanstaat — de Marp-compatibiliteitscontrole.
 ///
 /// Alledrie pure functies op de bronstring, zonder Flutter- of
-/// BuildContext-afhankelijkheid, zodat [deckChecksRunner] de bundel op een
-/// achtergrond-isolate kan draaien: op een deck van honderdvijftig dia's
+/// BuildContext-afhankelijkheid, zodat [deckChecksRunner] de bundel native op
+/// een achtergrond-isolate kan draaien: op een deck van honderdvijftig dia's
 /// kostte deze serie ~42 ms op de UI-thread bij élke typ-pauze (#2713).
 DeckCheckResult deckSourceChecks(DeckCheckArgs args) => (
   validation: MarkdownValidator().validate(args.source),
@@ -39,11 +41,15 @@ DeckCheckResult deckSourceChecks(DeckCheckArgs args) => (
         ),
 );
 
-/// Hoe de bundel draait. Productie gebruikt een achtergrond-isolate, zodat de
-/// scans de UI-thread niet blokkeren; tests vervangen de runner door een
-/// synchrone variant — een isolate-resultaat valt niet binnen pump()-tijden.
-var deckChecksRunner = (DeckCheckArgs args) =>
-    Isolate.run(() => deckSourceChecks(args));
+/// Hoe de bundel draait. Native op een achtergrond-isolate, zodat de scans de
+/// UI-thread niet blokkeren. Het web kent geen `Isolate.run` — het gooit daar
+/// pas bij aanroep, ná de debounce (#2764) — en draait de bundel dus op de
+/// main thread, zoals `ExportService._offload` het ook doet. Widgettests
+/// vervangen de runner door een synchrone variant: een isolate-resultaat valt
+/// niet binnen pump()-tijden.
+var deckChecksRunner = (DeckCheckArgs args) => kIsWeb
+    ? Future.sync(() => deckSourceChecks(args))
+    : Isolate.run(() => deckSourceChecks(args));
 
 /// Plant één debounced inspectieronde. Een ronde waarvan de bron onderweg is
 /// gewijzigd — of waarvan de widget is verdwenen — levert niets af; [current]

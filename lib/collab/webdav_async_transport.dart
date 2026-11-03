@@ -165,6 +165,7 @@ class WebdavAsyncTransport implements CollabTransport {
     _polling = true;
     try {
       final present = (await store.listSequences()).toSet();
+
       if (present.isNotEmpty) {
         _knownMaxSeq = math.max(_knownMaxSeq, present.reduce(math.max));
       }

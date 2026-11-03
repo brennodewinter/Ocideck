@@ -135,8 +135,12 @@ class _SeveritySection extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 6),
                       child: TextButton.icon(
                         onPressed: () {
+                          final navCtx = Navigator.of(
+                            context,
+                            rootNavigator: true,
+                          ).context;
                           Navigator.pop(context);
-                          action.run();
+                          action.run(navCtx);
                         },
                         icon: Icon(action.icon, size: 14),
                         label: Text(action.label),

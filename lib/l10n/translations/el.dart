@@ -14,8 +14,6 @@ const _stringsEl = {
   'more': 'Περισσότερα',
   'export': 'Εξαγωγή',
   'exportReady': 'Εξαγωγή (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Αποθηκεύστε την παρουσίαση πριν την εξαγωγή',
-  'exportNeedsClean': 'Αποθηκεύστε τις αλλαγές σας πριν την εξαγωγή',
   'saved': 'Αποθηκεύτηκε',
   'unsaved': 'Μη αποθηκευμένο',
   'unsavedChanges': 'Αποθήκευση αλλαγών (Ctrl/Cmd+S)',
@@ -696,8 +694,6 @@ const _dutchSourceEl = {
   'Eerste · laatste slide': 'Πρώτη · τελευταία διαφάνεια',
   'Slide-overzicht': 'Επισκόπηση διαφανειών',
   'Slide-overzicht (pijltjes + Enter)': 'Επισκόπηση διαφανειών (βέλη + Enter)',
-  'Presenter view (notities, klok)': 'Προβολή παρουσιαστή (σημειώσεις, ρολόι)',
-  'Scherm wisselen (meerdere schermen)': 'Εναλλαγή οθόνης (πολλαπλές οθόνες)',
   'Zwart · wit scherm': 'Μαύρη · λευκή οθόνη',
   'Automatische modus aan/uit': 'Αυτόματη λειτουργία ναι/όχι',
   'Herhalen (loop) aan/uit': 'Επανάληψη (βρόχος) ναι/όχι',
@@ -721,11 +717,6 @@ const _dutchSourceEl = {
       'Σημειώσεις για τον παραλήπτη κατά τη διάρκεια ενός μαθήματος',
   'Mijn notities aan/uit': 'Εναλλαγή των σημειώσεών μου ναι/όχι',
   'Wissel scherm (S)': 'Εναλλαγή οθόνης (S)',
-  'Kon niet van scherm wisselen.': 'Δεν ήταν δυνατή η εναλλαγή οθονών.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · H υπόμνημα · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · H υπόμνημα · S οθόνη · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
   'pijltjes + Enter of klik om te springen': 'βέλη + Enter ή κλικ για μετάβαση',
   'Afsluiten (Escape)': 'Έξοδος (Escape)',
   'Sluiten (G of Esc)': 'Κλείσιμο (G ή Esc)',
@@ -1630,6 +1621,60 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Επιπλέον γραμματοσειρά για χαρακτήρες που λείπουν',
+  'Geen lettertypebestand gekozen': 'Δεν επιλέχθηκε αρχείο γραμματοσειράς',
+  'Kies bestand…': 'Επιλογή αρχείου…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Μόνο ένα υποσύνολο αυτού του αρχείου ενσωματώνεται στο PDF. Η άδεια του αρχείου πρέπει να επιτρέπει την ενσωμάτωση· το OciDeck δεν την ελέγχει και δεν κατεβάζει τίποτα.',
+  'Bijzonder persoonsgegeven': 'Δεδομένο προσωπικού ειδικής κατηγορίας',
+  'Dia {n} van {m}': 'Διαφάνεια {n} από {m}',
+  'ander scherm: niet bereikbaar': 'άλλη οθόνη: μη προσβάσιμη',
+  'het andere scherm': 'η άλλη οθόνη',
+  'Dit mag blijven': 'Αυτό μπορεί να μείνει',
+  'Waarschuw de ontvanger': 'Προειδοποίησε τον παραλήπτη',
+  'Laat dit weg bij tonen en exporteren':
+      'Άφησέ το εκτός κατά την εμφάνιση και την εξαγωγή',
+  'Ga naar de eerste dia zonder keuze':
+      'Μετάβαση στη πρώτη διαφάνεια χωρίς επιλογή',
+  'Onderteken git-commits': 'Υπογραφή commit git',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Υπογράψτε τα commit με το κλειδί που το git ήδη χρησιμοποιεί σε αυτό το μηχάνημα.',
+  'getekend en gecontroleerd': 'υπογεγραμμένο και επαληθευμένο',
+  'getekend (hier niet te controleren)': 'υπογεγραμμένο (μη επαληθεύσιμο εδώ)',
+  'ongetekend': 'μη υπογεγραμμένο',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} σε αυτό το {veld}. Ανοίξτε την ειδοποίηση και το τμήμα επιλέγεται στο κείμενο.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Ανοίξτε την ειδοποίηση και το τμήμα επιλέγεται στο κείμενο.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Το επίπεδό τους είναι αυστηρότερο από αυτό της παρουσίασης. Ανεβάστε το επίπεδο της παρουσίασης ή κατεβάστε αυτό της διαφάνειας.',
+  'Niveau van de presentatie': 'Επίπεδο της παρουσίασης',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Ανεβάστε το επίπεδο της παρουσίασης ή κατεβάστε αυτό της διαφάνειας.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Το κοινό βλέπει αυτή τη διαφάνεια στην άλλη οθόνη.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Η άλλη οθόνη δεν συμμετέχει. Οι διαφάνειες είναι σε αυτή την οθόνη.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Οι οθόνες δεν εναλλάχθηκαν. Οι σημειώσεις είναι ακόμη εδώ.',
+  'Notities aan of uit': 'Σημειώσεις ενεργές ή ανενεργές',
+  'Zet de notities op het andere scherm':
+      'Βάλτε τις σημειώσεις στην άλλη οθόνη',
+  'Terug naar de dia\'s': 'Πίσω στις διαφάνειες',
+  'Verder typen': 'Συνέχεια πληκτρολόγησης',
+  'Terug zonder deze wijzigingen': 'Επιστροφή χωρίς αυτές τις αλλαγές',
+  'Toepassen en terug': 'Εφαρμογή και επιστροφή',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Οι αλλαγές σας δεν έχουν εφαρμοστεί ακόμη.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Μη εφαρμοσμένες αλλαγές: εφαρμόστε, απορρίψτε ή μείνετε εδώ.',
+  'Deze tabel bewerken': 'Επεξεργασία αυτού του πίνακα',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} δεν θα αναφέρεται πλέον σε καμία παρουσίαση. Μπορείτε να το επαναφέρετε στην Ασφάλεια.',
+  'Niet melden': 'Να μην αναφέρεται',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Αποθηκεύστε πρώτα. Μετά μπορείτε να εξάγετε.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Ένα αρχείο HTML με πραγματικό κείμενο, επικεφαλίδες και εναλλακτικά κείμενα, που ανοίγει σε οποιοδήποτε πρόγραμμα περιήγησης χωρίς διαδίκτυο — με πίνακες, μαθηματικά, mermaid και γραφήματα.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1642,6 +1687,19 @@ const _dutchSourceAddEl = <String, String>{
   'Ga naar de brontabel': 'Μετάβαση στον πίνακα προέλευσης',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Αυτός ο πίνακας είναι αντίγραφο του πίνακα προέλευσης "{bron}". Επεξεργαστείτε την προέλευση και επιλέξτε Ανανέωση, ή αποσυνδέστε την προβολή ως στιγμιότυπο.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Ξεκινήστε με ξεχωριστό παράθυρο παρουσιαστή για ιδιωτική αναζήτηση.',
+  'Privé zoeken': 'Ιδιωτική αναζήτηση',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Το κοινό παραμένει στην τρέχουσα διαφάνεια μέχρι να επιλέξετε Εμφάνιση διαφάνειας. Η αυτόματη αναπαραγωγή έχει τεθεί σε παύση. Μοιραστείτε μόνο το παράθυρο του κοινού, όχι ολόκληρη την επιφάνεια εργασίας.',
+  'Ook in sprekersnotities': 'Αναζήτηση και στις σημειώσεις ομιλητή',
+  'Typ om te zoeken': 'Πληκτρολογήστε για αναζήτηση',
+  'Toon dia': 'Εμφάνιση διαφάνειας',
+  'Verder vanaf het begin': 'Συνέχεια από την αρχή',
+  'Verder vanaf het einde': 'Συνέχεια από το τέλος',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Δεν υπάρχουν αποτελέσματα. Δοκιμάστε μικρότερο κείμενο αναζήτησης.',
+  'Treffer {n} van {m}': 'Αντιστοιχία {n} από {m}',
   'Quizvragen': 'Ερωτήσεις κουίζ',
   'Met vragen': 'Με ερωτήσεις',
   'Zonder vragen': 'Χωρίς ερωτήσεις',
@@ -2364,12 +2422,9 @@ const _dutchSourceAddEl = <String, String>{
   'Bewaren als kopie': 'Αποθήκευση ως αντίγραφο',
   'Bewaren in document': 'Αποθήκευση στο έγγραφο',
   'beamer': 'προβολέας',
-  'beamer: niet bereikbaar': 'προβολέας: μη προσβάσιμος',
   'Bewerken sluiten (Esc)': 'Κλείσιμο επεξεργασίας (Esc)',
   'Presenteer document…': 'Παρουσίαση εγγράφου…',
   'Presenteer document': 'Παρουσίαση εγγράφου',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Επιλέξτε ποιοι πίνακες μπορούν να επεξεργαστούν ζωντανά κατά την παρουσίαση. Όλο το υπόλοιπο περιεχόμενο παραμένει μόνο για ανάγνωση.',
   'Extra ruimte': 'Επιπλέον χώρος',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Αυτή η σημείωση είναι μακρύτερη από τη σελίδα — κύλιση για τα υπόλοιπα',
@@ -5229,8 +5284,6 @@ const _dutchSourceAddEl = <String, String>{
   'Markdown-broneditor': 'Πρόγραμμα επεξεργασίας πηγών Markdown',
   'Niet toegepast': 'Δεν εφαρμόζεται',
   'Niet-toegepaste wijzigingen': 'Μη εφαρμοσμένες αλλαγές',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Εφαρμόστε ή απορρίψτε τις τρέχουσες αλλαγές πριν αλλάξετε το εύρος.',
   'Problemen gevonden': 'Βρέθηκαν προβλήματα',
   'Schrijftips': 'Συμβουλές γραφής',
   'Snel herstellen': 'Ανάρρωση γρήγορα',
@@ -6485,8 +6538,6 @@ const _dutchSourceAddEl = <String, String>{
       '1 διαφάνεια παρακρατείται λόγω του TLP της',
   'slides achtergehouden door hun TLP':
       'διαφάνειες παρακρατούνται λόγω του TLP τους',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Αυτές οι διαφάνειες δεν συμπεριλαμβάνονται στην παρουσίαση, στην εξαγωγή ούτε στο πακέτο. Αυξήστε το επίπεδο TLP της παρουσίασης στις Πληροφορίες παρουσίασης για να τις συμπεριλάβετε.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Όλες οι διαφάνειες παρακρατούνται λόγω της ταξινόμησης TLP τους, οπότε δεν υπάρχει τίποτα να εμφανιστεί.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7243,8 +7294,6 @@ const _dutchSourceAddEl = <String, String>{
   'seksuele geaardheid': 'σεξουαλικός προσανατολισμός',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Σε αυτή τη διαφάνεια υπάρχει και ένα στοιχείο ταυτοποίησης, άρα αυτό ανάγεται σε πρόσωπο.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Ειδική κατηγορία προσωπικών δεδομένων (GDPR άρθρο 9/10)',
   'gezondheidsgegeven': 'δεδομένο υγείας',
   'strafrechtelijk gegeven': 'ποινικό δεδομένο',
   'religie of levensovertuiging': 'θρησκεία ή πεποιθήσεις',
@@ -7305,8 +7354,6 @@ const _dutchSourceAddEl = <String, String>{
   'PERSOONSGEGEVENS': 'ΠΡΟΣΩΠΙΚΑ ΔΕΔΟΜΕΝΑ',
   'Volg de presentatie': 'Ακολούθησε την παρουσίαση',
   'Weglaten uit tonen en exporteren': 'Παράλειψη από προβολή και εξαγωγή',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Σκέψου να το αποκρύψεις με [[διπλές αγκύλες]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Χωρίς συμφραζόμενα στο κείμενο, ίσως να μην είναι καν προσωπικό δεδομένο.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

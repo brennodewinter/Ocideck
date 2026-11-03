@@ -430,6 +430,8 @@ enum _ValueKind {
   menuLayout,
   tableAlignList,
   boolList,
+  // De rijen van een tabel, als geneste lijst — #2749.
+  stringRows,
   timelineLayout,
   timelineReveal,
   bulletMarker,
@@ -521,6 +523,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.menuLayout: _ValueKind.menuLayout,
   SlideField.tableColumnAlignments: _ValueKind.tableAlignList,
   SlideField.tableNumberColumns: _ValueKind.boolList,
+  SlideField.tableRows: _ValueKind.stringRows,
   SlideField.timelineLayout: _ValueKind.timelineLayout,
   SlideField.timelineReveal: _ValueKind.timelineReveal,
   SlideField.timelineAnimationMs: _ValueKind.integer,
@@ -588,6 +591,9 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
       value,
     ).map((e) => e.name).toList(),
     _ValueKind.boolList => _needBoolList(value),
+    _ValueKind.stringRows => [
+      for (final row in _need<List<dynamic>>(value)) _needStrList(row),
+    ],
     _ValueKind.timelineLayout => _need<TimelineLayout>(value).name,
     _ValueKind.timelineReveal => _need<TimelineReveal>(value).name,
     _ValueKind.bulletMarker => _need<BulletMarker>(value).name,
@@ -645,6 +651,9 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
       where,
     ).map((name) => _enumByName(TableAlign.values, name, where)).toList(),
     _ValueKind.boolList => _asBoolList(json, where),
+    _ValueKind.stringRows => [
+      for (final row in _asList(json, where)) _asStrList(row, where),
+    ],
     _ValueKind.timelineLayout => _enumByName(
       TimelineLayout.values,
       _asString(json, where),

@@ -219,6 +219,10 @@ enum SlideField {
   isDetail,
   tableEditable,
   tableMarkOverdue,
+  // — List<List<String>> —
+  // De rijen reizen als één op per losgelaten tabel: dat is het slot uit
+  // #2749 — geen cel-CRDT, maar de hele tabel als laatste-schrijver-wint.
+  tableRows,
   // — int —
   videoStartMs,
   videoEndMs,
@@ -472,6 +476,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.tableMarkOverdue => slide.copyWith(
       tableMarkOverdue: _cast<bool>(value, field),
+    ),
+    SlideField.tableRows => slide.copyWith(
+      tableRows: _cast<List<List<String>>>(value, field),
     ),
     SlideField.videoStartMs => slide.copyWith(
       videoStartMs: _cast<int>(value, field),

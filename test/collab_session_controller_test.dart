@@ -42,10 +42,15 @@ class _Tab {
 
 /// Drive the async log forward deterministically instead of waiting on timers.
 Future<void> _sync(List<_Tab> tabs) async {
-  for (final t in tabs) {
-    await (t.ctrl.session.transport as WebdavAsyncTransport).poll();
+  // Twee rondes: een append die tussen de polls landt (v0-intent en de
+  // authoritative echo tellen als afzonderlijke records) komt pas bij de
+  // volgende poll binnen (#2749 voegde zo'n extra writer toe).
+  for (var round = 0; round < 2; round++) {
+    for (final t in tabs) {
+      await (t.ctrl.session.transport as WebdavAsyncTransport).poll();
+    }
+    await pumpEventQueue();
   }
-  await pumpEventQueue();
 }
 
 void main() {

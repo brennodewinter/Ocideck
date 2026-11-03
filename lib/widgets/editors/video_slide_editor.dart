@@ -45,8 +45,10 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title)
-      ..addTextListener(_emitTitle);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    )..addTextListener(_emitTitle);
     _source = EditorTextController(text: widget.slide.videoPath);
     _start = EditorTextController(text: _secText(widget.slide.videoStartMs));
     _end = EditorTextController(text: _secText(widget.slide.videoEndMs));

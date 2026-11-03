@@ -30,6 +30,12 @@ class _CockpitPreviewState extends State<_CockpitPreview>
   /// markdown changes.
   late CockpitSpec _spec;
 
+  /// De OS-bewegingsvoorkeur zolang deze meter gemonteerd is — uit staat de
+  /// animatie stil op de eindstand (#2733). Bijgehouden in
+  /// [didChangeDependencies] want er is een MediaQuery voor nodig, en die
+  /// bestaat pas na initState.
+  bool _reduceMotion = false;
+
   @override
   void initState() {
     super.initState();
@@ -57,13 +63,26 @@ class _CockpitPreviewState extends State<_CockpitPreview>
     }
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    if (reduceMotion != _reduceMotion) {
+      _reduceMotion = reduceMotion;
+      _maybeStart();
+    }
+  }
+
   void _maybeStart() {
     final spec = _spec;
+    // #2733: wie beweging uitzet krijgt meteen de eindstand — het veld, niet
+    // een nieuwe MediaQuery-lezing: deze methode loopt ook in initState.
+    final reduceMotion = _reduceMotion;
     // null override = inherit the theme's shared activation duration.
     final ms = (spec.animationDurationMs ?? widget.profile.animationDurationMs)
         .clamp(cockpitMinAnimationDurationMs, cockpitMaxAnimationDurationMs);
     _controller.duration = Duration(milliseconds: ms);
-    if (widget.presentationMode && spec.animateOnEnter) {
+    if (widget.presentationMode && spec.animateOnEnter && !reduceMotion) {
       _controller.forward(from: 0);
     } else {
       _controller.value = 1;

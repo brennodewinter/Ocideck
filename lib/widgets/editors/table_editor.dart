@@ -39,7 +39,10 @@ class _TableEditorState extends State<TableEditor> {
   @override
   void initState() {
     super.initState();
-    _title = EditorTextController(text: widget.slide.title);
+    _title = EditorTextController(
+      text: widget.slide.title,
+      searchFieldId: 'title',
+    );
     _title.addTextListener(_emit);
     _grid = _makeGrid(widget.slide);
   }

@@ -10,6 +10,21 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Grote SVG's tonen op het web.** Een geïmporteerde SVG boven 256 KB ging in
+  de browser naar `Isolate.run`, dat het web niet kent, en verscheen als fout.
+  Het web saneert hem nu op de main thread; native blijft dat op een
+  achtergrond-isolate. Een conventieregel weigert voortaan elke `Isolate.run`
+  zonder platformpoort (#2789).
+- **Broncontrole werkt op het web.** In de browser liep de controle van de
+  broneditor na elke typpauze stuk op `Isolate.run`, dat het web niet kent.
+  Validatie, schrijftips en de Marp-controle kwamen niet, en de balk bleef op
+  "Controleren…" staan. Op het web draait de ronde nu op de main thread;
+  native blijft hij op een achtergrond-isolate (#2764).
+- **Zoeken en springen.** Zoekresultaten krijgen tekstcontext en een directe
+  sprong naar de gevonden passage. Documenten houden hun huidige weergave;
+  presentaties openen het juiste tekstveld. De eerste Enter opent de eerste
+  treffer en zichtbare linktekst blijft vindbaar zonder linkdoelen te wijzigen.
+
 - **Presentaties openen op het web.** De privacyscan vraagt in de browser
   geen desktop-isolate meer op. Daardoor openen de proefpresentatielink en
   URL-import weer zonder de misleidende CORS-foutmelding.
@@ -43,6 +58,12 @@ All notable changes to OciDeck are documented in this file.
   live-verbinding. Duur, meter en teller blijven zichtbaar en leesbaar (#2757).
 
 ### Added
+
+- **Privé zoeken tijdens presenteren.** Met een apart publieksvenster kun je
+  passages en optioneel sprekersnotities terugvinden. Het publiek blijft op de
+  huidige dia totdat je bewust *Toon dia* kiest; automatisch doorspelen pauzeert.
+  Het zoekvenster volgt de gekozen appstijl, inclusief kleuren, knopvorm en
+  lettertype. Aangepaste applettertypen worden weer doorgegeven aan het thema.
 
 - **Quizvragen bij de export.** In het exportdialoog kun je vraagdia's
   meenemen, weglaten of als eigen bestand exporteren. De bestandsnaam krijgt

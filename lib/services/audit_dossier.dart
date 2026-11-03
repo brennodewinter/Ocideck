@@ -81,6 +81,10 @@ String _verificationRecipe(Deck deck) => switch (deck.sealForm) {
 String buildAuditDossier(
   Deck deck, {
   Map<String, EvidenceHashes> evidenceHashes = const {},
+
+  /// #2747: bij >0 zit `report-geredigeerd.md` en `report-redactions.json`
+  /// (commitments zonder salts) in het pakket, en noemt de index dat.
+  int redactionCount = 0,
   MiauwComplianceAnalyzer analyzer = const MiauwComplianceAnalyzer(),
 }) {
   final summary = deckManagementSummary(deck);
@@ -109,6 +113,16 @@ String buildAuditDossier(
   meta('Versie', deck.version);
   meta('Datum', deck.date);
   meta('TLP', deck.tlp.label);
+  if (redactionCount > 0) {
+    // #2747: de auditor kan de redacties controleren — het manifest zit
+    // zónder salts in het pakket; de verificatiesleutels blijven bij de
+    // auteur (de scheiding ís de beveiliging, OCIWACHT).
+    meta('Redacties', '$redactionCount');
+    b.writeln(
+      '  - `report-geredigeerd.md` — de afleiding met redacties toegepast\n'
+      '  - `report-redactions.json` — commitments per redactie, zonder salts',
+    );
+  }
   b.writeln();
 
   b.writeln('## Integriteit en verzegeling');

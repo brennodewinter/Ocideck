@@ -14,8 +14,6 @@ const _stringsNl = {
   'more': 'Meer',
   'export': 'Exporteren',
   'exportReady': 'Exporteren (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Sla de presentatie eerst op om te exporteren',
-  'exportNeedsClean': 'Sla je wijzigingen eerst op om te exporteren',
   'saved': 'Opgeslagen',
   'unsaved': 'Niet opgeslagen',
   'unsavedChanges': 'Wijzigingen opslaan (Ctrl/Cmd+S)',

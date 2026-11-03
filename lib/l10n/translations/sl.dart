@@ -14,8 +14,6 @@ const _stringsSl = {
   'more': 'Več',
   'export': 'Izvozi',
   'exportReady': 'Izvozi (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Pred izvozom najprej shranite predstavitev',
-  'exportNeedsClean': 'Pred izvozom najprej shranite spremembe',
   'saved': 'Shranjeno',
   'unsaved': 'Neshranjeno',
   'unsavedChanges': 'Shrani spremembe (Ctrl/Cmd+S)',
@@ -686,8 +684,6 @@ const _dutchSourceSl = {
   'Slide-overzicht': 'Pregled diapozitivov',
   'Slide-overzicht (pijltjes + Enter)':
       'Pregled diapozitivov (puščice + Enter)',
-  'Presenter view (notities, klok)': 'Pogled predavatelja (opombe, ura)',
-  'Scherm wisselen (meerdere schermen)': 'Preklop zaslona (več zaslonov)',
   'Zwart · wit scherm': 'Črn · bel zaslon',
   'Automatische modus aan/uit': 'Samodejni način vklop/izklop',
   'Herhalen (loop) aan/uit': 'Ponavljanje (zanka) vklop/izklop',
@@ -710,11 +706,6 @@ const _dutchSourceSl = {
       'Opombe za prejemnika med tečajem',
   'Mijn notities aan/uit': 'Vklop/izklop mojih opomb',
   'Wissel scherm (S)': 'Preklop zaslona (S)',
-  'Kon niet van scherm wisselen.': 'Zaslona ni bilo mogoče preklopiti.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · H legenda · G pregled · B/W črno/belo · R čas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · H legenda · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
   'pijltjes + Enter of klik om te springen':
       'puščice + Enter ali klik za preskok',
   'Afsluiten (Escape)': 'Izhod (Escape)',
@@ -1605,6 +1596,58 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Dodatna pisava za manjkajoče znake',
+  'Geen lettertypebestand gekozen': 'Datoteka s pisavo ni izbrana',
+  'Kies bestand…': 'Izberi datoteko…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'V PDF se vgradi samo podmnožica te datoteke. Licenca datoteke mora dovoljevati vgradnjo; OciDeck tega ne preverja in ničesar ne prenese.',
+  'Bijzonder persoonsgegeven': 'Osebni podatek posebne kategorije',
+  'Dia {n} van {m}': 'Diapozitiv {n} od {m}',
+  'ander scherm: niet bereikbaar': 'drugi zaslon: nedostopen',
+  'het andere scherm': 'drugi zaslon',
+  'Dit mag blijven': 'To lahko ostane',
+  'Waarschuw de ontvanger': 'Opozori prejemnika',
+  'Laat dit weg bij tonen en exporteren': 'Izpusti to pri prikazu in izvozu',
+  'Ga naar de eerste dia zonder keuze': 'Pojdi na prvi diapozitiv brez izbire',
+  'Onderteken git-commits': 'Podpisuj git commit-e',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Podpisujte commit-e s ključem, ki ga git že uporablja na tem računalniku.',
+  'getekend en gecontroleerd': 'podpisano in preverjeno',
+  'getekend (hier niet te controleren)':
+      'podpisano (tukaj ni mogoče preveriti)',
+  'ongetekend': 'nepodpisano',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} v tem {veld}. Odprite obvestilo in del je izbran v besedilu.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Odprite obvestilo in del je izbran v besedilu.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Njihova stopnja je strožja od stopnje predstavitve. Povečajte stopnjo predstavitve ali znižajte stopnjo slajda.',
+  'Niveau van de presentatie': 'Stopnja predstavitve',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Povečajte stopnjo predstavitve ali znižajte stopnjo slajda.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Dvornana vidi ta slide na drugem zaslonu.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Drugi zaslon ne sodeluje. Slajdi so na tem zaslonu.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Zaslona se nista zamenjala. Zapiski so še tukaj.',
+  'Notities aan of uit': 'Zapiski vklopljeni ali izklopljeni',
+  'Zet de notities op het andere scherm': 'Postavi zapiske na drugi zaslon',
+  'Terug naar de dia\'s': 'Nazaj na slide',
+  'Verder typen': 'Tipkaj naprej',
+  'Terug zonder deze wijzigingen': 'Nazaj brez teh sprememb',
+  'Toepassen en terug': 'Uporabi in nazaj',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Vaše spremembe še niso uveljavljene.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Neuveljavljene spremembe: uveljavi, zavrzi ali ostani tukaj.',
+  'Deze tabel bewerken': 'Uredi to tabelo',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} se ne bo več poročal v nobeni predstavitvi. Nazaj ga vključite pri Varnost.',
+  'Niet melden': 'Ne poročaj',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Najprej shranite. Nato lahko izvozite.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'Ena datoteka HTML s pravim besedilom, naslovi in nadomestnimi besedili, ki se odpre v katerem koli brskalniku brez interneta — s tabelami, matematiko, mermaid in grafikoni.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1617,6 +1660,19 @@ const _dutchSourceAddSl = <String, String>{
   'Ga naar de brontabel': 'Pojdi na izvorno tabelo',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Ta tabela je odpis izvorne tabele "{bron}". Uredite vir in izberite Osveži, ali ločite pogled kot posnetek.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Za zasebno iskanje začnite z ločenim oknom za predstavitelja.',
+  'Privé zoeken': 'Zasebno iskanje',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Občinstvo vidi trenutni diapozitiv, dokler ne izberete Prikaži diapozitiv. Samodejno predvajanje je začasno ustavljeno. Delite samo okno za občinstvo, ne celotnega namizja.',
+  'Ook in sprekersnotities': 'Išči tudi v govornikovih opombah',
+  'Typ om te zoeken': 'Vnesite iskalno besedilo',
+  'Toon dia': 'Prikaži diapozitiv',
+  'Verder vanaf het begin': 'Nadaljevanje od začetka',
+  'Verder vanaf het einde': 'Nadaljevanje od konca',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Ni rezultatov. Poskusite s krajšim iskalnim besedilom.',
+  'Treffer {n} van {m}': 'Zadetek {n} od {m}',
   'Quizvragen': 'Vprašanja kviza',
   'Met vragen': 'Z vprašanji',
   'Zonder vragen': 'Brez vprašanj',
@@ -2324,12 +2380,9 @@ const _dutchSourceAddSl = <String, String>{
   'Bewaren als kopie': 'Shrani kot kopijo',
   'Bewaren in document': 'Shrani v dokument',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: nedosegljiv',
   'Bewerken sluiten (Esc)': 'Zapri urejanje (Esc)',
   'Presenteer document…': 'Predstavi dokument…',
   'Presenteer document': 'Predstavi dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Označite, katere tabele je med predstavitvijo dovoljeno urejati v živo. Vsa druga vsebina ostane samo za branje.',
   'Extra ruimte': 'Dodaten prostor',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta opomba je daljša od strani — drsite za preostanek',
@@ -5137,8 +5190,6 @@ const _dutchSourceAddSl = <String, String>{
   'Markdown-broneditor': 'Markdown urejevalnik vira',
   'Niet toegepast': 'Ni uporabljeno',
   'Niet-toegepaste wijzigingen': 'Neuporabljene spremembe',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Uporabite ali zavrnite trenutne spremembe, preden preklopite obsege.',
   'Problemen gevonden': 'Najdene težave',
   'Schrijftips': 'Nasveti za pisanje',
   'Snel herstellen': 'Hitro si opomore',
@@ -6378,8 +6429,6 @@ const _dutchSourceAddSl = <String, String>{
       '1 diapozitiv zadržan zaradi svojega TLP',
   'slides achtergehouden door hun TLP':
       'diapozitivov zadržanih zaradi njihovega TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'Te prosojnice ne gredo zraven pri predstavljanju, izvozu ali v paketu. Zvišajte raven TLP predstavitve v Informacijah o predstavitvi, da jih vključite.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Vsi diapozitivi so zadržani zaradi svoje klasifikacije TLP — ni kaj prikazati.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7126,8 +7175,6 @@ const _dutchSourceAddSl = <String, String>{
   'seksuele geaardheid': 'spolna usmerjenost',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tej prosojnici je tudi identifikacijski podatek, zato je to mogoče povezati z osebo.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Posebna vrsta osebnih podatkov (GDPR čl. 9/10)',
   'gezondheidsgegeven': 'zdravstveni podatek',
   'strafrechtelijk gegeven': 'kazenskopravni podatek',
   'religie of levensovertuiging': 'vera ali prepričanje',
@@ -7188,8 +7235,6 @@ const _dutchSourceAddSl = <String, String>{
   'PERSOONSGEGEVENS': 'OSEBNI PODATKI',
   'Volg de presentatie': 'Sledi predstavitvi',
   'Weglaten uit tonen en exporteren': 'Izpusti iz prikaza in izvoza',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Razmisli o prekritju z [[dvojnimi oglatimi oklepaji]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Brez konteksta v besedilu to morda sploh ni osebni podatek.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':

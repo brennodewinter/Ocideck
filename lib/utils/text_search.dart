@@ -1,3 +1,5 @@
+export 'visible_markdown_search.dart';
+
 /// A character range within a string (start inclusive, end exclusive).
 class TextMatchRange {
   final int start;

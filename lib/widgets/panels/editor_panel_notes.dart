@@ -90,6 +90,9 @@ class _NotesFieldState extends State<_NotesField> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final search = DeckSearchTarget.of(context);
+    _ctrl.searchFieldId = 'notes.${widget.richTextPage}';
+    final found = search?.matches(_ctrl.searchFieldId) == true;
     return Material(
       color: AppTheme.notesBg,
       child: Theme(
@@ -103,9 +106,9 @@ class _NotesFieldState extends State<_NotesField> {
           // Binnen dezelfde slide verandert de sleutel niet, zodat handmatig
           // open- of dichtklappen blijft staan terwijl je typt.
           key: ValueKey(
-            'speaker-notes-tile-${widget.slide.id}-p${widget.richTextPage}',
+            'speaker-notes-tile-${widget.slide.id}-p${widget.richTextPage}-${found ? search!.signal : 0}',
           ),
-          initiallyExpanded: _noteText().trim().isNotEmpty,
+          initiallyExpanded: found || _noteText().trim().isNotEmpty,
           tilePadding: const EdgeInsets.symmetric(horizontal: 12),
           childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
           leading: const Icon(Icons.notes, size: 18, color: AppTheme.amber700),

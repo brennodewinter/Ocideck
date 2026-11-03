@@ -43,6 +43,33 @@ Widget? _costOverlayFor(
   );
 }
 
+Widget _presenterPreviewLayout(
+  bool compact,
+  double aspect, {
+  required Widget child,
+}) => compact
+    ? AspectRatio(aspectRatio: aspect, child: child)
+    : Expanded(child: child);
+
+Widget _presenterPanelLayout(bool compact, Widget current, Widget sidebar) {
+  if (compact) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [current, const SizedBox(height: 20), sidebar],
+      ),
+    );
+  }
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Expanded(flex: 3, child: current),
+      const SizedBox(width: 20),
+      SizedBox(width: 400, child: sidebar),
+    ],
+  );
+}
+
 extension _PresenterViews on _FullscreenPresenterState {
   /// A slide in the deck's aspect sized to fit within the given constraints.
   Widget _slideCanvas(Slide slide) {
@@ -238,156 +265,153 @@ extension _PresenterViews on _FullscreenPresenterState {
     final l10n = context.l10n;
     final total = widget.slides.length;
     final slide = widget.slides[_index.clamp(0, total - 1)];
-    final hasNext = _index < total - 1;
-    final nextSlide = hasNext ? widget.slides[_index + 1] : null;
+    final nextSlide = _index < total - 1 ? widget.slides[_index + 1] : null;
 
     return Container(
       color: PresenterPalette.bgDeepest,
       padding: const EdgeInsets.all(20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // ── Hoofdgebied: huidige slide ───────────────────────────────────
-          Expanded(
-            flex: 3,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _SectionLabel(l10n.d('HUIDIGE SLIDE')),
-                const SizedBox(height: 8),
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: GestureDetector(
-                      onTap: _tableEditMode || _timedManualAdvanceBlocked(this)
-                          ? null
-                          : _next,
-                      child: Stack(
-                        children: [
-                          Positioned.fill(child: _slideCanvas(slide)),
-                          // Blanco scherm dekt alleen het slidevlak; jouw
-                          // notities en klok blijven zichtbaar.
-                          if (_blank != _Blank.none)
-                            Positioned.fill(child: _blankFill()),
-                          if (_blank == _Blank.none)
-                            // De balk tikt 20× per seconde; alleen deze
-                            // builder herbouwt mee, niet de dia eronder
-                            // (#2633). In tijdmodus komt de waarde van de
-                            // sessieklok, anders van de doorschakeltimer.
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              height: 3,
-                              child: IgnorePointer(
-                                child: ValueListenableBuilder<double>(
-                                  valueListenable:
-                                      widget.presentationTiming.enabled
-                                      ? _timedSession.progress
-                                      : _progress,
-                                  builder: (context, p, _) => p > 0
-                                      ? LinearProgressIndicator(
-                                          value: p,
-                                          backgroundColor: Colors.white12,
-                                          color: _muted,
-                                          minHeight: 3,
-                                        )
-                                      : const SizedBox.shrink(),
-                                ),
-                              ),
-                            ),
-                          if (_showQuestionWaitBadge)
-                            _buildQuestionWaitBadge(context),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                _buildPresenterControls(total),
-                // Dual-screen: de dia staat op de beamer, dus de knop "Aanzetten
-                // in instellingen" mag niet op de dia zelf. In plaats daarvan
-                // staat hij hier, in de cockpit op het privéscherm van de
-                // presentator (#865). Alleen wanneer de huidige slide een online
-                // bron heeft en de instelling uit staat.
-                if (_dual &&
-                    !widget.allowRemoteMedia &&
-                    _slideHasRemoteMedia(slide))
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: _buildRemoteMediaHint(context),
-                  ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 20),
-
-          // ── Zijbalk: klok, volgende slide, notities ─────────────────────
-          SizedBox(
-            width: 400,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _buildClockBar(),
-                const SizedBox(height: 16),
-                _SectionLabel(l10n.d('VOLGENDE')),
-                const SizedBox(height: 8),
-                AspectRatio(
-                  aspectRatio: widget.slideAspect,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: nextSlide != null
-                        ? Container(
-                            color: Colors.black,
-                            child: SlidePreviewWidget(
-                              slideAspect: widget.slideAspect,
-                              slide: nextSlide,
-                              projectPath: widget.projectPath,
-                              themeProfile: widget.themeProfile,
-                              deckMarpStyle: widget.marpStyle,
-                              cockpitColorScheme: widget.cockpitColorScheme,
-                              allowRemoteMedia: widget.allowRemoteMedia,
-                              tlp: widget.tlp,
-                              organization: widget.organization,
-                              showClassificationWatermark:
-                                  widget.showClassificationWatermark,
-                              presentationMode: true,
-                              scopeCia: deckScopeCiaIndex(widget.slides),
-                              fitScaleOverride: sharedSplitFitScale(
-                                widget.slides,
-                                _index + 1,
-                                widget.themeProfile,
-                                widget.themeProfile.fontFamily,
-                                slideAspect: widget.slideAspect,
-                              ),
-                              splitRunPosition: splitRunPositionFor(
-                                widget.slides,
-                                _index + 1,
-                              ),
-                              improvementY01: widget.improvementY01,
-                            ),
-                          )
-                        : Container(
-                            color: PresenterPalette.bg2,
-                            alignment: Alignment.center,
-                            child: Text(
-                              l10n.d('Einde van de presentatie'),
-                              style: const TextStyle(
-                                color: _muted,
-                                fontSize: 13,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final compact = constraints.maxWidth < 1000;
+          final current = Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _SectionLabel(l10n.d('HUIDIGE SLIDE')),
+              const SizedBox(height: 8),
+              _presenterPreviewLayout(
+                compact,
+                widget.slideAspect,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: GestureDetector(
+                    onTap: _tableEditMode || _timedManualAdvanceBlocked(this)
+                        ? null
+                        : _next,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(child: _slideCanvas(slide)),
+                        // Blanco scherm dekt alleen het slidevlak; jouw
+                        // notities en klok blijven zichtbaar.
+                        if (_blank != _Blank.none)
+                          Positioned.fill(child: _blankFill()),
+                        if (_blank == _Blank.none)
+                          // De balk tikt 20× per seconde; alleen deze
+                          // builder herbouwt mee, niet de dia eronder
+                          // (#2633). In tijdmodus komt de waarde van de
+                          // sessieklok, anders van de doorschakeltimer.
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: 3,
+                            child: IgnorePointer(
+                              child: ValueListenableBuilder<double>(
+                                valueListenable:
+                                    widget.presentationTiming.enabled
+                                    ? _timedSession.progress
+                                    : _progress,
+                                builder: (context, p, _) => p > 0
+                                    ? LinearProgressIndicator(
+                                        value: p,
+                                        backgroundColor: Colors.white12,
+                                        color: _muted,
+                                        minHeight: 3,
+                                      )
+                                    : const SizedBox.shrink(),
                               ),
                             ),
                           ),
+                        if (_showQuestionWaitBadge)
+                          _buildQuestionWaitBadge(context),
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                _SectionLabel(l10n.d('NOTITIES')),
-                const SizedBox(height: 8),
+              ),
+              const SizedBox(height: 10),
+              _buildPresenterControls(total),
+              // Dual-screen: de dia staat op de beamer, dus de knop "Aanzetten
+              // in instellingen" mag niet op de dia zelf. In plaats daarvan
+              // staat hij hier, in de cockpit op het privéscherm van de
+              // presentator (#865). Alleen wanneer de huidige slide een online
+              // bron heeft en de instelling uit staat.
+              if (_dual &&
+                  !widget.allowRemoteMedia &&
+                  _slideHasRemoteMedia(slide))
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: _buildRemoteMediaHint(context),
+                ),
+            ],
+          );
+          final sidebar = Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildClockBar(),
+              const SizedBox(height: 16),
+              _SectionLabel(l10n.d('VOLGENDE')),
+              const SizedBox(height: 8),
+              _nextSlidePreview(nextSlide),
+              const SizedBox(height: 16),
+              _SectionLabel(l10n.d('NOTITIES')),
+              const SizedBox(height: 8),
+              if (compact)
+                SizedBox(height: 240, child: _buildNotes(slide))
+              else
                 Expanded(child: _buildNotes(slide)),
-              ],
-            ),
-          ),
-        ],
+            ],
+          );
+          return _presenterPanelLayout(compact, current, sidebar);
+        },
+      ),
+    );
+  }
+
+  Widget _nextSlidePreview(Slide? nextSlide) {
+    final l10n = context.l10n;
+    return AspectRatio(
+      aspectRatio: widget.slideAspect,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(6),
+        child: nextSlide != null
+            ? Container(
+                color: Colors.black,
+                child: SlidePreviewWidget(
+                  slideAspect: widget.slideAspect,
+                  slide: nextSlide,
+                  projectPath: widget.projectPath,
+                  themeProfile: widget.themeProfile,
+                  deckMarpStyle: widget.marpStyle,
+                  cockpitColorScheme: widget.cockpitColorScheme,
+                  allowRemoteMedia: widget.allowRemoteMedia,
+                  tlp: widget.tlp,
+                  organization: widget.organization,
+                  showClassificationWatermark:
+                      widget.showClassificationWatermark,
+                  presentationMode: true,
+                  scopeCia: deckScopeCiaIndex(widget.slides),
+                  fitScaleOverride: sharedSplitFitScale(
+                    widget.slides,
+                    _index + 1,
+                    widget.themeProfile,
+                    widget.themeProfile.fontFamily,
+                    slideAspect: widget.slideAspect,
+                  ),
+                  splitRunPosition: splitRunPositionFor(
+                    widget.slides,
+                    _index + 1,
+                  ),
+                  improvementY01: widget.improvementY01,
+                ),
+              )
+            : Container(
+                color: PresenterPalette.bg2,
+                alignment: Alignment.center,
+                child: Text(
+                  l10n.d('Einde van de presentatie'),
+                  style: const TextStyle(color: _muted, fontSize: 13),
+                ),
+              ),
       ),
     );
   }

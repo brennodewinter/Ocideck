@@ -511,23 +511,36 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
 /// probleem verplaatst in plaats van opgelost.
 String _formatPrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
   final rule = privacyRuleLabel(l10n, issue.args['rule'] ?? '');
-  final sample = issue.args['sample'] ?? '';
+  // #2739: de zin noemt soort én plek, en wat de klik doet. Het masker is
+  // weg — twee adressen met dezelfde eerste/laatste letter lazen er als één —
+  // en de blokhaakles ook; die hoort in de handleiding.
+  final where = slideQualityFieldLabel(l10n, issue);
+  final sentence =
+      (where == null
+              ? l10n.d(
+                  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.',
+                )
+              : l10n.d(
+                  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.',
+                ))
+          .replaceAll('{regel}', rule)
+          .replaceAll('{veld}', where?.toLowerCase() ?? '');
   final suffix = issue.severity == MarkdownValidationSeverity.informational
       ? l10n.d(
           ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.',
         )
-      : l10n.d(' Overweeg dit te redigeren met [[dubbele blokhaken]].');
+      : '';
   // Een API-sleutel is geen persoonsgegeven maar een geheim, en een diagnose is
   // geen gewoon persoonsgegeven maar een bijzonder. Ze allemaal hetzelfde noemen
   // maakt de melding onbegrijpelijk voor precies wie hem moet lezen.
   final prefix = switch (issue.kind) {
     SlideQualityIssueKind.privacySecret => l10n.d('Mogelijk geheim'),
     SlideQualityIssueKind.privacySpecialCategory => l10n.d(
-      'Bijzonder persoonsgegeven (AVG art. 9/10)',
+      'Bijzonder persoonsgegeven',
     ),
     _ => l10n.d('Mogelijk persoonsgegeven'),
   };
-  return '$prefix — $rule ($sample).${_privacySuffix(l10n, issue, suffix)}';
+  return '$prefix — $sentence${_privacySuffix(l10n, issue, suffix)}';
 }
 
 /// De staart van de melding.

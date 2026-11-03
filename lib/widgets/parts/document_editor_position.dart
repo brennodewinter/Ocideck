@@ -48,6 +48,18 @@ class _DocPosition {
       _state._applyingExternal = false;
     }
     _state._rebuild(() => _state._viewMode = mode);
+    final find = _state._find;
+    if (find.visible) {
+      find.refreshSearchScope(
+        showReplace: mode == _DocViewMode.pages ? false : null,
+      );
+    }
+    if (find.visible && find.hasRevealedMatch && find.matches.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_state.mounted) _state._jumpToMatch(find.matches[find.matchIndex]);
+      });
+      return;
+    }
     if (mode != _DocViewMode.pages) {
       // Het schrijfvlak bestaat pas ná deze opbouw; focussen kan dus niet
       // eerder, en zonder [reveal] zou een cursor die goed staat toch

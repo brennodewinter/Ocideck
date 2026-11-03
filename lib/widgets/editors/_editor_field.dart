@@ -54,9 +54,15 @@ void applyQualitySpanSelection(
 mixin EditorTextControllers<T extends StatefulWidget> on State<T> {
   final List<EditorTextController> _editorControllers = [];
 
-  EditorTextController newController(String text, VoidCallback onChanged) {
-    final controller = EditorTextController(text: text)
-      ..addTextListener(onChanged);
+  EditorTextController newController(
+    String text,
+    VoidCallback onChanged, {
+    String? searchFieldId,
+  }) {
+    final controller = EditorTextController(
+      text: text,
+      searchFieldId: searchFieldId,
+    )..addTextListener(onChanged);
     _editorControllers.add(controller);
     return controller;
   }
@@ -692,7 +698,10 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
   @override
   void initState() {
     super.initState();
-    _ctrl = EditorTextController(text: widget.caption);
+    _ctrl = EditorTextController(
+      text: widget.caption,
+      searchFieldId: widget.captionField,
+    );
     _ctrl.addTextListener(_onChanged);
     _loadStoredCaption();
     WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());

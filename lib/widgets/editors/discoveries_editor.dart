@@ -81,7 +81,7 @@ class _DiscoveriesEditorState extends State<DiscoveriesEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = EditorTextController(text: spec.title)
+    _title = EditorTextController(text: spec.title, searchFieldId: 'title')
       ..addTextListener(_onChanged);
     _discoveries = spec.discoveries
         .map((d) => _DiscoveryControllers(d, _onChanged))
@@ -145,6 +145,12 @@ class _DiscoveriesEditorState extends State<DiscoveriesEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _discoveries.length; i++) {
+      _discoveries[i].name.searchFieldId = 'tableRows.${i + 1}.0';
+      _discoveries[i].kind.searchFieldId = 'tableRows.${i + 1}.1';
+      _discoveries[i].days.searchFieldId = 'tableRows.${i + 1}.2';
+      _discoveries[i].owner.searchFieldId = 'tableRows.${i + 1}.3';
+    }
     final l10n = context.l10n;
     final full = _discoveries.length >= discoveriesMaxEntries;
 

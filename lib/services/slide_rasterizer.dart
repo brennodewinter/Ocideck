@@ -204,17 +204,13 @@ class SlideRasterizer {
     final logo = _resolvedRasterAsset(rawLogo, projectPath);
     final rawBrandStrip = themeProfile.brandStripPath?.trim() ?? '';
     final brandStrip = _resolvedRasterAsset(rawBrandStrip, projectPath);
-    // Élke afbeelding van de dia wordt voorgeladen, ook een `![…](…)` in de
-    // vrije tekst: zonder precache is de afbeelding nog niet gedecodeerd op het
-    // moment dat het beeldje wordt vastgelegd, en belandt er een leeg vak in de
-    // PDF of PPTX.
-    final allPaths = <String>{
-      ?logo,
-      ?brandStrip,
-      for (final slide in slides)
-        for (final path in slideImagePaths(slide))
-          ?_resolveOrMem(path, projectPath),
-    };
+    // Chrome-afbeeldingen (logo, merkstrook) komen in elke dia voor: die
+    // precachen we eenmaal vooraf. De afbeeldingen van een dia zelf precachen
+    // we per dia, vlak voor haar capture (#2726) — het hele deck vooraf
+    // laden joeg de eerste tientallen beelden uit de cache nog vóór hun
+    // vastlegging (64 × 16 MiB ≈ het hele plafond), waarna de capture ze
+    // opnieuw decodéerde of na 12 vuile frames een leeg vlak vastlegde.
+    final chromePaths = <String>{?logo, ?brandStrip};
 
     final repaintKey = GlobalKey();
     final hostKey = GlobalKey<_RasterSlideHostState>();
@@ -238,7 +234,7 @@ class SlideRasterizer {
       overlay.insert(entry);
       await _precacheForRaster(
         context,
-        allPaths,
+        chromePaths,
         signature,
         frameTimeout,
         onStage,
@@ -252,6 +248,15 @@ class SlideRasterizer {
           break;
         }
         onStage?.call('prepare', i, slides.length);
+        if (!context.mounted) break;
+        // Per dia precachen: alleen de beelden van díe dia leven nu in de
+        // cache — bij 150 fotodia's is dat ~16 MiB in plaats van het volle
+        // gibibyte (#2726).
+        await _precachePathsBatched(context, {
+          for (final path in slideImagePaths(slides[i]))
+            ?_resolveOrMem(path, projectPath),
+        }, onProgress: (done, total) => onStage?.call('precache', done, total));
+        if (!context.mounted) break;
         // Meet vóór het tonen hoeveel renders al liepen: alleen renders die
         // deze dia zelf afvuurt mag de capture ophouden (#2358).
         final pendingBaseline = MermaidRenderService.instance.pendingRenders;

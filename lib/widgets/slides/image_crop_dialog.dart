@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
@@ -169,6 +170,37 @@ ImageProvider? _cropProvider(String imagePath, String? projectPath) {
   return cappedFileImage(File(resolved));
 }
 
+/// Decodeer, verklein naar de 4096-grens, draai en codeer — in één gang op
+/// een achtergrond-isolate (#2728). `format`: 0=png, 1=jpg, 2=gif.
+///
+/// De grens is die van de renderlaag: groter dan 4096 op een as wordt eerst
+/// verkleind, zodat de UI-isolate nooit een ~100 MiB bitmap plus rotatiebuffer
+/// vasthoudt én de schrijver geen beeld oplevert dat de rest van de app
+/// toch zou weigeren.
+Uint8List? _rotateEncodeOffUi((Uint8List, int, int) args) {
+  try {
+    final (bytes, turns, format) = args;
+    var work = img.decodeImage(bytes);
+    if (work == null) return null;
+    if (work.width > kMaxImageDecodeDimension ||
+        work.height > kMaxImageDecodeDimension) {
+      work = img.copyResize(
+        work,
+        width: work.width >= work.height ? kMaxImageDecodeDimension : null,
+        height: work.height > work.width ? kMaxImageDecodeDimension : null,
+      );
+    }
+    final rotated = img.copyRotate(work, angle: turns * 90.0);
+    return Uint8List.fromList(switch (format) {
+      1 => img.encodeJpg(rotated),
+      2 => img.encodeGif(rotated),
+      _ => img.encodePng(rotated),
+    });
+  } on Object {
+    return null;
+  }
+}
+
 class _ImageCropDialog extends StatefulWidget {
   final String imagePath;
   final String? projectPath;
@@ -286,19 +318,59 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     if (!_canRotate) return;
     if (WebAssetStore.isMemPath(widget.imagePath)) {
       _originalBytes = WebAssetStore.bytesFor(widget.imagePath);
-    } else {
-      final resolved = resolveContainedRealPath(
-        widget.imagePath,
-        widget.projectPath,
-      );
-      if (resolved != null) {
-        try {
-          _originalBytes = File(resolved).readAsBytesSync();
-        } on Object {
-          _originalBytes = null;
-        }
-      }
+      return;
     }
+    final resolved = resolveContainedRealPath(
+      widget.imagePath,
+      widget.projectPath,
+    );
+    if (resolved == null) return;
+    // Asynchroon: een foto van tientallen MB lezen hoort niet op de
+    // UI-isolate (#2728).
+    unawaited(
+      File(resolved)
+          .readAsBytes()
+          .then((bytes) {
+            if (!mounted) return;
+            setState(() {
+              _originalBytes = bytes;
+              // #1854: de header-maat komt met dezelfde bytes — goedkoop en
+              // hij staat er eerder dan de stream-listener van de preview.
+              final dims = imageDimensionsFromBytes(bytes);
+              if (dims != null) {
+                _intrinsic = Size(
+                  dims.width.toDouble(),
+                  dims.height.toDouble(),
+                );
+              }
+              // De voorvertoning wisselt naar de geheugenprovider: die houdt
+              // het bestand niet vast zoals FileImage op Windows deed.
+              _stream?.removeListener(_listener!);
+              _stream = null;
+              _listener = null;
+              _provider = _voorvertoning();
+              if (_provider != null) _listenToStream(_provider!);
+            });
+          })
+          .catchError((Object _) => _originalBytes = null),
+    );
+  }
+
+  /// Het resultaat van de draai — één geëncodeerd beeld dat zowel de
+  /// voorvertoning als het wegschrijven voedt (#2728).
+  Uint8List? _rotatedBytes;
+
+  /// Een lopende draaibeurt, of `null`. De schrijver wacht hierop in plaats
+  /// van zelf nog eens te decoderen.
+  Future<void>? _rotationJob;
+  bool _rotationBusy = false;
+
+  /// Formaatindex voor [_rotateEncodeOffUi]: 0=png, 1=jpg, 2=gif.
+  int get _rotateFormat {
+    final path = widget.imagePath;
+    if (path.endsWith('.jpg') || path.endsWith('.jpeg')) return 1;
+    if (path.endsWith('.gif')) return 2;
+    return 0;
   }
 
   void _rotate(int quarterTurns) {
@@ -307,29 +379,32 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     setState(() {
       _rotationQuarterTurns = (_rotationQuarterTurns + quarterTurns) % 4;
       if (_rotationQuarterTurns < 0) _rotationQuarterTurns += 4;
-      // Decodeer, roteer, codeer opnieuw. Behoud het originele formaat.
-      final decoded = img.decodeImage(original);
-      if (decoded == null) return;
-      final rotated = img.copyRotate(
-        decoded,
-        angle: _rotationQuarterTurns * 90.0,
-      );
-      final encoded =
-          widget.imagePath.endsWith('.jpg') ||
-              widget.imagePath.endsWith('.jpeg')
-          ? img.encodeJpg(rotated)
-          : widget.imagePath.endsWith('.gif')
-          ? img.encodeGif(rotated)
-          : img.encodePng(rotated);
-      final bytes = Uint8List.fromList(encoded);
-      // Ververs de preview met de geroteerde bytes.
-      _stream?.removeListener(_listener!);
-      _stream = null;
-      _listener = null;
-      _intrinsic = null;
-      _provider = cappedMemoryImage(bytes);
-      _listenToStream(_provider!);
+      _rotationBusy = true;
     });
+    // Keten achter een lopende beurt: twee snelle tikken is 180°, niet één
+    // stil weggegooide tik. De compute draait op een achtergrond-isolate —
+    // een 6000×4000-bron was ~92 MiB aan bitmap plus rotatiebuffer, midden in
+    // setState (#2728).
+    final turns = _rotationQuarterTurns;
+    _rotationJob = (_rotationJob ?? Future<void>.value())
+        .then(
+          (_) => compute(_rotateEncodeOffUi, (original, turns, _rotateFormat)),
+        )
+        .then((bytes) {
+          if (!mounted) return;
+          setState(() {
+            _rotationBusy = false;
+            if (bytes != null) {
+              _rotatedBytes = bytes;
+              _stream?.removeListener(_listener!);
+              _stream = null;
+              _listener = null;
+              _intrinsic = null;
+              _provider = cappedMemoryImage(bytes);
+              _listenToStream(_provider!);
+            }
+          });
+        });
   }
 
   /// Schrijf de geroteerde afbeelding terug naar het bestand (of `mem:`-pad).
@@ -354,30 +429,21 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
   /// Synchroon, zodat de dialoog direct kan sluiten — de afbeelding is klein en
   /// lokaal. Elke uitgang die niets schrijft zet [lastRotationWriteFailure];
   /// zie daar waarom dat nodig was.
-  String? _writeRotatedCopy() {
+  Future<String?> _writeRotatedCopy() async {
     lastRotationWriteFailure = null;
+    // Een lopende draaibeurt eerst afwachten — de uitkomst deelt de schrijver
+    // in plaats van zelf nog eens te decoderen (#2728).
+    await _rotationJob;
     if (_rotationQuarterTurns == 0) return null;
     if (_originalBytes == null) {
       lastRotationWriteFailure = 'de oorspronkelijke bytes zijn nooit geladen';
       return null;
     }
-    final original = _originalBytes!;
-    final decoded = img.decodeImage(original);
-    if (decoded == null) {
+    final bytes = _rotatedBytes;
+    if (bytes == null) {
       lastRotationWriteFailure = 'de afbeelding was niet te decoderen';
       return null;
     }
-    final rotated = img.copyRotate(
-      decoded,
-      angle: _rotationQuarterTurns * 90.0,
-    );
-    final encoded =
-        widget.imagePath.endsWith('.jpg') || widget.imagePath.endsWith('.jpeg')
-        ? img.encodeJpg(rotated)
-        : widget.imagePath.endsWith('.gif')
-        ? img.encodeGif(rotated)
-        : img.encodePng(rotated);
-    final bytes = Uint8List.fromList(encoded);
 
     if (WebAssetStore.isMemPath(widget.imagePath)) {
       // Web kent geen bestandssysteem: dezelfde regel, andere opslag. `put`
@@ -726,13 +792,15 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton.icon(
-                      onPressed: () => _rotate(-1),
+                      // Zolang een draaibeurt loopt is de knop uit — een
+                      // tweede tik wordt anders stil weggegooid.
+                      onPressed: _rotationBusy ? null : () => _rotate(-1),
                       icon: const Icon(Icons.rotate_left, size: 20),
                       label: Text(l10n.d('Linksom')),
                     ),
                     const SizedBox(width: 16),
                     TextButton.icon(
-                      onPressed: () => _rotate(1),
+                      onPressed: _rotationBusy ? null : () => _rotate(1),
                       icon: const Icon(Icons.rotate_right, size: 20),
                       label: Text(l10n.d('Rechtsom')),
                     ),
@@ -779,8 +847,9 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
             child: Text(l10n.d('Annuleren')),
           ),
           FilledButton(
-            onPressed: () {
-              final rotated = _writeRotatedCopy();
+            onPressed: () async {
+              final rotated = await _writeRotatedCopy();
+              if (!context.mounted) return;
               Navigator.of(context).pop(
                 ImageCropResult(_size, _fx, _fy, rotatedImagePath: rotated),
               );

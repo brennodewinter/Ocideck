@@ -19,6 +19,7 @@ import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../utils/text_search.dart';
+import '../../utils/deck_source_search.dart';
 import '../markdown_editor/markdown_editor_actions.dart';
 import '../markdown_editor/markdown_editor_theme.dart';
 import '../markdown_editor/markdown_editor_toolbar.dart';
@@ -116,6 +117,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   /// met de documenteditor; dit scherm levert alleen de controller en waar de
   /// cursor naartoe springt.
   late final FindReplaceSession _find;
+  DeckSourceSearchIndex? _searchIndex;
+  bool _searchNotes = false;
 
   @override
   void initState() {
@@ -131,7 +134,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       onChanged: () {
         if (mounted) setState(() {});
       },
-      onReveal: _jumpToRange,
+      onReveal: (range) => _jumpToSourceRange(this, range),
+      searchMatches: (source, query, {caseSensitive = false}) =>
+          _sourceSearchIndex(this).matches(query, caseSensitive: caseSensitive),
     );
     _scrollController = ScrollController();
     _editorFocusNode = FocusNode();
@@ -223,7 +228,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       if (target != null) {
         final targetStart = target.start;
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) _jumpToRange(TextMatchRange(targetStart, targetStart));
+          if (mounted) {
+            _jumpToSourceRange(this, TextMatchRange(targetStart, targetStart));
+          }
         });
       }
     }
@@ -282,10 +289,11 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   void _scheduleValidation() {
     _validationTimer?.cancel();
     _validationPending = true;
-    // De bundel draait op een achtergrond-isolate (#2713): drie volledig-
-    // bronscans van samen ~42 ms op een groot deck hoorden niet op de
-    // UI-thread, ook niet pas na de debounce. Een verlopen ronde (er was
-    // alweer getypt, of de widget is weg) wordt bij afgifte weggegooid.
+    // De bundel draait native op een achtergrond-isolate (#2713): drie
+    // volledig-bronscans van samen ~42 ms op een groot deck hoorden niet op de
+    // UI-thread, ook niet pas na de debounce; op web blijft hij op de main
+    // thread (#2764). Een verlopen ronde (er was alweer getypt, of de widget
+    // is weg) wordt bij afgifte weggegooid.
     final args = (
       source: _ctrl.text,
       compatContext: _marpCompatEnabled ? _compatContext : null,
@@ -349,24 +357,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     for (var i = 0; i < index; i++) {
       offset += lines[i].length + 1;
     }
-    _jumpToRange(TextMatchRange(offset, offset + lines[index].length));
-  }
-
-  void _jumpToRange(TextMatchRange range) {
-    _ctrl.selection = TextSelection(
-      baseOffset: range.start,
-      extentOffset: range.end,
+    _jumpToSourceRange(
+      this,
+      TextMatchRange(offset, offset + lines[index].length),
     );
-    final textBefore = _ctrl.text.substring(0, range.start);
-    final line = '\n'.allMatches(textBefore).length;
-    final target = line * _lineHeight;
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(
-        target.clamp(0.0, _scrollController.position.maxScrollExtent),
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOut,
-      );
-    }
   }
 
   Future<bool> _confirmApplyWithIssues(
@@ -419,13 +413,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               ),
               child: Text(l10n.d('Terug naar editor')),
             ),
-            TextButton(
-              onPressed: () => Navigator.pop(
-                ctx,
-                const _ApplyChoiceResult(_ApplyChoice.cancel),
-              ),
-              child: Text(l10n.t('cancel')),
-            ),
+
             ElevatedButton(
               onPressed: () => Navigator.pop(
                 ctx,
@@ -462,31 +450,40 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       widget.onExitMarkdown();
       return;
     }
-    final discard = await showDialog<bool>(
+    // #2742: drie keuzes i.p.v. alleen verwerpen — "Toepassen en terug" is
+    // de voorgeselecteerde knop, verder typen of terug zonder deze tekst.
+    final choice = await showDialog<int>(
       context: context,
       builder: (ctx) {
         final l10n = ctx.l10n;
         return AlertDialog(
           title: Text(l10n.d('Niet-toegepaste wijzigingen')),
-          content: Text(
-            l10n.d(
-              'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?',
-            ),
-          ),
+          content: Text(l10n.d('Je wijzigingen zijn nog niet toegepast.')),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(ctx, false),
-              child: Text(l10n.d('Doorgaan met bewerken')),
+              onPressed: () => Navigator.pop(ctx, 0),
+              child: Text(l10n.d('Verder typen')),
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(ctx, true),
-              child: Text(l10n.d('Wijzigingen verwerpen')),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, 1),
+              child: Text(l10n.d('Terug zonder deze wijzigingen')),
+            ),
+            FilledButton(
+              autofocus: true,
+              onPressed: () => Navigator.pop(ctx, 2),
+              child: Text(l10n.d('Toepassen en terug')),
             ),
           ],
         );
       },
     );
-    if (discard == true && mounted) widget.onExitMarkdown();
+    if (!mounted) return;
+    if (choice == 1) {
+      widget.onExitMarkdown();
+    } else if (choice == 2) {
+      await _applyMarkdown();
+      widget.onExitMarkdown();
+    }
   }
 
   void _formatSelection(String before, String after) {
@@ -531,12 +528,34 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   void _requestScopeChange(MarkdownScope scope) {
     if (scope == widget.scope) return;
     if (_isDirty) {
+      final l10n = context.l10n;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            context.l10n.d(
-              'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.',
-            ),
+          content: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.d(
+                    'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.',
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  _applyMarkdown();
+                  widget.onScopeChanged(scope);
+                },
+                child: Text(l10n.d('Toepassen')),
+              ),
+              TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  widget.onScopeChanged(scope);
+                },
+                child: Text(l10n.d('Verwerpen')),
+              ),
+            ],
           ),
         ),
       );
@@ -667,14 +686,24 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     }
   }
 
+  /// Ctrl/Cmd+Tab: naar de volgende focusbare plek — de Tab-zelf springt
+  /// hier immers niet verder, hij springt tekst in.
+  void _focusNextPanel() => FocusManager.instance.primaryFocus?.nextFocus();
+
   KeyEventResult _handleEscape(FocusNode node, KeyEvent event) {
-    if (!_find.visible) return KeyEventResult.ignored;
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
-    if (event.logicalKey == LogicalKeyboardKey.escape) {
+    if (event.logicalKey != LogicalKeyboardKey.escape) {
+      return KeyEventResult.ignored;
+    }
+    if (_find.visible) {
       _find.close();
       return KeyEventResult.handled;
     }
-    return KeyEventResult.ignored;
+    // #2729: zonder open zoekbalk is Escape dé uitweg — Tab is hier een
+    // bewerkingscommando (inspringen), dus wie met het toetsenbord in het
+    // veld zit kan anders niet bij een volgend paneel komen.
+    node.nextFocus();
+    return KeyEventResult.handled;
   }
 
   @override
@@ -734,6 +763,12 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             MarkdownEditorActions.indentSelection(_ctrl),
         const SingleActivator(LogicalKeyboardKey.tab, shift: true): () =>
             MarkdownEditorActions.outdentSelection(_ctrl),
+        // Uit het bewerkveld zonder de tekst te wijzigen (#2729): Ctrl/Cmd+Tab
+        // springt naar de volgende focusbare plek, net als Escape.
+        const SingleActivator(LogicalKeyboardKey.tab, control: true):
+            _focusNextPanel,
+        const SingleActivator(LogicalKeyboardKey.tab, meta: true):
+            _focusNextPanel,
       },
       child: Focus(
         onKeyEvent: _handleEscape,
@@ -798,6 +833,12 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 showReplace: _find.showReplace,
                 matchCount: _find.matchCount,
                 matchIndex: _find.matchIndex,
+                resultContexts: [
+                  for (final match in _find.matches)
+                    _searchResultContext(this, match),
+                ],
+                onSelectMatch: _find.selectMatch,
+                wrapDirection: _find.wrapDirection,
                 onQueryChanged: _find.onQueryFieldChanged,
                 onReplaceChanged: _find.setReplacement,
                 onCaseSensitiveChanged: _find.setCaseSensitive,
@@ -807,6 +848,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 onReplaceAll: _find.replaceAll,
                 onClose: _find.close,
               ),
+            if (_find.visible && !_find.showReplace) _sourceNotesOption(this),
             const Divider(height: 1),
             _editorArea(lineCount, issueLines),
           ],
@@ -819,79 +861,115 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     return Container(
       color: AppTheme.warnSurface,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Row(
-        children: [
-          // Niet-interactief status-badge: het <>-icoon met het woord 'Bron'
-          // maakt duidelijk dat je in de rauwe markdown-bron zit — een label,
-          // geen knop (#1187). Een kale icoon las tussen de echte icoonknoppen
-          // in deze balk als iets klikbaars. Hetzelfde woord 'Bron' als de chip
-          // die hierheen leidt, dus instap en bestemming dragen één signaal.
-          Icon(Icons.code, size: 14, color: AppTheme.warningFg),
-          const SizedBox(width: 5),
-          Text(
-            l10n.d('Bron'),
-            style: TextStyle(
-              fontSize: 11.5,
-              fontWeight: FontWeight.w600,
-              color: AppTheme.warningFg,
-            ),
-          ),
-          const SizedBox(width: 10),
-          Flexible(
-            child: _MarkdownScopeToggle(
-              scope: widget.scope,
-              slideNumber: widget.slideNumber,
-              slideCount: widget.slideCount,
-              onChanged: _requestScopeChange,
-            ),
-          ),
-          const Spacer(),
-          _DocumentStatus(
-            dirty: _isDirty,
-            validationPending: _validationPending,
-            validation: _validation,
-            onPressed: _isDirty ? _showSourceDiff : null,
-          ),
-          const SizedBox(width: 6),
-          _MarkdownOutlineButton(
-            entries: _sourceDocument.outline,
-            onSelected: _jumpToLine,
-          ),
-          IconButton(
-            onPressed: _openCommandPalette,
-            icon: const Icon(Icons.add_circle_outline, size: 16),
-            tooltip: l10n.d('Invoegen of opmaken (Ctrl/Cmd+Spatie)'),
-            visualDensity: VisualDensity.compact,
-            color: AppTheme.warningFg,
-          ),
-          // Zoeken zat er al — op Ctrl/Cmd+F, en via het menu en de
-          // opdrachtenbalk — maar nergens zichtbaar in de markdown-weergave
-          // zelf. Zonder knop weet niemand dat het kan: "in markdown kan ik niet
-          // zoeken" was de klacht, terwijl de balk er wél was. Een icoonknop en
-          // geen tekstknop, want de kopregel is smal: het vergrootglas is een
-          // vertrouwd zoek-signaal en de tooltip vertelt de rest.
-          IconButton(
-            onPressed: () => _openFind(showReplace: false),
-            icon: const Icon(Icons.search, size: 16),
-            tooltip: l10n.d('Zoeken'),
-            visualDensity: VisualDensity.compact,
-            color: AppTheme.warningFg,
-          ),
-          TextButton.icon(
-            onPressed: _runValidation,
-            icon: const Icon(Icons.rule, size: 16),
-            label: Text(l10n.d('Controleren')),
-          ),
-          TextButton(
-            onPressed: _applyMarkdown,
-            child: Text(l10n.d('Toepassen')),
-          ),
-          TextButton(
-            onPressed: _requestExitMarkdown,
-            child: Text(l10n.t('cancel')),
-          ),
-        ],
+      // Bij ~880px en smaller past de knoppenreeks niet meer — scrollen houdt
+      // alle knoppen bereikbaar in plaats van ze weg te duwen (#2742).
+      child: LayoutBuilder(
+        builder: (context, box) =>
+            _modeBannerRow(l10n, scrollable: box.maxWidth < 880),
       ),
+    );
+  }
+
+  Widget _modeBannerRow(AppLocalizations l10n, {bool scrollable = false}) {
+    // De scope-toggle is zelf een Expanded — hij kan dus niet ín een
+    // scrollblad (unbounded), maar wel naast een scrollblad. Daarom blijft
+    // hij naast de actieknoppen altijd zichtbaar; alleen de status-zijde
+    // scrolt (#2742).
+    final scopeToggle = _MarkdownScopeToggle(
+      scope: widget.scope,
+      slideNumber: widget.slideNumber,
+      slideCount: widget.slideCount,
+      onChanged: _requestScopeChange,
+    );
+    final buttons = <Widget>[
+      TextButton.icon(
+        onPressed: _runValidation,
+        icon: const Icon(Icons.rule, size: 16),
+        label: Text(l10n.d('Controleren')),
+      ),
+      TextButton(onPressed: _applyMarkdown, child: Text(l10n.d('Toepassen'))),
+      TextButton(
+        onPressed: _requestExitMarkdown,
+        child: Text(l10n.d('Terug naar de dia\'s')),
+      ),
+    ];
+    final statusLeft = <Widget>[
+      // Niet-interactief status-badge: het <>-icoon met het woord 'Bron'
+      // maakt duidelijk dat je in de rauwe markdown-bron zit — een label,
+      // geen knop (#1187). Een kale icoon las tussen de echte icoonknoppen
+      // in deze balk als iets klikbaars. Hetzelfde woord 'Bron' als de chip
+      // die hierheen leidt, dus instap en bestemming dragen één signaal.
+      Icon(Icons.code, size: 14, color: AppTheme.warningFg),
+      const SizedBox(width: 5),
+      Text(
+        l10n.d('Bron'),
+        style: TextStyle(
+          fontSize: 11.5,
+          fontWeight: FontWeight.w600,
+          color: AppTheme.warningFg,
+        ),
+      ),
+      const SizedBox(width: 10),
+    ];
+    final statusRight = <Widget>[
+      _DocumentStatus(
+        dirty: _isDirty,
+        validationPending: _validationPending,
+        validation: _validation,
+        onPressed: _isDirty ? _showSourceDiff : null,
+      ),
+      const SizedBox(width: 6),
+      _MarkdownOutlineButton(
+        entries: _sourceDocument.outline,
+        onSelected: _jumpToLine,
+      ),
+      IconButton(
+        onPressed: _openCommandPalette,
+        icon: const Icon(Icons.add_circle_outline, size: 16),
+        tooltip: l10n.d('Invoegen of opmaken (Ctrl/Cmd+Spatie)'),
+        visualDensity: VisualDensity.compact,
+        color: AppTheme.warningFg,
+      ),
+      // Zoeken zat er al — op Ctrl/Cmd+F, en via het menu en de
+      // opdrachtenbalk — maar nergens zichtbaar in de markdown-weergave
+      // zelf. Zonder knop weet niemand dat het kan: "in markdown kan ik niet
+      // zoeken" was de klacht, terwijl de balk er wél was. Een icoonknop en
+      // geen tekstknop, want de kopregel is smal: het vergrootglas is een
+      // vertrouwd zoek-signaal en de tooltip vertelt de rest.
+      IconButton(
+        onPressed: () => _openFind(showReplace: false),
+        icon: const Icon(Icons.search, size: 16),
+        tooltip: l10n.d('Zoeken'),
+        visualDensity: VisualDensity.compact,
+        color: AppTheme.warningFg,
+      ),
+    ];
+    if (scrollable) {
+      // Bij smalte gaan de actieknoppen naar een tweede regel — zonder
+      // scrollen, dus alles blijft zichtbaar en bereikbaar (#2742).
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              ...statusLeft,
+              Flexible(child: scopeToggle),
+              const Spacer(),
+              ...statusRight,
+            ],
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: buttons),
+        ],
+      );
+    }
+    return Row(
+      children: [
+        ...statusLeft,
+        Flexible(child: scopeToggle),
+        const Spacer(),
+        ...statusRight,
+        ...buttons,
+      ],
     );
   }
 

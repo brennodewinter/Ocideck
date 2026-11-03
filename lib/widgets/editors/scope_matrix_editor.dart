@@ -76,7 +76,8 @@ class _ScopeMatrixEditorState extends ConsumerState<ScopeMatrixEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = EditorTextController(text: spec.title)..addTextListener(_emit);
+    _title = EditorTextController(text: spec.title, searchFieldId: 'title')
+      ..addTextListener(_emit);
     _rows = spec.rows.map((r) => _RowControllers(r, _emit)).toList();
     if (_rows.isEmpty) _rows = [_RowControllers(const ScopeRow(), _emit)];
   }
@@ -118,6 +119,10 @@ class _ScopeMatrixEditorState extends ConsumerState<ScopeMatrixEditor> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < _rows.length; i++) {
+      _rows[i].object.searchFieldId = 'tableRows.${i + 1}.0';
+      _rows[i].note.searchFieldId = 'tableRows.${i + 1}.4';
+    }
     final l10n = context.l10n;
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,

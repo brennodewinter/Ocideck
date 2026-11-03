@@ -14,8 +14,6 @@ const _stringsSv = {
   'more': 'Mer',
   'export': 'Exportera',
   'exportReady': 'Exportera (PDF/PPTX/HTML)',
-  'exportNeedsSave': 'Spara presentationen innan du exporterar',
-  'exportNeedsClean': 'Spara dina ändringar innan du exporterar',
   'saved': 'Sparad',
   'unsaved': 'Osparad',
   'unsavedChanges': 'Spara ändringar (Ctrl/Cmd+S)',
@@ -687,8 +685,6 @@ const _dutchSourceSv = {
   'Eerste · laatste slide': 'Första · sista bilden',
   'Slide-overzicht': 'Bildöversikt',
   'Slide-overzicht (pijltjes + Enter)': 'Bildöversikt (pilar + Enter)',
-  'Presenter view (notities, klok)': 'Presentatörsvy (anteckningar, klocka)',
-  'Scherm wisselen (meerdere schermen)': 'Byt skärm (flera skärmar)',
   'Zwart · wit scherm': 'Svart · vit skärm',
   'Automatische modus aan/uit': 'Automatiskt läge på/av',
   'Herhalen (loop) aan/uit': 'Upprepa (loop) på/av',
@@ -711,11 +707,6 @@ const _dutchSourceSv = {
       'Anteckningar för mottagaren under en kurs',
   'Mijn notities aan/uit': 'Växla mina anteckningar på/av',
   'Wissel scherm (S)': 'Byt skärm (S)',
-  'Kon niet van scherm wisselen.': 'Kunde inte byta skärm.',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H teckenförklaring · G översikt · B/W svart/vit · R tid · Esc stopp',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · H teckenförklaring · S skärm · G översikt · B/W svart/vit · R tid · Esc stopp',
   'pijltjes + Enter of klik om te springen':
       'pilar + Enter eller klicka för att hoppa',
   'Afsluiten (Escape)': 'Avsluta (Escape)',
@@ -1604,6 +1595,59 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Extra lettertype voor ontbrekende tekens':
+      'Extra typsnitt för saknade tecken',
+  'Geen lettertypebestand gekozen': 'Ingen typsnittsfil vald',
+  'Kies bestand…': 'Välj fil…',
+  'Alleen een subset van dit bestand gaat mee in de PDF. De licentie van het bestand moet insluiten toestaan; OciDeck controleert dat niet en downloadt niets.':
+      'Endast en delmängd av denna fil bäddas in i PDF:en. Filens licens måste tillåta inbäddning; OciDeck kontrollerar inte det och laddar inte ner något.',
+  'Bijzonder persoonsgegeven': 'Känsliga personuppgifter',
+  'Dia {n} van {m}': 'Bild {n} av {m}',
+  'ander scherm: niet bereikbaar': 'annan skärm: inte nåbar',
+  'het andere scherm': 'den andra skärmen',
+  'Dit mag blijven': 'Detta får stanna',
+  'Waarschuw de ontvanger': 'Varna mottagaren',
+  'Laat dit weg bij tonen en exporteren':
+      'Lämna bort detta vid visning och export',
+  'Ga naar de eerste dia zonder keuze': 'Gå till första bilden utan beslut',
+  'Onderteken git-commits': 'Signera git-commits',
+  'Teken commits met de sleutel die git op deze machine al gebruikt.':
+      'Signera commits med den nyckel git redan använder på den här maskinen.',
+  'getekend en gecontroleerd': 'signerat och verifierat',
+  'getekend (hier niet te controleren)': 'signerat (kan inte verifieras här)',
+  'ongetekend': 'osignerat',
+  '{regel} in deze {veld}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel} i detta {veld}. Öppna meddelandet så är stycket markerat i texten.',
+  '{regel}. Open de melding, dan staat het stuk geselecteerd in de tekst.':
+      '{regel}. Öppna meddelandet så är stycket markerat i texten.',
+  'Hun niveau is strenger dan dat van de presentatie. Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      'Deras nivå är strängare än presentationens. Höj presentationens nivå, eller sänk bildens nivå.',
+  'Niveau van de presentatie': 'Presentationens nivå',
+  ' Zet het niveau van de presentatie hoger, of verlaag het niveau van de dia.':
+      ' Höj presentationens nivå, eller sänk bildens nivå.',
+  'De zaal ziet deze dia op het andere scherm.':
+      'Publiken ser den här bilden på den andra skärmen.',
+  'Het andere scherm doet niet mee. De dia\'s staan op dit scherm.':
+      'Den andra skärmen deltar inte. Bilderna är på den här skärmen.',
+  'De schermen zijn niet gewisseld. De notities staan nog hier.':
+      'Skärmarna byttes inte. Anteckningarna finns kvar här.',
+  'Notities aan of uit': 'Anteckningar på eller av',
+  'Zet de notities op het andere scherm':
+      'Lägg anteckningarna på den andra skärmen',
+  'Terug naar de dia\'s': 'Tillbaka till bilderna',
+  'Verder typen': 'Fortsätt skriva',
+  'Terug zonder deze wijzigingen': 'Tillbaka utan dessa ändringar',
+  'Toepassen en terug': 'Tillämpa och gå tillbaka',
+  'Je wijzigingen zijn nog niet toegepast.':
+      'Dina ändringar har inte tillämpats ännu.',
+  'Ongepaste wijzigingen: pas toe, verwerp of blijf hier.':
+      'Ej tillämpade ändringar: tillämpa, kassera eller stanna här.',
+  'Deze tabel bewerken': 'Redigera den här tabellen',
+  '{regel} worden dan in geen enkele presentatie meer gemeld. Terugzetten kan bij Beveiliging.':
+      '{regel} rapporteras inte längre i någon presentation. Du kan slå på det igen under Säkerhet.',
+  'Niet melden': 'Rapportera inte',
+  'Eerst opslaan. Daarna kun je exporteren.':
+      'Spara först. Sedan kan du exportera.',
   'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.':
       'En HTML-fil med riktig text, rubriker och alt-texter som öppnas i vilken webbläsare som helst utan internet — med tabeller, matematik, mermaid och diagram.',
   'Werk live samen aan een presentatie op een WebDAV-server. Standaard uit. Bewerkingen reizen via een werkmap naast het deck op dezelfde server — zonder versleuteling door OciDeck.':
@@ -1616,6 +1660,19 @@ const _dutchSourceAddSv = <String, String>{
   'Ga naar de brontabel': 'Gå till källtabellen',
   'Deze tabel is een afschrift van de brontabel "{bron}". Pas de bron aan en kies Verversen, of koppel de weergave los als momentopname.':
       'Den här tabellen är en avskrift av källtabellen "{bron}". Redigera källan och välj Uppdatera, eller koppla loss vyn som en ögonblicksbild.',
+  'Start met een apart presentatorvenster om privé te zoeken.':
+      'Starta med ett separat presentatörsfönster för att söka privat.',
+  'Privé zoeken': 'Privat sökning',
+  'Het publiek blijft op de huidige dia tot je Toon dia kiest. Automatisch doorspelen is gepauzeerd. Deel alleen het publieksvenster, niet je hele bureaublad.':
+      'Publiken ser den aktuella bilden tills du väljer Visa bild. Automatisk uppspelning är pausad. Dela bara publikfönstret, inte hela skrivbordet.',
+  'Ook in sprekersnotities': 'Sök även i talaranteckningar',
+  'Typ om te zoeken': 'Skriv för att söka',
+  'Toon dia': 'Visa bild',
+  'Verder vanaf het begin': 'Fortsätter från början',
+  'Verder vanaf het einde': 'Fortsätter från slutet',
+  'Geen resultaten. Probeer een kortere zoektekst.':
+      'Inga resultat. Prova en kortare söktext.',
+  'Treffer {n} van {m}': 'Träff {n} av {m}',
   'Quizvragen': 'Quizfrågor',
   'Met vragen': 'Med frågor',
   'Zonder vragen': 'Utan frågor',
@@ -2324,12 +2381,9 @@ const _dutchSourceAddSv = <String, String>{
   'Bewaren als kopie': 'Spara som kopia',
   'Bewaren in document': 'Spara i dokumentet',
   'beamer': 'projektor',
-  'beamer: niet bereikbaar': 'projektor: ej nåbar',
   'Bewerken sluiten (Esc)': 'Stäng redigering (Esc)',
   'Presenteer document…': 'Presentera dokument…',
   'Presenteer document': 'Presentera dokument',
-  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
-      'Markera vilka tabeller som får redigeras live under presentationen. Allt annat innehåll förblir skrivskyddat.',
   'Extra ruimte': 'Extra utrymme',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Den här noten är längre än sidan — scrolla för resten',
@@ -5140,8 +5194,6 @@ const _dutchSourceAddSv = <String, String>{
   'Markdown-broneditor': 'Markdown källredigerare',
   'Niet toegepast': 'Inte tillämpat',
   'Niet-toegepaste wijzigingen': 'Ej tillämpade ändringar',
-  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
-      'Tillämpa eller avvisa aktuella ändringar innan du byter scope.',
   'Problemen gevonden': 'Problem hittades',
   'Schrijftips': 'Skrivtips',
   'Snel herstellen': 'Återhämta dig snabbt',
@@ -6376,8 +6428,6 @@ const _dutchSourceAddSv = <String, String>{
       'Undanhållen: klassificerad strängare än presentationen',
   '1 slide achtergehouden door haar TLP': '1 bild undanhållen av sin TLP',
   'slides achtergehouden door hun TLP': 'bilder undanhållna av sin TLP',
-  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'De här bilderna följer inte med vid presentation, export eller i paketet. Höj presentationens TLP-nivå under Presentationsinfo för att få med dem.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
       'Alla bilder är undanhållna av sin TLP-klassificering, så det finns inget att visa.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
@@ -7122,8 +7172,6 @@ const _dutchSourceAddSv = <String, String>{
   'seksuele geaardheid': 'sexuell läggning',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' På den här bilden finns även en identifierande uppgift, så detta kan kopplas till en person.',
-  'Bijzonder persoonsgegeven (AVG art. 9/10)':
-      'Särskild kategori av personuppgifter (GDPR art. 9/10)',
   'gezondheidsgegeven': 'hälsouppgift',
   'strafrechtelijk gegeven': 'straffrättslig uppgift',
   'religie of levensovertuiging': 'religion eller övertygelse',
@@ -7184,8 +7232,6 @@ const _dutchSourceAddSv = <String, String>{
   'PERSOONSGEGEVENS': 'PERSONUPPGIFTER',
   'Volg de presentatie': 'Följ presentationen',
   'Weglaten uit tonen en exporteren': 'Utelämna från visning och export',
-  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
-      ' Överväg att maska det med [[dubbla hakparenteser]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
       ' Utan sammanhang i texten är detta kanske inte en personuppgift alls.',
   'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
