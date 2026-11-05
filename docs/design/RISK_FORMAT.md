@@ -149,16 +149,17 @@ Contract keys: `id`, `type` (`preventive|detective|mitigating|escalation`),
 `description`, `owner`, `status`, `evidence`, `test_date`, `expires`,
 `risks` (comma-separated `R-###`), `notes`.
 
-Status tokens in the file (UI localises):
+Status tokens in the file (UI localises). The Dutch token is accepted on read
+as an equivalent (case-insensitive), so a Dutch register stays valid:
 
-| token | meaning |
-|---|---|
-| `proposed` | suggested, not accepted |
-| `planned` | accepted, not yet done |
-| `implemented` | done, not yet tested |
-| `tested` | tested, outcome recorded |
-| `working` | tested and effective |
-| `ineffective` | tested, does not work |
+| token | Dutch token | meaning |
+|---|---|---|
+| `proposed` | `voorgesteld` | suggested, not accepted |
+| `planned` | `gepland` | accepted, not yet done |
+| `implemented` | `ingevoerd` | done, not yet tested |
+| `tested` | `getoetst` | tested, outcome recorded |
+| `working` | `werkt` | tested and effective |
+| `ineffective` | `werkt niet` | tested, does not work |
 
 `planned`/`implemented` measures never lower a netto score by themselves:
 netto exists only after an explicit re-assessment (`netto_basis` referencing
@@ -171,8 +172,10 @@ netto exists only after an explicit re-assessment (`netto_basis` referencing
 | Waarde | Label | Betekenis |
 ```
 
-Built-in scales referenced by name: `sod-1-10` (FMEA S/O/D 1–10),
-`li-1-5` (likelihood × impact 1–5). A custom scale table is a marked table
+Built-in scales referenced by name: `sod-1-5` (FMEA S/O/D 1–5, the
+default for new FMEA dossiers; RPN 1–125), `sod-1-10` (FMEA S/O/D 1–10, kept
+for existing dossiers and for registers without `scale=`), `li-1-5`
+(likelihood × impact 1–5). A custom scale table is a marked table
 with `cols=value,label,meaning` and a `version` attr; `risks` markers point
 at it via `scale=<id>`. Editing a scale after assessments exist triggers an
 impact overview in the UI — stored scores are never silently rewritten.

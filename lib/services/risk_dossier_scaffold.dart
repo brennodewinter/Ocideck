@@ -139,9 +139,10 @@ const ociBowtieContractCols = [
   'owner',
 ];
 
-/// De standaard-schaalnaam per methode.
+/// De standaard-schaalnaam per methode. FMEA gebruikt standaard 1–5
+/// (`sod-1-5`); `sod-1-10` blijft beschikbaar voor bestaande dossiers.
 String ociDefaultScaleId(RiskMethod method) => switch (method) {
-  RiskMethod.fmea => 'sod-1-10',
+  RiskMethod.fmea => 'sod-1-5',
   RiskMethod.likelihoodImpact => 'li-1-5',
   RiskMethod.bowtie => '',
 };

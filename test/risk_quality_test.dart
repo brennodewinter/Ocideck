@@ -9,6 +9,7 @@
 // herbouwen uit de bron.
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/risk_dossier.dart';
 import 'package:ocideck/services/risk_quality.dart';
 import 'package:ocideck/services/risk_view.dart';
 
@@ -60,6 +61,45 @@ void main() {
     final report = riskQualityFindings(source);
     expect(report.errors.any((f) => f.code == 'score-invalid'), isTrue);
     expect(report.errors.any((f) => f.code == 'score-out-of-range'), isTrue);
+  });
+
+  test('sod-1-5 is ingebouwd en toetst scores op 1 tot en met 5', () {
+    final schoon = _base
+        .replaceFirst('scale=sod-1-10', 'scale=sod-1-5')
+        .replaceFirst(
+          '| R-001 | Ventiel lekt | 8 | 4 | 3 | 8 | 2 | 3 |',
+          '| R-001 | Ventiel lekt | 4 | 2 | 2 | 4 | 1 | 2 |',
+        )
+        .replaceFirst(
+          '| R-002 | Sensor blind | 6 | 7 | 5 |',
+          '| R-002 | Sensor blind | 3 | 4 | 3 |',
+        );
+    expect(riskQualityFindings(schoon).isClean, isTrue);
+
+    final teHoog = schoon.replaceFirst(
+      '| R-002 | Sensor blind | 3 | 4 | 3 |',
+      '| R-002 | Sensor blind | 3 | 6 | 3 |',
+    );
+    final report = riskQualityFindings(teHoog);
+    expect(report.errors.any((f) => f.code == 'scale-unknown'), isFalse);
+    expect(report.errors.any((f) => f.code == 'score-out-of-range'), isTrue);
+  });
+
+  test('Nederlandse maatregelstatussen worden herkend', () {
+    expect(MeasureStatus.parse('voorgesteld'), MeasureStatus.proposed);
+    expect(MeasureStatus.parse('Gepland'), MeasureStatus.planned);
+    expect(MeasureStatus.parse('ingevoerd'), MeasureStatus.implemented);
+    expect(MeasureStatus.parse('getoetst'), MeasureStatus.tested);
+    expect(MeasureStatus.parse('werkt'), MeasureStatus.working);
+    expect(MeasureStatus.parse('werkt  niet'), MeasureStatus.ineffective);
+    expect(MeasureStatus.parse('working'), MeasureStatus.working);
+    expect(MeasureStatus.parse('misschien'), isNull);
+
+    final source = _base.replaceFirst(
+      '| tested | rapport 12 |',
+      '| getoetst | rapport 12 |',
+    );
+    expect(riskQualityFindings(source).isClean, isTrue);
   });
 
   test('onbekende schaalnaam is blokkerend', () {

@@ -83,6 +83,9 @@ class RiskDossier {
   /// `null` als geen van beide matcht.
   RiskScale? scaleFor(OciMarkedTable riskTable) {
     final name = riskTable.marker?.attr('scale');
+    // Zonder `scale=` blijft 1–10 gelden: oudere registers zonder
+    // schaalnaam houden zo hun bestaande scores geldig. Nieuwe dossiers
+    // schrijven altijd een expliciete schaal (standaard `sod-1-5`).
     if (name == null || name.isEmpty) return RiskScale.sod110;
     final custom = scaleTables.where((t) => t.id == name).firstOrNull;
     if (custom != null) {
