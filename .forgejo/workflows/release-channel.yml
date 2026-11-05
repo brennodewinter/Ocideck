@@ -45,6 +45,14 @@ jobs:
           persist-credentials: false
           ref: ${{ github.sha }}
           path: controller
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+          EXPECTED_MEMORY_GIB: "${{ inputs.channel == 'windows' && '4' || '8' }}"
+        run: node controller/tool/enforce_release_cpu.cjs
       - name: Vaste bron controleren voor broncode wordt uitgevoerd
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
@@ -223,6 +231,19 @@ jobs:
       options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
+          EXPECTED_MEMORY_GIB: "4"
+        run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Installeren, linken en starten
@@ -261,6 +282,19 @@ jobs:
       options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
+          EXPECTED_MEMORY_GIB: "4"
+        run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Uitpakken, linken en starten
@@ -296,6 +330,19 @@ jobs:
       options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
+          EXPECTED_MEMORY_GIB: "4"
+        run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Installeren, linken en starten
@@ -326,6 +373,19 @@ jobs:
       options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
+          EXPECTED_MEMORY_GIB: "4"
+        run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Uitpakken, linken en starten
@@ -363,6 +423,19 @@ jobs:
       options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
+          EXPECTED_MEMORY_GIB: "4"
+        run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Installeren en inhoud controleren
@@ -391,6 +464,19 @@ jobs:
       options: --cpus 2 --memory 4g
       image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          path: controller
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
+          EXPECTED_MEMORY_GIB: "4"
+        run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
       - name: Uitpakken, linken en starten
@@ -427,6 +513,14 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.sha }}
+      # Runner v13.2.1 laat CPU-opties vallen; de guard bewijst de kernelgrens.
+      - name: Eigen CPU-grens toepassen en kernel controleren
+        env:
+          FORGEJO_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+          EXPECTED_MEMORY_GIB: "4"
+        run: node tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a
         with: { name: channel-build, path: dist }
       - name: Exacte kanaalbytes vastleggen

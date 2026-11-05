@@ -2,6 +2,7 @@
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import tempfile
 import unittest
@@ -108,15 +109,34 @@ if sys.argv[1]=='check-toolchain': sys.exit(1)
                 [json.loads(row) for row in calls.read_text().splitlines()],
                 [['-j2', '-C', 'build', 'install']] * 2)
 
-    def test_every_docker_job_has_quota_and_linux_channels_share_queue(self):
+    def test_docker_guards_precede_source_and_candidate_execution(self):
         text = (ROOT / '.forgejo/workflows/release-channel.yml').read_text()
         self.assertIn("|| 'linux-web-server'", text)
         self.assertIn('cancel-in-progress: false', text)
-        containers = text.split('    container:\n')[1:]
-        self.assertEqual(len(containers), 8)
-        for container in containers:
-            self.assertIn('options: --cpus 2 --memory ', container.split('      image:')[0])
-        self.assertIn("inputs.channel == 'windows' && '4g' || '8g'", containers[0])
+        jobs = dict(re.findall(r'^  ([a-z][a-z0-9-]*):\n(.*?)(?=^  [a-z][a-z0-9-]*:\n|\Z)',
+                               text, flags=re.M | re.S))
+        containers = {name: job for name, job in jobs.items() if '    container:\n' in job}
+        self.assertEqual(set(containers), {'build', 'evidence', 'consumer-deb',
+                         'consumer-debian12', 'consumer-rpm', 'consumer-appimage',
+                         'consumer-flatpak', 'consumer-tar'})
+        for name, job in containers.items():
+            with self.subTest(job=name):
+                image = re.search(r'^      image: (.+)$', job, re.M).group(1)
+                steps = job.split('    steps:\n', 1)[1]
+                guard = steps.index('run: node ')
+                self.assertIn('enforce_release_cpu.cjs', steps[:guard + 80])
+                self.assertIn('EXPECTED_IMAGE: ' + image, steps[:guard])
+                self.assertIn('SOURCE_SHA: ${{ inputs.source_sha }}', steps[:guard])
+                self.assertIn('FORGEJO_TOKEN: ${{ github.token }}', steps[:guard])
+                checkout = steps[:guard]
+                self.assertIn('persist-credentials: false', checkout)
+                self.assertIn('ref: ${{ github.sha }}', checkout)
+                if name == 'build':
+                    self.assertLess(guard, steps.index('Vaste bron controleren'))
+                    self.assertLess(guard, steps.index('ref: ${{ inputs.source_sha }}'))
+                else:
+                    self.assertLess(guard, steps.index('actions/download-artifact@'))
+        self.assertIn("inputs.channel == 'windows' && '4' || '8'", containers['build'])
 
     def test_macos_whisper_cli_is_signed_and_app_resealed_after_install(self):
         # #2800: de helper landt in een al verzegelde .app — zonder eigen
