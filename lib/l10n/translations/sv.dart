@@ -1602,6 +1602,10 @@ const _dutchSourceAddSv = <String, String>{
   'Markerregel zonder tabel eronder.': 'Markörsrad utan tabell under.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Markören gör ingenting; den ligger kvar i filen som död metadata.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Nettoscore eller nettobas i ett register med scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Detta register förväntar en enda poäng; netto-värdet ignoreras och kan vilseleda.',
   'Extra lettertype voor ontbrekende tekens':
       'Extra typsnitt för saknade tecken',
   'Geen lettertypebestand gekozen': 'Ingen typsnittsfil vald',

@@ -652,6 +652,10 @@ const _dutchSourceAddFr = {
       'Ligne de marqueur sans table en dessous.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Le marqueur ne fait rien ; il reste dans le fichier comme métadonnée morte.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Score nette ou base nette dans un registre scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Ce registre consigne un seul score ; la valeur nette est ignorée et peut induire en erreur.',
   'Extra lettertype voor ontbrekende tekens':
       'Police supplémentaire pour les caractères manquants',
   'Geen lettertypebestand gekozen': 'Aucun fichier de police choisi',

@@ -1622,6 +1622,10 @@ const _dutchSourceAddBg = <String, String>{
   'Markerregel zonder tabel eronder.': 'Ред маркер без таблица под него.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Маркерът не прави нищо; остава във файла като мъртви метаданни.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Нетна оценка или нетна основа в регистър scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Този регистър записва една оценка; нетната стойност се игнорира и може да подведе.',
   'Extra lettertype voor ontbrekende tekens':
       'Допълнителен шрифт за липсващи знаци',
   'Geen lettertypebestand gekozen': 'Не е избран шрифтов файл',

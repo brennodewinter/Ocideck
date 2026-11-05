@@ -150,6 +150,49 @@ void main() {
       expect(view.id, isNull);
     });
 
+    // #2804: één score per risico — projecties laten netto weg en de
+    // koppen worden S/O/D/RPN in plaats van de bruto-suffixen.
+    const single = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea scale=sod-1-5 scoring=single rev=2 next=3 cols=id,failure,s_b,o_b,d_b -->
+| ID | Faalwijze | S | O | D |
+|---|---|---|---|---|
+| R-1 | Ventiel lekt | 4 | 2 | 2 |
+| R-2 | Sensor blind | 5 | 4 | 3 |
+''';
+
+    test('scoring=single: overview laat netto weg, koppen zonder suffix', () {
+      final source =
+          '$single\n<!-- ocideck:view v1 source=hoofd projection=overview gen=2 -->\n| ID |\n|---|';
+      final view = scanOciMarkedTables(source).tables.last;
+      final rows = ociViewMaterialize(RiskDossier.read(single), view)!;
+      expect(rows.first, ['ID', 'Faalwijze', 'S', 'O', 'D']);
+      expect(rows[1], ['R-1', 'Ventiel lekt', '4', '2', '2']);
+    });
+
+    test('scoring=single: verversen schrijft korte koppen en klasse', () {
+      // R-2: RPN 60 → 'hoog' op de sod-1-5-klasseregel; R-1: RPN 16 → 'laag'.
+      final source =
+          '$single\n<!-- ocideck:view v1 source=hoofd cols=id,failure,rpn,klasse gen=1 -->\n'
+          '| ID | Faalwijze | RPN | Klasse |\n|---|---|---|---|\n| R-9 | verlopen | 1 | laag |';
+      final view = scanOciMarkedTables(source).tables.last;
+      final out = regenerateOciView(source, view)!;
+      expect(out, contains('| R-2 | Sensor blind | 60 | hoog |'));
+      expect(out, contains('| R-1 | Ventiel lekt | 16 | laag |'));
+      expect(out, isNot(contains('S b')));
+    });
+
+    test('klasse op sod-1-10 blijft —, geen geraden band', () {
+      final view = _view('source=hoofd cols=id,rpn,klasse gen=3', const [
+        '| ID |',
+        '|---|',
+      ]);
+      final rows = ociViewMaterialize(
+        RiskDossier.read(_dossier),
+        view,
+      )!.skip(1).toList();
+      expect(rows[0], ['R-1', '96', '—']);
+    });
+
     test('afgeleide rpn materialiseert, onbekend rendert —', () {
       final view = _view('source=hoofd cols=id,rpn,rpn_n gen=3', const [
         '| ID |',

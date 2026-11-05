@@ -2507,6 +2507,10 @@ const _dutchSourceAddTr = <String, String>{
   'Markerregel zonder tabel eronder.': 'Altında tablo olmayan işaretçi satırı.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'İşaretçi hiçbir şey yapmaz; dosyada ölü meta veri olarak kalır.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'scoring=single kaydında net skor veya net temel.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Bu kayıt tek bir skor tutar; net değer yok sayılır ve yanıltabilir.',
   'Extra lettertype voor ontbrekende tekens':
       'Eksik karakterler için ek yazı tipi',
   'Geen lettertypebestand gekozen': 'Yazı tipi dosyası seçilmedi',

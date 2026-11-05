@@ -1603,6 +1603,10 @@ const _dutchSourceAddFi = <String, String>{
   'Markerregel zonder tabel eronder.': 'Merkkirivi ilman taulukkoa alla.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Merkki ei tee mitään; se jää tiedostoon kuolleena metatietona.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Nettopisteet tai nettoperuste scoring=single-rekisterissä.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Tämä rekisteri tallentaa yhden pistemäärän; nettoarvo ohitetaan ja voi johtaa harhaan.',
   'Extra lettertype voor ontbrekende tekens':
       'Lisäfontti puuttuville merkeille',
   'Geen lettertypebestand gekozen': 'Fonttitiedostoa ei valittu',

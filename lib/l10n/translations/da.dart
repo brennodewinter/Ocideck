@@ -1603,6 +1603,10 @@ const _dutchSourceAddDa = <String, String>{
   'Markerregel zonder tabel eronder.': 'Markørlinje uden tabel nedenunder.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Markøren gør ingenting; den bliver stående i filen som død metadata.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Nettoscore eller nettobasis i et register med scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Dette register fastholder én score; netto-værdien ignoreres og kan vildlede.',
   'Extra lettertype voor ontbrekende tekens':
       'Ekstra skrifttype til manglende tegn',
   'Geen lettertypebestand gekozen': 'Ingen skrifttypefil valgt',

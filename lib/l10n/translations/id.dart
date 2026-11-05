@@ -1603,6 +1603,10 @@ const _dutchSourceAddId = <String, String>{
   'Markerregel zonder tabel eronder.': 'Baris penanda tanpa tabel di bawahnya.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Penanda tidak melakukan apa pun; ia tetap di berkas sebagai metadata mati.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Skor netto atau basis netto dalam register scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Register ini mencatat satu skor; nilai netto diabaikan dan dapat menyesatkan.',
   'Extra lettertype voor ontbrekende tekens':
       'Fonta tambahan untuk karakter yang hilang',
   'Geen lettertypebestand gekozen': 'Tidak ada file fonta dipilih',

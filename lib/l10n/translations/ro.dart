@@ -1619,6 +1619,10 @@ const _dutchSourceAddRo = <String, String>{
   'Markerregel zonder tabel eronder.': 'Rând de marcator fără tabel dedesubt.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Marcatorul nu face nimic; rămâne în fișier ca metadată moartă.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Scor net sau bază netă într-un registru scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Acest registru înregistrează un singur scor; valoarea netă este ignorată și poate induce în eroare.',
   'Extra lettertype voor ontbrekende tekens':
       'Font suplimentar pentru caracterele lipsă',
   'Geen lettertypebestand gekozen': 'Niciun fișier de font ales',

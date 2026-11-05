@@ -1603,6 +1603,10 @@ const _dutchSourceAddCs = <String, String>{
   'Markerregel zonder tabel eronder.': 'Řádek značky bez tabulky pod ním.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Značka nic nedělá; zůstává v souboru jako mrtvá metadata.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Netto skóre nebo netto základ v registru scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Tento registr zaznamenává jediné skóre; netto hodnota se ignoruje a může vést k omylu.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatečné písmo pro chybějící znaky',
   'Geen lettertypebestand gekozen': 'Nevybrán žádný soubor písma',

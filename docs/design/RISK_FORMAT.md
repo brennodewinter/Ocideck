@@ -138,6 +138,22 @@ Contract keys (per method; `*_b` = bruto/inherent, `*_n` = netto/residual):
 Derived values (`RPN`, risk class) are **never contract keys** — they are
 computed at render/export, exactly as `MatrixSpec.derivedRpn` already works.
 
+**Single scoring.** A `risks` marker may carry `scoring=single`: the
+register then records **one** score per risk — the situation as measured,
+including the measures in use — and has no `*_n` columns and no
+`netto_basis`. Views on it drop the netto columns (the named `overview`
+and `prioriteit` projections resolve without them) and show the single
+score under the short headers `S`, `O`, `D`, `RPN` / `K`, `I`, `Score`
+instead of the `… b` variants. The quality check expects no netto values
+and no `netto_basis` in such a register. Without the attribute nothing
+changes: `scoring=` absent means the bruto/netto pair as before.
+
+Named risk classes: `klasse` resolves on `li-1-5` into four bands of the
+likelihood×impact product (laag ≤4, midden ≤9, hoog ≤16, zeer hoog >16)
+and on `sod-1-5` into the FMEA rule — `hoog` at RPN ≥40 or S 5 with O ≥3,
+`midden` at RPN ≥20, otherwise `laag`. On any other scale `klasse` is
+`—`: a class rule is only ever claimed where it is written down.
+
 ### 3.4 `measures` — the measure register
 
 ```markdown

@@ -253,6 +253,28 @@ void main() {
     );
   });
 
+  // #2804: een register met scoring=single legt één score vast; netto
+  // hoort daar niet en is een waarschuwing als het toch ingevuld is.
+  test('scoring=single verwacht geen netto en geen netto_basis', () {
+    const schoon = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea scale=sod-1-5 scoring=single rev=1 next=2 cols=id,failure,s_b,o_b,d_b -->
+| ID | Faalwijze | S | O | D |
+|---|---|---|---|---|
+| R-001 | Ventiel lekt | 4 | 2 | 2 |
+''';
+    expect(riskQualityFindings(schoon).isClean, isTrue);
+
+    const metNetto = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea scale=sod-1-5 scoring=single rev=1 next=2 cols=id,failure,s_b,o_b,d_b,s_n,netto_basis -->
+| ID | Faalwijze | S | O | D | S n | Netto-basis |
+|---|---|---|---|---|---|---|
+| R-001 | Ventiel lekt | 4 | 2 | 2 | 2 | herijkt |
+''';
+    final report = riskQualityFindings(metNetto);
+    final f = report.warnings.singleWhere((w) => w.code == 'netto-in-single');
+    expect(f.recordId, 'R-001');
+  });
+
   test('bevindingen dragen hun regelnummer voor navigatie', () {
     final source = _base.replaceFirst('| R-002 |', '| |');
     final report = riskQualityFindings(source);

@@ -1632,6 +1632,10 @@ const _dutchSourceAddGa = <String, String>{
   'Markerregel zonder tabel eronder.': 'Líne marcóra gan tábla faoi.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Ní dhéanann an marcóir aon rud; fanann sé sa chomhad mar mheiteashonraí mharbha.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Scór glan nó bunús glan i gclár scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Taifeadann an clár seo scór amháin; déantar neamhaird den luach glan agus féadfaidh sé a bheith míthreorach.',
   'Extra lettertype voor ontbrekende tekens':
       'Cló breise do charachtair ar iarraidh',
   'Geen lettertypebestand gekozen': 'Níor roghnaíodh aon chomhad cló',

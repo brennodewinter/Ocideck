@@ -1596,6 +1596,10 @@ const _dutchSourceAddEt = <String, String>{
   'Markerregel zonder tabel eronder.': 'Markeririda ilma tabelita all.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Marker ei tee midagi; see jääb faili surnud metaandmetena.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Netoskoor või netoalus registris scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'See register salvestab ühe skoori; netoväärtust ignoreeritakse ja see võib eksitada.',
   'Extra lettertype voor ontbrekende tekens':
       'Lisafont puuduvate tähtede jaoks',
   'Geen lettertypebestand gekozen': 'Fontifaili pole valitud',

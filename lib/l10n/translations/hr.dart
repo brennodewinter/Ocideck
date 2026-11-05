@@ -1607,6 +1607,10 @@ const _dutchSourceAddHr = <String, String>{
   'Markerregel zonder tabel eronder.': 'Redak oznake bez tablice ispod.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Oznaka ne čini ništa; ostaje u datoteci kao mrtvi metapodatak.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Neto rezultat ili neto osnova u registru scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Ovaj registar bilježi jednu ocjenu; neto vrijednost se ignorira i može zavesti.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatni font za znakove koji nedostaju',
   'Geen lettertypebestand gekozen': 'Nije odabran fontovni file',

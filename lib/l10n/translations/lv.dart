@@ -1600,6 +1600,10 @@ const _dutchSourceAddLv = <String, String>{
   'Markerregel zonder tabel eronder.': 'Marķiera rindiņa bez tabulas zem tās.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Marķieris neko nedara; tas paliek failā kā miruši metadati.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Neto vērtējums vai neto pamats reģistrā scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Šis reģistrs fiksē vienu vērtējumu; neto vērtība tiek ignorēta un var maldināt.',
   'Extra lettertype voor ontbrekende tekens':
       'Papildu fonts trūkstošajām rakstzīmēm',
   'Geen lettertypebestand gekozen': 'Fonta fails nav izvēlēts',

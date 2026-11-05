@@ -651,6 +651,10 @@ const _dutchSourceAddFy = {
       'Markearringsrige sûnder tabel derûnder.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'De markearring docht neat; hy bliuwt as deade metadata yn it bestân stean.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Netto-skorre of netto-basis yn in scoring=single register.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Dit register leit ien skorre fêst; de netto-waarde wurdt negearre en kin misliede.',
   'Extra lettertype voor ontbrekende tekens':
       'Ekstra lettertype foar ûntbrekkende tekens',
   'Geen lettertypebestand gekozen': 'Gjin lettertypebestân keazen',

@@ -1609,6 +1609,10 @@ const _dutchSourceAddLt = <String, String>{
   'Markerregel zonder tabel eronder.': 'Žymeklio eilutė be lentelės po ja.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Žymeklis nieko nedaro; jis lieka faile kaip negyvi metaduomenys.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Neto balas arba neto pagrindas registre scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Šis registras fiksuoja vieną balą; neto reikšmė ignoruojama ir gali suklaidinti.',
   'Extra lettertype voor ontbrekende tekens':
       'Papildomas šriftas trūkstantiems simboliams',
   'Geen lettertypebestand gekozen': 'Šrifto failas nepasirinktas',

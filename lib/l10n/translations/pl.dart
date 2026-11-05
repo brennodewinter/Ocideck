@@ -1615,6 +1615,10 @@ const _dutchSourceAddPl = <String, String>{
   'Markerregel zonder tabel eronder.': 'Wiersz znacznika bez tabeli poniżej.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Znacznik nic nie robi; pozostaje w pliku jako martwe metadane.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Wynik netto lub podstawa netto w rejestrze scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Ten rejestr zapisuje jedną ocenę; wartość netto jest ignorowana i może wprowadzać w błąd.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatkowa czcionka dla brakujących znaków',
   'Geen lettertypebestand gekozen': 'Nie wybrano pliku czcionki',
