@@ -406,10 +406,8 @@ def fetch_locked(api, root, dist, tag, sha, ref, operation_id, state, saved, sbo
             if workflow not in saved['selected_runs']:
                 raise ValueError('collect requires exact existing Windows IDs')
             continue
-        run = latest(api, workflow, sha, ref)
-        if workflow in saved['dispatch_intents']:
-            matches = [value for value in owned_runs(api, sha, ref, operation_id) if value['path'] == '.github/workflows/' + workflow]
-            run = max(matches, key=lambda value: value['id']) if matches else None
+        # A fresh operation owns its marker, while a continuation owns its exact saved IDs.
+        run = selected_runs(api, sha, ref, saved, allow_missing=True)[workflow]
         if run is not None and run.get('status') == 'completed' and run.get('conclusion') != 'success':
             raise ValueError('existing Windows candidate failed; diagnose and explicitly rerun its GitHub run')
         if run is None:
