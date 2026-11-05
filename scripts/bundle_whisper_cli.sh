@@ -31,7 +31,15 @@ case "$PLATFORM" in
     [[ -z "$APP" ]] && { echo "geen .app onder build/macos/…" >&2; exit 1; }
     mkdir -p "$APP/Contents/Helpers"
     install -m 0755 "$SRC" "$APP/Contents/Helpers/whisper-cli"
-    echo "whisper-cli → $APP/Contents/Helpers/"
+    # De helper is een eigen uitvoerbaar bestand in een al verzegelde bundel:
+    # eerst hem zelf tekenen, daarna de app opnieuw verzegelen — zonder die
+    # stappen klopt de seal niet meer en weigert Gatekeeper de app (#2800).
+    # Ad hoc hier; notarize_macos.sh vervangt alles later door de
+    # Developer-ID-handtekening met hardened runtime.
+    codesign --force --options runtime -s - "$APP/Contents/Helpers/whisper-cli"
+    codesign --force --sign - \
+      --preserve-metadata=entitlements,requirements,flags,runtime "$APP"
+    echo "whisper-cli → $APP/Contents/Helpers/ (getekend, app verzegeld)"
     ;;
   windows)
     SRC="native/whisper_cli/bin/windows-$(arch_dir)/whisper-cli.exe"
