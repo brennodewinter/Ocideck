@@ -18,10 +18,9 @@ and do not execute there. Corrected 2026-11-03: this said the scans ran on
 every pull request — that trigger was removed when `make check-full` became
 the committer-side gate, and it said no release had ever been tagged.)
 
-## Release publication boundary (2026-11-03)
+## Release publication boundary (2026-11-05)
 
-The current independent-channel work is a guarded prototype, not an approved
-stable-release path. A candidate uses a frozen source SHA; local manifests bind
+Each independent channel uses a frozen source SHA; local manifests bind
 version, source, controller, channel, run and byte hashes. The journal records
 explicit phase transitions and hashes its evidence; a local controller lock
 serializes its writer and a remote branch lock is intended to serialize writes
@@ -30,8 +29,21 @@ provenance, durably stages candidate bytes before tagging, creates a draft
 release, reads every selected signed asset back, and only then flips the draft
 to public and checks public readback again. The next-version
 baseline requires a public, signed channel and matching tags on both remotes.
-These are implemented primitives; the macOS, Windows and Debian 12 independent
-build/consumer routes and a durable publisher-worker hand-off are not.
+The macOS, Windows and Debian 12 independent build/consumer routes are
+implemented. Every release still needs its own terminal native checks,
+candidate installation checks, signatures and externally observed bytes.
+A durable publisher-worker hand-off is not implemented.
+
+Workflow CPU declarations are not an enforcement proof: Forgejo Runner
+13.2.1 drops CPU fields when merging job-container options. After checking out
+the trusted controller, each Docker job binds its own container through two
+kernel mount records, the private kernel gateway, Docker inspection and the
+current Forgejo task. Only that container may receive the fixed two-CPU
+update. The guard requires the expected memory, preserves all other Docker
+host configuration, and verifies both the new configuration and the actual
+cgroup kernel quota before source or candidate execution. Unknown identity,
+an existing different CPU policy, or uncertain readback blocks the job.
+The Forgejo token is confined to this guard step and is never sent to Docker.
 
 The publisher checks `origin` and `mirror` tag targets before the public
 release flip. An absent mirror tag is copied from the exact annotated origin
@@ -48,14 +60,16 @@ incomplete **draft** release, which must be recovered under the same tag; this i
 currently proves only the selected channel's signed metadata and bytes, not
 all operating systems. The local controller can reuse its durable staged
 candidate if the original artifact expires, but its child-process and remote
-branch lease still need native CI and interruption/recovery proof. A detached
-publisher worker is not yet implemented. No release should be declared
-complete from local receipts or job success alone. The live `v0.7.7` release
-must not be restarted under this unfinished route, and its monitor remains paused. Tags annotated
+branch lease require native CI and interruption/recovery proof. A detached
+publisher worker is not implemented. No release should be declared
+complete from local receipts or job success alone. A stopped attempt retains
+its original source, controller, journal and evidence; a corrected controller
+starts a new operation only after the old workers and dependent jobs are
+terminal and its own build claims are released. Tags annotated
 `Release-Mode: channels` are rejected by legacy `release_auto.sh --resume`;
 only the channel controller may verify or continue them.
 
-The open hardening work is tracked in
+The hardening requirements are tracked in
 [#2773–#2787](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues):
 credential phases; artifact retention and durable storage; runner queue and
 capacity; cache context; pinned tools; time and network uncertainty; Apple
