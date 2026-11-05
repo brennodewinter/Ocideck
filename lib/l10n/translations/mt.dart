@@ -1622,6 +1622,10 @@ const _dutchSourceAddMt = <String, String>{
       'Linja ta’ markatur mingħajr tabella taħtha.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Il-markatur ma jagħmel xejn; jibqa’ fil-fajl bħala metadata mejta.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Punteġġ nett jew bażi netta f’reġistru scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Dan ir-reġistru jirrrekordja skor wieħed; il-valur nett jiġi injorat u jista’ jqarraq.',
   'Extra lettertype voor ontbrekende tekens':
       'Font żejjed għal karattri nieqsa',
   'Geen lettertypebestand gekozen': 'L-ebda fajl ta\' font magħżul',

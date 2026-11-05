@@ -1618,6 +1618,10 @@ const _dutchSourceAddUk = <String, String>{
   'Markerregel zonder tabel eronder.': 'Рядок маркера без таблиці під ним.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Маркер нічого не робить; він лишається у файлі як мертві метадані.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Нетто-оцінка або нетто-базис у реєстрі scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Цей реєстр фіксує одну оцінку; нетто-значення ігнорується і може ввести в оману.',
   'Extra lettertype voor ontbrekende tekens':
       'Додатковий шрифт для відсутніх символів',
   'Geen lettertypebestand gekozen': 'Файл шрифту не вибрано',

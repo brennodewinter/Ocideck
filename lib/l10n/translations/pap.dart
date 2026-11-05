@@ -649,6 +649,10 @@ const _dutchSourceAddPap = {
   'Markerregel zonder tabel eronder.': 'Lína di markador sin tabla bou di dje.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'E markador no ta hasi nada; e ta keda den e archivo komo metadata morto.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Puntuashon neto òf base neto den un registro scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'E registro aki ta fiksa un puntuashon; e balor neto ta wordu ignorá i por indusí eror.',
   'Extra lettertype voor ontbrekende tekens':
       'Tipo di letra ekstra pa karakternan falta',
   'Geen lettertypebestand gekozen': 'Ningun archivo di fuente elegí',

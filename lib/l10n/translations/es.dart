@@ -648,6 +648,10 @@ const _dutchSourceAddEs = {
   'Markerregel zonder tabel eronder.': 'Línea de marcador sin tabla debajo.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'El marcador no hace nada; permanece en el archivo como metadato muerto.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Puntuación neta o base neta en un registro scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Este registro anota una sola puntuación; el valor neto se ignora y puede inducir a error.',
   'Extra lettertype voor ontbrekende tekens':
       'Tipo de letra extra para caracteres ausentes',
   'Geen lettertypebestand gekozen': 'Ningún archivo de fuente elegido',

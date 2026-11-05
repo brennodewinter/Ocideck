@@ -1605,6 +1605,10 @@ const _dutchSourceAddHu = <String, String>{
   'Markerregel zonder tabel eronder.': 'Jelölősor táblázat nélkül alatta.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'A jelölő nem csinál semmit; holt metaadatként marad a fájlban.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Nettó pontszám vagy nettó alap egy scoring=single nyilvántartásban.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Ez a nyilvántartás egyetlen pontszámot rögzít; a nettó értéket figyelmen kívül hagyja, és megtéveszthet.',
   'Extra lettertype voor ontbrekende tekens':
       'Extra betűtípus a hiányzó karakterekhez',
   'Geen lettertypebestand gekozen': 'Nincs betűtípus-fájl kiválasztva',

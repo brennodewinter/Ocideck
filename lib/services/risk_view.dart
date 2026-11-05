@@ -52,6 +52,52 @@ String? _riskClass(int? score) {
   };
 }
 
+/// De benoemde bandregel voor FMEA op `sod-1-5` (§3.3, #2804): 'hoog' bij
+/// RPN 40 of meer, of bij S 5 met O 3 of meer; 'midden' vanaf RPN 20;
+/// daaronder 'laag'. Alleen op die schaal — op `sod-1-10` betekent RPN 40
+/// iets anders en blijft de klasse '—'.
+String? _fmeaClass(int? rpn, int? s, int? o) {
+  if (rpn == null) return null;
+  if (rpn >= 40 || (s == 5 && (o ?? 0) >= 3)) return 'hoog';
+  return rpn >= 20 ? 'midden' : 'laag';
+}
+
+/// De netto-sleutels die een `scoring=single`-register niet kent (#2804):
+/// uitgefilterd uit weergave-kolommen én verantwoord als bevinding als een
+/// rij ze toch invult.
+const _nettoViewKeys = {
+  's_n',
+  'o_n',
+  'd_n',
+  'l_n',
+  'i_n',
+  'rpn_n',
+  'score_n',
+  'klasse_n',
+  'netto_basis',
+  'netto_date',
+  'netto_by',
+};
+
+/// Korte kopteksten voor `scoring=single` (#2804): zonder netto zijn de
+/// bruto-suffixen loze ballast — de enige score heet gewoon S, O, D, RPN.
+const _singleScoreHeaderLabels = {
+  's_b': 'S',
+  'o_b': 'O',
+  'd_b': 'D',
+  'rpn': 'RPN',
+  'rpn_b': 'RPN',
+  'l_b': 'K',
+  'i_b': 'I',
+  'score': 'Score',
+  'score_b': 'Score',
+};
+
+/// Of een `risks`-tabel één score per risico vastlegt (`scoring=single`,
+/// §3.4) in plaats van een bruto- én netto-score.
+bool ociScoringSingle(OciMarkedTable riskTable) =>
+    riskTable.marker?.attr('scoring') == 'single';
+
 /// De benoemde projecties uit §3.6, per methode opgelost naar
 /// contractkolommen. `null` = de naam is geen projectie — dan geldt `cols=`
 /// letterlijk.
@@ -132,7 +178,13 @@ class OciViewPlan {
 
 /// Leest de `cols=`/`projection=`/`sort=`/`filter=`-attributen van [view] uit
 /// en lost de benoemde projectie op tegen de methode van de brontabel.
-OciViewPlan ociViewPlan(OciMarkedTable view, RiskMethod method) {
+/// Op een `scoring=single`-bron vallen de netto-kolommen weg — de benoemde
+/// projecties kennen ze daar niet (#2804).
+OciViewPlan ociViewPlan(
+  OciMarkedTable view,
+  RiskMethod method, {
+  bool singleScoring = false,
+}) {
   final marker = view.marker;
   final projection = marker?.attr('projection');
   var cols = view.cols;
@@ -141,6 +193,12 @@ OciViewPlan ociViewPlan(OciMarkedTable view, RiskMethod method) {
     // Een `cols=` bij een projectie verfijnt de benoemde set verder niet —
     // de projectie is een keuze, geen filter op de keuze.
     cols = named ?? cols;
+  }
+  if (singleScoring) {
+    cols = [
+      for (final key in cols)
+        if (!_nettoViewKeys.contains(key)) key,
+    ];
   }
   String? sortKey;
   var desc = false;
@@ -168,7 +226,26 @@ OciViewPlan ociViewPlan(OciMarkedTable view, RiskMethod method) {
 
 /// De waarde die contract- of afgeleide sleutel [key] voor [record] oplevert.
 /// Onberekenbare afgeleiden renderen `—` (§3.7: "onbekend" is nooit `0`).
-String _viewCell(RiskRecord record, String key) {
+/// [method] en [scaleId] bepalen welke benoemde klasseregel geldt.
+String _viewCell(
+  RiskRecord record,
+  String key,
+  RiskMethod method,
+  String? scaleId,
+) {
+  String? klasse({required bool bruto}) {
+    // 'klasse' hoort bij dezelfde kopregel-score als 'score'/'rpn' — de
+    // bruto-waarde. Netto en bruto apart staan in klasse_b/klasse_n.
+    if (method == RiskMethod.fmea && scaleId == 'sod-1-5') {
+      return _fmeaClass(
+        bruto ? record.rpnBruto : record.rpnNetto,
+        bruto ? record.sB : record.sN,
+        bruto ? record.oB : record.oN,
+      );
+    }
+    return _riskClass(bruto ? record.scoreBruto : record.scoreNetto);
+  }
+
   final derived = switch (key) {
     'rpn' => record.rpnBruto ?? record.scoreBruto,
     'rpn_b' => record.rpnBruto,
@@ -176,11 +253,9 @@ String _viewCell(RiskRecord record, String key) {
     'score' => record.scoreBruto ?? record.rpnBruto,
     'score_b' => record.scoreBruto,
     'score_n' => record.scoreNetto,
-    // 'klasse' hoort bij dezelfde kopregel-score als 'score'/'rpn' —
-    // de bruto-waarde. Netto en bruto apart staan in klasse_b/klasse_n.
-    'klasse' => _riskClass(record.scoreBruto ?? record.rpnBruto),
-    'klasse_b' => _riskClass(record.scoreBruto),
-    'klasse_n' => _riskClass(record.scoreNetto),
+    'klasse' => klasse(bruto: true),
+    'klasse_b' => klasse(bruto: true),
+    'klasse_n' => klasse(bruto: false),
     _ => null,
   };
   if (_derivedKeys.contains(key)) {
@@ -205,7 +280,9 @@ List<List<String>>? ociViewMaterialize(
   final method =
       RiskMethod.parse(sourceTable.marker?.attr('method') ?? '') ??
       RiskMethod.fmea;
-  final plan = ociViewPlan(view, method);
+  final single = ociScoringSingle(sourceTable);
+  final scaleId = dossier.scaleFor(sourceTable)?.id;
+  final plan = ociViewPlan(view, method, singleScoring: single);
   var rows = [for (final row in sourceTable.contractRows) RiskRecord(row)];
   if (plan.filterKey != null) {
     rows = [
@@ -214,7 +291,8 @@ List<List<String>>? ociViewMaterialize(
     ];
   }
   var materialized = [
-    for (final r in rows) [for (final key in plan.cols) _viewCell(r, key)],
+    for (final r in rows)
+      [for (final key in plan.cols) _viewCell(r, key, method, scaleId)],
   ];
   if (plan.sortKey == 'priority') {
     // De benoemde prioriteringsregel uit §3.6 (#2493): RPN of score dalend,
@@ -225,7 +303,7 @@ List<List<String>>? ociViewMaterialize(
     indexed.sort((a, b) => _priorityCompare(rows[a], rows[b], method));
     materialized = [
       for (final i in indexed)
-        [for (final key in plan.cols) _viewCell(rows[i], key)],
+        [for (final key in plan.cols) _viewCell(rows[i], key, method, scaleId)],
     ];
   } else if (plan.sortKey != null) {
     final sortCol = plan.cols.indexOf(plan.sortKey!);
@@ -252,7 +330,9 @@ List<List<String>>? ociViewMaterialize(
   return [
     [
       for (final key in plan.cols)
-        ociContractHeaderLabels[key] ?? (key.startsWith('x-') ? key : key),
+        (single ? _singleScoreHeaderLabels[key] : null) ??
+            ociContractHeaderLabels[key] ??
+            (key.startsWith('x-') ? key : key),
     ],
     ...materialized,
   ];
@@ -305,6 +385,13 @@ String? createOciViewBlock(
     return null;
   }
   final rev = sourceTable.rev;
+  var cols = ociViewProjectionCols(projection, method)!;
+  if (ociScoringSingle(sourceTable)) {
+    cols = [
+      for (final key in cols)
+        if (!_nettoViewKeys.contains(key)) key,
+    ];
+  }
   final marker = OciTableMarker(
     kind: OciMarkerKinds.view,
     version: 1,
@@ -313,7 +400,7 @@ String? createOciViewBlock(
       'projection': projection,
       if (rev != null) 'gen': '$rev',
       'sort': ?sort,
-      'cols': ociViewProjectionCols(projection, method)!.join(','),
+      'cols': cols.join(','),
     },
   );
   // Materialiseer direct — het blok dat terugkomt is meteen een bruikbare,

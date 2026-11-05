@@ -1628,6 +1628,10 @@ const _dutchSourceAddEl = <String, String>{
   'Markerregel zonder tabel eronder.': 'Γραμμή δείκτη χωρίς πίνακα από κάτω.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Ο δείκτης δεν κάνει τίποτα· παραμένει στο αρχείο ως νεκρά μεταδεδομένα.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Καθαρή βαθμολογία ή καθαρή βάση σε μητρώο scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Αυτό το μητρώο καταγράφει μία βαθμολογία· η καθαρή τιμή αγνοείται και μπορεί να παραπλανήσει.',
   'Extra lettertype voor ontbrekende tekens':
       'Επιπλέον γραμματοσειρά για χαρακτήρες που λείπουν',
   'Geen lettertypebestand gekozen': 'Δεν επιλέχθηκε αρχείο γραμματοσειράς',

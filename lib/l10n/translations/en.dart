@@ -809,6 +809,10 @@ const _dutchSourceAddEn = {
   'Markerregel zonder tabel eronder.': 'Marker line without a table below it.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'The marker does nothing; it remains in the file as dead metadata.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Netto score or netto basis in a scoring=single register.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'This register records a single score; the netto value is ignored and can mislead.',
   'Extra lettertype voor ontbrekende tekens':
       'Extra font for missing characters',
   'Geen lettertypebestand gekozen': 'No font file selected',

@@ -293,6 +293,10 @@ void _scoreAndNettoChecks(
     final marker = table.marker!;
     final method = RiskMethod.parse(marker.attr('method') ?? '');
     if (method == null) continue;
+    // Een `scoring=single`-register kent één score per risico (#2804):
+    // netto-kolommen en netto_basis horen daar niet en zijn een bevinding
+    // als een rij ze toch invult.
+    final single = ociScoringSingle(table);
     final scale = dossier.scaleFor(table);
     final scaleName = marker.attr('scale') ?? '';
     if (scale == null) {
@@ -366,7 +370,25 @@ void _scoreAndNettoChecks(
       final hasNetto = nettoKeys.any(
         (key) => (record.cells[key]?.trim() ?? '').isNotEmpty,
       );
-      if (hasNetto && record.nettoBasis.isEmpty) {
+      if (single) {
+        if (hasNetto || record.nettoBasis.isNotEmpty) {
+          findings.add(
+            RiskQualityFinding(
+              severity: RiskQualitySeverity.warning,
+              code: 'netto-in-single',
+              line: line,
+              tableId: table.id,
+              recordId: record.id.isEmpty ? null : record.id,
+              message: _l10n.d(
+                'Netto-score of netto-basis in een scoring=single register.',
+              ),
+              consequence: _l10n.d(
+                'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.',
+              ),
+            ),
+          );
+        }
+      } else if (hasNetto && record.nettoBasis.isEmpty) {
         final justified = record.measureIds.any(
           (id) => dossier.measureById(id)?.status?.justifiesNetto ?? false,
         );

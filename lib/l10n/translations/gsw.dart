@@ -1605,6 +1605,10 @@ const _dutchSourceAddGsw = <String, String>{
   'Markerregel zonder tabel eronder.': 'Markierigszile ohni Tabelle drunder.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'D Markierig macht nüüt; si blibt als tooti Metadata in der Datei stoh.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Netto-Score oder Netto-Basis in eme Register mit scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Das Register hält e Score fäst; de Netto-Wärt wird ignoriert und cha irrifüehre.',
   'Extra lettertype voor ontbrekende tekens':
       'Zuesätzlechi Schrift für fehlende Zeiche',
   'Geen lettertypebestand gekozen': 'Kai Schriftdaatei gwählt',

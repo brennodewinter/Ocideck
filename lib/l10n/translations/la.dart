@@ -1617,6 +1617,10 @@ const _dutchSourceAddLa = <String, String>{
   'Markerregel zonder tabel eronder.': 'Linea notae sine tabula subter.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Nota nihil agit; in archivo manet velut metadata mortua.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Punctum netum vel basis neta in registro scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Hoc registrum unum punctum notat; valor netus ignoratur et fallere potest.',
   'Extra lettertype voor ontbrekende tekens':
       'Typus extra pro litteris absentibus',
   'Geen lettertypebestand gekozen': 'Nullum typi file electum',

@@ -1631,6 +1631,10 @@ const _dutchSourceAddPt = <String, String>{
   'Markerregel zonder tabel eronder.': 'Linha de marcador sem tabela abaixo.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'O marcador não faz nada; permanece no ficheiro como metadado morto.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Pontuação líquida ou base líquida num registo scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Este registo regista uma única pontuação; o valor líquido é ignorado e pode induzir em erro.',
   'Extra lettertype voor ontbrekende tekens':
       'Tipo de letra extra para caracteres em falta',
   'Geen lettertypebestand gekozen':

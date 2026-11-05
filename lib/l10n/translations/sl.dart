@@ -1603,6 +1603,10 @@ const _dutchSourceAddSl = <String, String>{
   'Markerregel zonder tabel eronder.': 'Vrstica oznake brez tabele spodaj.',
   'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
       'Oznaka ne naredi ničesar; ostane v datoteki kot mrtvi metapodatek.',
+  'Netto-score of netto-basis in een scoring=single register.':
+      'Neto ocena ali neto osnova v registru scoring=single.',
+  'Dit register legt één score vast; de netto-waarde wordt genegeerd en kan misleiden.':
+      'Ta register beleži eno samo oceno; neto vrednost se prezre in lahko zmede.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatna pisava za manjkajoče znake',
   'Geen lettertypebestand gekozen': 'Datoteka s pisavo ni izbrana',
