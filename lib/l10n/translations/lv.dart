@@ -1593,6 +1593,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Marķieris ir atdalīts no savas tabulas — starp tām ir tikai tukšas rindiņas.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Marķieris nedarbojas: līgums klusi pazūd un tabula kļūst par parastu tabulu.',
+  'Markerregel zonder tabel eronder.': 'Marķiera rindiņa bez tabulas zem tās.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Marķieris neko nedara; tas paliek failā kā miruši metadati.',
   'Extra lettertype voor ontbrekende tekens':
       'Papildu fonts trūkstošajām rakstzīmēm',
   'Geen lettertypebestand gekozen': 'Fonta fails nav izvēlēts',

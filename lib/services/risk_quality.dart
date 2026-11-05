@@ -12,6 +12,9 @@ import 'dart:ui' show Locale;
 
 import '../l10n/app_localizations.dart';
 import '../models/risk_dossier.dart';
+import '../utils/markdown_blocks.dart';
+import 'document_timeline.dart';
+import 'markdown_table_codec.dart';
 import 'ocideck_marked_table.dart';
 import 'ocideck_markers.dart';
 import 'risk_bowtie.dart';
@@ -29,7 +32,7 @@ enum RiskQualitySeverity { error, warning }
 /// Welke veilige herstelactie bij een bevinding past. Alleen
 /// [refreshView] mag de bron aanraken; alle andere bevindingen vragen om
 /// menselijke keuze en tonen alleen waar en wat.
-enum RiskQualityRepair { none, refreshView, recalculateCalc }
+enum RiskQualityRepair { none, refreshView, recalculateCalc, reattachMarker }
 
 /// Eén bevinding op één plek: welke tabel, welk record, welke regel —
 /// genoeg om ernaartoe te springen in elke weergave van het bestand.
@@ -121,6 +124,7 @@ AppLocalizations get _l10n => const AppLocalizations(Locale('nl'));
 RiskQualityReport riskQualityFindings(String source) {
   final dossier = RiskDossier.read(source);
   final findings = <RiskQualityFinding>[];
+  _markerAttachmentChecks(source, dossier, findings);
   _idIntegrity(dossier, findings);
   _scoreAndNettoChecks(dossier, findings);
   _measureLifecycleChecks(dossier, findings);
@@ -129,6 +133,92 @@ RiskQualityReport riskQualityFindings(String source) {
   _viewChecks(source, dossier, findings);
   findings.sort((a, b) => a.line - b.line);
   return RiskQualityReport(findings);
+}
+
+/// Markerhechting (#2803): een marker die door alleen lege regels van de
+/// tabel eronder is gescheiden verliest zijn binding — bij
+/// `<!-- timeline -->` altijd (dat contract kent geen witregel-tolerantie),
+/// bij `<!-- ocideck:* -->` als een lege regel midden in een markerstapel
+/// viel. Dat is één herstelknop; een marker helemaal zonder tabel is een
+/// aparte, lichtere bevinding.
+void _markerAttachmentChecks(
+  String source,
+  RiskDossier dossier,
+  List<RiskQualityFinding> findings,
+) {
+  final lines = source.split('\n');
+  final orphans = dossier.scan.orphanMarkerLines;
+  var o = 0;
+  while (o < orphans.length) {
+    final start = orphans[o].$1;
+    var end = start;
+    while (o + 1 < orphans.length && orphans[o + 1].$1 == end + 1) {
+      o++;
+      end = orphans[o].$1;
+    }
+    findings.add(_detachedOrOrphan(lines, start, end));
+    o++;
+  }
+  // `<!-- timeline -->` loopt buiten de oci-scan om: zelfde beoordeling,
+  // zelfde herstelknop. Fenced blokken zijn letterlijke tekst.
+  var i = 0;
+  while (i < lines.length) {
+    final fence = markdownFenceOpen(lines[i].trim());
+    if (fence != null) {
+      i++;
+      while (i < lines.length && !fence.closes(lines[i].trim())) {
+        i++;
+      }
+      continue;
+    }
+    if (lines[i].trim() == documentTimelineMarker) {
+      final bound =
+          i + 2 < lines.length &&
+          isMarkdownTableLine(lines[i + 1]) &&
+          isMarkdownTableDelimiterRow(lines[i + 2]);
+      if (!bound) findings.add(_detachedOrOrphan(lines, i, i));
+    }
+    i++;
+  }
+}
+
+/// De beoordeling van één marker(run) die niet aan zijn tabel hangt: komt
+/// er na witregels — eventueel via een wél gebonden markerblok — een
+/// GFM-tabel, dan is de marker los (blokkerend, met één klik te hechten);
+/// anders is hij een wees (waarschuwing, geen veilige automaat).
+RiskQualityFinding _detachedOrOrphan(List<String> lines, int start, int end) {
+  var j = end + 1;
+  while (j < lines.length &&
+      (lines[j].trim().isEmpty || isOciTableMarkerLine(lines[j]))) {
+    j++;
+  }
+  final detached =
+      j + 1 < lines.length &&
+      isMarkdownTableLine(lines[j]) &&
+      isMarkdownTableDelimiterRow(lines[j + 1]);
+  if (detached) {
+    return RiskQualityFinding(
+      severity: RiskQualitySeverity.error,
+      code: 'marker-detached',
+      line: start + 1,
+      message: _l10n.d(
+        'Marker staat los van zijn tabel — alleen lege regels ertussen.',
+      ),
+      consequence: _l10n.d(
+        'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.',
+      ),
+      repair: RiskQualityRepair.reattachMarker,
+    );
+  }
+  return RiskQualityFinding(
+    severity: RiskQualitySeverity.warning,
+    code: 'marker-orphan',
+    line: start + 1,
+    message: _l10n.d('Markerregel zonder tabel eronder.'),
+    consequence: _l10n.d(
+      'De marker doet niets; hij blijft als dode metadata in het bestand staan.',
+    ),
+  );
 }
 
 /// ID-integriteit, over álle contracttabellen.

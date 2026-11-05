@@ -1596,6 +1596,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Oznaka je ločena od svoje tabele — med njima so samo prazne vrstice.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Oznaka ne velja: pogodba tiho izgine in tabela postane običajna tabela.',
+  'Markerregel zonder tabel eronder.': 'Vrstica oznake brez tabele spodaj.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Oznaka ne naredi ničesar; ostane v datoteki kot mrtvi metapodatek.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatna pisava za manjkajoče znake',
   'Geen lettertypebestand gekozen': 'Datoteka s pisavo ni izbrana',

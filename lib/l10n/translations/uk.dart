@@ -1611,6 +1611,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Маркер відокремлений від своєї таблиці — між ними лише порожні рядки.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Маркер не діє: контракт мовчки зникає, і таблиця стає звичайною таблицею.',
+  'Markerregel zonder tabel eronder.': 'Рядок маркера без таблиці під ним.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Маркер нічого не робить; він лишається у файлі як мертві метадані.',
   'Extra lettertype voor ontbrekende tekens':
       'Додатковий шрифт для відсутніх символів',
   'Geen lettertypebestand gekozen': 'Файл шрифту не вибрано',

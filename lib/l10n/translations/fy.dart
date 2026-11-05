@@ -643,6 +643,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Markearring stiet los fan syn tabel — allinnich lege rigels der tusken.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'De markearring jildt net: it kontrakt falt stil wei en de tabel wurdt in gewoane tabel.',
+  'Markerregel zonder tabel eronder.':
+      'Markearringsrige sûnder tabel derûnder.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'De markearring docht neat; hy bliuwt as deade metadata yn it bestân stean.',
   'Extra lettertype voor ontbrekende tekens':
       'Ekstra lettertype foar ûntbrekkende tekens',
   'Geen lettertypebestand gekozen': 'Gjin lettertypebestân keazen',

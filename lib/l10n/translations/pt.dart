@@ -1624,6 +1624,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'O marcador está separado da sua tabela — apenas linhas vazias entre eles.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'O marcador não se aplica: o contrato desaparece silenciosamente e a tabela torna-se uma tabela normal.',
+  'Markerregel zonder tabel eronder.': 'Linha de marcador sem tabela abaixo.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'O marcador não faz nada; permanece no ficheiro como metadado morto.',
   'Extra lettertype voor ontbrekende tekens':
       'Tipo de letra extra para caracteres em falta',
   'Geen lettertypebestand gekozen':

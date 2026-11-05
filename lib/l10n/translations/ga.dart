@@ -1625,6 +1625,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Tá an marcóir scartha óna thábla — níl ach línte folmha eatarthu.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Ní bhaineann an marcóir: imíonn an conradh go ciúin agus éiríonn an tábla ina ghnáth-thábla.',
+  'Markerregel zonder tabel eronder.': 'Líne marcóra gan tábla faoi.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Ní dhéanann an marcóir aon rud; fanann sé sa chomhad mar mheiteashonraí mharbha.',
   'Extra lettertype voor ontbrekende tekens':
       'Cló breise do charachtair ar iarraidh',
   'Geen lettertypebestand gekozen': 'Níor roghnaíodh aon chomhad cló',

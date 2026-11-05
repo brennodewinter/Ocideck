@@ -1610,6 +1610,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Nota a tabula sua seiuncta est — solum lineae vacuae intersunt.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Nota non valet: contractus tacite abit et tabula vulgaris fit.',
+  'Markerregel zonder tabel eronder.': 'Linea notae sine tabula subter.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Nota nihil agit; in archivo manet velut metadata mortua.',
   'Extra lettertype voor ontbrekende tekens':
       'Typus extra pro litteris absentibus',
   'Geen lettertypebestand gekozen': 'Nullum typi file electum',

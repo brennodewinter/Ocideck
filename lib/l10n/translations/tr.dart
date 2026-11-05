@@ -2500,6 +2500,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'İşaretçi tablosundan ayrılmış — aralarında yalnızca boş satırlar var.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'İşaretçi geçerli değil: sözleşme sessizce düşer ve tablo sıradan bir tablo olur.',
+  'Markerregel zonder tabel eronder.': 'Altında tablo olmayan işaretçi satırı.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'İşaretçi hiçbir şey yapmaz; dosyada ölü meta veri olarak kalır.',
   'Extra lettertype voor ontbrekende tekens':
       'Eksik karakterler için ek yazı tipi',
   'Geen lettertypebestand gekozen': 'Yazı tipi dosyası seçilmedi',

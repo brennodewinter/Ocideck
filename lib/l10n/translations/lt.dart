@@ -1602,6 +1602,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Žymeklis atskirtas nuo savo lentelės — tarp jų tik tuščios eilutės.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Žymeklis negalioja: sutartis tyliai išnyksta ir lentelė tampa paprasta lentele.',
+  'Markerregel zonder tabel eronder.': 'Žymeklio eilutė be lentelės po ja.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Žymeklis nieko nedaro; jis lieka faile kaip negyvi metaduomenys.',
   'Extra lettertype voor ontbrekende tekens':
       'Papildomas šriftas trūkstantiems simboliams',
   'Geen lettertypebestand gekozen': 'Šrifto failas nepasirinktas',

@@ -1612,6 +1612,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Marcatorul este despărțit de tabelul său — doar rânduri goale între ele.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Marcatorul nu se aplică: contractul dispare în tăcere și tabelul devine un tabel obișnuit.',
+  'Markerregel zonder tabel eronder.': 'Rând de marcator fără tabel dedesubt.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Marcatorul nu face nimic; rămâne în fișier ca metadată moartă.',
   'Extra lettertype voor ontbrekende tekens':
       'Font suplimentar pentru caracterele lipsă',
   'Geen lettertypebestand gekozen': 'Niciun fișier de font ales',

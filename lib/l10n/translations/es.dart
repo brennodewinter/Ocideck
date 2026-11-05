@@ -641,6 +641,13 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'El marcador está separado de su tabla — solo hay líneas vacías entre ellos.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'El marcador no se aplica: el contrato desaparece en silencio y la tabla se convierte en una tabla normal.',
+  'Markerregel zonder tabel eronder.': 'Línea de marcador sin tabla debajo.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'El marcador no hace nada; permanece en el archivo como metadato muerto.',
   'Extra lettertype voor ontbrekende tekens':
       'Tipo de letra extra para caracteres ausentes',
   'Geen lettertypebestand gekozen': 'Ningún archivo de fuente elegido',

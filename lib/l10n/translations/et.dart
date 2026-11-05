@@ -1589,6 +1589,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Marker on oma tabelist lahti — vahel on ainult tühjad read.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Marker ei kehti: leping kaob vaikselt ja tabel muutub tavaliseks tabeliks.',
+  'Markerregel zonder tabel eronder.': 'Markeririda ilma tabelita all.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Marker ei tee midagi; see jääb faili surnud metaandmetena.',
   'Extra lettertype voor ontbrekende tekens':
       'Lisafont puuduvate tähtede jaoks',
   'Geen lettertypebestand gekozen': 'Fontifaili pole valitud',
