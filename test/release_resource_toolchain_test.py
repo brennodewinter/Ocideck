@@ -118,6 +118,20 @@ if sys.argv[1]=='check-toolchain': sys.exit(1)
             self.assertIn('options: --cpus 2 --memory ', container.split('      image:')[0])
         self.assertIn("inputs.channel == 'windows' && '4g' || '8g'", containers[0])
 
+    def test_macos_whisper_cli_is_signed_and_app_resealed_after_install(self):
+        # #2800: de helper landt in een al verzegelde .app — zonder eigen
+        # handtekening en zonder hersluiten van de bundel is die seal kapot.
+        text = (ROOT / 'scripts/bundle_whisper_cli.sh').read_text()
+        macos = text.split("PLATFORM in\n  macos)")[1].split('windows)')[0] \
+            if 'PLATFORM in\n  macos)' in text else text
+        install = macos.index('install -m 0755')
+        helper_sign = macos.index('Helpers/whisper-cli"\n    codesign') \
+            if 'Helpers/whisper-cli"\n    codesign' in macos \
+            else macos.index('codesign --force --options runtime -s -')
+        app_seal = macos.index('--preserve-metadata=entitlements')
+        self.assertLess(install, helper_sign)
+        self.assertLess(helper_sign, app_seal)
+
     def test_debian_daemon_build_and_execution_are_bounded(self):
         text = (ROOT / 'scripts/build_debian12_release.sh').read_text()
         self.assertIn('build --platform linux/amd64 --cpu-quota 200000 --cpu-period 100000 --memory 8g', text)
