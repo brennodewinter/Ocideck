@@ -90,7 +90,14 @@ sys.exit(subprocess.run(shlex.split(sys.argv[-1]),input=sys.stdin.buffer.read())
                 bundle.mkdir()
                 (bundle / 'index.html').write_text('checked elsewhere')
                 (bundle / 'SHA256SUMS').write_text('checked elsewhere')
-                scripts = {'dart': '#!/bin/sh\nexit 0\n',
+                scripts = {'dart': '''#!/bin/sh
+if [ "$1" = run ]; then
+    printf 'BAD_BUILD_HOOK\\n' >> "$PROBE_LOG"
+    exit 99
+fi
+test "$1" = --disable-dart-dev && test "$2" = tool/pack_web_release.dart && test "$3" = --check || exit 98
+printf 'dart-check\\n' >> "$PROBE_LOG"
+''',
                            'ssh': '#!/bin/sh\nprintf "ssh\\n" >> "$PROBE_LOG"\nexit "$SSH_RESULT"\n',
                            'scp': '#!/bin/sh\nprintf "BAD_SCP\\n" >> "$PROBE_LOG"\nexit 99\n',
                            'tar': '#!/bin/sh\nprintf "BAD_TAR\\n" >> "$PROBE_LOG"\nexit 99\n'}
@@ -103,7 +110,7 @@ sys.exit(subprocess.run(shlex.split(sys.argv[-1]),input=sys.stdin.buffer.read())
                     PATH=str(tools) + os.pathsep + os.environ['PATH'], PROBE_LOG=str(log),
                     SSH_RESULT='1' if failure else '0'), capture_output=True, text=True, timeout=20)
                 self.assertEqual(result.returncode, 1 if failure else 0, result.stderr)
-                self.assertEqual(log.read_text().splitlines(), ['ssh'])
+                self.assertEqual(log.read_text().splitlines(), ['dart-check', 'ssh'])
 
 
 if __name__ == '__main__':

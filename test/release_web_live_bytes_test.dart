@@ -42,7 +42,9 @@ void main() {
     final server = await Process.start('python3', [
       '-u',
       '-c',
-      'import http.server,sys; '
+      // Reverse-DNS van loopback kan langer duren dan de hele lokale byteproef.
+      'import http.server,socket; '
+          'socket.getfqdn=lambda *_: "localhost"; '
           'server=http.server.ThreadingHTTPServer(("127.0.0.1",0),http.server.SimpleHTTPRequestHandler); '
           'print(server.server_port,flush=True); server.serve_forever()',
     ], workingDirectory: dir.path);

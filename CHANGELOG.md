@@ -8,8 +8,35 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.7] — 2026-11-05
+
 ### Fixed
 
+- **Opslaan en herstel.** Een document schrijft door wanneer de tekst tijdens
+  het opslaan verandert; een deck meldt pas succes wanneer de actuele inhoud
+  schoon op schijf staat. Momentopnames van levende sessies blijven bij het
+  opruimen bewaard. Een onleesbare Git-wachtrijsleutel telt niet meer als een
+  lege wachtrij (#2720–#2723).
+- **Afbeeldingen bij offline Git-opslag.** Tijdelijke beeldbytes worden bij
+  uitgesteld opslaan bewaard. Ontbreekt een benodigd beeld, dan weigert de
+  commit in plaats van een verwijzing zonder inhoud op te slaan (#2724).
+- **Documenteditor en bronmodus.** Gekoppelde weergaven zijn weer aanklikbaar
+  en de broninspectie volgt de typpauze. Bij teruggaan uit een bron met fouten
+  kun je je tekst behouden; een smal venster geeft de knoppen een tweede regel
+  (#2709–#2713, #2742).
+- **Diagrammen en grafieken.** Gelijktijdige Mermaid-weergaven delen een
+  render die ook werkelijk afloopt. Grafieken lezen de bewegingsvoorkeur
+  zonder die al vóór het opbouwen van de weergave op te vragen (#2725, #2733).
+- **Toetsenbord en schermlezer.** Bewerkvelden en roosters hebben een
+  toetsenborduitweg. De dialijst toont de focus voordat Delete een dia wist.
+  Mermaid- en Gantt-diagrammen krijgen een tekstalternatief (#2729–#2733).
+- **Dossiermarkers.** De kwaliteitscontrole meldt een marker die door lege
+  regels losstaat van zijn tabel en kan die weer aansluiten. Een marker zonder
+  bijbehorende tabel krijgt een waarschuwing zonder automatisch herstel
+  (#2803).
+- **Risicostatussen en schalen.** Risico's herkennen ook de Nederlandse
+  statussen. De FMEA-schaal `sod-1-5` valideert waarden van één tot vijf
+  (#2801, #2802).
 - **Grote SVG's tonen op het web.** Een geïmporteerde SVG boven 256 KB ging in
   de browser naar `Isolate.run`, dat het web niet kent, en verscheen als fout.
   Het web saneert hem nu op de main thread; native blijft dat op een
@@ -46,8 +73,8 @@ All notable changes to OciDeck are documented in this file.
   een Linux met tmpfs-`/tmp` bij elke herstart, ook na een vastgelopen call.
   De staging staat nu in de app-supportmap (`transcription/recordings/`), en
   wat er nog in de oude map lag verhuist bij de eerste start mee (#2761).
-- **Modeldownload loopt altijd af.** Een TLS-fout, zoals een bedrijfsproxy die
-  het certificaat vervangt, liet de modelkaart voorgoed op "bezig" staan. Elke
+- **Modeldownload herstelt na een fout.** Een TLS-fout, zoals een bedrijfsproxy
+  die het certificaat vervangt, liet de modelkaart voorgoed op "bezig" staan. Elke
   volgende download bleef daarna geweigerd tot een herstart. Zo'n fout heet nu
   een netwerkfout en ruimt het deelbestand op (#2756).
 - **Opnamestroken overspoelen een schermlezer niet meer.** De strook "Opname
@@ -59,6 +86,18 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Eén risicoscore.** Met `scoring=single` legt een risicoregister één score
+  per risico vast, zonder nettokolommen of nettobasis. Overzicht en prioriteiten
+  volgen die keuze. Zonder dit attribuut blijft bruto/netto behouden (#2804).
+- **Auditpakket met redactie.** Een geredigeerde afleiding kan met een manifest
+  van de redacties worden verpakt. Het pakket bevat de commitments zonder de
+  bijbehorende salts (#2747).
+- **Grafieken en tekst in documenten.** De visuele editor toont een
+  `chart`-codeblok als grafiek. Alinearichting volgt het eerste sterke teken;
+  voor document-PDF kun je een systeemlettertype kiezen dat de benodigde
+  tekens buiten Latin-1 bevat (#2751–#2753).
+- **Git-commits ondertekenen.** De native Git-route kan optioneel tekenen met
+  de ingestelde `user.signingkey`; standaard staat dit uit (#2750).
 - **Privé zoeken tijdens presenteren.** Met een apart publieksvenster kun je
   passages en optioneel sprekersnotities terugvinden. Het publiek blijft op de
   huidige dia totdat je bewust *Toon dia* kiest; automatisch doorspelen pauzeert.
@@ -72,6 +111,29 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Privacykeuzes.** Melding, badge en exportblokkade bieden dezelfde keuzes.
+  Bevindingen noemen de soort, de plek en het gevolg van de actie. Een regel
+  blijvend onderdrukken vraagt eerst bevestiging; de balk voor achtergehouden
+  inhoud legt de reden uit en biedt de TLP-keuze (#2738–#2744).
+- **HTML-export.** De TLP-badge, privacybadge en het watermerk gaan per dia
+  mee, inclusief de benodigde opmaak en alinearichting (#2748, #2752).
+- **Presenteren en bedienen.** De presentatiekeuze legt uit waar de dia
+  verschijnt en wanneer dat niet kan. Een document kan direct worden
+  gepresenteerd. De bewaarknop heet *Opslaan* en de TLP-chip *Delen*
+  (#2741, #2743, #2745, #2746).
+- **Samen tabellen bewerken.** Een tabelrij reist als één bewerking mee in
+  plaats van als losse wijzigingen aan de cellen (#2749).
+- **Beelden en export.** Documentbeelden worden op passende breedtes
+  gedecodeerd en bijsnijden begrenst de decodeergrootte. De beeldvoorbereiding
+  voor export gebeurt per dia in plaats van voor alle dia's tegelijk
+  (#2726–#2728).
+- **Taart- en donutgrafieken.** Het segment onder de aanwijzer springt verder
+  naar buiten (#2701).
+- **Releaseketen.** Platformkanalen kunnen afzonderlijk publiceren met
+  ondertekende manifesten. Onderbroken werk kan met dezelfde kandidaat worden
+  hervat; bouwroutes controleren de SDK en begrenzen hun middelen. De
+  macOS-bundel tekent ook `whisper-cli` en wordt na het bundelen verzegeld
+  (#2773–#2787, #2797–#2800).
 - **Callopname rekent zuiniger.** Tijdens een callopname kreeg de app vijftig
   keer per seconde een nieuwe toestand, alleen om de teller "Ontvangen brokken"
   op te hogen. Banner en callpaneel werden daardoor continu opnieuw gebouwd.
