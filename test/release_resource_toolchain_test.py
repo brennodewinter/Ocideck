@@ -51,7 +51,7 @@ if sys.argv[1]=='check-toolchain': sys.exit(1)
                     'dart': '#!/bin/sh\nexit 0\n',
                     'ninja': "#!/usr/bin/env python3\nimport json,os,sys\nopen(os.environ['CALLS'],'a').write(json.dumps(sys.argv[1:])+'\\n')\n",
                     'make': '#!/bin/sh\n[ "$1" = check-toolchain ] && exit 0\nninja -C build install -j99\nexit 17\n',
-                    'flutter': '#!/bin/sh\n[ "$1" = pub ] && exit 0\nninja -C build install -j99\nexit 17\n',
+                    'flutter': '#!/bin/sh\n[ "$1" = pub ] && exit 0\n[ "$1" = config ] && exit 0\nninja -C build install -j99\nexit 17\n',
                 }
                 for name, source in binaries.items():
                     executable = root / 'bin' / name
@@ -124,4 +124,9 @@ if sys.argv[1]=='check-toolchain': sys.exit(1)
         self.assertIn('create --platform linux/amd64 --cpus 2 --memory 8g', text)
         self.assertIn('--env CMAKE_BUILD_PARALLEL_LEVEL=2', text)
         entry = (ROOT / 'scripts/debian12_builder/container-build.sh').read_text()
-        self.assertLess(entry.index('dart run tool/check_toolchain.dart'), entry.index('flutter pub get'))
+        # #2799: analytics uit op het runtime-HOME vóór de strikte versieprobe,
+        # en de controle standalone — `dart run` zou pub-resolutie/hooks
+        # starten vóór de poort die juist vroeg moet zijn.
+        self.assertLess(entry.index('flutter config --no-analytics'), entry.index('dart tool/check_toolchain.dart'))
+        self.assertLess(entry.index('dart tool/check_toolchain.dart'), entry.index('flutter pub get'))
+        self.assertNotIn('dart run tool/check_toolchain.dart', entry)

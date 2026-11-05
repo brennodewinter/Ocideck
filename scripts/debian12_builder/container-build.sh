@@ -22,7 +22,14 @@ if [[ -e "${destination}" || -e "${destination}.tar.gz" ]]; then
   exit 1
 fi
 
-dart run tool/check_toolchain.dart
+# Analytics uit vóór de eerste Flutter-aanroep op dit runtime-HOME: anders
+# schrijft Flutter een eenmalige melding ná de machine-JSON van
+# `flutter --version --machine` en valt de strikte toolchaincontrole op de
+# extra uitvoer (#2799). De controle zelf draait standalone — `dart run` in
+# een pakketmap zou pub-resolutie en native hooks starten, terwijl deze
+# vroege poort alleen de SDK mag vragen.
+flutter config --no-analytics
+dart tool/check_toolchain.dart
 flutter pub get --enforce-lockfile
 bash scripts/run_release_linux_build.sh flutter build linux --release
 
