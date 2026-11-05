@@ -1,442 +1,80 @@
-# Alleen handmatig; maakt kandidaatbestanden, nooit tags of publieke releases.
-name: Onafhankelijke releasekandidaat
-concurrency:
-  group: release-channel-${{ (inputs.channel == 'macos' || inputs.channel == 'windows') && inputs.channel || 'linux-web-server' }}
-  cancel-in-progress: false
+# Disposable runtime proof only: no application build, artifact execution or publication.
+name: Release CPU limit canary
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        required: true
-      source_sha:
-        required: true
-      frozen_ref:
-        required: true
-      operation_id:
-        description: Ownership marker for cancellation and recovery
-        required: false
-      attempt_id:
-        description: Explicit continuation nonce, empty for the original attempt
-        required: false
-        default: ""
-      previous_run_id:
-        description: Exact terminal predecessor with retained pending evidence
-        required: false
-        default: ""
-      channel:
-        type: choice
-        options: [macos, windows, web, linux-debian12, linux-tar, linux-deb, linux-rpm, linux-appimage, linux-flatpak]
-        required: true
-env:
-  RELEASE_TAG: ${{ inputs.tag }}
+      tag: {required: true}
+      source_sha: {required: true}
+      frozen_ref: {required: true}
+      channel: {required: true}
+      operation_id: {required: true}
+concurrency:
+  group: release-cpu-canary-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
-  build:
-    if: ${{ inputs.channel != 'macos' && ((github.ref == 'refs/heads/main' && inputs.attempt_id == '') || (inputs.channel == 'windows' && inputs.attempt_id != '' && inputs.previous_run_id != '' && github.ref == format('refs/heads/codex/release-build-lock-{0}-{1}', inputs.tag, inputs.channel))) }}
+  canary:
+    # Keep the Docker job name equal to GITHUB_JOB even after server matrix expansion.
+    name: canary
     runs-on: docker
-    timeout-minutes: ${{ inputs.channel == 'windows' && 90 || 175 }}
-    outputs:
-      completed: ${{ steps.windows.outputs.completed }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - profile: ci8
+            image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+            memory_gib: 8
+          - profile: ci4
+            image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+            memory_gib: 4
+          - profile: deb
+            image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
+            memory_gib: 4
+          - profile: debian12
+            image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
+            memory_gib: 4
+          - profile: rpm
+            image: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
+            memory_gib: 4
+          - profile: appimage
+            image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
+            memory_gib: 4
+          - profile: flatpak
+            image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
+            memory_gib: 4
+          - profile: tar
+            image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
+            memory_gib: 4
     container:
-      options: --cpus 2 --memory ${{ inputs.channel == 'windows' && '4g' || '8g' }}
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: ${{ matrix.image }}
+      options: --cpus 2 --memory ${{ matrix.memory_gib }}g
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          persist-credentials: false
           ref: ${{ github.sha }}
-          path: controller
-      - name: Vaste bron controleren voor broncode wordt uitgevoerd
-        env:
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          FROZEN_REF: ${{ inputs.frozen_ref }}
-          CHANNEL: ${{ inputs.channel }}
-        run: |
-          set -eu
-          cd controller
-          git config --global --add safe.directory "$PWD"
-          python3 - "$RELEASE_TAG" "$SOURCE_SHA" "$CHANNEL" <<'PYGUARD'
-          import sys
-          from tool.release_channel import identity
-          identity(*sys.argv[1:])
-          PYGUARD
-          test "$FROZEN_REF" = "codex/release-candidate-$RELEASE_TAG-$SOURCE_SHA"
-          test "$(git ls-remote --exit-code origin "refs/heads/$FROZEN_REF" | awk '{print $1}')" = "$SOURCE_SHA"
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        with:
           persist-credentials: false
-          ref: ${{ inputs.source_sha }}
-          path: source
-      - name: Windows-kandidaat en volledige Windows-suite volgen
-        id: windows
-        if: ${{ inputs.channel == 'windows' }}
+          path: controller
+      - name: Enforce and verify only this container's CPU limit
         env:
-          GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
-          OPERATION_ID: ${{ inputs.operation_id }}
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          FROZEN_REF: ${{ inputs.frozen_ref }}
           FORGEJO_TOKEN: ${{ github.token }}
-          ATTEMPT_ID: ${{ inputs.attempt_id }}
-          PREVIOUS_RUN_ID: ${{ inputs.previous_run_id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          mode=fetch
-          continuation=()
-          if [ -n "$ATTEMPT_ID" ]; then
-            [[ "$ATTEMPT_ID" =~ ^[A-Za-z0-9_-]{1,80}$ && "$PREVIOUS_RUN_ID" =~ ^[1-9][0-9]*$ ]]
-            mode=collect
-            continuation=(--previous-run-id "$PREVIOUS_RUN_ID" --attempt-id "$ATTEMPT_ID")
-          fi
-          python3 controller/tool/release_windows_candidate.py "$mode" --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --ref "$FROZEN_REF" --root controller --dist source/dist --operation-id "$OPERATION_ID" --state controller/build/windows-operation.json --forge-run-id "${{ github.run_id }}" --controller-sha "${{ github.sha }}" "${continuation[@]}"
-          echo "completed=$(python3 -c 'import json; print(str(json.load(open("controller/build/windows-operation.json"))["outcome"] == "completed").lower())')" >> "$GITHUB_OUTPUT"
-      - name: Pub-cache voor de vastgelegde toolchain
-        if: ${{ inputs.channel != 'windows' && inputs.channel != 'linux-debian12' }}
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-        with:
-          path: /root/.pub-cache
-          key: channel-pub-linux-x64-${{ hashFiles('source/.tool-versions', 'source/pubspec.lock') }}
-      - name: Native hooks voor dezelfde bronafhankelijkheden en bouwomgeving
-        if: ${{ inputs.channel != 'windows' && inputs.channel != 'linux-debian12' }}
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-        with:
-          path: |
-            source/.dart_tool/hooks_runner
-            source/build/native_assets
-          key: channel-native-linux-x64-${{ hashFiles('source/.tool-versions', 'source/pubspec.lock', 'source/packages/**', 'source/third_party/**', 'source/hook/**', 'controller/.forgejo/workflows/release-channel.yml') }}
-      - name: Bouwgereedschap voor het gekozen kanaal
-        if: ${{ inputs.channel != 'windows' }}
-        env:
-          CHANNEL: ${{ inputs.channel }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          EXPECTED_IMAGE: ${{ matrix.image }}
+          EXPECTED_MEMORY_GIB: "${{ matrix.memory_gib }}"
+          PROFILE: ${{ matrix.profile }}
         run: |
           set -eu
-          git config --global --add safe.directory "$GITHUB_WORKSPACE/source"
-          if [ "$CHANNEL" != web ]; then
-            apt-get update
-            apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev file
-            case "$CHANNEL" in
-              linux-debian12) apt-get install -y --no-install-recommends docker.io iproute2 ;;
-              linux-rpm) apt-get install -y --no-install-recommends rpm ;;
-              linux-flatpak) apt-get install -y --no-install-recommends flatpak ;;
-            esac
-          fi
-      - name: Debian 12 builder-daemon vinden
-        if: ${{ inputs.channel == 'linux-debian12' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          GW="$(ip -4 route show default | awk '{print $3; exit}')"
-          test -n "$GW"
-          DOCKER_DAEMON="tcp://$GW:2375"
-          for i in $(seq 1 30); do
-            docker -H "$DOCKER_DAEMON" info >/dev/null 2>&1 && break
-            sleep 2
-          done
-          docker -H "$DOCKER_DAEMON" info >/dev/null
-          echo "DOCKER_DAEMON=$DOCKER_DAEMON" >> "$GITHUB_ENV"
-      - name: Gekozen kanaal bouwen en bron controleren
-        if: ${{ inputs.channel != 'windows' }}
-        env:
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          FROZEN_REF: ${{ inputs.frozen_ref }}
-          CHANNEL: ${{ inputs.channel }}
-          APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage
-          APPIMAGETOOL_SHA256: ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0
-        run: |
-          cd source
-          bash ../controller/scripts/build_release_channel.sh "$RELEASE_TAG" "$SOURCE_SHA" "$FROZEN_REF" "$CHANNEL"
+          test "$GITHUB_JOB" = canary
+          mkdir -p cpu-proof
+          echo '9324f3ec6a7e6f989224938b47f806e3d0dafb52c5262c7c9e22ca83a7d8b68d  controller/tool/enforce_release_cpu.cjs' | sha256sum -c -
+          sha256sum controller/tool/enforce_release_cpu.cjs > cpu-proof/helper.sha256
+          printf '%s\n' "$PROFILE" > cpu-proof/profile.txt
+          node controller/tool/enforce_release_cpu.cjs > cpu-proof/receipt.json
+          cat cpu-proof/receipt.json
       - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
-        if: ${{ inputs.channel != 'windows' || steps.windows.outputs.completed == 'true' }}
-        with:
-          name: channel-build
-          path: source/dist/*
-          if-no-files-found: error
-          retention-days: 90
-      - name: Preserve Windows operation ownership
-        if: ${{ always() && inputs.channel == 'windows' }}
-        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
-        with:
-          name: windows-operation-${{ inputs.operation_id }}
-          path: controller/build/windows-operation.json
-          if-no-files-found: warn
-          retention-days: 90
-
-  build-macos:
-    name: build-macos
-    if: ${{ inputs.channel == 'macos' && ((github.ref == 'refs/heads/main' && inputs.attempt_id == '') || (inputs.attempt_id != '' && inputs.previous_run_id != '' && github.ref == format('refs/heads/codex/release-build-lock-{0}-{1}', inputs.tag, inputs.channel))) }}
-    runs-on: ocideck-macos-arm64
-    timeout-minutes: 240
-    outputs:
-      completed: ${{ steps.macos.outputs.completed }}
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-          ref: ${{ github.sha }}
-          path: controller
-      - name: Vaste macOS-bron controleren, bouwen en notarisatie hervatten
-        id: macos
-        env:
-          FORGEJO_TOKEN: ${{ github.token }}
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          FROZEN_REF: ${{ inputs.frozen_ref }}
-          OPERATION_ID: ${{ inputs.operation_id }}
-          ATTEMPT_ID: ${{ inputs.attempt_id }}
-          PREVIOUS_RUN_ID: ${{ inputs.previous_run_id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$FROZEN_REF" = "codex/release-candidate-$RELEASE_TAG-$SOURCE_SHA"
-          cd controller
-          test "$(git ls-remote --exit-code origin "refs/heads/$FROZEN_REF" | awk '{print $1}')" = "$SOURCE_SHA"
-          git fetch --no-tags origin "$FROZEN_REF"
-          continuation=()
-          if [ -n "$ATTEMPT_ID" ]; then
-            [[ "$ATTEMPT_ID" =~ ^[A-Za-z0-9_-]{1,80}$ && "$PREVIOUS_RUN_ID" =~ ^[1-9][0-9]*$ ]]
-            continuation=(--previous-run-id "$PREVIOUS_RUN_ID" --attempt-id "$ATTEMPT_ID")
-          fi
-          python3 tool/release_macos_candidate.py --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --controller "$PWD" --dist "$GITHUB_WORKSPACE/source/dist" --operation-id "$OPERATION_ID" --forge-run-id "$GITHUB_RUN_ID" --result build/macos-operation.json "${continuation[@]}"
-          echo "completed=$(python3 -c 'import json; print(str(json.load(open("build/macos-operation.json"))["outcome"] == "completed").lower())')" >> "$GITHUB_OUTPUT"
-      - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
-        if: ${{ steps.macos.outputs.completed == 'true' }}
-        with:
-          name: channel-build
-          path: source/dist/*
-          if-no-files-found: error
-          retention-days: 90
-      - name: Preserve macOS submission ownership
         if: ${{ always() }}
-        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
         with:
-          name: macos-operation-${{ inputs.operation_id }}
-          path: controller/build/macos-operation.json
-          if-no-files-found: warn
-          retention-days: 90
-
-  consumer-deb:
-    name: .deb proef op een schone Ubuntu
-    needs: build
-    if: ${{ inputs.channel == 'linux-deb' }}
-    runs-on: docker
-    # Het image bevat alleen testgereedschap; pakketdependencies blijven een echte proef.
-    timeout-minutes: 175
-    container:
-      options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
-    steps:
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: channel-build, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          # Alleen het echte pakket en zijn gedeclareerde dependencies installeren.
-          apt-get update
-          apt-get install -y "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb"
-          # Declares de control minder dan de binary linkt, dan toont ldd
-          # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
-          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
-            echo "Het .deb dekt niet alle runtimebibliotheken van de binary." >&2
-            exit 1
-          fi
-          # Startproef: onder Xvfb moet de app opkomen en draaien blijven.
-          # timeout geeft 124 als hij de volle 20 s overleefde; een crash of
-          # direct wegvallen geeft iets anders en is dus rood.
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
-
-  consumer-debian12:
-    name: Debian 12-archief proef op een schone Debian 12
-    needs: build
-    if: ${{ inputs.channel == 'linux-debian12' }}
-    runs-on: docker
-    timeout-minutes: 175
-    container:
-      options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
-    steps:
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: channel-build, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          mkdir -p /tmp/ocideck-test
-          tar -xzf "dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
-          cd /tmp/ocideck-test/ocideck-linux-debian12-*
-          test -x ./ocideck
-          if ldd ./ocideck | grep 'not found'; then
-            echo "Het Debian 12-archief mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ./ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
-  consumer-rpm:
-    name: .rpm proef op een schone Fedora
-    needs: build
-    if: ${{ inputs.channel == 'linux-rpm' }}
-    runs-on: docker
-    timeout-minutes: 175
-    # Alleen testgereedschap vooraf: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
-    # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
-    container:
-      options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
-    steps:
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: channel-build, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          dnf install -y "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm"
-          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
-            echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
-
-  consumer-appimage:
-    name: AppImage proef op een schone Ubuntu
-    needs: build
-    if: ${{ inputs.channel == 'linux-appimage' }}
-    runs-on: docker
-    timeout-minutes: 175
-    container:
-      options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
-    steps:
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: channel-build, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          # De gepinde desktop-runtime staat al in het consumerimage.
-          cd dist
-          chmod +x ocideck-linux-x86_64-*.AppImage
-          ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
-          test -x squashfs-root/ocideck
-          # De binary vindt zijn eigen lib/ via $ORIGIN (zie packaging/linux/
-          # AppRun); wat ldd als "not found" toont, ontbreekt dus echt.
-          if ldd squashfs-root/ocideck | grep 'not found'; then
-            echo "De AppImage mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a squashfs-root/AppRun
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "De AppImage kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
-
-  consumer-flatpak:
-    name: Flatpak installatie en inhoud op een schone Ubuntu
-    needs: build
-    if: ${{ inputs.channel == 'linux-flatpak' }}
-    runs-on: docker
-    timeout-minutes: 175
-    container:
-      options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
-    steps:
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: channel-build, path: dist }
-      - name: Installeren en inhoud controleren
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          flatpak --system install -y --noninteractive --no-deps --no-related --bundle "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak"
-          app="$(flatpak --system info --show-location com.dewinter.ocideck)"
-          flatpak --system info --show-metadata com.dewinter.ocideck | grep -Fx 'runtime=org.gnome.Platform/x86_64/50'
-          test -x "$app/files/bin/ocideck"
-          test -x "$app/files/bin/git"
-          test -x "$app/files/lib/ocideck/ocideck"
-          test -x "$app/files/libexec/git-core/git-remote-https"
-          sh -n "$app/files/bin/ocideck"
-          (cd "$app/files" && sha256sum -c share/doc/ocideck-flatpak/FILES.sha256)
-          cmp "$app/files/share/doc/ocideck-flatpak/components.cdx.json" "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak.cdx.json"
-
-
-  consumer-tar:
-    name: Linux-tar-archief proef op een schone Linux-tar
-    needs: build
-    if: ${{ inputs.channel == 'linux-tar' }}
-    runs-on: docker
-    timeout-minutes: 175
-    container:
-      options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
-    steps:
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with: { name: channel-build, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          mkdir -p /tmp/ocideck-test
-          tar -xzf "dist/ocideck-linux-x64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
-          cd /tmp/ocideck-test/ocideck-*
-          test -x ./ocideck
-          if ldd ./ocideck | grep 'not found'; then
-            echo "Het Linux-tar-archief mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ./ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
-
-  evidence:
-    needs: [build, build-macos, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]
-    if: ${{ always() && (needs.build.result == 'success' || needs.build-macos.result == 'success') && ((inputs.channel == 'macos' && needs.build-macos.outputs.completed == 'true') || (inputs.channel == 'windows' && needs.build.outputs.completed == 'true') || inputs.channel == 'web' || needs.consumer-deb.result == 'success' || needs.consumer-debian12.result == 'success' || needs.consumer-rpm.result == 'success' || needs.consumer-appimage.result == 'success' || needs.consumer-flatpak.result == 'success' || needs.consumer-tar.result == 'success') }}
-    runs-on: docker
-    container:
-      options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        with:
-          persist-credentials: false
-          ref: ${{ github.sha }}
-      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a
-        with: { name: channel-build, path: dist }
-      - name: Exacte kanaalbytes vastleggen
-        env:
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          CHANNEL: ${{ inputs.channel }}
-        run: python3 tool/release_channel.py create --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --channel "$CHANNEL" --run-id "$GITHUB_RUN_ID" --dist dist --output "dist/channel-manifest-$CHANNEL.json"
-      - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
-        with:
-          name: channel-candidate-${{ inputs.channel }}
-          path: dist/*
+          name: cpu-canary-${{ matrix.profile }}
+          path: cpu-proof/*
           if-no-files-found: error
           retention-days: 90
