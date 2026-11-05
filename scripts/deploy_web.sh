@@ -171,7 +171,8 @@ fi
 # Dezelfde controle die `make check-web` doet: de checksumlijst moet exact de
 # bestanden beschrijven die er liggen. Vangt zowel een half afgebroken build
 # als een bestand dat er ná het inpakken bij is gekomen.
-dart run tool/pack_web_release.dart --check --bundle-dir "$BUNDLE_DIR"
+# De bestandscontrole heeft geen native assets nodig; pub run zou bouw-hooks starten.
+dart --disable-dart-dev tool/pack_web_release.dart --check --bundle-dir "$BUNDLE_DIR"
 
 BUNDLE_SHA="$(shasum -a 256 "$BUNDLE_DIR/SHA256SUMS" | cut -d' ' -f1)"
 echo "SHA256SUMS: $BUNDLE_SHA"
