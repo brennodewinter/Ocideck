@@ -1600,6 +1600,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Oznaka je odvojena od svoje tablice — između njih su samo prazni retci.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Oznaka ne vrijedi: ugovor tiho nestaje i tablica postaje obična tablica.',
+  'Markerregel zonder tabel eronder.': 'Redak oznake bez tablice ispod.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Oznaka ne čini ništa; ostaje u datoteci kao mrtvi metapodatak.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatni font za znakove koji nedostaju',
   'Geen lettertypebestand gekozen': 'Nije odabran fontovni file',

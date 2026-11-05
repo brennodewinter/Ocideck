@@ -1595,6 +1595,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Markören är frikopplad från sin tabell — bara tomma rader emellan.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Markören gäller inte: kontraktet faller tyst bort och tabellen blir en vanlig tabell.',
+  'Markerregel zonder tabel eronder.': 'Markörsrad utan tabell under.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Markören gör ingenting; den ligger kvar i filen som död metadata.',
   'Extra lettertype voor ontbrekende tekens':
       'Extra typsnitt för saknade tecken',
   'Geen lettertypebestand gekozen': 'Ingen typsnittsfil vald',

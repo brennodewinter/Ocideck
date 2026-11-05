@@ -642,6 +642,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'E markador ta separá di su tabla — solamente línanan bashí entre nan.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'E markador no ta bálido: e kontrakt ta disparse silensiosamente i e tabla ta bira un tabla normal.',
+  'Markerregel zonder tabel eronder.': 'Lína di markador sin tabla bou di dje.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'E markador no ta hasi nada; e ta keda den e archivo komo metadata morto.',
   'Extra lettertype voor ontbrekende tekens':
       'Tipo di letra ekstra pa karakternan falta',
   'Geen lettertypebestand gekozen': 'Ningun archivo di fuente elegí',

@@ -643,6 +643,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Marker ist von seiner Tabelle getrennt — nur Leerzeilen dazwischen.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Der Marker gilt nicht: der Vertrag fällt still weg und die Tabelle wird eine gewöhnliche Tabelle.',
+  'Markerregel zonder tabel eronder.': 'Markerzeile ohne Tabelle darunter.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Der Marker tut nichts; er bleibt als tote Metadaten in der Datei stehen.',
   'Extra lettertype voor ontbrekende tekens':
       'Zusätzliche Schrift für fehlende Zeichen',
   'Geen lettertypebestand gekozen': 'Keine Schriftdatei gewählt',

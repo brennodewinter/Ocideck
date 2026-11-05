@@ -802,6 +802,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Marker is detached from its table — only blank lines between them.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'The marker does not apply: the contract silently disappears and the table becomes an ordinary table.',
+  'Markerregel zonder tabel eronder.': 'Marker line without a table below it.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'The marker does nothing; it remains in the file as dead metadata.',
   'Extra lettertype voor ontbrekende tekens':
       'Extra font for missing characters',
   'Geen lettertypebestand gekozen': 'No font file selected',

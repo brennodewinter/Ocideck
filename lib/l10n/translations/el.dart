@@ -1621,6 +1621,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Ο δείκτης είναι αποσυνδεδεμένος από τον πίνακά του — μόνο κενές γραμμές ανάμεσά τους.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Ο δείκτης δεν ισχύει: το συμβόλαιο χάνεται σιωπηλά και ο πίνακας γίνεται ένας συνηθισμένος πίνακας.',
+  'Markerregel zonder tabel eronder.': 'Γραμμή δείκτη χωρίς πίνακα από κάτω.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Ο δείκτης δεν κάνει τίποτα· παραμένει στο αρχείο ως νεκρά μεταδεδομένα.',
   'Extra lettertype voor ontbrekende tekens':
       'Επιπλέον γραμματοσειρά για χαρακτήρες που λείπουν',
   'Geen lettertypebestand gekozen': 'Δεν επιλέχθηκε αρχείο γραμματοσειράς',

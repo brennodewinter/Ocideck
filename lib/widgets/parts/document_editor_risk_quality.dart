@@ -158,18 +158,21 @@ Widget _riskQualityTile(
                       s._controller.text,
                       f.repairTable!,
                     ),
+                    RiskQualityRepair.reattachMarker => reattachDetachedMarker(
+                      s._controller.text,
+                      f.line,
+                    ),
                     RiskQualityRepair.none => null,
                   };
                   if (next == null) return;
                   _commitDocumentBody(s.ref, next, coalesceKey: null);
                   refresh();
                 },
-                child: Text(
-                  f.repair == RiskQualityRepair.recalculateCalc
-                      ? l10n.d('Herberekenen')
-                      : l10n.d('Verversen'),
-                  style: const TextStyle(fontSize: 11),
-                ),
+                child: Text(switch (f.repair) {
+                  RiskQualityRepair.recalculateCalc => l10n.d('Herberekenen'),
+                  RiskQualityRepair.reattachMarker => l10n.d('Koppelen'),
+                  _ => l10n.d('Verversen'),
+                }, style: const TextStyle(fontSize: 11)),
               )
             else
               TextButton(

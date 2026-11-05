@@ -1608,6 +1608,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Znacznik jest odłączony od swojej tabeli — tylko puste wiersze między nimi.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Znacznik nie obowiązuje: kontrakt po cichu znika, a tabela staje się zwykłą tabelą.',
+  'Markerregel zonder tabel eronder.': 'Wiersz znacznika bez tabeli poniżej.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Znacznik nic nie robi; pozostaje w pliku jako martwe metadane.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatkowa czcionka dla brakujących znaków',
   'Geen lettertypebestand gekozen': 'Nie wybrano pliku czcionki',

@@ -1614,6 +1614,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Il-markatur huwa separat mit-tabella tiegħu — biss ringieli vojta bejniethom.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Il-markatur ma jiswiex: il-kuntrast jinżel bil-moda u t-tabella ssir tabella ordinarja.',
+  'Markerregel zonder tabel eronder.':
+      'Linja ta’ markatur mingħajr tabella taħtha.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Il-markatur ma jagħmel xejn; jibqa’ fil-fajl bħala metadata mejta.',
   'Extra lettertype voor ontbrekende tekens':
       'Font żejjed għal karattri nieqsa',
   'Geen lettertypebestand gekozen': 'L-ebda fajl ta\' font magħżul',

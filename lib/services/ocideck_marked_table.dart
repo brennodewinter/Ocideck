@@ -13,6 +13,7 @@
 library;
 
 import '../utils/markdown_blocks.dart';
+import 'document_timeline.dart';
 import 'markdown_table_codec.dart';
 import 'ocideck_markers.dart';
 
@@ -247,6 +248,29 @@ String rewriteOciMarkedTable(
   ];
   lines.replaceRange(table.blockStart, table.tableEnd, replacement);
   return lines.join('\n');
+}
+
+/// Herstelt een losgeraakte marker (bevinding `marker-detached`, #2803):
+/// vanaf de 1-gebaseerde markerregel [line] worden de aaneengesloten
+/// markerregels overgeslagen en daarna álle witregels weggehaald tot aan de
+/// eerste niet-lege regel — de tabel of het volgende markerblok. Werkt voor
+/// `<!-- ocideck:* -->` én `<!-- timeline -->`; de tabelbytes blijven
+/// ongemoeid. `null` als er geen witregel weg te halen viel.
+String? reattachDetachedMarker(String source, int line) {
+  final lines = source.split('\n');
+  var i = line - 1;
+  if (i < 0 || i >= lines.length) return null;
+  while (i + 1 < lines.length &&
+      (isOciTableMarkerLine(lines[i + 1]) ||
+          lines[i + 1].trim() == documentTimelineMarker)) {
+    i++;
+  }
+  var end = i + 1;
+  while (end < lines.length && lines[end].trim().isEmpty) {
+    end++;
+  }
+  if (end == i + 1) return null;
+  return [...lines.sublist(0, i + 1), ...lines.sublist(end)].join('\n');
 }
 
 /// Splitst één gecombineerd markerblok (zoals het in de atomaire embed of in

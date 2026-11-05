@@ -1615,6 +1615,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Маркерът е отделен от таблицата си — между тях има само празни редове.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Маркерът не важи: договорът мълчаливо отпада и таблицата става обикновена таблица.',
+  'Markerregel zonder tabel eronder.': 'Ред маркер без таблица под него.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Маркерът не прави нищо; остава във файла като мъртви метаданни.',
   'Extra lettertype voor ontbrekende tekens':
       'Допълнителен шрифт за липсващи знаци',
   'Geen lettertypebestand gekozen': 'Не е избран шрифтов файл',

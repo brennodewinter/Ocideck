@@ -10,6 +10,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/risk_dossier.dart';
+import 'package:ocideck/services/ocideck_marked_table.dart';
 import 'package:ocideck/services/risk_quality.dart';
 import 'package:ocideck/services/risk_view.dart';
 
@@ -187,6 +188,69 @@ void main() {
         '|---|---|---|---|---|\n'
         '| R-001 | OUDE KOPIE | 9 | 9 | 9 |';
     expect(riskQualityFindings(source).isClean, isTrue);
+  });
+
+  // #2803: een externe editor die na een HTML-commentaar een lege regel
+  // zet, maakt een dossier ongemerkt kapot. De controle meldt dat nu als
+  // 'marker-detached' met één herstelhandeling.
+  test('tijdlijnmarker los van zijn tabel is blokkerend en herstelbaar', () {
+    const source =
+        '<!-- timeline -->\n\n| Tijd | Wat |\n|---|---|\n| 1 | x |\n';
+    final report = riskQualityFindings(source);
+    final f = report.errors.singleWhere((e) => e.code == 'marker-detached');
+    expect(f.line, 1);
+    expect(f.repair, RiskQualityRepair.reattachMarker);
+
+    final fixed = reattachDetachedMarker(source, f.line)!;
+    expect(fixed, '<!-- timeline -->\n| Tijd | Wat |\n|---|---|\n| 1 | x |\n');
+    expect(
+      riskQualityFindings(
+        fixed,
+      ).findings.where((x) => x.code == 'marker-detached'),
+      isEmpty,
+    );
+  });
+
+  test('een van zijn stapel afgesplitste oci-marker is herstelbaar', () {
+    // Marker+witregel+tabel bindt al; wat breekt is de stapel: een lege
+    // regel tussen twee markers maakt de eerste een wees (#2803).
+    const source =
+        '<!-- ocideck:risks v1 id=hoofd cols=id,v -->\n\n'
+        '<!-- ocideck:calc v1 col=v expr="1" -->\n'
+        '| ID | V |\n|---|---|\n| R-001 | 1 |\n';
+    final report = riskQualityFindings(source);
+    final f = report.errors.singleWhere((e) => e.code == 'marker-detached');
+    expect(f.line, 1);
+
+    // De herstelknop voegt de marker weer aan zijn stapel toe; de witregel
+    // tussen stapel en tabel is legaal en blijft staan.
+    final fixed = reattachDetachedMarker(source, f.line)!;
+    expect(riskQualityFindings(fixed).isClean, isTrue);
+  });
+
+  test('een marker zonder tabel is een aparte, lichtere bevinding', () {
+    const source =
+        '<!-- ocideck:risks v1 id=zwever cols=id -->\n\n'
+        'Gewone tekst ertussen.\n\n'
+        '<!-- timeline -->\n\nOok geen tabel.\n';
+    final report = riskQualityFindings(source);
+    expect(report.errors, isEmpty);
+    final orphans = report.warnings.where((w) => w.code == 'marker-orphan');
+    expect(orphans, hasLength(2));
+    expect(orphans.map((w) => w.line), [1, 5]);
+  });
+
+  test('een direct gebonden tijdlijn en markers in fences zijn schoon', () {
+    const source =
+        '<!-- timeline -->\n| Tijd | Wat |\n|---|---|\n| 1 | x |\n\n'
+        '```\n<!-- timeline -->\n\n| niet | echt |\n|---|---|\n```\n';
+    final report = riskQualityFindings(source);
+    expect(
+      report.findings.where(
+        (f) => f.code == 'marker-detached' || f.code == 'marker-orphan',
+      ),
+      isEmpty,
+    );
   });
 
   test('bevindingen dragen hun regelnummer voor navigatie', () {

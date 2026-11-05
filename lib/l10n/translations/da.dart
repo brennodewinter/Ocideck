@@ -1596,6 +1596,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Markøren er løsrevet fra sin tabel — kun tomme linjer imellem.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Markøren gælder ikke: kontrakten forsvinder stille, og tabellen bliver en almindelig tabel.',
+  'Markerregel zonder tabel eronder.': 'Markørlinje uden tabel nedenunder.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Markøren gør ingenting; den bliver stående i filen som død metadata.',
   'Extra lettertype voor ontbrekende tekens':
       'Ekstra skrifttype til manglende tegn',
   'Geen lettertypebestand gekozen': 'Ingen skrifttypefil valgt',

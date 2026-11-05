@@ -1600,6 +1600,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Značka je oddelená od svojej tabuľky — medzi nimi sú len prázdne riadky.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Značka neplatí: kontrakt ticho zaniká a tabuľka sa stáva obyčajnou tabuľkou.',
+  'Markerregel zonder tabel eronder.': 'Riadok značky bez tabuľky pod ním.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Značka nerobí nič; zostáva v súbore ako mŕtve metadáta.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatočné písmo pre chýbajúce znaky',
   'Geen lettertypebestand gekozen': 'Nevybraný žiadny súbor písma',

@@ -1596,6 +1596,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Značka je oddělená od své tabulky — mezi nimi jsou jen prázdné řádky.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Značka neplatí: kontrakt tiše zaniká a tabulka se stává obyčejnou tabulkou.',
+  'Markerregel zonder tabel eronder.': 'Řádek značky bez tabulky pod ním.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Značka nic nedělá; zůstává v souboru jako mrtvá metadata.',
   'Extra lettertype voor ontbrekende tekens':
       'Dodatečné písmo pro chybějící znaky',
   'Geen lettertypebestand gekozen': 'Nevybrán žádný soubor písma',

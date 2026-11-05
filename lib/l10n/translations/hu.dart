@@ -1598,6 +1598,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'A jelölő elvált a táblázatától — csak üres sorok vannak közöttük.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'A jelölő nem érvényes: a szerződés csendben elvész, és a táblázat közönséges táblázattá válik.',
+  'Markerregel zonder tabel eronder.': 'Jelölősor táblázat nélkül alatta.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'A jelölő nem csinál semmit; holt metaadatként marad a fájlban.',
   'Extra lettertype voor ontbrekende tekens':
       'Extra betűtípus a hiányzó karakterekhez',
   'Geen lettertypebestand gekozen': 'Nincs betűtípus-fájl kiválasztva',

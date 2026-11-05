@@ -641,6 +641,13 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Il marcatore è staccato dalla sua tabella — solo righe vuote in mezzo.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Il marcatore non vale: il contratto scompare silenziosamente e la tabella diventa una tabella normale.',
+  'Markerregel zonder tabel eronder.': 'Riga di marcatore senza tabella sotto.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Il marcatore non fa nulla; resta nel file come metadato morto.',
   'Extra lettertype voor ontbrekende tekens':
       'Font aggiuntivo per i caratteri mancanti',
   'Geen lettertypebestand gekozen': 'Nessun file di font selezionato',

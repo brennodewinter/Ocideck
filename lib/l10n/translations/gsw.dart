@@ -1598,6 +1598,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Markierig isch vo ire Tabelle glöst — nur Läärzile dezwoische.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'D Markierig giltet nöd: de Vertrag faut still wäg und d Tabelle wird e gwöhnlichi Tabelle.',
+  'Markerregel zonder tabel eronder.': 'Markierigszile ohni Tabelle drunder.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'D Markierig macht nüüt; si blibt als tooti Metadata in der Datei stoh.',
   'Extra lettertype voor ontbrekende tekens':
       'Zuesätzlechi Schrift für fehlende Zeiche',
   'Geen lettertypebestand gekozen': 'Kai Schriftdaatei gwählt',

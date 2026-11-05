@@ -1596,6 +1596,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Penanda terlepas dari tabelnya — hanya baris kosong di antaranya.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Penanda tidak berlaku: kontrak hilang diam-diam dan tabel menjadi tabel biasa.',
+  'Markerregel zonder tabel eronder.': 'Baris penanda tanpa tabel di bawahnya.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Penanda tidak melakukan apa pun; ia tetap di berkas sebagai metadata mati.',
   'Extra lettertype voor ontbrekende tekens':
       'Fonta tambahan untuk karakter yang hilang',
   'Geen lettertypebestand gekozen': 'Tidak ada file fonta dipilih',

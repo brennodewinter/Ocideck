@@ -1596,6 +1596,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Marker staat los van zijn tabel — alleen lege regels ertussen.':
+      'Merkki on irti taulukostaan — vain tyhjiä rivejä välissä.',
+  'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
+      'Merkki ei päde: sopimus katoaa äänettömästi ja taulukosta tulee tavallinen taulukko.',
+  'Markerregel zonder tabel eronder.': 'Merkkirivi ilman taulukkoa alla.',
+  'De marker doet niets; hij blijft als dode metadata in het bestand staan.':
+      'Merkki ei tee mitään; se jää tiedostoon kuolleena metatietona.',
   'Extra lettertype voor ontbrekende tekens':
       'Lisäfontti puuttuville merkeille',
   'Geen lettertypebestand gekozen': 'Fonttitiedostoa ei valittu',
