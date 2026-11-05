@@ -14,7 +14,7 @@ void main() {
       expect(risks.kind, 'risks');
       expect(risks.id, 'risico');
       expect(risks.marker!.attr('method'), 'fmea');
-      expect(risks.marker!.attr('scale'), 'sod-1-10');
+      expect(risks.marker!.attr('scale'), 'sod-1-5');
       expect(risks.next, 1);
       expect(risks.cols, hasLength(16));
       // Lege body — geen voorgeschreven scores (#2492).

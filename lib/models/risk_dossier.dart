@@ -22,20 +22,23 @@ enum MeasureStatus {
   String get token => name;
 
   /// `null` bij een leeg of onbekend token — een status die wij niet
-  /// kennen is "geen status", nooit stilletjes `proposed`.
+  /// kennen is "geen status", nooit stilletjes `proposed`. Naast de Engelse
+  /// tokens worden de Nederlandse statussen herkend (hoofdletterongevoelig),
+  /// zodat een Nederlandstalig register geldig blijft: `voorgesteld`,
+  /// `gepland`, `ingevoerd`, `getoetst`, `werkt` en `werkt niet`.
   static MeasureStatus? parse(String raw) {
-    switch (raw.trim()) {
-      case 'proposed':
+    switch (raw.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' ')) {
+      case 'proposed' || 'voorgesteld':
         return proposed;
-      case 'planned':
+      case 'planned' || 'gepland':
         return planned;
-      case 'implemented':
+      case 'implemented' || 'ingevoerd':
         return implemented;
-      case 'tested':
+      case 'tested' || 'getoetst':
         return tested;
-      case 'working':
+      case 'working' || 'werkt':
         return working;
-      case 'ineffective':
+      case 'ineffective' || 'werkt niet':
         return ineffective;
     }
     return null;
@@ -167,8 +170,13 @@ class RiskScale {
 
   const RiskScale(this.id, this.version, this.labels);
 
-  /// De FMEA-schaal 1–10; labels zijn generiek, de specifieke betekenis
-  /// hoort bij S, O of D afzonderlijk en staat in de template-tekst.
+  /// De FMEA-schaal 1–5, de standaard voor nieuwe dossiers; labels zijn
+  /// generiek, de specifieke betekenis hoort bij S, O of D afzonderlijk en
+  /// staat in de template-tekst. RPN loopt hier van 1 tot 125.
+  static const sod15 = RiskScale('sod-1-5', 1, {});
+
+  /// De FMEA-schaal 1–10; blijft geldig voor bestaande dossiers en voor
+  /// registers zonder `scale=` (achterwaartse compatibiliteit).
   static const sod110 = RiskScale('sod-1-10', 1, {});
 
   /// De kans × impact-schaal 1–5.
@@ -177,14 +185,17 @@ class RiskScale {
   /// `null` bij een naam die noch ingebouwd is noch een getal-schaal
   /// impliceert — aangepaste schalen reizen via een `scale`-tabel.
   static RiskScale? builtin(String name) => switch (name) {
+    'sod-1-5' => sod15,
     'sod-1-10' => sod110,
     'li-1-5' => li15,
     _ => null,
   };
 
-  /// De schaalbreedte voor validatie: 10 bij `sod-1-10`, 5 bij `li-1-5`,
+  /// De schaalbreedte voor validatie: 5 bij `sod-1-5`, 10 bij `sod-1-10`,
+  /// 5 bij `li-1-5`,
   /// anders de hoogste `value` in [labels] (0 = onbekend, niet toetsbaar).
   int get max => switch (id) {
+    'sod-1-5' => 5,
     'sod-1-10' => 10,
     'li-1-5' => 5,
     _ => labels.keys.fold(0, (m, v) => v > m ? v : m),
