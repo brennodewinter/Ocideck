@@ -74,6 +74,40 @@ if sys.argv[1]=='check-toolchain': sys.exit(1)
                 subprocess.run(['ninja', '--version'], env=environment, check=True)
                 self.assertEqual(json.loads(calls.read_text()), ['--version'])
 
+    def test_ninja_shim_path_survives_wrapper_exit_for_cmake_cache_reuse(self):
+        # #2798: CMake bewaart het absolute ninjapad in CMAKE_MAKE_PROGRAM;
+        # een shim die bij exit verdwijnt laat de cache onbruikbaar achter.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'bin').mkdir()
+            ninja = root / 'bin' / 'ninja'
+            ninja.write_text(
+                "#!/usr/bin/env python3\nimport json,os,sys\n"
+                "open(os.environ['CALLS'],'a').write(json.dumps(sys.argv[1:])+'\\n')\n")
+            ninja.chmod(0o700)
+            recorder = root / 'bin' / 'recorder'
+            recorder.write_text(
+                '#!/bin/sh\ncommand -v ninja > "$OUT"\nninja -C build install -j99\n')
+            recorder.chmod(0o700)
+            out = root / 'out'
+            calls = root / 'calls'
+            env = dict(os.environ, PATH=str(root / 'bin') + ':' + os.environ['PATH'],
+                       HOME=str(root), CALLS=str(calls), OUT=str(out))
+            script = str(ROOT / 'scripts/run_release_linux_build.sh')
+            first = subprocess.run(['bash', script, 'recorder'], env=env, capture_output=True)
+            self.assertEqual(first.returncode, 0, first.stderr)
+            shim = out.read_text().strip()
+            # Een tweede, los wrapperproces (of cmake --build op de cache)
+            # moet dat pad nog kunnen uitvoeren.
+            second = subprocess.run(
+                [shim, '-C', 'build', 'install', '-j99'],
+                env=dict(os.environ, OCIDECK_RELEASE_NINJA=str(ninja),
+                         CALLS=str(calls)), capture_output=True)
+            self.assertEqual(second.returncode, 0, second.stderr)
+            self.assertEqual(
+                [json.loads(row) for row in calls.read_text().splitlines()],
+                [['-j2', '-C', 'build', 'install']] * 2)
+
     def test_every_docker_job_has_quota_and_linux_channels_share_queue(self):
         text = (ROOT / '.forgejo/workflows/release-channel.yml').read_text()
         self.assertIn("|| 'linux-web-server'", text)
