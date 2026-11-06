@@ -211,7 +211,7 @@ class WindowsCandidateTest(unittest.TestCase):
             self.fetch()
 
     def test_failed_existing_run_is_not_automatically_redispatched(self):
-        self.api.new_run('windows-test-check.yml')
+        self.api.new_run('windows-test-check.yml', 'op-test')
         self.api.runs['windows-test-check.yml'][0]['conclusion'] = 'failure'
         with self.assertRaisesRegex(ValueError, 'existing Windows candidate failed'):
             self.fetch()
@@ -219,11 +219,11 @@ class WindowsCandidateTest(unittest.TestCase):
 
     def test_forged_run_identity_is_refused(self):
         for field, value in [('head_sha', 'b' * 40), ('head_branch', 'main'), ('event', 'push'),
-                             ('path', '.github/workflows/other.yml'), ('display_title', 'Windows release v0.7.7')]:
+                             ('path', '.github/workflows/other.yml'), ('display_title', 'Windows release v0.7.7 [operation:op-test]')]:
             with self.subTest(field=field):
                 self.api = FakeGitHub(ROOT)
                 (Path(self.temp.name) / 'operation.json').unlink(missing_ok=True)
-                self.api.new_run('release.yml')
+                self.api.new_run('release.yml', 'op-test')
                 self.api.runs['release.yml'][0][field] = value
                 with self.assertRaisesRegex(ValueError, 'identity differs|not a candidate'):
                     self.fetch()
@@ -263,20 +263,26 @@ class WindowsCandidateTest(unittest.TestCase):
 
     def test_interruption_cancels_only_own_nonce_not_foreign_pending_suite(self):
         self.api.new_run('windows-test-check.yml')
-        self.api.runs['windows-test-check.yml'][0]['status'] = 'in_progress'
-        self.api.runs['windows-test-check.yml'][0]['conclusion'] = None
+        foreign = self.api.runs['windows-test-check.yml'][0]
+        foreign.update(id=1, status='in_progress', conclusion=None)
         original = self.api.data
         def pending(path, payload=None):
             result = original(path, payload)
             if payload is not None and path.endswith('/dispatches'):
-                self.api.runs['release.yml'][0]['status'] = 'in_progress'
-                self.api.runs['release.yml'][0]['conclusion'] = None
+                for values in self.api.runs.values():
+                    for run in values:
+                        if windows.owned_run(run, 'op-test'):
+                            run.update(status='in_progress', conclusion=None)
+                if 'windows-test-check.yml/dispatches' in path:
+                    self.api.runs['windows-test-check.yml'].append(foreign)
             return result
         with patch.object(self.api, 'data', side_effect=pending), patch.object(windows.time, 'sleep', side_effect=KeyboardInterrupt):
             with self.assertRaises(KeyboardInterrupt):
                 self.fetch()
         cancellations = [path for path, _ in self.api.calls if path.endswith('/cancel')]
-        self.assertEqual(['/actions/runs/20/cancel'], cancellations)
+        self.assertEqual(['/actions/runs/10/cancel', '/actions/runs/20/cancel'], cancellations)
+        self.assertEqual('in_progress', foreign['status'])
+        self.assertIn(foreign, self.api.runs['windows-test-check.yml'])
 
     def test_cancel_wait_confirms_terminal_owned_runs_only(self):
         self.api.new_run('release.yml', 'op-test')
@@ -344,6 +350,81 @@ class WindowsCandidateTest(unittest.TestCase):
         self.assertFalse(result['unknown'])
         self.assertTrue(result['selected_verified'])
         self.assertEqual([], result['runs'])
+
+    def foreign_history(self, suite_status='completed', suite_conclusion='success'):
+        foreign = {}
+        for number, workflow in enumerate(windows.WORKFLOWS, 1):
+            self.api.new_run(workflow, 'previous-operation')
+            run = self.api.runs[workflow][0]
+            run['id'] = number
+            if workflow == 'windows-test-check.yml':
+                run.update(status=suite_status, conclusion=suite_conclusion)
+            foreign[workflow] = copy.deepcopy(run)
+        original = self.api.data
+        def preserve(path, payload=None):
+            result = original(path, payload)
+            if payload is not None and path.endswith('/dispatches'):
+                for workflow in windows.WORKFLOWS:
+                    if '/' + workflow + '/dispatches' in path:
+                        self.api.runs[workflow].append(copy.deepcopy(foreign[workflow]))
+            return result
+        self.api.data = preserve
+        return foreign
+
+    def assert_foreign_history_unchanged(self, foreign):
+        for workflow, original in foreign.items():
+            self.assertEqual([original], [run for run in self.api.runs[workflow] if run['id'] == original['id']])
+        self.assertFalse(any(path.endswith('/cancel') for path, _ in self.api.calls))
+
+    def test_new_operation_ignores_another_operations_cancelled_suite_and_green_build(self):
+        foreign = self.foreign_history(suite_conclusion='cancelled')
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, self.fetch())
+        posts = [(path, body) for path, body in self.api.calls if body is not None]
+        self.assertEqual(2, len(posts))
+        self.assertTrue(all(body['inputs']['operation_id'] == 'op-test' for _, body in posts))
+        self.assert_foreign_history_unchanged(foreign)
+
+    def test_new_operation_never_silently_adopts_another_operations_green_children(self):
+        foreign = self.foreign_history()
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, self.fetch())
+        self.assertEqual(2, sum(body is not None for _, body in self.api.calls))
+        self.assert_foreign_history_unchanged(foreign)
+
+    def test_new_operation_does_not_wait_for_another_operations_pending_child(self):
+        foreign = self.foreign_history('in_progress', None)
+        with patch.object(windows.time, 'sleep', side_effect=AssertionError('waited for a foreign child')):
+            self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, self.fetch())
+        self.assert_foreign_history_unchanged(foreign)
+
+    def test_existing_operation_keeps_exact_selected_ids_despite_newer_same_marker_runs(self):
+        for workflow in windows.WORKFLOWS:
+            self.api.new_run(workflow, 'op-test')
+            self.api.runs[workflow].append(dict(self.api.runs[workflow][0], id=self.api.runs[workflow][0]['id'] + 100))
+        state = Path(self.temp.name) / 'operation.json'
+        state.write_text(json.dumps(dict(schema=1, operation_id='op-test', tag=TAG, sha=SHA,
+            ref=REF, dispatch_intents=list(windows.WORKFLOWS), closed=False, outcome='pending',
+            forge_run_id=123, controller_sha=SHA, selected_runs={'release.yml': 20, 'windows-test-check.yml': 10})))
+        result = windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test', state, 123, SHA)
+        self.assertEqual({'release.yml': 20, 'windows-test-check.yml': 10}, result)
+        self.assertFalse(any(body is not None for _, body in self.api.calls))
+
+    def test_ambiguous_current_operation_never_chooses_latest_or_dispatches(self):
+        self.api.new_run('windows-test-check.yml', 'op-test')
+        self.api.runs['windows-test-check.yml'].append(dict(self.api.runs['windows-test-check.yml'][0], id=11))
+        with self.assertRaisesRegex(ValueError, 'unavailable or ambiguous'):
+            self.fetch()
+        self.assertFalse(any(body is not None for _, body in self.api.calls))
+
+    def test_foreign_history_cannot_resolve_a_current_operations_unknown_dispatch_intent(self):
+        foreign = self.foreign_history()
+        state = Path(self.temp.name) / 'operation.json'
+        state.write_text(json.dumps(dict(schema=1, operation_id='op-test', tag=TAG, sha=SHA,
+            ref=REF, dispatch_intents=['windows-test-check.yml'], closed=False, outcome='pending',
+            forge_run_id=123, controller_sha=SHA, selected_runs={})))
+        with self.assertRaisesRegex(ValueError, 'dispatch outcome unknown'):
+            windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test', state, 123, SHA)
+        self.assertFalse(any(body is not None for _, body in self.api.calls))
+        self.assert_foreign_history_unchanged(foreign)
 
     def test_cancel_deadline_bounds_slow_api_and_never_claims_terminal(self):
         clock = [0.0]
