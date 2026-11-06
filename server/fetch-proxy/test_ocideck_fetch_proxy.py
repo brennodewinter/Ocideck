@@ -12,7 +12,8 @@ import socket
 import struct
 import threading
 import unittest
-from contextlib import redirect_stderr
+from concurrent.futures import Future
+from contextlib import contextmanager, redirect_stderr
 from unittest import mock
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -28,15 +29,17 @@ class _Proxy:
 
     def __enter__(self):
         self.server = proxy.ThreadingHTTPServer(("127.0.0.1", 0), proxy.Handler)
-        threading.Thread(target=self.server.serve_forever, daemon=True).start()
+        self.thread = threading.Thread(target=self.server.serve_forever)
+        self.thread.start()
         return self.server.server_address[1]
 
     def __exit__(self, *exc):
         self.server.shutdown()
         self.server.server_close()
+        self.thread.join()
 
 
-def _exchange(port, request, timeout=5):
+def _exchange(port, request, timeout=5, headers_received=None):
     """Stuurt [request] en leest tot de server de verbinding sluit."""
     with socket.create_connection(("127.0.0.1", port), timeout=timeout) as conn:
         conn.sendall(request)
@@ -46,6 +49,12 @@ def _exchange(port, request, timeout=5):
             if not chunk:
                 return data
             data += chunk
+            if (
+                headers_received is not None
+                and data.startswith(b"HTTP/1.1 200 ")
+                and b"\r\n\r\n" in data
+            ):
+                headers_received.set()
 
 
 class AccessLogTest(unittest.TestCase):
@@ -67,37 +76,58 @@ class AccessLogTest(unittest.TestCase):
         self.assertIn(" 400 ", log)
 
 
+@contextmanager
 def _source(reset=False, declared=1000):
     """Een bron die tien bytes stuurt en normaal sluit of reset."""
-    listener = socket.socket()
-    listener.bind(("127.0.0.1", 0))
-    listener.listen(1)
+    headers_received = threading.Event()
+    finished = Future()
+    with socket.socket() as listener:
+        listener.settimeout(5)
+        listener.bind(("127.0.0.1", 0))
+        listener.listen(1)
 
-    def serve():
-        conn, _ = listener.accept()
-        conn.recv(65536)
-        conn.sendall(
-            b"HTTP/1.1 200 OK\r\nContent-Length: %d\r\n\r\n0123456789" % declared
-        )
-        # SO_LINGER 0: close() stuurt een RST, zoals een bron die wegvalt.
-        if reset:
-            linger = "HH" if os.name == "nt" else "ii"
-            conn.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack(linger, 1, 0))
-        conn.close()
-        listener.close()
+        def serve():
+            try:
+                conn, _ = listener.accept()
+                with conn:
+                    conn.settimeout(5)
+                    conn.recv(65536)
+                    conn.sendall(
+                        b"HTTP/1.1 200 OK\r\nContent-Length: %d\r\n\r\n0123456789"
+                        % declared
+                    )
+                    if reset:
+                        # Een directe RST kan zelfs de nog ongelezen headers wissen.
+                        if not headers_received.wait(5):
+                            raise AssertionError("downstream 200 headers not received")
+                        linger = "HH" if os.name == "nt" else "ii"
+                        conn.setsockopt(
+                            socket.SOL_SOCKET, socket.SO_LINGER, struct.pack(linger, 1, 0)
+                        )
+                finished.set_result(None)
+            except BaseException as error:
+                finished.set_exception(error)
 
-    port = listener.getsockname()[1]
-    threading.Thread(target=serve, daemon=True).start()
-    return port
+        thread = threading.Thread(target=serve)
+        thread.start()
+        try:
+            yield listener.getsockname()[1], headers_received
+        finally:
+            # Elke socketbewerking en de barrière zijn begrensd; geen verborgen draadfout.
+            thread.join()
+            finished.result()
 
 
 class MidStreamFailureTest(unittest.TestCase):
-    def exchange(self, source, close=False):
-        with mock.patch.object(proxy, "ALLOW_ANY", True), mock.patch.object(
+    def exchange(self, fixture, close=False):
+        with redirect_stderr(io.StringIO()), _Proxy() as port, fixture as (
+            source,
+            headers_received,
+        ), mock.patch.object(proxy, "ALLOW_ANY", True), mock.patch.object(
             proxy, "ALLOWED_PORTS", {source}
         ), mock.patch.object(
             proxy, "resolve_pinned", lambda host, port: "127.0.0.1"
-        ), redirect_stderr(io.StringIO()), _Proxy() as port:
+        ):
             # Bewust zonder Connection: close — de proxy moet zelf afbreken,
             # anders wacht de client op bytes die nooit komen.
             reply = _exchange(
@@ -105,6 +135,7 @@ class MidStreamFailureTest(unittest.TestCase):
                 b"GET /?url=http%%3A%%2F%%2Fbron.test%%3A%d%%2Fdeck HTTP/1.1\r\n"
                 b"Host: x\r\n%s\r\n"
                 % (source, b"Connection: close\r\n" if close else b""),
+                headers_received=headers_received,
             )
         return reply
 
@@ -120,6 +151,23 @@ class MidStreamFailureTest(unittest.TestCase):
         self.assertEqual(reply.split(b"\r\n\r\n", 1)[1], b"0123456789")
         self.assertTrue(reply.startswith(b"HTTP/1.1 200"), reply)
         self.assertEqual(reply.count(b"HTTP/1.1 "), 1, reply)
+
+
+class SourceFixtureTest(unittest.TestCase):
+    def test_missing_downstream_headers_fails(self):
+        with self.assertRaisesRegex(AssertionError, "downstream 200 headers"), _source(
+            reset=True
+        ) as (port, _):
+            with socket.create_connection(("127.0.0.1", port), timeout=5) as conn:
+                conn.sendall(b"request")
+                conn.recv(65536)
+
+    def test_source_thread_error_fails(self):
+        with mock.patch.object(socket.socket, "sendall", side_effect=OSError("source failed")):
+            with self.assertRaisesRegex(OSError, "source failed"), _source() as (port, _):
+                with socket.create_connection(("127.0.0.1", port), timeout=5) as conn:
+                    conn.send(b"request")
+                    self.assertEqual(conn.recv(65536), b"")
 
 
 if __name__ == "__main__":
