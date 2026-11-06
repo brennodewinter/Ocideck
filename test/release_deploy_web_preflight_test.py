@@ -1,9 +1,11 @@
-"""A read-only deploy prerequisite check never packs or uploads bytes."""
+"""Deploy prerequisites stay read-only; public permissions stay in the new tree."""
 import os
 import hashlib
 import json
 from pathlib import Path
+import stat
 import subprocess
+import tarfile
 import tempfile
 import unittest
 
@@ -11,6 +13,51 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class DeployPreflightTest(unittest.TestCase):
+    def test_private_bundle_modes_become_public_only_in_deployed_tree(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            bundle, tools, live = root / 'private bundle', root / 'bin', root / 'live'
+            bundle.mkdir(mode=0o700); tools.mkdir()
+            (bundle / 'assets').mkdir(mode=0o700)
+            contents = {'index.html': b'<html>public app</html>',
+                        '.htaccess': b'Require all denied\n',
+                        'assets/app.js': b'public script'}
+            for name, content in contents.items():
+                path = bundle / name
+                path.write_bytes(content); path.chmod(0o600)
+            canary = root / 'unrelated-private-file'
+            canary.write_bytes(b'private'); canary.chmod(0o600)
+            archive = root / 'bundle.tar.gz'
+            with tarfile.open(archive, 'w:gz') as packed:
+                packed.add(bundle, arcname='.')
+            # Ownership needs privileges and flock is Linux-only; all bundle
+            # extraction, permission changes and the first-deploy move are real.
+            (tools / 'sudo').write_text('''#!/usr/bin/env python3
+import os,sys
+assert sys.argv[1]=='-n'
+if sys.argv[2]=='chown':sys.exit(0)
+os.execvp(sys.argv[2],sys.argv[2:])
+''')
+            (tools / 'flock').write_text('#!/bin/sh\nexit 0\n')
+            for path in tools.iterdir():path.chmod(0o700)
+            script = (ROOT / 'scripts/deploy_web.sh').read_text()
+            remote = script.split('log "Wisselen op de server"\n', 1)[1].split("<<'REMOTE'\n", 1)[1].split('\nREMOTE', 1)[0]
+            result = subprocess.run(['bash', '-s', '--', str(live),
+                'fixture:fixture', str(archive), '20261106-000000'], input=remote,
+                env=dict(os.environ, PATH=str(tools) + os.pathsep + os.environ['PATH']),
+                capture_output=True, text=True, timeout=20)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(stat.S_IMODE(live.stat().st_mode), 0o755)
+            self.assertEqual(stat.S_IMODE((live / 'assets').stat().st_mode), 0o755)
+            for name, content in contents.items():
+                self.assertEqual((live / name).read_bytes(), content)
+                self.assertEqual(stat.S_IMODE((live / name).stat().st_mode), 0o644)
+                self.assertEqual((bundle / name).read_bytes(), content)
+                self.assertEqual(stat.S_IMODE((bundle / name).stat().st_mode), 0o600)
+            self.assertEqual(stat.S_IMODE(bundle.stat().st_mode), 0o700)
+            self.assertEqual(canary.read_bytes(), b'private')
+            self.assertEqual(stat.S_IMODE(canary.stat().st_mode), 0o600)
+
     def test_config_readback_rejects_conflicting_modes_and_unbound_local_config_before_ssh(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

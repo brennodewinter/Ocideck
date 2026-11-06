@@ -157,8 +157,8 @@ fi
 
 preflight_host() {
   ssh "${SSH_OPTS[@]}" "$HOST" \
-    "command -v flock python3 sudo tar >/dev/null && sudo -n true && python3 -c 'import ctypes; assert hasattr(ctypes.CDLL(None), \"renameat2\")'" \
-    || { echo "Deploy-host mist wachtwoordloze sudo, flock, python3, tar of renameat2." >&2; exit 1; }
+    "command -v flock python3 sudo tar find chmod >/dev/null && sudo -n true && python3 -c 'import ctypes; assert hasattr(ctypes.CDLL(None), \"renameat2\")'" \
+    || { echo "Deploy-host mist wachtwoordloze sudo, flock, python3, tar, find, chmod of renameat2." >&2; exit 1; }
 }
 
 # --- 1. Is er iets te deployen, en klopt het? --------------------------------
@@ -290,9 +290,10 @@ sudo -n tar -C "$NEW" -xzf "$TARBALL"
 rm -f "$TARBALL"
 printf '%s\n' "$STAMP" | sudo -n tee "$NEW/.ocideck-deploy-id" >/dev/null
 
-# Bestandsrechten worden al door `make build-web` genormaliseerd (644/755);
-# hier gaat het om het eigendom, want de tarball draagt de uid van de
-# bouwmachine mee en die bestaat op de server niet.
+# Een geverifieerde bundel kan privé zijn uitgepakt; zet publieke rechten pas
+# in de nieuwe servermap, zonder de bronbundel te wijzigen.
+sudo -n find "$NEW" -type d -exec chmod 0755 {} +
+sudo -n find "$NEW" -type f -exec chmod 0644 {} +
 sudo -n chown -R "$OWNER" "$NEW"
 
 if [ -d "$WEBROOT" ]; then
