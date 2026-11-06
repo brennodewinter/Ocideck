@@ -1,6 +1,7 @@
 """macOS signing boundaries without building or contacting Apple."""
 import sys
 import json
+import re
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -202,6 +203,43 @@ class MacCandidateTest(unittest.TestCase):
         api.sha = 'b' * 40
         with self.assertRaises(ValueError):
             mac.quality(api, SHA)
+
+    def test_workflow_checkout_history_proves_frozen_main_ancestor(self):
+        workflow = (Path(__file__).resolve().parents[1] / '.forgejo/workflows/release-channel.yml').read_text()
+        checkout = workflow.split('\n  build-macos:\n', 1)[1].split('      - name:', 1)[0]
+        configured = re.search(r'^          fetch-depth: ([0-9]+)$', checkout, re.M)
+        depth = int(configured.group(1)) if configured else 1  # actions/checkout default
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory).resolve()
+            remote, controller = home / 'remote', home / 'controller'
+            remote.mkdir()
+            def git(*args, cwd=remote):
+                return mac.command(['git', *args], cwd)
+            git('init', '-q', '-b', 'main')
+            git('config', 'user.name', 'Fixture')
+            git('config', 'user.email', 'fixture@example.invalid')
+            def commit(message):
+                git('-c', 'commit.gpgsign=false', 'commit', '-q', '--allow-empty', '-m', message)
+                return git('rev-parse', 'HEAD')
+            base = commit('base')
+            git('branch', 'codex/release-base-v1.2.3', base)
+            source = commit('frozen source')
+            frozen = 'codex/release-candidate-v1.2.3-' + source
+            git('branch', frozen, source)
+            tip = commit('controller')
+            git('checkout', '-q', '-b', 'divergent', base)
+            divergent = commit('outside protected main')
+            git('checkout', '-q', 'main')
+            clone = ['clone', '--no-tags', '--branch', 'main']
+            if depth:
+                clone += ['--depth', str(depth)]
+            git(*clone, remote.as_uri(), str(controller), cwd=home)
+            self.assertEqual(git('rev-parse', 'HEAD', cwd=controller), tip)
+            git('fetch', '--no-tags', 'origin', frozen, cwd=controller)
+            mac.source_trusted(controller, 'v1.2.3', source)
+            git('fetch', '--no-tags', 'origin', 'divergent', cwd=controller)
+            with self.assertRaisesRegex(ValueError, 'protected-main'):
+                mac.source_trusted(controller, 'v1.2.3', divergent)
 
     def test_arbitrary_frozen_branch_is_not_trusted(self):
         with patch.object(mac, 'command', side_effect=['', SHA + '\trefs/heads/untrusted']), \
