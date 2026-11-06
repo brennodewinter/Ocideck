@@ -1,0 +1,53 @@
+name: Standard J build tool versions once
+on:
+  push:
+    branches: [codex/J-tool-versions-once]
+permissions:
+  contents: read
+env:
+  QA_PLAN: |
+    {
+      "reviewed": true,
+      "read_only_standard_tool_versions": true,
+      "source": "d6339bc9c652d7222d82a358d67bf4f61d90679a",
+      "parent": "0bcad3c24b83c1a7c425ee93125218dff5670fd3",
+      "branch": "codex/J-tool-versions-once",
+      "file": ".forgejo/workflows/J-tool-versions-once.yml",
+      "no_cache_inventory_or_cleanup": true
+    }
+jobs:
+  tool-versions:
+    runs-on: ocideck-macos-arm64
+    timeout-minutes: 10
+    steps:
+      - name: Require reviewed ordinary tool report
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,json
+          p=json.loads(os.environ["QA_PLAN"]);assert p["reviewed"] is True and p["read_only_standard_tool_versions"] is True and p["no_cache_inventory_or_cleanup"] is True
+          PY
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: d6339bc9c652d7222d82a358d67bf4f61d90679a
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Report all pinned build tool versions before any repair
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,json,pathlib,subprocess,re
+          P=json.loads(os.environ['QA_PLAN']);assert P['reviewed'] is True and P['read_only_standard_tool_versions'] is True and P['no_cache_inventory_or_cleanup'] is True
+          assert os.getuid()==501 and os.uname().machine=='arm64'
+          assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==P['source']
+          env=dict(os.environ,HOME='/Users/brennodewinter/Library/Caches/OciDeckRunner/release-qa/controller-C/home',CFFIXED_USER_HOME='/Users/brennodewinter/Library/Caches/OciDeckRunner/release-qa/controller-C/home',PUB_CACHE='/Users/brennodewinter/Library/Caches/OciDeckRunner/pub-cache/flutter-3.47.7-abaf9c523780',PATH='/Users/brennodewinter/Library/Caches/OciDeckRunner/toolchains/flutter-3.47.7-abaf9c523780/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin')
+          pins={x['name']:x['version'] for x in json.loads(pathlib.Path('.github/pinned-ci-versions.json').read_text())['tools']};pins.update(shellcheck='0.11.0',flutter='3.47.7',dart='3.13.5');rows=[]
+          # Complete the entire ordinary tool-version report before checking failures.
+          for name in ('gitleaks','trufflehog','semgrep','shellcheck','node','npm','flutter','dart'):
+           try:
+            r=subprocess.run([name,'--version'],env=env,capture_output=True,text=True,timeout=90);value=(r.stdout+r.stderr).strip();expected=pins.get(name);valid=r.returncode==0 and (expected is None or bool(re.search(r'(?<!\d)'+re.escape(expected)+r'(?!\d)',value)));rows.append({'tool':name,'actual':value,'required':expected,'exit':r.returncode,'matches_pin':valid})
+           except Exception as e:rows.append({'tool':name,'error':type(e).__name__,'matches_pin':False})
+          print(json.dumps({'standard_build_tool_versions':rows,'no_cache_inventory_or_cleanup':True}),flush=True)
+          # This diagnostic succeeds only when all reported installed pins already match.
+          assert all(x['matches_pin'] for x in rows),'Toolchain drift; preserve full report, no build or automatic repair'
+          PY
