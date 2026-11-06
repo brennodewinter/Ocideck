@@ -1,6 +1,7 @@
 """macOS signing boundaries without building or contacting Apple."""
 import sys
 import json
+import os
 import re
 from pathlib import Path
 import tempfile
@@ -53,7 +54,7 @@ class MacCandidateTest(unittest.TestCase):
         return home, cache, root, source, archive, args
 
     def source_command(self, arguments, _cwd):
-        if arguments == ['make', 'check-toolchain']:
+        if arguments == ['dart', '--disable-dart-dev', 'tool/check_toolchain.dart']:
             return ''
         if arguments[:3] == ['git', 'rev-parse', 'HEAD']:
             return SHA
@@ -63,21 +64,55 @@ class MacCandidateTest(unittest.TestCase):
             return ''
         raise AssertionError('unexpected source operation: ' + repr(arguments))
 
-    def test_wrong_live_sdk_stops_fresh_candidate_before_signing(self):
-        with tempfile.TemporaryDirectory() as directory:
-            home, _, _, _, _, args = self.candidate(directory, state=False)
-            def command(arguments, cwd):
-                if arguments == ['make', 'check-toolchain']:
-                    raise subprocess.CalledProcessError(1, arguments)
-                return self.source_command(arguments, cwd)
-            with patch.object(mac.Path, 'home', return_value=home), patch.object(mac, 'Forgejo'), \
-                 patch.object(mac, 'source_trusted'), patch.object(mac, 'quality'), \
-                 patch.object(mac, 'command', side_effect=command), patch.object(mac, 'preflight') as preflight, \
-                 patch.object(mac.subprocess, 'run') as build:
-                with self.assertRaises(subprocess.CalledProcessError):
-                    mac.run(args)
-            preflight.assert_not_called()
-            build.assert_not_called()
+    def test_fresh_toolchain_probe_executes_without_native_hooks_before_signing(self):
+        class ProbeComplete(Exception):
+            pass
+        for wrong_sdk in (False, True):
+            with self.subTest(wrong_sdk=wrong_sdk), tempfile.TemporaryDirectory() as directory:
+                home, _, root, _, _, args = self.candidate(directory, state=False)
+                args.controller.mkdir()
+                (root / 'tool').mkdir()
+                (root / 'tool/check_toolchain.dart').write_bytes(
+                    (Path(__file__).resolve().parents[1] / 'tool/check_toolchain.dart').read_bytes())
+                binary = home / 'bin'
+                binary.mkdir()
+                scripts = {
+                    'make': '#!/bin/sh\nexec dart run tool/check_toolchain.dart\n',
+                    'dart': '#!' + sys.executable + '\nimport json,os,sys\nfrom pathlib import Path\n'
+                            'root=Path(os.environ["PROBE_ROOT"])\n'
+                            'if sys.argv[1:2]==["run"]:\n (root/"native-hooks").touch();sys.exit(95)\n'
+                            'assert sys.argv[1:]==["--disable-dart-dev","tool/check_toolchain.dart"]\n'
+                            'assert Path(sys.argv[2]).is_file()\n'
+                            '(root/"direct-probe.json").write_text(json.dumps(sys.argv[1:]))\n'
+                            'sys.exit(23 if os.environ["WRONG_SDK"]=="yes" else 0)\n',
+                    'git': '#!' + sys.executable + '\nimport sys\n'
+                           'args=sys.argv[1:]\n'
+                           'if args==["rev-parse","HEAD"]: print("' + SHA + '")\n'
+                           'elif args[:1]==["show"]: print("version: 1.2.3+1")\n'
+                           'else: assert args[:1]==["status"],args\n',
+                    'bash': '#!/bin/sh\ntouch "$PROBE_ROOT/forbidden-build"\nexit 96\n'}
+                for name, content in scripts.items():
+                    path = binary / name
+                    path.write_text(content)
+                    path.chmod(0o700)
+                env = dict(os.environ, PATH=str(binary) + os.pathsep + os.environ['PATH'],
+                           PROBE_ROOT=str(home), WRONG_SDK='yes' if wrong_sdk else 'no')
+                with patch.dict(os.environ, env), patch.object(mac.Path, 'home', return_value=home), \
+                     patch.object(mac, 'Forgejo'), patch.object(mac, 'source_trusted'), \
+                     patch.object(mac, 'quality'), \
+                     patch.object(mac, 'preflight', side_effect=ProbeComplete) as preflight:
+                    if wrong_sdk:
+                        with self.assertRaises(subprocess.CalledProcessError) as failure:
+                            mac.run(args)
+                        self.assertEqual(failure.exception.returncode, 23)
+                        preflight.assert_not_called()
+                    else:
+                        with self.assertRaises(ProbeComplete):
+                            mac.run(args)
+                        preflight.assert_called_once()
+                self.assertTrue((home / 'direct-probe.json').is_file())
+                self.assertFalse((home / 'native-hooks').exists())
+                self.assertFalse((home / 'forbidden-build').exists())
 
     def test_pending_apple_receipt_continues_same_submission_and_finishes_consumer(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -114,6 +149,8 @@ class MacCandidateTest(unittest.TestCase):
             self.assertEqual(archive.read_bytes(), (args.dist / 'ocideck-macos-1.2.3.zip').read_bytes())
 
             self.assertNotIn(['make', 'check-toolchain'], [call.args[0] for call in commands.call_args_list])
+            self.assertNotIn(['dart', '--disable-dart-dev', 'tool/check_toolchain.dart'],
+                             [call.args[0] for call in commands.call_args_list])
 
     def test_continuation_refuses_missing_or_modified_saved_submission_before_keychain(self):
         for mutate in ('missing', 'changed'):
