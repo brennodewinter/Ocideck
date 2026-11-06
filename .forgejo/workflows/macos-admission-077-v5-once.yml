@@ -1,0 +1,229 @@
+name: Mac admission v0.7.7 v5 once
+
+on:
+  push:
+    branches: [codex/macos-admission-077-v5-once]
+
+permissions:
+  contents: read
+
+jobs:
+  read-only-admission:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/codex/macos-admission-077-v5-once' && github.run_attempt == 1
+    runs-on: ocideck-macos-arm64
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0, repository release pin
+        with:
+          ref: 6a7321e574dd799cbade57659216e3e0f923a66f
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Read dedicated Mac identity, source, pins and capacity
+        shell: python
+        env:
+          QA_COMMIT: ${{ github.sha }}
+        run: |
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import plistlib
+          import re
+          import shutil
+          import stat
+          import struct
+          import subprocess
+          import sys
+          import time
+          
+          M7 = '6a7321e574dd799cbade57659216e3e0f923a66f'
+          SOURCE = 'aade287705575fb333fbc6c2948c359f6a443208'
+          BRANCH = 'codex/macos-admission-077-v5-once'
+          WORKFLOW = '.forgejo/workflows/macos-admission-077-v5-once.yml'
+          FRAMEWORK = 'abaf9c523780a608bd46686fd5e53740a07077f8'
+          ENGINE = 'deb287481e3ce9468f3434937ced4240a70539ca'
+          TESTER = '7ee9b703ceab0c542f2e0d01474c044f2f9590ff1b17a07c472918792d36c94f'
+          HOME = Path('/Users/brennodewinter')
+          SAFE_ENV = {k: os.environ[k] for k in ('PATH', 'HOME', 'TMPDIR', 'LANG') if k in os.environ}
+          SAFE_ENV['GIT_OPTIONAL_LOCKS'] = '0'
+          START = time.monotonic()
+          
+          
+          def command(argv, timeout=12, required=True):
+              remaining = 150 - (time.monotonic() - START)
+              if remaining <= 0:
+                  raise RuntimeError('read-only probe budget exhausted')
+              result = subprocess.run(argv, capture_output=True, text=True, env=SAFE_ENV,
+                                      timeout=min(timeout, remaining), stdin=subprocess.DEVNULL)
+              if len(result.stdout) > 131072 or len(result.stderr) > 131072:
+                  raise RuntimeError('bounded probe output exceeded')
+              if required and result.returncode:
+                  raise RuntimeError(Path(argv[0]).name + ' read-only probe exit ' + str(result.returncode))
+              return result
+          
+          
+          def digest(path):
+              value = hashlib.sha256()
+              with path.open('rb') as stream:
+                  for block in iter(lambda: stream.read(1024 * 1024), b''):
+                      value.update(block)
+              return value.hexdigest()
+          
+          
+          def owned(path, directory=False):
+              info = path.lstat()
+              if stat.S_ISLNK(info.st_mode) or info.st_uid != 501:
+                  raise RuntimeError('expected owned nonsymlink path: ' + str(path))
+              if directory != stat.S_ISDIR(info.st_mode):
+                  raise RuntimeError('expected path type differs: ' + str(path))
+              return info
+          
+          
+          def process_rows(text):
+              rows = {}
+              for line in text.splitlines():
+                  values = line.strip().split(None, 10)
+                  if len(values) == 11:
+                      pid, parent, uid = map(int, values[:3])
+                      rows[pid] = dict(pid=pid, ppid=parent, uid=uid,
+                                       start=' '.join(values[3:8]), rss_kib=int(values[8]),
+                                       cpu_time=values[9], executable=values[10])
+              return rows
+          
+          
+          def service_pid(text):
+              match = re.search(r'^\s*pid = (\d+)\s*$', text, re.M)
+              if not match:
+                  raise RuntimeError('Aqua runner service has no live PID')
+              return int(match.group(1))
+          
+          
+          def public_cwd(pid):
+              result = command(['lsof', '-a', '-p', str(pid), '-d', 'cwd', '-Fpn'], timeout=3, required=False)
+              values = [line[1:] for line in result.stdout.splitlines() if line.startswith('n')]
+              if not values:
+                  return None
+              prefix = str(HOME / 'Library/Caches/OciDeckRunner') + '/'
+              candidate = str(HOME / 'Library/Caches/OciDeck-macos-candidates') + '/'
+              return values[0] if values[0].startswith((prefix, candidate)) else '[outside owned OciDeck roots]'
+          
+          
+          def facts(report):
+              if os.getuid() != 501 or Path.home() != HOME:
+                  raise RuntimeError('expected dedicated Mac user UID501/HOME')
+              hardware = dict(cpu_count=os.cpu_count(), memory_bytes=int(command(['sysctl', '-n', 'hw.memsize']).stdout))
+              report['hardware'] = hardware
+              if hardware != dict(cpu_count=12, memory_bytes=18 * 1024**3):
+                  raise RuntimeError('expected dedicated 12CPU/18GiB Mac; never use operator laptop')
+              qa = os.environ.get('QA_COMMIT', '')
+              if not re.fullmatch('[0-9a-f]{40}', qa):
+                  raise RuntimeError('QA commit identity absent')
+              git = lambda *a: command(['git', *a]).stdout.strip()
+              if git('rev-parse', 'HEAD') != M7 or git('rev-parse', '--is-shallow-repository') != 'false':
+                  raise RuntimeError('expected exact full-history M7 checkout')
+              if git('show', '-s', '--format=%P', qa) != M7 or git('diff', '--name-only', M7, qa) != WORKFLOW:
+                  raise RuntimeError('QA ref must be one new workflow on exact M7 parent')
+              command(['git', 'merge-base', '--is-ancestor', SOURCE, M7])
+              if git('rev-parse', SOURCE + '^{tree}') != git('rev-parse', M7 + '^{tree}'):
+                  raise RuntimeError('tested source/controller trees differ')
+              remote = command(['git', 'ls-remote', 'origin', 'refs/heads/main', 'refs/heads/' + BRANCH,
+                                'refs/heads/codex/release-candidate-v0.7.7-' + SOURCE], timeout=25).stdout
+              refs = dict((line.split()[1], line.split()[0]) for line in remote.splitlines())
+              if (refs.get('refs/heads/main') != M7 or refs.get('refs/heads/' + BRANCH) != qa or
+                      refs.get('refs/heads/codex/release-candidate-v0.7.7-' + SOURCE) != SOURCE):
+                  raise RuntimeError('current protected main/frozen source/QA tip differs')
+              if 'version: 0.7.7+49' not in command(['git', 'show', SOURCE + ':pubspec.yaml']).stdout.splitlines():
+                  raise RuntimeError('frozen source version differs')
+              report['git'] = dict(controller=M7, source=SOURCE, qa_commit=qa, refs=refs,
+                                   source_tree=git('rev-parse', SOURCE + '^{tree}'), full_history=True,
+                                   workflow_sha256=hashlib.sha256(command(['git', 'show', qa + ':' + WORKFLOW]).stdout.encode()).hexdigest())
+              plist = HOME / 'Library/LaunchAgents/nl.librekat.ocideck.runner.plist'
+              if owned(plist).st_mode & 0o077:
+                  raise RuntimeError('runner LaunchAgent permissions differ')
+              config = plistlib.loads(plist.read_bytes())
+              label = 'nl.librekat.ocideck.runner'
+              if config.get('Label') != label or config.get('ProgramArguments', [None, None])[1] != 'daemon':
+                  raise RuntimeError('runner service identity differs')
+              pid = service_pid(command(['launchctl', 'print', 'gui/501/' + label]).stdout)
+              rows = process_rows(command(['ps', '-axo', 'pid=,ppid=,uid=,lstart=,rss=,time=,comm=']).stdout)
+              runner = rows.get(pid)
+              binary = Path(config['ProgramArguments'][0]).resolve()
+              if not runner or runner['uid'] != 501 or Path(runner['executable']).resolve() != binary:
+                  raise RuntimeError('live runner executable/UID binding differs')
+              current, ancestors = os.getpid(), set()
+              while current in rows and current not in ancestors:
+                  ancestors.add(current)
+                  if current == pid:
+                      break
+                  current = rows[current]['ppid']
+              if pid not in ancestors:
+                  raise RuntimeError('QA process is not a descendant of the expected Aqua runner')
+              sdk = HOME / 'Library/Caches/OciDeckRunner/toolchains/flutter-3.47.7-abaf9c523780'
+              pub = HOME / 'Library/Caches/OciDeckRunner/pub-cache/flutter-3.47.7-abaf9c523780'
+              environment = config.get('EnvironmentVariables', {})
+              if environment.get('PATH', '').split(':')[0] != str(sdk / 'bin') or environment.get('PUB_CACHE') != str(pub):
+                  raise RuntimeError('permanent SDK/Pub runner bindings differ')
+              report['runner'] = dict(label=label, domain='gui/501', process=runner,
+                                      expected_parent_chain=True, SDK=str(sdk), PUB_CACHE=str(pub))
+              candidates = [row for row in rows.values() if row['pid'] not in ancestors and
+                            any(name in row['executable'] for name in ('/clang', '/dart', '/ninja', '/cmake', 'flutter_tester', 'xcodebuild'))]
+              if len(candidates) > 16:
+                  raise RuntimeError('other native workload exceeds bounded inspection')
+              report['other_native_processes'] = [dict(pid=row['pid'], ppid=row['ppid'], uid=row['uid'],
+                  start=row['start'], rss_kib=row['rss_kib'], cpu_time=row['cpu_time'],
+                  executable=Path(row['executable']).name, cwd=public_cwd(row['pid'])) for row in candidates]
+              owned(sdk, True)
+              owned(pub, True)
+              version = json.loads((sdk / 'bin/cache/flutter.version.json').read_text())
+              tester = sdk / 'bin/cache/artifacts/engine/darwin-x64/flutter_tester'
+              if (version['frameworkRevision'] != FRAMEWORK or version['engineRevision'] != ENGINE or
+                      version['dartSdkVersion'] != '3.13.5' or version['channel'] != 'stable' or digest(tester) != TESTER):
+                  raise RuntimeError('official permanent SDK pin/code hash differs')
+              with tester.open('rb') as stream:
+                  header = stream.read(8)
+              if header[:4] != bytes.fromhex('cffaedfe') or struct.unpack('<I', header[4:])[0] != 0x0100000c:
+                  raise RuntimeError('tester is not native ARM64 Mach-O')
+              report['toolchain'] = dict(framework=FRAMEWORK, engine=ENGINE, Dart='3.13.5',
+                  tester_sha256=TESTER, tester_arch='arm64', macOS=command(['sw_vers', '-productVersion']).stdout.strip(),
+                  macOS_build=command(['sw_vers', '-buildVersion']).stdout.strip(),
+                  Xcode=command(['xcodebuild', '-version']).stdout.strip())
+              cache = HOME / 'Library/Caches/OciDeck-macos-candidates'
+              if cache.is_symlink():
+                  raise RuntimeError('candidate cache must not be a symlink')
+              if cache.exists() and (owned(cache, True).st_mode & 0o077):
+                  raise RuntimeError('candidate cache ownership/privacy differs')
+              if any(path.exists() or path.is_symlink() for path in (cache / SOURCE, cache / (SOURCE + '.controller.json'))):
+                  raise RuntimeError('fresh K candidate root/receipt already exists; preserve and inspect')
+              roots = [p.name for p in cache.iterdir() if re.fullmatch('[a-f0-9]{40}', p.name)] if cache.exists() else []
+              report['candidate'] = dict(K_root_absent=True, K_receipt_absent=True, existing_source_roots=roots)
+              archive = HOME / 'Library/Caches/OciDeckRunner/release-qa/mac-failed-13124-M5'
+              owned(archive, True)
+              for name in ('archive-proof.json', 'manifest-before.json', 'manifest-after.json',
+                           'ee64013610fe726d9b873443ccc4e5bd7ac771a9.controller.json'):
+                  owned(archive / name)
+              proof = json.loads((archive / 'archive-proof.json').read_text())
+              if (digest(archive / 'manifest-before.json') != proof['manifest_sha256'] or
+                      digest(archive / 'manifest-after.json') != proof['manifest_sha256'] or
+                      digest(archive / 'ee64013610fe726d9b873443ccc4e5bd7ac771a9.controller.json') != proof['receipt_sha256']):
+                  raise RuntimeError('preserved EE archive receipt/manifest hashes differ')
+              report['preserved_EE_archive'] = dict(path=str(archive), existing_manifest_hashes_intact=True,
+                                                   existing_controller_receipt_hash_intact=True,
+                                                   scope='metadata/receipt checks, no recursive rehash of archived product bytes')
+              memory = command(['memory_pressure', '-Q']).stdout
+              report['capacity'] = dict(free_bytes=shutil.disk_usage(HOME).free, memory_pressure=memory.strip(),
+                                        swapusage=command(['sysctl', 'vm.swapusage']).stdout.strip(), load=os.getloadavg())
+              report['idle_excluding_owned_QA'] = not candidates
+              report['candidate_reserve_available'] = report['capacity']['free_bytes'] >= 16 * 1024**3
+              report['read_only_probe_complete'] = True
+          
+          
+          report = dict(schema=1, scope='One read-only Mac admission through existing outbound runner; no release operation',
+                        started=time.time(), no_build_sign_notary_keychain_network_configuration=True)
+          try:
+              facts(report)
+          except Exception as error:
+              report['failure'] = dict(type=type(error).__name__, message=str(error)[:1024])
+          finally:
+              report['ended'] = time.time()
+              print(json.dumps(report, indent=2, sort_keys=True), flush=True)
+          sys.exit(1 if 'failure' in report else 0)
