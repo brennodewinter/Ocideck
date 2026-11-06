@@ -102,18 +102,18 @@ def asset_listing(transport, release_id):
     assets = {}
     if type(release_id) is not int or release_id <= 0:
         raise ValueError('invalid release ID')
-    for page in range(1, 101):
-        values = transport.data(f'/releases/{release_id}/assets?limit=50&page={page}')
-        if not isinstance(values, list):
-            raise ValueError('invalid assets response')
-        for asset in values:
-            name = asset.get('name')
-            if not isinstance(name, str) or name in assets:
-                raise ValueError('invalid or duplicate release asset')
-            assets[name] = asset
-        if len(values) < 50:
-            return assets
-    raise ValueError('asset listing exceeds bound')
+    # Forgejo lists all release attachments in one bounded response; no pagination.
+    values = transport.data(f'/releases/{release_id}/assets')
+    if not isinstance(values, list) or len(values) > 5000:
+        raise ValueError('invalid assets response')
+    for asset in values:
+        if not isinstance(asset, dict):
+            raise ValueError('invalid release asset')
+        name = asset.get('name')
+        if not isinstance(name, str) or not name or name in assets:
+            raise ValueError('invalid or duplicate release asset')
+        assets[name] = asset
+    return assets
 
 
 def public_proof(transport, assets, tag, sha, key):

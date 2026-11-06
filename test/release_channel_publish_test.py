@@ -96,8 +96,8 @@ elif '/actions/runs/' in u and u.endswith('/jobs') and not u.endswith('/9/jobs')
 elif u.endswith('/actions/runs/9/jobs'): out=json.dumps(s['jobs']).encode()
 elif u.endswith('/actions/runs/9'): out=json.dumps(s['run']).encode()
 elif '/actions/runs/' in u and u.rsplit('/',1)[1] in s.get('predecessors',{}): out=json.dumps(s['predecessors'][u.rsplit('/',1)[1]]).encode()
-elif '/releases/7/assets?limit=' in u:
-    page=int(parse_qs(urlsplit(u).query)['page'][0]);out=json.dumps(s['assets'][(page-1)*50:page*50]).encode()
+elif u.endswith('/releases/7/assets'):
+    out=json.dumps(s['assets']).encode()
 elif u.endswith('/releases/7'): out=json.dumps({'id':7,'tag_name':'v0.7.7','draft':s.get('draft',False)}).encode()
 else: sys.exit(22)
 state_path.write_text(json.dumps(s));Path(args[args.index('--output')+1]).write_bytes(out);print('200',end='')
@@ -368,14 +368,15 @@ class PublishTests(unittest.TestCase):
         self.assertNotEqual(self.run_publish().returncode, 0)
         self.assertEqual(receipt.read_bytes(), b'previous receipt')
 
-    def test_assets_after_first_page_are_reused(self):
+    def test_exactly_fifty_unpaginated_assets_are_reused_without_upload(self):
         self.assertEqual(self.run_publish().returncode, 0)
         ours = self.state['assets']
-        prefix = [{'id': n + 100, 'name': 'other-' + str(n)} for n in range(55)]
+        prefix = [{'id': n + 100, 'name': 'other-' + str(n)} for n in range(45)]
         self.state['assets'] = prefix + ours
         self.assertEqual(self.run_publish().returncode, 0)
-        self.assertEqual(len(self.state['assets']), 60)
-        self.assertTrue(any('page=2' in call for call in self.state['calls']))
+        self.assertEqual(len(self.state['assets']), 50)
+        self.assertFalse(any('/assets?limit=' in call for call in self.state['calls']))
+        self.assertEqual(prefix + ours, self.state['assets'])
 
     def test_draft_release_never_uploads_or_receipts(self):
         self.state['draft'] = True
