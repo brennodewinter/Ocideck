@@ -67,8 +67,8 @@ class AccessLogTest(unittest.TestCase):
         self.assertIn(" 400 ", log)
 
 
-def _breaking_source():
-    """Een bron die 1000 bytes aankondigt, er 10 stuurt en dan reset."""
+def _source(reset=False, declared=1000):
+    """Een bron die tien bytes stuurt en normaal sluit of reset."""
     listener = socket.socket()
     listener.bind(("127.0.0.1", 0))
     listener.listen(1)
@@ -76,19 +76,23 @@ def _breaking_source():
     def serve():
         conn, _ = listener.accept()
         conn.recv(65536)
-        conn.sendall(b"HTTP/1.1 200 OK\r\nContent-Length: 1000\r\n\r\n0123456789")
+        conn.sendall(
+            b"HTTP/1.1 200 OK\r\nContent-Length: %d\r\n\r\n0123456789" % declared
+        )
         # SO_LINGER 0: close() stuurt een RST, zoals een bron die wegvalt.
-        conn.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack("ii", 1, 0))
+        if reset:
+            linger = "HH" if os.name == "nt" else "ii"
+            conn.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack(linger, 1, 0))
         conn.close()
         listener.close()
 
+    port = listener.getsockname()[1]
     threading.Thread(target=serve, daemon=True).start()
-    return listener.getsockname()[1]
+    return port
 
 
 class MidStreamFailureTest(unittest.TestCase):
-    def test_source_lost_after_headers_closes_without_second_response(self):  # #2755
-        source = _breaking_source()
+    def exchange(self, source, close=False):
         with mock.patch.object(proxy, "ALLOW_ANY", True), mock.patch.object(
             proxy, "ALLOWED_PORTS", {source}
         ), mock.patch.object(
@@ -99,8 +103,21 @@ class MidStreamFailureTest(unittest.TestCase):
             reply = _exchange(
                 port,
                 b"GET /?url=http%%3A%%2F%%2Fbron.test%%3A%d%%2Fdeck HTTP/1.1\r\n"
-                b"Host: x\r\n\r\n" % source,
+                b"Host: x\r\n%s\r\n"
+                % (source, b"Connection: close\r\n" if close else b""),
             )
+        return reply
+
+    def test_source_lost_after_headers_closes_without_second_response(self):  # #2755
+        for reset in (False, True):
+            with self.subTest(reset=reset):
+                reply = self.exchange(_source(reset=reset))
+                self.assertTrue(reply.startswith(b"HTTP/1.1 200"), reply)
+                self.assertEqual(reply.count(b"HTTP/1.1 "), 1, reply)
+
+    def test_complete_source_preserves_body(self):
+        reply = self.exchange(_source(declared=10), close=True)
+        self.assertEqual(reply.split(b"\r\n\r\n", 1)[1], b"0123456789")
         self.assertTrue(reply.startswith(b"HTTP/1.1 200"), reply)
         self.assertEqual(reply.count(b"HTTP/1.1 "), 1, reply)
 
