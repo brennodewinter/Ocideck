@@ -74,7 +74,7 @@ command() {
           '${gekozen.path}/$checksumBestand',
         ).readAsStringSync();
         final controle = await Process.run('dart', [
-          'run',
+          '--disable-dart-dev',
           'tool/pack_web_release.dart',
           '--check',
           '--bundle-dir',
@@ -120,7 +120,7 @@ command() {
         ['--onbekend'],
       ]) {
         for (final opdracht in [
-          ['dart', 'run', 'tool/pack_web_release.dart'],
+          ['dart', '--disable-dart-dev', 'tool/pack_web_release.dart'],
           [bash, 'scripts/deploy_web.sh'],
         ]) {
           final resultaat = await Process.run(opdracht.first, [
@@ -131,7 +131,7 @@ command() {
         }
       }
       final schrijven = await Process.run('dart', [
-        'run',
+        '--disable-dart-dev',
         'tool/pack_web_release.dart',
         '--bundle-dir',
         bundel.path,

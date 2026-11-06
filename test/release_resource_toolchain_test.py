@@ -13,6 +13,26 @@ SHA = 'a' * 40
 
 
 class ResourceToolchainTest(unittest.TestCase):
+    def test_make_toolchain_probe_does_not_start_native_hooks(self):
+        for wrong_sdk in (False, True):
+            with self.subTest(wrong_sdk=wrong_sdk), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                dart = root / 'dart'
+                dart.write_text('#!' + sys.executable + '\nimport os,sys\nfrom pathlib import Path\n'
+                    'root=Path(os.environ["PROBE_ROOT"])\n'
+                    'if sys.argv[1:2]==["run"]:\n (root/"native-hooks").touch();sys.exit(95)\n'
+                    'assert sys.argv[1:]==["--disable-dart-dev","tool/check_toolchain.dart"]\n'
+                    '(root/"probe-executed").touch()\n'
+                    'sys.exit(23 if os.environ["WRONG_SDK"]=="yes" else 0)\n')
+                dart.chmod(0o700)
+                result = subprocess.run(['make', '--no-print-directory', 'check-toolchain'],
+                    cwd=ROOT, env=dict(os.environ, PATH=str(root) + os.pathsep + os.environ['PATH'],
+                        PROBE_ROOT=str(root), WRONG_SDK='yes' if wrong_sdk else 'no'),
+                    capture_output=True, text=True, timeout=20)
+                self.assertFalse((root / 'native-hooks').exists(), result.stdout + result.stderr)
+                self.assertTrue((root / 'probe-executed').exists())
+                self.assertEqual(result.returncode == 0, not wrong_sdk)
+
     def test_wrong_live_sdk_stops_before_linux_build(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

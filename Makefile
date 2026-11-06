@@ -998,9 +998,10 @@ check-dated-claims:
 # Elke groene poort is een uitspraak over de toolchain die hem draaide (#598).
 # Eén Flutter per machine, de laatste stable uit het officiële kanaal, en de pin
 # volgt die installatie — niet andersom.
+# Pure Dart: geen native bouw starten vóór de toolchainpoort.
 check-toolchain:
 	@echo "== OciDeck check: toolchain =="
-	@echo "Command: dart run tool/check_toolchain.dart"
+	@echo "Command: dart --disable-dart-dev tool/check_toolchain.dart"
 	@echo "Covers: kanaal stable, de officiële Flutter-repository, en de versie"
 	@echo "        exact gelijk aan de pin in .tool-versions. Elk van de drie is"
 	@echo "        apart fataal; alle gebreken worden in één run gemeld. Daarna"
@@ -1010,7 +1011,7 @@ check-toolchain:
 	@echo "        stable (sha256 toetsen vóór uitpakken) in ~/flutter en trek élke"
 	@echo "        pin mee. Wint ~/flutter niet: kijk naar de PATH-volgorde in"
 	@echo "        ~/.zshrc — een regel vóór die van Homebrew verliest alsnog."
-	dart run tool/check_toolchain.dart
+	dart --disable-dart-dev tool/check_toolchain.dart
 
 check-improvement-templates:
 	@echo "== OciDeck check: improvement templates =="
@@ -1287,7 +1288,7 @@ build-web: deps-verify-offline sbom-verify
 	@# served under /sbom/ from the same origin). The step ends by writing
 	@# SHA256SUMS over the finished bundle, so it must stay the LAST thing that
 	@# touches file contents here.
-	dart run tool/pack_web_release.dart
+	dart --disable-dart-dev tool/pack_web_release.dart
 	@# Flutter kopieert assets mét hun bronpermissies. Een bestand dat lokaal
 	@# 600 staat wordt dan op de webserver onleesbaar (stil 403 → "onzichtbaar"
 	@# logo). Normaliseer daarom de hele bundel naar world-readable.
@@ -1304,11 +1305,11 @@ check-web: build-web
 	@echo "Failure means: the web bundle lost a hardening invariant — see the list."
 	dart run tool/check_web_hardening.dart
 	@echo "== OciDeck check: release artefacts =="
-	@echo "Command: dart run tool/pack_web_release.dart --check"
+	@echo "Command: dart --disable-dart-dev tool/pack_web_release.dart --check"
 	@echo "Covers: LICENSE, THIRD_PARTY_NOTICES and the SBOM travel with the bundle,"
 	@echo "        and SHA256SUMS describes exactly the files that are there."
 	@echo "Failure means: something was added, changed or lost after packing."
-	dart run tool/pack_web_release.dart --check
+	dart --disable-dart-dev tool/pack_web_release.dart --check
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	@echo "Command: dart run tool/check_bundled_docs_fresh.dart build/web"
 	@echo "Covers: the docs inside the built bundle match docs/ on disk, byte for byte."
