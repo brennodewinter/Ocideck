@@ -142,8 +142,10 @@ From a checkout, with the bundle in `build/web`, one command does both that and
 the presence of the licence, source indication and SBOM:
 
 ```sh
-dart run tool/pack_web_release.dart --check
+dart --disable-dart-dev tool/pack_web_release.dart --check
 ```
+
+The direct Dart invocation avoids starting unrelated native-asset build hooks.
 
 **What this proves, and what it does not.** It lets you check that your copy is
 complete and undamaged. On its own the list proves nothing — it only says

@@ -819,7 +819,7 @@ also declares them, but see the [CI note](#continuous-integration).)
   translation gate then wants it in every language.
 
 ### `make check-toolchain`
-- **Runs:** `dart run tool/check_toolchain.dart`
+- **Runs:** `dart --disable-dart-dev tool/check_toolchain.dart`
 - **Covers:** that the Flutter actually executing the gate — version, channel
   and repository — appears in [Toolchains of record](#toolchains-of-record).
   Every green gate is a statement about the toolchain that produced it; if that
@@ -1450,7 +1450,7 @@ also declares them, but see the [CI note](#continuous-integration).)
 
 ### `make check-web`
 - **Runs:** `make build-web`, then `dart run tool/check_web_hardening.dart`,
-  `dart run tool/pack_web_release.dart --check` and
+  `dart --disable-dart-dev tool/pack_web_release.dart --check` and
   `dart run tool/check_bundled_docs_fresh.dart build/web`.
 - **Covers:** three things about the built `build/web`.
 

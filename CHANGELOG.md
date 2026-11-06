@@ -62,7 +62,9 @@ All notable changes to OciDeck are documented in this file.
 - **Fetch-hulppunt breekt netjes af.** Viel de bron halverwege een doorgifte
   weg, dan schreef het hulppunt een tweede antwoord (`502`) midden in de
   bytes van het eerste en liet het de verbinding open; de import hing. Het
-  kapt de verbinding nu, zodat de app een afgebroken download ziet (#2755).
+  kapt de verbinding nu, zodat de app een afgebroken download ziet (#2755). Ook
+  wanneer de bron normaal sluit voordat alle aangekondigde bytes binnen zijn,
+  sluit het hulppunt de verbinding in plaats van op meer bytes te wachten.
 - **API-sleutel van de ASR-server alleen versleuteld.** Een LAN-profiel op kale
   `http` of `ws` stuurde de sleutel leesbaar mee, terwijl de handleiding alleen
   `https` beloofde. De sleutel gaat nu alleen over `https`/`wss` of naar dit

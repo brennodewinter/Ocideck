@@ -328,6 +328,8 @@ class Handler(BaseHTTPRequestHandler):
                     conn.sock.settimeout(min(READ_TIMEOUT, remaining))
                     chunk = resp.read(CHUNK)
                     if not chunk:
+                        if declared and declared.isdigit() and total < int(declared):
+                            self.close_connection = True
                         break
                     total += len(chunk)
                     if total > MAX_BYTES:

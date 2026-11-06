@@ -8,9 +8,9 @@
 // een bestand tussen schuift en de lijst stil onvolledig wordt.
 //
 // Gebruik:
-//   dart run tool/pack_web_release.dart            na `flutter build web`
-//   dart run tool/pack_web_release.dart --check     controleer een klaargezette bundel
-//   dart run tool/pack_web_release.dart --check --bundle-dir PATH
+//   dart --disable-dart-dev tool/pack_web_release.dart            na `flutter build web`
+//   dart --disable-dart-dev tool/pack_web_release.dart --check     controleer een klaargezette bundel
+//   dart --disable-dart-dev tool/pack_web_release.dart --check --bundle-dir PATH
 //
 // Wat dit NIET is: een handtekening. Zie [checksumUitleg] en docs/BUILD.md —
 // een lijst die naast de bundel ligt bewijst dat je hebt wat er lag, niet van
