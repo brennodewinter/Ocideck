@@ -1,0 +1,92 @@
+name: Read-only owned native cache inventory once
+on:
+  push:
+    branches: [codex/web-mode-cache-inventory-once]
+permissions:
+  contents: read
+env:
+  QA_PLAN: |
+    {
+      "reviewed": true,
+      "read_only": true,
+      "qa_parent": "0bcad3c24b83c1a7c425ee93125218dff5670fd3",
+      "qa_branch": "codex/web-mode-cache-inventory-once",
+      "qa_file": ".forgejo/workflows/web-mode-cache-inventory-once.yml",
+      "owned_source_expected": "e5500074b71b2936cd01dd9dfe8c5e154a95a835",
+      "Q": "/Users/brennodewinter/Library/Caches/OciDeckRunner/release-qa/controller-C",
+      "old_L_log_sha256": "6a8e5927b7fd616a5e4aad6e832a14de4bed9ff66d0a67bf129e71aa82962036",
+      "old_L_TMP": "/private/var/tmp/oci077-l",
+      "goal_minimum_reclaim_bytes": 2281332736,
+      "preserve": [
+        "all .git",
+        "all tracked source",
+        "coverage/report originals",
+        "all Apple/notary/app/ZIP",
+        "PUB",
+        "SDK"
+      ],
+      "optional_extra_readonly_candidates": [
+        "Q/home/.npm/_cacache",
+        "Q/home/.cache/puppeteer",
+        "old private L TMP"
+      ],
+      "cleanup_authorized": false
+    }
+jobs:
+  owned-cache-inventory:
+    runs-on: ocideck-macos-arm64
+    timeout-minutes: 15
+    steps:
+      - name: Refuse unreviewed or mutating inventory
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,json
+          p=json.loads(os.environ['QA_PLAN']);assert p['reviewed'] is True and p['read_only'] is True and p['cleanup_authorized'] is False
+          PY
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Read exact owned terminal cache sizes only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,json,pathlib,hashlib,subprocess,shutil,time,stat
+          P=json.loads(os.environ['QA_PLAN']);assert P['reviewed'] is True and P['read_only'] is True and P['cleanup_authorized'] is False
+          W=pathlib.Path(os.environ['GITHUB_WORKSPACE']);X=W/'native-web-mode-cache-inventory';X.mkdir(mode=0o700)
+          def run(*a,cwd=W):return subprocess.check_output(a,cwd=cwd,text=True,timeout=90).strip()
+          def own(p):assert p.exists() and not p.is_symlink() and p.stat().st_uid==501,str(p)
+          assert os.getuid()==501 and os.uname().machine=='arm64'
+          assert run('git','rev-parse','HEAD')==os.environ['GITHUB_SHA'] and run('git','rev-parse','HEAD^')==P['qa_parent']
+          assert run('git','diff','--name-only','HEAD^','HEAD')==P['qa_file']
+          Q=pathlib.Path(P['Q']);S=Q/'source';own(Q);own(S)
+          assert (S/'.git').is_dir() and not (S/'.git').is_symlink() and run('git','rev-parse','HEAD',cwd=S)==P['owned_source_expected'] and not run('git','status','--porcelain',cwd=S)
+          heavy={'clang','clang++','ninja','cmake','flutter_tester','xcodebuild'};active=[x for x in run('/bin/ps','-axo','comm=').splitlines() if pathlib.Path(x.strip()).name in heavy];assert not active,'Native work active; inventoryonly doesnotpermit cleanup'
+          prepared=Q/'L-run/prepared.json';own(prepared);prior=json.loads(prepared.read_text());assert prior['head']==P['owned_source_expected']
+          log=Q/'L-run/logs/check-release.log';own(log);loghash=hashlib.sha256(log.read_bytes()).hexdigest();assert loghash==P['old_L_log_sha256']
+          # Only fixed owned paths are measured. Nothing is removed, chmodded or executed.
+          roots=[(S/'build','generated build children; original reports alwayspreserved'),(S/'.dart_tool','generated dependency/build cache'),(S/'coverage','PRESERVE original coverage reports'),(Q/'home/.npm/_cacache','optional generated QA npm download cache'),(Q/'home/.cache/puppeteer','optional generated QA browser binary cache'),(pathlib.Path(P['old_L_TMP']),'optional generated old L temporary namespace')]
+          rows=[]
+          for path,kind in roots:
+           if not path.exists():rows.append({'path':str(path),'exists':False,'classification':kind});continue
+           own(path);assert all(not p.is_symlink() for p in path.parents)
+           row={'path':str(path),'exists':True,'classification':kind,'mode':oct(stat.S_IMODE(path.stat().st_mode)),'du_sk':run('/usr/bin/du','-skx',str(path)),'cleanup_authorized':False,'children':[]}
+           if path.is_dir():
+            children=sorted(path.iterdir(),key=lambda p:p.name);assert len(children)<=256
+            for child in children:
+             if child.is_symlink():row['children'].append({'name':child.name,'symlink_preserve':True});continue
+             own(child);protected=(child.name=='.git' or child.name.endswith(('.app','.zip')) or 'report' in child.name.lower() or child.name=='lcov.info' or kind.startswith('PRESERVE'))
+             row['children'].append({'name':child.name,'kind':'dir' if child.is_dir() else 'file','mode':oct(stat.S_IMODE(child.stat().st_mode)),'du_sk':run('/usr/bin/du','-skx',str(child)),'classification':'PRESERVE original/source/report/app/ZIP' if protected else 'derived_candidate_pending_rootreview','cleanup_authorized':False})
+           rows.append(row)
+          proof={'at':time.time(),'read_only':True,'source_L_clean':P['owned_source_expected'],'old_L_full_log_sha256':loghash,'old_L_exit_scope':'Originaltop-level exitUNKNOWN; completedmandatoryoutput independentlyverified, not relabelledsuccess','old_L_prepared_sha256':hashlib.sha256(prepared.read_bytes()).hexdigest(),'free_bytes':shutil.disk_usage(Q).free,'native_active_processes':active,'owned_paths':rows,'all_source_git_reports_Apple_PUB_SDK_preserved':True,'root_review_required_before_any_cleanup':True,'APFS_note':'du isallocatedinventory; actualreclaimcannotbeguaranteed. Recheckrealdf>=16GiBafteranylaterapprovedcleanup, neverweakenadmission.'}
+          (X/'inventory.json').write_text(json.dumps(proof,indent=2)+'\n');(X/'HASHINDEX.json').write_text(json.dumps({'inventory.json':{'bytes':(X/'inventory.json').stat().st_size,'sha256':hashlib.sha256((X/'inventory.json').read_bytes()).hexdigest()}},indent=2)+'\n');print(json.dumps(proof),flush=True)
+          PY
+      - name: Preserve read-only inventory
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
+        with:
+          name: native-web-mode-cache-inventory
+          path: native-web-mode-cache-inventory/**
+          if-no-files-found: error
+          retention-days: 90
