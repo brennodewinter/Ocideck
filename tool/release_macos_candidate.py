@@ -171,7 +171,7 @@ def run(args):
         environment = {key: value for key, value in os.environ.items()
                        if not any(secret in key.upper() for secret in ('TOKEN', 'SECRET', 'PASSWORD'))}
         if not mode:
-            command(['make', 'check-toolchain'], root)
+            command(['dart', '--disable-dart-dev', 'tool/check_toolchain.dart'], root)
         preflight(controller, root, environment)
         operation = dict(schema=1, operation_id=args.operation_id, tag=args.tag, sha=args.sha,
             ref=wanted_operation['frozen_ref'], forge_run_id=args.forge_run_id,
