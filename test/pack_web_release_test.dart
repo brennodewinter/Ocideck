@@ -13,6 +13,10 @@ import '../tool/pack_web_release.dart';
 /// te kopiëren er ook echt zijn, want een lijst die naar niets wijst pakt een
 /// lege bundel in en meldt vrolijk succes.
 void main() {
+  // Windows zoekt System32 (WSL) vóór PATH bij een kale executable-naam.
+  final bash = Platform.isWindows
+      ? '${Platform.environment['ProgramFiles']}\\Git\\bin\\bash.exe'
+      : 'bash';
   late Directory tijdelijk;
   late Directory wortel;
   late Directory bundel;
@@ -77,7 +81,7 @@ command() {
           gekozen.path,
         ], environment: zonderDeployCommando());
         expect(controle.exitCode, 0, reason: '${controle.stderr}');
-        final deploy = await Process.run('bash', [
+        final deploy = await Process.run(bash, [
           'scripts/deploy_web.sh',
           '--dry-run',
           '--bundle-dir',
@@ -89,7 +93,7 @@ command() {
           File('${gekozen.path}/$checksumBestand').readAsStringSync(),
           manifest,
         );
-        final live = await Process.run('bash', [
+        final live = await Process.run(bash, [
           'scripts/deploy_web.sh',
           '--bundle-dir',
           gekozen.path,
@@ -97,7 +101,7 @@ command() {
         expect(live.exitCode, 1);
         expect(live.stderr, contains('Ontbrekend commando: scp'));
         File('${gekozen.path}/index.html').writeAsStringSync('gewijzigd');
-        final ongeldig = await Process.run('bash', [
+        final ongeldig = await Process.run(bash, [
           'scripts/deploy_web.sh',
           '--dry-run',
           '--bundle-dir',
@@ -117,7 +121,7 @@ command() {
       ]) {
         for (final opdracht in [
           ['dart', 'run', 'tool/pack_web_release.dart'],
-          ['bash', 'scripts/deploy_web.sh'],
+          [bash, 'scripts/deploy_web.sh'],
         ]) {
           final resultaat = await Process.run(opdracht.first, [
             ...opdracht.skip(1),

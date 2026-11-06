@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  // Windows zoekt System32 (WSL) vóór PATH bij een kale executable-naam.
+  final bash = Platform.isWindows
+      ? '${Platform.environment['ProgramFiles']}\\Git\\bin\\bash.exe'
+      : 'bash';
   test(
     'channel workflow is manual and publishes only consumer-checked bytes',
     () {
@@ -61,7 +65,7 @@ void main() {
   );
 
   test('invalid source identity stops before any build command', () async {
-    final result = await Process.run('bash', [
+    final result = await Process.run(bash, [
       'scripts/build_release_channel.sh',
       'v0.7.7',
       'main',
