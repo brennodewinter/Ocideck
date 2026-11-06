@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -137,6 +138,44 @@ if sys.argv[1]=='check-toolchain': sys.exit(1)
                 else:
                     self.assertLess(guard, steps.index('actions/download-artifact@'))
         self.assertIn("inputs.channel == 'windows' && '4' || '8'", containers['build'])
+
+    def test_macos_workflow_continuation_argv_under_nounset(self):
+        # macOS ships Bash 3.2: an empty array under set -u must add no argument.
+        workflow = (ROOT / '.forgejo/workflows/release-channel.yml').read_text()
+        lines = workflow.split('\n  build-macos:\n', 1)[1].splitlines()
+        start = next(i for i, line in enumerate(lines) if line.strip() == 'continuation=()')
+        end = next(i for i in range(start, len(lines))
+                   if lines[i].strip().startswith('python3 tool/release_macos_candidate.py '))
+        script = 'set -euo pipefail\n' + '\n'.join(line[10:] for line in lines[start:end + 1])
+        for attempt, previous, extra in (
+                ('', '', []),
+                ('attempt-1', '456', ['--previous-run-id', '456', '--attempt-id', 'attempt-1']),
+                ('bad attempt', '456', None), ('attempt-1', '', None)):
+            with self.subTest(attempt=attempt, previous=previous), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                (root / 'bin').mkdir()
+                stub = root / 'bin/python3'
+                stub.write_text('#!' + sys.executable + '\nimport json,os,sys\n'
+                                'open(os.environ["CALLS"],"w").write(json.dumps(sys.argv[1:]))\n')
+                stub.chmod(0o700)
+                calls = root / 'calls.json'
+                workspace = root / 'workspace with spaces'
+                env = dict(os.environ, PATH=str(root / 'bin') + ':' + os.environ['PATH'],
+                           ATTEMPT_ID=attempt, PREVIOUS_RUN_ID=previous, RELEASE_TAG='v0.7.7',
+                           SOURCE_SHA=SHA, GITHUB_SHA='b' * 40, GITHUB_WORKSPACE=str(workspace),
+                           OPERATION_ID='fixture', GITHUB_RUN_ID='123', CALLS=str(calls))
+                result = subprocess.run(['/bin/bash', '-c', script], cwd=root, env=env,
+                                        capture_output=True, text=True)
+                if extra is None:
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertFalse(calls.exists(), result.stderr)
+                else:
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertEqual(json.loads(calls.read_text()), [
+                        'tool/release_macos_candidate.py', '--tag', 'v0.7.7', '--sha', SHA,
+                        '--controller-sha', 'b' * 40, '--controller', str(root),
+                        '--dist', str(workspace / 'source/dist'), '--operation-id', 'fixture',
+                        '--forge-run-id', '123', '--result', 'build/macos-operation.json'] + extra)
 
     def test_macos_whisper_cli_is_signed_and_app_resealed_after_install(self):
         # #2800: de helper landt in een al verzegelde .app — zonder eigen

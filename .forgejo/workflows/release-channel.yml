@@ -199,10 +199,10 @@ jobs:
           git fetch --no-tags origin "$FROZEN_REF"
           continuation=()
           if [ -n "$ATTEMPT_ID" ]; then
-            [[ "$ATTEMPT_ID" =~ ^[A-Za-z0-9_-]{1,80}$ && "$PREVIOUS_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+            [[ "$ATTEMPT_ID" =~ ^[A-Za-z0-9_-]{1,80}$ && "$PREVIOUS_RUN_ID" =~ ^[1-9][0-9]*$ ]] || exit 1
             continuation=(--previous-run-id "$PREVIOUS_RUN_ID" --attempt-id "$ATTEMPT_ID")
           fi
-          python3 tool/release_macos_candidate.py --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --controller "$PWD" --dist "$GITHUB_WORKSPACE/source/dist" --operation-id "$OPERATION_ID" --forge-run-id "$GITHUB_RUN_ID" --result build/macos-operation.json "${continuation[@]}"
+          python3 tool/release_macos_candidate.py --tag "$RELEASE_TAG" --sha "$SOURCE_SHA" --controller-sha "$GITHUB_SHA" --controller "$PWD" --dist "$GITHUB_WORKSPACE/source/dist" --operation-id "$OPERATION_ID" --forge-run-id "$GITHUB_RUN_ID" --result build/macos-operation.json ${continuation[@]+"${continuation[@]}"}
           echo "completed=$(python3 -c 'import json; print(str(json.load(open("build/macos-operation.json"))["outcome"] == "completed").lower())')" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
         if: ${{ steps.macos.outputs.completed == 'true' }}
