@@ -72,7 +72,7 @@ if (( VERIFY_SERVER_CONFIG_ONLY )); then
   fi
   REQUIRED_COMMANDS=(python3 ssh)
 else
-  REQUIRED_COMMANDS=(dart git shasum tar du cut uname cmp python3)
+  REQUIRED_COMMANDS=(dart git tar du cut uname cmp python3)
 fi
 for cmd in "${REQUIRED_COMMANDS[@]}"; do
   command -v "$cmd" >/dev/null 2>&1 \
@@ -174,7 +174,15 @@ fi
 # De bestandscontrole heeft geen native assets nodig; pub run zou bouw-hooks starten.
 dart --disable-dart-dev tool/pack_web_release.dart --check --bundle-dir "$BUNDLE_DIR"
 
-BUNDLE_SHA="$(shasum -a 256 "$BUNDLE_DIR/SHA256SUMS" | cut -d' ' -f1)"
+BUNDLE_SHA="$(python3 - "$BUNDLE_DIR/SHA256SUMS" <<'PYHASH'
+import hashlib, sys
+hasher = hashlib.sha256()
+with open(sys.argv[1], 'rb') as stream:
+    for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+        hasher.update(chunk)
+print(hasher.hexdigest())
+PYHASH
+)"
 echo "SHA256SUMS: $BUNDLE_SHA"
 
 # Wie deployt wat. Niet als poort maar als vermelding: bij een probleem op de
