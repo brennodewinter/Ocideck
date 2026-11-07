@@ -46,6 +46,20 @@ class ReleaseBaselineTest(unittest.TestCase):
              patch.object(baseline, 'signature', side_effect=ValueError('invalid signature') if signature_error else None):
             return baseline.baseline(self.args, self.transport)
 
+    def test_complete_unpaginated_asset_list_at_fifty(self):
+        assets = [{'name': f'asset-{i}'} for i in range(50)]
+        with patch.object(self.transport, 'data', return_value=assets) as request:
+            result = baseline.asset_listing(self.transport, 8)
+        self.assertEqual({asset['name']: asset for asset in assets}, result)
+        request.assert_called_once_with('/releases/8/assets')
+
+    def test_asset_list_rejects_invalid_entries_and_duplicate_names(self):
+        for values in ({}, [{'name': f'asset-{i}'} for i in range(5001)], [None], [{'name': None}], [{'name': ''}],
+                       [{'name': 'same'}, {'name': 'same'}]):
+            with self.subTest(values=values), patch.object(self.transport, 'data', return_value=values):
+                with self.assertRaises(ValueError):
+                    baseline.asset_listing(self.transport, 8)
+
     def test_highest_signed_publication_and_shared_abandoned_policy(self):
         self.assertEqual({'version': '0.7.7', 'build': 49, 'tag': 'v0.7.7', 'source': 'a' * 40}, self.run_baseline())
         self.args.current_build = 55

@@ -84,6 +84,7 @@ def main():
     spec.loader.exec_module(channel)
     sys.path.insert(0, str(root / 'tool'))
     from release_channel_capabilities import require_space
+    from release_baseline import asset_listing
     channel.identity(args.tag, args.sha, args.channel)
     if not re.fullmatch(r'[0-9a-f]{40}', args.controller_sha) or args.controller_sha == '0' * 40:
         raise ValueError('invalid controller SHA')
@@ -312,19 +313,7 @@ def main():
     files += proof + [Path(str(file) + '.minisig') for file in proof]
 
     def listing():
-        result = {}
-        for page in range(1, 1001):
-            values = data(release_path + '/assets?limit=50&page=' + str(page))
-            if not isinstance(values, list):
-                raise ValueError('invalid assets response')
-            for value in values:
-                name = value.get('name')
-                if not isinstance(name, str) or name in result:
-                    raise ValueError('invalid or duplicate release asset')
-                result[name] = value
-            if len(values) < 50:
-                return result
-        raise ValueError('asset pagination exceeded bound')
+        return asset_listing(argparse.Namespace(data=data), int(args.release_id))
 
     def readback(asset, output):
         asset_id = str(asset.get('id', ''))
