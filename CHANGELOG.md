@@ -21,6 +21,23 @@ All notable changes to OciDeck are documented in this file.
   van uitzonderingen zijn zichtbaar; landen en eigen uitzonderingen blijven
   behouden.
 
+### Fixed
+
+- **Security: beschadigde archieven worden geweigerd, niet half gelezen.**
+  `archive` gaat van 4.3 naar 4.6 en krijgt daarmee de zip64-fix uit 4.4: een
+  gemanipuleerde grootte kon de decoder laten vastlopen. Omdat 4.6 standaard
+  zwijgt over beschadigde data, controleren `.ocideck`-pakketten, imports
+  (PowerPoint, Keynote, OpenDocument, Word, Excel, eLearning) en de lokale
+  CVE-database nu zelf grootte en controlesom. Een omgevallen of afgekapt
+  onderdeel geeft een foutmelding in plaats van stil verkeerde inhoud. Een
+  pakket in een compressie die OciDeck nooit schrijft (zstd, xz, lzma) wordt
+  geweigerd, en een inzendpakket dat zich opblaast stopt nu bij zijn
+  aangekondigde grootte in plaats van eerst het geheugen te vullen.
+  Inzendpakketten verraden de tijdzone van de maker niet meer via de
+  zip-tijdstempel. `image` gaat mee naar 4.12.0, dat nu oplosbaar is: die
+  versie stopt onder meer afbeeldingen waarvan de EXIF- of TIFF-gegevens in
+  een lus verwijzen en begrenst uitgepakte grootten.
+
 ## [0.7.7] — 2026-11-05
 
 ### Fixed

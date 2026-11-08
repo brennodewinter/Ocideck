@@ -154,6 +154,10 @@ class CveBulkIngest {
       rethrow;
     } on FileSystemException catch (e) {
       throw CveIngestException(CveIngestFailure.diskFull, e.message);
+    } on ArchiveException catch (e) {
+      // Een CRC-fout of afgekapt lid: de download kwam binnen maar is kapot.
+      // Dat is geen netwerkfout, wat de algemene vangst er anders van maakt.
+      throw CveIngestException(CveIngestFailure.invalidArchive, e.message);
     } finally {
       // De twee archieven samen zijn ruim een gigabyte. Ze mogen niet blijven
       // liggen, ook niet als het misging.
@@ -231,7 +235,11 @@ class CveBulkIngest {
   void _extractInnerZip(File outer, File inner) {
     final input = InputFileStream(outer.path);
     try {
-      final archive = ZipDecoder().decodeStream(input);
+      final archive = ZipDecoder().decodeStream(
+        input,
+        verify: true,
+        throwOnError: true,
+      );
       ArchiveFile? nested;
       for (final file in archive.files) {
         if (file.isFile && file.name.toLowerCase().endsWith('.zip')) {
@@ -254,7 +262,12 @@ class CveBulkIngest {
       final output = _CappedFileOutputStream(inner.path, maxInnerArchiveBytes);
       try {
         nested.writeContent(output);
-      } on ExtractionLimitException {
+      } on Exception catch (e) {
+        // archive stopt zelf een lid dat voorbij zijn aankondiging groeit
+        // (ArchiveLimitException), vóór onze grens het doet: hetzelfde teken.
+        if (e is! ExtractionLimitException && e is! ArchiveLimitException) {
+          rethrow;
+        }
         throw const CveIngestException(
           CveIngestFailure.invalidArchive,
           'het geneste archief groeide voorbij de grens tijdens het uitpakken',
@@ -280,7 +293,13 @@ class CveBulkIngest {
     var records = 0;
 
     try {
-      final archive = ZipDecoder().decodeStream(input);
+      // Zonder de vlaggen leest een beschadigd record stil als leeg of half, en
+      // belandt een ingekorte index als "klaar" op schijf.
+      final archive = ZipDecoder().decodeStream(
+        input,
+        verify: true,
+        throwOnError: true,
+      );
       for (final file in archive.files) {
         if (!file.isFile) continue;
         final name = file.name;

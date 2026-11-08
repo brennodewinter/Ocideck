@@ -292,7 +292,14 @@ String formDay(DateTime when) {
 /// The time stamp every entry carries: 1980-01-01 00:00, the earliest a zip can
 /// say. A package must not tell when it was made beyond the day the manifest
 /// states.
-final DateTime _zipEpoch = DateTime.utc(1980);
+///
+/// Not 1980-01-01 UTC itself: archive (since 4.6) writes the DOS fields in
+/// *local* time, so that read 01:00 in Amsterdam and gave the maker's offset
+/// away. An instant that is still 1979 in every zone (UTC+14 included) is
+/// clamped by the encoder to 1980-01-01 00:00 everywhere, and the UT extra field
+/// it now also writes holds this one fixed instant: the bytes no longer depend
+/// on where the package was built.
+final DateTime _zipEpoch = DateTime.utc(1979, 12, 31);
 
 /// Builds the package of [submission]: the filled template, its photos and a
 /// manifest that holds the hash of each.
@@ -702,6 +709,14 @@ class _CappedOutput extends OutputMemoryStream {
   void writeStream(InputStream stream) {
     _room(stream.length);
     super.writeStream(stream);
+  }
+
+  // Inflate copies every repeat through here, not through writeBytes: without
+  // it the cap held for literal bytes only, and a run of zeros grew past it.
+  @override
+  void writeBackReference(int distance, int count) {
+    _room(count);
+    super.writeBackReference(distance, count);
   }
 }
 

@@ -6,7 +6,7 @@
 // PNG (zie svg_to_png.dart) en als afbeeldingen ingebed. Headless: geen Flutter,
 // geen IO — de aanroeper schrijft de bytes weg.
 //
-// Hergebruikt de `archive`-package (pubspec: `archive: ^4.0.9`) voor de
+// Hergebruikt de `archive`-package (pubspec: `archive: ^4.6.0`) voor de
 // ZIP-verpakking, de `markdown`-package via markdown_to_docx.dart voor de
 // conversie, en `flutter_svg`+`dart:ui` voor de rasterisatie. Geen nieuwe
 // dependency.

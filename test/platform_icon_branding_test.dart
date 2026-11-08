@@ -159,9 +159,13 @@ void main() {
     final merk = vingerafdruk(lees(merkpad));
     for (final MapEntry(key: doel, value: pad) in grootste.entries) {
       final beeld = lees(pad);
-      // Een .ico draagt meerdere formaten; pak het grootste.
-      final kunstwerk = beeld.frames.reduce(
-        (a, b) => b.width > a.width ? b : a,
+      // Een .ico draagt meerdere formaten; pak het grootste. Als los beeld:
+      // een frame deelt de framelijst met zijn ico, en `trim` (image 4.11+)
+      // loopt die hele lijst af met de maat van het eerste, dus kleinere
+      // formaten liepen buiten hun buffer.
+      final kunstwerk = img.Image.from(
+        beeld.frames.reduce((a, b) => b.width > a.width ? b : a),
+        noAnimation: true,
       );
       expect(
         afstand(merk, vingerafdruk(kunstwerk)),

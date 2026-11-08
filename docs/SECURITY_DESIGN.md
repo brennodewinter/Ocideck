@@ -724,10 +724,17 @@ model.
   package cannot be opened without its password. The password probe and every
   extracted member share the package's output-byte ceiling. On web, ZIP
   DEFLATE uses the archive inflater with OciDeck's capped output directly;
-  `archive` 4.3.0 otherwise inflates into an unbounded intermediate buffer
-  before invoking a caller-supplied output stream. AES authentication is
-  checked before decompression. A member whose declared size is false still
-  stops at the actual output limit.
+  `archive` (still in 4.6) otherwise inflates into an unbounded intermediate
+  buffer before invoking a caller-supplied output stream. That direct path, also
+  used by every presentation and document import, skips archive's own entry
+  checks, so `writeArchiveEntryCapped` (`lib/utils/archive_limits.dart`) checks
+  itself that the deflate stream reached its final block and that the output has
+  the size and CRC-32 the central directory promises. Every other `ZipDecoder`
+  on untrusted input runs with `verify: true, throwOnError: true`: since 4.6
+  archive is silent about damaged data by default and would hand back a cut or
+  corrupted member as if it were whole. AES authentication is checked before
+  decompression. A member whose declared size is false still stops at the
+  actual output limit.
 - **Atomic writes.** All persistence uses `writeStringAtomic`/`writeBytesAtomic`
   (`lib/utils/atomic_file.dart`) — write-to-temp-then-rename — so a crash never
   truncates a file. A `check_conventions` ratchet forbids raw

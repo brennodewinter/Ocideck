@@ -15,6 +15,8 @@ import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/damaged_zip.dart';
+
 /// Covers branches of lib/services/file_service.dart that the existing
 /// file_service_test.dart / file_service_extra_test.dart do not reach:
 /// in-memory open, theme-profile logo resolution, the byte-inspection helpers,
@@ -195,6 +197,55 @@ void main() {
       final names = entries!.map((e) => e.name).toList();
       expect(names, contains('deck.md'));
       expect(names.any((n) => n == longName), isFalse);
+    });
+
+    group('een beschadigd lid', () {
+      // archive 4.6 zwijgt zonder verify/throwOnError over beschadigde inhoud:
+      // dan kwam een omgevallen of afgekapt lid als verkeerde bytes mee.
+      final md = utf8.encode(goodMarkdown);
+      final png = incompressible(4000);
+
+      test('weigert in een strikt pakket alle leden', () {
+        final zip = flipByteIn(
+          storedZip({'deck.md': md, 'images/pic.png': png}),
+          png,
+        );
+        expect(
+          makeService().decodePackageEntries(zip, strictIntegrity: true),
+          isNull,
+        );
+      });
+
+      test('valt in een gewoon pakket weg in plaats van half mee te komen', () {
+        final zip = zipWithCutEntry({
+          'deck.md': md,
+          'images/pic.png': png,
+        }, 'images/pic.png');
+        final entries = makeService().decodePackageEntries(zip);
+        expect(entries!.map((e) => e.name), ['deck.md']);
+        expect(entries.single.bytes, md);
+      });
+
+      test('in zstd, een compressie die een pakket nooit draagt', () {
+        // archive 4.6 leest ook zstd, xz en lzma: decodercode die een pakket
+        // niet nodig heeft, en die de webroute al weigert.
+        final zip = ZipEncoder().encode(
+          Archive()
+            ..add(ArchiveFile.bytes('deck.md', md))
+            ..add(
+              ArchiveFile.bytes('images/pic.png', png)
+                ..compression = CompressionType.zstd,
+            ),
+        );
+        final service = makeService();
+        expect(
+          service.decodePackageEntries(zip, strictIntegrity: true),
+          isNull,
+        );
+        expect(service.decodePackageEntries(zip)!.map((e) => e.name), [
+          'deck.md',
+        ]);
+      });
     });
 
     test('tolerantly decodes a non-zip blob to no members', () {

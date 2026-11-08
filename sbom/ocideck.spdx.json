@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.7+49",
-  "documentNamespace": "https://ocideck.app/spdx/fc48bf0d-c0ee-596d-87fb-a3f60227120c",
+  "documentNamespace": "https://ocideck.app/spdx/26591bdd-1345-5d31-82d5-8d757d6a4c9b",
   "creationInfo": {
-    "created": "2026-11-08T20:14:19.597529Z",
+    "created": "2026-11-08T21:28:23.375978Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -126,23 +126,23 @@
     {
       "SPDXID": "SPDXRef-6-archive",
       "name": "archive",
-      "versionInfo": "4.3.0",
+      "versionInfo": "4.6.0",
       "supplier": "Organization: brendan-duncan",
-      "downloadLocation": "https://pub.dev/packages/archive/versions/4.3.0",
+      "downloadLocation": "https://pub.dev/packages/archive/versions/4.6.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "6c5bcd986e06b94e3c40244af471750840a3d2341d1f9763a1100a14add517b4"
+          "checksumValue": "de5ac590b8155e4e676088d714bd41ea620449a6adc0f7950c5073874b287ddb"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/archive@4.3.0"
+          "referenceLocator": "pkg:pub/archive@4.6.0"
         }
       ]
     },
@@ -1849,23 +1849,23 @@
     {
       "SPDXID": "SPDXRef-85-image",
       "name": "image",
-      "versionInfo": "4.10.2",
+      "versionInfo": "4.12.0",
       "supplier": "Organization: brendan-duncan",
-      "downloadLocation": "https://pub.dev/packages/image/versions/4.10.2",
+      "downloadLocation": "https://pub.dev/packages/image/versions/4.12.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "0be525eb917b032c7c9c980597c508a255814a858bd8d9abfc9c57e04f3ebf89"
+          "checksumValue": "89ed75b2f8231fe676808c5564f9590d728024ded7ac782a7ed8474f1c95b72a"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/image@4.10.2"
+          "referenceLocator": "pkg:pub/image@4.12.0"
         }
       ]
     },

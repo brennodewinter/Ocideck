@@ -86,7 +86,7 @@ bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
       throw const ExtractionLimitException();
     }
     final copy = Uint8List.fromList(bytes);
-    final archive = ZipDecoder().decodeBytes(copy, password: password);
+    final archive = _decodePackageZip(copy, password);
     if (archive.files.length > FileService.maxPackageEntries) {
       throw const ExtractionLimitException();
     }
@@ -97,7 +97,7 @@ bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
     if (file.size < 0 || file.size > maxBytes) {
       throw const ExtractionLimitException();
     }
-    _writePackageEntryCapped(file, _CappedOutputStream(maxBytes));
+    _writePackageEntryCapped(file, CappedArchiveOutput(maxBytes));
     return true;
   } on ExtractionLimitException {
     rethrow;
@@ -235,7 +235,7 @@ extension FileServiceImport on FileService {
       if (zipContainsSymlinkMetadata(zipBytes)) {
         return const ImportOutcome.failed(ImportFailure.corrupt);
       }
-      archive = ZipDecoder().decodeBytes(zipBytes, password: password);
+      archive = _decodePackageZip(zipBytes, password);
     } catch (e, s) {
       logError('FileService.importPackageBytes: ZIP decode failed', e, s);
       return const ImportOutcome.failed(ImportFailure.corrupt);
