@@ -66,9 +66,7 @@ extension FileServiceDossier on FileService {
       redactedMarkdown: redactedMarkdown,
       redactionManifestJson: redactionManifestJson,
     );
-    final pw = (password != null && password.isNotEmpty) ? password : null;
-    if (kIsWeb) return ZipEncoder(password: pw).encodeBytes(archive);
-    return Isolate.run(() => ZipEncoder(password: pw).encodeBytes(archive));
+    return _zipPackageArchive(archive, password);
   }
 
   /// Write an audit dossier to [destPath] (desktop). Mirrors [exportPackage].
