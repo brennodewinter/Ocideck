@@ -32,7 +32,7 @@ jobs:
     runs-on: docker
     timeout-minutes: 60
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       - name: Validate publication inputs
         env:

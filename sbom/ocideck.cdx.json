@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:80dd36dd-e548-5551-864c-f5454069970d",
+  "serialNumber": "urn:uuid:cdf29ece-8fe7-5199-8981-8944984e06af",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-08T21:28:23.375978Z",
+    "timestamp": "2026-11-08T21:52:23.607518Z",
     "tools": {
       "components": [
         {
@@ -63,7 +63,7 @@
   },
   "components": [
     {
-      "bom-ref": "pkg:pub/_fe_analyzer_shared@109.0.0",
+      "bom-ref": "pkg:pub/_fe_analyzer_shared@111.0.0",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -72,8 +72,8 @@
         ]
       },
       "name": "_fe_analyzer_shared",
-      "version": "109.0.0",
-      "purl": "pkg:pub/_fe_analyzer_shared@109.0.0",
+      "version": "111.0.0",
+      "purl": "pkg:pub/_fe_analyzer_shared@111.0.0",
       "licenses": [
         {
           "license": {
@@ -84,13 +84,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "48e48f73a431eb269eec66d243a63a07ed90ef9417a74047a3b98d52338626ad"
+          "content": "1c5591cc6f252d5f440d96ab87c03e43504be552a3fa49d7cb7563f04c51fb0a"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/_fe_analyzer_shared/versions/109.0.0"
+          "url": "https://pub.dev/packages/_fe_analyzer_shared/versions/111.0.0"
         }
       ],
       "properties": [
@@ -105,7 +105,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/analyzer@14.5.0",
+      "bom-ref": "pkg:pub/analyzer@14.7.0",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -114,8 +114,8 @@
         ]
       },
       "name": "analyzer",
-      "version": "14.5.0",
-      "purl": "pkg:pub/analyzer@14.5.0",
+      "version": "14.7.0",
+      "purl": "pkg:pub/analyzer@14.7.0",
       "licenses": [
         {
           "license": {
@@ -126,13 +126,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "6d377901d198536b648172974d9d4f277910502cad92193466869cac0ff34990"
+          "content": "6c39bd5486a310e56217bed7cb1691377959f31be4227e41750107db7e6dd55c"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/analyzer/versions/14.5.0"
+          "url": "https://pub.dev/packages/analyzer/versions/14.7.0"
         }
       ],
       "properties": [
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/android_file_picker@2.0.1",
+      "bom-ref": "pkg:pub/android_file_picker@2.1.3",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -156,8 +156,8 @@
         ]
       },
       "name": "android_file_picker",
-      "version": "2.0.1",
-      "purl": "pkg:pub/android_file_picker@2.0.1",
+      "version": "2.1.3",
+      "purl": "pkg:pub/android_file_picker@2.1.3",
       "licenses": [
         {
           "license": {
@@ -168,13 +168,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "537bce9a43bc6fc08670cb68498251acc6eb9134b86a391b43e1f7c863588388"
+          "content": "868183c959e754e915954d8074c20cfa4cfdb4684b35ecc08378437be1a542d8"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/android_file_picker/versions/2.0.1"
+          "url": "https://pub.dev/packages/android_file_picker/versions/2.1.3"
         }
       ],
       "properties": [
@@ -367,7 +367,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/asn1lib@1.6.5",
+      "bom-ref": "pkg:pub/asn1lib@1.6.8",
       "type": "library",
       "supplier": {
         "name": "wstrange",
@@ -376,8 +376,8 @@
         ]
       },
       "name": "asn1lib",
-      "version": "1.6.5",
-      "purl": "pkg:pub/asn1lib@1.6.5",
+      "version": "1.6.8",
+      "purl": "pkg:pub/asn1lib@1.6.8",
       "licenses": [
         {
           "license": {
@@ -388,13 +388,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "9a8f69025044eb466b9b60ef3bc3ac99b4dc6c158ae9c56d25eeccf5bc56d024"
+          "content": "cfb3cf6a53158918d52dda61bc26f0cc8612a0d3b9dc29e87eaa3423902ca636"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/asn1lib/versions/1.6.5"
+          "url": "https://pub.dev/packages/asn1lib/versions/1.6.8"
         }
       ],
       "properties": [
@@ -792,7 +792,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/code_assets@2.1.0",
+      "bom-ref": "pkg:pub/code_assets@2.2.0",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -801,8 +801,8 @@
         ]
       },
       "name": "code_assets",
-      "version": "2.1.0",
-      "purl": "pkg:pub/code_assets@2.1.0",
+      "version": "2.2.0",
+      "purl": "pkg:pub/code_assets@2.2.0",
       "licenses": [
         {
           "license": {
@@ -813,13 +813,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "828110d598123b5ea96c00c9f3c72105bf79f8ee36c20a39b26209ade421ec57"
+          "content": "1ef22a0be3af9370bd9481ac76db114db92bfe75d5ca2b2d7bc911764478a4d9"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/code_assets/versions/2.1.0"
+          "url": "https://pub.dev/packages/code_assets/versions/2.2.0"
         }
       ],
       "properties": [
@@ -960,7 +960,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/crypto@3.0.7",
+      "bom-ref": "pkg:pub/crypto@3.0.8",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -969,8 +969,8 @@
         ]
       },
       "name": "crypto",
-      "version": "3.0.7",
-      "purl": "pkg:pub/crypto@3.0.7",
+      "version": "3.0.8",
+      "purl": "pkg:pub/crypto@3.0.8",
       "licenses": [
         {
           "license": {
@@ -981,13 +981,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "c8ea0233063ba03258fbcf2ca4d6dadfefe14f02fab57702265467a19f27fadf"
+          "content": "e3626ae6270383c9e3a549f34c9e4cd26c09ae6a9adaab2bf4737a00340efdc4"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/crypto/versions/3.0.7"
+          "url": "https://pub.dev/packages/crypto/versions/3.0.8"
         }
       ],
       "properties": [
@@ -1170,7 +1170,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/cupertino_ui@1.1.2",
+      "bom-ref": "pkg:pub/cupertino_ui@1.1.6",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -1179,8 +1179,8 @@
         ]
       },
       "name": "cupertino_ui",
-      "version": "1.1.2",
-      "purl": "pkg:pub/cupertino_ui@1.1.2",
+      "version": "1.1.6",
+      "purl": "pkg:pub/cupertino_ui@1.1.6",
       "licenses": [
         {
           "license": {
@@ -1191,13 +1191,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "ea0b8170b40a86262b2fc21ac0625303f52df209dbf6fccc2b98b27eff44f6ce"
+          "content": "369e39a1c5c030a6212589c3da1809920b1c2cfade7b02aade7695bfa4b88c3a"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/cupertino_ui/versions/1.1.2"
+          "url": "https://pub.dev/packages/cupertino_ui/versions/1.1.6"
         }
       ],
       "properties": [
@@ -1506,7 +1506,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/equatable@2.1.0",
+      "bom-ref": "pkg:pub/equatable@3.0.0",
       "type": "library",
       "supplier": {
         "name": "felangel",
@@ -1515,8 +1515,8 @@
         ]
       },
       "name": "equatable",
-      "version": "2.1.0",
-      "purl": "pkg:pub/equatable@2.1.0",
+      "version": "3.0.0",
+      "purl": "pkg:pub/equatable@3.0.0",
       "licenses": [
         {
           "license": {
@@ -1527,13 +1527,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "3bce007a596ff8b3119c45d68aaef631272537c03d30e5d4534dd24bf4c5eaa2"
+          "content": "ea36e500cbf0ec18361deabca755434f73e42fe53c5130021c7e2d6b5ebe1702"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/equatable/versions/2.1.0"
+          "url": "https://pub.dev/packages/equatable/versions/3.0.0"
         }
       ],
       "properties": [
@@ -1716,7 +1716,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker@13.1.0",
+      "bom-ref": "pkg:pub/file_picker@13.3.2",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1725,8 +1725,8 @@
         ]
       },
       "name": "file_picker",
-      "version": "13.1.0",
-      "purl": "pkg:pub/file_picker@13.1.0",
+      "version": "13.3.2",
+      "purl": "pkg:pub/file_picker@13.3.2",
       "licenses": [
         {
           "license": {
@@ -1737,13 +1737,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "98c0b156b6380ba55bc767a14e2e6b3feb246e713ad40092424596fa79005bea"
+          "content": "c64036857780d7125f011d543f89eedcb5df61da473668bace4eee9ab875284d"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker/versions/13.1.0"
+          "url": "https://pub.dev/packages/file_picker/versions/13.3.2"
         }
       ],
       "properties": [
@@ -1758,7 +1758,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker_darwin@2.1.3",
+      "bom-ref": "pkg:pub/file_picker_darwin@2.4.2",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1767,8 +1767,8 @@
         ]
       },
       "name": "file_picker_darwin",
-      "version": "2.1.3",
-      "purl": "pkg:pub/file_picker_darwin@2.1.3",
+      "version": "2.4.2",
+      "purl": "pkg:pub/file_picker_darwin@2.4.2",
       "licenses": [
         {
           "license": {
@@ -1779,13 +1779,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "3df1dc8e881de9ffd3953c9e482ac5d6e1ffe1e7f7b231b5695543e251ab7918"
+          "content": "daeb0219f6279c73eb9c63ae9a566beef04ae13d59b8feba0be2a7f3b258d3d4"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker_darwin/versions/2.1.3"
+          "url": "https://pub.dev/packages/file_picker_darwin/versions/2.4.2"
         }
       ],
       "properties": [
@@ -1800,7 +1800,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker_linux@2.0.0",
+      "bom-ref": "pkg:pub/file_picker_linux@2.0.3",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1809,8 +1809,8 @@
         ]
       },
       "name": "file_picker_linux",
-      "version": "2.0.0",
-      "purl": "pkg:pub/file_picker_linux@2.0.0",
+      "version": "2.0.3",
+      "purl": "pkg:pub/file_picker_linux@2.0.3",
       "licenses": [
         {
           "license": {
@@ -1821,13 +1821,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "e7db600f50672ce5ebbe422ac0906e0f3d2a476188cc93e7126afee12bf08063"
+          "content": "eb00de71b123e91d3c61f389a05b8cc90f9cbe7e4c88da30ebe2f0442b281b61"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker_linux/versions/2.0.0"
+          "url": "https://pub.dev/packages/file_picker_linux/versions/2.0.3"
         }
       ],
       "properties": [
@@ -1842,7 +1842,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker_platform_interface@4.0.0",
+      "bom-ref": "pkg:pub/file_picker_platform_interface@4.2.0",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1851,8 +1851,8 @@
         ]
       },
       "name": "file_picker_platform_interface",
-      "version": "4.0.0",
-      "purl": "pkg:pub/file_picker_platform_interface@4.0.0",
+      "version": "4.2.0",
+      "purl": "pkg:pub/file_picker_platform_interface@4.2.0",
       "licenses": [
         {
           "license": {
@@ -1863,13 +1863,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "bbdc085a6f168e63f147e9ce8988f79fa0800a58e7f25a48f762c60837107ba5"
+          "content": "336e7168306834a2b68e6168ed768e00d3fabeac23154d5793e277ca9f97cf20"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker_platform_interface/versions/4.0.0"
+          "url": "https://pub.dev/packages/file_picker_platform_interface/versions/4.2.0"
         }
       ],
       "properties": [
@@ -1884,7 +1884,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker_web@4.1.0",
+      "bom-ref": "pkg:pub/file_picker_web@4.2.0",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1893,8 +1893,8 @@
         ]
       },
       "name": "file_picker_web",
-      "version": "4.1.0",
-      "purl": "pkg:pub/file_picker_web@4.1.0",
+      "version": "4.2.0",
+      "purl": "pkg:pub/file_picker_web@4.2.0",
       "licenses": [
         {
           "license": {
@@ -1905,13 +1905,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "32af8262aca907b02b8970b32328b0312db0b42ba6f930be6d27fde179d59b7d"
+          "content": "a2288008280aabe371aff029466b3405e60838e0a1d714767488c59b926c8b8c"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker_web/versions/4.1.0"
+          "url": "https://pub.dev/packages/file_picker_web/versions/4.2.0"
         }
       ],
       "properties": [
@@ -2010,7 +2010,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_selector_ios@0.5.3+6",
+      "bom-ref": "pkg:pub/file_selector_ios@0.5.3+7",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -2019,8 +2019,8 @@
         ]
       },
       "name": "file_selector_ios",
-      "version": "0.5.3+6",
-      "purl": "pkg:pub/file_selector_ios@0.5.3+6",
+      "version": "0.5.3+7",
+      "purl": "pkg:pub/file_selector_ios@0.5.3+7",
       "licenses": [
         {
           "license": {
@@ -2031,13 +2031,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "97269e5307a0ab813b1fa2430bada0a96e0afb74848417f8676f64ba5de0051c"
+          "content": "5b42ec0ef7626124b4624ea244341e9df780406793c204e89fa68a2e71af115c"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_selector_ios/versions/0.5.3+6"
+          "url": "https://pub.dev/packages/file_selector_ios/versions/0.5.3+7"
         }
       ],
       "properties": [
@@ -2094,7 +2094,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_selector_macos@0.9.5+1",
+      "bom-ref": "pkg:pub/file_selector_macos@0.9.5+2",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -2103,8 +2103,8 @@
         ]
       },
       "name": "file_selector_macos",
-      "version": "0.9.5+1",
-      "purl": "pkg:pub/file_selector_macos@0.9.5+1",
+      "version": "0.9.5+2",
+      "purl": "pkg:pub/file_selector_macos@0.9.5+2",
       "licenses": [
         {
           "license": {
@@ -2115,13 +2115,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "d57c62362766b5e7ae739448650b66c6aab7a68ba7ecc65e04018652645ae0f4"
+          "content": "d785431f1910aac8a50e5c492cae912320158030a88703c67b9ef7f1f96fd7ba"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_selector_macos/versions/0.9.5+1"
+          "url": "https://pub.dev/packages/file_selector_macos/versions/0.9.5+2"
         }
       ],
       "properties": [
@@ -2304,7 +2304,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/fl_chart@1.2.0",
+      "bom-ref": "pkg:pub/fl_chart@1.3.0",
       "type": "library",
       "supplier": {
         "name": "imaNNeo",
@@ -2313,8 +2313,8 @@
         ]
       },
       "name": "fl_chart",
-      "version": "1.2.0",
-      "purl": "pkg:pub/fl_chart@1.2.0",
+      "version": "1.3.0",
+      "purl": "pkg:pub/fl_chart@1.3.0",
       "licenses": [
         {
           "license": {
@@ -2325,13 +2325,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "b938f77d042cbcd822936a7a359a7235bad8bd72070de1f827efc2cc297ac888"
+          "content": "5ed69b8be550c6276c8f0bc25c09704fb061018ed1b1681867ad18fcf477e7b7"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/fl_chart/versions/1.2.0"
+          "url": "https://pub.dev/packages/fl_chart/versions/1.3.0"
         }
       ],
       "properties": [
@@ -2580,7 +2580,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.5",
+      "bom-ref": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.6",
       "type": "library",
       "supplier": {
         "name": "EchoEllet",
@@ -2589,8 +2589,8 @@
         ]
       },
       "name": "flutter_keyboard_visibility_temp_fork",
-      "version": "0.1.5",
-      "purl": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.5",
+      "version": "0.1.6",
+      "purl": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.6",
       "licenses": [
         {
           "license": {
@@ -2601,13 +2601,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "e3d02900640fbc1129245540db16944a0898b8be81694f4bf04b6c985bed9048"
+          "content": "364483415622eb1aec43858cd48267a55e2da22c6366fd1eeb75f9ca56b02caa"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_keyboard_visibility_temp_fork/versions/0.1.5"
+          "url": "https://pub.dev/packages/flutter_keyboard_visibility_temp_fork/versions/0.1.6"
         }
       ],
       "properties": [
@@ -2865,7 +2865,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_riverpod@3.4.3",
+      "bom-ref": "pkg:pub/flutter_riverpod@3.5.0",
       "type": "library",
       "supplier": {
         "name": "rrousselGit",
@@ -2874,8 +2874,8 @@
         ]
       },
       "name": "flutter_riverpod",
-      "version": "3.4.3",
-      "purl": "pkg:pub/flutter_riverpod@3.4.3",
+      "version": "3.5.0",
+      "purl": "pkg:pub/flutter_riverpod@3.5.0",
       "licenses": [
         {
           "license": {
@@ -2886,13 +2886,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "2b7f9d2a3c730ac1a98221b420cef966b990fca7ab546ede324642ca57a533e3"
+          "content": "2ae1a93a868ae5f2d5358f521a4bfae0da7a3bfe77a60515ab5c28953b50557f"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_riverpod/versions/3.4.3"
+          "url": "https://pub.dev/packages/flutter_riverpod/versions/3.5.0"
         }
       ],
       "properties": [
@@ -3159,7 +3159,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_svg@2.3.0",
+      "bom-ref": "pkg:pub/flutter_svg@2.3.2",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -3168,8 +3168,8 @@
         ]
       },
       "name": "flutter_svg",
-      "version": "2.3.0",
-      "purl": "pkg:pub/flutter_svg@2.3.0",
+      "version": "2.3.2",
+      "purl": "pkg:pub/flutter_svg@2.3.2",
       "licenses": [
         {
           "license": {
@@ -3180,13 +3180,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "35882981abcbfb8c15b286f0cd690ff25bac12d95eff3e25ee207f37d4c42e7f"
+          "content": "100c19dcc4ff60083e95a44a6f44f3a1bb887d353c5d86f6a9b688aa3cb46236"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_svg/versions/2.3.0"
+          "url": "https://pub.dev/packages/flutter_svg/versions/2.3.2"
         }
       ],
       "properties": [
@@ -3716,7 +3716,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/jni@1.1.0",
+      "bom-ref": "pkg:pub/jni@1.1.2",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -3725,8 +3725,8 @@
         ]
       },
       "name": "jni",
-      "version": "1.1.0",
-      "purl": "pkg:pub/jni@1.1.0",
+      "version": "1.1.2",
+      "purl": "pkg:pub/jni@1.1.2",
       "licenses": [
         {
           "license": {
@@ -3737,13 +3737,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "6b9ca0602fef0230e83149afbe3f9f8227e94f2bbe84a1da4f14d699742f402d"
+          "content": "2e91e6087291affd10b31b6c872f3e3ac7dc5d93b51b5ba485d930c8f08bde6c"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/jni/versions/1.1.0"
+          "url": "https://pub.dev/packages/jni/versions/1.1.2"
         }
       ],
       "properties": [
@@ -4304,7 +4304,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/material_ui@1.6.0",
+      "bom-ref": "pkg:pub/material_ui@1.10.0",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -4313,8 +4313,8 @@
         ]
       },
       "name": "material_ui",
-      "version": "1.6.0",
-      "purl": "pkg:pub/material_ui@1.6.0",
+      "version": "1.10.0",
+      "purl": "pkg:pub/material_ui@1.10.0",
       "licenses": [
         {
           "license": {
@@ -4325,13 +4325,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "98ab9eda579ecae623e4b376c603035c5def78ce706f735f30bd632af5814695"
+          "content": "a30f5d0625b6b83770f53ca3f7aafd6fd9d147cb3853f54a70668541046fe5d6"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/material_ui/versions/1.6.0"
+          "url": "https://pub.dev/packages/material_ui/versions/1.10.0"
         }
       ],
       "properties": [
@@ -4374,6 +4374,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/meta/versions/1.19.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/native_toolchain_c@0.19.6",
+      "type": "library",
+      "supplier": {
+        "name": "dart-lang",
+        "url": [
+          "https://github.com/dart-lang"
+        ]
+      },
+      "name": "native_toolchain_c",
+      "version": "0.19.6",
+      "purl": "pkg:pub/native_toolchain_c@0.19.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "120b6fc66acd8a5ddeaeb1e59b78836bb3ec9919bd9d9dfb1e2401985710c2c0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/native_toolchain_c/versions/0.19.6"
         }
       ],
       "properties": [
@@ -4566,7 +4608,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/objective_c@9.6.2",
+      "bom-ref": "pkg:pub/objective_c@9.6.3",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -4575,8 +4617,8 @@
         ]
       },
       "name": "objective_c",
-      "version": "9.6.2",
-      "purl": "pkg:pub/objective_c@9.6.2",
+      "version": "9.6.3",
+      "purl": "pkg:pub/objective_c@9.6.3",
       "licenses": [
         {
           "license": {
@@ -4587,13 +4629,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "5c80c2ad6e2c0397de5db38c6d653e69616a3397e13aa7633bf39eb668f2041b"
+          "content": "322d5f1f0680534acaf557c5d68e97b40c3800ee5e15b63dcacc3c31504674c2"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/objective_c/versions/9.6.2"
+          "url": "https://pub.dev/packages/objective_c/versions/9.6.3"
         }
       ],
       "properties": [
@@ -4776,7 +4818,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/pasteboard@0.5.0",
+      "bom-ref": "pkg:pub/pasteboard@0.6.0",
       "type": "library",
       "supplier": {
         "name": "MixinNetwork",
@@ -4785,8 +4827,8 @@
         ]
       },
       "name": "pasteboard",
-      "version": "0.5.0",
-      "purl": "pkg:pub/pasteboard@0.5.0",
+      "version": "0.6.0",
+      "purl": "pkg:pub/pasteboard@0.6.0",
       "licenses": [
         {
           "license": {
@@ -4797,13 +4839,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "fedbe8da188d2f713aa8b01260737342e6e1087534a3ab26e1a719f8d3e8f32f"
+          "content": "e0535da36124e6f2ca9d17424102ce5de34e72acc39f05a1d942b974b48e5eea"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/pasteboard/versions/0.5.0"
+          "url": "https://pub.dev/packages/pasteboard/versions/0.6.0"
         }
       ],
       "properties": [
@@ -5196,7 +5238,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/pdfium_dart@0.3.1",
+      "bom-ref": "pkg:pub/pdfium_dart@0.4.1",
       "type": "library",
       "supplier": {
         "name": "espresso3389",
@@ -5205,8 +5247,8 @@
         ]
       },
       "name": "pdfium_dart",
-      "version": "0.3.1",
-      "purl": "pkg:pub/pdfium_dart@0.3.1",
+      "version": "0.4.1",
+      "purl": "pkg:pub/pdfium_dart@0.4.1",
       "licenses": [
         {
           "license": {
@@ -5217,13 +5259,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "e296a26c030e6e0fb34b32ce7481a3cfa0c2d35ce80f6269551c685759f4c91f"
+          "content": "3e250021b2f462058aae216837902fdc8b2cb7f0657e4ec2bc9ac541f960ff84"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/pdfium_dart/versions/0.3.1"
+          "url": "https://pub.dev/packages/pdfium_dart/versions/0.4.1"
         }
       ],
       "properties": [
@@ -5238,7 +5280,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/pdfium_flutter@0.3.1",
+      "bom-ref": "pkg:pub/pdfium_flutter@0.4.1",
       "type": "library",
       "supplier": {
         "name": "espresso3389",
@@ -5247,8 +5289,8 @@
         ]
       },
       "name": "pdfium_flutter",
-      "version": "0.3.1",
-      "purl": "pkg:pub/pdfium_flutter@0.3.1",
+      "version": "0.4.1",
+      "purl": "pkg:pub/pdfium_flutter@0.4.1",
       "licenses": [
         {
           "license": {
@@ -5259,13 +5301,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "59897274513984b347fc98e7bf71ba457678daea8b5568cd7c688979aeb77765"
+          "content": "4d18e6181aa87200750aa4fc607c870f957731b1de9252c2ea19627c19109388"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/pdfium_flutter/versions/0.3.1"
+          "url": "https://pub.dev/packages/pdfium_flutter/versions/0.4.1"
         }
       ],
       "properties": [
@@ -5280,7 +5322,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/pdfrx@2.6.5",
+      "bom-ref": "pkg:pub/pdfrx@2.12.0",
       "type": "library",
       "supplier": {
         "name": "espresso3389",
@@ -5289,8 +5331,8 @@
         ]
       },
       "name": "pdfrx",
-      "version": "2.6.5",
-      "purl": "pkg:pub/pdfrx@2.6.5",
+      "version": "2.12.0",
+      "purl": "pkg:pub/pdfrx@2.12.0",
       "licenses": [
         {
           "license": {
@@ -5301,13 +5343,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "52e78d84a706e5d63d2502689fe8e800d823bc780ac4341b2d3683a4d726505a"
+          "content": "b3bd49fd0918ba7f807ceb0860f4110c346fc70dd96bd68b992418cf17f97650"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/pdfrx/versions/2.6.5"
+          "url": "https://pub.dev/packages/pdfrx/versions/2.12.0"
         }
       ],
       "properties": [
@@ -5322,7 +5364,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/pdfrx_engine@0.6.1",
+      "bom-ref": "pkg:pub/pdfrx_engine@0.9.1",
       "type": "library",
       "supplier": {
         "name": "espresso3389",
@@ -5331,8 +5373,8 @@
         ]
       },
       "name": "pdfrx_engine",
-      "version": "0.6.1",
-      "purl": "pkg:pub/pdfrx_engine@0.6.1",
+      "version": "0.9.1",
+      "purl": "pkg:pub/pdfrx_engine@0.9.1",
       "licenses": [
         {
           "license": {
@@ -5343,13 +5385,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "f74ca9ea4ec722545f054a1d6ee1bf01222409ecd9458e5945c0cc5feaa3d2c6"
+          "content": "4f86165b90c8ae7647747e2d2f9880727f0480caab976a712de1c95076c48762"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/pdfrx_engine/versions/0.6.1"
+          "url": "https://pub.dev/packages/pdfrx_engine/versions/0.9.1"
         }
       ],
       "properties": [
@@ -5532,7 +5574,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/posix@6.5.2",
+      "bom-ref": "pkg:pub/posix@6.5.4",
       "type": "library",
       "supplier": {
         "name": "onepub-dev",
@@ -5541,8 +5583,8 @@
         ]
       },
       "name": "posix",
-      "version": "6.5.2",
-      "purl": "pkg:pub/posix@6.5.2",
+      "version": "6.5.4",
+      "purl": "pkg:pub/posix@6.5.4",
       "licenses": [
         {
           "license": {
@@ -5553,13 +5595,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "bc1bad54ad2b735816e31f8d4600cfde6c7839975085ddfbca48b6c9f7c4044e"
+          "content": "613646d076944f3acc125830af935b48d4b8a57a388691547bbfd25b434f4d63"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/posix/versions/6.5.2"
+          "url": "https://pub.dev/packages/posix/versions/6.5.4"
         }
       ],
       "properties": [
@@ -5574,7 +5616,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/pqcrypto@0.4.3",
+      "bom-ref": "pkg:pub/pqcrypto@0.4.4",
       "type": "library",
       "supplier": {
         "name": "turkananation",
@@ -5583,8 +5625,8 @@
         ]
       },
       "name": "pqcrypto",
-      "version": "0.4.3",
-      "purl": "pkg:pub/pqcrypto@0.4.3",
+      "version": "0.4.4",
+      "purl": "pkg:pub/pqcrypto@0.4.4",
       "licenses": [
         {
           "license": {
@@ -5595,13 +5637,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "ec5027887d3bfdcf0c383f805a813d7c518864e56e3e48028f5ed2980db7eb64"
+          "content": "1efc05e3a2c61d0f061e2b512207d1447b22bdad91f517ca91e6fac0df0f5136"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/pqcrypto/versions/0.4.3"
+          "url": "https://pub.dev/packages/pqcrypto/versions/0.4.4"
         }
       ],
       "properties": [
@@ -5742,7 +5784,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/qr@3.0.2",
+      "bom-ref": "pkg:pub/qr@3.0.3",
       "type": "library",
       "supplier": {
         "name": "kevmoo",
@@ -5751,8 +5793,8 @@
         ]
       },
       "name": "qr",
-      "version": "3.0.2",
-      "purl": "pkg:pub/qr@3.0.2",
+      "version": "3.0.3",
+      "purl": "pkg:pub/qr@3.0.3",
       "licenses": [
         {
           "license": {
@@ -5763,13 +5805,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "5a1d2586170e172b8a8c8470bbbffd5eb0cd38a66c0d77155ea138d3af3a4445"
+          "content": "2c0189dca64a3ab08dda7acd7911c89af2374f08eb4eaded3e8ef4609f3b9c8b"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/qr/versions/3.0.2"
+          "url": "https://pub.dev/packages/qr/versions/3.0.3"
         }
       ],
       "properties": [
@@ -6246,7 +6288,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/riverpod@3.4.3",
+      "bom-ref": "pkg:pub/riverpod@3.5.0",
       "type": "library",
       "supplier": {
         "name": "rrousselGit",
@@ -6255,8 +6297,8 @@
         ]
       },
       "name": "riverpod",
-      "version": "3.4.3",
-      "purl": "pkg:pub/riverpod@3.4.3",
+      "version": "3.5.0",
+      "purl": "pkg:pub/riverpod@3.5.0",
       "licenses": [
         {
           "license": {
@@ -6267,13 +6309,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "484dfc873ea4c4f4240e5635444fa066f87b07862b7279ebd004a2b71fba4b7a"
+          "content": "24cbce92e87088cae0dd06caac3876c0b3abfd084901e7a93a3254d6daf4937d"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/riverpod/versions/3.4.3"
+          "url": "https://pub.dev/packages/riverpod/versions/3.5.0"
         }
       ],
       "properties": [
@@ -6419,7 +6461,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/shared_preferences_android@2.4.28",
+      "bom-ref": "pkg:pub/shared_preferences_android@2.5.4",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -6428,8 +6470,8 @@
         ]
       },
       "name": "shared_preferences_android",
-      "version": "2.4.28",
-      "purl": "pkg:pub/shared_preferences_android@2.4.28",
+      "version": "2.5.4",
+      "purl": "pkg:pub/shared_preferences_android@2.5.4",
       "licenses": [
         {
           "license": {
@@ -6440,13 +6482,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "1e12aafe408aa50da80edfd679a2a6bf63ba7ab37c7fa98286da459a757b3399"
+          "content": "33b38b07d9ac7d16aff0426c61418752fd3e7a8c7dc8be786c875d6ce673b002"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/shared_preferences_android/versions/2.4.28"
+          "url": "https://pub.dev/packages/shared_preferences_android/versions/2.5.4"
         }
       ],
       "properties": [
@@ -6461,7 +6503,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/shared_preferences_foundation@2.5.7",
+      "bom-ref": "pkg:pub/shared_preferences_foundation@2.6.1",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -6470,8 +6512,8 @@
         ]
       },
       "name": "shared_preferences_foundation",
-      "version": "2.5.7",
-      "purl": "pkg:pub/shared_preferences_foundation@2.5.7",
+      "version": "2.6.1",
+      "purl": "pkg:pub/shared_preferences_foundation@2.6.1",
       "licenses": [
         {
           "license": {
@@ -6482,13 +6524,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "2ec3934efa51e46117f23031cc141b8fc878e8525b94ec1ea4f7f586cf1b47ea"
+          "content": "4e396ac6f8751ab7d2d6e27f22f32c8350b07006028d534f5221503382f1fa69"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/shared_preferences_foundation/versions/2.5.7"
+          "url": "https://pub.dev/packages/shared_preferences_foundation/versions/2.6.1"
         }
       ],
       "properties": [
@@ -6956,7 +6998,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/synchronized@3.4.2",
+      "bom-ref": "pkg:pub/synchronized@3.6.1",
       "type": "library",
       "supplier": {
         "name": "tekartik",
@@ -6965,8 +7007,8 @@
         ]
       },
       "name": "synchronized",
-      "version": "3.4.2",
-      "purl": "pkg:pub/synchronized@3.4.2",
+      "version": "3.6.1",
+      "purl": "pkg:pub/synchronized@3.6.1",
       "licenses": [
         {
           "license": {
@@ -6977,13 +7019,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "397b146f97613b83d84bdccb439bc8d0f3aebb6c1d14a9641e6f24201c490b2d"
+          "content": "0ce4712bd3be1fccfab14458059baebb400ba6c6239b65398e3464945fabbae7"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/synchronized/versions/3.4.2"
+          "url": "https://pub.dev/packages/synchronized/versions/3.6.1"
         }
       ],
       "properties": [
@@ -7082,7 +7124,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/timezone@0.11.1",
+      "bom-ref": "pkg:pub/timezone@0.11.2",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -7091,8 +7133,8 @@
         ]
       },
       "name": "timezone",
-      "version": "0.11.1",
-      "purl": "pkg:pub/timezone@0.11.1",
+      "version": "0.11.2",
+      "purl": "pkg:pub/timezone@0.11.2",
       "licenses": [
         {
           "license": {
@@ -7103,13 +7145,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "981d1020d6ef8fe1e7b3de5054e5b25579ae7c403d7734adc508ffc47668e9cb"
+          "content": "9f4e5a1a0e4fef7dd3424842c0575db01bfb7a11730e8d55753fcd5c5c98767b"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/timezone/versions/0.11.1"
+          "url": "https://pub.dev/packages/timezone/versions/0.11.2"
         }
       ],
       "properties": [
@@ -7628,7 +7670,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/vector_graphics@1.2.3",
+      "bom-ref": "pkg:pub/vector_graphics@1.2.6",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7637,8 +7679,8 @@
         ]
       },
       "name": "vector_graphics",
-      "version": "1.2.3",
-      "purl": "pkg:pub/vector_graphics@1.2.3",
+      "version": "1.2.6",
+      "purl": "pkg:pub/vector_graphics@1.2.6",
       "licenses": [
         {
           "license": {
@@ -7649,13 +7691,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "9d0e3b9cb16542ad660daee871e726a10d13a93b7b5391677c3160e8f5e83935"
+          "content": "82885f6ac633044e7a4e4d8d745724a67aa0dc50af5d8a81ec29379f63c29035"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/vector_graphics/versions/1.2.3"
+          "url": "https://pub.dev/packages/vector_graphics/versions/1.2.6"
         }
       ],
       "properties": [
@@ -7712,7 +7754,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/vector_graphics_compiler@1.3.0",
+      "bom-ref": "pkg:pub/vector_graphics_compiler@1.3.4",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7721,8 +7763,8 @@
         ]
       },
       "name": "vector_graphics_compiler",
-      "version": "1.3.0",
-      "purl": "pkg:pub/vector_graphics_compiler@1.3.0",
+      "version": "1.3.4",
+      "purl": "pkg:pub/vector_graphics_compiler@1.3.4",
       "licenses": [
         {
           "license": {
@@ -7733,13 +7775,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "4dca4feb77dc3ec7f6e27e49c53241eb8217f55e4f9b12599a27f8903bca5682"
+          "content": "4c9d2e7121eea8b4f160e6e435900a0ae7214cfc97c2d6cf84c25532b789b50d"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/vector_graphics_compiler/versions/1.3.0"
+          "url": "https://pub.dev/packages/vector_graphics_compiler/versions/1.3.4"
         }
       ],
       "properties": [
@@ -7754,7 +7796,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/vector_math@2.4.3",
+      "bom-ref": "pkg:pub/vector_math@2.4.4",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7763,8 +7805,8 @@
         ]
       },
       "name": "vector_math",
-      "version": "2.4.3",
-      "purl": "pkg:pub/vector_math@2.4.3",
+      "version": "2.4.4",
+      "purl": "pkg:pub/vector_math@2.4.4",
       "licenses": [
         {
           "license": {
@@ -7775,13 +7817,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
+          "content": "fa49e1674cb84acb900141714e6c6e1f9ae099827c24d141430ff6819db4e1bc"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/vector_math/versions/2.4.3"
+          "url": "https://pub.dev/packages/vector_math/versions/2.4.4"
         }
       ],
       "properties": [
@@ -7880,7 +7922,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/video_player_avfoundation@2.12.1",
+      "bom-ref": "pkg:pub/video_player_avfoundation@2.12.3",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7889,8 +7931,8 @@
         ]
       },
       "name": "video_player_avfoundation",
-      "version": "2.12.1",
-      "purl": "pkg:pub/video_player_avfoundation@2.12.1",
+      "version": "2.12.3",
+      "purl": "pkg:pub/video_player_avfoundation@2.12.3",
       "licenses": [
         {
           "license": {
@@ -7901,13 +7943,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "4f8a845173377ab250a50f9b9dfe4a43500cc76a7c49dd8410d02d8fc29dfd8b"
+          "content": "7d620d8c69d00c158a5c57bf3d2a051833b547631203ff724664fbf301024bc1"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/video_player_avfoundation/versions/2.12.1"
+          "url": "https://pub.dev/packages/video_player_avfoundation/versions/2.12.3"
         }
       ],
       "properties": [
@@ -8006,7 +8048,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/vm_service@15.3.0",
+      "bom-ref": "pkg:pub/vm_service@15.4.0",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -8015,8 +8057,8 @@
         ]
       },
       "name": "vm_service",
-      "version": "15.3.0",
-      "purl": "pkg:pub/vm_service@15.3.0",
+      "version": "15.4.0",
+      "purl": "pkg:pub/vm_service@15.4.0",
       "licenses": [
         {
           "license": {
@@ -8027,13 +8069,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "5f37239c4851efcef929cea7824e76df7f2f0970aef85d66bbc430afa40e72f0"
+          "content": "89b11d62e1040ee681af3b4f1c97a803ecbf010c6e8b9c5896ee5b08c3bf7b78"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/vm_service/versions/15.3.0"
+          "url": "https://pub.dev/packages/vm_service/versions/15.4.0"
         }
       ],
       "properties": [
@@ -8174,7 +8216,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/web@1.1.1",
+      "bom-ref": "pkg:pub/web@1.1.2",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -8183,8 +8225,8 @@
         ]
       },
       "name": "web",
-      "version": "1.1.1",
-      "purl": "pkg:pub/web@1.1.1",
+      "version": "1.1.2",
+      "purl": "pkg:pub/web@1.1.2",
       "licenses": [
         {
           "license": {
@@ -8195,13 +8237,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
+          "content": "e119e82ac4795c7925103b7cf3768191f33941b99e7ccffbd6c645201d9f606b"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/web/versions/1.1.1"
+          "url": "https://pub.dev/packages/web/versions/1.1.2"
         }
       ],
       "properties": [
@@ -8468,7 +8510,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/webview_flutter_wkwebview@3.27.0",
+      "bom-ref": "pkg:pub/webview_flutter_wkwebview@3.27.2",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -8477,8 +8519,8 @@
         ]
       },
       "name": "webview_flutter_wkwebview",
-      "version": "3.27.0",
-      "purl": "pkg:pub/webview_flutter_wkwebview@3.27.0",
+      "version": "3.27.2",
+      "purl": "pkg:pub/webview_flutter_wkwebview@3.27.2",
       "licenses": [
         {
           "license": {
@@ -8489,13 +8531,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a9cc3f507ee40127ed0812ca54d00701a27833f51ea0b5820f4b3e7f42518bf3"
+          "content": "acac45e0a8d7beb1d0805521f44842f406c46eb5a69410f53d935e3c62138afc"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/webview_flutter_wkwebview/versions/3.27.0"
+          "url": "https://pub.dev/packages/webview_flutter_wkwebview/versions/3.27.2"
         }
       ],
       "properties": [
@@ -9534,27 +9576,27 @@
         "pkg:npm/marked@18.0.5",
         "pkg:npm/mathjax@3.2.2",
         "pkg:npm/mermaid@11.16.1",
-        "pkg:pub/analyzer@14.5.0",
+        "pkg:pub/analyzer@14.7.0",
         "pkg:pub/archive@4.6.0",
         "pkg:pub/characters@1.4.1",
         "pkg:pub/clock@1.1.3",
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/cryptography@2.9.0",
         "pkg:pub/cupertino_icons@2.0.0",
         "pkg:pub/dart_webrtc@1.8.2",
         "pkg:pub/dartcv4@2.3.1",
         "pkg:pub/desktop_drop@0.8.4",
         "pkg:pub/fake_async@1.3.3",
-        "pkg:pub/file_picker@13.1.0",
+        "pkg:pub/file_picker@13.3.2",
         "pkg:pub/file_selector@1.1.0",
         "pkg:pub/file_selector_platform_interface@2.7.0",
-        "pkg:pub/fl_chart@1.2.0",
+        "pkg:pub/fl_chart@1.3.0",
         "pkg:pub/flutter_lints@6.0.0",
         "pkg:pub/flutter_math_fork@0.7.4",
         "pkg:pub/flutter_quill@11.6.0",
-        "pkg:pub/flutter_riverpod@3.4.3",
+        "pkg:pub/flutter_riverpod@3.5.0",
         "pkg:pub/flutter_secure_storage@11.2.0",
-        "pkg:pub/flutter_svg@2.3.0",
+        "pkg:pub/flutter_svg@2.3.2",
         "pkg:pub/html@0.15.7",
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.12.0",
@@ -9562,27 +9604,27 @@
         "pkg:pub/jose@0.3.5+2",
         "pkg:pub/logger@2.8.0",
         "pkg:pub/markdown@7.3.1",
-        "pkg:pub/material_ui@1.6.0",
+        "pkg:pub/material_ui@1.10.0",
         "pkg:pub/openid_client@0.4.10+2",
-        "pkg:pub/pasteboard@0.5.0",
+        "pkg:pub/pasteboard@0.6.0",
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
         "pkg:pub/pdf@3.13.1",
-        "pkg:pub/pdfrx@2.6.5",
+        "pkg:pub/pdfrx@2.12.0",
         "pkg:pub/plugin_platform_interface@2.1.8",
         "pkg:pub/re_highlight@0.0.3",
         "pkg:pub/shared_preferences@2.5.6",
         "pkg:pub/shared_preferences_platform_interface@2.4.2",
         "pkg:pub/shared_preferences_web@2.4.3",
-        "pkg:pub/timezone@0.11.1",
+        "pkg:pub/timezone@0.11.2",
         "pkg:pub/url_launcher@6.3.3",
         "pkg:pub/url_launcher_platform_interface@2.3.2",
         "pkg:pub/uuid@4.6.0",
-        "pkg:pub/vector_math@2.4.3",
+        "pkg:pub/vector_math@2.4.4",
         "pkg:pub/video_player@2.14.1",
         "pkg:pub/video_player_platform_interface@6.9.0",
         "pkg:pub/wakelock_plus@1.8.0",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "pkg:pub/webview_flutter@4.14.1",
         "pkg:pub/webview_flutter_platform_interface@2.15.1",
         "pkg:pub/webview_flutter_web@0.2.3+4",
@@ -9599,18 +9641,18 @@
       ]
     },
     {
-      "ref": "pkg:pub/_fe_analyzer_shared@109.0.0",
+      "ref": "pkg:pub/_fe_analyzer_shared@111.0.0",
       "dependsOn": [
         "pkg:pub/meta@1.19.0"
       ]
     },
     {
-      "ref": "pkg:pub/analyzer@14.5.0",
+      "ref": "pkg:pub/analyzer@14.7.0",
       "dependsOn": [
-        "pkg:pub/_fe_analyzer_shared@109.0.0",
+        "pkg:pub/_fe_analyzer_shared@111.0.0",
         "pkg:pub/collection@1.19.1",
         "pkg:pub/convert@3.1.2",
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/glob@2.2.0",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/package_config@3.0.0",
@@ -9622,10 +9664,10 @@
       ]
     },
     {
-      "ref": "pkg:pub/android_file_picker@2.0.1",
+      "ref": "pkg:pub/android_file_picker@2.1.3",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
-        "pkg:pub/file_picker_platform_interface@4.0.0",
+        "pkg:pub/file_picker_platform_interface@4.2.0",
         "pkg:pub/path@1.9.1",
         "sdk:flutter@0.0.0"
       ]
@@ -9633,14 +9675,14 @@
     {
       "ref": "git:app_appearance@0.1.0",
       "dependsOn": [
-        "pkg:pub/material_ui@1.6.0",
+        "pkg:pub/material_ui@1.10.0",
         "sdk:flutter@0.0.0"
       ]
     },
     {
       "ref": "git:app_localizations@0.1.0",
       "dependsOn": [
-        "pkg:pub/material_ui@1.6.0",
+        "pkg:pub/material_ui@1.10.0",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -9648,7 +9690,7 @@
       "ref": "pkg:pub/archive@4.6.0",
       "dependsOn": [
         "pkg:pub/path@1.9.1",
-        "pkg:pub/posix@6.5.2"
+        "pkg:pub/posix@6.5.4"
       ]
     },
     {
@@ -9656,7 +9698,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/asn1lib@1.6.5",
+      "ref": "pkg:pub/asn1lib@1.6.8",
       "dependsOn": []
     },
     {
@@ -9670,7 +9712,7 @@
       "ref": "pkg:pub/barcode@2.2.9",
       "dependsOn": [
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/qr@3.0.2"
+        "pkg:pub/qr@3.0.3"
       ]
     },
     {
@@ -9710,7 +9752,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/code_assets@2.1.0",
+      "ref": "pkg:pub/code_assets@2.2.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/hooks@2.2.0",
@@ -9731,14 +9773,12 @@
       "ref": "pkg:pub/cross_file@0.3.5+5",
       "dependsOn": [
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/web@1.1.1"
+        "pkg:pub/web@1.1.2"
       ]
     },
     {
-      "ref": "pkg:pub/crypto@3.0.7",
-      "dependsOn": [
-        "pkg:pub/typed_data@1.4.0"
-      ]
+      "ref": "pkg:pub/crypto@3.0.8",
+      "dependsOn": []
     },
     {
       "ref": "pkg:pub/crypto_keys@0.3.1",
@@ -9753,7 +9793,7 @@
       "ref": "pkg:pub/cryptography@2.9.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/typed_data@1.4.0"
@@ -9770,7 +9810,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/cupertino_ui@1.1.2",
+      "ref": "pkg:pub/cupertino_ui@1.1.6",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/intl@0.20.3",
@@ -9792,8 +9832,8 @@
         "pkg:pub/collection@1.19.1",
         "pkg:pub/logging@1.3.0",
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/synchronized@3.4.2",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/synchronized@3.6.1",
+        "pkg:pub/web@1.1.2",
         "pkg:pub/webrtc_interface@1.5.1"
       ]
     },
@@ -9802,13 +9842,13 @@
       "dependsOn": [
         "pkg:pub/cryptography@2.9.0",
         "pkg:pub/pointycastle@4.0.0",
-        "pkg:pub/pqcrypto@0.4.3"
+        "pkg:pub/pqcrypto@0.4.4"
       ]
     },
     {
       "ref": "pkg:pub/dartcv4@2.3.1",
       "dependsOn": [
-        "pkg:pub/code_assets@2.1.0",
+        "pkg:pub/code_assets@2.2.0",
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/hooks@2.2.0",
         "pkg:pub/logging@1.3.0",
@@ -9832,7 +9872,7 @@
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/dbus@0.7.15",
         "pkg:pub/universal_platform@1.1.0",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -9842,7 +9882,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/equatable@2.1.0",
+      "ref": "pkg:pub/equatable@3.0.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/meta@1.19.0"
@@ -9873,39 +9913,39 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_picker@13.1.0",
+      "ref": "pkg:pub/file_picker@13.3.2",
       "dependsOn": [
-        "pkg:pub/android_file_picker@2.0.1",
+        "pkg:pub/android_file_picker@2.1.3",
         "pkg:pub/cross_file@0.3.5+5",
-        "pkg:pub/file_picker_darwin@2.1.3",
-        "pkg:pub/file_picker_linux@2.0.0",
-        "pkg:pub/file_picker_platform_interface@4.0.0",
-        "pkg:pub/file_picker_web@4.1.0",
+        "pkg:pub/file_picker_darwin@2.4.2",
+        "pkg:pub/file_picker_linux@2.0.3",
+        "pkg:pub/file_picker_platform_interface@4.2.0",
+        "pkg:pub/file_picker_web@4.2.0",
         "pkg:pub/windows_file_picker@2.0.1",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/file_picker_darwin@2.1.3",
+      "ref": "pkg:pub/file_picker_darwin@2.4.2",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
-        "pkg:pub/file_picker_platform_interface@4.0.0",
+        "pkg:pub/file_picker_platform_interface@4.2.0",
         "pkg:pub/path@1.9.1",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/file_picker_linux@2.0.0",
+      "ref": "pkg:pub/file_picker_linux@2.0.3",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/dbus@0.7.15",
-        "pkg:pub/file_picker_platform_interface@4.0.0",
+        "pkg:pub/file_picker_platform_interface@4.2.0",
         "pkg:pub/path@1.9.1",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/file_picker_platform_interface@4.0.0",
+      "ref": "pkg:pub/file_picker_platform_interface@4.2.0",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/path@1.9.1",
@@ -9914,13 +9954,13 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_picker_web@4.1.0",
+      "ref": "pkg:pub/file_picker_web@4.2.0",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
-        "pkg:pub/file_picker_platform_interface@4.0.0",
+        "pkg:pub/file_picker_platform_interface@4.2.0",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/path@1.9.1",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -9929,9 +9969,9 @@
       "ref": "pkg:pub/file_selector@1.1.0",
       "dependsOn": [
         "pkg:pub/file_selector_android@0.5.2+11",
-        "pkg:pub/file_selector_ios@0.5.3+6",
+        "pkg:pub/file_selector_ios@0.5.3+7",
         "pkg:pub/file_selector_linux@0.9.4+1",
-        "pkg:pub/file_selector_macos@0.9.5+1",
+        "pkg:pub/file_selector_macos@0.9.5+2",
         "pkg:pub/file_selector_platform_interface@2.7.0",
         "pkg:pub/file_selector_web@0.9.5",
         "pkg:pub/file_selector_windows@0.9.3+6",
@@ -9948,7 +9988,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_selector_ios@0.5.3+6",
+      "ref": "pkg:pub/file_selector_ios@0.5.3+7",
       "dependsOn": [
         "pkg:pub/file_selector_platform_interface@2.7.0",
         "pkg:pub/meta@1.19.0",
@@ -9965,7 +10005,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_selector_macos@0.9.5+1",
+      "ref": "pkg:pub/file_selector_macos@0.9.5+2",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/file_selector_platform_interface@2.7.0",
@@ -9986,7 +10026,7 @@
       "ref": "pkg:pub/file_selector_web@0.9.5",
       "dependsOn": [
         "pkg:pub/file_selector_platform_interface@2.7.0",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -10005,10 +10045,10 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/fl_chart@1.2.0",
+      "ref": "pkg:pub/fl_chart@1.3.0",
       "dependsOn": [
-        "pkg:pub/equatable@2.1.0",
-        "pkg:pub/vector_math@2.4.3",
+        "pkg:pub/equatable@3.0.0",
+        "pkg:pub/vector_math@2.4.4",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -10019,7 +10059,7 @@
         "pkg:pub/collection@1.19.1",
         "pkg:pub/material_color_utilities@0.13.0",
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/vector_math@2.4.3",
+        "pkg:pub/vector_math@2.4.4",
         "sdk:sky_engine@0.0.0"
       ]
     },
@@ -10036,7 +10076,7 @@
         "pkg:pub/matcher@0.12.20",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/path@1.9.1",
-        "pkg:pub/vm_service@15.3.0",
+        "pkg:pub/vm_service@15.4.0",
         "pkg:pub/webdriver@3.2.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter_test@0.0.0",
@@ -10066,14 +10106,14 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.5",
+      "ref": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.6",
       "dependsOn": [
         "pkg:pub/flutter_keyboard_visibility_linux@1.0.0",
         "pkg:pub/flutter_keyboard_visibility_macos@1.0.0",
         "pkg:pub/flutter_keyboard_visibility_platform_interface@2.0.0",
         "pkg:pub/flutter_keyboard_visibility_windows@1.0.0",
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -10103,7 +10143,7 @@
       "ref": "pkg:pub/flutter_math_fork@0.7.4",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
-        "pkg:pub/flutter_svg@2.3.0",
+        "pkg:pub/flutter_svg@2.3.2",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/provider@6.1.5+1",
         "pkg:pub/tuple@2.0.2",
@@ -10117,7 +10157,7 @@
         "pkg:pub/collection@1.19.1",
         "pkg:pub/dart_quill_delta@10.8.3",
         "pkg:pub/flutter_colorpicker@1.1.0",
-        "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.5",
+        "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.6",
         "pkg:pub/flutter_quill_delta_from_html@1.5.3",
         "pkg:pub/html@0.15.7",
         "pkg:pub/intl@0.20.3",
@@ -10138,11 +10178,12 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_riverpod@3.4.3",
+      "ref": "pkg:pub/flutter_riverpod@3.5.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
+        "pkg:pub/material_ui@1.10.0",
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/riverpod@3.4.3",
+        "pkg:pub/riverpod@3.5.0",
         "pkg:pub/state_notifier@1.0.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter_test@0.0.0"
@@ -10185,7 +10226,7 @@
       "ref": "pkg:pub/flutter_secure_storage_web@2.1.1",
       "dependsOn": [
         "pkg:pub/flutter_secure_storage_platform_interface@2.1.1",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -10203,12 +10244,12 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_svg@2.3.0",
+      "ref": "pkg:pub/flutter_svg@2.3.2",
       "dependsOn": [
         "pkg:pub/http@1.6.0",
-        "pkg:pub/vector_graphics@1.2.3",
+        "pkg:pub/vector_graphics@1.2.6",
         "pkg:pub/vector_graphics_codec@1.1.13",
-        "pkg:pub/vector_graphics_compiler@1.3.0",
+        "pkg:pub/vector_graphics_compiler@1.3.4",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -10225,7 +10266,7 @@
         "pkg:pub/stack_trace@1.12.2",
         "pkg:pub/stream_channel@2.1.4",
         "pkg:pub/test_api@0.7.12",
-        "pkg:pub/vector_math@2.4.3",
+        "pkg:pub/vector_math@2.4.4",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -10242,7 +10283,7 @@
         "pkg:pub/dart_webrtc@1.8.2",
         "pkg:pub/logger@2.8.0",
         "pkg:pub/path_provider@2.1.6",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "pkg:pub/webrtc_interface@1.5.1",
         "sdk:flutter@0.0.0"
       ]
@@ -10252,7 +10293,7 @@
       "dependsOn": [
         "pkg:pub/meta@1.19.0",
         "pkg:pub/process@5.0.6",
-        "pkg:pub/vm_service@15.3.0"
+        "pkg:pub/vm_service@15.4.0"
       ]
     },
     {
@@ -10269,7 +10310,7 @@
       "ref": "pkg:pub/hooks@2.2.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/logging@1.3.0",
         "pkg:pub/pub_semver@2.2.1",
         "pkg:pub/record_use@1.1.1",
@@ -10289,7 +10330,7 @@
         "pkg:pub/async@2.13.1",
         "pkg:pub/http_parser@4.1.2",
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/web@1.1.1"
+        "pkg:pub/web@1.1.2"
       ]
     },
     {
@@ -10311,7 +10352,7 @@
       "ref": "sdk:integration_test@0.0.0",
       "dependsOn": [
         "pkg:pub/path@1.9.1",
-        "pkg:pub/vm_service@15.3.0",
+        "pkg:pub/vm_service@15.4.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter_driver@0.0.0",
         "sdk:flutter_test@0.0.0"
@@ -10333,7 +10374,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/jni@1.1.0",
+      "ref": "pkg:pub/jni@1.1.2",
       "dependsOn": [
         "pkg:pub/args@2.7.0",
         "pkg:pub/collection@1.19.1",
@@ -10348,7 +10389,7 @@
     {
       "ref": "pkg:pub/jni_flutter@1.0.4+1",
       "dependsOn": [
-        "pkg:pub/jni@1.1.0",
+        "pkg:pub/jni@1.1.2",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -10362,7 +10403,7 @@
       "ref": "pkg:pub/jose@0.3.5+2",
       "dependsOn": [
         "pkg:pub/archive@4.6.0",
-        "pkg:pub/asn1lib@1.6.5",
+        "pkg:pub/asn1lib@1.6.8",
         "pkg:pub/collection@1.19.1",
         "pkg:pub/crypto_keys@0.3.1",
         "pkg:pub/http@1.6.0",
@@ -10379,7 +10420,7 @@
         "pkg:pub/collection@1.19.1",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/path@1.9.1",
-        "pkg:pub/vm_service@15.3.0"
+        "pkg:pub/vm_service@15.4.0"
       ]
     },
     {
@@ -10445,13 +10486,13 @@
       ]
     },
     {
-      "ref": "pkg:pub/material_ui@1.6.0",
+      "ref": "pkg:pub/material_ui@1.10.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
-        "pkg:pub/cupertino_ui@1.1.2",
+        "pkg:pub/cupertino_ui@1.1.6",
         "pkg:pub/intl@0.20.3",
         "pkg:pub/material_color_utilities@0.13.0",
-        "pkg:pub/vector_math@2.4.3",
+        "pkg:pub/vector_math@2.4.4",
         "sdk:flutter@0.0.0",
         "sdk:flutter_localizations@0.0.0"
       ]
@@ -10461,10 +10502,23 @@
       "dependsOn": []
     },
     {
+      "ref": "pkg:pub/native_toolchain_c@0.19.6",
+      "dependsOn": [
+        "pkg:pub/code_assets@2.2.0",
+        "pkg:pub/file@7.0.1",
+        "pkg:pub/glob@2.2.0",
+        "pkg:pub/hooks@2.2.0",
+        "pkg:pub/logging@1.3.0",
+        "pkg:pub/meta@1.19.0",
+        "pkg:pub/process@5.0.6",
+        "pkg:pub/pub_semver@2.2.1"
+      ]
+    },
+    {
       "ref": "pkg:pub/native_toolchain_cmake@0.3.2",
       "dependsOn": [
         "pkg:pub/change_case@2.2.0",
-        "pkg:pub/code_assets@2.1.0",
+        "pkg:pub/code_assets@2.2.0",
         "pkg:pub/glob@2.2.0",
         "pkg:pub/hooks@2.2.0",
         "pkg:pub/logging@1.3.0",
@@ -10492,13 +10546,13 @@
     {
       "ref": "git:network_guard@0.1.0",
       "dependsOn": [
-        "pkg:pub/crypto@3.0.7"
+        "pkg:pub/crypto@3.0.8"
       ]
     },
     {
-      "ref": "pkg:pub/objective_c@9.6.2",
+      "ref": "pkg:pub/objective_c@9.6.3",
       "dependsOn": [
-        "pkg:pub/code_assets@2.1.0",
+        "pkg:pub/code_assets@2.2.0",
         "pkg:pub/collection@1.19.1",
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/hooks@2.2.0",
@@ -10517,7 +10571,7 @@
         "pkg:pub/logging@1.3.0",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/pointycastle@4.0.0",
-        "pkg:pub/web@1.1.1"
+        "pkg:pub/web@1.1.2"
       ]
     },
     {
@@ -10535,7 +10589,7 @@
         "pkg:pub/meta@1.19.0",
         "pkg:pub/package_info_plus_platform_interface@4.1.0",
         "pkg:pub/path@1.9.1",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "pkg:pub/win32@6.4.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
@@ -10550,11 +10604,11 @@
       ]
     },
     {
-      "ref": "pkg:pub/pasteboard@0.5.0",
+      "ref": "pkg:pub/pasteboard@0.6.0",
       "dependsOn": [
         "pkg:pub/path@1.9.1",
         "pkg:pub/uuid@4.6.0",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -10567,7 +10621,7 @@
       "ref": "pkg:pub/path_parsing@1.1.0",
       "dependsOn": [
         "pkg:pub/meta@1.19.0",
-        "pkg:pub/vector_math@2.4.3"
+        "pkg:pub/vector_math@2.4.4"
       ]
     },
     {
@@ -10584,7 +10638,7 @@
     {
       "ref": "pkg:pub/path_provider_android@2.3.1",
       "dependsOn": [
-        "pkg:pub/jni@1.1.0",
+        "pkg:pub/jni@1.1.2",
         "pkg:pub/jni_flutter@1.0.4+1",
         "pkg:pub/path_provider_platform_interface@2.1.3",
         "sdk:flutter@0.0.0"
@@ -10594,7 +10648,7 @@
       "ref": "pkg:pub/path_provider_foundation@2.6.0",
       "dependsOn": [
         "pkg:pub/ffi@2.2.0",
-        "pkg:pub/objective_c@9.6.2",
+        "pkg:pub/objective_c@9.6.3",
         "pkg:pub/path_provider_platform_interface@2.1.3",
         "sdk:flutter@0.0.0"
       ]
@@ -10632,70 +10686,71 @@
         "pkg:pub/archive@4.6.0",
         "pkg:pub/barcode@2.2.9",
         "pkg:pub/bidi@2.0.13",
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/image@4.12.0",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/path_parsing@1.1.0",
-        "pkg:pub/vector_math@2.4.3",
+        "pkg:pub/vector_math@2.4.4",
         "pkg:pub/xml@7.0.1"
       ]
     },
     {
-      "ref": "pkg:pub/pdfium_dart@0.3.1",
+      "ref": "pkg:pub/pdfium_dart@0.4.1",
       "dependsOn": [
         "pkg:pub/archive@4.6.0",
-        "pkg:pub/code_assets@2.1.0",
+        "pkg:pub/code_assets@2.2.0",
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/hooks@2.2.0",
         "pkg:pub/http@1.6.0",
+        "pkg:pub/native_toolchain_c@0.19.6",
         "runtime:pdfium@chromium-7811"
       ]
     },
     {
-      "ref": "pkg:pub/pdfium_flutter@0.3.1",
+      "ref": "pkg:pub/pdfium_flutter@0.4.1",
       "dependsOn": [
-        "pkg:pub/code_assets@2.1.0",
+        "pkg:pub/code_assets@2.2.0",
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/hooks@2.2.0",
         "pkg:pub/path@1.9.1",
-        "pkg:pub/pdfium_dart@0.3.1",
+        "pkg:pub/pdfium_dart@0.4.1",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/pdfrx@2.6.5",
+      "ref": "pkg:pub/pdfrx@2.12.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
-        "pkg:pub/crypto@3.0.7",
-        "pkg:pub/material_ui@1.6.0",
+        "pkg:pub/crypto@3.0.8",
+        "pkg:pub/material_ui@1.10.0",
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
-        "pkg:pub/pdfium_flutter@0.3.1",
-        "pkg:pub/pdfrx_engine@0.6.1",
+        "pkg:pub/pdfium_flutter@0.4.1",
+        "pkg:pub/pdfrx_engine@0.9.1",
         "pkg:pub/rxdart@0.28.0",
-        "pkg:pub/synchronized@3.4.2",
+        "pkg:pub/synchronized@3.6.1",
         "pkg:pub/url_launcher@6.3.3",
-        "pkg:pub/vector_math@2.4.3",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/vector_math@2.4.4",
+        "pkg:pub/web@1.1.2",
         "pkg:pub/yaml@3.1.4",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/pdfrx_engine@0.6.1",
+      "ref": "pkg:pub/pdfrx_engine@0.9.1",
       "dependsOn": [
         "pkg:pub/archive@4.6.0",
         "pkg:pub/collection@1.19.1",
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.12.0",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/path@1.9.1",
-        "pkg:pub/pdfium_dart@0.3.1",
+        "pkg:pub/pdfium_dart@0.4.1",
         "pkg:pub/rxdart@0.28.0",
-        "pkg:pub/synchronized@3.4.2",
-        "pkg:pub/vector_math@2.4.3"
+        "pkg:pub/synchronized@3.6.1",
+        "pkg:pub/vector_math@2.4.4"
       ]
     },
     {
@@ -10725,7 +10780,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/posix@6.5.2",
+      "ref": "pkg:pub/posix@6.5.4",
       "dependsOn": [
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/meta@1.19.0",
@@ -10733,7 +10788,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/pqcrypto@0.4.3",
+      "ref": "pkg:pub/pqcrypto@0.4.4",
       "dependsOn": []
     },
     {
@@ -10759,7 +10814,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/qr@3.0.2",
+      "ref": "pkg:pub/qr@3.0.3",
       "dependsOn": [
         "pkg:pub/meta@1.19.0"
       ]
@@ -10820,7 +10875,7 @@
       "ref": "pkg:pub/quill_native_bridge_web@0.0.2",
       "dependsOn": [
         "pkg:pub/quill_native_bridge_platform_interface@0.0.2+1",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -10859,7 +10914,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/riverpod@3.4.3",
+      "ref": "pkg:pub/riverpod@3.5.0",
       "dependsOn": [
         "pkg:pub/async@2.13.1",
         "pkg:pub/clock@1.1.3",
@@ -10886,8 +10941,8 @@
     {
       "ref": "pkg:pub/shared_preferences@2.5.6",
       "dependsOn": [
-        "pkg:pub/shared_preferences_android@2.4.28",
-        "pkg:pub/shared_preferences_foundation@2.5.7",
+        "pkg:pub/shared_preferences_android@2.5.4",
+        "pkg:pub/shared_preferences_foundation@2.6.1",
         "pkg:pub/shared_preferences_linux@2.4.1",
         "pkg:pub/shared_preferences_platform_interface@2.4.2",
         "pkg:pub/shared_preferences_web@2.4.3",
@@ -10896,17 +10951,20 @@
       ]
     },
     {
-      "ref": "pkg:pub/shared_preferences_android@2.4.28",
+      "ref": "pkg:pub/shared_preferences_android@2.5.4",
       "dependsOn": [
+        "pkg:pub/jni@1.1.2",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/shared_preferences_platform_interface@2.4.2",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/shared_preferences_foundation@2.5.7",
+      "ref": "pkg:pub/shared_preferences_foundation@2.6.1",
       "dependsOn": [
+        "pkg:pub/ffi@2.2.0",
         "pkg:pub/meta@1.19.0",
+        "pkg:pub/objective_c@9.6.3",
         "pkg:pub/shared_preferences_platform_interface@2.4.2",
         "sdk:flutter@0.0.0"
       ]
@@ -10933,7 +10991,7 @@
       "ref": "pkg:pub/shared_preferences_web@2.4.3",
       "dependsOn": [
         "pkg:pub/shared_preferences_platform_interface@2.4.2",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -10990,7 +11048,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/synchronized@3.4.2",
+      "ref": "pkg:pub/synchronized@3.6.1",
       "dependsOn": []
     },
     {
@@ -11012,7 +11070,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/timezone@0.11.1",
+      "ref": "pkg:pub/timezone@0.11.2",
       "dependsOn": [
         "pkg:pub/http@1.6.0",
         "pkg:pub/path@1.9.1"
@@ -11088,7 +11146,7 @@
       "ref": "pkg:pub/url_launcher_web@2.4.3",
       "dependsOn": [
         "pkg:pub/url_launcher_platform_interface@2.3.2",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
@@ -11104,12 +11162,12 @@
     {
       "ref": "pkg:pub/uuid@4.6.0",
       "dependsOn": [
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/fixnum@1.1.1"
       ]
     },
     {
-      "ref": "pkg:pub/vector_graphics@1.2.3",
+      "ref": "pkg:pub/vector_graphics@1.2.6",
       "dependsOn": [
         "pkg:pub/http@1.6.0",
         "pkg:pub/vector_graphics_codec@1.1.13",
@@ -11121,7 +11179,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/vector_graphics_compiler@1.3.0",
+      "ref": "pkg:pub/vector_graphics_compiler@1.3.4",
       "dependsOn": [
         "pkg:pub/args@2.7.0",
         "pkg:pub/meta@1.19.0",
@@ -11132,7 +11190,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/vector_math@2.4.3",
+      "ref": "pkg:pub/vector_math@2.4.4",
       "dependsOn": []
     },
     {
@@ -11141,7 +11199,7 @@
         "pkg:pub/collection@1.19.1",
         "pkg:pub/html@0.15.7",
         "pkg:pub/video_player_android@2.12.2",
-        "pkg:pub/video_player_avfoundation@2.12.1",
+        "pkg:pub/video_player_avfoundation@2.12.3",
         "pkg:pub/video_player_platform_interface@6.9.0",
         "pkg:pub/video_player_web@2.4.0",
         "sdk:flutter@0.0.0"
@@ -11156,7 +11214,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/video_player_avfoundation@2.12.1",
+      "ref": "pkg:pub/video_player_avfoundation@2.12.3",
       "dependsOn": [
         "pkg:pub/meta@1.19.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
@@ -11174,13 +11232,13 @@
       "ref": "pkg:pub/video_player_web@2.4.0",
       "dependsOn": [
         "pkg:pub/video_player_platform_interface@6.9.0",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/vm_service@15.3.0",
+      "ref": "pkg:pub/vm_service@15.4.0",
       "dependsOn": []
     },
     {
@@ -11190,7 +11248,7 @@
         "pkg:pub/meta@1.19.0",
         "pkg:pub/package_info_plus@10.2.2",
         "pkg:pub/wakelock_plus_platform_interface@1.7.0",
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "pkg:pub/win32@6.4.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
@@ -11212,7 +11270,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/web@1.1.1",
+      "ref": "pkg:pub/web@1.1.2",
       "dependsOn": []
     },
     {
@@ -11222,7 +11280,7 @@
         "pkg:pub/path@1.9.1",
         "pkg:pub/stack_trace@1.12.2",
         "pkg:pub/sync_http@0.3.1",
-        "pkg:pub/web@1.1.1"
+        "pkg:pub/web@1.1.2"
       ]
     },
     {
@@ -11234,7 +11292,7 @@
       "dependsOn": [
         "pkg:pub/webview_flutter_android@4.14.1",
         "pkg:pub/webview_flutter_platform_interface@2.15.1",
-        "pkg:pub/webview_flutter_wkwebview@3.27.0",
+        "pkg:pub/webview_flutter_wkwebview@3.27.2",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -11257,14 +11315,14 @@
     {
       "ref": "pkg:pub/webview_flutter_web@0.2.3+4",
       "dependsOn": [
-        "pkg:pub/web@1.1.1",
+        "pkg:pub/web@1.1.2",
         "pkg:pub/webview_flutter_platform_interface@2.15.1",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/webview_flutter_wkwebview@3.27.0",
+      "ref": "pkg:pub/webview_flutter_wkwebview@3.27.2",
       "dependsOn": [
         "pkg:pub/meta@1.19.0",
         "pkg:pub/path@1.9.1",
@@ -11285,7 +11343,7 @@
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/ffi@2.2.0",
-        "pkg:pub/file_picker_platform_interface@4.0.0",
+        "pkg:pub/file_picker_platform_interface@4.2.0",
         "pkg:pub/meta@1.19.0",
         "pkg:pub/path@1.9.1",
         "pkg:pub/win32@6.4.0",
@@ -11295,7 +11353,7 @@
     {
       "ref": "pkg:pub/x509@0.2.4+3",
       "dependsOn": [
-        "pkg:pub/asn1lib@1.6.5",
+        "pkg:pub/asn1lib@1.6.8",
         "pkg:pub/crypto_keys@0.3.1",
         "pkg:pub/quiver@3.2.2"
       ]
@@ -11328,7 +11386,7 @@
       "dependsOn": [
         "pkg:pub/archive@4.6.0",
         "pkg:pub/characters@1.4.1",
-        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/crypto@3.0.8",
         "pkg:pub/cryptography@2.9.0",
         "pkg:pub/dartage@0.3.0"
       ]

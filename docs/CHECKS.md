@@ -351,7 +351,7 @@ per-file floor. This is a dated result, not a promise about every subsequent
 checkout. External reference refreshes that were unreachable remained unknown;
 see the gate’s existing treatment of external-source availability.
 
-The run used the official native ARM64 Flutter 3.47.9 SDK (Dart 3.13.5).
+The run used the official native ARM64 Flutter 3.47.7 SDK (Dart 3.13.5).
 
 ### Historical result (2026-07-23; duration sample updated 2026-09-01)
 
