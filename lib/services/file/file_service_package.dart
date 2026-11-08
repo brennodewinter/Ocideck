@@ -183,14 +183,7 @@ List<PackageEntry>? _decodePackageEntries(
       );
       return null;
     }
-    // Zonder deze vlaggen zwijgt archive (vanaf 4.6) over beschadigde inhoud:
-    // een afgekapt lid kwam dan als halve bytes terug in plaats van als fout.
-    archive = ZipDecoder().decodeBytes(
-      input,
-      password: password,
-      verify: true,
-      throwOnError: true,
-    );
+    archive = _decodePackageZip(input, password);
   } catch (e, s) {
     logError('FileService.decodePackageEntries: ZIP decode failed', e, s);
     return null;
@@ -787,6 +780,12 @@ class PackageBudgetExceeded implements Exception {
   String toString() =>
       'PackageBudgetExceeded(used: $usedBytes, limit: $limitBytes)';
 }
+
+/// De ene strikte decode van een pakket-zip. Zonder deze vlaggen zwijgt archive
+/// (vanaf 4.6) over beschadigde inhoud: een afgekapt of omgevallen lid kwam dan
+/// als halve of verkeerde bytes terug in plaats van als fout.
+Archive _decodePackageZip(List<int> bytes, String? password) => ZipDecoder()
+    .decodeBytes(bytes, password: password, verify: true, throwOnError: true);
 
 /// Buiten het web toetst `ZipFile` zelf grootte en CRC, mits de decoder met
 /// `verify`/`throwOnError` liep. Op web bouwt archive bij DEFLATE eerst de
