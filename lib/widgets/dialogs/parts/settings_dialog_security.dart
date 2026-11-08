@@ -20,6 +20,8 @@ extension _SettingsSecurity on _SettingsDialogState {
           style: const TextStyle(fontSize: 12, height: 1.4),
         ),
         const SizedBox(height: 20),
+        _sectionTitle(l10n.d('Bescherming tegen gegevenslekken (DLP)')),
+        const PrivacyProfiles(),
         _sectionTitle(l10n.d('Privacycontrole')),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
@@ -515,11 +517,14 @@ extension _SettingsSecurity on _SettingsDialogState {
                 child: Text(label(g), overflow: TextOverflow.ellipsis),
               ),
           ],
-          onChanged: (v) {
-            if (v != null) {
-              ref.read(settingsProvider.notifier).setPrivacyExportGate(v);
-            }
-          },
+          onChanged:
+              ref.watch(settingsProvider.select((s) => s.privacyChecksEnabled))
+              ? (v) {
+                  if (v != null) {
+                    ref.read(settingsProvider.notifier).setPrivacyExportGate(v);
+                  }
+                }
+              : null,
         ),
       ),
     );
@@ -535,34 +540,6 @@ extension _SettingsSecurity on _SettingsDialogState {
   /// Bewust een lijst en geen slimmigheid: een heuristiek die probeert te raden
   /// wie de auteur is, zit er soms naast — en dan onderdrukt hij juist wél een
   /// echte bevinding.
-  Widget _privacyOwnIdentity(AppLocalizations l10n) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(l10n.d('Je eigen gegevens'), style: const TextStyle(fontSize: 13)),
-        const SizedBox(height: 2),
-        Text(
-          l10n.d(
-            'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.',
-          ),
-          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-        ),
-        const SizedBox(height: 6),
-        TextFormField(
-          initialValue: ref.read(settingsProvider).privacyOwnIdentity,
-          minLines: 2,
-          maxLines: 4,
-          style: const TextStyle(fontSize: 12),
-          decoration: InputDecoration(
-            isDense: true,
-            border: const OutlineInputBorder(),
-            hintText: l10n.d('naam@example.org\nexample.org'),
-            hintStyle: TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-          onChanged: (value) =>
-              ref.read(settingsProvider.notifier).setPrivacyOwnIdentity(value),
-        ),
-      ],
-    );
-  }
+  Widget _privacyOwnIdentity(AppLocalizations l10n) =>
+      const PrivacyOwnIdentityField();
 }

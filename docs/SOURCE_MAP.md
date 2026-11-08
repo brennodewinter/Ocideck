@@ -7,6 +7,17 @@ complements [`ARCHITECTURE.md`](ARCHITECTURE.md) (the *why* and the cross-cuttin
 flows) with a *what-is-this-file* lookup. For the on-disk file format see
 [`FILE_FORMAT.md`](FILE_FORMAT.md).
 
+## Extension consent and browser storage
+
+- `lib/services/browser_deck_store.dart` — bounded package storage in the browser, independent keys per presentation, and preservation during settings reset.
+- `lib/services/data_impact_log.dart` — bounded local consent journal with fixed identifiers, notice versions, decisions and timestamps.
+- `lib/widgets/dialogs/browser_storage_dialog.dart` — explicit download/browser destination choice and consent before storing a package.
+- `lib/widgets/dialogs/settings/browser_storage_section.dart` — inspect, reopen through package safety checks, and delete browser copies.
+- `lib/widgets/dialogs/settings/data_impact_log_section.dart` — inspect and copy the consent journal, including on web.
+- `lib/widgets/dialogs/settings/extension_consent.dart` — exhaustive module impact assessment and the shared logged confirmation dialog.
+- `lib/widgets/dialogs/settings/privacy_own_identity_field.dart` — local scan exceptions with an explanation of domain-wide exclusions.
+- `lib/widgets/dialogs/settings/privacy_profiles.dart` — warning/blocking DLP profiles and a summary of the active export behavior.
+
 ## What this map covers
 
 The claim used to be "a line per file under `lib/`", and 156 files did not have

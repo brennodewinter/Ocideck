@@ -1598,6 +1598,42 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Egyéni: ellenőrizze alább a fő vizsgálatot és az exportálás működését.',
+  'Als bestand downloaden': 'Letöltés fájlként',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Adatszivárgás elleni védelem (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Mentve a böngészőben. Újranyitás: Beállítások → Tárolás.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Használatkor személyes adatok és üzleti információk kerülhetnek a kiválasztott szolgáltatáshoz vagy címzettekhez, és ott tárolva maradhatnak. Ellenőrizze a hozzáférést és a megőrzési időt. A bekapcsolás önmagában még nem küld semmit.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Figyelmeztetés a kezeletlen találatoknál; tudatosan továbbra is folytathatja.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Törli a böngésző másolatát? Szükség esetén előbb mentse fájlba.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'A böngésző tárhelye nincs titkosítva, és a profil más felhasználói, valamint a webhely szkriptjei is hozzáférhetnek. A webhelyadatok törlése, a privát mód vagy a helyhiány törölheti munkáját. A helyi lemezre mentés biztonságosabb: Ön kezeli a hozzáférést és a biztonsági másolatokat.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'A böngészőbe mentés sikertelen. Töltse le a bemutatót fájlként.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Az adatvédelmi vizsgálat ki van kapcsolva; az exportszabályzat ekkor nem véd.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'A kivételként megadott tartomány a kollégák adatait is elrejti. Gondosan válasszon kivételeket.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Nincs garancia: a kivételek és a kikapcsolt szabályok továbbra is érvényesek.',
+  'In browser bewaarde presentaties': 'Böngészőben mentett bemutatók',
+  'In browser bewaren': 'Mentés a böngészőben',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Válassza ki az exportálás működését. Az országok, a képvizsgálat és a kivételek megmaradnak.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Utolsó 200 esemény: shown = megjelenítve, accepted = elfogadva, declined = elutasítva.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Még nincs böngészőmásolat. Mentéskor válassza a Mentés a böngészőben lehetőséget.',
+  'Toestemmingslogboek': 'Hozzájárulási napló',
+  'Uitbreiding inschakelen?': 'Bekapcsolja a bővítményt?',
+  'Waar wilt u de presentatie bewaren?': 'Hová szeretné menteni a bemutatót?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'A biztos találatok blokkolják az exportálást, amíg nem kezeli őket.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'A jelölő elvált a táblázatától — csak üres sorok vannak közöttük.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

@@ -642,6 +642,42 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Personalisa: kontrolá e kontrol prinsipal i e manera di eksportá aki bou.',
+  'Als bestand downloaden': 'Deskargá komo fail',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Protektor kontra fuga di dato (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Wardá den browser. Habri atrobe via Konfigurashon → Almasenamentu.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Ora di uso, dato personal i informashon di kompania por yega na e servisio òf destinatario skohe i keda wardá ei. Kontrolá akseso i tempu di konservashon. Aktivá so no ta manda nada ainda.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Avertí pa resultado ku no ta trata ainda; bo por skohe pa sigui.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Kita e kopia di browser? Warda un fail promé si ta nesesario.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Almasenamentu di browser no ta sifrá i otro usuario di e profil aki i script riba e wèpsait por aksedé. Kita dato di wèpsait, modo privá òf falta di espasio por kita bo trabou. Warda riba disko lokal ta mas sigur: bo mes ta kontrolá akseso i kopia di seguridat.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Almasenamentu di browser a faya. Deskargá bo presentashon komo fail.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'E kontrol di privasidat ta pagá; e regla di eksportashon no ta protehá e ora ei.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Un dominio ekskluí ta skonde dato di kolega tambe. Skohe eksepshon ku kuido.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'No tin garantia: eksepshon i regla desaktivá ta sigui konta.',
+  'In browser bewaarde presentaties': 'Presentashon wardá den browser',
+  'In browser bewaren': 'Warda den browser',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Skohe e manera di eksportá. Pais, kontrol di imágen i eksepshon ta keda meskos.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Último 200 evento: shown = mustrá, accepted = aseptá, declined = rechasá.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'No tin kopia di browser ainda. Ora di warda, skohe Warda den browser.',
+  'Toestemmingslogboek': 'Registro di konsentimentu',
+  'Uitbreiding inschakelen?': 'Aktivá ekstenshon?',
+  'Waar wilt u de presentatie bewaren?': 'Unda bo ke warda e presentashon?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Resultado sigur ta blokia eksportashon te ora bo trata nan.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'E markador ta separá di su tabla — solamente línanan bashí entre nan.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

@@ -75,6 +75,10 @@ extension _SettingsStorageTab on _SettingsDialogState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (isWebPlatform) ...[
+          _sectionTitle(l10n.d('In browser bewaarde presentaties')),
+          const BrowserStorageSection(),
+        ],
         ..._connectionsSection(l10n),
         // Het openscherm doorzoekt diezelfde verbindingen; de voorbeeldweergave
         // hoort daarom hier en niet bij "Weergave". De exportmap stuurt het

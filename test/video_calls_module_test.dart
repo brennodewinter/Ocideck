@@ -73,6 +73,8 @@ void main() {
     );
     await tester.tap(find.byType(Switch));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Doorgaan'));
+    await tester.pumpAndSettle();
     expect(
       tester.widget<SwitchListTile>(find.byType(SwitchListTile)).value,
       isTrue,

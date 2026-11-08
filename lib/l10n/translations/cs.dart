@@ -1596,6 +1596,41 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Vlastní: níže zkontrolujte hlavní kontrolu a chování exportu.',
+  'Als bestand downloaden': 'Stáhnout jako soubor',
+  'Bescherming tegen gegevenslekken (DLP)': 'Ochrana proti úniku dat (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Uloženo v prohlížeči. Znovu otevřete přes Nastavení → Úložiště.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Při používání se osobní údaje a firemní informace mohou dostat ke zvolené službě nebo příjemcům a zůstat tam uloženy. Zkontrolujte přístup a dobu uchovávání. Samotné zapnutí zatím nic neposílá.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Varovat při nevyřešených nálezech; lze vědomě pokračovat.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Smazat kopii v prohlížeči? V případě potřeby nejprve uložte soubor.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Úložiště prohlížeče není šifrované a je přístupné ostatním uživatelům tohoto profilu a skriptům tohoto webu. Vymazání dat webu, anonymní režim nebo nedostatek místa mohou smazat vaši práci. Ukládání na místní disk je bezpečnější: přístup a zálohy řídíte sami.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Ukládání v prohlížeči selhalo. Stáhněte prezentaci jako soubor.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Kontrola soukromí je vypnutá; zásady exportu pak nechrání.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Vyloučená doména skryje i údaje kolegů. Výjimky vybírejte pečlivě.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Bez záruky: výjimky a vypnutá pravidla nadále platí.',
+  'In browser bewaarde presentaties': 'Prezentace uložené v prohlížeči',
+  'In browser bewaren': 'Uložit v prohlížeči',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Zvolte chování exportu. Země, kontrola obrázků a výjimky zůstanou zachovány.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Posledních 200 událostí: shown = zobrazeno, accepted = přijato, declined = odmítnuto.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Zatím žádné kopie v prohlížeči. Při ukládání zvolte Uložit v prohlížeči.',
+  'Toestemmingslogboek': 'Protokol souhlasů',
+  'Uitbreiding inschakelen?': 'Zapnout rozšíření?',
+  'Waar wilt u de presentatie bewaren?': 'Kam chcete prezentaci uložit?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Jisté nálezy blokují export, dokud je nevyřešíte.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Značka je oddělená od své tabulky — mezi nimi jsou jen prázdné řádky.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

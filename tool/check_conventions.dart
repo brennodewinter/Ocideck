@@ -701,7 +701,10 @@ const Map<String, int> classSizeBaseline = {
   // _mutate-callsite; de permutatie-detectie staat in
   // table_row_permutation.dart.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1469, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
+      1484, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
+  // +15: identiteit van de bewust bewaarde browserkopie en het bevestigen
+  // van een pakketopslag. Alleen een nog levende, ongewijzigde momentopname
+  // mag schoon worden; die staatsovergang hoort bij de notifier.
   // +5 (#2721): de schrijflus in _saveToPath die doorschrijft tot de schijf
   // de levende deck bevat — hoort bij de opslaginvariant van deze klasse.
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,

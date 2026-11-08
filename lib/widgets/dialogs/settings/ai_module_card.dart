@@ -6,6 +6,7 @@ import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 
 /// De modulekaart voor AI-assistentie op het tabblad Uitbreidingen (#731).
 ///
@@ -46,7 +47,9 @@ class AiModuleCard extends StatelessWidget {
         children: [
           SwitchListTile(
             value: !web && enabled,
-            onChanged: web ? null : onChanged,
+            onChanged: web
+                ? null
+                : consentToggle(context, ModuleId.ai, onChanged),
             title: Text(
               moduleCardTitle(ModuleId.ai, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

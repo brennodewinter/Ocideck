@@ -7,6 +7,7 @@ import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 
 /// De modulekaart voor Formulieren en inzendingen op Instellingen → Uitbreidingen
 /// (FORM_INTAKE.md §7).
@@ -24,7 +25,11 @@ class FormsModuleCard extends ConsumerWidget {
     return ModuleCard(
       child: SwitchListTile(
         value: enabled,
-        onChanged: (v) => ref.read(formsProvider.notifier).setEnabled(v),
+        onChanged: consentToggle(
+          context,
+          ModuleId.forms,
+          (v) => ref.read(formsProvider.notifier).setEnabled(v),
+        ),
         title: Text(
           moduleCardTitle(ModuleId.forms, l10n),
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

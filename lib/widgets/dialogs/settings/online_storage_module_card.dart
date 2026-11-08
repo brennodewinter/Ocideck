@@ -8,6 +8,7 @@ import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 
 /// De modulekaart voor Online opslag op het tabblad Uitbreidingen (#570).
 ///
@@ -43,7 +44,12 @@ class OnlineStorageModuleCard extends ConsumerWidget {
             value: enabled,
             onChanged: web
                 ? null
-                : (v) => ref.read(onlineStorageProvider.notifier).setEnabled(v),
+                : consentToggle(
+                    context,
+                    ModuleId.onlineStorage,
+                    (v) =>
+                        ref.read(onlineStorageProvider.notifier).setEnabled(v),
+                  ),
             title: Text(
               moduleCardTitle(ModuleId.onlineStorage, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

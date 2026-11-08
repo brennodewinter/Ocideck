@@ -1596,6 +1596,41 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Tilpasset: kontrollér hovedkontrollen og eksportadfærden nedenfor.',
+  'Als bestand downloaden': 'Download som fil',
+  'Bescherming tegen gegevenslekken (DLP)': 'Beskyttelse mod datalæk (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Gemt i browseren. Åbn igen via Indstillinger → Lager.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Ved brug kan personoplysninger og virksomhedsoplysninger nå den valgte tjeneste eller modtagere og blive gemt der. Kontrollér adgang og opbevaringsperioder. Aktivering alene sender endnu intet.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Advar om uafklarede fund; du kan stadig vælge at fortsætte.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Slet browserkopien? Gem om nødvendigt først en fil.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Browserlager er ukrypteret og tilgængeligt for andre brugere af denne profil og scripts på dette websted. Rydning af webstedsdata, privat tilstand eller pladsmangel kan slette dit arbejde. Det er sikrere at gemme på den lokale disk: du styrer selv adgang og sikkerhedskopier.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Lagring i browseren mislykkedes. Download din præsentation som en fil.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Privatlivskontrollen er slået fra; eksportpolitikken beskytter så ikke.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Et undtaget domæne skjuler også kollegers data. Vælg undtagelser omhyggeligt.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Ingen garanti: undtagelser og deaktiverede regler gælder stadig.',
+  'In browser bewaarde presentaties': 'Præsentationer gemt i browseren',
+  'In browser bewaren': 'Gem i browseren',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Vælg eksportadfærd. Lande, billedkontrol og undtagelser bevares.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Seneste 200 hændelser: shown = vist, accepted = accepteret, declined = afvist.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Ingen browserkopier endnu. Vælg Gem i browseren, når du gemmer.',
+  'Toestemmingslogboek': 'Samtykkelog',
+  'Uitbreiding inschakelen?': 'Aktivér udvidelse?',
+  'Waar wilt u de presentatie bewaren?': 'Hvor vil du gemme præsentationen?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Sikre fund blokerer eksport, indtil du behandler dem.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Markøren er løsrevet fra sin tabel — kun tomme linjer imellem.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

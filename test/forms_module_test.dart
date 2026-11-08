@@ -126,6 +126,8 @@ void main() {
       await tester.ensureVisible(tile);
       await tester.tap(tile);
       await tester.pumpAndSettle();
+      await tester.tap(find.text('Doorgaan'));
+      await tester.pumpAndSettle();
       expect(container.read(formsEnabledProvider), isTrue);
     });
   });

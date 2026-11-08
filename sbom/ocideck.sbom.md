@@ -4,7 +4,7 @@
 
 This is **ocideck 0.7.7+49** (licence EUPL-1.2) and every third-party component it ships (228 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
 
-The JSON documents carry **806 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **807 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -180,7 +180,7 @@ The JSON documents carry **806 dependency relations** between these components: 
 | shared_preferences_foundation _(transitive)_ | 2.5.7 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_foundation@2.5.7` |
 | shared_preferences_linux _(transitive)_ | 2.4.1 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_linux@2.4.1` |
 | shared_preferences_platform_interface _(direct main)_ | 2.4.2 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_platform_interface@2.4.2` |
-| shared_preferences_web _(transitive)_ | 2.4.3 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_web@2.4.3` |
+| shared_preferences_web _(direct dev)_ | 2.4.3 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_web@2.4.3` |
 | shared_preferences_windows _(transitive)_ | 2.4.1 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_windows@2.4.1` |
 | sky_engine _(transitive)_ | 0.0.0 | MIT | flutter | Source: sdk. |
 | source_span _(transitive)_ | 1.10.2 | BSD-3-Clause | dart-lang | `pkg:pub/source_span@1.10.2` |

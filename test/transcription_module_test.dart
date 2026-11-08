@@ -135,6 +135,8 @@ void main() {
       find.descendant(of: moduleSwitch, matching: find.byType(Switch)),
     );
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Doorgaan'));
+    await tester.pumpAndSettle();
     expect(tester.widget<SwitchListTile>(moduleSwitch).value, isTrue);
   });
 }

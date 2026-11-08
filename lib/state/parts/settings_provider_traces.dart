@@ -192,7 +192,7 @@ extension SettingsTraces on SettingsNotifier {
     await _diskTraces.clearLogs();
     await RecoveryService().clearAll();
 
-    await _persist('resetToInitialState', (prefs) => prefs.clear());
+    await _persist('resetToInitialState', clearSettingsPreservingBrowserDecks);
     _persistedLogoPaths = const {};
     currentState = const AppSettings();
     return true;

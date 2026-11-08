@@ -802,6 +802,42 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Custom: check the main scan and export behavior below.',
+  'Als bestand downloaden': 'Download as a file',
+  'Bescherming tegen gegevenslekken (DLP)': 'Data loss prevention (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Saved in browser. Reopen via Settings → Storage.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'When used, personal data and business information may reach the selected service or recipients and remain stored there. Check access and retention periods. Enabling sends nothing yet.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Warn about unresolved findings; you can still choose to continue.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Delete browser copy? Save a file first if needed.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Browser storage is unencrypted and accessible to other users of this profile and scripts on this website. Clearing site data, private mode or running out of space can erase your work. Saving to local disk is safer: you control access and backups yourself.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Browser storage failed. Download your presentation as a file.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'The privacy scan is off; the export policy then offers no protection.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'An excluded domain also hides colleagues’ data. Choose exceptions carefully.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'No guarantee: exceptions and disabled rules still apply.',
+  'In browser bewaarde presentaties': 'Presentations saved in browser',
+  'In browser bewaren': 'Save in browser',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Choose export behavior. Countries, image scanning and exceptions are preserved.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Last 200 events: shown = displayed, accepted = agreed, declined = refused.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'No browser copies yet. When saving, choose Save in browser.',
+  'Toestemmingslogboek': 'Consent log',
+  'Uitbreiding inschakelen?': 'Enable extension?',
+  'Waar wilt u de presentatie bewaren?':
+      'Where would you like to save the presentation?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Certain findings block export until you resolve them.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Marker is detached from its table — only blank lines between them.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

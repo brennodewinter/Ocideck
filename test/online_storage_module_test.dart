@@ -213,6 +213,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(schakelaar);
       await tester.pumpAndSettle();
+      await tester.tap(find.text('Doorgaan'));
+      await tester.pumpAndSettle();
 
       // Naar Opslag: de online soorten zijn er nu wél — zonder Opslaan, want
       // een module aanzetten is een handeling op zichzelf (zelfde gedrag als

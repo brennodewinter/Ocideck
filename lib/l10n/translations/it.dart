@@ -641,6 +641,43 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Personalizzato: controlli sotto la scansione principale e il comportamento di esportazione.',
+  'Als bestand downloaden': 'Scarica come file',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Protezione dalle fughe di dati (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Salvato nel browser. Riapra da Impostazioni → Archiviazione.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Durante l’uso, dati personali e informazioni aziendali possono raggiungere il servizio o i destinatari scelti e restarvi conservati. Controlli gli accessi e i tempi di conservazione. L’attivazione da sola non invia nulla.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Avvisa dei risultati non gestiti; è possibile scegliere di continuare.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Eliminare la copia nel browser? Salvi prima un file se necessario.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'L’archiviazione del browser non è cifrata ed è accessibile ad altri utenti di questo profilo e agli script di questo sito. Cancellare i dati del sito, la modalità privata o lo spazio insufficiente possono eliminare il lavoro. Salvare sul disco locale è più sicuro: controlla personalmente gli accessi e le copie di sicurezza.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Archiviazione nel browser non riuscita. Scarichi la presentazione come file.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Il controllo della privacy è disattivato; il criterio di esportazione non protegge.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Un dominio escluso nasconde anche i dati dei colleghi. Scelga le eccezioni con cura.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Nessuna garanzia: eccezioni e regole disattivate restano valide.',
+  'In browser bewaarde presentaties': 'Presentazioni salvate nel browser',
+  'In browser bewaren': 'Salva nel browser',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Scelga il comportamento di esportazione. Paesi, controllo delle immagini ed eccezioni restano invariati.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Ultimi 200 eventi: shown = mostrato, accepted = accettato, declined = rifiutato.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Nessuna copia nel browser. Al salvataggio scelga Salva nel browser.',
+  'Toestemmingslogboek': 'Registro dei consensi',
+  'Uitbreiding inschakelen?': 'Attivare l’estensione?',
+  'Waar wilt u de presentatie bewaren?':
+      'Dove desidera salvare la presentazione?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'I risultati certi bloccano l’esportazione finché non vengono gestiti.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Il marcatore è staccato dalla sua tabella — solo righe vuote in mezzo.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

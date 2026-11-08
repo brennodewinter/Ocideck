@@ -1598,6 +1598,41 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Aapasst: Prüef unde d Hauptprüefig und s Exportverhalte.',
+  'Als bestand downloaden': 'Als Datei abelade',
+  'Bescherming tegen gegevenslekken (DLP)': 'Schutz vor Dateabfluss (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Im Browser gspeicheret. Wider öffne über Iistellige → Speicher.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Bi de Nutzig chönd Personedate und Gschäftsinformatione zum gwählte Dienscht oder zu de Empfänger cho und det gspeicheret bliibe. Prüef de Zuegriff und d Ufbewahrigsfrischte. S Iischalte allei verschickt no nüt.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Bi offne Fund warne; du chasch bewusst wiitermache.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Browserkopie lösche? Speicher wenn nötig zerscht e Datei.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'De Browserspeicher isch unverschlüsslet und für anderi Benutzer vo dem Profil und Skript uf dere Website zuegänglich. S Lösche vo Websitedate, de Privatmodus oder Platzmangel chönd dini Arbet lösche. Uf de lokale Platte speichere isch sicherer: Du kontrolliersch Zuegriff und Sicherigskopie sälber.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Speichere im Browser fehlgschlage. Lad dini Präsentation als Datei abe.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'D Dateschutzprüefig isch us; d Exportrichtlinie schützt denn nöd.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'E usgnoomni Domain versteckt au Date vo Kollege. Wähl Usnahme sorgfältig.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Kei Garantie: Usnahme und usgschalteti Regle gälte wiiter.',
+  'In browser bewaarde presentaties': 'Im Browser gspeichereti Präsentatione',
+  'In browser bewaren': 'Im Browser speichere',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Wähl s Exportverhalte. Länder, Bildprüefig und Usnahme bliibed erhalte.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Letschti 200 Ereignis: shown = zeigt, accepted = aagno, declined = abglehnt.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'No kei Browserkopie. Wähl bim Speichere Im Browser speichere.',
+  'Toestemmingslogboek': 'Iiwilligungsprotokoll',
+  'Uitbreiding inschakelen?': 'Erwiiterig iischalte?',
+  'Waar wilt u de presentatie bewaren?': 'Wo wetsch d Präsentation speichere?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Sicheri Fund blockiered de Export, bis du si bearbeitisch.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Markierig isch vo ire Tabelle glöst — nur Läärzile dezwoische.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

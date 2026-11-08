@@ -14,6 +14,7 @@ import '../../../state/ociserve_provider.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 
 /// Inschakelkaart voor één integratie uit [integrationRegistry].
 class IntegrationModuleCard extends ConsumerWidget {
@@ -34,7 +35,21 @@ class IntegrationModuleCard extends ConsumerWidget {
         children: [
           SwitchListTile(
             value: enabled,
-            onChanged: loading ? null : (v) => entry.setEnabled(ref, v),
+            onChanged: loading
+                ? null
+                : (v) async {
+                    if (v &&
+                        !await confirmDataImpact(
+                          context,
+                          id: 'integration.${entry.id.name}',
+                          title: integrationCardTitle(entry.id, l10n),
+                          warning:
+                              '${_subtitle(l10n)}\n\n${l10n.d(dataImpactWarning)}',
+                        )) {
+                      return;
+                    }
+                    if (context.mounted) await entry.setEnabled(ref, v);
+                  },
             title: Text(
               integrationCardTitle(entry.id, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

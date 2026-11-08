@@ -14,6 +14,7 @@ import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 
 class CollaborationModuleCard extends ConsumerWidget {
   const CollaborationModuleCard({super.key});
@@ -28,8 +29,11 @@ class CollaborationModuleCard extends ConsumerWidget {
         children: [
           SwitchListTile(
             value: enabled,
-            onChanged: (v) =>
-                ref.read(collaborationProvider.notifier).setEnabled(v),
+            onChanged: consentToggle(
+              context,
+              ModuleId.collaboration,
+              (v) => ref.read(collaborationProvider.notifier).setEnabled(v),
+            ),
             title: Text(
               moduleCardTitle(ModuleId.collaboration, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

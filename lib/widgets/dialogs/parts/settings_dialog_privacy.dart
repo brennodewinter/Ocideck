@@ -13,6 +13,8 @@ extension _SettingsPrivacy on _SettingsDialogState {
         const PrivacyStatementContent(),
         const SizedBox(height: 20),
         _sectionTitle(l10n.d('Toestemming')),
+        const DataImpactLogSection(),
+        const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(

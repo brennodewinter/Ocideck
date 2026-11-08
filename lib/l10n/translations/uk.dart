@@ -1611,6 +1611,41 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Власні налаштування: перевірте нижче основну перевірку та поведінку експорту.',
+  'Als bestand downloaden': 'Завантажити як файл',
+  'Bescherming tegen gegevenslekken (DLP)': 'Захист від витоку даних (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Збережено в браузері. Відкрийте через Налаштування → Сховище.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Під час використання персональні дані та ділова інформація можуть потрапити до вибраної служби чи одержувачів і зберігатися там. Перевірте доступ і строки зберігання. Саме ввімкнення нічого не надсилає.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Попереджати про неопрацьовані знахідки; можна свідомо продовжити.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Видалити копію з браузера? За потреби спочатку збережіть файл.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Сховище браузера не зашифроване й доступне іншим користувачам цього профілю та скриптам цього сайту. Очищення даних сайту, приватний режим або брак місця можуть видалити вашу роботу. Збереження на локальному диску безпечніше: ви самі контролюєте доступ і резервні копії.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Не вдалося зберегти в браузері. Завантажте презентацію як файл.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Перевірку приватності вимкнено; політика експорту тоді не захищає.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Виключений домен також приховує дані колег. Уважно вибирайте винятки.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Без гарантій: винятки та вимкнені правила залишаються чинними.',
+  'In browser bewaarde presentaties': 'Презентації, збережені в браузері',
+  'In browser bewaren': 'Зберегти в браузері',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Виберіть поведінку експорту. Країни, перевірка зображень і винятки зберігаються.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Останні 200 подій: shown = показано, accepted = прийнято, declined = відхилено.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Копій у браузері ще немає. Під час збереження виберіть Зберегти в браузері.',
+  'Toestemmingslogboek': 'Журнал згоди',
+  'Uitbreiding inschakelen?': 'Увімкнути розширення?',
+  'Waar wilt u de presentatie bewaren?': 'Де зберегти презентацію?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Достовірні знахідки блокують експорт, доки ви їх не опрацюєте.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Маркер відокремлений від своєї таблиці — між ними лише порожні рядки.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

@@ -200,6 +200,8 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(inschakelkaart);
         await tester.pumpAndSettle();
+        await tester.tap(find.text('Doorgaan'));
+        await tester.pumpAndSettle();
 
         await tester.ensureVisible(find.byTooltip('Integraties'));
         await tester.pumpAndSettle();

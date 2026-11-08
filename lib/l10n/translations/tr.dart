@@ -2500,6 +2500,43 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Özel: aşağıda ana denetimi ve dışa aktarma davranışını kontrol edin.',
+  'Als bestand downloaden': 'Dosya olarak indir',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Veri sızıntısına karşı koruma (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Tarayıcıya kaydedildi. Ayarlar → Depolama üzerinden yeniden açın.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Kullanım sırasında kişisel veriler ve iş bilgileri seçilen hizmete veya alıcılara ulaşabilir ve orada saklanabilir. Erişimi ve saklama sürelerini kontrol edin. Yalnızca etkinleştirmek henüz hiçbir şey göndermez.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Ele alınmamış bulgularda uyar; bilinçli olarak devam edebilirsiniz.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Tarayıcı kopyası silinsin mi? Gerekirse önce bir dosya kaydedin.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Tarayıcı depolaması şifrelenmez ve bu profilin diğer kullanıcıları ile bu sitedeki betikler tarafından erişilebilir. Site verilerinin silinmesi, özel mod veya alan yetersizliği çalışmanızı silebilir. Yerel diske kaydetmek daha güvenlidir: erişimi ve yedekleri kendiniz yönetirsiniz.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Tarayıcı depolaması başarısız. Sununuzu dosya olarak indirin.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Gizlilik denetimi kapalı; dışa aktarma ilkesi bu durumda koruma sağlamaz.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'İstisna tutulan bir alan adı iş arkadaşlarının verilerini de gizler. İstisnaları dikkatle seçin.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Garanti yok: istisnalar ve devre dışı kurallar geçerliliğini korur.',
+  'In browser bewaarde presentaties': 'Tarayıcıya kaydedilen sunular',
+  'In browser bewaren': 'Tarayıcıya kaydet',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Dışa aktarma davranışını seçin. Ülkeler, görüntü denetimi ve istisnalar korunur.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Son 200 olay: shown = gösterildi, accepted = kabul edildi, declined = reddedildi.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Henüz tarayıcı kopyası yok. Kaydederken Tarayıcıya kaydet seçeneğini seçin.',
+  'Toestemmingslogboek': 'Onay günlüğü',
+  'Uitbreiding inschakelen?': 'Uzantı etkinleştirilsin mi?',
+  'Waar wilt u de presentatie bewaren?':
+      'Sunuyu nereye kaydetmek istiyorsunuz?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Kesin bulgular, siz ele alana kadar dışa aktarmayı engeller.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'İşaretçi tablosundan ayrılmış — aralarında yalnızca boş satırlar var.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

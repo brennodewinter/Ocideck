@@ -8,6 +8,19 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Added
+
+- **Bewuste uitbreidingen.** Uitbreidingen met gevolgen voor gegevens vragen
+  vóór het inschakelen om toestemming. Getoonde waarschuwingen, acceptatie en
+  weigering staan in het toepassingslog en een lokaal toestemmingslogboek.
+- **Optionele browseropslag.** Bij opslaan in de webversie kunt u bewust een
+  browserkopie met media bewaren. De waarschuwing legt inzage en verlies uit
+  en beveelt de lokale schijf aan. Heropenen en verwijderen kan via Opslag.
+- **Eenvoudiger DLP instellen.** Kies direct tussen waarschuwen vóór export en
+  export blokkeren. Het actieve gedrag, een uitgezette controle en gevolgen
+  van uitzonderingen zijn zichtbaar; landen en eigen uitzonderingen blijven
+  behouden.
+
 ## [0.7.7] — 2026-11-05
 
 ### Fixed

@@ -7,6 +7,7 @@ import '../../../state/transcription_provider.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 import 'transcription_models_section.dart';
 import 'transcription_server_section.dart';
 import 'transcription_status_section.dart';
@@ -37,7 +38,11 @@ class TranscriptionModuleCard extends ConsumerWidget {
             value: state.enabled,
             onChanged: state.loading
                 ? null
-                : ref.read(transcriptionModuleProvider.notifier).setEnabled,
+                : consentToggle(
+                    context,
+                    ModuleId.transcription,
+                    ref.read(transcriptionModuleProvider.notifier).setEnabled,
+                  ),
             title: Text(
               moduleCardTitle(ModuleId.transcription, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

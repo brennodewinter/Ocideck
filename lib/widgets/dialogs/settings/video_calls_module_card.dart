@@ -10,6 +10,7 @@ import '../meeting_preflight_dialog.dart';
 import '../xmpp_test_connection_dialog.dart';
 import 'media_preflight_tile.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 
 /// The Uitbreidingen-tab card for the optional video-calls module
 /// (`docs/design/NATIVE_CALLS.md` §7). Same toggle shape as the other module
@@ -31,7 +32,11 @@ class VideoCallsModuleCard extends ConsumerWidget {
             value: state.enabled,
             onChanged: state.loading
                 ? null
-                : ref.read(videoCallsModuleProvider.notifier).setEnabled,
+                : consentToggle(
+                    context,
+                    ModuleId.videoCalls,
+                    ref.read(videoCallsModuleProvider.notifier).setEnabled,
+                  ),
             title: Text(
               moduleCardTitle(ModuleId.videoCalls, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

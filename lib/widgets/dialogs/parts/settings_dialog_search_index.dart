@@ -293,12 +293,41 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['tlp', 'classificatie', 'watermerk', 'merk'],
   ),
 
+  if (kIsWeb)
+    SettingsSearchEntry(
+      tab: SettingsSection.storage,
+      label: 'In browser bewaarde presentaties',
+      section: 'In browser bewaarde presentaties',
+      keywords: ['browser', 'opslag', 'storage', 'download'],
+    ),
+  SettingsSearchEntry(
+    tab: SettingsSection.privacy,
+    label: 'Toestemmingslogboek',
+    section: 'Toestemming',
+    keywords: ['toestemming', 'waarschuwing', 'logboek', 'uitbreidingen'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.security,
+    label: 'Bescherming tegen gegevenslekken (DLP)',
+    section: 'Bescherming tegen gegevenslekken (DLP)',
+    keywords: ['dlp', 'profiel', 'gegevenslekken', 'blokkeren'],
+  ),
   // ── Beveiliging ───────────────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.security,
     label: 'Waarschuw bij mogelijke persoonsgegevens',
     section: 'Privacycontrole',
-    keywords: ['privacy', 'persoonsgegevens', 'bsn', 'avg', 'scanner'],
+    keywords: [
+      'privacy',
+      'persoonsgegevens',
+      'bsn',
+      'avg',
+      'scanner',
+      'dlp',
+      'gegevenslekken',
+      'export',
+      'blokkeren',
+    ],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.security,
