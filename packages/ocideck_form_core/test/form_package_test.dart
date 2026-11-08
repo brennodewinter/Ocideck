@@ -637,8 +637,13 @@ void main() {
           ),
         ]);
         final watch = Stopwatch()..start();
-        expect(refusal(zip), [FormPackageIssue.corruptEntry]);
-        // It stopped at the claim instead of producing 60 MB.
+        final result = readFormPackage(zip) as FormPackageRefused;
+        expect(result.problems.single.issue, FormPackageIssue.corruptEntry);
+        // It stopped at the claim instead of producing 60 MB. Inflate writes
+        // a run of zeros almost entirely as back references, so a cap that
+        // only watches literal bytes inflated it all and refused it afterwards
+        // on its size: refused, but only after the memory was spent.
+        expect(result.problems.single.detail, 'inflates past its size');
         expect(watch.elapsedMilliseconds, lessThan(5000));
       },
     );

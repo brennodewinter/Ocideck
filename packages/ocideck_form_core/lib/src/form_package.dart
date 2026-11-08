@@ -710,6 +710,14 @@ class _CappedOutput extends OutputMemoryStream {
     _room(stream.length);
     super.writeStream(stream);
   }
+
+  // Inflate copies every repeat through here, not through writeBytes: without
+  // it the cap held for literal bytes only, and a run of zeros grew past it.
+  @override
+  void writeBackReference(int distance, int count) {
+    _room(count);
+    super.writeBackReference(distance, count);
+  }
 }
 
 // ── the manifest, strictly ──────────────────────────────────────────────────
