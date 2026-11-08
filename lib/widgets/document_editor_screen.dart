@@ -622,44 +622,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ),
     zoom: settings.documentEditorZoom,
     onZoomChanged: (zoom) => _setDocumentZoom(ref, zoom),
-    onFitWidth: switch (_fitWidthZoom(ref)) {
-      final fit? => () => _setDocumentZoom(ref, fit),
-      null => null,
-    },
+    onFitWidth: _fitWidthAction(context, ref, _viewMode, _outlineCollapsed),
   );
-
-  /// De zoom waarmee de huidige weergave het scherm in de breedte vult, of
-  /// `null` als er niets te vergroten valt — "hele vensterbreedte" vult al,
-  /// het vel is al breder dan het scherm, of de stand (bron, invullen) heeft
-  /// geen tekstkolom met een vaste maat om op te schalen.
-  ///
-  /// De marge van 24 px houdt de schuifbalk en een beetje ademruimte mee:
-  /// liever nét onder de rand dan een horizontale scrollbalk erdoor.
-  double? _fitWidthZoom(WidgetRef ref) {
-    final settings = ref.watch(settingsProvider);
-    final screenW = MediaQuery.of(context).size.width;
-    // De Overzicht-rail (216 uitgeklapt / 40 ingeklapt + 1 px scheiding)
-    // komt alleen bij 940 px of meer, en alleen in de visuele stand.
-    final rail = _viewMode == _DocViewMode.visual && screenW >= 940
-        ? (_outlineCollapsed ? 40 : 216) + 1
-        : 0.0;
-    final base = switch (_viewMode) {
-      // Pagina's: het héle vel vult de breedte, marges meegerekend.
-      _DocViewMode.pages =>
-        effectiveDocumentPageSetup(
-              settings,
-              _pageSetupSource(ref),
-            ).size!.dimensions.$1 *
-            kPxPerMm,
-      _DocViewMode.visual => switch (settings.documentEditorWidth) {
-        DocumentEditorWidth.page => _documentPageTextWidthPx(ref),
-        DocumentEditorWidth.column => settings.documentEditorMaxWidth,
-        DocumentEditorWidth.full => null,
-      },
-      _ => null,
-    };
-    return documentFitWidthZoom(availablePx: screenW - rail - 24, basePx: base);
-  }
 }
 
 /// Bouwt de exportbundel voor het gekozen [profile], laat een pad kiezen met
@@ -1029,3 +993,58 @@ TlpLevel _documentTlp(WidgetRef ref) => ref.watch(
 /// de pagina-einden erin. Een eigen tekenaar voor pagina's zou precies de
 /// afwijking opleveren die §2.1 verbiedt.
 enum _DocViewMode { visual, source, pages, fill }
+
+/// De zoom waarmee de huidige weergave het scherm in de breedte vult, of
+/// `null` als er niets te vergroten valt — "hele vensterbreedte" vult al,
+/// het vel is al breder dan het scherm, of de stand (bron, invullen) heeft
+/// geen tekstkolom met een vaste maat om op te schalen.
+///
+/// De marge van 24 px houdt de schuifbalk en een beetje ademruimte mee:
+/// liever nét onder de rand dan een horizontale scrollbalk erdoor.
+double? _fitWidthZoom(
+  WidgetRef ref, {
+  required BuildContext context,
+  required _DocViewMode viewMode,
+  required bool outlineCollapsed,
+}) {
+  final settings = ref.watch(settingsProvider);
+  final screenW = MediaQuery.of(context).size.width;
+  // De Overzicht-rail (216 uitgeklapt / 40 ingeklapt + 1 px scheiding)
+  // komt alleen bij 940 px of meer, en alleen in de visuele stand.
+  final rail = viewMode == _DocViewMode.visual && screenW >= 940
+      ? (outlineCollapsed ? 40 : 216) + 1
+      : 0.0;
+  final base = switch (viewMode) {
+    // Pagina's: het héle vel vult de breedte, marges meegerekend.
+    _DocViewMode.pages =>
+      effectiveDocumentPageSetup(
+            settings,
+            _pageSetupSource(ref),
+          ).size!.dimensions.$1 *
+          kPxPerMm,
+    _DocViewMode.visual => switch (settings.documentEditorWidth) {
+      DocumentEditorWidth.page => _documentPageTextWidthPx(ref),
+      DocumentEditorWidth.column => settings.documentEditorMaxWidth,
+      DocumentEditorWidth.full => null,
+    },
+    _ => null,
+  };
+  return documentFitWidthZoom(availablePx: screenW - rail - 24, basePx: base);
+}
+
+/// De actie achter de fit-knop, of `null` als er niets te vergroten valt —
+/// bij `null` staat de knop er niet.
+VoidCallback? _fitWidthAction(
+  BuildContext context,
+  WidgetRef ref,
+  _DocViewMode viewMode,
+  bool outlineCollapsed,
+) {
+  final fit = _fitWidthZoom(
+    ref,
+    context: context,
+    viewMode: viewMode,
+    outlineCollapsed: outlineCollapsed,
+  );
+  return fit == null ? null : () => _setDocumentZoom(ref, fit);
+}
