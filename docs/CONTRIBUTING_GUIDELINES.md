@@ -1,12 +1,12 @@
 # OciDeck — Contributing Guidelines
 
-> **Status:** procedure, current — the process half of contributing · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current — the process half of contributing · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 Welcome to the OciDeck project! We appreciate your interest in contributing. This document outlines how to contribute effectively to the project.
 
 > **There are two contributing documents, and this is the process one.** This
-> file covers issue reporting, review, branch naming, the (absent) release
-> process and the Code of Conduct, and ships inside the app as a readable
+> file covers issue reporting, review, branch naming, the release
+> process and the Code of Conduct. It is a repository-only developer
 > document. Its companion, [`../CONTRIBUTING.md`](../CONTRIBUTING.md) in the
 > repository root, covers the commands: the quality gate, each `make` target,
 > and the localisation tooling. It is not bundled with the app. Neither replaces
@@ -19,7 +19,7 @@ Welcome to the OciDeck project! We appreciate your interest in contributing. Thi
 
 Before creating a new issue, please:
 1. Search existing issues to avoid duplicates
-2. Check whether you are on the latest `main` — there are no released versions
+2. Check the release feed or, for a source build, whether `main` contains the fix
 3. Include detailed information about your environment and steps to reproduce
 
 When reporting bugs or requesting features:
@@ -27,13 +27,13 @@ When reporting bugs or requesting features:
 - Provide detailed descriptions with examples when possible
 - Include screenshots or screen recordings where relevant
 - Specify your operating system, your Flutter/Dart versions, and the commit hash
-  you are on (the app has no version number to read off)
+  you are on; include the app version from Settings → About OciDeck
 
 ### Pull Request Process
 
 1. Fork the repository and create a feature branch
 2. Make your changes following project conventions
-3. Run `make check` to ensure all tests pass
+3. Run `make check-full` before merging; see [CHECKS.md](CHECKS.md) for the gates
 4. Add or update documentation as needed
 5. Create a descriptive pull request with:
    - Clear title and description
@@ -44,7 +44,7 @@ When reporting bugs or requesting features:
 
 Our codebase follows strict conventions:
 - Dart formatting: `dart format` (enforced by `make format-check`, which runs
-  locally and, since #751, in CI on every pull request as part of `make check`)
+  as part of `make check`; the complete pre-merge gate is `make check-full`)
 - No raw `print()` statements, use logging instead  
 - Strict type checking with `strict-casts`, `strict-raw-types`, `strict-inference`
 - Layering rules: models don't import UI layers
@@ -54,8 +54,8 @@ Our codebase follows strict conventions:
 
 All code changes should include:
 - Unit tests for new functionality
-- Widget tests where behaviour is visible in the UI (there is no
-  `integration_test/` suite)
+- Widget tests where behaviour is visible in the UI; use `integration_test/`
+  for device and real-platform journeys where appropriate
 - Coverage maintained at or above the enforced floor (80% line coverage, checked by `make coverage`)
 - Test the specific behavior being changed
 
@@ -65,7 +65,7 @@ All code changes should include:
 
 - **Flutter 3.47.7** (stable), with its bundled Dart 3.13.5 — see
   [BUILD.md](BUILD.md), which is the authority on the toolchain pin and on why
-  `make format-check` needs the exact version while building does not
+  both checks and builds enforce the exact version
 - macOS, Windows, or Linux desktop toolchain for your target platform  
 - For web development: `make build-web` is available with hardened CSP
 
@@ -113,7 +113,8 @@ Reviewers look for:
 ## Branch Naming Conventions
 
 Use descriptive branch names with one of the prefixes this repository actually
-uses, measured over the last 200 merges to `main`:
+uses. The counts below are a historical sample of 200 merges measured on
+2026-07-22, not a live branch policy; `codex/` is also used for agent work:
 
 | Prefix | Used for | Merges |
 | --- | --- | --- |
@@ -164,16 +165,17 @@ not tell whether a proposal gets an answer or disappears.)*
 
 ## Release Process
 
-**Nothing has been released yet** — `git tag` carries no version and the version
-sits at `0.1.0+1`. Changes are merged to `main` through pull requests, and until
-a tag exists you run what you build.
+Releases are tagged `v*` and published on the project forge. The source version
+is in `pubspec.yaml`; the installed version appears in About OciDeck. Do not
+infer the latest downloadable release from a source version alone.
 
-The machinery for the first one is in place, though: pushing a `v*` tag runs
-`.forgejo/workflows/release.yml`, which builds the web, macOS and Linux
-artifacts on the forge, collects the Windows build from the GitHub mirror,
-publishes them as a Forgejo release with the SBOM and `SHA256SUMS`, and puts the
-web bundle live. The full sequence — including what to check before tagging —
-is [BUILD.md § Cutting a release](BUILD.md#cutting-a-release).
+Follow [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md) for independent release
+channels, stopping/resuming publication and evidence, and
+[BUILD.md § Cutting a release](BUILD.md#cutting-a-release) for preparation.
+Artifacts include the SBOM and signed checksum list; platform signing differs.
+
+*(Corrected 2026-11-08: the no-release/no-version claims, absent integration
+suite and bundled-document claim described an earlier state.)*
 
 Versioning follows [Semantic Versioning](https://semver.org/); what a version
 change means for existing decks belongs in

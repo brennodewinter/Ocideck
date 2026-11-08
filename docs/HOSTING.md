@@ -1,6 +1,6 @@
 # OciDeck — Hosting & Deployment Guide
 
-> **Status:** procedure, current — for whoever serves the web build · **Status last reviewed:** 2026-09-24 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current — for whoever serves the web build · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 How to build and serve the OciDeck **web** build safely. The desktop apps are
 built as native binaries and need no hosting; this guide is about the web
@@ -11,9 +11,12 @@ see [SECURITY_DESIGN.md](SECURITY_DESIGN.md).
 
 OciDeck's web build is a **static, self-contained** bundle. There is no
 application server, database, or API to run — you serve a directory of files from
-any static host. The app processes everything in the browser tab; user content
-never touches your server (the one exception is the optional fetch-proxy, below,
-which only forwards bytes and stores nothing).
+any static host. The core editor processes content in the browser tab without an editing backend.
+The optional fetch-proxy below forwards bytes without storing them. Explicit
+integrations, external media and release/reference lookups have their own
+network paths; see [PRIVACY.md](PRIVACY.md). Browser copies are stored on the
+client, accessible to scripts served by your origin, not uploaded to a storage
+backend. *(Clarified 2026-11-08.)*
 
 ## 1. Build the bundle
 
@@ -337,12 +340,12 @@ services named below.
 
 | Feature | Web | Why |
 |---|---|---|
-| Local project folders, sidecar files | ✗ | No filesystem. Open/save go through the browser; decks live in tab memory. |
+| Local project folders, sidecar files | ✗ | No native project filesystem. Decks start in tab memory; Save also offers an explicit browser package copy. |
 | WebDAV / Nextcloud as a deck source | ✗ | The client is `dart:io` with its own SSRF pinning, and from a browser it would need CORS agreed with the server admin. |
 | S3 buckets as a deck source | ✗ | The client is `dart:io` with hand-rolled SigV4 and its own SSRF pinning; a browser has neither, and would need CORS agreed on the bucket. |
 | Git as a deck source | ✓ | Over the REST transport (`git_transport_web.dart`), under the same security gate as URL import (§4). The native `git` subprocess is unavailable on web, so there is no local clone or offline merge — commits go straight to the forge — but open and save both work. |
 | Second-screen presenter view | ✗ | Needs native windowing. |
-| Crash recovery / autosave snapshots | ✗ | No app-support directory, so every snapshot call is a no-op and the autosave timer is not even started. **Nothing is recovered after a browser crash.** It is no longer silent, though: the app says so once at the user's first edit, and a `beforeunload` guard makes the browser ask before a tab with unsaved work closes. That guard is the only lever a browser offers here, and its wording belongs to the browser. |
+| Crash recovery / autosave snapshots | ✗ | No app-support directory, so every snapshot call is a no-op and the autosave timer is not even started. **Unsaved changes are not recovered after a browser crash.** A deliberately saved browser copy can be reopened from Settings → Storage; it is not a recovery snapshot. It is no longer silent, though: the app says so once at the user's first edit, and a `beforeunload` guard makes the browser ask before a tab with unsaved work closes. That guard is the only lever a browser offers here, and its wording belongs to the browser. |
 | Face detection in slide images | ✗ | The detector is a native library over FFI. See below — this one has a privacy consequence. |
 | Local CVE database (offline lookup) | ✗ | Needs a multi-gigabyte on-disk index. The online CVE lookup is also desktop-only — it runs through an SSRF-pinned `dart:io` request the browser can't make; the in-app button says so. |
 | Image caption sidecars | ✗ | Sidecars are files next to the image; there are none. |
@@ -355,6 +358,24 @@ services named below.
 Also: the web build is more memory-constrained than desktop, and very large
 media can destabilise a tab.
 
+### Browser copies and consent metadata
+
+Save can keep an explicit `.ocideck` package copy in the browser profile after
+confirmation. It includes embedded media, is unencrypted, and shares a 5 MiB
+encoded-copy limit. Other profile users and same-origin scripts can read it;
+clearing site data or browser eviction can remove it. This is not automatic
+crash recovery. Settings → Storage reopens or deletes copies; resetting settings
+preserves presentations but clears the separate consent journal.
+
+The journal retains the latest 200 shown/accepted/declined warning events with
+fixed identifiers, notice version and UTC time, without presentation contents or
+server/account details. It is inspectable under Privacy and classification.
+Deploying the app on another origin does not move copies or consent history to
+that origin. Tell users to export a local backup before changing hosts or
+clearing site data. See [PRIVACY.md](PRIVACY.md#extension-consent-and-browser-copies).
+
+*(Corrected 2026-11-08: absence of native filesystem access no longer means that
+all presentations are limited to tab memory.)*
 ### The one to say out loud: face detection
 
 The privacy check has two halves — it scans text, and it looks at images for

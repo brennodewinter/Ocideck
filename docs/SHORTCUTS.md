@@ -1,8 +1,12 @@
 # OciDeck — Keyboard shortcuts
 
-> **Status:** reference, current · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
+> **Status:** reference, current · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 `Ctrl` is shown for Windows/Linux; use `Cmd` (⌘) on macOS.
+
+On the web, saving a presentation opens a choice between a download and a
+browser copy. The browser copy requires confirmation of its risks; saving to
+local disk is safer. This does not enable automatic saving. *(Updated 2026-11-08.)*
 
 ## Editor (app-wide)
 

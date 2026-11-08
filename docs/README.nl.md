@@ -4,10 +4,10 @@
 
 # OciDeck — Documentation
 
-> **Status:** index van deze map, actueel · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** index van deze map, actueel · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 OciDeck is een privacy-eerst Marp-presentatiebouwer voor desktop en web, zonder
-applicatie-backend — alles draait lokaal. Deze map bevat de projectdocumentatie.
+verplichte bewerkingsbackend. Optionele integraties benaderen gekozen diensten. Deze map bevat de projectdocumentatie.
 Begin hier en spring naar wat je nodig hebt.
 
 > **Status:** alpha — releases worden getagd; de releases-feed op de forge
@@ -44,6 +44,7 @@ Begin hier en spring naar wat je nodig hebt.
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Systeemarchitectuur en gelaagdheid. |
 | [SOURCE_MAP.md](SOURCE_MAP.md) | Waar dingen leven in `lib/`. |
 | [API_DOCUMENTATION.md](API_DOCUMENTATION.md) | Belangrijke interne API's, modellen, services en providers. |
+| [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md) | Releasekanalen afzonderlijk bedienen, stoppen en hervatten; publicatiebewijs. |
 | [BUILD.md](BUILD.md) | Bouwdoelen en de versiepin. |
 | [CHECKS.md](CHECKS.md) | De kwaliteitspoorten (`make check`) en wat elke afdwingt. |
 | [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) | Afgedwongen grenzen, gemeten omvang en optimalisatietips. |
@@ -79,20 +80,39 @@ lezer is teruggebracht tot de gebruikers-, licentie/compliance- en gebruiksrelev
 documenten, worden de ontwerpnotities — en de ontwikkelaar-interne documenten — niet langer meegebundeld;
 ze leven in de repository. Zie [Hoe deze documenten worden onderhouden](#hoe-deze-documenten-worden-onderhouden).)*
 
-| Document | Wat het is |
+| Document | Wat het beschrijft |
 |---|---|
-| [COLLABORATION.md](design/COLLABORATION.md) | Ontwerpvoorstel, ongebouwd: realtime samenwerking, presenteren, gesprekken en een register van provider-adapters dat grote, kleinere en zelf-gehoste vergadersystemen omspant. |
-| [SELF_ENCRYPTED_RELAY.md](design/SELF_ENCRYPTED_RELAY.md) | Ontwerpvoorstel, ongebouwd: de gekozen pure-Dart-route voor realtime samenwerking (COLLABORATION Fase 1) — de homeserver als versleutelde relay met OciDecks eigen minimale E2EE, geen AGPL, geen Rust, EUPL-1.2 intact. Vervangt het Matrix-SDK-mechanisme in COLLABORATION §6/§9. |
-| [TEAMS_GUEST_CLIENT.md](design/TEAMS_GUEST_CLIENT.md) | Ontwerpvoorstel, ongebouwd: deelnemen aan ondersteunde Teams-werk/school-vergaderingen via een OciDeck-web/PWA-gastclient zonder een Microsoft-account. |
-| [GIT_STORAGE.md](design/GIT_STORAGE.md) | Ontwerp van het git-opslagvlak; fasen 0–6 zijn geland, wat rest is verificatie. |
-| [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | Het oorspronkelijke ontwerp voor de MIAUW-pentestmodule, die wordt meegeleverd. Delen worden door de code tegengesproken. |
-| [AI_ASSIST.md](design/AI_ASSIST.md) | Het optionele AI-assistentieontwerp; fasen 0–3 zijn gebouwd, fase 4 (MCP) niet — OciDeck spreekt geen MCP, en MCP is niet de manier om een model aan te haken. Om er een aan te haken: *AI-assistentie (optioneel)* in [USER_GUIDE.nl.md](USER_GUIDE.nl.md#ai-assistentie-optioneel). |
-| [OCIWACHT.md](design/OCIWACHT.md) | Het ontwerp van de privacyscanner, **in het Nederlands**, met bovenaan een tabel per sectie van geleverd/open. Met 2.668 regels is het het grootste van de drie Nederlandse documenten. |
-| [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historisch: het agentische bouwplan voor het pentest/AI-werk. Uitgevoerd; bewaard als uitgewerkt voorbeeld, niet als wachtrij. |
-| [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Gebouwd (fasen 0–10, met de eerlijkheidsnotities in het document): een Lean Six Sigma-auteursmodule. Ondanks de naam is het een productontwerp, geen rapport over ons proces. |
-| [VERIFICATION.md](design/VERIFICATION.md) | Een werklijst, in het Nederlands: wat is gebouwd en zijn eigen tests doorstaat maar nooit een echte server, een tweede besturingssysteem of een echt rapport heeft ontmoet. |
-| [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | Een licentiedossier, in het Nederlands: drie lexiconbronnen die de privacycontrole zouden verrijken, en waarom geen ervan al kan worden meegebundeld. |
-| [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Ontwerpvoorstel, ongebouwd: versleutelde rapportdistributie naar een ontvanger met minimale wrijving — dubbelklikken en bekijken. De distributiekant van de OpenKAT-integratie. |
+| [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historisch uitgevoerd bouwplan voor pentest- en AI-werk. |
+| [AI_ASSIST.md](design/AI_ASSIST.md) | AI-ontwerp: fasen 0–3 gebouwd; MCP-fase 4 niet gebouwd. |
+| [COCKPIT_LAYOUT.md](design/COCKPIT_LAYOUT.md) | Geïmplementeerde ontwerprationale voor meters, uitlezingen en labels. |
+| [COLLABORATION.md](design/COLLABORATION.md) | Deels gebouwd: samenwerkingskern en WebDAV-transport; dit transport is niet eind-tot-eind versleuteld. Versleutelde relay en andere adapters blijven ontwerp. |
+| [DOCUMENT_MODE.md](design/DOCUMENT_MODE.md) | Ontwerp en implementatierecord van documentmodus; actuele werking staat in de gebruikersgids. |
+| [ELEARNING_MODEL.md](design/ELEARNING_MODEL.md) | eLearning-domeinmodel en OciServe-contract; ontwerpen en serverintegratie zijn afzonderlijk. |
+| [FORM_INTAKE.md](design/FORM_INTAKE.md) | Deels gebouwd: fasen 1–3, de bestands- en age-route. Managed Intake heeft een afzonderlijk providercontract; de eerdere blinde server is teruggedraaid. |
+| [FORM_INTAKE_REVIEW.md](design/FORM_INTAKE_REVIEW.md) | Dossier voor externe cryptografische review; geen verklaring dat die review al is afgerond. |
+| [GANTT_SLIDETYPE.md](design/GANTT_SLIDETYPE.md) | Geïmplementeerd Gantt-diatype met een Markdown-tabel en gegenereerde Mermaid. |
+| [GIT_STORAGE.md](design/GIT_STORAGE.md) | Git-opslagontwerp: fasen 0–6 gebouwd, met resterende verificatie. |
+| [IMAGE_CALLOUTS.md](design/IMAGE_CALLOUTS.md) | Geïmplementeerde afbeeldingsaanwijzingen; formaatcontract en gedeelde geometrie. |
+| [IMAGE_ROTATION.md](design/IMAGE_ROTATION.md) | Gebouwde kopieer-bij-roteren aanpak die het oorspronkelijke bestand behoudt. |
+| [ISO_MANAGEMENTSYSTEEM.md](design/ISO_MANAGEMENTSYSTEEM.md) | Gebouwde blokken A–C voor ISO 27001/9001/42001-voortgang. |
+| [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | Licentiedossier van lexiconbronnen; geen toestemming om ze te bundelen. |
+| [LINUX_PACKAGING.md](design/LINUX_PACKAGING.md) | Gebouwde fase 1: AppImage-, deb- en rpm-installatieroutes. |
+| [NATIVE_CALLS.md](design/NATIVE_CALLS.md) | Deels gebouwd: tweepersoonsgesprekken bewezen op macOS en web; Windows en Linux niet getest. |
+| [OCIWACHT.md](design/OCIWACHT.md) | Privacyscannerontwerp met tabel van geleverd en open werk. |
+| [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Nog niet gebouwd ontwerp voor versleutelde rapportdistributie. |
+| [OPENKAT_LIVE_UX.md](design/OPENKAT_LIVE_UX.md) | Ontwerpbijlage over de gebruikerskant van de live OpenKAT-integratie. |
+| [OPENKAT_ROCKY_REPORT_API.md](design/OPENKAT_ROCKY_REPORT_API.md) | Onderzoek en ontwerpcontract voor Rocky-rapporten via API en JSON-export. |
+| [OPENKAT_ROCKY_REPORT_API.nl.md](design/OPENKAT_ROCKY_REPORT_API.nl.md) | Nederlandse versie van het Rocky-API-onderzoek en ontwerpcontract. |
+| [PENTEST_DOCUMENT.md](design/PENTEST_DOCUMENT.md) | Nog niet gebouwd ontwerp voor pentestrapporten als document en afgeleide presentaties. |
+| [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | Oorspronkelijk ontwerp van de geleverde MIAUW-module; deels door code achterhaald. |
+| [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Geïmplementeerde Lean Six Sigma-module, met beperkingen per fase. |
+| [PROVENANCE_SIGNATURE.md](design/PROVENANCE_SIGNATURE.md) | Deels gebouwd: formaat, cryptografie en service; de ondertekeningsinterface is nog niet gebouwd. |
+| [RISK_FORMAT.md](design/RISK_FORMAT.md) | Formaatcontract en ontwerprationale voor risicoregisters. |
+| [SELF_ENCRYPTED_RELAY.md](design/SELF_ENCRYPTED_RELAY.md) | Nog niet gebouwde eind-tot-eind versleutelde relay; huidige WebDAV-samenwerking heeft deze bescherming niet. |
+| [TEAMS_GUEST_CLIENT.md](design/TEAMS_GUEST_CLIENT.md) | Nog niet gebouwd ontwerp voor een Teams-gastclient. |
+| [TRANSCRIPTION.md](design/TRANSCRIPTION.md) | Ontwerpcontract met geleverde implementatie; actuele inrichting en bewijsgrenzen staan in TRANSCRIPTION_SETUP.md. |
+| [VERIFICATION.md](design/VERIFICATION.md) | Werklijst van gebouwd gedrag waarvoor praktijkverificatie nog ontbreekt. |
+| [XMPP_COLLAB_TRANSPORT.md](design/XMPP_COLLAB_TRANSPORT.md) | Nog niet gebouwd XMPP-datatransport voor samenwerking; afzonderlijk van gesprekken. |
 
 *(Gecorrigeerd 2026-07-22: deze lijst noemde zeven van de toen negen documenten in
 `design/`; `VERIFICATION.md` en `LEXICON_LICENTIENAVRAAG.md` ontbraken terwijl
@@ -112,6 +132,11 @@ dat ze buiten de bundel blijven.)*
 - **Ik moet de beveiliging/privacy beoordelen** → [SECURITY_DESIGN.md](SECURITY_DESIGN.md) en [PRIVACY.md](PRIVACY.md).
 - **Ik ben afhankelijk van hulptechnologie** → [ACCESSIBILITY.md](ACCESSIBILITY.md).
 - **Ik stuit op een term die ik niet ken** → [GLOSSARY.md](GLOSSARY.md).
+
+*(Documentatieronde 2026-11-08: links, registratie, versieclaims, platformopslag,
+toestemming, DLP en ontwerpstatus zijn naast de huidige code gelegd. Historische
+metingen en beoordelingen blijven gedateerde verslagen; deze ronde is geen
+nieuwe externe veiligheids- of compliancebeoordeling.)*
 
 ## Hoe deze documenten worden onderhouden
 

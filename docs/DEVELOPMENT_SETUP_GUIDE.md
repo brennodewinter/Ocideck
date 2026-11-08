@@ -1,6 +1,6 @@
 # OciDeck — Development Setup Guide
 
-> **Status:** procedure, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This document provides detailed instructions for setting up a development environment for OciDeck.
 
@@ -37,16 +37,17 @@ Setting up a proper development environment is crucial for contributing to OciDe
 
 ### Step 1: Install Flutter SDK
 
-1. Download Flutter SDK from [flutter.dev](https://flutter.dev/docs/get-started/install)
-2. Extract to a permanent location:
-   ```bash
-   cd ~
-   tar xf flutter_macos_3.47.7-stable.tar.xz  # macOS example
-   ```
+1. Use the pinned SDK and verified archive procedure in [BUILD.md](BUILD.md).
+2. Choose the archive for your operating system **and CPU architecture**, then
+   extract it to a permanent location. macOS archives are ZIP files; do not
+   reuse a guessed Linux archive name. On Apple Silicon use the native ARM64
+   SDK. An x64 SDK running through Rosetta can stall subprocess-based tests.
+   Check `flutter --version` and the architecture of `bin/cache/dart-sdk/bin/dart`
+   with `file` if tests hang. *(Corrected 2026-11-08.)*
 
 3. Add Flutter to PATH in your shell profile (.zshrc, .bash_profile):
    ```bash
-   export PATH="$PATH:$HOME/flutter/bin"
+   export PATH="$HOME/flutter/bin:$PATH"
    ```
 
 4. Verify installation:
@@ -242,7 +243,7 @@ The build system uses:
 
 Recommended workflow patterns:
 1. **Feature branches**: Create from main for new features
-2. **Bug fixes**: Branch from `main` — there is no released version to branch from
+2. **Bug fixes**: Branch from current `main`; consult [SECURITY.md](../SECURITY.md#supported-versions) for supported release policy
 3. **Documentation**: Separate branch if substantial changes needed
 
 ### Code Quality Standards

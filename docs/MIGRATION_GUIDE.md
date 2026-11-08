@@ -1,6 +1,6 @@
 # OciDeck — Migration Guide
 
-> **Status:** current-state — releases are tagged, no breaking format changes recorded yet · **Status last reviewed:** 2026-07-28 · **Published by:** Stichting LibreKAT
+> **Status:** current-state — releases are tagged, no breaking format changes recorded yet · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 ## No migration steps between releases yet
 
@@ -26,6 +26,16 @@ migrates on its own, and the rules that migration follows.
 > "2.x to 3.x", automated file-format converters, theme-profile migration tools,
 > and community support forums. None of those existed. The guide was generated
 > boilerplate; it is replaced here with the real picture. Corrected 2026-07-19.
+
+### Browser copies and consent history
+
+The 2026-11-08 storage and consent additions introduce preferences, not a new
+Markdown format. Existing files need no conversion. `browserDeckPackageV1.<id>`
+keys hold explicit presentation packages; a settings reset preserves them.
+`dataImpactLogV1` holds the latest 200 warning events and is cleared by that reset.
+Previously enabled extensions are not retroactively disabled or given fabricated
+consent history. A subsequent activation uses the new confirmation. DLP profiles
+reuse existing privacy-setting keys and retain country packages and exceptions.
 
 ## What does migrate: stored settings
 

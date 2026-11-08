@@ -1,4 +1,6 @@
-# Cockpit-dia: indeling van instrument, uitlezing en label
+# OciDeck — Cockpit-dia: indeling van instrument, uitlezing en label
+
+> **Status:** geïmplementeerde ontwerprationale · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 *Ontwerp, september 2026. Gebouwd in `lib/services/cockpit_layout.dart`,
 `lib/widgets/slides/previews/cockpit_*.dart` en

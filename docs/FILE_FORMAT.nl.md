@@ -4,7 +4,7 @@
 
 # OciDeck — Bestandsformaat
 
-> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-09-18 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -159,6 +159,19 @@ presentaties.
 > voor wat is verplaatst en waarheen.
 
 ---
+
+### Browserkopieën als pakket
+
+De webactie Opslaan kan bewust een `.ocideck`-pakket in browseropslag bewaren in
+plaats van een download te starten. Dit gebruikt hetzelfde pakketcontract;
+er komt geen Markdown-dialect of frontmatterveld bij. Per presentatie staat één
+sleutel (`browserDeckPackageV1.<id>`) met JSON-metadata en een base64-pakket. De
+gecodeerde kopieën delen een budget van 5 MiB. Dit zijn onversleutelde gegevens
+van het browserprofiel, geen gewone bestanden of herstelmomentopnamen. Heropenen
+doorloopt de normale pakketcontrole. Verwijder kopieën via Instellingen →
+Opslag; instellingen terugzetten behoudt ze bewust.
+
+*(Toegevoegd 2026-11-08.)*
 
 ## 2. Markdown-structuur in één oogopslag
 

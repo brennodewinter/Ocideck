@@ -1,9 +1,11 @@
 # OciDeck — Form intake: fill-in Markdown forms and managed submissions (Design)
 
-> **Status:** design proposal, revision 4 — unbuilt · **Status last reviewed:** 2026-10-04 · **Published by:** Stichting LibreKAT
+> **Status:** revision 4, partly implemented; file/age route phases 1–3 built; Managed Intake has a separate provider contract · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
-> **A design proposal — not yet implemented.**
-> This document describes a *future* capability: a **form** that is an ordinary
+> **Design with delivered and deferred parts.** Current user behavior is
+> documented in [USER_GUIDE.md](../USER_GUIDE.md); proposals below do not
+> establish that every adapter, server journey or security property has shipped.
+> This document describes the design contract: a **form** that is an ordinary
 > Markdown document, filled in by a respondent in OciDeck (images included),
 > checked against rules the form author wrote down (required, minimum and maximum
 > words, options, image size), and **delivered** — as a file, or optionally

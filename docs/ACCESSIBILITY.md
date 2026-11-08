@@ -1,6 +1,6 @@
 # OciDeck — Accessibility
 
-> **Status:** current-state description of what is and is not accessible · **Status last reviewed:** 2026-08-29 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of what is and is not accessible · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 What OciDeck does for accessibility, and — the longer half of this document —
 what it does not do. Both halves are here on purpose. A tool that only lists its
@@ -10,6 +10,12 @@ possible moment, which is usually the moment the deck has already been sent.
 The short version: **the editor is built to be usable with a keyboard and a
 screen reader and to survive being scaled up; the exports are not accessible
 documents.** PDF and PPTX come out of OciDeck as pictures.
+
+Extension consent uses standard dialog actions Cancel and Continue. Dismissal
+or Escape declines and is logged. DLP profiles expose a textual status, so
+the state is not conveyed by color alone. Browser saving names the destination
+and its risks. These describe the controls; they do not establish new WCAG
+conformance or proof on every screen reader. *(Updated 2026-11-08.)*
 
 ## What is in place
 

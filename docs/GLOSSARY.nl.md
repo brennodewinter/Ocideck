@@ -4,7 +4,7 @@
 
 # OciDeck — Woordenlijst
 
-> **Status:** reference, current · **Status laatst nagekeken:** 2026-07-22 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** reference, current · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 OciDeck-specifieke termen en de afkortingen die steeds terugkomen in de codebase en
 docs. Voor waar dingen leven in `lib/`, zie [SOURCE_MAP.md](SOURCE_MAP.md).
@@ -94,6 +94,19 @@ de paginamaat-indicator in de documentbewerker. Met een afloop of in liggende
 stand vervalt de naam en wordt het vel als `paperwidth`/`paperheight`
 weggeschreven, omdat een papiernaam geen vergroot of gedraaid vel kan beschrijven.
 Zie [FILE_FORMAT.md](FILE_FORMAT.md) §14.8. *(Toegevoegd 2026-08-17.)*
+
+**Browserkopie** — een bewust bewaard, onversleuteld presentatiepakket in de
+browseropslag van de huidige website. Bevat meegebundelde media, deelt een budget
+van 5 MiB voor gecodeerde kopieën en is te heropenen of verwijderen via
+Instellingen → Opslag. Het is geen automatisch bewaren of reservekopie.
+
+**Toestemmingslogboek** — de laatste 200 getoonde, geaccepteerde of geweigerde
+waarschuwingen voor uitbreidingen/opslag, met vaste onderdeelcodes,
+waarschuwingsversie en UTC-tijd. Zonder documentinhoud of account-/servergegevens.
+
+**DLP-profiel** — een snelle keuze voor lokale privacycontrole en exportgedrag:
+waarschuwen of blokkeren bij onafgehandelde zekere vondsten. Uitzonderingen
+blijven gelden; detectie is niet gegarandeerd. *(Toegevoegd 2026-11-08.)*
 
 ## Bestanden & opslag
 

@@ -1,6 +1,6 @@
 # OciDeck — Known limitations
 
-> **Status:** current-state list of what is not there yet · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** current-state list of what is not there yet · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This page exists so you do not have to assemble it yourself. Every item below
 was already written down somewhere in this repository; they were spread across
@@ -10,9 +10,15 @@ here is new — the pointers say where the full account lives.
 For an alpha, this list is a feature. Read it before you decide whether OciDeck
 fits what you are doing.
 
+An explicit browser copy can retain a presentation package with media, but is
+unencrypted and bound to the browser profile and site origin. Site-data deletion
+or storage pressure can remove it; all encoded copies share a 5 MiB budget.
+Later edits have no automatic crash recovery. A local file with a backup is
+safer. See [USER_GUIDE.md](USER_GUIDE.md). *(Updated 2026-11-08.)*
+
 ## Releases are alpha and unsigned
 
-Releases are tagged (latest `0.4.10`, 2026-08-25) and every release carries the
+Releases are tagged (see the [release feed](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases)) and every release carries the
 app for all four platforms — macOS, Windows, Linux and web — plus both SBOM
 formats and a `SHA256SUMS` list. That list is itself signed with minisign
 (`SHA256SUMS.minisig`, public key `minisign.pub` in the repository root), so the
@@ -80,18 +86,13 @@ to LaTeX for typeset maths. *(Added 2026-08-20; narrowed the same day from
 "always shows source" once the drawings landed, and corrected again once the
 platform limits were actually measured.)*
 
-## The visual editor draws a Mermaid diagram, but not a chart
+## Charts in the visual document editor
 
-A document's visual mode renders the blocks that travel as embeds: tables,
-timelines, the table of contents, footnotes, pentest envelopes, and — since
-#1920 — a ```mermaid fence. A ```chart fence is the one that is left: it has no
-embed of its own, so the visual editor shows its source in a monospaced box
-while the reader, the preview, the Pagina's view, the PDF and the HTML export
-all draw the chart. Editing the numbers means switching to Bron.
-
-Nothing is lost either way: the fence is ordinary Markdown, the source stays
-byte-faithful through a visual edit, and every other view draws it. *(Added
-2026-09-02.)*
+A valid `chart` block renders in the visual document editor too. Double-click
+to edit the chart, or edit its Markdown in Source. Malformed or unreadable
+source remains editable; this does not imply support for every external chart
+syntax. *(Corrected 2026-11-08: the earlier missing-chart-embed limitation no
+longer applies.)*
 
 ## Exporting a document on the web build arrives as a download, not a saved file
 
@@ -116,9 +117,13 @@ The PDF picks a serif or a sans depending on which one the style profile uses,
 but not the exact typeface — the same line the LaTeX export draws, which leaves
 the font to the compiler. What travels is the structure and the page setup, not
 the typography of the screen. Characters outside Latin-1 fall back to a bundled
-font that covers Latin Extended, Greek and Cyrillic; anything beyond that (CJK,
-Arabic, Hebrew) has no shape available. That is not silent: the export names the
-characters it could not set and points at HTML or LaTeX, which handle them.
+font that covers Latin Extended, Greek and Cyrillic. On desktop the PDF export
+dialog can load an extra font for missing glyphs, provided its license permits
+embedding. This does not replace the standard base face or establish correct
+layout for every script. The export reports remaining missing characters;
+HTML or LaTeX may be more suitable. *(Corrected 2026-11-08: the previous absolute
+claim about unavailable CJK, Arabic and Hebrew glyphs omitted the user-font
+fallback.)*
 *(Added 2026-08-20.)*
 
 ## A raster logo can print grainy, and the PDF says so rather than fixing it

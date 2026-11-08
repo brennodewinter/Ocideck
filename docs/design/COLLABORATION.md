@@ -1,9 +1,11 @@
 # OciDeck — Real-time Collaboration, Presenting & Calls (Design)
 
-> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
+> **Status:** partly implemented; collaboration core and WebDAV transport built; encrypted relay remains design · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
-> **A design proposal — not yet implemented.**
-> This document describes a *future* capability and the architecture chosen for
+> **Design with delivered and deferred parts.** Current user behavior is
+> documented in [USER_GUIDE.md](../USER_GUIDE.md); proposals below do not
+> establish that every adapter, server journey or security property has shipped.
+> This document records the proposed scope and the architecture chosen for
 > it. It is deliberately kept separate from the current-state contributor docs
 > ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),
 > [`FILE_FORMAT.md`](../FILE_FORMAT.md)) so that those keep describing what

@@ -1,6 +1,6 @@
 # OciDeck — Transcription and recording: platform setup
 
-> **Status:** setup matrix and step-by-step guide for the released builds · **Status last reviewed:** 2026-10-26 · **Published by:** Stichting LibreKAT
+> **Status:** setup matrix and step-by-step guide for the released builds · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This page answers, per platform: what you must install or allow, how a
 recording becomes a transcript, where the files live, and what to do when
@@ -9,6 +9,13 @@ explains the module itself; this page is the platform matrix the release
 notes are tested against. Where a route was not proven on real hardware,
 this page says *not tested* rather than letting a shared code path read as
 support.
+
+Enabling this extension first presents a data-impact warning. Showing it and
+accepting or declining are logged. This does not replace later consent for a
+recording or server task. An explicit browser copy saves a presentation package
+including media included in that package; it does not automatically persist a
+standalone recording or transcription session. See [USER_GUIDE.md](USER_GUIDE.md).
+*(Updated 2026-11-08.)*
 
 ## The three steps, on every platform
 

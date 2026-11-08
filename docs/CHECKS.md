@@ -1,6 +1,6 @@
 # OciDeck — Checks & CI
 
-> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-09-24 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 Every automated check OciDeck runs, what it covers, what a failure means, and how
 to fix it. The **`Makefile` is the single entry point** and the **real gate**.
@@ -19,6 +19,19 @@ gate checks the actual `main` after each merge, the Linux suite runs nightly,
 native builds run after relevant changes, time-degrading checks run on a
 schedule, a toolchain change rehearses all platforms, and a release candidate runs the full release gate before a tag exists. See [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
+
+### Browser-copy checks and host architecture (2026-11-08)
+
+The browser persistence roundtrip needs a real browser in addition to VM tests:
+
+```sh
+flutter test --platform chrome test/browser_storage_web_test.dart
+```
+
+It exercises localStorage persistence, package/media roundtrips and save/open/
+delete controls. Use the pinned native ARM64 SDK on Apple Silicon: an x64 SDK
+under Rosetta was observed hanging at subprocess creation despite a matching
+version. A timeout is not passing evidence. See [BUILD.md](BUILD.md).
 
 ## The one command
 
@@ -332,6 +345,19 @@ out of it, the way [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) records its
 own last run. A dated outcome next to a repeatable command is the difference
 between "we check this" and "we checked this".
 
+The preceding feature change passed `make check-full` on 2026-11-08 at
+`8b98659a3`: 15,223 application tests, 86.6% line coverage and the configured
+per-file floor. This is a dated result, not a promise about every subsequent
+checkout. External reference refreshes that were unreachable remained unknown;
+see the gate’s existing treatment of external-source availability.
+
+The run used the official native ARM64 Flutter 3.47.7 SDK (Dart 3.13.5).
+
+### Historical result (2026-07-23; duration sample updated 2026-09-01)
+
+The following evidence describes the toolchain and gate at those dates, not
+the current version or current suite size.
+
 **Run on 2026-07-23**, on macOS (arm64), on this exact toolchain:
 
 ```
@@ -339,7 +365,7 @@ Flutter 3.44.7 • channel stable • https://github.com/flutter/flutter.git
 Tools • Dart 3.13.0
 ```
 
-**This is the pinned toolchain, and that is new.** Until 2026-07-23 this section
+**This was the pinned toolchain at that date.** Until 2026-07-23 this section
 recorded `3.44.2 • [user-branch] • unknown source` — an unofficial build, with
 its binaries under a directory named for a third version again — against
 documents that all named a pinned release. Because the gate did not run in CI

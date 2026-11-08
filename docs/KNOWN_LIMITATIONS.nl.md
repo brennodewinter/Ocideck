@@ -4,7 +4,7 @@
 
 # OciDeck — Bekende beperkingen
 
-> **Status:** actuele lijst van wat er nog niet is · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** actuele lijst van wat er nog niet is · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 Deze pagina bestaat zodat je hem niet zelf hoeft samen te stellen. Elk punt
 hieronder stond al ergens in deze repository opgeschreven; ze waren verspreid
@@ -14,9 +14,16 @@ Niets hier is nieuw — de verwijzingen zeggen waar het volledige verhaal staat.
 Voor een alfa is deze lijst een pluspunt. Lees hem voordat je besluit of OciDeck
 past bij wat je aan het doen bent.
 
+Een bewuste browserkopie kan een presentatiepakket met media bewaren, maar
+blijft onversleuteld en gebonden aan browserprofiel en websiteherkomst. Wissen
+van sitegegevens of opslagdruk kan de kopie verwijderen; de gezamenlijke
+begroting is 5 MiB gecodeerde gegevens. Er is geen automatisch crashherstel
+voor wijzigingen daarna. Een lokaal bestand met back-up is veiliger.
+Zie [USER_GUIDE.md](USER_GUIDE.md). *(Bijgewerkt 2026-11-08.)*
+
 ## Releases zijn alfa en niet ondertekend
 
-Releases zijn getagd (laatste `0.4.10`, 2026-08-25) en elke release draagt de app
+Releases zijn getagd (zie de [releasefeed](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases)) en elke release draagt de app
 voor alle vier de platformen — macOS, Windows, Linux en web — plus beide
 SBOM-formaten en een `SHA256SUMS`-lijst. Die lijst is zelf ondertekend met
 minisign (`SHA256SUMS.minisig`, publieke sleutel `minisign.pub` in de root van de
@@ -84,19 +91,13 @@ browser, of naar LaTeX voor gezette wiskunde. *(Toegevoegd 2026-08-20; nog
 dezelfde dag ingeperkt van "toont altijd de bron" toen de tekeningen er waren, en
 nogmaals gecorrigeerd toen de platformgrenzen werkelijk gemeten waren.)*
 
-## De visuele bewerker tekent een mermaid-diagram, maar geen grafiek
+## Grafieken in de visuele documentbewerker
 
-De visuele modus van een document tekent de blokken die als embed reizen:
-tabellen, tijdlijnen, de inhoudsopgave, voetnoten, pentest-enveloppen en — sinds
-#1920 — een mermaid-fence. De grafiek-fence is degene die overblijft: die heeft
-geen eigen embed, dus de visuele bewerker toont zijn bron in een monospace-kader
-terwijl de lezer, de voorvertoning, de weergave Pagina's, de PDF en de
-HTML-export de grafiek wél tekenen. De cijfers bewerk je door naar Bron te
-wisselen.
-
-Er gaat hoe dan ook niets verloren: de fence is gewone Markdown, de bron blijft
-byte-getrouw door een visuele bewerking heen, en elke andere weergave tekent
-hem. *(Toegevoegd 2026-09-02.)*
+Een geldig `chart`-blok wordt ook in de visuele documentbewerker als grafiek
+getoond. Dubbelklik om de grafiek te bewerken, of wijzig de Markdown in Bron.
+Onleesbare of ongeldige bron blijft bewerkbaar; deze weergave garandeert niet
+dat elke externe grafieknotatie ondersteund is. *(Gecorrigeerd 2026-11-08:
+de eerdere beperking over ontbrekende grafiek-embeds is vervallen.)*
 
 ## Een document exporteren komt in de webversie als download, niet als opgeslagen bestand
 
@@ -122,9 +123,13 @@ stijlprofiel gebruikt, maar niet het exacte lettertype — dezelfde lijn die de
 LaTeX-export trekt, die de letterkeuze aan de compiler laat. Wat meereist is de
 structuur en de paginaopmaak, niet de typografie van het scherm. Tekens buiten
 Latin-1 vallen terug op een meegeleverd lettertype dat Latijns uitgebreid, Grieks
-en Cyrillisch dekt; wat daarbuiten valt (CJK, Arabisch, Hebreeuws) heeft geen
-vorm beschikbaar. Stil gebeurt dat niet: de export noemt de tekens die hij niet
-kon zetten en wijst naar HTML of LaTeX, die er wél raad mee weten.
+en Cyrillisch dekt. Op desktop kun je in het PDF-exportvenster een extra
+lettertype voor ontbrekende tekens aanwijzen, mits de licentie insluiten
+toestaat. Dit wijzigt het standaardbasislettertype niet en bewijst niet dat elk
+schrift goed wordt gezet. De export meldt nog ontbrekende tekens; HTML of
+LaTeX kan dan geschikter zijn. *(Gecorrigeerd 2026-11-08: de eerdere absolute
+bewering over ontbrekende CJK-, Arabische en Hebreeuwse glyphs hield geen
+rekening met het extra lettertype.)*
 *(Toegevoegd 2026-08-20.)*
 
 ## Een rasterlogo kan korrelig afdrukken, en de PDF zegt dat in plaats van het te repareren

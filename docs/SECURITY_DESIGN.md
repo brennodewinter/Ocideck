@@ -1,6 +1,6 @@
 # OciDeck — Security Design
 
-> **Status:** current-state description of the security design and its mechanisms · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of the security design and its mechanisms · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This document describes the security design principles and the concrete
 mechanisms that enforce them. Where a mechanism is implemented, the source is
@@ -77,6 +77,28 @@ signing, Windows and Debian 12 native proof; and web, download and package
 channels. These dependencies can fail independently. Release acceptance
 requires terminal checks on the exact source and externally observed bytes,
 including signature verification and public readback.
+
+## Local consent and browser persistence (2026-11-08)
+
+Extension activation warnings explain applicable outbound-data risks before the
+setting changes. Shown, accepted and declined events go to the application log
+and the last 200 events to local preferences. These are a user-visible local
+journal, not tamper-proof audit evidence or an authorization boundary. Previously
+enabled extensions remain enabled; no past consent is invented.
+
+Browser presentation copies are explicit, unencrypted packaged snapshots in
+origin storage, bounded to 5 MiB of encoded data in aggregate. They are visible
+to that origin’s scripts and users of the profile, subject to browser eviction
+and site-data deletion, and are preserved when settings are reset. A disk file
+is the safer user-controlled destination. Reopening a copy applies the normal
+package import checks. See [PRIVACY.md](PRIVACY.md) and
+[FILE_FORMAT.md](FILE_FORMAT.md).
+
+DLP warning/blocking profiles configure the existing local scanner and export
+gate while preserving exceptions and country/image settings. Turning off the
+presentation privacy scan makes its presentation export policy inactive. The
+mandatory document-export scan is independent; a profile is not proof that
+all sensitive content has been found.
 
 ## Overview
 

@@ -1,6 +1,6 @@
 # Contributing to OciDeck
 
-> **Status:** procedure, current — the practical half of contributing · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current — the practical half of contributing · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 Thanks for your interest in improving OciDeck! This document explains how to set
 up the project, the quality bar, and how to propose changes.
@@ -39,6 +39,12 @@ one thing that will hold a pull request even when the code is fine; `git commit
 agreement the open-source world recognises and left no per-commit record; the
 DCO is the lightest thing that fixes both, and it is what `AUTHORS.md` now
 relies on when it says contributors keep copyright in their own work.)*
+
+On Apple Silicon use the pinned **native ARM64 Flutter SDK**, ahead of other
+SDKs in `PATH`. A matching version number alone does not establish matching
+architecture: an x64 SDK under Rosetta can hang subprocess-based checks. Inspect
+`bin/cache/dart-sdk/bin/dart` with `file` and rerun with the native SDK if needed.
+*(Documented 2026-11-08.)*
 
 ## Prerequisites
 

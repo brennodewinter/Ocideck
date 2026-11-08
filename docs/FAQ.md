@@ -1,6 +1,6 @@
 # OciDeck — Frequently Asked Questions
 
-> **Status:** current-state answers; where one conflicts with the code, the code wins · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** current-state answers; where one conflicts with the code, the code wins · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This document answers common questions about OciDeck's features, usage, and functionality.
 
@@ -33,7 +33,7 @@ nothing and lets you use, study, change and redistribute it.
 On signing: the release manifest `SHA256SUMS` is signed with minisign, so a
 download's provenance is verifiable (see
 [BUILD.md](BUILD.md#signing-status-of-the-published-artifacts)). Releases are
-tagged (latest `0.4.10`, 2026-08-25) and carry the app for all four platforms; the
+tagged (see the [release feed](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases)) and carry the app for all four platforms; the
 macOS build is additionally signed and notarised and opens normally, while the
 **Windows and Linux binaries are not code-signed** — Windows warns on first
 launch. Windows offers both an installer (shortcut, file associations, clean
@@ -48,6 +48,11 @@ version number in prose goes stale on every release, so re-read it from the
 release list when you touch this paragraph.*
 
 ## Security and Privacy
+
+Core editing requires no application backend. Optional AI, transcription,
+storage, collaboration and learning integrations can exchange data. Their
+activation warnings and [PRIVACY.md](PRIVACY.md) explain the impact.
+*(Clarified 2026-11-08.)*
 
 ### What security measures does OciDeck implement?
 OciDeck implements several security layers:
@@ -298,6 +303,10 @@ them — so step 2 does not apply there and unsaved work is gone. The app says s
 at your first edit, and the browser asks before you close a tab that still holds
 unsaved work. Save early if you work in a browser tab.
 
+An explicit browser copy can still be reopened from Settings → Storage.
+Changes after its last successful save have no crash recovery. See the browser
+storage question below. *(Clarified 2026-11-08.)*
+
 ## Configuration and Settings
 
 ### How do I choose the cockpit look?
@@ -357,6 +366,34 @@ internal server* tick, since private addresses are blocked by default.
 One difference is worth knowing: S3 is object storage, not a filesystem, so it
 has no real folders. A prefix behaves like one, and listing uses a delimiter so
 prefixes show up as if they were folders.
+
+### Why does enabling an extension ask for confirmation?
+
+Extensions that can process or share personal or business data show their
+purpose and data consequences before they turn on. Cancel or close the dialog
+to refuse. This does not replace the confirmation for a particular AI or
+transcription task. Review the latest 200 decisions in **Settings → Privacy and
+classification → Consent log**; the application log receives them too.
+
+### Can I keep a presentation in the browser?
+
+Yes. In the web version choose **Save → Save in browser** and confirm the warning.
+The unencrypted package includes embedded media; all encoded copies together are
+limited to 5 MiB. Reopen or delete them in **Settings → Storage**. Browser-profile
+users and same-site scripts can read them; clearing website data, private mode
+or lack of space can remove them. A file on local disk is safer and easier to
+back up. Browser copies are explicit saves, not autosave, and settings reset
+preserves them. Unsaved edits still have no browser crash recovery.
+
+### How do I choose DLP protection?
+
+Use **Settings → Security → Data loss prevention (DLP)**. Choose warning or
+blocking; both enable the local scan and preserve your country, image and
+exception settings. Blocking concerns unresolved certain findings. The summary
+also shows when the main scan is off, and domain exceptions can hide colleagues'
+data. No profile guarantees that every sensitive value will be found.
+
+*(Added 2026-11-08.)*
 
 ## Future Features and Roadmap
 

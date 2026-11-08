@@ -1,6 +1,6 @@
 # OciDeck — File Format
 
-> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
+> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -157,6 +157,19 @@ presentations.
 > for what moved, and where it went.
 
 ---
+
+### Browser package copies
+
+The web Save action can explicitly persist a `.ocideck` package in browser
+storage instead of starting a download. This reuses the package contract below;
+there is no new Markdown dialect or presentation front-matter field. The store
+has one key per presentation (`browserDeckPackageV1.<id>`) containing JSON
+metadata and a base64 package. Encoded copies share a 5 MiB budget. These are
+unencrypted browser-profile data, not ordinary files or recovery snapshots.
+Reopening uses the normal package-import safety checks. Delete copies through
+Settings → Storage; a settings reset deliberately keeps them.
+
+*(Added 2026-11-08.)*
 
 ## 2. Markdown Structure at a Glance
 

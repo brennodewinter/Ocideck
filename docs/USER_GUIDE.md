@@ -1,6 +1,6 @@
 # OciDeck — User Guide
 
-> **Status:** current-state user manual · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
+> **Status:** current-state user manual · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -205,6 +205,28 @@ see the [release downloads](https://pawprint.vigilis.online/LibreKAT/Ocideck/rel
   the tab closes; the wording of that question is the browser's own and cannot be
   set by the app. On desktop the window asks the same thing itself.
 - **Traces on this device**: *Settings → Beveiliging → Sporen op dit apparaat* shows what OciDeck keeps locally and lets you remove it: the recent list (which stores the full path and the TLP classification of every deck you opened), the crash-recovery snapshots, and a full reset that also clears the git working copies and the passwords in your keychain. Your presentations are never touched. Removing a git connection now takes its working copy with it — unless commits are still waiting to be pushed, in which case OciDeck names them and asks first.
+
+### Optional browser copies
+
+In the web version, **Save** offers **Download as a file** or **Save in browser**.
+Choosing browser storage first opens a warning; cancel or close it to leave the
+presentation unsaved. Confirm only after considering who can access this browser
+profile and how you will keep a backup. Saving a file to the local disk is safer:
+you control its access and backup location.
+
+A browser copy is an unencrypted, self-contained `.ocideck` package with its
+embedded media. Other users of the profile and scripts on the same website can
+read it. Clearing site data, private browsing or storage pressure can remove it.
+The app limits encoded browser copies to **5 MiB in total**. A failed save keeps
+unsaved changes marked as such; this is an explicit save, not autosave or crash
+recovery. Ordinary documents do not use this presentation-storage option.
+
+Open **Settings → Storage → Presentations saved in browser** to reopen or delete
+a copy. Reopening uses the usual package-import safety checks. Deleting asks for
+confirmation; resetting app settings preserves these presentations. Download or
+export a local file before removing a copy you still need.
+
+*(Added 2026-11-08: decks are no longer limited to tab memory and downloads.)*
 
 ## Command palette
 
@@ -2315,6 +2337,25 @@ version cannot do" below.
 
 Found something you want gone? Wrap it in double square brackets — see below.
 
+### Choose the DLP export behavior
+
+Under **Settings → Security → Data loss prevention (DLP)** choose **Warn before
+exporting** or **Block export**. Both profiles enable the local scan and retain
+your country packages, image-check choice, disabled rules and own-identity
+exceptions. Blocking also raises certain findings to errors. The active summary
+explains the result; unresolved **certain** findings must be handled before a
+blocked export can continue. Uncertain findings and data without a recognisable
+pattern are not a guarantee of detection.
+
+Turning the main privacy check off disables this presentation export policy; its
+dropdown becomes unavailable and the summary says that protection is off.
+Document export has its own mandatory privacy scan; switching off checks during
+editing does not switch that document-export scan off. A domain exception also
+hides colleagues' data at that domain, so add only deliberate exceptions.
+
+*(Added 2026-11-08: profiles make the existing scan, severity and export settings
+work together without silently resetting exceptions.)*
+
 ## What to do with a finding
 
 A finding is not a verdict. A police briefing contains personal data by
@@ -4054,6 +4095,26 @@ Under *Settings → General → Accessibility*:
 
 When *Warn on export* is off, quality issues are ignored at export time (they
 still show while editing).
+
+### Extension warnings and the consent log
+
+Enable optional modules under **Settings → Extensions**. AI, online storage,
+collaboration, calls, transcription, LibrePlan, forms and the server integrations
+show a data-impact warning before activation. It explains their purpose and the
+possibility that personal data or business information reaches a service or
+recipient and remains stored there. Cancel, Escape or closing the dialog leaves
+the extension off. Local reference and authoring modules without this consequence
+do not show an outbound-data warning. Disabling does not require confirmation.
+
+The warning is not permission for every future operation: the existing server,
+recording and AI task confirmations still apply. See **Settings → Privacy and
+classification → Consent log** to inspect or copy the latest 200 warning events.
+`shown` means displayed, `accepted` means agreed, and `declined` includes cancel
+or close. Entries contain a fixed component identifier, notice version and UTC
+time, not document contents or account/server details. The application log also
+receives these events. Resetting settings clears the consent history.
+
+*(Added 2026-11-08.)*
 
 ## AI assistance (optional)
 
@@ -6791,12 +6852,12 @@ before you open a client's deck on it. Hosting the same bundle yourself is
 
 | What | In the browser |
 |---|---|
-| Local project folders and sidecar files | Absent. Opening and saving go through the browser, and your deck lives in the tab. |
+| Local project folders and sidecar files | Absent. Decks start in tab memory; Save offers a download or an explicit browser package copy. |
 | WebDAV / Nextcloud as a deck source | Absent. |
 | An S3 bucket as a deck source | Absent. |
 | A git repository as a deck source | **Works**, over the forge's REST interface — see *Git repository* above; opening, saving, review, merging and versions are all there. What is absent is the local clone, which needs the real `git` program: no durable offline commit history, and no `git grep` to speed up cross-deck search. *(Corrected 21-07-2026; this row said "absent", which contradicted the git section of this same guide.)* |
 | The second-screen presenter view | Absent — it needs a real second window. |
-| **Recovery after a crash** | Absent. There is no folder to write a snapshot to, so nothing is autosaved and a browser crash loses unsaved work. The app says this once, at your first edit, and the browser asks for confirmation before you close a tab that holds unsaved work. |
+| **Recovery after a crash** | Absent for unsaved changes. There are no recovery snapshots or automatic browser-copy saves; an explicitly saved browser copy can be reopened from Settings → Storage. The app says this once, at your first edit, and the browser asks for confirmation before you close a tab that holds unsaved work. |
 | **The image half of the privacy check** | Absent. See below. |
 | The offline CVE database | Absent — and so is the online lookup, which is desktop-only (SSRF-safe subprocess). The **Zoek CVE…** button reports "niet beschikbaar in de webversie". |
 | Image caption sidecars | Absent — they are files beside the image. |
