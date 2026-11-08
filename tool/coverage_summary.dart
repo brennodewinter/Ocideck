@@ -208,6 +208,13 @@ const Set<String> uncoveredBaseline = {
   'lib/platform/native_window_stub.dart',
   'lib/platform/platform_features_web.dart',
   'lib/platform/presenter_fullscreen_web.dart',
+  // PLATFORM: `deep_link_cleanup_web.dart` (#2826) en
+  // `markdown_transfer_web.dart` (#2827) zijn de webhelften van hun
+  // conditional-importnaad — history.replaceState en de
+  // message-luisteraar draaien alleen in een echte browser. Hun pure
+  // logica (URI-helpers, protocol, bridge) is wél getest.
+  'lib/platform/deep_link_cleanup_web.dart',
+  'lib/platform/markdown_transfer_web.dart',
   'lib/services/cve_transport_factory.dart',
   'lib/services/cve_transport_web.dart',
   // PLATFORM: `update_check_fetch.dart` is de conditional-importnaad van de
