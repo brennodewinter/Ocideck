@@ -535,7 +535,14 @@ opstartproef() {
       # die zo lang leeft heeft al zijn frameworks geladen en zijn venster
       # gebouwd.
       sleep "${OCIDECK_PROBE_SECONDEN:-6}"
-      if kill -0 "$PROBE_PID" 2>/dev/null; then
+      # `kill -0` slaagt óók op een zombie: het kind is afgelopen maar bash
+      # heeft de exit-status onder belasting nog niet gereaped — dan zou de
+      # proef "blijft draaien" melden voor een app die allang dood was, en
+      # dat is een valse groen precies waar deze stap tegen bewaakt
+      # (flake in notarize_opstartproef_test, 08-11-2026). De toestandsletter
+      # `Z` uit `ps -o stat=` betekent op BSD én GNU een zombie.
+      if kill -0 "$PROBE_PID" 2>/dev/null \
+        && ! ps -o stat= -p "$PROBE_PID" 2>/dev/null | grep -q '^ *Z'; then
         kill "$PROBE_PID" 2>/dev/null || true
         wait "$PROBE_PID" 2>/dev/null || true
         rm -f "$PROBE_LOG"
