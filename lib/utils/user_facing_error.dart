@@ -179,11 +179,23 @@ String importFailureDetail(pres.ImportFailure failure) {
 
 /// Begrijpelijke melding per import-weigerreden, zodat de gebruiker weet of
 /// het bestand te groot, kapot, geen presentatie of onbereikbaar was.
-String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
+///
+/// [limitBytes] maakt de grens concreet wanneer de aanroeper die kent —
+/// "groter dan de limiet van 512 MiB" is te toetsen, "de toegestane limiet"
+/// niet (#2826). Zonder meegegeven grens blijft de generieke zin staan:
+/// een grens verzinnen is erger dan hem niet te noemen.
+String importFailureMessage(
+  AppLocalizations l10n,
+  ImportFailure failure, {
+  int? limitBytes,
+}) {
   return switch (failure) {
-    ImportFailure.tooLarge => l10n.d(
-      'Het bestand is groter dan de toegestane limiet.',
-    ),
+    ImportFailure.tooLarge =>
+      limitBytes != null
+          ? l10n
+                .d('Het bestand is groter dan de limiet van {limit}.')
+                .replaceAll('{limit}', '${limitBytes ~/ (1024 * 1024)} MiB')
+          : l10n.d('Het bestand is groter dan de toegestane limiet.'),
     ImportFailure.corrupt => l10n.d('Het bestand is beschadigd of onleesbaar.'),
     ImportFailure.unsupported => l10n.d(
       'Dit is geen Marp/OciDeck-presentatie.',
@@ -192,7 +204,7 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
       'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.',
     ),
     ImportFailure.network => l10n.d(
-      'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.',
+      'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.',
     ),
     ImportFailure.unknownHost => l10n.d(
       'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.',
@@ -210,7 +222,7 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
       'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.',
     ),
     ImportFailure.notFound => l10n.d(
-      'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.',
+      'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.',
     ),
     ImportFailure.needsPassword => l10n.d(
       'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.',

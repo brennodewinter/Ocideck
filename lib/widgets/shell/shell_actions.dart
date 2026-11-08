@@ -354,7 +354,32 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
     // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
     // en het deck wordt volledig in het geheugen geopend — het dart:io-
     // downloadpad hieronder bestaat op web niet.
-    return _importUrlWeb(context, ref, url);
+    final result = await _importUrlWeb(context, ref, url);
+    // Na een geslaagde open is de `?deck=`-deellink dé manier om de
+    // presentatie door te sturen — bieden we meteen aan (#2826).
+    if (result == OpenResult.opened && context.mounted) {
+      final messenger = ScaffoldMessenger.of(context);
+      final l10n = context.l10n;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(l10n.d('Geopend.')),
+          action: SnackBarAction(
+            label: l10n.d('Deellink kopiëren'),
+            onPressed: () async {
+              await Clipboard.setData(
+                ClipboardData(text: deckShareLink(Uri.base, url)),
+              );
+              if (context.mounted) {
+                messenger.showSnackBar(
+                  SnackBar(content: Text(l10n.d('Deellink gekopieerd.'))),
+                );
+              }
+            },
+          ),
+        ),
+      );
+    }
+    return;
   }
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
@@ -374,11 +399,48 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   }
 }
 
+/// Open in OciDeck geplakte Markdowntekst (#2825) via exact dezelfde poort
+/// als een geopend `.md`-bestand: de tekst wordt één keer UTF-8-gecodeerd en
+/// [TabsNotifier.openDeckFromBytes] doet de rest — omvangsgrens,
+/// veiligheidsscan met het importalarm, en routering naar presentatie of
+/// document. De dialoog beheert de invoer en houdt hem vast als het openen
+/// mislukt; deze functie levert alleen de melding die hij dan toont. De
+/// inhoud gaat nergens heen — geen server, geen URL — en komt net als bij de
+/// bestandsroute hooguit als telling in de logregels.
+Future<void> _openPastedMarkdown(BuildContext context, WidgetRef ref) async {
+  await PasteMarkdownDialog.show(
+    context,
+    onOpen: (text) async {
+      final l10n = context.l10n;
+      ref.read(openFailureProvider.notifier).state = null;
+      final result = await ref
+          .read(tabsProvider.notifier)
+          .openDeckFromBytes(
+            Uint8List.fromList(utf8.encode(text)),
+            // Geen bestandsnaam om aan te houden: dit labelt alleen het
+            // importalarm en de logregel.
+            'geplakte-markdown.md',
+          );
+      if (result == OpenResult.opened) return null;
+      if (result == OpenResult.blocked) {
+        // Het importalarm toont zichzelf met de bevindingen; in de dialoog
+        // volstaat de verwijzing — de details herhalen zou twee meldingen
+        // over elkaar leggen.
+        return l10n.d(
+          'Deze tekst is niet geopend — zie de beveiligingsmelding.',
+        );
+      }
+      return openFailureMessage(l10n, ref.read(openFailureProvider));
+    },
+  );
+}
+
 /// Web-kern van de URL-import: ophalen (met hulppunt-terugval), dezelfde
 /// security-gate, en de juiste melding. Gedeeld door de importdialoog en de
 /// `?deck=`-deeplink waarmee een link OciDeck én een presentatie tegelijk
-/// opent.
-Future<void> _importUrlWeb(
+/// opent. Geeft het [OpenResult] terug zodat de aanroeper er op kan
+/// reageren (de deellink wist zijn parameter, de dialoog biedt hem aan).
+Future<OpenResult> _importUrlWeb(
   BuildContext context,
   WidgetRef ref,
   String url,
@@ -399,12 +461,12 @@ Future<void> _importUrlWeb(
   }
   if (result == OpenResult.notAPresentation) {
     _reportOpenFailure(messenger, l10n, result);
-    return;
+    return result;
   }
   if (result == OpenResult.opened ||
       result == OpenResult.blocked ||
       result == OpenResult.passwordCancelled) {
-    return;
+    return result;
   }
   // Een concrete ophaalreden (te groot, 404, geen http(s)-link, geweigerde
   // host, omleiding) is specifieker dan CORS: toon díe. Alleen de ondoorzichtige
@@ -414,27 +476,32 @@ Future<void> _importUrlWeb(
     showErrorSnackBar(
       messenger,
       l10n,
-      importFailureMessage(l10n, fetchFailure),
+      importFailureMessage(
+        l10n,
+        fetchFailure,
+        limitBytes: FileService.maxPackageBytes,
+      ),
     );
-    return;
+    return result;
   }
   // Ophalen slaagde maar het openen niet (beschadigd deck, vol mediabudget):
   // openDeckFromBytes legde de reden vast, en die is specifieker dan CORS.
   final reason = ref.read(openFailureProvider);
   if (reason != null) {
     _reportOpenFailure(messenger, l10n, result, reason: reason);
-    return;
+    return result;
   }
   // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
   // browser mag alleen lezen van servers die dat expliciet toestaan.
   messenger.showSnackBar(
     SnackBar(
       content: Text(
-        '${l10n.d('Kon van deze URL geen presentatie ophalen.')}\n'
+        '${l10n.d('Kon van deze URL geen bestand ophalen.')}\n'
         '${l10n.d('Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).')}',
       ),
     ),
   );
+  return result;
 }
 
 /// Kies een deck uit de git-repository, haal het op, door de security-gate en
@@ -649,98 +716,6 @@ class _RemoteSaveDialogState extends State<_RemoteSaveDialog> {
           },
           icon: const Icon(Icons.cloud_upload_outlined, size: 16),
           label: Text(l10n.d('Opslaan')),
-        ),
-      ],
-    );
-  }
-}
-
-/// Vraag een URL op om een presentatie (pakket of markdown) op te halen.
-Future<String?> _showUrlDialog(BuildContext context) {
-  return showDialog<String>(
-    context: context,
-    builder: (_) => const _UrlImportDialog(),
-  );
-}
-
-class _UrlImportDialog extends StatefulWidget {
-  const _UrlImportDialog();
-
-  @override
-  State<_UrlImportDialog> createState() => _UrlImportDialogState();
-}
-
-class _UrlImportDialogState extends State<_UrlImportDialog> {
-  final _controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    // Herbouw bij elke wijziging zodat de Ophalen-knop live aan/uit gaat.
-    _controller.addListener(() => setState(() {}));
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  /// Alleen een http(s)-URL met host is op te halen; alles daarbuiten laat
-  /// de knop uit staan i.p.v. stil te falen na het klikken.
-  bool get _isFetchable {
-    final uri = Uri.tryParse(_controller.text.trim());
-    if (uri == null || uri.host.isEmpty) return false;
-    final scheme = uri.scheme.toLowerCase();
-    return scheme == 'http' || scheme == 'https';
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return AlertDialog(
-      title: Text(l10n.d('Importeren via URL')),
-      content: SizedBox(
-        width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.d(
-                'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.',
-              ),
-              style: TextStyle(fontSize: 12, color: AppTheme.slate500),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _controller,
-              autofocus: true,
-              keyboardType: TextInputType.url,
-              decoration: InputDecoration(
-                hintText: l10n.d('https://...'),
-                prefixIcon: const Icon(Icons.link, size: 18),
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-              onSubmitted: (v) {
-                if (_isFetchable) Navigator.pop(context, v);
-              },
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.t('cancel')),
-        ),
-        ElevatedButton.icon(
-          onPressed: _isFetchable
-              ? () => Navigator.pop(context, _controller.text)
-              : null,
-          icon: const Icon(Icons.download, size: 16),
-          label: Text(l10n.d('Ophalen')),
         ),
       ],
     );

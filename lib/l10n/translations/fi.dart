@@ -32,7 +32,7 @@ const _stringsFi = {
   'newPresentationTab': 'Uusi esitys (välilehti)',
   'exportPackage': 'Vie paketti…',
   'importPackage': 'Tuo paketti…',
-  'importUrl': 'Tuo URL-osoitteesta…',
+  'importUrl': 'Avaa URL-osoitteesta…',
   'findReplace': 'Etsi ja korvaa',
   'fullDeckPreview': 'Näytä koko diasarja',
   'settingsGeneral': 'Yleiset',
@@ -394,9 +394,6 @@ const _dutchSourceFi = {
       'Edellisestä istunnosta löytyi esitys, jossa on tallentamattomia muutoksia:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Tässä esityksessä on tallentamattomia muutoksia. Tallenna esitys ennen välilehden sulkemista.',
-  'Importeren via URL': 'Tuo URL-osoitteesta',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Liitä linkki .ocideck-pakettiin tai Marp-Markdown-tiedostoon.',
   'Ophalen': 'Hae',
   'Laat los om toe te voegen': 'Vapauta lisätäksesi',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -412,8 +409,6 @@ const _dutchSourceFi = {
   'Export mislukt:': 'Vienti epäonnistui:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Tämä dia ei voi vastaanottaa kuvaa. Valitse ensin kuvadia.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Tästä URL-osoitteesta ei voitu hakea esitystä.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Vedä tehdäksesi dian esikatselusta leveämmän tai kapeamman',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1350,8 +1345,6 @@ const _dutchSourceFi = {
       'Tiedosto on vaurioitunut tai lukukelvoton.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Tuonti hylättiin: paketti ylittää turvarajat.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Tästä URL-osoitteesta ei voitu hakea esitystä. Tarkista osoite ja yhteys.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Kirjautuminen epäonnistui — tarkista käyttäjätunnus ja salasana. Vinkki: käytä Nextcloudissa sovellussalasanaa (Asetukset → Turvallisuus), älä tilisi salasanaa.',
   'Annuleren…': 'Peruutetaan…',
@@ -1596,6 +1589,41 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Website wil Markdown openen?': 'Sivusto haluaa avata Markdownin?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Sivusto {origin} haluaa avata Markdown-tekstin OciDeckissä.',
+  'Voorgestelde naam: {name}': 'Ehdotettu nimi: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Teksti avautuu ikään kuin olisit liittänyt sen itse. Sivusto saa vain tiedon, onnistuiko avaus — ei koskaan sisältöä.',
+  'Weigeren': 'Kieltäydy',
+  'Openen via URL': 'Avaa URL-osoitteesta',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Liitä linkki .md-tiedostoon tai .ocideck-pakettiin; .md avautuu esityksenä tai dokumenttina. Lähteen on sallittava selaimen lukea tiedosto.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Anna http(s)-osoite palvelimen nimellä, esim. https://example.org/muistiinpanot.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Tiedostoa ei voitu hakea tästä URL-osoitteesta.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Tiedostoa ei voitu hakea tästä URL-osoitteesta. Tarkista osoite ja yhteys.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Tässä URL-osoitteessa ei ole tiedostoa (ei löydy). Tarkista, että linkki on edelleen oikea.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Tiedosto on suurempi kuin raja {limit}.',
+  'Geopend.': 'Avattu.',
+  'Deellink kopiëren': 'Kopioi jakolinkki',
+  'Deellink gekopieerd.': 'Jakolinkki kopioitu.',
+  'Plak Markdown…': 'Liitä Markdown…',
+  'Markdown plakken': 'Liitä Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Liitä Markdown-teksti tähän. Jos alussa on marp: true, siitä tulee esitys, muuten dokumentti.',
+  'Markdown-tekst': 'Markdown-teksti',
+  '{n} tekens': '{n} merkkiä',
+  'Openen in OciDeck': 'Avaa OciDeckissä',
+  'Geplakte tekst verwerpen?': 'Hylätäänkö liitetty teksti?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Kentässä on vielä tekstiä; sitä ei avata.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Tätä tekstiä ei avattu — katso turvallisuusvaroitus.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Mukautettu: tarkista alta pääasiallinen tarkistus ja viennin toiminta.',
   'Als bestand downloaden': 'Lataa tiedostona',
@@ -4916,8 +4944,6 @@ const _dutchSourceAddFi = <String, String>{
       'Päätepiste ohjaa muualle — yleensä väärä alue tai päätepisteen URL-osoite. Uudelleenyritys ei auta tässä.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Tallennettu paikallisesti, mutta julkaiseminen forgeen epäonnistui:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Tässä URL-osoitteessa ei ole esitystä (ei löytynyt). Tarkista, että linkki on yhä oikein.',
   'Video kan niet worden geladen': 'Videota ei voi ladata',
   'Titel boven afbeelding': 'Otsikko kuvan yläpuolella',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

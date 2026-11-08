@@ -33,4 +33,44 @@ void main() {
       isNull,
     );
   });
+
+  test('deckDeepLinkFrom geeft een gecodeerde bron met eigen query en '
+      'fragment volledig terug (#2826)', () {
+    // Precies de waarde die afbrak toen hem iemand ongecodeerd in de link
+    // zette: de &-tekens van de bron lazen als nieuwe parameters van de app.
+    final link = Uri.parse(
+      'https://ocideck.example/?deck='
+      'https%3A%2F%2Felders.example%2Fzoek%3Fq%3Dkat%26n%3D5%23kop',
+    );
+    expect(deckDeepLinkFrom(link), 'https://elders.example/zoek?q=kat&n=5#kop');
+  });
+
+  test('withoutDeckParam wist alleen de deck-parameter (#2826)', () {
+    final uri = Uri.parse(
+      'https://ocideck.example/app/?deck=https%3A%2F%2Fe.x%2Fd.md&taal=nl',
+    );
+    expect(
+      withoutDeckParam(uri).toString(),
+      'https://ocideck.example/app/?taal=nl',
+    );
+    // Was deck de enige parameter, dan valt ook het vraagteken weg.
+    expect(
+      withoutDeckParam(
+        Uri.parse('https://ocideck.example/?deck=https%3A%2F%2Fe.x%2Fd.md'),
+      ).toString(),
+      'https://ocideck.example/',
+    );
+  });
+
+  test('deckShareLink codeert de bron volledig (#2826)', () {
+    final base = Uri.parse('https://ocideck.example/app/');
+    expect(
+      deckShareLink(base, 'https://elders.example/zoek?q=kat&n=5#kop'),
+      'https://ocideck.example/app/'
+      '?deck=https%3A%2F%2Felders.example%2Fzoek%3Fq%3Dkat%26n%3D5%23kop',
+    );
+    // En de ronde terug levert de bron weer heel op.
+    final link = Uri.parse(deckShareLink(base, 'https://e.x/d.md'));
+    expect(deckDeepLinkFrom(link), 'https://e.x/d.md');
+  });
 }

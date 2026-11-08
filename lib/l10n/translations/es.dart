@@ -33,7 +33,7 @@ const _stringsEs = {
   'newPresentationTab': 'Nueva presentación (pestaña)',
   'exportPackage': 'Exportar paquete…',
   'importPackage': 'Importar paquete…',
-  'importUrl': 'Importar desde URL…',
+  'importUrl': 'Abrir mediante URL…',
   'findReplace': 'Buscar y reemplazar',
   'fullDeckPreview': 'Ver deck completo',
   'settingsGeneral': 'General',
@@ -394,7 +394,6 @@ const _dutchSourceEs = {
   'Herstellen': 'Restaurar',
   'Opslaan en sluiten': 'Guardar y cerrar',
   'Niet opslaan': 'No guardar',
-  'Importeren via URL': 'Importar desde URL',
   'Ophalen': 'Obtener',
   'Titelpagina': 'Diapositiva de título',
   'Alleen Bullets': 'Solo viñetas',
@@ -641,6 +640,41 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Website wil Markdown openen?': '¿El sitio quiere abrir Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'El sitio {origin} quiere abrir un texto Markdown en OciDeck.',
+  'Voorgestelde naam: {name}': 'Nombre sugerido: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'El texto se abre como si lo hubieras pegado tú. El sitio solo recibe si la apertura tuvo éxito — nunca el contenido.',
+  'Weigeren': 'Rechazar',
+  'Openen via URL': 'Abrir mediante URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Pega el enlace a un archivo .md o a un paquete .ocideck; un .md se abre como presentación o documento. La fuente debe permitir que tu navegador lea el archivo.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Introduce una dirección http(s) con un nombre de servidor, p. ej. https://example.org/notas.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'No se pudo obtener un archivo de esta URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'No se pudo obtener un archivo de esta URL. Comprueba la URL y tu conexión.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'No hay ningún archivo en esta URL (no encontrado). Comprueba que el enlace siga siendo correcto.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'El archivo es mayor que el límite de {limit}.',
+  'Geopend.': 'Abierto.',
+  'Deellink kopiëren': 'Copiar enlace para compartir',
+  'Deellink gekopieerd.': 'Enlace para compartir copiado.',
+  'Plak Markdown…': 'Pegar Markdown…',
+  'Markdown plakken': 'Pegar Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Pega aquí el texto Markdown. Con marp: true en la cabecera se convierte en una presentación; sin él, en un documento.',
+  'Markdown-tekst': 'Texto Markdown',
+  '{n} tekens': '{n} caracteres',
+  'Openen in OciDeck': 'Abrir en OciDeck',
+  'Geplakte tekst verwerpen?': '¿Descartar el texto pegado?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Aún hay texto en el campo; no se abrirá.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Este texto no se ha abierto — consulta el aviso de seguridad.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personalizado: revise abajo el control principal y el comportamiento de exportación.',
   'Als bestand downloaden': 'Descargar como archivo',
@@ -3998,8 +4032,6 @@ const _dutchSourceAddEs = {
       'El punto de conexión redirige — normalmente una región o una URL del punto de conexión incorrectas. Reintentar no ayuda aquí.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Guardado localmente, pero la publicación en la forja falló:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'No hay ninguna presentación en esta URL (no encontrada). Comprueba que el enlace siga siendo correcto.',
   'Video kan niet worden geladen': 'No se puede cargar el vídeo',
   'Titel boven afbeelding': 'Título sobre la imagen',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
@@ -6988,8 +7020,6 @@ const _dutchSourceAddEs = {
   'Kies een map met presentaties om te beginnen.':
       'Elige una carpeta con presentaciones para empezar.',
   'Kon dit pakket niet importeren.': 'No se pudo importar este paquete.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'No se pudo obtener ninguna presentación desde esta URL.',
   'Kopieer afbeelding naar klembord': 'Copiar imagen al portapapeles',
   'Kopiëren mislukt.': 'Error al copiar.',
   'Kopiëren naar ander deck': 'Copiar a otra presentación',
@@ -7019,8 +7049,6 @@ const _dutchSourceAddEs = {
   'Pakket geëxporteerd naar:': 'Paquete exportado a:',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Ajusta el término de búsqueda o añade una descripción.',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Pega el enlace a un paquete .ocideck o a un archivo Markdown de Marp.',
   'Preview inklappen': 'Contraer vista previa',
   'Preview uitklappen': 'Expandir vista previa',
   'Profiel verwijderen': 'Eliminar perfil',
@@ -7312,8 +7340,6 @@ const _dutchSourceAddEs = {
       'El archivo está dañado o es ilegible.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Importación rechazada: el paquete supera los límites de seguridad.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'No se pudo obtener una presentación de esta URL. Comprueba la URL y tu conexión.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Error al iniciar sesión — comprueba el usuario y la contraseña. Consejo: con Nextcloud usa una contraseña de aplicación (Ajustes → Seguridad), no la de tu cuenta.',
   'Annuleren…': 'Cancelando…',

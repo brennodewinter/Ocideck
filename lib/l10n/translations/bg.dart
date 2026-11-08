@@ -33,7 +33,7 @@ const _stringsBg = {
   'newPresentationTab': 'Нова презентация (раздел)',
   'exportPackage': 'Експортиране на пакет…',
   'importPackage': 'Импортиране на пакет…',
-  'importUrl': 'Импортиране от URL…',
+  'importUrl': 'Отваряне чрез URL…',
   'findReplace': 'Търсене и замяна',
   'fullDeckPreview': 'Преглед на цялото деко',
   'settingsGeneral': 'Общи',
@@ -396,9 +396,6 @@ const _dutchSourceBg = {
       'Открита е презентация с незапазени промени от предишна сесия:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Тази презентация има незапазени промени. Запазете я, преди да затворите раздела.',
-  'Importeren via URL': 'Импортиране от URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Поставете връзка към .ocideck пакет или Marp Markdown файл.',
   'Ophalen': 'Извличане',
   'Laat los om toe te voegen': 'Пуснете за добавяне',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -414,8 +411,6 @@ const _dutchSourceBg = {
   'Export mislukt:': 'Експортирането е неуспешно:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Този слайд не може да получи изображение. Първо изберете слайд с изображение.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Не можа да се извлече презентация от този URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Плъзнете, за да разширите или стесните прегледа на слайда',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1361,8 +1356,6 @@ const _dutchSourceBg = {
   'Het bestand is beschadigd of onleesbaar.': 'Файлът е повреден или нечетлив.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Импортът е отказан: пакетът надвишава ограниченията за сигурност.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'От този URL не можа да се изтегли презентация. Проверете URL адреса и връзката.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Влизането не успя — проверете потребителското име и паролата. Съвет: с Nextcloud използвайте парола за приложение (Настройки → Сигурност), а не паролата на акаунта.',
   'Annuleren…': 'Отказване…',
@@ -1615,6 +1608,41 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Website wil Markdown openen?': 'Сайтът иска да отвори Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Сайтът {origin} иска да отвори текст Markdown в OciDeck.',
+  'Voorgestelde naam: {name}': 'Предложено име: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Текстът се отваря, сякаш сам сте го поставили. Сайтът научава само дали отварянето е успешно — никога съдържанието.',
+  'Weigeren': 'Откажи',
+  'Openen via URL': 'Отваряне чрез URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Поставете връзката към .md файл или .ocideck пакет; .md се отваря като презентация или документ. Източникът трябва да позволява на браузъра ви да чете файла.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Въведете http(s) адрес с име на сървър, напр. https://example.org/notes.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Не можа да се изтегли файл от този URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Не можа да се изтегли файл от този URL. Проверете URL адреса и връзката си.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'На този URL няма файл (не е намерен). Проверете дали връзката още е вярна.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Файлът е по-голям от лимита от {limit}.',
+  'Geopend.': 'Отворено.',
+  'Deellink kopiëren': 'Копиране на връзка за споделяне',
+  'Deellink gekopieerd.': 'Връзката за споделяне е копирана.',
+  'Plak Markdown…': 'Постави Markdown…',
+  'Markdown plakken': 'Постави Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Поставете тук текста на Markdown. С marp: true в заглавната част той става презентация, без нея — документ.',
+  'Markdown-tekst': 'Текст на Markdown',
+  '{n} tekens': '{n} знака',
+  'Openen in OciDeck': 'Отвори в OciDeck',
+  'Geplakte tekst verwerpen?': 'Да се отхвърли ли поставеният текст?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'В полето все още има текст; той няма да бъде отворен.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Този текст не беше отворен — вижте предупреждението за сигурност.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'По избор: проверете по-долу основната проверка и поведението при експортиране.',
   'Als bestand downloaden': 'Изтегляне като файл',
@@ -4949,8 +4977,6 @@ const _dutchSourceAddBg = <String, String>{
       'Крайната точка пренасочва — обикновено грешен регион или URL на крайната точка. Повторният опит тук не помага.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Запазено локално, но публикуването във форджа не бе успешно:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'На този URL адрес няма презентация (не е намерена). Проверете дали връзката все още е валидна.',
   'Video kan niet worden geladen': 'Видеото не може да се зареди',
   'Titel boven afbeelding': 'Заглавие над изображението',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

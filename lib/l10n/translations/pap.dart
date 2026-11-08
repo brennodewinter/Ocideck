@@ -32,7 +32,7 @@ const _stringsPap = {
   'newPresentationTab': 'Presentashon nobo (tab)',
   'exportPackage': 'Eksportá pakete…',
   'importPackage': 'Importá pakete…',
-  'importUrl': 'Importá for di URL…',
+  'importUrl': 'Abrí via URL…',
   'findReplace': 'Busca i reemplasá',
   'fullDeckPreview': 'Mira henter e deck',
   'settingsGeneral': 'General',
@@ -389,7 +389,6 @@ const _dutchSourcePap = {
   'Herstellen': 'Restorá',
   'Opslaan en sluiten': 'Warda i sera',
   'Niet opslaan': 'No warda',
-  'Importeren via URL': 'Importá for di URL',
   'Ophalen': 'Tuma',
   'Titelpagina': 'Slide di título',
   'Alleen Bullets': 'Solamente bullets',
@@ -642,6 +641,41 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Website wil Markdown openen?': 'Website ke habri Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'E website {origin} ke habri un teksto di Markdown den OciDeck.',
+  'Voorgestelde naam: {name}': 'Nòmber sugerí: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'E teksto ta wordu habrí manera bo mes a peg’é. E website ta haña solamente si e apertura a sosial — nunka e kontenido.',
+  'Weigeren': 'Rechazá',
+  'Openen via URL': 'Abrí via URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Pega e link na un archivo .md òf un pakete .ocideck; un .md ta habrí komo presentashon òf dokumento. E fuente mester permití bo browser pa lesa e archivo.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Yena un adres http(s) ku un nòmber di servidor, p.e. https://example.org/nota.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'No por a haña un archivo di e URL aki.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'No por a haña un archivo di e URL aki. Kontrolá e URL i bo konekshon.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'No tin archivo na e URL aki (no hañá). Kontrolá si e link ainda ta korekto.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'E archivo ta mas grandi ku e límite di {limit}.',
+  'Geopend.': 'Habrí.',
+  'Deellink kopiëren': 'Kopiá e link pa kompartí',
+  'Deellink gekopieerd.': 'E link pa kompartí a ser kopiá.',
+  'Plak Markdown…': 'Pega Markdown…',
+  'Markdown plakken': 'Pega Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Pega e teksto di Markdown aki. Ku marp: true den e kabesera e ta bira un presentashon; sin djè, un dokumento.',
+  'Markdown-tekst': 'Teksto di Markdown',
+  '{n} tekens': '{n} karakter',
+  'Openen in OciDeck': 'Abrí den OciDeck',
+  'Geplakte tekst verwerpen?': 'Bandona e teksto pegá?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Ainda tin teksto den e kampo; e no lo bira habrí.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'E teksto aki no a bira habrí — mira e aviso di seguridat.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personalisa: kontrolá e kontrol prinsipal i e manera di eksportá aki bou.',
   'Als bestand downloaden': 'Deskargá komo fail',
@@ -3966,8 +4000,6 @@ const _dutchSourceAddPap = {
       'E punto final ta redirigí — generalmente un region of URL di punto final robes. Purba di nobo no ta yuda akinan.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Wardá lokalmente, ma publiká na e forge no a lòk:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Riba e URL aki no tin ningun presentashon (no a wòrdu haña). Kontrolá si e enlace ta bon ainda.',
   'Video kan niet worden geladen': 'No por karga e vidio',
   'Titel boven afbeelding': 'Título riba di e imagen',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
@@ -6933,8 +6965,6 @@ const _dutchSourceAddPap = {
   'Kies een map met presentaties om te beginnen.':
       'Skohe un karpeta ku presentashon pa kuminsá.',
   'Kon dit pakket niet importeren.': 'No por a importá e paket aki.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'No por a haña un presentashon for di e URL aki.',
   'Kopieer afbeelding naar klembord': 'Kopia imágen pa klembord',
   'Kopiëren mislukt.': 'Kopiamentu a faya.',
   'Kopiëren naar ander deck': 'Kopia pa otro deck',
@@ -6964,8 +6994,6 @@ const _dutchSourceAddPap = {
   'Pakket geëxporteerd naar:': 'Paket eksportá pa:',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Ahustá bo término di buskeda òf agregá un deskripshon.',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Pega e link pa un paket .ocideck òf un archivo markdown di Marp.',
   'Preview inklappen': 'Sera preview',
   'Preview uitklappen': 'Habri preview',
   'Profiel verwijderen': 'Kita profil',
@@ -7256,8 +7284,6 @@ const _dutchSourceAddPap = {
   'Het bestand is beschadigd of onleesbaar.': 'E archivo ta daña òf ilegibel.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Importashon rechasá: e paket ta surpasá e límitenan di siguridat.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'No por a haña un presentashon di e URL aki. Kontrolá e URL i bo konekshon.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Login a faya — kontrolá e nòmber di usuario i e password. Tip: ku Nextcloud usa un app-password (Konfigurashon → Siguridat), no esun di bo kuenta.',
   'Annuleren…': 'Kanselando…',

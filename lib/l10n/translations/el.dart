@@ -32,7 +32,7 @@ const _stringsEl = {
   'newPresentationTab': 'Νέα παρουσίαση (καρτέλα)',
   'exportPackage': 'Εξαγωγή πακέτου…',
   'importPackage': 'Εισαγωγή πακέτου…',
-  'importUrl': 'Εισαγωγή από URL…',
+  'importUrl': 'Άνοιγμα μέσω URL…',
   'findReplace': 'Εύρεση και αντικατάσταση',
   'fullDeckPreview': 'Προβολή πλήρους deck',
   'settingsGeneral': 'Γενικά',
@@ -400,9 +400,6 @@ const _dutchSourceEl = {
       'Βρέθηκε παρουσίαση με μη αποθηκευμένες αλλαγές από προηγούμενη συνεδρία:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Αυτή η παρουσίαση έχει μη αποθηκευμένες αλλαγές. Αποθηκεύστε την πριν κλείσετε την καρτέλα.',
-  'Importeren via URL': 'Εισαγωγή από URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Επικολλήστε τον σύνδεσμο σε ένα πακέτο .ocideck ή ένα αρχείο Marp Markdown.',
   'Ophalen': 'Ανάκτηση',
   'Laat los om toe te voegen': 'Αφήστε για προσθήκη',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -419,8 +416,6 @@ const _dutchSourceEl = {
   'Export mislukt:': 'Η εξαγωγή απέτυχε:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Αυτή η διαφάνεια δεν μπορεί να δεχτεί εικόνα. Επιλέξτε πρώτα μια διαφάνεια εικόνας.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Δεν ήταν δυνατή η ανάκτηση παρουσίασης από αυτό το URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Σύρετε για να κάνετε την προεπισκόπηση της διαφάνειας πιο φαρδιά ή πιο στενή',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1366,8 +1361,6 @@ const _dutchSourceEl = {
       'Το αρχείο είναι κατεστραμμένο ή μη αναγνώσιμο.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Η εισαγωγή απορρίφθηκε: το πακέτο υπερβαίνει τα όρια ασφαλείας.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Δεν ήταν δυνατή η λήψη παρουσίασης από αυτό το URL. Ελέγξτε το URL και τη σύνδεσή σας.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Η σύνδεση απέτυχε — ελέγξτε όνομα χρήστη και κωδικό. Συμβουλή: με το Nextcloud χρησιμοποιήστε κωδικό εφαρμογής (Ρυθμίσεις → Ασφάλεια), όχι τον κωδικό του λογαριασμού.',
   'Annuleren…': 'Ακύρωση…',
@@ -1621,6 +1614,41 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Website wil Markdown openen?': 'Ο ιστότοπος θέλει να ανοίξει Markdown;',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Ο ιστότοπος {origin} θέλει να ανοίξει κείμενο Markdown στο OciDeck.',
+  'Voorgestelde naam: {name}': 'Προτεινόμενο όνομα: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Το κείμενο ανοίγει σαν να το είχατε επικολλήσει εσείς. Ο ιστότοπος μαθαίνει μόνο αν το άνοιγμα πέτυχε — ποτέ το περιεχόμενο.',
+  'Weigeren': 'Απόρριψη',
+  'Openen via URL': 'Άνοιγμα μέσω URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Επικολλήστε τον σύνδεσμο σε αρχείο .md ή πακέτο .ocideck· το .md ανοίγει ως παρουσίαση ή έγγραφο. Η πηγή πρέπει να επιτρέπει στον περιηγητή σας να διαβάζει το αρχείο.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Εισαγάγετε μια διεύθυνση http(s) με όνομα διακομιστή, π.χ. https://example.org/notes.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Δεν ήταν δυνατή η λήψη αρχείου από αυτό το URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Δεν ήταν δυνατή η λήψη αρχείου από αυτό το URL. Ελέγξτε το URL και τη σύνδεσή σας.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Δεν υπάρχει αρχείο σε αυτό το URL (δεν βρέθηκε). Ελέγξτε αν ο σύνδεσμος είναι ακόμη σωστός.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Το αρχείο είναι μεγαλύτερο από το όριο των {limit}.',
+  'Geopend.': 'Άνοιξε.',
+  'Deellink kopiëren': 'Αντιγραφή συνδέσμου κοινοποίησης',
+  'Deellink gekopieerd.': 'Ο σύνδεσμος κοινοποίησης αντιγράφηκε.',
+  'Plak Markdown…': 'Επικόλληση Markdown…',
+  'Markdown plakken': 'Επικόλληση Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Επικολλήστε εδώ το κείμενο Markdown. Με marp: true στην κεφαλίδα γίνεται παρουσίαση, χωρίς αυτήν έγγραφο.',
+  'Markdown-tekst': 'Κείμενο Markdown',
+  '{n} tekens': '{n} χαρακτήρες',
+  'Openen in OciDeck': 'Άνοιγμα στο OciDeck',
+  'Geplakte tekst verwerpen?': 'Απόρριψη του επικολλημένου κειμένου;',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Υπάρχει ακόμη κείμενο στο πεδίο· δεν θα ανοικτεί.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Αυτό το κείμενο δεν άνοιξε — δείτε την ειδοποίηση ασφαλείας.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Προσαρμοσμένο: ελέγξτε παρακάτω τον κύριο έλεγχο και τη συμπεριφορά εξαγωγής.',
   'Als bestand downloaden': 'Λήψη ως αρχείο',
@@ -4998,8 +5026,6 @@ const _dutchSourceAddEl = <String, String>{
       'Το τελικό σημείο ανακατευθύνει — συνήθως λάθος περιοχή ή URL τελικού σημείου. Η επανάληψη δεν βοηθά εδώ.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Αποθηκεύτηκε τοπικά, αλλά η δημοσίευση στο forge απέτυχε:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Δεν υπάρχει παρουσίαση σε αυτό το URL (δεν βρέθηκε). Ελέγξτε αν ο σύνδεσμος εξακολουθεί να ισχύει.',
   'Video kan niet worden geladen': 'Δεν είναι δυνατή η φόρτωση του βίντεο',
   'Titel boven afbeelding': 'Τίτλος πάνω από την εικόνα',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

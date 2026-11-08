@@ -32,7 +32,7 @@ const _stringsEn = {
   'newPresentationTab': 'New presentation (tab)',
   'exportPackage': 'Export package…',
   'importPackage': 'Import package…',
-  'importUrl': 'Import from URL…',
+  'importUrl': 'Open via URL…',
   'findReplace': 'Find and replace',
   'fullDeckPreview': 'View full deck',
   'settingsGeneral': 'General',
@@ -395,9 +395,6 @@ const _dutchSourceEn = {
       'A presentation with unsaved changes was found from a previous session:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'This presentation has unsaved changes. Save it before closing the tab.',
-  'Importeren via URL': 'Import from URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Paste the link to an .ocideck package or a Marp Markdown file.',
   'Ophalen': 'Fetch',
   'Laat los om toe te voegen': 'Release to add',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -413,8 +410,6 @@ const _dutchSourceEn = {
   'Export mislukt:': 'Export failed:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'This slide cannot receive an image. Choose an image slide first.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Could not fetch a presentation from this URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Drag to make the slide preview wider or narrower',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -802,6 +797,41 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Website wil Markdown openen?': 'Website wants to open Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'The website {origin} wants to open a Markdown text in OciDeck.',
+  'Voorgestelde naam: {name}': 'Suggested name: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'The text is opened as if you had pasted it yourself. The website is only told whether opening succeeded — never the content.',
+  'Weigeren': 'Decline',
+  'Openen via URL': 'Open via URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Paste the link to an .md file or an .ocideck package; an .md opens as a presentation or document. The source must allow your browser to read the file.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Enter an http(s) address with a host name, e.g. https://example.org/notes.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Could not fetch a file from this URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Could not fetch a file from this URL. Check the URL and your connection.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'There is no file at this URL (not found). Check that the link is still correct.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'The file is larger than the limit of {limit}.',
+  'Geopend.': 'Opened.',
+  'Deellink kopiëren': 'Copy share link',
+  'Deellink gekopieerd.': 'Share link copied.',
+  'Plak Markdown…': 'Paste Markdown…',
+  'Markdown plakken': 'Paste Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Paste the Markdown text here. With marp: true in the front matter it becomes a presentation; without, a document.',
+  'Markdown-tekst': 'Markdown text',
+  '{n} tekens': '{n} characters',
+  'Openen in OciDeck': 'Open in OciDeck',
+  'Geplakte tekst verwerpen?': 'Discard pasted text?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'There is still text in the field; it will not be opened.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'This text was not opened — see the security warning.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Custom: check the main scan and export behavior below.',
   'Als bestand downloaden': 'Download as a file',
@@ -4122,8 +4152,6 @@ const _dutchSourceAddEn = {
       'The endpoint redirects — usually a wrong region or endpoint URL. Retrying will not help here.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Saved locally, but publishing to the forge failed:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'There is no presentation at this URL (not found). Check that the link is still correct.',
   'Video kan niet worden geladen': 'Video cannot be loaded',
   'Titel boven afbeelding': 'Title above image',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
@@ -7220,8 +7248,6 @@ const _dutchSourceAddEn = {
       'The file is damaged or unreadable.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import refused: the package exceeds the safety limits.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Could not fetch a presentation from this URL. Check the URL and your connection.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Sign-in failed — check the username and password. Tip: with Nextcloud, use an app password (Settings → Security), not your account password.',
   'Annuleren…': 'Cancelling…',

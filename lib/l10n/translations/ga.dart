@@ -34,7 +34,7 @@ const _stringsGa = {
   'newPresentationTab': 'Láithreoireacht nua (cluaisín)',
   'exportPackage': 'Easpórtáil pacáiste…',
   'importPackage': 'Iompórtáil pacáiste…',
-  'importUrl': 'Iompórtáil ó URL…',
+  'importUrl': 'Oscail trí URL…',
   'findReplace': 'Aimsigh agus athsholáthar',
   'fullDeckPreview': 'Féach ar an deic iomlán',
   'settingsGeneral': 'Ginearálta',
@@ -399,9 +399,6 @@ const _dutchSourceGa = {
       'Aimsíodh cur i láthair le hathruithe neamhshábháilte ó sheisiún roimhe seo:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Tá athruithe neamhshábháilte sa chur i láthair seo. Sábháil é sula ndúnann an cluaisín.',
-  'Importeren via URL': 'Iompórtáil ó URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Greamaigh an nasc chuig pacáiste .ocideck nó comhad Marp Markdown.',
   'Ophalen': 'Faigh',
   'Laat los om toe te voegen': 'Scaoil chun cur leis',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -418,8 +415,6 @@ const _dutchSourceGa = {
   'Export mislukt:': 'Theip ar an easpórtáil:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Ní féidir leis an sleamhnán seo íomhá a ghlacadh. Roghnaigh sleamhnán íomhá ar dtús.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Níorbh fhéidir cur i láthair a fháil ón URL seo.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Tarraing chun an réamhamharc sleamhnáin a leathnú nó a chúngú',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1371,8 +1366,6 @@ const _dutchSourceGa = {
       'Tá an comhad damáiste nó doléite.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Diúltaíodh don iompórtáil: sáraíonn an pacáiste na teorainneacha slándála.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Níorbh fhéidir cur i láthair a fháil ón URL seo. Seiceáil an URL agus do nasc.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Theip ar an síniú isteach — seiceáil an t-ainm úsáideora agus an pasfhocal. Leid: le Nextcloud, úsáid pasfhocal aipe (Socruithe → Slándáil), ní pasfhocal do chuntais.',
   'Annuleren…': 'Á chealú…',
@@ -1625,6 +1618,41 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Website wil Markdown openen?': 'An suíomh ag iarraidh Markdown a oscailt?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Tá an suíomh {origin} ag iarraidh téacs Markdown a oscailt in OciDeck.',
+  'Voorgestelde naam: {name}': 'Ainm molta: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Osclaítear an téacs amhail is dá bhféadfá é a ghreamú tú féin. Ní chloiseann an suíomh ach an éirigh leis an oscailt — riamh an t-ábhar.',
+  'Weigeren': 'Diúltaigh',
+  'Openen via URL': 'Oscail trí URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Greamaigh an nasc chuig comhad .md nó pacáiste .ocideck; osclaíonn .md mar chur i láthair nó dhoiciméad. Caithfidh an foinse cead a thabhairt do do bhrabhsálaí an comhad a léamh.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Iontráil seoladh http(s) le hainm freastalaí, m.sh. https://example.org/notai.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Níorbh fhéidir comhad a fháil ón URL seo.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Níorbh fhéidir comhad a fháil ón URL seo. Seiceáil an URL agus do nasc.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Níl comhad ar bith ag an URL seo (gan aimsiú). Seiceáil an bhfuil an nasc fós ceart.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Tá an comhad níos mó ná an teorainn {limit}.',
+  'Geopend.': 'Oscailte.',
+  'Deellink kopiëren': 'Cóipeáil an nasc comhroinnte',
+  'Deellink gekopieerd.': 'Cóipeáladh an nasc comhroinnte.',
+  'Plak Markdown…': 'Greamaigh Markdown…',
+  'Markdown plakken': 'Greamaigh Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Greamaigh an téacs Markdown anseo. Le marp: true sa cheannteideal tagann sé chun bheith ina chur i láthair, gan é ina dhoiciméad.',
+  'Markdown-tekst': 'Téacs Markdown',
+  '{n} tekens': '{n} carachtar',
+  'Openen in OciDeck': 'Oscail in OciDeck',
+  'Geplakte tekst verwerpen?': 'Caith an téacs greamaithe uait?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Tá téacs fós sa réimse; ní osclófar é.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Níor osclaíodh an téacs seo — féach an rabhadh slándála.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Saincheaptha: seiceáil an príomhsheiceáil agus iompar easpórtála thíos.',
   'Als bestand downloaden': 'Íoslódáil mar chomhad',
@@ -4992,8 +5020,6 @@ const _dutchSourceAddGa = <String, String>{
       'Atreoraíonn an críochphointe — réigiún nó URL críochphointe mícheart de ghnáth. Ní chabhraíonn atriail anseo.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Sábháilte go logánta, ach theip ar an bhfoilsiú chuig an forge:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Níl aon chur i láthair ag an URL seo (gan aimsiú). Seiceáil an bhfuil an nasc fós ceart.',
   'Video kan niet worden geladen': 'Ní féidir an físeán a lódáil',
   'Titel boven afbeelding': 'Teideal os cionn na híomhá',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

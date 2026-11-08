@@ -32,7 +32,7 @@ const _stringsDa = {
   'newPresentationTab': 'Ny præsentation (fane)',
   'exportPackage': 'Eksportér pakke…',
   'importPackage': 'Importér pakke…',
-  'importUrl': 'Importér fra URL…',
+  'importUrl': 'Åbn via URL…',
   'findReplace': 'Søg og erstat',
   'fullDeckPreview': 'Vis hele decket',
   'settingsGeneral': 'Generelt',
@@ -396,9 +396,6 @@ const _dutchSourceDa = {
       'En præsentation med ikke-gemte ændringer blev fundet fra en tidligere session:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Denne præsentation har ikke-gemte ændringer. Gem den, før fanen lukkes.',
-  'Importeren via URL': 'Importer fra URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Indsæt linket til en .ocideck-pakke eller en Marp Markdown-fil.',
   'Ophalen': 'Hent',
   'Laat los om toe te voegen': 'Slip for at tilføje',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -414,8 +411,6 @@ const _dutchSourceDa = {
   'Export mislukt:': 'Eksport mislykkedes:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Denne slide kan ikke modtage et billede. Vælg først en billedslide.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Kunne ikke hente en præsentation fra denne URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Træk for at gøre slide-forhåndsvisningen bredere eller smallere',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1346,8 +1341,6 @@ const _dutchSourceDa = {
       'Filen er beskadiget eller ulæselig.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import afvist: pakken overskrider sikkerhedsgrænserne.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Kunne ikke hente en præsentation fra denne URL. Tjek URL\'en og din forbindelse.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Login mislykkedes — tjek brugernavn og adgangskode. Tip: brug med Nextcloud en app-adgangskode (Indstillinger → Sikkerhed), ikke din kontoadgangskode.',
   'Annuleren…': 'Annullerer…',
@@ -1596,6 +1589,41 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Website wil Markdown openen?': 'Websitet vil åbne Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Websitet {origin} vil åbne en Markdown-tekst i OciDeck.',
+  'Voorgestelde naam: {name}': 'Foreslået navn: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Teksten åbnes, som om du selv havde indsat den. Websitet får kun at vide, om åbningen lykkedes — aldrig indholdet.',
+  'Weigeren': 'Afvis',
+  'Openen via URL': 'Åbn via URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Indsæt linket til en .md-fil eller en .ocideck-pakke; en .md åbner som præsentation eller dokument. Kilden skal tillade din browser at læse filen.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Indtast en http(s)-adresse med et servernavn, f.eks. https://example.org/noter.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Kunne ikke hente en fil fra denne URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Kunne ikke hente en fil fra denne URL. Kontrollér URL’en og din forbindelse.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Der er ingen fil på denne URL (ikke fundet). Kontrollér, om linket stadig er korrekt.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Filen er større end grænsen på {limit}.',
+  'Geopend.': 'Åbnet.',
+  'Deellink kopiëren': 'Kopiér delelink',
+  'Deellink gekopieerd.': 'Delelink kopieret.',
+  'Plak Markdown…': 'Indsæt Markdown…',
+  'Markdown plakken': 'Indsæt Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Indsæt Markdown-teksten her. Med marp: true i headeren bliver det en præsentation, uden et dokument.',
+  'Markdown-tekst': 'Markdown-tekst',
+  '{n} tekens': '{n} tegn',
+  'Openen in OciDeck': 'Åbn i OciDeck',
+  'Geplakte tekst verwerpen?': 'Kassér den indsatte tekst?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Der står stadig tekst i feltet; den åbnes ikke.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Denne tekst blev ikke åbnet — se sikkerhedsadvarslen.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Tilpasset: kontrollér hovedkontrollen og eksportadfærden nedenfor.',
   'Als bestand downloaden': 'Download som fil',
@@ -4910,8 +4938,6 @@ const _dutchSourceAddDa = <String, String>{
       'Slutpunktet omdirigerer — som regel en forkert region eller slutpunkts-URL. At prøve igen hjælper ikke her.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Gemt lokalt, men publicering til forgen mislykkedes:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Der er ingen præsentation på denne URL (ikke fundet). Tjek, om linket stadig er korrekt.',
   'Video kan niet worden geladen': 'Videoen kan ikke indlæses',
   'Titel boven afbeelding': 'Titel over billedet',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

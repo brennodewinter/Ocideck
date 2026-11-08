@@ -1,0 +1,77 @@
+{
+  "additions": {
+    "Website wil Markdown openen?": {
+      "en": "Website wants to open Markdown?", "de": "Website möchte Markdown öffnen?", "fr": "Le site veut ouvrir du Markdown ?", "es": "¿El sitio quiere abrir Markdown?", "it": "Il sito vuole aprire un Markdown?", "pt": "O site quer abrir Markdown?", "fy": "Webside wol Markdown iepenje?", "pap": "Website ke habri Markdown?", "la": "Pagina Markdown aperire vult?", "id": "Situs ingin membuka Markdown?", "pl": "Witryna chce otworzyć Markdown?", "uk": "Сайт хоче відкрити Markdown?", "gsw": "Websyte wot Markdown ufmache?", "el": "Ο ιστότοπος θέλει να ανοίξει Markdown;", "da": "Websitet vil åbne Markdown?", "sv": "Webbplatsen vill öppna Markdown?", "hr": "Web-mjesto želi otvoriti Markdown?", "cs": "Web chce otevřít Markdown?", "fi": "Sivusto haluaa avata Markdownin?", "bg": "Сайтът иска да отвори Markdown?", "lv": "Vietne vēlas atvērt Markdown?", "lt": "Svetainė nori atidaryti Markdown?", "mt": "Is-sit irid jiftaħ Markdown?", "et": "Veebileht tahab Markdowni avada?", "hu": "A webhely Markdownot akar megnyitni?", "ga": "An suíomh ag iarraidh Markdown a oscailt?", "ro": "Site-ul vrea să deschidă Markdown?", "sl": "Spletno mesto želi odpreti Markdown?", "sk": "Web chce otvoriť Markdown?", "tr": "Site Markdown açmak istiyor?"
+    },
+    "De website {origin} wil een Markdown-tekst in OciDeck openen.": {
+      "en": "The website {origin} wants to open a Markdown text in OciDeck.",
+      "de": "Die Website {origin} möchte einen Markdown-Text in OciDeck öffnen.",
+      "fr": "Le site {origin} veut ouvrir un texte Markdown dans OciDeck.",
+      "es": "El sitio {origin} quiere abrir un texto Markdown en OciDeck.",
+      "it": "Il sito {origin} vuole aprire un testo Markdown in OciDeck.",
+      "pt": "O site {origin} quer abrir um texto Markdown no OciDeck.",
+      "fy": "De webside {origin} wol in Markdown-tekst yn OciDeck iepenje.",
+      "pap": "E website {origin} ke habri un teksto di Markdown den OciDeck.",
+      "la": "Pagina {origin} textum Markdown in OciDeck aperire vult.",
+      "id": "Situs {origin} ingin membuka teks Markdown di OciDeck.",
+      "pl": "Witryna {origin} chce otworzyć tekst Markdown w OciDeck.",
+      "uk": "Сайт {origin} хоче відкрити текст Markdown в OciDeck.",
+      "gsw": "D Websyte {origin} wot en Markdown-Tekscht in OciDeck ufmache.",
+      "el": "Ο ιστότοπος {origin} θέλει να ανοίξει κείμενο Markdown στο OciDeck.",
+      "da": "Websitet {origin} vil åbne en Markdown-tekst i OciDeck.",
+      "sv": "Webbplatsen {origin} vill öppna en Markdown-text i OciDeck.",
+      "hr": "Web-mjesto {origin} želi otvoriti Markdown tekst u OciDecku.",
+      "cs": "Web {origin} chce otevřít text Markdown v OciDecku.",
+      "fi": "Sivusto {origin} haluaa avata Markdown-tekstin OciDeckissä.",
+      "bg": "Сайтът {origin} иска да отвори текст Markdown в OciDeck.",
+      "lv": "Vietne {origin} vēlas atvērt Markdown tekstu lietotnē OciDeck.",
+      "lt": "Svetainė {origin} nori atidaryti Markdown tekstą OciDeck.",
+      "mt": "Is-sit {origin} irid jiftaħ test Markdown f’OciDeck.",
+      "et": "Veebileht {origin} tahab avada Markdown-teksti OciDeckis.",
+      "hu": "A(z) {origin} webhely Markdown-szöveget akar megnyitni az OciDeckben.",
+      "ga": "Tá an suíomh {origin} ag iarraidh téacs Markdown a oscailt in OciDeck.",
+      "ro": "Site-ul {origin} vrea să deschidă un text Markdown în OciDeck.",
+      "sl": "Spletno mesto {origin} želi odpreti besedilo Markdown v OciDecku.",
+      "sk": "Web {origin} chce otvoriť text Markdown v OciDecku.",
+      "tr": "{origin} sitesi OciDeck’te bir Markdown metni açmak istiyor."
+    },
+    "Voorgestelde naam: {name}": {
+      "en": "Suggested name: {name}", "de": "Vorgeschlagener Name: {name}", "fr": "Nom proposé : {name}", "es": "Nombre sugerido: {name}", "it": "Nome suggerito: {name}", "pt": "Nome sugerido: {name}", "fy": "Foarstelde namme: {name}", "pap": "Nòmber sugerí: {name}", "la": "Nomen propositum: {name}", "id": "Nama yang disarankan: {name}", "pl": "Proponowana nazwa: {name}", "uk": "Запропонована назва: {name}", "gsw": "Vorgeschlagene Name: {name}", "el": "Προτεινόμενο όνομα: {name}", "da": "Foreslået navn: {name}", "sv": "Föreslaget namn: {name}", "hr": "Predloženi naziv: {name}", "cs": "Navržený název: {name}", "fi": "Ehdotettu nimi: {name}", "bg": "Предложено име: {name}", "lv": "Ierosinātais nosaukums: {name}", "lt": "Siūlomas pavadinimas: {name}", "mt": "Isem propost: {name}", "et": "Soovitatud nimi: {name}", "hu": "Javasolt név: {name}", "ga": "Ainm molta: {name}", "ro": "Nume propus: {name}", "sl": "Predlagano ime: {name}", "sk": "Navrhovaný názov: {name}", "tr": "Önerilen ad: {name}"
+    },
+    "De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.": {
+      "en": "The text is opened as if you had pasted it yourself. The website is only told whether opening succeeded — never the content.",
+      "de": "Der Text wird geöffnet, als hätten Sie ihn selbst eingefügt. Die Website erfährt nur, ob das Öffnen gelang — nie den Inhalt.",
+      "fr": "Le texte est ouvert comme si vous l’aviez collé vous-même. Le site apprend seulement si l’ouverture a réussi — jamais le contenu.",
+      "es": "El texto se abre como si lo hubieras pegado tú. El sitio solo recibe si la apertura tuvo éxito — nunca el contenido.",
+      "it": "Il testo viene aperto come se lo avessi incollato tu. Il sito viene a sapere solo se l’apertura è riuscita — mai il contenuto.",
+      "pt": "O texto é aberto como se o tivesses colado. O site apenas fica a saber se a abertura correu bem — nunca o conteúdo.",
+      "fy": "De tekst wurdt iepene as hiest jim him sels plakt. De webside heart allinnich oft it iepenjen slagge is — nea de ynhâld.",
+      "pap": "E teksto ta wordu habrí manera bo mes a peg’é. E website ta haña solamente si e apertura a sosial — nunka e kontenido.",
+      "la": "Textus aperitur quasi ipse eum glutinavisses. Pagina solum audit an apertio successerit — numquam contentum.",
+      "id": "Teks dibuka seolah-olah Anda menempelkannya sendiri. Situs hanya diberi tahu apakah pembukaan berhasil — tidak pernah isinya.",
+      "pl": "Tekst otwiera się tak, jakbyś go sam wkleił. Witryna dowiaduje się tylko, czy otwarcie się powiodło — nigdy treści.",
+      "uk": "Текст відкривається так, ніби ви вставили його самі. Сайт дізнається лише, чи відкриття вдалося — ніколи зміст.",
+      "gsw": "De Tekscht wird ufgmacht, als hettsch ne sälber iigfüegt. D Websyte erfahrt nur, öbs klapp het — nie de Inhalt.",
+      "el": "Το κείμενο ανοίγει σαν να το είχατε επικολλήσει εσείς. Ο ιστότοπος μαθαίνει μόνο αν το άνοιγμα πέτυχε — ποτέ το περιεχόμενο.",
+      "da": "Teksten åbnes, som om du selv havde indsat den. Websitet får kun at vide, om åbningen lykkedes — aldrig indholdet.",
+      "sv": "Texten öppnas som om du hade klistrat in den själv. Webbplatsen får bara veta om öppnandet lyckades — aldrig innehållet.",
+      "hr": "Tekst se otvara kao da ste ga sami zalijepili. Web-mjesto saznaje samo je li otvaranje uspjelo — nikad sadržaj.",
+      "cs": "Text se otevře, jako byste ho sami vložili. Web se dozví jen, jestli otevření proběhlo — nikdy obsah.",
+      "fi": "Teksti avautuu ikään kuin olisit liittänyt sen itse. Sivusto saa vain tiedon, onnistuiko avaus — ei koskaan sisältöä.",
+      "bg": "Текстът се отваря, сякаш сам сте го поставили. Сайтът научава само дали отварянето е успешно — никога съдържанието.",
+      "lv": "Teksts tiek atvērts tā, it kā jūs pats to būtu ielīmējis. Vietne uzzina tikai, vai atvēršana izdevās — nekad saturu.",
+      "lt": "Tekstas atidaromas tarytum patys jį įklijavote. Svetainė sužino tik, ar atidaryti pavyko — niekada turinio.",
+      "mt": "It-test jinfetaħ bħallikieku int stess waħħaltu. Is-sit jinduna biss jekk il-ftuħ irnexxiex — qatt il-kontenut.",
+      "et": "Tekst avatakse nii, nagu oleksite selle ise kleepinud. Veebileht saab teada vaid, kas avamine õnnestus — mitte kunagi sisu.",
+      "hu": "A szöveg úgy nyílik meg, mintha Ön illesztette volna be. A webhely csak azt tudja meg, hogy a megnyitás sikerült-e — a tartalmat soha.",
+      "ga": "Osclaítear an téacs amhail is dá bhféadfá é a ghreamú tú féin. Ní chloiseann an suíomh ach an éirigh leis an oscailt — riamh an t-ábhar.",
+      "ro": "Textul se deschide ca și cum l-ați fi lipit chiar dvs. Site-ul află doar dacă deschiderea a reușit — niciodată conținutul.",
+      "sl": "Besedilo se odpre, kot da bi ga sami prilepili. Spletno mesto izve le, ali je odpiranje uspelo — nikoli vsebino.",
+      "sk": "Text sa otvorí, akoby ste ho sami vložili. Web sa dozvie len, či otvorenie prebehlo — nikdy obsah.",
+      "tr": "Metin, siz yapıştırmışsınız gibi açılır. Site yalnızca açmanın başarılı olup olmadığını öğrenir — içeriği asla."
+    },
+    "Weigeren": {
+      "en": "Decline", "de": "Ablehnen", "fr": "Refuser", "es": "Rechazar", "it": "Rifiuta", "pt": "Recusar", "fy": "Weigere", "pap": "Rechazá", "la": "Recusa", "id": "Tolak", "pl": "Odrzuć", "uk": "Відхилити", "gsw": "Abchlähne", "el": "Απόρριψη", "da": "Afvis", "sv": "Avvisa", "hr": "Odbij", "cs": "Odmítnout", "fi": "Kieltäydy", "bg": "Откажи", "lv": "Noraidīt", "lt": "Atmesti", "mt": "Irrifjuta", "et": "Keeldu", "hu": "Elutasítás", "ga": "Diúltaigh", "ro": "Refuză", "sl": "Zavrni", "sk": "Odmietnuť", "tr": "Reddet"
+    }
+  }
+}

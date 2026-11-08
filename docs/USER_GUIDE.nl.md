@@ -184,11 +184,41 @@ staan bij de [release-downloads](https://pawprint.vigilis.online/LibreKAT/Ocidec
   [Presentaties importeren](#presentaties-importeren-powerpoint-keynote-impress)
   voor wat die omzetting wel en niet overleeft. Het zit achter de optionele module
   *Importeren*, dus je ziet het pas als je die inschakelt.
-- **Geopend vanuit een URL**: een deck opgehaald van een webadres (de URL-import,
-  of een `?deck=…`-deellink op de webbuild) toont een privacybadge **“Extern”** in
-  de statusbalk. Het openen van zo'n link heeft je apparaat contact met die server
-  laten leggen; beweeg over de badge om de bronhost te zien. Decks die je van je
+- **Openen via URL**: kies **Openen via URL…** — op het welkomstscherm, achter
+  *Importeren…* in het `…`-menu, of via het commandopalet — en plak de link naar
+  een `.md`-bestand (opent als presentatie of document) of een `.ocideck`-pakket.
+  De browser mag het bestand alleen lezen als de server dat toestaat (CORS);
+  weigert die, dan biedt OciDeck aan het adres aan zijn eigen ophaalhulppunt door
+  te geven — pas ná jouw expliciete toestemming, want dan ziet die website het
+  volledige adres. Een deck opgehaald van een webadres (de URL-import, of een
+  `?deck=…`-deellink op de webbuild) toont een privacybadge **“Extern”** in de
+  statusbalk; beweeg over de badge om de bronhost te zien. Decks die je van je
   eigen schijf opent, dragen geen badge.
+- **Deellink (`?deck=…`)**: op de webbuild kun je een link maken die OciDeck én
+  een presentatie tegelijk opent: `https://<host>/?deck=<url>`. De bron-URL moet
+  **URL-gecodeerd** zijn, zeker als hij zelf een query (`?a=1&b=2`) of een
+  `#`-fragment heeft — anders breken die tekens de deellink af. Encodeer met
+  bijvoorbeeld `encodeURIComponent()` in JavaScript of een encoder online:
+
+  ```
+  https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fnotities.md
+  https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fzoek%3Fq%3Dkat%26n%3D5%23kop
+  ```
+
+  Na een succesvol geopende URL biedt OciDeck **Deellink kopiëren** aan, die de
+  correct gecodeerde link op je klembord zet. Zodra het deck opent, verdwijnt
+  `?deck=` uit de adresbalk — anders zou een herlading het bestand opnieuw
+  ophalen als extra tabblad. *(Toegevoegd 2026-11-08, #2826.)*
+- **Markdown vanuit een website**: op een hosting die dit expliciet toestaat kan een externe website je een Markdown-tekst aanbieden (bijvoorbeeld vanuit een intake-formulier). OciDeck toont dan een toestemmingsvraag met de herkomst; pas na *Openen* wordt de tekst door dezelfde poort gehaald als geplakte tekst — zie het punt hierboven. *(Toegevoegd 2026-11-08, #2827.)*
+- **Markdown plakken**: staat je tekst in een andere toepassing (een wiki, chat of
+  AI-assistent), dan hoeft die niet eerst als `.md`-bestand opgeslagen te worden.
+  Kies **Plak Markdown…** — op het welkomstscherm, achter *Importeren…* in het
+  `…`-menu, of via het commandopalet — plak de tekst en klik **Open in OciDeck**.
+  Met `marp: true` in de kopregels wordt het een presentatie, zonder een document,
+  in een nieuw tabblad zonder bestandspad. De tekst gaat nergens heen: dezelfde
+  veiligheidsscan en omvangsgrens gelden als bij een geopend bestand, maar er
+  vertrekt geen verzoek — ook niet naar een server. *(Toegevoegd 2026-11-08,
+  #2825.)*
 - **Opslaan**: `Ctrl/Cmd + S`. Bij het opslaan wordt een nette projectmap naast je
   `.md` neergezet (`images/`, `data/`, `logos/`, `themes/`) en worden assets erin
   gekopieerd. Zie [`FILE_FORMAT.md`](FILE_FORMAT.md). Bij volgende opslagbeurten

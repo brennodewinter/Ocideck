@@ -96,7 +96,7 @@ void main() {
     // leven voort als keuzes in de tweede stap.
     expect(menuText('Pakket exporteren…'), findsNothing);
     expect(menuText('Pakket importeren…'), findsNothing);
-    expect(menuText('Importeren via URL…'), findsNothing);
+    expect(menuText('Openen via URL…'), findsNothing);
     expect(menuText('Presentaties importeren…'), findsNothing);
   });
 
@@ -162,7 +162,7 @@ void main() {
 
     expect(find.byType(ChoicePicker<String>), findsOneWidget);
     expect(pickerText('Pakket importeren…'), findsOneWidget);
-    expect(pickerText('Importeren via URL…'), findsOneWidget);
+    expect(pickerText('Openen via URL…'), findsOneWidget);
     // Module "Importeren" staat uit: de presentatie-import hoort dan weg te
     // zijn, niet grijs (zelfde regel als in het oude menu).
     expect(pickerText('Presentaties importeren…'), findsNothing);
@@ -199,10 +199,10 @@ void main() {
   testWidgets('URL-import opent het bestaande invoervenster', (tester) async {
     await openMenu(tester);
     await openPicker(tester, 'Importeren…');
-    await tester.tap(pickerText('Importeren via URL…'));
+    await tester.tap(pickerText('Openen via URL…'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Importeren via URL'), findsOneWidget);
+    expect(find.text('Openen via URL'), findsOneWidget);
   });
 }
 

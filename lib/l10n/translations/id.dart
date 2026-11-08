@@ -32,7 +32,7 @@ const _stringsId = {
   'newPresentationTab': 'Presentasi baru (tab)',
   'exportPackage': 'Ekspor paket…',
   'importPackage': 'Impor paket…',
-  'importUrl': 'Impor dari URL…',
+  'importUrl': 'Buka via URL…',
   'findReplace': 'Cari dan ganti',
   'fullDeckPreview': 'Lihat seluruh deck',
   'settingsGeneral': 'Umum',
@@ -393,9 +393,6 @@ const _dutchSourceId = {
       'Ditemukan presentasi dengan perubahan yang belum disimpan dari sesi sebelumnya:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Presentasi ini memiliki perubahan yang belum disimpan. Simpan sebelum menutup tab.',
-  'Importeren via URL': 'Impor dari URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Tempel tautan ke paket .ocideck atau berkas Markdown Marp.',
   'Ophalen': 'Ambil',
   'Laat los om toe te voegen': 'Lepaskan untuk menambahkan',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -411,8 +408,6 @@ const _dutchSourceId = {
   'Export mislukt:': 'Ekspor gagal:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Slide ini tidak dapat menerima gambar. Pilih slide gambar terlebih dahulu.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Tidak dapat mengambil presentasi dari URL ini.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Seret untuk memperlebar atau mempersempit pratinjau slide',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1347,8 +1342,6 @@ const _dutchSourceId = {
       'File rusak atau tidak dapat dibaca.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Impor ditolak: paket melebihi batas keamanan.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Tidak dapat mengambil presentasi dari URL ini. Periksa URL dan koneksi Anda.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Gagal masuk — periksa nama pengguna dan kata sandi. Tips: dengan Nextcloud gunakan kata sandi aplikasi (Pengaturan → Keamanan), bukan kata sandi akun.',
   'Annuleren…': 'Membatalkan…',
@@ -1596,6 +1589,41 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Website wil Markdown openen?': 'Situs ingin membuka Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Situs {origin} ingin membuka teks Markdown di OciDeck.',
+  'Voorgestelde naam: {name}': 'Nama yang disarankan: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Teks dibuka seolah-olah Anda menempelkannya sendiri. Situs hanya diberi tahu apakah pembukaan berhasil — tidak pernah isinya.',
+  'Weigeren': 'Tolak',
+  'Openen via URL': 'Buka via URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Tempel tautan ke berkas .md atau paket .ocideck; .md terbuka sebagai presentasi atau dokumen. Sumber harus mengizinkan browser Anda membaca berkas itu.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Masukkan alamat http(s) dengan nama server, mis. https://example.org/catatan.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Tidak dapat mengambil berkas dari URL ini.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Tidak dapat mengambil berkas dari URL ini. Periksa URL dan koneksi Anda.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Tidak ada berkas di URL ini (tidak ditemukan). Periksa apakah tautan masih benar.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Berkas lebih besar dari batas {limit}.',
+  'Geopend.': 'Dibuka.',
+  'Deellink kopiëren': 'Salin tautan berbagi',
+  'Deellink gekopieerd.': 'Tautan berbagi disalin.',
+  'Plak Markdown…': 'Tempel Markdown…',
+  'Markdown plakken': 'Tempel Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Tempel teks Markdown di sini. Dengan marp: true di baris kepala menjadi presentasi; tanpa itu menjadi dokumen.',
+  'Markdown-tekst': 'Teks Markdown',
+  '{n} tekens': '{n} karakter',
+  'Openen in OciDeck': 'Buka di OciDeck',
+  'Geplakte tekst verwerpen?': 'Buang teks yang ditempel?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Masih ada teks di kolom; teks itu tidak akan dibuka.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Teks ini tidak dibuka — lihat peringatan keamanan.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Khusus: periksa pemindaian utama dan perilaku ekspor di bawah.',
   'Als bestand downloaden': 'Unduh sebagai berkas',
@@ -4911,8 +4939,6 @@ const _dutchSourceAddId = <String, String>{
       'Endpoint mengalihkan — biasanya region atau URL endpoint yang salah. Mencoba lagi tidak membantu di sini.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Disimpan secara lokal, tetapi memublikasikan ke forge gagal:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Tidak ada presentasi di URL ini (tidak ditemukan). Periksa apakah tautannya masih benar.',
   'Video kan niet worden geladen': 'Video tidak dapat dimuat',
   'Titel boven afbeelding': 'Judul di atas gambar',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

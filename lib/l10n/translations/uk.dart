@@ -33,7 +33,7 @@ const _stringsUk = {
   'newPresentationTab': 'Нова презентація (вкладка)',
   'exportPackage': 'Експортувати пакет…',
   'importPackage': 'Імпортувати пакет…',
-  'importUrl': 'Імпортувати з URL…',
+  'importUrl': 'Відкрити з URL…',
   'findReplace': 'Знайти та замінити',
   'fullDeckPreview': 'Переглянути всю презентацію',
   'settingsGeneral': 'Загальні',
@@ -398,9 +398,6 @@ const _dutchSourceUk = {
       'Знайдено презентацію з незбереженими змінами з попередньої сесії:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ця презентація має незбережені зміни. Збережіть її, перш ніж закривати вкладку.',
-  'Importeren via URL': 'Імпорт за URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Вставте посилання на пакет .ocideck або файл Marp Markdown.',
   'Ophalen': 'Отримати',
   'Laat los om toe te voegen': 'Відпустіть, щоб додати',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -416,8 +413,6 @@ const _dutchSourceUk = {
   'Export mislukt:': 'Помилка експорту:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Цей слайд не може отримати зображення. Спочатку виберіть слайд із зображенням.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Не вдалося отримати презентацію за цим URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Перетягніть, щоб зробити попередній перегляд слайда ширшим або вужчим',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1360,8 +1355,6 @@ const _dutchSourceUk = {
       'Файл пошкоджений або нечитабельний.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Імпорт відхилено: пакет перевищує межі безпеки.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Не вдалося отримати презентацію за цією URL-адресою. Перевірте URL і з\'єднання.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Не вдалося увійти — перевірте ім\'я користувача та пароль. Порада: для Nextcloud використовуйте пароль застосунку (Налаштування → Безпека), а не пароль облікового запису.',
   'Annuleren…': 'Скасування…',
@@ -1611,6 +1604,41 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Website wil Markdown openen?': 'Сайт хоче відкрити Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Сайт {origin} хоче відкрити текст Markdown в OciDeck.',
+  'Voorgestelde naam: {name}': 'Запропонована назва: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Текст відкривається так, ніби ви вставили його самі. Сайт дізнається лише, чи відкриття вдалося — ніколи зміст.',
+  'Weigeren': 'Відхилити',
+  'Openen via URL': 'Відкрити з URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Вставте посилання на файл .md або пакет .ocideck; .md відкриється як презентація або документ. Джерело має дозволяти браузеру читати файл.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Введіть адресу http(s) з іменем сервера, напр. https://example.org/notatky.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Не вдалося отримати файл за цією адресою.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Не вдалося отримати файл за цією адресою. Перевірте адресу та з’єднання.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'За цією адресою немає файла (не знайдено). Перевірте, чи посилання ще правильне.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Файл перевищує ліміт {limit}.',
+  'Geopend.': 'Відкрито.',
+  'Deellink kopiëren': 'Копіювати посилання для поширення',
+  'Deellink gekopieerd.': 'Посилання для поширення скопійовано.',
+  'Plak Markdown…': 'Вставити Markdown…',
+  'Markdown plakken': 'Вставити Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Вставте тут текст Markdown. З marp: true у заголовку він стане презентацією, без — документом.',
+  'Markdown-tekst': 'Текст Markdown',
+  '{n} tekens': '{n} символів',
+  'Openen in OciDeck': 'Відкрити в OciDeck',
+  'Geplakte tekst verwerpen?': 'Відкинути вставлений текст?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'У полі ще є текст; його не буде відкрито.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Цей текст не відкрито — див. попередження безпеки.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Власні налаштування: перевірте нижче основну перевірку та поведінку експорту.',
   'Als bestand downloaden': 'Завантажити як файл',
@@ -4920,8 +4948,6 @@ const _dutchSourceAddUk = <String, String>{
       'Кінцева точка перенаправляє — зазвичай через неправильний регіон або URL кінцевої точки. Повторна спроба тут не допоможе.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Збережено локально, але опублікувати у форж не вдалося:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'За цією URL-адресою немає презентації (не знайдено). Перевірте, чи посилання ще дійсне.',
   'Video kan niet worden geladen': 'Не вдається завантажити відео',
   'Titel boven afbeelding': 'Заголовок над зображенням',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

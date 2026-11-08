@@ -32,7 +32,7 @@ const _stringsHr = {
   'newPresentationTab': 'Nova prezentacija (kartica)',
   'exportPackage': 'Izvezi paket…',
   'importPackage': 'Uvezi paket…',
-  'importUrl': 'Uvezi s URL-a…',
+  'importUrl': 'Otvori putem URL-a…',
   'findReplace': 'Pronađi i zamijeni',
   'fullDeckPreview': 'Prikaži cijelu prezentaciju',
   'settingsGeneral': 'Općenito',
@@ -394,9 +394,6 @@ const _dutchSourceHr = {
       'Pronađena je prezentacija s nespremljenim promjenama iz prethodne sesije:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ova prezentacija ima nespremljene promjene. Spremite je prije zatvaranja kartice.',
-  'Importeren via URL': 'Uvezi iz URL-a',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Zalijepite poveznicu na .ocideck paket ili Marp Markdown datoteku.',
   'Ophalen': 'Dohvati',
   'Laat los om toe te voegen': 'Pustite za dodavanje',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -412,8 +409,6 @@ const _dutchSourceHr = {
   'Export mislukt:': 'Izvoz nije uspio:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Ovaj slajd ne može primiti sliku. Najprije odaberite slajd sa slikom.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Nije moguće dohvatiti prezentaciju s ovog URL-a.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Povucite da biste pregled slajda učinili širim ili užim',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1351,8 +1346,6 @@ const _dutchSourceHr = {
       'Datoteka je oštećena ili nečitljiva.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Uvoz odbijen: paket premašuje sigurnosna ograničenja.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'S ovog URL-a nije bilo moguće dohvatiti prezentaciju. Provjerite URL i vezu.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prijava nije uspjela — provjerite korisničko ime i lozinku. Savjet: uz Nextcloud koristite lozinku aplikacije (Postavke → Sigurnost), ne lozinku računa.',
   'Annuleren…': 'Otkazivanje…',
@@ -1600,6 +1593,41 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Website wil Markdown openen?': 'Web-mjesto želi otvoriti Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Web-mjesto {origin} želi otvoriti Markdown tekst u OciDecku.',
+  'Voorgestelde naam: {name}': 'Predloženi naziv: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Tekst se otvara kao da ste ga sami zalijepili. Web-mjesto saznaje samo je li otvaranje uspjelo — nikad sadržaj.',
+  'Weigeren': 'Odbij',
+  'Openen via URL': 'Otvori putem URL-a',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Zalijepite vezu na .md datoteku ili .ocideck paket; .md se otvara kao prezentacija ili dokument. Izvor mora dopustiti vašem pregledniku čitanje datoteke.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Unesite http(s) adresu s imenom poslužitelja, npr. https://example.org/biljeske.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Nije moguće dohvatiti datoteku s ovog URL-a.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Nije moguće dohvatiti datoteku s ovog URL-a. Provjerite URL i svoju vezu.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Na ovom URL-u nema datoteke (nije pronađeno). Provjerite je li veza još točna.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Datoteka je veća od ograničenja od {limit}.',
+  'Geopend.': 'Otvoreno.',
+  'Deellink kopiëren': 'Kopiraj vezu za dijeljenje',
+  'Deellink gekopieerd.': 'Veza za dijeljenje kopirana.',
+  'Plak Markdown…': 'Zalijepi Markdown…',
+  'Markdown plakken': 'Zalijepi Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Zalijepite ovdje Markdown tekst. S marp: true u zaglavlju postaje prezentacija, bez njega dokument.',
+  'Markdown-tekst': 'Markdown tekst',
+  '{n} tekens': '{n} znakova',
+  'Openen in OciDeck': 'Otvori u OciDecku',
+  'Geplakte tekst verwerpen?': 'Odbaciti zalijepljeni tekst?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'U polju je još uvijek tekst; neće se otvoriti.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Ovaj tekst nije otvoren — pogledajte sigurnosno upozorenje.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Prilagođeno: u nastavku provjerite glavni pregled i ponašanje izvoza.',
   'Als bestand downloaden': 'Preuzmi kao datoteku',
@@ -4915,8 +4943,6 @@ const _dutchSourceAddHr = <String, String>{
       'Krajnja točka preusmjerava — obično pogrešna regija ili URL krajnje točke. Ponovni pokušaj ovdje ne pomaže.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Spremljeno lokalno, ali objava na forge nije uspjela:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Na ovom URL-u nema prezentacije (nije pronađena). Provjerite je li poveznica još ispravna.',
   'Video kan niet worden geladen': 'Videozapis nije moguće učitati',
   'Titel boven afbeelding': 'Naslov iznad slike',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

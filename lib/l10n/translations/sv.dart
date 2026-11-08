@@ -32,7 +32,7 @@ const _stringsSv = {
   'newPresentationTab': 'Ny presentation (flik)',
   'exportPackage': 'Exportera paket…',
   'importPackage': 'Importera paket…',
-  'importUrl': 'Importera från URL…',
+  'importUrl': 'Öppna via URL…',
   'findReplace': 'Sök och ersätt',
   'fullDeckPreview': 'Visa hela decket',
   'settingsGeneral': 'Allmänt',
@@ -394,9 +394,6 @@ const _dutchSourceSv = {
       'En presentation med osparade ändringar hittades från en tidigare session:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Den här presentationen har osparade ändringar. Spara den innan du stänger fliken.',
-  'Importeren via URL': 'Importera från URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Klistra in länken till ett .ocideck-paket eller en Marp-Markdown-fil.',
   'Ophalen': 'Hämta',
   'Laat los om toe te voegen': 'Släpp för att lägga till',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -412,8 +409,6 @@ const _dutchSourceSv = {
   'Export mislukt:': 'Exporten misslyckades:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Den här bilden kan inte ta emot en bild. Välj en bildbild först.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Kunde inte hämta en presentation från den här URL:en.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Dra för att göra bildförhandsvisningen bredare eller smalare',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1345,8 +1340,6 @@ const _dutchSourceSv = {
   'Het bestand is beschadigd of onleesbaar.': 'Filen är skadad eller oläslig.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Importen nekades: paketet överskrider säkerhetsgränserna.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Kunde inte hämta en presentation från denna URL. Kontrollera URL:en och din anslutning.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Inloggningen misslyckades — kontrollera användarnamn och lösenord. Tips: använd med Nextcloud ett applösenord (Inställningar → Säkerhet), inte ditt kontolösenord.',
   'Annuleren…': 'Avbryter…',
@@ -1595,6 +1588,41 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Website wil Markdown openen?': 'Webbplatsen vill öppna Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Webbplatsen {origin} vill öppna en Markdown-text i OciDeck.',
+  'Voorgestelde naam: {name}': 'Föreslaget namn: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Texten öppnas som om du hade klistrat in den själv. Webbplatsen får bara veta om öppnandet lyckades — aldrig innehållet.',
+  'Weigeren': 'Avvisa',
+  'Openen via URL': 'Öppna via URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Klistra in länken till en .md-fil eller ett .ocideck-paket; en .md öppnas som presentation eller dokument. Källan måste tillåta din webbläsare att läsa filen.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Ange en http(s)-adress med ett servernamn, t.ex. https://example.org/anteckningar.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Kunde inte hämta en fil från denna URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Kunde inte hämta en fil från denna URL. Kontrollera URL:en och din anslutning.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Det finns ingen fil på denna URL (hittades inte). Kontrollera att länken fortfarande stämmer.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Filen är större än gränsen på {limit}.',
+  'Geopend.': 'Öppnad.',
+  'Deellink kopiëren': 'Kopiera dellänk',
+  'Deellink gekopieerd.': 'Dellänk kopierad.',
+  'Plak Markdown…': 'Klistra in Markdown…',
+  'Markdown plakken': 'Klistra in Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Klistra in Markdown-texten här. Med marp: true i front matter blir det en presentation, utan ett dokument.',
+  'Markdown-tekst': 'Markdown-text',
+  '{n} tekens': '{n} tecken',
+  'Openen in OciDeck': 'Öppna i OciDeck',
+  'Geplakte tekst verwerpen?': 'Kassera den inklistrade texten?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Det finns fortfarande text i fältet; den öppnas inte.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Texten öppnades inte — se säkerhetsvarningen.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Anpassat: kontrollera huvudkontrollen och exportbeteendet nedan.',
   'Als bestand downloaden': 'Ladda ned som fil',
@@ -4911,8 +4939,6 @@ const _dutchSourceAddSv = <String, String>{
       'Slutpunkten omdirigerar — oftast fel region eller slutpunkts-URL. Att försöka igen hjälper inte här.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Sparat lokalt, men publiceringen till forgen misslyckades:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Det finns ingen presentation på denna URL (hittades inte). Kontrollera att länken fortfarande stämmer.',
   'Video kan niet worden geladen': 'Videon kan inte läsas in',
   'Titel boven afbeelding': 'Titel över bilden',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

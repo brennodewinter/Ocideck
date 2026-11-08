@@ -32,7 +32,7 @@ const _stringsGsw = {
   'newPresentationTab': 'Nöi Präsentation (Tab)',
   'exportPackage': 'Paket exportiere…',
   'importPackage': 'Paket importiere…',
-  'importUrl': 'Über URL importiere…',
+  'importUrl': 'Über URL öffne…',
   'findReplace': 'Sueche und ersetze',
   'fullDeckPreview': 'Ganze Deck aaluege',
   'settingsGeneral': 'Allgemein',
@@ -396,9 +396,6 @@ const _dutchSourceGsw = {
       'Es isch e Presentation mit nöd gspicherte Ännderige us ere früenere Sitzig gfunde worde:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Die Presentation het nöd gspicherti Ännderige. Spicher si, bevor de Tab zuegaht.',
-  'Importeren via URL': 'Vo ere URL importiere',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Kläb de Link zu me .ocideck-Paket oder eme Marp-Markdown-File ie.',
   'Ophalen': 'Abhole',
   'Laat los om toe te voegen': 'Loslah zum zuefüege',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -414,8 +411,6 @@ const _dutchSourceGsw = {
   'Export mislukt:': 'Export fehlgschlage:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Die Slide cha kes Bild empfah. Wähl zerscht e Bild-Slide.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Ha vo dere URL kei Presentation chöne abhole.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Zieh zum d Slide-Vorschau breiter oder schmäler mache',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1349,8 +1344,6 @@ const _dutchSourceGsw = {
       'D Datei isch kaputt oder nit läsbar.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import verweigeret: s Paket überschritet d Sicherheitslimite.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Vo dere URL het kei Präsentation chönne gholt wärde. Lueg d URL und dini Verbindig aa.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Aamäldig fählgschlage — lueg Benutzername und Passwort aa. Tipp: bruch bi Nextcloud es App-Passwort (Iistellige → Sicherheit), nit dis Konto-Passwort.',
   'Annuleren…': 'Am Abbräche…',
@@ -1598,6 +1591,41 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Website wil Markdown openen?': 'Websyte wot Markdown ufmache?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'D Websyte {origin} wot en Markdown-Tekscht in OciDeck ufmache.',
+  'Voorgestelde naam: {name}': 'Vorgeschlagene Name: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'De Tekscht wird ufgmacht, als hettsch ne sälber iigfüegt. D Websyte erfahrt nur, öbs klapp het — nie de Inhalt.',
+  'Weigeren': 'Abchlähne',
+  'Openen via URL': 'Über URL öffne',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Füeg de Link zuen ere .md-Datei oder eme .ocideck-Pakätt ii; e .md macht als Präsentation oder Dokumänt uff. D Quell muss dim Browser erlaube, d Datei z läse.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Gib en http(s)-Adräss mit eme Sèrvernamä ii, z.B. https://example.org/notizä.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Vo däre URL het kai Datei chönne gholt wärde.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Vo däre URL het kai Datei chönne gholt wärde. Prüef d URL und dini Verbindig.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Uf däre URL staht kai Datei (nöd gfunde). Prüef, öb de Link no stimmt.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'D Datei isch gröösser als s Limit vo {limit}.',
+  'Geopend.': 'Ufgmacht.',
+  'Deellink kopiëren': 'Teil-Link kopiere',
+  'Deellink gekopieerd.': 'Teil-Link kopiert.',
+  'Plak Markdown…': 'Markdown iifüege…',
+  'Markdown plakken': 'Markdown iifüege',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Füeg do de Markdown-Tekscht ii. Mit marp: true i de Kopfziile wirds e Präsentation, ohni es Dokumänt.',
+  'Markdown-tekst': 'Markdown-Tekscht',
+  '{n} tekens': '{n} Zeiche',
+  'Openen in OciDeck': 'In OciDeck öffne',
+  'Geplakte tekst verwerpen?': 'Iigfüegte Tekscht verwärfe?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Im Fäld staht no Tekscht; de wird nöd ufgmacht.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Dä Tekscht isch nöd ufgmacht worde — lueg d Warnmäldig.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Aapasst: Prüef unde d Hauptprüefig und s Exportverhalte.',
   'Als bestand downloaden': 'Als Datei abelade',
@@ -4934,8 +4962,6 @@ const _dutchSourceAddGsw = <String, String>{
       'De Ändpunkt leitet um — meischtens e falschi Region oder Ändpunkt-URL. Nomol probiere hilft do nid.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Lokal gspeicheret, aber s Veröffentliche uf de Forge het nid klappet:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Under dere URL git’s kei Präsentation (nid gfunde). Lueg, öb de Link no stimmt.',
   'Video kan niet worden geladen': 'S Video cha nid glade wärde',
   'Titel boven afbeelding': 'Titel überem Bild',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

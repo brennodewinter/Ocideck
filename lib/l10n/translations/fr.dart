@@ -33,7 +33,7 @@ const _stringsFr = {
   'newPresentationTab': 'Nouvelle présentation (onglet)',
   'exportPackage': 'Exporter le paquet…',
   'importPackage': 'Importer un paquet…',
-  'importUrl': 'Importer depuis une URL…',
+  'importUrl': 'Ouvrir via une URL…',
   'findReplace': 'Rechercher et remplacer',
   'fullDeckPreview': 'Voir le deck complet',
   'settingsGeneral': 'Général',
@@ -396,7 +396,6 @@ const _dutchSourceFr = {
   'Herstellen': 'Restaurer',
   'Opslaan en sluiten': 'Enregistrer et fermer',
   'Niet opslaan': 'Ne pas enregistrer',
-  'Importeren via URL': 'Importer depuis une URL',
   'Ophalen': 'Récupérer',
   'Titelpagina': 'Diapositive de titre',
   'Alleen Bullets': 'Puces uniquement',
@@ -644,6 +643,41 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Website wil Markdown openen?': 'Le site veut ouvrir du Markdown ?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Le site {origin} veut ouvrir un texte Markdown dans OciDeck.',
+  'Voorgestelde naam: {name}': 'Nom proposé : {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Le texte est ouvert comme si vous l’aviez collé vous-même. Le site apprend seulement si l’ouverture a réussi — jamais le contenu.',
+  'Weigeren': 'Refuser',
+  'Openen via URL': 'Ouvrir via une URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Collez le lien vers un fichier .md ou un paquet .ocideck ; un .md s’ouvre comme présentation ou document. La source doit autoriser votre navigateur à lire le fichier.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Saisissez une adresse http(s) avec un nom d’hôte, par ex. https://example.org/notes.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Impossible de récupérer un fichier depuis cette URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Impossible de récupérer un fichier depuis cette URL. Vérifiez l’URL et votre connexion.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Aucun fichier à cette URL (introuvable). Vérifiez que le lien est toujours correct.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Le fichier dépasse la limite de {limit}.',
+  'Geopend.': 'Ouvert.',
+  'Deellink kopiëren': 'Copier le lien de partage',
+  'Deellink gekopieerd.': 'Lien de partage copié.',
+  'Plak Markdown…': 'Coller du Markdown…',
+  'Markdown plakken': 'Coller du Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Collez ici le texte Markdown. Avec marp: true dans l’en-tête, il devient une présentation ; sans, un document.',
+  'Markdown-tekst': 'Texte Markdown',
+  '{n} tekens': '{n} caractères',
+  'Openen in OciDeck': 'Ouvrir dans OciDeck',
+  'Geplakte tekst verwerpen?': 'Jeter le texte collé ?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Il reste du texte dans le champ ; il ne sera pas ouvert.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Ce texte n’a pas été ouvert — voir l’avertissement de sécurité.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personnalisé : vérifiez ci-dessous le contrôle principal et le comportement d’exportation.',
   'Als bestand downloaden': 'Télécharger comme fichier',
@@ -4025,8 +4059,6 @@ const _dutchSourceAddFr = {
       'Le point de terminaison redirige — le plus souvent une région ou une URL de point de terminaison erronée. Réessayer n’aide pas ici.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Enregistré localement, mais la publication sur la forge a échoué :',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Il n’y a aucune présentation à cette URL (introuvable). Vérifiez que le lien est toujours correct.',
   'Video kan niet worden geladen': 'Impossible de charger la vidéo',
   'Titel boven afbeelding': 'Titre au-dessus de l\'image',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
@@ -7028,8 +7060,6 @@ const _dutchSourceAddFr = {
   'Kies een map met presentaties om te beginnen.':
       'Choisissez un dossier de présentations pour commencer.',
   'Kon dit pakket niet importeren.': 'Impossible d\'importer ce paquet.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Impossible de récupérer une présentation depuis cette URL.',
   'Kopieer afbeelding naar klembord': 'Copier l\'image dans le presse-papiers',
   'Kopiëren mislukt.': 'Échec de la copie.',
   'Kopiëren naar ander deck': 'Copier vers un autre deck',
@@ -7061,8 +7091,6 @@ const _dutchSourceAddFr = {
   'Pakket geëxporteerd naar:': 'Paquet exporté vers :',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Ajustez votre terme de recherche ou ajoutez une description.',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Collez le lien vers un paquet .ocideck ou un fichier Markdown Marp.',
   'Preview inklappen': 'Réduire l\'aperçu',
   'Preview uitklappen': 'Développer l\'aperçu',
   'Profiel verwijderen': 'Supprimer le profil',
@@ -7355,8 +7383,6 @@ const _dutchSourceAddFr = {
       'Le fichier est endommagé ou illisible.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import refusé : le paquet dépasse les limites de sécurité.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Impossible de récupérer une présentation depuis cette URL. Vérifiez l\'URL et votre connexion.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Échec de la connexion — vérifiez le nom d\'utilisateur et le mot de passe. Astuce : avec Nextcloud, utilisez un mot de passe d\'application (Paramètres → Sécurité), pas celui de votre compte.',
   'Annuleren…': 'Annulation…',

@@ -32,7 +32,7 @@ const _stringsTr = {
   'newPresentationTab': 'Yeni sunum (sekme)',
   'exportPackage': 'Paketi dışa aktar…',
   'importPackage': 'Paketi içe aktar…',
-  'importUrl': 'URL ile içe aktar…',
+  'importUrl': 'URL ile aç…',
   'findReplace': 'Bul ve değiştir',
   'fullDeckPreview': 'Sunumun tamamını görüntüle',
   'settingsGeneral': 'Genel',
@@ -394,9 +394,6 @@ const _dutchSourceTr = {
       'Önceki oturumdan kaydedilmemiş değişiklikleri olan bir sunum bulundu:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Bu sunumda kaydedilmemiş değişiklikler var. Sekme kapanmadan önce sunumu kaydedin.',
-  'Importeren via URL': 'URL ile içe aktar',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Bir .ocideck paketinin veya Marp Markdown dosyasının bağlantısını yapıştırın.',
   'Ophalen': 'Getir',
   'Laat los om toe te voegen': 'Eklemek için bırakın',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -412,7 +409,6 @@ const _dutchSourceTr = {
   'Export mislukt:': 'Dışa aktarma başarısız:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Bu slayt görsel alamaz. Önce bir görsel slaydı seçin.',
-  'Kon van deze URL geen presentatie ophalen.': 'Bu URL\'den sunum alınamadı.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Slayt önizlemesini genişletmek veya daraltmak için sürükleyin',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -2309,8 +2305,6 @@ const _dutchSourceTr = {
   'Het bestand is beschadigd of onleesbaar.': 'Dosya bozuk veya okunamıyor.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'İçe aktarma reddedildi: paket güvenlik sınırlarını aşıyor.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Bu URL\'den sunum alınamadı. URL\'yi ve bağlantınızı kontrol edin.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Oturum açma başarısız — kullanıcı adını ve parolayı kontrol edin. İpucu: Nextcloud\'da bir uygulama parolası (Ayarlar → Güvenlik) kullanın, hesap parolanızı değil.',
   'Annuleren…': 'İptal ediliyor…',
@@ -2500,6 +2494,40 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Website wil Markdown openen?': 'Site Markdown açmak istiyor?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      '{origin} sitesi OciDeck’te bir Markdown metni açmak istiyor.',
+  'Voorgestelde naam: {name}': 'Önerilen ad: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Metin, siz yapıştırmışsınız gibi açılır. Site yalnızca açmanın başarılı olup olmadığını öğrenir — içeriği asla.',
+  'Weigeren': 'Reddet',
+  'Openen via URL': 'URL ile aç',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      '.md dosyasına veya .ocideck paketine giden bağlantıyı yapıştırın; .md sunum veya belge olarak açılır. Kaynağın, tarayıcınızın dosyayı okumasına izin vermesi gerekir.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Sunucu adı içeren bir http(s) adresi girin, örn. https://example.org/notlar.md',
+  'Kon van deze URL geen bestand ophalen.': 'Bu URL’den bir dosya alınamadı.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Bu URL’den bir dosya alınamadı. URL’yi ve bağlantınızı denetleyin.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Bu URL’de dosya yok (bulunamadı). Bağlantının hâlâ doğru olup olmadığını denetleyin.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Dosya {limit} sınırından büyük.',
+  'Geopend.': 'Açıldı.',
+  'Deellink kopiëren': 'Paylaşım bağlantısını kopyala',
+  'Deellink gekopieerd.': 'Paylaşım bağlantısı kopyalandı.',
+  'Plak Markdown…': 'Markdown yapıştır…',
+  'Markdown plakken': 'Markdown yapıştır',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Markdown metnini buraya yapıştırın. Başlıkta marp: true varsa sunum olur, yoksa belge olur.',
+  'Markdown-tekst': 'Markdown metni',
+  '{n} tekens': '{n} karakter',
+  'Openen in OciDeck': 'OciDeck’te aç',
+  'Geplakte tekst verwerpen?': 'Yapıştırılan metin atılsın mı?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Alında hâlâ metin var; açılmayacak.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Bu metin açılmadı — güvenlik uyarısına bakın.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Özel: aşağıda ana denetimi ve dışa aktarma davranışını kontrol edin.',
   'Als bestand downloaden': 'Dosya olarak indir',
@@ -5789,8 +5817,6 @@ const _dutchSourceAddTr = <String, String>{
       'Endpoint yönlendiriyor — genellikle yanlış bölge veya endpoint URL’si. Burada yeniden denemek yardımcı olmaz.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Yerel olarak kaydedildi, ancak forge’a yayımlama başarısız oldu:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Bu URL’de sunum yok (bulunamadı). Bağlantının hâlâ doğru olduğunu denetleyin.',
   'Video kan niet worden geladen': 'Video yüklenemiyor',
   'Titel boven afbeelding': 'Görselin üstündeki başlık',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

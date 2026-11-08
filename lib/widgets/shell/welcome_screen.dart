@@ -322,6 +322,13 @@ class _WelcomeScreen extends ConsumerWidget {
         label: Text(l10n.t('importUrl')),
         onPressed: () => _importFromUrl(context, ref),
       ),
+      const SizedBox(height: 10),
+      _wideSecondaryButton(
+        style: secondaryStyle,
+        icon: Icons.content_paste_outlined,
+        label: Text(l10n.d('Plak Markdown…')),
+        onPressed: () => _openPastedMarkdown(context, ref),
+      ),
       // Op web: presentaties die al op de eigen webserver staan, via de
       // autoindex. De beheerder configureert dit met een config-bestand op
       // de server (zie HOSTING.md §7); zonder configuratie is de sectie

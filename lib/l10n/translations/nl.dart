@@ -32,7 +32,7 @@ const _stringsNl = {
   'newPresentationTab': 'Nieuwe presentatie (tab)',
   'exportPackage': 'Pakket exporteren…',
   'importPackage': 'Pakket importeren…',
-  'importUrl': 'Importeren via URL…',
+  'importUrl': 'Openen via URL…',
   'findReplace': 'Zoeken en vervangen',
   'fullDeckPreview': 'Volledig deck bekijken',
   'settingsGeneral': 'Algemeen',

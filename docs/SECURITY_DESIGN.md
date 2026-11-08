@@ -1072,6 +1072,32 @@ stated somewhere else in this repository too, and the wording here is meant to
 match it. Where this table and the section it points at disagree, the section is
 the more detailed one and wins.
 
+## PostMessage Markdown transfer (browser coupling, #2827)
+
+An embedded OciDeck (iframe) accepts `postMessage` Markdown offers from the
+embedding page — a new inbound trust boundary. The controls, in order:
+
+1. **Who may embed** is `frame-ancestors` on the server — `'none'` by
+   default, opt-in per deployment (HOSTING.md §8). The browser enforces it
+   before any message can arrive.
+2. **`event.origin` + `event.source`**: only `window.parent` counts, and
+   `event.origin` is checked against the optional
+   `trustedMessageOrigins` allowlist — never the referrer (which is
+   `no-referrer` anyway). A `window.open` channel does not exist: COOP
+   `same-origin` severs the opener, and relaxing it would sacrifice the
+   cross-origin isolation local transcription needs — the iframe channel
+   was chosen precisely because it leaves COOP/COEP untouched.
+3. **Explicit user consent** with the origin named — the same line as the
+   fetch-proxy prompt: a boundary a machine should not cross silently.
+4. **Same open gate as a file**: size cap (UTF-8 bytes ≤ the deck limit,
+   measured before parsing), the `MarkdownSafetyScanner` gate, `marp: true`
+   routing. A scan hit is `rejected/unsafe` and raises the existing import
+   alarm.
+5. **Protocol discipline**: handshake per transfer (`init` → `ready` → one
+   offer), unknown type/version ignored, replies targeted at
+   `event.origin` — never `'*'` — and carrying only the outcome, never
+   content. Logs record origin, size and outcome only.
+
 ## Roadmap
 
 Planned hardening includes more granular privacy controls in export settings and

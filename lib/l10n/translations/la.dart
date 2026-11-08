@@ -34,7 +34,7 @@ const _stringsLa = {
   'newPresentationTab': 'Nova praesentatio (scida)',
   'exportPackage': 'Fasciculum exportare…',
   'importPackage': 'Fasciculum importare…',
-  'importUrl': 'Importare ex URL…',
+  'importUrl': 'Aperire ex URL…',
   'findReplace': 'Quaerere et substituere',
   'fullDeckPreview': 'Totum acervum inspicere',
   'settingsGeneral': 'Generalia',
@@ -395,9 +395,6 @@ const _dutchSourceLa = {
       'Praesentatio cum mutationibus non servatis ex sessione priore inventa est:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Haec praesentatio mutationes non servatas habet. Serva praesentationem antequam scidam claudas.',
-  'Importeren via URL': 'Importare ex URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Insere nexum ad fasciculum .ocideck vel plicam Marp Markdown.',
   'Ophalen': 'Accersere',
   'Laat los om toe te voegen': 'Emitte ut addas',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -413,8 +410,6 @@ const _dutchSourceLa = {
   'Export mislukt:': 'Exportatio defecit:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Haec pagina imaginem accipere non potest. Elige primum paginam imaginis.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Praesentatio ex hoc URL accersiri non potuit.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Trahe ut praevisum paginae latius aut angustius facias',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1354,8 +1349,6 @@ const _dutchSourceLa = {
       'Plica corrupta aut illegibilis est.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Importatio recusata: fasciculus fines securitatis excedit.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Ex hac URL praesentatio peti non potuit. URL et nexum tuum proba.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Conatus intrandi defecit — nomen usoris et tesseram proba. Consilium: apud Nextcloud tessera applicationis utere (Optiones → Securitas), non tessera rationis tuae.',
   'Annuleren…': 'Abrogatur…',
@@ -1610,6 +1603,41 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Website wil Markdown openen?': 'Pagina Markdown aperire vult?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Pagina {origin} textum Markdown in OciDeck aperire vult.',
+  'Voorgestelde naam: {name}': 'Nomen propositum: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Textus aperitur quasi ipse eum glutinavisses. Pagina solum audit an apertio successerit — numquam contentum.',
+  'Weigeren': 'Recusa',
+  'Openen via URL': 'Aperire ex URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Glutina nexum ad fasciculum .md vel sarcinam .ocideck; .md ut praesentatio aut documentum aperitur. Fons sinere debet navigatrum fasciculum legere.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Inscribe inscriptionem http(s) cum nomine servatoris, exempli https://example.org/notae.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Ex hoc URL fasciculum petere non licuit.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Ex hoc URL fasciculum petere non licuit. Inscriptionem et nexum tuum inspice.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Ad hoc URL fasciculus nullus est (non inventus). Nexum adhuc rectum esse inspice.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Fasciculus maior est quam limes {limit}.',
+  'Geopend.': 'Apertum.',
+  'Deellink kopiëren': 'Nexum communicandi exscribe',
+  'Deellink gekopieerd.': 'Nexus communicandi exscriptus est.',
+  'Plak Markdown…': 'Insere Markdown…',
+  'Markdown plakken': 'Markdown inserere',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Glutina hic textum Markdown. Cum marp: true in fronte fit praesentatio, sine fit documentum.',
+  'Markdown-tekst': 'Textus Markdown',
+  '{n} tekens': '{n} litterae',
+  'Openen in OciDeck': 'Aperi in OciDeck',
+  'Geplakte tekst verwerpen?': 'Textum glutinatum reicere?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Textus in campo adhuc est; non aperietur.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Hic textus non apertus est — vide monitum securitatis.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Proprium: inspectionem principalem et rationem exportandi infra verifica.',
   'Als bestand downloaden': 'Ut fasciculum depone',
@@ -4930,8 +4958,6 @@ const _dutchSourceAddLa = <String, String>{
       'Terminus dirigit — plerumque regio falsa vel URL termini falsa. Iterare hic non iuvat.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Localiter servatum, sed in officinam edere non successit:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'In hac URL nulla praesentatio est (non inventa). Proba num nexus adhuc rectus sit.',
   'Video kan niet worden geladen': 'Pellicula onerari non potest',
   'Titel boven afbeelding': 'Titulus supra imaginem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

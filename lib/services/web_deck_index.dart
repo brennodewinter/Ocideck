@@ -15,22 +15,46 @@ typedef WebDeckEntry = ({String name, String url});
 /// de app — zie HOSTING.md §7.
 const _kConfigFileName = 'ocideck-web-config.json';
 
-/// Haal het pad naar de presentatie-map op uit het config-bestand op de
-/// server. Geeft null als het bestand niet bestaat, niet leesbaar is, of geen
-/// geldig `decksPath` bevat — de feature staat dan uit.
-Future<String?> _fetchDecksPath(http.Client client) async {
+/// Haal het config-bestand op dat de beheerder op de wortel van de app
+/// plaatst, of null als het ontbreekt/onleesbaar is — afwezigheid is de
+/// verwachte toestand, geen fout om te loggen.
+Future<Map<String, Object?>?> _fetchWebConfig(http.Client client) async {
   try {
     final r = await client.get(Uri.base.resolve(_kConfigFileName));
     if (r.statusCode != 200) return null;
     final json = jsonDecode(r.body);
     if (json is! Map) return null;
-    final path = json['decksPath'];
-    if (path is! String || path.isEmpty) return null;
-    return path;
+    return Map<String, Object?>.from(json);
   } on Exception {
-    // 404 (geen config), netwerkfout, ongeldig JSON — de feature staat uit,
-    // en dat is de verwachte toestand, geen fout om te loggen.
     return null;
+  }
+}
+
+/// Haal het pad naar de presentatie-map op uit het config-bestand op de
+/// server. Geeft null als het bestand niet bestaat, niet leesbaar is, of geen
+/// geldig `decksPath` bevat — de feature staat dan uit.
+Future<String?> _fetchDecksPath(http.Client client) async {
+  final path = (await _fetchWebConfig(client))?['decksPath'];
+  if (path is! String || path.isEmpty) return null;
+  return path;
+}
+
+/// De origins die Markdown via postMessage mogen aanbieden (#2827), uit
+/// `trustedMessageOrigins` in hetzelfde config-bestand. Leeg = de opt-in
+/// staat uit op config-niveau; elke site die OciDeck mag insluiten mag
+/// dan vragen — de gebruiker beslist alsnog expliciet per overdracht.
+Future<List<String>> fetchTrustedMessageOrigins({http.Client? client}) async {
+  if (!kIsWeb) return const [];
+  final c = client ?? http.Client();
+  try {
+    final value = (await _fetchWebConfig(c))?['trustedMessageOrigins'];
+    if (value is! List) return const [];
+    return [
+      for (final e in value)
+        if (e is String && e.trim().isNotEmpty) e.trim(),
+    ];
+  } finally {
+    if (client == null) c.close();
   }
 }
 

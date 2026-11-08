@@ -33,7 +33,7 @@ const _stringsRo = {
   'newPresentationTab': 'Prezentare nouă (filă)',
   'exportPackage': 'Exportă pachet…',
   'importPackage': 'Importă pachet…',
-  'importUrl': 'Importă din URL…',
+  'importUrl': 'Deschide prin URL…',
   'findReplace': 'Caută și înlocuiește',
   'fullDeckPreview': 'Vezi întregul deck',
   'settingsGeneral': 'General',
@@ -396,9 +396,6 @@ const _dutchSourceRo = {
       'A fost găsită o prezentare cu modificări nesalvate dintr-o sesiune anterioară:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Această prezentare are modificări nesalvate. Salveaz-o înainte de a închide fila.',
-  'Importeren via URL': 'Importă din URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Lipește linkul către un pachet .ocideck sau un fișier Markdown Marp.',
   'Ophalen': 'Preia',
   'Laat los om toe te voegen': 'Eliberează pentru a adăuga',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -414,8 +411,6 @@ const _dutchSourceRo = {
   'Export mislukt:': 'Export eșuat:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Acest slide nu poate primi o imagine. Alege mai întâi un slide cu imagine.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Nu s-a putut prelua o prezentare de la acest URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Trage pentru a lărgi sau îngusta previzualizarea slide-ului',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1357,8 +1352,6 @@ const _dutchSourceRo = {
       'Fișierul este deteriorat sau ilizibil.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import refuzat: pachetul depășește limitele de siguranță.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Nu s-a putut prelua o prezentare de la acest URL. Verificați URL-ul și conexiunea.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Autentificarea a eșuat — verificați numele de utilizator și parola. Sfat: cu Nextcloud folosiți o parolă de aplicație (Setări → Securitate), nu parola contului.',
   'Annuleren…': 'Se anulează…',
@@ -1612,6 +1605,41 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Website wil Markdown openen?': 'Site-ul vrea să deschidă Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Site-ul {origin} vrea să deschidă un text Markdown în OciDeck.',
+  'Voorgestelde naam: {name}': 'Nume propus: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Textul se deschide ca și cum l-ați fi lipit chiar dvs. Site-ul află doar dacă deschiderea a reușit — niciodată conținutul.',
+  'Weigeren': 'Refuză',
+  'Openen via URL': 'Deschide prin URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Lipește linkul către un fișier .md sau un pachet .ocideck; un .md se deschide ca prezentare sau document. Sursa trebuie să permită browserului să citească fișierul.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Introduceți o adresă http(s) cu un nume de server, de ex. https://example.org/note.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Nu s-a putut descărca un fișier de la acest URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Nu s-a putut descărca un fișier de la acest URL. Verificați URL-ul și conexiunea.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Nu există niciun fișier la acest URL (negăsit). Verificați dacă linkul mai este corect.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Fișierul este mai mare decât limita de {limit}.',
+  'Geopend.': 'Deschis.',
+  'Deellink kopiëren': 'Copiază linkul de partajare',
+  'Deellink gekopieerd.': 'Linkul de partajare a fost copiat.',
+  'Plak Markdown…': 'Lipește Markdown…',
+  'Markdown plakken': 'Lipește Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Lipește aici textul Markdown. Cu marp: true în antet devine o prezentare, fără — un document.',
+  'Markdown-tekst': 'Text Markdown',
+  '{n} tekens': '{n} caractere',
+  'Openen in OciDeck': 'Deschide în OciDeck',
+  'Geplakte tekst verwerpen?': 'Se aruncă textul lipit?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Mai există text în câmp; nu va fi deschis.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Acest text nu a fost deschis — vezi avertismentul de securitate.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personalizat: verificați mai jos controlul principal și comportamentul exportului.',
   'Als bestand downloaden': 'Descarcă drept fișier',
@@ -4969,8 +4997,6 @@ const _dutchSourceAddRo = <String, String>{
       'Punctul final redirecționează — de obicei o regiune sau un URL al punctului final greșite. Reîncercarea nu ajută aici.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Salvat local, dar publicarea pe forge a eșuat:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Nu există nicio prezentare la acest URL (nu a fost găsită). Verifică dacă linkul este încă valid.',
   'Video kan niet worden geladen': 'Videoclipul nu poate fi încărcat',
   'Titel boven afbeelding': 'Titlu deasupra imaginii',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

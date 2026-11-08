@@ -33,7 +33,7 @@ const _stringsSk = {
   'newPresentationTab': 'Nová prezentácia (karta)',
   'exportPackage': 'Exportovať balík…',
   'importPackage': 'Importovať balík…',
-  'importUrl': 'Importovať cez URL…',
+  'importUrl': 'Otvoriť z URL…',
   'findReplace': 'Nájsť a nahradiť',
   'fullDeckPreview': 'Zobraziť celý balík',
   'settingsGeneral': 'Všeobecné',
@@ -395,9 +395,6 @@ const _dutchSourceSk = {
       'Našla sa prezentácia s neuloženými zmenami z predchádzajúcej relácie:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Táto prezentácia má neuložené zmeny. Uložte ju pred zatvorením karty.',
-  'Importeren via URL': 'Importovať z URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Vložte odkaz na balík .ocideck alebo súbor Marp Markdown.',
   'Ophalen': 'Načítať',
   'Laat los om toe te voegen': 'Pustite pre pridanie',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -413,8 +410,6 @@ const _dutchSourceSk = {
   'Export mislukt:': 'Export zlyhal:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Táto snímka nemôže prijať obrázok. Najprv zvoľte snímku s obrázkom.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Z tejto URL sa nepodarilo načítať prezentáciu.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Ťahaním rozšírite alebo zúžite náhľad snímky',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1351,8 +1346,6 @@ const _dutchSourceSk = {
       'Súbor je poškodený alebo nečitateľný.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import odmietnutý: balík prekračuje bezpečnostné limity.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Z tejto URL sa nepodarilo získať prezentáciu. Skontrolujte URL a pripojenie.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prihlásenie zlyhalo — skontrolujte meno a heslo. Tip: pri Nextcloude použite heslo aplikácie (Nastavenia → Zabezpečenie), nie heslo účtu.',
   'Annuleren…': 'Ruší sa…',
@@ -1600,6 +1593,41 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Website wil Markdown openen?': 'Web chce otvoriť Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Web {origin} chce otvoriť text Markdown v OciDecku.',
+  'Voorgestelde naam: {name}': 'Navrhovaný názov: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Text sa otvorí, akoby ste ho sami vložili. Web sa dozvie len, či otvorenie prebehlo — nikdy obsah.',
+  'Weigeren': 'Odmietnuť',
+  'Openen via URL': 'Otvoriť z URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Vložte odkaz na súbor .md alebo balíček .ocideck; .md sa otvorí ako prezentácia alebo dokument. Zdroj musí prehliadaču povoliť súbor čítať.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Zadajte adresu http(s) s názvom servera, napr. https://example.org/poznamky.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Z tejto adresy URL sa nepodarilo súbor stiahnuť.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Z tejto adresy URL sa nepodarilo súbor stiahnuť. Skontrolujte adresu aj pripojenie.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Na tejto adrese URL nie je žiadny súbor (nenájdený). Skontrolujte, či odkaz ešte platí.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Súbor je väčší ako limit {limit}.',
+  'Geopend.': 'Otvorené.',
+  'Deellink kopiëren': 'Skopírovať odkaz na zdieľanie',
+  'Deellink gekopieerd.': 'Odkaz na zdieľanie skopírovaný.',
+  'Plak Markdown…': 'Vložiť Markdown…',
+  'Markdown plakken': 'Vložiť Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Vložte sem text Markdown. S marp: true v hlavičke sa stane prezentáciou, bez nej dokumentom.',
+  'Markdown-tekst': 'Text Markdown',
+  '{n} tekens': '{n} znakov',
+  'Openen in OciDeck': 'Otvoriť v OciDecku',
+  'Geplakte tekst verwerpen?': 'Zahodiť vložený text?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'V poli je ešte text; nebude otvorený.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Tento text nebol otvorený — pozrite bezpečnostné upozornenie.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Vlastné: nižšie skontrolujte hlavnú kontrolu a správanie exportu.',
   'Als bestand downloaden': 'Stiahnuť ako súbor',
@@ -4907,8 +4935,6 @@ const _dutchSourceAddSk = <String, String>{
       'Koncový bod presmerúva — zvyčajne nesprávny región alebo URL koncového bodu. Opakovanie tu nepomôže.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Uložené lokálne, ale publikovanie do forge zlyhalo:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Na tejto URL nie je žiadna prezentácia (nenájdená). Skontroluj, či je odkaz stále platný.',
   'Video kan niet worden geladen': 'Video sa nedá načítať',
   'Titel boven afbeelding': 'Nadpis nad obrázkom',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

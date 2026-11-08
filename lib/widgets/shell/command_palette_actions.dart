@@ -104,6 +104,12 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         onInvoke: _importUrl,
       ),
       PaletteCommand(
+        label: l10n.d('Plak Markdown…'),
+        icon: Icons.content_paste_outlined,
+        keywords: const ['paste', 'plakken', 'markdown', 'clipboard'],
+        onInvoke: _pasteMarkdown,
+      ),
+      PaletteCommand(
         label: l10n.t('settings'),
         icon: Icons.settings_outlined,
         onInvoke: () => SettingsDialog.show(context),

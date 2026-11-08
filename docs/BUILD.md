@@ -286,8 +286,12 @@ resources and needs testing first.
 ### Deep link: app plus presentation in one URL
 
 `https://<host>/?deck=<url>` opens OciDeck *and* fetches the presentation at the
-address you pass (URL-encode it). The same import gate applies as for *Import
-from URL*: the safety scan, the Marp check, and the CORS rules below. Example:
+address you pass (URL-encode it — see [USER_GUIDE.md](USER_GUIDE.md) for the
+user-facing explanation, including how to encode a source URL that carries its
+own query or fragment). The same import gate applies as for *Open via URL*: the
+safety scan, the Marp check, and the CORS rules below. After a successful open
+the parameter is removed from the address bar, so a reload does not fetch the
+file again as an extra tab. Example:
 
 ```
 https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fdeck.ocideck
