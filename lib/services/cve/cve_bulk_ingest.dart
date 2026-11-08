@@ -154,6 +154,10 @@ class CveBulkIngest {
       rethrow;
     } on FileSystemException catch (e) {
       throw CveIngestException(CveIngestFailure.diskFull, e.message);
+    } on ArchiveException catch (e) {
+      // Een CRC-fout of afgekapt lid: de download kwam binnen maar is kapot.
+      // Dat is geen netwerkfout, wat de algemene vangst er anders van maakt.
+      throw CveIngestException(CveIngestFailure.invalidArchive, e.message);
     } finally {
       // De twee archieven samen zijn ruim een gigabyte. Ze mogen niet blijven
       // liggen, ook niet als het misging.

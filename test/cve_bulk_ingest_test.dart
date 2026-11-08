@@ -248,10 +248,17 @@ void main() {
       'cves/README.md': readme,
     };
 
+    // Als ongeldig archief, niet als netwerkfout: de download kwam wél binnen.
     Future<void> refuses(List<int> archive) async {
       await expectLater(
         run(makeIngest(archive)),
-        throwsA(isA<ArchiveException>()),
+        throwsA(
+          isA<CveIngestException>().having(
+            (e) => e.failure,
+            'failure',
+            CveIngestFailure.invalidArchive,
+          ),
+        ),
       );
       expect(await LocalCveIndex(Directory('${tmp.path}/db')).stats(), isNull);
     }
