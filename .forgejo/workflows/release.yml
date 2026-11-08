@@ -132,7 +132,7 @@ jobs:
     # afdrijft. De web-engine-artefacten zijn niet voorgebakken (`--no-web` in het
     # image) en worden bij `flutter build web` opgehaald — een kleine download.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -209,7 +209,7 @@ jobs:
     # hieronder aan. De rest (clang/cmake/ninja/pkg-config/libgtk-3-dev/
     # build-essential/node) is ingebakken.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       # liblzma-dev + libsecret-1-dev + libayatana-appindicator3-dev: nodig voor
       # `make build-linux` (flutter_secure_storage linkt libsecret; lzma voor
@@ -445,7 +445,7 @@ jobs:
     # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
     # (4-6 min apt) vervalt. #11 van het releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       # De spiegelrelease blijft draft: Windows mag niet eerder publiek zijn dan
       # de centrale release. Ophalen gebeurt daarom geauthenticeerd via de API.
@@ -856,7 +856,7 @@ jobs:
     if: ${{ inputs.mode == 'candidate' }}
     runs-on: docker
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -926,7 +926,7 @@ jobs:
     # image staat door de bouw-jobs al warm op de runner. #11 van het
     # releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:

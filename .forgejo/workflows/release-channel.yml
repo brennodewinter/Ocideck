@@ -38,7 +38,7 @@ jobs:
       completed: ${{ steps.windows.outputs.completed }}
     container:
       options: --cpus 2 --memory ${{ inputs.channel == 'windows' && '4g' || '8g' }}
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -50,7 +50,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
           EXPECTED_MEMORY_GIB: "${{ inputs.channel == 'windows' && '4' || '8' }}"
         run: node controller/tool/enforce_release_cpu.cjs
       - name: Vaste bron controleren voor broncode wordt uitgevoerd
@@ -508,7 +508,7 @@ jobs:
     runs-on: docker
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -519,7 +519,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:9fb20e45072635824e4a8dd0895b7cbe172bd3b063ef65fd5ad08b3127e177c2
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
           EXPECTED_MEMORY_GIB: "4"
         run: node tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a
