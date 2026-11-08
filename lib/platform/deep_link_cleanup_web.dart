@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:web/web.dart' as web;
 
 /// `history.replaceState` werkt de adresbalk bij zonder navigatie —
