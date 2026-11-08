@@ -1591,6 +1591,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Website wil Markdown openen?': 'A webhely Markdownot akar megnyitni?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'A(z) {origin} webhely Markdown-szöveget akar megnyitni az OciDeckben.',
+  'Voorgestelde naam: {name}': 'Javasolt név: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'A szöveg úgy nyílik meg, mintha Ön illesztette volna be. A webhely csak azt tudja meg, hogy a megnyitás sikerült-e — a tartalmat soha.',
+  'Weigeren': 'Elutasítás',
   'Openen via URL': 'Megnyitás URL-ből',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Illessze be az .md fájlra vagy .ocideck csomagra mutató hivatkozást; az .md prezentációként vagy dokumentumként nyílik meg. A forrásnak engednie kell, hogy a böngésző beolvassa a fájlt.',

@@ -839,6 +839,15 @@ they are the moment a deck holds someone else's name. For a tool that is
 marketed for penetration-test reports, that was the most predictable gap a
 reader with GDPR knowledge would find.*
 
+### Embedded use (postMessage handover)
+
+When a deployment allows another site to embed OciDeck (HOSTING.md §8), that
+site may *offer* you a Markdown text. The text stays in your browser: it opens
+locally through the same gate as pasted Markdown, and the only thing sent back
+to the site is the outcome (opened / declined / rejected) — never content,
+never a URL, never a log line with your text. You decide per offer; nothing is
+accepted silently.
+
 ## See also
 
 - [SECURITY_DESIGN.md](SECURITY_DESIGN.md) — the mechanisms behind these guarantees

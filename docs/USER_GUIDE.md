@@ -203,6 +203,7 @@ see the [release downloads](https://pawprint.vigilis.online/LibreKAT/Ocideck/rel
   the correctly encoded link on your clipboard. Once the deck opens, `?deck=`
   disappears from the address bar — otherwise a reload would fetch the file
   again as an extra tab. *(Added 2026-11-08, #2826.)*
+- **Markdown offered by a website**: on a deployment that explicitly allows it, an external website can offer you a Markdown text (e.g. from an intake form). OciDeck shows a consent prompt naming the origin; only after *Open* does the text pass the same gate as pasted text — see above. *(Added 2026-11-08, #2827.)*
 - **Paste Markdown**: if your text lives in another app (a wiki, chat or AI
   assistant), you don't have to save it as an `.md` file first. Choose
   **Paste Markdown…** — on the welcome screen, behind *Importeren…* in the `…`

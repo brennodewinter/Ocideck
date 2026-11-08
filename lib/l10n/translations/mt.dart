@@ -1607,6 +1607,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Website wil Markdown openen?': 'Is-sit irid jiftaħ Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Is-sit {origin} irid jiftaħ test Markdown f’OciDeck.',
+  'Voorgestelde naam: {name}': 'Isem propost: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'It-test jinfetaħ bħallikieku int stess waħħaltu. Is-sit jinduna biss jekk il-ftuħ irnexxiex — qatt il-kontenut.',
+  'Weigeren': 'Irrifjuta',
   'Openen via URL': 'Iftaħ permezz ta’ URL',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Waħħal il-link għal fajl .md jew pakkett .ocideck; .md jinfetaħ bħala preżentazzjoni jew dokument. Is-sors irid jippermetti lill-browser tiegħek jaqra l-fajl.',

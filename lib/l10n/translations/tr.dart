@@ -2494,6 +2494,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Website wil Markdown openen?': 'Site Markdown açmak istiyor?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      '{origin} sitesi OciDeck’te bir Markdown metni açmak istiyor.',
+  'Voorgestelde naam: {name}': 'Önerilen ad: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Metin, siz yapıştırmışsınız gibi açılır. Site yalnızca açmanın başarılı olup olmadığını öğrenir — içeriği asla.',
+  'Weigeren': 'Reddet',
   'Openen via URL': 'URL ile aç',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       '.md dosyasına veya .ocideck paketine giden bağlantıyı yapıştırın; .md sunum veya belge olarak açılır. Kaynağın, tarayıcınızın dosyayı okumasına izin vermesi gerekir.',

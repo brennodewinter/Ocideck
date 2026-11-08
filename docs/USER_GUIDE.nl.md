@@ -209,6 +209,7 @@ staan bij de [release-downloads](https://pawprint.vigilis.online/LibreKAT/Ocidec
   correct gecodeerde link op je klembord zet. Zodra het deck opent, verdwijnt
   `?deck=` uit de adresbalk — anders zou een herlading het bestand opnieuw
   ophalen als extra tabblad. *(Toegevoegd 2026-11-08, #2826.)*
+- **Markdown vanuit een website**: op een hosting die dit expliciet toestaat kan een externe website je een Markdown-tekst aanbieden (bijvoorbeeld vanuit een intake-formulier). OciDeck toont dan een toestemmingsvraag met de herkomst; pas na *Openen* wordt de tekst door dezelfde poort gehaald als geplakte tekst — zie het punt hierboven. *(Toegevoegd 2026-11-08, #2827.)*
 - **Markdown plakken**: staat je tekst in een andere toepassing (een wiki, chat of
   AI-assistent), dan hoeft die niet eerst als `.md`-bestand opgeslagen te worden.
   Kies **Plak Markdown…** — op het welkomstscherm, achter *Importeren…* in het

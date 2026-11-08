@@ -1591,6 +1591,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Website wil Markdown openen?': 'Websyte wot Markdown ufmache?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'D Websyte {origin} wot en Markdown-Tekscht in OciDeck ufmache.',
+  'Voorgestelde naam: {name}': 'Vorgeschlagene Name: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'De Tekscht wird ufgmacht, als hettsch ne sälber iigfüegt. D Websyte erfahrt nur, öbs klapp het — nie de Inhalt.',
+  'Weigeren': 'Abchlähne',
   'Openen via URL': 'Über URL öffne',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Füeg de Link zuen ere .md-Datei oder eme .ocideck-Pakätt ii; e .md macht als Präsentation oder Dokumänt uff. D Quell muss dim Browser erlaube, d Datei z läse.',

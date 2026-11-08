@@ -1603,6 +1603,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Website wil Markdown openen?': 'Pagina Markdown aperire vult?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Pagina {origin} textum Markdown in OciDeck aperire vult.',
+  'Voorgestelde naam: {name}': 'Nomen propositum: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Textus aperitur quasi ipse eum glutinavisses. Pagina solum audit an apertio successerit — numquam contentum.',
+  'Weigeren': 'Recusa',
   'Openen via URL': 'Aperire ex URL',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Glutina nexum ad fasciculum .md vel sarcinam .ocideck; .md ut praesentatio aut documentum aperitur. Fons sinere debet navigatrum fasciculum legere.',

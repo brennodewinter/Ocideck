@@ -1593,6 +1593,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Website wil Markdown openen?': 'Web chce otvoriť Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Web {origin} chce otvoriť text Markdown v OciDecku.',
+  'Voorgestelde naam: {name}': 'Navrhovaný názov: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Text sa otvorí, akoby ste ho sami vložili. Web sa dozvie len, či otvorenie prebehlo — nikdy obsah.',
+  'Weigeren': 'Odmietnuť',
   'Openen via URL': 'Otvoriť z URL',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Vložte odkaz na súbor .md alebo balíček .ocideck; .md sa otvorí ako prezentácia alebo dokument. Zdroj musí prehliadaču povoliť súbor čítať.',

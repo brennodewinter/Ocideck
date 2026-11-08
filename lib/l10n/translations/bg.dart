@@ -1608,6 +1608,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Website wil Markdown openen?': 'Сайтът иска да отвори Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Сайтът {origin} иска да отвори текст Markdown в OciDeck.',
+  'Voorgestelde naam: {name}': 'Предложено име: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Текстът се отваря, сякаш сам сте го поставили. Сайтът научава само дали отварянето е успешно — никога съдържанието.',
+  'Weigeren': 'Откажи',
   'Openen via URL': 'Отваряне чрез URL',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Поставете връзката към .md файл или .ocideck пакет; .md се отваря като презентация или документ. Източникът трябва да позволява на браузъра ви да чете файла.',

@@ -487,6 +487,54 @@ parses. Subdirectories are not followed — the listing is flat.
   References pointing outside the deck's directory or at another origin fail
   closed: the slide shows the missing-media placeholder instead.
 
+## 8. Optional: let another website hand Markdown to OciDeck (postMessage)
+
+A portal on **another** site — an intake form, a reporting app, a knowledge
+base — can offer a Markdown text to a visitor's OciDeck without hosting it
+anywhere and without putting it in a URL. OciDeck listens for `postMessage`
+from the page that embeds it, asks the user for explicit permission showing
+the sender's origin, and only then opens the text through the same gate as
+pasted Markdown (size limit, safety scan, `marp: true` routing). The sender
+only ever learns the outcome (`opened` / `declined` / `rejected` + reason) —
+never content. See `examples/postmessage-bridge.html` for a working example
+and `lib/services/markdown_transfer_protocol.dart` for the wire format.
+
+This stays **opt-in per deployment**: the shipped headers keep
+`frame-ancestors 'none'` and `X-Frame-Options: DENY`, so no site can embed
+OciDeck — and therefore no site can reach the channel — until you relax them.
+
+**To enable it**, on the OciDeck host:
+
+1. Replace `frame-ancestors 'none'` in the CSP header with
+   `frame-ancestors https://your-portal.example` and set
+   `X-Frame-Options` accordingly (`X-Frame-Options` only understands
+   `ALLOW-FROM` on legacy browsers; frame-ancestors is the real control).
+   Keep the rest of the CSP byte-identical.
+2. Optionally restrict *which* embedded origins may even ask, by adding
+   `trustedMessageOrigins` to `ocideck-web-config.json` (§7):
+
+   ```json
+   {"trustedMessageOrigins": ["https://your-portal.example"]}
+   ```
+
+   Absent = any site you allow in `frame-ancestors` may *ask* — the user's
+   consent dialog is always the real gate. Present = only those origins get
+   a `ready` answer; every message still needs explicit user consent.
+
+Notes:
+- Only the **iframe** channel is supported (sender = `window.parent`).
+  Opening OciDeck in a `window.open` popup cannot work on the default
+  deployment: `Cross-Origin-Opener-Policy: same-origin` severs the opener
+  relationship, and relaxing it would break the cross-origin isolation that
+  local transcription needs — that trade was rejected (see
+  `SECURITY_DESIGN.md`, postMessage boundary).
+- One transfer per handshake: the sender repeats `ocideck:init` until it
+  gets `ocideck:ready`, then sends one `ocideck:open-markdown`. Messages
+  before `ready`, after a handled transfer, or with an unknown type/version
+  are ignored — the example page implements this retry.
+- `Referrer-Policy: no-referrer` does not break this: the app verifies
+  `event.origin`, not the referrer.
+
 ## Checklist
 
 Everything under "Release conditions" is a condition for a publicly reachable

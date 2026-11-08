@@ -1618,6 +1618,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Website wil Markdown openen?': 'An suíomh ag iarraidh Markdown a oscailt?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Tá an suíomh {origin} ag iarraidh téacs Markdown a oscailt in OciDeck.',
+  'Voorgestelde naam: {name}': 'Ainm molta: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Osclaítear an téacs amhail is dá bhféadfá é a ghreamú tú féin. Ní chloiseann an suíomh ach an éirigh leis an oscailt — riamh an t-ábhar.',
+  'Weigeren': 'Diúltaigh',
   'Openen via URL': 'Oscail trí URL',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Greamaigh an nasc chuig comhad .md nó pacáiste .ocideck; osclaíonn .md mar chur i láthair nó dhoiciméad. Caithfidh an foinse cead a thabhairt do do bhrabhsálaí an comhad a léamh.',

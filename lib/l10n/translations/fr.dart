@@ -643,6 +643,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Website wil Markdown openen?': 'Le site veut ouvrir du Markdown ?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Le site {origin} veut ouvrir un texte Markdown dans OciDeck.',
+  'Voorgestelde naam: {name}': 'Nom proposé : {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Le texte est ouvert comme si vous l’aviez collé vous-même. Le site apprend seulement si l’ouverture a réussi — jamais le contenu.',
+  'Weigeren': 'Refuser',
   'Openen via URL': 'Ouvrir via une URL',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Collez le lien vers un fichier .md ou un paquet .ocideck ; un .md s’ouvre comme présentation ou document. La source doit autoriser votre navigateur à lire le fichier.',

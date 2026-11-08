@@ -641,6 +641,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Website wil Markdown openen?': 'Website ke habri Markdown?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'E website {origin} ke habri un teksto di Markdown den OciDeck.',
+  'Voorgestelde naam: {name}': 'Nòmber sugerí: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'E teksto ta wordu habrí manera bo mes a peg’é. E website ta haña solamente si e apertura a sosial — nunka e kontenido.',
+  'Weigeren': 'Rechazá',
   'Openen via URL': 'Abrí via URL',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Pega e link na un archivo .md òf un pakete .ocideck; un .md ta habrí komo presentashon òf dokumento. E fuente mester permití bo browser pa lesa e archivo.',

@@ -1589,6 +1589,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Website wil Markdown openen?': 'Sivusto haluaa avata Markdownin?',
+  'De website {origin} wil een Markdown-tekst in OciDeck openen.':
+      'Sivusto {origin} haluaa avata Markdown-tekstin OciDeckissä.',
+  'Voorgestelde naam: {name}': 'Ehdotettu nimi: {name}',
+  'De tekst wordt geopend alsof je hem zelf had geplakt. De website krijgt alleen te horen of het openen lukte — nooit de inhoud.':
+      'Teksti avautuu ikään kuin olisit liittänyt sen itse. Sivusto saa vain tiedon, onnistuiko avaus — ei koskaan sisältöä.',
+  'Weigeren': 'Kieltäydy',
   'Openen via URL': 'Avaa URL-osoitteesta',
   'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
       'Liitä linkki .md-tiedostoon tai .ocideck-pakettiin; .md avautuu esityksenä tai dokumenttina. Lähteen on sallittava selaimen lukea tiedosto.',

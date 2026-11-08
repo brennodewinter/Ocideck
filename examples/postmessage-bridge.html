@@ -1,0 +1,85 @@
+<!doctype html>
+<!--
+  Minimaal integratievoorbeeld voor de postMessage-browserkoppeling (#2827).
+
+  Werking: deze pagina sluit OciDeck in een iframe in en biedt één
+  Markdown-tekst aan. Protocol:
+
+    afzender → OciDeck  {"type":"ocideck:init","version":1}   (herhaal tot ready)
+    OciDeck  → afzender  {"type":"ocideck:ready","version":1}
+    afzender → OciDeck  {"type":"ocideck:open-markdown","version":1,
+                         "id":"…","name":"…","markdown":"…"}
+    OciDeck  → afzender  {"type":"ocideck:result","version":1,"id":"…",
+                         "status":"opened"|"declined"|"rejected","reason":…}
+
+  Voorwaarden server-side (zie docs/HOSTING.md): de OciDeck-deployment moet
+  deze pagina-origin in frame-ancestors toelaten, en optioneel in
+  trustedMessageOrigins van ocideck-web-config.json. Zonder die headers
+  werkt dit voorbeeld niet — dat is bewust, standaard hosting blijft dicht.
+
+  Lokaal proberen: serveer deze pagina op een eigen origin (bv.
+  `python3 -m http.server 8888`) en wijzig de CSP frame-ancestors van de
+  OciDeck-build naar `frame-ancestors 'self' http://localhost:8888`.
+-->
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <title>OciDeck Markdown-overdracht — voorbeeld</title>
+</head>
+<body>
+  <h1>Markdown aanbieden aan OciDeck</h1>
+  <p>
+    <button id="send" disabled>Verstuur voorbeeld-Markdown</button>
+    <span id="status">wacht op ocideck:ready…</span>
+  </p>
+  <iframe id="app" src="http://localhost:8080/" width="900" height="560"></iframe>
+  <script>
+    const frame = document.getElementById('app');
+    const status = document.getElementById('status');
+    const button = document.getElementById('send');
+    const ocideckOrigin = new URL(frame.src).origin;
+    let ready = false;
+
+    // Herhaal init tot OciDeck klaar meldt — de app kan nog aan het laden
+    // zijn wanneer het iframe-load event vuurt, en vroege berichten zijn
+    // dan verloren. 250 ms is rap genoeg om onzichtbaar te zijn.
+    const initTimer = setInterval(() => {
+      if (ready) { clearInterval(initTimer); return; }
+      frame.contentWindow.postMessage(
+        {type: 'ocideck:init', version: 1}, ocideckOrigin);
+    }, 250);
+
+    window.addEventListener('message', (event) => {
+      // Alleen berichten van OciDeck zelf tellen.
+      if (event.origin !== ocideckOrigin || event.source !== frame.contentWindow) return;
+      const msg = event.data || {};
+      if (msg.type === 'ocideck:ready') {
+        ready = true;
+        button.disabled = false;
+        status.textContent = 'klaar — verstuur één tekst per ready';
+      } else if (msg.type === 'ocideck:result' && msg.id === lastId) {
+        status.textContent = 'uitkomst: ' + msg.status +
+          (msg.reason ? ' (' + msg.reason + ')' : '');
+        // Eén overdracht per ready: opnieuw init voor een volgende.
+        ready = false;
+        setTimeout(() => frame.contentWindow.postMessage(
+          {type: 'ocideck:init', version: 1}, ocideckOrigin), 100);
+      }
+    });
+
+    let lastId = null;
+    button.addEventListener('click', () => {
+      if (!ready) return;
+      lastId = 'demo-' + Date.now();
+      button.disabled = true;
+      frame.contentWindow.postMessage({
+        type: 'ocideck:open-markdown',
+        version: 1,
+        id: lastId,
+        name: 'voorbeeld.md',
+        markdown: '---\nmarp: true\n---\n\n# Via postMessage\n\nGeopend vanuit een externe site.',
+      }, ocideckOrigin);
+    });
+  </script>
+</body>
+</html>

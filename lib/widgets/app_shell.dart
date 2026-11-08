@@ -11,10 +11,12 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 
 import 'dialogs/browser_storage_dialog.dart';
+import 'dialogs/markdown_transfer_dialog.dart';
 import 'dialogs/paste_markdown_dialog.dart';
 import '../l10n/export_block_localization.dart';
 import '../platform/deep_link_cleanup.dart';
 import '../platform/launch_files.dart';
+import '../platform/markdown_transfer.dart';
 import '../platform/native_shortcut_channel.dart';
 import '../platform/native_window.dart'
     show quitApp, setAppExitHandler, setWillCloseCallback;
@@ -96,6 +98,8 @@ import '../services/git/version_diff.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
+import '../services/markdown_transfer_bridge.dart';
+import '../services/markdown_transfer_protocol.dart';
 import '../services/web_deck_index.dart';
 import '../state/collab_session_provider.dart';
 import '../state/deck_provider.dart';
@@ -129,6 +133,7 @@ import '../state/storage_status_provider.dart';
 import '../state/ai_status_provider.dart';
 import '../state/consent_provider.dart';
 import '../state/secret_store_provider.dart';
+import '../state/markdown_transfer_provider.dart';
 import '../state/tabs_provider.dart';
 import '../state/open_tab_image_usage.dart';
 import '../state/git_provider.dart';
@@ -317,6 +322,13 @@ class _AppShellState extends ConsumerState<AppShell> {
     sweepStaleRecordings(ref);
     ref.read(ociServeProvider.notifier).closeLearningTabsLocally = () =>
         closeLearningTabsLocally(ref.read(tabsProvider.notifier));
+    // Web: de postMessage-browserkoppeling — luistert naar een insluitende
+    // site en stuurt elke aanbieding via inboundMarkdownRequestProvider aan
+    // de toestemmingsvraag hierboven. Vóór `ocideck:ready` gaat geen tekst
+    // de openpoort in (#2827).
+    if (isWebPlatform) {
+      unawaited(_startMarkdownTransferBridge());
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();
       // Open any file the app was launched with, and start listening for files
@@ -337,6 +349,56 @@ class _AppShellState extends ConsumerState<AppShell> {
     final paths = List<String>.from(pendingLaunchFiles);
     pendingLaunchFiles.clear();
     await _onFilesDropped(paths);
+  }
+
+  /// De postMessage-browserkoppeling (#2827): een insluitende site kan één
+  /// Markdown-tekst aanbieden. De bridge bewaakt het protocol (init →
+  /// ready → één overdracht); alles wat bij de gebruiker moet komen gaat
+  /// via [inboundMarkdownRequestProvider].
+  MarkdownTransferBridge? _markdownTransferBridge;
+
+  Future<void> _startMarkdownTransferBridge() async {
+    final origins = await fetchTrustedMessageOrigins();
+    if (!mounted) return;
+    _markdownTransferBridge = MarkdownTransferBridge(
+      trustedOrigins: origins,
+      onRequest: (request) {
+        ref.read(inboundMarkdownRequestProvider.notifier).state = request;
+      },
+    );
+    startMarkdownListener(_markdownTransferBridge!.handleMessage);
+  }
+
+  /// Beantwoord een aangeboden overdracht: weigeren stuurt `declined`;
+  /// openen gaat door exact dezelfde poort als geplakte tekst (#2825) en
+  /// de site krijgt alleen de uitkomst — `unsafe`/`invalid`, nooit inhoud.
+  Future<void> _answerMarkdownTransfer(InboundMarkdownRequest request) async {
+    final bridge = _markdownTransferBridge;
+    if (bridge == null || !mounted) return;
+    final consent = await MarkdownTransferConsentDialog.show(
+      context,
+      origin: request.origin,
+      name: request.name,
+    );
+    if (!mounted) return;
+    if (!consent) {
+      bridge.answer(request.id, kStatusDeclined);
+      return;
+    }
+    ref.read(openFailureProvider.notifier).state = null;
+    final result = await ref
+        .read(tabsProvider.notifier)
+        .openDeckFromBytes(
+          Uint8List.fromList(utf8.encode(request.markdown)),
+          request.name ?? 'overdracht.md',
+        );
+    if (result == OpenResult.opened) {
+      bridge.answer(request.id, kStatusOpened);
+    } else if (result == OpenResult.blocked) {
+      bridge.answer(request.id, kStatusRejected, reason: kReasonUnsafe);
+    } else {
+      bridge.answer(request.id, kStatusRejected, reason: kReasonInvalid);
+    }
   }
 
   /// Web-deeplink: `?deck=<url>` haalt de presentatie op en opent haar —
@@ -891,6 +953,18 @@ class _AppShellState extends ConsumerState<AppShell> {
       if (alarm == null) return;
       ImportSecurityAlarmDialog.show(context, alarm);
       ref.read(importSecurityAlarmProvider.notifier).state = null;
+    });
+
+    // Een externe website biedt Markdown aan via postMessage (#2827): de
+    // toestemmingsvraag met de origin, en pas na "Openen" dezelfde openpoort
+    // als geplakte tekst. Het antwoord aan de site draagt nooit inhoud.
+    ref.listen<InboundMarkdownRequest?>(inboundMarkdownRequestProvider, (
+      _,
+      request,
+    ) {
+      if (request == null) return;
+      ref.read(inboundMarkdownRequestProvider.notifier).state = null;
+      _answerMarkdownTransfer(request);
     });
 
     // Een instelling kon niet naar schijf worden weggeschreven: niet-blokkerend
