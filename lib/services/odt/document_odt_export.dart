@@ -4,7 +4,7 @@
 // met koppen, alinea's, tabellen, lijsten, voetnoten en afbeeldingen.
 // Headless: geen Flutter, geen IO — de aanroeper schrijft de bytes weg.
 //
-// Hergebruikt de `archive`-package (pubspec: `archive: ^4.0.9`) voor de
+// Hergebruikt de `archive`-package (pubspec: `archive: ^4.6.0`) voor de
 // ZIP-verpakking en de `markdown`-package via markdown_to_odt.dart voor de
 // ODT-conversie. Geen nieuwe dependency.
 //
