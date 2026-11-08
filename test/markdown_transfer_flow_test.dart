@@ -7,6 +7,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/platform/deep_link_cleanup.dart';
 import 'package:ocideck/platform/markdown_transfer.dart';
 import 'package:ocideck/services/markdown_transfer_bridge.dart';
+import 'package:ocideck/state/markdown_transfer_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/markdown_transfer_flow.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -106,6 +107,25 @@ void main() {
     await tester.pumpAndSettle();
     expect(replies.last['status'], 'opened');
     expect(replies.last.containsKey('markdown'), isFalse);
+  });
+
+  testWidgets('een aanvraag op de provider gaat naar de shell-listener', (
+    tester,
+  ) async {
+    // Desktop: de listener staat geregistreerd; de bridge is null (alleen
+    // web maakt die aan), dus answerMarkdownTransfer keert stil terug —
+    // maar de callback draait wél en dat is precies wat deze test dekt.
+    await pumpApp(tester);
+    ProviderScope.containerOf(shell(tester).context)
+        .read(inboundMarkdownRequestProvider.notifier)
+        .state = offer();
+    await tester.pumpAndSettle();
+    expect(
+      ProviderScope.containerOf(
+        shell(tester).context,
+      ).read(inboundMarkdownRequestProvider),
+      isNull,
+    );
   });
 
   test('platform-noops draaien buiten de browser zonder effect', () {
