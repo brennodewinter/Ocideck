@@ -198,4 +198,61 @@ void main() {
     await tapRailHeading('Alfa');
     expect(caret(), body.indexOf('# Alfa'));
   });
+
+  testWidgets('rail-klik op een kop die óók als lopende tekst voorkomt '
+      'landt op de kop, niet op de eerste teksttreffer', (tester) async {
+    // Regressie: `_revealFromOutline` zocht met `indexOf(titel)` in de
+    // platte tekst — een titel die eerder in de tekst staat, of met
+    // inline-opmaak, landde op de verkeerde plek of op positie 0. De
+    // MarkdownCaretMap vertaalt de bron-offset exact, zoals de
+    // caret-sync die al gebruikte.
+    await tester.binding.setSurfaceSize(const Size(1400, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    const doc =
+        '# Alfa\n\nBeta komt hier ook als lopende tekst voor.\n\n'
+        '# Beta\n\nLaatste tekst.\n';
+    final parsed = MarkdownDocument.parse(doc);
+    final body = parsed.body;
+    final notifier = DocumentNotifier()..loadDocument(parsed);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [documentProvider.overrideWith((_) => notifier)],
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const DocumentEditorScreen(),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    int caret() => tester
+        .widget<MarkdownNotesEditor>(find.byType(MarkdownNotesEditor))
+        .controller
+        .selection
+        .baseOffset;
+
+    final railBeta = find.descendant(
+      of: find.byKey(const Key('document-outline-rail')),
+      matching: find.text('Beta'),
+    );
+    await tester.tap(railBeta);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pump();
+
+    final headingAt = body.indexOf('# Beta');
+    expect(caret(), inInclusiveRange(headingAt, headingAt + 6));
+    // Zeker niet op de eerste 'Beta' in de lopende tekst.
+    expect(
+      caret(),
+      isNot(inInclusiveRange(body.indexOf('Beta'), body.indexOf('Beta') + 4)),
+    );
+  });
 }

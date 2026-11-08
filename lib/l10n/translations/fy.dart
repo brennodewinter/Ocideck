@@ -642,6 +642,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Vergroot tot schermbreedte': 'Fergruttsje ta skermbreedte',
   'Website wil Markdown openen?': 'Webside wol Markdown iepenje?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'De webside {origin} wol in Markdown-tekst yn OciDeck iepenje.',

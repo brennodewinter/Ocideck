@@ -641,6 +641,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Vergroot tot schermbreedte': 'Amplia te na e hanchura di e pantaya',
   'Website wil Markdown openen?': 'Website ke habri Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'E website {origin} ke habri un teksto di Markdown den OciDeck.',

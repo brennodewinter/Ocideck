@@ -1614,6 +1614,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Vergroot tot schermbreedte': 'Μεγέθυνση στο πλάτος της οθόνης',
   'Website wil Markdown openen?': 'Ο ιστότοπος θέλει να ανοίξει Markdown;',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Ο ιστότοπος {origin} θέλει να ανοίξει κείμενο Markdown στο OciDeck.',

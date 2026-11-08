@@ -23,7 +23,7 @@ Setting up a proper development environment is crucial for contributing to OciDe
 
 ### Software Dependencies
 
-- **Flutter 3.47.7** (stable) — the pinned version. Use the `dart` that
+- **Flutter 3.47.9** (stable) — the pinned version. Use the `dart` that
   ships inside it (3.13.5) rather than a separately installed one.
   [BUILD.md](BUILD.md) is the authority here and explains why the exact version
   matters for `make format-check` but not for building.

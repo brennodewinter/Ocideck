@@ -1591,6 +1591,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Vergroot tot schermbreedte': 'Uff Bildschirmbreiti vergrössere',
   'Website wil Markdown openen?': 'Websyte wot Markdown ufmache?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'D Websyte {origin} wot en Markdown-Tekscht in OciDeck ufmache.',

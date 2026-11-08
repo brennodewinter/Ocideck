@@ -63,7 +63,7 @@ All code changes should include:
 
 ### Prerequisites
 
-- **Flutter 3.47.7** (stable), with its bundled Dart 3.13.5 — see
+- **Flutter 3.47.9** (stable), with its bundled Dart 3.13.5 — see
   [BUILD.md](BUILD.md), which is the authority on the toolchain pin and on why
   both checks and builds enforce the exact version
 - macOS, Windows, or Linux desktop toolchain for your target platform  

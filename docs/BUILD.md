@@ -21,7 +21,7 @@ architecture: an x64 SDK under Rosetta can hang subprocess-based checks. Inspect
 > answers — "3.44+ / 3.12+" in one place and "3.44.6 / 3.12.2" in two others —
 > without either saying which one mattered and why.)*
 
-- **Flutter 3.47.7** (stable) — the exact version in `.tool-versions` and the
+- **Flutter 3.47.9** (stable) — the exact version in `.tool-versions` and the
   `.github/workflows/*.yml` workflows. Only Flutter is pinned; the Dart SDK comes
   bundled with it, and `pubspec.yaml` merely constrains it (`sdk: ^3.12.0`).
   Building tolerates
@@ -32,7 +32,7 @@ architecture: an x64 SDK under Rosetta can hang subprocess-based checks. Inspect
   `flutter --version`.
 
   In short: *build* with 3.44 or newer if you must, but *pass the gate* with
-  3.47.7. The two are different requirements and only the second is enforced.
+  3.47.9. The two are different requirements and only the second is enforced.
 - A desktop toolchain for your target:
   - **macOS**: Xcode.
   - **Windows**: Visual Studio with the "Desktop development with C++" workload.

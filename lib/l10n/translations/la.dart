@@ -1603,6 +1603,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Vergroot tot schermbreedte': 'Amplifica ad latitudinem scrini',
   'Website wil Markdown openen?': 'Pagina Markdown aperire vult?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Pagina {origin} textum Markdown in OciDeck aperire vult.',

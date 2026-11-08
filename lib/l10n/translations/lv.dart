@@ -1586,6 +1586,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Vergroot tot schermbreedte': 'Palielināt līdz ekrāna platumam',
   'Website wil Markdown openen?': 'Vietne vēlas atvērt Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Vietne {origin} vēlas atvērt Markdown tekstu lietotnē OciDeck.',

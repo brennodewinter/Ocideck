@@ -1618,6 +1618,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Vergroot tot schermbreedte': 'Méadaigh go leithead an scáileáin',
   'Website wil Markdown openen?': 'An suíomh ag iarraidh Markdown a oscailt?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Tá an suíomh {origin} ag iarraidh téacs Markdown a oscailt in OciDeck.',

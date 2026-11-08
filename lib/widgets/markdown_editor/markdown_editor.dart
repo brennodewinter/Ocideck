@@ -444,7 +444,15 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (quill == null) return;
     final plain = quill.document.toPlainText();
     var index = 0;
-    if (title != null && title.isNotEmpty) {
+    if (markdownOffset != null) {
+      // Dezelfde kaart als de caret-sync: een kop met inline-opmaak
+      // (`**vet**`) of een titel die óók in de lopende tekst voorkomt,
+      // landt op de kop zelf — niet op de eerste teksttreffer of op
+      // positie 0 omdat `indexOf` de titel niet letterlijk vindt.
+      index = MarkdownCaretMap.of(
+        widget.controller.text,
+      ).visualOffsetOf(markdownOffset.clamp(0, widget.controller.text.length));
+    } else if (title != null && title.isNotEmpty) {
       final found = plain.indexOf(title);
       if (found >= 0) index = found;
     }

@@ -1591,6 +1591,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Vergroot tot schermbreedte': 'Nagyítás képernyőszélességre',
   'Website wil Markdown openen?': 'A webhely Markdownot akar megnyitni?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'A(z) {origin} webhely Markdown-szöveget akar megnyitni az OciDeckben.',

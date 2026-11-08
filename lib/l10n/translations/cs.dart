@@ -1589,6 +1589,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Vergroot tot schermbreedte': 'Zvětšit na šířku obrazovky',
   'Website wil Markdown openen?': 'Web chce otevřít Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Web {origin} chce otevřít text Markdown v OciDecku.',

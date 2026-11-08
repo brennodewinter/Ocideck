@@ -1589,6 +1589,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Vergroot tot schermbreedte': 'Suurenna näytön leveyteen',
   'Website wil Markdown openen?': 'Sivusto haluaa avata Markdownin?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Sivusto {origin} haluaa avata Markdown-tekstin OciDeckissä.',

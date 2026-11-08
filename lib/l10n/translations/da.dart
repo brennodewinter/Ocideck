@@ -1589,6 +1589,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Vergroot tot schermbreedte': 'Forstør til skærmbredde',
   'Website wil Markdown openen?': 'Websitet vil åbne Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Websitet {origin} vil åbne en Markdown-tekst i OciDeck.',

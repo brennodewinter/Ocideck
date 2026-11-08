@@ -447,7 +447,10 @@ const Map<String, int> classSizeBaseline = {
   // +3 (#1759): stripLeadingFrontMatterLeakage op drie plekken in de editor.
   // −62 (#2466): de slimme plakroute trok naar een top-level functie in
   // document_editor_layouts — de klasse staat op 1050, plafond met lucht.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1075,
+  // +15 (document-zoom): één fit-width-aanroep op de toolbar — de berekening
+  // zelf staat al top-level, dit is alleen de lucht boven de telling die de
+  // kop hieronder beschrijft.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1090,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.

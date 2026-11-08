@@ -1604,6 +1604,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Vergroot tot schermbreedte': 'Збільшити до ширини екрана',
   'Website wil Markdown openen?': 'Сайт хоче відкрити Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Сайт {origin} хоче відкрити текст Markdown в OciDeck.',
