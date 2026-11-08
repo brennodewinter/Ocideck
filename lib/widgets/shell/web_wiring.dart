@@ -6,6 +6,9 @@ part of '../app_shell.dart';
 /// dragen geen eigen widget-state en droegen alleen bij aan de omvang van
 /// die klasse. `isMounted` gaat mee als callback omdat een top-level
 /// functie zelf geen `mounted` heeft.
+///
+/// Het stuk dat UI én de openpoort raakt ([answerMarkdownTransfer]) staat
+/// apart als gewone library — een `part` is niet los te testen.
 
 /// De postMessage-browserkoppeling (#2827): een insluitende site kan één
 /// Markdown-tekst aanbieden. Top-level in deze library — er is maar één
@@ -33,71 +36,25 @@ Future<void> _openDeckDeepLink(
   }
 }
 
-/// De bridge bewaakt het protocol (init → ready → één overdracht);
-/// alles wat bij de gebruiker moet komen gaat via
-/// [inboundMarkdownRequestProvider].
-Future<MarkdownTransferBridge> _startMarkdownTransferBridge(
-  WidgetRef ref,
-  bool Function() isMounted,
-) async {
-  final origins = await fetchTrustedMessageOrigins();
-  final bridge = MarkdownTransferBridge(
-    trustedOrigins: origins,
-    onRequest: (request) {
-      // De luisteraar overleeft de shell; zonder deze check schrijft een
-      // laat binnenkomend bericht op een weggegooide ref.
-      if (!isMounted()) return;
-      ref.read(inboundMarkdownRequestProvider.notifier).state = request;
-    },
-  );
-  startMarkdownListener(bridge.handleMessage);
-  return bridge;
-}
-
-/// Beantwoord een aangeboden overdracht: weigeren stuurt `declined`;
-/// openen gaat door exact dezelfde poort als geplakte tekst (#2825) en
-/// de site krijgt alleen de uitkomst — `unsafe`/`invalid`, nooit inhoud.
-Future<void> _answerMarkdownTransfer(
-  BuildContext context,
-  WidgetRef ref,
-  InboundMarkdownRequest request,
-  MarkdownTransferBridge? bridge,
-) async {
-  if (bridge == null || !context.mounted) return;
-  final consent = await MarkdownTransferConsentDialog.show(
-    context,
-    origin: request.origin,
-    name: request.name,
-  );
-  if (!context.mounted) return;
-  if (!consent) {
-    bridge.answer(request.id, kStatusDeclined);
-    return;
-  }
-  ref.read(openFailureProvider.notifier).state = null;
-  final result = await ref
-      .read(tabsProvider.notifier)
-      .openDeckFromBytes(
-        Uint8List.fromList(utf8.encode(request.markdown)),
-        request.name ?? 'overdracht.md',
-      );
-  if (result == OpenResult.opened) {
-    bridge.answer(request.id, kStatusOpened);
-  } else if (result == OpenResult.blocked) {
-    bridge.answer(request.id, kStatusRejected, reason: kReasonUnsafe);
-  } else {
-    bridge.answer(request.id, kStatusRejected, reason: kReasonInvalid);
-  }
-}
-
 /// Start de postMessage-browserkoppeling (#2827): luistert naar een
 /// insluitende site en stuurt elke aanbieding via
-/// [inboundMarkdownRequestProvider] aan de toestemmingsvraag. Vóór
+/// [inboundMarkdownRequestProvider] aan de toestemmingsvraag. De bridge
+/// bewaakt het protocol (init → ready → één overdracht); vóór
 /// `ocideck:ready` gaat geen tekst de openpoort in.
 void _initMarkdownTransfer(WidgetRef ref, bool Function() isMounted) {
   if (!isWebPlatform) return;
   unawaited(() async {
-    final bridge = await _startMarkdownTransferBridge(ref, isMounted);
+    final origins = await fetchTrustedMessageOrigins();
+    final bridge = MarkdownTransferBridge(
+      trustedOrigins: origins,
+      onRequest: (request) {
+        // De luisteraar overleeft de shell; zonder deze check schrijft een
+        // laat binnenkomend bericht op een weggegooide ref.
+        if (!isMounted()) return;
+        ref.read(inboundMarkdownRequestProvider.notifier).state = request;
+      },
+    );
+    startMarkdownListener(bridge.handleMessage);
     if (isMounted()) _markdownTransferBridge = bridge;
   }());
 }
@@ -113,7 +70,7 @@ void _watchMarkdownTransferRequests(BuildContext context, WidgetRef ref) {
     if (request == null) return;
     ref.read(inboundMarkdownRequestProvider.notifier).state = null;
     unawaited(
-      _answerMarkdownTransfer(context, ref, request, _markdownTransferBridge),
+      answerMarkdownTransfer(context, ref, request, _markdownTransferBridge),
     );
   });
 }
