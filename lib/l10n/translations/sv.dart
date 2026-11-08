@@ -1588,6 +1588,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Vergroot tot schermbreedte': 'Förstora till skärmens bredd',
   'Website wil Markdown openen?': 'Webbplatsen vill öppna Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Webbplatsen {origin} vill öppna en Markdown-text i OciDeck.',

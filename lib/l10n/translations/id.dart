@@ -1589,6 +1589,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Vergroot tot schermbreedte': 'Perbesar ke lebar layar',
   'Website wil Markdown openen?': 'Situs ingin membuka Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Situs {origin} ingin membuka teks Markdown di OciDeck.',

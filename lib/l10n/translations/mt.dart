@@ -1607,6 +1607,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Vergroot tot schermbreedte': 'Kabbar għal wisa’ l-iskrin',
   'Website wil Markdown openen?': 'Is-sit irid jiftaħ Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Is-sit {origin} irid jiftaħ test Markdown f’OciDeck.',

@@ -1582,6 +1582,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Vergroot tot schermbreedte': 'Suurenda ekraani laiuseks',
   'Website wil Markdown openen?': 'Veebileht tahab Markdowni avada?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Veebileht {origin} tahab avada Markdown-teksti OciDeckis.',

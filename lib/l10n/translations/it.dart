@@ -640,6 +640,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Vergroot tot schermbreedte': 'Ingrandisci alla larghezza dello schermo',
   'Website wil Markdown openen?': 'Il sito vuole aprire un Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Il sito {origin} vuole aprire un testo Markdown in OciDeck.',

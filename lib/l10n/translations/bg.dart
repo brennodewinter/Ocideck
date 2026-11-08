@@ -1608,6 +1608,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Vergroot tot schermbreedte': 'Увеличи до ширината на екрана',
   'Website wil Markdown openen?': 'Сайтът иска да отвори Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Сайтът {origin} иска да отвори текст Markdown в OciDeck.',

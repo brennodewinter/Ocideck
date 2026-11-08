@@ -1589,6 +1589,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Vergroot tot schermbreedte': 'Povečaj na širino zaslona',
   'Website wil Markdown openen?': 'Spletno mesto želi odpreti Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Spletno mesto {origin} želi odpreti besedilo Markdown v OciDecku.',

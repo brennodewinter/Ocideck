@@ -31,6 +31,11 @@ class _DocEditorToolbar extends StatelessWidget {
   /// knoppen ervoor. 1,0 is ware grootte.
   final double zoom;
   final ValueChanged<double> onZoomChanged;
+
+  /// "Vergroot tot schermbreedte" in één klik, of `null` als er niets te
+  /// vergroten valt (de schrijfstand "hele vensterbreedte" vult alles al,
+  /// of de inhoud is al breder dan het scherm).
+  final VoidCallback? onFitWidth;
   final TlpLevel tlp;
   final ValueChanged<TlpLevel> onTlpChanged;
   final VoidCallback onInsertChart;
@@ -106,6 +111,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onWidthChanged,
     required this.zoom,
     required this.onZoomChanged,
+    required this.onFitWidth,
     required this.tlp,
     required this.onTlpChanged,
     required this.onInsertChart,
@@ -397,6 +403,16 @@ class _DocEditorToolbar extends StatelessWidget {
         icon: const Icon(Icons.zoom_in, size: 18),
         visualDensity: VisualDensity.compact,
       ),
+      // Eén klik tot schermbreedte (#document-zoom): alleen als er iets
+      // te vergroten valt — bij "hele vensterbreedte" vult de kolom alles
+      // al en staat hier niets.
+      if (onFitWidth != null)
+        IconButton(
+          tooltip: l10n.d('Vergroot tot schermbreedte'),
+          onPressed: onFitWidth,
+          icon: const Icon(Icons.fit_screen, size: 18),
+          visualDensity: VisualDensity.compact,
+        ),
     ];
   }
 

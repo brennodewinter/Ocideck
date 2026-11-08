@@ -1601,6 +1601,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Vergroot tot schermbreedte': 'Powiększ do szerokości ekranu',
   'Website wil Markdown openen?': 'Witryna chce otworzyć Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Witryna {origin} chce otworzyć tekst Markdown w OciDeck.',

@@ -1605,6 +1605,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Vergroot tot schermbreedte': 'Mărește la lățimea ecranului',
   'Website wil Markdown openen?': 'Site-ul vrea să deschidă Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
       'Site-ul {origin} vrea să deschidă un text Markdown în OciDeck.',

@@ -10,6 +10,8 @@ import '../../models/settings.dart'
         documentBodyFontSizeToCssPx,
         kDocumentDefaultBodyFontSize;
 import '../../services/document_footnote_setup.dart';
+import '../../state/settings_provider.dart'
+    show kDocumentEditorZoomMax, kDocumentEditorZoomMin;
 import '../../services/document_pagination.dart';
 import '../../utils/footnotes.dart';
 import '../../utils/text_search.dart';
@@ -38,6 +40,24 @@ double pageTextWidthPx(PageSizeSpec size, PageMargins margins) {
     kPxPerMm,
     double.infinity,
   );
+}
+
+/// De zoom waarmee een inhoud van [basePx] breed (op zoom 1,0) de beschikbare
+/// [availablePx] vult, geklemd op de zoomgrenzen van de documenteditor.
+///
+/// `null` als er niets te vergroten valt: geen vaste basisbreedte (de
+/// schrijfstand "hele vensterbreedte" vult al), geen zichtbare breedte, of een
+/// basis die al ruimer ligt dan het scherm — dan is "tot schermbreedte"
+/// juist úitzoomen en kiest de gebruiker dat zelf.
+double? documentFitWidthZoom({
+  required double availablePx,
+  required double? basePx,
+  double min = kDocumentEditorZoomMin,
+  double max = kDocumentEditorZoomMax,
+}) {
+  if (basePx == null || basePx <= 0 || availablePx <= 0) return null;
+  if (basePx >= availablePx) return null;
+  return (availablePx / basePx).clamp(min, max);
 }
 
 /// Toont een document als échte pagina's: op maat, met de gekozen marges, een
