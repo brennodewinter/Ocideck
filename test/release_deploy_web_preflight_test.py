@@ -10,6 +10,10 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
+# The stubbed subprocesses finish in well under a second on a workstation, but
+# the linux-serial CI runner executes this suite under heavy parallel load —
+# bind them to that pace, not to local timings.
+SCRIPT_TIMEOUT_S = 90
 
 
 class DeployPreflightTest(unittest.TestCase):
@@ -45,7 +49,7 @@ os.execvp(sys.argv[2],sys.argv[2:])
             result = subprocess.run(['bash', '-s', '--', str(live),
                 'fixture:fixture', str(archive), '20261106-000000'], input=remote,
                 env=dict(os.environ, PATH=str(tools) + os.pathsep + os.environ['PATH']),
-                capture_output=True, text=True, timeout=20)
+                capture_output=True, text=True, timeout=SCRIPT_TIMEOUT_S)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(stat.S_IMODE(live.stat().st_mode), 0o755)
             self.assertEqual(stat.S_IMODE((live / 'assets').stat().st_mode), 0o755)
@@ -73,7 +77,7 @@ os.execvp(sys.argv[2],sys.argv[2:])
                     result = subprocess.run(['bash', str(ROOT / 'scripts/deploy_web.sh'),
                         '--verify-server-config-only', '--bundle-dir', str(bundle), *flags],
                         env=dict(os.environ, PATH=str(tools) + os.pathsep + os.environ['PATH'],
-                                 PROBE_LOG=str(log)), capture_output=True, text=True, timeout=20)
+                                 PROBE_LOG=str(log)), capture_output=True, text=True, timeout=SCRIPT_TIMEOUT_S)
                     self.assertNotEqual(result.returncode, 0)
                     self.assertFalse(log.exists())
 
@@ -119,7 +123,7 @@ sys.exit(subprocess.run(shlex.split(sys.argv[-1]),input=sys.stdin.buffer.read())
                     '--verify-server-config-only', '--bundle-dir', str(bundle)], env=dict(os.environ,
                     PATH=str(tools) + os.pathsep + os.environ['PATH'], PROBE_LOG=str(log),
                     SSH_RESULT='1' if problem == 'ssh' else '0', OCIDECK_DEPLOY_ROOT=str(remote),
-                    OCIDECK_DEPLOY_HOST='fixture@example.test'), capture_output=True, text=True, timeout=20)
+                    OCIDECK_DEPLOY_HOST='fixture@example.test'), capture_output=True, text=True, timeout=SCRIPT_TIMEOUT_S)
                 self.assertEqual(result.returncode == 0, problem == 'none', result.stderr)
                 calls = json.loads(log.read_text())
                 self.assertIn('StrictHostKeyChecking=yes', calls)
@@ -156,7 +160,7 @@ printf 'dart-check\\n' >> "$PROBE_LOG"
                 result = subprocess.run(['bash', str(ROOT / 'scripts/deploy_web.sh'),
                     '--preflight-only', '--bundle-dir', str(bundle)], env=dict(os.environ,
                     PATH=str(tools) + os.pathsep + os.environ['PATH'], PROBE_LOG=str(log),
-                    SSH_RESULT='1' if failure else '0'), capture_output=True, text=True, timeout=20)
+                    SSH_RESULT='1' if failure else '0'), capture_output=True, text=True, timeout=SCRIPT_TIMEOUT_S)
                 self.assertEqual(result.returncode, 1 if failure else 0, result.stderr)
                 self.assertIn('SHA256SUMS: ' + hashlib.sha256(b'checked elsewhere').hexdigest(), result.stdout)
                 self.assertEqual(log.read_text().splitlines(), ['dart-check', 'ssh'])
