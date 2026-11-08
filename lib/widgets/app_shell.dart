@@ -226,6 +226,8 @@ part 'app_shell_menu.dart';
 // Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';
+part 'shell/url_import_dialog.dart';
+part 'shell/web_wiring.dart';
 part 'shell/shell_actions_present.dart';
 part 'shell/shell_actions_export.dart';
 part 'shell/shell_actions_connections.dart';
@@ -322,13 +324,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     sweepStaleRecordings(ref);
     ref.read(ociServeProvider.notifier).closeLearningTabsLocally = () =>
         closeLearningTabsLocally(ref.read(tabsProvider.notifier));
-    // Web: de postMessage-browserkoppeling — luistert naar een insluitende
-    // site en stuurt elke aanbieding via inboundMarkdownRequestProvider aan
-    // de toestemmingsvraag hierboven. Vóór `ocideck:ready` gaat geen tekst
-    // de openpoort in (#2827).
-    if (isWebPlatform) {
-      unawaited(_startMarkdownTransferBridge());
-    }
+    _initMarkdownTransfer(ref, () => mounted);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();
       // Open any file the app was launched with, and start listening for files
@@ -338,7 +334,7 @@ class _AppShellState extends ConsumerState<AppShell> {
       _openLaunchFiles();
       // Web: ?deck=<url>-deeplink die OciDeck én een presentatie tegelijk
       // opent (zelfde security-gate als de importdialoog).
-      _openDeckDeepLink();
+      unawaited(_openDeckDeepLink(context, ref, () => mounted));
     });
   }
 
@@ -349,73 +345,6 @@ class _AppShellState extends ConsumerState<AppShell> {
     final paths = List<String>.from(pendingLaunchFiles);
     pendingLaunchFiles.clear();
     await _onFilesDropped(paths);
-  }
-
-  /// De postMessage-browserkoppeling (#2827): een insluitende site kan één
-  /// Markdown-tekst aanbieden. De bridge bewaakt het protocol (init →
-  /// ready → één overdracht); alles wat bij de gebruiker moet komen gaat
-  /// via [inboundMarkdownRequestProvider].
-  MarkdownTransferBridge? _markdownTransferBridge;
-
-  Future<void> _startMarkdownTransferBridge() async {
-    final origins = await fetchTrustedMessageOrigins();
-    if (!mounted) return;
-    _markdownTransferBridge = MarkdownTransferBridge(
-      trustedOrigins: origins,
-      onRequest: (request) {
-        ref.read(inboundMarkdownRequestProvider.notifier).state = request;
-      },
-    );
-    startMarkdownListener(_markdownTransferBridge!.handleMessage);
-  }
-
-  /// Beantwoord een aangeboden overdracht: weigeren stuurt `declined`;
-  /// openen gaat door exact dezelfde poort als geplakte tekst (#2825) en
-  /// de site krijgt alleen de uitkomst — `unsafe`/`invalid`, nooit inhoud.
-  Future<void> _answerMarkdownTransfer(InboundMarkdownRequest request) async {
-    final bridge = _markdownTransferBridge;
-    if (bridge == null || !mounted) return;
-    final consent = await MarkdownTransferConsentDialog.show(
-      context,
-      origin: request.origin,
-      name: request.name,
-    );
-    if (!mounted) return;
-    if (!consent) {
-      bridge.answer(request.id, kStatusDeclined);
-      return;
-    }
-    ref.read(openFailureProvider.notifier).state = null;
-    final result = await ref
-        .read(tabsProvider.notifier)
-        .openDeckFromBytes(
-          Uint8List.fromList(utf8.encode(request.markdown)),
-          request.name ?? 'overdracht.md',
-        );
-    if (result == OpenResult.opened) {
-      bridge.answer(request.id, kStatusOpened);
-    } else if (result == OpenResult.blocked) {
-      bridge.answer(request.id, kStatusRejected, reason: kReasonUnsafe);
-    } else {
-      bridge.answer(request.id, kStatusRejected, reason: kReasonInvalid);
-    }
-  }
-
-  /// Web-deeplink: `?deck=<url>` haalt de presentatie op en opent haar —
-  /// één link deelt zo de app én de inhoud. De volledige importpoort
-  /// (CORS/hulppunt, veiligheidsscan met alarm, marp-controle) blijft gelden.
-  Future<void> _openDeckDeepLink() async {
-    if (!isWebPlatform || !mounted) return;
-    final deckUrl = deckDeepLinkFrom(Uri.base);
-    if (deckUrl == null) return;
-    final result = await _importUrlWeb(context, ref, deckUrl);
-    // Besluit (#2826): bij een geopend deck wissen we `?deck=` uit de
-    // adresbalk — anders haalt elke herlading het bestand opnieuw binnen
-    // als extra tabblad. Bij een míslukte open blijft hij bewust staan:
-    // dan is herladen om opnieuw te proberen juist het nuttige gedrag.
-    if (result == OpenResult.opened) {
-      replaceAddressBar(withoutDeckParam(Uri.base));
-    }
   }
 
   /// Bij opstart: zijn er herstelbestanden van een vorige (gecrashte) sessie?
@@ -955,17 +884,7 @@ class _AppShellState extends ConsumerState<AppShell> {
       ref.read(importSecurityAlarmProvider.notifier).state = null;
     });
 
-    // Een externe website biedt Markdown aan via postMessage (#2827): de
-    // toestemmingsvraag met de origin, en pas na "Openen" dezelfde openpoort
-    // als geplakte tekst. Het antwoord aan de site draagt nooit inhoud.
-    ref.listen<InboundMarkdownRequest?>(inboundMarkdownRequestProvider, (
-      _,
-      request,
-    ) {
-      if (request == null) return;
-      ref.read(inboundMarkdownRequestProvider.notifier).state = null;
-      _answerMarkdownTransfer(request);
-    });
+    _watchMarkdownTransferRequests(context, ref);
 
     // Een instelling kon niet naar schijf worden weggeschreven: niet-blokkerend
     // melden. De wijziging geldt wel voor deze sessie (de state is al
