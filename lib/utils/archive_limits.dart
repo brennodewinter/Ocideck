@@ -46,6 +46,12 @@ class CappedArchiveOutput extends OutputMemoryStream {
 }
 
 /// Uses the streaming inflater on every platform, including browser builds.
+///
+/// Dit pad leest de ruwe stroom en slaat daarmee de controles over die
+/// `ZipFile` zelf doet — de `verify`/`throwOnError` van de decoder bereiken het
+/// niet. Een afgekapt of beschadigd lid leverde zo stil een stuk inhoud op.
+/// Daarom toetst het hier zelf of de inflater het slotblok haalde, en of de
+/// uitkomst de grootte en CRC-32 heeft die de centrale map belooft.
 void writeArchiveEntryCapped(ArchiveFile file, CappedArchiveOutput output) {
   final raw = file.rawContent;
   if (raw is! ZipFile) {
@@ -55,14 +61,32 @@ void writeArchiveEntryCapped(ArchiveFile file, CappedArchiveOutput output) {
   final compressed = raw.getStream(decompress: false);
   switch (file.compression) {
     case CompressionType.deflate:
-      Inflate.stream(compressed, output: output);
-    case CompressionType.bzip2:
-      if (!BZip2Decoder().decodeStream(compressed, output)) {
-        throw const FormatException('Invalid BZip2 entry');
+      final inflate = Inflate.stream(
+        compressed,
+        output: output,
+        throwOnError: true,
+      );
+      if (!inflate.isFinished) {
+        throw const FormatException('Truncated deflate entry');
       }
+    case CompressionType.bzip2:
+      BZip2Decoder().decodeStream(
+        compressed,
+        output,
+        verify: true,
+        throwOnError: true,
+      );
     case CompressionType.none:
       output.writeStream(compressed);
-    case null:
-      throw const FormatException('Unknown ZIP compression');
+    case CompressionType.zstd ||
+        CompressionType.lzma ||
+        CompressionType.xz ||
+        null:
+      throw const FormatException('Unsupported ZIP compression');
+  }
+  // AES (AE-2) draagt geen CRC; daar heeft `getStream` de MAC al gecontroleerd.
+  if (output.length != raw.uncompressedSize ||
+      (raw.hasCrc32 && getCrc32(output.getBytes()) != raw.crc32)) {
+    throw const FormatException('ZIP entry does not match its size or CRC-32');
   }
 }

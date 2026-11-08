@@ -231,7 +231,11 @@ class CveBulkIngest {
   void _extractInnerZip(File outer, File inner) {
     final input = InputFileStream(outer.path);
     try {
-      final archive = ZipDecoder().decodeStream(input);
+      final archive = ZipDecoder().decodeStream(
+        input,
+        verify: true,
+        throwOnError: true,
+      );
       ArchiveFile? nested;
       for (final file in archive.files) {
         if (file.isFile && file.name.toLowerCase().endsWith('.zip')) {
@@ -280,7 +284,13 @@ class CveBulkIngest {
     var records = 0;
 
     try {
-      final archive = ZipDecoder().decodeStream(input);
+      // Zonder de vlaggen leest een beschadigd record stil als leeg of half, en
+      // belandt een ingekorte index als "klaar" op schijf.
+      final archive = ZipDecoder().decodeStream(
+        input,
+        verify: true,
+        throwOnError: true,
+      );
       for (final file in archive.files) {
         if (!file.isFile) continue;
         final name = file.name;

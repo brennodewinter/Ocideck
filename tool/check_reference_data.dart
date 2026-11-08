@@ -590,7 +590,11 @@ Future<ProbeResult> probeCweXml(
 ) {
   final Archive archive;
   try {
-    archive = ZipDecoder().decodeBytes(Uint8List.fromList(bytes), verify: true);
+    archive = ZipDecoder().decodeBytes(
+      Uint8List.fromList(bytes),
+      verify: true,
+      throwOnError: true,
+    );
   } on Object {
     return null;
   }

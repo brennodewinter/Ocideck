@@ -66,7 +66,11 @@ Archive safeDecodeZip(
       'ZIP archive contains symbolic-link metadata and cannot be imported.',
     );
   }
-  final archive = ZipDecoder().decodeBytes(bytes);
+  final archive = ZipDecoder().decodeBytes(
+    bytes,
+    verify: true,
+    throwOnError: true,
+  );
   if (archive.length > budget.maxArchiveEntries) {
     throw ImportBudgetException('${budget.maxArchiveEntries} onderdelen');
   }

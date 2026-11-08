@@ -183,7 +183,14 @@ List<PackageEntry>? _decodePackageEntries(
       );
       return null;
     }
-    archive = ZipDecoder().decodeBytes(input, password: password);
+    // Zonder deze vlaggen zwijgt archive (vanaf 4.6) over beschadigde inhoud:
+    // een afgekapt lid kwam dan als halve bytes terug in plaats van als fout.
+    archive = ZipDecoder().decodeBytes(
+      input,
+      password: password,
+      verify: true,
+      throwOnError: true,
+    );
   } catch (e, s) {
     logError('FileService.decodePackageEntries: ZIP decode failed', e, s);
     return null;
@@ -227,7 +234,7 @@ List<PackageEntry>? _decodePackageEntries(
       return null;
     }
     final Uint8List content;
-    final capped = _CappedOutputStream(maxBytes - extracted);
+    final capped = CappedArchiveOutput(maxBytes - extracted);
     try {
       _writePackageEntryCapped(file, capped);
       // De stream geeft al een zicht op zijn buffer; kopiëren verdubbelt de
@@ -781,67 +788,15 @@ class PackageBudgetExceeded implements Exception {
       'PackageBudgetExceeded(used: $usedBytes, limit: $limitBytes)';
 }
 
-/// An [OutputStream] that refuses to grow past [limit] bytes. The archive
-/// inflater writes decompressed output incrementally, so throwing here stops a
-/// zip bomb mid-inflation instead of after the whole entry is in memory.
-class _CappedOutputStream extends OutputMemoryStream {
-  _CappedOutputStream(this.limit);
-
-  final int limit;
-
-  void _guard(int add) {
-    if (length + add > limit) throw const ExtractionLimitException();
-  }
-
-  @override
-  void writeByte(int value) {
-    _guard(1);
-    super.writeByte(value);
-  }
-
-  @override
-  void writeBytes(List<int> bytes, {int? length}) {
-    _guard(length ?? bytes.length);
-    super.writeBytes(bytes, length: length);
-  }
-
-  @override
-  void writeStream(InputStream stream) {
-    _guard(stream.length);
-    super.writeStream(stream);
-  }
-
-  @override
-  void writeBackReference(int distance, int count) {
-    _guard(count);
-    super.writeBackReference(distance, count);
-  }
-}
-
-void _writePackageEntryCapped(ArchiveFile file, _CappedOutputStream output) {
-  if (!kIsWeb) {
+/// Buiten het web toetst `ZipFile` zelf grootte en CRC, mits de decoder met
+/// `verify`/`throwOnError` liep. Op web bouwt archive bij DEFLATE eerst de
+/// volledige body op en negeert de meegegeven output (ook nog in 4.6), dus daar
+/// de gedeelde directe inflater, die die controles zelf doet.
+void _writePackageEntryCapped(ArchiveFile file, CappedArchiveOutput output) {
+  if (kIsWeb) {
+    writeArchiveEntryCapped(file, output);
+  } else {
     file.writeContent(output);
-    return;
-  }
-  // archive 4.3.0 negeert op web de meegegeven output bij DEFLATE en bouwt
-  // eerst zelf de volledige body op. Gebruik daar zijn directe inflater.
-  final raw = file.rawContent;
-  if (raw is! ZipFile) throw const FormatException('ongeldig ZIP-lid');
-  final compressed = raw.getStream(decompress: false); // Controleert AES-MAC.
-  switch (file.compression) {
-    case CompressionType.deflate:
-      Inflate.stream(compressed, output: output);
-      return;
-    case CompressionType.bzip2:
-      if (!BZip2Decoder().decodeStream(compressed, output)) {
-        throw const FormatException('ongeldige BZip2-inhoud');
-      }
-      return;
-    case CompressionType.none:
-      output.writeStream(compressed);
-      return;
-    case null:
-      throw const FormatException('onbekende ZIP-compressie');
   }
 }
 
