@@ -643,6 +643,43 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Oanpast: kontrolearje hjirûnder de haadkontrôle en it eksportgedrach.',
+  'Als bestand downloaden': 'As bestân downloade',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Beskerming tsjin gegevenslekken (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Yn browser bewarre. Wer iepenje fia Ynstellingen → Opslach.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'By gebrûk kinne persoansgegevens en bedriuwsynformaasje by de keazen tsjinst of ûntfangers telâne komme en bewarre bliuwe. Kontrolearje tagong en bewartermyn. Oansetten ferstjoert noch neat.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Warskôgje by net ôfhannele fynsten; bewust trochgean bliuwt mooglik.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Browserkopy wiskje? Bewarje sa nedich earst in bestân.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Browseropslach is net fersifere en tagonklik foar oare brûkers fan dit profyl en skripts op dizze webside. It wiskjen fan websidegegevens, priveemodus of romtegebrek kin jo wurk fuorthelje. Bewarjen op de lokale skiif is feiliger: jo beheare sels tagong en reservekopyen.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Browseropslach mislearre. Download jo presintaasje as bestân.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'De privacykontrôle stiet út; it eksportbelied beskermet dan net.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'In útsûndere domein ferberget ek gegevens fan kollega’s. Kies útsûnderingen soarchfâldich.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Gjin garânsje: útsûnderingen en útskeakele regels bliuwe jilden.',
+  'In browser bewaarde presentaties': 'Yn de browser bewarre presintaasjes',
+  'In browser bewaren': 'Yn browser bewarje',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Kies it eksportgedrach. Lannen, byldkontrôle en útsûnderingen bliuwe behâlden.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Lêste 200 barrens: shown = toand, accepted = akseptearre, declined = wegere.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Noch gjin browserkopyen. Kies by Bewarje foar Yn browser bewarje.',
+  'Toestemmingslogboek': 'Tastimmingslogboek',
+  'Uitbreiding inschakelen?': 'Utwreiding oansette?',
+  'Waar wilt u de presentatie bewaren?':
+      'Wêr wolle jo de presintaasje bewarje?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Wisse fynsten blokkearje eksport oant jo se ôfhannele hawwe.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Markearring stiet los fan syn tabel — allinnich lege rigels der tusken.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

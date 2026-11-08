@@ -1602,6 +1602,42 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Pasirinktinai: toliau patikrinkite pagrindinę patikrą ir eksporto veikimą.',
+  'Als bestand downloaden': 'Atsisiųsti kaip failą',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Apsauga nuo duomenų nutekėjimo (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Išsaugota naršyklėje. Atverkite per Nustatymai → Saugykla.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Naudojant asmens duomenys ir verslo informacija gali pasiekti pasirinktą paslaugą ar gavėjus ir ten likti išsaugoti. Patikrinkite prieigą ir saugojimo terminus. Vien įjungimas dar nieko nesiunčia.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Įspėti apie neapdorotus radinius; galite sąmoningai tęsti.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Ištrinti naršyklės kopiją? Jei reikia, pirmiausia išsaugokite failą.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Naršyklės saugykla nešifruojama ir prieinama kitiems šio profilio naudotojams bei šios svetainės scenarijams. Svetainės duomenų išvalymas, privatus režimas ar vietos trūkumas gali ištrinti jūsų darbą. Išsaugoti vietiniame diske saugiau: patys valdote prieigą ir atsargines kopijas.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Nepavyko išsaugoti naršyklėje. Atsisiųskite pateiktį kaip failą.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Privatumo patikra išjungta; eksporto politika tada neapsaugo.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Išimtimi pažymėtas domenas paslepia ir kolegų duomenis. Atidžiai rinkitės išimtis.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Garantijos nėra: išimtys ir išjungtos taisyklės tebegalioja.',
+  'In browser bewaarde presentaties': 'Naršyklėje išsaugotos pateiktys',
+  'In browser bewaren': 'Išsaugoti naršyklėje',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Pasirinkite eksporto veikimą. Šalys, vaizdų patikra ir išimtys išsaugomos.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Paskutiniai 200 įvykių: shown = parodyta, accepted = priimta, declined = atmesta.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Naršyklės kopijų dar nėra. Išsaugodami rinkitės Išsaugoti naršyklėje.',
+  'Toestemmingslogboek': 'Sutikimų žurnalas',
+  'Uitbreiding inschakelen?': 'Įjungti plėtinį?',
+  'Waar wilt u de presentatie bewaren?': 'Kur norite išsaugoti pateiktį?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Patikimi radiniai blokuoja eksportą, kol juos apdorosite.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Žymeklis atskirtas nuo savo lentelės — tarp jų tik tuščios eilutės.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

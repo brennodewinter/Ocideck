@@ -1593,6 +1593,42 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Pielāgots: tālāk pārbaudiet galveno pārbaudi un eksportēšanas darbību.',
+  'Als bestand downloaden': 'Lejupielādēt kā failu',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Aizsardzība pret datu noplūdi (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Saglabāts pārlūkā. Atveriet vēlreiz sadaļā Iestatījumi → Krātuve.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Lietošanas laikā personas dati un uzņēmuma informācija var nonākt izvēlētajā pakalpojumā vai pie saņēmējiem un palikt tur saglabāta. Pārbaudiet piekļuvi un glabāšanas termiņus. Ieslēgšana pati par sevi vēl neko nenosūta.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Brīdināt par neapstrādātiem atradumiem; varat apzināti turpināt.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Dzēst pārlūka kopiju? Ja nepieciešams, vispirms saglabājiet failu.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Pārlūka krātuve nav šifrēta un ir pieejama citiem šī profila lietotājiem un šīs vietnes skriptiem. Vietnes datu dzēšana, privātais režīms vai vietas trūkums var izdzēst jūsu darbu. Saglabāšana lokālajā diskā ir drošāka: piekļuvi un rezerves kopijas pārvaldāt pats.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Saglabāšana pārlūkā neizdevās. Lejupielādējiet prezentāciju kā failu.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Privātuma pārbaude ir izslēgta; eksportēšanas politika tad neaizsargā.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Izņēmumā iekļauts domēns paslēpj arī kolēģu datus. Izvēlieties izņēmumus uzmanīgi.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Nav garantijas: izņēmumi un atspējotie noteikumi joprojām ir spēkā.',
+  'In browser bewaarde presentaties': 'Pārlūkā saglabātās prezentācijas',
+  'In browser bewaren': 'Saglabāt pārlūkā',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Izvēlieties eksportēšanas darbību. Valstis, attēlu pārbaude un izņēmumi tiek saglabāti.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Pēdējie 200 notikumi: shown = parādīts, accepted = pieņemts, declined = noraidīts.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Vēl nav pārlūka kopiju. Saglabājot izvēlieties Saglabāt pārlūkā.',
+  'Toestemmingslogboek': 'Piekrišanas žurnāls',
+  'Uitbreiding inschakelen?': 'Ieslēgt paplašinājumu?',
+  'Waar wilt u de presentatie bewaren?': 'Kur vēlaties saglabāt prezentāciju?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Droši atradumi bloķē eksportēšanu, līdz tos apstrādājat.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Marķieris ir atdalīts no savas tabulas — starp tām ir tikai tukšas rindiņas.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

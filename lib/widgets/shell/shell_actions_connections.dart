@@ -176,6 +176,13 @@ Future<bool> saveDeckWithDestination(
   // niet. Waarschuw, maar blokkeer niet: de gebruiker mag bewust een tekstueel
   // .md willen, en het pakket (.ocideck) is de weg om het beeld mee te nemen.
   if (!supportsLocalProjectFolders) {
+    final choice = await chooseBrowserSave(
+      context,
+      deckNotifier,
+      ref.read(fileServiceProvider),
+    );
+    if (choice == null || !context.mounted) return false;
+    if (choice) return true;
     final deck = deckNotifier.currentState.deck;
     if (deck != null && deckCarriesMemoryAssets(deck)) {
       final proceed = await _confirmWebAssetLoss(context);

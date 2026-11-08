@@ -108,6 +108,7 @@ void main() {
   /// gebruiker, en de opstelling waar de meeste toetsen hieronder vanuit gaan.
   Future<void> moduleAanEnNaarTab(WidgetTester tester) async {
     await tapIn(tester, aanZetten());
+    await tapIn(tester, find.text('Doorgaan'));
     await tapIn(tester, integratiesTabblad());
   }
 
@@ -174,6 +175,7 @@ void main() {
 
     await tapIn(tester, find.byTooltip('Uitbreidingen'));
     await tapIn(tester, aanZetten());
+    await tapIn(tester, find.text('Doorgaan'));
     await tapIn(tester, integratiesTabblad());
     expect(find.byType(DropdownButtonFormField<AiBackendMode>), findsOneWidget);
   });

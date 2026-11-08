@@ -1621,6 +1621,44 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Προσαρμοσμένο: ελέγξτε παρακάτω τον κύριο έλεγχο και τη συμπεριφορά εξαγωγής.',
+  'Als bestand downloaden': 'Λήψη ως αρχείο',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Προστασία από διαρροή δεδομένων (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Αποθηκεύτηκε στο πρόγραμμα περιήγησης. Ανοίξτε από Ρυθμίσεις → Αποθήκευση.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Κατά τη χρήση, προσωπικά δεδομένα και επιχειρηματικές πληροφορίες ενδέχεται να φτάσουν στην επιλεγμένη υπηρεσία ή στους παραλήπτες και να παραμείνουν αποθηκευμένα. Ελέγξτε την πρόσβαση και τους χρόνους διατήρησης. Η ενεργοποίηση από μόνη της δεν στέλνει τίποτα.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Προειδοποίηση για ανεπίλυτα ευρήματα· μπορείτε να επιλέξετε να συνεχίσετε.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Διαγραφή αντιγράφου περιήγησης; Αποθηκεύστε πρώτα ένα αρχείο αν χρειάζεται.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Η αποθήκευση περιήγησης δεν είναι κρυπτογραφημένη και είναι προσβάσιμη σε άλλους χρήστες αυτού του προφίλ και σε σενάρια αυτού του ιστοτόπου. Η εκκαθάριση δεδομένων, η ιδιωτική λειτουργία ή η έλλειψη χώρου μπορούν να διαγράψουν την εργασία σας. Η αποθήκευση στον τοπικό δίσκο είναι ασφαλέστερη: ελέγχετε εσείς την πρόσβαση και τα αντίγραφα ασφαλείας.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Αποτυχία αποθήκευσης περιήγησης. Κατεβάστε την παρουσίασή σας ως αρχείο.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Ο έλεγχος απορρήτου είναι ανενεργός· η πολιτική εξαγωγής τότε δεν προστατεύει.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Ένας εξαιρούμενος τομέας κρύβει και δεδομένα συναδέλφων. Επιλέξτε προσεκτικά τις εξαιρέσεις.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Καμία εγγύηση: οι εξαιρέσεις και οι απενεργοποιημένοι κανόνες εξακολουθούν να ισχύουν.',
+  'In browser bewaarde presentaties':
+      'Παρουσιάσεις αποθηκευμένες στο πρόγραμμα περιήγησης',
+  'In browser bewaren': 'Αποθήκευση στο πρόγραμμα περιήγησης',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Επιλέξτε συμπεριφορά εξαγωγής. Οι χώρες, ο έλεγχος εικόνων και οι εξαιρέσεις διατηρούνται.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Τελευταία 200 συμβάντα: shown = εμφανίστηκε, accepted = έγινε αποδεκτό, declined = απορρίφθηκε.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Δεν υπάρχουν ακόμη αντίγραφα περιήγησης. Κατά την αποθήκευση επιλέξτε Αποθήκευση στο πρόγραμμα περιήγησης.',
+  'Toestemmingslogboek': 'Αρχείο συγκατάθεσης',
+  'Uitbreiding inschakelen?': 'Ενεργοποίηση επέκτασης;',
+  'Waar wilt u de presentatie bewaren?':
+      'Πού θέλετε να αποθηκεύσετε την παρουσίαση;',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Τα βέβαια ευρήματα εμποδίζουν την εξαγωγή μέχρι να τα επιλύσετε.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Ο δείκτης είναι αποσυνδεδεμένος από τον πίνακά του — μόνο κενές γραμμές ανάμεσά τους.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

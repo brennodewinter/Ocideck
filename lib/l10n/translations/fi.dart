@@ -1596,6 +1596,41 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Mukautettu: tarkista alta pääasiallinen tarkistus ja viennin toiminta.',
+  'Als bestand downloaden': 'Lataa tiedostona',
+  'Bescherming tegen gegevenslekken (DLP)': 'Suojaus tietovuodoilta (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Tallennettu selaimeen. Avaa uudelleen kohdasta Asetukset → Tallennustila.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Käytettäessä henkilötietoja ja yritystietoja voi päätyä valitulle palvelulle tai vastaanottajille ja jäädä sinne tallennettuina. Tarkista käyttöoikeudet ja säilytysajat. Pelkkä käyttöönotto ei vielä lähetä mitään.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Varoita käsittelemättömistä löydöksistä; voit silti tietoisesti jatkaa.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Poistetaanko selainkopio? Tallenna tarvittaessa ensin tiedosto.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Selaimen tallennustila on salaamaton ja tämän profiilin muiden käyttäjien sekä tämän sivuston komentosarjojen käytettävissä. Sivustotietojen tyhjentäminen, yksityinen tila tai tilan loppuminen voivat poistaa työsi. Paikalliselle levylle tallentaminen on turvallisempaa: hallitset itse käyttöoikeuksia ja varmuuskopioita.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Selaimeen tallennus epäonnistui. Lataa esitys tiedostona.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Tietosuojatarkistus on pois päältä; vientikäytäntö ei silloin suojaa.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Poikkeukseksi asetettu verkkotunnus piilottaa myös työtoverien tiedot. Valitse poikkeukset huolellisesti.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Ei takuuta: poikkeukset ja käytöstä poistetut säännöt pätevät edelleen.',
+  'In browser bewaarde presentaties': 'Selaimeen tallennetut esitykset',
+  'In browser bewaren': 'Tallenna selaimeen',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Valitse viennin toiminta. Maat, kuvien tarkistus ja poikkeukset säilytetään.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Viimeiset 200 tapahtumaa: shown = näytetty, accepted = hyväksytty, declined = hylätty.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Ei vielä selainkopioita. Valitse tallentaessasi Tallenna selaimeen.',
+  'Toestemmingslogboek': 'Suostumusloki',
+  'Uitbreiding inschakelen?': 'Otetaanko laajennus käyttöön?',
+  'Waar wilt u de presentatie bewaren?': 'Minne haluat tallentaa esityksen?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Varmat löydökset estävät viennin, kunnes käsittelet ne.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Merkki on irti taulukostaan — vain tyhjiä rivejä välissä.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

@@ -1600,6 +1600,41 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Prilagođeno: u nastavku provjerite glavni pregled i ponašanje izvoza.',
+  'Als bestand downloaden': 'Preuzmi kao datoteku',
+  'Bescherming tegen gegevenslekken (DLP)': 'Zaštita od curenja podataka (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Spremljeno u pregledniku. Ponovno otvorite putem Postavke → Pohrana.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Pri uporabi osobni i poslovni podaci mogu dospjeti do odabrane usluge ili primatelja i tamo ostati pohranjeni. Provjerite pristup i rokove čuvanja. Samo uključivanje još ništa ne šalje.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Upozori na neriješene nalaze; i dalje možete svjesno nastaviti.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Izbrisati kopiju iz preglednika? Po potrebi najprije spremite datoteku.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Pohrana preglednika nije šifrirana i dostupna je drugim korisnicima ovog profila i skriptama na ovoj stranici. Brisanje podataka stranice, privatni način ili nedostatak prostora mogu izbrisati vaš rad. Spremanje na lokalni disk sigurnije je: sami upravljate pristupom i sigurnosnim kopijama.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Pohrana u pregledniku nije uspjela. Preuzmite prezentaciju kao datoteku.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Provjera privatnosti je isključena; pravila izvoza tada ne pružaju zaštitu.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Izuzeće domene skriva i podatke kolega. Pažljivo birajte iznimke.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Nema jamstva: iznimke i isključena pravila i dalje vrijede.',
+  'In browser bewaarde presentaties': 'Prezentacije spremljene u pregledniku',
+  'In browser bewaren': 'Spremi u preglednik',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Odaberite ponašanje izvoza. Zemlje, provjera slika i iznimke ostaju sačuvane.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Posljednjih 200 događaja: shown = prikazano, accepted = prihvaćeno, declined = odbijeno.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Još nema kopija u pregledniku. Pri spremanju odaberite Spremi u preglednik.',
+  'Toestemmingslogboek': 'Dnevnik pristanka',
+  'Uitbreiding inschakelen?': 'Uključiti proširenje?',
+  'Waar wilt u de presentatie bewaren?': 'Gdje želite spremiti prezentaciju?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Pouzdani nalazi blokiraju izvoz dok ih ne obradite.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Oznaka je odvojena od svoje tablice — između njih su samo prazni retci.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

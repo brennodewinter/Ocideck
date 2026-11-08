@@ -1596,6 +1596,42 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Khusus: periksa pemindaian utama dan perilaku ekspor di bawah.',
+  'Als bestand downloaden': 'Unduh sebagai berkas',
+  'Bescherming tegen gegevenslekken (DLP)': 'Perlindungan kebocoran data (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Disimpan di browser. Buka kembali melalui Pengaturan → Penyimpanan.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Saat digunakan, data pribadi dan informasi bisnis dapat sampai ke layanan atau penerima yang dipilih dan tetap tersimpan di sana. Periksa akses dan masa penyimpanan. Mengaktifkan saja belum mengirim apa pun.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Peringatkan tentang temuan yang belum ditangani; Anda tetap dapat memilih melanjutkan.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Hapus salinan browser? Simpan berkas terlebih dahulu jika perlu.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Penyimpanan browser tidak terenkripsi dan dapat diakses pengguna lain profil ini serta skrip di situs ini. Menghapus data situs, mode privat atau kehabisan ruang dapat menghapus pekerjaan Anda. Menyimpan di disk lokal lebih aman: Anda mengendalikan akses dan cadangan sendiri.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Penyimpanan browser gagal. Unduh presentasi Anda sebagai berkas.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Pemeriksaan privasi mati; kebijakan ekspor tidak memberikan perlindungan.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Domain yang dikecualikan juga menyembunyikan data rekan kerja. Pilih pengecualian dengan hati-hati.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Tidak ada jaminan: pengecualian dan aturan yang dinonaktifkan tetap berlaku.',
+  'In browser bewaarde presentaties': 'Presentasi yang disimpan di browser',
+  'In browser bewaren': 'Simpan di browser',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Pilih perilaku ekspor. Negara, pemindaian gambar dan pengecualian dipertahankan.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      '200 peristiwa terakhir: shown = ditampilkan, accepted = disetujui, declined = ditolak.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Belum ada salinan browser. Saat menyimpan, pilih Simpan di browser.',
+  'Toestemmingslogboek': 'Log persetujuan',
+  'Uitbreiding inschakelen?': 'Aktifkan ekstensi?',
+  'Waar wilt u de presentatie bewaren?':
+      'Di mana Anda ingin menyimpan presentasi?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Temuan pasti memblokir ekspor sampai Anda menanganinya.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Penanda terlepas dari tabelnya — hanya baris kosong di antaranya.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

@@ -164,6 +164,8 @@ hooks:
         - objdetect
 
 dev_dependencies:
+  # Registreert de echte localStorage-backend voor browseropslag-regressies.
+  shared_preferences_web: ^2.4.3
   flutter_test:
     sdk: flutter
   integration_test:

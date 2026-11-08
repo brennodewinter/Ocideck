@@ -1610,6 +1610,42 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Proprium: inspectionem principalem et rationem exportandi infra verifica.',
+  'Als bestand downloaden': 'Ut fasciculum depone',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Praesidium contra effluxum datorum (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'In navigatro servatum. Aperi iterum per Optiones → Repositorium.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'In usu, data personalia et res societatis ad servitium vel destinatarios electos pervenire ibique servari possunt. Aditum et tempora conservationis verifica. Activatio sola nihil mittit.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'De inventis nondum tractatis mone; consulto pergere licet.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Exemplar navigatri delere? Si opus est, fasciculum prius serva.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Repositorium navigatri non est cryptatum et aliis usoribus huius profili atque scriptis huius situs patet. Deletio datorum situs, modus privatus vel defectus spatii opus delere possunt. In disco locali servare tutius est: ipse aditum et exemplaria subsidiaria regis.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Servatio in navigatro defecit. Praesentationem ut fasciculum depone.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Inspectio secreti inactiva est; regula exportandi tum non protegit.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Dominium exceptum etiam data collegarum celat. Exceptiones caute elige.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Nulla cautio: exceptiones et regulae inactivae adhuc valent.',
+  'In browser bewaarde presentaties': 'Praesentationes in navigatro servatae',
+  'In browser bewaren': 'In navigatro serva',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Rationem exportandi elige. Regiones, inspectio imaginum et exceptiones servantur.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Ultimi 200 eventus: shown = ostensum, accepted = acceptum, declined = recusatum.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Nulla adhuc exemplaria navigatri. In servando elige In navigatro serva.',
+  'Toestemmingslogboek': 'Diarium consensus',
+  'Uitbreiding inschakelen?': 'Extensionem activare?',
+  'Waar wilt u de presentatie bewaren?': 'Ubi praesentationem servare vis?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Inventa certa exportationem impediunt donec ea tractaveris.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Nota a tabula sua seiuncta est — solum lineae vacuae intersunt.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

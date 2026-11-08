@@ -6,6 +6,7 @@ import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
+import 'extension_consent.dart';
 
 /// De modulekaart voor de LibrePlan-connector op het tabblad Uitbreidingen
 /// (#1240). Spiegelt [AiModuleCard]: optioneel, standaard uit, met een
@@ -44,7 +45,9 @@ class LibreplanModuleCard extends StatelessWidget {
         children: [
           SwitchListTile(
             value: !web && enabled,
-            onChanged: web ? null : onChanged,
+            onChanged: web
+                ? null
+                : consentToggle(context, ModuleId.libreplan, onChanged),
             title: Text(
               moduleCardTitle(ModuleId.libreplan, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),

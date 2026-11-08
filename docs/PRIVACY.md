@@ -43,6 +43,40 @@ technical mechanisms behind these guarantees, see
 - **You control sharing** through privacy scanning (OciWacht), redaction, and TLP
   classification before anything is exported.
 
+### Extension consent and browser copies
+
+Enabling an extension with data consequences first shows its purpose and a
+warning about personal data, business information, recipients and retention.
+Cancelling or closing the warning leaves it disabled. This does not replace
+per-task consent for AI, transcription or meetings. Offline reference and
+authoring modules do not show an outbound-data warning.
+
+Shown warnings and accepted or declined choices are recorded with a fixed
+component identifier, notice version and UTC timestamp. The application log
+receives the events; a bounded local consent log retains the last 200 events
+in preferences, including in the browser. It contains no presentation content,
+account names or server addresses and is available under Privacy and
+classification. Resetting settings clears this consent history.
+
+In the web version, Save offers a download or an explicit browser copy. A
+browser copy contains a complete `.ocideck` package, including embedded media,
+in the origin's browser storage. Saving requires confirmation of the risks:
+the copy is unencrypted, scripts on that origin and other users of the browser
+profile can read it, and site-data deletion, private browsing or storage
+pressure can remove it. Saving a file to local disk is safer because the user
+controls access and backups. Browser storage is not a backup or automatic
+saving; each save remains an explicit choice. The application limits encoded
+browser copies to 5 MiB in total and reports failed or full storage without
+marking unsaved work as saved. Open and delete copies through Settings →
+Storage. Reopening uses the regular package-import safety checks. Resetting
+settings preserves these presentations; delete them explicitly in Storage.
+
+DLP offers warning and blocking profiles for export. Both enable the local
+privacy scan and preserve country, image-check and exception choices. Blocking
+requires handling unresolved certain findings; it does not prove that a
+presentation contains no sensitive information. Domain exceptions also cover
+colleagues using that domain.
+
 ## What stays local
 
 Editing, previewing, presenting, and exporting all happen entirely on your

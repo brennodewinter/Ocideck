@@ -1612,6 +1612,42 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Personalizat: verificați mai jos controlul principal și comportamentul exportului.',
+  'Als bestand downloaden': 'Descarcă drept fișier',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Protecție împotriva scurgerilor de date (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Salvat în browser. Redeschideți prin Setări → Stocare.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'La utilizare, datele personale și informațiile de afaceri pot ajunge la serviciul sau destinatarii aleși și pot rămâne stocate acolo. Verificați accesul și perioadele de păstrare. Simpla activare nu trimite încă nimic.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Avertizare pentru constatările netratate; puteți alege să continuați.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Ștergeți copia din browser? Salvați mai întâi un fișier dacă este necesar.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Stocarea browserului nu este criptată și este accesibilă altor utilizatori ai acestui profil și scripturilor acestui site. Ștergerea datelor site-ului, modul privat sau lipsa spațiului pot șterge munca dumneavoastră. Salvarea pe discul local este mai sigură: controlați personal accesul și copiile de siguranță.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Stocarea în browser a eșuat. Descărcați prezentarea ca fișier.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Verificarea confidențialității este oprită; politica de export nu protejează atunci.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Un domeniu exceptat ascunde și datele colegilor. Alegeți excepțiile cu grijă.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Fără garanție: excepțiile și regulile dezactivate se aplică în continuare.',
+  'In browser bewaarde presentaties': 'Prezentări salvate în browser',
+  'In browser bewaren': 'Salvează în browser',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Alegeți comportamentul exportului. Țările, verificarea imaginilor și excepțiile sunt păstrate.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Ultimele 200 de evenimente: shown = afișat, accepted = acceptat, declined = refuzat.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Încă nu există copii în browser. La salvare alegeți Salvează în browser.',
+  'Toestemmingslogboek': 'Jurnal de consimțământ',
+  'Uitbreiding inschakelen?': 'Activați extensia?',
+  'Waar wilt u de presentatie bewaren?': 'Unde doriți să salvați prezentarea?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Constatările certe blochează exportul până când le tratați.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Marcatorul este despărțit de tabelul său — doar rânduri goale între ele.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

@@ -230,6 +230,20 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   DeckState get currentState => state;
 
+  /// Identiteit van de bewust in dit browserprofiel bewaarde pakketkopie.
+  String? browserStorageId;
+
+  /// Latere bewerkingen mogen niet schoon worden door een oudere schrijfbeurt.
+  bool markBrowserSaved(Deck snapshot, int revision) {
+    if (mounted &&
+        identical(state.deck, snapshot) &&
+        state.revision == revision) {
+      state = state.copyWith(isDirty: false);
+      return true;
+    }
+    return false;
+  }
+
   set _replacementState(DeckState value) => state = value;
 
   bool get canUndo => _undoStack.isNotEmpty;
@@ -281,6 +295,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
   }
 
   void _clearHistory() {
+    browserStorageId = null;
     _undoStack.clear();
     _redoStack.clear();
     _lastMutationAt = null;

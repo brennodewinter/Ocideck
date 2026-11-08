@@ -1614,6 +1614,44 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Personalizzat: iċċekkja hawn taħt il-kontroll ewlieni u l-imġiba tal-esportazzjoni.',
+  'Als bestand downloaden': 'Niżżel bħala fajl',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Protezzjoni kontra t-tnixxija tad-data (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Issejvjat fil-browser. Iftaħ mill-ġdid minn Settings → Ħażna.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Waqt l-użu, data personali u informazzjoni tan-negozju jistgħu jaslu għand is-servizz jew ir-riċevituri magħżula u jibqgħu maħżuna hemm. Iċċekkja l-aċċess u l-perjodi ta’ żamma. L-attivazzjoni waħedha għadha ma tibgħat xejn.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Wissi dwar sejbiet mhux trattati; xorta tista’ tagħżel li tkompli.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Tħassar il-kopja tal-browser? Jekk meħtieġ, issejvja fajl l-ewwel.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Il-ħażna tal-browser mhix kriptata u hija aċċessibbli għal utenti oħra ta’ dan il-profil u skripts fuq dan is-sit. It-tħassir tad-data tas-sit, il-modalità privata jew nuqqas ta’ spazju jistgħu jħassru xogħlok. Issejvjar fuq id-diska lokali huwa aktar sigur: tikkontrolla l-aċċess u l-kopji ta’ riżerva int stess.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Il-ħażna fil-browser falliet. Niżżel il-preżentazzjoni bħala fajl.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Il-kontroll tal-privatezza huwa mitfi; il-politika tal-esportazzjoni mbagħad ma tipproteġix.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Dominju eskluż jaħbi wkoll id-data tal-kollegi. Agħżel l-eċċezzjonijiet bir-reqqa.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Ebda garanzija: l-eċċezzjonijiet u r-regoli diżattivati jibqgħu japplikaw.',
+  'In browser bewaarde presentaties':
+      'Preżentazzjonijiet issejvjati fil-browser',
+  'In browser bewaren': 'Issejvja fil-browser',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Agħżel l-imġiba tal-esportazzjoni. Il-pajjiżi, il-kontroll tal-immaġnijiet u l-eċċezzjonijiet jinżammu.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'L-aħħar 200 avveniment: shown = muri, accepted = aċċettat, declined = miċħud.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Għad m’hemmx kopji fil-browser. Meta tissejvja, agħżel Issejvja fil-browser.',
+  'Toestemmingslogboek': 'Reġistru tal-kunsens',
+  'Uitbreiding inschakelen?': 'Tattiva l-estensjoni?',
+  'Waar wilt u de presentatie bewaren?':
+      'Fejn trid tissejvja l-preżentazzjoni?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Sejbiet ċerti jimblukkaw l-esportazzjoni sakemm tindirizzahom.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Il-markatur huwa separat mit-tabella tiegħu — biss ringieli vojta bejniethom.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

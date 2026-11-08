@@ -1615,6 +1615,43 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'По избор: проверете по-долу основната проверка и поведението при експортиране.',
+  'Als bestand downloaden': 'Изтегляне като файл',
+  'Bescherming tegen gegevenslekken (DLP)':
+      'Защита срещу изтичане на данни (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Запазено в браузъра. Отворете отново чрез Настройки → Хранилище.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'При използване лични данни и фирмена информация могат да достигнат до избраната услуга или получателите и да останат съхранени там. Проверете достъпа и сроковете за съхранение. Самото включване все още не изпраща нищо.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Предупреждение за необработени находки; можете съзнателно да продължите.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Да се изтрие ли копието от браузъра? При нужда първо запазете файл.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Хранилището на браузъра не е шифровано и е достъпно за други потребители на този профил и скриптове на този сайт. Изчистването на данните на сайта, частният режим или недостигът на място могат да изтрият работата ви. Запазването на локалния диск е по-безопасно: сами контролирате достъпа и резервните копия.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Запазването в браузъра е неуспешно. Изтеглете презентацията като файл.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Проверката за поверителност е изключена; политиката за експортиране тогава не защитава.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Изключен домейн скрива и данните на колеги. Избирайте изключенията внимателно.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Няма гаранция: изключенията и изключените правила продължават да важат.',
+  'In browser bewaarde presentaties': 'Презентации, запазени в браузъра',
+  'In browser bewaren': 'Запазване в браузъра',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Изберете поведение при експортиране. Държавите, проверката на изображения и изключенията се запазват.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Последни 200 събития: shown = показано, accepted = прието, declined = отказано.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Все още няма копия в браузъра. При запазване изберете Запазване в браузъра.',
+  'Toestemmingslogboek': 'Дневник на съгласията',
+  'Uitbreiding inschakelen?': 'Да се включи ли разширението?',
+  'Waar wilt u de presentatie bewaren?':
+      'Къде искате да запазите презентацията?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Сигурните находки блокират експортирането, докато ги обработите.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Маркерът е отделен от таблицата си — между тях има само празни редове.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':

@@ -1589,6 +1589,41 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
+      'Kohandatud: kontrollige allpool põhikontrolli ja ekspordi käitumist.',
+  'Als bestand downloaden': 'Laadi alla failina',
+  'Bescherming tegen gegevenslekken (DLP)': 'Kaitse andmelekete eest (DLP)',
+  'Bewaard in browser. Heropenen via Instellingen → Opslag.':
+      'Salvestatud brauserisse. Ava uuesti menüüst Seaded → Salvestusruum.',
+  'Bij gebruik kunnen persoonsgegevens en bedrijfsinformatie bij de gekozen dienst of ontvangers terechtkomen en bewaard blijven. Controleer toegang en bewaartermijnen. Aanzetten verstuurt nog niets.':
+      'Kasutamisel võivad isikuandmed ja ettevõtte teave jõuda valitud teenuse või saajateni ning sinna salvestatuks jääda. Kontrollige juurdepääsu ja säilitusaegu. Ainuüksi sisselülitamine ei saada veel midagi.',
+  'Bij onafgehandelde vondsten waarschuwen; bewust doorgaan blijft mogelijk.':
+      'Hoiata lahendamata leidude korral; saate teadlikult jätkata.',
+  'Browserkopie verwijderen? Bewaar zo nodig eerst een bestand.':
+      'Kas kustutada brauserikoopia? Vajadusel salvestage esmalt fail.',
+  'Browseropslag is onversleuteld en toegankelijk voor andere gebruikers van dit profiel en scripts op deze website. Wissen van websitegegevens, privémodus of ruimtegebrek kan uw werk verwijderen. Bewaren op de lokale schijf is veiliger: u beheert zelf toegang en reservekopieën.':
+      'Brauseri salvestusruum on krüptimata ja ligipääsetav teistele selle profiili kasutajatele ning selle veebilehe skriptidele. Saidiandmete kustutamine, privaatrežiim või ruumipuudus võivad teie töö kustutada. Kohalikule kettale salvestamine on turvalisem: haldate ise juurdepääsu ja varukoopiaid.',
+  'Browseropslag mislukt. Download uw presentatie als bestand.':
+      'Brauserisse salvestamine nurjus. Laadige esitlus alla failina.',
+  'De privacycontrole staat uit; het exportbeleid beschermt dan niet.':
+      'Privaatsuskontroll on välja lülitatud; ekspordipoliitika siis ei kaitse.',
+  'Een uitgezonderd domein verbergt ook gegevens van collega’s. Kies uitzonderingen zorgvuldig.':
+      'Erandiks märgitud domeen peidab ka kolleegide andmeid. Valige erandeid hoolikalt.',
+  'Geen garantie: uitzonderingen en uitgeschakelde regels blijven gelden.':
+      'Garantiid pole: erandid ja keelatud reeglid kehtivad endiselt.',
+  'In browser bewaarde presentaties': 'Brauserisse salvestatud esitlused',
+  'In browser bewaren': 'Salvesta brauserisse',
+  'Kies het exportgedrag. Landen, beeldcontrole en uitzonderingen blijven behouden.':
+      'Valige ekspordi käitumine. Riigid, pildikontroll ja erandid säilivad.',
+  'Laatste 200 gebeurtenissen: shown = getoond, accepted = geaccepteerd, declined = geweigerd.':
+      'Viimased 200 sündmust: shown = näidatud, accepted = nõustutud, declined = keeldutud.',
+  'Nog geen browserkopieën. Kies bij Opslaan voor In browser bewaren.':
+      'Brauserikoopiaid veel pole. Salvestamisel valige Salvesta brauserisse.',
+  'Toestemmingslogboek': 'Nõusolekulogi',
+  'Uitbreiding inschakelen?': 'Kas lülitada laiendus sisse?',
+  'Waar wilt u de presentatie bewaren?': 'Kuhu soovite esitluse salvestada?',
+  'Zekere vondsten blokkeren export totdat u ze afhandelt.':
+      'Kindlad leiud blokeerivad ekspordi, kuni need lahendate.',
   'Marker staat los van zijn tabel — alleen lege regels ertussen.':
       'Marker on oma tabelist lahti — vahel on ainult tühjad read.',
   'De marker geldt niet: het contract valt stil weg en de tabel wordt een gewone tabel.':
