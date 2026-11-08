@@ -37,6 +37,14 @@ All notable changes to OciDeck are documented in this file.
   zip-tijdstempel. `image` gaat mee naar 4.12.0, dat nu oplosbaar is: die
   versie stopt onder meer afbeeldingen waarvan de EXIF- of TIFF-gegevens in
   een lus verwijzen en begrenst uitgepakte grootten.
+### Changed
+
+- Flutter 3.47.9 (Dart 3.13.7) en de oplosbare pakketten zijn bijgewerkt:
+  `file_picker` 13.3.2, `pdfrx` 2.12.0 (met `pdfrx_engine` 0.9.1 en
+  `pdfium_dart`/`pdfium_flutter` 0.4.1), `flutter_riverpod` 3.5.0,
+  `material_ui` 1.10.0, `fl_chart` 1.3.0, `pasteboard` 0.6.0 en `flutter_svg`
+  2.3.2; de software-inventaris volgt. De CI-images en de vrijgaveroutes
+  draaien op dezelfde Flutter.
 
 ## [0.7.7] — 2026-11-05
 
