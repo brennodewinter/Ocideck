@@ -245,10 +245,18 @@ void main() {
       final a = build(created: DateTime.utc(2026, 10, 4, 1, 2, 3));
       final b = build(created: DateTime.utc(2026, 10, 4, 22, 59, 59));
       expect(a, b);
-      // Every entry's time stamp is the earliest a zip can say: 1980-01-01 00:00.
+      // Every entry's DOS time stamp is the earliest a zip can say, 1980-01-01
+      // 00:00 (date 0x0021, time 0), and the instant in the UT extra field is
+      // one fixed constant. archive 4.6 writes the DOS fields in local time, so
+      // 1980-01-01 UTC came out as 01:00 here and gave the maker's offset away.
       final zip = ZipDecoder().decodeBytes(a);
       for (final file in zip.files) {
-        expect(file.lastModDateTime, DateTime.utc(1980, 1, 1));
+        expect(file.lastModDosTime, 0x0021 << 16, reason: file.name);
+        expect(
+          file.lastModDateTime.toUtc(),
+          DateTime.utc(1979, 12, 31),
+          reason: file.name,
+        );
       }
     });
 

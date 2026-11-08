@@ -258,7 +258,12 @@ class CveBulkIngest {
       final output = _CappedFileOutputStream(inner.path, maxInnerArchiveBytes);
       try {
         nested.writeContent(output);
-      } on ExtractionLimitException {
+      } on Exception catch (e) {
+        // archive stopt zelf een lid dat voorbij zijn aankondiging groeit
+        // (ArchiveLimitException), vóór onze grens het doet: hetzelfde teken.
+        if (e is! ExtractionLimitException && e is! ArchiveLimitException) {
+          rethrow;
+        }
         throw const CveIngestException(
           CveIngestFailure.invalidArchive,
           'het geneste archief groeide voorbij de grens tijdens het uitpakken',

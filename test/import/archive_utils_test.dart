@@ -7,6 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/import/utils/archive_utils.dart';
 import 'package:ocideck/services/import/utils/import_budget.dart';
 
+import '../support/damaged_zip.dart';
+
 /// De zip-bom-beveiliging van de presentatie-import, nu gedreven door één
 /// centraal [ImportBudget] (#874).
 ///
@@ -45,6 +47,29 @@ void main() {
       ),
       throwsA(isA<ImportBudgetException>()),
     );
+  });
+
+  group('een beschadigd lid wordt geweigerd, niet half gelezen', () {
+    // De directe inflater leest de ruwe stroom, dus de decodervlaggen bereiken
+    // hem niet: hij moet zelf zien dat een lid afgekapt of omgevallen is.
+    final slide = incompressible(4000);
+
+    test('een omgedraaide byte (CRC-32 klopt niet)', () {
+      final zip = flipByteIn(storedZip({'ppt/slide1.xml': slide}), slide);
+      expect(() => safeDecodeZip(zip), throwsFormatException);
+    });
+
+    test('een halverwege afgekapte deflate-stroom', () {
+      final zip = zipWithCutEntry({'ppt/slide1.xml': slide}, 'ppt/slide1.xml');
+      expect(() => safeDecodeZip(zip), throwsFormatException);
+    });
+
+    test('een onbeschadigd lid komt er byte voor byte door', () {
+      final bytes = safeDecodeZip(
+        storedZip({'ppt/slide1.xml': slide}),
+      ).findFile('ppt/slide1.xml')!.content;
+      expect(bytes, slide);
+    });
   });
 
   test('een gewoon archief komt er gewoon doorheen', () {

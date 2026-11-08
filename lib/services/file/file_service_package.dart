@@ -795,8 +795,14 @@ class PackageBudgetExceeded implements Exception {
 void _writePackageEntryCapped(ArchiveFile file, CappedArchiveOutput output) {
   if (kIsWeb) {
     writeArchiveEntryCapped(file, output);
-  } else {
+    return;
+  }
+  try {
     file.writeContent(output);
+  } on ArchiveLimitException {
+    // archive stopt zelf een lid dat voorbij zijn aankondiging groeit, vóór
+    // onze grens het doet. Het blijft hetzelfde teken: een bom.
+    throw const ExtractionLimitException();
   }
 }
 

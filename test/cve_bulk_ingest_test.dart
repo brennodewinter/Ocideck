@@ -8,6 +8,8 @@ import 'package:ocideck/models/local_cve_status.dart';
 import 'package:ocideck/services/cve/cve_bulk_ingest.dart';
 import 'package:ocideck/services/cve/local_cve_index.dart';
 
+import 'support/damaged_zip.dart';
+
 /// De hele keten — release opzoeken, downloaden, de zip ín de zip uitpakken,
 /// indexeren — met een archiefje van een paar kilobyte in plaats van 550 MB.
 ///
@@ -228,6 +230,48 @@ void main() {
       ..add(ArchiveFile.bytes('cves.zip', ZipEncoder().encode(inner)));
 
     expect((await run(makeIngest(ZipEncoder().encode(outer)))).records, 1);
+  });
+
+  group('een beschadigde download levert geen index op', () {
+    // Anders dan een kapot JSON-record hierboven: een CRC-fout zegt dat de
+    // download zelf omviel, dus niets ervan is te vertrouwen. Zonder
+    // verify/throwOnError las archive 4.6 het lid stil als verkeerde bytes.
+    // Twee records, zodat een stil overgeslagen beschadigd record niet achter
+    // de "geen records"-weigering verdwijnt: dan bouwt hij gewoon met één.
+    final record = utf8.encode(jsonEncode(cveJson('CVE-2021-44228')));
+    final readme = incompressible(2000);
+    Map<String, List<int>> members() => {
+      'cves/2021/44xxx/CVE-2021-44228.json': record,
+      'cves/2014/0xxx/CVE-2014-0160.json': utf8.encode(
+        jsonEncode(cveJson('CVE-2014-0160')),
+      ),
+      'cves/README.md': readme,
+    };
+
+    Future<void> refuses(List<int> archive) async {
+      await expectLater(
+        run(makeIngest(archive)),
+        throwsA(isA<ArchiveException>()),
+      );
+      expect(await LocalCveIndex(Directory('${tmp.path}/db')).stats(), isNull);
+    }
+
+    test('een omgevallen record in de binnenste zip', () async {
+      final inner = flipByteIn(storedZip(members()), record);
+      await refuses(
+        ZipEncoder().encode(
+          Archive()..add(ArchiveFile.bytes('cves.zip', inner)),
+        ),
+      );
+    });
+
+    test('een omgevallen byte in de buitenste zip', () async {
+      // Geraakt is de README, die de index nooit leest: alleen de buitenste
+      // decoder kan dit zien.
+      await refuses(
+        flipByteIn(storedZip({'cves.zip': storedZip(members())}), readme),
+      );
+    });
   });
 
   test(
