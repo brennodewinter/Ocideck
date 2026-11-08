@@ -1643,7 +1643,7 @@ const _dutchSourceAddEl = <String, String>{
       'Επικολλήστε εδώ το κείμενο Markdown. Με marp: true στην κεφαλίδα γίνεται παρουσίαση, χωρίς αυτήν έγγραφο.',
   'Markdown-tekst': 'Κείμενο Markdown',
   '{n} tekens': '{n} χαρακτήρες',
-  'Open in OciDeck': 'Άνοιγμα στο OciDeck',
+  'Openen in OciDeck': 'Άνοιγμα στο OciDeck',
   'Geplakte tekst verwerpen?': 'Απόρριψη του επικολλημένου κειμένου;',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Υπάρχει ακόμη κείμενο στο πεδίο· δεν θα ανοικτεί.',

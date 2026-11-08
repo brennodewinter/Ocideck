@@ -121,7 +121,7 @@ void main() {
       '# Aantekening\n\nGewone tekst, geen presentatie.',
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, 'Open in OciDeck'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Openen in OciDeck'));
     await tester.pumpAndSettle();
 
     final tabs = container.read(tabsProvider).tabs;
@@ -151,7 +151,7 @@ void main() {
       '---\nmarp: true\n---\n\n# Dia één\n',
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, 'Open in OciDeck'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Openen in OciDeck'));
     await tester.pumpAndSettle();
 
     final tabs = container.read(tabsProvider).tabs;

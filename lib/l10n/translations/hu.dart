@@ -1620,7 +1620,7 @@ const _dutchSourceAddHu = <String, String>{
       'Illessze be ide a Markdown-szöveget. A fejlécben szereplő marp: true esetén prezentáció lesz, nélküle dokumentum.',
   'Markdown-tekst': 'Markdown-szöveg',
   '{n} tekens': '{n} karakter',
-  'Open in OciDeck': 'Megnyitás az OciDeckben',
+  'Openen in OciDeck': 'Megnyitás az OciDeckben',
   'Geplakte tekst verwerpen?': 'Elveti a beillesztett szöveget?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'A mezőben még van szöveg; az nem lesz megnyitva.',

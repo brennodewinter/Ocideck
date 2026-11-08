@@ -2522,7 +2522,7 @@ const _dutchSourceAddTr = <String, String>{
       'Markdown metnini buraya yapıştırın. Başlıkta marp: true varsa sunum olur, yoksa belge olur.',
   'Markdown-tekst': 'Markdown metni',
   '{n} tekens': '{n} karakter',
-  'Open in OciDeck': 'OciDeck’te aç',
+  'Openen in OciDeck': 'OciDeck’te aç',
   'Geplakte tekst verwerpen?': 'Yapıştırılan metin atılsın mı?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Alında hâlâ metin var; açılmayacak.',

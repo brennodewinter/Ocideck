@@ -669,7 +669,7 @@ const _dutchSourceAddEs = {
       'Pega aquí el texto Markdown. Con marp: true en la cabecera se convierte en una presentación; sin él, en un documento.',
   'Markdown-tekst': 'Texto Markdown',
   '{n} tekens': '{n} caracteres',
-  'Open in OciDeck': 'Abrir en OciDeck',
+  'Openen in OciDeck': 'Abrir en OciDeck',
   'Geplakte tekst verwerpen?': '¿Descartar el texto pegado?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Aún hay texto en el campo; no se abrirá.',

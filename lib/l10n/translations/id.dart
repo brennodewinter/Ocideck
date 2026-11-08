@@ -1618,7 +1618,7 @@ const _dutchSourceAddId = <String, String>{
       'Tempel teks Markdown di sini. Dengan marp: true di baris kepala menjadi presentasi; tanpa itu menjadi dokumen.',
   'Markdown-tekst': 'Teks Markdown',
   '{n} tekens': '{n} karakter',
-  'Open in OciDeck': 'Buka di OciDeck',
+  'Openen in OciDeck': 'Buka di OciDeck',
   'Geplakte tekst verwerpen?': 'Buang teks yang ditempel?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Masih ada teks di kolom; teks itu tidak akan dibuka.',

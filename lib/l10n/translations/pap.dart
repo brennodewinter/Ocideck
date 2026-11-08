@@ -670,7 +670,7 @@ const _dutchSourceAddPap = {
       'Pega e teksto di Markdown aki. Ku marp: true den e kabesera e ta bira un presentashon; sin djè, un dokumento.',
   'Markdown-tekst': 'Teksto di Markdown',
   '{n} tekens': '{n} karakter',
-  'Open in OciDeck': 'Abrí den OciDeck',
+  'Openen in OciDeck': 'Abrí den OciDeck',
   'Geplakte tekst verwerpen?': 'Bandona e teksto pegá?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Ainda tin teksto den e kampo; e no lo bira habrí.',

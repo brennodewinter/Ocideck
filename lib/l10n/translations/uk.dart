@@ -1633,7 +1633,7 @@ const _dutchSourceAddUk = <String, String>{
       'Вставте тут текст Markdown. З marp: true у заголовку він стане презентацією, без — документом.',
   'Markdown-tekst': 'Текст Markdown',
   '{n} tekens': '{n} символів',
-  'Open in OciDeck': 'Відкрити в OciDeck',
+  'Openen in OciDeck': 'Відкрити в OciDeck',
   'Geplakte tekst verwerpen?': 'Відкинути вставлений текст?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'У полі ще є текст; його не буде відкрито.',

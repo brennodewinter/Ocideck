@@ -1634,7 +1634,7 @@ const _dutchSourceAddRo = <String, String>{
       'Lipește aici textul Markdown. Cu marp: true în antet devine o prezentare, fără — un document.',
   'Markdown-tekst': 'Text Markdown',
   '{n} tekens': '{n} caractere',
-  'Open in OciDeck': 'Deschide în OciDeck',
+  'Openen in OciDeck': 'Deschide în OciDeck',
   'Geplakte tekst verwerpen?': 'Se aruncă textul lipit?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Mai există text în câmp; nu va fi deschis.',

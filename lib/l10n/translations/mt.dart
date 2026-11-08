@@ -1636,7 +1636,7 @@ const _dutchSourceAddMt = <String, String>{
       'Waħħal hawn it-test Markdown. B’marp: true fl-intestatura jsir preżentazzjoni, mingħajru dokument.',
   'Markdown-tekst': 'Test Markdown',
   '{n} tekens': '{n} karattri',
-  'Open in OciDeck': 'Iftaħ f’OciDeck',
+  'Openen in OciDeck': 'Iftaħ f’OciDeck',
   'Geplakte tekst verwerpen?': 'Tarmi t-test imwaħħal?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Għad hemm test fil-qasam; ma jinfetaħx.',

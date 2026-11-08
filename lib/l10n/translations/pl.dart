@@ -1630,7 +1630,7 @@ const _dutchSourceAddPl = <String, String>{
       'Wklej tutaj tekst Markdown. Z marp: true w nagłówku stanie się prezentacją, bez niego dokumentem.',
   'Markdown-tekst': 'Tekst Markdown',
   '{n} tekens': '{n} znaków',
-  'Open in OciDeck': 'Otwórz w OciDeck',
+  'Openen in OciDeck': 'Otwórz w OciDeck',
   'Geplakte tekst verwerpen?': 'Odrzucić wklejony tekst?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'W polu jest jeszcze tekst; nie zostanie otwarty.',

@@ -671,7 +671,7 @@ const _dutchSourceAddDe = {
       'Fügen Sie hier den Markdown-Text ein. Mit marp: true im Frontmatter wird daraus eine Präsentation, ohne ein Dokument.',
   'Markdown-tekst': 'Markdown-Text',
   '{n} tekens': '{n} Zeichen',
-  'Open in OciDeck': 'In OciDeck öffnen',
+  'Openen in OciDeck': 'In OciDeck öffnen',
   'Geplakte tekst verwerpen?': 'Eingefügten Text verwerfen?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Im Feld steht noch Text; dieser wird nicht geöffnet.',

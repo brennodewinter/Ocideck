@@ -1623,7 +1623,7 @@ const _dutchSourceAddLt = <String, String>{
       'Įklijuokite čia Markdown tekstą. Su marp: true antraštėje jis tampa pristatymu, be jos — dokumentu.',
   'Markdown-tekst': 'Markdown tekstas',
   '{n} tekens': '{n} ženklų',
-  'Open in OciDeck': 'Atidaryti OciDeck',
+  'Openen in OciDeck': 'Atidaryti OciDeck',
   'Geplakte tekst verwerpen?': 'Atmesti įklijuotą tekstą?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Lauke dar yra teksto; jis nebus atidarytas.',

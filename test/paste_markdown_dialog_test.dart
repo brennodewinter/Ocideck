@@ -40,7 +40,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  Finder openButton() => find.widgetWithText(FilledButton, 'Open in OciDeck');
+  Finder openButton() => find.widgetWithText(FilledButton, 'Openen in OciDeck');
 
   testWidgets('Open-knop uit bij leeg én bij alleen witruimte', (tester) async {
     await openDialog(tester);

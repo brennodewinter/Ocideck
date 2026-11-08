@@ -1622,7 +1622,7 @@ const _dutchSourceAddHr = <String, String>{
       'Zalijepite ovdje Markdown tekst. S marp: true u zaglavlju postaje prezentacija, bez njega dokument.',
   'Markdown-tekst': 'Markdown tekst',
   '{n} tekens': '{n} znakova',
-  'Open in OciDeck': 'Otvori u OciDecku',
+  'Openen in OciDeck': 'Otvori u OciDecku',
   'Geplakte tekst verwerpen?': 'Odbaciti zalijepljeni tekst?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'U polju je još uvijek tekst; neće se otvoriti.',

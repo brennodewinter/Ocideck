@@ -1618,7 +1618,7 @@ const _dutchSourceAddFi = <String, String>{
       'Liitä Markdown-teksti tähän. Jos alussa on marp: true, siitä tulee esitys, muuten dokumentti.',
   'Markdown-tekst': 'Markdown-teksti',
   '{n} tekens': '{n} merkkiä',
-  'Open in OciDeck': 'Avaa OciDeckissä',
+  'Openen in OciDeck': 'Avaa OciDeckissä',
   'Geplakte tekst verwerpen?': 'Hylätäänkö liitetty teksti?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Kentässä on vielä tekstiä; sitä ei avata.',

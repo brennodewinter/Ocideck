@@ -1617,7 +1617,7 @@ const _dutchSourceAddSv = <String, String>{
       'Klistra in Markdown-texten här. Med marp: true i front matter blir det en presentation, utan ett dokument.',
   'Markdown-tekst': 'Markdown-text',
   '{n} tekens': '{n} tecken',
-  'Open in OciDeck': 'Öppna i OciDeck',
+  'Openen in OciDeck': 'Öppna i OciDeck',
   'Geplakte tekst verwerpen?': 'Kassera den inklistrade texten?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Det finns fortfarande text i fältet; den öppnas inte.',

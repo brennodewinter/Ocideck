@@ -1618,7 +1618,7 @@ const _dutchSourceAddCs = <String, String>{
       'Vložte sem text Markdown. S marp: true v záhlaví se stane prezentací, bez něj dokumentem.',
   'Markdown-tekst': 'Text Markdown',
   '{n} tekens': '{n} znaků',
-  'Open in OciDeck': 'Otevřít v OciDecku',
+  'Openen in OciDeck': 'Otevřít v OciDecku',
   'Geplakte tekst verwerpen?': 'Zahodit vložený text?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'V poli je ještě text; nebude otevřen.',

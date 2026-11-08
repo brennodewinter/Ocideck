@@ -1632,7 +1632,7 @@ const _dutchSourceAddLa = <String, String>{
       'Glutina hic textum Markdown. Cum marp: true in fronte fit praesentatio, sine fit documentum.',
   'Markdown-tekst': 'Textus Markdown',
   '{n} tekens': '{n} litterae',
-  'Open in OciDeck': 'Aperi in OciDeck',
+  'Openen in OciDeck': 'Aperi in OciDeck',
   'Geplakte tekst verwerpen?': 'Textum glutinatum reicere?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Textus in campo adhuc est; non aperietur.',

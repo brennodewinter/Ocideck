@@ -182,7 +182,7 @@ class _PasteMarkdownDialogState extends State<PasteMarkdownDialog> {
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : const Icon(Icons.file_open_outlined, size: 16),
-          label: Text(l10n.d('Open in OciDeck')),
+          label: Text(l10n.d('Openen in OciDeck')),
         ),
       ],
     );

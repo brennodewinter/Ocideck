@@ -1646,7 +1646,7 @@ const _dutchSourceAddPt = <String, String>{
       'Cole aqui o texto Markdown. Com marp: true no cabeçalho torna-se uma apresentação; sem, um documento.',
   'Markdown-tekst': 'Texto Markdown',
   '{n} tekens': '{n} caracteres',
-  'Open in OciDeck': 'Abrir no OciDeck',
+  'Openen in OciDeck': 'Abrir no OciDeck',
   'Geplakte tekst verwerpen?': 'Descartar o texto colado?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Ainda há texto no campo; não será aberto.',

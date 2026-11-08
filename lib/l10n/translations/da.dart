@@ -1618,7 +1618,7 @@ const _dutchSourceAddDa = <String, String>{
       'Indsæt Markdown-teksten her. Med marp: true i headeren bliver det en præsentation, uden et dokument.',
   'Markdown-tekst': 'Markdown-tekst',
   '{n} tekens': '{n} tegn',
-  'Open in OciDeck': 'Åbn i OciDeck',
+  'Openen in OciDeck': 'Åbn i OciDeck',
   'Geplakte tekst verwerpen?': 'Kassér den indsatte tekst?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Der står stadig tekst i feltet; den åbnes ikke.',

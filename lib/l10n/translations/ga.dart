@@ -1647,7 +1647,7 @@ const _dutchSourceAddGa = <String, String>{
       'Greamaigh an téacs Markdown anseo. Le marp: true sa cheannteideal tagann sé chun bheith ina chur i láthair, gan é ina dhoiciméad.',
   'Markdown-tekst': 'Téacs Markdown',
   '{n} tekens': '{n} carachtar',
-  'Open in OciDeck': 'Oscail in OciDeck',
+  'Openen in OciDeck': 'Oscail in OciDeck',
   'Geplakte tekst verwerpen?': 'Caith an téacs greamaithe uait?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Tá téacs fós sa réimse; ní osclófar é.',

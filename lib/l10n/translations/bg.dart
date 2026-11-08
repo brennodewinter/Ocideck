@@ -1637,7 +1637,7 @@ const _dutchSourceAddBg = <String, String>{
       'Поставете тук текста на Markdown. С marp: true в заглавната част той става презентация, без нея — документ.',
   'Markdown-tekst': 'Текст на Markdown',
   '{n} tekens': '{n} знака',
-  'Open in OciDeck': 'Отвори в OciDeck',
+  'Openen in OciDeck': 'Отвори в OciDeck',
   'Geplakte tekst verwerpen?': 'Да се отхвърли ли поставеният текст?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'В полето все още има текст; той няма да бъде отворен.',

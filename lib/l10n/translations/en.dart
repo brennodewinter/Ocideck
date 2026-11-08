@@ -826,7 +826,7 @@ const _dutchSourceAddEn = {
       'Paste the Markdown text here. With marp: true in the front matter it becomes a presentation; without, a document.',
   'Markdown-tekst': 'Markdown text',
   '{n} tekens': '{n} characters',
-  'Open in OciDeck': 'Open in OciDeck',
+  'Openen in OciDeck': 'Open in OciDeck',
   'Geplakte tekst verwerpen?': 'Discard pasted text?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'There is still text in the field; it will not be opened.',

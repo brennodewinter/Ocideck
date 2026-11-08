@@ -1620,7 +1620,7 @@ const _dutchSourceAddGsw = <String, String>{
       'Füeg do de Markdown-Tekscht ii. Mit marp: true i de Kopfziile wirds e Präsentation, ohni es Dokumänt.',
   'Markdown-tekst': 'Markdown-Tekscht',
   '{n} tekens': '{n} Zeiche',
-  'Open in OciDeck': 'In OciDeck öffne',
+  'Openen in OciDeck': 'In OciDeck öffne',
   'Geplakte tekst verwerpen?': 'Iigfüegte Tekscht verwärfe?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Im Fäld staht no Tekscht; de wird nöd ufgmacht.',

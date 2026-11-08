@@ -1611,7 +1611,7 @@ const _dutchSourceAddEt = <String, String>{
       'Kleebi siia Markdown-tekst. Kui päises on marp: true, saab sellest esitlus, muidu dokument.',
   'Markdown-tekst': 'Markdown-tekst',
   '{n} tekens': '{n} tähemärki',
-  'Open in OciDeck': 'Ava OciDeckis',
+  'Openen in OciDeck': 'Ava OciDeckis',
   'Geplakte tekst verwerpen?': 'Kas loobuda kleebitud tekstist?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Väljas on veel teksti; seda ei avata.',

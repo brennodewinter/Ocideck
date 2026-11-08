@@ -1618,7 +1618,7 @@ const _dutchSourceAddSl = <String, String>{
       'Prilepite sem besedilo Markdown. Z marp: true v glavi postane predstavitev, brez nje dokument.',
   'Markdown-tekst': 'Besedilo Markdown',
   '{n} tekens': '{n} znakov',
-  'Open in OciDeck': 'Odpri v OciDecku',
+  'Openen in OciDeck': 'Odpri v OciDecku',
   'Geplakte tekst verwerpen?': 'Zavreči prilepljeno besedilo?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'V polju je še besedilo; ne bo odprto.',

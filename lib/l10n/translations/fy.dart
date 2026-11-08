@@ -671,7 +671,7 @@ const _dutchSourceAddFy = {
       'Plak hjir de Markdown-tekst. Mei marp: true yn de koprigels wurdt it in presintaasje, sûnder in dokumint.',
   'Markdown-tekst': 'Markdown-tekst',
   '{n} tekens': '{n} tekens',
-  'Open in OciDeck': 'Iepenje yn OciDeck',
+  'Openen in OciDeck': 'Iepenje yn OciDeck',
   'Geplakte tekst verwerpen?': 'Plakte tekst fuortsmite?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Der stiet noch tekst yn it fjild; dy wurdt net iepene.',

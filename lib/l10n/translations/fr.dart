@@ -672,7 +672,7 @@ const _dutchSourceAddFr = {
       'Collez ici le texte Markdown. Avec marp: true dans l’en-tête, il devient une présentation ; sans, un document.',
   'Markdown-tekst': 'Texte Markdown',
   '{n} tekens': '{n} caractères',
-  'Open in OciDeck': 'Ouvrir dans OciDeck',
+  'Openen in OciDeck': 'Ouvrir dans OciDeck',
   'Geplakte tekst verwerpen?': 'Jeter le texte collé ?',
   'Er staat nog tekst in het veld; die wordt niet geopend.':
       'Il reste du texte dans le champ ; il ne sera pas ouvert.',
