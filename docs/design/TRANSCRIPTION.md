@@ -5,19 +5,15 @@ editable Markdown document — a file you can transcribe, a microphone you can
 record, provisional text while you record and a definitive pass when you stop —
 without a hidden upload, a bundled model, or a private file format.*
 
-> **Status:** **design, not shipping behaviour** — the product contract, the
-> on-disk contract and the provider-neutral boundary are fixed here **before**
-> any platform code lands; deeltickets #2510–#2525 consume this document and
-> may not contradict it without amending it first · **Status last reviewed:**
-> 2026-10-22 · **Published by:** Stichting LibreKAT
+> **Status:** design contract with delivered implementation; deferred provider
+> and hardware verification remains separate · **Status last reviewed:**
+> 2026-11-08 · **Published by:** Stichting LibreKAT
+>
+> The “before any platform code lands” banner is obsolete. For current setup,
+> recording and provider limits use [TRANSCRIPTION_SETUP.md](../TRANSCRIPTION_SETUP.md)
+> and [USER_GUIDE.md](../USER_GUIDE.md). This design is not evidence that every
+> platform, audio route or provider has been tested. *(Corrected 2026-11-08.)*
 
-> **This is a design doc, not shipping behaviour.** It is the format-first
-> gate, the same role [`DOCUMENT_MODE.md`](DOCUMENT_MODE.md) played for
-> documents: the disk contract and the shared-boundary decision are signed off
-> here (core-values guardian, software architect) before implementation starts.
-> When behaviour ships, [`FILE_FORMAT.md`](../FILE_FORMAT.md),
-> [`USER_GUIDE.md`](../USER_GUIDE.md) and the [`CHANGELOG.md`](../../CHANGELOG.md)
-> carry the truth; this document remains the *why*.
 
 > Sibling design docs: [`AI_ASSIST.md`](AI_ASSIST.md) (the optional-AI
 > capability this deliberately does **not** reuse), [`COLLABORATION.md`](COLLABORATION.md)

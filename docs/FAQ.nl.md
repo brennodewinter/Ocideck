@@ -4,7 +4,7 @@
 
 # OciDeck — Veelgestelde vragen
 
-> **Status:** antwoorden over de huidige stand van zaken; waar een antwoord botst met de code, wint de code · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** antwoorden over de huidige stand van zaken; waar een antwoord botst met de code, wint de code · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 Dit document beantwoordt veelgestelde vragen over de functies, het gebruik en de werking van OciDeck.
 
@@ -37,7 +37,7 @@ kost en je toestaat het te gebruiken, te bestuderen, te wijzigen en te herdistri
 Over ondertekening: het releasemanifest `SHA256SUMS` is ondertekend met minisign, zodat de
 herkomst van een download verifieerbaar is (zie
 [BUILD.md](BUILD.md#signing-status-of-the-published-artifacts)). Releases worden
-getagd (laatste `0.4.10`, 2026-08-25) en bevatten de app voor alle vier de platformen; de
+getagd (zie de [releasefeed](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases)) en bevatten de app voor alle vier de platformen; de
 macOS-build is bovendien ondertekend en genotariseerd en opent normaal, terwijl de
 **Windows- en Linux-binaries niet code-signed zijn** — Windows waarschuwt bij de eerste
 start. Windows biedt zowel een installer (snelkoppeling, bestandskoppelingen, schone
@@ -53,6 +53,11 @@ laatste release `0.1.1` (2026-07-27) terwijl de gepubliceerde laatste `0.4.10`
 dus lees het opnieuw uit de releaselijst wanneer je deze alinea aanraakt.*
 
 ## Beveiliging en privacy
+
+De kernbewerker heeft geen verplichte applicatiebackend. Optionele AI-,
+transcriptie-, opslag-, samenwerkings- en leerintegraties kunnen wel gegevens
+uitwisselen. De waarschuwing bij aanzetten en [PRIVACY.md](PRIVACY.md)
+beschrijven de gevolgen. *(Verduidelijkt 2026-11-08.)*
 
 ### Welke beveiligingsmaatregelen implementeert OciDeck?
 OciDeck implementeert diverse beveiligingslagen:
@@ -306,6 +311,10 @@ weg te schrijven — dus stap 2 is daar niet van toepassing en niet-opgeslagen w
 bij je eerste bewerking, en de browser vraagt het voor je een tabblad sluit dat nog
 niet-opgeslagen werk bevat. Sla vroeg op als je in een browsertab werkt.
 
+Een bewuste browserkopie is wel heropenbaar via Instellingen → Opslag. Alleen
+wijzigingen na de laatste geslaagde opslag gaan bij een crash verloren. Zie de
+uitleg over browseropslag hieronder. *(Verduidelijkt 2026-11-08.)*
+
 ## Configuratie en instellingen
 
 ### Hoe kies ik het cockpituiterlijk?
@@ -365,6 +374,38 @@ interne server* nodig, omdat privéadressen standaard worden geblokkeerd.
 Eén verschil is het waard om te weten: S3 is objectopslag, geen bestandssysteem, dus het
 heeft geen echte mappen. Een prefix gedraagt zich als een map, en bij het opsommen wordt een
 scheidingsteken gebruikt zodat prefixen zich tonen alsof ze mappen zijn.
+
+### Waarom vraagt een uitbreiding toestemming bij het inschakelen?
+
+Uitbreidingen die persoonsgegevens of bedrijfsinformatie kunnen verwerken of
+delen tonen eerst hun doel en de gevolgen voor gegevens. Annuleren of sluiten
+weigert de keuze. De bevestiging voor een specifieke AI- of transcriptietaak
+blijft daarnaast nodig. Bekijk de laatste 200 gebeurtenissen bij **Instellingen
+→ Privacy en classificatie → Toestemmingslogboek**; ze komen ook in het
+applicatielog.
+
+### Kan ik een presentatie in de browser bewaren?
+
+Ja. Kies in de webversie **Opslaan → In browser bewaren** en bevestig de
+waarschuwing. Het onversleutelde pakket bevat meegebundelde media; alle gecodeerde
+kopieën samen zijn begrensd op 5 MiB. Heropenen of verwijderen kan via
+**Instellingen → Opslag**. Profielgebruikers en scripts op dezelfde website
+kunnen erbij. Websitegegevens wissen, privémodus of ruimtegebrek kan ze
+verwijderen. Een bestand op de lokale schijf is veiliger en makkelijker te
+back-uppen. Browserkopieën zijn bewuste opslag, geen automatisch bewaren;
+instellingen terugzetten behoudt ze. Onopgeslagen wijzigingen hebben nog steeds
+geen crashherstel in de browser.
+
+### Hoe kies ik DLP-bescherming?
+
+Ga naar **Instellingen → Beveiliging → Bescherming tegen gegevenslekken (DLP)**.
+Kies waarschuwen of blokkeren: beide zetten de lokale controle aan en behouden
+land-, beeld- en uitzonderingskeuzes. Blokkeren betreft onafgehandelde zekere
+vondsten. De samenvatting meldt ook een uitgezette hoofdcontrole; een
+domeinuitzondering kan gegevens van collega's verbergen. Geen profiel garandeert
+dat iedere gevoelige waarde wordt gevonden.
+
+*(Toegevoegd 2026-11-08.)*
 
 ## Toekomstige functies en roadmap
 

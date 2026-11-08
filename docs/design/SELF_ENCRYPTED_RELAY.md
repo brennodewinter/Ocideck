@@ -1,6 +1,6 @@
 # OciDeck — Self-encrypted relay: realtime samenwerken in pure Dart (Design)
 
-> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-31 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This is the detailed, pick-up-cold implementation design for **real-time remote
@@ -22,6 +22,11 @@
 > numbers drift).
 
 ---
+
+> **Current transport clarification (2026-11-08):** the unbuilt status refers
+> to this encrypted relay. The collaboration core and WebDAV transport exist,
+> but the current WebDAV collaboration transport is **not end-to-end encrypted**.
+> Do not infer its protection from this proposal.
 
 ## 1. The idea in one paragraph
 

@@ -4,7 +4,7 @@
 
 # OciDeck — Probleemoplossingsgids
 
-> **Status:** procedure, actueel · **Status laatst nagekeken:** 2026-07-22 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** procedure, actueel · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 Dit document biedt oplossingen voor veelvoorkomende problemen die gebruikers kunnen tegenkomen bij het gebruik van OciDeck.
 
@@ -309,6 +309,21 @@ schonen — instructies voor een distributie die toen niet bestond.*
    - Configureer de fetch-proxyserver wanneer CORS-beperkingen directe toegang verhinderen  
    - Test externe verbindingen apart om problemen te isoleren
 
+## Browserkopieën en vastlopende ontwikkeltests
+
+Een browserkopie wordt alleen bewaard nadat je die bestemming kiest en de
+waarschuwing accepteert. Bij een quotafout blijft het deck niet-opgeslagen:
+download het of exporteer een draagbaar pakket. Heropen kopieën via
+Instellingen → Opslag. Ze horen bij het huidige browserprofiel en de herkomst
+van de website; een andere browser, privésessie of hostnaam ziet ze niet.
+Websitegegevens wissen verwijdert ze. Niet-opgeslagen wijzigingen hebben in de
+browser nog steeds geen crashherstel. Zie [USER_GUIDE.md](USER_GUIDE.md).
+
+Gebruik op Apple Silicon de vastgezette native ARM64 Flutter-SDK wanneer tests
+bij het starten van subprocessen blijven hangen. Zet die SDK vooraan in `PATH`;
+zie [DEVELOPMENT_SETUP_GUIDE.md](DEVELOPMENT_SETUP_GUIDE.md). Een vastgelopen
+controle geldt niet als geslaagd. *(Toegevoegd 2026-11-08.)*
+
 ## Diagnostische procedures
 
 ### Systeeminformatie verzamelen
@@ -350,8 +365,10 @@ documentatie. Beveiligingsproblemen volgen een andere route; zie
 ### Regelmatig onderhoud
 
 1. **Systeemupdates**: 
-   - Pas systeem- en toolchain-updates regelmatig toe. (OciDeck zelf heeft nog geen
-     uitgebrachte versies en geen updatemechanisme — je draait wat je hebt gebouwd.)
+   - Pas systeemupdates toe en gebruik de vastgezette toolchain. Installeer een
+     nieuwe OciDeck-release of bouw vanuit de huidige bron; optionele
+     desktopversiecontroles vinden releases maar installeren ze niet.
+     *(Gecorrigeerd 2026-11-08.)*
 
 2. **Back-upstrategieën**:
    - Maak regelmatig een back-up van belangrijke presentaties
@@ -367,9 +384,8 @@ documentatie. Beveiligingsproblemen volgen een andere route; zie
 
 Er is één kanaal: een issue in de [Forgejo-tracker](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues). Vermeld wat je uit deze
 gids probeerde, de exacte stappen die het probleem reproduceren, je
-besturingssysteem, en de commit waarvandaan je bouwde — de app toont geen
-versienummer, dus de commit is de enige manier om te zeggen welke OciDeck je
-draait. Een beveiligingsprobleem is de uitzondering en gaat naar het adres in
+besturingssysteem, de versie uit Instellingen → Over OciDeck en bij een eigen
+bouw de broncommit. *(Gecorrigeerd 2026-11-08: de app toont zijn versie.)* Een beveiligingsprobleem is de uitzondering en gaat naar het adres in
 [`../SECURITY.md`](../SECURITY.md) in plaats van naar een openbaar issue.
 
 *(Gecorrigeerd 2026-07-22: deze sectie had als kop "When to Seek Professional Help"

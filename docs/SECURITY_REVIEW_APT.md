@@ -11,6 +11,11 @@ bewering tegen de code is na te trekken.
 
 ---
 
+> **Historical review:** findings and evidence below belong to the review date
+> and revision stated here. They are not a security assessment of current main.
+> See [SECURITY_DESIGN.md](SECURITY_DESIGN.md) and [PRIVACY.md](PRIVACY.md) for
+> current mechanisms and outbound data flows. *(Clarified 2026-11-08.)*
+
 ## 1. Conclusie
 
 OciDeck is een lokaal-eerst product zonder applicatiebackend. Het beveiligingsontwerp is

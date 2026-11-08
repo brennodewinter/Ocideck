@@ -1,8 +1,13 @@
 # OciDeck — Sneltoetsen
 
-> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-09-18 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 `Ctrl` wordt getoond voor Windows/Linux; gebruik `Cmd` (⌘) op macOS.
+
+In de webversie opent opslaan van een presentatie de keuze tussen downloaden
+en een browserkopie. De browserkopie vereist bevestiging van de risico’s;
+opslaan op de lokale schijf is veiliger. Dit is geen automatische opslag.
+*(Bijgewerkt 2026-11-08.)*
 
 ## Editor (in de hele app)
 

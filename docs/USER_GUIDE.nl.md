@@ -4,7 +4,7 @@
 
 # OciDeck — Gebruikershandleiding
 
-> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-09-18 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -221,6 +221,30 @@ staan bij de [release-downloads](https://pawprint.vigilis.online/LibreKAT/Ocidec
   de wachtwoorden in je sleutelbos wist. Je presentaties worden nooit aangeraakt.
   Een git-verbinding verwijderen neemt nu de werkkopie mee — tenzij er nog commits
   wachten om gepusht te worden, in welk geval OciDeck ze noemt en eerst vraagt.
+
+### Bewuste browserkopieën
+
+In de webversie biedt **Opslaan** de keuze **Als bestand downloaden** of **In
+browser bewaren**. Browseropslag opent eerst een waarschuwing. Annuleren of
+sluiten bewaart niets. Bevestig alleen nadat je hebt afgewogen wie bij dit
+browserprofiel kan en hoe je een reservekopie maakt. Bewaren op de lokale schijf
+is veiliger: je bepaalt zelf de toegang en de plek van je reservekopieën.
+
+Een browserkopie is een onversleuteld, zelfstandig `.ocideck`-pakket met de
+meegebundelde media. Andere gebruikers van het profiel en scripts op dezelfde
+website kunnen erbij. Websitegegevens wissen, privémodus of ruimtegebrek kan
+het werk verwijderen. Alle gecodeerde browserkopieën samen mogen **5 MiB** groot
+zijn. Een mislukte opslag laat wijzigingen als onopgeslagen staan. Dit is bewust
+opslaan, geen automatisch bewaren of crashherstel. Gewone documenten gebruiken
+deze opslagmogelijkheid voor presentaties niet.
+
+Ga naar **Instellingen → Opslag → In browser bewaarde presentaties** om een
+kopie te heropenen of te verwijderen. Heropenen doorloopt de normale
+veiligheidscontrole voor pakketten. Verwijderen vraagt bevestiging; instellingen
+terugzetten behoudt deze presentaties. Download of exporteer eerst een lokaal
+bestand als je een kopie wilt verwijderen die je nog nodig hebt.
+
+*(Toegevoegd 2026-11-08: presentaties zijn niet meer beperkt tot tabgeheugen en downloads.)*
 
 ## Opdrachtenpalet
 
@@ -2398,6 +2422,26 @@ hieronder.
 Iets gevonden dat je weg wilt? Zet er dubbele vierkante haken omheen — zie
 hieronder.
 
+### Kies het DLP-gedrag bij exporteren
+
+Kies bij **Instellingen → Beveiliging → Bescherming tegen gegevenslekken (DLP)**
+voor **Waarschuwen vóór export** of **Export blokkeren**. Beide profielen zetten
+de lokale controle aan en behouden landpakketten, beeldcontrole, uitgeschakelde
+regels en uitzonderingen voor eigen gegevens. Blokkeren laat zekere vondsten ook
+als fouten tellen. De samenvatting toont het actieve gedrag: onafgehandelde
+**zekere** vondsten moeten worden afgehandeld voordat een geblokkeerde export
+verder kan. Onzekere vondsten en gegevens zonder herkenbaar patroon geven geen
+garantie dat alles wordt gevonden.
+
+Als de hoofdcontrole uitstaat, beschermt dit exportbeleid voor presentaties niet:
+de keuzelijst is dan uitgeschakeld en de samenvatting meldt dat. Documentexport
+heeft een eigen verplichte privacycontrole; de controle tijdens het bewerken
+uitzetten schakelt die documentexportcontrole niet uit. Een domeinuitzondering
+verbergt ook gegevens van collega's op dat domein. Kies uitzonderingen bewust.
+
+*(Toegevoegd 2026-11-08: profielen koppelen de bestaande controle-, ernst- en
+exportkeuzes zonder uitzonderingen stilzwijgend terug te zetten.)*
+
 ## Wat te doen met een bevinding
 
 Een bevinding is geen oordeel. Een politiebriefing bevat per definitie
@@ -4150,6 +4194,29 @@ Onder *Instellingen → Algemeen → Toegankelijkheid*:
 
 Wanneer *Waarschuwen bij export* uit staat, worden kwaliteitsproblemen genegeerd bij het exporteren (ze
 tonen nog steeds tijdens het bewerken).
+
+### Waarschuwingen bij uitbreidingen en het toestemmingslogboek
+
+Optionele modules zet je aan bij **Instellingen → Uitbreidingen**. AI, online
+opslag, samenwerken, gesprekken, transcriptie, LibrePlan, formulieren en de
+serverintegraties tonen vóór het inschakelen een waarschuwing over gegevens.
+Die legt hun doel uit en dat persoonsgegevens of bedrijfsinformatie bij een
+dienst of ontvanger kunnen komen en daar bewaard kunnen blijven. Annuleren,
+Escape of de dialoog sluiten laat de uitbreiding uit. Lokale referentie- en
+maakmodules zonder dit gevolg tonen geen waarschuwing voor uitgaande gegevens.
+Uitschakelen vraagt geen bevestiging.
+
+Deze keuze is geen toestemming voor alle volgende handelingen: de bestaande
+bevestigingen voor servers, opnamen en AI-opdrachten blijven gelden. Onder
+**Instellingen → Privacy en classificatie → Toestemmingslogboek** kun je de
+laatste 200 gebeurtenissen bekijken en kopiëren. `shown` betekent getoond,
+`accepted` geaccepteerd en `declined` geweigerd, inclusief annuleren of sluiten.
+Een regel bevat een vaste onderdeelcode, de waarschuwingsversie en een UTC-tijd,
+geen documentinhoud, accountgegevens of serveradres. De gebeurtenissen komen ook
+in het toepassingslog. Instellingen terugzetten wist deze toestemmingshistorie.
+
+*(Toegevoegd 2026-11-08.)*
+
 ## AI-assistentie (optioneel)
 
 OciDeck heeft geen eigen AI en levert geen model mee. Wat het wél heeft is een
@@ -6854,12 +6921,12 @@ voordat je het deck van een klant erop opent. Dezelfde bundle zelf hosten is
 
 | Wat | In de browser |
 |---|---|
-| Lokale projectmappen en sidecar-bestanden | Afwezig. Openen en opslaan gaan via de browser, en je deck leeft in het tabblad. |
+| Lokale projectmappen en sidecar-bestanden | Afwezig. Een deck begint in tabgeheugen; Opslaan biedt een download of een bewuste browserkopie van het pakket. |
 | WebDAV / Nextcloud als deckbron | Afwezig. |
 | Een S3-bucket als deckbron | Afwezig. |
 | Een git-repository als deckbron | **Werkt**, via de REST-interface van de forge — zie *Git repository* hierboven; openen, opslaan, review, mergen en versies zijn er allemaal. Wat afwezig is, is de lokale kloon, die het echte `git`-programma nodig heeft: geen duurzame offline commitgeschiedenis, en geen `git grep` om cross-deck-zoeken te versnellen. *(Gecorrigeerd 21-07-2026; deze rij zei "afwezig", wat de git-sectie van diezelfde gids tegensprak.)* |
 | De presentatorweergave op het tweede scherm | Afwezig — het heeft een echt tweede venster nodig. |
-| **Herstel na een crash** | Afwezig. Er is geen map om een momentopname naartoe te schrijven, dus er wordt niets automatisch opgeslagen en een browsercrash verliest niet-opgeslagen werk. De app zegt dit één keer, bij je eerste bewerking, en de browser vraagt om bevestiging voordat je een tabblad met niet-opgeslagen werk sluit. |
+| **Herstel na een crash** | Afwezig voor onopgeslagen wijzigingen: er zijn geen herstelbestanden of automatische browserkopieën. Een bewust bewaarde browserkopie kun je heropenen via Instellingen → Opslag. Het afsluitbericht van de browser blijft gelden voor onopgeslagen werk. |
 | **De beeldhelft van de privacycontrole** | Afwezig. Zie hieronder. |
 | De offline CVE-database | Afwezig — en dat is ook de online opzoeking, die alleen desktop is (SSRF-veilig subproces). De knop **Zoek CVE…** meldt "niet beschikbaar in de webversie". |
 | Beeldbijschrift-sidecars | Afwezig — het zijn bestanden naast de afbeelding. |

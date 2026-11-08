@@ -1,6 +1,6 @@
 # OciDeck — Troubleshooting Guide
 
-> **Status:** procedure, current · **Status last reviewed:** 2026-10-29 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This document provides solutions for common issues and problems users may encounter while using OciDeck.
 
@@ -302,6 +302,20 @@ that did not exist then.*
    - Configure fetch-proxy server when CORS restrictions prevent direct access  
    - Test external connections separately to isolate issues
 
+## Browser copies and stalled developer tests
+
+A browser copy is saved only after choosing that destination and accepting its
+warning. A quota error leaves the deck unsaved: download or export a portable
+package instead. Reopen saved copies in Settings → Storage. Copies belong to
+the current browser profile and site origin; another browser, private session
+or changed hostname cannot see them. Clearing site data deletes them. Unsaved
+edits still have no web crash recovery. See [USER_GUIDE.md](USER_GUIDE.md).
+
+On Apple Silicon, tests that stall around subprocess creation should be rerun
+with the pinned native ARM64 Flutter SDK, ahead of other SDKs in `PATH`; see
+[DEVELOPMENT_SETUP_GUIDE.md](DEVELOPMENT_SETUP_GUIDE.md). Do not treat a hung
+check as a passing one. *(Added 2026-11-08.)*
+
 ## Diagnostic Procedures
 
 ### System Information Collection
@@ -344,8 +358,9 @@ repository is the documentation. Security issues follow a different route; see
 ### Regular Maintenance
 
 1. **System Updates**: 
-   - Apply system and toolchain updates regularly. (OciDeck itself has no
-     released versions yet and no update mechanism — you run what you built.)
+   - Apply system updates and use the repository-pinned toolchain. Install an
+     OciDeck release update or rebuild from current source; optional desktop
+     version checks discover releases but do not install them. *(Corrected 2026-11-08.)*
 
 2. **Backup Strategies**:
    - Implement regular backup of important presentations
@@ -361,8 +376,8 @@ repository is the documentation. Security issues follow a different route; see
 
 There is one channel: an issue in the [Forgejo tracker](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues). Include what you tried
 from this guide, the exact steps that reproduce the problem, your operating
-system, and the commit you built from — the app displays no version number, so
-the commit is the only way to say which OciDeck you are running. A security
+system, the version from Settings → About OciDeck, and the source commit when
+you built it yourself. *(Corrected 2026-11-08: the app displays its version.)* A security
 problem is the exception and goes to the address in
 [`../SECURITY.md`](../SECURITY.md) instead of a public issue.
 

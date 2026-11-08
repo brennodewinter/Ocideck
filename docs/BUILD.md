@@ -1,8 +1,14 @@
 # OciDeck — Build & Release
 
-> **Status:** procedure, current — and the authority on the toolchain pin · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current — and the authority on the toolchain pin · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 How to build OciDeck from source and produce distributable apps.
+
+On Apple Silicon use the pinned **native ARM64 Flutter SDK**, ahead of other
+SDKs in `PATH`. A matching version number alone does not establish matching
+architecture: an x64 SDK under Rosetta can hang subprocess-based checks. Inspect
+`bin/cache/dart-sdk/bin/dart` with `file` and rerun with the native SDK if needed.
+*(Documented 2026-11-08.)*
 
 ## Prerequisites
 

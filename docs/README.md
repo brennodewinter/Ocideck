@@ -1,10 +1,11 @@
 # OciDeck — Documentation
 
-> **Status:** index of this folder, current · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** index of this folder, current · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
-OciDeck is a privacy-first Marp presentation builder for desktop and web, with no
-application backend — everything runs locally. This folder holds the project
-documentation. Start here and jump to what you need.
+OciDeck is a privacy-first Marp presentation builder for desktop and web, with
+no required editing backend. Optional integrations contact the services you
+choose. This folder holds the project documentation. Start here and jump to
+what you need.
 
 > **Status:** alpha — releases are tagged; the releases feed on the forge
 > carries the latest. See
@@ -40,6 +41,7 @@ documentation. Start here and jump to what you need.
 | [ARCHITECTURE.md](ARCHITECTURE.md) | System architecture and layering. |
 | [SOURCE_MAP.md](SOURCE_MAP.md) | Where things live in `lib/`. |
 | [API_DOCUMENTATION.md](API_DOCUMENTATION.md) | Key internal APIs, models, services, and providers. |
+| [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md) | Independent release channels, stop/resume operations and publication evidence. |
 | [BUILD.md](BUILD.md) | Build targets and the version pin. |
 | [CHECKS.md](CHECKS.md) | The quality gates (`make check`) and what each enforces. |
 | [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) | Enforced limits, measured sizes, and optimisation tips. |
@@ -76,31 +78,37 @@ they live in the repository. See [How these documents are maintained](#how-these
 
 | Document | What it is |
 |---|---|
-| [COLLABORATION.md](design/COLLABORATION.md) | Design proposal, unbuilt: real-time collaboration, presenting, calls and a provider-adapter register spanning major, smaller and self-hosted meeting systems. |
-| [SELF_ENCRYPTED_RELAY.md](design/SELF_ENCRYPTED_RELAY.md) | Design proposal, unbuilt: the decided pure-Dart route for real-time collaboration (COLLABORATION Phase 1) — the homeserver as an encrypted relay with OciDeck's own minimal E2EE, no AGPL, no Rust, EUPL-1.2 intact. Supersedes the Matrix-SDK mechanism in COLLABORATION §6/§9. |
-| [TEAMS_GUEST_CLIENT.md](design/TEAMS_GUEST_CLIENT.md) | Design proposal, unbuilt: join supported Teams work/school meetings through an OciDeck web/PWA guest client without a Microsoft account. |
+| [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historical: the agentic build plan for the pentest/AI work. Executed; kept as a worked example, not a queue. |
+| [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not — OciDeck does not speak MCP, and MCP is not how a model is attached. To attach one, see *AI assistance (optional)* in [USER_GUIDE.md](USER_GUIDE.md#ai-assistance-optional). |
+| [COCKPIT_LAYOUT.md](design/COCKPIT_LAYOUT.md) | Implemented layout rationale, in Dutch: cockpit instruments, readings and labels. |
+| [COLLABORATION.md](design/COLLABORATION.md) | Partly implemented design: collaboration core and WebDAV transport exist; current WebDAV transport is unencrypted. Encrypted relay and other adapters remain proposals. |
+| [DOCUMENT_MODE.md](design/DOCUMENT_MODE.md) | Document-mode design and implementation record; current behavior lives in the user guide and file-format reference. |
+| [ELEARNING_MODEL.md](design/ELEARNING_MODEL.md) | eLearning domain model and OciServe integration contract; distinguish authoring from server integration. |
 | [FORM_INTAKE.md](design/FORM_INTAKE.md) | Design and, as phases land, record of what is built: fill-in Markdown forms, validation, plain and sealed (`age`) submissions, the organiser's workspace, register and book, and — optionally — OciServe Managed Intake. Phases 1–3 (the file route) are built; the unreleased blind-server phase 4 was reverted (#2263), and the Managed Intake contract boundary (#2262) and journey (#2260) landed on top. |
 | [FORM_INTAKE_REVIEW.md](design/FORM_INTAKE_REVIEW.md) | Dossier for the external cryptographic review that closes phase 3: scope, the constructions (sealing, bundle, keys, editor card), the evidence, the known limits and the questions for the reviewer. |
+| [GANTT_SLIDETYPE.md](design/GANTT_SLIDETYPE.md) | Implemented in #1246: the Gantt slide type, stored as an ordinary Markdown table and rendered through generated Mermaid. |
 | [GIT_STORAGE.md](design/GIT_STORAGE.md) | Design of the git storage plane; phases 0–6 have landed, what remains is verification. |
-| [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | The original design for the MIAUW pentest module, which ships. Parts are contradicted by the code. |
-| [PENTEST_DOCUMENT.md](design/PENTEST_DOCUMENT.md) | Design proposal, unbuilt, **in Dutch**: the MIAUW report moves from a presentation to a document, and a signed-and-sealed report can derive a management and an IT highlights deck. Builds on PENTEST_MIAUW.md and DOCUMENT_MODE.md. |
-| [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not — OciDeck does not speak MCP, and MCP is not how a model is attached. To attach one, see *AI assistance (optional)* in [USER_GUIDE.md](USER_GUIDE.md#ai-assistance-optional). |
-| [OCIWACHT.md](design/OCIWACHT.md) | The privacy scanner design, **in Dutch**, with a per-section delivered/open table at the top. At 2,668 lines it is the largest of the three Dutch documents. |
-| [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historical: the agentic build plan for the pentest/AI work. Executed; kept as a worked example, not a queue. |
-| [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Implemented (Phases 0–10, with the honesty notes in the doc): a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |
-| [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |
-| [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
-| [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Design proposal, unbuilt: encrypted report distribution to a recipient who has minimal friction — double-click and view. The distribution side of the OpenKAT integration. |
-| [OPENKAT_ROCKY_REPORT_API.md](design/OPENKAT_ROCKY_REPORT_API.md) | Research/design contract: how Rocky reports work via API and JSON export, and what that means for a later live OpenKAT integration in OciDeck. Dutch twin: [OPENKAT_ROCKY_REPORT_API.nl.md](design/OPENKAT_ROCKY_REPORT_API.nl.md). |
-| [OPENKAT_LIVE_UX.md](design/OPENKAT_LIVE_UX.md) | Design appendix, in Dutch, to the OpenKAT build: what the live integration looks like from the user's side. |
 | [IMAGE_CALLOUTS.md](design/IMAGE_CALLOUTS.md) | Revision 5, implemented and under acceptance: tying a bullet to a part of the picture beside it, as a pin, a region or an arrow. Carries the format contract and the shared geometry rules. |
 | [IMAGE_ROTATION.md](design/IMAGE_ROTATION.md) | Decided and built 2026-08-30: rotating a picture used to rewrite the user's file. Three shapes weighed; copy-on-rotate chosen and shipped. |
-| [GANTT_SLIDETYPE.md](design/GANTT_SLIDETYPE.md) | Implemented in #1246: the Gantt slide type, stored as an ordinary Markdown table and rendered through generated Mermaid. |
-| [PROVENANCE_SIGNATURE.md](design/PROVENANCE_SIGNATURE.md) | Partly implemented: cryptographic owner provenance on a distributed deck (format, crypto and service on `main`; the signing UI is next). |
-| [NATIVE_CALLS.md](design/NATIVE_CALLS.md) | Design proposal, partly built (F1–F3.4a landed): calls inside OciDeck over an XMPP spine. |
-| [XMPP_COLLAB_TRANSPORT.md](design/XMPP_COLLAB_TRANSPORT.md) | Design proposal, unbuilt (slice 2 of NATIVE_CALLS §7.1): the XMPP transport the collaboration layer rides on. |
 | [ISO_MANAGEMENTSYSTEEM.md](design/ISO_MANAGEMENTSYSTEEM.md) | Blocks A–C built, in Dutch: ISO 27001/9001/42001 progress reporting. |
+| [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
 | [LINUX_PACKAGING.md](design/LINUX_PACKAGING.md) | Phase 1 built, in Dutch (#1227): the Linux install routes — AppImage, .deb and .rpm. |
+| [NATIVE_CALLS.md](design/NATIVE_CALLS.md) | Partly built design: two-person calls proven on macOS and web; Windows and Linux remain untested. Read its status banner for scope. |
+| [OCIWACHT.md](design/OCIWACHT.md) | Privacy scanner design, in Dutch, with a delivered/open status table. |
+| [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Design proposal, unbuilt: encrypted report distribution to a recipient who has minimal friction — double-click and view. The distribution side of the OpenKAT integration. |
+| [OPENKAT_LIVE_UX.md](design/OPENKAT_LIVE_UX.md) | Design appendix, in Dutch, to the OpenKAT build: what the live integration looks like from the user's side. |
+| [OPENKAT_ROCKY_REPORT_API.md](design/OPENKAT_ROCKY_REPORT_API.md) | Research/design contract: how Rocky reports work via API and JSON export, and what that means for a later live OpenKAT integration in OciDeck. Dutch twin: [OPENKAT_ROCKY_REPORT_API.nl.md](design/OPENKAT_ROCKY_REPORT_API.nl.md). |
+| [OPENKAT_ROCKY_REPORT_API.nl.md](design/OPENKAT_ROCKY_REPORT_API.nl.md) | Dutch translation of the Rocky report API research/design contract. |
+| [PENTEST_DOCUMENT.md](design/PENTEST_DOCUMENT.md) | Design proposal, unbuilt, **in Dutch**: the MIAUW report moves from a presentation to a document, and a signed-and-sealed report can derive a management and an IT highlights deck. Builds on PENTEST_MIAUW.md and DOCUMENT_MODE.md. |
+| [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | The original design for the MIAUW pentest module, which ships. Parts are contradicted by the code. |
+| [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Implemented (Phases 0–10, with the honesty notes in the doc): a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |
+| [PROVENANCE_SIGNATURE.md](design/PROVENANCE_SIGNATURE.md) | Partly implemented: cryptographic owner provenance on a distributed deck (format, crypto and service on `main`; the signing UI is next). |
+| [RISK_FORMAT.md](design/RISK_FORMAT.md) | Risk-register format contract and design rationale. |
+| [SELF_ENCRYPTED_RELAY.md](design/SELF_ENCRYPTED_RELAY.md) | Design proposal, unbuilt: the decided pure-Dart route for real-time collaboration (COLLABORATION Phase 1) — the homeserver as an encrypted relay with OciDeck's own minimal E2EE, no AGPL, no Rust, EUPL-1.2 intact. Supersedes the Matrix-SDK mechanism in COLLABORATION §6/§9. |
+| [TEAMS_GUEST_CLIENT.md](design/TEAMS_GUEST_CLIENT.md) | Design proposal, unbuilt: join supported Teams work/school meetings through an OciDeck web/PWA guest client without a Microsoft account. |
+| [TRANSCRIPTION.md](design/TRANSCRIPTION.md) | Transcription and recording design contract with delivered implementation; setup and verification limits are in TRANSCRIPTION_SETUP.md. |
+| [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |
+| [XMPP_COLLAB_TRANSPORT.md](design/XMPP_COLLAB_TRANSPORT.md) | Design proposal, unbuilt (slice 2 of NATIVE_CALLS §7.1): the XMPP transport the collaboration layer rides on. |
 
 *(Corrected 2026-08-30: nine of the design notes had no row here, including
 `IMAGE_CALLOUTS.md`, which carries a format contract. The 2026-07-22 note below
@@ -125,6 +133,11 @@ that they stay out of the bundle.)*
 - **I need to assess its security/privacy** → [SECURITY_DESIGN.md](SECURITY_DESIGN.md) and [PRIVACY.md](PRIVACY.md).
 - **I depend on assistive technology** → [ACCESSIBILITY.md](ACCESSIBILITY.md).
 - **I hit a term I don't know** → [GLOSSARY.md](GLOSSARY.md).
+
+*(Documentation pass 2026-11-08: checked links, registration, version claims,
+platform storage, consent, DLP and design status against current code. Historical
+measurements and reviews remain dated records; this pass is not a new external
+security or compliance assessment.)*
 
 ## How these documents are maintained
 

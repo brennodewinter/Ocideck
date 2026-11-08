@@ -4,7 +4,7 @@
 
 # OciDeck — Toegankelijkheid
 
-> **Status:** beschrijving van de huidige stand van wat wel en niet toegankelijk is · **Status laatst nagekeken:** 2026-08-29 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** beschrijving van de huidige stand van wat wel en niet toegankelijk is · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 Wat OciDeck voor toegankelijkheid doet, en — de langere helft van dit document —
 wat het niet doet. Beide helften staan hier met opzet. Een gereedschap dat enkel
@@ -15,6 +15,13 @@ verstuurd is.
 De korte versie: **de editor is gebouwd om met een toetsenbord en een
 schermlezer bruikbaar te zijn en om opschaling te doorstaan; de exports zijn geen
 toegankelijke documenten.** PDF en PPTX komen als plaatjes uit OciDeck.
+
+De toestemmingsmelding bij een uitbreiding heeft de gewone dialoogacties
+Annuleren en Doorgaan. Sluiten of Escape geldt als weigeren en wordt gelogd.
+DLP-profielen hebben tekst met de actuele status; de betekenis hangt niet alleen
+van kleur af. In de browser benoemt de opslagkeuze de bestemming en de risico’s.
+Dit beschrijft de bediening, geen nieuwe verklaring van WCAG-conformiteit of
+bewezen ondersteuning van iedere schermlezer. *(Bijgewerkt 2026-11-08.)*
 
 ## Wat er staat
 

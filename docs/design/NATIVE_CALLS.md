@@ -1,9 +1,9 @@
 # OciDeck — Native Calls: one interface, Jitsi + Matrix backends (Design)
 
-> **Status:** design proposal — partially built (F1–F3.4c plus join/lifecycle/screenshare: two-person calls proven on the released macOS build and on the released web bundle — real RTP renders a counterparty's video in a texture; Windows and Linux remain untested) · **Status last reviewed:** 2026-10-26 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — partially built (F1–F3.4c plus join/lifecycle/screenshare: two-person calls proven on the released macOS build and on the released web bundle — real RTP renders a counterparty's video in a texture; Windows and Linux remain untested) · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
-> **A design proposal — not yet implemented.**
-> This document describes a *future* capability. It is kept separate from the
+> **Partially implemented design; use the status banner for verification scope.**
+> This document includes both delivered behavior and future capability. It is kept separate from the
 > current-state contributor docs ([`ARCHITECTURE.md`](../ARCHITECTURE.md),
 > [`SOURCE_MAP.md`](../SOURCE_MAP.md)) so those keep describing what exists. When
 > (parts of) this lands, fold the relevant sections into those docs and the

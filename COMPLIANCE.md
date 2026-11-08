@@ -30,6 +30,10 @@ distrust the rows that are true.
 
 ---
 
+Factual version references were refreshed on 2026-11-08 against the repository
+and release workflow. This maintenance does not constitute a new independent
+compliance assessment; dated declarations and measurements retain their scope.
+
 ## Authorship
 
 **AU.01 — Issuing entity**
@@ -100,10 +104,10 @@ attestation therefore describes the relationship rather than claiming the label.
 |---|---|
 | Project | OciDeck |
 | URL | <https://pawprint.vigilis.online/LibreKAT/Ocideck> |
-| Valid for versions | **The default branch and the `v*` release tags.** 23 tags exist, latest `v0.4.9` (23-08-2026) |
+| Valid for versions | **The default branch and the `v*` release tags.** See the [release feed](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases) for published builds |
 | Valid for dates | Issued 2026-07-22; revised 2026-09-01; describes the branch as of that date |
 
-`pubspec.yaml` carries `0.4.10+24`. Releases are tagged `v*` and built by an
+`pubspec.yaml` carries the source version. Releases are tagged `v*` and built by an
 automated pipeline (`.forgejo/workflows/release.yml`) with minisign-signed
 artefacts. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
 
@@ -167,8 +171,8 @@ artefacts. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
 
 - [x] **BR.01 — How to build from source.** [`docs/BUILD.md`](docs/BUILD.md)
 - [x] **BR.02 — Unique, monotonically increasing version identifiers.**
-      Releases are tagged `v*` (semver), 23 tags exist, latest `v0.4.9`.
-      `pubspec.yaml` carries `0.4.10+24`. The release pipeline builds and
+      Releases are tagged `v*` (semver), the release feed lists published builds.
+      `pubspec.yaml` carries the source version. The release pipeline builds and
       publishes artefacts per tag.
 - [x] **BR.03 — Integrity of released assets, and how to verify it.**
       Each release carries `SHA256SUMS` and a minisign signature
@@ -218,7 +222,7 @@ The ORC WG's light-weight summary asks for this, and it is not a template row:
 - **Releases feed** —
   `https://pawprint.vigilis.online/LibreKAT/Ocideck/releases.rss`
 
-There are 23 releases in the feed, latest `v0.4.9`. A security fix is marked
+The release feed is the authority for published versions. A security fix is marked
 `Security:` in the release notes and [`CHANGELOG.md`](CHANGELOG.md). There is
 deliberately no mailing list — a subscriber list is personal data we would have
 to hold and protect, and a feed is not. [`SECURITY.md`](SECURITY.md) lists the

@@ -1,6 +1,6 @@
 # Security Policy
 
-> **Status:** policy, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** policy, current · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This policy covers vulnerabilities in **OciDeck itself** (the application). It does
 **not** govern how findings from a penetration test authored *with* OciDeck are
@@ -609,15 +609,17 @@ deck in plain Markdown: your work should be able to outlive the tool.
 Stated plainly, because the honest answer is thinner than most projects' and a
 reader deserves to know it before relying on this (*added 2026-07-22*).
 
-There is **no update mechanism inside the app**. It never phones home and never
-checks for a newer version — showing you its own version (see [Supported
-versions](#supported-versions)) is not the same as knowing whether a newer one
-exists. Direct downloads do not update themselves. A Linux installation made
-through the signed Forgejo APT repository is the exception: the operating
-system's package manager discovers and installs a newer OciDeck package during
-the user's normal `apt update` / `apt upgrade`. The application itself still
-makes no update request. Other installations receive a fix when you download a
-new release or fetch the default branch and rebuild — and not before.
+The app does **not install updates itself**. Desktop release discovery is
+optional and off by default; users can also request a version check from About
+OciDeck. That check contacts the configured release source, so “never phones
+home” is not an accurate description of an enabled checker. Direct downloads
+do not update themselves. Linux installations from the signed Forgejo APT
+repository receive updates through the normal `apt update` / `apt upgrade`
+process. Other installations receive a fix when you download a new release or
+fetch the default branch and rebuild.
+
+*(Corrected 2026-11-08: distinguish optional version discovery from automatic
+installation. The installer itself remains offline.)*
 
 Windows does have an **installer** (#1208), and it changes nothing above. It is a
 deliberately dumb, offline one: it copies the files, adds a shortcut and the file

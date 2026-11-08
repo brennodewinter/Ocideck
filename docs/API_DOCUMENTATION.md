@@ -1,6 +1,6 @@
 # OciDeck — API Documentation
 
-> **Status:** current-state reference for internal APIs · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** current-state reference for internal APIs · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This document describes the key internal APIs and interfaces in the OciDeck
 codebase. OciDeck is not a library with a published public API; the surfaces
@@ -621,6 +621,30 @@ containment guard) rather than what the questions themselves mean.
 keyed under a `mem:` path scheme. Static `put(bytes, {name})`, `bytesFor`,
 `nameFor`, `clear`, `isMemPath`.
 
+### BrowserDeckStore and DataImpactLog
+
+`lib/services/browser_deck_store.dart` persists standalone package bytes in
+SharedPreferences: `list()`, `save(title, bytes, {id})` and `remove(id)`.
+`BrowserDeckEntry` holds `id`, `title`, UTC `savedAt`, base64 `package` and decoded
+`bytes`. Saves are serialised within the app; separate keys prevent different
+presentations in browser tabs from overwriting one shared index. Storage failures
+throw, and `maxEncodedLength` bounds all encoded copies to 5 MiB.
+`clearSettingsPreservingBrowserDecks(prefs)` resets preferences while retaining
+these user documents.
+
+`DeckNotifier.browserStorageId` binds an open copy to its saved identity.
+`markBrowserSaved(snapshot, revision)` marks only a still-mounted, identical and
+unchanged snapshot clean. `chooseBrowserSave` returns true for a successful
+current save, false for the download choice, and null for cancellation, failure
+or newer unsaved edits. The shell retains its existing save/close guards.
+
+`lib/services/data_impact_log.dart` records fixed component IDs, notice version 1,
+UTC timestamps and `shown`/`accepted`/`declined`, both through `logInfo` and in a
+bounded 200-event preferences journal. `confirmDataImpact` and `consentToggle`
+wrap user-facing activation; they do not replace outbound task gates.
+
+*(Added 2026-11-08.)*
+
 ### Fetch proxy (web only)
 There is no `FetchProxyService` class. On the web, URL fetches that CORS would
 block are routed through a **server-side** `fetch-proxy?url=…` endpoint (see
@@ -770,7 +794,7 @@ than a formal mock framework — see the `dev_dependencies` in `pubspec.yaml`.
 
 ## Compatibility
 
-These interfaces are stable against no release — they are internal and change
+These are internal interfaces, not a versioned public SDK; they can change
 freely between commits; see [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md). The
 `.md`/Marp on-disk format is the stable contract and is documented in
 [`docs/FILE_FORMAT.md`](FILE_FORMAT.md). *(Corrected 2026-11-03: this claimed

@@ -1,6 +1,6 @@
 # OciDeck — Architecture
 
-> **Status:** current-state description of the system and its layering · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of the system and its layering · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 A high-level map of how OciDeck is put together, for contributors. For how files
 are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md). For a one-line
@@ -48,7 +48,9 @@ desktop and web alike — the editor, live preview, the on-device privacy scan
 (OciWacht), export to PDF/PPTX/HTML, and the CVSS/MIAUW engines run **in the
 process the user is looking at**: the native app on desktop, and on web the
 browser tab, into which the whole Dart-compiled bundle is downloaded and then
-run. Deck content is never shipped to a server to be processed.
+run. The core editing and preview path does not upload deck content. Explicit AI,
+ASR, storage, collaboration and learning operations can exchange selected data
+with the services the user chose; see [PRIVACY.md](PRIVACY.md).
 
 There is **no general telemetry or analytics**. The optional, default-off
 OciServe extension is an explicit, user-configured learning connection: it uses
@@ -152,6 +154,23 @@ intercepting it (`_networkConfig`):
 config, and that `git` actually honours it — offline, by pinning
 `example.invalid` (a name that by RFC 2606 never resolves) at a local server, so
 a connection that arrives at all can only have come from the pin.
+
+### Local browser persistence and activation consent
+
+`BrowserDeckStore` stores explicit presentation packages under independent
+browser-preference keys, with an aggregate 5 MiB encoded-copy budget. Live media
+still use `WebAssetStore`; only a successful package save survives a reload.
+Browser copies are source-fidelity user documents, not audience exports or
+recovery snapshots. They use the ordinary package-import safety gate on reopen
+and survive settings reset.
+
+The settings UI guards data-impacting extension activation through
+`confirmDataImpact`/`consentToggle`. `DataImpactLog` sends fixed-ID decisions to
+the application logger and retains a separate bounded preferences journal.
+It never records deck contents, account names or server URLs. DLP profiles
+compose existing scan, severity and export-gate settings without resetting
+exceptions. These UI choices supplement, not replace, operation-time outbound
+and export policies. *(Added 2026-11-08.)*
 
 ## Module layout
 

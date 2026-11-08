@@ -1,6 +1,6 @@
 # OciDeck — Performance Guide
 
-> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
@@ -8,6 +8,13 @@ few measured figures. Where a number is a hard cap in code, it is authoritative;
 where it is a measured size or timing, it is labelled as such. OciDeck ships no
 general latency benchmark suite, so there are deliberately no invented user-facing
 timing promises here. One relative regression test does guard the local save path.
+
+Browser copies have a **5 MiB aggregate encoded-data budget**, including base64
+package data and metadata (`BrowserDeckStore.maxEncodedLength`). This differs
+from the in-memory asset limit: a deck that works in memory may not fit browser
+storage. Copy creation is explicit, not an autosave loop; a failed write leaves
+the deck dirty. The separate consent journal retains at most 200 events.
+*(Added 2026-11-08.)*
 
 ## Memory Management
 

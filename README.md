@@ -1,8 +1,8 @@
 # OciDeck
 
-> **Status:** current-state project overview · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** current-state project overview · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
-> **Alpha — releases are now tagged (latest: `0.4.10`, 2026-08-25).** You can
+> **Alpha — tagged releases are available from the [release feed](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases).** You can
 > build from source, or download a release build; either way the file format is
 > the part meant to be stable ([FILE_FORMAT.md](docs/FILE_FORMAT.md)), while the
 > application is not yet. What is missing, rough or untested is collected in
@@ -22,7 +22,8 @@ presentation
 ([ARCHITECTURE.md](docs/ARCHITECTURE.md#document-mode)).
 
 > **Try it in your browser:** <https://ocideck.librekat.nl/> — the web build,
-> running entirely in your own tab; nothing you type or open is uploaded. It is
+> editing in your own tab. Optional integrations send data only through their
+> configured actions; review their activation warnings and [privacy guide](docs/PRIVACY.md). It is
 > the smaller half of the two: no local video, no local CVE database, no WebDAV
 > browsing, and a URL import that a browser blocks on CORS grounds is retried
 > through a proxy on that host — which then sees the address you typed
@@ -51,14 +52,11 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 
 > **Runs on your device, not on a server.** No application backend for editing,
 > no general telemetry or analytics; the privacy scan runs on your device too.
-> The optional **eLearning integration** (technically OciServe) is an explicit
-> exception: after you enable it
-> and sign in, OciDeck exchanges course files and your displayed time/progress
-> with the OciServe installation you chose. Most other outbound calls are ones
-> you start and point where you choose,
-> but four are not — the web CORS fetch-proxy, the CVE mirror, the local CVE
-> database's bulk download, and an embedded YouTube or Vimeo player. All of
-> them, with what each one sends, are listed in
+> Optional integrations, including AI, transcription, collaboration and
+> OciServe, can exchange personal or business information with configured
+> services. Other network paths include external media, reference downloads,
+> the web fetch-proxy and optional desktop release discovery. These paths,
+> their triggers and the information sent are listed in
 > [PRIVACY.md](docs/PRIVACY.md#what-leaves-your-device--and-only-when-you-ask);
 > the mechanics are in
 > [ARCHITECTURE.md](docs/ARCHITECTURE.md#runtime--network-model). The demo above
@@ -240,6 +238,11 @@ data (`data/*.csv`). A style profile also travels on its own as a
 specification — front matter, per-slide markup, style profile, sidecars, and the
 package format — is documented in
 [`docs/FILE_FORMAT.md`](docs/FILE_FORMAT.md).
+
+Presentation saving in the browser offers a download or an explicit browser copy.
+Browser copies need informed consent, include packaged media, and are less safe
+than a file on your local disk. See the [user guide](docs/USER_GUIDE.md) for
+saving, DLP profiles and the extension consent log. *(Added 2026-11-08.)*
 
 ## Documentation
 

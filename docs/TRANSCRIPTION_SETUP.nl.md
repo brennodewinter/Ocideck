@@ -1,6 +1,6 @@
 # OciDeck — Transcriptie en opname: platformsetup
 
-> **Status:** setupmatrix en stapsgewijze gids voor de vrijgegeven builds · **Status laatst nagekeken:** 2026-10-26 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** setupmatrix en stapsgewijze gids voor de vrijgegeven builds · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
 
 Deze pagina beantwoordt, per platform: wat je moet installeren of
 toestaan, hoe een opname een transcript wordt, waar de bestanden staan,
@@ -10,6 +10,14 @@ legt de module zelf uit; deze pagina is de platformmatrix waarop de
 release wordt getest. Waar een route niet op echte hardware is bewezen,
 staat hier *niet getest* in plaats van dat een gedeelde codepad als
 ondersteuning leest.
+
+Bij het aanzetten van de uitbreiding verschijnt eerst een waarschuwing over
+mogelijke gegevensuitwisseling. Tonen en accepteren of weigeren komen in het
+logboek. Dat vervangt de latere toestemming voor een opname of servertaak niet.
+Een expliciete browserkopie bewaart een presentatiepakket inclusief opgenomen
+media die daarin zijn opgenomen; dit bewaart geen losse opname of
+transcriptiesessie automatisch. Zie [USER_GUIDE.md](USER_GUIDE.md).
+*(Bijgewerkt 2026-11-08.)*
 
 ## De drie stappen, op elk platform
 

@@ -1,6 +1,6 @@
 # OciDeck — Glossary
 
-> **Status:** reference, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** reference, current · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
 OciDeck-specific terms and the acronyms that recur in the codebase and docs. For
 where things live in `lib/`, see [SOURCE_MAP.md](SOURCE_MAP.md).
@@ -8,7 +8,7 @@ where things live in `lib/`, see [SOURCE_MAP.md](SOURCE_MAP.md).
 ## Core concepts
 
 **OciDeck** — a privacy-first Marp presentation builder for desktop and web, with
-no application backend; all processing is local.
+no required editing backend; optional integrations can process selected data on a server.
 
 **Deck** — a complete presentation: metadata, an ordered list of slides, a theme
 profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
@@ -83,6 +83,19 @@ in the document editor. With a bleed or in landscape the name is dropped and the
 sheet is written out as `paperwidth`/`paperheight`, because a paper name cannot
 describe an enlarged or rotated sheet. See
 [FILE_FORMAT.md](FILE_FORMAT.md) §14.8. *(Added 2026-08-17.)*
+
+**Browser copy** — an explicitly saved, unencrypted presentation package in the
+current website's browser storage. It includes embedded media, has a shared
+5 MiB encoded-copy budget, and can be reopened or deleted in Settings → Storage.
+It is neither autosave nor a backup.
+
+**Consent log** — the latest 200 extension/storage warning events, recorded as
+shown, accepted or declined with fixed identifiers, notice version and UTC time.
+It contains no document content or account/server details.
+
+**DLP profile** — a shortcut to local privacy-scan and export settings: warn or
+block unresolved certain findings. Exceptions remain effective; detection is
+not guaranteed. *(Added 2026-11-08.)*
 
 ## Files & storage
 
