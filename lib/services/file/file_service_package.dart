@@ -797,6 +797,12 @@ void _writePackageEntryCapped(ArchiveFile file, CappedArchiveOutput output) {
     writeArchiveEntryCapped(file, output);
     return;
   }
+  // archive (sinds 4.6) leest ook zstd, xz en lzma. Een pakket draagt die
+  // nooit en de webroute weigert ze al: zet die decodercode hier niet open.
+  if (file.compression
+      case CompressionType.zstd || CompressionType.xz || CompressionType.lzma) {
+    throw const FormatException('Unsupported ZIP compression');
+  }
   try {
     file.writeContent(output);
   } on ArchiveLimitException {

@@ -225,6 +225,27 @@ void main() {
         expect(entries!.map((e) => e.name), ['deck.md']);
         expect(entries.single.bytes, md);
       });
+
+      test('in zstd, een compressie die een pakket nooit draagt', () {
+        // archive 4.6 leest ook zstd, xz en lzma: decodercode die een pakket
+        // niet nodig heeft, en die de webroute al weigert.
+        final zip = ZipEncoder().encode(
+          Archive()
+            ..add(ArchiveFile.bytes('deck.md', md))
+            ..add(
+              ArchiveFile.bytes('images/pic.png', png)
+                ..compression = CompressionType.zstd,
+            ),
+        );
+        final service = makeService();
+        expect(
+          service.decodePackageEntries(zip, strictIntegrity: true),
+          isNull,
+        );
+        expect(service.decodePackageEntries(zip)!.map((e) => e.name), [
+          'deck.md',
+        ]);
+      });
     });
 
     test('tolerantly decodes a non-zip blob to no members', () {
