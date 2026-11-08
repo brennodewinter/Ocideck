@@ -642,6 +642,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Plak Markdown…': 'Pega Markdown…',
+  'Markdown plakken': 'Pega Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Pega e teksto di Markdown aki. Ku marp: true den e kabesera e ta bira un presentashon; sin djè, un dokumento.',
+  'Markdown-tekst': 'Teksto di Markdown',
+  '{n} tekens': '{n} karakter',
+  'Open in OciDeck': 'Abrí den OciDeck',
+  'Geplakte tekst verwerpen?': 'Bandona e teksto pegá?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Ainda tin teksto den e kampo; e no lo bira habrí.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'E teksto aki no a bira habrí — mira e aviso di seguridat.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personalisa: kontrolá e kontrol prinsipal i e manera di eksportá aki bou.',
   'Als bestand downloaden': 'Deskargá komo fail',

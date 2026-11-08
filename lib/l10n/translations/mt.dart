@@ -1614,6 +1614,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Plak Markdown…': 'Waħħal Markdown…',
+  'Markdown plakken': 'Waħħal Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Waħħal hawn it-test Markdown. B’marp: true fl-intestatura jsir preżentazzjoni, mingħajru dokument.',
+  'Markdown-tekst': 'Test Markdown',
+  '{n} tekens': '{n} karattri',
+  'Open in OciDeck': 'Iftaħ f’OciDeck',
+  'Geplakte tekst verwerpen?': 'Tarmi t-test imwaħħal?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Għad hemm test fil-qasam; ma jinfetaħx.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Dan it-test ma nifetaħx — ara t-twissija tas-sigurtà.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personalizzat: iċċekkja hawn taħt il-kontroll ewlieni u l-imġiba tal-esportazzjoni.',
   'Als bestand downloaden': 'Niżżel bħala fajl',

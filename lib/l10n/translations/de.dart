@@ -643,6 +643,18 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Plak Markdown…': 'Markdown einfügen…',
+  'Markdown plakken': 'Markdown einfügen',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Fügen Sie hier den Markdown-Text ein. Mit marp: true im Frontmatter wird daraus eine Präsentation, ohne ein Dokument.',
+  'Markdown-tekst': 'Markdown-Text',
+  '{n} tekens': '{n} Zeichen',
+  'Open in OciDeck': 'In OciDeck öffnen',
+  'Geplakte tekst verwerpen?': 'Eingefügten Text verwerfen?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Im Feld steht noch Text; dieser wird nicht geöffnet.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Dieser Text wurde nicht geöffnet — siehe die Sicherheitsmeldung.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Benutzerdefiniert: Prüfen Sie unten Hauptprüfung und Exportverhalten.',
   'Als bestand downloaden': 'Als Datei herunterladen',

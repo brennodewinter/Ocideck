@@ -1596,6 +1596,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Plak Markdown…': 'Liitä Markdown…',
+  'Markdown plakken': 'Liitä Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Liitä Markdown-teksti tähän. Jos alussa on marp: true, siitä tulee esitys, muuten dokumentti.',
+  'Markdown-tekst': 'Markdown-teksti',
+  '{n} tekens': '{n} merkkiä',
+  'Open in OciDeck': 'Avaa OciDeckissä',
+  'Geplakte tekst verwerpen?': 'Hylätäänkö liitetty teksti?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Kentässä on vielä tekstiä; sitä ei avata.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Tätä tekstiä ei avattu — katso turvallisuusvaroitus.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Mukautettu: tarkista alta pääasiallinen tarkistus ja viennin toiminta.',
   'Als bestand downloaden': 'Lataa tiedostona',

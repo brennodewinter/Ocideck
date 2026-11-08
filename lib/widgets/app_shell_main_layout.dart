@@ -813,6 +813,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _importUrl() => _importFromUrl(context, ref);
+
+  Future<void> _pasteMarkdown() => _openPastedMarkdown(context, ref);
 }
 
 // ── AppBar helpers ────────────────────────────────────────────────────────────

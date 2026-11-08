@@ -1596,6 +1596,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Plak Markdown…': 'Prilepi Markdown…',
+  'Markdown plakken': 'Prilepi Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Prilepite sem besedilo Markdown. Z marp: true v glavi postane predstavitev, brez nje dokument.',
+  'Markdown-tekst': 'Besedilo Markdown',
+  '{n} tekens': '{n} znakov',
+  'Open in OciDeck': 'Odpri v OciDecku',
+  'Geplakte tekst verwerpen?': 'Zavreči prilepljeno besedilo?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'V polju je še besedilo; ne bo odprto.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'To besedilo ni bilo odprto — glejte varnostno opozorilo.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Po meri: spodaj preverite glavni pregled in vedenje izvoza.',
   'Als bestand downloaden': 'Prenesi kot datoteko',

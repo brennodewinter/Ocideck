@@ -1611,6 +1611,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Plak Markdown…': 'Вставити Markdown…',
+  'Markdown plakken': 'Вставити Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Вставте тут текст Markdown. З marp: true у заголовку він стане презентацією, без — документом.',
+  'Markdown-tekst': 'Текст Markdown',
+  '{n} tekens': '{n} символів',
+  'Open in OciDeck': 'Відкрити в OciDeck',
+  'Geplakte tekst verwerpen?': 'Відкинути вставлений текст?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'У полі ще є текст; його не буде відкрито.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Цей текст не відкрито — див. попередження безпеки.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Власні налаштування: перевірте нижче основну перевірку та поведінку експорту.',
   'Als bestand downloaden': 'Завантажити як файл',

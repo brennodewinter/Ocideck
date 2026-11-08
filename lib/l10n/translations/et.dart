@@ -1589,6 +1589,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Plak Markdown…': 'Kleebi Markdown…',
+  'Markdown plakken': 'Kleebi Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Kleebi siia Markdown-tekst. Kui päises on marp: true, saab sellest esitlus, muidu dokument.',
+  'Markdown-tekst': 'Markdown-tekst',
+  '{n} tekens': '{n} tähemärki',
+  'Open in OciDeck': 'Ava OciDeckis',
+  'Geplakte tekst verwerpen?': 'Kas loobuda kleebitud tekstist?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Väljas on veel teksti; seda ei avata.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Seda teksti ei avatud — vaadake turvahoiatust.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Kohandatud: kontrollige allpool põhikontrolli ja ekspordi käitumist.',
   'Als bestand downloaden': 'Laadi alla failina',

@@ -1621,6 +1621,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Plak Markdown…': 'Επικόλληση Markdown…',
+  'Markdown plakken': 'Επικόλληση Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Επικολλήστε εδώ το κείμενο Markdown. Με marp: true στην κεφαλίδα γίνεται παρουσίαση, χωρίς αυτήν έγγραφο.',
+  'Markdown-tekst': 'Κείμενο Markdown',
+  '{n} tekens': '{n} χαρακτήρες',
+  'Open in OciDeck': 'Άνοιγμα στο OciDeck',
+  'Geplakte tekst verwerpen?': 'Απόρριψη του επικολλημένου κειμένου;',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Υπάρχει ακόμη κείμενο στο πεδίο· δεν θα ανοικτεί.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Αυτό το κείμενο δεν άνοιξε — δείτε την ειδοποίηση ασφαλείας.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Προσαρμοσμένο: ελέγξτε παρακάτω τον κύριο έλεγχο και τη συμπεριφορά εξαγωγής.',
   'Als bestand downloaden': 'Λήψη ως αρχείο',

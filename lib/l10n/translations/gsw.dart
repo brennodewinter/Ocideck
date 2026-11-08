@@ -1598,6 +1598,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Plak Markdown…': 'Markdown iifüege…',
+  'Markdown plakken': 'Markdown iifüege',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Füeg do de Markdown-Tekscht ii. Mit marp: true i de Kopfziile wirds e Präsentation, ohni es Dokumänt.',
+  'Markdown-tekst': 'Markdown-Tekscht',
+  '{n} tekens': '{n} Zeiche',
+  'Open in OciDeck': 'In OciDeck öffne',
+  'Geplakte tekst verwerpen?': 'Iigfüegte Tekscht verwärfe?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Im Fäld staht no Tekscht; de wird nöd ufgmacht.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Dä Tekscht isch nöd ufgmacht worde — lueg d Warnmäldig.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Aapasst: Prüef unde d Hauptprüefig und s Exportverhalte.',
   'Als bestand downloaden': 'Als Datei abelade',

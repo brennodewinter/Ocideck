@@ -1610,6 +1610,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Plak Markdown…': 'Insere Markdown…',
+  'Markdown plakken': 'Markdown inserere',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Glutina hic textum Markdown. Cum marp: true in fronte fit praesentatio, sine fit documentum.',
+  'Markdown-tekst': 'Textus Markdown',
+  '{n} tekens': '{n} litterae',
+  'Open in OciDeck': 'Aperi in OciDeck',
+  'Geplakte tekst verwerpen?': 'Textum glutinatum reicere?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Textus in campo adhuc est; non aperietur.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Hic textus non apertus est — vide monitum securitatis.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Proprium: inspectionem principalem et rationem exportandi infra verifica.',
   'Als bestand downloaden': 'Ut fasciculum depone',

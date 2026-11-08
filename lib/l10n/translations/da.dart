@@ -1596,6 +1596,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Plak Markdown…': 'Indsæt Markdown…',
+  'Markdown plakken': 'Indsæt Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Indsæt Markdown-teksten her. Med marp: true i headeren bliver det en præsentation, uden et dokument.',
+  'Markdown-tekst': 'Markdown-tekst',
+  '{n} tekens': '{n} tegn',
+  'Open in OciDeck': 'Åbn i OciDeck',
+  'Geplakte tekst verwerpen?': 'Kassér den indsatte tekst?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Der står stadig tekst i feltet; den åbnes ikke.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Denne tekst blev ikke åbnet — se sikkerhedsadvarslen.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Tilpasset: kontrollér hovedkontrollen og eksportadfærden nedenfor.',
   'Als bestand downloaden': 'Download som fil',

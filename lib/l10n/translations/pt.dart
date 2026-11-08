@@ -1624,6 +1624,18 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Plak Markdown…': 'Colar Markdown…',
+  'Markdown plakken': 'Colar Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Cole aqui o texto Markdown. Com marp: true no cabeçalho torna-se uma apresentação; sem, um documento.',
+  'Markdown-tekst': 'Texto Markdown',
+  '{n} tekens': '{n} caracteres',
+  'Open in OciDeck': 'Abrir no OciDeck',
+  'Geplakte tekst verwerpen?': 'Descartar o texto colado?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Ainda há texto no campo; não será aberto.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Este texto não foi aberto — consulte o aviso de segurança.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personalizado: verifique abaixo o controlo principal e o comportamento de exportação.',
   'Als bestand downloaden': 'Transferir como ficheiro',

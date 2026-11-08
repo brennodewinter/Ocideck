@@ -1596,6 +1596,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Plak Markdown…': 'Vložit Markdown…',
+  'Markdown plakken': 'Vložit Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Vložte sem text Markdown. S marp: true v záhlaví se stane prezentací, bez něj dokumentem.',
+  'Markdown-tekst': 'Text Markdown',
+  '{n} tekens': '{n} znaků',
+  'Open in OciDeck': 'Otevřít v OciDecku',
+  'Geplakte tekst verwerpen?': 'Zahodit vložený text?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'V poli je ještě text; nebude otevřen.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Tento text nebyl otevřen — viz bezpečnostní upozornění.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Vlastní: níže zkontrolujte hlavní kontrolu a chování exportu.',
   'Als bestand downloaden': 'Stáhnout jako soubor',

@@ -1593,6 +1593,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Plak Markdown…': 'Ielīmēt Markdown…',
+  'Markdown plakken': 'Ielīmēt Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Ielīmējiet šeit Markdown tekstu. Ar marp: true galvenē tas kļūst par prezentāciju, bez tās — par dokumentu.',
+  'Markdown-tekst': 'Markdown teksts',
+  '{n} tekens': '{n} rakstzīmes',
+  'Open in OciDeck': 'Atvērt lietotnē OciDeck',
+  'Geplakte tekst verwerpen?': 'Atmest ielīmēto tekstu?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Laukā joprojām ir teksts; tas netiks atvērts.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Šis teksts netika atvērts — skatiet drošības brīdinājumu.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Pielāgots: tālāk pārbaudiet galveno pārbaudi un eksportēšanas darbību.',
   'Als bestand downloaden': 'Lejupielādēt kā failu',

@@ -1615,6 +1615,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Plak Markdown…': 'Постави Markdown…',
+  'Markdown plakken': 'Постави Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Поставете тук текста на Markdown. С marp: true в заглавната част той става презентация, без нея — документ.',
+  'Markdown-tekst': 'Текст на Markdown',
+  '{n} tekens': '{n} знака',
+  'Open in OciDeck': 'Отвори в OciDeck',
+  'Geplakte tekst verwerpen?': 'Да се отхвърли ли поставеният текст?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'В полето все още има текст; той няма да бъде отворен.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Този текст не беше отворен — вижте предупреждението за сигурност.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'По избор: проверете по-долу основната проверка и поведението при експортиране.',
   'Als bestand downloaden': 'Изтегляне като файл',

@@ -1612,6 +1612,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Plak Markdown…': 'Lipește Markdown…',
+  'Markdown plakken': 'Lipește Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Lipește aici textul Markdown. Cu marp: true în antet devine o prezentare, fără — un document.',
+  'Markdown-tekst': 'Text Markdown',
+  '{n} tekens': '{n} caractere',
+  'Open in OciDeck': 'Deschide în OciDeck',
+  'Geplakte tekst verwerpen?': 'Se aruncă textul lipit?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Mai există text în câmp; nu va fi deschis.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Acest text nu a fost deschis — vezi avertismentul de securitate.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Personalizat: verificați mai jos controlul principal și comportamentul exportului.',
   'Als bestand downloaden': 'Descarcă drept fișier',

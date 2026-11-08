@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 
 import 'dialogs/browser_storage_dialog.dart';
+import 'dialogs/paste_markdown_dialog.dart';
 import '../l10n/export_block_localization.dart';
 import '../platform/launch_files.dart';
 import '../platform/native_shortcut_channel.dart';

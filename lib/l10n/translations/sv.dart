@@ -1595,6 +1595,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Plak Markdown…': 'Klistra in Markdown…',
+  'Markdown plakken': 'Klistra in Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Klistra in Markdown-texten här. Med marp: true i front matter blir det en presentation, utan ett dokument.',
+  'Markdown-tekst': 'Markdown-text',
+  '{n} tekens': '{n} tecken',
+  'Open in OciDeck': 'Öppna i OciDeck',
+  'Geplakte tekst verwerpen?': 'Kassera den inklistrade texten?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Det finns fortfarande text i fältet; den öppnas inte.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Texten öppnades inte — se säkerhetsvarningen.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Anpassat: kontrollera huvudkontrollen och exportbeteendet nedan.',
   'Als bestand downloaden': 'Ladda ned som fil',

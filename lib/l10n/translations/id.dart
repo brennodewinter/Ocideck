@@ -1596,6 +1596,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Plak Markdown…': 'Tempel Markdown…',
+  'Markdown plakken': 'Tempel Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Tempel teks Markdown di sini. Dengan marp: true di baris kepala menjadi presentasi; tanpa itu menjadi dokumen.',
+  'Markdown-tekst': 'Teks Markdown',
+  '{n} tekens': '{n} karakter',
+  'Open in OciDeck': 'Buka di OciDeck',
+  'Geplakte tekst verwerpen?': 'Buang teks yang ditempel?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Masih ada teks di kolom; teks itu tidak akan dibuka.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Teks ini tidak dibuka — lihat peringatan keamanan.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Khusus: periksa pemindaian utama dan perilaku ekspor di bawah.',
   'Als bestand downloaden': 'Unduh sebagai berkas',

@@ -182,6 +182,15 @@ see the [release downloads](https://pawprint.vigilis.online/LibreKAT/Ocideck/rel
   the status bar. Opening such a link made your device contact that server;
   hover the badge to see the source host. Decks you open from your own disk carry
   no badge.
+- **Paste Markdown**: if your text lives in another app (a wiki, chat or AI
+  assistant), you don't have to save it as an `.md` file first. Choose
+  **Paste Markdown…** — on the welcome screen, behind *Importeren…* in the `…`
+  menu, or via the command palette — paste the text and click **Open in
+  OciDeck**. With `marp: true` in the front matter it opens as a presentation,
+  without as a document, in a new tab without a file path. The text goes
+  nowhere: the same safety scan and size limit apply as for an opened file, but
+  no request leaves the app — not even to a server. *(Added 2026-11-08,
+  #2825.)*
 - **Save**: `Ctrl/Cmd + S`. Saving lays out a tidy project folder next to your
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
   [`FILE_FORMAT.md`](FILE_FORMAT.md). Later saves materialise only newly added

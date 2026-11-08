@@ -1600,6 +1600,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Plak Markdown…': 'Zalijepi Markdown…',
+  'Markdown plakken': 'Zalijepi Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Zalijepite ovdje Markdown tekst. S marp: true u zaglavlju postaje prezentacija, bez njega dokument.',
+  'Markdown-tekst': 'Markdown tekst',
+  '{n} tekens': '{n} znakova',
+  'Open in OciDeck': 'Otvori u OciDecku',
+  'Geplakte tekst verwerpen?': 'Odbaciti zalijepljeni tekst?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'U polju je još uvijek tekst; neće se otvoriti.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Ovaj tekst nije otvoren — pogledajte sigurnosno upozorenje.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Prilagođeno: u nastavku provjerite glavni pregled i ponašanje izvoza.',
   'Als bestand downloaden': 'Preuzmi kao datoteku',

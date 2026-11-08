@@ -189,6 +189,15 @@ staan bij de [release-downloads](https://pawprint.vigilis.online/LibreKAT/Ocidec
   de statusbalk. Het openen van zo'n link heeft je apparaat contact met die server
   laten leggen; beweeg over de badge om de bronhost te zien. Decks die je van je
   eigen schijf opent, dragen geen badge.
+- **Markdown plakken**: staat je tekst in een andere toepassing (een wiki, chat of
+  AI-assistent), dan hoeft die niet eerst als `.md`-bestand opgeslagen te worden.
+  Kies **Plak Markdown…** — op het welkomstscherm, achter *Importeren…* in het
+  `…`-menu, of via het commandopalet — plak de tekst en klik **Open in OciDeck**.
+  Met `marp: true` in de kopregels wordt het een presentatie, zonder een document,
+  in een nieuw tabblad zonder bestandspad. De tekst gaat nergens heen: dezelfde
+  veiligheidsscan en omvangsgrens gelden als bij een geopend bestand, maar er
+  vertrekt geen verzoek — ook niet naar een server. *(Toegevoegd 2026-11-08,
+  #2825.)*
 - **Opslaan**: `Ctrl/Cmd + S`. Bij het opslaan wordt een nette projectmap naast je
   `.md` neergezet (`images/`, `data/`, `logos/`, `themes/`) en worden assets erin
   gekopieerd. Zie [`FILE_FORMAT.md`](FILE_FORMAT.md). Bij volgende opslagbeurten

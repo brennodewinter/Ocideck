@@ -1,0 +1,118 @@
+{
+  "additions": {
+    "Plak Markdown…": {
+      "en": "Paste Markdown…", "de": "Markdown einfügen…", "fr": "Coller du Markdown…", "es": "Pegar Markdown…", "it": "Incolla Markdown…", "pt": "Colar Markdown…", "fy": "Markdown plakke…", "pap": "Pega Markdown…", "la": "Insere Markdown…", "id": "Tempel Markdown…", "pl": "Wklej Markdown…", "uk": "Вставити Markdown…", "gsw": "Markdown iifüege…", "el": "Επικόλληση Markdown…", "da": "Indsæt Markdown…", "sv": "Klistra in Markdown…", "hr": "Zalijepi Markdown…", "cs": "Vložit Markdown…", "fi": "Liitä Markdown…", "bg": "Постави Markdown…", "lv": "Ielīmēt Markdown…", "lt": "Įklijuoti Markdown…", "mt": "Waħħal Markdown…", "et": "Kleebi Markdown…", "hu": "Markdown beillesztése…", "ga": "Greamaigh Markdown…", "ro": "Lipește Markdown…", "sl": "Prilepi Markdown…", "sk": "Vložiť Markdown…", "tr": "Markdown yapıştır…"
+    },
+    "Markdown plakken": {
+      "en": "Paste Markdown", "de": "Markdown einfügen", "fr": "Coller du Markdown", "es": "Pegar Markdown", "it": "Incolla Markdown", "pt": "Colar Markdown", "fy": "Markdown plakke", "pap": "Pega Markdown", "la": "Markdown inserere", "id": "Tempel Markdown", "pl": "Wklej Markdown", "uk": "Вставити Markdown", "gsw": "Markdown iifüege", "el": "Επικόλληση Markdown", "da": "Indsæt Markdown", "sv": "Klistra in Markdown", "hr": "Zalijepi Markdown", "cs": "Vložit Markdown", "fi": "Liitä Markdown", "bg": "Постави Markdown", "lv": "Ielīmēt Markdown", "lt": "Įklijuoti Markdown", "mt": "Waħħal Markdown", "et": "Kleebi Markdown", "hu": "Markdown beillesztése", "ga": "Greamaigh Markdown", "ro": "Lipește Markdown", "sl": "Prilepi Markdown", "sk": "Vložiť Markdown", "tr": "Markdown yapıştır"
+    },
+    "Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.": {
+      "en": "Paste the Markdown text here. With marp: true in the front matter it becomes a presentation; without, a document.",
+      "de": "Fügen Sie hier den Markdown-Text ein. Mit marp: true im Frontmatter wird daraus eine Präsentation, ohne ein Dokument.",
+      "fr": "Collez ici le texte Markdown. Avec marp: true dans l’en-tête, il devient une présentation ; sans, un document.",
+      "es": "Pega aquí el texto Markdown. Con marp: true en la cabecera se convierte en una presentación; sin él, en un documento.",
+      "it": "Incolla qui il testo Markdown. Con marp: true nell’intestazione diventa una presentazione, senza un documento.",
+      "pt": "Cole aqui o texto Markdown. Com marp: true no cabeçalho torna-se uma apresentação; sem, um documento.",
+      "fy": "Plak hjir de Markdown-tekst. Mei marp: true yn de koprigels wurdt it in presintaasje, sûnder in dokumint.",
+      "pap": "Pega e teksto di Markdown aki. Ku marp: true den e kabesera e ta bira un presentashon; sin djè, un dokumento.",
+      "la": "Glutina hic textum Markdown. Cum marp: true in fronte fit praesentatio, sine fit documentum.",
+      "id": "Tempel teks Markdown di sini. Dengan marp: true di baris kepala menjadi presentasi; tanpa itu menjadi dokumen.",
+      "pl": "Wklej tutaj tekst Markdown. Z marp: true w nagłówku stanie się prezentacją, bez niego dokumentem.",
+      "uk": "Вставте тут текст Markdown. З marp: true у заголовку він стане презентацією, без — документом.",
+      "gsw": "Füeg do de Markdown-Tekscht ii. Mit marp: true i de Kopfziile wirds e Präsentation, ohni es Dokumänt.",
+      "el": "Επικολλήστε εδώ το κείμενο Markdown. Με marp: true στην κεφαλίδα γίνεται παρουσίαση, χωρίς αυτήν έγγραφο.",
+      "da": "Indsæt Markdown-teksten her. Med marp: true i headeren bliver det en præsentation, uden et dokument.",
+      "sv": "Klistra in Markdown-texten här. Med marp: true i front matter blir det en presentation, utan ett dokument.",
+      "hr": "Zalijepite ovdje Markdown tekst. S marp: true u zaglavlju postaje prezentacija, bez njega dokument.",
+      "cs": "Vložte sem text Markdown. S marp: true v záhlaví se stane prezentací, bez něj dokumentem.",
+      "fi": "Liitä Markdown-teksti tähän. Jos alussa on marp: true, siitä tulee esitys, muuten dokumentti.",
+      "bg": "Поставете тук текста на Markdown. С marp: true в заглавната част той става презентация, без нея — документ.",
+      "lv": "Ielīmējiet šeit Markdown tekstu. Ar marp: true galvenē tas kļūst par prezentāciju, bez tās — par dokumentu.",
+      "lt": "Įklijuokite čia Markdown tekstą. Su marp: true antraštėje jis tampa pristatymu, be jos — dokumentu.",
+      "mt": "Waħħal hawn it-test Markdown. B’marp: true fl-intestatura jsir preżentazzjoni, mingħajru dokument.",
+      "et": "Kleebi siia Markdown-tekst. Kui päises on marp: true, saab sellest esitlus, muidu dokument.",
+      "hu": "Illessze be ide a Markdown-szöveget. A fejlécben szereplő marp: true esetén prezentáció lesz, nélküle dokumentum.",
+      "ga": "Greamaigh an téacs Markdown anseo. Le marp: true sa cheannteideal tagann sé chun bheith ina chur i láthair, gan é ina dhoiciméad.",
+      "ro": "Lipește aici textul Markdown. Cu marp: true în antet devine o prezentare, fără — un document.",
+      "sl": "Prilepite sem besedilo Markdown. Z marp: true v glavi postane predstavitev, brez nje dokument.",
+      "sk": "Vložte sem text Markdown. S marp: true v hlavičke sa stane prezentáciou, bez nej dokumentom.",
+      "tr": "Markdown metnini buraya yapıştırın. Başlıkta marp: true varsa sunum olur, yoksa belge olur."
+    },
+    "Markdown-tekst": {
+      "en": "Markdown text", "de": "Markdown-Text", "fr": "Texte Markdown", "es": "Texto Markdown", "it": "Testo Markdown", "pt": "Texto Markdown", "fy": "Markdown-tekst", "pap": "Teksto di Markdown", "la": "Textus Markdown", "id": "Teks Markdown", "pl": "Tekst Markdown", "uk": "Текст Markdown", "gsw": "Markdown-Tekscht", "el": "Κείμενο Markdown", "da": "Markdown-tekst", "sv": "Markdown-text", "hr": "Markdown tekst", "cs": "Text Markdown", "fi": "Markdown-teksti", "bg": "Текст на Markdown", "lv": "Markdown teksts", "lt": "Markdown tekstas", "mt": "Test Markdown", "et": "Markdown-tekst", "hu": "Markdown-szöveg", "ga": "Téacs Markdown", "ro": "Text Markdown", "sl": "Besedilo Markdown", "sk": "Text Markdown", "tr": "Markdown metni"
+    },
+    "{n} tekens": {
+      "en": "{n} characters", "de": "{n} Zeichen", "fr": "{n} caractères", "es": "{n} caracteres", "it": "{n} caratteri", "pt": "{n} caracteres", "fy": "{n} tekens", "pap": "{n} karakter", "la": "{n} litterae", "id": "{n} karakter", "pl": "{n} znaków", "uk": "{n} символів", "gsw": "{n} Zeiche", "el": "{n} χαρακτήρες", "da": "{n} tegn", "sv": "{n} tecken", "hr": "{n} znakova", "cs": "{n} znaků", "fi": "{n} merkkiä", "bg": "{n} знака", "lv": "{n} rakstzīmes", "lt": "{n} ženklų", "mt": "{n} karattri", "et": "{n} tähemärki", "hu": "{n} karakter", "ga": "{n} carachtar", "ro": "{n} caractere", "sl": "{n} znakov", "sk": "{n} znakov", "tr": "{n} karakter"
+    },
+    "Open in OciDeck": {
+      "en": "Open in OciDeck", "de": "In OciDeck öffnen", "fr": "Ouvrir dans OciDeck", "es": "Abrir en OciDeck", "it": "Apri in OciDeck", "pt": "Abrir no OciDeck", "fy": "Iepenje yn OciDeck", "pap": "Abrí den OciDeck", "la": "Aperi in OciDeck", "id": "Buka di OciDeck", "pl": "Otwórz w OciDeck", "uk": "Відкрити в OciDeck", "gsw": "In OciDeck öffne", "el": "Άνοιγμα στο OciDeck", "da": "Åbn i OciDeck", "sv": "Öppna i OciDeck", "hr": "Otvori u OciDecku", "cs": "Otevřít v OciDecku", "fi": "Avaa OciDeckissä", "bg": "Отвори в OciDeck", "lv": "Atvērt lietotnē OciDeck", "lt": "Atidaryti OciDeck", "mt": "Iftaħ f’OciDeck", "et": "Ava OciDeckis", "hu": "Megnyitás az OciDeckben", "ga": "Oscail in OciDeck", "ro": "Deschide în OciDeck", "sl": "Odpri v OciDecku", "sk": "Otvoriť v OciDecku", "tr": "OciDeck’te aç"
+    },
+    "Geplakte tekst verwerpen?": {
+      "en": "Discard pasted text?", "de": "Eingefügten Text verwerfen?", "fr": "Jeter le texte collé ?", "es": "¿Descartar el texto pegado?", "it": "Scartare il testo incollato?", "pt": "Descartar o texto colado?", "fy": "Plakte tekst fuortsmite?", "pap": "Bandona e teksto pegá?", "la": "Textum glutinatum reicere?", "id": "Buang teks yang ditempel?", "pl": "Odrzucić wklejony tekst?", "uk": "Відкинути вставлений текст?", "gsw": "Iigfüegte Tekscht verwärfe?", "el": "Απόρριψη του επικολλημένου κειμένου;", "da": "Kassér den indsatte tekst?", "sv": "Kassera den inklistrade texten?", "hr": "Odbaciti zalijepljeni tekst?", "cs": "Zahodit vložený text?", "fi": "Hylätäänkö liitetty teksti?", "bg": "Да се отхвърли ли поставеният текст?", "lv": "Atmest ielīmēto tekstu?", "lt": "Atmesti įklijuotą tekstą?", "mt": "Tarmi t-test imwaħħal?", "et": "Kas loobuda kleebitud tekstist?", "hu": "Elveti a beillesztett szöveget?", "ga": "Caith an téacs greamaithe uait?", "ro": "Se aruncă textul lipit?", "sl": "Zavreči prilepljeno besedilo?", "sk": "Zahodiť vložený text?", "tr": "Yapıştırılan metin atılsın mı?"
+    },
+    "Er staat nog tekst in het veld; die wordt niet geopend.": {
+      "en": "There is still text in the field; it will not be opened.",
+      "de": "Im Feld steht noch Text; dieser wird nicht geöffnet.",
+      "fr": "Il reste du texte dans le champ ; il ne sera pas ouvert.",
+      "es": "Aún hay texto en el campo; no se abrirá.",
+      "it": "Nel campo c’è ancora del testo; non verrà aperto.",
+      "pt": "Ainda há texto no campo; não será aberto.",
+      "fy": "Der stiet noch tekst yn it fjild; dy wurdt net iepene.",
+      "pap": "Ainda tin teksto den e kampo; e no lo bira habrí.",
+      "la": "Textus in campo adhuc est; non aperietur.",
+      "id": "Masih ada teks di kolom; teks itu tidak akan dibuka.",
+      "pl": "W polu jest jeszcze tekst; nie zostanie otwarty.",
+      "uk": "У полі ще є текст; його не буде відкрито.",
+      "gsw": "Im Fäld staht no Tekscht; de wird nöd ufgmacht.",
+      "el": "Υπάρχει ακόμη κείμενο στο πεδίο· δεν θα ανοικτεί.",
+      "da": "Der står stadig tekst i feltet; den åbnes ikke.",
+      "sv": "Det finns fortfarande text i fältet; den öppnas inte.",
+      "hr": "U polju je još uvijek tekst; neće se otvoriti.",
+      "cs": "V poli je ještě text; nebude otevřen.",
+      "fi": "Kentässä on vielä tekstiä; sitä ei avata.",
+      "bg": "В полето все още има текст; той няма да бъде отворен.",
+      "lv": "Laukā joprojām ir teksts; tas netiks atvērts.",
+      "lt": "Lauke dar yra teksto; jis nebus atidarytas.",
+      "mt": "Għad hemm test fil-qasam; ma jinfetaħx.",
+      "et": "Väljas on veel teksti; seda ei avata.",
+      "hu": "A mezőben még van szöveg; az nem lesz megnyitva.",
+      "ga": "Tá téacs fós sa réimse; ní osclófar é.",
+      "ro": "Mai există text în câmp; nu va fi deschis.",
+      "sl": "V polju je še besedilo; ne bo odprto.",
+      "sk": "V poli je ešte text; nebude otvorený.",
+      "tr": "Alında hâlâ metin var; açılmayacak."
+    },
+    "Deze tekst is niet geopend — zie de beveiligingsmelding.": {
+      "en": "This text was not opened — see the security warning.",
+      "de": "Dieser Text wurde nicht geöffnet — siehe die Sicherheitsmeldung.",
+      "fr": "Ce texte n’a pas été ouvert — voir l’avertissement de sécurité.",
+      "es": "Este texto no se ha abierto — consulta el aviso de seguridad.",
+      "it": "Questo testo non è stato aperto — vedi l’avviso di sicurezza.",
+      "pt": "Este texto não foi aberto — consulte o aviso de segurança.",
+      "fy": "Dizze tekst is net iepene — sjoch de feilichheidswarskôging.",
+      "pap": "E teksto aki no a bira habrí — mira e aviso di seguridat.",
+      "la": "Hic textus non apertus est — vide monitum securitatis.",
+      "id": "Teks ini tidak dibuka — lihat peringatan keamanan.",
+      "pl": "Ten tekst nie został otwarty — zobacz ostrzeżenie bezpieczeństwa.",
+      "uk": "Цей текст не відкрито — див. попередження безпеки.",
+      "gsw": "Dä Tekscht isch nöd ufgmacht worde — lueg d Warnmäldig.",
+      "el": "Αυτό το κείμενο δεν άνοιξε — δείτε την ειδοποίηση ασφαλείας.",
+      "da": "Denne tekst blev ikke åbnet — se sikkerhedsadvarslen.",
+      "sv": "Texten öppnades inte — se säkerhetsvarningen.",
+      "hr": "Ovaj tekst nije otvoren — pogledajte sigurnosno upozorenje.",
+      "cs": "Tento text nebyl otevřen — viz bezpečnostní upozornění.",
+      "fi": "Tätä tekstiä ei avattu — katso turvallisuusvaroitus.",
+      "bg": "Този текст не беше отворен — вижте предупреждението за сигурност.",
+      "lv": "Šis teksts netika atvērts — skatiet drošības brīdinājumu.",
+      "lt": "Šis tekstas neatidarytas — žr. saugos įspėjimą.",
+      "mt": "Dan it-test ma nifetaħx — ara t-twissija tas-sigurtà.",
+      "et": "Seda teksti ei avatud — vaadake turvahoiatust.",
+      "hu": "Ez a szöveg nem lett megnyitva — lásd a biztonsági figyelmeztetést.",
+      "ga": "Níor osclaíodh an téacs seo — féach an rabhadh slándála.",
+      "ro": "Acest text nu a fost deschis — vezi avertismentul de securitate.",
+      "sl": "To besedilo ni bilo odprto — glejte varnostno opozorilo.",
+      "sk": "Tento text nebol otvorený — pozrite bezpečnostné upozornenie.",
+      "tr": "Bu metin açılmadı — güvenlik uyarısına bakın."
+    }
+  }
+}

@@ -1625,6 +1625,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Plak Markdown…': 'Greamaigh Markdown…',
+  'Markdown plakken': 'Greamaigh Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Greamaigh an téacs Markdown anseo. Le marp: true sa cheannteideal tagann sé chun bheith ina chur i láthair, gan é ina dhoiciméad.',
+  'Markdown-tekst': 'Téacs Markdown',
+  '{n} tekens': '{n} carachtar',
+  'Open in OciDeck': 'Oscail in OciDeck',
+  'Geplakte tekst verwerpen?': 'Caith an téacs greamaithe uait?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Tá téacs fós sa réimse; ní osclófar é.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Níor osclaíodh an téacs seo — féach an rabhadh slándála.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Saincheaptha: seiceáil an príomhsheiceáil agus iompar easpórtála thíos.',
   'Als bestand downloaden': 'Íoslódáil mar chomhad',

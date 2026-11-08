@@ -1598,6 +1598,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Plak Markdown…': 'Markdown beillesztése…',
+  'Markdown plakken': 'Markdown beillesztése',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Illessze be ide a Markdown-szöveget. A fejlécben szereplő marp: true esetén prezentáció lesz, nélküle dokumentum.',
+  'Markdown-tekst': 'Markdown-szöveg',
+  '{n} tekens': '{n} karakter',
+  'Open in OciDeck': 'Megnyitás az OciDeckben',
+  'Geplakte tekst verwerpen?': 'Elveti a beillesztett szöveget?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'A mezőben még van szöveg; az nem lesz megnyitva.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Ez a szöveg nem lett megnyitva — lásd a biztonsági figyelmeztetést.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Egyéni: ellenőrizze alább a fő vizsgálatot és az exportálás működését.',
   'Als bestand downloaden': 'Letöltés fájlként',

@@ -802,6 +802,18 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Plak Markdown…': 'Paste Markdown…',
+  'Markdown plakken': 'Paste Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Paste the Markdown text here. With marp: true in the front matter it becomes a presentation; without, a document.',
+  'Markdown-tekst': 'Markdown text',
+  '{n} tekens': '{n} characters',
+  'Open in OciDeck': 'Open in OciDeck',
+  'Geplakte tekst verwerpen?': 'Discard pasted text?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'There is still text in the field; it will not be opened.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'This text was not opened — see the security warning.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Custom: check the main scan and export behavior below.',
   'Als bestand downloaden': 'Download as a file',

@@ -374,6 +374,42 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   }
 }
 
+/// Open in OciDeck geplakte Markdowntekst (#2825) via exact dezelfde poort
+/// als een geopend `.md`-bestand: de tekst wordt één keer UTF-8-gecodeerd en
+/// [TabsNotifier.openDeckFromBytes] doet de rest — omvangsgrens,
+/// veiligheidsscan met het importalarm, en routering naar presentatie of
+/// document. De dialoog beheert de invoer en houdt hem vast als het openen
+/// mislukt; deze functie levert alleen de melding die hij dan toont. De
+/// inhoud gaat nergens heen — geen server, geen URL — en komt net als bij de
+/// bestandsroute hooguit als telling in de logregels.
+Future<void> _openPastedMarkdown(BuildContext context, WidgetRef ref) async {
+  await PasteMarkdownDialog.show(
+    context,
+    onOpen: (text) async {
+      final l10n = context.l10n;
+      ref.read(openFailureProvider.notifier).state = null;
+      final result = await ref
+          .read(tabsProvider.notifier)
+          .openDeckFromBytes(
+            Uint8List.fromList(utf8.encode(text)),
+            // Geen bestandsnaam om aan te houden: dit labelt alleen het
+            // importalarm en de logregel.
+            'geplakte-markdown.md',
+          );
+      if (result == OpenResult.opened) return null;
+      if (result == OpenResult.blocked) {
+        // Het importalarm toont zichzelf met de bevindingen; in de dialoog
+        // volstaat de verwijzing — de details herhalen zou twee meldingen
+        // over elkaar leggen.
+        return l10n.d(
+          'Deze tekst is niet geopend — zie de beveiligingsmelding.',
+        );
+      }
+      return openFailureMessage(l10n, ref.read(openFailureProvider));
+    },
+  );
+}
+
 /// Web-kern van de URL-import: ophalen (met hulppunt-terugval), dezelfde
 /// security-gate, en de juiste melding. Gedeeld door de importdialoog en de
 /// `?deck=`-deeplink waarmee een link OciDeck én een presentatie tegelijk

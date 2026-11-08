@@ -1602,6 +1602,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Plak Markdown…': 'Įklijuoti Markdown…',
+  'Markdown plakken': 'Įklijuoti Markdown',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Įklijuokite čia Markdown tekstą. Su marp: true antraštėje jis tampa pristatymu, be jos — dokumentu.',
+  'Markdown-tekst': 'Markdown tekstas',
+  '{n} tekens': '{n} ženklų',
+  'Open in OciDeck': 'Atidaryti OciDeck',
+  'Geplakte tekst verwerpen?': 'Atmesti įklijuotą tekstą?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Lauke dar yra teksto; jis nebus atidarytas.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Šis tekstas neatidarytas — žr. saugos įspėjimą.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Pasirinktinai: toliau patikrinkite pagrindinę patikrą ir eksporto veikimą.',
   'Als bestand downloaden': 'Atsisiųsti kaip failą',

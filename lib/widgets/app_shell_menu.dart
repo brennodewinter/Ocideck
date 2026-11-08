@@ -145,6 +145,13 @@ List<PickerOption<String>> importSourceOptions(
     label: l10n.t('importPackage'),
   ),
   (value: 'import_url', icon: Icons.link, label: l10n.t('importUrl')),
+  // Geen "import" in de naam: er wordt geen bestand vertaald — de tekst ís
+  // de Markdown en opent onveranderd via de gewone open-poort (#2825).
+  (
+    value: 'paste_markdown',
+    icon: Icons.content_paste_outlined,
+    label: l10n.d('Plak Markdown…'),
+  ),
   // Presentatie-import (PowerPoint/Keynote/Impress): werkt op bytes, dus ook
   // op web — zelfde reveal-poort als het tabblad Integraties.
   if (ref.read(importModuleRevealProvider))
@@ -334,6 +341,8 @@ extension _MainLayoutMenu on _MainLayoutState {
         await _importPackage();
       case 'import_url':
         await _importUrl();
+      case 'paste_markdown':
+        await _pasteMarkdown();
       case 'import_presentation':
         await importPresentation(context, ref);
       case 'transcribe_file':

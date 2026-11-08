@@ -2500,6 +2500,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Plak Markdown…': 'Markdown yapıştır…',
+  'Markdown plakken': 'Markdown yapıştır',
+  'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
+      'Markdown metnini buraya yapıştırın. Başlıkta marp: true varsa sunum olur, yoksa belge olur.',
+  'Markdown-tekst': 'Markdown metni',
+  '{n} tekens': '{n} karakter',
+  'Open in OciDeck': 'OciDeck’te aç',
+  'Geplakte tekst verwerpen?': 'Yapıştırılan metin atılsın mı?',
+  'Er staat nog tekst in het veld; die wordt niet geopend.':
+      'Alında hâlâ metin var; açılmayacak.',
+  'Deze tekst is niet geopend — zie de beveiligingsmelding.':
+      'Bu metin açılmadı — güvenlik uyarısına bakın.',
   'Aangepast: controleer hieronder de hoofdcontrole en het exportgedrag.':
       'Özel: aşağıda ana denetimi ve dışa aktarma davranışını kontrol edin.',
   'Als bestand downloaden': 'Dosya olarak indir',
