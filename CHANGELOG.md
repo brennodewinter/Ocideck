@@ -29,7 +29,10 @@ All notable changes to OciDeck are documented in this file.
   zwijgt over beschadigde data, controleren `.ocideck`-pakketten, imports
   (PowerPoint, Keynote, OpenDocument, Word, Excel, eLearning) en de lokale
   CVE-database nu zelf grootte en controlesom. Een omgevallen of afgekapt
-  onderdeel geeft een foutmelding in plaats van stil verkeerde inhoud.
+  onderdeel geeft een foutmelding in plaats van stil verkeerde inhoud. Een
+  pakket in een compressie die OciDeck nooit schrijft (zstd, xz, lzma) wordt
+  geweigerd, en een inzendpakket dat zich opblaast stopt nu bij zijn
+  aangekondigde grootte in plaats van eerst het geheugen te vullen.
   Inzendpakketten verraden de tijdzone van de maker niet meer via de
   zip-tijdstempel. `image` gaat mee naar 4.12.0, dat nu oplosbaar is: die
   versie stopt onder meer afbeeldingen waarvan de EXIF- of TIFF-gegevens in
