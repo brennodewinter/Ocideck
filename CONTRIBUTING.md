@@ -48,7 +48,7 @@ architecture: an x64 SDK under Rosetta can hang subprocess-based checks. Inspect
 
 ## Prerequisites
 
-- **Flutter 3.47.7** (stable), from the official channel, using the `dart`
+- **Flutter 3.47.9** (stable), from the official channel, using the `dart`
   bundled with it. `.tool-versions` pins it, `make check-toolchain` enforces it,
   and the rule is deliberately strict: the exact version, channel `stable`, and
   the SDK's repository must be `https://github.com/flutter/flutter.git`.
