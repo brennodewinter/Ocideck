@@ -10,6 +10,10 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 SHA = 'a' * 40
+# The stubbed subprocesses finish in well under a second on a workstation, but
+# the linux-serial CI runner executes this suite under heavy parallel load —
+# bind them to that pace, not to local timings.
+SCRIPT_TIMEOUT_S = 90
 
 
 class ResourceToolchainTest(unittest.TestCase):
@@ -28,7 +32,7 @@ class ResourceToolchainTest(unittest.TestCase):
                 result = subprocess.run(['make', '--no-print-directory', 'check-toolchain'],
                     cwd=ROOT, env=dict(os.environ, PATH=str(root) + os.pathsep + os.environ['PATH'],
                         PROBE_ROOT=str(root), WRONG_SDK='yes' if wrong_sdk else 'no'),
-                    capture_output=True, text=True, timeout=20)
+                    capture_output=True, text=True, timeout=SCRIPT_TIMEOUT_S)
                 self.assertFalse((root / 'native-hooks').exists(), result.stdout + result.stderr)
                 self.assertTrue((root / 'probe-executed').exists())
                 self.assertEqual(result.returncode == 0, not wrong_sdk)
