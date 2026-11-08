@@ -34,7 +34,7 @@ const _stringsPl = {
   'newPresentationTab': 'Nowa prezentacja (karta)',
   'exportPackage': 'Eksportuj pakiet…',
   'importPackage': 'Importuj pakiet…',
-  'importUrl': 'Importuj z adresu URL…',
+  'importUrl': 'Otwórz z adresu URL…',
   'findReplace': 'Znajdź i zamień',
   'fullDeckPreview': 'Wyświetl całą prezentację',
   'settingsGeneral': 'Ogólne',
@@ -398,9 +398,6 @@ const _dutchSourcePl = {
       'Znaleziono prezentację z niezapisanymi zmianami z poprzedniej sesji:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ta prezentacja ma niezapisane zmiany. Zapisz ją przed zamknięciem karty.',
-  'Importeren via URL': 'Importuj z adresu URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Wklej link do pakietu .ocideck lub pliku Markdown Marp.',
   'Ophalen': 'Pobierz',
   'Laat los om toe te voegen': 'Zwolnij, aby dodać',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -416,8 +413,6 @@ const _dutchSourcePl = {
   'Export mislukt:': 'Eksport nie powiódł się:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Ten slajd nie może przyjąć obrazu. Najpierw wybierz slajd z obrazem.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Nie udało się pobrać prezentacji z tego adresu URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Przeciągnij, aby poszerzyć lub zwęzić podgląd slajdu',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1356,8 +1351,6 @@ const _dutchSourcePl = {
       'Plik jest uszkodzony lub nieczytelny.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import odrzucony: pakiet przekracza limity bezpieczeństwa.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Nie udało się pobrać prezentacji z tego adresu URL. Sprawdź adres i połączenie.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Logowanie nie powiodło się — sprawdź nazwę użytkownika i hasło. Wskazówka: w Nextcloud użyj hasła aplikacji (Ustawienia → Bezpieczeństwo), nie hasła konta.',
   'Annuleren…': 'Anulowanie…',
@@ -1608,6 +1601,22 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Openen via URL': 'Otwórz z adresu URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Wklej link do pliku .md lub pakietu .ocideck; .md otwiera się jako prezentacja lub dokument. Źródło musi pozwalać przeglądarce na odczyt pliku.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Wpisz adres http(s) z nazwą serwera, np. https://example.org/notatki.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Nie udało się pobrać pliku z tego adresu URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Nie udało się pobrać pliku z tego adresu URL. Sprawdź adres i połączenie.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Pod tym adresem URL nie ma pliku (nie znaleziono). Sprawdź, czy link jest nadal poprawny.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Plik jest większy niż limit {limit}.',
+  'Geopend.': 'Otwarto.',
+  'Deellink kopiëren': 'Kopiuj link udostępniania',
+  'Deellink gekopieerd.': 'Skopiowano link udostępniania.',
   'Plak Markdown…': 'Wklej Markdown…',
   'Markdown plakken': 'Wklej Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4953,8 +4962,6 @@ const _dutchSourceAddPl = <String, String>{
       'Punkt końcowy przekierowuje — zwykle błędny region lub adres URL punktu końcowego. Ponawianie tu nie pomoże.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Zapisano lokalnie, ale publikacja w forge nie powiodła się:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Pod tym adresem URL nie ma prezentacji (nie znaleziono). Sprawdź, czy link jest nadal poprawny.',
   'Video kan niet worden geladen': 'Nie można wczytać wideo',
   'Titel boven afbeelding': 'Tytuł nad obrazem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

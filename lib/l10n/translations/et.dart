@@ -32,7 +32,7 @@ const _stringsEt = {
   'newPresentationTab': 'Uus esitlus (vahekaart)',
   'exportPackage': 'Ekspordi pakett…',
   'importPackage': 'Impordi pakett…',
-  'importUrl': 'Impordi URL-ist…',
+  'importUrl': 'Ava URL-i kaudu…',
   'findReplace': 'Otsi ja asenda',
   'fullDeckPreview': 'Vaata kogu esitlust',
   'settingsGeneral': 'Üldine',
@@ -393,9 +393,6 @@ const _dutchSourceEt = {
       'Eelmisest seansist leiti esitlus salvestamata muudatustega:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Sellel esitlusel on salvestamata muudatused. Salvesta esitlus enne kaardi sulgemist.',
-  'Importeren via URL': 'Impordi URL-ist',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Kleebi link .ocideck-paketile või Marp Markdown -failile.',
   'Ophalen': 'Too',
   'Laat los om toe te voegen': 'Vabasta lisamiseks',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -411,8 +408,6 @@ const _dutchSourceEt = {
   'Export mislukt:': 'Eksport ebaõnnestus:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'See slaid ei saa pilti vastu võtta. Vali kõigepealt pildislaid.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Sellest URL-ist ei õnnestunud esitlust tuua.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Lohista slaidi eelvaate laiuse muutmiseks',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1342,8 +1337,6 @@ const _dutchSourceEt = {
       'Fail on kahjustatud või loetamatu.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import keelduti: pakett ületab turvapiiranguid.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Sellelt URL-ilt ei õnnestunud esitlust laadida. Kontrolli URL-i ja ühendust.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Sisselogimine ebaõnnestus — kontrolli kasutajanime ja parooli. Vihje: Nextcloudiga kasuta rakenduse parooli (Seaded → Turvalisus), mitte konto parooli.',
   'Annuleren…': 'Tühistamine…',
@@ -1589,6 +1582,22 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Openen via URL': 'Ava URL-i kaudu',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Kleebi link .md-faili või .ocideck-paketi juurde; .md avaneb esitlusena või dokumendina. Allikas peab lubama teie brauseril faili lugeda.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Sisestage http(s)-aadress koos serveri nimega, nt https://example.org/markmed.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Sellest URL-ist ei õnnestunud faili hankida.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Sellest URL-ist ei õnnestunud faili hankida. Kontrollige URL-i ja ühendust.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Sellel URL-il pole faili (ei leitud). Kontrollige, kas link on endiselt õige.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Fail on suurem kui {limit} piir.',
+  'Geopend.': 'Avatud.',
+  'Deellink kopiëren': 'Kopeeri jagamislink',
+  'Deellink gekopieerd.': 'Jagamislink kopeeritud.',
   'Plak Markdown…': 'Kleebi Markdown…',
   'Markdown plakken': 'Kleebi Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4914,8 +4923,6 @@ const _dutchSourceAddEt = <String, String>{
       'Lõpp-punkt suunab mujale — tavaliselt on vale piirkond või lõpp-punkti URL. Uuesti proovimine siin ei aita.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Salvestatud kohapeal, kuid forge’i avaldamine ebaõnnestus:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Sellel URL-il pole esitlust (ei leitud). Kontrolli, kas link on endiselt õige.',
   'Video kan niet worden geladen': 'Videot ei saa laadida',
   'Titel boven afbeelding': 'Pealkiri pildi kohal',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

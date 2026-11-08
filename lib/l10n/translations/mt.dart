@@ -33,7 +33,7 @@ const _stringsMt = {
   'newPresentationTab': 'Preżentazzjoni ġdida (tab)',
   'exportPackage': 'Esporta pakkett…',
   'importPackage': 'Importa pakkett…',
-  'importUrl': 'Importa minn URL…',
+  'importUrl': 'Iftaħ permezz ta’ URL…',
   'findReplace': 'Sib u ibdel',
   'fullDeckPreview': 'Ara d-deck sħiħ',
   'settingsGeneral': 'Ġenerali',
@@ -397,9 +397,6 @@ const _dutchSourceMt = {
       'Instabet preżentazzjoni b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Din il-preżentazzjoni għandha bidliet mhux maħżuna. Aħżinha qabel ma tagħlaq it-tab.',
-  'Importeren via URL': 'Importa minn URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Waħħal il-link għal pakkett .ocideck jew fajl Markdown ta\' Marp.',
   'Ophalen': 'Ġib',
   'Laat los om toe te voegen': 'Erħi biex iżżid',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -415,8 +412,6 @@ const _dutchSourceMt = {
   'Export mislukt:': 'L-esportazzjoni falliet:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Din is-slide ma tistax tirċievi immaġni. Agħżel l-ewwel slide ta\' immaġni.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Ma stajniex inġibu preżentazzjoni minn dan l-URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Iġbed biex twessa\' jew tidjieq il-preview tas-slide',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1359,8 +1354,6 @@ const _dutchSourceMt = {
       'Il-fajl bil-ħsara jew ma jinqarax.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'L-importazzjoni miċħuda: il-pakkett jaqbeż il-limiti tas-sigurtà.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Ma setgħetx tinġab preżentazzjoni minn dan il-URL. Iċċekkja l-URL u l-konnessjoni.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Il-login falla — iċċekkja l-isem tal-utent u l-password. Suġġeriment: ma\' Nextcloud uża password tal-app (Settings → Sigurtà), mhux dik tal-kont.',
   'Annuleren…': 'Qed jitħassar…',
@@ -1614,6 +1607,22 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Openen via URL': 'Iftaħ permezz ta’ URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Waħħal il-link għal fajl .md jew pakkett .ocideck; .md jinfetaħ bħala preżentazzjoni jew dokument. Is-sors irid jippermetti lill-browser tiegħek jaqra l-fajl.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Daħħal indirizz http(s) b’isem ta’ server, eż. https://example.org/noti.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Ma setax jiġi fetches fajl minn dan l-URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Ma setax jiġi fetches fajl minn dan l-URL. Iċċekkja l-URL u l-konnessioni tiegħek.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'M’hemm l-ebda fajl f’dan l-URL (ma nstabx). Iċċekkja jekk il-link għadu korrett.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Il-fajl huwa akbar mill-limitu ta’ {limit}.',
+  'Geopend.': 'Miftuħ.',
+  'Deellink kopiëren': 'Ikkopja l-link għall-qsim',
+  'Deellink gekopieerd.': 'Il-link għall-qsim ikkopjat.',
   'Plak Markdown…': 'Waħħal Markdown…',
   'Markdown plakken': 'Waħħal Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4986,8 +4995,6 @@ const _dutchSourceAddMt = <String, String>{
       'Il-punt tat-tmiem jidderieġi — ġeneralment reġjun jew URL tal-punt tat-tmiem żbaljati. Li terġa’ tipprova ma jgħinx hawn.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Ġie salvat lokalment, iżda l-pubblikazzjoni fil-forge falliet:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'F’dan il-URL m’hemm l-ebda preżentazzjoni (ma nstabitx). Iċċekkja li l-ħolqa għadha korretta.',
   'Video kan niet worden geladen': 'Il-vidjo ma jistax jitgħabba',
   'Titel boven afbeelding': 'Titlu fuq l-istampa',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

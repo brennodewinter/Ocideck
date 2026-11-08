@@ -32,7 +32,7 @@ const _stringsFy = {
   'newPresentationTab': 'Nije presintaasje (ljepblêd)',
   'exportPackage': 'Pakket eksportearje…',
   'importPackage': 'Pakket ymportearje…',
-  'importUrl': 'Ymportearje fan URL…',
+  'importUrl': 'Iepenje fia URL…',
   'findReplace': 'Sykje en ferfange',
   'fullDeckPreview': 'Hiel deck besjen',
   'settingsGeneral': 'Algemien',
@@ -389,7 +389,6 @@ const _dutchSourceFy = {
   'Herstellen': 'Weromsette',
   'Opslaan en sluiten': 'Bewarje en slute',
   'Niet opslaan': 'Net bewarje',
-  'Importeren via URL': 'Ymportearje fan URL',
   'Ophalen': 'Ophelje',
   'Titelpagina': 'Titelslide',
   'Alleen Bullets': 'Allinnich bullets',
@@ -643,6 +642,22 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Openen via URL': 'Iepenje fia URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Plak de keppeling nei in .md-bestân of in .ocideck-pakket; in .md giet iepen as presintaasje of dokumint. De boarne moat jo browser tastean it bestân te lêzen.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Fier in http(s)-adres mei in tsjinnernamme yn, bygelyks https://example.org/notysjes.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Kin fan dizze URL gjin bestân ophelje.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Kin fan dizze URL gjin bestân ophelje. Kontrolearje de URL en jo ferbining.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Op dizze URL stiet gjin bestân (net fûn). Kontrolearje oft de keppeling noch kloppet.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'It bestân is grutter as de limyt fan {limit}.',
+  'Geopend.': 'Iepene.',
+  'Deellink kopiëren': 'Dielkeppeling kopiearje',
+  'Deellink gekopieerd.': 'Dielkeppeling kopiearre.',
   'Plak Markdown…': 'Markdown plakke…',
   'Markdown plakken': 'Markdown plakke',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -3980,8 +3995,6 @@ const _dutchSourceAddFy = {
       'It einpunt stjoert troch — meastal in ferkearde regio of einpunt-URL. Opnij besykje helpt hjir net.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Lokaal bewarre, mar publisearjen nei de forge is mislearre:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Op dizze URL stiet gjin presintaasje (net fûn). Kontrolearje oft de keppeling noch kloppet.',
   'Video kan niet worden geladen': 'Fideo kin net laden wurde',
   'Titel boven afbeelding': 'Titel boppe ôfbylding',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
@@ -6928,8 +6941,6 @@ const _dutchSourceAddFy = {
   'Kies een map met presentaties om te beginnen.':
       'Kies in map mei presintaasjes om te begjinnen.',
   'Kon dit pakket niet importeren.': 'Koe dit pakket net ymportearje.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Koe fan dizze URL gjin presintaasje ophelje.',
   'Kopieer afbeelding naar klembord': 'Kopiearje ôfbylding nei klamboerd',
   'Kopiëren mislukt.': 'Kopiearjen mislearre.',
   'Kopiëren naar ander deck': 'Kopiearje nei oar deck',
@@ -6959,8 +6970,6 @@ const _dutchSourceAddFy = {
   'Pakket geëxporteerd naar:': 'Pakket eksportearre nei:',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Pas dyn sykterm oan of foegje in beskriuwing ta.',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Plak de keppeling nei in .ocideck-pakket of in Marp-markdownbestân.',
   'Preview inklappen': 'Foarbyld ynklappe',
   'Preview uitklappen': 'Foarbyld útklappe',
   'Profiel verwijderen': 'Profyl fuortsmite',
@@ -7251,8 +7260,6 @@ const _dutchSourceAddFy = {
       'It bestân is skansearre of net te lêzen.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Ymport wegere: it pakket giet oer de feilichheidslimiten hinne.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Koe fan dizze URL gjin presintaasje ophelje. Kontrolearje de URL en jo ferbining.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Oanmelden mislearre — kontrolearje brûkersnamme en wachtwurd. Tip: brûk by Nextcloud in app-wachtwurd (Ynstellingen → Feilichheid), net jo accountwachtwurd.',
   'Annuleren…': 'Annulearje…',

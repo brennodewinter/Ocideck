@@ -13,6 +13,7 @@ import 'package:path/path.dart' as p;
 import 'dialogs/browser_storage_dialog.dart';
 import 'dialogs/paste_markdown_dialog.dart';
 import '../l10n/export_block_localization.dart';
+import '../platform/deep_link_cleanup.dart';
 import '../platform/launch_files.dart';
 import '../platform/native_shortcut_channel.dart';
 import '../platform/native_window.dart'
@@ -345,7 +346,14 @@ class _AppShellState extends ConsumerState<AppShell> {
     if (!isWebPlatform || !mounted) return;
     final deckUrl = deckDeepLinkFrom(Uri.base);
     if (deckUrl == null) return;
-    await _importUrlWeb(context, ref, deckUrl);
+    final result = await _importUrlWeb(context, ref, deckUrl);
+    // Besluit (#2826): bij een geopend deck wissen we `?deck=` uit de
+    // adresbalk — anders haalt elke herlading het bestand opnieuw binnen
+    // als extra tabblad. Bij een míslukte open blijft hij bewust staan:
+    // dan is herladen om opnieuw te proberen juist het nuttige gedrag.
+    if (result == OpenResult.opened) {
+      replaceAddressBar(withoutDeckParam(Uri.base));
+    }
   }
 
   /// Bij opstart: zijn er herstelbestanden van een vorige (gecrashte) sessie?

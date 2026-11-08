@@ -92,31 +92,32 @@ void main() {
     expect(find.byType(AlertDialog), findsOneWidget);
   });
 
-  testWidgets('annuleren met tekst vraagt bevestiging; weigeren houdt hem open', (
-    tester,
-  ) async {
-    await openDialog(tester);
-    await tester.enterText(find.byType(TextField), 'werk');
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Annuleren'));
-    await tester.pumpAndSettle();
-    expect(find.text('Geplakte tekst verwerpen?'), findsOneWidget);
-    // "Annuleren" in de bevestiging = terug naar de tekst. Twee dialogen
-    // dragen die knop: neem die van de bevestiging.
-    await tester.tap(find.text('Annuleren').last);
-    await tester.pumpAndSettle();
-    expect(find.text('Geplakte tekst verwerpen?'), findsNothing);
-    expect(
-      tester.widget<TextField>(find.byType(TextField)).controller!.text,
-      'werk',
-    );
-    // "Verwerpen" gooit de tekst weg en sluit.
-    await tester.tap(find.text('Annuleren').first);
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Verwerpen'));
-    await tester.pumpAndSettle();
-    expect(find.byType(AlertDialog), findsNothing);
-  });
+  testWidgets(
+    'annuleren met tekst vraagt bevestiging; weigeren houdt hem open',
+    (tester) async {
+      await openDialog(tester);
+      await tester.enterText(find.byType(TextField), 'werk');
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Annuleren'));
+      await tester.pumpAndSettle();
+      expect(find.text('Geplakte tekst verwerpen?'), findsOneWidget);
+      // "Annuleren" in de bevestiging = terug naar de tekst. Twee dialogen
+      // dragen die knop: neem die van de bevestiging.
+      await tester.tap(find.text('Annuleren').last);
+      await tester.pumpAndSettle();
+      expect(find.text('Geplakte tekst verwerpen?'), findsNothing);
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        'werk',
+      );
+      // "Verwerpen" gooit de tekst weg en sluit.
+      await tester.tap(find.text('Annuleren').first);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Verwerpen'));
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+    },
+  );
 
   testWidgets('annuleren met een leeg veld sluit meteen', (tester) async {
     await openDialog(tester);

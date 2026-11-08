@@ -177,11 +177,32 @@ see the [release downloads](https://pawprint.vigilis.online/LibreKAT/Ocideck/rel
   [Importing presentations](#importing-presentations-powerpoint-keynote-impress)
   for what does and does not survive that conversion. It lives behind the
   optional *Importeren* module, so you will not see it until you switch that on.
-- **Opened from a URL**: a deck fetched from a web address (the URL import, or a
-  `?deck=…` share link on the web build) shows an **“Extern”** privacy badge in
-  the status bar. Opening such a link made your device contact that server;
-  hover the badge to see the source host. Decks you open from your own disk carry
-  no badge.
+- **Open via URL**: choose **Open via URL…** — on the welcome screen, behind
+  *Importeren…* in the `…` menu, or via the command palette — and paste the link
+  to an `.md` file (opens as a presentation or a document) or an `.ocideck`
+  package. The browser may only read the file if the server allows it (CORS);
+  when it refuses, OciDeck offers to pass the address to its own fetch helper —
+  only after your explicit consent, because that website then sees the full
+  address. A deck fetched from a web address (the URL import, or a `?deck=…`
+  share link on the web build) shows an **“Extern”** privacy badge in the status
+  bar; hover the badge to see the source host. Decks you open from your own disk
+  carry no badge.
+- **Share link (`?deck=…`)**: on the web build you can make a link that opens
+  OciDeck *and* a presentation at once: `https://<host>/?deck=<url>`. The source
+  URL must be **URL-encoded**, especially when it carries its own query
+  (`?a=1&b=2`) or a `#` fragment — otherwise those characters cut the share link
+  short. Encode it with `encodeURIComponent()` in JavaScript or an online
+  encoder:
+
+  ```
+  https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fnotes.md
+  https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fsearch%3Fq%3Dcat%26n%3D5%23section
+  ```
+
+  After a successfully opened URL, OciDeck offers **Copy share link**, which puts
+  the correctly encoded link on your clipboard. Once the deck opens, `?deck=`
+  disappears from the address bar — otherwise a reload would fetch the file
+  again as an extra tab. *(Added 2026-11-08, #2826.)*
 - **Paste Markdown**: if your text lives in another app (a wiki, chat or AI
   assistant), you don't have to save it as an `.md` file first. Choose
   **Paste Markdown…** — on the welcome screen, behind *Importeren…* in the `…`

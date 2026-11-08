@@ -32,7 +32,7 @@ const _stringsHu = {
   'newPresentationTab': 'Új bemutató (lap)',
   'exportPackage': 'Csomag exportálása…',
   'importPackage': 'Csomag importálása…',
-  'importUrl': 'Importálás URL-ből…',
+  'importUrl': 'Megnyitás URL-ből…',
   'findReplace': 'Keresés és csere',
   'fullDeckPreview': 'Teljes diasor megtekintése',
   'settingsGeneral': 'Általános',
@@ -395,9 +395,6 @@ const _dutchSourceHu = {
       'Egy előző munkamenetből nem mentett módosításokat tartalmazó prezentáció található:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ez a prezentáció nem mentett módosításokat tartalmaz. Mentse, mielőtt bezárja a lapot.',
-  'Importeren via URL': 'Importálás URL-ből',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Illessze be egy .ocideck csomag vagy egy Marp Markdown-fájl hivatkozását.',
   'Ophalen': 'Lekérés',
   'Laat los om toe te voegen': 'Engedje el a hozzáadáshoz',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -413,8 +410,6 @@ const _dutchSourceHu = {
   'Export mislukt:': 'Az exportálás sikertelen:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Ez a dia nem fogadhat képet. Először válasszon egy képdiát.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Nem sikerült prezentációt lekérni erről az URL-ről.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Húzza a diaelőnézet szélesebbre vagy keskenyebbre',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1349,8 +1344,6 @@ const _dutchSourceHu = {
       'A fájl sérült vagy olvashatatlan.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Az importálás elutasítva: a csomag túllépi a biztonsági korlátokat.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Erről az URL-ről nem sikerült prezentációt letölteni. Ellenőrizd az URL-t és a kapcsolatot.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'A bejelentkezés nem sikerült — ellenőrizd a felhasználónevet és a jelszót. Tipp: Nextcloudnál alkalmazásjelszót használj (Beállítások → Biztonság), ne a fiókjelszavadat.',
   'Annuleren…': 'Megszakítás…',
@@ -1598,6 +1591,22 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Openen via URL': 'Megnyitás URL-ből',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Illessze be az .md fájlra vagy .ocideck csomagra mutató hivatkozást; az .md prezentációként vagy dokumentumként nyílik meg. A forrásnak engednie kell, hogy a böngésző beolvassa a fájlt.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Adjon meg egy http(s)-címet kiszolgálónévvel, pl. https://example.org/jegyzetek.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Nem sikerült fájlt letölteni erről az URL-ről.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Nem sikerült fájlt letölteni erről az URL-ről. Ellenőrizze az URL-t és a kapcsolatot.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Ezen az URL-en nincs fájl (nem található). Ellenőrizze, hogy a link még helyes-e.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'A fájl nagyobb, mint a(z) {limit} korlát.',
+  'Geopend.': 'Megnyitva.',
+  'Deellink kopiëren': 'Megosztási link másolása',
+  'Deellink gekopieerd.': 'Megosztási link másolva.',
   'Plak Markdown…': 'Markdown beillesztése…',
   'Markdown plakken': 'Markdown beillesztése',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4941,8 +4950,6 @@ const _dutchSourceAddHu = <String, String>{
       'A végpont átirányít — általában rossz régió vagy végpont-URL miatt. Az újrapróbálkozás itt nem segít.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Helyileg mentve, de a közzététel a forge-ba nem sikerült:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Ezen az URL-en nincs prezentáció (nem található). Ellenőrizd, hogy a hivatkozás még helyes-e.',
   'Video kan niet worden geladen': 'A videó nem tölthető be',
   'Titel boven afbeelding': 'Cím a kép felett',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

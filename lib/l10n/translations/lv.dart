@@ -32,7 +32,7 @@ const _stringsLv = {
   'newPresentationTab': 'Jauna prezentācija (cilne)',
   'exportPackage': 'Eksportēt paketi…',
   'importPackage': 'Importēt paketi…',
-  'importUrl': 'Importēt no URL…',
+  'importUrl': 'Atvērt no URL…',
   'findReplace': 'Meklēt un aizstāt',
   'fullDeckPreview': 'Skatīt visu deku',
   'settingsGeneral': 'Vispārīgi',
@@ -393,9 +393,6 @@ const _dutchSourceLv = {
       'No iepriekšējās sesijas atrasta prezentācija ar nesaglabātām izmaiņām:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Šai prezentācijai ir nesaglabātas izmaiņas. Saglabājiet to pirms cilnes aizvēršanas.',
-  'Importeren via URL': 'Importēt no URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Ielīmējiet saiti uz .ocideck pakotni vai Marp Markdown failu.',
   'Ophalen': 'Ielādēt',
   'Laat los om toe te voegen': 'Atlaidiet, lai pievienotu',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -411,8 +408,6 @@ const _dutchSourceLv = {
   'Export mislukt:': 'Eksportēšana neizdevās:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Šis slaids nevar saņemt attēlu. Vispirms izvēlieties attēla slaidu.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'No šī URL neizdevās ielādēt prezentāciju.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Velciet, lai padarītu slaida priekšskatījumu platāku vai šaurāku',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1344,8 +1339,6 @@ const _dutchSourceLv = {
   'Het bestand is beschadigd of onleesbaar.': 'Fails ir bojāts vai nenolasāms.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Imports noraidīts: pakotne pārsniedz drošības limitus.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'No šī URL neizdevās iegūt prezentāciju. Pārbaudiet URL un savienojumu.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Pieteikšanās neizdevās — pārbaudiet lietotājvārdu un paroli. Padoms: ar Nextcloud izmantojiet lietotnes paroli (Iestatījumi → Drošība), nevis konta paroli.',
   'Annuleren…': 'Atceļ…',
@@ -1593,6 +1586,21 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Openen via URL': 'Atvērt no URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Ielīmējiet saiti uz .md failu vai .ocideck pakotni; .md atveras kā prezentācija vai dokuments. Avotam ir jāļauj jūsu pārlūkam lasīt failu.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Ievadiet http(s) adresi ar servera nosaukumu, piem. https://example.org/piezimes.md',
+  'Kon van deze URL geen bestand ophalen.': 'No šī URL neizdevās iegūt failu.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'No šī URL neizdevās iegūt failu. Pārbaudiet URL un savienojumu.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Šajā URL nav faila (nav atrasts). Pārbaudiet, vai saite vēl ir pareiza.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Fails ir lielāks par ierobežojumu {limit}.',
+  'Geopend.': 'Atvērts.',
+  'Deellink kopiëren': 'Kopēt koplietošanas saiti',
+  'Deellink gekopieerd.': 'Koplietošanas saite nokopēta.',
   'Plak Markdown…': 'Ielīmēt Markdown…',
   'Markdown plakken': 'Ielīmēt Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4918,8 +4926,6 @@ const _dutchSourceAddLv = <String, String>{
       'Galapunkts novirza — parasti nepareizs reģions vai galapunkta URL. Atkārtošana šeit nepalīdzēs.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Saglabāts lokāli, taču publicēšana forge neizdevās:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Šajā URL nav prezentācijas (nav atrasta). Pārbaudiet, vai saite joprojām ir pareiza.',
   'Video kan niet worden geladen': 'Video nevar ielādēt',
   'Titel boven afbeelding': 'Virsraksts virs attēla',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

@@ -32,7 +32,7 @@ const _stringsSl = {
   'newPresentationTab': 'Nova predstavitev (zavihek)',
   'exportPackage': 'Izvozi paket …',
   'importPackage': 'Uvozi paket …',
-  'importUrl': 'Uvozi prek URL …',
+  'importUrl': 'Odpri prek URL…',
   'findReplace': 'Poišči in zamenjaj',
   'fullDeckPreview': 'Ogled celotne predstavitve',
   'settingsGeneral': 'Splošno',
@@ -394,9 +394,6 @@ const _dutchSourceSl = {
       'Najdena je bila predstavitev z neshranjenimi spremembami iz prejšnje seje:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ta predstavitev ima neshranjene spremembe. Shranite jo pred zaprtjem zavihka.',
-  'Importeren via URL': 'Uvoz iz URL-ja',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Prilepite povezavo do paketa .ocideck ali datoteke Marp Markdown.',
   'Ophalen': 'Pridobi',
   'Laat los om toe te voegen': 'Spustite za dodajanje',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -412,8 +409,6 @@ const _dutchSourceSl = {
   'Export mislukt:': 'Izvoz ni uspel:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Ta diapozitiv ne more prejeti slike. Najprej izberite diapozitiv s sliko.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'S tega URL-ja ni bilo mogoče pridobiti predstavitve.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Povlecite, da predogled diapozitiva razširite ali zožite',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1347,8 +1342,6 @@ const _dutchSourceSl = {
       'Datoteka je poškodovana ali neberljiva.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Uvoz zavrnjen: paket presega varnostne omejitve.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'S tega URL-ja ni bilo mogoče pridobiti predstavitve. Preverite URL in povezavo.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prijava ni uspela — preverite uporabniško ime in geslo. Namig: pri Nextcloudu uporabite geslo aplikacije (Nastavitve → Varnost), ne gesla računa.',
   'Annuleren…': 'Preklicevanje…',
@@ -1596,6 +1589,22 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Openen via URL': 'Odpri prek URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Prilepite povezavo do datoteke .md ali paketa .ocideck; .md se odpre kot predstavitev ali dokument. Vir mora vašemu brskalniku dovoliti branje datoteke.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Vnesite naslov http(s) z imenom strežnika, npr. https://example.org/zapiski.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'S tega URL-ja ni bilo mogoče pridobiti datoteke.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'S tega URL-ja ni bilo mogoče pridobiti datoteke. Preverite URL in povezavo.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Na tem URL-ju ni datoteke (ni najdeno). Preverite, ali je povezava še pravilna.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Datoteka je večja od omejitve {limit}.',
+  'Geopend.': 'Odprto.',
+  'Deellink kopiëren': 'Kopiraj povezavo za deljenje',
+  'Deellink gekopieerd.': 'Povezava za deljenje kopirana.',
   'Plak Markdown…': 'Prilepi Markdown…',
   'Markdown plakken': 'Prilepi Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4923,8 +4932,6 @@ const _dutchSourceAddSl = <String, String>{
       'Končna točka preusmerja — običajno napačna regija ali URL končne točke. Ponovni poskus tukaj ne pomaga.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Shranjeno lokalno, vendar objava v forge ni uspela:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Na tem URL-ju ni predstavitve (ni najdena). Preveri, ali je povezava še pravilna.',
   'Video kan niet worden geladen': 'Videa ni mogoče naložiti',
   'Titel boven afbeelding': 'Naslov nad sliko',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

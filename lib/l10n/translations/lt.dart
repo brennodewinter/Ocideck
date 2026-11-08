@@ -32,7 +32,7 @@ const _stringsLt = {
   'newPresentationTab': 'Nauja prezentacija (skirtukas)',
   'exportPackage': 'Eksportuoti paketą…',
   'importPackage': 'Importuoti paketą…',
-  'importUrl': 'Importuoti iš URL…',
+  'importUrl': 'Atidaryti per URL…',
   'findReplace': 'Rasti ir pakeisti',
   'fullDeckPreview': 'Peržiūrėti visą rinkinį',
   'settingsGeneral': 'Bendra',
@@ -394,9 +394,6 @@ const _dutchSourceLt = {
       'Rasta ankstesnės sesijos pateiktis su neišsaugotais pakeitimais:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ši pateiktis turi neišsaugotų pakeitimų. Išsaugokite ją prieš uždarydami skirtuką.',
-  'Importeren via URL': 'Importuoti iš URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Įklijuokite nuorodą į .ocideck paketą arba Marp Markdown failą.',
   'Ophalen': 'Gauti',
   'Laat los om toe te voegen': 'Paleiskite, kad pridėtumėte',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -412,8 +409,6 @@ const _dutchSourceLt = {
   'Export mislukt:': 'Eksportuoti nepavyko:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Ši skaidrė negali priimti paveikslėlio. Pirmiausia pasirinkite paveikslėlio skaidrę.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Nepavyko gauti pateikties iš šio URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Vilkite, kad skaidrės peržiūra būtų platesnė arba siauresnė',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1352,8 +1347,6 @@ const _dutchSourceLt = {
       'Failas sugadintas arba neperskaitomas.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Importas atmestas: paketas viršija saugumo ribas.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Iš šio URL nepavyko gauti pristatymo. Patikrinkite URL ir ryšį.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prisijungti nepavyko — patikrinkite naudotojo vardą ir slaptažodį. Patarimas: su Nextcloud naudokite programėlės slaptažodį (Nustatymai → Sauga), o ne paskyros.',
   'Annuleren…': 'Atšaukiama…',
@@ -1602,6 +1595,21 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Openen via URL': 'Atidaryti per URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Įklijuokite nuorodą į .md failą arba .ocideck paketą; .md atidaromas kaip pristatymas arba dokumentas. Šaltinis turi leisti jūsų naršyklei skaityti failą.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Įveskite http(s) adresą su serverio pavadinimu, pvz. https://example.org/uzrasai.md',
+  'Kon van deze URL geen bestand ophalen.': 'Iš šio URL nepavyko gauti failo.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Iš šio URL nepavyko gauti failo. Patikrinkite URL ir ryšį.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Šiuo URL nėra failo (nerasta). Patikrinkite, ar nuoroda vis dar teisinga.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Failas didesnis nei {limit} riba.',
+  'Geopend.': 'Atidaryta.',
+  'Deellink kopiëren': 'Kopijuoti bendrinimo nuorodą',
+  'Deellink gekopieerd.': 'Bendrinimo nuoroda nukopijuota.',
   'Plak Markdown…': 'Įklijuoti Markdown…',
   'Markdown plakken': 'Įklijuoti Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4928,8 +4936,6 @@ const _dutchSourceAddLt = <String, String>{
       'Galinis taškas nukreipia — dažniausiai netinkamas regionas arba galinio taško URL. Kartojimas čia nepadeda.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Įrašyta vietoje, bet paskelbti į forge nepavyko:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Šiuo URL nėra pristatymo (nerasta). Patikrinkite, ar nuoroda vis dar teisinga.',
   'Video kan niet worden geladen': 'Nepavyksta įkelti vaizdo įrašo',
   'Titel boven afbeelding': 'Antraštė virš paveikslėlio',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

@@ -33,7 +33,7 @@ const _stringsPt = {
   'newPresentationTab': 'Nova apresentação (separador)',
   'exportPackage': 'Exportar pacote…',
   'importPackage': 'Importar pacote…',
-  'importUrl': 'Importar por URL…',
+  'importUrl': 'Abrir via URL…',
   'findReplace': 'Localizar e substituir',
   'fullDeckPreview': 'Ver deck completo',
   'settingsGeneral': 'Geral',
@@ -400,9 +400,6 @@ const _dutchSourcePt = {
       'Foi encontrada uma apresentação com alterações não guardadas de uma sessão anterior:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Esta apresentação tem alterações não guardadas. Guarde-a antes de fechar o separador.',
-  'Importeren via URL': 'Importar a partir de URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Cole o link para um pacote .ocideck ou um ficheiro Markdown do Marp.',
   'Ophalen': 'Obter',
   'Laat los om toe te voegen': 'Solte para adicionar',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -418,8 +415,6 @@ const _dutchSourcePt = {
   'Export mislukt:': 'Falha na exportação:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Este slide não pode receber uma imagem. Escolha primeiro um slide de imagem.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Não foi possível obter uma apresentação a partir deste URL.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Arraste para tornar a pré-visualização do slide mais larga ou mais estreita',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1370,8 +1365,6 @@ const _dutchSourcePt = {
       'O ficheiro está danificado ou ilegível.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Importação recusada: o pacote excede os limites de segurança.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Não foi possível obter uma apresentação deste URL. Verifique o URL e a ligação.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Falha ao iniciar sessão — verifique o utilizador e a palavra-passe. Dica: com o Nextcloud use uma palavra-passe de aplicação (Definições → Segurança), não a da conta.',
   'Annuleren…': 'A cancelar…',
@@ -1624,6 +1617,22 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Openen via URL': 'Abrir via URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Cole a ligação para um ficheiro .md ou um pacote .ocideck; um .md abre como apresentação ou documento. A origem tem de permitir que o navegador leia o ficheiro.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Introduza um endereço http(s) com um nome de servidor, p. ex. https://example.org/notas.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Não foi possível obter um ficheiro deste URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Não foi possível obter um ficheiro deste URL. Verifique o URL e a sua ligação.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Não existe ficheiro neste URL (não encontrado). Verifique se a ligação ainda está correta.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'O ficheiro é maior do que o limite de {limit}.',
+  'Geopend.': 'Aberto.',
+  'Deellink kopiëren': 'Copiar ligação de partilha',
+  'Deellink gekopieerd.': 'Ligação de partilha copiada.',
   'Plak Markdown…': 'Colar Markdown…',
   'Markdown plakken': 'Colar Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4983,8 +4992,6 @@ const _dutchSourceAddPt = <String, String>{
       'O ponto de extremidade redireciona — normalmente uma região ou um URL do ponto de extremidade errados. Tentar de novo não ajuda aqui.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Guardado localmente, mas a publicação na forge falhou:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Não há nenhuma apresentação neste URL (não encontrada). Verifica se a ligação ainda está correta.',
   'Video kan niet worden geladen': 'Não é possível carregar o vídeo',
   'Titel boven afbeelding': 'Título acima da imagem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':

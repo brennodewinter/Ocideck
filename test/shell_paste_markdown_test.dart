@@ -84,7 +84,7 @@ void main() {
   ) async {
     await pumpApp(tester);
     expect(find.text('Plak Markdown…'), findsOneWidget);
-    expect(find.text('Importeren via URL…'), findsOneWidget);
+    expect(find.text('Openen via URL…'), findsOneWidget);
   });
 
   testWidgets('de bronkiezer achter Importeren… voert hem ook', (tester) async {

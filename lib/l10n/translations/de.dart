@@ -32,7 +32,7 @@ const _stringsDe = {
   'newPresentationTab': 'Neue Präsentation (Tab)',
   'exportPackage': 'Paket exportieren…',
   'importPackage': 'Paket importieren…',
-  'importUrl': 'Von URL importieren…',
+  'importUrl': 'Über URL öffnen…',
   'findReplace': 'Suchen und ersetzen',
   'fullDeckPreview': 'Ganzes Deck anzeigen',
   'settingsGeneral': 'Allgemein',
@@ -395,7 +395,6 @@ const _dutchSourceDe = {
   'Herstellen': 'Wiederherstellen',
   'Opslaan en sluiten': 'Speichern und schließen',
   'Niet opslaan': 'Nicht speichern',
-  'Importeren via URL': 'Von URL importieren',
   'Ophalen': 'Abrufen',
   'Titelpagina': 'Titelfolie',
   'Alleen Bullets': 'Nur Stichpunkte',
@@ -643,6 +642,22 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Openen via URL': 'Über URL öffnen',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Fügen Sie den Link zu einer .md-Datei oder einem .ocideck-Paket ein; eine .md öffnet als Präsentation oder Dokument. Die Quelle muss Ihrem Browser erlauben, die Datei zu lesen.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Geben Sie eine http(s)-Adresse mit einem Servernamen ein, z. B. https://example.org/notizen.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Von dieser URL konnte keine Datei abgerufen werden.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Von dieser URL konnte keine Datei abgerufen werden. Prüfen Sie die URL und Ihre Verbindung.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Unter dieser URL befindet sich keine Datei (nicht gefunden). Prüfen Sie, ob der Link noch stimmt.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Die Datei ist größer als das Limit von {limit}.',
+  'Geopend.': 'Geöffnet.',
+  'Deellink kopiëren': 'Teile-Link kopieren',
+  'Deellink gekopieerd.': 'Teile-Link kopiert.',
   'Plak Markdown…': 'Markdown einfügen…',
   'Markdown plakken': 'Markdown einfügen',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4020,8 +4035,6 @@ const _dutchSourceAddDe = {
       'Der Endpunkt leitet um — meist eine falsche Region oder Endpunkt-URL. Erneutes Versuchen hilft hier nicht.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Lokal gespeichert, aber das Veröffentlichen auf der Forge ist fehlgeschlagen:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Unter dieser URL gibt es keine Präsentation (nicht gefunden). Prüfe, ob der Link noch stimmt.',
   'Video kan niet worden geladen': 'Video kann nicht geladen werden',
   'Titel boven afbeelding': 'Titel über dem Bild',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
@@ -7003,8 +7016,6 @@ const _dutchSourceAddDe = {
       'Wählen Sie einen Ordner mit Präsentationen, um zu beginnen.',
   'Kon dit pakket niet importeren.':
       'Dieses Paket konnte nicht importiert werden.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Von dieser URL konnte keine Präsentation abgerufen werden.',
   'Kopieer afbeelding naar klembord': 'Bild in die Zwischenablage kopieren',
   'Kopiëren mislukt.': 'Kopieren fehlgeschlagen.',
   'Kopiëren naar ander deck': 'In anderes Deck kopieren',
@@ -7036,8 +7047,6 @@ const _dutchSourceAddDe = {
   'Pakket geëxporteerd naar:': 'Paket exportiert nach:',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Passen Sie Ihren Suchbegriff an oder fügen Sie eine Beschreibung hinzu.',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Fügen Sie den Link zu einem .ocideck-Paket oder einer Marp-Markdown-Datei ein.',
   'Preview inklappen': 'Vorschau einklappen',
   'Preview uitklappen': 'Vorschau ausklappen',
   'Profiel verwijderen': 'Profil löschen',
@@ -7327,8 +7336,6 @@ const _dutchSourceAddDe = {
       'Die Datei ist beschädigt oder unlesbar.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import verweigert: das Paket überschreitet die Sicherheitslimits.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Von dieser URL konnte keine Präsentation geholt werden. Prüfe die URL und deine Verbindung.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Anmeldung fehlgeschlagen — prüfe Benutzername und Passwort. Tipp: verwende bei Nextcloud ein App-Passwort (Einstellungen → Sicherheit), nicht dein Kontopasswort.',
   'Annuleren…': 'Abbrechen…',

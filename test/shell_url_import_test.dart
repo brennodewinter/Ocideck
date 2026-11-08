@@ -86,10 +86,10 @@ void main() {
     await pumpShell(tester);
     await tester.tap(appBarIcon(Icons.more_vert));
     await tester.pumpAndSettle();
-    // ⋮ → "Importeren…" → bronkiezer → "Importeren via URL…" (#2359).
+    // ⋮ → "Importeren…" → bronkiezer → "Openen via URL…" (#2359).
     await tester.tap(menuItemIcon(Icons.file_upload_outlined));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Importeren via URL…'));
+    await tester.tap(find.text('Openen via URL…'));
     await tester.pumpAndSettle();
   }
 
@@ -118,7 +118,7 @@ void main() {
   ) async {
     await openUrlDialog(tester);
 
-    expect(find.text('Importeren via URL'), findsOneWidget);
+    expect(find.text('Openen via URL'), findsOneWidget);
     expect(
       fetchEnabled(tester),
       isFalse,
@@ -165,7 +165,7 @@ void main() {
     await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Importeren via URL'), findsNothing);
+    expect(find.text('Openen via URL'), findsNothing);
     expect(find.byType(SnackBar), findsNothing);
     expect(container.read(tabsProvider).tabs, hasLength(1));
   });
@@ -177,7 +177,7 @@ void main() {
     await type(tester, 'zomaar wat tekst');
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
-    expect(find.text('Importeren via URL'), findsOneWidget);
+    expect(find.text('Openen via URL'), findsOneWidget);
   });
 
   testWidgets('een URL die niets oplevert eindigt in een melding, niet in '

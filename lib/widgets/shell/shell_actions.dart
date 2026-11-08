@@ -354,7 +354,32 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
     // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
     // en het deck wordt volledig in het geheugen geopend — het dart:io-
     // downloadpad hieronder bestaat op web niet.
-    return _importUrlWeb(context, ref, url);
+    final result = await _importUrlWeb(context, ref, url);
+    // Na een geslaagde open is de `?deck=`-deellink dé manier om de
+    // presentatie door te sturen — bieden we meteen aan (#2826).
+    if (result == OpenResult.opened && context.mounted) {
+      final messenger = ScaffoldMessenger.of(context);
+      final l10n = context.l10n;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(l10n.d('Geopend.')),
+          action: SnackBarAction(
+            label: l10n.d('Deellink kopiëren'),
+            onPressed: () async {
+              await Clipboard.setData(
+                ClipboardData(text: deckShareLink(Uri.base, url)),
+              );
+              if (context.mounted) {
+                messenger.showSnackBar(
+                  SnackBar(content: Text(l10n.d('Deellink gekopieerd.'))),
+                );
+              }
+            },
+          ),
+        ),
+      );
+    }
+    return;
   }
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
@@ -413,8 +438,9 @@ Future<void> _openPastedMarkdown(BuildContext context, WidgetRef ref) async {
 /// Web-kern van de URL-import: ophalen (met hulppunt-terugval), dezelfde
 /// security-gate, en de juiste melding. Gedeeld door de importdialoog en de
 /// `?deck=`-deeplink waarmee een link OciDeck én een presentatie tegelijk
-/// opent.
-Future<void> _importUrlWeb(
+/// opent. Geeft het [OpenResult] terug zodat de aanroeper er op kan
+/// reageren (de deellink wist zijn parameter, de dialoog biedt hem aan).
+Future<OpenResult> _importUrlWeb(
   BuildContext context,
   WidgetRef ref,
   String url,
@@ -435,12 +461,12 @@ Future<void> _importUrlWeb(
   }
   if (result == OpenResult.notAPresentation) {
     _reportOpenFailure(messenger, l10n, result);
-    return;
+    return result;
   }
   if (result == OpenResult.opened ||
       result == OpenResult.blocked ||
       result == OpenResult.passwordCancelled) {
-    return;
+    return result;
   }
   // Een concrete ophaalreden (te groot, 404, geen http(s)-link, geweigerde
   // host, omleiding) is specifieker dan CORS: toon díe. Alleen de ondoorzichtige
@@ -450,27 +476,32 @@ Future<void> _importUrlWeb(
     showErrorSnackBar(
       messenger,
       l10n,
-      importFailureMessage(l10n, fetchFailure),
+      importFailureMessage(
+        l10n,
+        fetchFailure,
+        limitBytes: FileService.maxPackageBytes,
+      ),
     );
-    return;
+    return result;
   }
   // Ophalen slaagde maar het openen niet (beschadigd deck, vol mediabudget):
   // openDeckFromBytes legde de reden vast, en die is specifieker dan CORS.
   final reason = ref.read(openFailureProvider);
   if (reason != null) {
     _reportOpenFailure(messenger, l10n, result, reason: reason);
-    return;
+    return result;
   }
   // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
   // browser mag alleen lezen van servers die dat expliciet toestaan.
   messenger.showSnackBar(
     SnackBar(
       content: Text(
-        '${l10n.d('Kon van deze URL geen presentatie ophalen.')}\n'
+        '${l10n.d('Kon van deze URL geen bestand ophalen.')}\n'
         '${l10n.d('Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).')}',
       ),
     ),
   );
+  return result;
 }
 
 /// Kies een deck uit de git-repository, haal het op, door de security-gate en
@@ -735,7 +766,7 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AlertDialog(
-      title: Text(l10n.d('Importeren via URL')),
+      title: Text(l10n.d('Openen via URL')),
       content: SizedBox(
         width: 460,
         child: Column(
@@ -744,7 +775,7 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
           children: [
             Text(
               l10n.d(
-                'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.',
+                'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate500),
             ),
@@ -763,6 +794,21 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
                 if (_isFetchable) Navigator.pop(context, v);
               },
             ),
+            // AC3 (#2826): de knop blijft niet alleen uit — de dialoog zegt
+            // ook waarom, zodra er iets ingetikt is dat geen ophaalbaar
+            // adres is. Een leeg veld blijft stil.
+            if (_controller.text.trim().isNotEmpty && !_isFetchable) ...[
+              const SizedBox(height: 8),
+              Text(
+                l10n.d(
+                  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md',
+                ),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+            ],
           ],
         ),
       ),

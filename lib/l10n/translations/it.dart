@@ -32,7 +32,7 @@ const _stringsIt = {
   'newPresentationTab': 'Nuova presentazione (scheda)',
   'exportPackage': 'Esporta pacchetto…',
   'importPackage': 'Importa pacchetto…',
-  'importUrl': 'Importa da URL…',
+  'importUrl': 'Apri tramite URL…',
   'findReplace': 'Trova e sostituisci',
   'fullDeckPreview': 'Visualizza deck completo',
   'settingsGeneral': 'Generale',
@@ -391,7 +391,6 @@ const _dutchSourceIt = {
   'Herstellen': 'Ripristina',
   'Opslaan en sluiten': 'Salva e chiudi',
   'Niet opslaan': 'Non salvare',
-  'Importeren via URL': 'Importa da URL',
   'Ophalen': 'Recupera',
   'Titelpagina': 'Slide titolo',
   'Alleen Bullets': 'Solo punti elenco',
@@ -641,6 +640,22 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Openen via URL': 'Apri tramite URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Incolla il link a un file .md o a un pacchetto .ocideck; un .md si apre come presentazione o documento. La fonte deve consentire al browser di leggere il file.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Inserisci un indirizzo http(s) con un nome host, ad es. https://example.org/note.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Impossibile recuperare un file da questo URL.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Impossibile recuperare un file da questo URL. Controlla l’URL e la tua connessione.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Nessun file a questo URL (non trovato). Verifica che il link sia ancora corretto.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Il file supera il limite di {limit}.',
+  'Geopend.': 'Aperto.',
+  'Deellink kopiëren': 'Copia link di condivisione',
+  'Deellink gekopieerd.': 'Link di condivisione copiato.',
   'Plak Markdown…': 'Incolla Markdown…',
   'Markdown plakken': 'Incolla Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4018,8 +4033,6 @@ const _dutchSourceAddIt = {
       'L’endpoint reindirizza — di solito una regione o un URL dell’endpoint errati. Qui riprovare non serve.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Salvato localmente, ma la pubblicazione sulla forge non è riuscita:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Non c’è alcuna presentazione a questo URL (non trovata). Controlla che il collegamento sia ancora corretto.',
   'Video kan niet worden geladen': 'Impossibile caricare il video',
   'Titel boven afbeelding': 'Titolo sopra l\'immagine',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
@@ -7017,8 +7030,6 @@ const _dutchSourceAddIt = {
   'Kies een map met presentaties om te beginnen.':
       'Scegli una cartella con presentazioni per iniziare.',
   'Kon dit pakket niet importeren.': 'Impossibile importare questo pacchetto.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Impossibile recuperare una presentazione da questo URL.',
   'Kopieer afbeelding naar klembord': 'Copia immagine negli appunti',
   'Kopiëren mislukt.': 'Copia non riuscita.',
   'Kopiëren naar ander deck': 'Copia in un altro deck',
@@ -7049,8 +7060,6 @@ const _dutchSourceAddIt = {
   'Pakket geëxporteerd naar:': 'Pacchetto esportato in:',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Modifica il termine di ricerca o aggiungi una descrizione.',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Incolla il link a un pacchetto .ocideck o a un file Markdown Marp.',
   'Preview inklappen': 'Comprimi anteprima',
   'Preview uitklappen': 'Espandi anteprima',
   'Profiel verwijderen': 'Elimina profilo',
@@ -7339,8 +7348,6 @@ const _dutchSourceAddIt = {
       'Il file è danneggiato o illeggibile.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Importazione rifiutata: il pacchetto supera i limiti di sicurezza.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Impossibile recuperare una presentazione da questo URL. Controlla l\'URL e la connessione.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Accesso non riuscito — controlla nome utente e password. Suggerimento: con Nextcloud usa una password per app (Impostazioni → Sicurezza), non quella dell\'account.',
   'Annuleren…': 'Annullamento…',

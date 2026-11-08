@@ -33,7 +33,7 @@ const _stringsCs = {
   'newPresentationTab': 'Nová prezentace (karta)',
   'exportPackage': 'Exportovat balíček…',
   'importPackage': 'Importovat balíček…',
-  'importUrl': 'Importovat z URL…',
+  'importUrl': 'Otevřít z URL…',
   'findReplace': 'Najít a nahradit',
   'fullDeckPreview': 'Zobrazit celou prezentaci',
   'settingsGeneral': 'Obecné',
@@ -395,9 +395,6 @@ const _dutchSourceCs = {
       'Byla nalezena prezentace s neuloženými změnami z předchozí relace:',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Tato prezentace má neuložené změny. Uložte ji před zavřením karty.',
-  'Importeren via URL': 'Importovat z URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
-      'Vložte odkaz na balíček .ocideck nebo soubor Marp Markdown.',
   'Ophalen': 'Načíst',
   'Laat los om toe te voegen': 'Uvolněte pro přidání',
   'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
@@ -413,8 +410,6 @@ const _dutchSourceCs = {
   'Export mislukt:': 'Export selhal:',
   'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
       'Tento snímek nemůže přijmout obrázek. Nejprve zvolte snímek s obrázkem.',
-  'Kon van deze URL geen presentatie ophalen.':
-      'Z této URL nelze načíst prezentaci.',
   'Sleep om de slide-preview breder of smaller te maken':
       'Táhnutím rozšíříte nebo zúžíte náhled snímku',
   'TLP-classificatie (Traffic Light Protocol)':
@@ -1347,8 +1342,6 @@ const _dutchSourceCs = {
       'Soubor je poškozený nebo nečitelný.',
   'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
       'Import odmítnut: balíček překračuje bezpečnostní limity.',
-  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
-      'Z této URL se nepodařilo stáhnout prezentaci. Zkontrolujte URL a připojení.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Přihlášení se nezdařilo — zkontrolujte uživatelské jméno a heslo. Tip: u Nextcloudu použijte heslo aplikace (Nastavení → Zabezpečení), ne heslo účtu.',
   'Annuleren…': 'Rušení…',
@@ -1596,6 +1589,22 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Openen via URL': 'Otevřít z URL',
+  'Plak de link naar een .md-bestand of een .ocideck-pakket; een .md opent als presentatie of document. De bron moet je browser toestaan het bestand te lezen.':
+      'Vložte odkaz na soubor .md nebo balíček .ocideck; .md se otevře jako prezentace nebo dokument. Zdroj musí prohlížeči umožnit soubor číst.',
+  'Voer een http(s)-adres met een servernaam in, bijvoorbeeld https://example.org/notities.md':
+      'Zadejte adresu http(s) s názvem serveru, např. https://example.org/poznamky.md',
+  'Kon van deze URL geen bestand ophalen.':
+      'Z této adresy URL se nepodařilo soubor stáhnout.',
+  'Kon van deze URL geen bestand ophalen. Controleer de URL en je verbinding.':
+      'Z této adresy URL se nepodařilo soubor stáhnout. Zkontrolujte adresu i připojení.',
+  'Op deze URL staat geen bestand (niet gevonden). Controleer of de link nog klopt.':
+      'Na této adrese URL žádný soubor není (nenalezeno). Zkontrolujte, zda odkaz stále platí.',
+  'Het bestand is groter dan de limiet van {limit}.':
+      'Soubor je větší než limit {limit}.',
+  'Geopend.': 'Otevřeno.',
+  'Deellink kopiëren': 'Zkopírovat odkaz pro sdílení',
+  'Deellink gekopieerd.': 'Odkaz pro sdílení zkopírován.',
   'Plak Markdown…': 'Vložit Markdown…',
   'Markdown plakken': 'Vložit Markdown',
   'Plak hier de Markdown-tekst. Met marp: true in de kopregels wordt het een presentatie, zonder wordt het een document.':
@@ -4906,8 +4915,6 @@ const _dutchSourceAddCs = <String, String>{
       'Koncový bod přesměrovává — obvykle špatný region nebo URL koncového bodu. Opakování zde nepomůže.',
   'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
       'Uloženo lokálně, ale publikování do forge se nezdařilo:',
-  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
-      'Na této URL není žádná prezentace (nenalezena). Zkontrolujte, zda je odkaz stále platný.',
   'Video kan niet worden geladen': 'Video nelze načíst',
   'Titel boven afbeelding': 'Nadpis nad obrázkem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
