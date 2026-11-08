@@ -12,6 +12,8 @@ import 'package:ocideck/utils/password_generator.dart';
 import 'package:ocideck/utils/password_strength.dart';
 import 'package:ocideck/utils/zip_encryption.dart';
 
+import 'support/ociserve_aes_fixture.dart';
+
 /// Bouw een klein ZIP-archief met één tekstlid.
 Archive _sampleArchive() {
   final archive = Archive();
@@ -21,6 +23,54 @@ Archive _sampleArchive() {
 }
 
 void main() {
+  group('de webinflater met een versleuteld lid', () {
+    // Op web leest een pakket via writeArchiveEntryCapped, de ruwe stroom; op
+    // de VM via writeContent. Deze route krijgt hier dus een eigen toets. Hij
+    // moet de MAC laten toetsen: archive 4.4 liet geknoeide AES-inhoud door.
+    final plain = utf8.encode('marp: true\n\n# Titel\n');
+
+    ArchiveFile member(Uint8List zip, String password) => ZipDecoder()
+        .decodeBytes(zip, password: password, verify: true, throwOnError: true)
+        .files
+        .single;
+
+    // Eén bit om in de eerste versleutelde byte: na kop, naam en extra veld
+    // komen 16 bytes salt en 2 bytes wachtwoordcontrole.
+    Uint8List tampered(Uint8List zip) {
+      final out = Uint8List.fromList(zip);
+      final nameLength = out[26] | out[27] << 8;
+      final extraLength = out[28] | out[29] << 8;
+      out[30 + nameLength + extraLength + 18] ^= 0x01;
+      return out;
+    }
+
+    for (final (profile, zip, password) in [
+      (
+        'AE-1',
+        Uint8List.fromList(ZipEncoder(password: 'pw').encode(_sampleArchive())),
+        'pw',
+      ),
+      (
+        'AE-2 (OciServe)',
+        ociServeAesPackage({'deck.md': plain}),
+        testOciServePackagePassword,
+      ),
+    ]) {
+      test('$profile: opent intact, weigert geknoeid', () {
+        final out = CappedArchiveOutput(4096);
+        writeArchiveEntryCapped(member(zip, password), out);
+        expect(out.getBytes(), plain);
+        expect(
+          () => writeArchiveEntryCapped(
+            member(tampered(zip), password),
+            CappedArchiveOutput(4096),
+          ),
+          throwsA(isA<ArchiveException>()),
+        );
+      });
+    }
+  });
+
   group('archive AES round-trip', () {
     test('a forged small AES member is capped on the web inflater', () {
       final expanded = List<int>.filled(64 * 1024, 65);
