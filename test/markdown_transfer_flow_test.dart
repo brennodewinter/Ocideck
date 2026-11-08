@@ -116,9 +116,9 @@ void main() {
     // web maakt die aan), dus answerMarkdownTransfer keert stil terug —
     // maar de callback draait wél en dat is precies wat deze test dekt.
     await pumpApp(tester);
-    ProviderScope.containerOf(shell(tester).context)
-        .read(inboundMarkdownRequestProvider.notifier)
-        .state = offer();
+    ProviderScope.containerOf(
+      shell(tester).context,
+    ).read(inboundMarkdownRequestProvider.notifier).state = offer();
     await tester.pumpAndSettle();
     expect(
       ProviderScope.containerOf(
