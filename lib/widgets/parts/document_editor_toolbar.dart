@@ -403,16 +403,6 @@ class _DocEditorToolbar extends StatelessWidget {
         icon: const Icon(Icons.zoom_in, size: 18),
         visualDensity: VisualDensity.compact,
       ),
-      // Eén klik tot schermbreedte (#document-zoom): alleen als er iets
-      // te vergroten valt — bij "hele vensterbreedte" vult de kolom alles
-      // al en staat hier niets.
-      if (onFitWidth != null)
-        IconButton(
-          tooltip: l10n.d('Vergroot tot schermbreedte'),
-          onPressed: onFitWidth,
-          icon: const Icon(Icons.fit_screen, size: 18),
-          visualDensity: VisualDensity.compact,
-        ),
     ];
   }
 
@@ -636,9 +626,31 @@ class _DocEditorToolbar extends StatelessWidget {
             onEditFields();
           case 4:
             unawaited(importDocument(context));
+          case 6:
+            onFitWidth?.call();
         }
       },
       itemBuilder: (context) => [
+        // Eén klik tot schermbreedte — een menu-item en géén aparte knop,
+        // want elke extra werkbalkbreedte duwde de Stijl-kiezer van de
+        // scrollbare rij buiten het zichtbare venster (document_style_
+        // editor_test). Staat er alleen als er iets te vergroten valt.
+        if (onFitWidth != null)
+          PopupMenuItem<int>(
+            value: 6,
+            child: Row(
+              children: [
+                const Icon(Icons.fit_screen, size: 17),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    l10n.d('Vergroot tot schermbreedte'),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
         PopupMenuItem<int>(
           value: 3,
           child: Row(

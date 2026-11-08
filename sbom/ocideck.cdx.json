@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:f2f6db5d-4126-536c-8d5d-ae8899c27b38",
+  "serialNumber": "urn:uuid:2e4cc5f0-117a-5bcd-81e8-3e37094ae680",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-08T10:11:46.328291Z",
+    "timestamp": "2026-11-08T20:14:19.597529Z",
     "tools": {
       "components": [
         {
@@ -9370,7 +9370,7 @@
       ]
     },
     {
-      "bom-ref": "sdk:flutter@3.47.7",
+      "bom-ref": "sdk:flutter@3.47.9",
       "type": "framework",
       "supplier": {
         "name": "flutter",
@@ -9379,7 +9379,7 @@
         ]
       },
       "name": "flutter",
-      "version": "3.47.7",
+      "version": "3.47.9",
       "licenses": [
         {
           "license": {
@@ -9592,7 +9592,7 @@
         "runtime:whisper.cpp@1.9.5",
         "sdk:dart@^3.12.0",
         "sdk:flutter@0.0.0",
-        "sdk:flutter@3.47.7",
+        "sdk:flutter@3.47.9",
         "sdk:flutter_localizations@0.0.0",
         "sdk:flutter_test@0.0.0",
         "sdk:integration_test@0.0.0"

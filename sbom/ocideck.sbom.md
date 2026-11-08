@@ -286,4 +286,4 @@ The JSON documents carry **807 dependency relations** between these components: 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | dart | ^3.12.0 | BSD-3-Clause | dart-lang | https://github.com/dart-lang/sdk |
-| flutter | 3.47.7 | BSD-3-Clause | flutter | https://github.com/flutter/flutter |
+| flutter | 3.47.9 | BSD-3-Clause | flutter | https://github.com/flutter/flutter |

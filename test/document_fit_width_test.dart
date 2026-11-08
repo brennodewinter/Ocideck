@@ -66,7 +66,9 @@ void main() {
     );
     expect(container.read(settingsProvider).documentEditorZoom, 1.0);
 
-    await tester.tap(find.byIcon(Icons.fit_screen));
+    await tester.tap(find.byIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Vergroot tot schermbreedte'));
     await tester.pump();
     expect(
       container.read(settingsProvider).documentEditorZoom,
