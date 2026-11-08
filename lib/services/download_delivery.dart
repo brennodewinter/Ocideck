@@ -22,6 +22,7 @@ import 'package:archive/archive.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
+import '../utils/archive_limits.dart';
 import '../utils/file_download.dart';
 
 /// Eén af te leveren bestand: de naam die de gebruiker ziet, en de bytes.
@@ -76,7 +77,7 @@ String? deliverAsDownload(
   for (final f in files) {
     archive.add(ArchiveFile(f.name, f.bytes.length, f.bytes));
   }
-  final zip = ZipEncoder().encodeBytes(archive);
+  final zip = ZipEncoder().encodeBytes(archive, modified: neutralZipTime);
   return sink(bundleName, zip, _mimeTypeFor(bundleName)) ? bundleName : null;
 }
 

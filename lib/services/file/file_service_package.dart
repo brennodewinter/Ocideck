@@ -295,12 +295,7 @@ extension FileServicePackage on FileService {
     int budgetBytes = FileService.maxPackageBytes,
   }) async {
     final archive = await _buildPackageArchive(deck, budgetBytes: budgetBytes);
-    final pw = (password != null && password.isNotEmpty) ? password : null;
-    // Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn);
-    // in een eigen isolate blijft de UI responsief tijdens het pakken. Op web
-    // bestaan isolates niet en pakt de main thread — merkbaar, maar werkend.
-    if (kIsWeb) return ZipEncoder(password: pw).encodeBytes(archive);
-    return Isolate.run(() => ZipEncoder(password: pw).encodeBytes(archive));
+    return _zipPackageArchive(archive, password);
   }
 
   /// Web: bouw het pakket in het geheugen en bied het de browser als download
@@ -779,6 +774,20 @@ class PackageBudgetExceeded implements Exception {
   @override
   String toString() =>
       'PackageBudgetExceeded(used: $usedBytes, limit: $limitBytes)';
+}
+
+/// Pakt een pakket of dossier in; met een niet-leeg [password] elk lid
+/// WinZip-AES-256. Elk lid draagt [neutralZipTime], niet het exportmoment.
+///
+/// Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn); in een
+/// eigen isolate blijft de UI responsief tijdens het pakken. Op web bestaan
+/// isolates niet en pakt de main thread — merkbaar, maar werkend.
+Future<Uint8List> _zipPackageArchive(Archive archive, String? password) async {
+  final pw = (password != null && password.isNotEmpty) ? password : null;
+  Uint8List zip() =>
+      ZipEncoder(password: pw).encodeBytes(archive, modified: neutralZipTime);
+  if (kIsWeb) return zip();
+  return Isolate.run(zip);
 }
 
 /// De ene strikte decode van een pakket-zip. Zonder deze vlaggen zwijgt archive

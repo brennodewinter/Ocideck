@@ -734,7 +734,11 @@ model.
   archive is silent about damaged data by default and would hand back a cut or
   corrupted member as if it were whole. AES authentication is checked before
   decompression. A member whose declared size is false still stops at the
-  actual output limit.
+  actual output limit. Encryption covers member contents, not the central
+  directory, so every member of a package, audit dossier or download bundle
+  carries one fixed time (`neutralZipTime`): archive 4.6 would otherwise write
+  the local DOS time beside the exact UTC instant, giving away the export
+  moment and the maker's UTC offset without the password.
 - **Atomic writes.** All persistence uses `writeStringAtomic`/`writeBytesAtomic`
   (`lib/utils/atomic_file.dart`) — write-to-temp-then-rename — so a crash never
   truncates a file. A `check_conventions` ratchet forbids raw

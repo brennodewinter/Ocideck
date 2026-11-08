@@ -37,6 +37,15 @@ All notable changes to OciDeck are documented in this file.
   zip-tijdstempel. `image` gaat mee naar 4.12.0, dat nu oplosbaar is: die
   versie stopt onder meer afbeeldingen waarvan de EXIF- of TIFF-gegevens in
   een lus verwijzen en begrenst uitgepakte grootten.
+- **Privacy: pakketten verraden niet meer wanneer en in welke tijdzone ze
+  gemaakt zijn.** Sinds `archive` 4.6 droeg elk onderdeel van een
+  `.ocideck`-pakket, auditdossier of downloadbundel het exportmoment op de
+  seconde én, via het verschil tussen lokale en UTC-tijd, de tijdzone van de
+  maker. Ook bij een versleuteld pakket was dat zonder wachtwoord te lezen:
+  de inhoudsopgave van een zip is niet versleuteld. Alle onderdelen dragen nu
+  één vaste datum (1 januari 1980), zodat ook hetzelfde deck dezelfde
+  pakketinhoud oplevert.
+
 ### Changed
 
 - Flutter 3.47.9 (Dart 3.13.7) en de oplosbare pakketten zijn bijgewerkt:

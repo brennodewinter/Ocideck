@@ -12,6 +12,19 @@ class ExtractionLimitException implements Exception {
   const ExtractionLimitException();
 }
 
+/// De tijd op elk lid van een zip die OciDeck zelf schrijft zonder eigen
+/// UTC-metadata (pakket, auditdossier, downloadbundel): `ZipEncoder(modified:)`.
+///
+/// archive (sinds 4.6) schrijft de DOS-tijd in *lokale* tijd plus het exacte
+/// moment in een UT-extraveld, en de centrale map is ook bij AES onversleuteld.
+/// Samen gaven ze de UTC-offset van de maker en het exportmoment op de seconde
+/// prijs, wachtwoord of niet. Dit moment is in elke zone (UTC+14 incluis) nog
+/// 1979, dus de encoder klemt de DOS-velden overal op 1980-01-01 00:00, en het
+/// UT-veld draagt dit ene vaste moment. Niets leest de lidtijden terug; het
+/// tijdsbewijs van een dossier is het RFC 3161-token. Het inzendpakket in
+/// `ocideck_form_core` gebruikt om dezelfde reden dezelfde waarde.
+final DateTime neutralZipTime = DateTime.utc(1979, 12, 31);
+
 /// Stops inflation before an entry can allocate beyond its output budget.
 class CappedArchiveOutput extends OutputMemoryStream {
   CappedArchiveOutput(this.limit);
