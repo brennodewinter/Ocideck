@@ -123,7 +123,7 @@ so they cost the ordinary user nothing.
 ## Requirements
 
 - Flutter **3.47.9** (stable) — the pinned toolchain (see `.tool-versions`),
-  bundling Dart 3.13.5. The `pubspec.yaml` Dart SDK constraint is `^3.12.0`;
+  bundling Dart 3.13.7. The `pubspec.yaml` Dart SDK constraint is `^3.12.0`;
   building tolerates Flutter 3.44+, but `make format-check` is version-sensitive
   (see [BUILD.md](docs/BUILD.md)).
 - A desktop target enabled: macOS, Windows, or Linux — or run in a browser via Flutter web

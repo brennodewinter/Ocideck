@@ -5,8 +5,8 @@ gegenereerde applicatie tegen de glibc en libstdc++ van Debian 12, in plaats van
 tegen de nieuwere bibliotheken uit de officiële OciDeck-release.
 
 Het script leest OciDecks Flutter-pin uit `.tool-versions`. Een pin zoals
-`3.47.7-stable` wordt voor het officiële archief genormaliseerd naar
-`flutter_linux_3.47.7-stable.tar.xz`.
+`3.47.9-stable` wordt voor het officiële archief genormaliseerd naar
+`flutter_linux_3.47.9-stable.tar.xz`.
 
 ## Benodigd
 
