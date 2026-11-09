@@ -38,13 +38,13 @@ void main() {
   /// held a second copy of this very CWE dataset and nothing ever read it back,
   /// so it was 288 KB bought for one boolean — see the CHANGELOG entry for
   /// 2026-07-16.
-  const expectedDataAssets = {'assets/cwe/cwe_full.json'};
+  const expectedDataAssets = <String>{};
 
   /// Ceiling for the unpacked bytes those assets add to every build. Headroom is
   /// for regenerating the datasets from upstream (CWE grows), not for adding new
   /// ones — a new dataset belongs in [expectedDataAssets], with this raised
   /// deliberately. Ratchet it **down** when the payload shrinks.
-  const dataPayloadCeilingBytes = 260 * 1024;
+  const dataPayloadCeilingBytes = 0;
 
   final pubspec = File('pubspec.yaml').readAsStringSync();
 
@@ -103,13 +103,8 @@ void main() {
   test('the reference-data payload stays under its ceiling', () {
     final total = expectedDataAssets.fold(0, (sum, e) => sum + bytesFor(e));
 
-    // A declared-but-missing asset already fails the Flutter build, so reaching
-    // zero here means the entry resolves to nothing on disk.
-    expect(
-      total,
-      greaterThan(0),
-      reason: 'Broken payload scan: nothing found.',
-    );
+    // Retired datasets must add zero bytes to the application.
+    expect(total, 0, reason: 'Retired module data must not ship.');
     expect(
       total,
       lessThanOrEqualTo(dataPayloadCeilingBytes),

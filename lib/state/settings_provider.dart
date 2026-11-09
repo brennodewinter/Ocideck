@@ -17,6 +17,7 @@ import '../services/disk_traces.dart';
 import '../services/shared_preferences_atomic.dart';
 import '../services/privacy/privacy_regions.dart';
 import '../services/recovery_service.dart';
+import '../services/retired_miauw_cleanup.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 
@@ -111,6 +112,27 @@ _loadCockpitSettings(
   );
 }
 
+/// Removes preferences and downloaded data belonging to the retired module.
+Future<void> _removeRetiredMiauwSettings(SharedPreferences prefs) async {
+  try {
+    for (final key in [
+      'secModuleEnabled',
+      'secModulePackVersion',
+      'allowCveLookup',
+      'cveApiBaseUrl',
+    ]) {
+      await prefs.remove(key);
+    }
+  } catch (error, stack) {
+    logError('Removing retired MIAUW preferences failed', error, stack);
+  }
+  unawaited(
+    removeRetiredMiauwData().catchError((Object error, StackTrace stack) {
+      logError('Removing retired MIAUW data failed', error, stack);
+    }),
+  );
+}
+
 /// The single owner of application-wide settings: everything in [AppSettings],
 /// persisted in one `shared_preferences` domain.
 ///
@@ -201,6 +223,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       logError('SettingsNotifier._load: prefs lezen mislukt', e, s);
       return;
     }
+    await _removeRetiredMiauwSettings(prefs);
     final themeJson = prefs.getString('themeProfile');
     final profilesJson = prefs.getString('themeProfiles');
     // Verse installatie (geen opgeslagen profielen): de ingebouwde profielen
@@ -334,9 +357,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       ),
       showOpenPreview: prefs.getBool('showOpenPreview') ?? false,
       allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
-      allowCveLookup: prefs.getBool('allowCveLookup') ?? false,
-      cveApiBaseUrl:
-          prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       updateChecksEnabled: prefs.getBool('updateChecksEnabled') ?? false,
       aiSettings: ai,
       libreplanSettings: libreplan,
@@ -659,27 +679,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setAllowRemoteMedia',
       (prefs) => prefs.setBool('allowRemoteMedia', enabled),
-    );
-  }
-
-  /// Sta het online opzoeken van CVE's toe, of zet het uit (fail-closed).
-  Future<void> setAllowCveLookup(bool enabled) async {
-    state = state.copyWith(allowCveLookup: enabled);
-    await _persist(
-      'setAllowCveLookup',
-      (prefs) => prefs.setBool('allowCveLookup', enabled),
-    );
-  }
-
-  /// Stel de CVE-mirror-basis-URL in; leeg valt terug op de standaard.
-  Future<void> setCveApiBaseUrl(String url) async {
-    final value = url.trim().isEmpty
-        ? AppSettings.defaultCveApiBaseUrl
-        : url.trim();
-    state = state.copyWith(cveApiBaseUrl: value);
-    await _persist(
-      'setCveApiBaseUrl',
-      (prefs) => prefs.setString('cveApiBaseUrl', value),
     );
   }
 

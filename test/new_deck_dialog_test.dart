@@ -12,7 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// uiteindelijke uitkomst landt in [_Harness.choice] zodra de dialoog sluit.
 class _Harness {
   _Harness({
-    this.reveal = false,
     this.revealProcesverbetering = false,
     this.languageCode,
     this.brightness = Brightness.light,
@@ -21,7 +20,6 @@ class _Harness {
 
   /// Whether the Informatieveiligheid module is revealed (gates MIAUW-only
   /// templates). Off by default, matching a fresh install.
-  final bool reveal;
   final bool revealProcesverbetering;
   final String? languageCode;
   final Brightness brightness;
@@ -32,7 +30,7 @@ class _Harness {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          infoSafetyRevealProvider.overrideWithValue(reveal),
+          infoSafetyRevealProvider.overrideWithValue(false),
           procesverbeteringRevealProvider.overrideWithValue(
             revealProcesverbetering,
           ),
@@ -231,36 +229,6 @@ void main() {
     }
   });
 
-  testWidgets('a module-only template is hidden while the module is off', (
-    tester,
-  ) async {
-    final miauw = deckTemplates.firstWhere((t) => t.id == 'miauwReport');
-
-    // Module off (the default) → the MIAUW template is not in the picker.
-    await _Harness().open(tester);
-    expect(find.text(miauw.title), findsNothing);
-  });
-
-  testWidgets('a module-only template appears once the module is revealed', (
-    tester,
-  ) async {
-    final miauw = deckTemplates.firstWhere((t) => t.id == 'miauwReport');
-
-    // Reveal the Informatieveiligheid module → it appears.
-    await _Harness(reveal: true).open(tester);
-    // Deze test scrolt in één keer van bovenaan door naar één ver sjabloon
-    // (MIAUW, sorteert onder de M). Met de bredere catalogus staat het dieper,
-    // dus een royaal scrollbudget zoals de rest van dit bestand (maxScrolls:
-    // 200); de standaard 50 reikt niet meer tot onderaan.
-    await _revealTemplate(tester, find.text(miauw.title));
-    expect(find.text(miauw.title), findsOneWidget);
-    expect(
-      find.byKey(const ValueKey('templateModuleBadge-miauwReport')),
-      findsOneWidget,
-    );
-    expect(find.text('Informatieveiligheid'), findsWidgets);
-  });
-
   testWidgets('all process templates appear with badges only after reveal', (
     tester,
   ) async {
@@ -407,20 +375,6 @@ void main() {
     expect(create.onPressed, isNull);
     expect(harness.choice, isNull);
     expect(find.text('Nieuwe presentatie'), findsOneWidget);
-  });
-
-  testWidgets('searching the security badge finds a security template', (
-    tester,
-  ) async {
-    await _Harness(reveal: true).open(tester);
-    await tester.enterText(searchField, 'Informatieveiligheid');
-    await tester.pumpAndSettle();
-
-    // De MIAUW-titel en -omschrijving bevatten de zoekterm niet. Alleen de
-    // modulebadge kan dit sjabloon dus in het resultaat brengen.
-    await _revealTemplate(tester, find.text('MIAUW-pentestrapport'));
-    expect(find.text('MIAUW-pentestrapport'), findsOneWidget);
-    expect(find.text('Leeg deck'), findsNothing);
   });
 
   testWidgets('searching the improvement badge finds the SIPOC template', (

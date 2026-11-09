@@ -1,10 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/eis_entry.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/services/markdown_service.dart';
-import 'package:ocideck/services/miauw_eis_catalog.dart';
 
 void main() {
   final markdown = MarkdownService();
@@ -126,21 +124,6 @@ void main() {
         referenceHeader: 'R',
       );
       expect(rows[1], ['nmap', '', '', '']);
-    });
-  });
-
-  group('EIS 4.8.2 blijft handmatig', () {
-    test('vastleggen en invoegen vinken de eis niet af', () {
-      // Het hele ontwerp van deze feature: OciDeck maakt de bijlage makkelijk,
-      // maar bevestigt niet dat hij klopt. Na het invoegen kan de tester de
-      // slide nog wijzigen of verwijderen, dus alleen hij kan verklaren dat
-      // 4.8.2 gedekt is. Automatisch afvinken zou een claim zijn die OciDeck
-      // niet kan waarmaken.
-      for (final id in ['4.8.2', '4.8.2.1', '4.8.2.2', '4.8.2.3']) {
-        final eis = MiauwEisCatalog.instance.byId(id)!;
-        expect(eis.derivation, EisDerivation.manual);
-        expect(eis.check, isNull);
-      }
     });
   });
 }

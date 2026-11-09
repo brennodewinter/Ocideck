@@ -85,47 +85,24 @@ const _dutchSourceRo = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serie = rând, coloană = etichetă, culoarea celulei urmează valoarea. Etichetează axele ca probabilitate și impact pentru o matrice de risc.',
   'Auditdossier exporteren': 'Exportă dosarul de audit',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalizați și sigilați mai întâi raportul.',
-  'Auditdossier geëxporteerd naar:': 'Dosarul de audit exportat în:',
-  'MIAUW-pentestrapport': 'Raport de pentest MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Structura completă a raportului MIAUW: gestionarea documentelor, domeniu, execuție, rezumat managerial, constatări, liste de verificare și semnare.',
+
   'Tekst voorstellen (AI)': 'Sugerează text (IA)',
   'Het model gaf geen tekst terug.': 'Modelul nu a returnat text.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Există deja text. Îl înlocuiți cu ciorna IA?',
   'RFC3161-tijdstempel': 'Marcaj temporal RFC3161',
-  'Verzegel het deck eerst.': 'Sigilează mai întâi deck-ul.',
-  'Verzoek (.tsq) exporteren': 'Exportă cererea (.tsq)',
-  'Token (.tsr) importeren': 'Importă tokenul (.tsr)',
-  'Nog geen tijdstempel': 'Încă niciun marcaj temporal',
-  'Getijdstempeld op': 'Marcat temporal la',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Marcajul temporal nu se potrivește cu hash-ul sigiliului',
-  'Tijdstempelverzoek opgeslagen': 'Cererea de marcaj temporal salvată',
-  'Tijdstempel geïmporteerd': 'Marcaj temporal importat',
+
   'Managementsamenvatting': 'Rezumat pentru management',
-  'Bevindingen totaal': 'Total constatări',
-  'scope-objecten getest': 'obiecte de domeniu testate',
+
   'Gebruikte standaarden': 'Standarde utilizate',
-  'Bewijs-hashes kopiëren': 'Copiază hash-urile probelor',
-  'Bewijs-hashes gekopieerd': 'Hash-urile probelor au fost copiate',
-  'Bevindingen hernummeren': 'Renumerotează constatările',
-  'Scope-dekking controleren': 'Verifică acoperirea domeniului',
-  'Scope-dekking': 'Acoperirea domeniului',
-  'Geen dekkingsgaten': 'Fără lacune de acoperire',
-  'In scope, maar niet getest en geen bevinding:':
-      'În domeniu, dar netestat și fără constatare:',
+
   'MIAUW-compliance': 'Conformitate MIAUW',
   'Voldaan': 'Îndeplinit',
   'Openstaand': 'Deschis',
-  'Uitgesloten door klant': 'Exclus de client',
+
   'Handmatig': 'Manual',
   'Uitsluiten': 'Exclude',
-  'Opheffen': 'Anulează',
-  'Reden voor uitsluiting': 'Motivul excluderii',
-  'Fundamentele eisen zijn uitgesloten': 'Cerințe fundamentale sunt excluse',
+
   'Nieuwe bevinding (wizard)': 'Constatare nouă (expert)',
   'Bevinding maken': 'Creează constatare',
   'CIA-rating (scope-object)': 'Evaluare CIA (obiect de domeniu)',
@@ -136,10 +113,7 @@ const _dutchSourceRo = {
   'Bewijsslide toevoegen': 'Adaugă diapozitiv de dovadă',
   'CIA-gewogen': 'Ponderat CIA',
   'Severity (bevindingen)': 'Severitate (constatări)',
-  'CWE kiezen': 'Alege CWE',
-  'Zoek op naam of CWE-nummer': 'Caută după nume sau număr CWE',
-  'Geen CWE gevonden': 'Niciun CWE găsit',
-  'Kies CWE…': 'Alege CWE…',
+
   'AI-concept': 'Schiță IA',
   'Nagekeken': 'Verificat',
   'Wis AI-alt-teksten': 'Șterge textele alternative IA',
@@ -269,10 +243,7 @@ const _dutchSourceRo = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Declarația de veridicitate cu raportorul, certificarea, semnătura și sigilarea.',
   'Uitbreidingen': 'Extensii',
-  'Gegevens opschonen': 'Curăță datele',
-  'Gegevens lokaal beschikbaar': 'Date disponibile local',
-  'Op het web nog niet beschikbaar': 'Încă indisponibil pe web',
-  'Nog niet opgehaald': 'Încă nedescărcat',
+
   'AI-assistentie': 'Asistență IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Asistența IA este disponibilă doar în versiunea desktop.',
@@ -1389,9 +1360,7 @@ const _dutchSourceRo = {
   'Projectstart / kick-off': 'Start de proiect / kick-off',
   'Voorbespreking communicatie': 'Discuție preliminară de comunicare',
   'Projecttijdlijn': 'Cronologia proiectului',
-  'Informatieveiligheid: RASCI / TVB': 'Securitatea informațiilor: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Plan de sarcini de securitate',
-  'Certificering voortgang': 'Progresul certificării',
+
   'Training / workshop': 'Instruire / workshop',
   'Rapportage': 'Raportare',
   'Onderzoeksverhaal': 'Poveste de investigație',
@@ -1407,12 +1376,7 @@ const _dutchSourceRo = {
       'Grupuri-țintă, mesaj central, canale și purtători de cuvânt.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Faze, jaloane, dependențe și momente de decizie.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Consemnarea rolurilor, a matricei RASCI și a acordurilor de sarcini.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Sarcini, priorități, responsabili și dovezi.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Progres pe domenii, controale și planificarea auditului.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Obiective de învățare, concepte-cheie, exercițiu și întrebare de quiz.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1426,21 +1390,17 @@ const _dutchSourceRo = {
   'Sjabloon': 'Șablon',
   'Post-incident review / lessons learned':
       'Analiză post-incident / lecții învățate',
-  'Datalek / privacy-incident beoordeling':
-      'Evaluarea unei breșe de date / a unui incident de confidențialitate',
+
   'DPIA / privacy impact assessment':
       'DPIA / evaluarea impactului asupra confidențialității',
-  'Risicoanalyse / risk register': 'Analiză de risc / registru de riscuri',
+
   'Business continuity / DR-test': 'Continuitatea activității / test DR',
-  'Tabletop-oefening / crisisoefening':
-      'Exercițiu tabletop / exercițiu de criză',
+
   'BOB-crisisrapportage': 'Raportare de criză BOB',
   'CAB / release readiness': 'CAB / pregătirea lansării',
   'Stuurgroep / project board update':
       'Actualizare pentru comitetul de coordonare / project board',
-  'Auditbevindingen en opvolging': 'Constatări de audit și urmărire',
-  'Leveranciersbeoordeling / vendor risk':
-      'Evaluarea furnizorilor / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Decizie de arhitectură / prezentare ADR',
   'Beleid uitrollen / implementatieplan':
@@ -1448,28 +1408,14 @@ const _dutchSourceRo = {
   'Overdracht / handover': 'Predare / handover',
   'Retrospective / teamverbetering': 'Retrospectivă / îmbunătățirea echipei',
   'PPL Vluchtvoorbereiding': 'Pregătirea zborului PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Cronologie, impact, cauze și acțiuni de îmbunătățire după un incident.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Evaluați datele, riscul, obligația de notificare și comunicarea.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Prelucrare, temei juridic, riscuri de confidențialitate și măsuri.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Consemnați riscurile, probabilitatea, impactul, măsurile și responsabilii.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Scenariu, obiective de recuperare, constatările testelor și puncte de îmbunătățire.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Scenariu, injects, decizii, observații și evaluare.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Conduceți o echipă de criză prin formarea imaginii, formarea judecății și luarea deciziilor, cu imagine de situație în timp real, cereri de informații, dileme, jurnal de decizii și listă de acțiuni.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Modificare, impact, teste, rollback, comunicare și go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Progres, planificare, buget, riscuri și decizii solicitate.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Constatări, root cause, măsuri, dovezi și stare.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Serviciu, date, dependență, cerințe, riscuri și decizie.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Context, opțiuni, trade-off-uri, decizie și consecințe.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4679,8 +4625,7 @@ const _dutchSourceAddRo = <String, String>{
   'Privacy en classificatie': 'Confidențialitate și clasificare',
   'Uiterlijk van documenten': 'Aspectul documentelor',
   'Exportkwaliteit': 'Calitatea exportului',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Acordați mai întâi consimțământul pentru traficul de ieșire la Confidențialitate și clasificare.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Un serviciu cloud necesită mai întâi consimțământul tău privind confidențialitatea la "Confidențialitate și clasificare" și nu funcționează în versiunea web.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5640,9 +5585,7 @@ const _dutchSourceAddRo = <String, String>{
   'Debriefing / after-action review': 'Debriefing / analiză post-acțiune',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Ce era planificat, ce s-a întâmplat, de ce — și ce înțelegeri stabilim.',
-  'Threat modeling-sessie': 'Sesiune de threat modeling',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Domeniul, fluxurile de date, granițele de încredere, amenințări pe categorii STRIDE și măsuri.',
+
   'Casuïstiekbespreking sociaal domein':
       'Analiza cazurilor din domeniul social',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
@@ -6224,10 +6167,7 @@ const _dutchSourceAddRo = <String, String>{
       'Indexul listei de verificare: per test, id-ul stabil, titlul canonic și categoria. Conținutul ghidului în sine nu este inclus.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Indexul testelor din v2.0.0: per test, id-ul stabil, titlul canonic, categoria MASVS și slăbiciunea MASWE. Testele v1 retrase și substituenții nu sunt incluși; nici conținutul ghidului.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Lista completă (id, nume, descriere) plus un nucleu propriu selectat, cu notele noastre de remediere.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Schema EIS completă (88 de cerințe testabile).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Denumiri de afecțiuni în nouă limbi, ca lexicon medical pentru verificarea confidențialității (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6381,8 +6321,7 @@ const _dutchSourceAddRo = <String, String>{
   'naam@example.org\nexample.org': 'nume@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Un strat de lângă acest deck era prea mare și nu a fost încărcat; fișierul în sine este neschimbat:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Acest marcaj temporal nu aparține ultimei cereri',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Menționați acest număr de versiune când raportați o problemă de securitate.',
   'Video niet ingesloten': 'Videoclipul nu este încorporat',
@@ -6596,10 +6535,7 @@ const _dutchSourceAddRo = <String, String>{
       'Cifrele graficelor nu au fost salvate — există doar în această fereastră:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'În browser nu există recuperare după blocare: dacă închideți această filă, munca nesalvată se pierde. Salvați-vă singur prezentarea.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Baza de date CVE locală (descărcarea o porniți dumneavoastră): OciDeck preia datele în masă prin api.github.com și fișierul de lansare către care indică acea adresă.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Căutare CVE (dezactivată implicit): când este activată, termenul dumneavoastră de căutare ajunge la oglinda CVE configurată și, dacă aceasta nu găsește nimic, la baza de date europeană a ENISA și la MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Un videoclip YouTube sau Vimeo încorporat încarcă playerul de la serviciul respectiv.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7209,8 +7145,7 @@ const _dutchSourceAddRo = <String, String>{
   'Geen presentaties in deze repository.': 'Nicio prezentare în acest depozit.',
   'Rapportagetaal': 'Limba raportului',
   'Niet vastgelegd': 'Neînregistrat',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Datele de referință se află în aplicația însăși, așa că modulul funcționează imediat și complet offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; rămân ascunse până nu le activați.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7239,11 +7174,10 @@ const _dutchSourceAddRo = <String, String>{
   'adres': 'adresă',
   'postcode': 'cod poștal',
   'persoonsnaam': 'nume de persoană',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Această prezentare conține elemente ale modulului Securitatea informațiilor. Activează modulul pentru a le edita.',
+
   'Inschakelen': 'Activează',
   'Bevestigen': 'Confirmă',
-  'Onderbouwing van de bevestiging': 'Justificarea confirmării',
+
   'De eigenaar staat insluiten niet toe':
       'Proprietarul nu permite încorporarea',
   'Deze video is alleen op de bron zelf te bekijken.':
@@ -7353,43 +7287,13 @@ const _dutchSourceAddRo = <String, String>{
   'databaseverbinding met wachtwoord': 'conexiune la baza de date cu parolă',
   'wachtwoord in klare tekst': 'parolă în text clar',
   'Afbreken': 'Anulează',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Anulat. Nu a rămas nimic pe jumătate.',
+
   'Bijwerken': 'Actualizează',
   'Binnenhalen…': 'Se descarcă…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Descarcă baza de date',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Lista CVE nu a putut fi descărcată. Verifică-ți conexiunea și încearcă din nou; o listă descărcată pe jumătate a fost aruncată.',
-  'De nieuwste uitgave opzoeken…': 'Se caută cea mai recentă versiune…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Aceasta este o descărcare mare: peste 500 MB de adus, temporar cam 1,5 GB spațiu pe disc și, în funcție de conexiune și dispozitiv, ușor zece până la treizeci de minute de lucru. După aceea rămâne un index de câteva sute de megabiți. Pe o conexiune plătită la megabit, mai bine nu faci asta.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Nu era destul spațiu pe disc. Construirea cere temporar peste 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Arhiva descărcată nu era cea așteptată și a fost respinsă. Nu s-a instalat nimic.',
-  'Indexeren…': 'Se indexează…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Disponibil local — căutările se fac offline, niciun termen de căutare nu iese afară.',
-  'Lokale CVE-database': 'Bază de date CVE locală',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Cu lista CVE pe propriul dispozitiv, căutările rămân aici: niciun termen de căutare nu mai ajunge la un server și nimeni nu poate vedea ce vulnerabilitate cercetezi.',
-  'Uitpakken…': 'Se dezarhivează…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Pune lista CVE completă pe acest dispozitiv, astfel încât căutările să se facă offline, iar termenul tău de căutare să nu ajungă nicăieri. Baza de date provine din CVE List V5 (programul CVE oficial, prin GitHub).',
-  'Wat er lokaal beschikbaar is': 'Ce este disponibil local',
-  'Nu bijwerken': 'Actualizează acum',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Date disponibile local — căutările au loc pe acest dispozitiv; nimic nu iese.',
-  'Zwakheden (CWE)': 'Slăbiciuni (CWE)',
-  'Testgevallen (WSTG)': 'Cazuri de test (WSTG)',
-  'MIAUW-eisen': 'Cerințe MIAUW',
-  'CVSS-scoretabel': 'Tabel de scoruri CVSS',
-  'Bevindingsjablonen': 'Șabloane de constatare',
+
   'Zoek een instelling': 'Caută o setare',
   'Geen instelling gevonden': 'Nicio setare găsită',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Termenul tău de căutare ajunge la oglinda CVE configurată și, dacă aceasta nu găsește nimic, și la ENISA și MITRE. Cei care administrează acele servere pot deduce ce vulnerabilitate anume cauți — și deci ce vulnerabilitate investighezi.',
+
   'Accepteren': 'Acceptă',
   'Accepteren + waarschuwen': 'Acceptă + avertizează',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7409,8 +7313,7 @@ const _dutchSourceAddRo = <String, String>{
   'burgerservicenummer (BSN)': 'număr de identificare a cetățeanului (BSN)',
   'bankrekeningnummer (IBAN)': 'număr de cont bancar (IBAN)',
   'e-mailadres': 'adresă de e-mail',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Semnătura TSA nu este verificată în aplicație; doar hash-ul corespunde.',
+
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Preluat de la un URL extern; deschiderea a contactat acel server.',
@@ -7448,21 +7351,7 @@ const _dutchSourceAddRo = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Creează o listă de verificare pentru fiecare obiect din domeniu (WSTG pentru web/API); cele existente se păstrează.',
   'CVE opzoeken': 'Caută CVE',
-  'CVE opzoeken (online)': 'Caută CVE (online)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Căutarea CVE nu este disponibilă în versiunea web.',
-  'CVE-mirror (basis-URL)': 'Oglindă CVE (URL de bază)',
-  'Geen CVE gevonden.': 'Niciun CVE găsit.',
-  'Kon de CVE-bron niet bereiken.': 'Nu s-a putut accesa sursa CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Permite căutarea CVE online în editorul de constatări printr-o oglindă NVD. Dezactivat implicit; necesită de asemenea consimțământul tău și funcționează doar pe desktop.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Tastează (o parte dintr-)un id CVE și caută.',
-  'Typ minstens 3 tekens.': 'Tastează cel puțin 3 caractere.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Activează căutarea CVE (online) în Setări → Securitate pentru a căuta CVE online.',
-  'Zoek CVE…': 'Caută CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Caută după id CVE, de ex. 2021-44228',
+
   'Zoeken': 'Caută',
   'Hertest': 'Retestare',
   'Niet hertest': 'Neretestat',

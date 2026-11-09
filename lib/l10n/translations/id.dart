@@ -84,47 +84,24 @@ const _dutchSourceId = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Seri = baris, kolom = label, warna sel mengikuti nilai. Beri label sumbu sebagai kemungkinan dan dampak untuk matriks risiko.',
   'Auditdossier exporteren': 'Ekspor dosir audit',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalkan dan segel laporan terlebih dahulu.',
-  'Auditdossier geëxporteerd naar:': 'Dosir audit diekspor ke:',
-  'MIAUW-pentestrapport': 'Laporan pentest MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Struktur laporan MIAUW lengkap: manajemen dokumen, ruang lingkup, eksekusi, ringkasan manajemen, temuan, daftar periksa, dan penandatanganan.',
+
   'Tekst voorstellen (AI)': 'Sarankan teks (AI)',
   'Het model gaf geen tekst terug.': 'Model tidak mengembalikan teks.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Sudah ada teks. Ganti dengan draf AI?',
   'RFC3161-tijdstempel': 'Stempel waktu RFC3161',
-  'Verzegel het deck eerst.': 'Segel deck terlebih dahulu.',
-  'Verzoek (.tsq) exporteren': 'Ekspor permintaan (.tsq)',
-  'Token (.tsr) importeren': 'Impor token (.tsr)',
-  'Nog geen tijdstempel': 'Belum ada stempel waktu',
-  'Getijdstempeld op': 'Distempel waktu pada',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Stempel waktu tidak cocok dengan hash segel',
-  'Tijdstempelverzoek opgeslagen': 'Permintaan stempel waktu disimpan',
-  'Tijdstempel geïmporteerd': 'Stempel waktu diimpor',
+
   'Managementsamenvatting': 'Ringkasan manajemen',
-  'Bevindingen totaal': 'Total temuan',
-  'scope-objecten getest': 'objek lingkup diuji',
+
   'Gebruikte standaarden': 'Standar yang digunakan',
-  'Bewijs-hashes kopiëren': 'Salin hash bukti',
-  'Bewijs-hashes gekopieerd': 'Hash bukti disalin',
-  'Bevindingen hernummeren': 'Nomori ulang temuan',
-  'Scope-dekking controleren': 'Periksa cakupan lingkup',
-  'Scope-dekking': 'Cakupan lingkup',
-  'Geen dekkingsgaten': 'Tidak ada celah cakupan',
-  'In scope, maar niet getest en geen bevinding:':
-      'Dalam lingkup, tetapi tidak diuji dan tanpa temuan:',
+
   'MIAUW-compliance': 'Kepatuhan MIAUW',
   'Voldaan': 'Terpenuhi',
   'Openstaand': 'Terbuka',
-  'Uitgesloten door klant': 'Dikecualikan oleh klien',
+
   'Handmatig': 'Manual',
   'Uitsluiten': 'Kecualikan',
-  'Opheffen': 'Batalkan',
-  'Reden voor uitsluiting': 'Alasan pengecualian',
-  'Fundamentele eisen zijn uitgesloten': 'Persyaratan mendasar dikecualikan',
+
   'Nieuwe bevinding (wizard)': 'Temuan baru (wisaya)',
   'Bevinding maken': 'Buat temuan',
   'CIA-rating (scope-object)': 'Peringkat CIA (objek lingkup)',
@@ -135,10 +112,7 @@ const _dutchSourceId = {
   'Bewijsslide toevoegen': 'Tambah slide bukti',
   'CIA-gewogen': 'Berbobot CIA',
   'Severity (bevindingen)': 'Tingkat keparahan (temuan)',
-  'CWE kiezen': 'Pilih CWE',
-  'Zoek op naam of CWE-nummer': 'Cari berdasarkan nama atau nomor CWE',
-  'Geen CWE gevonden': 'CWE tidak ditemukan',
-  'Kies CWE…': 'Pilih CWE…',
+
   'AI-concept': 'Draf AI',
   'Nagekeken': 'Ditinjau',
   'Wis AI-alt-teksten': 'Hapus teks alt AI',
@@ -266,10 +240,7 @@ const _dutchSourceId = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Pernyataan kebenaran dengan pelapor, sertifikasi, tanda tangan, dan penyegelan.',
   'Uitbreidingen': 'Ekstensi',
-  'Gegevens opschonen': 'Bersihkan data',
-  'Gegevens lokaal beschikbaar': 'Data tersedia secara lokal',
-  'Op het web nog niet beschikbaar': 'Belum tersedia di web',
-  'Nog niet opgehaald': 'Belum diambil',
+
   'AI-assistentie': 'Bantuan AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Bantuan AI hanya tersedia di versi desktop.',
@@ -1379,9 +1350,7 @@ const _dutchSourceId = {
   'Projectstart / kick-off': 'Awal proyek / kick-off',
   'Voorbespreking communicatie': 'Diskusi awal komunikasi',
   'Projecttijdlijn': 'Linimasa proyek',
-  'Informatieveiligheid: RASCI / TVB': 'Keamanan informasi: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Rencana tugas keamanan',
-  'Certificering voortgang': 'Kemajuan sertifikasi',
+
   'Training / workshop': 'Pelatihan / workshop',
   'Rapportage': 'Laporan',
   'Onderzoeksverhaal': 'Narasi penelitian',
@@ -1397,12 +1366,7 @@ const _dutchSourceId = {
       'Kelompok sasaran, pesan utama, kanal, dan juru bicara.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fase, tonggak pencapaian, ketergantungan, dan momen keputusan.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Mencatat peran, matriks RASCI, dan kesepakatan tugas.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Tugas, prioritas, pemilik, dan bukti pendukung.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Kemajuan per domain, kontrol, dan perencanaan audit.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Tujuan pembelajaran, konsep utama, latihan, dan pertanyaan kuis.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1416,18 +1380,16 @@ const _dutchSourceId = {
   'Sjabloon': 'Templat',
   'Post-incident review / lessons learned':
       'Tinjauan pasca-insiden / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Kebocoran data / penilaian insiden privasi',
+
   'DPIA / privacy impact assessment': 'DPIA / penilaian dampak privasi',
-  'Risicoanalyse / risk register': 'Analisis risiko / risk register',
+
   'Business continuity / DR-test': 'Kelangsungan bisnis / uji DR',
-  'Tabletop-oefening / crisisoefening': 'Latihan tabletop / latihan krisis',
+
   'BOB-crisisrapportage': 'Pelaporan krisis BOB',
   'CAB / release readiness': 'CAB / kesiapan rilis',
   'Stuurgroep / project board update':
       'Komite pengarah / pembaruan project board',
-  'Auditbevindingen en opvolging': 'Temuan audit dan tindak lanjut',
-  'Leveranciersbeoordeling / vendor risk': 'Penilaian pemasok / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Keputusan arsitektur / presentasi ADR',
   'Beleid uitrollen / implementatieplan':
@@ -1435,28 +1397,14 @@ const _dutchSourceId = {
   'Overdracht / handover': 'Serah terima / handover',
   'Retrospective / teamverbetering': 'Retrospektif / perbaikan tim',
   'PPL Vluchtvoorbereiding': 'Persiapan penerbangan PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Linimasa, dampak, penyebab, dan tindakan perbaikan setelah insiden.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Menilai data, risiko, kewajiban lapor, dan komunikasi.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Pemrosesan, dasar hukum, risiko privasi, dan langkah penanganan.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Mencatat risiko, kemungkinan, dampak, langkah penanganan, dan pemilik.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Skenario, target pemulihan, temuan pengujian, dan poin perbaikan.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Skenario, inject, keputusan, pengamatan, dan evaluasi.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Memandu tim krisis melalui pembentukan gambaran, penilaian, dan pengambilan keputusan, dengan gambaran situasi langsung, pertanyaan informasi, dilema, log keputusan, dan daftar tindakan.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Perubahan, dampak, pengujian, rollback, komunikasi, dan go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Kemajuan, perencanaan, anggaran, risiko, dan keputusan yang diminta.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Temuan, root cause, langkah penanganan, bukti, dan status.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Layanan, data, ketergantungan, persyaratan, risiko, dan keputusan.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Konteks, opsi, trade-off, keputusan, dan konsekuensi.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4621,8 +4569,7 @@ const _dutchSourceAddId = <String, String>{
   'Privacy en classificatie': 'Privasi dan klasifikasi',
   'Uiterlijk van documenten': 'Tampilan dokumen',
   'Exportkwaliteit': 'Kualitas ekspor',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Berikan dulu persetujuan untuk lalu lintas keluar di Privasi dan klasifikasi.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Layanan cloud terlebih dahulu memerlukan persetujuan privasi Anda di "Privasi dan klasifikasi" dan tidak berfungsi di versi web.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5575,9 +5522,7 @@ const _dutchSourceAddId = <String, String>{
   'Debriefing / after-action review': 'Debriefing / tinjauan pasca-tindakan',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Apa yang direncanakan, apa yang terjadi, mengapa — dan kesepakatan apa yang kita buat.',
-  'Threat modeling-sessie': 'Sesi threat modeling',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Cakupan, aliran data, batas kepercayaan, ancaman per kategori STRIDE, dan langkah penanganan.',
+
   'Casuïstiekbespreking sociaal domein': 'Pembahasan kasus bidang sosial',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Kasus yang dianonimkan: ranah kehidupan, keselamatan, kerangka hukum, dan koordinasi.',
@@ -6162,10 +6107,7 @@ const _dutchSourceAddId = <String, String>{
       'Indeks daftar periksa: id stabil, judul kanonik, dan kategori per pengujian. Isi panduan itu sendiri tidak disertakan.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Indeks pengujian v2.0.0: id stabil, judul kanonik, kategori MASVS, dan kelemahan MASWE per pengujian. Pengujian v1 yang ditarik dan placeholder tidak termasuk; begitu pula isi panduan.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Daftar lengkap (id, nama, deskripsi) ditambah inti pilihan kami sendiri dengan catatan remediasi.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Skema EIS lengkap (88 persyaratan yang dapat diuji).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Nama kondisi medis dalam sembilan bahasa sebagai leksikon kesehatan untuk pemeriksaan privasi (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6320,8 +6262,7 @@ const _dutchSourceAddId = <String, String>{
   'naam@example.org\nexample.org': 'nama@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Sebuah lapisan di samping deck ini terlalu besar dan tidak dimuat; berkasnya sendiri tidak berubah:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Stempel waktu ini bukan milik permintaan terakhir',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Sebutkan nomor versi ini saat Anda melaporkan masalah keamanan.',
   'Video niet ingesloten': 'Video tidak disertakan',
@@ -6530,10 +6471,7 @@ const _dutchSourceAddId = <String, String>{
       'Angka bagan tidak tersimpan — sekarang hanya ada di jendela ini:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Di peramban tidak ada pemulihan setelah crash: jika kamu menutup tab ini, pekerjaan yang belum tersimpan akan hilang. Simpan sendiri presentasimu.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Basis data CVE lokal (Anda sendiri yang memulai unduhan): OciDeck mengambil data massal melalui api.github.com dan berkas rilis yang ditunjuk alamat itu.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Pencarian CVE (mati secara bawaan): jika dinyalakan, kata pencarian Anda dikirim ke cermin CVE yang disetel dan, jika tidak menemukan apa pun, ke basis data Eropa ENISA dan ke MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Video YouTube atau Vimeo yang disematkan memuat pemutar dari layanan tersebut.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7135,8 +7073,7 @@ const _dutchSourceAddId = <String, String>{
       'Tidak ada presentasi di repositori ini.',
   'Rapportagetaal': 'Bahasa laporan',
   'Niet vastgelegd': 'Tidak dicatat',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Slide pelaporan dan data referensi untuk keamanan informasi: temuan, daftar periksa, matriks ruang lingkup, dan penandatanganan. Terstruktur menurut MIAUW dan dapat digunakan secara luas untuk pentest, audit, dan riset keamanan. Data referensi ada di dalam aplikasi itu sendiri, jadi modul langsung bekerja dan sepenuhnya offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Modul opsional. Mati secara bawaan; tetap tersembunyi sampai Anda mengaktifkannya.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7165,11 +7102,10 @@ const _dutchSourceAddId = <String, String>{
   'adres': 'alamat',
   'postcode': 'kode pos',
   'persoonsnaam': 'nama orang',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Presentasi ini berisi bagian dari modul Keamanan Informasi. Aktifkan modul untuk mengeditnya.',
+
   'Inschakelen': 'Aktifkan',
   'Bevestigen': 'Konfirmasi',
-  'Onderbouwing van de bevestiging': 'Dasar konfirmasi',
+
   'De eigenaar staat insluiten niet toe':
       'Pemilik tidak mengizinkan penyematan',
   'Deze video is alleen op de bron zelf te bekijken.':
@@ -7278,43 +7214,13 @@ const _dutchSourceAddId = <String, String>{
   'databaseverbinding met wachtwoord': 'koneksi basis data dengan kata sandi',
   'wachtwoord in klare tekst': 'kata sandi dalam teks biasa',
   'Afbreken': 'Batalkan',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Dibatalkan. Tidak ada yang tertinggal setengah jadi.',
+
   'Bijwerken': 'Perbarui',
   'Binnenhalen…': 'Mengunduh…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Ambil basis data',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Daftar CVE tidak dapat diambil. Periksa koneksimu dan coba lagi; daftar yang terunduh sebagian telah dibuang.',
-  'De nieuwste uitgave opzoeken…': 'Mencari rilis terbaru…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Ini unduhan besar: lebih dari 500 MB yang harus diambil, sekitar 1,5 GB ruang disk untuk sementara, dan tergantung koneksi serta perangkatmu, mudah memakan sepuluh sampai tiga puluh menit. Setelah itu tersisa indeks sebesar beberapa ratus megabyte. Pada koneksi yang dibayar per megabyte, sebaiknya jangan lakukan ini.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Ruang disk tidak mencukupi. Pembangunan indeks sementara membutuhkan lebih dari 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Arsip yang diunduh bukan yang kami harapkan dan ditolak. Tidak ada yang dipasang.',
-  'Indexeren…': 'Mengindeks…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Tersedia secara lokal — pencarian berlangsung offline, tidak ada kata kunci yang keluar.',
-  'Lokale CVE-database': 'Basis data CVE lokal',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Dengan daftar CVE di perangkatmu sendiri, pencarian tetap di sini: tidak ada lagi kata kunci yang dikirim ke server, dan tidak ada yang bisa melihat celah keamanan mana yang kamu teliti.',
-  'Uitpakken…': 'Mengekstrak…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Tempatkan daftar CVE lengkap di perangkat ini, agar pencarian berlangsung offline dan kata kuncimu tidak pergi ke mana-mana. Basis data ini berasal dari CVE List V5 (program CVE resmi, melalui GitHub).',
-  'Wat er lokaal beschikbaar is': 'Yang tersedia secara lokal',
-  'Nu bijwerken': 'Perbarui sekarang',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Data tersedia secara lokal — pencarian dilakukan di perangkat ini; tidak ada yang keluar.',
-  'Zwakheden (CWE)': 'Kelemahan (CWE)',
-  'Testgevallen (WSTG)': 'Kasus uji (WSTG)',
-  'MIAUW-eisen': 'Persyaratan MIAUW',
-  'CVSS-scoretabel': 'Tabel skor CVSS',
-  'Bevindingsjablonen': 'Templat temuan',
+
   'Zoek een instelling': 'Cari pengaturan',
   'Geen instelling gevonden': 'Pengaturan tidak ditemukan',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Kata pencarian Anda dikirim ke mirror CVE yang dikonfigurasi, dan jika tidak menemukan apa pun, juga ke ENISA dan MITRE. Pengelola server tersebut dapat menyimpulkan kerentanan spesifik mana yang Anda cari — dan dengan demikian kerentanan mana yang sedang Anda selidiki.',
+
   'Accepteren': 'Terima',
   'Accepteren + waarschuwen': 'Terima + peringatkan',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7334,8 +7240,7 @@ const _dutchSourceAddId = <String, String>{
   'burgerservicenummer (BSN)': 'nomor layanan warga (BSN)',
   'bankrekeningnummer (IBAN)': 'nomor rekening bank (IBAN)',
   'e-mailadres': 'alamat email',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Tanda tangan TSA tidak diverifikasi di dalam aplikasi; hanya hash yang cocok.',
+
   'Extern': 'Eksternal',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Diambil dari URL eksternal; membukanya menghubungi server itu.',
@@ -7372,22 +7277,7 @@ const _dutchSourceAddId = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Membuat daftar periksa per objek cakupan (WSTG untuk web/API); yang ada tetap dipertahankan.',
   'CVE opzoeken': 'Cari CVE',
-  'CVE opzoeken (online)': 'Cari CVE (daring)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Pencarian CVE tidak tersedia di versi web.',
-  'CVE-mirror (basis-URL)': 'Cermin CVE (URL dasar)',
-  'Geen CVE gevonden.': 'Tidak ada CVE ditemukan.',
-  'Kon de CVE-bron niet bereiken.': 'Tidak dapat menjangkau sumber CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Izinkan pencarian CVE secara daring di editor temuan melalui mirror NVD. Nonaktif secara bawaan; juga memerlukan persetujuan Anda dan hanya berfungsi di desktop.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Ketik (sebagian) id CVE lalu cari.',
-  'Typ minstens 3 tekens.': 'Ketik minimal 3 karakter.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Aktifkan pencarian CVE (daring) di Pengaturan → Keamanan untuk mencari CVE secara daring.',
-  'Zoek CVE…': 'Cari CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228':
-      'Cari berdasarkan id CVE, mis. 2021-44228',
+
   'Zoeken': 'Cari',
   'Hertest': 'Uji ulang',
   'Niet hertest': 'Tidak diuji ulang',

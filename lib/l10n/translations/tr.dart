@@ -83,47 +83,24 @@ const _dutchSourceTr = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Seri = satır, sütun = etiket, hücre rengi değeri izler. Risk matrisi için eksenleri olasılık ve etki olarak etiketleyin.',
   'Auditdossier exporteren': 'Denetim dosyasını dışa aktar',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Önce raporu sonlandırın ve mühürleyin.',
-  'Auditdossier geëxporteerd naar:': 'Denetim dosyası şuraya aktarıldı:',
-  'MIAUW-pentestrapport': 'MIAUW sızma testi raporu',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Tam MIAUW rapor yapısı: doküman yönetimi, kapsam, yürütme, yönetici özeti, bulgular, kontrol listeleri ve imza.',
+
   'Tekst voorstellen (AI)': 'Metin öner (AI)',
   'Het model gaf geen tekst terug.': 'Model herhangi bir metin döndürmedi.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Zaten metin var. AI taslağıyla değiştirilsin mi?',
   'RFC3161-tijdstempel': 'RFC3161 zaman damgası',
-  'Verzegel het deck eerst.': 'Önce sunumu mühürleyin.',
-  'Verzoek (.tsq) exporteren': 'İsteği (.tsq) dışa aktar',
-  'Token (.tsr) importeren': 'Token\'ı (.tsr) içe aktar',
-  'Nog geen tijdstempel': 'Henüz zaman damgası yok',
-  'Getijdstempeld op': 'Zaman damgası tarihi',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Zaman damgası mühür karmasıyla eşleşmiyor',
-  'Tijdstempelverzoek opgeslagen': 'Zaman damgası isteği kaydedildi',
-  'Tijdstempel geïmporteerd': 'Zaman damgası içe aktarıldı',
+
   'Managementsamenvatting': 'Yönetici özeti',
-  'Bevindingen totaal': 'Toplam bulgu',
-  'scope-objecten getest': 'kapsam nesnesi test edildi',
+
   'Gebruikte standaarden': 'Kullanılan standartlar',
-  'Bewijs-hashes kopiëren': 'Kanıt karmalarını kopyala',
-  'Bewijs-hashes gekopieerd': 'Kanıt karmaları kopyalandı',
-  'Bevindingen hernummeren': 'Bulguları yeniden numaralandır',
-  'Scope-dekking controleren': 'Kapsam kapsamasını denetle',
-  'Scope-dekking': 'Kapsam kapsaması',
-  'Geen dekkingsgaten': 'Kapsama boşluğu yok',
-  'In scope, maar niet getest en geen bevinding:':
-      'Kapsamda, ancak test edilmedi ve bulgu yok:',
+
   'MIAUW-compliance': 'MIAUW uyumluluğu',
   'Voldaan': 'Karşılandı',
   'Openstaand': 'Açık',
-  'Uitgesloten door klant': 'Müşteri tarafından hariç tutuldu',
+
   'Handmatig': 'Elle',
   'Uitsluiten': 'Hariç tut',
-  'Opheffen': 'Kaldır',
-  'Reden voor uitsluiting': 'Hariç tutma nedeni',
-  'Fundamentele eisen zijn uitgesloten': 'Temel gereksinimler hariç tutuldu',
+
   'Nieuwe bevinding (wizard)': 'Yeni bulgu (sihirbaz)',
   'Bevinding maken': 'Bulgu oluştur',
   'CIA-rating (scope-object)': 'CIA derecelendirmesi (kapsam nesnesi)',
@@ -134,10 +111,7 @@ const _dutchSourceTr = {
   'Bewijsslide toevoegen': 'Kanıt slaydı ekle',
   'CIA-gewogen': 'CIA ağırlıklı',
   'Severity (bevindingen)': 'Önem derecesi (bulgular)',
-  'CWE kiezen': 'CWE seç',
-  'Zoek op naam of CWE-nummer': 'Ada veya CWE numarasına göre ara',
-  'Geen CWE gevonden': 'CWE bulunamadı',
-  'Kies CWE…': 'CWE seçin…',
+
   'AI-concept': 'AI taslağı',
   'Nagekeken': 'Gözden geçirildi',
   'Wis AI-alt-teksten': 'AI alt metinlerini sil',
@@ -267,10 +241,7 @@ const _dutchSourceTr = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Raportör, sertifikasyon, imza ve mühürleme ile doğruluk beyanı.',
   'Uitbreidingen': 'Eklentiler',
-  'Gegevens opschonen': 'Verileri temizle',
-  'Gegevens lokaal beschikbaar': 'Veriler yerel olarak mevcut',
-  'Op het web nog niet beschikbaar': 'Web\'de henüz kullanılamıyor',
-  'Nog niet opgehaald': 'Henüz alınmadı',
+
   'AI-assistentie': 'AI yardımı',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'AI yardımı yalnızca masaüstü sürümünde kullanılabilir.',
@@ -1388,8 +1359,7 @@ const _dutchSourceTr = {
   'Geen presentaties in deze repository.': 'Bu depoda sunum yok.',
   'Rapportagetaal': 'Rapor dili',
   'Niet vastgelegd': 'Kaydedilmedi',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Bilgi güvenliği için raporlama slaytları ve referans verileri: bulgular, kontrol listeleri, kapsam matrisleri ve imzalama. MIAUW\'ya göre yapılandırılmıştır ve pentestler, denetimler ve güvenlik araştırmaları için geniş çapta kullanılabilir. Referans veriler uygulamanın kendi içindedir, bu yüzden modül anında ve tamamen çevrimdışı çalışır.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'İsteğe bağlı modüller. Varsayılan olarak kapalı; siz açana kadar gizli kalır.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -1418,11 +1388,10 @@ const _dutchSourceTr = {
   'adres': 'adres',
   'postcode': 'posta kodu',
   'persoonsnaam': 'kişi adı',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Bu sunum, Bilgi güvenliği modülünün parçalarını içeriyor. Bunları düzenlemek için modülü açın.',
+
   'Inschakelen': 'Etkinleştir',
   'Bevestigen': 'Onayla',
-  'Onderbouwing van de bevestiging': 'Onayın gerekçesi',
+
   'De eigenaar staat insluiten niet toe': 'Sahibi gömmeye izin vermiyor',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Bu video yalnızca kaynağın kendisinde izlenebilir.',
@@ -1531,43 +1500,13 @@ const _dutchSourceTr = {
   'databaseverbinding met wachtwoord': 'parola içeren veritabanı bağlantısı',
   'wachtwoord in klare tekst': 'düz metin hâlinde parola',
   'Afbreken': 'İptal',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'İptal edildi. Yarım kalan hiçbir şey yok.',
+
   'Bijwerken': 'Güncelle',
   'Binnenhalen…': 'İndiriliyor…',
-  'CVE\'s': 'CVE\'ler',
-  'Database ophalen': 'Veritabanını getir',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'CVE listesi alınamadı. Bağlantınızı denetleyip yeniden deneyin; yarım indirilmiş liste atıldı.',
-  'De nieuwste uitgave opzoeken…': 'En yeni sürüm aranıyor…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Bu büyük bir indirmedir: 500 MB\'ın üzerinde veri, geçici olarak yaklaşık 1,5 GB disk alanı ve bağlantınıza ve cihazınıza bağlı olarak kolayca on ila otuz dakikalık iş. Sonrasında birkaç yüz megabaytlık bir dizin geride kalır. Megabayt başına ücretlendirilen bir bağlantıda bunu yapmamanız daha iyi olur.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Disk alanı yetersizdi. Dizinin oluşturulması geçici olarak 1,5 GB\'ın üzerinde alan ister.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Alınan arşiv beklediğimiz gibi değildi ve reddedildi. Hiçbir şey kurulmadı.',
-  'Indexeren…': 'Dizinleniyor…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Yerel olarak kullanılabilir — aramalar çevrimdışı yapılır, hiçbir arama terimi dışarı çıkmaz.',
-  'Lokale CVE-database': 'Yerel CVE veritabanı',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'CVE listesi kendi cihazınızda olduğunda aramalar burada kalır: artık hiçbir arama terimi bir sunucuya gitmez ve hangi açığı incelediğinizi kimse göremez.',
-  'Uitpakken…': 'Arşivden çıkarılıyor…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Tam CVE listesini bu cihaza yerleştirin; böylece aramalar çevrimdışı yapılır ve arama teriminiz hiçbir yere gitmez. Veritabanı CVE List V5\'ten gelir (resmî CVE programı, GitHub üzerinden).',
-  'Wat er lokaal beschikbaar is': 'Yerel olarak neler kullanılabilir',
-  'Nu bijwerken': 'Şimdi güncelle',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Veriler yerel olarak kullanılabilir — aramalar bu cihazda yapılır, dışarı hiçbir şey çıkmaz.',
-  'Zwakheden (CWE)': 'Zayıflıklar (CWE)',
-  'Testgevallen (WSTG)': 'Test durumları (WSTG)',
-  'MIAUW-eisen': 'MIAUW gereksinimleri',
-  'CVSS-scoretabel': 'CVSS puan tablosu',
-  'Bevindingsjablonen': 'Bulgu şablonları',
+
   'Zoek een instelling': 'Bir ayar arayın',
   'Geen instelling gevonden': 'Ayar bulunamadı',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Arama teriminiz ayarlanan CVE aynasına, orada bir şey bulunmazsa ENISA ve MITRE\'ye de gider. Bu sunucuları işletenler, buradan hangi belirli açığı aradığınızı — dolayısıyla hangi açığı incelediğinizi — çıkarabilir.',
+
   'Accepteren': 'Kabul et',
   'Accepteren + waarschuwen': 'Kabul et + uyar',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -1586,8 +1525,7 @@ const _dutchSourceTr = {
   'burgerservicenummer (BSN)': 'vatandaşlık hizmet numarası (BSN)',
   'bankrekeningnummer (IBAN)': 'banka hesap numarası (IBAN)',
   'e-mailadres': 'e-posta adresi',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'TSA imzası uygulama içinde doğrulanmadı; yalnızca özet (hash) eşleşiyor.',
+
   'Extern': 'Harici',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Harici bir URL\'den alındı; açılması o sunucuya erişti.',
@@ -1625,22 +1563,7 @@ const _dutchSourceTr = {
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Her kapsam nesnesi için bir kontrol listesi oluşturur (web/API için WSTG); mevcut olanlar korunur.',
   'CVE opzoeken': 'CVE ara',
-  'CVE opzoeken (online)': 'CVE ara (çevrimiçi)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE arama web sürümünde kullanılamaz.',
-  'CVE-mirror (basis-URL)': 'CVE aynası (temel URL)',
-  'Geen CVE gevonden.': 'CVE bulunamadı.',
-  'Kon de CVE-bron niet bereiken.': 'CVE kaynağına ulaşılamadı.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Bulgu düzenleyicisinde bir NVD aynası üzerinden çevrimiçi CVE aramaya izin verin. Varsayılan olarak kapalı; ayrıca izninizi gerektirir ve yalnızca masaüstünde çalışır.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Bir CVE kimliğinin (bir bölümünü) yazıp arayın.',
-  'Typ minstens 3 tekens.': 'En az 3 karakter yazın.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Çevrimiçi CVE aramak için Ayarlar → Güvenlik altında CVE ara (çevrimiçi) seçeneğini açın.',
-  'Zoek CVE…': 'CVE ara…',
-  'Zoek op CVE-id, bijv. 2021-44228':
-      'CVE kimliğine göre arayın, örn. 2021-44228',
+
   'Zoeken': 'Ara',
   'Hertest': 'Yeniden test',
   'Niet hertest': 'Yeniden test edilmedi',
@@ -2342,9 +2265,7 @@ const _dutchSourceTr = {
   'Projectstart / kick-off': 'Proje başlangıcı / kick-off',
   'Voorbespreking communicatie': 'İletişim ön görüşmesi',
   'Projecttijdlijn': 'Proje zaman çizelgesi',
-  'Informatieveiligheid: RASCI / TVB': 'Bilgi güvenliği: RASCI / sorumluluklar',
-  'Takenplan informatieveiligheid': 'Bilgi güvenliği görev planı',
-  'Certificering voortgang': 'Sertifikasyon ilerlemesi',
+
   'Training / workshop': 'Eğitim / atölye',
   'Rapportage': 'Raporlama',
   'Onderzoeksverhaal': 'Araştırma anlatısı',
@@ -2360,12 +2281,7 @@ const _dutchSourceTr = {
       'Hedef kitleler, ana mesaj, kanallar ve sözcülük.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Aşamalar, kilometre taşları, bağımlılıklar ve karar anları.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Rolleri, RASCI matrisini ve görev anlaşmalarını kaydedin.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Görevler, öncelikler, sahipler ve kanıtlar.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Alan bazında ilerleme, kontroller ve denetim planlaması.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Öğrenme hedefleri, temel kavramlar, alıştırma ve quiz sorusu.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -2379,46 +2295,29 @@ const _dutchSourceTr = {
   'Sjabloon': 'Şablon',
   'Post-incident review / lessons learned':
       'Olay sonrası inceleme / çıkarılan dersler',
-  'Datalek / privacy-incident beoordeling':
-      'Veri ihlali / gizlilik olayı değerlendirmesi',
+
   'DPIA / privacy impact assessment': 'DPIA / gizlilik etki değerlendirmesi',
-  'Risicoanalyse / risk register': 'Risk analizi / risk kaydı',
+
   'Business continuity / DR-test': 'İş sürekliliği / DR testi',
-  'Tabletop-oefening / crisisoefening': 'Masa başı tatbikat / kriz tatbikatı',
+
   'BOB-crisisrapportage': 'BOB kriz raporlaması',
   'CAB / release readiness': 'CAB / sürüm hazırlığı',
   'Stuurgroep / project board update':
       'Yönlendirme kurulu / proje kurulu güncellemesi',
-  'Auditbevindingen en opvolging': 'Denetim bulguları ve takibi',
-  'Leveranciersbeoordeling / vendor risk':
-      'Tedarikçi değerlendirmesi / tedarikçi riski',
+
   'Architectuurbesluit / ADR-presentatie': 'Mimari karar / ADR sunumu',
   'Beleid uitrollen / implementatieplan': 'Politika yayılımı / uygulama planı',
   'Overdracht / handover': 'Devir teslim / handover',
   'Retrospective / teamverbetering': 'Retrospektif / ekip iyileştirmesi',
   'PPL Vluchtvoorbereiding': 'PPL uçuş hazırlığı',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Bir olaydan sonra zaman çizelgesi, etki, nedenler ve iyileştirme eylemleri.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Verileri, riski, bildirim yükümlülüğünü ve iletişimi değerlendirin.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'İşleme, hukuki dayanak, gizlilik riskleri ve önlemler.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Riskleri, olasılığı, etkiyi, önlemleri ve sahipleri kaydedin.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Senaryo, kurtarma hedefleri, test bulguları ve iyileştirme noktaları.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Senaryo, olay girdileri, kararlar, gözlemler ve değerlendirme.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Bir kriz ekibini durum tespiti, değerlendirme ve karar verme aşamalarında yönlendirin; canlı durum resmi, bilgi talepleri, ikilemler, karar günlüğü ve eylem listesiyle.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Değişiklik, etki, testler, geri alma, iletişim ve go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'İlerleme, planlama, bütçe, riskler ve istenen kararlar.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Bulgular, kök neden, önlemler, kanıt ve durum.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Hizmet, veri, bağımlılık, gereksinimler, riskler ve karar.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Bağlam, seçenekler, ödünleşimler, karar ve sonuçlar.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -5502,8 +5401,7 @@ const _dutchSourceAddTr = <String, String>{
   'Privacy en classificatie': 'Gizlilik ve sınıflandırma',
   'Uiterlijk van documenten': 'Belge görünümü',
   'Exportkwaliteit': 'Dışa aktarma kalitesi',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Önce Gizlilik ve sınıflandırma bölümünden giden trafiğe izin verin.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Bulut hizmeti için önce "Gizlilik ve sınıflandırma" bölümünde gizlilik izniniz gerekir; web sürümünde çalışmaz.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -6451,9 +6349,7 @@ const _dutchSourceAddTr = <String, String>{
   'Debriefing / after-action review': 'Debrifing / eylem sonrası inceleme',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Ne planlanmıştı, ne oldu, neden — ve hangi anlaşmaları yapıyoruz.',
-  'Threat modeling-sessie': 'Tehdit modelleme oturumu',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Kapsam, veri akışları, güven sınırları, STRIDE kategorisi başına tehditler ve önlemler.',
+
   'Casuïstiekbespreking sociaal domein': 'Sosyal alanda vaka görüşmesi',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Anonimleştirilmiş vaka: yaşam alanları, güvenlik, yasal çerçeve ve koordinasyon.',
@@ -7024,10 +6920,7 @@ const _dutchSourceAddTr = <String, String>{
       'Kontrol listesi dizini: her test için kalıcı kimlik, kanonik başlık ve kategori. Kılavuzun kendi içeriği pakete dahil değil.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 test dizini: her test için kalıcı kimlik, kanonik başlık, MASVS kategorisi ve MASWE zayıflığı. Geri çekilen v1 testleri ve yer tutucular dahil değil; kılavuzun içeriği de değil.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Tam liste (kimlik, ad, açıklama) ve kendi seçtiğimiz çekirdek ile giderme notlarımız.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Tam EIS şeması (88 test edilebilir gereksinim).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Gizlilik denetimi için sağlık sözlüğü olarak dokuz dilde hastalık adları (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -7180,8 +7073,7 @@ const _dutchSourceAddTr = <String, String>{
   'naam@example.org\nexample.org': 'ad@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Bu sunumun yanındaki bir katman çok büyük olduğu için yüklenmedi; dosyanın kendisi değişmedi:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Bu zaman damgası son isteğe ait değil',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Bir güvenlik sorunu bildirirken bu sürüm numarasını belirtin.',
   'Video niet ingesloten': 'Video gömülmedi',
@@ -7388,10 +7280,7 @@ const _dutchSourceAddTr = <String, String>{
       'Grafik sayıları kaydedilmedi — artık yalnızca bu pencerede duruyorlar:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Tarayıcıda çökme kurtarma yoktur: bu sekmeyi kapatırsanız kaydedilmemiş çalışma kaybolur. Sunumunuzu kendiniz kaydedin.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Yerel CVE veri tabanı (indirmeyi siz başlatırsınız): OciDeck toplu verileri api.github.com üzerinden ve o adresin işaret ettiği sürüm dosyasından alır.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE arama (varsayılan olarak kapalı): açıksa arama teriminiz ayarlanan CVE aynasına, orada bir şey bulunamazsa ENISA\'nın Avrupa veri tabanına ve MITRE\'ye gider.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Gömülü bir YouTube veya Vimeo videosu oynatıcıyı o hizmetten yükler.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':

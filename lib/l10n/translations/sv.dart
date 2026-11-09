@@ -84,47 +84,24 @@ const _dutchSourceSv = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serie = rad, kolumn = etikett, cellfärgen följer värdet. Namnge axlarna sannolikhet och konsekvens för en riskmatris.',
   'Auditdossier exporteren': 'Exportera revisionsdossier',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Slutför och försegla rapporten först.',
-  'Auditdossier geëxporteerd naar:': 'Revisionsdossier exporterat till:',
-  'MIAUW-pentestrapport': 'MIAUW-pentestrapport',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Fullständig MIAUW-rapportstruktur: dokumenthantering, omfattning, genomförande, ledningssammanfattning, resultat, checklistor och signering.',
+
   'Tekst voorstellen (AI)': 'Föreslå text (AI)',
   'Het model gaf geen tekst terug.': 'Modellen returnerade ingen text.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Det finns redan text. Ersätt med AI-utkastet?',
   'RFC3161-tijdstempel': 'RFC3161-tidsstämpel',
-  'Verzegel het deck eerst.': 'Försegla decket först.',
-  'Verzoek (.tsq) exporteren': 'Exportera begäran (.tsq)',
-  'Token (.tsr) importeren': 'Importera token (.tsr)',
-  'Nog geen tijdstempel': 'Ingen tidsstämpel än',
-  'Getijdstempeld op': 'Tidsstämplad den',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Tidsstämpeln matchar inte sigillhashen',
-  'Tijdstempelverzoek opgeslagen': 'Tidsstämpelbegäran sparad',
-  'Tijdstempel geïmporteerd': 'Tidsstämpel importerad',
+
   'Managementsamenvatting': 'Sammanfattning för ledningen',
-  'Bevindingen totaal': 'Totalt antal fynd',
-  'scope-objecten getest': 'omfångsobjekt testade',
+
   'Gebruikte standaarden': 'Använda standarder',
-  'Bewijs-hashes kopiëren': 'Kopiera bevis-hashar',
-  'Bewijs-hashes gekopieerd': 'Bevis-hashar kopierade',
-  'Bevindingen hernummeren': 'Numrera om fynd',
-  'Scope-dekking controleren': 'Kontrollera scope-täckning',
-  'Scope-dekking': 'Scope-täckning',
-  'Geen dekkingsgaten': 'Inga täckningsluckor',
-  'In scope, maar niet getest en geen bevinding:':
-      'Inom scope, men inte testat och utan fynd:',
+
   'MIAUW-compliance': 'MIAUW-efterlevnad',
   'Voldaan': 'Uppfylld',
   'Openstaand': 'Öppen',
-  'Uitgesloten door klant': 'Utesluten av kunden',
+
   'Handmatig': 'Manuell',
   'Uitsluiten': 'Uteslut',
-  'Opheffen': 'Upphäv',
-  'Reden voor uitsluiting': 'Skäl för uteslutning',
-  'Fundamentele eisen zijn uitgesloten': 'Grundläggande krav är uteslutna',
+
   'Nieuwe bevinding (wizard)': 'Nytt fynd (guide)',
   'Bevinding maken': 'Skapa fynd',
   'CIA-rating (scope-object)': 'CIA-bedömning (omfångsobjekt)',
@@ -135,10 +112,7 @@ const _dutchSourceSv = {
   'Bewijsslide toevoegen': 'Lägg till bevisbild',
   'CIA-gewogen': 'CIA-viktad',
   'Severity (bevindingen)': 'Allvarlighetsgrad (fynd)',
-  'CWE kiezen': 'Välj CWE',
-  'Zoek op naam of CWE-nummer': 'Sök på namn eller CWE-nummer',
-  'Geen CWE gevonden': 'Ingen CWE hittades',
-  'Kies CWE…': 'Välj CWE…',
+
   'AI-concept': 'AI-utkast',
   'Nagekeken': 'Granskad',
   'Wis AI-alt-teksten': 'Rensa AI-alt-texter',
@@ -266,10 +240,7 @@ const _dutchSourceSv = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Sanningsförsäkran med rapportör, certifiering, underskrift och försegling.',
   'Uitbreidingen': 'Tillägg',
-  'Gegevens opschonen': 'Rensa data',
-  'Gegevens lokaal beschikbaar': 'Data tillgängliga lokalt',
-  'Op het web nog niet beschikbaar': 'Inte tillgängligt på webben ännu',
-  'Nog niet opgehaald': 'Inte hämtat ännu',
+
   'AI-assistentie': 'AI-assistans',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'AI-assistans är endast tillgängligt i skrivbordsversionen.',
@@ -1377,9 +1348,7 @@ const _dutchSourceSv = {
   'Projectstart / kick-off': 'Projektstart / kick-off',
   'Voorbespreking communicatie': 'Förmöte om kommunikation',
   'Projecttijdlijn': 'Projekttidslinje',
-  'Informatieveiligheid: RASCI / TVB': 'Informationssäkerhet: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Plan för säkerhetsuppgifter',
-  'Certificering voortgang': 'Certifieringsframsteg',
+
   'Training / workshop': 'Utbildning / workshop',
   'Rapportage': 'Rapportering',
   'Onderzoeksverhaal': 'Undersökningsberättelse',
@@ -1395,12 +1364,7 @@ const _dutchSourceSv = {
       'Målgrupper, kärnbudskap, kanaler och talespersonsroll.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Faser, milstolpar, beroenden och beslutspunkter.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Fastställ roller, RASCI-matris och uppgiftsöverenskommelser.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Uppgifter, prioriteringar, ägare och underlag.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Framsteg per domän, kontroller och revisionsplanering.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Lärandemål, kärnbegrepp, övning och quizfråga.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1414,18 +1378,16 @@ const _dutchSourceSv = {
   'Sjabloon': 'Mall',
   'Post-incident review / lessons learned':
       'Post-incident review / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Dataläcka / bedömning av integritetsincident',
+
   'DPIA / privacy impact assessment':
       'DPIA / konsekvensbedömning för dataskydd',
-  'Risicoanalyse / risk register': 'Riskanalys / riskregister',
+
   'Business continuity / DR-test': 'Business continuity / DR-test',
-  'Tabletop-oefening / crisisoefening': 'Tabletop-övning / krisövning',
+
   'BOB-crisisrapportage': 'BOB-krisrapportering',
   'CAB / release readiness': 'CAB / release readiness',
   'Stuurgroep / project board update': 'Styrgrupp / project board-uppdatering',
-  'Auditbevindingen en opvolging': 'Revisionsfynd och uppföljning',
-  'Leveranciersbeoordeling / vendor risk': 'Leverantörsbedömning / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Arkitekturbeslut / ADR-presentation',
   'Beleid uitrollen / implementatieplan':
@@ -1433,28 +1395,14 @@ const _dutchSourceSv = {
   'Overdracht / handover': 'Överlämning / handover',
   'Retrospective / teamverbetering': 'Retrospektiv / teamförbättring',
   'PPL Vluchtvoorbereiding': 'PPL-flygförberedelse',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Tidslinje, påverkan, orsaker och förbättringsåtgärder efter en incident.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Bedöm uppgifter, risk, anmälningsplikt och kommunikation.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Behandling, rättslig grund, integritetsrisker och åtgärder.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Dokumentera risker, sannolikhet, påverkan, åtgärder och ägare.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Scenario, återställningsmål, testfynd och förbättringspunkter.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Scenario, injects, beslut, observationer och utvärdering.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Led ett kristeam genom lägesbild, bedömning och beslutsfattande, med lägesbild i realtid, informationsfrågor, dilemman, beslutslogg och åtgärdslista.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Ändring, påverkan, tester, rollback, kommunikation och go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Framsteg, planering, budget, risker och begärda beslut.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Fynd, root cause, åtgärder, underlag och status.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Tjänst, data, beroende, krav, risker och beslut.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontext, alternativ, trade-offs, beslut och konsekvenser.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4621,8 +4569,7 @@ const _dutchSourceAddSv = <String, String>{
   'Privacy en classificatie': 'Integritet och klassificering',
   'Uiterlijk van documenten': 'Dokumentutseende',
   'Exportkwaliteit': 'Exportkvalitet',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Ge först samtycke till utgående trafik under Integritet och klassificering.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'En molntjänst kräver först ditt integritetssamtycke under "Integritet och klassificering" och fungerar inte i webbversionen.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5574,9 +5521,7 @@ const _dutchSourceAddSv = <String, String>{
   'Debriefing / after-action review': 'Debriefing / utvärdering efter insats',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Vad som var planerat, vad som hände, varför — och vilka överenskommelser vi gör.',
-  'Threat modeling-sessie': 'Threat modeling-session',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Omfattning, dataflöden, förtroendegränser, hot per STRIDE-kategori och åtgärder.',
+
   'Casuïstiekbespreking sociaal domein':
       'Ärendegenomgång inom det sociala området',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
@@ -6154,10 +6099,7 @@ const _dutchSourceAddSv = <String, String>{
       'Checklisteindexet: per test det stabila id:t, den kanoniska titeln och kategorin. Själva guidens innehåll ingår inte.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Testindexet för v2.0.0: per test det stabila id:t, den kanoniska titeln, MASVS-kategorin och MASWE-svagheten. Tillbakadragna v1-test och platshållare ingår inte; inte heller guidens innehåll.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Hela listan (id, namn, beskrivning) plus en egen utvald kärna med våra åtgärdsanteckningar.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Hela EIS-schemat (88 testbara krav).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Sjukdomsnamn på nio språk som hälsolexikon för integritetskontrollen (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6311,8 +6253,7 @@ const _dutchSourceAddSv = <String, String>{
   'naam@example.org\nexample.org': 'namn@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Ett lager bredvid detta deck var för stort och lästes inte in; själva filen är oförändrad:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Den här tidsstämpeln hör inte till den senaste begäran',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Ange detta versionsnummer när du rapporterar ett säkerhetsproblem.',
   'Video niet ingesloten': 'Videon är inte inbäddad',
@@ -6521,10 +6462,7 @@ const _dutchSourceAddSv = <String, String>{
       'Diagramsiffrorna sparades inte — de finns bara kvar i det här fönstret:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'I webbläsaren finns ingen kraschåterställning: stänger du den här fliken är osparat arbete borta. Spara din presentation själv.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Den lokala CVE-databasen (du startar hämtningen själv): OciDeck hämtar massdata via api.github.com och den utgåvefil som adressen pekar på.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE-sökning (av som standard): när den är på skickas din sökterm till den inställda CVE-spegeln och, om den inte hittar något, till ENISA:s europeiska databas och till MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  En inbäddad YouTube- eller Vimeo-video hämtar spelaren från den tjänsten.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7126,8 +7064,7 @@ const _dutchSourceAddSv = <String, String>{
       'Inga presentationer i detta repository.',
   'Rapportagetaal': 'Rapportspråk',
   'Niet vastgelegd': 'Inte angivet',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Rapporteringsslides och referensdata för informationssäkerhet: fynd, checklistor, scope-matriser och godkännande. Strukturerad enligt MIAUW och brett användbar för pentester, revisioner och säkerhetsundersökningar. Referensdata finns i själva appen, så modulen fungerar direkt och helt offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valfria moduler. Av som standard; de förblir dolda tills du aktiverar dem.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7156,11 +7093,10 @@ const _dutchSourceAddSv = <String, String>{
   'adres': 'adress',
   'postcode': 'postnummer',
   'persoonsnaam': 'personnamn',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Den här presentationen innehåller delar av modulen Informationssäkerhet. Aktivera modulen för att redigera dem.',
+
   'Inschakelen': 'Aktivera',
   'Bevestigen': 'Bekräfta',
-  'Onderbouwing van de bevestiging': 'Motivering för bekräftelsen',
+
   'De eigenaar staat insluiten niet toe': 'Ägaren tillåter inte inbäddning',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Den här videon kan bara ses på själva källan.',
@@ -7268,43 +7204,13 @@ const _dutchSourceAddSv = <String, String>{
   'databaseverbinding met wachtwoord': 'databasanslutning med lösenord',
   'wachtwoord in klare tekst': 'lösenord i klartext',
   'Afbreken': 'Avbryt',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Avbrutet. Ingenting blev halvfärdigt kvar.',
+
   'Bijwerken': 'Uppdatera',
   'Binnenhalen…': 'Hämtar…',
-  'CVE\'s': 'CVE:er',
-  'Database ophalen': 'Hämta databas',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'CVE-listan kunde inte hämtas. Kontrollera din anslutning och försök igen; en halvhämtad lista har kastats.',
-  'De nieuwste uitgave opzoeken…': 'Söker efter den senaste utgåvan…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Det här är en stor nedladdning: över 500 MB att hämta, tillfälligt runt 1,5 GB diskutrymme och, beroende på din anslutning och enhet, lätt tio till trettio minuters arbete. Sedan blir ett index på några hundra megabyte kvar. På en anslutning som betalas per megabyte gör du helst inte det här.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Det fanns för lite diskutrymme. Uppbyggnaden kräver tillfälligt över 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Det hämtade arkivet var inte det vi förväntade oss och avvisades. Ingenting har installerats.',
-  'Indexeren…': 'Indexerar…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Tillgänglig lokalt — uppslag sker offline, ingen sökterm lämnar enheten.',
-  'Lokale CVE-database': 'Lokal CVE-databas',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Med CVE-listan på din egen enhet stannar uppslagen här: ingen sökterm går längre till en server, och ingen kan se vilken sårbarhet du undersöker.',
-  'Uitpakken…': 'Packar upp…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Lägg hela CVE-listan på den här enheten, så att uppslag sker offline och din sökterm inte går någonstans. Databasen kommer från CVE List V5 (det officiella CVE-programmet, via GitHub).',
-  'Wat er lokaal beschikbaar is': 'Vad som finns tillgängligt lokalt',
-  'Nu bijwerken': 'Uppdatera nu',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Data finns tillgängliga lokalt — sökningar sker på den här enheten; ingenting lämnar den.',
-  'Zwakheden (CWE)': 'Svagheter (CWE)',
-  'Testgevallen (WSTG)': 'Testfall (WSTG)',
-  'MIAUW-eisen': 'MIAUW-krav',
-  'CVSS-scoretabel': 'CVSS-poängtabell',
-  'Bevindingsjablonen': 'Fyndmallar',
+
   'Zoek een instelling': 'Sök en inställning',
   'Geen instelling gevonden': 'Ingen inställning hittades',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Din sökterm skickas till den konfigurerade CVE-spegeln och, om den inte hittar något, även till ENISA och MITRE. De som driver dessa servrar kan sluta sig till vilken specifik sårbarhet du söker — och därmed vilken sårbarhet du undersöker.',
+
   'Accepteren': 'Acceptera',
   'Accepteren + waarschuwen': 'Acceptera + varna',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7324,8 +7230,7 @@ const _dutchSourceAddSv = <String, String>{
   'burgerservicenummer (BSN)': 'medborgarnummer (BSN)',
   'bankrekeningnummer (IBAN)': 'bankkontonummer (IBAN)',
   'e-mailadres': 'e-postadress',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'TSA-signaturen verifieras inte i appen; endast hashen stämmer.',
+
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hämtad från en extern URL; öppningen kontaktade den servern.',
@@ -7362,21 +7267,7 @@ const _dutchSourceAddSv = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Skapar en checklista per scope-objekt (WSTG för webb/API); befintliga behålls.',
   'CVE opzoeken': 'Slå upp CVE',
-  'CVE opzoeken (online)': 'Slå upp CVE (online)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE-uppslag är inte tillgängligt i webbversionen.',
-  'CVE-mirror (basis-URL)': 'CVE-spegel (bas-URL)',
-  'Geen CVE gevonden.': 'Ingen CVE hittades.',
-  'Kon de CVE-bron niet bereiken.': 'Kunde inte nå CVE-källan.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Tillåt sökning efter CVE:er online i fyndeditorn via en NVD-spegel. Avstängt som standard; kräver också ditt samtycke och fungerar endast på skrivbordet.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Skriv (en del av) ett CVE-id och sök.',
-  'Typ minstens 3 tekens.': 'Skriv minst 3 tecken.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Aktivera CVE-uppslag (online) i Inställningar → Säkerhet för att söka CVE:er online.',
-  'Zoek CVE…': 'Sök CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Sök efter CVE-id, t.ex. 2021-44228',
+
   'Zoeken': 'Sök',
   'Hertest': 'Omtest',
   'Niet hertest': 'Inte omtestad',

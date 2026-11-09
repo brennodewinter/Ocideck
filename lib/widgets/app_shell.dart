@@ -51,7 +51,6 @@ import '../models/storage_origin.dart';
 import '../services/ai_client_service.dart';
 import '../services/ai_security_gate.dart';
 import '../services/ai_translate_service.dart';
-import '../services/audit_dossier.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/classification_enforcement_policy.dart';
@@ -59,10 +58,7 @@ import '../services/finding_context_score.dart';
 import '../services/finding_pagination.dart';
 import '../services/markdown_service.dart';
 import '../services/marp_compatibility.dart';
-import '../services/evidence_hash_service.dart';
 import '../services/pdf_evidence_service.dart';
-import '../services/management_summary.dart';
-import '../services/scope_coverage.dart';
 import '../services/classification_policy.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_integrity.dart';
@@ -153,10 +149,7 @@ import 'dialogs/command_palette.dart';
 import 'dialogs/local_deck_conflict_dialog.dart';
 import 'editors/markdown_editor_field.dart';
 import 'dialogs/duplicate_cleanup_dialog.dart';
-import 'dialogs/management_summary_dialog.dart';
 import 'dialogs/marp_compat_dialog.dart';
-import 'dialogs/miauw_compliance_panel.dart';
-import 'dialogs/scope_coverage_dialog.dart';
 import 'dialogs/slide_diff_dialog.dart';
 import 'dialogs/ai_translate_dialog.dart';
 import 'dialogs/convert_to_document_dialog.dart';
@@ -186,7 +179,6 @@ import 'shell/app_menu_bar.dart';
 import 'shell/shell_deck_commands.dart';
 import 'dialogs/save_destination_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
-import 'dialogs/seal_timestamp_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'dialogs/git_browser_dialog.dart';
 import 'dialogs/storage_connection_picker.dart';
@@ -274,11 +266,7 @@ class _AppShellState extends ConsumerState<AppShell> {
   /// null als er geen staat. De melding is niet zomaar een mededeling maar een
   /// uitspraak over déze presentatie, dus hij mag een tabwissel of het sluiten
   /// van het deck niet overleven — dan gaat hij namelijk over iets anders dan
-  /// wat de gebruiker ziet. Zie [_syncSecurityBannerWithTabs].
-  int? _securityPromptTabId;
-
-  /// Same role as [_securityPromptTabId] for the Procesverbetering discovery
-  /// banner (PROCESS_IMPROVEMENT.md Phase 0).
+  /// wat de gebruiker ziet. Voor de Procesverbetering-module.
   int? _improvementPromptTabId;
 
   @override
@@ -870,7 +858,6 @@ class _AppShellState extends ConsumerState<AppShell> {
   Widget build(BuildContext context) {
     final tabsState = ref.watch(tabsProvider);
     ref.listen<TabsState>(tabsProvider, (_, next) {
-      _syncSecurityBannerWithTabs(next);
       _syncImprovementBannerWithTabs(next);
     });
 
@@ -946,7 +933,6 @@ class _AppShellState extends ConsumerState<AppShell> {
       );
     });
 
-    _listenSecurityModulePrompt(context);
     _listenImprovementModulePrompt(context);
 
     _listenChartDataWarning(context, ref);

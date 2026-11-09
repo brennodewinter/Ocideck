@@ -195,12 +195,6 @@ const Map<String, Surface> _registry = {
     SurfaceKind.source,
     'Het projectbestand van de gebruiker zelf.',
   ),
-  'lib/widgets/dialogs/seal_timestamp_dialog.dart::_exportTsq': Surface(
-    SurfaceKind.source,
-    'Schrijft een RFC 3161-tijdstempelverzoek weg: een hash plus een nonce, '
-    'geen dia-inhoud. Het deck staat alleen in de parameterlijst omdat de '
-    'hash eruit berekend wordt.',
-  ),
 };
 
 /// De primitieven waarmee een artefact de map van de gebruiker verlaat, of

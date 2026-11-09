@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../tool/check_reference_data.dart';
@@ -86,21 +83,8 @@ void main() {
 
   group('het register', () {
     test('elke standaard is uitgelezen', () {
-      expect(standards, hasLength(greaterThanOrEqualTo(7)));
-      expect(standards.map((s) => s.id), contains('miauw'));
-    });
-
-    test('MIAUW kijkt naar het werkboek zelf, met een datum als versie', () {
-      final miauw = standards.firstWhere((s) => s.id == 'miauw');
-      expect(miauw.probe, 'githubCommitDate');
-      expect(
-        miauw.path,
-        isNotEmpty,
-        reason:
-            'zonder probePath kijkt de poort repobreed en wordt hij rood van '
-            'een README-typefout',
-      );
-      expect(miauw.version, matches(r'^\d{4}-\d{2}-\d{2}$'));
+      expect(standards, hasLength(greaterThanOrEqualTo(5)));
+      expect(standards.map((s) => s.id), isNot(contains('miauw')));
     });
 
     test('een datumprobe hoort bij een datum als gebundelde versie', () {
@@ -130,7 +114,7 @@ void main() {
     test('een geplante nieuwere bron laat hem vallen', () async {
       final outcome = await evaluate(
         standards,
-        (s) async => s.id == 'miauw'
+        (s) async => s.id == standards.first.id
             ? ProbeResult(
                 '2027-01-01',
                 stale: deviates(s.version, '2027-01-01'),
@@ -171,7 +155,7 @@ void main() {
       // glipt het stil door.
       final outcome = await evaluate(
         standards,
-        (s) async => s.id == 'miauw'
+        (s) async => s.id == standards.first.id
             ? ProbeResult(s.version, integrityProblem: 'pad bestaat niet meer')
             : echo(s),
       );
@@ -185,7 +169,7 @@ void main() {
       // is één standaard, geen twee.
       final outcome = await evaluate(
         standards,
-        (s) async => s.id == 'cwe'
+        (s) async => s.id == standards.first.id
             ? ProbeResult('99.0', stale: true, integrityProblem: 'te kort')
             : echo(s),
       );
@@ -194,94 +178,13 @@ void main() {
     });
   });
 
-  group('de CWE XML-release als bron (#2292)', () {
-    // De REST-API verbrak op 6-10-2026 verbindingen ná het HTTP-verzoek;
-    // MITRE's officiële cwec_latest.xml.zip bleef bereikbaar en bevat dezelfde
-    // feiten — versie, inhoudsdatum en het aantal Weakness-elementen.
-    final cwe = standards.firstWhere((s) => s.id == 'cwe');
-    final bundledCount =
-        (jsonDecode(File('assets/cwe/cwe_full.json').readAsStringSync())
-                as Map<String, dynamic>)['weaknesses']
-            as List;
-
-    /// Een echte zip met één XML-catalogus, in dezelfde vorm als MITRE publiceert.
-    Uint8List cweZip({required String version, required int weaknesses}) {
-      final buf = StringBuffer(
-        '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<Weakness_Catalog Name="CWE" Version="$version" '
-        'Date="2026-04-30" xmlns="http://cwe.mitre.org/cwe-7">'
-        '<Weaknesses>',
-      );
-      for (var i = 1; i <= weaknesses; i++) {
-        buf.write('<Weakness ID="$i" Name="w$i" Abstraction="Base"/>');
-      }
-      buf.write('</Weaknesses></Weakness_Catalog>');
-      final archive = Archive()
-        ..addFile(ArchiveFile.string('cwec_latest.xml', buf.toString()));
-      return Uint8List.fromList(ZipEncoder().encode(archive));
-    }
-
-    test('gelijke versie én telling is actueel', () async {
-      final r = await probeCweXml(
-        cwe,
-        (uri) async =>
-            cweZip(version: cwe.version, weaknesses: bundledCount.length),
-      );
-      expect(r.latest, cwe.version);
-      expect(r.stale, isFalse);
-      expect(r.integrityProblem, isEmpty);
-      expect(r.note, contains('2026-04-30'));
-    });
-
-    test('een afwijkende versie is verouderd', () async {
-      final r = await probeCweXml(
-        cwe,
-        (uri) async => cweZip(version: '9.9', weaknesses: bundledCount.length),
-      );
-      expect(r.stale, isTrue);
-      expect(r.latest, '9.9');
-    });
-
-    test('een afwijkende telling is een integriteitsbevinding', () async {
-      final r = await probeCweXml(
-        cwe,
-        (uri) async =>
-            cweZip(version: cwe.version, weaknesses: bundledCount.length - 3),
-      );
-      expect(r.stale, isFalse, reason: 'de versie klopt — dit is géén drift');
-      expect(r.integrityProblem, contains('zwakheden'));
-    });
-
-    test('een beschadigde zip is onbekend, nooit actueel', () async {
-      final r = await probeCweXml(
-        cwe,
-        (uri) async => Uint8List.fromList([1, 2, 3, 4, 5]),
-      );
-      expect(r.latest, isNull);
-    });
-
-    test('kapotte XML in een geldige zip is onbekend', () async {
-      final archive = Archive()
-        ..addFile(ArchiveFile.string('cwec_latest.xml', '<open>'));
-      final r = await probeCweXml(
-        cwe,
-        (uri) async => Uint8List.fromList(ZipEncoder().encode(archive)),
-      );
-      expect(r.latest, isNull);
-    });
-
-    test('een onbereikbare bron is onbekend', () async {
-      final r = await probeCweXml(cwe, (uri) async => null);
-      expect(r.latest, isNull);
-    });
-  });
-
   group('de drie uitkomsten blijven uit elkaar', () {
     test('adviserend meldt hetzelfde maar blokkeert niet', () async {
       final outcome = await evaluate(
         standards,
-        (s) async =>
-            s.id == 'miauw' ? ProbeResult('2027-01-01', stale: true) : echo(s),
+        (s) async => s.id == standards.first.id
+            ? ProbeResult('2027-01-01', stale: true)
+            : echo(s),
       );
       expect(outcome.outdated, 1, reason: 'de melding blijft staan');
       expect(outcome.exitCode(advisory: true), 0);
@@ -312,7 +215,7 @@ void main() {
     test('één onbereikbare bron breekt de controle niet af', () async {
       final outcome = await evaluate(
         standards,
-        (s) async => s.id == 'cwe' ? ProbeResult(null) : echo(s),
+        (s) async => s.id == standards.first.id ? ProbeResult(null) : echo(s),
       );
       expect(outcome.unreachable, 1);
       expect(outcome.exitCode(advisory: false), 0);

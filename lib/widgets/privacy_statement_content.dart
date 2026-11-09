@@ -219,24 +219,6 @@ class PrivacyStatementContent extends StatelessWidget {
         ),
         style: _bodyStyle,
       ),
-      // Drie bestemmingen die de gebruiker niet zelf aanwijst. Ze horen hier
-      // juist daarom: de opsomming hierboven zegt "alleen als jij dat kiest",
-      // en die zin blijft alleen waar zolang de uitzonderingen erbij staan.
-      // De CVE-spiegel is een server van de uitgever, ENISA en MITRE zijn niet
-      // instelbaar, en de terugval via de eigen origin op web gebeurt zonder
-      // aparte vraag. Zie docs/PRIVACY.md en docs/HOSTING.md §4.
-      Text(
-        l10n.d(
-          '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.',
-        ),
-        style: _bodyStyle,
-      ),
-      Text(
-        l10n.d(
-          '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.',
-        ),
-        style: _bodyStyle,
-      ),
       Text(
         l10n.d(
           '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.',

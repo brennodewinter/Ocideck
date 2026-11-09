@@ -62,7 +62,6 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
       ),
       ...aiPaletteCommands(context, ref, l10n, deck, deckNotifier),
       ..._helpCommands(l10n),
-      ..._infoSafetyCommands(l10n, deck, deckNotifier),
       PaletteCommand(
         label: l10n.t('imageLibrary'),
         icon: Icons.photo_library_outlined,
@@ -200,101 +199,6 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
       ),
     ),
   ];
-
-  /// The security-module command-palette actions. Gated on the reveal flag:
-  /// when the module is off they are **omitted entirely** (not shown greyed-out),
-  /// matching how the security slide types are hidden from the add-slide picker
-  /// and editor — the palette never offers a command the user can't run.
-  /// Grouped here to keep [_openCommandPalette] under the method-length limit.
-  List<PaletteCommand> _infoSafetyCommands(
-    AppLocalizations l10n,
-    Deck deck,
-    DeckNotifier deckNotifier,
-  ) {
-    if (!ref.read(infoSafetyRevealProvider)) return const [];
-    return [
-      PaletteCommand(
-        label: l10n.d('MIAUW-compliance'),
-        icon: Icons.fact_check_outlined,
-        keywords: const ['eis', 'compliance', 'miauw', 'waiver', 'audit'],
-        onInvoke: () => MiauwCompliancePanel.show(context, deckNotifier),
-      ),
-      PaletteCommand(
-        label: l10n.d('Bevindingen hernummeren'),
-        icon: Icons.format_list_numbered,
-        keywords: const ['finding', 'renumber', 'nummer', 'f-01'],
-        onInvoke: deckNotifier.autoRenumberFindings,
-      ),
-      PaletteCommand(
-        label: l10n.d('Scope-dekking controleren'),
-        icon: Icons.travel_explore_outlined,
-        keywords: const ['scope', 'coverage', 'gap', 'dekking'],
-        onInvoke: () =>
-            ScopeCoverageDialog.show(context, deckScopeCoverageGaps(deck)),
-      ),
-      PaletteCommand(
-        label: l10n.d('Bewijs-hashes kopiëren'),
-        icon: Icons.tag_outlined,
-        keywords: const ['sha1', 'sha256', 'hash', 'bewijs', 'evidence'],
-        onInvoke: _copyEvidenceHashes,
-      ),
-      PaletteCommand(
-        label: l10n.d('Managementsamenvatting'),
-        icon: Icons.summarize_outlined,
-        keywords: const ['summary', 'management', 'samenvatting', 'overzicht'],
-        onInvoke: () =>
-            ManagementSummaryDialog.show(context, deckManagementSummary(deck)),
-      ),
-      PaletteCommand(
-        label: l10n.d('RFC3161-tijdstempel'),
-        icon: Icons.schedule_outlined,
-        keywords: const ['rfc3161', 'timestamp', 'tijdstempel', 'tsa', 'seal'],
-        onInvoke: () => SealTimestampDialog.show(context, deckNotifier),
-      ),
-      PaletteCommand(
-        label: l10n.d('Auditdossier exporteren'),
-        icon: Icons.inventory_2_outlined,
-        keywords: const [
-          'audit',
-          'dossier',
-          'export',
-          'pakket',
-          'bewijs',
-          'verzegel',
-        ],
-        onInvoke: () => _exportAuditDossier(context, ref),
-      ),
-    ];
-  }
-
-  /// Compute the MIAUW evidence hash table (SHA1 + SHA-256) for every evidence
-  /// slide in the deck and copy it to the clipboard (PENTEST_MIAUW §10.2). Reads
-  /// each evidence image's bytes off disk; slides it cannot read are skipped.
-  Future<void> _copyEvidenceHashes() async {
-    final deck = ref.read(deckProvider).deck;
-    if (deck == null) return;
-    final imageService = ImageService();
-    final hashes = <String, EvidenceHashes>{};
-    for (final slide in deck.slides) {
-      if (slide.findingRole != FindingRole.evidence ||
-          slide.imagePath.isEmpty) {
-        continue;
-      }
-      final bytes = await imageService.readSlideImageBytes(
-        slide.imagePath,
-        projectPath: deck.projectPath,
-      );
-      if (bytes != null) {
-        hashes[slide.imagePath] = computeEvidenceHashes(bytes);
-      }
-    }
-    if (!mounted) return;
-    await Clipboard.setData(ClipboardData(text: evidenceHashTable(hashes)));
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(context.l10n.d('Bewijs-hashes gekopieerd'))),
-    );
-  }
 }
 
 /// Tell a co-author when owner-drop handover changes their role

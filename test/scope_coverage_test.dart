@@ -3,7 +3,6 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
-import 'package:ocideck/services/management_summary.dart';
 import 'package:ocideck/services/scope_coverage.dart';
 
 Slide _scope(List<ScopeRow> rows) =>
@@ -90,9 +89,6 @@ void main() {
           ]),
         ],
       );
-      final summary = deckManagementSummary(deck);
-      expect(summary.scopeObjectCount, 3);
-      expect(summary.scopeTestedCount, 1);
       expect(deckScopeCoverageGaps(deck), hasLength(2));
     });
 
@@ -106,7 +102,6 @@ void main() {
           ]),
         ],
       );
-      expect(deckManagementSummary(deck).scopeTestedCount, 1);
       expect(deckScopeCoverageGaps(deck), isEmpty);
     });
 
@@ -125,9 +120,9 @@ void main() {
           ]),
         ],
       );
-      final summary = deckManagementSummary(deck);
-      expect(summary.scopeObjectCount, 2, reason: 'c en d, niet drie rijen');
-      expect(summary.scopeTestedCount, 1);
+      expect(deckScopeCoverageGaps(deck).map((gap) => gap.object), [
+        'https://d',
+      ]);
     });
 
     test('de uitkomst hangt niet van de volgorde van de dia\'s af', () {

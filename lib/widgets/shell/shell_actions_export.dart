@@ -6,11 +6,6 @@ String _packageDeliveredLabel(AppLocalizations l10n) => deliversByDownload
     ? exportDeliveryLabel(l10n)
     : l10n.d('Pakket geëxporteerd naar:');
 
-/// Idem voor het auditdossier.
-String _dossierDeliveredLabel(AppLocalizations l10n) => deliversByDownload
-    ? exportDeliveryLabel(l10n)
-    : l10n.d('Auditdossier geëxporteerd naar:');
-
 /// Wat er staat als de browser de download niet aannam.
 String _downloadRefusedMessage(AppLocalizations l10n) => l10n.d(
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
@@ -25,14 +20,6 @@ ExportDecision _fullTransferExportDecision(Deck deck, AppSettings settings) {
       ? policy.evaluate(deckReleaseTlp(deck))
       : deckDecision;
 }
-
-/// De twee uitvoerpaden die niet door [ExportService] lopen: het `.ocideck`-
-/// pakket en het auditdossier.
-///
-/// Ze staan apart omdat `shell_actions.dart` tegen de regelratchet aan zit, maar
-/// ze hóren ook bij elkaar: allebei schrijven ze een volledige overdracht weg —
-/// markdown plus élke asset — en allebei gingen ze om de classificatiepoort
-/// heen die ARCHITECTURE.md bij name aan het pakket toeschrijft.
 
 /// Exporteer het huidige deck als zelfstandig `.ocideck`-pakket. Toont eerst de
 /// [PackageEncryptDialog] zodat de gebruiker het pakket optioneel met een
@@ -97,131 +84,6 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
     );
   } catch (e) {
     logError('AppShell: pakketexport mislukt', e);
-    if (!context.mounted) return;
-    showErrorSnackBar(
-      ScaffoldMessenger.of(context),
-      l10n,
-      '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
-    );
-  }
-}
-
-/// Exporteer een one-click auditdossier (MIAUW §10.11): het verzegelde rapport
-/// (`.md` + assets + bewijs) plus een `AUDIT_DOSSIER.md`-index met de zegel-,
-/// samenvattings-, compliance- en bewijs-hashgegevens, optioneel met AES-256.
-/// Vereist een gefinaliseerd, verzegeld deck; leest de bewijs-afbeeldingen van
-/// schijf om de hashtabel op te bouwen (onleesbare worden overgeslagen).
-Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
-  final l10n = context.l10n;
-  final deck = ref.read(deckProvider).deck!;
-  if (!(deck.finalized && deck.sealHash.trim().isNotEmpty)) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.d('Finaliseer en verzegel het rapport eerst.')),
-      ),
-    );
-    return;
-  }
-  // Een dossier draagt het hele deck en al zijn bewijs mee, net als een pakket.
-  final decision = _fullTransferExportDecision(
-    deck,
-    ref.read(settingsProvider),
-  );
-  if (!decision.allowed) {
-    showErrorSnackBar(
-      ScaffoldMessenger.of(context),
-      l10n,
-      exportBlockMessage(l10n, decision) ?? '',
-    );
-    return;
-  }
-  final privacyDecision = PrivacyExportPolicy(
-    gate: ref.read(settingsProvider).privacyExportGate,
-  ).evaluate(ref.read(privacyExportSummaryProvider));
-  if (!context.mounted ||
-      !await confirmDocumentPrivacyExport(context, privacyDecision)) {
-    return;
-  }
-  final imageService = ImageService();
-  final hashes = <String, EvidenceHashes>{};
-  for (final slide in deck.slides) {
-    if (slide.findingRole != FindingRole.evidence || slide.imagePath.isEmpty) {
-      continue;
-    }
-    final bytes = await imageService.readSlideImageBytes(
-      slide.imagePath,
-      projectPath: deck.projectPath,
-    );
-    if (bytes != null) hashes[slide.imagePath] = computeEvidenceHashes(bytes);
-  }
-  if (!context.mounted) return;
-  final choice = await PackageEncryptDialog.show(context);
-  if (choice == null || !context.mounted) return;
-  final password = choice.encrypt ? choice.password : null;
-  // #2747: het dossier draagt óók de geredigeerde afleiding en haar
-  // commitment-manifest zonder salts — dan kan de auditor de redacties
-  // controleren zonder de verificatiesleutels in handen te krijgen.
-  final settings = ref.read(settingsProvider);
-  final redactedBundle = buildExportBundle(
-    deck,
-    deck.slides,
-    profile: PrivacyExportProfile.redacted,
-    includeDetail: true,
-    expandPages: true,
-    disabledRules: settings.privacyDisabledRules,
-    ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
-    regions: settings.privacyRegions,
-    markdownService: MarkdownService(),
-  );
-  final manifest = redactedBundle.manifest;
-  final hasRedactions = !manifest.isEmpty;
-  final index = buildAuditDossier(
-    deck,
-    evidenceHashes: hashes,
-    redactionCount: manifest.entries.length,
-  );
-  final fileService = ref.read(fileServiceProvider);
-  try {
-    final String? dest;
-    if (deliversByDownload) {
-      dest = await fileService.downloadDossier(
-        deck,
-        dossierIndex: index,
-        redactedMarkdown: hasRedactions ? redactedBundle.markdown : null,
-        redactionManifestJson: hasRedactions
-            ? manifest.withoutSalts.toPrettyJson()
-            : null,
-        password: password,
-      );
-    } else {
-      final picked = await fileService.pickDossierDestination(deck);
-      if (picked == null) return;
-      await fileService.exportDossier(
-        deck,
-        picked,
-        dossierIndex: index,
-        redactedMarkdown: hasRedactions ? redactedBundle.markdown : null,
-        redactionManifestJson: hasRedactions
-            ? manifest.withoutSalts.toPrettyJson()
-            : null,
-        password: password,
-      );
-      dest = picked;
-    }
-    if (!context.mounted) return;
-    if (dest == null) {
-      showErrorSnackBar(
-        ScaffoldMessenger.of(context),
-        l10n,
-        _downloadRefusedMessage(l10n),
-      );
-      return;
-    }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${_dossierDeliveredLabel(l10n)}\n$dest')),
-    );
-  } catch (e) {
-    logError('AppShell: auditdossier-export mislukt', e);
     if (!context.mounted) return;
     showErrorSnackBar(
       ScaffoldMessenger.of(context),

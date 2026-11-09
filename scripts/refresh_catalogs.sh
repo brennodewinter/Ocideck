@@ -40,8 +40,7 @@
 #   WSTG_VERSION=5.0 scripts/refresh_catalogs.sh # een versie afdwingen
 #   MASTG_VERSION=… / MASWE_VERSION=…            # idem voor de andere twee
 #
-# CWE hoort hier niet bij: die bron is een zip van tientallen MB achter een
-# gedateerde URL. Zie tool/build_cwe_catalog.dart.
+# CVE/CWE downloads and MIAUW reporting have been retired (#2845).
 
 set -Eeuo pipefail
 

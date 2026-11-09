@@ -84,47 +84,24 @@ const _dutchSourcePap = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serie = fila, kolom = etiket, koló di e selda ta sigui e balor. Pone nòmber na e èksnan probabilidat i impakto pa un matris di risiko.',
   'Auditdossier exporteren': 'Eksportá dossier di ouditó',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalisá i seyá e rapòrt promé.',
-  'Auditdossier geëxporteerd naar:': 'Dossier di ouditó eksportá na:',
-  'MIAUW-pentestrapport': 'Rapòrt di pentest MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Struktura kompletu di rapòrt MIAUW: maneho di dokumento, skòp, ehekushon, resúmen pa gerensia, deskubrimentu, chèklist i firma.',
+
   'Tekst voorstellen (AI)': 'Sugerí teksto (IA)',
   'Het model gaf geen tekst terug.': 'E modelo no a duna teksto bèk.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Tin teksto kaba. Remplasá ku e konsepto IA?',
   'RFC3161-tijdstempel': 'Seyo di tempu RFC3161',
-  'Verzegel het deck eerst.': 'Seya e deck promé.',
-  'Verzoek (.tsq) exporteren': 'Eksportá petishon (.tsq)',
-  'Token (.tsr) importeren': 'Importá token (.tsr)',
-  'Nog geen tijdstempel': 'Ainda sin seyo di tempu',
-  'Getijdstempeld op': 'Seyá riba',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'E seyo di tempu no ta koresponde ku e hash di seyo',
-  'Tijdstempelverzoek opgeslagen': 'Petishon di seyo di tempu wardá',
-  'Tijdstempel geïmporteerd': 'Seyo di tempu importá',
+
   'Managementsamenvatting': 'Resúmen ehekutivo',
-  'Bevindingen totaal': 'Total di deskubrimentu',
-  'scope-objecten getest': 'opheto di scope testá',
+
   'Gebruikte standaarden': 'Standardnan usá',
-  'Bewijs-hashes kopiëren': 'Kopia hash di prueba',
-  'Bewijs-hashes gekopieerd': 'Hash di prueba kopiá',
-  'Bevindingen hernummeren': 'Rennumera e deskubrimentunan',
-  'Scope-dekking controleren': 'Kontrolá kobertura di scope',
-  'Scope-dekking': 'Kobertura di scope',
-  'Geen dekkingsgaten': 'Sin lakuna di kobertura',
-  'In scope, maar niet getest en geen bevinding:':
-      'Den scope, pero no testá i sin deskubrimentu:',
+
   'MIAUW-compliance': 'Kumplimentu MIAUW',
   'Voldaan': 'Kumpli',
   'Openstaand': 'Habrí',
-  'Uitgesloten door klant': 'Eksklui pa kliente',
+
   'Handmatig': 'Manual',
   'Uitsluiten': 'Eksklui',
-  'Opheffen': 'Kita',
-  'Reden voor uitsluiting': 'Motibu di eksklushon',
-  'Fundamentele eisen zijn uitgesloten': 'Rekisitonan fundamental ta eksklui',
+
   'Nieuwe bevinding (wizard)': 'Deskubrimentu nobo (wizard)',
   'Bevinding maken': 'Krea deskubrimentu',
   'CIA-rating (scope-object)': 'Klasifikashon CIA (opheto di scope)',
@@ -135,10 +112,7 @@ const _dutchSourcePap = {
   'Bewijsslide toevoegen': 'Agregá slide di prueba',
   'CIA-gewogen': 'Pondera pa CIA',
   'Severity (bevindingen)': 'Severidat (findingnan)',
-  'CWE kiezen': 'Skohe CWE',
-  'Zoek op naam of CWE-nummer': 'Buska pa nòmber o number CWE',
-  'Geen CWE gevonden': 'No a haña CWE',
-  'Kies CWE…': 'Skohe CWE…',
+
   'AI-concept': 'Konsepto di IA',
   'Nagekeken': 'Revisá',
   'Wis AI-alt-teksten': 'Kita teksto alternativo di IA',
@@ -268,10 +242,7 @@ const _dutchSourcePap = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'E deklarashon di berdat ku e reportadó, sertifikashon, firma i seyo.',
   'Uitbreidingen': 'Ekstenshonnan',
-  'Gegevens opschonen': 'Limpia datonan',
-  'Gegevens lokaal beschikbaar': 'Datonan disponibel lokalmente',
-  'Op het web nog niet beschikbaar': 'Ainda no disponibel riba web',
-  'Nog niet opgehaald': 'Ainda no a baha',
+
   'AI-assistentie': 'Asistensia di IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Asistensia di IA ta disponibel solamente den e version di desktop.',
@@ -3682,8 +3653,7 @@ const _dutchSourceAddPap = {
   'Privacy en classificatie': 'Privasidat i klasifikashon',
   'Uiterlijk van documenten': 'Aparensia di e dokumentonan',
   'Exportkwaliteit': 'Kalidat di eksportashon',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Duna promé permit pa tráfiko saliente na Privasidat i klasifikashon.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Un servisio di nubia ta rekerí promé bo konsentimentu di privasidat na "Privasidat i klasifikashon" i no ta funshoná den e version web.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -4639,9 +4609,7 @@ const _dutchSourceAddPap = {
   'Debriefing / after-action review': 'Debriefing / after-action review',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Kiko tabata planiá, kiko a pasa, pakiko — i ki akuerdonan nos ta traha.',
-  'Threat modeling-sessie': 'Seshon di threat modeling',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Alkanse, fluhonan di data, fronteranan di konfiansa, menasanan pa kategoria STRIDE i medidanan.',
+
   'Casuïstiekbespreking sociaal domein': 'Diskushon di kaso den dominio soshal',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Kaso anonimisá: dominionan di bida, siguridat, kuadro legal i koordinashon.',
@@ -5225,10 +5193,7 @@ const _dutchSourceAddPap = {
       'E indeks di checklist: pa kada test e id stabil, e título kanóniko i e kategoria. E kontenido di e guia mes no ta inkluí.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'E indeks di test di v2.0.0: pa kada test e id stabil, e título kanóniko, e kategoria MASVS i e debilidat MASWE. E testnan v1 retirá i e placeholdernan no ta aden; e kontenido di e guia tampoko.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'E lista kompleto (id, nòmber, deskripshon) plus un núkleo selektá pa nos ku nos notanan di remediashon.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'E skema EIS kompleto (88 rekisito testabel).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Nòmber di kondishon den nuebe idioma komo leksikon di salú pa e kontrol di privasidat (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -5383,8 +5348,7 @@ const _dutchSourceAddPap = {
   'naam@example.org\nexample.org': 'nomber@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Un kapa banda di e deck aki tabata muchu grandi i no a wòrdu lesá; e archivo mes no a kambia:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'E seyo di tempu aki no ta pertenesé na e último petishon',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Menshoná e number di vershon aki ora bo ta rapportá un problema di seguridat.',
   'Video niet ingesloten': 'Video no inkluí',
@@ -5606,10 +5570,7 @@ const _dutchSourceAddPap = {
       'E sifranan di grafiko no a keda wardá — nan ta solamente den e bentana aki:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Den e browser no tin rekuperashon despues di un crash: si bo sera e tab aki, trabou no wardá ta pèrdí. Warda bo presentashon bo mes.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  E base di datos CVE lokal (ta bo ta kuminsá e download): OciDeck ta buska e datos na bulto via api.github.com i e archivo di release ku e adrès ei ta indiká.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Buska CVE (ta pagá pa defekto): si e ta sendé, bo palabra di buskeda ta bai na e spil CVE konfigurá i, si esei no haña nada, na e base di datos Europeo di ENISA i na MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Un vidio di YouTube of Vimeo inkorporá ta karga e reprodukdó for di e servisio ei.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -6212,8 +6173,7 @@ const _dutchSourceAddPap = {
       'No tin presentashon den e repositorio aki.',
   'Rapportagetaal': 'Idioma di e raport',
   'Niet vastgelegd': 'No registrá',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Slide di raportahe i datonan di referensia pa seguridat di informashon: hallazgonan, lista di kontrol, matris di scope i firma. Strukturá segun MIAUW i ampliamente uzabel pa pentest, audit i investigashon di seguridat. E datonan di referensia ta den e app mes, p\'esei e módulo ta funshoná mesora i kompletamente offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Módulonan opcional. Pa defekto apagá; nan ta keda skondí te ora bo aktivá nan.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -6244,11 +6204,10 @@ const _dutchSourceAddPap = {
   'adres': 'adres',
   'postcode': 'kódigo postal',
   'persoonsnaam': 'nòmber di persona',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'E presentashon aki ta kontené elementonan di e módulo di Seguridat di informashon. Aktivá e módulo pa editá nan.',
+
   'Inschakelen': 'Aktivá',
   'Bevestigen': 'Konfirmá',
-  'Onderbouwing van de bevestiging': 'Hustifikashon di e konfirmashon',
+
   'De eigenaar staat insluiten niet toe': 'E doño no ta permití inkrustashon',
   'Deze video is alleen op de bron zelf te bekijken.':
       'E video aki por wòrdu mirá solamente riba e fuente mes.',
@@ -6357,43 +6316,13 @@ const _dutchSourceAddPap = {
       'konekshon di base di datos ku kontraseña',
   'wachtwoord in klare tekst': 'kontraseña den teksto kla',
   'Afbreken': 'Kanselá',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Kanselá. No a keda nada mitar kaba.',
+
   'Bijwerken': 'Aktualisá',
   'Binnenhalen…': 'Ta baha…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Baha database',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'No por a baha e lista di CVE. Chek bo konekshon i purba atrobe; un lista mitar bahá a ser tirá afó.',
-  'De nieuwste uitgave opzoeken…': 'Ta buska e edishon di mas resien…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Esaki ta un download grandi: mas ku 500 MB pa baha, temporalmente mas o ménos 1,5 GB di espasio riba disko, i dependiendo di bo konekshon i aparato lihé dies te trinta minüt di trabou. Despues ta keda un index di algun shen megabyte. Riba un konekshon ku ta paga pa megabyte, mihó bo no hasi esaki.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Tabata tin muy poko espasio riba disko. E konstrukshon ta pidi temporalmente mas ku 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'E archivo bahá no tabata loke nos a spera i a ser rechasá. No a instalá nada.',
-  'Indexeren…': 'Ta indeksá…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Disponibel lokalmente — buskeda ta sosodé offline, ningun término di buskeda no ta bai pafó.',
-  'Lokale CVE-database': 'Database CVE lokal',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Ku e lista di CVE riba bo mes aparato, buskeda ta keda akinan: ningun término di buskeda no ta bai mas serka un server, i ningun hende no por mira ki vulnerabilidat bo ta investigá.',
-  'Uitpakken…': 'Ta saka afó…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Pone e lista kompletu di CVE riba e aparato aki, pa buskeda sosodé offline i bo término di buskeda no bai ningun kaminda. E database ta bin di CVE List V5 (e programa CVE ofisial, via GitHub).',
-  'Wat er lokaal beschikbaar is': 'Kiko ta disponibel lokalmente',
-  'Nu bijwerken': 'Aktualisá awor',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Dato disponibel lokalmente — e buskeda ta sosodé riba e aparato aki; nada no ta sali.',
-  'Zwakheden (CWE)': 'Debilidatnan (CWE)',
-  'Testgevallen (WSTG)': 'Kasonan di tèst (WSTG)',
-  'MIAUW-eisen': 'Rekisitonan MIAUW',
-  'CVSS-scoretabel': 'Tabel di skor CVSS',
-  'Bevindingsjablonen': 'Plantilyanan di hayasgo',
+
   'Zoek een instelling': 'Buska un konfigurashon',
   'Geen instelling gevonden': 'No a haña ningun konfigurashon',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Bo término di buskeda ta bai na e mirror di CVE konfigurá, i si esei no haña nada, tambe na ENISA i MITRE. Ken ta maneha e servidornan ei por dedusí kua vulnerabilidat spesífiko bo ta buska — i pues kua lek bo ta investigá.',
+
   'Accepteren': 'Aseptá',
   'Accepteren + waarschuwen': 'Aseptá + advertí',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -6413,8 +6342,7 @@ const _dutchSourceAddPap = {
   'burgerservicenummer (BSN)': 'number di servisio na siudadano (BSN)',
   'bankrekeningnummer (IBAN)': 'number di kuenta bankario (IBAN)',
   'e-mailadres': 'adres di e-mail',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'E firma di TSA no ta verifiká den e app; solamente e hash ta korespondé.',
+
   'Extern': 'Èksterno',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Buscá for di un URL èksterno; ora di habri el a kontaktá e server ei.',
@@ -6452,21 +6380,7 @@ const _dutchSourceAddPap = {
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Ta krea un lista di kontrol pa kada objeto di scope (WSTG pa web/API); esnan eksistente ta keda.',
   'CVE opzoeken': 'Buska CVE',
-  'CVE opzoeken (online)': 'Buska CVE (online)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Buska CVE no ta disponibel den e version web.',
-  'CVE-mirror (basis-URL)': 'Spil CVE (URL base)',
-  'Geen CVE gevonden.': 'No a haña ningun CVE.',
-  'Kon de CVE-bron niet bereiken.': 'No por a alkansá e fuente CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Permití buska CVE online den e editor di findings via un mirror NVD. Apagá pa default; tambe ta rekerí bo permiso i ta funshoná solamente riba desktop.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Skirbi (un parti di) un id CVE i buska.',
-  'Typ minstens 3 tekens.': 'Skirbi por lo ménos 3 karakter.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Sende buska CVE (online) den Konfigurashon → Siguridat pa buska CVE online.',
-  'Zoek CVE…': 'Buska CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Buska pa id CVE, p.e. 2021-44228',
+
   'Zoeken': 'Buska',
   'Hertest': 'Test di nobo',
   'Niet hertest': 'No testá di nobo',
@@ -7330,9 +7244,7 @@ const _dutchSourceAddPap = {
   'Projectstart / kick-off': 'Inisio di proyekto / kick-off',
   'Voorbespreking communicatie': 'Preparashon di komunikashon',
   'Projecttijdlijn': 'Liña di tempu di proyekto',
-  'Informatieveiligheid: RASCI / TVB': 'Seguridat di informashon: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Plan di tarea di seguridat',
-  'Certificering voortgang': 'Progreso di sertifikashon',
+
   'Training / workshop': 'Entrenamentu / workshop',
   'Rapportage': 'Rapòrt',
   'Onderzoeksverhaal': 'Historia di investigashon',
@@ -7348,12 +7260,7 @@ const _dutchSourceAddPap = {
       'Gruponan meta, mensahe klave, kanalnan i portavos.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fasenan, hitonan, dependensianan i momentonan di desishon.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Registrá rolnan, matriks RASCI i akuerdonan di tarea.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Tareanan, prioridatnan, doñonan i evidensianan.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Progreso pa dominio, kontrolnan i planifikashon di audit.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Metanan di siñansa, konseptonan klave, ehersisio i pregunta di quiz.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -7367,20 +7274,16 @@ const _dutchSourceAddPap = {
   'Sjabloon': 'Modelo',
   'Post-incident review / lessons learned':
       'Post-incident review / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Fuga di dato / evaluashon di insidente di privasidat',
+
   'DPIA / privacy impact assessment': 'DPIA / privacy impact assessment',
-  'Risicoanalyse / risk register': 'Análisis di riesgo / risk register',
+
   'Business continuity / DR-test': 'Business continuity / test di DR',
-  'Tabletop-oefening / crisisoefening':
-      'Ehersisio tabletop / ehersisio di krisis',
+
   'BOB-crisisrapportage': 'Rapòrt di krisis BOB',
   'CAB / release readiness': 'CAB / release readiness',
   'Stuurgroep / project board update':
       'Grupo di direkshon / update di project board',
-  'Auditbevindingen en opvolging': 'Resultadonan di audit i seguimentu',
-  'Leveranciersbeoordeling / vendor risk':
-      'Evaluashon di proveedó / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Desishon di arkitektura / presentashon ADR',
   'Beleid uitrollen / implementatieplan':
@@ -7388,28 +7291,14 @@ const _dutchSourceAddPap = {
   'Overdracht / handover': 'Traspaso / handover',
   'Retrospective / teamverbetering': 'Retrospective / mehorashon di tim',
   'PPL Vluchtvoorbereiding': 'Preparashon di buelo PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Liña di tempu, impakto, kousanan i akshonnan di mehora despues di un insidente.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Evaluá datonan, riesgo, obligashon di notifikashon i komunikashon.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Prosesamentu, base legal, riesgonan di privasidat i medidanan.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Registrá riesgonan, probabilidat, impakto, medidanan i doñonan.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Senario, metanan di rekuperashon, resultadonan di test i puntonan di mehora.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Senario, injects, desishonnan, opservashonnan i evaluashon.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Guia un tim di krisis dor di formashon di imágen, formashon di huisio i tuma di desishon, ku bista di situashon live, preguntanan di informashon, dilemanan, log di desishon i lista di akshon.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Kambio, impakto, testnan, rollback, komunikashon i go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Progreso, planifikashon, presupuesto, riesgonan i desishonnan pidí.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Resultadonan, root cause, medidanan, evidensia i status.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Servisio, dato, dependensia, eksigensianan, riesgonan i desishon.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Konteksto, opshonnan, trade-offs, desishon i konsekuensianan.',
   'Doelgroep, planning, communicatie, training en adoptie.':

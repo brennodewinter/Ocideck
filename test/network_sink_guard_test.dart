@@ -106,10 +106,8 @@ void main() {
     // package `network_guard` (PinnedAiHttpTransport), dit bestand maakt
     // zelf geen HttpClient meer aan.
     'lib/services/ai_client_service.dart': 0,
-    'lib/services/cve_transport_io.dart': 0,
     // Twee: `getJson` en `download` openen elk hun eigen client, en beide laten
     // hem door `_get` pinnen — één keer per redirect-hop.
-    'lib/services/cve/local_cve_database_io.dart': 2,
     'lib/services/git/git_transport_io.dart': 0,
     // XMPP-over-WebSocket egress (desktop): één gepinde client op de
     // wss-endpoint-origin, resolveConfigured + connectPinned + een fail-closed
@@ -177,12 +175,10 @@ void main() {
         // moet — afgemeten wordt het op de telling hieronder.
         'lib/services/ai_client_service.dart',
         // CVE lookup: NetGuard.safeResolve + socket pin + no-redirect + cap.
-        'lib/services/cve_transport_io.dart',
         // CVE-bulkdownload: NetGuard.safeResolve + socket pin per hop. Deze moet
         // redirects volgen (github.com → objects.githubusercontent.com), maar
         // doet dat zélf: elke sprong gaat opnieuw door de poort, zodat een 3xx
         // naar een intern adres niet alsnog opgehaald wordt.
-        'lib/services/cve/local_cve_database_io.dart',
         // Git-forge (desktop): safeResolveTrusted met de trustedInternal-opt-in
         // van de repo + socket-pin + geen redirects + cap. De pin wordt één keer
         // gelegd en hergebruikt; een URI buiten de geconfigureerde origin wordt

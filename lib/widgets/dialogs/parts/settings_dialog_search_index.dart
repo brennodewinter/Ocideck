@@ -347,36 +347,6 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.security,
-    label: 'CVE opzoeken (online)',
-    section: 'CVE opzoeken',
-    infoSafetyOnly: true,
-    keywords: ['cve', 'kwetsbaarheid', 'lek', 'nvd', 'mitre', 'enisa'],
-  ),
-  SettingsSearchEntry(
-    tab: SettingsSection.security,
-    label: 'CVE-mirror (basis-URL)',
-    section: 'CVE opzoeken',
-    infoSafetyOnly: true,
-    keywords: ['cve', 'mirror', 'url', 'server'],
-  ),
-  SettingsSearchEntry(
-    tab: SettingsSection.security,
-    label: 'Database ophalen',
-    section: 'Lokale CVE-database',
-    infoSafetyOnly: true,
-    keywords: [
-      'cve',
-      'offline',
-      'lokaal',
-      'database',
-      'kwetsbaarheid',
-      'lek',
-      'nvd',
-      'downloaden',
-    ],
-  ),
-  SettingsSearchEntry(
-    tab: SettingsSection.security,
     label: 'Herstelbestanden nu wissen',
     section: 'Sporen op dit apparaat',
     keywords: ['herstel', 'recovery', 'wissen', 'autosave', 'sporen'],
@@ -546,21 +516,6 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
 
   // ── Uitbreidingen ─────────────────────────────────────────────────────────
-  SettingsSearchEntry(
-    tab: SettingsSection.modules,
-    label: 'Informatieveiligheid',
-    section: 'Uitbreidingen',
-    keywords: [
-      'security',
-      'cwe',
-      'wstg',
-      'miauw',
-      'cvss',
-      'pentest',
-      'module',
-      'referentiegegevens',
-    ],
-  ),
   SettingsSearchEntry(
     tab: SettingsSection.modules,
     label: 'Pakket importeren',

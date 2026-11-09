@@ -9,7 +9,7 @@ import 'sidecar_format.dart';
 /// Twee kaarten, allebei op EIS-nummer: [MiauwDisposition.waivers] zijn eisen
 /// die de klant heeft uitgesloten (met reden), [MiauwDisposition.confirmations]
 /// zijn eisen die de klant zelf heeft bevestigd. Zie
-/// `miauw_compliance_analyzer.dart` voor wat ze betekenen.
+/// De codec blijft beschikbaar om bestaande gebruikersbestanden te bewaren.
 ///
 /// **Waarom ernaast en niet erin.** Tot 0.1.0 stonden ze als base64-JSON in de
 /// front matter van de `.md`. Dat is twee keer verkeerd: het is ondoorzichtig

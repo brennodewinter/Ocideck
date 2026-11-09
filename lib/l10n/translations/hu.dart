@@ -84,47 +84,24 @@ const _dutchSourceHu = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Sorozat = sor, oszlop = címke, a cella színe az értéket követi. Címkézd a tengelyeket valószínűségnek és hatásnak egy kockázati mátrixhoz.',
   'Auditdossier exporteren': 'Auditdosszié exportálása',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Először véglegesítse és pecsételje le a jelentést.',
-  'Auditdossier geëxporteerd naar:': 'Auditdosszié exportálva ide:',
-  'MIAUW-pentestrapport': 'MIAUW pentest jelentés',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Teljes MIAUW jelentésstruktúra: dokumentumkezelés, hatókör, végrehajtás, vezetői összefoglaló, megállapítások, ellenőrzőlisták és aláírás.',
+
   'Tekst voorstellen (AI)': 'Szöveg javaslata (AI)',
   'Het model gaf geen tekst terug.': 'A modell nem adott vissza szöveget.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Már van szöveg. Lecseréli az AI-vázlatra?',
   'RFC3161-tijdstempel': 'RFC3161 időbélyeg',
-  'Verzegel het deck eerst.': 'Előbb pecsételje le a decket.',
-  'Verzoek (.tsq) exporteren': 'Kérés exportálása (.tsq)',
-  'Token (.tsr) importeren': 'Token importálása (.tsr)',
-  'Nog geen tijdstempel': 'Még nincs időbélyeg',
-  'Getijdstempeld op': 'Időbélyegezve',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Az időbélyeg nem egyezik a pecsét hashével',
-  'Tijdstempelverzoek opgeslagen': 'Időbélyeg-kérés mentve',
-  'Tijdstempel geïmporteerd': 'Időbélyeg importálva',
+
   'Managementsamenvatting': 'Vezetői összefoglaló',
-  'Bevindingen totaal': 'Megállapítások összesen',
-  'scope-objecten getest': 'tesztelt hatókör-objektumok',
+
   'Gebruikte standaarden': 'Használt szabványok',
-  'Bewijs-hashes kopiëren': 'Bizonyíték-hashek másolása',
-  'Bewijs-hashes gekopieerd': 'Bizonyíték-hashek másolva',
-  'Bevindingen hernummeren': 'Megállapítások újraszámozása',
-  'Scope-dekking controleren': 'Hatókör-lefedettség ellenőrzése',
-  'Scope-dekking': 'Hatókör-lefedettség',
-  'Geen dekkingsgaten': 'Nincsenek lefedettségi hézagok',
-  'In scope, maar niet getest en geen bevinding:':
-      'Hatókörben, de nem tesztelt és nincs megállapítás:',
+
   'MIAUW-compliance': 'MIAUW-megfelelés',
   'Voldaan': 'Teljesült',
   'Openstaand': 'Nyitott',
-  'Uitgesloten door klant': 'Ügyfél kizárta',
+
   'Handmatig': 'Kézi',
   'Uitsluiten': 'Kizárás',
-  'Opheffen': 'Visszavonás',
-  'Reden voor uitsluiting': 'Kizárás oka',
-  'Fundamentele eisen zijn uitgesloten': 'Alapvető követelmények kizárva',
+
   'Nieuwe bevinding (wizard)': 'Új megállapítás (varázsló)',
   'Bevinding maken': 'Megállapítás létrehozása',
   'CIA-rating (scope-object)': 'CIA-besorolás (hatókör-objektum)',
@@ -135,10 +112,7 @@ const _dutchSourceHu = {
   'Bewijsslide toevoegen': 'Bizonyítékdia hozzáadása',
   'CIA-gewogen': 'CIA-súlyozott',
   'Severity (bevindingen)': 'Súlyosság (megállapítások)',
-  'CWE kiezen': 'CWE kiválasztása',
-  'Zoek op naam of CWE-nummer': 'Keresés név vagy CWE-szám alapján',
-  'Geen CWE gevonden': 'Nincs találat CWE-re',
-  'Kies CWE…': 'CWE kiválasztása…',
+
   'AI-concept': 'AI-vázlat',
   'Nagekeken': 'Ellenőrizve',
   'Wis AI-alt-teksten': 'AI alt szövegek törlése',
@@ -267,10 +241,7 @@ const _dutchSourceHu = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'A valódiságnyilatkozat a jelentéstevővel, tanúsítással, aláírással és pecséttel.',
   'Uitbreidingen': 'Bővítmények',
-  'Gegevens opschonen': 'Adatok törlése',
-  'Gegevens lokaal beschikbaar': 'Adatok helyben elérhetők',
-  'Op het web nog niet beschikbaar': 'A weben még nem érhető el',
-  'Nog niet opgehaald': 'Még nincs letöltve',
+
   'AI-assistentie': 'MI-segítség',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Az MI-segítség csak az asztali verzióban érhető el.',
@@ -1381,9 +1352,7 @@ const _dutchSourceHu = {
   'Projectstart / kick-off': 'Projektindítás / kick-off',
   'Voorbespreking communicatie': 'Kommunikációs előkészítő megbeszélés',
   'Projecttijdlijn': 'Projekt-idővonal',
-  'Informatieveiligheid: RASCI / TVB': 'Információbiztonság: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Biztonsági feladatterv',
-  'Certificering voortgang': 'Tanúsítás előrehaladása',
+
   'Training / workshop': 'Képzés / workshop',
   'Rapportage': 'Beszámoló',
   'Onderzoeksverhaal': 'Kutatási történet',
@@ -1399,12 +1368,7 @@ const _dutchSourceHu = {
       'Célcsoportok, kulcsüzenet, csatornák és szóvivői feladatok.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fázisok, mérföldkövek, függőségek és döntési pontok.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Szerepek, RASCI-mátrix és feladatmegállapodások rögzítése.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Feladatok, prioritások, felelősök és bizonyítékok.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Előrehaladás területenként, kontrollok és audittervezés.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Tanulási célok, kulcsfogalmak, gyakorlat és kvízkérdés.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1418,19 +1382,16 @@ const _dutchSourceHu = {
   'Sjabloon': 'Sablon',
   'Post-incident review / lessons learned':
       'Incidens utáni értékelés / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Adatszivárgás / adatvédelmi incidens értékelése',
+
   'DPIA / privacy impact assessment': 'DPIA / adatvédelmi hatásvizsgálat',
-  'Risicoanalyse / risk register': 'Kockázatelemzés / kockázati nyilvántartás',
+
   'Business continuity / DR-test': 'Üzletmenet-folytonosság / DR-teszt',
-  'Tabletop-oefening / crisisoefening': 'Tabletop-gyakorlat / válsággyakorlat',
+
   'BOB-crisisrapportage': 'BOB-válságjelentés',
   'CAB / release readiness': 'CAB / release readiness',
   'Stuurgroep / project board update':
       'Irányítóbizottság / project board beszámoló',
-  'Auditbevindingen en opvolging': 'Auditmegállapítások és nyomon követés',
-  'Leveranciersbeoordeling / vendor risk':
-      'Beszállítói értékelés / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Architektúradöntés / ADR-prezentáció',
   'Beleid uitrollen / implementatieplan':
@@ -1438,28 +1399,14 @@ const _dutchSourceHu = {
   'Overdracht / handover': 'Átadás-átvétel / handover',
   'Retrospective / teamverbetering': 'Retrospektív / csapatfejlesztés',
   'PPL Vluchtvoorbereiding': 'PPL repülés-előkészítés',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Idővonal, hatás, okok és javító intézkedések egy incidens után.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Értékelje az adatokat, a kockázatot, a bejelentési kötelezettséget és a kommunikációt.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Adatkezelés, jogalap, adatvédelmi kockázatok és intézkedések.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Rögzítse a kockázatokat, a valószínűséget, a hatást, az intézkedéseket és a felelősöket.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Forgatókönyv, helyreállítási célok, tesztmegállapítások és fejlesztési pontok.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Forgatókönyv, injectek, döntések, megfigyelések és értékelés.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Vezessen végig egy válságstábot a helyzetkép kialakításán, a mérlegelésen és a döntéshozatalon, élő helyzetképpel, információs kérdésekkel, dilemmákkal, döntésnaplóval és feladatlistával.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Változtatás, hatás, tesztek, rollback, kommunikáció és go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Előrehaladás, ütemezés, költségvetés, kockázatok és kért döntések.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Megállapítások, root cause, intézkedések, bizonyítékok és állapot.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Szolgáltatás, adatok, függőség, követelmények, kockázatok és döntés.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontextus, opciók, trade-offok, döntés és következmények.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4639,8 +4586,7 @@ const _dutchSourceAddHu = <String, String>{
   'Privacy en classificatie': 'Adatvédelem és besorolás',
   'Uiterlijk van documenten': 'Dokumentumok megjelenése',
   'Exportkwaliteit': 'Exportálás minősége',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Először adjon hozzájárulást a kimenő forgalomhoz a Adatvédelem és besorolás részben.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'A felhőszolgáltatáshoz először az adatvédelmi hozzájárulásod szükséges a "Adatvédelem és besorolás" részben, és a webes verzióban nem működik.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5596,9 +5542,7 @@ const _dutchSourceAddHu = <String, String>{
   'Debriefing / after-action review': 'Debriefing / akció utáni elemzés',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Mi volt a terv, mi történt, miért — és milyen megállapodásokat kötünk.',
-  'Threat modeling-sessie': 'Fenyegetésmodellezési ülés',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Hatókör, adatáramlások, bizalmi határok, fenyegetések STRIDE-kategóriánként és intézkedések.',
+
   'Casuïstiekbespreking sociaal domein':
       'Esetmegbeszélés a szociális területen',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
@@ -6176,10 +6120,7 @@ const _dutchSourceAddHu = <String, String>{
       'Az ellenőrzőlista indexe: tesztenként az állandó azonosító, a kanonikus cím és a kategória. Maga az útmutató tartalma nincs mellékelve.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'A v2.0.0 tesztindexe: tesztenként az állandó azonosító, a kanonikus cím, a MASVS-kategória és a MASWE-gyengeség. A visszavont v1-tesztek és a helykitöltők nincsenek benne; az útmutató tartalma sem.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'A teljes lista (azonosító, név, leírás), valamint egy saját válogatott mag a javítási megjegyzéseinkkel.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'A teljes EIS-séma (88 tesztelhető követelmény).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Betegségnevek kilenc nyelven egészségügyi lexikonként az adatvédelmi ellenőrzéshez (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6334,8 +6275,7 @@ const _dutchSourceAddHu = <String, String>{
   'naam@example.org\nexample.org': 'nev@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'A deck melletti egyik réteg túl nagy volt, ezért nem töltődött be; maga a fájl változatlan:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Ez az időbélyeg nem a legutóbbi kéréshez tartozik',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Adja meg ezt a verziószámot, amikor biztonsági problémát jelent.',
   'Video niet ingesloten': 'A videó nincs beágyazva',
@@ -6546,10 +6486,7 @@ const _dutchSourceAddHu = <String, String>{
       'A diagramok számai nem lettek elmentve — már csak ebben az ablakban léteznek:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'A böngészőben nincs összeomlás utáni helyreállítás: ha bezárod ezt a lapot, a nem mentett munka elvész. Mentsd el magad a prezentációdat.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  A helyi CVE-adatbázis (a letöltést Ön indítja): az OciDeck a tömeges adatokat az api.github.com címen és az arra mutató kiadási fájlon keresztül tölti le.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE-keresés (alapértelmezetten kikapcsolva): ha be van kapcsolva, a keresőkifejezés a beállított CVE-tükörhöz kerül, és ha az nem talál semmit, az ENISA európai adatbázisához és a MITRE-hez.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  A beágyazott YouTube- vagy Vimeo-videó a lejátszót az adott szolgáltatástól tölti be.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7154,8 +7091,7 @@ const _dutchSourceAddHu = <String, String>{
       'Nincsenek bemutatók ebben a tárolóban.',
   'Rapportagetaal': 'A jelentés nyelve',
   'Niet vastgelegd': 'Nincs rögzítve',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Jelentésdiák és referenciaadatok az információbiztonsághoz: megállapítások, ellenőrzőlisták, hatókörmátrixok és aláírás. MIAUW szerint strukturálva és széles körben használható pentesztekhez, auditokhoz és biztonsági kutatáshoz. A referenciaadatok magában az alkalmazásban vannak, így a modul azonnal és teljesen offline működik.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Választható modulok. Alapértelmezetten kikapcsolva; rejtve maradnak, amíg be nem kapcsolja őket.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7184,11 +7120,10 @@ const _dutchSourceAddHu = <String, String>{
   'adres': 'cím',
   'postcode': 'irányítószám',
   'persoonsnaam': 'személynév',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Ez a bemutató az Információbiztonsági modul elemeit tartalmazza. Kapcsold be a modult a szerkesztésükhöz.',
+
   'Inschakelen': 'Bekapcsolás',
   'Bevestigen': 'Megerősítés',
-  'Onderbouwing van de bevestiging': 'A megerősítés indoklása',
+
   'De eigenaar staat insluiten niet toe':
       'A tulajdonos nem engedélyezi a beágyazást',
   'Deze video is alleen op de bron zelf te bekijken.':
@@ -7297,43 +7232,13 @@ const _dutchSourceAddHu = <String, String>{
   'databaseverbinding met wachtwoord': 'adatbázis-kapcsolat jelszóval',
   'wachtwoord in klare tekst': 'jelszó nyílt szövegben',
   'Afbreken': 'Megszakítás',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Megszakítva. Semmi nem maradt félkészen.',
+
   'Bijwerken': 'Frissítés',
   'Binnenhalen…': 'Letöltés…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Adatbázis letöltése',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'A CVE-listát nem sikerült letölteni. Ellenőrizd a kapcsolatot, és próbáld újra; a félig letöltött listát eldobtuk.',
-  'De nieuwste uitgave opzoeken…': 'A legújabb kiadás keresése…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Ez nagy letöltés: több mint 500 MB behúzása, átmenetileg nagyjából 1,5 GB lemezterület, és a kapcsolatodtól meg az eszközödtől függően könnyen tíz-harminc perc munka. Utána néhány száz megabájtos index marad. Megabájt alapon fizetett kapcsolaton ezt inkább ne tedd.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Nem volt elég lemezterület. A felépítés átmenetileg több mint 1,5 GB-ot igényel.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'A letöltött archívum nem az volt, amire számítottunk, ezért elutasítottuk. Semmi sem került telepítésre.',
-  'Indexeren…': 'Indexelés…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Helyben elérhető — a keresés offline történik, egyetlen keresőkifejezés sem hagyja el az eszközt.',
-  'Lokale CVE-database': 'Helyi CVE-adatbázis',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Ha a CVE-lista a saját eszközödön van, a keresés itt marad: egyetlen keresőkifejezés sem megy többé szerverre, és senki nem látja, melyik sebezhetőséget vizsgálod.',
-  'Uitpakken…': 'Kicsomagolás…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Tedd a teljes CVE-listát erre az eszközre, hogy a keresés offline történjen, és a keresőkifejezésed sehová se menjen. Az adatbázis a CVE List V5-ből származik (a hivatalos CVE-program, GitHubon keresztül).',
-  'Wat er lokaal beschikbaar is': 'Ami helyben elérhető',
-  'Nu bijwerken': 'Frissítés most',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Az adatok helyben elérhetők — a keresés ezen az eszközön történik; semmi sem hagyja el.',
-  'Zwakheden (CWE)': 'Gyengeségek (CWE)',
-  'Testgevallen (WSTG)': 'Tesztesetek (WSTG)',
-  'MIAUW-eisen': 'MIAUW követelmények',
-  'CVSS-scoretabel': 'CVSS pontszámtábla',
-  'Bevindingsjablonen': 'Megállapítás-sablonok',
+
   'Zoek een instelling': 'Beállítás keresése',
   'Geen instelling gevonden': 'Nincs találat a beállításokban',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'A keresőkifejezésed a beállított CVE-tükörre kerül, és ha az nem talál semmit, az ENISA-hoz és a MITRE-hez is. Aki ezeket a kiszolgálókat üzemelteti, kikövetkeztetheti, melyik konkrét sérülékenységet keresed — és így melyiket vizsgálod.',
+
   'Accepteren': 'Elfogadás',
   'Accepteren + waarschuwen': 'Elfogadás + figyelmeztetés',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7353,8 +7258,7 @@ const _dutchSourceAddHu = <String, String>{
   'burgerservicenummer (BSN)': 'állampolgári azonosító szám (BSN)',
   'bankrekeningnummer (IBAN)': 'bankszámlaszám (IBAN)',
   'e-mailadres': 'e-mail-cím',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'A TSA-aláírást az alkalmazás nem ellenőrzi; csak a hash egyezik.',
+
   'Extern': 'Külső',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Külső URL-ről letöltve; a megnyitás kapcsolatba lépett azzal a kiszolgálóval.',
@@ -7391,22 +7295,7 @@ const _dutchSourceAddHu = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Hatókör-objektumonként ellenőrzőlistát hoz létre (WSTG web/API esetén); a meglévők megmaradnak.',
   'CVE opzoeken': 'CVE keresése',
-  'CVE opzoeken (online)': 'CVE keresése (online)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'A CVE-keresés nem érhető el a webes verzióban.',
-  'CVE-mirror (basis-URL)': 'CVE-tükör (alap-URL)',
-  'Geen CVE gevonden.': 'Nem található CVE.',
-  'Kon de CVE-bron niet bereiken.': 'A CVE-forrás nem érhető el.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Engedélyezd a CVE-k online keresését a megállapítás-szerkesztőben egy NVD-tükrön keresztül. Alapértelmezetten kikapcsolva; a hozzájárulásodat is igényli, és csak asztali gépen működik.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Írj be egy CVE-azonosítót (vagy annak egy részét), és keress.',
-  'Typ minstens 3 tekens.': 'Írj be legalább 3 karaktert.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Kapcsold be a CVE-keresést (online) a Beállítások → Biztonság menüben a CVE-k online kereséséhez.',
-  'Zoek CVE…': 'CVE keresése…',
-  'Zoek op CVE-id, bijv. 2021-44228':
-      'Keresés CVE-azonosító alapján, pl. 2021-44228',
+
   'Zoeken': 'Keresés',
   'Hertest': 'Újratesztelés',
   'Niet hertest': 'Nincs újratesztelve',

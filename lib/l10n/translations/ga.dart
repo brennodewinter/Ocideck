@@ -86,47 +86,24 @@ const _dutchSourceGa = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Sraith = ró, colún = lipéad, leanann dath na cille an luach. Cuir lipéad ar na haiseanna mar dhóchúlacht agus tionchar le haghaidh maitrís riosca.',
   'Auditdossier exporteren': 'Easpórtáil dálach iniúchta',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Cuir bailchríoch agus séala ar an tuairisc ar dtús.',
-  'Auditdossier geëxporteerd naar:': 'Easpórtáladh an dálach iniúchta go:',
-  'MIAUW-pentestrapport': 'Tuairisc pentest MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Struchtúr iomlán tuairisce MIAUW: bainistíocht doiciméad, scóip, forghníomhú, achoimre bhainistíochta, torthaí, seicliostaí agus síniú.',
+
   'Tekst voorstellen (AI)': 'Mol téacs (IS)',
   'Het model gaf geen tekst terug.': 'Níor thug an tsamhail téacs ar ais.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Tá téacs ann cheana. Cuir dréacht IS ina áit?',
   'RFC3161-tijdstempel': 'Stampa ama RFC3161',
-  'Verzegel het deck eerst.': 'Séalaigh an deck ar dtús.',
-  'Verzoek (.tsq) exporteren': 'Easpórtáil iarratas (.tsq)',
-  'Token (.tsr) importeren': 'Iompórtáil comhartha (.tsr)',
-  'Nog geen tijdstempel': 'Gan stampa ama fós',
-  'Getijdstempeld op': 'Stampáilte ama ar',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Ní mheaitseálann an stampa ama le hais an tséala',
-  'Tijdstempelverzoek opgeslagen': 'Iarratas stampa ama sábháilte',
-  'Tijdstempel geïmporteerd': 'Stampa ama iompórtáilte',
+
   'Managementsamenvatting': 'Achoimre bhainistíochta',
-  'Bevindingen totaal': 'Fionnachtana san iomlán',
-  'scope-objecten getest': 'réada scóip tástáilte',
+
   'Gebruikte standaarden': 'Caighdeáin úsáidte',
-  'Bewijs-hashes kopiëren': 'Cóipeáil haiseanna fianaise',
-  'Bewijs-hashes gekopieerd': 'Haiseanna fianaise cóipeáilte',
-  'Bevindingen hernummeren': 'Athuimhrigh na fionnachtana',
-  'Scope-dekking controleren': 'Seiceáil clúdach an scóip',
-  'Scope-dekking': 'Clúdach an scóip',
-  'Geen dekkingsgaten': 'Gan bearnaí clúdaigh',
-  'In scope, maar niet getest en geen bevinding:':
-      'Sa scóip, ach gan tástáil agus gan fionnachtain:',
+
   'MIAUW-compliance': 'Comhlíonadh MIAUW',
   'Voldaan': 'Comhlíonta',
   'Openstaand': 'Oscailte',
-  'Uitgesloten door klant': 'Eisiata ag an gcliant',
+
   'Handmatig': 'De láimh',
   'Uitsluiten': 'Eisiaigh',
-  'Opheffen': 'Cealaigh',
-  'Reden voor uitsluiting': 'Fáth an eisiata',
-  'Fundamentele eisen zijn uitgesloten': 'Tá ceanglais bhunúsacha eisiata',
+
   'Nieuwe bevinding (wizard)': 'Fionnachtain nua (draoi)',
   'Bevinding maken': 'Cruthaigh fionnachtain',
   'CIA-rating (scope-object)': 'Rátáil CIA (réad scóip)',
@@ -137,10 +114,7 @@ const _dutchSourceGa = {
   'Bewijsslide toevoegen': 'Cuir sleamhnán fianaise leis',
   'CIA-gewogen': 'Ualaithe de réir CIA',
   'Severity (bevindingen)': 'Déine (fionnachtana)',
-  'CWE kiezen': 'Roghnaigh CWE',
-  'Zoek op naam of CWE-nummer': 'Cuardaigh de réir ainm nó uimhir CWE',
-  'Geen CWE gevonden': 'Níor aimsíodh CWE',
-  'Kies CWE…': 'Roghnaigh CWE…',
+
   'AI-concept': 'Dréacht IS',
   'Nagekeken': 'Seiceáilte',
   'Wis AI-alt-teksten': 'Glan téacsanna malartacha IS',
@@ -270,10 +244,7 @@ const _dutchSourceGa = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'An dearbhú fírinne le tuairisceoir, deimhniú, síniú agus séalú.',
   'Uitbreidingen': 'Breiseáin',
-  'Gegevens opschonen': 'Glan na sonraí',
-  'Gegevens lokaal beschikbaar': 'Sonraí ar fáil go háitiúil',
-  'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
-  'Nog niet opgehaald': 'Gan íoslódáil fós',
+
   'AI-assistentie': 'Cúnamh II',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Níl cúnamh II ar fáil ach sa leagan deisce.',
@@ -1403,9 +1374,7 @@ const _dutchSourceGa = {
   'Projectstart / kick-off': 'Tús tionscadail / kick-off',
   'Voorbespreking communicatie': 'Réamhphlé cumarsáide',
   'Projecttijdlijn': 'Amlíne an tionscadail',
-  'Informatieveiligheid: RASCI / TVB': 'Slándáil faisnéise: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Plean tascanna slándála',
-  'Certificering voortgang': 'Dul chun cinn an deimhniúcháin',
+
   'Training / workshop': 'Oiliúint / ceardlann',
   'Rapportage': 'Tuairisciú',
   'Onderzoeksverhaal': 'Scéal taighde',
@@ -1421,12 +1390,7 @@ const _dutchSourceGa = {
       'Spriocghrúpaí, príomhtheachtaireacht, cainéil agus urlabhraíocht.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Céimeanna, garspriocanna, spleáchais agus pointí cinnidh.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Róil, maitrís RASCI agus socruithe tascanna a thaifeadadh.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Tascanna, tosaíochtaí, úinéirí agus fianaise.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Dul chun cinn de réir fearainn, rialuithe agus pleanáil iniúchta.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Spriocanna foghlama, príomhchoincheapa, cleachtadh agus ceist quiz.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1440,20 +1404,17 @@ const _dutchSourceGa = {
   'Sjabloon': 'Teimpléad',
   'Post-incident review / lessons learned':
       'Athbhreithniú iar-theagmhais / ceachtanna foghlamtha',
-  'Datalek / privacy-incident beoordeling':
-      'Measúnú ar sceitheadh sonraí / teagmhas príobháideachais',
+
   'DPIA / privacy impact assessment':
       'DPIA / measúnú tionchair ar phríobháideachas',
-  'Risicoanalyse / risk register': 'Anailís riosca / clár rioscaí',
+
   'Business continuity / DR-test': 'Leanúnachas gnó / tástáil DR',
-  'Tabletop-oefening / crisisoefening':
-      'Cleachtadh tabletop / cleachtadh géarchéime',
+
   'BOB-crisisrapportage': 'Tuairisciú géarchéime BOB',
   'CAB / release readiness': 'CAB / ullmhacht don scaoileadh',
   'Stuurgroep / project board update':
       'Nuashonrú don ghrúpa stiúrtha / project board',
-  'Auditbevindingen en opvolging': 'Torthaí iniúchta agus obair leantach',
-  'Leveranciersbeoordeling / vendor risk': 'Measúnú soláthraithe / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Cinneadh ailtireachta / cur i láthair ADR',
   'Beleid uitrollen / implementatieplan':
@@ -1461,28 +1422,14 @@ const _dutchSourceGa = {
   'Overdracht / handover': 'Aistriú / handover',
   'Retrospective / teamverbetering': 'Retrospective / feabhsú foirne',
   'PPL Vluchtvoorbereiding': 'Ullmhúchán eitilte PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Amlíne, tionchar, cúiseanna agus gníomhartha feabhais tar éis teagmhais.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Déan measúnú ar shonraí, riosca, dualgas tuairiscithe agus cumarsáid.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Próiseáil, bunús dlí, rioscaí príobháideachais agus bearta.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Taifead rioscaí, dóchúlacht, tionchar, bearta agus úinéirí.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Cás, spriocanna athshlánaithe, torthaí tástála agus pointí feabhais.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Cás, injects, cinntí, breathnuithe agus meastóireacht.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Treoraigh foireann ghéarchéime trí léargas a fhorbairt, breithiúnas a dhéanamh agus cinntí a ghlacadh, le pictiúr beo den staid, ceisteanna faisnéise, aincheisteanna, loga cinntí agus liosta gníomhartha.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Athrú, tionchar, tástálacha, rollback, cumarsáid agus go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Dul chun cinn, pleanáil, buiséad, rioscaí agus cinntí á n-iarraidh.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Torthaí, root cause, bearta, fianaise agus stádas.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Seirbhís, sonraí, spleáchas, riachtanais, rioscaí agus cinneadh.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Comhthéacs, roghanna, trade-offs, cinneadh agus iarmhairtí.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4701,8 +4648,7 @@ const _dutchSourceAddGa = <String, String>{
   'Privacy en classificatie': 'Príobháideacht agus Aicmiú',
   'Uiterlijk van documenten': 'Cuma na gcáipéisí',
   'Exportkwaliteit': 'Cáilíocht easpórtála',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Tabhair toiliú do thrácht amach ar dtús faoi Príobháideacht agus Aicmiú.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Éilíonn seirbhís néil do thoiliú príobháideachais ar dtús faoi "Príobháideacht agus Aicmiú" agus ní oibríonn sí sa leagan gréasáin.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5665,9 +5611,7 @@ const _dutchSourceAddGa = <String, String>{
   'Debriefing / after-action review': 'Debriefing / athbhreithniú iarghnímh',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Cad a bhí beartaithe, cad a tharla, cén fáth — agus cé na comhaontuithe a dhéanaimid.',
-  'Threat modeling-sessie': 'Seisiún samhaltaithe bagairtí',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Scóip, sreafaí sonraí, teorainneacha muiníne, bagairtí de réir chatagóir STRIDE agus bearta.',
+
   'Casuïstiekbespreking sociaal domein':
       'Athbhreithniú cásanna sa réimse sóisialta',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
@@ -6255,10 +6199,7 @@ const _dutchSourceAddGa = <String, String>{
       'Innéacs an tseicliosta: in aghaidh gach tástála, an t-aitheantóir seasmhach, an teideal canónta agus an chatagóir. Níl ábhar an treoraí féin faoi iamh.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Innéacs tástálacha v2.0.0: in aghaidh gach tástála, an t-aitheantóir seasmhach, an teideal canónta, an chatagóir MASVS agus an laige MASWE. Níl tástálacha v1 a tarraingíodh siar ná ionadchoinneálaithe san áireamh; ná ábhar an treoraí ach oiread.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'An liosta iomlán (aitheantóir, ainm, cur síos) chomh maith le croí roghnaithe dár gcuid féin le nótaí leigheasta.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'An scéimre EIS iomlán (88 riachtanas intástála).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Ainmneacha riochtaí i naoi dteanga mar fhoclóir sláinte don seiceáil príobháideachais (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6415,8 +6356,7 @@ const _dutchSourceAddGa = <String, String>{
   'naam@example.org\nexample.org': 'ainm@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Bhí sraith in aice leis an deic seo rómhór agus níor lódáladh í; níl aon athrú ar an gcomhad féin:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Ní bhaineann an stampa ama seo leis an iarratas is déanaí',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Luaigh an uimhir leagain seo nuair a thuairiscíonn tú fadhb slándála.',
   'Video niet ingesloten': 'Físeán gan leabú',
@@ -6628,10 +6568,7 @@ const _dutchSourceAddGa = <String, String>{
       'Níor sábháladh figiúirí na gcairteacha — níl siad ann a thuilleadh ach san fhuinneog seo:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Sa bhrabhsálaí níl aon aisghabháil tar éis tuairte: má dhúnann tú an cluaisín seo, imíonn obair nár sábháladh. Sábháil do chur i láthair tú féin.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Cuardach CVE (múchta de réir réamhshocraithe): nuair atá sé lasta, téann do théarma cuardaigh chuig an scáthán CVE atá socraithe agus, mura bhfaigheann sin aon rud, chuig bunachar sonraí Eorpach ENISA agus chuig MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Luchtaíonn físeán YouTube nó Vimeo leabaithe an seinnteoir ón tseirbhís sin.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7240,8 +7177,7 @@ const _dutchSourceAddGa = <String, String>{
       'Níl aon láithreoireacht sa stór seo.',
   'Rapportagetaal': 'Teanga na tuairisce',
   'Niet vastgelegd': 'Gan taifeadadh',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Sleamhnáin tuairiscithe agus sonraí tagartha don slándáil faisnéise: fionnachtana, seicliostaí, maitrísí raon feidhme agus síniú. Struchtúrtha de réir MIAUW agus inúsáidte go forleathan le haghaidh pentestanna, iniúchtaí agus taighde slándála. Tá na sonraí tagartha san aip féin, mar sin oibríonn an modúl láithreach agus go hiomlán as líne.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Modúil roghnacha. Múchta de réir réamhshocraithe; fanann siad i bhfolach go dtí go gcumasaíonn tú iad.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7271,11 +7207,10 @@ const _dutchSourceAddGa = <String, String>{
   'adres': 'seoladh',
   'postcode': 'cód poist',
   'persoonsnaam': 'ainm duine',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Tá codanna den mhodúl Slándáil Faisnéise sa láithreoireacht seo. Cuir an modúl ar siúl chun iad a chur in eagar.',
+
   'Inschakelen': 'Cuir ar siúl',
   'Bevestigen': 'Deimhnigh',
-  'Onderbouwing van de bevestiging': 'Bunús an dearbhaithe',
+
   'De eigenaar staat insluiten niet toe': 'Ní cheadaíonn an t-úinéir leabú',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Ní féidir an físeán seo a fheiceáil ach ar an bhfoinse féin.',
@@ -7385,43 +7320,13 @@ const _dutchSourceAddGa = <String, String>{
   'databaseverbinding met wachtwoord': 'nasc bunachair sonraí le pasfhocal',
   'wachtwoord in klare tekst': 'pasfhocal i ngnáth-théacs',
   'Afbreken': 'Cealaigh',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Cealaithe. Níor fágadh aon rud leathdhéanta.',
+
   'Bijwerken': 'Nuashonraigh',
   'Binnenhalen…': 'Á íoslódáil…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Faigh an bunachar sonraí',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Níorbh fhéidir an liosta CVE a fháil. Seiceáil do cheangal agus bain triail eile as; caitheadh liosta leathíoslódáilte i leataobh.',
-  'De nieuwste uitgave opzoeken…': 'Ag cuardach an eisiúint is déanaí…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Íoslódáil mhór atá anseo: breis is 500 MB le tarraingt anuas, timpeall 1,5 GB spás diosca go sealadach, agus ag brath ar do cheangal is ar do ghléas, deich go tríocha nóiméad oibre go héasca. Ina dhiaidh sin fanann innéacs cúpla céad megabyte. Ar cheangal a ghearrann táille de réir an mhegabyte, b\'fhearr gan é seo a dhéanamh.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Ní raibh go leor spáis dhiosca ann. Teastaíonn breis is 1,5 GB go sealadach chun é a thógáil.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Níorbh é an chartlann a fuarthas an ceann a rabhthas ag súil leis agus diúltaíodh di. Níor suiteáladh aon rud.',
-  'Indexeren…': 'Á innéacsú…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Ar fáil go háitiúil — déantar cuardaigh as líne, ní fhágann téarma cuardaigh ar bith an gléas.',
-  'Lokale CVE-database': 'Bunachar sonraí CVE áitiúil',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Leis an liosta CVE ar do ghléas féin, fanann na cuardaigh anseo: ní théann téarma cuardaigh ar bith chuig freastalaí a thuilleadh, agus ní féidir le duine ar bith a fheiceáil cén leochaileacht atá á scrúdú agat.',
-  'Uitpakken…': 'Á bhaint amach…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Cuir an liosta CVE iomlán ar an ngléas seo, ionas go ndéanfar cuardaigh as líne agus nach dtéann do théarma cuardaigh áit ar bith. Tagann an bunachar sonraí ó CVE List V5 (an clár oifigiúil CVE, trí GitHub).',
-  'Wat er lokaal beschikbaar is': 'A bhfuil ar fáil go háitiúil',
-  'Nu bijwerken': 'Nuashonraigh anois',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Sonraí ar fáil go háitiúil — déantar cuardaigh ar an ngléas seo; ní fhágann aon rud é.',
-  'Zwakheden (CWE)': 'Laigí (CWE)',
-  'Testgevallen (WSTG)': 'Cásanna tástála (WSTG)',
-  'MIAUW-eisen': 'Riachtanais MIAUW',
-  'CVSS-scoretabel': 'Tábla scór CVSS',
-  'Bevindingsjablonen': 'Teimpléid aimsithe',
+
   'Zoek een instelling': 'Cuardaigh socrú',
   'Geen instelling gevonden': 'Níor aimsíodh aon socrú',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Téann do théarma cuardaigh chuig an scáthán CVE atá cumraithe, agus mura bhfaigheann sé sin aon rud, chuig ENISA agus MITRE freisin. Is féidir leo siúd a riarann na freastalaithe sin a thuiscint cén leochaileacht ar leith atá á lorg agat — agus mar sin cén leochaileacht atá á scrúdú agat.',
+
   'Accepteren': 'Glac leis',
   'Accepteren + waarschuwen': 'Glac leis + tabhair rabhadh',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7442,8 +7347,7 @@ const _dutchSourceAddGa = <String, String>{
   'burgerservicenummer (BSN)': 'uimhir sheirbhíse saoránach (BSN)',
   'bankrekeningnummer (IBAN)': 'uimhir chuntais bhainc (IBAN)',
   'e-mailadres': 'seoladh ríomhphoist',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Ní fhíoraítear síniú an TSA san aip; ní mheaitseálann ach an hais.',
+
   'Extern': 'Seachtrach',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Aisghabhadh ó URL seachtrach; rinne an oscailt teagmháil leis an bhfreastalaí sin.',
@@ -7480,22 +7384,7 @@ const _dutchSourceAddGa = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Cruthaíonn sé seicliosta in aghaidh gach réad scóipe (WSTG do web/API); coinnítear na cinn atá ann.',
   'CVE opzoeken': 'Cuardaigh CVE',
-  'CVE opzoeken (online)': 'Cuardaigh CVE (ar líne)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Níl cuardach CVE ar fáil sa leagan gréasáin.',
-  'CVE-mirror (basis-URL)': 'Scáthán CVE (bun-URL)',
-  'Geen CVE gevonden.': 'Níor aimsíodh aon CVE.',
-  'Kon de CVE-bron niet bereiken.': 'Níorbh fhéidir teacht ar fhoinse CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Ceadaigh cuardach CVE ar líne san eagarthóir torthaí trí scáthán NVD. Múchta de réir réamhshocraithe; teastaíonn do thoiliú freisin agus ní oibríonn sé ach ar an deasc.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Clóscríobh (cuid de) aitheantas CVE agus cuardaigh.',
-  'Typ minstens 3 tekens.': 'Clóscríobh 3 charachtar ar a laghad.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Cuir cuardach CVE (ar líne) ar siúl i Socruithe → Slándáil chun CVEanna a chuardach ar líne.',
-  'Zoek CVE…': 'Cuardaigh CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228':
-      'Cuardaigh de réir aitheantais CVE, m.sh. 2021-44228',
+
   'Zoeken': 'Cuardaigh',
   'Hertest': 'Athtástáil',
   'Niet hertest': 'Gan athtástáil',

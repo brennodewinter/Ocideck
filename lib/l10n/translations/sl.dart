@@ -84,47 +84,24 @@ const _dutchSourceSl = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serija = vrstica, stolpec = oznaka, barva celice sledi vrednosti. Osi označite kot verjetnost in vpliv za matriko tveganja.',
   'Auditdossier exporteren': 'Izvozi revizijski dosje',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Najprej dokončajte in zapečatite poročilo.',
-  'Auditdossier geëxporteerd naar:': 'Revizijski dosje izvožen v:',
-  'MIAUW-pentestrapport': 'Poročilo o pentestu MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Celotna struktura poročila MIAUW: upravljanje dokumentov, obseg, izvedba, povzetek za vodstvo, ugotovitve, kontrolni seznami in podpis.',
+
   'Tekst voorstellen (AI)': 'Predlagaj besedilo (UI)',
   'Het model gaf geen tekst terug.': 'Model ni vrnil besedila.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Besedilo že obstaja. Ga zamenjati z osnutkom UI?',
   'RFC3161-tijdstempel': 'Časovni žig RFC3161',
-  'Verzegel het deck eerst.': 'Najprej zapečatite komplet.',
-  'Verzoek (.tsq) exporteren': 'Izvozi zahtevo (.tsq)',
-  'Token (.tsr) importeren': 'Uvozi žeton (.tsr)',
-  'Nog geen tijdstempel': 'Še ni časovnega žiga',
-  'Getijdstempeld op': 'Časovno žigosano',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Časovni žig se ne ujema z zgoščeno vrednostjo pečata',
-  'Tijdstempelverzoek opgeslagen': 'Zahteva za časovni žig shranjena',
-  'Tijdstempel geïmporteerd': 'Časovni žig uvožen',
+
   'Managementsamenvatting': 'Povzetek za vodstvo',
-  'Bevindingen totaal': 'Ugotovitev skupaj',
-  'scope-objecten getest': 'preizkušeni predmeti obsega',
+
   'Gebruikte standaarden': 'Uporabljeni standardi',
-  'Bewijs-hashes kopiëren': 'Kopiraj razpršila dokazov',
-  'Bewijs-hashes gekopieerd': 'Razpršila dokazov kopirana',
-  'Bevindingen hernummeren': 'Preštevilči ugotovitve',
-  'Scope-dekking controleren': 'Preveri pokritost obsega',
-  'Scope-dekking': 'Pokritost obsega',
-  'Geen dekkingsgaten': 'Ni vrzeli v pokritosti',
-  'In scope, maar niet getest en geen bevinding:':
-      'V obsegu, a nepreverjeno in brez ugotovitve:',
+
   'MIAUW-compliance': 'Skladnost MIAUW',
   'Voldaan': 'Izpolnjeno',
   'Openstaand': 'Odprto',
-  'Uitgesloten door klant': 'Izključil naročnik',
+
   'Handmatig': 'Ročno',
   'Uitsluiten': 'Izključi',
-  'Opheffen': 'Prekliči',
-  'Reden voor uitsluiting': 'Razlog za izključitev',
-  'Fundamentele eisen zijn uitgesloten': 'Temeljne zahteve so izključene',
+
   'Nieuwe bevinding (wizard)': 'Nova ugotovitev (čarovnik)',
   'Bevinding maken': 'Ustvari ugotovitev',
   'CIA-rating (scope-object)': 'Ocena CIA (predmet obsega)',
@@ -135,10 +112,7 @@ const _dutchSourceSl = {
   'Bewijsslide toevoegen': 'Dodaj diapozitiv dokaza',
   'CIA-gewogen': 'Uteženo po CIA',
   'Severity (bevindingen)': 'Resnost (ugotovitve)',
-  'CWE kiezen': 'Izberi CWE',
-  'Zoek op naam of CWE-nummer': 'Iskanje po imenu ali številki CWE',
-  'Geen CWE gevonden': 'Noben CWE ni bil najden',
-  'Kies CWE…': 'Izberi CWE…',
+
   'AI-concept': 'Osnutek UI',
   'Nagekeken': 'Pregledano',
   'Wis AI-alt-teksten': 'Počisti nadomestna besedila UI',
@@ -267,10 +241,7 @@ const _dutchSourceSl = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Izjava o resničnosti s poročevalcem, certificiranjem, podpisom in pečatom.',
   'Uitbreidingen': 'Razširitve',
-  'Gegevens opschonen': 'Počisti podatke',
-  'Gegevens lokaal beschikbaar': 'Podatki na voljo lokalno',
-  'Op het web nog niet beschikbaar': 'V spletu še ni na voljo',
-  'Nog niet opgehaald': 'Še ni preneseno',
+
   'AI-assistentie': 'Pomoč UI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Pomoč UI je na voljo samo v namizni različici.',
@@ -1379,9 +1350,7 @@ const _dutchSourceSl = {
   'Projectstart / kick-off': 'Začetek projekta / kick-off',
   'Voorbespreking communicatie': 'Predhodni posvet o komunikaciji',
   'Projecttijdlijn': 'Časovnica projekta',
-  'Informatieveiligheid: RASCI / TVB': 'Informacijska varnost: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Načrt varnostnih nalog',
-  'Certificering voortgang': 'Napredek certificiranja',
+
   'Training / workshop': 'Usposabljanje / delavnica',
   'Rapportage': 'Poročilo',
   'Onderzoeksverhaal': 'Raziskovalna zgodba',
@@ -1397,12 +1366,7 @@ const _dutchSourceSl = {
       'Ciljne skupine, ključno sporočilo, kanali in govorci.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Faze, mejniki, odvisnosti in odločitvene točke.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Zapis vlog, matrike RASCI in dogovorov o nalogah.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Naloge, prioritete, lastniki in dokazila.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Napredek po domenah, kontrole in načrtovanje revizij.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Učni cilji, ključni koncepti, vaja in kvizno vprašanje.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1416,46 +1380,30 @@ const _dutchSourceSl = {
   'Sjabloon': 'Predloga',
   'Post-incident review / lessons learned':
       'Pregled po incidentu / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Ocena uhajanja podatkov / incidenta zasebnosti',
+
   'DPIA / privacy impact assessment': 'DPIA / ocena učinka na zasebnost',
-  'Risicoanalyse / risk register': 'Analiza tveganj / register tveganj',
+
   'Business continuity / DR-test': 'Neprekinjeno poslovanje / test DR',
-  'Tabletop-oefening / crisisoefening': 'Vaja tabletop / krizna vaja',
+
   'BOB-crisisrapportage': 'Krizno poročilo BOB',
   'CAB / release readiness': 'CAB / pripravljenost na izdajo',
   'Stuurgroep / project board update':
       'Usmerjevalni odbor / posodobitev za project board',
-  'Auditbevindingen en opvolging': 'Revizijske ugotovitve in nadaljnji ukrepi',
-  'Leveranciersbeoordeling / vendor risk': 'Ocena dobavitelja / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Arhitekturna odločitev / predstavitev ADR',
   'Beleid uitrollen / implementatieplan': 'Uvajanje politike / izvedbeni načrt',
   'Overdracht / handover': 'Predaja / handover',
   'Retrospective / teamverbetering': 'Retrospektiva / izboljševanje ekipe',
   'PPL Vluchtvoorbereiding': 'Priprava na let PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Časovnica, vpliv, vzroki in izboljševalni ukrepi po incidentu.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Ocenite podatke, tveganje, obveznost prijave in komunikacijo.',
-  "Verwerking, grondslag, privacyrisico's en maatregelen.":
-      'Obdelava, pravna podlaga, tveganja za zasebnost in ukrepi.',
-  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
-      'Zabeležite tveganja, verjetnost, vpliv, ukrepe in lastnike.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Scenarij, cilji obnovitve, ugotovitve testov in točke za izboljšave.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Scenarij, injects, odločitve, opažanja in evalvacija.',
+
   "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
       'Vodite krizno ekipo skozi oblikovanje slike stanja, presojo in odločanje, z živo sliko stanja, informacijskimi vprašanji, dilemami, dnevnikom odločitev in seznamom ukrepov.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Sprememba, vpliv, testi, rollback, komunikacija in go/no-go.',
   "Voortgang, planning, budget, risico's en besluiten gevraagd.":
       'Napredek, načrtovanje, proračun, tveganja in zahtevane odločitve.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Ugotovitve, root cause, ukrepi, dokazi in status.',
-  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
-      'Storitev, podatki, odvisnosti, zahteve, tveganja in odločitev.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontekst, možnosti, trade-offs, odločitev in posledice.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4623,8 +4571,7 @@ const _dutchSourceAddSl = <String, String>{
   'Privacy en classificatie': 'Zasebnost in klasifikacija',
   'Uiterlijk van documenten': 'Videz dokumentov',
   'Exportkwaliteit': 'Kakovost izvoza',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Najprej podajte soglasje za odhodni promet v razdelku Zasebnost in klasifikacija.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Oblačna storitev najprej zahteva vaše soglasje o zasebnosti pod "Zasebnost in klasifikacija" in ne deluje v spletni različici.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5571,9 +5518,7 @@ const _dutchSourceAddSl = <String, String>{
   'Debriefing / after-action review': 'Debriefing / analiza po akciji',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Kaj je bilo načrtovano, kaj se je zgodilo, zakaj — in katere dogovore sklenemo.',
-  'Threat modeling-sessie': 'Seja modeliranja groženj',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Obseg, podatkovni tokovi, meje zaupanja, grožnje po kategorijah STRIDE in ukrepi.',
+
   'Casuïstiekbespreking sociaal domein':
       'Obravnava primerov na socialnem področju',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
@@ -6153,10 +6098,7 @@ const _dutchSourceAddSl = <String, String>{
       'Kazalo kontrolnega seznama: za vsak test stabilni id, kanonični naslov in kategorija. Vsebina samega vodnika ni vključena.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Kazalo testov v2.0.0: za vsak test stabilni id, kanonični naslov, kategorija MASVS in šibkost MASWE. Umaknjeni testi v1 in ograde niso vključeni; prav tako ne vsebina vodnika.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Celoten seznam (id, ime, opis) in lastno izbrano jedro z našimi opombami za odpravo.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Celotna shema EIS (88 preverljivih zahtev).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Imena bolezni v devetih jezikih kot zdravstveni leksikon za preverjanje zasebnosti (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6310,8 +6252,7 @@ const _dutchSourceAddSl = <String, String>{
   'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Sloj ob tem decku je bil prevelik in ni bil naložen; sama datoteka ostaja nespremenjena:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Ta časovni žig ne pripada zadnji zahtevi',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Navedite to številko različice, ko prijavite varnostno težavo.',
   'Video niet ingesloten': 'Videoposnetek ni vdelan',
@@ -6523,10 +6464,7 @@ const _dutchSourceAddSl = <String, String>{
       'Številke grafikonov niso bile shranjene — obstajajo samo še v tem oknu:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'V brskalniku ni obnovitve po sesutju: če zaprete ta zavihek, je neshranjeno delo izgubljeno. Predstavitev shranite sami.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Lokalna zbirka podatkov CVE (prenos zaženete sami): OciDeck pridobi množične podatke prek api.github.com in datoteke izdaje, na katero kaže ta naslov.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Iskanje CVE (privzeto izklopljeno): ko je vklopljeno, gre vaš iskalni izraz na nastavljeno zrcalo CVE, in če to ničesar ne najde, v evropsko zbirko podatkov ENISA in v MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Vgrajen videoposnetek YouTube ali Vimeo naloži predvajalnik pri tej storitvi.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7129,8 +7067,7 @@ const _dutchSourceAddSl = <String, String>{
       'V tem repozitoriju ni predstavitev.',
   'Rapportagetaal': 'Jezik poročila',
   'Niet vastgelegd': 'Ni zabeleženo',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Poročilne prosojnice in referenčni podatki za informacijsko varnost: ugotovitve, kontrolni seznami, matrike obsega in podpis. Strukturirano po MIAUW in široko uporabno za penteste, revizije in varnostne raziskave. Referenčni podatki so v sami aplikaciji, zato modul deluje takoj in povsem brez povezave.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Izbirni moduli. Privzeto izklopljeni; ostanejo skriti, dokler jih ne omogočite.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7159,11 +7096,10 @@ const _dutchSourceAddSl = <String, String>{
   'adres': 'naslov',
   'postcode': 'poštna številka',
   'persoonsnaam': 'ime osebe',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Ta predstavitev vsebuje dele modula Informacijska varnost. Vklopite modul, da jih uredite.',
+
   'Inschakelen': 'Vklopi',
   'Bevestigen': 'Potrdi',
-  'Onderbouwing van de bevestiging': 'Utemeljitev potrditve',
+
   'De eigenaar staat insluiten niet toe': 'Lastnik ne dovoljuje vdelave',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Ta video si je mogoče ogledati le v samem viru.',
@@ -7272,43 +7208,13 @@ const _dutchSourceAddSl = <String, String>{
   'databaseverbinding met wachtwoord': 'povezava z zbirko podatkov z geslom',
   'wachtwoord in klare tekst': 'geslo v čistem besedilu',
   'Afbreken': 'Prekini',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Prekinjeno. Nič ni ostalo na pol.',
+
   'Bijwerken': 'Posodobi',
   'Binnenhalen…': 'Prenašanje…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Prenesi zbirko podatkov',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Seznama CVE ni bilo mogoče prenesti. Preveri povezavo in poskusi znova; napol prenesen seznam je bil zavržen.',
-  'De nieuwste uitgave opzoeken…': 'Iskanje najnovejše izdaje…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'To je velik prenos: več kot 500 MB za prenesti, začasno okoli 1,5 GB prostora na disku in – odvisno od povezave in naprave – zlahka deset do trideset minut dela. Zatem ostane kazalo velikosti nekaj sto megabajtov. Na povezavi, ki se plačuje po megabajtu, tega raje ne počni.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Na disku ni bilo dovolj prostora. Izgradnja začasno zahteva več kot 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Prenesen arhiv ni bil takšen, kot smo pričakovali, in je bil zavrnjen. Nič ni bilo nameščeno.',
-  'Indexeren…': 'Indeksiranje…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Na voljo lokalno — iskanje poteka brez povezave, noben iskalni izraz ne zapusti naprave.',
-  'Lokale CVE-database': 'Lokalna zbirka podatkov CVE',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'S seznamom CVE na lastni napravi iskanje ostane tu: noben iskalni izraz ne gre več na strežnik in nihče ne vidi, katero ranljivost preiskuješ.',
-  'Uitpakken…': 'Razpakiranje…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Postavi celoten seznam CVE na to napravo, da iskanje poteka brez povezave in tvoj iskalni izraz ne gre nikamor. Zbirka podatkov prihaja iz CVE List V5 (uradni program CVE, prek GitHuba).',
-  'Wat er lokaal beschikbaar is': 'Kaj je na voljo lokalno',
-  'Nu bijwerken': 'Posodobi zdaj',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Podatki so na voljo lokalno — iskanje poteka na tej napravi; nič je ne zapusti.',
-  'Zwakheden (CWE)': 'Šibkosti (CWE)',
-  'Testgevallen (WSTG)': 'Testni primeri (WSTG)',
-  'MIAUW-eisen': 'Zahteve MIAUW',
-  'CVSS-scoretabel': 'Tabela ocen CVSS',
-  'Bevindingsjablonen': 'Predloge ugotovitev',
+
   'Zoek een instelling': 'Iskanje nastavitve',
   'Geen instelling gevonden': 'Nastavitve ni mogoče najti',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Vaš iskalni izraz gre na nastavljeno zrcalo CVE, in če to ničesar ne najde, tudi na ENISA in MITRE. Tisti, ki upravljajo te strežnike, lahko sklepajo, katero konkretno ranljivost iščete — in s tem, katero ranljivost preiskujete.',
+
   'Accepteren': 'Sprejmi',
   'Accepteren + waarschuwen': 'Sprejmi + opozori',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7327,8 +7233,7 @@ const _dutchSourceAddSl = <String, String>{
   'burgerservicenummer (BSN)': 'matična številka občana (BSN)',
   'bankrekeningnummer (IBAN)': 'številka bančnega računa (IBAN)',
   'e-mailadres': 'e-poštni naslov',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Podpis TSA v aplikaciji ni preverjen; ujema se samo zgostitev (hash).',
+
   'Extern': 'Zunanji',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Pridobljeno z zunanjega URL-ja; odpiranje je vzpostavilo stik s tem strežnikom.',
@@ -7366,21 +7271,7 @@ const _dutchSourceAddSl = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Ustvari kontrolni seznam za vsak predmet obsega (WSTG za splet/API); obstoječi ostanejo.',
   'CVE opzoeken': 'Poišči CVE',
-  'CVE opzoeken (online)': 'Poišči CVE (na spletu)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Iskanje CVE ni na voljo v spletni različici.',
-  'CVE-mirror (basis-URL)': 'Zrcalo CVE (osnovni URL)',
-  'Geen CVE gevonden.': 'Noben CVE ni bil najden.',
-  'Kon de CVE-bron niet bereiken.': 'Vira CVE ni bilo mogoče doseči.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Dovoli spletno iskanje CVE-jev v urejevalniku ugotovitev prek zrcala NVD. Privzeto izklopljeno; zahteva tudi vaše soglasje in deluje samo na namizju.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Vnesite (del) CVE ID-ja in poiščite.',
-  'Typ minstens 3 tekens.': 'Vnesite vsaj 3 znake.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Vklopite iskanje CVE (na spletu) v Nastavitve → Varnost za spletno iskanje CVE-jev.',
-  'Zoek CVE…': 'Išči CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Išči po CVE ID-ju, npr. 2021-44228',
+
   'Zoeken': 'Išči',
   'Hertest': 'Ponovni test',
   'Niet hertest': 'Ni ponovno testirano',

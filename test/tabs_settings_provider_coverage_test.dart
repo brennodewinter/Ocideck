@@ -497,11 +497,33 @@ void main() {
       return n;
     }
 
+    test(
+      'removes retired MIAUW preferences without resetting other settings',
+      () async {
+        SharedPreferences.setMockInitialValues({
+          'secModuleEnabled': true,
+          'secModulePackVersion': 'old',
+          'allowCveLookup': true,
+          'cveApiBaseUrl': 'https://mirror.example',
+          'allowRemoteMedia': true,
+        });
+        final n = await loaded();
+        final prefs = await SharedPreferences.getInstance();
+        for (final key in [
+          'secModuleEnabled',
+          'secModulePackVersion',
+          'allowCveLookup',
+          'cveApiBaseUrl',
+        ]) {
+          expect(prefs.containsKey(key), isFalse);
+        }
+        expect(n.state.allowRemoteMedia, isTrue);
+      },
+    );
+
     test('exposes the documented defaults on a fresh install', () async {
       final n = await loaded();
       expect(n.state.webdavServer, isNull);
-      expect(n.state.allowCveLookup, isFalse);
-      expect(n.state.cveApiBaseUrl, AppSettings.defaultCveApiBaseUrl);
       expect(n.state.aiSettings.enabled, isFalse);
       expect(n.state.selectedCockpitColorSchemeName, 'Standaard');
       expect(n.state.cockpitVisualStyle, CockpitVisualStyle.authentic);
@@ -588,19 +610,6 @@ void main() {
         expect(await n.readAiApiKey('http://127.0.0.1:11434/v1'), isNull);
       },
     );
-
-    test('CVE lookup toggle and mirror URL fall back to the default', () async {
-      final n = await loaded();
-      await n.setAllowCveLookup(true);
-      expect(n.state.allowCveLookup, isTrue);
-
-      await n.setCveApiBaseUrl('https://mirror.example.nl');
-      expect(n.state.cveApiBaseUrl, 'https://mirror.example.nl');
-
-      // A blank URL resets to the built-in default rather than storing empty.
-      await n.setCveApiBaseUrl('   ');
-      expect(n.state.cveApiBaseUrl, AppSettings.defaultCveApiBaseUrl);
-    });
 
     test('removeRecentFile drops a path and ignores unknown ones', () async {
       final n = await loaded();

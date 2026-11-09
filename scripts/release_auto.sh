@@ -1304,17 +1304,6 @@ stale_catalog_ids() { # stale_catalog_ids JSON
 # commando niets, en dan stuur je iemand een middag het bos in.
 handmatige_route() { # handmatige_route ID
   case "$1" in
-    cwe)
-      printf '     * CWE: regenereer met tool/build_cwe_catalog.dart (de bron is een zip van\n' >&2
-      printf '       tientallen MB achter een gedateerde URL) en zet cweBundledVersion in\n' >&2
-      printf '       lib/services/reference_standards.dart.\n' >&2 ;;
-    miauw)
-      printf '     * MIAUW: neem een nieuwe momentopname van het werkboek over en zet\n' >&2
-      printf '       miauwBundledVersion op de commitdatum van de BRON, niet op de dag\n' >&2
-      printf '       waarop je het overnam.\n' >&2 ;;
-    cvss)
-      printf '     * CVSS: er bestaat een opvolger van de specificatie. Dat is een\n' >&2
-      printf '       implementatiebeslissing (lib/services/cvss/), geen verversing.\n' >&2 ;;
     orphanet)
       printf '     * Orphanet: make refresh-lexicon, en weeg de termdiff tegen de\n' >&2
       printf '       vals-positievencorpus — bij een lexicon vuurt elke term.\n' >&2 ;;

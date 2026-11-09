@@ -85,47 +85,24 @@ const _dutchSourceCs = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Řada = řádek, sloupec = popisek, barva buňky sleduje hodnotu. Osy označte jako pravděpodobnost a dopad pro matici rizik.',
   'Auditdossier exporteren': 'Exportovat auditní dokumentaci',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Nejprve dokončete a zapečeťte zprávu.',
-  'Auditdossier geëxporteerd naar:': 'Auditní dokumentace exportována do:',
-  'MIAUW-pentestrapport': 'Zpráva o pentestu MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Úplná struktura zprávy MIAUW: správa dokumentů, rozsah, provedení, manažerské shrnutí, zjištění, kontrolní seznamy a podpis.',
+
   'Tekst voorstellen (AI)': 'Navrhnout text (AI)',
   'Het model gaf geen tekst terug.': 'Model nevrátil žádný text.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Text už existuje. Nahradit jej návrhem AI?',
   'RFC3161-tijdstempel': 'Časové razítko RFC3161',
-  'Verzegel het deck eerst.': 'Nejprve zapečeťte deck.',
-  'Verzoek (.tsq) exporteren': 'Exportovat žádost (.tsq)',
-  'Token (.tsr) importeren': 'Importovat token (.tsr)',
-  'Nog geen tijdstempel': 'Zatím žádné časové razítko',
-  'Getijdstempeld op': 'Označeno časem',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Časové razítko neodpovídá hashi pečeti',
-  'Tijdstempelverzoek opgeslagen': 'Žádost o časové razítko uložena',
-  'Tijdstempel geïmporteerd': 'Časové razítko importováno',
+
   'Managementsamenvatting': 'Manažerské shrnutí',
-  'Bevindingen totaal': 'Nálezy celkem',
-  'scope-objecten getest': 'testované objekty rozsahu',
+
   'Gebruikte standaarden': 'Použité standardy',
-  'Bewijs-hashes kopiëren': 'Kopírovat hashe důkazů',
-  'Bewijs-hashes gekopieerd': 'Hashe důkazů zkopírovány',
-  'Bevindingen hernummeren': 'Přečíslovat nálezy',
-  'Scope-dekking controleren': 'Zkontrolovat pokrytí rozsahu',
-  'Scope-dekking': 'Pokrytí rozsahu',
-  'Geen dekkingsgaten': 'Žádné mezery v pokrytí',
-  'In scope, maar niet getest en geen bevinding:':
-      'V rozsahu, ale netestováno a bez nálezu:',
+
   'MIAUW-compliance': 'Soulad s MIAUW',
   'Voldaan': 'Splněno',
   'Openstaand': 'Otevřené',
-  'Uitgesloten door klant': 'Vyloučeno klientem',
+
   'Handmatig': 'Ručně',
   'Uitsluiten': 'Vyloučit',
-  'Opheffen': 'Zrušit',
-  'Reden voor uitsluiting': 'Důvod vyloučení',
-  'Fundamentele eisen zijn uitgesloten': 'Základní požadavky jsou vyloučeny',
+
   'Nieuwe bevinding (wizard)': 'Nový nález (průvodce)',
   'Bevinding maken': 'Vytvořit nález',
   'CIA-rating (scope-object)': 'Hodnocení CIA (objekt rozsahu)',
@@ -136,10 +113,7 @@ const _dutchSourceCs = {
   'Bewijsslide toevoegen': 'Přidat snímek s důkazy',
   'CIA-gewogen': 'Vážené podle CIA',
   'Severity (bevindingen)': 'Závažnost (nálezy)',
-  'CWE kiezen': 'Vybrat CWE',
-  'Zoek op naam of CWE-nummer': 'Hledat podle názvu nebo čísla CWE',
-  'Geen CWE gevonden': 'Žádné CWE nenalezeno',
-  'Kies CWE…': 'Vybrat CWE…',
+
   'AI-concept': 'AI koncept',
   'Nagekeken': 'Zkontrolováno',
   'Wis AI-alt-teksten': 'Vymazat AI alt texty',
@@ -268,10 +242,7 @@ const _dutchSourceCs = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Prohlášení o pravdivosti se zpracovatelem, certifikací, podpisem a pečetí.',
   'Uitbreidingen': 'Rozšíření',
-  'Gegevens opschonen': 'Vyčistit data',
-  'Gegevens lokaal beschikbaar': 'Data dostupná lokálně',
-  'Op het web nog niet beschikbaar': 'Na webu zatím nedostupné',
-  'Nog niet opgehaald': 'Zatím nestaženo',
+
   'AI-assistentie': 'Asistence AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Asistence AI je dostupná pouze v desktopové verzi.',
@@ -1379,9 +1350,7 @@ const _dutchSourceCs = {
   'Projectstart / kick-off': 'Zahájení projektu / kick-off',
   'Voorbespreking communicatie': 'Předběžná porada o komunikaci',
   'Projecttijdlijn': 'Časová osa projektu',
-  'Informatieveiligheid: RASCI / TVB': 'Bezpečnost informací: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Plán bezpečnostních úkolů',
-  'Certificering voortgang': 'Postup certifikace',
+
   'Training / workshop': 'Školení / workshop',
   'Rapportage': 'Zpráva',
   'Onderzoeksverhaal': 'Výzkumný příběh',
@@ -1397,12 +1366,7 @@ const _dutchSourceCs = {
       'Cílové skupiny, klíčové sdělení, kanály a mluvčí.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fáze, milníky, závislosti a rozhodovací body.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Zaznamenání rolí, matice RASCI a dohod o úkolech.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Úkoly, priority, vlastníci a doklady.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Postup podle domén, kontroly a plánování auditu.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Výukové cíle, klíčové koncepty, cvičení a kvízová otázka.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1416,18 +1380,16 @@ const _dutchSourceCs = {
   'Sjabloon': 'Šablona',
   'Post-incident review / lessons learned':
       'Přezkoumání po incidentu / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Posouzení úniku dat / incidentu soukromí',
+
   'DPIA / privacy impact assessment': 'DPIA / posouzení vlivu na soukromí',
-  'Risicoanalyse / risk register': 'Analýza rizik / registr rizik',
+
   'Business continuity / DR-test': 'Business continuity / test DR',
-  'Tabletop-oefening / crisisoefening': 'Cvičení tabletop / krizové cvičení',
+
   'BOB-crisisrapportage': 'Krizová zpráva BOB',
   'CAB / release readiness': 'CAB / připravenost k vydání',
   'Stuurgroep / project board update':
       'Řídicí výbor / aktualizace pro project board',
-  'Auditbevindingen en opvolging': 'Zjištění auditu a následná opatření',
-  'Leveranciersbeoordeling / vendor risk': 'Hodnocení dodavatele / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Architektonické rozhodnutí / prezentace ADR',
   'Beleid uitrollen / implementatieplan':
@@ -1435,28 +1397,14 @@ const _dutchSourceCs = {
   'Overdracht / handover': 'Předání / handover',
   'Retrospective / teamverbetering': 'Retrospektiva / zlepšování týmu',
   'PPL Vluchtvoorbereiding': 'Předletová příprava PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Časová osa, dopad, příčiny a nápravná opatření po incidentu.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Posuďte data, riziko, ohlašovací povinnost a komunikaci.',
-  "Verwerking, grondslag, privacyrisico's en maatregelen.":
-      'Zpracování, právní základ, rizika pro soukromí a opatření.',
-  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
-      'Zaznamenejte rizika, pravděpodobnost, dopad, opatření a vlastníky.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Scénář, cíle obnovy, zjištění z testů a body ke zlepšení.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Scénář, injects, rozhodnutí, pozorování a vyhodnocení.',
+
   "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
       'Proveďte krizový tým fázemi vytváření obrazu situace, posouzení situace a rozhodování, se živým obrazem situace, informačními otázkami, dilematy, protokolem rozhodnutí a seznamem akcí.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Změna, dopad, testy, rollback, komunikace a go/no-go.',
   "Voortgang, planning, budget, risico's en besluiten gevraagd.":
       'Postup, plánování, rozpočet, rizika a požadovaná rozhodnutí.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Zjištění, root cause, opatření, důkazy a status.',
-  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
-      'Služba, data, závislosti, požadavky, rizika a rozhodnutí.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontext, možnosti, trade-offs, rozhodnutí a důsledky.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4606,8 +4554,7 @@ const _dutchSourceAddCs = <String, String>{
   'Privacy en classificatie': 'Soukromí a klasifikace',
   'Uiterlijk van documenten': 'Vzhled dokumentů',
   'Exportkwaliteit': 'Kvalita exportu',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Nejprve udělte souhlas s odchozím provozem v části Soukromí a klasifikace.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Cloudová služba nejprve vyžaduje váš souhlas se soukromím v části "Soukromí a klasifikace" a ve webové verzi nefunguje.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5559,9 +5506,7 @@ const _dutchSourceAddCs = <String, String>{
   'Debriefing / after-action review': 'Debriefing / rozbor po akci',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Co bylo v plánu, co se stalo, proč — a jaké dohody uzavíráme.',
-  'Threat modeling-sessie': 'Modelování hrozeb (threat modeling)',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Rozsah, datové toky, hranice důvěry, hrozby podle kategorií STRIDE a opatření.',
+
   'Casuïstiekbespreking sociaal domein': 'Případová porada v sociální oblasti',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Anonymizovaný případ: životní oblasti, bezpečnost, právní rámec a koordinace.',
@@ -6133,10 +6078,7 @@ const _dutchSourceAddCs = <String, String>{
       'Rejstřík kontrolního seznamu: u každého testu stabilní id, kanonický název a kategorie. Obsah samotné příručky součástí není.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Rejstřík testů v2.0.0: u každého testu stabilní id, kanonický název, kategorie MASVS a slabina MASWE. Stažené testy v1 a zástupné položky obsaženy nejsou; obsah příručky rovněž ne.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Úplný seznam (id, název, popis) plus vlastní vybrané jádro s našimi poznámkami k nápravě.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Úplné schéma EIS (88 ověřitelných požadavků).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Názvy onemocnění v devíti jazycích jako zdravotní lexikon pro kontrolu soukromí (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6290,8 +6232,7 @@ const _dutchSourceAddCs = <String, String>{
   'naam@example.org\nexample.org': 'jmeno@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Vrstva vedle této prezentace byla příliš velká a nebyla načtena; samotný soubor zůstává nezměněný:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Toto časové razítko nepatří k poslední žádosti',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Uveďte toto číslo verze, když nahlásíte bezpečnostní problém.',
   'Video niet ingesloten': 'Video není vloženo',
@@ -6497,10 +6438,7 @@ const _dutchSourceAddCs = <String, String>{
       'Čísla grafů se neuložila — existují už jen v tomto okně:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'V prohlížeči neexistuje obnova po pádu: zavřete-li tuto kartu, neuložená práce je pryč. Uložte si prezentaci sami.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Místní databáze CVE (stahování spouštíte sami): OciDeck načítá hromadná data přes api.github.com a soubor vydání, na který tato adresa odkazuje.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Vyhledávání CVE (ve výchozím stavu vypnuto): je-li zapnuté, váš hledaný výraz jde na nastavené zrcadlo CVE, a pokud tam nic nenajde, do evropské databáze ENISA a do MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Vložené video z YouTube nebo Vimea načte přehrávač od této služby.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7099,8 +7037,7 @@ const _dutchSourceAddCs = <String, String>{
       'V tomto repozitáři nejsou žádné prezentace.',
   'Rapportagetaal': 'Jazyk zprávy',
   'Niet vastgelegd': 'Nezaznamenáno',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Reportové snímky a referenční data pro informační bezpečnost: zjištění, kontrolní seznamy, matice rozsahu a podpis. Strukturováno podle MIAUW a široce použitelné pro pentesty, audity a bezpečnostní výzkum. Referenční data jsou přímo v aplikaci, takže modul funguje ihned a zcela offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Volitelné moduly. Ve výchozím nastavení vypnuté; zůstávají skryté, dokud je nezapnete.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7129,11 +7066,10 @@ const _dutchSourceAddCs = <String, String>{
   'adres': 'adresa',
   'postcode': 'PSČ',
   'persoonsnaam': 'jméno osoby',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Tato prezentace obsahuje části modulu Informační bezpečnost. Zapněte modul, abyste je mohli upravovat.',
+
   'Inschakelen': 'Zapnout',
   'Bevestigen': 'Potvrdit',
-  'Onderbouwing van de bevestiging': 'Odůvodnění potvrzení',
+
   'De eigenaar staat insluiten niet toe': 'Vlastník nepovoluje vkládání',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Toto video lze zhlédnout jen na samotném zdroji.',
@@ -7241,43 +7177,13 @@ const _dutchSourceAddCs = <String, String>{
   'databaseverbinding met wachtwoord': 'připojení k databázi s heslem',
   'wachtwoord in klare tekst': 'heslo v otevřeném textu',
   'Afbreken': 'Přerušit',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Přerušeno. Nic nezůstalo rozdělané.',
+
   'Bijwerken': 'Aktualizovat',
   'Binnenhalen…': 'Stahování…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Stáhnout databázi',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Seznam CVE se nepodařilo stáhnout. Zkontroluj připojení a zkus to znovu; napůl stažený seznam byl zahozen.',
-  'De nieuwste uitgave opzoeken…': 'Hledání nejnovějšího vydání…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Tohle je velké stahování: přes 500 MB ke stažení, dočasně asi 1,5 GB místa na disku a podle připojení a zařízení klidně deset až třicet minut práce. Poté zůstane index o velikosti několika set megabajtů. Na připojení placeném po megabajtech to raději nedělej.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Na disku nebylo dost místa. Sestavení dočasně vyžaduje přes 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Stažený archiv nebyl tím, co jsme čekali, a byl odmítnut. Nic se nenainstalovalo.',
-  'Indexeren…': 'Indexování…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Dostupné lokálně — vyhledávání probíhá offline, žádný hledaný výraz neopustí zařízení.',
-  'Lokale CVE-database': 'Místní databáze CVE',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Se seznamem CVE na vlastním zařízení zůstává vyhledávání tady: žádný hledaný výraz už nejde na server a nikdo nevidí, kterou zranitelnost zkoumáš.',
-  'Uitpakken…': 'Rozbalování…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Ulož celý seznam CVE do tohoto zařízení, aby vyhledávání probíhalo offline a tvůj hledaný výraz nikam neputoval. Databáze pochází z CVE List V5 (oficiálního programu CVE, přes GitHub).',
-  'Wat er lokaal beschikbaar is': 'Co je k dispozici lokálně',
-  'Nu bijwerken': 'Aktualizovat nyní',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Data k dispozici lokálně — vyhledávání probíhá na tomto zařízení; nic je neopouští.',
-  'Zwakheden (CWE)': 'Slabiny (CWE)',
-  'Testgevallen (WSTG)': 'Testovací případy (WSTG)',
-  'MIAUW-eisen': 'Požadavky MIAUW',
-  'CVSS-scoretabel': 'Tabulka skóre CVSS',
-  'Bevindingsjablonen': 'Šablony zjištění',
+
   'Zoek een instelling': 'Hledat nastavení',
   'Geen instelling gevonden': 'Nenalezeno žádné nastavení',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Váš vyhledávaný výraz jde na nastavené zrcadlo CVE, a pokud nic nenajde, také do ENISA a MITRE. Kdo tyto servery provozuje, může odvodit, jakou konkrétní zranitelnost hledáte — a tedy jakou zranitelnost zkoumáte.',
+
   'Accepteren': 'Přijmout',
   'Accepteren + waarschuwen': 'Přijmout + upozornit',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7297,8 +7203,7 @@ const _dutchSourceAddCs = <String, String>{
   'burgerservicenummer (BSN)': 'občanské identifikační číslo (BSN)',
   'bankrekeningnummer (IBAN)': 'číslo bankovního účtu (IBAN)',
   'e-mailadres': 'e-mailová adresa',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Podpis TSA není v aplikaci ověřen; shoduje se pouze hash.',
+
   'Extern': 'Externí',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Načteno z externí adresy URL; otevření kontaktovalo tento server.',
@@ -7336,21 +7241,7 @@ const _dutchSourceAddCs = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Vytvoří kontrolní seznam pro každý objekt rozsahu (WSTG pro web/API); stávající zůstávají.',
   'CVE opzoeken': 'Vyhledat CVE',
-  'CVE opzoeken (online)': 'Vyhledat CVE (online)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Vyhledávání CVE není ve webové verzi dostupné.',
-  'CVE-mirror (basis-URL)': 'Zrcadlo CVE (základní URL)',
-  'Geen CVE gevonden.': 'Nenalezeno žádné CVE.',
-  'Kon de CVE-bron niet bereiken.': 'Nepodařilo se připojit ke zdroji CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Povolit online vyhledávání CVE v editoru zjištění prostřednictvím zrcadla NVD. Ve výchozím nastavení vypnuto; vyžaduje také váš souhlas a funguje pouze na počítači.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Zadejte (část) ID CVE a vyhledejte.',
-  'Typ minstens 3 tekens.': 'Zadejte alespoň 3 znaky.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Zapněte vyhledávání CVE (online) v Nastavení → Zabezpečení pro online vyhledávání CVE.',
-  'Zoek CVE…': 'Hledat CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Hledat podle ID CVE, např. 2021-44228',
+
   'Zoeken': 'Hledat',
   'Hertest': 'Opakovaný test',
   'Niet hertest': 'Nepřetestováno',

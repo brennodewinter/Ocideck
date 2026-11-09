@@ -19,7 +19,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'collaboration_provider.dart';
 import 'meeting_session_provider.dart';
-import 'info_safety_provider.dart';
 import 'transcription_provider.dart';
 import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
@@ -34,7 +33,6 @@ import 'forms_provider.dart';
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
 enum ModuleId {
-  infoSafety,
   ai,
   onlineStorage,
   imports,
@@ -72,12 +70,6 @@ class ModuleEntry {
   final Provider<bool> revealed;
 }
 
-/// Of de Informatieveiligheid-schakelaar aan staat, als los handvat voor het
-/// register; de poort zelf blijft [infoSafetyRevealProvider].
-final infoSafetyEnabledProvider = Provider<bool>((ref) {
-  return ref.watch(infoSafetyProvider.select((s) => s.enabled));
-});
-
 /// Of de AI-schakelaar aan staat (de bewaarde stand, niet het formulier).
 final aiModuleEnabledProvider = Provider<bool>((ref) {
   return ref.watch(settingsProvider.select((s) => s.aiSettings.enabled));
@@ -97,11 +89,6 @@ final aiModuleRevealProvider = Provider<bool>((ref) {
 /// tabblad telt hierop, zodat een vierde module niet stil zonder kaart kan
 /// blijven.
 final List<ModuleEntry> moduleRegistry = [
-  ModuleEntry(
-    id: ModuleId.infoSafety,
-    enabled: infoSafetyEnabledProvider,
-    revealed: infoSafetyRevealProvider,
-  ),
   ModuleEntry(
     id: ModuleId.ai,
     enabled: aiModuleEnabledProvider,

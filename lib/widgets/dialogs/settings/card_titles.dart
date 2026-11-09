@@ -14,7 +14,6 @@ import '../../../state/module_registry.dart';
 
 /// De titel van een modulekaart op het tabblad Uitbreidingen.
 String moduleCardTitle(ModuleId id, AppLocalizations l10n) => switch (id) {
-  ModuleId.infoSafety => l10n.d('Informatieveiligheid'),
   ModuleId.ai => l10n.d('AI-assistentie'),
   ModuleId.onlineStorage => l10n.d('Online opslag'),
   ModuleId.imports => l10n.d('Importeren'),

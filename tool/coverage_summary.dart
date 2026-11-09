@@ -215,13 +215,15 @@ const Set<String> uncoveredBaseline = {
   // logica (URI-helpers, protocol, bridge) is wél getest.
   'lib/platform/deep_link_cleanup_web.dart',
   'lib/platform/markdown_transfer_web.dart',
-  'lib/services/cve_transport_factory.dart',
-  'lib/services/cve_transport_web.dart',
   // PLATFORM: `update_check_fetch.dart` is de conditional-importnaad van de
   // versiecheck — één const-binding, niets om uit te voeren. De webhelft
   // (altijd-weigeren) wordt rechtstreeks gedekt in update_check_test.dart,
   // de io-helft via de service onder de VM.
   'lib/services/update_check_fetch.dart',
+  // PLATFORM: retirement cleanup facade and web no-op. There is no downloaded
+  // filesystem cache on web; the IO implementation is tested directly.
+  'lib/services/retired_miauw_cleanup.dart',
+  'lib/services/retired_miauw_cleanup_stub.dart',
   // PLATFORM: de twee OciServe-fabrieken zijn kale conditional-importnaden;
   // hun io-helften worden rechtstreeks gedekt door ociserve_platform_io_test.
   // De webhelften weigeren alleen fail-closed en worden rechtstreeks geladen
@@ -344,8 +346,6 @@ const Set<String> uncoveredBaseline = {
   'lib/services/git/draft_store_factory.dart',
   // PLATFORM: the local CVE database's conditional-export facade + its web half
   // (the feature is desktop-only; the io half is exercised by the ingest tests).
-  'lib/services/cve/local_cve_database.dart',
-  'lib/services/cve/local_cve_database_web.dart',
   'lib/utils/file_download.dart',
   'lib/utils/file_download_web.dart',
   // PLATFORM: de webhelft van de import-runner (#875). De browser heeft geen
@@ -409,7 +409,6 @@ const Set<String> uncoveredBaseline = {
   'lib/widgets/dialogs/parts/settings_dialog_search_index.dart',
   // NO EXECUTABLE LINES: an abstract interface (the local CVE database as the
   // UI sees it). Its two implementations are covered separately.
-  'lib/services/cve/local_cve_database_api.dart',
   // NO EXECUTABLE LINES: a single enum declaration.
   'lib/widgets/markdown_editor/notes_editor_mode.dart',
   // NO EXECUTABLE LINES: the stand-alone dark presenter palette — nothing but
