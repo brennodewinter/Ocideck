@@ -1541,6 +1541,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeeldingsgroep': 'Grupa slika',
+  'Stapel': 'Hrpa',
+  'Afbeelding toevoegen': 'Dodaj sliku',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Više slika na jednom slajdu. Odaberite mrežu (sve jedna pored druge) ili hrpu (jedna slika pada po kliku, poput isječaka iz novina). Dodajte slike iz biblioteke i dajte svakoj zamjenski tekst.',
   'Ondertitels': 'Podnaslovi',
   'Ander bestand…': 'Druga datoteka…',
   'Geen ondertitels': 'Bez podnaslova',

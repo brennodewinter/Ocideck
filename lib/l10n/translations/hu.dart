@@ -1538,6 +1538,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeeldingsgroep': 'Képcsoport',
+  'Stapel': 'Halom',
+  'Afbeelding toevoegen': 'Kép hozzáadása',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Több kép egy dián. Válasszon rácsot (mind egymás mellett) vagy halmot (kattintásonként egy kép esik, mint az újságkivágások). Adjon hozzá képeket a könyvtárból és adjon mindegyiknek alt-szöveget.',
   'Ondertitels': 'Feliratok',
   'Ander bestand…': 'Másik fájl…',
   'Geen ondertitels': 'Nincsenek feliratok',

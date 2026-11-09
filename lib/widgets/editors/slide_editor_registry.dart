@@ -16,6 +16,7 @@ import 'cockpit_editor.dart';
 import 'finding_editor.dart';
 import 'findings_summary_editor.dart';
 import 'free_markdown_editor.dart';
+import 'image_gallery_editor.dart';
 import 'image_slide_editor.dart';
 import 'menu_editor.dart';
 import 'question_editor.dart';
@@ -169,6 +170,14 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         captionBasePath: c.captionBasePath,
         nestedInScrollView: c.nestedInScrollView,
         slideAspect: c.slideAspect,
+      ),
+      SlideType.imageGallery: (c) => ImageGalleryEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        searchPaths: c.searchPaths,
+        captionBasePath: c.captionBasePath,
+        nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.image: (c) => ImageSlideEditor(
         key: c._key,

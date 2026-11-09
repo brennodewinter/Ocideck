@@ -8,6 +8,7 @@
 // Flutter-free so it can be tested without a widget tree and used by both the
 // presenter and the audience window.
 
+import 'gallery_layout.dart';
 import 'image_callout.dart';
 import 'slide.dart';
 import 'timeline.dart';
@@ -51,6 +52,13 @@ sealed class PresentationStepPlan {
         slide.callouts.isNotEmpty) {
       return CalloutRevealStepPlan.forSlide(slide);
     }
+    // Afbeeldingsstapel (#2838): stap 0 toont het eerste beeld, elke klik laat
+    // er één op neervallen. Alleen de stapel-lay-out stapt; het raster toont
+    // alles meteen.
+    if (slide.type == SlideType.imageGallery &&
+        slide.galleryLayout == GalleryLayout.stack) {
+      return ImageStackStepPlan(imageCount: slide.galleryImages.length);
+    }
     return const NoStepPlan();
   }
 }
@@ -86,6 +94,43 @@ class TimelineStepPlan extends PresentationStepPlan {
 
   @override
   int get hashCode => Object.hash('timeline', eventCount);
+}
+
+/// Afbeeldingsstapel in stapmodus (#2838). Stap 0 toont de eerste afbeelding
+/// zodat de dia nooit leeg opent; elke klik laat er één op neervallen.
+/// De plaatsing (verschuiving/draaiing) is deterministisch per dia — het
+/// beamerscherm toont exact dezelfde stapel als de presentator.
+class ImageStackStepPlan extends PresentationStepPlan {
+  /// Totaal aantal afbeeldingen in de stapel.
+  final int imageCount;
+
+  const ImageStackStepPlan({required this.imageCount});
+
+  @override
+  int get remainingSteps => imageCount > 0 ? imageCount - 1 : 0;
+
+  /// Hoeveel afbeeldingen zichtbaar zijn bij [step] (stap 0 = de eerste).
+  int revealedImageCount(int step) {
+    if (imageCount <= 0) return 0;
+    return (step + 1).clamp(1, imageCount);
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is ImageStackStepPlan && other.imageCount == imageCount;
+
+  @override
+  int get hashCode => Object.hash('imageStack', imageCount);
+}
+
+/// Hoeveel galerijbeelden bij [step] zichtbaar zijn op een stapel-dia (#2838),
+/// of null als de slide geen stapel-stapmodus heeft. Stap 0 toont al de eerste
+/// beeld, zodat de dia nooit leeg opent. Gedeeld door presentator en
+/// zaalscherm zodat beide exact dezelfde stapel tekenen.
+int? galleryVisibleForSlide(Slide slide, int step) {
+  final plan = PresentationStepPlan.forSlide(slide);
+  if (plan is! ImageStackStepPlan) return null;
+  return plan.revealedImageCount(step);
 }
 
 /// Callout reveal step mode (IMAGE_CALLOUTS.md §7). Step 0 shows title and

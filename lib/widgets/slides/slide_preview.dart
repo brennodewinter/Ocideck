@@ -45,6 +45,7 @@ import '../../models/deck.dart';
 import '../../models/image_callout.dart';
 import '../../models/improvement_y01.dart';
 import '../../models/marp_style.dart';
+import '../../models/gallery_layout.dart';
 import '../../models/menu.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/document_signature.dart';
@@ -125,6 +126,7 @@ part 'previews/bullets_image_preview.dart';
 part 'previews/checklist_previews.dart';
 part 'previews/table_preview.dart';
 part 'previews/media_previews.dart';
+part 'previews/gallery_preview.dart';
 part 'previews/media_previews_video.dart';
 part 'previews/media_previews_image.dart';
 part 'previews/code_preview.dart';
@@ -439,6 +441,10 @@ class SlidePreviewWidget extends StatelessWidget {
   /// de slide toont alles. Alleen van toepassing op bulletsImage met callouts.
   final int? calloutRevealedBulletCount;
 
+  /// Afbeeldingsstapel-stapmodus (#2838): hoeveel beelden tot nu toe zichtbaar
+  /// zijn (door de presenter aangestuurd). Null = alles tonen.
+  final int? galleryVisibleCount;
+
   /// First number for this slide's numbered list. 1 restarts; a higher value
   /// continues a numbered list from a previous slide (see [numberedListStartFor]).
   /// Callers with the full deck compute it; standalone previews leave it at 1.
@@ -524,6 +530,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.onAnswerTextChanged,
     this.timelineRevealedCount,
     this.calloutRevealedBulletCount,
+    this.galleryVisibleCount,
     this.numberStart = 1,
     this.fitScaleOverride,
     this.splitRunPosition,
@@ -839,6 +846,14 @@ class SlidePreviewWidget extends StatelessWidget {
           font: fontFamily,
           profile: themeProfile,
         );
+      case SlideType.imageGallery:
+        return GalleryPreview(
+          slide: slide,
+          w: w,
+          projectPath: projectPath,
+          profile: themeProfile,
+          visibleCount: galleryVisibleCount,
+        );
       case SlideType.video:
         return _videoPreview(slide, w);
       case SlideType.quote:
@@ -1087,6 +1102,7 @@ double _contentLeftInset(Slide slide, double w) {
         SlideType.menu ||
         SlideType.twoImages ||
         SlideType.image ||
+        SlideType.imageGallery ||
         SlideType.video ||
         SlideType.scorecard ||
         SlideType.assets ||

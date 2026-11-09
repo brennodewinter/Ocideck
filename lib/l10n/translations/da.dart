@@ -1537,6 +1537,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeeldingsgroep': 'Billedgruppe',
+  'Stapel': 'Stak',
+  'Afbeelding toevoegen': 'Tilføj billede',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Flere billeder på ét slide. Vælg gitter (alle side om side) eller stak (ét billede falder per klik, som avisudklip man lægger). Tilføj billeder fra biblioteket og giv hvert billede en alt-tekst.',
   'Ondertitels': 'Undertekster',
   'Ander bestand…': 'Anden fil…',
   'Geen ondertitels': 'Ingen undertekster',

@@ -27,6 +27,7 @@
 import 'dart:convert';
 
 import '../models/deck.dart';
+import '../models/gallery_layout.dart';
 import '../models/display_window_spec.dart';
 import '../models/image_callout.dart';
 import '../models/marp_style.dart';
@@ -237,6 +238,8 @@ Map<String, Object?> slideToJson(Slide s) => {
   'ganttScale': s.ganttScale,
   'ganttSections': s.ganttSections,
   'menuLayout': s.menuLayout.name,
+  'galleryImages': s.galleryImages,
+  'galleryLayout': s.galleryLayout.name,
   'tableColumnAlignments': s.tableColumnAlignments.map((e) => e.name).toList(),
   'tableNumberColumns': s.tableNumberColumns,
   'renderPage': s.renderPage,
@@ -362,6 +365,14 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
   menuLayout: j['menuLayout'] == null
       ? MenuLayout.grid
       : _enumByName(MenuLayout.values, _str(j, 'menuLayout'), 'menuLayout'),
+  galleryImages: _strList(j, 'galleryImages'),
+  galleryLayout: j['galleryLayout'] == null
+      ? GalleryLayout.grid
+      : _enumByName(
+          GalleryLayout.values,
+          _str(j, 'galleryLayout'),
+          'galleryLayout',
+        ),
   tableColumnAlignments: j['tableColumnAlignments'] == null
       ? const []
       : _enumList(j, 'tableColumnAlignments', TableAlign.values),
@@ -430,6 +441,7 @@ enum _ValueKind {
   marpStyle,
   titleColumnLayout,
   menuLayout,
+  galleryLayout,
   tableAlignList,
   boolList,
   // De rijen van een tabel, als geneste lijst — #2749.
@@ -524,6 +536,8 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.ganttScale: _ValueKind.str,
   SlideField.ganttSections: _ValueKind.boolean,
   SlideField.menuLayout: _ValueKind.menuLayout,
+  SlideField.galleryImages: _ValueKind.stringList,
+  SlideField.galleryLayout: _ValueKind.galleryLayout,
   SlideField.tableColumnAlignments: _ValueKind.tableAlignList,
   SlideField.tableNumberColumns: _ValueKind.boolList,
   SlideField.tableRows: _ValueKind.stringRows,
@@ -590,6 +604,7 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
     _ValueKind.marpStyle => _need<MarpStyle>(value).toJson(),
     _ValueKind.titleColumnLayout => _need<TitleColumnLayout>(value).name,
     _ValueKind.menuLayout => _need<MenuLayout>(value).name,
+    _ValueKind.galleryLayout => _need<GalleryLayout>(value).name,
     _ValueKind.tableAlignList => _needEnumList<TableAlign>(
       value,
     ).map((e) => e.name).toList(),
@@ -646,6 +661,11 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
     ),
     _ValueKind.menuLayout => _enumByName(
       MenuLayout.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.galleryLayout => _enumByName(
+      GalleryLayout.values,
       _asString(json, where),
       where,
     ),

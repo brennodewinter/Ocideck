@@ -1540,6 +1540,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeeldingsgroep': 'Skupina obrázkov',
+  'Stapel': 'Kopa',
+  'Afbeelding toevoegen': 'Pridať obrázok',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Viacero obrázkov na jednej snímke. Vyberte mriežku (všetky vedľa seba) alebo kopu (jeden obrázok padne na kliknutie, ako výstrižky z novín). Pridajte obrázky z knižnice a každému dajte alternatívny text.',
   'Ondertitels': 'Titulky',
   'Ander bestand…': 'Iný súbor…',
   'Geen ondertitels': 'Žiadne titulky',

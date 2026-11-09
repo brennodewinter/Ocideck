@@ -25,7 +25,38 @@ bool isOcideckWrittenClassToken(String token) =>
     token == 'table-editable' ||
     token == 'table-overdue' ||
     isTimelineOptionToken(token) ||
-    isMenuOptionToken(token);
+    isMenuOptionToken(token) ||
+    isGalleryOptionToken(token);
+
+/// De afbeeldingsgroep (#2838): kop gevolgd door elke beeldentry ongewijzigd
+/// als `![alt](pad)`-regel — een gewone Markdown-lijst, dus Marp en elke
+/// andere lezer tonen de beelden zonder OciDeck (de bewaker-toets). Top-level
+/// zodat de toch al forse [MarkdownService]-klasse er niet van groeit.
+void writeGallerySlideBody(StringBuffer buf, Slide slide) {
+  if (slide.title.isNotEmpty) {
+    buf.writeln('# ${slide.title}');
+    buf.writeln();
+  }
+  if (slide.subtitle.isNotEmpty) {
+    buf.writeln('## ${slide.subtitle}');
+    buf.writeln();
+  }
+  for (final entry in slide.galleryImages) {
+    if (entry.trim().isNotEmpty) buf.writeln(entry.trim());
+  }
+}
+
+/// De `![alt](pad)`-regels van een galerij-body (#2838), in leesvolgorde —
+/// de post-pass tegenhanger van de contentlinewalker: pas de type-inferentie
+/// beslist of ze gebruikt worden, dus verzamelen in de lus zou elke dia
+/// meeslepen. Een regel telt alleen als hij héél uit één beeldtoken bestaat.
+List<String> galleryImageLines(String body) => [
+  for (final line in body.split('\n'))
+    if (line.trim().startsWith('![') &&
+        RegExp(r'!\[[^\]]*\]\([^)\n]+\)').firstMatch(line.trim())?.group(0) ==
+            line.trim())
+      line.trim(),
+];
 
 // Hoisted hot-path regexes (zie markdown_service_parse.dart); [_attrRegexes]
 // cachet de per-attribuutnaam gebouwde patronen van [_parseEmbedLine].

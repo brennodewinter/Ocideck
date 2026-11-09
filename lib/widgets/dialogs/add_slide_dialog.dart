@@ -66,6 +66,7 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.twoBullets,
     SlideType.bulletsImage,
     SlideType.twoImages,
+    SlideType.imageGallery,
     SlideType.image,
     SlideType.video,
     SlideType.quote,
@@ -668,6 +669,11 @@ class SlideTypePreviewPainter extends CustomPainter {
         _imageBox(canvas, 12, 16, 64, 46);
         _imageBox(canvas, 84, 16, 64, 46);
         _bar(canvas, 20, 68, 48, 5, _soft);
+      case SlideType.imageGallery:
+        _imageBox(canvas, 12, 18, 44, 40);
+        _imageBox(canvas, 58, 18, 44, 40);
+        _imageBox(canvas, 104, 18, 44, 40);
+        _bar(canvas, 30, 66, 100, 5, _soft);
         _bar(canvas, 92, 68, 48, 5, _soft);
       case SlideType.image:
         _imageBox(canvas, 10, 10, 140, 70);
@@ -1023,6 +1029,7 @@ class SlideTypePreviewPainter extends CustomPainter {
           SlideType.bulletsImage ||
           SlideType.twoImages ||
           SlideType.image ||
+          SlideType.imageGallery ||
           SlideType.video ||
           SlideType.quote ||
           SlideType.table ||

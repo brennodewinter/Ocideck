@@ -1,3 +1,4 @@
+import 'package:ocideck/models/gallery_layout.dart';
 import 'package:ocideck/models/slide.dart';
 
 /// Een dia van [type] met het minimum aan inhoud dat hem herkenbaar maakt.
@@ -30,6 +31,11 @@ Slide slideMetInhoud(SlideType type) {
     SlideType.twoImages => basis.copyWith(
       imagePath: 'images/a.png',
       imagePath2: 'images/b.png',
+    ),
+    SlideType.imageGallery => basis.copyWith(
+      title: 'T',
+      galleryImages: const ['![](images/a.png)', '![alt](images/b.png)'],
+      galleryLayout: GalleryLayout.grid,
     ),
     SlideType.video => basis.copyWith(videoPath: 'media/film.mp4'),
     SlideType.quote => basis.copyWith(

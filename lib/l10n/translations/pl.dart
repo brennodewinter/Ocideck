@@ -1547,6 +1547,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeeldingsgroep': 'Grupa obrazów',
+  'Stapel': 'Stos',
+  'Afbeelding toevoegen': 'Dodaj obraz',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Kilka obrazów na jednym slajdzie. Wybierz siatkę (wszystkie obok siebie) lub stos (po jednym obrazie na kliknięcie, jak wycinki z gazet). Dodaj obrazy z biblioteki i nadaj każdemu tekst alternatywny.',
   'Ondertitels': 'Napisy',
   'Ander bestand…': 'Inny plik…',
   'Geen ondertitels': 'Brak napisów',

@@ -130,6 +130,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       case SlideType.section:
       case SlideType.image:
       case SlideType.twoImages:
+      case SlideType.imageGallery:
       case SlideType.video:
       case SlideType.chart:
       case SlideType.cockpit:

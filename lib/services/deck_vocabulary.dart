@@ -55,6 +55,10 @@ const kKnownClassTokens = {
   'menu-grid',
   'menu-list',
   'menu-circle',
+  // Afbeeldingsgroep (#2838): `gallery` is het typetoken, `gallery-stack` de
+  // lay-outoptie — het raster is de stille standaard zonder token.
+  'gallery',
+  'gallery-stack',
   'timeline-horizontal',
   'timeline-vertical',
   'timeline-steps',
@@ -85,6 +89,7 @@ const kOciDeckOnlyClassTokens = {
   'scorecard',
   'actions',
   'menu',
+  'gallery',
   'assets',
   'discoveries',
   'finding',

@@ -29,6 +29,7 @@
 // sufficient for v1. The enums are the seam where later fields are added.
 
 import '../models/deck.dart';
+import '../models/gallery_layout.dart';
 import '../models/display_window_spec.dart';
 import '../models/image_callout.dart';
 import '../models/marp_style.dart';
@@ -203,6 +204,7 @@ enum SlideField {
   // — List<String> —
   bullets,
   bullets2,
+  galleryImages,
   preservedMarpLines,
   marpStyle, // MarpStyle
   // — bool —
@@ -244,6 +246,7 @@ enum SlideField {
   ganttSections,
   // — menu —
   menuLayout, // MenuLayout
+  galleryLayout, // GalleryLayout
   // — table formatting —
   tableColumnAlignments, // List<TableAlign>
   tableNumberColumns, // List<bool>
@@ -443,6 +446,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     SlideField.bullets2 => slide.copyWith(
       bullets2: _castList<String>(value, field),
     ),
+    SlideField.galleryImages => slide.copyWith(
+      galleryImages: _castList<String>(value, field),
+    ),
     SlideField.preservedMarpLines => slide.copyWith(
       preservedMarpLines: _castList<String>(value, field),
     ),
@@ -522,6 +528,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.menuLayout => slide.copyWith(
       menuLayout: _cast<MenuLayout>(value, field),
+    ),
+    SlideField.galleryLayout => slide.copyWith(
+      galleryLayout: _cast<GalleryLayout>(value, field),
     ),
     SlideField.tableColumnAlignments => slide.copyWith(
       tableColumnAlignments: _castList<TableAlign>(value, field),

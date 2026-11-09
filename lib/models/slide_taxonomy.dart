@@ -169,6 +169,10 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     bulletColumns: BulletColumns.one,
   ),
   SlideType.twoImages: SlideTypeMeta(label: 'Twee Afbeeldingen', marpClass: ''),
+  SlideType.imageGallery: SlideTypeMeta(
+    label: 'Afbeeldingsgroep',
+    marpClass: 'gallery',
+  ),
   SlideType.image: SlideTypeMeta(label: 'Grote Afbeelding', marpClass: ''),
   SlideType.video: SlideTypeMeta(label: 'Video', marpClass: 'video'),
   SlideType.quote: SlideTypeMeta(label: 'Citaat', marpClass: 'quote'),
