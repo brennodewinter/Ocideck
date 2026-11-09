@@ -1604,6 +1604,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Ondertitels': 'Субтитри',
+  'Ander bestand…': 'Інший файл…',
+  'Geen ondertitels': 'Без субтитрів',
+  'Kies een ondertitelbestand': 'Виберіть файл субтитрів',
+  'Ondertitels aan': 'Субтитри увімкнено',
+  'Ondertitels toevoegen…': 'Додати субтитри…',
+  'Ondertitels uit': 'Субтитри вимкнено',
+  'Ondertitels verwijderen': 'Вилучити субтитри',
   'Vergroot tot schermbreedte': 'Збільшити до ширини екрана',
   'Website wil Markdown openen?': 'Сайт хоче відкрити Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

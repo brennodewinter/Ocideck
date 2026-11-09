@@ -797,6 +797,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Ondertitels': 'Captions',
+  'Ander bestand…': 'Different file…',
+  'Geen ondertitels': 'No captions',
+  'Kies een ondertitelbestand': 'Choose a caption file',
+  'Ondertitels aan': 'Captions on',
+  'Ondertitels toevoegen…': 'Add captions…',
+  'Ondertitels uit': 'Captions off',
+  'Ondertitels verwijderen': 'Remove captions',
   'Vergroot tot schermbreedte': 'Zoom to screen width',
   'Website wil Markdown openen?': 'Website wants to open Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

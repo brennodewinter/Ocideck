@@ -2494,6 +2494,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Ondertitels': 'Altyazılar',
+  'Ander bestand…': 'Başka dosya…',
+  'Geen ondertitels': 'Altyazı yok',
+  'Kies een ondertitelbestand': 'Bir altyazı dosyası seç',
+  'Ondertitels aan': 'Altyazı açık',
+  'Ondertitels toevoegen…': 'Altyazı ekle…',
+  'Ondertitels uit': 'Altyazı kapalı',
+  'Ondertitels verwijderen': 'Altyazıyı kaldır',
   'Vergroot tot schermbreedte': 'Ekran genişliğine büyüt',
   'Website wil Markdown openen?': 'Site Markdown açmak istiyor?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

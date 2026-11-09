@@ -643,6 +643,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Ondertitels': 'Sous-titres',
+  'Ander bestand…': 'Autre fichier…',
+  'Geen ondertitels': 'Pas de sous-titres',
+  'Kies een ondertitelbestand': 'Choisir un fichier de sous-titres',
+  'Ondertitels aan': 'Sous-titres activés',
+  'Ondertitels toevoegen…': 'Ajouter des sous-titres…',
+  'Ondertitels uit': 'Sous-titres désactivés',
+  'Ondertitels verwijderen': 'Supprimer les sous-titres',
   'Vergroot tot schermbreedte': 'Agrandir à la largeur de l’écran',
   'Website wil Markdown openen?': 'Le site veut ouvrir du Markdown ?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

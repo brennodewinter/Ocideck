@@ -350,6 +350,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       slide.imagePath,
       slide.imagePath2,
       slide.videoPath,
+      slide.videoCaptions,
       slide.audioPath,
       slide.notes,
     ].where((s) => s.isNotEmpty).join('  ·  ');

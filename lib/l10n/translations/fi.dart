@@ -1589,6 +1589,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Ondertitels': 'Tekstitys',
+  'Ander bestand…': 'Toinen tiedosto…',
+  'Geen ondertitels': 'Ei tekstitystä',
+  'Kies een ondertitelbestand': 'Valitse tekstitystiedosto',
+  'Ondertitels aan': 'Tekstitys päällä',
+  'Ondertitels toevoegen…': 'Lisää tekstitys…',
+  'Ondertitels uit': 'Tekstitys pois',
+  'Ondertitels verwijderen': 'Poista tekstitys',
   'Vergroot tot schermbreedte': 'Suurenna näytön leveyteen',
   'Website wil Markdown openen?': 'Sivusto haluaa avata Markdownin?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

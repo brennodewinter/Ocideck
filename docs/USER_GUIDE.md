@@ -1716,6 +1716,17 @@ private, the link is invalid, or there is no connection to the source. While a
 valid embed is still loading you see a small spinner, so a slow load is no longer
 mistaken for a broken one.
 
+**Captions (subtitles).** For a video from a local file you can attach a
+subtitle file (`.vtt` or `.srt`) via **Ondertitels toevoegen…** in the video
+editor. The file is imported next to the video into the project folder, and it
+travels with the presentation — save-as, package, dossier, download bundle,
+and copying the slide into another deck all keep it. Captions are shown by
+default in the presenter and on the audience display; the subtitle button in
+the player's hover controls switches them off per slide. They are stored as
+standard HTML (`<track>` inside `<video>`), so exported Marp HTML shows them
+in any browser too — no OciDeck needed. One file per slide for now; YouTube
+and Vimeo keep captions in their own player.
+
 A **YouTube** embed is played on `youtube-nocookie.com`, and only there: the
 player frame fetches no script from `youtube.com`, and the "Watch on YouTube"
 logo inside the player is refused rather than followed, so a stray click during

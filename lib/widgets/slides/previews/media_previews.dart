@@ -80,6 +80,10 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
   /// meldt altijd; video alleen tijdens autoplay.
   bool get reportsMediaCompletion => true;
 
+  /// De toekomst met het ondertitelbestand voor deze media, of null (#2841).
+  /// Alleen de videopreview vult dit in; audio heeft geen captions.
+  Future<ClosedCaptionFile>? mediaClosedCaptionFile(String source) => null;
+
   /// Maakt de controller voor [source]. Een `http(s)`- of `blob:`-bron wordt een
   /// netwerk-controller, anders een bestand-controller. Subklassen hoeven dit
   /// zelden te overschrijven.
@@ -92,11 +96,12 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
         : source;
     final uri = Uri.tryParse(src);
     final scheme = uri?.scheme.toLowerCase();
+    final captions = mediaClosedCaptionFile(src);
     if (uri != null &&
         (scheme == 'http' || scheme == 'https' || scheme == 'blob')) {
-      return VideoPlayerController.networkUrl(uri);
+      return VideoPlayerController.networkUrl(uri, closedCaptionFile: captions);
     }
-    return VideoPlayerController.file(File(src));
+    return VideoPlayerController.file(File(src), closedCaptionFile: captions);
   }
 
   /// Extra controller-instelling vóór play (bv. setLooping). Standaard niets.

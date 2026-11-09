@@ -1618,6 +1618,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Ondertitels': 'Fotheidearlacha',
+  'Ander bestand…': 'Comhad eile…',
+  'Geen ondertitels': 'Gan fotheidearlacha',
+  'Kies een ondertitelbestand': 'Roghnaigh comhad fotheidearlach',
+  'Ondertitels aan': 'Fotheidearlacha ar siúl',
+  'Ondertitels toevoegen…': 'Cuir fotheidearlacha leis…',
+  'Ondertitels uit': 'Fotheidearlacha as',
+  'Ondertitels verwijderen': 'Bain fotheidearlacha',
   'Vergroot tot schermbreedte': 'Méadaigh go leithead an scáileáin',
   'Website wil Markdown openen?': 'An suíomh ag iarraidh Markdown a oscailt?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

@@ -640,7 +640,11 @@ const Map<String, int> classSizeBaseline = {
   // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
   // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
   'lib/services/markdown_service.dart#MarkdownService':
-      2452, // +13 (#2435): vier ocideck_cost_*-sleutels op _FrontMatter, vier
+      2454, // +2 (#2841): videoCaptions door _BodyParse-record, assembly en
+  // consume (de `<track>` zelf parseert _parseVideoLine in helpers — die telt
+  // niet mee; _BodyParse verhuisde naar body_parse.dart en viel óók uit de
+  // telling). Onherleidbare codec-plumbing voor het nieuwe veld.
+  // +13 (#2435): vier ocideck_cost_*-sleutels op _FrontMatter, vier
   // case-takken en één assembly-regel — de vertaling naar
   // PresentationCostConfig staat in presentation_cost.dart.
   // +10 (#2433): de ruwe papersize/geometry-velden op _FrontMatter
@@ -658,7 +662,10 @@ const Map<String, int> classSizeBaseline = {
   // de dunne pick/plak-orchestratie en snackbar-afslag.
   // Was 2437 (+228, #1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
-  'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1616,
+  'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1637,
+  // +21 (#2841): videoCaptions-fragment — pad én, via de geïnjecteerde
+  // assetTextReader, de inhoud van het ondertitelbestand (ondertitels dragen
+  // evenzeer persoonsdata als notities).
   // +12 (#1845): calloutDescription fragments — descriptions are scannable
   // content per IMAGE_CALLOUTS.md §8; the privacy scanner now yields one
   // fragment per callout description.

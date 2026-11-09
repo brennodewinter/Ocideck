@@ -27,6 +27,7 @@ extension _MarkdownParseBody on MarkdownService {
     bool videoAutoplay,
     int videoStartMs,
     int videoEndMs,
+    String videoCaptions,
     String audioPath,
     bool audioAutoplay,
     String quote,
@@ -42,7 +43,7 @@ extension _MarkdownParseBody on MarkdownService {
     List<String> bullets, {
     required bool skipContentLines,
   }) {
-    final b = _BodyParse(listStyle);
+    final b = BodyParse(listStyle);
     final classTokens = cssClass.split(_reWhitespace);
     b.isSplit = classTokens.contains('split');
 
@@ -92,6 +93,7 @@ extension _MarkdownParseBody on MarkdownService {
       videoAutoplay: b.videoAutoplay,
       videoStartMs: b.videoStartMs,
       videoEndMs: b.videoEndMs,
+      videoCaptions: b.videoCaptions,
       audioPath: b.audioPath,
       audioAutoplay: b.audioAutoplay,
       quote: b.quote,
@@ -102,7 +104,7 @@ extension _MarkdownParseBody on MarkdownService {
     );
   }
 
-  void _consumeRichTextLine(String line, _BodyParse b) {
+  void _consumeRichTextLine(String line, BodyParse b) {
     final t = line.trim();
     // De split-stellage bijhouden vóór al het andere. De kopfase hieronder slikt
     // elke `<div`-regel en keert meteen terug, en bij een dia met een lége body
@@ -174,7 +176,7 @@ extension _MarkdownParseBody on MarkdownService {
     String line,
     String t,
     List<String> bullets,
-    _BodyParse b,
+    BodyParse b,
   ) {
     final htmlItems = _reLiItem.allMatches(t).toList();
     final bulletMatch = _reBullet.firstMatch(t);
@@ -281,6 +283,7 @@ extension _MarkdownParseBody on MarkdownService {
       b.videoStartMs = v.startMs;
       b.videoEndMs = v.endMs;
       b.videoAutoplay = v.autoplay;
+      b.videoCaptions = v.captions;
     } else if (t.startsWith('<iframe') && t.contains('ocideck-embed')) {
       final e = _parseEmbedLine(t);
       b.videoPath = e.path;

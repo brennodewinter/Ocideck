@@ -127,8 +127,10 @@ Future<Deck> resolveRepoAssetsToMem(
     }
     var next = rewriteSlideImagePaths(slide, (path) => resolved[path]);
     final video = await mediaPath(slide.videoPath);
+    final captions = await mediaPath(slide.videoCaptions);
     final audio = await mediaPath(slide.audioPath);
     if (video != null) next = next.copyWith(videoPath: video);
+    if (captions != null) next = next.copyWith(videoCaptions: captions);
     if (audio != null) next = next.copyWith(audioPath: audio);
     slides.add(next);
   }
@@ -148,8 +150,10 @@ Future<Deck> resolveRepoAssetsToMem(
   for (var slide in slides) {
     slide = rewriteSlideImagePaths(slide, (path) => memFor[path]);
     final video = memFor[slide.videoPath];
+    final captions = memFor[slide.videoCaptions];
     final audio = memFor[slide.audioPath];
     if (video != null) slide = slide.copyWith(videoPath: video);
+    if (captions != null) slide = slide.copyWith(videoCaptions: captions);
     if (audio != null) slide = slide.copyWith(audioPath: audio);
     rewritten.add(slide);
   }

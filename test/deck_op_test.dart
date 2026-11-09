@@ -32,6 +32,7 @@ _slideCases = {
   SlideField.imageAltText: (value: 'alt', read: (s) => s.imageAltText),
   SlideField.imageAltText2: (value: 'alt2', read: (s) => s.imageAltText2),
   SlideField.videoPath: (value: 'v/a.mp4', read: (s) => s.videoPath),
+  SlideField.videoCaptions: (value: 'v/a.vtt', read: (s) => s.videoCaptions),
   SlideField.audioPath: (value: 'a/a.mp3', read: (s) => s.audioPath),
   SlideField.quote: (value: 'be excellent', read: (s) => s.quote),
   SlideField.quoteAuthor: (value: 'someone', read: (s) => s.quoteAuthor),

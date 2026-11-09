@@ -1589,6 +1589,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Ondertitels': 'Titulky',
+  'Ander bestand…': 'Jiný soubor…',
+  'Geen ondertitels': 'Žádné titulky',
+  'Kies een ondertitelbestand': 'Vyber soubor titulků',
+  'Ondertitels aan': 'Titulky zapnuty',
+  'Ondertitels toevoegen…': 'Přidat titulky…',
+  'Ondertitels uit': 'Titulky vypnuty',
+  'Ondertitels verwijderen': 'Odebrat titulky',
   'Vergroot tot schermbreedte': 'Zvětšit na šířku obrazovky',
   'Website wil Markdown openen?': 'Web chce otevřít Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

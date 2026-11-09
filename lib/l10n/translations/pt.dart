@@ -1617,6 +1617,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Ondertitels': 'Legendas',
+  'Ander bestand…': 'Outro ficheiro…',
+  'Geen ondertitels': 'Sem legendas',
+  'Kies een ondertitelbestand': 'Escolhe um ficheiro de legendas',
+  'Ondertitels aan': 'Legendas ativadas',
+  'Ondertitels toevoegen…': 'Adicionar legendas…',
+  'Ondertitels uit': 'Legendas desativadas',
+  'Ondertitels verwijderen': 'Remover legendas',
   'Vergroot tot schermbreedte': 'Ampliar para a largura do ecrã',
   'Website wil Markdown openen?': 'O site quer abrir Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

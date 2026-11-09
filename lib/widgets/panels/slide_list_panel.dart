@@ -149,6 +149,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       slide.imagePath,
       slide.imagePath2,
       slide.videoPath,
+      slide.videoCaptions,
       slide.audioPath,
       slide.type.label,
     ].join(' ').toLowerCase();

@@ -654,8 +654,9 @@ class MarpHtmlService {
 
   // ── Video → melding ───────────────────────────────────────────────────────
 
+  // `<track>`-kinderen tellen niet mee: ondertitels spelen evenmin in de export.
   static final RegExp _videoElement = RegExp(
-    r'<video\b[^>]*>\s*</video>',
+    r'<video\b[^>]*>(?:<track\b[^>]*>\s*)*</video>',
     caseSensitive: false,
   );
   static final RegExp _embedElement = RegExp(

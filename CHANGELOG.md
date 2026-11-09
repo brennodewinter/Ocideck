@@ -10,6 +10,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Ondertitels bij videodia's (WebVTT/SRT).** Een lokaal `.vtt`- of
+  `.srt`-bestand koppelen aan een videodia; het reist mee in opslag, pakket,
+  dossier, downloadbundel en bij dia kopiëren. Opgeslagen als standaard-HTML
+  `<track>` in het `<video>`-element — Marp en browsers tonen ze mee zonder
+  OciDeck. Standaard aan in presentator en beamerscherm, per dia uit te
+  zetten. De privacyscanner scant de inhoud mee.
 - **Bewuste uitbreidingen.** Uitbreidingen met gevolgen voor gegevens vragen
   vóór het inschakelen om toestemming. Getoonde waarschuwingen, acceptatie en
   weigering staan in het toepassingslog en een lokaal toestemmingslogboek.

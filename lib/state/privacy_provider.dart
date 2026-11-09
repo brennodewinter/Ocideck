@@ -6,6 +6,7 @@ import '../models/privacy_finding.dart';
 import '../models/slide_quality.dart';
 import '../services/privacy/privacy_export_policy.dart';
 import '../services/privacy/privacy_quality_bridge.dart';
+import '../services/privacy/asset_text_reader.dart';
 import '../services/privacy/privacy_own_identity.dart';
 import '../services/privacy/privacy_scan_memo.dart';
 import '../services/privacy/privacy_scanner.dart';
@@ -22,6 +23,13 @@ final privacyScannerProvider = Provider<PrivacyScanner>(
       ref.watch(settingsProvider.select((s) => s.privacyOwnIdentity)),
     ),
     regions: ref.watch(settingsProvider.select((s) => s.privacyRegions)),
+    // Ondertitelbestanden zijn inhoud (#2841): de lezer lost het pad binnen de
+    // projectmap op en leest begrensd, zodat namen in een .vtt net zo gemeld
+    // worden als in de sprekersnotities.
+    assetTextReader: (path) => readSlideAssetText(
+      path,
+      projectPath: ref.read(deckProvider.select((s) => s.deck?.projectPath)),
+    ),
   ),
 );
 

@@ -1614,6 +1614,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Ondertitels': 'Υπότιτλοι',
+  'Ander bestand…': 'Άλλο αρχείο…',
+  'Geen ondertitels': 'Χωρίς υπότιτλους',
+  'Kies een ondertitelbestand': 'Επίλεξε αρχείο υποτίτλων',
+  'Ondertitels aan': 'Ενεργοποίηση υποτίτλων',
+  'Ondertitels toevoegen…': 'Προσθήκη υποτίτλων…',
+  'Ondertitels uit': 'Απενεργοποίηση υποτίτλων',
+  'Ondertitels verwijderen': 'Αφαίρεση υποτίτλων',
   'Vergroot tot schermbreedte': 'Μεγέθυνση στο πλάτος της οθόνης',
   'Website wil Markdown openen?': 'Ο ιστότοπος θέλει να ανοίξει Markdown;',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

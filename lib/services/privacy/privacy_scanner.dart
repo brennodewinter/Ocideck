@@ -123,16 +123,25 @@ class PrivacyScanner {
 
   /// De landpakketten die aan staan (OCIWACHT §5.7, §7).
   ///
-  /// Alleen regels met een landcode in hun id kijken hiernaar; de universele
+  /// Alleen regels met een landcode in hun id kijkt hiernaar; de universele
   /// laag — IBAN, e-mail, secrets, MRZ, digitale identificatoren — draait
   /// altijd. Zie `privacy_regions.dart` voor waarom het standaardpakket heel
   /// Europa is en niet alleen het thuisland.
   final Set<String> regions;
 
+  /// Leest tekst van een bestand bij een dia-veld (nu: `Slide.videoCaptions`,
+  /// #2841), zodat de ínhoud óók gescand wordt — ondertitels dragen even goed
+  /// namen als de notities. `null` = geen bestandstoegang: dan telt alleen het
+  /// pad. De lezer is scannerconfiguratie, dus de memo op instantie-identiteit
+  /// dekt hem mee; bewerkt iemand het bestand zónder de dia aan te raken, dan
+  /// volgt de scan bij de volgende dia-wijziging.
+  final String? Function(String path)? assetTextReader;
+
   const PrivacyScanner({
     this.disabledRules = const {},
     this.ownIdentity = OwnIdentity.empty,
     this.regions = defaultPrivacyRegions,
+    this.assetTextReader,
   });
 
   /// Scant het hele deck. Deckbrede velden (titel, auteur, trefwoorden) krijgen

@@ -1589,6 +1589,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Ondertitels': 'Podnapisi',
+  'Ander bestand…': 'Druga datoteka…',
+  'Geen ondertitels': 'Brez podnapisov',
+  'Kies een ondertitelbestand': 'Izberi datoteko podnapisov',
+  'Ondertitels aan': 'Podnapisi vključeni',
+  'Ondertitels toevoegen…': 'Dodaj podnapise…',
+  'Ondertitels uit': 'Podnapisi izključeni',
+  'Ondertitels verwijderen': 'Odstrani podnapise',
   'Vergroot tot schermbreedte': 'Povečaj na širino zaslona',
   'Website wil Markdown openen?': 'Spletno mesto želi odpreti Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

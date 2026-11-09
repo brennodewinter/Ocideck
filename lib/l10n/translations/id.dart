@@ -1589,6 +1589,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Ondertitels': 'Takarir',
+  'Ander bestand…': 'Berkas lain…',
+  'Geen ondertitels': 'Tanpa takarir',
+  'Kies een ondertitelbestand': 'Pilih berkas takarir',
+  'Ondertitels aan': 'Takarir aktif',
+  'Ondertitels toevoegen…': 'Tambahkan takarir…',
+  'Ondertitels uit': 'Takarir nonaktif',
+  'Ondertitels verwijderen': 'Hapus takarir',
   'Vergroot tot schermbreedte': 'Perbesar ke lebar layar',
   'Website wil Markdown openen?': 'Situs ingin membuka Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

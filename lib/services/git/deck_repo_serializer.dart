@@ -308,30 +308,15 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   final warnings = <String>{};
   final deletes = <String>[];
 
-  Future<String?> poolAsset(String path, {required String fallback}) async {
-    if (path.isEmpty) return null;
-    // Al gepoold (bv. een afbeelding die ongemoeid bleef sinds het openen).
-    if (GitRepoLayout.isRepoAsset(path)) return path;
-    final cached = refForMem[path];
-    if (cached != null) return cached;
-
-    final bytes = await resolveBytes(path);
-    if (bytes == null) {
-      warnings.add(path); // web zonder mem:, buiten project, of leesfout
-      return null;
-    }
-    final name = WebAssetStore.isMemPath(path)
-        ? (WebAssetStore.nameFor(path) ?? fallback)
-        : p.basename(path);
-    final ref = await AssetPool.refFor(bytes, name: name);
-    if (ref == null) {
-      warnings.add(path); // geen bruikbare extensie
-      return null;
-    }
-    refForMem[path] = ref;
-    bytesForRef[ref] = bytes;
-    return ref;
-  }
+  Future<String?> poolAsset(String path, {required String fallback}) =>
+      _poolRepoAsset(
+        path,
+        fallback: fallback,
+        resolveBytes: resolveBytes,
+        refForMem: refForMem,
+        bytesForRef: bytesForRef,
+        warnings: warnings,
+      );
 
   final slides = <Slide>[];
   for (final slide in deck.slides) {
@@ -353,10 +338,15 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     // inhoud, dus een ongewijzigde film levert bij elke commit hetzelfde blob
     // op en groeit de historie niet.
     final videoRef = await poolAsset(slide.videoPath, fallback: 'video.mp4');
+    final captionsRef = await poolAsset(
+      slide.videoCaptions,
+      fallback: 'ondertitels.vtt',
+    );
     final audioRef = await poolAsset(slide.audioPath, fallback: 'audio.m4a');
 
     var next = rewriteSlideImagePaths(slide, (path) => pooled[path]);
     if (videoRef != null) next = next.copyWith(videoPath: videoRef);
+    if (captionsRef != null) next = next.copyWith(videoCaptions: captionsRef);
     if (audioRef != null) next = next.copyWith(audioPath: audioRef);
     slides.add(next);
   }
@@ -436,6 +426,42 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     warnings: warnings.toList(),
     deletes: deletes,
   );
+}
+
+/// Poolt één bronpad naar een `repo:`-verwijzing: leest de bytes, vraagt een
+/// content-adres aan de pool en vult [refForMem]/[bytesForRef]. `null` bij
+/// een onleesbaar of onbruikbaar pad — [warnings] legt het pad dan vast.
+/// Top-level zodat [buildDeckRepoFiles] binnen zijn regelplafond blijft.
+Future<String?> _poolRepoAsset(
+  String path, {
+  required String fallback,
+  required AssetByteResolver resolveBytes,
+  required Map<String, String> refForMem,
+  required Map<String, Uint8List> bytesForRef,
+  required Set<String> warnings,
+}) async {
+  if (path.isEmpty) return null;
+  // Al gepoold (bv. een afbeelding die ongemoeid bleef sinds het openen).
+  if (GitRepoLayout.isRepoAsset(path)) return path;
+  final cached = refForMem[path];
+  if (cached != null) return cached;
+
+  final bytes = await resolveBytes(path);
+  if (bytes == null) {
+    warnings.add(path); // web zonder mem:, buiten project, of leesfout
+    return null;
+  }
+  final name = WebAssetStore.isMemPath(path)
+      ? (WebAssetStore.nameFor(path) ?? fallback)
+      : p.basename(path);
+  final ref = await AssetPool.refFor(bytes, name: name);
+  if (ref == null) {
+    warnings.add(path); // geen bruikbare extensie
+    return null;
+  }
+  refForMem[path] = ref;
+  bytesForRef[ref] = bytes;
+  return ref;
 }
 
 /// De tekstbestanden van [deck] voor de lokale werkkopie ([DeckMirror]) —

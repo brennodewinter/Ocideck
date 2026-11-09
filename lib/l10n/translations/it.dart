@@ -640,6 +640,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Ondertitels': 'Sottotitoli',
+  'Ander bestand…': 'Altro file…',
+  'Geen ondertitels': 'Nessun sottotitolo',
+  'Kies een ondertitelbestand': 'Scegli un file di sottotitoli',
+  'Ondertitels aan': 'Sottotitoli attivati',
+  'Ondertitels toevoegen…': 'Aggiungi sottotitoli…',
+  'Ondertitels uit': 'Sottotitoli disattivati',
+  'Ondertitels verwijderen': 'Rimuovi sottotitoli',
   'Vergroot tot schermbreedte': 'Ingrandisci alla larghezza dello schermo',
   'Website wil Markdown openen?': 'Il sito vuole aprire un Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

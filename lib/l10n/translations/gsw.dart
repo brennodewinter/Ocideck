@@ -1591,6 +1591,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Ondertitels': 'Untertitel',
+  'Ander bestand…': 'Anderi Datei…',
+  'Geen ondertitels': 'Keini Untertitel',
+  'Kies een ondertitelbestand': 'Wähl e Untertiteldatei',
+  'Ondertitels aan': 'Untertitel aa',
+  'Ondertitels toevoegen…': 'Untertitel dezuegee…',
+  'Ondertitels uit': 'Untertitel us',
+  'Ondertitels verwijderen': 'Untertitel ewägnee',
   'Vergroot tot schermbreedte': 'Uff Bildschirmbreiti vergrössere',
   'Website wil Markdown openen?': 'Websyte wot Markdown ufmache?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

@@ -5,7 +5,7 @@ part of '../markdown_service.dart';
 
 /// Mutable accumulator for the deck-level front-matter fields, filled by
 /// [_MarkdownParseFrontMatter._parseFrontMatter]. Held as a struct — the same
-/// idiom as [_BodyParse] — so [_MarkdownParse._doParse] stays short and the
+/// idiom as [BodyParse] — so [_MarkdownParse._doParse] stays short and the
 /// per-key switch reads top-to-bottom.
 class _FrontMatter {
   String theme = 'ocideck';

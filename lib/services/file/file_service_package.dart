@@ -575,6 +575,11 @@ extension FileServicePackage on FileService {
         withEvidence.copyWith(
           videoPath:
               await addAsset(slide.videoPath, 'media') ?? slide.videoPath,
+          // Ondertitels reizen mee als media-asset (#2841): de `<track>` in
+          // de markdown moet in het pakket naar een meegepakte tekst wijzen.
+          videoCaptions:
+              await addAsset(slide.videoCaptions, 'media') ??
+              slide.videoCaptions,
           audioPath:
               await addAsset(slide.audioPath, 'media') ?? slide.audioPath,
         ),

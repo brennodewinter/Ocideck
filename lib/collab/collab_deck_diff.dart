@@ -166,6 +166,7 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.imageAltText => slide.imageAltText,
     SlideField.imageAltText2 => slide.imageAltText2,
     SlideField.videoPath => slide.videoPath,
+    SlideField.videoCaptions => slide.videoCaptions,
     SlideField.audioPath => slide.audioPath,
     SlideField.quote => slide.quote,
     SlideField.quoteAuthor => slide.quoteAuthor,

@@ -85,6 +85,9 @@ Deck _attachPackageAssetsToMem(
     var out = s;
     final mv = mediaMemPath(s.videoPath);
     if (mv != null) out = out.copyWith(videoPath: mv);
+    // Ondertitels zijn media-bytes zoals de video zelf (#2841).
+    final mc = mediaMemPath(s.videoCaptions);
+    if (mc != null) out = out.copyWith(videoCaptions: mc);
     final ma = mediaMemPath(s.audioPath);
     if (ma != null) out = out.copyWith(audioPath: ma);
     return out;

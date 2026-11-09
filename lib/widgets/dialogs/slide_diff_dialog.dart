@@ -298,6 +298,8 @@ class _SlideDiffDialogState extends State<SlideDiffDialog> {
         return l10n.d('Tweede bijschrift');
       case SlideField.video:
         return l10n.d('Video');
+      case SlideField.videoCaptions:
+        return l10n.d('Ondertitels');
       case SlideField.audio:
         return l10n.d('Audio');
       case SlideField.table:

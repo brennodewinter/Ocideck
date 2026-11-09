@@ -1591,6 +1591,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Ondertitels': 'Feliratok',
+  'Ander bestand…': 'Másik fájl…',
+  'Geen ondertitels': 'Nincsenek feliratok',
+  'Kies een ondertitelbestand': 'Válassz feliratfájlt',
+  'Ondertitels aan': 'Feliratok bekapcsolva',
+  'Ondertitels toevoegen…': 'Feliratok hozzáadása…',
+  'Ondertitels uit': 'Feliratok kikapcsolva',
+  'Ondertitels verwijderen': 'Feliratok eltávolítása',
   'Vergroot tot schermbreedte': 'Nagyítás képernyőszélességre',
   'Website wil Markdown openen?': 'A webhely Markdownot akar megnyitni?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

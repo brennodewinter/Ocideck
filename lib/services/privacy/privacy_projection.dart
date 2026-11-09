@@ -553,6 +553,7 @@ class PrivacyProjection {
           slide.imagePath,
           slide.imagePath2,
           slide.videoPath,
+          slide.videoCaptions,
           slide.audioPath,
         ].where((p) => p.isNotEmpty).length +
         inline.length +
@@ -570,6 +571,9 @@ class PrivacyProjection {
         imagePath: '',
         imagePath2: '',
         videoPath: '',
+        // De ondertitelverwijzing gaat óók weg: het `.vtt`/`.srt`-bestand is
+        // inhoud, niet metadata, en reist mee in pakket en export (#2841).
+        videoCaptions: '',
         audioPath: '',
         // `none` is an explicit local override. An empty value would inherit
         // the deck-wide background again and cross the projection boundary.
