@@ -625,7 +625,8 @@ class _QuotePreview extends StatelessWidget {
           slide.imageSize,
           bgColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
         ),
-        Container(color: Colors.black.withValues(alpha: 0.52)),
+        if (slide.titleImageOverlay)
+          Container(color: Colors.black.withValues(alpha: 0.52)),
         content,
         _captionOverlay(context, slide.imageCaption, w),
       ],

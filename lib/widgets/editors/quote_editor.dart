@@ -82,13 +82,6 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
 
         // ── Background image ──────────────────────────────────────────────
         const SectionLabel('Achtergrondafbeelding (optioneel)'),
-        const SizedBox(height: 4),
-        Text(
-          l10n.d(
-            'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.',
-          ),
-          style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-        ),
         const SizedBox(height: 8),
         ImagePickerBar(
           imagePath: imagePath,
@@ -106,6 +99,23 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
           label: 'Geen achtergrondafbeelding',
         ),
         if (imagePath.isNotEmpty) ...[
+          const SizedBox(height: 12),
+          CheckboxListTile(
+            value: widget.slide.titleImageOverlay,
+            onChanged: (value) => widget.onUpdate(
+              widget.slide.copyWith(titleImageOverlay: value ?? true),
+            ),
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            controlAffinity: ListTileControlAffinity.leading,
+            title: Text(l10n.d('Grijze waas over afbeelding')),
+            subtitle: Text(
+              l10n.d(
+                'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.',
+              ),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+            ),
+          ),
           const SizedBox(height: 12),
           const SectionLabel('Zoom achtergrond'),
           ImageZoomControl(
