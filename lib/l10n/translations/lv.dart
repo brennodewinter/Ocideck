@@ -87,44 +87,24 @@ const _dutchSourceLv = {
   'Finaliseer en verzegel het rapport eerst.':
       'Vispirms pabeidziet un aizzīmogojiet ziņojumu.',
   'Auditdossier geëxporteerd naar:': 'Audita dokumentācija eksportēta uz:',
-  'MIAUW-pentestrapport': 'MIAUW pentesta ziņojums',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Pilna MIAUW ziņojuma struktūra: dokumentu pārvaldība, tvērums, izpilde, vadības kopsavilkums, atklājumi, kontrolsaraksti un parakstīšana.',
+
   'Tekst voorstellen (AI)': 'Ieteikt tekstu (MI)',
   'Het model gaf geen tekst terug.': 'Modelis neatgrieza tekstu.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Teksts jau ir. Aizstāt to ar MI melnrakstu?',
   'RFC3161-tijdstempel': 'RFC3161 laika zīmogs',
-  'Verzegel het deck eerst.': 'Vispirms aizzīmogojiet deku.',
-  'Verzoek (.tsq) exporteren': 'Eksportēt pieprasījumu (.tsq)',
-  'Token (.tsr) importeren': 'Importēt marķieri (.tsr)',
-  'Nog geen tijdstempel': 'Vēl nav laika zīmoga',
-  'Getijdstempeld op': 'Laika zīmogots',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Laika zīmogs neatbilst zīmoga jaucējam',
-  'Tijdstempelverzoek opgeslagen': 'Laika zīmoga pieprasījums saglabāts',
-  'Tijdstempel geïmporteerd': 'Laika zīmogs importēts',
+
   'Managementsamenvatting': 'Vadības kopsavilkums',
-  'Bevindingen totaal': 'Atradumu kopā',
-  'scope-objecten getest': 'pārbaudīti tvēruma objekti',
+
   'Gebruikte standaarden': 'Izmantotie standarti',
-  'Bewijs-hashes kopiëren': 'Kopēt pierādījumu jaucējus',
-  'Bewijs-hashes gekopieerd': 'Pierādījumu jaucēji nokopēti',
-  'Bevindingen hernummeren': 'Pārnumurēt atradumus',
-  'Scope-dekking controleren': 'Pārbaudīt tvēruma pārklājumu',
-  'Scope-dekking': 'Tvēruma pārklājums',
-  'Geen dekkingsgaten': 'Nav pārklājuma nepilnību',
-  'In scope, maar niet getest en geen bevinding:':
-      'Tvērumā, bet nav pārbaudīts un bez atraduma:',
+
   'MIAUW-compliance': 'MIAUW atbilstība',
   'Voldaan': 'Izpildīts',
   'Openstaand': 'Atvērts',
-  'Uitgesloten door klant': 'Klients izslēdzis',
+
   'Handmatig': 'Manuāli',
   'Uitsluiten': 'Izslēgt',
-  'Opheffen': 'Atcelt',
-  'Reden voor uitsluiting': 'Izslēgšanas iemesls',
-  'Fundamentele eisen zijn uitgesloten': 'Pamatprasības ir izslēgtas',
+
   'Nieuwe bevinding (wizard)': 'Jauns atradums (vednis)',
   'Bevinding maken': 'Izveidot atradumu',
   'CIA-rating (scope-object)': 'CIA novērtējums (tvēruma objekts)',
@@ -135,10 +115,7 @@ const _dutchSourceLv = {
   'Bewijsslide toevoegen': 'Pievienot pierādījumu slaidu',
   'CIA-gewogen': 'CIA svērts',
   'Severity (bevindingen)': 'Nopietnība (atradumi)',
-  'CWE kiezen': 'Izvēlēties CWE',
-  'Zoek op naam of CWE-nummer': 'Meklēt pēc nosaukuma vai CWE numura',
-  'Geen CWE gevonden': 'Neviens CWE nav atrasts',
-  'Kies CWE…': 'Izvēlēties CWE…',
+
   'AI-concept': 'MI melnraksts',
   'Nagekeken': 'Pārbaudīts',
   'Wis AI-alt-teksten': 'Notīrīt MI alt tekstus',
@@ -266,10 +243,7 @@ const _dutchSourceLv = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Patiesuma apliecinājums ar ziņotāju, sertifikāciju, parakstu un aizzīmogojumu.',
   'Uitbreidingen': 'Paplašinājumi',
-  'Gegevens opschonen': 'Notīrīt datus',
-  'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
-  'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
-  'Nog niet opgehaald': 'Vēl nav lejupielādēts',
+
   'AI-assistentie': 'MI palīdzība',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'MI palīdzība ir pieejama tikai darbvirsmas versijā.',
@@ -1376,9 +1350,7 @@ const _dutchSourceLv = {
   'Projectstart / kick-off': 'Projekta sākums / kick-off',
   'Voorbespreking communicatie': 'Komunikācijas priekšapspriede',
   'Projecttijdlijn': 'Projekta laika grafiks',
-  'Informatieveiligheid: RASCI / TVB': 'Informācijas drošība: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Drošības uzdevumu plāns',
-  'Certificering voortgang': 'Sertifikācijas progress',
+
   'Training / workshop': 'Apmācība / darbseminārs',
   'Rapportage': 'Pārskats',
   'Onderzoeksverhaal': 'Pētījuma stāsts',
@@ -1394,12 +1366,7 @@ const _dutchSourceLv = {
       'Mērķauditorijas, galvenais vēstījums, kanāli un runaspersonas.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fāzes, atskaites punkti, atkarības un lēmumu pieņemšanas brīži.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Fiksēt lomas, RASCI matricu un vienošanās par uzdevumiem.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Uzdevumi, prioritātes, atbildīgie un pierādījumi.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Progress pa jomām, kontroles un auditu plānošana.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Mācību mērķi, pamatjēdzieni, vingrinājums un viktorīnas jautājums.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1413,19 +1380,16 @@ const _dutchSourceLv = {
   'Sjabloon': 'Veidne',
   'Post-incident review / lessons learned':
       'Pēcincidenta pārskats / gūtās atziņas',
-  'Datalek / privacy-incident beoordeling':
-      'Datu noplūdes / privātuma incidenta izvērtējums',
+
   'DPIA / privacy impact assessment': 'DPIA / privātuma ietekmes novērtējums',
-  'Risicoanalyse / risk register': 'Risku analīze / risku reģistrs',
+
   'Business continuity / DR-test': 'Darbības nepārtrauktība / DR tests',
-  'Tabletop-oefening / crisisoefening': 'Galda mācības / krīzes mācības',
+
   'BOB-crisisrapportage': 'BOB krīzes ziņojums',
   'CAB / release readiness': 'CAB / gatavība laidienam',
   'Stuurgroep / project board update':
       'Vadības grupa / projekta valdes atjauninājums',
-  'Auditbevindingen en opvolging': 'Audita konstatējumi un turpmākie pasākumi',
-  'Leveranciersbeoordeling / vendor risk':
-      'Piegādātāju izvērtējums / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Arhitektūras lēmums / ADR prezentācija',
   'Beleid uitrollen / implementatieplan':
@@ -1433,28 +1397,14 @@ const _dutchSourceLv = {
   'Overdracht / handover': 'Nodošana / handover',
   'Retrospective / teamverbetering': 'Retrospektīva / komandas pilnveide',
   'PPL Vluchtvoorbereiding': 'PPL lidojuma sagatavošana',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Laika grafiks, ietekme, cēloņi un uzlabojumu darbības pēc incidenta.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Izvērtējiet datus, risku, ziņošanas pienākumu un komunikāciju.',
-  "Verwerking, grondslag, privacyrisico's en maatregelen.":
-      'Apstrāde, tiesiskais pamats, privātuma riski un pasākumi.',
-  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
-      'Fiksējiet riskus, varbūtību, ietekmi, pasākumus un atbildīgos.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Scenārijs, atkopšanas mērķi, testa konstatējumi un uzlabojumu punkti.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Scenārijs, injects, lēmumi, novērojumi un izvērtējums.',
+
   "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
       'Vadiet krīzes komandu cauri situācijas apzināšanai, vērtējuma veidošanai un lēmumu pieņemšanai, ar reāllaika situācijas ainu, informācijas pieprasījumiem, dilemmām, lēmumu žurnālu un darbību sarakstu.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Izmaiņa, ietekme, testi, rollback, komunikācija un go/no-go.',
   "Voortgang, planning, budget, risico's en besluiten gevraagd.":
       'Progress, plānošana, budžets, riski un pieprasītie lēmumi.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Konstatējumi, root cause, pasākumi, pierādījumi un statuss.',
-  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
-      'Pakalpojums, dati, atkarība, prasības, riski un lēmums.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Konteksts, opcijas, kompromisi, lēmums un sekas.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4617,8 +4567,7 @@ const _dutchSourceAddLv = <String, String>{
   'Privacy en classificatie': 'Privātums un klasifikācija',
   'Uiterlijk van documenten': 'Dokumentu izskats',
   'Exportkwaliteit': 'Eksporta kvalitāte',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Privātums un klasifikācija.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Mākoņpakalpojumam vispirms nepieciešama jūsu privātuma piekrišana sadaļā "Privātums un klasifikācija", un tas nedarbojas tīmekļa versijā.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5570,9 +5519,7 @@ const _dutchSourceAddLv = <String, String>{
   'Debriefing / after-action review': 'Debrīfings / analīze pēc darbības',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Kas bija plānots, kas notika, kāpēc — un kādas vienošanās mēs pieņemam.',
-  'Threat modeling-sessie': 'Draudu modelēšanas sesija',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Tvērums, datu plūsmas, uzticības robežas, draudi pa STRIDE kategorijām un pasākumi.',
+
   'Casuïstiekbespreking sociaal domein': 'Gadījumu izskatīšana sociālajā jomā',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Anonimizēts gadījums: dzīves jomas, drošība, tiesiskais ietvars un koordinācija.',
@@ -6149,10 +6096,7 @@ const _dutchSourceAddLv = <String, String>{
       'Kontrolsaraksta rādītājs: katram testam stabilais id, kanoniskais nosaukums un kategorija. Pašas rokasgrāmatas saturs nav iekļauts.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 testu rādītājs: katram testam stabilais id, kanoniskais nosaukums, MASVS kategorija un MASWE vājība. Atsauktie v1 testi un vietturi nav iekļauti; arī rokasgrāmatas saturs ne.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Pilns saraksts (id, nosaukums, apraksts) un pašu atlasīts kodols ar mūsu novēršanas piezīmēm.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Pilnā EIS shēma (88 pārbaudāmas prasības).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Slimību nosaukumi deviņās valodās kā veselības leksikons privātuma pārbaudei (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6306,8 +6250,7 @@ const _dutchSourceAddLv = <String, String>{
   'naam@example.org\nexample.org': 'vards@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Slānis blakus šim dekam bija pārāk liels un netika ielādēts; pats fails ir nemainīts:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Šis laika zīmogs nepieder pēdējam pieprasījumam',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Norādiet šo versijas numuru, ziņojot par drošības problēmu.',
   'Video niet ingesloten': 'Videoklips nav iegults',
@@ -6515,10 +6458,7 @@ const _dutchSourceAddLv = <String, String>{
       'Diagrammu skaitļi netika saglabāti — tie vairs pastāv tikai šajā logā:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Pārlūkā nav atkopšanas pēc avārijas: aizverot šo cilni, nesaglabātais darbs pazūd. Saglabājiet prezentāciju paši.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Vietējā CVE datubāze (lejupielādi sākat jūs pats): OciDeck iegūst apjoma datus caur api.github.com un laidiena failu, uz kuru šī adrese norāda.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE meklēšana (pēc noklusējuma izslēgta): kad tā ir ieslēgta, jūsu meklējamais vārds nonāk iestatītajā CVE spogulī un, ja tas neko neatrod, ENISA Eiropas datubāzē un MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Iegults YouTube vai Vimeo video ielādē atskaņotāju no attiecīgā pakalpojuma.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7121,8 +7061,7 @@ const _dutchSourceAddLv = <String, String>{
       'Šajā repozitorijā nav prezentāciju.',
   'Rapportagetaal': 'Ziņojuma valoda',
   'Niet vastgelegd': 'Nav reģistrēts',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Atsauces dati atrodas pašā lietotnē, tāpēc modulis darbojas uzreiz un pilnībā bezsaistē.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie paliek paslēpti, līdz tos ieslēdzat.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7152,11 +7091,10 @@ const _dutchSourceAddLv = <String, String>{
   'adres': 'adrese',
   'postcode': 'pasta indekss',
   'persoonsnaam': 'personas vārds',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Šī prezentācija satur Informācijas drošības moduļa daļas. Ieslēdziet moduli, lai tās rediģētu.',
+
   'Inschakelen': 'Ieslēgt',
   'Bevestigen': 'Apstiprināt',
-  'Onderbouwing van de bevestiging': 'Apstiprinājuma pamatojums',
+
   'De eigenaar staat insluiten niet toe': 'Īpašnieks neatļauj iegulšanu',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Šo video var skatīties tikai pašā avotā.',
@@ -7263,43 +7201,13 @@ const _dutchSourceAddLv = <String, String>{
   'databaseverbinding met wachtwoord': 'datubāzes savienojums ar paroli',
   'wachtwoord in klare tekst': 'parole atklātā tekstā',
   'Afbreken': 'Pārtraukt',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Pārtraukts. Nekas nav palicis pusceļā.',
+
   'Bijwerken': 'Atjaunināt',
   'Binnenhalen…': 'Lejupielādē…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Ielādēt datubāzi',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'CVE sarakstu neizdevās ielādēt. Pārbaudi savienojumu un mēģini vēlreiz; daļēji lejupielādētais saraksts ir izmests.',
-  'De nieuwste uitgave opzoeken…': 'Meklē jaunāko laidienu…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Šī ir liela lejupielāde: vairāk nekā 500 MB, uz laiku aptuveni 1,5 GB diska vietas un — atkarībā no savienojuma un ierīces — viegli desmit līdz trīsdesmit minūtes darba. Pēc tam paliek indekss dažu simtu megabaitu apmērā. Savienojumā, par kuru maksā par katru megabaitu, to labāk nedarīt.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Diska vietas bija par maz. Veidošanai uz laiku vajag vairāk nekā 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Ielādētais arhīvs nebija tāds, kādu gaidījām, un tika noraidīts. Nekas netika instalēts.',
-  'Indexeren…': 'Indeksē…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Pieejams lokāli — meklēšana notiek bezsaistē, neviens meklējamais vārds neaiziet ārā.',
-  'Lokale CVE-database': 'Lokāla CVE datubāze',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Ar CVE sarakstu savā ierīcē meklēšana paliek šeit: neviens meklējamais vārds vairs neaiziet uz serveri, un neviens neredz, kuru ievainojamību tu pēti.',
-  'Uitpakken…': 'Izpako…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Ievieto pilnu CVE sarakstu šajā ierīcē, lai meklēšana notiktu bezsaistē un tavs meklējamais vārds nekur neaizietu. Datubāze nāk no CVE List V5 (oficiālās CVE programmas, caur GitHub).',
-  'Wat er lokaal beschikbaar is': 'Kas ir pieejams lokāli',
-  'Nu bijwerken': 'Atjaunināt tagad',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Dati pieejami lokāli — meklēšana notiek šajā ierīcē; nekas to nepamet.',
-  'Zwakheden (CWE)': 'Vājības (CWE)',
-  'Testgevallen (WSTG)': 'Testa gadījumi (WSTG)',
-  'MIAUW-eisen': 'MIAUW prasības',
-  'CVSS-scoretabel': 'CVSS vērtējuma tabula',
-  'Bevindingsjablonen': 'Atradumu veidnes',
+
   'Zoek een instelling': 'Meklēt iestatījumu',
   'Geen instelling gevonden': 'Iestatījums nav atrasts',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Jūsu meklēšanas vārds tiek nosūtīts uz konfigurēto CVE spoguli, un, ja tas neko neatrod, arī uz ENISA un MITRE. Tie, kas pārvalda šos serverus, var secināt, kuru konkrēto ievainojamību meklējat — un tātad kuru ievainojamību pētāt.',
+
   'Accepteren': 'Pieņemt',
   'Accepteren + waarschuwen': 'Pieņemt + brīdināt',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7319,8 +7227,7 @@ const _dutchSourceAddLv = <String, String>{
   'burgerservicenummer (BSN)': 'iedzīvotāja identifikācijas numurs (BSN)',
   'bankrekeningnummer (IBAN)': 'bankas konta numurs (IBAN)',
   'e-mailadres': 'e-pasta adrese',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'TSA paraksts lietotnē netiek pārbaudīts; sakrīt tikai jaucējkods (hash).',
+
   'Extern': 'Ārējs',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Iegūts no ārēja URL; atverot tika izveidots savienojums ar šo serveri.',
@@ -7357,21 +7264,7 @@ const _dutchSourceAddLv = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Izveido kontrolsarakstu katram tvēruma objektam (WSTG tīmeklim/API); esošie tiek saglabāti.',
   'CVE opzoeken': 'Meklēt CVE',
-  'CVE opzoeken (online)': 'Meklēt CVE (tiešsaistē)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE meklēšana nav pieejama tīmekļa versijā.',
-  'CVE-mirror (basis-URL)': 'CVE spogulis (bāzes URL)',
-  'Geen CVE gevonden.': 'CVE nav atrasts.',
-  'Kon de CVE-bron niet bereiken.': 'Nevarēja sasniegt CVE avotu.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Atļaut meklēt CVE tiešsaistē atradumu redaktorā, izmantojot NVD spoguli. Pēc noklusējuma izslēgts; nepieciešama arī jūsu piekrišana un darbojas tikai datorā.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Ievadiet (daļu no) CVE identifikatora un meklējiet.',
-  'Typ minstens 3 tekens.': 'Ievadiet vismaz 3 rakstzīmes.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Ieslēdziet CVE meklēšanu (tiešsaistē) sadaļā Iestatījumi → Drošība, lai meklētu CVE tiešsaistē.',
-  'Zoek CVE…': 'Meklēt CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Meklēt pēc CVE id, piem. 2021-44228',
+
   'Zoeken': 'Meklēt',
   'Hertest': 'Atkārtota pārbaude',
   'Niet hertest': 'Nav atkārtoti pārbaudīts',

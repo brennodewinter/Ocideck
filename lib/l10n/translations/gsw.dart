@@ -87,45 +87,24 @@ const _dutchSourceGsw = {
   'Finaliseer en verzegel het rapport eerst.':
       'Finalisier und versigle zerscht de Bricht.',
   'Auditdossier geëxporteerd naar:': 'Audit-Dossier exportiert nach:',
-  'MIAUW-pentestrapport': 'MIAUW-Pentescht-Bricht',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Vollständigi MIAUW-Bricht-Struktur: Dokumäntverwaltig, Umfang, Durchfüerig, Managemänt-Zämefassig, Befund, Checklischte und Underschrift.',
+
   'Tekst voorstellen (AI)': 'Text vorschla (KI)',
   'Het model gaf geen tekst terug.': 'S Modäll het kein Text zruggäh.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Es het scho Text. Mit em KI-Entwurf ersetze?',
   'RFC3161-tijdstempel': 'RFC3161-Ziitstämpel',
-  'Verzegel het deck eerst.': 'Versiegle zerst s Deck.',
-  'Verzoek (.tsq) exporteren': 'Aafrog (.tsq) exportiere',
-  'Token (.tsr) importeren': 'Token (.tsr) importiere',
-  'Nog geen tijdstempel': 'No kei Ziitstämpel',
-  'Getijdstempeld op': 'Ziitgstämplet am',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Ziitstämpel passt nöd zum Siegel-Hash',
-  'Tijdstempelverzoek opgeslagen': 'Ziitstämpel-Aafrog gspeicheret',
-  'Tijdstempel geïmporteerd': 'Ziitstämpel importiert',
+
   'Managementsamenvatting': 'Managementzämmefassig',
-  'Bevindingen totaal': 'Befund total',
-  'scope-objecten getest': 'Scope-Objäkt teschtet',
+
   'Gebruikte standaarden': 'Bruuchti Standards',
-  'Bewijs-hashes kopiëren': 'Nachwiis-Hashes kopiere',
-  'Bewijs-hashes gekopieerd': 'Nachwiis-Hashes kopiert',
-  'Bevindingen hernummeren': 'Befund neu nummeriere',
-  'Scope-dekking controleren': 'Scope-Abdeckig prüefe',
-  'Scope-dekking': 'Scope-Abdeckig',
-  'Geen dekkingsgaten': 'Kei Abdeckigslücke',
-  'In scope, maar niet getest en geen bevinding:':
-      'Im Scope, aber nöd teschtet und ohni Befund:',
+
   'MIAUW-compliance': 'MIAUW-Konformität',
   'Voldaan': 'Erfüllt',
   'Openstaand': 'Offe',
-  'Uitgesloten door klant': 'Vom Chund uusgschlosse',
+
   'Handmatig': 'Vo Hand',
   'Uitsluiten': 'Uusschliesse',
-  'Opheffen': 'Ufhebe',
-  'Reden voor uitsluiting': 'Grund fürs Uusschliesse',
-  'Fundamentele eisen zijn uitgesloten':
-      'Grundlegendi Aaforderige sind uusgschlosse',
+
   'Nieuwe bevinding (wizard)': 'Neue Befund (Assistänt)',
   'Bevinding maken': 'Befund erstelle',
   'CIA-rating (scope-object)': 'CIA-Bewärtig (Scope-Objäkt)',
@@ -136,10 +115,7 @@ const _dutchSourceGsw = {
   'Bewijsslide toevoegen': 'Nachwiisfolie zuefüege',
   'CIA-gewogen': 'CIA-gwichtet',
   'Severity (bevindingen)': 'Schweregrad (Befund)',
-  'CWE kiezen': 'CWE uswähle',
-  'Zoek op naam of CWE-nummer': 'Nach Name oder CWE-Nummere sueche',
-  'Geen CWE gevonden': 'Kei CWE gfunde',
-  'Kies CWE…': 'CWE uswähle…',
+
   'AI-concept': 'KI-Entwurf',
   'Nagekeken': 'Prüeft',
   'Wis AI-alt-teksten': 'KI-Alt-Text lösche',
@@ -267,10 +243,7 @@ const _dutchSourceGsw = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'D Wahrheitserkläärig mit em Berichterstatter, Zertifizierig, Underschrift und Versieglig.',
   'Uitbreidingen': 'Erwyterige',
-  'Gegevens opschonen': 'Date ufruume',
-  'Gegevens lokaal beschikbaar': 'Date lokal verfüegbar',
-  'Op het web nog niet beschikbaar': 'Im Web no nöd verfüegbar',
-  'Nog niet opgehaald': 'No nöd glade',
+
   'AI-assistentie': 'KI-Unterstützig',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'KI-Unterstützig isch nume i de Desktop-Version verfüegbar.',
@@ -1381,9 +1354,7 @@ const _dutchSourceGsw = {
   'Projectstart / kick-off': 'Projäktschtart / Kick-off',
   'Voorbespreking communicatie': 'Vorbeschprächig Kommunikation',
   'Projecttijdlijn': 'Projäkt-Ziitlinie',
-  'Informatieveiligheid: RASCI / TVB': 'Informationssicherheit: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Security-Ufgabeplan',
-  'Certificering voortgang': 'Zertifizierigs-Fortschritt',
+
   'Training / workshop': 'Training / Workshop',
   'Rapportage': 'Bricht',
   'Onderzoeksverhaal': 'Untersuechigs-Gschicht',
@@ -1399,12 +1370,7 @@ const _dutchSourceGsw = {
       'Zielgruppe, Chärnbotschaft, Kanäl und Wortfüehrig.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Phase, Meilestei, Abhängigkeite und Entscheidigsmomänt.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Rolle, RASCI-Matrix und Ufgabe-Abmachige feschthalte.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Ufgabe, Prioritäte, Owner und Nachwiis.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Fortschritt pro Domäne, Controls und Auditplanig.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Lernziel, Chärnkonzäpt, Üebig und Quizfrag.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1418,46 +1384,29 @@ const _dutchSourceGsw = {
   'Sjabloon': 'Vorlag',
   'Post-incident review / lessons learned':
       'Post-Incident-Review / Lessons Learned',
-  'Datalek / privacy-incident beoordeling':
-      'Dateläck / Privacy-Vorfall-Beurteilig',
+
   'DPIA / privacy impact assessment': 'DPIA / Privacy Impact Assessment',
-  'Risicoanalyse / risk register': 'Risikoanalyse / Risk Register',
+
   'Business continuity / DR-test': 'Business Continuity / DR-Test',
-  'Tabletop-oefening / crisisoefening': 'Tabletop-Üebig / Chriseüebig',
+
   'BOB-crisisrapportage': 'BOB-Chrisebricht',
   'CAB / release readiness': 'CAB / Release Readiness',
   'Stuurgroep / project board update': 'Stüürgruppe / Project-Board-Update',
-  'Auditbevindingen en opvolging': 'Audit-Befund und Nachverfolgig',
-  'Leveranciersbeoordeling / vendor risk':
-      'Lieferante-Beurteilig / Vendor Risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Architekturentscheid / ADR-Präsentation',
   'Beleid uitrollen / implementatieplan': 'Richtlinie uusrolle / Umsetzigsplan',
   'Overdracht / handover': 'Übergab / Handover',
   'Retrospective / teamverbetering': 'Retrospektive / Teamverbesserig',
   'PPL Vluchtvoorbereiding': 'PPL Flugvorbereitig',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Ziitlinie, Uuswirkig, Ursache und Verbesserige nach eme Vorfall.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Beurteil d Date, s Risiko, d Mäldpflicht und d Kommunikation.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Verarbeitig, Rächtsgrundlag, Privacy-Risike und Massnahme.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Halt Risike, Wahrschiinlichkeit, Uuswirkig, Massnahme und Owner fescht.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Szenario, Wiederherstelligsziel, Testbefund und Verbesserigspünkt.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Szenario, Injects, Entscheid, Beobachtige und Evaluation.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Füehr es Chriseteam dur Lagebildig, Urteilsbildig und Entscheidsfindig, mit livem Lagebild, Informationsfrage, Dilemma, Entscheidigslog und Aktionslischte.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Änderig, Uuswirkig, Tests, Rollback, Kommunikation und Go/No-Go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Fortschritt, Planig, Budget, Risike und verlangti Entscheid.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Befund, Root Cause, Massnahme, Nachwiis und Status.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Dienscht, Date, Abhängigkeite, Aforderige, Risike und Entscheid.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontext, Optione, Trade-offs, Entscheid und Folge.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4645,8 +4594,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Privacy en classificatie': 'Dateschutz und Klassifizierig',
   'Uiterlijk van documenten': 'Ussgseh vo de Dokumänt',
   'Exportkwaliteit': 'Exportqualität',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Dateschutz und Klassifizierig.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'E Cloud-Dienscht bruucht zerscht dini Dateschutz-Iiwilligung under "Dateschutz und Klassifizierig" und lauft nöd i de Web-Version.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5599,9 +5547,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Debriefing / after-action review': 'Debriefing / After-Action-Review',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Was plant gsi isch, was passiert isch, warum — und weli Abmachige mir träffed.',
-  'Threat modeling-sessie': 'Threat-Modeling-Sitzig',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Scope, Dateflüss, Vertrauensgränze, Bedrohige pro STRIDE-Kategorie und Massnahme.',
+
   'Casuïstiekbespreking sociaal domein': 'Fallbesprächig im Sozialberiich',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Anonymisierte Fall: Läbensberiich, Sicherheit, rächtliche Rahme und Fallführig.',
@@ -6179,10 +6125,7 @@ const _dutchSourceAddGsw = <String, String>{
       'De Checklischte-Index: pro Test d stabili ID, de kanonisch Titel und d Kategorie. De Inhalt vom Leitfade sälber isch nöd derbi.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'De Test-Index vo v2.0.0: pro Test d stabili ID, de kanonisch Titel, d MASVS-Kategorie und d MASWE-Schwechi. Zrugzoge v1-Tests und Platzhalter sind nöd derbi; de Inhalt vom Leitfade au nöd.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'D ganzi Lischte (ID, Name, Beschriibig) plus en eigne uusgwählte Chärn mit üsne Behebigs-Notize.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'S ganze EIS-Schema (88 prüefbari Aaforderige).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Chrankheitsname i nün Sprache als Gsundheitslexikon für d Datenschutzprüefig (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6336,8 +6279,7 @@ const _dutchSourceAddGsw = <String, String>{
   'naam@example.org\nexample.org': 'name@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'En Ebeni näbe dem Deck isch z gross gsi und isch nöd glade worde; d Datei sälber isch unveränderet:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Dä Ziitstämpel ghört nöd zur letschte Aafrog',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Nenn die Versionsnummere, wenn Sie es Sicherheitsproblem melde.',
   'Video niet ingesloten': 'Video nöd iibettet',
@@ -6547,10 +6489,7 @@ const _dutchSourceAddGsw = <String, String>{
       'D Diagrammzahle sind nöd gspeicheret worde — sie stönd nu no i dem Fänschter:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Im Browser git\'s kei Absturz-Wiederherstellig: wänn du das Tab zuemachsch, isch nöd gspeicherti Arbet ewäg. Speicher dini Präsentation sälber.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  D lokal CVE-Datebank (de Download startisch du sälber): OciDeck holt d Massedate über api.github.com und d Release-Datei, wo die Adrässe druf zeigt.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE sueche (isch standardmässig us): wenn s aa isch, gaht dis Suechwort a de iigstellt CVE-Spiegel und, wenn dä nüt findt, a d europäisch Datebank vo de ENISA und a MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Es iibunde YouTube- oder Vimeo-Video ladt de Player bi dem Dienscht.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7154,8 +7093,7 @@ const _dutchSourceAddGsw = <String, String>{
       'Kei Presentatione i dem Repository.',
   'Rapportagetaal': 'Brichtsprach',
   'Niet vastgelegd': 'Nid festghalte',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Bricht-Slides und Referänzdate für d\'Informationssicherheit: Befund, Checkliste, Scope-Matrize und Underzeichnig. Nach MIAUW strukturiert und breit iisetzbar für Pentest, Audits und Sicherheitsforschig. D\'Referänzdate stecke i de App sälber, drum lauft s Modul grad und ganz offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Optionali Modul. Standardmässig us; si bliibe verborge, bis du si iischaltisch.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7184,11 +7122,10 @@ const _dutchSourceAddGsw = <String, String>{
   'adres': 'Adrässe',
   'postcode': 'Poschtleitzahl',
   'persoonsnaam': 'Persoonename',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Die Präsentation enthaltet Teil vom Modul Informationssicherheit. Aktivier s Modul, zum si bearbeite.',
+
   'Inschakelen': 'Aktiviere',
   'Bevestigen': 'Bestätige',
-  'Onderbouwing van de bevestiging': 'Begründig vo dr Bestätigung',
+
   'De eigenaar staat insluiten niet toe': 'De Bsitzer erlaubt s Iibette nöd',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Das Video cha me nume uf de Quelle sälber aaluege.',
@@ -7295,43 +7232,13 @@ const _dutchSourceAddGsw = <String, String>{
   'databaseverbinding met wachtwoord': 'Datebankverbindig mit Passwort',
   'wachtwoord in klare tekst': 'Passwort im Klartäxt',
   'Afbreken': 'Abbräche',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Abbroche. Es isch nüt halbfertigs zrugg bliebe.',
+
   'Bijwerken': 'Aktualisiere',
   'Binnenhalen…': 'Am abelade…',
-  'CVE\'s': 'CVEs',
-  'Database ophalen': 'Datebank hole',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'D CVE-Lischte het nöd chönne gholt werde. Prüef dini Verbindig und probier\'s nomal; e halb abeglade Lischte isch weggschmisse worde.',
-  'De nieuwste uitgave opzoeken…': 'Di nöischti Usgab wird gsuecht…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Das isch en grosse Download: über 500 MB abelade, zitwiis öppe 1,5 GB Spycherplatz und, je nach Verbindig und Grät, schnäll zäh bis drissg Minute Arbet. Nachher bliibt en Index vo es paar hundert Megabyte. Uf ere Verbindig wo pro Megabyte zahlt, machsch das lieber nöd.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Es het z\'wenig Spycherplatz gha. De Ufbau bruucht zitwiis über 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'S gholte Archiv isch nöd das gsi, wo mer erwartet hend, und isch abglehnt worde. Es isch nüt installiert worde.',
-  'Indexeren…': 'Am indexiere…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Lokal verfüegbar – s Nachschlage passiert offline, kein Suechbegriff gaht use.',
-  'Lokale CVE-database': 'Lokali CVE-Datebank',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Mit de CVE-Lischte uf dim eigene Grät bliibt s Nachschlage da: es gaht kein Suechbegriff meh zum e Server, und niemert cha gseh, weli Sicherheitslücke du undersuechsch.',
-  'Uitpakken…': 'Am uspacke…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Leg di ganzi CVE-Lischte uf das Grät, damit s Nachschlage offline passiert und din Suechbegriff niene ane gaht. D Datebank chunnt vo CVE List V5 (em offizielle CVE-Programm, über GitHub).',
-  'Wat er lokaal beschikbaar is': 'Was lokal verfüegbar isch',
-  'Nu bijwerken': 'Jetz aktualisiere',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Date lokal verfüegbar — s Nachschlage passiert uf däm Grät; es gaht nüt use.',
-  'Zwakheden (CWE)': 'Schwachstelle (CWE)',
-  'Testgevallen (WSTG)': 'Testfäll (WSTG)',
-  'MIAUW-eisen': 'MIAUW-Aaforderige',
-  'CVSS-scoretabel': 'CVSS-Bewärtigstabälle',
-  'Bevindingsjablonen': 'Befundvorlage',
+
   'Zoek een instelling': 'Yystellig sueche',
   'Geen instelling gevonden': 'Kei Yystellig gfunde',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Dyn Suechbegriff gaht a de yygstellti CVE-Mirror, und wenn dä nüt findt, au a ENISA und MITRE. Wer die Server betriibt, cha drus abläse, nach welerer konkrete Schwachstell du suechsch — und somit, weli Schwachstell du undersuechsch.',
+
   'Accepteren': 'Akzeptiere',
   'Accepteren + waarschuwen': 'Akzeptiere + warne',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7350,8 +7257,7 @@ const _dutchSourceAddGsw = <String, String>{
   'burgerservicenummer (BSN)': 'Bürgerservicenummere (BSN)',
   'bankrekeningnummer (IBAN)': 'Bankkontonummere (IBAN)',
   'e-mailadres': 'E-Mail-Adrässe',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'D TSA-Signatur wird i de App nöd prüeft; nume de Hash stimmt überii.',
+
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Vo ere externe URL glade; bim Öffne isch dä Server kontaktiert worde.',
@@ -7388,22 +7294,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Erstellt pro Scope-Objäkt e Checkliste (WSTG für Web/API); bestehendi bliibed.',
   'CVE opzoeken': 'CVE nachluege',
-  'CVE opzoeken (online)': 'CVE nachluege (online)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE nachluege isch i de Webversion nöd verfüegbar.',
-  'CVE-mirror (basis-URL)': 'CVE-Spiegel (Basis-URL)',
-  'Geen CVE gevonden.': 'Kei CVE gfunde.',
-  'Kon de CVE-bron niet bereiken.':
-      'S CVE-Quelle het nöd erreicht werde chöne.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Erlaub online i CVE\'s z sueche im Befund-Editor über en NVD-Spiegel. Standardmässig us; brucht au dini Zuestimmig und funktioniert nume ufem Desktop.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Gib (en Teil vo) ere CVE-ID i und suech.',
-  'Typ minstens 3 tekens.': 'Gib mindestens 3 Zeiche i.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Schalt CVE nachluege (online) i de Iistellige → Sicherheit ii, zum online i CVE\'s z sueche.',
-  'Zoek CVE…': 'CVE sueche…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Nach CVE-ID sueche, z. B. 2021-44228',
+
   'Zoeken': 'Sueche',
   'Hertest': 'Nochtescht',
   'Niet hertest': 'Nöd nochtescht',

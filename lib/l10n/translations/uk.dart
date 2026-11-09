@@ -88,44 +88,24 @@ const _dutchSourceUk = {
   'Finaliseer en verzegel het rapport eerst.':
       'Спершу завершіть і опечатайте звіт.',
   'Auditdossier geëxporteerd naar:': 'Аудиторське досьє експортовано до:',
-  'MIAUW-pentestrapport': 'Звіт про пентест MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Повна структура звіту MIAUW: керування документами, обсяг, виконання, резюме для керівництва, результати, контрольні списки та підписання.',
+
   'Tekst voorstellen (AI)': 'Запропонувати текст (ШІ)',
   'Het model gaf geen tekst terug.': 'Модель не повернула текст.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Текст уже є. Замінити його чернеткою ШІ?',
   'RFC3161-tijdstempel': 'Мітка часу RFC3161',
-  'Verzegel het deck eerst.': 'Спершу запечатайте колоду.',
-  'Verzoek (.tsq) exporteren': 'Експортувати запит (.tsq)',
-  'Token (.tsr) importeren': 'Імпортувати токен (.tsr)',
-  'Nog geen tijdstempel': 'Ще немає мітки часу',
-  'Getijdstempeld op': 'Позначено часом',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Мітка часу не збігається з хешем печатки',
-  'Tijdstempelverzoek opgeslagen': 'Запит мітки часу збережено',
-  'Tijdstempel geïmporteerd': 'Мітку часу імпортовано',
+
   'Managementsamenvatting': 'Резюме для керівництва',
-  'Bevindingen totaal': 'Усього виявлень',
-  'scope-objecten getest': 'об\'єктів обсягу перевірено',
+
   'Gebruikte standaarden': 'Використані стандарти',
-  'Bewijs-hashes kopiëren': 'Копіювати хеші доказів',
-  'Bewijs-hashes gekopieerd': 'Хеші доказів скопійовано',
-  'Bevindingen hernummeren': 'Перенумерувати виявлення',
-  'Scope-dekking controleren': 'Перевірити покриття обсягу',
-  'Scope-dekking': 'Покриття обсягу',
-  'Geen dekkingsgaten': 'Немає прогалин у покритті',
-  'In scope, maar niet getest en geen bevinding:':
-      'В обсязі, але не перевірено і без виявлення:',
+
   'MIAUW-compliance': 'Відповідність MIAUW',
   'Voldaan': 'Виконано',
   'Openstaand': 'Відкрито',
-  'Uitgesloten door klant': 'Виключено клієнтом',
+
   'Handmatig': 'Вручну',
   'Uitsluiten': 'Виключити',
-  'Opheffen': 'Скасувати',
-  'Reden voor uitsluiting': 'Причина виключення',
-  'Fundamentele eisen zijn uitgesloten': 'Основні вимоги виключено',
+
   'Nieuwe bevinding (wizard)': 'Нове виявлення (майстер)',
   'Bevinding maken': 'Створити виявлення',
   'CIA-rating (scope-object)': 'Оцінка CIA (об\'єкт області)',
@@ -136,10 +116,7 @@ const _dutchSourceUk = {
   'Bewijsslide toevoegen': 'Додати слайд доказів',
   'CIA-gewogen': 'Зважено за CIA',
   'Severity (bevindingen)': 'Серйозність (виявлення)',
-  'CWE kiezen': 'Вибрати CWE',
-  'Zoek op naam of CWE-nummer': 'Пошук за назвою або номером CWE',
-  'Geen CWE gevonden': 'CWE не знайдено',
-  'Kies CWE…': 'Вибрати CWE…',
+
   'AI-concept': 'Чернетка ШІ',
   'Nagekeken': 'Перевірено',
   'Wis AI-alt-teksten': 'Очистити альт-тексти ШІ',
@@ -269,10 +246,7 @@ const _dutchSourceUk = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Декларація про достовірність із доповідачем, сертифікацією, підписом і печаткою.',
   'Uitbreidingen': 'Розширення',
-  'Gegevens opschonen': 'Очистити дані',
-  'Gegevens lokaal beschikbaar': 'Дані доступні локально',
-  'Op het web nog niet beschikbaar': 'У вебі поки що недоступно',
-  'Nog niet opgehaald': 'Ще не завантажено',
+
   'AI-assistentie': 'Підтримка ШІ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Підтримка ШІ доступна лише в настільній версії.',
@@ -1392,9 +1366,7 @@ const _dutchSourceUk = {
   'Projectstart / kick-off': 'Старт проєкту / kick-off',
   'Voorbespreking communicatie': 'Підготовча нарада з комунікації',
   'Projecttijdlijn': 'Часова шкала проєкту',
-  'Informatieveiligheid: RASCI / TVB': 'Інформаційна безпека: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'План завдань з безпеки',
-  'Certificering voortgang': 'Прогрес сертифікації',
+
   'Training / workshop': 'Тренінг / воркшоп',
   'Rapportage': 'Звіт',
   'Onderzoeksverhaal': 'Дослідницька розповідь',
@@ -1410,12 +1382,7 @@ const _dutchSourceUk = {
       'Цільові аудиторії, ключове повідомлення, канали та речництво.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Фази, віхи, залежності та моменти ухвалення рішень.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Зафіксувати ролі, матрицю RASCI та домовленості щодо завдань.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Завдання, пріоритети, власники та докази.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Прогрес за доменами, контролі та планування аудитів.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Навчальні цілі, ключові концепції, вправа та питання вікторини.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1429,19 +1396,16 @@ const _dutchSourceUk = {
   'Sjabloon': 'Шаблон',
   'Post-incident review / lessons learned':
       'Пост-інцидентний огляд / засвоєні уроки',
-  'Datalek / privacy-incident beoordeling':
-      'Оцінка витоку даних / інциденту приватності',
+
   'DPIA / privacy impact assessment': 'DPIA / оцінка впливу на приватність',
-  'Risicoanalyse / risk register': 'Аналіз ризиків / реєстр ризиків',
+
   'Business continuity / DR-test': 'Безперервність бізнесу / DR-тест',
-  'Tabletop-oefening / crisisoefening': 'Штабні навчання / кризові навчання',
+
   'BOB-crisisrapportage': 'BOB-кризовий звіт',
   'CAB / release readiness': 'CAB / готовність до релізу',
   'Stuurgroep / project board update':
       'Керівний комітет / звіт для ради проєкту',
-  'Auditbevindingen en opvolging': 'Аудиторські висновки та подальші дії',
-  'Leveranciersbeoordeling / vendor risk':
-      'Оцінка постачальників / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Архітектурне рішення / ADR-презентація',
   'Beleid uitrollen / implementatieplan':
@@ -1449,28 +1413,14 @@ const _dutchSourceUk = {
   'Overdracht / handover': 'Передавання справ / handover',
   'Retrospective / teamverbetering': 'Ретроспектива / вдосконалення команди',
   'PPL Vluchtvoorbereiding': 'PPL підготовка до польоту',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Часова шкала, вплив, причини та заходи з покращення після інциденту.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      "Оцініть дані, ризик, обов'язок повідомлення та комунікацію.",
-  "Verwerking, grondslag, privacyrisico's en maatregelen.":
-      'Обробка, правова підстава, ризики приватності та заходи.',
-  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
-      'Зафіксуйте ризики, ймовірність, вплив, заходи та власників.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Сценарій, цілі відновлення, результати тестування та точки покращення.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Сценарій, injects, рішення, спостереження та оцінка.',
+
   "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
       'Проведіть кризову команду через формування картини, оцінювання та ухвалення рішень, з живою картиною ситуації, інформаційними запитами, дилемами, журналом рішень та списком дій.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Зміна, вплив, тести, rollback, комунікація та go/no-go.',
   "Voortgang, planning, budget, risico's en besluiten gevraagd.":
       'Прогрес, планування, бюджет, ризики та запитувані рішення.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Висновки, root cause, заходи, докази та статус.',
-  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
-      'Сервіс, дані, залежність, вимоги, ризики та рішення.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Контекст, опції, компроміси, рішення та наслідки.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4632,8 +4582,7 @@ const _dutchSourceAddUk = <String, String>{
   'Privacy en classificatie': 'Конфіденційність та класифікація',
   'Uiterlijk van documenten': 'Вигляд документів',
   'Exportkwaliteit': 'Якість експорту',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Спершу надайте згоду на вихідний трафік у розділі «Конфіденційність та класифікація».',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Хмарний сервіс спершу потребує вашої згоди на конфіденційність у розділі "Конфіденційність та класифікація" і не працює у веб-версії.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5588,9 +5537,7 @@ const _dutchSourceAddUk = <String, String>{
   'Debriefing / after-action review': 'Дебрифінг / аналіз після дій',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Що було заплановано, що сталося, чому — і які домовленості ми ухвалюємо.',
-  'Threat modeling-sessie': 'Сесія моделювання загроз',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Обсяг, потоки даних, межі довіри, загрози за категоріями STRIDE та заходи.',
+
   'Casuïstiekbespreking sociaal domein': 'Розбір випадків у соціальній сфері',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Анонімізований випадок: сфери життя, безпека, правові рамки та координація.',
@@ -6166,10 +6113,7 @@ const _dutchSourceAddUk = <String, String>{
       'Покажчик контрольного списку: для кожного тесту стабільний ідентифікатор, канонічна назва та категорія. Вміст самого посібника не входить.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Покажчик тестів v2.0.0: для кожного тесту стабільний ідентифікатор, канонічна назва, категорія MASVS і слабкість MASWE. Відкликані тести v1 і заповнювачі не входять; вміст посібника також ні.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Повний список (ідентифікатор, назва, опис) плюс власне дібране ядро з нашими нотатками щодо усунення.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Повна схема EIS (88 перевірюваних вимог).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Назви захворювань дев’ятьма мовами як медичний лексикон для перевірки приватності (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6324,8 +6268,7 @@ const _dutchSourceAddUk = <String, String>{
   'naam@example.org\nexample.org': 'imya@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Шар поруч із цим деком був завеликий і не був завантажений; сам файл лишився незмінним:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Ця мітка часу не належить до останнього запиту',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Вкажіть цей номер версії, коли повідомляєте про проблему безпеки.',
   'Video niet ingesloten': 'Відео не вбудовано',
@@ -6533,10 +6476,7 @@ const _dutchSourceAddUk = <String, String>{
       'Числа діаграм не збережено — вони залишилися лише в цьому вікні:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'У браузері немає відновлення після збою: якщо закрити цю вкладку, незбережена робота зникне. Збережіть презентацію самостійно.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Локальна база CVE (завантаження запускаєте ви самі): OciDeck отримує масив даних через api.github.com і файл випуску, на який вказує ця адреса.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Пошук CVE (типово вимкнено): якщо його ввімкнено, ваш пошуковий запит іде на налаштоване дзеркало CVE, а якщо там нічого не знайдено — до європейської бази ENISA та до MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Вбудоване відео з YouTube або Vimeo завантажує програвач із цієї служби.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7140,8 +7080,7 @@ const _dutchSourceAddUk = <String, String>{
       'У цьому репозиторії немає презентацій.',
   'Rapportagetaal': 'Мова звіту',
   'Niet vastgelegd': 'Не зафіксовано',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Слайди звітів і довідкові дані для інформаційної безпеки: висновки, контрольні списки, матриці обсягу та підписання. Структуровано за MIAUW і широко застосовно для пентестів, аудитів і досліджень безпеки. Довідкові дані містяться в самому застосунку, тож модуль працює одразу й повністю офлайн.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Необов\'язкові модулі. Типово вимкнені; вони лишаються прихованими, доки ви їх не увімкнете.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7169,11 +7108,10 @@ const _dutchSourceAddUk = <String, String>{
   'adres': 'адреса',
   'postcode': 'поштовий індекс',
   'persoonsnaam': 'ім\'я особи',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Ця презентація містить елементи модуля «Інформаційна безпека». Увімкніть модуль, щоб редагувати їх.',
+
   'Inschakelen': 'Увімкнути',
   'Bevestigen': 'Підтвердити',
-  'Onderbouwing van de bevestiging': 'Обґрунтування підтвердження',
+
   'De eigenaar staat insluiten niet toe': 'Власник не дозволяє вбудовування',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Це відео можна переглянути лише в самому джерелі.',
@@ -7284,43 +7222,13 @@ const _dutchSourceAddUk = <String, String>{
   'databaseverbinding met wachtwoord': 'підключення до бази даних з паролем',
   'wachtwoord in klare tekst': 'пароль у відкритому вигляді',
   'Afbreken': 'Перервати',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Перервано. Нічого недоробленого не залишилося.',
+
   'Bijwerken': 'Оновити',
   'Binnenhalen…': 'Завантаження…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Отримати базу даних',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Не вдалося отримати список CVE. Перевір з\'єднання та спробуй ще раз; частково завантажений список видалено.',
-  'De nieuwste uitgave opzoeken…': 'Пошук найновішого випуску…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Це велике завантаження: понад 500 MB, тимчасово близько 1,5 GB місця на диску і, залежно від з\'єднання та пристрою, легко від десяти до тридцяти хвилин роботи. Після цього залишається індекс на кілька сотень мегабайтів. На з\'єднанні з оплатою за мегабайт краще цього не робити.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Бракувало місця на диску. Побудова тимчасово потребує понад 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Отриманий архів виявився не тим, на що ми очікували, і був відхилений. Нічого не встановлено.',
-  'Indexeren…': 'Індексування…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Доступно локально — пошук відбувається офлайн, жоден запит не залишає пристрій.',
-  'Lokale CVE-database': 'Локальна база даних CVE',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Зі списком CVE на власному пристрої пошук залишається тут: жоден запит більше не йде на сервер, і ніхто не бачить, яку вразливість ти досліджуєш.',
-  'Uitpakken…': 'Розпакування…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Розмісти повний список CVE на цьому пристрої, щоб пошук відбувався офлайн і твій запит нікуди не йшов. База даних походить із CVE List V5 (офіційної програми CVE, через GitHub).',
-  'Wat er lokaal beschikbaar is': 'Що доступно локально',
-  'Nu bijwerken': 'Оновити зараз',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Дані доступні локально — пошук відбувається на цьому пристрої; нічого не надсилається назовні.',
-  'Zwakheden (CWE)': 'Слабкості (CWE)',
-  'Testgevallen (WSTG)': 'Тестові випадки (WSTG)',
-  'MIAUW-eisen': 'Вимоги MIAUW',
-  'CVSS-scoretabel': 'Таблиця оцінок CVSS',
-  'Bevindingsjablonen': 'Шаблони знахідок',
+
   'Zoek een instelling': 'Пошук налаштування',
   'Geen instelling gevonden': 'Налаштування не знайдено',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Ваш пошуковий запит надходить до налаштованого дзеркала CVE, а якщо воно нічого не знайде — також до ENISA та MITRE. Ті, хто керує цими серверами, можуть визначити, яку саме вразливість ви шукаєте — а отже, яку вразливість ви досліджуєте.',
+
   'Accepteren': 'Прийняти',
   'Accepteren + waarschuwen': 'Прийняти + попередити',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7340,8 +7248,7 @@ const _dutchSourceAddUk = <String, String>{
   'burgerservicenummer (BSN)': 'номер громадянина (BSN)',
   'bankrekeningnummer (IBAN)': 'номер банківського рахунку (IBAN)',
   'e-mailadres': 'адреса електронної пошти',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Підпис TSA не перевіряється в застосунку; збігається лише хеш.',
+
   'Extern': 'Зовнішній',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Отримано із зовнішньої URL-адреси; відкриття звернулося до того сервера.',
@@ -7379,22 +7286,7 @@ const _dutchSourceAddUk = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Створює контрольний список для кожного об\'єкта обсягу (WSTG для web/API); наявні залишаються.',
   'CVE opzoeken': 'Знайти CVE',
-  'CVE opzoeken (online)': 'Знайти CVE (онлайн)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Пошук CVE недоступний у веб-версії.',
-  'CVE-mirror (basis-URL)': 'Дзеркало CVE (базова URL-адреса)',
-  'Geen CVE gevonden.': 'CVE не знайдено.',
-  'Kon de CVE-bron niet bereiken.': 'Не вдалося зв\'язатися з джерелом CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Дозволити онлайн-пошук CVE у редакторі знахідок через дзеркало NVD. За замовчуванням вимкнено; також потребує вашої згоди та працює лише на комп\'ютері.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Введіть (частину) ідентифікатора CVE та шукайте.',
-  'Typ minstens 3 tekens.': 'Введіть щонайменше 3 символи.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Увімкніть пошук CVE (онлайн) у Налаштування → Безпека, щоб шукати CVE онлайн.',
-  'Zoek CVE…': 'Пошук CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228':
-      'Шукати за ідентифікатором CVE, напр. 2021-44228',
+
   'Zoeken': 'Пошук',
   'Hertest': 'Повторний тест',
   'Niet hertest': 'Не протестовано повторно',

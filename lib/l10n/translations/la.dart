@@ -89,44 +89,24 @@ const _dutchSourceLa = {
   'Finaliseer en verzegel het rapport eerst.':
       'Prius relationem consumma et obsigna.',
   'Auditdossier geëxporteerd naar:': 'Fasciculus auditus exportatus ad:',
-  'MIAUW-pentestrapport': 'Relatio pentesti MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Plena structura relationis MIAUW: administratio documentorum, ambitus, executio, summarium moderatorium, inventa, indices et subscriptio.',
+
   'Tekst voorstellen (AI)': 'Textum proponere (IA)',
   'Het model gaf geen tekst terug.': 'Exemplar nullum textum reddidit.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Textus iam adest. Designatione IA substituere?',
   'RFC3161-tijdstempel': 'Signaculum temporis RFC3161',
-  'Verzegel het deck eerst.': 'Sigilla prius fasciculum.',
-  'Verzoek (.tsq) exporteren': 'Petitionem (.tsq) exportare',
-  'Token (.tsr) importeren': 'Signum (.tsr) importare',
-  'Nog geen tijdstempel': 'Nullum adhuc signaculum temporis',
-  'Getijdstempeld op': 'Tempore signatum die',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Signaculum temporis cum sigilli summa non congruit',
-  'Tijdstempelverzoek opgeslagen': 'Petitio signaculi temporis servata',
-  'Tijdstempel geïmporteerd': 'Signaculum temporis importatum',
+
   'Managementsamenvatting': 'Summarium administrationis',
-  'Bevindingen totaal': 'Inventa summa',
-  'scope-objecten getest': 'res ambitus probatae',
+
   'Gebruikte standaarden': 'Normae adhibitae',
-  'Bewijs-hashes kopiëren': 'Digestos testimonii transcribere',
-  'Bewijs-hashes gekopieerd': 'Digesti testimonii descripti',
-  'Bevindingen hernummeren': 'Inventa renumerare',
-  'Scope-dekking controleren': 'Coperturam ambitus inspicere',
-  'Scope-dekking': 'Copertura ambitus',
-  'Geen dekkingsgaten': 'Nullae lacunae coperturae',
-  'In scope, maar niet getest en geen bevinding:':
-      'In ambitu, sed non probatum et sine invento:',
+
   'MIAUW-compliance': 'Conformitas MIAUW',
   'Voldaan': 'Impletum',
   'Openstaand': 'Apertum',
-  'Uitgesloten door klant': 'A cliente exclusum',
+
   'Handmatig': 'Manuale',
   'Uitsluiten': 'Excludere',
-  'Opheffen': 'Revocare',
-  'Reden voor uitsluiting': 'Causa exclusionis',
-  'Fundamentele eisen zijn uitgesloten': 'Requisita fundamentalia exclusa sunt',
+
   'Nieuwe bevinding (wizard)': 'Novum inventum (adiutor)',
   'Bevinding maken': 'Inventum creare',
   'CIA-rating (scope-object)': 'Aestimatio CIA (res ambitus)',
@@ -137,10 +117,7 @@ const _dutchSourceLa = {
   'Bewijsslide toevoegen': 'Addere laminam testimonii',
   'CIA-gewogen': 'CIA ponderatum',
   'Severity (bevindingen)': 'Gravitas (inventa)',
-  'CWE kiezen': 'CWE eligere',
-  'Zoek op naam of CWE-nummer': 'Quaere nomine vel numero CWE',
-  'Geen CWE gevonden': 'Nullum CWE inventum',
-  'Kies CWE…': 'CWE elige…',
+
   'AI-concept': 'Adumbratio IA',
   'Nagekeken': 'Recognitum',
   'Wis AI-alt-teksten': 'Textus alternos IA dele',
@@ -269,10 +246,7 @@ const _dutchSourceLa = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Declaratio veritatis cum relatore, certificatione, subscriptione et sigillo.',
   'Uitbreidingen': 'Extensiones',
-  'Gegevens opschonen': 'Data purgare',
-  'Gegevens lokaal beschikbaar': 'Data localiter praesto',
-  'Op het web nog niet beschikbaar': 'In rete nondum praesto',
-  'Nog niet opgehaald': 'Nondum accersitum',
+
   'AI-assistentie': 'Auxilium IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Auxilium IA solum in versione desktop praesto est.',
@@ -1386,9 +1360,7 @@ const _dutchSourceLa = {
   'Projectstart / kick-off': 'Initium proiecti / kick-off',
   'Voorbespreking communicatie': 'Colloquium praevium communicationis',
   'Projecttijdlijn': 'Linea temporis proiecti',
-  'Informatieveiligheid: RASCI / TVB': 'Securitas informationis: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Consilium operum securitatis',
-  'Certificering voortgang': 'Progressus certificationis',
+
   'Training / workshop': 'Exercitatio / officina',
   'Rapportage': 'Relatio',
   'Onderzoeksverhaal': 'Narratio investigationis',
@@ -1404,12 +1376,7 @@ const _dutchSourceLa = {
       'Auditores destinati, nuntius praecipuus, canales et locutio publica.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Phases, lapides miliarii, dependentiae et momenta decernendi.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Partes, matricem RASCI et pacta operum consignare.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Opera, prioritates, domini et documenta probantia.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Progressus per dominium, moderamina et consilium inspectionis.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Proposita discendi, notiones praecipuae, exercitium et quaestio quiz.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1423,22 +1390,17 @@ const _dutchSourceLa = {
   'Sjabloon': 'Exemplar',
   'Post-incident review / lessons learned':
       'Recognitio post incidens / lectiones acceptae',
-  'Datalek / privacy-incident beoordeling':
-      'Aestimatio fugae datorum / incidentis vitae privatae',
+
   'DPIA / privacy impact assessment':
       'DPIA / aestimatio effectus in vitam privatam',
-  'Risicoanalyse / risk register':
-      'Analysis periculorum / registrum periculorum',
+
   'Business continuity / DR-test': 'Continuitas negotii / probatio DR',
-  'Tabletop-oefening / crisisoefening':
-      'Exercitatio tabletop / exercitatio crisis',
+
   'BOB-crisisrapportage': 'Relatio crisis BOB',
   'CAB / release readiness': 'CAB / promptitudo emissionis',
   'Stuurgroep / project board update':
       'Renovatio coetus gubernantis / project board',
-  'Auditbevindingen en opvolging': 'Inventa inspectionis et prosecutio',
-  'Leveranciersbeoordeling / vendor risk':
-      'Aestimatio praebitorum / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Decretum architecturae / expositio ADR',
   'Beleid uitrollen / implementatieplan':
@@ -1446,28 +1408,14 @@ const _dutchSourceLa = {
   'Overdracht / handover': 'Traditio / handover',
   'Retrospective / teamverbetering': 'Retrospectiva / emendatio turmae',
   'PPL Vluchtvoorbereiding': 'Praeparatio volatus PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Linea temporis, effectus, causae et actiones emendandi post incidens.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Aestima data, periculum, officium nuntiandi et communicationem.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Tractatio, fundamentum iuris, pericula vitae privatae et remedia.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Pericula, probabilitatem, effectum, remedia et dominos consigna.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Scenarium, proposita restitutionis, inventa probationum et puncta emendanda.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Scenarium, injects, decreta, observationes et aestimatio.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Duc turmam crisis per formationem imaginis, iudicii et decreti, cum imagine situationis viva, quaestionibus informationis, dilemmatibus, registro decretorum et indice actionum.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Mutatio, effectus, probationes, rollback, communicatio et go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Progressus, ordinatio, ratio sumptuum, pericula et decreta petita.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Inventa, root cause, remedia, documenta probantia et status.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Ministerium, data, dependentia, postulata, pericula et decretum.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Contextus, optiones, trade-offs, decretum et consequentiae.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4640,8 +4588,7 @@ const _dutchSourceAddLa = <String, String>{
   'Privacy en classificatie': 'Privatitas et Classificatio',
   'Uiterlijk van documenten': 'Aspectus documentorum',
   'Exportkwaliteit': 'Qualitas exportationis',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Primum consensum ad commercium exiens sub Privatitas et Classificatio concede.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Servitium nubis primum consensum tuum de privata re requirit apud "Privatitas et Classificatio" nec in versione interretiali operatur.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5601,9 +5548,7 @@ const _dutchSourceAddLa = <String, String>{
   'Debriefing / after-action review': 'Debriefing / recensio post actionem',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Quid provisum erat, quid accidit, cur — et quae pacta faciamus.',
-  'Threat modeling-sessie': 'Sessio threat modeling',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Ambitus, flumina datorum, fines fiduciae, minae per categoriam STRIDE et remedia.',
+
   'Casuïstiekbespreking sociaal domein': 'Disputatio casuum in campo sociali',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Casus anonymus: campi vitae, securitas, forma legalis et gubernatio.',
@@ -6176,10 +6121,7 @@ const _dutchSourceAddLa = <String, String>{
       'Index indicis probationum: pro singulis probationibus id stabile, titulus canonicus et genus. Ipsius ducis contenta non adiunguntur.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Index probationum v2.0.0: pro singulis probationibus id stabile, titulus canonicus, genus MASVS et infirmitas MASWE. Probationes v1 retractae et vicaria non insunt; nec ducis contenta.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Index plenus (id, nomen, descriptio) atque nucleus proprius delectus cum notis nostris remediorum.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Schema EIS plenum (88 postulata probabilia).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Nomina morborum novem linguis ut lexicon sanitatis ad privatam inspectionem (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6335,8 +6277,7 @@ const _dutchSourceAddLa = <String, String>{
   'naam@example.org\nexample.org': 'nomen@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Stratum iuxta hanc praesentationem nimis magnum erat neque lectum est; plica ipsa immutata manet:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Hoc signaculum temporis ad ultimam petitionem non pertinet',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Hunc numerum versionis nomina cum vitium securitatis nuntias.',
   'Video niet ingesloten': 'Pellicula non inclusa',
@@ -6544,10 +6485,7 @@ const _dutchSourceAddLa = <String, String>{
       'Numeri diagrammatis servati non sunt — in hac fenestra tantum manent:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'In navigatro nulla est recuperatio post ruinam: si hanc tabellam claudis, opus non servatum perit. Praesentationem tuam ipse serva.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Basis datorum CVE localis (descensum ipse incipis): OciDeck data cumulata per api.github.com petit et per plagulam emissionis quam illa inscriptio monstrat.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Inquisitio CVE (praedefinite exstincta): si accensa est, verbum quaesitum ad speculum CVE constitutum mittitur et, si nihil invenit, ad basim datorum Europaeam ENISA et ad MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Pellicula YouTube vel Vimeo inserta lusorem ab illo ministerio onerat.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7146,8 +7084,7 @@ const _dutchSourceAddLa = <String, String>{
       'Nullae presentationes in hoc repositorio.',
   'Rapportagetaal': 'Lingua relationis',
   'Niet vastgelegd': 'Non consignatum',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Tabellae relationis et data referentiae ad securitatem informationis: inventa, indices agendorum, matrices ambitus et subscriptio. Secundum MIAUW ordinata et late adhibenda ad pentest, recognitiones et investigationem securitatis. Data referentiae in ipsa applicatione insunt, itaque modulus statim et plene sine rete operatur.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Moduli optionales. Praedefinite exstincti; latent donec eos actives.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7178,11 +7115,10 @@ const _dutchSourceAddLa = <String, String>{
   'adres': 'inscriptio',
   'postcode': 'numerus postalis',
   'persoonsnaam': 'nomen personae',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Haec demonstratio partes moduli Securitatis Informationum continet. Modulum activa ut eas recenseas.',
+
   'Inschakelen': 'Activare',
   'Bevestigen': 'Confirmare',
-  'Onderbouwing van de bevestiging': 'Ratio confirmationis',
+
   'De eigenaar staat insluiten niet toe': 'Dominus insertionem non permittit',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Haec pellicula tantum in ipso fonte spectari potest.',
@@ -7289,43 +7225,13 @@ const _dutchSourceAddLa = <String, String>{
   'databaseverbinding met wachtwoord': 'conexio datorum cum tessera',
   'wachtwoord in klare tekst': 'tessera in textu aperto',
   'Afbreken': 'Abrumpere',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Abruptum est. Nihil semiperfectum remansit.',
+
   'Bijwerken': 'Renovare',
   'Binnenhalen…': 'Deponitur…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Datorum copiam accersere',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Index CVE accersi non potuit. Nexum tuum inspice et iterum conare; index ex parte deportatus abiectus est.',
-  'De nieuwste uitgave opzoeken…': 'Editio novissima quaeritur…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Magna haec est deportatio: plus quam 500 MB accersenda, ad tempus circiter 1,5 GB spatii in disco, et pro nexu tuo et machina facile decem ad triginta minuta operis. Postea index aliquot centenorum megabytorum remanet. In nexu qui pro singulis megabytis pretium exigit, hoc facere malis.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Spatium in disco nimis exiguum erat. Constructio ad tempus plus quam 1,5 GB poscit.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Tabularium deportatum non erat quod exspectabamus et recusatum est. Nihil installatum est.',
-  'Indexeren…': 'Index conficitur…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Localiter praesto est — quaestiones sine nexu fiunt, nullum verbum quaesitum foras exit.',
-  'Lokale CVE-database': 'Copia datorum CVE localis',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Cum index CVE in machina tua propria est, quaestiones hic manent: nullum verbum quaesitum amplius ad servitorem it, nec quisquam videre potest quod vitium securitatis investiges.',
-  'Uitpakken…': 'Expromitur…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Indicem CVE plenum in hac machina pone, ut quaestiones sine nexu fiant et verbum quaesitum tuum nusquam eat. Copia datorum ex CVE List V5 venit (programma CVE publicum, per GitHub).',
-  'Wat er lokaal beschikbaar is': 'Quae localiter praesto sunt',
-  'Nu bijwerken': 'Nunc renovare',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Data localiter praesto — inquisitio in hoc instrumento fit; nihil egreditur.',
-  'Zwakheden (CWE)': 'Infirmitates (CWE)',
-  'Testgevallen (WSTG)': 'Casus probationis (WSTG)',
-  'MIAUW-eisen': 'Postulata MIAUW',
-  'CVSS-scoretabel': 'Tabula aestimationis CVSS',
-  'Bevindingsjablonen': 'Exemplaria inventorum',
+
   'Zoek een instelling': 'Optionem quaerere',
   'Geen instelling gevonden': 'Nulla optio inventa',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Vocabulum quaesitum ad speculum CVE constitutum mittitur et, si nihil invenit, etiam ad ENISA et MITRE. Qui ea moderantur, colligere possunt quod certum vitium quaeras — ideoque quod vitium investiges.',
+
   'Accepteren': 'Accipere',
   'Accepteren + waarschuwen': 'Accipere + monere',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7345,8 +7251,7 @@ const _dutchSourceAddLa = <String, String>{
   'burgerservicenummer (BSN)': 'numerus civilis (BSN)',
   'bankrekeningnummer (IBAN)': 'numerus rationis argentariae (IBAN)',
   'e-mailadres': 'inscriptio electronica',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Subscriptio TSA in programmate non verificatur; sola summa (hash) congruit.',
+
   'Extern': 'Externum',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Ex URL externa haustum; in aperiendo servitium illud contactum est.',
@@ -7383,21 +7288,7 @@ const _dutchSourceAddLa = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Pro singulis obiectis ambitus indicem creat (WSTG pro web/API); exsistentia manent.',
   'CVE opzoeken': 'CVE quaerere',
-  'CVE opzoeken (online)': 'CVE quaerere (interrete)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE quaerere in versione telae non praesto est.',
-  'CVE-mirror (basis-URL)': 'Speculum CVE (URL basis)',
-  'Geen CVE gevonden.': 'Nullum CVE inventum.',
-  'Kon de CVE-bron niet bereiken.': 'Fons CVE adiri non potuit.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Permitte CVE interrete quaerere in editore inventorum per speculum NVD. Praedefinite exstinctum; consensum tuum quoque requirit et solum in desktop operatur.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Scribe (partem) identificationis CVE et quaere.',
-  'Typ minstens 3 tekens.': 'Scribe saltem 3 characteres.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Activa CVE quaerere (interrete) in Optionibus → Securitate ad CVE interrete quaerenda.',
-  'Zoek CVE…': 'CVE quaere…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Quaere per id CVE, e.g. 2021-44228',
+
   'Zoeken': 'Quaerere',
   'Hertest': 'Retentatio',
   'Niet hertest': 'Non retentatum',

@@ -87,44 +87,24 @@ const _dutchSourceFi = {
   'Finaliseer en verzegel het rapport eerst.':
       'Viimeistele ja sinetöi raportti ensin.',
   'Auditdossier geëxporteerd naar:': 'Auditointikansio viety kohteeseen:',
-  'MIAUW-pentestrapport': 'MIAUW-tunkeutumistestiraportti',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Täydellinen MIAUW-raportin rakenne: dokumenttien hallinta, laajuus, toteutus, johdon yhteenveto, havainnot, tarkistuslistat ja allekirjoitus.',
+
   'Tekst voorstellen (AI)': 'Ehdota tekstiä (tekoäly)',
   'Het model gaf geen tekst terug.': 'Malli ei palauttanut tekstiä.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Tekstiä on jo. Korvataanko se tekoälyluonnoksella?',
   'RFC3161-tijdstempel': 'RFC3161-aikaleima',
-  'Verzegel het deck eerst.': 'Sinetöi ensin deck.',
-  'Verzoek (.tsq) exporteren': 'Vie pyyntö (.tsq)',
-  'Token (.tsr) importeren': 'Tuo token (.tsr)',
-  'Nog geen tijdstempel': 'Ei vielä aikaleimaa',
-  'Getijdstempeld op': 'Aikaleimattu',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Aikaleima ei vastaa sinetin tiivistettä',
-  'Tijdstempelverzoek opgeslagen': 'Aikaleimapyyntö tallennettu',
-  'Tijdstempel geïmporteerd': 'Aikaleima tuotu',
+
   'Managementsamenvatting': 'Johdon yhteenveto',
-  'Bevindingen totaal': 'Havaintoja yhteensä',
-  'scope-objecten getest': 'laajuuden kohteita testattu',
+
   'Gebruikte standaarden': 'Käytetyt standardit',
-  'Bewijs-hashes kopiëren': 'Kopioi todisteiden tiivisteet',
-  'Bewijs-hashes gekopieerd': 'Todisteiden tiivisteet kopioitu',
-  'Bevindingen hernummeren': 'Numeroi havainnot uudelleen',
-  'Scope-dekking controleren': 'Tarkista laajuuden kattavuus',
-  'Scope-dekking': 'Laajuuden kattavuus',
-  'Geen dekkingsgaten': 'Ei kattavuusaukkoja',
-  'In scope, maar niet getest en geen bevinding:':
-      'Laajuudessa, mutta ei testattu eikä havaintoa:',
+
   'MIAUW-compliance': 'MIAUW-vaatimustenmukaisuus',
   'Voldaan': 'Täytetty',
   'Openstaand': 'Avoin',
-  'Uitgesloten door klant': 'Asiakas jätti pois',
+
   'Handmatig': 'Manuaalinen',
   'Uitsluiten': 'Jätä pois',
-  'Opheffen': 'Kumoa',
-  'Reden voor uitsluiting': 'Poisjätön syy',
-  'Fundamentele eisen zijn uitgesloten': 'Perusvaatimuksia on jätetty pois',
+
   'Nieuwe bevinding (wizard)': 'Uusi havainto (ohjattu)',
   'Bevinding maken': 'Luo havainto',
   'CIA-rating (scope-object)': 'CIA-luokitus (kohdeobjekti)',
@@ -135,10 +115,7 @@ const _dutchSourceFi = {
   'Bewijsslide toevoegen': 'Lisää todistedia',
   'CIA-gewogen': 'CIA-painotettu',
   'Severity (bevindingen)': 'Vakavuus (havainnot)',
-  'CWE kiezen': 'Valitse CWE',
-  'Zoek op naam of CWE-nummer': 'Hae nimellä tai CWE-numerolla',
-  'Geen CWE gevonden': 'CWE:tä ei löytynyt',
-  'Kies CWE…': 'Valitse CWE…',
+
   'AI-concept': 'Tekoälyluonnos',
   'Nagekeken': 'Tarkistettu',
   'Wis AI-alt-teksten': 'Tyhjennä tekoälyn alt-tekstit',
@@ -267,10 +244,7 @@ const _dutchSourceFi = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Totuudenvakuutus raportoijan, sertifioinnin, allekirjoituksen ja sinetöinnin kanssa.',
   'Uitbreidingen': 'Laajennukset',
-  'Gegevens opschonen': 'Siivoa tiedot',
-  'Gegevens lokaal beschikbaar': 'Tiedot saatavilla paikallisesti',
-  'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
-  'Nog niet opgehaald': 'Ei vielä haettu',
+
   'AI-assistentie': 'Tekoälyavustus',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Tekoälyavustus on saatavilla vain työpöytäversiossa.',
@@ -1382,9 +1356,7 @@ const _dutchSourceFi = {
   'Projectstart / kick-off': 'Projektin aloitus / kick-off',
   'Voorbespreking communicatie': 'Viestinnän ennakkopalaveri',
   'Projecttijdlijn': 'Projektin aikajana',
-  'Informatieveiligheid: RASCI / TVB': 'Tietoturva: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Turvallisuustehtävien suunnitelma',
-  'Certificering voortgang': 'Sertifioinnin eteneminen',
+
   'Training / workshop': 'Koulutus / työpaja',
   'Rapportage': 'Raportointi',
   'Onderzoeksverhaal': 'Tutkimustarina',
@@ -1400,12 +1372,7 @@ const _dutchSourceFi = {
       'Kohderyhmät, ydinviesti, kanavat ja tiedottaminen.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Vaiheet, virstanpylväät, riippuvuudet ja päätöskohdat.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Roolien, RASCI-matriisin ja tehtäväsopimusten kirjaaminen.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Tehtävät, prioriteetit, omistajat ja todisteet.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Eteneminen aihealueittain, kontrollit ja auditointien suunnittelu.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Oppimistavoitteet, ydinkäsitteet, harjoitus ja tietovisakysymys.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1419,45 +1386,29 @@ const _dutchSourceFi = {
   'Sjabloon': 'Mallipohja',
   'Post-incident review / lessons learned':
       'Post-incident review / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Tietovuoto / tietosuojapoikkeaman arviointi',
+
   'DPIA / privacy impact assessment': 'DPIA / tietosuojan vaikutustenarviointi',
-  'Risicoanalyse / risk register': 'Riskianalyysi / riskirekisteri',
+
   'Business continuity / DR-test': 'Business continuity / DR-testi',
-  'Tabletop-oefening / crisisoefening': 'Tabletop-harjoitus / kriisiharjoitus',
+
   'BOB-crisisrapportage': 'BOB-kriisiraportointi',
   'CAB / release readiness': 'CAB / julkaisuvalmius',
   'Stuurgroep / project board update': 'Ohjausryhmä / project board -katsaus',
-  'Auditbevindingen en opvolging': 'Auditointihavainnot ja jatkotoimet',
-  'Leveranciersbeoordeling / vendor risk': 'Toimittaja-arviointi / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie': 'Arkkitehtuuripäätös / ADR-esitys',
   'Beleid uitrollen / implementatieplan':
       'Politiikan käyttöönotto / toteutussuunnitelma',
   'Overdracht / handover': 'Luovutus / handover',
   'Retrospective / teamverbetering': 'Retrospektiivi / tiimin kehittäminen',
   'PPL Vluchtvoorbereiding': 'PPL-lennonvalmistelu',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Aikajana, vaikutukset, syyt ja parannustoimet häiriötilanteen jälkeen.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Arvioi tiedot, riski, ilmoitusvelvollisuus ja viestintä.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Käsittely, oikeusperuste, tietosuojariskit ja toimenpiteet.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Kirjaa riskit, todennäköisyys, vaikutus, toimenpiteet ja omistajat.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Skenaario, palautumistavoitteet, testihavainnot ja parannuskohteet.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Skenaario, injectit, päätökset, havainnot ja arviointi.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Ohjaa kriisiryhmä tilannekuvan muodostamisen, arvioinnin ja päätöksenteon läpi reaaliaikaisen tilannekuvan, tietopyyntöjen, dilemmojen, päätöslokin ja toimenpidelistan avulla.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Muutos, vaikutus, testit, rollback, viestintä ja go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Eteneminen, aikataulu, budjetti, riskit ja pyydetyt päätökset.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Havainnot, root cause, toimenpiteet, todisteet ja tila.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Palvelu, tiedot, riippuvuus, vaatimukset, riskit ja päätös.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Konteksti, vaihtoehdot, trade-offit, päätös ja seuraukset.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4628,8 +4579,7 @@ const _dutchSourceAddFi = <String, String>{
   'Privacy en classificatie': 'Tietosuoja ja luokittelu',
   'Uiterlijk van documenten': 'Asiakirjojen ulkoasu',
   'Exportkwaliteit': 'Viennin laatu',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Anna ensin suostumus lähtevään liikenteeseen kohdassa Tietosuoja ja luokittelu.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Pilvipalvelu edellyttää ensin yksityisyyssuostumustasi kohdassa "Tietosuoja ja luokittelu" eikä toimi verkkoversiossa.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5578,9 +5528,7 @@ const _dutchSourceAddFi = <String, String>{
   'Debriefing / after-action review': 'Jälkipuinti / after-action review',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Mitä oli suunniteltu, mitä tapahtui, miksi — ja mitä sovimme jatkosta.',
-  'Threat modeling-sessie': 'Uhkamallinnusistunto',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Rajaus, tietovirrat, luottamusrajat, uhat STRIDE-kategorioittain ja toimenpiteet.',
+
   'Casuïstiekbespreking sociaal domein': 'Tapauskäsittely sosiaalialalla',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Anonymisoitu tapaus: elämänalueet, turvallisuus, lainsäädäntökehys ja koordinointi.',
@@ -6156,10 +6104,7 @@ const _dutchSourceAddFi = <String, String>{
       'Tarkistuslistan hakemisto: testikohtainen pysyvä tunnus, kanoninen otsikko ja luokka. Itse oppaan sisältö ei ole mukana.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Version v2.0.0 testihakemisto: testikohtainen pysyvä tunnus, kanoninen otsikko, MASVS-luokka ja MASWE-heikkous. Poistetut v1-testit ja paikkamerkit eivät ole mukana; ei myöskään oppaan sisältö.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Koko luettelo (tunnus, nimi, kuvaus) sekä oma valittu ydin korjausmuistiinpanoineen.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Täysi EIS-skeema (88 testattavaa vaatimusta).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Sairauksien nimet yhdeksällä kielellä terveyssanastona yksityisyystarkistusta varten (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6314,8 +6259,7 @@ const _dutchSourceAddFi = <String, String>{
   'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Tämän deckin vieressä ollut taso oli liian suuri eikä sitä ladattu; itse tiedosto on muuttumaton:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Tämä aikaleima ei kuulu viimeisimpään pyyntöön',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Ilmoita tämä versionumero, kun ilmoitat tietoturvaongelmasta.',
   'Video niet ingesloten': 'Videota ei upotettu',
@@ -6526,10 +6470,7 @@ const _dutchSourceAddFi = <String, String>{
       'Kaavion lukuja ei tallennettu — ne ovat enää vain tässä ikkunassa:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Selaimessa ei ole kaatumispalautusta: jos suljet tämän välilehden, tallentamaton työ katoaa. Tallenna esityksesi itse.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Paikallinen CVE-tietokanta (käynnistät latauksen itse): OciDeck hakee joukkotiedot osoitteen api.github.com kautta ja sen julkaisutiedoston, johon osoite viittaa.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE-haku (oletuksena pois päältä): kun se on päällä, hakusanasi menee asetettuun CVE-peilipalvelimeen ja, jos se ei löydä mitään, ENISAn eurooppalaiseen tietokantaan ja MITREen.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Upotettu YouTube- tai Vimeo-video lataa soittimen kyseiseltä palvelulta.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7131,8 +7072,7 @@ const _dutchSourceAddFi = <String, String>{
       'Tässä tietovarastossa ei ole esityksiä.',
   'Rapportagetaal': 'Raportin kieli',
   'Niet vastgelegd': 'Ei kirjattu',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Raportointidiat ja viitetiedot tietoturvaa varten: havainnot, tarkistuslistat, scope-matriisit ja hyväksyntä. Jäsennelty MIAUW:n mukaisesti ja laajasti käytettävissä pentesteihin, auditointeihin ja tietoturvatutkimukseen. Viitetiedot ovat itse sovelluksessa, joten moduuli toimii heti ja täysin offline-tilassa.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valinnaiset moduulit. Oletuksena pois; ne pysyvät piilossa, kunnes otat ne käyttöön.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7162,11 +7102,10 @@ const _dutchSourceAddFi = <String, String>{
   'adres': 'osoite',
   'postcode': 'postinumero',
   'persoonsnaam': 'henkilön nimi',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Tämä esitys sisältää Tietoturva-moduulin osia. Ota moduuli käyttöön muokataksesi niitä.',
+
   'Inschakelen': 'Ota käyttöön',
   'Bevestigen': 'Vahvista',
-  'Onderbouwing van de bevestiging': 'Vahvistuksen perustelu',
+
   'De eigenaar staat insluiten niet toe': 'Omistaja ei salli upottamista',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Tätä videota voi katsoa vain itse lähteessä.',
@@ -7276,43 +7215,13 @@ const _dutchSourceAddFi = <String, String>{
   'databaseverbinding met wachtwoord': 'tietokantayhteys salasanalla',
   'wachtwoord in klare tekst': 'salasana selkokielisenä',
   'Afbreken': 'Keskeytä',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Keskeytetty. Mitään ei jäänyt puolitiehen.',
+
   'Bijwerken': 'Päivitä',
   'Binnenhalen…': 'Ladataan…',
-  'CVE\'s': 'CVE:tä',
-  'Database ophalen': 'Nouda tietokanta',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'CVE-luetteloa ei voitu noutaa. Tarkista yhteys ja yritä uudelleen; puoliksi ladattu luettelo on hylätty.',
-  'De nieuwste uitgave opzoeken…': 'Etsitään uusinta julkaisua…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Tämä on iso lataus: yli 500 MB noudettavaa, tilapäisesti noin 1,5 GB levytilaa ja yhteydestä ja laitteesta riippuen helposti kymmenestä kolmeenkymmeneen minuuttiin työtä. Jälkeenpäin jää muutaman sadan megatavun hakemisto. Yhteydellä, josta maksetaan megatavuittain, tätä on parempi olla tekemättä.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Levytilaa oli liian vähän. Rakentaminen vaatii tilapäisesti yli 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Noudettu arkisto ei ollut se, mitä odotimme, ja se hylättiin. Mitään ei asennettu.',
-  'Indexeren…': 'Indeksoidaan…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Saatavilla paikallisesti — haut tehdään offline-tilassa, yksikään hakusana ei lähde ulos.',
-  'Lokale CVE-database': 'Paikallinen CVE-tietokanta',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Kun CVE-luettelo on omalla laitteellasi, haut pysyvät täällä: yksikään hakusana ei enää mene palvelimelle, eikä kukaan näe, mitä haavoittuvuutta tutkit.',
-  'Uitpakken…': 'Puretaan…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Vie koko CVE-luettelo tälle laitteelle, jotta haut tehdään offline-tilassa eikä hakusanasi mene minnekään. Tietokanta tulee CVE List V5 -lähteestä (virallinen CVE-ohjelma, GitHubin kautta).',
-  'Wat er lokaal beschikbaar is': 'Mitä on saatavilla paikallisesti',
-  'Nu bijwerken': 'Päivitä nyt',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Tiedot saatavilla paikallisesti — haut tehdään tällä laitteella; mitään ei lähde ulos.',
-  'Zwakheden (CWE)': 'Heikkoudet (CWE)',
-  'Testgevallen (WSTG)': 'Testitapaukset (WSTG)',
-  'MIAUW-eisen': 'MIAUW-vaatimukset',
-  'CVSS-scoretabel': 'CVSS-pisteytystaulukko',
-  'Bevindingsjablonen': 'Havaintomallit',
+
   'Zoek een instelling': 'Hae asetusta',
   'Geen instelling gevonden': 'Asetusta ei löytynyt',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Hakusanasi lähetetään määritettyyn CVE-peilipalvelimeen, ja jos se ei löydä mitään, myös ENISAlle ja MITRElle. Näiden palvelimien ylläpitäjät voivat päätellä, mitä tiettyä haavoittuvuutta etsit — ja siten mitä haavoittuvuutta tutkit.',
+
   'Accepteren': 'Hyväksy',
   'Accepteren + waarschuwen': 'Hyväksy + varoita',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7332,8 +7241,7 @@ const _dutchSourceAddFi = <String, String>{
   'burgerservicenummer (BSN)': 'kansalaisen tunnusnumero (BSN)',
   'bankrekeningnummer (IBAN)': 'pankkitilinumero (IBAN)',
   'e-mailadres': 'sähköpostiosoite',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'TSA:n allekirjoitusta ei varmenneta sovelluksessa; vain tiiviste (hash) täsmää.',
+
   'Extern': 'Ulkoinen',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Haettu ulkoisesta URL-osoitteesta; avaaminen otti yhteyden kyseiseen palvelimeen.',
@@ -7370,22 +7278,7 @@ const _dutchSourceAddFi = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Luo tarkistuslistan kutakin laajuuden kohdetta kohti (WSTG webille/API:lle); olemassa olevat säilytetään.',
   'CVE opzoeken': 'Hae CVE',
-  'CVE opzoeken (online)': 'Hae CVE (verkossa)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE-haku ei ole käytettävissä verkkoversiossa.',
-  'CVE-mirror (basis-URL)': 'CVE-peili (perus-URL)',
-  'Geen CVE gevonden.': 'CVE:tä ei löytynyt.',
-  'Kon de CVE-bron niet bereiken.': 'CVE-lähteeseen ei saatu yhteyttä.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Salli CVE:iden haku verkossa löydöseditorissa NVD-peilin kautta. Oletuksena pois päältä; vaatii myös suostumuksesi ja toimii vain työpöydällä.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Kirjoita (osa) CVE-tunnuksesta ja hae.',
-  'Typ minstens 3 tekens.': 'Kirjoita vähintään 3 merkkiä.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Ota CVE-haku (verkossa) käyttöön kohdassa Asetukset → Suojaus hakeaksesi CVE:itä verkossa.',
-  'Zoek CVE…': 'Hae CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228':
-      'Hae CVE-tunnuksen mukaan, esim. 2021-44228',
+
   'Zoeken': 'Hae',
   'Hertest': 'Uusintatesti',
   'Niet hertest': 'Ei testattu uudelleen',

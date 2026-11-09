@@ -87,45 +87,24 @@ const _dutchSourceEl = {
   'Finaliseer en verzegel het rapport eerst.':
       'Οριστικοποιήστε και σφραγίστε πρώτα την αναφορά.',
   'Auditdossier geëxporteerd naar:': 'Ο φάκελος ελέγχου εξήχθη σε:',
-  'MIAUW-pentestrapport': 'Αναφορά pentest MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Πλήρης δομή αναφοράς MIAUW: διαχείριση εγγράφων, εύρος, εκτέλεση, σύνοψη διοίκησης, ευρήματα, λίστες ελέγχου και υπογραφή.',
+
   'Tekst voorstellen (AI)': 'Πρόταση κειμένου (AI)',
   'Het model gaf geen tekst terug.': 'Το μοντέλο δεν επέστρεψε κείμενο.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Υπάρχει ήδη κείμενο. Αντικατάσταση με το προσχέδιο AI;',
   'RFC3161-tijdstempel': 'Χρονοσήμανση RFC3161',
-  'Verzegel het deck eerst.': 'Σφραγίστε πρώτα το deck.',
-  'Verzoek (.tsq) exporteren': 'Εξαγωγή αιτήματος (.tsq)',
-  'Token (.tsr) importeren': 'Εισαγωγή διακριτικού (.tsr)',
-  'Nog geen tijdstempel': 'Χωρίς χρονοσήμανση ακόμη',
-  'Getijdstempeld op': 'Χρονοσημάνθηκε στις',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Η χρονοσήμανση δεν ταιριάζει με το hash της σφραγίδας',
-  'Tijdstempelverzoek opgeslagen': 'Το αίτημα χρονοσήμανσης αποθηκεύτηκε',
-  'Tijdstempel geïmporteerd': 'Η χρονοσήμανση εισήχθη',
+
   'Managementsamenvatting': 'Σύνοψη διοίκησης',
-  'Bevindingen totaal': 'Σύνολο ευρημάτων',
-  'scope-objecten getest': 'αντικείμενα εμβέλειας ελέγχθηκαν',
+
   'Gebruikte standaarden': 'Πρότυπα που χρησιμοποιήθηκαν',
-  'Bewijs-hashes kopiëren': 'Αντιγραφή hash αποδείξεων',
-  'Bewijs-hashes gekopieerd': 'Τα hash αποδείξεων αντιγράφηκαν',
-  'Bevindingen hernummeren': 'Επαναρίθμηση ευρημάτων',
-  'Scope-dekking controleren': 'Έλεγχος κάλυψης εμβέλειας',
-  'Scope-dekking': 'Κάλυψη εμβέλειας',
-  'Geen dekkingsgaten': 'Χωρίς κενά κάλυψης',
-  'In scope, maar niet getest en geen bevinding:':
-      'Εντός εμβέλειας, αλλά χωρίς έλεγχο και εύρημα:',
+
   'MIAUW-compliance': 'Συμμόρφωση MIAUW',
   'Voldaan': 'Πληρούται',
   'Openstaand': 'Ανοιχτό',
-  'Uitgesloten door klant': 'Εξαιρέθηκε από τον πελάτη',
+
   'Handmatig': 'Χειροκίνητα',
   'Uitsluiten': 'Εξαίρεση',
-  'Opheffen': 'Άρση',
-  'Reden voor uitsluiting': 'Λόγος εξαίρεσης',
-  'Fundamentele eisen zijn uitgesloten':
-      'Θεμελιώδεις απαιτήσεις έχουν εξαιρεθεί',
+
   'Nieuwe bevinding (wizard)': 'Νέο εύρημα (οδηγός)',
   'Bevinding maken': 'Δημιουργία ευρήματος',
   'CIA-rating (scope-object)': 'Αξιολόγηση CIA (αντικείμενο εμβέλειας)',
@@ -136,10 +115,7 @@ const _dutchSourceEl = {
   'Bewijsslide toevoegen': 'Προσθήκη διαφάνειας αποδείξεων',
   'CIA-gewogen': 'Σταθμισμένο κατά CIA',
   'Severity (bevindingen)': 'Σοβαρότητα (ευρήματα)',
-  'CWE kiezen': 'Επιλογή CWE',
-  'Zoek op naam of CWE-nummer': 'Αναζήτηση με όνομα ή αριθμό CWE',
-  'Geen CWE gevonden': 'Δεν βρέθηκε CWE',
-  'Kies CWE…': 'Επιλογή CWE…',
+
   'AI-concept': 'Προσχέδιο AI',
   'Nagekeken': 'Ελεγμένο',
   'Wis AI-alt-teksten': 'Εκκαθάριση εναλλακτικών κειμένων AI',
@@ -270,10 +246,7 @@ const _dutchSourceEl = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Η δήλωση ακρίβειας με τον συντάκτη, την πιστοποίηση, την υπογραφή και τη σφράγιση.',
   'Uitbreidingen': 'Επεκτάσεις',
-  'Gegevens opschonen': 'Εκκαθάριση δεδομένων',
-  'Gegevens lokaal beschikbaar': 'Δεδομένα διαθέσιμα τοπικά',
-  'Op het web nog niet beschikbaar': 'Δεν είναι ακόμη διαθέσιμο στον ιστό',
-  'Nog niet opgehaald': 'Δεν έχει ληφθεί ακόμη',
+
   'AI-assistentie': 'Υποστήριξη AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Η υποστήριξη AI είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
@@ -1398,9 +1371,7 @@ const _dutchSourceEl = {
   'Projectstart / kick-off': 'Έναρξη έργου / kick-off',
   'Voorbespreking communicatie': 'Προκαταρκτική συζήτηση επικοινωνίας',
   'Projecttijdlijn': 'Χρονοδιάγραμμα έργου',
-  'Informatieveiligheid: RASCI / TVB': 'Ασφάλεια πληροφοριών: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Σχέδιο εργασιών ασφάλειας',
-  'Certificering voortgang': 'Πρόοδος πιστοποίησης',
+
   'Training / workshop': 'Εκπαίδευση / workshop',
   'Rapportage': 'Αναφορά',
   'Onderzoeksverhaal': 'Ερευνητική αφήγηση',
@@ -1416,12 +1387,7 @@ const _dutchSourceEl = {
       'Ομάδες-στόχοι, βασικό μήνυμα, κανάλια και εκπροσώπηση.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Φάσεις, ορόσημα, εξαρτήσεις και σημεία απόφασης.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Καταγραφή ρόλων, πίνακα RASCI και συμφωνιών εργασιών.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Εργασίες, προτεραιότητες, υπεύθυνοι και αποδεικτικά στοιχεία.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Πρόοδος ανά τομέα, μέτρα ελέγχου και προγραμματισμός audit.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Μαθησιακοί στόχοι, βασικές έννοιες, άσκηση και ερώτηση κουίζ.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1435,20 +1401,17 @@ const _dutchSourceEl = {
   'Sjabloon': 'Πρότυπο',
   'Post-incident review / lessons learned':
       'Ανασκόπηση μετά το περιστατικό / διδάγματα',
-  'Datalek / privacy-incident beoordeling':
-      'Διαρροή δεδομένων / αξιολόγηση περιστατικού ιδιωτικότητας',
+
   'DPIA / privacy impact assessment':
       'DPIA / εκτίμηση αντικτύπου στην προστασία δεδομένων',
-  'Risicoanalyse / risk register': 'Ανάλυση κινδύνων / μητρώο κινδύνων',
+
   'Business continuity / DR-test': 'Επιχειρησιακή συνέχεια / δοκιμή DR',
-  'Tabletop-oefening / crisisoefening': 'Άσκηση tabletop / άσκηση κρίσης',
+
   'BOB-crisisrapportage': 'Αναφορά κρίσης BOB',
   'CAB / release readiness': 'CAB / ετοιμότητα έκδοσης',
   'Stuurgroep / project board update':
       'Συντονιστική επιτροπή / ενημέρωση project board',
-  'Auditbevindingen en opvolging': 'Ευρήματα audit και παρακολούθηση',
-  'Leveranciersbeoordeling / vendor risk':
-      'Αξιολόγηση προμηθευτών / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Απόφαση αρχιτεκτονικής / παρουσίαση ADR',
   'Beleid uitrollen / implementatieplan':
@@ -1456,28 +1419,14 @@ const _dutchSourceEl = {
   'Overdracht / handover': 'Παράδοση / handover',
   'Retrospective / teamverbetering': 'Retrospective / βελτίωση ομάδας',
   'PPL Vluchtvoorbereiding': 'Προετοιμασία πτήσης PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Χρονολόγιο, επιπτώσεις, αίτια και ενέργειες βελτίωσης μετά από περιστατικό.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Αξιολογήστε δεδομένα, κίνδυνο, υποχρέωση γνωστοποίησης και επικοινωνία.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Επεξεργασία, νομική βάση, κίνδυνοι ιδιωτικότητας και μέτρα.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Καταγράψτε κινδύνους, πιθανότητα, επιπτώσεις, μέτρα και υπευθύνους.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Σενάριο, στόχοι ανάκαμψης, ευρήματα δοκιμών και σημεία βελτίωσης.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Σενάριο, injects, αποφάσεις, παρατηρήσεις και αξιολόγηση.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Καθοδηγήστε μια ομάδα κρίσης στη διαμόρφωση εικόνας, την αξιολόγηση και τη λήψη αποφάσεων, με ζωντανή εικόνα κατάστασης, ερωτήματα πληροφόρησης, διλήμματα, ημερολόγιο αποφάσεων και λίστα ενεργειών.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Αλλαγή, επιπτώσεις, δοκιμές, rollback, επικοινωνία και go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Πρόοδος, χρονοδιάγραμμα, προϋπολογισμός, κίνδυνοι και ζητούμενες αποφάσεις.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Ευρήματα, root cause, μέτρα, αποδεικτικά στοιχεία και κατάσταση.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Υπηρεσία, δεδομένα, εξάρτηση, απαιτήσεις, κίνδυνοι και απόφαση.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Πλαίσιο, επιλογές, trade-offs, απόφαση και συνέπειες.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4708,8 +4657,7 @@ const _dutchSourceAddEl = <String, String>{
   'Privacy en classificatie': 'Απόρρητο και Ταξινόμηση',
   'Uiterlijk van documenten': 'Εμφάνιση εγγράφων',
   'Exportkwaliteit': 'Ποιότητα εξαγωγής',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Δώστε πρώτα συγκατάθεση για εξερχόμενη κίνηση στην ενότητα Απόρρητο και Ταξινόμηση.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Μια υπηρεσία cloud απαιτεί πρώτα τη συγκατάθεσή σας για το απόρρητο στην ενότητα "Απόρρητο και Ταξινόμηση" και δεν λειτουργεί στην έκδοση web.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5674,9 +5622,7 @@ const _dutchSourceAddEl = <String, String>{
   'Debriefing / after-action review': 'Απολογισμός / ανασκόπηση μετά τη δράση',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Τι είχε σχεδιαστεί, τι συνέβη, γιατί — και ποιες συμφωνίες κάνουμε.',
-  'Threat modeling-sessie': 'Συνεδρία μοντελοποίησης απειλών',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Εύρος, ροές δεδομένων, όρια εμπιστοσύνης, απειλές ανά κατηγορία STRIDE και μέτρα.',
+
   'Casuïstiekbespreking sociaal domein':
       'Συζήτηση περιστατικών στον κοινωνικό τομέα',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
@@ -6259,10 +6205,7 @@ const _dutchSourceAddEl = <String, String>{
       'Το ευρετήριο της λίστας ελέγχου: ανά δοκιμή το σταθερό αναγνωριστικό, ο κανονικός τίτλος και η κατηγορία. Το περιεχόμενο του ίδιου του οδηγού δεν περιλαμβάνεται.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Το ευρετήριο δοκιμών της v2.0.0: ανά δοκιμή το σταθερό αναγνωριστικό, ο κανονικός τίτλος, η κατηγορία MASVS και η αδυναμία MASWE. Οι αποσυρμένες δοκιμές v1 και τα σύμβολα κράτησης θέσης δεν περιλαμβάνονται· ούτε το περιεχόμενο του οδηγού.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Ο πλήρης κατάλογος (αναγνωριστικό, όνομα, περιγραφή) συν έναν δικό μας επιλεγμένο πυρήνα με τις σημειώσεις αποκατάστασης.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Το πλήρες σχήμα EIS (88 ελέγξιμες απαιτήσεις).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Ονόματα παθήσεων σε εννέα γλώσσες ως λεξικό υγείας για τον έλεγχο απορρήτου (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6419,8 +6362,7 @@ const _dutchSourceAddEl = <String, String>{
   'naam@example.org\nexample.org': 'onoma@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Ένα επίπεδο δίπλα σε αυτό το deck ήταν πολύ μεγάλο και δεν φορτώθηκε· το ίδιο το αρχείο παραμένει αμετάβλητο:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Αυτή η χρονοσήμανση δεν ανήκει στο τελευταίο αίτημα',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Αναφέρετε αυτόν τον αριθμό έκδοσης όταν αναφέρετε πρόβλημα ασφαλείας.',
   'Video niet ingesloten': 'Το βίντεο δεν ενσωματώθηκε',
@@ -6634,10 +6576,7 @@ const _dutchSourceAddEl = <String, String>{
       'Οι αριθμοί των γραφημάτων δεν αποθηκεύτηκαν — υπάρχουν πλέον μόνο σε αυτό το παράθυρο:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Στο πρόγραμμα περιήγησης δεν υπάρχει ανάκτηση μετά από κατάρρευση: αν κλείσετε αυτήν την καρτέλα, η μη αποθηκευμένη εργασία χάνεται. Αποθηκεύστε μόνοι σας την παρουσίασή σας.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Η τοπική βάση δεδομένων CVE (τη λήψη την ξεκινάτε εσείς): το OciDeck ανακτά τα μαζικά δεδομένα μέσω του api.github.com και του αρχείου έκδοσης στο οποίο παραπέμπει η διεύθυνση αυτή.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Αναζήτηση CVE (απενεργοποιημένη από προεπιλογή): όταν είναι ενεργή, ο όρος αναζήτησής σας πηγαίνει στο ρυθμισμένο κάτοπτρο CVE και, αν αυτό δεν βρει τίποτα, στην ευρωπαϊκή βάση δεδομένων του ENISA και στο MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Ένα ενσωματωμένο βίντεο YouTube ή Vimeo φορτώνει το πρόγραμμα αναπαραγωγής από την υπηρεσία αυτή.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7248,8 +7187,7 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν υπάρχουν παρουσιάσεις σε αυτό το αποθετήριο.',
   'Rapportagetaal': 'Γλώσσα αναφοράς',
   'Niet vastgelegd': 'Δεν έχει καταγραφεί',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Διαφάνειες αναφοράς και δεδομένα αναφοράς για την ασφάλεια πληροφοριών: ευρήματα, λίστες ελέγχου, μήτρες εμβέλειας και υπογραφή. Δομημένο κατά MIAUW και ευρέως αξιοποιήσιμο για pentests, ελέγχους και έρευνα ασφάλειας. Τα δεδομένα αναφοράς βρίσκονται μέσα στην ίδια την εφαρμογή, οπότε η μονάδα λειτουργεί αμέσως και πλήρως εκτός σύνδεσης.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· παραμένουν κρυφές μέχρι να τις ενεργοποιήσετε.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7279,11 +7217,10 @@ const _dutchSourceAddEl = <String, String>{
   'adres': 'διεύθυνση',
   'postcode': 'ταχυδρομικός κώδικας',
   'persoonsnaam': 'όνομα προσώπου',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Αυτή η παρουσίαση περιέχει στοιχεία της ενότητας Ασφάλεια πληροφοριών. Ενεργοποιήστε την ενότητα για να τα επεξεργαστείτε.',
+
   'Inschakelen': 'Ενεργοποίηση',
   'Bevestigen': 'Επιβεβαίωση',
-  'Onderbouwing van de bevestiging': 'Τεκμηρίωση της επιβεβαίωσης',
+
   'De eigenaar staat insluiten niet toe':
       'Ο κάτοχος δεν επιτρέπει την ενσωμάτωση',
   'Deze video is alleen op de bron zelf te bekijken.':
@@ -7393,43 +7330,13 @@ const _dutchSourceAddEl = <String, String>{
   'databaseverbinding met wachtwoord': 'σύνδεση βάσης δεδομένων με κωδικό',
   'wachtwoord in klare tekst': 'κωδικός σε απλό κείμενο',
   'Afbreken': 'Ακύρωση',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Ακυρώθηκε. Δεν έμεινε τίποτα μισοτελειωμένο.',
+
   'Bijwerken': 'Ενημέρωση',
   'Binnenhalen…': 'Γίνεται λήψη…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Λήψη βάσης δεδομένων',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Δεν ήταν δυνατή η λήψη της λίστας CVE. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά· μια μισοκατεβασμένη λίστα απορρίφθηκε.',
-  'De nieuwste uitgave opzoeken…': 'Αναζήτηση της πιο πρόσφατης έκδοσης…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Πρόκειται για μεγάλη λήψη: πάνω από 500 MB, προσωρινά περίπου 1,5 GB χώρου στον δίσκο και, ανάλογα με τη σύνδεση και τη συσκευή σου, εύκολα δέκα έως τριάντα λεπτά δουλειάς. Μετά παραμένει ένα ευρετήριο μερικών εκατοντάδων megabyte. Σε σύνδεση που χρεώνεται ανά megabyte, καλύτερα να μην το κάνεις.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Δεν υπήρχε αρκετός χώρος στον δίσκο. Η δημιουργία χρειάζεται προσωρινά πάνω από 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Το αρχείο που κατέβηκε δεν ήταν αυτό που περιμέναμε και απορρίφθηκε. Δεν εγκαταστάθηκε τίποτα.',
-  'Indexeren…': 'Ευρετηρίαση…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Διαθέσιμο τοπικά — οι αναζητήσεις γίνονται εκτός σύνδεσης, κανένας όρος αναζήτησης δεν φεύγει.',
-  'Lokale CVE-database': 'Τοπική βάση δεδομένων CVE',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Με τη λίστα CVE στη δική σου συσκευή, οι αναζητήσεις μένουν εδώ: κανένας όρος αναζήτησης δεν πηγαίνει πια σε διακομιστή και κανείς δεν βλέπει ποια ευπάθεια ερευνάς.',
-  'Uitpakken…': 'Γίνεται εξαγωγή…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Βάλε την πλήρη λίστα CVE σε αυτή τη συσκευή, ώστε οι αναζητήσεις να γίνονται εκτός σύνδεσης και ο όρος αναζήτησής σου να μην πηγαίνει πουθενά. Η βάση δεδομένων προέρχεται από το CVE List V5 (το επίσημο πρόγραμμα CVE, μέσω GitHub).',
-  'Wat er lokaal beschikbaar is': 'Τι είναι διαθέσιμο τοπικά',
-  'Nu bijwerken': 'Ενημέρωση τώρα',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Τα δεδομένα είναι διαθέσιμα τοπικά — οι αναζητήσεις γίνονται σε αυτή τη συσκευή· τίποτα δεν φεύγει.',
-  'Zwakheden (CWE)': 'Αδυναμίες (CWE)',
-  'Testgevallen (WSTG)': 'Περιπτώσεις δοκιμών (WSTG)',
-  'MIAUW-eisen': 'Απαιτήσεις MIAUW',
-  'CVSS-scoretabel': 'Πίνακας βαθμολογίας CVSS',
-  'Bevindingsjablonen': 'Πρότυπα ευρημάτων',
+
   'Zoek een instelling': 'Αναζήτηση ρύθμισης',
   'Geen instelling gevonden': 'Δεν βρέθηκε ρύθμιση',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Ο όρος αναζήτησής σας πηγαίνει στο ρυθμισμένο κάτοπτρο CVE και, αν αυτό δεν βρει τίποτα, και στον ENISA και στη MITRE. Όποιος διαχειρίζεται αυτούς τους διακομιστές μπορεί να συμπεράνει ποια συγκεκριμένη ευπάθεια αναζητάτε — και άρα ποια ευπάθεια ερευνάτε.',
+
   'Accepteren': 'Αποδοχή',
   'Accepteren + waarschuwen': 'Αποδοχή + προειδοποίηση',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7449,8 +7356,7 @@ const _dutchSourceAddEl = <String, String>{
   'burgerservicenummer (BSN)': 'αριθμός μητρώου πολίτη (BSN)',
   'bankrekeningnummer (IBAN)': 'αριθμός τραπεζικού λογαριασμού (IBAN)',
   'e-mailadres': 'διεύθυνση email',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Η υπογραφή της TSA δεν επαληθεύεται στην εφαρμογή· ταιριάζει μόνο το hash.',
+
   'Extern': 'Εξωτερικό',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Λήφθηκε από εξωτερική διεύθυνση URL· το άνοιγμα επικοινώνησε με αυτόν τον διακομιστή.',
@@ -7489,22 +7395,7 @@ const _dutchSourceAddEl = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Δημιουργεί μια λίστα ελέγχου ανά αντικείμενο εμβέλειας (WSTG για web/API)· οι υπάρχουσες διατηρούνται.',
   'CVE opzoeken': 'Αναζήτηση CVE',
-  'CVE opzoeken (online)': 'Αναζήτηση CVE (διαδικτυακά)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'Η αναζήτηση CVE δεν είναι διαθέσιμη στην έκδοση web.',
-  'CVE-mirror (basis-URL)': 'Κάτοπτρο CVE (βασικό URL)',
-  'Geen CVE gevonden.': 'Δεν βρέθηκε CVE.',
-  'Kon de CVE-bron niet bereiken.': 'Δεν ήταν δυνατή η πρόσβαση στην πηγή CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Επιτρέψτε την αναζήτηση CVE διαδικτυακά στον επεξεργαστή ευρημάτων μέσω ενός κατόπτρου NVD. Απενεργοποιημένο από προεπιλογή· απαιτεί επίσης τη συγκατάθεσή σας και λειτουργεί μόνο σε υπολογιστή.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Πληκτρολογήστε (μέρος) ενός αναγνωριστικού CVE και αναζητήστε.',
-  'Typ minstens 3 tekens.': 'Πληκτρολογήστε τουλάχιστον 3 χαρακτήρες.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Ενεργοποιήστε την αναζήτηση CVE (διαδικτυακά) στις Ρυθμίσεις → Ασφάλεια για αναζήτηση CVE διαδικτυακά.',
-  'Zoek CVE…': 'Αναζήτηση CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228':
-      'Αναζήτηση με βάση το id CVE, π.χ. 2021-44228',
+
   'Zoeken': 'Αναζήτηση',
   'Hertest': 'Επανέλεγχος',
   'Niet hertest': 'Δεν επανελέγχθηκε',

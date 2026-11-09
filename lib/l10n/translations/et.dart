@@ -87,44 +87,24 @@ const _dutchSourceEt = {
       'Esmalt vormista ja pitseeri aruanne.',
   'Auditdossier geëxporteerd naar:':
       'Auditidokumentatsioon eksporditi asukohta:',
-  'MIAUW-pentestrapport': 'MIAUW pentesti aruanne',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Täielik MIAUW aruande struktuur: dokumendihaldus, ulatus, teostus, juhtkonna kokkuvõte, leiud, kontroll-loendid ja allkiri.',
+
   'Tekst voorstellen (AI)': 'Paku teksti (AI)',
   'Het model gaf geen tekst terug.': 'Mudel ei tagastanud teksti.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Tekst on juba olemas. Kas asendada AI mustandiga?',
   'RFC3161-tijdstempel': 'RFC3161 ajatempel',
-  'Verzegel het deck eerst.': 'Pitseerige esmalt deck.',
-  'Verzoek (.tsq) exporteren': 'Ekspordi päring (.tsq)',
-  'Token (.tsr) importeren': 'Impordi tunnusluba (.tsr)',
-  'Nog geen tijdstempel': 'Ajatemplit veel pole',
-  'Getijdstempeld op': 'Ajatembeldatud',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Ajatempel ei ühti pitseri räsiga',
-  'Tijdstempelverzoek opgeslagen': 'Ajatempli päring salvestatud',
-  'Tijdstempel geïmporteerd': 'Ajatempel imporditud',
+
   'Managementsamenvatting': 'Juhtkonna kokkuvõte',
-  'Bevindingen totaal': 'Leide kokku',
-  'scope-objecten getest': 'ulatuse objekte testitud',
+
   'Gebruikte standaarden': 'Kasutatud standardid',
-  'Bewijs-hashes kopiëren': 'Kopeeri tõendite räsid',
-  'Bewijs-hashes gekopieerd': 'Tõendite räsid kopeeritud',
-  'Bevindingen hernummeren': 'Nummerda leiud ümber',
-  'Scope-dekking controleren': 'Kontrolli ulatuse katvust',
-  'Scope-dekking': 'Ulatuse katvus',
-  'Geen dekkingsgaten': 'Katvuselünki pole',
-  'In scope, maar niet getest en geen bevinding:':
-      'Ulatuses, kuid testimata ja leiuta:',
+
   'MIAUW-compliance': 'MIAUW vastavus',
   'Voldaan': 'Täidetud',
   'Openstaand': 'Avatud',
-  'Uitgesloten door klant': 'Klient välistas',
+
   'Handmatig': 'Käsitsi',
   'Uitsluiten': 'Välista',
-  'Opheffen': 'Tühista',
-  'Reden voor uitsluiting': 'Välistamise põhjus',
-  'Fundamentele eisen zijn uitgesloten': 'Põhinõuded on välistatud',
+
   'Nieuwe bevinding (wizard)': 'Uus leid (viisard)',
   'Bevinding maken': 'Loo leid',
   'CIA-rating (scope-object)': 'CIA hinnang (ulatuse objekt)',
@@ -135,10 +115,7 @@ const _dutchSourceEt = {
   'Bewijsslide toevoegen': 'Lisa tõendislaid',
   'CIA-gewogen': 'CIA-kaalutud',
   'Severity (bevindingen)': 'Raskusaste (leiud)',
-  'CWE kiezen': 'Vali CWE',
-  'Zoek op naam of CWE-nummer': 'Otsi nime või CWE-numbri järgi',
-  'Geen CWE gevonden': 'CWE-d ei leitud',
-  'Kies CWE…': 'Vali CWE…',
+
   'AI-concept': 'AI mustand',
   'Nagekeken': 'Üle vaadatud',
   'Wis AI-alt-teksten': 'Kustuta AI alt-tekstid',
@@ -266,10 +243,7 @@ const _dutchSourceEt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Tõesuse kinnitus koos raportööri, sertifitseerimise, allkirja ja pitseriga.',
   'Uitbreidingen': 'Laiendused',
-  'Gegevens opschonen': 'Puhasta andmed',
-  'Gegevens lokaal beschikbaar': 'Andmed saadaval kohapeal',
-  'Op het web nog niet beschikbaar': 'Veebis veel saadaval pole',
-  'Nog niet opgehaald': 'Pole veel alla laaditud',
+
   'AI-assistentie': 'Tehisintellekti abi',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Tehisintellekti abi on saadaval ainult lauaarvuti versioonis.',
@@ -1374,9 +1348,7 @@ const _dutchSourceEt = {
   'Projectstart / kick-off': 'Projekti algus / kick-off',
   'Voorbespreking communicatie': 'Kommunikatsiooni eelarutelu',
   'Projecttijdlijn': 'Projekti ajajoon',
-  'Informatieveiligheid: RASCI / TVB': 'Infoturve: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Turbeülesannete plaan',
-  'Certificering voortgang': 'Sertifitseerimise edenemine',
+
   'Training / workshop': 'Koolitus / töötuba',
   'Rapportage': 'Aruanne',
   'Onderzoeksverhaal': 'Uurimislugu',
@@ -1392,12 +1364,7 @@ const _dutchSourceEt = {
       'Sihtrühmad, põhisõnum, kanalid ja pressiesindus.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Faasid, verstapostid, sõltuvused ja otsustushetked.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Rollide, RASCI-maatriksi ja ülesandekokkulepete fikseerimine.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Ülesanded, prioriteedid, vastutajad ja tõendusmaterjal.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Edenemine valdkonniti, kontrollid ja auditite planeerimine.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Õpieesmärgid, põhimõisted, harjutus ja viktoriiniküsimus.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1411,45 +1378,29 @@ const _dutchSourceEt = {
   'Sjabloon': 'Mall',
   'Post-incident review / lessons learned':
       'Intsidendijärgne ülevaade / saadud õppetunnid',
-  'Datalek / privacy-incident beoordeling':
-      'Andmelekke / privaatsusintsidendi hindamine',
+
   'DPIA / privacy impact assessment': 'DPIA / privaatsuse mõjuhinnang',
-  'Risicoanalyse / risk register': 'Riskianalüüs / riskiregister',
+
   'Business continuity / DR-test': 'Talitluspidevus / DR-test',
-  'Tabletop-oefening / crisisoefening': 'Lauaõppus / kriisiõppus',
+
   'BOB-crisisrapportage': 'BOB-kriisiraport',
   'CAB / release readiness': 'CAB / väljalaske valmidus',
   'Stuurgroep / project board update': 'Juhtrühm / projektinõukogu ülevaade',
-  'Auditbevindingen en opvolging': 'Auditileiud ja järeltegevused',
-  'Leveranciersbeoordeling / vendor risk': 'Tarnija hindamine / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie': 'Arhitektuuriotsus / ADR-esitlus',
   'Beleid uitrollen / implementatieplan':
       'Poliitika juurutamine / rakendusplaan',
   'Overdracht / handover': 'Üleandmine / handover',
   'Retrospective / teamverbetering': 'Retrospektiiv / meeskonna täiustamine',
   'PPL Vluchtvoorbereiding': 'PPL lennuettevalmistus',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Ajajoon, mõju, põhjused ja parendustegevused pärast intsidenti.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Hinnake andmeid, riski, teavitamiskohustust ja kommunikatsiooni.',
-  "Verwerking, grondslag, privacyrisico's en maatregelen.":
-      'Töötlemine, õiguslik alus, privaatsusriskid ja meetmed.',
-  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
-      'Fikseerige riskid, tõenäosus, mõju, meetmed ja vastutajad.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Stsenaarium, taaste-eesmärgid, testileiud ja parenduskohad.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Stsenaarium, injects, otsused, tähelepanekud ja hindamine.',
+
   "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
       'Juhtige kriisimeeskonda läbi olukorrapildi loomise, hinnangu kujundamise ja otsustamise, koos reaalajas olukorrapildi, infopäringute, dilemmade, otsuste logi ja tegevuste loendiga.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Muudatus, mõju, testid, rollback, kommunikatsioon ja go/no-go.',
   "Voortgang, planning, budget, risico's en besluiten gevraagd.":
       'Edenemine, planeerimine, eelarve, riskid ja soovitud otsused.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Leiud, root cause, meetmed, tõendid ja staatus.',
-  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
-      'Teenus, andmed, sõltuvus, nõuded, riskid ja otsus.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontekst, valikud, kompromissid, otsus ja tagajärjed.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4613,8 +4564,7 @@ const _dutchSourceAddEt = <String, String>{
   'Privacy en classificatie': 'Privaatsus ja klassifikatsioon',
   'Uiterlijk van documenten': 'Dokumentide välimus',
   'Exportkwaliteit': 'Ekspordi kvaliteet',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Andke esmalt nõusolek väljuvale liiklusele jaotises Privaatsus ja klassifikatsioon.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Pilveteenus nõuab kõigepealt teie privaatsusnõusolekut jaotises "Privaatsus ja klassifikatsioon" ega tööta veebiversioonis.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5566,9 +5516,7 @@ const _dutchSourceAddEt = <String, String>{
   'Debriefing / after-action review': 'Debriifing / tegevusjärgne analüüs',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Mis oli plaanitud, mis juhtus, miks — ja millised kokkulepped teeme.',
-  'Threat modeling-sessie': 'Ohumodelleerimise sessioon',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Ulatus, andmevood, usalduspiirid, ohud STRIDE-kategooriate kaupa ja meetmed.',
+
   'Casuïstiekbespreking sociaal domein': 'Juhtumiarutelu sotsiaalvaldkonnas',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Anonüümitud juhtum: eluvaldkonnad, turvalisus, õiguslik raamistik ja koordineerimine.',
@@ -6144,10 +6092,7 @@ const _dutchSourceAddEt = <String, String>{
       'Kontrollnimekirja register: iga testi kohta püsiv id, kanooniline pealkiri ja kategooria. Juhendi enda sisu ei ole kaasas.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 testiregister: iga testi kohta püsiv id, kanooniline pealkiri, MASVS-kategooria ja MASWE-nõrkus. Tagasi võetud v1-testid ja kohatäited ei ole kaasas; juhendi sisu samuti mitte.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Täisloend (id, nimi, kirjeldus) ning oma valitud tuumik koos meie parandusmärkustega.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Täielik EIS-skeem (88 testitavat nõuet).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Haiguste nimetused üheksas keeles tervise sõnastikuna privaatsuskontrolli jaoks (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6300,8 +6245,7 @@ const _dutchSourceAddEt = <String, String>{
   'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Selle decki kõrval olev kiht oli liiga suur ja seda ei laaditud; fail ise on muutmata:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'See ajatempel ei kuulu viimase päringu juurde',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Märkige see versiooninumber, kui teatate turvaprobleemist.',
   'Video niet ingesloten': 'Videot ei manustatud',
@@ -6512,10 +6456,7 @@ const _dutchSourceAddEt = <String, String>{
       'Diagrammi arve ei salvestatud — need on alles ainult selles aknas:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Brauseris pole krahhitaastet: kui sulged selle vahekaardi, on salvestamata töö kadunud. Salvesta oma esitlus ise.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Kohalik CVE andmebaas (allalaadimise käivitate ise): OciDeck toob masskogumi aadressi api.github.com kaudu ja selle väljalaskefaili, millele see aadress osutab.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE otsing (vaikimisi väljas): kui see on sees, läheb teie otsingusõna määratud CVE peeglisse ja, kui see midagi ei leia, ENISA Euroopa andmebaasi ja MITRE-sse.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Manustatud YouTube\'i või Vimeo video laadib mängija sellelt teenuselt.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7117,8 +7058,7 @@ const _dutchSourceAddEt = <String, String>{
   'Geen presentaties in deze repository.': 'Selles hoidlas pole esitlusi.',
   'Rapportagetaal': 'Aruande keel',
   'Niet vastgelegd': 'Pole märgitud',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Aruandlusslaidid ja võrdlusandmed infoturbe jaoks: leiud, kontroll-loendid, skoobimaatriksid ja allkirjastamine. Struktureeritud MIAUW järgi ja laialt kasutatav pentestideks, audititeks ja turvauuringuteks. Võrdlusandmed on rakenduses endas, seega töötab moodul kohe ja täielikult võrguühenduseta.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; need jäävad peidetuks, kuni te need sisse lülitate.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7148,11 +7088,10 @@ const _dutchSourceAddEt = <String, String>{
   'adres': 'aadress',
   'postcode': 'postiindeks',
   'persoonsnaam': 'isiku nimi',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'See esitlus sisaldab infoturbe mooduli osi. Lülita moodul sisse, et neid muuta.',
+
   'Inschakelen': 'Lülita sisse',
   'Bevestigen': 'Kinnita',
-  'Onderbouwing van de bevestiging': 'Kinnituse põhjendus',
+
   'De eigenaar staat insluiten niet toe': 'Omanik ei luba manustamist',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Seda videot saab vaadata ainult allikas endas.',
@@ -7260,43 +7199,13 @@ const _dutchSourceAddEt = <String, String>{
   'databaseverbinding met wachtwoord': 'andmebaasiühendus parooliga',
   'wachtwoord in klare tekst': 'parool avatekstina',
   'Afbreken': 'Katkesta',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Katkestatud. Midagi poolikut ei jäänud järele.',
+
   'Bijwerken': 'Uuenda',
   'Binnenhalen…': 'Allalaadimine…',
-  'CVE\'s': 'CVE-d',
-  'Database ophalen': 'Laadi andmebaas',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'CVE-loendit ei õnnestunud alla laadida. Kontrolli ühendust ja proovi uuesti; poolik loend visati ära.',
-  'De nieuwste uitgave opzoeken…': 'Otsitakse uusimat väljalaset…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'See on suur allalaadimine: üle 500 MB tõmmata, ajutiselt umbes 1,5 GB kettaruumi ning olenevalt ühendusest ja seadmest hõlpsasti kümme kuni kolmkümmend minutit tööd. Pärast jääb alles paarisaja megabaidi suurune indeks. Ühenduses, mille eest makstakse megabaidi kaupa, on parem seda mitte teha.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Kettaruumi oli liiga vähe. Ülesehitus vajab ajutiselt üle 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Allalaaditud arhiiv ei olnud see, mida ootasime, ja lükati tagasi. Midagi ei paigaldatud.',
-  'Indexeren…': 'Indekseerimine…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Saadaval kohapeal — otsingud toimuvad võrguühenduseta, ükski otsingusõna ei lahku seadmest.',
-  'Lokale CVE-database': 'Kohalik CVE-andmebaas',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Kui CVE-loend on sinu enda seadmes, jäävad otsingud siia: ükski otsingusõna ei lähe enam serverisse ja keegi ei näe, millist turvaauku sa uurid.',
-  'Uitpakken…': 'Lahtipakkimine…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Pane täielik CVE-loend sellesse seadmesse, et otsingud toimuksid võrguühenduseta ja su otsingusõna ei läheks kuhugi. Andmebaas pärineb allikast CVE List V5 (ametlik CVE-programm, GitHubi kaudu).',
-  'Wat er lokaal beschikbaar is': 'Mis on kohapeal saadaval',
-  'Nu bijwerken': 'Uuenda kohe',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Andmed on kohapeal saadaval — otsingud toimuvad selles seadmes; midagi ei lahku.',
-  'Zwakheden (CWE)': 'Nõrkused (CWE)',
-  'Testgevallen (WSTG)': 'Testjuhtumid (WSTG)',
-  'MIAUW-eisen': 'MIAUW nõuded',
-  'CVSS-scoretabel': 'CVSS-i skooritabel',
-  'Bevindingsjablonen': 'Leidude mallid',
+
   'Zoek een instelling': 'Otsi seadet',
   'Geen instelling gevonden': 'Seadet ei leitud',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Teie otsingusõna saadetakse seadistatud CVE peegelserverisse ja, kui see midagi ei leia, ka ENISA-le ja MITRE-le. Nende serverite haldajad saavad järeldada, millist konkreetset haavatavust te otsite — ja seega millist haavatavust te uurite.',
+
   'Accepteren': 'Nõustu',
   'Accepteren + waarschuwen': 'Nõustu + hoiata',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7316,8 +7225,7 @@ const _dutchSourceAddEt = <String, String>{
   'burgerservicenummer (BSN)': 'kodaniku isikukood (BSN)',
   'bankrekeningnummer (IBAN)': 'pangakonto number (IBAN)',
   'e-mailadres': 'e-posti aadress',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'TSA allkirja rakenduses ei kontrollita; kattub ainult räsi (hash).',
+
   'Extern': 'Väline',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Toodud välisest URL-ist; avamine võttis ühendust selle serveriga.',
@@ -7354,21 +7262,7 @@ const _dutchSourceAddEt = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Loob kontrollnimekirja iga ulatuse objekti kohta (WSTG veebi/API jaoks); olemasolevad säilivad.',
   'CVE opzoeken': 'Otsi CVE',
-  'CVE opzoeken (online)': 'Otsi CVE (võrgus)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE otsing pole veebiversioonis saadaval.',
-  'CVE-mirror (basis-URL)': 'CVE peegel (baas-URL)',
-  'Geen CVE gevonden.': 'CVE-d ei leitud.',
-  'Kon de CVE-bron niet bereiken.': 'CVE allikat ei õnnestunud saavutada.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Luba CVE-de otsimine võrgus leidude redaktoris NVD peegli kaudu. Vaikimisi väljas; nõuab ka teie nõusolekut ja töötab ainult arvutis.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Sisestage (osa) CVE identifikaatorist ja otsige.',
-  'Typ minstens 3 tekens.': 'Sisestage vähemalt 3 tähemärki.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Lülitage CVE otsing (võrgus) sisse menüüs Seaded → Turvalisus, et otsida CVE-sid võrgus.',
-  'Zoek CVE…': 'Otsi CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Otsi CVE id järgi, nt 2021-44228',
+
   'Zoeken': 'Otsi',
   'Hertest': 'Kordustest',
   'Niet hertest': 'Uuesti testimata',

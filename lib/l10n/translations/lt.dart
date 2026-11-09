@@ -87,44 +87,24 @@ const _dutchSourceLt = {
   'Finaliseer en verzegel het rapport eerst.':
       'Pirmiausia užbaikite ir užantspauduokite ataskaitą.',
   'Auditdossier geëxporteerd naar:': 'Audito byla eksportuota į:',
-  'MIAUW-pentestrapport': 'MIAUW pentesto ataskaita',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Visa MIAUW ataskaitos struktūra: dokumentų valdymas, apimtis, vykdymas, vadovybės santrauka, radiniai, kontroliniai sąrašai ir pasirašymas.',
+
   'Tekst voorstellen (AI)': 'Siūlyti tekstą (DI)',
   'Het model gaf geen tekst terug.': 'Modelis negrąžino teksto.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Tekstas jau yra. Pakeisti jį DI juodraščiu?',
   'RFC3161-tijdstempel': 'RFC3161 laiko žyma',
-  'Verzegel het deck eerst.': 'Pirmiausia užantspauduokite deką.',
-  'Verzoek (.tsq) exporteren': 'Eksportuoti užklausą (.tsq)',
-  'Token (.tsr) importeren': 'Importuoti prieigos raktą (.tsr)',
-  'Nog geen tijdstempel': 'Kol kas nėra laiko žymos',
-  'Getijdstempeld op': 'Pažymėta laiku',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Laiko žyma neatitinka antspaudo maišos',
-  'Tijdstempelverzoek opgeslagen': 'Laiko žymos užklausa įrašyta',
-  'Tijdstempel geïmporteerd': 'Laiko žyma importuota',
+
   'Managementsamenvatting': 'Vadovybės santrauka',
-  'Bevindingen totaal': 'Iš viso radinių',
-  'scope-objecten getest': 'patikrinti aprėpties objektai',
+
   'Gebruikte standaarden': 'Naudoti standartai',
-  'Bewijs-hashes kopiëren': 'Kopijuoti įrodymų maišas',
-  'Bewijs-hashes gekopieerd': 'Įrodymų maišos nukopijuotos',
-  'Bevindingen hernummeren': 'Pernumeruoti radinius',
-  'Scope-dekking controleren': 'Patikrinti aprėpties dengimą',
-  'Scope-dekking': 'Aprėpties dengimas',
-  'Geen dekkingsgaten': 'Nėra dengimo spragų',
-  'In scope, maar niet getest en geen bevinding:':
-      'Aprėptyje, bet nepatikrinta ir be radinio:',
+
   'MIAUW-compliance': 'MIAUW atitiktis',
   'Voldaan': 'Atitinka',
   'Openstaand': 'Atvira',
-  'Uitgesloten door klant': 'Klientas pašalino',
+
   'Handmatig': 'Rankiniu būdu',
   'Uitsluiten': 'Pašalinti',
-  'Opheffen': 'Atšaukti',
-  'Reden voor uitsluiting': 'Pašalinimo priežastis',
-  'Fundamentele eisen zijn uitgesloten': 'Pagrindiniai reikalavimai pašalinti',
+
   'Nieuwe bevinding (wizard)': 'Naujas radinys (vediklis)',
   'Bevinding maken': 'Sukurti radinį',
   'CIA-rating (scope-object)': 'CIA vertinimas (aprėpties objektas)',
@@ -135,10 +115,7 @@ const _dutchSourceLt = {
   'Bewijsslide toevoegen': 'Pridėti įrodymų skaidrę',
   'CIA-gewogen': 'Pagal CIA pasvertas',
   'Severity (bevindingen)': 'Rimtumas (radiniai)',
-  'CWE kiezen': 'Pasirinkti CWE',
-  'Zoek op naam of CWE-nummer': 'Ieškoti pagal pavadinimą arba CWE numerį',
-  'Geen CWE gevonden': 'CWE nerasta',
-  'Kies CWE…': 'Pasirinkti CWE…',
+
   'AI-concept': 'DI juodraštis',
   'Nagekeken': 'Peržiūrėta',
   'Wis AI-alt-teksten': 'Išvalyti DI alt tekstus',
@@ -266,10 +243,7 @@ const _dutchSourceLt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Tikrumo deklaracija su ataskaitos rengėju, sertifikavimu, parašu ir antspaudu.',
   'Uitbreidingen': 'Plėtiniai',
-  'Gegevens opschonen': 'Išvalyti duomenis',
-  'Gegevens lokaal beschikbaar': 'Duomenys pasiekiami vietoje',
-  'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
-  'Nog niet opgehaald': 'Dar neatsisiųsta',
+
   'AI-assistentie': 'DI pagalba',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'DI pagalba pasiekiama tik darbalaukio versijoje.',
@@ -1384,9 +1358,7 @@ const _dutchSourceLt = {
   'Projectstart / kick-off': 'Projekto pradžia / kick-off',
   'Voorbespreking communicatie': 'Išankstinis komunikacijos aptarimas',
   'Projecttijdlijn': 'Projekto laiko juosta',
-  'Informatieveiligheid: RASCI / TVB': 'Informacijos sauga: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Saugumo užduočių planas',
-  'Certificering voortgang': 'Sertifikavimo pažanga',
+
   'Training / workshop': 'Mokymai / dirbtuvės',
   'Rapportage': 'Ataskaita',
   'Onderzoeksverhaal': 'Tyrimo pasakojimas',
@@ -1402,12 +1374,7 @@ const _dutchSourceLt = {
       'Tikslinės grupės, pagrindinė žinutė, kanalai ir atstovavimas spaudai.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fazės, gairės, priklausomybės ir sprendimų momentai.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Užfiksuoti vaidmenis, RASCI matricą ir susitarimus dėl užduočių.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Užduotys, prioritetai, atsakingieji ir įrodymai.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Pažanga pagal sritis, kontrolės priemonės ir auditų planavimas.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Mokymosi tikslai, pagrindinės sąvokos, pratimas ir viktorinos klausimas.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1421,18 +1388,16 @@ const _dutchSourceLt = {
   'Sjabloon': 'Šablonas',
   'Post-incident review / lessons learned':
       'Peržiūra po incidento / išmoktos pamokos',
-  'Datalek / privacy-incident beoordeling':
-      'Duomenų nutekėjimo / privatumo incidento vertinimas',
+
   'DPIA / privacy impact assessment': 'DPIA / poveikio privatumui vertinimas',
-  'Risicoanalyse / risk register': 'Rizikos analizė / rizikos registras',
+
   'Business continuity / DR-test': 'Veiklos tęstinumas / DR testas',
-  'Tabletop-oefening / crisisoefening': 'Stalo pratybos / krizių pratybos',
+
   'BOB-crisisrapportage': 'BOB krizės ataskaita',
   'CAB / release readiness': 'CAB / pasirengimas leidimui',
   'Stuurgroep / project board update':
       'Valdymo grupė / projekto valdybos atnaujinimas',
-  'Auditbevindingen en opvolging': 'Audito išvados ir tolesni veiksmai',
-  'Leveranciersbeoordeling / vendor risk': 'Tiekėjų vertinimas / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Architektūros sprendimas / ADR pristatymas',
   'Beleid uitrollen / implementatieplan':
@@ -1440,28 +1405,14 @@ const _dutchSourceLt = {
   'Overdracht / handover': 'Perdavimas / handover',
   'Retrospective / teamverbetering': 'Retrospektyva / komandos tobulinimas',
   'PPL Vluchtvoorbereiding': 'PPL pasirengimas skrydžiui',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Laiko juosta, poveikis, priežastys ir tobulinimo veiksmai po incidento.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Įvertinkite duomenis, riziką, pareigą pranešti ir komunikaciją.',
-  "Verwerking, grondslag, privacyrisico's en maatregelen.":
-      'Tvarkymas, teisinis pagrindas, privatumo rizikos ir priemonės.',
-  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
-      'Užfiksuokite rizikas, tikimybę, poveikį, priemones ir atsakinguosius.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Scenarijus, atkūrimo tikslai, testo išvados ir tobulintini punktai.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Scenarijus, injects, sprendimai, stebėjimai ir įvertinimas.',
+
   "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
       'Veskite krizių komandą per situacijos vaizdo formavimą, vertinimą ir sprendimų priėmimą, su tiesioginiu situacijos vaizdu, informacijos užklausomis, dilemomis, sprendimų žurnalu ir veiksmų sąrašu.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Pakeitimas, poveikis, testai, rollback, komunikacija ir go/no-go.',
   "Voortgang, planning, budget, risico's en besluiten gevraagd.":
       'Pažanga, planavimas, biudžetas, rizikos ir prašomi sprendimai.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Išvados, root cause, priemonės, įrodymai ir būsena.',
-  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
-      'Paslauga, duomenys, priklausomybė, reikalavimai, rizikos ir sprendimas.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontekstas, variantai, kompromisai, sprendimas ir pasekmės.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4627,8 +4578,7 @@ const _dutchSourceAddLt = <String, String>{
   'Privacy en classificatie': 'Privatumas ir klasifikacija',
   'Uiterlijk van documenten': 'Dokumentų išvaizda',
   'Exportkwaliteit': 'Eksporto kokybė',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Privatumas ir klasifikacija.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Debesijos paslaugai pirmiausia reikia jūsų privatumo sutikimo skiltyje "Privatumas ir klasifikacija" ir ji neveikia žiniatinklio versijoje.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5581,9 +5531,7 @@ const _dutchSourceAddLt = <String, String>{
   'Debriefing / after-action review': 'Debrifingas / analizė po veiksmų',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Kas buvo suplanuota, kas įvyko, kodėl — ir kokius susitarimus priimame.',
-  'Threat modeling-sessie': 'Grėsmių modeliavimo sesija',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Apimtis, duomenų srautai, pasitikėjimo ribos, grėsmės pagal STRIDE kategorijas ir priemonės.',
+
   'Casuïstiekbespreking sociaal domein': 'Atvejų aptarimas socialinėje srityje',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Nuasmenintas atvejis: gyvenimo sritys, saugumas, teisinis pagrindas ir koordinavimas.',
@@ -6164,10 +6112,7 @@ const _dutchSourceAddLt = <String, String>{
       'Kontrolinio sąrašo rodyklė: kiekvienam testui stabilus id, kanoninis pavadinimas ir kategorija. Paties vadovo turinys neįtrauktas.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 testų rodyklė: kiekvienam testui stabilus id, kanoninis pavadinimas, MASVS kategorija ir MASWE silpnybė. Atšaukti v1 testai ir vietaženkliai neįtraukti; vadovo turinys taip pat ne.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Visas sąrašas (id, pavadinimas, aprašas) ir mūsų pačių atrinktas branduolys su taisymo pastabomis.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'Visa EIS schema (88 tikrinami reikalavimai).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Ligų pavadinimai devyniomis kalbomis kaip sveikatos leksikonas privatumo patikrai (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6323,8 +6268,7 @@ const _dutchSourceAddLt = <String, String>{
   'naam@example.org\nexample.org': 'vardas@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Šalia šio rinkinio esantis sluoksnis buvo per didelis ir nebuvo įkeltas; pats failas liko nepakeistas:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Ši laiko žyma nepriklauso paskutinei užklausai',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Nurodykite šį versijos numerį, kai pranešate apie saugumo problemą.',
   'Video niet ingesloten': 'Vaizdo įrašas neįterptas',
@@ -6531,10 +6475,7 @@ const _dutchSourceAddLt = <String, String>{
       'Diagramų skaičiai neįrašyti — jie liko tik šiame lange:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Naršyklėje nėra atkūrimo po strigties: uždarius šį skirtuką, neįrašytas darbas dings. Išsaugokite pristatymą patys.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Vietinė CVE duomenų bazė (atsisiuntimą pradedate patys): OciDeck paima masinius duomenis per api.github.com ir leidimo failą, į kurį tas adresas nurodo.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE paieška (numatytai išjungta): kai ji įjungta, jūsų paieškos žodis keliauja į nustatytą CVE veidrodį, o jei ten nieko nerandama – į ENISA Europos duomenų bazę ir į MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Įterptas YouTube arba Vimeo vaizdo įrašas įkelia grotuvą iš tos paslaugos.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7139,8 +7080,7 @@ const _dutchSourceAddLt = <String, String>{
   'Geen presentaties in deze repository.': 'Šioje saugykloje pristatymų nėra.',
   'Rapportagetaal': 'Ataskaitos kalba',
   'Niet vastgelegd': 'Neužfiksuota',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Ataskaitų skaidrės ir nuorodų duomenys informacijos saugumui: išvados, kontroliniai sąrašai, aprėpties matricos ir patvirtinimas. Struktūruota pagal MIAUW ir plačiai pritaikoma pentestams, auditams ir saugumo tyrimams. Nuorodų duomenys yra pačioje programoje, todėl modulis veikia iš karto ir visiškai neprisijungus.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Neprivalomi moduliai. Numatytai išjungti; jie lieka paslėpti, kol jų neįjungiate.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7169,11 +7109,10 @@ const _dutchSourceAddLt = <String, String>{
   'adres': 'adresas',
   'postcode': 'pašto kodas',
   'persoonsnaam': 'asmens vardas',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Šioje pateiktyje yra Informacijos saugumo modulio dalių. Įjunkite modulį, kad galėtumėte jas redaguoti.',
+
   'Inschakelen': 'Įjungti',
   'Bevestigen': 'Patvirtinti',
-  'Onderbouwing van de bevestiging': 'Patvirtinimo pagrindimas',
+
   'De eigenaar staat insluiten niet toe': 'Savininkas neleidžia įterpti',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Šį vaizdo įrašą galima žiūrėti tik pačiame šaltinyje.',
@@ -7282,43 +7221,13 @@ const _dutchSourceAddLt = <String, String>{
   'databaseverbinding met wachtwoord': 'duomenų bazės ryšys su slaptažodžiu',
   'wachtwoord in klare tekst': 'slaptažodis atviru tekstu',
   'Afbreken': 'Nutraukti',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Nutraukta. Nieko nebaigto neliko.',
+
   'Bijwerken': 'Atnaujinti',
   'Binnenhalen…': 'Atsiunčiama…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Atsisiųsti duomenų bazę',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Nepavyko atsisiųsti CVE sąrašo. Patikrink ryšį ir bandyk dar kartą; iš dalies atsiųstas sąrašas išmestas.',
-  'De nieuwste uitgave opzoeken…': 'Ieškoma naujausios laidos…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Tai didelis atsisiuntimas: daugiau nei 500 MB, laikinai apie 1,5 GB disko vietos ir, priklausomai nuo ryšio bei įrenginio, lengvai nuo dešimties iki trisdešimties minučių darbo. Po to lieka kelių šimtų megabaitų rodyklė. Naudojant ryšį, už kurį mokama pagal megabaitus, geriau to nedaryti.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Trūko vietos diske. Kūrimui laikinai reikia daugiau nei 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'Atsiųstas archyvas buvo ne toks, kokio tikėjomės, ir buvo atmestas. Nieko neįdiegta.',
-  'Indexeren…': 'Indeksuojama…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Pasiekiama vietoje — paieška vyksta neprisijungus, joks paieškos žodis neišeina į išorę.',
-  'Lokale CVE-database': 'Vietinė CVE duomenų bazė',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Turint CVE sąrašą savo įrenginyje, paieška lieka čia: joks paieškos žodis nebekeliauja į serverį ir niekas nemato, kokį pažeidžiamumą tiri.',
-  'Uitpakken…': 'Išpakuojama…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Įkelk visą CVE sąrašą į šį įrenginį, kad paieška vyktų neprisijungus ir tavo paieškos žodis niekur nekeliautų. Duomenų bazė gaunama iš CVE List V5 (oficialios CVE programos, per GitHub).',
-  'Wat er lokaal beschikbaar is': 'Kas prieinama vietoje',
-  'Nu bijwerken': 'Atnaujinti dabar',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Duomenys prieinami vietoje — paieška vyksta šiame įrenginyje; niekas neišsiunčiama.',
-  'Zwakheden (CWE)': 'Silpnybės (CWE)',
-  'Testgevallen (WSTG)': 'Testavimo atvejai (WSTG)',
-  'MIAUW-eisen': 'MIAUW reikalavimai',
-  'CVSS-scoretabel': 'CVSS balų lentelė',
-  'Bevindingsjablonen': 'Radinių šablonai',
+
   'Zoek een instelling': 'Ieškoti nustatymo',
   'Geen instelling gevonden': 'Nustatymų nerasta',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Jūsų paieškos žodis siunčiamas į sukonfigūruotą CVE veidrodį, o jei jis nieko neranda — taip pat į ENISA ir MITRE. Tie, kas valdo šiuos serverius, gali nustatyti, kurio konkretaus pažeidžiamumo ieškote — taigi ir kurį pažeidžiamumą tiriate.',
+
   'Accepteren': 'Priimti',
   'Accepteren + waarschuwen': 'Priimti + įspėti',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7338,8 +7247,7 @@ const _dutchSourceAddLt = <String, String>{
   'burgerservicenummer (BSN)': 'piliečio identifikacinis numeris (BSN)',
   'bankrekeningnummer (IBAN)': 'banko sąskaitos numeris (IBAN)',
   'e-mailadres': 'el. pašto adresas',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'TSA parašas programoje netikrinamas; sutampa tik maiša (hash).',
+
   'Extern': 'Išorinis',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Gauta iš išorinio URL; atidarant buvo susisiekta su tuo serveriu.',
@@ -7376,21 +7284,7 @@ const _dutchSourceAddLt = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Sukuria kontrolinį sąrašą kiekvienam apimties objektui (WSTG žiniatinkliui/API); esami išlieka.',
   'CVE opzoeken': 'Ieškoti CVE',
-  'CVE opzoeken (online)': 'Ieškoti CVE (internete)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE paieška negalima žiniatinklio versijoje.',
-  'CVE-mirror (basis-URL)': 'CVE veidrodis (bazinis URL)',
-  'Geen CVE gevonden.': 'CVE nerasta.',
-  'Kon de CVE-bron niet bereiken.': 'Nepavyko pasiekti CVE šaltinio.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Leisti ieškoti CVE internete radinių redaktoriuje per NVD veidrodį. Pagal numatytuosius nustatymus išjungta; taip pat reikalingas jūsų sutikimas ir veikia tik kompiuteryje.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Įveskite (dalį) CVE identifikatoriaus ir ieškokite.',
-  'Typ minstens 3 tekens.': 'Įveskite bent 3 simbolius.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Įjunkite CVE paiešką (internete) skiltyje Nustatymai → Sauga, kad ieškotumėte CVE internete.',
-  'Zoek CVE…': 'Ieškoti CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Ieškoti pagal CVE id, pvz. 2021-44228',
+
   'Zoeken': 'Ieškoti',
   'Hertest': 'Pakartotinis testas',
   'Niet hertest': 'Nepatikrinta pakartotinai',

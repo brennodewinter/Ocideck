@@ -88,45 +88,24 @@ const _dutchSourceEs = {
   'Finaliseer en verzegel het rapport eerst.':
       'Finalice y selle primero el informe.',
   'Auditdossier geëxporteerd naar:': 'Dosier de auditoría exportado a:',
-  'MIAUW-pentestrapport': 'Informe de pentest MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Estructura completa del informe MIAUW: gestión documental, alcance, ejecución, resumen ejecutivo, hallazgos, listas de verificación y firma.',
+
   'Tekst voorstellen (AI)': 'Sugerir texto (IA)',
   'Het model gaf geen tekst terug.': 'El modelo no devolvió texto.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Ya hay texto. ¿Reemplazarlo con el borrador de IA?',
   'RFC3161-tijdstempel': 'Sello de tiempo RFC3161',
-  'Verzegel het deck eerst.': 'Sella primero el deck.',
-  'Verzoek (.tsq) exporteren': 'Exportar solicitud (.tsq)',
-  'Token (.tsr) importeren': 'Importar token (.tsr)',
-  'Nog geen tijdstempel': 'Aún sin sello de tiempo',
-  'Getijdstempeld op': 'Sellado el',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'El sello de tiempo no coincide con el hash del sello',
-  'Tijdstempelverzoek opgeslagen': 'Solicitud de sello de tiempo guardada',
-  'Tijdstempel geïmporteerd': 'Sello de tiempo importado',
+
   'Managementsamenvatting': 'Resumen ejecutivo',
-  'Bevindingen totaal': 'Total de hallazgos',
-  'scope-objecten getest': 'objetos de alcance probados',
+
   'Gebruikte standaarden': 'Estándares utilizados',
-  'Bewijs-hashes kopiëren': 'Copiar hashes de evidencia',
-  'Bewijs-hashes gekopieerd': 'Hashes de evidencia copiados',
-  'Bevindingen hernummeren': 'Renumerar hallazgos',
-  'Scope-dekking controleren': 'Comprobar cobertura del alcance',
-  'Scope-dekking': 'Cobertura del alcance',
-  'Geen dekkingsgaten': 'Sin lagunas de cobertura',
-  'In scope, maar niet getest en geen bevinding:':
-      'En el alcance, pero no probado y sin hallazgos:',
+
   'MIAUW-compliance': 'Conformidad MIAUW',
   'Voldaan': 'Cumplido',
   'Openstaand': 'Abierto',
-  'Uitgesloten door klant': 'Excluido por el cliente',
+
   'Handmatig': 'Manual',
   'Uitsluiten': 'Excluir',
-  'Opheffen': 'Restaurar',
-  'Reden voor uitsluiting': 'Motivo de la exclusión',
-  'Fundamentele eisen zijn uitgesloten':
-      'Se han excluido requisitos fundamentales',
+
   'Nieuwe bevinding (wizard)': 'Nuevo hallazgo (asistente)',
   'Bevinding maken': 'Crear hallazgo',
   'CIA-rating (scope-object)': 'Clasificación CIA (objeto de alcance)',
@@ -137,10 +116,7 @@ const _dutchSourceEs = {
   'Bewijsslide toevoegen': 'Añadir diapositiva de evidencia',
   'CIA-gewogen': 'Ponderado por CIA',
   'Severity (bevindingen)': 'Gravedad (hallazgos)',
-  'CWE kiezen': 'Elegir CWE',
-  'Zoek op naam of CWE-nummer': 'Buscar por nombre o número CWE',
-  'Geen CWE gevonden': 'No se encontró ningún CWE',
-  'Kies CWE…': 'Elegir CWE…',
+
   'AI-concept': 'Borrador de IA',
   'Nagekeken': 'Revisado',
   'Wis AI-alt-teksten': 'Borrar textos alternativos de IA',
@@ -272,10 +248,7 @@ const _dutchSourceEs = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'La declaración de veracidad con el ponente, la certificación, la firma y el sellado.',
   'Uitbreidingen': 'Extensiones',
-  'Gegevens opschonen': 'Limpiar datos',
-  'Gegevens lokaal beschikbaar': 'Datos disponibles localmente',
-  'Op het web nog niet beschikbaar': 'Aún no disponible en la web',
-  'Nog niet opgehaald': 'Aún no descargado',
+
   'AI-assistentie': 'Asistencia de IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'La asistencia de IA solo está disponible en la versión de escritorio.',
@@ -3713,8 +3686,7 @@ const _dutchSourceAddEs = {
   'Privacy en classificatie': 'Privacidad y clasificación',
   'Uiterlijk van documenten': 'Apariencia de los documentos',
   'Exportkwaliteit': 'Calidad de exportación',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Conceda primero el consentimiento para el tráfico saliente en Privacidad y clasificación.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Un servicio en la nube requiere primero tu consentimiento de privacidad en "Privacidad y clasificación" y no funciona en la versión web.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -4676,9 +4648,7 @@ const _dutchSourceAddEs = {
       'Debriefing / análisis posterior a la acción',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Qué estaba previsto, qué ocurrió, por qué — y qué acuerdos tomamos.',
-  'Threat modeling-sessie': 'Sesión de threat modeling',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Alcance, flujos de datos, límites de confianza, amenazas por categoría STRIDE y medidas.',
+
   'Casuïstiekbespreking sociaal domein': 'Revisión de casos del ámbito social',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Caso anonimizado: ámbitos vitales, seguridad, marco legal y coordinación.',
@@ -5263,10 +5233,7 @@ const _dutchSourceAddEs = {
       'El índice de la lista de verificación: por prueba, el id estable, el título canónico y la categoría. El contenido de la guía no se incluye.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'El índice de pruebas de v2.0.0: por prueba, el id estable, el título canónico, la categoría MASVS y la debilidad MASWE. Las pruebas v1 retiradas y los marcadores no están; tampoco el contenido de la guía.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'La lista completa (id, nombre, descripción) más un núcleo propio seleccionado con nuestras notas de remediación.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'El esquema EIS completo (88 requisitos comprobables).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Nombres de afecciones en nueve idiomas como léxico de salud para la comprobación de privacidad (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -5423,8 +5390,7 @@ const _dutchSourceAddEs = {
   'naam@example.org\nexample.org': 'nombre@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Una capa junto a esta presentación era demasiado grande y no se ha cargado; el archivo en sí no ha cambiado:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Este sello de tiempo no pertenece a la última solicitud',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Indique este número de versión cuando informe de un problema de seguridad.',
   'Video niet ingesloten': 'Vídeo no incrustado',
@@ -5645,10 +5611,7 @@ const _dutchSourceAddEs = {
       'Las cifras de los gráficos no se han guardado: solo existen en esta ventana:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'En el navegador no hay recuperación tras un fallo: si cierras esta pestaña, el trabajo sin guardar se pierde. Guarda tú mismo la presentación.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  La base de datos CVE local (el que inicia la descarga eres tú): OciDeck obtiene los datos masivos a través de api.github.com y el archivo de versión al que apunta esa dirección.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Búsqueda de CVE (desactivada de forma predeterminada): si está activada, el término de búsqueda va al espejo CVE configurado y, si este no encuentra nada, a la base de datos europea de ENISA y a MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Un vídeo de YouTube o Vimeo incrustado carga el reproductor desde ese servicio.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -6255,8 +6218,7 @@ const _dutchSourceAddEs = {
       'No hay presentaciones en este repositorio.',
   'Rapportagetaal': 'Idioma del informe',
   'Niet vastgelegd': 'No registrado',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Diapositivas de informe y datos de referencia para la seguridad de la información: hallazgos, listas de verificación, matrices de alcance y firma. Estructurado según MIAUW y ampliamente utilizable para pentests, auditorías e investigación de seguridad. Los datos de referencia están en la propia aplicación, por lo que el módulo funciona de inmediato y totalmente sin conexión.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Módulos opcionales. Desactivados por defecto; permanecen ocultos hasta que los activa.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -6285,11 +6247,10 @@ const _dutchSourceAddEs = {
   'adres': 'dirección',
   'postcode': 'código postal',
   'persoonsnaam': 'nombre de persona',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Esta presentación contiene elementos del módulo de Seguridad de la información. Activa el módulo para editarlos.',
+
   'Inschakelen': 'Activar',
   'Bevestigen': 'Confirmar',
-  'Onderbouwing van de bevestiging': 'Justificación de la confirmación',
+
   'De eigenaar staat insluiten niet toe':
       'El propietario no permite la inserción',
   'Deze video is alleen op de bron zelf te bekijken.':
@@ -6400,43 +6361,13 @@ const _dutchSourceAddEs = {
       'conexión a base de datos con contraseña',
   'wachtwoord in klare tekst': 'contraseña en texto claro',
   'Afbreken': 'Cancelar',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Cancelado. No ha quedado nada a medias.',
+
   'Bijwerken': 'Actualizar',
   'Binnenhalen…': 'Descargando…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Obtener la base de datos',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'No se pudo obtener la lista de CVE. Comprueba tu conexión e inténtalo de nuevo; una lista descargada a medias se ha descartado.',
-  'De nieuwste uitgave opzoeken…': 'Buscando la última versión…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Es una descarga grande: más de 500 MB que bajar, unos 1,5 GB de espacio en disco temporalmente y, según tu conexión y tu dispositivo, fácilmente de diez a treinta minutos de trabajo. Después queda un índice de unos cientos de megabytes. En una conexión que se paga por megabyte, mejor no hacerlo.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'No había suficiente espacio en disco. La construcción necesita temporalmente más de 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'El archivo descargado no era el que esperábamos y ha sido rechazado. No se ha instalado nada.',
-  'Indexeren…': 'Indexando…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Disponible en local: las búsquedas se hacen sin conexión, ningún término de búsqueda sale del dispositivo.',
-  'Lokale CVE-database': 'Base de datos CVE local',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Con la lista de CVE en tu propio dispositivo, las búsquedas se quedan aquí: ningún término de búsqueda va ya a un servidor y nadie puede ver qué vulnerabilidad estás investigando.',
-  'Uitpakken…': 'Extrayendo…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Pon la lista completa de CVE en este dispositivo, para que las búsquedas se hagan sin conexión y tu término de búsqueda no vaya a ninguna parte. La base de datos procede de CVE List V5 (el programa oficial de CVE, a través de GitHub).',
-  'Wat er lokaal beschikbaar is': 'Lo que está disponible localmente',
-  'Nu bijwerken': 'Actualizar ahora',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Datos disponibles localmente: las búsquedas se hacen en este dispositivo; nada sale de él.',
-  'Zwakheden (CWE)': 'Debilidades (CWE)',
-  'Testgevallen (WSTG)': 'Casos de prueba (WSTG)',
-  'MIAUW-eisen': 'Requisitos MIAUW',
-  'CVSS-scoretabel': 'Tabla de puntuación CVSS',
-  'Bevindingsjablonen': 'Plantillas de hallazgo',
+
   'Zoek een instelling': 'Buscar un ajuste',
   'Geen instelling gevonden': 'No se encontró ningún ajuste',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Tu término de búsqueda se envía al mirror de CVE configurado y, si no encuentra nada, también a ENISA y MITRE. Quien gestione esos servidores puede deducir qué vulnerabilidad concreta buscas — y por tanto cuál estás investigando.',
+
   'Accepteren': 'Aceptar',
   'Accepteren + waarschuwen': 'Aceptar + avisar',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -6457,8 +6388,7 @@ const _dutchSourceAddEs = {
   'burgerservicenummer (BSN)': 'número de servicio al ciudadano (BSN)',
   'bankrekeningnummer (IBAN)': 'número de cuenta bancaria (IBAN)',
   'e-mailadres': 'dirección de correo electrónico',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'La firma de la TSA no se verifica en la aplicación; solo coincide el hash.',
+
   'Extern': 'Externo',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Obtenido de una URL externa; al abrirla se contactó ese servidor.',
@@ -6496,21 +6426,7 @@ const _dutchSourceAddEs = {
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Crea una lista de verificación por objeto del alcance (WSTG para web/API); las existentes se conservan.',
   'CVE opzoeken': 'Buscar CVE',
-  'CVE opzoeken (online)': 'Buscar CVE (en línea)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'La búsqueda de CVE no está disponible en la versión web.',
-  'CVE-mirror (basis-URL)': 'Espejo CVE (URL base)',
-  'Geen CVE gevonden.': 'No se encontró ningún CVE.',
-  'Kon de CVE-bron niet bereiken.': 'No se pudo acceder a la fuente CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Permitir buscar CVE en línea en el editor de hallazgos mediante un espejo NVD. Desactivado de forma predeterminada; también requiere tu consentimiento y solo funciona en escritorio.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Escribe (parte de) un id CVE y busca.',
-  'Typ minstens 3 tekens.': 'Escribe al menos 3 caracteres.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Activa la búsqueda de CVE (en línea) en Ajustes → Seguridad para buscar CVE en línea.',
-  'Zoek CVE…': 'Buscar CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Buscar por id CVE, p. ej. 2021-44228',
+
   'Zoeken': 'Buscar',
   'Hertest': 'Nueva prueba',
   'Niet hertest': 'No reprobado',
@@ -7386,10 +7302,7 @@ const _dutchSourceAddEs = {
   'Projectstart / kick-off': 'Inicio de proyecto / kick-off',
   'Voorbespreking communicatie': 'Preparación de la comunicación',
   'Projecttijdlijn': 'Cronograma del proyecto',
-  'Informatieveiligheid: RASCI / TVB':
-      'Seguridad de la información: RASCI / responsabilidades',
-  'Takenplan informatieveiligheid': 'Plan de tareas de seguridad',
-  'Certificering voortgang': 'Avance de la certificación',
+
   'Training / workshop': 'Formación / taller',
   'Rapportage': 'Informe',
   'Onderzoeksverhaal': 'Relato de investigación',
@@ -7405,12 +7318,7 @@ const _dutchSourceAddEs = {
       'Públicos objetivo, mensaje clave, canales y portavocía.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fases, hitos, dependencias y momentos de decisión.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Registrar roles, matriz RASCI y acuerdos de tareas.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Tareas, prioridades, responsables y evidencias.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Avance por dominio, controles y planificación de auditorías.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Objetivos de aprendizaje, conceptos clave, ejercicio y pregunta de quiz.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -7424,21 +7332,17 @@ const _dutchSourceAddEs = {
   'Sjabloon': 'Plantilla',
   'Post-incident review / lessons learned':
       'Revisión post-incidente / lecciones aprendidas',
-  'Datalek / privacy-incident beoordeling':
-      'Brecha de datos / evaluación de incidente de privacidad',
+
   'DPIA / privacy impact assessment':
       'DPIA / evaluación de impacto en la privacidad',
-  'Risicoanalyse / risk register': 'Análisis de riesgos / registro de riesgos',
+
   'Business continuity / DR-test': 'Continuidad de negocio / prueba de DR',
-  'Tabletop-oefening / crisisoefening':
-      'Ejercicio tabletop / simulacro de crisis',
+
   'BOB-crisisrapportage': 'Informe de crisis BOB',
   'CAB / release readiness': 'CAB / preparación de la release',
   'Stuurgroep / project board update':
       'Comité de dirección / actualización del proyecto',
-  'Auditbevindingen en opvolging': 'Hallazgos de auditoría y seguimiento',
-  'Leveranciersbeoordeling / vendor risk':
-      'Evaluación de proveedores / riesgo de proveedor',
+
   'Architectuurbesluit / ADR-presentatie':
       'Decisión de arquitectura / presentación ADR',
   'Beleid uitrollen / implementatieplan':
@@ -7446,28 +7350,14 @@ const _dutchSourceAddEs = {
   'Overdracht / handover': 'Traspaso / handover',
   'Retrospective / teamverbetering': 'Retrospectiva / mejora del equipo',
   'PPL Vluchtvoorbereiding': 'Preparación de vuelo PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Cronología, impacto, causas y acciones de mejora tras un incidente.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Evaluar datos, riesgo, obligación de notificación y comunicación.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Tratamiento, base jurídica, riesgos de privacidad y medidas.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Registrar riesgos, probabilidad, impacto, medidas y responsables.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Escenario, objetivos de recuperación, hallazgos de las pruebas y puntos de mejora.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Escenario, injects, decisiones, observaciones y evaluación.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Guía a un equipo de crisis por el análisis de la situación, la valoración y la toma de decisiones, con imagen de situación en vivo, peticiones de información, dilemas, registro de decisiones y lista de acciones.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Cambio, impacto, pruebas, rollback, comunicación y go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Avance, planificación, presupuesto, riesgos y decisiones solicitadas.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Hallazgos, causa raíz, medidas, evidencias y estado.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Servicio, datos, dependencia, requisitos, riesgos y decisión.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Contexto, opciones, trade-offs, decisión y consecuencias.',
   'Doelgroep, planning, communicatie, training en adoptie.':

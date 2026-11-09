@@ -88,44 +88,24 @@ const _dutchSourceMt = {
   'Finaliseer en verzegel het rapport eerst.':
       'Iffinalizza u ssiġilla r-rapport l-ewwel.',
   'Auditdossier geëxporteerd naar:': 'Id-dossier tal-awditu ġie esportat lejn:',
-  'MIAUW-pentestrapport': 'Rapport tal-pentest MIAUW',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Struttura sħiħa tar-rapport MIAUW: ġestjoni tad-dokumenti, kamp ta\' applikazzjoni, eżekuzzjoni, sommarju maniġerjali, sejbiet, listi ta\' kontroll u firma.',
+
   'Tekst voorstellen (AI)': 'Issuġġerixxi test (IA)',
   'Het model gaf geen tekst terug.': 'Il-mudell ma rritorna l-ebda test.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Diġà hemm test. Tibdlu bl-abbozz tal-IA?',
   'RFC3161-tijdstempel': 'Timbru tal-ħin RFC3161',
-  'Verzegel het deck eerst.': 'L-ewwel issiġilla d-deck.',
-  'Verzoek (.tsq) exporteren': 'Esporta t-talba (.tsq)',
-  'Token (.tsr) importeren': 'Importa t-token (.tsr)',
-  'Nog geen tijdstempel': 'Għad m\'hemmx timbru tal-ħin',
-  'Getijdstempeld op': 'Ittimbrat fil-ħin fi',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'It-timbru tal-ħin ma jaqbilx mal-hash tas-siġill',
-  'Tijdstempelverzoek opgeslagen': 'It-talba tat-timbru tal-ħin ġiet salvata',
-  'Tijdstempel geïmporteerd': 'It-timbru tal-ħin ġie importat',
+
   'Managementsamenvatting': 'Sommarju maniġerjali',
-  'Bevindingen totaal': 'Total tas-sejbiet',
-  'scope-objecten getest': 'oġġetti tal-ambitu ttestjati',
+
   'Gebruikte standaarden': 'Standards użati',
-  'Bewijs-hashes kopiëren': 'Ikkupja l-hashes tal-evidenza',
-  'Bewijs-hashes gekopieerd': 'Hashes tal-evidenza kkupjati',
-  'Bevindingen hernummeren': 'Innumra mill-ġdid is-sejbiet',
-  'Scope-dekking controleren': 'Iċċekkja l-kopertura tal-ambitu',
-  'Scope-dekking': 'Kopertura tal-ambitu',
-  'Geen dekkingsgaten': 'Ebda lakuni fil-kopertura',
-  'In scope, maar niet getest en geen bevinding:':
-      'Fl-ambitu, iżda mhux ittestjat u bla sejba:',
+
   'MIAUW-compliance': 'Konformità MIAUW',
   'Voldaan': 'Sodisfatt',
   'Openstaand': 'Miftuħ',
-  'Uitgesloten door klant': 'Eskluż mill-klijent',
+
   'Handmatig': 'Manwali',
   'Uitsluiten': 'Eskludi',
-  'Opheffen': 'Neħħi',
-  'Reden voor uitsluiting': 'Raġuni għall-esklużjoni',
-  'Fundamentele eisen zijn uitgesloten': 'Rekwiżiti fundamentali huma esklużi',
+
   'Nieuwe bevinding (wizard)': 'Sejba ġdida (wizard)',
   'Bevinding maken': 'Oħloq sejba',
   'CIA-rating (scope-object)': 'Klassifikazzjoni CIA (oġġett tal-ambitu)',
@@ -136,10 +116,7 @@ const _dutchSourceMt = {
   'Bewijsslide toevoegen': 'Żid slide ta\' evidenza',
   'CIA-gewogen': 'Peżat b\'CIA',
   'Severity (bevindingen)': 'Gravità (sejbiet)',
-  'CWE kiezen': 'Agħżel CWE',
-  'Zoek op naam of CWE-nummer': 'Fittex bl-isem jew bin-numru CWE',
-  'Geen CWE gevonden': 'Ebda CWE ma nstab',
-  'Kies CWE…': 'Agħżel CWE…',
+
   'AI-concept': 'Abbozz IA',
   'Nagekeken': 'Rivedut',
   'Wis AI-alt-teksten': 'Naddaf it-testi alternattivi IA',
@@ -268,10 +245,7 @@ const _dutchSourceMt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Id-dikjarazzjoni tal-verità bir-rapporteur, iċ-ċertifikazzjoni, il-firma u s-siġill.',
   'Uitbreidingen': 'Estensjonijiet',
-  'Gegevens opschonen': 'Naddaf id-dejta',
-  'Gegevens lokaal beschikbaar': 'Dejta disponibbli lokalment',
-  'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
-  'Nog niet opgehaald': 'Għadha ma tniżżlitx',
+
   'AI-assistentie': 'Assistenza AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'L-assistenza AI hija disponibbli biss fil-verżjoni desktop.',
@@ -1391,9 +1365,7 @@ const _dutchSourceMt = {
   'Projectstart / kick-off': 'Bidu tal-proġett / kick-off',
   'Voorbespreking communicatie': 'Diskussjoni preliminari tal-komunikazzjoni',
   'Projecttijdlijn': 'Kronoloġija tal-proġett',
-  'Informatieveiligheid: RASCI / TVB': 'Sigurtà tal-informazzjoni: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Pjan tal-kompiti tas-sigurtà',
-  'Certificering voortgang': 'Progress taċ-ċertifikazzjoni',
+
   'Training / workshop': 'Taħriġ / workshop',
   'Rapportage': 'Rappurtar',
   'Onderzoeksverhaal': 'Storja ta\' riċerka',
@@ -1409,12 +1381,7 @@ const _dutchSourceMt = {
       'Udjenzi fil-mira, messaġġ ewlieni, kanali u kelliema.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fażijiet, stadji importanti, dipendenzi u mumenti ta\' deċiżjoni.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Irreġistra r-rwoli, il-matriċi RASCI u l-ftehimiet tal-kompiti.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Kompiti, prijoritajiet, sidien u evidenza.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Progress għal kull qasam, kontrolli u ppjanar tal-awditjar.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Għanijiet ta\' tagħlim, kunċetti ewlenin, eżerċizzju u mistoqsija tal-kwiżż.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -1428,21 +1395,17 @@ const _dutchSourceMt = {
   'Sjabloon': 'Mudell',
   'Post-incident review / lessons learned':
       'Reviżjoni wara inċident / tagħlimiet miksuba',
-  'Datalek / privacy-incident beoordeling':
-      'Valutazzjoni ta\' ksur ta\' data / inċident ta\' privatezza',
+
   'DPIA / privacy impact assessment':
       'DPIA / valutazzjoni tal-impatt fuq il-privatezza',
-  'Risicoanalyse / risk register': 'Analiżi tar-riskju / reġistru tar-riskji',
+
   'Business continuity / DR-test': 'Kontinwità tan-negozju / test DR',
-  'Tabletop-oefening / crisisoefening':
-      'Eżerċizzju tabletop / eżerċizzju ta\' kriżi',
+
   'BOB-crisisrapportage': 'Rappurtar ta\' kriżi BOB',
   'CAB / release readiness': 'CAB / tħejjija għar-rilaxx',
   'Stuurgroep / project board update':
       'Aġġornament għall-grupp ta\' tmexxija / project board',
-  'Auditbevindingen en opvolging': 'Sejbiet tal-awditjar u segwitu',
-  'Leveranciersbeoordeling / vendor risk':
-      'Valutazzjoni tal-fornituri / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Deċiżjoni ta\' arkitettura / preżentazzjoni ADR',
   'Beleid uitrollen / implementatieplan':
@@ -1450,28 +1413,14 @@ const _dutchSourceMt = {
   'Overdracht / handover': 'Trasferiment / handover',
   'Retrospective / teamverbetering': 'Retrospettiva / titjib tat-tim',
   'PPL Vluchtvoorbereiding': 'Tħejjija tat-titjira PPL',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Kronoloġija, impatt, kawżi u azzjonijiet ta\' titjib wara inċident.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Ivvaluta d-data, ir-riskju, l-obbligu ta\' notifika u l-komunikazzjoni.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Ipproċessar, bażi legali, riskji ta\' privatezza u miżuri.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Irreġistra r-riskji, il-probabbiltà, l-impatt, il-miżuri u s-sidien.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Xenarju, għanijiet ta\' rkupru, sejbiet tat-testijiet u punti ta\' titjib.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Xenarju, injects, deċiżjonijiet, osservazzjonijiet u evalwazzjoni.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Mexxi tim ta\' kriżi mill-formazzjoni tal-istampa, il-formazzjoni tal-ġudizzju u t-teħid tad-deċiżjonijiet, bi stampa tas-sitwazzjoni ħajja, talbiet għal informazzjoni, dilemmi, reġistru tad-deċiżjonijiet u lista ta\' azzjonijiet.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Bidla, impatt, testijiet, rollback, komunikazzjoni u go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Progress, ippjanar, baġit, riskji u deċiżjonijiet mitluba.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Sejbiet, root cause, miżuri, evidenza u status.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Servizz, data, dipendenza, rekwiżiti, riskji u deċiżjoni.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kuntest, għażliet, trade-offs, deċiżjoni u konsegwenzi.',
   'Doelgroep, planning, communicatie, training en adoptie.':
@@ -4685,8 +4634,7 @@ const _dutchSourceAddMt = <String, String>{
   'Privacy en classificatie': 'Privatezza u klassifikazzjoni',
   'Uiterlijk van documenten': 'Dehra tad-dokumenti',
   'Exportkwaliteit': 'Kwalità tal-esportazzjoni',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Privatezza u klassifikazzjoni.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'Servizz tal-cloud l-ewwel jeħtieġ il-kunsens tiegħek għall-privatezza taħt "Privatezza u klassifikazzjoni" u ma jaħdimx fil-verżjoni web.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -5649,9 +5597,7 @@ const _dutchSourceAddMt = <String, String>{
   'Debriefing / after-action review': 'Debriefing / analiżi wara l-azzjoni',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'X\'kien ippjanat, x\'ġara, għaliex — u liema ftehimiet nagħmlu.',
-  'Threat modeling-sessie': 'Sessjoni ta\' threat modeling',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Ambitu, flussi tad-data, konfini ta\' fiduċja, theddid għal kull kategorija STRIDE u miżuri.',
+
   'Casuïstiekbespreking sociaal domein':
       'Reviżjoni ta\' każijiet fil-qasam soċjali',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
@@ -6234,10 +6180,7 @@ const _dutchSourceAddMt = <String, String>{
       'L-indiċi tal-lista ta\' kontroll: għal kull test l-id stabbli, it-titlu kanoniku u l-kategorija. Il-kontenut tal-gwida nnifisha mhuwiex inkluż.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'L-indiċi tat-testijiet ta\' v2.0.0: għal kull test l-id stabbli, it-titlu kanoniku, il-kategorija MASVS u d-dgħufija MASWE. It-testijiet v1 irtirati u l-placeholders mhumiex inklużi; lanqas il-kontenut tal-gwida.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'Il-lista sħiħa (id, isem, deskrizzjoni) flimkien ma\' qalba magħżula minna bin-noti tagħna għar-rimedju.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'L-iskema EIS sħiħa (88 rekwiżit li jistgħu jiġu ttestjati).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Ismijiet ta\' kundizzjonijiet f\'disa\' lingwi bħala lessiku tas-saħħa għall-kontroll tal-privatezza (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -6394,8 +6337,7 @@ const _dutchSourceAddMt = <String, String>{
   'naam@example.org\nexample.org': 'isem@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Saff maġenb dan id-deck kien kbir wisq u ma ġiex mgħobbi; il-fajl innifsu baqa\' ma nbidilx:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Dan it-timbru tal-ħin ma jappartjenix għall-aħħar talba',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Semmi dan in-numru tal-verżjoni meta tirrapporta problema ta\' sigurtà.',
   'Video niet ingesloten': 'Il-vidjo mhuwiex inkorporat',
@@ -6607,10 +6549,7 @@ const _dutchSourceAddMt = <String, String>{
       'Iċ-ċifri tal-graffs ma ġewx issalvati — jinsabu biss f\'din it-tieqa:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Fil-browser m\'hemmx irkupru wara ħabta: jekk tagħlaq din it-tab, ix-xogħol mhux issalvat jintilef. Issalva l-preżentazzjoni tiegħek int stess.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  Id-database CVE lokali (id-download tibdieh int stess): OciDeck iġib id-data bl-ingrossa permezz ta\' api.github.com u l-fajl tal-ħruġ li dak l-indirizz jipponta lejh.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  Tfittxija CVE (mitfija awtomatikament): meta tkun mixgħula, il-kelma li tfittex tmur lejn il-mera CVE issettjata u, jekk dik ma ssib xejn, lejn id-database Ewropea tal-ENISA u lejn MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  Vidjow inkorporat minn YouTube jew Vimeo jgħabbi l-plejer minn dak is-servizz.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -7216,8 +7155,7 @@ const _dutchSourceAddMt = <String, String>{
       'L-ebda preżentazzjoni f\'dan ir-repożitorju.',
   'Rapportagetaal': 'Lingwa tar-rapport',
   'Niet vastgelegd': 'Mhux irreġistrat',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Slajds ta\' rappurtar u dejta ta\' referenza għas-sigurtà tal-informazzjoni: sejbiet, listi ta\' verifika, matriċi tal-ambitu u firma. Strutturat skont MIAUW u użabbli fuq firxa wiesgħa għall-pentests, l-awditi u r-riċerka tas-sigurtà. Id-dejta ta\' referenza tinsab fl-app innifisha, għalhekk il-modulu jaħdem mill-ewwel u kompletament offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Moduli fakultattivi. Mitfija b\'mod awtomatiku; jibqgħu moħbija sakemm ma tattivahomx.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -7249,11 +7187,10 @@ const _dutchSourceAddMt = <String, String>{
   'adres': 'indirizz',
   'postcode': 'kodiċi postali',
   'persoonsnaam': 'isem ta\' persuna',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Din il-preżentazzjoni fiha partijiet mill-modulu tas-Sigurtà tal-Informazzjoni. Ixgħel il-modulu biex teditjahom.',
+
   'Inschakelen': 'Ixgħel',
   'Bevestigen': 'Ikkonferma',
-  'Onderbouwing van de bevestiging': 'Ġustifikazzjoni tal-konferma',
+
   'De eigenaar staat insluiten niet toe':
       'Is-sid ma jippermettix l-inkorporazzjoni',
   'Deze video is alleen op de bron zelf te bekijken.':
@@ -7363,43 +7300,13 @@ const _dutchSourceAddMt = <String, String>{
   'databaseverbinding met wachtwoord': 'konnessjoni tad-database bil-password',
   'wachtwoord in klare tekst': 'password f\'test ċar',
   'Afbreken': 'Ikkanċella',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Ikkanċellat. Ma baqa\' xejn nofsu lest.',
+
   'Bijwerken': 'Aġġorna',
   'Binnenhalen…': 'Qed jitniżżel…',
-  'CVE\'s': 'CVE',
-  'Database ophalen': 'Niżżel id-database',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'Il-lista tas-CVE ma setgħetx tinġieb. Iċċekkja l-konnessjoni tiegħek u erġa\' pprova; lista mniżżla nofsha ntremiet.',
-  'De nieuwste uitgave opzoeken…': 'Qed tinstab l-aħħar verżjoni…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Dan huwa download kbir: aktar minn 500 MB x\'tniżżel, temporanjament madwar 1,5 GB spazju fuq id-diska, u skont il-konnessjoni u l-apparat tiegħek faċilment għaxar sa tletin minuta xogħol. Wara jibqa\' indiċi ta\' xi mitt megabajt jew tnejn. Fuq konnessjoni li titħallas bil-megabajt, aħjar ma tagħmilx dan.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Ma kienx hemm biżżejjed spazju fuq id-diska. Il-bini jitlob temporanjament aktar minn 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'L-arkivju mniżżel ma kienx dak li stennejna u ġie miċħud. Ma ġie installat xejn.',
-  'Indexeren…': 'Qed jiġi indiċjat…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Disponibbli lokalment — it-tfittxija ssir offline, l-ebda terminu ta\' tfittxija ma joħroġ barra.',
-  'Lokale CVE-database': 'Database CVE lokali',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Bil-lista tas-CVE fuq l-apparat tiegħek stess, it-tfittxija tibqa\' hawn: l-ebda terminu ta\' tfittxija ma jmur aktar għand server, u ħadd ma jista\' jara liema vulnerabbiltà qed tinvestiga.',
-  'Uitpakken…': 'Qed jinħareġ…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Poġġi l-lista sħiħa tas-CVE fuq dan l-apparat, biex it-tfittxija ssir offline u t-terminu ta\' tfittxija tiegħek ma jmur imkien. Id-database tiġi minn CVE List V5 (il-programm uffiċjali tas-CVE, permezz ta\' GitHub).',
-  'Wat er lokaal beschikbaar is': 'X\'inhu disponibbli lokalment',
-  'Nu bijwerken': 'Aġġorna issa',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Data disponibbli lokalment — it-tfittxija ssir fuq dan l-apparat; xejn ma joħroġ.',
-  'Zwakheden (CWE)': 'Dgħufijiet (CWE)',
-  'Testgevallen (WSTG)': 'Każijiet ta\' test (WSTG)',
-  'MIAUW-eisen': 'Rekwiżiti MIAUW',
-  'CVSS-scoretabel': 'Tabella tal-punteġġ CVSS',
-  'Bevindingsjablonen': 'Mudelli tas-sejbiet',
+
   'Zoek een instelling': 'Fittex issettjar',
   'Geen instelling gevonden': 'Ma nstab l-ebda issettjar',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'It-terminu tat-tfittxija tiegħek jintbagħat lill-mirror CVE konfigurat, u jekk dak ma jsib xejn, anke lil ENISA u MITRE. Min imexxi dawk is-servers jista\' jiddeduċi liema vulnerabbiltà speċifika qed tfittex — u għalhekk liema vulnerabbiltà qed tinvestiga.',
+
   'Accepteren': 'Aċċetta',
   'Accepteren + waarschuwen': 'Aċċetta + wissi',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -7419,8 +7326,7 @@ const _dutchSourceAddMt = <String, String>{
   'burgerservicenummer (BSN)': 'numru taċ-ċittadin (BSN)',
   'bankrekeningnummer (IBAN)': 'numru tal-kont bankarju (IBAN)',
   'e-mailadres': 'indirizz tal-email',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'Il-firma tat-TSA mhijiex verifikata fl-app; jaqbel biss il-hash.',
+
   'Extern': 'Estern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Miksub minn URL estern; il-ftuħ ikkuntattja dak is-server.',
@@ -7459,21 +7365,7 @@ const _dutchSourceAddMt = <String, String>{
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Joħloq lista ta\' kontroll għal kull oġġett tal-kamp (WSTG għal web/API); dawk eżistenti jinżammu.',
   'CVE opzoeken': 'Fittex CVE',
-  'CVE opzoeken (online)': 'Fittex CVE (onlajn)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'It-tfittxija CVE mhix disponibbli fil-verżjoni tal-web.',
-  'CVE-mirror (basis-URL)': 'Mera CVE (URL bażi)',
-  'Geen CVE gevonden.': 'L-ebda CVE ma nstab.',
-  'Kon de CVE-bron niet bereiken.': 'Ma setax jintlaħaq is-sors CVE.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Ippermetti t-tfittxija ta\' CVE onlajn fl-editur tas-sejbiet permezz ta\' mera NVD. Mitfi b\'mod awtomatiku; jeħtieġ ukoll il-kunsens tiegħek u jaħdem biss fuq desktop.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Ittajpja (parti minn) id CVE u fittex.',
-  'Typ minstens 3 tekens.': 'Ittajpja mill-inqas 3 karattri.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Ixgħel it-tfittxija CVE (onlajn) f\'Settings → Sigurtà biex tfittex CVE onlajn.',
-  'Zoek CVE…': 'Fittex CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Fittex bl-id CVE, eż. 2021-44228',
+
   'Zoeken': 'Fittex',
   'Hertest': 'Test mill-ġdid',
   'Niet hertest': 'Mhux ittestjat mill-ġdid',

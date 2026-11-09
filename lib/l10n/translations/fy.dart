@@ -87,44 +87,24 @@ const _dutchSourceFy = {
   'Finaliseer en verzegel het rapport eerst.':
       'Finalisearje en fersegelje earst it rapport.',
   'Auditdossier geëxporteerd naar:': 'Auditdossier eksportearre nei:',
-  'MIAUW-pentestrapport': 'MIAUW-pentestrapport',
-  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
-      'Folsleine MIAUW-rapportstruktuer: dokumintbehear, scope, útfiering, managementgearfetting, befiningen, checklists en ûndertekening.',
+
   'Tekst voorstellen (AI)': 'Tekst foarstelle (AI)',
   'Het model gaf geen tekst terug.': 'It model joech gjin tekst werom.',
   'Er staat al tekst. Vervangen door het AI-concept?':
       'Der stiet al tekst. Ferfange troch it AI-konsept?',
   'RFC3161-tijdstempel': 'RFC3161-tiidstimpel',
-  'Verzegel het deck eerst.': 'Fersegelje earst it deck.',
-  'Verzoek (.tsq) exporteren': 'Fersyk (.tsq) eksportearje',
-  'Token (.tsr) importeren': 'Token (.tsr) ymportearje',
-  'Nog geen tijdstempel': 'Noch gjin tiidstimpel',
-  'Getijdstempeld op': 'Tiidstimpele op',
-  'Tijdstempel komt niet overeen met de seal-hash':
-      'Tiidstimpel komt net oerien mei de segel-hash',
-  'Tijdstempelverzoek opgeslagen': 'Tiidstimpelfersyk bewarre',
-  'Tijdstempel geïmporteerd': 'Tiidstimpel ymportearre',
+
   'Managementsamenvatting': 'Managementgearfetting',
-  'Bevindingen totaal': 'Befinings totaal',
-  'scope-objecten getest': 'scope-objekten test',
+
   'Gebruikte standaarden': 'Brûkte standerts',
-  'Bewijs-hashes kopiëren': 'Bewiis-hashes kopiearje',
-  'Bewijs-hashes gekopieerd': 'Bewiis-hashes kopiearre',
-  'Bevindingen hernummeren': 'Befinings opnij nûmerje',
-  'Scope-dekking controleren': 'Scope-dekking kontrolearje',
-  'Scope-dekking': 'Scope-dekking',
-  'Geen dekkingsgaten': 'Gjin dekkingsgatten',
-  'In scope, maar niet getest en geen bevinding:':
-      'Yn scope, mar net test en gjin befining:',
+
   'MIAUW-compliance': 'MIAUW-neilibjen',
   'Voldaan': 'Foldien',
   'Openstaand': 'Iepensteand',
-  'Uitgesloten door klant': 'Utsletten troch klant',
+
   'Handmatig': 'Mei de hân',
   'Uitsluiten': 'Utslute',
-  'Opheffen': 'Opheffe',
-  'Reden voor uitsluiting': 'Reden foar útsluting',
-  'Fundamentele eisen zijn uitgesloten': 'Fûnemintele easken binne útsletten',
+
   'Nieuwe bevinding (wizard)': 'Nije befining (wizard)',
   'Bevinding maken': 'Befining meitsje',
   'CIA-rating (scope-object)': 'CIA-wurdearring (scope-objekt)',
@@ -135,10 +115,7 @@ const _dutchSourceFy = {
   'Bewijsslide toevoegen': 'Bewiisslide tafoegje',
   'CIA-gewogen': 'CIA-woegen',
   'Severity (bevindingen)': 'Earnst (befinings)',
-  'CWE kiezen': 'CWE kieze',
-  'Zoek op naam of CWE-nummer': 'Sykje op namme of CWE-nûmer',
-  'Geen CWE gevonden': 'Gjin CWE fûn',
-  'Kies CWE…': 'Kies CWE…',
+
   'AI-concept': 'AI-konsept',
   'Nagekeken': 'Neisjoen',
   'Wis AI-alt-teksten': 'AI-alt-teksten wiskje',
@@ -267,10 +244,7 @@ const _dutchSourceFy = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'De wierheidsferklearring mei rapporteur, sertifisearring, hantekening en fersegeling.',
   'Uitbreidingen': 'Utwreidingen',
-  'Gegevens opschonen': 'Gegevens opromje',
-  'Gegevens lokaal beschikbaar': 'Gegevens lokaal beskikber',
-  'Op het web nog niet beschikbaar': 'Op it web noch net beskikber',
-  'Nog niet opgehaald': 'Noch net ophelle',
+
   'AI-assistentie': 'AI-stipe',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'AI-stipe is allinnich beskikber yn de desktopferzje.',
@@ -3685,8 +3659,7 @@ const _dutchSourceAddFy = {
   'Privacy en classificatie': 'Privacy en klassifikaasje',
   'Uiterlijk van documenten': 'Uterlik fan dokuminten',
   'Exportkwaliteit': 'Eksportkwaliteit',
-  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
-      'Jou earst tastimming foar útgeand ferkear by Privacy en klassifikaasje.',
+
   'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
       'In clouddienst freget earst dyn privacytastimming by "Privacy en klassifikaasje" en wurket net yn de webferzje.',
   'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
@@ -4640,9 +4613,7 @@ const _dutchSourceAddFy = {
   'Debriefing / after-action review': 'Debriefing / after-action review',
   'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
       'Wat wie pland, wat barde der, wêrom — en hokker ôfspraken meitsje wy.',
-  'Threat modeling-sessie': 'Threat modeling-sesje',
-  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
-      'Scope, datastreamen, fertrouwensgrinzen, driigingen per STRIDE-kategory en maatregels.',
+
   'Casuïstiekbespreking sociaal domein': 'Kasuïstykbesprek sosjaal domein',
   'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
       'Anonymisearre kasus: libbensdomeinen, feiligens, wetlik ramt en rezjy.',
@@ -5221,10 +5192,7 @@ const _dutchSourceAddFy = {
       'De checklist-yndeks: de stabile id, de kanonike titel en de kategory per test. De ynhâld fan de gids sels sit der net by.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'De test-yndeks fan v2.0.0: per test de stabile id, de kanonike titel, de MASVS-kategory en de MASWE-swakte. De ynlutsen v1-tests en de placeholders sitte der net yn; de ynhâld fan de gids likemin.',
-  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
-      'De folsleine list (id, namme, beskriuwing) plus in eigen selektearre kearn mei ús remediaasje-notysjes.',
-  'Het volledige EIS-schema (88 toetsbare eisen).':
-      'It folsleine EIS-skema (88 toetsbere easken).',
+
   'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
       'Nammen fan oandwaningen yn njoggen talen as sûnenslexikon foar de privacykontrôle (assets/privacy/health_lexicon.json).',
   'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
@@ -5378,8 +5346,7 @@ const _dutchSourceAddFy = {
   'naam@example.org\nexample.org': 'namme@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'In laach neist dit deck wie te grut en is net ynlêzen; it bestân sels is ûnferoare:',
-  'Deze tijdstempel hoort niet bij het laatste verzoek':
-      'Dizze tiidstimpel heart net by it lêste fersyk',
+
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Neam dit ferzjenûmer as jo in feiligensprobleem melde.',
   'Video niet ingesloten': 'Fideo net ynsletten',
@@ -5600,10 +5567,7 @@ const _dutchSourceAddFy = {
       'Grafykgetallen binne net bewarre — se steane allinne noch yn dit finster:',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Yn de browser is der gjin crashherstel: slutsto dit ljepblêd, dan is net-bewarre wurk fuort. Bewarje dyn presintaasje sels.',
-  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
-      '•  De lokale CVE-databank (do starte de download sels): OciDeck hellet de bulkgegevens op fia api.github.com en it releasebestân dêr\'t dat adres nei wiist.',
-  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
-      '•  CVE opsykje (stiet standert út): stiet it oan, dan giet jo sykterm nei de ynstelde CVE-spegel en, as dy neat fynt, nei de Europeeske databank fan ENISA en nei MITRE.',
+
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
       '•  In ynsletten YouTube- of Vimeo-fideo laadt de spiler by dy tsjinst.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
@@ -6203,8 +6167,7 @@ const _dutchSourceAddFy = {
       'Gjin presintaasjes yn dizze repository.',
   'Rapportagetaal': 'Rapportaazjetaal',
   'Niet vastgelegd': 'Net fêstlein',
-  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Rapportaazjeslides en referinsjedata foar ynformaasjebefeiliging: befinings, checklists, scope-matriuzen en ûndertekening. Struktureare neffens MIAUW en breed ynsetber foar pentests, audits en befeiligingsûndersyk. De referinsjegegevens sitte yn de app sels, dus de module wurket fuortendaliks en folslein offline.',
+
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Opsjonele modules. Standert út; se bliuwe ferburgen oant jo se ynskeakelje.',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
@@ -6235,11 +6198,10 @@ const _dutchSourceAddFy = {
   'adres': 'adres',
   'postcode': 'postkoade',
   'persoonsnaam': 'persoansnamme',
-  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'Dizze presintaasje befettet ûnderdielen fan de Ynformaasjefeiligensmodule. Set de module oan om se te bewurkjen.',
+
   'Inschakelen': 'Ynskeakelje',
   'Bevestigen': 'Befêstigje',
-  'Onderbouwing van de bevestiging': 'Underbouwing fan de befêstiging',
+
   'De eigenaar staat insluiten niet toe': 'De eigner stiet ynsluten net ta',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Dizze fideo is allinnich op de boarne sels te besjen.',
@@ -6346,43 +6308,13 @@ const _dutchSourceAddFy = {
   'databaseverbinding met wachtwoord': 'databaseferbining mei wachtwurd',
   'wachtwoord in klare tekst': 'wachtwurd yn platte tekst',
   'Afbreken': 'Ofbrekke',
-  'Afgebroken. Er is niets half achtergebleven.':
-      'Ofbrutsen. Der is neat healwei achterbleaun.',
+
   'Bijwerken': 'Bywurkje',
   'Binnenhalen…': 'Ophelje…',
-  'CVE\'s': 'CVE\'s',
-  'Database ophalen': 'Databank ophelje',
-  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
-      'De CVE-list koe net ophelle wurde. Kontrolearje dyn ferbining en besykje it nochris; in healwei ophelle list is fuortsmiten.',
-  'De nieuwste uitgave opzoeken…': 'De nijste útjefte opsykje…',
-  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
-      'Dit is in grutte download: rom 500 MB ophelje, tydlik sa\'n 1,5 GB skiifromte, en ôfhinklik fan dyn ferbining en apparaat al gau tsien oant tritich minuten wurk. Dêrnei bliuwt der in yndeks fan inkele hûnderten megabytes stean. Op in ferbining dy\'t per megabyte betellet, dochst dit leaver net.',
-  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
-      'Der wie te min skiifromte. De opbou freget tydlik rom 1,5 GB.',
-  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
-      'It ophelle argyf wie net wat wy ferwachten en is wegere. Der is neat ynstallearre.',
-  'Indexeren…': 'Yndeksearje…',
-  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
-      'Lokaal beskikber — opsykjen bart offline, der giet gjin sykterm nei bûten.',
-  'Lokale CVE-database': 'Lokale CVE-databank',
-  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
-      'Mei de CVE-list op dyn eigen apparaat bliuwt it opsykjen hjir: der giet gjin sykterm mear nei in server, en nimmen kin sjen hokker lek do ûndersikest.',
-  'Uitpakken…': 'Útpakke…',
-  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
-      'Set de folsleine CVE-list op dit apparaat, sadat opsykjen offline bart en dyn sykterm nearne hinne giet. De databank komt fan CVE List V5 (it offisjele CVE-programma, fia GitHub).',
-  'Wat er lokaal beschikbaar is': 'Wat der lokaal beskikber is',
-  'Nu bijwerken': 'No bywurkje',
-  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
-      'Gegevens lokaal beskikber — it opsykjen bart op dit apparaat, der giet neat nei bûten.',
-  'Zwakheden (CWE)': 'Swakheden (CWE)',
-  'Testgevallen (WSTG)': 'Testgefallen (WSTG)',
-  'MIAUW-eisen': 'MIAUW-easken',
-  'CVSS-scoretabel': 'CVSS-skoretabel',
-  'Bevindingsjablonen': 'Befiningssjabloanen',
+
   'Zoek een instelling': 'Sykje in ynstelling',
   'Geen instelling gevonden': 'Gjin ynstelling fûn',
-  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
-      'Dyn sykterm giet nei de ynstelde CVE-mirror, en as dy neat fynt ek nei ENISA en MITRE. Wa\'t dy servers beheart, kin dêrút ôfliede nei hokker spesifyk lek ast sikest — en dus hokker lek ast ûndersikest.',
+
   'Accepteren': 'Akseptearje',
   'Accepteren + waarschuwen': 'Akseptearje + warskôgje',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
@@ -6402,8 +6334,7 @@ const _dutchSourceAddFy = {
   'burgerservicenummer (BSN)': 'boargerservicenûmer (BSN)',
   'bankrekeningnummer (IBAN)': 'bankrekkennûmer (IBAN)',
   'e-mailadres': 'e-mailadres',
-  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
-      'De TSA-hantekening wurdt net yn de app ferifiearre; allinnich de hash komt oerien.',
+
   'Extern': 'Ekstern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Fan in eksterne URL ophelle; it iepenjen hat dy server benadere.',
@@ -6440,21 +6371,7 @@ const _dutchSourceAddFy = {
   'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
       'Makket per scope-objekt in checklist (WSTG foar web/API); besteande bliuwe stean.',
   'CVE opzoeken': 'CVE opsykje',
-  'CVE opzoeken (online)': 'CVE opsykje (online)',
-  'CVE opzoeken is niet beschikbaar in de webversie.':
-      'CVE opsykje is net beskikber yn de webferzje.',
-  'CVE-mirror (basis-URL)': 'CVE-spegel (basis-URL)',
-  'Geen CVE gevonden.': 'Gjin CVE fûn.',
-  'Kon de CVE-bron niet bereiken.': 'Koe de CVE-boarne net berikke.',
-  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
-      'Tastean om online yn CVE\'s te sykjen yn de befiningseditor fia in NVD-mirror. Standert út; freget ek dyn tastimming en wurket allinnich op desktop.',
-  'Typ een (deel van een) CVE-id en zoek.':
-      'Typ (in diel fan) in CVE-id en sykje.',
-  'Typ minstens 3 tekens.': 'Typ op syn minst 3 tekens.',
-  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
-      'Set CVE opsykje (online) oan yn Ynstellings → Feiligens om online yn CVE\'s te sykjen.',
-  'Zoek CVE…': 'Sykje CVE…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'Sykje op CVE-id, bygl. 2021-44228',
+
   'Zoeken': 'Sykje',
   'Hertest': 'Werhelle test',
   'Niet hertest': 'Net op \'e nij test',
@@ -7313,9 +7230,7 @@ const _dutchSourceAddFy = {
   'Projectstart / kick-off': 'Projektstart / kick-off',
   'Voorbespreking communicatie': 'Foaroerlis kommunikaasje',
   'Projecttijdlijn': 'Projekttiidline',
-  'Informatieveiligheid: RASCI / TVB': 'Ynformaasjefeiligens: RASCI / TVB',
-  'Takenplan informatieveiligheid': 'Takenplan ynformaasjefeiligens',
-  'Certificering voortgang': 'Sertifisearring fuortgong',
+
   'Training / workshop': 'Training / workshop',
   'Rapportage': 'Rapportaazje',
   'Onderzoeksverhaal': 'Ûndersyksferhaal',
@@ -7331,12 +7246,7 @@ const _dutchSourceAddFy = {
       'Doelgroepen, kearnboadskip, kanalen en wurdfiering.',
   'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
       'Fazen, mylpealen, ôfhinklikheden en beslismominten.',
-  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
-      'Rollen, RASCI-matrix en taakôfspraken fêstlizze.',
-  'Taken, prioriteiten, eigenaren en bewijsstukken.':
-      'Taken, prioriteiten, eigners en bewiisstikken.',
-  'Voortgang per domein, controls en auditplanning.':
-      'Fuortgong per domein, controls en auditplanning.',
+
   'Leerdoelen, kernconcepten, oefening en quizvraag.':
       'Leardoelen, kearnkonsepten, oefening en quizfraach.',
   'Samenvatting, KPI-dashboard, trend en acties.':
@@ -7350,46 +7260,29 @@ const _dutchSourceAddFy = {
   'Sjabloon': 'Sjabloan',
   'Post-incident review / lessons learned':
       'Post-incident review / lessons learned',
-  'Datalek / privacy-incident beoordeling':
-      'Datalek / beoardieling privacy-ynsidint',
+
   'DPIA / privacy impact assessment': 'DPIA / privacy impact assessment',
-  'Risicoanalyse / risk register': 'Risiko-analyze / risk register',
+
   'Business continuity / DR-test': 'Business continuity / DR-test',
-  'Tabletop-oefening / crisisoefening': 'Tabletop-oefening / krisisoefening',
+
   'BOB-crisisrapportage': 'BOB-krisisrapportaazje',
   'CAB / release readiness': 'CAB / release readiness',
   'Stuurgroep / project board update': 'Stjoergroep / project board update',
-  'Auditbevindingen en opvolging': 'Auditbefiningen en opfolging',
-  'Leveranciersbeoordeling / vendor risk':
-      'Leveransiersbeoardieling / vendor risk',
+
   'Architectuurbesluit / ADR-presentatie':
       'Arsjitektuerbeslút / ADR-presintaasje',
   'Beleid uitrollen / implementatieplan': 'Belied útrolje / ymplemintaasjeplan',
   'Overdracht / handover': 'Oerdracht / handover',
   'Retrospective / teamverbetering': 'Retrospective / teamferbettering',
   'PPL Vluchtvoorbereiding': 'PPL Flechttarieding',
-  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
-      'Tiidline, ympakt, oarsaken en ferbetteraksjes nei in ynsidint.',
-  'Beoordeel gegevens, risico, meldplicht en communicatie.':
-      'Beoardielje gegevens, risiko, meldplicht en kommunikaasje.',
-  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
-      'Ferwurking, grûnslach, privacyrisiko\'s en maatregels.',
-  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
-      'Lis risiko\'s, kâns, ympakt, maatregels en eigners fêst.',
-  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
-      'Senario, wersteldoelen, testbefiningen en ferbetterpunten.',
-  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
-      'Senario, injects, besluten, waarnimmingen en evaluaasje.',
+
   'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
       'Lied in krisisteam troch byldfoarming, oardielsfoarming en beslútfoarming, mei live sitewaasjebyld, ynformaasjefragen, dilemma\'s, beslutelog en aksjelist.',
   'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
       'Wiziging, ympakt, tests, rollback, kommunikaasje en go/no-go.',
   'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
       'Fuortgong, planning, budzjet, risiko\'s en besluten frege.',
-  'Bevindingen, root cause, maatregelen, bewijs en status.':
-      'Befiningen, root cause, maatregels, bewiis en status.',
-  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
-      'Tsjinst, data, ôfhinklikheid, easken, risiko\'s en beslút.',
+
   'Context, opties, trade-offs, besluit en gevolgen.':
       'Kontekst, opsjes, trade-offs, beslút en gefolgen.',
   'Doelgroep, planning, communicatie, training en adoptie.':
