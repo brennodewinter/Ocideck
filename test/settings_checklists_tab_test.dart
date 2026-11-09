@@ -29,6 +29,7 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
+        overrides: [infoSafetyRevealProvider.overrideWithValue(true)],
         child: MaterialApp(
           home: Scaffold(
             body: Builder(
@@ -45,13 +46,6 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
-    // De module Informatieveiligheid aanzetten: sinds #648 zit dit oppervlak
-    // erachter, en met de module uit hoort het er juist níét te staan.
-    await ProviderScope.containerOf(
-      tester.element(find.text('open')),
-      listen: false,
-    ).read(infoSafetyProvider.notifier).enable();
-    await tester.pumpAndSettle();
     // Go to the Checklists tab (the nav rail scrolls, so bring it into view).
     await tester.ensureVisible(find.byIcon(Icons.checklist_outlined));
     await tester.pumpAndSettle();

@@ -531,16 +531,11 @@ void main() {
   testWidgets('een zoektreffer landt op het tabblad dat hij noemt', (
     tester,
   ) async {
-    await openSettings(tester, section: SettingsSection.general);
-    // De checklists-ingang zit sinds #648 achter de module Informatieveiligheid;
-    // zonder die aan bestaat de treffer niet. De regressie die deze test
-    // bewaakt gaat over de kóppeling treffer→tabblad, dus die blijft precies
-    // zoals hij was — alleen het baken moet er weer zijn.
-    await ProviderScope.containerOf(
-      tester.element(find.text('open')),
-      listen: false,
-    ).read(infoSafetyProvider.notifier).enable();
-    await tester.pumpAndSettle();
+    await openSettings(
+      tester,
+      section: SettingsSection.general,
+      overrides: [infoSafetyRevealProvider.overrideWithValue(true)],
+    );
 
     // Dit is de regressie. Met volgnummers sprong "sjabloon" naar
     // Git-repository, omdat de zoekindex onder het ingeschoven git-tabblad niet
@@ -561,7 +556,11 @@ void main() {
       webdav('a', 'Klant A', 'a.voorbeeld.nl'),
       webdav('b', 'Klant B', 'b.voorbeeld.nl'),
     ]);
-    await openSettings(tester, section: SettingsSection.general);
+    await openSettings(
+      tester,
+      section: SettingsSection.general,
+      overrides: [infoSafetyRevealProvider.overrideWithValue(true)],
+    );
 
     // Zonder het uitklappen staat het anker niet in de boom en komt de sprong
     // stilletjes nergens op uit: je landt op Opslag en mag zelf gaan zoeken.

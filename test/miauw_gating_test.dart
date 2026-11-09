@@ -3,11 +3,8 @@ import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 
-/// Regression guards for feedback #1: self-authoring MIAUW/security content is
-/// only offered when the "informatieveiligheid" module is on. The dialog
-/// behaviour is covered by add_slide_dialog_test / new_deck_dialog_test; these
-/// pin the invariants those gates rely on, so a new security slide type or MIAUW
-/// template can't slip through ungated.
+/// Legacy slides keep their decoding and rendering support, while the retired
+/// module, templates and data acquisition must stay unavailable.
 void main() {
   test('the security module is off (and nothing revealed) by default', () {
     const state = InfoSafetyState();
@@ -46,26 +43,8 @@ void main() {
     expect(gated, securityTypes);
   });
 
-  test('information-security templates require the module', () {
-    const expected = {
-      'rasci',
-      'securityTasks',
-      'certification',
-      'postIncidentReview',
-      'privacyIncident',
-      'dpia',
-      'riskRegister',
-      'continuityTest',
-      'tabletopExercise',
-      'auditFollowup',
-      'vendorRisk',
-      'threatModeling',
-      'miauwReport',
-    };
-    final gated = deckTemplates
-        .where((template) => template.requiresInfoSafety)
-        .map((template) => template.id)
-        .toSet();
-    expect(gated, expected);
+  test('security report templates have been removed', () {
+    expect(deckTemplates.where((t) => t.requiresInfoSafety), isEmpty);
+    expect(deckTemplateById('miauwReport'), isNull);
   });
 }

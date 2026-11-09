@@ -60,38 +60,6 @@ const referenceStandards = <ReferenceStandard>[
     probeTarget: 'OWASP/maswe',
   ),
   ReferenceStandard(
-    id: 'cwe',
-    name: 'MITRE CWE',
-    bundledVersion: cweBundledVersion,
-    url: 'https://cwe.mitre.org/',
-    bundled:
-        'De volledige lijst (id, naam, beschrijving) plus een eigen '
-        'geselecteerde kern met onze remediatie-notities.',
-    licence: 'MITRE Terms of Use',
-    // MITRE's officiële XML-release geeft versie, inhoudsdatum én het aantal
-    // zwakheden — dat laatste controleert meteen of onze bundel compleet is.
-    // Niet de REST-API: die host verbrak op 6-10-2026 verbindingen ná het
-    // HTTP-verzoek, terwijl cwec_latest.xml.zip gewoon bereikbaar bleef.
-    probe: UpstreamProbe.cweXmlZip,
-    probeTarget: 'https://cwe.mitre.org/data/xml/cwec_latest.xml.zip',
-  ),
-  ReferenceStandard(
-    id: 'miauw',
-    name: 'MIAUW',
-    bundledVersion: miauwBundledVersion,
-    url: 'https://github.com/brennodewinter/Informatiebeveiligingsonderzoek',
-    bundled: 'Het volledige EIS-schema (88 toetsbare eisen).',
-    licence: 'EUPL-1.2',
-    // Op de commitdatum van het werkboek zelf, niet op de release en niet op de
-    // repo als geheel. De methodologie tagt releases met namen ("Otis"), dus een
-    // tagvergelijking gaat niet op; de repo krijgt daarnaast commits die het
-    // schema niet raken. Wat wij bundelen is dit ene bestand, dus dat is wat de
-    // poort in de gaten houdt.
-    probe: UpstreamProbe.githubCommitDate,
-    probeTarget: 'brennodewinter/Informatiebeveiligingsonderzoek',
-    probePath: 'NL-Schema_Miauw_1_00.xlsx',
-  ),
-  ReferenceStandard(
     id: 'orphanet',
     name: 'Orphanet',
     bundledVersion: orphanetBundledVersion,
@@ -184,23 +152,6 @@ const iso9001BundledEdition = '2015';
 
 /// De ISO/IEC 42001-editie die de gebundelde Annex A-index weerspiegelt.
 const iso42001BundledEdition = '2023';
-
-/// De CWE-lijst die `assets/cwe/cwe_full.json` weerspiegelt.
-const cweBundledVersion = '5.0';
-
-/// Het MIAUW-schema dat `miauw_eis_catalog.dart` weerspiegelt. De methodologie
-/// voert geen releasenummers, dus we noteren een datum — en dat is de datum die
-/// **de bron** draagt: de laatste wijziging van het werkboek
-/// `NL-Schema_Miauw_1_00.xlsx` upstream.
-///
-/// Hier stond tot 22-07-2026 `2026-07-16`, de dag waarop wij het schema
-/// overnamen. Dat leest als hetzelfde soort feit maar is het niet, en het brak
-/// de poort: een overnamedatum ligt altijd ná de bronwijziging, dus de
-/// vergelijking "is upstream nieuwer?" kon voor MIAUW nooit waar worden. De
-/// verouderingscontrole meldde jarenlang "actueel" zonder ooit iets te kunnen
-/// zeggen. Bundel je een nieuwe snapshot, zet hier dan de commitdatum van het
-/// werkboek — niet de dag waarop je het deed.
-const miauwBundledVersion = '2024-12-06';
 
 /// De Orphanet-uitgave die `assets/privacy/health_lexicon.json` weerspiegelt.
 /// Orphanet voert geen versienummers maar datumt elke uitgave.

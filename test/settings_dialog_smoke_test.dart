@@ -2,12 +2,10 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
-import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
-import 'package:ocideck/widgets/privacy_badge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Smoke test for the settings dialog. Its tab bodies are built into an
@@ -240,58 +238,5 @@ void main() {
 
       expect(container.read(settingsProvider).languageCode, 'de');
     });
-  });
-
-  // De CVE-schakelaar zet je bloot: de zoekterm gaat naar de mirror en bij een
-  // misser ook naar ENISA en MITRE. De badge moet dat zichtbaar maken, náást de
-  // schakelaar, en niet stilletjes verdwijnen als iemand de sectie herschikt.
-  testWidgets('the CVE lookup toggle carries a privacy badge', (tester) async {
-    await tester.binding.setSurfaceSize(const Size(1500, 1100));
-    addTearDown(() => tester.binding.setSurfaceSize(null));
-
-    await tester.pumpWidget(
-      ProviderScope(
-        child: MaterialApp(
-          home: Scaffold(
-            body: Builder(
-              builder: (context) => ElevatedButton(
-                onPressed: () => SettingsDialog.show(
-                  context,
-                  initialSection: SettingsSection.security,
-                ),
-                child: const Text('open'),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('open'));
-    await tester.pumpAndSettle();
-
-    // De module Informatieveiligheid aanzetten: sinds #648 zit dit oppervlak
-    // erachter, en met de module uit hoort het er juist níét te staan.
-    await ProviderScope.containerOf(
-      tester.element(find.text('open')),
-      listen: false,
-    ).read(infoSafetyProvider.notifier).enable();
-    await tester.pumpAndSettle();
-    // Het Beveiliging-tabblad draagt er inmiddels twee: één bij de online
-    // zoekopdracht (wat je prijsgeeft) en één bij de lokale database (dat je
-    // dan niets meer prijsgeeft). Die van de online schakelaar moet de keten
-    // benoemen die de zoekterm doorstuurt.
-    final tooltips = tester
-        .widgetList<PrivacyBadge>(find.byType(PrivacyBadge))
-        .map((b) => b.tooltip)
-        .toList();
-
-    expect(tooltips, isNotEmpty);
-    expect(
-      tooltips.any((t) => t.contains('ENISA') && t.contains('MITRE')),
-      isTrue,
-      reason:
-          'de badge bij de online CVE-schakelaar noemt de doorstuurketen niet',
-    );
   });
 }

@@ -111,27 +111,6 @@ final List<DeckTemplate> deckTemplates = [
     icon: 'projectTimeline',
   ),
   DeckTemplate(
-    id: 'rasci',
-    title: 'Informatieveiligheid: RASCI / TVB',
-    description: 'Rollen, RASCI-matrix en taakafspraken vastleggen.',
-    icon: 'rasci',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'securityTasks',
-    title: 'Takenplan informatieveiligheid',
-    description: 'Taken, prioriteiten, eigenaren en bewijsstukken.',
-    icon: 'securityTasks',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'certification',
-    title: 'Certificering voortgang',
-    description: 'Voortgang per domein, controls en auditplanning.',
-    icon: 'certification',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
     id: 'training',
     title: 'Training / workshop',
     description: 'Leerdoelen, kernconcepten, oefening en quizvraag.',
@@ -142,49 +121,6 @@ final List<DeckTemplate> deckTemplates = [
     title: 'Rapportage',
     description: 'Samenvatting, KPI-dashboard, trend en acties.',
     icon: 'report',
-  ),
-  DeckTemplate(
-    id: 'postIncidentReview',
-    title: 'Post-incident review / lessons learned',
-    description:
-        'Tijdlijn, impact, oorzaken en verbeteracties na een incident.',
-    icon: 'postIncidentReview',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'privacyIncident',
-    title: 'Datalek / privacy-incident beoordeling',
-    description: 'Beoordeel gegevens, risico, meldplicht en communicatie.',
-    icon: 'privacyIncident',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'dpia',
-    title: 'DPIA / privacy impact assessment',
-    description: "Verwerking, grondslag, privacyrisico's en maatregelen.",
-    icon: 'dpia',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'riskRegister',
-    title: 'Risicoanalyse / risk register',
-    description: "Leg risico's, kans, impact, maatregelen en eigenaren vast.",
-    icon: 'riskRegister',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'continuityTest',
-    title: 'Business continuity / DR-test',
-    description: 'Scenario, hersteldoelen, testbevindingen en verbeterpunten.',
-    icon: 'continuityTest',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'tabletopExercise',
-    title: 'Tabletop-oefening / crisisoefening',
-    description: 'Scenario, injects, besluiten, waarnemingen en evaluatie.',
-    icon: 'tabletopExercise',
-    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'bobCrisis',
@@ -232,33 +168,10 @@ final List<DeckTemplate> deckTemplates = [
     icon: 'decisionMeeting',
   ),
   DeckTemplate(
-    id: 'auditFollowup',
-    title: 'Auditbevindingen en opvolging',
-    description: 'Bevindingen, root cause, maatregelen, bewijs en status.',
-    icon: 'auditFollowup',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
-    id: 'vendorRisk',
-    title: 'Leveranciersbeoordeling / vendor risk',
-    description: "Dienst, data, afhankelijkheid, eisen, risico's en besluit.",
-    icon: 'vendorRisk',
-    requiresInfoSafety: true,
-  ),
-  DeckTemplate(
     id: 'architectureDecision',
     title: 'Architectuurbesluit / ADR-presentatie',
     description: 'Context, opties, trade-offs, besluit en gevolgen.',
     icon: 'architectureDecision',
-  ),
-  DeckTemplate(
-    id: 'threatModeling',
-    title: 'Threat modeling-sessie',
-    description:
-        'Scope, datastromen, vertrouwensgrenzen, dreigingen per '
-        'STRIDE-categorie en maatregelen.',
-    icon: 'threatModeling',
-    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'policyRollout',
@@ -701,15 +614,6 @@ final List<DeckTemplate> deckTemplates = [
         'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor '
         'vereniging of VvE.',
     icon: 'membersAssembly',
-  ),
-  DeckTemplate(
-    id: 'miauwReport',
-    title: 'MIAUW-pentestrapport',
-    description:
-        'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, '
-        'managementsamenvatting, bevindingen, checklists en ondertekening.',
-    icon: 'miauwReport',
-    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'safariAssurance',

@@ -325,18 +325,6 @@ class AppSettings {
   /// derden laden. De gebruiker zet dit bewust aan in de instellingen.
   final bool allowRemoteMedia;
 
-  /// De standaard-CVE-mirror (een NVD-spiegel) voor het opzoeken van CVE's.
-  static const defaultCveApiBaseUrl = 'https://cveapi.librekat.nl';
-
-  /// Of CVE's online opgezocht mogen worden (in de bevinding-editor). Standaard
-  /// uit (fail-closed, offline-first): de gebruiker zet het bewust aan en dan
-  /// nog geldt de outbound-consent. Alleen desktop (geen web).
-  final bool allowCveLookup;
-
-  /// De basis-URL van de CVE-mirror; instelbaar zodat je een eigen spiegel kunt
-  /// gebruiken. Leeg = de standaard ([defaultCveApiBaseUrl]).
-  final String cveApiBaseUrl;
-
   /// Of de app bij het opstarten zelf mag controleren of er een nieuwere
   /// release op de forge staat (maximaal eenmaal per dag). Standaard uit:
   /// uitgaand verkeer staat uit tenzij de gebruiker het aanzet — de ping
@@ -436,8 +424,6 @@ class AppSettings {
     this.contrastMinRatio = 4.5,
     this.showOpenPreview = false,
     this.allowRemoteMedia = false,
-    this.allowCveLookup = false,
-    this.cveApiBaseUrl = defaultCveApiBaseUrl,
     this.updateChecksEnabled = false,
     this.aiSettings = const AiSettings(),
     this.libreplanSettings = const LibreplanSettings(),
@@ -560,8 +546,6 @@ class AppSettings {
     double? contrastMinRatio,
     bool? showOpenPreview,
     bool? allowRemoteMedia,
-    bool? allowCveLookup,
-    String? cveApiBaseUrl,
     bool? updateChecksEnabled,
     AiSettings? aiSettings,
     LibreplanSettings? libreplanSettings,
@@ -655,8 +639,6 @@ class AppSettings {
       contrastMinRatio: contrastMinRatio ?? this.contrastMinRatio,
       showOpenPreview: showOpenPreview ?? this.showOpenPreview,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
-      allowCveLookup: allowCveLookup ?? this.allowCveLookup,
-      cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,
       updateChecksEnabled: updateChecksEnabled ?? this.updateChecksEnabled,
       aiSettings: aiSettings ?? this.aiSettings,
       libreplanSettings: libreplanSettings ?? this.libreplanSettings,

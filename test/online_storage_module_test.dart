@@ -115,7 +115,6 @@ void main() {
 
     test('het register kent de modules, in kaartvolgorde', () {
       expect(moduleRegistry.map((m) => m.id), [
-        ModuleId.infoSafety,
         ModuleId.ai,
         ModuleId.onlineStorage,
         ModuleId.imports,

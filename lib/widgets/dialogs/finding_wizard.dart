@@ -8,9 +8,7 @@ import '../../models/slide.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/finding_group_builder.dart';
 import '../../theme/app_theme.dart';
-import 'cve_picker.dart';
 import 'cvss_builder_dialog.dart';
-import 'cwe_picker.dart';
 
 /// The guided **finding wizard** (PENTEST_MIAUW §4.1): step through title →
 /// scope object → a per-metric **CVSS 4.0 builder** (which stores a Base-only
@@ -140,29 +138,6 @@ class _FindingWizardState extends State<FindingWizard> {
     Navigator.of(context).pop(group);
   }
 
-  Future<void> _pickCwe() async {
-    final entry = await CwePicker.show(context);
-    if (entry == null) return;
-    _cwe.text = entry.label;
-    if (_description.text.trim().isEmpty) _description.text = entry.description;
-    if (_recommendation.text.trim().isEmpty) {
-      _recommendation.text = entry.recommendation;
-    }
-    setState(() {});
-  }
-
-  /// Look up a CVE online (gated) and append its id to the CVE field.
-  Future<void> _pickCve() async {
-    final id = await CvePicker.show(context);
-    if (id == null || !mounted) return;
-    final existing = _cve.text.trim();
-    final present = _reCve
-        .allMatches(existing)
-        .map((m) => m.group(0)!.toUpperCase());
-    if (present.contains(id.toUpperCase())) return;
-    setState(() => _cve.text = existing.isEmpty ? id : '$existing, $id');
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -247,23 +222,6 @@ class _FindingWizardState extends State<FindingWizard> {
   Widget _stepCweCve(AppLocalizations l10n) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: [
-          OutlinedButton.icon(
-            onPressed: _pickCwe,
-            icon: const Icon(Icons.shield_outlined, size: 16),
-            label: Text(l10n.d('Kies CWE…')),
-          ),
-          OutlinedButton.icon(
-            onPressed: _pickCve,
-            icon: const Icon(Icons.travel_explore, size: 16),
-            label: Text(l10n.d('Zoek CVE…')),
-          ),
-        ],
-      ),
-      const SizedBox(height: 4),
       _field('CWE', _cwe, hint: 'CWE-89 — Improper Neutralization of SQL'),
       _field('CVE', _cve, hint: 'CVE-2024-1234, CVE-2024-5678'),
     ],

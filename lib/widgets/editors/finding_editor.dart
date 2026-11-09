@@ -21,9 +21,7 @@ import '../../state/editor_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../utils/error_snackbar.dart';
-import '../dialogs/cve_picker.dart';
 import '../dialogs/cvss_builder_dialog.dart';
-import '../dialogs/cwe_picker.dart';
 import '../dialogs/maswe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
@@ -319,20 +317,6 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     ],
   );
 
-  /// Pick a weakness from the offline CWE catalog (§10.6): always set the CWE
-  /// field, and fill the description / recommendation **only when they are
-  /// still empty** with the entry's deterministic snippet — so a picked CWE
-  /// gives a head start without ever overwriting text the tester already wrote.
-  Future<void> _pickCwe() async {
-    final entry = await CwePicker.show(context);
-    if (entry == null) return;
-    _cwe.text = entry.label;
-    if (_description.text.trim().isEmpty) _description.text = entry.description;
-    if (_recommendation.text.trim().isEmpty) {
-      _recommendation.text = entry.recommendation;
-    }
-  }
-
   /// Kies een mobiele zwakheid uit de gebundelde MASWE-lijst.
   ///
   /// Anders dan bij CWE wordt hier géén beschrijving ingevuld: drie kwart van
@@ -343,19 +327,6 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     final w = await MaswePicker.show(context);
     if (w == null) return;
     _maswe.text = w.id;
-  }
-
-  /// Look up a CVE online (gated) and append its id to the CVE field, without
-  /// duplicating an id already present. The finding's CVSS is left untouched.
-  Future<void> _pickCve() async {
-    final id = await CvePicker.show(context);
-    if (id == null || !mounted) return;
-    final existing = _cve.text.trim();
-    final present = _reCve
-        .allMatches(existing)
-        .map((m) => m.group(0)!.toUpperCase());
-    if (present.contains(id.toUpperCase())) return;
-    _cve.text = existing.isEmpty ? id : '$existing, $id';
   }
 
   @override
@@ -387,16 +358,6 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
                 onPressed: _pickTemplate,
                 icon: const Icon(Icons.library_books_outlined, size: 16),
                 label: Text(context.l10n.d('Uit sjabloon…')),
-              ),
-              OutlinedButton.icon(
-                onPressed: _pickCwe,
-                icon: const Icon(Icons.shield_outlined, size: 16),
-                label: Text(context.l10n.d('Kies CWE…')),
-              ),
-              OutlinedButton.icon(
-                onPressed: _pickCve,
-                icon: const Icon(Icons.travel_explore, size: 16),
-                label: Text(context.l10n.d('Zoek CVE…')),
               ),
             ],
           ),

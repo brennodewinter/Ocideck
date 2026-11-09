@@ -56,24 +56,13 @@ The foundation publishes OciDeck and holds the copyright. It does not sell it
 and does not monetise it in any form. Nobody buys it, nobody subscribes, and
 there is no paid edition.
 
-It runs **two** servers, and both belong in this paragraph rather than only in a
-table further away:
-
-- `cveapi.librekat.nl`, a CVE mirror the application can talk to — off by
-  default and repointable at any other mirror. No deck ever reaches it.
-- `ocideck.librekat.nl`, a public build of the web app, free to use and
-  advertised in the README. Everything still runs in the visitor's browser and
-  no deck is uploaded, but the origin is the foundation's: it sees the requests
-  for the bundle, and it carries the same-origin fetch-proxy, so a URL a visitor
-  imports there is fetched by the foundation's server.
-
-Both are processing operations by the foundation, with the foundation as
-controller. [`docs/PRIVACY.md`](docs/PRIVACY.md#the-servers-the-publisher-runs)
-says per server what the application sends and what this repository can
-establish — and for the CVE mirror, since the operator stated it (2026-07-23),
-that the foundation keeps what the service receives only as long as it needs to
-run it (art. 5(1)(e), no fixed schedule) and judges the privacy impact minor. No
-such statement has been made for the demo host yet, and none is invented here.
+The publisher serves the public web demo at `ocideck.librekat.nl` and the
+project forge at `pawprint.vigilis.online`. The demo receives requests for the
+application bundle and handles same-origin URL imports; the optional version
+check contacts the forge. The former CVE mirror is no longer contacted by
+OciDeck: MIAUW reporting, CVE lookup and bulk downloads have been removed.
+See [the privacy documentation](docs/PRIVACY.md#the-servers-the-publisher-runs)
+for the remaining network destinations.
 
 *(Corrected 2026-07-22, #579: "does not host it as a service" read as "runs no
 servers at all", and that was the sentence a critical reader would check first.

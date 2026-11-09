@@ -21,7 +21,6 @@ String? moduleRisk(ModuleId id) => switch (id) {
     'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
   ModuleId.forms =>
     'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.',
-  ModuleId.infoSafety ||
   ModuleId.imports ||
   ModuleId.procesverbetering ||
   ModuleId.assetRights ||

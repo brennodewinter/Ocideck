@@ -80,10 +80,6 @@
 // inclusief het hercontroleren van de vals-positievencorpus.
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-
-import 'package:archive/archive.dart';
-import 'package:xml/xml.dart';
 
 /// Uitgelezen uit lib/services/reference_standards.dart, zodat dit gereedschap
 /// en de app niet uiteen kunnen lopen. Bewust een parse van de bron en geen
@@ -426,8 +422,6 @@ Future<ProbeResult> probeUpstream(Standard s) async {
     case 'orphanetDate':
       final latest = await _probeOrphanetDate(s.target);
       return ProbeResult(latest, stale: deviates(s.version, latest));
-    case 'cweXmlZip':
-      return probeCweXml(s);
     case 'successorDocument':
       return _probeSuccessor(s);
     case 'isoEdition':
@@ -541,123 +535,6 @@ String? _committerDate(dynamic commit) {
   }
 }
 
-/// MITRE's officiële CWE XML-release: versie, inhoudsdatum én het aantal
-/// zwakheden — alle drie uit `cwec_latest.xml` in de zip die [Standard.target]
-/// aanwijst.
-///
-/// Dit verving de REST-API (`cwe-api.mitre.org`): die host accepteerde op
-/// 6-10-2026 nog DNS/TCP/TLS maar verbrak verbindingen ná het HTTP-verzoek,
-/// terwijl de zip gewoon bereikbaar bleef (#2292). Elke onleesbare of
-/// onbereikbare stap eindigt in `null` — onbekend, nooit "actueel".
-Future<ProbeResult> probeCweXml(
-  Standard s, [
-  Future<Uint8List?> Function(Uri uri) fetchBytes = _getBytes,
-]) async {
-  final bytes = await fetchBytes(Uri.parse(s.target));
-  if (bytes == null) return ProbeResult(null);
-  return cweProbeResultFromZip(s, bytes);
-}
-
-/// De feiten die de poort nodig heeft, uit de inhoud van `cwec_latest.xml`.
-/// Null bij iedere beschadigde of vreemde bron — liever "onbekend" dan een
-/// oordeel op een halve catalogus.
-({String version, String date, int weaknesses})? cweFactsFromXml(
-  String xmlText,
-) {
-  final XmlElement root;
-  try {
-    root = XmlDocument.parse(xmlText).rootElement;
-  } on Object {
-    return null;
-  }
-  final version = root.getAttribute('Version');
-  final weaknesses = root
-      .findAllElements('Weakness')
-      .length; // findAllElements matcht op de lokale naam, naamruimte-vrij
-  if (version == null || version.isEmpty || weaknesses == 0) return null;
-  return (
-    version: version,
-    date: root.getAttribute('Date') ?? '',
-    weaknesses: weaknesses,
-  );
-}
-
-/// De CWE-feiten uit de release-zip: de catalogus is het enige XML-bestand
-/// erin. Een corrupte zip of een ontbrekende catalogus leveren null op —
-/// dat is "onbekend", geen "actueel".
-({String version, String date, int weaknesses})? cweFactsFromZipBytes(
-  List<int> bytes,
-) {
-  final Archive archive;
-  try {
-    archive = ZipDecoder().decodeBytes(
-      Uint8List.fromList(bytes),
-      verify: true,
-      throwOnError: true,
-    );
-  } on Object {
-    return null;
-  }
-  ArchiveFile? entry;
-  for (final f in archive.files) {
-    if (f.isFile && f.name.endsWith('.xml')) {
-      entry = f;
-      break;
-    }
-  }
-  if (entry == null) return null;
-  try {
-    return cweFactsFromXml(utf8.decode(entry.content as List<int>));
-  } on Object {
-    return null;
-  }
-}
-
-/// Het oordeel uit een al opgehaalde release-zip — los van het netwerk, zodat
-/// de toetsen hermetisch blijven (beschadigde zip, afwijkende telling…).
-ProbeResult cweProbeResultFromZip(Standard s, List<int> bytes) {
-  final facts = cweFactsFromZipBytes(bytes);
-  if (facts == null) return ProbeResult(null);
-
-  // Het aantal is een gratis integriteitscontrole: onze bundel hoort er even
-  // veel te bevatten. Wijkt dat af, dan is hij afgekapt of half geregenereerd —
-  // een ander soort fout dan veroudering, en stiller.
-  var integrity = '';
-  final bundled = _bundledCweCount();
-  if (bundled != null && facts.weaknesses != bundled) {
-    integrity =
-        'CWE: de bundel bevat $bundled zwakheden, de bron meldt er '
-        '${facts.weaknesses}. De bundel is onvolledig of half geregenereerd — '
-        'regenereer hem met tool/build_cwe_catalog.dart.';
-  }
-
-  return ProbeResult(
-    facts.version,
-    stale: facts.version != s.version,
-    integrityProblem: integrity,
-    note: facts.date.isEmpty
-        ? ''
-        : 'CWE-inhoudsdatum bij de bron: ${facts.date}.',
-  );
-}
-
-/// Telt de items in de gebundelde CWE-lijst, of null als die er niet is.
-int? _bundledCweCount() {
-  final f = File('assets/cwe/cwe_full.json');
-  if (!f.existsSync()) return null;
-  try {
-    final decoded = jsonDecode(f.readAsStringSync());
-    // The asset carries a MITRE attribution header around the rows; the older
-    // bare-array shape is still counted so this never reports a false zero.
-    final rows = decoded is Map<String, dynamic>
-        ? decoded['weaknesses'] as List
-        : decoded as List;
-    return rows.length;
-  } on Object {
-    return null;
-  }
-}
-
 /// Bronnen die geen "laatste versie" publiceren maar wel per versie een
 /// document op een vaste URL: bestaat de opvolger al?
 ///
@@ -736,25 +613,6 @@ String? githubReleaseVersionFromLocation(String? location) {
   final tag = uri.pathSegments[marker + 1];
   if (tag.isEmpty) return null;
   return tag.startsWith('v') ? tag.substring(1) : tag;
-}
-
-/// Haalt een URL op als bytes, of null bij welke fout dan ook. Apart van
-/// [_get] omdat de CWE-release een zip is — die overleeft geen tekstdecoder.
-Future<Uint8List?> _getBytes(Uri uri) async {
-  final client = HttpClient()..connectionTimeout = const Duration(seconds: 15);
-  try {
-    final request = await client.getUrl(uri);
-    request.headers.set('User-Agent', 'OciDeck-reference-data-check');
-    final response = await request.close();
-    if (response.statusCode != 200) return null;
-    final builder = BytesBuilder();
-    await response.forEach(builder.add);
-    return builder.takeBytes();
-  } on Object {
-    return null;
-  } finally {
-    client.close(force: true);
-  }
 }
 
 /// Haalt een URL op, of null bij welke fout dan ook.

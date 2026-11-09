@@ -14,23 +14,13 @@ technical mechanisms behind these guarantees, see
   (technically OciServe) is the
   explicit exception: after you enable it and sign in, it downloads assigned
   courses and reports your last slide, completion and displayed milliseconds per
-  slide to the OciServe organisation you selected. *(Corrected 2026-07-22: this
-  said "no OciDeck server", full stop.
-  That is not true — the publisher runs one, `cveapi.librekat.nl`, for CVE
-  lookups. It never sees a deck, it is off by default, and you can point the app
-  somewhere else or use the offline database instead — but "no server" was an
-  absolute claim and the exception belongs in the summary, not only in a table
-  170 lines down. Extended 2026-07-23: there is a second one,
-  `ocideck.librekat.nl`, the public web demo — a copy of the app served by the
-  publisher, where your decks still stay in your tab but the origin is not
-  yours. See [The servers the publisher runs](#the-servers-the-publisher-runs).)*
+  slide to the OciServe organisation you selected. See [The servers the publisher runs](#the-servers-the-publisher-runs).
 - **Almost everything that leaves your device is something you explicitly
   send** — by importing from a URL, saving to your own Nextcloud/git server, or
   turning on the AI assistant. Three paths are the exception, and two of them you
   do not choose in the moment: the **CORS fallback** on the web build (used
   automatically, without a separate prompt), an **embedded YouTube or Vimeo
-  video** (the service is contacted when the slide plays), the **CVE lookup**
-  if you switch it on, and the desktop **version check** if you enable it (off
+  video** (the service is contacted when the slide plays), and the desktop **version check** if you enable it (off
   by default; a manual check always works). The table below names every
   destination the app can reach.
   *(Corrected 2026-07-22: this bullet said "the only data … is data you
@@ -319,8 +309,6 @@ against accessing internal/private network addresses.
 | **eLearning portfolio import** | The public verification URL you paste is fetched **without** any OciServe credential — the wallet host sees only that URL. Only the credentials you tick are then submitted to OciServe as evidence | The wallet/verification host you point at, and your configured OciServe server for the ones you share |
 | **eLearning invitation (OciServe)** | The invitation number and one-time code, the display name you enter, and — during registration — the password you choose (never stored or logged by OciDeck) | Your configured OciServe server |
 | **eLearning profile photo and themes (OciServe)** | The profile image you upload, and — when you publish a style profile to your organisation — its theme definition | Your configured OciServe server and selected organisation |
-| **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
-| **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
 | **Transcription speech model** (you press *Binnenhalen/Download* in the Transcriptie module) | One GET per model, at a revision pinned in the build; the file's size and SHA-256 are fixed beforehand and verified after the download — nothing is uploaded | `huggingface.co`, then the CDN host it redirects to |
 | **Transcription via an ASR server** (only with a configured server profile — off by default — and a per-task confirmation naming host and file) | The audio file you confirmed (one `POST /inference` multipart upload, whisper-server protocol); on HTTPS endpoints an optional API key travels in the `Authorization` header only. A connectivity probe you can run first sends no audio. What the server keeps or deletes is that server's policy, not an OciDeck guarantee | The server you configured: a loopback address, a LAN host you explicitly trusted, or an external HTTPS endpoint you confirmed |
 | **Live transcription via an ASR server** (only with the session-consent checkbox that names the receiving host, and only offered after a successful protocol probe) | The running recording's audio chunks, streamed over the live endpoint's WebSocket (`vosk-ws-1` protocol) for as long as you record; ticking the box is consent for that one session, never a standing permission. The protocol probe sends no audio. A dropped connection loses the provisional text only — nothing reconnects or re-sends by itself. A browser WebSocket cannot carry the API-key header, so a key-protected live server is honestly unreachable there instead of silently unauthenticated | The live endpoint on the same configured server profile |
@@ -332,7 +320,7 @@ against accessing internal/private network addresses.
 | **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |
 
 The storage, AI and eLearning/OciServe rows go to servers **you or your organisation**
-configured — not to OciDeck. The CVE and embedded-media rows are exceptions,
+configured — not to OciDeck. The embedded-media rows are exceptions,
 and they are listed because
 naming them is the only honest way to keep the sentence above true:
 
@@ -343,10 +331,6 @@ naming them is the only honest way to keep the sentence above true:
   and it is used automatically, without a separate prompt. On desktop the
   fallback never runs. If you host the web build yourself, §4 of
   [HOSTING.md](HOSTING.md) covers deploying (or deliberately not deploying) it.
-- The **CVE lookup** is off by default and desktop-only, and the mirror address
-  is a setting you can repoint at your own mirror. The ENISA and MITRE
-  fallbacks are not settings; they are compiled in. This is the one destination
-  in the table that belongs to the publisher, so it gets its own section below.
 - **YouTube and Vimeo** load their player from their own service, which is
   inherent to embedding a video hosted there. Remote media is off by default
   (*Settings → Security → allow remote media*). For YouTube the player is a
@@ -358,90 +342,11 @@ naming them is the only honest way to keep the sentence above true:
 
 ### The servers the publisher runs
 
-Everything above goes to a service you chose, or to a video platform you
-embedded. Three destinations are different, and all are operated by **Stichting
-LibreKAT**, the same foundation that publishes OciDeck: `cveapi.librekat.nl`,
-the default mirror for CVE lookups; `ocideck.librekat.nl`, the public web
-demo; and `pawprint.vigilis.online`, the project's forge, which the optional
-version check contacts (and which also serves the releases, their notes and
-their SBOM). The first you reach from your own copy of the app; the second
-*is* a copy of the app, served by the publisher; the third sees at most one
-GET a day, only if you switched the check on — and it is the same host the
-app itself came from.
-
-#### `cveapi.librekat.nl` — the CVE mirror
-
-**Why it deserves this much text.** What you look up is not neutral. Someone
-searching for a specific vulnerability is usually working on a specific system,
-often for a specific client, and often before the finding is public. The code
-says so where the feature lives (`cve_picker.dart`): *wélk lek je opzoekt is
-het gevoeligste dat je prijsgeeft*. A document that lists this in a table row
-and moves on would be technically complete and practically useless.
-
-**What the app sends.** One `GET` per lookup:
-
-```
-GET https://cveapi.librekat.nl/api/search?q=<your search term>&limit=25
-GET https://cveapi.librekat.nl/api/cve/<CVE-id>          (exact-id lookups)
-```
-
-No account, no identifier, no deck content, no custom headers. But note where
-the search term sits: **in the URL**, not in a request body. A URL query string
-is the part every ordinary web server writes to its access log by default, next
-to your IP address and a timestamp. Assume it is logged unless the operator says
-otherwise.
-
-**Who is responsible.** For this service, Stichting LibreKAT is the controller
-under the GDPR — not you, and not "nobody". Questions, access or erasure
-requests about it go to the address in [SECURITY.md](../SECURITY.md); for
-everything else in OciDeck there is no controller because there is no
-processing (see *Your rights and this tool*).
-
-**What the operator states.** Which fields that server records, and for how
-long, are properties of a deployment and not of the code, so this repository
-cannot *prove* them. What it can do is record what the operator has said.
-Stichting LibreKAT, as the operator, states two things (2026-07-23): it judges
-the privacy impact of a CVE lookup to be **minor**, and it keeps what the
-service receives **only for as long as it is needed to run the service** — the
-storage-limitation principle of art. 5(1)(e), not a fixed schedule and not
-indefinitely. There is no separate published retention table beyond that
-statement; if a formal one is issued later it belongs on the foundation's site,
-not in this repository. Two things do not depend on the operator, and this
-document *can* prove them: the search term travels in the URL (logged by default
-unless suppressed), and the foundation is the controller for the request. Treat
-a term you send as disclosed, decide accordingly, and if the "minor" judgement
-is not yours to make for a given engagement, use one of the routes below.
-
-**How to avoid it entirely**, in increasing order of effort:
-
-1. Leave the CVE lookup **off** — it is off by default, and nothing contacts
-   this server until you switch it on and accept the outbound prompt.
-2. Use the **local CVE database** instead (*Settings → Security → Local CVE database*). It downloads
-   a bulk release once, from GitHub, and then searches offline. After that
-   download, no lookup leaves your machine.
-3. Point the mirror setting at **your own** instance, or at any NVD mirror you
-   trust. The address is a plain setting.
-
-The ENISA EU Vulnerability Database and MITRE fallbacks are a separate matter:
-they are compiled in rather than configurable, and they are consulted only when
-the mirror returns nothing. They are not run by the publisher.
-
-*Added 2026-07-22 (#579). The summary at the top of this document said "no
-OciDeck server" while this one existed and was described 170 lines further
-down, and `COMPLIANCE.md` said the foundation does not host anything as a
-service. Both were corrected in the same commit. A privacy document is the
-first thing a critical reader checks, and it was wrong in the sentence most
-people read.*
-
-*Corrected 2026-07-21: this table previously listed only the five rows you
-choose yourself, and the sentence "Nothing here goes to OciDeck" was true of
-that shortened list rather than of the code.*
-
-*Corrected 2026-07-22: the YouTube row named `youtube.com`, and it was right to
-— the embed loaded its player script from there, so `YT.Player` put the player
-on that origin too. The nocookie form was used everywhere else in the code. The
-embed now loads no script at all; the row was split so the two services are not
-described by one sentence that fits neither.*
+The publisher operates the public web demo at `ocideck.librekat.nl` and the
+project forge at `pawprint.vigilis.online`. The optional version check contacts
+the forge. MIAUW reporting and all CVE lookup/download services have been removed;
+OciDeck no longer contacts a CVE mirror, ENISA or MITRE. On upgrade it removes
+its downloaded CVE cache without changing presentation files or sidecars.
 
 #### `ocideck.librekat.nl` — the public web demo
 
@@ -467,7 +372,7 @@ publisher's server" stops being true the moment you import one there. On a
 desktop build, or on a copy of the web build you host yourself, that path does
 not exist.
 
-**What the operator states.** Nothing yet. For the CVE mirror the operator
+**What the operator states.** Nothing yet. For the former CVE mirror the operator
 stated retention and a privacy judgement on 2026-07-23; for this host no such
 statement has been made, and this repository does not invent one. What it can
 establish is above: static serving with the access log that implies, plus the
@@ -749,44 +654,11 @@ unconditional right to every employee's identity. The organisation must make
 that concrete balancing decision when identity is necessary to exercise the
 learner's rights.
 
-**Two exceptions, and both are the publisher's.** If you switched on the CVE
-lookup and left it pointed at the default mirror, then `cveapi.librekat.nl`
-received your search terms. And if you used the public demo at
-`ocideck.librekat.nl`, that origin received the ordinary web-server record of
-your visit — plus, if you imported a deck from a URL there, the URL itself and
-the bytes behind it. For both, Stichting LibreKAT is controller for whatever
-those servers kept, and rights of access and erasure under articles 15 and 17
-apply there, to the foundation — see
-[The servers the publisher runs](#the-servers-the-publisher-runs), including
-what that section can and cannot tell you. *(Added 2026-07-22: this paragraph
-said there was nothing to request or erase, full stop, which was true of your
-decks and untrue of that one service. Extended 2026-07-23, #589, for the demo
-host.)*
+**Public demo.** If you use `ocideck.librekat.nl`, that origin receives the
+ordinary web-server record of your visit and, for URL imports, the imported URL
+and bytes. Stichting LibreKAT is controller for those server records; access and
+erasure requests go to the foundation. See [The servers the publisher runs](#the-servers-the-publisher-runs).
 
-Because OciDeck is open source (EUPL-1.2), you can verify every claim in this
-document against the code.
-
-### Who is controller, and who is not
-
-Most of this document is about *your* data. But a deck routinely holds data
-about **other people**: a pentest report names the employee who clicked, a
-screenshot carries a colleague's mailbox, a finding carries the account it was
-found on. Under the GDPR someone answers for that data, and it is worth writing
-down who — because the promise this tool makes rests on that division, and it
-has so far been stated nowhere.
-
-- **You are the controller for what is in your deck — unless your assignment
-  makes you something else.** Normally you chose to put those people's data in
-  it, for your purpose, and you decide who receives it. But if you test on a
-  client's instructions, and it was the client who decided this data would be
-  processed at all, you may be that client's **processor** instead, or the two
-  of you joint controllers under art. 26. Which of the three it is follows from
-  the assignment, not from this tool. It matters here for one concrete reason:
-  a processor may not engage another processor without the controller's prior
-  authorisation (art. 28(2)). If that is your position, the third bullet is
-  something you clear with your client *before* you switch it on — arranging it
-  yourself is not enough. And if you use OciDeck as an employee, "you" in this
-  section is your employer (art. 29).
 - **Stichting LibreKAT is not a processor for it, and offers no processing
   agreement.** Not as a refusal, but because there is nothing to cover: the
   publisher receives no deck. OciDeck runs on your device, and every storage
@@ -794,10 +666,8 @@ has so far been stated nowhere.
   procurement asks you for an art. 28 agreement with the publisher of your
   editing tool, the accurate answer is that no processing takes place that such
   an agreement could describe — the same answer you would give for the text
-  editor you write in. Two paths sit outside this bullet and are named below:
-  the CVE lookup reaches a server the publisher runs, and on the **public demo**
-  the publisher is also the one serving the app and proxying a URL import. Both
-  make the foundation a controller in its own right rather than your processor
+  editor you write in. On the **public demo**, the publisher serves the app and proxies URL imports.
+  This makes the foundation a controller in its own right rather than your processor
   — but if you work on a client's deck, note that the demo is the publisher's
   computer, not yours. That is a decision to make before you open the deck
   there, not after.
@@ -810,34 +680,6 @@ has so far been stated nowhere.
   under Chapter V, such as standard contractual clauses or an adequacy decision.
   Each of these is off until you configure it, and each is named in the table
   above precisely so you can see what you have to arrange before you turn it on.
-
-One thing does not fit this division, and it should not be smoothed over: the
-**CVE lookup**. Its first stop is a mirror the publisher runs itself
-(`cveapi.librekat.nl`), so a search term you send there is a search term the
-publisher receives — and for that one path Stichting LibreKAT is not your
-processor but a controller in its own right, for the request it receives. The
-operator keeps what that server receives only for as long as it needs to run the
-service (art. 5(1)(e); no fixed schedule is published), and judges the privacy
-impact minor — see [The servers the publisher runs](#the-servers-the-publisher-runs)
-for the full statement. Either way, treat a search term you send there as
-disclosed.
-
-Two limits on the mitigations, because the setting reads more reassuring than it
-is. **Emptying the mirror field does not point the lookup at nothing** — it
-restores the publisher's address. The switch that sends nothing is the CVE
-lookup itself, and it is off until you turn it on. **Repointing at your own
-mirror does not close the path either:** when a lookup yields nothing, ENISA's
-EU Vulnerability Database and MITRE are contacted next, and those two addresses
-are compiled in rather than configurable. The one arrangement in which a search
-term never leaves your machine is the **local CVE database**: with it installed,
-the online cascade is not used at all — not even when the local search finds
-nothing.
-
-*Added 2026-07-22. This section did not exist. The document treated the reader
-solely as a data subject — "your files are yours" — and never as the controller
-they are the moment a deck holds someone else's name. For a tool that is
-marketed for penetration-test reports, that was the most predictable gap a
-reader with GDPR knowledge would find.*
 
 ### Embedded use (postMessage handover)
 

@@ -69,33 +69,6 @@ void main() {
       );
     });
 
-    test('de CWE-probe wijst naar de officiële XML-release', () {
-      // De REST-API (cwe-api.mitre.org) verbrak op 6-10-2026 verbindingen ná
-      // het HTTP-verzoek; cwec_latest.xml.zip is de officiële releasebron en
-      // bleef bereikbaar (#2292).
-      final cwe = referenceStandardById('cwe')!;
-      expect(cwe.probe, UpstreamProbe.cweXmlZip);
-      expect(
-        cwe.probeTarget,
-        'https://cwe.mitre.org/data/xml/cwec_latest.xml.zip',
-      );
-    });
-
-    test('de MIAUW-versie is een datum, want de probe rekent ermee', () {
-      // githubCommitDate vergelijkt datums; een versienummer hier zou die
-      // vergelijking stil onzinnig maken. En de datum moet die van de **bron**
-      // zijn, niet de dag waarop wij het schema overnamen — dat laatste stond
-      // er tot 22-07-2026 en maakte de poort onmogelijk rood.
-      final miauw = referenceStandardById('miauw')!;
-      expect(miauw.probe, UpstreamProbe.githubCommitDate);
-      expect(miauw.bundledVersion, matches(r'^\d{4}-\d{2}-\d{2}$'));
-      expect(
-        miauw.probePath,
-        isNotEmpty,
-        reason: 'de bundel komt uit één werkboek, niet uit de hele repo',
-      );
-    });
-
     test('een probePath hoort bij een bron die per bestand te volgen is', () {
       // Een pad zonder commitdatum-probe doet niets; dat is een stille no-op en
       // precies het soort halve bedrading dat deze poort moet uitsluiten.

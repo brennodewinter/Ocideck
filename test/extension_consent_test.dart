@@ -103,7 +103,6 @@ void main() {
   });
 
   test('offline reference and authoring modules need no outbound consent', () {
-    expect(moduleRisk(ModuleId.infoSafety), isNull);
     expect(moduleRisk(ModuleId.elearning), isNull);
     for (final id in [
       ModuleId.ai,

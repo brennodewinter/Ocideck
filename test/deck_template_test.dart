@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
-import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
@@ -14,16 +13,9 @@ import 'package:ocideck/services/document_integrity.dart';
 
 /// De vijftien invulbare werkdeck-sjablonen voor terugkerende werkprocessen.
 const werkdeckIds = [
-  'postIncidentReview',
-  'privacyIncident',
-  'dpia',
-  'riskRegister',
-  'continuityTest',
-  'tabletopExercise',
   'releaseReadiness',
   'steeringUpdate',
-  'auditFollowup',
-  'vendorRisk',
+
   'safariAssurance',
   'architectureDecision',
   'policyRollout',
@@ -89,7 +81,7 @@ void main() {
         containsAll([
           // De oorspronkelijke veertien.
           'empty', 'briefing', 'status', 'kickoff', 'communication',
-          'projectTimeline', 'rasci', 'securityTasks', 'certification',
+          'projectTimeline',
           'training', 'report', 'research', 'technical', 'quiz',
           // De veertien werkdecks plus de twee sessiedecks.
           ...werkdeckIds,
@@ -113,7 +105,6 @@ void main() {
 
     test('module visibility follows the template requirement', () {
       final ordinary = deckTemplateById('briefing')!;
-      final security = deckTemplateById('miauwReport')!;
 
       bool visible(
         DeckTemplate template, {
@@ -126,8 +117,6 @@ void main() {
       );
 
       expect(visible(ordinary), isTrue);
-      expect(visible(security), isFalse);
-      expect(visible(security, sec: true), isTrue);
       for (final id in improvementTemplateIds) {
         final improvement = deckTemplateById(id)!;
         expect(visible(improvement), isFalse, reason: id);
@@ -351,23 +340,6 @@ void main() {
       expect(types, contains(SlideType.table));
     });
 
-    test('RASCI template is table-heavy', () {
-      final types = typesOf('rasci');
-      expect(types.where((t) => t == SlideType.table).length, 4);
-    });
-
-    test('security task plan tracks tasks in tables', () {
-      final types = typesOf('securityTasks');
-      expect(types.where((t) => t == SlideType.table).length, 3);
-    });
-
-    test('certification progress has a chart, controls and audit timeline', () {
-      final types = typesOf('certification');
-      expect(types, contains(SlideType.chart));
-      expect(types, contains(SlideType.table));
-      expect(types, contains(SlideType.timeline));
-    });
-
     test('training has a case study, a quiz question and free markdown', () {
       final types = typesOf('training');
       expect(types, contains(SlideType.question));
@@ -494,13 +466,8 @@ void main() {
 
     test('central action and go/no-go lists show checklist progress', () {
       const withProgressList = [
-        'privacyIncident',
-        'dpia',
-        'riskRegister',
-        'continuityTest',
-        'tabletopExercise',
         'releaseReadiness',
-        'vendorRisk',
+
         'handover',
         'retrospective',
       ];
@@ -774,62 +741,6 @@ void main() {
                   s.listStyle == ListStyle.checklist && s.showChecklistProgress,
             );
         expect(progressLists.length, greaterThanOrEqualTo(3), reason: language);
-      }
-    });
-  });
-
-  group('MIAUW-pentestrapport', () {
-    test('is registered as a module-only template', () {
-      final template = deckTemplateById('miauwReport')!;
-      expect(template.requiresInfoSafety, isTrue);
-      expect(template.title, 'MIAUW-pentestrapport');
-      expect(slidesOf('miauwReport').first.type, SlideType.title);
-    });
-
-    test('has the four MIAUW report parts as section dividers', () {
-      final sections = slidesOf(
-        'miauwReport',
-      ).where((s) => s.type == SlideType.section).map((s) => s.title).toList();
-      expect(sections, [
-        '1. Algemeen',
-        '2. Plan van aanpak',
-        '3. Executie',
-        '4. Rapportage',
-      ]);
-    });
-
-    test('scaffolds every module-only slide type in both languages', () {
-      for (final language in contentLanguages) {
-        final types = slidesOf(
-          'miauwReport',
-          language: language,
-        ).map((s) => s.type).toSet();
-        expect(
-          types,
-          containsAll([
-            SlideType.signOff,
-            SlideType.scopeMatrix,
-            SlideType.findingsSummary,
-            SlideType.finding,
-            SlideType.checklist,
-          ]),
-          reason: language,
-        );
-      }
-    });
-
-    test('the example finding is a numberable header with a full spec', () {
-      for (final language in contentLanguages) {
-        final finding = slidesOf(
-          'miauwReport',
-          language: language,
-        ).singleWhere((s) => s.type == SlideType.finding);
-        // Recognised as a finding by the numbering/list services.
-        expect(finding.findingRole, FindingRole.header, reason: language);
-        final spec = FindingSpec.parse(finding.customMarkdown);
-        expect(spec.heading, contains('F-01'), reason: language);
-        expect(spec.description, isNotEmpty, reason: language);
-        expect(spec.recommendation, isNotEmpty, reason: language);
       }
     });
   });
@@ -1273,7 +1184,7 @@ void main() {
       'budgetPresentation',
       'decisionMeeting',
       'sprintReview',
-      'threatModeling',
+
       'conversationPrep',
       'crucialConversation',
       'familyCareConversation',
@@ -1290,10 +1201,10 @@ void main() {
       'passengerBriefing',
     ];
 
-    test('all nineteen expansion templates are registered', () {
+    test('all eighteen expansion templates are registered', () {
       final ids = deckTemplates.map((t) => t.id).toSet();
       expect(ids, containsAll(uitbreidingIds));
-      expect(uitbreidingIds.toSet(), hasLength(19));
+      expect(uitbreidingIds.toSet(), hasLength(18));
     });
 
     test('every expansion template is substantial in both languages', () {

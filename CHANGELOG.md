@@ -8,6 +8,10 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Removed
+
+- **MIAUW-rapportage uit OciDeck (#2845).** De module Informatieveiligheid, de bijbehorende rapportdocumenten, compliance-analyse, CVE-opzoekingen, bulkdownloads en CWE-dataset zijn verwijderd. Eerder gedownloade CVE-data en instellingen worden opgeruimd. Bestaande gebruikerspresentaties en sidecars blijven leesbaar.
+
 ### Added
 
 - **Ondertitels bij videodia's (WebVTT/SRT).** Een lokaal `.vtt`- of

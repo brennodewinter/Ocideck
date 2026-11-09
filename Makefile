@@ -710,7 +710,7 @@ check-owasp-catalog-sources:
 
 refresh-catalogs:
 	@echo "== OciDeck: refresh bundled reference catalogues =="
-	@echo "Sources: OWASP WSTG + MASTG + MASWE (CWE is manual, see below)."
+	@echo "Sources: OWASP WSTG + MASTG + MASWE."
 	@echo "This rewrites the generated files under lib/services/ AND the version"
 	@echo "        each one records — in the catalogue itself and in"
 	@echo "        docs/LICENSE_COMPLIANCE.md. Read the diff before committing."
@@ -719,8 +719,6 @@ refresh-catalogs:
 	@echo "        'make refresh-catalogs WSTG_VERSION=5.0' if you need to."
 	scripts/refresh_catalogs.sh
 	@echo ""
-	@echo "CWE is not refreshed here: its source is a ~30 MB zip behind a dated"
-	@echo "URL. Run tool/build_cwe_catalog.dart by hand (see its header)."
 
 # Machine-translate the bundled user docs into every app language (#1181). The
 # app resolves docs/NAME.<lang>.md automatically; this writes those variants.

@@ -41,10 +41,6 @@ import '../../services/recovery_service.dart';
 import '../../utils/net_guard.dart';
 import '../../utils/sanitize_svg.dart';
 import 'certificate_trust_dialog.dart';
-import '../../models/local_cve_status.dart';
-import '../../services/cve/local_cve_database.dart';
-import '../../services/info_safety/info_safety_reference_inventory.dart';
-import '../../state/local_cve_provider.dart';
 import '../../services/slide_quality_analyzer.dart';
 import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
@@ -70,7 +66,6 @@ import '../connection_status.dart';
 import '../editors/advanced_section.dart';
 import '../document_page_chrome.dart';
 import '../language_flag.dart';
-import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/document_reader_screen.dart';
 import '../reader/document_markdown_view.dart';
@@ -134,7 +129,6 @@ part 'parts/settings_dialog_about.dart';
 part 'parts/settings_dialog_standards.dart';
 part 'parts/settings_dialog_search.dart';
 part 'parts/settings_dialog_search_index.dart';
-part 'parts/settings_dialog_cve_local.dart';
 
 class SettingsDialog extends ConsumerStatefulWidget {
   /// Het tabblad dat bij openen actief is.
@@ -258,12 +252,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   String? _highlightedSection;
   final _searchController = TextEditingController();
   String _searchQuery = '';
-
-  /// De telling van de referentiecatalogi (Uitbreidingen). Eén keer starten en
-  /// vasthouden: de volledige CWE-lijst komt uit een asset, en een FutureBuilder
-  /// die elke build opnieuw begint zou hem elke build opnieuw willen laden.
-  late final Future<List<ReferenceCatalog>> _referenceInventory =
-      InfoSafetyReferenceInventory.load();
 
   /// Het tabblad dat de zijbalk op dit moment toont.
   late SettingsSection _selectedTab;
