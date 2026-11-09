@@ -904,6 +904,21 @@ The generated form for each type is shown below. Image captions (§6) are writte
 where applicable, as `<div class="image-caption">...</div>` directly below the
 image.
 
+**Alt text.** OciDeck writes an image's accessibility description as
+`<!-- ocideck_image_alt: … -->` (§8) and leaves the brackets empty (`![](…)`,
+`![bg …](…)`). It also **reads the Marp form**: the words inside `![…]` that
+Marp does not take as an instruction become the alt text when no
+`ocideck_image_alt` comment is present. Not alt text are sizes (`w:`, `h:`,
+`width:`, `height:`), filters (`blur`, `sepia`, `opacity:.45`, …) and, on a
+background, `bg` and its placement (`left`, `right`, `left:40%`, `contain`,
+`60%`, …). So `![bg left:40% sepia A cat on a roof](cat.png)` carries the alt
+text `A cat on a roof`. This holds for every type with an image: title and
+section background, image, two images (the right image's alt goes to
+`ocideck_image_alt2`), bullets with image (the `split-image` div), quote and
+question. When both are present the comment wins. On save the alt moves into the
+comment; a Marp keyword OciDeck does not type (`vertical`, `cover`) still keeps
+the whole block verbatim (§9).
+
 **Title** (`title`)
 ```markdown
 ![bg 60% opacity:.45](images/background.png)   <!-- optional background -->
@@ -3300,7 +3315,7 @@ are listed below in the same order the serializer writes them.)*
 | `<!-- ocideck_bullet_marker: dot\|paw\|custom_svg -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). `custom_svg` uses the SVG stored in the theme. |
 | `<!-- ocideck_image_focus: x,y -->` | Image crop focal point (0..1 per axis, `0.5,0.5` = centre) for the slide's image. Decides which part stays in view when the picture is cropped (fill/zoom, or a fixed image panel). Written only when not centred. |
 | `<!-- ocideck_image_focus2: x,y -->` | Same, for the **second** image of a two-images slide. Written only when not centred. |
-| `<!-- ocideck_image_alt: text -->` | Per-usage WCAG alt-text (accessibility description) for the slide's image. Preferred over the visible caption as the screen-reader label. Written only when set; `-->` inside is escaped like presenter notes. |
+| `<!-- ocideck_image_alt: text -->` | Per-usage WCAG alt-text (accessibility description) for the slide's image. Preferred over the visible caption as the screen-reader label. Written only when set; `-->` inside is escaped like presenter notes. Absent, the alt text from Marp's `![alt](path)` is read instead; present, the comment wins (§5). |
 | `<!-- ocideck_image_alt2: text -->` | Same, for the **second** image of a two-images slide. |
 | `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Finding-group link: ties a header card to its detail/evidence slides (§5). Written on any slide with a non-empty finding id. |
 | `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text), and any PDF/PPTX/HTML export declares it in its document properties, its filename, and — in HTML — a banner (§11). Written only when non-empty; AI drafting sets it and clears it on review. |
