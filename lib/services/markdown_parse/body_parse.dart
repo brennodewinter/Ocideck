@@ -15,6 +15,11 @@ class BodyParse {
   String imagePath2 = '';
   String imageCaption = '';
   String imageCaption2 = '';
+
+  /// De alt-tekst uit `![alt](pad)` — de Marp-vorm. Het
+  /// `ocideck_image_alt`-commentaar wint als het er óók staat.
+  String imageAlt = '';
+  String imageAlt2 = '';
   int imageSize = 0;
   // Title-column side detection (#1405).
   bool sawBgLeft = false;

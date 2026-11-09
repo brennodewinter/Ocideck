@@ -12,6 +12,35 @@ final _imageFilter = RegExp(
 );
 final _contain = RegExp(r'\b(?:fit|contain)\b', caseSensitive: false);
 
+/// Eén woord in `![…]` dat Marp als opdracht leest, niet als alt-tekst: een
+/// maat (`w:`/`h:`) of een filter, en bij een achtergrond ook de plaatsing.
+final _marpSizeOrFilter = RegExp(
+  r'^(?:(?:w|h|width|height):\S+|(?:blur|brightness|contrast|drop-shadow|grayscale|hue-rotate|invert|opacity|saturate|sepia)(?::\S+)?)$',
+  caseSensitive: false,
+);
+final _marpBgKeyword = RegExp(
+  r'^(?:bg|left|right|vertical|contain|cover|fit|auto|\d+(?:\.\d+)?%|(?:left|right):\S+)$',
+  caseSensitive: false,
+);
+final _whitespace = RegExp(r'\s+');
+
+bool _isMarpImageKeyword(String word, {required bool background}) =>
+    _marpSizeOrFilter.hasMatch(word) ||
+    (background && _marpBgKeyword.hasMatch(word));
+
+/// De alt-tekst tussen de haken van een Marp-afbeelding (`![…](pad)`): de
+/// woorden die Marp níet als maat, filter of achtergrondplaatsing leest
+/// (FILE_FORMAT §5). `![bg left:40% sepia Kat op een dak]` → `Kat op een dak`.
+String marpImageAlt(String bracket) {
+  final words = bracket.trim().split(_whitespace);
+  final background = words.first.toLowerCase() == 'bg';
+  return words
+      .where(
+        (w) => w.isNotEmpty && !_isMarpImageKeyword(w, background: background),
+      )
+      .join(' ');
+}
+
 /// Whether typed serialization would move or rewrite authored Marpit source.
 bool requiresWholeMarpBlockPreservation(String block) {
   final backgrounds = block
@@ -143,7 +172,12 @@ bool _hasOnlyTypedBackgroundOptions(
       .replaceAll(RegExp(r'\b(?:left|right):\d+%'), '')
       .replaceAll(RegExp(r'\b\d+%'), '')
       .trim();
-  return options.isEmpty;
+  // Wat overblijft mag alleen alt-tekst zijn; die tilt de parser in
+  // `imageAltText`. Een Marp-sleutelwoord dat OciDeck niet typeert (`vertical`,
+  // `cover`, een filter op de tweede afbeelding) bewaart het blok letterlijk.
+  return options
+      .split(_whitespace)
+      .every((w) => w.isEmpty || !_isMarpImageKeyword(w, background: true));
 }
 
 // De uitzonderingslijst die hier stond (`advance:`, `tlp:`, `ocideck_`, `_`)

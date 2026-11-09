@@ -18,6 +18,8 @@ extension _MarkdownParseBody on MarkdownService {
     String imagePath2,
     String imageCaption,
     String imageCaption2,
+    String imageAlt,
+    String imageAlt2,
     int imageSize,
     bool sawBgLeft,
     bool sawBgRight,
@@ -84,6 +86,8 @@ extension _MarkdownParseBody on MarkdownService {
       imagePath2: b.imagePath2,
       imageCaption: b.imageCaption,
       imageCaption2: b.imageCaption2,
+      imageAlt: b.imageAlt,
+      imageAlt2: b.imageAlt2,
       imageSize: b.imageSize,
       sawBgLeft: b.sawBgLeft,
       sawBgRight: b.sawBgRight,
@@ -153,6 +157,7 @@ extension _MarkdownParseBody on MarkdownService {
       final m = _reImageMd.firstMatch(t);
       if (m != null && b.imagePath.isEmpty) {
         b.imagePath = m.group(1) ?? '';
+        b.imageAlt = _imageAlt(t);
       }
     } else if (t.startsWith('<audio')) {
       final audio = _parseAudioAttrs(t);
@@ -237,6 +242,7 @@ extension _MarkdownParseBody on MarkdownService {
         if (side == 'left') {
           b.sawBgLeft = true;
           b.imagePath = m.group(1) ?? '';
+          b.imageAlt = _imageAlt(t);
           final wMatch = _reBgSideWidth.firstMatch(t);
           if (wMatch != null) {
             b.bgLeftWidth = int.tryParse(wMatch.group(1)!) ?? 0;
@@ -244,14 +250,17 @@ extension _MarkdownParseBody on MarkdownService {
         } else if (side == 'right') {
           b.sawBgRight = true;
           b.imagePath2 = m.group(1) ?? '';
+          b.imageAlt2 = _imageAlt(t);
           final wMatch = _reBgSideWidth.firstMatch(t);
           if (wMatch != null) {
             b.bgRightWidth = int.tryParse(wMatch.group(1)!) ?? 0;
           }
         } else if (b.imagePath.isEmpty) {
           b.imagePath = m.group(1) ?? '';
+          b.imageAlt = _imageAlt(t);
         } else {
           b.imagePath2 = m.group(1) ?? ''; // tweede afbeelding
+          b.imageAlt2 = _imageAlt(t);
         }
       }
       // Parse size: ![bg 50%](...) or ![bg left:42%](...)
@@ -267,8 +276,10 @@ extension _MarkdownParseBody on MarkdownService {
       if (m != null) {
         if (b.imagePath.isEmpty) {
           b.imagePath = m.group(1) ?? '';
+          b.imageAlt = _imageAlt(t);
         } else {
           b.imagePath2 = m.group(1) ?? '';
+          b.imageAlt2 = _imageAlt(t);
         }
       }
     } else if (t.startsWith('<div class="image-caption">')) {

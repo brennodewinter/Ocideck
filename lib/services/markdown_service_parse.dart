@@ -14,6 +14,11 @@ part of 'markdown_service.dart';
 // slide-type inference, recompiling the same patterns thousands of times).
 final _reWhitespace = RegExp(r'\s+');
 final _reImageMd = RegExp(r'!\[[^\]]*\]\(([^)]+)\)');
+final _reImageBracket = RegExp(r'!\[([^\]]*)\]\(');
+
+/// De Marp-alt-tekst van de eerste afbeelding op regel [t]; zie [marpImageAlt].
+String _imageAlt(String t) =>
+    marpImageAlt(_reImageBracket.firstMatch(t)?.group(1) ?? '');
 final _reLiItem = RegExp(r'<li[^>]*>(.*?)</li>', caseSensitive: false);
 final _reHtmlList = RegExp(r'^</?(ul|ol)(?:\s[^>]*)?>$', caseSensitive: false);
 final _reBullet = RegExp(r'^([-*+•◦▪▫–]|\d+[.)])\s+(.+)$');
@@ -367,6 +372,7 @@ extension _MarkdownParse on MarkdownService {
       String block,
     })
     link,
+    String imageAlt,
   ) {
     final structured = _tryStructuredSlide(
       cssClass: d.cssClass,
@@ -383,6 +389,8 @@ extension _MarkdownParse on MarkdownService {
     if (structured == null) return null;
     // De dispositie hangt hier aan elke slide, zonder alle parsers te verlengen.
     return structured.copyWith(
+      // Het `ocideck_image_alt`-commentaar wint van de Marp-alt (vraag-slide).
+      imageAltText: imageAlt.isNotEmpty ? imageAlt : structured.imageAltText,
       aiAssistedFields: link.aiAssistedFields,
       privacy: d.privacy,
       quality: d.quality,
@@ -414,7 +422,7 @@ extension _MarkdownParse on MarkdownService {
     // Fenced (code/chart/cockpit/question) and finding-header slides carry
     // structured bodies the generic line parser below would mangle; they are
     // parsed up front from their class token.
-    final structured = _structuredSlideOrNull(d, link);
+    final structured = _structuredSlideOrNull(d, link, alt.alt);
     if (structured != null) return structured;
 
     final classTokens = d.cssClass.split(_reWhitespace);
@@ -513,8 +521,9 @@ extension _MarkdownParse on MarkdownService {
       imagePath2: body.imagePath2,
       imageCaption: body.imageCaption,
       imageCaption2: body.imageCaption2,
-      imageAltText: alt.alt,
-      imageAltText2: alt.alt2,
+      // Het OciDeck-commentaar wint; anders telt de Marp-alt uit `![alt](pad)`.
+      imageAltText: alt.alt.isNotEmpty ? alt.alt : body.imageAlt,
+      imageAltText2: alt.alt2.isNotEmpty ? alt.alt2 : body.imageAlt2,
       imageFocalX: focus.fx,
       imageFocalY: focus.fy,
       imageFocalX2: focus.fx2,
