@@ -731,99 +731,63 @@ class ImageService {
     return map;
   }
 
-  Future<List<Slide>> copyMediaToProject(
-    List<Slide> slides,
-    String projectPath, {
-    String? sourceProjectPath,
+  /// De gedeelde kies-route voor media: picker → acceptatie → import onder
+  /// `media/`. Op web bestaat dit pad niet, en het faalt luidruchtiger dan je
+  /// zou denken: `PlatformFile.path` GOOIT daar een kale String (file_picker
+  /// 5.5.0 — geen null en geen blob:-URL, zoals hier eerder stond). Die vloog
+  /// ongevangen omhoog zodra iemand in de webversie op "Bestand kiezen" drukte.
+  /// Bovendien schrijft `_importIntoProject` naar schijf, wat er ook niet is.
+  /// De knop is inmiddels ook verborgen (video_slide_editor.dart); deze poort
+  /// staat er zodat het bestand zijn eigen belofte waarmaakt.
+  Future<String?> _pickIntoProject(
+    FileType type,
+    String dialogTitle,
+    Future<bool> Function(String path) acceptable,
+    String? projectPath, {
+    List<String>? allowedExtensions,
   }) async {
-    final mediaDir = await createContainedProjectDirectory(
-      projectPath,
-      'media',
+    if (!supportsLocalProjectFolders) return null;
+    final file = await FilePicker.pickFile(
+      type: type,
+      allowedExtensions: allowedExtensions,
+      dialogTitle: dialogTitle,
     );
-
-    final updated = <Slide>[];
-    for (final slide in slides) {
-      var next = slide;
-      final video = await _mediaToProject(
-        next.videoPath,
-        mediaDir,
-        fallbackName: 'video.mp4',
-        fallbackExtension: '.mp4',
-        sourceProjectPath: sourceProjectPath,
-      );
-      if (video != null) next = next.copyWith(videoPath: video);
-      // Ondertitels reizen mee naar de doelmap (#2841): de `<track>` in de
-      // markdown moet bij het gekopieerde deck naar een lokaal bestand wijzen.
-      final captions = await _mediaToProject(
-        next.videoCaptions,
-        mediaDir,
-        fallbackName: 'ondertitels.vtt',
-        fallbackExtension: '.vtt',
-        sourceProjectPath: sourceProjectPath,
-      );
-      if (captions != null) next = next.copyWith(videoCaptions: captions);
-      final audio = await _mediaToProject(
-        next.audioPath,
-        mediaDir,
-        fallbackName: 'audio.m4a',
-        fallbackExtension: '.m4a',
-        sourceProjectPath: sourceProjectPath,
-      );
-      if (audio != null) next = next.copyWith(audioPath: audio);
-      updated.add(next);
-    }
-    return updated;
+    final path = file?.path;
+    if (path == null) return null;
+    if (!await acceptable(path)) return null;
+    return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
-  /// Het projectrelatieve mediapad voor [path], of `null` als er niets te doen
-  /// is (leeg, al projectrelatief, of een URL die geen bestand is).
-  ///
-  /// Twee bronnen: een `mem:`-pad draagt zijn bytes mee (een geïmporteerde of
-  /// remote presentatie), een absoluut pad wijst naar schijf.
-  Future<String?> _mediaToProject(
-    String path,
-    Directory mediaDir, {
-    // Per soort een eigen terugval: een bestand zonder extensie in de store
-    // zou anders met de verkeerde landen (.mp4 voor een .vtt bijvoorbeeld).
-    required String fallbackName,
-    required String fallbackExtension,
-    String? sourceProjectPath,
-  }) async {
-    if (WebAssetStore.isMemPath(path)) {
-      final bytes = WebAssetStore.bytesFor(path);
-      if (bytes == null || bytes.length > maxMediaBytes) {
-        return null;
+  Future<String?> pickVideo({String? projectPath}) async => _pickIntoProject(
+    FileType.video,
+    _d('Kies een video'),
+    (p) => _isAcceptableMedia(p, 'pickVideo'),
+    projectPath,
+  );
+
+  /// Kiest een ondertitelbestand (`.vtt` of `.srt`) voor een videodia (#2841).
+  /// Geen container-check zoals bij [pickVideo]: een captionbestand is platte
+  /// tekst — wel dezelfde groottecap en import onder `media/`.
+  Future<String?> pickCaptions({String? projectPath}) async => _pickIntoProject(
+    FileType.custom,
+    _d('Kies een ondertitelbestand'),
+    (p) async {
+      if (!await _isWithinMediaCap(p)) {
+        logWarning('ImageService.pickCaptions: rejected (exceeds size cap)');
+        return false;
       }
-      return _materializeMemAsset(
-        path,
-        mediaDir,
-        subdir: 'media',
-        fallbackName: fallbackName,
-        fallbackExtension: fallbackExtension,
-      );
-    }
-    if (!_shouldCopy(path)) return null;
-    final root = AssetStaging.isStagedPath(path)
-        ? AssetStaging.rootPath
-        : sourceProjectPath;
-    if (root == null) return null;
-    final trusted = resolveContainedRealPath(path, root);
-    if (trusted == null || !await _isWithinMediaCap(trusted)) {
-      logWarning('ImageService.copyMedia: rejected (exceeds size cap)');
-      return null;
-    }
-    return _copyToDir(trusted, mediaDir);
-  }
+      return true;
+    },
+    projectPath,
+    allowedExtensions: const ['vtt', 'srt'],
+  );
 
-  bool _shouldCopy(String path) {
-    return path.isNotEmpty &&
-        !path.startsWith('media/') &&
-        !path.startsWith('images/') &&
-        p.isAbsolute(path);
-  }
-
-  Future<String?> _copyToDir(String sourcePath, Directory destDir) async =>
-      _copyInto(sourcePath, destDir, 'media');
+  Future<String?> pickAudio({String? projectPath}) async => _pickIntoProject(
+    FileType.audio,
+    _d('Kies een audiobestand'),
+    (p) => _isAcceptableMedia(p, 'pickAudio'),
+    projectPath,
+  );
 
   Future<String?> _copyImageToProject(
     String sourcePath,
