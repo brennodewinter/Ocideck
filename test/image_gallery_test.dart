@@ -67,9 +67,9 @@ void main() {
 
     test('alt-tekst reist in de entry zelf mee', () {
       final out = _roundTrip(
-        Slide.create(SlideType.imageGallery).copyWith(
-          galleryImages: const ['![Foto van het team](team.jpg)'],
-        ),
+        Slide.create(
+          SlideType.imageGallery,
+        ).copyWith(galleryImages: const ['![Foto van het team](team.jpg)']),
       );
       expect(out.galleryImages.single, '![Foto van het team](team.jpg)');
     });
@@ -100,23 +100,17 @@ void main() {
     });
 
     test('lege stapel stapt niet', () {
-      final slide = Slide.create(SlideType.imageGallery).copyWith(
-        galleryLayout: GalleryLayout.stack,
-      );
-      expect(
-        PresentationStepPlan.forSlide(slide).remainingSteps,
-        0,
-      );
+      final slide = Slide.create(
+        SlideType.imageGallery,
+      ).copyWith(galleryLayout: GalleryLayout.stack);
+      expect(PresentationStepPlan.forSlide(slide).remainingSteps, 0);
     });
   });
 
   group('imageGallery — asset-reis via slideImageRefs', () {
     test('paden en alt-teksten zijn zichtbaar voor de verzamelaar', () {
       final slide = Slide.create(SlideType.imageGallery).copyWith(
-        galleryImages: const [
-          '![](media/nrc.png)',
-          '![Kop](media/vk.png)',
-        ],
+        galleryImages: const ['![](media/nrc.png)', '![Kop](media/vk.png)'],
       );
       final refs = slideImageRefs(slide).toList();
       expect(refs.map((r) => r.path), ['media/nrc.png', 'media/vk.png']);
