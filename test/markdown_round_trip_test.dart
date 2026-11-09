@@ -1934,6 +1934,17 @@ void main() {
       expect(out.imageZoom, 150);
     });
 
+    test('a zoom-out under 100% survives save and reopen (#2840)', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          bullets: const ['Een'],
+          imagePath: 'images/side.png',
+          imageZoom: 50,
+        ),
+      );
+      expect(out.imageZoom, 50);
+    });
+
     test('a zero zoom writes no comment and stays default', () {
       final service = MarkdownService();
       final markdown = service.generateDeck(

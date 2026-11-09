@@ -178,6 +178,41 @@ void main() {
       expect(r.top, closeTo(405.6, 0.001));
     });
 
+    test('zoom 50: box = helft van slot, beeld erin passend (#2840)', () {
+      final r = ImageViewportGeometry.paintedRect(
+        imageW: 800,
+        imageH: 400,
+        slotW: 384,
+        slotH: 1080,
+        focalX: 0.5,
+        focalY: 0.5,
+        zoom: 50,
+      );
+      // k=0.5, bw=192, bh=540, bx=(384-192)*0.5=96, by=(1080-540)*0.5=270
+      // s = min(192/800, 540/400) = min(0.24, 1.35) = 0.24
+      // pw=192, ph=96, px=96, py=270+(540-96)/2=492
+      expect(r.width, closeTo(192, 0.001));
+      expect(r.height, closeTo(96, 0.001));
+      expect(r.left, closeTo(96, 0.001));
+      expect(r.top, closeTo(492, 0.001));
+    });
+
+    test('zoom 50: de focal positioneert de kleine box in de vrije ruimte', () {
+      GeoRect at(double fx) => ImageViewportGeometry.paintedRect(
+        imageW: 800,
+        imageH: 400,
+        slotW: 384,
+        slotH: 1080,
+        focalX: fx,
+        focalY: 0.5,
+        zoom: 50,
+      );
+      // Vrije ruimte = slotW - bw = 384 - 192 = 192: fx=0 links, fx=1 rechts.
+      expect(at(0).left, closeTo(0, 0.001));
+      expect(at(1).left, closeTo(192, 0.001));
+      expect(at(0).width, closeTo(192, 0.001));
+    });
+
     test('zoom clamps to 0..400', () {
       expect(ImageViewportGeometry.clampZoom(-50), 0);
       expect(ImageViewportGeometry.clampZoom(5000), 400);

@@ -278,6 +278,53 @@ void main() {
   // #1856 — de schuif was alleen te bereiken met een pinch-gebaar (twee
   // vingers), niet met muis of toetsenbord. Nu staat hij altijd in beeld,
   // ook in vullende (cover) modus.
+  testWidgets('de schuif kan onder de 100% komen (#2840)', (tester) async {
+    final uitkomst = await open(tester, imageSize: 100);
+
+    expect(find.byType(Slider), findsOneWidget);
+    // Naar links slepen onder de startwaarde: het veld gaat mee omlaag,
+    // tot onder de vroegere ondergrens van 100%.
+    await tester.drag(find.byType(Slider), const Offset(-160, 0));
+    await tester.pumpAndSettle();
+    await klaar(tester, uitkomst);
+
+    expect(
+      uitkomst.single!.imageSize,
+      lessThan(100),
+      reason: 'de schuif hoort uitzoomen onder 100% toe te staan',
+    );
+    expect(
+      uitkomst.single!.imageSize,
+      greaterThanOrEqualTo(25),
+      reason: 'de ondergrens is 25%; 0 blijft gereserveerd voor Vullen',
+    );
+  });
+
+  testWidgets('uitzoomen verplaatst het beeld nog met de sleep (#2840)', (
+    tester,
+  ) async {
+    // Zoom 50%: het kader is half zo groot als het beeld en de focal
+    // positioneert het in de vrije ruimte. Trekken naar rechts schuift de
+    // box mee naar rechts — dus focalX omhoog.
+    final uitkomst = await open(
+      tester,
+      imageSize: 50,
+      focalX: 0.5,
+      focalY: 0.5,
+    );
+
+    final kader = tester.getSize(find.byType(AspectRatio));
+    await tester.drag(find.byType(AspectRatio), Offset(kader.width * 0.2, 0));
+    await tester.pumpAndSettle();
+    await klaar(tester, uitkomst);
+
+    expect(
+      uitkomst.single!.focalX,
+      greaterThan(0.5),
+      reason: 'slepen hoort bij uitgezoomd beeld de focal te verschuiven',
+    );
+  });
+
   testWidgets('op vullend formaat is de schuif wel bereikbaar (#1856)', (
     tester,
   ) async {
