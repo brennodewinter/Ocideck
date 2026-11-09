@@ -120,6 +120,9 @@ void main() {
           ]),
         ],
       );
+      expect(deckScopeCoverageGaps(deck).map((gap) => gap.object), [
+        'https://d',
+      ]);
     });
 
     test('de uitkomst hangt niet van de volgorde van de dia\'s af', () {
