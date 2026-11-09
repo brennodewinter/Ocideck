@@ -225,23 +225,20 @@ void main() {
 
   // Verzegelen is documentintegriteit uit de informatieveiligheidsmodule: het
   // hoort achter dezelfde schakelaar als het RFC3161-tijdstempel dat erop volgt.
-  testWidgets(
-    'the overflow menu offers finalise & seal once the module is on',
-    (tester) async {
-      SharedPreferences.setMockInitialValues({
-        'app_consent_accepted': true,
-        'secModuleEnabled': true,
-      });
-      await pumpShell(tester);
+  testWidgets('stored module preference does not restore finalise & seal', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'secModuleEnabled': true,
+    });
+    await pumpShell(tester);
 
-      await tester.tap(appBarIcon(Icons.more_vert));
-      await tester.pumpAndSettle();
-      await tester.tap(menuItemIcon(Icons.verified_user_outlined));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(FinalizeSealDialog), findsOneWidget);
-    },
-  );
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+    expect(menuItemIcon(Icons.verified_user_outlined), findsNothing);
+    expect(find.byType(FinalizeSealDialog), findsNothing);
+  });
 
   testWidgets('finalise & seal stays hidden while the module is off', (
     tester,
@@ -311,7 +308,7 @@ void main() {
     expect(menuItemIcon(Icons.handyman_outlined), findsNothing);
   });
 
-  testWidgets('the tools appendix appears once the module is on', (
+  testWidgets('stored module preference does not restore the tools appendix', (
     tester,
   ) async {
     SharedPreferences.setMockInitialValues({
@@ -323,7 +320,7 @@ void main() {
     await tester.tap(appBarIcon(Icons.more_vert));
     await tester.pumpAndSettle();
 
-    expect(menuItemIcon(Icons.handyman_outlined), findsOneWidget);
+    expect(menuItemIcon(Icons.handyman_outlined), findsNothing);
   });
 
   testWidgets('the overflow menu opens the full-deck preview', (tester) async {
