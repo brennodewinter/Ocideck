@@ -338,16 +338,21 @@ Slide absolutizeSlideAssetPaths(Slide slide, String? basePath) {
 
   var next = rewriteSlideImagePaths(slide, abs);
   final video = abs(next.videoPath);
+  final captions = abs(next.videoCaptions);
   final audio = abs(next.audioPath);
   final bg = rewriteMarpBackgroundAssetPath(
     next.marpStyle.backgroundImage,
     abs,
   );
-  if (video == null && audio == null && bg == next.marpStyle.backgroundImage) {
+  if (video == null &&
+      captions == null &&
+      audio == null &&
+      bg == next.marpStyle.backgroundImage) {
     return next;
   }
   return next.copyWith(
     videoPath: video,
+    videoCaptions: captions,
     audioPath: audio,
     marpStyle: bg == next.marpStyle.backgroundImage
         ? null

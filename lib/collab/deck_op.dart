@@ -187,6 +187,7 @@ enum SlideField {
   imageAltText,
   imageAltText2,
   videoPath,
+  videoCaptions,
   audioPath,
   quote,
   quoteAuthor,
@@ -400,6 +401,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.videoPath => slide.copyWith(
       videoPath: _cast<String>(value, field),
+    ),
+    SlideField.videoCaptions => slide.copyWith(
+      videoCaptions: _cast<String>(value, field),
     ),
     SlideField.audioPath => slide.copyWith(
       audioPath: _cast<String>(value, field),

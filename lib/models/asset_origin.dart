@@ -89,7 +89,9 @@ bool deckCarriesMemoryAssets(Deck deck) {
   bool mem(String path) => WebAssetStore.isMemPath(path.trim());
   if (_profileMemoryPaths(deck.themeProfile).isNotEmpty) return true;
   for (final s in deck.slides) {
-    if (mem(s.videoPath) || mem(s.audioPath)) return true;
+    if (mem(s.videoPath) || mem(s.videoCaptions) || mem(s.audioPath)) {
+      return true;
+    }
     if (slideImagePaths(s).any(mem)) return true;
   }
   return false;
@@ -107,6 +109,7 @@ void addSlideMemoryAssetPaths(Slide slide, Set<String> into) {
   for (final path in [
     ...slideImagePaths(slide),
     slide.videoPath,
+    slide.videoCaptions,
     slide.audioPath,
   ]) {
     if (WebAssetStore.isMemPath(path.trim())) into.add(path.trim());

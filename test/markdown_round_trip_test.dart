@@ -845,6 +845,57 @@ void main() {
       expect(out.audioAutoplay, isTrue);
     });
 
+    test('video slide keeps the captions track (#2841)', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.video).copyWith(
+              videoPath: 'media/movie.mp4',
+              videoCaptions: 'media/movie.vtt',
+            ),
+          ],
+        ),
+      );
+      // Standaard-HTML: geen OciDeck-commentaar maar een <track> in het
+      // <video>-element, zodat elke Marp- of browserlezer hem meespeelt.
+      expect(
+        markdown,
+        contains('<track kind="subtitles" src="media/movie.vtt" default>'),
+      );
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.videoCaptions, 'media/movie.vtt');
+      expect(out.videoPath, 'media/movie.mp4');
+    });
+
+    test('a video without captions writes no track element', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(
+              SlideType.video,
+            ).copyWith(videoPath: 'media/movie.mp4'),
+          ],
+        ),
+      );
+      expect(markdown.contains('<track'), isFalse);
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.videoCaptions, isEmpty);
+    });
+
+    test('an .srt caption file also round-trips', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.video).copyWith(
+          videoPath: 'media/movie.mp4',
+          videoCaptions: 'media/movie.srt',
+        ),
+      );
+      expect(out.videoCaptions, 'media/movie.srt');
+    });
+
     test('quote slide keeps quote, author and background image', () {
       final out = _roundTrip(
         Slide.create(SlideType.quote).copyWith(

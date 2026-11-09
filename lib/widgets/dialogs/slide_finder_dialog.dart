@@ -237,6 +237,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       slide.imagePath,
       slide.imagePath2,
       slide.videoPath,
+      slide.videoCaptions,
       slide.audioPath,
       slide.notes,
       slide.type.label,

@@ -353,10 +353,15 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     // inhoud, dus een ongewijzigde film levert bij elke commit hetzelfde blob
     // op en groeit de historie niet.
     final videoRef = await poolAsset(slide.videoPath, fallback: 'video.mp4');
+    final captionsRef = await poolAsset(
+      slide.videoCaptions,
+      fallback: 'ondertitels.vtt',
+    );
     final audioRef = await poolAsset(slide.audioPath, fallback: 'audio.m4a');
 
     var next = rewriteSlideImagePaths(slide, (path) => pooled[path]);
     if (videoRef != null) next = next.copyWith(videoPath: videoRef);
+    if (captionsRef != null) next = next.copyWith(videoCaptions: captionsRef);
     if (audioRef != null) next = next.copyWith(audioPath: audioRef);
     slides.add(next);
   }

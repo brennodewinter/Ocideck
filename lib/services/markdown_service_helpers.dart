@@ -332,8 +332,14 @@ void _writeVideo(StringBuffer buf, Slide slide, {required bool forExport}) {
     }
     final autoplay = slide.videoAutoplay ? ' autoplay muted loop' : '';
     const attr = HtmlEscape(HtmlEscapeMode.attribute);
+    // Ondertitels als standaard-`<track>` ín het `<video>`-element (#2841):
+    // Marp en elke browser spelen ze dan vanzelf mee — ook zonder OciDeck —
+    // en de parser leest het pad weer terug. `default` zet ze aan in HTML.
+    final track = slide.videoCaptions.isEmpty
+        ? ''
+        : '<track kind="subtitles" src="${attr.convert(slide.videoCaptions)}" default>';
     buf.writeln(
-      '<video src="${attr.convert(slide.videoPath)}$frag" controls$autoplay style="width:100%; max-height:72vh;"></video>',
+      '<video src="${attr.convert(slide.videoPath)}$frag" controls$autoplay style="width:100%; max-height:72vh;">$track</video>',
     );
   }
 
@@ -346,10 +352,10 @@ void _writeVideo(StringBuffer buf, Slide slide, {required bool forExport}) {
 }
 
 /// Parseert een `<video …>`-regel: splitst het `#t=start,end` media-fragment
-/// van de bron af en leest de trim-grenzen (in ms).
-({String path, int startMs, int endMs, bool autoplay}) _parseVideoLine(
-  String t,
-) {
+/// van de bron af en leest de trim-grenzen (in ms). Een
+/// `<track … src="…">` in het element levert het ondertitelpad (#2841).
+({String path, int startMs, int endMs, bool autoplay, String captions})
+_parseVideoLine(String t) {
   final m = _reSrcAttr.firstMatch(t);
   var src = _unescapeAttr(m?.group(1) ?? '');
   var startMs = 0;
@@ -367,7 +373,15 @@ void _writeVideo(StringBuffer buf, Slide slide, {required bool forExport}) {
     startMs: startMs,
     endMs: endMs,
     autoplay: t.contains('autoplay'),
+    captions: _parseTrackSrc(t),
   );
+}
+
+/// Het `src`-attribuut van een `<track>`-kind in een `<video>`-element, of ''.
+String _parseTrackSrc(String t) {
+  final track = RegExp('<track\\b[^>]*>').firstMatch(t)?.group(0) ?? '';
+  if (track.isEmpty) return '';
+  return _unescapeAttr(_reSrcAttr.firstMatch(track)?.group(1) ?? '');
 }
 
 /// Parseert een `<iframe class="ocideck-embed" …>`-regel terug naar de bron en

@@ -346,6 +346,9 @@ class _EditorPanelContent extends ConsumerWidget {
       imageCaption: keepsImage ? slide.imageCaption : '',
       imageCaption2: newType == SlideType.twoImages ? slide.imageCaption2 : '',
       videoPath: newType == SlideType.video ? slide.videoPath : '',
+      // Ondertitels horen bij de videodia: meereizen naar een ander type
+      // zou een dode `<track>`-verwijzing in de markdown achterlaten.
+      videoCaptions: newType == SlideType.video ? slide.videoCaptions : '',
       videoAutoplay: slide.videoAutoplay,
       audioPath: slide.audioPath,
       audioAutoplay: slide.audioAutoplay,
