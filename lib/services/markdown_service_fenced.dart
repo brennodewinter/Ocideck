@@ -44,6 +44,7 @@ class _FencedScan {
   String fenceInfo = '';
   final content = <String>[];
   String imagePath = '';
+  String imageAlt = '';
   String imageCaption = '';
   String audioPath = '';
   bool audioAutoplay = false;
@@ -86,7 +87,10 @@ _FencedScan _scanFencedBlock(String remaining) {
       scan.title = t.substring(2).trim();
     } else if (t.startsWith('![')) {
       final m = _reImageMdAllowEmpty.firstMatch(t);
-      if (m != null) scan.imagePath = m.group(1) ?? '';
+      if (m != null) {
+        scan.imagePath = m.group(1) ?? '';
+        scan.imageAlt = _imageAlt(t);
+      }
     } else if (t.startsWith('<div class="image-caption">')) {
       scan.imageCaption = _decodeCaption(_decodeImageCaption(t));
     } else if (t.startsWith('<audio')) {
@@ -237,6 +241,7 @@ extension _MarkdownFenced on MarkdownService {
       type: SlideType.question,
       title: scan.title,
       imagePath: scan.imagePath,
+      imageAltText: scan.imageAlt,
       imageCaption: scan.imageCaption,
       imageSize: imageSize,
       audioPath: scan.audioPath,

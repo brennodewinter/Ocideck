@@ -29,6 +29,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Alt-teksten uit Marp blijven bewaard.** Een afbeelding met een standaard
+  Marp-alt-tekst (`![Kat met een sleutel](images/x.png)`) verloor die
+  beschrijving stil bij de eerste opslag. OciDeck leest de Marp-alt nu in en
+  bewaart hem bij elk type met een afbeelding: opsomming met afbeelding, titel,
+  tussentitel, afbeelding, twee afbeeldingen, citaat en vraag. Maten (`w:`,
+  `h:`) en filters horen niet bij de alt. Een titeldia met `![bg alt]` blijft
+  ook een titeldia.
+
 - **Security: beschadigde archieven worden geweigerd, niet half gelezen.**
   `archive` gaat van 4.3 naar 4.6 en krijgt daarmee de zip64-fix uit 4.4: een
   gemanipuleerde grootte kon de decoder laten vastlopen. Omdat 4.6 standaard

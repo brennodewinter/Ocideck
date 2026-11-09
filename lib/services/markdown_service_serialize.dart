@@ -311,6 +311,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln(
         '![${marpBackgroundOptions(slide, overlay: true)}](${slide.imagePath})',
       );
+      _writeImageAlt(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
     }
@@ -459,6 +460,7 @@ extension _MarkdownSerialize on MarkdownService {
         buf.writeln('<!-- _style: --image-width: ${slide.imageSize}%; -->');
       }
       buf.writeln('![](${slide.imagePath})');
+      _writeImageAlt(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
     }

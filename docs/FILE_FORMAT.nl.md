@@ -879,6 +879,22 @@ De gegenereerde vorm voor elk type staat hieronder. Afbeeldingsbijschriften (§6
 waar van toepassing, geschreven als `<div class="image-caption">...</div>` direct onder de
 afbeelding.
 
+**Alt-tekst.** OciDeck schrijft de toegankelijkheidsbeschrijving van een
+afbeelding als `<!-- ocideck_image_alt: … -->` (§8) en laat de haken leeg
+(`![](…)`, `![bg …](…)`). Het **leest ook de Marp-vorm**: de woorden binnen
+`![…]` die Marp niet als opdracht leest, worden de alt-tekst wanneer er geen
+`ocideck_image_alt`-commentaar staat. Geen alt-tekst zijn maten (`w:`, `h:`,
+`width:`, `height:`), filters (`blur`, `sepia`, `opacity:.45`, …) en, bij een
+achtergrond, `bg` en de plaatsing (`left`, `right`, `left:40%`, `contain`,
+`60%`, …). `![bg left:40% sepia Een kat op een dak](kat.png)` draagt dus de
+alt-tekst `Een kat op een dak`. Dat geldt voor elk type met een afbeelding:
+achtergrond van titel en tussentitel, afbeelding, twee afbeeldingen (de alt van
+de rechter gaat naar `ocideck_image_alt2`), opsomming met afbeelding (de
+`split-image`-div), citaat en vraag. Staan beide er, dan wint het commentaar.
+Bij opslaan verhuist de alt naar het commentaar; een Marp-sleutelwoord dat
+OciDeck niet typeert (`vertical`, `cover`) bewaart het hele blok nog steeds
+letterlijk (§9).
+
 **Titel** (`title`)
 ```markdown
 ![bg 60% opacity:.45](images/background.png)   <!-- optional background -->
@@ -3216,7 +3232,7 @@ serializer ze schrijft.)*
 | `<!-- ocideck_bullet_marker: dot\|paw\|custom_svg -->` | Per-slide overschrijving van de bulletmarkering (bullets/two-bullets/bullets+image). Afwezig = neem de `bulletMarker` van het thema over (§3.2). `custom_svg` gebruikt de SVG uit het thema. |
 | `<!-- ocideck_image_focus: x,y -->` | Brandpunt voor het bijsnijden van het beeld (0..1 per as, `0.5,0.5` = midden) voor het beeld van de slide. Bepaalt welk deel in beeld blijft wanneer het plaatje wordt bijgesneden (fill/zoom, of een vast beeldpaneel). Alleen geschreven wanneer niet gecentreerd. |
 | `<!-- ocideck_image_focus2: x,y -->` | Hetzelfde, voor het **tweede** beeld van een twee-beelden-slide. Alleen geschreven wanneer niet gecentreerd. |
-| `<!-- ocideck_image_alt: text -->` | Per-gebruik WCAG-alt-tekst (toegankelijkheidsbeschrijving) voor het beeld van de slide. Krijgt de voorkeur boven het zichtbare bijschrift als schermlezerlabel. Alleen geschreven wanneer ingesteld; `-->` erin wordt geëscaped zoals sprekersnotities. |
+| `<!-- ocideck_image_alt: text -->` | Per-gebruik WCAG-alt-tekst (toegankelijkheidsbeschrijving) voor het beeld van de slide. Krijgt de voorkeur boven het zichtbare bijschrift als schermlezerlabel. Alleen geschreven wanneer ingesteld; `-->` erin wordt geëscaped zoals sprekersnotities. Ontbreekt het, dan wordt de alt-tekst uit Marps `![alt](pad)` gelezen; staat het er, dan wint het commentaar (§5). |
 | `<!-- ocideck_image_alt2: text -->` | Hetzelfde, voor het **tweede** beeld van een twee-beelden-slide. |
 | `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Bevindingsgroep-koppeling: verbindt een kopkaart met zijn detail-/bewijsslides (§5). Geschreven op elke slide met een niet-lege bevindings-id. |
 | `<!-- ocideck_ai_assisted: field1, field2 -->` | De velden van de slide waarvan de tekst door AI is opgesteld en nog niet door een mens is nagekeken. Zolang enige slide deze markering draagt, kan het deck **niet worden afgerond/verzegeld** (de EIS 1.6-attestatie moet door mensen geverifieerde tekst dekken), en elke PDF-/PPTX-/HTML-export vermeldt het in zijn documenteigenschappen, zijn bestandsnaam, en — in HTML — een banner (§11). Alleen geschreven wanneer niet-leeg; het AI-opstellen zet het en wist het bij nakijken. |
