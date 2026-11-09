@@ -27,10 +27,6 @@ class BodyParse {
   int bgLeftWidth = 0;
   int bgRightWidth = 0;
 
-  /// Elke losse `![alt](pad)`-regel in de body (#2838). Alleen de assembly
-  /// gebruikt hem, en alleen als het type imageGallery blijkt — voor andere
-  /// types is de lijst verzameld-maar-ongelezen.
-  final List<String> galleryImages = [];
   String videoPath = '';
   bool videoAutoplay = false;
   int videoStartMs = 0;

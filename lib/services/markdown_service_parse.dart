@@ -545,7 +545,7 @@ extension _MarkdownParse on MarkdownService {
       videoEndMs: body.videoEndMs,
       videoCaptions: body.videoCaptions,
       galleryImages: type == SlideType.imageGallery
-          ? body.galleryImages
+          ? galleryImageLines(d.remaining)
           : const [],
       galleryLayout: type == SlideType.imageGallery
           ? galleryLayoutFromTokens(classTokens)

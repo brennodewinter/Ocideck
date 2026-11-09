@@ -253,7 +253,9 @@ const Map<String, int> fileSizeBaseline = {
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
   'lib/services/slide_quality_analyzer.dart':
-      1075, // +60 (sweep #2634/#2620/#2622): analyzeWarmed met
+      1076, // +1 (#2838): missing-file-case voor galleryImages — codec-vrije
+      // loodgieterij bij het nieuwe dia-veld. Eerdere verhoging:
+      // +60 (sweep #2634/#2620/#2622): analyzeWarmed met
   // batch-verdeling over idle-frames, per-dia Expando-memo's en de
   // gedeelde split-run-meting — cohesief met de analyzer-staat.
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
@@ -524,7 +526,10 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3522, // +17 (#2733/#2741): tegel-semantiek in het
+      3528, // +6 (#2838): stapel-stapplumbing — de zichtbaarhelper
+      // delegeert naar galleryVisibleForSlide in het model; de
+      // aankondigingsregel en views-doorgave blijven hier.
+      // Eerdere verhoging: +17 (#2733/#2741): tegel-semantiek in het
   // presenter-raster en de verduidelijkt-schermteksten — zinnen die bij
   // deze State's schermtoestand horen. +10: rebase op de zoek-eindtoestand
   // van #2791 — de zoekvelden landden in deze State.
@@ -640,7 +645,11 @@ const Map<String, int> classSizeBaseline = {
   // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
   // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
   'lib/services/markdown_service.dart#MarkdownService':
-      2454, // +2 (#2841): videoCaptions door _BodyParse-record, assembly en
+      2466, // +12 (#2838): imageGallery — gallery-stack-class-token,
+  // galleryImages/galleryLayout-assembly en beeldregelverzameling. De
+  // schrijver (writeGallerySlideBody) en regellezer (galleryImageLines)
+  // wonen in helpers en tellen niet mee.
+  // Eerdere verhoging: +2 (#2841): videoCaptions door _BodyParse-record, assembly en
   // consume (de `<track>` zelf parseert _parseVideoLine in helpers — die telt
   // niet mee; _BodyParse verhuisde naar body_parse.dart en viel óók uit de
   // telling). Onherleidbare codec-plumbing voor het nieuwe veld.
@@ -760,7 +769,9 @@ const Map<String, int> classSizeBaseline = {
   // invalid geometry, missing anchor) met tekst-ref-telling en entry-vergelijking.
   // De klasse meet 1097.
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer':
-      1160, // +62 (sweep #2634/#2620/#2622): analyzeWarmed en de
+      1165, // +5 (#2838): alt-tekst- en missing-file-cases voor imageGallery —
+      // onherleidbare veldplumbing; de gedeelde refs-lezer doet het padwerk.
+      // Eerdere verhoging: +62 (sweep #2634/#2620/#2622): analyzeWarmed en de
   // per-dia Expando-memo's — de meting staat in de part-bestanden.
   // +15 (#2433): de slideAspect-parameter door de metriek- en
   // memo-functies — de kwaliteitsmeting moet op de deckverhouding rekenen; de

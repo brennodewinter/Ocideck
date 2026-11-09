@@ -32,7 +32,6 @@ extension _MarkdownParseBody on MarkdownService {
     String videoCaptions,
     String audioPath,
     bool audioAutoplay,
-    List<String> galleryImages,
     String quote,
     String quoteAuthor,
     List<String> tableLines,
@@ -100,7 +99,6 @@ extension _MarkdownParseBody on MarkdownService {
       videoEndMs: b.videoEndMs,
       videoCaptions: b.videoCaptions,
       audioPath: b.audioPath,
-      galleryImages: b.galleryImages,
       audioAutoplay: b.audioAutoplay,
       quote: b.quote,
       quoteAuthor: b.quoteAuthor,
@@ -187,12 +185,6 @@ extension _MarkdownParseBody on MarkdownService {
   ) {
     final htmlItems = _reLiItem.allMatches(t).toList();
     final bulletMatch = _reBullet.firstMatch(t);
-    // Een losse beeldregel hoort ook in de galerijlijst (#2838): pas de
-    // type-inferentie beslist of die gebruikt wordt; voor andere types
-    // verandert er niets en loopt de regel gewoon door de keten hieronder.
-    if (t.startsWith('![') && _reImageMd.firstMatch(t)?.group(0) == t) {
-      b.galleryImages.add(t);
-    }
     if (htmlItems.isNotEmpty) {
       for (final item in htmlItems) {
         final body = _stripInlineHtml(item.group(1) ?? '');

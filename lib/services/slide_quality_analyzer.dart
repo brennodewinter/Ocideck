@@ -581,12 +581,10 @@ class SlideQualityAnalyzer {
   }
 
   /// Of een `![alt](pad)`-galerijentry een niet-lege alt-tekst draagt (#2838).
-  static bool _entryHasAlt(String entry) {
-    final close = entry.indexOf(']');
-    return entry.startsWith('![') &&
-        close > 2 &&
-        entry.substring(2, close).trim().isNotEmpty;
-  }
+  static bool _entryHasAlt(String entry) =>
+      entry.startsWith('![') &&
+      entry.indexOf(']') > 2 &&
+      entry.substring(2, entry.indexOf(']')).trim().isNotEmpty;
 
   void _checkMediaAltText({
     required Slide slide,
@@ -710,16 +708,14 @@ class SlideQualityAnalyzer {
           label: 'Tweede afbeelding',
         );
       case SlideType.imageGallery:
-        // Elke galerijentry is een `![alt](pad)`; het pad telt als verwijzing
-        // zoals elke andere afbeelding (#2838).
-        for (final entry in slide.galleryImages) {
-          for (final path in inlineImagePaths(entry)) {
-            missingFile(
-              path: path,
-              field: 'galleryImages',
-              label: 'Afbeelding',
-            );
-          }
+        // De refs-lezer levert de galerijpaden zoals bij elke andere
+        // afbeelding (#2838); het veld wijst de plek aan.
+        for (final ref in slideImageRefs(slide)) {
+          missingFile(
+            path: ref.path,
+            field: 'galleryImages',
+            label: 'Afbeelding',
+          );
         }
       case SlideType.title:
       case SlideType.section:

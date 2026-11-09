@@ -123,6 +123,16 @@ class ImageStackStepPlan extends PresentationStepPlan {
   int get hashCode => Object.hash('imageStack', imageCount);
 }
 
+/// Hoeveel galerijbeelden bij [step] zichtbaar zijn op een stapel-dia (#2838),
+/// of null als de slide geen stapel-stapmodus heeft. Stap 0 toont al de eerste
+/// beeld, zodat de dia nooit leeg opent. Gedeeld door presentator en
+/// zaalscherm zodat beide exact dezelfde stapel tekenen.
+int? galleryVisibleForSlide(Slide slide, int step) {
+  final plan = PresentationStepPlan.forSlide(slide);
+  if (plan is! ImageStackStepPlan) return null;
+  return plan.revealedImageCount(step);
+}
+
 /// Callout reveal step mode (IMAGE_CALLOUTS.md §7). Step 0 shows title and
 /// image only; each click reveals one bullet plus all of its callout targets
 /// atomically. The reveal order follows bullet order.

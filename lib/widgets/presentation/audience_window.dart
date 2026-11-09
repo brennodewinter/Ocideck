@@ -584,14 +584,11 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     return plan.revealedBulletCount(_stepIndex);
   }
 
-  /// Galerij-zichtbaar aantal in stapel-stapmodus (#2838), gelijk aan de
+  /// Galerij-zichtbaar aantal in stapel-stapmodus (#2838), gedeeld met de
   /// presentator zodat het beamerscherm dezelfde stapel toont; null bij
   /// raster-lay-out (dan staat alles er meteen).
-  int? _galleryVisibleFor(Slide slide) {
-    final plan = PresentationStepPlan.forSlide(slide);
-    if (plan is! ImageStackStepPlan) return null;
-    return plan.revealedImageCount(_stepIndex);
-  }
+  int? _galleryVisibleFor(Slide slide) =>
+      galleryVisibleForSlide(slide, _stepIndex);
 
   /// Cmd+W / Ctrl+W op het beamervenster vraagt de presenter de presentatie af
   /// te sluiten (die ruimt dit venster daarna op).

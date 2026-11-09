@@ -199,13 +199,9 @@ extension _PresenterContent on _FullscreenPresenterState {
   }
 
   /// Hoeveel galerijbeelden nu zichtbaar moeten zijn, of null als de slide
-  /// geen stapel-stapmodus heeft (#2838). Stap 0 toont al de eerste, zodat
-  /// de slide nooit leeg opent.
-  int? _galleryVisibleFor(Slide slide) {
-    final plan = _planFor(slide);
-    if (plan is! ImageStackStepPlan) return null;
-    return plan.revealedImageCount(_stepIndex);
-  }
+  /// geen stapel-stapmodus heeft (#2838).
+  int? _galleryVisibleFor(Slide slide) =>
+      galleryVisibleForSlide(slide, _stepIndex);
 
   void _toggleChecklistItem({
     required int slideIndex,

@@ -319,7 +319,7 @@ class MarkdownService {
       case SlideType.twoImages:
         _writeTwoImagesSlide(buf, slide);
       case SlideType.imageGallery:
-        _writeImageGallerySlide(buf, slide);
+        writeGallerySlideBody(buf, slide);
       case SlideType.image:
         _writeImageSlide(buf, slide);
       case SlideType.video:
