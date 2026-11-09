@@ -157,6 +157,19 @@ extension PrivacyScannerFragments on PrivacyScanner {
     yield (field: 'imagePath', index: 0, text: slide.imagePath, context: '');
     yield (field: 'imagePath2', index: 0, text: slide.imagePath2, context: '');
     yield (field: 'videoPath', index: 0, text: slide.videoPath, context: '');
+    // De ínhoud van een ondertitelbestand telt mee zodra de scanner een lezer
+    // heeft (#2841): `.vtt`-tekst is evenzeer persoonsdata als de notities.
+    final captionsText = slide.videoCaptions.isEmpty
+        ? null
+        : assetTextReader?.call(slide.videoCaptions);
+    yield (
+      field: 'videoCaptions',
+      index: 0,
+      text: captionsText == null
+          ? slide.videoCaptions
+          : '${slide.videoCaptions}\n$captionsText',
+      context: '',
+    );
     yield (field: 'audioPath', index: 0, text: slide.audioPath, context: '');
     // Callout descriptions are ordinary scannable content (IMAGE_CALLOUTS.md
     // §8): an email or phone number in a description is a privacy finding,

@@ -17,6 +17,7 @@ import '../models/slide.dart';
 import 'finding_pagination.dart';
 import 'markdown_service.dart';
 import '../models/privacy_disposition.dart';
+import 'privacy/asset_text_reader.dart';
 import 'privacy/privacy_export_policy.dart';
 import 'privacy/privacy_own_identity.dart';
 import 'privacy/privacy_projection.dart';
@@ -158,11 +159,14 @@ ExportBundle buildExportBundle(
   );
 
   // Eén scan voor de hele bundel; het waren er drie, één per afnemer hieronder,
-  // alle drie over hetzelfde deck (#613).
+  // alle drie over hetzelfde deck (#613). De lezer maakt dat ondertitelbestanden
+  // (videoCaptions, #2841) op inhoud gescand worden — ze reizen mee in de bundel.
   final scan = PrivacyScanner(
     disabledRules: disabledRules,
     ownIdentity: ownIdentity,
     regions: regions,
+    assetTextReader: (path) =>
+        readSlideAssetText(path, projectPath: source.projectPath),
   ).scan(source);
 
   final audience = PrivacyProjection.forAudience(
