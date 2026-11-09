@@ -84,6 +84,7 @@ export '../../services/split_run.dart'
         sharedSplitFitScale,
         splitRunMemberScale,
         splitRunPositionFor;
+import '../../services/privacy/asset_text_reader.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';

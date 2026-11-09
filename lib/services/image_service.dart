@@ -24,6 +24,7 @@ import 'web_asset_store.dart';
 import '../utils/content_hash.dart';
 
 part 'image_service_svg.dart';
+part 'image_service_media_pick.dart';
 
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de overige redenen
@@ -283,38 +284,6 @@ class ImageService {
       return const ImageImportOutcome.failed(ImageImportFailure.writeFailed);
     }
     return ImageImportOutcome.success(imported);
-  }
-
-  Future<String?> pickVideo({String? projectPath}) async {
-    // Op web bestaat dit pad niet, en het faalt luidruchtiger dan je zou
-    // denken: `PlatformFile.path` GOOIT daar een kale String (file_picker
-    // 5.5.0 — geen null en geen blob:-URL, zoals hier eerder stond). Die vloog
-    // ongevangen omhoog zodra iemand in de webversie op "Bestand kiezen" drukte.
-    // Bovendien schrijft `_importIntoProject` naar schijf, wat er ook niet is.
-    // De knop is inmiddels ook verborgen (video_slide_editor.dart); deze poort
-    // staat er zodat het bestand zijn eigen belofte waarmaakt.
-    if (!supportsLocalProjectFolders) return null;
-    final file = await FilePicker.pickFile(
-      type: FileType.video,
-      dialogTitle: _d('Kies een video'),
-    );
-    final path = file?.path;
-    if (path == null) return null;
-    if (!await _isAcceptableMedia(path, 'pickVideo')) return null;
-    return _importIntoProject(path, projectPath, subdir: 'media');
-  }
-
-  Future<String?> pickAudio({String? projectPath}) async {
-    // Zelfde verhaal als [pickVideo]: `path` gooit op web.
-    if (!supportsLocalProjectFolders) return null;
-    final file = await FilePicker.pickFile(
-      type: FileType.audio,
-      dialogTitle: _d('Kies een audiobestand'),
-    );
-    final path = file?.path;
-    if (path == null) return null;
-    if (!await _isAcceptableMedia(path, 'pickAudio')) return null;
-    return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
   /// Read the encoded bytes of a slide image [path] resolved against
@@ -778,14 +747,26 @@ class ImageService {
       final video = await _mediaToProject(
         next.videoPath,
         mediaDir,
-        isAudio: false,
+        fallbackName: 'video.mp4',
+        fallbackExtension: '.mp4',
         sourceProjectPath: sourceProjectPath,
       );
       if (video != null) next = next.copyWith(videoPath: video);
+      // Ondertitels reizen mee naar de doelmap (#2841): de `<track>` in de
+      // markdown moet bij het gekopieerde deck naar een lokaal bestand wijzen.
+      final captions = await _mediaToProject(
+        next.videoCaptions,
+        mediaDir,
+        fallbackName: 'ondertitels.vtt',
+        fallbackExtension: '.vtt',
+        sourceProjectPath: sourceProjectPath,
+      );
+      if (captions != null) next = next.copyWith(videoCaptions: captions);
       final audio = await _mediaToProject(
         next.audioPath,
         mediaDir,
-        isAudio: true,
+        fallbackName: 'audio.m4a',
+        fallbackExtension: '.m4a',
         sourceProjectPath: sourceProjectPath,
       );
       if (audio != null) next = next.copyWith(audioPath: audio);
@@ -802,7 +783,10 @@ class ImageService {
   Future<String?> _mediaToProject(
     String path,
     Directory mediaDir, {
-    required bool isAudio,
+    // Per soort een eigen terugval: een bestand zonder extensie in de store
+    // zou anders met de verkeerde landen (.mp4 voor een .vtt bijvoorbeeld).
+    required String fallbackName,
+    required String fallbackExtension,
     String? sourceProjectPath,
   }) async {
     if (WebAssetStore.isMemPath(path)) {
@@ -814,10 +798,8 @@ class ImageService {
         path,
         mediaDir,
         subdir: 'media',
-        // Per soort, niet één terugval voor allebei: een audiobestand zonder
-        // extensie in de store zou anders als `.mp4` landen.
-        fallbackName: isAudio ? 'audio.m4a' : 'video.mp4',
-        fallbackExtension: isAudio ? '.m4a' : '.mp4',
+        fallbackName: fallbackName,
+        fallbackExtension: fallbackExtension,
       );
     }
     if (!_shouldCopy(path)) return null;

@@ -108,6 +108,16 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
     }
   }
 
+  Future<void> _pickCaptions() async {
+    final path = await widget.imageService.pickCaptions(
+      projectPath: widget.projectPath,
+    );
+    if (path != null) {
+      widget.onUpdate(widget.slide.copyWith(videoCaptions: path));
+      setState(() {});
+    }
+  }
+
   @override
   void dispose() {
     _title.dispose();
@@ -175,6 +185,47 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
             controlAffinity: ListTileControlAffinity.leading,
           ),
         ),
+        // Ondertitels (#2841): alleen bij een lokale videobron — YouTube/Vimeo
+        // regelen captions in hun eigen speler. Het gekozen bestand reist mee
+        // in de projectmap, het pakket en de downloadbundel.
+        if (supportsLocalProjectFolders &&
+            (source.kind == VideoSourceKind.localFile ||
+                widget.slide.videoCaptions.isNotEmpty))
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  widget.slide.videoCaptions.isEmpty
+                      ? l10n.d('Geen ondertitels')
+                      : widget.slide.videoCaptions,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: widget.slide.videoCaptions.isEmpty
+                        ? AppTheme.slate400
+                        : AppTheme.slate600,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              if (widget.slide.videoCaptions.isNotEmpty)
+                IconButton(
+                  tooltip: l10n.d('Ondertitels verwijderen'),
+                  icon: const Icon(Icons.close, size: 16),
+                  onPressed: () =>
+                      widget.onUpdate(widget.slide.copyWith(videoCaptions: '')),
+                  visualDensity: VisualDensity.compact,
+                ),
+              TextButton.icon(
+                onPressed: _pickCaptions,
+                icon: const Icon(Icons.subtitles_outlined, size: 16),
+                label: Text(
+                  widget.slide.videoCaptions.isEmpty
+                      ? l10n.d('Ondertitels toevoegen…')
+                      : l10n.d('Ander bestand…'),
+                ),
+              ),
+            ],
+          ),
         const SizedBox(height: 16),
         // Knippen en audio-bijsluiting zijn verdieping; ingeklapt tenzij er
         // al een knippunt of audiobestand op deze slide staat.

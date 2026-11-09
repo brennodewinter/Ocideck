@@ -37,6 +37,27 @@ class _VideoPreviewState extends State<_VideoPreview>
   // zodat hij de dia niet ontsiert tijdens het presenteren.
   bool _hovering = false;
 
+  /// Ondertitels staan aan zodra er een bestand is (#2841); de gebruiker kan
+  /// ze per dia uitzetten met de CC-knop in dezelfde hover-rij.
+  bool _captionsOn = true;
+
+  /// Het `closedCaptionFile` voor de controller: de inhoud van
+  /// [Slide.videoCaptions] als WebVTT- of SubRip-reader, gekozen op extensie.
+  /// Alleen `.vtt` en `.srt` tellen — iets anders levert geen captions en is
+  /// géén reden om de video niet te laden.
+  @override
+  Future<ClosedCaptionFile>? mediaClosedCaptionFile(String source) {
+    if (!_captionsOn) return null;
+    final text = readSlideAssetText(
+      widget.slide.videoCaptions,
+      projectPath: widget.projectPath,
+    );
+    if (text == null) return null;
+    return widget.slide.videoCaptions.toLowerCase().endsWith('.srt')
+        ? Future.value(SubRipCaptionFile(text))
+        : Future.value(WebVTTCaptionFile(text));
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,6 +70,7 @@ class _VideoPreviewState extends State<_VideoPreview>
     if (oldWidget.slide.videoPath != widget.slide.videoPath ||
         oldWidget.slide.videoStartMs != widget.slide.videoStartMs ||
         oldWidget.slide.videoEndMs != widget.slide.videoEndMs ||
+        oldWidget.slide.videoCaptions != widget.slide.videoCaptions ||
         oldWidget.allowRemoteMedia != widget.allowRemoteMedia ||
         oldWidget.autoplay != widget.autoplay) {
       initMedia();
@@ -153,7 +175,34 @@ class _VideoPreviewState extends State<_VideoPreview>
               Center(
                 child: AspectRatio(
                   aspectRatio: controller.value.aspectRatio,
-                  child: VideoPlayer(controller),
+                  // De controller vuurt per afspeeltick; de caption-tekst
+                  // hoort daar bij bijgewerkt te worden (#2841).
+                  child: ValueListenableBuilder<VideoPlayerValue>(
+                    valueListenable: controller,
+                    builder: (context, value, _) => Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        VideoPlayer(controller),
+                        if (value.caption.text.isNotEmpty)
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: widget.w * 0.02),
+                              child: ClosedCaption(
+                                text: value.caption.text,
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  backgroundColor: Colors.black.withValues(
+                                    alpha: 0.65,
+                                  ),
+                                  fontSize: widget.w * 0.028,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               )
             else if (widget.source.kind == VideoSourceKind.remoteFile &&
@@ -209,26 +258,52 @@ class _VideoPreviewState extends State<_VideoPreview>
                   opacity: _hovering ? 1 : 0,
                   duration: const Duration(milliseconds: 160),
                   curve: Curves.easeOut,
-                  child: IconButton(
-                    tooltip: controller?.value.isPlaying == true
-                        ? context.l10n.d('Pauzeren')
-                        : context.l10n.d('Afspelen'),
-                    onPressed:
-                        controller == null || !controller.value.isInitialized
-                        ? null
-                        : () {
-                            setState(() {
-                              controller.value.isPlaying
-                                  ? controller.pause()
-                                  : controller.play();
-                            });
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        tooltip: controller?.value.isPlaying == true
+                            ? context.l10n.d('Pauzeren')
+                            : context.l10n.d('Afspelen'),
+                        onPressed:
+                            controller == null ||
+                                !controller.value.isInitialized
+                            ? null
+                            : () {
+                                setState(() {
+                                  controller.value.isPlaying
+                                      ? controller.pause()
+                                      : controller.play();
+                                });
+                              },
+                        icon: Icon(
+                          controller?.value.isPlaying == true
+                              ? Icons.pause_circle
+                              : Icons.play_circle,
+                        ),
+                        iconSize: widget.w * 0.045,
+                      ),
+                      // Ondertitels aan/uit (#2841): alleen aanbieden wanneer
+                      // de dia een bestand aanwijst; standaard aan.
+                      if (widget.slide.videoCaptions.isNotEmpty)
+                        IconButton(
+                          tooltip: _captionsOn
+                              ? context.l10n.d('Ondertitels uit')
+                              : context.l10n.d('Ondertitels aan'),
+                          onPressed: () {
+                            final c = controller;
+                            if (c == null || !c.value.isInitialized) return;
+                            setState(() => _captionsOn = !_captionsOn);
+                            c.setClosedCaptionFile(
+                              mediaClosedCaptionFile(c.dataSource),
+                            );
                           },
-                    icon: Icon(
-                      controller?.value.isPlaying == true
-                          ? Icons.pause_circle
-                          : Icons.play_circle,
-                    ),
-                    iconSize: widget.w * 0.045,
+                          icon: Icon(
+                            _captionsOn ? Icons.subtitles : Icons.subtitles_off,
+                          ),
+                          iconSize: widget.w * 0.04,
+                        ),
+                    ],
                   ),
                 ),
               ),
