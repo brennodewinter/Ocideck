@@ -446,3 +446,202 @@ class _NotesDiscardButton extends StatelessWidget {
     );
   }
 }
+
+/// Algemene achtergrondbediening, naast de instellingen van elk slidetype.
+Widget _slideBackgroundGroup(
+  BuildContext context,
+  Slide slide,
+  ValueChanged<Slide> onUpdate,
+  Deck deck,
+) => _SettingsGroup(
+  label: context.l10n.d('Achtergrondafbeelding (optioneel)'),
+  children: [
+    Padding(
+      padding: const EdgeInsets.all(10),
+      child: SlideBackgroundEditor(
+        slide: slide,
+        onUpdate: onUpdate,
+        projectPath: deck.projectPath,
+      ),
+    ),
+  ],
+);
+
+// ── Timing ────────────────────────────────────────────────────────────────────
+
+/// Automatisch doorgaan, met de duur pas ín beeld als het aan staat.
+///
+/// Voorheen stonden een vinkje, een label, een min, een waarde en een plus op één
+/// regel, met een streepje als de instelling uit stond. Vijf bedieningselementen
+/// voor één keuze, waarvan er drie meestal niets doen.
+class _TimingSetting extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+
+  const _TimingSetting({required this.slide, required this.onUpdate});
+
+  void _set(double value) {
+    final clamped = (value * 10).round() / 10; // stapjes van 0,1 s
+    onUpdate(slide.copyWith(advanceDuration: clamped < 0 ? 0 : clamped));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final duration = slide.advanceDuration;
+    final enabled = duration > 0;
+
+    return _SettingRow(
+      icon: Icons.timer_outlined,
+      label: l10n.d('Automatisch doorgaan'),
+      control: _SettingSwitch(
+        value: enabled,
+        semanticLabel: l10n.d('Automatisch doorgaan'),
+        onChanged: (v) => _set(v ? 3.0 : 0),
+      ),
+      detail: enabled
+          ? Row(
+              children: [
+                _StepperButton(
+                  icon: Icons.remove,
+                  tooltip: l10n.d('Duur verkorten'),
+                  onPressed: duration > 0.1 ? () => _set(duration - 0.1) : null,
+                ),
+                SizedBox(
+                  width: 52,
+                  child: Text(
+                    '${duration.toStringAsFixed(1)} s',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.slate700,
+                    ),
+                  ),
+                ),
+                _StepperButton(
+                  icon: Icons.add,
+                  tooltip: l10n.d('Duur verlengen'),
+                  onPressed: () => _set(duration + 0.1),
+                ),
+              ],
+            )
+          : null,
+    );
+  }
+}
+
+class _StepperButton extends StatelessWidget {
+  final IconData icon;
+  final String tooltip;
+  final VoidCallback? onPressed;
+
+  const _StepperButton({
+    required this.icon,
+    required this.tooltip,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: 26,
+    height: 26,
+    child: IconButton(
+      padding: EdgeInsets.zero,
+      tooltip: tooltip,
+      icon: Icon(icon, size: 14),
+      onPressed: onPressed,
+      color: AppTheme.slate600,
+    ),
+  );
+}
+
+// ── Audio ─────────────────────────────────────────────────────────────────────
+
+/// Audio bij deze slide: kiezen, en dan pas de vraag of hij vanzelf start.
+///
+/// De oude kaart had een eigen koptekst, een eigen kader, een eigen lettergrootte
+/// en een `CheckboxListTile` — vier keer een andere maat dan de regels eromheen.
+/// Nu is het één regel met de bestandsnaam en een keuzeknop; de autoplay-regel
+/// verschijnt pas als er iets te spelen valt.
+class _AudioSetting extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  final ImageService imageService;
+  final String? projectPath;
+
+  const _AudioSetting({
+    required this.slide,
+    required this.onUpdate,
+    required this.imageService,
+    required this.projectPath,
+  });
+
+  Future<void> _pick() async {
+    final path = await imageService.pickAudio(projectPath: projectPath);
+    if (path != null) onUpdate(slide.copyWith(audioPath: path));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final has = slide.audioPath.isNotEmpty;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _SettingRow(
+          icon: Icons.audiotrack_outlined,
+          label: l10n.d('Audio'),
+          control: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (has)
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 160),
+                  child: Text(
+                    // Bewust niet `Platform.pathSeparator`: die bestaat op web
+                    // niet, en een pad uit een .ocideck-pakket kan van een ander
+                    // besturingssysteem komen dan waarop je het opent.
+                    slide.audioPath.split(RegExp(r'[\\/]')).last,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12, color: AppTheme.slate700),
+                  ),
+                ),
+              // Geen audiokiezer op web: geen projectmap om in te importeren.
+              // Een bestaand pad uit een pakket blijft wél zichtbaar.
+              if (supportsLocalProjectFolders)
+                TextButton(
+                  onPressed: _pick,
+                  child: Text(
+                    has ? l10n.d('Wijzigen') : l10n.d('Kiezen'),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+              if (has)
+                _StepperButton(
+                  icon: Icons.clear,
+                  tooltip: l10n.d('Audio verwijderen'),
+                  onPressed: () => onUpdate(
+                    slide.copyWith(audioPath: '', audioAutoplay: false),
+                  ),
+                ),
+            ],
+          ),
+        ),
+        // Pas een vraag als er iets te spelen valt. Een uitgegrijsde
+        // autoplay-schakelaar zonder audiobestand is ruis.
+        if (has)
+          _SettingRow(
+            icon: Icons.play_circle_outline,
+            label: l10n.d('Automatisch afspelen'),
+            control: _SettingSwitch(
+              value: slide.audioAutoplay,
+              semanticLabel: l10n.d('Automatisch afspelen'),
+              onChanged: (v) => onUpdate(slide.copyWith(audioAutoplay: v)),
+            ),
+          ),
+      ],
+    );
+  }
+}

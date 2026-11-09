@@ -183,6 +183,12 @@ Color _profileSlideBackground(BuildContext context, ThemeProfile profile) =>
       AppTheme.parseHexColor(profile.slideBackgroundColor),
     );
 
+Color _titleContentBackground(BuildContext context, ThemeProfile profile) =>
+    _contentBackground(
+      context,
+      AppTheme.parseHexColor(profile.titleBackgroundColor),
+    );
+
 ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
   final foreground = normalizeMarpColor(style.color);
   final background = normalizeMarpColor(style.backgroundColor);

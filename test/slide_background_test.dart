@@ -16,6 +16,7 @@ import 'package:ocideck/widgets/editors/slide_background_editor.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 import 'slide_fixtures.dart';
+import 'support/pump_until.dart';
 
 void main() {
   for (final type in SlideType.values) {
@@ -134,10 +135,10 @@ void main() {
           ),
         ),
       );
-      await tester.runAsync(() async {
-        await Future<void>.delayed(const Duration(milliseconds: 30));
-      });
-      await tester.pump(const Duration(milliseconds: 100));
+      await pumpUntil(tester, () {
+        final images = tester.widgetList<RawImage>(find.byType(RawImage));
+        return images.any((image) => image.image != null);
+      }, reason: 'achtergrondafbeelding is niet geladen');
       final boundary =
           key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
       final image = await tester.runAsync(() => boundary.toImage());

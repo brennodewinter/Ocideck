@@ -94,10 +94,7 @@ class _CodePreview extends StatelessWidget {
     }
 
     return Container(
-      color: _contentBackground(
-        context,
-        AppTheme.parseHexColor(profile.slideBackgroundColor),
-      ),
+      color: _profileSlideBackground(context, profile),
       child: Padding(
         padding: EdgeInsets.fromLTRB(pad, topPad, pad, bottomPad),
         child: Column(

@@ -60,10 +60,7 @@ class _ScorecardPreview extends StatelessWidget {
     final layout = _ScorecardLayout.of(entries.length);
 
     return Container(
-      color: _contentBackground(
-        context,
-        AppTheme.parseHexColor(profile.slideBackgroundColor),
-      ),
+      color: _profileSlideBackground(context, profile),
       child: SizedBox.expand(
         child: FittedBox(
           fit: BoxFit.scaleDown,

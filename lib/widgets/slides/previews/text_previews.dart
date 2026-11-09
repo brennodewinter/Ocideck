@@ -235,10 +235,7 @@ class _TitlePreview extends StatelessWidget {
     final pad = w * 0.08;
     return Container(
       width: double.infinity,
-      color: _contentBackground(
-        context,
-        AppTheme.parseHexColor(profile.titleBackgroundColor),
-      ),
+      color: _titleContentBackground(context, profile),
       padding: EdgeInsets.fromLTRB(pad, pad * 0.7, pad, pad * 0.7),
       child: _lockupColumn(context),
     );
@@ -306,10 +303,7 @@ class _TitlePreview extends StatelessWidget {
 
     if (!hasBg) {
       return Container(
-        color: _contentBackground(
-          context,
-          AppTheme.parseHexColor(profile.titleBackgroundColor),
-        ),
+        color: _titleContentBackground(context, profile),
         child: SizedBox.expand(child: _lockup(context)),
       );
     }
@@ -319,10 +313,7 @@ class _TitlePreview extends StatelessWidget {
     // runs past the title's accent rule and no text crosses the picture.
     if (slide.imageSize != 0) {
       return Container(
-        color: _contentBackground(
-          context,
-          AppTheme.parseHexColor(profile.titleBackgroundColor),
-        ),
+        color: _titleContentBackground(context, profile),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
