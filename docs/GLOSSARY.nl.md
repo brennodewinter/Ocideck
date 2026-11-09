@@ -17,9 +17,9 @@ applicatie-backend; alle verwerking gebeurt lokaal.
 **Deck** — een volledige presentatie: metadata, een geordende lijst van slides, een
 themaprofiel en een TLP-classificatie. Onveranderlijk model (`lib/models/deck.dart`).
 
-**Slide** — één onveranderlijke, sterk getypeerde slide. Zijn `SlideType` (36 waarden)
+**Slide** — één onveranderlijke, sterk getypeerde slide. Zijn `SlideType` (37 waarden)
 kiest de layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
-`twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
+`twoImages`, `imageGallery` (meerdere beelden als raster of stapel, #2838), `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
 `cockpit`, `question`, `timeline`, `scorecard`, `menu` (niet-lineair keuzemenu, #1162), de pentest-layouts (`assets`,
 `discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
 `signOff`), de Procesverbetering-layouts (`matrix`, `canvas`, `tree`,
