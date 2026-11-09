@@ -524,7 +524,6 @@ extension _MarkdownParse on MarkdownService {
       imagePath2: body.imagePath2,
       imageCaption: body.imageCaption,
       imageCaption2: body.imageCaption2,
-      // Het OciDeck-commentaar wint; anders telt de Marp-alt uit `![alt](pad)`.
       imageAltText: alt.alt.isNotEmpty ? alt.alt : body.imageAlt,
       imageAltText2: alt.alt2.isNotEmpty ? alt.alt2 : body.imageAlt2,
       imageFocalX: focus.fx,
