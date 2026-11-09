@@ -176,6 +176,40 @@ String _parsedTitleMarkdown(String remaining) {
   );
 }
 
+// Pure helpers: top-level, not in the extension, so they stay out of the
+// MarkdownService class-size count (tool/check_conventions.dart).
+
+/// Parses an `x,y` image focal-point comment into a clamped (0..1) pair, or
+/// null when the value is malformed (fail-safe: the caller keeps the centre
+/// default). Plain split — no RegExp — so it stays cheap on the parse path.
+(double, double)? _parseFocalPair(String raw) {
+  final parts = raw.trim().split(',');
+  if (parts.length != 2) return null;
+  final x = double.tryParse(parts[0].trim());
+  final y = double.tryParse(parts[1].trim());
+  if (x == null || y == null || !x.isFinite || !y.isFinite) return null;
+  return (x.clamp(0.0, 1.0), y.clamp(0.0, 1.0));
+}
+
+/// The image size (`![bg N%]`) to store: the body value, or the `_style`
+/// `--image-width` when absent. `0` stays "auto"; capped at 400% so a crafted
+/// `![bg 900000%]` can't blow the layout box up.
+int _cappedImageSize(int bodySize, int styleImageWidth) {
+  final size = bodySize == 0 && styleImageWidth > 0
+      ? styleImageWidth
+      : bodySize;
+  return size > 400 ? 400 : size;
+}
+
+/// De projectmap waarin de Markdown en zijn relatieve assets staan.
+String? _projectPathFor(String? filePath) {
+  if (filePath == null) return null;
+  final sep = filePath.contains('/') ? '/' : '\\';
+  final parts = filePath.split(sep);
+  if (parts.length <= 1) return null;
+  return parts.sublist(0, parts.length - 1).join(sep);
+}
+
 extension _MarkdownParse on MarkdownService {
   Deck _doParse(String markdown, {String? filePath, String fileHash = ''}) {
     final fm = _parseFrontMatter(markdown);
@@ -300,18 +334,6 @@ extension _MarkdownParse on MarkdownService {
     return (fx: fx, fy: fy, fx2: fx2, fy2: fy2, zoom: zoom, block: cleaned);
   }
 
-  /// Parses an `x,y` image focal-point comment into a clamped (0..1) pair, or
-  /// null when the value is malformed (fail-safe: the caller keeps the centre
-  /// default). Plain split — no RegExp — so it stays cheap on the parse path.
-  (double, double)? _parseFocalPair(String raw) {
-    final parts = raw.trim().split(',');
-    if (parts.length != 2) return null;
-    final x = double.tryParse(parts[0].trim());
-    final y = double.tryParse(parts[1].trim());
-    if (x == null || y == null || !x.isFinite || !y.isFinite) return null;
-    return (x.clamp(0.0, 1.0), y.clamp(0.0, 1.0));
-  }
-
   /// Lifts the WCAG alt-text comments (`ocideck_image_alt` / `…_alt2`, AI_ASSIST
   /// §6.1) out of [block] and decodes them (unescaping `-->` like presenter
   /// notes), so the directive is stripped before the generic scan treats it as
@@ -338,25 +360,6 @@ extension _MarkdownParse on MarkdownService {
       return m.group(0)!;
     });
     return (alt: alt, alt2: alt2, block: cleaned);
-  }
-
-  /// The image size (`![bg N%]`) to store: the body value, or the `_style`
-  /// `--image-width` when absent. `0` stays "auto"; capped at 400% so a crafted
-  /// `![bg 900000%]` can't blow the layout box up.
-  int _cappedImageSize(int bodySize, int styleImageWidth) {
-    final size = bodySize == 0 && styleImageWidth > 0
-        ? styleImageWidth
-        : bodySize;
-    return size > 400 ? 400 : size;
-  }
-
-  /// De projectmap waarin de Markdown en zijn relatieve assets staan.
-  static String? _projectPathFor(String? filePath) {
-    if (filePath == null) return null;
-    final sep = filePath.contains('/') ? '/' : '\\';
-    final parts = filePath.split(sep);
-    if (parts.length <= 1) return null;
-    return parts.sublist(0, parts.length - 1).join(sep);
   }
 
   /// De slidetypes met een eigen gestructureerde body (chart, cockpit, finding,
