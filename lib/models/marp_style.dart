@@ -1,8 +1,11 @@
-/// Standard Marp visual directives that OciDeck can round-trip and render.
+/// Bestaande sterkte van de citaatwaas, in procenten.
+const kDefaultQuoteImageOverlayStrength = 52;
+
+/// Marp visual directives and local image presentation settings.
 ///
 /// A missing value inherits. An explicitly empty value disables the inherited
-/// deck value. The public values stay non-null so render callers remain simple;
-/// the matching `has*` getters carry the third state.
+/// deck value. Standard directives use `has*` flags for this third state.
+/// The local overlay strength is nullable and has an effective default getter.
 class MarpStyle {
   final String color;
   final String backgroundColor;
@@ -12,6 +15,11 @@ class MarpStyle {
   final String imageFit;
   final List<String> imageFilters;
   final bool headingFit;
+
+  /// Lokale citaatwaas; null behoudt de bestaande standaard en overerving.
+  final int? imageOverlayStrength;
+  int get effectiveImageOverlayStrength =>
+      imageOverlayStrength ?? kDefaultQuoteImageOverlayStrength;
 
   final bool hasColor;
   final bool hasBackgroundColor;
@@ -30,7 +38,15 @@ class MarpStyle {
     String? imageFit,
     List<String>? imageFilters,
     this.headingFit = false,
-  }) : color = color ?? '',
+    int? imageOverlayStrength,
+  }) : imageOverlayStrength = imageOverlayStrength == null
+           ? null
+           : imageOverlayStrength < 0
+           ? 0
+           : imageOverlayStrength > 100
+           ? 100
+           : imageOverlayStrength,
+       color = color ?? '',
        backgroundColor = backgroundColor ?? '',
        backgroundImage = backgroundImage ?? '',
        header = header ?? '',
@@ -54,6 +70,7 @@ class MarpStyle {
     required this.imageFit,
     required this.imageFilters,
     required this.headingFit,
+    required this.imageOverlayStrength,
     required this.hasColor,
     required this.hasBackgroundColor,
     required this.hasBackgroundImage,
@@ -71,7 +88,8 @@ class MarpStyle {
       !hasFooter &&
       !hasImageFit &&
       !hasImageFilters &&
-      !headingFit;
+      !headingFit &&
+      imageOverlayStrength == null;
 
   MarpStyle inherit(MarpStyle fallback) => MarpStyle._(
     color: hasColor ? color : fallback.color,
@@ -86,6 +104,7 @@ class MarpStyle {
     imageFit: hasImageFit ? imageFit : fallback.imageFit,
     imageFilters: hasImageFilters ? imageFilters : fallback.imageFilters,
     headingFit: headingFit,
+    imageOverlayStrength: imageOverlayStrength ?? fallback.imageOverlayStrength,
     hasColor: hasColor || fallback.hasColor,
     hasBackgroundColor: hasBackgroundColor || fallback.hasBackgroundColor,
     hasBackgroundImage: hasBackgroundImage || fallback.hasBackgroundImage,
@@ -104,6 +123,7 @@ class MarpStyle {
     String? imageFit,
     List<String>? imageFilters,
     bool? headingFit,
+    int? imageOverlayStrength,
     bool clearFooter = false,
     bool clearBackgroundImage = false,
   }) => MarpStyle._(
@@ -117,6 +137,8 @@ class MarpStyle {
     imageFit: imageFit ?? this.imageFit,
     imageFilters: imageFilters ?? this.imageFilters,
     headingFit: headingFit ?? this.headingFit,
+    imageOverlayStrength:
+        imageOverlayStrength?.clamp(0, 100) ?? this.imageOverlayStrength,
     hasColor: color != null || hasColor,
     hasBackgroundColor: backgroundColor != null || hasBackgroundColor,
     hasBackgroundImage: clearBackgroundImage
@@ -137,6 +159,8 @@ class MarpStyle {
     if (hasImageFit) 'imageFit': imageFit,
     if (hasImageFilters) 'imageFilters': imageFilters,
     'headingFit': headingFit,
+    if (imageOverlayStrength != null)
+      'imageOverlayStrength': imageOverlayStrength,
   };
 
   factory MarpStyle.fromJson(Map<String, Object?> json) => MarpStyle(
@@ -148,6 +172,7 @@ class MarpStyle {
     imageFit: _optional<String>(json, 'imageFit'),
     imageFilters: _stringList(json, 'imageFilters'),
     headingFit: _optional<bool>(json, 'headingFit') ?? false,
+    imageOverlayStrength: _optional<int>(json, 'imageOverlayStrength'),
   );
 
   @override
@@ -161,6 +186,7 @@ class MarpStyle {
       imageFit == other.imageFit &&
       _listEquals(imageFilters, other.imageFilters) &&
       headingFit == other.headingFit &&
+      imageOverlayStrength == other.imageOverlayStrength &&
       hasColor == other.hasColor &&
       hasBackgroundColor == other.hasBackgroundColor &&
       hasBackgroundImage == other.hasBackgroundImage &&
@@ -178,6 +204,7 @@ class MarpStyle {
     footer,
     imageFit,
     Object.hashAll(imageFilters),
+    imageOverlayStrength,
     headingFit,
     hasColor,
     hasBackgroundColor,
