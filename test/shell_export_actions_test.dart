@@ -10,7 +10,6 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
-import 'package:ocideck/services/download_delivery.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart';
@@ -22,10 +21,8 @@ import 'package:ocideck/widgets/dialogs/package_encrypt_dialog.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// De twee uitvoerpaden die NIET door `ExportService` lopen: het `.ocideck`-
-/// pakket en het auditdossier (`widgets/shell/shell_actions_export.dart`). Ze
-/// schrijven de meest complete overdracht die de app kent — markdown plus élke
-/// asset — en stonden op nul uitgevoerde regels.
+/// De volledige pakketoverdracht buiten ExportService, plus een regressiecheck
+/// dat oude modulevoorkeuren de verwijderde MIAUW-opdrachten niet terugbrengen.
 ///
 /// Alles hier draait echt: de classificatiepoort, het wachtwoorddialoog, het
 /// lezen van de bewijsbytes, de zip-bouw en het wegschrijven naar schijf. Het
@@ -39,8 +36,7 @@ void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
     SharedPreferences.setMockInitialValues({
-      // Voorbij de toestemmingspoort, en de informatieveiligheidsmodule aan —
-      // anders staat het auditdossier niet in het opdrachtenpalet.
+      // Oude modulevoorkeuren mogen rapportopdrachten niet terugbrengen.
       'app_consent_accepted': true,
       'secModuleEnabled': true,
       'privacyImageFaceDetection': false,
@@ -435,184 +431,11 @@ void main() {
     expect(asked, isEmpty);
   });
 
-  testWidgets('het auditdossier eist eerst een verzegeld rapport', (
+  testWidgets('oude modulevoorkeur herstelt geen MIAUW-rapportopdrachten', (
     tester,
   ) async {
     await openPalette(tester);
-    await runCommand(
-      tester,
-      'auditdossier',
-      'Auditdossier exporteren',
-      until: () => find
-          .text('Finaliseer en verzegel het rapport eerst.')
-          .evaluate()
-          .isNotEmpty,
-      reason: 'de eis van een verzegeld rapport bleef stil',
-    );
-
-    expect(
-      find.text('Finaliseer en verzegel het rapport eerst.'),
-      findsOneWidget,
-    );
-    expect(asked, isEmpty);
-    expect(find.byType(PackageEncryptDialog), findsNothing);
-  });
-
-  Deck sealedDeckWithEvidence() {
-    File(
-      p.join(tmp.path, 'bewijs.png'),
-    ).writeAsBytesSync(const [0x89, 0x50, 0x4E, 0x47, 1, 2, 3, 4]);
-    return Deck(
-      title: 'Verzegeld',
-      projectPath: tmp.path,
-      finalized: true,
-      sealHash: 'a' * 64,
-      sealAlgo: 'sha256',
-      sealAt: '2026-07-21T10:00:00Z',
-      slides: [
-        Slide.create(SlideType.title).copyWith(title: 'Verzegeld'),
-        Slide.create(SlideType.image).copyWith(
-          title: 'Bewijs',
-          imagePath: 'bewijs.png',
-          findingRole: FindingRole.evidence,
-        ),
-      ],
-    );
-  }
-
-  for (final rule in [
-    'verplichte classificatie',
-    'classificatie alleen op dia',
-    'minimum',
-    'plafond',
-  ]) {
-    testWidgets('auditdossier volgt het $rule vóór aflevering', (tester) async {
-      SharedPreferences.setMockInitialValues({
-        'app_consent_accepted': true,
-        'secModuleEnabled': true,
-        // Deze test meet de classificatiepoort, niet de achtergrond-beeldscan.
-        'privacyImageFaceDetection': false,
-        if (rule == 'verplichte classificatie' ||
-            rule == 'classificatie alleen op dia')
-          'requireClassificationOnExport': true,
-        if (rule == 'minimum') 'minRequiredExportTlp': 'green',
-        if (rule == 'plafond') 'maxReleaseExportTlp': 'amber',
-      });
-      final base = sealedDeckWithEvidence();
-      final deck = switch (rule) {
-        'classificatie alleen op dia' => base.copyWith(
-          slides: [
-            base.slides.first,
-            base.slides.last.copyWith(tlp: TlpLevel.green),
-          ],
-        ),
-        'minimum' => base.copyWith(tlp: TlpLevel.clear),
-        'plafond' => base.copyWith(
-          slides: [
-            base.slides.first,
-            base.slides.last.copyWith(tlp: TlpLevel.red),
-          ],
-        ),
-        _ => base,
-      };
-      var downloads = 0;
-      if (rule == 'plafond') {
-        debugDeliversByDownload = true;
-        debugDownloadSink = (_, _, _) {
-          downloads++;
-          return true;
-        };
-        addTearDown(() {
-          debugDeliversByDownload = null;
-          debugDownloadSink = null;
-        });
-      }
-
-      await openPalette(tester, deck: deck);
-      await runCommand(
-        tester,
-        'auditdossier',
-        'Auditdossier exporteren',
-        until: () =>
-            encryptDialogShown() ||
-            find
-                .textContaining('Export geblokkeerd door classificatiebeleid')
-                .evaluate()
-                .isNotEmpty,
-        reason: 'de poort of het versleutelingsvenster verscheen niet',
-      );
-
-      expect(
-        find.textContaining('Export geblokkeerd door classificatiebeleid'),
-        findsOneWidget,
-      );
-      expect(find.byType(PackageEncryptDialog), findsNothing);
-      expect(asked, isEmpty);
-      expect(File(destination!).existsSync(), isFalse);
-      expect(downloads, 0);
-    });
-  }
-
-  testWidgets('een mislukt auditdossier meldt dat ook', (tester) async {
-    destination = p.join(tmp.path, 'bestaat', 'niet', 'dossier.ocideck');
-
-    await openPalette(tester, deck: sealedDeckWithEvidence());
-    await runCommand(
-      tester,
-      'auditdossier',
-      'Auditdossier exporteren',
-      until: encryptDialogShown,
-      reason: 'het wachtwoorddialoog kwam niet op',
-    );
-
-    await confirmExport(
-      tester,
-      () => find.textContaining('Export mislukt:').evaluate().isNotEmpty,
-      reason: 'een mislukt dossier bleef stil',
-    );
-
-    expect(find.textContaining('Export mislukt:'), findsOneWidget);
-    expect(find.text('Kopiëren'), findsOneWidget);
-  });
-
-  testWidgets('het auditdossier bundelt de index met de bewijs-hashes', (
-    tester,
-  ) async {
-    await openPalette(tester, deck: sealedDeckWithEvidence());
-    await runCommand(
-      tester,
-      'auditdossier',
-      'Auditdossier exporteren',
-      until: encryptDialogShown,
-      reason: 'het wachtwoorddialoog kwam niet op',
-    );
-
-    await confirmExport(
-      tester,
-      () => File(destination!).existsSync(),
-      reason: 'er is geen auditdossier weggeschreven',
-    );
-
-    expect(
-      asked.single,
-      'Verzegeld_auditdossier.ocideck',
-      reason: 'het dossier krijgt een eigen, herkenbare naam',
-    );
-
-    final archive = ZipDecoder().decodeBytes(
-      File(destination!).readAsBytesSync(),
-    );
-    final index = archive.files.firstWhere((f) => f.name == 'AUDIT_DOSSIER.md');
-    final text = String.fromCharCodes(index.content as List<int>);
-    expect(text, contains('Auditdossier'));
-    // De hashtabel wordt uit de bewijsbytes van schijf opgebouwd; staat het
-    // bestand er niet in, dan is de tabel leeg en is het dossier waardeloos
-    // als bewijsketen.
-    expect(text, contains('bewijs.png'));
-
-    expect(
-      find.textContaining('Auditdossier geëxporteerd naar:'),
-      findsOneWidget,
-    );
+    expect(find.text('Auditdossier exporteren'), findsNothing);
+    expect(find.text('MIAUW-compliance'), findsNothing);
   });
 }
