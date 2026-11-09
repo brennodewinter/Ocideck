@@ -449,6 +449,7 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.twoBullets: Icons.view_column_outlined,
   SlideType.bulletsImage: Icons.view_agenda_outlined,
   SlideType.twoImages: Icons.auto_stories_outlined,
+  SlideType.imageGallery: Icons.photo_library_outlined,
   SlideType.image: Icons.image_outlined,
   SlideType.video: Icons.movie_outlined,
   SlideType.quote: Icons.format_quote_outlined,
