@@ -37,6 +37,7 @@ import '../utils/log.dart';
 import '../utils/utf8_bom.dart';
 import '../utils/inline_markdown.dart';
 import '../utils/markdown_paste_cleanup.dart';
+import 'markdown_parse/body_parse.dart';
 
 part 'markdown_service_helpers.dart';
 part 'markdown_service_parse.dart';
