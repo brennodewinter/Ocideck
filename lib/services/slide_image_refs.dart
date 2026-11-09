@@ -45,6 +45,9 @@ enum SlideImageSlot {
   /// Een `![…](…)` in de vrije tekst ([Slide.customMarkdown]).
   inline,
 
+  /// Een beeldentry van een `imageGallery`-dia ([Slide.galleryImages], #2838).
+  gallery,
+
   /// Een afbeelding in het `question`-blok ([Slide.customMarkdown]): het
   /// antwoord van een imagePair-vraag, of de afbeelding waarop een
   /// hotspot-vraag zijn gebieden aanwijst. In beide gevallen is de afbeelding
@@ -154,6 +157,20 @@ List<SlideImageRef> slideImageRefs(Slide slide) {
         ),
       );
     }
+  }
+  // De galerijentries zijn volle `![alt](pad)`-tokens: het pad is de
+  // verwijzing, de alt-tekst reist erin mee (#2838).
+  for (final entry in slide.galleryImages) {
+    final match = _imageRef.firstMatch(entry);
+    final path = (match?.group(2) ?? '').trim();
+    if (path.isEmpty) continue;
+    refs.add(
+      SlideImageRef(
+        path: path,
+        slot: SlideImageSlot.gallery,
+        alt: (match?.group(1) ?? '').trim(),
+      ),
+    );
   }
   return refs;
 }
@@ -297,15 +314,25 @@ Slide rewriteSlideImagePaths(Slide slide, String? Function(String path) map) {
       ? _rewriteQuestionAnswerImages(slide.customMarkdown, map)
       : slide.customMarkdown;
   final newMarkdown = rewriteInlineImagePaths(questionMarkdown, map);
+  final newGallery = slide.galleryImages
+      .map((entry) => rewriteInlineImagePaths(entry, map))
+      .toList();
+  final galleryChanged =
+      newGallery.length != slide.galleryImages.length ||
+      [
+        for (var i = 0; i < newGallery.length; i++) i,
+      ].any((i) => newGallery[i] != slide.galleryImages[i]);
   if (newImage == null &&
       newImage2 == null &&
-      newMarkdown == slide.customMarkdown) {
+      newMarkdown == slide.customMarkdown &&
+      !galleryChanged) {
     return slide;
   }
   return slide.copyWith(
     imagePath: newImage,
     imagePath2: newImage2,
     customMarkdown: newMarkdown,
+    galleryImages: newGallery,
   );
 }
 

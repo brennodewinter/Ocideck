@@ -213,6 +213,8 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.ganttScale => slide.ganttScale,
     SlideField.ganttSections => slide.ganttSections,
     SlideField.menuLayout => slide.menuLayout,
+    SlideField.galleryImages => slide.galleryImages,
+    SlideField.galleryLayout => slide.galleryLayout,
     SlideField.tableColumnAlignments => slide.tableColumnAlignments,
     SlideField.tableNumberColumns => slide.tableNumberColumns,
     SlideField.timelineLayout => slide.timelineLayout,

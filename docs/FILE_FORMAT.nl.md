@@ -1647,6 +1647,35 @@ hier" wordt getoond.
 > De onthulstap (hoeveel gebeurtenissen op dit moment in stapmodus worden getoond) is
 > **alleen-sessie** en wordt nooit naar het bestand geschreven.
 
+**Afbeeldingsgroep** (`gallery`) — #2838
+
+Een afbeeldingsgroep bevat **meerdere afbeeldingen op één dia** als een gewone
+lijst `![alt](pad)`-regels — platte Markdown die in elke lezer als rij beelden
+rendert, met de alt-tekst van elke afbeelding in zijn eigen token meegereisd:
+
+```markdown
+<!-- _class: gallery -->
+# Krantenkoppen van deze week
+
+![NRC over de hack](media/nrc.png)
+![Volkskrant kop](media/vk.png)
+![Nu.nl nieuwsitem](media/nu.png)
+```
+
+De indeling is een **presentatie-optie**, geen inhoud, dus hij gaat heen en
+terug als extra `_class`-token naast het basis-`gallery`-token:
+
+- `gallery-stack` — de beelden liggen op elkaar met kleine deterministische
+  verschuiving en draaiing, en tijdens het presenteren valt er per klik één
+  afbeelding op de stapel (de eerste ligt er al, zodat de dia nooit leeg
+  opent). Afwezig = **raster**: alle beelden naast elkaar, meteen zichtbaar.
+
+Statische exports (PDF/PPTX, LaTeX/beamer, Marp) tonen altijd de eindstand —
+alle beelden zichtbaar — want een stapel kan in een document niet neervallen.
+De stapelplaatsing volgt uit het dia-id, zodat presentator, beamerscherm en
+elke export exact dezelfde stapel zien. Gebruikers met verminderde beweging
+zien de beelden verschijnen zonder de valanimatie.
+
 **Scorekaart** (`scorecard`) — een handvol kopcijfers, elk met het cijfer
 uit de vorige rapportage ernaast, zodat een terugkerende rapportage leidt met wat er
 veranderde. Opgeslagen als een normale Markdown-tabel (zoals `checklist` / `scope-matrix`) zodat het
@@ -3397,7 +3426,7 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 | **Commentaar** | waarschuwing | Een kale Marp-richtlijn (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck modelleert die niet, dus de hele slide blijft vrije Markdown en krijgt geen slidetype (§8, §9). *(Toegevoegd 2026-08-27, #1815 — deze terugval gebeurde eerder zonder één woord uitleg.)* |
 | **Codeblokken** | fout | Oneven aantal ` ``` `-regels (niet gesloten). |
 | **`_class`** | fout | Misvormde `<!-- _class: ... -->`. |
-| **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`, `objective`, `module`, `feedback`, `assessment-summary`, `kennischeck` (alleen-lezen, leest als `question`); de optietokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens en liet er twaalf weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, de vier `timeline-…`-opties, `table-overdue` en `image-title-above`. Die laatste twee zijn diezelfde dag aan de woordenlijst toegevoegd; zie hieronder. Uitgebreid 2026-09-06 met de vier eLearning-tokens en het opgeheven `kennischeck`, die de controle allemaal aanvaardt.)* |
+| **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`, `objective`, `module`, `feedback`, `assessment-summary`, `kennischeck` (alleen-lezen, leest als `question`), `gallery`; de optietokens `gallery-stack`, `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens en liet er twaalf weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, de vier `timeline-…`-opties, `table-overdue` en `image-title-above`. Die laatste twee zijn diezelfde dag aan de woordenlijst toegevoegd; zie hieronder. Uitgebreid 2026-09-06 met de vier eLearning-tokens en het opgeheven `kennischeck`, die de controle allemaal aanvaardt.)* |
 | **Slide-metadata** | fout | Onbekende `<!-- tlp: ... -->`, niet-numerieke `<!-- advance: ... -->`, of ongeldige `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Twee kolommen** | fout | Ongeldige base64/JSON in een verouderd `ocideck_two_bullets_*`-commentaar (vervallen; §5). |
 | **Beelden** | fout | `![...](...` zonder afsluitende `)`. |

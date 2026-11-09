@@ -1537,6 +1537,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeeldingsgroep': 'Skupina slik',
+  'Stapel': 'Kopica',
+  'Afbeelding toevoegen': 'Dodaj sliko',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Več slik na enem prosojnici. Izberite mrežo (vse ena ob drugi) ali kopico (ena slika pade na klik, kot izrezki iz časopisov). Dodajte slike iz knjižnice in vsaki dajte nadomestno besedilo.',
   'Ondertitels': 'Podnapisi',
   'Ander bestand…': 'Druga datoteka…',
   'Geen ondertitels': 'Brez podnapisov',

@@ -26,6 +26,7 @@ class BodyParse {
   bool sawBgRight = false;
   int bgLeftWidth = 0;
   int bgRightWidth = 0;
+
   String videoPath = '';
   bool videoAutoplay = false;
   int videoStartMs = 0;

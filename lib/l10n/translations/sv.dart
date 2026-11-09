@@ -1536,6 +1536,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeeldingsgroep': 'Bildgrupp',
+  'Stapel': 'Trave',
+  'Afbeelding toevoegen': 'Lägg till bild',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Flera bilder på en bild. Välj rutnät (alla sida vid sida) eller trave (en bild faller per klick, som tidningsurklipp). Lägg till bilder från biblioteket och ge varje bild en alt-text.',
   'Ondertitels': 'Undertexter',
   'Ander bestand…': 'Annan fil…',
   'Geen ondertitels': 'Inga undertexter',

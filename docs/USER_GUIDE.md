@@ -785,7 +785,8 @@ model provides, and is planned for a later phase. *(Added 2026-08-27.)*
 ## Slide types
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
-bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
+bullet columns**, **bullets + image**, **two images**, **image group**,
+**large image**, **video**,
 **quote**, **table**, **source code**, **chart** (bar, horizontal
 bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
 spider/radar, scatter, waterfall, heatmap/risk matrix, or target-and-actual — plus
@@ -839,7 +840,15 @@ off for the familiar text-left, image-right layout. The image-panel width
 control applies to the picture's side in either layout. The choice is saved in
 the deck as the optional `<!-- ocideck_split_image_side: left -->` comment; decks
 without it keep the image on the right. For a **two images** slide, **Swap images** exchanges the
-left and right pictures, including their captions, alt text, crop focal points
+left and right pictures, including their captions, alt text, crop focal points.
+An **image group** slide holds any number of images on one slide (#2838): in the
+editor you pick the layout — **grid** shows them all side by side at once,
+**stack** piles them with small offsets and during a presentation each click
+drops one image onto the pile (like laying down newspaper headlines, the first
+one already there). Add images from the library, give each its own alt text,
+and reorder or remove them per row. Static exports always show all images; the
+pile falls only in the live presenter and beamer screen, and reduced-motion
+users see the images appear without the fall
 and panel widths.
 The saved Markdown still uses the ordinary `![bg left:…]` and `![bg right:…]`
 images, so there is no extra layout marker for that action.

@@ -767,6 +767,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afbeeldingsgroep': 'Image group',
+  'Stapel': 'Stack',
+  'Afbeelding toevoegen': 'Add image',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Multiple images on one slide. Choose grid (all side by side) or stack (one image drops per click, like newspaper headlines you lay down). Add images from the library and give each image an alt text.',
   'Ondertitels': 'Captions',
   'Ander bestand…': 'Different file…',
   'Geen ondertitels': 'No captions',

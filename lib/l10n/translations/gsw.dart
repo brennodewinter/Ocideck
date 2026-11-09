@@ -1537,6 +1537,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeeldingsgroep': 'Bildgruppe',
+  'Stapel': 'Stapel',
+  'Afbeelding toevoegen': 'Bild dezuetue',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Mehreri Billed uf einere Dia. Raster (alli nääbenenand) oder Stapel (pro Klick fällt es Bild derzue, wie Zitigsusschnitt, wo mer ableit). Billed us de Bibliothek dezue tue und jedem es Alt-Text gäh.',
   'Ondertitels': 'Untertitel',
   'Ander bestand…': 'Anderi Datei…',
   'Geen ondertitels': 'Keini Untertitel',

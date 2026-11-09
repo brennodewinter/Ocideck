@@ -1553,6 +1553,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeeldingsgroep': 'Grupp ta’ stampi',
+  'Stapel': 'Munzell',
+  'Afbeelding toevoegen': 'Żid stampa',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Diversi stampi fuq slide waħda. Agħżel gradilja (kollha ġenb xulxin) jew munzell (stampa waħda taqa’ għal kull klikk, bħal qatgħa tal-gazzetti). Żid stampi mill-librerija u agħti kull stampa test alternattiv.',
   'Ondertitels': 'Sottotitoli',
   'Ander bestand…': 'File ieħor…',
   'Geen ondertitels': 'L-ebda sottotitoli',

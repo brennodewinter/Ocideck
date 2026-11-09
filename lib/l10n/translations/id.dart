@@ -1537,6 +1537,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeeldingsgroep': 'Grup gambar',
+  'Stapel': 'Tumpukan',
+  'Afbeelding toevoegen': 'Tambah gambar',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Beberapa gambar pada satu slide. Pilih kisi (semua berdampingan) atau tumpukan (satu gambar jatuh per klik, seperti kliping berita yang diletakkan). Tambahkan gambar dari pustaka dan beri setiap gambar teks alt.',
   'Ondertitels': 'Takarir',
   'Ander bestand…': 'Berkas lain…',
   'Geen ondertitels': 'Tanpa takarir',

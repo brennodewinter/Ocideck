@@ -774,6 +774,7 @@ The first class determines (together with the content) the **slide type**:
 | Title page | `title` | — |
 | Section divider | `section` | — |
 | Two bullet columns | `two-bullets` | — |
+| Image group (#2838) | `gallery` (+ optional `gallery-stack`) | — |
 | Bullets + image | `split` | bullets **and** image present |
 | Quote | `quote` | a `>` line is present |
 | Video | `video` | a `<video>` tag or an `<iframe class="ocideck-embed">` is present |
@@ -1698,6 +1699,35 @@ token, and only when it differs from the 1600 ms default:
 ```
 
 It is the full draw-in duration in milliseconds, clamped to 400–30000 ms.
+
+**Image group** (`gallery`) — #2838
+
+An image group holds **several images on one slide** as an ordinary list of
+`![alt](path)` lines — plain Markdown that renders as a row of images in any
+reader, with each alt text travelling inside its own token:
+
+```markdown
+<!-- _class: gallery -->
+# Krantenkoppen van deze week
+
+![NRC over de hack](media/nrc.png)
+![Volkskrant kop](media/vk.png)
+![Nu.nl nieuwsitem](media/nu.png)
+```
+
+The layout is a **presentation option**, not content, so it round-trips as an
+extra `_class` token beside the base `gallery` token:
+
+- `gallery-stack` — the images pile with small deterministic offsets and
+  rotation, and during a presentation each click drops one image onto the pile
+  (the first is already there, so the slide never opens empty). Absent =
+  **grid**: all images side by side, shown at once.
+
+Static exports (PDF/PPTX, LaTeX/beamer, Marp) always show the end state — all
+images visible — because a pile cannot fall in a document. The pile placement
+is derived from the slide id, so presenter, beamer screen and every export see
+the exact same pile. Reduced-motion users see the images appear without the
+fall animation.
 
 One event can be highlighted as the **current point** ("where we are now", e.g.
 a project's present phase): its card gets a solid accent border and glow, and
@@ -3477,7 +3507,7 @@ not model is not reported.
 | **Comment** | warning | A bare Marp directive (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck does not model it, so the whole slide stays free Markdown and gets no slide type (§8, §9). *(Added 2026-08-27, #1815 — this fallback used to happen without a word.)* |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`, `objective`, `module`, `feedback`, `assessment-summary`, `kennischeck` (read-only, reads as `question`); the option tokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens and omitted twelve the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, the four `timeline-…` options, `table-overdue` and `image-title-above`. The last two were added to the vocabulary the same day; see below. Extended 2026-09-06 with the four eLearning tokens and the retired `kennischeck`, all of which the checker accepts.)* |
+| **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`, `objective`, `module`, `feedback`, `assessment-summary`, `kennischeck` (read-only, reads as `question`), `gallery`; the option tokens `gallery-stack`, `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens and omitted twelve the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, the four `timeline-…` options, `table-overdue` and `image-title-above`. The last two were added to the vocabulary the same day; see below. Extended 2026-09-06 with the four eLearning tokens and the retired `kennischeck`, all of which the checker accepts.)* |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in a legacy `ocideck_two_bullets_*` comment (retired; §5). |
 | **Images** | error | `![...](...` without closing `)`. |

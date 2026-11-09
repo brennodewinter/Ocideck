@@ -1551,6 +1551,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeeldingsgroep': 'Група зображень',
+  'Stapel': 'Стопка',
+  'Afbeelding toevoegen': 'Додати зображення',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Кілька зображень на одному слайді. Виберіть сітку (усі поруч) або стопку (одне зображення падає за клік, як вирізки з газет). Додайте зображення з бібліотеки та дайте кожному альтернативний текст.',
   'Ondertitels': 'Субтитри',
   'Ander bestand…': 'Інший файл…',
   'Geen ondertitels': 'Без субтитрів',

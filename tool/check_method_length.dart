@@ -66,7 +66,9 @@ const Map<String, int> methodLengthBaseline = {
   // clearX-patroon — het veld zelf staat in het instellingenpakket.
   'lib/models/parts/app_settings.dart::AppSettings.copyWith': 151,
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
-      154, // +5 (#1999): eLearning-types in de missing-file switch.
+      164, // +10 (#2838): imageGallery-case — per mediaveld groeit deze switch;
+  // de refs-lezer doet het padwerk, wat rest is één regel per beeld.
+  // Eerdere verhoging: +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
   // +9 (#2433): de papersize/geometry-sleutels als ruwe waarden (één case)
   // plus de slideSize-resolutie erna. De eigenlijke logica staat in
@@ -79,8 +81,9 @@ const Map<String, int> methodLengthBaseline = {
   // meting moet per deckverhouding gescheiden blijven. De methode stond al
   // op de limiet.
   'lib/services/slide_quality/slide_quality_analyzer_density.dart::_QualityDensityChecks._checkTextDensity':
-      151,
-  // +1 (#2433): de deckverhouding afleiden (slideAspect + logicalSizeFor)
+      152,
+  // +1 (#2838): imageGallery-case in de dichtheidsswitch — één regel.
+  // Eerdere verhoging: +1 (#2433): de deckverhouding afleiden (slideAspect + logicalSizeFor)
   // zodat het raster en het exportbudget het vel volgen. De methode stond
   // al op de limiet.
   // +9 (#2625, #2629): decodeMaxEdge-resolutie per dia en de
@@ -128,7 +131,9 @@ const Map<String, int> methodLengthBaseline = {
   // `effectiveClass` werd één aanroep van `isOcideckWrittenClassToken`.
   // +1 (#2841): videoCaptions-doorvoer in de body-assembly — één veld, één
   // toewijzing; de `<track>`-lezing zelf staat in helpers (telt niet mee).
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 201,
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 207,
+  // +6 (#2838): galleryImages/galleryLayout-assembly — twee velden, twee
+  // toewijzingen; de regellezing zelf staat in helpers (telt niet mee).
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -149,7 +154,9 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
       181, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
   // +1 (#1999): eLearning-types in de serialize-switch (freeMarkdown + question hergebruikt).
-  'lib/services/markdown_service.dart::MarkdownService._generateSlideImpl': 151,
+  'lib/services/markdown_service.dart::MarkdownService._generateSlideImpl': 156,
+  // +5 (#2838): imageGallery — gallery-stack-class-token in de classes-lijst
+  // plus de serialize-case; de body-schrijver staat in helpers.
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
   // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
   // +2: tableNumberColumns-parameter.
@@ -160,7 +167,8 @@ const Map<String, int> methodLengthBaseline = {
   // +6 (#1824): callouts, calloutPresentation, calloutReveal-parameters +
   // doorvoer in copyWith voor image callouts.
   // One more stored layout choice needs one parameter and one constructor field.
-  'lib/models/slide.dart::Slide.copyWith': 176,
+  'lib/models/slide.dart::Slide.copyWith': 180,
+  // +4 (#2838): galleryImages/galleryLayout-parameters — pure plumbing.
   // +2 (#2841): videoCaptions-parameter + doorvoer in copyWith — zelfde pure
   // plumbing als de vijf voorgaande copyWith-bumps hierboven.
   // +3 (#2616): customBulletSvg-parameter plus clear-vlag in copyWith — pure
@@ -185,8 +193,12 @@ const Map<String, int> methodLengthBaseline = {
   // switch, één case per veld, niet uit te tillen.
   // +9 (#1824): callouts, calloutPresentation, calloutReveal — drie nieuwe
   // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
+  'lib/collab/collab_codec.dart::slideFromJson': 152,
+  // +2 (#2838): galleryImages/galleryLayout — twee nieuwe dia-velden in de
+  // codec; één regel per veld, onherleidbare plumbing zoals de rest.
   // +3 (#2749): de tableRows-case — zelfde vorm, één regel per veld.
-  'lib/collab/deck_op.dart::_slideWithField': 206,
+  'lib/collab/deck_op.dart::_slideWithField': 212,
+  // +6 (#2838): galleryImages/galleryLayout-cases — twee nieuwe velden.
   // +3 (#2841): de videoCaptions-case — zelfde vorm als elke andere
   // veld-case in de switch, niet uit te tillen.
   // +8 (#2628): prefs-lezing fail-closed afvangen + quarantaine-herstel van

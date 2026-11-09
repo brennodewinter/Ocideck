@@ -1562,6 +1562,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afbeeldingsgroep': 'Grupo de imagens',
+  'Stapel': 'Pilha',
+  'Afbeelding toevoegen': 'Adicionar imagem',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Várias imagens num só slide. Escolha grelha (todas lado a lado) ou pilha (uma imagem cai por clique, como recortes de jornal). Adicione imagens da biblioteca e dê a cada uma um texto alternativo.',
   'Ondertitels': 'Legendas',
   'Ander bestand…': 'Outro ficheiro…',
   'Geen ondertitels': 'Sem legendas',

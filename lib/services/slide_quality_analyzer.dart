@@ -476,6 +476,7 @@ class SlideQualityAnalyzer {
           SlideType.bulletsImage ||
           SlideType.twoImages ||
           SlideType.image ||
+          SlideType.imageGallery ||
           SlideType.video ||
           SlideType.quote ||
           SlideType.table ||
@@ -528,6 +529,14 @@ class SlideQualityAnalyzer {
               slide.imagePath2.trim().isNotEmpty,
           label: 'Afbeelding',
         );
+      case SlideType.imageGallery:
+        _checkMediaAltText(
+          slide: slide,
+          index: index,
+          issues: issues,
+          hasMedia: slide.galleryImages.isNotEmpty,
+          label: 'Afbeelding',
+        );
       // Video is bewust géén alt-tekst-nudge: een videoslide zonder titel is
       // een legitieme keuze (de clip spreekt voor zich), en de tip dook op bij
       // élke video omdat de video-editor alleen een titelveld heeft — er is
@@ -571,6 +580,12 @@ class SlideQualityAnalyzer {
     }
   }
 
+  /// Of een `![alt](pad)`-galerijentry een niet-lege alt-tekst draagt (#2838).
+  static bool _entryHasAlt(String entry) =>
+      entry.startsWith('![') &&
+      entry.indexOf(']') > 2 &&
+      entry.substring(2, entry.indexOf(']')).trim().isNotEmpty;
+
   void _checkMediaAltText({
     required Slide slide,
     required int index,
@@ -589,7 +604,10 @@ class SlideQualityAnalyzer {
         slide.imageAltText.trim().isNotEmpty ||
         slide.imageAltText2.trim().isNotEmpty ||
         slide.imageCaption.trim().isNotEmpty ||
-        slide.imageCaption2.trim().isNotEmpty;
+        slide.imageCaption2.trim().isNotEmpty ||
+        // De alt-tekst van een galerijbeeld zit ín zijn `![alt](pad)`-entry —
+        // dat is evengoed iets om voor te lezen (#2838).
+        slide.galleryImages.any(_entryHasAlt);
     if (hasDescription) return;
 
     issues.add(
@@ -689,6 +707,16 @@ class SlideQualityAnalyzer {
           field: 'imagePath2',
           label: 'Tweede afbeelding',
         );
+      case SlideType.imageGallery:
+        // De refs-lezer levert de galerijpaden zoals bij elke andere
+        // afbeelding (#2838); het veld wijst de plek aan.
+        for (final ref in slideImageRefs(slide)) {
+          missingFile(
+            path: ref.path,
+            field: 'galleryImages',
+            label: 'Afbeelding',
+          );
+        }
       case SlideType.title:
       case SlideType.section:
       case SlideType.quote:

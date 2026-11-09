@@ -74,6 +74,8 @@ String _slideBody(Slide slide) {
       return _bulletsImageSlide(slide);
     case SlideType.twoImages:
       return _twoImagesSlide(slide);
+    case SlideType.imageGallery:
+      return _imageGallerySlide(slide);
     case SlideType.image:
       return _imageSlide(slide);
     case SlideType.quote:
@@ -292,6 +294,31 @@ String _twoImagesSlide(Slide slide) {
     if (caption.trim().isNotEmpty) {
       buf.write('\\\\\\small{${_escapeLatex(caption)}}\n');
     }
+    buf.write('\\end{column}\n');
+  }
+  buf.write('\\end{columns}\n');
+  return buf.toString();
+}
+
+/// De afbeeldingsgroep (#2838) in de LaTeX-export: de eindstand met alle
+/// beelden naast elkaar in kolommen — een stapel kan in een statisch
+/// document niet neervallen, dus dat is de representatieve vorm.
+String _imageGallerySlide(Slide slide) {
+  final buf = StringBuffer();
+  final paths = [
+    for (final entry in slide.galleryImages)
+      (RegExp(r'!\[[^\]]*\]\(([^)\n]+)\)').firstMatch(entry)?.group(1) ?? '')
+          .trim(),
+  ].where((p) => p.isNotEmpty).toList();
+  if (paths.isEmpty) return buf.toString();
+  buf.write('\\begin{columns}\n');
+  final width = (0.95 / paths.length).toStringAsFixed(2);
+  for (final path in paths) {
+    buf.write('\\begin{column}{$width\\textwidth}\n');
+    buf.write(
+      r'\includegraphics[width=\textwidth]{'
+      '${_escapeImagePath(path)}}\n',
+    );
     buf.write('\\end{column}\n');
   }
   buf.write('\\end{columns}\n');

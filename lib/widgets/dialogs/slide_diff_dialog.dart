@@ -300,6 +300,10 @@ class _SlideDiffDialogState extends State<SlideDiffDialog> {
         return l10n.d('Video');
       case SlideField.videoCaptions:
         return l10n.d('Ondertitels');
+      case SlideField.gallery:
+        return l10n.d('Afbeeldingsgroep');
+      case SlideField.galleryLayout:
+        return l10n.d('Indeling');
       case SlideField.audio:
         return l10n.d('Audio');
       case SlideField.table:

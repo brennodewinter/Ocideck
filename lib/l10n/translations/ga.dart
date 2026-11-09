@@ -1565,6 +1565,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeeldingsgroep': 'Grúpa íomhánna',
+  'Stapel': 'Carn',
+  'Afbeelding toevoegen': 'Cuir íomhá leis',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Roinnt íomhánna ar aon sleamhnán amháin. Roghnaigh greille (uile taobh le chéile) nó carn (thiteann íomhá amháin in aghaidh an chliceáil, mar ghearrthóga nuachtáin). Cuir íomhánna leis ón leabharlann agus tabhair téacs alt do gach ceann.',
   'Ondertitels': 'Fotheidearlacha',
   'Ander bestand…': 'Comhad eile…',
   'Geen ondertitels': 'Gan fotheidearlacha',

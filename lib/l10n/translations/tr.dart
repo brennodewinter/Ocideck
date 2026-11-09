@@ -2393,6 +2393,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afbeeldingsgroep': 'Görsel grubu',
+  'Stapel': 'Yığın',
+  'Afbeelding toevoegen': 'Görsel ekle',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Tek slaytta birden fazla görsel. Izgara (yan yana hepsi) veya yığın (her tıkta bir görsel düşer, gazete kupürleri gibi) seçin. Kitaplıktan görseller ekleyin ve her birine alt metin verin.',
   'Ondertitels': 'Altyazılar',
   'Ander bestand…': 'Başka dosya…',
   'Geen ondertitels': 'Altyazı yok',

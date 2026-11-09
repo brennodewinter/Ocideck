@@ -612,6 +612,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeeldingsgroep': 'Grupo di imágen',
+  'Stapel': 'Pila',
+  'Afbeelding toevoegen': 'Agregá imágen',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Varios imágen riba un dia. Skohe raster (tur hana otro) òf pila (pa kada klik un imágen ka, manera kabeisnan di korant ku bo ta pone). Agregá imágen for di e biblioteca i duna kada un un teksto alternativo.',
   'Ondertitels': 'Subtítulos',
   'Ander bestand…': 'Otro archivo…',
   'Geen ondertitels': 'Sin subtítulos',

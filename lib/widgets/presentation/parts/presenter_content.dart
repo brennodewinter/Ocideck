@@ -198,6 +198,11 @@ extension _PresenterContent on _FullscreenPresenterState {
     return plan.revealedBulletCount(_stepIndex);
   }
 
+  /// Hoeveel galerijbeelden nu zichtbaar moeten zijn, of null als de slide
+  /// geen stapel-stapmodus heeft (#2838).
+  int? _galleryVisibleFor(Slide slide) =>
+      galleryVisibleForSlide(slide, _stepIndex);
+
   void _toggleChecklistItem({
     required int slideIndex,
     required int column,

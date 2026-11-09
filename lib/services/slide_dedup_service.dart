@@ -27,6 +27,8 @@ enum SlideField {
   imageCaption2,
   video,
   videoCaptions,
+  gallery, // imageGallery-beeldenlijst (#2838): de ![alt](pad)-entries
+  galleryLayout,
   audio,
   table,
   notes,
@@ -286,6 +288,8 @@ class SlideDedupService {
     SlideField.imageCaption2: s.imageCaption2,
     SlideField.video: s.videoPath,
     SlideField.videoCaptions: s.videoCaptions,
+    SlideField.gallery: s.galleryImages.join('\n'),
+    SlideField.galleryLayout: s.galleryLayout.name,
     SlideField.audio: s.audioPath,
     SlideField.table: s.tableRows.map((r) => r.join(' | ')).join('\n'),
     SlideField.notes: s.notes,
