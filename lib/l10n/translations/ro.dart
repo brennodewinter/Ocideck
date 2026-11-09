@@ -1551,6 +1551,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeeldingsgroep': 'Grup de imagini',
+  'Stapel': 'Stivă',
+  'Afbeelding toevoegen': 'Adaugă imagine',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Mai multe imagini pe un singur slide. Alege grilă (toate alăturate) sau stivă (câte o imagine cade la fiecare clic, ca decupajele de ziar). Adaugă imagini din bibliotecă și dă fiecăreia un text alternativ.',
   'Ondertitels': 'Subtitrări',
   'Ander bestand…': 'Alt fișier…',
   'Geen ondertitels': 'Fără subtitrări',

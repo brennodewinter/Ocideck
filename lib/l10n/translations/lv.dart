@@ -1533,6 +1533,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeeldingsgroep': 'Attēlu grupa',
+  'Stapel': 'Kaubja',
+  'Afbeelding toevoegen': 'Pievienot attēlu',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Vairāki attēli vienā slaidā. Izvēlieties režģi (visi blakus) vai kaudzi (pa vienam attēlam klikšķī, kā avīžu izgriezumus). Pievienojiet attēlus no bibliotēkas un dodiet katram alternatīvo tekstu.',
   'Ondertitels': 'Subtitri',
   'Ander bestand…': 'Cits fails…',
   'Geen ondertitels': 'Bez subitriem',

@@ -1556,6 +1556,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeeldingsgroep': 'Група изображения',
+  'Stapel': 'Купчина',
+  'Afbeelding toevoegen': 'Добави изображение',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Няколко изображения на един слайд. Изберете мрежа (всички една до друга) или купчина (по едно изображение пада на клик, като изрезки от вестници). Добавете изображения от библиотеката и дайте на всяко алтернативен текст.',
   'Ondertitels': 'Субтитри',
   'Ander bestand…': 'Друг файл…',
   'Geen ondertitels': 'Без субтитри',

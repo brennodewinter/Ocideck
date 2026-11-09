@@ -18,6 +18,14 @@ All notable changes to OciDeck are documented in this file.
 
 - **Achtergrondafbeeldingen voor alle slidetypes (#2848).** Kies, plak of verwijder een achtergrond via Slide-instellingen. De achtergrond staat los van inhoudsafbeeldingen en blijft bewaard bij opslaan en exporteren.
 
+- **Afbeeldingsgroep-dia: meerdere afbeeldingen op één dia (#2838).** Nieuw
+  slidetype dat een reeks beelden als raster (alles naast elkaar) of als stapel
+  toont (per klik valt er één beeld op, zoals neergelegde krantenkoppen). De
+  beelden zijn gewone `![alt](pad)`-regels — in elke Markdown-lezer zichtbaar;
+  alleen de stapel draagt een `_class`-subtoken `gallery-stack`. Deterministische
+  stapelplaatsing (presentator, beamer en export identiek), per-klik-onthulling
+  in presentator én zaalscherm, eindstand in statische exports, alt-tekst per
+  beeld, geen valanimatie bij verminderde beweging.
 - **Ondertitels bij videodia's (WebVTT/SRT).** Een lokaal `.vtt`- of
   `.srt`-bestand koppelen aan een videodia; het reist mee in opslag, pakket,
   dossier, downloadbundel en bij dia kopiëren. Opgeslagen als standaard-HTML

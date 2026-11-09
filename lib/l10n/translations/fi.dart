@@ -1537,6 +1537,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeeldingsgroep': 'Kuvaryhmä',
+  'Stapel': 'Pino',
+  'Afbeelding toevoegen': 'Lisää kuva',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Useita kuvia yhdellä dialla. Valitse ruudukko (kaikki rinnakkain) tai pino (yksi kuva putoaa per napsautus, kuin lehtileikkeet). Lisää kuvia kirjastosta ja anna jokaiselle vaihtoehtoteksti.',
   'Ondertitels': 'Tekstitys',
   'Ander bestand…': 'Toinen tiedosto…',
   'Geen ondertitels': 'Ei tekstitystä',

@@ -613,6 +613,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeeldingsgroep': 'Groupe d\'images',
+  'Stapel': 'Pile',
+  'Afbeelding toevoegen': 'Ajouter une image',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Plusieurs images sur une diapositive. Choisissez grille (toutes côte à côte) ou pile (une image tombe par clic, comme des coupures de presse qu’on pose). Ajoutez des images depuis la bibliothèque et donnez à chacune un texte alternatif.',
   'Ondertitels': 'Sous-titres',
   'Ander bestand…': 'Autre fichier…',
   'Geen ondertitels': 'Pas de sous-titres',

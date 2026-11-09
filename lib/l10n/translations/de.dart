@@ -612,6 +612,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Afbeeldingsgroep': 'Bildgruppe',
+  'Stapel': 'Stapel',
+  'Afbeelding toevoegen': 'Bild hinzufügen',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Mehrere Bilder auf einer Folie. Raster (alle nebeneinander) oder Stapel (pro Klick fällt ein Bild, wie Zeitungsschlagzeilen, die man ablegt). Bilder aus der Bibliothek hinzufügen und jedem Bild einen Alt-Text geben.',
   'Ondertitels': 'Untertitel',
   'Ander bestand…': 'Andere Datei…',
   'Geen ondertitels': 'Keine Untertitel',

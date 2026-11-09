@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/display_window_spec.dart';
+import 'package:ocideck/models/gallery_layout.dart';
 import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
@@ -56,6 +57,14 @@ _slideCases = {
   ),
   SlideField.bullets: (value: ['a', 'b'], read: (s) => s.bullets),
   SlideField.bullets2: (value: ['c', 'd'], read: (s) => s.bullets2),
+  SlideField.galleryImages: (
+    value: ['![](a.png)', '![b](b.png)'],
+    read: (s) => s.galleryImages,
+  ),
+  SlideField.galleryLayout: (
+    value: GalleryLayout.stack,
+    read: (s) => s.galleryLayout,
+  ),
   SlideField.preservedMarpLines: (
     value: ['<!-- _future: value -->'],
     read: (s) => s.preservedMarpLines,

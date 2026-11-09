@@ -1543,6 +1543,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeeldingsgroep': 'Vaizdų grupė',
+  'Stapel': 'Krūva',
+  'Afbeelding toevoegen': 'Pridėti paveikslėlį',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Keli vaizdai viename skaidrėje. Pasirinkite tinklelį (visi greta) arba krūvą (po vieną vaizdą kaskart spustelėjus, kaip laikraščių iškarpas). Pridėkite vaizdus iš bibliotekos ir kiekvienam suteikite alternatyvųjį tekstą.',
   'Ondertitels': 'Subtitrai',
   'Ander bestand…': 'Kitas failas…',
   'Geen ondertitels': 'Be subtitrų',

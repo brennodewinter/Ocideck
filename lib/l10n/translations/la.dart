@@ -1548,6 +1548,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeeldingsgroep': 'Coetus imaginum',
+  'Stapel': 'Acervus',
+  'Afbeelding toevoegen': 'Imaginem adde',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Plures imagines in una pagina. Elige ordinationem (omnes iuxta) vel acervum (singulae singulis ictibus decidunt, sicut ephemeridum tituli quos deponis). Imagines ex bibliotheca adde et unicuique textum alternativum da.',
   'Ondertitels': 'Subtituli',
   'Ander bestand…': 'Alia lima…',
   'Geen ondertitels': 'Nulli subtituli',

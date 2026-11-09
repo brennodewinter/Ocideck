@@ -1529,6 +1529,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeeldingsgroep': 'Pildigrupp',
+  'Stapel': 'Hunnik',
+  'Afbeelding toevoegen': 'Lisa pilt',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Mitu pilti ühel slaidil. Vali ruudustik (kõik kõrvuti) või hunnik (üks pilt langeb iga klõpsuga, nagu ajalehelõiked). Lisa pilte teegist ja anna igale pildile alt-tekst.',
   'Ondertitels': 'Subtiitrid',
   'Ander bestand…': 'Teine fail…',
   'Geen ondertitels': 'Subtiitrid puuduvad',

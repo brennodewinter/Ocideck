@@ -613,6 +613,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeeldingsgroep': 'Ofbyldingsgroep',
+  'Stapel': 'Steapel',
+  'Afbeelding toevoegen': 'Ofbylding tafoegje',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Mear ôfbyldings op ien dia. Kies rêster (alle njonkeninoar) of steapel (per klik falt ien ôfbylding derop, lykas krante-artikelen dy’t jo delizze). Foegje ôfbyldings ta út de bibleteek en jou elke ôfbylding in alt-tekst.',
   'Ondertitels': 'Undertiteling',
   'Ander bestand…': 'Oar bestân…',
   'Geen ondertitels': 'Gjin undertiteling',

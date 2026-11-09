@@ -62,8 +62,8 @@ Two of those fields exist **only while rendering** and never reach a saved file:
 rich-text body a copy draws. Neither is read back by the parser and neither is
 carried over by `Slide.duplicate`; see ARCHITECTURE § *Render-time pagination*.
 
-`SlideType` (36 values): `title, section, bullets, twoBullets, bulletsImage,
-twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
+`SlideType` (37 values): `title, section, bullets, twoBullets, bulletsImage,
+twoImages, imageGallery, image, video, quote, table, freeMarkdown, code, chart, cockpit,
 question, timeline, scorecard, menu, assets, discoveries, finding, findingsSummary,
 checklist, scopeMatrix, signOff, matrix, canvas, tree, flow, phaseGate, gantt,
 controlStatus, objective, module, feedback, assessmentSummary`. *(Was 29 until 2026-08-02, when `controlStatus` was added for the

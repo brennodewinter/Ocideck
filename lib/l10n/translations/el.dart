@@ -1560,6 +1560,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeeldingsgroep': 'Ομάδα εικόνων',
+  'Stapel': 'Στοίβα',
+  'Afbeelding toevoegen': 'Προσθήκη εικόνας',
+  'Meerdere afbeeldingen op één dia. Kies raster (alles naast elkaar) of stapel (per klik valt er één afbeelding op, zoals krantenkoppen die je neerlegt). Voeg beelden toe uit de bibliotheek en geef elke afbeelding een alt-tekst.':
+      'Πολλαπλές εικόνες σε μία διαφάνεια. Επιλέξτε πλέγμα (όλες δίπλα-δίπλα) ή στοίβα (μία εικόνα πέφτει ανά κλικ, όπως αποκόμματα εφημερίδας). Προσθέστε εικόνες από τη βιβλιοθήκη και δώστε σε κάθε μία εναλλακτικό κείμενο.',
   'Ondertitels': 'Υπότιτλοι',
   'Ander bestand…': 'Άλλο αρχείο…',
   'Geen ondertitels': 'Χωρίς υπότιτλους',
