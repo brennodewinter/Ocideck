@@ -1175,6 +1175,27 @@ beginning; a missing end plays to the natural end.
 <video src="media/clip.mp4#t=5,12" controls style="..."></video>
 ```
 
+**Captions (WebVTT/SubRip).** A local video can carry a subtitles file —
+ordinary standard HTML, not an OciDeck directive: a `<track>` element inside
+the `<video>` pointing at a `.vtt` or `.srt` next to the video. `default`
+means on-by-default; the app shows a CC button in the player to switch them
+off. Captions ride inside the element so that a Marp render or plain browser
+plays them without OciDeck — that is exactly what the portability rule wants.
+
+```markdown
+<video src="media/clip.mp4" controls style="..."><track kind="subtitles" src="media/clip.vtt" default></video>
+```
+
+The file lives beside the video (imported under `media/`, packaged and bundled
+like any other media asset, and copied when a slide travels between decks —
+see §7). One file per slide; multiple languages can come later via additional
+`<track>` elements. Only local video files take a `<track>`: YouTube/Vimeo
+embeds keep captions in the provider's own player.
+
+The caption file is content, like speaker notes: the privacy scanner scans
+its text wherever the scan has a file reader, and a slide set to *redact*
+drops the `<track>` together with the `<video>`.
+
 > Online media (URL files and embeds) is only loaded live when the
 > **Online media** security setting is on (off by default). When off, the slide
 > shows a placeholder with the URL instead of fetching anything. On **export**,

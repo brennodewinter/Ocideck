@@ -1586,6 +1586,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Ondertitels': 'Subtitri',
+  'Ander bestand…': 'Cits fails…',
+  'Geen ondertitels': 'Bez subitriem',
+  'Kies een ondertitelbestand': 'Izvēlies subtitru failu',
+  'Ondertitels aan': 'Subtitri ieslēgti',
+  'Ondertitels toevoegen…': 'Pievienot subtitrus…',
+  'Ondertitels uit': 'Subtitri izslēgti',
+  'Ondertitels verwijderen': 'Noņemt subtitrus',
   'Vergroot tot schermbreedte': 'Palielināt līdz ekrāna platumam',
   'Website wil Markdown openen?': 'Vietne vēlas atvērt Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

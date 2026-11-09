@@ -1593,6 +1593,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Ondertitels': 'Titulky',
+  'Ander bestand…': 'Iný súbor…',
+  'Geen ondertitels': 'Žiadne titulky',
+  'Kies een ondertitelbestand': 'Vyber súbor titulkov',
+  'Ondertitels aan': 'Titulky zapnuté',
+  'Ondertitels toevoegen…': 'Pridať titulky…',
+  'Ondertitels uit': 'Titulky vypnuté',
+  'Ondertitels verwijderen': 'Odstrániť titulky',
   'Vergroot tot schermbreedte': 'Zväčšiť na šírku obrazovky',
   'Website wil Markdown openen?': 'Web chce otvoriť Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

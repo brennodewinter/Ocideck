@@ -1601,6 +1601,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Ondertitels': 'Napisy',
+  'Ander bestand…': 'Inny plik…',
+  'Geen ondertitels': 'Brak napisów',
+  'Kies een ondertitelbestand': 'Wybierz plik napisów',
+  'Ondertitels aan': 'Napisy włączone',
+  'Ondertitels toevoegen…': 'Dodaj napisy…',
+  'Ondertitels uit': 'Napisy wyłączone',
+  'Ondertitels verwijderen': 'Usuń napisy',
   'Vergroot tot schermbreedte': 'Powiększ do szerokości ekranu',
   'Website wil Markdown openen?': 'Witryna chce otworzyć Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

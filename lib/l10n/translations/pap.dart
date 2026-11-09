@@ -641,6 +641,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Ondertitels': 'Subtítulos',
+  'Ander bestand…': 'Otro archivo…',
+  'Geen ondertitels': 'Sin subtítulos',
+  'Kies een ondertitelbestand': 'Skohe un archivo di subtítulos',
+  'Ondertitels aan': 'Subtítulos prendí',
+  'Ondertitels toevoegen…': 'Agregá subtítulos…',
+  'Ondertitels uit': 'Subtítulos apagá',
+  'Ondertitels verwijderen': 'Kita subtítulos',
   'Vergroot tot schermbreedte': 'Amplia te na e hanchura di e pantaya',
   'Website wil Markdown openen?': 'Website ke habri Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

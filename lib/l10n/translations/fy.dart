@@ -642,6 +642,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Ondertitels': 'Undertiteling',
+  'Ander bestand…': 'Oar bestân…',
+  'Geen ondertitels': 'Gjin undertiteling',
+  'Kies een ondertitelbestand': 'Kies in undertitelingbestân',
+  'Ondertitels aan': 'Undertiteling oan',
+  'Ondertitels toevoegen…': 'Undertiteling tafoegje…',
+  'Ondertitels uit': 'Undertiteling út',
+  'Ondertitels verwijderen': 'Undertiteling fuortsmite',
   'Vergroot tot schermbreedte': 'Fergruttsje ta skermbreedte',
   'Website wil Markdown openen?': 'Webside wol Markdown iepenje?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

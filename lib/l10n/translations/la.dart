@@ -1603,6 +1603,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Ondertitels': 'Subtituli',
+  'Ander bestand…': 'Alia lima…',
+  'Geen ondertitels': 'Nulli subtituli',
+  'Kies een ondertitelbestand': 'Limam subtitulorum elige',
+  'Ondertitels aan': 'Subtituli admissi',
+  'Ondertitels toevoegen…': 'Subtitulos adde…',
+  'Ondertitels uit': 'Subtituli exclusi',
+  'Ondertitels verwijderen': 'Subtitulos remove',
   'Vergroot tot schermbreedte': 'Amplifica ad latitudinem scrini',
   'Website wil Markdown openen?': 'Pagina Markdown aperire vult?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

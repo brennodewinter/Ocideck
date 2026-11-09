@@ -1589,6 +1589,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Ondertitels': 'Undertekster',
+  'Ander bestand…': 'Anden fil…',
+  'Geen ondertitels': 'Ingen undertekster',
+  'Kies een ondertitelbestand': 'Vælg en undertekstfil',
+  'Ondertitels aan': 'Undertekster til',
+  'Ondertitels toevoegen…': 'Tilføj undertekster…',
+  'Ondertitels uit': 'Undertekster fra',
+  'Ondertitels verwijderen': 'Fjern undertekster',
   'Vergroot tot schermbreedte': 'Forstør til skærmbredde',
   'Website wil Markdown openen?': 'Websitet vil åbne Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

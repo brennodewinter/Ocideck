@@ -1607,6 +1607,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Ondertitels': 'Sottotitoli',
+  'Ander bestand…': 'File ieħor…',
+  'Geen ondertitels': 'L-ebda sottotitoli',
+  'Kies een ondertitelbestand': 'Agħżel file tas-sottotitoli',
+  'Ondertitels aan': 'Sottotitoli mixgħula',
+  'Ondertitels toevoegen…': 'Żid sottotitoli…',
+  'Ondertitels uit': 'Sottotitoli mitfi',
+  'Ondertitels verwijderen': 'Neħħi s-sottotitoli',
   'Vergroot tot schermbreedte': 'Kabbar għal wisa’ l-iskrin',
   'Website wil Markdown openen?': 'Is-sit irid jiftaħ Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

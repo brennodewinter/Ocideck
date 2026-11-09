@@ -1605,6 +1605,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Ondertitels': 'Subtitrări',
+  'Ander bestand…': 'Alt fișier…',
+  'Geen ondertitels': 'Fără subtitrări',
+  'Kies een ondertitelbestand': 'Alege un fișier de subtitrări',
+  'Ondertitels aan': 'Subtitrări pornite',
+  'Ondertitels toevoegen…': 'Adaugă subtitrări…',
+  'Ondertitels uit': 'Subtitrări oprite',
+  'Ondertitels verwijderen': 'Elimină subtitrările',
   'Vergroot tot schermbreedte': 'Mărește la lățimea ecranului',
   'Website wil Markdown openen?': 'Site-ul vrea să deschidă Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

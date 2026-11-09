@@ -1582,6 +1582,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Ondertitels': 'Subtiitrid',
+  'Ander bestand…': 'Teine fail…',
+  'Geen ondertitels': 'Subtiitrid puuduvad',
+  'Kies een ondertitelbestand': 'Vali subtiitrite fail',
+  'Ondertitels aan': 'Subtiitrid sees',
+  'Ondertitels toevoegen…': 'Lisa subtiitrid…',
+  'Ondertitels uit': 'Subtiitrid väljas',
+  'Ondertitels verwijderen': 'Eemalda subtiitrid',
   'Vergroot tot schermbreedte': 'Suurenda ekraani laiuseks',
   'Website wil Markdown openen?': 'Veebileht tahab Markdowni avada?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

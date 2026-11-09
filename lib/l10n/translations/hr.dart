@@ -1593,6 +1593,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Ondertitels': 'Podnaslovi',
+  'Ander bestand…': 'Druga datoteka…',
+  'Geen ondertitels': 'Bez podnaslova',
+  'Kies een ondertitelbestand': 'Odaberi datoteku podnaslova',
+  'Ondertitels aan': 'Podnaslovi uključeni',
+  'Ondertitels toevoegen…': 'Dodaj podnaslove…',
+  'Ondertitels uit': 'Podnaslovi isključeni',
+  'Ondertitels verwijderen': 'Ukloni podnaslove',
   'Vergroot tot schermbreedte': 'Uvećaj na širinu zaslona',
   'Website wil Markdown openen?': 'Web-mjesto želi otvoriti Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':

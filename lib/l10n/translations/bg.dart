@@ -1608,6 +1608,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Ondertitels': 'Субтитри',
+  'Ander bestand…': 'Друг файл…',
+  'Geen ondertitels': 'Без субтитри',
+  'Kies een ondertitelbestand': 'Избери файл със субтитри',
+  'Ondertitels aan': 'Включи субтитрите',
+  'Ondertitels toevoegen…': 'Добави субтитри…',
+  'Ondertitels uit': 'Изключи субтитрите',
+  'Ondertitels verwijderen': 'Премахни субтитрите',
   'Vergroot tot schermbreedte': 'Увеличи до ширината на екрана',
   'Website wil Markdown openen?': 'Сайтът иска да отвори Markdown?',
   'De website {origin} wil een Markdown-tekst in OciDeck openen.':
