@@ -84,9 +84,6 @@ const _dutchSourceFy = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Searje = rige, kolom = label, de selkleur folget de wearde. Label de assen kâns en ynfloed foar in risikomatriks.',
   'Auditdossier exporteren': 'Auditdossier eksportearje',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalisearje en fersegelje earst it rapport.',
-  'Auditdossier geëxporteerd naar:': 'Auditdossier eksportearre nei:',
 
   'Tekst voorstellen (AI)': 'Tekst foarstelle (AI)',
   'Het model gaf geen tekst terug.': 'It model joech gjin tekst werom.',

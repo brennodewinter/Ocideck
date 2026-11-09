@@ -85,9 +85,6 @@ const _dutchSourceRo = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serie = rând, coloană = etichetă, culoarea celulei urmează valoarea. Etichetează axele ca probabilitate și impact pentru o matrice de risc.',
   'Auditdossier exporteren': 'Exportă dosarul de audit',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalizați și sigilați mai întâi raportul.',
-  'Auditdossier geëxporteerd naar:': 'Dosarul de audit exportat în:',
 
   'Tekst voorstellen (AI)': 'Sugerează text (IA)',
   'Het model gaf geen tekst terug.': 'Modelul nu a returnat text.',

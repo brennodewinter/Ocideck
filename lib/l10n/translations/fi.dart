@@ -84,9 +84,6 @@ const _dutchSourceFi = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Sarja = rivi, sarake = otsikko, solun väri seuraa arvoa. Nimeä akselit todennäköisyydeksi ja vaikutukseksi riskimatriisia varten.',
   'Auditdossier exporteren': 'Vie auditointikansio',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Viimeistele ja sinetöi raportti ensin.',
-  'Auditdossier geëxporteerd naar:': 'Auditointikansio viety kohteeseen:',
 
   'Tekst voorstellen (AI)': 'Ehdota tekstiä (tekoäly)',
   'Het model gaf geen tekst terug.': 'Malli ei palauttanut tekstiä.',

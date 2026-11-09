@@ -85,9 +85,6 @@ const _dutchSourceEs = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serie = fila, columna = etiqueta, el color de la celda sigue el valor. Etiqueta los ejes como probabilidad e impacto para una matriz de riesgo.',
   'Auditdossier exporteren': 'Exportar dosier de auditoría',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalice y selle primero el informe.',
-  'Auditdossier geëxporteerd naar:': 'Dosier de auditoría exportado a:',
 
   'Tekst voorstellen (AI)': 'Sugerir texto (IA)',
   'Het model gaf geen tekst terug.': 'El modelo no devolvió texto.',

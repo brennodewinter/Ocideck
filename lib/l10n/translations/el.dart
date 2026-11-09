@@ -84,9 +84,6 @@ const _dutchSourceEl = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Σειρά = γραμμή, στήλη = ετικέτα, το χρώμα του κελιού ακολουθεί την τιμή. Ονομάστε τους άξονες πιθανότητα και επίπτωση για μητρώο κινδύνου.',
   'Auditdossier exporteren': 'Εξαγωγή φακέλου ελέγχου',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Οριστικοποιήστε και σφραγίστε πρώτα την αναφορά.',
-  'Auditdossier geëxporteerd naar:': 'Ο φάκελος ελέγχου εξήχθη σε:',
 
   'Tekst voorstellen (AI)': 'Πρόταση κειμένου (AI)',
   'Het model gaf geen tekst terug.': 'Το μοντέλο δεν επέστρεψε κείμενο.',

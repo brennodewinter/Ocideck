@@ -86,9 +86,6 @@ const _dutchSourceLa = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Series = ordo, columna = titulus, color cellae valorem sequitur. Axes probabilitate et impetu inscribe ad matricem periculi.',
   'Auditdossier exporteren': 'Fasciculum auditus exportare',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Prius relationem consumma et obsigna.',
-  'Auditdossier geëxporteerd naar:': 'Fasciculus auditus exportatus ad:',
 
   'Tekst voorstellen (AI)': 'Textum proponere (IA)',
   'Het model gaf geen tekst terug.': 'Exemplar nullum textum reddidit.',

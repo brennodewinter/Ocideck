@@ -84,9 +84,6 @@ const _dutchSourceSl = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serija = vrstica, stolpec = oznaka, barva celice sledi vrednosti. Osi označite kot verjetnost in vpliv za matriko tveganja.',
   'Auditdossier exporteren': 'Izvozi revizijski dosje',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Najprej dokončajte in zapečatite poročilo.',
-  'Auditdossier geëxporteerd naar:': 'Revizijski dosje izvožen v:',
 
   'Tekst voorstellen (AI)': 'Predlagaj besedilo (UI)',
   'Het model gaf geen tekst terug.': 'Model ni vrnil besedila.',

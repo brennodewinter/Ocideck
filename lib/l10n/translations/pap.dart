@@ -84,9 +84,6 @@ const _dutchSourcePap = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serie = fila, kolom = etiket, koló di e selda ta sigui e balor. Pone nòmber na e èksnan probabilidat i impakto pa un matris di risiko.',
   'Auditdossier exporteren': 'Eksportá dossier di ouditó',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalisá i seyá e rapòrt promé.',
-  'Auditdossier geëxporteerd naar:': 'Dossier di ouditó eksportá na:',
 
   'Tekst voorstellen (AI)': 'Sugerí teksto (IA)',
   'Het model gaf geen tekst terug.': 'E modelo no a duna teksto bèk.',

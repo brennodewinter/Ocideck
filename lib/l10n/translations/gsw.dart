@@ -84,9 +84,6 @@ const _dutchSourceGsw = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Reie = Zile, Spalte = Beschriftig, d Zällefarb folgt em Wärt. Beschrift d Achse mit Wahrschinlichkeit und Uswirkig für e Risikomatrix.',
   'Auditdossier exporteren': 'Audit-Dossier exportiere',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalisier und versigle zerscht de Bricht.',
-  'Auditdossier geëxporteerd naar:': 'Audit-Dossier exportiert nach:',
 
   'Tekst voorstellen (AI)': 'Text vorschla (KI)',
   'Het model gaf geen tekst terug.': 'S Modäll het kein Text zruggäh.',

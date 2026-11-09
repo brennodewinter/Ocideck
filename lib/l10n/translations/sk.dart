@@ -85,9 +85,6 @@ const _dutchSourceSk = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Rad = riadok, stĺpec = menovka, farba bunky sleduje hodnotu. Osi označte ako pravdepodobnosť a dopad pre maticu rizík.',
   'Auditdossier exporteren': 'Exportovať audítorský spis',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Najprv dokončite a zapečaťte správu.',
-  'Auditdossier geëxporteerd naar:': 'Audítorský spis exportovaný do:',
 
   'Tekst voorstellen (AI)': 'Navrhnúť text (AI)',
   'Het model gaf geen tekst terug.': 'Model nevrátil žiadny text.',

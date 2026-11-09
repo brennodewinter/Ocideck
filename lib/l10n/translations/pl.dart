@@ -86,9 +86,6 @@ const _dutchSourcePl = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Seria = wiersz, kolumna = etykieta, kolor komórki zależy od wartości. Opisz osie jako prawdopodobieństwo i skutek, aby uzyskać macierz ryzyka.',
   'Auditdossier exporteren': 'Eksportuj dossier audytu',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Najpierw sfinalizuj i zapieczętuj raport.',
-  'Auditdossier geëxporteerd naar:': 'Dossier audytu wyeksportowano do:',
 
   'Tekst voorstellen (AI)': 'Zaproponuj tekst (AI)',
   'Het model gaf geen tekst terug.': 'Model nie zwrócił tekstu.',

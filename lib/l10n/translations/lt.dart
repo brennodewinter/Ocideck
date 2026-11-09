@@ -84,9 +84,6 @@ const _dutchSourceLt = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serija = eilutė, stulpelis = etiketė, langelio spalva atitinka reikšmę. Pažymėkite ašis kaip tikimybę ir poveikį rizikos matricai.',
   'Auditdossier exporteren': 'Eksportuoti audito bylą',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Pirmiausia užbaikite ir užantspauduokite ataskaitą.',
-  'Auditdossier geëxporteerd naar:': 'Audito byla eksportuota į:',
 
   'Tekst voorstellen (AI)': 'Siūlyti tekstą (DI)',
   'Het model gaf geen tekst terug.': 'Modelis negrąžino teksto.',

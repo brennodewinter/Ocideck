@@ -84,9 +84,6 @@ const _dutchSourceHu = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Sorozat = sor, oszlop = címke, a cella színe az értéket követi. Címkézd a tengelyeket valószínűségnek és hatásnak egy kockázati mátrixhoz.',
   'Auditdossier exporteren': 'Auditdosszié exportálása',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Először véglegesítse és pecsételje le a jelentést.',
-  'Auditdossier geëxporteerd naar:': 'Auditdosszié exportálva ide:',
 
   'Tekst voorstellen (AI)': 'Szöveg javaslata (AI)',
   'Het model gaf geen tekst terug.': 'A modell nem adott vissza szöveget.',

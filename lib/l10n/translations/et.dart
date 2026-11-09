@@ -83,10 +83,6 @@ const _dutchSourceEt = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Seeria = rida, veerg = silt, lahtri värv järgib väärtust. Märgista teljed tõenäosuse ja mõjuna riskimaatriksi jaoks.',
   'Auditdossier exporteren': 'Ekspordi auditidokumentatsioon',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Esmalt vormista ja pitseeri aruanne.',
-  'Auditdossier geëxporteerd naar:':
-      'Auditidokumentatsioon eksporditi asukohta:',
 
   'Tekst voorstellen (AI)': 'Paku teksti (AI)',
   'Het model gaf geen tekst terug.': 'Mudel ei tagastanud teksti.',

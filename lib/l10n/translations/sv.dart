@@ -84,9 +84,6 @@ const _dutchSourceSv = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serie = rad, kolumn = etikett, cellfärgen följer värdet. Namnge axlarna sannolikhet och konsekvens för en riskmatris.',
   'Auditdossier exporteren': 'Exportera revisionsdossier',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Slutför och försegla rapporten först.',
-  'Auditdossier geëxporteerd naar:': 'Revisionsdossier exporterat till:',
 
   'Tekst voorstellen (AI)': 'Föreslå text (AI)',
   'Het model gaf geen tekst terug.': 'Modellen returnerade ingen text.',

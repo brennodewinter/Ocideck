@@ -85,9 +85,6 @@ const _dutchSourceUk = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Ряд = рядок, стовпець = підпис, колір клітинки залежить від значення. Підпишіть осі як імовірність та вплив для матриці ризиків.',
   'Auditdossier exporteren': 'Експортувати аудиторське досьє',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Спершу завершіть і опечатайте звіт.',
-  'Auditdossier geëxporteerd naar:': 'Аудиторське досьє експортовано до:',
 
   'Tekst voorstellen (AI)': 'Запропонувати текст (ШІ)',
   'Het model gaf geen tekst terug.': 'Модель не повернула текст.',

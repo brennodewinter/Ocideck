@@ -84,9 +84,6 @@ const _dutchSourceLv = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Sērija = rinda, kolonna = etiķete, šūnas krāsa seko vērtībai. Apzīmējiet asis kā varbūtību un ietekmi riska matricai.',
   'Auditdossier exporteren': 'Eksportēt audita dokumentāciju',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Vispirms pabeidziet un aizzīmogojiet ziņojumu.',
-  'Auditdossier geëxporteerd naar:': 'Audita dokumentācija eksportēta uz:',
 
   'Tekst voorstellen (AI)': 'Ieteikt tekstu (MI)',
   'Het model gaf geen tekst terug.': 'Modelis neatgrieza tekstu.',

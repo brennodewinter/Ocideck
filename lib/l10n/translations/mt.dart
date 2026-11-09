@@ -85,9 +85,6 @@ const _dutchSourceMt = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serje = ringiela, kolonna = tikketta, il-kulur taċ-ċellula jsegwi l-valur. Semmi l-assi bħala probabbiltà u impatt għal matriċi tar-riskju.',
   'Auditdossier exporteren': 'Esporta d-dossier tal-awditu',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Iffinalizza u ssiġilla r-rapport l-ewwel.',
-  'Auditdossier geëxporteerd naar:': 'Id-dossier tal-awditu ġie esportat lejn:',
 
   'Tekst voorstellen (AI)': 'Issuġġerixxi test (IA)',
   'Het model gaf geen tekst terug.': 'Il-mudell ma rritorna l-ebda test.',

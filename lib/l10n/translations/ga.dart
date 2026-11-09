@@ -86,9 +86,6 @@ const _dutchSourceGa = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Sraith = ró, colún = lipéad, leanann dath na cille an luach. Cuir lipéad ar na haiseanna mar dhóchúlacht agus tionchar le haghaidh maitrís riosca.',
   'Auditdossier exporteren': 'Easpórtáil dálach iniúchta',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Cuir bailchríoch agus séala ar an tuairisc ar dtús.',
-  'Auditdossier geëxporteerd naar:': 'Easpórtáladh an dálach iniúchta go:',
 
   'Tekst voorstellen (AI)': 'Mol téacs (IS)',
   'Het model gaf geen tekst terug.': 'Níor thug an tsamhail téacs ar ais.',

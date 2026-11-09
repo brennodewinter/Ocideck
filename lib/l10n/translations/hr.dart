@@ -84,9 +84,6 @@ const _dutchSourceHr = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Serija = redak, stupac = oznaka, boja ćelije prati vrijednost. Označite osi kao vjerojatnost i učinak za matricu rizika.',
   'Auditdossier exporteren': 'Izvezi revizijski dosje',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Prvo dovršite i zapečatite izvještaj.',
-  'Auditdossier geëxporteerd naar:': 'Revizijski dosje izvezen u:',
 
   'Tekst voorstellen (AI)': 'Predloži tekst (AI)',
   'Het model gaf geen tekst terug.': 'Model nije vratio tekst.',

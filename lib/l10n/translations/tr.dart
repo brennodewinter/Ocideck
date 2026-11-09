@@ -83,9 +83,6 @@ const _dutchSourceTr = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Seri = satır, sütun = etiket, hücre rengi değeri izler. Risk matrisi için eksenleri olasılık ve etki olarak etiketleyin.',
   'Auditdossier exporteren': 'Denetim dosyasını dışa aktar',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Önce raporu sonlandırın ve mühürleyin.',
-  'Auditdossier geëxporteerd naar:': 'Denetim dosyası şuraya aktarıldı:',
 
   'Tekst voorstellen (AI)': 'Metin öner (AI)',
   'Het model gaf geen tekst terug.': 'Model herhangi bir metin döndürmedi.',

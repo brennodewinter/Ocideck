@@ -85,9 +85,6 @@ const _dutchSourceBg = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Серия = ред, колона = етикет, цветът на клетката следва стойността. Обозначете осите като вероятност и въздействие за матрица на риска.',
   'Auditdossier exporteren': 'Експортиране на одитно досие',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Първо финализирайте и запечатайте доклада.',
-  'Auditdossier geëxporteerd naar:': 'Одитното досие е експортирано в:',
 
   'Tekst voorstellen (AI)': 'Предложи текст (AI)',
   'Het model gaf geen tekst terug.': 'Моделът не върна текст.',

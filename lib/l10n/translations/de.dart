@@ -84,9 +84,6 @@ const _dutchSourceDe = {
   'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
       'Reihe = Zeile, Spalte = Beschriftung, die Zellenfarbe folgt dem Wert. Beschrifte die Achsen mit Wahrscheinlichkeit und Auswirkung für eine Risikomatrix.',
   'Auditdossier exporteren': 'Audit-Dossier exportieren',
-  'Finaliseer en verzegel het rapport eerst.':
-      'Finalisieren und versiegeln Sie zuerst den Bericht.',
-  'Auditdossier geëxporteerd naar:': 'Audit-Dossier exportiert nach:',
 
   'Tekst voorstellen (AI)': 'Text vorschlagen (KI)',
   'Het model gaf geen tekst terug.':
