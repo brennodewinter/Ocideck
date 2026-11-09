@@ -55,6 +55,38 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
     );
   }
 
+  Widget _strengthSlider(AppLocalizations l10n) => Row(
+    children: [
+      Expanded(
+        child: Semantics(
+          label: l10n.d('Grijze waas over afbeelding'),
+          child: Slider(
+            value: widget.slide.marpStyle.effectiveImageOverlayStrength
+                .toDouble(),
+            min: 0,
+            max: 100,
+            divisions: 100,
+            label: '${widget.slide.marpStyle.effectiveImageOverlayStrength}%',
+            semanticFormatterCallback: (v) => '${v.round()}%',
+            onChanged: widget.slide.titleImageOverlay
+                ? (v) => widget.onUpdate(
+                    widget.slide.copyWith(
+                      marpStyle: widget.slide.marpStyle.copyWith(
+                        imageOverlayStrength: v.round(),
+                      ),
+                    ),
+                  )
+                : null,
+          ),
+        ),
+      ),
+      SizedBox(
+        width: 44,
+        child: Text('${widget.slide.marpStyle.effectiveImageOverlayStrength}%'),
+      ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -116,6 +148,8 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
               style: TextStyle(fontSize: 11, color: AppTheme.slate500),
             ),
           ),
+          const SizedBox(height: 12),
+          _strengthSlider(l10n),
           const SizedBox(height: 12),
           const SectionLabel('Zoom achtergrond'),
           ImageZoomControl(

@@ -537,6 +537,7 @@ class _QuotePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final pad = w * 0.08;
     final hasBg = slide.imagePath.isNotEmpty;
+    final veil = slide.marpStyle.effectiveImageOverlayStrength / 100;
     final textColor = hasBg
         ? Colors.white
         : AppTheme.parseHexColor(profile.textColor);
@@ -607,10 +608,7 @@ class _QuotePreview extends StatelessWidget {
 
     if (!hasBg) {
       return Container(
-        color: _contentBackground(
-          context,
-          AppTheme.parseHexColor(profile.slideBackgroundColor),
-        ),
+        color: _profileSlideBackground(context, profile),
         child: SizedBox.expand(child: content),
       );
     }
@@ -626,7 +624,7 @@ class _QuotePreview extends StatelessWidget {
           bgColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
         ),
         if (slide.titleImageOverlay)
-          Container(color: Colors.black.withValues(alpha: 0.52)),
+          Container(color: Colors.black.withValues(alpha: veil)),
         content,
         _captionOverlay(context, slide.imageCaption, w),
       ],

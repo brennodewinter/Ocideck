@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
 import 'package:ocideck/widgets/editors/markdown_editor_field.dart';
 import 'package:ocideck/widgets/editors/quote_editor.dart';
@@ -56,6 +57,7 @@ void main() {
     await pump(tester, Slide.create(SlideType.quote));
 
     expect(find.text('Zoom achtergrond'), findsNothing);
+    expect(find.byType(Slider), findsNothing);
     expect(find.text('Grijze waas over afbeelding'), findsNothing);
   });
 
@@ -99,5 +101,48 @@ void main() {
     await tester.tap(checkbox);
     await tester.pump();
     expect(latest()!.titleImageOverlay, isTrue);
+  });
+  testWidgets('strength starts at 52 and the slider changes it', (
+    tester,
+  ) async {
+    final latest = await pump(
+      tester,
+      Slide.create(SlideType.quote).copyWith(imagePath: 'bg.png'),
+    );
+    final finder = find.byWidgetPredicate(
+      (w) => w is Slider && w.min == 0 && w.max == 100,
+    );
+    final slider = tester.widget<Slider>(finder);
+    expect(slider.value, 52);
+    expect(slider.divisions, 100);
+    expect(slider.semanticFormatterCallback!(75), '75%');
+    slider.onChanged!(75);
+    expect(latest()!.marpStyle.effectiveImageOverlayStrength, 75);
+    expect(latest()!.titleImageOverlay, isTrue);
+    await tester.drag(finder, const Offset(1000, 0));
+    expect(latest()!.marpStyle.effectiveImageOverlayStrength, 100);
+  });
+
+  testWidgets('disabling the veil retains the selected strength', (
+    tester,
+  ) async {
+    final latest = await pump(
+      tester,
+      Slide.create(SlideType.quote).copyWith(
+        imagePath: 'bg.png',
+        marpStyle: const MarpStyle(imageOverlayStrength: 75),
+        titleImageOverlay: false,
+      ),
+    );
+    final slider = tester.widget<Slider>(
+      find.byWidgetPredicate((w) => w is Slider && w.max == 100),
+    );
+    expect(slider.value, 75);
+    expect(slider.onChanged, isNull);
+    await tester.tap(
+      find.widgetWithText(CheckboxListTile, 'Grijze waas over afbeelding'),
+    );
+    expect(latest()!.titleImageOverlay, isTrue);
+    expect(latest()!.marpStyle.effectiveImageOverlayStrength, 75);
   });
 }

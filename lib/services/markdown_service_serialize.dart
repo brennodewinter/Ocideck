@@ -84,6 +84,13 @@ extension _MarkdownSerialize on MarkdownService {
       overlay: slide.titleImageOverlay,
     );
     buf.writeln('![$bgOptions](${slide.imagePath})');
+    if (slide.type == SlideType.quote &&
+        slide.marpStyle.effectiveImageOverlayStrength !=
+            kDefaultQuoteImageOverlayStrength) {
+      buf.writeln(
+        '<!-- ocideck_quote_image_overlay_strength: ${slide.marpStyle.effectiveImageOverlayStrength} -->',
+      );
+    }
     if (!slide.titleImageOverlay) {
       buf.writeln('<!-- ocideck_title_image_overlay: false -->');
     }

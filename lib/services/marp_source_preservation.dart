@@ -41,6 +41,28 @@ String marpImageAlt(String bracket) {
       .join(' ');
 }
 
+// Alleen door onze sterkte-richtlijn gedragen opacity is getypeerd. Andere
+// Marp-opacity blijft brongetrouw bewaard, zoals vóór de schuifregelaar.
+String _typedQuoteBackground(String block, String line) {
+  final match = RegExp(
+    r'<!--\s*ocideck_quote_image_overlay_strength:\s*(\d+)\s*-->',
+  ).firstMatch(block);
+  if (match == null) return line;
+  final strength =
+      int.tryParse(match.group(1)!) ?? kDefaultQuoteImageOverlayStrength;
+  return line.replaceAll(
+    'opacity:${_quoteOverlayOpacity(strength)}',
+    'opacity:.45',
+  );
+}
+
+// De bestaande Marp-standaard blijft .45; aangepaste sterktes schrijven hun
+// complement als beeldopacity. OciDeck zelf tekent de waas als aparte laag.
+String _quoteOverlayOpacity(int strength) =>
+    strength == kDefaultQuoteImageOverlayStrength
+    ? '.45'
+    : ((100 - strength.clamp(0, 100)) / 100).toStringAsFixed(2);
+
 /// Whether typed serialization would move or rewrite authored Marpit source.
 bool requiresWholeMarpBlockPreservation(String block) {
   final backgrounds = block
@@ -51,7 +73,7 @@ bool requiresWholeMarpBlockPreservation(String block) {
   if (backgrounds.length > 2) return true;
   for (var i = 0; i < backgrounds.length; i++) {
     if (!_hasOnlyTypedBackgroundOptions(
-      backgrounds[i],
+      _typedQuoteBackground(block, backgrounds[i]),
       allowVisualStyle: i == 0,
     )) {
       return true;
@@ -240,6 +262,17 @@ MarpStyle marpImageStyleFromSource(String source) {
   String valueAfter(String prefix) =>
       parseMarkdownYamlScalar(content.substring(prefix.length).trim());
 
+  if (content.startsWith('ocideck_quote_image_overlay_strength:')) {
+    return (
+      handled: true,
+      preserve: false,
+      style: current.copyWith(
+        imageOverlayStrength:
+            int.tryParse(valueAfter('ocideck_quote_image_overlay_strength:')) ??
+            kDefaultQuoteImageOverlayStrength,
+      ),
+    );
+  }
   if (content.startsWith('_color:')) {
     return (
       handled: true,
@@ -302,5 +335,6 @@ String marpBackgroundOptions(
   else if (slide.imageSize > 0 && positional.isEmpty)
     '${slide.imageSize}%',
   ...slide.marpStyle.imageFilters,
-  if (overlay) 'opacity:.45',
+  if (overlay)
+    'opacity:${slide.type == SlideType.quote ? _quoteOverlayOpacity(slide.marpStyle.effectiveImageOverlayStrength) : '.45'}',
 ].join(' ');
