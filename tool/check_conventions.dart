@@ -254,8 +254,8 @@ const Map<String, int> fileSizeBaseline = {
   // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
   'lib/services/slide_quality_analyzer.dart':
       1076, // +1 (#2838): missing-file-case voor galleryImages — codec-vrije
-      // loodgieterij bij het nieuwe dia-veld. Eerdere verhoging:
-      // +60 (sweep #2634/#2620/#2622): analyzeWarmed met
+  // loodgieterij bij het nieuwe dia-veld. Eerdere verhoging:
+  // +60 (sweep #2634/#2620/#2622): analyzeWarmed met
   // batch-verdeling over idle-frames, per-dia Expando-memo's en de
   // gedeelde split-run-meting — cohesief met de analyzer-staat.
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
@@ -527,9 +527,9 @@ const Map<String, int> classSizeBaseline = {
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
       3528, // +6 (#2838): stapel-stapplumbing — de zichtbaarhelper
-      // delegeert naar galleryVisibleForSlide in het model; de
-      // aankondigingsregel en views-doorgave blijven hier.
-      // Eerdere verhoging: +17 (#2733/#2741): tegel-semantiek in het
+  // delegeert naar galleryVisibleForSlide in het model; de
+  // aankondigingsregel en views-doorgave blijven hier.
+  // Eerdere verhoging: +17 (#2733/#2741): tegel-semantiek in het
   // presenter-raster en de verduidelijkt-schermteksten — zinnen die bij
   // deze State's schermtoestand horen. +10: rebase op de zoek-eindtoestand
   // van #2791 — de zoekvelden landden in deze State.
@@ -770,8 +770,8 @@ const Map<String, int> classSizeBaseline = {
   // De klasse meet 1097.
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer':
       1165, // +5 (#2838): alt-tekst- en missing-file-cases voor imageGallery —
-      // onherleidbare veldplumbing; de gedeelde refs-lezer doet het padwerk.
-      // Eerdere verhoging: +62 (sweep #2634/#2620/#2622): analyzeWarmed en de
+  // onherleidbare veldplumbing; de gedeelde refs-lezer doet het padwerk.
+  // Eerdere verhoging: +62 (sweep #2634/#2620/#2622): analyzeWarmed en de
   // per-dia Expando-memo's — de meting staat in de part-bestanden.
   // +15 (#2433): de slideAspect-parameter door de metriek- en
   // memo-functies — de kwaliteitsmeting moet op de deckverhouding rekenen; de

@@ -67,8 +67,8 @@ const Map<String, int> methodLengthBaseline = {
   'lib/models/parts/app_settings.dart::AppSettings.copyWith': 151,
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
       164, // +10 (#2838): imageGallery-case — per mediaveld groeit deze switch;
-      // de refs-lezer doet het padwerk, wat rest is één regel per beeld.
-      // Eerdere verhoging: +5 (#1999): eLearning-types in de missing-file switch.
+  // de refs-lezer doet het padwerk, wat rest is één regel per beeld.
+  // Eerdere verhoging: +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
   // +9 (#2433): de papersize/geometry-sleutels als ruwe waarden (één case)
   // plus de slideSize-resolutie erna. De eigenlijke logica staat in
