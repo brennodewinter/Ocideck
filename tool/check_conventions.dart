@@ -1066,7 +1066,7 @@ const Map<String, int> syncIoBaseline = {
   // op het eerste frame meeliften (#1854); `_writeRotatedCopy` is sync omdat
   // de dialoog direct moet kunnen sluiten — dezelfde afweging als
   // writeBytesAtomicSyncRetrying documenteert.
-  'lib/widgets/slides/image_crop_dialog.dart': 2,
+  'lib/widgets/slides/image_crop_dialog.dart': 1,
 };
 
 /// Synchrone bestandssysteem-calls in [sources] — pad → regelnummers.

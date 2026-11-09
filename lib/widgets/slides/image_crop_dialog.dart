@@ -134,7 +134,7 @@ Future<ImageCropResult?> showImageCropDialog(
   required int imageSize,
   required double focalX,
   required double focalY,
-  int minZoom = 100,
+  int minZoom = 25,
   int maxZoom = 400,
   Color? backgroundColor,
   List<ImageCallout>? callouts,
@@ -584,14 +584,18 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       overflowY = shownH - frameH;
     } else {
       final scale = _size / 100.0;
+      // Bij uitzoomen (< 100%) is de overloop negatief: het beeld is kleiner
+      // dan het kader en de focal verschuift het kader in de vrije ruimte.
+      // Dezelfde formule werkt dan ook — trek je het beeld naar rechts, dan
+      // schuift het kader mee naar rechts (#2840).
       overflowX = frameW * (scale - 1);
       overflowY = frameH * (scale - 1);
     }
     setState(() {
-      if (overflowX > 0.5) {
+      if (overflowX.abs() > 0.5) {
         _fx = (_fx - delta.dx / overflowX).clamp(0.0, 1.0);
       }
-      if (overflowY > 0.5) {
+      if (overflowY.abs() > 0.5) {
         _fy = (_fy - delta.dy / overflowY).clamp(0.0, 1.0);
       }
     });
