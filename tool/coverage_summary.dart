@@ -220,6 +220,10 @@ const Set<String> uncoveredBaseline = {
   // (altijd-weigeren) wordt rechtstreeks gedekt in update_check_test.dart,
   // de io-helft via de service onder de VM.
   'lib/services/update_check_fetch.dart',
+  // PLATFORM: retirement cleanup facade and web no-op. There is no downloaded
+  // filesystem cache on web; the IO implementation is tested directly.
+  'lib/services/retired_miauw_cleanup.dart',
+  'lib/services/retired_miauw_cleanup_stub.dart',
   // PLATFORM: de twee OciServe-fabrieken zijn kale conditional-importnaden;
   // hun io-helften worden rechtstreeks gedekt door ociserve_platform_io_test.
   // De webhelften weigeren alleen fail-closed en worden rechtstreeks geladen
