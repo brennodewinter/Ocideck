@@ -109,7 +109,7 @@ class _PreviewScaffold extends StatelessWidget {
     );
 
     return Container(
-      color: background,
+      color: _contentBackground(context, background),
       child: Padding(
         padding: EdgeInsets.only(top: safe.top, bottom: safe.bottom),
         child: SizedBox.expand(

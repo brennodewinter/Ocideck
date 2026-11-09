@@ -344,7 +344,7 @@ class _TwoImagesPreview extends StatelessWidget {
     final safe = _mediaBrandStripInsets(w, slide, profile);
 
     return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      color: _profileSlideBackground(context, profile),
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -518,7 +518,10 @@ class _ImagePreview extends StatelessWidget {
     return Padding(
       padding: _mediaBrandStripInsets(w, slide, profile),
       child: Container(
-        color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+        color: _contentBackground(
+          context,
+          AppTheme.parseHexColor(profile.slideBackgroundColor),
+        ),
         child: Column(
           children: [
             if (slide.title.isNotEmpty)

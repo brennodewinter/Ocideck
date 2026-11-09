@@ -39,6 +39,7 @@ import '../../utils/page_scoped_notes.dart';
 import '../panels/preview_panel.dart';
 import '../markdown_editor/markdown_editor.dart';
 import '../editors/editor_text_controller.dart';
+import '../editors/slide_background_editor.dart';
 
 part 'editor_panel_controls.dart';
 part 'editor_panel_slide_settings.dart';

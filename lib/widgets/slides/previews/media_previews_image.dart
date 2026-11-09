@@ -40,7 +40,7 @@ Widget _zoomedImage(
   // .toImage (used for exports), so the box-size approach is more reliable.
   return ClipRect(
     child: ColoredBox(
-      color: bgColor,
+      color: _contentBackground(context, bgColor),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final boxW = constraints.maxWidth * scale;
@@ -543,7 +543,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
 
   final tint = _placeholderTint(context);
   final fullPlaceholder = Container(
-    color: tint.fill,
+    color: _contentBackground(context, tint.fill),
     padding: const EdgeInsets.all(16),
     child: Center(
       child: Column(
@@ -612,7 +612,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
       // action in a slot that cannot fit them.
       if (constraints.maxHeight < 180 || constraints.maxWidth < 220) {
         return Container(
-          color: tint.fill,
+          color: _contentBackground(context, tint.fill),
           padding: const EdgeInsets.all(4),
           alignment: Alignment.center,
           child: Text(
@@ -645,7 +645,7 @@ Widget _mediaPlaceholder(BuildContext context, IconData icon, String label) {
   }
   final tint = _placeholderTint(context);
   return Container(
-    color: tint.fill,
+    color: _contentBackground(context, tint.fill),
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -807,7 +807,7 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
   // vertelt waaróm er een vlak op de dia staat, dus het haalt de contrastvloer.
   final tint = _placeholderTint(context);
   return ColoredBox(
-    color: tint.fill,
+    color: _contentBackground(context, tint.fill),
     child: LayoutBuilder(
       builder: (context, constraints) {
         final shortestSide = constraints.biggest.shortestSide;

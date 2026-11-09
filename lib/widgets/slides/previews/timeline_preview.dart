@@ -300,7 +300,7 @@ class _TimelinePreviewState extends State<_TimelinePreview>
     final title = widget.slide.title.trim();
 
     return Container(
-      color: bg,
+      color: _contentBackground(context, bg),
       padding: outerPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

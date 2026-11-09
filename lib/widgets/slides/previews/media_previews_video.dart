@@ -184,7 +184,10 @@ class _VideoPreviewState extends State<_VideoPreview>
         if (_hovering) setState(() => _hovering = false);
       },
       child: Container(
-        color: AppTheme.parseHexColor(widget.profile.slideBackgroundColor),
+        color: _contentBackground(
+          context,
+          AppTheme.parseHexColor(widget.profile.slideBackgroundColor),
+        ),
         child: Stack(
           fit: StackFit.expand,
           children: [

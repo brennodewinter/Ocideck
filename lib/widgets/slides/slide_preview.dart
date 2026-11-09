@@ -169,6 +169,26 @@ TextStyle _applyFont(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
 }
 
+/// Laat de gedeelde achtergrondlaag zichtbaar; kaarten houden hun eigen vlak.
+Color _contentBackground(BuildContext context, Color fallback) =>
+    marpBackgroundAssetPath(
+      SlideLinkScope.marpStyleOf(context).backgroundImage,
+    ).isNotEmpty
+    ? Colors.transparent
+    : fallback;
+
+Color _profileSlideBackground(BuildContext context, ThemeProfile profile) =>
+    _contentBackground(
+      context,
+      AppTheme.parseHexColor(profile.slideBackgroundColor),
+    );
+
+Color _titleContentBackground(BuildContext context, ThemeProfile profile) =>
+    _contentBackground(
+      context,
+      AppTheme.parseHexColor(profile.titleBackgroundColor),
+    );
+
 ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
   final foreground = normalizeMarpColor(style.color);
   final background = normalizeMarpColor(style.backgroundColor);
