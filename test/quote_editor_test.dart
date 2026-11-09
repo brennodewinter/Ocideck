@@ -56,6 +56,7 @@ void main() {
     await pump(tester, Slide.create(SlideType.quote));
 
     expect(find.text('Zoom achtergrond'), findsNothing);
+    expect(find.text('Grijze waas over afbeelding'), findsNothing);
   });
 
   testWidgets('setting a background image reveals the zoom control', (
@@ -67,5 +68,36 @@ void main() {
     );
 
     expect(find.text('Zoom achtergrond'), findsOneWidget);
+  });
+  testWidgets('the veil defaults to on and can be disabled', (tester) async {
+    final latest = await pump(
+      tester,
+      Slide.create(SlideType.quote).copyWith(imagePath: 'bg.png'),
+    );
+    final checkbox = find.widgetWithText(
+      CheckboxListTile,
+      'Grijze waas over afbeelding',
+    );
+    expect(tester.widget<CheckboxListTile>(checkbox).value, isTrue);
+    await tester.tap(checkbox);
+    await tester.pump();
+    expect(latest()!.titleImageOverlay, isFalse);
+  });
+
+  testWidgets('a disabled veil can be enabled again', (tester) async {
+    final latest = await pump(
+      tester,
+      Slide.create(
+        SlideType.quote,
+      ).copyWith(imagePath: 'bg.png', titleImageOverlay: false),
+    );
+    final checkbox = find.widgetWithText(
+      CheckboxListTile,
+      'Grijze waas over afbeelding',
+    );
+    expect(tester.widget<CheckboxListTile>(checkbox).value, isFalse);
+    await tester.tap(checkbox);
+    await tester.pump();
+    expect(latest()!.titleImageOverlay, isTrue);
   });
 }

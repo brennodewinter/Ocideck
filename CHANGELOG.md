@@ -14,6 +14,8 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Instelbare waas bij citaten (#2850).** De waas over een citaatafbeelding staat standaard aan en kan in de editor worden uitgezet. De keuze blijft bewaard bij opslaan en geldt ook voor presentatie en export.
+
 - **Achtergrondafbeeldingen voor alle slidetypes (#2848).** Kies, plak of verwijder een achtergrond via Slide-instellingen. De achtergrond staat los van inhoudsafbeeldingen en blijft bewaard bij opslaan en exporteren.
 
 - **Ondertitels bij videodia's (WebVTT/SRT).** Een lokaal `.vtt`- of

@@ -75,7 +75,7 @@ extension _MarkdownSerialize on MarkdownService {
   }
 
   /// The optional full-slide background image, emitted before the headings so
-  /// Marp reads it as a `bg` directive. Shared by the title and section dia's —
+  /// Marp reads it as a `bg` directive. Shared by title, section and quote slides —
   /// a tussentitel is a heading slide too, and carries the same fields.
   void _writeSlideBackground(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isEmpty) return;
@@ -307,14 +307,7 @@ extension _MarkdownSerialize on MarkdownService {
   }
 
   void _writeQuoteSlide(StringBuffer buf, Slide slide) {
-    if (slide.imagePath.isNotEmpty) {
-      buf.writeln(
-        '![${marpBackgroundOptions(slide, overlay: true)}](${slide.imagePath})',
-      );
-      _writeImageAlt(buf, slide);
-      _writeImageCaption(buf, slide.imageCaption);
-      buf.writeln();
-    }
+    _writeSlideBackground(buf, slide);
     if (slide.quote.isNotEmpty) {
       // Elke regel zijn eigen `>`. De editor laat vijf regels toe, dus een
       // meerregelig citaat is gewoon te typen; zonder prefix per regel las de
