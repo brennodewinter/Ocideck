@@ -51,6 +51,7 @@ import 'slide_presence_dots.dart';
 part 'slide_list_panel_bars.dart';
 part 'slide_list_panel_add.dart';
 part 'slide_list_panel_clipboard.dart';
+part 'slide_list_panel_frame.dart';
 
 class SlideListPanel extends ConsumerStatefulWidget {
   /// Current width of the slide rail. When it changes (dragging the divider),
@@ -77,6 +78,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   /// Of het paneel zelf toetsenbordfocus heeft — dan mag Delete de selectie
   /// wissen, en dan mag de gebruiker dat óók zien (#2730).
   bool _focused = false;
+
+  /// Of de gebruiker de rail deze focusperiode echt aanraakte: een muisklik,
+  /// een sleep of een afgehandelde toets. Alleen dan mag Delete de selectie
+  /// wissen (#2839).
+  bool _engaged = false;
   String _query = '';
   final _searchController = TextEditingController();
   final _scrollController = ScrollController();
@@ -300,28 +306,29 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     if (event is! KeyDownEvent || _textInputHasFocus) {
       return KeyEventResult.ignored;
     }
+    final KeyEventResult result;
     switch (event.logicalKey) {
       case LogicalKeyboardKey.arrowUp:
       case LogicalKeyboardKey.arrowLeft:
         _moveSelection(-1);
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       case LogicalKeyboardKey.arrowDown:
       case LogicalKeyboardKey.arrowRight:
         _moveSelection(1);
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       case LogicalKeyboardKey.pageUp:
         _moveSelection(-5);
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       case LogicalKeyboardKey.pageDown:
         _moveSelection(5);
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       case LogicalKeyboardKey.home:
         _selectSlide(0);
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       case LogicalKeyboardKey.end:
         final deck = ref.read(deckProvider).deck;
         if (deck != null) _selectSlide(deck.slides.length - 1);
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       case LogicalKeyboardKey.keyA
           when HardwareKeyboard.instance.isControlPressed ||
               HardwareKeyboard.instance.isMetaPressed:
@@ -329,14 +336,26 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         if (deck != null) {
           ref.read(editorProvider.notifier).selectAll(deck.slides.length);
         }
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       case LogicalKeyboardKey.delete:
       case LogicalKeyboardKey.backspace:
+        // Wissen alleen als de rail zélf de primaire focus heeft én de
+        // gebruiker hem deze focusperiode echt aanraakte. Demonteert een
+        // tekstveld elders (de notities na een undo of remount), dan eist de
+        // autofocus hier stilletjes de focus op — en zou één Delete een dia
+        // kosten in plaats van de bedoelde selectie (#2839).
+        if (!_focusNode.hasPrimaryFocus || !_engaged) {
+          return KeyEventResult.ignored;
+        }
         _deleteSelection();
-        return KeyEventResult.handled;
+        result = KeyEventResult.handled;
       default:
         return KeyEventResult.ignored;
     }
+    // Elke afgehandelde toets in de rail is zelf engagement: wie hier
+    // navigeert of selecteert, is er daarna ook echt mee bezig.
+    _engaged = true;
+    return result;
   }
 
   /// De zoekwortels voor 'Slide zoeken': álle geconfigureerde bibliotheken plus
@@ -725,60 +744,42 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final skippedCount = deck.slides.where((s) => s.skipped).length;
     final withheldCount = withheldSlideCount(deck);
 
-    return Focus(
+    return _SlideRailFrame(
       focusNode: _focusNode,
-      autofocus: true,
+      focused: _focused,
       onKeyEvent: _onKey,
       // #2730: het paneel kan focus hebben terwijl niets dat laat zien —
       // Delete wist dan een dia zonder dat er een ring was. Toon dezelfde
       // accentrand als de scheidingsbalk zolang het paneel focus heeft.
-      onFocusChange: (focused) => setState(() => _focused = focused),
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: _focusNode.requestFocus,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).extension<AppPalette>()!.panel,
-            border: Border.all(
-              color: _focused
-                  ? Theme.of(context).colorScheme.secondary
-                  : Colors.transparent,
-              width: 2,
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _header(
-                context,
-                l10n,
-                deck: deck,
-                notifier: notifier,
-                editorNotifier: editorNotifier,
-                searching: searching,
-                matchCount: matchCount,
-                skippedCount: skippedCount,
-                withheldCount: withheldCount,
-                multiSelectionCount: multiSelectionCount,
-              ),
-
-              // ── Slide list ───────────────────────────────────────────────────
-              Expanded(
-                child: _buildSlideList(
-                  deck,
-                  searching,
-                  query,
-                  notifier,
-                  editorNotifier,
-                ),
-              ),
-
-              // ── Add / Paste slide buttons ─────────────────────────────────
-              _addPasteButtons(context, deck, deckState, clipboard, l10n),
-            ],
-          ),
-        ),
+      onFocusChange: (focused) => setState(() {
+        _focused = focused;
+        // Verlaat de focus de rail, dan begint engagement opnieuw: de
+        // autofocus die hem daarna stil teruglegt telt niet als aanraking
+        // (#2839).
+        if (!focused) _engaged = false;
+      }),
+      onPointerDown: (_) => _engaged = true,
+      onTap: _focusNode.requestFocus,
+      header: _header(
+        context,
+        l10n,
+        deck: deck,
+        notifier: notifier,
+        editorNotifier: editorNotifier,
+        searching: searching,
+        matchCount: matchCount,
+        skippedCount: skippedCount,
+        withheldCount: withheldCount,
+        multiSelectionCount: multiSelectionCount,
       ),
+      slideList: _buildSlideList(
+        deck,
+        searching,
+        query,
+        notifier,
+        editorNotifier,
+      ),
+      footer: _addPasteButtons(context, deck, deckState, clipboard, l10n),
     );
   }
 
