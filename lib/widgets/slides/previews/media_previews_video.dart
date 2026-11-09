@@ -156,6 +156,23 @@ class _VideoPreviewState extends State<_VideoPreview>
   String get mediaLogLabel =>
       '_VideoPreviewState.initMedia: video controller init failed';
 
+  /// De getoonde ondertitelregel: zwarte leg achter witte tekst, geschaald
+  /// met de preview-breedte zodat hij op de beamer leesbaar blijft.
+  Widget _captionOverlay(String text) => Align(
+    alignment: Alignment.bottomCenter,
+    child: Padding(
+      padding: EdgeInsets.only(bottom: widget.w * 0.02),
+      child: ClosedCaption(
+        text: text,
+        textStyle: TextStyle(
+          color: Colors.white,
+          backgroundColor: Colors.black.withValues(alpha: 0.65),
+          fontSize: widget.w * 0.028,
+        ),
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     final controller = _controller;
@@ -184,22 +201,7 @@ class _VideoPreviewState extends State<_VideoPreview>
                       children: [
                         VideoPlayer(controller),
                         if (value.caption.text.isNotEmpty)
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: widget.w * 0.02),
-                              child: ClosedCaption(
-                                text: value.caption.text,
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  backgroundColor: Colors.black.withValues(
-                                    alpha: 0.65,
-                                  ),
-                                  fontSize: widget.w * 0.028,
-                                ),
-                              ),
-                            ),
-                          ),
+                          _captionOverlay(value.caption.text),
                       ],
                     ),
                   ),

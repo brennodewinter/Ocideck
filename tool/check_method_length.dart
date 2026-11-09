@@ -126,7 +126,9 @@ const Map<String, int> methodLengthBaseline = {
   // menu-optietokens uit `effectiveClass`. Pure doorvoer van een nieuw veld.
   // Verlaagd van 208 naar 202: de rij losse tokenvergelijkingen in
   // `effectiveClass` werd één aanroep van `isOcideckWrittenClassToken`.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 200,
+  // +1 (#2841): videoCaptions-doorvoer in de body-assembly — één veld, één
+  // toewijzing; de `<track>`-lezing zelf staat in helpers (telt niet mee).
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 201,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -158,7 +160,9 @@ const Map<String, int> methodLengthBaseline = {
   // +6 (#1824): callouts, calloutPresentation, calloutReveal-parameters +
   // doorvoer in copyWith voor image callouts.
   // One more stored layout choice needs one parameter and one constructor field.
-  'lib/models/slide.dart::Slide.copyWith': 174,
+  'lib/models/slide.dart::Slide.copyWith': 176,
+  // +2 (#2841): videoCaptions-parameter + doorvoer in copyWith — zelfde pure
+  // plumbing als de vijf voorgaande copyWith-bumps hierboven.
   // +3 (#2616): customBulletSvg-parameter plus clear-vlag in copyWith — pure
   // plumbing, hetzelfde patroon als Slide.copyWith hierboven.
   'lib/models/settings.dart::ThemeProfile.copyWith': 158,
@@ -182,7 +186,9 @@ const Map<String, int> methodLengthBaseline = {
   // +9 (#1824): callouts, calloutPresentation, calloutReveal — drie nieuwe
   // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
   // +3 (#2749): de tableRows-case — zelfde vorm, één regel per veld.
-  'lib/collab/deck_op.dart::_slideWithField': 203,
+  'lib/collab/deck_op.dart::_slideWithField': 206,
+  // +3 (#2841): de videoCaptions-case — zelfde vorm als elke andere
+  // veld-case in de switch, niet uit te tillen.
   // +8 (#2628): prefs-lezing fail-closed afvangen + quarantaine-herstel van
   // de atomische store; de decode-stappen zelf blijven één lineair blok.
   'lib/state/settings_provider.dart::SettingsNotifier._load': 165,

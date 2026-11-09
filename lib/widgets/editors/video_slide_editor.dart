@@ -118,6 +118,46 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
     }
   }
 
+  /// De ondertitelrij: huidig bestand, wis-knop en kies/vervang-knop.
+  /// Het gekozen bestand reist mee in de projectmap, het pakket en de
+  /// downloadbundel (#2841).
+  Widget _captionsRow(AppLocalizations l10n) {
+    final hasCaptions = widget.slide.videoCaptions.isNotEmpty;
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            hasCaptions
+                ? widget.slide.videoCaptions
+                : l10n.d('Geen ondertitels'),
+            style: TextStyle(
+              fontSize: 12,
+              color: hasCaptions ? AppTheme.slate600 : AppTheme.slate400,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        if (hasCaptions)
+          IconButton(
+            tooltip: l10n.d('Ondertitels verwijderen'),
+            icon: const Icon(Icons.close, size: 16),
+            onPressed: () =>
+                widget.onUpdate(widget.slide.copyWith(videoCaptions: '')),
+            visualDensity: VisualDensity.compact,
+          ),
+        TextButton.icon(
+          onPressed: _pickCaptions,
+          icon: const Icon(Icons.subtitles_outlined, size: 16),
+          label: Text(
+            hasCaptions
+                ? l10n.d('Ander bestand…')
+                : l10n.d('Ondertitels toevoegen…'),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   void dispose() {
     _title.dispose();
@@ -186,46 +226,11 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
           ),
         ),
         // Ondertitels (#2841): alleen bij een lokale videobron — YouTube/Vimeo
-        // regelen captions in hun eigen speler. Het gekozen bestand reist mee
-        // in de projectmap, het pakket en de downloadbundel.
+        // regelen captions in hun eigen speler.
         if (supportsLocalProjectFolders &&
             (source.kind == VideoSourceKind.localFile ||
                 widget.slide.videoCaptions.isNotEmpty))
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  widget.slide.videoCaptions.isEmpty
-                      ? l10n.d('Geen ondertitels')
-                      : widget.slide.videoCaptions,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: widget.slide.videoCaptions.isEmpty
-                        ? AppTheme.slate400
-                        : AppTheme.slate600,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              if (widget.slide.videoCaptions.isNotEmpty)
-                IconButton(
-                  tooltip: l10n.d('Ondertitels verwijderen'),
-                  icon: const Icon(Icons.close, size: 16),
-                  onPressed: () =>
-                      widget.onUpdate(widget.slide.copyWith(videoCaptions: '')),
-                  visualDensity: VisualDensity.compact,
-                ),
-              TextButton.icon(
-                onPressed: _pickCaptions,
-                icon: const Icon(Icons.subtitles_outlined, size: 16),
-                label: Text(
-                  widget.slide.videoCaptions.isEmpty
-                      ? l10n.d('Ondertitels toevoegen…')
-                      : l10n.d('Ander bestand…'),
-                ),
-              ),
-            ],
-          ),
+          _captionsRow(l10n),
         const SizedBox(height: 16),
         // Knippen en audio-bijsluiting zijn verdieping; ingeklapt tenzij er
         // al een knippunt of audiobestand op deze slide staat.
