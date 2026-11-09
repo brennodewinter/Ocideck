@@ -223,7 +223,7 @@ class _TitlePreview extends StatelessWidget {
     }
 
     return Container(
-      color: bg,
+      color: _contentBackground(context, bg),
       child: Row(children: children),
     );
   }
@@ -235,7 +235,10 @@ class _TitlePreview extends StatelessWidget {
     final pad = w * 0.08;
     return Container(
       width: double.infinity,
-      color: AppTheme.parseHexColor(profile.titleBackgroundColor),
+      color: _contentBackground(
+        context,
+        AppTheme.parseHexColor(profile.titleBackgroundColor),
+      ),
       padding: EdgeInsets.fromLTRB(pad, pad * 0.7, pad, pad * 0.7),
       child: _lockupColumn(context),
     );
@@ -293,7 +296,7 @@ class _TitlePreview extends StatelessWidget {
               alignment: focalAlignment(slide.imageFocalX, slide.imageFocalY),
             )
           else
-            ColoredBox(color: background),
+            ColoredBox(color: _contentBackground(context, background)),
           if (hasBg && slide.titleImageOverlay) _scrim(),
           _brandLockup(context),
           if (hasBg) _captionOverlay(context, slide.imageCaption, w),
@@ -303,7 +306,10 @@ class _TitlePreview extends StatelessWidget {
 
     if (!hasBg) {
       return Container(
-        color: AppTheme.parseHexColor(profile.titleBackgroundColor),
+        color: _contentBackground(
+          context,
+          AppTheme.parseHexColor(profile.titleBackgroundColor),
+        ),
         child: SizedBox.expand(child: _lockup(context)),
       );
     }
@@ -313,7 +319,10 @@ class _TitlePreview extends StatelessWidget {
     // runs past the title's accent rule and no text crosses the picture.
     if (slide.imageSize != 0) {
       return Container(
-        color: AppTheme.parseHexColor(profile.titleBackgroundColor),
+        color: _contentBackground(
+          context,
+          AppTheme.parseHexColor(profile.titleBackgroundColor),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -450,7 +459,7 @@ class _SectionPreview extends StatelessWidget {
     // Geen afbeelding: de vertrouwde effen tussentitel.
     if (!hasBg) {
       return Container(
-        color: sectionBg,
+        color: _contentBackground(context, sectionBg),
         child: SizedBox.expand(child: _centred(context, pad)),
       );
     }
@@ -460,7 +469,7 @@ class _SectionPreview extends StatelessWidget {
     // nooit over de foto valt.
     if (slide.imageSize != 0) {
       return Container(
-        color: sectionBg,
+        color: _contentBackground(context, sectionBg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -485,7 +494,7 @@ class _SectionPreview extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              color: sectionBg,
+              color: _contentBackground(context, sectionBg),
               padding: EdgeInsets.fromLTRB(pad, pad * 0.7, pad, pad * 0.7),
               child: _contentColumn(context),
             ),
@@ -607,7 +616,10 @@ class _QuotePreview extends StatelessWidget {
 
     if (!hasBg) {
       return Container(
-        color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+        color: _contentBackground(
+          context,
+          AppTheme.parseHexColor(profile.slideBackgroundColor),
+        ),
         child: SizedBox.expand(child: content),
       );
     }

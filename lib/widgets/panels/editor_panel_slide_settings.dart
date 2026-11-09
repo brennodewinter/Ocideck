@@ -511,7 +511,7 @@ class _SlideSettingsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final groups = _groups(context);
+    final groups = [_backgroundGroup(context.l10n), ..._groups(context)];
 
     // Zoveel kolommen als er passen, hoogstens één per groep. Boven de ~1050px
     // (een normaal breed editorpaneel) staan de drie kaarten naast elkaar; wordt
@@ -634,6 +634,20 @@ class _SlideSettingsBody extends StatelessWidget {
           : null,
     );
   }
+
+  Widget _backgroundGroup(AppLocalizations l10n) => _SettingsGroup(
+    label: l10n.d('Achtergrondafbeelding (optioneel)'),
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(10),
+        child: SlideBackgroundEditor(
+          slide: slide,
+          onUpdate: onUpdate,
+          projectPath: deck.projectPath,
+        ),
+      ),
+    ],
+  );
 
   List<Widget> _groups(BuildContext context) {
     final l10n = context.l10n;

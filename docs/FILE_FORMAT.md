@@ -400,6 +400,12 @@ deck-wide value instead of accidentally inheriting it. A Marp header/footer is
 the text source for OciDeck's overlay; it does not create a second competing
 footer. Inline Markdown is rendered in both.
 
+The slide settings background picker is available for every slide type and
+writes `_backgroundImage: url("images/…")`. It is independent of the content
+image fields. Removing a selected background writes `none`, explicitly
+suppressing an inherited deck background. The shared renderer paints the image
+with cover fitting behind the content; content cards retain their own fills.
+
 Other front-matter keys — a typo, or an option OciDeck does not implement such
 as `size` or `style` — have no effect inside OciDeck but are **kept on save**.
 Likewise, an unknown body directive is retained verbatim and the checker explains

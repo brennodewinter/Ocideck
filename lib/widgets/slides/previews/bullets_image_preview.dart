@@ -110,7 +110,7 @@ class _BulletsImagePreview extends StatelessWidget {
     );
 
     return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      color: _profileSlideBackground(context, profile),
       child: Stack(
         children: [
           Positioned(
@@ -292,7 +292,7 @@ class _BulletsImagePreview extends StatelessWidget {
     );
 
     return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      color: _profileSlideBackground(context, profile),
       child: Stack(
         children: [
           Positioned(

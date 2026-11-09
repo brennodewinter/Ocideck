@@ -46,12 +46,13 @@ Widget _titleWithSplitCounter(
 /// Clips bullets-slide content to the real layout box. [OverflowBox] keeps the
 /// inner column from throwing flex overflow; [ClipRect] hides any remainder.
 Widget _bulletsSlideShell({
+  required BuildContext context,
   required Color background,
   required EdgeInsets padding,
   required Widget Function(double availW, double availH) buildContent,
 }) {
   return Container(
-    color: background,
+    color: _contentBackground(context, background),
     child: LayoutBuilder(
       builder: (context, constraints) {
         final outerW = constraints.maxWidth;
@@ -159,6 +160,7 @@ class _BulletsPreview extends StatelessWidget {
     );
 
     return _bulletsSlideShell(
+      context: context,
       background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       padding: padding,
       buildContent: (contentW, availH) =>
@@ -331,6 +333,7 @@ class _BulletsPreview extends StatelessWidget {
     );
 
     return _bulletsSlideShell(
+      context: context,
       background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       padding: padding,
       buildContent: (contentW, availH) => _richTextPaginatedContent(
@@ -568,6 +571,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       vPad: vPad,
     );
     return _bulletsSlideShell(
+      context: context,
       background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       padding: padding,
       buildContent: (contentW, layoutH) =>

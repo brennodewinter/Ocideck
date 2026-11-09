@@ -45,7 +45,10 @@ class _InvalidQuestionAnswerCountNotice extends StatelessWidget {
     final l10n = context.l10n;
     final textColor = AppTheme.parseHexColor(profile.textColor);
     return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      color: _contentBackground(
+        context,
+        AppTheme.parseHexColor(profile.slideBackgroundColor),
+      ),
       alignment: Alignment.center,
       padding: EdgeInsets.all(width * 0.06),
       child: Semantics(
@@ -215,7 +218,10 @@ class _QuestionPreview extends StatelessWidget {
     }
 
     return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      color: _contentBackground(
+        context,
+        AppTheme.parseHexColor(profile.slideBackgroundColor),
+      ),
       child: Stack(
         children: [
           Positioned.fill(child: content),

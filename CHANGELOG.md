@@ -14,6 +14,8 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Achtergrondafbeeldingen voor alle slidetypes (#2848).** Kies, plak of verwijder een achtergrond via Slide-instellingen. De achtergrond staat los van inhoudsafbeeldingen en blijft bewaard bij opslaan en exporteren.
+
 - **Ondertitels bij videodia's (WebVTT/SRT).** Een lokaal `.vtt`- of
   `.srt`-bestand koppelen aan een videodia; het reist mee in opslag, pakket,
   dossier, downloadbundel en bij dia kopiëren. Opgeslagen als standaard-HTML

@@ -115,7 +115,7 @@ class _CockpitPreviewState extends State<_CockpitPreview>
       _logoAwareBottomPadding(pad, logoSafe.bottom),
     );
     return Container(
-      color: bg,
+      color: _contentBackground(context, bg),
       padding: outerPadding,
       child: AnimatedBuilder(
         animation: _controller,

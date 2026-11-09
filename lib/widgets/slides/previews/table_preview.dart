@@ -380,7 +380,10 @@ class _TablePreview extends StatelessWidget {
     required String caption,
   }) {
     return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      color: _contentBackground(
+        context,
+        AppTheme.parseHexColor(profile.slideBackgroundColor),
+      ),
       child: FittedBox(
         fit: BoxFit.scaleDown,
         alignment: Alignment.topLeft,

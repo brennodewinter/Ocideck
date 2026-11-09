@@ -369,7 +369,10 @@ class _ChartPreviewState extends State<_ChartPreview>
     Color textColor,
   ) {
     return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      color: _contentBackground(
+        context,
+        AppTheme.parseHexColor(profile.slideBackgroundColor),
+      ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(
           horizontalPad,
