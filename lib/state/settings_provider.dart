@@ -129,6 +129,26 @@ _loadCockpitSettings(
 /// The class is split across `parts/settings_provider_*.dart` by subject
 /// (connections, git, privacy, traces). Those are the same class — add a
 /// setting beside its neighbours rather than here.
+Future<void> _removeRetiredMiauwSettings(SharedPreferences prefs) async {
+  try {
+    for (final key in [
+      'secModuleEnabled',
+      'secModulePackVersion',
+      'allowCveLookup',
+      'cveApiBaseUrl',
+    ]) {
+      await prefs.remove(key);
+    }
+  } catch (error, stack) {
+    logError('Removing retired MIAUW preferences failed', error, stack);
+  }
+  unawaited(
+    removeRetiredMiauwData().catchError((Object error, StackTrace stack) {
+      logError('Removing retired MIAUW data failed', error, stack);
+    }),
+  );
+}
+
 class SettingsNotifier extends StateNotifier<AppSettings> {
   /// De huidige instellingen, leesbaar en schrijfbaar vanuit een `part`.
   ///
@@ -202,23 +222,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       logError('SettingsNotifier._load: prefs lezen mislukt', e, s);
       return;
     }
-    try {
-      for (final key in [
-        'secModuleEnabled',
-        'secModulePackVersion',
-        'allowCveLookup',
-        'cveApiBaseUrl',
-      ]) {
-        await prefs.remove(key);
-      }
-    } catch (error, stack) {
-      logError('Removing retired MIAUW preferences failed', error, stack);
-    }
-    unawaited(
-      removeRetiredMiauwData().catchError((Object error, StackTrace stack) {
-        logError('Removing retired MIAUW data failed', error, stack);
-      }),
-    );
+    await _removeRetiredMiauwSettings(prefs);
     final themeJson = prefs.getString('themeProfile');
     final profilesJson = prefs.getString('themeProfiles');
     // Verse installatie (geen opgeslagen profielen): de ingebouwde profielen
