@@ -24,6 +24,7 @@ import 'control_status_spec.dart';
 import 'scope_matrix_spec.dart';
 import 'scorecard_spec.dart';
 import 'settings.dart';
+import 'gallery_layout.dart';
 import 'timeline.dart';
 
 part 'slide_bullets.dart';
@@ -38,6 +39,10 @@ enum SlideType {
   twoBullets,
   bulletsImage,
   twoImages,
+  // Meerdere afbeeldingen op één dia (#2838): raster of stapel (per-klik
+  // neervallen). De beelden zijn gewone ![alt](pad)-regels in de body —
+  // leesbaar in elke Markdown-lezer; de lay-out reist als _class-subtoken.
+  imageGallery,
   image,
   video,
   quote,
@@ -143,6 +148,15 @@ class Slide {
   final double imageFocalY;
   final double imageFocalX2;
   final double imageFocalY2;
+
+  /// De beeldreeks van een imageGallery-dia (#2838): elke entry is een volle
+  /// `![alt](pad)`-Markdown, zodat de alt-tekst van elke afbeelding meereist
+  /// en de dia in elke Markdown-lezer een gewone lijst beelden blijft.
+  final List<String> galleryImages;
+
+  /// Raster (alles tegelijk) of stapel (per klik één erbij). Reist als
+  /// `_class`-subtoken `gallery-stack`; zonder token = grid.
+  final GalleryLayout galleryLayout;
   final String videoPath;
   final bool videoAutoplay;
 
@@ -448,6 +462,8 @@ class Slide {
     this.imageFocalY = 0.5,
     this.imageFocalX2 = 0.5,
     this.imageFocalY2 = 0.5,
+    this.galleryImages = const [],
+    this.galleryLayout = GalleryLayout.grid,
     this.videoPath = '',
     this.videoAutoplay = false,
     this.videoStartMs = 0,
@@ -626,6 +642,8 @@ class Slide {
       imageFocalY: src.imageFocalY,
       imageFocalX2: src.imageFocalX2,
       imageFocalY2: src.imageFocalY2,
+      galleryImages: src.galleryImages,
+      galleryLayout: src.galleryLayout,
       videoPath: src.videoPath,
       videoAutoplay: src.videoAutoplay,
       videoStartMs: src.videoStartMs,
@@ -705,6 +723,8 @@ class Slide {
     double? imageFocalY,
     double? imageFocalX2,
     double? imageFocalY2,
+    List<String>? galleryImages,
+    GalleryLayout? galleryLayout,
     String? videoPath,
     bool? videoAutoplay,
     int? videoStartMs,
@@ -792,6 +812,8 @@ class Slide {
     imageFocalY: imageFocalY ?? this.imageFocalY,
     imageFocalX2: imageFocalX2 ?? this.imageFocalX2,
     imageFocalY2: imageFocalY2 ?? this.imageFocalY2,
+    galleryImages: galleryImages ?? this.galleryImages,
+    galleryLayout: galleryLayout ?? this.galleryLayout,
     videoPath: videoPath ?? this.videoPath,
     videoAutoplay: videoAutoplay ?? this.videoAutoplay,
     videoStartMs: videoStartMs ?? this.videoStartMs,

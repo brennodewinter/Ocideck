@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../platform/platform_features.dart';
+import '../../models/gallery_layout.dart';
 import '../../models/deck.dart';
 import '../../models/slide_format.dart';
 import '../../models/improvement_y01.dart';
@@ -350,6 +351,15 @@ class _EditorPanelContent extends ConsumerWidget {
       // Ondertitels horen bij de videodia: meereizen naar een ander type
       // zou een dode `<track>`-verwijzing in de markdown achterlaten.
       videoCaptions: newType == SlideType.video ? slide.videoCaptions : '',
+      // Galerijvelden horen bij de afbeeldingsgroep (#2838): meereizen zou
+      // verweesde ![alt](pad)-regels en een betekenisloos lay-outtoken
+      // achterlaten in een dia die geen galerij is.
+      galleryImages: newType == SlideType.imageGallery
+          ? slide.galleryImages
+          : const [],
+      galleryLayout: newType == SlideType.imageGallery
+          ? slide.galleryLayout
+          : GalleryLayout.grid,
       videoAutoplay: slide.videoAutoplay,
       audioPath: slide.audioPath,
       audioAutoplay: slide.audioAutoplay,

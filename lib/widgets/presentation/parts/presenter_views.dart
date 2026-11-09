@@ -133,6 +133,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                     calloutRevealedBulletCount: _calloutRevealedBulletCount(
                       slide,
                     ),
+                    galleryVisibleCount: _galleryVisibleFor(slide),
                     tlp: widget.tlp,
                     organization: widget.organization,
                     showClassificationWatermark:

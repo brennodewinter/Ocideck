@@ -544,6 +544,12 @@ extension _MarkdownParse on MarkdownService {
       videoStartMs: body.videoStartMs,
       videoEndMs: body.videoEndMs,
       videoCaptions: body.videoCaptions,
+      galleryImages: type == SlideType.imageGallery
+          ? body.galleryImages
+          : const [],
+      galleryLayout: type == SlideType.imageGallery
+          ? galleryLayoutFromTokens(classTokens)
+          : GalleryLayout.grid,
       audioPath: body.audioPath,
       audioAutoplay: body.audioAutoplay,
       quote: body.quote,

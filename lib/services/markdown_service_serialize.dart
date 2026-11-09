@@ -282,6 +282,23 @@ extension _MarkdownSerialize on MarkdownService {
     if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
   }
 
+  /// De afbeeldingsgroep (#2838): kop gevolgd door elke beeldentry ongewijzigd
+  /// als `![alt](pad)`-regel — een gewone Markdown-lijst, dus Marp en elke
+  /// andere lezer tonen de beelden zonder OciDeck (de bewaker-toets).
+  void _writeImageGallerySlide(StringBuffer buf, Slide slide) {
+    if (slide.title.isNotEmpty) {
+      buf.writeln('# ${slide.title}');
+      buf.writeln();
+    }
+    if (slide.subtitle.isNotEmpty) {
+      buf.writeln('## ${slide.subtitle}');
+      buf.writeln();
+    }
+    for (final entry in slide.galleryImages) {
+      if (entry.trim().isNotEmpty) buf.writeln(entry.trim());
+    }
+  }
+
   void _writeImageSlide(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isNotEmpty) {
       buf.writeln('![${marpBackgroundOptions(slide)}](${slide.imagePath})');

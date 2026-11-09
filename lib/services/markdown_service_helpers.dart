@@ -25,7 +25,8 @@ bool isOcideckWrittenClassToken(String token) =>
     token == 'table-editable' ||
     token == 'table-overdue' ||
     isTimelineOptionToken(token) ||
-    isMenuOptionToken(token);
+    isMenuOptionToken(token) ||
+    isGalleryOptionToken(token);
 
 // Hoisted hot-path regexes (zie markdown_service_parse.dart); [_attrRegexes]
 // cachet de per-attribuutnaam gebouwde patronen van [_parseEmbedLine].

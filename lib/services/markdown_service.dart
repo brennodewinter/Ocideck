@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:characters/characters.dart';
 import 'package:uuid/uuid.dart';
+import '../models/gallery_layout.dart';
 import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
@@ -291,6 +292,10 @@ class MarkdownService {
       // Keuze-menu-indeling (#1162) rijdt op dezelfde manier mee; `grid` is de
       // standaard en schrijft niets, zodat bestaande menudia's niet wijzigen.
       if (slide.type == SlideType.menu) ...menuClassTokens(slide.menuLayout),
+      // Afbeeldingsgroep (#2838): `grid` is de stille standaard; alleen de
+      // stapel draagt een token, zodat de .md compact blijft.
+      if (slide.type == SlideType.imageGallery)
+        ...galleryClassTokens(slide.galleryLayout),
     ];
 
     _writeSlideDirectives(buf, slide, classes, forExport);
@@ -313,6 +318,8 @@ class MarkdownService {
         _writeBulletsImageSlide(buf, slide, themeProfile, forExport);
       case SlideType.twoImages:
         _writeTwoImagesSlide(buf, slide);
+      case SlideType.imageGallery:
+        _writeImageGallerySlide(buf, slide);
       case SlideType.image:
         _writeImageSlide(buf, slide);
       case SlideType.video:
