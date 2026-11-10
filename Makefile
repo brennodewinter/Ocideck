@@ -144,10 +144,10 @@ fix:
 # Verify formatting without modifying files.
 format-check:
 	@echo "== OciDeck check: format =="
-	@echo "Command: dart format --output=none --set-exit-if-changed ."
+	@echo "Command: git ls-files -z '*.dart' | xargs -0 dart format --output=none --set-exit-if-changed"
 	@echo "Covers: all Dart source and test files tracked in this workspace."
 	@echo "Failure means: at least one Dart file needs 'dart format .'."
-	dart format --output=none --set-exit-if-changed .
+	git ls-files -z '*.dart' | xargs -0 dart format --output=none --set-exit-if-changed
 
 # Static analysis. --fatal-infos makes info-level diagnostics fail the build too,
 # so the strict-casts/strict-raw-types/strict-inference modes in
