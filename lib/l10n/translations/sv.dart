@@ -1260,7 +1260,6 @@ const _dutchSourceSv = {
   'Afbeelding paneelvullend': 'Bild fyller panelen',
   'Vult het paneel en snijdt de randen bij':
       'Fyller panelen och beskär kanterna',
-  'Afbeeldingen paneelvullend': 'Bilder fyller sina paneler',
   'Vult elk paneel en snijdt de randen bij':
       'Fyller varje panel och beskär kanterna',
   'Vullen (bijsnijden)': 'Fylla (beskära)',
@@ -1536,6 +1535,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Eigen verdeling': 'Egen fördelning',
+  'Gelijke hoogte': 'Samma höjd',
+  'Panelen vullen': 'Fyll paneler',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Fördela bredden själv; varje bild får plats i sin panel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Båda bilderna är lika höga och helt synliga — fördelning och beskärning gör inget',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Fyller varje panel och beskär kanterna; ‘Justera bild’ väljer fokuspunkten',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Beskärning gör inget i Samma höjd — välj först en annan vy',
   'Afbeeldingsgroep': 'Bildgrupp',
   'Stapel': 'Trave',
   'Afbeelding toevoegen': 'Lägg till bild',

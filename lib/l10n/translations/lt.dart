@@ -1266,7 +1266,6 @@ const _dutchSourceLt = {
   'Afbeelding paneelvullend': 'Vaizdas užpildo panelį',
   'Vult het paneel en snijdt de randen bij':
       'Užpildo panelį ir apkarpo kraštus',
-  'Afbeeldingen paneelvullend': 'Vaizdai užpildo savo panelius',
   'Vult elk paneel en snijdt de randen bij':
       'Užpildo kiekvieną panelį ir apkarpo kraštus',
   'Vullen (bijsnijden)': 'Užpildyti (apkarpyti)',
@@ -1543,6 +1542,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Eigen verdeling': 'Pasirinktinis padalijimas',
+  'Gelijke hoogte': 'Vienodas aukštis',
+  'Panelen vullen': 'Užpildyti skydelius',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Paskirstykite plotį patys; kiekvienas paveikslėlis telpa savo skydelyje',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Abu paveikslėliai vienodo aukščio ir visiškai matomi — dalijimas ir apkarpymas nieko nedaro',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Užpildo kiekvieną skydelį ir nukerpa kraštus; ‘Derinti paveikslėlį’ parenka fokusavimo tašką',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Apkarpymas nieko nedaro režime Vienodas aukštis — pirmiausia pasirinkite kitą rodinį',
   'Afbeeldingsgroep': 'Vaizdų grupė',
   'Stapel': 'Krūva',
   'Afbeelding toevoegen': 'Pridėti paveikslėlį',

@@ -237,6 +237,12 @@ class Slide {
   final bool splitImageOnLeft; // absent marker keeps the image on the right
   /// Panel zoom: 0 = cover, 100 = contain, >100 = zoom; full-bleed uses [imageSize].
   final int imageZoom;
+
+  /// twoImages only: [TwoImagesLayout.panels] keeps the split-panel layout
+  /// driven by [imageSize]/[imageZoom]; [TwoImagesLayout.equalHeight] shows
+  /// both pictures at the same visible height, fully visible, with widths
+  /// following their source aspect ratios. Inert on every other slide type.
+  final TwoImagesLayout twoImagesLayout;
   final bool titleImageOverlay; // darken title background image for readability
   final bool
   imageTitleAbove; // image slide: title at top, image below (not overlaid)
@@ -496,6 +502,7 @@ class Slide {
     this.imageSize = 0,
     this.splitImageOnLeft = false,
     this.imageZoom = 0,
+    this.twoImagesLayout = TwoImagesLayout.panels,
     this.titleImageOverlay = true,
     this.imageTitleAbove = false,
     this.titleTextColorOverride = '',
@@ -674,6 +681,7 @@ class Slide {
       imageSize: src.imageSize,
       splitImageOnLeft: src.splitImageOnLeft,
       imageZoom: src.imageZoom,
+      twoImagesLayout: src.twoImagesLayout,
       titleImageOverlay: src.titleImageOverlay,
       imageTitleAbove: src.imageTitleAbove,
       titleTextColorOverride: src.titleTextColorOverride,
@@ -757,6 +765,7 @@ class Slide {
     int? imageSize,
     bool? splitImageOnLeft,
     int? imageZoom,
+    TwoImagesLayout? twoImagesLayout,
     bool? titleImageOverlay,
     bool? imageTitleAbove,
     String? titleTextColorOverride,
@@ -846,6 +855,7 @@ class Slide {
     imageSize: imageSize ?? this.imageSize,
     splitImageOnLeft: splitImageOnLeft ?? this.splitImageOnLeft,
     imageZoom: imageZoom ?? this.imageZoom,
+    twoImagesLayout: twoImagesLayout ?? this.twoImagesLayout,
     titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
     imageTitleAbove: imageTitleAbove ?? this.imageTitleAbove,
     titleTextColorOverride:

@@ -1273,7 +1273,6 @@ const _dutchSourceMt = {
       'Timla l-islajd kollu u taqta\' t-truf',
   'Afbeelding paneelvullend': 'L-immaġni timla l-pannell',
   'Vult het paneel en snijdt de randen bij': 'Timla l-pannell u taqta\' t-truf',
-  'Afbeeldingen paneelvullend': 'L-immaġni jimlu l-pannelli tagħhom',
   'Vult elk paneel en snijdt de randen bij':
       'Timla kull pannell u taqta\' t-truf',
   'Vullen (bijsnijden)': 'Imla (aqta\')',
@@ -1553,6 +1552,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Eigen verdeling': 'Diviżjoni personalizzata',
+  'Gelijke hoogte': 'Għoli ugwali',
+  'Panelen vullen': 'Imla l-panelli',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Qassam il-wisa’ lilek innifsek; kull stampa tifla’ fil-panell tagħha',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Iż-żewġ stampi għandhom l-istess għoli u huma viżibbli għal kollox — qasma u qtugħ ma jagħmlu xejn',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Imla kull panell u jaqta’ t-truf; ‘Aġġusta l-istampa’ jagħżel il-punt fokali',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Il-qtugħ ma jagħmel xejn fil-modalità Għoli ugwali — agħżel l-ewwel dehra oħra',
   'Afbeeldingsgroep': 'Grupp ta’ stampi',
   'Stapel': 'Munzell',
   'Afbeelding toevoegen': 'Żid stampa',

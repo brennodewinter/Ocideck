@@ -1262,7 +1262,6 @@ const _dutchSourceGsw = {
   'Afbeelding paneelvullend': 'Bild füllt das Panäl',
   'Vult het paneel en snijdt de randen bij':
       'Füllt das Panäl und schnidt d Ränder ab',
-  'Afbeeldingen paneelvullend': 'Bilder fülln ihr Panäl',
   'Vult elk paneel en snijdt de randen bij':
       'Füllt jedes Panäl und schnidt d Ränder ab',
   'Vullen (bijsnijden)': 'Fülle (beschneide)',
@@ -1537,6 +1536,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Eigen verdeling': 'Eigeni Ufteilig',
+  'Gelijke hoogte': 'Glichi Höchi',
+  'Panelen vullen': 'Panels fülle',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Teil d Bräiti sälber uf; jeds Bild passt i sis Panel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Bedi Bilder glich hooch und vollständig sichtbar — Ufteile und Zueschnyde bewirkt nüt',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Füllt jeds Panel uus und schnydet d Ränder ab; ‘Bild aapasse’ wehlt dr Fokuspunkt',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Zueschnyde bewirkt i Glichi Höchi nüt — wehl zerscht e anderi Aasicht',
   'Afbeeldingsgroep': 'Bildgruppe',
   'Stapel': 'Stapel',
   'Afbeelding toevoegen': 'Bild dezuetue',

@@ -50,6 +50,19 @@ String _splitSectionClass(String slideMarkdown) {
 /// Extracts `--image-width: N%` from the `<!-- _style: … -->` directive so the
 /// split grid's image column matches the panel width the author chose. Returns
 /// `''` when absent — the CSS default (40%) then applies.
+/// Extra `<section>` class (` two-eq-height`) voor een twoImages-dia met de
+/// 'Gelijke hoogte'-keuze (#2867). De serialisatie schrijft
+/// `<!-- ocideck_two_images_layout: equalHeight -->`; de stylesheet geeft de
+/// twee `![bg …]`-beelden dan één vaste hoogte.
+final RegExp _twoImagesLayoutComment = RegExp(
+  r'<!--\s*ocideck_two_images_layout:\s*(\w+)',
+);
+
+String _twoImagesLayoutSectionClass(String slideMarkdown) =>
+    _twoImagesLayoutComment.firstMatch(slideMarkdown)?.group(1) == 'equalHeight'
+    ? ' two-eq-height'
+    : '';
+
 final RegExp _styleImageWidthComment = RegExp(r'--image-width:\s*(\d+)%');
 
 String _splitImageWidthStyle(String slideMarkdown) {
@@ -408,11 +421,12 @@ String _renderSections(
     final logoClass = _logoSectionClass(slideMd, hasLogo);
     final occupyClass = _logoOccupySectionClass(slideObj, logoClass);
     final splitClass = _splitSectionClass(slideMd);
+    final twoEqClass = _twoImagesLayoutSectionClass(slideMd);
     final anchorId = _slideAnchorIdAttr(slideMd);
     final marpSection = _marpSectionStyle(slideMd, marpStyle);
     sections
       ..write(
-        '<section class="slide$markerClass$logoClass$occupyClass$splitClass${marpSection.classes}"'
+        '<section class="slide$markerClass$logoClass$occupyClass$splitClass$twoEqClass${marpSection.classes}"'
         '$anchorId${marpSection.attributes}>',
       )
       ..write('<script type="text/markdown">')

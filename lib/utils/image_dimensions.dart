@@ -95,6 +95,49 @@ void _storeDimensions(String path, _CachedDimensions entry) {
   }
 }
 
+/// De breedte/hoogte-verhouding van een SVG uit zijn brontekst — uit
+/// `width`/`height` op het root-element, anders uit de `viewBox`. Alleen de
+/// verhouding is betrouwbaar: `width`/`height` mogen in elke eenheid staan,
+/// en de `viewBox` zegt niets over pixels maar wél over de vorm (#2867).
+/// `null` als de tekst geen bruikbare maat draagt.
+double? svgAspectFromText(String text) {
+  final svg = RegExp(r'<svg\b[^>]*>', caseSensitive: false).firstMatch(text);
+  if (svg == null) return null;
+  final tag = svg.group(0)!;
+  double? attr(String name) {
+    final m =
+        RegExp(
+          '$name\\s*=\\s*"([^"]*)"',
+          caseSensitive: false,
+        ).firstMatch(tag) ??
+        RegExp("$name\\s*=\\s*'([^']*)'", caseSensitive: false).firstMatch(tag);
+    if (m == null) return null;
+    final raw = m.group(1)!.trim();
+    // Een percentage of 'auto' zegt niets over een absolute maat.
+    if (raw.isEmpty || raw.endsWith('%')) return null;
+    return double.tryParse(
+      RegExp(r'^-?[\d.]+(?:[eE][-+]?\d+)?').firstMatch(raw)?.group(0) ?? '',
+    );
+  }
+
+  final w = attr('width');
+  final h = attr('height');
+  if (w != null && h != null && w > 0 && h > 0) return w / h;
+  final box = RegExp(
+    r'viewBox\s*=\s*"?\s*([-\d.eE]+)[,\s]+([-\d.eE]+)[,\s]+([-\d.eE]+)[,\s]+([-\d.eE]+)"?',
+    caseSensitive: false,
+  ).firstMatch(tag);
+  if (box == null) return null;
+  final bw = double.tryParse(box.group(3)!);
+  final bh = double.tryParse(box.group(4)!);
+  if (bw == null || bh == null || bw <= 0 || bh <= 0) return null;
+  return bw / bh;
+}
+
+/// Zie [svgAspectFromText]; deze leest de bytes eerst als UTF-8.
+double? svgAspectFromBytes(Uint8List bytes) =>
+    svgAspectFromText(String.fromCharCodes(bytes));
+
 /// Same as [readImageDimensions] but from in-memory bytes.
 ImageDimensions? imageDimensionsFromBytes(Uint8List bytes) {
   if (bytes.length < 10) return null;

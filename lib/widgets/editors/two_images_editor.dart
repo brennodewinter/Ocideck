@@ -34,6 +34,12 @@ class TwoImagesEditor extends ConsumerStatefulWidget {
   ConsumerState<TwoImagesEditor> createState() => _TwoImagesEditorState();
 }
 
+/// De drie weergavestanden van een twoImages-dia (#2867). `manual` en `fill`
+/// zijn de bestaande paneelverdeling — verschillend alleen in imageZoom
+/// (contain/zoom resp. cover); `equalHeight` is de eigen layoutmodus waarin
+/// verdeling, zoom en bijsnijden bewust niets doen.
+enum _TwoImageViewMode { manual, equalHeight, fill }
+
 class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
   late final EditorTextController _title;
 
@@ -157,6 +163,34 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
     );
   }
 
+  _TwoImageViewMode get _viewMode {
+    if (widget.slide.twoImagesLayout == TwoImagesLayout.equalHeight) {
+      return _TwoImageViewMode.equalHeight;
+    }
+    return widget.slide.imageZoom == 0
+        ? _TwoImageViewMode.fill
+        : _TwoImageViewMode.manual;
+  }
+
+  void _setViewMode(_TwoImageViewMode mode) {
+    final slide = widget.slide;
+    widget.onUpdate(switch (mode) {
+      // Verdeling, zoom en focuspunten worden nooit overschreven — ze
+      // blijven bewaard zodat terugschakelen de eerdere compositie herstelt.
+      _TwoImageViewMode.equalHeight => slide.copyWith(
+        twoImagesLayout: TwoImagesLayout.equalHeight,
+      ),
+      _TwoImageViewMode.fill => slide.copyWith(
+        twoImagesLayout: TwoImagesLayout.panels,
+        imageZoom: 0,
+      ),
+      _TwoImageViewMode.manual => slide.copyWith(
+        twoImagesLayout: TwoImagesLayout.panels,
+        imageZoom: slide.imageZoom == 0 ? 100 : slide.imageZoom,
+      ),
+    });
+  }
+
   Widget _cropButton(bool isSecond) {
     final path = isSecond ? widget.slide.imagePath2 : widget.slide.imagePath;
     if (!imageIsCroppable(path)) return const SizedBox.shrink();
@@ -164,10 +198,19 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
       padding: const EdgeInsets.only(top: 8),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: OutlinedButton.icon(
-          icon: const Icon(Icons.crop, size: 18),
-          label: Text(context.l10n.d('Afbeelding aanpassen')),
-          onPressed: () => _openCrop(isSecond),
+        child: Tooltip(
+          message: _viewMode == _TwoImageViewMode.equalHeight
+              ? context.l10n.d(
+                  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave',
+                )
+              : '',
+          child: OutlinedButton.icon(
+            icon: const Icon(Icons.crop, size: 18),
+            label: Text(context.l10n.d('Afbeelding aanpassen')),
+            onPressed: _viewMode == _TwoImageViewMode.equalHeight
+                ? null
+                : () => _openCrop(isSecond),
+          ),
         ),
       ),
     );
@@ -263,43 +306,76 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
         ),
         _cropButton(true),
         const SizedBox(height: 20),
-        const SectionLabel('Verdeling (links / rechts)'),
-        ImageZoomControl(
-          value: widget.slide.imageSize > 0 ? widget.slide.imageSize : 50,
-          onChanged: (v) =>
-              widget.onUpdate(widget.slide.copyWith(imageSize: v)),
-          step: 5,
-          minValue: 20,
-          maxValue: 80,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Text(
-            'Links ${widget.slide.imageSize > 0 ? widget.slide.imageSize : 50}% — '
-            'Rechts ${100 - (widget.slide.imageSize > 0 ? widget.slide.imageSize : 50)}%',
-            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-          ),
-        ),
-        const SizedBox(height: 12),
-        // imageZoom 0 = cover (vullen), 100 = contain (passen). Geldt beide
-        // afbeeldingen — sneltoets naast de bijsnijddialoog (#1879).
-        CheckboxListTile(
-          contentPadding: EdgeInsets.zero,
-          controlAffinity: ListTileControlAffinity.leading,
-          dense: true,
-          title: Text(context.l10n.d('Afbeeldingen paneelvullend')),
-          subtitle: Text(
-            context.l10n.d('Vult elk paneel en snijdt de randen bij'),
-          ),
-          value: widget.slide.imageZoom == 0,
-          onChanged:
+        _viewModeSection(),
+      ],
+    );
+  }
+
+  /// De weergavekeuze (#2867): één SegmentedButton voor de drie standen, zodat
+  /// geen twee schakelaars elkaar tegenspreken. imageZoom 0 = cover (panelen
+  /// vullen), 100 = contain (eigen verdeling), >100 = inzoomen via de
+  /// bijsnijddialoog (#1879).
+  Widget _viewModeSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SectionLabel('Weergave'),
+        SegmentedButton<_TwoImageViewMode>(
+          segments: [
+            ButtonSegment(
+              value: _TwoImageViewMode.manual,
+              label: Text(context.l10n.d('Eigen verdeling')),
+            ),
+            ButtonSegment(
+              value: _TwoImageViewMode.equalHeight,
+              label: Text(context.l10n.d('Gelijke hoogte')),
+            ),
+            ButtonSegment(
+              value: _TwoImageViewMode.fill,
+              label: Text(context.l10n.d('Panelen vullen')),
+            ),
+          ],
+          selected: {_viewMode},
+          onSelectionChanged:
               (widget.slide.imagePath.isEmpty &&
                   widget.slide.imagePath2.isEmpty)
               ? null
-              : (checked) => widget.onUpdate(
-                  widget.slide.copyWith(imageZoom: checked == true ? 0 : 100),
-                ),
+              : (sel) => _setViewMode(sel.first),
         ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, top: 4),
+          child: Text(switch (_viewMode) {
+            _TwoImageViewMode.manual => context.l10n.d(
+              'Verdeel de breedte zelf; elke afbeelding past in haar paneel',
+            ),
+            _TwoImageViewMode.equalHeight => context.l10n.d(
+              'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets',
+            ),
+            _TwoImageViewMode.fill => context.l10n.d(
+              'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt',
+            ),
+          }, style: TextStyle(fontSize: 11, color: AppTheme.slate500)),
+        ),
+        if (_viewMode != _TwoImageViewMode.equalHeight) ...[
+          const SizedBox(height: 12),
+          const SectionLabel('Verdeling (links / rechts)'),
+          ImageZoomControl(
+            value: widget.slide.imageSize > 0 ? widget.slide.imageSize : 50,
+            onChanged: (v) =>
+                widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+            step: 5,
+            minValue: 20,
+            maxValue: 80,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Text(
+              'Links ${widget.slide.imageSize > 0 ? widget.slide.imageSize : 50}% — '
+              'Rechts ${100 - (widget.slide.imageSize > 0 ? widget.slide.imageSize : 50)}%',
+              style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+            ),
+          ),
+        ],
       ],
     );
   }

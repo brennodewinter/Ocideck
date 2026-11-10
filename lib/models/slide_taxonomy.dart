@@ -22,6 +22,16 @@ enum ListStyle { bullets, numbered, checklist, richText }
 /// Native Marp image-column layout for a title slide (#1405).
 enum TitleColumnLayout { none, left, right, both }
 
+/// Hoe de twee beelden van een twoImages-dia de rij verdelen (#2867).
+/// [panels] is de bestaande verdeling: twee panelen uit [Slide.imageSize],
+/// elk gevuld of passend via [Slide.imageZoom]. [equalHeight] zet beide
+/// beelden op exact dezelfde zichtbare hoogte, volledig zichtbaar en
+/// onvervormd; hun breedtes volgen dan de bronverhoudingen, niet de
+/// paneelverdeling. Reist als `<!-- ocideck_two_images_layout: equalHeight
+/// -->`; zonder die richtlijn is een dia [panels], zoals oudere decks
+/// eruitzien.
+enum TwoImagesLayout { panels, equalHeight }
+
 /// Per-kolomuitlijning uit de GFM-scheidingsrij van een tabel.
 enum TableAlign { left, center, right }
 

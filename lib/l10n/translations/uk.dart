@@ -1274,7 +1274,6 @@ const _dutchSourceUk = {
       'Заповнює весь слайд і обрізає краї',
   'Afbeelding paneelvullend': 'Зображення заповнює панель',
   'Vult het paneel en snijdt de randen bij': 'Заповнює панель і обрізає краї',
-  'Afbeeldingen paneelvullend': 'Зображення заповнюють свої панелі',
   'Vult elk paneel en snijdt de randen bij':
       'Заповнює кожну панель і обрізає краї',
   'Vullen (bijsnijden)': 'Заповнити (обрізати)',
@@ -1551,6 +1550,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Eigen verdeling': 'Власний розподіл',
+  'Gelijke hoogte': 'Однакова висота',
+  'Panelen vullen': 'Заповнити панелі',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Розподіліть ширину самостійно; кожне зображення вміщується у своїй панелі',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Обидва зображення однакової висоти й повністю видимі — розподіл і обрізання нічого не роблять',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Заповнює кожну панель і обрізає краї; ‘Налаштувати зображення’ обирає точку фокусування',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Обрізання нічого не робить у режимі Однакова висота — спершу виберіть інший вигляд',
   'Afbeeldingsgroep': 'Група зображень',
   'Stapel': 'Стопка',
   'Afbeelding toevoegen': 'Додати зображення',

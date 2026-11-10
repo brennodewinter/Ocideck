@@ -613,6 +613,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Eigen verdeling': 'Répartition personnalisée',
+  'Gelijke hoogte': 'Hauteur égale',
+  'Panelen vullen': 'Remplir les panneaux',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Répartissez vous-même la largeur ; chaque image tient dans son panneau',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Les deux images sont de hauteur égale et entièrement visibles — répartir et recadrer ne font rien',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Remplit chaque panneau et rogne les bords ; ‘Ajuster l\'image’ choisit le point focal',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Le recadrage ne fait rien en Hauteur égale — choisissez d\'abord une autre vue',
   'Afbeeldingsgroep': 'Groupe d\'images',
   'Stapel': 'Pile',
   'Afbeelding toevoegen': 'Ajouter une image',
@@ -7257,7 +7268,6 @@ const _dutchSourceAddFr = {
   'Afbeelding paneelvullend': 'Image plein panneau',
   'Vult het paneel en snijdt de randen bij':
       'Remplit le panneau et rogne les bords',
-  'Afbeeldingen paneelvullend': 'Images plein panneau',
   'Vult elk paneel en snijdt de randen bij':
       'Remplit chaque panneau et rogne les bords',
   'Vullen (bijsnijden)': 'Remplir (rogner)',

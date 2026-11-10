@@ -767,6 +767,17 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Eigen verdeling': 'Custom split',
+  'Gelijke hoogte': 'Equal height',
+  'Panelen vullen': 'Fill panels',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Distribute the width yourself; every image fits in its panel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Both images equally high and fully visible — splitting and cropping do nothing',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Fills every panel and crops the edges; ‘Adjust image’ chooses the focal point',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Cropping does nothing in Equal height — choose another view first',
   'Afbeeldingsgroep': 'Image group',
   'Stapel': 'Stack',
   'Afbeelding toevoegen': 'Add image',
@@ -7123,7 +7134,6 @@ const _dutchSourceAddEn = {
   'Afbeelding paneelvullend': 'Image fills the panel',
   'Vult het paneel en snijdt de randen bij':
       'Fills the panel and crops the edges',
-  'Afbeeldingen paneelvullend': 'Images fill their panels',
   'Vult elk paneel en snijdt de randen bij':
       'Fills each panel and crops the edges',
   'Vullen (bijsnijden)': 'Fill (crop)',
