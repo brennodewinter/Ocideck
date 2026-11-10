@@ -279,6 +279,10 @@ String _calloutImageTikz(Slide slide) {
 
 String _twoImagesSlide(Slide slide) {
   final buf = StringBuffer();
+  // Bij 'Gelijke hoogte' (#2867) krijgt elk beeld dezelfde \textheight-basis;
+  // keepaspectratio houdt de vorm en laat een extreem breed beeld binnen de
+  // kolombreedte meeschalen in plaats van over de kant te schieten.
+  final equalHeight = slide.twoImagesLayout == TwoImagesLayout.equalHeight;
   buf.write('\\begin{columns}\n');
   for (final (path, caption) in [
     (slide.imagePath, slide.imageCaption),
@@ -287,8 +291,11 @@ String _twoImagesSlide(Slide slide) {
     buf.write('\\begin{column}{0.48\\textwidth}\n');
     if (path.isNotEmpty) {
       buf.write(
-        r'\includegraphics[width=\textwidth]{'
-        '${_escapeImagePath(path)}}\n',
+        equalHeight
+            ? r'\includegraphics[width=\textwidth,height=0.6\textheight,'
+                  'keepaspectratio]{${_escapeImagePath(path)}}\n'
+            : r'\includegraphics[width=\textwidth]{'
+                  '${_escapeImagePath(path)}}\n',
       );
     }
     if (caption.trim().isNotEmpty) {

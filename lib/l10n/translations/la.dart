@@ -1268,7 +1268,6 @@ const _dutchSourceLa = {
   'Afbeelding paneelvullend': 'Imago tabulam implet',
   'Vult het paneel en snijdt de randen bij':
       'Tabulam implet et margines resecat',
-  'Afbeeldingen paneelvullend': 'Imagines tabulas suas implent',
   'Vult elk paneel en snijdt de randen bij':
       'Omnem tabulam implet et margines resecat',
   'Vullen (bijsnijden)': 'Implere (resecare)',
@@ -1548,6 +1547,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Eigen verdeling': 'Divisio propria',
+  'Gelijke hoogte': 'Altitudo aequalis',
+  'Panelen vullen': 'Tabulas implere',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Latitudinem ipse distribue; quaelibet imago in tabula sua capit',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Ambae imagines aeque altae et plene visibiles — distribuere et praecidere nihil agunt',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Quamlibet tabulam implet et margines praecidit; ‘Imaginem accommoda’ punctum foci eligit',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Praecidere nihil agit in modo Altitudo aequalis — prius aliam visionem elige',
   'Afbeeldingsgroep': 'Coetus imaginum',
   'Stapel': 'Acervus',
   'Afbeelding toevoegen': 'Imaginem adde',

@@ -321,7 +321,7 @@ class _AudioPlaybackState extends State<_AudioPlayback>
 
 // ── Individual slide-type renderers ──────────────────────────────────────────
 
-class _TwoImagesPreview extends StatelessWidget {
+class _TwoImagesPreview extends StatefulWidget {
   final Slide slide;
   final double w;
   final String? projectPath;
@@ -337,84 +337,337 @@ class _TwoImagesPreview extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  State<_TwoImagesPreview> createState() => _TwoImagesPreviewState();
+}
+
+class _TwoImagesPreviewState extends State<_TwoImagesPreview> {
+  /// De bronverhoudingen (b/h) voor de 'Gelijke hoogte'-weergave (#2867).
+  /// `null` = nog niet bekend of niet afleidbaar; de build valt dan terug op
+  /// de gewone paneelverdeling in plaats van iets ongeldigs te tekenen.
+  double? _aspect1;
+  double? _aspect2;
+
+  /// Bumped on every (re)resolve so an in-flight decode that has been
+  /// superseded by a path change cannot write a stale ratio.
+  int _aspectGen = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Niet in initState: de async route leest SlideLinkScope/DeckAssetScope,
+    // en inherited widgets mogen daar nog niet gelezen worden. Een gewijzigde
+    // scope (andere deck-URL, andere media-gate) herberekent de verhoudingen.
+    _resolveAspects();
+  }
+
+  @override
+  void didUpdateWidget(_TwoImagesPreview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.slide.imagePath != widget.slide.imagePath ||
+        oldWidget.slide.imagePath2 != widget.slide.imagePath2 ||
+        oldWidget.slide.twoImagesLayout != widget.slide.twoImagesLayout ||
+        oldWidget.projectPath != widget.projectPath) {
+      _resolveAspects();
+    }
+  }
+
+  void _resolveAspects() {
+    final gen = ++_aspectGen;
+    _aspect1 = _aspectSync(widget.slide.imagePath);
+    _aspect2 = _aspectSync(widget.slide.imagePath2);
+    if (_aspect1 == null) _resolveAspectAsync(gen, second: false);
+    if (_aspect2 == null) _resolveAspectAsync(gen, second: true);
+  }
+
+  /// De synchrone routes: `mem:`-bytes en de gecachete headerlezing voor
+  /// lokale bestanden (#2685). SVG's dragen hun verhouding in de brontekst.
+  /// Bundled assets en remote/deck-URL's hebben geen synchrone route en
+  /// vallen hier op `null` — [_resolveAspectAsync] pakt die op.
+  double? _aspectSync(String path) {
+    if (path.isEmpty) return null;
+    if (WebAssetStore.isMemPath(path)) {
+      final bytes = WebAssetStore.bytesFor(path);
+      if (bytes == null) return null;
+      return isSvgImagePath(path)
+          ? svgAspectFromBytes(bytes)
+          : imageDimensionsFromBytes(bytes)?.aspect;
+    }
+    // Lokale SVG's gaan óók via de async route: de verhouding staat in de
+    // brontekst, en een leesbeurt hoort niet op de UI-isolate thuis.
+    if (isBundledAssetPath(path) ||
+        VideoSource.looksLikeUrl(path) ||
+        isSvgImagePath(path)) {
+      return null;
+    }
+    final resolved = resolveSlideAssetPath(path, widget.projectPath);
+    if (resolved == null) return null;
+    return readImageDimensions(resolved)?.aspect;
+  }
+
+  void _assignAspect(int gen, bool second, double? aspect, bool synchronous) {
+    if (aspect == null || gen != _aspectGen) return;
+    if (synchronous) {
+      if (second) {
+        _aspect2 = aspect;
+      } else {
+        _aspect1 = aspect;
+      }
+      return;
+    }
+    if (mounted) {
+      setState(() => second ? _aspect2 = aspect : _aspect1 = aspect);
+    }
+  }
+
+  /// De asynchrone routes: dezelfde image-provider-infrastructuur als de
+  /// callout-overlay gebruikt ([calloutImageProvider] + [resolveIntrinsicSize],
+  /// ontworpen zodat een cache-hit synchroon terugkomt — dat is wat de
+  /// rasterexports nodig hebben om de rij in hún frame te tekenen). Remote en
+  /// deck-asset URL's gaan via de netwerkprovider met dezelfde gates als de
+  /// weergave zelf; een gebundelde SVG leest zijn verhouding uit de tekst.
+  void _resolveAspectAsync(int gen, {required bool second}) {
+    final path = second ? widget.slide.imagePath2 : widget.slide.imagePath;
+    void done(Size? size, bool synchronous) {
+      _assignAspect(
+        gen,
+        second,
+        size == null || size.height <= 0 ? null : size.width / size.height,
+        synchronous,
+      );
+    }
+
+    if (isSvgImagePath(path)) {
+      if (isBundledAssetPath(path)) {
+        unawaited(
+          rootBundle.loadString(bundledAssetKey(path)).then((text) {
+            _assignAspect(gen, second, svgAspectFromText(text), false);
+          }, onError: (_, _) {}),
+        );
+        return;
+      }
+      // Lokale SVG: de eerste 64 KB volstaan — het root-element met
+      // width/height/viewBox staat vooraan.
+      final resolved = resolveSlideAssetPath(path, widget.projectPath);
+      if (resolved == null) return;
+      unawaited(() async {
+        try {
+          final file = await File(resolved).open();
+          final bytes = await file.read(64 * 1024);
+          await file.close();
+          _assignAspect(gen, second, svgAspectFromBytes(bytes), false);
+        } catch (e) {
+          logError(
+            '_TwoImagesPreviewState._resolveAspectAsync: svg head read',
+            e,
+          );
+        }
+      }());
+      return;
+    }
+    final provider = calloutImageProvider(path, widget.projectPath);
+    if (provider != null) {
+      resolveIntrinsicSize(provider, done);
+      return;
+    }
+    if (VideoSource.looksLikeUrl(path)) {
+      // Zelfde grens als _resolvedRemoteImage: instelling aan én de URL mag
+      // door de SSRF-poort, anders blijft de paneelverdeling de fallback.
+      if (!SlideLinkScope.allowRemoteMediaOf(context)) return;
+      unawaited(
+        NetGuard.isAllowedRemoteUrlResolved(path).then((allowed) {
+          if (!allowed || gen != _aspectGen || !mounted) return;
+          resolveIntrinsicSize(guardedNetworkImage(path), done);
+        }),
+      );
+      return;
+    }
+    // Relatief pad in een via URL geopend deck (#2282): opgelost tegen de
+    // deck-URL — die host koos de gebruiker zelf, dus geen SSRF-poort.
+    final deckAsset = resolveDeckAssetUrl(
+      path,
+      DeckAssetScope.maybeOf(context),
+    );
+    if (deckAsset != null) {
+      resolveIntrinsicSize(guardedNetworkImage(deckAsset), done);
+    }
+  }
+
+  Widget _panelRow(BuildContext context) {
+    final slide = widget.slide;
     final splitFraction = (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.5)
         .clamp(0.1, 0.9);
-    final titleSize = w * 0.032;
-    final safe = _mediaBrandStripInsets(w, slide, profile);
+    return Row(
+      children: [
+        Expanded(
+          flex: (splitFraction * 1000).round(),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              _panelImage(
+                context,
+                slide.imagePath,
+                widget.projectPath,
+                slide.imageZoom,
+                focalAlignment(slide.imageFocalX, slide.imageFocalY),
+                imageSemanticsLabel(
+                  context,
+                  slide.imageCaption,
+                  altText: slide.imageAltText,
+                ),
+              ),
+              _captionOverlay(context, slide.imageCaption, widget.w),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: ((1 - splitFraction) * 1000).round(),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              _panelImage(
+                context,
+                slide.imagePath2,
+                widget.projectPath,
+                slide.imageZoom,
+                focalAlignment(slide.imageFocalX2, slide.imageFocalY2),
+                imageSemanticsLabel(
+                  context,
+                  slide.imageCaption2,
+                  altText: slide.imageAltText2,
+                ),
+              ),
+              _captionOverlay(context, slide.imageCaption2, widget.w),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// De 'Gelijke hoogte'-rij (#2867): beide beelden op exact dezelfde
+  /// zichtbare hoogte, volledig zichtbaar en onvervormd (contain). Breedtes
+  /// volgen de bronverhoudingen; de handmatige verdeling/zoom doet hier
+  /// bewust niets. Bijschriften hangen aan hun eigen beeldrechthoek.
+  Widget _equalHeightRow(BuildContext context) {
+    final slide = widget.slide;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final a1 = _aspect1, a2 = _aspect2;
+        // De ondertitelbalk ligt over de onderkant heen; in deze modus hoort
+        // die geen beeld te bedekken, dus de rij krijgt de ruimte erboven.
+        final reserve = slide.title.isNotEmpty ? widget.w * 0.15 : 0.0;
+        final row =
+            slide.imagePath.isNotEmpty &&
+                slide.imagePath2.isNotEmpty &&
+                a1 != null &&
+                a2 != null
+            ? twoImagesEqualHeight(
+                aspect1: a1,
+                aspect2: a2,
+                availW: constraints.maxWidth,
+                availH: constraints.maxHeight - reserve,
+                gap: widget.w * 0.02,
+              )
+            : null;
+        // Eén ontbrekend beeld, nog ladende of onleesbare afmetingen: de
+        // paneelverdeling is de voorspelbare toestand — zij toont ook de
+        // placeholders.
+        if (row == null) return _panelRow(context);
+        return Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _equalImage(
+                context,
+                slide.imagePath,
+                row.leftWidth,
+                row.height,
+                slide.imageCaption,
+                slide.imageAltText,
+              ),
+              SizedBox(width: row.gap),
+              _equalImage(
+                context,
+                slide.imagePath2,
+                row.rightWidth,
+                row.height,
+                slide.imageCaption2,
+                slide.imageAltText2,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _equalImage(
+    BuildContext context,
+    String path,
+    double width,
+    double height,
+    String caption,
+    String altText,
+  ) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          _resolvedImage(
+            context,
+            path,
+            widget.projectPath,
+            fit: BoxFit.contain,
+            semanticLabel: imageSemanticsLabel(
+              context,
+              caption,
+              altText: altText,
+            ),
+          ),
+          _captionOverlay(context, caption, widget.w),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final slide = widget.slide;
+    final titleSize = widget.w * 0.032;
+    final safe = _mediaBrandStripInsets(widget.w, slide, widget.profile);
 
     return Container(
-      color: _profileSlideBackground(context, profile),
+      color: _profileSlideBackground(context, widget.profile),
       child: Stack(
         fit: StackFit.expand,
         children: [
           // Twee afbeeldingen naast elkaar
           Padding(
             padding: safe,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: (splitFraction * 1000).round(),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      _panelImage(
-                        context,
-                        slide.imagePath,
-                        projectPath,
-                        slide.imageZoom,
-                        focalAlignment(slide.imageFocalX, slide.imageFocalY),
-                        imageSemanticsLabel(
-                          context,
-                          slide.imageCaption,
-                          altText: slide.imageAltText,
-                        ),
-                      ),
-                      _captionOverlay(context, slide.imageCaption, w),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: ((1 - splitFraction) * 1000).round(),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      _panelImage(
-                        context,
-                        slide.imagePath2,
-                        projectPath,
-                        slide.imageZoom,
-                        focalAlignment(slide.imageFocalX2, slide.imageFocalY2),
-                        imageSemanticsLabel(
-                          context,
-                          slide.imageCaption2,
-                          altText: slide.imageAltText2,
-                        ),
-                      ),
-                      _captionOverlay(context, slide.imageCaption2, w),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: slide.twoImagesLayout == TwoImagesLayout.equalHeight
+                ? _equalHeightRow(context)
+                : _panelRow(context),
           ),
           // Optionele ondertitel
           if (slide.title.isNotEmpty)
             Positioned(
               left: 0,
               right: 0,
-              bottom: w * 0.04 + safe.bottom,
+              bottom: widget.w * 0.04 + safe.bottom,
               child: Container(
                 color: Colors.black54,
                 padding: EdgeInsets.symmetric(
-                  horizontal: w * 0.04,
-                  vertical: w * 0.015,
+                  horizontal: widget.w * 0.04,
+                  vertical: widget.w * 0.015,
                 ),
                 child: _md(
                   context,
                   slide.title,
                   _applyFont(
-                    font,
+                    widget.font,
                     TextStyle(
                       color: Colors.white,
                       fontSize: titleSize,

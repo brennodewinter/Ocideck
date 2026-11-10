@@ -247,6 +247,7 @@ enum SlideField {
   // — menu —
   menuLayout, // MenuLayout
   galleryLayout, // GalleryLayout
+  twoImagesLayout, // TwoImagesLayout
   // — table formatting —
   tableColumnAlignments, // List<TableAlign>
   tableNumberColumns, // List<bool>
@@ -531,6 +532,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.galleryLayout => slide.copyWith(
       galleryLayout: _cast<GalleryLayout>(value, field),
+    ),
+    SlideField.twoImagesLayout => slide.copyWith(
+      twoImagesLayout: _cast<TwoImagesLayout>(value, field),
     ),
     SlideField.tableColumnAlignments => slide.copyWith(
       tableColumnAlignments: _castList<TableAlign>(value, field),

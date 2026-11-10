@@ -612,6 +612,17 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Eigen verdeling': 'Eigene Aufteilung',
+  'Gelijke hoogte': 'Gleiche Höhe',
+  'Panelen vullen': 'Paneele füllen',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Teile die Breite selbst auf; jedes Bild passt in sein Paneel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Beide Bilder gleich hoch und vollständig sichtbar — Aufteilen und Zuschneiden bewirken nichts',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Füllt jedes Paneel und schneidet die Ränder ab; ‘Bild anpassen’ wählt den Fokuspunkt',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Zuschneiden bewirkt in Gleiche Höhe nichts — wähle zuerst eine andere Ansicht',
   'Afbeeldingsgroep': 'Bildgruppe',
   'Stapel': 'Stapel',
   'Afbeelding toevoegen': 'Bild hinzufügen',
@@ -7217,7 +7228,6 @@ const _dutchSourceAddDe = {
   'Afbeelding paneelvullend': 'Bild füllt das Panel',
   'Vult het paneel en snijdt de randen bij':
       'Füllt das Panel und beschneidet die Ränder',
-  'Afbeeldingen paneelvullend': 'Bilder füllen ihre Panels',
   'Vult elk paneel en snijdt de randen bij':
       'Füllt jedes Panel und beschneidet die Ränder',
   'Vullen (bijsnijden)': 'Füllen (beschneiden)',

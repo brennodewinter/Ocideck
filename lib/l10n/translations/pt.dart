@@ -1283,7 +1283,6 @@ const _dutchSourcePt = {
   'Afbeelding paneelvullend': 'Imagem preenche o painel',
   'Vult het paneel en snijdt de randen bij':
       'Preenche o painel e corta as margens',
-  'Afbeeldingen paneelvullend': 'Imagens preenchem os painéis',
   'Vult elk paneel en snijdt de randen bij':
       'Preenche cada painel e corta as margens',
   'Vullen (bijsnijden)': 'Preencher (cortar)',
@@ -1562,6 +1561,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Eigen verdeling': 'Divisão personalizada',
+  'Gelijke hoogte': 'Altura igual',
+  'Panelen vullen': 'Preencher painéis',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Distribua a largura você mesmo; cada imagem cabe no seu painel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'As duas imagens têm a mesma altura e estão totalmente visíveis — dividir e recortar não fazem nada',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Preenche cada painel e corta as margens; ‘Ajustar imagem’ escolhe o ponto focal',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Recortar não faz nada em Altura igual — escolha primeiro outra vista',
   'Afbeeldingsgroep': 'Grupo de imagens',
   'Stapel': 'Pilha',
   'Afbeelding toevoegen': 'Adicionar imagem',

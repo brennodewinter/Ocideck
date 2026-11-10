@@ -1259,7 +1259,6 @@ const _dutchSourceLv = {
       'Aizpilda visu slaidu un apgriež malas',
   'Afbeelding paneelvullend': 'Attēls aizpilda paneli',
   'Vult het paneel en snijdt de randen bij': 'Aizpilda paneli un apgriež malas',
-  'Afbeeldingen paneelvullend': 'Attēli aizpilda savus paneļus',
   'Vult elk paneel en snijdt de randen bij':
       'Aizpilda katru paneli un apgriež malas',
   'Vullen (bijsnijden)': 'Aizpildīt (apgriezt)',
@@ -1533,6 +1532,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Eigen verdeling': 'Pielāgots sadalījums',
+  'Gelijke hoogte': 'Vienāds augstums',
+  'Panelen vullen': 'Aizpildīt paneļus',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Sadaliet platumu pats; katrs attēls ietilpst savā panelī',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Abi attēli ir vienādi augsti un pilnībā redzami — sadalīšana un apgriešana neko nedara',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Aizpilda katru paneli un nogriež malas; ‘Pielāgot attēlu’ izvēlas fokusa punktu',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Apgriešana neko nedara režīmā Vienāds augstums — vispirms izvēlieties citu skatu',
   'Afbeeldingsgroep': 'Attēlu grupa',
   'Stapel': 'Kaubja',
   'Afbeelding toevoegen': 'Pievienot attēlu',

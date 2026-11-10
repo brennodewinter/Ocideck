@@ -613,6 +613,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Eigen verdeling': 'Eigen ferdieling',
+  'Gelijke hoogte': 'Lyke hichte',
+  'Panelen vullen': 'Panelen folmeije',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Ferdiel de breedte sels; elke ôfbylding past yn har paniel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Beide ôfbyldingen lyk heech en folslein sichtber — ferdielen en bysnijden dogge neat',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Folmakket elk paniel en snijt de rânen by; ‘Ofbylding oanpasse’ kiest it fokuspunt',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Bysnijden docht neat yn Lyke hichte — kies earst in oare werjefte',
   'Afbeeldingsgroep': 'Ofbyldingsgroep',
   'Stapel': 'Steapel',
   'Afbeelding toevoegen': 'Ofbylding tafoegje',
@@ -7143,7 +7154,6 @@ const _dutchSourceAddFy = {
   'Afbeelding paneelvullend': 'Ofbylding follet it paniel',
   'Vult het paneel en snijdt de randen bij':
       'Follet it paniel en snijt de rânen by',
-  'Afbeeldingen paneelvullend': 'Ofbyldingen folje har panielen',
   'Vult elk paneel en snijdt de randen bij':
       'Follet elk paniel en snijt de rânen by',
   'Vullen (bijsnijden)': 'Folje (bynsnije)',
