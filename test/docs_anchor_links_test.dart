@@ -55,6 +55,7 @@ void main() {
             'ephemeral',
             'Pods',
             '.claude',
+            'work', // Ignored local working documents are not shipped docs.
           ];
           return !p.split(rel).any(buiten.contains);
         })
