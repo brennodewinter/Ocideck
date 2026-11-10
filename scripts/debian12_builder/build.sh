@@ -45,6 +45,7 @@ snapshot_dir="$(mktemp -d "${workspace_dir}/work/ocideck-snapshot.XXXXXX")"
 trap 'rm -rf -- "${snapshot_dir}"' EXIT
 # Export the selected commit without a host-only .git worktree pointer.
 git -C "${source_dir}" archive HEAD | tar -x -C "${snapshot_dir}"
+git -C "${source_dir}" rev-parse HEAD > "${snapshot_dir}/.ocideck-source-revision"
 
 "${engine[@]}" build \
   --platform linux/amd64 \

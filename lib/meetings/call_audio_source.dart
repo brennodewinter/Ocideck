@@ -55,11 +55,13 @@ const unavailableCallAudio = CallAudioCaptureFact(
 /// De binding van nu. Eén plek, zodat de sessie en de media-core hetzelfde
 /// zeggen en een test die uitspraak kan vastzetten.
 ///
-/// Bewezen: macOS (darwin-sink) en web (Web Audio op het jsTrack-object).
-/// Windows en Linux hebben dezelfde C++-route in de binding maar zijn
-/// nóóit in een echte call getest — geen claim. iOS/Android: niet bewezen.
+/// Desktop uses the native per-track sink; web uses Web Audio. Availability
+/// describes the implemented binding; device/release proof is recorded separately.
 CallAudioCaptureFact callAudioCaptureOfCurrentBinding() {
-  if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
+  if (kIsWeb ||
+      defaultTargetPlatform == TargetPlatform.macOS ||
+      defaultTargetPlatform == TargetPlatform.windows ||
+      defaultTargetPlatform == TargetPlatform.linux) {
     return const CallAudioCaptureFact(localOutbound: true, remote: true);
   }
   return unavailableCallAudio;

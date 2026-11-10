@@ -18,6 +18,7 @@ version in your browser. Your deck stays in the tab; nothing is uploaded.
 | Linux — Flatpak component inventory (CycloneDX) | `ocideck-linux-x86_64-@VERSIE@.flatpak.cdx.json` |
 | Linux — portable tarball | `ocideck-linux-x64-@VERSIE@.tar.gz` |
 | Linux — Debian 12 compatible, x86-64 | `ocideck-linux-debian12-x86_64-@VERSIE@.tar.gz` |
+| Linux — accompanying project/package sources | `ocideck-linux-sources-@VERSIE@.tar.gz` |
 | Web bundle (self-hosting) | `ocideck-web-@VERSIE@.tar.gz` |
 
 Also attached: the Software Bill of Materials in CycloneDX
@@ -122,6 +123,11 @@ for the full list, and
 to get started. Both links point at this tag, not at `main`, so they keep
 describing the version you just downloaded.
 
-Licensed under the EUPL-1.2. Published by Stichting LibreKAT. Security
+Our own code is licensed under EUPL-1.2. The Linux combination with GPL libmpv
+is distributed under GPL-3.0-or-later through EUPL article 5; third-party
+components retain their own terms. Every Linux bundle includes source and
+notices in `share/doc/ocideck`; Flatpak also includes matching distro sources
+in `/app/share/doc/ocideck-flatpak`. Pass these on when redistributing.
+Published by Stichting LibreKAT. Security
 findings: <security@librekat.nl> — see
 [SECURITY.md](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/tag/@TAG@/SECURITY.md).

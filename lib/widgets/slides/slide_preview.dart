@@ -13,10 +13,14 @@ import 'package:re_highlight/styles/atom-one-dark.dart';
 import 'package:re_highlight/styles/github.dart';
 import 'package:video_player/video_player.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
+import 'package:webview_win_floating/webview_plugin.dart';
+import 'package:path_provider/path_provider.dart';
+import '../../services/video_embed_host.dart';
+import '../../platform/desktop_video.dart';
 import 'mermaid_diagram.dart';
 import 'chart_hover.dart';
 import 'video_playhead_bus.dart';
+import 'previews/video_embed_view.dart';
 import 'previews/callout_overlay.dart';
 import 'previews/retrying_image.dart';
 import '../../l10n/app_localizations.dart';

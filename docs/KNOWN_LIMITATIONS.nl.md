@@ -81,11 +81,12 @@ Formules, Mermaid-diagrammen en grafieken worden als vectortekening in de PDF
 **getekend**. Lukt dat niet, dan drukt de PDF de **bron** van het blok af in een
 kader met vaste letterafstand en een regel erboven die zegt wat het is — liever
 dat dan een leeg vlak, want wie het diagram nodig heeft ziet zo tenminste wát er
-hoort te staan. Dat gebeurt in vier gevallen: een grafiek waarvan de cijfers in
+hoort te staan. Dat gebeurt in drie gevallen: een grafiek waarvan de cijfers in
 een los `data/*.json` staan dat niet meekwam; een diagram of formule die de
 renderer niet kon maken; een tekening die de SVG-lezer van de PDF niet kan
-ontleden; en **Windows en Linux**, waar de verborgen renderer die mermaid en
-formules tekent geen implementatie heeft. Grafieken worden in Dart getekend en
+ontleden. Windows en Linux hebben nu een offline native renderer voor
+Mermaid en formules. De Linux-WebKitGTK-backend heeft echte SVG-uitvoer voor
+flowchart, Gantt en formule geleverd; de Windows-releaseproef staat nog open. Grafieken worden in Dart getekend en
 reizen op elk platform mee. Exporteer naar HTML voor alle drie gerenderd in een
 browser, of naar LaTeX voor gezette wiskunde. *(Toegevoegd 2026-08-20; nog
 dezelfde dag ingeperkt van "toont altijd de bron" toen de tekeningen er waren, en
@@ -308,10 +309,12 @@ call het tegendeel zegt. Browsergrenzen: de pagina kan het servercertificaat
 niet pinnen, kale `http`-vergaderlinks werken alleen naar een letterlijk
 loopback-adres (`127.0.0.1`, niet de naam `localhost`), en de browser vraagt
 zelf per site om camera, microfoon en schermdelen. Een audiobron van de hele
-call voor transcriptie is alleen op **macOS en web** beschikbaar — de geforkte
-mediabinding levert daar gedecodeerde PCM per track (bewezen in een echte
-call), terwijl Windows, Linux, iOS en Android eerlijk geen per-bron-tap
-melden, dus het callpaneel biedt géén opnameknop in plaats van een kapotte.
+call voor transcriptie is geïmplementeerd op macOS, Windows, Linux en web.
+De meegeleverde Windows/Linux-binding hangt nu een native sink aan iedere
+gedecodeerde audiotrack. Eigendom van PCM, afzonderlijke bronnen, dempen, stoppen
+en begrensde wachtrijen zijn in C++ getest. Een echte tweepersoonscall is nog
+alleen bewezen op macOS en web; de Windows/Linux-release- en apparaatproeven
+staan open. iOS en Android hebben in OciDeck geen per-bron-tap.
 De opname, de live-server-opt-in en het transcript volgen daarna hetzelfde
 contract als een microfoonopname — toestemming per sessie, geen stille
 upload, en een weggevallen live-verbinding stopt de opname nooit. Wat een
@@ -465,3 +468,22 @@ afbeeldingen.)*
 *Deze pagina vervangt de roadmap-sectie die vroeger in [FAQ.md](FAQ.md) stond —
 een roadmap die niemand onderhoudt is erger dan geen. Wat gepland staat, wordt in
 de issue-tracker beslist, in het openbaar.*
+
+## Vereisten voor desktopvideo
+
+MP4 gebruikt op Windows Media Foundation en de geïnstalleerde codecs.
+YouTube/Vimeo vereist Microsoft Edge WebView2 Runtime en toestemming voor online
+media in OciDeck. Linux gebruikt libmpv voor bestanden en WebKitGTK 4.1 met
+GStreamer-codecs voor embeds. Linux decodeert standaard met software; grote
+video’s kunnen daardoor meer CPU gebruiken. Debian-, RPM- en AUR-pakketten vermelden de
+runtime-afhankelijkheden; gebruikers van AppImage en tarball installeren deze
+zelf. Op Debian/Ubuntu:
+`sudo apt install libmpv2 libwebkit2gtk-4.1-0 gstreamer1.0-plugins-good gstreamer1.0-libav`.
+Flatpak bundelt libmpv en gebruikt WebKitGTK uit de GNOME-runtime.
+
+De Windows/Linux-webview gebruikt een native venster boven de Flutter-weergave.
+Daardoor werken overlays (ook diatitels) en uitsnijden beperkt. De native speler
+wordt tijdelijk verborgen wanneer een dialoogvenster of andere route de dia
+bedekt. Native video heeft een integratietest in
+`integration_test/desktop_media_test.dart`; YouTube vereist daarnaast een
+handmatige controle met een video die insluiten toestaat.

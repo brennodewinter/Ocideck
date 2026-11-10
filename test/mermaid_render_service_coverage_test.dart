@@ -37,9 +37,8 @@ void main() {
   });
 
   test('zonder WebView-platform levert een render meteen niets op', () async {
-    // Windows en Linux hebben geen `webview_flutter`-implementatie (pubspec.lock
-    // kent android, wkwebview en web). Daar blijft `WebViewPlatform.instance`
-    // null — net als hier in een unit-test.
+    // Een platform zonder backend houdt WebViewPlatform.instance null,
+    // net als hier in een unit-test.
     //
     // Vóór de vraag `isAvailable` liep dit anders af: de dienst vroeg om de
     // host, die bouwde een `WebViewController` op een platform zonder

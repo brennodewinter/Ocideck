@@ -6,7 +6,8 @@
 //  * macOS — `/usr/bin/afconvert`: bij het OS geleverd, vast absoluut pad
 //    (geen PATH-raadsel), dekt WAV/AIFF/CAF/AAC/MP3/M4A en de audiotrack
 //    van QuickTime/MP4-video;
-//  * Linux/Windows — `ffmpeg` (`ffmpeg.exe`) als die op PATH staat:
+//  * Linux/Windows — bundled ocideck-audio (GStreamer/Media Foundation);
+//    optional legacy fallback: `ffmpeg` (`ffmpeg.exe`) on PATH:
 //    aanwezigheid is opstelafhankelijk (§5.1 noot 4), dus `describe`
 //    zegt eerlijk "alleen WAV" wanneer hij er niet is.
 //
@@ -22,6 +23,7 @@ import 'package:path/path.dart' as p;
 
 import '../../utils/log.dart';
 import 'capture_source.dart';
+import 'bundled_audio_helper_io.dart';
 import 'file_capture_source.dart';
 import 'media_sniff.dart';
 import 'transcription_errors.dart';
@@ -45,6 +47,8 @@ class IoFileCaptureSource extends FileCaptureSource {
   /// passief (§4.1).
   Future<String?> findDecoder() async {
     if (decoderOverride != null) return decoderOverride;
+    final bundled = bundledAudioHelper();
+    if (bundled != null) return bundled;
     if (Platform.isMacOS) {
       const afconvert = '/usr/bin/afconvert';
       if (await File(afconvert).exists()) return afconvert;
@@ -256,6 +260,9 @@ class IoFileCaptureSession extends FileCaptureSession {
   /// 16-bit-WAV — precies wat elke engine-route spreekt (§5.1 noot 1).
   List<String> _decoderArgs(String decoder, String outPath) {
     final base = p.basename(decoder).toLowerCase();
+    if (base == 'ocideck-audio' || base == 'ocideck-audio.exe') {
+      return ['--decode', _info.path, outPath];
+    }
     if (base == 'afconvert') {
       return [
         '-f',
@@ -293,7 +300,7 @@ class IoFileCaptureSession extends FileCaptureSession {
   /// Dezelfde toelatingslijst als de whisper-helper: alleen wat een
   /// decoder legitiem nodig heeft (tijdelijke map, op Windows de
   /// systeemvariabelen voor DLL-lading) — geen erfenis.
-  Map<String, String> _decoderEnv() {
+  Map<String, String> _decoderEnv(String decoder) {
     const carriedWindows = {
       'PATHEXT',
       'SystemRoot',
@@ -304,6 +311,8 @@ class IoFileCaptureSession extends FileCaptureSession {
     };
     final env = <String, String>{
       'LC_ALL': 'C',
+      if (Platform.isLinux)
+        'LD_LIBRARY_PATH': p.join(p.dirname(decoder), 'lib'),
       'HOME': _stagingDir,
       if (!Platform.isWindows) 'TMPDIR': _stagingDir,
       if (Platform.isWindows) ...{
@@ -330,7 +339,7 @@ class IoFileCaptureSession extends FileCaptureSession {
     final run = _runner(
       decoder,
       _decoderArgs(decoder, durablePath),
-      environment: _decoderEnv(),
+      environment: _decoderEnv(decoder),
       timeout: _decodeTimeout,
     );
     _decode = run;
@@ -351,6 +360,10 @@ class IoFileCaptureSession extends FileCaptureSession {
     }
     if (result.exitCode != 0) {
       await _deletePartial();
+      if (result.exitCode == 3 &&
+          p.basename(decoder).toLowerCase().startsWith('ocideck-audio')) {
+        throw const DecodeFailed('de container bevat geen audiotrack');
+      }
       throw _decodeError(decoder, result.stderr);
     }
     return _readResult();
@@ -426,22 +439,7 @@ class IoFileCaptureSession extends FileCaptureSession {
 
   /// Losse zoektocht voor `stop()` — `describe` zocht al, maar de bron
   /// mag niet vertrouwen op wat een eerdere stap zag.
-  Future<String?> _findDecoderForRun() async {
-    if (Platform.isMacOS) {
-      const afconvert = '/usr/bin/afconvert';
-      if (await File(afconvert).exists()) return afconvert;
-      return null;
-    }
-    final pathVar = Platform.environment['PATH'] ?? '';
-    final sep = Platform.isWindows ? ';' : ':';
-    final name = Platform.isWindows ? 'ffmpeg.exe' : 'ffmpeg';
-    for (final dir in pathVar.split(sep)) {
-      if (dir.isEmpty) continue;
-      final candidate = p.join(dir, name);
-      if (await File(candidate).exists()) return candidate;
-    }
-    return null;
-  }
+  Future<String?> _findDecoderForRun() => IoFileCaptureSource().findDecoder();
 }
 
 /// De echte start van de decoder — hetzelfde patroon als

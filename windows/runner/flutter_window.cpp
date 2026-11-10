@@ -1,3 +1,4 @@
+#include "trash_channel.h"
 #include "flutter_window.h"
 
 #include <optional>
@@ -39,6 +40,7 @@ bool FlutterWindow::OnCreate() {
           flutter_controller_->engine()->messenger(), "ocideck/open_file",
           &flutter::StandardMethodCodec::GetInstance());
   RegisterMicCapture(flutter_controller_->engine()->messenger(), GetHandle());
+  RegisterTrashChannel(flutter_controller_->engine()->messenger(), GetHandle());
   RegisterSystemCapture(flutter_controller_->engine()->messenger(), GetHandle());
   DesktopMultiWindowSetWindowCreatedCallback([](void* controller) {
     auto* flutter_view_controller =

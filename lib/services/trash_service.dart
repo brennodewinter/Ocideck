@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:path/path.dart' as p;
 
 import '../utils/atomic_file.dart';
@@ -7,18 +10,21 @@ import '../utils/log.dart';
 
 /// Verplaatst presentatiebestanden naar de prullenbak van het OS — nooit hard
 /// verwijderen, in lijn met de fail-safe-lijn van de app. macOS: `~/.Trash`;
-/// Linux: de XDG-prullenbak (`Trash/files` + `.trashinfo`). Op Windows en web
-/// is er geen veilig equivalent zonder platformcode: [isSupported] is daar
-/// false en de UI verbergt de opruimactie.
+/// Linux: de XDG-prullenbak (`Trash/files` + `.trashinfo`). Windows: de Shell-prullenbak via een native kanaal dat permanent
+/// verwijderen weigert. Web heeft geen toegang tot de systeemprullenbak.
 class TrashService {
   final String? Function() _osHome;
+  final bool _windows;
+  final MethodChannel _channel = const MethodChannel('ocideck/trash');
 
-  TrashService({String? Function()? osHome}) : _osHome = osHome ?? _defaultHome;
+  TrashService({String? Function()? osHome, bool? windows})
+    : _osHome = osHome ?? _defaultHome,
+      _windows = windows ?? (!kIsWeb && Platform.isWindows);
 
   static String? _defaultHome() =>
       Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
 
-  bool get isSupported => _trashFilesDir() != null;
+  bool get isSupported => !kIsWeb && (_windows || _trashFilesDir() != null);
 
   /// De map waarin verwijderde items belanden, of null op een platform
   /// zonder ondersteunde prullenbak.
@@ -67,6 +73,26 @@ class TrashService {
   /// projectmap — zie [trashTargetsFor]) naar de prullenbak. Geeft true
   /// wanneer alles is verplaatst.
   Future<bool> moveToTrash(String mdPath) async {
+    if (kIsWeb) return false;
+    if (_windows) {
+      var complete = true;
+      for (final target in trashTargetsFor(mdPath)) {
+        if (FileSystemEntity.typeSync(target, followLinks: false) ==
+            FileSystemEntityType.notFound) {
+          continue;
+        }
+        try {
+          final moved = await _channel.invokeMethod<bool>('recycle', {
+            'path': target,
+          });
+          if (moved != true) complete = false;
+        } catch (error, stack) {
+          logError('TrashService: Windows recycle failed', error, stack);
+          complete = false;
+        }
+      }
+      return complete;
+    }
     final trashDir = _trashFilesDir();
     if (trashDir == null) return false;
     try {

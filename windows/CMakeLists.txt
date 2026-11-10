@@ -123,3 +123,12 @@ if(MSVC)
     DESTINATION "${CMAKE_INSTALL_PREFIX}"
     COMPONENT Runtime)
 endif()
+
+# Media Foundation is part of Windows; no separate FFmpeg installation needed.
+add_executable(ocideck_audio "../native/audio_tools/audio_windows.cc"
+  "../native/audio_tools/audio_windows.manifest")
+set_target_properties(ocideck_audio PROPERTIES OUTPUT_NAME "ocideck-audio")
+target_link_libraries(ocideck_audio PRIVATE mfplat mfreadwrite mfuuid ole32)
+install(TARGETS ocideck_audio RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}" COMPONENT Runtime)
+
+add_subdirectory("../native/audio_tools/test" "native_audio_tests")

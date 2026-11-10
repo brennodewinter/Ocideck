@@ -420,6 +420,11 @@ list below, which made "where does this belong" slower than it needed to be.)*
 - `markdown_table_codec.dart` — The Markdown-table cell coding (escape `|`, `\`, newline as `<br>`), shared by the parser, the serializer and the HTML export so the three cannot drift. Since the office tables it is also the document mode's table codec: `isMarkdownTableLine`/`isMarkdownTableDelimiterRow` let the reader and `DocumentDeckBridge` recognise a table start, `splitMarkdownTableRow`/`decodeMarkdownTableRows` read the cells (a `<br>` becomes a real newline, so a document table cell can be multi-line), and `encodeMarkdownTable` writes the grid back with per-column alignment — one codec for the app's internal report tables and the user's own document tables alike.
 - `bundled_licenses.dart` — The licence texts for everything OciDeck bundles that is **not** a Dart package: fonts, the YuNet model, the PDFium runtime and the JS/CSS bundles. Flutter's own `NOTICES` asset covers packages (including both `third_party/` forks) and nothing else; this registers the rest with `LicenseRegistry` so `showLicensePage` is complete, and pins the `.txt` files as declared assets so they are actually in the binary.
 - `lib/widgets/reader/pdf_evidence_viewer.dart` — full-screen, read-only, on-device PDF/PDF-A evidence reader with page/zoom controls, password prompt and an explicit no-signature-validation notice; shared by local deck evidence and clean OciServe evidence.
+- `lib/platform/desktop_video.dart` — Registers the Linux video-player adapter before native playback.
+- `lib/services/video_embed_host.dart` — Serves one generated video/embed or offline-renderer document over loopback, with a random path and no file-serving route.
+- `lib/widgets/slides/previews/video_embed_view.dart` — Hosts the native Windows/Linux video embed surface.
+- `offline_render_document_io.dart` — Serves the generated offline renderer HTML over loopback to avoid WebView2’s inline-document size limit; the web stub never starts a server.
+- `offline_render_document_stub.dart` — Browser counterpart of the offline document host.
 - `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG. Headless: on desktop/mobile via a shared WebView whose host is a widget in `lib/widgets/mermaid_render_host.dart`; on web via the JS-interop path below (the WebView cannot render there — `webview_flutter_web` has no `runJavaScriptReturningResult`, #851). The offstage page has a fixed, non-zero internal drawing width because Mermaid Gantt derives its geometry from the page viewport; the resulting SVG remains responsive through its `viewBox`.
 - `mermaid_config.dart` — Single source of truth for the Mermaid init settings (`kMermaidInitConfig`, `securityLevel: strict`, no `htmlLabels`) and the bundled-script URL, shared by both render paths so they cannot drift.
 - `mermaid_theme.dart` — Maps a `ThemeProfile` to Mermaid `themeVariables` and injects them as a per-diagram `%%{init}%%` directive, so diagrams (especially Gantt) follow the chosen style's colours instead of the fixed `neutral` theme. Also the shared home of `injectIntoMermaidInit`, the directive-merge helper the dark reader mode reuses.
@@ -752,6 +757,8 @@ orchestrator that ties them together.
 - `libreplan_import.dart` — `LibreplanImporter.import()`: orchestrates fetch + parse + convert. `LibreplanImportOptions` selects which slide types to produce. One failing endpoint produces a warning, not a crash — the rest of the slides are still produced.
 
 ### `lib/services/transcription/` — recording & transcription boundary (design: `docs/design/TRANSCRIPTION.md`)
+
+- `bundled_audio_helper_io.dart` — Resolves the installed native audio helper beside OciDeck, without relying on PATH.
 
 The provider-neutral edges of the *Transcriptie en opname* module (#2510) plus
 the first engine that implements them (#2512): what capturing audio and

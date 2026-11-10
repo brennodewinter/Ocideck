@@ -15,6 +15,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'capture_source.dart';
+import 'bundled_audio_helper_io.dart';
 import 'mic_capture_port.dart';
 import 'transcription_errors.dart';
 
@@ -56,6 +57,12 @@ LinuxRecordPlan? planLinuxRecording({
 }) {
   if (parecordPath == null || parecordPath.isEmpty) return null;
   if (deviceId != null && !isSafePulseDevice(deviceId)) return null;
+  if (parecordPath.endsWith('/ocideck-audio')) {
+    return LinuxRecordPlan(
+      executable: parecordPath,
+      args: ['--capture', ?deviceId],
+    );
+  }
   return LinuxRecordPlan(
     executable: parecordPath,
     args: [
@@ -162,7 +169,11 @@ Map<String, String> linuxRecorderEnvironment() {
     // en de rest van de omgeving erven we bewust niet.
     'PATH',
   };
-  final env = <String, String>{'LC_ALL': 'C'};
+  final helper = bundledAudioHelper();
+  final env = <String, String>{
+    'LC_ALL': 'C',
+    if (helper != null) 'LD_LIBRARY_PATH': '${File(helper).parent.path}/lib',
+  };
   for (final key in allow) {
     final value = Platform.environment[key];
     if (value != null && value.isNotEmpty) env[key] = value;
@@ -351,6 +362,29 @@ class _LinuxLive implements MicCaptureLive {
 }
 
 Future<LinuxMicTools> _defaultLookup() async {
+  final helper = bundledAudioHelper();
+  if (helper != null) {
+    String? sources;
+    try {
+      final result = await Process.run(
+        helper,
+        ['--list-sources'],
+        environment: linuxRecorderEnvironment(),
+        includeParentEnvironment: false,
+        runInShell: false,
+      ).timeout(const Duration(seconds: 3));
+      if (result.exitCode == 0) sources = result.stdout as String;
+    } on Object {
+      // The session daemon may be absent; never substitute a microphone for
+      // a requested system monitor.
+      sources = null;
+    }
+    return LinuxMicTools(
+      parecordPath: helper,
+      pactlPath: helper,
+      sourcesText: sources,
+    );
+  }
   final parecord = await _which('parecord');
   final pactl = await _which('pactl');
   String? sources;

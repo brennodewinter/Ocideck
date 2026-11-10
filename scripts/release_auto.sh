@@ -564,6 +564,7 @@ expected_release_assets() {
     "ocideck-linux-x86_64-$NEW_VERSION.AppImage" \
     "ocideck-linux-x86_64-$NEW_VERSION.flatpak" \
     "ocideck-linux-x86_64-$NEW_VERSION.flatpak.cdx.json" \
+    "ocideck-linux-sources-$NEW_VERSION.tar.gz" \
     "ocideck-linux-debian12-x86_64-$NEW_VERSION.tar.gz" \
     "ocideck-macos-$NEW_VERSION.zip" \
     "ocideck-windows-x64-$NEW_VERSION.zip" \

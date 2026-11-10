@@ -76,11 +76,12 @@ below.)*
 Formulas, Mermaid diagrams and charts are **drawn** into the PDF as vector art.
 Where that fails, the PDF prints the block's **source** in a monospaced box with
 a line above saying what it is — rather than leave an empty space, whoever needs
-the diagram at least sees what should be there. It happens in four cases: a
+the diagram at least sees what should be there. It happens in three cases: a
 chart whose numbers live in an external `data/*.json` that did not travel; a
 diagram or formula the renderer could not produce; a drawing the PDF's own SVG
-reader cannot parse; and **Windows and Linux**, where the hidden renderer that
-draws Mermaid and formulas has no implementation. Charts are drawn in Dart and do
+reader cannot parse. Windows and Linux now have an offline native renderer
+for both Mermaid and formulas. Linux's WebKitGTK backend has produced actual
+flowchart, Gantt and formula SVGs; Windows release verification remains pending. Charts are drawn in Dart and do
 travel on every platform. Export to HTML for all three rendered in a browser, or
 to LaTeX for typeset maths. *(Added 2026-08-20; narrowed the same day from
 "always shows source" once the drawings landed, and corrected again once the
@@ -289,10 +290,12 @@ Browser-specific boundaries: the page cannot pin the server certificate, plain
 `http` meeting links work only to a literal loopback address (`127.0.0.1`, not
 the name `localhost`), and the browser asks its own per-site permissions for
 camera, microphone and screen share. A whole-call audio source for
-transcription is available on **macOS and web only** — the forked media
-binding delivers per-track decoded PCM there (proven in a real call), while
-Windows, Linux, iOS and Android honestly report no per-source tap, so the
-call panel offers no record button rather than a broken one. The recording,
+transcription is implemented on macOS, Windows, Linux and web. The vendored
+Windows/Linux binding now attaches a native sink to each decoded audio track;
+its PCM ownership, separate sources, mute, stop and queue bounds are tested in
+C++. A real two-person call remains proven only on macOS and web: Windows/Linux
+release and device verification is still pending. iOS and Android have no
+per-source tap available in OciDeck. The recording,
 the live-server opt-in and the transcript then follow the same contract as
 a microphone take — per-session consent, no silent upload, and a dropped
 live link never stops the take. What a call adds is provenance:
@@ -435,3 +438,20 @@ the export dialog, and `docs/images/` holds twelve images.)*
 *This page replaces the roadmap section that used to sit in
 [FAQ.md](FAQ.md) — a roadmap nobody maintains is worse than none. What is
 planned is decided in the issue tracker, in the open.*
+
+## Desktop video requirements
+
+Windows MP4 playback uses Media Foundation and the codecs installed in Windows.
+YouTube/Vimeo requires the Microsoft Edge WebView2 Runtime and online media
+permission in OciDeck. Linux uses libmpv for files and WebKitGTK 4.1 plus
+GStreamer codecs for embeds. Linux defaults to software video decoding, which
+can increase CPU usage for large videos. Debian/RPM/AUR packages declare runtime dependencies;
+AppImage and tarball users must install them themselves. On Debian/Ubuntu:
+`sudo apt install libmpv2 libwebkit2gtk-4.1-0 gstreamer1.0-plugins-good gstreamer1.0-libav`.
+Flatpak includes libmpv and uses WebKitGTK from the GNOME runtime.
+
+The Windows/Linux embed backend uses a native child view. Flutter overlays
+(including slide titles) and clipping have limitations. The native player is
+temporarily hidden while a dialog or another route covers the slide. Native video
+playback has an integration test in `integration_test/desktop_media_test.dart`;
+live YouTube playback still needs a manual check with an embeddable video.

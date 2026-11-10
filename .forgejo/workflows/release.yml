@@ -227,7 +227,7 @@ jobs:
       - name: Ontbrekende Linux-buildlibs
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev rpm file flatpak python3
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv-dev rpm file flatpak python3
 
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -281,6 +281,7 @@ jobs:
         run: |
           VERSIE="${RELEASE_TAG#v}"
           mkdir -p dist
+          python3 scripts/linux_source_bundle.py stage "$PWD" build/linux/x64/release/bundle dist "$VERSIE"
           tar -C build/linux/x64/release \
             --transform "s,^bundle,ocideck-$VERSIE," \
             -czf "dist/ocideck-linux-x64-$VERSIE.tar.gz" bundle
@@ -298,7 +299,10 @@ jobs:
           APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage
           APPIMAGETOOL_SHA256: ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0
           OUT: dist
-        run: make package-linux VERSION="$VERSIE"
+        run: |
+          flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
+          make package-linux VERSION="$VERSIE"
 
       - name: Artifact bewaren
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
@@ -314,6 +318,7 @@ jobs:
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.AppImage
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.flatpak
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.flatpak.cdx.json
+            dist/ocideck-linux-sources-${{ env.VERSIE }}.tar.gz
 
   linux-debian12:
     name: Linux bouwen op Debian 12
@@ -720,7 +725,7 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive
           apt-get install -y --no-install-recommends \
             xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
-            libayatana-appindicator3-1 libgles2 libegl1 libpulse0
+            libayatana-appindicator3-1 libgles2 libegl1 libwebkit2gtk-4.1-0 libmpv2 gstreamer1.0-plugins-good gstreamer1.0-libav libpulse0
           mkdir -p /tmp/ocideck-test
           tar -xzf "dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
           cd /tmp/ocideck-test/ocideck-linux-debian12-*
@@ -797,7 +802,7 @@ jobs:
           apt-get install -y --no-install-recommends \
             xvfb fonts-dejavu-core \
             libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1 \
-            libgles2 libegl1
+            libgles2 libegl1 libwebkit2gtk-4.1-0 libmpv2 gstreamer1.0-plugins-good gstreamer1.0-libav
           cd dist
           chmod +x ocideck-linux-x86_64-*.AppImage
           ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
@@ -836,7 +841,7 @@ jobs:
         run: |
           set -eu
           export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends flatpak
+          apt-get install -y --no-install-recommends flatpak python3
           flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
           flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
           flatpak --user install -y --noninteractive --bundle "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak"
@@ -848,6 +853,7 @@ jobs:
           test -x "$app/files/libexec/git-core/git-remote-https"
           sh -n "$app/files/bin/ocideck"
           (cd "$app/files" && sha256sum -c share/doc/ocideck-flatpak/FILES.sha256)
+          python3 "$app/files/lib/ocideck/share/doc/ocideck/verify_sources.py" verify "$app/files/lib/ocideck" --copied-files "$app/files/share/doc/ocideck-flatpak/FILES.sha256"
           cmp "$app/files/share/doc/ocideck-flatpak/components.cdx.json" "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak.cdx.json"
 
   candidate:
@@ -899,6 +905,7 @@ jobs:
             "ocideck-linux-x86_64-$VERSIE.AppImage" \
             "ocideck-linux-x86_64-$VERSIE.flatpak" \
             "ocideck-linux-x86_64-$VERSIE.flatpak.cdx.json" \
+            "ocideck-linux-sources-$VERSIE.tar.gz" \
             "ocideck-macos-$VERSIE.zip" "ocideck-windows-x64-$VERSIE.zip" \
             "ocideck-windows-x64-setup-$VERSIE.exe" | LC_ALL=C sort > /tmp/expected
           find dist -maxdepth 1 -type f -exec basename {} \; | LC_ALL=C sort > /tmp/actual
@@ -1082,6 +1089,7 @@ jobs:
             "ocideck-linux-x86_64-$VERSIE.AppImage" \
             "ocideck-linux-x86_64-$VERSIE.flatpak" \
             "ocideck-linux-x86_64-$VERSIE.flatpak.cdx.json" \
+            "ocideck-linux-sources-$VERSIE.tar.gz" \
             "ocideck-macos-$VERSIE.zip" \
             "ocideck-windows-x64-$VERSIE.zip" \
             "ocideck-windows-x64-setup-$VERSIE.exe" \
@@ -1089,7 +1097,7 @@ jobs:
           find dist -maxdepth 1 -type f -exec basename {} \; \
             | LC_ALL=C sort > /tmp/werkelijke-assets
           if ! diff -u /tmp/verwachte-assets /tmp/werkelijke-assets; then
-            echo "dist/ bevat niet exact de veertien verwachte release-assets; publicatie geweigerd." >&2
+            echo "dist/ bevat niet exact de verwachte release-assets; publicatie geweigerd." >&2
             exit 1
           fi
 

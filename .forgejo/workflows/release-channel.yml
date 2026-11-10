@@ -120,11 +120,15 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE/source"
           if [ "$CHANNEL" != web ]; then
             apt-get update
-            apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev file
+            apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libmpv-dev file
             case "$CHANNEL" in
               linux-debian12) apt-get install -y --no-install-recommends docker.io iproute2 ;;
               linux-rpm) apt-get install -y --no-install-recommends rpm ;;
-              linux-flatpak) apt-get install -y --no-install-recommends flatpak ;;
+              linux-flatpak)
+                apt-get install -y --no-install-recommends flatpak
+                flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+                flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
+                ;;
             esac
           fi
       - name: Debian 12 builder-daemon vinden
@@ -452,6 +456,7 @@ jobs:
           test -x "$app/files/libexec/git-core/git-remote-https"
           sh -n "$app/files/bin/ocideck"
           (cd "$app/files" && sha256sum -c share/doc/ocideck-flatpak/FILES.sha256)
+          python3 controller/scripts/linux_source_bundle.py verify "$app/files/lib/ocideck" --copied-files "$app/files/share/doc/ocideck-flatpak/FILES.sha256"
           cmp "$app/files/share/doc/ocideck-flatpak/components.cdx.json" "dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.flatpak.cdx.json"
 
 

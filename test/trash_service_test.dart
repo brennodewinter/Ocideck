@@ -20,7 +20,7 @@ void main() {
 
   setUp(() {
     temp = Directory.systemTemp.createTempSync('ocideck_trash_');
-    trash = TrashService(osHome: () => temp.path);
+    trash = TrashService(osHome: () => temp.path, windows: false);
   });
 
   tearDown(() {
@@ -87,7 +87,7 @@ void main() {
   }, skip: _geenPrullenbakOpWindows);
 
   test('zonder thuismap is de prullenbak niet ondersteund', () {
-    final geen = TrashService(osHome: () => null);
+    final geen = TrashService(osHome: () => null, windows: false);
     expect(geen.isSupported, isFalse);
   });
 }

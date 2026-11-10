@@ -10,11 +10,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_win_floating/webview_plugin.dart';
 
 import '../utils/log.dart';
 import '../utils/lru_cache.dart';
 import '../utils/sanitize_svg.dart';
 import 'mermaid_config.dart';
+import 'offline_render_document_stub.dart'
+    if (dart.library.io) 'offline_render_document_io.dart';
 // Op web kan de WebView-renderer niet werken (webview_flutter_web mist
 // runJavaScriptReturningResult, #851); daar draait mermaid rechtstreeks in de
 // app-pagina via JS-interop. De stub op IO wordt nooit aangeroepen.
@@ -51,6 +54,7 @@ class MermaidRenderService {
   WebViewController? _controller;
   bool _bootstrapped = false;
   Completer<void>? _bootstrapCompleter;
+  Timer? _bootstrapTimer;
   final List<_PendingRender> _queue = [];
   bool _busy = false;
 
@@ -64,19 +68,11 @@ class MermaidRenderService {
   int _renderSeq = 0;
   Completer<String?>? _renderCompleter;
 
-  /// Of er op dit platform überhaupt gerenderd kan worden.
-  ///
-  /// De verborgen WebView bestaat alleen waar `webview_flutter` een
-  /// implementatie heeft: Android, iOS en macOS. **Windows en Linux hebben er
-  /// geen** (zie `pubspec.lock`: android, wkwebview, web — meer niet), en dan is
-  /// `WebViewPlatform.instance` null. Zonder deze vraag zou een render daar de
-  /// host laten monteren, zou die een `WebViewController` bouwen, en zou dát
-  /// gooien — een documentexport die eerst gewoon lukte, sloopt dan op één
-  /// diagram.
-  ///
-  /// Op web is er een eigen weg (JS-interop in de app-pagina zelf), dus daar is
-  /// het antwoord ja zonder dat er een platform-instantie hoeft te zijn.
+  /// A native offscreen controller is used on Windows/Linux; Apple keeps its
+  /// widget host and web uses JS interop directly.
   bool get isAvailable => kIsWeb || WebViewPlatform.instance != null;
+
+  OfflineRenderDocument? _document;
 
   /// Ask the UI layer to mount the offstage WebView host.
   ///
@@ -103,11 +99,38 @@ class MermaidRenderService {
   void attachController(WebViewController controller) {
     _controller = controller;
     _bootstrapCompleter ??= Completer<void>();
-    unawaited(_bootstrap());
+    unawaited(
+      _bootstrap().catchError((Object error, StackTrace stack) {
+        logError('MermaidRender: bootstrap failed', error, stack);
+        if (identical(_controller, controller)) _markBootstrapReady();
+      }),
+    );
+  }
+
+  void detachController(WebViewController controller) {
+    if (!identical(_controller, controller)) return;
+    _controller = null;
+    _bootstrapped = false;
+    _bootstrapTimer?.cancel();
+    _bootstrapTimer = null;
+    _bootstrapCompleter?.complete();
+    _bootstrapCompleter = null;
+    final active = _renderCompleter;
+    _renderCompleter = null;
+    if (active != null && !active.isCompleted) active.complete(null);
+    for (final job in _queue) {
+      job.completer.complete(null);
+    }
+    _queue.clear();
+    final document = _document;
+    _document = null;
+    if (document != null) unawaited(document.close());
+    hostNeeded.value = false;
   }
 
   Future<void> _bootstrap() async {
     if (_bootstrapped || _controller == null) return;
+    final controller = _controller!;
     final mermaidJs = await rootBundle.loadString(
       'assets/web_export/mermaid.min.js',
     );
@@ -134,11 +157,13 @@ class MermaidRenderService {
     // Kanaal waarlangs de pagina de klaar-gerenderde SVG terugstuurt (#882).
     // Vóór het laden geregistreerd, zodat `MermaidChannel` bestaat wanneer de
     // render later vuurt.
-    await _controller!.addJavaScriptChannel(
+    if (!identical(controller, _controller)) return;
+    await controller.addJavaScriptChannel(
       'MermaidChannel',
       onMessageReceived: _onMermaidMessage,
     );
-    await _controller!.loadHtmlString('''
+    final html =
+        '''
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8">
@@ -223,7 +248,21 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
 </script>
 </body>
 </html>
-''');
+''';
+    if (!identical(controller, _controller)) return;
+    if (controller.platform is WindowsPlatformWebViewController) {
+      // NavigateToString is limited to 2 MiB; our offline bundles exceed it.
+      await _document?.close();
+      final document = await OfflineRenderDocument.start(html);
+      if (!identical(controller, _controller)) {
+        await document.close();
+        return;
+      }
+      _document = document;
+      await controller.loadRequest(document.uri);
+    } else {
+      await controller.loadHtmlString(html);
+    }
     // NIET meteen als klaar markeren (#882): `loadHtmlString` resolvet zodra het
     // laden STÁRT, niet zodra het pagina-script draaide. Een render in dat gaatje
     // roept `runJavaScript('window.__renderMermaid(...)')` aan terwijl die functie
@@ -232,13 +271,17 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
     // geladen en `__renderMermaid` gedefinieerd is (zie [_onMermaidMessage]). Een
     // time-out markeert alsnog klaar, zodat een uitblijvend bericht de wachtrij
     // niet eeuwig laat hangen (dan valt een render hooguit terug op de brontekst).
-    Future<void>.delayed(const Duration(seconds: 10), _markBootstrapReady);
+    if (identical(controller, _controller) && !_bootstrapped) {
+      _bootstrapTimer = Timer(const Duration(seconds: 10), _markBootstrapReady);
+    }
   }
 
   /// Geef de wachtrij vrij zodra de pagina klaar is om te renderen (#882).
   void _markBootstrapReady() {
     if (_bootstrapped) return;
     _bootstrapped = true;
+    _bootstrapTimer?.cancel();
+    _bootstrapTimer = null;
     _bootstrapCompleter?.complete();
     _bootstrapCompleter = null;
     _pumpQueue();
