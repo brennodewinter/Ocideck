@@ -234,7 +234,7 @@ jobs:
     timeout-minutes: 175
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:9295c344d01f6f20bdea7b34fe9dbd6d8b2d9e2ed00bb0746c0b98274bf304b9
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -246,7 +246,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:9295c344d01f6f20bdea7b34fe9dbd6d8b2d9e2ed00bb0746c0b98274bf304b9
           EXPECTED_MEMORY_GIB: "4"
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -285,7 +285,7 @@ jobs:
     timeout-minutes: 175
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:49a0879d7afbac18d6a160607de7273d0189c687a1839c8663cfb9c9b74506c1
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -297,7 +297,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:49a0879d7afbac18d6a160607de7273d0189c687a1839c8663cfb9c9b74506c1
           EXPECTED_MEMORY_GIB: "4"
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -333,7 +333,7 @@ jobs:
     # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:a949b24f4bf34402979ad783530f8dad6b0dc94360ae2883e22c0899cdb836db
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -345,7 +345,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:a949b24f4bf34402979ad783530f8dad6b0dc94360ae2883e22c0899cdb836db
           EXPECTED_MEMORY_GIB: "4"
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -376,7 +376,7 @@ jobs:
     timeout-minutes: 175
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:f5ca300b004d7057f7e64b43212de18faf315638ff52c21a5797f492e6a1d755
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -388,7 +388,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:f5ca300b004d7057f7e64b43212de18faf315638ff52c21a5797f492e6a1d755
           EXPECTED_MEMORY_GIB: "4"
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -426,7 +426,7 @@ jobs:
     timeout-minutes: 175
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:5c465f30d5a7019b953b4004c559436a4865bc280d6aef566fcf690f12b70012
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -438,7 +438,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:5c465f30d5a7019b953b4004c559436a4865bc280d6aef566fcf690f12b70012
           EXPECTED_MEMORY_GIB: "4"
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -468,7 +468,7 @@ jobs:
     timeout-minutes: 175
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:c41fb0a0c49349b08df0d113bbaf0161ebbccd3993fd075252d195be223a2218
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -480,7 +480,7 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:c41fb0a0c49349b08df0d113bbaf0161ebbccd3993fd075252d195be223a2218
           EXPECTED_MEMORY_GIB: "4"
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
