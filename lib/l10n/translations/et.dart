@@ -1528,6 +1528,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Onderstrepen': 'Allakriipsutatud',
   'Eigen verdeling': 'Kohandatud jaotus',
   'Gelijke hoogte': 'Sama kõrgus',
   'Panelen vullen': 'Täida paneelid',

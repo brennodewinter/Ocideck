@@ -610,6 +610,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Onderstrepen': 'Subrayado',
   'Eigen verdeling': 'Reparto personalizado',
   'Gelijke hoogte': 'Altura igual',
   'Panelen vullen': 'Rellenar paneles',

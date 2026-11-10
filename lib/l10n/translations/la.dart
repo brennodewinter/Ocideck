@@ -1547,6 +1547,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Onderstrepen': 'Sublineatum',
   'Eigen verdeling': 'Divisio propria',
   'Gelijke hoogte': 'Altitudo aequalis',
   'Panelen vullen': 'Tabulas implere',

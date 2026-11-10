@@ -1536,6 +1536,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Onderstrepen': 'Podtržené',
   'Eigen verdeling': 'Vlastní rozdělení',
   'Gelijke hoogte': 'Stejná výška',
   'Panelen vullen': 'Vyplnit panely',

@@ -612,6 +612,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Onderstrepen': 'Unterstrichen',
   'Eigen verdeling': 'Eigene Aufteilung',
   'Gelijke hoogte': 'Gleiche Höhe',
   'Panelen vullen': 'Paneele füllen',

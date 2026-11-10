@@ -1552,6 +1552,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Onderstrepen': 'Sottolinear',
   'Eigen verdeling': 'Diviżjoni personalizzata',
   'Gelijke hoogte': 'Għoli ugwali',
   'Panelen vullen': 'Imla l-panelli',

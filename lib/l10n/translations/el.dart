@@ -1559,6 +1559,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Onderstrepen': 'Υπογραμμισμένο',
   'Eigen verdeling': 'Προσαρμοσμένη κατανομή',
   'Gelijke hoogte': 'Ίδιο ύψος',
   'Panelen vullen': 'Γέμισμα πλαισίων',

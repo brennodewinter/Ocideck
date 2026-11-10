@@ -1536,6 +1536,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Onderstrepen': 'Garis bawah',
   'Eigen verdeling': 'Pembagian kustom',
   'Gelijke hoogte': 'Tinggi sama',
   'Panelen vullen': 'Isi panel',

@@ -1550,6 +1550,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Onderstrepen': 'Підкреслене',
   'Eigen verdeling': 'Власний розподіл',
   'Gelijke hoogte': 'Однакова висота',
   'Panelen vullen': 'Заповнити панелі',

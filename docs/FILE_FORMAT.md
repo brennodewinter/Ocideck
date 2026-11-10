@@ -1003,6 +1003,12 @@ typed:
 A paragraph, **bold**, a `- list` if you want one, all of it ordinary Markdown.
 ```
 
+**Inline formatting** in titles and text uses `**bold**`, `*italic*`,
+`~~strikethrough~~` and — the one deliberate non-Markdown extension —
+`<u>underlined</u>` (#2866). `__text__` stays bold; it never means underline.
+A lone `<u>` or `</u>` without its pair is literal text, and plain-text
+extraction drops the tags like every other marker.
+
 **An `![alt](path)` alone on a line in such a body is an image**, drawn in the
 flow of the text rather than left as literal Markdown (since 2026-07-22). It is
 written and read back verbatim — there is no OciDeck marker around it — so this

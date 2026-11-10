@@ -1546,6 +1546,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Onderstrepen': 'Podkreślenie',
   'Eigen verdeling': 'Własny podział',
   'Gelijke hoogte': 'Równa wysokość',
   'Panelen vullen': 'Wypełnij panele',

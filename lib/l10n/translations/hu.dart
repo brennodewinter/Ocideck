@@ -1537,6 +1537,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Onderstrepen': 'Aláhúzott',
   'Eigen verdeling': 'Egyéni felosztás',
   'Gelijke hoogte': 'Egyenlő magasság',
   'Panelen vullen': 'Panelek kitöltése',
