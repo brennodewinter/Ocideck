@@ -244,19 +244,19 @@ class _TitlePreview extends StatelessWidget {
   /// Directional scrim drawn behind the bottom-left lockup over a background
   /// image: opaque enough where the text sits (bottom) to guarantee legibility,
   /// fading to nothing higher up so the image itself stays vivid. Replaces the
-  /// old flat full-surface haze. The alpha under the text stays at or above the
-  /// flat-wash value `title_contrast.dart` assumes, so its contrast check
-  /// remains a valid (slightly conservative) predictor of what is rendered.
+  /// old flat full-surface haze. The strength scales the same gradient shape;
+  /// `title_contrast.dart` scales its conservative contrast estimate with it.
   Widget _scrim() {
     final scrim = AppTheme.parseHexColor(profile.titleBackgroundColor);
+    final strength = imageOverlayStrengthFor(slide) / 100;
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           colors: [
-            scrim.withValues(alpha: 0.95),
-            scrim.withValues(alpha: 0.90),
+            scrim.withValues(alpha: strength),
+            scrim.withValues(alpha: strength * (0.90 / 0.95)),
             scrim.withValues(alpha: 0.0),
           ],
           stops: const [0.0, 0.45, 0.80],
@@ -445,6 +445,7 @@ class _SectionPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final pad = w * 0.08;
     final sectionBg = AppTheme.parseHexColor(profile.sectionBackgroundColor);
+    final overlayAlpha = imageOverlayStrengthFor(slide) / 100;
     final hasBg = slide.imagePath.isNotEmpty;
 
     // Geen afbeelding: de vertrouwde effen tussentitel.
@@ -496,8 +497,8 @@ class _SectionPreview extends StatelessWidget {
 
     // Schermvullend beeld: de kop gecentreerd over een egale waas. Vlak en niet
     // richtinggevoelig zoals de titeldia's scrim, want tussentiteltekst staat in
-    // het midden — en een egale waas op [kTitleOverlayAlpha] is precies wat de
-    // contrastcontrole aanneemt, zodat haar oordeel klopt met wat er staat.
+    // het midden. De gekozen sterkte geldt voor dit hele vlak en wordt ook
+    // door de contrastcontrole gebruikt.
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -510,7 +511,7 @@ class _SectionPreview extends StatelessWidget {
           alignment: focalAlignment(slide.imageFocalX, slide.imageFocalY),
         ),
         if (slide.titleImageOverlay)
-          ColoredBox(color: sectionBg.withValues(alpha: kTitleOverlayAlpha)),
+          ColoredBox(color: sectionBg.withValues(alpha: overlayAlpha)),
         _centred(context, pad),
         _captionOverlay(context, slide.imageCaption, w),
       ],

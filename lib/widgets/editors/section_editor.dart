@@ -210,6 +210,8 @@ class _SectionEditorState extends ConsumerState<SectionEditor>
             ),
           ),
           const SizedBox(height: 12),
+          imageOverlayStrengthControl,
+          const SizedBox(height: 12),
           const SectionLabel('Titeltekstkleur'),
           const SizedBox(height: 6),
           Wrap(

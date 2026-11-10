@@ -158,6 +158,7 @@ const kSupportedCommentDirectives = {
   'ocideck_split_image_side',
   'ocideck_title_image_overlay',
   'ocideck_quote_image_overlay_strength',
+  'ocideck_image_overlay_strength',
   'ocideck_title_text_color',
   'ocideck_bullet_marker',
   'ocideck_timeline_duration',

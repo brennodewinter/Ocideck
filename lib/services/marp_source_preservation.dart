@@ -43,25 +43,25 @@ String marpImageAlt(String bracket) {
 
 // Alleen door onze sterkte-richtlijn gedragen opacity is getypeerd. Andere
 // Marp-opacity blijft brongetrouw bewaard, zoals vóór de schuifregelaar.
-String _typedQuoteBackground(String block, String line) {
+String _typedOverlayBackground(String block, String line) {
   final match = RegExp(
-    r'<!--\s*ocideck_quote_image_overlay_strength:\s*(\d+)\s*-->',
+    r'<!--\s*ocideck_(?:quote_)?image_overlay_strength:\s*(.*?)\s*-->',
   ).firstMatch(block);
   if (match == null) return line;
-  final strength =
-      int.tryParse(match.group(1)!) ?? kDefaultQuoteImageOverlayStrength;
+  final strength = int.tryParse(parseMarkdownYamlScalar(match.group(1)!));
+  if (strength == null) return line;
   return line.replaceAll(
-    'opacity:${_quoteOverlayOpacity(strength)}',
+    'opacity:${((100 - strength.clamp(0, 100)) / 100).toStringAsFixed(2)}',
     'opacity:.45',
   );
 }
 
 // De bestaande Marp-standaard blijft .45; aangepaste sterktes schrijven hun
 // complement als beeldopacity. OciDeck zelf tekent de waas als aparte laag.
-String _quoteOverlayOpacity(int strength) =>
-    strength == kDefaultQuoteImageOverlayStrength
+String _overlayOpacity(Slide slide) =>
+    imageOverlayStrengthFor(slide) == defaultImageOverlayStrength(slide.type)
     ? '.45'
-    : ((100 - strength.clamp(0, 100)) / 100).toStringAsFixed(2);
+    : ((100 - imageOverlayStrengthFor(slide)) / 100).toStringAsFixed(2);
 
 /// Whether typed serialization would move or rewrite authored Marpit source.
 bool requiresWholeMarpBlockPreservation(String block) {
@@ -73,7 +73,7 @@ bool requiresWholeMarpBlockPreservation(String block) {
   if (backgrounds.length > 2) return true;
   for (var i = 0; i < backgrounds.length; i++) {
     if (!_hasOnlyTypedBackgroundOptions(
-      _typedQuoteBackground(block, backgrounds[i]),
+      _typedOverlayBackground(block, backgrounds[i]),
       allowVisualStyle: i == 0,
     )) {
       return true;
@@ -262,14 +262,17 @@ MarpStyle marpImageStyleFromSource(String source) {
   String valueAfter(String prefix) =>
       parseMarkdownYamlScalar(content.substring(prefix.length).trim());
 
-  if (content.startsWith('ocideck_quote_image_overlay_strength:')) {
+  if (content.startsWith('ocideck_quote_image_overlay_strength:') ||
+      content.startsWith('ocideck_image_overlay_strength:')) {
     return (
       handled: true,
       preserve: false,
       style: current.copyWith(
-        imageOverlayStrength:
-            int.tryParse(valueAfter('ocideck_quote_image_overlay_strength:')) ??
-            kDefaultQuoteImageOverlayStrength,
+        imageOverlayStrength: int.tryParse(
+          parseMarkdownYamlScalar(
+            content.substring(content.indexOf(':') + 1).trim(),
+          ),
+        ),
       ),
     );
   }
@@ -335,6 +338,5 @@ String marpBackgroundOptions(
   else if (slide.imageSize > 0 && positional.isEmpty)
     '${slide.imageSize}%',
   ...slide.marpStyle.imageFilters,
-  if (overlay)
-    'opacity:${slide.type == SlideType.quote ? _quoteOverlayOpacity(slide.marpStyle.effectiveImageOverlayStrength) : '.45'}',
+  if (overlay) 'opacity:${_overlayOpacity(slide)}',
 ].join(' ');

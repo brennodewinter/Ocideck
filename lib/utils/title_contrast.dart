@@ -39,7 +39,7 @@ class TitleContrastEval {
   });
 }
 
-/// Grey-wash opacity used by the title preview (`_TitlePreview`).
+/// Bestaande egale waas en conservatieve contrastbasis voor het titelverloop.
 const double kTitleOverlayAlpha = 0.62;
 
 /// The subtitle is drawn at this opacity in `_TitlePreview`, so it always has
@@ -71,7 +71,11 @@ Color _background(
       ? theme.sectionBackgroundColor
       : theme.titleBackgroundColor;
   final wash = tryParseHexColor(washHex) ?? AppTheme.navy;
-  return Color.alphaBlend(wash.withValues(alpha: kTitleOverlayAlpha), avgImage);
+  final alpha =
+      kTitleOverlayAlpha *
+      imageOverlayStrengthFor(slide) /
+      defaultImageOverlayStrength(slide.type);
+  return Color.alphaBlend(wash.withValues(alpha: alpha), avgImage);
 }
 
 class _Candidate {

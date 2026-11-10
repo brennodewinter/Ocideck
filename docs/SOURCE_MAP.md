@@ -1723,12 +1723,12 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `discoveries_editor.dart` — Edits a discoveries slide (up to six finds, four fields each), with a banner that restates the headline the slide will lead with as you type.
 - `asset_overview_editor.dart` — Edits an asset-overview slide (up to eight kinds, four counts each), summing as you type and flagging a subtotal larger than its total.
 - `scorecard_editor.dart` — Edits a scorecard slide (up to five figures: label, now, previous report, unit, direction). One figure is one compact two-row card carrying a live change chip; ordering is a drag handle, like every other reorderable list in the app.
-- `section_editor.dart` — Edits a section-divider slide (title, subtitle).
+- `section_editor.dart` — Reuses the shared image-overlay strength control (62% flat-wash default). Edits a section-divider slide (title, subtitle).
 - `signoff_editor.dart` — Edits the sign-off slide (truthfulness statement, signature, certification, seal).
 - `slide_type_help.dart` — Collapsible "what can I do here?" hint per slide type (and the TLP hint); exhaustive switch guarantees every type has one.
 - `table_editor.dart` — Edits a table slide by reusing the document spreadsheet (`TableEditController` + `DocumentMarkdownView`), so a slide table is the same in-place grid as a document table (Tab grows a row, Enter moves down, paste from a cell). Number formatting stays a slide-only toolbar extra.
 - `timeline_editor.dart` — Edits a timeline slide (reorderable events, layout).
-- `title_editor.dart` — Edits a title slide (title, subtitle/byline, ordinary-Markdown additional information, image and zoom). The extra field reuses `Slide.customMarkdown`, so no new slide type or format-only field is needed.
+- `title_editor.dart` — Reuses the shared image-overlay strength control (95% title-gradient default). Edits a title slide (title, subtitle/byline, ordinary-Markdown additional information, image and zoom). The extra field reuses `Slide.customMarkdown`, so no new slide type or format-only field is needed.
 - `two_bullets_editor.dart` — Edits a two-column bullet slide (per-column titles).
 - `image_gallery_editor.dart` — Editor voor `imageGallery`-dia's (#2838): titel, lay-outkeuze (raster/stapel) en de rij beelden als `![alt](pad)`-entries — per rij een alt-tekstveld, herordenen en verwijderen; "Afbeelding toevoegen" appendt via `pickImageWithFeedback`.
 - `two_images_editor.dart` — Edits a two-image slide; its swap action exchanges both image slots with their associated captions, alt text, crop focal points and panel widths.

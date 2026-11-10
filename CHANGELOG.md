@@ -14,6 +14,8 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Sterkte van de waas bij titels en tussenkoppen (#2855).** De bestaande schuifregelaar is nu gedeeld met citaten. Titels behouden hun verloop van 95% naar 90% en transparant; tussenkoppen hun egale waas van 62%. Aangepaste sterktes blijven bewaard en werken door in presentatie, export en contrastcontrole.
+
 - **Sterkte van de citaatwaas (#2853).** Een schuifregelaar van 0–100% vult de bestaande waasschakelaar aan. De standaard blijft 52%; de gekozen sterkte blijft behouden bij opslaan, dupliceren en samenwerken en werkt door in presentatie en export.
 
 - **Instelbare waas bij citaten (#2850).** De waas over een citaatafbeelding staat standaard aan en kan in de editor worden uitgezet. De keuze blijft bewaard bij opslaan en geldt ook voor presentatie en export.
