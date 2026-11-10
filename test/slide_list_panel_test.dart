@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/services.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
@@ -270,7 +271,8 @@ void main() {
       reason: 'focused slide should be visible',
     );
     final rect = tester.getRect(thumb(14));
-    expect(rect.top, lessThan(200), reason: 'focused slide should be near top');
+    expect(rect.top, greaterThanOrEqualTo(0));
+    expect(rect.bottom, lessThanOrEqualTo(600));
   });
 
   testWidgets('deleting a slide below the selection keeps it in view', (
@@ -329,6 +331,81 @@ void main() {
       reason: 'focused slide should stay in view',
     );
     final rect = tester.getRect(thumb(14));
-    expect(rect.top, lessThan(200), reason: 'focused slide should be near top');
+    expect(rect.top, greaterThanOrEqualTo(0));
+    expect(rect.bottom, lessThanOrEqualTo(600));
   });
+
+  for (final keyboard in [false, true]) {
+    testWidgets(
+      'deleting via ${keyboard ? 'keyboard' : 'thumbnail'} preserves overview position',
+      (tester) async {
+        final container = ProviderContainer();
+        addTearDown(container.dispose);
+        final deck = container.read(deckProvider.notifier)..newDeck('Test');
+        for (var i = 0; i < 29; i++) {
+          deck.addSlide(SlideType.bullets);
+        }
+        await tester.pumpWidget(
+          UncontrolledProviderScope(
+            container: container,
+            child: MaterialApp(
+              theme: AppTheme.light,
+              home: const Scaffold(
+                body: SizedBox(
+                  width: 320,
+                  child: SlideListPanel(railWidth: 320),
+                ),
+              ),
+            ),
+          ),
+        );
+        container.read(editorProvider.notifier).select(15);
+        for (var i = 0; i < 4; i++) {
+          await tester.pump();
+        }
+        await tester.pump(const Duration(milliseconds: 200));
+        Finder thumb(int index) => find.byWidgetPredicate(
+          (w) => w is SlideThumbnail && w.index == index,
+        );
+        // Engage the rail for Delete without selecting a different slide.
+        final gesture = await tester.startGesture(tester.getCenter(thumb(15)));
+        await gesture.cancel();
+        // Leave the selected slide and its predecessor visible together.
+        final controller = tester
+            .widget<ReorderableListView>(find.byType(ReorderableListView))
+            .scrollController!;
+        controller.jumpTo(controller.offset - 250);
+        await tester.pump();
+        final before = controller.offset;
+        final previousId = container.read(deckProvider).deck!.slides[14].id;
+        for (var deletion = 0; deletion < 2; deletion++) {
+          final index = container.read(editorProvider).selectedIndex;
+          if (keyboard) {
+            await tester.sendKeyEvent(LogicalKeyboardKey.delete);
+          } else {
+            tester.widget<SlideThumbnail>(thumb(index)).onDelete();
+          }
+          await tester.pump();
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 200));
+          expect(container.read(editorProvider).selectedIndex, 14 - deletion);
+          if (deletion == 0) {
+            expect(controller.offset, closeTo(before, 1));
+          }
+          final selected = tester.getRect(thumb(14 - deletion));
+          expect(selected.top, greaterThanOrEqualTo(0));
+          expect(selected.bottom, lessThanOrEqualTo(600));
+        }
+        expect(
+          container
+              .read(deckProvider)
+              .deck!
+              .slides
+              .any((s) => s.id == previousId),
+          isFalse,
+        );
+        expect(tester.takeException(), isNull);
+      },
+    );
+  }
 }
