@@ -8,6 +8,9 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.8] — 2026-11-10
+
+
 ### Removed
 
 - **MIAUW-rapportage uit OciDeck (#2845).** De module Informatieveiligheid, de bijbehorende rapportdocumenten, compliance-analyse, CVE-opzoekingen, bulkdownloads en CWE-dataset zijn verwijderd. Eerder gedownloade CVE-data en instellingen worden opgeruimd. Bestaande gebruikerspresentaties en sidecars blijven leesbaar.
