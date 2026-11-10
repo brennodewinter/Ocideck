@@ -1255,7 +1255,6 @@ const _dutchSourceEt = {
       'Täidab kogu slaidi ja kärbib servi',
   'Afbeelding paneelvullend': 'Pilt täidab paneeli',
   'Vult het paneel en snijdt de randen bij': 'Täidab paneeli ja kärbib servi',
-  'Afbeeldingen paneelvullend': 'Pildid täidavad oma paneelid',
   'Vult elk paneel en snijdt de randen bij':
       'Täidab iga paneeli ja kärbib servi',
   'Vullen (bijsnijden)': 'Täida (kärbi)',
@@ -1529,6 +1528,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Eigen verdeling': 'Kohandatud jaotus',
+  'Gelijke hoogte': 'Sama kõrgus',
+  'Panelen vullen': 'Täida paneelid',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Jaota laius ise; iga pilt mahub oma paneeli',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Mõlemad pildid on sama kõrged ja täielikult nähtavad — jagamine ja kärpimine ei tee midagi',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Täidab iga paneeli ja lõikab servi; ‘Kohanda pilti’ valib fookuspunkti',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Kärpimine ei tee režiimis Sama kõrgus midagi — vali esmalt teine vaade',
   'Afbeeldingsgroep': 'Pildigrupp',
   'Stapel': 'Hunnik',
   'Afbeelding toevoegen': 'Lisa pilt',

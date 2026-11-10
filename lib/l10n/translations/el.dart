@@ -1278,7 +1278,6 @@ const _dutchSourceEl = {
   'Afbeelding paneelvullend': 'Η εικόνα γεμίζει το πάνελ',
   'Vult het paneel en snijdt de randen bij':
       'Γεμίζει το πάνελ και περικόπτει τις άκρες',
-  'Afbeeldingen paneelvullend': 'Οι εικόνες γεμίζουν τα πάνελ τους',
   'Vult elk paneel en snijdt de randen bij':
       'Γεμίζει κάθε πάνελ και περικόπτει τις άκρες',
   'Vullen (bijsnijden)': 'Γέμισμα (περικοπή)',
@@ -1560,6 +1559,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Eigen verdeling': 'Προσαρμοσμένη κατανομή',
+  'Gelijke hoogte': 'Ίδιο ύψος',
+  'Panelen vullen': 'Γέμισμα πλαισίων',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Κατανείμετε το πλάτος μόνοι σας· κάθε εικόνα χωρά στο πλαίσιό της',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Και οι δύο εικόνες έχουν ίδιο ύψος και είναι πλήρως ορατές — η κατανομή και η περικοπή δεν κάνουν τίποτα',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Γεμίζει κάθε πλαίσιο και κόβει τις άκρες· ‘Προσαρμογή εικόνας’ επιλέγει το σημείο εστίασης',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Η περικοπή δεν κάνει τίποτα στο Ίδιο ύψος — επιλέξτε πρώτα άλλη προβολή',
   'Afbeeldingsgroep': 'Ομάδα εικόνων',
   'Stapel': 'Στοίβα',
   'Afbeelding toevoegen': 'Προσθήκη εικόνας',

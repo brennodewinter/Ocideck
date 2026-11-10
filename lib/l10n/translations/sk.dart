@@ -1265,7 +1265,6 @@ const _dutchSourceSk = {
       'Vyplní celú snímku a oreže okraje',
   'Afbeelding paneelvullend': 'Obrázok vyplní panel',
   'Vult het paneel en snijdt de randen bij': 'Vyplní panel a oreže okraje',
-  'Afbeeldingen paneelvullend': 'Obrázky vyplnia svoje panely',
   'Vult elk paneel en snijdt de randen bij':
       'Vyplní každý panel a oreže okraje',
   'Vullen (bijsnijden)': 'Vyplniť (orezať)',
@@ -1540,6 +1539,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Eigen verdeling': 'Vlastné rozdelenie',
+  'Gelijke hoogte': 'Rovnaká výška',
+  'Panelen vullen': 'Vyplniť panely',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Rozdeľte šírku sami; každý obrázok sa zmestí do svojho panela',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Oba obrázky sú rovnako vysoké a úplne viditeľné — rozdelenie a orezanie neurobia nič',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Vyplní každý panel a oreže okraje; ‘Upraviť obrázok’ vyberie bod zaostrenia',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Orezanie neurobí nič v režime Rovnaká výška — najprv vyberte iné zobrazenie',
   'Afbeeldingsgroep': 'Skupina obrázkov',
   'Stapel': 'Kopa',
   'Afbeelding toevoegen': 'Pridať obrázok',
