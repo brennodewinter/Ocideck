@@ -1535,6 +1535,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Onderstrepen': 'Understruket',
   'Eigen verdeling': 'Egen fördelning',
   'Gelijke hoogte': 'Samma höjd',
   'Panelen vullen': 'Fyll paneler',

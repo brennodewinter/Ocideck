@@ -1542,6 +1542,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Onderstrepen': 'Pabraukta',
   'Eigen verdeling': 'Pasirinktinis padalijimas',
   'Gelijke hoogte': 'Vienodas aukštis',
   'Panelen vullen': 'Užpildyti skydelius',

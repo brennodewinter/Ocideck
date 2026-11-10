@@ -612,6 +612,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Onderstrepen': 'Sutrayá',
   'Eigen verdeling': 'Divishon personalisá',
   'Gelijke hoogte': 'Altura igual',
   'Panelen vullen': 'Yena panelnan',

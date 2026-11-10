@@ -1550,6 +1550,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Onderstrepen': 'Subliniat',
   'Eigen verdeling': 'Împărțire personalizată',
   'Gelijke hoogte': 'Înălțime egală',
   'Panelen vullen': 'Umple panourile',

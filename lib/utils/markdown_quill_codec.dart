@@ -6,6 +6,7 @@ import '../services/form_document_blocks.dart';
 import '../services/pentest_blocks.dart';
 import 'footnote_embed_syntax.dart';
 import 'form_block_embed_syntax.dart';
+import 'underline_tag_syntax.dart';
 import 'image_embed_syntax.dart';
 import 'list_block_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
@@ -88,11 +89,21 @@ class MarkdownQuillCodec {
     // link-regel zou er anders overheen lopen. `![alt](bron)` staat er om
     // dezelfde reden: de standaardweg maakt er een `image`-embed van die alleen
     // de bron draagt — geen alt-tekst meer, en geen bouwer om hem te tekenen.
-    inlineSyntaxes: [FootnoteRefSyntax(), MarkdownImageSyntax()],
+    // `UnderlineTagSyntax` maakt van `<u>…</u>` (#2866) een element dat de
+    // codec op het underline-attribuut kan zetten — zonder hem bleef de
+    // onderstreping letterlijke tekst in de visuele editor.
+    inlineSyntaxes: [
+      FootnoteRefSyntax(),
+      MarkdownImageSyntax(),
+      UnderlineTagSyntax(),
+    ],
   );
 
   static final _mdToDelta = MarkdownToDelta(
     markdownDocument: _mdDocument,
+    customElementToInlineAttribute: {
+      'u': (_) => [Attribute.underline],
+    },
     customElementToEmbeddable: {
       EmbeddableTimelineTable.timelineType:
           EmbeddableTimelineTable.fromMdSyntax,
@@ -132,6 +143,21 @@ class MarkdownQuillCodec {
           EmbeddableSourceFragment.toMdSyntax,
     },
     customTextAttrsHandlers: {
+      // `underline` krijgt de <u>-conventie mee terug (#2866): het
+      // standaardpad van DeltaToMarkdown zou niets schrijven en de
+      // onderstreping ging bij elke heen-terugreis verloren.
+      Attribute.underline.key: CustomAttributeHandler(
+        beforeContent: (attribute, node, output) {
+          if (!_nodeHasAttr(node.previous, attribute.key)) {
+            output.write('<u>');
+          }
+        },
+        afterContent: (attribute, node, output) {
+          if (!_nodeHasAttr(node.next, attribute.key)) {
+            output.write('</u>');
+          }
+        },
+      ),
       Attribute.italic.key: CustomAttributeHandler(
         beforeContent: (attribute, node, output) {
           if (!_nodeHasAttr(node.previous, attribute.key)) {

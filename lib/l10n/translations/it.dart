@@ -611,6 +611,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Onderstrepen': 'Sottolineato',
   'Eigen verdeling': 'Suddivisione personalizzata',
   'Gelijke hoogte': 'Altezza uguale',
   'Panelen vullen': 'Riempi pannelli',

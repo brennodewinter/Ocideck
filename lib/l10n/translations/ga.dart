@@ -1564,6 +1564,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Onderstrepen': 'Folíne',
   'Eigen verdeling': 'Roinn saincheaptha',
   'Gelijke hoogte': 'Airde chomhionann',
   'Panelen vullen': 'Líon na painéil',

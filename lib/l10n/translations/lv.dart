@@ -1532,6 +1532,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Onderstrepen': 'Pasvītrots',
   'Eigen verdeling': 'Pielāgots sadalījums',
   'Gelijke hoogte': 'Vienāds augstums',
   'Panelen vullen': 'Aizpildīt paneļus',

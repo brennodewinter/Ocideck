@@ -1555,6 +1555,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Onderstrepen': 'Подчертано',
   'Eigen verdeling': 'Собствено разпределение',
   'Gelijke hoogte': 'Еднаква височина',
   'Panelen vullen': 'Запълване на панелите',

@@ -1539,6 +1539,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Onderstrepen': 'Podčiarknuté',
   'Eigen verdeling': 'Vlastné rozdelenie',
   'Gelijke hoogte': 'Rovnaká výška',
   'Panelen vullen': 'Vyplniť panely',

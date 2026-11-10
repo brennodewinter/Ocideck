@@ -767,6 +767,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Onderstrepen': 'Underline',
   'Eigen verdeling': 'Custom split',
   'Gelijke hoogte': 'Equal height',
   'Panelen vullen': 'Fill panels',

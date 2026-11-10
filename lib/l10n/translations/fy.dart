@@ -613,6 +613,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Onderstrepen': 'Understreept',
   'Eigen verdeling': 'Eigen ferdieling',
   'Gelijke hoogte': 'Lyke hichte',
   'Panelen vullen': 'Panelen folmeije',

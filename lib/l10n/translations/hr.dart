@@ -1540,6 +1540,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Onderstrepen': 'Podcrtano',
   'Eigen verdeling': 'Vlastita podjela',
   'Gelijke hoogte': 'Jednaka visina',
   'Panelen vullen': 'Ispuni ploče',

@@ -1536,6 +1536,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Onderstrepen': 'Podčrtano',
   'Eigen verdeling': 'Lastna razdelitev',
   'Gelijke hoogte': 'Enaka višina',
   'Panelen vullen': 'Zapolni plošče',

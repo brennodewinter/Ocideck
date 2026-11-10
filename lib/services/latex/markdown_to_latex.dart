@@ -19,6 +19,7 @@ import 'package:markdown/markdown.dart' as md;
 import '../../models/settings.dart' show TableBorderStyle, ThemeProfile;
 import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
+import '../../utils/underline_tag_syntax.dart';
 import '../document_footnote_setup.dart';
 import '../document_timeline.dart';
 
@@ -83,6 +84,9 @@ String markdownToLatex(
   final document = md.Document(
     encodeHtml: false,
     extensionSet: md.ExtensionSet.gitHubFlavored,
+    // `<u>…</u>` (#2866) als element, net als in de visuele codec — de
+    // visitor schrijft er \uline{…} voor weg.
+    inlineSyntaxes: [UnderlineTagSyntax()],
   );
   final nodes = document.parse(protected.text);
   final visitor = _LatexNodeVisitor(
@@ -175,6 +179,9 @@ String markdownInlineToLatex(String markdown) {
   final document = md.Document(
     encodeHtml: false,
     extensionSet: md.ExtensionSet.gitHubFlavored,
+    // `<u>…</u>` (#2866) als element, net als in de visuele codec — de
+    // visitor schrijft er \uline{…} voor weg.
+    inlineSyntaxes: [UnderlineTagSyntax()],
   );
   final nodes = document.parseInline(protected.text);
   final visitor = _LatexNodeVisitor(mathBlocks: protected.blocks);
@@ -356,6 +363,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
       case 's':
         _buf.write('\\sout{');
         _stack.add(_Ctx.inline);
+      case 'u':
+        _buf.write('\\uline{');
+        _stack.add(_Ctx.inline);
 
       // ── Links en afbeeldingen ──
       case 'a':
@@ -528,6 +538,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
       case 'i':
       case 'del':
       case 's':
+      case 'u':
         _buf.write('}');
       case 'a':
         if (ctx == _Ctx.link) _buf.write('}');

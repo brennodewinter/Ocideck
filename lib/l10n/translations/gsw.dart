@@ -1536,6 +1536,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Onderstrepen': 'Understriche',
   'Eigen verdeling': 'Eigeni Ufteilig',
   'Gelijke hoogte': 'Glichi Höchi',
   'Panelen vullen': 'Panels fülle',

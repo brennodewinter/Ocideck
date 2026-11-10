@@ -613,6 +613,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Onderstrepen': 'Souligné',
   'Eigen verdeling': 'Répartition personnalisée',
   'Gelijke hoogte': 'Hauteur égale',
   'Panelen vullen': 'Remplir les panneaux',

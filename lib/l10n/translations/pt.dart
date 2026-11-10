@@ -1561,6 +1561,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Onderstrepen': 'Sublinhado',
   'Eigen verdeling': 'Divisão personalizada',
   'Gelijke hoogte': 'Altura igual',
   'Panelen vullen': 'Preencher painéis',

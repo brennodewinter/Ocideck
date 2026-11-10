@@ -1536,6 +1536,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Onderstrepen': 'Understreget',
   'Eigen verdeling': 'Egen fordeling',
   'Gelijke hoogte': 'Samme højde',
   'Panelen vullen': 'Fyld paneler',

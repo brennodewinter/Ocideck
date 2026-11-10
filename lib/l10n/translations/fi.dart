@@ -1536,6 +1536,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Onderstrepen': 'Alleviivaus',
   'Eigen verdeling': 'Mukautettu jako',
   'Gelijke hoogte': 'Sama korkeus',
   'Panelen vullen': 'Täytä paneelit',
