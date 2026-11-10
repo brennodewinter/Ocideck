@@ -10,6 +10,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/asset_staging.dart';
 import 'package:ocideck/widgets/safe_svg_image.dart';
+import 'package:ocideck/widgets/slides/previews/retrying_image.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 import 'package:path/path.dart' as p;
 
@@ -19,6 +20,21 @@ Future<File> _writeSolidPng(String dir, String name, Color color) async {
   canvas.drawRect(const Rect.fromLTWH(0, 0, 8, 8), Paint()..color = color);
   final picture = recorder.endRecording();
   final img = await picture.toImage(8, 8);
+  final data = await img.toByteData(format: ui.ImageByteFormat.png);
+  final file = File('$dir/$name');
+  file.writeAsBytesSync(data!.buffer.asUint8List());
+  return file;
+}
+
+Future<File> _writeSizedPng(String dir, String name, int w, int h) async {
+  final recorder = ui.PictureRecorder();
+  final canvas = Canvas(recorder);
+  canvas.drawRect(
+    Rect.fromLTWH(0, 0, w.toDouble(), h.toDouble()),
+    Paint()..color = const Color(0xFF3366CC),
+  );
+  final picture = recorder.endRecording();
+  final img = await picture.toImage(w, h);
   final data = await img.toByteData(format: ui.ImageByteFormat.png);
   final file = File('$dir/$name');
   file.writeAsBytesSync(data!.buffer.asUint8List());
@@ -425,6 +441,49 @@ void main() {
       );
 
       dir.deleteSync(recursive: true);
+    });
+  });
+
+  // #2867 — 'Gelijke hoogte': twee beelden met verschillende bronverhoudingen
+  // staan op exact dezelfde zichtbare hoogte; hun breedtes volgen de
+  // verhoudingen, niet de paneelverdeling.
+  testWidgets('equal-height twoImages lays both images at one height', (
+    tester,
+  ) async {
+    await tester.runAsync(() async {
+      final dir = Directory.systemTemp.createTempSync('ocideck_two_eq');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      // 16×8 landschap (2:1) naast 8×16 portret (1:2).
+      await _writeSizedPng(dir.path, 'breed.png', 16, 8);
+      await _writeSizedPng(dir.path, 'smal.png', 8, 16);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 800,
+              height: 450,
+              child: SlidePreviewWidget(
+                slide: Slide.create(SlideType.twoImages).copyWith(
+                  imagePath: 'breed.png',
+                  imagePath2: 'smal.png',
+                  twoImagesLayout: TwoImagesLayout.equalHeight,
+                ),
+                projectPath: dir.path,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final finder = find.byType(RetryingImage);
+      expect(finder, findsNWidgets(2));
+      final first = tester.getSize(finder.at(0));
+      final second = tester.getSize(finder.at(1));
+      // De breedverhouding 2:1 ↔ 1:2 ligt vier keer zo ver uit elkaar.
+      expect(first.height, closeTo(second.height, 0.5));
+      expect(first.width, closeTo(second.width * 4, 1));
     });
   });
 }

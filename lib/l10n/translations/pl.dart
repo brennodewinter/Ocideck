@@ -1269,7 +1269,6 @@ const _dutchSourcePl = {
   'Afbeelding paneelvullend': 'Obraz wypełnia panel',
   'Vult het paneel en snijdt de randen bij':
       'Wypełnia panel i przycina krawędzie',
-  'Afbeeldingen paneelvullend': 'Obrazy wypełniają swoje panele',
   'Vult elk paneel en snijdt de randen bij':
       'Wypełnia każdy panel i przycina krawędzie',
   'Vullen (bijsnijden)': 'Wypełnij (przytnij)',
@@ -1547,6 +1546,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Onderstrepen': 'Podkreślenie',
+  'Eigen verdeling': 'Własny podział',
+  'Gelijke hoogte': 'Równa wysokość',
+  'Panelen vullen': 'Wypełnij panele',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Rozdziel szerokość samodzielnie; każdy obraz mieści się w swoim panelu',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Oba obrazy mają równą wysokość i są w pełni widoczne — dzielenie i przycinanie nic nie robią',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Wypełnia każdy panel i przycina krawędzie; ‘Dostosuj obraz’ wybiera punkt ostrości',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Przycinanie nic nie robi w trybie Równa wysokość — najpierw wybierz inny widok',
   'Afbeeldingsgroep': 'Grupa obrazów',
   'Stapel': 'Stos',
   'Afbeelding toevoegen': 'Dodaj obraz',

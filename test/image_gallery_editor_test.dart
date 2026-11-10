@@ -57,6 +57,9 @@ void main() {
   testWidgets('toont titel, beeldrijen met alt-veld en de toevoegknop', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(1400, 2000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
     await tester.pumpWidget(
       _host(ImageGalleryEditor(slide: gallery(), onUpdate: (_) {})),
     );
@@ -130,6 +133,9 @@ void main() {
     tester,
   ) async {
     Slide? emitted;
+    tester.view.physicalSize = const Size(1400, 2000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
     await tester.pumpWidget(
       _host(
         ImageGalleryEditor(slide: gallery(), onUpdate: (s) => emitted = s),

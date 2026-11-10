@@ -303,5 +303,11 @@ void main() {
       expect(out, contains(r'\textbf{vet}'));
       expect(out, contains('tekst'));
     });
+
+    test('<u>onderstreept</u> wordt \\uline{#2866}', () {
+      final out = markdownInlineToLatex('een <u>onderstreept</u> deel');
+      expect(out, contains(r'\uline{onderstreept}'));
+      expect(out, isNot(contains('<u>')));
+    });
   });
 }

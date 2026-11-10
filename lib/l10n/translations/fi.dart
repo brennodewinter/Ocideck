@@ -1264,7 +1264,6 @@ const _dutchSourceFi = {
       'Täyttää koko dian ja rajaa reunat',
   'Afbeelding paneelvullend': 'Kuva täyttää paneelin',
   'Vult het paneel en snijdt de randen bij': 'Täyttää paneelin ja rajaa reunat',
-  'Afbeeldingen paneelvullend': 'Kuvat täyttävät paneelinsa',
   'Vult elk paneel en snijdt de randen bij':
       'Täyttää jokaisen paneelin ja rajaa reunat',
   'Vullen (bijsnijden)': 'Täyttää (rajaa)',
@@ -1537,6 +1536,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Onderstrepen': 'Alleviivaus',
+  'Eigen verdeling': 'Mukautettu jako',
+  'Gelijke hoogte': 'Sama korkeus',
+  'Panelen vullen': 'Täytä paneelit',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Jaa leveys itse; jokainen kuva mahtuu paneeliinsa',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Molemmat kuvat ovat yhtä korkeita ja täysin näkyvissä — jakaminen ja rajaus eivät tee mitään',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Täyttää jokaisen paneelin ja rajaa reunat; ‘Säädä kuva’ valitsee tarkennuspisteen',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Rajaus ei tee mitään tilassa Sama korkeus — valitse ensin toinen näkymä',
   'Afbeeldingsgroep': 'Kuvaryhmä',
   'Stapel': 'Pino',
   'Afbeelding toevoegen': 'Lisää kuva',

@@ -28,6 +28,7 @@ class InlineRun {
   final bool italic;
   final bool code;
   final bool strike;
+  final bool underline;
   final bool math;
   final bool footnote;
   final String? link;
@@ -38,6 +39,7 @@ class InlineRun {
     this.italic = false,
     this.code = false,
     this.strike = false,
+    this.underline = false,
     this.math = false,
     this.footnote = false,
     this.link,
@@ -48,6 +50,7 @@ class InlineRun {
     bool? italic,
     bool? code,
     bool? strike,
+    bool? underline,
     bool? math,
     bool? footnote,
     String? link,
@@ -58,6 +61,7 @@ class InlineRun {
       italic: italic ?? this.italic,
       code: code ?? this.code,
       strike: strike ?? this.strike,
+      underline: underline ?? this.underline,
       footnote: footnote ?? this.footnote,
       math: math ?? this.math,
       link: link ?? this.link,
@@ -72,6 +76,12 @@ const _markers = r'*_~`[]()\$';
 /// (`<br clear="all">`) tellen mee. Andere tags blijven letterlijke tekst; een
 /// bredere HTML-parser zou meer wegsnoepen dan Marp belooft (#2274).
 final _brTag = RegExp(r'<br(\s[^>]*)?/?>', caseSensitive: false);
+
+/// De enige tweede inline-HTML-conventie: `<u>tekst</u>` voor onderstrepen
+/// (#2866). Geen willekeurige HTML — alleen dit paar, net zo bewust begrensd
+/// als `<br>` hierboven. `__tekst__` blijft vet en wordt dat niet.
+final _uOpen = RegExp(r'<u>', caseSensitive: false);
+final _uClose = RegExp(r'</u>', caseSensitive: false);
 
 bool _isEscapedPunctuation(String c) =>
     c.length == 1 && markdownEscapedPunctuation.contains(c);
@@ -100,6 +110,7 @@ List<InlineRun> parseInlineRuns(String text, {bool footnotes = false}) {
         merged.last.italic == r.italic &&
         merged.last.code == r.code &&
         merged.last.strike == r.strike &&
+        merged.last.underline == r.underline &&
         merged.last.link == r.link) {
       final prev = merged.removeLast();
       merged.add(
@@ -109,6 +120,7 @@ List<InlineRun> parseInlineRuns(String text, {bool footnotes = false}) {
           italic: prev.italic,
           code: prev.code,
           strike: prev.strike,
+          underline: prev.underline,
           link: prev.link,
         ),
       );
@@ -138,7 +150,11 @@ bool _hasMarker(String s) {
     if (s[i] == r'\' && i + 1 < s.length && _isEscapedPunctuation(s[i + 1])) {
       return true;
     }
-    if (s[i] == '<' && _brTag.matchAsPrefix(s, i) != null) return true;
+    if (s[i] == '<' &&
+        (_brTag.matchAsPrefix(s, i) != null ||
+            _uOpen.matchAsPrefix(s, i) != null)) {
+      return true;
+    }
   }
   return false;
 }
@@ -243,6 +259,22 @@ void _parseInto(
         buf.write('\n');
         i = br.end;
         continue;
+      }
+      // `<u>…</u>` — onderstrepen (#2866). Alleen een afgesloten paar telt;
+      // een losse `<u>` of `</u>` blijft letterlijke tekst.
+      if (_uOpen.matchAsPrefix(s, i) != null) {
+        final close = s.indexOf(_uClose, i + 3);
+        if (close > i + 3) {
+          flush();
+          _parseInto(
+            s.substring(i + 3, close),
+            ctx._with(underline: true),
+            out,
+            footnotes: footnotes,
+          );
+          i = close + 4;
+          continue;
+        }
       }
     }
 
@@ -406,6 +438,7 @@ extension on InlineRun {
     italic: italic,
     code: code,
     strike: strike,
+    underline: underline,
     math: math,
     footnote: footnote,
     link: link,
@@ -442,6 +475,15 @@ TextStyle inlineRunStyle(
         if (style.decoration != null && style.decoration != TextDecoration.none)
           style.decoration!,
         TextDecoration.lineThrough,
+      ]),
+    );
+  }
+  if (run.underline) {
+    style = style.copyWith(
+      decoration: TextDecoration.combine([
+        if (style.decoration != null && style.decoration != TextDecoration.none)
+          style.decoration!,
+        TextDecoration.underline,
       ]),
     );
   }

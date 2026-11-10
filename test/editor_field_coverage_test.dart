@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
+import 'package:ocideck/widgets/editors/editor_text_controller.dart';
 
 /// Coverage for the reusable editor building blocks in `_editor_field.dart`:
 /// [EditorField], [EditorFieldList], [editorScrollList], [ImageZoomControl] and
@@ -261,6 +262,89 @@ void main() {
       reportImageImportFailure(ctx, null);
       await tester.pump();
       expect(find.byType(SnackBar), findsNothing);
+    });
+
+    group('titel-opmaakbalk (#2866)', () {
+      testWidgets(
+        'titelveld toont de vier inline-knoppen, andere velden niet',
+        (tester) async {
+          final title = EditorTextController(
+            text: 'Hallo wereld',
+            searchFieldId: 'title',
+          );
+          final other = EditorTextController(
+            text: 'Ondertitel',
+            searchFieldId: 'subtitle',
+          );
+          addTearDown(title.dispose);
+          addTearDown(other.dispose);
+          await tester.pumpWidget(
+            _scoped(
+              Column(
+                children: [
+                  EditorField(label: 'Titel', controller: title),
+                  EditorField(label: 'Subtitel', controller: other),
+                ],
+              ),
+            ),
+          );
+          await tester.pump();
+          expect(find.byIcon(Icons.format_bold), findsOneWidget);
+          expect(find.byIcon(Icons.format_italic), findsOneWidget);
+          expect(find.byIcon(Icons.format_strikethrough), findsOneWidget);
+          expect(find.byIcon(Icons.format_underlined), findsOneWidget);
+          expect(find.byIcon(Icons.format_list_bulleted), findsNothing);
+        },
+      );
+
+      testWidgets('vet-knop omhult de selectie en houdt hem geselecteerd', (
+        tester,
+      ) async {
+        final controller = EditorTextController(
+          text: 'dat staat volgende maand op het programma',
+          searchFieldId: 'title',
+        );
+        addTearDown(controller.dispose);
+        controller.selection = const TextSelection(
+          baseOffset: 10,
+          extentOffset: 24,
+        );
+        await tester.pumpWidget(
+          _scoped(EditorField(label: 'Titel', controller: controller)),
+        );
+        await tester.pump();
+        await tester.tap(find.byIcon(Icons.format_bold));
+        await tester.pump();
+        expect(
+          controller.text,
+          'dat staat **volgende maand** op het programma',
+        );
+        expect(
+          controller.selection.textInside(controller.text),
+          'volgende maand',
+        );
+      });
+
+      testWidgets('onderstrepen-knop schrijft de <u>-conventie', (
+        tester,
+      ) async {
+        final controller = EditorTextController(
+          text: 'belangrijk stuk',
+          searchFieldId: 'title',
+        );
+        addTearDown(controller.dispose);
+        controller.selection = const TextSelection(
+          baseOffset: 0,
+          extentOffset: 10,
+        );
+        await tester.pumpWidget(
+          _scoped(EditorField(label: 'Titel', controller: controller)),
+        );
+        await tester.pump();
+        await tester.tap(find.byIcon(Icons.format_underlined));
+        await tester.pump();
+        expect(controller.text, '<u>belangrijk</u> stuk');
+      });
     });
   });
 }

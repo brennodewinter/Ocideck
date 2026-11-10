@@ -42,6 +42,11 @@ html,body{margin:0;padding:0}
 .slide p,.slide li{font-size:24px;line-height:1.45}
 .slide pre.mermaid{background:transparent;border:0;text-align:center}
 .slide img{max-width:100%}
+/* #2867: 'Gelijke hoogte' op een twoImages-dia — de `![bg …]`-beelden staan
+   inline in dezelfde paragraaf; een vaste hoogte met automatische breedte
+   maakt ze even hoog zonder vervorming, en de max-breedte houdt een extreem
+   breed beeld binnen de dia. */
+.slide.two-eq-height img[alt^="bg"]{display:inline-block;height:520px;width:auto;max-width:48%;vertical-align:top}
 .slide .marp-header,.slide .marp-footer{position:absolute;left:48px;right:48px;z-index:2;font-size:16px;line-height:1.25}
 .slide .marp-header{top:18px}.slide .marp-footer{bottom:18px}
 .slide .marp-header p,.slide .marp-footer p{font-size:inherit;line-height:inherit;margin:0}

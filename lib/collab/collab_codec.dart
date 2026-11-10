@@ -240,6 +240,7 @@ Map<String, Object?> slideToJson(Slide s) => {
   'menuLayout': s.menuLayout.name,
   'galleryImages': s.galleryImages,
   'galleryLayout': s.galleryLayout.name,
+  'twoImagesLayout': s.twoImagesLayout.name,
   'tableColumnAlignments': s.tableColumnAlignments.map((e) => e.name).toList(),
   'tableNumberColumns': s.tableNumberColumns,
   'renderPage': s.renderPage,
@@ -373,6 +374,13 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
           _str(j, 'galleryLayout'),
           'galleryLayout',
         ),
+  twoImagesLayout: j['twoImagesLayout'] == null
+      ? TwoImagesLayout.panels
+      : _enumByName(
+          TwoImagesLayout.values,
+          _str(j, 'twoImagesLayout'),
+          'twoImagesLayout',
+        ),
   tableColumnAlignments: j['tableColumnAlignments'] == null
       ? const []
       : _enumList(j, 'tableColumnAlignments', TableAlign.values),
@@ -442,6 +450,7 @@ enum _ValueKind {
   titleColumnLayout,
   menuLayout,
   galleryLayout,
+  twoImagesLayout,
   tableAlignList,
   boolList,
   // De rijen van een tabel, als geneste lijst — #2749.
@@ -538,6 +547,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.menuLayout: _ValueKind.menuLayout,
   SlideField.galleryImages: _ValueKind.stringList,
   SlideField.galleryLayout: _ValueKind.galleryLayout,
+  SlideField.twoImagesLayout: _ValueKind.twoImagesLayout,
   SlideField.tableColumnAlignments: _ValueKind.tableAlignList,
   SlideField.tableNumberColumns: _ValueKind.boolList,
   SlideField.tableRows: _ValueKind.stringRows,
@@ -605,6 +615,7 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
     _ValueKind.titleColumnLayout => _need<TitleColumnLayout>(value).name,
     _ValueKind.menuLayout => _need<MenuLayout>(value).name,
     _ValueKind.galleryLayout => _need<GalleryLayout>(value).name,
+    _ValueKind.twoImagesLayout => _need<TwoImagesLayout>(value).name,
     _ValueKind.tableAlignList => _needEnumList<TableAlign>(
       value,
     ).map((e) => e.name).toList(),
@@ -666,6 +677,11 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
     ),
     _ValueKind.galleryLayout => _enumByName(
       GalleryLayout.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.twoImagesLayout => _enumByName(
+      TwoImagesLayout.values,
       _asString(json, where),
       where,
     ),

@@ -777,6 +777,50 @@ void main() {
       expect(out.imageCaption2, 'Rechts');
     });
 
+    test('twoImages keeps the equal-height layout choice (#2867)', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoImages).copyWith(
+          imagePath: 'images/a.png',
+          imagePath2: 'images/b.png',
+          imageSize: 60,
+          twoImagesLayout: TwoImagesLayout.equalHeight,
+        ),
+      );
+      expect(out.type, SlideType.twoImages);
+      expect(out.twoImagesLayout, TwoImagesLayout.equalHeight);
+      // De handmatige verdeling reist mee: terugschakelen herstelt hem.
+      expect(out.imageSize, 60);
+    });
+
+    test('twoImages without the directive stays panels, and writes none', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(
+              SlideType.twoImages,
+            ).copyWith(imagePath: 'images/a.png', imagePath2: 'images/b.png'),
+          ],
+        ),
+      );
+      expect(markdown.contains('ocideck_two_images_layout'), isFalse);
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.twoImagesLayout, TwoImagesLayout.panels);
+    });
+
+    test('an unknown two_images_layout value falls back to panels', () {
+      final service = MarkdownService();
+      final deck = service.parseDeck(
+        '---\nmarp: true\n---\n\n'
+        '![bg left:50%](images/a.png)\n'
+        '![bg right:50%](images/b.png)\n'
+        '<!-- ocideck_two_images_layout: diagonal -->\n',
+      );
+      expect(deck, isNotNull);
+      expect(deck!.slides.single.twoImagesLayout, TwoImagesLayout.panels);
+    });
+
     test('image slide keeps title, image and size', () {
       final out = _roundTrip(
         Slide.create(SlideType.image).copyWith(
