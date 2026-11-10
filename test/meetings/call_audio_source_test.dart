@@ -5,9 +5,12 @@ import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_participant.dart';
 
 void main() {
-  test('de capability volgt het bewezen platform, niet de binding-wens', () {
+  test('de capability volgt de gebouwde desktop- en webbinding', () {
     final fact = callAudioCaptureOfCurrentBinding();
-    if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
+    if (kIsWeb ||
+        defaultTargetPlatform == TargetPlatform.macOS ||
+        defaultTargetPlatform == TargetPlatform.windows ||
+        defaultTargetPlatform == TargetPlatform.linux) {
       // Darwin-sink en Web Audio zijn gebouwd — de claim bestaat.
       expect(fact.wholeCall, isTrue);
       expect(fact.denial, isNull);

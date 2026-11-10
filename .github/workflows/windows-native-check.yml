@@ -35,6 +35,7 @@ on:
       - 'pubspec.lock'
       - 'windows/**'
       - 'third_party/**'
+      - 'native/audio_tools/**'
       - '.tool-versions'
       - '.github/workflows/windows-native-check.yml'
   workflow_dispatch:

@@ -34,6 +34,24 @@ void main() {
   final releaseBody = File('.forgejo/release-body.md').readAsStringSync();
 
   group('the release workflow builds and ships the Linux packages', () {
+    test('sources accompany binaries before tar and package creation', () {
+      for (final workflow in [releaseYaml, preTagYaml]) {
+        expect(workflow, contains('scripts/linux_source_bundle.py stage'));
+        expect(
+          workflow.indexOf('scripts/linux_source_bundle.py stage'),
+          lessThan(workflow.indexOf('--transform "s,^bundle')),
+        );
+      }
+      expect(script, contains('linux_source_bundle.py" verify'));
+      expect(script, contains(r'flatpak_sources.py" "$root/files"'));
+      expect(script, isNot(contains('FLATPAK_SOURCE_DIR')));
+      expect(
+        releaseYaml,
+        contains(r'dist/ocideck-linux-sources-${{ env.VERSIE }}.tar.gz'),
+      );
+      expect(releaseYaml, contains(r'"ocideck-linux-sources-$VERSIE.tar.gz"'));
+    });
+
     test('the Linux job installs rpmbuild (via the rpm package)', () {
       // dpkg-deb is in the base system and appimagetool is fetched by the
       // script, but rpmbuild is not — the job must add it.

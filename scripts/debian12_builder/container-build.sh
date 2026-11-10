@@ -64,6 +64,7 @@ report="${destination}/BUILD-COMPATIBILITY.txt"
     | tail -n 20
 } > "${report}"
 
+python3 scripts/linux_source_bundle.py stage "$PWD" "$destination" /out "${version%%+*}"
 tar -C /out -czf "${destination}.tar.gz" "$(basename "${destination}")"
 
 echo

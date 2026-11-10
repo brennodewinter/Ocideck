@@ -150,6 +150,7 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
     if (gen != _initGen) return; // superseded while resolving
     final controller = createMediaController(path);
     try {
+      registerDesktopVideo();
       await controller.initialize();
       if (gen != _initGen) {
         await _stopAndDispose(controller);

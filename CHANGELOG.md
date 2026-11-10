@@ -49,6 +49,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Desktopmedia op Linux en Windows.** Video, ingesloten webvideo en offline
+  diagramweergave gebruiken de bijbehorende desktopbackends. De meegebouwde
+  audiohelper decodeert geluidsbestanden voor transcriptie; Linux-opname gebruikt
+  PulseAudio of de compatibele PipeWire-server zonder losse opnamecommando's.
+  Verwijderen op Windows gebruikt de systeemprullenbak.
+
 - **Alt-teksten uit Marp blijven bewaard.** Een afbeelding met een standaard
   Marp-alt-tekst (`![Kat met een sleutel](images/x.png)`) verloor die
   beschrijving stil bij de eerste opslag. OciDeck leest de Marp-alt nu in en
@@ -81,6 +87,12 @@ All notable changes to OciDeck are documented in this file.
   pakketinhoud oplevert.
 
 ### Changed
+
+- **Bronnen en licenties bij Linux-distributies.** Linux-pakketten en losse
+  bundels krijgen de bijbehorende project- en pakketbronnen, licenties,
+  bouwinstructies en bestandshashes. De release publiceert ook een afzonderlijk
+  bronarchief; de software-inventaris en consumentimages volgen de nieuwe
+  multimedia-afhankelijkheden.
 
 - Flutter 3.47.9 (Dart 3.13.7) en de oplosbare pakketten zijn bijgewerkt:
   `file_picker` 13.3.2, `pdfrx` 2.12.0 (met `pdfrx_engine` 0.9.1 en

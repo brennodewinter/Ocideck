@@ -187,7 +187,16 @@ static void my_application_activate(GApplication* application) {
   gdk_rgba_parse(&background_color, "#000000");
   fl_view_set_background_color(view, &background_color);
   gtk_widget_show(GTK_WIDGET(view));
-  gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(view));
+  // Keep the Flutter graphics surface in one parent for its entire lifetime.
+  // Native webviews are positioned in a sibling layer, prepared before realize.
+  GtkWidget* video_overlay = gtk_overlay_new();
+  GtkWidget* webview_layer = gtk_fixed_new();
+  gtk_container_add(GTK_CONTAINER(video_overlay), GTK_WIDGET(view));
+  gtk_overlay_add_overlay(GTK_OVERLAY(video_overlay), webview_layer);
+  gtk_widget_show(webview_layer);
+  gtk_widget_show(video_overlay);
+  g_object_set_data(G_OBJECT(window), "ocideck-webview-container", webview_layer);
+  gtk_container_add(GTK_CONTAINER(window), video_overlay);
 
   // Show the window when Flutter renders.
   // Requires the view to be realized so we can start rendering.

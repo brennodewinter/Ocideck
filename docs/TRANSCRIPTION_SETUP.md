@@ -87,7 +87,7 @@ opens, so a model you drop in later shows up without a restart.
 | Microphone | Proven — after the macOS prompt | Offered — OS privacy toggle decides | Offered — hardware presence decides, most setups have no OS prompt | Proven — per-site browser permission |
 | System / app audio | Offered — ScreenCaptureKit under *screen recording* consent (macOS 13+); DRM audio is excluded by the OS | Offered — WASAPI loopback records the endpoint mix, not one app | Offered — PipeWire/PulseAudio `.monitor` sources only; bare ALSA has none | Not offered as system audio |
 | Tab audio | — | — | — | Chromium only; Firefox and Safari are told honestly instead of given a button |
-| Call audio (Jitsi in-app) | Proven in a real two-person call | Not claimed — no proven per-source tap | Not claimed — no proven per-source tap | Proven in a real two-person call (Chromium-tested) |
+| Call audio (Jitsi in-app) | Proven in a real two-person call | Native per-track sink implemented; real release call not yet proven | Native per-track sink implemented; real release call not yet proven | Proven in a real two-person call (Chromium-tested) |
 | Local engine | Proven — measured on Apple Silicon | Built from the same pinned source — real-hardware proof pending | Built from the same pinned source — real-hardware proof pending | Proven — measured on the shipped WASM artifacts in Chrome, Firefox and WebKit |
 | Batch server route | Proven | Available — same egress route, hardware proof pending | Available — same egress route, hardware proof pending | Proven — subject to CORS |
 | Live server route | Proven against the pinned Vosk testbed | Available — same egress route, hardware proof pending | Available — same egress route, hardware proof pending | Available only without an API key — a browser WebSocket cannot carry the header |
@@ -235,3 +235,17 @@ dialog names it rather than pretending success:
 The staged seven-day folder is also the recovery path: a recording that
 outlived its dialog can still be transcribed or deleted from the staged
 list.
+
+## Native helper on Windows and Linux
+
+The build installs `ocideck-audio` beside OciDeck. File transcription uses
+Media Foundation on Windows and GStreamer on Linux. A separate FFmpeg install
+is no longer required; the legacy PATH route remains a fallback for developer
+builds without the helper. Windows N/KN still needs the Media Feature Pack;
+Linux still needs the declared GStreamer codecs and a working PulseAudio or
+PipeWire session. The Linux helper enumerates sources and reads PCM through
+libpulse directly, so `parecord` and `pactl` are no longer required.
+
+Integration tests use synthetic MP3/M4A/MP4 fixtures, a video without audio,
+and the production C++ call-audio sink. They prove those routes, not a real
+two-person call with physical devices on every operating system.

@@ -57,7 +57,11 @@ void main() {
 
   if (problems.isEmpty) {
     stdout.writeln(
-      '\nOK — all dependencies use recognised open-source licences.',
+      '\nOK — all resolved Dart/Flutter packages use recognised open-source licences.',
+    );
+    stdout.writeln(
+      'Scope: package LICENSE files only. This is not approval of native '
+      'libmpv/FFmpeg/WebKit builds, licence compatibility, or binary/source redistribution.',
     );
     stdout.writeln(
       'Bundled JS/font assets are listed in THIRD_PARTY_NOTICES.md '

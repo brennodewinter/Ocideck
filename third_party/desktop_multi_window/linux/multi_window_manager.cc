@@ -2,6 +2,7 @@
 // Original: desktop_multi_window (c) 2021 Mixin, Apache License 2.0 (see
 // ../LICENSE), commit 0c9aa50455106503cacfdb54ef1acfd217af2614.
 // Change: let GTK tear down the FlView with its window on destroy.
+// Change (2026-11-10): prepare a GTK overlay for native video without reparenting FlView.
 // Modification notice per Apache-2.0 section 4(b); see ../MODIFICATIONS.md.
 
 #include "multi_window_manager.h"
@@ -107,7 +108,16 @@ std::string MultiWindowManager::Create(FlValue* args) {
   // Create Flutter view
   auto fl_view = fl_view_new(project);
   gtk_widget_show(GTK_WIDGET(fl_view));
-  gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(fl_view));
+  // Keep the Flutter graphics surface in one parent for its entire lifetime.
+  // Native webviews are positioned in a sibling layer, prepared before realize.
+  GtkWidget* video_overlay = gtk_overlay_new();
+  GtkWidget* webview_layer = gtk_fixed_new();
+  gtk_container_add(GTK_CONTAINER(video_overlay), GTK_WIDGET(fl_view));
+  gtk_overlay_add_overlay(GTK_OVERLAY(video_overlay), webview_layer);
+  gtk_widget_show(webview_layer);
+  gtk_widget_show(video_overlay);
+  g_object_set_data(G_OBJECT(window), "ocideck-webview-container", webview_layer);
+  gtk_container_add(GTK_CONTAINER(window), video_overlay);
 
   // Issues from flutter/engine: https://github.com/flutter/engine/pull/40033
   // Prevent delete-event from flutter engine shell, which will quit the whole

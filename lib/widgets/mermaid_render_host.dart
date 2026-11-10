@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
+import 'package:webview_win_floating/webview_plugin.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../services/mermaid_render_service.dart';
 import '../utils/is_flutter_test.dart';
+import '../utils/log.dart';
 
 /// De widgetkant van [MermaidRenderService]: de verborgen WebView waarin de
 /// diagrammen worden getekend. Die woont hier en niet bij de dienst, zodat de
@@ -43,14 +47,27 @@ class _MermaidRenderHostState extends State<MermaidRenderHost> {
     super.initState();
     // Defer platform-view creation until after the first frame so we never
     // compete with engine/window startup (macOS multi-window + WebView).
-    WidgetsBinding.instance.addPostFrameCallback((_) => _initWebView());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_initWebView());
+    });
   }
 
-  void _initWebView() {
+  Future<void> _initWebView() async {
     if (!mounted || _controller != null) return;
-    final controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
+    final nativeOffscreen = WebViewPlatform.instance is WindowsWebViewPlatform;
+    final controller = WebViewController.fromPlatformCreationParams(
+      nativeOffscreen
+          ? const WindowsWebViewControllerCreationParams(
+              offscreen: true,
+              suspendDuringDeactive: false,
+            )
+          : const PlatformWebViewControllerCreationParams(),
+    );
+    setState(() => _controller = controller);
+    try {
+      await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+      if (!mounted) return;
+      await controller.setNavigationDelegate(
         NavigationDelegate(
           onNavigationRequest: (request) {
             if (!_initialLoadDone) {
@@ -59,11 +76,14 @@ class _MermaidRenderHostState extends State<MermaidRenderHost> {
             }
             return NavigationDecision.prevent;
           },
-          onHttpAuthRequest: (request) async {
-            // Deny auth prompts from the offline renderer.
-          },
+          onHttpAuthRequest: nativeOffscreen ? null : (request) async {},
         ),
       );
+    } catch (error, stack) {
+      // A missing native runtime must use the renderer's normal source fallback.
+      logError('MermaidRenderHost: native initialization failed', error, stack);
+    }
+    if (!mounted) return;
     // GEEN setBackgroundColor. Die stond hierboven in de cascade en gooide op
     // macOS `UnimplementedError: opaque is not implemented` — waarmee alles wat
     // erna kwam werd overgeslagen: de controller werd nooit toegekend,
@@ -75,14 +95,29 @@ class _MermaidRenderHostState extends State<MermaidRenderHost> {
     // niets — wat eruit komt is SVG-tekst — dus de achtergrondkleur was
     // decoratie zonder kijker. Een try/catch eromheen zou een tak opleveren die
     // op de meeste platforms nooit draait en dus stil kan rotten.
-    setState(() => _controller = controller);
     MermaidRenderService.instance.attachController(controller);
+  }
+
+  @override
+  void dispose() {
+    final controller = _controller;
+    if (controller != null) {
+      MermaidRenderService.instance.detachController(controller);
+      final platform = controller.platform;
+      if (platform is WindowsPlatformWebViewController) {
+        unawaited(platform.controller.dispose());
+      }
+    }
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final controller = _controller;
-    if (controller == null) return const SizedBox.shrink();
+    if (controller == null ||
+        controller.platform is WindowsPlatformWebViewController) {
+      return const SizedBox.shrink();
+    }
     return IgnorePointer(
       child: Offstage(
         offstage: true,

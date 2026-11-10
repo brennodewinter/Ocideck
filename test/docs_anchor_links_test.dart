@@ -47,6 +47,7 @@ void main() {
           // `worktrees/` met losse checkouts van agent-sessies: hun Markdown is
           // een andere werkkopie, geen inhoud van deze.
           const buiten = [
+            '.git', // Git metadata can contain cached notarisation app bundles.
             'build',
             '.dart_tool',
             'third_party',
@@ -54,6 +55,7 @@ void main() {
             'ephemeral',
             'Pods',
             '.claude',
+            'work', // Ignored local working documents are not shipped docs.
           ];
           return !p.split(rel).any(buiten.contains);
         })

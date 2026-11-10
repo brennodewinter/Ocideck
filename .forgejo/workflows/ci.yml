@@ -54,3 +54,6 @@ jobs:
       # `make check`, op de machine van de committer, vóór main.
       - name: De poort
         run: make check-no-coverage
+
+      - name: Linux-broncode- en authenticatiecontroles
+        run: python3 -m unittest discover -s test/python -v
