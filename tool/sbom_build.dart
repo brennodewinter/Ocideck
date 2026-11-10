@@ -45,6 +45,8 @@ const _groupLabels = <String, String>{
   'export-asset': 'Vendored export assets',
   'font': 'Bundled fonts',
   'native-runtime': 'Bundled native runtimes',
+  'system-runtime':
+      'External native runtime requirements (resolve per artifact)',
   'sdk': 'Build SDKs',
 };
 
@@ -84,6 +86,11 @@ const _validSpdxIds = <String>{
 /// API reports for `MixinNetwork/flutter-plugins` is the *root* LICENSE of the
 /// monorepo; the package directory carries its own, and that one governs.
 const _forkOrigins = <String, ({String vcs, String revision, String subdir})>{
+  'flutter_webrtc': (
+    vcs: 'https://pawprint.vigilis.online/LibreKAT/flutter_webrtc',
+    revision: 'b82f0db567e10aecd152c4039336d09e48f295a8',
+    subdir: '',
+  ),
   'desktop_multi_window': (
     vcs: 'https://github.com/MixinNetwork/flutter-plugins',
     revision: '0c9aa50455106503cacfdb54ef1acfd217af2614',
@@ -337,6 +344,7 @@ Inventory buildInventory() {
     ..._npmBundles(),
     ..._fonts(pubspec),
     ..._nativeRuntimes(),
+    ..._nativeMediaRequirements(),
     ..._sdks(pubspec),
   ];
 
@@ -462,7 +470,9 @@ List<SbomComponent> _dartPackages() {
     final desc = data['description'];
 
     final root = roots[name];
-    final license = root != null
+    final license = name == 'flutter_webrtc' && source == 'path'
+        ? 'MIT AND EUPL-1.2' // inherited MIT plus OciDeck's native capture files
+        : root != null
         ? licenseForPackage(name, root)
         : 'NOASSERTION';
 
@@ -470,6 +480,19 @@ List<SbomComponent> _dartPackages() {
     var edges = resolveEdges(facts?.dependencies, refByName);
     if (name == 'pdfium_dart') {
       edges = [...?edges, 'runtime:pdfium@chromium-7811'];
+    }
+    if (name == 'webview_win_floating') {
+      edges = [
+        ...?edges,
+        'runtime:webview2-loader@1.0.1418.22',
+        'runtime:wil@1.0.220914.1',
+      ];
+    }
+    if (name == 'media_kit' || name == 'media_kit_video') {
+      edges = [...?edges, 'system:libmpv'];
+    }
+    if (name == 'webview_win_floating') {
+      edges = [...?edges, 'system:webkitgtk'];
     }
     final fork = _forkOrigins[name];
     final gitDescription = source == 'git' && desc is YamlMap ? desc : null;
@@ -698,11 +721,92 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
   return out;
 }
 
+/// Requirements, not a claim that every platform ships these binaries. Distro
+/// builds differ: do not inherit the MIT/BSD licence of their Dart wrappers.
+List<SbomComponent> _nativeMediaRequirements() => [
+  for (final runtime in [
+    (
+      'libmpv',
+      'system:libmpv',
+      'https://github.com/mpv-player/mpv',
+      'Linux. Licence depends on build and linked libraries. Inspected Debian 12 libmpv2 0.35.1-4 declares GPL-3.0-or-later for its binaries. Resolve exact versions, licences and corresponding source per release artifact.',
+    ),
+    (
+      'FFmpeg',
+      'system:ffmpeg',
+      'https://ffmpeg.org/legal.html',
+      'Linux media dependency. LGPL/GPL status depends on configure flags and linked codecs. Do not label this runtime MIT or assume an LGPL-only build. Flatpak copied binaries require matching source and full notices.',
+    ),
+    (
+      'WebKitGTK',
+      'system:webkitgtk',
+      'https://webkit.org/licensing-webkit/',
+      'Linux webview runtime. Contains LGPL and BSD code. System-provided in native packages or supplied by the Flatpak GNOME runtime. Resolve exact runtime version and licence evidence per artifact.',
+    ),
+    (
+      'GStreamer',
+      'system:gstreamer',
+      'https://gstreamer.freedesktop.org/',
+      'Linux native audio helper and WebKit media dependency. Codec plugins and exact versions depend on the distro/runtime. Native packages declare base/good/libav; copied Flatpak plugins carry matching notices and source records.',
+    ),
+    (
+      'PulseAudio client libraries',
+      'system:libpulse',
+      'https://www.freedesktop.org/wiki/Software/PulseAudio/',
+      'Linux recording helper links libpulse and libpulse-simple, including on PipeWire through its PulseAudio compatibility server. Native packages require the system libraries; resolve exact build versions per artifact.',
+    ),
+  ])
+    SbomComponent(
+      ref: runtime.$2,
+      group: 'system-runtime',
+      type: 'library',
+      name: runtime.$1,
+      license: 'NOASSERTION',
+      downloadUrl: runtime.$3,
+      note: runtime.$4,
+    ),
+];
+
 /// Native code downloaded/bundled by resolved Flutter packages rather than
 /// represented as a package of its own. Keeping it separate prevents the MIT
 /// wrapper licence from hiding the runtime that actually parses untrusted PDFs.
 List<SbomComponent> _nativeRuntimes() => [
   ..._whisperRuntime(),
+  SbomComponent(
+    ref: 'runtime:webview2-loader@1.0.1418.22',
+    group: 'native-runtime',
+    type: 'library',
+    name: 'Microsoft Edge WebView2 loader',
+    version: '1.0.1418.22',
+    purl: 'pkg:nuget/Microsoft.Web.WebView2@1.0.1418.22',
+    sha256: '51d2ef56196e2a9d768a6843385bcb9c6baf9ed34b2603ddb074fb4995543a99',
+    license: 'BSD-3-Clause',
+    supplier: 'Microsoft Corporation',
+    supplierUrl: 'https://www.microsoft.com/',
+    downloadUrl:
+        'https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1418.22/microsoft.web.webview2.1.0.1418.22.nupkg',
+    dependsOn: [],
+    note:
+        'Windows-only SDK loader linked statically by webview_win_floating. SHA-256 identifies the NuGet SDK archive. The separately installed WebView2 Runtime is an OS prerequisite.',
+  ),
+  SbomComponent(
+    ref: 'runtime:wil@1.0.220914.1',
+    group: 'native-runtime',
+    type: 'library',
+    name: 'Windows Implementation Library',
+    version: '1.0.220914.1',
+    purl: 'pkg:nuget/Microsoft.Windows.ImplementationLibrary@1.0.220914.1',
+    sha256: 'b6b1d55bc8df309105cd7733fd200cccc678d703b61b31398a63a146a7148b09',
+    license: 'MIT',
+    supplier: 'Microsoft Corporation',
+    supplierUrl: 'https://www.microsoft.com/',
+    vcsUrl: 'https://github.com/microsoft/wil',
+    downloadUrl:
+        'https://api.nuget.org/v3-flatcontainer/microsoft.windows.implementationlibrary/1.0.220914.1/microsoft.windows.implementationlibrary.1.0.220914.1.nupkg',
+    dependsOn: [],
+    note:
+        'Windows-only C++ helper headers compiled into webview_win_floating. SHA-256 identifies the NuGet archive.',
+  ),
   SbomComponent(
     ref: 'runtime:pdfium@chromium-7811',
     group: 'native-runtime',

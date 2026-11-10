@@ -1285,7 +1285,6 @@ const _dutchSourceGa = {
   'Afbeelding paneelvullend': 'Líonann an íomhá an painéal',
   'Vult het paneel en snijdt de randen bij':
       'Líonann sé an painéal agus bearrann sé na himill',
-  'Afbeeldingen paneelvullend': 'Líonann na híomhánna a bpainéil',
   'Vult elk paneel en snijdt de randen bij':
       'Líonann sé gach painéal agus bearrann sé na himill',
   'Vullen (bijsnijden)': 'Líon (bearr)',
@@ -1565,6 +1564,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Onderstrepen': 'Folíne',
+  'Eigen verdeling': 'Roinn saincheaptha',
+  'Gelijke hoogte': 'Airde chomhionann',
+  'Panelen vullen': 'Líon na painéil',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Roinn an leithead tú féin; oireann gach íomhá ina painéal féin',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Tá an dá íomhá ar an airde chéanna agus go hiomlán infheicthe — ní dhéanann roinnt ná bearradh aon rud',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Líonann sé gach painéal agus bearrann sé na himill; roghnaíonn ‘Coigeartaigh íomhá’ an fócasphointe',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Ní dhéanann bearradh aon rud in Airde chomhionann — roghnaigh radharc eile ar dtús',
   'Afbeeldingsgroep': 'Grúpa íomhánna',
   'Stapel': 'Carn',
   'Afbeelding toevoegen': 'Cuir íomhá leis',

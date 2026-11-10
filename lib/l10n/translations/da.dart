@@ -1260,7 +1260,6 @@ const _dutchSourceDa = {
   'Afbeelding paneelvullend': 'Billede fylder panelet',
   'Vult het paneel en snijdt de randen bij':
       'Fylder panelet og beskærer kanterne',
-  'Afbeeldingen paneelvullend': 'Billeder fylder deres paneler',
   'Vult elk paneel en snijdt de randen bij':
       'Fylder hvert panel og beskærer kanterne',
   'Vullen (bijsnijden)': 'Fylde (beskære)',
@@ -1537,6 +1536,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Onderstrepen': 'Understreget',
+  'Eigen verdeling': 'Egen fordeling',
+  'Gelijke hoogte': 'Samme højde',
+  'Panelen vullen': 'Fyld paneler',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Fordel bredden selv; hvert billede passer i sit panel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Begge billeder er lige høje og fuldt synlige — fordeling og beskæring gør intet',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Fylder hvert panel og beskærer kanterne; ‘Justér billede’ vælger fokuspunktet',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Beskæring gør intet i Samme højde — vælg først en anden visning',
   'Afbeeldingsgroep': 'Billedgruppe',
   'Stapel': 'Stak',
   'Afbeelding toevoegen': 'Tilføj billede',

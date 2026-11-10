@@ -4,11 +4,21 @@ import 'package:ocideck/utils/document_stats.dart';
 void main() {
   test('empty document has zero stats', () {
     final stats = computeDocumentStats('');
+    expect(stats.characters, 0);
     expect(stats.words, 0);
     expect(stats.chapters, 0);
     expect(stats.sections, 0);
     expect(stats.tables, 0);
     expect(stats.images, 0);
+  });
+
+  test('counts characters including whitespace, markup and fenced code', () {
+    const body = '# A\n\n```\nx y\n```\n';
+    expect(computeDocumentStats(body).characters, body.length);
+  });
+
+  test('counts emoji and combining accents as single characters', () {
+    expect(computeDocumentStats('e\u0301 👨‍👩‍👧‍👦 👍🏽').characters, 5);
   });
 
   test('counts words in plain text', () {

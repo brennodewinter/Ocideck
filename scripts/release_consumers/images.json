@@ -1,14 +1,20 @@
 {
   "images": {
-    "appimage": "pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:eb5c0c2f2e828a53dbfc05ce38da0123ebce67ea99aa4ffa7e2a9fdffd9a786e",
-    "deb": "pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:5d9c9a9bf0e29ef55ce16476b5c19b18d5eac612648d8721743cb98bcec4787c",
-    "debian12": "pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:396e3b6ca9b3c4fb37bb30b65f82f60f2edc0d7a3a8d6bd9cc614847b0d59fab",
-    "flatpak": "pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:49b3dda73f9aa832a8640ea3e3b1e20dbe47e9445c556bc1b2198d5332adecaf",
-    "rpm": "pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:6124a96e54d66b072ec2c5a8b947ab9feaea600397b154e9795c52b2996fc06f",
-    "tar": "pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:b8d58795d5ac4d4ce0f397912ba285d02a43334c3fe522f07175154d9d126b6d"
+    "appimage": "pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:f5ca300b004d7057f7e64b43212de18faf315638ff52c21a5797f492e6a1d755",
+    "deb": "pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:9295c344d01f6f20bdea7b34fe9dbd6d8b2d9e2ed00bb0746c0b98274bf304b9",
+    "debian12": "pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:49a0879d7afbac18d6a160607de7273d0189c687a1839c8663cfb9c9b74506c1",
+    "flatpak": "pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:5c465f30d5a7019b953b4004c559436a4865bc280d6aef566fcf690f12b70012",
+    "rpm": "pawprint.vigilis.online/librekat/ocideck-consumer-rpm@sha256:a949b24f4bf34402979ad783530f8dad6b0dc94360ae2883e22c0899cdb836db",
+    "tar": "pawprint.vigilis.online/librekat/ocideck-consumer-tar@sha256:c41fb0a0c49349b08df0d113bbaf0161ebbccd3993fd075252d195be223a2218"
   },
   "provenance": {
-    "artifact_install_probe": "not performed; requires fixed stdin forwarding",
+    "artifact_install_probe": "not performed in image refresh; exact candidate artifact probes remain required",
+    "build_resources": {
+      "cpu_period": 100000,
+      "cpu_quota": 200000,
+      "execution": "serial profiles on Pawprint amd64 Docker daemon",
+      "memory_bytes": 4294967296
+    },
     "checks": [
       "packages.txt present",
       "node command available",
@@ -16,19 +22,19 @@
       "registry push",
       "registry pull and exact RepoDigests readback"
     ],
-    "finished_at": "2026-11-03T17:45:13Z",
-    "helper_sha256": "35a090c7d7c34dfb48961541865ea831ab07881870447780ff85280d8f149f41",
+    "consumer_context_archive_sha256": "6f451f49c0c5a87cc10813d4642e16d07986bdc753885de492bbdd10ca739e3d",
+    "finished_at": "2026-11-10T21:55:14Z",
+    "helper_sha256": "34d1687f9a21ddf94c43203f3f3c18e4e0c362432dffa13398e5b5d095ff8478",
     "recipes_sha256": {
-      "appimage": "64647c58f73f33c6e2b8835712e9a0cc0f07daacc2ebe14cde09ad1b4b567209",
+      "appimage": "7e832927ae08fb57dd2e00671478c6c12e59ced475a4b734b551fb816c9ff4be",
       "deb": "1de26d6cb085a13d31ebef400f913d14b4e7392a638993fb0454d55ccf5397f8",
-      "debian12": "2d2ce6926fddfbdc60f9bd3b8445c897a4d2fd83194e9a32c277eefa4cd16021",
+      "debian12": "200c7b8c9c565af1804e251f58ac1fea4bab3aed6c0bc8bf79fc576b8ecf9fa3",
       "flatpak": "d27cb86da5f07c14c0001e7b0609c2afc06cc93c7a6489d712bdbfa2f493647c",
       "rpm": "e4c35bcd5af0b4141b91f625199cb213c8607554fa4dc9a4ee444266d33efb04",
-      "tar": "d12b439fe8ed868216ef53d9c44bf754cf8260c43b917a1dbe3cc7e2387e890a"
+      "tar": "973f3fbf0d4a82616c9a417dd6e805a53378987885c7441147a15402d4bfe209"
     },
-    "source_archive_sha256": "08fa53f3cab6ba6bc72fafe85d3d72083dfa8bd313e86128d3f4d272fc6af6bf",
-    "started_at": "2026-11-03T17:14:10Z"
+    "started_at": "2026-11-10T21:10:52Z"
   },
   "schema": 1,
-  "source": "3f0d6019ff0bc4f1c94069698655b2cc1000f3c8"
+  "source": "de4b2937e23c9c74651dcc102bede6871819f852"
 }

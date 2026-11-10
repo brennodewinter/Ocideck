@@ -278,6 +278,11 @@ extension _MarkdownSerialize on MarkdownService {
     }
     _writeImageFocus(buf, slide);
     _writeImageAlt(buf, slide);
+    // `panels` is de stille standaard; alleen een afwijkende modus schrijft
+    // (#2867). De `![bg]`-regels blijven staan voor elke andere lezer.
+    if (slide.twoImagesLayout == TwoImagesLayout.equalHeight) {
+      buf.writeln('<!-- ocideck_two_images_layout: equalHeight -->');
+    }
     _writeCaptionDiv(
       buf,
       _joinTwoCaptions(slide.imageCaption, slide.imageCaption2),

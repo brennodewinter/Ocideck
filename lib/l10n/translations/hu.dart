@@ -1263,7 +1263,6 @@ const _dutchSourceHu = {
   'Afbeelding paneelvullend': 'Kép kitölti a panelt',
   'Vult het paneel en snijdt de randen bij':
       'Kitölti a panelt és levágja a széleket',
-  'Afbeeldingen paneelvullend': 'Képek kitöltik a paneljeiket',
   'Vult elk paneel en snijdt de randen bij':
       'Kitölti minden panelt és levágja a széleket',
   'Vullen (bijsnijden)': 'Kitölteni (levágni)',
@@ -1538,6 +1537,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Onderstrepen': 'Aláhúzott',
+  'Eigen verdeling': 'Egyéni felosztás',
+  'Gelijke hoogte': 'Egyenlő magasság',
+  'Panelen vullen': 'Panelek kitöltése',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Oszd el magad a szélességet; minden kép elfér a paneljében',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Mindkét kép egyforma magas és teljesen látható — a felosztás és a vágás nem csinál semmit',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Kitölti az összes panelt és levágja a széleket; ‘Kép beállítása’ választja a fókuszpontot',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'A vágás nem csinál semmit az Egyenlő magasság módban — előbb válassz más nézetet',
   'Afbeeldingsgroep': 'Képcsoport',
   'Stapel': 'Halom',
   'Afbeelding toevoegen': 'Kép hozzáadása',

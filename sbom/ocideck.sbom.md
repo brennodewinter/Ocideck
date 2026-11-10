@@ -2,25 +2,26 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.7.8+50** (licence EUPL-1.2) and every third-party component it ships (229 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
+This is **ocideck 0.7.8+50** (licence EUPL-1.2) and every third-party component it ships (245 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
 
-The JSON documents carry **819 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **874 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 12 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 128 |
-| MIT | 66 |
-| Apache-2.0 | 19 |
+| BSD-3-Clause | 131 |
+| MIT | 73 |
+| Apache-2.0 | 20 |
 | OFL-1.1 | 7 |
 | EUPL-1.2 | 5 |
+| NOASSERTION | 5 |
 | BSD | 3 |
 | MPL-2.0 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (209)
+### Dart / Flutter packages (215)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -101,8 +102,8 @@ The JSON documents carry **819 dependency relations** between these components: 
 | flutter_svg _(direct main)_ | 2.3.2 | MIT | flutter | `pkg:pub/flutter_svg@2.3.2` |
 | flutter_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | flutter_web_plugins _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
-| flutter_webrtc _(direct main)_ | 1.6.2+hotfix.4 | MIT | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git @ `b82f0db567e10aecd152c4039336d09e48f295a8` (.) |
 | fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
+| fullscreen_window _(transitive)_ | 1.2.1 | Apache-2.0 | jakky1 | `pkg:pub/fullscreen_window@1.2.1` |
 | glob _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.2.0` |
 | hooks _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@2.2.0` |
 | html _(direct main)_ | 0.15.7 | MIT | dart-lang | `pkg:pub/html@0.15.7` |
@@ -127,6 +128,8 @@ The JSON documents carry **819 dependency relations** between these components: 
 | matcher _(transitive)_ | 0.12.20 | BSD-3-Clause | dart-lang | `pkg:pub/matcher@0.12.20` |
 | material_color_utilities _(transitive)_ | 0.13.0 | Apache-2.0 | material-foundation | `pkg:pub/material_color_utilities@0.13.0` |
 | material_ui _(direct main)_ | 1.10.0 | BSD-3-Clause | flutter | `pkg:pub/material_ui@1.10.0` |
+| media_kit _(transitive)_ | 1.2.6 | MIT | media-kit | `pkg:pub/media_kit@1.2.6` |
+| media_kit_libs_linux _(direct main)_ | 1.2.1 | MIT | media-kit | `pkg:pub/media_kit_libs_linux@1.2.1` |
 | meta _(transitive)_ | 1.19.0 | BSD-3-Clause | dart-lang | `pkg:pub/meta@1.19.0` |
 | native_toolchain_c _(transitive)_ | 0.19.6 | BSD-3-Clause | dart-lang | `pkg:pub/native_toolchain_c@0.19.6` |
 | native_toolchain_cmake _(transitive)_ | 0.3.2 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.3.2` |
@@ -175,6 +178,7 @@ The JSON documents carry **819 dependency relations** between these components: 
 | record_use _(transitive)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/record_use@1.1.1` |
 | riverpod _(transitive)_ | 3.5.0 | MIT | rrousselGit | `pkg:pub/riverpod@3.5.0` |
 | rxdart _(transitive)_ | 0.28.0 | Apache-2.0 | ReactiveX | `pkg:pub/rxdart@0.28.0` |
+| safe_local_storage _(transitive)_ | 2.0.7 | MIT | alexmercerind | `pkg:pub/safe_local_storage@2.0.7` |
 | secret_storage _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `ac46741489d60c011377e27e0df9152b164f0701` (packages/secret_storage) |
 | shared_preferences _(direct main)_ | 2.5.6 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences@2.5.6` |
 | shared_preferences_android _(transitive)_ | 2.5.4 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_android@2.5.4` |
@@ -197,6 +201,7 @@ The JSON documents carry **819 dependency relations** between these components: 
 | tuple _(transitive)_ | 2.0.2 | BSD | google | `pkg:pub/tuple@2.0.2` |
 | typed_data _(transitive)_ | 1.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/typed_data@1.4.0` |
 | universal_platform _(transitive)_ | 1.1.0 | MIT | gskinnerTeam | `pkg:pub/universal_platform@1.1.0` |
+| uri_parser _(transitive)_ | 3.0.2 | MIT | alexmercerind | `pkg:pub/uri_parser@3.0.2` |
 | url_launcher _(direct main)_ | 6.3.3 | BSD-3-Clause | flutter | `pkg:pub/url_launcher@6.3.3` |
 | url_launcher_android _(transitive)_ | 6.3.33 | BSD-3-Clause | flutter | `pkg:pub/url_launcher_android@6.3.33` |
 | url_launcher_ios _(transitive)_ | 6.4.2 | BSD-3-Clause | flutter | `pkg:pub/url_launcher_ios@6.4.2` |
@@ -213,8 +218,10 @@ The JSON documents carry **819 dependency relations** between these components: 
 | video_player _(direct main)_ | 2.14.1 | BSD-3-Clause | flutter | `pkg:pub/video_player@2.14.1` |
 | video_player_android _(transitive)_ | 2.12.2 | BSD-3-Clause | flutter | `pkg:pub/video_player_android@2.12.2` |
 | video_player_avfoundation _(transitive)_ | 2.12.3 | BSD-3-Clause | flutter | `pkg:pub/video_player_avfoundation@2.12.3` |
+| video_player_media_kit _(direct main)_ | 2.0.0 | MIT | media-kit | `pkg:pub/video_player_media_kit@2.0.0` |
 | video_player_platform_interface _(direct dev)_ | 6.9.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_platform_interface@6.9.0` |
 | video_player_web _(transitive)_ | 2.4.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_web@2.4.0` |
+| video_player_win _(direct main)_ | 3.3.1 | BSD-3-Clause | jakky1 | `pkg:pub/video_player_win@3.3.1` |
 | vm_service _(transitive)_ | 15.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/vm_service@15.4.0` |
 | wakelock_plus _(direct main)_ | 1.8.0 | BSD-3-Clause | fluttercommunity | `pkg:pub/wakelock_plus@1.8.0` |
 | wakelock_plus_platform_interface _(transitive)_ | 1.7.0 | BSD-3-Clause | fluttercommunity | `pkg:pub/wakelock_plus_platform_interface@1.7.0` |
@@ -240,12 +247,15 @@ The JSON documents carry **819 dependency relations** between these components: 
 | --- | --- | --- | --- | --- |
 | ocideck_form_core _(direct main)_ | 0.0.1 | EUPL-1.2 | Stichting LibreKAT | First-party package in packages/ocideck_form_core, part of this repository and released with it; it has no archive hash of its own. |
 
-### Vendored plugin forks (third_party/) (2)
+### Vendored plugin forks (third_party/) (5)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | desktop_multi_window _(direct main)_ | 0.3.1 | Apache-2.0 | MixinNetwork | https://github.com/MixinNetwork/flutter-plugins/tree/0c9aa50455106503cacfdb54ef1acfd217af2614/packages/desktop_multi_window |
+| flutter_webrtc _(direct main)_ | 1.6.2+hotfix.4 | MIT AND EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/flutter_webrtc/tree/b82f0db567e10aecd152c4039336d09e48f295a8 |
 | markdown_quill _(direct main)_ | 4.3.0 | MIT | TarekkMA | https://github.com/TarekkMA/markdown_quill/tree/49641654bd584c6f0fc398c2c91383cf13a3424b |
+| media_kit_video _(direct overridden)_ | 2.0.1 | MIT | media-kit | Vendored fork in third_party/media_kit_video; the local changes are recorded in third_party/media_kit_video/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none. |
+| webview_win_floating _(direct main)_ | 3.0.3 | BSD-3-Clause | jakky1 | Vendored fork in third_party/webview_win_floating; the local changes are recorded in third_party/webview_win_floating/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none. |
 
 ### Vendored JavaScript bundles (HTML export) (5)
 
@@ -275,12 +285,24 @@ The JSON documents carry **819 dependency relations** between these components: 
 | Roboto | — | OFL-1.1 | The Roboto Project Authors | `pkg:generic/Roboto` |
 | Roboto Mono | — | OFL-1.1 | The Roboto Mono Project Authors | `pkg:generic/Roboto%20Mono` |
 
-### Bundled native runtimes (2)
+### Bundled native runtimes (4)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
+| Microsoft Edge WebView2 loader | 1.0.1418.22 | BSD-3-Clause | Microsoft Corporation | `pkg:nuget/Microsoft.Web.WebView2@1.0.1418.22` |
 | PDFium | 144.0.7811.0 | BSD-3-Clause AND Apache-2.0 | The PDFium Authors | `pkg:generic/pdfium@144.0.7811.0` |
+| Windows Implementation Library | 1.0.220914.1 | MIT | Microsoft Corporation | `pkg:nuget/Microsoft.Windows.ImplementationLibrary@1.0.220914.1` |
 | whisper.cpp (whisper-cli / whisper-wasm) | 1.9.5 | MIT | Georgi Gerganov and contributors | `pkg:github/ggml-org/whisper.cpp@1.9.5` |
+
+### External native runtime requirements (resolve per artifact) (5)
+
+| Component | Version | Licence | Supplier | Source |
+| --- | --- | --- | --- | --- |
+| FFmpeg | — | NOASSERTION | — | Linux media dependency. LGPL/GPL status depends on configure flags and linked codecs. Do not label this runtime MIT or assume an LGPL-only build. Flatpak copied binaries require matching source and full notices. |
+| GStreamer | — | NOASSERTION | — | Linux native audio helper and WebKit media dependency. Codec plugins and exact versions depend on the distro/runtime. Native packages declare base/good/libav; copied Flatpak plugins carry matching notices and source records. |
+| PulseAudio client libraries | — | NOASSERTION | — | Linux recording helper links libpulse and libpulse-simple, including on PipeWire through its PulseAudio compatibility server. Native packages require the system libraries; resolve exact build versions per artifact. |
+| WebKitGTK | — | NOASSERTION | — | Linux webview runtime. Contains LGPL and BSD code. System-provided in native packages or supplied by the Flatpak GNOME runtime. Resolve exact runtime version and licence evidence per artifact. |
+| libmpv | — | NOASSERTION | — | Linux. Licence depends on build and linked libraries. Inspected Debian 12 libmpv2 0.35.1-4 declares GPL-3.0-or-later for its binaries. Resolve exact versions, licences and corresponding source per release artifact. |
 
 ### Build SDKs (2)
 

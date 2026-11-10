@@ -1261,7 +1261,6 @@ const _dutchSourceId = {
   'Afbeelding paneelvullend': 'Gambar memenuhi panel',
   'Vult het paneel en snijdt de randen bij':
       'Memenuhi panel dan memotong tepinya',
-  'Afbeeldingen paneelvullend': 'Gambar memenuhi panelnya',
   'Vult elk paneel en snijdt de randen bij':
       'Memenuhi setiap panel dan memotong tepinya',
   'Vullen (bijsnijden)': 'Memenuhi (memotong)',
@@ -1537,6 +1536,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Onderstrepen': 'Garis bawah',
+  'Eigen verdeling': 'Pembagian kustom',
+  'Gelijke hoogte': 'Tinggi sama',
+  'Panelen vullen': 'Isi panel',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Bagikan lebarnya sendiri; setiap gambar muat di panelnya',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Kedua gambar sama tinggi dan terlihat sepenuhnya — membagi dan memotong tidak berpengaruh',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Mengisi setiap panel dan memotong tepinya; ‘Sesuaikan gambar’ memilih titik fokus',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Memotong tidak berpengaruh dalam mode Tinggi sama — pilih tampilan lain dulu',
   'Afbeeldingsgroep': 'Grup gambar',
   'Stapel': 'Tumpukan',
   'Afbeelding toevoegen': 'Tambah gambar',

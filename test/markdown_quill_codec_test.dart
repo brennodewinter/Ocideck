@@ -381,4 +381,14 @@ Tekst.
       expect(restored, contains('###### Zes'));
     });
   });
+
+  test('onderstrepen round-tript via <u> (#2866)', () {
+    const source = 'Titel met <u>onderstreept</u> deel.';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+
+    expect(restored, contains('<u>onderstreept</u>'));
+    expect(restored, isNot(contains('&lt;u&gt;')));
+  });
 }

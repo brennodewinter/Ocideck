@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.revision=$SOURCE_REVISION
 LABEL online.vigilis.ocideck.consumer="debian12"
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends nodejs ca-certificates xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 libayatana-appindicator3-1 libgles2 libegl1 libpulse0 \
+    && apt-get install -y --no-install-recommends nodejs ca-certificates xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 libayatana-appindicator3-1 libgles2 libegl1 libpulse0 libmpv2 libwebkit2gtk-4.1-0 gstreamer1.0-plugins-good gstreamer1.0-libav \
     && mkdir -p /usr/share/ocideck-consumer \
     && dpkg-query -W -f='${Package}=${Version}\n' | sort > /usr/share/ocideck-consumer/packages.txt \
     && rm -rf /var/lib/apt/lists/*

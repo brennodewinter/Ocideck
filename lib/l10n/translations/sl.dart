@@ -1261,7 +1261,6 @@ const _dutchSourceSl = {
       'Zapolni celotno prosojnico in obreže robove',
   'Afbeelding paneelvullend': 'Slika zapolni panel',
   'Vult het paneel en snijdt de randen bij': 'Zapolni panel in obreže robove',
-  'Afbeeldingen paneelvullend': 'Slike zapolnijo svoje panele',
   'Vult elk paneel en snijdt de randen bij':
       'Zapolni vsak panel in obreže robove',
   'Vullen (bijsnijden)': 'Zapolniti (obrezati)',
@@ -1537,6 +1536,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Onderstrepen': 'Podčrtano',
+  'Eigen verdeling': 'Lastna razdelitev',
+  'Gelijke hoogte': 'Enaka višina',
+  'Panelen vullen': 'Zapolni plošče',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Širino razdelite sami; vsaka slika se prilega svoji plošči',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Obe sliki sta enako visoki in popolnoma vidni — deljenje in obrezovanje ne naredita ničesar',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Zapolni vsako ploščo in obreže robove; ‘Prilagodi sliko’ izbere žariščno točko',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Obrezovanje ne naredi ničesar v načinu Enaka višina — najprej izberite drug prikaz',
   'Afbeeldingsgroep': 'Skupina slik',
   'Stapel': 'Kopica',
   'Afbeelding toevoegen': 'Dodaj sliko',

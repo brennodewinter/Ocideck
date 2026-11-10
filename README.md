@@ -260,6 +260,7 @@ and it also indexes the design documents. The current-state documents:
 | [Changelog](CHANGELOG.md) | Notable changes and release history |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
 | [Compliance attestation](COMPLIANCE.md) | Voluntary security attestation (ORC WG light-weight checklist), including the rows we cannot tick |
+| [Repository instructions](AGENTS.md) | Main repository and issue-tracker routing for coding agents |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
 | [Contributing guidelines](docs/CONTRIBUTING_GUIDELINES.md) | The fuller contribution workflow: reporting issues, pull requests, and coding standards |
 | [Contributors](CONTRIBUTORS.md) | A word of thanks to the people who have helped shape OciDeck |

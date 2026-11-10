@@ -2177,7 +2177,6 @@ const _dutchSourceTr = {
   'Afbeelding paneelvullend': 'Görüntü paneli kaplar',
   'Vult het paneel en snijdt de randen bij':
       'Paneli kaplar ve kenarları kırpar',
-  'Afbeeldingen paneelvullend': 'Görüntüler panellerini kaplar',
   'Vult elk paneel en snijdt de randen bij':
       'Her paneli kaplar ve kenarları kırpar',
   'Vullen (bijsnijden)': 'Doldur (kırp)',
@@ -2393,6 +2392,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Onderstrepen': 'Altı çizili',
+  'Eigen verdeling': 'Özel bölme',
+  'Gelijke hoogte': 'Eşit yükseklik',
+  'Panelen vullen': 'Panelleri doldur',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Genişliği kendiniz dağıtın; her görsel kendi paneline sığar',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Her iki görsel eşit yükseklikte ve tamamen görünür — bölme ve kırpma hiçbir şey yapmaz',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Her paneli doldurur ve kenarları kırpar; ‘Görseli ayarla’ odak noktasını seçer',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Kırpma Eşit yükseklik modunda bir şey yapmaz — önce başka bir görünüm seçin',
   'Afbeeldingsgroep': 'Görsel grubu',
   'Stapel': 'Yığın',
   'Afbeelding toevoegen': 'Görsel ekle',

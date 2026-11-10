@@ -122,6 +122,15 @@ artefacts. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
       [`docs/LICENSE_COMPLIANCE.md`](docs/LICENSE_COMPLIANCE.md), enforced by
       `make licenses`, which fails on a non-open-source dependency.
 
+**Video distribution review, 2026-11-10:** the package checker does not classify
+native binaries. The Linux combination uses GPL-3.0-or-later through EUPL article
+5, retaining EUPL-1.2 for our own source. The release pipeline accompanies native
+builds with matching project/package sources, notices and build instructions;
+Flatpak additionally acquires and embeds exact distro source packages through
+authenticated APT indexes. Changed or missing source/notice payloads block
+packaging. Actual release artifacts must pass that pipeline; the historical
+attestation is not evidence for an unbuilt artifact. See [the review](docs/LICENSE_COMPLIANCE.md#video-backend-review--2026-11-10).
+
 ## Quality
 
 - [x] **QA.01 — Direct dependencies listed, with checksums.**

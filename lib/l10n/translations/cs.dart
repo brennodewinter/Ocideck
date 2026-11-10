@@ -1261,7 +1261,6 @@ const _dutchSourceCs = {
       'Vyplní celý snímek a ořízne okraje',
   'Afbeelding paneelvullend': 'Obrázek vyplní panel',
   'Vult het paneel en snijdt de randen bij': 'Vyplní panel a ořízne okraje',
-  'Afbeeldingen paneelvullend': 'Obrázky vyplní své panely',
   'Vult elk paneel en snijdt de randen bij':
       'Vyplní každý panel a ořízne okraje',
   'Vullen (bijsnijden)': 'Vyplnit (oříznout)',
@@ -1537,6 +1536,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Onderstrepen': 'Podtržené',
+  'Eigen verdeling': 'Vlastní rozdělení',
+  'Gelijke hoogte': 'Stejná výška',
+  'Panelen vullen': 'Vyplnit panely',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Rozdělte šířku sami; každý obrázek se vejde do svého panelu',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Oba obrázky jsou stejně vysoké a plně viditelné — rozdělení a oříznutí nic neudělají',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Vyplní každý panel a ořízne okraje; ‘Upravit obrázek’ vybírá bod zaostření',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Oříznutí nic neudělá v režimu Stejná výška — nejdřív zvolte jiné zobrazení',
   'Afbeeldingsgroep': 'Skupina obrázků',
   'Stapel': 'Hromada',
   'Afbeelding toevoegen': 'Přidat obrázek',

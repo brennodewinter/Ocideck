@@ -72,6 +72,12 @@ set_target_properties(${BINARY_NAME}
 
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
+# Video backends need these at build time; keep the dependency manifest and
+# package declarations in sync so a missing library fails before compilation.
+pkg_check_modules(OCIDECK_MPV REQUIRED IMPORTED_TARGET mpv)
+pkg_check_modules(OCIDECK_WEBKIT REQUIRED IMPORTED_TARGET webkit2gtk-4.1)
+pkg_check_modules(OCIDECK_EPOXY REQUIRED IMPORTED_TARGET epoxy)
+
 include(flutter/generated_plugins.cmake)
 
 
@@ -130,3 +136,14 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
   install(FILES "${AOT_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
     COMPONENT Runtime)
 endif()
+
+# Installed helpers use the same runtime libraries and source kit as the app.
+pkg_check_modules(OCIDECK_GST REQUIRED IMPORTED_TARGET gstreamer-1.0)
+pkg_check_modules(OCIDECK_PULSE REQUIRED IMPORTED_TARGET libpulse libpulse-simple)
+add_executable(ocideck_audio "../native/audio_tools/audio_linux.cc")
+set_target_properties(ocideck_audio PROPERTIES OUTPUT_NAME "ocideck-audio"
+  INSTALL_RPATH "$ORIGIN/lib")
+target_link_libraries(ocideck_audio PRIVATE PkgConfig::OCIDECK_GST PkgConfig::OCIDECK_PULSE)
+install(TARGETS ocideck_audio RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}" COMPONENT Runtime)
+
+add_subdirectory("../native/audio_tools/test" "native_audio_tests")

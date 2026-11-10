@@ -187,4 +187,48 @@ void main() {
       expect(decodeNamedHtmlEntities(''), '');
     });
   });
+
+  group('<u> onderstrepen (#2866)', () {
+    test('onderstreepte tekst krijgt de underline-vlag, geen markers', () {
+      final runs = parseInlineRuns('a <u>onderstreept</u> b');
+      expect(runs.map((r) => r.text).join(), 'a onderstreept b');
+      expect(runs[1].underline, isTrue);
+      expect(runs[0].underline, isFalse);
+    });
+
+    test('onderstrepen combineert met vet en doorhalen', () {
+      final runs = parseInlineRuns('<u>**vet** en ~~weg~~</u>');
+      expect(runs.every((r) => r.underline), isTrue);
+      expect(runs.any((r) => r.bold), isTrue);
+      expect(runs.any((r) => r.strike), isTrue);
+    });
+
+    test('een losse <u> blijft letterlijke tekst', () {
+      final runs = parseInlineRuns('a <u> open');
+      expect(runs.single.text, 'a <u> open');
+      expect(runs.single.underline, isFalse);
+    });
+
+    test('een losse </u> blijft letterlijke tekst', () {
+      expect(parseInlineRuns('a </u> b').single.text, 'a </u> b');
+    });
+
+    test('stripInlineMarkdown verwijdert de u-markeringen', () {
+      expect(
+        stripInlineMarkdown('de <u>zeer</u> **grote** titel'),
+        'de zeer grote titel',
+      );
+    });
+
+    test('hasInlineMarkdown ziet <u> maar geen willekeurige tags', () {
+      expect(hasInlineMarkdown('x <u>y</u>'), isTrue);
+      expect(hasInlineMarkdown('x <span>y</span>'), isFalse);
+    });
+
+    test('__tekst__ blijft vet, geen onderstrepen', () {
+      final runs = parseInlineRuns('__vet__');
+      expect(runs.single.bold, isTrue);
+      expect(runs.single.underline, isFalse);
+    });
+  });
 }

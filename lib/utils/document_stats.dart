@@ -1,4 +1,4 @@
-/// Document statistics computed from the Markdown body: word count, chapter
+/// Document statistics computed from the Markdown body: word and character count, chapter
 /// count (H1), section count (H2+), table count and image count.
 ///
 /// Zuiver Dart — geen Flutter-import, net als `markdown_table_lines.dart`, zodat
@@ -6,12 +6,17 @@
 /// te halen.
 library;
 
+import 'package:characters/characters.dart';
+
 import '../models/markdown_outline.dart';
 import '../services/markdown_table_lines.dart';
 
 /// Statistieken van een documentbody, geteld op de bron.
 class DocumentStats {
   final int words;
+
+  /// Grapheme clusters in the Markdown body, including whitespace and markup.
+  final int characters;
   final int chapters;
   final int sections;
   final int tables;
@@ -19,6 +24,7 @@ class DocumentStats {
 
   const DocumentStats({
     required this.words,
+    required this.characters,
     required this.chapters,
     required this.sections,
     required this.tables,
@@ -108,6 +114,7 @@ DocumentStats _computeDocumentStats(String body) {
 
   return DocumentStats(
     words: words,
+    characters: body.characters.length,
     chapters: chapters,
     sections: sections,
     tables: tables,

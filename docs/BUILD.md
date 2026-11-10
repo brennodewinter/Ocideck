@@ -1772,3 +1772,61 @@ alleen geüploade assets telt niet als volledig publiek gecontroleerd. De verse
 controle verifieert ondertekende releasebytes en toepasselijke website-, web- en
 Homebrew-verwijzingen. Zij kan daarom bestanden downloaden en netwerkverkeer
 veroorzaken. Het commando start geen bouw, plaatsing of publicatie.
+
+### Desktop video dependency updates
+
+Windows video uses `video_player_win` (Media Foundation); YouTube/Vimeo uses
+`webview_win_floating` (WebView2 Runtime). Linux uses libmpv, WebKitGTK 4.1 and
+GStreamer codecs. The Linux module manifest and build jobs list the development
+packages. `integration_test/desktop_media_test.dart` exercises native playback
+and the native JavaScript bridge in the same engine, without external network
+requests. Live YouTube still requires a manual check.
+Primary and audience Linux runners prepare a GTK overlay before realizing the
+Flutter view. The webview backend reuses that overlay; reparenting an active
+Flutter view stalls its renderer. Preparing the overlay creates no webview and
+loads no network content.
+
+Flatpak packaging needs an installed `org.gnome.Platform/x86_64/50` runtime, or
+`FLATPAK_RUNTIME_DIR` pointing to its `files` directory. `flatpak_media.py` copies
+libmpv and only dependencies absent from that runtime, recording package
+versions, licence texts and hashes in the existing component inventory.
+
+After changing the tar/AppImage consumer Dockerfiles, rebuild the consumer
+images with `scripts/build_release_consumer_images.sh` and update their immutable
+references in `scripts/release_consumers/images.json` before a release. Existing
+published images do not acquire the new video libraries automatically.
+
+Linux source compliance: after the final application/helper build, before making
+a tarball or any package, run:
+
+```sh
+python3 scripts/linux_source_bundle.py stage "$PWD" build/linux/x64/release/bundle dist "$VERSION"
+python3 scripts/linux_source_bundle.py verify build/linux/x64/release/bundle
+```
+
+This requires a clean committed source tree and resolved packages. It embeds the
+exact project/package sources, licences, replacement/rebuild instructions and
+binary hashes, and writes `dist/ocideck-linux-sources-$VERSION.tar.gz`. The
+release workflows run this automatically and publish that archive. Debian 12
+embeds its own source kit. Native `.deb`/`.rpm` also expose the notices under
+`/usr/share/doc/ocideck`. Packaging rejects missing or stale source kits.
+
+Flatpak source collection is automatic: `scripts/flatpak_sources.py` derives
+exact source versions from every copied distro package, obtains them using
+APT's authenticated Sources indexes, checks the complete `.dsc` archive envelope,
+and embeds source, distro patches/recipes, copyrights and full GNU texts.
+The builder needs `apt-get`, `dpkg`, Python 3, network access and permission to
+update APT's indexes (the CI builder runs as root). Configured repository
+`Signed-By` settings are retained; no authentication bypass is permitted.
+`FLATPAK_SOURCE_DIR` is no longer an input or an approval mechanism. If the exact
+source version has disappeared, rebuild against an available distro version;
+never bypass source delivery. Allow additional time/disk space for these archives.
+
+Our own source remains EUPL-1.2. The GPL media combination is distributed under
+GPL-3.0-or-later via EUPL article 5; see `packaging/linux/DISTRIBUTION-LICENSES.md`
+and the scoped review in `docs/LICENSE_COMPLIANCE.md`. A release still has to
+pass actual packaging/consumer checks; `make licenses` alone is insufficient.
+
+Independent release channels embed their build-specific source archive in each
+artifact. The full release candidate also publishes the standalone Ubuntu
+source archive; independent channels keep disjoint asset ownership.

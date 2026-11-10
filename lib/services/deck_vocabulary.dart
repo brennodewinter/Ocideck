@@ -183,6 +183,10 @@ const kSupportedCommentDirectives = {
   'ocideck_image_focus2',
   'ocideck_image_alt',
   'ocideck_image_alt2',
+  // Paneelzoom (0=cover, 100=contain, >100=inzoomen) en de gelijke-hoogte-
+  // layout van een twoImages-dia (#2867); `_parseImageFocus` licht beiden.
+  'ocideck_image_zoom',
+  'ocideck_two_images_layout',
   // Per-slide privacy disposition (OCIWACHT §4.2): accept / shield /
   // redact. Zonder deze regel meldt de checker een onbekende directive.
   'ocideck_privacy',

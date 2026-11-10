@@ -279,7 +279,9 @@ void main() {
     // (de bronnenlijst), which (het pad van die twee) en df (vrije
     // ruimte). PATH staat op de toelatingslijst omdat which en df bij
     // naam heten; de rest van de omgeving gaat niet mee.
-    'lib/services/transcription/linux_mic_recorder_io.dart': 4,
+    // Extra bronlijst via de geïnstalleerde helper: vast argv, geen shell,
+    // omgevingstoelatingslijst, Dart-time-out en native deadline van 2 s.
+    'lib/services/transcription/linux_mic_recorder_io.dart': 5,
   };
 
   test('een subproces blijft binnen de twee plekken die het mogen', () {
@@ -324,7 +326,9 @@ void main() {
 
   test('een WebView blijft op de drie plekken die hem afschermen', () {
     scan(
-      sink: RegExp(r'WebViewController\(|\.loadRequest\(|WebViewWidget\('),
+      sink: RegExp(
+        r'WebViewController(?:\.[A-Za-z]\w*)?\(|\.loadRequest\(|WebViewWidget\(',
+      ),
       allowedFiles: {
         // De verborgen Mermaid-renderer. Laadt één keer een lokale HTML-string
         // met een eigen CSP (`default-src 'none'`), en de navigatiedelegate
@@ -337,6 +341,8 @@ void main() {
         // HOST — niet naar een `contains`, want `youtube.com.kwaadaardig.nl`
         // bevat die tekst ook.
         'lib/widgets/slides/previews/media_previews_video.dart',
+        // Native surface for the same guarded video controller; no URLs here.
+        'lib/widgets/slides/previews/video_embed_view.dart',
       },
       guidance:
           'Nieuwe WebView. Een WebView is een netwerkuitgang die NetGuard niet '

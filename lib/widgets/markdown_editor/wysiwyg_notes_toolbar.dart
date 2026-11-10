@@ -61,7 +61,9 @@ class WysiwygNotesToolbar extends StatelessWidget {
         ),
         showFontFamily: false,
         showFontSize: false,
-        showUnderLineButton: false,
+        // Onderstrepen schrijft `<u>…</u>` weg (#2866) — de knop hoort thuis
+        // in dezelfde vier stijlen als de brontoolbar en de titelvelden.
+        showUnderLineButton: true,
         showColorButton: false,
         showBackgroundColorButton: false,
         showClearFormat: !compact,

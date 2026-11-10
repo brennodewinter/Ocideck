@@ -211,6 +211,15 @@ class MarkdownSafetyScanner {
     for (var i = 0; i < text.length; i++) {
       final code = text.codeUnitAt(i);
       if (start == null) {
+        // Speaker notes are HTML comments, not tags with attributes. Quotes
+        // inside them must not consume the closing delimiter or later tags.
+        // This only skips tag indexing; threat rules still scan all content.
+        if (text.startsWith('<!--', i)) {
+          final commentEnd = text.indexOf('-->', i + 4);
+          if (commentEnd == -1) break;
+          i = commentEnd + 2;
+          continue;
+        }
         if (code == 0x3C) start = i;
         continue;
       }

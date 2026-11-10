@@ -25,6 +25,10 @@ CID="$("${DOCKER[@]}" create --platform linux/amd64 --cpus 2 --memory 8g \
 trap '"${DOCKER[@]}" rm -f "$CID" >/dev/null 2>&1 || true' EXIT
 # A worktree's .git file points to a host path that does not exist in Docker.
 git -C "$ROOT" archive HEAD | "${DOCKER[@]}" cp - "$CID:/src"
+REVISION_FILE="$(mktemp)"
+git -C "$ROOT" rev-parse HEAD > "$REVISION_FILE"
+"${DOCKER[@]}" cp "$REVISION_FILE" "$CID:/src/.ocideck-source-revision"
+rm "$REVISION_FILE"
 "${DOCKER[@]}" start -a "$CID"
 [[ "$("${DOCKER[@]}" inspect -f '{{.State.ExitCode}}' "$CID")" == 0 ]] || {
   echo 'Debian 12 build failed' >&2

@@ -39,6 +39,10 @@ case "$CHANNEL" in
   linux-tar|linux-deb|linux-rpm|linux-appimage|linux-flatpak)
     bash "$(dirname "$0")/run_release_linux_build.sh" make build-linux
     mkdir dist
+    # Every independent artifact carries its own source kit. Keep the optional
+    # standalone archive outside dist: channels have disjoint asset ownership.
+    python3 scripts/linux_source_bundle.py stage "$PWD" \
+      build/linux/x64/release/bundle build/linux-source-archives "${TAG#v}"
     if [[ "$CHANNEL" == linux-tar ]]; then
       tar -C build/linux/x64/release --transform "s,^bundle,ocideck-${TAG#v}," -czf "dist/ocideck-linux-x64-${TAG#v}.tar.gz" bundle
     else

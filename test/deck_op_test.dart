@@ -65,6 +65,10 @@ _slideCases = {
     value: GalleryLayout.stack,
     read: (s) => s.galleryLayout,
   ),
+  SlideField.twoImagesLayout: (
+    value: TwoImagesLayout.equalHeight,
+    read: (s) => s.twoImagesLayout,
+  ),
   SlideField.preservedMarpLines: (
     value: ['<!-- _future: value -->'],
     read: (s) => s.preservedMarpLines,
