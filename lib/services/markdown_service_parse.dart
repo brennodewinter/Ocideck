@@ -41,6 +41,43 @@ final _reSplitImageSide = RegExp(
   r'^<!--\s*ocideck_split_image_side:\s*(left|right)\s*-->$',
 );
 
+/// Lifts the `ocideck_two_images_layout` comment out of [block] (#2867) —
+/// same reason as `_parseImageFocus`: stripped before the generic scan would
+/// read it as presenter notes. `equalHeight` is the only known value;
+/// anything else (empty, unknown, future) falls back to
+/// [TwoImagesLayout.panels], like decks without the directive. Top-level like
+/// [_takeSplitImageOnLeft], not an extension member.
+({TwoImagesLayout layout, String block}) _liftTwoImagesLayout(String block) {
+  var layout = TwoImagesLayout.panels;
+  final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
+    final content = m.group(1)!.trim();
+    if (!content.startsWith('ocideck_two_images_layout:')) {
+      return m.group(0)!;
+    }
+    layout =
+        content.substring('ocideck_two_images_layout:'.length).trim() ==
+            'equalHeight'
+        ? TwoImagesLayout.equalHeight
+        : TwoImagesLayout.panels;
+    return '';
+  });
+  return (layout: layout, block: cleaned);
+}
+
+/// Vul de uitlijning aan tot het aantal kolommen: een scheidingsrij zonder
+/// colons leverde een lege lijst op, en een raggede scheidingsrij een
+/// kortere — beide behandelen we als "links" (de GFM-default).
+List<TableAlign> _paddedTableAlignments(
+  List<List<String>> rows,
+  List<TableAlign> alignments,
+) {
+  final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+  return List<TableAlign>.generate(
+    colCount,
+    (c) => c < alignments.length ? alignments[c] : TableAlign.left,
+  );
+}
+
 bool _takeSplitImageOnLeft(SlideType type, List<String> preservedLines) {
   if (type != SlideType.bulletsImage) return false;
   final imageOnLeft = preservedLines.any(
@@ -418,7 +455,8 @@ extension _MarkdownParse on MarkdownService {
     // directives are stripped before the generic comment scan would otherwise
     // read them as presenter notes.
     final focus = _parseImageFocus(block);
-    final alt = _parseImageAlt(focus.block);
+    final twoLayout = _liftTwoImagesLayout(focus.block);
+    final alt = _parseImageAlt(twoLayout.block);
     final link = _parseFindingLink(alt.block);
     final d = _parseBlockDirectives(link.block);
 
@@ -453,18 +491,9 @@ extension _MarkdownParse on MarkdownService {
     final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
     final tableDecoded = _decodeTableWithAlignment(body.tableLines);
     final tableRows = tableDecoded.rows;
-    // Vul de uitlijning aan tot het aantal kolommen: een scheidingsrij zonder
-    // colons leverde een lege lijst op, en een raggede scheidingsrij een
-    // kortere — beide behandelen we als "links" (de GFM-default).
-    final colCount = tableRows.fold<int>(
-      0,
-      (m, r) => r.length > m ? r.length : m,
-    );
-    final tableAlignments = List<TableAlign>.generate(
-      colCount,
-      (c) => c < tableDecoded.alignments.length
-          ? tableDecoded.alignments[c]
-          : TableAlign.left,
+    final tableAlignments = _paddedTableAlignments(
+      tableRows,
+      tableDecoded.alignments,
     );
 
     final type = _inferSlideType(
@@ -531,6 +560,9 @@ extension _MarkdownParse on MarkdownService {
       imageFocalX2: focus.fx2,
       imageFocalY2: focus.fy2,
       imageZoom: focus.zoom,
+      twoImagesLayout: type == SlideType.twoImages
+          ? twoLayout.layout
+          : TwoImagesLayout.panels,
       imageSize: titleColumns.imageSize,
       titleImageOverlay: d.titleImageOverlay,
       imageTitleAbove: imageTitleAbove,

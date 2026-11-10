@@ -1271,7 +1271,6 @@ const _dutchSourceRo = {
       'Umple tot diapozitivul și taie marginile',
   'Afbeelding paneelvullend': 'Imaginea umple panoul',
   'Vult het paneel en snijdt de randen bij': 'Umple panoul și taie marginile',
-  'Afbeeldingen paneelvullend': 'Imaginile umplu panourile',
   'Vult elk paneel en snijdt de randen bij':
       'Umple fiecare panou și taie marginile',
   'Vullen (bijsnijden)': 'Umple (tăia)',
@@ -1551,6 +1550,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Onderstrepen': 'Subliniat',
+  'Eigen verdeling': 'Împărțire personalizată',
+  'Gelijke hoogte': 'Înălțime egală',
+  'Panelen vullen': 'Umple panourile',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Repartizează singur lățimea; fiecare imagine încape în panoul ei',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Ambele imagini au aceeași înălțime și sunt complet vizibile — împărțirea și decuparea nu fac nimic',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Umple fiecare panou și decupează marginile; ‘Ajustează imaginea’ alege punctul focal',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Decuparea nu face nimic în modul Înălțime egală — alege mai întâi altă vizualizare',
   'Afbeeldingsgroep': 'Grup de imagini',
   'Stapel': 'Stivă',
   'Afbeelding toevoegen': 'Adaugă imagine',

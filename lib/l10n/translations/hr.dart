@@ -1265,7 +1265,6 @@ const _dutchSourceHr = {
   'Afbeelding paneelvullend': 'Slika ispunjava panel',
   'Vult het paneel en snijdt de randen bij':
       'Ispunjava panel i obrezuje rubove',
-  'Afbeeldingen paneelvullend': 'Slike ispunjavaju svoje panele',
   'Vult elk paneel en snijdt de randen bij':
       'Ispunjava svaki panel i obrezuje rubove',
   'Vullen (bijsnijden)': 'Ispuniti (obrezati)',
@@ -1541,6 +1540,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Onderstrepen': 'Podcrtano',
+  'Eigen verdeling': 'Vlastita podjela',
+  'Gelijke hoogte': 'Jednaka visina',
+  'Panelen vullen': 'Ispuni ploče',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Sami raspodijelite širinu; svaka slika stane u svoju ploču',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Obje slike jednake su visine i potpuno vidljive — dijeljenje i obrezivanje ne čine ništa',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Ispunjava svaku ploču i obrezuje rubove; ‘Prilagodi sliku’ bira žarišnu točku',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Obrezivanje ne čini ništa u načinu Jednaka visina — prvo odaberite drugi prikaz',
   'Afbeeldingsgroep': 'Grupa slika',
   'Stapel': 'Hrpa',
   'Afbeelding toevoegen': 'Dodaj sliku',

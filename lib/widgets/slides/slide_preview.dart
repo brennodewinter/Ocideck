@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
 
@@ -75,6 +76,7 @@ import '../../services/display_window_service.dart';
 import '../../services/markdown_body_blocks.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
+import '../../services/two_images_geometry.dart';
 // De split-run-metingen zijn services (headless rekenwerk), maar hun natuurlijke
 // vindplek is deze bibliotheek: elke aanroeper vraagt ze op naast
 // `SlidePreviewWidget.fitScaleOverride`.
@@ -94,6 +96,7 @@ import '../../utils/mem_asset_blob.dart';
 import '../../utils/marp_emoji.dart';
 import '../../utils/marp_style_values.dart';
 import '../../utils/jaro_winkler.dart';
+import '../../utils/image_dimensions.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/media_fetch.dart';
 import '../../utils/table_dates.dart';

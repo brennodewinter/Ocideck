@@ -1276,7 +1276,6 @@ const _dutchSourceBg = {
   'Afbeelding paneelvullend': 'Изображението запълва панела',
   'Vult het paneel en snijdt de randen bij':
       'Запълва панела и изрязва краищата',
-  'Afbeeldingen paneelvullend': 'Изображенията запълват панелите си',
   'Vult elk paneel en snijdt de randen bij':
       'Запълва всеки панел и изрязва краищата',
   'Vullen (bijsnijden)': 'Запълни (изрежи)',
@@ -1556,6 +1555,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Onderstrepen': 'Подчертано',
+  'Eigen verdeling': 'Собствено разпределение',
+  'Gelijke hoogte': 'Еднаква височина',
+  'Panelen vullen': 'Запълване на панелите',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Разпределете ширината сами; всяко изображение се побира в своя панел',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Двете изображения са с еднаква височина и напълно видими — разпределянето и изрязването не правят нищо',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Запълва всеки панел и изрязва ръбовете; ‘Настрой изображение’ избира фокусната точка',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Изрязването не прави нищо в режим Еднаква височина — първо изберете друг изглед',
   'Afbeeldingsgroep': 'Група изображения',
   'Stapel': 'Купчина',
   'Afbeelding toevoegen': 'Добави изображение',

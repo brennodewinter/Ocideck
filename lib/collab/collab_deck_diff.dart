@@ -215,6 +215,7 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.menuLayout => slide.menuLayout,
     SlideField.galleryImages => slide.galleryImages,
     SlideField.galleryLayout => slide.galleryLayout,
+    SlideField.twoImagesLayout => slide.twoImagesLayout,
     SlideField.tableColumnAlignments => slide.tableColumnAlignments,
     SlideField.tableNumberColumns => slide.tableNumberColumns,
     SlideField.timelineLayout => slide.timelineLayout,
