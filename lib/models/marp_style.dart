@@ -1,5 +1,7 @@
 /// Bestaande sterkte van de citaatwaas, in procenten.
 const kDefaultQuoteImageOverlayStrength = 52;
+const kDefaultTitleImageOverlayStrength = 95;
+const kDefaultSectionImageOverlayStrength = 62;
 
 /// Marp visual directives and local image presentation settings.
 ///
@@ -16,7 +18,7 @@ class MarpStyle {
   final List<String> imageFilters;
   final bool headingFit;
 
-  /// Lokale citaatwaas; null behoudt de bestaande standaard en overerving.
+  /// Lokale afbeeldingswaas; null behoudt de bestaande standaard en overerving.
   final int? imageOverlayStrength;
   int get effectiveImageOverlayStrength =>
       imageOverlayStrength ?? kDefaultQuoteImageOverlayStrength;

@@ -32,6 +32,17 @@ part 'slide_taxonomy.dart';
 
 const _uuid = Uuid();
 
+/// Bestaande beginwaarden per soort waas; expliciete stijlwaarden gaan voor.
+int defaultImageOverlayStrength(SlideType type) => switch (type) {
+  SlideType.title => kDefaultTitleImageOverlayStrength,
+  SlideType.section => kDefaultSectionImageOverlayStrength,
+  _ => kDefaultQuoteImageOverlayStrength,
+};
+
+int imageOverlayStrengthFor(Slide slide) =>
+    slide.marpStyle.imageOverlayStrength ??
+    defaultImageOverlayStrength(slide.type);
+
 enum SlideType {
   title,
   section,

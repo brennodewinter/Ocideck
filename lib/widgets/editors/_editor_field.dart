@@ -84,6 +84,9 @@ mixin BgImageHandlers<T extends ConsumerStatefulWidget> on ConsumerState<T> {
   ValueChanged<Slide> get onSlideUpdate;
   String? get bgImageBasePath;
 
+  Widget get imageOverlayStrengthControl =>
+      ImageOverlayStrengthControl(slide: editorSlide, onUpdate: onSlideUpdate);
+
   Future<void> pasteBgImage() async {
     final path = await pasteImageWithFeedback(
       context,
@@ -916,4 +919,43 @@ void reportImageImportFailure(
     ImageImportFailure.memoryBudgetExceeded => webAssetBudgetMessage(l10n),
   };
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+}
+
+/// Gedeelde sterktebediening bij de bestaande waasschakelaar.
+class ImageOverlayStrengthControl extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  const ImageOverlayStrengthControl({
+    super.key,
+    required this.slide,
+    required this.onUpdate,
+  });
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: Semantics(
+          label: context.l10n.d('Grijze waas over afbeelding'),
+          child: Slider(
+            value: imageOverlayStrengthFor(slide).toDouble(),
+            min: 0,
+            max: 100,
+            divisions: 100,
+            label: '${imageOverlayStrengthFor(slide)}%',
+            semanticFormatterCallback: (v) => '${v.round()}%',
+            onChanged: slide.titleImageOverlay
+                ? (v) => onUpdate(
+                    slide.copyWith(
+                      marpStyle: slide.marpStyle.copyWith(
+                        imageOverlayStrength: v.round(),
+                      ),
+                    ),
+                  )
+                : null,
+          ),
+        ),
+      ),
+      SizedBox(width: 44, child: Text('${imageOverlayStrengthFor(slide)}%')),
+    ],
+  );
 }

@@ -103,8 +103,7 @@ import '../../utils/lru_cache.dart';
 import '../../utils/net_guard.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
-import '../../utils/title_contrast.dart'
-    show kTitleOverlayAlpha, kTitleSubtitleAlpha;
+import '../../utils/title_contrast.dart' show kTitleSubtitleAlpha;
 import '../reader/table_edit_controller.dart';
 import '../reader/table_editable_cell.dart';
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
