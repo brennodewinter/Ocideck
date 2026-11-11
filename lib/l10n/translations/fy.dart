@@ -613,6 +613,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Herstel een kopie': 'In kopy weromsette',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'De weromsette kopy stiet yn in nije map njonken it orizjineel.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopy bewarre; it deck sels koe net weromset wurde.',
+  'Herstel van een kopie is mislukt.':
+      'It weromsetten fan in kopy is mislearre.',
   'Onderstrepen': 'Understreept',
   'Eigen verdeling': 'Eigen ferdieling',
   'Gelijke hoogte': 'Lyke hichte',

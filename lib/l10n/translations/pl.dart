@@ -1552,6 +1552,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Herstel een kopie': 'Przywróć kopię',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Przywrócona kopia znajduje się w nowym folderze obok oryginału.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopia zachowana; samej prezentacji nie udało się przywrócić.',
+  'Herstel van een kopie is mislukt.': 'Przywrócenie kopii nie powiodło się.',
   'Onderstrepen': 'Podkreślenie',
   'Eigen verdeling': 'Własny podział',
   'Gelijke hoogte': 'Równa wysokość',

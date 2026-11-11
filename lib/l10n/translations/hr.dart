@@ -1546,6 +1546,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Herstel een kopie': 'Vrati kopiju',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Vraćena kopija nalazi se u novoj mapi pokraj izvornika.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopija je spremljena; samu prezentaciju nije bilo moguće vratiti.',
+  'Herstel van een kopie is mislukt.': 'Vraćanje kopije nije uspjelo.',
   'Onderstrepen': 'Podcrtano',
   'Eigen verdeling': 'Vlastita podjela',
   'Gelijke hoogte': 'Jednaka visina',

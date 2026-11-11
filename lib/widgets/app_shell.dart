@@ -71,6 +71,7 @@ import '../services/update_check_service.dart';
 import '../services/export_readiness.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
+import '../services/file_recovery/file_recovery_service.dart';
 import '../services/file_service.dart';
 import '../services/template_content_service.dart';
 import '../services/image_service.dart';
@@ -682,6 +683,7 @@ class _AppShellState extends ConsumerState<AppShell> {
               context.l10n,
               result,
               reason: ref.read(openFailureProvider),
+              onRecover: () => recoverDeckCopy(context, ref, path),
             );
           }
         } else if (ext == '.ocideck' || ext == '.zip') {

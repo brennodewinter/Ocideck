@@ -2398,6 +2398,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Herstel een kopie': 'Kopyayı kurtar',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Kurtarılan kopya, orijinalin yanındaki yeni bir klasörde duruyor.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopya korundu; destenin kendisi kurtarılamadı.',
+  'Herstel van een kopie is mislukt.': 'Kopya kurtarma başarısız oldu.',
   'Onderstrepen': 'Altı çizili',
   'Eigen verdeling': 'Özel bölme',
   'Gelijke hoogte': 'Eşit yükseklik',

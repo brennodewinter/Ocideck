@@ -792,6 +792,7 @@ class _WelcomeScreen extends ConsumerWidget {
       l10n,
       result,
       reason: ref.read(openFailureProvider),
+      onRecover: () => recoverDeckCopy(context, ref, path),
     );
     if (result == OpenResult.unreadable && !await File(path).exists()) {
       // Het bestand bestaat niet meer: opruimen i.p.v. blijven aanbieden.

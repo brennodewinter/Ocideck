@@ -1548,6 +1548,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Herstel een kopie': 'Atkurti kopiją',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Atkurtą kopiją rasite naujame aplanke šalia originalo.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopija išsaugota; paties pristatymo atkurti nepavyko.',
+  'Herstel van een kopie is mislukt.': 'Kopijos atkurti nepavyko.',
   'Onderstrepen': 'Pabraukta',
   'Eigen verdeling': 'Pasirinktinis padalijimas',
   'Gelijke hoogte': 'Vienodas aukštis',

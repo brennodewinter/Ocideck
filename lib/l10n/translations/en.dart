@@ -767,6 +767,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Herstel een kopie': 'Restore a copy',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'The restored copy is in a new folder next to the original.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Copy preserved; the deck itself could not be restored.',
+  'Herstel van een kopie is mislukt.': 'Restoring a copy failed.',
   'Onderstrepen': 'Underline',
   'Eigen verdeling': 'Custom split',
   'Gelijke hoogte': 'Equal height',

@@ -1542,6 +1542,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Herstel een kopie': 'Pulihkan salinan',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Salinan yang dipulihkan ada di folder baru di samping aslinya.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Salinan tersimpan; dek itu sendiri tidak dapat dipulihkan.',
+  'Herstel van een kopie is mislukt.': 'Pemulihan salinan gagal.',
   'Onderstrepen': 'Garis bawah',
   'Eigen verdeling': 'Pembagian kustom',
   'Gelijke hoogte': 'Tinggi sama',

@@ -1556,6 +1556,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Herstel een kopie': 'Restaurează o copie',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Copia restaurată se află într-un dosar nou, lângă original.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Copia a fost păstrată; prezentarea în sine nu a putut fi restaurată.',
+  'Herstel van een kopie is mislukt.': 'Restaurarea unei copii a eșuat.',
   'Onderstrepen': 'Subliniat',
   'Eigen verdeling': 'Împărțire personalizată',
   'Gelijke hoogte': 'Înălțime egală',

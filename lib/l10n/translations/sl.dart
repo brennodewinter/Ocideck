@@ -1542,6 +1542,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Herstel een kopie': 'Obnovi kopijo',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Obnovljena kopija je v novi mapi ob izvirniku.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopija je shranjena; same predstavitve ni bilo mogoče obnoviti.',
+  'Herstel van een kopie is mislukt.': 'Obnovitev kopije ni uspela.',
   'Onderstrepen': 'Podčrtano',
   'Eigen verdeling': 'Lastna razdelitev',
   'Gelijke hoogte': 'Enaka višina',

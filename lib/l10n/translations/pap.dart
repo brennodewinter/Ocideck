@@ -612,6 +612,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Herstel een kopie': 'Restaurá un kopia',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'E kopia restorá ta den un fòlder nobo banda di e orishente.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'E kopia ta wardá; e presentashon mes no por a wòrdu restorá.',
+  'Herstel van een kopie is mislukt.': 'Restorashon di un kopia a faya.',
   'Onderstrepen': 'Sutrayá',
   'Eigen verdeling': 'Divishon personalisá',
   'Gelijke hoogte': 'Altura igual',
