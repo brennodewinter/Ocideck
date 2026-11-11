@@ -34,10 +34,21 @@ extension TabsImport on TabsNotifier {
   }) async {
     final dest = await _importDestDir(homeDir);
     final file = File(zipPath);
-    if (await file.length() > FileService.maxPackageBytes) {
-      return ImportFailure.tooLarge;
+    final Uint8List bytes;
+    try {
+      // Stat en lees onder één vangst: het bestand kan verdwenen zijn tussen
+      // de keuze en nu, of de toegang kan geweigerd zijn. Zonder deze vangst
+      // ontsnapte de FileSystemException uit openFileByPath — geen melding,
+      // en bij een meervoudige open vielen ook de nóg te openen bestanden weg
+      // (#2875).
+      if (await file.length() > FileService.maxPackageBytes) {
+        return ImportFailure.tooLarge;
+      }
+      bytes = await file.readAsBytes();
+    } on FileSystemException catch (e) {
+      logWarning('TabsNotifier.importPackageFile: bron niet leesbaar', e);
+      return ImportFailure.sourceUnavailable;
     }
-    final bytes = await file.readAsBytes();
     final outcome = await _file.importPackageBytesDetailed(
       bytes,
       dest,
@@ -338,6 +349,7 @@ OpenResult _packageOpenResult(
   // 404. Deze lokale/WebDAV-weg haalt geen URL op, dus ze kunnen hier niet
   // écht ontstaan — maar de switch moet volledig zijn, en geen van hen heeft
   // een fijnere OpenFailure, dus generiek onleesbaar.
+  ImportFailure.sourceUnavailable ||
   ImportFailure.network ||
   ImportFailure.unknownHost ||
   ImportFailure.blockedHost ||

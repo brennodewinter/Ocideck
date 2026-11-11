@@ -70,6 +70,12 @@ enum ImportFailure {
   /// deze reden gooide het uitpakken een niet-gevangen `PathAccessException` die
   /// stil verdween: het bestand opende niet en er kwam geen melding.
   destinationUnavailable,
+
+  /// Het bronbestand zelf kon niet worden gelezen — weggevallen tussen de
+  /// keuze en het inlezen, geweigerde toegang, een stat die faalde. Los van
+  /// [corrupt]: beschadigd zegt "de inhoud deugt niet", dit zegt "er was
+  /// niets te lezen" (#2875).
+  sourceUnavailable,
 }
 
 bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
