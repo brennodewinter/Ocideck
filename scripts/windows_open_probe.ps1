@@ -353,6 +353,8 @@ try {
         Save-ProbeEvidence "selected-$($scenario.kind)"
         [Windows.Forms.SendKeys]::SendWait('{ENTER}')
         [void](Wait-Probe 'native dialog closing' { $null -eq (Get-NativePicker) })
+        Start-Sleep -Milliseconds 1000
+        Save-ProbeEvidence "returned-$($scenario.kind)"
         [void](Wait-Probe "opened $($scenario.kind) presentation in the editor" {
             $root = Get-AppRoot
             $marker = Find-Marker $root $scenario.marker
@@ -378,6 +380,15 @@ try {
         ConvertTo-Json | Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory 'result.json')
     throw
 } finally {
+    # Disposable runner: retain the app's own bounded flight-recorder logs.
+    try {
+        $logs = @(Get-ChildItem $env:APPDATA -Recurse -File -Filter 'ocideck*.log' -ErrorAction SilentlyContinue)
+        $index = 0
+        foreach ($log in $logs) {
+            Copy-Item $log.FullName (Join-Path $EvidenceDirectory "app-flight-$index.log")
+            $index++
+        }
+    } catch { Write-Warning "Could not collect app flight recorder: $_" }
     if ($script:app) {
         $script:app.Refresh()
         if (-not $script:app.HasExited) { Stop-Process -Id $script:app.Id -Force }
