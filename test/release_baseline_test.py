@@ -146,6 +146,30 @@ class ReleaseBaselineTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'incomplete'):
                 baseline.public_proof(self.transport, assets, 'v0.7.7', 'a' * 40, self.args.public_key)
 
+    def test_global_manifest_accepts_only_matching_public_source_kit(self):
+        version = '0.7.8'
+        required = {n.format(v=version) for templates in baseline.CHANNELS.values() for n in templates}
+        required.discard('ocideck-windows-cohort-0.7.8.json')
+        required |= {'ocideck-0.7.8.cdx.json', 'ocideck-0.7.8.spdx.json'}
+        for extra, public, valid in (
+            ('ocideck-linux-sources-0.7.8.tar.gz', True, True),
+            ('ocideck-linux-sources-0.7.8.tar.gz', False, False),
+            ('ocideck-linux-sources-0.7.7.tar.gz', True, False),
+            ('unexpected.tar.gz', True, False),
+        ):
+            with self.subTest(extra=extra, public=public):
+                names = required | {extra}
+                assets = {n: {'browser_download_url': 'https://forge.invalid/' + n}
+                          for n in names | {'SHA256SUMS', 'SHA256SUMS.minisig'} if public or n != extra}
+                body = ''.join('c' * 64 + '  ./' + n + '\n' for n in sorted(names)).encode()
+                with patch.object(self.transport, 'get', side_effect=lambda u: b'sig' if u.endswith('.minisig') else body), \
+                     patch.object(baseline, 'signature'):
+                    if valid:
+                        baseline.public_proof(self.transport, assets, 'v0.7.8', 'a' * 40, self.args.public_key)
+                    else:
+                        with self.assertRaisesRegex(ValueError, 'incomplete'):
+                            baseline.public_proof(self.transport, assets, 'v0.7.8', 'a' * 40, self.args.public_key)
+
 
 if __name__ == '__main__':
     unittest.main()
