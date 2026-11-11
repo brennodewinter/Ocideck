@@ -15,7 +15,10 @@ ThemeProfile portableCarriedStyle(ThemeProfile profile) {
     if (trimmed.isEmpty) return '';
     if (isBundledAssetPath(trimmed)) return trimmed;
     final normalized = p.posix.normalize(trimmed.replaceAll('\\', '/'));
-    if (!normalized.startsWith('logos/') || normalized.startsWith('../')) {
+    // De traversal-disjunct is verdwenen: na normalize begint een pad dat
+    // met '../' opent per definitie niet met 'logos/' — de eerste helft
+    // dekt hem al (de mutatiesweep wees dit als dood aan).
+    if (!normalized.startsWith('logos/')) {
       return emptyWhenUnsafe ? '' : null;
     }
     return normalized;
@@ -155,7 +158,11 @@ ThemeProfile _styleMembersToMemory(
     if (path.isEmpty) return '';
     if (isBundledAssetPath(path) || WebAssetStore.isMemPath(path)) return path;
     final normalized = p.posix.normalize(path.replaceAll('\\', '/'));
-    if (!normalized.startsWith('logos/') || normalized.contains('..')) {
+    // 'logos/'-containment leeft in portableCarriedStyle, die hier altijd
+    // aan voorafgaat — de prefixcheck was daardoor onbereikbaar (dood,
+    // wees de mutatiesweep aan). '..' kan een pakket-entry wél letterlijk
+    // als sleutel hebben, dus die check blijft lokaal dragen.
+    if (normalized.contains('..')) {
       return emptyWhenMissing ? '' : null;
     }
     final bytes = byName[normalized];
