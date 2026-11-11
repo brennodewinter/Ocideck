@@ -9,6 +9,8 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:path/path.dart' as p;
 
+import 'io_fault.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -302,6 +304,55 @@ void main() {
     expect(reopened!.title, 'Portable Deck');
     expect(reopened.slides.length, 2);
   });
+
+  test(
+    'een leesfout in de hergebruik-vergelijking pakt opnieuw uit (#2882)',
+    () async {
+      // De tweede import van een identiek pakket hergebruikt de eerder
+      // uitgepakte map als alle leden byte-identiek zijn. Faalde de
+      // bytevergelijking zelf (weg tussen stat en lees), dan ontsnapte de
+      // uitzondering uit importPackageBytesDetailed — nu telt hij als
+      // "niet gelijk" en pakt de import gewoon opnieuw uit.
+      final temp = await Directory.systemTemp.createTemp(
+        'ocideck_pkg_reuse_fault_',
+      );
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+
+      final service = makeService();
+      final deck = Deck(
+        title: 'Hergebruikt Deck',
+        slides: <Slide>[
+          Slide.create(SlideType.title).copyWith(title: 'Hergebruikt Deck'),
+        ],
+      );
+      final bytes = await service.buildPackageBytes(deck);
+
+      final first = await service.importPackageBytes(bytes, temp.path);
+      expect(first, isNotNull);
+
+      // De hergebruik-vergelijking werkt op lexicale paden, dus het doel is
+      // het pad zoals de eerste import het teruggaf — geen realpath.
+      final second = await runWithFileFault(
+        () => service.importPackageBytes(bytes, temp.path),
+        targetPath: first!,
+        failOn: {'readAsBytes'},
+      );
+
+      expect(
+        second,
+        isNotNull,
+        reason: 'een leesfout mag de import niet meenemen',
+      );
+      expect(
+        second,
+        isNot(first),
+        reason: 'zonder match hoort een verse uitgepakte map',
+      );
+      expect(await File(second!).exists(), isTrue);
+    },
+  );
 
   test('importPackageBytes returns null when no markdown is present', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck_pkg_nomd_');

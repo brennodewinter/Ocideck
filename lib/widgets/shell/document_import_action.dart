@@ -280,7 +280,17 @@ Future<({Uint8List bytes, String name})?> _pickDocument(
   );
   if (picked.isEmpty) return null;
   final file = picked.first;
-  return (bytes: Uint8List.fromList(await file.readAsBytes()), name: file.name);
+  try {
+    return (
+      bytes: Uint8List.fromList(await file.readAsBytes()),
+      name: file.name,
+    );
+  } catch (e) {
+    // Leesfout op het gekozen bestand is "niets bruikbaars gekregen" — loggen
+    // en terugvallen, niet uit de importknop laten ontsnappen (#2886).
+    logWarning('Document-import: ${file.name} niet leesbaar', e);
+    return null;
+  }
 }
 
 /// Het menulabel voor de document-import.

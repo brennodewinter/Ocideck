@@ -698,18 +698,26 @@ Future<({String name, Uint8List bytes})?> _pickBytes({
 
 /// Lees een gekozen bestand incrementeel zodat een bestandkiezer niet alsnog
 /// de hele schijf in één buffer kan zetten vóór de importlimiet hem ziet.
+/// Een leesfout levert `null` — hetzelfde "niets bruikbaars gekregen" als een
+/// te groot bestand; de aanroeper meldt dan alsof er niets is gekozen, maar
+/// crasht in elk geval niet midden in de openstroom (#2883).
 Future<Uint8List?> _readPickedBytesCapped(
   PlatformFile file, {
   required int maxBytes,
 }) async {
-  final knownSize = file.lengthSync() ?? await file.length();
-  if (knownSize != null && knownSize > maxBytes) return null;
-  final builder = BytesBuilder(copy: false);
-  await for (final chunk in file.readAsByteStream()) {
-    if (chunk.length > maxBytes - builder.length) return null;
-    builder.add(chunk);
+  try {
+    final knownSize = file.lengthSync() ?? await file.length();
+    if (knownSize != null && knownSize > maxBytes) return null;
+    final builder = BytesBuilder(copy: false);
+    await for (final chunk in file.readAsByteStream()) {
+      if (chunk.length > maxBytes - builder.length) return null;
+      builder.add(chunk);
+    }
+    return builder.takeBytes();
+  } catch (e) {
+    logWarning('FileService._readPickedBytesCapped: gekozen bestand faalde', e);
+    return null;
   }
-  return builder.takeBytes();
 }
 
 String _safeImportBase(String name) =>

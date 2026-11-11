@@ -589,10 +589,21 @@ Future<List<PickedPresentation>?> _pickPresentations(
     initialDirectory: initialDirectory,
   );
   if (picked.isEmpty) return null;
-  return [
-    for (final file in picked)
-      (bytes: Uint8List.fromList(await file.readAsBytes()), name: file.name),
-  ];
+  final presentations = <PickedPresentation>[];
+  for (final file in picked) {
+    try {
+      presentations.add((
+        bytes: Uint8List.fromList(await file.readAsBytes()),
+        name: file.name,
+      ));
+    } catch (e) {
+      // Eén gekozen bestand dat niet leest mag de rest van de stapel niet
+      // meenemen — en evenmin als ongegrepene fout uit de importknop lopen
+      // (#2886).
+      logWarning('Presentatie-import: ${file.name} niet leesbaar', e);
+    }
+  }
+  return presentations;
 }
 
 /// Het menulabel voor de presentatie-import.

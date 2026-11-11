@@ -15,6 +15,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/image_sidecar_store.dart';
 import 'package:path/path.dart' as p;
 
+import 'io_fault.dart';
+
 void main() {
   late Directory tmp;
 
@@ -70,4 +72,41 @@ void main() {
     expect(await store.read(p.join(tmp.path, 'foto.png')), 'een bijschrift');
     expect(await store.readDir(tmp.path), {'foto.png': 'een bijschrift'});
   });
+
+  test(
+    'een gefaalde toegangscontrole is geen ontsnapte fout (#2885)',
+    () async {
+      // File.existsSync gooit bij een I/O-fout — die stond búiten de vangst en
+      // ontsnapte zo uit elke lees- en schrijfoperatie van de store.
+      final image = p.join(tmp.path, 'foto.png');
+      // De store werkt op het lexicale pad — geen realpath nodig.
+      final sidecar = p.join(tmp.path, store.sidecarName);
+
+      final value = await runWithFileFault(
+        () => store.read(image),
+        targetPath: sidecar,
+        failOn: {'existsSync'},
+      );
+      expect(value, isNull, reason: 'onleesbaar is "geen entry", geen crash');
+
+      final entries = await runWithFileFault(
+        () => store.readDir(tmp.path),
+        targetPath: sidecar,
+        failOn: {'existsSync'},
+      );
+      expect(entries, isEmpty);
+
+      // Schrijven mag wél hoorbaar stoppen: doorgaan met een lege map zou het
+      // bestaande bestand overschrijven. De fout blijft de bekende
+      // SidecarUnreadable, geen kale FileSystemException.
+      await expectLater(
+        runWithFileFault(
+          () => store.write(image, 'bijschrift'),
+          targetPath: sidecar,
+          failOn: {'existsSync'},
+        ),
+        throwsA(isA<SidecarUnreadable>()),
+      );
+    },
+  );
 }

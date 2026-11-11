@@ -295,7 +295,22 @@ _readAndScanMarkdown(String filePath, String? content) async {
     raw = content;
   } else {
     final file = File(filePath);
-    if (!await file.exists()) {
+    // exists() gooit bij een I/O-fout (geen bestand is `false`, geen toegang
+    // is een uitzondering). Een gefaalde controle is geen "bestaat niet" —
+    // dat zou ons eerlijk niet weten — maar "kom er niet bij" (#2876).
+    final bool exists;
+    try {
+      exists = await file.exists();
+    } catch (e) {
+      logWarning('FileService.open: cannot check existence', e);
+      return (
+        raw: null,
+        failure: OpenFailure.inaccessible,
+        hasUtf8Bom: false,
+        safetyFindings: null,
+      );
+    }
+    if (!exists) {
       return (
         raw: null,
         failure: OpenFailure.notFound,
@@ -392,22 +407,26 @@ extension _FileServiceOpen on FileService {
     List<String> skipped,
   ) async {
     var hydrated = deck;
+    // De exists-controle staat bewust ín de vangst: File.exists() gooit bij
+    // een I/O-fout (geen bestand is `false`, geen toegang is een uitzondering)
+    // en ook die mag het openen van het deck niet blokkeren — zelfde regel
+    // als de leesfout eronder.
     final sidecar = File(_sidecarPath(filePath));
-    if (await sidecar.exists()) {
-      try {
+    try {
+      if (await sidecar.exists()) {
         final raw = await _readSidecarCapped(sidecar, 'ink', skipped);
         if (raw != null) {
           final map = AnnotationCodec.decode(raw, hydrated.slides);
           if (map.isNotEmpty) hydrated = hydrated.copyWith(annotations: map);
         }
-      } catch (e) {
-        // A broken sidecar must never block opening the deck.
-        logWarning('FileService.openDeck: annotation sidecar unreadable', e);
       }
+    } catch (e) {
+      // A broken sidecar must never block opening the deck.
+      logWarning('FileService.openDeck: annotation sidecar unreadable', e);
     }
     final userNotesSidecar = File(_userNotesSidecarPath(filePath));
-    if (await userNotesSidecar.exists()) {
-      try {
+    try {
+      if (await userNotesSidecar.exists()) {
         final raw = await _readSidecarCapped(
           userNotesSidecar,
           'user-notes',
@@ -417,16 +436,16 @@ extension _FileServiceOpen on FileService {
           final map = UserNotesCodec.decode(raw, hydrated.slides);
           if (map.isNotEmpty) hydrated = hydrated.copyWith(userNotes: map);
         }
-      } catch (e) {
-        logWarning('FileService.openDeck: user-notes sidecar unreadable', e);
       }
+    } catch (e) {
+      logWarning('FileService.openDeck: user-notes sidecar unreadable', e);
     }
     // De MIAUW-dispositie. Ligt er een sidecar, dan is die de waarheid; wat
     // de parser nog uit de oude base64-front matter haalde, is het
     // opwaardeerpad voor een bestand dat er nog geen heeft.
     final miauwSidecar = File(_miauwSidecarPath(filePath));
-    if (await miauwSidecar.exists()) {
-      try {
+    try {
+      if (await miauwSidecar.exists()) {
         final raw = await _readSidecarCapped(miauwSidecar, 'MIAUW', skipped);
         final d = raw == null
             ? const MiauwDisposition()
@@ -434,16 +453,16 @@ extension _FileServiceOpen on FileService {
         if (!d.isEmpty) {
           hydrated = hydrated.copyWith(miauw: d);
         }
-      } catch (e) {
-        logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
       }
+    } catch (e) {
+      logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
     }
     // De terzijdegelegde privacybevindingen (#651). Ligt er geen sidecar, dan
     // is er niets terzijdegelegd — er is geen oude vorm om van op te waarderen,
     // want dit formaat begon hier.
     final dismissalsSidecar = File(_dismissalsSidecarPath(filePath));
-    if (await dismissalsSidecar.exists()) {
-      try {
+    try {
+      if (await dismissalsSidecar.exists()) {
         final raw = await _readSidecarCapped(
           dismissalsSidecar,
           'dismissals',
@@ -458,23 +477,23 @@ extension _FileServiceOpen on FileService {
           );
           if (!d.isEmpty) hydrated = hydrated.copyWith(dismissals: d);
         }
-      } catch (e) {
-        logWarning('FileService.openDeck: dismissals sidecar unreadable', e);
       }
+    } catch (e) {
+      logWarning('FileService.openDeck: dismissals sidecar unreadable', e);
     }
     // Het zegel en de handtekening. Ligt er een sidecar, dan is die de
     // waarheid; wat de parser nog uit de oude front matter haalde (met
     // [SealForm.canonical]) is het opwaardeerpad voor een bestand dat er nog
     // geen heeft.
     final sealSidecar = File(_sealSidecarPath(filePath));
-    if (await sealSidecar.exists()) {
-      try {
+    try {
+      if (await sealSidecar.exists()) {
         final raw = await _readSidecarCapped(sealSidecar, 'seal', skipped);
         final record = raw == null ? null : SealCodec.decode(raw);
         if (record != null) hydrated = record.applyTo(hydrated);
-      } catch (e) {
-        logWarning('FileService.openDeck: seal sidecar unreadable', e);
       }
+    } catch (e) {
+      logWarning('FileService.openDeck: seal sidecar unreadable', e);
     }
     return hydrated;
   }

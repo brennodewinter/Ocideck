@@ -49,8 +49,12 @@ class ImageSidecarStore {
   /// De tekst voor [resolvedImagePath], of null zonder sidecar of entry.
   Future<String?> read(String resolvedImagePath) async {
     final file = fileFor(resolvedImagePath);
-    if (!file.existsSync()) return null;
     try {
+      // existsSync staat bewust ín de vangst: File.existsSync gooit bij een
+      // I/O-fout (geen bestand is `false`, geen toegang is een uitzondering),
+      // en zo'n fout mag het openen van het deck evenmin blokkeren als een
+      // leesfout (#2885).
+      if (!file.existsSync()) return null;
       if (!await _withinCap(file)) return null;
       final data = jsonDecodeGuarded(await file.readAsString()) as Map;
       final value = data[p.basename(resolvedImagePath)];
@@ -88,8 +92,11 @@ class ImageSidecarStore {
     Map<String, String> replacements,
   ) async {
     Map<String, dynamic> data = {};
-    if (file.existsSync()) {
-      try {
+    try {
+      // existsSync ín de vangst: gooit de toegangscontrole (weggevallen
+      // volume), dan moeten we óók niet met een lege map doorgaan — die zou
+      // het bestaande bestand hieronder overschrijven (#2885).
+      if (file.existsSync()) {
         // Boven de grens niet lezen, en dus ook niet schrijven: doorgaan met een
         // lege map zou het bestand overschrijven en alle andere bijschriften in
         // deze map wissen — precies de fout die het catch-blok hieronder
@@ -98,16 +105,16 @@ class ImageSidecarStore {
         data = Map<String, dynamic>.from(
           jsonDecodeGuarded(await file.readAsString()) as Map,
         );
-      } catch (e, s) {
-        // Niet dóórgaan met een lege map: die wordt hieronder over het bestand
-        // heen geschreven, en dan zijn alle andere bijschriften in deze map weg
-        // — of het bestand wordt in zijn geheel verwijderd wanneer de gebruiker
-        // net een bijschrift wíste. Eén beschadigde sidecar (een
-        // synchronisatieconflict, een halve kopie) kostte zo alle andere.
-        // Liever niets doen dan de rest slopen; de aanroeper krijgt het te zien.
-        logError('$logLabel: parse existing sidecar', e, s);
-        throw SidecarUnreadable(file.path, e);
       }
+    } catch (e, s) {
+      // Niet dóórgaan met een lege map: die wordt hieronder over het bestand
+      // heen geschreven, en dan zijn alle andere bijschriften in deze map weg
+      // — of het bestand wordt in zijn geheel verwijderd wanneer de gebruiker
+      // net een bijschrift wíste. Eén beschadigde sidecar (een
+      // synchronisatieconflict, een halve kopie) kostte zo alle andere.
+      // Liever niets doen dan de rest slopen; de aanroeper krijgt het te zien.
+      logError('$logLabel: parse existing sidecar', e, s);
+      throw SidecarUnreadable(file.path, e);
     }
     for (final entry in replacements.entries) {
       if (entry.value.trim().isEmpty) {
@@ -117,7 +124,13 @@ class ImageSidecarStore {
       }
     }
     if (data.isEmpty) {
-      if (file.existsSync()) await file.delete();
+      // Opruimen mag de schrijfbeurt niet breken: een existsSync- of
+      // delete-fout is een waarschuwing, geen verloren bijschrift.
+      try {
+        if (file.existsSync()) await file.delete();
+      } catch (e) {
+        logWarning('$logLabel: delete empty sidecar', e);
+      }
     } else {
       await writeStringAtomicIfChanged(
         file,
@@ -129,8 +142,8 @@ class ImageSidecarStore {
   /// Alle entries van de sidecar in [dir]: bestandsnaam → tekst.
   Future<Map<String, String>> readDir(String dir) async {
     final file = File(p.join(dir, sidecarName));
-    if (!file.existsSync()) return const {};
     try {
+      if (!file.existsSync()) return const {};
       if (!await _withinCap(file)) return const {};
       final data = jsonDecodeGuarded(await file.readAsString()) as Map;
       return {

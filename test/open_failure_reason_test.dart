@@ -74,6 +74,63 @@ void main() {
     expect(reden, OpenFailure.inaccessible);
   });
 
+  test(
+    'een fout die geen bekende categorie is, valt op het vangnet (#2887)',
+    () async {
+      // Elke I/O-stap in het openpad hoort zijn eigen uitkomst te kennen —
+      // maar blijft er tóch een niet-filesystem-fout doorheen glippen, dan
+      // is "kon niet openen" de eerlijke melding: het openFileByPath-vangnet
+      // maakt er een uitkomst van in plaats van de fout te laten ontsnappen.
+      final dir = Directory(temp.resolveSymbolicLinksSync());
+      final pad = '${dir.path}/deck.md';
+      File(
+        pad,
+      ).writeAsStringSync('---\nmarp: true\n---\n\n# Titel\n\nInhoud.\n');
+      // De stijlsidecar wordt bij elke schijf-open aangeraakt; een StateError
+      // (geen FileSystemException) glipt langs alle gerichte vangsten.
+      final sidecar = '${dir.path}/ocideck-style.json';
+
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final result = await runWithFileFault(
+        () => container.read(tabsProvider.notifier).openFileByPath(pad),
+        targetPath: sidecar,
+        failOn: {'exists'},
+        error: StateError('geforceerde niet-IO-fout'),
+      );
+
+      expect(result, OpenResult.unreadable);
+      expect(
+        container.read(openFailureProvider),
+        isNull,
+        reason: 'een onbekende fout verzint geen reden',
+      );
+    },
+  );
+
+  test(
+    'een sidecar die niet te staten is, blokkeert het openen niet',
+    () async {
+      // Dezelfde regel als bij een kapotte sidecar: een I/O-fout op de
+      // bijlagen mag de presentatie er zelf niet meenemen.
+      final dir = Directory(temp.resolveSymbolicLinksSync());
+      final pad = '${dir.path}/deck.md';
+      File(
+        pad,
+      ).writeAsStringSync('---\nmarp: true\n---\n\n# Titel\n\nInhoud.\n');
+
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final result = await runWithFileFault(
+        () => container.read(tabsProvider.notifier).openFileByPath(pad),
+        targetPath: '${dir.path}/deck.ink.json',
+        failOn: {'exists'},
+      );
+
+      expect(result, OpenResult.opened);
+    },
+  );
+
   test('een binair bestand wordt als onleesbaar herkend', () async {
     // Geen geldige UTF-8. De gebruiker koos iets wat geen tekst is — dan hoort
     // de melding te zeggen wat OciDeck wél opent.

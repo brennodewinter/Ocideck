@@ -45,8 +45,10 @@ Future<ThemeProfile> carriedProjectStyle(
 ) async {
   if (kIsWeb || projectPath == null) return fallback;
   final file = File(p.join(projectPath, carriedStyleFileName));
-  if (!await file.exists()) return fallback;
   try {
+    // exists() ín de vangst: ook hij gooit bij een I/O-fout, en een
+    // sidecar-fout mag nooit het openen van het deck meenemen.
+    if (!await file.exists()) return fallback;
     final length = await file.length();
     if (length <= 0 || length > _carriedStyleMaxBytes) return fallback;
     final decoded = jsonDecodeGuarded(await file.readAsString());
@@ -69,11 +71,18 @@ Future<void> refreshCarriedProjectStyle(
 ) async {
   if (kIsWeb) return;
   final file = File(p.join(projectPath, carriedStyleFileName));
-  if (!await file.exists()) return;
-  await writeStringAtomic(
-    file,
-    jsonEncode(portableCarriedStyle(profile).toJson()),
-  );
+  try {
+    if (!await file.exists()) return;
+    await writeStringAtomic(
+      file,
+      jsonEncode(portableCarriedStyle(profile).toJson()),
+    );
+  } on FileSystemException catch (e) {
+    // Een sidecar-verversing die faalt mag een verder geslaagde opslag niet
+    // meenemen — de volgende open valt anders terug op de oude sidecar, nooit
+    // op niets.
+    logWarning('FileService.refreshCarriedProjectStyle', e);
+  }
 }
 
 ThemeProfile _styleInsideProject(ThemeProfile profile, String projectPath) {

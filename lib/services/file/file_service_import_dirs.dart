@@ -52,11 +52,19 @@ extension _FileServiceImportDirs on FileService {
   }
 
   Future<bool> _fileHasBytes(File file, List<int> bytes) async {
-    if (await file.length() != bytes.length) return false;
-    final onDisk = await file.readAsBytes();
-    for (var i = 0; i < bytes.length; i++) {
-      if (onDisk[i] != bytes[i]) return false;
+    // Een leesfout telt als "niet gelijk", dezelfde afspraak als
+    // `filesHaveSameContent`: hergebruik valt dan af en de import pakt uit in
+    // een verse map — erger dan nodig, maar nooit een ontsnapte uitzondering
+    // of een stil overschreven bestand (#2882).
+    try {
+      if (await file.length() != bytes.length) return false;
+      final onDisk = await file.readAsBytes();
+      for (var i = 0; i < bytes.length; i++) {
+        if (onDisk[i] != bytes[i]) return false;
+      }
+      return true;
+    } on FileSystemException {
+      return false;
     }
-    return true;
   }
 }
