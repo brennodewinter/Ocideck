@@ -1,3 +1,6 @@
+@TestOn('vm')
+library;
+
 import 'dart:isolate';
 
 import 'package:flutter_test/flutter_test.dart';

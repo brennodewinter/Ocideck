@@ -234,7 +234,10 @@ typedef _PrivacyScanRequest = ({
 
 Future<(bool, List<List<PrivacyFinding>>)> _runPrivacyScanRequest(
   _PrivacyScanRequest request,
-) => Isolate.run(() => _scanPrivacyRequest(request));
+) {
+  if (kIsWeb) return Future.sync(() => _scanPrivacyRequest(request));
+  return Isolate.run(() => _scanPrivacyRequest(request));
+}
 
 Future<(bool, List<List<PrivacyFinding>>)> _scanPrivacyRequest(
   _PrivacyScanRequest request,
