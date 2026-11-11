@@ -6547,6 +6547,12 @@ const _dutchSourceAddDe = {
   'Vernieuwen': 'Aktualisieren',
   'Deze map is leeg': 'Dieser Ordner ist leer',
   'Kon dit bestand niet openen.': 'Diese Datei konnte nicht geöffnet werden.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Diese Datei konnte nicht geöffnet werden: kein Zugriff oder der Ort ist nicht mehr verfügbar.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Diese Datei konnte nicht gelesen werden — kein Zugriff oder die Datei ist verschwunden',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Die ausgewählte Paketdatei konnte nicht gelesen werden. Prüfen Sie, ob sie noch vorhanden ist und ob Sie darauf zugreifen können.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Das ist keine Marp/OciDeck-Präsentation.',
   'Downloaden mislukt:': 'Download fehlgeschlagen:',

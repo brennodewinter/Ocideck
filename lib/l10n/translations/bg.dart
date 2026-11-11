@@ -764,6 +764,12 @@ const _dutchSourceBg = {
   'Vernieuwen': 'Опресняване',
   'Deze map is leeg': 'Тази папка е празна',
   'Kon dit bestand niet openen.': 'Този файл не можа да се отвори.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Този файл не можа да се отвори: няма достъп или местоположението е изчезнало.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Този файл не можа да се прочете — няма достъп или файлът е изчезнал',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Избраният файл на пакета не можа да се прочете. Проверете дали още е там и дали имате достъп до него.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Това не е презентация на Marp/OciDeck.',
   'Downloaden mislukt:': 'Изтеглянето не бе успешно:',

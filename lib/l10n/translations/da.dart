@@ -755,6 +755,12 @@ const _dutchSourceDa = {
   'Vernieuwen': 'Opdater',
   'Deze map is leeg': 'Denne mappe er tom',
   'Kon dit bestand niet openen.': 'Kunne ikke åbne denne fil.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Kunne ikke åbne denne fil: ingen adgang, eller placeringen er forsvundet.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Kunne ikke læse denne fil — ingen adgang eller filen er forsvundet',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Den valgte pakkefil kunne ikke læses. Kontrollér, at den stadig findes, og at du kan nå den.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Dette er ikke en Marp/OciDeck-præsentation.',
   'Downloaden mislukt:': 'Download mislykkedes:',

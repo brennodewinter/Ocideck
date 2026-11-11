@@ -756,6 +756,12 @@ const _dutchSourceCs = {
   'Vernieuwen': 'Obnovit',
   'Deze map is leeg': 'Tato složka je prázdná',
   'Kon dit bestand niet openen.': 'Tento soubor se nepodařilo otevřít.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Tento soubor se nepodařilo otevřít: chybí přístup nebo umístění zmizelo.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Tento soubor se nepodařilo přečíst — chybí přístup nebo soubor zmizel',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Zvolený soubor balíčku se nepodařilo přečíst. Zkontrolujte, zda tam stále je a zda k němu máte přístup.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Toto není prezentace Marp/OciDeck.',
   'Downloaden mislukt:': 'Stahování se nezdařilo:',
   'Opslaan mislukt:': 'Uložení se nezdařilo:',

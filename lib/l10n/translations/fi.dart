@@ -755,6 +755,12 @@ const _dutchSourceFi = {
   'Vernieuwen': 'Päivitä',
   'Deze map is leeg': 'Tämä kansio on tyhjä',
   'Kon dit bestand niet openen.': 'Tätä tiedostoa ei voitu avata.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Tätä tiedostoa ei voitu avata: ei käyttöoikeutta tai sijainti on kadonnut.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Tätä tiedostoa ei voitu lukea — ei käyttöoikeutta tai tiedosto on kadonnut',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Valittua pakettitiedostoa ei voitu lukea. Tarkista, että se on yhä paikallaan ja että pääset siihen käsiksi.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Tämä ei ole Marp/OciDeck-esitys.',
   'Downloaden mislukt:': 'Lataus epäonnistui:',
   'Opslaan mislukt:': 'Tallennus epäonnistui:',

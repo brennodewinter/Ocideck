@@ -757,6 +757,12 @@ const _dutchSourceHr = {
   'Vernieuwen': 'Osvježi',
   'Deze map is leeg': 'Ova mapa je prazna',
   'Kon dit bestand niet openen.': 'Nije moguće otvoriti ovu datoteku.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Nije moguće otvoriti ovu datoteku: nema pristupa ili je lokacija nestala.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Nije moguće pročitati ovu datoteku — nema pristupa ili je datoteka nestala',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Odabrana datoteka paketa nije se mogla pročitati. Provjerite je li još uvijek tu i možete li joj pristupiti.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Ovo nije Marp/OciDeck prezentacija.',
   'Downloaden mislukt:': 'Preuzimanje nije uspjelo:',

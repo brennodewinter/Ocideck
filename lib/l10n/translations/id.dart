@@ -754,6 +754,12 @@ const _dutchSourceId = {
   'Vernieuwen': 'Segarkan',
   'Deze map is leeg': 'Folder ini kosong',
   'Kon dit bestand niet openen.': 'Tidak dapat membuka berkas ini.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Tidak dapat membuka berkas ini: tidak ada akses atau lokasinya telah hilang.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Tidak dapat membaca berkas ini — tidak ada akses atau berkasnya telah hilang',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Berkas paket yang dipilih tidak dapat dibaca. Periksa apakah masih ada dan apakah Anda dapat mengaksesnya.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Ini bukan presentasi Marp/OciDeck.',
   'Downloaden mislukt:': 'Unduhan gagal:',
   'Opslaan mislukt:': 'Penyimpanan gagal:',

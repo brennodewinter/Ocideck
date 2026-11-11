@@ -765,6 +765,12 @@ const _dutchSourceEl = {
   'Deze map is leeg': 'Αυτός ο φάκελος είναι κενός',
   'Kon dit bestand niet openen.':
       'Δεν ήταν δυνατό το άνοιγμα αυτού του αρχείου.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Αδυναμία ανοίγματος αυτού του αρχείου: δεν υπάρχει πρόσβαση ή η τοποθεσία έχει χαθεί.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Αδυναμία ανάγνωσης αυτού του αρχείου — δεν υπάρχει πρόσβαση ή το αρχείο έχει χαθεί',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Το επιλεγμένο αρχείο πακέτου δεν ήταν δυνατό να διαβαστεί. Ελέγξτε αν εξακολουθεί να υπάρχει και αν έχετε πρόσβαση σε αυτό.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Αυτή δεν είναι παρουσίαση Marp/OciDeck.',
   'Downloaden mislukt:': 'Η λήψη απέτυχε:',

@@ -754,6 +754,12 @@ const _dutchSourceSl = {
   'Vernieuwen': 'Osveži',
   'Deze map is leeg': 'Ta mapa je prazna',
   'Kon dit bestand niet openen.': 'Te datoteke ni bilo mogoče odpreti.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Te datoteke ni bilo mogoče odpreti: ni dostopa ali pa je lokacija izginila.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Te datoteke ni bilo mogoče prebrati — ni dostopa ali pa je datoteka izginila',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Izbrane datoteke paketa ni bilo mogoče prebrati. Preverite, ali je še tam in ali lahko dostopate do nje.',
   'Dit is geen Marp/OciDeck-presentatie.': 'To ni predstavitev Marp/OciDeck.',
   'Downloaden mislukt:': 'Prenos ni uspel:',
   'Opslaan mislukt:': 'Shranjevanje ni uspelo:',

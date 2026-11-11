@@ -759,6 +759,12 @@ const _dutchSourceLt = {
   'Vernieuwen': 'Atnaujinti',
   'Deze map is leeg': 'Šis aplankas tuščias',
   'Kon dit bestand niet openen.': 'Nepavyko atverti šio failo.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Nepavyko atverti šio failo: nėra prieigos arba vieta dingo.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Nepavyko perskaityti šio failo — nėra prieigos arba failas dingo',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Nepavyko perskaityti pasirinkto paketo failo. Patikrinkite, ar jis vis dar yra ir ar galite jį pasiekti.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Tai nėra Marp/OciDeck pristatymas.',
   'Downloaden mislukt:': 'Atsisiųsti nepavyko:',
   'Opslaan mislukt:': 'Išsaugoti nepavyko:',

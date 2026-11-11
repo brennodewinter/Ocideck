@@ -753,6 +753,12 @@ const _dutchSourceLv = {
   'Vernieuwen': 'Atsvaidzināt',
   'Deze map is leeg': 'Šī mape ir tukša',
   'Kon dit bestand niet openen.': 'Neizdevās atvērt šo failu.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Neizdevās atvērt šo failu: nav piekļuves vai atrašanās vieta ir pazudusi.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Neizdevās nolasīt šo failu — nav piekļuves vai fails ir pazudis',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Izvēlēto pakotnes failu neizdevās nolasīt. Pārbaudi, vai tas joprojām ir tur un vai vari tam piekļūt.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Šī nav Marp/OciDeck prezentācija.',
   'Downloaden mislukt:': 'Lejupielāde neizdevās:',
   'Opslaan mislukt:': 'Saglabāšana neizdevās:',

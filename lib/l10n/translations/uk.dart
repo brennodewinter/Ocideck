@@ -764,6 +764,12 @@ const _dutchSourceUk = {
   'Vernieuwen': 'Оновити',
   'Deze map is leeg': 'Ця тека порожня',
   'Kon dit bestand niet openen.': 'Не вдалося відкрити цей файл.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Не вдалося відкрити цей файл: немає доступу або розташування зникло.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Не вдалося прочитати цей файл — немає доступу або файл зник',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Не вдалося прочитати вибраний файл пакета. Перевірте, чи він ще там і чи маєте ви до нього доступ.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Це не презентація Marp/OciDeck.',
   'Downloaden mislukt:': 'Не вдалося завантажити:',
   'Opslaan mislukt:': 'Не вдалося зберегти:',
