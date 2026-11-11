@@ -238,6 +238,17 @@ function Get-NativePicker {
     return $null
 }
 
+function Find-NativeAction($Dialog, [string]$Id, [string]$NamePattern) {
+    # Explorer list items reuse IDs 1 and 2. Require the visible action label
+    # as well, and reject ambiguity rather than invoking a file in the list.
+    $matches = @($Dialog.FindAll([Windows.Automation.TreeScope]::Descendants,
+        [Windows.Automation.PropertyCondition]::new(
+            [Windows.Automation.AutomationElement]::AutomationIdProperty, $Id)) |
+        Where-Object { -not $_.Current.IsOffscreen -and $_.Current.Name -match $NamePattern })
+    if ($matches.Count -ne 1) { throw "Expected one native action $Id ($NamePattern), found $($matches.Count)." }
+    return $matches[0]
+}
+
 function Open-NativePicker {
     $root = Get-AppRoot
     [void][OpenProbeWindow]::SetForegroundWindow($script:app.MainWindowHandle)
@@ -320,10 +331,7 @@ try {
 
     # Cancellation is followed by a new open, proving the app remains usable.
     $dialog = Open-NativePicker
-    $cancel = $dialog.FindFirst([Windows.Automation.TreeScope]::Descendants,
-        [Windows.Automation.PropertyCondition]::new(
-            [Windows.Automation.AutomationElement]::AutomationIdProperty, '2'))
-    if (-not $cancel) { throw 'Native Cancel button (ID 2) not found.' }
+    $cancel = Find-NativeAction $dialog '2' '^(Cancel|Annuleren)$'
     Invoke-Control $cancel
     [void](Wait-Probe 'native cancellation' { $null -eq (Get-NativePicker) })
     $script:cancelled = $true
@@ -349,10 +357,7 @@ try {
             $value = $nameBox.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
         }
         $value.SetValue($scenario.path)
-        $open = $dialog.FindFirst([Windows.Automation.TreeScope]::Descendants,
-            [Windows.Automation.PropertyCondition]::new(
-                [Windows.Automation.AutomationElement]::AutomationIdProperty, '1'))
-        if (-not $open) { throw 'Native Open button (ID 1) not found.' }
+        $open = Find-NativeAction $dialog '1' '^(Open|Openen)$'
         Invoke-Control $open
         [void](Wait-Probe 'native dialog closing' { $null -eq (Get-NativePicker) })
         [void](Wait-Probe "opened $($scenario.kind) presentation in the editor" {
