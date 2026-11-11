@@ -493,26 +493,35 @@ extension _FileServiceOpen on FileService {
       // `../` escapes) — otherwise an untrusted deck could read arbitrary files.
       final abs = resolveContainedRealPath(spec.source!, deck.projectPath);
       final file = abs == null ? null : File(abs);
-      if (file == null || !await file.exists()) {
+      if (file == null) {
         // The chart will draw empty. Say so: silence here reads as "this chart
         // has no numbers" when the truth is "its file is missing or refused".
         warnings.add(spec.source!);
         slides.add(s);
         continue;
       }
-      if (await file.length() > FileService.maxChartDataBytes) {
-        // Dezelfde behandeling als een ontbrekend bestand: de grafiek tekent
-        // leeg, en de waarschuwing zegt welk bestand het was. Stil overslaan
-        // zou lezen als "deze grafiek heeft geen cijfers".
-        logWarning(
-          'FileService.openDeck: chart data exceeds '
-          '${FileService.maxChartDataBytes ~/ (1024 * 1024)} MiB cap',
-        );
-        warnings.add(spec.source!);
-        slides.add(s);
-        continue;
-      }
       try {
+        // Bestaan, stat én lees onder één vangst: een stat-fout (weg tussen
+        // exists en length, geweigerde toegang) is net zo goed "data niet
+        // geladen" als een leesfout — hij mag het openen van de presentatie
+        // nooit blokkeren (#2879).
+        if (!await file.exists()) {
+          warnings.add(spec.source!);
+          slides.add(s);
+          continue;
+        }
+        if (await file.length() > FileService.maxChartDataBytes) {
+          // Dezelfde behandeling als een ontbrekend bestand: de grafiek tekent
+          // leeg, en de waarschuwing zegt welk bestand het was. Stil overslaan
+          // zou lezen als "deze grafiek heeft geen cijfers".
+          logWarning(
+            'FileService.openDeck: chart data exceeds '
+            '${FileService.maxChartDataBytes ~/ (1024 * 1024)} MiB cap',
+          );
+          warnings.add(spec.source!);
+          slides.add(s);
+          continue;
+        }
         final raw = await file.readAsString();
         final filled = spec.withData(raw, path: abs!);
         // Hydration happens on open, with no interface to interrupt, so an
