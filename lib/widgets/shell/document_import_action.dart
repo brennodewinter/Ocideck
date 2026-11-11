@@ -272,12 +272,20 @@ Future<({Uint8List bytes, String name})?> _pickDocument(
   AppLocalizations l10n, {
   String? initialDirectory,
 }) async {
-  final picked = await FilePicker.pickFiles(
-    type: FileType.custom,
-    allowedExtensions: documentImportExtensions,
-    dialogTitle: l10n.d('Document kiezen'),
-    initialDirectory: initialDirectory,
-  );
+  final List<PlatformFile> picked;
+  try {
+    picked = await FilePicker.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: documentImportExtensions,
+      dialogTitle: l10n.d('Document kiezen'),
+      initialDirectory: initialDirectory,
+    );
+  } catch (e) {
+    // Een gefaald kiezerproces is "niets gekozen", geen ongegrepene fout
+    // uit de importknop (#2878).
+    logWarning('Document-import: bestandskiezer faalde', e);
+    return null;
+  }
   if (picked.isEmpty) return null;
   final file = picked.first;
   try {

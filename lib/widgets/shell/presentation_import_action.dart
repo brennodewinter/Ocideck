@@ -580,14 +580,23 @@ Future<List<PickedPresentation>?> _pickPresentations(
   AppLocalizations l10n, {
   String? initialDirectory,
 }) async {
-  final picked = await FilePicker.pickFiles(
-    type: FileType.custom,
-    allowedExtensions: presentationImportExtensions,
-    // Meer tegelijk mag: wie een stapel presentaties overzet, doet dat zelden
-    // één voor één. Bij precies één blijft het gedrag ongewijzigd.
-    dialogTitle: l10n.d('Presentatie kiezen'),
-    initialDirectory: initialDirectory,
-  );
+  final List<PlatformFile> picked;
+  try {
+    // Ook het kiezerproces zelf kan falen (worker-exit op Windows, sinds
+    // windows_file_picker 2.0.2 een fout i.p.v. een eindeloos wachten) —
+    // dat is "niets gekozen" met een logregel, geen ongegrepene fout (#2878).
+    picked = await FilePicker.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: presentationImportExtensions,
+      // Meer tegelijk mag: wie een stapel presentaties overzet, doet dat zelden
+      // één voor één. Bij precies één blijft het gedrag ongewijzigd.
+      dialogTitle: l10n.d('Presentatie kiezen'),
+      initialDirectory: initialDirectory,
+    );
+  } catch (e) {
+    logWarning('Presentatie-import: bestandskiezer faalde', e);
+    return null;
+  }
   if (picked.isEmpty) return null;
   final presentations = <PickedPresentation>[];
   for (final file in picked) {

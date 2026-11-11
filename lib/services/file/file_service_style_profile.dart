@@ -616,13 +616,24 @@ extension FileServiceStyleProfile on FileService {
   /// [FileService.pickPackageFile]. [importStyleProfileBytes] toetst daarna de
   /// JSON-envelop met de `ocideck`-marker.
   Future<StyleProfileImportOutcome> importStyleProfile() async {
-    final file = await FilePicker.pickFile(
-      dialogTitle: _d('Stijlprofiel importeren'),
-      type: FileType.any,
-    );
-    if (file == null) {
+    final PlatformFile file;
+    try {
+      // Zie _pickPathsGated: een gefaald kiezerproces is "niets gekozen",
+      // geen ongegrepene fout in het instellingenvenster.
+      final picked = await FilePicker.pickFile(
+        dialogTitle: _d('Stijlprofiel importeren'),
+        type: FileType.any,
+      );
+      if (picked == null) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.cancelled,
+        );
+      }
+      file = picked;
+    } catch (e) {
+      logWarning('FileService.importStyleProfile: kiezer faalde', e);
       return const StyleProfileImportOutcome.failed(
-        StyleProfileImportFailure.cancelled,
+        StyleProfileImportFailure.unreadable,
       );
     }
     // Stat en lees onder één vangst: verdwijnt het bestand tussen kiezen en

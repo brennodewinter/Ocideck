@@ -660,23 +660,33 @@ Future<List<String>> _pickPathsGated({
       // Oude build zonder native handler: val terug op file_picker.
     }
   }
-  if (!allowsMultiple) {
-    final file = await FilePicker.pickFile(
+  try {
+    // De kiezer-Future kan ook met een fout voltooien: sinds
+    // windows_file_picker 2.0.2 propageert een crashende worker via compute
+    // i.p.v. de aanroeper eindeloos te laten wachten (#2878). Een kiezerfout
+    // telt als "niets gekozen" — met een logregel, niet als ongegrepene fout
+    // uit het openmenu.
+    if (!allowsMultiple) {
+      final file = await FilePicker.pickFile(
+        dialogTitle: dialogTitle,
+        type: type,
+        allowedExtensions: allowedExtensions,
+        initialDirectory: initialDirectory,
+      );
+      final path = file?.path;
+      return path == null ? const [] : [path];
+    }
+    final files = await FilePicker.pickFiles(
       dialogTitle: dialogTitle,
       type: type,
       allowedExtensions: allowedExtensions,
       initialDirectory: initialDirectory,
     );
-    final path = file?.path;
-    return path == null ? const [] : [path];
+    return [for (final file in files) ?file.path];
+  } catch (e) {
+    logWarning('FileService.pickPaths: bestandskiezer faalde', e);
+    return const [];
   }
-  final files = await FilePicker.pickFiles(
-    dialogTitle: dialogTitle,
-    type: type,
-    allowedExtensions: allowedExtensions,
-    initialDirectory: initialDirectory,
-  );
-  return [for (final file in files) ?file.path];
 }
 
 /// Kies een bestand en lever NAAM + BYTES. Werkt overal, ook op web — dit is de
@@ -684,11 +694,20 @@ Future<List<String>> _pickPathsGated({
 Future<({String name, Uint8List bytes})?> _pickBytes({
   required String dialogTitle,
 }) async {
-  final file = await FilePicker.pickFile(
-    dialogTitle: dialogTitle,
-    type: FileType.any,
-  );
-  if (file == null) return null;
+  final PlatformFile file;
+  try {
+    // Zelfde vangst als _pickPathsGated: een gefaald kiezerproces (worker
+    // exit op Windows) mag niet als ongegrepene fout uit de openknop lopen.
+    final picked = await FilePicker.pickFile(
+      dialogTitle: dialogTitle,
+      type: FileType.any,
+    );
+    if (picked == null) return null;
+    file = picked;
+  } catch (e) {
+    logWarning('FileService.pickBytes: bestandskiezer faalde', e);
+    return null;
+  }
   final bytes = await _readPickedBytesCapped(
     file,
     maxBytes: FileService.maxPackageBytes,
