@@ -40,9 +40,11 @@ extension SettingsTraces on SettingsNotifier {
   /// paden-lijst ('recentFiles') wordt eenmalig als metadata-loze entries
   /// gemigreerd en daarna alleen nog overschreven bij het wegschrijven.
   List<RecentFile> _loadRecentFiles(SharedPreferences prefs) {
-    final v2 = RecentFile.decodeList(prefs.getString('recentFilesV2'));
+    final v2 = RecentFile.decodeList(_pref<String>(prefs, 'recentFilesV2'));
     if (v2.isNotEmpty) return v2;
-    return RecentFile.fromLegacyPaths(prefs.getStringList('recentFiles') ?? []);
+    return RecentFile.fromLegacyPaths(
+      _prefStringList(prefs, 'recentFiles') ?? [],
+    );
   }
 
   Future<void> _persistRecentFiles(List<RecentFile> files) async {

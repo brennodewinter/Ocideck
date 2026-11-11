@@ -115,7 +115,7 @@ extension SettingsPrivacy on SettingsNotifier {
   Future<void> adoptPrivacyOwnIdentity(SharedPreferences prefs) async {
     // De uitzondering hoort bij de scanner — uit = sleutelbos met rust.
     if (!currentState.privacyChecksEnabled) return;
-    final legacy = prefs.getString(legacyOwnIdentityKey);
+    final legacy = _pref<String>(prefs, legacyOwnIdentityKey);
     if (legacy != null) {
       // De staat draagt hem al: hij kwam rechtstreeks uit prefs.
       if (await _secrets.writePrivacyOwnIdentity(legacy)) {

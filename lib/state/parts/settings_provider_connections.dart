@@ -127,9 +127,11 @@ extension SettingsNotifierConnections on SettingsNotifier {
 /// eerste mutatie. Zolang de gebruiker niets aanraakt blijven de oude sleutels
 /// staan, en dat is precies wat je wilt als hij terugvalt op een oudere versie.
 List<StorageConnection> _loadConnections(SharedPreferences prefs) {
-  final stored = StorageConnection.decodeList(prefs.getString(_connectionsKey));
+  final stored = StorageConnection.decodeList(
+    _pref<String>(prefs, _connectionsKey),
+  );
   if (stored.isNotEmpty) return stored;
-  if (prefs.getString(_connectionsKey) != null) {
+  if (_pref<String>(prefs, _connectionsKey) != null) {
     // Sleutel bestaat maar is leeg: de gebruiker heeft alles verwijderd. Niet
     // migreren, anders komt zijn opruiming elke start terug.
     return const [];
@@ -150,7 +152,7 @@ List<StorageConnection> _migrateLegacyConnections(SharedPreferences prefs) {
     );
   }
 
-  final webdavJson = prefs.getString('webdavServer');
+  final webdavJson = _pref<String>(prefs, 'webdavServer');
   if (webdavJson != null) {
     try {
       final server = WebdavServer.fromJson(
@@ -168,7 +170,7 @@ List<StorageConnection> _migrateLegacyConnections(SharedPreferences prefs) {
     }
   }
 
-  final gitJson = prefs.getString('gitRepo');
+  final gitJson = _pref<String>(prefs, 'gitRepo');
   if (gitJson != null) {
     try {
       final repo = GitRepoConfig.fromJson(
@@ -192,9 +194,9 @@ List<StorageConnection> _migrateLegacyConnections(SharedPreferences prefs) {
 /// De bibliotheken zoals ze vóór de verbindingenlijst waren opgeslagen,
 /// inclusief de nóg oudere enkele `homeDirectory`.
 List<LibraryFolder> _legacyLibraries(SharedPreferences prefs) {
-  final stored = LibraryFolder.decodeList(prefs.getString('libraries'));
+  final stored = LibraryFolder.decodeList(_pref<String>(prefs, 'libraries'));
   if (stored.isNotEmpty) return stored;
-  final legacy = prefs.getString('homeDirectory');
+  final legacy = _pref<String>(prefs, 'homeDirectory');
   if (legacy != null && legacy.trim().isNotEmpty) {
     return [LibraryFolder(name: _migratedLibraryName, path: legacy)];
   }
