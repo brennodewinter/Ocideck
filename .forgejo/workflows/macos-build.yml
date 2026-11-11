@@ -60,7 +60,7 @@ jobs:
       # incrementele build zou verouderde doc-assets kunnen meenemen. Toets dat
       # de docs in de .app byte-voor-byte gelijk zijn aan docs/ op schijf.
       - name: Gebundelde documentatie vers?
-        run: dart run tool/check_bundled_docs_fresh.dart build/macos
+        run: dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/macos
 
       - name: Bundel inpakken
         # ditto bewaart symlinks en resource forks — een .app die door een

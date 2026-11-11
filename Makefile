@@ -1309,10 +1309,10 @@ check-web: build-web
 	@echo "Failure means: something was added, changed or lost after packing."
 	dart --disable-dart-dev tool/pack_web_release.dart --check
 	@echo "== OciDeck check: bundled documentation is fresh =="
-	@echo "Command: dart run tool/check_bundled_docs_fresh.dart build/web"
+	@echo "Command: dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/web"
 	@echo "Covers: the docs inside the built bundle match docs/ on disk, byte for byte."
 	@echo "Failure means: an incremental build shipped stale documentation — clean-rebuild."
-	dart run tool/check_bundled_docs_fresh.dart build/web
+	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/web
 
 # Native desktop release builds. Each target only works on its own OS — Flutter
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows
@@ -1326,7 +1326,7 @@ build-macos: prune-hook-cache sbom-verify
 	@echo "== OciDeck helper: whisper-cli in de bundel =="
 	scripts/bundle_whisper_cli.sh macos
 	@echo "== OciDeck check: bundled documentation is fresh =="
-	dart run tool/check_bundled_docs_fresh.dart build/macos
+	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/macos
 
 build-windows: prune-hook-cache sbom-verify
 	@echo "== OciDeck build: Windows app (.exe) =="
@@ -1336,7 +1336,7 @@ build-windows: prune-hook-cache sbom-verify
 	@echo "== OciDeck helper: whisper-cli in de bundel =="
 	scripts/bundle_whisper_cli.sh windows
 	@echo "== OciDeck check: bundled documentation is fresh =="
-	dart run tool/check_bundled_docs_fresh.dart build/windows
+	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/windows
 
 # Wrap the built Windows bundle in an Inno Setup installer (#1208): Start menu
 # shortcut, the file associations from windows/file-associations.reg, and an
@@ -1368,7 +1368,7 @@ build-linux: prune-hook-cache sbom-verify
 	@echo "== OciDeck helper: whisper-cli in de bundel =="
 	scripts/bundle_whisper_cli.sh linux
 	@echo "== OciDeck check: bundled documentation is fresh =="
-	dart run tool/check_bundled_docs_fresh.dart build/linux
+	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/linux
 
 # Compile a native Linux bundle against Debian 12's runtime libraries in Docker.
 # The builder writes the bundle and tarball to outputs/ocideck-local-builds/.

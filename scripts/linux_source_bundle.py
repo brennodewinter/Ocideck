@@ -23,7 +23,11 @@ GNU = ['GPL-2', 'GPL-3', 'LGPL-2', 'LGPL-2.1', 'LGPL-3']
 
 
 def sha(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def native_requirements():
@@ -72,11 +76,15 @@ def payload_hashes(bundle):
             if p.is_file() and DOC not in p.relative_to(bundle).parents}
 
 
-def copy_source(source, destination):
+def copy_source(source, destination, *, flutter_sdk=False):
     # Never follow an external symlink into credentials or untracked host data.
     source = Path(source).resolve()
     def ignore(directory, names):
         ignored = set(names) & EXCLUDED
+        # Release SDK archives contain engines for several platforms and the
+        # Dart SDK here. They are build prerequisites, not package source.
+        if flutter_sdk and Path(directory) == source / 'bin':
+            ignored.add('cache')
         for name in names:
             path = Path(directory) / name
             if path.is_symlink() and not path.resolve().is_relative_to(source):
@@ -165,6 +173,7 @@ def stage(project, bundle, out, version, common=Path('/usr/share/common-licenses
         kit.mkdir()
         revision = snapshot_project(project, kit / 'project')
         rows = []
+        copied_sdk = None
         for package in config['packages']:
             uri = urlparse(package['rootUri'])
             if uri.scheme not in ('', 'file'):
@@ -184,7 +193,22 @@ def stage(project, bundle, out, version, common=Path('/usr/share/common-licenses
                 repository = next((p for p in [source, *source.parents]
                                    if (p / '.git').exists()), source)
                 base = f'packages/{name}'
-                copy_source(repository, kit / base)
+                is_sdk = ((repository / 'bin/flutter').is_file()
+                          and (repository / 'packages/flutter/pubspec.yaml').is_file())
+                if is_sdk and source.is_relative_to(repository / 'bin/cache'):
+                    # sky_engine is generated Dart source inside the SDK cache;
+                    # retain that package, without the rest of the binary cache.
+                    repository = source
+                    copy_source(source, kit / base)
+                elif is_sdk:
+                    base = 'sdk/flutter'
+                    if copied_sdk is None:
+                        copy_source(repository, kit / base, flutter_sdk=True)
+                        copied_sdk = repository
+                    elif copied_sdk != repository:
+                        raise ValueError('Multiple Flutter SDK source roots')
+                else:
+                    copy_source(repository, kit / base)
                 destination = str(Path(base) / source.relative_to(repository))
             rows.append({**package, 'rootUri': '../../' + destination})
         rebuilt = kit / 'project/.dart_tool'

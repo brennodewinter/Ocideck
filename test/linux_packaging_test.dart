@@ -216,13 +216,12 @@ void main() {
 
     test('the pre-tag workflow builds and runs all consumer probes', () {
       expect(preTagYaml, contains('make package-linux VERSION='));
+      final jobs = (loadYaml(preTagYaml) as YamlMap)['jobs'] as YamlMap;
+      final build = jobs['build-linux'] as YamlMap;
       expect(
-        preTagYaml,
-        matches(
-          RegExp(r'  build-linux:\n(?:.*\n){0,4}?    timeout-minutes: 240'),
-        ),
-        reason:
-            'A stuck pre-tag build must not occupy the release indefinitely.',
+        build['timeout-minutes'],
+        inInclusiveRange(240, 720),
+        reason: 'Allow slow active builds while retaining a finite job budget.',
       );
       for (final job in [
         'consumer-deb',

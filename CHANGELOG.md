@@ -8,7 +8,7 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
-## [0.7.8] — 2026-11-10
+## [0.7.8] — 2026-11-11
 
 ### Removed
 
@@ -57,6 +57,8 @@ All notable changes to OciDeck are documented in this file.
   behouden.
 
 ### Fixed
+
+- **Linux-bronpakketten.** Flutter-bronnen worden eenmaal opgenomen, zonder binaire SDK-caches. De gebundelde broncode en licenties blijven controleerbaar. Documentatiecontroles bouwen geen ongebruikte native variant meer; Linux-bouwen krijgen een ruimere, begrensde looptijd.
 
 - **Positie in het slideoverzicht (#2873).** Na het verwijderen van een dia
   blijft het overzicht op de bijbehorende positie staan.

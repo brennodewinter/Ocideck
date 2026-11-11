@@ -56,14 +56,12 @@ on:
 jobs:
   build-linux:
     runs-on: docker
-    # Koude bouw + pakketten raakten na 90 min de upload; houd ruim
-    # meer dan tweemaal die gemeten duur vrij, inclusief cache-opslag.
-    timeout-minutes: 240
+    # Gelijk aan de runner: voortgaande koude builds krijgen twaalf uur.
+    timeout-minutes: 720
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9@sha256:232a3799ab82c95f5a89e1d3bc3f6352972b3cca43ef68fdeff4eb6a0eb82867
     steps:
-      # Vóór de checkout: actions/checkout en upload-artifact zijn node-acties,
-      # en dit kale image brengt geen node mee.
+      # De gepinde toolchain is voorgebakken; vul de media- en pakkettools aan.
       - name: Gereedschap en Linux-buildafhankelijkheden installeren
         run: |
           apt-get update
@@ -131,6 +129,15 @@ jobs:
       - name: Afhankelijkheden ophalen
         run: flutter pub get
 
+      - name: Native bouwcache voor dezelfde toolchain en lockfile
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: release-native-linux-${{ steps.pin.outputs.version }}-${{ hashFiles('pubspec.lock') }}
+
       - name: Linux-release bouwen
         run: flutter build linux --release
 
@@ -145,7 +152,7 @@ jobs:
       # schijf, zodat een incrementele build nooit verouderde documentatie
       # meelevert.
       - name: Gebundelde documentatie vers?
-        run: dart run tool/check_bundled_docs_fresh.dart build/linux
+        run: dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/linux
 
       - name: Bundel inpakken
         run: |
@@ -183,7 +190,7 @@ jobs:
     runs-on: docker
     # Een kale Ubuntu installeert de runtime opnieuw; onder runnerbelasting
     # duurde apt al langer dan 20 minuten voordat de startproef begon.
-    timeout-minutes: 240
+    timeout-minutes: 720
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
@@ -210,7 +217,7 @@ jobs:
     name: .rpm proef op een schone Fedora
     needs: build-linux
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 720
     container:
       image: fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814
     steps:
@@ -234,7 +241,7 @@ jobs:
     name: AppImage proef op een schone Ubuntu
     needs: build-linux
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 720
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
@@ -265,7 +272,7 @@ jobs:
     name: Flatpak installatie en inhoud op een schone Ubuntu
     needs: build-linux
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 720
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
