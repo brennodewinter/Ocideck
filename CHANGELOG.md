@@ -58,7 +58,7 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
-- **Linux-bronpakketten.** Flutter-bronnen worden eenmaal opgenomen, zonder binaire SDK-caches. De gebundelde broncode en licenties blijven controleerbaar. Documentatiecontroles bouwen geen ongebruikte native variant meer; Linux-bouwen krijgen een ruimere, begrensde looptijd.
+- **Linux-bronpakketten.** Flutter-bronnen worden eenmaal opgenomen, zonder binaire SDK-caches of gegenereerde platformlinks. De gebundelde broncode en licenties blijven controleerbaar. Documentatiecontroles bouwen geen ongebruikte native variant meer; Linux-bouwen krijgen een ruimere, begrensde looptijd.
 
 - **Positie in het slideoverzicht (#2873).** Na het verwijderen van een dia
   blijft het overzicht op de bijbehorende positie staan.

@@ -76,11 +76,15 @@ def payload_hashes(bundle):
             if p.is_file() and DOC not in p.relative_to(bundle).parents}
 
 
-def copy_source(source, destination, *, flutter_sdk=False):
+def copy_source(source, destination, *, flutter_sdk=False, flutter_project=False):
     # Never follow an external symlink into credentials or untracked host data.
     source = Path(source).resolve()
+    generated_parents = {source / parent for parent in
+                         ('linux/flutter', 'windows/flutter', 'macos/Flutter')} if flutter_project else set()
     def ignore(directory, names):
         ignored = set(names) & EXCLUDED
+        if Path(directory) in generated_parents:
+            ignored.add('ephemeral')
         # Release SDK archives contain engines for several platforms and the
         # Dart SDK here. They are build prerequisites, not package source.
         if flutter_sdk and Path(directory) == source / 'bin':
@@ -128,7 +132,7 @@ def snapshot_project(project, target):
     if (project / '.ocideck-source-revision').is_file() and not (project / '.git').exists():
         # Container input is a git-archive exported by the release wrapper.
         revision = (project / '.ocideck-source-revision').read_text().strip()
-        copy_source(project, target)
+        copy_source(project, target, flutter_project=True)
     else:
         # Releases must describe their actual source, never dirty HEAD plus a
         # reassuring commit label. Untracked files are intentionally not shipped.

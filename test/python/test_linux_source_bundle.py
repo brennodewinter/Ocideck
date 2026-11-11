@@ -1,6 +1,7 @@
 import importlib.util
 import io
 import json
+import shutil
 from pathlib import Path
 import subprocess
 import tarfile
@@ -183,6 +184,22 @@ class SourceBundleTests(unittest.TestCase):
             for name in packages:
                 self.assertEqual(roots[name], f'../../sdk/flutter/packages/{name}')
             self.assertEqual(roots['sky_engine'], '../../packages/sky_engine')
+
+    def test_exported_project_omits_generated_platform_plugin_links(self):
+        revision = subprocess.check_output(
+            ['git', '-C', str(self.project), 'rev-parse', 'HEAD'], text=True).strip()
+        shutil.rmtree(self.project / '.git')
+        (self.project / '.ocideck-source-revision').write_text(revision + '\n')
+        for platform in ('linux/flutter', 'windows/flutter', 'macos/Flutter'):
+            generated = self.project / platform / 'ephemeral/.plugin_symlinks'
+            generated.mkdir(parents=True)
+            (generated / 'sample').symlink_to(self.package, target_is_directory=True)
+        self.stage()
+        source.verify(self.bundle)
+        with tarfile.open(self.bundle / source.DOC / 'sources.tar.gz') as archive:
+            names = archive.getnames()
+            self.assertIn('ocideck-sources/project/app.dart', names)
+            self.assertFalse(any('/ephemeral/' in name for name in names))
 
 
 class AptRepositoryTests(unittest.TestCase):
