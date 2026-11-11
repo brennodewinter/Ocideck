@@ -1,17 +1,10 @@
 name: Windows open probe diagnostics
 
 on:
-  # Branch-scoped iteration against the retained f566a349c installer. This
-  # never runs on main or publishes a release; manual runs choose a producer.
-  push:
-    branches: [codex/windows-open-probe]
-    paths:
-      - '.github/workflows/windows-open-probe-check.yml'
-      - 'scripts/windows_open_probe.ps1'
   workflow_dispatch:
     inputs:
       source_run_id:
-        description: Completed Windows release-build run containing windows-probe-installer
+        description: Completed Windows release-build run containing its installer
         required: true
         type: string
 
@@ -28,10 +21,11 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate installer producer
+        id: producer
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
-          SOURCE_RUN_ID: ${{ inputs.source_run_id || '43063590429' }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
         run: |
           $ErrorActionPreference = 'Stop'
           if ($env:SOURCE_RUN_ID -notmatch '^\d+$') { throw 'Invalid producer run ID.' }
@@ -40,11 +34,15 @@ jobs:
             throw 'Installer must come from a completed release-build workflow in this repository.'
           }
           $run | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 producer.json
+          # Successful candidates retain the attested cohort; failed probes
+          # retain the installer separately for driver diagnosis.
+          $artifact = if ($run.conclusion -eq 'success') { 'ocideck-windows-cohort' } else { 'windows-probe-installer' }
+          "artifact_name=$artifact" | Add-Content $env:GITHUB_OUTPUT
       - uses: actions/download-artifact@v4
         with:
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.source_run_id || '43063590429' }}
-          name: windows-probe-installer
+          run-id: ${{ inputs.source_run_id }}
+          name: ${{ steps.producer.outputs.artifact_name }}
           path: build/probe-installer
       - name: Install and run real open probe
         shell: pwsh

@@ -77,11 +77,6 @@ public static class OpenProbeWindow {
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hwnd);
   [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hwnd, int command);
-  [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint pid);
-  [DllImport("kernel32.dll")] private static extern uint GetCurrentThreadId();
-  [DllImport("user32.dll")] private static extern bool AttachThreadInput(uint from, uint to, bool attach);
-  [DllImport("user32.dll")] private static extern IntPtr SetFocus(IntPtr hwnd);
-  [DllImport("user32.dll")] private static extern IntPtr GetFocus();
   private delegate bool EnumWindow(IntPtr hwnd, IntPtr state);
   [DllImport("user32.dll")] private static extern bool EnumChildWindows(IntPtr hwnd, EnumWindow callback, IntPtr state);
   [DllImport("user32.dll", CharSet=CharSet.Unicode)] private static extern int GetClassName(IntPtr hwnd, StringBuilder name, int count);
@@ -90,24 +85,6 @@ public static class OpenProbeWindow {
   [DllImport("oleacc.dll")] private static extern int AccessibleChildren(
       IAccessible parent, int start, int count,
       [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)] object[] children, out int obtained);
-  public static bool FocusFlutterView(IntPtr root) {
-    IntPtr view = IntPtr.Zero;
-    EnumWindow callback = (hwnd, state) => {
-      var name = new StringBuilder(256);
-      GetClassName(hwnd, name, name.Capacity);
-      if (name.ToString() == "FLUTTERVIEW") { view = hwnd; return false; }
-      return true;
-    };
-    EnumChildWindows(root, callback, IntPtr.Zero);
-    GC.KeepAlive(callback);
-    if (view == IntPtr.Zero) return false;
-    uint pid;
-    uint target = GetWindowThreadProcessId(view, out pid);
-    uint caller = GetCurrentThreadId();
-    if (!AttachThreadInput(caller, target, true)) return false;
-    try { SetFocus(view); return GetFocus() == view; }
-    finally { AttachThreadInput(caller, target, false); }
-  }
   public static OpenProbeAccessible[] Snapshot(IntPtr root) {
     var nodes = new List<OpenProbeAccessible>();
     var seen = new HashSet<string>();
@@ -258,10 +235,14 @@ function Open-NativePicker {
         # The same welcome-screen action as in the reported video.
         Invoke-Control $welcomeOpen
     } else {
-        if (-not [OpenProbeWindow]::FocusFlutterView($script:app.MainWindowHandle)) {
-            throw 'Could not focus the real Flutter client for Ctrl+O.'
+        $more = Wait-Probe 'the editor More menu' {
+            Find-Control (Get-AppRoot) '^(More|Meer)$' ([Windows.Automation.ControlType]::Button)
         }
-        [Windows.Forms.SendKeys]::SendWait('^o')
+        Invoke-Control $more
+        $openAction = Wait-Probe 'the editor Open menu action' {
+            Find-Control (Get-AppRoot) '^(Open|Openen)(\u2026|\.\.\.)$'
+        }
+        Invoke-Control $openAction
     }
     $browse = Wait-Probe 'the in-app Browse action' {
         Find-Control (Get-AppRoot) '^(Browse|Bladeren)(\u2026|\.\.\.)$' ([Windows.Automation.ControlType]::Button)
