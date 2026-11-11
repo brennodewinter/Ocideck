@@ -15,7 +15,7 @@
 // the release with the offending files named, so the fix (a clean rebuild) is
 // forced rather than hoped for. It rewrites nothing — it only checks freshness.
 //
-// Usage: dart run tool/check_bundled_docs_fresh.dart <build-root>
+// Usage: dart --disable-dart-dev tool/check_bundled_docs_fresh.dart <build-root>
 //   <build-root> is a directory to search for the built Flutter assets, e.g.
 //   build/web, build/macos, build/linux. The tool locates the assets directory
 //   beneath it (web: assets/, desktop: .../flutter_assets/) by a sentinel doc,
@@ -109,7 +109,7 @@ Directory? findAssetsDir(Directory root) {
 void main(List<String> args) {
   if (args.length != 1) {
     stderr.writeln(
-      'Usage: dart run tool/check_bundled_docs_fresh.dart <build-root>',
+      'Usage: dart --disable-dart-dev tool/check_bundled_docs_fresh.dart <build-root>',
     );
     exit(2);
   }

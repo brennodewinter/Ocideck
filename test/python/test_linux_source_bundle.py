@@ -1,6 +1,7 @@
 import importlib.util
 import io
 import json
+import shutil
 from pathlib import Path
 import subprocess
 import tarfile
@@ -138,6 +139,67 @@ class SourceBundleTests(unittest.TestCase):
             self.assertIn('ocideck-sources/packages/sample/LICENSE', archive.getnames())
             rebuilt = json.load(archive.extractfile('ocideck-sources/project/.dart_tool/package_config.json'))
             self.assertEqual(rebuilt['packages'][1]['rootUri'], '../../packages/sample/packages/sample')
+
+    def test_flutter_sdk_sources_are_shared_without_binary_caches(self):
+        sdk = self.package.parent / 'flutter-sdk'
+        (sdk / '.git').mkdir(parents=True)
+        (sdk / 'bin').mkdir()
+        (sdk / 'bin/flutter').write_text('SDK launcher')
+        (sdk / 'LICENSE').write_text('shared SDK licence')
+        packages = ['flutter', 'flutter_driver', 'flutter_localizations',
+                    'flutter_test', 'flutter_web_plugins',
+                    'fuchsia_remote_debug_protocol', 'integration_test']
+        config = self.project / '.dart_tool/package_config.json'
+        data = json.loads(config.read_text())
+        for name in packages:
+            package = sdk / 'packages' / name
+            (package / 'lib').mkdir(parents=True)
+            (package / 'pubspec.yaml').write_text(f'name: {name}\n')
+            (package / 'lib/source.dart').write_text(f'source for {name}')
+            data['packages'].append({'name': name, 'rootUri': package.as_uri(),
+                                     'packageUri': 'lib/'})
+        cache = sdk / 'bin/cache'
+        (cache / 'artifacts/engine/android-arm').mkdir(parents=True)
+        (cache / 'artifacts/engine/android-arm/flutter.jar').write_bytes(b'binary cache')
+        sky = cache / 'pkg/sky_engine'
+        (sky / 'lib').mkdir(parents=True)
+        (sky / 'lib/ui.dart').write_text('generated SDK source')
+        data['packages'].append({'name': 'sky_engine', 'rootUri': sky.as_uri(),
+                                 'packageUri': 'lib/'})
+        config.write_text(json.dumps(data))
+        self.stage()
+        source.verify(self.bundle)
+        with tarfile.open(self.bundle / source.DOC / 'sources.tar.gz') as archive:
+            names = archive.getnames()
+            self.assertFalse(any('/bin/cache/' in name for name in names))
+            self.assertEqual(sum(name.endswith('/LICENSE') and '/sdk/' in name
+                                 for name in names), 1)
+            for name in packages:
+                path = f'ocideck-sources/sdk/flutter/packages/{name}/lib/source.dart'
+                self.assertEqual(archive.extractfile(path).read().decode(), f'source for {name}')
+            self.assertEqual(archive.extractfile(
+                'ocideck-sources/packages/sky_engine/lib/ui.dart').read(), b'generated SDK source')
+            rebuilt = json.load(archive.extractfile('ocideck-sources/project/.dart_tool/package_config.json'))
+            roots = {row['name']: row['rootUri'] for row in rebuilt['packages']}
+            for name in packages:
+                self.assertEqual(roots[name], f'../../sdk/flutter/packages/{name}')
+            self.assertEqual(roots['sky_engine'], '../../packages/sky_engine')
+
+    def test_exported_project_omits_generated_platform_plugin_links(self):
+        revision = subprocess.check_output(
+            ['git', '-C', str(self.project), 'rev-parse', 'HEAD'], text=True).strip()
+        shutil.rmtree(self.project / '.git')
+        (self.project / '.ocideck-source-revision').write_text(revision + '\n')
+        for platform in ('linux/flutter', 'windows/flutter', 'macos/Flutter'):
+            generated = self.project / platform / 'ephemeral/.plugin_symlinks'
+            generated.mkdir(parents=True)
+            (generated / 'sample').symlink_to(self.package, target_is_directory=True)
+        self.stage()
+        source.verify(self.bundle)
+        with tarfile.open(self.bundle / source.DOC / 'sources.tar.gz') as archive:
+            names = archive.getnames()
+            self.assertIn('ocideck-sources/project/app.dart', names)
+            self.assertFalse(any('/ephemeral/' in name for name in names))
 
 
 class AptRepositoryTests(unittest.TestCase):

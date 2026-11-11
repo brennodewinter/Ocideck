@@ -137,7 +137,11 @@ def public_proof(transport, assets, tag, sha, key):
             if not match or match[1] in names:
                 raise ValueError('invalid global checksum manifest')
             names.add(match[1])
-        if names != all_names or not names <= assets.keys():
+        # Complete releases also ship the corresponding Linux source kit.
+        # Older manifests predate that artifact; accept only this exact extra
+        # name and still require its signed entry to have a public asset.
+        optional_sources = {f'ocideck-linux-sources-{version}.tar.gz'}
+        if not all_names <= names or not names <= all_names | optional_sources or not names <= assets.keys():
             raise ValueError('incomplete global publication')
         return
     for channel, templates in CHANNELS.items():

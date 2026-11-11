@@ -101,7 +101,9 @@ void main() {
   Future<void> waitFor(
     WidgetTester tester,
     Finder finder, {
-    Duration timeout = const Duration(seconds: 10),
+    // Team bewaren doet echte, geflushte schijf-I/O. Gebruik dezelfde
+    // begrensde marge als pumpUntil voor de gedeelde Linux-runner.
+    Duration timeout = const Duration(seconds: 30),
   }) => pumpUntil(
     tester,
     () => finder.evaluate().isNotEmpty,

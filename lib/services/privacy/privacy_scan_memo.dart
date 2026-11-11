@@ -8,6 +8,7 @@ import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import 'privacy_bulk_lexicon.dart';
 import 'privacy_scanner.dart';
+import 'privacy_own_identity.dart';
 import '../../utils/log.dart';
 
 /// Per-slide memoisatie van de privacyscan op dia-identiteit.
@@ -175,12 +176,10 @@ Future<void> warmPrivacyScanMemo(
   if (token == null) {
     results = scanSync();
   } else {
-    final scanned = await Isolate.run<(bool, List<List<PrivacyFinding>>)>(
-      () async {
-        BackgroundIsolateBinaryMessenger.ensureInitialized(token);
-        await PrivacyBulkLexicon.instance.ensureLoaded();
-        return (PrivacyBulkLexicon.instance.isLoaded, scanSync());
-      },
+    final scanned = await scanPrivacySlidesInIsolate(
+      scanner,
+      cold,
+      token: token,
     );
     // Kon het lexicon in de worker niet laden, dan missen diens uitslagen de
     // bulktermen — liever hier hermeten dan een incompleet warme memo.
@@ -189,4 +188,73 @@ Future<void> warmPrivacyScanMemo(
   for (var i = 0; i < cold.length; i++) {
     _slideScanCache[cold[i]] = _SlideScanMemo(_scanEpoch, scanner, results[i]);
   }
+}
+
+/// Serialiseert uitsluitend scanconfiguratie en inhoud, nooit de scanner of
+/// zijn assetlezer: die callback kan een Riverpod-ref en Futures vasthouden.
+/// Captiontekst wordt op de aanroepende isolate begrensd gelezen, zodat ook
+/// mem:-assets en aangepaste lezers dezelfde bevindingen blijven opleveren.
+@visibleForTesting
+Future<(bool, List<List<PrivacyFinding>>)> scanPrivacySlidesInIsolate(
+  PrivacyScanner scanner,
+  List<Slide> slides, {
+  RootIsolateToken? token,
+}) {
+  final captions = <String, String?>{};
+  final reader = scanner.assetTextReader;
+  if (reader != null) {
+    for (final slide in slides) {
+      final path = slide.videoCaptions;
+      if (path.isNotEmpty && !captions.containsKey(path)) {
+        captions[path] = reader(path);
+      }
+    }
+  }
+  final request = (
+    disabledRules: Set<String>.of(scanner.disabledRules),
+    ownIdentity: scanner.ownIdentity,
+    regions: Set<String>.of(scanner.regions),
+    slides: slides,
+    captions: captions,
+    token: token,
+  );
+  // Eigen functiecontext: de Isolate.run-closure kan geen scanner/reader uit
+  // de bovenstaande context impliciet meenemen (Dart closure overcapture).
+  return _runPrivacyScanRequest(request);
+}
+
+typedef _PrivacyScanRequest = ({
+  Set<String> disabledRules,
+  OwnIdentity ownIdentity,
+  Set<String> regions,
+  List<Slide> slides,
+  Map<String, String?> captions,
+  RootIsolateToken? token,
+});
+
+Future<(bool, List<List<PrivacyFinding>>)> _runPrivacyScanRequest(
+  _PrivacyScanRequest request,
+) {
+  if (kIsWeb) return Future.sync(() => _scanPrivacyRequest(request));
+  return Isolate.run(() => _scanPrivacyRequest(request));
+}
+
+Future<(bool, List<List<PrivacyFinding>>)> _scanPrivacyRequest(
+  _PrivacyScanRequest request,
+) async {
+  final token = request.token;
+  if (token != null) {
+    BackgroundIsolateBinaryMessenger.ensureInitialized(token);
+    await PrivacyBulkLexicon.instance.ensureLoaded();
+  }
+  final scanner = PrivacyScanner(
+    disabledRules: request.disabledRules,
+    ownIdentity: request.ownIdentity,
+    regions: request.regions,
+    assetTextReader: (path) => request.captions[path],
+  );
+  return (
+    PrivacyBulkLexicon.instance.isLoaded,
+    [for (final slide in request.slides) scanner.scanSlide(slide, 0).findings],
+  );
 }
