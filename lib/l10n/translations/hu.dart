@@ -1543,6 +1543,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Herstel een kopie': 'Másolat visszaállítása',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'A visszaállított másolat egy új mappában van az eredeti mellett.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'A másolat megőrződött; maga a bemutató nem állítható vissza.',
+  'Herstel van een kopie is mislukt.': 'A másolat visszaállítása nem sikerült.',
   'Onderstrepen': 'Aláhúzott',
   'Eigen verdeling': 'Egyéni felosztás',
   'Gelijke hoogte': 'Egyenlő magasság',

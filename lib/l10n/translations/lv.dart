@@ -1538,6 +1538,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Herstel een kopie': 'Atjaunot kopiju',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Atjaunotā kopija atrodas jaunā mapē blakus oriģinālam.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopija saglabāta; pašu prezentāciju atjaunot neizdevās.',
+  'Herstel van een kopie is mislukt.': 'Kopijas atjaunošana neizdevās.',
   'Onderstrepen': 'Pasvītrots',
   'Eigen verdeling': 'Pielāgots sadalījums',
   'Gelijke hoogte': 'Vienāds augstums',

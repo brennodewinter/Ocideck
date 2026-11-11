@@ -1542,6 +1542,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Herstel een kopie': 'Gendan en kopi',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Den gendannede kopi ligger i en ny mappe ved siden af originalen.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopien er gemt; selve præsentationen kunne ikke gendannes.',
+  'Herstel van een kopie is mislukt.': 'Gendannelse af en kopi mislykkedes.',
   'Onderstrepen': 'Understreget',
   'Eigen verdeling': 'Egen fordeling',
   'Gelijke hoogte': 'Samme højde',

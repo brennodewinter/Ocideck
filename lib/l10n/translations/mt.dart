@@ -1558,6 +1558,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Herstel een kopie': 'Irkupra kopja',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Il-kopja rkuprata tinsab f’folder ġdid ħdejn l-oriġinal.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Il-kopja ġiet iżżejjed; id-deck innifsu ma setax jiġi rkuprat.',
+  'Herstel van een kopie is mislukt.': 'L-irkupru ta’ kopja naqas.',
   'Onderstrepen': 'Sottolinear',
   'Eigen verdeling': 'Diviżjoni personalizzata',
   'Gelijke hoogte': 'Għoli ugwali',

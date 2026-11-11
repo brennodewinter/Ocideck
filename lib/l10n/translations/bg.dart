@@ -1561,6 +1561,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Herstel een kopie': 'Възстанови копие',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Възстановеното копие е в нова папка до оригинала.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Копието е запазено; самата презентация не можа да бъде възстановена.',
+  'Herstel van een kopie is mislukt.': 'Възстановяването на копие не успя.',
   'Onderstrepen': 'Подчертано',
   'Eigen verdeling': 'Собствено разпределение',
   'Gelijke hoogte': 'Еднаква височина',

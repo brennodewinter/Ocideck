@@ -611,6 +611,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Herstel een kopie': 'Ripristina una copia',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'La copia ripristinata si trova in una nuova cartella accanto all’originale.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Copia conservata; la presentazione non è stato possibile ripristinarla.',
+  'Herstel van een kopie is mislukt.': 'Ripristino di una copia non riuscito.',
   'Onderstrepen': 'Sottolineato',
   'Eigen verdeling': 'Suddivisione personalizzata',
   'Gelijke hoogte': 'Altezza uguale',

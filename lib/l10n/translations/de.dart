@@ -612,6 +612,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Herstel een kopie': 'Eine Kopie wiederherstellen',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Die wiederhergestellte Kopie liegt in einem neuen Ordner neben dem Original.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopie gesichert; das Deck selbst ließ sich nicht wiederherstellen.',
+  'Herstel van een kopie is mislukt.':
+      'Die Wiederherstellung einer Kopie ist fehlgeschlagen.',
   'Onderstrepen': 'Unterstrichen',
   'Eigen verdeling': 'Eigene Aufteilung',
   'Gelijke hoogte': 'Gleiche Höhe',

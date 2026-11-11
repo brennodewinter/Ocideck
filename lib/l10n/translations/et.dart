@@ -1534,6 +1534,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Herstel een kopie': 'Taasta koopia',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Taastatud koopia on uues kaustas originaali kõrval.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Koopia on säilitatud; ise esitlust ei õnnestunud taastada.',
+  'Herstel van een kopie is mislukt.': 'Koopia taastamine ebaõnnestus.',
   'Onderstrepen': 'Allakriipsutatud',
   'Eigen verdeling': 'Kohandatud jaotus',
   'Gelijke hoogte': 'Sama kõrgus',

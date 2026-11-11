@@ -1565,6 +1565,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Herstel een kopie': 'Επαναφορά αντιγράφου',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Το ανακτημένο αντίγραφο βρίσκεται σε νέο φάκελο δίπλα στο πρωτότυπο.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Το αντίγραφο διατηρήθηκε· η ίδια η παρουσίαση δεν μπόρεσε να ανακτηθεί.',
+  'Herstel van een kopie is mislukt.': 'Η επαναφορά αντιγράφου απέτυχε.',
   'Onderstrepen': 'Υπογραμμισμένο',
   'Eigen verdeling': 'Προσαρμοσμένη κατανομή',
   'Gelijke hoogte': 'Ίδιο ύψος',

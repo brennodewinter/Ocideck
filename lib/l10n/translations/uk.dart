@@ -1556,6 +1556,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Herstel een kopie': 'Відновити копію',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Відновлена копія лежить у новій папці поруч із оригіналом.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Копію збережено; саму презентацію відновити не вдалося.',
+  'Herstel van een kopie is mislukt.': 'Відновити копію не вдалося.',
   'Onderstrepen': 'Підкреслене',
   'Eigen verdeling': 'Власний розподіл',
   'Gelijke hoogte': 'Однакова висота',

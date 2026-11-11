@@ -1553,6 +1553,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Herstel een kopie': 'Exemplar restitue',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Exemplar restitutum in novo archivo iuxta originale positum est.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Exemplar servatum est; ipsa praesentatio restitui non potuit.',
+  'Herstel van een kopie is mislukt.': 'Exemplar restituere defecit.',
   'Onderstrepen': 'Sublineatum',
   'Eigen verdeling': 'Divisio propria',
   'Gelijke hoogte': 'Altitudo aequalis',

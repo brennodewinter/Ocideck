@@ -1542,6 +1542,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Herstel een kopie': 'Palauta kopio',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Palautettu kopio on uudessa kansiossa alkuperäisen vieressä.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopio tallennettu; itse esitystä ei voitu palauttaa.',
+  'Herstel van een kopie is mislukt.': 'Kopion palautus epäonnistui.',
   'Onderstrepen': 'Alleviivaus',
   'Eigen verdeling': 'Mukautettu jako',
   'Gelijke hoogte': 'Sama korkeus',

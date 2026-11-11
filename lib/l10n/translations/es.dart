@@ -610,6 +610,12 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Herstel een kopie': 'Restaurar una copia',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'La copia restaurada está en una carpeta nueva junto al original.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Copia guardada; la presentación en sí no se pudo restaurar.',
+  'Herstel van een kopie is mislukt.': 'Error al restaurar una copia.',
   'Onderstrepen': 'Subrayado',
   'Eigen verdeling': 'Reparto personalizado',
   'Gelijke hoogte': 'Altura igual',

@@ -1542,6 +1542,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Herstel een kopie': 'E Kopii widerherstelle',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Di widerhergstellti Kopii lit in ere neue Datei näben em Original.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopii gspeicheret; s Deck säuber het sich nöd widerherstelle laa.',
+  'Herstel van een kopie is mislukt.':
+      'D Kopii het sich nöd widerherstelle laa.',
   'Onderstrepen': 'Understriche',
   'Eigen verdeling': 'Eigeni Ufteilig',
   'Gelijke hoogte': 'Glichi Höchi',

@@ -1567,6 +1567,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Herstel een kopie': 'Restaurar uma cópia',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'A cópia restaurada está numa pasta nova ao lado do original.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Cópia guardada; a apresentação em si não pôde ser restaurada.',
+  'Herstel van een kopie is mislukt.': 'Falha ao restaurar uma cópia.',
   'Onderstrepen': 'Sublinhado',
   'Eigen verdeling': 'Divisão personalizada',
   'Gelijke hoogte': 'Altura igual',

@@ -1570,6 +1570,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Herstel een kopie': 'Athchóirigh cóip',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Tá an chóip athchóirithe i bhfillteán nua in aice leis an mbunleagan.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Sábháladh an chóip; níorbh fhéidir an deic féin a athchóiriú.',
+  'Herstel van een kopie is mislukt.': 'Theip ar chóip a athchóiriú.',
   'Onderstrepen': 'Folíne',
   'Eigen verdeling': 'Roinn saincheaptha',
   'Gelijke hoogte': 'Airde chomhionann',

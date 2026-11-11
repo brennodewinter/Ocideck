@@ -1541,6 +1541,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Herstel een kopie': 'Återställ en kopia',
+  'Herstelkopie staat in een nieuwe map naast het origineel.':
+      'Den återställda kopian ligger i en ny mapp bredvid originalet.',
+  'Herstelkopie bewaard; het deck zelf was niet te herstellen.':
+      'Kopian sparad; själva presentationen gick inte att återställa.',
+  'Herstel van een kopie is mislukt.': 'Det gick inte att återställa en kopia.',
   'Onderstrepen': 'Understruket',
   'Eigen verdeling': 'Egen fördelning',
   'Gelijke hoogte': 'Samma höjd',

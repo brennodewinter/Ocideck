@@ -18,6 +18,7 @@ void _reportOpenFailure(
   bool importModuleAvailable = false,
   VoidCallback? onImport,
   VoidCallback? onOpenSettings,
+  Future<void> Function()? onRecover,
 }) {
   // Koos de gebruiker via "Openen" eigenlijk een presentatie of een
   // kantoorbestand, dan is import de bedoeling: een melding mét uitweg, niet
@@ -54,7 +55,72 @@ void _reportOpenFailure(
     OpenResult.passwordCancelled => null,
   };
   if (message != null) {
-    messenger.showSnackBar(SnackBar(content: Text(message)));
+    // #2880: bij een vastgestelde beschadiging (onleesbare tekst of
+    // afgekapte/onparseerbare markdown) is "Herstel een kopie" een uitweg
+    // die het origineel ongemoeid laat. Bij toegangs- of omgevingsfouten
+    // en veiligheidsweigeringen niet aanbieden — zonder leesbare bronbytes
+    // is er niets om te bewaren, en `unsafe` mag sowieso niet meekomen.
+    final recoverable =
+        onRecover != null &&
+        (reason == OpenFailure.unreadable || reason == OpenFailure.corrupt);
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(message),
+        action: recoverable
+            ? SnackBarAction(
+                label: l10n.d('Herstel een kopie'),
+                onPressed: () => unawaited(onRecover()),
+              )
+            : null,
+      ),
+    );
+  }
+}
+
+/// Draait het bestandsherstel uit #2880 en rapporteert waar de kopie staat;
+/// bij een herstelbaar deck kan de gebruiker de kopie direct openen. De
+/// bron wordt nooit aangeraakt — dat garandeert de service, hier valt alleen
+/// een onverwachte dienstfout terug op een melding.
+Future<void> recoverDeckCopy(
+  BuildContext context,
+  WidgetRef ref,
+  String sourcePath,
+) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  try {
+    final result = await FileRecoveryService().recoverCopy(sourcePath);
+    if (!context.mounted) return;
+    final copy = result.recoveredMarkdownPath;
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          copy != null
+              ? l10n.d(
+                  'Herstelkopie staat in een nieuwe map naast het origineel.',
+                )
+              : l10n.d(
+                  'Herstelkopie bewaard; het deck zelf was niet te herstellen.',
+                ),
+        ),
+        action: copy != null
+            ? SnackBarAction(
+                label: l10n.d('Openen'),
+                onPressed: () => unawaited(
+                  ref.read(tabsProvider.notifier).openFileByPath(copy),
+                ),
+              )
+            : null,
+      ),
+    );
+  } on FileRecoveryException catch (e) {
+    logWarning('recoverDeckCopy: herstel mislukt', e.cause ?? e.message);
+    if (!context.mounted) return;
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      l10n.d('Herstel van een kopie is mislukt.'),
+    );
   }
 }
 
@@ -269,6 +335,11 @@ Future<void> _openPickedPaths(
       reason: ref.read(openFailureProvider),
       sourceName: single ? path : null,
       importModuleAvailable: importModuleAvailable,
+      // #2880: de herstelroute is er alleen voor een plat pad — een
+      // pakket-import of een versie uit git heeft hier geen bronmap.
+      onRecover: p.extension(path).toLowerCase() == '.md'
+          ? () => recoverDeckCopy(context, ref, path)
+          : null,
       // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
       // De naam bepaalt welke importeur — een `.docx`/`.xlsx` hoort bij de
       // documentimport, een `.pptx`/`.odp` bij de presentatie-import.
