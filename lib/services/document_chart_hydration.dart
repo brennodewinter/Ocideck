@@ -55,18 +55,20 @@ Future<String> _inlineBlock(String inner, String projectPath) async {
   if (abs == null) return inner;
 
   final file = File(abs);
-  if (!await file.exists()) return inner;
-  // Zelfde 8 MiB-plafond als het deck-openpad: een pathologisch databestand
-  // is een DoS op het exportpad (#1666).
-  if (await file.length() > FileService.maxChartDataBytes) {
-    logWarning(
-      'hydrateDocumentChartData: chart data exceeds '
-      '${FileService.maxChartDataBytes ~/ (1024 * 1024)} MiB cap',
-      abs,
-    );
-    return inner;
-  }
   try {
+    // Bestaan, stat én lees onder één vangst: een stat-fout is net zo goed
+    // "data niet geladen" als een leesfout — het blok blijft staan (#2881).
+    if (!await file.exists()) return inner;
+    // Zelfde 8 MiB-plafond als het deck-openpad: een pathologisch databestand
+    // is een DoS op het exportpad (#1666).
+    if (await file.length() > FileService.maxChartDataBytes) {
+      logWarning(
+        'hydrateDocumentChartData: chart data exceeds '
+        '${FileService.maxChartDataBytes ~/ (1024 * 1024)} MiB cap',
+        abs,
+      );
+      return inner;
+    }
     final raw = await file.readAsString();
     // [ChartSpec.withData] kiest op de extensie (JSON/CSV) en laat de spec
     // ongemoeid bij onleesbare inhoud; [toBlock] schrijft de cijfers weer inline.
