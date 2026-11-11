@@ -362,6 +362,13 @@ jobs:
           }
           Stop-Process -Id $app.Id -Force
 
+          # Exercise the installed binary through the real Windows picker.
+          # A window/first frame alone does not prove a presentation can open.
+          & powershell.exe -NoProfile -File ./test/release_windows_open_probe_supervisor_test.ps1
+          if ($LASTEXITCODE -ne 0) { throw 'Windows open-probe supervisor checks failed.' }
+          & ./scripts/windows_open_probe.ps1 -Executable "$doel\ocideck.exe" `
+            -EvidenceDirectory "$env:GITHUB_WORKSPACE\build\windows-open-probe"
+
           # 4. Stil verwijderen en aantoonbaar schoon achterlaten. unins000.exe
           #    retourneert vroeg (het echte werk doet een kindproces), dus pollen
           #    tot de map weg is in plaats van op de exitstatus alleen te leunen.
@@ -381,6 +388,14 @@ jobs:
             throw 'De de-installatie liet de ProgID-sleutel achter.'
           }
           Write-Host "Smoke-test groen: $setup installeert, start en ruimt schoon op."
+
+      - name: Bewaar bewijs van de Windows-openproef
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-open-probe
+          path: build/windows-open-probe/
+          if-no-files-found: warn
 
       - name: Cohortattest voor de forge
         shell: bash
