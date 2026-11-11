@@ -1,0 +1,78 @@
+name: Windows open probe diagnostics
+
+on:
+  # Branch-scoped iteration against the retained f566a349c installer. This
+  # never runs on main or publishes a release; manual runs choose a producer.
+  push:
+    branches: [codex/windows-open-probe]
+    paths:
+      - '.github/workflows/windows-open-probe-check.yml'
+      - 'scripts/windows_open_probe.ps1'
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Completed Windows release-build run containing windows-probe-installer
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  probe:
+    runs-on: windows-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Validate installer producer
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id || '43063590429' }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:SOURCE_RUN_ID -notmatch '^\d+$') { throw 'Invalid producer run ID.' }
+          $run = gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:SOURCE_RUN_ID" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0 -or $run.status -ne 'completed' -or $run.path -ne '.github/workflows/release.yml') {
+            throw 'Installer must come from a completed release-build workflow in this repository.'
+          }
+          $run | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 producer.json
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run_id || '43063590429' }}
+          name: windows-probe-installer
+          path: build/probe-installer
+      - name: Install and run real open probe
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $installers = @(Get-ChildItem build/probe-installer -Filter '*setup*.exe')
+          if ($installers.Count -ne 1) { throw 'Expected exactly one retained installer.' }
+          $destination = Join-Path $env:TEMP "ocideck-open-diagnostics-$PID"
+          try {
+            $installer = Start-Process -FilePath $installers[0].FullName -PassThru -Wait -ArgumentList `
+              '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/CURRENTUSER', "/DIR=`"$destination`""
+            if ($installer.ExitCode -ne 0) { throw "Install failed: $($installer.ExitCode)" }
+            & powershell.exe -NoProfile -File ./test/release_windows_open_probe_supervisor_test.ps1
+            if ($LASTEXITCODE -ne 0) { throw 'Supervisor checks failed.' }
+            & ./scripts/windows_open_probe.ps1 -Executable "$destination\ocideck.exe" `
+              -EvidenceDirectory "$env:GITHUB_WORKSPACE\build\windows-open-probe"
+          } finally {
+            if (Test-Path "$destination\unins000.exe") {
+              $uninstaller = Start-Process -FilePath "$destination\unins000.exe" -Wait -PassThru -ArgumentList `
+                '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART'
+              if ($uninstaller.ExitCode -ne 0) { throw "Uninstall failed: $($uninstaller.ExitCode)" }
+            }
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-open-probe
+          path: |
+            build/windows-open-probe/
+            producer.json
+          if-no-files-found: warn

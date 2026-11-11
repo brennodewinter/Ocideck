@@ -52,19 +52,78 @@ if (-not $Worker) {
 
 # Windows PowerShell 5.1 supplies the .NET Framework UI Automation assemblies.
 # https://learn.microsoft.com/dotnet/framework/ui-automation/invoke-a-control-using-ui-automation
-Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, System.Windows.Forms, System.Drawing
-Add-Type @'
+Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, System.Windows.Forms, System.Drawing, Accessibility
+Add-Type -ReferencedAssemblies ([Accessibility.IAccessible].Assembly.Location) -TypeDefinition @'
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
+using Accessibility;
+public sealed class OpenProbeAccessible {
+  private readonly IAccessible owner;
+  private readonly object child;
+  public OpenProbeAccessible(IAccessible owner, object child) { this.owner = owner; this.child = child; }
+  public OpenProbeAccessible Current { get { return this; } }
+  public string Name { get { try { return owner.get_accName(child) ?? ""; } catch (COMException) { return ""; } } }
+  public string Value { get { try { return owner.get_accValue(child) ?? ""; } catch (COMException) { return ""; } } }
+  public int Role { get { try { return Convert.ToInt32(owner.get_accRole(child)); } catch (COMException) { return 0; } } }
+  public int State { get { try { return Convert.ToInt32(owner.get_accState(child)); } catch (COMException) { return 0; } } }
+  public bool IsOffscreen { get { return (State & 0x18000) != 0; } }
+  public bool IsEnabled { get { return (State & 1) == 0; } }
+  public bool IsChecked { get { return (State & 0x10) != 0; } }
+  public void Invoke() { owner.accDoDefaultAction(child); }
+}
 public static class OpenProbeWindow {
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hwnd);
   [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hwnd, int command);
   private delegate bool EnumWindow(IntPtr hwnd, IntPtr state);
   [DllImport("user32.dll")] private static extern bool EnumChildWindows(IntPtr hwnd, EnumWindow callback, IntPtr state);
+  [DllImport("user32.dll", CharSet=CharSet.Unicode)] private static extern int GetClassName(IntPtr hwnd, StringBuilder name, int count);
   [DllImport("oleacc.dll")] private static extern int AccessibleObjectFromWindow(
       IntPtr hwnd, uint objectId, ref Guid iid, out IntPtr accessible);
+  [DllImport("oleacc.dll")] private static extern int AccessibleChildren(
+      IAccessible parent, int start, int count,
+      [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)] object[] children, out int obtained);
+  public static OpenProbeAccessible[] Snapshot(IntPtr root) {
+    var nodes = new List<OpenProbeAccessible>();
+    var seen = new HashSet<string>();
+    EnumWindow callback = (hwnd, state) => {
+      var name = new StringBuilder(256);
+      GetClassName(hwnd, name, name.Capacity);
+      if (name.ToString() != "FLUTTERVIEW") return true;
+      var iid = new Guid("618736e0-3c3d-11cf-810c-00aa00389b71");
+      IntPtr pointer;
+      if (AccessibleObjectFromWindow(hwnd, unchecked((uint)-4), ref iid, out pointer) == 0 && pointer != IntPtr.Zero) {
+        try { Visit((IAccessible)Marshal.GetObjectForIUnknown(pointer), 0, nodes, seen, 0); }
+        finally { Marshal.Release(pointer); }
+      }
+      return true;
+    };
+    EnumChildWindows(root, callback, IntPtr.Zero);
+    GC.KeepAlive(callback);
+    return nodes.ToArray();
+  }
+  private static void Visit(IAccessible owner, object child, List<OpenProbeAccessible> nodes, HashSet<string> seen, int depth) {
+    if (depth > 60 || nodes.Count >= 4000) return;
+    IntPtr identity = Marshal.GetIUnknownForObject(owner);
+    string key = identity.ToString() + ":" + child.ToString();
+    Marshal.Release(identity);
+    if (!seen.Add(key)) return;
+    nodes.Add(new OpenProbeAccessible(owner, child));
+    if (Convert.ToInt32(child) != 0) return;
+    int count;
+    try { count = Math.Min(owner.accChildCount, 4000); } catch (COMException) { return; }
+    if (count <= 0) return;
+    var children = new object[count];
+    int obtained;
+    if (AccessibleChildren(owner, 0, count, children, out obtained) < 0) return;
+    for (int i=0; i<obtained; i++) {
+      var accessible = children[i] as IAccessible;
+      if (accessible != null) Visit(accessible, 0, nodes, seen, depth+1);
+      else if (children[i] is int) Visit(owner, children[i], nodes, seen, depth+1);
+    }
+  }
   public static string[] EnableAccessibility(IntPtr root) {
     // Flutter enables semantics on OBJID_CLIENT requests to its child view.
     // Query the actual window subtree, as a screen reader does; no app hook.
@@ -113,17 +172,18 @@ function Get-AppRoot {
 
 function Find-Control($Root, [string]$NamePattern, $ControlType = $null) {
     if ($null -eq $Root) { return $null }
-    $all = $Root.FindAll([Windows.Automation.TreeScope]::Descendants,
-        [Windows.Automation.Condition]::TrueCondition)
+    $all = [OpenProbeWindow]::Snapshot($script:app.MainWindowHandle)
     foreach ($element in $all) {
         if ($element.Current.IsOffscreen) { continue }
-        if ($ControlType -and $element.Current.ControlType -ne $ControlType) { continue }
+        if ($ControlType -eq [Windows.Automation.ControlType]::Button -and $element.Role -ne 43) { continue }
+        if ($ControlType -eq [Windows.Automation.ControlType]::CheckBox -and $element.Role -ne 44) { continue }
         if ($element.Current.Name -match $NamePattern) { return $element }
     }
     return $null
 }
 
 function Invoke-Control($Element) {
+    if ($Element -is [OpenProbeAccessible]) { $Element.Invoke(); return }
     $pattern = $null
     if (-not $Element.TryGetCurrentPattern([Windows.Automation.InvokePattern]::Pattern, [ref]$pattern)) {
         throw "Control has no InvokePattern: $($Element.Current.Name)"
@@ -133,20 +193,11 @@ function Invoke-Control($Element) {
 
 function Find-Marker($Root, [string]$Marker) {
     if ($null -eq $Root) { return $null }
-    $all = $Root.FindAll([Windows.Automation.TreeScope]::Descendants,
-        [Windows.Automation.Condition]::TrueCondition)
+    $all = [OpenProbeWindow]::Snapshot($script:app.MainWindowHandle)
     foreach ($element in $all) {
         if ($element.Current.IsOffscreen) { continue }
         if ($element.Current.Name.Contains($Marker)) { return $element }
-        # Editable slide titles expose their contents as Value, not Name.
-        $pattern = $null
-        if ($element.TryGetCurrentPattern([Windows.Automation.ValuePattern]::Pattern, [ref]$pattern)) {
-            if ($pattern.Current.Value.Contains($Marker)) { return $element }
-        }
-        $pattern = $null
-        if ($element.TryGetCurrentPattern([Windows.Automation.TextPattern]::Pattern, [ref]$pattern)) {
-            if ($pattern.DocumentRange.GetText(2048).Contains($Marker)) { return $element }
-        }
+        if ($element.Value.Contains($Marker)) { return $element }
     }
     return $null
 }
@@ -191,6 +242,12 @@ function Save-ProbeEvidence([string]$Stage) {
             }
             ConvertTo-Json -InputObject @($rows) -Depth 4 |
                 Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory "$Stage.uia.json")
+            $accessible = [OpenProbeWindow]::Snapshot($script:app.MainWindowHandle)
+            $msaa = foreach ($node in $accessible) {
+                [ordered]@{ name=$node.Name; value=$node.Value; role=$node.Role; state=$node.State }
+            }
+            ConvertTo-Json -InputObject @($msaa) -Depth 4 |
+                Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory "$Stage.msaa.json")
         }
         $bounds = [Windows.Forms.SystemInformation]::VirtualScreen
         $bitmap = [Drawing.Bitmap]::new($bounds.Width, $bounds.Height)
@@ -214,13 +271,12 @@ try {
     [OpenProbeWindow]::EnableAccessibility($script:app.MainWindowHandle) |
         ConvertTo-Json | Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory 'accessibility-activation.json')
     $initial = Wait-Probe 'consent or the welcome actions' {
-        Find-Control (Get-AppRoot) '^(Agree|Akkoord gaan|New presentation|Nieuwe presentatie)$' ([Windows.Automation.ControlType]::Button)
+        Find-Control (Get-AppRoot) '^(Agree|Akkoord gaan)$|^(New presentation|Nieuwe presentatie)(\s|$)' ([Windows.Automation.ControlType]::Button)
     } 60
     if ($initial.Current.Name -match '^(Agree|Akkoord gaan)$') {
         $checkbox = Find-Control (Get-AppRoot) '.*' ([Windows.Automation.ControlType]::CheckBox)
         if (-not $checkbox) { throw 'Consent checkbox is not exposed to UI Automation.' }
-        $toggle = $checkbox.GetCurrentPattern([Windows.Automation.TogglePattern]::Pattern)
-        if ($toggle.Current.ToggleState -ne [Windows.Automation.ToggleState]::On) { $toggle.Toggle() }
+        if (-not $checkbox.IsChecked) { $checkbox.Invoke() }
         $agree = Wait-Probe 'enabled consent button' {
             $button = Find-Control (Get-AppRoot) '^(Agree|Akkoord gaan)$' ([Windows.Automation.ControlType]::Button)
             if ($button -and $button.Current.IsEnabled) { return $button }
@@ -228,7 +284,7 @@ try {
         Invoke-Control $agree
     }
     [void](Wait-Probe 'welcome screen' {
-        Find-Control (Get-AppRoot) '^(New presentation|Nieuwe presentatie)$' ([Windows.Automation.ControlType]::Button)
+        Find-Control (Get-AppRoot) '^(New presentation|Nieuwe presentatie)(\s|$)' ([Windows.Automation.ControlType]::Button)
     })
 
     # Cancellation is followed by a new open, proving the app remains usable.
@@ -271,7 +327,7 @@ try {
         [void](Wait-Probe "opened $($scenario.kind) presentation in the editor" {
             $root = Get-AppRoot
             $marker = Find-Marker $root $scenario.marker
-            $welcome = Find-Control $root '^(New presentation|Nieuwe presentatie)$' ([Windows.Automation.ControlType]::Button)
+            $welcome = Find-Control $root '^(New presentation|Nieuwe presentatie)(\s|$)' ([Windows.Automation.ControlType]::Button)
             return ($null -ne $marker -and $null -eq $welcome)
         } 60)
         [ordered]@{ marker = $scenario.marker; nativeDialogClosed = $true; editorVisible = $true } |
