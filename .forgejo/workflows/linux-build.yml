@@ -131,7 +131,7 @@ jobs:
 
       - name: Native bouwcache voor dezelfde toolchain en lockfile
         continue-on-error: true
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: |
             .dart_tool/hooks_runner
@@ -153,6 +153,17 @@ jobs:
       # meelevert.
       - name: Gebundelde documentatie vers?
         run: dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/linux
+
+      # Bewaar afgerond compilerwerk vóór de verpakking: een latere
+      # pakketfout mag geen nieuwe OpenCV-compilatie noodzakelijk maken.
+      - name: Afgeronde native bouw bewaren
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: release-native-linux-${{ steps.pin.outputs.version }}-${{ hashFiles('pubspec.lock') }}
 
       - name: Bundel inpakken
         run: |

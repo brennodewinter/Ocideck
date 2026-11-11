@@ -52,6 +52,18 @@ class SourceEnvelopeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Missing matching source'):
             self.stage()
 
+    def test_signature_tool_version_does_not_replace_source_version(self):
+        payload = self.descriptor.read_text()
+        self.descriptor.write_text(
+            '-----BEGIN PGP SIGNED MESSAGE-----\nHash: SHA384\n\n'
+            + payload
+            + '\n-----BEGIN PGP SIGNATURE-----\n'
+            'Version: GnuPG v1.4.14 (MirBSD)\n\n'
+            'fixture-signature\n-----END PGP SIGNATURE-----\n')
+        self.stage()
+        manifest = json.loads((self.root / 'share/doc/ocideck-flatpak/SOURCES.json').read_text())
+        self.assertEqual(manifest['sources'][0]['version'], '1-2')
+
     def test_wrong_source_version_blocks_packaging(self):
         self.records[0]['source_version'] = '1-3'
         with self.assertRaisesRegex(ValueError, 'Missing matching source'):

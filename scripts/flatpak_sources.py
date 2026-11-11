@@ -19,6 +19,10 @@ def fields(text):
     result = {}
     key = None
     for line in text.splitlines():
+        # A clearsigned .dsc can have a second Version header in the PGP
+        # signature (the signing tool's version, not the source version).
+        if line == '-----BEGIN PGP SIGNATURE-----':
+            break
         if line.startswith((' ', '\t')) and key:
             result[key] += '\n' + line.strip()
         elif ':' in line:
