@@ -20,6 +20,8 @@ import '../../utils/project_path.dart';
 import '../../utils/user_facing_error.dart';
 import '../asset_origin_badge.dart';
 import '../dialogs/image_carousel_picker.dart';
+import '../markdown_editor/markdown_editor_theme.dart';
+import '../markdown_editor/markdown_editor_toolbar.dart';
 import '../../theme/app_theme.dart';
 import 'editor_text_controller.dart';
 
@@ -239,6 +241,13 @@ class _EditorFieldState extends ConsumerState<EditorField> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // De inline-opmaakbalk hoort bij het veld dat de diatitel schrijft; dat
+    // veld is al herkenbaar aan searchFieldId 'title' — dezelfde marker als
+    // zoekmarkering en kwaliteitsfocus gebruiken (#2866).
+    final controller = widget.controller;
+    final isTitle =
+        controller is EditorTextController &&
+        controller.searchFieldId == 'title';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -260,6 +269,18 @@ class _EditorFieldState extends ConsumerState<EditorField> {
             hintText: widget.hint.isEmpty ? '' : l10n.d(widget.hint),
           ),
         ),
+        if (isTitle)
+          MarkdownEditorToolbar(
+            controller: widget.controller,
+            focusNode: _focusNode,
+            theme: MarkdownEditorTheme.documentSurface(
+              scheme: Theme.of(context).colorScheme,
+              fontSize: 13,
+            ),
+            compact: true,
+            bordered: false,
+            inlineOnly: true,
+          ),
       ],
     );
   }

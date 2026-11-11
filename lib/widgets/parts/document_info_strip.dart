@@ -1,6 +1,6 @@
 // Part of the document-editor library — see ../document_editor_screen.dart.
 //
-// De strook onder het schrijfvlak: woorden, koppen, tabellen, afbeeldingen en
+// De strook onder het schrijfvlak: woorden, tekens, koppen, tabellen, afbeeldingen en
 // de paginamaat. Vroeger zweefde dat linksonder over de laatste regels heen.
 // De strook neemt nu een eigen rij, boven de TLP-voet wanneer die er is, zodat
 // de tekst er niet meer onderdoor schuift (#2397).
@@ -85,6 +85,12 @@ Widget _documentInfoStrip(
                     Icons.text_fields,
                     stats.words,
                     l10n.d('woorden'),
+                  ),
+                  _statChip(
+                    theme,
+                    Icons.short_text,
+                    stats.characters,
+                    l10n.d('tekens'),
                   ),
                   _statChip(
                     theme,

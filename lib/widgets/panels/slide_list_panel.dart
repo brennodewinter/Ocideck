@@ -52,6 +52,7 @@ part 'slide_list_panel_bars.dart';
 part 'slide_list_panel_add.dart';
 part 'slide_list_panel_clipboard.dart';
 part 'slide_list_panel_frame.dart';
+part 'slide_list_panel_search.dart';
 
 class SlideListPanel extends ConsumerStatefulWidget {
   /// Current width of the slide rail. When it changes (dragging the divider),
@@ -107,6 +108,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   }
 
   Timer? _resizeSettleTimer;
+  int _scrollRequest = 0;
   @override
   void dispose() {
     _resizeSettleTimer?.cancel();
@@ -132,38 +134,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     });
   }
 
-  /// Lower-cased, concatenated text of a slide for searching. Kept broad on
-  /// purpose: everything you typed into the slide should make it findable.
-  String _slideText(Slide slide) {
-    return [
-      slide.title,
-      slide.subtitle,
-      ...slide.bullets,
-      ...slide.bullets2,
-      slide.quote,
-      slide.quoteAuthor,
-      slide.customMarkdown,
-      slide.imageCaption,
-      slide.imageCaption2,
-      slide.notes,
-      slide.imagePath,
-      slide.imagePath2,
-      slide.videoPath,
-      slide.videoCaptions,
-      slide.audioPath,
-      slide.type.label,
-    ].join(' ').toLowerCase();
-  }
-
-  /// Multi-word AND match: every term must appear somewhere in the slide.
-  bool _matches(Slide slide, String query) {
-    final text = _slideText(slide);
-    return query
-        .split(RegExp(r'\s+'))
-        .where((t) => t.isNotEmpty)
-        .every(text.contains);
-  }
-
   bool get _textInputHasFocus {
     final context = FocusManager.instance.primaryFocus?.context;
     return context?.widget is EditableText ||
@@ -183,11 +153,18 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     _thumbCache.removeWhere((id, _) => !ids.contains(id));
   }
 
-  void _scrollSlideToTop(int index, {int attempts = 2}) {
+  void _scrollSlideToTop(
+    int index, {
+    int attempts = 2,
+    bool onlyIfOutside = false,
+  }) {
+    final request = ++_scrollRequest;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // The panel can be disposed before the frame lands (slide restructure,
       // tab close). Reading `ref` after unmount throws, so bail out first.
-      if (!mounted) return;
+      // Deck and selection can both change during deletion. Only the latest
+      // reveal may scroll, rather than animating towards the removed slide.
+      if (!mounted || request != _scrollRequest) return;
       final deck = ref.read(deckProvider).deck;
       if (deck == null ||
           index < 0 ||
@@ -210,17 +187,30 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         _scrollController.jumpTo(
           (avgItem * index).clamp(0.0, position.maxScrollExtent),
         );
-        _scrollSlideToTop(index, attempts: attempts - 1);
+        _scrollSlideToTop(
+          index,
+          attempts: attempts - 1,
+          onlyIfOutside: onlyIfOutside,
+        );
         return;
       }
 
       final viewport = RenderAbstractViewport.maybeOf(target);
       if (viewport == null) return;
 
-      final offset = viewport
+      var offset = viewport
           .getOffsetToReveal(target, 0)
           .offset
           .clamp(0.0, _scrollController.position.maxScrollExtent);
+      if (onlyIfOutside) {
+        final bottomOffset = viewport
+            .getOffsetToReveal(target, 1)
+            .offset
+            .clamp(0.0, _scrollController.position.maxScrollExtent);
+        final current = _scrollController.offset;
+        if (current >= bottomOffset && current <= offset) return;
+        if (current < bottomOffset) offset = bottomOffset;
+      }
       _scrollController.animateTo(
         offset,
         duration: const Duration(milliseconds: 140),
@@ -665,11 +655,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     // opnieuw over álle dia's, dus O(dia's × zichtbaar) per toetsaanslag.
     final scopeCia = _deckScopeCia(deck);
     return ReorderableListView.builder(
-      // Rebuild when slides are bulk-added/removed — the list's internal
-      // bookkeeping can otherwise keep showing the old item count until restart.
-      key: ValueKey(
-        'slide-list-${deck.slides.length}-${deck.slides.isEmpty ? 'empty' : deck.slides.last.id}',
-      ),
+      // Keep the scroll position and reorder state when the slide count changes.
+      // A count-based key remounted the list on every deletion (#2872).
+      key: const ValueKey('slide-list'),
       scrollController: _scrollController,
       padding: const EdgeInsets.symmetric(vertical: 4),
       buildDefaultDragHandles: false,
@@ -716,20 +704,21 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       previous,
       next,
     ) {
-      if (previous != next) _scrollSlideToTop(next);
+      if (previous != next) {
+        _scrollSlideToTop(next, onlyIfOutside: true);
+      }
     });
-    // Any change in slide count rebuilds the list under a fresh ValueKey (see
-    // _buildSlideList), which resets the scroll offset to the top. Re-reveal the
-    // active slide so it stays put — on removal the focus target can equal the
-    // current selection (a no-op `select`), so the selectedIndex listener above
-    // would not fire and only this listener keeps the list from snapping to the
-    // first slide.
+    // Removal can leave the selected index unchanged. Reveal it if necessary,
+    // while keeping the surrounding overview still when it is already visible.
     ref.listen<int?>(deckProvider.select((s) => s.deck?.slides.length), (
       previous,
       next,
     ) {
       if (previous != null && next != null && next != previous) {
-        _scrollSlideToTop(ref.read(editorProvider).selectedIndex);
+        _scrollSlideToTop(
+          ref.read(editorProvider).selectedIndex,
+          onlyIfOutside: true,
+        );
       }
     });
     final notifier = ref.read(deckProvider.notifier);

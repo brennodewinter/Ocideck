@@ -612,6 +612,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Onderstrepen': 'Sutrayá',
+  'Eigen verdeling': 'Divishon personalisá',
+  'Gelijke hoogte': 'Altura igual',
+  'Panelen vullen': 'Yena panelnan',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Reparti e hanchura bo mes; kada imagen ta kab den su panel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Ambos imagen tin mesun haltura i ta kompletamente bishibel — partí i korta no ta hasi nada',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Yena kada panel i korta e randnan; ‘Adjusta imagen’ ta skohe e punto di foko',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Korta no ta hasi nada den Altura igual — skohe prome un otro bista',
   'Afbeeldingsgroep': 'Grupo di imágen',
   'Stapel': 'Pila',
   'Afbeelding toevoegen': 'Agregá imágen',
@@ -7161,7 +7173,6 @@ const _dutchSourceAddPap = {
   'Afbeelding paneelvullend': 'Imágen ta yena e panel',
   'Vult het paneel en snijdt de randen bij':
       'Ta yena e panel i ta kòrta e ramanan',
-  'Afbeeldingen paneelvullend': 'Imágennan ta yena nan panelnan',
   'Vult elk paneel en snijdt de randen bij':
       'Ta yena kada panel i ta kòrta e ramanan',
   'Vullen (bijsnijden)': 'Yena (kòrta)',

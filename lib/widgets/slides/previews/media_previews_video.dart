@@ -353,7 +353,14 @@ class _VideoEmbedPreview extends StatefulWidget {
 class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   WebViewController? _controller;
   bool _completed = false;
-  bool _initialLoadDone = false;
+  VideoEmbedHost? _embedHost;
+  bool _initializing = false;
+  int _embedGeneration = 0;
+
+  bool get _desktopWebView =>
+      !kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.windows ||
+          defaultTargetPlatform == TargetPlatform.linux);
 
   /// De reden waarom deze embed niet speelt, of null zolang alles goed gaat.
   /// Zolang dit null is en de speler nog niet "ok" meldde, tonen we de
@@ -399,38 +406,50 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
     }
   }
 
-  void _initWebView() {
-    if (!mounted || _controller != null) return;
-    final origin = widget.source.kind == VideoSourceKind.youtube
-        ? 'youtube'
-        : 'vimeo';
-    final controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..addJavaScriptChannel('OciDeck', onMessageReceived: _onJsMessage)
-      ..setNavigationDelegate(
+  Future<void> _initWebView() async {
+    if (!mounted || _controller != null || _initializing) return;
+    _initializing = true;
+    WebViewController? pending;
+    try {
+      PlatformWebViewControllerCreationParams params =
+          const PlatformWebViewControllerCreationParams();
+      if (_desktopWebView) {
+        final cache = await getApplicationCacheDirectory();
+        if (!mounted || !widget.allowRemoteMedia) return;
+        params = WindowsWebViewControllerCreationParams(
+          userDataFolder: '${cache.path}/video-webview',
+          // Presenter and audience windows must both keep playing.
+          suspendDuringDeactive: false,
+        );
+      }
+      final controller = WebViewController.fromPlatformCreationParams(params);
+      pending = controller;
+      await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+      await controller.addJavaScriptChannel(
+        'OciDeck',
+        onMessageReceived: _onJsMessage,
+      );
+      await controller.setNavigationDelegate(
         NavigationDelegate(
           // Sta alleen de eerste lading + navigatie binnen de speler-origins toe;
           // pop-ups en wegnavigeren worden geblokkeerd.
           onNavigationRequest: (request) {
-            if (!_initialLoadDone) {
-              _initialLoadDone = true;
-              return NavigationDecision.navigate;
-            }
             final u = request.url;
             // Onze eigen stop-navigatie bij het verlaten van de dia
             // (zie [_stopPlayback]): een lege pagina sloopt de speler en dempt
             // het geluid. Geen tracking-oorsprong, dus die mag altijd door.
-            if (u == 'about:blank') return NavigationDecision.navigate;
-            final allowed = origin == 'youtube'
+            if (u == 'about:blank' || u == _embedHost?.uri.toString()) {
+              return NavigationDecision.navigate;
+            }
+            final allowed = widget.source.kind == VideoSourceKind.youtube
                 ? youTubePlayerNavigationAllowed(u)
                 : vimeoPlayerNavigationAllowed(u);
             return allowed
                 ? NavigationDecision.navigate
                 : NavigationDecision.prevent;
           },
-          onHttpAuthRequest: (request) async {
-            // Weiger auth-prompts vanuit de embed.
-          },
+          // Desktop's delegate does not implement HTTP-auth callbacks.
+          onHttpAuthRequest: _desktopWebView ? null : (request) async {},
           // Alleen een fout op de hóófdlading telt hier als netwerkfout. Een
           // embed laadt tientallen subresources (het IFrame-script, thumbnails,
           // tracking) die los mogen mislukken zonder dat de video stuk is; die
@@ -444,10 +463,23 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           },
         ),
       );
-    _setEmbedBackground(controller);
-    _controller = controller;
-    _loadEmbed();
-    if (mounted) setState(() {});
+      await _setEmbedBackground(controller);
+      if (!mounted || !widget.allowRemoteMedia) {
+        await _disposeDesktopWebView(controller);
+        pending = null;
+        return;
+      }
+      _controller = controller;
+      pending = null;
+      await _loadEmbed();
+      if (mounted) setState(() {});
+    } catch (error) {
+      if (pending != null) await _disposeDesktopWebView(pending);
+      logWarning('Video webview initialization failed', error);
+      _reportError(VideoEmbedError.network);
+    } finally {
+      _initializing = false;
+    }
   }
 
   /// Een zwarte achtergrond onder de speler — puur cosmetisch, en niet overal
@@ -460,9 +492,9 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   ///
   /// De kleur mag falen: de embed-HTML zet zelf al `background:#000`, en de
   /// speler vult het vlak. Alleen de video mag niet aan de kleur onderdoorgaan.
-  void _setEmbedBackground(WebViewController controller) {
+  Future<void> _setEmbedBackground(WebViewController controller) async {
     try {
-      controller.setBackgroundColor(Colors.black);
+      await controller.setBackgroundColor(Colors.black);
     } on UnimplementedError catch (e) {
       logWarning(
         '_VideoEmbedPreviewState._initWebView: '
@@ -472,7 +504,8 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
     }
   }
 
-  void _loadEmbed() {
+  Future<void> _loadEmbed() async {
+    final generation = ++_embedGeneration;
     final controller = _controller;
     if (controller == null) return;
     _completed = false;
@@ -489,7 +522,27 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
     final baseUrl = widget.source.kind == VideoSourceKind.youtube
         ? kYouTubeEmbedOrigin
         : 'https://player.vimeo.com';
-    controller.loadHtmlString(html, baseUrl: baseUrl);
+    try {
+      if (_desktopWebView) {
+        final host = _embedHost ?? await VideoEmbedHost.start(html);
+        if (!mounted ||
+            generation != _embedGeneration ||
+            !widget.allowRemoteMedia) {
+          if (host != _embedHost) await host.close();
+          return;
+        }
+        _embedHost = host;
+        host.update(html);
+        await controller.loadRequest(host.uri);
+      } else {
+        await controller.loadHtmlString(html, baseUrl: baseUrl);
+      }
+    } catch (error) {
+      logWarning('Video embed loading failed', error);
+      if (mounted && generation == _embedGeneration) {
+        _reportError(VideoEmbedError.network);
+      }
+    }
   }
 
   void _onJsMessage(JavaScriptMessage message) {
@@ -567,9 +620,27 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   /// in `dispose` valt er niets te awaiten, en een fout betekent dat het view al
   /// weg is, dus dan speelt er ook niets meer.
   void _stopPlayback() {
+    _embedGeneration++;
+    final host = _embedHost;
+    _embedHost = null;
+    host?.close();
     final controller = _controller;
     if (controller == null) return;
-    controller.loadRequest(Uri.parse('about:blank')).catchError((_) {});
+    controller
+        .loadRequest(Uri.parse('about:blank'))
+        .catchError((_) {})
+        .whenComplete(() => _disposeDesktopWebView(controller));
+  }
+
+  Future<void> _disposeDesktopWebView(WebViewController controller) async {
+    final platform = controller.platform;
+    if (platform is WindowsPlatformWebViewController) {
+      try {
+        await platform.controller.dispose();
+      } catch (error) {
+        logWarning('Video webview disposal failed', error);
+      }
+    }
   }
 
   @override
@@ -589,7 +660,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
               widget.slide.videoPath,
             )
           else if (controller != null) ...[
-            WebViewWidget(controller: controller),
+            VideoEmbedView(controller: controller),
             // De speler zit al in beeld, maar meldde nog geen positie of "ok".
             // Toon zolang een subtiele laadhint zodat een trage lading niet met
             // een dood vlak wordt verward.

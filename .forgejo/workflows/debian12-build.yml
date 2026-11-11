@@ -15,7 +15,7 @@ on:
 jobs:
   native-build:
     runs-on: docker
-    timeout-minutes: 240
+    timeout-minutes: 720
     steps:
       - name: Docker-gereedschap installeren
         run: |

@@ -167,7 +167,9 @@ const Map<String, int> methodLengthBaseline = {
   // +6 (#1824): callouts, calloutPresentation, calloutReveal-parameters +
   // doorvoer in copyWith voor image callouts.
   // One more stored layout choice needs one parameter and one constructor field.
-  'lib/models/slide.dart::Slide.copyWith': 180,
+  // +2 (#2867): twoImagesLayout-parameter + doorvoer in copyWith — pure
+  // plumbing, zoals elke opgeslagen layoutkeuze hierboven.
+  'lib/models/slide.dart::Slide.copyWith': 182,
   // +4 (#2838): galleryImages/galleryLayout-parameters — pure plumbing.
   // +2 (#2841): videoCaptions-parameter + doorvoer in copyWith — zelfde pure
   // plumbing als de vijf voorgaande copyWith-bumps hierboven.
@@ -193,11 +195,15 @@ const Map<String, int> methodLengthBaseline = {
   // switch, één case per veld, niet uit te tillen.
   // +9 (#1824): callouts, calloutPresentation, calloutReveal — drie nieuwe
   // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
-  'lib/collab/collab_codec.dart::slideFromJson': 152,
+  // +7 (#2867): de twoImagesLayout-case in de codec — één blok per veld,
+  // onherleidbare plumbing zoals de rest.
+  'lib/collab/collab_codec.dart::slideFromJson': 159,
   // +2 (#2838): galleryImages/galleryLayout — twee nieuwe dia-velden in de
   // codec; één regel per veld, onherleidbare plumbing zoals de rest.
   // +3 (#2749): de tableRows-case — zelfde vorm, één regel per veld.
-  'lib/collab/deck_op.dart::_slideWithField': 212,
+  // +3 (#2867): de twoImagesLayout-case — zelfde vorm als elke andere
+  // veld-case in de switch, niet uit te tillen.
+  'lib/collab/deck_op.dart::_slideWithField': 215,
   // +6 (#2838): galleryImages/galleryLayout-cases — twee nieuwe velden.
   // +3 (#2841): de videoCaptions-case — zelfde vorm als elke andere
   // veld-case in de switch, niet uit te tillen.

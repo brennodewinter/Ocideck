@@ -112,6 +112,10 @@ same answer `make licenses` and the SBOM give.
 | `crypto` | SHA-256/SHA-512 for the seal, evidence hashes and the SBOM generator | BSD-3-Clause |
 | `cryptography` | X25519/Ed25519/HKDF/XChaCha20-Poly1305 for the collaboration end-to-end encryption (self-encrypted relay, `docs/design/SELF_ENCRYPTED_RELAY.md`) | Apache-2.0 |
 | `video_player` | Video slides | BSD-3-Clause |
+| `video_player_win` | Windows Media Foundation video backend | BSD-3-Clause |
+| `video_player_media_kit` | Linux video_player adapter | MIT |
+| `media_kit_libs_linux` | Linux native media support | MIT |
+| `webview_win_floating` | Windows WebView2 and Linux WebKitGTK embeds | BSD-3-Clause |
 | `flutter_webrtc` | WebRTC media (audio/video, ICE/SRTP via libwebrtc) for native calls — the media plane behind the meeting adapters (`docs/design/NATIVE_CALLS.md`), reached only through the default-off Videovergaderingen module | MIT |
 | `characters` | Grapheme-correct text truncation | BSD-3-Clause |
 | `url_launcher` | External links (scheme allowlist) | BSD-3-Clause |
@@ -182,3 +186,45 @@ Other names that appear in the interface or the documentation — operating
 systems, browsers, standards bodies, the reference catalogues listed in
 [`docs/LICENSE_COMPLIANCE.md`](docs/LICENSE_COMPLIANCE.md) — belong to their
 respective owners and are likewise used only to identify the thing they name.
+
+## Linux video texture backend
+
+`media_kit_video_linux` (`third_party/media_kit_video_linux`) contains the Dart and Linux sources from
+media_kit_video 2.0.1 (MIT, Hitesh Kumar Saini and contributors). Only Linux native
+registration is enabled; see its `MODIFICATIONS.md` and retained `LICENSE`.
+Windows continues to use Media Foundation and Apple platforms AVFoundation.
+Linux distribution packages provide libmpv; the Flatpak component inventory
+records the versions and licence texts of the system libraries copied into it.
+
+`webview_win_floating` is vendored from 3.0.3 (BSD-3-Clause). Its Linux backend
+reuses OciDeck's prepared GTK overlay; Windows native code is unchanged.
+See `third_party/webview_win_floating/MODIFICATIONS.md` and its retained `LICENSE`.
+
+The Windows backend links Microsoft Edge WebView2 loader **1.0.1418.22**
+(BSD-3-Clause) and uses Windows Implementation Library **1.0.220914.1** (MIT).
+Their full copyright/licence texts ship in `assets/licenses/webview2-sdk-LICENSE.txt`
+and `assets/licenses/wil-LICENSE.txt` and are registered in the app's licence
+page. Both NuGet SDK archives are versioned and hash-recorded in the SBOM.
+The Microsoft Edge WebView2 Runtime itself remains a system prerequisite.
+
+## Native Linux media: separate GNU licence obligations
+
+The MIT licences of `media_kit`, `video_player_media_kit`, `media_kit_video_linux`
+and `media_kit_libs_linux` cover their own code, **not** libmpv, FFmpeg, WebKitGTK
+or the codecs linked into them. These runtime licences depend on the actual
+system/build. The inspected Debian libmpv binary is GPL-3.0-or-later; an LGPL-only
+build must not be assumed. WebKit includes LGPL and BSD code.
+
+The generic SBOM records these external requirements with `NOASSERTION` until
+resolved per artifact. Each native bundle records the actual system builds and
+includes an accompanying project/package source archive, build instructions and
+full licence texts under `share/doc/ocideck`. Our own source remains EUPL-1.2;
+the Linux combination with GPL libmpv is distributed under GPL-3.0-or-later via
+EUPL article 5. See `packaging/linux/DISTRIBUTION-LICENSES.md`.
+
+Flatpak additionally downloads matching distro source packages through signed
+APT repository indexes and includes `SOURCES.json`, patches/build recipes,
+package copyrights and full GNU texts. This covers all copied distro packages,
+including Git and libmpv's additional libraries. It records the separately
+supplied GNOME runtime's exact commit. Missing sources or changed payloads block
+packaging. See `docs/LICENSE_COMPLIANCE.md` for the scoped review.

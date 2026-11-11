@@ -47,6 +47,10 @@ if [ ! -x "$BUNDLE_DIR/ocideck" ]; then
   exit 1
 fi
 
+# This must run before the raw tarball too (the workflows call it explicitly).
+# Packaging a developer build without its matching source payload is forbidden.
+python3 "$SCRIPT_DIR/linux_source_bundle.py" verify "$BUNDLE_DIR"
+
 mkdir -p "$OUT"
 OUT="$(cd "$OUT" && pwd)"
 
@@ -76,6 +80,8 @@ stage_fhs() {
   local root="$1"
   install -d "$root/usr/lib/ocideck"
   cp -a "$BUNDLE_DIR/." "$root/usr/lib/ocideck/"
+  install -d "$root/usr/share/doc"
+  ln -s ../../lib/ocideck/share/doc/ocideck "$root/usr/share/doc/ocideck"
 
   install -d "$root/usr/bin"
   cat > "$root/usr/bin/ocideck" <<'WRAP'
@@ -113,7 +119,7 @@ Version: $VERSION
 Architecture: amd64
 Maintainer: $MAINTAINER
 Installed-Size: $size_kb
-Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1, libgles2, libegl1, libpulse0
+Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1, libgles2, libegl1, libpulse0, libgstreamer1.0-0, gstreamer1.0-plugins-base, libmpv2 | libmpv1, libwebkit2gtk-4.1-0, gstreamer1.0-plugins-good, gstreamer1.0-libav
 Section: office
 Priority: optional
 Homepage: $HOMEPAGE
@@ -147,11 +153,12 @@ Name:           ocideck
 Version:        $rpmver
 Release:        1
 Summary:        $SUMMARY
-License:        EUPL-1.2
+License:        EUPL-1.2 AND GPL-3.0-or-later
 URL:            $HOMEPAGE
 BuildArch:      x86_64
 Requires:       libGLESv2.so.2()(64bit)
 Requires:       libEGL.so.1()(64bit)
+Requires:       libmpv.so.2()(64bit)
 
 # The payload is a prebuilt Flutter bundle — no sources, no compilation. Skip the
 # debuginfo split (nothing to attach) and the strip/brp post-install scripts that
@@ -177,6 +184,7 @@ cp -a %{stagedir}/. %{buildroot}/
 %{_bindir}/ocideck
 %{_datadir}/applications/$APP_ID.desktop
 %{_datadir}/icons/hicolor/512x512/apps/$APP_ID.png
+%{_datadir}/doc/ocideck
 EOF
 
   # QA_RPATHS masks the $ORIGIN/lib rpath check (bit 0) and the standard-dirs
@@ -307,9 +315,21 @@ build_flatpak() {
     lib/ocideck/lib/liblber.so* lib/ocideck/lib/libsasl2.so* \
     \( -type f -o -type l \) -print0 | sort -z | xargs -0 sha256sum) \
     > "$notices/FILES.sha256"
+  # libmpv is loaded dynamically: ELF dependency scanning alone misses it.
+  local runtime_dir mpv_library
+  runtime_dir="${FLATPAK_RUNTIME_DIR:-}"
+  if [ -z "$runtime_dir" ]; then
+    runtime_dir="$(flatpak --user info --show-location org.gnome.Platform/x86_64/50)/files"
+  fi
+  mpv_library="$(ldconfig -p | awk '$1 == "libmpv.so.2" { print $NF; exit }')"
+  python3 "$SCRIPT_DIR/flatpak_media.py" "$root/files" "$runtime_dir" "$mpv_library"
+  python3 "$SCRIPT_DIR/flatpak_sources.py" "$root/files"
+  flatpak --user info --show-commit org.gnome.Platform/x86_64/50 > "$notices/RUNTIME-COMMIT"
   python3 "$SCRIPT_DIR/flatpak_components.py" \
     "$notices/PACKAGES.tsv" "$notices/FILES.sha256" "$VERSION" \
     "$notices/components.cdx.json"
+  python3 "$SCRIPT_DIR/linux_source_bundle.py" verify "$root/files/lib/ocideck" \
+    --copied-files "$notices/FILES.sha256"
   cat > "$root/files/bin/ocideck" <<'WRAP'
 #!/bin/sh
 export GIT_EXEC_PATH=/app/libexec/git-core

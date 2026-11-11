@@ -28,6 +28,28 @@ void main() {
   final cdxRefs = cdxComponents.map((c) => c['bom-ref'] as String).toSet();
 
   group('completeness', () {
+    test('native Linux requirements do not inherit wrapper licences', () {
+      final inventory = buildInventory();
+      for (final ref in [
+        'system:libmpv',
+        'system:ffmpeg',
+        'system:webkitgtk',
+      ]) {
+        final runtime = inventory.all.singleWhere((c) => c.ref == ref);
+        expect(runtime.group, 'system-runtime');
+        expect(runtime.license, 'NOASSERTION');
+        expect(runtime.version, isNull);
+        expect(runtime.note, isNotEmpty);
+      }
+      final graph = {
+        for (final d in cdx['dependencies'] as List)
+          d['ref']: d['dependsOn'] as List,
+      };
+      final wrapper = cdxComponents.singleWhere(
+        (c) => c['name'] == 'media_kit',
+      );
+      expect(graph[wrapper['bom-ref']], contains('system:libmpv'));
+    });
     test('every pubspec.lock package is in the CycloneDX SBOM', () {
       final lock = loadYaml(File('pubspec.lock').readAsStringSync()) as YamlMap;
       final packages = lock['packages'] as YamlMap;
@@ -68,6 +90,39 @@ void main() {
       expect(pdfium['name'], 'PDFium');
       expect(pdfium['licenses'].toString(), contains('Apache-2.0'));
       expect(pdfium['licenses'].toString(), contains('BSD-3-Clause'));
+    });
+
+    test('Windows webview SDK pins and static loader match the SBOM', () {
+      final cmake = File(
+        'third_party/webview_win_floating/windows/CMakeLists.txt',
+      ).readAsStringSync();
+      for (final entry in [
+        (
+          'runtime:webview2-loader@1.0.1418.22',
+          'WEBVIEW_VERSION',
+          'BSD-3-Clause',
+        ),
+        ('runtime:wil@1.0.220914.1', 'WIL_VERSION', 'MIT'),
+      ]) {
+        final sdk = cdxComponents.singleWhere((c) => c['bom-ref'] == entry.$1);
+        expect(cmake, contains('set(${entry.$2} "${sdk['version']}")'));
+        expect(sdk['licenses'].toString(), contains(entry.$3));
+        expect(sdk['hashes'].toString(), contains('SHA-256'));
+      }
+      expect(cmake, contains('VS_GLOBAL_WebView2LoaderPreference "Static"'));
+      final wrapper = cdxComponents.singleWhere(
+        (c) => c['name'] == 'webview_win_floating',
+      );
+      final dependencies = (cdx['dependencies'] as List)
+          .cast<Map<String, dynamic>>()
+          .singleWhere((d) => d['ref'] == wrapper['bom-ref']);
+      expect(
+        dependencies['dependsOn'],
+        containsAll([
+          'runtime:webview2-loader@1.0.1418.22',
+          'runtime:wil@1.0.220914.1',
+        ]),
+      );
     });
 
     test('both SBOMs list the same number of components', () {
@@ -333,11 +388,23 @@ void main() {
         for (final c in (spdx['packages'] as List).cast<Map<String, dynamic>>())
           if (!c.containsKey('supplier')) c['name'] as String,
       ];
-      // The vendored JS bundles are the known gap: their only local URL is the
-      // CDN they were fetched from, and a CDN is not a supplier. Everything
-      // else declares a repository or ships inside an SDK that does.
+      // A native runtime requirement has no resolved distro binary/supplier
+      // yet. CDN bundles and the font likewise have no stated supplier.
       expect(missing, everyElement(isNot(startsWith('pkg:pub/'))));
-      expect(missing.length, lessThan(10), reason: 'missing: $missing');
+      expect(missing.toSet(), {
+        'highlight.css',
+        'Noto Sans Math',
+        'dompurify',
+        'highlight.js',
+        'marked',
+        'mathjax',
+        'mermaid',
+        'FFmpeg',
+        'WebKitGTK',
+        'libmpv',
+        'GStreamer',
+        'PulseAudio client libraries',
+      });
     });
 
     test('the SPDX supplier keeps the required prefix', () {

@@ -98,11 +98,10 @@ jobs:
     # meer dan één zware gate tegelijk draait (zie de kop en docs/CHECKS.md).
     # `static-gate`/`scans` blijven op `docker` (capacity 4).
     runs-on: linux-serial
-    # De suite mat 81 min onder volle belasting op 08-10-2026 en naderde in
-    # de v0.7.0-preflight al 110 min. Houd ruimte
-    # voor de volledige suite, maar stop een echte hang vóór release_auto's
-    # ruimere grens van 300 min.
-    timeout-minutes: 300
+    # Geef voortgaande builds op de gedeelde HDD-runner dezelfde 12 uur
+    # als de runner zelf. De releasecontroller bewaakt daarnaast de voortgang;
+    # een oude grens van 3-5 uur mag actief werk niet meer afbreken.
+    timeout-minutes: 720
     env:
       PUB_CACHE: /home/ubuntu/.pub-cache
       # De volle suite belast de runner genoeg om losse schijf-I/O-tests over

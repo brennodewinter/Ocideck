@@ -1,7 +1,7 @@
 name: ocideck
 description: "Marp Presentation Builder for Desktop and Web"
 publish_to: 'none'
-version: 0.7.7+49
+version: 0.7.8+50
 repository: https://pawprint.vigilis.online/LibreKAT/Ocideck
 issue_tracker: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues
 
@@ -132,6 +132,11 @@ dependencies:
   timezone: ^0.11.1
   logger: ^2.8.0
   shared_preferences_platform_interface: ^2.4.2
+  # Desktop video backends: Media Foundation on Windows, libmpv on Linux.
+  video_player_win: ^3.3.1
+  webview_win_floating: ^3.0.3
+  video_player_media_kit: ^2.0.0
+  media_kit_libs_linux: ^1.2.1
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.
 # De README waarschuwt: "even a module is excluded, its dart code is still
@@ -202,14 +207,18 @@ dev_dependencies:
 # cnativeapi moet ook uit de fork komen — nativeapi dependt op ^0.1.4 en pub
 # zou de gepubliceerde versie kiezen, die de willClose-hook niet heeft.
 dependency_overrides:
+  # Reuse the prepared GTK container instead of reparenting a live FlView.
+  webview_win_floating:
+    path: third_party/webview_win_floating
+  # Only Linux uses media_kit; keep Apple builds on SwiftPM and AVFoundation.
+  media_kit_video:
+    path: third_party/media_kit_video_linux
   # Per-track gedecodeerde audiosink voor de call-audiobron (#2527). Onze
   # fork voegt `audioTrackFrames` toe bovenop v1.6.2+hotfix.4; upstream-
   # patch: flutter-webrtc/flutter-webrtc#2250 — landt die, dan kan deze
   # override weer weg.
   flutter_webrtc:
-    git:
-      url: https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git
-      ref: b82f0db567e10aecd152c4039336d09e48f295a8
+    path: third_party/flutter_webrtc
   cnativeapi:
     git:
       url: https://github.com/brennodewinter/nativeapi-flutter.git

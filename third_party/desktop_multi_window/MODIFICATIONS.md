@@ -49,3 +49,10 @@ The local delta is intended to disappear once equivalent window placement,
 fullscreen, close and non-key hover behaviour has been accepted and released
 upstream. Until then, the vendored copy keeps OciDeck reproducible without a
 runtime or build-time dependency on an unpublished branch.
+
+## Linux native video container
+
+Primary and audience windows install a GtkOverlay with a GtkFixed sibling for
+native webviews before adding the Flutter view to the window. This preserves
+the FlView's parent and graphics surface when a video embed is opened. The
+`webview_win_floating` fork reuses that sibling via window object data.

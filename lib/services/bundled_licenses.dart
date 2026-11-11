@@ -51,6 +51,19 @@ abstract final class BundledLicenses {
   /// Everything that ships inside the application binary.
   static const all = <BundledLicense>[
     BundledLicense(
+      component: 'Microsoft Edge WebView2 loader (Windows)',
+      license: 'BSD-3-Clause',
+      source:
+          'https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1418.22',
+      licenseAsset: 'assets/licenses/webview2-sdk-LICENSE.txt',
+    ),
+    BundledLicense(
+      component: 'Windows Implementation Library (Windows)',
+      license: 'MIT',
+      source: 'https://github.com/microsoft/wil',
+      licenseAsset: 'assets/licenses/wil-LICENSE.txt',
+    ),
+    BundledLicense(
       component: 'EB Garamond (font)',
       license: 'OFL-1.1',
       source: 'https://github.com/octaviopardo/EBGaramond12',

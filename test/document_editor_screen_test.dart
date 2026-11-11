@@ -68,6 +68,12 @@ void main() {
     expect(find.byType(QuillEditor), findsOneWidget);
     // De informatiestrook is er ook zonder TLP, en niet als overlay op de tekst.
     expect(find.byKey(const Key('document-info-strip')), findsOneWidget);
+    expect(find.text('13 tekens'), findsOneWidget);
+
+    n.edit('# Kop\n\nMeer tekst.', coalesceKey: null);
+    await tester.pump();
+    expect(find.text('18 tekens'), findsOneWidget);
+    expect(find.text('13 tekens'), findsNothing);
   });
 
   testWidgets('Visueel: een tabel valt niet terug op ruwe markdown', (

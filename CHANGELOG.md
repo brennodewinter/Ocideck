@@ -8,11 +8,20 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.8] — 2026-11-11
+
 ### Removed
 
 - **MIAUW-rapportage uit OciDeck (#2845).** De module Informatieveiligheid, de bijbehorende rapportdocumenten, compliance-analyse, CVE-opzoekingen, bulkdownloads en CWE-dataset zijn verwijderd. Eerder gedownloade CVE-data en instellingen worden opgeruimd. Bestaande gebruikerspresentaties en sidecars blijven leesbaar.
 
 ### Added
+
+- **Opmaak in titelvelden (#2871).** Geselecteerde titeltekst kan vet,
+  cursief, doorgestreept of onderstreept worden via de opmaakknoppen.
+- **Gelijke zichtbare afbeeldingshoogte (#2868).** Bij twee afbeeldingen is
+  de zichtbare hoogte gezamenlijk instelbaar.
+- **Live tekenteller (#2870).** De documentbalk toont naast het aantal woorden
+  ook het actuele aantal tekens.
 
 - **Sterkte van de waas bij titels en tussenkoppen (#2855).** De bestaande schuifregelaar is nu gedeeld met citaten. Titels behouden hun verloop van 95% naar 90% en transparant; tussenkoppen hun egale waas van 62%. Aangepaste sterktes blijven bewaard en werken door in presentatie, export en contrastcontrole.
 
@@ -49,6 +58,17 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Linux-bronpakketten.** Flutter-bronnen worden eenmaal opgenomen, zonder binaire SDK-caches of gegenereerde platformlinks. De gebundelde broncode en licenties blijven controleerbaar. Documentatiecontroles bouwen geen ongebruikte native variant meer; Linux-bouwen krijgen een ruimere, begrensde looptijd.
+
+- **Positie in het slideoverzicht (#2873).** Na het verwijderen van een dia
+  blijft het overzicht op de bijbehorende positie staan.
+
+- **Desktopmedia op Linux en Windows.** Video, ingesloten webvideo en offline
+  diagramweergave gebruiken de bijbehorende desktopbackends. De meegebouwde
+  audiohelper decodeert geluidsbestanden voor transcriptie; Linux-opname gebruikt
+  PulseAudio of de compatibele PipeWire-server zonder losse opnamecommando's.
+  Verwijderen op Windows gebruikt de systeemprullenbak.
+
 - **Alt-teksten uit Marp blijven bewaard.** Een afbeelding met een standaard
   Marp-alt-tekst (`![Kat met een sleutel](images/x.png)`) verloor die
   beschrijving stil bij de eerste opslag. OciDeck leest de Marp-alt nu in en
@@ -81,6 +101,12 @@ All notable changes to OciDeck are documented in this file.
   pakketinhoud oplevert.
 
 ### Changed
+
+- **Bronnen en licenties bij Linux-distributies.** Linux-pakketten en losse
+  bundels krijgen de bijbehorende project- en pakketbronnen, licenties,
+  bouwinstructies en bestandshashes. De release publiceert ook een afzonderlijk
+  bronarchief; de software-inventaris en consumentimages volgen de nieuwe
+  multimedia-afhankelijkheden.
 
 - Flutter 3.47.9 (Dart 3.13.7) en de oplosbare pakketten zijn bijgewerkt:
   `file_picker` 13.3.2, `pdfrx` 2.12.0 (met `pdfrx_engine` 0.9.1 en

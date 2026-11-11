@@ -55,4 +55,76 @@ void main() {
 
     expect(latest()!.title, 'Voor en na');
   });
+
+  // #2867 — één weergavekeuze met drie standen: eigen verdeling (contain),
+  // gelijke hoogte en panelen vullen (cover). De handmatige waarden worden
+  // nooit overschreven, dus terugschakelen herstelt de compositie.
+  group('view mode (#2867)', () {
+    Slide slide([
+      TwoImagesLayout layout = TwoImagesLayout.panels,
+      int zoom = 0,
+    ]) => Slide.create(SlideType.twoImages).copyWith(
+      imagePath: 'images/a.png',
+      imagePath2: 'images/b.png',
+      imageSize: 60,
+      imageZoom: zoom,
+      twoImagesLayout: layout,
+    );
+
+    testWidgets(
+      'selecting Gelijke hoogte sets the layout and keeps the split',
+      (tester) async {
+        final latest = await pump(tester, slide());
+
+        await tester.tap(find.text('Gelijke hoogte'));
+        await tester.pump();
+
+        final out = latest()!;
+        expect(out.twoImagesLayout, TwoImagesLayout.equalHeight);
+        expect(out.imageSize, 60);
+        expect(out.imageZoom, 0);
+      },
+    );
+
+    testWidgets('equal height hides the split slider and disables crop', (
+      tester,
+    ) async {
+      await pump(tester, slide(TwoImagesLayout.equalHeight));
+
+      expect(find.text('Verdeling (links / rechts)'), findsNothing);
+      final crop = tester.widget<OutlinedButton>(
+        find.widgetWithText(OutlinedButton, 'Afbeelding aanpassen').first,
+      );
+      expect(crop.onPressed, isNull);
+    });
+
+    testWidgets('back to Eigen verdeling restores contain with the split', (
+      tester,
+    ) async {
+      final latest = await pump(tester, slide(TwoImagesLayout.equalHeight));
+
+      await tester.tap(find.text('Eigen verdeling'));
+      await tester.pump();
+
+      final out = latest()!;
+      expect(out.twoImagesLayout, TwoImagesLayout.panels);
+      expect(out.imageSize, 60);
+      // imageZoom 0 was cover — passen betekent contain.
+      expect(out.imageZoom, 100);
+    });
+
+    testWidgets('Panelen vullen selects cover without touching the split', (
+      tester,
+    ) async {
+      final latest = await pump(tester, slide(TwoImagesLayout.panels, 100));
+
+      await tester.tap(find.text('Panelen vullen'));
+      await tester.pump();
+
+      final out = latest()!;
+      expect(out.twoImagesLayout, TwoImagesLayout.panels);
+      expect(out.imageZoom, 0);
+      expect(out.imageSize, 60);
+    });
+  });
 }

@@ -610,6 +610,18 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Onderstrepen': 'Subrayado',
+  'Eigen verdeling': 'Reparto personalizado',
+  'Gelijke hoogte': 'Altura igual',
+  'Panelen vullen': 'Rellenar paneles',
+  'Verdeel de breedte zelf; elke afbeelding past in haar paneel':
+      'Reparte tú mismo el ancho; cada imagen cabe en su panel',
+  'Beide afbeeldingen even hoog en volledig zichtbaar — verdelen en bijsnijden doen niets':
+      'Ambas imágenes tienen la misma altura y son completamente visibles — repartir y recortar no hacen nada',
+  'Vult elk paneel en snijdt de randen bij; ‘Afbeelding aanpassen’ kiest het focuspunt':
+      'Rellena cada panel y recorta los bordes; ‘Ajustar imagen’ elige el punto de enfoque',
+  'Bijsnijden doet niets in Gelijke hoogte — kies eerst een andere weergave':
+      'Recortar no hace nada en Altura igual — elige primero otra vista',
   'Afbeeldingsgroep': 'Grupo de imágenes',
   'Stapel': 'Pila',
   'Afbeelding toevoegen': 'Añadir imagen',
@@ -7214,7 +7226,6 @@ const _dutchSourceAddEs = {
   'Afbeelding paneelvullend': 'Imagen a pantalla completa del panel',
   'Vult het paneel en snijdt de randen bij':
       'Llena el panel y recorta los bordes',
-  'Afbeeldingen paneelvullend': 'Imágenes a pantalla completa del panel',
   'Vult elk paneel en snijdt de randen bij':
       'Llena cada panel y recorta los bordes',
   'Vullen (bijsnijden)': 'Llenar (recortar)',

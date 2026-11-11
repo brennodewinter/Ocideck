@@ -94,7 +94,7 @@ verschijnt zonder herstart.
 | Microfoon | Bewezen — na de macOS-prompt | Aangeboden — OS-privacy-schakelaar beslist | Aangeboden — hardware-aanwezigheid beslist, de meeste setups hebben geen OS-prompt | Bewezen — per-site browsertoestemming |
 | Systeem-/appgeluid | Aangeboden — ScreenCaptureKit onder *schermopname*-toestemming (macOS 13+); DRM-audio wordt door het OS uitgesloten | Aangeboden — WASAPI-loopback neemt de endpointmix op, niet één app | Aangeboden — alleen PipeWire/PulseAudio `.monitor`-bronnen; kale ALSA heeft er geen | Niet aangeboden als systeemgeluid |
 | Tabbladgeluid | — | — | — | Alleen Chromium; Firefox en Safari krijgen een eerlijke melding in plaats van een knop |
-| Callaudio (Jitsi in-app) | Bewezen in een echte tweepersoonscall | Niet geclaimd — geen bewezen per-bron-tap | Niet geclaimd — geen bewezen per-bron-tap | Bewezen in een echte tweepersoonscall (getest op Chromium) |
+| Callaudio (Jitsi in-app) | Bewezen in een echte tweepersoonscall | Native per-track-sink aanwezig; echte releasecall nog niet bewezen | Native per-track-sink aanwezig; echte releasecall nog niet bewezen | Bewezen in een echte tweepersoonscall (getest op Chromium) |
 | Lokale engine | Bewezen — gemeten op Apple Silicon | Gebouwd uit dezelfde gepinde bron — hardwarebewijs loopt nog | Gebouwd uit dezelfde gepinde bron — hardwarebewijs loopt nog | Bewezen — gemeten op de verscheepte WASM-artifacten in Chrome, Firefox en WebKit |
 | Batchserverroute | Bewezen | Beschikbaar — zelfde egressroute, hardwarebewijs loopt nog | Beschikbaar — zelfde egressroute, hardwarebewijs loopt nog | Bewezen — onderworpen aan CORS |
 | Liveserverroute | Bewezen tegen de gepinde Vosk-testbed | Beschikbaar — zelfde egressroute, hardwarebewijs loopt nog | Beschikbaar — zelfde egressroute, hardwarebewijs loopt nog | Alleen beschikbaar zonder API-sleutel — een browser-WebSocket kan de header niet dragen |
@@ -252,3 +252,17 @@ uitkomst — de dialoog benoemt hem in plaats van succes te doen alsof:
 De zevendaagse stagingmap is ook de herstelweg: een opname die zijn
 dialoog overleefde kan vanuit de gestage lijst alsnog worden
 getranscribeerd of verwijderd.
+
+## Native hulpmiddel op Windows en Linux
+
+De build installeert `ocideck-audio` naast OciDeck. Bestands­transcriptie gebruikt
+op Windows Media Foundation en op Linux GStreamer. Een losse FFmpeg-installatie
+is niet meer nodig; de oude PATH-route blijft een terugval voor ontwikkelbuilds
+zonder helper. Windows N/KN vraagt nog de Media Feature Pack; op Linux blijven
+de gedeclareerde GStreamer-codecs en een werkende PulseAudio/PipeWire-sessie
+systeemvoorwaarden. De Linux-helper leest bronnen en PCM rechtstreeks via
+libpulse: `parecord` en `pactl` hoeven niet meer aanwezig te zijn.
+
+De code bevat integratieproeven met synthetische MP3/M4A/MP4-bestanden, een video
+zonder audiotrack, en de echte C++-callaudiosink. Deze bewijzen de betreffende
+paden; zij vervangen geen tweepersoonscall met echte apparaten op ieder OS.

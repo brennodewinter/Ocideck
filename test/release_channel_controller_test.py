@@ -233,7 +233,9 @@ class ControllerTest(unittest.TestCase):
         def paused_get(path):
             if path.startswith('/branches/'):
                 entered.set()
-                self.assertTrue(proceed.wait(5))
+                # The test owns this barrier. Release it in finally rather
+                # than racing a second thread's join timeout on slow fsync.
+                proceed.wait()
             return original_get(path)
         def mutation(path, method, payload=None, expected=201):
             if method == 'DELETE':
@@ -251,11 +253,18 @@ class ControllerTest(unittest.TestCase):
         first = threading.Thread(target=release)
         second = threading.Thread(target=release)
         first.start()
-        self.assertTrue(entered.wait(5))
-        second.start()
-        second.join(5)
-        proceed.set()
-        first.join(5)
+        try:
+            self.assertTrue(entered.wait(60))
+            second.start()
+            second.join(60)
+            self.assertFalse(second.is_alive())
+        finally:
+            proceed.set()
+            # Finish actual filesystem writes before TemporaryDirectory
+            # cleanup, including when a preceding assertion failed.
+            first.join()
+            if second.ident is not None:
+                second.join()
         self.assertFalse(first.is_alive() or second.is_alive())
         self.assertEqual(1, len(deletions))
         self.assertTrue(any('locked' in outcome for outcome in outcomes))

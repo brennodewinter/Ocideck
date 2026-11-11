@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/markdown_safety.dart';
 
@@ -133,6 +135,33 @@ title: Kwartaalcijfers
 
       test('YouTube embed passes the gate', () {
         expect(MarkdownSafetyScanner.isSafe(youtube), isTrue);
+      });
+      test('apostrophes in speaker notes do not block later video embeds', () {
+        final markdown = File(
+          'test/fixtures/markdown_safety/speaker_notes_apostrophe.md',
+        ).readAsStringSync();
+        expect(markdown, contains("zo'n"));
+        expect('<iframe'.allMatches(markdown), hasLength(4));
+        expect(MarkdownSafetyScanner.scan(markdown), isEmpty);
+      });
+      test(
+        'quotes and angle brackets in notes do not consume later embeds',
+        () {
+          const notes = '<!--\nzo\'n "notitie met < en >\n-->\n';
+          expect(MarkdownSafetyScanner.scan('$notes$youtube'), isEmpty);
+          final findings = MarkdownSafetyScanner.scan(
+            '$notes<iframe src="https://evil.example/x"></iframe>',
+          );
+          expect(findings, hasLength(1));
+          expect(findings.single.kind, MarkdownThreat.embeddedContent);
+          expect(findings.single.line, 4);
+        },
+      );
+      test('comments do not hide executable content from threat rules', () {
+        expect(
+          MarkdownSafetyScanner.scan('<!-- <script>alert(1)</script> -->'),
+          isNotEmpty,
+        );
       });
       test('Vimeo embed passes the gate', () {
         expect(MarkdownSafetyScanner.isSafe(vimeo), isTrue);

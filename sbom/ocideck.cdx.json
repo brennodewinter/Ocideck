@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:cdf29ece-8fe7-5199-8981-8944984e06af",
+  "serialNumber": "urn:uuid:4ed5d929-4808-56de-8c11-a2f5296ef710",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-08T21:52:23.607518Z",
+    "timestamp": "2026-11-11T01:43:28.111762Z",
     "tools": {
       "components": [
         {
@@ -17,7 +17,7 @@
       ]
     },
     "component": {
-      "bom-ref": "ocideck@0.7.7+49",
+      "bom-ref": "ocideck@0.7.8+50",
       "type": "application",
       "supplier": {
         "name": "Stichting LibreKAT",
@@ -26,8 +26,8 @@
         ]
       },
       "name": "ocideck",
-      "version": "0.7.7+49",
-      "purl": "pkg:generic/ocideck@0.7.7+49",
+      "version": "0.7.8+50",
+      "purl": "pkg:generic/ocideck@0.7.8+50",
       "licenses": [
         {
           "license": {
@@ -3267,53 +3267,6 @@
       ]
     },
     {
-      "bom-ref": "git:flutter_webrtc@1.6.2+hotfix.4",
-      "type": "library",
-      "supplier": {
-        "name": "pawprint.vigilis.online",
-        "url": [
-          "https://pawprint.vigilis.online"
-        ]
-      },
-      "name": "flutter_webrtc",
-      "version": "1.6.2+hotfix.4",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "vcs",
-          "url": "https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git"
-        }
-      ],
-      "properties": [
-        {
-          "name": "ocideck:group",
-          "value": "dart-package"
-        },
-        {
-          "name": "cdx:pub:scope",
-          "value": "direct main"
-        },
-        {
-          "name": "ocideck:resolved-revision",
-          "value": "b82f0db567e10aecd152c4039336d09e48f295a8"
-        },
-        {
-          "name": "ocideck:package-subpath",
-          "value": "."
-        },
-        {
-          "name": "ocideck:note",
-          "value": "Source: git."
-        }
-      ]
-    },
-    {
       "bom-ref": "sdk:fuchsia_remote_debug_protocol@0.0.0",
       "type": "library",
       "supplier": {
@@ -3343,6 +3296,48 @@
         {
           "name": "ocideck:note",
           "value": "Source: sdk."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/fullscreen_window@1.2.1",
+      "type": "library",
+      "supplier": {
+        "name": "jakky1",
+        "url": [
+          "https://github.com/jakky1"
+        ]
+      },
+      "name": "fullscreen_window",
+      "version": "1.2.1",
+      "purl": "pkg:pub/fullscreen_window@1.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "262a19366157542c3e1fa07232ee7e8a5c82e5223d912b04a2771c47aa6a048d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/fullscreen_window/versions/1.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
         }
       ]
     },
@@ -4332,6 +4327,90 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/material_ui/versions/1.10.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/media_kit@1.2.6",
+      "type": "library",
+      "supplier": {
+        "name": "media-kit",
+        "url": [
+          "https://github.com/media-kit"
+        ]
+      },
+      "name": "media_kit",
+      "version": "1.2.6",
+      "purl": "pkg:pub/media_kit@1.2.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ae9e79597500c7ad6083a3c7b7b7544ddabfceacce7ae5c9709b0ec16a5d6643"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/media_kit/versions/1.2.6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/media_kit_libs_linux@1.2.1",
+      "type": "library",
+      "supplier": {
+        "name": "media-kit",
+        "url": [
+          "https://github.com/media-kit"
+        ]
+      },
+      "name": "media_kit_libs_linux",
+      "version": "1.2.1",
+      "purl": "pkg:pub/media_kit_libs_linux@1.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2b473399a49ec94452c4d4ae51cfc0f6585074398d74216092bf3d54aac37ecf"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/media_kit_libs_linux/versions/1.2.1"
         }
       ],
       "properties": [
@@ -6372,6 +6451,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/safe_local_storage@2.0.7",
+      "type": "library",
+      "supplier": {
+        "name": "alexmercerind",
+        "url": [
+          "https://github.com/alexmercerind"
+        ]
+      },
+      "name": "safe_local_storage",
+      "version": "2.0.7",
+      "purl": "pkg:pub/safe_local_storage@2.0.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "76288b689a3e1fddccb377177feed85d73fdfc64c9c3c52991e2d9aba35c4857"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/safe_local_storage/versions/2.0.7"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "git:secret_storage@0.1.0",
       "type": "library",
       "supplier": {
@@ -7292,6 +7413,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/uri_parser@3.0.2",
+      "type": "library",
+      "supplier": {
+        "name": "alexmercerind",
+        "url": [
+          "https://github.com/alexmercerind"
+        ]
+      },
+      "name": "uri_parser",
+      "version": "3.0.2",
+      "purl": "pkg:pub/uri_parser@3.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "051c62e5f693de98ca9f130ee707f8916e2266945565926be3ff20659f7853ce"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/uri_parser/versions/3.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/url_launcher@6.3.3",
       "type": "library",
       "supplier": {
@@ -7964,6 +8127,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/video_player_media_kit@2.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "media-kit",
+        "url": [
+          "https://github.com/media-kit"
+        ]
+      },
+      "name": "video_player_media_kit",
+      "version": "2.0.0",
+      "purl": "pkg:pub/video_player_media_kit@2.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "66c5f30e2700f4528154320e708f89f4a80075b2451bebc6fef73a15d63a3fca"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/video_player_media_kit/versions/2.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/video_player_platform_interface@6.9.0",
       "type": "library",
       "supplier": {
@@ -8044,6 +8249,48 @@
         {
           "name": "cdx:pub:scope",
           "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/video_player_win@3.3.1",
+      "type": "library",
+      "supplier": {
+        "name": "jakky1",
+        "url": [
+          "https://github.com/jakky1"
+        ]
+      },
+      "name": "video_player_win",
+      "version": "3.3.1",
+      "purl": "pkg:pub/video_player_win@3.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1616be414376aa142ca1b6360f5e1de2568c479bb14bed3d8e5011d92b112a8c"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/video_player_win/versions/3.3.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
         }
       ]
     },
@@ -9111,6 +9358,48 @@
       ]
     },
     {
+      "bom-ref": "runtime:webview2-loader@1.0.1418.22",
+      "type": "library",
+      "supplier": {
+        "name": "Microsoft Corporation",
+        "url": [
+          "https://www.microsoft.com/"
+        ]
+      },
+      "name": "Microsoft Edge WebView2 loader",
+      "version": "1.0.1418.22",
+      "purl": "pkg:nuget/Microsoft.Web.WebView2@1.0.1418.22",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "51d2ef56196e2a9d768a6843385bcb9c6baf9ed34b2603ddb074fb4995543a99"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1418.22/microsoft.web.webview2.1.0.1418.22.nupkg"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "native-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Windows-only SDK loader linked statically by webview_win_floating. SHA-256 identifies the NuGet SDK archive. The separately installed WebView2 Runtime is an OS prerequisite."
+        }
+      ]
+    },
+    {
       "bom-ref": "runtime:pdfium@chromium-7811",
       "type": "library",
       "supplier": {
@@ -9145,6 +9434,52 @@
         {
           "name": "ocideck:note",
           "value": "Platform-specific runtime bundled by pdfium_dart/pdfium_flutter. The web WASM in pdfrx 2.6.1 has SHA-256 5b2cbb18e9dc361dae375e971c7e75f7306d39b7749ad4fced475579e6a549df; the Darwin XCFramework archive is pinned upstream as 948d9257f53f01cbed74b81bb8adc8758e52ac9390751772de7889026d32d5a1. Other native targets are release-pinned by the upstream build hook."
+        }
+      ]
+    },
+    {
+      "bom-ref": "runtime:wil@1.0.220914.1",
+      "type": "library",
+      "supplier": {
+        "name": "Microsoft Corporation",
+        "url": [
+          "https://www.microsoft.com/"
+        ]
+      },
+      "name": "Windows Implementation Library",
+      "version": "1.0.220914.1",
+      "purl": "pkg:nuget/Microsoft.Windows.ImplementationLibrary@1.0.220914.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b6b1d55bc8df309105cd7733fd200cccc678d703b61b31398a63a146a7148b09"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://api.nuget.org/v3-flatcontainer/microsoft.windows.implementationlibrary/1.0.220914.1/microsoft.windows.implementationlibrary.1.0.220914.1.nupkg"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/microsoft/wil"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "native-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Windows-only C++ helper headers compiled into webview_win_floating. SHA-256 identifies the NuGet archive."
         }
       ]
     },
@@ -9451,6 +9786,146 @@
       ]
     },
     {
+      "bom-ref": "system:ffmpeg",
+      "type": "library",
+      "name": "FFmpeg",
+      "licenses": [
+        {
+          "license": {
+            "name": "NOASSERTION"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://ffmpeg.org/legal.html"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "system-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Linux media dependency. LGPL/GPL status depends on configure flags and linked codecs. Do not label this runtime MIT or assume an LGPL-only build. Flatpak copied binaries require matching source and full notices."
+        }
+      ]
+    },
+    {
+      "bom-ref": "system:gstreamer",
+      "type": "library",
+      "name": "GStreamer",
+      "licenses": [
+        {
+          "license": {
+            "name": "NOASSERTION"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://gstreamer.freedesktop.org/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "system-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Linux native audio helper and WebKit media dependency. Codec plugins and exact versions depend on the distro/runtime. Native packages declare base/good/libav; copied Flatpak plugins carry matching notices and source records."
+        }
+      ]
+    },
+    {
+      "bom-ref": "system:libpulse",
+      "type": "library",
+      "name": "PulseAudio client libraries",
+      "licenses": [
+        {
+          "license": {
+            "name": "NOASSERTION"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://www.freedesktop.org/wiki/Software/PulseAudio/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "system-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Linux recording helper links libpulse and libpulse-simple, including on PipeWire through its PulseAudio compatibility server. Native packages require the system libraries; resolve exact build versions per artifact."
+        }
+      ]
+    },
+    {
+      "bom-ref": "system:webkitgtk",
+      "type": "library",
+      "name": "WebKitGTK",
+      "licenses": [
+        {
+          "license": {
+            "name": "NOASSERTION"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://webkit.org/licensing-webkit/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "system-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Linux webview runtime. Contains LGPL and BSD code. System-provided in native packages or supplied by the Flatpak GNOME runtime. Resolve exact runtime version and licence evidence per artifact."
+        }
+      ]
+    },
+    {
+      "bom-ref": "system:libmpv",
+      "type": "library",
+      "name": "libmpv",
+      "licenses": [
+        {
+          "license": {
+            "name": "NOASSERTION"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/mpv-player/mpv"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "system-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Linux. Licence depends on build and linked libraries. Inspected Debian 12 libmpv2 0.35.1-4 declares GPL-3.0-or-later for its binaries. Resolve exact versions, licences and corresponding source per release artifact."
+        }
+      ]
+    },
+    {
       "bom-ref": "fork:desktop_multi_window@0.3.1",
       "type": "library",
       "supplier": {
@@ -9471,7 +9946,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "9b39eb44dfb5f6185367c4f2b3db545e1cbf4b150e0d20d652d8d5c53b30ba92"
+          "content": "064e1f68d01e00dd8d71f2996f4bef333f1e7048554bf9b1cda3e44a1639d976"
         }
       ],
       "externalReferences": [
@@ -9496,6 +9971,53 @@
         {
           "name": "ocideck:note",
           "value": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
+        }
+      ]
+    },
+    {
+      "bom-ref": "fork:flutter_webrtc@1.6.2+hotfix.4",
+      "type": "library",
+      "supplier": {
+        "name": "pawprint.vigilis.online",
+        "url": [
+          "https://pawprint.vigilis.online"
+        ]
+      },
+      "name": "flutter_webrtc",
+      "version": "1.6.2+hotfix.4",
+      "licenses": [
+        {
+          "expression": "MIT AND EUPL-1.2"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7cf68caf7c6a51130f653c3899d209fde63465c97403a7375970e054d91bc2a5"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://pawprint.vigilis.online/LibreKAT/flutter_webrtc/tree/b82f0db567e10aecd152c4039336d09e48f295a8"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "vendored-fork"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:upstream-revision",
+          "value": "b82f0db567e10aecd152c4039336d09e48f295a8"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored fork in third_party/flutter_webrtc; the local changes are recorded in third_party/flutter_webrtc/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
         }
       ]
     },
@@ -9547,11 +10069,83 @@
           "value": "Vendored fork in third_party/markdown_quill; the local changes are recorded in third_party/markdown_quill/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
         }
       ]
+    },
+    {
+      "bom-ref": "fork:media_kit_video@2.0.1",
+      "type": "library",
+      "supplier": {
+        "name": "media-kit",
+        "url": [
+          "https://github.com/media-kit"
+        ]
+      },
+      "name": "media_kit_video",
+      "version": "2.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "vendored-fork"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct overridden"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored fork in third_party/media_kit_video; the local changes are recorded in third_party/media_kit_video/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
+        }
+      ]
+    },
+    {
+      "bom-ref": "fork:webview_win_floating@3.0.3",
+      "type": "library",
+      "supplier": {
+        "name": "jakky1",
+        "url": [
+          "https://github.com/jakky1"
+        ]
+      },
+      "name": "webview_win_floating",
+      "version": "3.0.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "68f0a0e3b5ad29ac87d9b4962883e3670b67600a8e3f56222fb095b2aa6a80c5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "vendored-fork"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored fork in third_party/webview_win_floating; the local changes are recorded in third_party/webview_win_floating/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
+        }
+      ]
     }
   ],
   "dependencies": [
     {
-      "ref": "ocideck@0.7.7+49",
+      "ref": "ocideck@0.7.8+50",
       "dependsOn": [
         "export-asset:highlight.css",
         "first-party:ocideck_form_core@0.0.1",
@@ -9563,11 +10157,13 @@
         "font:assets/fonts/Roboto-Variable.ttf",
         "font:assets/fonts/RobotoMono-Variable.ttf",
         "fork:desktop_multi_window@0.3.1",
+        "fork:flutter_webrtc@1.6.2+hotfix.4",
         "fork:markdown_quill@4.3.0",
+        "fork:media_kit_video@2.0.1",
+        "fork:webview_win_floating@3.0.3",
         "git:app_appearance@0.1.0",
         "git:app_localizations@0.1.0",
         "git:cnativeapi@0.1.4",
-        "git:flutter_webrtc@1.6.2+hotfix.4",
         "git:nativeapi@0.1.4",
         "git:network_guard@0.1.0",
         "git:secret_storage@0.1.0",
@@ -9605,6 +10201,7 @@
         "pkg:pub/logger@2.8.0",
         "pkg:pub/markdown@7.3.1",
         "pkg:pub/material_ui@1.10.0",
+        "pkg:pub/media_kit_libs_linux@1.2.1",
         "pkg:pub/openid_client@0.4.10+2",
         "pkg:pub/pasteboard@0.6.0",
         "pkg:pub/path@1.9.1",
@@ -9622,7 +10219,9 @@
         "pkg:pub/uuid@4.6.0",
         "pkg:pub/vector_math@2.4.4",
         "pkg:pub/video_player@2.14.1",
+        "pkg:pub/video_player_media_kit@2.0.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
+        "pkg:pub/video_player_win@3.3.1",
         "pkg:pub/wakelock_plus@1.8.0",
         "pkg:pub/web@1.1.2",
         "pkg:pub/webview_flutter@4.14.1",
@@ -9631,13 +10230,20 @@
         "pkg:pub/xml@7.0.1",
         "pkg:pub/yaml@3.1.4",
         "runtime:pdfium@chromium-7811",
+        "runtime:webview2-loader@1.0.1418.22",
         "runtime:whisper.cpp@1.9.5",
+        "runtime:wil@1.0.220914.1",
         "sdk:dart@^3.12.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter@3.47.9",
         "sdk:flutter_localizations@0.0.0",
         "sdk:flutter_test@0.0.0",
-        "sdk:integration_test@0.0.0"
+        "sdk:integration_test@0.0.0",
+        "system:ffmpeg",
+        "system:gstreamer",
+        "system:libmpv",
+        "system:libpulse",
+        "system:webkitgtk"
       ]
     },
     {
@@ -10277,23 +10883,20 @@
       ]
     },
     {
-      "ref": "git:flutter_webrtc@1.6.2+hotfix.4",
-      "dependsOn": [
-        "pkg:pub/collection@1.19.1",
-        "pkg:pub/dart_webrtc@1.8.2",
-        "pkg:pub/logger@2.8.0",
-        "pkg:pub/path_provider@2.1.6",
-        "pkg:pub/web@1.1.2",
-        "pkg:pub/webrtc_interface@1.5.1",
-        "sdk:flutter@0.0.0"
-      ]
-    },
-    {
       "ref": "sdk:fuchsia_remote_debug_protocol@0.0.0",
       "dependsOn": [
         "pkg:pub/meta@1.19.0",
         "pkg:pub/process@5.0.6",
         "pkg:pub/vm_service@15.4.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/fullscreen_window@1.2.1",
+      "dependsOn": [
+        "pkg:pub/plugin_platform_interface@2.1.8",
+        "pkg:pub/web@1.1.2",
+        "sdk:flutter@0.0.0",
+        "sdk:flutter_web_plugins@0.0.0"
       ]
     },
     {
@@ -10495,6 +11098,29 @@
         "pkg:pub/vector_math@2.4.4",
         "sdk:flutter@0.0.0",
         "sdk:flutter_localizations@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/media_kit@1.2.6",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/http@1.6.0",
+        "pkg:pub/image@4.12.0",
+        "pkg:pub/meta@1.19.0",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/safe_local_storage@2.0.7",
+        "pkg:pub/synchronized@3.6.1",
+        "pkg:pub/universal_platform@1.1.0",
+        "pkg:pub/uri_parser@3.0.2",
+        "pkg:pub/uuid@4.6.0",
+        "pkg:pub/web@1.1.2",
+        "system:libmpv"
+      ]
+    },
+    {
+      "ref": "pkg:pub/media_kit_libs_linux@1.2.1",
+      "dependsOn": [
+        "sdk:flutter@0.0.0"
       ]
     },
     {
@@ -10932,6 +11558,13 @@
       "dependsOn": []
     },
     {
+      "ref": "pkg:pub/safe_local_storage@2.0.7",
+      "dependsOn": [
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/synchronized@3.6.1"
+      ]
+    },
+    {
       "ref": "git:secret_storage@0.1.0",
       "dependsOn": [
         "pkg:pub/flutter_secure_storage@11.2.0",
@@ -11091,6 +11724,12 @@
       "dependsOn": []
     },
     {
+      "ref": "pkg:pub/uri_parser@3.0.2",
+      "dependsOn": [
+        "pkg:pub/path@1.9.1"
+      ]
+    },
+    {
       "ref": "pkg:pub/url_launcher@6.3.3",
       "dependsOn": [
         "pkg:pub/url_launcher_android@6.3.33",
@@ -11222,6 +11861,16 @@
       ]
     },
     {
+      "ref": "pkg:pub/video_player_media_kit@2.0.0",
+      "dependsOn": [
+        "fork:media_kit_video@2.0.1",
+        "pkg:pub/media_kit@1.2.6",
+        "pkg:pub/universal_platform@1.1.0",
+        "pkg:pub/video_player_platform_interface@6.9.0",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
       "ref": "pkg:pub/video_player_platform_interface@6.9.0",
       "dependsOn": [
         "pkg:pub/plugin_platform_interface@2.1.8",
@@ -11235,6 +11884,14 @@
         "pkg:pub/web@1.1.2",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/video_player_win@3.3.1",
+      "dependsOn": [
+        "pkg:pub/plugin_platform_interface@2.1.8",
+        "pkg:pub/video_player_platform_interface@6.9.0",
+        "sdk:flutter@0.0.0"
       ]
     },
     {
@@ -11420,7 +12077,15 @@
       "dependsOn": []
     },
     {
+      "ref": "runtime:webview2-loader@1.0.1418.22",
+      "dependsOn": []
+    },
+    {
       "ref": "runtime:pdfium@chromium-7811",
+      "dependsOn": []
+    },
+    {
+      "ref": "runtime:wil@1.0.220914.1",
       "dependsOn": []
     },
     {
@@ -11434,11 +12099,48 @@
       ]
     },
     {
+      "ref": "fork:flutter_webrtc@1.6.2+hotfix.4",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/dart_webrtc@1.8.2",
+        "pkg:pub/logger@2.8.0",
+        "pkg:pub/path_provider@2.1.6",
+        "pkg:pub/web@1.1.2",
+        "pkg:pub/webrtc_interface@1.5.1",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
       "ref": "fork:markdown_quill@4.3.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/flutter_quill@11.6.0",
         "pkg:pub/markdown@7.3.1"
+      ]
+    },
+    {
+      "ref": "fork:media_kit_video@2.0.1",
+      "dependsOn": [
+        "pkg:pub/media_kit@1.2.6",
+        "pkg:pub/plugin_platform_interface@2.1.8",
+        "pkg:pub/synchronized@3.6.1",
+        "pkg:pub/universal_platform@1.1.0",
+        "pkg:pub/wakelock_plus@1.8.0",
+        "pkg:pub/web@1.1.2",
+        "sdk:flutter@0.0.0",
+        "system:libmpv"
+      ]
+    },
+    {
+      "ref": "fork:webview_win_floating@3.0.3",
+      "dependsOn": [
+        "pkg:pub/fullscreen_window@1.2.1",
+        "pkg:pub/plugin_platform_interface@2.1.8",
+        "pkg:pub/webview_flutter_platform_interface@2.15.1",
+        "sdk:flutter@0.0.0",
+        "runtime:webview2-loader@1.0.1418.22",
+        "runtime:wil@1.0.220914.1",
+        "system:webkitgtk"
       ]
     }
   ]
