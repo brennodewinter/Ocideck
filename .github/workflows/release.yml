@@ -397,6 +397,14 @@ jobs:
           path: build/windows-open-probe/
           if-no-files-found: warn
 
+      - name: Bewaar installer voor diagnose van een mislukte proef
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-probe-installer
+          path: ocideck-windows-x64-setup-${{ env.VERSIE }}.exe
+          if-no-files-found: warn
+
       - name: Cohortattest voor de forge
         shell: bash
         run: |
