@@ -2463,6 +2463,27 @@ GitHub stores its zip, installer and cohort as an Actions artifact for the
 forge to fetch and verify before tagging. A subsequent tag push validates the
 version and does not rebuild or publish a separate GitHub release asset.
 
+**Installed Windows open probe (added 2026-11-11).** The installer smoke step
+also runs `scripts/windows_open_probe.ps1` against the installed `ocideck.exe`,
+before uninstalling and producing the cohort attestation. It uses Windows UI
+Automation to invoke Ctrl+O, the in-app Browse action and the native file dialog;
+it cancels once, then opens both a Markdown presentation and an OciDeck package.
+Each contains 48 slides, a portable style, CRLF and a UTF-8 BOM; input paths
+include spaces and an accent. A fresh title must appear in the editor, and
+source hashes must remain unchanged. A running process or first frame alone
+does not pass this probe.
+
+The worker has a four-minute outer process deadline, so a stalled UI Automation
+provider cannot occupy the release job indefinitely. Missing native controls,
+missing editor evidence or a timeout fail the candidate; there is no skip or
+`continue-on-error`. Screenshots, UI Automation trees, generated fixtures and
+result/error JSON are uploaded as `windows-open-probe`, also on failure.
+This runs on a disposable interactive Windows runner with English or Dutch UI.
+It does not simulate OneDrive faults or prove every filesystem error case.
+Local checks of fixture generation and release wiring use
+`python3 -m unittest discover -s test -p 'release_windows_open_probe_test.py'`;
+they do not substitute for the Windows execution and its evidence artifact.
+
 ### `.github/workflows/ci.yml` — manual diagnostics on the mirror
 - **Trigger:** `workflow_dispatch` only. The full mirror pipeline can be
   started on a branch for diagnosis without consuming a release tag. The
