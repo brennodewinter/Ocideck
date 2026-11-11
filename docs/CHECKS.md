@@ -2465,30 +2465,45 @@ version and does not rebuild or publish a separate GitHub release asset.
 
 **Installed Windows open probe (added 2026-11-11).** The installer smoke step
 also runs `scripts/windows_open_probe.ps1` against the installed `ocideck.exe`,
-before uninstalling and producing the cohort attestation. It uses Windows UI
-Automation to invoke Ctrl+O, the in-app Browse action and the native file dialog;
+before uninstalling and producing the cohort attestation. It invokes the welcome
+screen Open action (More → Open from the editor), the in-app Browse action
+and the native file dialog;
 it cancels once, then opens both a Markdown presentation and an OciDeck package.
 Each contains 48 slides, a portable style, CRLF and a UTF-8 BOM; input paths
 include spaces and an accent. A fresh title must appear in the editor, and
 source hashes must remain unchanged. A running process or first frame alone
 does not pass this probe.
 
-The driver requests MSAA accessibility on the actual Flutter child window
-before querying UI Automation. The first Windows run exposed only an empty
-`FLUTTERVIEW` until this activation; a screenshot of the consent screen was
-not accepted as evidence that the controls were operable.
+The driver reads and invokes real Flutter controls through MSAA on the actual
+Flutter child window. This engine does not expose its semantics through UIA;
+activation alone did not fix that. The native Windows dialog is identified
+through UI Automation and driven with
+real keyboard input (Escape, filename accelerator, paste and Enter); its UIA
+provider exposes standard controls as panes without Invoke/Value patterns on
+this runner. Explorer list items also reuse action IDs 1 and 2, so IDs alone
+are unsuitable selectors. A screenshot alone is never accepted as open evidence.
 
 The worker has a four-minute outer process deadline, so a stalled UI Automation
 provider cannot occupy the release job indefinitely. Missing native controls,
 missing editor evidence or a timeout fail the candidate; there is no skip or
-`continue-on-error`. Screenshots, UI Automation trees, generated fixtures and
+`continue-on-error`. Screenshots, UI Automation/MSAA trees, generated fixtures and
 result/error JSON are uploaded as `windows-open-probe`, also on failure.
 On failure the built installer is retained separately as `windows-probe-installer`.
-This runs on a disposable interactive Windows runner with English or Dutch UI.
+This runs on a disposable interactive Windows runner with an English native
+file picker; Flutter controls support English or Dutch app UI.
 It does not simulate OneDrive faults or prove every filesystem error case.
 Local checks of fixture generation and release wiring use
 `python3 -m unittest discover -s test -p 'release_windows_open_probe_test.py'`;
 they do not substitute for the Windows execution and its evidence artifact.
+
+### `.github/workflows/windows-open-probe-check.yml` — driver diagnostics
+Runs the same native probe against an installer from a completed release-build
+run in this repository. Manual runs require its run ID. Successful producers
+provide `ocideck-windows-cohort`; failed probes provide `windows-probe-installer`.
+`producer.json` records the
+installer provenance alongside the open evidence. This avoids rebuilding the
+unchanged application for each driver correction; the release candidate still
+runs the probe against its own newly built installer before cohort production.
 
 ### `.github/workflows/ci.yml` — manual diagnostics on the mirror
 - **Trigger:** `workflow_dispatch` only. The full mirror pipeline can be
