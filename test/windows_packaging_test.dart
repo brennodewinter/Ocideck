@@ -270,7 +270,7 @@ void main() {
         );
         final arguments = upgrade.substring(
           upgrade.indexOf('-ArgumentList'),
-          upgrade.indexOf('if ($p.ExitCode'),
+          upgrade.indexOf(r'if ($p.ExitCode'),
         );
         expect(arguments, isNot(contains('/CURRENTUSER')));
         expect(arguments, isNot(contains('/DIR=')));
