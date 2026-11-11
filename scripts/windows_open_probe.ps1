@@ -238,15 +238,13 @@ function Get-NativePicker {
     return $null
 }
 
-function Find-NativeAction($Dialog, [string]$Id, [string]$NamePattern) {
-    # Explorer list items reuse IDs 1 and 2. Require the visible action label
-    # as well, and reject ambiguity rather than invoking a file in the list.
-    $matches = @($Dialog.FindAll([Windows.Automation.TreeScope]::Descendants,
-        [Windows.Automation.PropertyCondition]::new(
-            [Windows.Automation.AutomationElement]::AutomationIdProperty, $Id)) |
-        Where-Object { -not $_.Current.IsOffscreen -and $_.Current.Name -match $NamePattern })
-    if ($matches.Count -ne 1) { throw "Expected one native action $Id ($NamePattern), found $($matches.Count)." }
-    return $matches[0]
+function Focus-NativePicker($Dialog) {
+    $handle = [IntPtr]$Dialog.Current.NativeWindowHandle
+    if ($handle -eq [IntPtr]::Zero) { throw 'Native picker has no window handle.' }
+    [void][OpenProbeWindow]::SetForegroundWindow($handle)
+    [void](Wait-Probe 'native picker keyboard focus' {
+        [OpenProbeWindow]::GetForegroundWindow() -eq $handle
+    })
 }
 
 function Open-NativePicker {
@@ -331,8 +329,8 @@ try {
 
     # Cancellation is followed by a new open, proving the app remains usable.
     $dialog = Open-NativePicker
-    $cancel = Find-NativeAction $dialog '2' '^(Cancel|Annuleren)$'
-    Invoke-Control $cancel
+    Focus-NativePicker $dialog
+    [Windows.Forms.SendKeys]::SendWait('{ESC}')
     [void](Wait-Probe 'native cancellation' { $null -eq (Get-NativePicker) })
     $script:cancelled = $true
 
@@ -341,24 +339,14 @@ try {
             throw 'Marker was visible before opening; this would be a false positive.'
         }
         $dialog = Open-NativePicker
-        $nameBox = $dialog.FindFirst([Windows.Automation.TreeScope]::Descendants,
-            [Windows.Automation.OrCondition]::new(
-                [Windows.Automation.PropertyCondition]::new(
-                    [Windows.Automation.AutomationElement]::AutomationIdProperty, '1148'),
-                [Windows.Automation.PropertyCondition]::new(
-                    [Windows.Automation.AutomationElement]::AutomationIdProperty, 'FileNameControlHost')))
-        if (-not $nameBox) { throw 'Native filename control not found.' }
-        $value = $null
-        if (-not $nameBox.TryGetCurrentPattern([Windows.Automation.ValuePattern]::Pattern, [ref]$value)) {
-            $nameBox = $nameBox.FindFirst([Windows.Automation.TreeScope]::Descendants,
-                [Windows.Automation.PropertyCondition]::new(
-                    [Windows.Automation.AutomationElement]::ControlTypeProperty, [Windows.Automation.ControlType]::Edit))
-            if (-not $nameBox) { throw 'Native filename edit control not found.' }
-            $value = $nameBox.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
-        }
-        $value.SetValue($scenario.path)
-        $open = Find-NativeAction $dialog '1' '^(Open|Openen)$'
-        Invoke-Control $open
+        Focus-NativePicker $dialog
+        # The Windows picker exposes some standard controls as UIA panes
+        # without Invoke/Value patterns on this runner. Use its real filename
+        # keyboard accelerator and clipboard input instead of app internals.
+        [Windows.Forms.SendKeys]::SendWait('%n')
+        [Windows.Forms.Clipboard]::SetText([string]$scenario.path)
+        [Windows.Forms.SendKeys]::SendWait('^a^v')
+        [Windows.Forms.SendKeys]::SendWait('{ENTER}')
         [void](Wait-Probe 'native dialog closing' { $null -eq (Get-NativePicker) })
         [void](Wait-Probe "opened $($scenario.kind) presentation in the editor" {
             $root = Get-AppRoot
