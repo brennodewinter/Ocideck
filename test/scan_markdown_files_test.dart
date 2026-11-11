@@ -7,6 +7,8 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:path/path.dart' as p;
 
+import 'io_fault.dart';
+
 /// De mapscan achter het openscherm: hij levert presentaties én platte
 /// documenten op. Dat laatste is de reden dat dit bestand bestaat — een
 /// zoeklijst die alleen decks toont, verstopt de helft van wat OciDeck opent.
@@ -38,6 +40,18 @@ void main() {
   });
 
   const deckSource = '---\nmarp: true\ntitle: Het deck\n---\n\n# Dia\n\n- a\n';
+
+  test('een onleesbare zoekwortel levert leeg op, geen uitzondering', () async {
+    // Zoals walk() een onleesbare ondermap overslaat: een root die niet te
+    // staten is, is "niets gevonden" met een logregel — geen ontsnapte fout.
+    final found = await runWithFileFault(
+      () => service.scanMarkdownFiles(temp.path),
+      targetPath: temp.path,
+      failOn: {'exists'},
+    );
+
+    expect(found, isEmpty);
+  });
 
   test('finds presentations and documents in one list', () async {
     await write('deck.md', deckSource);

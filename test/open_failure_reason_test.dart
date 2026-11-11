@@ -8,6 +8,8 @@ import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'io_fault.dart';
+
 /// Waaróm een bestand niet openging (#646).
 ///
 /// De melding was "Kon dit bestand niet openen." — en dat stond voor vier heel
@@ -51,6 +53,81 @@ void main() {
         await reasonFor('${temp.path}/verdwenen.md'),
         OpenFailure.notFound,
       );
+    },
+  );
+
+  test('een toegewezen stat is geen formaatfout: inaccessible, niet '
+      'unreadable (#2876)', () async {
+    // Het bestand staat er en is geldige Markdown — alleen de toegang
+    // faalde. Dat melden als "geen leesbare tekst" stuurde de gebruiker
+    // het bestand repareren terwijl de locatie het probleem was.
+    final dir = Directory(temp.resolveSymbolicLinksSync());
+    final pad = '${dir.path}/geweigerd.md';
+    File(pad).writeAsStringSync('---\nmarp: true\n---\n\n# Titel\n\nInhoud.\n');
+
+    final reden = await runWithFileFault(
+      () => reasonFor(pad),
+      targetPath: pad,
+      failOn: {'length'},
+    );
+
+    expect(reden, OpenFailure.inaccessible);
+  });
+
+  test(
+    'een fout die geen bekende categorie is, valt op het vangnet (#2887)',
+    () async {
+      // Elke I/O-stap in het openpad hoort zijn eigen uitkomst te kennen —
+      // maar blijft er tóch een niet-filesystem-fout doorheen glippen, dan
+      // is "kon niet openen" de eerlijke melding: het openFileByPath-vangnet
+      // maakt er een uitkomst van in plaats van de fout te laten ontsnappen.
+      final dir = Directory(temp.resolveSymbolicLinksSync());
+      final pad = '${dir.path}/deck.md';
+      File(
+        pad,
+      ).writeAsStringSync('---\nmarp: true\n---\n\n# Titel\n\nInhoud.\n');
+      // De stijlsidecar wordt bij elke schijf-open aangeraakt; een StateError
+      // (geen FileSystemException) glipt langs alle gerichte vangsten.
+      final sidecar = '${dir.path}/ocideck-style.json';
+
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final result = await runWithFileFault(
+        () => container.read(tabsProvider.notifier).openFileByPath(pad),
+        targetPath: sidecar,
+        failOn: {'exists'},
+        error: StateError('geforceerde niet-IO-fout'),
+      );
+
+      expect(result, OpenResult.unreadable);
+      expect(
+        container.read(openFailureProvider),
+        isNull,
+        reason: 'een onbekende fout verzint geen reden',
+      );
+    },
+  );
+
+  test(
+    'een sidecar die niet te staten is, blokkeert het openen niet',
+    () async {
+      // Dezelfde regel als bij een kapotte sidecar: een I/O-fout op de
+      // bijlagen mag de presentatie er zelf niet meenemen.
+      final dir = Directory(temp.resolveSymbolicLinksSync());
+      final pad = '${dir.path}/deck.md';
+      File(
+        pad,
+      ).writeAsStringSync('---\nmarp: true\n---\n\n# Titel\n\nInhoud.\n');
+
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final result = await runWithFileFault(
+        () => container.read(tabsProvider.notifier).openFileByPath(pad),
+        targetPath: '${dir.path}/deck.ink.json',
+        failOn: {'exists'},
+      );
+
+      expect(result, OpenResult.opened);
     },
   );
 

@@ -15,7 +15,10 @@ ThemeProfile portableCarriedStyle(ThemeProfile profile) {
     if (trimmed.isEmpty) return '';
     if (isBundledAssetPath(trimmed)) return trimmed;
     final normalized = p.posix.normalize(trimmed.replaceAll('\\', '/'));
-    if (!normalized.startsWith('logos/') || normalized.startsWith('../')) {
+    // De traversal-disjunct is verdwenen: na normalize begint een pad dat
+    // met '../' opent per definitie niet met 'logos/' — de eerste helft
+    // dekt hem al (de mutatiesweep wees dit als dood aan).
+    if (!normalized.startsWith('logos/')) {
       return emptyWhenUnsafe ? '' : null;
     }
     return normalized;
@@ -45,8 +48,10 @@ Future<ThemeProfile> carriedProjectStyle(
 ) async {
   if (kIsWeb || projectPath == null) return fallback;
   final file = File(p.join(projectPath, carriedStyleFileName));
-  if (!await file.exists()) return fallback;
   try {
+    // exists() ín de vangst: ook hij gooit bij een I/O-fout, en een
+    // sidecar-fout mag nooit het openen van het deck meenemen.
+    if (!await file.exists()) return fallback;
     final length = await file.length();
     if (length <= 0 || length > _carriedStyleMaxBytes) return fallback;
     final decoded = jsonDecodeGuarded(await file.readAsString());
@@ -69,11 +74,18 @@ Future<void> refreshCarriedProjectStyle(
 ) async {
   if (kIsWeb) return;
   final file = File(p.join(projectPath, carriedStyleFileName));
-  if (!await file.exists()) return;
-  await writeStringAtomic(
-    file,
-    jsonEncode(portableCarriedStyle(profile).toJson()),
-  );
+  try {
+    if (!await file.exists()) return;
+    await writeStringAtomic(
+      file,
+      jsonEncode(portableCarriedStyle(profile).toJson()),
+    );
+  } on FileSystemException catch (e) {
+    // Een sidecar-verversing die faalt mag een verder geslaagde opslag niet
+    // meenemen — de volgende open valt anders terug op de oude sidecar, nooit
+    // op niets.
+    logWarning('FileService.refreshCarriedProjectStyle', e);
+  }
 }
 
 ThemeProfile _styleInsideProject(ThemeProfile profile, String projectPath) {
@@ -89,7 +101,13 @@ ThemeProfile _styleInsideProject(ThemeProfile profile, String projectPath) {
     if (!p.isWithin(p.normalize(projectPath), abs)) {
       return emptyWhenMissing ? '' : null;
     }
-    if (!File(abs).existsSync()) return emptyWhenMissing ? '' : null;
+    bool present;
+    try {
+      present = File(abs).existsSync();
+    } on FileSystemException {
+      present = false;
+    }
+    if (!present) return emptyWhenMissing ? '' : null;
     return normalized;
   }
 
@@ -140,7 +158,11 @@ ThemeProfile _styleMembersToMemory(
     if (path.isEmpty) return '';
     if (isBundledAssetPath(path) || WebAssetStore.isMemPath(path)) return path;
     final normalized = p.posix.normalize(path.replaceAll('\\', '/'));
-    if (!normalized.startsWith('logos/') || normalized.contains('..')) {
+    // 'logos/'-containment leeft in portableCarriedStyle, die hier altijd
+    // aan voorafgaat — de prefixcheck was daardoor onbereikbaar (dood,
+    // wees de mutatiesweep aan). '..' kan een pakket-entry wél letterlijk
+    // als sleutel hebben, dus die check blijft lokaal dragen.
+    if (normalized.contains('..')) {
       return emptyWhenMissing ? '' : null;
     }
     final bytes = byName[normalized];

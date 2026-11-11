@@ -467,6 +467,22 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }
 
   Future<OpenResult> openFileByPath(String path, {int? selectIndex}) async {
+    // De buitenste vangst van het openpad: elke I/O-fout hoort als uitkomst
+    // terug te komen, maar waar er tóch eentje doorheen glipt mag hij hier niet
+    // ontsnappen — een ongegrepene fout zou bij een meervoudige open óók de
+    // nog te openen bestanden meenemen, en bij de fire-and-forget-wegen
+    // (Finder, slepen) stil verdwijnen (#2887). Geen reden vastleggen: een
+    // onverwachte fout is geen bekende categorie, en een verzonnen reden
+    // wijst de verkeerde kant op — de melding blijft dan eerlijk algemeen.
+    try {
+      return await _openFileByPath(path, selectIndex: selectIndex);
+    } catch (e, s) {
+      logError('TabsNotifier.openFileByPath: onverwachte fout', e, s);
+      return _openFailureResult(_ref, mounted, null);
+    }
+  }
+
+  Future<OpenResult> _openFileByPath(String path, {int? selectIndex}) async {
     // Dezelfde presentatie hoort maar één keer open te staan. Staat dit bestand
     // al in een tabblad, spring er dan naartoe in plaats van een tweede kopie te
     // openen — dat voorkomt versieverwarring (twee tabs, twee losse bewerkingen

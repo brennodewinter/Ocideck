@@ -33,7 +33,14 @@ Future<List<ScannedMarkdown>> walkMarkdownFiles(
   int maxScanBytes = 256 * 1024 * 1024,
 }) async {
   final root = Directory(directory);
-  if (!await root.exists()) return [];
+  try {
+    if (!await root.exists()) return [];
+  } catch (e) {
+    // Zoals walk() een onleesbare ondermap overslaat: een wortel die niet te
+    // lezen is levert niets op — met een logregel, geen ontsnapte fout.
+    logWarning('FileService.scanMarkdownFiles: root niet leesbaar', e);
+    return [];
+  }
 
   final results = <ScannedMarkdown>[];
   var visited = 0;

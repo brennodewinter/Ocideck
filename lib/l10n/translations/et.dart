@@ -753,6 +753,12 @@ const _dutchSourceEt = {
   'Vernieuwen': 'Värskenda',
   'Deze map is leeg': 'See kaust on tühi',
   'Kon dit bestand niet openen.': 'Seda faili ei õnnestunud avada.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Seda faili ei õnnestunud avada: puudub juurdepääs või asukoht on kadunud.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Seda faili ei saanud lugeda — puudub juurdepääs või fail on kadunud',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Valitud paketifaili ei saanud lugeda. Kontrolli, et see on alles ja et pääsed sellele ligi.',
   'Dit is geen Marp/OciDeck-presentatie.': 'See pole Marp/OciDeck esitlus.',
   'Downloaden mislukt:': 'Allalaadimine ebaõnnestus:',
   'Opslaan mislukt:': 'Salvestamine ebaõnnestus:',

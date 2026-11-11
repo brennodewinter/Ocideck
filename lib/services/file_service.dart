@@ -63,6 +63,7 @@ import 'web_asset_store.dart';
 
 part 'file/file_service_net.dart';
 part 'file/file_service_open.dart';
+part 'file/file_service_sidecars.dart';
 part 'file/file_service_package.dart';
 part 'file/file_service_carried_style.dart';
 part 'file/file_service_dossier.dart';
@@ -99,8 +100,12 @@ ThemeProfile _resolveDocumentLogoPath(
   final bases = [?projectPath, ?homeDirectory()];
   for (final base in bases) {
     final candidate = p.normalize(p.join(base, docPath));
-    if (File(candidate).existsSync()) {
-      return profile.copyWith(documentLogoPath: candidate);
+    try {
+      if (File(candidate).existsSync()) {
+        return profile.copyWith(documentLogoPath: candidate);
+      }
+    } on FileSystemException {
+      continue;
     }
   }
   return profile;
@@ -249,6 +254,19 @@ enum OpenFailure {
 
   /// The markdown is present but truncated or unparseable.
   corrupt,
+
+  /// Lezen mislukte om een andere reden dan het formaat — geweigerde toegang,
+  /// een weggevallen volume, een stat die faalde. Los van [unreadable]:
+  /// "geen leesbare tekst" stuurt de gebruiker naar het bestand terwijl de
+  /// toegang of de locatie het probleem is (#2876).
+  inaccessible,
+
+  /// De doelschijf had geen ruimte (spiegelt [ImportFailure.diskFull]).
+  diskFull,
+
+  /// De doelmap kon niet worden aangemaakt of beschreven (spiegelt
+  /// [ImportFailure.destinationUnavailable]).
+  destinationUnavailable,
 }
 
 /// Vraagt (interactief) het wachtwoord van een versleuteld pakket. [retry] is
@@ -404,7 +422,13 @@ class FileService {
     final bases = [?projectPath, ?_homeDirectory()];
     for (final base in bases) {
       final candidate = p.normalize(p.join(base, logoPath));
-      if (File(candidate).existsSync()) {
+      bool present;
+      try {
+        present = File(candidate).existsSync();
+      } on FileSystemException {
+        continue;
+      }
+      if (present) {
         return _resolveBrandStripPath(
           _resolveDocumentLogoPath(
             _resolveLogoDarkPath(
@@ -445,8 +469,12 @@ class FileService {
     final bases = [?projectPath, ?_homeDirectory()];
     for (final base in bases) {
       final candidate = p.normalize(p.join(base, darkPath));
-      if (File(candidate).existsSync()) {
-        return profile.copyWith(logoDarkPath: candidate);
+      try {
+        if (File(candidate).existsSync()) {
+          return profile.copyWith(logoDarkPath: candidate);
+        }
+      } on FileSystemException {
+        continue;
       }
     }
     return profile;
@@ -598,7 +626,14 @@ class FileService {
     for (final root in roots) {
       if (cancelled() || hits.length >= maxMatches || capped) break;
       final dir = Directory(root);
-      if (!await dir.exists()) continue;
+      try {
+        if (!await dir.exists()) continue;
+      } on FileSystemException catch (e) {
+        // Zoals walk() bij een ondermap: een onleesbare wortel slaat de
+        // zoekopdracht niet over — meld hem en ga door met de volgende.
+        logWarning('FileService: zoekwortel niet leesbaar', e);
+        continue;
+      }
       await walk(dir, 0);
     }
 

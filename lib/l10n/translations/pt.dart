@@ -769,6 +769,12 @@ const _dutchSourcePt = {
   'Vernieuwen': 'Atualizar',
   'Deze map is leeg': 'Esta pasta está vazia',
   'Kon dit bestand niet openen.': 'Não foi possível abrir este ficheiro.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Não foi possível abrir este ficheiro: sem acesso ou a localização desapareceu.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Não foi possível ler este ficheiro — sem acesso ou o ficheiro desapareceu',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Não foi possível ler o ficheiro de pacote escolhido. Verifique se ainda existe e se consegue aceder-lhe.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Isto não é uma apresentação Marp/OciDeck.',
   'Downloaden mislukt:': 'Falha na transferência:',

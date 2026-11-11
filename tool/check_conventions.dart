@@ -361,7 +361,11 @@ const Map<String, int> fileSizeBaseline = {
   // part-bestanden, de staat in deze klasse.
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
-      1095, // +132 (sweep #2641–#2645/#2634): theme.json in
+      1110, // +15 (sweep #2875–#2887): existsSync-vangsten in de
+  // logo-/documentlogo-kandidaatlussen en de zoekwortels van de
+  // dossierscan — dezelfde "bestand verdwijnt tussen stat en lees"-klasse,
+  // uitkomst is kandidaat of wortel overslaan.
+  // +132 (sweep #2641–#2645/#2634): theme.json in
   // .ocideck-pakketten, documentLogoPath-doorvoer, botsingsvrije
   // logo-bestemmingen en privacybevindingen die met het openresultaat
   // meereizen — allemaal in de part-bestanden van deze library.
@@ -561,7 +565,12 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2874, // +114 (sweep #2641–#2645/#2634): theme.json-ronde
+      2990, // +116 (sweep #2875–#2887): I/O-vangsten in het
+  // open-/importpad — exists/stat/lees-fouten die voorheen ontsnapten
+  // krijgen nu een uitkomst (waarschuwing, terugval, kandidaat
+  // overslaan). Geen nieuw gedrag; verdediging aan de grens. Ook de
+  // nieuwe sidecars-part telt mee.
+  // +114 (sweep #2641–#2645/#2634): theme.json-ronde
   // in pakketten, logo-resolutie en scan-doorvoer — extensies in
   // file_service_*.dart tellen mee. Ook de #2640-verhuizing van pakketstijl
   // en logobotsing (file_service_carried_style/file_service_project) valt in
@@ -1561,6 +1570,129 @@ Map<String, List<int>> _handJoinedPathExpects() {
   return handJoinedPathExpectsIn(sources);
 }
 
+// ── Bestandssysteem-calls buiten een vangst in het open-/importpad ──────────
+//
+// Vijf issues uit één incident (#2875-#2879) waren allemaal `await` op I/O
+// die geen vangst had: `file.length()`, `readAsBytes()`, `exists()` — een
+// bestand dat wegvalt tussen stat en lees, of toegang die geweigerd wordt.
+// De audit die volgde vond er nog zeven (#2881-#2887), waaronder
+// `existsSync` — die gooit óók bij een I/O-fout; `false` betekent alleen
+// "staat er niet".
+//
+// De regel: in het open-/importoppervlak staat elke aanroep van een
+// bestandssysteem-methode lexicaal binnen een `try`-body, zodat zo'n fout
+// een uitkomst wordt in plaats van een ontsnapte uitzondering die een
+// meervoudige open breekt of stil verdwijnt. De vangst zélf bepaalt wat de
+// uitkomst is (waarschuwing, terugval, weiger-reden) — dat hoeft de poort
+// niet na te rekenen; hij eist alleen dat er één is.
+//
+// Methode-namen, niet typen: de AST in deze poort is onopgelost, dus
+// `File` versus een willekeurige `delete()` is niet te onderscheiden. Het
+// bereik is daarom bewust smal — de open-/importbestanden — waar zo'n naam
+// vrijwel altijd `dart:io` is. Komt er een vals-positieve naam voor, dan is
+// de uitweg dezelfde als voor een echte: vang hem, of laat de melding zien
+// waarom deze plek bewust mag. De lijst mag alleen krimpen: haal een site
+// weg door hem te beveiligen, niet door de scope te verkleinen.
+const _fileIoMethodNames = {
+  'exists',
+  'existsSync',
+  'length',
+  'lengthSync',
+  'readAsBytes',
+  'readAsBytesSync',
+  'readAsString',
+  'readAsStringSync',
+  'readAsLines',
+  'readAsLinesSync',
+  'openRead',
+  'stat',
+  'statSync',
+  'delete',
+  'deleteSync',
+  'create',
+  'createSync',
+  'copy',
+  'copySync',
+  'rename',
+  'renameSync',
+  'resolveSymbolicLinks',
+  'resolveSymbolicLinksSync',
+  'list',
+  'listSync',
+  'openWrite',
+  'setLastModified',
+  'setLastAccessed',
+};
+
+/// De bestanden die het open-/importoppervlak vormen. Buiten deze set is
+/// onbewaakte I/O een fout maar geen *deze* poort — hier, waar één fout een
+// meervoudige open of een kiezerknop kan meenemen, is hij verplicht gevangen.
+bool _isOpenImportSurface(String path) =>
+    path == 'lib/services/file_service.dart' ||
+    path.startsWith('lib/services/file/') ||
+    path == 'lib/state/tabs_provider.dart' ||
+    path.startsWith('lib/state/tabs_provider_') ||
+    path == 'lib/services/image_sidecar_store.dart' ||
+    path == 'lib/services/document_chart_hydration.dart' ||
+    path == 'lib/utils/asset_destination.dart' ||
+    path == 'lib/widgets/shell/presentation_import_action.dart' ||
+    path == 'lib/widgets/shell/document_import_action.dart';
+
+/// Is [node] lexicaal binnen de `try`-BODY van een `try`/`on`/`catch`?
+/// `thisOrAncestorOfType<TryStatement>` alleen is niet genoeg: ook een
+/// aanroep ín de catch of finally heeft zo'n ouder — maar daar mag een fout
+/// juist wél door (die paden mogen zelf hard falen als opruimen faalt).
+bool _insideTryBody(AstNode node) {
+  final tryStmt = node.thisOrAncestorOfType<TryStatement>();
+  if (tryStmt == null) return false;
+  return node.offset >= tryStmt.body.offset && node.end <= tryStmt.body.end;
+}
+
+class _UnguardedIoVisitor extends RecursiveAstVisitor<void> {
+  final List<int> hits = [];
+
+  @override
+  void visitMethodInvocation(MethodInvocation node) {
+    if (_fileIoMethodNames.contains(node.methodName.name) &&
+        !_insideTryBody(node)) {
+      hits.add(node.offset);
+    }
+    super.visitMethodInvocation(node);
+  }
+}
+
+/// Regelnummers per bestand van bestandssysteem-calls zonder `try`-vangst.
+Map<String, List<int>> unguardedIoIn(Map<String, String> sources) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    final parsed = parseString(
+      content: raw,
+      featureSet: FeatureSet.latestLanguageVersion(),
+      throwIfDiagnostics: false,
+    );
+    if (parsed.errors.isNotEmpty) return;
+    final visitor = _UnguardedIoVisitor();
+    parsed.unit.accept(visitor);
+    if (visitor.hits.isEmpty) return;
+    perFile[path] = [
+      for (final offset in visitor.hits)
+        parsed.lineInfo.getLocation(offset).lineNumber,
+    ]..sort();
+  });
+  return perFile;
+}
+
+Map<String, List<int>> _unguardedIo() {
+  final sources = <String, String>{};
+  for (final file in _dartFiles(Directory('lib'))) {
+    final path = file.path.replaceAll(r'\', '/');
+    if (_isOpenImportSurface(path)) {
+      sources[path] = file.readAsStringSync();
+    }
+  }
+  return unguardedIoIn(sources);
+}
+
 // ── `mktemp -t` in scripts — BSD-vorm die GNU breekt ────────────────────────
 //
 // `mktemp -t naam` zonder X's werkt op macOS (BSD) en faalt onder GNU
@@ -2209,6 +2341,25 @@ void main() {
     );
   }
 
+  final unguardedIo = _unguardedIo();
+  if (unguardedIo.isNotEmpty) {
+    final sites = [
+      for (final entry in unguardedIo.entries)
+        for (final line in entry.value) '${entry.key}:$line',
+    ];
+    failures.add(
+      '${sites.length} bestandssysteem-aanroep(en) in het open-/importpad '
+      'zonder `try`-vangst. Een I/O-fout op zo\'n plek wordt geen uitkomst '
+      'maar een ontsnapte uitzondering — het patroon achter #2875-#2887: een '
+      'bestand dat wegvalt tussen stat en lees, of toegang die geweigerd '
+      'wordt, liet toen een verder geldige open mislukken of stil '
+      'verdwijnen. Zet de aanroep in een try met een uitkomst (waarschuwing, '
+      'terugval, weiger-reden); de vangst kiest wat past. Zie '
+      '_fileIoMethodNames/_isOpenImportSurface in tool/check_conventions.dart:'
+      '\n    ${sites.join('\n    ')}',
+    );
+  }
+
   final isolateHits = _isolateRunViolations();
   if (isolateHits.isNotEmpty) {
     failures.add(
@@ -2358,7 +2509,8 @@ void main() {
       '(baseline ${filePickerPathBaseline.length}); Isolate.run gated; vaste '
       'wachtpunten in '
       'test/ binnen de basislijn (${fixedDelayBaseline.length} bestand(en)); '
-      'geen handgeplakte paden in expects; geen BSD-mktemp in scripts/.',
+      'geen handgeplakte paden in expects; geen BSD-mktemp in scripts/; '
+      'open-/importpad I/O binnen vangst.',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
       stdout.writeln(

@@ -761,6 +761,12 @@ const _dutchSourceRo = {
   'Vernieuwen': 'Reîmprospătează',
   'Deze map is leeg': 'Acest folder este gol',
   'Kon dit bestand niet openen.': 'Nu s-a putut deschide acest fișier.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Nu s-a putut deschide acest fișier: acces refuzat sau locația a dispărut.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Nu s-a putut citi acest fișier — acces refuzat sau fișierul a dispărut',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Fișierul de pachet ales nu a putut fi citit. Verificați dacă mai există și dacă îl puteți accesa.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Aceasta nu este o prezentare Marp/OciDeck.',
   'Downloaden mislukt:': 'Descărcare eșuată:',

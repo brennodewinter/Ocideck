@@ -70,6 +70,12 @@ enum ImportFailure {
   /// deze reden gooide het uitpakken een niet-gevangen `PathAccessException` die
   /// stil verdween: het bestand opende niet en er kwam geen melding.
   destinationUnavailable,
+
+  /// Het bronbestand zelf kon niet worden gelezen — weggevallen tussen de
+  /// keuze en het inlezen, geweigerde toegang, een stat die faalde. Los van
+  /// [corrupt]: beschadigd zegt "de inhoud deugt niet", dit zegt "er was
+  /// niets te lezen" (#2875).
+  sourceUnavailable,
 }
 
 bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
@@ -435,7 +441,11 @@ extension FileServiceImport on FileService {
     final encoded = utf8.encode(markdown);
     for (final existing in _importDirCandidates(destParentDir, base)) {
       final existingMd = File(p.join(existing.path, '$base.md'));
-      if (!existingMd.existsSync()) continue;
+      try {
+        if (!existingMd.existsSync()) continue;
+      } on FileSystemException {
+        continue;
+      }
       if (await _fileHasBytes(existingMd, encoded)) {
         return ImportOutcome.ok(existingMd.path);
       }
@@ -633,7 +643,6 @@ Future<List<String>> _pickPathsGated({
   String? initialDirectory,
   bool allowsMultiple = false,
 }) async {
-  if (!supportsLocalProjectFolders) return const [];
   // macOS + geen extensiefilter: eigen NSOpenPanel die allowedContentTypes
   // expliciet leegzet. file_picker's FileType.any zet géén filter, en dan kan
   // macOS een onthouden filter laten staan waardoor .md grijs wordt (# openen).
@@ -654,23 +663,37 @@ Future<List<String>> _pickPathsGated({
       // Oude build zonder native handler: val terug op file_picker.
     }
   }
-  if (!allowsMultiple) {
-    final file = await FilePicker.pickFile(
+  try {
+    // Binnen de try: vlak boven de kiezers, waar de platformpoort-poort hem
+    // altijd vindt — verder omhoog schoof hem bij de volgende aanpassing weer
+    // uit diens venster.
+    if (!supportsLocalProjectFolders) return const [];
+    // De kiezer-Future kan ook met een fout voltooien: sinds
+    // windows_file_picker 2.0.2 propageert een crashende worker via compute
+    // i.p.v. de aanroeper eindeloos te laten wachten (#2878). Een kiezerfout
+    // telt als "niets gekozen" — met een logregel, niet als ongegrepene fout
+    // uit het openmenu.
+    if (!allowsMultiple) {
+      final file = await FilePicker.pickFile(
+        dialogTitle: dialogTitle,
+        type: type,
+        allowedExtensions: allowedExtensions,
+        initialDirectory: initialDirectory,
+      );
+      final path = file?.path;
+      return path == null ? const [] : [path];
+    }
+    final files = await FilePicker.pickFiles(
       dialogTitle: dialogTitle,
       type: type,
       allowedExtensions: allowedExtensions,
       initialDirectory: initialDirectory,
     );
-    final path = file?.path;
-    return path == null ? const [] : [path];
+    return [for (final file in files) ?file.path];
+  } catch (e) {
+    logWarning('FileService.pickPaths: bestandskiezer faalde', e);
+    return const [];
   }
-  final files = await FilePicker.pickFiles(
-    dialogTitle: dialogTitle,
-    type: type,
-    allowedExtensions: allowedExtensions,
-    initialDirectory: initialDirectory,
-  );
-  return [for (final file in files) ?file.path];
 }
 
 /// Kies een bestand en lever NAAM + BYTES. Werkt overal, ook op web — dit is de
@@ -678,11 +701,20 @@ Future<List<String>> _pickPathsGated({
 Future<({String name, Uint8List bytes})?> _pickBytes({
   required String dialogTitle,
 }) async {
-  final file = await FilePicker.pickFile(
-    dialogTitle: dialogTitle,
-    type: FileType.any,
-  );
-  if (file == null) return null;
+  final PlatformFile file;
+  try {
+    // Zelfde vangst als _pickPathsGated: een gefaald kiezerproces (worker
+    // exit op Windows) mag niet als ongegrepene fout uit de openknop lopen.
+    final picked = await FilePicker.pickFile(
+      dialogTitle: dialogTitle,
+      type: FileType.any,
+    );
+    if (picked == null) return null;
+    file = picked;
+  } catch (e) {
+    logWarning('FileService.pickBytes: bestandskiezer faalde', e);
+    return null;
+  }
   final bytes = await _readPickedBytesCapped(
     file,
     maxBytes: FileService.maxPackageBytes,
@@ -692,18 +724,26 @@ Future<({String name, Uint8List bytes})?> _pickBytes({
 
 /// Lees een gekozen bestand incrementeel zodat een bestandkiezer niet alsnog
 /// de hele schijf in één buffer kan zetten vóór de importlimiet hem ziet.
+/// Een leesfout levert `null` — hetzelfde "niets bruikbaars gekregen" als een
+/// te groot bestand; de aanroeper meldt dan alsof er niets is gekozen, maar
+/// crasht in elk geval niet midden in de openstroom (#2883).
 Future<Uint8List?> _readPickedBytesCapped(
   PlatformFile file, {
   required int maxBytes,
 }) async {
-  final knownSize = file.lengthSync() ?? await file.length();
-  if (knownSize != null && knownSize > maxBytes) return null;
-  final builder = BytesBuilder(copy: false);
-  await for (final chunk in file.readAsByteStream()) {
-    if (chunk.length > maxBytes - builder.length) return null;
-    builder.add(chunk);
+  try {
+    final knownSize = file.lengthSync() ?? await file.length();
+    if (knownSize != null && knownSize > maxBytes) return null;
+    final builder = BytesBuilder(copy: false);
+    await for (final chunk in file.readAsByteStream()) {
+      if (chunk.length > maxBytes - builder.length) return null;
+      builder.add(chunk);
+    }
+    return builder.takeBytes();
+  } catch (e) {
+    logWarning('FileService._readPickedBytesCapped: gekozen bestand faalde', e);
+    return null;
   }
-  return builder.takeBytes();
 }
 
 String _safeImportBase(String name) =>

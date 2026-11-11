@@ -401,19 +401,26 @@ extension FileServicePackage on FileService {
         return '';
       }
       final file = File(abs);
-      if (!await file.exists()) return null;
-      final existing = byAbsolutePath[abs];
-      if (existing != null) return existing;
-      final rel = _freeArchivePath(added, subdir, abs);
-      // Stat before read: reserve the on-disk size so an oversized asset trips
-      // the budget without first being pulled into memory (#1046).
-      reserve(await file.length());
-      final bytes = await _readPkg(abs, subdir);
-      if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return '';
-      archive.add(ArchiveFile(rel, bytes.length, bytes));
-      added.add(rel);
-      byAbsolutePath[abs] = rel;
-      return rel;
+      // Een asset die niet te verifiëren of te meten is, komt niet mee het
+      // pakket in — zelfde afspraak als _readPkg: missend materiaal, geen
+      // ontsnapte uitzondering die de export meeneemt.
+      try {
+        if (!await file.exists()) return null;
+        final existing = byAbsolutePath[abs];
+        if (existing != null) return existing;
+        final rel = _freeArchivePath(added, subdir, abs);
+        // Stat before read: reserve the on-disk size so an oversized asset
+        // trips the budget without first being pulled into memory (#1046).
+        reserve(await file.length());
+        final bytes = await _readPkg(abs, subdir);
+        if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return '';
+        archive.add(ArchiveFile(rel, bytes.length, bytes));
+        added.add(rel);
+        byAbsolutePath[abs] = rel;
+        return rel;
+      } on FileSystemException {
+        return null;
+      }
     }
 
     final slides = await _packSlideAssets(

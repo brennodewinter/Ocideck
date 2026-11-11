@@ -194,9 +194,13 @@ Future<Uint8List?> _readProjectStyleImage(
   ];
   for (final candidate in candidates) {
     final file = File(candidate);
-    if (await file.exists()) {
-      final bytes = await _styleImageBytes(file);
-      if (bytes != null) return bytes;
+    try {
+      if (await file.exists()) {
+        final bytes = await _styleImageBytes(file);
+        if (bytes != null) return bytes;
+      }
+    } on FileSystemException {
+      continue;
     }
   }
   final fallback = await _findExistingProjectLogo(projectPath, normalized);
@@ -252,7 +256,11 @@ Future<String?> _findExistingProjectLogo(
     p.join(projectPath, 'images', 'logo_$filename'),
   ];
   for (final candidate in candidates) {
-    if (await File(candidate).exists()) return candidate;
+    try {
+      if (await File(candidate).exists()) return candidate;
+    } on FileSystemException {
+      continue;
+    }
   }
   return null;
 }
@@ -299,7 +307,11 @@ ThemeProfile _resolveOneRelativeStylePath(
   final bases = [?projectPath, ?homeDirectory()];
   for (final base in bases) {
     final candidate = p.normalize(p.join(base, path));
-    if (File(candidate).existsSync()) return apply(profile, candidate);
+    try {
+      if (File(candidate).existsSync()) return apply(profile, candidate);
+    } on FileSystemException {
+      continue;
+    }
   }
   return profile;
 }

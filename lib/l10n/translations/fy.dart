@@ -6484,6 +6484,12 @@ const _dutchSourceAddFy = {
   'Vernieuwen': 'Fernije',
   'Deze map is leeg': 'Dizze map is leech',
   'Kon dit bestand niet openen.': 'Koe dit bestân net iepenje.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Koe dit bestân net iepenje: gjin tagong of it plak is wechfallen.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Koe dit bestân net lêze — gjin tagong of it bestân is wechfallen',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'It keazen pakketbestân koe net lêzen wurde. Kontrolearje oft it der noch stiet en oftsto der by kinst.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Dit is gjin Marp/OciDeck-presintaasje.',
   'Downloaden mislukt:': 'Downloaden mislearre:',

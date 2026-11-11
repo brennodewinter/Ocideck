@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
+import 'log.dart';
+
 /// Waar een geïmporteerde asset heen gaat, en of hij er al stond.
 class AssetDestination {
   /// Het bestand waarnaar gekopieerd moet worden, of dat er al identiek staat.
@@ -39,7 +41,9 @@ Future<AssetDestination?> resolveAssetDestination(
   for (var n = 1; n <= _maxNameAttempts; n++) {
     final name = n == 1 ? filename : '${stem}_$n$ext';
     final candidate = File(p.join(destDir.path, name));
-    if (!await candidate.exists()) {
+    final free = await _isFree(candidate);
+    if (free == null) return null;
+    if (free) {
       return AssetDestination(candidate, alreadyPresent: false);
     }
     if (await filesHaveSameContent(src, candidate)) {
@@ -64,7 +68,9 @@ Future<AssetDestination?> resolveAssetDestinationForBytes(
   for (var n = 1; n <= _maxNameAttempts; n++) {
     final name = n == 1 ? filename : '${stem}_$n$ext';
     final candidate = File(p.join(destDir.path, name));
-    if (!await candidate.exists()) {
+    final free = await _isFree(candidate);
+    if (free == null) return null;
+    if (free) {
       return AssetDestination(candidate, alreadyPresent: false);
     }
     if (await _fileHasBytes(candidate, bytes)) {
@@ -72,6 +78,22 @@ Future<AssetDestination?> resolveAssetDestinationForBytes(
     }
   }
   return null;
+}
+
+/// Of [candidate] nog niet bestaat, of null als dat niet vast te stellen is.
+/// Een I/O-fout is niet "vrij": een naam gokken bovenop een onleesbare map kan
+/// een bestaand bestand raken — geen bestemming is dan de eerlijke uitkomst
+/// (de schrijver meldt straks zelf waarom de map niet bereikbaar was).
+Future<bool?> _isFree(File candidate) async {
+  try {
+    return !await candidate.exists();
+  } catch (e) {
+    logWarning(
+      'asset destination: exists-check faalde voor ${candidate.path}',
+      e,
+    );
+    return null;
+  }
 }
 
 /// Vergelijk de inhoud van [file] met [bytes]. Een leesfout telt als "niet

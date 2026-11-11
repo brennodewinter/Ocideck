@@ -758,6 +758,12 @@ const _dutchSourceSk = {
   'Vernieuwen': 'Obnoviť',
   'Deze map is leeg': 'Tento priečinok je prázdny',
   'Kon dit bestand niet openen.': 'Tento súbor sa nepodarilo otvoriť.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Tento súbor sa nepodarilo otvoriť: chýba prístup alebo umiestnenie zmizlo.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Tento súbor sa nepodarilo prečítať — chýba prístup alebo súbor zmizol',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Zvolený súbor balíčka sa nepodarilo prečítať. Skontrolujte, či tam stále je a či k nemu máte prístup.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Toto nie je prezentácia Marp/OciDeck.',
   'Downloaden mislukt:': 'Sťahovanie zlyhalo:',

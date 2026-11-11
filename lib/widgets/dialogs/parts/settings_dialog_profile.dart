@@ -18,6 +18,9 @@ String _importFailureText(
     'Dit stijlprofiel komt uit een nieuwere versie van OciDeck',
   ),
   StyleProfileImportFailure.memoryBudgetExceeded => webAssetBudgetMessage(l10n),
+  StyleProfileImportFailure.unreadable => l10n.d(
+    'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen',
+  ),
   // cancelled komt hier nooit: dat handelt _importProfile stil af.
   _ => l10n.d('Dit is geen geldig stijlprofiel-bestand'),
 };

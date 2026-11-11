@@ -759,6 +759,12 @@ const _dutchSourcePl = {
   'Vernieuwen': 'Odśwież',
   'Deze map is leeg': 'Ten folder jest pusty',
   'Kon dit bestand niet openen.': 'Nie udało się otworzyć tego pliku.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Nie udało się otworzyć tego pliku: brak dostępu lub lokalizacja zniknęła.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Nie udało się odczytać tego pliku — brak dostępu lub plik zniknął',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Nie udało się odczytać wybranego pliku pakietu. Sprawdź, czy nadal istnieje i czy masz do niego dostęp.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'To nie jest prezentacja Marp/OciDeck.',
   'Downloaden mislukt:': 'Pobieranie nie powiodło się:',

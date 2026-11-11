@@ -16,6 +16,8 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:path/path.dart' as p;
 
+import 'io_fault.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -586,4 +588,44 @@ void main() {
           'gebruiker moet horen welk bestand geweigerd is',
     );
   });
+
+  // #2879: een stat-fout midden in de grafiekhydratatie — weg tussen `exists`
+  // en `length`, of een geweigerde toegang — stond vroeger buiten de catch die
+  // alleen de leesactie dekte, en blokkeerde zo het hele openen. Elke vorm van
+  // "data niet geladen" is een waarschuwing, nooit een uitzondering.
+  for (final (label, failOn) in [
+    ('exists', {'exists'}),
+    ('stat', {'length'}),
+    ('lees', {'readAsString'}),
+  ]) {
+    test(
+      'een $label-fout van het grafiekbestand wordt een waarschuwing',
+      () async {
+        final service = serviceOf();
+        await service.saveDeck(
+          deckWith(chartSlide('data/omzet.json', [120, 138])),
+          deckPath(),
+        );
+        // De hydratatie werkt op het realpath na de containment-controle; op
+        // macOS loopt die via /private/var. Daarom injecteren we daar, niet op
+        // het lexicale pad.
+        final realDataPath = File(
+          p.join(temp.path, 'data', 'omzet.json'),
+        ).resolveSymbolicLinksSync();
+
+        final opened = await runWithFileFault(
+          () => service.openDeckDetailed(deckPath()),
+          targetPath: realDataPath,
+          failOn: failOn,
+        );
+
+        expect(opened.deck, isNotNull, reason: 'het deck opent gewoon');
+        expect(
+          opened.warnings,
+          contains('data/omzet.json'),
+          reason: 'welk gekoppeld bestand niet is geladen moet hoorbaar zijn',
+        );
+      },
+    );
+  }
 }

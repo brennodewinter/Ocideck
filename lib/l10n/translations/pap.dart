@@ -6499,6 +6499,12 @@ const _dutchSourceAddPap = {
   'Vernieuwen': 'Refreská',
   'Deze map is leeg': 'E karpeta aki ta bashí',
   'Kon dit bestand niet openen.': 'No por a habri e dokumento aki.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'No por a habri e dokumento aki: sin akseso òf e lugá a disparsé.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'No por a lesa e dokumento aki — sin akseso òf e dokumento a disparsé',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'E dokumento di pakete skohí no por a wordu lesa. Kontrolá si e ta ainda aki i si bo por yega na dje.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Esaki no ta un presentashon Marp/OciDeck.',
   'Downloaden mislukt:': 'Download a faya:',

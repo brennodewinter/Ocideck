@@ -27,7 +27,7 @@ The JSON documents carry **874 dependency relations** between these components: 
 | --- | --- | --- | --- | --- |
 | _fe_analyzer_shared _(transitive)_ | 111.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@111.0.0` |
 | analyzer _(direct dev)_ | 14.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@14.7.0` |
-| android_file_picker _(transitive)_ | 2.1.3 | MIT | vicajilau | `pkg:pub/android_file_picker@2.1.3` |
+| android_file_picker _(transitive)_ | 2.1.5 | MIT | vicajilau | `pkg:pub/android_file_picker@2.1.5` |
 | app_appearance _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82` (packages/app_appearance) |
 | app_localizations _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `73822a01339b6e601f8b84ada2e529d3db33d81d` (packages/app_localizations) |
 | archive _(direct main)_ | 4.6.0 | MIT | brendan-duncan | `pkg:pub/archive@4.6.0` |
@@ -64,11 +64,11 @@ The JSON documents carry **874 dependency relations** between these components: 
 | ffi _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/ffi@2.2.0` |
 | ffi_leak_tracker _(transitive)_ | 0.1.2 | BSD-3-Clause | halildurmus | `pkg:pub/ffi_leak_tracker@0.1.2` |
 | file _(transitive)_ | 7.0.1 | BSD-3-Clause | dart-lang | `pkg:pub/file@7.0.1` |
-| file_picker _(direct main)_ | 13.3.2 | MIT | vicajilau | `pkg:pub/file_picker@13.3.2` |
+| file_picker _(direct main)_ | 13.3.3 | MIT | vicajilau | `pkg:pub/file_picker@13.3.3` |
 | file_picker_darwin _(transitive)_ | 2.4.2 | MIT | vicajilau | `pkg:pub/file_picker_darwin@2.4.2` |
-| file_picker_linux _(transitive)_ | 2.0.3 | MIT | vicajilau | `pkg:pub/file_picker_linux@2.0.3` |
+| file_picker_linux _(transitive)_ | 2.0.4 | MIT | vicajilau | `pkg:pub/file_picker_linux@2.0.4` |
 | file_picker_platform_interface _(transitive)_ | 4.2.0 | MIT | vicajilau | `pkg:pub/file_picker_platform_interface@4.2.0` |
-| file_picker_web _(transitive)_ | 4.2.0 | MIT | vicajilau | `pkg:pub/file_picker_web@4.2.0` |
+| file_picker_web _(transitive)_ | 4.2.1 | MIT | vicajilau | `pkg:pub/file_picker_web@4.2.1` |
 | file_selector _(direct main)_ | 1.1.0 | BSD-3-Clause | flutter | `pkg:pub/file_selector@1.1.0` |
 | file_selector_android _(transitive)_ | 0.5.2+11 | Apache-2.0 | flutter | `pkg:pub/file_selector_android@0.5.2+11` |
 | file_selector_ios _(transitive)_ | 0.5.3+7 | BSD-3-Clause | flutter | `pkg:pub/file_selector_ios@0.5.3+7` |
@@ -235,7 +235,7 @@ The JSON documents carry **874 dependency relations** between these components: 
 | webview_flutter_web _(direct main)_ | 0.2.3+4 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_web@0.2.3+4` |
 | webview_flutter_wkwebview _(transitive)_ | 3.27.2 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_wkwebview@3.27.2` |
 | win32 _(transitive)_ | 6.4.0 | BSD-3-Clause | halildurmus | `pkg:pub/win32@6.4.0` |
-| windows_file_picker _(transitive)_ | 2.0.1 | MIT | vicajilau | `pkg:pub/windows_file_picker@2.0.1` |
+| windows_file_picker _(transitive)_ | 2.0.2 | MIT | vicajilau | `pkg:pub/windows_file_picker@2.0.2` |
 | x509 _(transitive)_ | 0.2.4+3 | BSD-3-Clause | appsup-dart | `pkg:pub/x509@0.2.4+3` |
 | xdg_directories _(transitive)_ | 1.1.0 | BSD-3-Clause | flutter | `pkg:pub/xdg_directories@1.1.0` |
 | xml _(direct main)_ | 7.0.1 | MIT | renggli | `pkg:pub/xml@7.0.1` |

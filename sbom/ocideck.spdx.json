@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.7+49",
-  "documentNamespace": "https://ocideck.app/spdx/b03f45df-9443-5914-8890-487109e81421",
+  "documentNamespace": "https://ocideck.app/spdx/db210e28-3447-5b13-811d-c9047d702c9c",
   "creationInfo": {
-    "created": "2026-11-11T16:54:40.670929Z",
+    "created": "2026-11-11T18:06:47.837815Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -79,23 +79,23 @@
     {
       "SPDXID": "SPDXRef-3-android-file-picker",
       "name": "android_file_picker",
-      "versionInfo": "2.1.3",
+      "versionInfo": "2.1.5",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/android_file_picker/versions/2.1.3",
+      "downloadLocation": "https://pub.dev/packages/android_file_picker/versions/2.1.5",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "868183c959e754e915954d8074c20cfa4cfdb4684b35ecc08378437be1a542d8"
+          "checksumValue": "04c1306eda42c23ecbf449c909f4fa05c5e66fc48cf5f994d8d08b9d45e5396b"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/android_file_picker@2.1.3"
+          "referenceLocator": "pkg:pub/android_file_picker@2.1.5"
         }
       ]
     },
@@ -897,23 +897,23 @@
     {
       "SPDXID": "SPDXRef-40-file-picker",
       "name": "file_picker",
-      "versionInfo": "13.3.2",
+      "versionInfo": "13.3.3",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/file_picker/versions/13.3.2",
+      "downloadLocation": "https://pub.dev/packages/file_picker/versions/13.3.3",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c64036857780d7125f011d543f89eedcb5df61da473668bace4eee9ab875284d"
+          "checksumValue": "079dc46b753abbddb7f77cd87e6ed9ecc62902580707514568321bdf8e050a86"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/file_picker@13.3.2"
+          "referenceLocator": "pkg:pub/file_picker@13.3.3"
         }
       ]
     },
@@ -943,23 +943,23 @@
     {
       "SPDXID": "SPDXRef-42-file-picker-linux",
       "name": "file_picker_linux",
-      "versionInfo": "2.0.3",
+      "versionInfo": "2.0.4",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/file_picker_linux/versions/2.0.3",
+      "downloadLocation": "https://pub.dev/packages/file_picker_linux/versions/2.0.4",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "eb00de71b123e91d3c61f389a05b8cc90f9cbe7e4c88da30ebe2f0442b281b61"
+          "checksumValue": "9215ee8c672508cdd9a325202669f849e1baac883658626b3abed5d7777e6a4b"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/file_picker_linux@2.0.3"
+          "referenceLocator": "pkg:pub/file_picker_linux@2.0.4"
         }
       ]
     },
@@ -989,23 +989,23 @@
     {
       "SPDXID": "SPDXRef-44-file-picker-web",
       "name": "file_picker_web",
-      "versionInfo": "4.2.0",
+      "versionInfo": "4.2.1",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/file_picker_web/versions/4.2.0",
+      "downloadLocation": "https://pub.dev/packages/file_picker_web/versions/4.2.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a2288008280aabe371aff029466b3405e60838e0a1d714767488c59b926c8b8c"
+          "checksumValue": "50749a6da2984fc29609e102ad4d80fd1d07e6895150f8e4922086167d9d45d8"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/file_picker_web@4.2.0"
+          "referenceLocator": "pkg:pub/file_picker_web@4.2.1"
         }
       ]
     },
@@ -4701,23 +4701,23 @@
     {
       "SPDXID": "SPDXRef-211-windows-file-picker",
       "name": "windows_file_picker",
-      "versionInfo": "2.0.1",
+      "versionInfo": "2.0.2",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/windows_file_picker/versions/2.0.1",
+      "downloadLocation": "https://pub.dev/packages/windows_file_picker/versions/2.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "18452aa293de3b6961c6d05b0e71b4be7bb90c67635abdd3aa5c4e75dd875072"
+          "checksumValue": "cd1be37ada0abcfaa55bddb7410e8515844e35cd77669c35d9a28a15722299d8"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/windows_file_picker@2.0.1"
+          "referenceLocator": "pkg:pub/windows_file_picker@2.0.2"
         }
       ]
     },

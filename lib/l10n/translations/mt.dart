@@ -762,6 +762,12 @@ const _dutchSourceMt = {
   'Vernieuwen': 'Aġġorna',
   'Deze map is leeg': 'Dan il-folder huwa vojt',
   'Kon dit bestand niet openen.': 'Ma stajniex niftħu dan il-fajl.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Ma stajniex niftħu dan il-fajl: ebda aċċess jew il-post għeb.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Ma stajniex naqra dan il-fajl — ebda aċċess jew il-fajl għeb',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Il-fajl tal-pakkett magħżul ma setax jinqara. Iċċekkja jekk għadux hemm u jekk tista’ tilħqu.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Din mhijiex preżentazzjoni Marp/OciDeck.',
   'Downloaden mislukt:': 'It-tniżżil falla:',

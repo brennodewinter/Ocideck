@@ -1661,6 +1661,12 @@ const _dutchSourceTr = {
   'Vernieuwen': 'Yenile',
   'Deze map is leeg': 'Bu klasör boş',
   'Kon dit bestand niet openen.': 'Bu dosya açılamadı.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Bu dosya açılamadı: erişim yok veya konum kayboldu.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Bu dosya okunamadı — erişim yok veya dosya kayboldu',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Seçilen paket dosyası okunamadı. Hâlâ orada olup olmadığını ve ona erişip erişemediğinizi kontrol edin.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Bu bir Marp/OciDeck sunumu değil.',
   'Downloaden mislukt:': 'İndirme başarısız:',
   'Opslaan mislukt:': 'Kaydetme başarısız:',

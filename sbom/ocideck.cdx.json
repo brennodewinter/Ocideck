@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:4ed5d929-4808-56de-8c11-a2f5296ef710",
+  "serialNumber": "urn:uuid:e2033532-0403-5801-8b2f-16d55769bb2b",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-11T16:54:40.670929Z",
+    "timestamp": "2026-11-11T18:06:47.837815Z",
     "tools": {
       "components": [
         {
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/android_file_picker@2.1.3",
+      "bom-ref": "pkg:pub/android_file_picker@2.1.5",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -156,8 +156,8 @@
         ]
       },
       "name": "android_file_picker",
-      "version": "2.1.3",
-      "purl": "pkg:pub/android_file_picker@2.1.3",
+      "version": "2.1.5",
+      "purl": "pkg:pub/android_file_picker@2.1.5",
       "licenses": [
         {
           "license": {
@@ -168,13 +168,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "868183c959e754e915954d8074c20cfa4cfdb4684b35ecc08378437be1a542d8"
+          "content": "04c1306eda42c23ecbf449c909f4fa05c5e66fc48cf5f994d8d08b9d45e5396b"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/android_file_picker/versions/2.1.3"
+          "url": "https://pub.dev/packages/android_file_picker/versions/2.1.5"
         }
       ],
       "properties": [
@@ -1716,7 +1716,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker@13.3.2",
+      "bom-ref": "pkg:pub/file_picker@13.3.3",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1725,8 +1725,8 @@
         ]
       },
       "name": "file_picker",
-      "version": "13.3.2",
-      "purl": "pkg:pub/file_picker@13.3.2",
+      "version": "13.3.3",
+      "purl": "pkg:pub/file_picker@13.3.3",
       "licenses": [
         {
           "license": {
@@ -1737,13 +1737,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "c64036857780d7125f011d543f89eedcb5df61da473668bace4eee9ab875284d"
+          "content": "079dc46b753abbddb7f77cd87e6ed9ecc62902580707514568321bdf8e050a86"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker/versions/13.3.2"
+          "url": "https://pub.dev/packages/file_picker/versions/13.3.3"
         }
       ],
       "properties": [
@@ -1800,7 +1800,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker_linux@2.0.3",
+      "bom-ref": "pkg:pub/file_picker_linux@2.0.4",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1809,8 +1809,8 @@
         ]
       },
       "name": "file_picker_linux",
-      "version": "2.0.3",
-      "purl": "pkg:pub/file_picker_linux@2.0.3",
+      "version": "2.0.4",
+      "purl": "pkg:pub/file_picker_linux@2.0.4",
       "licenses": [
         {
           "license": {
@@ -1821,13 +1821,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "eb00de71b123e91d3c61f389a05b8cc90f9cbe7e4c88da30ebe2f0442b281b61"
+          "content": "9215ee8c672508cdd9a325202669f849e1baac883658626b3abed5d7777e6a4b"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker_linux/versions/2.0.3"
+          "url": "https://pub.dev/packages/file_picker_linux/versions/2.0.4"
         }
       ],
       "properties": [
@@ -1884,7 +1884,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker_web@4.2.0",
+      "bom-ref": "pkg:pub/file_picker_web@4.2.1",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -1893,8 +1893,8 @@
         ]
       },
       "name": "file_picker_web",
-      "version": "4.2.0",
-      "purl": "pkg:pub/file_picker_web@4.2.0",
+      "version": "4.2.1",
+      "purl": "pkg:pub/file_picker_web@4.2.1",
       "licenses": [
         {
           "license": {
@@ -1905,13 +1905,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a2288008280aabe371aff029466b3405e60838e0a1d714767488c59b926c8b8c"
+          "content": "50749a6da2984fc29609e102ad4d80fd1d07e6895150f8e4922086167d9d45d8"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker_web/versions/4.2.0"
+          "url": "https://pub.dev/packages/file_picker_web/versions/4.2.1"
         }
       ],
       "properties": [
@@ -8841,7 +8841,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/windows_file_picker@2.0.1",
+      "bom-ref": "pkg:pub/windows_file_picker@2.0.2",
       "type": "library",
       "supplier": {
         "name": "vicajilau",
@@ -8850,8 +8850,8 @@
         ]
       },
       "name": "windows_file_picker",
-      "version": "2.0.1",
-      "purl": "pkg:pub/windows_file_picker@2.0.1",
+      "version": "2.0.2",
+      "purl": "pkg:pub/windows_file_picker@2.0.2",
       "licenses": [
         {
           "license": {
@@ -8862,13 +8862,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "18452aa293de3b6961c6d05b0e71b4be7bb90c67635abdd3aa5c4e75dd875072"
+          "content": "cd1be37ada0abcfaa55bddb7410e8515844e35cd77669c35d9a28a15722299d8"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/windows_file_picker/versions/2.0.1"
+          "url": "https://pub.dev/packages/windows_file_picker/versions/2.0.2"
         }
       ],
       "properties": [
@@ -10183,7 +10183,7 @@
         "pkg:pub/dartcv4@2.3.1",
         "pkg:pub/desktop_drop@0.8.4",
         "pkg:pub/fake_async@1.3.3",
-        "pkg:pub/file_picker@13.3.2",
+        "pkg:pub/file_picker@13.3.3",
         "pkg:pub/file_selector@1.1.0",
         "pkg:pub/file_selector_platform_interface@2.7.0",
         "pkg:pub/fl_chart@1.3.0",
@@ -10270,7 +10270,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/android_file_picker@2.1.3",
+      "ref": "pkg:pub/android_file_picker@2.1.5",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/file_picker_platform_interface@4.2.0",
@@ -10519,15 +10519,15 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_picker@13.3.2",
+      "ref": "pkg:pub/file_picker@13.3.3",
       "dependsOn": [
-        "pkg:pub/android_file_picker@2.1.3",
+        "pkg:pub/android_file_picker@2.1.5",
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/file_picker_darwin@2.4.2",
-        "pkg:pub/file_picker_linux@2.0.3",
+        "pkg:pub/file_picker_linux@2.0.4",
         "pkg:pub/file_picker_platform_interface@4.2.0",
-        "pkg:pub/file_picker_web@4.2.0",
-        "pkg:pub/windows_file_picker@2.0.1",
+        "pkg:pub/file_picker_web@4.2.1",
+        "pkg:pub/windows_file_picker@2.0.2",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -10541,7 +10541,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_picker_linux@2.0.3",
+      "ref": "pkg:pub/file_picker_linux@2.0.4",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/dbus@0.7.15",
@@ -10560,7 +10560,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_picker_web@4.2.0",
+      "ref": "pkg:pub/file_picker_web@4.2.1",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/file_picker_platform_interface@4.2.0",
@@ -11996,7 +11996,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/windows_file_picker@2.0.1",
+      "ref": "pkg:pub/windows_file_picker@2.0.2",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+5",
         "pkg:pub/ffi@2.2.0",

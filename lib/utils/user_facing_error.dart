@@ -235,6 +235,9 @@ String importFailureMessage(
     ImportFailure.destinationUnavailable => l10n.d(
       'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.',
     ),
+    ImportFailure.sourceUnavailable => l10n.d(
+      'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.',
+    ),
   };
 }
 

@@ -755,6 +755,12 @@ const _dutchSourceHu = {
   'Vernieuwen': 'Frissítés',
   'Deze map is leeg': 'Ez a mappa üres',
   'Kon dit bestand niet openen.': 'Nem sikerült megnyitni ezt a fájlt.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Nem sikerült megnyitni ezt a fájlt: nincs hozzáférés, vagy a hely eltűnt.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Nem sikerült beolvasni ezt a fájlt — nincs hozzáférés, vagy a fájl eltűnt',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'A kiválasztott csomagfájl nem olvasható. Ellenőrizze, hogy még ott van-e, és hogy hozzáfér-e.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Ez nem Marp/OciDeck prezentáció.',
   'Downloaden mislukt:': 'A letöltés nem sikerült:',
   'Opslaan mislukt:': 'A mentés nem sikerült:',

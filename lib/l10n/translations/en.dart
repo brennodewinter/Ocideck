@@ -6616,6 +6616,12 @@ const _dutchSourceAddEn = {
   'Vernieuwen': 'Refresh',
   'Deze map is leeg': 'This folder is empty',
   'Kon dit bestand niet openen.': 'Could not open this file.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Could not open this file: access denied or the location is no longer available.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Could not read this file — no access or the file is gone',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'The selected package file could not be read. Check that it is still there and that you can reach it.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'This isn\'t a Marp/OciDeck presentation.',
   'Downloaden mislukt:': 'Download failed:',

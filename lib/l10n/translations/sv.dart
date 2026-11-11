@@ -753,6 +753,12 @@ const _dutchSourceSv = {
   'Vernieuwen': 'Uppdatera',
   'Deze map is leeg': 'Den här mappen är tom',
   'Kon dit bestand niet openen.': 'Kunde inte öppna den här filen.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Kunde inte öppna den här filen: ingen åtkomst eller platsen har försvunnit.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Kunde inte läsa den här filen — ingen åtkomst eller filen har försvunnit',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Den valda paketfilen kunde inte läsas. Kontrollera att den fortfarande finns kvar och att du kan nå den.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Det här är ingen Marp/OciDeck-presentation.',
   'Downloaden mislukt:': 'Nedladdningen misslyckades:',

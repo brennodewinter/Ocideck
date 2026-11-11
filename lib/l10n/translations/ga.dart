@@ -769,6 +769,12 @@ const _dutchSourceGa = {
   'Vernieuwen': 'Athnuaigh',
   'Deze map is leeg': 'Tá an fillteán seo folamh',
   'Kon dit bestand niet openen.': 'Níorbh fhéidir an comhad seo a oscailt.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Níorbh fhéidir an comhad seo a oscailt: gan rochtain nó tá an suíomh imithe.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Níorbh fhéidir an comhad seo a léamh — gan rochtain nó tá an comhad imithe',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Níorbh fhéidir an comhad pacáiste roghnaithe a léamh. Seiceáil an bhfuil sé fós ann agus an bhfuil rochtain agat air.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Ní láithreoireacht Marp/OciDeck é seo.',
   'Downloaden mislukt:': 'Theip ar an íoslódáil:',

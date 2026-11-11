@@ -50,6 +50,10 @@ enum StyleProfileImportFailure {
   invalid,
   unsupportedVersion,
   memoryBudgetExceeded,
+
+  /// Het gekozen bestand kon niet worden gelezen — geen toegang of weggevallen
+  /// — los van [invalid], dat zegt "de inhoud deugt niet" (#2884).
+  unreadable,
 }
 
 /// Uitkomst van een import: het [profile] bij succes, anders een [failure].
@@ -612,30 +616,51 @@ extension FileServiceStyleProfile on FileService {
   /// [FileService.pickPackageFile]. [importStyleProfileBytes] toetst daarna de
   /// JSON-envelop met de `ocideck`-marker.
   Future<StyleProfileImportOutcome> importStyleProfile() async {
-    final file = await FilePicker.pickFile(
-      dialogTitle: _d('Stijlprofiel importeren'),
-      type: FileType.any,
-    );
-    if (file == null) {
+    final PlatformFile file;
+    try {
+      // Zie _pickPathsGated: een gefaald kiezerproces is "niets gekozen",
+      // geen ongegrepene fout in het instellingenvenster.
+      final picked = await FilePicker.pickFile(
+        dialogTitle: _d('Stijlprofiel importeren'),
+        type: FileType.any,
+      );
+      if (picked == null) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.cancelled,
+        );
+      }
+      file = picked;
+    } catch (e) {
+      logWarning('FileService.importStyleProfile: kiezer faalde', e);
       return const StyleProfileImportOutcome.failed(
-        StyleProfileImportFailure.cancelled,
+        StyleProfileImportFailure.unreadable,
       );
     }
-    // file_picker 13 onderscheidt een echt leeg bestand van een mislukte
-    // lengtemeting. Bij die laatste mogen we niet alsnog onbegrensd inlezen:
-    // dit pad bewaakt de geheugencap en faalt daarom dicht.
-    final length = file.lengthSync() ?? await file.length();
-    if (length == null) {
+    // Stat en lees onder één vangst: verdwijnt het bestand tussen kiezen en
+    // lezen — of weigert de toegang — dan ontsnapte hier een
+    // FileSystemException uit de instellingenknop (#2884).
+    try {
+      // file_picker 13 onderscheidt een echt leeg bestand van een mislukte
+      // lengtemeting. Bij die laatste mogen we niet alsnog onbegrensd inlezen:
+      // dit pad bewaakt de geheugencap en faalt daarom dicht.
+      final length = file.lengthSync() ?? await file.length();
+      if (length == null) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.invalid,
+        );
+      }
+      if (length > FileService.maxStyleProfileBytes) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.tooLarge,
+        );
+      }
+      final bytes = await file.readAsBytes();
+      return await importStyleProfileBytes(bytes);
+    } on FileSystemException catch (e) {
+      logWarning('FileService.importStyleProfile: bron niet leesbaar', e);
       return const StyleProfileImportOutcome.failed(
-        StyleProfileImportFailure.invalid,
+        StyleProfileImportFailure.unreadable,
       );
     }
-    if (length > FileService.maxStyleProfileBytes) {
-      return const StyleProfileImportOutcome.failed(
-        StyleProfileImportFailure.tooLarge,
-      );
-    }
-    final bytes = await file.readAsBytes();
-    return importStyleProfileBytes(bytes);
   }
 }

@@ -760,6 +760,12 @@ const _dutchSourceLa = {
   'Vernieuwen': 'Renovare',
   'Deze map is leeg': 'Haec plica vacua est',
   'Kon dit bestand niet openen.': 'Hunc fasciculum aperire non potui.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Hunc fasciculum aperire non potui: aditus negatus vel locus abiit.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Hunc fasciculum legere non potui — aditus negatus vel fasciculus abiit',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Fasciculus sarcinae electus legi non potuit. Vide num adhuc adsit et num ad eum pervenire possis.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Haec non est praesentatio Marp/OciDeck.',
   'Downloaden mislukt:': 'Descensus defecit:',

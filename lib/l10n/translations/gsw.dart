@@ -756,6 +756,12 @@ const _dutchSourceGsw = {
   'Vernieuwen': 'Aktualisiere',
   'Deze map is leeg': 'De Ordner isch leer',
   'Kon dit bestand niet openen.': 'Ha das Datei nöd chöne öffne.',
+  'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.':
+      'Ha das Datei nöd chöne öffne: kei Zuegriff oder de Ort isch weggschwunde.',
+  'Kon dit bestand niet lezen — geen toegang of het bestand is weggevallen':
+      'Ha das Datei nöd chöne läse — kei Zuegriff oder d Datei isch weggschwunde',
+  'Het gekozen pakketbestand kon niet worden gelezen. Controleer of het er nog staat en of je er bij kunt.':
+      'Das usgwehlte Paketdatei het nöd chöne gläse wärde. Lueg, öb sie no da isch und öb de dran chunnsch.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Das isch kei Marp/OciDeck-Präsentation.',
   'Downloaden mislukt:': 'Download fehlgschlage:',

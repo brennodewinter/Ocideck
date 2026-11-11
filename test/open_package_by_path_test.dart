@@ -15,6 +15,8 @@ import 'package:ocideck/state/tabs_provider.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'io_fault.dart';
+
 /// Een `.ocideck`-pakket openen via "Bestand → Openen" (#905).
 ///
 /// Een `.ocideck` is OciDeck's eigen formaat: een zip met de deck plus assets.
@@ -122,6 +124,39 @@ void main() {
       expect(container.read(openFailureProvider), OpenFailure.notPresentation);
     },
   );
+
+  test('een pakketbron die niet leest, is een uitkomst — geen uitzondering '
+      '(#2875)', () async {
+    // Het bestand staat er, maar de stat of lees faalt (weggevallen
+    // volume, geweigerde toegang). Vroeger ontsnapte de FileSystemException
+    // uit openFileByPath: geen melding, en een meervoudige open zou hier
+    // stuklopen.
+    final dir = Directory(temp.resolveSymbolicLinksSync());
+    final zipPath = await writePackage('kapot.ocideck');
+    // De fout geldt op het echte pad (macOS symlinkt /var → /private/var).
+    final target = File(zipPath).resolveSymbolicLinksSync();
+
+    final container = await containerWithHome();
+    final tabs = container.read(tabsProvider.notifier);
+    final result = await runWithFileFault(
+      () => tabs.openFileByPath(target),
+      targetPath: target,
+      failOn: {'length'},
+    );
+
+    expect(result, OpenResult.unreadable);
+    expect(
+      container.read(openFailureProvider),
+      OpenFailure.inaccessible,
+      reason: 'een bronfout is geen formaatfout',
+    );
+
+    // En de afspraak die eronder ligt: een mislukte open breekt de rest
+    // van een stapel niet. Dezelfde container opent hierna gewoon verder.
+    final mdPath = p.join(dir.path, 'goed.md');
+    File(mdPath).writeAsStringSync('---\nmarp: true\n---\n\n# Titel\n\nHoi.\n');
+    expect(await tabs.openFileByPath(mdPath), OpenResult.opened);
+  });
 
   test('een gewoon .md-bestand blijft de markdown-open volgen', () async {
     // De pakket-afslag mag een losse presentatie niet wegkapen.

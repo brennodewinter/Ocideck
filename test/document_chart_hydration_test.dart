@@ -8,6 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/document_chart_hydration.dart';
 import 'package:path/path.dart' as p;
 
+import 'io_fault.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -160,4 +162,21 @@ void main() {
       expect(out.contains('4242'), isTrue);
     },
   );
+
+  // #2881: dezelfde stat-stap als in het deck-openpad (#2879) stond hier óók
+  // buiten de catch — een stat-fout ontsnapte uit de hydratatie.
+  test('een stat-fout van het databestand laat het blok staan', () async {
+    await writeDataFile();
+    final realDataPath = File(
+      p.join(temp.path, 'data', 'x.json'),
+    ).resolveSymbolicLinksSync();
+
+    final out = await runWithFileFault(
+      () => hydrateDocumentChartData(chartBody, projectPath: temp.path),
+      targetPath: realDataPath,
+      failOn: {'length'},
+    );
+
+    expect(out, equals(chartBody));
+  });
 }
