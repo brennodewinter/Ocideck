@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.7+49",
-  "documentNamespace": "https://ocideck.app/spdx/dfff3d05-49e9-529e-8c7f-d7ed2768d23e",
+  "documentNamespace": "https://ocideck.app/spdx/b03f45df-9443-5914-8890-487109e81421",
   "creationInfo": {
-    "created": "2026-11-10T12:40:35.417940Z",
+    "created": "2026-11-11T16:54:40.670929Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -5302,7 +5302,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "001819a9f09db08732276d3376d63dfe5cf9309eb7a55f94c7c4c0a8812e9a98"
+          "checksumValue": "7cf68caf7c6a51130f653c3899d209fde63465c97403a7375970e054d91bc2a5"
         }
       ],
       "sourceInfo": "Vendored from https://pawprint.vigilis.online/LibreKAT/flutter_webrtc/tree/b82f0db567e10aecd152c4039336d09e48f295a8 at commit b82f0db567e10aecd152c4039336d09e48f295a8.",
@@ -5349,7 +5349,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "02dec28aa872ec841222c2ac446f38bc3d1d6e491393f178bff6a896bf0eaa7a"
+          "checksumValue": "68f0a0e3b5ad29ac87d9b4962883e3670b67600a8e3f56222fb095b2aa6a80c5"
         }
       ],
       "comment": "Vendored fork in third_party/webview_win_floating; the local changes are recorded in third_party/webview_win_floating/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
