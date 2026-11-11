@@ -136,6 +136,21 @@ signing is an optional step in that script, off by default and loud about it; se
 [Building the Windows installer](../docs/BUILD.md#building-the-windows-installer)
 for the environment variables and why no key file or password is accepted.
 
+### Windows upgrades
+
+The installer keeps its AppId, installation directory and privilege mode across
+versions. Run the new setup after closing OciDeck. The Windows release smoke
+probe installs a synthetic older version, upgrades without directory or scope
+overrides, checks replacement and a single uninstall entry, and preserves a
+presentation in the installation folder before exercising start and uninstall.
+
+The portable zip uses `OciDeck/` as its stable root; only the archive filename
+contains the release version. Extract to the same parent folder and confirm
+replacement. This avoids new versioned app folders without spreading files into
+the destination. It does not delete files absent from the new bundle. Existing
+`ocideck-<version>/` folders need manual cleanup after moving user files; use the
+installer for managed installations.
+
 ## WinGet
 
 WinGet is an optional catalog entry over that same installer, not a new build

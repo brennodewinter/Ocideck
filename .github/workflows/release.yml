@@ -218,11 +218,11 @@ jobs:
         run: |
           set -eu
           VERSIE="${RELEASE_TAG#v}"
-          # In één versiemap ocideck-<versie>/, niet los in de huidige map:
+          # In één vaste app-map OciDeck/, niet los in de huidige map:
           # anders spatte de zip bij het uitpakken over de map waarin je stond
           # (issue #904). 7z kent geen hernoem-bij-inpakken, dus eerst een
           # staging-map vullen en die inpakken.
-          STAGE="ocideck-$VERSIE"
+          STAGE="OciDeck"
           rm -rf "$STAGE"
           mkdir "$STAGE"
           cp -r build/windows/x64/runner/Release/* "$STAGE/"
@@ -251,9 +251,17 @@ jobs:
           if (-not (Test-Path $setup)) { throw "De gebouwde setup ontbreekt: $setup" }
           $doel = Join-Path $env:TEMP "ocideck-smoke-$PID"
 
+          # Build an older installer from this payload to exercise a real version
+          # transition without downloading or trusting a previous release.
+          $baseline = Join-Path $env:RUNNER_TEMP 'ocideck-upgrade-baseline.exe'
+          & $env:OCIDECK_ISCC '/DAppVersion=0.0.0' `
+            "/DBundleDir=$env:GITHUB_WORKSPACE\build\windows\x64\runner\Release" `
+            "/O=$env:RUNNER_TEMP" '/F=ocideck-upgrade-baseline' packaging/windows/ocideck.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Baseline installer compilation failed.' }
+
           # 1. Stil installeren, per gebruiker (/CURRENTUSER — HKA-sleutels
           #    landen dan in HKCU en de proef raakt niets machine-breeds).
-          $p = Start-Process -FilePath $setup -Wait -NoNewWindow -PassThru -ArgumentList `
+          $p = Start-Process -FilePath $baseline -Wait -NoNewWindow -PassThru -ArgumentList `
             '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', `
             '/CURRENTUSER', "/DIR=`"$doel`""
           if ($p.ExitCode -ne 0) {
@@ -266,6 +274,37 @@ jobs:
           while (-not (Test-Path "$doel\unins000.exe") -and $wacht -lt 120) {
             Start-Sleep -Seconds 2; $wacht += 2
           }
+
+          # Upgrade without /DIR or /CURRENTUSER: discover both from the old
+          # installation, even on an administrator runner. Replace stale bytes,
+          # retain user files and keep exactly one uninstall registration.
+          $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\{5AEB475C-9E67-475B-BB99-F52816B739C8}_is1'
+          if ((Get-Item $uninstallKey).GetValue('DisplayVersion') -ne '0.0.0') {
+            throw 'Baseline version was not registered.'
+          }
+          $userFile = Join-Path $doel 'my-presentation.md'
+          Set-Content $userFile 'keep my presentation'
+          Set-Content "$doel\ocideck.exe" 'obsolete executable'
+          $p = Start-Process -FilePath $setup -Wait -NoNewWindow -PassThru -ArgumentList `
+            '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-'
+          if ($p.ExitCode -ne 0) { throw "Upgrade failed: $($p.ExitCode)" }
+          $entry = Get-Item $uninstallKey
+          if ($entry.GetValue('DisplayVersion') -ne $env:VERSIE) { throw 'Upgrade version not registered.' }
+          if ($entry.GetValue('InstallLocation').TrimEnd('\') -ne $doel.TrimEnd('\')) {
+            throw 'Upgrade did not reuse the installation directory.'
+          }
+          if ((Get-FileHash "$doel\ocideck.exe").Hash -ne
+              (Get-FileHash 'build\windows\x64\runner\Release\ocideck.exe').Hash) {
+            throw 'Upgrade left the old executable in place.'
+          }
+          $entries = @(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+            'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' |
+            Where-Object { $_.PSChildName -eq '{5AEB475C-9E67-475B-BB99-F52816B739C8}_is1' })
+          if ($entries.Count -ne 1) { throw 'Upgrade created duplicate installed applications.' }
+          if ((Get-Content $userFile -Raw).Trim() -ne 'keep my presentation') {
+            throw 'Upgrade changed a user presentation.'
+          }
+          Remove-Item $userFile
 
           # 2. Payload en associaties: precies wat de installer belooft.
           #    De VC++-runtime staat er bij omdat deze runner hem wél heeft

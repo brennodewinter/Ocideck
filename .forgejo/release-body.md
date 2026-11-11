@@ -36,14 +36,19 @@ Verify the download below, then:
 normal double-click, no workaround needed. (Check with `spctl -a -t exec
 OciDeck.app`: it reports `source=Notarized Developer ID`.)
 
-**Windows.** Two ways in, both the same build — pick one.
+**Windows.** Use the installer for installation and upgrades. The zip is an optional portable build.
 
 - **Installer** (`ocideck-windows-x64-setup-@VERSIE@.exe`) — installs to Program
   Files with a Start menu shortcut, registers `.ocideck` (and adds OciDeck to
   *Open with…* for `.md`), and uninstalls through *Apps & features*. Without
-  administrator rights, choose the per-user install when it asks.
+  administrator rights, choose the per-user install when it asks. To upgrade,
+  close OciDeck and run the new installer: it reuses the existing installation
+  folder and replaces the app while keeping your settings and presentations.
 - **Portable zip** (`ocideck-windows-x64-@VERSIE@.zip`) — unpack and run
-  `ocideck.exe`. Nothing is written outside the folder, and no rights are needed.
+  `OciDeck/ocideck.exe`. Extract future versions into the same parent folder
+  and confirm replacement of existing files. Older downloads used a versioned
+  `ocideck-<version>/` folder: remove that old app folder manually after moving
+  any presentations you saved there. The zip does not remove old app folders.
 
 Neither checks for updates or contacts a server; a new version reaches you the
 way every other change does — from the repository.
