@@ -129,7 +129,7 @@ Future<void> _applyDocumentEditorMaxWidth(
 /// [_applyDocumentEditorMaxWidth]), een ontbrekende sleutel betekent "nog nooit
 /// gekozen" en krijgt de standaard van 1100 px.
 double? _readDocumentEditorMaxWidth(SharedPreferences prefs) =>
-    switch (prefs.getDouble('documentEditorMaxWidth')) {
+    switch (_pref<double>(prefs, 'documentEditorMaxWidth')) {
       null => 1100,
       <= 0 => null,
       final width => width,
@@ -222,29 +222,29 @@ Future<void> _applyDocumentEditorZoom(SettingsNotifier notifier, double zoom) {
   String? presentationStart,
 })
 _readDocumentSettings(SharedPreferences prefs) => (
-  defaultStyle: prefs.getString('documentDefaultStyle'),
-  styleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
-  chapterPageBreak: prefs.getBool('documentChapterPageBreak') ?? true,
-  cropMarks: prefs.getBool('documentCropMarks') ?? false,
+  defaultStyle: _pref<String>(prefs, 'documentDefaultStyle'),
+  styleEnforced: _pref<bool>(prefs, 'documentStyleEnforced') ?? false,
+  chapterPageBreak: _pref<bool>(prefs, 'documentChapterPageBreak') ?? true,
+  cropMarks: _pref<bool>(prefs, 'documentCropMarks') ?? false,
   editorMaxWidth: _readDocumentEditorMaxWidth(prefs),
   editorWidth: DocumentEditorWidth.values.firstWhere(
-    (value) => value.name == prefs.getString('documentEditorWidth'),
+    (value) => value.name == _pref<String>(prefs, 'documentEditorWidth'),
     // Niets gekozen → de breedte van het vel: dat is de stand waarin de
     // pagina-einden kloppen, en dus de stand waarin de editor het meeste zegt.
     orElse: () => DocumentEditorWidth.page,
   ),
-  editorZoom: (prefs.getDouble('documentEditorZoom') ?? 1.0).clamp(
+  editorZoom: (_pref<double>(prefs, 'documentEditorZoom') ?? 1.0).clamp(
     kDocumentEditorZoomMin,
     kDocumentEditorZoomMax,
   ),
   pageSize:
-      PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??
+      PageSizeSpec.fromId(_pref<String>(prefs, 'documentPageSize')) ??
       PageSizeSpec.a4,
   pageMargins:
-      PageMargins.fromId(prefs.getString('documentPageMargins')) ??
+      PageMargins.fromId(_pref<String>(prefs, 'documentPageMargins')) ??
       const PageMargins(),
-  documentStart: prefs.getString('documentStartDirectory'),
-  presentationStart: prefs.getString('presentationStartDirectory'),
+  documentStart: _pref<String>(prefs, 'documentStartDirectory'),
+  presentationStart: _pref<String>(prefs, 'presentationStartDirectory'),
 );
 
 extension SettingsNotifierStartDirectories on SettingsNotifier {

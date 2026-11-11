@@ -19,12 +19,14 @@ import '../services/privacy/privacy_regions.dart';
 import '../services/recovery_service.dart';
 import '../services/retired_miauw_cleanup.dart';
 import '../services/secret_store.dart';
+import '../utils/json_list_codec.dart';
 import '../utils/log.dart';
 
 part 'parts/settings_provider_classification.dart';
 part 'parts/settings_provider_connections.dart';
 part 'parts/settings_provider_document_style.dart';
 part 'parts/settings_provider_git.dart';
+part 'parts/settings_provider_load.dart';
 part 'parts/settings_provider_privacy.dart';
 part 'parts/settings_provider_traces.dart';
 part 'parts/settings_provider_update_check.dart';
@@ -48,68 +50,6 @@ String _startupLanguageCode() {
       AppLocalizations.preferredLanguageCode(
         PlatformDispatcher.instance.locales,
       );
-}
-
-/// Lees de opgeslagen AI-instellingen; corrupte data degradeert veilig.
-AiSettings _readAiSettings(SharedPreferences prefs) {
-  final aiJson = prefs.getString('aiSettings');
-  if (aiJson == null) return const AiSettings();
-  try {
-    return AiSettings.fromJson(
-      Map<String, Object?>.from(jsonDecode(aiJson) as Map),
-    );
-  } catch (e) {
-    logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
-    return const AiSettings();
-  }
-}
-
-/// Lees de opgeslagen LibrePlan-connector-instellingen; corrupte data
-/// degradeert veilig. Spiegelt [_readAiSettings].
-LibreplanSettings _readLibreplanSettings(SharedPreferences prefs) {
-  final json = prefs.getString('libreplanSettings');
-  if (json == null) return const LibreplanSettings();
-  try {
-    return LibreplanSettings.fromJson(
-      Map<String, Object?>.from(jsonDecode(json) as Map),
-    );
-  } catch (e) {
-    logWarning('SettingsNotifier: ongeldige libreplanSettings-prefs', e);
-    return const LibreplanSettings();
-  }
-}
-
-({
-  List<CockpitColorScheme> schemes,
-  String selectedName,
-  CockpitVisualStyle visualStyle,
-})
-_loadCockpitSettings(
-  SharedPreferences prefs,
-  List<CockpitColorScheme> Function(List<CockpitColorScheme>) mergeSchemes,
-) {
-  final raw = prefs.getString('cockpitColorSchemes');
-  final loaded = raw == null
-      ? const <CockpitColorScheme>[]
-      : (jsonDecode(raw) as List)
-            .map(
-              (item) => CockpitColorScheme.fromJson(
-                Map<String, Object?>.from(item as Map),
-              ),
-            )
-            .toList();
-  final schemes = mergeSchemes(loaded);
-  final requested =
-      prefs.getString('selectedCockpitColorSchemeName') ?? 'Standaard';
-  return (
-    schemes: schemes,
-    selectedName: schemes.any((scheme) => scheme.name == requested)
-        ? requested
-        : 'Standaard',
-    visualStyle: CockpitVisualStyle.fromName(
-      prefs.getString('cockpitVisualStyle'),
-    ),
-  );
 }
 
 /// Removes preferences and downloaded data belonging to the retired module.
@@ -162,7 +102,16 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     : _secrets = secretStore ?? SecretStore(),
       _diskTraces = diskTraces ?? DiskTraces(),
       super(const AppSettings()) {
-    _load();
+    // Vangnet onderaan de per-onderdeel-vangsten in _load zelf: een
+    // onverwachte restfout mag nooit als uncaught zone error ontsnappen en
+    // de initialisatie halverwege laten staan (#2888) — de staat blijft dan
+    // op de defaults en de fout is zichtbaar in de log.
+    unawaited(
+      _load().onError((Object error, StackTrace stack) {
+        logError('SettingsNotifier._load onverwacht afgebroken', error, stack);
+        _reportLoadIssue('_load');
+      }),
+    );
   }
 
   final SecretStore _secrets;
@@ -190,6 +139,21 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   /// zitten controleren dat nooit is opgeslagen. Dat is precies het spoor waar
   /// hij niets te zoeken heeft, dus verdient het een eigen melding.
   final StreamController<int> _secretErrors = StreamController<int>.broadcast();
+
+  /// Sleutels van voorkeuronderdelen die bij [_load] werden geweigerd:
+  /// beschadigde JSON, een verkeerd topniveau, of items die niet te lezen
+  /// waren. De oorspronkelijke bytes staan onder `<sleutel>.refused` (#2888).
+  /// Zelfde vorm als [_persistErrors] — wie hierop wil tonen, abonneert zich.
+  final StreamController<String> _loadIssues =
+      StreamController<String>.broadcast();
+
+  /// Zie [_loadIssues].
+  Stream<String> get loadIssues => _loadIssues.stream;
+
+  void _reportLoadIssue(String key) {
+    if (!_loadIssues.isClosed) _loadIssues.add(key);
+  }
+
   int _secretErrorSeq = 0;
 
   /// Stroom van keychain-fouten voor de UI. Zie [settingsSecretErrorProvider].
@@ -207,6 +171,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   void dispose() {
     _persistErrors.close();
     _secretErrors.close();
+    _loadIssues.close();
     super.dispose();
   }
 
@@ -224,42 +189,19 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       return;
     }
     await _removeRetiredMiauwSettings(prefs);
-    final themeJson = prefs.getString('themeProfile');
-    final profilesJson = prefs.getString('themeProfiles');
-    // Verse installatie (geen opgeslagen profielen): de ingebouwde profielen
-    // met LibreKAT voorop als standaardselectie. Bestaande prefs — ook het
-    // legacy enkelvoudige 'themeProfile' — winnen altijd.
-    final loadedProfiles = profilesJson == null
-        ? [
-            if (themeJson == null)
-              ...ThemeProfile.builtIns
-            else
-              ThemeProfile.fromJson(
-                Map<String, Object?>.from(jsonDecode(themeJson) as Map),
-              ),
-          ]
-        : (jsonDecode(profilesJson) as List)
-              .map(
-                (item) => ThemeProfile.fromJson(
-                  Map<String, Object?>.from(item as Map),
-                ),
-              )
-              .toList();
-    final profiles = _uniqueProfiles(loadedProfiles);
-    final appearanceJson = prefs.getString('appAppearanceProfiles');
-    final loadedAppearances = appearanceJson == null
-        ? const <AppAppearanceProfile>[]
-        : (jsonDecode(appearanceJson) as List)
-              .map(
-                (item) => AppAppearanceProfile.fromJson(
-                  Map<String, Object?>.from(item as Map),
-                ),
-              )
-              .toList();
-    final appearances = _mergeAppearanceProfiles(loadedAppearances);
-    final selectedAppearance =
-        prefs.getString('selectedAppAppearanceProfileName') ?? 'Europa';
-    final cockpit = _loadCockpitSettings(prefs, _mergeCockpitSchemes);
+    // Stijlonderdelen komen uit de bewaakte lezer in
+    // parts/settings_provider_load.dart: elk onderdeel degradeert zelf en
+    // geweigerde bronnen worden hier gemeld én onder `<sleutel>.refused`
+    // geparkeerd (#2888).
+    final style = _decodeStylePrefs(prefs);
+    for (final entry in style.refusedSources.entries) {
+      _reportLoadIssue(entry.key);
+      await _quarantineRefused(prefs, entry.key, entry.value);
+    }
+    final profiles = _uniqueProfiles(style.themeProfiles);
+    final appearances = _mergeAppearanceProfiles(style.appearances);
+    final cockpitSchemes = _mergeCockpitSchemes(style.cockpitSchemes);
+    final requestedCockpit = style.selectedCockpitSchemeName ?? 'Standaard';
     final document = _readDocumentSettings(prefs);
     final ai = _readAiSettings(prefs);
     final libreplan = _readLibreplanSettings(prefs);
@@ -268,19 +210,22 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     // opleveren. Er valt dan ook niets meer bij te werken.
     if (!mounted) return;
     state = AppSettings(
-      languageCode: prefs.getString('languageCode') ?? _startupLanguageCode(),
+      languageCode:
+          _pref<String>(prefs, 'languageCode') ?? _startupLanguageCode(),
       connections: _loadConnections(prefs),
       customChecklists: ChecklistTemplate.decodeList(
-        prefs.getString('customChecklists'),
+        _pref<String>(prefs, 'customChecklists'),
       ),
-      exportDirectory: prefs.getString('exportDirectory'),
+      exportDirectory: _pref<String>(prefs, 'exportDirectory'),
       themeProfiles: profiles.isEmpty ? ThemeProfile.builtIns : profiles,
       selectedThemeProfileName:
-          prefs.getString('selectedThemeProfileName') ?? profiles.first.name,
+          style.selectedThemeProfileName ?? profiles.first.name,
       appAppearanceProfiles: appearances,
       selectedAppAppearanceProfileName:
-          appearances.any((profile) => profile.name == selectedAppearance)
-          ? selectedAppearance
+          appearances.any(
+            (profile) => profile.name == style.selectedAppearanceName,
+          )
+          ? style.selectedAppearanceName!
           : 'Europa',
       documentDefaultStyle: document.defaultStyle,
       documentStyleEnforced: document.styleEnforced,
@@ -293,71 +238,75 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       documentPageMargins: document.pageMargins,
       documentStartDirectory: document.documentStart,
       presentationStartDirectory: document.presentationStart,
-      cockpitColorSchemes: cockpit.schemes,
-      selectedCockpitColorSchemeName: cockpit.selectedName,
-      cockpitVisualStyle: cockpit.visualStyle,
+      cockpitColorSchemes: cockpitSchemes,
+      selectedCockpitColorSchemeName:
+          cockpitSchemes.any((scheme) => scheme.name == requestedCockpit)
+          ? requestedCockpit
+          : 'Standaard',
+      cockpitVisualStyle: style.cockpitVisualStyle,
       recentFiles: _loadRecentFiles(prefs),
       recentFileOrigins: _decodeRecentFileOrigins(
-        prefs.getString('recentFileOrigins'),
+        _pref<String>(prefs, 'recentFileOrigins'),
       ),
-      maxReleaseExportTlpKey: prefs.getString('maxReleaseExportTlp'),
-      minRequiredExportTlpKey: prefs.getString('minRequiredExportTlp'),
+      maxReleaseExportTlpKey: _pref<String>(prefs, 'maxReleaseExportTlp'),
+      minRequiredExportTlpKey: _pref<String>(prefs, 'minRequiredExportTlp'),
       requireClassificationOnExport:
-          prefs.getBool('requireClassificationOnExport') ?? false,
+          _pref<bool>(prefs, 'requireClassificationOnExport') ?? false,
       // #2750: commits ondertekenen met user.signingkey — standaard uit.
-      gitSignCommits: prefs.getBool('gitSignCommits') ?? false,
+      gitSignCommits: _pref<bool>(prefs, 'gitSignCommits') ?? false,
       // #2753: een lettertype van de eigen machine voor tekens die de
       // gebundelde snedes niet hebben; alleen een subset gaat in de PDF.
-      documentPdfFontPath: prefs.getString('documentPdfFontPath'),
+      documentPdfFontPath: _pref<String>(prefs, 'documentPdfFontPath'),
       classificationWatermarkEnabled:
-          prefs.getBool('classificationWatermarkEnabled') ?? false,
+          _pref<bool>(prefs, 'classificationWatermarkEnabled') ?? false,
       // Standaard AAN: een privacycontrole die je eerst moet aanzetten, helpt
       // precies de mensen niet die niet weten dat ze hem nodig hebben.
-      privacyChecksEnabled: prefs.getBool('privacyChecksEnabled') ?? true,
+      privacyChecksEnabled: _pref<bool>(prefs, 'privacyChecksEnabled') ?? true,
       privacyImageFaceDetection:
-          prefs.getBool('privacyImageFaceDetection') ?? true,
+          _pref<bool>(prefs, 'privacyImageFaceDetection') ?? true,
       // Standaard uit: aanzetten verandert wat `qualityBlockExportOnErrors`
       // betekent, en dat mag niet gebeuren zonder dat iemand ernaar greep.
-      privacyStrictSeverity: prefs.getBool('privacyStrictSeverity') ?? false,
+      privacyStrictSeverity:
+          _pref<bool>(prefs, 'privacyStrictSeverity') ?? false,
       // Nooit eerder opgeslagen → de standaard-uitgezette regels. Een lege lijst
       // die de gebruiker zelf heeft gemaakt, blijft leeg: dat is een keuze.
       privacyDisabledRules:
-          prefs.getStringList('privacyDisabledRules')?.toSet() ??
+          _prefStringList(prefs, 'privacyDisabledRules')?.toSet() ??
           defaultDisabledPrivacyRules,
       // Nooit eerder opgeslagen → heel Europa. Een lege verzameling die de
       // gebruiker zelf heeft gemaakt blijft leeg: dan draait alleen de
       // universele laag, en dat is een geldige keuze.
       privacyRegions:
-          prefs.getStringList('privacyRegions')?.toSet() ??
+          _prefStringList(prefs, 'privacyRegions')?.toSet() ??
           defaultPrivacyRegions,
       privacyExportGate: PrivacyExportGateX.fromKey(
-        prefs.getString('privacyExportGate'),
+        _pref<String>(prefs, 'privacyExportGate'),
       ),
       // De echte plek is de sleutelbos; dit is de nog niet gemigreerde
       // waarde, die meteen beschikbaar is. Zie [adoptPrivacyOwnIdentity],
       // dat de sleutelbos náást het laden raadpleegt.
       privacyOwnIdentity:
-          prefs.getString(SettingsPrivacy.legacyOwnIdentityKey) ?? '',
-      uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
-      docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
-        0.8,
-        1.8,
-      ),
+          _pref<String>(prefs, SettingsPrivacy.legacyOwnIdentityKey) ?? '',
+      uiTextScale: (_pref<double>(prefs, 'uiTextScale') ?? 1.0).clamp(1.0, 2.0),
+      docReaderTextScale: (_pref<double>(prefs, 'docReaderTextScale') ?? 1.0)
+          .clamp(0.8, 1.8),
       slideOverviewZoom: _readSlideOverviewZoom(prefs),
-      qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
+      qualityWarningsOnExport:
+          _pref<bool>(prefs, 'qualityWarningsOnExport') ?? true,
       qualityBlockExportOnErrors:
-          prefs.getBool('qualityBlockExportOnErrors') ?? false,
+          _pref<bool>(prefs, 'qualityBlockExportOnErrors') ?? false,
       // Standaard AAN, zelfde reden als privacyChecksEnabled: wie niet weet
       // dat zijn deck bij een andere tool degradeert, zet de controle die
       // hem dat vertelt ook niet aan.
-      marpCompatChecksEnabled: prefs.getBool('marpCompatChecksEnabled') ?? true,
-      contrastMinRatio: (prefs.getDouble('contrastMinRatio') ?? 4.5).clamp(
+      marpCompatChecksEnabled:
+          _pref<bool>(prefs, 'marpCompatChecksEnabled') ?? true,
+      contrastMinRatio: (_pref<double>(prefs, 'contrastMinRatio') ?? 4.5).clamp(
         1.0,
         7.0,
       ),
-      showOpenPreview: prefs.getBool('showOpenPreview') ?? false,
-      allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
-      updateChecksEnabled: prefs.getBool('updateChecksEnabled') ?? false,
+      showOpenPreview: _pref<bool>(prefs, 'showOpenPreview') ?? false,
+      allowRemoteMedia: _pref<bool>(prefs, 'allowRemoteMedia') ?? false,
+      updateChecksEnabled: _pref<bool>(prefs, 'updateChecksEnabled') ?? false,
       aiSettings: ai,
       libreplanSettings: libreplan,
     );

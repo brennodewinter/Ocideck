@@ -47,7 +47,7 @@ Future<void> _applySlideOverviewZoom(SettingsNotifier notifier, double zoom) {
 /// De opgeslagen overzichtszoom, geklemd — een corrupte of met de hand
 /// aangepaste pref degradeert naar een geldige stand, niet naar een crash.
 double _readSlideOverviewZoom(SharedPreferences prefs) =>
-    (prefs.getDouble('slideOverviewZoom') ?? 1.0).clamp(
+    (_pref<double>(prefs, 'slideOverviewZoom') ?? 1.0).clamp(
       kSlideOverviewZoomMin,
       kSlideOverviewZoomMax,
     );
