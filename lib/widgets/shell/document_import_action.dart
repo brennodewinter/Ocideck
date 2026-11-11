@@ -296,7 +296,7 @@ Future<({Uint8List bytes, String name})?> _pickDocument(
   } catch (e) {
     // Leesfout op het gekozen bestand is "niets bruikbaars gekregen" — loggen
     // en terugvallen, niet uit de importknop laten ontsnappen (#2886).
-    logWarning('Document-import: ${file.name} niet leesbaar', e);
+    logWarning('Document-import: ${logName(file.name)} niet leesbaar', e);
     return null;
   }
 }

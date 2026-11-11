@@ -609,7 +609,7 @@ Future<List<PickedPresentation>?> _pickPresentations(
       // Eén gekozen bestand dat niet leest mag de rest van de stapel niet
       // meenemen — en evenmin als ongegrepene fout uit de importknop lopen
       // (#2886).
-      logWarning('Presentatie-import: ${file.name} niet leesbaar', e);
+      logWarning('Presentatie-import: ${logName(file.name)} niet leesbaar', e);
     }
   }
   return presentations;
