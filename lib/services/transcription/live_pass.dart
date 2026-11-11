@@ -72,6 +72,13 @@ class LivePass {
     _incoming = null;
     final outgoing = _outgoing;
     _outgoing = null;
-    if (outgoing != null && !outgoing.isClosed) await outgoing.close();
+    if (outgoing != null && !outgoing.isClosed) {
+      // Een geweigerde route kan stoppen vóór de engine naar audio luistert.
+      // Zonder luisteraar voltooit close() nooit; de opname mag daar niet op
+      // wachten. Met luisteraar blijft de normale afhandeling behouden.
+      final listening = outgoing.hasListener;
+      final closed = outgoing.close();
+      if (listening) await closed;
+    }
   }
 }

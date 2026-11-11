@@ -265,7 +265,9 @@ void main() {
     await tester.tap(find.text('Deelnemers zijn geïnformeerd'));
     await tester.pump();
     session.captureController = StreamController<CallAudioChunk>.broadcast();
-    unawaited(container.read(callRecordingProvider.notifier).start());
+    await tester.runAsync(
+      () => container.read(callRecordingProvider.notifier).start(),
+    );
     await pumpUntil(
       tester,
       () => session.captureStarts == 1,
@@ -308,12 +310,16 @@ void main() {
     expect(container.read(liveServerStatusProvider), LiveServerStatus.off);
     expect(session.connectionState, MeetingConnectionState.connected);
 
-    unawaited(container.read(recordingSessionProvider)?.stop());
-    await pumpUntil(
-      tester,
-      () => container.read(recordingSessionProvider) == null,
-      reason: 'de opname stopte niet',
+    // De duurzame stop schrijft en flusht echte WAV-bestanden. Start en
+    // voltooi die handeling op de echte gebeurtenislus, zoals de app.
+    await tester.runAsync(
+      () => container
+          .read(recordingSessionProvider)!
+          .stop()
+          .timeout(const Duration(seconds: 30)),
     );
+    await tester.pump();
+    expect(container.read(recordingSessionProvider), isNull);
     expect(liveStatus, greaterThan(0), reason: 'de statusregel is niet live');
     expect(liveCounter, 0, reason: 'de brokkenteller staat in een live region');
   });
@@ -336,8 +342,8 @@ void main() {
       // De consent van een opt-in die "127.0.0.1" benoemde — zónder live-
       // endpoint in het profiel faalt de stream op de consent-check; dat
       // is de eerlijke `lost`, geen socket en geen stille afwezigheid.
-      unawaited(
-        container
+      await tester.runAsync(
+        () => container
             .read(callRecordingProvider.notifier)
             .start(liveConsent: const ServerConsent.liveSession('127.0.0.1')),
       );
@@ -370,12 +376,16 @@ void main() {
         CallRecordingPhase.bezig,
       );
 
-      unawaited(container.read(recordingSessionProvider)?.stop());
-      await pumpUntil(
-        tester,
-        () => container.read(recordingSessionProvider) == null,
-        reason: 'de opname stopte niet',
+      // De duurzame stop schrijft en flusht echte WAV-bestanden. Start en
+      // voltooi die handeling op de echte gebeurtenislus, zoals de app.
+      await tester.runAsync(
+        () => container
+            .read(recordingSessionProvider)!
+            .stop()
+            .timeout(const Duration(seconds: 30)),
       );
+      await tester.pump();
+      expect(container.read(recordingSessionProvider), isNull);
     },
   );
 

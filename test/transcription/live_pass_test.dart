@@ -16,6 +16,7 @@ class _Engine implements TranscriptionEngine {
   final received = <AudioChunk>[];
   StreamSubscription<AudioChunk>? sub;
   var pauseOnListen = false;
+  var refuseLive = false;
   TranscriptionOptions? seenOptions;
 
   @override
@@ -41,6 +42,7 @@ class _Engine implements TranscriptionEngine {
   }) {
     seenOptions = options;
     if (!streaming) return null;
+    if (refuseLive) return Stream.error(StateError('live-route geweigerd'));
     final out = StreamController<PartialTranscript>();
     late StreamSubscription<AudioChunk> subscription;
     subscription = chunks.listen((chunk) {
@@ -56,6 +58,23 @@ class _Engine implements TranscriptionEngine {
 }
 
 void main() {
+  test('een geweigerde live-route blokkeert het stoppen niet', () async {
+    final pass = LivePass();
+    final input = StreamController<AudioChunk>.broadcast();
+    final errors = <Object>[];
+    final partials = pass.attach(
+      engine: _Engine(streaming: true)..refuseLive = true,
+      chunks: input.stream,
+    );
+    final subscription = partials!.listen((_) {}, onError: errors.add);
+    await Future<void>.delayed(Duration.zero);
+    expect(errors, hasLength(1));
+    await pass.close().timeout(const Duration(seconds: 1));
+    expect(input.hasListener, isFalse);
+    await subscription.cancel();
+    await input.close();
+  });
+
   test('zonder streaming-engine is er geen live-route', () async {
     final pass = LivePass();
     final partials = pass.attach(
