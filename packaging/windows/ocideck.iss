@@ -62,6 +62,10 @@ AppSupportURL={#AppUrl}/issues
 ; never tell you.
 AppUpdatesURL={#AppUrl}/releases
 DefaultDirName={autopf}\{#AppName}
+; Reuse the existing installation when a downloaded setup is run again.
+UsePreviousAppDir=yes
+UsePreviousPrivileges=yes
+DisableDirPage=auto
 DefaultGroupName={#AppName}
 UninstallDisplayIcon={app}\{#ExeName}
 ; Without this, Setup registers the associations but never tells Explorer to

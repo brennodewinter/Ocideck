@@ -246,6 +246,48 @@ void main() {
     });
   });
 
+  group('Windows upgrades replace an existing installation (#2889)', () {
+    test(
+      'installer keeps its identity, scope and directory across versions',
+      () {
+        for (final directive in [
+          'AppId={{5AEB475C-9E67-475B-BB99-F52816B739C8}',
+          'UsePreviousAppDir=yes',
+          'UsePreviousPrivileges=yes',
+          'DisableDirPage=auto',
+        ]) {
+          expect(iss.split('\n'), contains(directive));
+        }
+      },
+    );
+
+    test(
+      'Windows smoke probe upgrades without overriding scope or directory',
+      () {
+        final upgrade = mirrorYaml.substring(
+          mirrorYaml.indexOf('          # Upgrade without /DIR'),
+          mirrorYaml.indexOf('          # 2. Payload en associaties'),
+        );
+        final arguments = upgrade.substring(
+          upgrade.indexOf('-ArgumentList'),
+          upgrade.indexOf(r'if ($p.ExitCode'),
+        );
+        expect(arguments, isNot(contains('/CURRENTUSER')));
+        expect(arguments, isNot(contains('/DIR=')));
+        for (final check in [
+          'DisplayVersion',
+          'InstallLocation',
+          'Get-FileHash',
+          r'$entries.Count -ne 1',
+          'keep my presentation',
+        ]) {
+          expect(upgrade, contains(check));
+        }
+        expect(mirrorYaml, contains('/DAppVersion=0.0.0'));
+      },
+    );
+  });
+
   group('it stays a dumb, offline installer', () {
     test('nothing in it downloads or checks for a version', () {
       // The Inno ecosystem's usual downloaders, plus the plain script hooks that

@@ -139,6 +139,13 @@ portable tarball — all the same build. The macOS build is signed and notarised
 and opens normally; the Windows and Linux binaries are unsigned, so they warn on
 first launch — the release notes explain how to open them on each platform.
 
+On **Windows**, use `ocideck-windows-x64-setup-<version>.exe` for installation
+and upgrades. Close OciDeck and run the new installer to replace the existing
+installation while keeping settings and presentations. The optional portable zip
+uses a fixed `OciDeck/` folder: extract into the same parent folder and confirm
+file replacement. Older versioned portable folders must be removed manually;
+move any presentations saved inside them first.
+
 On macOS you can also install with [Homebrew](https://brew.sh/), tapping our own
 forge — the canonical source for the cask as well as the app:
 
