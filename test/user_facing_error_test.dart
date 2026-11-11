@@ -12,6 +12,7 @@ import 'package:ocideck/services/import/importers/import_failure.dart' as pres;
 import 'package:ocideck/services/s3/s3_service.dart';
 import 'package:ocideck/services/webdav_service.dart';
 import 'package:ocideck/utils/user_facing_error.dart';
+import 'package:ocideck/widgets/shell/open_failure_message.dart';
 
 /// Tests the caught-error → user-message mapping. With the active language set
 /// to Dutch, `l10n.d(...)` returns its source string verbatim, so we can assert
@@ -112,6 +113,25 @@ void main() {
       }
       final shared = byMessage.values.where((k) => k.length > 1).toList();
       expect(shared, isEmpty, reason: 'delen dezelfde melding: $shared');
+    });
+  });
+
+  group('openFailureMessage', () {
+    test('opslag- en toegangsredenen delen de formaatmelding niet (#2876)', () {
+      final formaat = openFailureMessage(l10n, OpenFailure.unreadable);
+      for (final reason in [
+        OpenFailure.inaccessible,
+        OpenFailure.diskFull,
+        OpenFailure.destinationUnavailable,
+      ]) {
+        final msg = openFailureMessage(l10n, reason);
+        expect(msg, isNotEmpty, reason: '$reason should explain itself');
+        expect(
+          msg,
+          isNot(formaat),
+          reason: '$reason mag niet als formaatfout lezen',
+        );
+      }
     });
   });
 

@@ -1,5 +1,5 @@
 import '../../l10n/app_localizations.dart';
-import '../../services/file_service.dart' show OpenFailure;
+import '../../services/file_service.dart' show ImportFailure, OpenFailure;
 import '../../utils/user_facing_error.dart';
 
 /// Wat er misging, zo precies als het openpad het wist.
@@ -24,6 +24,15 @@ String openFailureMessage(
   ),
   OpenFailure.unreadable => l10n.d(
     'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.',
+  ),
+  OpenFailure.inaccessible => l10n.d(
+    'Kon dit bestand niet openen: geen toegang, of de locatie is weggevallen.',
+  ),
+  // Dezelfde woorden als bij de importer zelf — één bron voor de reden.
+  OpenFailure.diskFull => importFailureMessage(l10n, ImportFailure.diskFull),
+  OpenFailure.destinationUnavailable => importFailureMessage(
+    l10n,
+    ImportFailure.destinationUnavailable,
   ),
   // `unsafe` en `notPresentation` komen hier niet langs: die hebben hun
   // eigen afhandeling (het veiligheidsalarm en OpenResult.notAPresentation).

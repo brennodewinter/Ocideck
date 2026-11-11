@@ -347,20 +347,23 @@ OpenResult _packageOpenResult(
   ImportFailure.notFound => _openFailureResult(
     ref,
     alive,
-    OpenFailure.unreadable,
+    OpenFailure.inaccessible,
   ),
+  // Opslag- en locatiefouten zijn géén leesbaarheidsprobleem: "geen leesbare
+  // tekst" zou de gebruiker het bestand laten herstellen terwijl de schijf
+  // vol is of de doelmap weg (#2876).
   ImportFailure.diskFull => _openFailureResult(
     ref,
     alive,
-    OpenFailure.unreadable,
+    OpenFailure.diskFull,
   ),
   // Belandt hier alleen als zelfs de documentenmap-terugval van
   // [TabsImport._importDestDir] faalde — een catastrofaal schrijfprobleem,
-  // zeldzaam genoeg voor de generieke melding. De drag-drop/Finder-weg toont
-  // via [importFailureMessage] wél de specifieke reden.
+  // maar wel eentje met een eigen melding. De drag-drop/Finder-weg toont
+  // via [importFailureMessage] dezelfde specifieke reden.
   ImportFailure.destinationUnavailable => _openFailureResult(
     ref,
     alive,
-    OpenFailure.unreadable,
+    OpenFailure.destinationUnavailable,
   ),
 };

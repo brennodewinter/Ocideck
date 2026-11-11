@@ -319,10 +319,13 @@ _readAndScanMarkdown(String filePath, String? content) async {
         );
       }
     } catch (e) {
+      // Een gefaalde stat is een toegangsprobleem, geen formaatprobleem —
+      // anders krijgt de gebruiker "geen leesbare tekst" bij een rechten-
+      // of locatiefout (#2876).
       logWarning('FileService.open: cannot stat file', e);
       return (
         raw: null,
-        failure: OpenFailure.unreadable,
+        failure: OpenFailure.inaccessible,
         hasUtf8Bom: false,
         safetyFindings: null,
       );
@@ -331,6 +334,14 @@ _readAndScanMarkdown(String filePath, String? content) async {
       final decoded = decodeUtf8KeepingBomFlag(await file.readAsBytes());
       raw = decoded.text;
       hasUtf8Bom = decoded.hasBom;
+    } on FileSystemException catch (e) {
+      logWarning('FileService.open: file unreadable', e);
+      return (
+        raw: null,
+        failure: OpenFailure.inaccessible,
+        hasUtf8Bom: false,
+        safetyFindings: null,
+      );
     } catch (e) {
       // Non-UTF8 / unreadable bytes must not crash the open flow.
       logWarning('FileService.open: file not readable as UTF-8', e);

@@ -249,6 +249,19 @@ enum OpenFailure {
 
   /// The markdown is present but truncated or unparseable.
   corrupt,
+
+  /// Lezen mislukte om een andere reden dan het formaat — geweigerde toegang,
+  /// een weggevallen volume, een stat die faalde. Los van [unreadable]:
+  /// "geen leesbare tekst" stuurt de gebruiker naar het bestand terwijl de
+  /// toegang of de locatie het probleem is (#2876).
+  inaccessible,
+
+  /// De doelschijf had geen ruimte (spiegelt [ImportFailure.diskFull]).
+  diskFull,
+
+  /// De doelmap kon niet worden aangemaakt of beschreven (spiegelt
+  /// [ImportFailure.destinationUnavailable]).
+  destinationUnavailable,
 }
 
 /// Vraagt (interactief) het wachtwoord van een versleuteld pakket. [retry] is

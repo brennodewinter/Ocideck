@@ -8,6 +8,8 @@ import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'io_fault.dart';
+
 /// Waaróm een bestand niet openging (#646).
 ///
 /// De melding was "Kon dit bestand niet openen." — en dat stond voor vier heel
@@ -53,6 +55,24 @@ void main() {
       );
     },
   );
+
+  test('een toegewezen stat is geen formaatfout: inaccessible, niet '
+      'unreadable (#2876)', () async {
+    // Het bestand staat er en is geldige Markdown — alleen de toegang
+    // faalde. Dat melden als "geen leesbare tekst" stuurde de gebruiker
+    // het bestand repareren terwijl de locatie het probleem was.
+    final dir = Directory(temp.resolveSymbolicLinksSync());
+    final pad = '${dir.path}/geweigerd.md';
+    File(pad).writeAsStringSync('---\nmarp: true\n---\n\n# Titel\n\nInhoud.\n');
+
+    final reden = await runWithFileFault(
+      () => reasonFor(pad),
+      targetPath: pad,
+      failOn: {'length'},
+    );
+
+    expect(reden, OpenFailure.inaccessible);
+  });
 
   test('een binair bestand wordt als onleesbaar herkend', () async {
     // Geen geldige UTF-8. De gebruiker koos iets wat geen tekst is — dan hoort
