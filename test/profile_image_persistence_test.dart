@@ -233,6 +233,43 @@ void main() {
   );
 
   test(
+    'een sidecar met verkeerde veldtypen valt per veld terug (#2877)',
+    () async {
+      final proj = Directory(p.join(tmp.path, 'proj'))..createSync();
+      File(p.join(proj.path, 'ocideck-style.json')).writeAsStringSync(
+        jsonEncode({
+          'accentColor': '#AA0000',
+          'tableCellPaddingPx': 'vijf',
+          'logoSize': true,
+          'brandStripHeight': 'hoog',
+          'documentLogoSize': 'groot',
+          'documentBodyFontSize': [11],
+          'animationDurationMs': {'ms': 2},
+          'tableBorderStyle': 42,
+          'checklistStrikeThrough': 'ja',
+        }),
+      );
+
+      final profile = await carriedProjectStyle(
+        proj.path,
+        const ThemeProfile(accentColor: '#00BB00'),
+      );
+
+      // Wat wel klopt geldt; de verkeerde types vallen op hun eigen
+      // standaard terug in plaats van de openactie te laten klapperen.
+      expect(profile.accentColor, '#AA0000');
+      expect(profile.tableCellPaddingPx, 8.0);
+      expect(profile.logoSize, 96);
+      expect(profile.brandStripHeight, 0.0);
+      expect(profile.documentLogoSize, isNull);
+      expect(profile.documentBodyFontSize, 11.0);
+      expect(profile.animationDurationMs, 2000);
+      expect(profile.tableBorderStyle, TableBorderStyle.boxed);
+      expect(profile.checklistStrikeThrough, isTrue);
+    },
+  );
+
+  test(
     'een .ocideck-pakket draagt de stijl mee als ocideck-style.json (#2644)',
     () async {
       final logo = image(srcA, 'logo.png', _pngA);

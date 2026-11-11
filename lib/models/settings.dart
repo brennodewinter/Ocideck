@@ -666,6 +666,11 @@ class ThemeProfile {
     bool boolValue(String key, bool fallback) =>
         json[key] is bool ? json[key] as bool : fallback;
 
+    // Geen `as num?` hier: een sidecar met een verkeerd type gooide een
+    // TypeError waar de aanroepers alleen FormatException verwachtten, en
+    // nam zo een verder geldige openactie mee (#2877).
+    num? numValue(String key) => json[key] is num ? json[key] as num : null;
+
     final customBulletSvg = stringValue('customBulletSvg');
 
     return ThemeProfile(
@@ -703,8 +708,7 @@ class ThemeProfile {
         orElse: () => TableBorderStyle.boxed,
       ),
       tableBorderColor: _color(json['tableBorderColor'], '#CBD5E1'),
-      tableCellPaddingPx:
-          (json['tableCellPaddingPx'] as num?)?.toDouble() ?? 8.0,
+      tableCellPaddingPx: numValue('tableCellPaddingPx')?.toDouble() ?? 8.0,
       tableAccentHeaderBorder: boolValue('tableAccentHeaderBorder', false),
       titleBackgroundColor: _color(json['titleBackgroundColor'], '#1C2B47'),
       titleTextColor: _color(json['titleTextColor'], '#FFFFFF'),
@@ -719,20 +723,19 @@ class ThemeProfile {
       ),
       logoPath: stringValue('logoPath'),
       logoPosition: stringValue('logoPosition') ?? 'bottom-right',
-      logoSize: (json['logoSize'] as num?)?.round() ?? 96,
+      logoSize: numValue('logoSize')?.round() ?? 96,
       brandStripPath: stringValue('brandStripPath'),
-      brandStripHeight: ((json['brandStripHeight'] as num?)?.toDouble() ?? 0)
-          .clamp(0.0, 0.25),
+      brandStripHeight: (numValue('brandStripHeight')?.toDouble() ?? 0).clamp(
+        0.0,
+        0.25,
+      ),
       titleSubtitleInBrandStrip: boolValue('titleSubtitleInBrandStrip', false),
       logoDarkPath: stringValue('logoDarkPath'),
       documentLogoPath: stringValue('documentLogoPath'),
       documentLogoPosition: stringValue('documentLogoPosition') ?? 'top-right',
-      documentLogoSize: (json['documentLogoSize'] as num?)?.round().clamp(
-        32,
-        480,
-      ),
+      documentLogoSize: numValue('documentLogoSize')?.round().clamp(32, 480),
       documentBodyFontSize: clampDocumentBodyFontSize(
-        (json['documentBodyFontSize'] as num?)?.toDouble() ??
+        numValue('documentBodyFontSize')?.toDouble() ??
             kDocumentDefaultBodyFontSize,
       ),
       documentHeaderText: stringValue('documentHeaderText') ?? '',
@@ -767,7 +770,7 @@ class ThemeProfile {
       closingSlideMarkdown:
           stringValue('closingSlideMarkdown') ?? '# Bedankt\n\nVragen?',
       animationDurationMs: clampThemeAnimationDuration(
-        (json['animationDurationMs'] as num?)?.round() ??
+        numValue('animationDurationMs')?.round() ??
             kThemeDefaultAnimationDurationMs,
       ),
       severityCriticalColor: _color(json['severityCriticalColor'], '#B91C1C'),
