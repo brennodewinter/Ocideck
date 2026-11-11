@@ -251,6 +251,15 @@ function Open-NativePicker {
     return Wait-Probe 'the native Windows file dialog' { Get-NativePicker }
 }
 
+function Get-SourceHash([string]$Path) {
+    # Windows PowerShell inherits pwsh's module search path in Actions;
+    # use .NET directly instead of relying on Get-FileHash autoloading.
+    $stream = [IO.File]::OpenRead($Path)
+    $sha = [Security.Cryptography.SHA256]::Create()
+    try { return [BitConverter]::ToString($sha.ComputeHash($stream)).Replace('-', '').ToLowerInvariant() }
+    finally { $sha.Dispose(); $stream.Dispose() }
+}
+
 function Save-ProbeEvidence([string]$Stage) {
     try {
         $root = Get-AppRoot
@@ -349,7 +358,7 @@ try {
     }
     # Opening must not repair/rewrite original project files behind our back.
     foreach ($source in $manifest.sourceHashes.PSObject.Properties) {
-        $hash = (Get-FileHash (Join-Path $EvidenceDirectory "fixtures\$($source.Name)") -Algorithm SHA256).Hash.ToLowerInvariant()
+        $hash = Get-SourceHash (Join-Path $EvidenceDirectory "fixtures\$($source.Name)")
         if ($hash -ne $source.Value) { throw "Opening modified source: $($source.Name)" }
     }
     [ordered]@{ status = 'passed'; executable = $Executable; opened = $script:opened
