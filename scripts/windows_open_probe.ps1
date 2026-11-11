@@ -303,7 +303,9 @@ try {
     if (Get-Process ocideck -ErrorAction SilentlyContinue) {
         throw 'Another OciDeck instance is running; refusing to drive or kill an unrelated instance.'
     }
-    $script:app = Start-Process -FilePath $Executable -PassThru
+    $script:app = Start-Process -FilePath $Executable -PassThru `
+        -RedirectStandardOutput (Join-Path $EvidenceDirectory 'app.stdout.log') `
+        -RedirectStandardError (Join-Path $EvidenceDirectory 'app.stderr.log')
     $root = Wait-Probe 'the installed app window' { Get-AppRoot } 60
     [void][OpenProbeWindow]::ShowWindow($script:app.MainWindowHandle, 3)
     # UIA alone can expose only FLUTTERVIEW until MSAA is requested on the
@@ -344,8 +346,11 @@ try {
         # without Invoke/Value patterns on this runner. Use its real filename
         # keyboard accelerator and clipboard input instead of app internals.
         [Windows.Forms.SendKeys]::SendWait('%n')
+        Start-Sleep -Milliseconds 300
         [Windows.Forms.Clipboard]::SetText([string]$scenario.path)
         [Windows.Forms.SendKeys]::SendWait('^a^v')
+        Start-Sleep -Milliseconds 300
+        Save-ProbeEvidence "selected-$($scenario.kind)"
         [Windows.Forms.SendKeys]::SendWait('{ENTER}')
         [void](Wait-Probe 'native dialog closing' { $null -eq (Get-NativePicker) })
         [void](Wait-Probe "opened $($scenario.kind) presentation in the editor" {
