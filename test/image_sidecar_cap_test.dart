@@ -109,4 +109,33 @@ void main() {
       );
     },
   );
+
+  test(
+    'een meetfout op de sidecar: lezen slaat over, schrijven blijft luid',
+    () async {
+      // _withinCap laat de meetfout door aan zijn aanroeper: de lezers vangen
+      // hem als "overgeslagen", _writeEntries als SidecarUnreadable — beide
+      // kanten fail closed, de schrijfkant ook hoorbaar.
+      final image = p.join(tmp.path, 'foto.png');
+      final sidecar = p.join(tmp.path, store.sidecarName);
+      // Zonder bestaand bestand kortsluit existsSync de meetfout weg.
+      await store.write(image, 'vorig bijschrift');
+
+      final value = await runWithFileFault(
+        () => store.read(image),
+        targetPath: sidecar,
+        failOn: {'length'},
+      );
+      expect(value, isNull);
+
+      await expectLater(
+        runWithFileFault(
+          () => store.write(image, 'bijschrift'),
+          targetPath: sidecar,
+          failOn: {'length'},
+        ),
+        throwsA(isA<SidecarUnreadable>()),
+      );
+    },
+  );
 }

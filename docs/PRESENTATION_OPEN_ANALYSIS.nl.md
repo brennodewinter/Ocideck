@@ -266,3 +266,30 @@ repro's en geen persoonsgegevens of persoonlijke bestandsnamen uit de opname.
 - Proefbron en logs staan tijdelijk onder `/tmp/ocideck-video-analysis/`.
   De duurzame reproductie-instructies en grenzen staan in deze notitie en
   Pawprint #2877, #2878 en #2879.
+
+### Wat er na de reparatie vastligt (ratchet)
+
+De sweep boven de vijf issues vond zeven extra defecten in dezelfde klasse
+(#2881-#2887) en daarna nog eens zeventien sites van dezelfde vorm. Om de
+klasse structureel dood te maken in plaats van incidenteel:
+
+- **Invariant**: in het open-/importoppervlak staat elke aanroep van een
+  bestandssysteem-methode lexicaal binnen een `try`-body. Een I/O-fout wordt
+  daarmee altijd een uitkomst — waarschuwing, terugval of geweigerde
+  bestemming — en nooit een ontsnapte uitzondering die een meervoudige open
+  of import afbreekt of stil laat verdwijnen.
+- **Poort**: `tool/check_conventions.dart` draait `unguardedIoIn` over
+  `lib/services/file/`, `file_service.dart`, `tabs_provider*.dart`,
+  `image_sidecar_store.dart`, `document_chart_hydration.dart`,
+  `asset_destination.dart` en de twee import-acties
+  (`_fileIoMethodNames`/`_isOpenImportSurface`). De lijst is bewust smal en
+  mag alleen krimpen: haal een site weg door hem te beveiligen.
+- **Harnas**: `test/io_fault.dart` injecteert `FileSystemException`s per
+  methode (`exists`, `length`, `readAsBytes`, `stat`, …) via `IOOverrides`
+  op één genormaliseerd pad, terwijl alle andere I/O echt draait. De
+  regressietests bewijzen per grens dat een fout een uitkomst wordt en nooit
+  een uitzondering of een eindeloos wachten.
+- **Dependency-contract**: `windows_file_picker >= 2.0.2` is de garantie
+  dat de Windows-kiezerworker via `compute` propageert i.p.v. `port.first`
+  eindeloos te laten wachten (#2878). Kiezers die aan die Future hangen
+  vangen de voltoide fout af als "niets gekozen".

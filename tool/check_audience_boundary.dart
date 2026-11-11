@@ -167,19 +167,20 @@ const Map<String, Surface> _registry = {
     SurfaceKind.source,
     'Dezelfde bytes als exportDossier, via de bestandskiezer.',
   ),
-  'lib/services/file/file_service_open.dart::_writeSidecar': Surface(
+  'lib/services/file/file_service_sidecars.dart::_writeSidecar': Surface(
     SurfaceKind.source,
     'De inkt-sidecar naast het deck van de gebruiker zelf.',
   ),
-  'lib/services/file/file_service_open.dart::_writeUserNotesSidecar': Surface(
-    SurfaceKind.source,
-    'De notitie-sidecar naast het deck van de gebruiker zelf.',
-  ),
-  'lib/services/file/file_service_open.dart::_writeMiauwSidecar': Surface(
+  'lib/services/file/file_service_sidecars.dart::_writeUserNotesSidecar':
+      Surface(
+        SurfaceKind.source,
+        'De notitie-sidecar naast het deck van de gebruiker zelf.',
+      ),
+  'lib/services/file/file_service_sidecars.dart::_writeMiauwSidecar': Surface(
     SurfaceKind.source,
     'De MIAUW-sidecar naast het deck van de gebruiker zelf.',
   ),
-  'lib/services/file/file_service_open.dart::_writeSealSidecar': Surface(
+  'lib/services/file/file_service_sidecars.dart::_writeSealSidecar': Surface(
     SurfaceKind.source,
     'De zegel-sidecar naast het deck van de gebruiker zelf.',
   ),

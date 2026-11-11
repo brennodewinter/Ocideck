@@ -160,7 +160,16 @@ class ImageSidecarStore {
   /// stil overslaan laat de gebruiker denken dat zijn bijschriften weg zijn
   /// terwijl ze er nog staan.
   Future<bool> _withinCap(File file) async {
-    final length = await file.length();
+    final int length;
+    try {
+      length = await file.length();
+    } on FileSystemException catch (e) {
+      // Niet te meten = niet te vertrouwen, en toch doorgeven: de lezers
+      // vangen dit als "overgeslagen", `_writeEntries` als SidecarUnreadable
+      // — aan beide kanten fail closed, aan de schrijfkant ook luid (#2885).
+      logWarning('$logLabel: sidecar niet te meten', e);
+      rethrow;
+    }
     if (length <= maxImageSidecarBytes) return true;
     logWarning(
       '$logLabel: sidecar van $length bytes overschrijdt de grens van '

@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/asset_destination.dart';
 import 'package:path/path.dart' as p;
 
+import 'io_fault.dart';
+
 void main() {
   late Directory tmp;
 
@@ -19,6 +21,22 @@ void main() {
       Directory(p.join(tmp.path, 'images'))..createSync(recursive: true);
 
   group('resolveAssetDestination', () {
+    test('een exists-fout is geen bestemming — geen uitzondering', () async {
+      // Kan de code niet vaststellen of een naam vrij is, dan is gokken geen
+      // optie: null terug, en de schrijver meldt straks waarom de map niet
+      // bereikbaar was.
+      final src = write('foto.png', 'aaa');
+      final candidate = p.join(dest().path, 'foto.png');
+
+      final result = await runWithFileFault(
+        () => resolveAssetDestination(dest(), 'foto.png', src),
+        targetPath: candidate,
+        failOn: {'exists'},
+      );
+
+      expect(result, isNull);
+    });
+
     test('gebruikt de naam zelf als die nog vrij is', () async {
       final src = write('foto.png', 'aaa');
       final result = await resolveAssetDestination(dest(), 'foto.png', src);

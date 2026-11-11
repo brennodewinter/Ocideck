@@ -44,6 +44,14 @@ Future<T> runWithFileFault<T>(
           ? _FaultFile(real, failOn, error)
           : real;
     },
+    createDirectory: (path) {
+      final real = parent != null
+          ? parent.createDirectory(path)
+          : IOOverrides.runWithIOOverrides(() => Directory(path), _RealIO());
+      return p.normalize(path) == target
+          ? _FaultDirectory(real, failOn, error)
+          : real;
+    },
   );
 }
 
@@ -119,6 +127,56 @@ class _FaultFile implements File {
   @override
   dynamic noSuchMethod(Invocation invocation) => throw UnimplementedError(
     '_FaultFile delegeert ${invocation.memberName} niet; '
+    'voeg de overschrijving toe als de code onder test hem raakt',
+  );
+}
+
+/// De [Directory]-variant van [_FaultFile]: zelfde afspraak, zelfde leden
+/// zolang de code onder test ze raakt.
+class _FaultDirectory implements Directory {
+  _FaultDirectory(this._delegate, this._failOn, this._error);
+
+  final Directory _delegate;
+  final Set<String> _failOn;
+  final Object _error;
+
+  void _maybeThrow(String member) {
+    if (_failOn.contains(member)) throw _error;
+  }
+
+  @override
+  String get path => _delegate.path;
+
+  @override
+  Future<bool> exists() {
+    _maybeThrow('exists');
+    return _delegate.exists();
+  }
+
+  @override
+  bool existsSync() {
+    _maybeThrow('existsSync');
+    return _delegate.existsSync();
+  }
+
+  @override
+  Stream<FileSystemEntity> list({
+    bool recursive = false,
+    bool followLinks = true,
+  }) {
+    _maybeThrow('list');
+    return _delegate.list(recursive: recursive, followLinks: followLinks);
+  }
+
+  @override
+  Future<FileStat> stat() {
+    _maybeThrow('stat');
+    return _delegate.stat();
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => throw UnimplementedError(
+    '_FaultDirectory delegeert ${invocation.memberName} niet; '
     'voeg de overschrijving toe als de code onder test hem raakt',
   );
 }

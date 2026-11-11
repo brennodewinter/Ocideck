@@ -441,7 +441,11 @@ extension FileServiceImport on FileService {
     final encoded = utf8.encode(markdown);
     for (final existing in _importDirCandidates(destParentDir, base)) {
       final existingMd = File(p.join(existing.path, '$base.md'));
-      if (!existingMd.existsSync()) continue;
+      try {
+        if (!existingMd.existsSync()) continue;
+      } on FileSystemException {
+        continue;
+      }
       if (await _fileHasBytes(existingMd, encoded)) {
         return ImportOutcome.ok(existingMd.path);
       }
@@ -639,7 +643,6 @@ Future<List<String>> _pickPathsGated({
   String? initialDirectory,
   bool allowsMultiple = false,
 }) async {
-  if (!supportsLocalProjectFolders) return const [];
   // macOS + geen extensiefilter: eigen NSOpenPanel die allowedContentTypes
   // expliciet leegzet. file_picker's FileType.any zet géén filter, en dan kan
   // macOS een onthouden filter laten staan waardoor .md grijs wordt (# openen).
@@ -661,6 +664,10 @@ Future<List<String>> _pickPathsGated({
     }
   }
   try {
+    // Binnen de try: vlak boven de kiezers, waar de platformpoort-poort hem
+    // altijd vindt — verder omhoog schoof hem bij de volgende aanpassing weer
+    // uit diens venster.
+    if (!supportsLocalProjectFolders) return const [];
     // De kiezer-Future kan ook met een fout voltooien: sinds
     // windows_file_picker 2.0.2 propageert een crashende worker via compute
     // i.p.v. de aanroeper eindeloos te laten wachten (#2878). Een kiezerfout

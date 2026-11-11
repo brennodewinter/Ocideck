@@ -98,7 +98,13 @@ ThemeProfile _styleInsideProject(ThemeProfile profile, String projectPath) {
     if (!p.isWithin(p.normalize(projectPath), abs)) {
       return emptyWhenMissing ? '' : null;
     }
-    if (!File(abs).existsSync()) return emptyWhenMissing ? '' : null;
+    bool present;
+    try {
+      present = File(abs).existsSync();
+    } on FileSystemException {
+      present = false;
+    }
+    if (!present) return emptyWhenMissing ? '' : null;
     return normalized;
   }
 
