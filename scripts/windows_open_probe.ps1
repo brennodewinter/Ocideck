@@ -55,11 +55,33 @@ if (-not $Worker) {
 Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, System.Windows.Forms, System.Drawing
 Add-Type @'
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 public static class OpenProbeWindow {
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hwnd);
   [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hwnd, int command);
+  private delegate bool EnumWindow(IntPtr hwnd, IntPtr state);
+  [DllImport("user32.dll")] private static extern bool EnumChildWindows(IntPtr hwnd, EnumWindow callback, IntPtr state);
+  [DllImport("oleacc.dll")] private static extern int AccessibleObjectFromWindow(
+      IntPtr hwnd, uint objectId, ref Guid iid, out IntPtr accessible);
+  public static string[] EnableAccessibility(IntPtr root) {
+    // Flutter enables semantics on OBJID_CLIENT requests to its child view.
+    // Query the actual window subtree, as a screen reader does; no app hook.
+    var observations = new List<string>();
+    Action<IntPtr> query = hwnd => {
+      var iid = new Guid("618736e0-3c3d-11cf-810c-00aa00389b71");
+      IntPtr accessible;
+      int hr = AccessibleObjectFromWindow(hwnd, unchecked((uint)-4), ref iid, out accessible);
+      observations.Add(hwnd.ToString() + ": " + hr.ToString());
+      if (accessible != IntPtr.Zero) Marshal.Release(accessible);
+    };
+    query(root);
+    EnumWindow callback = (hwnd, state) => { query(hwnd); return true; };
+    EnumChildWindows(root, callback, IntPtr.Zero);
+    GC.KeepAlive(callback);
+    return observations.ToArray();
+  }
 }
 '@
 $script:app = $null
@@ -187,7 +209,10 @@ try {
     $script:app = Start-Process -FilePath $Executable -PassThru
     $root = Wait-Probe 'the installed app window' { Get-AppRoot } 60
     [void][OpenProbeWindow]::ShowWindow($script:app.MainWindowHandle, 3)
-    # Querying UIA also asks Flutter to expose its real semantics tree.
+    # UIA alone can expose only FLUTTERVIEW until MSAA is requested on the
+    # child HWND. AccessibleObjectFromWindow sends WM_GETOBJECT/OBJID_CLIENT.
+    [OpenProbeWindow]::EnableAccessibility($script:app.MainWindowHandle) |
+        ConvertTo-Json | Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory 'accessibility-activation.json')
     $initial = Wait-Probe 'consent or the welcome actions' {
         Find-Control (Get-AppRoot) '^(Agree|Akkoord gaan|New presentation|Nieuwe presentatie)$' ([Windows.Automation.ControlType]::Button)
     } 60

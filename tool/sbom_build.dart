@@ -115,14 +115,25 @@ const _forkOrigins = <String, ({String vcs, String revision, String subdir})>{
 /// Dot-directories and dot-files are skipped: they are build/editor droppings
 /// (`.DS_Store`, `.dart_tool`) that are not part of the vendored source and
 /// would make the hash machine-dependent.
+///
+/// Hash a symlink's POSIX target text, not the target contents. Git checkouts
+/// without symlink support (normally Windows) materialise exactly that text as
+/// an ordinary file. Both representations must identify the same source tree.
 String forkTreeHash(Directory dir) {
   final prefix = '${dir.path}${Platform.pathSeparator}';
   final lines = <String>[];
   for (final entity in dir.listSync(recursive: true, followLinks: false)) {
-    if (entity is! File) continue;
     final rel = entity.path.substring(prefix.length).replaceAll(r'\', '/');
     if (rel.split('/').any((seg) => seg.startsWith('.'))) continue;
-    lines.add('$rel ${sha256.convert(entity.readAsBytesSync())}');
+    final List<int> bytes;
+    if (entity is Link) {
+      bytes = utf8.encode(entity.targetSync().replaceAll(r'\', '/'));
+    } else if (entity is File) {
+      bytes = entity.readAsBytesSync();
+    } else {
+      continue;
+    }
+    lines.add('$rel ${sha256.convert(bytes)}');
   }
   lines.sort();
   return sha256.convert(utf8.encode('${lines.join('\n')}\n')).toString();

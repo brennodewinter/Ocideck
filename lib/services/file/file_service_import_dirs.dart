@@ -50,13 +50,14 @@ extension _FileServiceImportDirs on FileService {
     }
     return true;
   }
+}
 
-  Future<bool> _fileHasBytes(File file, List<int> bytes) async {
-    if (await file.length() != bytes.length) return false;
-    final onDisk = await file.readAsBytes();
-    for (var i = 0; i < bytes.length; i++) {
-      if (onDisk[i] != bytes[i]) return false;
-    }
-    return true;
+/// Vergelijkt een bestand met pakketbytes; gebruikt geen FileService-toestand.
+Future<bool> _fileHasBytes(File file, List<int> bytes) async {
+  if (await file.length() != bytes.length) return false;
+  final onDisk = await file.readAsBytes();
+  for (var i = 0; i < bytes.length; i++) {
+    if (onDisk[i] != bytes[i]) return false;
   }
+  return true;
 }

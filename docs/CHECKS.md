@@ -2473,11 +2473,17 @@ include spaces and an accent. A fresh title must appear in the editor, and
 source hashes must remain unchanged. A running process or first frame alone
 does not pass this probe.
 
+The driver requests MSAA accessibility on the actual Flutter child window
+before querying UI Automation. The first Windows run exposed only an empty
+`FLUTTERVIEW` until this activation; a screenshot of the consent screen was
+not accepted as evidence that the controls were operable.
+
 The worker has a four-minute outer process deadline, so a stalled UI Automation
 provider cannot occupy the release job indefinitely. Missing native controls,
 missing editor evidence or a timeout fail the candidate; there is no skip or
 `continue-on-error`. Screenshots, UI Automation trees, generated fixtures and
 result/error JSON are uploaded as `windows-open-probe`, also on failure.
+On failure the built installer is retained separately as `windows-probe-installer`.
 This runs on a disposable interactive Windows runner with English or Dutch UI.
 It does not simulate OneDrive faults or prove every filesystem error case.
 Local checks of fixture generation and release wiring use

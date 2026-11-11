@@ -87,9 +87,8 @@ Er worden geen runtime-testhaakjes aan Ocideck toegevoegd.
 Dit vereist een wegwerp-Windows-runner met interactieve desktop en Engelse of
 Nederlandse interface. UIA-identificatie gebeurt op de echte toegankelijkheids-
 boom; fouten daarin komen als rood bewijs terug. Cloudplaceholder-/rechtenfouten
-worden hiermee niet nagebootst. Er is in deze macOS-sessie **geen Windows-app
-uitgevoerd**: syntax-/fixturetests zijn geen bewijs van geslaagde native bediening.
-De eerste kandidaat-run moet dat bewijs leveren in `windows-open-probe`.
+worden hiermee niet nagebootst. Syntax-/fixturetests zijn geen bewijs van
+geslaagde native bediening; het vervolg hieronder legt de echte runs vast.
 
 ## Verificatie
 
@@ -117,3 +116,41 @@ De eerste kandidaat-run moet dat bewijs leveren in `windows-open-probe`.
   fixture-/releasekoppelingtests zijn ook afzonderlijk uitgevoerd. Beide
   PowerShell-bestanden zijn syntactisch geverifieerd. Geen volledige
   `make check-full` of nieuwe Windows-build geclaimd.
+
+## Vervolg: commit, push en uitvoering op Windows
+
+De bestuurder is gecommit als `6daf2854206cfadd1306c65f1b7b1b062f2f1ac5`
+en op Pawprint gezet onder `codex/windows-open-probe`. De Windows-spiegel
+bouwt een afzonderlijke, onveranderlijke kandidaatbranch. Er wordt geen tag
+of publieke release gemaakt.
+
+- Run 43058129791 weigerde terecht de kandidaatinvoer: de commit vermeldt
+  `0.7.7+49`, terwijl `v0.7.8` was meegegeven. De invoer is daarna afgeleid
+  van de vastgezette `pubspec.yaml`; de versiecontrole is behouden.
+- [Run 43058624708](https://github.com/brennodewinter/Ocideck/actions/runs/43058624708)
+  bouwde de app en installer en startte de geïnstalleerde app op Windows
+  Server 2025. De eerste echte proef stopte op het toestemmingsscherm:
+  screenshot aanwezig, maar de UIA-boom bevatte slechts een leeg `FLUTTERVIEW`.
+  Dat is geen bewezen bestandsopenfout; de bestuurder kon nog niet bedienen.
+- De bestuurder vraagt nu via `AccessibleObjectFromWindow`/`OBJID_CLIENT`
+  toegankelijkheid aan op het hoofdvenster en de echte child-HWND's. Dit is
+  het normale MSAA-pad waarmee Flutter zijn semantiek activeert, zonder
+  testbinding of app-haakje. Zie de
+  [Flutter Windows-toegankelijkheidsdocumentatie](https://github.com/flutter/flutter/blob/master/docs/platforms/desktop/windows/Accessibility-on-Windows.md).
+  De bestaande eisen aan native dialoog, titel en bronhashes blijven gelden.
+- Een mislukte kandidaat bewaart voortaan ook de installer als diagnoseartifact,
+  zodat een probleem in de bestuurder niet alle gebouwde bytes weggooit.
+- De lokale poort vond daarnaast een overschreden `FileService`-klasseplafond.
+  De staatloze `_fileHasBytes`-helper is buiten de extensie geplaatst, met
+  behoud van gedrag; het plafond is niet verruimd.
+- De volledige lokale suite bereikte **15.317 geslaagde tests**, één skip en
+  één fout: een verouderde WebRTC-boomhash in de SBOM. Bij onderzoek bleek ook
+  dat de generator echte symlinks oversloeg, maar Windows-placeholders als
+  gewone bestanden meetelde. De generator neemt nu het POSIX-doel van een
+  symlink op als tekst, zonder het doel te volgen. De SBOM is opnieuw afgeleid.
+  Drie regressietests bewaken gelijkheid met Git-placeholders, geen lezen
+  buiten de fork en het detecteren van bronwijzigingen. Samen met SBOM- en
+  packagingtests zijn **78 gerichte tests geslaagd**.
+
+De herproef op Windows en de volledige lokale poort worden gevolgd tot hun
+eindresultaat; het definitieve bewijs wordt hieronder toegevoegd.
