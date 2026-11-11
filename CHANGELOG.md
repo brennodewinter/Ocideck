@@ -49,6 +49,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Presentaties openen met ingeschakelde privacycontrole (#2891).** Een
+  scanner met een providerverwijzing kon niet naar de achtergrondtaak worden
+  verstuurd, waardoor een geldige presentatie na selectie niet opende. De taak
+  ontvangt nu uitsluitend inhoud en scaninstellingen; ondertitels blijven
+  gecontroleerd en de privacycontrole hoeft niet te worden uitgezet.
+
 - **Desktopmedia op Linux en Windows.** Video, ingesloten webvideo en offline
   diagramweergave gebruiken de bijbehorende desktopbackends. De meegebouwde
   audiohelper decodeert geluidsbestanden voor transcriptie; Linux-opname gebruikt
