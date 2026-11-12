@@ -49,6 +49,10 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Een opname stoppen na een geweigerde live-route (#2896).** Het afsluiten
+  wacht niet meer op een audio-controller waar de live-engine nooit naar is
+  gaan luisteren. De duurzame opname kan daardoor netjes worden afgerond.
+
 - **Presentaties openen met ingeschakelde privacycontrole (#2891).** Een
   scanner met een providerverwijzing kon niet naar de achtergrondtaak worden
   verstuurd, waardoor een geldige presentatie na selectie niet opende. De taak
