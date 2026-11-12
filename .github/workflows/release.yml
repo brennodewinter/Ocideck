@@ -256,7 +256,7 @@ jobs:
           $baseline = Join-Path $env:RUNNER_TEMP 'ocideck-upgrade-baseline.exe'
           & $env:OCIDECK_ISCC '/DAppVersion=0.0.0' `
             "/DBundleDir=$env:GITHUB_WORKSPACE\build\windows\x64\runner\Release" `
-            "/O=$env:RUNNER_TEMP" '/F=ocideck-upgrade-baseline' packaging/windows/ocideck.iss
+            "/O$env:RUNNER_TEMP" '/Focideck-upgrade-baseline' packaging/windows/ocideck.iss
           if ($LASTEXITCODE -ne 0) { throw 'Baseline installer compilation failed.' }
 
           # 1. Stil installeren, per gebruiker (/CURRENTUSER — HKA-sleutels
