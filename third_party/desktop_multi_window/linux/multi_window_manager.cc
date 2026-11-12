@@ -114,6 +114,8 @@ std::string MultiWindowManager::Create(FlValue* args) {
   GtkWidget* webview_layer = gtk_fixed_new();
   gtk_container_add(GTK_CONTAINER(video_overlay), GTK_WIDGET(fl_view));
   gtk_overlay_add_overlay(GTK_OVERLAY(video_overlay), webview_layer);
+  // Empty overlay space must reach Flutter; native webview children still get input.
+  gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(video_overlay), webview_layer, TRUE);
   gtk_widget_show(webview_layer);
   gtk_widget_show(video_overlay);
   g_object_set_data(G_OBJECT(window), "ocideck-webview-container", webview_layer);

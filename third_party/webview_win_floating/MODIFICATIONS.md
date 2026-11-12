@@ -18,6 +18,10 @@ logging and Color.toARGB32(), without changing the playback API. Controller
 disposal awaits native resource release so callers can stop playback and clean
 up deterministically.
 
+The overlay passes pointer input through its empty space to Flutter (#2899).
+Native WebKit child windows retain their own input, so visible media controls
+remain interactive. This applies to both the editor and audience windows.
+
 The overlay is stored on GtkWindow under `ocideck-webview-container`. It creates
 no browser and initiates no network traffic. Only an authorized media preview or a requested offline diagram/formula render
 creates a WebKit view. Remove the fork when upstream supports an existing
