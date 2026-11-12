@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.9+51",
-  "documentNamespace": "https://ocideck.app/spdx/cfbeab8c-a58a-5873-8163-a36704428b19",
+  "documentNamespace": "https://ocideck.app/spdx/3757e0bf-2410-545e-8af1-56442293c4ad",
   "creationInfo": {
-    "created": "2026-11-12T06:44:32.485443Z",
+    "created": "2026-11-12T18:54:21.515343Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -5284,7 +5284,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "064e1f68d01e00dd8d71f2996f4bef333f1e7048554bf9b1cda3e44a1639d976"
+          "checksumValue": "a37ffca4f4339a923f3ac14a3c963cb60527204e6c18a897196663c323fb68a1"
         }
       ],
       "sourceInfo": "Vendored from https://github.com/MixinNetwork/flutter-plugins/tree/0c9aa50455106503cacfdb54ef1acfd217af2614/packages/desktop_multi_window at commit 0c9aa50455106503cacfdb54ef1acfd217af2614.",
@@ -5349,7 +5349,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "68f0a0e3b5ad29ac87d9b4962883e3670b67600a8e3f56222fb095b2aa6a80c5"
+          "checksumValue": "f272bc67c0b206663a18c52adda773b56ea9a78bca88e5439d2267592998540d"
         }
       ],
       "comment": "Vendored fork in third_party/webview_win_floating; the local changes are recorded in third_party/webview_win_floating/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
