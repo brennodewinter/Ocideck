@@ -39,11 +39,29 @@ void main() {
   });
 
   test('zelfde coalesceKey voegt snelle bewerkingen tot één stap samen', () {
-    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));
+    var now = DateTime.utc(2026);
+    final n = DocumentNotifier(now: () => now)
+      ..loadDocument(MarkdownDocument.parse(''));
     n.edit('a', coalesceKey: 'typ');
+    now = now.add(const Duration(milliseconds: 699));
     n.edit('ab', coalesceKey: 'typ');
+    now = now.add(const Duration(milliseconds: 699));
     n.edit('abc', coalesceKey: 'typ');
     // Eén ongedaan-stap terug naar de begintoestand vóór het typen.
+    n.undo();
+    expect(n.currentState.document!.source, '');
+    expect(n.canUndo, isFalse);
+  });
+
+  test('een pauze van 700 ms begint een nieuwe ongedaan-stap', () {
+    var now = DateTime.utc(2026);
+    final n = DocumentNotifier(now: () => now)
+      ..loadDocument(MarkdownDocument.parse(''));
+    n.edit('a', coalesceKey: 'typ');
+    now = now.add(const Duration(milliseconds: 700));
+    n.edit('ab', coalesceKey: 'typ');
+    n.undo();
+    expect(n.currentState.document!.source, 'a');
     n.undo();
     expect(n.currentState.document!.source, '');
     expect(n.canUndo, isFalse);

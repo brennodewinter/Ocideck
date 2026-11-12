@@ -44,7 +44,8 @@ void main() {
   Future<DocumentNotifier> open(WidgetTester tester, String text) async {
     await tester.binding.setSurfaceSize(const Size(1200, 900));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(text));
+    final n = DocumentNotifier(now: tester.binding.clock.now)
+      ..loadDocument(MarkdownDocument.parse(text));
     await tester.pumpWidget(harness(n));
     await tester.pump();
     return n;
@@ -104,7 +105,7 @@ void main() {
     final n = await open(tester, formulier);
     for (final deel in ['S', 'Sa', 'Sar', 'Sari']) {
       await tester.enterText(find.byType(TextField).first, deel);
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
     }
     await tester.tap(find.byTooltip('Ongedaan maken'));
     await tester.pump();
