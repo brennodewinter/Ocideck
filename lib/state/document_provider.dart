@@ -158,7 +158,11 @@ class DocumentState {
 /// markeert een losse, discrete stap. Dezelfde coalescing als `DeckNotifier`,
 /// bewust identiek zodat undo overal hetzelfde aanvoelt.
 class DocumentNotifier extends StateNotifier<DocumentState> {
-  DocumentNotifier() : super(const DocumentState());
+  DocumentNotifier({DateTime Function()? now})
+    : _now = now ?? DateTime.now,
+      super(const DocumentState());
+
+  final DateTime Function() _now;
 
   /// De open visuele editor bindt zich hier. Autosave en opslaan roepen
   /// [flushPendingVisualEdit] aan vóór ze de bron lezen, anders mist een
@@ -239,7 +243,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   void edit(String nextSource, {String? coalesceKey, bool visualEdit = false}) {
     final current = state.document;
     if (current == null || current.source == nextSource) return;
-    final now = DateTime.now();
+    final now = _now();
     final canCoalesce =
         coalesceKey != null &&
         coalesceKey == _lastCoalesceKey &&

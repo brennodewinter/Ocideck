@@ -48,6 +48,7 @@ RELEASE_CI_TIMEOUT_MIN=960
 STEP=test
 snap=
 ${allFunctionDefinitions()}
+homebrew_tap_current() { return 0; }
 $mocksAndCall
 ''');
     return Process.runSync('bash', [
