@@ -34,6 +34,7 @@ void main() {
     final dir = Directory.systemTemp.createTempSync('ocideck-status-deadline-');
     addTearDown(() => dir.deleteSync(recursive: true));
     final harness = File('${dir.path}/harness.sh');
+    // Homebrew heeft eigen tests; deze deadlinefixture gebruikt geen echt netwerk.
     harness.writeAsStringSync('''
 set -uo pipefail
 TAG=v9.9.9
@@ -50,6 +51,7 @@ TMP=
 STEP=test
 snap=
 ${allFunctionDefinitions()}
+homebrew_tap_current() { return 0; }
 $mocksAndCall
 ''');
     return Process.runSync('bash', [
@@ -157,6 +159,7 @@ cmd_status
       expect(output, contains('mark 1 release aangemaakt'), reason: output);
       expect(output, contains('macos-gate (goldens) op v9.9.9: success'));
       expect(output, contains('mark 1 webdemo'), reason: output);
+      expect(output, contains('mark 1 Homebrew-tap'), reason: output);
       expect(
         RegExp(r'\[\?\]').allMatches(output).length,
         1,
