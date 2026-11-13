@@ -1534,6 +1534,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Kontrollige kohustuslikke välju ning iga osaleja nime, e-posti aadressi ja tunde.',
+  'Leeg document': 'Tühi dokument',
+  'PE-bewijs': 'CPE tõend',
+  'Receptinzending': 'Retsepti esitamine',
+  'PE-bewijzen uitgeven': 'Väljasta CPE tõendid',
+  'PE-bewijzen maken': 'Loo CPE tõendid',
+
   'Herstel een kopie': 'Taasta koopia',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Taastatud koopia on uues kaustas originaali kõrval.',

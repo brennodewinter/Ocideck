@@ -1553,6 +1553,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Campi necessarii atque nomen, inscriptio electronica et horae cuiusque participis recognoscantur.',
+  'Leeg document': 'Documentum vacuum',
+  'PE-bewijs': 'Testimonium CPE',
+  'Receptinzending': 'Recepta missa',
+  'PE-bewijzen uitgeven': 'Testimonia CPE edere',
+  'PE-bewijzen maken': 'Testimonia CPE creare',
+
   'Herstel een kopie': 'Exemplar restitue',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Exemplar restitutum in novo archivo iuxta originale positum est.',

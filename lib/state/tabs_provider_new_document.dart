@@ -8,7 +8,7 @@ part of 'tabs_provider.dart';
 
 /// De aanmaakkant van de documentmodus — spiegel van `newDeckInNewTab`.
 extension TabsNotifierNewDocument on TabsNotifier {
-  /// Maak een nieuw, leeg document in een nieuw tabblad.
+  /// Maak een document in een nieuw tabblad, eventueel vanuit een sjabloon.
   ///
   /// [filePath] is de plek die de gebruiker in de aanmaakdialoog koos (#2177):
   /// het bestand staat dan meteen op schijf — met de gekozen naam en map —
@@ -21,17 +21,17 @@ extension TabsNotifierNewDocument on TabsNotifier {
   /// naamconflict of een schijffout. Er komt dan óók geen tabblad, zodat de
   /// aanroeper de mislukking kan melden in plaats van stil op een naamloos
   /// tabblad uit te komen.
-  Future<bool> newDocument({String? filePath}) async {
+  Future<bool> newDocument({String? filePath, String source = ''}) async {
     if (filePath == null || !supportsLocalProjectFolders) {
-      _placeDocumentTab(MarkdownDocument.parse(''));
+      _placeDocumentTab(MarkdownDocument.parse(source));
       return true;
     }
-    if (!await _createDocumentFileAt(filePath)) return false;
+    if (!await _createDocumentFileAt(filePath, source)) return false;
     if (!mounted) {
       await _deleteOrphanedDocumentFile(filePath);
       return false;
     }
-    _placeDocumentTab(MarkdownDocument.parse(''), filePath: filePath);
+    _placeDocumentTab(MarkdownDocument.parse(source), filePath: filePath);
     await _settings.addRecentFile(filePath, kind: MarkdownKind.document);
     return true;
   }
@@ -48,14 +48,21 @@ extension TabsNotifierNewDocument on TabsNotifier {
 ///
 /// Levert `false` bij een conflict én bij elke andere schrijffout (de
 /// aanroeper meldt dat aan de gebruiker; er komt dan ook geen tabblad). Een
-/// leeg document is 0 bytes op schijf en `MarkdownDocument.parse('').source`
-/// is `''`, dus `create` volstaat — geen aparte `saveDocument`-schrijving
-/// nodig. `loadDocument(filePath: path)` zet het tabblad daarna schoon met
+/// leeg document is 0 bytes op schijf; sjablooninhoud wordt na het claimen
+/// geschreven. Mislukt die schrijfstap, dan wordt het nieuwe bestand opgeruimd. `loadDocument(filePath: path)` zet het tabblad daarna schoon met
 /// een overeenkomende `savedFileHash`.
-Future<bool> _createDocumentFileAt(String filePath) async {
+Future<bool> _createDocumentFileAt(String filePath, String source) async {
   try {
     await Directory(p.dirname(filePath)).create(recursive: true);
     await File(filePath).create(exclusive: true);
+    try {
+      if (source.isNotEmpty) {
+        await writeStringAtomic(File(filePath), source);
+      }
+    } on FileSystemException {
+      await _deleteOrphanedDocumentFile(filePath);
+      return false;
+    }
     return true;
   } on FileSystemException {
     return false;

@@ -148,6 +148,22 @@ void main() {
       },
     );
 
+    test('sjablooninhoud wordt opgeslagen en schoon geopend', () async {
+      final container = await containerWithLibrary(home);
+      final chosen = p.join(home.path, 'certificate.md');
+      const source = '---\npapersize: a4\n---\n# Bewijs\n\n6,5 PE-uren\n';
+      expect(
+        await container
+            .read(tabsProvider.notifier)
+            .newDocument(filePath: chosen, source: source),
+        isTrue,
+      );
+      expect(File(chosen).readAsStringSync(), source);
+      final current = container.read(tabsProvider).current!;
+      expect(current.documentNotifier!.currentState.document!.source, source);
+      expect(current.documentNotifier!.currentState.isDirty, isFalse);
+    });
+
     test(
       'een bestaand bestand wordt niet overschreven en geeft geen tabblad',
       () async {

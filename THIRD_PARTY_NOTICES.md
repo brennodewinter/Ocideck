@@ -228,3 +228,10 @@ package copyrights and full GNU texts. This covers all copied distro packages,
 including Git and libmpv's additional libraries. It records the separately
 supplied GNOME runtime's exact commit. Missing sources or changed payloads block
 packaging. See `docs/LICENSE_COMPLIANCE.md` for the scoped review.
+
+## ISACA Netherlands Chapter mark
+
+`assets/images/isaca-netherlands-chapter.png` is the separate chapter logo from the
+user-supplied PE attendance example (`20250605-op-t-hof-peter.odt`). ISACA and its
+chapter mark belong to their respective owners; the application's software licence
+does not grant rights to the mark.

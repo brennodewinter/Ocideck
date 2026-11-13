@@ -613,6 +613,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Vérifiez les champs obligatoires ainsi que le nom, l’adresse e-mail et les heures de chaque participant.',
+  'Leeg document': 'Document vierge',
+  'PE-bewijs': 'Attestation CPE',
+  'Receptinzending': 'Envoi de recette',
+  'PE-bewijzen uitgeven': 'Délivrer les attestations CPE',
+  'PE-bewijzen maken': 'Créer les attestations CPE',
+
   'Herstel een kopie': 'Restaurer une copie',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'La copie restaurée se trouve dans un nouveau dossier à côté de l’original.',

@@ -1538,6 +1538,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Pārbaudiet obligātos laukus un katra dalībnieka vārdu, e-pasta adresi un stundas.',
+  'Leeg document': 'Tukšs dokuments',
+  'PE-bewijs': 'CPE apliecinājums',
+  'Receptinzending': 'Receptes iesniegums',
+  'PE-bewijzen uitgeven': 'Izsniegt CPE apliecinājumus',
+  'PE-bewijzen maken': 'Izveidot CPE apliecinājumus',
+
   'Herstel een kopie': 'Atjaunot kopiju',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Atjaunotā kopija atrodas jaunā mapē blakus oriģinālam.',

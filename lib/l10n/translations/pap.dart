@@ -612,6 +612,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Kontrolá e kampunan obligatorio i nòmber, adrès di e-mail i oranan di kada partisipante.',
+  'Leeg document': 'Dokumento bashí',
+  'PE-bewijs': 'Sertifikado CPE',
+  'Receptinzending': 'Entrega di resèpt',
+  'PE-bewijzen uitgeven': 'Emití sertifikadonan CPE',
+  'PE-bewijzen maken': 'Krea sertifikadonan CPE',
+
   'Herstel een kopie': 'Restaurá un kopia',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'E kopia restorá ta den un fòlder nobo banda di e orishente.',

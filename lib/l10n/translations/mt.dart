@@ -1558,6 +1558,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Iċċekkja l-oqsma obbligatorji u l-isem, l-indirizz tal-email u s-sigħat ta’ kull parteċipant.',
+  'Leeg document': 'Dokument vojt',
+  'PE-bewijs': 'Ċertifikat CPE',
+  'Receptinzending': 'Sottomissjoni ta’ riċetta',
+  'PE-bewijzen uitgeven': 'Oħroġ ċertifikati CPE',
+  'PE-bewijzen maken': 'Oħloq ċertifikati CPE',
+
   'Herstel een kopie': 'Irkupra kopja',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Il-kopja rkuprata tinsab f’folder ġdid ħdejn l-oriġinal.',

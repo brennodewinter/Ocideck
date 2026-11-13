@@ -1565,6 +1565,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Ελέγξτε τα υποχρεωτικά πεδία και το όνομα, τη διεύθυνση email και τις ώρες κάθε συμμετέχοντα.',
+  'Leeg document': 'Κενό έγγραφο',
+  'PE-bewijs': 'Βεβαίωση CPE',
+  'Receptinzending': 'Υποβολή συνταγής',
+  'PE-bewijzen uitgeven': 'Έκδοση βεβαιώσεων CPE',
+  'PE-bewijzen maken': 'Δημιουργία βεβαιώσεων CPE',
+
   'Herstel een kopie': 'Επαναφορά αντιγράφου',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Το ανακτημένο αντίγραφο βρίσκεται σε νέο φάκελο δίπλα στο πρωτότυπο.',

@@ -767,6 +767,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Leeg document': 'Blank document',
+  'PE-bewijs': 'CPE certificate',
+  'Receptinzending': 'Recipe submission',
+  'PE-bewijzen uitgeven': 'Issue CPE certificates',
+  'PE-bewijzen maken': 'Create CPE certificates',
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Check the required fields and each participant’s name, email address and hours.',
+
   'Herstel een kopie': 'Restore a copy',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'The restored copy is in a new folder next to the original.',

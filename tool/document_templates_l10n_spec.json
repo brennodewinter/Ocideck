@@ -1,0 +1,36 @@
+{
+  "additions": {
+    "Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.": {
+      "en": "Check the required fields and each participant’s name, email address and hours.",
+      "de": "Prüfen Sie die Pflichtfelder sowie Name, E-Mail-Adresse und Stunden jeder teilnehmenden Person.",
+      "fr": "Vérifiez les champs obligatoires ainsi que le nom, l’adresse e-mail et les heures de chaque participant.",
+      "es": "Compruebe los campos obligatorios y el nombre, el correo electrónico y las horas de cada participante.",
+      "it": "Controlla i campi obbligatori e il nome, l’indirizzo email e le ore di ogni partecipante.",
+      "pt": "Verifique os campos obrigatórios e o nome, o endereço de email e as horas de cada participante.",
+      "fy": "Kontrolearje de ferplichte fjilden en de namme, it e-mailadres en de oeren fan elke dielnimmer.",
+      "pap": "Kontrolá e kampunan obligatorio i nòmber, adrès di e-mail i oranan di kada partisipante.",
+      "la": "Campi necessarii atque nomen, inscriptio electronica et horae cuiusque participis recognoscantur.",
+      "id": "Periksa kolom wajib serta nama, alamat email, dan jam setiap peserta.",
+      "pl": "Sprawdź wymagane pola oraz imię i nazwisko, adres e-mail i godziny każdego uczestnika.",
+      "uk": "Перевірте обов’язкові поля, а також ім’я, електронну адресу та години кожного учасника.",
+      "gsw": "Prüef d Pflichtfälder sowie de Name, d E-Mail-Adrässe und d Stunde vo allne Teilnehmende.",
+      "el": "Ελέγξτε τα υποχρεωτικά πεδία και το όνομα, τη διεύθυνση email και τις ώρες κάθε συμμετέχοντα.",
+      "da": "Kontrollér de obligatoriske felter samt navn, e-mailadresse og timer for hver deltager.",
+      "sv": "Kontrollera de obligatoriska fälten samt namn, e-postadress och timmar för varje deltagare.",
+      "hr": "Provjerite obvezna polja te ime, adresu e-pošte i sate svakog sudionika.",
+      "cs": "Zkontrolujte povinná pole a jméno, e-mailovou adresu a hodiny každého účastníka.",
+      "fi": "Tarkista pakolliset kentät sekä kunkin osallistujan nimi, sähköpostiosoite ja tunnit.",
+      "bg": "Проверете задължителните полета и името, имейл адреса и часовете на всеки участник.",
+      "lv": "Pārbaudiet obligātos laukus un katra dalībnieka vārdu, e-pasta adresi un stundas.",
+      "lt": "Patikrinkite privalomus laukus ir kiekvieno dalyvio vardą, el. pašto adresą bei valandas.",
+      "mt": "Iċċekkja l-oqsma obbligatorji u l-isem, l-indirizz tal-email u s-sigħat ta’ kull parteċipant.",
+      "et": "Kontrollige kohustuslikke välju ning iga osaleja nime, e-posti aadressi ja tunde.",
+      "hu": "Ellenőrizze a kötelező mezőket, valamint minden résztvevő nevét, e-mail-címét és óraszámát.",
+      "ga": "Seiceáil na réimsí riachtanacha agus ainm, seoladh ríomhphoist agus uaireanta gach rannpháirtí.",
+      "ro": "Verificați câmpurile obligatorii și numele, adresa de e-mail și orele fiecărui participant.",
+      "sl": "Preverite obvezna polja ter ime, e-poštni naslov in ure vsakega udeleženca.",
+      "sk": "Skontrolujte povinné polia a meno, e-mailovú adresu a hodiny každého účastníka.",
+      "tr": "Zorunlu alanları ve her katılımcının adını, e-posta adresini ve saatlerini kontrol edin."
+    }
+  }
+}

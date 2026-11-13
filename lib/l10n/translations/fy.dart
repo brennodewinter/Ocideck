@@ -613,6 +613,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Kontrolearje de ferplichte fjilden en de namme, it e-mailadres en de oeren fan elke dielnimmer.',
+  'Leeg document': 'Leech dokumint',
+  'PE-bewijs': 'PE-bewiis',
+  'Receptinzending': 'Reseptynstjoering',
+  'PE-bewijzen uitgeven': 'PE-bewizen útjaan',
+  'PE-bewijzen maken': 'PE-bewizen meitsje',
+
   'Herstel een kopie': 'In kopy weromsette',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'De weromsette kopy stiet yn in nije map njonken it orizjineel.',
