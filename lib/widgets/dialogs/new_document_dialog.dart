@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import '../../l10n/app_localizations.dart';
 import '../../models/library_folder.dart';
+import '../../models/document_template.dart';
 import '../../platform/platform_features.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/safe_filename.dart';
@@ -17,7 +18,13 @@ import '../../utils/safe_filename.dart';
 /// [NewDocumentDialog.show] zelf betekent dat de dialoog geannuleerd is.
 class NewDocumentChoice {
   final String? path;
-  const NewDocumentChoice(this.path);
+  final DocumentTemplate template;
+  final String language;
+  const NewDocumentChoice(
+    this.path, {
+    this.template = DocumentTemplate.empty,
+    this.language = 'en',
+  });
 }
 
 /// Aanmaakdialoog voor een nieuw document (#2177): vraagt een naam — zoals de
@@ -56,6 +63,11 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
   /// er geen map is — samen met [_noSave] de enige geldige toestand zonder
   /// bibliotheek.
   String? _dir;
+  DocumentTemplate _template = DocumentTemplate.empty;
+  String _language =
+      DocumentTemplate.languages.contains(AppLocalizations.activeLanguageCode)
+      ? AppLocalizations.activeLanguageCode
+      : 'en';
 
   /// Een via "Andere map…" gekozen map die niet in de bibliotheken zit — als
   /// aparte optie getoond zodat de keuze zichtbaar blijft.
@@ -160,7 +172,10 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
   void _submit() {
     final l10n = context.l10n;
     if (_noSave) {
-      Navigator.pop(context, const NewDocumentChoice(null));
+      Navigator.pop(
+        context,
+        NewDocumentChoice(null, template: _template, language: _language),
+      );
       return;
     }
     if (!(_formKey.currentState?.validate() ?? false)) return;
@@ -168,7 +183,10 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
     // Kan alleen null zijn als er geen map is — met een bibliotheek of een
     // eigen map staat er altijd een keuze, dus dan is _dir gezet.
     if (path == null) return;
-    Navigator.pop(context, NewDocumentChoice(path));
+    Navigator.pop(
+      context,
+      NewDocumentChoice(path, template: _template, language: _language),
+    );
   }
 
   @override
@@ -205,6 +223,36 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
                     l10n.d('Kies een naam en waar het document komt te staan.'),
                     style: TextStyle(fontSize: 12, color: AppTheme.slate500),
                   ),
+                  const SizedBox(height: 12),
+                  DropdownButtonFormField<DocumentTemplate>(
+                    initialValue: _template,
+                    decoration: InputDecoration(labelText: l10n.d('Sjabloon')),
+                    items: [
+                      for (final template in DocumentTemplate.values)
+                        DropdownMenuItem(
+                          value: template,
+                          child: Text(l10n.d(template.label)),
+                        ),
+                    ],
+                    onChanged: (value) => setState(() => _template = value!),
+                  ),
+                  if (_template != DocumentTemplate.empty) ...[
+                    const SizedBox(height: 12),
+                    DropdownButtonFormField<String>(
+                      initialValue: _language,
+                      decoration: InputDecoration(
+                        labelText: l10n.t('language'),
+                      ),
+                      items: [
+                        for (final code in DocumentTemplate.languages)
+                          DropdownMenuItem(
+                            value: code,
+                            child: Text(AppLocalizations.languageNames[code]!),
+                          ),
+                      ],
+                      onChanged: (value) => setState(() => _language = value!),
+                    ),
+                  ],
                   const SizedBox(height: 12),
                   TextFormField(
                     controller: _nameCtrl,

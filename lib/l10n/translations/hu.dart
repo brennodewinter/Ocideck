@@ -1543,6 +1543,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Ellenőrizze a kötelező mezőket, valamint minden résztvevő nevét, e-mail-címét és óraszámát.',
+  'Leeg document': 'Üres dokumentum',
+  'PE-bewijs': 'CPE-igazolás',
+  'Receptinzending': 'Recept beküldése',
+  'PE-bewijzen uitgeven': 'CPE-igazolások kiállítása',
+  'PE-bewijzen maken': 'CPE-igazolások létrehozása',
+
   'Herstel een kopie': 'Másolat visszaállítása',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'A visszaállított másolat egy új mappában van az eredeti mellett.',

@@ -1552,6 +1552,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Sprawdź wymagane pola oraz imię i nazwisko, adres e-mail i godziny każdego uczestnika.',
+  'Leeg document': 'Pusty dokument',
+  'PE-bewijs': 'Zaświadczenie CPE',
+  'Receptinzending': 'Zgłoszenie przepisu',
+  'PE-bewijzen uitgeven': 'Wydaj zaświadczenia CPE',
+  'PE-bewijzen maken': 'Utwórz zaświadczenia CPE',
+
   'Herstel een kopie': 'Przywróć kopię',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Przywrócona kopia znajduje się w nowym folderze obok oryginału.',

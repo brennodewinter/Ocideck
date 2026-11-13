@@ -1542,6 +1542,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Periksa kolom wajib serta nama, alamat email, dan jam setiap peserta.',
+  'Leeg document': 'Dokumen kosong',
+  'PE-bewijs': 'Sertifikat CPE',
+  'Receptinzending': 'Kiriman resep',
+  'PE-bewijzen uitgeven': 'Terbitkan sertifikat CPE',
+  'PE-bewijzen maken': 'Buat sertifikat CPE',
+
   'Herstel een kopie': 'Pulihkan salinan',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Salinan yang dipulihkan ada di folder baru di samping aslinya.',

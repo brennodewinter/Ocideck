@@ -2398,6 +2398,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Zorunlu alanları ve her katılımcının adını, e-posta adresini ve saatlerini kontrol edin.',
+  'Leeg document': 'Boş belge',
+  'PE-bewijs': 'CPE sertifikası',
+  'Receptinzending': 'Tarif gönderimi',
+  'PE-bewijzen uitgeven': 'CPE sertifikalarını düzenle',
+  'PE-bewijzen maken': 'CPE sertifikaları oluştur',
+
   'Herstel een kopie': 'Kopyayı kurtar',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Kurtarılan kopya, orijinalin yanındaki yeni bir klasörde duruyor.',

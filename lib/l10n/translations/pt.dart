@@ -1567,6 +1567,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Verifique os campos obrigatórios e o nome, o endereço de email e as horas de cada participante.',
+  'Leeg document': 'Documento em branco',
+  'PE-bewijs': 'Certificado CPE',
+  'Receptinzending': 'Envio de receita',
+  'PE-bewijzen uitgeven': 'Emitir certificados CPE',
+  'PE-bewijzen maken': 'Criar certificados CPE',
+
   'Herstel een kopie': 'Restaurar uma cópia',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'A cópia restaurada está numa pasta nova ao lado do original.',

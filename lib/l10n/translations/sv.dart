@@ -1541,6 +1541,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Kontrollera de obligatoriska fälten samt namn, e-postadress och timmar för varje deltagare.',
+  'Leeg document': 'Tomt dokument',
+  'PE-bewijs': 'CPE-intyg',
+  'Receptinzending': 'Receptbidrag',
+  'PE-bewijzen uitgeven': 'Utfärda CPE-intyg',
+  'PE-bewijzen maken': 'Skapa CPE-intyg',
+
   'Herstel een kopie': 'Återställ en kopia',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Den återställda kopian ligger i en ny mapp bredvid originalet.',

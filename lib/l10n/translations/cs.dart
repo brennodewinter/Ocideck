@@ -1542,6 +1542,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Zkontrolujte povinná pole a jméno, e-mailovou adresu a hodiny každého účastníka.',
+  'Leeg document': 'Prázdný dokument',
+  'PE-bewijs': 'Osvědčení CPE',
+  'Receptinzending': 'Odeslání receptu',
+  'PE-bewijzen uitgeven': 'Vydat osvědčení CPE',
+  'PE-bewijzen maken': 'Vytvořit osvědčení CPE',
+
   'Herstel een kopie': 'Obnovit kopii',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Obnovená kopie leží v nové složce vedle originálu.',

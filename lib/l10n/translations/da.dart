@@ -1542,6 +1542,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Kontrollér de obligatoriske felter samt navn, e-mailadresse og timer for hver deltager.',
+  'Leeg document': 'Tomt dokument',
+  'PE-bewijs': 'CPE-bevis',
+  'Receptinzending': 'Indsendelse af opskrift',
+  'PE-bewijzen uitgeven': 'Udsted CPE-beviser',
+  'PE-bewijzen maken': 'Opret CPE-beviser',
+
   'Herstel een kopie': 'Gendan en kopi',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Den gendannede kopi ligger i en ny mappe ved siden af originalen.',

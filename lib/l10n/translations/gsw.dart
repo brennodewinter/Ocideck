@@ -1542,6 +1542,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Prüef d Pflichtfälder sowie de Name, d E-Mail-Adrässe und d Stunde vo allne Teilnehmende.',
+  'Leeg document': 'Leers Dokument',
+  'PE-bewijs': 'CPE-Bestätigung',
+  'Receptinzending': 'Rezept iireiche',
+  'PE-bewijzen uitgeven': 'CPE-Bestätigunge uusstelle',
+  'PE-bewijzen maken': 'CPE-Bestätigunge erstelle',
+
   'Herstel een kopie': 'E Kopii widerherstelle',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Di widerhergstellti Kopii lit in ere neue Datei näben em Original.',

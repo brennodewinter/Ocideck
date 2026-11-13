@@ -1570,6 +1570,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Seiceáil na réimsí riachtanacha agus ainm, seoladh ríomhphoist agus uaireanta gach rannpháirtí.',
+  'Leeg document': 'Doiciméad bán',
+  'PE-bewijs': 'Teastas CPE',
+  'Receptinzending': 'Oideas a chur isteach',
+  'PE-bewijzen uitgeven': 'Eisigh teastais CPE',
+  'PE-bewijzen maken': 'Cruthaigh teastais CPE',
+
   'Herstel een kopie': 'Athchóirigh cóip',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Tá an chóip athchóirithe i bhfillteán nua in aice leis an mbunleagan.',

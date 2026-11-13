@@ -1556,6 +1556,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Перевірте обов’язкові поля, а також ім’я, електронну адресу та години кожного учасника.',
+  'Leeg document': 'Порожній документ',
+  'PE-bewijs': 'Сертифікат CPE',
+  'Receptinzending': 'Подання рецепта',
+  'PE-bewijzen uitgeven': 'Видати сертифікати CPE',
+  'PE-bewijzen maken': 'Створити сертифікати CPE',
+
   'Herstel een kopie': 'Відновити копію',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Відновлена копія лежить у новій папці поруч із оригіналом.',

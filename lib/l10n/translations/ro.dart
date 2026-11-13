@@ -1556,6 +1556,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Verificați câmpurile obligatorii și numele, adresa de e-mail și orele fiecărui participant.',
+  'Leeg document': 'Document gol',
+  'PE-bewijs': 'Certificat CPE',
+  'Receptinzending': 'Trimitere rețetă',
+  'PE-bewijzen uitgeven': 'Emite certificate CPE',
+  'PE-bewijzen maken': 'Creează certificate CPE',
+
   'Herstel een kopie': 'Restaurează o copie',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Copia restaurată se află într-un dosar nou, lângă original.',

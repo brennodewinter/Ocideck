@@ -1561,6 +1561,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Проверете задължителните полета и името, имейл адреса и часовете на всеки участник.',
+  'Leeg document': 'Празен документ',
+  'PE-bewijs': 'Удостоверение CPE',
+  'Receptinzending': 'Изпращане на рецепта',
+  'PE-bewijzen uitgeven': 'Издаване на удостоверения CPE',
+  'PE-bewijzen maken': 'Създаване на удостоверения CPE',
+
   'Herstel een kopie': 'Възстанови копие',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Възстановеното копие е в нова папка до оригинала.',

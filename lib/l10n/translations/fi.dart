@@ -1542,6 +1542,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Tarkista pakolliset kentät sekä kunkin osallistujan nimi, sähköpostiosoite ja tunnit.',
+  'Leeg document': 'Tyhjä asiakirja',
+  'PE-bewijs': 'CPE-todistus',
+  'Receptinzending': 'Reseptin lähetys',
+  'PE-bewijzen uitgeven': 'Myönnä CPE-todistukset',
+  'PE-bewijzen maken': 'Luo CPE-todistukset',
+
   'Herstel een kopie': 'Palauta kopio',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Palautettu kopio on uudessa kansiossa alkuperäisen vieressä.',

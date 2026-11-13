@@ -48,6 +48,7 @@ import '../services/web_asset_store.dart';
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
+import '../utils/atomic_file.dart';
 import '../utils/is_flutter_test.dart';
 import '../utils/log.dart';
 import '../utils/archive_limits.dart';

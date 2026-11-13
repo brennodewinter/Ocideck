@@ -283,6 +283,8 @@ flutter:
     - assets/web_export/
     # Sjablooninhoud als document, één bestand per taal (<id>.nl.md naast
     # <id>.en.md); interfaceteksten van de kiezer blijven via l10n gaan.
+    - assets/document_templates/
+    - assets/images/isaca-netherlands-chapter.png
     - assets/templates/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md

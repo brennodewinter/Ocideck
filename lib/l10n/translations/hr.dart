@@ -1546,6 +1546,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
+      'Provjerite obvezna polja te ime, adresu e-pošte i sate svakog sudionika.',
+  'Leeg document': 'Prazan dokument',
+  'PE-bewijs': 'Potvrda CPE',
+  'Receptinzending': 'Prijava recepta',
+  'PE-bewijzen uitgeven': 'Izdaj potvrde CPE',
+  'PE-bewijzen maken': 'Izradi potvrde CPE',
+
   'Herstel een kopie': 'Vrati kopiju',
   'Herstelkopie staat in een nieuwe map naast het origineel.':
       'Vraćena kopija nalazi se u novoj mapi pokraj izvornika.',
