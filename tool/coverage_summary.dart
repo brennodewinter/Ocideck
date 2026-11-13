@@ -37,6 +37,9 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: a const enum and language list; the template loader
+  // and translation tests exercise its values, but lcov emits no file record.
+  'lib/models/document_template.dart',
   // NO EXECUTABLE LINES (#16): `net_guard.dart` is sinds de extractie een
   // export-shim op AppFoundation `network_guard` — het bestand bevat alleen
   // een export-directive, dus lcov emitteert geen record. De inhoud zelf is
