@@ -307,6 +307,60 @@ class WysiwygNotesField extends StatefulWidget {
 class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
   final TableEmbedControllerStore _tableEditors = TableEmbedControllerStore();
 
+  /// Eigen sleutel op de Quill-editor wanneer de aanroeper geen [editorKey]
+  /// meegeeft — de selectie-reveal hieronder heeft `QuillRawEditorState`
+  /// nodig ook in vlakken die zelf niets aan de editor vragen.
+  final GlobalKey<EditorState> _ownEditorKey = GlobalKey<EditorState>();
+  TextSelection? _lastSelection;
+
+  GlobalKey<EditorState> get _editorKey => widget.editorKey ?? _ownEditorKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _lastSelection = widget.controller.selection;
+    widget.controller.addListener(_revealMovedSelectionEdge);
+  }
+
+  @override
+  void didUpdateWidget(WysiwygNotesField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller.removeListener(_revealMovedSelectionEdge);
+      widget.controller.addListener(_revealMovedSelectionEdge);
+      _lastSelection = widget.controller.selection;
+    }
+  }
+
+  /// #2906: Quill toont bij een niet-ingeklapte selectie het document-eerste
+  /// eindpunt (`getOffsetToRevealCursor` kiest `endpoints.first`), niet het
+  /// eind dat bewoog — een verlengde selectie verdween zo uit beeld, of de
+  /// weergave sprong terug naar het anker. Na elke selectiewijziging brengen
+  /// we het bewogen eind zelf in beeld, zoals `EditableText` het doet. Bij
+  /// een sleep doet Quill dat al per aanwijzerstap; dit dekt het toetsenbord
+  /// en elke programmatisch gezette selectie.
+  void _revealMovedSelectionEdge() {
+    final selection = widget.controller.selection;
+    final previous = _lastSelection;
+    _lastSelection = selection;
+    if (!selection.isValid || selection.isCollapsed || selection == previous) {
+      return;
+    }
+    final moved =
+        previous != null && selection.extentOffset == previous.extentOffset
+        ? selection.base
+        : selection.extent;
+    // Na het frame: het render-model kent dan de nieuwe selectie en de
+    // caret-rect van het eind klopt.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final state = _editorKey.currentState;
+      if (state is QuillRawEditorState && state.scrollController.hasClients) {
+        state.bringIntoView(moved);
+      }
+    });
+  }
+
   /// Knippen en kopiëren zetten de Markdown van de selectie op het klembord,
   /// niet de platte tekst van Quill. Die mist de lijststreep en het vinkje
   /// (#2398). Een knip wist de regelafsluiter mee wanneer de hele regel
@@ -531,7 +585,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 },
                 onTapUp: (details, _) =>
                     _tableEditors.containsTableAt(details.globalPosition),
-                editorKey: widget.editorKey,
+                editorKey: _editorKey,
                 contextMenuBuilder: _contextMenu,
                 expands: widget.expand,
                 padding: widget.contentPadding,
@@ -605,6 +659,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
 
   @override
   void dispose() {
+    widget.controller.removeListener(_revealMovedSelectionEdge);
     _tableEditors.dispose();
     super.dispose();
   }
