@@ -9,6 +9,7 @@ import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/visual_selection_markdown.dart';
 import 'image_embed_builder.dart';
+import '../edge_drag_auto_scroll.dart';
 import '../reader/document_markdown_view.dart'
     show
         documentHeadingSize,
@@ -559,81 +560,86 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
           },
           child: DocumentStyleScope(
             profile: widget.editorTheme.profile,
-            child: QuillEditor.basic(
-              controller: widget.controller,
-              focusNode: widget.focusNode,
-              scrollController: widget.scrollController,
-              config: QuillEditorConfig(
-                onLaunchUrl: widget.onTapLink,
-                // De vastgepinde Quill-versie biedt alleen hier toegang tot lijstnummering.
-                // ignore: experimental_member_use
-                customLeadingBlockBuilder: _searchLeading,
-                // De tabelcellen verwerken hun eigen taps en tekstfocus.
-                // Quill ziet dezelfde tik; zijn caret voor de gehele embed
-                // zou een lang document anders naar een andere rij scrollen.
-                onTapDown: (details, _) {
-                  // Een tik buiten elke tabel bedoelt de documentcaret.
-                  // De skipRequestKeyboard-bewaker van een cel geldt zolang
-                  // die cel de aandacht heeft; als Quill daarna nooit om het
-                  // toetsenbord vroeg blijft de vlag als stil restant liggen
-                  // en slikt hij de eerste buitenklik (#2461).
-                  if (!_tableEditors.containsTableAt(details.globalPosition)) {
-                    widget.controller.skipRequestKeyboard = false;
-                    return false;
-                  }
-                  return true;
-                },
-                onTapUp: (details, _) =>
-                    _tableEditors.containsTableAt(details.globalPosition),
-                editorKey: _editorKey,
-                contextMenuBuilder: _contextMenu,
-                expands: widget.expand,
-                padding: widget.contentPadding,
-                placeholder: widget.hintText,
-                customStyles: defaultStylesFor(widget.editorTheme),
-                // GFM-tabellen komen als `x-embed-table`-embed binnen (zie
-                // MarkdownQuillCodec) en worden hier als gerenderde, bewerkbare
-                // tabel getekend i.p.v. losse woorden. Een `---`-scheiding komt als
-                // `divider`-embed binnen en wordt een horizontale lijn — zonder deze
-                // builder tekent Quill er een RenderErrorBox voor. De
-                // `<!-- toc -->`-marker komt als `x-embed-toc`-embed binnen en
-                // wordt de inhoudsopgave-voorbeeldweergave.
-                // De voetnoot komt in twee delen binnen: de verwijzing als
-                // inline-embed (het merkteken) en de definitie als blok-embed
-                // (de invulbare notenregel).
-                embedBuilders: [
-                  const ImageEmbedBuilder(),
-                  TimelineTableEmbedBuilder(
-                    onDiscreteEdit: widget.onDiscreteVisualEdit,
-                    controllerStore: _tableEditors,
-                  ),
-                  OciMarkedTableEmbedBuilder(
-                    onDiscreteEdit: widget.onDiscreteVisualEdit,
-                    controllerStore: _tableEditors,
-                  ),
-                  TableEmbedBuilder(
-                    onDiscreteEdit: widget.onDiscreteVisualEdit,
-                    controllerStore: _tableEditors,
-                  ),
-                  const DividerEmbedBuilder(),
-                  const TocEmbedBuilder(),
-                  const SpacerEmbedBuilder(),
-                  const TranscriptEmbedBuilder(),
-                  const MermaidEmbedBuilder(),
-                  const ChartEmbedBuilder(),
-                  const PentestBlockEmbedBuilder(),
-                  const FormBlockEmbedBuilder(),
-                  const SourceFragmentEmbedBuilder(),
-                  const FootnoteRefEmbedBuilder(),
-                  const FootnoteDefEmbedBuilder(),
-                ],
-                // Het vangnet. Een embed-type zonder bouwer wierp een
-                // `UnimplementedError` tijdens het tekenen van de regel, en dan
-                // is niet één alinea stuk maar het hele schrijfvlak: er staat
-                // een foutscherm in plaats van het document. Een gat hoort een
-                // rafeltje te zijn, geen dichtgeslagen deur.
-                unknownEmbedBuilder: const FallbackEmbedBuilder(),
-                autoFocus: false,
+            child: EdgeDragAutoScroll(
+              scroll: widget.scrollController,
+              child: QuillEditor.basic(
+                controller: widget.controller,
+                focusNode: widget.focusNode,
+                scrollController: widget.scrollController,
+                config: QuillEditorConfig(
+                  onLaunchUrl: widget.onTapLink,
+                  // De vastgepinde Quill-versie biedt alleen hier toegang tot lijstnummering.
+                  // ignore: experimental_member_use
+                  customLeadingBlockBuilder: _searchLeading,
+                  // De tabelcellen verwerken hun eigen taps en tekstfocus.
+                  // Quill ziet dezelfde tik; zijn caret voor de gehele embed
+                  // zou een lang document anders naar een andere rij scrollen.
+                  onTapDown: (details, _) {
+                    // Een tik buiten elke tabel bedoelt de documentcaret.
+                    // De skipRequestKeyboard-bewaker van een cel geldt zolang
+                    // die cel de aandacht heeft; als Quill daarna nooit om het
+                    // toetsenbord vroeg blijft de vlag als stil restant liggen
+                    // en slikt hij de eerste buitenklik (#2461).
+                    if (!_tableEditors.containsTableAt(
+                      details.globalPosition,
+                    )) {
+                      widget.controller.skipRequestKeyboard = false;
+                      return false;
+                    }
+                    return true;
+                  },
+                  onTapUp: (details, _) =>
+                      _tableEditors.containsTableAt(details.globalPosition),
+                  editorKey: _editorKey,
+                  contextMenuBuilder: _contextMenu,
+                  expands: widget.expand,
+                  padding: widget.contentPadding,
+                  placeholder: widget.hintText,
+                  customStyles: defaultStylesFor(widget.editorTheme),
+                  // GFM-tabellen komen als `x-embed-table`-embed binnen (zie
+                  // MarkdownQuillCodec) en worden hier als gerenderde, bewerkbare
+                  // tabel getekend i.p.v. losse woorden. Een `---`-scheiding komt als
+                  // `divider`-embed binnen en wordt een horizontale lijn — zonder deze
+                  // builder tekent Quill er een RenderErrorBox voor. De
+                  // `<!-- toc -->`-marker komt als `x-embed-toc`-embed binnen en
+                  // wordt de inhoudsopgave-voorbeeldweergave.
+                  // De voetnoot komt in twee delen binnen: de verwijzing als
+                  // inline-embed (het merkteken) en de definitie als blok-embed
+                  // (de invulbare notenregel).
+                  embedBuilders: [
+                    const ImageEmbedBuilder(),
+                    TimelineTableEmbedBuilder(
+                      onDiscreteEdit: widget.onDiscreteVisualEdit,
+                      controllerStore: _tableEditors,
+                    ),
+                    OciMarkedTableEmbedBuilder(
+                      onDiscreteEdit: widget.onDiscreteVisualEdit,
+                      controllerStore: _tableEditors,
+                    ),
+                    TableEmbedBuilder(
+                      onDiscreteEdit: widget.onDiscreteVisualEdit,
+                      controllerStore: _tableEditors,
+                    ),
+                    const DividerEmbedBuilder(),
+                    const TocEmbedBuilder(),
+                    const SpacerEmbedBuilder(),
+                    const TranscriptEmbedBuilder(),
+                    const MermaidEmbedBuilder(),
+                    const ChartEmbedBuilder(),
+                    const PentestBlockEmbedBuilder(),
+                    const FormBlockEmbedBuilder(),
+                    const SourceFragmentEmbedBuilder(),
+                    const FootnoteRefEmbedBuilder(),
+                    const FootnoteDefEmbedBuilder(),
+                  ],
+                  // Het vangnet. Een embed-type zonder bouwer wierp een
+                  // `UnimplementedError` tijdens het tekenen van de regel, en dan
+                  // is niet één alinea stuk maar het hele schrijfvlak: er staat
+                  // een foutscherm in plaats van het document. Een gat hoort een
+                  // rafeltje te zijn, geen dichtgeslagen deur.
+                  unknownEmbedBuilder: const FallbackEmbedBuilder(),
+                  autoFocus: false,
+                ),
               ),
             ),
           ),

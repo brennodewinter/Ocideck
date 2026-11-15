@@ -20,6 +20,7 @@ import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../utils/text_search.dart';
 import '../../utils/deck_source_search.dart';
+import '../edge_drag_auto_scroll.dart';
 import '../markdown_editor/markdown_editor_actions.dart';
 import '../markdown_editor/markdown_editor_theme.dart';
 import '../markdown_editor/markdown_editor_toolbar.dart';
@@ -1003,54 +1004,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                           topPadding: _editorTopPadding,
                         ),
                       ),
-                      Semantics(
-                        label: context.l10n.d('Markdown-broneditor'),
-                        textField: true,
-                        child: TextField(
-                          controller: _ctrl,
-                          undoController: _undoController,
-                          autocorrect: false,
-                          smartDashesType: SmartDashesType.disabled,
-                          smartQuotesType: SmartQuotesType.disabled,
-                          spellCheckConfiguration:
-                              WidgetsBinding
-                                  .instance
-                                  .platformDispatcher
-                                  .nativeSpellCheckServiceDefined
-                              ? SpellCheckConfiguration(
-                                  misspelledTextStyle: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    decorationStyle: TextDecorationStyle.wavy,
-                                    decorationColor: AppTheme.dangerFg,
-                                  ),
-                                )
-                              : const SpellCheckConfiguration.disabled(),
-                          focusNode: _editorFocusNode,
-                          scrollController: _scrollController,
-                          maxLines: null,
-                          expands: true,
-                          textAlignVertical: TextAlignVertical.top,
-                          style: const TextStyle(
-                            fontFamily: 'monospace',
-                            fontSize: 13,
-                            height: 1.5,
-                          ),
-                          inputFormatters: const [
-                            MarkdownSmartInputFormatter(),
-                          ],
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(
-                              8,
-                              _editorTopPadding,
-                              16,
-                              16,
-                            ),
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.transparent,
-                          ),
-                        ),
-                      ),
+                      _sourceTextField(this),
                     ],
                   ),
                 ),

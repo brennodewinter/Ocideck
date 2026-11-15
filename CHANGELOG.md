@@ -49,6 +49,18 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Tekst volgt de selectie in de visuele editor (#2906).** Bij het verlengen
+  van een selectie — met het toetsenbord of na een zoeksprong — verdween het
+  bewogen selectie-eind buiten beeld: Quill toonde bij een verlengde selectie
+  het anker in plaats van de caret. De visuele schrijfstand brengt nu het eind
+  dat bewoog in beeld, zoals de bron-editors al deden.
+
+- **Sleepselectie scrolt door aan de veldrand (#2907).** Hield je de aanwijzer
+  tijdens een tekstsleep stil boven of onder het veld, dan stopte het scrollen.
+  De documenteditor (visueel én bron) en de presentatie-broneditor scrollen nu
+  door met een snelheid die groeit naarmate de aanwijzer verder voorbij de
+  rand staat — zoals een tekstverwerker.
+
 - **Een opname stoppen na een geweigerde live-route (#2896).** Het afsluiten
   wacht niet meer op een audio-controller waar de live-engine nooit naar is
   gaan luisteren. De duurzame opname kan daardoor netjes worden afgerond.

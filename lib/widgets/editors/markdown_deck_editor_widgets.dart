@@ -5,6 +5,60 @@ part of 'markdown_deck_editor.dart';
 // plus de opmaakbalk. Een part omdat ze op de private editor-state leunen; zie
 // het hoofdbestand.
 
+/// Het schrijfvlak zelf. Staat in de part omdat het hoofdbestand op zijn
+/// regelplafond zit (#1509) — zelfde reden als de widgets hierboven.
+Widget _sourceTextField(_MarkdownDeckEditorState state) {
+  return Semantics(
+    label: state.context.l10n.d('Markdown-broneditor'),
+    textField: true,
+    child: EdgeDragAutoScroll(
+      scroll: state._scrollController,
+      child: TextField(
+        controller: state._ctrl,
+        undoController: state._undoController,
+        autocorrect: false,
+        smartDashesType: SmartDashesType.disabled,
+        smartQuotesType: SmartQuotesType.disabled,
+        spellCheckConfiguration:
+            WidgetsBinding
+                .instance
+                .platformDispatcher
+                .nativeSpellCheckServiceDefined
+            ? SpellCheckConfiguration(
+                misspelledTextStyle: TextStyle(
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.wavy,
+                  decorationColor: AppTheme.dangerFg,
+                ),
+              )
+            : const SpellCheckConfiguration.disabled(),
+        focusNode: state._editorFocusNode,
+        scrollController: state._scrollController,
+        maxLines: null,
+        expands: true,
+        textAlignVertical: TextAlignVertical.top,
+        style: const TextStyle(
+          fontFamily: 'monospace',
+          fontSize: 13,
+          height: 1.5,
+        ),
+        inputFormatters: const [MarkdownSmartInputFormatter()],
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(
+            8,
+            _MarkdownDeckEditorState._editorTopPadding,
+            16,
+            16,
+          ),
+          border: InputBorder.none,
+          filled: true,
+          fillColor: Colors.transparent,
+        ),
+      ),
+    ),
+  );
+}
+
 Widget _formattingBar(_MarkdownDeckEditorState state) {
   final theme = MarkdownEditorTheme.editorPanel(
     text: AppTheme.ink,

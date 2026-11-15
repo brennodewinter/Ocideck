@@ -126,32 +126,39 @@ class _DocumentSourceFieldState extends State<_DocumentSourceField> {
         },
         child: Stack(
           children: [
-            TextField(
-              controller: widget.controller,
-              focusNode: widget.focusNode,
-              scrollController: _scroll,
-              // Dezelfde typ-hulp als de deck-broneditor: lijstjes (ook
-              // taaklijsten) zetten door bij Enter en haken sluiten zichzelf.
-              inputFormatters: const [MarkdownSmartInputFormatter()],
-              maxLines: null,
-              expands: true,
-              textAlignVertical: TextAlignVertical.top,
-              cursorColor: theme.colorScheme.primary,
-              keyboardType: TextInputType.multiline,
-              style: TextStyle(
-                fontFamily: 'monospace',
-                fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-                fontSize: _kDocumentSourceFontSize,
-                height: _kDocumentSourceLineHeightFactor,
-                color: theme.colorScheme.onSurface,
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.fromLTRB(
-                  gutterWidth + 8,
-                  _kDocumentSourceTopPadding,
-                  16,
-                  16,
+            EdgeDragAutoScroll(
+              scroll: _scroll,
+              child: TextField(
+                controller: widget.controller,
+                focusNode: widget.focusNode,
+                scrollController: _scroll,
+                // Dezelfde typ-hulp als de deck-broneditor: lijstjes (ook
+                // taaklijsten) zetten door bij Enter en haken sluiten zichzelf.
+                inputFormatters: const [MarkdownSmartInputFormatter()],
+                maxLines: null,
+                expands: true,
+                textAlignVertical: TextAlignVertical.top,
+                cursorColor: theme.colorScheme.primary,
+                keyboardType: TextInputType.multiline,
+                style: TextStyle(
+                  fontFamily: 'monospace',
+                  fontFamilyFallback: const [
+                    'Menlo',
+                    'Consolas',
+                    'Courier New',
+                  ],
+                  fontSize: _kDocumentSourceFontSize,
+                  height: _kDocumentSourceLineHeightFactor,
+                  color: theme.colorScheme.onSurface,
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.fromLTRB(
+                    gutterWidth + 8,
+                    _kDocumentSourceTopPadding,
+                    16,
+                    16,
+                  ),
                 ),
               ),
             ),
