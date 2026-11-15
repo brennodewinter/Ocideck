@@ -15,7 +15,16 @@ class ImportSecurityAlarmDialog {
   static Color get _alarmRed => AppTheme.dangerFg;
   static Color get _alarmBg => AppTheme.dangerBg;
 
-  static Future<void> show(BuildContext context, ImportSecurityAlarm alarm) {
+  /// [title] en [lead] overschrijven de kop en de uitleg voor een weigering
+  /// die geen geopende presentatie betreft — zoals een bestand dat ín een
+  /// document werd geweigerd (#2909). Zonder ze blijft de dialoog de
+  /// open-presentatie-variant.
+  static Future<void> show(
+    BuildContext context,
+    ImportSecurityAlarm alarm, {
+    String? title,
+    String? lead,
+  }) {
     final l10n = context.l10n;
     return showDialog<void>(
       context: context,
@@ -28,7 +37,7 @@ class ImportSecurityAlarmDialog {
             child: Icon(Icons.gpp_bad_outlined, color: _alarmRed, size: 30),
           ),
           title: Text(
-            l10n.d('Onveilige presentatie geblokkeerd'),
+            title ?? l10n.d('Onveilige presentatie geblokkeerd'),
             textAlign: TextAlign.center,
             style: TextStyle(color: _alarmRed, fontWeight: FontWeight.w800),
           ),
@@ -39,9 +48,10 @@ class ImportSecurityAlarmDialog {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    l10n.d(
-                      'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.',
-                    ),
+                    lead ??
+                        l10n.d(
+                          'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.',
+                        ),
                     style: TextStyle(fontSize: 13, color: AppTheme.slate700),
                   ),
                   const SizedBox(height: 16),

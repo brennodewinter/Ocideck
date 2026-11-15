@@ -1556,6 +1556,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Markdown-bestand…': 'Fișier Markdown…',
+  'Markdown-bestand invoegen': 'Inserează fișier Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Acest fișier nu conține text lizibil; alegeți un fișier Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Acest fișier este gol; nu există nimic de inserat.',
+  'Onveilig bestand niet ingevoegd': 'Fișier nesigur neinserat',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Fișierul conține conținut care poate executa cod, iar un document ar trebui să conțină doar date — nimic executabil.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Verificați câmpurile obligatorii și numele, adresa de e-mail și orele fiecărui participant.',
   'Leeg document': 'Document gol',

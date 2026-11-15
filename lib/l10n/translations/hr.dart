@@ -1546,6 +1546,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Markdown-bestand…': 'Markdown datoteka…',
+  'Markdown-bestand invoegen': 'Umetni Markdown datoteku',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Ova datoteka ne sadrži čitljiv tekst; odaberite Markdown datoteku.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Ova datoteka je prazna; nema ništa za umetnuti.',
+  'Onveilig bestand niet ingevoegd': 'Nesigurna datoteka nije umetnuta',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Datoteka sadrži sadržaj koji može izvršavati kod, a dokument bi trebao sadržavati samo podatke — ništa izvršno.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Provjerite obvezna polja te ime, adresu e-pošte i sate svakog sudionika.',
   'Leeg document': 'Prazan dokument',

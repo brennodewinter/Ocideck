@@ -5293,6 +5293,25 @@ visual editor the spacer is a single block you can click, delete with
 Backspace/Delete and bring back with Undo; in the reader and every export (PDF,
 HTML, Word, LibreOffice, LaTeX, EPUB) it becomes the same extra space.
 
+### Inserting a Markdown file
+
+*(Added 2026-11-15.)* When the text you need already lives in another `.md`
+file — notes, an earlier section, an export from another tool — **Markdown-bestand…**
+("Markdown file…") in the **Invoegen** (Insert) palette puts its contents at the
+cursor instead of making you open and copy it by hand. The file lands as its own
+block, as a single edit you can take back with **Undo**, in **Visual** and
+**Source** alike — the same way a table or chart lands.
+
+The text goes in exactly as it stands: nothing is rewritten, merged or
+"improved", so what you had in the file is what you get in the document. Two
+guards apply before anything is inserted. A file that turns out not to be
+readable text (for instance a binary file renamed `.md`) is refused with a
+message saying so. And the same safety scan that guards opening a presentation
+runs on the contents: text carrying something that can execute code — a script,
+an embedded frame, a `javascript:` link — is not inserted at all, because a
+document is meant to hold data, not instructions. The alarm then lists what was
+found, verbatim.
+
 ### Giving a document a style
 
 A **Style** button in the toolbar picks one document-wide style — a font-and-styling

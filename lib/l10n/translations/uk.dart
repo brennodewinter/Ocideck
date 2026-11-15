@@ -1556,6 +1556,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Markdown-bestand…': 'Файл Markdown…',
+  'Markdown-bestand invoegen': 'Вставити файл Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Цей файл не містить читабельного тексту; виберіть файл Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Цей файл порожній; немає чого вставляти.',
+  'Onveilig bestand niet ingevoegd': 'Небезпечний файл не вставлено',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Файл містить вміст, що може виконувати код, а документ має містити лише дані — нічого виконуваного.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Перевірте обов’язкові поля, а також ім’я, електронну адресу та години кожного учасника.',
   'Leeg document': 'Порожній документ',

@@ -43,6 +43,10 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertTimeline;
   final VoidCallback onInsertMermaid;
   final VoidCallback onInsertImage;
+
+  /// Inhoud van een bestaand `.md`-bestand op de cursor (#2909): opent de
+  /// bestandskiezer; de rest (scan, invoeging) zit in de aanroeper.
+  final VoidCallback onInsertMarkdownFile;
   final VoidCallback onInsertPageBreak;
   final VoidCallback onInsertToc;
   final VoidCallback onInsertSpacer;
@@ -119,6 +123,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertTimeline,
     required this.onInsertMermaid,
     required this.onInsertImage,
+    required this.onInsertMarkdownFile,
     required this.onInsertPageBreak,
     required this.onInsertToc,
     required this.onInsertSpacer,
@@ -420,6 +425,7 @@ class _DocEditorToolbar extends StatelessWidget {
         9 => onInsertTimeline(),
         2 => onInsertMermaid(),
         3 => onInsertImage(),
+        12 => onInsertMarkdownFile(),
         5 => onInsertPageBreak(),
         6 => onInsertToc(),
         10 => onInsertSpacer(),
@@ -434,6 +440,11 @@ class _DocEditorToolbar extends StatelessWidget {
         _insertItem(9, Icons.timeline_outlined, l10n.d('Tijdlijn')),
         _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
         _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
+        _insertItem(
+          12,
+          Icons.upload_file_outlined,
+          l10n.d('Markdown-bestand…'),
+        ),
         _insertItem(
           5,
           Icons.insert_page_break_outlined,

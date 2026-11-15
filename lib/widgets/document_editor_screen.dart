@@ -1,6 +1,7 @@
 import '../services/document_page_setup.dart';
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:material_ui/material_ui.dart';
@@ -36,6 +37,7 @@ import '../services/file_service.dart';
 import '../services/form_document_blocks.dart';
 import '../services/html_image_embedder.dart';
 import '../services/image_service.dart' show ImageImportFailure, ImageService;
+import '../services/markdown_safety.dart';
 import '../services/markdown_table_codec.dart';
 import '../services/document_timeline.dart';
 import '../services/marp_html_service.dart';
@@ -81,6 +83,7 @@ import 'edge_drag_auto_scroll.dart';
 import 'dialogs/document_export_dialog.dart';
 import 'dialogs/tlp_audience_action.dart';
 import 'dialogs/image_carousel_picker.dart';
+import 'dialogs/import_security_alarm_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'document_page_chrome.dart';
 import 'editors/_editor_field.dart' show reportImageImportFailure;
@@ -591,6 +594,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onInsertTimeline: _insertTimeline,
     onInsertMermaid: _insertMermaid,
     onInsertImage: _insertImage,
+    onInsertMarkdownFile: () => unawaited(_insertMarkdownFile()),
     onPaste: () => unawaited(_smartPaste()),
     onUndo: canUndo ? _undo : null,
     onRedo: canRedo ? _redo : null,

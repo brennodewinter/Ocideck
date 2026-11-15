@@ -167,6 +167,55 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
     final alt = markdownImageAlt(picked.caption);
     _insertBlock('![$alt]($reference)');
   }
+
+  /// Voeg de inhoud van een bestaand `.md`-bestand in op de cursor (#2909).
+  /// De inhoud staat in [_insertMarkdownFileBody]: top-level, want
+  /// deze klasse zit op haar klasseplafond.
+  Future<void> _insertMarkdownFile() => _insertMarkdownFileBody(this);
+}
+
+/// De kiezer → scan → invoeging achter [_insertMarkdownFile] (#2909). De
+/// kiezer levert bytes — daardoor werkt dezelfde route op web, waar een
+/// gekozen bestand geen pad heeft — en de tekst loopt door dezelfde
+/// blokinvoeging als een tabel: eigen alinea, eigen undo-stap, in Visueel
+/// én Bron. Vooraf dezelfde fail-closed scan als bij het openen van een
+/// deck: inhoud uit een bestand is net zo goed vreemde inhoud, ook al komt
+/// hij in een eigen document terecht.
+Future<void> _insertMarkdownFileBody(_DocumentEditorScreenState s) async {
+  final l10n = s.context.l10n;
+  final picked = await pickMarkdownInsertBytes(
+    dialogTitle: l10n.d('Markdown-bestand invoegen'),
+  );
+  if (picked == null || !s.mounted) return;
+  void say(String message) => ScaffoldMessenger.of(
+    s.context,
+  ).showSnackBar(SnackBar(content: Text(message)));
+  final content = decodeInsertableMarkdown(picked.bytes);
+  if (content == null) {
+    say(
+      l10n.d(
+        'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.',
+      ),
+    );
+    return;
+  }
+  if (content.trim().isEmpty) {
+    say(l10n.d('Dit bestand is leeg; er is niets om in te voegen.'));
+    return;
+  }
+  final findings = MarkdownSafetyScanner.scan(content);
+  if (findings.isNotEmpty) {
+    await ImportSecurityAlarmDialog.show(
+      s.context,
+      ImportSecurityAlarm(path: picked.name, findings: findings),
+      title: l10n.d('Onveilig bestand niet ingevoegd'),
+      lead: l10n.d(
+        'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.',
+      ),
+    );
+    return;
+  }
+  s._insertBlock(content);
 }
 
 /// De nieuw-risicodossier-dialoog (#2492): de methodekeuze in gewone taal,

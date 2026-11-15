@@ -1542,6 +1542,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Markdown-bestand…': 'Datoteka Markdown…',
+  'Markdown-bestand invoegen': 'Vstavi datoteko Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Ta datoteka ne vsebuje berljivega besedila; izberite datoteko Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Ta datoteka je prazna; ničesar ni za vstaviti.',
+  'Onveilig bestand niet ingevoegd': 'Nevarna datoteka ni bila vstavljena',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Datoteka vsebuje vsebino, ki lahko izvaja kodo, dokument pa naj vsebuje samo podatke — nič izvedljivega.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Preverite obvezna polja ter ime, e-poštni naslov in ure vsakega udeleženca.',
   'Leeg document': 'Prazen dokument',

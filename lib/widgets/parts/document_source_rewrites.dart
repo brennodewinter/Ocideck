@@ -40,6 +40,25 @@ part of '../document_editor_screen.dart';
   return ('$before$insertion$after', before.length + insertion.length);
 }
 
+/// Decodeer de bytes van een gekozen tekstbestand naar invoegbare Markdown
+/// (#2909): UTF-8, een eventuele BOM eraf, en `\r\n`/`\r` genormaliseerd naar
+/// `\n` zodat de bron één regeleinde-orthografie houdt. `null` bij bytes die
+/// geen leesbare tekst vormen — de aanroeper meldt dat als "geen tekstbestand",
+/// gelijk aan hoe een te groot bestand eruit zou zien. Top-level en puur, los
+/// toetsbaar van het editor-scherm.
+String? decodeInsertableMarkdown(Uint8List bytes) {
+  final String text;
+  try {
+    text = utf8.decode(bytes);
+  } on FormatException {
+    return null;
+  }
+  return text
+      .replaceFirst('\uFEFF', '')
+      .replaceAll('\r\n', '\n')
+      .replaceAll('\r', '\n');
+}
+
 /// Zet in [body] een `---` vóór elke hoofdstukkop (`H1`) behalve de eerste, en
 /// geef de nieuwe body terug. Dat is de draagbare vorm van "nieuw hoofdstuk op
 /// een nieuwe pagina" (FILE_FORMAT.md §14.6): een `---` vóór een `H1` is een

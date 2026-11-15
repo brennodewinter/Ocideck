@@ -5226,6 +5226,25 @@ aanklikken, met Backspace/Delete weghaalt en met Ongedaan maken terughaalt; in d
 leesweergave en elke export (PDF, HTML, Word, LibreOffice, LaTeX, EPUB) wordt het
 dezelfde extra ruimte.
 
+### Een Markdown-bestand invoegen
+
+*(Toegevoegd 2026-11-15.)* Staat de tekst die je nodig hebt al in een ander
+`.md`-bestand — notities, een eerder stuk, een export uit een andere tool — dan
+zet **Markdown-bestand…** in het **Invoegen**-palet de inhoud op de cursor, in
+plaats van dat je het bestand zelf moet openen en kopiëren. De inhoud landt als
+eigen blok, als één bewerking die **Ongedaan maken** terughaalt — in **Visueel**
+én **Bron**, zoals ook een tabel of grafiek landt.
+
+De tekst gaat er letterlijk in zoals hij staat: er wordt niets herschreven,
+samengevoegd of "verbeterd", dus wat in het bestand stond krijg je in het
+document. Vooraf gelden twee controles. Een bestand dat geen leesbare tekst
+blijkt te zijn (bijvoorbeeld een binair bestand met de naam `.md`) wordt
+geweigerd met een melding die dat zegt. En dezelfde veiligheidsscan die het
+openen van een presentatie bewaakt, loopt over de inhoud: tekst met iets dat
+code kan uitvoeren — een script, een ingesloten frame, een `javascript:`-link —
+wordt helemaal niet ingevoegd, omdat een document gegevens hoort te bevatten en
+geen instructies. Het alarm toont dan letterlijk wat er is gevonden.
+
 ### Een document een stijl geven
 
 Met de knop **Stijl** in de werkbalk kies je één documentbrede stijl: hetzelfde

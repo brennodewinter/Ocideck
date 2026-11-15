@@ -1570,6 +1570,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Markdown-bestand…': 'Comhad Markdown…',
+  'Markdown-bestand invoegen': 'Ionsáigh comhad Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Níl aon téacs inléite sa chomhad seo; roghnaigh comhad Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Tá an comhad seo folamh; níl aon rud le hionsá.',
+  'Onveilig bestand niet ingevoegd': 'Níor ionsáladh comhad neamhshábháilte',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Tá ábhar sa chomhad ar féidir leis cód a rith, agus níor chóir go mbeadh i ndoiciméad ach sonraí — rud ar bith inrite.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Seiceáil na réimsí riachtanacha agus ainm, seoladh ríomhphoist agus uaireanta gach rannpháirtí.',
   'Leeg document': 'Doiciméad bán',

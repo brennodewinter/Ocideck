@@ -1542,6 +1542,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Markdown-bestand…': 'Markdown-fil…',
+  'Markdown-bestand invoegen': 'Indsæt Markdown-fil',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Denne fil indeholder ingen læsbar tekst; vælg en Markdown-fil.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Denne fil er tom; der er intet at indsætte.',
+  'Onveilig bestand niet ingevoegd': 'Usikker fil blev ikke indsat',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Filen indeholder indhold, der kan køre kode, og et dokument bør kun indeholde data — intet eksekverbart.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Kontrollér de obligatoriske felter samt navn, e-mailadresse og timer for hver deltager.',
   'Leeg document': 'Tomt dokument',

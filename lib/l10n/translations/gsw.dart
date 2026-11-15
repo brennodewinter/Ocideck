@@ -1542,6 +1542,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Markdown-bestand…': 'Markdown-Datei…',
+  'Markdown-bestand invoegen': 'Markdown-Datei yyfüege',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Die Datei het kei läsbare Tekst; wehl e Markdown-Datei.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Die Datei isch leer; es git nüt zum yyfüege.',
+  'Onveilig bestand niet ingevoegd': 'Unsicheri Datei nit yygfüegt',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'D Datei het Inhalt, wo Code cha uusfüere, un es Dokumint söll nume Date haa — nüt Usfüehrbars.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Prüef d Pflichtfälder sowie de Name, d E-Mail-Adrässe und d Stunde vo allne Teilnehmende.',
   'Leeg document': 'Leers Dokument',

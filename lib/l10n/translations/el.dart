@@ -1565,6 +1565,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Markdown-bestand…': 'Αρχείο Markdown…',
+  'Markdown-bestand invoegen': 'Εισαγωγή αρχείου Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Αυτό το αρχείο δεν περιέχει αναγνώσιμο κείμενο· επιλέξτε αρχείο Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Αυτό το αρχείο είναι κενό· δεν υπάρχει τίποτα να εισαχθεί.',
+  'Onveilig bestand niet ingevoegd': 'Το μη ασφαλές αρχείο δεν εισήχθη',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Το αρχείο περιέχει περιεχόμενο που μπορεί να εκτελέσει κώδικα, και ένα έγγραφο θα πρέπει να περιέχει μόνο δεδομένα — τίποτα εκτελέσιμο.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Ελέγξτε τα υποχρεωτικά πεδία και το όνομα, τη διεύθυνση email και τις ώρες κάθε συμμετέχοντα.',
   'Leeg document': 'Κενό έγγραφο',

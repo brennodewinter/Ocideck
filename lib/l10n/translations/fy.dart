@@ -613,6 +613,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Markdown-bestand…': 'Markdown-bestân…',
+  'Markdown-bestand invoegen': 'Markdown-bestân ynfoegje',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Dit bestân befettet gjin lêsber tekst; kies in Markdown-bestân.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Dit bestân is leech; der is neat om yn te foegjen.',
+  'Onveilig bestand niet ingevoegd': 'Unfeilich bestân net ynfoege',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'It bestân befettet ynhâld dy\'t koade útfiere kin, en in dokumint heart allinnich gegevens te befetsjen — neat útfierbers.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Kontrolearje de ferplichte fjilden en de namme, it e-mailadres en de oeren fan elke dielnimmer.',
   'Leeg document': 'Leech dokumint',

@@ -1538,6 +1538,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Markdown-bestand…': 'Markdown fails…',
+  'Markdown-bestand invoegen': 'Ievietot Markdown failu',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Šajā failā nav lasāma teksta; izvēlieties Markdown failu.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Šis fails ir tukšs; nav ko ievietot.',
+  'Onveilig bestand niet ingevoegd': 'Nedrošais fails netika ievietots',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Fails satur saturu, kas var izpildīt kodu, un dokumentam jāsatur tikai dati — nekas izpildāms.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Pārbaudiet obligātos laukus un katra dalībnieka vārdu, e-pasta adresi un stundas.',
   'Leeg document': 'Tukšs dokuments',

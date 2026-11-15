@@ -1541,6 +1541,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Markdown-bestand…': 'Markdown-fil…',
+  'Markdown-bestand invoegen': 'Infoga Markdown-fil',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Den här filen innehåller ingen läsbar text; välj en Markdown-fil.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Den här filen är tom; det finns inget att infoga.',
+  'Onveilig bestand niet ingevoegd': 'Osäker fil infogades inte',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Filen innehåller innehåll som kan köra kod, och ett dokument bör bara innehålla data — inget körbart.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Kontrollera de obligatoriska fälten samt namn, e-postadress och timmar för varje deltagare.',
   'Leeg document': 'Tomt dokument',

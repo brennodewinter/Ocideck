@@ -1543,6 +1543,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Markdown-bestand…': 'Markdown-fájl…',
+  'Markdown-bestand invoegen': 'Markdown-fájl beszúrása',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Ez a fájl nem tartalmaz olvasható szöveget; válasszon Markdown-fájlt.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Ez a fájl üres; nincs mit beszúrni.',
+  'Onveilig bestand niet ingevoegd': 'A nem biztonságos fájl nem lett beszúrva',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'A fájl kódot futtatni képes tartalmat tartalmaz, egy dokumentum pedig csak adatokat tartalmazhat — semmi futtathatót.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Ellenőrizze a kötelező mezőket, valamint minden résztvevő nevét, e-mail-címét és óraszámát.',
   'Leeg document': 'Üres dokumentum',

@@ -1552,6 +1552,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Markdown-bestand…': 'Plik Markdown…',
+  'Markdown-bestand invoegen': 'Wstaw plik Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Ten plik nie zawiera czytelnego tekstu; wybierz plik Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Ten plik jest pusty; nie ma nic do wstawienia.',
+  'Onveilig bestand niet ingevoegd': 'Niebezpieczny plik nie został wstawiony',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Plik zawiera treści mogące wykonywać kod, a dokument powinien zawierać wyłącznie dane — nic wykonywalnego.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Sprawdź wymagane pola oraz imię i nazwisko, adres e-mail i godziny każdego uczestnika.',
   'Leeg document': 'Pusty dokument',

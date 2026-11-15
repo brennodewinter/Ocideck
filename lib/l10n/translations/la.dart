@@ -1553,6 +1553,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Markdown-bestand…': 'Fasciculus Markdown…',
+  'Markdown-bestand invoegen': 'Fasciculum Markdown insere',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Hic fasciculus nullum textum legibilem continet; fasciculum Markdown elige.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Hic fasciculus vacuus est; nihil est quod inseratur.',
+  'Onveilig bestand niet ingevoegd': 'Fasciculus non tutus non insertus',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Fasciculus contentum continet quod codicem exsequi potest; documentum autem sola data continere debet — nihil exsequibile.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Campi necessarii atque nomen, inscriptio electronica et horae cuiusque participis recognoscantur.',
   'Leeg document': 'Documentum vacuum',
