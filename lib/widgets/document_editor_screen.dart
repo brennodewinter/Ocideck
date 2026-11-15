@@ -77,6 +77,7 @@ import '../utils/clipboard_markdown.dart';
 import '../utils/markdown_paste_cleanup.dart';
 import '../utils/visual_paste_delta.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
+import 'edge_drag_auto_scroll.dart';
 import 'dialogs/document_export_dialog.dart';
 import 'dialogs/tlp_audience_action.dart';
 import 'dialogs/image_carousel_picker.dart';
