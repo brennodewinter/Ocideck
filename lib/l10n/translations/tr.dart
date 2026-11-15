@@ -2398,6 +2398,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Markdown-bestand…': 'Markdown dosyası…',
+  'Markdown-bestand invoegen': 'Markdown dosyası ekle',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Bu dosya okunabilir metin içermiyor; bir Markdown dosyası seçin.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Bu dosya boş; eklenecek bir şey yok.',
+  'Onveilig bestand niet ingevoegd': 'Güvenli olmayan dosya eklenmedi',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Dosya, kod çalıştırabilen içerik barındırıyor; bir belge yalnızca veri içermelidir — çalıştırılabilir hiçbir şey olmamalı.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Zorunlu alanları ve her katılımcının adını, e-posta adresini ve saatlerini kontrol edin.',
   'Leeg document': 'Boş belge',

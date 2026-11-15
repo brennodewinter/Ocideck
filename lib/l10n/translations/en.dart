@@ -767,6 +767,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Markdown-bestand…': 'Markdown file…',
+  'Markdown-bestand invoegen': 'Insert Markdown file',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'This file contains no readable text; choose a Markdown file.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'This file is empty; there is nothing to insert.',
+  'Onveilig bestand niet ingevoegd': 'Unsafe file not inserted',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'The file contains content that can execute code, and a document should only contain data — nothing executable.',
   'Leeg document': 'Blank document',
   'PE-bewijs': 'CPE certificate',
   'Receptinzending': 'Recipe submission',

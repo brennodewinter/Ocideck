@@ -1558,6 +1558,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Markdown-bestand…': 'Fajl Markdown…',
+  'Markdown-bestand invoegen': 'Daħħal fajl Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Dan il-fajl ma fihx test li jista\' jinqara; agħżel fajl Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Dan il-fajl huwa vojt; m\'hemm xejn xi iddaħħal.',
+  'Onveilig bestand niet ingevoegd': 'Fajl mhux sigur ma ttieħadx',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Il-fajl fih kontenut li jista\' jesegwixxi kodiċi, u dokument għandu jkun fih biss data — xejn li jista\' jiġi eżegwit.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Iċċekkja l-oqsma obbligatorji u l-isem, l-indirizz tal-email u s-sigħat ta’ kull parteċipant.',
   'Leeg document': 'Dokument vojt',

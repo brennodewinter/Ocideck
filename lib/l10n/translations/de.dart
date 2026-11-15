@@ -612,6 +612,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Markdown-bestand…': 'Markdown-Datei…',
+  'Markdown-bestand invoegen': 'Markdown-Datei einfügen',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Diese Datei enthält keinen lesbaren Text; wählen Sie eine Markdown-Datei.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Diese Datei ist leer; es gibt nichts einzufügen.',
+  'Onveilig bestand niet ingevoegd': 'Unsichere Datei nicht eingefügt',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Die Datei enthält Inhalte, die Code ausführen können, und ein Dokument sollte nur Daten enthalten — nichts Ausführbares.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Prüfen Sie die Pflichtfelder sowie Name, E-Mail-Adresse und Stunden jeder teilnehmenden Person.',
   'Leeg document': 'Leeres Dokument',

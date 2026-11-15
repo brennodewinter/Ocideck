@@ -1561,6 +1561,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Markdown-bestand…': 'Markdown файл…',
+  'Markdown-bestand invoegen': 'Вмъкване на Markdown файл',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Този файл не съдържа четим текст; изберете Markdown файл.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Този файл е празен; няма какво да се вмъкне.',
+  'Onveilig bestand niet ingevoegd': 'Небезопасният файл не беше вмъкнат',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Файлът съдържа съдържание, което може да изпълнява код, а един документ трябва да съдържа само данни — нищо изпълнимо.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Проверете задължителните полета и името, имейл адреса и часовете на всеки участник.',
   'Leeg document': 'Празен документ',

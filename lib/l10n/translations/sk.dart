@@ -1545,6 +1545,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Markdown-bestand…': 'Súbor Markdown…',
+  'Markdown-bestand invoegen': 'Vložiť súbor Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Tento súbor neobsahuje čitateľný text; vyberte súbor Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Tento súbor je prázdny; nie je čo vložiť.',
+  'Onveilig bestand niet ingevoegd': 'Nebezpečný súbor nebol vložený',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Súbor obsahuje obsah, ktorý môže spúšťať kód, a dokument by mal obsahovať iba údaje — nič spustiteľné.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Skontrolujte povinné polia a meno, e-mailovú adresu a hodiny každého účastníka.',
   'Leeg document': 'Prázdny dokument',

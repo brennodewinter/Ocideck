@@ -1534,6 +1534,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Markdown-bestand…': 'Markdown-fail…',
+  'Markdown-bestand invoegen': 'Lisa Markdown-fail',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'See fail ei sisalda loetavat teksti; valige Markdown-fail.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'See fail on tühi; pole midagi lisada.',
+  'Onveilig bestand niet ingevoegd': 'Ohtlikku faili ei lisatud',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Fail sisaldab sisu, mis võib koodi käivitada, ja dokument peaks sisaldama ainult andmeid — mitte midagi käivitatavat.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Kontrollige kohustuslikke välju ning iga osaleja nime, e-posti aadressi ja tunde.',
   'Leeg document': 'Tühi dokument',

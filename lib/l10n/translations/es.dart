@@ -610,6 +610,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Markdown-bestand…': 'Archivo Markdown…',
+  'Markdown-bestand invoegen': 'Insertar archivo Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Este archivo no contiene texto legible; elige un archivo Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Este archivo está vacío; no hay nada que insertar.',
+  'Onveilig bestand niet ingevoegd': 'Archivo inseguro no insertado',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'El archivo contiene contenido que puede ejecutar código, y un documento solo debería contener datos, nada ejecutable.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Compruebe los campos obligatorios y el nombre, el correo electrónico y las horas de cada participante.',
   'Leeg document': 'Documento en blanco',

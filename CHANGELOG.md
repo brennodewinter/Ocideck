@@ -8,6 +8,10 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Added
+
+- **Markdown-bestand op de cursor invoegen (#2909).** Het Invoegen-palet van de documenteditor kent een nieuwe keuze *Markdown-bestand…*: kies een `.md`-, `.markdown`- of `.txt`-bestand en de inhoud landt als eigen blok op de cursorpositie — in de visuele stand én in de bron, als één ongedaan-maakbare bewerking. Werkt ook op web (bytes in plaats van pad). Inhoud die code kan uitvoeren wordt vóór de invoeging geweigerd met dezelfde veiligheidsscan en alarmdialoog als bij het openen van een presentatie; een bestand zonder leesbare tekst wordt netjes gemeld.
+
 ### Removed
 
 - **MIAUW-rapportage uit OciDeck (#2845).** De module Informatieveiligheid, de bijbehorende rapportdocumenten, compliance-analyse, CVE-opzoekingen, bulkdownloads en CWE-dataset zijn verwijderd. Eerder gedownloade CVE-data en instellingen worden opgeruimd. Bestaande gebruikerspresentaties en sidecars blijven leesbaar.

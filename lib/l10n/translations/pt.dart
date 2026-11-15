@@ -1567,6 +1567,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Markdown-bestand…': 'Ficheiro Markdown…',
+  'Markdown-bestand invoegen': 'Inserir ficheiro Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Este ficheiro não contém texto legível; escolha um ficheiro Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Este ficheiro está vazio; não há nada para inserir.',
+  'Onveilig bestand niet ingevoegd': 'Ficheiro inseguro não inserido',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'O ficheiro contém conteúdo que pode executar código, e um documento deve conter apenas dados — nada executável.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Verifique os campos obrigatórios e o nome, o endereço de email e as horas de cada participante.',
   'Leeg document': 'Documento em branco',

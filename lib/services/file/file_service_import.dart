@@ -700,6 +700,9 @@ Future<List<String>> _pickPathsGated({
 /// tegenhanger van [_pickPathGated] voor het pad dat daar niet bestaat.
 Future<({String name, Uint8List bytes})?> _pickBytes({
   required String dialogTitle,
+  FileType type = FileType.any,
+  List<String>? allowedExtensions,
+  int maxBytes = FileService.maxPackageBytes,
 }) async {
   final PlatformFile file;
   try {
@@ -707,7 +710,8 @@ Future<({String name, Uint8List bytes})?> _pickBytes({
     // exit op Windows) mag niet als ongegrepene fout uit de openknop lopen.
     final picked = await FilePicker.pickFile(
       dialogTitle: dialogTitle,
-      type: FileType.any,
+      type: type,
+      allowedExtensions: allowedExtensions,
     );
     if (picked == null) return null;
     file = picked;
@@ -715,12 +719,27 @@ Future<({String name, Uint8List bytes})?> _pickBytes({
     logWarning('FileService.pickBytes: bestandskiezer faalde', e);
     return null;
   }
-  final bytes = await _readPickedBytesCapped(
-    file,
-    maxBytes: FileService.maxPackageBytes,
-  );
+  final bytes = await _readPickedBytesCapped(file, maxBytes: maxBytes);
   return bytes == null ? null : (name: file.name, bytes: bytes);
 }
+
+/// Kies een Markdown-bestand dat ergens ín wordt gevoegd (geen eigen tab):
+/// levert naam + bytes, zodat dezelfde route op web werkt waar een gekozen
+/// bestand geen pad heeft. De cap is die van deck-Markdown — ruim genoeg
+/// voor elke echte tekst — in plaats van de pakketlimiet, omdat de inhoud
+/// letterlijk in een editor terechtkomt.
+///
+/// Top-level en niet op [FileService]: de klasse zit tegen haar plafond —
+/// dezelfde reden waarom [pickDocumentExportDestination] top-level staat.
+/// De aanroeper levert de (vertaalde) kiezertitel mee, zoals daar.
+Future<({String name, Uint8List bytes})?> pickMarkdownInsertBytes({
+  required String dialogTitle,
+}) => _pickBytes(
+  dialogTitle: dialogTitle,
+  type: FileType.custom,
+  allowedExtensions: const ['md', 'markdown', 'txt'],
+  maxBytes: FileService.maxDeckMarkdownBytes,
+);
 
 /// Lees een gekozen bestand incrementeel zodat een bestandkiezer niet alsnog
 /// de hele schijf in één buffer kan zetten vóór de importlimiet hem ziet.

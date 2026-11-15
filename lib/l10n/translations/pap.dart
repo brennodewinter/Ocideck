@@ -612,6 +612,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Markdown-bestand…': 'Archivo Markdown…',
+  'Markdown-bestand invoegen': 'Inserta archivo Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'E archivo aki no tin teksto lesabel; skohe un archivo Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'E archivo aki ta bashí; no tin nada pa inserta.',
+  'Onveilig bestand niet ingevoegd': 'Archivo inseguro no a ser inserta',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'E archivo tin kontenido ku por ehekuta kódigo, i un dokumento mester ta solamente data — nada ehekutabel.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Kontrolá e kampunan obligatorio i nòmber, adrès di e-mail i oranan di kada partisipante.',
   'Leeg document': 'Dokumento bashí',

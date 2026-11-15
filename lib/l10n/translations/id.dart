@@ -1542,6 +1542,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Markdown-bestand…': 'Berkas Markdown…',
+  'Markdown-bestand invoegen': 'Sisipkan berkas Markdown',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Berkas ini tidak berisi teks yang dapat dibaca; pilih berkas Markdown.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Berkas ini kosong; tidak ada yang bisa disisipkan.',
+  'Onveilig bestand niet ingevoegd': 'Berkas tidak aman tidak disisipkan',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Berkas berisi konten yang dapat menjalankan kode, dan dokumen seharusnya hanya berisi data — tidak ada yang dapat dieksekusi.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Periksa kolom wajib serta nama, alamat email, dan jam setiap peserta.',
   'Leeg document': 'Dokumen kosong',

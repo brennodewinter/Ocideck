@@ -1542,6 +1542,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Markdown-bestand…': 'Markdown-tiedosto…',
+  'Markdown-bestand invoegen': 'Lisää Markdown-tiedosto',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Tämä tiedosto ei sisällä luettavaa tekstiä; valitse Markdown-tiedosto.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Tämä tiedosto on tyhjä; ei ole mitään lisättävää.',
+  'Onveilig bestand niet ingevoegd': 'Epäturvallista tiedostoa ei lisätty',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Tiedosto sisältää sisältöä, joka voi suorittaa koodia, ja asiakirjan tulisi sisältää vain dataa — ei mitään suoritettavaa.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Tarkista pakolliset kentät sekä kunkin osallistujan nimi, sähköpostiosoite ja tunnit.',
   'Leeg document': 'Tyhjä asiakirja',

@@ -1548,6 +1548,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Markdown-bestand…': 'Markdown failas…',
+  'Markdown-bestand invoegen': 'Įterpti Markdown failą',
+  'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
+      'Šiame faile nėra įskaitomo teksto; pasirinkite Markdown failą.',
+  'Dit bestand is leeg; er is niets om in te voegen.':
+      'Šis failas tuščias; nėra ką įterpti.',
+  'Onveilig bestand niet ingevoegd': 'Nesaugus failas neįterptas',
+  'Het bestand bevat inhoud die code kan uitvoeren, en een document hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Faile yra turinio, galinčio vykdyti kodą, o dokumente turėtų būti tik duomenys — nieko vykdomojo.',
   'Controleer de verplichte velden en de naam, het e-mailadres en de uren van elke deelnemer.':
       'Patikrinkite privalomus laukus ir kiekvieno dalyvio vardą, el. pašto adresą bei valandas.',
   'Leeg document': 'Tuščias dokumentas',
