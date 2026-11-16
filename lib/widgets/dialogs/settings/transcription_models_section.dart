@@ -194,8 +194,11 @@ class _ModelRow extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
+            // De gewichten zijn van OpenAI (MIT); whisper.cpp is de runtime.
+            // Verwarrend labelen zou de ggml-notice als gewichtenlicentie
+            // presenteren (#2939).
             '${_tierLabel()} · ${_formatBytes(model.downloadBytes)} · '
-            '${l10n.d('MIT · whisper.cpp')}',
+            '${l10n.d('MIT · OpenAI')}',
             style: TextStyle(fontSize: 11, color: AppTheme.slate600),
           ),
           Text(

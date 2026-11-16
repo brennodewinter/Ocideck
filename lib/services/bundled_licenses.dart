@@ -123,6 +123,27 @@ abstract final class BundledLicenses {
       source: 'https://github.com/ggml-org/whisper.cpp',
       licenseAsset: 'assets/licenses/whisper-cpp-LICENSE.txt',
     ),
+    // The Whisper model weights are OpenAI's, not whisper.cpp's — the
+    // ggerganov notice above covers the ggml authors only. OpenAI licenses
+    // code and weights under MIT; the weights are downloaded by the user on
+    // request (revision/hash-pinned, lib/.../whisper_model.dart) and are not
+    // in the app artefact, but the notice must still travel with the app
+    // that offers them (#2939).
+    BundledLicense(
+      component: 'OpenAI Whisper model weights',
+      license: 'MIT',
+      source: 'https://github.com/openai/whisper',
+      licenseAsset: 'assets/licenses/openai-whisper-LICENSE.txt',
+    ),
+    // miniaudio.h and stb_vorbis.c compile into whisper-cli/whisper-wasm via
+    // whisper.cpp's examples/common. The pinned 1.9.5 sources offer a licence
+    // choice per file; we take the Unlicense option, recorded in the asset.
+    BundledLicense(
+      component: 'miniaudio / stb_vorbis (inside whisper.cpp runtime)',
+      license: 'Unlicense',
+      source: 'https://github.com/ggml-org/whisper.cpp/tree/v1.9.5/examples',
+      licenseAsset: 'assets/licenses/miniaudio-stb_vorbis-LICENSE.txt',
+    ),
     BundledLicense(
       component: 'PDFium rendering engine',
       license: 'BSD-3-Clause',
