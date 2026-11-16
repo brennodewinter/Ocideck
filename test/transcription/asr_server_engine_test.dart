@@ -266,7 +266,7 @@ void main() {
             transport: t,
             apiKeyReader: () async {
               if (duringKey) {
-                entered.complete();
+                if (!entered.isCompleted) entered.complete();
                 await release.future;
               }
               return null;
@@ -274,7 +274,7 @@ void main() {
             audioReader: (path) async {
               reads++;
               if (!duringKey) {
-                entered.complete();
+                if (!entered.isCompleted) entered.complete();
                 await release.future;
               }
               return fakeAudio();
