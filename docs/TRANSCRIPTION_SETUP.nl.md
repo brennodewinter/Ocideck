@@ -181,6 +181,28 @@ loopback, en een mixed-content-regel blokkeert `http` vanaf een
 aanbiedt, en PRIVACY.md somt precies op welke bytes waarheen gaan onder
 welke toestemming.
 
+### Antwoordbudgetten aan de clientkant
+
+Batchantwoorden via HTTP worden als stroom gelezen en stoppen bij 16 MiB,
+ook in de browser. Een ontbrekende of onjuiste `Content-Length` verandert
+die grens niet.
+
+De liveroute past afzonderlijke grenzen toe vóór JSON-parsing en tijdens het
+verzamelen van resultaten: 256 KiB per bericht, 64 KiB per tekstveld, 4.096
+woorden per resultaat, 64 MiB of 250.000 ontvangen berichten per sessie en
+8 MiB of 100.000 bewaarde resultaatsegmenten. Voor een gepauzeerde afnemer
+blijven hooguit 1 MiB of 256 berichten in de wachtrij. UTF-8-bytes tellen,
+niet alleen het aantal tekens. Bij overschrijding sluit de serverroute met
+een fout; een afgekapt transcript wordt niet als volledig resultaat gemeld.
+De lokale opname blijft onafhankelijk.
+
+Deze grenzen beperken conversie, parsing, wachtrijen en bewaarde resultaten
+in de applicatie. De WebSocket-API's van de browser en `dart:io` leveren
+complete berichten en kunnen een te groot bericht dus al hebben toegewezen
+voordat de app het afwijst. Een berichtlimiet op de server en een vertrouwde
+serverinrichting blijven nodig; dit belooft geen door OciDeck afgedwongen
+grens aan de eerste WebSocket-buffer van het platform.
+
 ## Opslag, bewaring en wissen
 
 - **Gestage opnames** staan in de stagingmap van de app,
