@@ -234,47 +234,7 @@ class _FormImageAnswerState extends State<FormImageAnswer> {
               ),
             ),
           if (widget.onAddImages != null)
-            Wrap(
-              spacing: 4,
-              children: [
-                TextButton.icon(
-                  icon: const Icon(
-                    Icons.add_photo_alternate_outlined,
-                    size: 18,
-                  ),
-                  label: Text(l10n.d('Foto toevoegen')),
-                  onPressed: _add,
-                ),
-                if (widget.onAddImages!.read != null) ...[
-                  TextButton.icon(
-                    icon: const Icon(Icons.content_paste, size: 18),
-                    label: Text(l10n.d('Plakken')),
-                    onPressed: _paste,
-                  ),
-                  TextButton.icon(
-                    icon: const Icon(Icons.draw_outlined, size: 18),
-                    label: Text(l10n.d('Tekenen')),
-                    onPressed: _draw,
-                  ),
-                  if (widget.onAddImages!.presets.isNotEmpty)
-                    PopupMenuButton<FormImagePreset>(
-                      itemBuilder: (context) => [
-                        for (final preset in widget.onAddImages!.presets)
-                          PopupMenuItem(
-                            value: preset,
-                            child: Text(preset.label),
-                          ),
-                      ],
-                      onSelected: (preset) => _addReader(preset.read),
-                      child: TextButton.icon(
-                        icon: const Icon(Icons.palette_outlined, size: 18),
-                        label: Text(l10n.d('Uit een stijl')),
-                        onPressed: null,
-                      ),
-                    ),
-                ],
-              ],
-            )
+            _adders(l10n)
           else
             Text(
               l10n.d('Sla het document eerst op om foto’s toe te voegen.'),
@@ -284,6 +244,46 @@ class _FormImageAnswerState extends State<FormImageAnswer> {
             ),
         ],
       ),
+    );
+  }
+
+  /// De bronknoppen onder de lijst: kiezen, plakken, tekenen, stijlpresets.
+  Widget _adders(AppLocalizations l10n) {
+    final adders = widget.onAddImages!;
+    return Wrap(
+      spacing: 4,
+      children: [
+        TextButton.icon(
+          icon: const Icon(Icons.add_photo_alternate_outlined, size: 18),
+          label: Text(l10n.d('Foto toevoegen')),
+          onPressed: _add,
+        ),
+        if (adders.read != null) ...[
+          TextButton.icon(
+            icon: const Icon(Icons.content_paste, size: 18),
+            label: Text(l10n.d('Plakken')),
+            onPressed: _paste,
+          ),
+          TextButton.icon(
+            icon: const Icon(Icons.draw_outlined, size: 18),
+            label: Text(l10n.d('Tekenen')),
+            onPressed: _draw,
+          ),
+          if (adders.presets.isNotEmpty)
+            PopupMenuButton<FormImagePreset>(
+              itemBuilder: (context) => [
+                for (final preset in adders.presets)
+                  PopupMenuItem(value: preset, child: Text(preset.label)),
+              ],
+              onSelected: (preset) => _addReader(preset.read),
+              child: TextButton.icon(
+                icon: const Icon(Icons.palette_outlined, size: 18),
+                label: Text(l10n.d('Uit een stijl')),
+                onPressed: null,
+              ),
+            ),
+        ],
+      ],
     );
   }
 
