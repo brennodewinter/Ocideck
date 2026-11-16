@@ -14,6 +14,7 @@ import 'package:markdown/markdown.dart' as md;
 
 import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
+import '../../utils/image_size_tokens.dart';
 import '../document_timeline.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_contents.dart';
@@ -586,10 +587,20 @@ class _PdfBlockConverter {
         _ => PdfColumnAlignment.left,
       };
 
-  PdfImageBlock _image(md.Element node) => PdfImageBlock(
-    node.attributes['src'] ?? '',
-    alt: node.attributes['alt'] ?? '',
-  );
+  /// De `w:`/`h:`-maattokens in de haakjes gaan naar de blokmaat en uit de
+  /// alt — dezelfde tokens die de lezer en het schrijfvlak honoreren
+  /// (image_size_tokens.dart), zodat de PDF dezelfde afbeelding toont.
+  PdfImageBlock _image(md.Element node) {
+    final bracket = splitImageSizeTokens(node.attributes['alt'] ?? '');
+    final size = bracket.size;
+    return PdfImageBlock(
+      node.attributes['src'] ?? '',
+      alt: bracket.alt,
+      width: size.width,
+      widthFraction: size.widthFraction,
+      height: size.height,
+    );
+  }
 
   List<PdfSpan> _spansOf(md.Element node, {PdfSpan? base}) =>
       spans(node.children ?? const [], base ?? const PdfSpan(''));

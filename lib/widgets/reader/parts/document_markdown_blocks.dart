@@ -45,6 +45,7 @@ class _Block {
     this.timelineMetadataHeader,
     this.timelineFirst = false,
     this.timelineLast = false,
+    this.imageSize,
   });
 
   final _Kind kind;
@@ -55,6 +56,10 @@ class _Block {
   /// De bron van een afbeelding `![alt](bron)` — het pad tussen de haakjes,
   /// zonder titel (voor [_Kind.image]). [text] draagt de alt-tekst.
   final String source;
+
+  /// De gevraagde maat uit `w:`/`h:`-tokens in de haakjes (voor
+  /// [_Kind.image]); `null` bij geen maat of bij elk ander bloktype.
+  final ImageSize? imageSize;
 
   /// Heading level 1–6 (0 otherwise).
   final int level;
@@ -659,18 +664,21 @@ bool _isParagraphLine(String line) {
 /// er zijn. Dezelfde syntaxis als `MarkdownImageSyntax` (image_embed_syntax),
 /// zodat de lezer en het schrijfvlak dezelfde afbeelding herkennen.
 ///
+/// `w:`/`h:`-maattokens in de haakjes gaan naar [ImageSize] en niet naar de
+/// alt-tekst — dezelfde tokens die Marp kent (image_size_tokens.dart).
+///
 /// Ondersteunt angle-bracket-bestemmingen `<path met spaties>` en ontsnapte
 /// haakjes `path\(1\).png`, zodat bestandsnamen met haakjes of spaties niet
 /// op de eerste `)` of whitespace afkappen.
-({String alt, String source})? _parseImageLine(String line) {
+({String alt, String source, ImageSize size})? _parseImageLine(String line) {
   final match = _imageLinePattern.firstMatch(line);
   if (match == null) return null;
-  final alt = match.group(1) ?? '';
+  final bracket = splitImageSizeTokens(match.group(1) ?? '');
   final raw = (match.group(2) ?? '').trim();
   if (raw.isEmpty) return null;
   final source = _extractImageSource(raw);
   if (source.isEmpty) return null;
-  return (alt: alt, source: source);
+  return (alt: bracket.alt, source: source, size: bracket.size);
 }
 
 /// Haalt de bron uit de inhoud van `](…)`: angle-bracket, ontsnapte haakjes

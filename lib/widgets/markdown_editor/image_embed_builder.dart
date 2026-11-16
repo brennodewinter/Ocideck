@@ -1,8 +1,10 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/image_embed_syntax.dart';
+import '../../utils/image_size_tokens.dart';
 import '../reader/document_markdown_view.dart'
     show DocumentImage, DocumentImageScope;
 
@@ -38,12 +40,73 @@ class ImageEmbedBuilder extends EmbedBuilder {
     return Semantics(
       image: true,
       label: label,
-      child: DocumentImage(
-        source: image.source,
-        alt: image.alt,
-        projectPath: DocumentImageScope.maybeOf(context),
-        block: false,
+      child: GestureDetector(
+        onDoubleTap: embedContext.readOnly
+            ? null
+            : () => _resize(context, embedContext),
+        child: Tooltip(
+          message: embedContext.readOnly
+              ? label
+              : context.l10n.d('Dubbelklik om de grootte te wijzigen'),
+          child: DocumentImage(
+            source: image.source,
+            alt: image.alt,
+            projectPath: DocumentImageScope.maybeOf(context),
+            block: false,
+            size: image.size,
+          ),
+        ),
       ),
+    );
+  }
+
+  /// De maatdialoog: een deel van de kolombreedte, of terug naar de
+  /// natuurlijke maat. De keuze wordt `w:`-tokens in de haakjes van de
+  /// afbeelding — Marp-vocabulaire (image_size_tokens.dart) — en komt via
+  /// `replaceText` op zijn eigen knoop terug, zoals elke embed-bewerking
+  /// in deze editor werkt.
+  Future<void> _resize(BuildContext context, EmbedContext embedContext) async {
+    final l10n = context.l10n;
+    final markdown = EmbeddableMarkdownImage.markdownOf(
+      embedContext.node.value,
+    );
+    // `_cleared` staat voor "geen maat meer vragen"; `null` is afbreken.
+    const cleared = -1.0;
+    final picked = await showDialog<double>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(l10n.d('Grootte van de afbeelding')),
+        children: [
+          for (final percent in [25, 50, 75, 100])
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(context, percent / 100),
+              child: Text(
+                l10n
+                    .d('{percent}% van de kolombreedte')
+                    .replaceAll('{percent}', '$percent'),
+              ),
+            ),
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(context, cleared),
+            child: Text(l10n.d('Natuurlijke maat')),
+          ),
+        ],
+      ),
+    );
+    if (picked == null || !context.mounted) return;
+    final node = embedContext.node;
+    if (node.parent == null) return;
+    final edited = markdownImageWithSize(markdown, (
+      width: null,
+      widthFraction: picked == cleared ? null : picked,
+      height: null,
+    ));
+    if (edited == markdown) return;
+    embedContext.controller.replaceText(
+      node.documentOffset,
+      1,
+      EmbeddableMarkdownImage(edited),
+      null,
     );
   }
 

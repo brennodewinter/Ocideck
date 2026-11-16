@@ -370,6 +370,19 @@ void main() {
       expect(image.alt, 'Een grafiek');
     });
 
+    test('w:/h:-tokens worden de blokmaat, niet de beschrijving', () {
+      final image =
+          markdownToPdfBlocks('![w:50% Een grafiek](plaatje.png)\n').single
+              as PdfImageBlock;
+      expect(image.alt, 'Een grafiek');
+      expect(image.widthFraction, 0.5);
+      expect(image.width, isNull);
+      final px =
+          markdownToPdfBlocks('![h:120 Handtekening](h.png)\n').single
+              as PdfImageBlock;
+      expect(px.height, 120);
+    });
+
     test('een afbeelding midden in een regel houdt zijn beschrijving', () {
       // Een PDF-alinea kan geen plaatje dragen; de beschrijving houdt de
       // betekenis vast in plaats van hem te laten vallen.

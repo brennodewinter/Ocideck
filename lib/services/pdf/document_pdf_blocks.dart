@@ -261,11 +261,24 @@ enum PdfColumnAlignment { left, center, right }
 /// Een afbeelding. [source] is het pad of de URI zoals in de bron; de renderer
 /// krijgt de bytes van de aanroeper — een PDF verwijst niet naar bestanden
 /// buiten zichzelf, alles zit erin.
+///
+/// [width] en [height] zijn de gevraagde maat uit `w:`/`h:`-tokens in punten;
+/// [widthFraction] is een deel van de bladspiegel (`w:50%`). Alles `null` is
+/// de gewone maat: zo groot als de bladspiegel toelaat.
 class PdfImageBlock extends PdfBlock {
-  const PdfImageBlock(this.source, {this.alt = ''});
+  const PdfImageBlock(
+    this.source, {
+    this.alt = '',
+    this.width,
+    this.widthFraction,
+    this.height,
+  });
 
   final String source;
   final String alt;
+  final double? width;
+  final double? widthFraction;
+  final double? height;
 
   @override
   String toString() => 'PdfImageBlock($source)';
