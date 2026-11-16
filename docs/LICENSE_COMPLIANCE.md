@@ -118,6 +118,51 @@ APT authentication configuration. A green package scan alone is not approval of
 native distribution. A release must execute the full Linux packaging/consumer
 pipeline; this review is not an assertion that an unbuilt artifact passed it.
 
+## Whisper transcription stack review — 2026-11-16
+
+Recorded for #2939. The transcription stack splits into components with
+different authors, and each carries its own notice:
+
+| Component | Version/pin | Licence | Notice |
+| --- | --- | --- | --- |
+| whisper.cpp runtime (`whisper-cli` / `whisper-wasm`) | 1.9.5, tarball SHA-256 in `native/whisper_cli/manifest.json` | MIT (ggml-org) | `assets/licenses/whisper-cpp-LICENSE.txt`, licence page registered |
+| OpenAI Whisper model weights | ggerganov/whisper.cpp repo revision `5359861c739e955e79d9a303bcbc70fb988958b1`, per-file SHA-256 in `whisper_model.dart` | MIT (OpenAI, code **and** weights) | `assets/licenses/openai-whisper-LICENSE.txt` |
+| `miniaudio.h`, `stb_vorbis.c` (inside the runtime via `examples/common`) | whisper.cpp 1.9.5 vendored source | dual-licence choice — **Unlicense taken** | `assets/licenses/miniaudio-stb_vorbis-LICENSE.txt` |
+
+Findings:
+
+- Whisper is **compatible** with OciDeck under EUPL-1.2: both the runtime and
+  the weights are MIT, and the European Commission's compatibility matrix
+  lists MIT as EUPL-compatible. No relicensing is needed; the obligation is
+  carrying the copyright and licence texts, which the registrations above do.
+- The weights are **not distributed** — the user downloads them on request,
+  hash-verified. The notice ships anyway so it is present where the models
+  are offered; if OciDeck ever redistributes weights directly the same MIT
+  notice remains the obligation.
+- `make licenses` covers Dart package licences only. Native helpers, model
+  weights and downloaded tools are outside its scope; the `BundledLicenses`
+  registry plus this review is their control. A green package scan is not
+  approval of helper distribution.
+
+### Helper distribution rule (acceptance gate for #2938 and #2935)
+
+A new helper (a yt-dlp build, an FFmpeg binary, a diarisation model such as
+pyannote) is assessed **per distributed artefact**, never per upstream
+repository licence:
+
+- yt-dlp upstream is Unlicense, but its PyInstaller bundles are GPLv3+
+  combined works and release zips embed MIT/ISC parts — a downloaded binary
+  is not "Unlicense" until its build form is verified.
+- FFmpeg obligations (LGPL/GPL, source and replacement rights, nonfree
+  configuration) depend on the concrete build flags.
+- An extra model does not inherit Whisper's MIT.
+
+Before a helper enters a release: record exact version, origin/hash, build
+flags, embedded dependencies and the licence choice in its manifest, and
+register the full notice text in `BundledLicenses` so it ships in the app.
+A GPLv3+ binary stays a separately justified decision with its own
+source-offer obligations, matching the existing Linux GPLv3+ route.
+
 ## Latest result
 
 Run on **2026-11-10** (`dart run tool/check_licenses.dart`). All **222** resolved

@@ -613,6 +613,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'le WAV n’est pas du PCM 16 bits — décodage nécessaire',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'le WAV n’est pas du PCM 16 bits — le navigateur le décode quand même',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Le module de transcription est désactivé ou non configuré. Activez-le dans Réglages → Modules.',
+  'Instellingen openen': 'Ouvrir les réglages',
+  'Sprekers onderscheiden': 'Distinguer les locuteurs',
   'Rij {n} omhoog': 'Ligne {n} vers le haut',
   'Rij {n} omlaag': 'Ligne {n} vers le bas',
   'Dubbelklik om de grootte te wijzigen':

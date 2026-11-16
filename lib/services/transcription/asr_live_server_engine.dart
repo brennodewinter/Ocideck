@@ -326,6 +326,11 @@ class AsrLiveServerEngine implements TranscriptionEngine {
     AudioRef audio,
     TranscriptionOptions options,
   ) async {
+    if (options.diarize) {
+      throw const EngineUnavailable(
+        'diarisatie wordt door deze engine niet ondersteund',
+      );
+    }
     final consent = options.serverConsent;
     final consentOk =
         consent != null &&

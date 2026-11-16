@@ -43,6 +43,76 @@ Uint8List wavBytes({int seconds = 2}) {
   ]);
 }
 
+/// De WAV zoals afconvert hem schrijft: een FLLR-paginavulling van
+/// enkele kB tussen `fmt ` en `data` (#2933). Geldig, maar `data` ligt
+/// buiten elke vaste kopgrens.
+Uint8List wavBytesFllr({int seconds = 2, int filler = 4044}) {
+  const rate = 16000;
+  final dataLen = seconds * rate * 2;
+  return Uint8List.fromList([
+    ...'RIFF'.codeUnits,
+    ..._le32(4 + (8 + 16) + (8 + filler) + (8 + dataLen)),
+    ...'WAVE'.codeUnits,
+    ...'fmt '.codeUnits,
+    ..._le32(16),
+    ..._le16(1),
+    ..._le16(1),
+    ..._le32(rate),
+    ..._le32(rate * 2),
+    ..._le16(2),
+    ..._le16(16),
+    ...'FLLR'.codeUnits,
+    ..._le32(filler),
+    ...List.filled(filler, 0),
+    ...'data'.codeUnits,
+    ..._le32(dataLen),
+    ...List.filled(dataLen, 0),
+  ]);
+}
+
+/// Een geldige WAV-header met een `data`-chunk van nul bytes.
+Uint8List wavBytesZeroData() {
+  const rate = 16000;
+  return Uint8List.fromList([
+    ...'RIFF'.codeUnits,
+    ..._le32(36),
+    ...'WAVE'.codeUnits,
+    ...'fmt '.codeUnits,
+    ..._le32(16),
+    ..._le16(1),
+    ..._le16(1),
+    ..._le32(rate),
+    ..._le32(rate * 2),
+    ..._le16(2),
+    ..._le16(16),
+    ...'data'.codeUnits,
+    ..._le32(0),
+  ]);
+}
+
+/// ISO-BMFF-magie — genoeg voor de sniffer, niet een echte film.
+Uint8List mp4MagicBytes() => Uint8List.fromList([
+  ..._le32(24),
+  ...'ftyp'.codeUnits,
+  ...'isom'.codeUnits,
+  ...List.filled(64, 0),
+]);
+
+/// Vangt argv van de fake decoder én schrijft een WAV als uitvoer.
+DecoderRunner wavWritingDecoder(
+  List<List<String>> argvs, {
+  Uint8List Function()? wav,
+  DecodeResult result = const DecodeResult(exitCode: 0, stderr: ''),
+}) {
+  return (exe, argv, {environment, required timeout}) {
+    argvs.add(argv);
+    if (result.exitCode == 0) {
+      File(argv.last).writeAsBytesSync((wav ?? wavBytesFllr)());
+    }
+    return DecodeRun(done: Future.value(result), kill: () {});
+  };
+}
+
 void main() {
   late Directory tmp;
   late Directory staging;
@@ -344,5 +414,248 @@ void main() {
       expect(identical(first, second), isTrue);
       await first;
     });
+  });
+
+  group('WAV met vulling/metadata vóór data (#2933)', () {
+    test('describe leest de duur ook met FLLR tussen fmt en data', () async {
+      final wav = File(p.join(tmp.path, 'fllr.wav'))
+        ..writeAsBytesSync(wavBytesFllr(seconds: 3));
+      final info = await IoFileCaptureSource().describe(wav.path);
+      expect(info.container, MediaContainer.wav);
+      expect(info.engineReadsDirectly, isTrue);
+      expect(info.duration, const Duration(seconds: 3));
+    });
+
+    test('metadata groter dan 4096 bytes blokkeert de header niet', () async {
+      final wav = File(p.join(tmp.path, 'groot-metadata.wav'))
+        ..writeAsBytesSync(wavBytesFllr(seconds: 2, filler: 70000));
+      final info = await IoFileCaptureSource().describe(wav.path);
+      expect(info.duration, const Duration(seconds: 2));
+    });
+
+    test('afconvert-uitvoer met FLLR is geen "lege audio" meer', () async {
+      final mp3 = File(p.join(tmp.path, 'clip.mp3'))
+        ..writeAsBytesSync(
+          Uint8List.fromList([0x49, 0x44, 0x33, ...List.filled(40, 0)]),
+        );
+      final session = await IoFileCaptureSource(
+        decoderOverride: 'afconvert',
+        decoderRunner: wavWritingDecoder([]),
+      ).start(request(mp3.path));
+      final audio = await session.stop();
+      expect(audio.duration, const Duration(seconds: 2));
+    });
+
+    test('afconvert-argv bevat --no-filler tegen de vulling zelf', () async {
+      final mp3 = File(p.join(tmp.path, 'clip.mp3'))
+        ..writeAsBytesSync(
+          Uint8List.fromList([0x49, 0x44, 0x33, ...List.filled(40, 0)]),
+        );
+      final argvs = <List<String>>[];
+      final session = await IoFileCaptureSource(
+        decoderOverride: 'afconvert',
+        decoderRunner: wavWritingDecoder(argvs),
+      ).start(request(mp3.path));
+      await session.stop();
+      expect(argvs.single, contains('--no-filler'));
+    });
+
+    test('een geldige header met nul audiobytes is wél "lege audio"', () async {
+      final mp3 = File(p.join(tmp.path, 'clip.mp3'))
+        ..writeAsBytesSync(
+          Uint8List.fromList([0x49, 0x44, 0x33, ...List.filled(40, 0)]),
+        );
+      final session = await IoFileCaptureSource(
+        decoderOverride: 'afconvert',
+        decoderRunner: wavWritingDecoder([], wav: wavBytesZeroData),
+      ).start(request(mp3.path));
+      expect(
+        () => session.stop(),
+        throwsA(
+          isA<DecodeFailed>().having(
+            (e) => e.message,
+            'melding',
+            contains('lege audio'),
+          ),
+        ),
+      );
+    });
+
+    test('direct openen van een nul-data-WAV meldt geen audiodata', () {
+      final wav = File(p.join(tmp.path, 'leeg-maar-valide.wav'))
+        ..writeAsBytesSync(wavBytesZeroData());
+      expect(
+        () => IoFileCaptureSource().describe(wav.path),
+        throwsA(
+          isA<DecodeFailed>().having(
+            (e) => e.message,
+            'melding',
+            contains('audiodata'),
+          ),
+        ),
+      );
+    });
+
+    test(
+      'afgekapt fmt-blok of chunk buiten bestand: geweigerd, geen crash',
+      () {
+        // fmt claimt 16 bytes maar er staan er maar 8.
+        final afgekapt = File(p.join(tmp.path, 'afgekapt.wav'))
+          ..writeAsBytesSync(
+            Uint8List.fromList([
+              ...'RIFF'.codeUnits,
+              ..._le32(20),
+              ...'WAVE'.codeUnits,
+              ...'fmt '.codeUnits,
+              ..._le32(16),
+              ..._le16(1),
+              ..._le16(1),
+              ..._le32(16000),
+            ]),
+          );
+        expect(
+          () => IoFileCaptureSource().describe(afgekapt.path),
+          throwsA(isA<DecodeFailed>()),
+        );
+        // Een chunk die voorbij het bestand claimt.
+        final buiten = File(p.join(tmp.path, 'buiten.wav'))
+          ..writeAsBytesSync(
+            Uint8List.fromList([
+              ...'RIFF'.codeUnits,
+              ..._le32(40),
+              ...'WAVE'.codeUnits,
+              ...'FLLR'.codeUnits,
+              ..._le32(0x7FFFFFFF),
+              ...List.filled(16, 0),
+            ]),
+          );
+        expect(
+          () => IoFileCaptureSource().describe(buiten.path),
+          throwsA(isA<DecodeFailed>()),
+        );
+      },
+    );
+
+    test('een niet-PCM-WAV gaat via de decoder, niet direct door', () async {
+      final floatWav = Uint8List.fromList([
+        ...'RIFF'.codeUnits,
+        ..._le32(36 + 32000),
+        ...'WAVE'.codeUnits,
+        ...'fmt '.codeUnits,
+        ..._le32(16),
+        ..._le16(3), // IEEE float — geen PCM
+        ..._le16(1),
+        ..._le32(16000),
+        ..._le32(64000),
+        ..._le16(4),
+        ..._le16(32),
+        ...'data'.codeUnits,
+        ..._le32(32000),
+        ...List.filled(32000, 0),
+      ]);
+      final wav = File(p.join(tmp.path, 'float.wav'))
+        ..writeAsBytesSync(floatWav);
+      final info = await IoFileCaptureSource(
+        decoderOverride: 'afconvert',
+      ).describe(wav.path);
+      expect(info.container, MediaContainer.wav);
+      expect(info.engineReadsDirectly, isFalse);
+      expect(info.decodable, isTrue);
+      expect(info.decodeNote, contains('geen 16-bit PCM'));
+    });
+  });
+
+  group('verkeerd benoemde invoer (#2934)', () {
+    test(
+      'MP4-inhoud met .mp3-naam krijgt een hernoemde staginginvoer',
+      () async {
+        final bron = File(p.join(tmp.path, 'verkeerd.mp3'))
+          ..writeAsBytesSync(mp4MagicBytes());
+        final argvs = <List<String>>[];
+        final session = await IoFileCaptureSource(
+          decoderOverride: 'afconvert',
+          decoderRunner: wavWritingDecoder(argvs),
+        ).start(request(bron.path));
+
+        // De voorbeschouwing zegt eerlijk MP4, niet MP3.
+        final session2 = IoFileCaptureSource(decoderOverride: 'afconvert');
+        final info = await session2.describe(bron.path);
+        expect(info.container, MediaContainer.mpeg4);
+        expect(info.decodeNote, contains('bestandsnaam'));
+
+        await session.stop();
+        final argv = argvs.single;
+        // De decoder kreeg geen .mp3-naam maar een .mp4-stagingkopie.
+        final input = argv[argv.length - 2];
+        expect(p.extension(input), '.mp4');
+        expect(p.dirname(input), staging.path);
+        // De kopie is wegwerpwerk — na de sessie weg.
+        expect(File(input).existsSync(), isFalse);
+        // En het origineel staat er onaangeraakt.
+        expect(bron.readAsBytesSync(), mp4MagicBytes());
+      },
+    );
+
+    test('een juiste .mp4-naam krijgt geen stagingkopie', () async {
+      final bron = File(p.join(tmp.path, 'film.mp4'))
+        ..writeAsBytesSync(mp4MagicBytes());
+      final argvs = <List<String>>[];
+      final session = await IoFileCaptureSource(
+        decoderOverride: 'afconvert',
+        decoderRunner: wavWritingDecoder(argvs),
+      ).start(request(bron.path));
+      await session.stop();
+      expect(argvs.single[argvs.single.length - 2], bron.path);
+      // Alleen de decode-uitvoer staat in de staging — geen kopie.
+      expect(
+        Directory(
+          staging.path,
+        ).listSync().where((e) => p.extension(e.path) == '.mp4'),
+        isEmpty,
+      );
+    });
+
+    test('ffmpeg krijgt de originele naam — inhoud telt daar', () async {
+      final bron = File(p.join(tmp.path, 'verkeerd.mp3'))
+        ..writeAsBytesSync(mp4MagicBytes());
+      final argvs = <List<String>>[];
+      final session = await IoFileCaptureSource(
+        decoderOverride: 'ffmpeg',
+        decoderRunner: wavWritingDecoder(argvs),
+      ).start(request(bron.path));
+      await session.stop();
+      expect(argvs.single, contains(bron.path));
+    });
+
+    test(
+      'afconvert-fout op een videocontainer claimt geen ontbrekende track',
+      () async {
+        final bron = File(p.join(tmp.path, 'video.mp4'))
+          ..writeAsBytesSync(mp4MagicBytes());
+        final session = await IoFileCaptureSource(
+          decoderOverride: 'afconvert',
+          decoderRunner: (exe, argv, {environment, required timeout}) =>
+              DecodeRun(
+                done: Future.value(
+                  const DecodeResult(
+                    exitCode: 1,
+                    stderr: "Error: Couldn't open input file ('dta?')",
+                  ),
+                ),
+                kill: () {},
+              ),
+        ).start(request(bron.path));
+        await expectLater(
+          session.stop(),
+          throwsA(
+            isA<DecodeFailed>().having(
+              (e) => e.message,
+              'melding',
+              allOf(contains('mogelijk geen audiotrack'), contains('dta?')),
+            ),
+          ),
+        );
+      },
+    );
   });
 }

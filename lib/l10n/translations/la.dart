@@ -1553,6 +1553,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV non est PCM sedecim bitum — decodatio necessaria est',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV non est PCM sedecim bitum — navigatrum tamen decodat',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Modulus transcriptionis vel non est vel non paratus est. Eum pone in Constitutis → Moduli.',
+  'Instellingen openen': 'Constituta aperire',
+  'Sprekers onderscheiden': 'Loquentes distinguere',
   'Rij {n} omhoog': 'Versus {n} sursum',
   'Rij {n} omlaag': 'Versus {n} deorsum',
   'Dubbelklik om de grootte te wijzigen':

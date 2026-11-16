@@ -786,6 +786,11 @@ class _WelcomeScreen extends ConsumerWidget {
   ) async {
     final messenger = ScaffoldMessenger.of(context);
     final l10n = context.l10n;
+    // Een mediabestand in de recente lijst (uit een oudere versie of een
+    // eigen mapkeuze) hoort dezelfde classificatie als de openwegen
+    // (#2932).
+    if (await openMediaPathIfMedia(context, path)) return;
+    if (!context.mounted) return;
     final result = await ref.read(tabsProvider.notifier).openFileByPath(path);
     _reportOpenFailure(
       messenger,

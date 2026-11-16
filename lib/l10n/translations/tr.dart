@@ -2398,6 +2398,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV 16 bit PCM değil — kod çözme gerekli',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV 16 bit PCM değil — tarayıcı yine de kodunu çözer',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Transkripsiyon modülü kapalı veya ayarlanmamış. Ayarlar → Modüller altından açın.',
+  'Instellingen openen': 'Ayarları aç',
+  'Sprekers onderscheiden': 'Konuşmacıları ayırt et',
   'Rij {n} omhoog': '{n}. satır yukarı',
   'Rij {n} omlaag': '{n}. satır aşağı',
   'Dubbelklik om de grootte te wijzigen':

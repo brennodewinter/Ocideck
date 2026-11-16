@@ -1558,6 +1558,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'il-WAV mhuwiex PCM ta’ 16-bit — hemm bżonn dekodifikar',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'il-WAV mhuwiex PCM ta’ 16-bit — il-browser jikkodifika xorta',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Il-modulu tat-traskrizzjoni huwa mitfi jew mhux ikkonfigurat. Ixgħalha fi Settings → Moduli.',
+  'Instellingen openen': 'Iftaħ is-settings',
+  'Sprekers onderscheiden': 'Iddistixxi l-kelliema',
   'Rij {n} omhoog': 'Ringiela {n} fuq',
   'Rij {n} omlaag': 'Ringiela {n} isfel',
   'Dubbelklik om de grootte te wijzigen':

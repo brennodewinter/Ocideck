@@ -1542,6 +1542,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV bukan PCM 16-bit — perlu didekode',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV bukan PCM 16-bit — browser tetap mendekodenya',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Modul transkripsi nonaktif atau belum diatur. Aktifkan melalui Pengaturan → Modul.',
+  'Instellingen openen': 'Buka pengaturan',
+  'Sprekers onderscheiden': 'Bedakan pembicara',
   'Rij {n} omhoog': 'Baris {n} ke atas',
   'Rij {n} omlaag': 'Baris {n} ke bawah',
   'Dubbelklik om de grootte te wijzigen': 'Klik dua kali untuk mengubah ukuran',

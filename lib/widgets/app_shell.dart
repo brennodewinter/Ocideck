@@ -218,6 +218,7 @@ part 'app_shell_menu.dart';
 // Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';
+part 'shell/shell_actions_pickers.dart';
 part 'shell/url_import_dialog.dart';
 part 'shell/web_wiring.dart';
 part 'shell/shell_actions_present.dart';
@@ -695,6 +696,9 @@ class _AppShellState extends ConsumerState<AppShell> {
               importFailureMessage(context.l10n, failure),
             );
           }
+        } else if (await openMediaPathIfMedia(context, path)) {
+          // Audio/video kreeg de transcriptievoorbeschouwing — ook via
+          // sleep, Finder-"Open met" en start-argumenten (#2932).
         } else if (droppedImageExtensions.contains(ext)) {
           final adopted = await _adoptDroppedImage(path);
           if (adopted != null) images.add(adopted);

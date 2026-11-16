@@ -1542,6 +1542,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV ei ole 16-bittistä PCM:ää — tarvitaan dekoodaus',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV ei ole 16-bittistä PCM:ää — selain dekoodaa sen silti',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Transkriptiomoduuli on pois päältä tai sitä ei ole määritetty. Ota se käyttöön kohdassa Asetukset → Moduulit.',
+  'Instellingen openen': 'Avaa asetukset',
+  'Sprekers onderscheiden': 'Erottele puhujat',
   'Rij {n} omhoog': 'Rivi {n} ylös',
   'Rij {n} omlaag': 'Rivi {n} alas',
   'Dubbelklik om de grootte te wijzigen': 'Kaksoisnapsauta muuttaaksesi kokoa',

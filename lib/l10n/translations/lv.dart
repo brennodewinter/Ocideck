@@ -1538,6 +1538,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV nav 16 bitu PCM — nepieciešama dekodēšana',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV nav 16 bitu PCM — pārlūks to tik un tā dekodē',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Transkripcijas modulis ir izslēgts vai nav iestatīts. Ieslēdziet to sadaļā Iestatījumi → Moduļi.',
+  'Instellingen openen': 'Atvērt iestatījumus',
+  'Sprekers onderscheiden': 'Atdalīt runātājus',
   'Rij {n} omhoog': 'Rinda {n} uz augšu',
   'Rij {n} omlaag': 'Rinda {n} uz leju',
   'Dubbelklik om de grootte te wijzigen': 'Dubultklikšķis, lai mainītu izmēru',

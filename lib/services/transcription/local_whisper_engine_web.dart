@@ -88,7 +88,9 @@ class WebWhisperEngine implements LocalWhisperEngine {
   @override
   Future<EngineCapabilities> capabilities() async => EngineCapabilities(
     timestamps: true,
-    languages: const {'auto'},
+    // Dezelfde whisper.cpp als de CLI — de WASM-bridge neemt dezelfde
+    // taalcode, dus dezelfde eerlijke tabel (#2940).
+    languages: whisperSupportedLanguages,
     requiresModel: model?.id,
   );
 
@@ -132,6 +134,11 @@ class WebWhisperEngine implements LocalWhisperEngine {
     if (!_supported) {
       throw const EngineUnavailable(
         'lokale web-engine vereist cross-origin isolatie',
+      );
+    }
+    if (options.diarize) {
+      throw const EngineUnavailable(
+        'diarisatie wordt door deze engine niet ondersteund',
       );
     }
     final Uint8List? bytes = WebAssetStore.isMemPath(audio.path)

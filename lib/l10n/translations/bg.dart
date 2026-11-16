@@ -1561,6 +1561,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV файлът не е 16-битов PCM — нужно е декодиране',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV файлът не е 16-битов PCM — браузърът все пак го декодира',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Модулът за транскрипция е изключен или не е настроен. Включете го от Настройки → Модули.',
+  'Instellingen openen': 'Отвори настройките',
+  'Sprekers onderscheiden': 'Различаване на говорителите',
   'Rij {n} omhoog': 'Ред {n} нагоре',
   'Rij {n} omlaag': 'Ред {n} надолу',
   'Dubbelklik om de grootte te wijzigen':

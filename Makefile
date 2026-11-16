@@ -239,8 +239,11 @@ test-golden:
 	@echo "== OciDeck check: golden (visual regression) =="
 	@echo "Command: flutter test test/golden --tags golden $(TEST_JOBS_FLAG) $(if $(UPDATE),--update-goldens,)"
 	@echo "Covers: SlidePreviewWidget layout/structure/colour per slide type."
-	@echo "Failure means: a slide renders differently — inspect the *_testImage diff,"
-	@echo "        then re-run with UPDATE=1 if the change is intentional."
+	@echo "Failure means: EITHER a slide renders differently — inspect the *_testImage"
+	@echo "        diff, then re-run with UPDATE=1 if the change is intentional — OR the"
+	@echo "        native buildhook (dartcv4/CMake) died before any test ran, which is"
+	@echo "        NOT a render mismatch and must not be resolved with UPDATE=1. Check"
+	@echo "        build/test-report.json: no test entries means a build failure (#2937)."
 	$(RAISE_FDS) flutter test test/golden --tags golden $(TEST_JOBS_FLAG) $(if $(UPDATE),--update-goldens,) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Mutation check for the "dead/untested boolean-operand" bug class that line

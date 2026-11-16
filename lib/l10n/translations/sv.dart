@@ -1541,6 +1541,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV-filen är inte 16-bitars PCM — avkodning krävs',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV-filen är inte 16-bitars PCM — webbläsaren avkodar den ändå',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Transkriptionsmodulen är av eller inte inställd. Slå på den under Inställningar → Moduler.',
+  'Instellingen openen': 'Öppna inställningar',
+  'Sprekers onderscheiden': 'Skilj talare åt',
   'Rij {n} omhoog': 'Rad {n} upp',
   'Rij {n} omlaag': 'Rad {n} ner',
   'Dubbelklik om de grootte te wijzigen':

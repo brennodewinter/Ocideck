@@ -56,30 +56,43 @@ class WebFileCaptureSource extends FileCaptureSource {
       head,
       extension: WebAssetStore.nameFor(sourcePath)?.split('.').last,
     );
+    WavInfo? wav;
     if (container == MediaContainer.wav) {
-      final info = parseWavHeader(head, bytes.length);
-      if (info == null) {
+      // De volle bytes liggen toch al in het geheugen — geef ze de
+      // parser, dan vindt hij `data` óók achter metadata/FLLR-vulling
+      // die voorbij de 256-sniffkop ligt (#2933).
+      wav = parseWavHeader(bytes, bytes.length);
+      if (wav == null) {
         throw const DecodeFailed('WAV-header is beschadigd of onleesbaar');
       }
-      return FileSourceInfo(
-        path: sourcePath,
-        sizeBytes: bytes.length,
-        container: container,
-        duration: info.duration,
-        engineReadsDirectly: true,
-        decodable: true,
-      );
+      if (wav.dataBytes == 0) {
+        throw const DecodeFailed('het bestand bevat geen audiodata');
+      }
+      if (wav.formatTag == 1) {
+        return FileSourceInfo(
+          path: sourcePath,
+          sizeBytes: bytes.length,
+          container: container,
+          duration: wav.duration,
+          engineReadsDirectly: true,
+          decodable: true,
+        );
+      }
+      // Geen PCM-WAV: `decodeAudioData` kan hem alsnog omzetten.
     }
     return FileSourceInfo(
       path: sourcePath,
       sizeBytes: bytes.length,
       container: container,
+      duration: wav?.duration,
       engineReadsDirectly: false,
       decodable: _bridge != null,
       // Welke codec de browser dekt is per browser anders (§5.1 noot 6) —
       // de decode zelf is de uitspraak, dit is de eerlijke aankondiging.
       decodeNote: _bridge == null
           ? 'whisper/bridge.js ontbreekt in deze bundle — geen decode'
+          : wav != null && wav.formatTag != 1
+          ? 'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog'
           : 'codecdekking hangt van deze browser af',
     );
   }

@@ -1534,6 +1534,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV ei ole 16-bitine PCM — vaja on dekodeerida',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV ei ole 16-bitine PCM — brauser dekodeerib selle ikkagi',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Transkriptsioonimoodul on välja lülitatud või seadistamata. Lülita see sisse jaotises Seaded → Moodulid.',
+  'Instellingen openen': 'Ava seaded',
+  'Sprekers onderscheiden': 'Erista kõnelejaid',
   'Rij {n} omhoog': 'Rida {n} üles',
   'Rij {n} omlaag': 'Rida {n} alla',
   'Dubbelklik om de grootte te wijzigen': 'Topeltklõps suuruse muutmiseks',
