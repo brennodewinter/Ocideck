@@ -10,6 +10,7 @@
 //    noemen in plaats van "een bestand";
 //  * voor PCM-WAV meteen de duur en of de engine hem direct leest — de
 //    enige container die géén decoder nodig heeft (§5.1 noot 1).
+import 'dart:convert';
 import 'dart:typed_data';
 
 /// De herkende container van een mediabestand.
@@ -96,8 +97,76 @@ class WavInfo {
 }
 
 /// Zoveel kopbytes als de sniffer leest. WAV-headers met een `data`-chunk
-/// die niet direct volgt (LIST/metadata ertussen) vragen zelden meer.
+/// die niet direct volgt (LIST/metadata ertussen) vragen zelden meer —
+/// voor alles groters seekt `readWavInfo` er doorheen (#2933).
 const sniffHeadBytes = 256;
+
+/// Extensies die een audio- of videobestand kunnen dragen — de snelle
+/// aanwijzing van de openroute (#2932). Dezelfde namen als de
+/// extensietabel hieronder, plus de varianten die decoders aankunnen;
+/// of er écht media in zit beslissen de magische bytes.
+const mediaFileExtensions = {
+  'wav',
+  'wave',
+  'mp3',
+  'm4a',
+  'aac',
+  'flac',
+  'ogg',
+  'oga',
+  'opus',
+  'mp4',
+  'm4v',
+  'mov',
+  '3gp',
+  'webm',
+  'mkv',
+  'mk3d',
+  'avi',
+};
+
+/// Wat de openroute met een bestand doet (#2932): media krijgt de
+/// transcriptievoorbeschouwing, de rest loopt de bestaande
+/// tekst-/pakket-/importroutes.
+enum OpenTarget {
+  /// Audio/video — de transcriptievoorbeschouwing is de openactie.
+  media,
+
+  /// Geen media aangetoond — de gewone openroutes bepalen verder.
+  other,
+}
+
+/// De centrale classificatie van de openroute, vóór elke tekstlezing:
+/// de magische bytes geven de doorslag (een `.mp3`-naam op MP4-inhoud,
+/// maar óók media-magic onder een tekstnaam), de extensie is de reserve
+/// voor containers zonder herkenbare kop — behalve als de kop gewoon
+/// leesbare tekst blijkt.
+OpenTarget classifyOpenTarget(Uint8List head, {String? extension}) {
+  if (sniffContainer(head) != MediaContainer.unknown) {
+    return OpenTarget.media;
+  }
+  final ext = (extension ?? '').toLowerCase().replaceFirst('.', '');
+  if (!mediaFileExtensions.contains(ext)) return OpenTarget.other;
+  return _looksLikeUtf8Text(head) ? OpenTarget.other : OpenTarget.media;
+}
+
+/// Mag dit de tekstroute in, ondanks een media-naam? Een `.mp3`-naam op
+/// een tekstbestand mag geen decodefout opleveren — en andersom hoort
+/// een medianaam op binaire inhoud níet de kans tekst te zijn.
+bool _looksLikeUtf8Text(Uint8List head) {
+  final end = head.length < 512 ? head.length : 512;
+  if (end == 0) return false;
+  // NUL-bytes zijn geen tekst meer.
+  for (var i = 0; i < end; i++) {
+    if (head[i] == 0) return false;
+  }
+  try {
+    utf8.decode(head.sublist(0, end));
+    return true;
+  } on Object {
+    return false;
+  }
+}
 
 bool _eq(Uint8List head, int off, List<int> magic) {
   if (head.length < off + magic.length) return false;

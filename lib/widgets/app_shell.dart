@@ -197,6 +197,8 @@ import 'shell/new_document_action.dart';
 import 'shell/openkat_import_action.dart';
 import 'shell/dropped_files.dart';
 import 'shell/presentation_import_action.dart';
+import '../services/transcription/file_capture_source_web.dart';
+import '../services/transcription/media_sniff.dart';
 import 'shell/transcribe_file_action.dart';
 import 'shell/record_microphone_action.dart';
 import 'shell/record_system_action.dart';
@@ -693,6 +695,16 @@ class _AppShellState extends ConsumerState<AppShell> {
               ScaffoldMessenger.of(context),
               context.l10n,
               importFailureMessage(context.l10n, failure),
+            );
+          }
+        } else if (await _isMediaPath(path)) {
+          // Audio/video krijgt de transcriptievoorbeschouwing — ook via
+          // sleep, Finder-"Open met" en start-argumenten (#2932).
+          if (mounted) {
+            await openMediaForTranscription(
+              context,
+              sourcePath: path,
+              displayName: p.basename(path),
             );
           }
         } else if (droppedImageExtensions.contains(ext)) {

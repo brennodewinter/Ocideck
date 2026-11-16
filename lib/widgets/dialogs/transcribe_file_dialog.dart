@@ -34,6 +34,7 @@ import '../../state/tabs_provider.dart';
 import '../../state/transcription_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/file_extension.dart';
+import 'settings_dialog.dart';
 
 /// De fasen van de flow — één toestand, nooit twee schermen tegelijk.
 enum _Phase {
@@ -283,35 +284,57 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     final profile = ref.watch(asrServerProfileProvider);
     final route = ref.watch(transcriptionRouteProvider);
     final isServer = route == 'server' && profile.isConfigured;
+    final engine = ref.watch(transcriptionEngineProvider);
     return AlertDialog(
       title: Text(l10n.d('Audio of video transcriberen')),
       content: SizedBox(
         width: 520,
         child: switch (_phase) {
-          _Phase.ready => _readyContent(l10n, isServer, profile.host),
+          _Phase.ready => _readyContent(
+            l10n,
+            isServer,
+            profile.host,
+            engineAvailable: engine != null,
+          ),
           _Phase.running => _runningContent(l10n),
           _Phase.failed => _failedContent(l10n),
         },
       ),
-      actions: _actions(l10n, isServer),
+      actions: _actions(l10n, isServer, engineAvailable: engine != null),
     );
   }
 
-  List<Widget> _actions(AppLocalizations l10n, bool isServer) {
+  List<Widget> _actions(
+    AppLocalizations l10n,
+    bool isServer, {
+    required bool engineAvailable,
+  }) {
     return switch (_phase) {
       _Phase.ready => [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(l10n.d('Annuleren')),
         ),
-        FilledButton(
-          onPressed: _info == null || _startDisabled() ? null : _start,
-          child: Text(
-            isServer
-                ? l10n.d('Uploaden en transcriberen')
-                : l10n.d('Transcriberen'),
+        // Staat de module uit, dan is Instellingen de enige zinnige
+        // stap — een dode Start-knop met een vaag verzoek is geen
+        // uitweg (#2932).
+        if (!engineAvailable)
+          FilledButton(
+            onPressed: () => SettingsDialog.show(
+              context,
+              initialSection: SettingsSection.modules,
+            ),
+            child: Text(l10n.d('Instellingen openen')),
+          )
+        else
+          FilledButton(
+            onPressed: _info == null || _startDisabled() ? null : _start,
+            child: Text(
+              isServer
+                  ? l10n.d('Uploaden en transcriberen')
+                  : l10n.d('Transcriberen'),
+            ),
           ),
-        ),
       ],
       _Phase.running => [
         TextButton(onPressed: _stop, child: Text(l10n.d('Stop'))),
@@ -333,7 +356,12 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     return !info.engineReadsDirectly && !info.decodable;
   }
 
-  Widget _readyContent(AppLocalizations l10n, bool isServer, String host) {
+  Widget _readyContent(
+    AppLocalizations l10n,
+    bool isServer,
+    String host, {
+    required bool engineAvailable,
+  }) {
     final info = _info;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -366,10 +394,20 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           style: TextStyle(fontSize: 12, color: AppTheme.slate600),
         ),
         const SizedBox(height: 8),
-        _routeBanner(l10n, isServer, host),
-        const SizedBox(height: 8),
-        _languageRow(l10n),
-        if (!kIsWeb) _keepAudioRow(l10n),
+        if (!engineAvailable)
+          _note(
+            l10n,
+            l10n.d(
+              'De transcriptiemodule staat uit of is niet ingesteld. '
+              'Schakel hem in via Instellingen → Modules.',
+            ),
+          )
+        else ...[
+          _routeBanner(l10n, isServer, host),
+          const SizedBox(height: 8),
+          _languageRow(l10n),
+          if (!kIsWeb) _keepAudioRow(l10n),
+        ],
       ],
     );
   }
