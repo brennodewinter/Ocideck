@@ -33,6 +33,7 @@ This is to certify that the participant below attended the program listed.
 
 <!-- field id=sessies type=table columns="Date|Session|Time" rows=1.. required -->
 **Sessions attended**
+> Time as a block (for example 09:00 - 17:00) or a number of hours; multiple blocks per row are allowed.
 <!-- answer -->
 <!-- /field id=sessies -->
 

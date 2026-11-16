@@ -16,9 +16,17 @@ import 'pdf/pdf_text_probe.dart';
 FormFill answer(FormFill fill, String id, FormAnswerValue value) =>
     (fill.setAnswer(id, value) as FormFillChanged).fill;
 
-FormFill course(String template, String language, {String hours = '6,5'}) {
+FormFill course(
+  String template,
+  String language, {
+  String hours = '6,5',
+  Map<String, FormImageFact> imageFacts = const {},
+}) {
   var fill =
-      (FormFill.open(CpeCertificateService.groupForm(template, language))
+      (FormFill.open(
+                CpeCertificateService.groupForm(template, language),
+                imageFacts: imageFacts,
+              )
               as FormFillReady)
           .fill;
   for (final entry in {
@@ -81,7 +89,9 @@ void main() {
     test(
       '$language: rejects zero, negative and invalid hours before issuing',
       () {
-        for (final hours in ['0', '-1', 'oops', 'NaN', '']) {
+        // Een lege urenkolom valt op het sessietotaal terug; 8:30-17:30 is 9
+        // uur, dus alleen 'oops' en 'NaN' blijven fouten.
+        for (final hours in ['0', '-1', 'oops', 'NaN']) {
           expect(
             () => CpeCertificateService.issue(
               template,
@@ -92,6 +102,55 @@ void main() {
             reason: hours,
           );
         }
+      },
+    );
+    test(
+      '$language: empty hours fall back to the session total, more is refused',
+      () {
+        final filled = CpeCertificateService.issue(
+          template,
+          course(template, language, hours: ''),
+          language,
+        );
+        expect(
+          filled[1].source,
+          contains('9 ${language == 'nl' ? 'PE-uren' : 'CPE hours'}'),
+        );
+        expect(
+          () => CpeCertificateService.issue(
+            template,
+            course(template, language, hours: '9,5'),
+            language,
+          ),
+          throwsFormatException,
+        );
+      },
+    );
+    test(
+      '$language: the signature gets a bounded height, not column width',
+      () {
+        final fill = answer(
+          course(
+            template,
+            language,
+            imageFacts: const {
+              'images/sig.png': FormImageFact(bytes: 10, format: 'png'),
+            },
+          ),
+          'handtekening',
+          const FormAnswerValue(
+            images: [FormImageRef('images/sig.png', 'Handtekening', null)],
+          ),
+        );
+        final certificate = CpeCertificateService.issue(
+          template,
+          fill,
+          language,
+        )[0];
+        expect(
+          certificate.source,
+          contains('![h:96px Handtekening](images/sig.png)'),
+        );
       },
     );
     test('$language: certificate renders as one PDF page', () async {
@@ -129,6 +188,27 @@ void main() {
       }
     });
   }
+  group('sessionHours', () {
+    test('a time block is the length between its clocks', () {
+      expect(CpeCertificateService.sessionHours('08:30 - 17:30'), 9);
+      expect(CpeCertificateService.sessionHours('9.00 - 12.30'), 3.5);
+    });
+    test('several blocks in one cell add up', () {
+      expect(
+        CpeCertificateService.sessionHours('09:00 - 12:00, 13:00 - 15:30'),
+        5.5,
+      );
+    });
+    test('a plain number or a number with a unit is hours', () {
+      expect(CpeCertificateService.sessionHours('6,5'), 6.5);
+      expect(CpeCertificateService.sessionHours('2 uur'), 2);
+      expect(CpeCertificateService.sessionHours('90 minuten'), 1.5);
+    });
+    test('nothing parseable is no bound', () {
+      expect(CpeCertificateService.sessionHours(''), isNull);
+      expect(CpeCertificateService.sessionHours('onduidelijk'), isNull);
+    });
+  });
   test('both recipe assets remain valid forms', () {
     for (final language in ['nl', 'en']) {
       expect(

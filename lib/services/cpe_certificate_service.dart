@@ -1,6 +1,7 @@
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import '../models/markdown_document.dart';
+import '../utils/image_size_tokens.dart';
 
 /// Shared course data stays in a single form; individual attendance never does.
 class CpeCertificateService {
@@ -21,8 +22,64 @@ class CpeCertificateService {
         : 'Name|Email address|CPE hours|Attendance exceptions (optional)';
     return '$body\n<!-- field id=deelnemers type=table columns="$columns" rows=1.. required -->\n'
         '**${nl ? 'Deelnemers' : 'Participants'}**\n'
-        '> ${nl ? 'Eén rij per persoon. Vul netto uren per deelnemer in, exclusief pauzes. Vermeld gemiste sessies of afwijkende tijden in de laatste kolom.' : 'One row per person. Enter net hours for each participant, excluding breaks. Note missed sessions or different times in the last column.'}\n'
+        '> ${nl ? 'Eén rij per persoon. Laat PE-uren leeg voor het totaal van de sessies — hoger dan dat totaal kan niet. Vermeld gemiste sessies of afwijkende tijden in de laatste kolom.' : 'One row per person. Leave CPE hours empty for the session total — more than that total is not possible. Note missed sessions or different times in the last column.'}\n'
         '<!-- answer -->\n<!-- /field id=deelnemers -->\n';
+  }
+
+  /// De lengte van één sessiecultuur in uren, uit de `Tijd`-kolom:
+  /// tijdsblokken (`09:00 - 12:30`, meerdere per cel mogen) of een urenaantal
+  /// (`6,5`, `6,5 uur`, `90 minuten`). Geeft `null` als niets ervan parseert.
+  static double? sessionHours(String cell) {
+    final text = cell.trim();
+    if (text.isEmpty) return null;
+    final blocks = RegExp(
+      r'(\d{1,2})[:.](\d{2})\s*[-–—]+\s*(\d{1,2})[:.](\d{2})',
+    ).allMatches(text);
+    if (blocks.isNotEmpty) {
+      var minutes = 0;
+      for (final m in blocks) {
+        final start = int.parse(m[1]!) * 60 + int.parse(m[2]!);
+        var end = int.parse(m[3]!) * 60 + int.parse(m[4]!);
+        // Een blok over middernacht ('22:00 - 02:00') loopt de dag door.
+        if (end <= start) end += 24 * 60;
+        minutes += end - start;
+      }
+      return minutes / 60;
+    }
+    final minutes = RegExp(
+      r'(\d+)\s*(?:minuten|min)\b',
+      caseSensitive: false,
+    ).firstMatch(text);
+    if (minutes != null) return int.parse(minutes[1]!) / 60;
+    final hours =
+        RegExp(
+          r'(\d+(?:[.,]\d+)?)\s*(?:uur|uren|hours?|h)\b',
+          caseSensitive: false,
+        ).firstMatch(text) ??
+        RegExp(r'^\s*(\d+(?:[.,]\d+)?)\s*$').firstMatch(text);
+    if (hours == null) return null;
+    return double.tryParse(hours[1]!.replaceAll(',', '.'));
+  }
+
+  /// Het PE-totaal van de sessietabel, of `null` als geen enkele tijdsopgave
+  /// parseert — dan is er geen bovengrens om te bewaken.
+  static double? sessionTotal(FormFill group) {
+    var total = 0.0;
+    var found = false;
+    for (final row in group.answerOf('sessies').value.rows) {
+      if (row.length < 3) continue;
+      final hours = sessionHours(row[2]);
+      if (hours == null) continue;
+      total += hours;
+      found = true;
+    }
+    return found ? total : null;
+  }
+
+  /// `8.0` → `8`, `6.5` → `6,5` (nl) — zoals de invuller het zelf zou schrijven.
+  static String formatHours(double hours, {required bool nl}) {
+    final text = hours.toStringAsFixed(2).replaceAll(RegExp(r'\.?0+$'), '');
+    return nl ? text.replaceAll('.', ',') : text;
   }
 
   /// Throws before creating any documents if any participant is invalid.
@@ -33,10 +90,21 @@ class CpeCertificateService {
   ) {
     if (!group.canSend) throw const FormatException('Incomplete course data');
     final rows = group.answerOf('deelnemers').value.rows;
+    // Het sessietotaal is de standaard én het plafond: een lege urenkolom
+    // krijgt het totaal, en meer PE-uren dan er sessietijd was kan niet.
+    final total = sessionTotal(group);
     final certificates = <({String name, String source})>[];
     for (var i = 0; i < rows.length; i++) {
       final row = rows[i];
       if (row.length != 4) throw const FormatException('Invalid participant');
+      var hours = row[2].trim();
+      if (hours.isEmpty && total != null) {
+        hours = formatHours(total, nl: language == 'nl');
+      }
+      final given = double.tryParse(hours.replaceAll(',', '.'));
+      if (total != null && given != null && given > total) {
+        throw FormatException('Hours above session total', null, i + 1);
+      }
       var individual =
           (FormFill.open(
                     MarkdownDocument.parse(template).body,
@@ -48,7 +116,7 @@ class CpeCertificateService {
         final value = switch (field.id) {
           'naam' => FormAnswerValue(text: row[0].trim()),
           'mail' => FormAnswerValue(text: row[1].trim()),
-          'uren' => FormAnswerValue(text: row[2].trim()),
+          'uren' => FormAnswerValue(text: hours),
           _ => group.answerOf(field.id).value,
         };
         final step = individual.setAnswer(field.id, value);
@@ -124,7 +192,15 @@ class CpeCertificateService {
     out.writeln('\n${answer('logo')}\n');
     out.writeln('**${nl ? 'Bevestigd door' : 'Confirmed by'}**\n');
     out.writeln('${answer('ondertekenaar')}\n');
-    out.writeln(answer('handtekening'));
+    // Een handtekening hoort een strook te zijn, geen plaat op kolombreedte:
+    // `h:` begrenst de hoogte in lezer én export (image_size_tokens.dart).
+    out.writeln(
+      markdownImageWithSize(answer('handtekening'), (
+        width: null,
+        widthFraction: null,
+        height: 96,
+      )),
+    );
     return out.toString();
   }
 }

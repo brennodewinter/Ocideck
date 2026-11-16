@@ -33,6 +33,7 @@ Hierbij wordt verklaard dat de onderstaande deelnemer het vermelde programma hee
 
 <!-- field id=sessies type=table columns="Datum|Sessie|Tijd" rows=1.. required -->
 **Bijgewoonde sessies**
+> Tijd als tijdsblok (bijvoorbeeld 09:00 - 17:00) of aantal uren; meerdere blokken per rij mogen.
 <!-- answer -->
 <!-- /field id=sessies -->
 
