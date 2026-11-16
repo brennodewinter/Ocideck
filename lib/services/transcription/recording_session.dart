@@ -155,6 +155,8 @@ class RecordingManager {
   final RecordingStaging _staging;
 
   RecordingHandle? _active;
+  _PendingRecordingStart? _starting;
+  Future<void>? _stopFuture;
   StreamSubscription<CaptureEndCause>? _endedSub;
 
   /// De lopende opname, of null. De indicator bestaat precies zo lang als
@@ -171,7 +173,7 @@ class RecordingManager {
     String? sourcePath,
     String? inputDeviceId,
   }) async {
-    if (_active != null) {
+    if (_active != null || _starting != null || _stopFuture != null) {
       throw StateError('Er loopt al een opname');
     }
     // §2.3: bronnen die per constructie andermans stemmen vastleggen mogen
@@ -188,37 +190,45 @@ class RecordingManager {
         'deelnemersmelding niet bevestigd voor deze bron',
       );
     }
-    final stagingDir = await _staging.createSessionDir();
-    final request = CaptureRequest(
-      kinds: kinds,
-      consent: consent,
-      stagingDir: stagingDir,
-      sourcePath: sourcePath,
-      inputDeviceId: inputDeviceId,
-    );
-    final CaptureSession capture;
+    final pending = _PendingRecordingStart();
+    _starting = pending;
+    String? stagingDir;
     try {
-      capture = await source.start(request);
+      stagingDir = await _staging.createSessionDir();
+      pending.throwIfStopped();
+      final capture = await source.start(
+        CaptureRequest(
+          kinds: kinds,
+          consent: consent,
+          stagingDir: stagingDir,
+          sourcePath: sourcePath,
+          inputDeviceId: inputDeviceId,
+        ),
+      );
+      if (pending.stopReason != null) {
+        await capture.stop();
+        pending.throwIfStopped();
+      }
+      final handle = RecordingHandle._(
+        this,
+        capture,
+        kinds,
+        DateTime.now(),
+        stagingDir,
+      );
+      _active = handle;
+      _endedSub = capture.ended?.listen((cause) {
+        unawaited(stop(_reasonFor(cause)));
+      });
+      return handle;
     } on Object {
-      // De stagingmap die we net maakten is van ons — weg ermee, anders
-      // blijft er bij elke mislukte start een leeg spoor achter. `Object`
-      // bewust: een bron die zijn eigen contract overtreedt en iets
-      // ongetypts gooit laat alsnog geen weesmap achter.
+      // Ook bij Stop tijdens start is de ongepubliceerde staging van ons.
       await _staging.discardDir(stagingDir);
       rethrow;
+    } finally {
+      if (identical(_starting, pending)) _starting = null;
+      pending.done.complete();
     }
-    final handle = RecordingHandle._(
-      this,
-      capture,
-      kinds,
-      DateTime.now(),
-      stagingDir,
-    );
-    _active = handle;
-    _endedSub = capture.ended?.listen((cause) {
-      unawaited(stop(_reasonFor(cause)));
-    });
-    return handle;
   }
 
   /// Vertaalt een spontaan einde naar de reden die de indicator en de
@@ -233,13 +243,42 @@ class RecordingManager {
   /// Stop de lopende opname, om welke reden dan ook. De enige plek waar
   /// tracks worden afgebroken: `ended`/`failed` bereik je nergens anders
   /// dan hier — daardoor geldt één bewijs voor alle eindwegen.
-  Future<void> stop(RecordingEndReason reason) async {
+  Future<void> stop(RecordingEndReason reason) {
+    final pending = _starting;
+    if (pending != null) {
+      pending.stopReason ??= reason;
+      return pending.done.future;
+    }
+    final stopping = _stopFuture;
+    if (stopping != null) return stopping;
     final handle = _active;
-    if (handle == null || handle._phase != RecordingPhase.recording) return;
+    if (handle == null) return Future<void>.value();
+    // Registreren vóór capture.stop(): ook een re-entrante Stop wacht mee.
+    final done = Completer<void>();
+    _stopFuture = done.future;
+    unawaited(
+      _stopActive(handle, reason).then(
+        (_) {
+          _stopFuture = null;
+          done.complete();
+        },
+        onError: (Object error, StackTrace stack) {
+          _stopFuture = null;
+          done.completeError(error, stack);
+        },
+      ),
+    );
+    return done.future;
+  }
+
+  Future<void> _stopActive(
+    RecordingHandle handle,
+    RecordingEndReason reason,
+  ) async {
     handle._phase = RecordingPhase.stopping;
     // De `ended`-subscription loslaten zonder erop te wachten: de afbraak
     // van de echte capture mag niet wachten op de gebeurtenisplumbing, en
-    // een laat binnenkomend `ended` strandt toch op de faseguard hierboven.
+    // een laat binnenkomend `ended` krijgt dezelfde lopende stopfuture.
     final sub = _endedSub;
     _endedSub = null;
     if (sub != null) unawaited(sub.cancel());
@@ -259,5 +298,15 @@ class RecordingManager {
       if (identical(_active, handle)) _active = null;
       handle._close();
     }
+  }
+}
+
+// De reservering bestaat al terwijl staging/toestemming/bronstart nog wachten.
+class _PendingRecordingStart {
+  final done = Completer<void>();
+  RecordingEndReason? stopReason;
+
+  void throwIfStopped() {
+    if (stopReason != null) throw const Cancelled('opnamestart geannuleerd');
   }
 }
