@@ -381,62 +381,6 @@ Future<void> _openPickedPaths(
   }
 }
 
-/// Vraag een URL op, haal de presentatie (een .ocideck-pakket of een Marp-
-/// markdownbestand) op en open hem. Toont een melding als ophalen mislukt.
-/// Gedeeld door het hoofdmenu én het openscherm, zodat je ook bij het openen
-/// online een presentatie kunt ophalen.
-Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
-  final url = await _showUrlDialog(context);
-  if (url == null || url.trim().isEmpty || !context.mounted) return;
-  if (isWebPlatform) {
-    // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
-    // en het deck wordt volledig in het geheugen geopend — het dart:io-
-    // downloadpad hieronder bestaat op web niet.
-    final result = await _importUrlWeb(context, ref, url);
-    // Na een geslaagde open is de `?deck=`-deellink dé manier om de
-    // presentatie door te sturen — bieden we meteen aan (#2826).
-    if (result == OpenResult.opened && context.mounted) {
-      final messenger = ScaffoldMessenger.of(context);
-      final l10n = context.l10n;
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(l10n.d('Geopend.')),
-          action: SnackBarAction(
-            label: l10n.d('Deellink kopiëren'),
-            onPressed: () async {
-              await Clipboard.setData(
-                ClipboardData(text: deckShareLink(Uri.base, url)),
-              );
-              if (context.mounted) {
-                messenger.showSnackBar(
-                  SnackBar(content: Text(l10n.d('Deellink gekopieerd.'))),
-                );
-              }
-            },
-          ),
-        ),
-      );
-    }
-    return;
-  }
-  final messenger = ScaffoldMessenger.of(context);
-  final l10n = context.l10n;
-  ImportFailure? failure;
-  try {
-    failure = await ref
-        .read(tabsProvider.notifier)
-        .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
-  } catch (e, s) {
-    // Een platform- of IO-fout mag nooit als stilte eindigen: de gebruiker
-    // heeft net een URL ingetikt en verwacht óf een tab óf een melding.
-    logError('_importFromUrl: import failed', e, s);
-    failure = ImportFailure.network;
-  }
-  if (failure != null && context.mounted) {
-    showErrorSnackBar(messenger, l10n, importFailureMessage(l10n, failure));
-  }
-}
-
 /// Open in OciDeck geplakte Markdowntekst (#2825) via exact dezelfde poort
 /// als een geopend `.md`-bestand: de tekst wordt één keer UTF-8-gecodeerd en
 /// [TabsNotifier.openDeckFromBytes] doet de rest — omvangsgrens,
