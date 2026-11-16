@@ -299,10 +299,7 @@ Uint8List buildMultipartBody({String? language, required Uint8List fileBytes}) {
   final out = BytesBuilder(copy: false);
   void line(String s) => out.add(utf8.encode('$s\r\n'));
 
-  final fields = {
-    'response_format': 'verbose_json',
-    if (language != null) 'language': language,
-  };
+  final fields = {'response_format': 'verbose_json', 'language': ?language};
   fields.forEach((name, value) {
     line('--$_boundary');
     line('Content-Disposition: form-data; name="$name"');
