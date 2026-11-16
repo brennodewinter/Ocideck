@@ -18,6 +18,8 @@ class FakeTransport implements AsrTransport {
   AsrResponse? respondWith;
   Object? throwWith;
   bool cancelled = false;
+  int sends = 0;
+  void Function()? onSend;
   String? method;
   Uri? url;
   Map<String, String>? headers;
@@ -36,6 +38,8 @@ class FakeTransport implements AsrTransport {
     Map<String, String> headers = const {},
     Duration timeout = Duration.zero,
   }) {
+    sends++;
+    onSend?.call();
     this.method = method;
     this.url = url;
     this.headers = headers;
@@ -149,6 +153,54 @@ void main() {
       expect(t.body!.length, greaterThan(512));
     });
 
+    for (final path in [
+      r'C:\Users\Alice\Private\recording.wav',
+      '/home/alice/private/recording.wav',
+      'mem:a1',
+      '/privé/音声 "test"\r\nX-Injected: secret.wav',
+    ]) {
+      test(
+        'uploadnaam bevat geen bronpad: ${path.replaceAll(RegExp(r"[\r\n]"), " ")}',
+        () async {
+          final t = FakeTransport();
+          final bytes = Uint8List.fromList([0, 1, 127, 255]);
+          final e = AsrServerEngine(
+            profile: profile,
+            transport: t,
+            audioReader: (_) async => bytes,
+          );
+          await e.transcribe(
+            AudioRef(path),
+            TranscriptionOptions(
+              serverConsent: ServerConsent(host: profile.host, audioPath: path),
+            ),
+          );
+          final wire = t.body!;
+          final text = utf8.decode(wire, allowMalformed: true);
+          expect(text, isNot(contains(path)));
+          expect(text, isNot(contains('Private')));
+          expect(text, isNot(contains('X-Injected')));
+          expect('filename="audio.wav"'.allMatches(text), hasLength(1));
+          expect('name="file";'.allMatches(text), hasLength(1));
+          expect(text, contains('Content-Type: audio/wav\r\n\r\n'));
+          final boundary = t.headers!['content-type']!.split('boundary=').last;
+          final prefix = utf8.encode(
+            '--$boundary\r\n'
+            'Content-Disposition: form-data; name="response_format"\r\n\r\n'
+            'verbose_json\r\n'
+            '--$boundary\r\n'
+            'Content-Disposition: form-data; name="file"; filename="audio.wav"\r\n'
+            'Content-Type: audio/wav\r\n\r\n',
+          );
+          expect(wire, [
+            ...prefix,
+            ...bytes,
+            ...utf8.encode('\r\n--$boundary--\r\n'),
+          ]);
+        },
+      );
+    }
+
     test('taal gaat mee als veld', () async {
       final t = FakeTransport();
       await engine(t).transcribe(
@@ -248,6 +300,116 @@ void main() {
       t.gate!.completeError(const AsrRequestException('afgebroken'));
       expect(future, throwsA(isA<Cancelled>()));
     });
+
+    for (final duringKey in [true, false]) {
+      test(
+        'cancel tijdens ${duringKey ? 'sleutel' : 'audio'} voorkomt upload',
+        () async {
+          final entered = Completer<void>();
+          final release = Completer<void>();
+          final t = FakeTransport();
+          var reads = 0;
+          final e = AsrServerEngine(
+            profile: profile,
+            transport: t,
+            apiKeyReader: () async {
+              if (duringKey) {
+                if (!entered.isCompleted) entered.complete();
+                await release.future;
+              }
+              return null;
+            },
+            audioReader: (path) async {
+              reads++;
+              if (!duringKey) {
+                if (!entered.isCompleted) entered.complete();
+                await release.future;
+              }
+              return fakeAudio();
+            },
+          );
+          final future = e.transcribe(ref, options);
+          final check = expectLater(future, throwsA(isA<Cancelled>()));
+          await entered.future;
+          e.cancel();
+          release.complete();
+          await check;
+          expect(t.sends, 0);
+          expect(reads, duringKey ? 0 : 1);
+          // Een volgende bewuste taak krijgt een eigen annuleringstoestand.
+          await e.transcribe(ref, options);
+          expect(t.sends, 1);
+        },
+      );
+    }
+
+    test('tweede taak verdringt een voorbereidende taak niet', () async {
+      final entered = Completer<void>();
+      final bytes = Completer<Uint8List>();
+      final t = FakeTransport();
+      final e = AsrServerEngine(
+        profile: profile,
+        transport: t,
+        audioReader: (_) {
+          entered.complete();
+          return bytes.future;
+        },
+      );
+      final first = e.transcribe(ref, options);
+      final check = expectLater(first, throwsA(isA<Cancelled>()));
+      await entered.future;
+      await expectLater(
+        e.transcribe(ref, options),
+        throwsA(isA<EngineUnavailable>()),
+      );
+      e.cancel();
+      bytes.complete(fakeAudio());
+      await check;
+      expect(t.sends, 0);
+    });
+
+    test('cancel wint van een laat succesvol transportantwoord', () async {
+      final t = FakeTransport()..gate = Completer<AsrResponse>();
+      final e = engine(t);
+      final future = e.transcribe(ref, options);
+      final check = expectLater(future, throwsA(isA<Cancelled>()));
+      await Future<void>.delayed(Duration.zero);
+      e.cancel();
+      t.gate!.complete(const AsrResponse(200, '{"text":"te laat"}'));
+      await check;
+      expect(t.cancelled, isTrue);
+      t.gate = null;
+      await e.transcribe(ref, options);
+      expect(t.sends, 2);
+    });
+
+    test('synchroon cancel in send breekt het nieuwe handle af', () async {
+      final t = FakeTransport();
+      final e = engine(t);
+      t.onSend = e.cancel;
+      await expectLater(e.transcribe(ref, options), throwsA(isA<Cancelled>()));
+      expect(t.cancelled, isTrue);
+    });
+
+    test(
+      'voorbereidingsfout geeft de engine vrij voor een volgende taak',
+      () async {
+        var fail = true;
+        final t = FakeTransport();
+        final e = AsrServerEngine(
+          profile: profile,
+          transport: t,
+          audioReader: (_) async {
+            if (fail) throw const IoFailed('leesfout');
+            return fakeAudio();
+          },
+        );
+        await expectLater(e.transcribe(ref, options), throwsA(isA<IoFailed>()));
+        fail = false;
+        await e.transcribe(ref, options);
+        expect(t.sends, 1);
+      },
+    );
 
     test('probe() verstuurt geen audio en toetst bereikbaarheid', () async {
       final t = FakeTransport()..respondWith = const AsrResponse(200, '<html>');
