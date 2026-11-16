@@ -47,12 +47,6 @@ void main() {
           annotation: s.href == null ? null : pw.AnnotationUrl(s.href!),
         ),
       );
-      // Ook een bezitsvorm zonder apostrof blijft een gewoon woord; alleen
-      // de apostrofgevallen hebben een afzonderlijk inline-kader nodig.
-      if (apostrophe < 0) {
-        expect(spans.whereType<pw.WidgetSpan>(), isEmpty);
-        return;
-      }
       final atomic = spans.whereType<pw.WidgetSpan>().single.child;
       final document = pw.Document();
       document.addPage(

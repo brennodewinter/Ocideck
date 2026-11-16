@@ -4,13 +4,13 @@ import 'package:pdf/widgets.dart' as pw;
 
 import 'document_pdf_blocks.dart';
 
-/// Keeps ordinary apostrophe words together across font and formatting changes.
+/// Keeps words together across apostrophes, font fallbacks and formatting changes.
 List<pw.InlineSpan> pdfApostropheWords(
   List<PdfSpan> spans, {
   required pw.InlineSpan Function(PdfSpan) render,
   required pw.TextStyle style,
 }) {
-  if (!spans.map((s) => s.text).join().contains(RegExp(r"['’]"))) {
+  if (!spans.map((s) => s.text).join().contains(RegExp(r"['’\u0080-\uFFFF]"))) {
     return spans.map(render).toList();
   }
   final output = <pw.InlineSpan>[];
@@ -37,7 +37,8 @@ List<pw.InlineSpan> pdfApostropheWords(
     final children = word.map(render).toList();
     // Lange tokens behouden de noodafbreking van RichText. Deze begrenzing
     // voorkomt dat een onbegrensd token een onbreekbaar inline-kader wordt.
-    if (text.length <= 80 && RegExp(r"\S['’]\S").hasMatch(text)) {
+    if (text.length <= 80 &&
+        RegExp(r"\S['’]\S|[\u0080-\uFFFF]").hasMatch(text)) {
       finishPending();
       output.add(
         _ApostropheWordSpan(
