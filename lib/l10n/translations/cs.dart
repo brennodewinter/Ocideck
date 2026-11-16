@@ -1542,6 +1542,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV není 16bitové PCM — je nutná konverze',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV není 16bitové PCM — prohlížeč ho stejně dekóduje',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Modul přepisu je vypnutý nebo není nastavený. Zapněte ho v Nastavení → Moduly.',
+  'Instellingen openen': 'Otevřít nastavení',
+  'Sprekers onderscheiden': 'Rozlišovat mluvčí',
   'Rij {n} omhoog': 'Řádek {n} nahoru',
   'Rij {n} omlaag': 'Řádek {n} dolů',
   'Dubbelklik om de grootte te wijzigen': 'Dvojitým kliknutím změníte velikost',

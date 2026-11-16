@@ -1556,6 +1556,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV-ul nu este PCM pe 16 biți — e nevoie de decodare',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV-ul nu este PCM pe 16 biți — browserul îl decodifică oricum',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Modulul de transcriere este dezactivat sau neconfigurat. Activați-l din Setări → Module.',
+  'Instellingen openen': 'Deschide setările',
+  'Sprekers onderscheiden': 'Distinge vorbitorii',
   'Rij {n} omhoog': 'Rândul {n} în sus',
   'Rij {n} omlaag': 'Rândul {n} în jos',
   'Dubbelklik om de grootte te wijzigen':

@@ -158,7 +158,7 @@ class IoFileCaptureSource extends FileCaptureSource {
   }) {
     final parts = <String>[
       if (wav != null && wav.formatTag != 1)
-        'de WAV is geen 16-bit PCM (formaat ${wav.formatTag}) — decode nodig',
+        'de WAV is geen 16-bit PCM — decode nodig',
       if (_extensionContradicts(container, extension))
         'de bestandsnaam wijkt af van de gedetecteerde inhoud',
       if (decoder == null)

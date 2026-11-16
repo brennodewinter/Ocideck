@@ -1556,6 +1556,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV не є 16-бітним PCM — потрібне декодування',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV не є 16-бітним PCM — браузер усе одно його декодує',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Модуль транскрипції вимкнено або не налаштовано. Увімкніть його в Налаштування → Модулі.',
+  'Instellingen openen': 'Відкрити налаштування',
+  'Sprekers onderscheiden': 'Розрізняти спікерів',
   'Rij {n} omhoog': 'Рядок {n} вгору',
   'Rij {n} omlaag': 'Рядок {n} вниз',
   'Dubbelklik om de grootte te wijzigen': 'Двічі клацніть, щоб змінити розмір',

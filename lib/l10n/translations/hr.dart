@@ -1546,6 +1546,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV nije 16-bitni PCM — potrebna je konverzija',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV nije 16-bitni PCM — preglednik ga svejedno dekodira',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Modul transkripcije je isključen ili nije postavljen. Uključite ga u Postavke → Moduli.',
+  'Instellingen openen': 'Otvori postavke',
+  'Sprekers onderscheiden': 'Razlikuj govornike',
   'Rij {n} omhoog': 'Redak {n} gore',
   'Rij {n} omlaag': 'Redak {n} dolje',
   'Dubbelklik om de grootte te wijzigen':

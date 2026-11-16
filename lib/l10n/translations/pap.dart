@@ -612,6 +612,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'e WAV no ta PCM di 16 bit — tin mester dekodifike',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'e WAV no ta PCM di 16 bit — e browser ta dekodifik’é mismo',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'E módulo di transkripshon ta apagá òf no ta konfigurá. Aktiv’é via Konfigurashon → Módulo.',
+  'Instellingen openen': 'Habri konfigurashon',
+  'Sprekers onderscheiden': 'Distingui e bisadónan',
   'Rij {n} omhoog': 'Fila {n} ariba',
   'Rij {n} omlaag': 'Fila {n} abou',
   'Dubbelklik om de grootte te wijzigen': 'Dòbel klik pa kambia e tamaño',

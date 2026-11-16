@@ -1570,6 +1570,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'ní PCM 16-giotán é an WAV — tá díchódáil de dhíth',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'ní PCM 16-giotán é an WAV — díchódálann an brabhsálaí é mar sin féin',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Tá an modúl tras-scríofa múchta nó gan a bheith cumraithe. Cuir air é faoi Socruithe → Modúil.',
+  'Instellingen openen': 'Oscail na socruithe',
+  'Sprekers onderscheiden': 'Déighil idir cainteoirí',
   'Rij {n} omhoog': 'Ró {n} suas',
   'Rij {n} omlaag': 'Ró {n} síos',
   'Dubbelklik om de grootte te wijzigen': 'Déchliceáil chun an méid a athrú',

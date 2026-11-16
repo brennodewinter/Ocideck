@@ -428,8 +428,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           _note(
             l10n,
             l10n.d(
-              'De transcriptiemodule staat uit of is niet ingesteld. '
-              'Schakel hem in via Instellingen → Modules.',
+              'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.',
             ),
           )
         else ...[

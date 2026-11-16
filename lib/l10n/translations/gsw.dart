@@ -1542,6 +1542,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      's WAV isch kei 16-Bit-PCM — en Dekodierig isch nötig',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      's WAV isch kei 16-Bit-PCM — de Browser dekodiert’n trotzdem',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'S Transkriptionsmodul isch usgset oder nöd igrichtet. Schalt’s under Ihstellige → Module i.',
+  'Instellingen openen': 'Ihstellige öffne',
+  'Sprekers onderscheiden': 'Sprecher ungerscheide',
   'Rij {n} omhoog': 'Ziile {n} ufe',
   'Rij {n} omlaag': 'Ziile {n} abe',
   'Dubbelklik om de grootte te wijzigen': 'Doppelklick zum d Grössi ändere',
