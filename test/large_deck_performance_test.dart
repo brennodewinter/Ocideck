@@ -359,67 +359,100 @@ void main() {
       },
     );
 
+    test('genummerde inhoud blijft op 300 pagina\'s volledig behouden', () {
+      final document = MarkdownQuillCodec.documentFromMarkdown(
+        _numberedPages(300),
+      );
+      final markdown = MarkdownQuillCodec.markdownFromDocument(document);
+      expect(
+        RegExp(r'^# Pagina \d+$', multiLine: true).allMatches(markdown),
+        hasLength(300),
+      );
+      final numbers = RegExp(
+        r'^(\d+)\. ',
+        multiLine: true,
+      ).allMatches(markdown).map((match) => int.parse(match[1]!));
+      expect(
+        numbers,
+        orderedEquals([
+          for (var page = 0; page < 300; page++)
+            for (var n = 1; n <= 8; n++) n,
+        ]),
+      );
+      expect(
+        RegExp(
+          r'^\| A \| B \| C \| D \|$',
+          multiLine: true,
+        ).allMatches(markdown),
+        hasLength(150),
+      );
+    });
+
     test('markdownFromDocument schaalt niet superlineair met het document', () {
       // 300 pagina's mag niet meer dan 2,5× kosten van 150. Lineair ligt op
       // 2×; de oude nummering liep per lijstitem het hele document af en kwam
       // op 2,5–3,4× uit (#2621).
-      String pages(int count) {
-        final buffer = StringBuffer();
-        for (var i = 1; i <= count; i++) {
-          buffer
-            ..writeln('# Pagina $i')
-            ..writeln()
-            ..writeln(
-              'Een alinea met **nadruk** en een [koppeling](https://example.com/$i).',
-            )
-            ..writeln()
-            ..writeln('1. Eerste punt van pagina $i')
-            ..writeln('2. Tweede punt met wat extra woorden')
-            ..writeln('3. Derde punt')
-            ..writeln('4. Vierde punt')
-            ..writeln('5. Vijfde punt')
-            ..writeln('6. Zesde punt')
-            ..writeln('7. Zevende punt')
-            ..writeln('8. Achtste punt')
-            ..writeln();
-          if (i.isEven) {
-            buffer
-              ..writeln('| A | B | C | D |')
-              ..writeln('| --- | --- | --- | --- |');
-            for (var row = 0; row < 4; row++) {
-              buffer.writeln('| $i | $row | cel | tekst |');
-            }
-            buffer.writeln();
-          }
-          if (i != count) buffer.writeln('---\n');
+      final small = MarkdownQuillCodec.documentFromMarkdown(
+        _numberedPages(150),
+      );
+      final large = MarkdownQuillCodec.documentFromMarkdown(
+        _numberedPages(300),
+      );
+      void smallWork() {
+        MarkdownQuillCodec.markdownFromDocument(small);
+        MarkdownQuillCodec.markdownFromDocument(small);
+      }
+
+      void largeWork() => MarkdownQuillCodec.markdownFromDocument(large);
+
+      Duration measure(void Function() work, int repeats) {
+        final clock = Stopwatch()..start();
+        for (var i = 0; i < repeats; i++) {
+          work();
         }
-        return buffer.toString();
+        return clock.elapsed;
       }
 
-      final small = MarkdownQuillCodec.documentFromMarkdown(pages(150));
-      final large = MarkdownQuillCodec.documentFromMarkdown(pages(300));
-      MarkdownQuillCodec.markdownFromDocument(small);
-      MarkdownQuillCodec.markdownFromDocument(large);
+      // Warm beide paden op; één omzetting liet JIT-kosten in de steekproef.
+      final warmup = Stopwatch()..start();
+      do {
+        smallWork();
+        largeWork();
+      } while (warmup.elapsedMilliseconds < 100);
 
-      var lowest = double.infinity;
-      for (var attempt = 0; attempt < 3; attempt++) {
-        final smallTime = fastestOf(
-          3,
-          () => MarkdownQuillCodec.markdownFromDocument(small),
-        );
-        final largeTime = fastestOf(
-          3,
-          () => MarkdownQuillCodec.markdownFromDocument(large),
-        );
+      // Kalibreer gelijk werk op 100 ms, niet twee losse omzettingen van
+      // 3–8 ms. De bovengrens houdt kalibratie begrensd.
+      var repeats = 1;
+      while (measure(smallWork, repeats).inMilliseconds < 100 &&
+          repeats < 128) {
+        repeats *= 2;
+      }
+      final ratios = <double>[];
+      final samples = <String>[];
+      for (var attempt = 0; attempt < 7; attempt++) {
+        final largeFirst = attempt.isOdd;
+        final first = measure(largeFirst ? largeWork : smallWork, repeats);
+        final second = measure(largeFirst ? smallWork : largeWork, repeats);
+        final smallTime = largeFirst ? second : first;
+        final largeTime = largeFirst ? first : second;
         final ratio = largeTime.inMicroseconds / smallTime.inMicroseconds;
-        if (ratio < lowest) lowest = ratio;
+        ratios.add(ratio);
+        samples.add(
+          'small_us=${smallTime.inMicroseconds}, '
+          'large_us=${largeTime.inMicroseconds}, ratio=$ratio',
+        );
       }
+      ratios.sort();
+      final median = ratios[ratios.length ~/ 2];
+      print('SCALING repeats=$repeats samples=$samples median=$median');
+      // Dezelfde grens als voorheen: groot / (2 × klein) < 1,25 is
+      // groot / klein < 2,5. De mediaan voorkomt slagen op één gelukstreffer.
       expect(
-        lowest,
-        lessThan(2.5),
+        median,
+        lessThan(1.25),
         reason:
-            '300 pagina\'s kostten ${lowest.toStringAsFixed(2)}× zoveel als '
-            '150; meer dan 2,5× wijst op superlineair gedrag',
+            '300 pagina\'s tegenover 2× 150: mediaan $median; '
+            'herhalingen=$repeats, steekproeven=$samples',
       );
     });
   });
@@ -515,4 +548,37 @@ void main() {
       );
     });
   });
+}
+
+String _numberedPages(int count) {
+  final buffer = StringBuffer();
+  for (var i = 1; i <= count; i++) {
+    buffer
+      ..writeln('# Pagina $i')
+      ..writeln()
+      ..writeln(
+        'Een alinea met **nadruk** en een [koppeling](https://example.com/$i).',
+      )
+      ..writeln()
+      ..writeln('1. Eerste punt van pagina $i')
+      ..writeln('2. Tweede punt met wat extra woorden')
+      ..writeln('3. Derde punt')
+      ..writeln('4. Vierde punt')
+      ..writeln('5. Vijfde punt')
+      ..writeln('6. Zesde punt')
+      ..writeln('7. Zevende punt')
+      ..writeln('8. Achtste punt')
+      ..writeln();
+    if (i.isEven) {
+      buffer
+        ..writeln('| A | B | C | D |')
+        ..writeln('| --- | --- | --- | --- |');
+      for (var row = 0; row < 4; row++) {
+        buffer.writeln('| $i | $row | cel | tekst |');
+      }
+      buffer.writeln();
+    }
+    if (i != count) buffer.writeln('---\n');
+  }
+  return buffer.toString();
 }
