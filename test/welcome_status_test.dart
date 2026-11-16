@@ -370,6 +370,9 @@ void main() {
       await tester.tap(
         elearningTip(server: 'niet ingesteld', account: 'niet ingelogd'),
       );
+      // Het lampje heeft een dubbelklik-handler (#2930): een enkele tik
+      // wacht de dubbeltik-timeout af voordat hij door komt.
+      await tester.pump(const Duration(milliseconds: 350));
       await tester.pumpAndSettle();
 
       expect(find.byType(SettingsDialog), findsOneWidget);
@@ -499,10 +502,82 @@ void main() {
       );
 
       await tester.tap(_tip('Schijf: bereikbaar'));
+      // Zie hierboven: de enkele tik wacht de dubbeltik-timeout af.
+      await tester.pump(const Duration(milliseconds: 350));
       await tester.pumpAndSettle();
 
       expect(find.byType(SettingsDialog), findsOneWidget);
       // Het opslag-tabblad is geselecteerd: de verbindingslijst staat er.
+      expect(find.text('Opslag'), findsWidgets);
+    });
+
+    /// Twee tikken binnen de dubbeltik-timeout — zoals een muis-dubbelklik.
+    Future<void> doubleTap(WidgetTester tester, Finder target) async {
+      await tester.tap(target);
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.tap(target, warnIfMissed: false);
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets(
+      // #2930: zonder onDoubleTap opende de eerste klik het venster en
+      // sloeg de tweede klik op de barrier — het venster flitste dicht.
+      'dubbelklik op eLearning-lampje opent Instellingen één keer',
+      (tester) async {
+        await _pumpWelcome(
+          tester,
+          elearningEnabled: true,
+          ociServeState: const OciServeState(
+            settings: OciServeSettings(enabled: true),
+            status: OciServeStatus.signedOut,
+          ),
+        );
+
+        await doubleTap(
+          tester,
+          elearningTip(server: 'niet ingesteld', account: 'niet ingelogd'),
+        );
+
+        expect(find.byType(SettingsDialog), findsOneWidget);
+        expect(find.text('Integraties'), findsWidgets);
+      },
+    );
+
+    testWidgets(
+      // #2930: een tik hertikt de verbinding; de dubbelklik moet naar de
+      // AI-instelling gaan.
+      'dubbelklik op AI-lampje opent Instellingen op Integraties',
+      (tester) async {
+        await _pumpWelcome(
+          tester,
+          prefs: _aiPrefs(const AiSettings(enabled: true)),
+        );
+
+        await doubleTap(tester, _tip('AI:'));
+        // Het testlettertype tekent breder dan een echt lettertype: de
+        // modus-dropdown op Integraties "overflowt" alleen in tests. Dezelfde
+        // ruisdrainage als settings_ai_tab_test.
+        while (tester.takeException() != null) {}
+
+        expect(find.byType(SettingsDialog), findsOneWidget);
+        expect(find.text('Integraties'), findsWidgets);
+      },
+    );
+
+    testWidgets('dubbelklik op opslaglampje opent Instellingen op Opslag', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        prefs: _connectionPrefs([
+          const LocalConnection(id: 'l1', name: 'Schijf', path: '/tmp/decks'),
+        ]),
+        storageProbe: _StorageProbe(true),
+      );
+
+      await doubleTap(tester, _tip('Schijf: bereikbaar'));
+
+      expect(find.byType(SettingsDialog), findsOneWidget);
       expect(find.text('Opslag'), findsWidgets);
     });
   });

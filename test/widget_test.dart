@@ -173,6 +173,9 @@ void main() {
             w.size == 11,
       );
       await tester.tap(badgeFinder);
+      // De badge heeft een dubbelklik-handler (#2930): de enkele tik wacht
+      // de dubbeltik-timeout af voordat hij door komt.
+      await tester.pump(const Duration(milliseconds: 350));
       await tester.pumpAndSettle();
 
       expect(find.text('Over OciDeck'), findsOneWidget);
