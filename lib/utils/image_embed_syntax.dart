@@ -24,6 +24,8 @@ library;
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:markdown/markdown.dart' as md;
 
+import 'image_size_tokens.dart';
+
 /// De afbeelding op zijn plek in de zin. Inline, want dat is wat een afbeelding
 /// in Markdown is: `![](a.png)![](b.png)` op één regel zijn twee afbeeldingen
 /// naast elkaar, geen twee alinea's.
@@ -45,13 +47,24 @@ class EmbeddableMarkdownImage extends Embeddable {
     out.write(markdownOf(embed.value));
   }
 
-  /// De alt-tekst en de bron, voor wie de afbeelding wil *tonen*. Faalt nooit:
-  /// wat niet te lezen is, komt als lege string terug en de opgeslagen markdown
-  /// blijft ongemoeid.
-  static ({String alt, String source}) parse(Embeddable value) {
+  /// De alt-tekst, de bron en de gevraagde maat (`w:`/`h:`-tokens in de
+  /// haakjes), voor wie de afbeelding wil *tonen*. Faalt nooit: wat niet te
+  /// lezen is, komt leeg terug en de opgeslagen markdown blijft ongemoeid.
+  static ({String alt, String source, ImageSize size}) parse(Embeddable value) {
     final match = _pattern.firstMatch(markdownOf(value));
-    if (match == null) return (alt: '', source: '');
-    return (alt: match[1] ?? '', source: _stripTitle(match[2] ?? ''));
+    if (match == null) {
+      return (
+        alt: '',
+        source: '',
+        size: (width: null, widthFraction: null, height: null),
+      );
+    }
+    final bracket = splitImageSizeTokens(match[1] ?? '');
+    return (
+      alt: bracket.alt,
+      source: _stripTitle(match[2] ?? ''),
+      size: bracket.size,
+    );
   }
 
   /// `a.png "Een titel"` → `a.png`. De titel hoort bij de markdown, niet bij

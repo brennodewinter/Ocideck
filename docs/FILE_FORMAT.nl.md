@@ -3705,6 +3705,28 @@ cijfers met `source: data/<name>.json`, precies zoals op een slide, en dezelfde
 insluitingswacht geldt — een dataverwijzing die met `../` of een absoluut pad uit
 de projectmap probeert te ontsnappen wordt geweigerd, niet gevolgd.
 
+### 14.2a Afbeeldingsgrootte — `w:`/`h:` tussen de haken *(toegevoegd 2026-02-04)*
+
+Een `![alt](pad)` die alleen op een regel staat is een afbeelding in de
+documentstroom. De **weergegeven maat** reist mee in Marp's eigen vocabulaire,
+dezelfde afspraak als §5 voor slidebodies vastlegt: `w:`/`h:`-tokens tussen de
+haken, vóór de alt-tekst.
+
+```markdown
+![w:50% Inlogscherm](images/login.png)      — de helft van de tekstkolom
+![h:96px Handtekening](images/hnd.png)      — hoogte begrensd op 96
+```
+
+`w:Npx` (of een kale `w:N`) is een breedte in pixels, `w:N%` een deel van de
+kolombreedte, `h:N`/`h:Npx` een hoogte in pixels; `width:`/`height:` worden
+als aliassen gelezen. Al het andere tussen de haken blijft alt-tekst. Voor
+elke andere Markdown-lezer zijn de tokens gewoon alt-tekst en voor een
+Marp-lezer betekenen ze precies wat ze hier betekenen — geen OciDeck-markering,
+dus het bestand kost niets. De visuele editor schrijft de tokens wanneer je op
+een afbeelding dubbelklikt en een maat kiest; *natuurlijke maat* haalt ze weer
+weg. De pdf-export volgt dezelfde tokens (pixels gelezen als punten, een
+percentage van het tekstblok).
+
 ### 14.3 Byte-getrouwe rondgang
 
 Openen → (niets bewerken) → Opslaan levert een **byte-identiek** bestand op. Anders

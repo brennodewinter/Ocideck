@@ -16,7 +16,8 @@ import '../../theme/app_theme.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../l10n/form_issue_localization.dart';
-import '../../services/form/form_image_service.dart' show FormImageRefusal;
+import '../../services/form/form_image_service.dart'
+    show FormImageBatch, FormImageRefusal;
 import '../../models/settings.dart' show ThemeProfile;
 import '../markdown_editor/markdown_editor_theme.dart' show DocumentStyleScope;
 import '../reader/document_markdown_view.dart';
@@ -164,16 +165,41 @@ class _FormFillViewState extends State<FormFillView> {
     }();
   }
 
-  /// Laat de invuller foto's kiezen en verwerkt ze. Geeft de antwoordregels van de
-  /// gelukte foto's terug; wat de controle niet door kwam wordt gemeld.
-  Future<List<FormImageRef>> _addImages(String fieldId) async {
-    final fill = _fill;
+  /// Wat het veld [fieldId] kan toevoegen: de kiezer, losse bytes (klembord,
+  /// tekening, stijllogo) en de bronnen die bij het veld horen — of `null`
+  /// als het document geen afbeeldingsondersteuning heeft.
+  FormImageAdders? _addersFor(String fieldId) {
     final support = widget.images;
-    if (fill == null || support == null) return const [];
-    final taken = {
-      for (final image in fill.answerOf(fieldId).images) image.path,
-    };
-    final batch = await support.add(fieldId, taken);
+    if (support == null) return null;
+    final read = support.addReaders;
+    return (
+      pick: () =>
+          _intakeImages(fieldId, () => support.add(fieldId, _taken(fieldId))),
+      read: read == null
+          ? null
+          : (readers) => _intakeImages(
+              fieldId,
+              () => read(fieldId, _taken(fieldId), readers),
+            ),
+      presets: support.presets[fieldId] ?? const [],
+    );
+  }
+
+  Set<String> _taken(String fieldId) => {
+    for (final image
+        in _fill?.answerOf(fieldId).images ?? const <FormImageRef>[])
+      image.path,
+  };
+
+  /// Verwerkt één toevoeging: de bron kiezen is van de aanroeper, het zuiveren
+  /// en bewaren deelt elke weg. Geeft de antwoordregels van de gelukte foto's
+  /// terug; wat de controle niet door kwam wordt gemeld.
+  Future<List<FormImageRef>> _intakeImages(
+    String fieldId,
+    Future<FormImageBatch?> Function() run,
+  ) async {
+    if (_fill == null || widget.images == null) return const [];
+    final batch = await run();
     if (batch == null || !mounted) return const [];
     setState(() {
       _fill = _fill!.withImageFacts({..._fill!.imageFacts, ...batch.facts});
@@ -321,7 +347,7 @@ class _FormFillViewState extends State<FormFillView> {
           fieldId: fieldId,
           showRequired: _touched.contains(fieldId),
           onCommit: _commit,
-          onAddImages: widget.images == null ? null : () => _addImages(fieldId),
+          onAddImages: _addersFor(fieldId),
           scrubbed: _scrubbed,
           preview: widget.images?.preview,
         );

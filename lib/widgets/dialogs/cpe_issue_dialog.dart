@@ -1,13 +1,21 @@
+import 'dart:typed_data';
+
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/cpe_certificate_service.dart';
+import '../../services/file_service.dart' show readStyleLogoBytes;
+import '../../state/settings_provider.dart';
+import '../../utils/bundled_asset.dart';
 import '../forms/form_fill_view.dart';
 import '../forms/form_image_picker.dart';
+import '../forms/form_image_support.dart' show FormImagePreset;
 
 /// One course, one participant table, an individual certificate for each row.
-class CpeIssueDialog extends StatefulWidget {
+class CpeIssueDialog extends ConsumerStatefulWidget {
   const CpeIssueDialog({
     super.key,
     required this.template,
@@ -19,10 +27,10 @@ class CpeIssueDialog extends StatefulWidget {
   final String? projectPath;
 
   @override
-  State<CpeIssueDialog> createState() => _CpeIssueDialogState();
+  ConsumerState<CpeIssueDialog> createState() => _CpeIssueDialogState();
 }
 
-class _CpeIssueDialogState extends State<CpeIssueDialog> {
+class _CpeIssueDialogState extends ConsumerState<CpeIssueDialog> {
   late String _body = CpeCertificateService.groupForm(
     widget.template,
     widget.language,
@@ -66,6 +74,34 @@ class _CpeIssueDialogState extends State<CpeIssueDialog> {
     }
   }
 
+  /// De logo's van de stijlprofielen als klaargezette bronnen voor het
+  /// logo-veld: de opleider heeft zijn huisstijl daar al staan, uploaden is
+  /// dan niet meer nodig (#2923).
+  Map<String, List<FormImagePreset>> _logoPresets() {
+    final profiles = ref.read(settingsProvider).themeProfiles;
+    return {
+      'logo': [
+        for (final profile in profiles)
+          if (profile.effectiveDocumentLogoPath?.trim() case final path?
+              when path.isNotEmpty)
+            (label: profile.name, read: () => _logoBytes(path)),
+      ],
+    };
+  }
+
+  /// De bytes van een stijllogo: gebundeld via de assets, de rest via de
+  /// vertrouwde lezer van stijlprofielen. Faalt hardop — de inname meldt de
+  /// weigering dan in plaats van stil een leeg bestand neer te leggen.
+  Future<Uint8List> _logoBytes(String path) async {
+    if (isBundledAssetPath(path)) {
+      final data = await rootBundle.load(bundledAssetKey(path));
+      return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    }
+    final bytes = await readStyleLogoBytes(path);
+    if (bytes == null) throw StateError('logo onleesbaar');
+    return bytes;
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -82,6 +118,7 @@ class _CpeIssueDialogState extends State<CpeIssueDialog> {
                 images: formImageSupportFor(
                   projectPath: widget.projectPath,
                   dialogTitle: l10n.d('Kies een afbeelding'),
+                  presets: _logoPresets(),
                 ),
                 onChanged: (body, _) => setState(() {
                   _body = body;

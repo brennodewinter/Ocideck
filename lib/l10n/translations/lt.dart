@@ -1548,6 +1548,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Rij {n} omhoog': 'Eilutė {n} aukštyn',
+  'Rij {n} omlaag': 'Eilutė {n} žemyn',
+  'Dubbelklik om de grootte te wijzigen':
+      'Dukart spustelėkite, kad pakeistumėte dydį',
+  'Grootte van de afbeelding': 'Vaizdo dydis',
+  '{percent}% van de kolombreedte': '{percent}% stulpelio pločio',
+  'Natuurlijke maat': 'Natūralus dydis',
+  'Tekenen': 'Piešti',
+  'Uit een stijl': 'Iš stiliaus',
   'Alleen lezen (vergrendeld)': 'Tik skaityti (užrakinta)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Šis dokumentas yra tik skaityti (užrakintas).',

@@ -13,6 +13,7 @@ This is to certify that the participant below attended the program listed.
 
 <!-- field id=logo type=image count=0..1 -->
 **Training provider logo (optional)**
+> Choose the logo from a style profile, or add your own file.
 <!-- answer -->
 <!-- /field id=logo -->
 
@@ -33,6 +34,7 @@ This is to certify that the participant below attended the program listed.
 
 <!-- field id=sessies type=table columns="Date|Session|Time" rows=1.. required -->
 **Sessions attended**
+> Time as a block (for example 09:00 - 17:00) or a number of hours; multiple blocks per row are allowed.
 <!-- answer -->
 <!-- /field id=sessies -->
 

@@ -610,6 +610,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Rij {n} omhoog': 'Fila {n} arriba',
+  'Rij {n} omlaag': 'Fila {n} abajo',
+  'Dubbelklik om de grootte te wijzigen':
+      'Haz doble clic para cambiar el tamaño',
+  'Grootte van de afbeelding': 'Tamaño de la imagen',
+  '{percent}% van de kolombreedte': '{percent}% del ancho de la columna',
+  'Natuurlijke maat': 'Tamaño natural',
+  'Tekenen': 'Dibujar',
+  'Uit een stijl': 'Desde un estilo',
   'Alleen lezen (vergrendeld)': 'Solo lectura (bloqueado)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Este documento es de solo lectura (bloqueado).',

@@ -30,6 +30,7 @@ import '../../utils/spacer_embed_syntax.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../../utils/footnotes.dart';
 import '../../utils/image_limits.dart';
+import '../../utils/image_size_tokens.dart';
 import '../../utils/markdown_blocks.dart';
 import '../../utils/project_path.dart';
 import '../slides/inline_markdown.dart';
@@ -400,6 +401,7 @@ class DocumentMarkdownView extends StatelessWidget {
         source: b.source,
         alt: b.text,
         projectPath: DocumentImageScope.maybeOf(context),
+        size: b.imageSize,
       ),
     ),
     _Kind.toc => _bounded(_tocPreview(context, t)),
@@ -661,7 +663,14 @@ class DocumentMarkdownView extends StatelessWidget {
       if (para.length == 1) {
         final img = _parseImageLine(para.single);
         if (img != null) {
-          blocks.add(_Block(_Kind.image, text: img.alt, source: img.source));
+          blocks.add(
+            _Block(
+              _Kind.image,
+              text: img.alt,
+              source: img.source,
+              imageSize: img.size,
+            ),
+          );
           continue;
         }
       }

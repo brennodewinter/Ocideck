@@ -1546,6 +1546,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Rij {n} omhoog': 'Redak {n} gore',
+  'Rij {n} omlaag': 'Redak {n} dolje',
+  'Dubbelklik om de grootte te wijzigen':
+      'Dvaput kliknite za promjenu veličine',
+  'Grootte van de afbeelding': 'Veličina slike',
+  '{percent}% van de kolombreedte': '{percent}% širine stupca',
+  'Natuurlijke maat': 'Prirodna veličina',
+  'Tekenen': 'Crtaj',
+  'Uit een stijl': 'Iz stila',
   'Alleen lezen (vergrendeld)': 'Samo za čitanje (zaključano)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Ovaj je dokument samo za čitanje (zaključan).',

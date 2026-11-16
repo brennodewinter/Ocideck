@@ -27,11 +27,14 @@ const List<String> kFormImageExtensions = [
 /// die er niet kan zijn: het document staat nog nergens, of het draait op het web
 /// (waar foto's in het geheugen leven en niet in een map).
 ///
-/// [pick] is de bestandskiezer; een test geeft een eigen keuze mee.
+/// [pick] is de bestandskiezer; een test geeft een eigen keuze mee. [presets]
+/// zijn klaargezette bronnen per veld, zoals de stijllogo's voor het
+/// logo-veld van een PE-bewijs.
 FormImageSupport? formImageSupportFor({
   required String? projectPath,
   required String dialogTitle,
   Future<List<FormImagePick>> Function(String dialogTitle)? pick,
+  Map<String, List<FormImagePreset>> presets = const {},
 }) {
   if (projectPath == null || kIsWeb) return null;
   return FormImageSupport(
@@ -45,6 +48,15 @@ FormImageSupport? formImageSupportFor({
         readers: [for (final file in files) file.read],
       );
     },
+    // Dezelfde verwerking als de kiezer, maar dan voor bytes die al binnen
+    // zijn: het klembord, een getekende handtekening, een stijllogo.
+    addReaders: (fieldId, taken, readers) => addFormImages(
+      projectPath: projectPath,
+      fieldId: fieldId,
+      taken: taken,
+      readers: readers,
+    ),
+    presets: presets,
     probe: (paths) => probeFormImages(paths, projectPath: projectPath),
     preview: (path) {
       final absolute = resolveSlideAssetPath(path, projectPath);

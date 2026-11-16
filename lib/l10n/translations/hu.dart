@@ -1543,6 +1543,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Rij {n} omhoog': '{n}. sor felfelé',
+  'Rij {n} omlaag': '{n}. sor lefelé',
+  'Dubbelklik om de grootte te wijzigen':
+      'Dupla kattintás a méret módosításához',
+  'Grootte van de afbeelding': 'A kép mérete',
+  '{percent}% van de kolombreedte': 'Az oszlopszélesség {percent}%-a',
+  'Natuurlijke maat': 'Természetes méret',
+  'Tekenen': 'Rajzolás',
+  'Uit een stijl': 'Stílusból',
   'Alleen lezen (vergrendeld)': 'Csak olvasható (zárolva)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Ez a dokumentum csak olvasható (zárolt).',

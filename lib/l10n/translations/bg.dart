@@ -1561,6 +1561,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Rij {n} omhoog': 'Ред {n} нагоре',
+  'Rij {n} omlaag': 'Ред {n} надолу',
+  'Dubbelklik om de grootte te wijzigen':
+      'Щракнете двукратно, за да промените размера',
+  'Grootte van de afbeelding': 'Размер на изображението',
+  '{percent}% van de kolombreedte': '{percent}% от ширината на колоната',
+  'Natuurlijke maat': 'Естествен размер',
+  'Tekenen': 'Рисувай',
+  'Uit een stijl': 'От стил',
   'Alleen lezen (vergrendeld)': 'Само за четене (заключено)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Този документ е само за четене (заключен).',

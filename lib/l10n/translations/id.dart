@@ -1542,6 +1542,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Rij {n} omhoog': 'Baris {n} ke atas',
+  'Rij {n} omlaag': 'Baris {n} ke bawah',
+  'Dubbelklik om de grootte te wijzigen': 'Klik dua kali untuk mengubah ukuran',
+  'Grootte van de afbeelding': 'Ukuran gambar',
+  '{percent}% van de kolombreedte': '{percent}% dari lebar kolom',
+  'Natuurlijke maat': 'Ukuran asli',
+  'Tekenen': 'Gambar',
+  'Uit een stijl': 'Dari gaya',
   'Alleen lezen (vergrendeld)': 'Hanya baca (terkunci)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Dokumen ini hanya-baca (terkunci).',

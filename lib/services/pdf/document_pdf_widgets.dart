@@ -651,11 +651,19 @@ class DocumentPdfWidgets {
         ),
       );
     }
+    // De `w:`/`h:`-maat uit de bron geldt als plafond bovenop de bladspiegel:
+    // een px is hier een punt, een percentage een deel van de kolom — nooit
+    // groter dan het blad toelaat.
+    final width = [
+      block.width,
+      if (block.widthFraction != null) maxImageWidth * block.widthFraction!,
+      maxImageWidth,
+    ].whereType<double>().reduce(math.min);
     return pw.Center(
       child: pw.ConstrainedBox(
         constraints: pw.BoxConstraints(
-          maxWidth: maxImageWidth,
-          maxHeight: maxImageHeight,
+          maxWidth: width,
+          maxHeight: math.min(block.height ?? maxImageHeight, maxImageHeight),
         ),
         child: pw.Image(pw.MemoryImage(bytes), fit: pw.BoxFit.contain),
       ),

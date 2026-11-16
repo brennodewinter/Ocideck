@@ -1542,6 +1542,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Rij {n} omhoog': 'Række {n} op',
+  'Rij {n} omlaag': 'Række {n} ned',
+  'Dubbelklik om de grootte te wijzigen': 'Dobbeltklik for at ændre størrelsen',
+  'Grootte van de afbeelding': 'Billedets størrelse',
+  '{percent}% van de kolombreedte': '{percent} % af kolonnebredden',
+  'Natuurlijke maat': 'Naturlig størrelse',
+  'Tekenen': 'Tegn',
+  'Uit een stijl': 'Fra en stil',
   'Alleen lezen (vergrendeld)': 'Kun læsning (låst)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Dette dokument er skrivebeskyttet (låst).',

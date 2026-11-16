@@ -1542,6 +1542,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Rij {n} omhoog': 'Ziile {n} ufe',
+  'Rij {n} omlaag': 'Ziile {n} abe',
+  'Dubbelklik om de grootte te wijzigen': 'Doppelklick zum d Grössi ändere',
+  'Grootte van de afbeelding': 'Bildgrössi',
+  '{percent}% van de kolombreedte': '{percent}% vo dr Spaltebräiti',
+  'Natuurlijke maat': 'Natürlichi Grössi',
+  'Tekenen': 'Zeichne',
+  'Uit een stijl': 'Us eme Stil',
   'Alleen lezen (vergrendeld)': 'Nume läse (gsperrt)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Das Dokumänt isch nume läsbar (gsperrt).',

@@ -3787,6 +3787,27 @@ numbers as `source: data/<name>.json`, exactly as on a slide, and the same
 containment guard applies — a data reference that tries to escape the project
 folder with `../` or an absolute path is refused, not followed.
 
+### 14.2a Image size — `w:`/`h:` in the brackets *(added 2026-02-04)*
+
+An `![alt](path)` alone on a line is an image in the document flow. Its
+**displayed size** travels in Marp's own vocabulary, the same convention §5
+states for slide bodies: `w:`/`h:` tokens inside the brackets, before the
+alt text.
+
+```markdown
+![w:50% Login screen](images/login.png)   — half of the text column
+![h:96px Signature](images/signature.png) — height capped at 96
+```
+
+`w:Npx` (or a bare `w:N`) is a width in pixels, `w:N%` a fraction of the
+column width, `h:N`/`h:Npx` a height in pixels; `width:`/`height:` are read
+as aliases. Everything else in the brackets stays alt text. To any other
+Markdown reader the tokens are just part of the alt, and to a Marp reader
+they mean exactly what they mean here — no OciDeck marker, so the file costs
+nothing. The visual editor writes the tokens when you double-click an image
+and pick a size; "natural size" removes them again. The PDF export honours
+the same tokens (pixels read as points, a percentage of the text block).
+
 ### 14.3 Byte-faithful round-trip
 
 Open → (no edit) → Save yields a **byte-identical** file. Unlike the deck path,

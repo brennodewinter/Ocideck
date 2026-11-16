@@ -1542,6 +1542,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Rij {n} omhoog': 'Rivi {n} ylös',
+  'Rij {n} omlaag': 'Rivi {n} alas',
+  'Dubbelklik om de grootte te wijzigen': 'Kaksoisnapsauta muuttaaksesi kokoa',
+  'Grootte van de afbeelding': 'Kuvan koko',
+  '{percent}% van de kolombreedte': '{percent} % sarakkeen leveydestä',
+  'Natuurlijke maat': 'Luonnollinen koko',
+  'Tekenen': 'Piirrä',
+  'Uit een stijl': 'Tyylistä',
   'Alleen lezen (vergrendeld)': 'Vain luku (lukittu)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Tämä asiakirja on vain luettavissa (lukittu).',

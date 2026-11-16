@@ -1567,6 +1567,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Rij {n} omhoog': 'Linha {n} para cima',
+  'Rij {n} omlaag': 'Linha {n} para baixo',
+  'Dubbelklik om de grootte te wijzigen': 'Duplo clique para alterar o tamanho',
+  'Grootte van de afbeelding': 'Tamanho da imagem',
+  '{percent}% van de kolombreedte': '{percent}% da largura da coluna',
+  'Natuurlijke maat': 'Tamanho natural',
+  'Tekenen': 'Desenhar',
+  'Uit een stijl': 'De um estilo',
   'Alleen lezen (vergrendeld)': 'Somente leitura (bloqueado)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Este documento é somente leitura (bloqueado).',

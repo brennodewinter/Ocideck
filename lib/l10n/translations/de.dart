@@ -612,6 +612,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Rij {n} omhoog': 'Zeile {n} nach oben',
+  'Rij {n} omlaag': 'Zeile {n} nach unten',
+  'Dubbelklik om de grootte te wijzigen':
+      'Doppelklicken, um die Größe zu ändern',
+  'Grootte van de afbeelding': 'Bildgröße',
+  '{percent}% van de kolombreedte': '{percent} % der Spaltenbreite',
+  'Natuurlijke maat': 'Natürliche Größe',
+  'Tekenen': 'Zeichnen',
+  'Uit een stijl': 'Aus einem Stil',
   'Alleen lezen (vergrendeld)': 'Nur Lesen (gesperrt)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Dieses Dokument ist schreibgeschützt (gesperrt).',

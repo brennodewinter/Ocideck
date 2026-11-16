@@ -1545,6 +1545,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Rij {n} omhoog': 'Riadok {n} hore',
+  'Rij {n} omlaag': 'Riadok {n} dole',
+  'Dubbelklik om de grootte te wijzigen': 'Dvojitým kliknutím zmeníte veľkosť',
+  'Grootte van de afbeelding': 'Veľkosť obrázka',
+  '{percent}% van de kolombreedte': '{percent} % šírky stĺpca',
+  'Natuurlijke maat': 'Prirodzená veľkosť',
+  'Tekenen': 'Kresliť',
+  'Uit een stijl': 'Zo štýlu',
   'Alleen lezen (vergrendeld)': 'Len na čítanie (uzamknuté)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Tento dokument je len na čítanie (uzamknutý).',

@@ -96,6 +96,10 @@ ImageProvider? documentImageProvider(
 /// Met [block] staat de afbeelding op eigen regel (volle breedte, met de
 /// alinearuimte eronder); zonder [block] is hij inline in een tekstregel
 /// (begrensd op de beschikbare regelbreedte), zoals het schrijfvlak hem toont.
+///
+/// Met [size] (de `w:`/`h:`-tokens uit de haakjes) tekent hij kleiner dan de
+/// kolom: een vaste breedte, een deel van de breedte, of een begrensde hoogte.
+/// Zonder maat blijft het oude gedrag — zo breed als het vak toelaat.
 class DocumentImage extends StatefulWidget {
   const DocumentImage({
     super.key,
@@ -103,12 +107,16 @@ class DocumentImage extends StatefulWidget {
     required this.alt,
     required this.projectPath,
     this.block = true,
+    this.size,
   });
 
   final String source;
   final String alt;
   final String? projectPath;
   final bool block;
+
+  /// De gevraagde maat uit `w:`/`h:`-tokens; `null` = de kolom vullen.
+  final ImageSize? size;
 
   @override
   State<DocumentImage> createState() => _DocumentImageState();
@@ -238,29 +246,55 @@ class _DocumentImageState extends State<DocumentImage> {
     final ratio = _aspectRatio;
     final image = ratio == null
         ? const _DocumentImagePlaceholder()
-        : AspectRatio(
-            aspectRatio: ratio,
-            child: Image(
-              image: provider,
-              fit: BoxFit.contain,
-              width: double.infinity,
-              // Het vorige beeld blijft staan terwijl de volgende decodeert;
-              // zonder dit flitst het vlak even zwart bij een bronwissel.
-              gaplessPlayback: true,
-              semanticLabel: widget.alt,
-              errorBuilder: (context, error, stackTrace) => _DocumentImageChip(
-                alt: widget.alt,
-                source: widget.source,
-                block: widget.block,
-              ),
-            ),
-          );
+        : _sized(provider, widget.size, ratio);
     if (!widget.block) return image;
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: kDocumentParagraphGap),
       child: image,
     );
+  }
+
+  /// De afbeelding op zijn natuurlijke verhouding, begrensd op de gevraagde
+  /// maat: een deel van de kolom (`w:50%`), een vaste breedte of hoogte in
+  /// px, of beide. Een afbeelding die kleiner mag dan het vak staat gecentreerd
+  /// — dezelfde plaats als de PDF-export hem neerlegt.
+  Widget _sized(ImageProvider provider, ImageSize? size, double ratio) {
+    final image = AspectRatio(
+      aspectRatio: ratio,
+      child: Image(
+        image: provider,
+        fit: BoxFit.contain,
+        width: double.infinity,
+        // Het vorige beeld blijft staan terwijl de volgende decodeert;
+        // zonder dit flitst het vlak even zwart bij een bronwissel.
+        gaplessPlayback: true,
+        semanticLabel: widget.alt,
+        errorBuilder: (context, error, stackTrace) => _DocumentImageChip(
+          alt: widget.alt,
+          source: widget.source,
+          block: widget.block,
+        ),
+      ),
+    );
+    if (size == null) return image;
+    Widget boxed = image;
+    if (size.widthFraction != null) {
+      boxed = FractionallySizedBox(
+        widthFactor: size.widthFraction!.clamp(0.05, 1.0),
+        child: boxed,
+      );
+    }
+    if (size.width != null || size.height != null) {
+      boxed = ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: size.width ?? double.infinity,
+          maxHeight: size.height ?? double.infinity,
+        ),
+        child: boxed,
+      );
+    }
+    return boxed;
   }
 }
 

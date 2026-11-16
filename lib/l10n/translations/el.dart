@@ -1565,6 +1565,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Rij {n} omhoog': 'Γραμμή {n} επάνω',
+  'Rij {n} omlaag': 'Γραμμή {n} κάτω',
+  'Dubbelklik om de grootte te wijzigen': 'Διπλό κλικ για αλλαγή μεγέθους',
+  'Grootte van de afbeelding': 'Μέγεθος εικόνας',
+  '{percent}% van de kolombreedte': '{percent}% του πλάτους της στήλης',
+  'Natuurlijke maat': 'Φυσικό μέγεθος',
+  'Tekenen': 'Σχεδίαση',
+  'Uit een stijl': 'Από στυλ',
   'Alleen lezen (vergrendeld)': 'Μόνο για ανάγνωση (κλειδωμένο)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Αυτό το έγγραφο είναι μόνο για ανάγνωση (κλειδωμένο).',

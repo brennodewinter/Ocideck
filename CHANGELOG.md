@@ -12,6 +12,8 @@ All notable changes to OciDeck are documented in this file.
 
 - **Markdown-bestand op de cursor invoegen (#2909).** Het Invoegen-palet van de documenteditor kent een nieuwe keuze *Markdown-bestand…*: kies een `.md`-, `.markdown`- of `.txt`-bestand en de inhoud landt als eigen blok op de cursorpositie — in de visuele stand én in de bron, als één ongedaan-maakbare bewerking. Werkt ook op web (bytes in plaats van pad). Inhoud die code kan uitvoeren wordt vóór de invoeging geweigerd met dezelfde veiligheidsscan en alarmdialoog als bij het openen van een presentatie; een bestand zonder leesbare tekst wordt netjes gemeld.
 
+- **PE-bewijs: feedback doorgevoerd (#2923–#2928).** Het PE-puntensjabloon is op zes punten bijgeschaafd. Het opleiderslogo is kiesbaar uit de logo's van de eigen stijlen — uploaden kan nog, maar hoeft niet (#2923). De sessiestabel kent nu rij-omhoog en rij-omlaag, zoals de andere tabellen (#2924). De handtekening kun je plakken of ter plekke tekenen (#2925) en wordt in het document met een begrensde hoogte weergegeven in plaats van kolombreed (#2927). De uren per deelnemer tellen standaard op uit de sessies — waar tijdsblokken (`09:00–10:30`) óf uren ingevuld mogen worden — en een regel boven dat totaal wordt geweigerd (#2926). Tot slot: in een document is een afbeelding met een dubbelklik van grootte te veranderen, opgeslagen als Marp's eigen `w:`/`h:`-tokens in de alt-tekst (#2928).
+
 ### Removed
 
 - **MIAUW-rapportage uit OciDeck (#2845).** De module Informatieveiligheid, de bijbehorende rapportdocumenten, compliance-analyse, CVE-opzoekingen, bulkdownloads en CWE-dataset zijn verwijderd. Eerder gedownloade CVE-data en instellingen worden opgeruimd. Bestaande gebruikerspresentaties en sidecars blijven leesbaar.

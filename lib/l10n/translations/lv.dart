@@ -1538,6 +1538,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Rij {n} omhoog': 'Rinda {n} uz augšu',
+  'Rij {n} omlaag': 'Rinda {n} uz leju',
+  'Dubbelklik om de grootte te wijzigen': 'Dubultklikšķis, lai mainītu izmēru',
+  'Grootte van de afbeelding': 'Attēla izmērs',
+  '{percent}% van de kolombreedte': '{percent}% no kolonnas platuma',
+  'Natuurlijke maat': 'Dabiskais izmērs',
+  'Tekenen': 'Zīmēt',
+  'Uit een stijl': 'No stila',
   'Alleen lezen (vergrendeld)': 'Tikai lasīšana (bloķēts)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Šis dokuments ir tikai lasāms (bloķēts).',

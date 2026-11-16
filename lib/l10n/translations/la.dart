@@ -1553,6 +1553,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Rij {n} omhoog': 'Versus {n} sursum',
+  'Rij {n} omlaag': 'Versus {n} deorsum',
+  'Dubbelklik om de grootte te wijzigen':
+      'Duplici pulsatione magnitudinem muta',
+  'Grootte van de afbeelding': 'Magnitudo imaginis',
+  '{percent}% van de kolombreedte': '{percent}% latitudinis columnae',
+  'Natuurlijke maat': 'Mensura naturalis',
+  'Tekenen': 'Delinea',
+  'Uit een stijl': 'Ex stilo',
   'Alleen lezen (vergrendeld)': 'Solum legere (clausum)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Hoc documentum solum legitur (clausum).',

@@ -1542,6 +1542,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Rij {n} omhoog': 'Řádek {n} nahoru',
+  'Rij {n} omlaag': 'Řádek {n} dolů',
+  'Dubbelklik om de grootte te wijzigen': 'Dvojitým kliknutím změníte velikost',
+  'Grootte van de afbeelding': 'Velikost obrázku',
+  '{percent}% van de kolombreedte': '{percent} % šířky sloupce',
+  'Natuurlijke maat': 'Přirozená velikost',
+  'Tekenen': 'Kreslit',
+  'Uit een stijl': 'Ze stylu',
   'Alleen lezen (vergrendeld)': 'Jen pro čtení (uzamčeno)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Tento dokument je jen pro čtení (uzamčen).',
