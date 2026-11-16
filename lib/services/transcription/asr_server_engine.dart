@@ -88,7 +88,7 @@ class AsrServerEngine implements TranscriptionEngine {
   final AsrAudioReader audioReader;
   final bool _isWeb;
 
-  AsrSendHandle? _current;
+  _AsrTask? _current;
 
   /// Bovengrens voor de upload. `whisper-server` kent zelf geen grens, maar
   /// een onbegrensde upload is ook hier een onbegrensde belofte — een
@@ -178,35 +178,44 @@ class AsrServerEngine implements TranscriptionEngine {
         consent.audioPath != audio.path) {
       throw const ConsentRequired('serverupload niet bevestigd voor deze taak');
     }
-    final auth = await _headers(allow);
-
-    final bytes = await audioReader(audio.path);
-    if (bytes.length > maxUploadBytes) {
-      throw const CapacityExceeded('audio groter dan de uploadgrens');
+    if (_current != null) {
+      throw const EngineUnavailable('er loopt al een servertranscriptie');
     }
-
-    final handle = transport.send(
-      method: 'POST',
-      url: _endpoint(allow.uri, 'inference'),
-      strategy: allow.strategy,
-      headers: {
-        'content-type': 'multipart/form-data; boundary=$_boundary',
-        ...auth,
-      },
-      body: buildMultipartBody(
-        fields: {
-          'response_format': 'verbose_json',
-          if (options.language != null) 'language': options.language!,
-        },
-        fileField: 'file',
-        fileName: _audioFileName(audio.path),
-        fileContentType: 'audio/wav',
-        fileBytes: bytes,
-      ),
-    );
-    _current = handle;
+    final task = _AsrTask();
+    _current = task;
     try {
+      final auth = await _headers(allow);
+      task.throwIfCancelled();
+      final bytes = await audioReader(audio.path);
+      task.throwIfCancelled();
+      if (bytes.length > maxUploadBytes) {
+        throw const CapacityExceeded('audio groter dan de uploadgrens');
+      }
+
+      final handle = transport.send(
+        method: 'POST',
+        url: _endpoint(allow.uri, 'inference'),
+        strategy: allow.strategy,
+        headers: {
+          'content-type': 'multipart/form-data; boundary=$_boundary',
+          ...auth,
+        },
+        body: buildMultipartBody(
+          fields: {
+            'response_format': 'verbose_json',
+            if (options.language != null) 'language': options.language!,
+          },
+          fileField: 'file',
+          fileName: _audioFileName(audio.path),
+          fileContentType: 'audio/wav',
+          fileBytes: bytes,
+        ),
+      );
+      task.handle = handle;
+      // Een transportdouble kan tijdens send() synchroon cancel() aanroepen.
+      if (task.cancelled) task.cancel();
       final response = await handle.done;
+      task.throwIfCancelled();
       if (!response.isOk) {
         throw ServerRefused('HTTP ${response.statusCode}');
       }
@@ -217,7 +226,7 @@ class AsrServerEngine implements TranscriptionEngine {
       }
       throw ServerRefused(e.message);
     } finally {
-      _current = null;
+      if (identical(_current, task)) _current = null;
     }
   }
 
@@ -227,7 +236,7 @@ class AsrServerEngine implements TranscriptionEngine {
     TranscriptionOptions? options,
   }) => null;
 
-  /// Breekt een lopende upload af; `transcribe` voltooit met [Cancelled].
+  /// Annuleert ook voorbereiding vóór de upload; geen audio vertrekt daarna.
   @override
   void cancel() => _current?.cancel();
 
@@ -273,6 +282,21 @@ class AsrServerEngine implements TranscriptionEngine {
     final idx = path.lastIndexOf('/');
     final name = idx >= 0 ? path.substring(idx + 1) : path;
     return name.isEmpty ? 'audio.wav' : name;
+  }
+}
+
+// De annulering hoort bij één taak, ook zolang er nog geen request is.
+class _AsrTask {
+  bool cancelled = false;
+  AsrSendHandle? handle;
+
+  void cancel() {
+    cancelled = true;
+    handle?.cancel();
+  }
+
+  void throwIfCancelled() {
+    if (cancelled) throw const Cancelled('servertranscriptie geannuleerd');
   }
 }
 

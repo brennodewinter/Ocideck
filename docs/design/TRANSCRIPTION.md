@@ -470,9 +470,13 @@ engine compares strictly to what it is about to send (host + audio path); a
 `probe()` connectivity check sends no audio, a real audio test is a separate
 deliberate act. The API key lives in `SecretStore` under
 `asr_api_key::<normalized-base-url>` and appears only in the `Authorization`
-header. Uploads cap at 400 MB, responses at 16 MB, cancel aborts the request
-as `Cancelled`, and a failed upload leaves the source audio untouched —
-retrying is a new user choice, never automatic.
+header. Uploads cap at 400 MB and responses at 16 MB. Each engine admits one
+batch task at a time, including preparation. Cancellation during key lookup or
+audio reading prevents the upload; cancellation after sending aborts the request
+and suppresses a late success. Preparation must settle before another task can
+start; cancellation does not itself interrupt a non-cancellable file read.
+The task finishes as `Cancelled`, and a failed upload leaves the source audio
+untouched — retrying is a new user choice, never automatic.
 
 **Implemented (#2525) — the live server route.** A second, optional endpoint
 on the same profile (`liveUrl`, `ws://`/`wss://`) carries provisional text
