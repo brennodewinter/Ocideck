@@ -7,11 +7,16 @@
 //  * web heeft geen pad: de bytes van de kiezer gaan in de `mem:`-
 //    assetstore en de sleutel is de `sourcePath` — dezelfde grens als
 //    waar de web-engine zijn audio leest.
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
+import 'package:path/path.dart' as p;
 
 import '../../l10n/app_localizations.dart';
+import '../../platform/platform_features.dart';
+import '../../services/transcription/media_sniff.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
@@ -21,21 +26,73 @@ import '../dialogs/transcribe_file_dialog.dart';
 /// voorspraak van de decoder — de sniffer en de decode zijn de eigenlijke
 /// uitspraak ("video zonder audiotrack" is een antwoord, geen afwijzing
 /// vooraf).
-const transcribableExtensions = [
-  'wav',
-  'mp3',
-  'm4a',
-  'aac',
-  'flac',
-  'ogg',
-  'opus',
-  'mp4',
-  'm4v',
-  'mov',
-  'webm',
-  'mkv',
-  'avi',
-];
+final transcribableExtensions = mediaFileExtensions.toList()..sort();
+
+/// De gedeelde media-openroute (#2932): de transcriptievoorbeschouwing
+/// voor een al gekozen bron — vanuit de losse actie, de gewone
+/// openwegen, drag-drop en de URL-router. [sourcePath] is het pad
+/// (desktop) of de `mem:`-sleutel (web); herkennen start nog geen
+/// decode — die begint pas na de Start-keuze in de dialoog.
+///
+/// Een geannuleerde dialoog is afgehandeld, géén fout: er valt niets te
+/// melden en de aanroeper gaat gewoon door met het volgende bestand.
+Future<void> openMediaForTranscription(
+  BuildContext context, {
+  required String sourcePath,
+  required String displayName,
+}) async {
+  await showDialog<void>(
+    context: context,
+    builder: (_) =>
+        TranscribeFileDialog(sourcePath: sourcePath, displayName: displayName),
+  );
+}
+
+/// De bytesvariant van [openMediaForTranscription] voor de routes die
+/// bytes hebben in plaats van een pad (web-picker, web-drop, URL-fetch).
+/// De bytes gaan de `mem:`-assetstore in — zelfde grens als waar de
+/// web-engine zijn audio leest — en de sleutel is de `sourcePath`.
+Future<void> openMediaBytesForTranscription(
+  BuildContext context,
+  Uint8List bytes,
+  String name,
+) async {
+  final l10n = context.l10n;
+  final messenger = ScaffoldMessenger.of(context);
+  if (bytes.isEmpty) {
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      l10n.d('Het bestand kon niet worden gelezen.'),
+    );
+    return;
+  }
+  final String sourcePath;
+  try {
+    sourcePath = WebAssetStore.put(bytes, name: name);
+  } on WebAssetBudgetExceeded {
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      l10n.d('Het bestand is te groot of er is te weinig geheugen vrij.'),
+    );
+    return;
+  } on Object catch (e) {
+    logWarning('openMediaBytesForTranscription: webopslag weigerde de bron', e);
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      l10n.d('Het bestand kon niet worden gelezen.'),
+    );
+    return;
+  }
+  if (!context.mounted) return;
+  await openMediaForTranscription(
+    context,
+    sourcePath: sourcePath,
+    displayName: name,
+  );
+}
 
 /// Kies een bestand en open de transcriptie-dialoog. `null`-keuze of een
 /// mislukte lezing eindigen stil resp. in een fout-snackbar — net als de
@@ -43,6 +100,10 @@ const transcribableExtensions = [
 Future<void> transcribeFile(BuildContext context) async {
   final l10n = context.l10n;
   final messenger = ScaffoldMessenger.of(context);
+  // Op web bestaat `PlatformFile.path` niet — daar loopt de route via de
+  // bytes. `supportsLocalProjectFolders` is de platformpoort die de
+  // conventiepoort hiervoor wil zien.
+  final localPaths = supportsLocalProjectFolders;
   final picked = await FilePicker.pickFiles(
     type: FileType.custom,
     allowedExtensions: transcribableExtensions,
@@ -51,56 +112,78 @@ Future<void> transcribeFile(BuildContext context) async {
   if (picked.isEmpty || !context.mounted) return;
   final file = picked.first;
 
-  String sourcePath;
-  if (kIsWeb) {
+  if (!localPaths) {
     final bytes = await file.readAsBytes();
-    if (bytes.isEmpty) {
-      showErrorSnackBar(
-        messenger,
-        l10n,
-        l10n.d('Het bestand kon niet worden gelezen.'),
-      );
-      return;
-    }
-    try {
-      sourcePath = WebAssetStore.put(bytes, name: file.name);
-    } on WebAssetBudgetExceeded {
-      showErrorSnackBar(
-        messenger,
-        l10n,
-        l10n.d('Het bestand is te groot of er is te weinig geheugen vrij.'),
-      );
-      return;
-    } on Object catch (e) {
-      logWarning('transcribeFile: webopslag weigerde de bron', e);
-      showErrorSnackBar(
-        messenger,
-        l10n,
-        l10n.d('Het bestand kon niet worden gelezen.'),
-      );
-      return;
-    }
-  } else {
-    final path = file.path;
-    if (path == null || path.isEmpty) {
-      showErrorSnackBar(
-        messenger,
-        l10n,
-        l10n.d('Het bestand kon niet worden gelezen.'),
-      );
-      return;
-    }
-    sourcePath = path;
+    if (!context.mounted) return;
+    await openMediaBytesForTranscription(context, bytes, file.name);
+    return;
+  }
+  final path = file.path;
+  if (path == null || path.isEmpty) {
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      l10n.d('Het bestand kon niet worden gelezen.'),
+    );
+    return;
   }
   if (!context.mounted) return;
-
-  await showDialog<void>(
-    context: context,
-    builder: (_) =>
-        TranscribeFileDialog(sourcePath: sourcePath, displayName: file.name),
+  await openMediaForTranscription(
+    context,
+    sourcePath: path,
+    displayName: file.name,
   );
 }
 
 /// Het menulabel voor de transcriptie-ingang.
 String transcribeFileLabel(AppLocalizations l10n) =>
     l10n.d('Audio/video transcriberen…');
+
+/// Snuif aan de kop van [path]; een mediacontainer gaat naar de
+/// transcriptievoorbeschouwing, ál het andere blijft bij de aanroeper.
+/// `true` = verwerkt (een geannuleerde voorbeschouwing telt ook), `false`
+/// = geen media of onleesbaar — de gewone openroute meldt dan zijn eigen,
+/// eerlijkere reden. Dit is de gedeelde zeef uit #2932 voor elke
+/// pad-ingang (kiezer, bibliotheek, Finder, recents).
+Future<bool> openMediaPathIfMedia(BuildContext context, String path) async {
+  bool media;
+  try {
+    final ra = await File(path).open();
+    try {
+      final head = Uint8List.fromList(await ra.read(sniffHeadBytes));
+      media =
+          classifyOpenTarget(head, extension: p.extension(path)) ==
+          OpenTarget.media;
+    } finally {
+      await ra.close();
+    }
+  } on Object {
+    return false;
+  }
+  if (!media || !context.mounted) return media;
+  await openMediaForTranscription(
+    context,
+    sourcePath: path,
+    displayName: p.basename(path),
+  );
+  return true;
+}
+
+/// Zelfde zeef voor al-gelezen bytes (web-kiezer, drop): de inhoud beslist,
+/// niet de naam — tekst met een `.mp3`-naam valt terug naar de aanroeper.
+Future<bool> openMediaBytesIfMedia(
+  BuildContext context,
+  Uint8List bytes,
+  String name,
+) async {
+  final head = bytes.length <= sniffHeadBytes
+      ? bytes
+      : Uint8List.sublistView(bytes, 0, sniffHeadBytes);
+  if (classifyOpenTarget(head, extension: p.extension(name)) !=
+      OpenTarget.media) {
+    return false;
+  }
+  if (!context.mounted) return true;
+  await openMediaBytesForTranscription(context, bytes, name);
+  return true;
+}

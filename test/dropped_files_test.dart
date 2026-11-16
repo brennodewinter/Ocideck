@@ -39,6 +39,12 @@ void main() {
       }
     });
 
+    test('herkent audio en video als media (#2932)', () {
+      for (final name in ['clip.mp3', 'film.MP4', 'rec.wav', 'a.webm']) {
+        expect(droppedKind(name), DroppedKind.media, reason: name);
+      }
+    });
+
     test('herkent afbeeldingen, ongeacht schrijfwijze', () {
       for (final name in [
         'foto.PNG',

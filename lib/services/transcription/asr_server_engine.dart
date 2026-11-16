@@ -161,6 +161,13 @@ class AsrServerEngine implements TranscriptionEngine {
     TranscriptionOptions options,
   ) async {
     final allow = _allowOrThrow();
+    // Zolang het servercontract geen sprekerlabels kent is `diarize` een
+    // afwijzing, geen stil verlies van de keuze (#2935).
+    if (options.diarize) {
+      throw const EngineUnavailable(
+        'diarisatie wordt door deze engine niet ondersteund',
+      );
+    }
 
     // Per-taaktoestemming: host én deze specifieke audio moeten in de
     // bevestiging zijn benoemd (§4.3). Strikte vergelijking — een consent

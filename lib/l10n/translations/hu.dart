@@ -1543,6 +1543,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'a WAV nem 16 bites PCM — dekódolás szükséges',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'a WAV nem 16 bites PCM — a böngésző így is dekódolja',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Az átírási modul ki van kapcsolva vagy nincs beállítva. Kapcsolja be a Beállítások → Modulok menüpontban.',
+  'Instellingen openen': 'Beállítások megnyitása',
+  'Sprekers onderscheiden': 'Beszélők megkülönböztetése',
   'Rij {n} omhoog': '{n}. sor felfelé',
   'Rij {n} omlaag': '{n}. sor lefelé',
   'Dubbelklik om de grootte te wijzigen':

@@ -14,6 +14,7 @@ import 'package:path/path.dart' as p;
 
 import '../../services/import/document_import_service.dart'
     show isImportableDocumentName;
+import '../../services/transcription/media_sniff.dart';
 import '../../utils/log.dart';
 import 'document_import_action.dart' show importDroppedDocuments;
 import 'presentation_import_action.dart';
@@ -50,6 +51,9 @@ enum DroppedKind {
 
   /// Een afbeelding: wordt slide-inhoud.
   image,
+
+  /// Audio/video: krijgt de transcriptievoorbeschouwing (#2932).
+  media,
 }
 
 /// De afhandeling die [name] krijgt, of `null` als de drop dit bestand negeert.
@@ -64,6 +68,9 @@ DroppedKind? droppedKind(String name) {
   if (isImportablePresentationName(name)) return DroppedKind.presentation;
   if (isImportableDocumentName(name)) return DroppedKind.document;
   if (droppedImageExtensions.contains(ext)) return DroppedKind.image;
+  if (mediaFileExtensions.contains(ext.replaceFirst('.', ''))) {
+    return DroppedKind.media;
+  }
   return null;
 }
 

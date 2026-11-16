@@ -1552,6 +1552,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'plik WAV nie jest 16-bitowym PCM — wymagane dekodowanie',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'plik WAV nie jest 16-bitowym PCM — przeglądarka dekoduje go mimo to',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Moduł transkrypcji jest wyłączony lub nieskonfigurowany. Włącz go w Ustawienia → Moduły.',
+  'Instellingen openen': 'Otwórz ustawienia',
+  'Sprekers onderscheiden': 'Rozróżniaj mówców',
   'Rij {n} omhoog': 'Wiersz {n} w górę',
   'Rij {n} omlaag': 'Wiersz {n} w dół',
   'Dubbelklik om de grootte te wijzigen':

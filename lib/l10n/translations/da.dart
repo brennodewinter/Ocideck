@@ -1542,6 +1542,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV’en er ikke 16-bit PCM — dekodning er nødvendig',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV’en er ikke 16-bit PCM — browseren dekoder den alligevel',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Transskriptionsmodulet er slået fra eller ikke konfigureret. Slå det til under Indstillinger → Moduler.',
+  'Instellingen openen': 'Åbn indstillinger',
+  'Sprekers onderscheiden': 'Skelne mellem talere',
   'Rij {n} omhoog': 'Række {n} op',
   'Rij {n} omlaag': 'Række {n} ned',
   'Dubbelklik om de grootte te wijzigen': 'Dobbeltklik for at ændre størrelsen',

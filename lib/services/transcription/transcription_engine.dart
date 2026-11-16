@@ -130,12 +130,19 @@ class ServerConsent {
 class TranscriptionOptions {
   const TranscriptionOptions({
     this.language,
+    this.diarize = false,
     this.serverConsent,
     this.onProgress,
   });
 
   /// Gewenste taal (bijv. `nl`), of null voor "laat de engine detecteren".
   final String? language;
+
+  /// Verzoek om sprekerscheiding. Een engine die geen diarisatie kan —
+  /// [EngineCapabilities.diarization] is dan `false` — krijgt deze keuze
+  /// niet aangeboden; komt hij er tóch mee aan, dan beantwoordt hij hem
+  /// met [EngineUnavailable] en niet met stil negeren (#2935).
+  final bool diarize;
 
   /// Verplicht voor een `batchServer`/`liveServer`-engine; een lokale
   /// engine negeert dit veld.

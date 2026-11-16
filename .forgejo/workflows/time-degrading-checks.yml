@@ -41,17 +41,31 @@ jobs:
       - name: Afhankelijkheden ophalen
         run: flutter pub get
 
+      # Vier onafhankelijke tijdscontroles — een rode mag de rest niet
+      # tegenhouden. Elke stap schrijft zijn falen weg in .dagchecks-failliet
+      # en laat de rest doorlopen (`if: always()`); de eindstand onderaan maakt
+      # de run alsnog rood. Zonder dit zou een stukgebroken pin-check de
+      # houdbaarheidscontrole erachter elke nacht overslaan (#2936) — precies
+      # wat er gebeurde.
       - name: Gebundelde JS tegen OSV (CVE's op marked, highlight.js, DOMPurify, mermaid, MathJax)
-        run: dart run tool/check_bundled_js.dart
+        if: always()
+        run: |
+          dart run tool/check_bundled_js.dart || { echo "FAILED: bundled-js" >> .dagchecks-failliet; exit 1; }
 
       - name: Referentiedata tegen de laatste editie
-        run: dart run tool/check_reference_data.dart
+        if: always()
+        run: |
+          dart run tool/check_reference_data.dart || { echo "FAILED: referentiedata" >> .dagchecks-failliet; exit 1; }
 
       - name: Licenties
-        run: dart run tool/check_licenses.dart
+        if: always()
+        run: |
+          dart run tool/check_licenses.dart || { echo "FAILED: licenties" >> .dagchecks-failliet; exit 1; }
 
       - name: GitHub-actie-pins tegen de laatste release
-        run: dart run tool/check_pinned_versions.dart
+        if: always()
+        run: |
+          dart run tool/check_pinned_versions.dart || { echo "FAILED: pins" >> .dagchecks-failliet; exit 1; }
 
       # Onze eigen metingen, niet die van een ander. Een looptijdbelofte in de
       # documentatie verrot terwijl de boom stilstaat: `docs/CHECKS.md` beloofde
@@ -59,4 +73,14 @@ jobs:
       # poort kon dat zien. De structurele helft draait per PR in
       # `make check-static`; alleen de houdbaarheid hoort hier, tegen de klok.
       - name: Gemeten beweringen in de documentatie tegen hun houdbaarheid
-        run: dart run tool/check_dated_claims.dart --tegen-de-klok
+        if: always()
+        run: |
+          dart run tool/check_dated_claims.dart --tegen-de-klok || { echo "FAILED: houdbaarheid" >> .dagchecks-failliet; exit 1; }
+
+      - name: Eindstand
+        if: always()
+        run: |
+          if [ -f .dagchecks-failliet ]; then
+            cat .dagchecks-failliet
+            exit 1
+          fi

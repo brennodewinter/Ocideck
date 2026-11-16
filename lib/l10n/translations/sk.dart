@@ -1545,6 +1545,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'WAV nie je 16-bitové PCM — treba ho dekódovať',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'WAV nie je 16-bitové PCM — prehliadač ho aj tak dekóduje',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Modul prepisu je vypnutý alebo nie je nastavený. Zapnite ho v Nastavenia → Moduly.',
+  'Instellingen openen': 'Otvoriť nastavenia',
+  'Sprekers onderscheiden': 'Rozlišovať rečníkov',
   'Rij {n} omhoog': 'Riadok {n} hore',
   'Rij {n} omlaag': 'Riadok {n} dole',
   'Dubbelklik om de grootte te wijzigen': 'Dvojitým kliknutím zmeníte veľkosť',

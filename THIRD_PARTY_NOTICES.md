@@ -187,6 +187,35 @@ systems, browsers, standards bodies, the reference catalogues listed in
 [`docs/LICENSE_COMPLIANCE.md`](docs/LICENSE_COMPLIANCE.md) — belong to their
 respective owners and are likewise used only to identify the thing they name.
 
+## Speech transcription (Whisper)
+
+Local transcription runs on **whisper.cpp 1.9.5** (MIT, ggml-org authors),
+built from a hash-pinned source tarball (`native/whisper_cli/manifest.json`)
+and shipped as the `whisper-cli` / `whisper-wasm` helper. Its full MIT text
+ships in `assets/licenses/whisper-cpp-LICENSE.txt` and is registered in the
+app's licence page.
+
+The **model weights are a different component from a different author**:
+OpenAI's Whisper models, MIT for both code and weights. OciDeck does not
+bundle them — the user downloads a revision- and SHA-256-pinned `.bin` from
+the ggerganov/whisper.cpp model repository (model card on the pinned
+revision confirms MIT). The full OpenAI MIT notice ships in
+`assets/licenses/openai-whisper-LICENSE.txt` so it travels with the app that
+offers the download. Should OciDeck ever redistribute the weights directly,
+that notice remains the obligation.
+
+`miniaudio.h` and `stb_vorbis.c` compile into the helper via whisper.cpp's
+`examples/common`. Both offer a licence choice in the pinned 1.9.5 source;
+OciDeck takes the **Unlicense** option, recorded with the full text in
+`assets/licenses/miniaudio-stb_vorbis-LICENSE.txt`.
+
+Any future download/transcript helper (a yt-dlp build, an FFmpeg binary, a
+diarisation model) is assessed **per distributed artefact**, not per upstream
+repository licence: upstream yt-dlp is Unlicense but PyInstaller bundles are
+GPLv3+ combined works, and FFmpeg obligations depend on the concrete build
+configuration. `docs/LICENSE_COMPLIANCE.md` records the assessment; a new
+helper is not added to a release before its own licence registration lands.
+
 ## Linux video texture backend
 
 `media_kit_video_linux` (`third_party/media_kit_video_linux`) contains the Dart and Linux sources from

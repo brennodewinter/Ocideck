@@ -1565,6 +1565,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'de WAV is geen 16-bit PCM — decode nodig':
+      'Το WAV δεν είναι PCM 16-bit — απαιτείται αποκωδικοποίηση',
+  'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
+      'Το WAV δεν είναι PCM 16-bit — το πρόγραμμα περιήγησης το αποκωδικοποιεί έτσι κι αλλιώς',
+  'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
+      'Η ενότητα μεταγραφής είναι απενεργοποιημένη ή δεν έχει ρυθμιστεί. Ενεργοποιήστε την από Ρυθμίσεις → Ενότητες.',
+  'Instellingen openen': 'Άνοιγμα ρυθμίσεων',
+  'Sprekers onderscheiden': 'Διάκριση ομιλητών',
   'Rij {n} omhoog': 'Γραμμή {n} επάνω',
   'Rij {n} omlaag': 'Γραμμή {n} κάτω',
   'Dubbelklik om de grootte te wijzigen': 'Διπλό κλικ για αλλαγή μεγέθους',
