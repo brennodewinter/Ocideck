@@ -134,6 +134,9 @@ class _ApostropheWord extends pw.RichText {
               }
             }
           }
+          // RichText tekent zelf een placeholder wanneer geen font dit teken
+          // kent. Vraag dan geen Latin-1-metriek voor de ontbrekende glyph op.
+          if (!font.isRuneSupported(rune)) continue;
           baseline = math.min(
             baseline,
             font.stringMetrics(String.fromCharCode(rune)).descent *
