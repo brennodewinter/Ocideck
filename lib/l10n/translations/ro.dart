@@ -1556,6 +1556,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Rij {n} omhoog': 'Rândul {n} în sus',
+  'Rij {n} omlaag': 'Rândul {n} în jos',
+  'Dubbelklik om de grootte te wijzigen':
+      'Dublu clic pentru a modifica dimensiunea',
+  'Grootte van de afbeelding': 'Dimensiunea imaginii',
+  '{percent}% van de kolombreedte': '{percent}% din lățimea coloanei',
+  'Natuurlijke maat': 'Dimensiune naturală',
+  'Tekenen': 'Desenează',
+  'Uit een stijl': 'Dintr-un stil',
   'Alleen lezen (vergrendeld)': 'Doar citire (blocat)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Acest document este doar pentru citire (blocat).',

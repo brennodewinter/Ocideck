@@ -1556,6 +1556,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Rij {n} omhoog': 'Рядок {n} вгору',
+  'Rij {n} omlaag': 'Рядок {n} вниз',
+  'Dubbelklik om de grootte te wijzigen': 'Двічі клацніть, щоб змінити розмір',
+  'Grootte van de afbeelding': 'Розмір зображення',
+  '{percent}% van de kolombreedte': '{percent}% ширини стовпця',
+  'Natuurlijke maat': 'Природний розмір',
+  'Tekenen': 'Намалювати',
+  'Uit een stijl': 'Зі стилю',
   'Alleen lezen (vergrendeld)': 'Лише для читання (заблоковано)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Цей документ лише для читання (заблоковано).',

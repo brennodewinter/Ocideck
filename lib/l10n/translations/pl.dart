@@ -1552,6 +1552,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Rij {n} omhoog': 'Wiersz {n} w górę',
+  'Rij {n} omlaag': 'Wiersz {n} w dół',
+  'Dubbelklik om de grootte te wijzigen':
+      'Kliknij dwukrotnie, aby zmienić rozmiar',
+  'Grootte van de afbeelding': 'Rozmiar obrazu',
+  '{percent}% van de kolombreedte': '{percent}% szerokości kolumny',
+  'Natuurlijke maat': 'Rozmiar naturalny',
+  'Tekenen': 'Rysuj',
+  'Uit een stijl': 'Ze stylu',
   'Alleen lezen (vergrendeld)': 'Tylko do odczytu (zablokowane)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Ten dokument jest tylko do odczytu (zablokowany).',

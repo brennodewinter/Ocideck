@@ -613,6 +613,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Rij {n} omhoog': 'Ligne {n} vers le haut',
+  'Rij {n} omlaag': 'Ligne {n} vers le bas',
+  'Dubbelklik om de grootte te wijzigen':
+      'Double-cliquez pour changer la taille',
+  'Grootte van de afbeelding': 'Taille de l\'image',
+  '{percent}% van de kolombreedte': '{percent} % de la largeur de la colonne',
+  'Natuurlijke maat': 'Taille naturelle',
+  'Tekenen': 'Dessiner',
+  'Uit een stijl': 'Depuis un style',
   'Alleen lezen (vergrendeld)': 'Lecture seule (verrouillé)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Ce document est en lecture seule (verrouillé).',

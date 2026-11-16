@@ -2398,6 +2398,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Rij {n} omhoog': '{n}. satır yukarı',
+  'Rij {n} omlaag': '{n}. satır aşağı',
+  'Dubbelklik om de grootte te wijzigen':
+      'Boyutu değiştirmek için çift tıklayın',
+  'Grootte van de afbeelding': 'Görsel boyutu',
+  '{percent}% van de kolombreedte': 'Sütun genişliğinin %{percent}\'i',
+  'Natuurlijke maat': 'Doğal boyut',
+  'Tekenen': 'Çiz',
+  'Uit een stijl': 'Stilden',
   'Alleen lezen (vergrendeld)': 'Salt okunur (kilitli)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Bu belge salt okunur (kilitli).',

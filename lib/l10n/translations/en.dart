@@ -767,6 +767,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Rij {n} omhoog': 'Row {n} up',
+  'Rij {n} omlaag': 'Row {n} down',
+  'Dubbelklik om de grootte te wijzigen': 'Double-click to change the size',
+  'Grootte van de afbeelding': 'Image size',
+  '{percent}% van de kolombreedte': '{percent}% of the column width',
+  'Natuurlijke maat': 'Natural size',
+  'Tekenen': 'Draw',
+  'Uit een stijl': 'From a style',
   'Alleen lezen (vergrendeld)': 'Read only (locked)',
   'Dit document is alleen-lezen (vergrendeld)':
       'This document is read-only (locked).',

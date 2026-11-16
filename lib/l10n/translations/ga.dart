@@ -1570,6 +1570,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Rij {n} omhoog': 'Ró {n} suas',
+  'Rij {n} omlaag': 'Ró {n} síos',
+  'Dubbelklik om de grootte te wijzigen': 'Déchliceáil chun an méid a athrú',
+  'Grootte van de afbeelding': 'Méid an íomhá',
+  '{percent}% van de kolombreedte': '{percent}% de leithead na colún',
+  'Natuurlijke maat': 'Méid nádúrtha',
+  'Tekenen': 'Tarraing',
+  'Uit een stijl': 'Ó stíl',
   'Alleen lezen (vergrendeld)': 'Léamh amháin (faoi ghlas)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Tá an doiciméad seo inléite amháin (faoi ghlas).',

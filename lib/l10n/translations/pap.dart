@@ -612,6 +612,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Rij {n} omhoog': 'Fila {n} ariba',
+  'Rij {n} omlaag': 'Fila {n} abou',
+  'Dubbelklik om de grootte te wijzigen': 'Dòbel klik pa kambia e tamaño',
+  'Grootte van de afbeelding': 'Tamaño di e imágen',
+  '{percent}% van de kolombreedte': '{percent}% di e anchura di e kolom',
+  'Natuurlijke maat': 'Tamaño natural',
+  'Tekenen': 'Dibuja',
+  'Uit een stijl': 'For di un stil',
   'Alleen lezen (vergrendeld)': 'Solo pa lesa (será)',
   'Dit document is alleen-lezen (vergrendeld)':
       'E dokumento aki ta solo pa lesa (será).',

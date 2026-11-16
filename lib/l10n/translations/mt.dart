@@ -1558,6 +1558,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Rij {n} omhoog': 'Ringiela {n} fuq',
+  'Rij {n} omlaag': 'Ringiela {n} isfel',
+  'Dubbelklik om de grootte te wijzigen':
+      'Ikklikkja darbtejn biex tibdel id-daqs',
+  'Grootte van de afbeelding': 'Daqs tal-immaġni',
+  '{percent}% van de kolombreedte': '{percent}% tal-wisa\' tal-kolonna',
+  'Natuurlijke maat': 'Daqs naturali',
+  'Tekenen': 'Tiġbed',
+  'Uit een stijl': 'Minn stil',
   'Alleen lezen (vergrendeld)': 'Qari biss (imsakkar)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Dan id-dokument huwa għall-qari biss (imsakkar).',

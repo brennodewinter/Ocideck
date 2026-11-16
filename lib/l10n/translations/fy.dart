@@ -613,6 +613,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Rij {n} omhoog': 'Rige {n} omheech',
+  'Rij {n} omlaag': 'Rige {n} omleech',
+  'Dubbelklik om de grootte te wijzigen': 'Dûbelklik om de grutte te wizigjen',
+  'Grootte van de afbeelding': 'Grutte fan de ôfbylding',
+  '{percent}% van de kolombreedte': '{percent}% fan de kolombreedte',
+  'Natuurlijke maat': 'Natuerlike maat',
+  'Tekenen': 'Tekenje',
+  'Uit een stijl': 'Ut in styl',
   'Alleen lezen (vergrendeld)': 'Allinnich lêze (beskoattele)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Dit dokumint is allinnich lêsber (beskoattele).',

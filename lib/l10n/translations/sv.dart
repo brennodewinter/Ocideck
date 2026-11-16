@@ -1541,6 +1541,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Rij {n} omhoog': 'Rad {n} upp',
+  'Rij {n} omlaag': 'Rad {n} ner',
+  'Dubbelklik om de grootte te wijzigen':
+      'Dubbelklicka för att ändra storleken',
+  'Grootte van de afbeelding': 'Bildens storlek',
+  '{percent}% van de kolombreedte': '{percent} % av kolumnbredden',
+  'Natuurlijke maat': 'Naturlig storlek',
+  'Tekenen': 'Rita',
+  'Uit een stijl': 'Från en stil',
   'Alleen lezen (vergrendeld)': 'Endast läsning (låst)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Detta dokument är skrivskyddat (låst).',

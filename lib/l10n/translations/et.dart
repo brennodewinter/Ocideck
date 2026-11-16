@@ -1534,6 +1534,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Rij {n} omhoog': 'Rida {n} üles',
+  'Rij {n} omlaag': 'Rida {n} alla',
+  'Dubbelklik om de grootte te wijzigen': 'Topeltklõps suuruse muutmiseks',
+  'Grootte van de afbeelding': 'Pildi suurus',
+  '{percent}% van de kolombreedte': '{percent}% veeru laiusest',
+  'Natuurlijke maat': 'Loomulik suurus',
+  'Tekenen': 'Joonista',
+  'Uit een stijl': 'Stiilist',
   'Alleen lezen (vergrendeld)': 'Ainult lugemine (lukustatud)',
   'Dit document is alleen-lezen (vergrendeld)':
       'See dokument on ainult lugemiseks (lukustatud).',

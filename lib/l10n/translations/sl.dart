@@ -1542,6 +1542,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Rij {n} omhoog': 'Vrstica {n} gor',
+  'Rij {n} omlaag': 'Vrstica {n} dol',
+  'Dubbelklik om de grootte te wijzigen':
+      'Dvakrat kliknite za spremembo velikosti',
+  'Grootte van de afbeelding': 'Velikost slike',
+  '{percent}% van de kolombreedte': '{percent}% širine stolpca',
+  'Natuurlijke maat': 'Naravna velikost',
+  'Tekenen': 'Riši',
+  'Uit een stijl': 'Iz sloga',
   'Alleen lezen (vergrendeld)': 'Samo za branje (zaklenjeno)',
   'Dit document is alleen-lezen (vergrendeld)':
       'Ta dokument je samo za branje (zaklenjen).',
