@@ -621,7 +621,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                       controllerStore: _tableEditors,
                     ),
                     const DividerEmbedBuilder(),
-                    const TocEmbedBuilder(),
+                    TocEmbedBuilder(onTapLink: widget.onTapLink),
                     const SpacerEmbedBuilder(),
                     const TranscriptEmbedBuilder(),
                     const MermaidEmbedBuilder(),

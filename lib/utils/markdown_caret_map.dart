@@ -1,3 +1,4 @@
+import '../services/table_of_contents.dart' show tocMarkerLinePattern;
 import 'markdown_blocks.dart';
 import 'visible_markdown_search.dart';
 
@@ -26,38 +27,69 @@ class MarkdownCaretMap {
   /// De lengte van de platte tekst waar deze kaart naartoe vertaalt.
   final int visualLength;
 
-  /// Bouwt de kaart voor [source] — de body van het document, zonder
-  /// frontmatter, precies zoals de editor hem in handen heeft.
+  // Eén bron bewaard: cursorbewegingen, zoeken en hoofdstuksprongen delen de
+  // kaart, zonder een onbegrensde geschiedenis van documenten vast te houden.
+  static String? _cachedSource;
+  static MarkdownCaretMap? _cachedMap;
+
+  /// De kaart voor [source], de documentbody zonder frontmatter. Hergebruikt
+  /// de laatste kaart zolang de tekst ongewijzigd is.
   factory MarkdownCaretMap.of(String source) {
+    if (_cachedSource == source) return _cachedMap!;
+    final map = MarkdownCaretMap._build(source);
+    _cachedSource = source;
+    _cachedMap = map;
+    return map;
+  }
+
+  factory MarkdownCaretMap._build(String source) {
     final lines = source.split('\n');
     final rows = <_Row>[];
     var sourceAt = 0;
     var visualAt = 0;
     MarkdownFence? fence;
+    var atomicFence = false;
 
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
       final start = sourceAt;
       sourceAt += line.length + 1; // +1 voor het regeleinde
 
-      if (fence != null && !fence.closes(line.trim())) {
+      final closesFence =
+          fence != null &&
+          (atomicFence
+              ? line.trim() == '```' &&
+                    line.length - line.trimLeft().length <= 3
+              : fence.closes(line.trim()));
+      if (fence != null && !closesFence) {
         rows.add(
-          _Row.text(start, line.length, 0, line, visualAt, literal: true),
+          atomicFence
+              ? _Row.hidden(start, line.length, visualAt)
+              : _Row.text(start, line.length, 0, line, visualAt, literal: true),
         );
-        visualAt += line.length + 1;
+        if (!atomicFence) visualAt += line.length + 1;
         continue;
       }
       final opening = markdownFenceOpen(line.trim());
       if (fence != null || opening != null) {
-        fence = fence == null ? opening : null;
-        rows.add(_Row.hidden(start, line.length, visualAt));
+        final closing = fence != null;
+        fence = closing ? null : opening;
+        atomicFence = !closing && _isDiagramFence(line, opening!);
+        if (atomicFence) {
+          rows.add(_Row.object(start, line.length, visualAt));
+          visualAt += 2;
+        } else {
+          rows.add(_Row.hidden(start, line.length, visualAt));
+        }
         continue;
       }
       if (line.trim().isEmpty) {
         rows.add(_Row.hidden(start, line.length, visualAt));
         continue;
       }
-      if (_rulePattern.hasMatch(line) || _loneImagePattern.hasMatch(line)) {
+      if (_rulePattern.hasMatch(line) ||
+          _loneImagePattern.hasMatch(line) ||
+          tocMarkerLinePattern.hasMatch(line)) {
         rows.add(_Row.object(start, line.length, visualAt));
         visualAt += 2; // het objectteken plus zijn regeleinde
         continue;
@@ -133,6 +165,15 @@ class MarkdownCaretMap {
     }
     return best;
   }
+
+  // Dezelfde exacte fencevorm als de Mermaid-/Chart-embed van Quill;
+  // extra info-woorden en langere of tilde-hekken blijven gewone code.
+  static bool _isDiagramFence(String line, MarkdownFence opening) =>
+      opening.marker == '`' &&
+      opening.length == 3 &&
+      (opening.language == 'mermaid' || opening.language == 'chart') &&
+      line.length - line.trimLeft().length <= 3 &&
+      line.trim().substring(3).trim() == opening.language;
 
   static final _rulePattern = RegExp(r'^\s*(-{3,}|\*{3,}|_{3,})\s*$');
   static final _tableRowPattern = RegExp(r'^\s*\|');

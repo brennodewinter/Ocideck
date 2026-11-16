@@ -17,7 +17,9 @@ import 'markdown_editor_theme.dart';
 /// draagt geen inhoud, en de voorbeeldweergave moet meelopen met wat er nú in
 /// het document staat.
 class TocEmbedBuilder extends EmbedBuilder {
-  const TocEmbedBuilder();
+  const TocEmbedBuilder({this.onTapLink});
+
+  final ValueChanged<String>? onTapLink;
 
   @override
   String get key => EmbeddableToc.tocType;
@@ -31,6 +33,7 @@ class TocEmbedBuilder extends EmbedBuilder {
     final profile = DocumentStyleScope.maybeOf(context);
     return DocumentMarkdownView(
       tocMarker,
+      onTapLink: onTapLink,
       tocSource: _headingsMarkdown(embedContext.controller.document),
       maxTextWidth: null,
       themeProfile: profile,

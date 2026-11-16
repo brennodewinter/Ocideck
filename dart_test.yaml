@@ -11,6 +11,10 @@
 # OCIDECK_XMPP_INTEGRATION=1 is set and the local stack is running —
 # `make test-xmpp-integration` sets the flag. Declared here so the default
 # suite doesn't warn about an unknown tag.
+# `benchmark` loopt in de verplichte aparte meetstap, zonder andere test-
+# isolates of coverage-instrumentatie. De functionele schaaltest blijft gewoon
+# in de parallelle suite. `make test` en `make coverage` voeren beide stappen uit.
 tags:
+  benchmark:
   golden:
   integration:
