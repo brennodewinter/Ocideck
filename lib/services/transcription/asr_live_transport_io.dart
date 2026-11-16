@@ -4,19 +4,23 @@
 // het gevalideerde adres via `customClient` — een DNS-rebind kan de
 // stream zo niet alsnog naar een intern adres zetten.
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
 import '../../utils/log.dart';
 import '../../utils/pinned_http_client.dart';
 import 'asr_live_transport.dart';
+import 'asr_live_limits.dart';
 import 'asr_resolve_io.dart';
 
 final class IoAsrLiveTransport implements AsrLiveTransport {
-  const IoAsrLiveTransport({this.connectTimeout = const Duration(seconds: 15)});
+  const IoAsrLiveTransport({
+    this.connectTimeout = const Duration(seconds: 15),
+    this.limits = const LiveResponseLimits(),
+  });
 
   final Duration connectTimeout;
+  final LiveResponseLimits limits;
 
   @override
   Future<AsrLiveSocket> connect({
@@ -35,7 +39,7 @@ final class IoAsrLiveTransport implements AsrLiveTransport {
       // De client blijft bij de socket: de losse upgrade-delegatie van
       // dart:io maakt sluiten onschadelijk, en `close(force)` is de
       // laatste stekker als de stream zelf niet wil sterven.
-      return _IoLiveSocket(ws, client);
+      return _IoLiveSocket(ws, client, limits);
     } catch (e, s) {
       client.close(force: true);
       logError('IoAsrLiveTransport.connect', e, s);
@@ -45,19 +49,26 @@ final class IoAsrLiveTransport implements AsrLiveTransport {
 }
 
 final class _IoLiveSocket implements AsrLiveSocket {
-  _IoLiveSocket(this._ws, this._client);
+  _IoLiveSocket(this._ws, this._client, LiveResponseLimits limits) {
+    _inbound = BoundedLiveInput(
+      limits: limits,
+      onLimit: () => unawaited(close()),
+    );
+    _subscription = _ws.cast<Object>().listen(
+      _inbound.add,
+      onError: _inbound.addError,
+      onDone: _inbound.close,
+    );
+  }
 
   final WebSocket _ws;
   final HttpClient _client;
+  late final BoundedLiveInput _inbound;
+  late final StreamSubscription<Object> _subscription;
+  bool _closed = false;
 
   @override
-  Stream<Object> get messages => _ws.map(
-    (frame) => frame is String
-        ? frame
-        : frame is List<int>
-        ? Uint8List.fromList(frame)
-        : utf8.encode('$frame'),
-  );
+  Stream<Object> get messages => _inbound.stream;
 
   @override
   int? get closeCode => _ws.closeCode;
@@ -71,17 +82,22 @@ final class _IoLiveSocket implements AsrLiveSocket {
   @override
   void sendText(String frame) {
     if (_ws.readyState != WebSocket.open) return;
-    _ws.addUtf8Text(utf8.encode(frame));
+    _ws.add(frame);
   }
 
   @override
   Future<void> close() async {
+    if (_closed) return;
+    _closed = true;
+    _inbound.close();
+    await _subscription.cancel();
     try {
-      await _ws.close();
+      await _ws.close().timeout(const Duration(seconds: 2));
     } on Object {
       // Een socket die niet wil sluiten is al dicht genoeg.
+    } finally {
+      _client.close(force: true);
     }
-    _client.close(force: true);
   }
 }
 

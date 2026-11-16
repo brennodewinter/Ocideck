@@ -168,6 +168,25 @@ and a mixed-content rule blocks `http` from an `https` page. The profile
 dialog tests reachability before offering anything, and PRIVACY.md lists
 exactly which bytes go where under which consent.
 
+### Client-side response budgets
+
+Batch HTTP responses are read as a stream and stop at 16 MiB, including in the
+browser. Missing or misleading `Content-Length` does not change that limit.
+
+The live route applies independent limits before JSON parsing and while
+collecting results: 256 KiB per message, 64 KiB per text field, 4,096 words per
+result, 64 MiB / 250,000 incoming messages per session, and 8 MiB / 100,000
+retained result segments. A paused consumer may queue at most 1 MiB or 256
+messages. UTF-8 bytes count, rather than only the number of characters. Crossing
+a limit closes the server route with an error; a truncated transcript is not
+reported as a completed result. The local recording remains independent.
+
+These limits bound application conversion, parsing, queues and retained results.
+The browser and `dart:io` WebSocket APIs deliver complete messages, so they may
+already have allocated an oversized message before the app can reject it. A
+server-side message limit and trusted server deployment remain necessary; this
+is not a claim that platform-level WebSocket buffering is bounded by OciDeck.
+
 ## Storage, retention and wiping
 
 - **Staged recordings** live in the app's staging folder,

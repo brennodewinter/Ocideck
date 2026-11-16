@@ -33,6 +33,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'asr_live_limits.dart';
+
 /// De protocolversie die OciDeck aanbiedt. Wijzigt de draad, dan wijzigt
 /// dit id — `AsrLiveServerEngine` claimt alleen dit.
 const liveProtocolId = 'vosk-ws-1';
@@ -94,7 +96,11 @@ final class LiveUnknown extends LiveServerMessage {
 /// Parseert één tekstframe. Defensief: elke kapotte of vreemde vorm
 /// wordt [LiveUnknown] — de server is externe invoer, geen contract
 /// dat we mogen aannemen.
-LiveServerMessage parseLiveMessage(String raw) {
+LiveServerMessage parseLiveMessage(
+  String raw, {
+  LiveResponseLimits limits = const LiveResponseLimits(),
+}) {
+  checkedLiveTextBytes(raw, limits.messageBytes);
   final Object? decoded;
   try {
     decoded = jsonDecode(raw);
@@ -104,20 +110,27 @@ LiveServerMessage parseLiveMessage(String raw) {
   if (decoded is! Map) return const LiveUnknown();
 
   final partial = decoded['partial'];
-  if (partial is String) return LivePartial(partial);
+  if (partial is String) {
+    checkedLiveTextBytes(partial, limits.textBytes);
+    return LivePartial(partial);
+  }
 
   final result = decoded['result'];
   final text = decoded['text'];
   if (result is List || text is String) {
+    if (text is String) checkedLiveTextBytes(text, limits.textBytes);
+    if (result is List && result.length > limits.words) {
+      throw const LiveResponseLimitExceeded();
+    }
     return LiveResult(
       text: text is String ? text : '',
-      words: result is List ? _parseWords(result) : const [],
+      words: result is List ? _parseWords(result, limits) : const [],
     );
   }
   return const LiveUnknown();
 }
 
-List<LiveWord> _parseWords(List<dynamic> result) {
+List<LiveWord> _parseWords(List<dynamic> result, LiveResponseLimits limits) {
   final words = <LiveWord>[];
   for (final raw in result) {
     if (raw is! Map) continue;
@@ -125,6 +138,16 @@ List<LiveWord> _parseWords(List<dynamic> result) {
     final start = raw['start'];
     final end = raw['end'];
     if (word is! String || start is! num || end is! num) continue;
+    checkedLiveTextBytes(word, limits.textBytes);
+    // Onbetrouwbare JSON kan oneindige of onrealistische getallen bevatten.
+    // Een jaar audio is royaal; ongeldige woordtijden vallen weg als metadata.
+    if (!start.isFinite ||
+        !end.isFinite ||
+        start < 0 ||
+        end < start ||
+        end > 366 * 24 * 60 * 60) {
+      continue;
+    }
     words.add(
       LiveWord(
         word: word,

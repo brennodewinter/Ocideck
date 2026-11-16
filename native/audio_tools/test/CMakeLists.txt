@@ -1,5 +1,10 @@
 # Compile the production track sink against the same headers/binary as the app.
 # Explicit target so a normal release does not install or build test programs.
+find_package(Threads REQUIRED)
+add_executable(ocideck_capture_startup_test EXCLUDE_FROM_ALL capture_startup_test.cc)
+target_compile_features(ocideck_capture_startup_test PRIVATE cxx_std_17)
+target_link_libraries(ocideck_capture_startup_test PRIVATE Threads::Threads)
+
 add_executable(ocideck_track_capture_test EXCLUDE_FROM_ALL
   track_capture_test.cc
   ../../../third_party/flutter_webrtc/common/cpp/src/flutter_audio_capture.cc)

@@ -20,6 +20,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../../models/asr_server_profile.dart';
 import 'asr_live_protocol.dart';
+import 'asr_live_limits.dart';
 import 'asr_live_transport.dart';
 import 'asr_server_engine.dart'
     show AsrAudioReader, AsrProbeStatus, AsrServerProbe;
@@ -58,6 +59,7 @@ class AsrLiveServerEngine implements TranscriptionEngine {
     required this.audioReader,
     Future<String?> Function()? apiKeyReader,
     bool? isWeb,
+    this.limits = const LiveResponseLimits(),
   }) : _apiKeyReader = apiKeyReader ?? (() async => null),
        _isWeb = isWeb ?? kIsWeb;
 
@@ -75,6 +77,7 @@ class AsrLiveServerEngine implements TranscriptionEngine {
   /// Leest de bytes achter een `AudioRef` voor de definitieve pass.
   final AsrAudioReader audioReader;
   final bool _isWeb;
+  final LiveResponseLimits limits;
 
   AsrLiveSocket? _socket;
   var _cancelled = false;
@@ -120,7 +123,8 @@ class AsrLiveServerEngine implements TranscriptionEngine {
       final first = await socket.messages.first.timeout(
         const Duration(seconds: 10),
       );
-      if (first is String && parseLiveMessage(first) is! LiveUnknown) {
+      if (first is String &&
+          parseLiveMessage(first, limits: limits) is! LiveUnknown) {
         return const AsrServerProbe(
           status: AsrProbeStatus.reachable,
           detail: liveProtocolId,
@@ -129,6 +133,11 @@ class AsrLiveServerEngine implements TranscriptionEngine {
       return const AsrServerProbe(
         status: AsrProbeStatus.unreachable,
         detail: 'endpoint spreekt geen $liveProtocolId',
+      );
+    } on LiveResponseLimitExceeded {
+      return const AsrServerProbe(
+        status: AsrProbeStatus.unreachable,
+        detail: liveResponseLimitMessage,
       );
     } on AsrLiveException catch (e) {
       return AsrServerProbe(
@@ -171,6 +180,7 @@ class AsrLiveServerEngine implements TranscriptionEngine {
     }
 
     final controller = StreamController<PartialTranscript>();
+    final budget = LiveResponseBudget(limits);
     var lastOffset = Duration.zero;
     var sentEof = false;
     StreamSubscription<AudioChunk>? chunkSub;
@@ -218,23 +228,28 @@ class AsrLiveServerEngine implements TranscriptionEngine {
 
       inboundSub = socket.messages.listen(
         (frame) {
-          if (frame is! String || controller.isClosed) return;
-          switch (parseLiveMessage(frame)) {
-            case LivePartial(:final text):
-              controller.add(PartialTranscript(text: text, offset: lastOffset));
-            case LiveResult(:final text, :final words):
-              controller.add(
-                PartialTranscript(
-                  text: text,
-                  offset: words.isNotEmpty ? words.first.start : lastOffset,
-                ),
-              );
-            case LiveUnknown():
-              break; // externe invoer die we niet kennen — negeren
+          if (controller.isClosed) return;
+          try {
+            budget.admit(frame);
+            if (frame is! String) return;
+            _publishLiveMessage(
+              parseLiveMessage(frame, limits: limits),
+              budget,
+              controller,
+              lastOffset,
+            );
+          } on LiveResponseLimitExceeded {
+            finishError(const ServerRefused(liveResponseLimitMessage));
           }
         },
         onError: (Object e) {
-          finishError(const ServerRefused('live-verbinding verbroken'));
+          finishError(
+            ServerRefused(
+              e is LiveResponseLimitExceeded
+                  ? liveResponseLimitMessage
+                  : 'live-verbinding verbroken',
+            ),
+          );
         },
         onDone: () {
           // Voor `eof` gesloten = de server hing de sessie op.
@@ -249,6 +264,7 @@ class AsrLiveServerEngine implements TranscriptionEngine {
         },
       );
 
+      if (controller.isPaused) inboundSub?.pause();
       chunkSub = chunks.listen(
         (chunk) {
           lastOffset = chunk.offset;
@@ -270,11 +286,35 @@ class AsrLiveServerEngine implements TranscriptionEngine {
       );
     }();
 
+    controller.onPause = () => inboundSub?.pause();
+    controller.onResume = () => inboundSub?.resume();
     controller.onCancel = () {
       _cancelled = true;
       unawaited(teardown());
     };
     return controller.stream;
+  }
+
+  void _publishLiveMessage(
+    LiveServerMessage message,
+    LiveResponseBudget budget,
+    StreamController<PartialTranscript> controller,
+    Duration lastOffset,
+  ) {
+    switch (message) {
+      case LivePartial(:final text):
+        controller.add(PartialTranscript(text: text, offset: lastOffset));
+      case LiveResult(:final text, :final words):
+        if (text.trim().isNotEmpty) budget.retainResult(text);
+        controller.add(
+          PartialTranscript(
+            text: text,
+            offset: words.isNotEmpty ? words.first.start : lastOffset,
+          ),
+        );
+      case LiveUnknown():
+        break;
+    }
   }
 
   /// De definitieve pass over een voltooide opname: dezelfde socket en
@@ -305,13 +345,25 @@ class AsrLiveServerEngine implements TranscriptionEngine {
 
     final socket = await _connectOrThrow(decision);
     final segments = <TranscriptSegment>[];
+    final budget = LiveResponseBudget(limits);
     final done = Completer<void>();
+    Object? responseFailure;
+    void failResponse(Object error) {
+      responseFailure ??= error;
+      if (!done.isCompleted) done.complete();
+      unawaited(socket.close());
+    }
+
     final inboundSub = socket.messages.listen(
       (frame) {
-        if (frame is! String) return;
-        switch (parseLiveMessage(frame)) {
-          case LiveResult(:final text, :final words):
+        if (responseFailure != null) return;
+        try {
+          budget.admit(frame);
+          if (frame is! String) return;
+          final message = parseLiveMessage(frame, limits: limits);
+          if (message case LiveResult(:final text, :final words)) {
             if (text.trim().isNotEmpty) {
+              budget.retainResult(text);
               segments.add(
                 TranscriptSegment(
                   text: text,
@@ -319,12 +371,19 @@ class AsrLiveServerEngine implements TranscriptionEngine {
                 ),
               );
             }
-          case LivePartial() || LiveUnknown():
-            break;
+          }
+        } on LiveResponseLimitExceeded {
+          failResponse(const ServerRefused(liveResponseLimitMessage));
         }
       },
       onError: (Object e) {
-        if (!done.isCompleted) done.completeError(e);
+        failResponse(
+          ServerRefused(
+            e is LiveResponseLimitExceeded
+                ? liveResponseLimitMessage
+                : 'live-verbinding verbroken',
+          ),
+        );
       },
       onDone: () {
         if (!done.isCompleted) done.complete();
@@ -335,6 +394,7 @@ class AsrLiveServerEngine implements TranscriptionEngine {
       socket.sendText(buildLiveConfigFrame(sampleRate: liveSampleRate));
       for (var off = 0; off < pcm.length; off += _definitiveFrameBytes) {
         if (_cancelled) throw const Cancelled('verwerking afgebroken');
+        if (responseFailure != null) throw responseFailure!;
         final end = (off + _definitiveFrameBytes).clamp(0, pcm.length);
         socket.sendBytes(Uint8List.sublistView(pcm, off, end));
         options.onProgress?.call(end / pcm.length);
@@ -347,6 +407,7 @@ class AsrLiveServerEngine implements TranscriptionEngine {
         onTimeout: () => throw const ServerRefused('server sloot niet af'),
       );
       if (_cancelled) throw const Cancelled('verwerking afgebroken');
+      if (responseFailure != null) throw responseFailure!;
       return TranscriptResult(segments: segments);
     } on AsrLiveException catch (e) {
       throw ServerRefused(e.message);

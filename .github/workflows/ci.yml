@@ -256,6 +256,8 @@ jobs:
           xvfb-run -a flutter test integration_test/desktop_audio_test.dart -d linux
           cmake --build build/linux/x64/debug --target ocideck_track_capture_test -j2
           build/linux/x64/debug/native_audio_tests/ocideck_track_capture_test
+          cmake --build build/linux/x64/debug --target ocideck_capture_startup_test -j2
+          build/linux/x64/debug/native_audio_tests/ocideck_capture_startup_test
 
       # Runs the full suite with coverage and enforces a line-coverage floor.
       - name: Test + coverage (make coverage)
@@ -352,6 +354,8 @@ jobs:
           flutter test integration_test/desktop_audio_test.dart -d windows
           cmake --build build/windows/x64 --config Debug --target ocideck_track_capture_test
           build/windows/x64/native_audio_tests/Debug/ocideck_track_capture_test.exe
+          cmake --build build/windows/x64 --config Debug --target ocideck_capture_startup_test
+          build/windows/x64/native_audio_tests/Debug/ocideck_capture_startup_test.exe
 
       # Het logbestand (#2618) in de échte app-supportmap. Op Windows is dit de
       # enige plek waar %APPDATA%, de virusscanner en de rotatie (hernoemen over

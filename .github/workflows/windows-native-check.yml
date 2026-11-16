@@ -88,3 +88,8 @@ jobs:
         run: |
           flutter config --enable-windows-desktop
           flutter build windows --release
+
+      - name: Check capture startup ownership
+        run: |
+          cmake --build build/windows/x64 --config Release --target ocideck_capture_startup_test
+          build/windows/x64/native_audio_tests/Release/ocideck_capture_startup_test.exe
