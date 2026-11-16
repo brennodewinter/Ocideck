@@ -37,6 +37,15 @@ on:
     - cron: "47 6 * * 1"
   workflow_dispatch:
     inputs:
+      navigation_only:
+        description: Run document-navigation regressions and Windows profile comparison
+        required: false
+        default: false
+        type: boolean
+      baseline_ref:
+        description: Full baseline commit SHA for the navigation profile comparison
+        required: false
+        type: string
       operation_id:
         description: Ownership marker for cancellation and recovery
         required: false
@@ -83,6 +92,7 @@ jobs:
       # is opzet, de seed staat bovenin de log voor wie een breuk wil
       # reproduceren.
       - name: Test
+        if: ${{ !inputs.navigation_only }}
         shell: bash
         run: |
           # Begrens de belasting en schrijf ook bij een runnerbreuk bewijs.
@@ -97,3 +107,43 @@ jobs:
           # Isoleer de terugkerende laatste testgroep vóór de volledige suite.
           flutter test --concurrency=1 test/shell_present_and_close_test.dart test/shell_s3_actions_test.dart
           flutter test --concurrency=2 --test-randomize-ordering-seed random --exclude-tags golden
+
+      - name: Navigation regressions
+        if: ${{ inputs.navigation_only }}
+        shell: bash
+        env:
+          BASELINE_REF: ${{ inputs.baseline_ref }}
+        run: |
+          [[ "$BASELINE_REF" =~ ^[0-9a-f]{40}$ ]] || { echo 'baseline_ref must be a full commit SHA'; exit 1; }
+          flutter test --concurrency=2 test/document_caret_across_modes_test.dart test/document_chapter_navigation_test.dart test/document_outline_caret_test.dart test/document_reader_test.dart test/paged_document_view_test.dart test/paged_document_search_test.dart
+
+      - name: Checkout navigation baseline
+        if: ${{ inputs.navigation_only }}
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.baseline_ref }}
+          path: baseline
+          persist-credentials: false
+
+      - name: Compare Windows profile before and after
+        if: ${{ inputs.navigation_only }}
+        shell: bash
+        run: |
+          mkdir -p baseline/integration_test baseline/test/support baseline/test_driver "$RUNNER_TEMP/document-navigation"
+          cp integration_test/document_navigation_profile_test.dart baseline/integration_test/
+          cp test/support/document_navigation_fixture.dart baseline/test/support/
+          cp test_driver/document_navigation_driver.dart baseline/test_driver/
+          (
+            cd baseline
+            flutter pub get --enforce-lockfile
+            NAVIGATION_RESULT_FILE="$RUNNER_TEMP/document-navigation/baseline.json" flutter drive --profile -d windows --driver=test_driver/document_navigation_driver.dart --target=integration_test/document_navigation_profile_test.dart
+          )
+          NAVIGATION_RESULT_FILE="$RUNNER_TEMP/document-navigation/changed.json" flutter drive --profile -d windows --driver=test_driver/document_navigation_driver.dart --target=integration_test/document_navigation_profile_test.dart
+
+      - name: Navigation measurements
+        if: ${{ always() && inputs.navigation_only }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: document-navigation-windows-${{ github.sha }}
+          path: ${{ runner.temp }}/document-navigation
+          if-no-files-found: warn

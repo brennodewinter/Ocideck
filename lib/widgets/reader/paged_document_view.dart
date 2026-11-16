@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
 import '../../models/page_size.dart';
+import '../../models/markdown_outline.dart';
+import '../../utils/doc_link.dart' show headingSlug;
 import '../../models/settings.dart'
     show
         ThemeProfile,
@@ -14,6 +16,7 @@ import '../../state/settings_provider.dart'
     show kDocumentEditorZoomMax, kDocumentEditorZoomMin;
 import '../../services/document_pagination.dart';
 import '../../utils/footnotes.dart';
+import '../../utils/url_launcher_util.dart';
 import '../../utils/text_search.dart';
 import '../../utils/markdown_blocks.dart';
 import '../../theme/app_theme.dart';
@@ -22,6 +25,7 @@ import 'document_markdown_view.dart';
 import 'document_search_overlay.dart';
 
 part 'paged_document_search.dart';
+part 'paged_document_navigation.dart';
 
 /// Millimeters naar beeldpunten. 96 dpi is de CSS-referentie (1 inch = 96 px),
 /// dus dit is dezelfde maat als waarin de HTML-export haar pagina uitmeet — een
@@ -89,12 +93,16 @@ class PagedDocumentView extends StatefulWidget {
     this.searchMatchIndex = -1,
     this.searchCaseSensitive = false,
     this.searchRevealSignal = 0,
+    this.revealSignal = 0,
+    this.revealMarkdownOffset,
   });
 
   final String searchQuery;
   final int searchMatchIndex;
   final bool searchCaseSensitive;
   final int searchRevealSignal;
+  final int revealSignal;
+  final int? revealMarkdownOffset;
   final String markdown;
   final PageSizeSpec pageSize;
   final PageMargins margins;
@@ -123,6 +131,11 @@ class PagedDocumentView extends StatefulWidget {
 
 class _PagedDocumentViewState extends State<PagedDocumentView> {
   final _searchScroll = ScrollController();
+  final _pageKeys = <int, GlobalKey>{};
+  List<double> _pageOffsets = const [];
+  double _pageScale = 1;
+  int? _handledRevealSignal;
+  int _measurementGeneration = 0;
   Widget? _pageLayout;
   Widget? _documentBody;
   Widget? _measureBody;
@@ -305,6 +318,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       _documentBody = null;
       _measureBody = null;
       _blockHeights = null;
+      _measurementGeneration++;
       _measuring.clear();
       _notes = documentFootnotes(widget.markdown);
       _blockTexts = DocumentMarkdownView.blockTexts(widget.markdown);
@@ -386,13 +400,17 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
 
   @override
   Widget build(BuildContext context) {
+    _queueHeadingReveal();
     final heights = _blockHeights;
     // De meetboom blijft warm: zoekletters veranderen alleen de geometrie,
     // niet opnieuw alle tekstwidgets. Ook asynchroon geladen beelden blijven
     // zo hun actuele blokhoogte aan de paginaverdeling doorgeven.
     return Stack(
       fit: StackFit.expand,
-      children: [_measure(), if (heights != null) _pages(heights)],
+      children: [
+        KeyedSubtree(key: ValueKey(_measurementGeneration), child: _measure()),
+        if (heights != null) _pages(heights),
+      ],
     );
   }
 
@@ -402,6 +420,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     if (_pageLayout case final cached?) return cached;
     final document = _documentBody ??= DocumentMarkdownView(
       widget.markdown,
+      onTapLink: _followPageLink,
       maxTextWidth: null,
       themeProfile: widget.profile,
       chartTheme: widget.profile,
@@ -437,6 +456,8 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       // eisen ze daar ruimte op.
       reservedRoom: _reservedRoom(heights.length),
     );
+    _pageOffsets = offsets;
+    _pageKeys.removeWhere((page, _) => page >= offsets.length);
     final notesPerPage = _notesPerPage(offsets, heights);
     final timelineContinuationPages = documentContinuationPageBlocks(
       blockHeights: heights,
@@ -475,6 +496,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         final (sheetW, _) = _sheetPx;
         final room = constraints.maxWidth - 32;
         final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
+        _pageScale = widget.scale * fit;
         return cachedContent = SingleChildScrollView(
           controller: _searchScroll,
           // Ingezoomd wordt het vel breder dan het venster. Zonder deze tweede,
@@ -752,6 +774,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         .replaceAll('{n}', '$pageNumber')
         .replaceAll('{m}', '$pageCount');
     return Semantics(
+      key: _pageKeys.putIfAbsent(pageNumber - 1, GlobalKey.new),
       label: label,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -773,14 +796,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           // stijlprofiel. Zonder dit bijschrift had een document zonder
           // profielband nergens een nummer, terwijl je deze stand juist
           // opent om te zien wat op welke bladzijde komt.
-          ExcludeSemantics(
-            child: Text(
-              label,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
+          _pageCaption(theme, label),
         ],
       ),
     );

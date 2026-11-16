@@ -238,11 +238,17 @@ class DocumentMarkdownView extends StatelessWidget {
   /// has no such heading. The reader uses it to point [anchorBlockIndex] at the
   /// section an `#anchor` link names. First match wins, mirroring how the anchor
   /// key attaches to the first heading with a slug.
-  static int headingBlockIndex(String markdown, String slug) {
+  static int headingBlockIndex(
+    String markdown,
+    String slug, {
+    int occurrence = 0,
+  }) {
     final blocks = _parse(markdown);
     for (var i = 0; i < blocks.length; i++) {
       final b = blocks[i];
-      if (b.kind == _Kind.heading && headingSlug(b.text) == slug) return i;
+      if (b.kind == _Kind.heading && headingSlug(b.text) == slug) {
+        if (occurrence-- == 0) return i;
+      }
     }
     return -1;
   }
@@ -481,13 +487,21 @@ class DocumentMarkdownView extends StatelessWidget {
     final text = match.group(2)!;
     return Padding(
       padding: EdgeInsets.only(left: indent * 8.0, top: 2, bottom: 2),
-      child: Text(
-        text,
-        style: t.body.copyWith(
-          fontSize: 13,
-          color: t.link,
-          decoration: TextDecoration.underline,
-          decorationColor: t.link.withValues(alpha: 0.4),
+      child: Semantics(
+        link: onTapLink != null,
+        child: InkWell(
+          onTap: onTapLink == null
+              ? null
+              : () => onTapLink!('#${match.group(3)!}'),
+          child: Text(
+            text,
+            style: t.body.copyWith(
+              fontSize: 13,
+              color: t.link,
+              decoration: TextDecoration.underline,
+              decorationColor: t.link.withValues(alpha: 0.4),
+            ),
+          ),
         ),
       ),
     );

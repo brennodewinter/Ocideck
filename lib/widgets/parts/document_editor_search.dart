@@ -72,7 +72,7 @@ extension _DocumentEditorSearch on _DocumentEditorScreenState {
     );
     final offset = entry.offset.clamp(0, _controller.text.length);
     _controller.selection = TextSelection.collapsed(offset: offset);
-    _editorFocus.requestFocus();
+    if (_viewMode != _DocViewMode.pages) _editorFocus.requestFocus();
     _rebuild(() {
       _activeOutlineIndex = outlineIndex;
       _revealMarkdownOffset = entry.offset;

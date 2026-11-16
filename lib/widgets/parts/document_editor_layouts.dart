@@ -684,6 +684,8 @@ Future<void> _followEditorDocumentLink(
     slug = Uri.decodeComponent(target.substring(1));
   } on FormatException {
     return;
+  } on ArgumentError {
+    return;
   }
   final outline = buildMarkdownOutline(source);
   final index = outline.indexWhere((entry) => headingSlug(entry.title) == slug);

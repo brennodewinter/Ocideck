@@ -9,6 +9,8 @@ import 'package:ocideck/utils/markdown_caret_map.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 
+import 'support/document_navigation_fixture.dart';
+
 /// Wisselen tussen Visueel en Bron laat je staan waar je stond (#1566).
 ///
 /// De kaart wordt niet tegen zelfbedachte getallen getoetst maar tegen de
@@ -16,6 +18,43 @@ import 'package:ocideck/widgets/document_editor_screen.dart';
 /// waar de cursor heen moet.
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+  test(
+    'positiekaart wordt hergebruikt en vervalt zodra de tekst verandert',
+    () {
+      const original = '# Kop\n\nEen **lange** alinea.\n\n## Slot';
+      final first = MarkdownCaretMap.of(original);
+      final sameText = String.fromCharCodes(original.codeUnits);
+      expect(identical(first, MarkdownCaretMap.of(sameText)), isTrue);
+      final changed = original.replaceFirst('lange', 'veel langere');
+      final next = MarkdownCaretMap.of(changed);
+      expect(identical(first, next), isFalse);
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        changed,
+      ).toPlainText();
+      expect(identical(first, MarkdownCaretMap.of(original)), isFalse);
+      expect(
+        next.visualOffsetOf(changed.indexOf('Slot')),
+        plain.indexOf('Slot'),
+      );
+    },
+  );
+
+  test(
+    'lang deelbaar rapport houdt hoofdstukposities en hergebruikt de kaart',
+    () {
+      final source = documentNavigationFixture();
+      final plain = MarkdownQuillCodec.documentFromMarkdown(
+        source,
+      ).toPlainText();
+      final map = MarkdownCaretMap.of(source);
+      for (final title in ['Hoofdstuk 01', 'Hoofdstuk 20', 'Hoofdstuk 39']) {
+        expect(map.visualOffsetOf(source.indexOf(title)), plain.indexOf(title));
+        expect(map.sourceOffsetOf(plain.indexOf(title)), source.indexOf(title));
+        expect(identical(map, MarkdownCaretMap.of(source)), isTrue);
+      }
+    },
+  );
 
   const bron =
       '# Kop\n'
@@ -98,6 +137,11 @@ void main() {
   test('ATX-sluithek en beide fencevarianten volgen de echte codec', () {
     for (final prefix in [
       '# Titel #\n\n',
+      '<!-- toc -->\n\n',
+      '```mermaid\ngraph TD; A-->B;\n```\n\n',
+      '```chart\ntype: bar\nlabels: [A]\nvalues: [1]\n```\n\n',
+      '```mermaid extra\nletterlijk\n```\n\n',
+      '~~~~mermaid\nletterlijk\n~~~~\n\n',
       '~~~text\na **letterlijk**  \n~~~\n\n',
       '````text\na\n```\nb\n````\n\n',
     ]) {
