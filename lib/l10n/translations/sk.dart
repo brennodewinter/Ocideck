@@ -1545,6 +1545,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Len na čítanie (uzamknuté)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Tento dokument je len na čítanie (uzamknutý).',
   'Markdown-bestand…': 'Súbor Markdown…',
   'Markdown-bestand invoegen': 'Vložiť súbor Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

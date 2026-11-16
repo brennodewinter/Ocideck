@@ -1542,6 +1542,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Nume läse (gsperrt)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Das Dokumänt isch nume läsbar (gsperrt).',
   'Markdown-bestand…': 'Markdown-Datei…',
   'Markdown-bestand invoegen': 'Markdown-Datei yyfüege',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

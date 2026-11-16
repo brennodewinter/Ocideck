@@ -34,25 +34,7 @@ Deck _attachPackageAssetsToMem(
   final mdDir = p.posix.dirname(mdName);
   final byName = {for (final e in entries) p.posix.normalize(e.name): e.bytes};
   final memFor = <String, String>{};
-  String? memPath(String ref) {
-    if (ref.trim().isEmpty || WebAssetStore.isMemPath(ref)) return null;
-    final resolved = p.posix.normalize(
-      mdDir == '.' ? ref : p.posix.join(mdDir, ref),
-    );
-    if (resolved.startsWith('..')) return null; // buiten het pakket
-    final cached = memFor[resolved];
-    if (cached != null) return cached;
-    final bytes = byName[resolved];
-    if (bytes == null ||
-        bytes.isEmpty ||
-        bytes.length > ImageService.maxImageBytes ||
-        !ImageService.looksLikeImage(bytes)) {
-      return null;
-    }
-    final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
-    memFor[resolved] = mem;
-    return mem;
-  }
+  final memPath = _packageMemResolver(entries, mdName, memFor: memFor);
 
   // Video/audio krijgen dezelfde weg naar het geheugen, maar met de media-cap
   // en zonder magic-byte-validatie (FILE_FORMAT §13, net als de desktop-import).
@@ -127,3 +109,51 @@ Deck _attachPackageAssetsToMem(
   ];
   return deck.copyWith(slides: slides);
 }
+
+/// De gedeelde afbeeldingsresolver van het pakketpad: brengt het lid dat
+/// [ref] — relatief aan de hoofd-markdown [mdName] — aanduidt naar de
+/// [WebAssetStore] en geeft zijn `mem:`-pad terug, of `null` wanneer de
+/// verwijzing leeg is, al `mem:` is, buiten het pakket wijst (`../`), niet in
+/// het archief staat, of de afbeeldingsvalidatie niet doorstaat. [memFor]
+/// deelt het pad-cache met mediagebruikers van dezelfde ledenlijst.
+String? Function(String ref) _packageMemResolver(
+  List<PackageEntry> entries,
+  String mdName, {
+  Map<String, String>? memFor,
+}) {
+  final mdDir = p.posix.dirname(mdName);
+  final byName = {for (final e in entries) p.posix.normalize(e.name): e.bytes};
+  final cache = memFor ?? <String, String>{};
+  return (String ref) {
+    if (ref.trim().isEmpty || WebAssetStore.isMemPath(ref)) return null;
+    final resolved = p.posix.normalize(
+      mdDir == '.' ? ref : p.posix.join(mdDir, ref),
+    );
+    if (resolved.startsWith('..')) return null; // buiten het pakket
+    final cached = cache[resolved];
+    if (cached != null) return cached;
+    final bytes = byName[resolved];
+    if (bytes == null ||
+        bytes.isEmpty ||
+        bytes.length > ImageService.maxImageBytes ||
+        !ImageService.looksLikeImage(bytes)) {
+      return null;
+    }
+    final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
+    cache[resolved] = mem;
+    return mem;
+  };
+}
+
+/// De document-tegenhanger van [attachPackageAssetsToMem]: dezelfde leden,
+/// dezelfde insluiting en validatie, maar dan op de `![…](…)`-verwijzingen in
+/// één markdownbron in plaats van op slides (#2913). Geeft de bron terug met
+/// opgeloste pakketverwijzingen als `mem:`-paden; zonder pakketleden blijft
+/// [source] letterlijk gelijk.
+String attachPackageAssetsToDocumentSource(
+  String source,
+  List<PackageEntry> entries,
+  String mdName,
+) => WebAssetStore.atomic(
+  () => rewriteInlineImagePaths(source, _packageMemResolver(entries, mdName)),
+);

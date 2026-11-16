@@ -69,6 +69,12 @@ class _DocEditorToolbar extends StatelessWidget {
   final bool footnotesAtEnd;
   final ValueChanged<bool> onFootnotesAtEndChanged;
 
+  /// Is dít document vergrendeld voor uitdeling (`ocideck_read_only`), en de
+  /// omschakeling ervoor. De keuze landt in de front matter van het document
+  /// zelf — de tegenhanger van `playOnly` bij presentaties (#2912).
+  final bool readOnly;
+  final ValueChanged<bool> onReadOnlyChanged;
+
   /// Zet in één keer een `---` vóór elk hoofdstuk (`H1`) behalve het eerste.
   /// Geen invoeging op de cursor maar een bewerking van het hele document —
   /// daarom onder een eigen scheiding in het palet.
@@ -133,6 +139,8 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onRiskQuality,
     required this.footnotesAtEnd,
     required this.onFootnotesAtEndChanged,
+    required this.readOnly,
+    required this.onReadOnlyChanged,
     required this.onApplyChapterBreaks,
     required this.onPaste,
     required this.onUndo,
@@ -614,6 +622,39 @@ class _DocEditorToolbar extends StatelessWidget {
     );
   }
 
+  /// Een gewone menu-regel in het overloopmenu: icoon links, label erachter.
+  /// Gedeeld door de items die dezelfde vorm hebben — één op één met wat er
+  /// stond, alleen korter.
+  PopupMenuItem<int> _item(int value, IconData icon, String label) =>
+      PopupMenuItem<int>(
+        value: value,
+        child: Row(
+          children: [
+            Icon(icon, size: 17),
+            const SizedBox(width: 10),
+            Expanded(child: Text(label, overflow: TextOverflow.ellipsis)),
+          ],
+        ),
+      );
+
+  /// Een aan/uit-regel in het overloopmenu: het vinkje (of de streep) links,
+  /// het label erachter. Gedeeld door de per-document schakelaars — voetnoten
+  /// achterin en de alleen-lezenvergrendeling — die dezelfde vorm hebben.
+  PopupMenuItem<int> _toggleItem(int value, bool checked, String label) =>
+      PopupMenuItem<int>(
+        value: value,
+        child: Row(
+          children: [
+            Icon(
+              checked ? Icons.check_box : Icons.check_box_outline_blank,
+              size: 17,
+            ),
+            const SizedBox(width: 10),
+            Expanded(child: Text(label, overflow: TextOverflow.ellipsis)),
+          ],
+        ),
+      );
+
   /// Het overloopmenu rechts: Instellingen (anders alleen via macOS-menubalk
   /// bereikbaar in documentmodus), conversie naar presentatie, en de
   /// document-import — die roept [importDocument] zelf aan met de context,
@@ -633,6 +674,8 @@ class _DocEditorToolbar extends StatelessWidget {
             onPresentDocument();
           case 2:
             onFootnotesAtEndChanged(!footnotesAtEnd);
+          case 7:
+            onReadOnlyChanged(!readOnly);
           case 3:
             onEditFields();
           case 4:
@@ -647,113 +690,33 @@ class _DocEditorToolbar extends StatelessWidget {
         // scrollbare rij buiten het zichtbare venster (document_style_
         // editor_test). Staat er alleen als er iets te vergroten valt.
         if (onFitWidth != null)
-          PopupMenuItem<int>(
-            value: 6,
-            child: Row(
-              children: [
-                const Icon(Icons.fit_screen, size: 17),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    l10n.d('Vergroot tot schermbreedte'),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        PopupMenuItem<int>(
-          value: 3,
-          child: Row(
-            children: [
-              const Icon(Icons.description_outlined, size: 17),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  '${l10n.d('Document')} · ${l10n.d('Eigenschappen')}',
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+          _item(6, Icons.fit_screen, l10n.d('Vergroot tot schermbreedte')),
+        _item(
+          3,
+          Icons.description_outlined,
+          '${l10n.d('Document')} · ${l10n.d('Eigenschappen')}',
         ),
-        // De plaatsing van de voetnoten is een eigenschap van dít document en
-        // landt in zijn front matter; daarom hier en niet bij de instellingen.
-        PopupMenuItem<int>(
-          value: 2,
-          child: Row(
-            children: [
-              Icon(
-                footnotesAtEnd
-                    ? Icons.check_box
-                    : Icons.check_box_outline_blank,
-                size: 17,
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  l10n.d('Voetnoten achterin het document'),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+        // De plaatsing van de voetnoten en de vergrendeling zijn
+        // eigenschappen van dít document en landen in zijn front matter;
+        // daarom hier en niet bij de instellingen.
+        _toggleItem(
+          2,
+          footnotesAtEnd,
+          l10n.d('Voetnoten achterin het document'),
         ),
+        _toggleItem(7, readOnly, l10n.d('Alleen lezen (vergrendeld)')),
         const PopupMenuDivider(),
-        PopupMenuItem<int>(
-          value: 0,
-          child: Row(
-            children: [
-              const Icon(Icons.settings_outlined, size: 17),
-              const SizedBox(width: 10),
-              Expanded(child: Text(l10n.t('settings'))),
-            ],
-          ),
+        _item(0, Icons.settings_outlined, l10n.t('settings')),
+        _item(5, Icons.present_to_all_outlined, l10n.d('Presenteer document…')),
+        _item(
+          1,
+          Icons.slideshow_outlined,
+          l10n.d('Converteer naar presentatie…'),
         ),
-        PopupMenuItem<int>(
-          value: 5,
-          child: Row(
-            children: [
-              const Icon(Icons.present_to_all_outlined, size: 17),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  l10n.d('Presenteer document…'),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
-        PopupMenuItem<int>(
-          value: 1,
-          child: Row(
-            children: [
-              const Icon(Icons.slideshow_outlined, size: 17),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  l10n.d('Converteer naar presentatie…'),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
-        PopupMenuItem<int>(
-          value: 4,
-          child: Row(
-            children: [
-              const Icon(Icons.upload_file_outlined, size: 17),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  l10n.d('Importeren uit Word of LibreOffice…'),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+        _item(
+          4,
+          Icons.upload_file_outlined,
+          l10n.d('Importeren uit Word of LibreOffice…'),
         ),
       ],
     );

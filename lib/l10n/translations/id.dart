@@ -1542,6 +1542,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Hanya baca (terkunci)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Dokumen ini hanya-baca (terkunci).',
   'Markdown-bestand…': 'Berkas Markdown…',
   'Markdown-bestand invoegen': 'Sisipkan berkas Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

@@ -1567,6 +1567,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Somente leitura (bloqueado)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Este documento é somente leitura (bloqueado).',
   'Markdown-bestand…': 'Ficheiro Markdown…',
   'Markdown-bestand invoegen': 'Inserir ficheiro Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
