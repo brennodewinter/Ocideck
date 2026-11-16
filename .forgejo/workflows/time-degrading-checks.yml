@@ -49,19 +49,23 @@ jobs:
       # wat er gebeurde.
       - name: Gebundelde JS tegen OSV (CVE's op marked, highlight.js, DOMPurify, mermaid, MathJax)
         if: always()
-        run: dart run tool/check_bundled_js.dart || { echo "FAILED: bundled-js" >> .dagchecks-failliet; exit 1; }
+        run: |
+          dart run tool/check_bundled_js.dart || { echo "FAILED: bundled-js" >> .dagchecks-failliet; exit 1; }
 
       - name: Referentiedata tegen de laatste editie
         if: always()
-        run: dart run tool/check_reference_data.dart || { echo "FAILED: referentiedata" >> .dagchecks-failliet; exit 1; }
+        run: |
+          dart run tool/check_reference_data.dart || { echo "FAILED: referentiedata" >> .dagchecks-failliet; exit 1; }
 
       - name: Licenties
         if: always()
-        run: dart run tool/check_licenses.dart || { echo "FAILED: licenties" >> .dagchecks-failliet; exit 1; }
+        run: |
+          dart run tool/check_licenses.dart || { echo "FAILED: licenties" >> .dagchecks-failliet; exit 1; }
 
       - name: GitHub-actie-pins tegen de laatste release
         if: always()
-        run: dart run tool/check_pinned_versions.dart || { echo "FAILED: pins" >> .dagchecks-failliet; exit 1; }
+        run: |
+          dart run tool/check_pinned_versions.dart || { echo "FAILED: pins" >> .dagchecks-failliet; exit 1; }
 
       # Onze eigen metingen, niet die van een ander. Een looptijdbelofte in de
       # documentatie verrot terwijl de boom stilstaat: `docs/CHECKS.md` beloofde
@@ -70,7 +74,8 @@ jobs:
       # `make check-static`; alleen de houdbaarheid hoort hier, tegen de klok.
       - name: Gemeten beweringen in de documentatie tegen hun houdbaarheid
         if: always()
-        run: dart run tool/check_dated_claims.dart --tegen-de-klok || { echo "FAILED: houdbaarheid" >> .dagchecks-failliet; exit 1; }
+        run: |
+          dart run tool/check_dated_claims.dart --tegen-de-klok || { echo "FAILED: houdbaarheid" >> .dagchecks-failliet; exit 1; }
 
       - name: Eindstand
         if: always()
