@@ -31,6 +31,15 @@ enum MediaContainer {
   /// MPEG audio (`ID3` of sync-frame) — `.mp3` e.d.
   mp3,
 
+  /// ADTS-framing van een losse AAC-stroom (geen MP4-container).
+  aac,
+
+  /// FORM/AIFF of FORM/AIFC; de codec blijkt pas bij decode.
+  aiff,
+
+  /// Core Audio File: container, niet automatisch PCM.
+  caf,
+
   /// EBML — `.webm`/`.mkv`; audio óf video.
   ebml,
 
@@ -119,6 +128,11 @@ const mediaFileExtensions = {
   'm4v',
   'mov',
   '3gp',
+  'aif',
+  'aiff',
+  'aifc',
+  'caf',
+  'm4b',
   'webm',
   'mkv',
   'mk3d',
@@ -192,12 +206,27 @@ MediaContainer sniffContainer(Uint8List head, {String? extension}) {
   if (_eq(head, 0, [0x66, 0x4C, 0x61, 0x43])) return MediaContainer.flac;
   // EBML-magic dekt webm én matroska.
   if (_eq(head, 0, [0x1A, 0x45, 0xDF, 0xA3])) return MediaContainer.ebml;
+  if (_eq(head, 0, [0x46, 0x4F, 0x52, 0x4D]) && head.length >= 12) {
+    final size = ByteData.sublistView(head).getUint32(4, Endian.big);
+    if (size >= 4 &&
+        (_eq(head, 8, [0x41, 0x49, 0x46, 0x46]) ||
+            _eq(head, 8, [0x41, 0x49, 0x46, 0x43]))) {
+      return MediaContainer.aiff;
+    }
+  }
+  if (_eq(head, 0, [0x63, 0x61, 0x66, 0x66, 0, 1, 0, 0])) {
+    return MediaContainer.caf;
+  }
+  if (_isAdtsHeader(head)) return MediaContainer.aac;
   // MP3: ID3v2-tag, of een MPEG-audioframe-sync aan het begin.
   if (_eq(head, 0, [0x49, 0x44, 0x33])) return MediaContainer.mp3;
-  if (head.length >= 2 &&
+  if (head.length >= 4 &&
       head[0] == 0xFF &&
       head[1] & 0xE0 == 0xE0 &&
-      head[1] & 0x18 != 0x08) {
+      head[1] & 0x18 != 0x08 &&
+      head[1] & 0x06 != 0 &&
+      head[2] & 0xF0 != 0xF0 &&
+      head[2] & 0x0C != 0x0C) {
     return MediaContainer.mp3;
   }
   // Geen magic — de extensie is de zwakke reserve: ze rechtvaardigt een
@@ -207,12 +236,29 @@ MediaContainer sniffContainer(Uint8List head, {String? extension}) {
     'wav' || 'wave' => MediaContainer.wav,
     'mp3' => MediaContainer.mp3,
     'flac' => MediaContainer.flac,
+    'aac' => MediaContainer.aac,
+    'aif' || 'aiff' || 'aifc' => MediaContainer.aiff,
+    'caf' => MediaContainer.caf,
     'ogg' || 'oga' || 'opus' => MediaContainer.ogg,
-    'm4a' || 'aac' || 'mp4' || 'mov' || 'm4v' || '3gp' => MediaContainer.mpeg4,
+    'm4a' || 'm4b' || 'mp4' || 'mov' || 'm4v' || '3gp' => MediaContainer.mpeg4,
     'webm' || 'mkv' || 'mk3d' => MediaContainer.ebml,
     'avi' => MediaContainer.avi,
     _ => MediaContainer.unknown,
   };
+}
+
+// ADTS heeft een 12-bits sync, layer=0, een geldige frequentie-index en
+// een frame dat minstens zijn eigen header kan dragen. Geen codecclaim uit suffix.
+bool _isAdtsHeader(Uint8List head) {
+  if (head.length < 7 || head[0] != 0xFF || head[1] & 0xF6 != 0xF0) {
+    return false;
+  }
+  final sampleIndex = (head[2] >> 2) & 0x0F;
+  if (sampleIndex > 12) return false;
+  final headerSize = head[1] & 1 == 1 ? 7 : 9;
+  if (head.length < headerSize) return false;
+  final frameSize = ((head[3] & 3) << 11) | (head[4] << 3) | (head[5] >> 5);
+  return frameSize >= headerSize;
 }
 
 /// Of deze container een video kan zijn — alleen dan is "geen
