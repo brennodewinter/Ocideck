@@ -16,10 +16,17 @@ import 'asr_transport.dart';
 /// De enige HTTP-uitgang van de serverroute op desktop. `cancel()` breekt
 /// de in-flight request af via `HttpClientRequest.abort`.
 final class IoAsrTransport implements AsrTransport {
-  const IoAsrTransport({this.maxResponseBytes = 16 * 1024 * 1024});
+  const IoAsrTransport({
+    this.maxResponseBytes = 16 * 1024 * 1024,
+    this.resolve = resolveAsrPinned,
+  });
 
   /// Harde grens aan de responsebody; er wordt niet meer gebufferd.
   final int maxResponseBytes;
+
+  /// Productie gebruikt uitsluitend de gevalideerde, gepinde resolver.
+  /// Injecteerbaar om late DNS-resultaten zonder netwerk te toetsen.
+  final Future<InternetAddress> Function(String, AiResolveStrategy) resolve;
 
   @override
   AsrSendHandle send({
@@ -31,78 +38,87 @@ final class IoAsrTransport implements AsrTransport {
     Duration timeout = const Duration(minutes: 15),
   }) {
     final completer = Completer<AsrResponse>();
-    var cancelRequested = false;
+    HttpClient? client;
     HttpClientRequest? inFlight;
+    StreamSubscription<List<int>>? subscription;
+    Timer? deadline;
 
-    () async {
-      final pinned = await resolveAsrPinned(url.host, strategy);
-      final client = buildPinnedClient(pinned);
-      void abort() {
-        completer.completeError(const AsrRequestException('afgebroken'));
+    void cleanup() {
+      deadline?.cancel();
+      inFlight?.abort();
+      client?.close(force: true);
+      final sub = subscription;
+      if (sub != null) unawaited(sub.cancel());
+    }
+
+    void fail(AsrRequestException error, [StackTrace? stack]) {
+      if (completer.isCompleted) return;
+      completer.completeError(error, stack);
+      cleanup();
+    }
+
+    void networkFailure(Object error, StackTrace stack) {
+      if (completer.isCompleted) return;
+      if (error is AsrRequestException) {
+        fail(error, stack);
+      } else {
+        logError('IoAsrTransport.send: verzoek mislukt', error, stack);
+        fail(const AsrRequestException('netwerk'), stack);
       }
+    }
 
+    // Eén deadline voor DNS, verbinden, upload én de volledige body.
+    deadline = Timer(
+      timeout,
+      () => fail(const AsrRequestException('verbinding verliep')),
+    );
+    unawaited(() async {
       try {
-        final request = await client.openUrl(method, url);
-        inFlight = request;
-        if (cancelRequested) {
+        final pinned = await resolve(url.host, strategy);
+        if (completer.isCompleted) return;
+        final activeClient = buildPinnedClient(pinned);
+        client = activeClient;
+        final request = await activeClient.openUrl(method, url);
+        if (completer.isCompleted) {
           request.abort();
-          abort();
           return;
         }
-        request.followRedirects =
-            false; // een 3xx mag de hostcontrole niet omzeilen
+        inFlight = request;
+        request.followRedirects = false;
         headers.forEach(request.headers.set);
         if (body != null) request.add(body);
-        final response = await request.close().timeout(timeout);
+        final response = await request.close();
+        if (completer.isCompleted) return;
         final builder = BytesBuilder(copy: false);
-        await for (final chunk in response) {
-          builder.add(chunk);
-          if (builder.length > maxResponseBytes) {
-            throw const AsrRequestException('respons groter dan het maximum');
-          }
-        }
-        completer.complete(
-          AsrResponse(
-            response.statusCode,
-            utf8.decode(builder.takeBytes(), allowMalformed: true),
-          ),
+        subscription = response.listen(
+          (chunk) {
+            if (completer.isCompleted) return;
+            if (chunk.length > maxResponseBytes - builder.length) {
+              fail(const AsrRequestException('respons groter dan het maximum'));
+              return;
+            }
+            builder.add(chunk);
+          },
+          onError: networkFailure,
+          onDone: () {
+            if (completer.isCompleted) return;
+            completer.complete(
+              AsrResponse(
+                response.statusCode,
+                utf8.decode(builder.takeBytes(), allowMalformed: true),
+              ),
+            );
+            cleanup();
+          },
         );
-      } on AsrRequestException catch (e, s) {
-        completer.completeError(e, s);
-      } catch (e) {
-        // Een gevraagde abort is geen netwerkfout: de engine vertaalt
-        // 'afgebroken' naar Cancelled.
-        if (cancelRequested) {
-          abort();
-        } else if (e is TimeoutException) {
-          completer.completeError(
-            const AsrRequestException('verbinding verliep'),
-          );
-        } else {
-          // De host blijft bewust uit de foutmelding: hij is door de
-          // gebruiker geconfigureerd maar kan gevoelig zijn.
-          logError('IoAsrTransport.send: verzoek mislukt', e);
-          completer.completeError(const AsrRequestException('netwerk'));
-        }
-      } finally {
-        client.close(force: true);
+      } catch (error, stack) {
+        networkFailure(error, stack);
       }
-    }().catchError((Object e, StackTrace s) {
-      // Fouten boven de request (resolve, openUrl) vallen hier.
-      if (cancelRequested) {
-        completer.completeError(const AsrRequestException('afgebroken'));
-      } else {
-        logError('IoAsrTransport.send: aanloop mislukt', e, s);
-        completer.completeError(const AsrRequestException('netwerk'));
-      }
-    });
+    }());
 
     return AsrSendHandle(
       done: completer.future,
-      cancel: () {
-        cancelRequested = true;
-        inFlight?.abort();
-      },
+      cancel: () => fail(const AsrRequestException('afgebroken')),
     );
   }
 }
