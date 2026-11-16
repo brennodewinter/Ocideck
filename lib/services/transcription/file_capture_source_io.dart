@@ -27,6 +27,7 @@ import 'bundled_audio_helper_io.dart';
 import 'file_capture_source.dart';
 import 'media_sniff.dart';
 import 'transcription_errors.dart';
+import 'wav_reader_io.dart';
 
 class IoFileCaptureSource extends FileCaptureSource {
   IoFileCaptureSource({this.decoderOverride, this.decoderRunner = _runDecoder});
@@ -95,37 +96,88 @@ class IoFileCaptureSource extends FileCaptureSource {
       throw IoFailed('bronbestand is niet leesbaar: $e');
     }
 
-    final container = sniffContainer(head, extension: p.extension(sourcePath));
+    final extension = p.extension(sourcePath);
+    final container = sniffContainer(head, extension: extension);
     if (stat.size == 0) {
       throw const DecodeFailed('het bestand is leeg');
     }
+    WavInfo? wav;
     if (container == MediaContainer.wav) {
-      final info = parseWavHeader(head, stat.size);
-      if (info == null) {
+      // De begrensde chunklezer seekt over metadata/FLLR-vulling heen —
+      // de 256-kop van de sniffer is voor afconvert-uitvoer te kort
+      // (#2933).
+      final ra = await file.open();
+      try {
+        wav = await readWavInfo(ra, stat.size);
+      } finally {
+        await ra.close();
+      }
+      if (wav == null) {
         throw const DecodeFailed('WAV-header is beschadigd of onleesbaar');
       }
-      return FileSourceInfo(
-        path: sourcePath,
-        sizeBytes: stat.size,
-        container: container,
-        duration: info.duration,
-        engineReadsDirectly: true,
-        decodable: true,
-      );
+      if (wav.dataBytes == 0) {
+        throw const DecodeFailed('het bestand bevat geen audiodata');
+      }
+      if (wav.formatTag == 1) {
+        return FileSourceInfo(
+          path: sourcePath,
+          sizeBytes: stat.size,
+          container: container,
+          duration: wav.duration,
+          engineReadsDirectly: true,
+          decodable: true,
+        );
+      }
+      // Geen PCM-WAV (float, extensible, gecomprimeerd): de engine
+      // leest alleen PCM — via de decoder kan hij alsnog.
     }
     final decoder = await findDecoder();
     return FileSourceInfo(
       path: sourcePath,
       sizeBytes: stat.size,
       container: container,
+      duration: wav?.duration,
       engineReadsDirectly: false,
       decodable: decoder != null,
-      decodeNote: decoder == null
-          ? Platform.isMacOS
-                ? 'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct'
-                : 'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct'
-          : null,
+      decodeNote: _describeNote(
+        decoder: decoder,
+        container: container,
+        extension: extension,
+        wav: wav,
+      ),
     );
+  }
+
+  /// Diagnose voor de voorbeschouwing: welke naam/inhoud-botsing en
+  /// welke onzekerheid er zit, niet gelokaliseerd.
+  String? _describeNote({
+    required String? decoder,
+    required MediaContainer container,
+    required String extension,
+    required WavInfo? wav,
+  }) {
+    final parts = <String>[
+      if (wav != null && wav.formatTag != 1)
+        'de WAV is geen 16-bit PCM (formaat ${wav.formatTag}) — decode nodig',
+      if (_extensionContradicts(container, extension))
+        'de bestandsnaam wijkt af van de gedetecteerde inhoud',
+      if (decoder == null)
+        Platform.isMacOS
+            ? 'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct'
+            : 'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct',
+    ];
+    return parts.isEmpty ? null : parts.join('; ');
+  }
+
+  /// Zegt de extensie iets anders dan de magische bytes? Dan is de naam
+  /// geen betrouwbare gids — afconvert struikelt daar bijvoorbeeld over
+  /// (#2934).
+  static bool _extensionContradicts(
+    MediaContainer container,
+    String extension,
+  ) {
+    final implied = sniffContainer(Uint8List(0), extension: extension);
+    return implied != MediaContainer.unknown && implied != container;
   }
 
   @override
@@ -258,10 +310,14 @@ class IoFileCaptureSession extends FileCaptureSession {
 
   /// Argv voor de gepinde decoder: vaste vlaggen, uitvoer 16 kHz mono
   /// 16-bit-WAV — precies wat elke engine-route spreekt (§5.1 noot 1).
-  List<String> _decoderArgs(String decoder, String outPath) {
+  ///
+  /// `--no-filler` voorkomt dat afconvert een FLLR-paginavulling van
+  /// enkele kB vóór de `data`-chunk zet (#2933); zonder die vlag schijnt
+  /// de werkelijke audio buiten elke vaste kopleesgrens.
+  List<String> _decoderArgs(String decoder, String inputPath, String outPath) {
     final base = p.basename(decoder).toLowerCase();
     if (base == 'ocideck-audio' || base == 'ocideck-audio.exe') {
-      return ['--decode', _info.path, outPath];
+      return ['--decode', inputPath, outPath];
     }
     if (base == 'afconvert') {
       return [
@@ -271,7 +327,8 @@ class IoFileCaptureSession extends FileCaptureSession {
         'LEI16@16000',
         '-c',
         '1',
-        _info.path,
+        '--no-filler',
+        inputPath,
         outPath,
       ];
     }
@@ -283,7 +340,7 @@ class IoFileCaptureSession extends FileCaptureSession {
       'error',
       '-y',
       '-i',
-      _info.path,
+      inputPath,
       '-map',
       '0:a:0',
       '-vn',
@@ -329,6 +386,52 @@ class IoFileCaptureSession extends FileCaptureSession {
     return env;
   }
 
+  /// afconvert kijkt mee naar de extensie: MP4-inhoud met een
+  /// `.mp3`-naam faalt met de generieke open-fout `dta?`, terwijl
+  /// dezelfde bytes als `.mp4` gewoon decoderen (#2934). Levert de
+  /// canonieke extensie als naam en gesnuffelde inhoud botsen —
+  /// anders null, dan is een kopie ook niet nodig.
+  String? _afconvertCanonicalExt(String decoder) {
+    if (p.basename(decoder).toLowerCase() != 'afconvert') return null;
+    final canonical = switch (_info.container) {
+      MediaContainer.mpeg4 => '.mp4',
+      MediaContainer.mp3 => '.mp3',
+      MediaContainer.flac => '.flac',
+      MediaContainer.ogg => '.ogg',
+      MediaContainer.wav => '.wav',
+      MediaContainer.avi => '.avi',
+      // ebml/unknown: geen afconvert-formaat waar een naam bij helpt.
+      _ => null,
+    };
+    if (canonical == null) return null;
+    final implied = sniffContainer(
+      Uint8List(0),
+      extension: p.extension(_info.path),
+    );
+    if (implied == _info.container) return null;
+    return canonical;
+  }
+
+  /// Kopieert de bron onder een naam die wél bij de inhoud past naar
+  /// de stagingmap. Gestreamd, zodat ook een 2 GiB-bron niet het
+  /// geheugen in hoeft; het origineel blijft onaangeraakt.
+  Future<String> _stageInputAs(String ext) async {
+    final dst = p.join(_stagingDir, 'input$ext');
+    try {
+      await File(_info.path).openRead().pipe(File(dst).openWrite());
+    } on Object catch (e) {
+      try {
+        await File(dst).delete();
+      } on Object {
+        // De halve kopie hoeft geen tweede fout op te leveren.
+      }
+      throw IoFailed(
+        'de bron kon niet naar de stagingmap worden gekopieerd: $e',
+      );
+    }
+    return dst;
+  }
+
   Future<RecordedAudio> _decodeToWav() async {
     final decoder = decoderOverride ?? await _findDecoderForRun();
     if (decoder == null) {
@@ -336,43 +439,60 @@ class IoFileCaptureSession extends FileCaptureSession {
         'geen decoder op dit systeem — alleen PCM-WAV kan direct',
       );
     }
-    final run = _runner(
-      decoder,
-      _decoderArgs(decoder, durablePath),
-      environment: _decoderEnv(decoder),
-      timeout: _decodeTimeout,
-    );
-    _decode = run;
-    DecodeResult result;
+    String? staged;
     try {
-      result = await run.done;
-    } finally {
-      _decode = null;
-    }
-
-    if (result.killed || _cancelled) {
-      await _deletePartial();
-      throw const Cancelled('de decode is afgebroken');
-    }
-    if (result.timedOut) {
-      await _deletePartial();
-      throw const EngineUnavailable('de decoder overschreed de tijdslimiet');
-    }
-    if (result.exitCode != 0) {
-      await _deletePartial();
-      if (result.exitCode == 3 &&
-          p.basename(decoder).toLowerCase().startsWith('ocideck-audio')) {
-        throw const DecodeFailed('de container bevat geen audiotrack');
+      var inputPath = _info.path;
+      final canonicalExt = _afconvertCanonicalExt(decoder);
+      if (canonicalExt != null) {
+        staged = await _stageInputAs(canonicalExt);
+        inputPath = staged;
       }
-      throw _decodeError(decoder, result.stderr);
+      final run = _runner(
+        decoder,
+        _decoderArgs(decoder, inputPath, durablePath),
+        environment: _decoderEnv(decoder),
+        timeout: _decodeTimeout,
+      );
+      _decode = run;
+      DecodeResult result;
+      try {
+        result = await run.done;
+      } finally {
+        _decode = null;
+      }
+
+      if (result.killed || _cancelled) {
+        await _deletePartial();
+        throw const Cancelled('de decode is afgebroken');
+      }
+      if (result.timedOut) {
+        await _deletePartial();
+        throw const EngineUnavailable('de decoder overschreed de tijdslimiet');
+      }
+      if (result.exitCode != 0) {
+        await _deletePartial();
+        if (result.exitCode == 3 &&
+            p.basename(decoder).toLowerCase().startsWith('ocideck-audio')) {
+          throw const DecodeFailed('de container bevat geen audiotrack');
+        }
+        throw _decodeError(decoder, result.stderr, stagedInput: staged);
+      }
+      return await _readResult();
+    } finally {
+      // De gerenommeerde invoer is wegwerpwerk — opruimen bij succes,
+      // fout én annulering; het origineel blijft hoe dan ook staan.
+      if (staged != null) await _deleteQuiet(staged);
     }
-    return _readResult();
   }
 
   /// De uitkomst van een niet-nul-exit naar de juiste getypte fout —
   /// "geen audiotrack" is een andere uitspraak dan "corrupt", en de
   /// dialoog vertaalt ze verschillend (§4.4).
-  TranscriptionError _decodeError(String decoder, String stderr) {
+  TranscriptionError _decodeError(
+    String decoder,
+    String stderr, {
+    String? stagedInput,
+  }) {
     final text = stderr.toLowerCase();
     final ffmpeg = p.basename(decoder).toLowerCase().startsWith('ffmpeg');
     if (ffmpeg && text.contains('matches no streams')) {
@@ -384,15 +504,34 @@ class IoFileCaptureSession extends FileCaptureSession {
             text.contains('end of file'))) {
       return const DecodeFailed('het bestand is beschadigd of afgebroken');
     }
-    // afconvert meldt "no audio" en corruptie niet met vaste strings;
-    // de container mag video zijn — dan is een mislukte decode de
-    // eerlijkste uitspraak "geen bruikbare audiotrack".
+    // afconvert geeft geen onderscheidende fout: `Couldn't open input
+    // file ('dta?')` geldt evengoed voor een ontbrekende audiotrack als
+    // voor een onleesbare container — "geen audiotrack" claimen is dan
+    // een gok, dus blijft het bij een eerlijke decodeermelding plus een
+    // geschoonde stderr-hint (#2934).
+    final hint = _stderrHint(stderr, stagedInput);
     if (mayBeVideo(_info.container)) {
-      return const DecodeFailed(
-        'geen decodeerbare audiotrack in deze container',
+      return DecodeFailed(
+        'de decoder kon geen audio uit deze container halen — '
+        'er zit mogelijk geen audiotrack in, of de container is '
+        'onleesbaar$hint',
       );
     }
-    return DecodeFailed('de decoder kon het bestand niet lezen');
+    return DecodeFailed('de decoder kon het bestand niet lezen$hint');
+  }
+
+  /// stderr als compacte diagnose: één regel, begrensd, en zonder de
+  /// paden van gebruiker of staging mee te nemen in een melding.
+  String _stderrHint(String stderr, String? stagedInput) {
+    var t = stderr.replaceAll(_info.path, '<bron>');
+    if (stagedInput != null) t = t.replaceAll(stagedInput, '<invoer>');
+    t = t
+        .replaceAll(RegExp(r'(/[\w.\-]+){2,}/?'), '<pad>')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
+    if (t.isEmpty) return '';
+    if (t.length > 140) t = '${t.substring(0, 140)}…';
+    return ' ($t)';
   }
 
   /// Controle na de decode: het WAV-resultaat bestaat, blijft onder de
@@ -410,16 +549,25 @@ class IoFileCaptureSession extends FileCaptureSession {
       );
     }
     final ra = await out.open();
-    final Uint8List head;
+    final WavInfo? wav;
     try {
-      head = Uint8List.fromList(await ra.read(sniffHeadBytes));
+      // Dezelfde begrensde chunklezer als describe: FLLR-vulling of
+      // metadata vóór `data` is geen lege decode (#2933).
+      wav = await readWavInfo(ra, size);
     } finally {
       await ra.close();
     }
-    final wav = parseWavHeader(head, size);
-    if (wav == null || wav.duration <= Duration.zero) {
+    if (wav == null) {
+      await _deletePartial();
+      throw const DecodeFailed('de decoder schreef geen leesbare WAV-header');
+    }
+    if (wav.dataBytes <= 0) {
       await _deletePartial();
       throw const DecodeFailed('de decode leverde lege audio op');
+    }
+    if (wav.formatTag != 1) {
+      await _deletePartial();
+      throw const DecodeFailed('de decoder schreef geen PCM-WAV');
     }
     return RecordedAudio(
       durablePath: durablePath,
@@ -428,10 +576,12 @@ class IoFileCaptureSession extends FileCaptureSession {
     );
   }
 
-  Future<void> _deletePartial() async {
+  Future<void> _deletePartial() async => _deleteQuiet(durablePath);
+
+  static Future<void> _deleteQuiet(String path) async {
     try {
-      final out = File(durablePath);
-      if (await out.exists()) await out.delete();
+      final f = File(path);
+      if (await f.exists()) await f.delete();
     } on Object catch (e) {
       logWarning('FileCaptureSession: halve decode opruimen', e);
     }

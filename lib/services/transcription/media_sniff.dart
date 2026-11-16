@@ -41,6 +41,29 @@ enum MediaContainer {
   unknown,
 }
 
+/// De velden van een `fmt `-chunk — de enige chunk die iets over de
+/// audio zelf zegt.
+class WavFmt {
+  const WavFmt({
+    required this.formatTag,
+    required this.channels,
+    required this.sampleRate,
+    required this.byteRate,
+    required this.bitsPerSample,
+  });
+
+  /// RIFF-formatcode: 1 is PCM. Float (3), extensible (0xFFFE) en
+  /// gecomprimeerde varianten zijn géén PCM — de engine spreekt alleen
+  /// PCM, de rest gaat via de decoder.
+  final int formatTag;
+  final int channels;
+  final int sampleRate;
+  final int byteRate;
+  final int bitsPerSample;
+
+  bool get isPcm => formatTag == 1;
+}
+
 /// Wat de kop van een WAV zegt — genoeg voor duur en "is dit echt PCM".
 class WavInfo {
   const WavInfo({
@@ -48,12 +71,28 @@ class WavInfo {
     required this.channels,
     required this.sampleRate,
     required this.bitsPerSample,
+    required this.formatTag,
+    required this.dataOffset,
+    required this.dataBytes,
   });
 
   final Duration duration;
   final int channels;
   final int sampleRate;
   final int bitsPerSample;
+
+  /// De `fmt `-formatcode — [WavFmt.isPcm] zegt of de engine hem direct
+  /// leest.
+  final int formatTag;
+
+  /// Byte-offset van de `data`-payload in het bestand.
+  final int dataOffset;
+
+  /// Werkelijke payloadgrootte: de kleinste van de chunkclaim en wat er
+  /// nog in het bestand staat. Nul is een legitieme uitslag — een
+  /// geldige header zonder audio, te onderscheiden van een kapotte kop
+  /// (die null oplevert).
+  final int dataBytes;
 }
 
 /// Zoveel kopbytes als de sniffer leest. WAV-headers met een `data`-chunk
@@ -147,20 +186,65 @@ Uint8List encodePcmWav(Float32List pcm, {int sampleRate = 16000}) {
   return out;
 }
 
-/// Leest een WAV-header: RIFF-kop, `fmt `-chunk, `data`-chunk. Levert
-/// null bij een kapotte of vreemde kop — de caller meldt dat als
-/// ondecodeerbaar, niet als "duur onbekend".
+/// Leest de velden van een `fmt `-payload. Null bij een afgekapte chunk
+/// of ongeldige kernwaarden — bounds worden gevalideerd vóór er een
+/// veld wordt gelezen, dus nooit een RangeError op corruptie.
+WavFmt? parseWavFmt(Uint8List fmt) {
+  if (fmt.length < 16) return null;
+  int u16(int off) => fmt[off] | (fmt[off + 1] << 8);
+  int u32(int off) =>
+      fmt[off] |
+      (fmt[off + 1] << 8) |
+      (fmt[off + 2] << 16) |
+      (fmt[off + 3] << 24);
+  final out = WavFmt(
+    formatTag: u16(0),
+    channels: u16(2),
+    sampleRate: u32(4),
+    byteRate: u32(8),
+    bitsPerSample: u16(14),
+  );
+  if (out.channels <= 0 || out.sampleRate <= 0 || out.byteRate <= 0) {
+    return null;
+  }
+  return out;
+}
+
+/// Bouwt de uitkomst op uit fmt-velden en de gevonden `data`-grootte.
+/// [dataBytes] is al afgekapt op wat werkelijk in het bestand staat.
+WavInfo wavInfoFromFields(
+  WavFmt fmt, {
+  required int dataBytes,
+  required int dataOffset,
+}) {
+  final micros = ((dataBytes / fmt.byteRate) * 1000000).round();
+  return WavInfo(
+    duration: Duration(microseconds: micros < 0 ? 0 : micros),
+    channels: fmt.channels,
+    sampleRate: fmt.sampleRate,
+    bitsPerSample: fmt.bitsPerSample,
+    formatTag: fmt.formatTag,
+    dataOffset: dataOffset,
+    dataBytes: dataBytes,
+  );
+}
+
+/// Leest een WAV-header uit een bytebuffer: RIFF-kop, `fmt `-chunk,
+/// `data`-chunk. Levert null bij een kapotte of vreemde kop — de caller
+/// meldt dat als ondecodeerbaar, niet als "duur onbekend". Een geldige
+/// kop met nul audiobytes geeft een [WavInfo] met `dataBytes == 0`.
 ///
 /// [fileSize] is de echte lengte van waar de kop uit komt: de `data`-
 /// chunk kan groter claimen dan de meegelezen bytes (we lazen alleen de
-/// kop), dus de duur rekent op `fileSize`, niet op `head.length`.
+/// kop), dus de duur rekent op `fileSize`, niet op `head.length`. Zit
+/// `data` pas ná de meegelezen kop, dan is dit niet aantoonbaar —
+/// `readWavInfo` (wav_reader_io) leest daar dan wél door met seeks.
 WavInfo? parseWavHeader(Uint8List head, int fileSize) {
   if (head.length < 44) return null;
   if (!_eq(head, 0, [0x52, 0x49, 0x46, 0x46]) ||
       !_eq(head, 8, [0x57, 0x41, 0x56, 0x45])) {
     return null;
   }
-  int u16(int off) => head[off] | (head[off + 1] << 8);
   int u32(int off) =>
       head[off] |
       (head[off + 1] << 8) |
@@ -168,49 +252,33 @@ WavInfo? parseWavHeader(Uint8List head, int fileSize) {
       (head[off + 3] << 24);
 
   var off = 12;
-  int? channels;
-  int? sampleRate;
-  int? bitsPerSample;
-  int? byteRate;
-  int? dataSize;
+  WavFmt? fmt;
   // Chunks lopen achter elkaar; `fmt` en `data` zijn de twee die tellen.
-  // Alles vreemds ertussen (LIST, fact, cue) wordt overgeslagen op zijn
-  // eigen lengteveld.
+  // Alles vreemds ertussen (LIST, FLLR, fact, cue) wordt overgeslagen
+  // op zijn eigen lengteveld.
   while (off + 8 <= head.length) {
     final id = u32(off);
     final size = u32(off + 4);
-    if (id == 0x20746D66 /* 'fmt ', little-endian gelezen */ &&
-        off + 16 <= head.length) {
-      channels = u16(off + 10);
-      sampleRate = u32(off + 12);
-      byteRate = u32(off + 16);
-      bitsPerSample = u16(off + 22);
-    } else if (id == 0x61746164 /* 'data ', little-endian gelezen */ ) {
+    if (id == 0x20746D66 /* 'fmt ', little-endian gelezen */ ) {
+      if (size < 16 || off + 8 + size > head.length) return null;
+      fmt = parseWavFmt(Uint8List.sublistView(head, off + 8, off + 8 + size));
+      if (fmt == null) return null;
+    } else if (id == 0x61746164 /* 'data' */ ) {
+      if (fmt == null) return null;
       // De chunk kan meer claimen dan er werkelijk in het bestand staat;
       // de kleinste van beide is de waarheid.
-      dataSize = size > 0 && off + 8 + size > fileSize
-          ? fileSize - off - 8
-          : size;
-      break;
+      final avail = fileSize - off - 8;
+      if (avail < 0) return null;
+      return wavInfoFromFields(
+        fmt,
+        dataBytes: size <= avail ? size : avail,
+        dataOffset: off + 8,
+      );
     }
     // Chunk-lengtes zijn even-afgerond (pad-byte).
     final next = off + 8 + size + (size & 1);
     if (next <= off) return null; // corrupte lengte — niet doorpogen
     off = next;
   }
-  if (sampleRate == null ||
-      sampleRate <= 0 ||
-      byteRate == null ||
-      byteRate <= 0 ||
-      dataSize == null ||
-      dataSize < 0) {
-    return null;
-  }
-  final micros = ((dataSize / byteRate) * 1000000).round();
-  return WavInfo(
-    duration: Duration(microseconds: micros),
-    channels: channels ?? 0,
-    sampleRate: sampleRate,
-    bitsPerSample: bitsPerSample ?? 0,
-  );
+  return null;
 }
