@@ -111,6 +111,23 @@ class MarkdownDocument {
   MarkdownDocument withFields(Map<String, String> fields) =>
       withSource(withDocumentFields(source, fields));
 
+  /// Of dit document vergrendeld is voor uitdeling: `ocideck_read_only: true`
+  /// laat hem openen zonder bewerkingsoppervlak — de document-tegenhanger van
+  /// `Deck.playOnly` (#2912).
+  bool get readOnly => _frontMatterMetadata
+      .valuesFor('ocideck_read_only')
+      .any((value) => value == 'true');
+
+  /// Zet de alleen-lezenvergrendeling byte-chirurgisch in de front matter.
+  /// `false` haalt de sleutel weg — de uitgang is even makkelijk als de ingang.
+  MarkdownDocument withReadOnly(bool value) => withSource(
+    withDocumentFrontMatterKey(
+      source,
+      'ocideck_read_only',
+      value ? 'true' : null,
+    ),
+  );
+
   /// De tekst die naar schijf gaat: exact de bron. Nooit her-serialiseren — dat
   /// is de rode lijn die een plat document plat en maximaal uitwisselbaar houdt.
   /// Let op: dit is de *tekst*; een eventuele BOM zit er niet in, zie [toBytes].

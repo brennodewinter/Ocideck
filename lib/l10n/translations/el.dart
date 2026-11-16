@@ -1565,6 +1565,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Μόνο για ανάγνωση (κλειδωμένο)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Αυτό το έγγραφο είναι μόνο για ανάγνωση (κλειδωμένο).',
   'Markdown-bestand…': 'Αρχείο Markdown…',
   'Markdown-bestand invoegen': 'Εισαγωγή αρχείου Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

@@ -1546,6 +1546,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Samo za čitanje (zaključano)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Ovaj je dokument samo za čitanje (zaključan).',
   'Markdown-bestand…': 'Markdown datoteka…',
   'Markdown-bestand invoegen': 'Umetni Markdown datoteku',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

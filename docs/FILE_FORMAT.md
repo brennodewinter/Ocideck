@@ -3241,6 +3241,13 @@ yet.
 └── ocideck-style.json        # this deck's style, beside the markdown (§7)
 ```
 
+A package may also carry a **document** instead of a deck: when the main
+markdown lacks `marp: true` (§14.1), opening the package places it as a document
+— on disk after extraction, and in memory (web, drag-drop, URL) with the image
+members attached as `mem:` assets after the same magic-byte validation (§7,
+#2913). The encryption/password route is unchanged because it wraps the whole
+archive before its contents are read.
+
 The package carries the same `.marprc.yml` at its root as a saved project folder
 (§1.1), so extracting it and running `marp <title>.md` from the extracted folder
 loads the theme the same way. *(Added 2026-08-27, #1804.)*
@@ -3818,8 +3825,9 @@ exist (`DocumentExportFormat` in
 [`lib/services/document_export_service.dart`](../lib/services/document_export_service.dart)):
 a projected `.md` (a redacted copy of the plain text), one **continuous**
 self-contained HTML document, and a LaTeX `article` (`.tex`). A portable
-`.ocideck` is deliberately not offered here: that package stores a presentation
-deck and would silently change the document mode and its free fields. All three
+`.ocideck` export is deliberately not offered here — but since #2913 a `.ocideck`
+package whose main markdown is a document (no `marp: true`) **opens** as a
+document again, assets and all (§7, §14.18). All three
 forms carry the privacy-projected (OciWacht) content rather than
 the raw source, along the same audience boundary as a deck export; the chosen
 privacy profile is written into the export's filename. There is still no built-in
@@ -3911,9 +3919,9 @@ well (§14.8), so it is a set, not a single key.)* The set is a register in the
 code rather than a habit spread over the call sites:
 `kDocumentOwnedKeys` in
 [`lib/utils/document_front_matter.dart`](../lib/utils/document_front_matter.dart)
-lists exactly `theme`, `tlp`, `papersize`, `geometry` and
-`reference-location` (§14.9), and the generic writer asserts against it, so a
-sixth key cannot slip in on the side. Beside it sits `kDocumentRetiredKeys`, the
+lists exactly `theme`, `tlp`, `papersize`, `geometry`,
+`reference-location` (§14.9) and `ocideck_read_only` (§14.17), and the generic
+writer asserts against it, so a seventh key cannot slip in on the side. Beside it sits `kDocumentRetiredKeys`, the
 place where a key OciDeck *stops* writing is to be recorded — the exit route, so
 a withdrawn key can be cleaned out of existing files instead of sitting in them
 forever. That route is built rather than merely declared: every deliberate write
@@ -4654,6 +4662,34 @@ The code lives under `lib/services/transcription/` (marker grammar,
 document writer, update planning, audio probe) with the editor seams in
 `lib/utils/transcript_embed_syntax.dart` and
 `lib/widgets/transcript_document_extras.dart`.
+
+### 14.17 Read-only lock — `ocideck_read_only` *(added 2026-11-16)*
+
+`ocideck_read_only: true` in a document's front matter is the document
+counterpart of a deck's `ocideck_play_only` (§3): the file opens **locked** —
+the content renders in the document style, but there is no editing surface,
+toolbar, find bar or shortcut that can touch the source. It is meant for a
+document you distribute: the recipient reads, nothing more. Removing the key
+(by hand, or from an unlocked copy) restores normal editing — like every
+document key, off is the *absence* of the key, so `false` is never written.
+
+This is the one `ocideck_*` key the document path writes — the rest of that
+prefix stays reserved but unwritten (§14.5). The key changes nothing about
+recognition: the file is still a document by the *absence* of `marp: true`
+(§14.1), and any other Markdown reader simply ignores an unknown front-matter
+key and shows the text.
+
+### 14.18 A `.ocideck` package containing a document *(added 2026-11-16)*
+
+The portable package format (§7) is not deck-only in content: a `.ocideck`
+whose main markdown lacks `marp: true` opens **as a document** on every route —
+extracted onto disk (images resolve next to the file) and fully in memory
+(web picker, drag-drop, URL), where the image members land in the in-memory
+asset store under `mem:` paths and the references are rewritten accordingly,
+under the same magic-byte validation and the same `../` confinement as deck
+assets. Encryption and password protection apply unchanged: they wrap the
+archive, not its kind. What does not exist is a *write* route — the document
+export menu deliberately does not offer `.ocideck` (§14.4).
 
 ## 15. Document Dossiers
 

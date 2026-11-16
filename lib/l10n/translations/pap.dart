@@ -612,6 +612,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Alleen lezen (vergrendeld)': 'Solo pa lesa (será)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'E dokumento aki ta solo pa lesa (será).',
   'Markdown-bestand…': 'Archivo Markdown…',
   'Markdown-bestand invoegen': 'Inserta archivo Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

@@ -1570,6 +1570,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Léamh amháin (faoi ghlas)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Tá an doiciméad seo inléite amháin (faoi ghlas).',
   'Markdown-bestand…': 'Comhad Markdown…',
   'Markdown-bestand invoegen': 'Ionsáigh comhad Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:archive/archive.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -91,6 +93,38 @@ theme: ocideck
       );
     },
   );
+
+  test('een .ocideck-pakket met niet-marp hoofd-markdown opent als document '
+      '(#2913), met pakketafbeeldingen als mem:-assets', () async {
+    final (container, tabs) = build();
+    // Een geldige PNG-kop — de pakketimport valideert op magic bytes.
+    final png = Uint8List.fromList([
+      0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, //
+      1, 2, 3, 4, 5, 6, 7, 8,
+    ]);
+    final md = utf8.encode('# Rapport\n\n![logo](images/logo.png)\n');
+    final archive = Archive()
+      ..add(ArchiveFile('rapport.md', md.length, md))
+      ..add(ArchiveFile('images/logo.png', png.length, png));
+    final zip = Uint8List.fromList(ZipEncoder().encodeBytes(archive));
+
+    final result = await tabs.openDeckFromBytes(zip, 'rapport.ocideck');
+
+    expect(result, OpenResult.opened);
+    final tab = container.read(tabsProvider).current!;
+    expect(tab.documentNotifier, isNotNull);
+    expect(tab.deckNotifierOrNull, isNull);
+    // De afbeeldingsverwijzing wijst nu naar het geheugen, niet naar een
+    // archief-intern pad dat nergens oplost.
+    expect(
+      tab.documentNotifier!.currentState.document!.source,
+      contains('mem:'),
+    );
+    expect(
+      tab.documentNotifier!.currentState.document!.source,
+      isNot(contains('images/logo.png')),
+    );
+  });
 
   test('een document met BOM onthoudt de BOM, buiten de bron (§3.1)', () async {
     final (container, tabs) = build();

@@ -1556,6 +1556,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Doar citire (blocat)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Acest document este doar pentru citire (blocat).',
   'Markdown-bestand…': 'Fișier Markdown…',
   'Markdown-bestand invoegen': 'Inserează fișier Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

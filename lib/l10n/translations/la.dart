@@ -1553,6 +1553,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Solum legere (clausum)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Hoc documentum solum legitur (clausum).',
   'Markdown-bestand…': 'Fasciculus Markdown…',
   'Markdown-bestand invoegen': 'Fasciculum Markdown insere',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

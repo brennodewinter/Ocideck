@@ -1548,6 +1548,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Tik skaityti (užrakinta)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Šis dokumentas yra tik skaityti (užrakintas).',
   'Markdown-bestand…': 'Markdown failas…',
   'Markdown-bestand invoegen': 'Įterpti Markdown failą',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

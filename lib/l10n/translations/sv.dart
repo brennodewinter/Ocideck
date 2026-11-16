@@ -1541,6 +1541,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Endast läsning (låst)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Detta dokument är skrivskyddat (låst).',
   'Markdown-bestand…': 'Markdown-fil…',
   'Markdown-bestand invoegen': 'Infoga Markdown-fil',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

@@ -1543,6 +1543,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Csak olvasható (zárolva)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Ez a dokumentum csak olvasható (zárolt).',
   'Markdown-bestand…': 'Markdown-fájl…',
   'Markdown-bestand invoegen': 'Markdown-fájl beszúrása',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

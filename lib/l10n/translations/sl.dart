@@ -1542,6 +1542,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Samo za branje (zaklenjeno)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Ta dokument je samo za branje (zaklenjen).',
   'Markdown-bestand…': 'Datoteka Markdown…',
   'Markdown-bestand invoegen': 'Vstavi datoteko Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

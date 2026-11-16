@@ -310,7 +310,36 @@ Future<OpenResult> _openPackageFromBytes(
     sourceName: '$name → ${mdEntry.name}',
   );
   var deck = gated.deck;
-  if (deck == null) return gated.failure;
+  if (deck == null) {
+    // Geen Marp-deck maar wél geldige markdown: open het pakket als document —
+    // dezelfde routering als een plat `.md` (#2913). De veiligheidsscan is al
+    // gepasseerd in de gate; afbeeldingsleden gaan de WebAssetStore in en hun
+    // verwijzingen worden `mem:`-paden, zodat ook deze route zijn plaatjes
+    // tekent. Een leersessie-pakket is per contract altijd een deck.
+    if (gated.failure == OpenResult.notAPresentation &&
+        learningSession == null) {
+      try {
+        final source = attachPackageAssetsToDocumentSource(
+          decoded.text,
+          entries,
+          mdEntry.name,
+        );
+        if (!notifier.mounted) return OpenResult.unreadable;
+        notifier._placeDocumentTab(
+          MarkdownDocument.parse(source, hasUtf8Bom: decoded.hasBom),
+        );
+        return OpenResult.opened;
+      } on WebAssetBudgetExceeded catch (e) {
+        logWarning('TabsNotifier._openPackageFromBytes: webgeheugen vol', e);
+        return _failOpen(
+          notifier._ref,
+          notifier.mounted,
+          OpenFailure.memoryBudgetExceeded,
+        );
+      }
+    }
+    return gated.failure;
+  }
   var carriesPackagedProfile = false;
   if (learningSession != null) {
     final anchors = deck.slides.map((slide) => slide.anchor.trim()).toList();

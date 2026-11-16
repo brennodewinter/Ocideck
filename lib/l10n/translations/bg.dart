@@ -1561,6 +1561,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Само за четене (заключено)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Този документ е само за четене (заключен).',
   'Markdown-bestand…': 'Markdown файл…',
   'Markdown-bestand invoegen': 'Вмъкване на Markdown файл',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

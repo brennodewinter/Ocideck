@@ -1542,6 +1542,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Kun læsning (låst)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Dette dokument er skrivebeskyttet (låst).',
   'Markdown-bestand…': 'Markdown-fil…',
   'Markdown-bestand invoegen': 'Indsæt Markdown-fil',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

@@ -613,6 +613,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Alleen lezen (vergrendeld)': 'Allinnich lêze (beskoattele)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Dit dokumint is allinnich lêsber (beskoattele).',
   'Markdown-bestand…': 'Markdown-bestân…',
   'Markdown-bestand invoegen': 'Markdown-bestân ynfoegje',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

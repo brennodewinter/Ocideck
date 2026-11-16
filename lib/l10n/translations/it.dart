@@ -611,6 +611,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Alleen lezen (vergrendeld)': 'Sola lettura (bloccato)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Questo documento è in sola lettura (bloccato).',
   'Markdown-bestand…': 'File Markdown…',
   'Markdown-bestand invoegen': 'Inserisci file Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

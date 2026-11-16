@@ -5205,6 +5205,21 @@ staat, zodat de export niet met een blanco pagina opent. De twee werken samen: d
 instelling breekt vóór elk hoofdstuk, en elke `---` die je zelf zet breekt waar jij
 hem neerzet.
 
+### Een alleen-lezen document verspreiden
+
+*(Toegevoegd 2026-11-16.)* Net als een alleen-afspelen-deck kan een document
+**vergrendeld alleen om te lezen** worden uitgedeeld. Zet **Alleen lezen
+(vergrendeld)** aan onder het ⋮-menu van het document — of schrijf
+`ocideck_read_only: true` zelf in de front matter. Wie zo'n document opent,
+ziet de tekst in zijn documentstijl met een slotjesmelding, maar **geen
+bewerker, werkbalk, zoekbalk of sneltoetsen**.
+
+De vergrendeling zit in het bestand en reist dus mee als je het deelt — ook in
+een `.ocideck`-pakket, dat nu als document opent wanneer zijn hoofd-markdown er
+een is. **Het tabblad sluiten herstelt de normale werking van de app.** Om het
+document te *ontgrendelen* haal je de sleutel `ocideck_read_only` uit de
+markdown.
+
 ### Extra ruimte invoegen
 
 *(Toegevoegd 2026-10-19.)* Soms is een gat tussen twee alinea's de bedoeling —

@@ -2398,6 +2398,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Salt okunur (kilitli)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Bu belge salt okunur (kilitli).',
   'Markdown-bestand…': 'Markdown dosyası…',
   'Markdown-bestand invoegen': 'Markdown dosyası ekle',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

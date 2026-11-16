@@ -1534,6 +1534,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Ainult lugemine (lukustatud)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'See dokument on ainult lugemiseks (lukustatud).',
   'Markdown-bestand…': 'Markdown-fail…',
   'Markdown-bestand invoegen': 'Lisa Markdown-fail',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':
