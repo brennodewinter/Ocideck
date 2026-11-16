@@ -1558,6 +1558,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Qari biss (imsakkar)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Dan id-dokument huwa għall-qari biss (imsakkar).',
   'Markdown-bestand…': 'Fajl Markdown…',
   'Markdown-bestand invoegen': 'Daħħal fajl Markdown',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

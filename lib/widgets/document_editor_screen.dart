@@ -123,6 +123,7 @@ part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
 part 'parts/document_editor_position.dart';
 part 'parts/document_editor_presenter.dart';
+part 'parts/document_editor_locked.dart';
 part 'parts/document_editor_risk_quality.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
@@ -365,6 +366,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // `ocideck_read_only` → geen bewerkingsoppervlak: dezelfde routering als
+    // `deck.playOnly` naar `_PlayOnlyScreen` (#2912).
+    final readOnly = ref.watch(
+      documentProvider.select((s) => s.document?.readOnly ?? false),
+    );
+    if (readOnly) return _documentReadOnlyView(context, ref);
     ref.listen(
       documentProvider.select(
         (state) => (state.findRequestId, state.findShowReplace),
@@ -589,6 +596,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         documentFootnotePlacement(_pageSetupSource(ref)) ==
         FootnotePlacement.document,
     onFootnotesAtEndChanged: (v) => _setFootnotePlacement(ref, v),
+    readOnly: ref.read(documentProvider).document?.readOnly ?? false,
+    onReadOnlyChanged: (v) => _setReadOnly(ref, v),
     onApplyChapterBreaks: () => applyChapterBreaksToDocument(context, ref),
     onInsertTable: _insertTable,
     onInsertTimeline: _insertTimeline,

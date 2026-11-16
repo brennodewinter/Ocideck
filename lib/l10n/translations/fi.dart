@@ -1542,6 +1542,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Alleen lezen (vergrendeld)': 'Vain luku (lukittu)',
+  'Dit document is alleen-lezen (vergrendeld)':
+      'Tämä asiakirja on vain luettavissa (lukittu).',
   'Markdown-bestand…': 'Markdown-tiedosto…',
   'Markdown-bestand invoegen': 'Lisää Markdown-tiedosto',
   'Dit bestand bevat geen leesbare tekst; kies een Markdown-bestand.':

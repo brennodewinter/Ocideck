@@ -3137,6 +3137,13 @@ nog niet is opgeslagen.
 └── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
 ```
 
+Een pakket kan ook een **document** dragen in plaats van een deck: mist de
+hoofd-markdown `marp: true` (§14.1), dan plaatst openen hem als document —
+op schijf na uitpakken, en in het geheugen (web, drag-drop, URL) met de
+afbeeldingsleden als `mem:`-assets na dezelfde magic-byte-validatie (#2913).
+De versleutel-/wachtwoordroute is onveranderd: die zit om het hele archief,
+vóór er naar de inhoud wordt gekeken.
+
 Het pakket draagt dezelfde `.marprc.yml` aan zijn root mee als een opgeslagen
 projectmap (§1.1), dus uitpakken en `marp <title>.md` draaien vanuit de
 uitgepakte map laadt het thema op dezelfde manier. *(Toegevoegd 2026-08-27, #1804.)*
@@ -3738,8 +3745,9 @@ raakt het origineel nooit aan, en valt dus **buiten** de byte-getrouwe garantie 
 [`lib/services/document_export_service.dart`](../lib/services/document_export_service.dart)):
 een geprojecteerd `.md` (een geredigeerde kopie van de platte tekst), één
 **doorlopend** zelfstandig HTML-document en een LaTeX-`article` (`.tex`). Een
-`.ocideck` wordt bewust niet aangeboden: dat pakket bewaart een presentatie en
-zou documentmodus en vrije velden verliezen. Alle drie dragen de privacygeprojecteerde
+`.ocideck`-export wordt bewust niet aangeboden — maar sinds #2913 **opent** een
+`.ocideck`-pakket waarvan de hoofd-markdown een document is (geen `marp: true`)
+weer als document, assets en al (§7, §14.18). Alle drie dragen de privacygeprojecteerde
 (OciWacht) inhoud in plaats van de ruwe bron, langs dezelfde publieksgrens als een
 deckexport; het gekozen privacyprofiel wordt in de bestandsnaam van de export
 geschreven. Een ingebouwde PDF-*schrijver* is er nog steeds niet: een PDF komt
@@ -3835,9 +3843,9 @@ bestand meereizen (§14.8), dus het is een verzameling, geen enkele sleutel.)* D
 verzameling is een register in de code en geen gewoonte verspreid over de
 aanroepplekken: `kDocumentOwnedKeys` in
 [`lib/utils/document_front_matter.dart`](../lib/utils/document_front_matter.dart)
-somt precies `theme`, `papersize`, `geometry` en — sinds 2026-08-18 —
-`reference-location` (§14.9) op, en de generieke schrijver asserteert daartegen,
-zodat er niet stilletjes een vijfde sleutel bij kan glippen. Ernaast staat
+somt precies `theme`, `papersize`, `geometry`, `reference-location` (§14.9) en
+`ocideck_read_only` (§14.17) op, en de generieke schrijver asserteert
+daartegen, zodat er niet stilletjes een zesde sleutel bij kan glippen. Ernaast staat
 `kDocumentRetiredKeys`, de plek waar een sleutel die OciDeck *niet langer* schrijft
 moet worden vastgelegd — de uitgang, zodat een teruggetrokken sleutel uit bestaande
 bestanden kan worden opgeruimd in plaats van er voor altijd in te blijven staan.
@@ -4594,7 +4602,7 @@ Feiten die op schijf tellen:
   rauwe bron.
 - **Bij export.** De `.md`-export houdt marker en provenancetekst, want die
   zijn bron; de audiolink reist zoals geschreven — een ontvanger krijgt de
-  *verwijzing*, nooit ingebedde audiabytes. Er is geen `.ocideck`-pakketroute
+  *verwijzing*, nooit ingebedde audiabytes. Er is geen `.ocideck`-exportroute
   voor documenten (§14.4), en dit ontwerp maakt er ook geen.
 
 Ontwerp, levensloop en de capaciteitenmatrix: `docs/design/TRANSCRIPTION.md`.
@@ -4602,6 +4610,36 @@ De code woont onder `lib/services/transcription/` (markergrammatica,
 documentschrijver, updateplanning, audioprobe) met de editornaden in
 `lib/utils/transcript_embed_syntax.dart` en
 `lib/widgets/transcript_document_extras.dart`.
+
+### 14.17 Alleen-lezenvergrendeling — `ocideck_read_only` *(toegevoegd 2026-11-16)*
+
+`ocideck_read_only: true` in de front matter van een document is de
+documenttegenhanger van `ocideck_play_only` bij een deck (§3): het bestand opent
+**vergrendeld** — de inhoud rendert in de documentstijl, maar er is geen
+bewerkingsoppervlak, werkbalk, zoekbalk of sneltoets die de bron kan aanraken.
+Hij is bedoeld voor een document dat je uitdeelt: de ontvanger leest, meer niet.
+De sleutel weghalen (met de hand, of vanuit een ontgrendelde kopie) herstelt het
+gewone bewerken — zoals bij elke documentsleutel is uit de *afwezigheid* van de
+sleutel, dus `false` wordt nooit geschreven.
+
+Dit is de enige `ocideck_*`-sleutel die het documentpad schrijft — de rest van
+dat voorvoegsel blijft gereserveerd maar ongeschreven (§14.5). De sleutel
+verandert niets aan de herkenning: het bestand is nog steeds een document door
+de *afwezigheid* van `marp: true` (§14.1), en elke andere Markdown-lezer ziet
+een onbekende front-matter-sleutel over het hoofd en toont gewoon de tekst.
+
+### 14.18 Een `.ocideck`-pakket met een document *(toegevoegd 2026-11-16)*
+
+Het draagbare pakketformaat (§7) is qua inhoud niet deck-only: een `.ocideck`
+waarvan de hoofd-markdown `marp: true` mist opent **als document** op elke
+route — uitgepakt op schijf (afbeeldingen lossen naast het bestand op) en
+volledig in het geheugen (webkiezer, drag-drop, URL), waar de afbeeldingsleden
+in de in-memory assetstore onder `mem:`-paden landen en de verwijzingen
+dienaangaande worden herschreven — onder dezelfde magic-byte-validatie en dezelfde
+`../`-insluiting als deckassets. Versleuteling en wachtwoordbescherming gelden
+onveranderd: die zitten om het archief, niet om de soort. Wat er niet bestaat is
+een *schrijfroute* — het exportmenu van het document biedt bewust geen
+`.ocideck` aan (§14.4).
 
 ## 15. Documentdossiers
 

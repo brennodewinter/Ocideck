@@ -5273,6 +5273,21 @@ break in front of it is left alone, so you never end up with a double `---` (and
 the message says so). A `---` or a `#` inside a fenced code block is code, not a
 break or a heading, and is left untouched — as is the front matter.
 
+### Distributing a read-only document
+
+*(Added 2026-11-16.)* Like a play-only deck, a document can be handed out
+**locked for reading only**. Turn on **Alleen lezen (vergrendeld)** (read only,
+locked) under the document's ⋮ menu — or write `ocideck_read_only: true` into
+its front matter by hand. When such a document is opened, OciDeck shows the
+text in its document style with a lock banner, but **no editor, toolbar, find
+bar or editing shortcuts**.
+
+The lock is part of the file, so it travels with the document when you share
+it — including inside a `.ocideck` package, which now opens as a document when
+its main markdown is one. **Closing the tab restores the normal working of the
+app.** To *unlock* the document, remove the `ocideck_read_only` key from its
+markdown.
+
 ### Inserting extra space
 
 *(Added 2026-10-19.)* Sometimes a gap between two paragraphs is deliberate — a

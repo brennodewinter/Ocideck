@@ -36,12 +36,19 @@ const int kMaxDocumentFieldValueLength = 4096;
 /// (Pandoc), `reference-location:` (Pandoc/Quarto — waar de voetnoten
 /// terechtkomen). OciDeck voegt geen eigen dialect toe — zie FILE_FORMAT.md
 /// §14.1.
+///
+/// Uitzondering op die regel: `ocideck_read_only` is een sleutel die alleen
+/// OciDeck kent — de alleen-lezenvergrendeling van een uitgedeeld document
+/// (#2912), de document-tegenhanger van `ocideck_play_only` bij decks. Hij is
+/// hier omdat het documentpad hem moet kunnen schrijven; de rest van de
+/// `ocideck_*`-ruimte blijft gereserveerd maar ongeschreven.
 const Set<String> kDocumentOwnedKeys = {
   'theme',
   'tlp',
   'papersize',
   'geometry',
   'reference-location',
+  'ocideck_read_only',
 };
 
 /// Sleutels die het documentpad ooit schreef en niet meer schrijft.

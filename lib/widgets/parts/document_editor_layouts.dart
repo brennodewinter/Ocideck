@@ -872,6 +872,17 @@ void _setFootnotePlacement(WidgetRef ref, bool atEnd) {
   ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
 }
 
+/// Vergrendelt dít document voor uitdeling (`ocideck_read_only`) of haalt de
+/// vergrendeling weg — dezelfde front-matter-discipline als
+/// [_setFootnotePlacement] (#2912).
+void _setReadOnly(WidgetRef ref, bool readOnly) {
+  final doc = ref.read(documentProvider).document;
+  if (doc == null) return;
+  final next = doc.withReadOnly(readOnly).source;
+  if (next == doc.source) return;
+  ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
+}
+
 /// Laat kiezen of de huidige paginaopmaak in dít document komt te staan of uit
 /// de instellingen blijft komen.
 ///
