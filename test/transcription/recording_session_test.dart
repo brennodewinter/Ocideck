@@ -13,6 +13,50 @@ import 'package:ocideck/services/transcription/transcription_errors.dart';
 
 import 'fakes/fake_capture_source.dart';
 
+class _DelayedSource extends FakeCaptureSource {
+  _DelayedSource({this.delayStart = true, this.delayStop = false});
+  final bool delayStart;
+  final bool delayStop;
+  final entered = Completer<void>();
+  final release = Completer<void>();
+
+  @override
+  Future<CaptureSession> start(CaptureRequest request) async {
+    startCalls++;
+    lastRequest = request;
+    entered.complete();
+    if (delayStart) await release.future;
+    return lastSession = _DelayedSession(request, delayStop: delayStop);
+  }
+}
+
+class _DelayedSession extends FakeCaptureSession {
+  _DelayedSession(super.request, {required this.delayStop});
+  final bool delayStop;
+  final stopEntered = Completer<void>();
+  final stopRelease = Completer<void>();
+
+  @override
+  Future<RecordedAudio> stop() async {
+    stopEntered.complete();
+    if (delayStop) await stopRelease.future;
+    return super.stop();
+  }
+}
+
+class _DelayedStaging extends IoRecordingStaging {
+  _DelayedStaging(Directory dir) : super(baseDir: dir);
+  final entered = Completer<void>();
+  final release = Completer<void>();
+
+  @override
+  Future<String?> createSessionDir() async {
+    entered.complete();
+    await release.future;
+    return super.createSessionDir();
+  }
+}
+
 void main() {
   late Directory tempDir;
   late RecordingManager manager;
@@ -68,6 +112,93 @@ void main() {
     expect(source.startCalls, 1);
     await manager.stop(RecordingEndReason.userStop);
   });
+
+  test('een bronstart reserveert de manager vóór de bron klaar is', () async {
+    final delayed = _DelayedSource();
+    source = delayed;
+    final first = startMic();
+    await delayed.entered.future;
+    await expectLater(startMic(), throwsA(isA<StateError>()));
+    expect(delayed.startCalls, 1);
+    delayed.release.complete();
+    final handle = await first;
+    expect(manager.active, same(handle));
+    await handle.stop();
+    expect(delayed.lastSession!.stopCalls, 1);
+  });
+
+  test(
+    'Stop tijdens bronstart wacht op captureafbraak en publiceert niets',
+    () async {
+      final delayed = _DelayedSource(delayStop: true);
+      source = delayed;
+      final starting = startMic();
+      final check = expectLater(starting, throwsA(isA<Cancelled>()));
+      await delayed.entered.future;
+      var stopped = false;
+      final firstStop = manager.stop(RecordingEndReason.moduleDisabled);
+      final secondStop = manager.stop(RecordingEndReason.appQuit);
+      expect(identical(firstStop, secondStop), isTrue);
+      unawaited(secondStop.then((_) => stopped = true));
+      delayed.release.complete();
+      // De bron kwam alsnog beschikbaar; ook diens Stop wordt afgewacht.
+      await Future<void>.delayed(Duration.zero);
+      final capture = delayed.lastSession! as _DelayedSession;
+      await capture.stopEntered.future;
+      expect(manager.active, isNull);
+      expect(stopped, isFalse);
+      capture.stopRelease.complete();
+      await check;
+      await firstStop;
+      await secondStop;
+      expect(capture.stopCalls, 1);
+      expect(manager.active, isNull);
+      expect(tempDir.listSync(), isEmpty);
+      source = FakeCaptureSource();
+      await (await startMic()).stop();
+    },
+  );
+
+  test('staging is al gereserveerd; Stop voorkomt daarna bronstart', () async {
+    final staging = _DelayedStaging(tempDir);
+    manager = RecordingManager(staging: staging);
+    final starting = startMic();
+    final check = expectLater(starting, throwsA(isA<Cancelled>()));
+    await staging.entered.future;
+    await expectLater(startMic(), throwsA(isA<StateError>()));
+    final stopped = manager.stop(RecordingEndReason.appQuit);
+    staging.release.complete();
+    await stopped;
+    await check;
+    expect(source.startCalls, 0);
+    expect(manager.active, isNull);
+    expect(tempDir.listSync(), isEmpty);
+  });
+
+  test(
+    'alle Stops wachten op dezelfde afronding van een actieve capture',
+    () async {
+      final delayed = _DelayedSource(delayStart: false, delayStop: true);
+      source = delayed;
+      final handle = await startMic();
+      final capture = delayed.lastSession! as _DelayedSession;
+      final first = manager.stop(RecordingEndReason.userStop);
+      await capture.stopEntered.future;
+      var finished = false;
+      final second = manager.stop(RecordingEndReason.appQuit);
+      expect(identical(first, second), isTrue);
+      unawaited(second.then((_) => finished = true));
+      await Future<void>.delayed(Duration.zero);
+      expect(finished, isFalse);
+      expect(handle.phase, RecordingPhase.stopping);
+      await expectLater(startMic(), throwsA(isA<StateError>()));
+      capture.stopRelease.complete();
+      await Future.wait([first, second]);
+      expect(capture.stopCalls, 1);
+      expect(handle.phase, RecordingPhase.ended);
+      expect(manager.active, isNull);
+    },
+  );
 
   test('Stop rondt de capture af, eenmaal, met userStop als reden', () async {
     final handle = await startMic();

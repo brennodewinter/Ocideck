@@ -13,6 +13,10 @@ import 'transcription_errors.dart';
 import 'web_media_source.dart';
 
 class WebMediaBrowserImpl implements WebMediaBrowser {
+  WebMediaBrowserImpl({this.stopTimeout = const Duration(seconds: 10)});
+
+  final Duration stopTimeout;
+
   @override
   Future<CaptureAvailability> probeMicrophone() async {
     return microphoneAvailability(
@@ -53,7 +57,12 @@ class WebMediaBrowserImpl implements WebMediaBrowser {
       _stopTracks(stream);
       throw const SourceUnavailable(webDisplaySilentMessage);
     }
-    return _record(stream);
+    try {
+      return await _record(stream);
+    } on Object {
+      _stopTracks(stream);
+      rethrow;
+    }
   }
 
   Future<web.MediaStream> _micStream() {
@@ -75,22 +84,95 @@ class WebMediaBrowserImpl implements WebMediaBrowser {
     final recorder = mime == null
         ? web.MediaRecorder(stream)
         : web.MediaRecorder(stream, web.MediaRecorderOptions(mimeType: mime));
-    final chunks = StreamController<Uint8List>();
-    final stopped = Completer<void>();
+    return _BrowserRecording(recorder, stream, stopTimeout).start();
+  }
+}
+
+class _BrowserRecording {
+  _BrowserRecording(this.recorder, this.stream, this.timeout);
+
+  final web.MediaRecorder recorder;
+  final web.MediaStream stream;
+  final Duration timeout;
+  final chunks = StreamController<Uint8List>();
+  final ended = StreamController<CaptureEndCause>.broadcast();
+  final stopped = Completer<void>();
+  Future<void> reads = Future<void>.value();
+  Future<void>? stopFuture;
+  DecodeFailed? readFailure;
+  bool finishing = false;
+  bool endEmitted = false;
+
+  WebMediaLive start() {
     recorder.ondataavailable = ((web.Event event) {
       final blob = (event as web.BlobEvent).data;
-      if (blob.size == 0) return;
-      unawaited(_emit(blob, chunks));
+      if (blob.size == 0 || chunks.isClosed) return;
+      // Eén keten bewaart de eventvolgorde en vangt ook mislukte Blob-reads.
+      reads = reads
+          .then((_) => _emit(blob, chunks).timeout(timeout))
+          .catchError((Object _) {
+            readFailure ??= const DecodeFailed(
+              'browseraudioblok kon niet worden gelezen',
+            );
+            signalEnd(CaptureEndCause.storageFailed);
+          });
     }).toJS;
     recorder.onstop = ((web.Event _) {
       if (!stopped.isCompleted) stopped.complete();
+      if (!finishing) signalEnd(CaptureEndCause.sourceLost);
     }).toJS;
+    recorder.onerror = ((web.Event _) {
+      signalEnd(CaptureEndCause.sourceLost);
+    }).toJS;
+    for (final track in stream.getTracks().toDart) {
+      track.onended = ((web.Event _) => signalEnd(
+        CaptureEndCause.sourceLost,
+      )).toJS;
+    }
     recorder.start(1000);
     return WebMediaLive(
       chunks: chunks.stream,
+      ended: ended.stream,
       mime: recorder.mimeType,
-      stop: () => _stop(recorder, stream, chunks, stopped),
+      stop: stop,
     );
+  }
+
+  void signalEnd(CaptureEndCause cause) {
+    if (!finishing && !endEmitted && !ended.isClosed) {
+      endEmitted = true;
+      ended.add(cause);
+    }
+  }
+
+  Future<void> stop() => stopFuture ??= finish();
+
+  Future<void> finish() async {
+    finishing = true;
+    try {
+      if (recorder.state != 'inactive') recorder.stop();
+      // Ook bij een al inactieve recorder kan het laatste data-event nog komen.
+      await stopped.future.timeout(timeout);
+      await reads.timeout(timeout);
+      final failure = readFailure;
+      if (failure != null) throw failure;
+    } on TimeoutException {
+      throw const IoFailed('browseropname stopte niet op tijd');
+    } on TranscriptionError {
+      rethrow;
+    } on Object {
+      throw const SourceUnavailable('browseropname kon niet afronden');
+    } finally {
+      recorder.ondataavailable = null;
+      recorder.onstop = null;
+      recorder.onerror = null;
+      for (final track in stream.getTracks().toDart) {
+        track.onended = null;
+      }
+      _stopTracks(stream);
+      if (!chunks.isClosed) await chunks.close();
+      if (!ended.isClosed) await ended.close();
+    }
   }
 }
 
@@ -119,26 +201,6 @@ Future<void> _emit(web.Blob blob, StreamController<Uint8List> chunks) async {
   if (chunks.isClosed) return;
   final bytes = (await blob.arrayBuffer().toDart).toDart.asUint8List();
   if (!chunks.isClosed && bytes.isNotEmpty) chunks.add(bytes);
-}
-
-Future<void> _stop(
-  web.MediaRecorder recorder,
-  web.MediaStream stream,
-  StreamController<Uint8List> chunks,
-  Completer<void> stopped,
-) async {
-  if (recorder.state != 'inactive') {
-    try {
-      recorder.stop();
-    } on Object {
-      if (!stopped.isCompleted) stopped.complete();
-    }
-  } else if (!stopped.isCompleted) {
-    stopped.complete();
-  }
-  await stopped.future;
-  _stopTracks(stream);
-  if (!chunks.isClosed) await chunks.close();
 }
 
 void _stopTracks(web.MediaStream stream) {

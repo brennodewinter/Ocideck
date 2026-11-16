@@ -18,7 +18,7 @@ import 'package:ocideck/services/transcription/wav_sink_io.dart';
 import 'package:path/path.dart' as p;
 
 class _Live implements MicCaptureLive {
-  final framesCtrl = StreamController<MicPcmFrame>.broadcast();
+  final framesCtrl = StreamController<MicPcmFrame>.broadcast(sync: true);
   final endedCtrl = StreamController<CaptureEndCause>.broadcast();
   var stops = 0;
 
@@ -89,12 +89,14 @@ void main() {
   DesktopMicrophoneSource source({
     int? free,
     int maxBytes = maxRecordingWavBytes,
+    int maxQueuedBytes = maxQueuedRecordingBytes,
   }) {
     return DesktopMicrophoneSource(
       port: port,
       gate: gate,
       freeBytes: (_) async => free,
       maxRecordingBytes: maxBytes,
+      maxQueuedBytes: maxQueuedBytes,
     );
   }
 
@@ -196,6 +198,76 @@ void main() {
       expect(info.channels, 1);
       expect(info.bitsPerSample, 16);
       expect(bytes.length, 44 + 3200);
+    },
+  );
+
+  test('Stop schrijft alle 100 al ontvangen frames in volgorde af', () async {
+    final session = await source().start(request());
+    final chunks = <AudioChunk>[];
+    final sub = session.liveChunks!.listen(chunks.add);
+    final accepted = <int>[];
+    for (var i = 0; i < 100; i++) {
+      final pcm = Uint8List(640)..fillRange(0, 640, i);
+      accepted.addAll(pcm);
+      port.live.framesCtrl.add(MicPcmFrame(pcm));
+    }
+    // Geen wachtpunt voor de schrijver: de queue staat vol bij Stop.
+    final first = session.stop();
+    final second = session.stop();
+    expect(identical(first, second), isTrue);
+    final audio = await first;
+    await second;
+    await sub.cancel();
+    final bytes = await File(audio.durablePath).readAsBytes();
+    expect(bytes.sublist(44), accepted);
+    expect(audio.duration, const Duration(seconds: 2));
+    expect(parseWavHeader(bytes, bytes.length)!.duration, audio.duration);
+    expect(chunks.expand((chunk) => chunk.bytes), accepted);
+    expect(chunks.last.offset, const Duration(milliseconds: 1980));
+    expect(port.live.stops, 1);
+    expect(gate.holder, isNull);
+  });
+
+  test('de live-only schrijver verwerkt ook opeenvolgende bursts', () async {
+    final session = await source().start(
+      CaptureRequest(
+        kinds: const {CaptureSourceKind.microphone},
+        consent: consent,
+        persistFile: false,
+      ),
+    );
+    final chunks = <AudioChunk>[];
+    final sub = session.liveChunks!.listen(chunks.add);
+    port.live.framesCtrl.add(MicPcmFrame(Uint8List(640)));
+    await until(() => chunks.length == 1);
+    port.live.framesCtrl.add(MicPcmFrame(Uint8List(640)));
+    final result = await session.stop();
+    await sub.cancel();
+    expect(result.duration, const Duration(milliseconds: 40));
+    expect(chunks, hasLength(2));
+    expect(gate.holder, isNull);
+  });
+
+  test(
+    'buffer-overloop meldt capaciteit en bewaart geaccepteerde audio',
+    () async {
+      final session = await source(maxQueuedBytes: 1280).start(request());
+      final causes = <CaptureEndCause>[];
+      final sub = session.ended!.listen(causes.add);
+      for (var i = 0; i < 5; i++) {
+        port.live.framesCtrl.add(MicPcmFrame(Uint8List(640)));
+      }
+      await expectLater(session.stop(), throwsA(isA<CapacityExceeded>()));
+      await sub.cancel();
+      expect(causes, [CaptureEndCause.storageFailed]);
+      final bytes = await File(session.durablePath).readAsBytes();
+      expect(bytes.length, 44 + 1280);
+      expect(
+        parseWavHeader(bytes, bytes.length)!.duration,
+        const Duration(milliseconds: 40),
+      );
+      expect(port.live.stops, 1);
+      expect(gate.holder, isNull);
     },
   );
 

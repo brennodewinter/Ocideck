@@ -6,6 +6,7 @@
 // bytes gaan ook als live-blokken naar buiten; of daar tekst uit komt
 // beslist de engine (#2522), niet deze bron.
 import 'dart:async';
+import 'dart:collection';
 import 'dart:typed_data';
 
 import 'package:path/path.dart' as p;
@@ -22,6 +23,9 @@ import 'wav_sink_stub.dart' if (dart.library.io) 'wav_sink_io.dart' as wav_file;
 /// we starten niet — een opname die meteen vastloopt is geen opname.
 const minFreeBytesForRecording = 32 * 1024 * 1024;
 
+/// Harde grens aan ontvangen PCM die op de schrijver wacht (geen stil verlies).
+const maxQueuedRecordingBytes = 8 * 1024 * 1024;
+
 typedef FreeBytes = Future<int?> Function(String directory);
 
 class DesktopMicrophoneSource extends CaptureSource {
@@ -32,6 +36,7 @@ class DesktopMicrophoneSource extends CaptureSource {
     this.onLevel,
     this.minFreeBytes = minFreeBytesForRecording,
     this.maxRecordingBytes = maxRecordingWavBytes,
+    this.maxQueuedBytes = maxQueuedRecordingBytes,
   }) : kind = CaptureSourceKind.microphone;
 
   /// Systeem- of appgeluid (#2518–#2520). Zelfde schrijfweg als de
@@ -41,6 +46,7 @@ class DesktopMicrophoneSource extends CaptureSource {
     required this._freeBytes,
     this.minFreeBytes = minFreeBytesForRecording,
     this.maxRecordingBytes = maxRecordingWavBytes,
+    this.maxQueuedBytes = maxQueuedRecordingBytes,
   }) : _gate = null,
        onLevel = null,
        kind = CaptureSourceKind.systemAudio;
@@ -51,6 +57,7 @@ class DesktopMicrophoneSource extends CaptureSource {
   final void Function(double level)? onLevel;
   final int minFreeBytes;
   final int maxRecordingBytes;
+  final int maxQueuedBytes;
 
   @override
   final CaptureSourceKind kind;
@@ -106,6 +113,7 @@ class DesktopMicrophoneSource extends CaptureSource {
         gate: gate,
         onLevel: onLevel,
         kinds: {kind},
+        maxQueuedBytes: maxQueuedBytes,
       );
       live = null;
       return session;
@@ -128,6 +136,7 @@ class _DesktopMicSession implements CaptureSession {
     required this._gate,
     required this._onLevel,
     required this._kinds,
+    required this.maxQueuedBytes,
   }) : _live = live,
        _wav = wav,
        durablePath = wav?.path ?? '',
@@ -142,8 +151,16 @@ class _DesktopMicSession implements CaptureSession {
     // en twee `add`s tegelijk zouden de header en de PCM door elkaar halen.
     _framesSub = live.frames.listen(
       (frame) {
+        if (_stopping || _overflow != null) return;
+        if (frame.pcm.length > maxQueuedBytes - _queuedBytes) {
+          _overflow = const CapacityExceeded('opnamebuffer vol');
+          _emit(CaptureEndCause.storageFailed);
+          return;
+        }
         _queue.add(frame);
-        if (!_draining) unawaited(_drain());
+        _queuedBytes += frame.pcm.length;
+        // Toewijzen vóór de drain start, ook als die zonder file synchroon loopt.
+        _drainFuture ??= Future<void>.microtask(_drain);
       },
       onError: (_) {
         if (!_stopping) _emit(CaptureEndCause.sourceLost);
@@ -166,8 +183,11 @@ class _DesktopMicSession implements CaptureSession {
   final _ended = StreamController<CaptureEndCause>.broadcast();
   final StreamController<AudioChunk> _liveOut;
   var _emitted = Duration.zero;
-  final _queue = <MicPcmFrame>[];
-  var _draining = false;
+  final _queue = Queue<MicPcmFrame>();
+  final int maxQueuedBytes;
+  var _queuedBytes = 0;
+  Future<void>? _drainFuture;
+  CapacityExceeded? _overflow;
   var _stopping = false;
   Future<RecordedAudio>? _stopFuture;
   var _lastLevel = Duration.zero;
@@ -187,10 +207,10 @@ class _DesktopMicSession implements CaptureSession {
   }
 
   Future<void> _drain() async {
-    _draining = true;
     try {
-      while (_queue.isNotEmpty && !_stopping) {
-        final frame = _queue.removeAt(0);
+      while (_queue.isNotEmpty) {
+        final frame = _queue.removeFirst();
+        _queuedBytes -= frame.pcm.length;
         final pcm = _resampler.add(frame.pcm);
         if (pcm.isEmpty) continue;
         _publishLevel(pcm);
@@ -212,12 +232,13 @@ class _DesktopMicSession implements CaptureSession {
           }
         } on IoFailed {
           _queue.clear();
+          _queuedBytes = 0;
           if (!_stopping) _emit(CaptureEndCause.storageFailed);
           return;
         }
       }
     } finally {
-      _draining = false;
+      _drainFuture = null;
     }
   }
 
@@ -233,14 +254,10 @@ class _DesktopMicSession implements CaptureSession {
 
   Future<RecordedAudio> _stop() async {
     _stopping = true;
-    _queue.clear();
     await _framesSub.cancel();
     await _endedSub.cancel();
-    // Wacht tot een lopende schrijfbeurt klaar is, anders sluiten we de
-    // file onder een `add` die nog bezig is.
-    while (_draining) {
-      await Future<void>.delayed(const Duration(milliseconds: 1));
-    }
+    // Geen nieuwe invoer; schrijf alle reeds geaccepteerde frames af vóór close.
+    await _drainFuture;
     try {
       await _live.stop();
     } on Object {
@@ -258,6 +275,8 @@ class _DesktopMicSession implements CaptureSession {
     _gate?.release(MicHolder.recording);
     if (!_ended.isClosed) await _ended.close();
     if (!_liveOut.isClosed) await _liveOut.close();
+    final overflow = _overflow;
+    if (overflow != null) throw overflow;
     final duration = wav?.duration ?? _emitted;
     return RecordedAudio(
       durablePath: durablePath,
