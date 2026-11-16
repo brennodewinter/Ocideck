@@ -1,10 +1,13 @@
 @TestOn('browser')
 library;
 
+import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:js_interop';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:web/web.dart' as web;
 import 'package:ocideck/services/transcription/model_download.dart';
 import 'package:ocideck/services/transcription/model_download_web.dart';
 import 'package:ocideck/services/transcription/model_store.dart';
@@ -13,6 +16,9 @@ import 'package:ocideck/services/transcription/whisper_model.dart';
 
 @JS('eval')
 external JSAny? evaluate(JSString code);
+
+@JS('globalThis.cancelModelDownload')
+external set cancelModelDownload(JSFunction? value);
 
 const key = 'models/ocideck-regression-2953.bin';
 const model = WhisperModel(
@@ -102,6 +108,9 @@ void main() {
       '''
       globalThis.savedModelFetch = globalThis.fetch;
       globalThis.savedEstimate = navigator.storage.estimate;
+      globalThis.savedModelPut = IDBObjectStore.prototype.put;
+      globalThis.savedModelDelete = IDBObjectStore.prototype.delete;
+      globalThis.savedModelDigest = crypto.subtle.digest;
       navigator.storage.estimate = async () => ({quota: 1000000000, usage: 0});
     '''
           .toJS,
@@ -113,6 +122,9 @@ void main() {
       '''
       globalThis.fetch = savedModelFetch;
       navigator.storage.estimate = savedEstimate;
+      IDBObjectStore.prototype.put = savedModelPut;
+      IDBObjectStore.prototype.delete = savedModelDelete;
+      crypto.subtle.digest = savedModelDigest;
     '''
           .toJS,
     );
@@ -199,4 +211,227 @@ void main() {
     await refused(start(total: const Duration(milliseconds: 35)));
     expect(count('modelReads'), lessThan(4));
   });
+  Future<void> cancelled(ModelDownload download) async {
+    await expectLater(
+      download.done,
+      throwsA(
+        isA<ModelDownloadException>().having(
+          (e) => e.failure,
+          'reden',
+          ModelDownloadFailure.cancelled,
+        ),
+      ),
+    );
+    expect(await readModelRecord(key), [9, 8, 7]);
+    expect((await listModelKeys()).where((k) => k.startsWith(key)), [key]);
+  }
+
+  Future<void> until(bool Function() condition) async {
+    for (var i = 0; i < 200 && !condition(); i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 5));
+    }
+    expect(condition(), isTrue);
+  }
+
+  test('annuleren bij verifying behoudt de vorige installatie', () async {
+    await writeModelRecord(key, Uint8List.fromList([9, 8, 7]));
+    install([
+      [1, 2, 3],
+    ]);
+    final download = start();
+    final sub = download.progress.listen((p) {
+      if (p.phase == ModelDownloadPhase.verifying) download.cancel();
+    });
+    await cancelled(download);
+    await sub.cancel();
+  });
+
+  test('annuleren tijdens ontvangen bewaart het vorige model', () async {
+    await writeModelRecord(key, Uint8List.fromList([9, 8, 7]));
+    install([
+      [1],
+      [2],
+      [3],
+    ]);
+    final download = start();
+    final sub = download.progress.listen((p) {
+      if (p.phase == ModelDownloadPhase.downloading) download.cancel();
+    });
+    await cancelled(download);
+    await sub.cancel();
+    expect((await start().done).path, key);
+    expect(await readModelRecord(key), [1, 2, 3]);
+  });
+
+  for (final quotaCall in [1, 2]) {
+    test(
+      'annuleren tijdens quota-opvraag $quotaCall installeert niets',
+      () async {
+        await writeModelRecord(key, Uint8List.fromList([9, 8, 7]));
+        install([
+          [1, 2, 3],
+        ]);
+        evaluate(
+          '''
+        globalThis.modelQuotaCalls = 0;
+        globalThis.releaseModelQuota = null;
+        navigator.storage.estimate = async () => {
+          if (++modelQuotaCalls === $quotaCall) return new Promise(resolve => {
+            releaseModelQuota = () => resolve({quota: 1000000000, usage: 0});
+          });
+          return {quota: 1000000000, usage: 0};
+        };
+      '''
+              .toJS,
+        );
+        final download = start();
+        await until(
+          () =>
+              evaluate(
+                'typeof releaseModelQuota === "function"'.toJS,
+              ).dartify() ==
+              true,
+        );
+        download.cancel();
+        evaluate('releaseModelQuota()'.toJS);
+        await cancelled(download);
+        if (quotaCall == 1) expect(count('modelReads'), 0);
+      },
+    );
+  }
+
+  for (final part in [true, false]) {
+    test(
+      'cancel tijdens ${part ? 'part-write' : 'finale transactie'} behoudt oud record',
+      () async {
+        await writeModelRecord(key, Uint8List.fromList([9, 8, 7]));
+        install([
+          [1, 2, 3],
+        ]);
+        evaluate(
+          '''
+        IDBObjectStore.prototype.put = function(...args) {
+          const result = savedModelPut.apply(this, args);
+          const key = String(args[1]);
+          if (${part ? "key.startsWith('$key.') && key.endsWith('.part')" : "key === '$key'"}) {
+            cancelModelDownload();
+          }
+          return result;
+        };
+      '''
+              .toJS,
+        );
+        final download = start();
+        cancelModelDownload = download.cancel.toJS;
+        await cancelled(download);
+      },
+    );
+  }
+
+  test(
+    'cancel tijdens WebCrypto-verificatie voorkomt definitieve write',
+    () async {
+      await writeModelRecord(key, Uint8List.fromList([9, 8, 7]));
+      install([
+        [1, 2, 3],
+      ]);
+      evaluate(
+        '''
+      crypto.subtle.digest = function(...args) {
+        return savedModelDigest.apply(this, args).then(result => {
+          cancelModelDownload(); return result;
+        });
+      };
+    '''
+            .toJS,
+      );
+      final download = start();
+      cancelModelDownload = download.cancel.toJS;
+      await cancelled(download);
+    },
+  );
+
+  test('installatie controleert opnieuw na database-openen', () async {
+    await writeModelRecord(key, Uint8List.fromList([9, 8, 7]));
+    final opened = Completer<web.IDBDatabase>();
+    final cancellation = ModelInstallCancellation();
+    final future = installModelRecord(
+      key,
+      Uint8List.fromList([1, 2, 3]),
+      cancellation,
+      openDatabase: () => opened.future,
+    );
+    cancellation.cancel();
+    opened.complete(await openModelDb());
+    expect(await future, isFalse);
+    expect(await readModelRecord(key), [9, 8, 7]);
+  });
+
+  test('cancel na transaction-complete verandert succes niet', () async {
+    install([
+      [1, 2, 3],
+    ]);
+    evaluate(
+      '''
+      IDBObjectStore.prototype.delete = function(...args) {
+        if (String(args[0]).startsWith('$key.')) cancelModelDownload();
+        return savedModelDelete.apply(this, args);
+      };
+    '''
+          .toJS,
+    );
+    final download = start();
+    cancelModelDownload = download.cancel.toJS;
+    expect((await download.done).path, key);
+    download.cancel();
+    expect(await readModelRecord(key), [1, 2, 3]);
+  });
+
+  test(
+    'oude cleanup raakt een nieuwere download naar dezelfde sleutel niet',
+    () async {
+      await writeModelRecord(key, Uint8List.fromList([9, 8, 7]));
+      install([
+        [1, 2, 3],
+      ]);
+      evaluate(
+        '''
+      globalThis.modelDigestCalls = 0;
+      globalThis.releaseFirstModelHash = null;
+      crypto.subtle.digest = function(...args) {
+        const real = savedModelDigest.apply(this, args);
+        if (++modelDigestCalls === 1) return real.then(result => new Promise(resolve => {
+          releaseFirstModelHash = () => resolve(result);
+        }));
+        return real;
+      };
+    '''
+            .toJS,
+      );
+      final first = start();
+      final failure = expectLater(
+        first.done,
+        throwsA(
+          isA<ModelDownloadException>().having(
+            (e) => e.failure,
+            'reden',
+            ModelDownloadFailure.cancelled,
+          ),
+        ),
+      );
+      await until(
+        () =>
+            evaluate(
+              'typeof releaseFirstModelHash === "function"'.toJS,
+            ).dartify() ==
+            true,
+      );
+      expect((await start().done).path, key);
+      first.cancel();
+      evaluate('releaseFirstModelHash()'.toJS);
+      await failure;
+      expect(await readModelRecord(key), [1, 2, 3]);
+      expect((await listModelKeys()).where((k) => k.startsWith(key)), [key]);
+    },
+  );
 }

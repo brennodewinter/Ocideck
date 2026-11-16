@@ -7,12 +7,13 @@
 //    ons equivalent van hop-voor-hop NetGuard. Een hop zonder toestemming
 //    (geen ACAO) strandt zichtbaar als netwerkfout, nooit als datalek;
 //  * voortgang via de streamreader; annuleren via AbortController;
-//  * bytes landen als `<sleutel>.part` in IndexedDB en pas na een geslaagde
+//  * bytes landen onder een eigen `.part`-sleutel en pas na een geslaagde
 //    SHA-256 (WebCrypto) onder de echte sleutel — dezelfde betekenis als
 //    `.part` op schijf;
 //  * quota- en opslagfouten zijn `ioFailed` — zichtbaar, niet stil.
 import 'dart:async';
 import 'dart:js_interop';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:web/web.dart' as web;
@@ -23,10 +24,13 @@ import 'model_store.dart';
 import 'model_store_web.dart'
     show
         deleteModelRecord,
+        installModelRecord,
+        ModelInstallCancellation,
         partialSuffix,
         sha256Web,
         storageFreeBytes,
         writeModelRecord;
+import 'transcription_errors.dart';
 import 'whisper_model.dart';
 
 class _WebModelDownload implements ModelDownload {
@@ -36,13 +40,19 @@ class _WebModelDownload implements ModelDownload {
     this.totalTimeout,
     this.idleTimeout,
   ) : _key = destination.path {
+    _partialKey =
+        '$_key.${_random.nextInt(0x100000000).toRadixString(16)}-${_random.nextInt(0x100000000).toRadixString(16)}$partialSuffix';
     _progressCtrl = StreamController<ModelDownloadProgress>();
     _run();
   }
 
   final WhisperModel model;
   final ModelStorePath destination;
+  static final _random = Random.secure();
   final String _key;
+  late final String _partialKey;
+  ModelInstallCancellation? _install;
+  bool _committed = false;
   final Duration totalTimeout;
   final Duration idleTimeout;
   final _abort = web.AbortController();
@@ -58,7 +68,9 @@ class _WebModelDownload implements ModelDownload {
 
   @override
   void cancel() {
+    if (_committed || _done.isCompleted) return;
     _cancelled = true;
+    _install?.cancel();
     _abort.abort();
   }
 
@@ -72,7 +84,7 @@ class _WebModelDownload implements ModelDownload {
   /// hangen eraan, en een mislukte cleanup mag `_done` niet doen hangen.
   Future<void> _dropPartial() async {
     try {
-      await deleteModelRecord('$_key$partialSuffix');
+      await deleteModelRecord(_partialKey);
     } on Object catch (e, s) {
       // IndexedDB weigerde — de sweep bij provider-start ruimt hem alsnog.
       logError('WebModelDownload: .part opruimen', e, s);
@@ -94,42 +106,63 @@ class _WebModelDownload implements ModelDownload {
   Future<void> _run() async {
     try {
       final merged = await _downloadBytes();
+      _throwIfCancelled();
       final received = merged.length;
       final total = model.downloadBytes;
       _emit(ModelDownloadPhase.verifying, received, total);
       await _ensureSpace(received);
+      _throwIfCancelled();
 
       // Eerst .part parkeren, dan hashtoets, dan pas de echte sleutel —
       // zelfde betekenis als het deelsbestand op schijf.
-      await writeModelRecord('$_key$partialSuffix', merged);
+      await writeModelRecord(_partialKey, merged);
+      _throwIfCancelled();
       final hex = await sha256Web(merged);
+      _throwIfCancelled();
       if (hex == null) {
-        await _dropPartial();
         throw const ModelDownloadException(
           ModelDownloadFailure.refused,
           'geen secure context voor de controlesom',
         );
       }
       if (hex != model.sha256) {
-        await _dropPartial();
         throw const ModelDownloadException(
           ModelDownloadFailure.invalidHash,
           'sha256 wijkt af van de catalogus',
         );
       }
-      await writeModelRecord(_key, merged);
+      _throwIfCancelled();
+      final install = ModelInstallCancellation();
+      _install = install;
+      final installed = await installModelRecord(_key, merged, install);
+      if (!installed) throw _cancelledError();
+      _committed = true;
       await _dropPartial();
       _finish();
     } on ModelDownloadException catch (e) {
-      await _dropPartial();
-      _fail(e.failure, e.detail);
+      await _stopWithFailure(e.failure, e.detail);
+    } on IoFailed catch (e) {
+      await _stopWithFailure(ModelDownloadFailure.ioFailed, e.message);
+    } on UnsupportedSource catch (e) {
+      await _stopWithFailure(ModelDownloadFailure.refused, e.message);
     } catch (e) {
-      await _dropPartial();
-      if (_cancelled) {
-        _fail(ModelDownloadFailure.cancelled, 'afgebroken door de gebruiker');
-      } else {
-        _fail(ModelDownloadFailure.networkFailed, '$e');
-      }
+      await _stopWithFailure(ModelDownloadFailure.networkFailed, '$e');
+    }
+  }
+
+  void _throwIfCancelled() {
+    if (_cancelled) throw _cancelledError();
+  }
+
+  Future<void> _stopWithFailure(
+    ModelDownloadFailure failure,
+    String detail,
+  ) async {
+    await _dropPartial();
+    if (_cancelled && !_committed) {
+      _fail(ModelDownloadFailure.cancelled, 'afgebroken door de gebruiker');
+    } else {
+      _fail(failure, detail);
     }
   }
 
@@ -149,6 +182,7 @@ class _WebModelDownload implements ModelDownload {
   Future<Uint8List> _downloadBytes() async {
     _emit(ModelDownloadPhase.connecting, 0, model.downloadBytes);
     await _ensureSpace(model.downloadBytes);
+    _throwIfCancelled();
     final clock = Stopwatch()..start();
     Future<T> waitFor<T>(Future<T> Function() operation) {
       final remaining = totalTimeout - clock.elapsed;
@@ -182,6 +216,8 @@ class _WebModelDownload implements ModelDownload {
           'antwoord is niet CORS-leesbaar',
         );
       }
+      // Fetch decodeert; bij CORS kan de transportencoding bovendien verborgen zijn.
+      // Vergelijk Content-Length alleen waar de representatie vaststaat.
       final encoding = response.headers.get('content-encoding');
       final comparable =
           encoding == 'identity' ||
@@ -213,6 +249,7 @@ class _WebModelDownload implements ModelDownload {
       while (true) {
         if (_cancelled) throw _cancelledError();
         final step = await waitFor(() => activeReader.read().toDart);
+        _throwIfCancelled();
         if (step.done) break;
         final value = step.value;
         if (value == null) continue;

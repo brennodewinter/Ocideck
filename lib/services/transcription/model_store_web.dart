@@ -127,6 +127,67 @@ Future<void> writeModelRecord(String key, Uint8List bytes) async {
   }
 }
 
+/// Annulering van precies één installatie, tot de definitieve transactie commit.
+class ModelInstallCancellation {
+  bool _cancelled = false;
+  bool _committed = false;
+  web.IDBTransaction? _transaction;
+
+  void cancel() {
+    if (_committed) return;
+    _cancelled = true;
+    try {
+      _transaction?.abort();
+    } on Object {
+      // Een al gecommitte transactie kan vóór oncomplete niet meer aborteren.
+      // De oncomplete-handler bepaalt dan terecht de succesvolle uitkomst.
+    }
+  }
+}
+
+/// Atomair vervangen: annulering na database-openen of tijdens de transactie
+/// behoudt een eerder geldig record. Alleen transaction-complete betekent succes.
+Future<bool> installModelRecord(
+  String key,
+  Uint8List bytes,
+  ModelInstallCancellation cancellation, {
+  Future<web.IDBDatabase> Function() openDatabase = openModelDb,
+}) async {
+  final db = await openDatabase();
+  try {
+    if (cancellation._cancelled) return false;
+    final done = Completer<bool>();
+    final tx = db.transaction(modelDbStore.toJS, 'readwrite');
+    cancellation._transaction = tx;
+    tx.oncomplete = ((web.Event _) {
+      cancellation._committed = true;
+      if (!done.isCompleted) done.complete(true);
+    }).toJS;
+    tx.onabort = ((web.Event _) {
+      if (done.isCompleted) return;
+      if (cancellation._cancelled) {
+        done.complete(false);
+      } else {
+        done.completeError(
+          const IoFailed('modelinstallatietransactie afgebroken'),
+        );
+      }
+    }).toJS;
+    tx.onerror = ((web.Event _) {
+      // De abort bevestigt de rollback. Niet al op een put-request afronden.
+    }).toJS;
+    try {
+      tx.objectStore(modelDbStore).put(web.Blob([bytes.toJS].toJS), key.toJS);
+    } on Object {
+      tx.abort();
+    }
+    return await done.future;
+  } finally {
+    cancellation._transaction = null;
+    db.close();
+  }
+}
+
 /// Verwijdert één recordsleutel; stil als hij niet bestond.
 Future<void> deleteModelRecord(String key) async {
   final db = await openModelDb();
