@@ -55,9 +55,76 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Toolchainfeiten vóór de build: run 6375 faalde vóór de tests in de
+      # dartcv4/Xcode-proefcompilatie en de log bevatte daarna niets waarmee de
+      # oorzaak te verklaren viel. Goedkoop, altijd, en hetzelfde rapport landt
+      # in het diagnose-artifact onderaan (#2937).
+      - name: Toolchain-preflight
+        run: |
+          set -u
+          mkdir -p build/golden-diagnose
+          {
+            echo "== systeem =="
+            sw_vers || true
+            uname -m || true
+            echo "== xcode =="
+            xcode-select -p || true
+            xcodebuild -version || true
+            xcrun --sdk macosx --show-sdk-version || true
+            echo "== cmake =="
+            cmake --version | head -1 || true
+            echo "== flutter =="
+            flutter --version | head -4 || true
+            echo "== deployment target (project) =="
+            grep -h "MACOSX_DEPLOYMENT_TARGET" \
+              macos/Runner.xcodeproj/project.pbxproj | sort -u || true
+          } | tee build/golden-diagnose/preflight.txt
+
       # Host-modus: de toolchain staat al op de Mac, net als bij macos-build.
       - name: Afhankelijkheden ophalen
         run: flutter pub get
 
       - name: Golden visual-regression suite
         run: make test-golden
+
+      # Bouwdiagnostiek bij elke falende stap. Faalt de native buildhook vóór
+      # de tests (run 6375: dartcv4 → CMAKE_TRY_COMPILE via xcodebuild), dan is
+      # de compileruitvoer het bewijs — en die verdwijnt met de job. We nemen
+      # mee: de CMake-configure/error/output-logs en de hook-invoer/-uitvoer
+      # (stdout/stderr/input/output.json) uit de hooks_runner-werkmap, plus het
+      # preflightrapport en het testrapport voor zover geschreven. Geen
+      # omgevingsdump: tokens en sleutels horen niet in een artifact (#2937).
+      - name: Bouwdiagnostiek verzamelen
+        if: failure()
+        run: |
+          dest=build/golden-diagnose
+          mkdir -p "$dest"
+          cp build/test-report.json "$dest/" 2>/dev/null || true
+          if [ -d .dart_tool/hooks_runner ]; then
+            find .dart_tool/hooks_runner -type f \
+              \( -name 'CMakeConfigureLog.yaml' -o -name 'CMakeError.log' \
+                 -o -name 'CMakeOutput.log' -o -name 'input.json' \
+                 -o -name 'output.json' -o -name 'stderr.txt' \
+                 -o -name 'stdout.txt' \) -print0 \
+              | tar cf - --null -T - | (cd "$dest" && tar xf -)
+          fi
+          # Onderscheid de twee rood-oorzaken expliciet: een native bouwfout
+          # vóór teststart is geen golden-mismatch en vraagt géén UPDATE=1.
+          if [ -s build/test-report.json ] \
+             && grep -q '"testID"' build/test-report.json; then
+            echo "DIAGNOSE: de suite rapporteerde testgevallen — echte" \
+              "testfout of visuele mismatch; zie de golden-diff."
+          else
+            echo "DIAGNOSE: geen testresultaten geschreven — de run stierf" \
+              "in de native buildhook vóór teststart. Geen golden-PNGs" \
+              "regenereren; zie de CMake-logs in dit artifact."
+          fi
+
+      - name: Diagnostiek uploaden
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: golden-gate-diagnose
+          path: build/golden-diagnose/
+          if-no-files-found: warn
+          retention-days: 30

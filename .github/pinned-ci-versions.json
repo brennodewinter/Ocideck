@@ -23,7 +23,7 @@
       "uses": "actions/upload-artifact",
       "version": "v3.2.1",
       "sha": "ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5",
-      "workflows": [".forgejo/workflows/release.yml", ".forgejo/workflows/release-channel.yml"],
+      "workflows": [".forgejo/workflows/release.yml", ".forgejo/workflows/release-channel.yml", ".forgejo/workflows/macos-gate.yml"],
       "purpose": "Uploads build artifacts through the Forgejo-compatible v3 protocol without trusting its mutable major tag.",
       "source": "github_ref",
       "api": "https://api.github.com/repos/actions/upload-artifact/git/ref/tags/v3"
