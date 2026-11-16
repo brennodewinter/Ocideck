@@ -13,6 +13,7 @@ Hierbij wordt verklaard dat de onderstaande deelnemer het vermelde programma hee
 
 <!-- field id=logo type=image count=0..1 -->
 **Logo opleider (optioneel)**
+> Kies het logo uit een stijlprofiel, of voeg een eigen bestand toe.
 <!-- answer -->
 <!-- /field id=logo -->
 

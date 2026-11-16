@@ -18,6 +18,7 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import '../../l10n/app_localizations.dart';
 import 'form_image_answer.dart';
+import 'form_image_support.dart';
 import 'form_text_helpers.dart';
 
 /// Het veld voor [field], met [value] als concept.
@@ -45,9 +46,10 @@ class FormAnswerEditor extends StatelessWidget {
   /// zijn vakje in plaats van erboven.
   final Widget Function(BuildContext context)? labelBuilder;
 
-  /// Voegt foto's toe aan een afbeeldingsveld; `null` zolang er geen manier is om
-  /// bestanden te kiezen (het web zonder bestandskiezer, of een test).
-  final Future<List<FormImageRef>> Function()? onAddImages;
+  /// Wat een afbeeldingsveld kan toevoegen (kiezer, klembord, tekening,
+  /// klaargezette bronnen); `null` zolang er geen manier is om bestanden te
+  /// kiezen (het web zonder bestandskiezer, of een test).
+  final FormImageAdders? onAddImages;
 
   /// De paden waaruit bij het toevoegen een positie is gehaald.
   final Set<String> scrubbed;

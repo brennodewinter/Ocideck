@@ -18,6 +18,7 @@ import '../../l10n/form_issue_localization.dart';
 import '../markdown_editor/markdown_editor_theme.dart' show DocumentStyleScope;
 import '../reader/document_markdown_view.dart';
 import 'form_answer_editors.dart';
+import 'form_image_support.dart';
 import 'form_text_helpers.dart';
 
 class FormFieldCard extends StatefulWidget {
@@ -44,7 +45,7 @@ class FormFieldCard extends StatefulWidget {
   final FormFillStep Function(String fieldId, FormAnswerValue value) onCommit;
 
   /// Zie [FormAnswerEditor.onAddImages].
-  final Future<List<FormImageRef>> Function()? onAddImages;
+  final FormImageAdders? onAddImages;
 
   /// Zie [FormAnswerEditor.scrubbed] en [FormAnswerEditor.preview].
   final Set<String> scrubbed;

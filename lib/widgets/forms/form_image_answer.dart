@@ -3,10 +3,16 @@
 // toe te voegen. Eigen bestand omdat de invoervelden samen boven de regelgrens
 // van het project kwamen.
 
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
+import 'package:pasteboard/pasteboard.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../signature_draw_dialog.dart';
+import 'form_image_support.dart';
 import 'form_text_helpers.dart';
 
 // ── foto's ──────────────────────────────────────────────────────────────────
@@ -27,7 +33,7 @@ class FormImageAnswer extends StatefulWidget {
   final FormAnswerValue value;
   final ValueChanged<FormAnswerValue> onChanged;
   final String label;
-  final Future<List<FormImageRef>> Function()? onAddImages;
+  final FormImageAdders? onAddImages;
   final Set<String> scrubbed;
   final ImageProvider? Function(String path)? preview;
 
@@ -79,9 +85,38 @@ class _FormImageAnswerState extends State<FormImageAnswer> {
       widget.onChanged(FormAnswerValue(images: images));
 
   Future<void> _add() async {
-    final added = await widget.onAddImages!();
+    final added = await widget.onAddImages!.pick();
     if (added.isEmpty) return;
     _emit([...widget.value.images, ...added]);
+  }
+
+  /// De bytes van één bron (klembord, tekening, stijllogo) door dezelfde
+  /// verwerking als een gekozen bestand.
+  Future<void> _addReader(Future<Uint8List> Function() reader) async {
+    final read = widget.onAddImages?.read;
+    if (read == null) return;
+    final added = await read([reader]);
+    if (added.isEmpty || !mounted) return;
+    _emit([...widget.value.images, ...added]);
+  }
+
+  Future<void> _paste() => _addReader(() async {
+    final bytes = await Pasteboard.image;
+    if (bytes == null || bytes.isEmpty) {
+      throw StateError('empty clipboard');
+    }
+    return bytes;
+  });
+
+  /// Een vrije streek op de tekentablet: komt terug als `data:`-URI en gaat
+  /// als png-bytes door de gewone inname.
+  Future<void> _draw() async {
+    final uri = await SignatureDrawDialog.show(context);
+    if (uri == null || !mounted) return;
+    final comma = uri.indexOf(',');
+    if (comma < 0) return;
+    final bytes = base64Decode(uri.substring(comma + 1));
+    await _addReader(() async => bytes);
   }
 
   @override
@@ -199,13 +234,46 @@ class _FormImageAnswerState extends State<FormImageAnswer> {
               ),
             ),
           if (widget.onAddImages != null)
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: TextButton.icon(
-                icon: const Icon(Icons.add_photo_alternate_outlined, size: 18),
-                label: Text(l10n.d('Foto toevoegen')),
-                onPressed: _add,
-              ),
+            Wrap(
+              spacing: 4,
+              children: [
+                TextButton.icon(
+                  icon: const Icon(
+                    Icons.add_photo_alternate_outlined,
+                    size: 18,
+                  ),
+                  label: Text(l10n.d('Foto toevoegen')),
+                  onPressed: _add,
+                ),
+                if (widget.onAddImages!.read != null) ...[
+                  TextButton.icon(
+                    icon: const Icon(Icons.content_paste, size: 18),
+                    label: Text(l10n.d('Plakken')),
+                    onPressed: _paste,
+                  ),
+                  TextButton.icon(
+                    icon: const Icon(Icons.draw_outlined, size: 18),
+                    label: Text(l10n.d('Tekenen')),
+                    onPressed: _draw,
+                  ),
+                  if (widget.onAddImages!.presets.isNotEmpty)
+                    PopupMenuButton<FormImagePreset>(
+                      itemBuilder: (context) => [
+                        for (final preset in widget.onAddImages!.presets)
+                          PopupMenuItem(
+                            value: preset,
+                            child: Text(preset.label),
+                          ),
+                      ],
+                      onSelected: (preset) => _addReader(preset.read),
+                      child: TextButton.icon(
+                        icon: const Icon(Icons.palette_outlined, size: 18),
+                        label: Text(l10n.d('Uit een stijl')),
+                        onPressed: null,
+                      ),
+                    ),
+                ],
+              ],
             )
           else
             Text(

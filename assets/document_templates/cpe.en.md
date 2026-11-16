@@ -13,6 +13,7 @@ This is to certify that the participant below attended the program listed.
 
 <!-- field id=logo type=image count=0..1 -->
 **Training provider logo (optional)**
+> Choose the logo from a style profile, or add your own file.
 <!-- answer -->
 <!-- /field id=logo -->
 
