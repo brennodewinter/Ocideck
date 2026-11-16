@@ -852,6 +852,18 @@ Aanvullende gedragsklassen:
 Bij het lezen herkent en verwijdert OciDeck de type- en gedragsklassen; wat
 overblijft wordt bewaard als de eigen `cssClass` van de slide.
 
+### Bullets stapsgewijs onthullen
+
+Het optionele `_class`-token `bullet-steps` schakelt presentatiestappen in voor
+gewone bulletslides en `split`-slides met een afbeelding en lijstinhoud.
+Hiervoor worden het bestaande `Slide.calloutReveal` / `BulletRevealMode`-model
+en het bijbehorende samenwerkingsveld gebruikt. Zonder callouts is geen anker
+of frontmatterblok nodig. Bestaande callout-frontmatter blijft leesbaar en heeft
+voorrang wanneer die aanwezig is. Verwijder het token om weer alles tegelijk te tonen.
+Een hoofdpunt met zijn ingesprongen subpunten vormt één stap; een tussenkop
+verschijnt samen met het volgende punt. De instelling verandert niets aan de
+paginanavigatie van vrije tekst. Statische exports bevatten altijd alle punten.
+
 ### 4.1 Standaard visuele Marp-directives
 
 De gestructureerde renderer herkent `![bg fit]` en `![bg contain]` als

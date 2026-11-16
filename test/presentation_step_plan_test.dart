@@ -86,16 +86,19 @@ void main() {
       expect(plan, isA<NoStepPlan>());
     });
 
-    test('NoStepPlan for bulletsImage with steps but no callouts', () {
-      final slide = testSlide(
-        type: SlideType.bulletsImage,
-        bullets: ['one', 'two'],
-        calloutReveal: BulletRevealMode.steps,
-        callouts: [],
-      );
-      final plan = PresentationStepPlan.forSlide(slide);
-      expect(plan, isA<NoStepPlan>());
-    });
+    test(
+      'BulletRevealStepPlan for bulletsImage with steps but no callouts',
+      () {
+        final slide = testSlide(
+          type: SlideType.bulletsImage,
+          bullets: ['one', 'two'],
+          calloutReveal: BulletRevealMode.steps,
+          callouts: [],
+        );
+        final plan = PresentationStepPlan.forSlide(slide);
+        expect(plan, isA<BulletRevealStepPlan>());
+      },
+    );
 
     test('CalloutRevealStepPlan for bulletsImage with steps and callouts', () {
       final slide = testSlide(

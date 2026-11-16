@@ -862,6 +862,15 @@ reorder. The list style picker switches the whole list between plain **bullets**
 **rich text** (a free-Markdown body). Plain bullets can use a dot or a cat-paw
 marker.
 
+For **bullets** and **bullets + image**, enable **Stap-voor-stap** (step by
+step) in the slide editor to reveal one main point per forward click or keypress.
+The slide starts with its title and any fixed image; subpoints appear with their
+main point. Back hides the last revealed point, and forward leaves the slide
+only after all points are visible. Hidden points keep their space, so the layout
+stays steady. The audience window follows the same steps. The editor and static
+exports show all points; rich-text slides keep their existing page navigation.
+The setting is saved with the slide. Older decks keep showing everything at once.
+
 **A rich-text body that does not fit runs on to a next page.** The text is first
 scaled to fill the slide; only when it would have to shrink past the readable
 floor is it broken into pages. All pages share one font size — the size of the

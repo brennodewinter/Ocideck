@@ -533,6 +533,9 @@ extension _MarkdownParse on MarkdownService {
     return Slide(
       id: _uuid.v4(),
       type: type,
+      calloutReveal: classTokens.contains('bullet-steps')
+          ? BulletRevealMode.steps
+          : BulletRevealMode.all,
       title: body.h1,
       subtitle: type == SlideType.section ? body.paragraph : body.h2,
       bullets: bullets,

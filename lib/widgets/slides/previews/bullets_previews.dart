@@ -118,6 +118,7 @@ class _BulletsPreview extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
   final int richTextPage;
+  final int? revealedBulletCount;
 
   /// First number for a numbered list (continues a chain across slides).
   final int numberStart;
@@ -136,6 +137,7 @@ class _BulletsPreview extends StatelessWidget {
     required this.font,
     required this.profile,
     this.richTextPage = 0,
+    this.revealedBulletCount,
     this.numberStart = 1,
     this.fitScaleOverride,
     this.splitRunPosition,
@@ -174,9 +176,7 @@ class _BulletsPreview extends StatelessWidget {
     final bulletSize = w * 0.026;
     final spacing = w * 0.07 * 0.5;
     final bulletGap = w * 0.006;
-    final bullets = slide.bullets
-        .where((b) => b.trimLeft().isNotEmpty)
-        .toList();
+    final bullets = _nonEmptyBullets(slide);
     final hasTitle = slide.title.isNotEmpty;
     final subtitle = slide.subtitle;
     final hasSubtitle = subtitle.isNotEmpty;
@@ -288,6 +288,7 @@ class _BulletsPreview extends StatelessWidget {
             Expanded(
               child: _BulletListColumn(
                 bullets: bullets,
+                revealedBulletCount: revealedBulletCount,
                 listStyle: slide.listStyle,
                 marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
                 font: font,

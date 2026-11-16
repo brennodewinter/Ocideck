@@ -527,11 +527,15 @@ void main() {
     await tester.pump();
 
     // "Van computer…" runs the file-picker path.
+    await tester.ensureVisible(find.text('Van computer…'));
+    await tester.pump();
     await tester.tap(find.text('Van computer…'));
     await tester.pumpAndSettle();
     expect(updated.imagePath, 'gekozen.png');
 
     // The paste icon runs the clipboard-image path.
+    await tester.ensureVisible(find.byIcon(Icons.content_paste));
+    await tester.pump();
     await tester.tap(find.byIcon(Icons.content_paste));
     await tester.pumpAndSettle();
     expect(updated.imagePath, 'geplakt.png');

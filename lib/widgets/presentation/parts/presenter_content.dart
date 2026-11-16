@@ -189,15 +189,6 @@ extension _PresenterContent on _FullscreenPresenterState {
     return plan.revealedEventCount(_stepIndex);
   }
 
-  /// Hoeveel callout-bullets nu zichtbaar moeten zijn, of null als de slide
-  /// geen callout-reveal-stapmodus heeft (dan toont de slide alles). Stap 0
-  /// toont titel + afbeelding, geen bullets (§7).
-  int? _calloutRevealedBulletCount(Slide slide) {
-    final plan = _planFor(slide);
-    if (plan is! CalloutRevealStepPlan) return null;
-    return plan.revealedBulletCount(_stepIndex);
-  }
-
   /// Hoeveel galerijbeelden nu zichtbaar moeten zijn, of null als de slide
   /// geen stapel-stapmodus heeft (#2838).
   int? _galleryVisibleFor(Slide slide) =>

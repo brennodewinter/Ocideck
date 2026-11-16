@@ -130,8 +130,9 @@ extension _PresenterViews on _FullscreenPresenterState {
                         : null,
                     timelineRevealedCount: _timelineRevealedFor(slide),
                     timelineViewController: _timelineSync.controller,
-                    calloutRevealedBulletCount: _calloutRevealedBulletCount(
+                    calloutRevealedBulletCount: bulletRevealedCountForSlide(
                       slide,
+                      _stepIndex,
                     ),
                     galleryVisibleCount: _galleryVisibleFor(slide),
                     tlp: widget.tlp,
@@ -231,8 +232,13 @@ extension _PresenterViews on _FullscreenPresenterState {
     if (_blank != _Blank.none) return _blankFill();
 
     return AudienceSurface(
-      onPrev: !_timedManualAdvanceBlocked(this) && _index > 0 ? _prev : null,
-      onNext: !_timedManualAdvanceBlocked(this) && _index < total - 1
+      onPrev:
+          !_timedManualAdvanceBlocked(this) && (_index > 0 || _stepIndex > 0)
+          ? _prev
+          : null,
+      onNext:
+          !_timedManualAdvanceBlocked(this) &&
+              (_index < total - 1 || _planHasMoreSteps)
           ? _next
           : null,
       onExit: _exit,

@@ -225,7 +225,7 @@ void main() {
     );
 
     expect(find.text('Voortgangsgrafiek tonen'), findsOneWidget);
-    await tester.tap(find.byType(Switch));
+    await tester.tap(find.text('Voortgangsgrafiek tonen'));
     await tester.pump();
     expect(updated.showChecklistProgress, isTrue);
   });

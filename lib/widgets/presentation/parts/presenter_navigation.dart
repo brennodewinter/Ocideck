@@ -48,6 +48,9 @@ String? stepAnnouncement(
     final n = plan.revealedImageCount(step);
     return '${l10n.d('Afbeelding')} $n/${plan.imageCount}';
   }
+  if (plan is BulletRevealStepPlan) {
+    return '${l10n.d('Punt')} ${step.clamp(0, plan.remainingSteps)}/${plan.remainingSteps}';
+  }
   if (plan is! CalloutRevealStepPlan) return null;
   final position =
       '${l10n.d('Punt')} ${plan.revealedBulletCount(step)}/${plan.bullets.length}';

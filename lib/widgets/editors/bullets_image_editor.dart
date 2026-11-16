@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/slide_format.dart';
@@ -11,7 +12,7 @@ import '_editor_field.dart';
 import 'ai_condense_button.dart';
 import 'bullet_editor_items.dart';
 import 'bullet_marker_selector.dart';
-import 'list_style_selector.dart';
+import 'bullet_reveal_selector.dart';
 import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
 import 'editor_text_controller.dart';
@@ -85,6 +86,11 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     );
     _richText.addTextListener(_emit);
     _bullets = BulletSet(widget.slide.bullets, _emit);
+  }
+
+  void _setListStyle(ListStyle value) {
+    setState(() => _listStyle = value);
+    _emit();
   }
 
   void _emit() {
@@ -189,12 +195,11 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
         const SizedBox(height: 16),
-        ListStyleSelector(
-          value: _listStyle,
-          onChanged: (value) {
-            setState(() => _listStyle = value);
-            _emit();
-          },
+        BulletRevealSelector(
+          slide: widget.slide,
+          onUpdate: widget.onUpdate,
+          listStyle: _listStyle,
+          onListStyleChanged: _setListStyle,
         ),
         if (_listStyle == ListStyle.bullets) ...[
           const SizedBox(height: 12),

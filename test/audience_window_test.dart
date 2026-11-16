@@ -5,6 +5,7 @@ import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/improvement_y01.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -105,6 +106,52 @@ void _mockBridge(WidgetTester tester) {
 }
 
 void main() {
+  for (final type in [SlideType.bullets, SlideType.bulletsImage]) {
+    testWidgets('publiek volgt bulletstappen en terugstappen: $type', (
+      tester,
+    ) async {
+      _mockBridge(tester);
+      final markdown = MarkdownService().generateDeck(
+        Deck(
+          title: 'Stappen',
+          slides: [
+            Slide.create(type).copyWith(
+              title: 'Onderwerpen',
+              bullets: ['Eerste punt', '\tSubpunt', 'Tweede punt'],
+              calloutReveal: BulletRevealMode.steps,
+            ),
+          ],
+        ),
+      );
+      await _pumpAudience(tester, {'markdown': markdown, 'index': 0});
+      await tester.pumpAndSettle();
+      expect(find.text('Eerste punt').hitTestable(), findsNothing);
+      await _fromPresenter(tester, 'update', {
+        'index': 0,
+        'stepIndex': 1,
+        'seq': 1,
+      });
+      await tester.pump();
+      expect(find.text('Eerste punt').hitTestable(), findsOneWidget);
+      expect(find.text('Subpunt').hitTestable(), findsOneWidget);
+      expect(find.text('Tweede punt').hitTestable(), findsNothing);
+      await _fromPresenter(tester, 'update', {
+        'index': 0,
+        'stepIndex': 2,
+        'seq': 2,
+      });
+      await tester.pump();
+      expect(find.text('Tweede punt').hitTestable(), findsOneWidget);
+      await _fromPresenter(tester, 'update', {
+        'index': 0,
+        'stepIndex': 0,
+        'seq': 3,
+      });
+      await tester.pump();
+      expect(find.text('Eerste punt').hitTestable(), findsNothing);
+    });
+  }
+
   testWidgets('remote image base survives a live deck update', (tester) async {
     _mockBridge(tester);
     const base = 'https://example.test/slides/deck.md';

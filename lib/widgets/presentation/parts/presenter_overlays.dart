@@ -435,7 +435,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           icon: Icons.chevron_left,
           onTap:
               !_timedManualAdvanceBlocked(this) &&
-                  (_index > 0 || _richTextPage > 0)
+                  (_index > 0 || _richTextPage > 0 || _stepIndex > 0)
               ? _prev
               : null,
         ),
@@ -444,6 +444,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           onTap:
               !_timedManualAdvanceBlocked(this) &&
                   (_index < total - 1 ||
+                      _planHasMoreSteps ||
                       (hasRichTextPages && _richTextPage < richTextPages - 1))
               ? _next
               : null,

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
@@ -579,9 +580,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// Callout bullet reveal count, mirroring the presenter; null when the slide
   /// isn't in callout-reveal step mode.
   int? _calloutRevealedBulletCount(Slide slide) {
-    final plan = PresentationStepPlan.forSlide(slide);
-    if (plan is! CalloutRevealStepPlan) return null;
-    return plan.revealedBulletCount(_stepIndex);
+    return bulletRevealedCountForSlide(slide, _stepIndex);
   }
 
   /// Galerij-zichtbaar aantal in stapel-stapmodus (#2838), gedeeld met de

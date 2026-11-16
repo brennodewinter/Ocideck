@@ -24,6 +24,7 @@ bool isOcideckWrittenClassToken(String token) =>
     token == 'image-title-above' ||
     token == 'table-editable' ||
     token == 'table-overdue' ||
+    token == 'bullet-steps' ||
     isTimelineOptionToken(token) ||
     isMenuOptionToken(token) ||
     isGalleryOptionToken(token);
@@ -523,4 +524,52 @@ String _decodeImageCaption(String line) {
         .replaceFirst('<div class="image-caption">', '')
         .replaceFirst('</div>', ''),
   ).trim();
+}
+
+/// Eén class-token voor de opgeslagen bulletkeuze, ook zonder callouts/anker.
+List<String> bulletRevealClassTokens(Slide slide) =>
+    (slide.type == SlideType.bullets || slide.type == SlideType.bulletsImage) &&
+        slide.calloutReveal == BulletRevealMode.steps
+    ? const ['bullet-steps']
+    : const [];
+
+/// De opgeslagen class-tokens van een dia, los van het schrijven van de body.
+List<String> slideClassTokens(Slide slide, ThemeProfile? themeProfile) {
+  final cssClass = slide.cssClass.isNotEmpty
+      ? slide.cssClass
+      : slide.type.marpClass;
+  final hasLogo = themeProfile?.logoPath?.isNotEmpty == true;
+  return [
+    if (cssClass.isNotEmpty) cssClass,
+    // Reserve logo space only when the logo is actually shown on this slide.
+    if (hasLogo && slide.showLogo) 'logo-safe',
+    // Mark slides that opt out of the logo so the theme can hide it.
+    if (hasLogo && !slide.showLogo) 'no-logo',
+    // Mark slides that opt out of the footer. Older presentations lack this
+    // token and therefore keep the existing default: footer shown.
+    if (!slide.showFooter) 'no-footer',
+    // Image slide with the title above the image instead of overlaid on it.
+    if (slide.type == SlideType.image && slide.imageTitleAbove)
+      'image-title-above',
+    // Table slides that may be edited live during a presentation. Absent by
+    // default, so tables stay read-only unless the author opts in.
+    if (slide.type == SlideType.table && slide.tableEditable) 'table-editable',
+    // Table slides that mark expired ISO dates. Absent by default, so an
+    // existing table never changes appearance.
+    if (slide.type == SlideType.table && slide.tableMarkOverdue)
+      'table-overdue',
+    // Timeline layout/animation options ride along as extra class tokens so
+    // they round-trip without a JSON block (the base `timeline` token comes
+    // from marpClass above).
+    if (slide.type == SlideType.timeline)
+      ...timelineClassTokens(slide.timelineLayout, slide.timelineReveal),
+    // Keuze-menu-indeling (#1162) rijdt op dezelfde manier mee; `grid` is de
+    // standaard en schrijft niets, zodat bestaande menudia's niet wijzigen.
+    if (slide.type == SlideType.menu) ...menuClassTokens(slide.menuLayout),
+    // Afbeeldingsgroep (#2838): `grid` is de stille standaard; alleen de
+    // stapel draagt een token, zodat de .md compact blijft.
+    if (slide.type == SlideType.imageGallery)
+      ...galleryClassTokens(slide.galleryLayout),
+    ...bulletRevealClassTokens(slide),
+  ];
 }

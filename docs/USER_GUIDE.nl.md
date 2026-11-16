@@ -903,6 +903,16 @@ herordenen. De lijststijlkiezer schakelt de hele lijst tussen gewone **opsomming
 **rijke tekst** (een vrije-Markdown-tekst). Gewone opsommingstekens kunnen een stip of een kattenpoot-
 markering gebruiken.
 
+Zet bij **Alleen Bullets** of **Bullets + Afbeelding** de schakelaar
+**Stap-voor-stap** aan om tijdens het presenteren één hoofdpunt per klik of
+toetsaanslag te tonen. Eerst zie je de titel en eventuele vaste afbeelding;
+subpunten verschijnen samen met hun hoofdpunt. Terug verbergt de laatste stap.
+Pas na het laatste punt gaat vooruit naar de volgende slide. Verborgen punten
+houden hun ruimte, zodat de opmaak niet verspringt. Het publieksscherm volgt
+dezelfde stappen. De editor en statische exports tonen alle punten; vrije tekst
+behoudt de bestaande paginanavigatie. De keuze wordt bij de slide opgeslagen.
+Bestaande presentaties blijven standaard alles tegelijk tonen.
+
 **Een rijke-tekstbody die niet past loopt door naar een volgende pagina.** De tekst wordt eerst
 geschaald om de slide te vullen; pas wanneer hij verder zou moeten krimpen dan de leesbare
 ondergrens wordt hij over pagina's verdeeld. Alle pagina's delen één lettergrootte — de grootte van de

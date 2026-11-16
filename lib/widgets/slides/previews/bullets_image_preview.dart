@@ -84,13 +84,11 @@ class _BulletsImagePreview extends StatelessWidget {
     final titleSize = w * 0.042;
     final spacing = verticalPad * 0.32;
     final bulletGap = w * 0.005;
-    final allBullets = slide.bullets
-        .where((b) => b.trimLeft().isNotEmpty)
-        .toList();
+    final allBullets = _nonEmptyBullets(slide);
     // Callout-reveal stapmodus (§7): toon alleen de eerste N bullets. Null =
     // alles tonen (statische export, editor, niet-stappende presentatie).
     final revealCount = calloutRevealedBulletCount;
-    final bullets = revealCount != null
+    final bullets = revealCount != null && slide.callouts.isNotEmpty
         ? allBullets.take(revealCount.clamp(0, allBullets.length)).toList()
         : allBullets;
     // Welke callout-references zichtbaar zijn: de references van de zichtbare
@@ -444,15 +442,19 @@ class _BulletsImagePreview extends StatelessWidget {
           ...bullets.asMap().entries.map((entry) {
             final b = entry.value;
             if (isGroupHeading(b)) {
-              return _GroupHeadingRow(
-                label: groupHeadingText(b),
-                fontSize: bulletSize * scale,
-                bulletSize: bulletSize,
-                bulletGap: bulletGap,
-                scale: scale,
-                isFirst: entry.key == 0,
-                font: font,
-                profile: profile,
+              return _revealBullet(
+                entry.key,
+                slide.callouts.isEmpty ? calloutRevealedBulletCount : null,
+                _GroupHeadingRow(
+                  label: groupHeadingText(b),
+                  fontSize: bulletSize * scale,
+                  bulletSize: bulletSize,
+                  bulletGap: bulletGap,
+                  scale: scale,
+                  isFirst: entry.key == 0,
+                  font: font,
+                  profile: profile,
+                ),
               );
             }
             int level = 0;
@@ -466,24 +468,28 @@ class _BulletsImagePreview extends StatelessWidget {
                 slide.listStyle == ListStyle.checklist &&
                 checklistItemChecked(b);
             final fontSize = bulletSize * bulletLevelScale(level) * scale;
-            return _describedByCallout(
-              b,
-              _ChecklistBulletRow(
-                bullets: bullets,
-                itemIndex: entry.key,
-                column: 0,
-                listStyle: slide.listStyle,
-                marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
-                checked: checked,
-                text: text,
-                level: level,
-                fontSize: fontSize,
-                bulletSize: bulletSize,
-                bulletGap: bulletGap,
-                scale: scale,
-                font: font,
-                profile: profile,
-                startNumber: numberStart,
+            return _revealBullet(
+              entry.key,
+              slide.callouts.isEmpty ? calloutRevealedBulletCount : null,
+              _describedByCallout(
+                b,
+                _ChecklistBulletRow(
+                  bullets: bullets,
+                  itemIndex: entry.key,
+                  column: 0,
+                  listStyle: slide.listStyle,
+                  marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
+                  checked: checked,
+                  text: text,
+                  level: level,
+                  fontSize: fontSize,
+                  bulletSize: bulletSize,
+                  bulletGap: bulletGap,
+                  scale: scale,
+                  font: font,
+                  profile: profile,
+                  startNumber: numberStart,
+                ),
               ),
             );
           }),
@@ -503,6 +509,7 @@ class _BulletListColumn extends StatelessWidget {
   final double bulletGap;
   final double scale;
   final int column;
+  final int? revealedBulletCount;
 
   /// First number for a numbered list (continues a chain across slides).
   final int numberStart;
@@ -517,6 +524,7 @@ class _BulletListColumn extends StatelessWidget {
     required this.bulletGap,
     required this.scale,
     this.column = 0,
+    this.revealedBulletCount,
     this.numberStart = 1,
   });
 
@@ -529,15 +537,19 @@ class _BulletListColumn extends StatelessWidget {
         ...bullets.asMap().entries.map((entry) {
           final b = entry.value;
           if (isGroupHeading(b)) {
-            return _GroupHeadingRow(
-              label: groupHeadingText(b),
-              fontSize: bulletSize * scale,
-              bulletSize: bulletSize,
-              bulletGap: bulletGap,
-              scale: scale,
-              isFirst: entry.key == 0,
-              font: font,
-              profile: profile,
+            return _revealBullet(
+              entry.key,
+              revealedBulletCount,
+              _GroupHeadingRow(
+                label: groupHeadingText(b),
+                fontSize: bulletSize * scale,
+                bulletSize: bulletSize,
+                bulletGap: bulletGap,
+                scale: scale,
+                isFirst: entry.key == 0,
+                font: font,
+                profile: profile,
+              ),
             );
           }
           int level = 0;
@@ -550,22 +562,26 @@ class _BulletListColumn extends StatelessWidget {
           final checked =
               listStyle == ListStyle.checklist && checklistItemChecked(b);
           final fontSize = bulletSize * bulletLevelScale(level) * scale;
-          return _ChecklistBulletRow(
-            bullets: bullets,
-            itemIndex: entry.key,
-            column: column,
-            listStyle: listStyle,
-            marker: marker,
-            checked: checked,
-            text: text,
-            level: level,
-            fontSize: fontSize,
-            bulletSize: bulletSize,
-            bulletGap: bulletGap,
-            scale: scale,
-            font: font,
-            profile: profile,
-            startNumber: numberStart,
+          return _revealBullet(
+            entry.key,
+            revealedBulletCount,
+            _ChecklistBulletRow(
+              bullets: bullets,
+              itemIndex: entry.key,
+              column: column,
+              listStyle: listStyle,
+              marker: marker,
+              checked: checked,
+              text: text,
+              level: level,
+              fontSize: fontSize,
+              bulletSize: bulletSize,
+              bulletGap: bulletGap,
+              scale: scale,
+              font: font,
+              profile: profile,
+              startNumber: numberStart,
+            ),
           );
         }),
       ],
@@ -610,3 +626,18 @@ Widget _panelImage(
     semanticLabel: semanticLabel,
   );
 }
+
+/// Verborgen punten houden hun plaats, maar zijn niet klikbaar of leesbaar
+/// voor hulptechnologie. De volledige lijst bepaalt daardoor altijd de schaal.
+Widget _revealBullet(int index, int? count, Widget child) => count == null
+    ? child
+    : Visibility(
+        visible: index < count,
+        maintainState: true,
+        maintainAnimation: true,
+        maintainSize: true,
+        child: child,
+      );
+
+List<String> _nonEmptyBullets(Slide slide) =>
+    slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();

@@ -886,6 +886,20 @@ Additional behavior classes:
 When reading, OciDeck recognizes and removes the type and behavior classes; what
 remains is preserved as the slide's custom `cssClass`.
 
+
+### Bullet reveal steps
+
+The optional `_class` token `bullet-steps` enables presentation steps on
+ordinary bullet slides and `split` (bullets with image) slides with list content. The existing
+`Slide.calloutReveal` / `BulletRevealMode` model and collaboration field are
+shared with image-callout reveal. Without callouts no anchor or front-matter
+block is needed. Existing callout front matter remains readable and takes
+precedence when present. Removing the token restores the default, all at once.
+Each main point and its indented subpoints form one step; group headings appear
+with the following point. This setting has no effect on rich-text page navigation.
+Static exports include every point regardless of this token.
+
+
 ### 4.1 Standard Marp visual directives
 
 The structured renderer recognises `![bg fit]` and `![bg contain]` as contain

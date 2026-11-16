@@ -16,6 +16,7 @@ import 'package:video_player/video_player.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_win_floating/webview_plugin.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../../services/video_embed_host.dart';
 import '../../platform/desktop_video.dart';
 import 'mermaid_diagram.dart';
@@ -813,6 +814,7 @@ class SlidePreviewWidget extends StatelessWidget {
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
           splitRunPosition: splitRunPosition,
+          revealedBulletCount: calloutRevealedBulletCount,
         );
       case SlideType.twoBullets:
         return _TwoBulletsPreview(

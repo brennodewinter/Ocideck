@@ -52,6 +52,12 @@ sealed class PresentationStepPlan {
         slide.callouts.isNotEmpty) {
       return CalloutRevealStepPlan.forSlide(slide);
     }
+    if ((slide.type == SlideType.bullets ||
+            slide.type == SlideType.bulletsImage) &&
+        slide.listStyle != ListStyle.richText &&
+        slide.calloutReveal == BulletRevealMode.steps) {
+      return BulletRevealStepPlan(slide.bullets);
+    }
     // Afbeeldingsstapel (#2838): stap 0 toont het eerste beeld, elke klik laat
     // er één op neervallen. Alleen de stapel-lay-out stapt; het raster toont
     // alles meteen.
@@ -239,3 +245,38 @@ class CalloutRevealStepPlan extends PresentationStepPlan {
     return true;
   }
 }
+
+/// Eén hoofdpunt met zijn subpunten per stap. Lege regels tellen niet mee;
+/// een groepskop verschijnt samen met het eerstvolgende punt.
+class BulletRevealStepPlan extends PresentationStepPlan {
+  BulletRevealStepPlan(List<String> source) {
+    final bullets = source.where((b) => b.trim().isNotEmpty).toList();
+    var hasPoint = false;
+    for (var i = 0; i < bullets.length; i++) {
+      if (isGroupHeading(bullets[i])) {
+        if (hasPoint) {
+          _ends.add(i);
+          hasPoint = false;
+        }
+      } else if (!bullets[i].startsWith('\t') && hasPoint) {
+        _ends.add(i);
+      }
+      if (!isGroupHeading(bullets[i])) hasPoint = true;
+    }
+    if (bullets.isNotEmpty) _ends.add(bullets.length);
+  }
+
+  final _ends = <int>[];
+  @override
+  int get remainingSteps => _ends.length;
+  int revealedBulletCount(int step) =>
+      step <= 0 || _ends.isEmpty ? 0 : _ends[step.clamp(1, _ends.length) - 1];
+}
+
+/// Dezelfde onthullingsgrens voor presenter en publiek, ook bij callouts.
+int? bulletRevealedCountForSlide(Slide slide, int step) =>
+    switch (PresentationStepPlan.forSlide(slide)) {
+      BulletRevealStepPlan p => p.revealedBulletCount(step),
+      CalloutRevealStepPlan p => p.revealedBulletCount(step),
+      _ => null,
+    };

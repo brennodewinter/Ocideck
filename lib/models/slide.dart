@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+
 import '../services/improvement/canvas_spec.dart';
 import '../services/improvement/flow_spec.dart';
 import '../services/improvement/flow_slide.dart';
@@ -454,6 +455,8 @@ class Slide {
 
   /// When the bullet and its marks appear during a presentation (§7). Absent =
   /// [BulletRevealMode.all].
+  // Ook gewone bullets gebruiken dit bestaande collab-veld. Zonder callouts
+  // reist de instelling mee als het `_class`-token `bullet-steps`.
   final BulletRevealMode calloutReveal;
 
   const Slide({
