@@ -237,7 +237,8 @@ class DocumentMarkdownView extends StatelessWidget {
   /// first heading whose [headingSlug] equals [slug], or `-1` when this document
   /// has no such heading. The reader uses it to point [anchorBlockIndex] at the
   /// section an `#anchor` link names. First match wins, mirroring how the anchor
-  /// key attaches to the first heading with a slug.
+  /// key attaches to the first heading with a slug. [occurrence] selects a later
+  /// heading with that same slug for an exact Outline selection.
   static int headingBlockIndex(
     String markdown,
     String slug, {

@@ -55,7 +55,13 @@ class MarkdownCaretMap {
       final start = sourceAt;
       sourceAt += line.length + 1; // +1 voor het regeleinde
 
-      if (fence != null && !fence.closes(line.trim())) {
+      final closesFence =
+          fence != null &&
+          (atomicFence
+              ? line.trim() == '```' &&
+                    line.length - line.trimLeft().length <= 3
+              : fence.closes(line.trim()));
+      if (fence != null && !closesFence) {
         rows.add(
           atomicFence
               ? _Row.hidden(start, line.length, visualAt)

@@ -141,6 +141,7 @@ void main() {
       '```mermaid\ngraph TD; A-->B;\n```\n\n',
       '```chart\ntype: bar\nlabels: [A]\nvalues: [1]\n```\n\n',
       '```mermaid extra\nletterlijk\n```\n\n',
+      '```mermaid\ngraph TD; A-->B;\n````\nB-->C;\n```\n\n',
       '~~~~mermaid\nletterlijk\n~~~~\n\n',
       '~~~text\na **letterlijk**  \n~~~\n\n',
       '````text\na\n```\nb\n````\n\n',
