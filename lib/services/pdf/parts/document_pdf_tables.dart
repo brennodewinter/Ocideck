@@ -12,7 +12,7 @@ part of '../document_pdf_widgets.dart';
 /// `part` deelt de bibliotheekscope en ziet die privéleden dus gewoon,
 /// terwijl het tekenbestand zelf onder zijn regelplafond blijft.
 extension DocumentPdfTables on DocumentPdfWidgets {
-  pw.Widget _table(PdfTableBlock block) {
+  pw.Widget _table(PdfTableBlock block, {int? rowLimit}) {
     // Een rij die hoger is dan een blad kan `pw.Table` nergens kwijt: hij past
     // op geen enkel blad, dus `MultiPage` blijft bladen openen en de export
     // loopt vast (#1798). Dan gaat de inhoud in een vorm die wél kan breken.
@@ -32,7 +32,7 @@ extension DocumentPdfTables on DocumentPdfWidgets {
       fontSize: style.bodyFontSize,
       cellPadding: style.tableCellPadding,
     );
-    for (var index = 0; index < block.rows.length; index++) {
+    for (var index = 0; index < (rowLimit ?? block.rows.length); index++) {
       final isHeader = block.hasHeader && index == 0;
       final zebra = !isHeader && index.isEven ? style.tableZebra : null;
       rows.add(
@@ -68,11 +68,7 @@ extension DocumentPdfTables on DocumentPdfWidgets {
       ),
       children: rows,
     );
-    // Past de hele tabel ruim op een blad, dan houdt hij zichzelf bij elkaar in
-    // plaats van zijn kopregel alleen onderaan achter te laten (#1790). Boven
-    // die grens blijft hij verdeelbaar — het vermogen om te breken is voor een
-    // lange tabel belangrijker dan een nette kop.
-    return _tableFitsOnAPage(block) ? pw.Inseparable(child: table) : table;
+    return table;
   }
 
   /// Een tabel met een rij die hoger is dan een blad, gezet als losse blokken.
@@ -139,43 +135,6 @@ extension DocumentPdfTables on DocumentPdfWidgets {
       out.add(pw.SizedBox(height: style.bodyFontSize * 0.6));
     }
     return out;
-  }
-
-  /// Of een tabel klein genoeg is om als geheel op één blad te passen.
-  ///
-  /// `package:pdf` plaatst rijen tot er één niet meer past. Past alléén de
-  /// herhaalde kopregel nog, dan tekent hij die onderaan het blad en begint de
-  /// inhoud op het volgende — met de kop daar opnieuw. De lezer ziet dan een
-  /// lege gele balk die niets aankondigt (#1790).
-  ///
-  /// `Table` kent geen instelling om dat te voorkomen en `MultiPage` kan een
-  /// spannende widget niet vragen om zich te verplaatsen. Wat hier wél kan is
-  /// een tabel die tóch op één blad past er als geheel op houden. Dat neemt de
-  /// verweesde kop weg voor de korte tabellen die een rapport vult; een tabel
-  /// die over meerdere bladen loopt houdt het euvel, en dat staat als
-  /// restpunt bij het issue.
-  ///
-  /// De grens is dezelfde ruime tekengrens als bij [_bindsToHeading], om
-  /// dezelfde reden: een niet-brekende widget die hoger is dan een blad kan
-  /// `MultiPage` nergens kwijt, en dat is geen schoonheidsfout maar een
-  /// gebroken export. Op een klein vel bindt deze laag daarom niets.
-  bool _tableFitsOnAPage(PdfTableBlock block) {
-    if (maxImageHeight < style.bodyFontSize * 20) return false;
-    // Twee maten, want een tabel kan op twee manieren te hoog worden. Honderd
-    // rijen "rij 3 | 3" tellen nauwelijks tekens en zijn tóch meters hoog;
-    // drie rijen met een alinea per cel tellen veel tekens en zijn dat ook.
-    // Alleen op tekens meten liet de eerste variant binden, en dat brak de
-    // bestaande toets op een doorlopende tabel van 120 rijen.
-    final rowHeight = style.bodyFontSize * 1.35 + style.tableCellPadding * 2;
-    if (block.rows.length * rowHeight > maxImageHeight * 0.4) return false;
-    var chars = 0;
-    for (final row in block.rows) {
-      for (final cell in row) {
-        chars += DocumentPdfWidgets.spanTextLength(cell);
-        if (chars > DocumentPdfWidgets.keepTogetherChars) return false;
-      }
-    }
-    return true;
   }
 
   pw.Widget _cell(

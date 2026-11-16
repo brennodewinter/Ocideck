@@ -1818,3 +1818,29 @@ gets no style question either.
   into this branch.
 - Per-level heading colours, heading sizes and the theme's other accents are
   not expressible in a profile and are reported as losses rather than modelled.
+
+
+### PDF: inhoudsopgave en pagina-einden
+
+De PDF-export zet `<!-- toc -->` op een eigen pagina; de tekst daarna begint
+opnieuw op een nieuw blad. Een onmiddellijk voorafgaande kop hoort bij die
+inhoudsopgave. Een handmatige inhoudsopgave wordt ook herkend: een kop met
+rechtstreeks daaronder een lijst van minstens twee interne links naar latere
+koppen, in documentvolgorde. De titel mag in iedere taal zijn. Een gewone
+sectie die alleen ‘Inhoud’ heet krijgt hierdoor geen bijzondere behandeling;
+terugverwijzingen en lijsten met externe links evenmin. Aangrenzende
+pagina-einden worden samengevoegd en een lang overzicht mag doorlopen.
+
+Interne Markdown-fragmenten worden in de PDF aan kopbestemmingen gekoppeld.
+De fragmentconventie volgt de bestaande inhoudsopgave-service: kleine letters,
+ASCII-letters en cijfers, met streepjes voor witruimte en zonder leestekens.
+Herhaalde fragmentnamen krijgen `-1`, `-2`, enzovoort. Een onbekend fragment
+blijft leesbare tekst en wordt geen externe URL of sprong naar een verkeerde kop.
+
+Paginering meet de werkelijk opgemaakte regels en de ruimte na kop- en
+voetband. Een kop blijft bij minstens twee vervolgregels, of bij de volledige
+tabel als kop en tabel op een leeg blad passen. Een lange tabel houdt minstens
+haar kolomkop en eerste gegevensrij bij de sectiekop en herhaalt haar kolomkop
+op vervolgbladen. Gesplitste alinea’s houden minimaal twee regels aan beide
+kanten van een bladovergang. Bij een blad dat te klein is voor zo’n binding
+krijgt voortgang voorrang; expliciete pagina-einden blijven leidend.

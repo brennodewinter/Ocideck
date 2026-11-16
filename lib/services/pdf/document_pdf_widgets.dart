@@ -26,6 +26,9 @@ import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_inline_math.dart';
 import 'document_pdf_orphan_safe_table.dart';
+import 'document_pdf_pagination.dart';
+import 'document_pdf_links.dart';
+import 'document_pdf_words.dart';
 import 'document_pdf_style.dart';
 import 'document_pdf_table_widths.dart';
 import 'document_pdf_timeline.dart';
@@ -74,6 +77,7 @@ class DocumentPdfWidgets {
     this.graphics = const {},
     this.headingPages = const {},
     this.onHeadingLaidOut,
+    this.pageBodyHeight,
   });
 
   final DocumentPdfStyle style;
@@ -121,6 +125,11 @@ class DocumentPdfWidgets {
   /// Zo weet de tweede ronde wat de eerste heeft uitgerekend.
   final void Function(int index, int page)? onHeadingLaidOut;
 
+  /// Usable page height after the actual header and footer have been laid out.
+  final double Function(pw.Context context)? pageBodyHeight;
+
+  late final _headingLinks = pdfHeadingLinks(headings.map((h) => h.title));
+
   int _headingCursor = 0;
 
   /// Zet [blocks] om in de widgets van de doorlopende bladzijdestroom.
@@ -136,42 +145,14 @@ class DocumentPdfWidgets {
         widgets.add(pw.SizedBox(height: style.headingSpaceBefore(block.level)));
       }
       final next = index + 1 < blocks.length ? blocks[index + 1] : null;
-      if (block is PdfHeadingBlock && next != null) {
-        // Bij een lijst reist alleen het eerste punt mee. Een hele lijst binden
-        // is óók een kop die niet alleen achterblijft, maar dan schuift er een
-        // half blad wit voor in de plaats; één punt is genoeg om te laten zien
-        // dat de lijst hier begint.
-        final split = next is PdfListBlock ? _splitFirstItem(next) : null;
-        final bound = split?.first ?? next;
-        if (_bindsToHeading(bound)) {
-          widgets.add(_headingBoundToNext(block, bound, tight: tight));
-          index++;
-          final rest = split?.rest;
-          if (rest != null) {
-            widgets.add(_widget(rest, tight: tight));
-          }
-          final spacingAfterPair = _spaceAfter(next, tight: tight);
-          if (spacingAfterPair > 0) {
-            widgets.add(pw.SizedBox(height: spacingAfterPair));
-          }
-          continue;
-        }
-        // De alinea is te lang om als geheel te binden, maar de kop mag toch
-        // niet als wees onderaan staan. Splits de alinea op woordgrens: het
-        // eerste deel reist met de kop mee, de rest volgt los (#1758).
-        if (bound is PdfParagraphBlock) {
-          final pair = splitParagraphAtWordBoundary(bound, _headingGuardChars);
-          if (pair != null) {
-            widgets.add(_headingBoundToNext(block, pair.first, tight: tight));
-            widgets.add(_widget(pair.rest, tight: true));
-            index++;
-            final rest = split?.rest;
-            if (rest != null) widgets.add(_widget(rest, tight: tight));
-            final sp = _spaceAfter(next, tight: tight);
-            if (sp > 0) widgets.add(pw.SizedBox(height: sp));
-            continue;
-          }
-        }
+      if (!tight &&
+          block is PdfHeadingBlock &&
+          next != null &&
+          next is! PdfPageBreakBlock) {
+        widgets.addAll(_keepBefore(block, next));
+      }
+      if (!tight && block is PdfTableBlock && !_tableNeedsBlocks(block)) {
+        widgets.addAll(_keepBefore(null, block));
       }
       // Alleen een widget die rechtstreeks in de lijst van `MultiPage` staat
       // mag over een bladovergang heen breken; een `Column` plaatst zijn
@@ -183,7 +164,9 @@ class DocumentPdfWidgets {
         widgets.add(_widget(block, tight: tight));
       }
       final spacing = _spaceAfter(block, tight: tight);
-      if (spacing > 0) widgets.add(pw.SizedBox(height: spacing));
+      if (spacing > 0 && index + 1 < blocks.length) {
+        widgets.add(pw.SizedBox(height: spacing));
+      }
     }
     return widgets;
   }
@@ -198,105 +181,81 @@ class DocumentPdfWidgets {
     _ => style.blockSpacing,
   };
 
-  /// Een kop plus het blok erachter, als één geheel dat niet mag breken.
-  pw.Widget _headingBoundToNext(
-    PdfHeadingBlock heading,
-    PdfBlock next, {
-    required bool tight,
-  }) => pw.Inseparable(
-    child: pw.Column(
-      crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-      children: [
-        _heading(heading),
-        pw.SizedBox(height: style.headingSpaceAfter),
-        _widget(next, tight: tight),
-      ],
-    ),
-  );
-
-  /// Of het blok ná een kop met die kop mee de bladzijde over moet.
-  ///
-  /// Een kop die alleen onderaan een blad achterblijft kondigt niets meer aan.
-  /// De HTML-afdruk lost dat op met `break-after: avoid`; `MultiPage` kent zoiets
-  /// niet, dus binden we de kop hier zelf aan wat erop volgt — in een
-  /// [pw.Inseparable] die niet mag breken, zodat het paar in zijn geheel
-  /// opschuift wanneer het onderaan niet meer past.
-  ///
-  /// **Waarom een grens op de lengte.** Een niet-brekend paar dat hóger is dan
-  /// een bladzijde kan `MultiPage` nergens kwijt en dán werpt hij een fout: de
-  /// export zou stukslaan op een lange alinea. De grens hieronder is daarom geen
-  /// schatting van de hoogte maar een ruime afstand tot de afgrond — een A4 op
-  /// 11 punt draagt ruwweg drieduizend tekens, en dit bindt tot een derde
-  /// daarvan.
-  ///
-  /// Op een klein vel (A6 en kleiner) is zelfs dat nog te veel; daar bindt deze
-  /// laag helemaal niet, want een verweesde kop is een schoonheidsfout en een
-  /// gebroken export niet.
-  bool _bindsToHeading(PdfBlock block) {
-    if (maxImageHeight < style.bodyFontSize * 20) return false;
-    return switch (block) {
-      PdfParagraphBlock(:final spans) =>
-        spanTextLength(spans) <= keepTogetherChars,
-      PdfCodeBlock(:final code) => code.length <= keepTogetherChars,
-      PdfVerbatimBlock(:final source) => source.length <= keepTogetherChars,
-      PdfListBlock(:final items) => _listTextLength(items) <= keepTogetherChars,
-      _ => false,
-    };
-  }
-
-  /// Splitst het eerste punt van een lijst af, zodat alleen dát met de kop mee
-  /// hoeft te verhuizen. Geeft `null` terug bij een lijst van één punt — dan
-  /// valt er niets te splitsen.
-  static ({PdfListBlock first, PdfListBlock? rest})? _splitFirstItem(
-    PdfListBlock list,
-  ) {
-    if (list.items.isEmpty) return null;
-    final first = PdfListBlock(
-      [list.items.first],
-      ordered: list.ordered,
-      startNumber: list.startNumber,
-    );
-    if (list.items.length == 1) return (first: first, rest: null);
-    return (
-      first: first,
-      rest: PdfListBlock(
-        list.items.sublist(1),
-        ordered: list.ordered,
-        // Doortellen vanaf waar het eerste punt ophield; anders begint de rest
-        // van een genummerde lijst weer bij één.
-        startNumber: list.startNumber + 1,
+  List<pw.Widget> _keepBefore(PdfHeadingBlock? heading, PdfBlock next) {
+    final pageBreak = PdfMeasuredBreak();
+    return [
+      PdfKeepMeasure(
+        pageBreak: pageBreak,
+        measure: (context, width) {
+          final body = pageBodyHeight?.call(context) ?? maxImageHeight;
+          final constraints = pw.BoxConstraints(maxWidth: width);
+          final title = heading == null
+              ? 0.0
+              : _measureHeading(context, constraints, heading);
+          final gap = heading == null ? 0.0 : style.headingSpaceAfter;
+          final following = _nextHeight(
+            context,
+            constraints,
+            next,
+            body - title - gap,
+          );
+          final required = title + gap + following;
+          return required <= body ? required : 0;
+        },
       ),
-    );
+      pageBreak,
+    ];
   }
 
-  /// De grens waarboven een blok niet meer als geheel aan zijn kop wordt
-  /// gebonden. Ruwweg vijftien regels op A4 — ruim genoeg voor bijna elke
-  /// alinea in een notitie of rapport. Boven deze grens wordt een alinea
-  /// op woordgrens gesplitst: het eerste deel reist met de kop mee in een
-  /// [pw.Inseparable], de rest volgt los. Zo staat een kop nooit als wees
-  /// onderaan een bladzijde (#1758).
-  ///
-  /// Groter binden mag van `MultiPage` best, maar dan schuift er een gat van
-  /// diezelfde hoogte voor de kop in de plaats — en een half leeg blad is
-  /// zichtbaarder dan een verweesde kop.
-  static const keepTogetherChars = 1200;
+  double _measureHeading(
+    pw.Context context,
+    pw.BoxConstraints constraints,
+    PdfHeadingBlock block,
+  ) {
+    final text = _headingText(block);
+    text.layout(context, constraints);
+    return text.box!.height;
+  }
 
-  /// Hoeveel tekens van een lange alinea meereizen met de kop in de
-  /// [pw.Inseparable] — ruwweg drie regels, genoeg om de kop nooit alleen
-  /// te laten staan.
-  static const _headingGuardChars = 200;
-
-  static int spanTextLength(List<PdfSpan> spans) =>
-      spans.fold<int>(0, (sum, span) => sum + span.text.length);
-
-  static int _listTextLength(List<PdfListItem> items) {
-    var total = 0;
-    for (final item in items) {
-      for (final block in item.blocks) {
-        if (block is PdfParagraphBlock) total += spanTextLength(block.spans);
-      }
+  double _nextHeight(
+    pw.Context context,
+    pw.BoxConstraints constraints,
+    PdfBlock block,
+    double available,
+  ) {
+    if (block is PdfParagraphBlock) {
+      return _paragraph(block).firstLinesHeight(context, constraints.maxWidth);
     }
-    return total;
+    if (block is PdfTableBlock && !_tableNeedsBlocks(block)) {
+      final table = _table(block);
+      table.layout(context, constraints);
+      if (table.box!.height <= available) return table.box!.height;
+      final first = _table(
+        block,
+        rowLimit: math.min(block.rows.length, block.hasHeader ? 2 : 1),
+      );
+      first.layout(context, constraints);
+      return first.box!.height;
+    }
+    if (block is PdfListBlock && block.items.isNotEmpty) {
+      final first = _list(
+        PdfListBlock(
+          [block.items.first],
+          ordered: block.ordered,
+          startNumber: block.startNumber,
+        ),
+      );
+      first.layout(context, constraints);
+      return first.box!.height;
+    }
+    if (block is PdfCodeBlock ||
+        block is PdfVerbatimBlock ||
+        block is PdfImageBlock) {
+      final next = _widget(block, tight: false);
+      next.layout(context, constraints);
+      return next.box!.height;
+    }
+    return 0;
   }
 
   pw.Widget _widget(PdfBlock block, {required bool tight}) => switch (block) {
@@ -326,8 +285,17 @@ class DocumentPdfWidgets {
         ? headings[_headingCursor]
         : PdfHeadingEntry(_headingCursor, block.level, block.outlineText);
     _headingCursor++;
+    return pw.Outline(
+      name: entry.anchor,
+      title: entry.title,
+      level: (block.level - 1).clamp(0, 5),
+      child: _recordPage(entry.index, _headingText(block)),
+    );
+  }
+
+  pw.Widget _headingText(PdfHeadingBlock block) {
     final size = style.headingSize(block.level);
-    final text = pw.RichText(
+    return pw.RichText(
       // Een kop die zelf langer is dan een blad hoort ook te kunnen breken; hij
       // zit in geen enkel kader, dus dat mag gewoon.
       overflow: pw.TextOverflow.span,
@@ -349,12 +317,6 @@ class DocumentPdfWidgets {
         children: _spans(block.spans, size: size),
       ),
     );
-    return pw.Outline(
-      name: entry.anchor,
-      title: entry.title,
-      level: (block.level - 1).clamp(0, 5),
-      child: _recordPage(entry.index, text),
-    );
   }
 
   /// Wikkelt een kop zo in dat we tijdens het opmaken zien op welk blad hij
@@ -371,10 +333,17 @@ class DocumentPdfWidgets {
     );
   }
 
-  pw.Widget _paragraph(PdfParagraphBlock block) => pw.RichText(
+  PaginatedPdfText _paragraph(PdfParagraphBlock block) => PaginatedPdfText(
+    pageHeight: pageBodyHeight ?? (_) => maxImageHeight,
     textAlign: pw.TextAlign.left,
-    overflow: pw.TextOverflow.span,
-    text: pw.TextSpan(style: _baseStyle, children: _spans(block.spans)),
+    text: pw.TextSpan(
+      style: _baseStyle,
+      children: pdfApostropheWords(
+        block.spans,
+        render: (span) => _span(span, style.bodyFontSize),
+        style: _baseStyle,
+      ),
+    ),
   );
 
   pw.Widget _timeline(PdfTimelineBlock block) => buildDocumentPdfTimeline(
@@ -799,11 +768,16 @@ class DocumentPdfWidgets {
       );
     }
     final href = span.href;
+    final destination = href != null && href.startsWith('#')
+        ? pdfFragmentDestination(href, _headingLinks)
+        : null;
     return pw.TextSpan(
       text: span.text,
       baseline: span.superscript ? size * 0.34 : 0,
       annotation: href == null || href.isEmpty
           ? null
+          : href.startsWith('#')
+          ? (destination == null ? null : pw.AnnotationLink(destination))
           : pw.AnnotationUrl(href.trim()),
       style: pw.TextStyle(
         // Vaste-breedteletter in álle vier de sneden. Eén `font` is hier niet

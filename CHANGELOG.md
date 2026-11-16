@@ -53,6 +53,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Document-PDF: navigatie en paginering (#2915–#2920).** Interne
+  Markdown-links springen naar hun kop, ook vanuit een handmatige
+  inhoudsopgave. Inhoudsopgaven krijgen een eigen pagina. Koppen blijven
+  bij twee vervolgregels of bij hun passende tabel; gesplitste alinea’s
+  houden minimaal twee regels aan beide kanten van de bladovergang.
+  Woorden zoals *thema’s* blijven bijeen bij een interne apostrof.
+
+
 - **Tekst volgt de selectie in de visuele editor (#2906).** Bij het verlengen
   van een selectie — met het toetsenbord of na een zoeksprong — verdween het
   bewogen selectie-eind buiten beeld: Quill toonde bij een verlengde selectie
