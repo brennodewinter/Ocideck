@@ -101,10 +101,8 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
   /// — zie git_cli_io._spawn voor de kleinkind-klem die dit afdekt.
   static const _drainGrace = Duration(seconds: 2);
 
-  /// Whisper ondersteunt `auto` plus de talen van het model; de lijst is
-  /// bewust niet limitatief geknipt — `languages` meldt alleen dat meertalig
-  /// en auto-detect bestaan, de catalogus bepaalt verder niets over taal.
-  static const _languages = {'auto', 'nl', 'en', 'de', 'fr', 'es'};
+  /// De tabel woont in `local_whisper_engine.dart` — CLI en WASM delen hem.
+  static const languages = whisperSupportedLanguages;
 
   /// De architecturen waarvoor de buildketen `whisper-cli` levert
   /// (§7: gebouwd en getoetst; andere architecturen vallen eerlijk af).
@@ -139,7 +137,7 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
 
   @override
   Future<EngineCapabilities> capabilities() async => EngineCapabilities(
-    languages: _languages,
+    languages: languages,
     timestamps: true,
     diarization: false,
     streaming: false,
@@ -165,6 +163,13 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
     final status = await this.status();
     if (status.support != LocalEngineSupport.ready) {
       throw EngineUnavailable(status.detail);
+    }
+    // whisper-cli heeft geen diarisatievlag; `diarize` stilletjes negeren
+    // zou een sprekerlabels-belofte doen die de uitvoer niet waarmaakt.
+    if (options.diarize) {
+      throw const EngineUnavailable(
+        'diarisatie wordt door deze engine niet ondersteund',
+      );
     }
 
     final wav = File(audio.path);

@@ -89,9 +89,17 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   /// vergadering — en het manifest zegt welke bronstukken ontbraken.
   Map<String, Object?>? _callManifest;
 
-  /// De talen waar de lokale engine voor staat — hetzelfde lijstje als
-  /// zijn `capabilities()`, auto voorop.
-  static const _languages = ['auto', 'nl', 'en', 'de', 'fr', 'es'];
+  /// De talen waar de actieve engine voor staat, uit zijn
+  /// `capabilities()` — `auto` voorop, de rest alfabetisch (#2940).
+  /// `['auto']` als er nog geen melding binnen is: nooit een taal aanbieden
+  /// die de engine niet meldde.
+  List<String> _languages = const ['auto'];
+
+  /// Diarisatie wordt alleen aangeboden als de engine het meldt —
+  /// [EngineCapabilities.diarization]. Geen melding, geen checkbox;
+  /// een niet-bestaande belofte is erger dan een ontbrekende (#2935).
+  bool _diarize = false;
+  bool _diarizationAvailable = false;
 
   @override
   void initState() {
@@ -101,6 +109,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
 
   Future<void> _describe() async {
     final source = _fileSource();
+    // De taalkeuze is capability-gedreven: de engine meldt zijn tabel en de
+    // dialoog toont precies die — geen vaste vijf-talen-lijst meer (#2940).
+    unawaited(_loadLanguages());
     try {
       // Synchroon: het manifest is hooguit enkele honderden bytes en een
       // async lees keert in een widgettest-zone nooit terug. Op web is dit
@@ -116,6 +127,24 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
         });
       }
     }
+  }
+
+  Future<void> _loadLanguages() async {
+    final engine = ref.read(transcriptionEngineProvider);
+    if (engine == null) return;
+    final caps = await engine.capabilities();
+    if (!mounted) return;
+    final sorted = caps.languages.toList()..sort();
+    sorted
+      ..remove('auto')
+      ..insert(0, 'auto');
+    setState(() {
+      if (sorted.isNotEmpty) {
+        _languages = sorted;
+        if (!_languages.contains(_language)) _language = 'auto';
+      }
+      _diarizationAvailable = caps.diarization;
+    });
   }
 
   /// De bestandsbron uit het register — dezelfde instantie die de
@@ -165,6 +194,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
       final profile = ref.read(asrServerProfileProvider);
       final options = TranscriptionOptions(
         language: _language == 'auto' ? null : _language,
+        diarize: _diarize,
         serverConsent: engine.kind == EngineKind.batchServer
             ? ServerConsent(host: profile.host, audioPath: audio.durablePath)
             : null,
@@ -406,6 +436,18 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           _routeBanner(l10n, isServer, host),
           const SizedBox(height: 8),
           _languageRow(l10n),
+          if (_diarizationAvailable)
+            CheckboxListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text(
+                l10n.d('Sprekers onderscheiden'),
+                style: const TextStyle(fontSize: 13),
+              ),
+              value: _diarize,
+              onChanged: (v) => setState(() => _diarize = v ?? false),
+            ),
           if (!kIsWeb) _keepAudioRow(l10n),
         ],
       ],
