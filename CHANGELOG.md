@@ -8,9 +8,28 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.10] — 2026-11-15
+
 ### Added
 
-- **Markdown-bestand op de cursor invoegen (#2909).** Het Invoegen-palet van de documenteditor kent een nieuwe keuze *Markdown-bestand…*: kies een `.md`-, `.markdown`- of `.txt`-bestand en de inhoud landt als eigen blok op de cursorpositie — in de visuele stand én in de bron, als één ongedaan-maakbare bewerking. Werkt ook op web (bytes in plaats van pad). Inhoud die code kan uitvoeren wordt vóór de invoeging geweigerd met dezelfde veiligheidsscan en alarmdialoog als bij het openen van een presentatie; een bestand zonder leesbare tekst wordt netjes gemeld.
+- **Documentsjablonen en PE-groepsuitgifte (#2905).** Maak een nieuw document
+  vanuit een recept- of PE-sjabloon. PE-certificaten kunnen voor een groep
+  deelnemers worden aangemaakt; de documentopslag wordt atomisch uitgevoerd.
+- **Markdown-bestand op de cursor invoegen (#2909).** Kies in het Invoegen-palet
+  van de documenteditor *Markdown-bestand…* om een `.md`-, `.markdown`- of
+  `.txt`-bestand op de cursor in te voegen. Dit werkt in de visuele editor,
+  bronmodus en webversie, met ongedaan maken en dezelfde veiligheidsscan als
+  bij het openen van een presentatie.
+
+### Fixed
+
+- **Tekst volgt de selectie (#2906).** Bij het verlengen van een selectie of
+  na een zoeksprong blijft het bewogen selectie-eind in de visuele editor in beeld.
+- **Sleepselectie scrolt door aan de veldrand (#2907).** De documenteditor
+  (visueel en bron) en de presentatie-broneditor scrollen door zolang de
+  aanwijzer bij het selecteren voorbij de rand staat.
+
+## [0.7.9] — 2026-11-12
 
 ### Removed
 
@@ -52,18 +71,6 @@ All notable changes to OciDeck are documented in this file.
   behouden.
 
 ### Fixed
-
-- **Tekst volgt de selectie in de visuele editor (#2906).** Bij het verlengen
-  van een selectie — met het toetsenbord of na een zoeksprong — verdween het
-  bewogen selectie-eind buiten beeld: Quill toonde bij een verlengde selectie
-  het anker in plaats van de caret. De visuele schrijfstand brengt nu het eind
-  dat bewoog in beeld, zoals de bron-editors al deden.
-
-- **Sleepselectie scrolt door aan de veldrand (#2907).** Hield je de aanwijzer
-  tijdens een tekstsleep stil boven of onder het veld, dan stopte het scrollen.
-  De documenteditor (visueel én bron) en de presentatie-broneditor scrollen nu
-  door met een snelheid die groeit naarmate de aanwijzer verder voorbij de
-  rand staat — zoals een tekstverwerker.
 
 - **Een opname stoppen na een geweigerde live-route (#2896).** Het afsluiten
   wacht niet meer op een audio-controller waar de live-engine nooit naar is
