@@ -910,6 +910,9 @@ class _VersionBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
     onTap: onTap,
+    // Zonder dit opent een dubbelklik het venster op de eerste klik en sluit
+    // de barrier het weer op de tweede (#2930).
+    onDoubleTap: onTap,
     borderRadius: BorderRadius.circular(3),
     child: Semantics(
       label: message,

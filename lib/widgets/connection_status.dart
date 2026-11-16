@@ -56,12 +56,19 @@ class StatusChip extends StatelessWidget {
   final String message;
   final VoidCallback? onTap;
 
+  /// Dubbelklik — bijvoorbeeld "naar de bijbehorende instelling". Is die
+  /// gezet, dan wacht een enkele tik de dubbeltik-timeout af; dat is ook de
+  /// reden dat de tweede klik van een dubbelklik nooit op de barrier van een
+  /// zojuist geopende dialoog kan landen en hem weer sluit (#2930).
+  final VoidCallback? onDoubleTap;
+
   const StatusChip({
     super.key,
     required this.icon,
     required this.level,
     required this.message,
     this.onTap,
+    this.onDoubleTap,
   });
 
   @override
@@ -71,9 +78,10 @@ class StatusChip extends StatelessWidget {
       message: message,
       child: Semantics(
         label: message,
-        button: onTap != null,
+        button: onTap != null || onDoubleTap != null,
         child: InkWell(
           onTap: onTap,
+          onDoubleTap: onDoubleTap,
           borderRadius: BorderRadius.circular(4),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
@@ -116,8 +124,9 @@ extension StorageConnectionKindIcon on StorageConnectionKind {
 /// geen schijnzekerheid.
 class OciServeStatusChip extends ConsumerWidget {
   final VoidCallback? onTap;
+  final VoidCallback? onDoubleTap;
 
-  const OciServeStatusChip({super.key, this.onTap});
+  const OciServeStatusChip({super.key, this.onTap, this.onDoubleTap});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -215,6 +224,7 @@ class OciServeStatusChip extends ConsumerWidget {
       level: level,
       message: lines.join('\n'),
       onTap: onTap,
+      onDoubleTap: onDoubleTap,
     );
   }
 }

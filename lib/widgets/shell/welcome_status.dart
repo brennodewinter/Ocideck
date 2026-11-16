@@ -23,14 +23,16 @@ class _WelcomeStatusCenter extends ConsumerWidget {
     final elearningOn =
         ref.watch(elearningEnabledProvider) ||
         ref.watch(ociServeProvider.select((s) => s.settings.enabled));
+    openIntegrations() => SettingsDialog.show(
+      context,
+      initialSection: SettingsSection.integrations,
+    );
     final items = <Widget>[
-      ..._aiStatusItem(context, ref, l10n),
+      ..._aiStatusItem(context, ref, l10n, openIntegrations),
       if (elearningOn)
         OciServeStatusChip(
-          onTap: () => SettingsDialog.show(
-            context,
-            initialSection: SettingsSection.integrations,
-          ),
+          onTap: openIntegrations,
+          onDoubleTap: openIntegrations,
         ),
       ?_storageStatusItem(context, ref, l10n),
     ];
@@ -45,11 +47,13 @@ class _WelcomeStatusCenter extends ConsumerWidget {
 
   /// Het AI-lampje volgt [aiStatusProvider]: die peilt de gate én pingt de
   /// endpoint zelf, zodat dit scherm nooit zelf het netwerk hoeft te kennen.
-  /// Een tik op het lampje hertikt meteen.
+  /// Een tik op het lampje hertikt meteen; een dubbelklik opent de
+  /// AI-instelling op het Integraties-tabblad (#2930).
   List<Widget> _aiStatusItem(
     BuildContext context,
     WidgetRef ref,
     AppLocalizations l10n,
+    VoidCallback openIntegrations,
   ) {
     final status = ref.watch(aiStatusProvider);
     if (status.availability == AiAvailability.hidden) return const [];
@@ -77,6 +81,7 @@ class _WelcomeStatusCenter extends ConsumerWidget {
         level: level,
         message: message,
         onTap: () => ref.read(aiStatusProvider.notifier).recheck(),
+        onDoubleTap: openIntegrations,
       ),
     ];
   }
@@ -111,7 +116,9 @@ class _WelcomeStatusCenter extends ConsumerWidget {
   /// veel lampjes. De kleur is de slechtste toestand van de ingestelde
   /// verbindingen; de hover-ballon somt ze één voor één op. Een tik
   /// opent het opslag-tabblad, waar dezelfde status per verbinding
-  /// naast de testknop staat.
+  /// naast de testknop staat. De dubbelklik doet hetzelfde — anders zou
+  /// de tweede klik op de barrier van het zojuist geopende venster
+  /// landen en hem meteen weer sluiten (#2930).
   Widget? _storageStatusItem(
     BuildContext context,
     WidgetRef ref,
@@ -151,12 +158,14 @@ class _WelcomeStatusCenter extends ConsumerWidget {
           break;
       }
     }
+    openStorage() =>
+        SettingsDialog.show(context, initialSection: SettingsSection.storage);
     return StatusChip(
       icon: Icons.inventory_2_outlined,
       level: level,
       message: lines.join('\n'),
-      onTap: () =>
-          SettingsDialog.show(context, initialSection: SettingsSection.storage),
+      onTap: openStorage,
+      onDoubleTap: openStorage,
     );
   }
 

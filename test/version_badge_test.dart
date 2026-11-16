@@ -98,8 +98,10 @@ void main() {
       );
 
       // Tik op het grijze lampje: de instellingen openen op het Over-tabblad,
-      // waar de automatische controle aan kan.
+      // waar de automatische controle aan kan. De badge heeft een
+      // dubbelklik-handler (#2930): de enkele tik wacht de timeout af.
       await tester.tap(_badge());
+      await tester.pump(const Duration(milliseconds: 350));
       await tester.pumpAndSettle();
       expect(find.text('Nieuwe versies'), findsOneWidget);
     });
@@ -122,6 +124,7 @@ void main() {
       // Tik op het groene vinkje: de instellingen openen op het Over-tabblad,
       // waar de uitkomst en 'Controleer nu' staan.
       await tester.tap(_badge(Icons.check_circle_outline));
+      await tester.pump(const Duration(milliseconds: 350));
       await tester.pumpAndSettle();
       expect(find.text('Nieuwe versies'), findsOneWidget);
       expect(find.text('Er is geen nieuwere versie.'), findsOneWidget);
@@ -148,6 +151,7 @@ void main() {
 
       // Tik: geen release-pagina maar het Over-tabblad.
       await tester.tap(badge);
+      await tester.pump(const Duration(milliseconds: 350));
       await tester.pumpAndSettle();
       expect(find.text('Nieuwe versies'), findsOneWidget);
     });
