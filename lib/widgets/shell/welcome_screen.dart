@@ -789,16 +789,7 @@ class _WelcomeScreen extends ConsumerWidget {
     // Een mediabestand in de recente lijst (uit een oudere versie of een
     // eigen mapkeuze) hoort dezelfde classificatie als de openwegen
     // (#2932).
-    if (await _isMediaPath(path)) {
-      if (context.mounted) {
-        await openMediaForTranscription(
-          context,
-          sourcePath: path,
-          displayName: p.basename(path),
-        );
-      }
-      return;
-    }
+    if (await openMediaPathIfMedia(context, path)) return;
     if (!context.mounted) return;
     final result = await ref.read(tabsProvider.notifier).openFileByPath(path);
     _reportOpenFailure(

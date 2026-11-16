@@ -197,8 +197,6 @@ import 'shell/new_document_action.dart';
 import 'shell/openkat_import_action.dart';
 import 'shell/dropped_files.dart';
 import 'shell/presentation_import_action.dart';
-import '../services/transcription/file_capture_source_web.dart';
-import '../services/transcription/media_sniff.dart';
 import 'shell/transcribe_file_action.dart';
 import 'shell/record_microphone_action.dart';
 import 'shell/record_system_action.dart';
@@ -220,6 +218,7 @@ part 'app_shell_menu.dart';
 // Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';
+part 'shell/shell_actions_pickers.dart';
 part 'shell/url_import_dialog.dart';
 part 'shell/web_wiring.dart';
 part 'shell/shell_actions_present.dart';
@@ -697,16 +696,9 @@ class _AppShellState extends ConsumerState<AppShell> {
               importFailureMessage(context.l10n, failure),
             );
           }
-        } else if (await _isMediaPath(path)) {
-          // Audio/video krijgt de transcriptievoorbeschouwing — ook via
+        } else if (await openMediaPathIfMedia(context, path)) {
+          // Audio/video kreeg de transcriptievoorbeschouwing — ook via
           // sleep, Finder-"Open met" en start-argumenten (#2932).
-          if (mounted) {
-            await openMediaForTranscription(
-              context,
-              sourcePath: path,
-              displayName: p.basename(path),
-            );
-          }
         } else if (droppedImageExtensions.contains(ext)) {
           final adopted = await _adoptDroppedImage(path);
           if (adopted != null) images.add(adopted);

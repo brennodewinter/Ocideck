@@ -152,27 +152,20 @@ extension _DropActions on _AppShellState {
           );
         }
       } else if (kind == DroppedKind.media) {
-        // De naam riep media; de bytes beslissen — een .mp3-naam op
-        // tekst hoort in de documentroute, niet in een decodefout.
-        if (classifyOpenTarget(
-              WebFileCaptureSource.headOf(bytes),
-              extension: p.extension(file.name),
-            ) ==
-            OpenTarget.media) {
-          if (!mounted) return;
-          await openMediaBytesForTranscription(context, bytes, file.name);
-        } else {
-          // Tekst met een media-naam: de inhoudsroute beslist — een
-          // plat tekstbestand wordt dan gewoon een document.
-          final result = await tabs.openDeckFromBytes(bytes, file.name);
-          if (mounted) {
-            _reportOpenFailure(
-              ScaffoldMessenger.of(context),
-              context.l10n,
-              result,
-              reason: ref.read(openFailureProvider),
-            );
-          }
+        // De naam riep media; de bytes beslissen — tekst met een
+        // `.mp3`-naam is een document, geen decodefout (#2932).
+        if (!mounted) return;
+        if (await openMediaBytesIfMedia(context, bytes, file.name)) {
+          continue;
+        }
+        final result = await tabs.openDeckFromBytes(bytes, file.name);
+        if (mounted) {
+          _reportOpenFailure(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            result,
+            reason: ref.read(openFailureProvider),
+          );
         }
       } else if (kind == DroppedKind.presentation ||
           kind == DroppedKind.document) {
@@ -315,25 +308,6 @@ Future<void> _openPdfBytes(
   await PdfEvidenceViewer.open(context, bytes: bytes, fileName: fileName);
 }
 
-/// Is de kop van [path] een mediacontainer? De snelle extensie-aanwijzing
-/// valt de magic bytes niet tegen — dat is precies de botsting uit #2934
-/// omgekeerd. Leesfouten tellen als niet-media: de gewone openroute meldt
-/// de werkelijke reden dan eerlijker dan deze zeef dat kan.
-Future<bool> _isMediaPath(String path) async {
-  try {
-    final ra = await File(path).open();
-    try {
-      final head = Uint8List.fromList(await ra.read(sniffHeadBytes));
-      return classifyOpenTarget(head, extension: p.extension(path)) ==
-          OpenTarget.media;
-    } finally {
-      await ra.close();
-    }
-  } on Object {
-    return false;
-  }
-}
-
 /// Open elk gekozen bestand in zijn eigen tabblad, in de gekozen volgorde; het
 /// laatste blijft het actieve. Eén onleesbaar bestand mag de rest niet
 /// afbreken — dezelfde afspraak als bij sleep-en-neerzetten.
@@ -364,16 +338,7 @@ Future<void> _openPickedPaths(
     // Media gaat vóór de tekstlezing: een audio-/videobestand hoort de
     // transcriptievoorbeschouwing te krijgen, geen UTF-8-parsefout
     // (#2932). Annuleren daar is afgehandeld — de volgende keuze volgt.
-    if (await _isMediaPath(path)) {
-      if (!context.mounted) return;
-      await openMediaForTranscription(
-        context,
-        sourcePath: path,
-        displayName: p.basename(path),
-      );
-      if (!context.mounted) return;
-      continue;
-    }
+    if (await openMediaPathIfMedia(context, path)) continue;
     final openResult = await tabs.openFileByPath(
       path,
       selectIndex: single ? selectIndex : null,
@@ -414,80 +379,6 @@ Future<void> _openPickedPaths(
       onOpenSettings: () => SettingsDialog.show(context),
     );
   }
-}
-
-/// Open-pad voor web: de browser-picker levert de bestandsinhoud als bytes
-/// (er bestaat geen pad), waarna het deck in-memory wordt geopend — een
-/// `.ocideck`-pakket wordt daarbij in het geheugen uitgepakt. Opslaan van
-/// zo'n tabblad wordt automatisch een download (geen [DeckState.filePath]).
-Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
-  final picked = await ref.read(fileServiceProvider).pickDeckFileBytes();
-  if (picked == null || !context.mounted) return;
-  if (p.extension(picked.name).toLowerCase() == '.pdf' ||
-      isSupportedPdfEvidence(picked.bytes)) {
-    await _openPdfBytes(context, picked.bytes, picked.name);
-    return;
-  }
-  // Media vóór de deck-poort: de bytes zijn er al, de `mem:`-sleutel
-  // wordt de sourcePath van de transcriptievoorbeschouwing (#2932).
-  if (classifyOpenTarget(
-        WebFileCaptureSource.headOf(picked.bytes),
-        extension: p.extension(picked.name),
-      ) ==
-      OpenTarget.media) {
-    await openMediaBytesForTranscription(context, picked.bytes, picked.name);
-    return;
-  }
-  final messenger = ScaffoldMessenger.of(context);
-  final l10n = context.l10n;
-  // Geen extensie-check: de bytes-poort herkent pakketten aan hun zip-kop en
-  // weigert al het andere met een gerichte melding via _reportOpenFailure.
-  final openResult = await ref
-      .read(tabsProvider.notifier)
-      .openDeckFromBytes(picked.bytes, picked.name);
-  // Zelfde laadwacht als het desktop-openpad (#1209) vóór de melding valt.
-  final importModuleAvailable = await importModuleRevealedWhenReady(ref);
-  if (!context.mounted) return;
-  // Op web zijn de bytes al binnen: een presentatie of een kantoorbestand kan
-  // direct de import in; de naam bepaalt welke importeur.
-  _reportOpenFailure(
-    messenger,
-    l10n,
-    openResult,
-    reason: ref.read(openFailureProvider),
-    sourceName: picked.name,
-    importModuleAvailable: importModuleAvailable,
-    onImport: () =>
-        importNamedFile(context, ref, bytes: picked.bytes, name: picked.name),
-    onOpenSettings: () => SettingsDialog.show(context),
-  );
-}
-
-/// Scan a fixed set of well-known folders for Marp presentations and open the
-/// chosen one. Complements [_openWithSearch], which scans a single folder.
-Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
-  final path = await ScanLibraryDialog.show(
-    context,
-    fileService: ref.read(fileServiceProvider),
-    recentFiles: [
-      for (final f in ref.read(settingsProvider).recentFiles) f.path,
-    ],
-    homeDir: ref.read(settingsProvider).homeDirectory,
-    showPreview: ref.read(settingsProvider).showOpenPreview,
-  );
-  if (path == null || !context.mounted) return;
-  // Dezelfde classificatie als de kiezer: een mediabestand uit een
-  // bibliotheekmap is media, geen mislukte tekstlezing (#2932).
-  if (await _isMediaPath(path)) {
-    if (!context.mounted) return;
-    await openMediaForTranscription(
-      context,
-      sourcePath: path,
-      displayName: p.basename(path),
-    );
-    return;
-  }
-  await ref.read(tabsProvider.notifier).openFileByPath(path);
 }
 
 /// Vraag een URL op, haal de presentatie (een .ocideck-pakket of een Marp-
