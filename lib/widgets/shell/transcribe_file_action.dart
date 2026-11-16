@@ -16,7 +16,6 @@ import 'package:path/path.dart' as p;
 
 import '../../l10n/app_localizations.dart';
 import '../../platform/platform_features.dart';
-import '../../services/transcription/file_capture_source_web.dart';
 import '../../services/transcription/media_sniff.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/error_snackbar.dart';
@@ -177,10 +176,10 @@ Future<bool> openMediaBytesIfMedia(
   Uint8List bytes,
   String name,
 ) async {
-  if (classifyOpenTarget(
-        WebFileCaptureSource.headOf(bytes),
-        extension: p.extension(name),
-      ) !=
+  final head = bytes.length <= sniffHeadBytes
+      ? bytes
+      : Uint8List.sublistView(bytes, 0, sniffHeadBytes);
+  if (classifyOpenTarget(head, extension: p.extension(name)) !=
       OpenTarget.media) {
     return false;
   }
