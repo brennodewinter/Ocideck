@@ -679,6 +679,26 @@ class _TableAnswerState extends State<_TableAnswer> {
   void _emit(List<List<String>> rows) =>
       widget.onChanged(FormAnswerValue(rows: rows));
 
+  /// Schuift rij [r] één plek [delta] (−1 omhoog, +1 omlaag).
+  void _move(int r, int delta) {
+    final next = [..._rows];
+    next.insert(r + delta, next.removeAt(r));
+    _emit(next);
+  }
+
+  /// Eén compacte rijknop: klein vlak, maar wel met tooltip en schermlezerlabel.
+  Widget _rowButton(IconData icon, String tooltip, VoidCallback? onPressed) =>
+      SizedBox(
+        width: 28,
+        child: IconButton(
+          tooltip: tooltip,
+          icon: Icon(icon, size: 18),
+          padding: EdgeInsets.zero,
+          visualDensity: VisualDensity.compact,
+          onPressed: onPressed,
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -698,7 +718,7 @@ class _TableAnswerState extends State<_TableAnswer> {
                     child: Text(column, style: textTheme.labelLarge),
                   ),
                 ),
-              const SizedBox(width: 40),
+              const SizedBox(width: 84),
             ],
           ),
           for (var r = 0; r < rows.length; r++)
@@ -729,14 +749,35 @@ class _TableAnswerState extends State<_TableAnswer> {
                         ),
                       ),
                     ),
+                  // Verplaatsen hoort bij elke tabel, zoals in de
+                  // tabelbewerker (Rij omhoog / Rij omlaag); een sessielijst op
+                  // volgorde houden is bij dit formulier de gewoonste zaak.
                   SizedBox(
-                    width: 34,
-                    child: IconButton(
-                      tooltip: l10n
-                          .d('Rij {n} verwijderen')
-                          .replaceAll('{n}', '${r + 1}'),
-                      icon: const Icon(Icons.close, size: 18),
-                      onPressed: () => _emit([...rows]..removeAt(r)),
+                    width: 84,
+                    child: Row(
+                      children: [
+                        _rowButton(
+                          Icons.arrow_upward,
+                          l10n
+                              .d('Rij {n} omhoog')
+                              .replaceAll('{n}', '${r + 1}'),
+                          r == 0 ? null : () => _move(r, -1),
+                        ),
+                        _rowButton(
+                          Icons.arrow_downward,
+                          l10n
+                              .d('Rij {n} omlaag')
+                              .replaceAll('{n}', '${r + 1}'),
+                          r == rows.length - 1 ? null : () => _move(r, 1),
+                        ),
+                        _rowButton(
+                          Icons.close,
+                          l10n
+                              .d('Rij {n} verwijderen')
+                              .replaceAll('{n}', '${r + 1}'),
+                          () => _emit([...rows]..removeAt(r)),
+                        ),
+                      ],
                     ),
                   ),
                 ],

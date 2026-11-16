@@ -636,6 +636,46 @@ void main() {
       expect(bodyOf(host), contains('| 1 | 2 |\n| 5 | 6 |\n'));
       expect(bodyOf(host), isNot(contains('| 3 | 4 |')));
     });
+
+    testWidgets('een rij schuift een plek omhoog en omlaag', (tester) async {
+      const tabel =
+          '<!-- form id=f -->\n'
+          '<!-- field id=t type=table columns="A|B" -->\n'
+          '**T**\n'
+          '<!-- answer -->\n'
+          '| A | B |\n| --- | --- |\n| 1 | 2 |\n| 3 | 4 |\n| 5 | 6 |\n'
+          '<!-- /field id=t -->\n';
+      final host = await pumpFill(tester, tabel);
+      // De randen staan uit: rij 1 kan niet omhoog, de laatste niet omlaag.
+      expect(
+        tester
+            .widget<IconButton>(
+              find.ancestor(
+                of: find.byTooltip('Rij 1 omhoog'),
+                matching: find.byType(IconButton),
+              ),
+            )
+            .onPressed,
+        isNull,
+      );
+      expect(
+        tester
+            .widget<IconButton>(
+              find.ancestor(
+                of: find.byTooltip('Rij 3 omlaag'),
+                matching: find.byType(IconButton),
+              ),
+            )
+            .onPressed,
+        isNull,
+      );
+      await tester.tap(find.byTooltip('Rij 2 omhoog'));
+      await tester.pump();
+      expect(bodyOf(host), contains('| 3 | 4 |\n| 1 | 2 |\n| 5 | 6 |\n'));
+      await tester.tap(find.byTooltip('Rij 1 omlaag'));
+      await tester.pump();
+      expect(bodyOf(host), contains('| 1 | 2 |\n| 3 | 4 |\n| 5 | 6 |\n'));
+    });
   });
 
   group('wanneer iets rood is', () {
