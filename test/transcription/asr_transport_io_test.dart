@@ -143,6 +143,112 @@ void main() {
     await expectLater(h.done, throwsA(isA<AsrRequestException>()));
   });
 
+  for (final phase in ['headers', 'lege body', 'partiële body', 'druppels']) {
+    test('totale deadline geldt tijdens $phase', () async {
+      final release = Completer<void>();
+      Timer? drip;
+      var arrived = false;
+      final t = await start((req) async {
+        arrived = true;
+        if (phase != 'headers') {
+          req.response.bufferOutput = false;
+          req.response.headers.chunkedTransferEncoding = true;
+          if (phase != 'lege body') req.response.write('a');
+          await req.response.flush();
+          if (phase == 'druppels') {
+            drip = Timer.periodic(const Duration(milliseconds: 20), (_) {
+              req.response.write('a');
+            });
+          }
+        }
+        await release.future;
+      });
+      final h = const IoAsrTransport().send(
+        method: 'GET',
+        url: t.base,
+        strategy: AiResolveStrategy.loopbackDirect,
+        timeout: const Duration(milliseconds: 500),
+      );
+      try {
+        await expectLater(
+          h.done.timeout(const Duration(seconds: 5)),
+          throwsA(
+            isA<AsrRequestException>().having(
+              (e) => e.message,
+              'reden',
+              'verbinding verliep',
+            ),
+          ),
+        );
+        expect(arrived, isTrue);
+        // Herhaalde en late annulering mogen de terminale reden niet wijzigen.
+        h.cancel();
+        h.cancel();
+      } finally {
+        drip?.cancel();
+        release.complete();
+      }
+    });
+  }
+
+  for (final cancel in [true, false]) {
+    test('${cancel ? 'cancel' : 'deadline'} voltooit vóór trage DNS', () async {
+      final resolved = Completer<InternetAddress>();
+      final t = await start((req) => req.response.write('te laat'));
+      final h = IoAsrTransport(resolve: (_, _) => resolved.future).send(
+        method: 'GET',
+        url: t.base,
+        strategy: AiResolveStrategy.loopbackDirect,
+        timeout: const Duration(milliseconds: 100),
+      );
+      final check = expectLater(
+        h.done.timeout(const Duration(seconds: 5)),
+        throwsA(
+          isA<AsrRequestException>().having(
+            (e) => e.message,
+            'reden',
+            cancel ? 'afgebroken' : 'verbinding verliep',
+          ),
+        ),
+      );
+      if (cancel) h.cancel();
+      await check;
+      resolved.complete(InternetAddress.loopbackIPv4);
+      await Future<void>.delayed(Duration.zero);
+      expect(t.seen, isEmpty, reason: 'late DNS mag geen verbinding starten');
+    });
+  }
+
+  test('cancel tijdens partiële body sluit de publieke future', () async {
+    final sent = Completer<void>();
+    final release = Completer<void>();
+    final t = await start((req) async {
+      req.response.write('a');
+      await req.response.flush();
+      sent.complete();
+      await release.future;
+    });
+    final h = const IoAsrTransport().send(
+      method: 'GET',
+      url: t.base,
+      strategy: AiResolveStrategy.loopbackDirect,
+    );
+    final check = expectLater(
+      h.done,
+      throwsA(
+        isA<AsrRequestException>().having(
+          (e) => e.message,
+          'reden',
+          'afgebroken',
+        ),
+      ),
+    );
+    await sent.future;
+    h.cancel();
+    await check;
+    release.complete();
+  });
+
   test('publicGuarded weigert een loopback-adres al in de resolve', () async {
     final h = const IoAsrTransport().send(
       method: 'GET',
