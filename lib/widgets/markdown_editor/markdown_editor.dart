@@ -20,6 +20,7 @@ import 'markdown_editor_theme.dart';
 import 'markdown_editor_toolbar.dart';
 import 'notes_editor_mode.dart';
 import 'notes_mode_toggle.dart';
+import 'resume_scroll_guard.dart';
 import 'wysiwyg_notes_field.dart';
 import 'wysiwyg_notes_toolbar.dart';
 
@@ -503,7 +504,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
 
   void _openVisualEditor() {
     if (_quillController != null) return;
-    _scrollController = ScrollController();
+    _scrollController = ResumeScrollGuard(focusNode: _focusNode);
     final document = MarkdownQuillCodec.documentFromMarkdown(
       normalizeRichTextMarkdownForStorage(widget.controller.text),
     );
