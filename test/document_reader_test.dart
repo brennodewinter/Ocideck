@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -198,6 +200,48 @@ void main() {
       await tester.pump();
       expect(tapped, 'https://example.com');
     });
+
+    testWidgets('gegenereerde inhoudsopgave stuurt de aangeklikte kop door', (
+      tester,
+    ) async {
+      String? tapped;
+      await pump(
+        tester,
+        DocumentMarkdownView(
+          '<!-- toc -->\n\n## Een **vet** hoofdstuk',
+          onTapLink: (href) => tapped = href,
+        ),
+      );
+      await tester.tap(find.text('Een vet hoofdstuk').first);
+      expect(tapped, '#een-vet-hoofdstuk');
+    });
+
+    testWidgets(
+      'gegenereerde inhoudslink is met het toetsenbord te activeren',
+      (tester) async {
+        String? tapped;
+        await pump(
+          tester,
+          SelectionArea(
+            child: DocumentMarkdownView(
+              '<!-- toc -->\n\n## Slot',
+              onTapLink: (href) => tapped = href,
+            ),
+          ),
+        );
+        final link = find.text('Slot').first;
+        // SelectionArea is zelf ook focusbaar; Tab moet de link bereiken.
+        for (var tab = 0; tab < 4; tab++) {
+          await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+          await tester.pump();
+          if (Focus.of(tester.element(link)).hasPrimaryFocus) break;
+        }
+        expect(Focus.of(tester.element(link)).hasPrimaryFocus, isTrue);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pump();
+        expect(tapped, '#slot');
+      },
+    );
 
     testWidgets('a tap fires even inside a SelectionArea', (tester) async {
       // The reader wraps the document in a SelectionArea so it stays

@@ -456,7 +456,7 @@ void main() {
             '300 pagina\'s tegenover 2× 150: mediaan $median; '
             'herhalingen=$repeats, steekproeven=$samples',
       );
-    });
+    }, tags: 'benchmark');
   });
 
   group('Schaal- en toetsaanslagpoorten (#2636)', () {
