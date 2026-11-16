@@ -16,6 +16,7 @@ import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
 import 'document_pdf_blocks.dart';
+import 'document_pdf_contents.dart';
 
 /// Zet [markdown] (GFM) om in de blokken waaruit de PDF wordt opgebouwd.
 ///
@@ -88,8 +89,10 @@ List<PdfBlock> markdownToPdfBlocks(
     blocks = _replaceTimelineSentinels(blocks, timelines.blocks);
   }
 
-  if (notes.isEmpty) return blocks;
-  return [...blocks, ..._endnoteBlocks(notes, footnotesTitle)];
+  return paginatePdfContents([
+    ...blocks,
+    if (notes.isNotEmpty) ..._endnoteBlocks(notes, footnotesTitle),
+  ]);
 }
 
 /// Zet één regel Markdown om in stukken tekst met hun opmaak.

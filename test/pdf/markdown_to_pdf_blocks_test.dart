@@ -275,7 +275,7 @@ void main() {
       final blocks = markdownToPdfBlocks('# Titel\n\n<!-- toc -->\n\nTekst.\n');
       expect(blocks[1], isA<PdfTocBlock>());
       // En de alinea eronder blijft een eigen alinea, zonder de marker erin.
-      final paragraph = blocks[2] as PdfParagraphBlock;
+      final paragraph = blocks.whereType<PdfParagraphBlock>().single;
       expect(paragraph.spans.single.text.trim(), 'Tekst.');
     });
 

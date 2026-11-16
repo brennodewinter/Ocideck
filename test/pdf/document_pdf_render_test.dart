@@ -96,8 +96,8 @@ void main() {
     final text = pdfVisibleText(bytes);
     expect(text, contains('Eerste'));
     expect(text, contains('Tweede'));
-    // De tweede kop staat op blad twee, en dat nummer hoort in de opgave.
-    expect(RegExp(r'\bTweede\b\s+2\b').hasMatch(text), isTrue, reason: text);
+    // De losse inhoudsopgave voegt een blad toe; de tweede kop staat op blad drie.
+    expect(RegExp(r'\bTweede\b\s+3\b').hasMatch(text), isTrue, reason: text);
   });
 
   test('het vel komt uit op het gevraagde formaat', () async {

@@ -43,10 +43,35 @@ String pdfVisibleText(Uint8List bytes) {
 /// (#1790).
 List<String> pdfVisibleTextPerPage(Uint8List bytes) => [
   for (final stream in _inflatedStreams(bytes))
-    [
-      for (final match in _literalString.allMatches(stream))
-        _unescape(match.group(1)!),
-    ].join(' '),
+    if (RegExp(r'\bBT\b').hasMatch(stream))
+      [
+        for (final match in _literalString.allMatches(stream))
+          _unescape(match.group(1)!),
+      ].join(' '),
+];
+
+/// Baselines of matching literal text runs in the rendered PDF content.
+List<double> pdfTextBaselines(Uint8List bytes, String text) => [
+  for (final stream in _inflatedStreams(bytes))
+    for (final block in RegExp(r'\bBT\b[\s\S]*?\bET\b').allMatches(stream))
+      if (_literalString
+          .allMatches(block.group(0)!)
+          .any((m) => _unescape(m.group(1)!).trim() == text))
+        for (final point in RegExp(
+          r'(-?[\d.]+)\s+(-?[\d.]+)\s+Td',
+        ).allMatches(block.group(0)!))
+          double.parse(point.group(2)!),
+];
+
+/// Number of distinct painted text baselines in each text page stream.
+List<int> pdfLineCountsPerPage(Uint8List bytes) => [
+  for (final stream in _inflatedStreams(bytes))
+    if (RegExp(r'\bBT\b').hasMatch(stream))
+      RegExp(r'(-?[\d.]+)\s+(-?[\d.]+)\s+Td')
+          .allMatches(stream)
+          .map((m) => (double.parse(m.group(2)!) * 100).round())
+          .toSet()
+          .length,
 ];
 
 /// Het aantal bladzijden, geteld aan de `/Type /Page`-objecten.

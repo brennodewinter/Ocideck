@@ -182,7 +182,34 @@ Future<Uint8List> _render(
     margins: margins,
     cropMarks: cropMarks,
   );
-  final builder = DocumentPdfWidgets(
+  late final DocumentPdfWidgets builder;
+  final headerSpans = markdownToPdfSpans(chrome.headerText);
+  final footerSpans = markdownToPdfSpans(chrome.footerText);
+  final logo = _logoImage(chrome.logo);
+  double bodyHeight(pw.Context context) {
+    var height = pageTheme.pageFormat.availableHeight;
+    for (final top in [true, false]) {
+      if (top ? !chrome.hasHeader : !chrome.hasFooter) continue;
+      final band = _band(
+        context,
+        chrome,
+        style,
+        fonts,
+        builder,
+        spans: top ? headerSpans : footerSpans,
+        logo: logo,
+        top: top,
+      );
+      band.layout(
+        context,
+        pw.BoxConstraints(maxWidth: pageTheme.pageFormat.availableWidth),
+      );
+      height -= band.box!.height;
+    }
+    return height;
+  }
+
+  builder = DocumentPdfWidgets(
     style: style,
     fonts: fonts,
     headings: headings,
@@ -195,6 +222,7 @@ Future<Uint8List> _render(
     graphics: graphics,
     headingPages: headingPages,
     onHeadingLaidOut: onHeadingLaidOut,
+    pageBodyHeight: bodyHeight,
   );
   if (onTablesTooWide != null) {
     final tooWide = pdfTablesThatCannotFit(
@@ -211,10 +239,6 @@ Future<Uint8List> _render(
   // `MemoryImage` werd, kreeg per blad een eigen object in het bestand — bij een
   // notitie van vijfentwintig bladzijden een kwart van de omvang aan
   // vijfentwintig identieke plaatjes.
-  final headerSpans = markdownToPdfSpans(chrome.headerText);
-  final footerSpans = markdownToPdfSpans(chrome.footerText);
-  final logo = _logoImage(chrome.logo);
-
   document.addPage(
     pw.MultiPage(
       pageTheme: pageTheme,
