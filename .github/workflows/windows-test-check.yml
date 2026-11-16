@@ -106,7 +106,8 @@ jobs:
           trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
           # Isoleer de terugkerende laatste testgroep vóór de volledige suite.
           flutter test --concurrency=1 test/shell_present_and_close_test.dart test/shell_s3_actions_test.dart
-          flutter test --concurrency=2 --test-randomize-ordering-seed random --exclude-tags golden
+          flutter test --concurrency=2 --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark'
+          flutter test --concurrency=1 test/large_deck_performance_test.dart --tags benchmark
 
       - name: Navigation regressions
         if: ${{ inputs.navigation_only }}

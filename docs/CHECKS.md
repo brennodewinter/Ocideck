@@ -2598,3 +2598,13 @@ may still provide 0.9.0 and produce different findings. The official Linux x64
 `8c3be12b05d5c177a04c29e3c78ce89ac86f1595681cab149b65b97c4e227198`.
 Verify this digest before installing the archive; a version mismatch is an
 environment failure, not a reason to suppress findings.
+
+### Isolated scaling measurements (#2967)
+
+`make test` and `make coverage` run functional tests in parallel, then invoke
+`make test-benchmarks` as a separate required step. The tagged codec scaling
+measurement runs without coverage and with one test process; its threshold is
+unchanged. The 300-page content-preservation test remains in the parallel
+instrumented suite. The GitHub Windows and platform-matrix test commands use the
+same separation. A benchmark failure still fails the gate; this is not a retry
+or an optional check. Invoke `make test-benchmarks` on its own for diagnosis.
