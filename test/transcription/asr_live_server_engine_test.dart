@@ -8,6 +8,7 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/asr_server_profile.dart';
 import 'package:ocideck/services/transcription/asr_live_protocol.dart';
+import 'package:ocideck/services/transcription/asr_live_limits.dart';
 import 'package:ocideck/services/transcription/asr_live_server_engine.dart';
 import 'package:ocideck/services/transcription/asr_live_transport.dart';
 import 'package:ocideck/services/transcription/asr_server_engine.dart';
@@ -85,9 +86,11 @@ AsrLiveServerEngine engine(
   Future<String?> Function()? apiKeyReader,
   AsrServerProfile profile = profile,
   AsrAudioReader? audioReader,
+  LiveResponseLimits limits = const LiveResponseLimits(),
 }) {
   return AsrLiveServerEngine(
     profile: profile,
+    limits: limits,
     transport: transport,
     audioReader: audioReader ?? ((_) async => Uint8List(0)),
     apiKeyReader: apiKeyReader,
@@ -404,6 +407,102 @@ void main() {
         ),
         throwsA(isA<DecodeFailed>()),
       );
+    });
+  });
+
+  group('serverbudgetten (#2957)', () {
+    for (final limits in [
+      const LiveResponseLimits(segments: 2),
+      const LiveResponseLimits(resultBytes: 2),
+    ]) {
+      test(
+        'definitieve pass weigert overloop zonder afgekapt succes: $limits',
+        () async {
+          final t = FakeLiveTransport();
+          final result = engine(
+            t,
+            audioReader: (_) async => wav(),
+            limits: limits,
+          ).transcribe(const AudioRef('/rec.wav'), options);
+          final failed = expectLater(
+            result,
+            throwsA(
+              isA<ServerRefused>().having(
+                (e) => e.message,
+                'message',
+                liveResponseLimitMessage,
+              ),
+            ),
+          );
+          final socket = await opened(t);
+          for (var i = 0; i < 3; i++) {
+            socket.inbound.add('{"text":"a"}');
+          }
+          await failed;
+          expect(socket.closed, isTrue);
+          expect(t.connectCount, 1);
+          await socket.inbound.close();
+        },
+      );
+    }
+
+    test(
+      'exact het resultaatbudget blijft een volledig geldig resultaat',
+      () async {
+        final t = FakeLiveTransport();
+        final result = engine(
+          t,
+          audioReader: (_) async => wav(),
+          limits: const LiveResponseLimits(segments: 2, resultBytes: 2),
+        ).transcribe(const AudioRef('/rec.wav'), options);
+        final socket = await opened(t);
+        socket.inbound.add('{"text":"a"}');
+        socket.inbound.add('{"text":"b"}');
+        while (!socket.sentText.contains(liveEofFrame)) {
+          await Future<void>.delayed(const Duration(milliseconds: 1));
+        }
+        await socket.serverCloses();
+        expect((await result).segments.map((s) => s.text), ['a', 'b']);
+      },
+    );
+
+    test('live overloop geeft een benoemde fout en sluit de socket', () async {
+      final t = FakeLiveTransport();
+      final stream = engine(
+        t,
+        limits: const LiveResponseLimits(textBytes: 3),
+      ).transcribeLive(const Stream.empty(), options: options)!;
+      final failed = expectLater(
+        stream,
+        emitsError(
+          isA<ServerRefused>().having(
+            (e) => e.message,
+            'message',
+            liveResponseLimitMessage,
+          ),
+        ),
+      );
+      final socket = await opened(t);
+      socket.inbound.add('{"partial":"te lang"}');
+      await failed;
+      await pumpEventQueue();
+      expect(socket.closed, isTrue);
+      await socket.inbound.close();
+    });
+
+    test('capabilityprobe verwerkt geen onbeperkt groot serverframe', () async {
+      final t = FakeLiveTransport();
+      final probe = engine(
+        t,
+        limits: const LiveResponseLimits(messageBytes: 8),
+      ).probeLive();
+      final socket = await opened(t);
+      socket.inbound.add('x' * 9);
+      final result = await probe;
+      expect(result.status, AsrProbeStatus.unreachable);
+      expect(result.detail, liveResponseLimitMessage);
+      expect(socket.closed, isTrue);
+      await socket.inbound.close();
     });
   });
 

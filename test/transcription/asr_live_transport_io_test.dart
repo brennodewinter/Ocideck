@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/transcription/asr_live_transport.dart';
+import 'package:ocideck/services/transcription/asr_live_limits.dart';
 import 'package:ocideck/services/transcription/asr_live_transport_io.dart';
 import 'package:ocideck/services/transcription/asr_live_transport_stub.dart'
     as stub;
@@ -29,7 +30,7 @@ void main() {
       Future<void> firstTwoFrames,
     })
   >
-  start() async {
+  start({Object response = '{"partial":"echo"}'}) async {
     final seen = <HttpRequest>[];
     final frames = <dynamic>[];
     final firstTwoFrames = Completer<void>();
@@ -44,7 +45,7 @@ void main() {
             if (frames.length == 2) firstTwoFrames.complete();
             // Elk inkomend frame krijgt een protocolantwoord terug —
             // zo is de inkomende richting écht te testen.
-            ws.add('{"partial":"echo"}');
+            ws.add(response);
           });
         } else {
           req.response.statusCode = 404;
@@ -109,6 +110,25 @@ void main() {
     // De gate-URL bleef kaal: geen token in de draad-adressering.
     expect(t.seen.single.uri.toString(), isNot(contains('token')));
   });
+
+  for (final response in <Object>['123456789', Uint8List(9)]) {
+    test(
+      'een echt te groot ${response.runtimeType}-antwoord sluit getypt',
+      () async {
+        final t = await start(response: response);
+        final socket = await const IoAsrLiveTransport(
+          limits: LiveResponseLimits(messageBytes: 8),
+        ).connect(url: t.url, strategy: AiResolveStrategy.loopbackDirect);
+        final failed = expectLater(
+          socket.messages,
+          emitsError(isA<LiveResponseLimitExceeded>()),
+        );
+        socket.sendText('antwoord');
+        await failed;
+        await socket.close();
+      },
+    );
+  }
 
   test('een dichte poort is een getypte AsrLiveException', () async {
     // Poort 1 is aantoonbaar dicht — connect mag nooit op een vage

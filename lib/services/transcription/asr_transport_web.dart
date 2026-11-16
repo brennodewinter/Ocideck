@@ -54,13 +54,7 @@ final class WebAsrTransport implements AsrTransport {
         final response = await web.window
             .fetch(url.toString().toJS, init)
             .toDart;
-        // `bodyUsed` is niet nodig — de response is vers en ongelezen;
-        // arrayBuffer() leent zich voor de byte-cap (een losgeslagen
-        // server mag de tab niet vullen).
-        final buf = (await response.arrayBuffer().toDart).toDart;
-        if (buf.lengthInBytes > maxResponseBytes) {
-          throw const AsrRequestException('respons groter dan het maximum');
-        }
+        final buf = await _readBody(response, controller);
         completer.complete(AsrResponse(response.status, _decodeUtf8(buf)));
       } on AsrRequestException catch (e, s) {
         completer.completeError(e, s);
@@ -82,12 +76,59 @@ final class WebAsrTransport implements AsrTransport {
       cancel: () => controller.abort(),
     );
   }
+
+  /// Toets vóór bewaren; Content-Length kan ontbreken of onjuist zijn.
+  Future<Uint8List> _readBody(
+    web.Response response,
+    web.AbortController controller,
+  ) async {
+    final body = response.body;
+    if (body == null) return Uint8List(0);
+    final reader = body.getReader() as web.ReadableStreamDefaultReader;
+    // Eén groeiende buffer: bewaar geen object/buffer per klein netwerkchunk.
+    final bytes = BytesBuilder(copy: true);
+    var complete = false;
+    try {
+      while (true) {
+        final step = await reader.read().toDart;
+        if (step.done) {
+          complete = true;
+          return bytes.takeBytes();
+        }
+        final value = step.value;
+        if (value == null) continue;
+        final chunk = (value as JSUint8Array).toDart;
+        if (chunk.length > maxResponseBytes - bytes.length) {
+          throw const AsrRequestException('respons groter dan het maximum');
+        }
+        bytes.add(chunk);
+      }
+    } catch (e) {
+      if (e is AsrRequestException || controller.signal.aborted) rethrow;
+      // Onze cleanup-abort hieronder is geen gebruikersannulering.
+      throw const AsrRequestException('netwerk');
+    } finally {
+      if (!complete) {
+        controller.abort();
+        // Cleanup mag de oorspronkelijke limiet-/netwerkfout niet vervangen.
+        try {
+          unawaited(reader.cancel().toDart.catchError((Object _) => null));
+        } on Object {
+          // De reader kan door een browserfout al losgelaten zijn.
+        }
+      }
+      try {
+        reader.releaseLock();
+      } on Object {
+        // Een cleanupfout vervangt de oorspronkelijke uitkomst niet.
+      }
+    }
+  }
 }
 
 /// UTF-8 met vervanging bij kapotte tekens (`fatal` blijft uit) — de
 /// serverroute mag nooit op een byte stuklopen; de parser bepaalt daarna
 /// of de inhoud zinnig is.
-String _decodeUtf8(ByteBuffer buf) =>
-    web.TextDecoder().decode(buf.asUint8List().toJS);
+String _decodeUtf8(Uint8List buf) => web.TextDecoder().decode(buf.toJS);
 
 AsrTransport createAsrTransport() => const WebAsrTransport();

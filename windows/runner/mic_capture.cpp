@@ -1,5 +1,7 @@
 #include "mic_capture.h"
 
+#include "../../native/audio_tools/capture_startup_state.h"
+
 #include <audioclient.h>
 #include <propkeydef.h>
 #include <functiondiscoverykeys_devpkey.h>
@@ -139,13 +141,10 @@ void PostPcm(std::vector<uint8_t> bytes) {
 struct CaptureArgs {
   std::wstring device_id;
   bool use_default = false;
-  HANDLE ready = nullptr;
-  HRESULT hr = E_FAIL;
-  int rate = 0;
-  int channels = 0;
+  ocideck::CaptureStartupState startup;
 };
 
-void CaptureMain(CaptureArgs* args) {
+void CaptureMain(std::shared_ptr<CaptureArgs> args) {
   const HRESULT init = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
   IMMDeviceEnumerator* enumerator = nullptr;
   IMMDevice* device = nullptr;
@@ -232,16 +231,13 @@ void CaptureMain(CaptureArgs* args) {
                             reinterpret_cast<void**>(&capture));
   }
   if (SUCCEEDED(hr)) hr = client->Start();
-  args->hr = hr;
-  if (SUCCEEDED(hr) && mix != nullptr) {
-    args->rate = mix->nSamplesPerSec;
-    args->channels = mix->nChannels;
-  }
-  SetEvent(args->ready);
+  const int rate = SUCCEEDED(hr) && mix != nullptr ? mix->nSamplesPerSec : 0;
+  const int channels = SUCCEEDED(hr) && mix != nullptr ? mix->nChannels : 0;
+  args->startup.Publish({static_cast<int32_t>(hr), rate, channels});
   if (SUCCEEDED(hr)) {
     std::vector<uint8_t> pending;
     const size_t flush_at =
-        static_cast<size_t>(std::max(args->rate, 1)) * args->channels;
+        static_cast<size_t>(std::max(rate, 1)) * channels;
     while (WaitForSingleObject(g_stop, 0) != WAIT_OBJECT_0) {
       WaitForSingleObject(audio_event, 200);
       if (WaitForSingleObject(g_stop, 0) == WAIT_OBJECT_0) break;
@@ -370,17 +366,15 @@ void HandleOpen(const EncodableValue* arguments,
   }
   if (g_stop == nullptr) g_stop = CreateEvent(nullptr, TRUE, FALSE, nullptr);
   ResetEvent(g_stop);
-  auto* args = new CaptureArgs();
+  auto args = std::make_shared<CaptureArgs>();
   args->device_id = Utf8ToWide(device_id);
   args->use_default = device_id.empty();
-  args->ready = CreateEvent(nullptr, TRUE, FALSE, nullptr);
   g_thread = std::thread(CaptureMain, args);
-  WaitForSingleObject(args->ready, 5000);
-  const HRESULT hr = args->hr;
-  const int rate = args->rate;
-  const int channels = args->channels;
-  CloseHandle(args->ready);
-  delete args;
+  const auto started = args->startup.WaitFor(std::chrono::seconds(5));
+  const HRESULT hr = started ? static_cast<HRESULT>(started->status)
+                             : HRESULT_FROM_WIN32(ERROR_TIMEOUT);
+  const int rate = started ? started->sample_rate : 0;
+  const int channels = started ? started->channels : 0;
   if (FAILED(hr) || rate <= 0 || channels <= 0) {
     SetEvent(g_stop);
     if (g_thread.joinable()) g_thread.join();

@@ -19,13 +19,24 @@ import 'dart:typed_data';
 import 'package:web/web.dart' as web;
 
 import 'asr_live_transport.dart';
+import 'asr_live_limits.dart';
+
+extension type _MessageString(JSString _) implements JSString {
+  external int get length;
+}
+
+extension type _MessageBuffer(JSArrayBuffer _) implements JSArrayBuffer {
+  external int get byteLength;
+}
 
 final class WebAsrLiveTransport implements AsrLiveTransport {
   const WebAsrLiveTransport({
     this.connectTimeout = const Duration(seconds: 15),
+    this.limits = const LiveResponseLimits(),
   });
 
   final Duration connectTimeout;
+  final LiveResponseLimits limits;
 
   @override
   Future<AsrLiveSocket> connect({
@@ -35,7 +46,7 @@ final class WebAsrLiveTransport implements AsrLiveTransport {
   }) async {
     final socket = web.WebSocket(url.toString())..binaryType = 'arraybuffer';
     final completer = Completer<AsrLiveSocket>();
-    final inner = _WebLiveSocket(socket);
+    final inner = _WebLiveSocket(socket, limits);
     inner._onEarlyClose = () {
       if (!completer.isCompleted) {
         completer.completeError(const AsrLiveException('verbinding geweigerd'));
@@ -63,25 +74,39 @@ final class WebAsrLiveTransport implements AsrLiveTransport {
 }
 
 final class _WebLiveSocket implements AsrLiveSocket {
-  _WebLiveSocket(this._socket) {
+  _WebLiveSocket(this._socket, LiveResponseLimits limits) {
+    _inbound = BoundedLiveInput(
+      limits: limits,
+      onLimit: () => unawaited(close()),
+    );
     _socket.onmessage = ((web.MessageEvent event) {
+      if (_closed) return;
       final data = event.data;
       if (data.isA<JSString>()) {
-        _inbound.add((data as JSString).toDart);
+        if (_MessageString(data as JSString).length > limits.messageBytes) {
+          _inbound.reject();
+          return;
+        }
+        _inbound.add(data.toDart);
       } else if (data.isA<JSArrayBuffer>()) {
-        _inbound.add((data as JSArrayBuffer).toDart.asUint8List());
+        if (_MessageBuffer(data as JSArrayBuffer).byteLength >
+            limits.messageBytes) {
+          _inbound.reject();
+          return;
+        }
+        _inbound.add(data.toDart.asUint8List());
       }
     }).toJS;
     _socket.onclose = ((web.CloseEvent event) {
       _closed = true;
       _code = event.code;
       _onEarlyClose?.call();
-      unawaited(_inbound.close());
+      _inbound.close();
     }).toJS;
   }
 
   final web.WebSocket _socket;
-  final StreamController<Object> _inbound = StreamController();
+  late final BoundedLiveInput _inbound;
   void Function()? _onEarlyClose;
   bool _closed = false;
   int? _code;
@@ -113,7 +138,7 @@ final class _WebLiveSocket implements AsrLiveSocket {
     } on Object {
       // Een socket die niet wil sluiten is al dicht genoeg.
     }
-    await _inbound.close();
+    _inbound.close();
   }
 }
 
