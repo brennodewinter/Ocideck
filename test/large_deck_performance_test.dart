@@ -444,7 +444,9 @@ void main() {
       }
       ratios.sort();
       final median = ratios[ratios.length ~/ 2];
-      print('SCALING repeats=$repeats samples=$samples median=$median');
+      printOnFailure(
+        'SCALING repeats=$repeats samples=$samples median=$median',
+      );
       // Dezelfde grens als voorheen: groot / (2 × klein) < 1,25 is
       // groot / klein < 2,5. De mediaan voorkomt slagen op één gelukstreffer.
       expect(
