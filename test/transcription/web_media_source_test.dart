@@ -12,10 +12,12 @@ import 'package:ocideck/services/transcription/web_media_source.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 
 class _Browser implements WebMediaBrowser {
-  _Browser({this.deny = false, this.empty = false});
+  _Browser({this.deny = false, this.empty = false, this.stopFailure});
 
   final bool deny;
   final bool empty;
+  final TranscriptionError? stopFailure;
+  final ended = StreamController<CaptureEndCause>.broadcast();
   var probes = 0;
   var opens = 0;
 
@@ -43,10 +45,14 @@ class _Browser implements WebMediaBrowser {
     final chunks = StreamController<Uint8List>();
     return WebMediaLive(
       chunks: chunks.stream,
+      ended: ended.stream,
       mime: 'audio/webm;codecs=opus',
       stop: () async {
         if (!empty) chunks.add(Uint8List.fromList([1, 2, 3, 4]));
         if (!chunks.isClosed) await chunks.close();
+        if (!ended.isClosed) await ended.close();
+        final failure = stopFailure;
+        if (failure != null) throw failure;
       },
     );
   }
@@ -137,6 +143,49 @@ void main() {
     expect(audio.durablePath, startsWith('mem:'));
     expect(WebAssetStore.bytesFor(audio.durablePath), [1, 2, 3, 4]);
   });
+
+  test(
+    'bronverlies bereikt de sessie en Stop bewaart het laatste blok',
+    () async {
+      final browser = _Browser();
+      final gate = MicSessionGate();
+      final session =
+          await WebMediaSource.microphone(browser: browser, gate: gate).start(
+            const CaptureRequest(
+              kinds: {CaptureSourceKind.microphone},
+              consent: consent,
+            ),
+          );
+      final ended = session.ended!.first;
+      browser.ended.add(CaptureEndCause.sourceLost);
+      expect(await ended, CaptureEndCause.sourceLost);
+      final first = session.stop();
+      expect(identical(first, session.stop()), isTrue);
+      final audio = await first;
+      expect(WebAssetStore.bytesFor(audio.durablePath), [1, 2, 3, 4]);
+      expect(gate.holder, isNull);
+    },
+  );
+
+  test(
+    'stopfout geeft de poort vrij en behoudt reeds ontvangen bytes',
+    () async {
+      final browser = _Browser(
+        stopFailure: const DecodeFailed('laatste blok mislukt'),
+      );
+      final gate = MicSessionGate();
+      final session =
+          await WebMediaSource.microphone(browser: browser, gate: gate).start(
+            const CaptureRequest(
+              kinds: {CaptureSourceKind.microphone},
+              consent: consent,
+            ),
+          );
+      await expectLater(session.stop(), throwsA(isA<DecodeFailed>()));
+      expect(gate.holder, isNull);
+      expect(WebAssetStore.bytesFor(session.durablePath), [1, 2, 3, 4]);
+    },
+  );
 
   test('een tab zonder geluid is een benoemde fout', () async {
     final browser = _Browser(empty: true);

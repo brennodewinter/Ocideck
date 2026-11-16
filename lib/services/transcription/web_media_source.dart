@@ -63,11 +63,13 @@ class WebMediaLive {
     required this.chunks,
     required this.mime,
     required this.stop,
+    this.ended,
   });
 
   final Stream<Uint8List> chunks;
   final String mime;
   final Future<void> Function() stop;
+  final Stream<CaptureEndCause>? ended;
 }
 
 class WebMediaSource extends CaptureSource {
@@ -133,6 +135,9 @@ class _WebMediaSession implements CaptureSession {
   }) : _live = live,
        _started = DateTime.now() {
     _sub = live.chunks.listen(_chunks.add);
+    _endedSub = live.ended?.listen((cause) {
+      if (!_ended.isClosed) _ended.add(cause);
+    });
   }
 
   final WebMediaLive _live;
@@ -143,6 +148,8 @@ class _WebMediaSession implements CaptureSession {
   final _chunks = <Uint8List>[];
   late final StreamSubscription<Uint8List> _sub;
   Future<RecordedAudio>? _stopFuture;
+  StreamSubscription<CaptureEndCause>? _endedSub;
+  final _ended = StreamController<CaptureEndCause>.broadcast();
 
   @override
   String get durablePath => _storedPath ?? '';
@@ -153,17 +160,28 @@ class _WebMediaSession implements CaptureSession {
   Stream<AudioChunk>? get liveChunks => null;
 
   @override
-  Stream<CaptureEndCause>? get ended => null;
+  Stream<CaptureEndCause>? get ended => _ended.stream;
 
   @override
   Future<RecordedAudio> stop() => _stopFuture ??= _finish();
 
   Future<RecordedAudio> _finish() async {
-    await _live.stop();
-    await _sub.cancel();
+    TranscriptionError? failure;
+    try {
+      await _live.stop();
+    } on TranscriptionError catch (error) {
+      failure = error;
+    } on Object {
+      failure = const SourceUnavailable('browseropname kon niet afronden');
+    } finally {
+      await _sub.cancel();
+      await _endedSub?.cancel();
+      _gate?.release(MicHolder.recording);
+      if (!_ended.isClosed) await _ended.close();
+    }
     final bytes = _concat(_chunks);
-    _gate?.release(MicHolder.recording);
     if (bytes.isEmpty) {
+      if (failure != null) throw failure;
       throw SourceUnavailable(
         _display ? webDisplaySilentMessage : 'lege opname',
       );
@@ -176,6 +194,7 @@ class _WebMediaSession implements CaptureSession {
         'de opname past niet in het browsergeheugen',
       );
     }
+    if (failure != null) throw failure;
     return RecordedAudio(
       durablePath: _storedPath!,
       duration: DateTime.now().difference(_started),

@@ -399,6 +399,24 @@ abstract class CaptureSession {
 }
 ```
 
+**Capture completion (#2946, #2948, #2949).** The recording manager reserves
+its slot before staging or source startup. Stop during startup waits for any
+late capture to stop and removes unpublished staging; it never publishes a new
+active recording. Concurrent Stop calls share the same completion future.
+Desktop Stop rejects new input, drains every accepted PCM frame in order, and
+then finalizes WAV/live output. The raw-PCM queue is capped at 8 MiB: overflow
+signals a storage failure and ends with `CapacityExceeded`, preserving accepted
+audio instead of silently dropping it. A real writer error retains its repair
+path.
+On web, Blob reads are serialized in event order. Stop waits for `onstop` and
+the pending reads before closing the chunk stream; missing completion is a
+bounded, typed failure. Recorder errors, spontaneous stop and ended tracks reach
+the session's end stream. Cleanup releases tracks and the microphone gate even
+on failure, retaining bytes already received. Chromium regression tests include
+a real synthetic audio track recorded for less than one MediaRecorder timeslice
+and successfully decoded after Stop; this does not establish hardware capture
+coverage on other browsers or platforms.
+
 ### 4.2 `TranscriptionEngine` — where text comes from
 
 ```dart
