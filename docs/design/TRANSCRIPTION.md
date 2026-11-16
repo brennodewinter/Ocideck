@@ -477,6 +477,15 @@ and suppresses a late success. Preparation must settle before another task can
 start; cancellation does not itself interrupt a non-cancellable file read.
 The task finishes as `Cancelled`, and a failed upload leaves the source audio
 untouched — retrying is a new user choice, never automatic.
+On desktop one total deadline covers DNS, connection, upload, headers and the
+complete response body. Timeout and cancellation close the request/client and
+remain distinct outcomes; a late DNS result cannot start a new connection.
+The batch input is normalized WAV: uploads always use `audio.wav` and
+`audio/wav`. Source paths and filenames never enter multipart headers; the
+builder accepts only the fixed protocol field names. The optional real-server
+contract test runs with `OCIDECK_BATCH_ASR_URL=http://127.0.0.1:8080 flutter test
+test/transcription/asr_batch_whisper_testbed_test.dart` against a local
+whisper.cpp server, using the repository's Vosk WAV fixture.
 
 **Implemented (#2525) — the live server route.** A second, optional endpoint
 on the same profile (`liveUrl`, `ws://`/`wss://`) carries provisional text

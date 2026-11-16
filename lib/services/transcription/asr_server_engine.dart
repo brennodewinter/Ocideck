@@ -200,16 +200,7 @@ class AsrServerEngine implements TranscriptionEngine {
           'content-type': 'multipart/form-data; boundary=$_boundary',
           ...auth,
         },
-        body: buildMultipartBody(
-          fields: {
-            'response_format': 'verbose_json',
-            if (options.language != null) 'language': options.language!,
-          },
-          fileField: 'file',
-          fileName: _audioFileName(audio.path),
-          fileContentType: 'audio/wav',
-          fileBytes: bytes,
-        ),
+        body: buildMultipartBody(language: options.language, fileBytes: bytes),
       );
       task.handle = handle;
       // Een transportdouble kan tijdens send() synchroon cancel() aanroepen.
@@ -273,16 +264,6 @@ class AsrServerEngine implements TranscriptionEngine {
     final trimmed = base.path.replaceAll(RegExp(r'/+$'), '');
     return base.replace(path: '$trimmed/$path');
   }
-
-  /// De bestandsnaam die de server te zien krijgt. `mem:`-sleutels hebben
-  /// geen pad; we geven een vaste naam — de server doet er niets mee maar
-  /// een echte padnaam zou op web niets betekenen.
-  static String _audioFileName(String path) {
-    if (path.startsWith('mem:')) return 'audio.wav';
-    final idx = path.lastIndexOf('/');
-    final name = idx >= 0 ? path.substring(idx + 1) : path;
-    return name.isEmpty ? 'audio.wav' : name;
-  }
 }
 
 // De annulering hoort bij één taak, ook zolang er nog geen request is.
@@ -312,19 +293,16 @@ class _KeyNeedsTls extends ServerRefused {
 /// niets dat een vaste grens niet ook afzet.
 const _boundary = '----ocideck-asr-boundary';
 
-/// Bouwt een `multipart/form-data`-body: eerst de tekstvelden, dan het
-/// bestanddeel. Puur, zodat de test de exacte bytes kan toetsen — een
-/// afwijkend format faalt bij elke whisper.cpp-achtige server hetzelfde.
-Uint8List buildMultipartBody({
-  required Map<String, String> fields,
-  required String fileField,
-  required String fileName,
-  required String fileContentType,
-  required Uint8List fileBytes,
-}) {
+/// Bouwt uitsluitend het ASR-WAV-contract: vaste veldnamen, uploadnaam en
+/// MIME-type. Lokale bronpaden komen nooit in de multipartheaders terecht.
+Uint8List buildMultipartBody({String? language, required Uint8List fileBytes}) {
   final out = BytesBuilder(copy: false);
   void line(String s) => out.add(utf8.encode('$s\r\n'));
 
+  final fields = {
+    'response_format': 'verbose_json',
+    if (language != null) 'language': language,
+  };
   fields.forEach((name, value) {
     line('--$_boundary');
     line('Content-Disposition: form-data; name="$name"');
@@ -332,11 +310,8 @@ Uint8List buildMultipartBody({
     line(value);
   });
   line('--$_boundary');
-  line(
-    'Content-Disposition: form-data; name="$fileField"; '
-    'filename="$fileName"',
-  );
-  line('Content-Type: $fileContentType');
+  line('Content-Disposition: form-data; name="file"; filename="audio.wav"');
+  line('Content-Type: audio/wav');
   line('');
   out.add(fileBytes);
   out.add(utf8.encode('\r\n--$_boundary--\r\n'));

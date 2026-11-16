@@ -153,6 +153,54 @@ void main() {
       expect(t.body!.length, greaterThan(512));
     });
 
+    for (final path in [
+      r'C:\Users\Alice\Private\recording.wav',
+      '/home/alice/private/recording.wav',
+      'mem:a1',
+      '/privé/音声 "test"\r\nX-Injected: secret.wav',
+    ]) {
+      test(
+        'uploadnaam bevat geen bronpad: ${path.replaceAll(RegExp(r"[\r\n]"), " ")}',
+        () async {
+          final t = FakeTransport();
+          final bytes = Uint8List.fromList([0, 1, 127, 255]);
+          final e = AsrServerEngine(
+            profile: profile,
+            transport: t,
+            audioReader: (_) async => bytes,
+          );
+          await e.transcribe(
+            AudioRef(path),
+            TranscriptionOptions(
+              serverConsent: ServerConsent(host: profile.host, audioPath: path),
+            ),
+          );
+          final wire = t.body!;
+          final text = utf8.decode(wire, allowMalformed: true);
+          expect(text, isNot(contains(path)));
+          expect(text, isNot(contains('Private')));
+          expect(text, isNot(contains('X-Injected')));
+          expect('filename="audio.wav"'.allMatches(text), hasLength(1));
+          expect('name="file";'.allMatches(text), hasLength(1));
+          expect(text, contains('Content-Type: audio/wav\r\n\r\n'));
+          final boundary = t.headers!['content-type']!.split('boundary=').last;
+          final prefix = utf8.encode(
+            '--$boundary\r\n'
+            'Content-Disposition: form-data; name="response_format"\r\n\r\n'
+            'verbose_json\r\n'
+            '--$boundary\r\n'
+            'Content-Disposition: form-data; name="file"; filename="audio.wav"\r\n'
+            'Content-Type: audio/wav\r\n\r\n',
+          );
+          expect(wire, [
+            ...prefix,
+            ...bytes,
+            ...utf8.encode('\r\n--$boundary--\r\n'),
+          ]);
+        },
+      );
+    }
+
     test('taal gaat mee als veld', () async {
       final t = FakeTransport();
       await engine(t).transcribe(
