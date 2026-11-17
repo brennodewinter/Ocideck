@@ -612,6 +612,16 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Sprekers corrigeren': 'Sprecher korrigieren',
+  'Fragment splitsen': 'Segment teilen',
+  'Doelspreker': 'Zielsprecher',
+  'Toewijzen': 'Zuweisen',
+  'Nieuwe spreker': 'Neuer Sprecher',
+  'Samenvoegen vanuit': 'Zusammenführen von',
+  'Samenvoegen': 'Zusammenführen',
+  'Selecteer fragmenten.': 'Segmente auswählen.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Setzen Sie den Cursor beim Sprecherwechsel. Der zweite Teil erhält keinen Zeitstempel.',
   'Ongeldige fragmentgrenzen.': 'Ungültige Ausschnittsgrenzen.',
   'Alleen dit fragment': 'Nur dieser Ausschnitt',
   'Audio downloaden en transcriberen…':

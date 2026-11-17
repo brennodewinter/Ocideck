@@ -1558,6 +1558,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Sprekers corrigeren': 'Ikkoreġi l-kelliema',
+  'Fragment splitsen': 'Aqsam is-segment',
+  'Doelspreker': 'Kelliem fil-mira',
+  'Toewijzen': 'Assenja',
+  'Nieuwe spreker': 'Kelliem ġdid',
+  'Samenvoegen vanuit': 'Għaqqad minn',
+  'Samenvoegen': 'Għaqqad',
+  'Selecteer fragmenten.': 'Agħżel is-segmenti.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Poġġi l-cursor fejn jinbidel il-kelliem. It-tieni parti ma tingħatax marka tal-ħin.',
   'Ongeldige fragmentgrenzen.': 'Limiti tal-framment mhux validi.',
   'Alleen dit fragment': 'Dan il-framment biss',
   'Audio downloaden en transcriberen…': 'Niżżel l-awdjo u ttraskrivi…',

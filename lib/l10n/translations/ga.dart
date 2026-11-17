@@ -1570,6 +1570,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Sprekers corrigeren': 'Ceartaigh cainteoirí',
+  'Fragment splitsen': 'Roinn mír',
+  'Doelspreker': 'Spriocchainteoir',
+  'Toewijzen': 'Sann',
+  'Nieuwe spreker': 'Cainteoir nua',
+  'Samenvoegen vanuit': 'Cumaisc ó',
+  'Samenvoegen': 'Cumaisc',
+  'Selecteer fragmenten.': 'Roghnaigh míreanna.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Cuir an cúrsóir ag athrú an chainteora. Ní fhaigheann an dara cuid stampa ama.',
   'Ongeldige fragmentgrenzen.': 'Teorainneacha míre neamhbhailí.',
   'Alleen dit fragment': 'An mhír seo amháin',
   'Audio downloaden en transcriberen…': 'Íoslódáil fuaim agus tras-scríobh…',

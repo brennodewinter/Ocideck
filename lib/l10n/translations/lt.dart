@@ -1548,6 +1548,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Sprekers corrigeren': 'Taisyti kalbėtojus',
+  'Fragment splitsen': 'Skaidyti segmentą',
+  'Doelspreker': 'Tikslinis kalbėtojas',
+  'Toewijzen': 'Priskirti',
+  'Nieuwe spreker': 'Naujas kalbėtojas',
+  'Samenvoegen vanuit': 'Sujungti iš',
+  'Samenvoegen': 'Sujungti',
+  'Selecteer fragmenten.': 'Pasirinkite segmentus.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Padėkite žymeklį ties kalbėtojo pasikeitimu. Antra dalis negauna laiko žymos.',
   'Ongeldige fragmentgrenzen.': 'Netinkamos ištraukos ribos.',
   'Alleen dit fragment': 'Tik ši ištrauka',
   'Audio downloaden en transcriberen…': 'Atsisiųsti garsą ir transkribuoti…',

@@ -1538,6 +1538,16 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Sprekers corrigeren': 'Labot runātājus',
+  'Fragment splitsen': 'Sadalīt segmentu',
+  'Doelspreker': 'Mērķa runātājs',
+  'Toewijzen': 'Piešķirt',
+  'Nieuwe spreker': 'Jauns runātājs',
+  'Samenvoegen vanuit': 'Apvienot no',
+  'Samenvoegen': 'Apvienot',
+  'Selecteer fragmenten.': 'Atlasiet segmentus.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Novietojiet kursoru pie runātāja maiņas. Otrā daļa nesaņem laika atzīmi.',
   'Ongeldige fragmentgrenzen.': 'Nederīgas fragmenta robežas.',
   'Alleen dit fragment': 'Tikai šis fragments',
   'Audio downloaden en transcriberen…': 'Lejupielādēt audio un transkribēt…',

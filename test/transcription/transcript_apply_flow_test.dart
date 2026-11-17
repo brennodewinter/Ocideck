@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/services/transcription/transcript_document.dart';
+import 'package:ocideck/services/transcription/speaker_corrections.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/state/transcription_provider.dart';
 import 'package:ocideck/widgets/transcript_document_extras.dart';
@@ -104,6 +105,30 @@ void main() {
       'Definitieve tekst.',
     );
   });
+
+  testWidgets(
+    'speaker corrections require visible comparison after reopening',
+    (tester) async {
+      final model = SpeakerCorrections.read(_doc)!;
+      model.assign({0}, model.addSpeaker('Carla'));
+      final corrected = model.apply(_doc);
+      notifier.loadDocument(MarkdownDocument.parse(corrected));
+      await tester.pumpWidget(_app(container, notifier));
+      await tester.pump();
+      final applied = container
+          .read(transcriptApplyRequestProvider.notifier)
+          .request(
+            incoming: 'Nieuwe modeltekst.',
+            baseline: transcriptBodyText(corrected),
+          );
+      await tester.pumpAndSettle();
+      expect(find.text('Nieuwe transcripttekst'), findsOneWidget);
+      await tester.tap(find.text('Huidige tekst behouden'));
+      await tester.pumpAndSettle();
+      expect(await applied, isFalse);
+      expect(notifier.currentState.document!.source, corrected);
+    },
+  );
 
   testWidgets('behouden laat de eigen tekst staan en meldt "niet toegepast"', (
     tester,

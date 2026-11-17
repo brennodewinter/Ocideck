@@ -878,3 +878,23 @@ with the honest label "room capture may include speaker output".
   placeholders for the strings #2511 picks; the contract fixes only that they
   are *plain text* and *only real*. Localising them is a l10n decision like
   every other generated line.
+
+### Speaker corrections (#2986)
+
+A transcript's **Sprekers corrigeren** action opens a segment selection dialog.
+Assign selected segments to an existing speaker, or add a named speaker and assign
+that selection. To separate a previously missed speaker change, split a segment
+at the text caret, then assign the selected second part. Its timestamp is left
+unknown: a text position cannot establish an audio time. Merge selects a source
+and destination speaker and confirms the affected segment count before replacing
+all occurrences, including deduplicating overlapping speaker IDs.
+
+Applying the dialog is one document undo step; cancelling discards its changes.
+The Markdown remains the storage format. Segment metadata stores speaker IDs,
+display names, and the exact corrected paragraph alongside the visible labels.
+Corrections therefore survive save/reopen and force a visible comparison before a
+later transcription can replace them, even when a caller supplies a fresh baseline.
+Ambiguous paragraph indexing, malformed metadata, or text edited after correction
+makes the structured correction action unavailable; the ordinary document editor
+remains available. Multi-line paragraphs cannot currently be corrected through
+this dialog. No audio alignment is inferred when splitting.

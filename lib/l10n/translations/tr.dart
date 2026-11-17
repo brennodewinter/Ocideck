@@ -2398,6 +2398,16 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Sprekers corrigeren': 'Konuşmacıları düzelt',
+  'Fragment splitsen': 'Bölümü ayır',
+  'Doelspreker': 'Hedef konuşmacı',
+  'Toewijzen': 'Ata',
+  'Nieuwe spreker': 'Yeni konuşmacı',
+  'Samenvoegen vanuit': 'Şuradan birleştir',
+  'Samenvoegen': 'Birleştir',
+  'Selecteer fragmenten.': 'Bölümleri seçin.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'İmleci konuşmacı değişimine yerleştirin. İkinci kısma zaman damgası verilmez.',
   'Ongeldige fragmentgrenzen.': 'Geçersiz bölüm sınırları.',
   'Alleen dit fragment': 'Yalnızca bu bölüm',
   'Audio downloaden en transcriberen…': 'Sesi indir ve metne dönüştür…',

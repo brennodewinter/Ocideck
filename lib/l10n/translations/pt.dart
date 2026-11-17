@@ -1567,6 +1567,16 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Sprekers corrigeren': 'Corrigir falantes',
+  'Fragment splitsen': 'Dividir segmento',
+  'Doelspreker': 'Falante de destino',
+  'Toewijzen': 'Atribuir',
+  'Nieuwe spreker': 'Novo falante',
+  'Samenvoegen vanuit': 'Unir a partir de',
+  'Samenvoegen': 'Unir',
+  'Selecteer fragmenten.': 'Selecione segmentos.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Coloque o cursor na mudança de falante. A segunda parte não recebe marca temporal.',
   'Ongeldige fragmentgrenzen.': 'Limites do excerto inválidos.',
   'Alleen dit fragment': 'Apenas este excerto',
   'Audio downloaden en transcriberen…': 'Descarregar áudio e transcrever…',

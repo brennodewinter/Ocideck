@@ -1541,6 +1541,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Sprekers corrigeren': 'Korrigera talare',
+  'Fragment splitsen': 'Dela segment',
+  'Doelspreker': 'Måltalare',
+  'Toewijzen': 'Tilldela',
+  'Nieuwe spreker': 'Ny talare',
+  'Samenvoegen vanuit': 'Slå samman från',
+  'Samenvoegen': 'Slå samman',
+  'Selecteer fragmenten.': 'Välj segment.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Placera markören vid talarbytet. Den andra delen får ingen tidsstämpel.',
   'Ongeldige fragmentgrenzen.': 'Ogiltiga gränser för utdraget.',
   'Alleen dit fragment': 'Endast detta utdrag',
   'Audio downloaden en transcriberen…': 'Hämta ljud och transkribera…',

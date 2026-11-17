@@ -319,6 +319,11 @@ TranscriptUpdate planTranscriptUpdate(
   if (current.trim() == incoming.trim()) {
     return const TranscriptUnchanged();
   }
+  // Speaker corrections are author edits, even if a caller supplied the
+  // current body as its baseline after reopening the document.
+  if (RegExp(r'"speaker_corrected"\s*:\s*true').hasMatch(current)) {
+    return TranscriptConflict(incoming);
+  }
   if (baseline != null && current.trim() == baseline.trim()) {
     return TranscriptApply(applyTranscriptBody(source, incoming));
   }

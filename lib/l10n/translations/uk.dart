@@ -1556,6 +1556,16 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Sprekers corrigeren': 'Виправити мовців',
+  'Fragment splitsen': 'Розділити сегмент',
+  'Doelspreker': 'Цільовий мовець',
+  'Toewijzen': 'Призначити',
+  'Nieuwe spreker': 'Новий мовець',
+  'Samenvoegen vanuit': 'Об’єднати з',
+  'Samenvoegen': 'Об’єднати',
+  'Selecteer fragmenten.': 'Виберіть сегменти.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Розташуйте курсор на зміні мовця. Друга частина не отримує часової позначки.',
   'Ongeldige fragmentgrenzen.': 'Недійсні межі уривка.',
   'Alleen dit fragment': 'Лише цей уривок',
   'Audio downloaden en transcriberen…': 'Завантажити аудіо й транскрибувати…',

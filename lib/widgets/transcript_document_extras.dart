@@ -20,6 +20,8 @@ import '../services/transcription/transcript_document.dart';
 import '../state/document_provider.dart';
 import '../state/transcription_provider.dart';
 import 'dialogs/transcript_apply_dialog.dart';
+import 'dialogs/speaker_corrections_dialog.dart';
+import '../services/transcription/speaker_corrections.dart';
 import 'panels/transcript_notice.dart';
 
 /// Strook + toepassingsverzoeken voor een transcriptdocument. Zonder
@@ -44,9 +46,34 @@ class _TranscriptDocumentExtrasState
       documentProvider.select((s) => s.document?.source ?? ''),
     );
     final filePath = ref.watch(documentProvider.select((s) => s.filePath));
-    return TranscriptNotice(
-      source: source,
-      projectPath: filePath == null ? null : p.dirname(filePath),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TranscriptNotice(
+          source: source,
+          projectPath: filePath == null ? null : p.dirname(filePath),
+        ),
+        if (SpeakerCorrections.read(source) != null)
+          TextButton.icon(
+            icon: const Icon(Icons.people_outline),
+            label: Text(context.l10n.d('Sprekers corrigeren')),
+            onPressed: () async {
+              final edited = await showSpeakerCorrectionsDialog(
+                context,
+                source,
+              );
+              if (!mounted || edited == null) return;
+              // A model result or a switch to another document must not be lost
+              // while the correction dialog is open.
+              if (ref.read(documentProvider).document?.source != source ||
+                  ref.read(documentProvider).filePath != filePath) {
+                return;
+              }
+              _commit(edited);
+            },
+          ),
+      ],
     );
   }
 
@@ -65,7 +92,11 @@ class _TranscriptDocumentExtrasState
       )) {
         TranscriptUnchanged() => true,
         TranscriptApply(:final markdown) => _commit(markdown),
-        TranscriptConflict(:final incoming) => await _compare(source, incoming),
+        TranscriptConflict(:final incoming) => await _compare(
+          source,
+          incoming,
+          request,
+        ),
         TranscriptTooLarge() => _tooLarge(),
       };
     }
@@ -79,14 +110,23 @@ class _TranscriptDocumentExtrasState
     return true;
   }
 
-  Future<bool> _compare(String source, String incoming) async {
+  Future<bool> _compare(
+    String source,
+    String incoming,
+    TranscriptApplyRequest request,
+  ) async {
     final current = transcriptBodyText(source) ?? '';
     final choice = await showTranscriptApplyDialog(
       context,
       current: current,
       incoming: incoming,
     );
-    if (choice != true) return false;
+    if (!mounted ||
+        choice != true ||
+        ref.read(transcriptApplyRequestProvider) != request ||
+        ref.read(documentProvider).document?.source != source) {
+      return false;
+    }
     return _commit(applyTranscriptBody(source, incoming));
   }
 
