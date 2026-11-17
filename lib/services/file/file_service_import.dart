@@ -113,6 +113,13 @@ bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
   }
 }
 
+/// Roept de schil na het ophalen maar vóór de deck-parsing aan met de
+/// opgehaalde bytes; `true` betekent "ik heb deze inhoud zelf
+/// afgehandeld" — de import stopt zonder fout of pad. Dezelfde vorm als
+/// de [PackagePasswordResolver]-injectie: de service kent de bytes, de
+/// schil kent de context (#2931, feedrouter voor podcasts).
+typedef UrlContentRouter = FutureOr<bool> Function(Uint8List bytes);
+
 extension FileServiceImport on FileService {
   /// De meervoudige variant van [FileService.pickMarkdownFile]: dezelfde
   /// filterloze kiezer, maar de gebruiker mag een stapel bestanden tegelijk
@@ -303,6 +310,7 @@ extension FileServiceImport on FileService {
     String url,
     String destParentDir, {
     PackagePasswordResolver? onPassword,
+    UrlContentRouter? contentRouter,
   }) async {
     final uri = Uri.tryParse(url.trim());
     if (uri == null || !uri.hasScheme) {
@@ -337,7 +345,7 @@ extension FileServiceImport on FileService {
     }
     final pinned = resolved.addresses!.first;
 
-    final List<int> bytes;
+    final Uint8List bytes;
     try {
       final client = buildPinnedClient(pinned);
       try {
@@ -381,6 +389,12 @@ extension FileServiceImport on FileService {
             ? ImportFailure.tls
             : ImportFailure.network,
       );
+    }
+
+    // Inhoudsrouter vóór de deck-parsing (#2931): een podcastfeed of een
+    // HTML-pagina met feedlinks is geen mislukt deck.
+    if (contentRouter != null && await contentRouter(bytes)) {
+      return const ImportOutcome.routed();
     }
 
     // Zip-magie → pakket; anders als markdown behandelen.

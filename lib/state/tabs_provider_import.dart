@@ -64,13 +64,21 @@ extension TabsImport on TabsNotifier {
 
   /// Haal een presentatie op via een URL (pakket of platte markdown) en open
   /// het in een tab. Zie [importPackageFile] voor de betekenis van de retour.
-  Future<ImportFailure?> importFromUrl(String url, {String? homeDir}) async {
+  /// [contentRouter] laat de schil de opgehaalde bytes vóór de deck-parsing
+  /// zelf afhandelen (feedrouter, #2931) — retour `null` is dan "verwerkt".
+  Future<ImportFailure?> importFromUrl(
+    String url, {
+    String? homeDir,
+    UrlContentRouter? contentRouter,
+  }) async {
     final dest = await _importDestDir(homeDir);
     final outcome = await _file.importFromUrlDetailed(
       url,
       dest,
       onPassword: packagePasswordResolver,
+      contentRouter: contentRouter,
     );
+    if (outcome.routed) return null;
     final mdPath = outcome.mdPath;
     if (outcome.failure == ImportFailure.encryptedCancelled) return null;
     if (mdPath == null) return outcome.failure;
@@ -91,9 +99,8 @@ extension TabsImport on TabsNotifier {
   /// http(s)-link, geweigerde host…) zodat de schil de juiste melding kiest in
   /// plaats van standaard CORS de schuld te geven. `failure` is null zodra het
   /// ophalen slaagde; wat er dáárna misging staat in [openFailureProvider].
-  Future<({OpenResult result, ImportFailure? failure})> importFromUrlWeb(
-    String url,
-  ) async {
+  Future<({OpenResult result, ImportFailure? failure, bool routed})>
+  importFromUrlWeb(String url, {UrlContentRouter? contentRouter}) async {
     final fetched = await _file.fetchUrlBytes(
       url,
       maxBytes: FileService.maxPackageBytes,
@@ -101,13 +108,22 @@ extension TabsImport on TabsNotifier {
     );
     final bytes = fetched.bytes;
     if (bytes == null || !mounted) {
-      return (result: OpenResult.unreadable, failure: fetched.failure);
+      return (
+        result: OpenResult.unreadable,
+        failure: fetched.failure,
+        routed: false,
+      );
+    }
+    // Zelfde inhoudsrouter als de desktoproute: een podcastfeed of een
+    // pagina met feedlinks is geen mislukt deck (#2931).
+    if (contentRouter != null && await contentRouter(bytes)) {
+      return (result: OpenResult.opened, failure: null, routed: true);
     }
     // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes]. De URL
     // reist mee als [remoteOrigin] zodat de statusbalk de privacy-badge toont:
     // deze presentatie is van buiten het apparaat opgehaald.
     final result = await openDeckFromBytes(bytes, url, remoteOrigin: url);
-    return (result: result, failure: null);
+    return (result: result, failure: null, routed: false);
   }
 
   /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het

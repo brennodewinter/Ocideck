@@ -615,6 +615,40 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'één taal': 'ien taal',
   'Meerdere talen in deze opname': 'Meardere talen yn dizze opname',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Noch gjin folge feeds. Iepenje in podcastfeed fia Iepenje fia URL om him te folgjen.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI stiet út; kontrôles en ferwurking steane pauzearre oant AI wer oan stiet.',
+  'Deze feed stond al in de lijst.': 'Dizze feed stie al yn \'e list.',
+  'Deze feed wordt gevolgd.': 'Dizze feed wurdt folge.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Dizze side biedt gjin presintaasje, mar wol in feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Dit transcript is leech of onlêsber.',
+  'Elk uur': 'Elk oere',
+  'Elke 15 minuten': 'Alle 15 minuten',
+  'Elke 30 minuten': 'Alle 30 minuten',
+  'Elke 6 uur': 'Elke 6 oere',
+  'Dagelijks': 'Deistich',
+  'Feed gevonden': 'Feed fûn',
+  'Feed volgen': 'Feed folgje',
+  'Geen nieuwe afleveringen.': 'Gjin nije ôfleverings.',
+  'Laatste controle': 'Lêste kontrôle',
+  'Markeren als verwerkt': 'Markearje as ôfhannele',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Nije ôfleverings automatysk downloade',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nije podcastôfleverings — sjoch Ymportearje → Podcastfeeds.',
+  'Nu vernieuwen': 'No fernije',
+  'Podcastfeeds': 'Podcastfeeds',
+  'Podcastfeeds…': 'Podcastfeeds…',
+  'Stoppen met volgen': 'Stopje mei folgjen',
+  'Transcript ophalen': 'Transcript ophelje',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Set AI oan yn \'e ynstellings om dizze feed te folgjen.',
+  'afleveringen': 'ôfleverings',
+  'controles mislukt': 'kontrôles mislearre',
+  'gepauzeerd': 'pauzearre',
   'Serverprotocol': 'Tsjinnerprotokol',
   'Spreker': 'Sprekker',
   'Automatisch afspelen is niet gestart.': 'Automatysk ôfspyljen is net begûn.',

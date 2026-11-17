@@ -387,7 +387,7 @@ const Map<String, int> fileSizeBaseline = {
   // +63 (sweep #2640/#2648): web-logoimport via WebAssetStore plus de
   // herstel-snackbar na corrupte instellingen (#2628) — beide aan de
   // shell-naad, waar ze met de context werken.
-  'lib/widgets/app_shell.dart': 1090,
+  'lib/widgets/app_shell.dart': 1081,
   // +6 (sweep #2623): gememoiseerde miniatuur-instanties en de eenmalige
   // scopeCia-index — precies het werk dat voorheen per toetsaanslag
   // opnieuw liep.
@@ -804,10 +804,6 @@ const Map<String, int> classSizeBaseline = {
   // inconsistent maken.
   'lib/widgets/dialogs/ociserve_courses_dialog.dart#_OciServeCoursesDialogState':
       1090,
-  // +56 (sweep #2640/#2628): de web-logoimport-helpers en de
-  // herstel-snackbar hangen aan de shell-state omdat ze context en
-  // mounted lezen; de sectie-widgets zelf staan in de part-bestanden.
-  'lib/widgets/app_shell.dart#_AppShellState': 1080,
   // +46 (sweep #2623): de miniatuur-cachemap en de scopeCia-index zijn
   // State-velden; de widgets die ze bouwen staan in de part-bestanden.
   'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1070,

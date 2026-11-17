@@ -1544,6 +1544,40 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'één taal': 'ét sprog',
   'Meerdere talen in deze opname': 'Flere sprog i denne optagelse',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Ingen fulgte feeds endnu. Åbn et podcastfeed via Åbn via URL for at følge det.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI er slået fra; kontroller og behandling er sat på pause, indtil AI er slået til igen.',
+  'Deze feed stond al in de lijst.': 'Dette feed var allerede på listen.',
+  'Deze feed wordt gevolgd.': 'Dette feed følges.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Denne side tilbyder ikke en präsentation, men et feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Denne transskription er tom eller ulæselig.',
+  'Elk uur': 'Hver time',
+  'Elke 15 minuten': 'Hvert 15. minut',
+  'Elke 30 minuten': 'Hvert 30. minut',
+  'Elke 6 uur': 'Hver 6. time',
+  'Dagelijks': 'Dagligt',
+  'Feed gevonden': 'Feed fundet',
+  'Feed volgen': 'Følg feed',
+  'Geen nieuwe afleveringen.': 'Ingen nye episoder.',
+  'Laatste controle': 'Seneste kontrol',
+  'Markeren als verwerkt': 'Markér som håndteret',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Download automatisk nye episoder',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nye podcastepisoder — se Importér → Podcastfeeds.',
+  'Nu vernieuwen': 'Opdatér nu',
+  'Podcastfeeds': 'Podcastfeeds',
+  'Podcastfeeds…': 'Podcastfeeds…',
+  'Stoppen met volgen': 'Stop med at følge',
+  'Transcript ophalen': 'Hent transskription',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Slå AI til i indstillingerne for at følge dette feed.',
+  'afleveringen': 'episoder',
+  'controles mislukt': 'mislykkede kontroller',
+  'gepauzeerd': 'sat på pause',
   'Serverprotocol': 'Serverprotokol',
   'Spreker': 'Taler',
   'Automatisch afspelen is niet gestart.':

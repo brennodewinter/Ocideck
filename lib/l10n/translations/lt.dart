@@ -1550,6 +1550,40 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'één taal': 'viena kalba',
   'Meerdere talen in deze opname': 'Kelios kalbos šiame įraše',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Kol kas nestebimų kanalų nėra. Atidarykite tinklalaidės kanalą per Atidaryti iš URL, kad jį sektumėte.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI išjungtas; patikrinimai ir apdorojimas pristabdyti, kol AI vėl bus įjungtas.',
+  'Deze feed stond al in de lijst.': 'Šis kanalas jau buvo sąraše.',
+  'Deze feed wordt gevolgd.': 'Šis kanalas stebimas.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Šis puslapis nesiūlo pristatymo, bet siūlo kanalą:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Šis transkriptas tuščias arba neįskaitomas.',
+  'Elk uur': 'Kas valandą',
+  'Elke 15 minuten': 'Kas 15 minučių',
+  'Elke 30 minuten': 'Kas 30 minučių',
+  'Elke 6 uur': 'Kas 6 valandas',
+  'Dagelijks': 'Kasdien',
+  'Feed gevonden': 'Kanalas rastas',
+  'Feed volgen': 'Sekti kanalą',
+  'Geen nieuwe afleveringen.': 'Naujų epizodų nėra.',
+  'Laatste controle': 'Paskutinis patikrinimas',
+  'Markeren als verwerkt': 'Pažymėti kaip apdorotą',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Automatiškai atsisiųsti naujus epizodus',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nauji tinklalaidžių epizodai — žr. Importuoti → Tinklalaidžių kanalus.',
+  'Nu vernieuwen': 'Atnaujinti dabar',
+  'Podcastfeeds': 'Tinklalaidžių kanalai',
+  'Podcastfeeds…': 'Tinklalaidžių kanalai…',
+  'Stoppen met volgen': 'Nustoti sekti',
+  'Transcript ophalen': 'Gauti transkriptą',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Įjunkite AI nustatymuose, kad sektumėte šį kanalą.',
+  'afleveringen': 'epizodai',
+  'controles mislukt': 'nepavykę patikrinimai',
+  'gepauzeerd': 'pristabdytas',
   'Serverprotocol': 'Serverio protokolas',
   'Spreker': 'Kalbėtojas',
   'Automatisch afspelen is niet gestart.': 'Automatinis atkūrimas neprasidėjo.',

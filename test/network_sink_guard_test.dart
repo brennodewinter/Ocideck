@@ -422,6 +422,15 @@ void main() {
         // en omvang (harde bytecap). Op desktop loopt de import via het gepinde
         // importFromUrl, niet hierlangs.
         'lib/services/file/file_service_net.dart',
+        // Feed-ophalen (podcastfeeds, #2931). Zelfde redenering als
+        // file_service_net.dart: `http.Client` zit alleen in de WEB-tak —
+        // `fetchFeed` kiest hem uitsluitend bij `kIsWeb` (of een testclient),
+        // waar de browser (CORS) en de pagina-CSP (`connect-src`) de gate
+        // zijn. Op desktop loopt alles via `_fetchFeedPinned`:
+        // NetGuard-resolve + gepinde client, `followRedirects = false` en
+        // elke 3xx-hop opnieuw door NetGuard — zelfde grens als de URL-import,
+        // plus conditionele headers en een eigen bytecap.
+        'lib/services/feeds/feed_fetch.dart',
         // Git-forge (WEB-tak). Zelfde redenering als file_service_net.dart
         // hierboven: op web bestaat de dart:io-pinning van git_transport_io.dart
         // niet en kan ze er ook niet draaien — daar zijn de browser-sandbox en

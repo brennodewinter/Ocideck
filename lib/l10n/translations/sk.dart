@@ -1547,6 +1547,40 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'één taal': 'jeden jazyk',
   'Meerdere talen in deze opname': 'Viac jazykov v tejto nahrávke',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Zatiaľ žiadne sledované kanály. Otvorte kanál podcastu cez Otvoriť cez URL a sledujte ho.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI je vypnutá; kontroly a spracovanie sú pozastavené, kým sa znova nezapne.',
+  'Deze feed stond al in de lijst.': 'Tento kanál už bol v zozname.',
+  'Deze feed wordt gevolgd.': 'Tento kanál sa sleduje.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Táto stránka neponúka prezentáciu, ale ponúka kanál:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Tento prepis je prázdny alebo nečitateľný.',
+  'Elk uur': 'Každú hodinu',
+  'Elke 15 minuten': 'Každých 15 minút',
+  'Elke 30 minuten': 'Každých 30 minút',
+  'Elke 6 uur': 'Každých 6 hodín',
+  'Dagelijks': 'Denne',
+  'Feed gevonden': 'Kanál nájdený',
+  'Feed volgen': 'Sledovať kanál',
+  'Geen nieuwe afleveringen.': 'Žiadne nové epizódy.',
+  'Laatste controle': 'Posledná kontrola',
+  'Markeren als verwerkt': 'Označiť ako vybavené',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Automaticky sťahovať nové epizódy',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nové epizódy podcastov — pozri Importovať → Kanály podcastov.',
+  'Nu vernieuwen': 'Obnoviť teraz',
+  'Podcastfeeds': 'Kanály podcastov',
+  'Podcastfeeds…': 'Kanály podcastov…',
+  'Stoppen met volgen': 'Prestať sledovať',
+  'Transcript ophalen': 'Stiahnuť prepis',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Zapnite AI v nastaveniach na sledovanie tohto kanála.',
+  'afleveringen': 'epizódy',
+  'controles mislukt': 'neúspešné kontroly',
+  'gepauzeerd': 'pozastavené',
   'Serverprotocol': 'Protokol servera',
   'Spreker': 'Hovoriaci',
   'Automatisch afspelen is niet gestart.':

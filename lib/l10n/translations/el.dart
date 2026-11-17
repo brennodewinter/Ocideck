@@ -1567,6 +1567,39 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'één taal': 'μία γλώσσα',
   'Meerdere talen in deze opname': 'Πολλές γλώσσες σε αυτήν την εγγραφή',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Καμία ροή δεν παρακολουθείται ακόμη. Ανοίξτε μια ροή podcast μέσω Άνοιγμα μέσω URL για να την ακολουθήσετε.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'Το AI είναι απενεργοποιημένο· οι έλεγχοι και η επεξεργασία είναι σε παύση έως ότου ενεργοποιηθεί ξανά.',
+  'Deze feed stond al in de lijst.': 'Αυτή η ροή υπήρχε ήδη στη λίστα.',
+  'Deze feed wordt gevolgd.': 'Αυτή η ροή παρακολουθείται.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Αυτή η σελίδα δεν προσφέρει παρουσίαση, αλλά προσφέρει ροή:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Αυτή η μεταγραφή είναι κενή ή δυσανάγνωστη.',
+  'Elk uur': 'Κάθε ώρα',
+  'Elke 15 minuten': 'Κάθε 15 λεπτά',
+  'Elke 30 minuten': 'Κάθε 30 λεπτά',
+  'Elke 6 uur': 'Κάθε 6 ώρες',
+  'Dagelijks': 'Καθημερινά',
+  'Feed gevonden': 'Βρέθηκε ροή',
+  'Feed volgen': 'Παρακολούθηση ροής',
+  'Geen nieuwe afleveringen.': 'Κανένα νέο επεισόδιο.',
+  'Laatste controle': 'Τελευταίος έλεγχος',
+  'Markeren als verwerkt': 'Σήμανση ως διεκπεραιωμένο',
+  'Nieuwe afleveringen automatisch downloaden': 'Αυτόματη λήψη νέων επεισοδίων',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Νέα επεισόδια podcast — δείτε Εισαγωγή → Ροές podcast.',
+  'Nu vernieuwen': 'Ανανέωση τώρα',
+  'Podcastfeeds': 'Ροές podcast',
+  'Podcastfeeds…': 'Ροές podcast…',
+  'Stoppen met volgen': 'Διακοπή παρακολούθησης',
+  'Transcript ophalen': 'Λήψη μεταγραφής',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Ενεργοποιήστε το AI στις ρυθμίσεις για να ακολουθήσετε αυτή τη ροή.',
+  'afleveringen': 'επεισόδια',
+  'controles mislukt': 'ανεπιτυχείς έλεγχοι',
+  'gepauzeerd': 'σε παύση',
   'Serverprotocol': 'Πρωτόκολλο διακομιστή',
   'Spreker': 'Ομιλητής',
   'Automatisch afspelen is niet gestart.':

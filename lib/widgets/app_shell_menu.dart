@@ -187,6 +187,14 @@ List<PickerOption<String>> importSourceOptions(
       icon: Icons.graphic_eq,
       label: recordCombinationLabel(l10n),
     ),
+  // Beheren van gevolgde podcastfeeds (#2931): pas zichtbaar als er iets
+  // te beheren valt — een leeg beheervenster is ruis.
+  if (ref.read(feedStoreProvider).isNotEmpty)
+    (
+      value: 'podcast_feeds',
+      icon: Icons.podcasts_outlined,
+      label: l10n.d('Podcastfeeds…'),
+    ),
   ...openKatImportChoices(ref, l10n),
 ];
 
@@ -353,6 +361,8 @@ extension _MainLayoutMenu on _MainLayoutState {
         await recordSystem(context);
       case 'record_combination':
         await recordCombination(context);
+      case 'podcast_feeds':
+        await showFeedSubscriptionsDialog(context);
       default:
         await dispatchOpenKatShellAction(context, ref, action);
     }

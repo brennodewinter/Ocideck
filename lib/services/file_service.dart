@@ -290,8 +290,13 @@ class ImportOutcome {
   final String? mdPath;
   final ImportFailure? failure;
 
-  const ImportOutcome.ok(this.mdPath) : failure = null;
-  const ImportOutcome.failed(this.failure) : mdPath = null;
+  /// Zet als de inhoudsrouter de bytes zelf afhandelde (#2931): geen
+  /// pad, geen fout, niets meer te openen of te melden.
+  final bool routed;
+
+  const ImportOutcome.ok(this.mdPath) : failure = null, routed = false;
+  const ImportOutcome.failed(this.failure) : mdPath = null, routed = false;
+  const ImportOutcome.routed() : mdPath = null, failure = null, routed = true;
 }
 
 /// Vraagt de gebruiker waar een bestand naartoe moet. Standaard het

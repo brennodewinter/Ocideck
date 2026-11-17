@@ -1555,6 +1555,40 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'één taal': 'una lingua',
   'Meerdere talen in deze opname': 'Plures linguae in hac inscriptione sonora',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Nulli rivi adhuc secuntur. Rivum podmaticum per Aperire via URL aperi ut sequaris.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'Intelligentia artificialis cessat; inspectiones et processus intermissi sunt donec redeat.',
+  'Deze feed stond al in de lijst.': 'Hic rivus iam in indice erat.',
+  'Deze feed wordt gevolgd.': 'Hic rivus sequitur.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Haec pagina non praebet praesentationem, sed rivum:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Haec transcriptio vacua aut illegibilis est.',
+  'Elk uur': 'Singulis horis',
+  'Elke 15 minuten': 'Quaque quadrante horae',
+  'Elke 30 minuten': 'Quaque semihore',
+  'Elke 6 uur': 'Quaque sexta hora',
+  'Dagelijks': 'Cotidie',
+  'Feed gevonden': 'Rivus inventus',
+  'Feed volgen': 'Rivum sequi',
+  'Geen nieuwe afleveringen.': 'Nullae partes novae.',
+  'Laatste controle': 'Ultima inspectio',
+  'Markeren als verwerkt': 'Nota ut confectum',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Partes novas ipso motu haurire',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Partes novae podmaticae — vide Importare → Rivos podmaticos.',
+  'Nu vernieuwen': 'Nunc renovare',
+  'Podcastfeeds': 'Rivi podmatici',
+  'Podcastfeeds…': 'Rivi podmatici…',
+  'Stoppen met volgen': 'Sequi desistere',
+  'Transcript ophalen': 'Transcriptionem haurire',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Intelligentiam artificialem in optionibus excita ut hunc rivum sequaris.',
+  'afleveringen': 'partes',
+  'controles mislukt': 'inspectiones lapsae',
+  'gepauzeerd': 'intermissus',
   'Serverprotocol': 'Protocollum ministri',
   'Spreker': 'Loquens',
   'Automatisch afspelen is niet gestart.':

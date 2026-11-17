@@ -1540,6 +1540,40 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'één taal': 'viena valoda',
   'Meerdere talen in deze opname': 'Vairākas valodas šajā ierakstā',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Vēl nav sekotu plūsmu. Atveriet raidījuma plūsmu, izmantojot Atvērt ar URL, lai to sekotu.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI ir izslēgts; pārbaudes un apstrāde ir pauzētas, līdz AI atkal ir ieslēgts.',
+  'Deze feed stond al in de lijst.': 'Šī plūsma jau bija sarakstā.',
+  'Deze feed wordt gevolgd.': 'Šī plūsma tiek sekota.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Šī lapa nepiedāvā prezentāciju, bet piedāvā plūsmu:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Šis transkripts ir tukšs vai neizlasāms.',
+  'Elk uur': 'Ik stundu',
+  'Elke 15 minuten': 'Ik pēc 15 minūtēm',
+  'Elke 30 minuten': 'Ik pēc 30 minūtēm',
+  'Elke 6 uur': 'Ik pēc 6 stundām',
+  'Dagelijks': 'Katru dienu',
+  'Feed gevonden': 'Plūsma atrasta',
+  'Feed volgen': 'Sekot plūsmai',
+  'Geen nieuwe afleveringen.': 'Nav jaunu sēriju.',
+  'Laatste controle': 'Pēdējā pārbaude',
+  'Markeren als verwerkt': 'Atzīmēt kā apstrādātu',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Automātiski lejupielādēt jaunās sērijas',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Jaunas raidījumu sērijas — skat. Importēt → Raidījumu plūsmas.',
+  'Nu vernieuwen': 'Atsvaidzināt tagad',
+  'Podcastfeeds': 'Raidījumu plūsmas',
+  'Podcastfeeds…': 'Raidījumu plūsmas…',
+  'Stoppen met volgen': 'Pārtraukt sekošanu',
+  'Transcript ophalen': 'Iegūt transkriptu',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Ieslēdziet AI iestatījumos, lai sekotu šai plūsmai.',
+  'afleveringen': 'sērijas',
+  'controles mislukt': 'neveiksmīgas pārbaudes',
+  'gepauzeerd': 'pauzēts',
   'Serverprotocol': 'Servera protokols',
   'Spreker': 'Runātājs',
   'Automatisch afspelen is niet gestart.': 'Automātiskā atskaņošana nesākās.',
