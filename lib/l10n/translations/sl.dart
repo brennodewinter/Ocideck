@@ -1542,6 +1542,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Serverprotocol': 'Protokol strežnika',
+  'Spreker': 'Govorec',
   'Automatisch afspelen is niet gestart.':
       'Samodejno predvajanje se ni začelo.',
   'Audio- en videoformaten': 'Zvočni in video formati',

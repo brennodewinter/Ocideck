@@ -1542,6 +1542,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Serverprotocol': 'Serverový protokol',
+  'Spreker': 'Mluvčí',
   'Automatisch afspelen is niet gestart.':
       'Automatické přehrávání se nespustilo.',
   'Audio- en videoformaten': 'Zvukové a obrazové formáty',

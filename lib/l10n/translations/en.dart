@@ -767,6 +767,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Serverprotocol': 'Server protocol',
+  'Spreker': 'Speaker',
   'Automatisch afspelen is niet gestart.': 'Automatic playback did not start.',
   'Audio- en videoformaten': 'Audio and video formats',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':

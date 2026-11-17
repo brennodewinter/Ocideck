@@ -129,6 +129,10 @@ void main() {
     await tester.pumpWidget(app());
     await tester.pumpAndSettle();
     await fillLoopback(tester);
+    await tester.tap(find.byType(DropdownButtonFormField<AsrBatchProtocol>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('OciDeck ASR v1').last);
+    await tester.pumpAndSettle();
     await tester.enterText(
       find.widgetWithText(TextField, 'API-sleutel'),
       'geheime-sleutel',
@@ -146,6 +150,7 @@ void main() {
       Map<String, Object?>.from(jsonDecode(raw!) as Map),
     );
     expect(saved.mode, AsrServerMode.loopback);
+    expect(saved.batchProtocol, AsrBatchProtocol.ocideckV1);
     expect(saved.enabled, isTrue);
     expect(saved.baseUrl, 'http://127.0.0.1:8080');
     // De sleutel staat nergens in het profiel — die hoort in de sleutelbos.
@@ -159,6 +164,8 @@ void main() {
     await tester.pumpAndSettle();
     await fillLoopback(tester);
 
+    await tester.ensureVisible(find.text('Verbinding testen (zonder audio)'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Verbinding testen (zonder audio)'));
     await tester.pumpAndSettle();
 

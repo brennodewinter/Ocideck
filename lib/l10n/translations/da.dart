@@ -1542,6 +1542,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Serverprotocol': 'Serverprotokol',
+  'Spreker': 'Taler',
   'Automatisch afspelen is niet gestart.':
       'Automatisk afspilning startede ikke.',
   'Audio- en videoformaten': 'Lyd- og videoformater',

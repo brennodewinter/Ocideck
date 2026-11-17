@@ -1538,6 +1538,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Serverprotocol': 'Servera protokols',
+  'Spreker': 'Runātājs',
   'Automatisch afspelen is niet gestart.': 'Automātiskā atskaņošana nesākās.',
   'Audio- en videoformaten': 'Audio un video formāti',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':

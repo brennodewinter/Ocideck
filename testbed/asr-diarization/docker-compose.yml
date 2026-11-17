@@ -1,0 +1,19 @@
+# Uitsluitend een expliciet gestarte loopback-proef; geen appafhankelijkheid.
+services:
+  batch:
+    image: alphacep/kaldi-vosk-server@sha256:381024347b954835c9c20adea2041377e7b55f50d4c5887eb42101bbf6e750a1
+    platform: linux/amd64
+    entrypoint: ["python3", "/opt/ocideck-asr/server.py"]
+    command: ["--container", "--model-nl", "/models/vosk-model-small-nl-0.22", "--model-en", "/models/vosk-model-small-en-us-0.15", "--speaker-model", "/models/vosk-model-spk-0.4"]
+    volumes:
+      - ./:/opt/ocideck-asr:ro
+      - ./model:/models:ro
+    ports:
+      - "127.0.0.1:8093:8093"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 64
+    mem_limit: 1g
+    cpus: 2
+    restart: "no"

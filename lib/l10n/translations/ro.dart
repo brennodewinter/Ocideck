@@ -1556,6 +1556,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Serverprotocol': 'Protocolul serverului',
+  'Spreker': 'Vorbitor',
   'Automatisch afspelen is niet gestart.': 'Redarea automată nu a pornit.',
   'Audio- en videoformaten': 'Formate audio și video',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':

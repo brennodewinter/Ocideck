@@ -38,6 +38,7 @@ enum EngineKind {
 class EngineCapabilities {
   const EngineCapabilities({
     this.languages = const {},
+    this.automaticLanguage = true,
     this.timestamps = false,
     this.diarization = false,
     this.streaming = false,
@@ -46,6 +47,9 @@ class EngineCapabilities {
 
   /// Taalcodes die de engine aankan; leeg = nog niet bekend/geen keuze.
   final Set<String> languages;
+
+  /// False als de route een expliciete taal vereist; geen fictieve detectie.
+  final bool automaticLanguage;
   final bool timestamps;
   final bool diarization;
 
@@ -64,11 +68,23 @@ class EngineCapabilities {
 /// tijdstempel; zonder `speaker` kreeg het geen spreker. Afwezig is een
 /// feit, geen weggelaten verplichting (§2.4).
 class TranscriptSegment {
-  const TranscriptSegment({required this.text, this.start, this.speaker});
+  const TranscriptSegment({
+    required this.text,
+    this.start,
+    this.end,
+    this.speaker,
+    this.speakerIds = const [],
+    this.speakerUncertain = false,
+  });
 
   final String text;
   final Duration? start;
+  final Duration? end;
   final String? speaker;
+
+  /// Opnamegebonden clusters, geen persoonsidentiteit. Meerdere = overlap.
+  final List<String> speakerIds;
+  final bool speakerUncertain;
 }
 
 /// De uitslag van de definitieve pass: platte tekst plus — waar de engine

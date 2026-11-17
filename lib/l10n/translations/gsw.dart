@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Serverprotocol': 'Serverprotokoll',
+  'Spreker': 'Sprächer',
   'Automatisch afspelen is niet gestart.':
       'D automatischi Wiedergab isch nöd gstartet.',
   'Audio- en videoformaten': 'Audio- und Videoformat',

@@ -167,15 +167,17 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     final engine = ref.read(transcriptionEngineProvider);
     if (engine == null) return;
     final caps = await engine.capabilities();
-    if (!mounted) return;
+    if (!mounted ||
+        _phase != _Phase.ready ||
+        !identical(ref.read(transcriptionEngineProvider), engine))
+      return;
     final sorted = caps.languages.toList()..sort();
-    sorted
-      ..remove('auto')
-      ..insert(0, 'auto');
+    sorted.remove('auto');
+    if (caps.automaticLanguage) sorted.insert(0, 'auto');
     setState(() {
       if (sorted.isNotEmpty) {
         _languages = sorted;
-        if (!_languages.contains(_language)) _language = 'auto';
+        if (!_languages.contains(_language)) _language = _languages.first;
       }
       _diarizationAvailable = caps.diarization;
     });
@@ -341,7 +343,11 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     );
     final markdown = buildTranscriptMarkdown(
       provenance,
-      formatTranscriptBody(result.segments),
+      formatTranscriptBody(
+        result.segments,
+        speakerLabel: l10n.d('Spreker'),
+        unknownLabel: l10n.d('Onbekend'),
+      ),
     );
     await _discardStaging();
     _checkTaskActive();
@@ -381,11 +387,25 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     final route = ref.watch(transcriptionRouteProvider);
     final isServer = route == 'server' && profile.isConfigured;
     final engine = ref.watch(transcriptionEngineProvider);
+    ref.listen<TranscriptionEngine?>(transcriptionEngineProvider, (
+      previous,
+      next,
+    ) {
+      if (_phase != _Phase.ready || identical(previous, next)) return;
+      setState(() {
+        _diarize = false;
+        _diarizationAvailable = false;
+        _languages = const ['auto'];
+        _language = 'auto';
+      });
+      unawaited(_loadLanguages());
+    });
     return PopScope<void>(
       onPopInvokedWithResult: (didPop, _) {
         if (didPop) _stop();
       },
       child: AlertDialog(
+        scrollable: true,
         title: Text(l10n.d('Audio of video transcriberen')),
         content: SizedBox(
           width: 520,

@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Serverprotocol': 'Prótacal freastalaí',
+  'Spreker': 'Cainteoir',
   'Automatisch afspelen is niet gestart.':
       'Níor thosaigh an t-athsheinm uathoibríoch.',
   'Audio- en videoformaten': 'Formáidí fuaime agus físe',

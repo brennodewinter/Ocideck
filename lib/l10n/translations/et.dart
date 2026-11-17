@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Serverprotocol': 'Serveri protokoll',
+  'Spreker': 'Kõneleja',
   'Automatisch afspelen is niet gestart.':
       'Automaatne taasesitus ei käivitunud.',
   'Audio- en videoformaten': 'Heli- ja videovormingud',

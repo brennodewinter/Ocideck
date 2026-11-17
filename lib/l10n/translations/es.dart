@@ -610,6 +610,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Serverprotocol': 'Protocolo del servidor',
+  'Spreker': 'Hablante',
   'Automatisch afspelen is niet gestart.':
       'La reproducción automática no se ha iniciado.',
   'Audio- en videoformaten': 'Formatos de audio y vídeo',

@@ -1,0 +1,8 @@
+{
+  "image": "alphacep/kaldi-vosk-server@sha256:381024347b954835c9c20adea2041377e7b55f50d4c5887eb42101bbf6e750a1",
+  "models": [
+    {"name": "vosk-model-small-en-us-0.15", "sha256": "30f26242c4eb449f948e42cb302dd7a686cb29a3423a8367f99ff41780942498", "license": "Apache-2.0"},
+    {"name": "vosk-model-small-nl-0.22", "sha256": "039811c3b829de64e4f123a9f684a53784005b212a346ac0b899dc7efce2ed0a", "license": "Apache-2.0"},
+    {"name": "vosk-model-spk-0.4", "sha256": "a74d8f51144484813e16af689bb0f916b7a111e2347f467c4933c1166097b5a7", "license": "Apache-2.0"}
+  ]
+}

@@ -1558,6 +1558,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Serverprotocol': 'Protokoll tas-server',
+  'Spreker': 'Kelliem',
   'Automatisch afspelen is niet gestart.': 'Id-daqq awtomatiku ma bediex.',
   'Audio- en videoformaten': 'Formati tal-awdjo u tal-vidjo',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':

@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Serverprotocol': 'Protokòl di servidor',
+  'Spreker': 'Hende ku ta papia',
   'Automatisch afspelen is niet gestart.':
       'Reprodukshon outomátiko no a kuminsá.',
   'Audio- en videoformaten': 'Formato di audio i video',

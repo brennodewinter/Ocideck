@@ -64,6 +64,7 @@ class _TranscriptionServerSectionState
 
   AsrServerMode _mode = AsrServerMode.none;
   bool _enabled = false;
+  AsrBatchProtocol _batchProtocol = AsrBatchProtocol.whisperCpp;
   bool _trustedInternal = false;
   bool _cloudConfirmed = false;
 
@@ -94,6 +95,7 @@ class _TranscriptionServerSectionState
 
   void _loadFromSaved(AsrServerProfile p) {
     _mode = p.mode;
+    _batchProtocol = p.batchProtocol;
     _enabled = p.enabled;
     _trustedInternal = p.trustedInternal;
     _cloudConfirmed = p.cloudConfirmed;
@@ -127,6 +129,7 @@ class _TranscriptionServerSectionState
   /// hetzelfde ding, zodat "testen" altijd over díe server gaat.
   AsrServerProfile _draft() => AsrServerProfile(
     enabled: _enabled,
+    batchProtocol: _batchProtocol,
     mode: _mode,
     baseUrl: _urlCtl.text.trim(),
     name: _nameCtl.text.trim(),
@@ -184,6 +187,7 @@ class _TranscriptionServerSectionState
         ),
         _modeField(l10n),
         if (_mode != AsrServerMode.none) ...[
+          _protocolField(l10n),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -266,6 +270,34 @@ class _TranscriptionServerSectionState
       ],
     );
   }
+
+  Widget _protocolField(AppLocalizations l10n) => Padding(
+    padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+    child: DropdownButtonFormField<AsrBatchProtocol>(
+      initialValue: _batchProtocol,
+      decoration: InputDecoration(labelText: l10n.d('Serverprotocol')),
+      items: [
+        for (final protocol in AsrBatchProtocol.values)
+          DropdownMenuItem(
+            value: protocol,
+            enabled: protocol != AsrBatchProtocol.unsupported,
+            child: Text(switch (protocol) {
+              AsrBatchProtocol.whisperCpp => 'whisper.cpp /inference',
+              AsrBatchProtocol.ocideckV1 => 'OciDeck ASR v1',
+              AsrBatchProtocol.unsupported => l10n.d('Onbekend'),
+            }),
+          ),
+      ],
+      onChanged: (value) {
+        if (value == null) return;
+        setState(() {
+          _batchProtocol = value;
+          _probe = null;
+          _audioResult = null;
+        });
+      },
+    ),
+  );
 
   Widget _modeField(AppLocalizations l10n) {
     return Padding(

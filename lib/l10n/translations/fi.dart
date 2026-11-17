@@ -1542,6 +1542,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Serverprotocol': 'Palvelinprotokolla',
+  'Spreker': 'Puhuja',
   'Automatisch afspelen is niet gestart.':
       'Automaattinen toisto ei käynnistynyt.',
   'Audio- en videoformaten': 'Ääni- ja videomuodot',

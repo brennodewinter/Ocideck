@@ -118,7 +118,14 @@ class _FakeSession extends FileCaptureSession {
 
 /// Een engine die één vast resultaat teruggeeft en voortgang streamt.
 class _FakeEngine implements TranscriptionEngine {
-  _FakeEngine(this._segments, {this.throwOnTranscribe});
+  _FakeEngine(
+    this._segments, {
+    this.throwOnTranscribe,
+    this.caps = const EngineCapabilities(timestamps: true),
+  });
+
+  final EngineCapabilities caps;
+  TranscriptionOptions? receivedOptions;
 
   final List<TranscriptSegment> _segments;
   final Object? throwOnTranscribe;
@@ -127,14 +134,14 @@ class _FakeEngine implements TranscriptionEngine {
   EngineKind get kind => EngineKind.local;
 
   @override
-  Future<EngineCapabilities> capabilities() async =>
-      const EngineCapabilities(timestamps: true, streaming: false);
+  Future<EngineCapabilities> capabilities() async => caps;
 
   @override
   Future<TranscriptResult> transcribe(
     AudioRef audio,
     TranscriptionOptions options,
   ) async {
+    receivedOptions = options;
     if (throwOnTranscribe != null) throw throwOnTranscribe!;
     // Speel de voortgang na: twee stappen, dan klaar.
     if (options.onProgress != null) {
@@ -153,6 +160,13 @@ class _FakeEngine implements TranscriptionEngine {
 
   @override
   void cancel() {}
+}
+
+class _PendingCapabilitiesEngine extends _FakeEngine {
+  _PendingCapabilitiesEngine() : super(const []);
+  final pending = Completer<EngineCapabilities>();
+  @override
+  Future<EngineCapabilities> capabilities() => pending.future;
 }
 
 class _DelayedEngine extends _FakeEngine {
@@ -316,6 +330,93 @@ void main() {
     expect(find.text('WAV'), findsOneWidget);
     expect(find.text('0:02'), findsOneWidget);
     expect(find.text('Transcriberen'), findsOneWidget);
+  });
+
+  testWidgets('diarisatie is expliciet en talen volgen de servercapability', (
+    tester,
+  ) async {
+    final engine = _FakeEngine(
+      const [
+        TranscriptSegment(
+          text: 'Hallo',
+          start: Duration.zero,
+          end: Duration(seconds: 1),
+          speakerIds: ['a'],
+        ),
+      ],
+      caps: const EngineCapabilities(
+        languages: {'nl', 'en'},
+        automaticLanguage: false,
+        timestamps: true,
+        diarization: true,
+      ),
+    );
+    await tester.pumpWidget(
+      app(
+        TranscribeFileDialog(sourcePath: wavPath, displayName: 'clip.wav'),
+        overrides: [
+          captureSourcesProvider.overrideWithValue({
+            CaptureSourceKind.file: _FakeFileSource(wavPath),
+          }),
+          transcriptionEngineProvider.overrideWithValue(engine),
+          recordingStagingProvider.overrideWithValue(_NoopStaging()),
+        ],
+      ),
+    );
+    await tester.pumpAndSettle();
+    final language = tester.widget<DropdownButton<String>>(
+      find.byType(DropdownButton<String>),
+    );
+    expect(language.items!.map((item) => item.value), ['en', 'nl']);
+    expect(language.value, 'en');
+    final checkbox = find.widgetWithText(
+      CheckboxListTile,
+      'Sprekers onderscheiden',
+    );
+    expect(tester.widget<CheckboxListTile>(checkbox).value, isFalse);
+    await tester.tap(checkbox);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Transcriberen'));
+    await tester.pumpAndSettle();
+    expect(engine.receivedOptions!.diarize, isTrue);
+    expect(engine.receivedOptions!.language, 'en');
+  });
+
+  testWidgets('late capabilities van een verlaten route blijven genegeerd', (
+    tester,
+  ) async {
+    final previous = _PendingCapabilitiesEngine();
+    final next = _FakeEngine(const []);
+    final source = _FakeFileSource(wavPath);
+    final staging = _NoopStaging();
+    List<Override> overrides(TranscriptionEngine engine) => [
+      captureSourcesProvider.overrideWithValue({
+        CaptureSourceKind.file: source,
+      }),
+      transcriptionEngineProvider.overrideWithValue(engine),
+      recordingStagingProvider.overrideWithValue(staging),
+    ];
+    await tester.pumpWidget(
+      app(
+        TranscribeFileDialog(sourcePath: wavPath, displayName: 'clip.wav'),
+        overrides: overrides(previous),
+      ),
+    );
+    await tester.pumpAndSettle();
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(Scaffold)),
+    );
+    container.updateOverrides(overrides(next));
+    await tester.pumpAndSettle();
+    previous.pending.complete(
+      const EngineCapabilities(languages: {'pl'}, diarization: true),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Sprekers onderscheiden'), findsNothing);
+    final language = tester.widget<DropdownButton<String>>(
+      find.byType(DropdownButton<String>),
+    );
+    expect(language.items!.map((item) => item.value), ['auto']);
   });
 
   testWidgets('Start loopt door en opent een nieuw transcriptdocument', (

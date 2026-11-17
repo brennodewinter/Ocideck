@@ -31,8 +31,13 @@ enum AsrServerMode {
   cloud,
 }
 
+/// Een expliciete protocolkeuze; onbekende opgeslagen versies blijven dicht.
+enum AsrBatchProtocol { whisperCpp, ocideckV1, unsupported }
+
 /// Onveranderlijke instellingen voor één ASR-serverprofiel.
 class AsrServerProfile {
+  final AsrBatchProtocol batchProtocol;
+
   /// Staat het profiel aan. Standaard uit: tot de gebruiker bewust kiest
   /// vertrekt er geen byte naar een server.
   final bool enabled;
@@ -65,6 +70,7 @@ class AsrServerProfile {
   final String liveUrl;
 
   const AsrServerProfile({
+    this.batchProtocol = AsrBatchProtocol.whisperCpp,
     this.enabled = false,
     this.mode = AsrServerMode.none,
     this.baseUrl = '',
@@ -102,6 +108,7 @@ class AsrServerProfile {
   String get provenanceName => name.trim().isNotEmpty ? name.trim() : host;
 
   AsrServerProfile copyWith({
+    AsrBatchProtocol? batchProtocol,
     bool? enabled,
     AsrServerMode? mode,
     String? baseUrl,
@@ -111,6 +118,7 @@ class AsrServerProfile {
     String? liveUrl,
   }) {
     return AsrServerProfile(
+      batchProtocol: batchProtocol ?? this.batchProtocol,
       enabled: enabled ?? this.enabled,
       mode: mode ?? this.mode,
       baseUrl: baseUrl ?? this.baseUrl,
@@ -122,6 +130,7 @@ class AsrServerProfile {
   }
 
   Map<String, Object?> toJson() => {
+    'batchProtocol': batchProtocol.name,
     'enabled': enabled,
     'mode': mode.name,
     'baseUrl': baseUrl,
@@ -133,6 +142,7 @@ class AsrServerProfile {
 
   factory AsrServerProfile.fromJson(Map<String, Object?> json) {
     return AsrServerProfile(
+      batchProtocol: _protocolFromName(json['batchProtocol']),
       enabled: (json['enabled'] as bool?) ?? false,
       mode: _modeFromName(json['mode'] as String?),
       baseUrl: (json['baseUrl'] as String?) ?? '',
@@ -150,9 +160,18 @@ class AsrServerProfile {
     return AsrServerMode.none;
   }
 
+  static AsrBatchProtocol _protocolFromName(Object? name) {
+    if (name == null) return AsrBatchProtocol.whisperCpp;
+    return AsrBatchProtocol.values.firstWhere(
+      (p) => p.name == name,
+      orElse: () => AsrBatchProtocol.unsupported,
+    );
+  }
+
   @override
   bool operator ==(Object other) =>
       other is AsrServerProfile &&
+      other.batchProtocol == batchProtocol &&
       other.enabled == enabled &&
       other.mode == mode &&
       other.baseUrl == baseUrl &&
@@ -163,6 +182,7 @@ class AsrServerProfile {
 
   @override
   int get hashCode => Object.hash(
+    batchProtocol,
     enabled,
     mode,
     baseUrl,

@@ -86,7 +86,10 @@ final class IoAsrTransport implements AsrTransport {
         inFlight = request;
         request.followRedirects = false;
         headers.forEach(request.headers.set);
-        if (body != null) request.add(body);
+        if (body != null) {
+          request.contentLength = body.length;
+          request.add(body);
+        }
         final response = await request.close();
         if (completer.isCompleted) return;
         final builder = BytesBuilder(copy: false);

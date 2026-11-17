@@ -1565,6 +1565,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Serverprotocol': 'Πρωτόκολλο διακομιστή',
+  'Spreker': 'Ομιλητής',
   'Automatisch afspelen is niet gestart.':
       'Η αυτόματη αναπαραγωγή δεν ξεκίνησε.',
   'Audio- en videoformaten': 'Μορφές ήχου και βίντεο',
