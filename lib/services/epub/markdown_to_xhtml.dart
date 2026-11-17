@@ -93,11 +93,10 @@ String markdownToXhtml(
         .whereType<md.Element>()
         .where((n) => RegExp(r'^h[1-6]$').hasMatch(n.tag))
         .toSet(),
-    anchors: HeadingAnchorIndex([
-      for (final node in nodes)
-        if (node is md.Element && RegExp(r'^h[1-6]$').hasMatch(node.tag))
-          node.textContent,
-    ]),
+    anchors: HeadingAnchorIndex(
+      markdownHeadings(preprocessed).map((h) => h.text),
+      plainText: true,
+    ),
   );
   for (final node in nodes) {
     node.accept(visitor);

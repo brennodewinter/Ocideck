@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html;
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/markdown_outline.dart';
@@ -105,6 +106,16 @@ void main() {
     },
   );
 
+  test('TOC-materialisatie bewaart de eerste kop en gelijke inspringing', () {
+    final output = replaceTocMarker(_source, generateTocMarkdown(_source));
+    final parsed = markdownHeadings(output);
+    expect(
+      parsed.map((h) => h.text),
+      markdownHeadings(_source).map((h) => h.text),
+    );
+    expect(output, contains('](#a-b-1-1)\n\n## A - B'));
+  });
+
   test('dieptefilter verandert de documentbrede suffixen niet', () {
     const source = '### Dubbel\n\n## Dubbel\n';
     expect(generateTocMarkdown(source, maxDepth: 2), contains('(#dubbel-1)'));
@@ -122,6 +133,51 @@ void main() {
       DocumentMarkdownView.headingBlockIndex(source, 'café-met-code-1'),
       1,
     );
+  });
+
+  test(
+    'entities, code-underscores en HTML-opmaak worden maar eenmaal ontleed',
+    () {
+      const source = '## A & B\n\n## `a_b`\n\n## `<tag>`\n\n## A <em>B</em>\n';
+      final headings = markdownHeadings(source);
+      final anchors = HeadingAnchorIndex(
+        headings.map((h) => h.text),
+        plainText: true,
+      );
+      expect(anchors.entries.map((e) => e.id), ['a-b', 'a_b', 'tag', 'a-b-1']);
+      final output = html.parse(markdownToXhtml(source));
+      for (final entry in anchors.entries) {
+        expect(output.getElementById(entry.id), isNotNull);
+        expect(
+          DocumentMarkdownView.headingBlockIndex(source, entry.id),
+          greaterThanOrEqualTo(0),
+        );
+      }
+      expect(generateTocMarkdown(source), contains('(#a_b)'));
+      final pdf = pdfHeadingLinks(headings.map((h) => h.text));
+      expect(pdf['a_b'], 'ocideck-kop-1');
+    },
+  );
+
+  testWidgets('TOC-labels tonen letterlijke code en activeren hun eigen kop', (
+    tester,
+  ) async {
+    String? tapped;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: DocumentMarkdownView(
+            '<!-- toc -->\n\n## `<tag>`\n\n## `a_b`\n',
+            onTapLink: (href) => tapped = href,
+          ),
+        ),
+      ),
+    );
+    final target = find.widgetWithText(InkWell, '<tag>');
+    expect(target, findsOneWidget);
+    await tester.tap(target);
+    expect(tapped, '#tag');
+    expect(find.widgetWithText(InkWell, 'a_b'), findsOneWidget);
   });
 
   test('lege titels en suffixvormige titels blijven uniek', () {
@@ -212,9 +268,13 @@ void main() {
   test(
     'HTML-export draagt dezelfde vooraf berekende index en veilige DOM-toekenning',
     () async {
-      final output = await MarpHtmlService(
-        loadAsset: (p) => File(p).readAsString(),
-      ).build(_source, continuous: true);
+      final output =
+          await MarpHtmlService(loadAsset: (p) => File(p).readAsString()).build(
+            replaceTocMarker(_source, generateTocMarkdown(_source)),
+            continuous: true,
+          );
+      final probePath = Platform.environment['OCIDECK_HEADING_EXPORT_PROBE'];
+      if (probePath != null) await File(probePath).writeAsString(output);
       final data = RegExp(
         r'var OCIDECK_HEADING_ANCHORS=(.*);',
       ).firstMatch(output)!.group(1)!;

@@ -420,8 +420,8 @@ class DocumentMarkdownView extends StatelessWidget {
   /// koppen in de huidige body en toont hem als een gestileerde nav-block.
   Widget _tocPreview(BuildContext context, _Theme t) {
     final l10n = context.l10n;
-    final toc = generateTocMarkdown(tocSource ?? markdown);
-    if (toc.isEmpty) {
+    final entries = documentTocEntries(tocSource ?? markdown);
+    if (entries.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -449,7 +449,6 @@ class DocumentMarkdownView extends StatelessWidget {
         ),
       );
     }
-    final lines = toc.split('\n');
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -475,17 +474,15 @@ class DocumentMarkdownView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          for (final line in lines) _tocLine(t, line),
+          for (final entry in entries) _tocLine(t, entry),
         ],
       ),
     );
   }
 
-  Widget _tocLine(_Theme t, String line) {
-    final match = RegExp(r'^(\s*)- \[(.*?)\]\(#(.*)\)$').firstMatch(line);
-    if (match == null) return const SizedBox.shrink();
-    final indent = match.group(1)!.length;
-    final text = match.group(2)!;
+  Widget _tocLine(_Theme t, DocumentTocEntry entry) {
+    final indent = (entry.level - 1) * 2;
+    final text = entry.text;
     return Padding(
       padding: EdgeInsets.only(left: indent * 8.0, top: 2, bottom: 2),
       child: Semantics(
@@ -493,7 +490,7 @@ class DocumentMarkdownView extends StatelessWidget {
         child: InkWell(
           onTap: onTapLink == null
               ? null
-              : () => onTapLink!('#${match.group(3)!}'),
+              : () => onTapLink!('#${entry.anchor}'),
           child: Text(
             text,
             style: t.body.copyWith(

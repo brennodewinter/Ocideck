@@ -29,18 +29,40 @@ final tocMarkerLinePattern = RegExp(r'^[ \t]*<!--\s*toc\s*-->[ \t]*$');
 /// [maxDepth] beperkt de kopniveaus die meekomen (standaard 3: H1–H3).
 ///
 /// Puur headless: geen I/O, geen widget-afhankelijkheden. Testbaar.
-String generateTocMarkdown(String body, {int maxDepth = 3}) {
+class DocumentTocEntry {
+  const DocumentTocEntry(this.level, this.text, this.anchor);
+  final int level;
+  final String text;
+  final String anchor;
+}
+
+/// De UI gebruikt de platte labels direct; alleen exports serialiseren Markdown.
+List<DocumentTocEntry> documentTocEntries(String body, {int maxDepth = 3}) {
   final headings = markdownHeadings(body);
-  final anchors = HeadingAnchorIndex(headings.map((h) => h.text));
+  final anchors = HeadingAnchorIndex(
+    headings.map((h) => h.text),
+    plainText: true,
+  );
+  return [
+    for (var i = 0; i < headings.length; i++)
+      if (headings[i].level <= maxDepth)
+        DocumentTocEntry(
+          headings[i].level,
+          headings[i].text,
+          anchors.entries[i].id,
+        ),
+  ];
+}
+
+String generateTocMarkdown(String body, {int maxDepth = 3}) {
   final buf = StringBuffer();
-  for (var i = 0; i < headings.length; i++) {
-    final h = headings[i];
-    if (h.level > maxDepth) continue;
-    final label = h.text
-        .replaceAll('\\', '\\\\')
-        .replaceAll('[', r'\[')
-        .replaceAll(']', r'\]');
-    buf.write('${'  ' * (h.level - 1)}- [$label](#${anchors.entries[i].id})\n');
+  for (final entry in documentTocEntries(body, maxDepth: maxDepth)) {
+    final label = entry.text
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAllMapped(RegExp(r'[\\\[\]`*_~$]'), (m) => '\\${m[0]}');
+    buf.write('${'  ' * (entry.level - 1)}- [$label](#${entry.anchor})\n');
   }
   return buf.toString().trimRight();
 }
@@ -70,14 +92,14 @@ String replaceTocMarker(
     multiLine: true,
   );
   if (!RegExp(r'^<!-- toc -->', multiLine: true).hasMatch(body)) return body;
-  final toc = generatedToc.trim();
+  final toc = generatedToc.trimRight();
   final String replacement;
   if (keepMarker) {
     replacement = toc.isEmpty ? tocMarker : '$tocMarker\n\n$toc';
   } else {
     replacement = toc;
   }
-  return body.replaceFirst(pattern, replacement);
+  return body.replaceFirst(pattern, '$replacement\n\n');
 }
 
 /// Verwijder de `<!-- toc -->`-marker en eventuele gegenereerde TOC eronder

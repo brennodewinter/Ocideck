@@ -33,7 +33,7 @@ String _renderScript(
 }) =>
     'var OCIDECK_L=${_renderScriptLabels()};\n'
     'var OCIDECK_IMG=${jsonEncode(dataUris)};\n'
-    'var OCIDECK_HEADING_ANCHORS=${jsonEncode(documentMarkdown == null ? [] : HeadingAnchorIndex(markdownHeadings(documentMarkdown).map((h) => h.text)).entries.map((e) => e.toJson()).toList())};\n'
+    'var OCIDECK_HEADING_ANCHORS=${jsonEncode(documentMarkdown == null ? [] : HeadingAnchorIndex(markdownHeadings(documentMarkdown).map((h) => h.text), plainText: true).entries.map((e) => e.toJson()).toList())};\n'
     'var OCIDECK_MERMAID_THEME=${jsonEncode(theme == null ? <String, Object>{} : {'themeVariables': mermaidThemeVariablesFor(theme)})};\n'
     '$_renderScriptBody';
 
