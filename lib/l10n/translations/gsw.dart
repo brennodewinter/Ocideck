@@ -1542,6 +1542,46 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Ungültigi Usschnittsgränze.',
+  'Alleen dit fragment': 'Nume dä Usschnitt',
+  'Audio downloaden en transcriberen…': 'Audio abelade und transkribiere…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'De Audio-Download öffnet d Transkriptionsuswahl. En Usschnitt wird vor ASR gschnitte. D abegladeni Quelle wird nachhär glöscht.',
+  'Automatische ondertitels': 'Automatischi Untertitel',
+  'Bronserver-URL': 'Quellserver-URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'De Quellserver bruucht es nöd unterstützts Protokoll.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'De Quellserver isch beschäftigt. Versuecheds spöter nomal.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'De Quellserver isch nöd erreichbar. Prüefed d Adräss, TLS und de Browserzuegriff.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Em Quellserver fählt s nötige Quellhilfsprogramm.',
+  'Deze bron is nog live of niet afgerond.':
+      'Die Quelle isch no live oder nöd abgschlosse.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Das Video hät kei bruuchbari Audiospur.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Das Video isch privat, entfernt oder bruucht e Zuegriffsberechtigung.',
+  'Deze video transcriberen?': 'Das Video transkribiere?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'En eigete Quellserver holt s Video vo YouTube. Bim Abruefe wird de Videolink a dä Server gschickt. Ohni Server chönd Sie Untertitel importiere.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'I dere Präsentation sind kei YouTube-Videos gfunde worde.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Kei bruuchbare Untertitel verfüegbar. Wähled Audio oder importiered e Datei.',
+  'Geïmporteerde ondertitels': 'Importierti Untertitel',
+  'Handmatige ondertitels': 'Manuelli Untertitel',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Wähled en HTTPS-Quellserver oder en Server uf däm Grät.',
+  'Ondertitels importeren…': 'Untertitel importiere…',
+  'Ondertitels overnemen': 'Untertitel übernäh',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Au Podcast-Feeds und YouTube-Videolinks werded erkennt.',
+  'Video-informatie ophalen': 'Videoinformatione abruefe',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube beschränkt d Aafrage. Versuecheds spöter nomal.',
+  'YouTube-video transcriberen…': 'YouTube-Video transkribiere…',
   'één taal': 'ei Sprach',
   'Meerdere talen in deze opname': 'Mehri Sprache i dere Ufnahm',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

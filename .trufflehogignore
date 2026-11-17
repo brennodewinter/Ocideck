@@ -1,5 +1,5 @@
 # Paden die trufflehog overslaat. Eén reguliere expressie per regel.
-# Dezelfde uitsluitingen als .gitleaks.toml — zie daar voor de motivering en
+# Grotendeels dezelfde uitsluitingen als .gitleaks.toml — zie daar voor de motivering en
 # voor de prijs die het detectiecorpus met zich meebrengt.
 
 # Gits eigen boekhouding. NIET de historie — die wordt door de aparte
@@ -67,6 +67,15 @@
 # credentials (user:pass@host) om te bewijzen dat de resolver die weigert —
 # geheim-vormig bij bestaansreden, zelfde categorie als het OciWacht-corpus.
 ^test/meetings/meeting_link_resolver_test\.dart$
+
+# Bron- en media-URL-tests (#2938): alleen deze twee bestanden bevatten
+# opzettelijke user:secret-plaatsaanduidingen om te bewijzen dat URL-credentials
+# worden geweigerd of uit de canonieke bron verdwijnen. De URI-detector vindt
+# deze fixtures ook in de Git-historie. Geen echte accounts of sleutels;
+# verificatie bij providers blijft uit. Geen uitzondering voor test/media/ als
+# geheel: Gitleaks blijft beide bestanden en hun historie volledig controleren.
+^test/media/youtube_reference_test\.dart$
+^test/media/media_url_client_test\.dart$
 
 # Bronbundeltest: de URL met user:secret@example.invalid is een opzettelijke
 # fixture die bewijst dat repositorycredentials uit openbaar bewijs verdwijnen.

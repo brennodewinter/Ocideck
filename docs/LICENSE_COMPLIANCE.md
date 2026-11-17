@@ -6,6 +6,23 @@ OciDeck is released under the **EUPL-1.2** (see [`../LICENSE.md`](../LICENSE.md)
 This document records the policy that the project only includes open-source
 software, how that is verified, and the result of the latest check.
 
+## Separately installed YouTube source server
+
+The optional reference source server under `testbed/youtube-source` is installed
+by an operator, not bundled or installed by the app. Its exact runtime manifest
+pins the Unlicense yt-dlp Python wheel, the yt-dlp-ejs wheel with its Unlicense,
+MIT and ISC subcomponents, and official Node with its complete third-party
+licence file. Full notices and source artifacts remain in the private install.
+This review does not cover arbitrary standalone yt-dlp executables.
+
+Optional audio decoding registers an existing macOS app's separately licensed
+FFmpeg component without copying or modifying it. The complete source archive,
+build recipe, LGPL notice and replacement rights stay with that component;
+registration records its actual post-signing hash. See the
+[operator guide](../testbed/youtube-source/README.md) for exact versions and
+verification. This adds no helper binary or blanket licence approval to the
+application SBOM.
+
 ## Policy
 
 Every software dependency and bundled runtime asset must be available under an

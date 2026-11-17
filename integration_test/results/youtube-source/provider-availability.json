@@ -1,0 +1,15 @@
+[
+  {
+    "video_id": "aqz-KE-bpKQ",
+    "tracks": 0,
+    "audio": true,
+    "duration_ms": 635000
+  },
+  {
+    "video_id": "BaW_jenozKc",
+    "status": 403,
+    "error": {
+      "error": "access"
+    }
+  }
+]

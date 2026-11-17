@@ -1548,6 +1548,46 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Netinkamos ištraukos ribos.',
+  'Alleen dit fragment': 'Tik ši ištrauka',
+  'Audio downloaden en transcriberen…': 'Atsisiųsti garsą ir transkribuoti…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Garso atsisiuntimas atveria transkripcijos parinktis. Ištrauka prieš ASR iškerpama. Atsisiųstas šaltinis paskui ištrinamas.',
+  'Automatische ondertitels': 'Automatiniai subtitrai',
+  'Bronserver-URL': 'Šaltinių serverio URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Šaltinių serveris naudoja nepalaikomą protokolą.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Šaltinių serveris užimtas. Bandykite vėliau.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Šaltinių serveris nepasiekiamas. Patikrinkite adresą, TLS ir naršyklės prieigą.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Šaltinių serveryje nėra reikiamo šaltinių pagalbinio įrankio.',
+  'Deze bron is nog live of niet afgerond.':
+      'Šis šaltinis dar transliuojamas tiesiogiai arba nebaigtas.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Šiame vaizdo įraše nėra tinkamo garso takelio.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Šis vaizdo įrašas privatus, pašalintas arba jam reikia prieigos teisės.',
+  'Deze video transcriberen?': 'Transkribuoti šį vaizdo įrašą?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Jūsų nuosavas šaltinių serveris gauna vaizdo įrašą iš „YouTube“. Gavimas siunčia vaizdo nuorodą šiam serveriui. Be serverio galite importuoti subtitrus.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Šiame pristatyme „YouTube“ vaizdo įrašų nerasta.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Tinkamų subtitrų nėra. Pasirinkite garsą arba importuokite failą.',
+  'Geïmporteerde ondertitels': 'Importuoti subtitrai',
+  'Handmatige ondertitels': 'Rankiniai subtitrai',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Pasirinkite HTTPS šaltinių serverį arba serverį šiame įrenginyje.',
+  'Ondertitels importeren…': 'Importuoti subtitrus…',
+  'Ondertitels overnemen': 'Naudoti subtitrus',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Taip pat atpažįstami tinklalaidžių kanalai ir „YouTube“ vaizdo nuorodos.',
+  'Video-informatie ophalen': 'Gauti vaizdo įrašo informaciją',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      '„YouTube“ riboja užklausas. Bandykite vėliau.',
+  'YouTube-video transcriberen…': 'Transkribuoti „YouTube“ vaizdo įrašą…',
   'één taal': 'viena kalba',
   'Meerdere talen in deze opname': 'Kelios kalbos šiame įraše',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

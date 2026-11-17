@@ -1570,6 +1570,46 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Teorainneacha míre neamhbhailí.',
+  'Alleen dit fragment': 'An mhír seo amháin',
+  'Audio downloaden en transcriberen…': 'Íoslódáil fuaim agus tras-scríobh…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Osclaíonn íoslódáil fuaime na roghanna tras-scríofa. Gearrtar mír roimh ASR. Scriostar an fhoinse íoslódáilte ina dhiaidh sin.',
+  'Automatische ondertitels': 'Fotheidil uathoibríocha',
+  'Bronserver-URL': 'URL an fhreastalaí foinse',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Úsáideann an freastalaí foinse prótacal nach dtacaítear leis.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Tá an freastalaí foinse gnóthach. Bain triail eile as níos déanaí.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Ní féidir an freastalaí foinse a bhaint amach. Seiceáil an seoladh, TLS agus rochtain an bhrabhsálaí.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Tá an uirlis chúnta foinse riachtanach ar iarraidh ón bhfreastalaí foinse.',
+  'Deze bron is nog live of niet afgerond.':
+      'Tá an fhoinse seo fós beo nó gan críochnú.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Níl rian fuaime inúsáidte san fhíseán seo.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Tá an físeán seo príobháideach, bainte nó tá cead rochtana de dhíth air.',
+  'Deze video transcriberen?': 'Tras-scríobh an físeán seo?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Faigheann do fhreastalaí foinse féin an físeán ó YouTube. Seoltar nasc an fhíseáin chuig an bhfreastalaí seo le linn na fála. Gan freastalaí, is féidir fotheidil a iompórtáil.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Níor aimsíodh físeáin YouTube sa chur i láthair seo.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Níl fotheidil inúsáidte ar fáil. Roghnaigh fuaim nó iompórtáil comhad.',
+  'Geïmporteerde ondertitels': 'Fotheidil iompórtáilte',
+  'Handmatige ondertitels': 'Fotheidil láimhe',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Roghnaigh freastalaí foinse HTTPS nó freastalaí ar an ngléas seo.',
+  'Ondertitels importeren…': 'Iompórtáil fotheidil…',
+  'Ondertitels overnemen': 'Úsáid fotheidil',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Aithnítear fothaí podchraolta agus naisc físeán YouTube freisin.',
+  'Video-informatie ophalen': 'Faigh eolas faoin bhfíseán',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'Tá YouTube ag teorannú iarratas. Bain triail eile as níos déanaí.',
+  'YouTube-video transcriberen…': 'Tras-scríobh físeán YouTube…',
   'één taal': 'teanga amháin',
   'Meerdere talen in deze opname': 'Ilteangacha sa taifeadadh seo',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

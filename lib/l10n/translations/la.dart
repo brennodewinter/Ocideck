@@ -1553,6 +1553,46 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Fines fragmenti invalidi.',
+  'Alleen dit fragment': 'Hoc fragmentum tantum',
+  'Audio downloaden en transcriberen…': 'Sonum depone et transcribe…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Depositio soni optiones transcriptionis aperit. Fragmentum ante ASR secatur. Fons depositus deinde deletur.',
+  'Automatische ondertitels': 'Subtituli automatici',
+  'Bronserver-URL': 'URL ministri fontium',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Minister fontium protocollo non suffulto utitur.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Minister fontium occupatus est. Postea iterum conare.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Minister fontium adiri non potest. Inscriptionem, TLS et aditum navigatoris inspice.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Ministro fontium instrumentum auxiliare fontium necessarium deest.',
+  'Deze bron is nog live of niet afgerond.':
+      'Hic fons adhuc directe transmittitur aut nondum perfectus est.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Haec pellicula vestigium soni utile non habet.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Haec pellicula privata, remota aut permissionem aditus requirens est.',
+  'Deze video transcriberen?': 'Hanc pelliculam transcribere?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Minister fontium tuus pelliculam e YouTube accipit. Acceptio nexum pelliculae ad hunc ministrum mittit. Sine ministro subtitulos importare potes.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Nullae pelliculae YouTube in hac praesentatione inventae sunt.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Nulli subtituli utiles praesto sunt. Sonum elige aut fasciculum importa.',
+  'Geïmporteerde ondertitels': 'Subtituli importati',
+  'Handmatige ondertitels': 'Subtituli manu scripti',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Ministrum fontium HTTPS aut ministrum in hoc apparatu elige.',
+  'Ondertitels importeren…': 'Subtitulos importare…',
+  'Ondertitels overnemen': 'Subtitulos adhibere',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Fluxus podcastorum et nexus pellicularum YouTube quoque agnoscuntur.',
+  'Video-informatie ophalen': 'Notitias pelliculae accipere',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube petitiones limitat. Postea iterum conare.',
+  'YouTube-video transcriberen…': 'Pelliculam YouTube transcribere…',
   'één taal': 'una lingua',
   'Meerdere talen in deze opname': 'Plures linguae in hac inscriptione sonora',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

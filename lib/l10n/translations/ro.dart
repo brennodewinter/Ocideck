@@ -1556,6 +1556,46 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Limite nevalide ale fragmentului.',
+  'Alleen dit fragment': 'Doar acest fragment',
+  'Audio downloaden en transcriberen…': 'Descarcă sunetul și transcrie…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Descărcarea sunetului deschide opțiunile de transcriere. Fragmentul este decupat înainte de ASR. Sursa descărcată este apoi ștearsă.',
+  'Automatische ondertitels': 'Subtitrări automate',
+  'Bronserver-URL': 'URL-ul serverului sursă',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Serverul sursă folosește un protocol neacceptat.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Serverul sursă este ocupat. Încercați din nou mai târziu.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Serverul sursă nu poate fi accesat. Verificați adresa, TLS și accesul browserului.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Serverului sursă îi lipsește instrumentul auxiliar de sursă necesar.',
+  'Deze bron is nog live of niet afgerond.':
+      'Această sursă este încă în direct sau neterminată.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Acest videoclip nu are o pistă audio utilizabilă.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Acest videoclip este privat, eliminat sau necesită permisiune de acces.',
+  'Deze video transcriberen?': 'Transcrieți acest videoclip?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Propriul server sursă preia videoclipul de pe YouTube. Preluarea trimite linkul videoclipului către acest server. Fără server puteți importa subtitrări.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Nu s-au găsit videoclipuri YouTube în această prezentare.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Nu există subtitrări utilizabile. Alegeți sunetul sau importați un fișier.',
+  'Geïmporteerde ondertitels': 'Subtitrări importate',
+  'Handmatige ondertitels': 'Subtitrări manuale',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Alegeți un server sursă HTTPS sau un server pe acest dispozitiv.',
+  'Ondertitels importeren…': 'Importă subtitrări…',
+  'Ondertitels overnemen': 'Folosește subtitrările',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Sunt recunoscute și fluxurile de podcast și linkurile video YouTube.',
+  'Video-informatie ophalen': 'Preia informațiile videoclipului',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube limitează solicitările. Încercați din nou mai târziu.',
+  'YouTube-video transcriberen…': 'Transcrie videoclipul YouTube…',
   'één taal': 'o limbă',
   'Meerdere talen in deze opname': 'Mai multe limbi în această înregistrare',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

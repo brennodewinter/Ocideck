@@ -72,6 +72,38 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
 Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   final url = await _showUrlDialog(context);
   if (url == null || url.trim().isEmpty || !context.mounted) return;
+  final youtube = YoutubeReference.parse(url);
+  if (youtube != null) {
+    await showYoutubeSourceDialog(context, youtube);
+    return;
+  }
+  if (isDirectMediaUrl(url)) {
+    await showDirectMediaUrlDialog(context, Uri.parse(url));
+    return;
+  }
+  if (mayProbeMediaMetadata(url) &&
+      ref.read(transcriptionEnabledProvider) &&
+      ref.read(settingsProvider).allowRemoteMedia) {
+    final probe = MediaUrlClient(
+      mayUseNetwork: () =>
+          context.mounted &&
+          ref.read(transcriptionEnabledProvider) &&
+          ref.read(settingsProvider).allowRemoteMedia,
+    );
+    try {
+      if (await probe.looksLikeMedia(Uri.parse(url))) {
+        if (context.mounted) {
+          await showDirectMediaUrlDialog(context, Uri.parse(url));
+        }
+        return;
+      }
+    } on TranscriptionError {
+      // HEAD is optional discovery; it must not replace the deck/feed route.
+    } finally {
+      probe.cancel();
+    }
+    if (!context.mounted) return;
+  }
   if (isWebPlatform) {
     // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
     // en het deck wordt volledig in het geheugen geopend — het dart:io-

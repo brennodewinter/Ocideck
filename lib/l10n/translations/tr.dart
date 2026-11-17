@@ -2398,6 +2398,46 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Geçersiz bölüm sınırları.',
+  'Alleen dit fragment': 'Yalnızca bu bölüm',
+  'Audio downloaden en transcriberen…': 'Sesi indir ve metne dönüştür…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Ses indirme, metne dönüştürme seçeneklerini açar. Bölüm ASR öncesinde kesilir. İndirilen kaynak daha sonra silinir.',
+  'Automatische ondertitels': 'Otomatik altyazılar',
+  'Bronserver-URL': 'Kaynak sunucu URL’si',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Kaynak sunucu desteklenmeyen bir protokol kullanıyor.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Kaynak sunucu meşgul. Daha sonra tekrar deneyin.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Kaynak sunucuya ulaşılamıyor. Adresi, TLS’yi ve tarayıcı erişimini kontrol edin.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Kaynak sunucuda gerekli kaynak yardımcı aracı eksik.',
+  'Deze bron is nog live of niet afgerond.':
+      'Bu kaynak hâlâ canlı veya tamamlanmamış.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Bu videoda kullanılabilir bir ses parçası yok.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Bu video gizli, kaldırılmış veya erişim izni gerektiriyor.',
+  'Deze video transcriberen?': 'Bu video metne dönüştürülsün mü?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Kendi kaynak sunucunuz videoyu YouTube’dan alır. Alma işlemi video bağlantısını bu sunucuya gönderir. Sunucu olmadan altyazı içe aktarabilirsiniz.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Bu sunumda YouTube videosu bulunamadı.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Kullanılabilir altyazı yok. Sesi seçin veya dosya içe aktarın.',
+  'Geïmporteerde ondertitels': 'İçe aktarılan altyazılar',
+  'Handmatige ondertitels': 'Elle hazırlanmış altyazılar',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Bir HTTPS kaynak sunucusu veya bu cihazdaki bir sunucuyu seçin.',
+  'Ondertitels importeren…': 'Altyazı içe aktar…',
+  'Ondertitels overnemen': 'Altyazıları kullan',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Podcast akışları ve YouTube video bağlantıları da tanınır.',
+  'Video-informatie ophalen': 'Video bilgilerini al',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube istekleri sınırlıyor. Daha sonra tekrar deneyin.',
+  'YouTube-video transcriberen…': 'YouTube videosunu metne dönüştür…',
   'één taal': 'tek dil',
   'Meerdere talen in deze opname': 'Bu kayıtta birden fazla dil',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

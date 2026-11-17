@@ -9,6 +9,7 @@
 // `fetch`+`AbortController` (daar is CORS de grens), `_stub` weigert
 // netjes op platforms zonder beide.
 import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:network_guard/network_guard.dart' show AiResolveStrategy;
 
@@ -28,6 +29,34 @@ final class AsrResponse {
   final int statusCode;
   final String body;
 
+  bool get isOk => statusCode >= 200 && statusCode < 300;
+  Uint8List get bytes => Uint8List.fromList(utf8.encode(body));
+  Map<String, String> get headers => const {};
+  Uri? get finalUrl => null;
+}
+
+/// Raw bounded transport bytes. JSON callers decode once, on first access;
+/// media callers retain binary audio without a lossy UTF-8 round trip.
+final class AsrByteResponse implements AsrResponse {
+  AsrByteResponse(
+    this.statusCode,
+    Uint8List bytes, {
+    Map<String, String> headers = const {},
+    this.finalUrl,
+  }) : bytes = bytes.asUnmodifiableView(),
+       headers = Map.unmodifiable(headers);
+
+  @override
+  final int statusCode;
+  @override
+  final Uint8List bytes;
+  @override
+  final Map<String, String> headers;
+  @override
+  final Uri? finalUrl;
+  @override
+  late final String body = utf8.decode(bytes, allowMalformed: true);
+  @override
   bool get isOk => statusCode >= 200 && statusCode < 300;
 }
 
@@ -66,4 +95,5 @@ abstract class AsrTransport {
   });
 }
 
-AsrTransport createAsrTransport() => impl.createAsrTransport();
+AsrTransport createAsrTransport({int maxResponseBytes = 16 * 1024 * 1024}) =>
+    impl.createAsrTransport(maxResponseBytes: maxResponseBytes);

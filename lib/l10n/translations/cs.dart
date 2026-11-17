@@ -1542,6 +1542,46 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Neplatné hranice úryvku.',
+  'Alleen dit fragment': 'Pouze tento úryvek',
+  'Audio downloaden en transcriberen…': 'Stáhnout zvuk a přepsat…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Stažení zvuku otevře možnosti přepisu. Úryvek se před ASR ořízne. Stažený zdroj se poté odstraní.',
+  'Automatische ondertitels': 'Automatické titulky',
+  'Bronserver-URL': 'URL zdrojového serveru',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Zdrojový server používá nepodporovaný protokol.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Zdrojový server je zaneprázdněn. Zkuste to později znovu.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Zdrojový server je nedostupný. Zkontrolujte adresu, TLS a přístup prohlížeče.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Zdrojovému serveru chybí požadovaný pomocný nástroj pro zdroj.',
+  'Deze bron is nog live of niet afgerond.':
+      'Tento zdroj je stále živý nebo nedokončený.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Toto video nemá použitelnou zvukovou stopu.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Toto video je soukromé, odstraněné nebo vyžaduje přístupová práva.',
+  'Deze video transcriberen?': 'Přepsat toto video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Váš vlastní zdrojový server načte video z YouTube. Načtení odešle odkaz na video tomuto serveru. Bez serveru můžete importovat titulky.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'V této prezentaci nebyla nalezena žádná videa YouTube.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Nejsou dostupné použitelné titulky. Zvolte zvuk nebo importujte soubor.',
+  'Geïmporteerde ondertitels': 'Importované titulky',
+  'Handmatige ondertitels': 'Ruční titulky',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Zvolte zdrojový server HTTPS nebo server na tomto zařízení.',
+  'Ondertitels importeren…': 'Importovat titulky…',
+  'Ondertitels overnemen': 'Použít titulky',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Rozpoznávají se také kanály podcastů a odkazy na videa YouTube.',
+  'Video-informatie ophalen': 'Načíst informace o videu',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube omezuje požadavky. Zkuste to později znovu.',
+  'YouTube-video transcriberen…': 'Přepsat video YouTube…',
   'één taal': 'jeden jazyk',
   'Meerdere talen in deze opname': 'Více jazyků v této nahrávce',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

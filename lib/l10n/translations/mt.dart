@@ -1558,6 +1558,46 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Limiti tal-framment mhux validi.',
+  'Alleen dit fragment': 'Dan il-framment biss',
+  'Audio downloaden en transcriberen…': 'Niżżel l-awdjo u ttraskrivi…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'It-tniżżil tal-awdjo jiftaħ l-għażliet tat-traskrizzjoni. Framment jinqata’ qabel l-ASR. Is-sors imniżżel jitħassar wara.',
+  'Automatische ondertitels': 'Sottotitoli awtomatiċi',
+  'Bronserver-URL': 'URL tas-server tas-sors',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Is-server tas-sors juża protokoll mhux appoġġjat.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Is-server tas-sors huwa okkupat. Erġa’ pprova aktar tard.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Is-server tas-sors ma jistax jintlaħaq. Iċċekkja l-indirizz, TLS u l-aċċess tal-browser.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Is-server tas-sors huwa nieqes mill-għodda awżiljarja tas-sors meħtieġa.',
+  'Deze bron is nog live of niet afgerond.':
+      'Dan is-sors għadu dirett jew mhux lest.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Dan il-video m’għandux track tal-awdjo li tista’ tintuża.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Dan il-video huwa privat, tneħħa jew jeħtieġ permess għall-aċċess.',
+  'Deze video transcriberen?': 'Tittraskrivi dan il-video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Is-server tas-sors tiegħek stess iġib il-video minn YouTube. Il-ġbir jibgħat il-link tal-video lil dan is-server. Mingħajr server tista’ timporta sottotitoli.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Ma nstabux videos ta’ YouTube f’din il-preżentazzjoni.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'M’hemmx sottotitoli li jistgħu jintużaw. Agħżel l-awdjo jew importa fajl.',
+  'Geïmporteerde ondertitels': 'Sottotitoli importati',
+  'Handmatige ondertitels': 'Sottotitoli manwali',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Agħżel server tas-sors HTTPS jew server fuq dan l-apparat.',
+  'Ondertitels importeren…': 'Importa sottotitoli…',
+  'Ondertitels overnemen': 'Uża s-sottotitoli',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Jiġu rikonoxxuti wkoll feeds ta’ podcasts u links ta’ videos ta’ YouTube.',
+  'Video-informatie ophalen': 'Ġib l-informazzjoni tal-video',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube qed jillimita t-talbiet. Erġa’ pprova aktar tard.',
+  'YouTube-video transcriberen…': 'Ittraskrivi video ta’ YouTube…',
   'één taal': 'lingwa waħda',
   'Meerdere talen in deze opname': 'Diversi lingwi f’din ir-reġistrazzjoni',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

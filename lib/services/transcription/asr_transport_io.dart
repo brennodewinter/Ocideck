@@ -4,7 +4,6 @@
 // weigeren, respons begrenzen — maar dan voor byte-bodies en met een
 // werkende afbreekknop.
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -62,7 +61,7 @@ final class IoAsrTransport implements AsrTransport {
       if (error is AsrRequestException) {
         fail(error, stack);
       } else {
-        logError('IoAsrTransport.send: verzoek mislukt', error, stack);
+        logWarning('IoAsrTransport.send: netwerkfout (${error.runtimeType})');
         fail(const AsrRequestException('netwerk'), stack);
       }
     }
@@ -92,6 +91,16 @@ final class IoAsrTransport implements AsrTransport {
         }
         final response = await request.close();
         if (completer.isCompleted) return;
+        final responseHeaders = {
+          for (final name in [
+            'content-type',
+            'content-length',
+            'location',
+            'etag',
+            'last-modified',
+          ])
+            name: ?response.headers.value(name),
+        };
         final builder = BytesBuilder(copy: false);
         subscription = response.listen(
           (chunk) {
@@ -106,9 +115,11 @@ final class IoAsrTransport implements AsrTransport {
           onDone: () {
             if (completer.isCompleted) return;
             completer.complete(
-              AsrResponse(
+              AsrByteResponse(
                 response.statusCode,
-                utf8.decode(builder.takeBytes(), allowMalformed: true),
+                builder.takeBytes(),
+                finalUrl: url,
+                headers: responseHeaders,
               ),
             );
             cleanup();
@@ -126,4 +137,5 @@ final class IoAsrTransport implements AsrTransport {
   }
 }
 
-AsrTransport createAsrTransport() => const IoAsrTransport();
+AsrTransport createAsrTransport({int maxResponseBytes = 16 * 1024 * 1024}) =>
+    IoAsrTransport(maxResponseBytes: maxResponseBytes);

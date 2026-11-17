@@ -1542,6 +1542,46 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Virheelliset katkelman rajat.',
+  'Alleen dit fragment': 'Vain tämä katkelma',
+  'Audio downloaden en transcriberen…': 'Lataa ääni ja litteroi…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Äänen lataaminen avaa litterointivalinnat. Katkelma leikataan ennen ASR:ää. Ladattu lähde poistetaan sen jälkeen.',
+  'Automatische ondertitels': 'Automaattiset tekstitykset',
+  'Bronserver-URL': 'Lähdepalvelimen URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Lähdepalvelin käyttää protokollaa, jota ei tueta.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Lähdepalvelin on varattu. Yritä myöhemmin uudelleen.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Lähdepalvelimeen ei saada yhteyttä. Tarkista osoite, TLS ja selaimen käyttöoikeus.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Lähdepalvelimelta puuttuu tarvittava lähdeapuohjelma.',
+  'Deze bron is nog live of niet afgerond.':
+      'Tämä lähde on yhä suorassa lähetyksessä tai kesken.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Tässä videossa ei ole käyttökelpoista ääniraitaa.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Tämä video on yksityinen, poistettu tai edellyttää käyttöoikeutta.',
+  'Deze video transcriberen?': 'Litteroidaanko tämä video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Oma lähdepalvelimesi hakee videon YouTubesta. Haku lähettää videolinkin tälle palvelimelle. Ilman palvelinta voit tuoda tekstityksiä.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Tästä esityksestä ei löytynyt YouTube-videoita.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Käyttökelpoisia tekstityksiä ei ole. Valitse ääni tai tuo tiedosto.',
+  'Geïmporteerde ondertitels': 'Tuodut tekstitykset',
+  'Handmatige ondertitels': 'Manuaaliset tekstitykset',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Valitse HTTPS-lähdepalvelin tai tällä laitteella toimiva palvelin.',
+  'Ondertitels importeren…': 'Tuo tekstityksiä…',
+  'Ondertitels overnemen': 'Käytä tekstityksiä',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Myös podcast-syötteet ja YouTube-videolinkit tunnistetaan.',
+  'Video-informatie ophalen': 'Hae videon tiedot',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube rajoittaa pyyntöjä. Yritä myöhemmin uudelleen.',
+  'YouTube-video transcriberen…': 'Litteroi YouTube-video…',
   'één taal': 'yksi kieli',
   'Meerdere talen in deze opname': 'Useita kieliä tässä tallenteessa',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

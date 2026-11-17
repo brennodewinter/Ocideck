@@ -767,6 +767,46 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Ongeldige fragmentgrenzen.': 'Invalid excerpt boundaries.',
+  'Alleen dit fragment': 'Only this excerpt',
+  'Audio downloaden en transcriberen…': 'Download audio and transcribe…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Downloading audio opens the transcription options. An excerpt is cut before ASR. The downloaded source is deleted afterwards.',
+  'Automatische ondertitels': 'Automatic captions',
+  'Bronserver-URL': 'Source server URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'The source server uses an unsupported protocol.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'The source server is busy. Try again later.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'The source server is unreachable. Check the address, TLS and browser access.',
+  'De bronserver mist de vereiste bronhelper.':
+      'The source server is missing the required source helper.',
+  'Deze bron is nog live of niet afgerond.':
+      'This source is still live or unfinished.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'This video has no usable audio track.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'This video is private, removed or requires access.',
+  'Deze video transcriberen?': 'Transcribe this video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Your own source server fetches the video from YouTube. Fetching sends the video link to this server. Without a server, you can import captions.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'No YouTube videos found in this presentation.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'No usable captions available. Choose audio or import a file.',
+  'Geïmporteerde ondertitels': 'Imported captions',
+  'Handmatige ondertitels': 'Manual captions',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Choose an HTTPS source server or a server on this device.',
+  'Ondertitels importeren…': 'Import captions…',
+  'Ondertitels overnemen': 'Use captions',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Podcast feeds and YouTube video links are also recognised.',
+  'Video-informatie ophalen': 'Fetch video information',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube is limiting requests. Try again later.',
+  'YouTube-video transcriberen…': 'Transcribe YouTube video…',
   'één taal': 'one language',
   'Meerdere talen in deze opname': 'Multiple languages in this recording',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

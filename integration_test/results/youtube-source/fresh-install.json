@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "python": "3.15.2",
+  "python_executable_sha256": "6cc907e4a022fefc843bcd93954eaf5a2cbfc77a095640bfadeeed96154190c5",
+  "manifest_sha256": "a61b568e13d3f80500f234361863344902a1189dbb0e2b618a38750340bcfa88",
+  "node_executable_sha256": "ff9365ccf73e95b7ac69867418124973addde63043650c0db96bd6a722c53cd8",
+  "source_files": {
+    "source_runtime.py": "dc61f2725b7ea474123e15f1693427b89e3fb9073cd35dbf3ccfca030a63e9e0",
+    "egress_proxy.py": "8e403dfda35514c5f4c2ac41864f5f1c194ac373d05bdc5381882045dd6e7779",
+    "install_runtime.py": "2477136167581737f377a8529c89c6b0e2571d89325086f1ac74f378881ff75f",
+    "source_server.py": "0339db37a3c32ec89db3979f22db897163dde7afa5ca99f6ba437c139247077b",
+    "register_decoder.py": "400d2f4e37f455b39224b5d13f9ae215838032e47c5c2753bdb1c6612f6a26fc"
+  },
+  "optional_decoder": true
+}

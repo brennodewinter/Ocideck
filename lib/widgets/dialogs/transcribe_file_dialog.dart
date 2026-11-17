@@ -24,6 +24,8 @@ import '../../l10n/app_localizations.dart';
 import '../../meetings/call_audio_manifest.dart';
 import '../../meetings/call_recording.dart';
 import '../../services/transcription/capture_source.dart';
+import '../../services/transcription/clip_recorded_audio.dart';
+import '../../services/media/media_transcript.dart';
 import '../../services/transcription/recording_staging.dart';
 import '../../services/web_asset_store.dart';
 import '../../services/transcription/file_capture_source.dart';
@@ -43,19 +45,28 @@ Future<void> showTranscribeFileDialog(
   BuildContext context, {
   required String sourcePath,
   required String displayName,
+  MediaTranscriptOrigin? mediaOrigin,
+  Duration mediaAudioOffset = Duration.zero,
 }) async {
   final lease = WebAssetStore.lease([
     sourcePath,
     ?WebAssetStore.pathForName('$sourcePath.sources.json'),
   ]);
+  final drained = Completer<void>();
   try {
     await showDialog<void>(
       context: context,
       builder: (_) => TranscribeFileDialog(
         sourcePath: sourcePath,
         displayName: displayName,
+        mediaOrigin: mediaOrigin,
+        mediaAudioOffset: mediaAudioOffset,
+        onDrained: () {
+          if (!drained.isCompleted) drained.complete();
+        },
       ),
     );
+    await drained.future;
   } finally {
     lease.release();
   }
@@ -81,10 +92,18 @@ class TranscribeFileDialog extends ConsumerStatefulWidget {
     super.key,
     required this.sourcePath,
     required this.displayName,
+    this.mediaOrigin,
+    this.mediaAudioOffset = Duration.zero,
+    this.onDrained,
   });
 
   final String sourcePath;
   final String displayName;
+  final MediaTranscriptOrigin? mediaOrigin;
+  final Duration mediaAudioOffset;
+
+  /// Source owners may remove temporary files only after native work drains.
+  final VoidCallback? onDrained;
 
   @override
   ConsumerState<TranscribeFileDialog> createState() =>
@@ -113,6 +132,8 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   bool _taskRunning = false;
   bool _cancelRequested = false;
   bool _disposed = false;
+  bool _describing = false;
+  bool _reportedDrained = false;
 
   /// Herkomst van een callopname (#2530): ligt de duurzame wav in een
   /// sessiemap met `sources.json`, dan is dit geen "bestand" maar een
@@ -142,11 +163,12 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   }
 
   Future<void> _describe() async {
-    final source = _fileSource();
+    _describing = true;
     // De taalkeuze is capability-gedreven: de engine meldt zijn tabel en de
     // dialoog toont precies die — geen vaste vijf-talen-lijst meer (#2940).
     unawaited(_loadLanguages());
     try {
+      final source = _fileSource();
       // Synchroon: het manifest is hooguit enkele honderden bytes en een
       // async lees keert in een widgettest-zone nooit terug. Op web is dit
       // de `mem:`-sidecar die de sessie naast de wav-sleutel zette.
@@ -160,6 +182,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           _phase = _Phase.failed;
         });
       }
+    } finally {
+      _describing = false;
+      _notifyDrained();
     }
   }
 
@@ -237,6 +262,28 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
       }
       audio = await session.stop();
       _checkTaskActive();
+      final origin = widget.mediaOrigin;
+      final clipStart = origin == null
+          ? Duration.zero
+          : origin.start - widget.mediaAudioOffset;
+      final clipEnd = origin?.end == null
+          ? null
+          : origin!.end! - widget.mediaAudioOffset;
+      if (clipStart.isNegative) {
+        throw const DecodeFailed('bronoffset ligt na het gekozen fragment');
+      }
+      if (origin != null &&
+          (clipStart > Duration.zero ||
+              (clipEnd != null && clipEnd < audio.duration))) {
+        audio = await clipRecordedAudio(
+          audio,
+          start: clipStart,
+          end: clipEnd,
+          stagingDir: stagingDir,
+          cancelled: () => _cancelRequested || !mounted,
+        );
+        _checkTaskActive();
+      }
       if (mounted) setState(() => _decoding = false);
 
       // De toestemming noemt host én bestand — de dialoog toonde beide en
@@ -287,7 +334,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     } finally {
       audio?.releaseAssets();
       _taskRunning = false;
-      if (_disposed) _sourceLease?.release();
+      _notifyDrained();
     }
   }
 
@@ -301,8 +348,15 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   void dispose() {
     _disposed = true;
     _stop();
-    if (!_taskRunning) _sourceLease?.release();
+    _notifyDrained();
     super.dispose();
+  }
+
+  void _notifyDrained() {
+    if (!_disposed || _taskRunning || _describing || _reportedDrained) return;
+    _reportedDrained = true;
+    _sourceLease?.release();
+    widget.onDrained?.call();
   }
 
   /// De gedecodeerde WAV in staging is een tussenstap — de audio die de
@@ -352,14 +406,27 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
                 .replaceAll('{n}', '${gaps.$1}'),
       audioRelPath: null, // de bewaarkeuze landt bij Opslaan (§3.2)
     );
-    final markdown = buildTranscriptMarkdown(
-      provenance,
-      formatTranscriptBody(
-        result.segments,
-        speakerLabel: l10n.d('Spreker'),
-        unknownLabel: l10n.d('Onbekend'),
-      ),
-    );
+    final markdown = widget.mediaOrigin != null
+        ? mediaTranscriptMarkdown(
+            origin: widget.mediaOrigin!,
+            segments: result.segments,
+            methodLabel: _engineLabel(engine, l10n) ?? '',
+            processedAtLabel: _formatNow(),
+            audioOffset: widget.mediaOrigin!.start,
+            language: _language == 'auto' || _language == 'mixed'
+                ? null
+                : _language,
+            speakerLabel: l10n.d('Spreker'),
+            unknownLabel: l10n.d('Onbekend'),
+          )
+        : buildTranscriptMarkdown(
+            provenance,
+            formatTranscriptBody(
+              result.segments,
+              speakerLabel: l10n.d('Spreker'),
+              unknownLabel: l10n.d('Onbekend'),
+            ),
+          );
     await _discardStaging();
     _checkTaskActive();
     ref
@@ -369,7 +436,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           suggestedName: '$title transcript',
           // Web heeft geen `media/` bij een losse download — de checkbox
           // staat daar bewust uit, dus dit veld is daar altijd null.
-          pendingAudioPath: _keepAudio ? widget.sourcePath : null,
+          pendingAudioPath: _keepAudio && widget.mediaOrigin == null
+              ? widget.sourcePath
+              : null,
         );
     if (mounted) Navigator.of(context).pop();
   }
@@ -549,7 +618,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
               value: _diarize,
               onChanged: (v) => setState(() => _diarize = v ?? false),
             ),
-          if (!kIsWeb) _keepAudioRow(l10n),
+          if (!kIsWeb && widget.mediaOrigin == null) _keepAudioRow(l10n),
         ],
       ],
     );

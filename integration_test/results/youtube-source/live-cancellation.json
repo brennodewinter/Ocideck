@@ -1,0 +1,8 @@
+{
+  "scope": "real HTTP peer-close during actual provider extraction, not release UI",
+  "observed_provider_groups": 1,
+  "live_group_members_after_cancel": 0,
+  "new_private_staging_after_cancel": 0,
+  "cancel_cleanup_ms": 461,
+  "subsequent_metadata_succeeded": true
+}

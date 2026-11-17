@@ -58,6 +58,10 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
               style: TextStyle(fontSize: 12, color: AppTheme.slate500),
             ),
             const SizedBox(height: 12),
+            Text(
+              l10n.d('Ook podcastfeeds en YouTube-videolinks worden herkend.'),
+            ),
+            const SizedBox(height: 12),
             TextField(
               controller: _controller,
               autofocus: true,

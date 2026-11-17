@@ -144,6 +144,7 @@ String formatTranscriptBody(
   List<TranscriptSegment> segments, {
   String speakerLabel = 'Spreker',
   String unknownLabel = 'Onbekend',
+  Uri Function(Duration)? sourceLink,
 }) {
   if (segments.every((s) => s.text.trim().isEmpty)) return '';
   final names = <String, int>{};
@@ -151,7 +152,11 @@ String formatTranscriptBody(
   for (final segment in segments) {
     final prefix = StringBuffer();
     if (segment.start != null) {
-      prefix.write('[${_formatTimecode(segment.start!)}] ');
+      final time = segment.start!;
+      final label = '[${_formatTimecode(time)}]';
+      prefix.write(
+        sourceLink == null ? '$label ' : '$label(${sourceLink(time)}) ',
+      );
     }
     if (segment.language != null) {
       prefix.write(

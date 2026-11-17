@@ -50,7 +50,8 @@ void installResponse(
         cancel: async () => { globalThis.asrCancels++; },
         releaseLock: () => { globalThis.asrReleases++; }
       };
-      return {status: 200, body: $emptyBody ? null : {getReader: () => reader},
+      return {status: 200, url: 'https://asr.invalid', headers: new Headers({'content-type': 'application/json'}),
+        body: $emptyBody ? null : {getReader: () => reader},
         arrayBuffer: () => { throw new Error('unbounded read is forbidden'); }};
     };
   '''

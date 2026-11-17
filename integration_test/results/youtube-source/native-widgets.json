@@ -1,0 +1,21 @@
+{
+  "scope": "macOS ARM64 production widgets, native source and ASR HTTP clients in Flutter test harness; not packaged release UI",
+  "source_revision": "4b84de7f3ea2fa818849ea1254aae04baa304c8a",
+  "flows": [
+    {
+      "entry": "URL open",
+      "caption_document_sha256": "06e6e2121d5013a56acc0937119b4c8393684a71a84775256abb8f860579ed2d",
+      "original_deck_unchanged": true
+    },
+    {
+      "entry": "deck Markdown link",
+      "caption_document_sha256": "06e6e2121d5013a56acc0937119b4c8393684a71a84775256abb8f860579ed2d",
+      "original_deck_unchanged": true
+    },
+    {
+      "entry": "video slide editor",
+      "caption_document_sha256": "06e6e2121d5013a56acc0937119b4c8393684a71a84775256abb8f860579ed2d",
+      "original_deck_unchanged": true
+    }
+  ]
+}

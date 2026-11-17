@@ -169,6 +169,13 @@ List<PickerOption<String>> importSourceOptions(
       icon: Icons.graphic_eq_outlined,
       label: transcribeFileLabel(l10n),
     ),
+  if (ref.read(deckProvider).deck case final deck?
+      when findDeckYoutubeReferences(deck.slides).isNotEmpty)
+    (
+      value: 'transcribe_youtube',
+      icon: Icons.video_library_outlined,
+      label: l10n.d('YouTube-video transcriberen…'),
+    ),
   if (ref.read(transcriptionRevealProvider) && microphoneRecordingOffered)
     (
       value: 'record_mic',
@@ -355,6 +362,8 @@ extension _MainLayoutMenu on _MainLayoutState {
         await importPresentation(context, ref);
       case 'transcribe_file':
         await transcribeFile(context);
+      case 'transcribe_youtube':
+        await transcribeDeckYoutube(context, ref);
       case 'record_mic':
         await recordMicrophone(context);
       case 'record_system':

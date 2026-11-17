@@ -612,6 +612,46 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Ongeldige fragmentgrenzen.': 'Límitenan di fragmento inválido.',
+  'Alleen dit fragment': 'Solamente e fragmento aki',
+  'Audio downloaden en transcriberen…': 'Baha audio i transkribí…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Bahamentu di audio ta habri e opshonnan di transkripshon. Un fragmento ta wordu kortá promé ku ASR. E fuente bahá ta wordu eliminá despues.',
+  'Automatische ondertitels': 'Subtítulonan outomátiko',
+  'Bronserver-URL': 'URL di servidor di fuente',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'E servidor di fuente ta usa un protokòl ku no ta soportá.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'E servidor di fuente ta okupá. Purba atrobe mas despues.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'No por alkansá e servidor di fuente. Kontrolá e adrès, TLS i akseso di e nabegadó.',
+  'De bronserver mist de vereiste bronhelper.':
+      'E servidor di fuente ta falta e programa di ayudo di fuente nesesario.',
+  'Deze bron is nog live of niet afgerond.':
+      'E fuente aki ainda ta en bibu òf no ta terminá.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'E video aki no tin un pista di audio utilisabel.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'E video aki ta privá, eliminá òf ta eksigí pèrmit di akseso.',
+  'Deze video transcriberen?': 'Transkribí e video aki?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Bo mes servidor di fuente ta buska e video na YouTube. E buskamentu ta manda e lenk di video na e servidor aki. Sin servidor bo por importá subtítulonan.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'No a haña video di YouTube den e presentashon aki.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'No tin subtítulonan utilisabel disponibel. Skohe audio òf importá un fail.',
+  'Geïmporteerde ondertitels': 'Subtítulonan importá',
+  'Handmatige ondertitels': 'Subtítulonan manual',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Skohe un servidor di fuente HTTPS òf un servidor riba e aparato aki.',
+  'Ondertitels importeren…': 'Importá subtítulonan…',
+  'Ondertitels overnemen': 'Usa subtítulonan',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Feednan di podcast i lenknan di video YouTube tambe ta wordu rekonosé.',
+  'Video-informatie ophalen': 'Buska informashon di video',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube ta limitá e petishonnan. Purba atrobe mas despues.',
+  'YouTube-video transcriberen…': 'Transkribí video di YouTube…',
   'één taal': 'un idioma',
   'Meerdere talen in deze opname': 'Varios idioma den e grabashon aki',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

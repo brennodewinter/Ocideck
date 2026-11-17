@@ -1561,6 +1561,46 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Невалидни граници на откъса.',
+  'Alleen dit fragment': 'Само този откъс',
+  'Audio downloaden en transcriberen…': 'Изтегляне на аудио и транскрибиране…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Изтеглянето на аудио отваря опциите за транскрипция. Откъсът се изрязва преди ASR. Изтегленият източник се изтрива след това.',
+  'Automatische ondertitels': 'Автоматични субтитри',
+  'Bronserver-URL': 'URL на сървъра за източници',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Сървърът за източници използва неподдържан протокол.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Сървърът за източници е зает. Опитайте отново по-късно.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Сървърът за източници е недостъпен. Проверете адреса, TLS и достъпа на браузъра.',
+  'De bronserver mist de vereiste bronhelper.':
+      'На сървъра за източници липсва необходимият помощен инструмент за източници.',
+  'Deze bron is nog live of niet afgerond.':
+      'Този източник все още се излъчва на живо или не е завършен.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Този видеоклип няма използваема аудиописта.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Този видеоклип е частен, премахнат или изисква разрешение за достъп.',
+  'Deze video transcriberen?': 'Да се транскрибира ли този видеоклип?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Ваш собствен сървър за източници извлича видеоклипа от YouTube. Извличането изпраща връзката към видеоклипа на този сървър. Без сървър можете да импортирате субтитри.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'В тази презентация не са намерени видеоклипове от YouTube.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Няма използваеми субтитри. Изберете аудио или импортирайте файл.',
+  'Geïmporteerde ondertitels': 'Импортирани субтитри',
+  'Handmatige ondertitels': 'Ръчни субтитри',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Изберете HTTPS сървър за източници или сървър на това устройство.',
+  'Ondertitels importeren…': 'Импортиране на субтитри…',
+  'Ondertitels overnemen': 'Използване на субтитри',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Разпознават се и подкаст емисии и връзки към видеоклипове в YouTube.',
+  'Video-informatie ophalen': 'Извличане на информация за видеоклипа',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube ограничава заявките. Опитайте отново по-късно.',
+  'YouTube-video transcriberen…': 'Транскрибиране на видеоклип от YouTube…',
   'één taal': 'един език',
   'Meerdere talen in deze opname': 'Няколко езика в този запис',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
