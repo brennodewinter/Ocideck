@@ -29,17 +29,24 @@
 
   // De print-routes moeten bij moduleconstructie al bestaan; de lopende
   // transcribe wisselt `onLine` uit. `state` deelt de run-status.
-  const state = { onLine: null, onAbort: null, moduleReady: null, cancelled: false };
+  const state = {
+    onLine: null, onAbort: null, initAbort: null, moduleReady: null,
+    cancelled: false, generation: 0, contexts: new Map(), active: null,
+  };
 
-  // Een abort (OOM, te groot model, SAB-misser) doodt de hele runtime:
-  // de volgende ensureModule mag een dode module nooit teruggeven.
-  function markAborted(why) {
+  // Contextindices zijn alleen binnen hun eigen runtime geldig. Een late
+  // callback van een overleden module mag de opvolger niet afbreken.
+  function markAborted(generation, why) {
+    if (generation !== state.generation) return;
+    state.generation++;
+    state.contexts.clear();
     state.moduleReady = null;
     window.Module = undefined;
-    const cb = state.onAbort;
-    state.onLine = null;
-    state.onAbort = null;
-    if (cb) cb(why);
+    const init = state.initAbort;
+    const run = state.onAbort;
+    state.initAbort = state.onLine = state.onAbort = null;
+    if (init) init(new Error('wasm-initialisatie afgebroken: ' + why));
+    if (run) run(why);
   }
 
   function isSupported() {
@@ -60,79 +67,107 @@
 
   async function ensureModule() {
     if (state.moduleReady) return state.moduleReady;
-    // Pre-declareer Module: libmain.js pakt deze vorm op en leest
-    // print/printErr/locateFile bij constructie.
-    window.Module = {
-      locateFile: p => DIR + p,
-      mainScriptUrlOrBlob: SRC,
-      print: t => { if (state.onLine) state.onLine(t); },
-      printErr: t => { if (state.onLine) state.onLine(t); },
-      onAbort: why => markAborted(why),
-    };
+    const generation = ++state.generation;
+    const initialized = new Promise((resolve, reject) => {
+      state.initAbort = reject;
+      window.Module = {
+        locateFile: p => DIR + p,
+        mainScriptUrlOrBlob: SRC,
+        print: t => {
+          if (generation === state.generation && state.onLine) state.onLine(t);
+        },
+        printErr: t => {
+          if (generation === state.generation && state.onLine) state.onLine(t);
+        },
+        onRuntimeInitialized: resolve,
+        onAbort: why => markAborted(generation, why),
+      };
+    });
     state.moduleReady = (async () => {
-      await loadScript(SRC);
-      const M = window.Module;
-      await new Promise(r => {
-        if (M.runtimeInitialized) return r();
-        const prev = M.onRuntimeInitialized;
-        M.onRuntimeInitialized = () => { if (prev) prev(); r(); };
-      });
-      return M;
+      try {
+        await Promise.all([loadScript(SRC), initialized]);
+        if (generation !== state.generation) throw new Error('oude wasm-runtime');
+        state.initAbort = null;
+        return window.Module;
+      } catch (e) {
+        if (generation === state.generation) markAborted(generation, e);
+        throw e;
+      }
     })();
     return state.moduleReady;
   }
 
-  // Model bytes -> virtuele FS -> context-index (>0), of 0 bij falen.
   async function loadModel(u8) {
     const M = await ensureModule();
+    const generation = state.generation;
+    if (state.active) throw new Error('wasm-engine is in gebruik');
     try { M.FS_unlink('whisper.bin'); } catch (e) { /* bestond niet */ }
     M.FS_createDataFile('/', 'whisper.bin', u8, true, true);
-    return M.init('whisper.bin');
+    const index = M.init('whisper.bin');
+    if (generation !== state.generation) throw new Error('modelruntime afgebroken');
+    if (index > 0) state.contexts.set(index, generation);
+    return index;
   }
 
-  // Definitieve pass over 16 kHz mono f32. Levert {segments, cancelled} —
-  // een afgebroken run is een expliciete uitkomst, geen stille afkap.
-  // `onSegment` (optioneel, #2515) krijgt elk segment zodra het valt —
-  // de Dart-kant rekent dat om naar een voortgangsfractie.
+  function contextGeneration(index) {
+    return state.contexts.get(index) || 0;
+  }
+
+  // Eén run beheert print/abort tot zijn eigen promise afgewikkeld is.
   async function transcribe(ctxIndex, pcm, lang, threads, onSegment) {
     const M = await ensureModule();
-    state.cancelled = false;
-    const result = new Promise((resolve, reject) => {
-      const segments = [];
-      state.onAbort = why =>
-        reject(new Error('wasm-runtime afgebroken: ' + why));
-      state.onLine = t => {
-        const m = SEGMENT.exec(t);
-        if (m) {
-          const t0 = (+m[1] * 3600 + +m[2] * 60 + +m[3]) * 1000;
-          const t1 = (+m[4] * 3600 + +m[5] * 60 + +m[6]) * 1000;
-          const seg = { t0: Math.round(t0), t1: Math.round(t1), text: m[7] };
-          segments.push(seg);
-          if (onSegment) onSegment(seg.t1);
-        }
-        if (t.indexOf('total time') !== -1) {
-          state.onLine = null;
-          resolve({ segments, cancelled: state.cancelled });
-        }
-      };
-    });
-    const ret = M.full_default(ctxIndex, pcm, lang, threads, false);
-    if (ret !== 0) {
-      state.onLine = null;
-      throw new Error('full_default weigerde: ' + ret);
+    if (contextGeneration(ctxIndex) !== state.generation) {
+      throw new Error('modelcontext hoort niet bij deze runtime');
     }
-    return result;
+    if (state.active) throw new Error('wasm-engine is in gebruik');
+    const token = {};
+    state.active = token;
+    state.cancelled = false;
+    try {
+      return await new Promise((resolve, reject) => {
+        const segments = [];
+        state.onAbort = why =>
+          reject(new Error('wasm-runtime afgebroken: ' + why));
+        state.onLine = t => {
+          const m = SEGMENT.exec(t);
+          if (m) {
+            const t0 = (+m[1] * 3600 + +m[2] * 60 + +m[3]) * 1000;
+            const t1 = (+m[4] * 3600 + +m[5] * 60 + +m[6]) * 1000;
+            const seg = { t0: Math.round(t0), t1: Math.round(t1), text: m[7] };
+            segments.push(seg);
+            if (onSegment) onSegment(seg.t1);
+          }
+          if (t.indexOf('total time') !== -1) {
+            state.onLine = null;
+            resolve({ segments, cancelled: state.cancelled });
+          }
+        };
+        try {
+          const ret = M.full_default(ctxIndex, pcm, lang, threads, false);
+          if (ret !== 0) reject(new Error('full_default weigerde: ' + ret));
+        } catch (e) { reject(e); }
+      });
+    } finally {
+      if (state.active === token) {
+        state.active = state.onLine = state.onAbort = null;
+      }
+    }
   }
 
   function requestCancel() {
+    if (!state.active) return;
     state.cancelled = true;
     try {
       if (window.Module) window.Module.requestCancel();
-    } catch (e) { /* module nog niet geladen — er liep dan ook niets */ }
+    } catch (e) { /* de runtime kan al zijn afgebroken */ }
   }
 
   function free(ctxIndex) {
-    if (window.Module && ctxIndex) window.Module.free(ctxIndex);
+    if (state.active) throw new Error('wasm-engine is in gebruik');
+    if (window.Module && contextGeneration(ctxIndex) === state.generation) {
+      window.Module.free(ctxIndex);
+      state.contexts.delete(ctxIndex);
+    }
   }
 
   // Container -> 16 kHz mono Float32Array via Web Audio (dezelfde weg als
@@ -162,6 +197,7 @@
 
   window.ocideckWhisper = {
     isSupported, ensureModule, loadModel, transcribe, requestCancel, free,
-    decodeAudio,
+    decodeAudio, contextGeneration,
+    get runtimeGeneration() { return state.generation; },
   };
 })();

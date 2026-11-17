@@ -657,6 +657,23 @@ and forwards cancel to whisper's `abort_callback` (patch:
 hash-pinned in `web/whisper/manifest.json`; a test fails the build if a
 binary is hand-edited.
 
+**Context ownership (#2945).** The engine provider retires its old instance
+when the selected model or route changes. An already accepted task keeps its
+context through model loading, decode and inference; cleanup runs after that
+task settles, before the next queued engine can load a model. Work across
+engine instances is serialized around the shared native worker. Cancelling a
+queued task cannot cancel another engine's native run. Cancellation during
+loading or decode is checked before inference and before accepting results.
+
+Each context is tied to the bridge's runtime generation. A runtime abort
+invalidates all context indices and rejects pending initialization/inference.
+A subsequent explicit attempt reloads the hash-verified model from IndexedDB;
+it does not silently download it again. Late callbacks from an old runtime
+are ignored, and disposal never frees an index reused by a newer runtime.
+The lifecycle tests use a controlled native bridge and small test model, and
+separately execute the production bridge callbacks in a module harness; they
+are ownership/recovery checks, not new speech-quality measurements.
+
 **The hard precondition.** The build uses WASM pthreads, which need
 `SharedArrayBuffer`, which exists only under cross-origin isolation:
 `Cross-Origin-Opener-Policy: same-origin` + `Cross-Origin-Embedder-Policy:
