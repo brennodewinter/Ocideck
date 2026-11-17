@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Níor thosaigh an t-athsheinm uathoibríoch.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Íoslódáil an taifeadadh seo chun é a choinneáil. Caillfear an fhuaim má dhúnann tú an fhuinneog nó an cluaisín seo.',
   'de WAV is geen 16-bit PCM — decode nodig':

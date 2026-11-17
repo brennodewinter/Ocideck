@@ -27,6 +27,10 @@ abstract class WebviewWinFloatingPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  Future<void> setPresentationKeys(int webviewId, bool enabled) {
+    throw UnimplementedError();
+  }
+
   void registerWebView(int webviewId, WinWebViewController webview) {
     throw UnimplementedError();
   }

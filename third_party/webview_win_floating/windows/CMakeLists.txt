@@ -20,7 +20,8 @@ set(PLUGIN_NAME "webview_win_floating_plugin")
 set(NUGET_URL https://dist.nuget.org/win-x86-commandline/v5.10.0/nuget.exe)
 set(NUGET_SHA256 852b71cc8c8c2d40d09ea49d321ff56fd2397b9d6ea9f96e532530307bbbafd3)
 
-set(WEBVIEW_VERSION "1.0.1418.22")
+# PermissionRequestedEventArgs3 makes autoplay grants request-scoped.
+set(WEBVIEW_VERSION "1.0.1661.34")
 set(WIL_VERSION "1.0.220914.1")
 
 find_program(NUGET nuget)

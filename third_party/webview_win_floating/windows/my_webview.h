@@ -16,6 +16,7 @@ class MyWebView;
 class MyWebViewCreateParams {
 public:
     bool offscreen = false;
+    std::function<void(int key, bool control, bool shift, bool alt, bool meta)> onPresentationKey;
 	std::function<void(HRESULT, MyWebView*)> onCreated;
     std::function<void(int requestId, std::string url, bool isNewWindow)> onNavigationRequest;
 	std::function<void(std::string url)> onPageStarted;
@@ -64,6 +65,7 @@ public:
 	virtual HRESULT setVisible(bool isVisible) = 0;
 	virtual HRESULT setBackgroundColor(int32_t argb) = 0;
 	virtual HRESULT requestFocus(bool isNext = true) = 0;
+    virtual void setPresentationKeys(bool enabled) = 0;
 
 	virtual bool canGoBack() = 0;
 	virtual bool canGoForward() = 0;

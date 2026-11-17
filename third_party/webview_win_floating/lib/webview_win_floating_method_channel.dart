@@ -45,7 +45,15 @@ class MethodChannelWebviewWinFloating extends WebviewWinFloatingPlatform {
         return;
       }
 
-      if (call.method == "OnWebMessageReceived") {
+      if (call.method == "onPresentationKey") {
+        controller.notifyPresentationKey_(WinWebViewPresentationKey(
+          virtualKey: call.arguments['key'] as int,
+          control: call.arguments['control'] == true,
+          shift: call.arguments['shift'] == true,
+          alt: call.arguments['alt'] == true,
+          meta: call.arguments['meta'] == true,
+        ));
+      } else if (call.method == "OnWebMessageReceived") {
         // NOTE: only linux pass 'JkChannelName'.
         //       Windows put 'JkChannelName' in 'message' json string
         String? channelName = call.arguments["JkChannelName"];
@@ -104,9 +112,9 @@ class MethodChannelWebviewWinFloating extends WebviewWinFloatingPlatform {
         String url = call.arguments["url"]!;
         int kind = call.arguments["kind"]!;
         int deferralId = call.arguments["deferralId"]!;
-        controller.notifyAskPermission_(
+        await controller.notifyAskPermission_(
           url,
-          WinWebViewPermissionResourceType.values[kind],
+          WinWebViewPermissionResourceType.fromNativeId(kind),
           deferralId,
         );
       } else {
@@ -114,6 +122,13 @@ class MethodChannelWebviewWinFloating extends WebviewWinFloatingPlatform {
       }
     });
   }
+
+  @override
+  Future<void> setPresentationKeys(int webviewId, bool enabled) =>
+      methodChannel.invokeMethod<void>('setPresentationKeys', {
+        'webviewId': webviewId,
+        'enabled': enabled,
+      });
 
   @override
   void registerWebView(int webviewId, WinWebViewController webview) {

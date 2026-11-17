@@ -73,7 +73,8 @@ Widget _presenterPanelLayout(bool compact, Widget current, Widget sidebar) {
 extension _PresenterViews on _FullscreenPresenterState {
   /// A slide in the deck's aspect sized to fit within the given constraints.
   Widget _slideCanvas(Slide slide) {
-    return LayoutBuilder(
+    return PresentationKeyScope.layout(
+      onKey: _handleLogicalKey,
       builder: (_, constraints) {
         final w = constraints.maxWidth;
         final h = constraints.maxHeight;

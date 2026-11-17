@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Automatisch afspelen is niet gestart.':
+      'Reprodukshon outomátiko no a kuminsá.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Download e grabashon aki pa warda e. Ora bo sera e bentana òf tab aki, e audio ta pèrdè.',
   'de WAV is geen 16-bit PCM — decode nodig':

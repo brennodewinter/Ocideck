@@ -1561,6 +1561,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Автоматичното възпроизвеждане не започна.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Изтеглете този запис, за да го запазите. При затваряне на този прозорец или раздел звукът се губи.',
   'de WAV is geen 16-bit PCM — decode nodig':

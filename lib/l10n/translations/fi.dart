@@ -1542,6 +1542,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Automaattinen toisto ei käynnistynyt.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Lataa tämä tallenne säilyttääksesi sen. Ääni katoaa, kun suljet tämän ikkunan tai välilehden.',
   'de WAV is geen 16-bit PCM — decode nodig':

@@ -1548,6 +1548,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Automatisch afspelen is niet gestart.': 'Automatinis atkūrimas neprasidėjo.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Atsisiųskite šį įrašą, kad jį išsaugotumėte. Uždarius šį langą ar kortelę, garsas bus prarastas.',
   'de WAV is geen 16-bit PCM — decode nodig':

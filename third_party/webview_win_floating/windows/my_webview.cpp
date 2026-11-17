@@ -1,4 +1,6 @@
 #include "my_webview.h"
+#include "pending_permissions.h"
+#include "presentation_keys.h"
 
 #include <functional>
 #include <iostream>
@@ -68,6 +70,7 @@ public:
     HRESULT setVisible(bool isVisible);
     HRESULT setBackgroundColor(int32_t argb);
     HRESULT requestFocus(bool isNext);
+    void setPresentationKeys(bool enabled) override { m_presentationKeys = enabled; }
 
     bool canGoBack();
     bool canGoForward();
@@ -106,8 +109,9 @@ private:
     std::map<std::wstring, std::wstring> channelMap; // channel name -> id of RemoveScriptToExecuteOnDocumentCreated
     bool m_hasRegisteredChannel = false;
 
-    std::map<int, std::pair< wil::com_ptr<ICoreWebView2PermissionRequestedEventArgs>, wil::com_ptr<ICoreWebView2Deferral> >> permissionArgsMap;
-    int m_lastPermissionDeferralId = 0;
+    PendingPermissions m_permissions;
+    bool m_presentationKeys = false;
+    EventRegistrationToken m_acceleratorToken{};
 
     wil::com_ptr<ICoreWebView2> m_pWebview;
     wil::com_ptr<ICoreWebView2Controller> m_pController;
@@ -187,6 +191,7 @@ MyWebViewImpl::MyWebViewImpl(HWND hWnd,
                 m_pWebview->add_NavigationStarting(
                     Callback<ICoreWebView2NavigationStartingEventHandler>(
                         [=](ICoreWebView2* sender, ICoreWebView2NavigationStartingEventArgs* args) -> HRESULT {
+                            m_permissions.CancelAll();
 
                             wil::unique_cotaskmem_string url;
                             args->get_Uri(&url);
@@ -400,6 +405,30 @@ MyWebViewImpl::MyWebViewImpl(HWND hWnd,
                             return S_OK;
                         }).Get(), NULL); /// &m_webMessageReceivedToken
 
+                m_pController->add_AcceleratorKeyPressed(
+                    Callback<ICoreWebView2AcceleratorKeyPressedEventHandler>(
+                        [this](ICoreWebView2Controller*, ICoreWebView2AcceleratorKeyPressedEventArgs* args) -> HRESULT {
+                            UINT key = 0;
+                            COREWEBVIEW2_KEY_EVENT_KIND kind;
+                            COREWEBVIEW2_PHYSICAL_KEY_STATUS status{};
+                            if (FAILED(args->get_VirtualKey(&key)) ||
+                                FAILED(args->get_KeyEventKind(&kind)) ||
+                                FAILED(args->get_PhysicalKeyStatus(&status))) return S_OK;
+                            const bool down = kind == COREWEBVIEW2_KEY_EVENT_KIND_KEY_DOWN ||
+                                              kind == COREWEBVIEW2_KEY_EVENT_KIND_SYSTEM_KEY_DOWN;
+                            const auto decision = PresentationKey(m_presentationKeys, key, down, status.WasKeyDown);
+                            if (!decision.handled) return S_OK;
+                            // Synchronously consume before sending anything to Flutter. The
+                            // focused cross-origin player must never see this as a seek.
+                            args->put_Handled(TRUE);
+                            if (decision.dispatch && m_params.onPresentationKey) {
+                                auto pressed = [](int vk) { return (GetKeyState(vk) & 0x8000) != 0; };
+                                m_params.onPresentationKey(static_cast<int>(key), pressed(VK_CONTROL),
+                                    pressed(VK_SHIFT), pressed(VK_MENU), pressed(VK_LWIN) || pressed(VK_RWIN));
+                            }
+                            return S_OK;
+                        }).Get(), &m_acceleratorToken);
+
                 hr = m_pController->add_MoveFocusRequested(
                     Callback<ICoreWebView2MoveFocusRequestedEventHandler>(
                         [=](ICoreWebView2Controller* sender, ICoreWebView2MoveFocusRequestedEventArgs* args) -> HRESULT {
@@ -460,34 +489,51 @@ void MyWebViewImpl::askFlutterPermission(wil::com_ptr<ICoreWebView2PermissionReq
     COREWEBVIEW2_PERMISSION_KIND kind;                           
     wil::unique_cotaskmem_string uri;
 
-    args->get_PermissionKind(&kind);
-    args->get_Uri(&uri);
-    args->GetDeferral(&deferral);
-
-    int deferralId = ++m_lastPermissionDeferralId;
-    permissionArgsMap[deferralId] = std::pair(args, deferral);
-    onAskPermission(utf8_encode(std::wstring(uri.get())), kind, deferralId);
+    if (FAILED(args->get_PermissionKind(&kind)) ||
+        FAILED(args->get_Uri(&uri)) || !uri || !onAskPermission) {
+        args->put_State(COREWEBVIEW2_PERMISSION_STATE_DENY);
+        return;
+    }
+    // Autoplay is a per-request opt-in in OciDeck, never a saved site grant.
+    // COREWEBVIEW2_PERMISSION_KIND_AUTOPLAY is ID 9 in newer runtimes; keeping
+    // the wire ID here also supports SDKs predating that enum member.
+    if (static_cast<int>(kind) == 9) {
+        auto scoped = args.try_query<ICoreWebView2PermissionRequestedEventArgs3>();
+        if (!scoped || FAILED(scoped->put_SavesInProfile(FALSE))) {
+            args->put_State(COREWEBVIEW2_PERMISSION_STATE_DENY);
+            return;
+        }
+    }
+    if (FAILED(args->GetDeferral(&deferral)) || !deferral) {
+        args->put_State(COREWEBVIEW2_PERMISSION_STATE_DENY);
+        return;
+    }
+    const int id = m_permissions.Add([args, deferral](bool granted) {
+        args->put_State(granted ? COREWEBVIEW2_PERMISSION_STATE_ALLOW
+                               : COREWEBVIEW2_PERMISSION_STATE_DENY);
+        deferral->Complete();
+    });
+    if (id == 0) return;
+    try {
+        onAskPermission(utf8_encode(std::wstring(uri.get())), kind, id);
+    } catch (...) {
+        m_permissions.Respond(id, false);
+    }
 }
 
 void MyWebViewImpl::grantPermission(int deferralId, BOOL isGranted)
 {
-    auto it = permissionArgsMap.find(deferralId);
-    if (it == permissionArgsMap.end()) return; // not found
-
-    auto pair = std::move(it->second);
-    permissionArgsMap.erase(it);
-
-    auto args = pair.first;
-    auto deferral = pair.second;
-
-    auto state = isGranted ? COREWEBVIEW2_PERMISSION_STATE_ALLOW : COREWEBVIEW2_PERMISSION_STATE_DENY;
-    args->put_State(state);
-    deferral->Complete();
+    m_permissions.Respond(deferralId, isGranted != FALSE);
 }
 
 MyWebViewImpl::~MyWebViewImpl()
 {
-    m_pController->Close();
+    m_permissions.Close();
+    m_presentationKeys = false;
+    if (m_pController) {
+        m_pController->remove_AcceleratorKeyPressed(m_acceleratorToken);
+        m_pController->Close();
+    }
     std::cout << "[webview_win_floating] MyWebViewImpl::~MyWebViewImpl()" << std::endl;
 }
 
@@ -523,12 +569,14 @@ void MyWebViewImpl::allowNavigationRequest(int requestId, bool isAllowed) {
 
 HRESULT MyWebViewImpl::loadUrl(LPCWSTR url)
 {
+    m_permissions.CancelAll();
     nowLoadingUrl = url;
     return m_pWebview->Navigate(url);
 }
 
 HRESULT MyWebViewImpl::loadHtmlString(LPCWSTR html)
 {
+    m_permissions.CancelAll();
     return m_pWebview->NavigateToString(html);
 }
 

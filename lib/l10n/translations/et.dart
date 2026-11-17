@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Automaatne taasesitus ei käivitunud.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Salvestise säilitamiseks laadige see alla. Selle akna või vahekaardi sulgemisel läheb heli kaotsi.',
   'de WAV is geen 16-bit PCM — decode nodig':

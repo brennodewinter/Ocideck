@@ -611,6 +611,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Automatisch afspelen is niet gestart.':
+      'La riproduzione automatica non è iniziata.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Scarica questa registrazione per conservarla. Chiudendo questa finestra o scheda, l\'audio andrà perso.',
   'de WAV is geen 16-bit PCM — decode nodig':

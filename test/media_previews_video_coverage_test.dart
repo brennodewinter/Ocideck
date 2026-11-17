@@ -118,6 +118,13 @@ class _FakeController extends PlatformWebViewController {
   String? loadedBaseUrl;
   String? lastRequestUrl;
 
+  int get generation => int.parse(
+    RegExp(r'var generation=(\d+);').firstMatch(loadedHtml!)!.group(1)!,
+  );
+  void emit(String message, {int? generation}) => jsChannel!(
+    JavaScriptMessage(message: '${generation ?? this.generation}|$message'),
+  );
+
   @override
   Future<void> loadRequest(LoadRequestParams params) async {
     lastRequestUrl = params.uri.toString();
@@ -235,6 +242,26 @@ Future<void> settle(WidgetTester tester) async {
   );
   await tester.pump();
 }
+
+Future<void> _checkPlayerHtml(
+  WidgetTester tester,
+  String html,
+  String script,
+) => tester.runAsync(() async {
+  final directory = await Directory.systemTemp.createTemp('ocideck-player-');
+  try {
+    final file = File.fromUri(directory.uri.resolve('player.html'));
+    await file.writeAsString(html);
+    final result = await Process.run(
+      'node',
+      ['--test', script],
+      environment: {'OCIDECK_VIDEO_HTML': file.path},
+    );
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+  } finally {
+    await directory.delete(recursive: true);
+  }
+});
 
 void main() {
   late _FakeVideoPlayerPlatform fakeVideo;
@@ -488,13 +515,13 @@ void main() {
     // Before any player message: a subtle loader over the still-blank player.
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
-    controller.jsChannel!(const JavaScriptMessage(message: 'pos:1200'));
+    controller.emit('pos:1200');
     await tester.pump();
     expect(find.byType(CircularProgressIndicator), findsNothing);
 
     // "ok" and "ended" are handled without error.
-    controller.jsChannel!(const JavaScriptMessage(message: 'ok'));
-    controller.jsChannel!(const JavaScriptMessage(message: 'ended'));
+    controller.emit('ok');
+    controller.emit('ended');
     await tester.pump();
     expect(tester.takeException(), isNull);
   });
@@ -533,12 +560,12 @@ void main() {
     await tester.pump();
 
     final controller = fakeWeb.lastController!;
-    controller.jsChannel!(const JavaScriptMessage(message: 'ended'));
+    controller.emit('ended');
     await tester.pump();
     expect(completions, 1);
 
     // A second ended does not report again.
-    controller.jsChannel!(const JavaScriptMessage(message: 'ended'));
+    controller.emit('ended');
     await tester.pump();
     expect(completions, 1);
     expect(tester.takeException(), isNull);
@@ -770,27 +797,109 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('iframe load is geen bewijs dat de speler klaarstaat', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(
+        _video(path: 'https://youtu.be/dQw4w9WgXcQ'),
+        allowRemoteMedia: true,
+      ),
+    );
+    await tester.pump();
+
+    // Only a player handshake proves readiness; load alone no longer hides
+    // a blocked or silent player behind an optimistic ready message.
+    final html = fakeWeb.lastController!.loadedHtml!;
+    expect(html, contains("f.addEventListener('load'"));
+    expect(html, contains('markReady'));
+    expect(html, isNot(contains('setTimeout(markReady')));
+    // En het foutpad blijft bestaan voor het geval er niets laadt.
+    expect(html, contains("post('err:noapi')"));
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
-    'een iframe dat laadt maar zwijgt levert geen valse foutmelding op',
+    'production YouTube document executes playback recovery and clip rules',
     (tester) async {
       await tester.pumpWidget(
         _host(
-          _video(path: 'https://youtu.be/dQw4w9WgXcQ'),
+          _video(
+            path: 'https://youtu.be/dQw4w9WgXcQ',
+            startMs: 10000,
+            endMs: 30000,
+            autoplay: true,
+          ),
+          allowRemoteMedia: true,
+          autoplayMedia: true,
+        ),
+      );
+      await tester.pump();
+      final html = fakeWeb.lastController!.loadedHtml!;
+      await _checkPlayerHtml(tester, html, 'test/video_embed_player_test.cjs');
+    },
+  );
+
+  testWidgets(
+    'production Vimeo document bounds late seeks and explicit replay',
+    (tester) async {
+      await tester.pumpWidget(
+        _host(
+          _video(
+            path: 'https://vimeo.com/123456789',
+            startMs: 10000,
+            endMs: 30000,
+          ),
           allowRemoteMedia: true,
         ),
       );
       await tester.pump();
+      await _checkPlayerHtml(
+        tester,
+        fakeWeb.lastController!.loadedHtml!,
+        'test/video_embed_vimeo_test.cjs',
+      );
+    },
+  );
 
-      // Zonder het IFrame-script komt "klaar" van de speler zelf via
-      // postMessage. Blijft die stil terwijl het iframe wél laadde, dan is de
-      // video vermoedelijk gewoon in orde: de HTML moet dan `ok` melden en niet
-      // na acht seconden alsnog `err:noapi` op een spelende video plakken.
-      final html = fakeWeb.lastController!.loadedHtml!;
-      expect(html, contains("f.addEventListener('load'"));
-      expect(html, contains('markReady'));
-      // En het foutpad blijft bestaan voor het geval er niets laadt.
-      expect(html, contains("post('err:noapi')"));
-      expect(tester.takeException(), isNull);
+  testWidgets(
+    'a previous embed generation cannot complete the replacement clip',
+    (tester) async {
+      var completed = 0;
+      await tester.pumpWidget(
+        _host(
+          _video(
+            path: 'https://youtu.be/dQw4w9WgXcQ',
+            autoplay: true,
+            endMs: 30000,
+          ),
+          allowRemoteMedia: true,
+          autoplayMedia: true,
+          onVideoComplete: () => completed++,
+        ),
+      );
+      await tester.pump();
+      final controller = fakeWeb.lastController!;
+      final old = controller.generation;
+      await tester.pumpWidget(
+        _host(
+          _video(
+            path: 'https://youtu.be/dQw4w9WgXcQ',
+            autoplay: true,
+            endMs: 45000,
+          ),
+          allowRemoteMedia: true,
+          autoplayMedia: true,
+          onVideoComplete: () => completed++,
+        ),
+      );
+      await tester.pump();
+      expect(controller.generation, greaterThan(old));
+      controller.emit('ended', generation: old);
+      controller.jsChannel!(const JavaScriptMessage(message: 'ended'));
+      expect(completed, 0);
+      controller.emit('ended');
+      expect(completed, 1);
     },
   );
 

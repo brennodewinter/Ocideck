@@ -1780,7 +1780,18 @@ Windows video uses `video_player_win` (Media Foundation); YouTube/Vimeo uses
 GStreamer codecs. The Linux module manifest and build jobs list the development
 packages. `integration_test/desktop_media_test.dart` exercises native playback
 and the native JavaScript bridge in the same engine, without external network
-requests. Live YouTube still requires a manual check.
+requests. `integration_test/windows_video_navigation_test.dart` adds physical
+WebView2 child-frame key injection and a separate live YouTube probe through
+`test_driver/windows_video_driver.dart`; `video_only` on the Windows workflow
+retains evidence even on failure. This external-network test must distinguish
+an actual PLAYING event from readiness and record browser policy failures.
+Multi-display hardware remains a separate manual scenario.
+
+The vendored Windows plugin pins WebView2 SDK 1.0.1661.34 for
+`PermissionRequestedEventArgs3`: autoplay decisions opt out of profile storage.
+Old runtimes lacking this interface deny rather than persist the grant.
+Navigation interception is per controller and enabled only by the current
+presentation canvas. Editors and upcoming-slide previews do not opt in.
 Primary and audience Linux runners prepare a GTK overlay before realizing the
 Flutter view. The webview backend reuses that overlay; reparenting an active
 Flutter view stalls its renderer. Preparing the overlay creates no webview and

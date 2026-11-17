@@ -180,6 +180,17 @@ void WebviewWinFloatingPlugin::createWebview(const flutter::MethodCall<flutter::
     m_MethodChannel->InvokeMethod("onHistoryChanged", std::make_unique<flutter::EncodableValue>(arguments));
   };
   
+  params.onPresentationKey = [=](int key, bool control, bool shift, bool alt, bool meta) {
+    flutter::EncodableMap arguments;
+    arguments[flutter::EncodableValue("webviewId")] = flutter::EncodableValue(webviewId);
+    arguments[flutter::EncodableValue("key")] = flutter::EncodableValue(key);
+    arguments[flutter::EncodableValue("control")] = flutter::EncodableValue(control);
+    arguments[flutter::EncodableValue("shift")] = flutter::EncodableValue(shift);
+    arguments[flutter::EncodableValue("alt")] = flutter::EncodableValue(alt);
+    arguments[flutter::EncodableValue("meta")] = flutter::EncodableValue(meta);
+    m_MethodChannel->InvokeMethod("onPresentationKey", std::make_unique<flutter::EncodableValue>(arguments));
+  };
+
   params.onAskPermission = [=](std::string url, int kind, int deferralId) -> void {
     flutter::EncodableMap arguments;
     arguments[flutter::EncodableValue("webviewId")] = flutter::EncodableValue(webviewId);
@@ -339,6 +350,10 @@ void WebviewWinFloatingPlugin::HandleMethodCall(
   } else if (method_call.method_name().compare("clearCookies") == 0) {
     HRESULT hr = webview->clearCookies();
     result->Success(flutter::EncodableValue(SUCCEEDED(hr)));
+
+  } else if (method_call.method_name().compare("setPresentationKeys") == 0) {
+    webview->setPresentationKeys(std::get<bool>(arguments[flutter::EncodableValue("enabled")]));
+    result->Success();
 
   } else if (method_call.method_name().compare("requestFocus") == 0) {
     webview->requestFocus(true);

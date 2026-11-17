@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'D automatischi Wiedergab isch nöd gstartet.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Lad die Ufnahm abe, zum si z bhalte. Wänn du das Fänschter oder de Tab zuemachsch, gaht de Ton verlore.',
   'de WAV is geen 16-bit PCM — decode nodig':

@@ -1546,6 +1546,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Automatska reprodukcija nije započela.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Preuzmite ovu snimku da biste je sačuvali. Zatvaranjem ovog prozora ili kartice zvuk se gubi.',
   'de WAV is geen 16-bit PCM — decode nodig':

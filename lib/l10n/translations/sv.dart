@@ -1541,6 +1541,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Automatisk uppspelning startade inte.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Ladda ned inspelningen för att spara den. Ljudet går förlorat när du stänger det här fönstret eller den här fliken.',
   'de WAV is geen 16-bit PCM — decode nodig':

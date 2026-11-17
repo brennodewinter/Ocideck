@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Reproductio automatica non incepit.',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Hanc inscriptionem sonoram depone ut serves. Hac fenestra vel tabella clausa, sonus amittitur.',
   'de WAV is geen 16-bit PCM — decode nodig':

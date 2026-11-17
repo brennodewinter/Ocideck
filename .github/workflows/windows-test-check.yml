@@ -42,6 +42,11 @@ on:
         required: false
         default: false
         type: boolean
+      video_only:
+        description: Run Windows WebView2 focus and live player evidence
+        required: false
+        default: false
+        type: boolean
       baseline_ref:
         description: Full baseline commit SHA for the navigation profile comparison
         required: false
@@ -92,7 +97,7 @@ jobs:
       # is opzet, de seed staat bovenin de log voor wie een breuk wil
       # reproduceren.
       - name: Test
-        if: ${{ !inputs.navigation_only }}
+        if: ${{ !inputs.navigation_only && !inputs.video_only }}
         shell: bash
         run: |
           # Begrens de belasting en schrijf ook bij een runnerbreuk bewijs.
@@ -147,4 +152,28 @@ jobs:
         with:
           name: document-navigation-windows-${{ github.sha }}
           path: ${{ runner.temp }}/document-navigation
+          if-no-files-found: warn
+
+      - name: Windows video regressions
+        if: ${{ inputs.video_only }}
+        shell: bash
+        run: |
+          python tool/ci_gate.py --label windows-video-regressions -- flutter test --concurrency=2 test/windows_webview_permissions_test.dart test/windows_webview_native_contracts_test.dart test/presenter_native_keys_test.dart test/media_previews_video_coverage_test.dart test/video_features_test.dart test/video_embed_host_test.dart
+
+      - name: Native WebView2 and live YouTube probe
+        if: ${{ inputs.video_only }}
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/windows-video"
+          export VIDEO_RESULT_FILE="$RUNNER_TEMP/windows-video/results.json"
+          python tool/ci_gate.py --label windows-video-native -- flutter drive --profile -d windows --driver=test_driver/windows_video_driver.dart --target=integration_test/windows_video_navigation_test.dart
+
+      - name: Windows video evidence
+        if: ${{ always() && inputs.video_only }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-video-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/windows-video
+            build/ci-diagnostics
           if-no-files-found: warn
