@@ -136,6 +136,59 @@ void main() {
     );
   });
 
+  testWidgets(
+    'deck link action retains duplicate slide references and rejection keeps the deck',
+    (tester) async {
+      await pumpShell(tester);
+      final original = Deck(
+        title: 'Source references',
+        slides: [
+          Slide.create(SlideType.title).copyWith(
+            title: 'First',
+            customMarkdown: '[one](https://youtu.be/M7lc1UVf-VE)',
+          ),
+          Slide.create(SlideType.title).copyWith(
+            title: 'Second',
+            customMarkdown:
+                '[two](https://www.youtube.com/watch?v=M7lc1UVf-VE)',
+          ),
+        ],
+      );
+      container.read(tabsProvider).current!.deckNotifier.loadDeck(original);
+      await tester.pumpAndSettle();
+      final before = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .state
+          .deck;
+      await tester.tap(appBarIcon(Icons.more_vert));
+      await tester.pumpAndSettle();
+      await tester.tap(menuItemIcon(Icons.file_upload_outlined));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('YouTube-video transcriberen…'));
+      await tester.pumpAndSettle();
+      expect(find.text('Dia 1, 2 · M7lc1UVf-VE'), findsOneWidget);
+      expect(find.byType(SimpleDialogOption), findsOneWidget);
+      await tester.tap(find.text('Dia 1, 2 · M7lc1UVf-VE'));
+      await tester.pumpAndSettle();
+      expect(find.text('Deze video transcriberen?'), findsOneWidget);
+      expect(
+        find.text('https://www.youtube.com/watch?v=M7lc1UVf-VE'),
+        findsOneWidget,
+      );
+      expect(find.text('Instellingen openen'), findsOneWidget);
+      expect(find.byType(LinearProgressIndicator), findsNothing);
+      await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
+      await tester.pumpAndSettle();
+      expect(
+        container.read(tabsProvider).current!.deckNotifier.state.deck,
+        same(before),
+      );
+      expect(container.read(tabsProvider).tabs, hasLength(1));
+    },
+  );
+
   testWidgets('het venster begint met een uitgeschakelde Ophalen-knop', (
     tester,
   ) async {
