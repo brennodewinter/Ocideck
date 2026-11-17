@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:html/parser.dart' as html;
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/markdown_outline.dart';
