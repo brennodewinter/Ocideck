@@ -289,7 +289,7 @@ The JSON documents carry **874 dependency relations** between these components: 
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
-| Microsoft Edge WebView2 loader | 1.0.1418.22 | BSD-3-Clause | Microsoft Corporation | `pkg:nuget/Microsoft.Web.WebView2@1.0.1418.22` |
+| Microsoft Edge WebView2 loader | 1.0.1661.34 | BSD-3-Clause | Microsoft Corporation | `pkg:nuget/Microsoft.Web.WebView2@1.0.1661.34` |
 | PDFium | 144.0.7811.0 | BSD-3-Clause AND Apache-2.0 | The PDFium Authors | `pkg:generic/pdfium@144.0.7811.0` |
 | Windows Implementation Library | 1.0.220914.1 | MIT | Microsoft Corporation | `pkg:nuget/Microsoft.Windows.ImplementationLibrary@1.0.220914.1` |
 | whisper.cpp (whisper-cli / whisper-wasm) | 1.9.5 | MIT | Georgi Gerganov and contributors | `pkg:github/ggml-org/whisper.cpp@1.9.5` |

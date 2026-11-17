@@ -68,7 +68,7 @@ This implements the [Commission's explanation of EUPL compatibility](https://int
 | Component / delivery | Treatment |
 |---|---|
 | Dart wrappers and texture/webview forks | Original MIT/BSD notices and modification records retained; these licences do not describe their native runtimes |
-| WebView2 loader 1.0.1418.22 / WIL 1.0.220914.1 | BSD-3-Clause / MIT texts verified against NuGet archives, bundled and registered; versions/hashes in SBOM |
+| WebView2 loader 1.0.1661.34 / WIL 1.0.220914.1 | BSD-3-Clause / MIT texts verified against NuGet archives, bundled and registered; versions/hashes in SBOM |
 | libmpv / FFmpeg | Treat the supported distro media combination as GPLv3-or-later, rather than assuming LGPL-only; exact installed versions, source-package versions and copyright evidence recorded at build time |
 | WebKitGTK | Mixed LGPL/BSD; supplied separately by the native OS or the GNOME runtime; its provenance is distinguished from copied libraries |
 | Native tar, AppImage, deb, rpm, Debian 12 | Accompany with the exact project snapshot, resolved package sources, notices, full GNU texts, build instructions and binary/source hashes |

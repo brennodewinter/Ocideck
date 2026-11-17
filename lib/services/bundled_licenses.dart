@@ -58,6 +58,13 @@ abstract final class BundledLicenses {
       licenseAsset: 'assets/licenses/webview2-sdk-LICENSE.txt',
     ),
     BundledLicense(
+      component: 'Microsoft WebView2 SDK third-party notices',
+      license: 'BSD-3-Clause',
+      source:
+          'https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1661.34',
+      licenseAsset: 'assets/licenses/webview2-sdk-NOTICE.txt',
+    ),
+    BundledLicense(
       component: 'Windows Implementation Library (Windows)',
       license: 'MIT',
       source: 'https://github.com/microsoft/wil',

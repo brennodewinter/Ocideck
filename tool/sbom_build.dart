@@ -484,7 +484,7 @@ List<SbomComponent> _dartPackages() {
     if (name == 'webview_win_floating') {
       edges = [
         ...?edges,
-        'runtime:webview2-loader@1.0.1418.22',
+        'runtime:webview2-loader@1.0.1661.34',
         'runtime:wil@1.0.220914.1',
       ];
     }
@@ -773,18 +773,18 @@ List<SbomComponent> _nativeMediaRequirements() => [
 List<SbomComponent> _nativeRuntimes() => [
   ..._whisperRuntime(),
   SbomComponent(
-    ref: 'runtime:webview2-loader@1.0.1418.22',
+    ref: 'runtime:webview2-loader@1.0.1661.34',
     group: 'native-runtime',
     type: 'library',
     name: 'Microsoft Edge WebView2 loader',
-    version: '1.0.1418.22',
-    purl: 'pkg:nuget/Microsoft.Web.WebView2@1.0.1418.22',
-    sha256: '51d2ef56196e2a9d768a6843385bcb9c6baf9ed34b2603ddb074fb4995543a99',
+    version: '1.0.1661.34',
+    purl: 'pkg:nuget/Microsoft.Web.WebView2@1.0.1661.34',
+    sha256: 'bad4c011c20ab68526c4c1448da05a6297586806123019ac89387fc62f46c3ce',
     license: 'BSD-3-Clause',
     supplier: 'Microsoft Corporation',
     supplierUrl: 'https://www.microsoft.com/',
     downloadUrl:
-        'https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1418.22/microsoft.web.webview2.1.0.1418.22.nupkg',
+        'https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1661.34/microsoft.web.webview2.1.0.1661.34.nupkg',
     dependsOn: [],
     note:
         'Windows-only SDK loader linked statically by webview_win_floating. SHA-256 identifies the NuGet SDK archive. The separately installed WebView2 Runtime is an OS prerequisite.',

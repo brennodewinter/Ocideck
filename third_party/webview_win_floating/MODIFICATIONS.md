@@ -45,3 +45,21 @@ channel. A failed ExecuteScript submission reports through the retained result
 rather than dereferencing a moved unique_ptr. The offline renderer serves only
 its generated document over loopback because WebView2 inline HTML is limited to
 2 MiB and the pinned Mermaid/MathJax bundles exceed that combined.
+
+## Windows presentation playback (#2964 / #2965)
+
+WebView2 permission IDs are decoded explicitly (including autoplay 9); unknown
+IDs fail closed. Requests await one native acknowledgement. Native ownership
+completes outstanding deferrals on navigation and disposal, and ignores late or
+duplicate replies. SDK 1.0.1661.34 supplies PermissionRequestedEventArgs3 so
+video autoplay decisions opt out of persisted profile grants. There is no
+global browser autoplay flag. The host's callback applies exact player/document
+origin, active-window, remote-media and slide-autoplay conditions.
+
+A per-controller opt-in registers AcceleratorKeyPressed, consumes reserved
+navigation keys synchronously, suppresses repeats and keyup, and forwards one
+keydown with modifiers. Hosts without this opt-in keep ordinary player input.
+The handler is removed when the native controller closes. Standalone C++ tests
+exercise permission ownership and key filtering; channel tests exercise Dart
+mapping, one reply, callback errors, toggling and late events. The Windows
+integration harness separately uses physical key events in a real WebView2.

@@ -98,7 +98,7 @@ void main() {
       ).readAsStringSync();
       for (final entry in [
         (
-          'runtime:webview2-loader@1.0.1418.22',
+          'runtime:webview2-loader@1.0.1661.34',
           'WEBVIEW_VERSION',
           'BSD-3-Clause',
         ),
@@ -119,7 +119,7 @@ void main() {
       expect(
         dependencies['dependsOn'],
         containsAll([
-          'runtime:webview2-loader@1.0.1418.22',
+          'runtime:webview2-loader@1.0.1661.34',
           'runtime:wil@1.0.220914.1',
         ]),
       );

@@ -226,10 +226,11 @@ Linux distribution packages provide libmpv; the Flatpak component inventory
 records the versions and licence texts of the system libraries copied into it.
 
 `webview_win_floating` is vendored from 3.0.3 (BSD-3-Clause). Its Linux backend
-reuses OciDeck's prepared GTK overlay; Windows native code is unchanged.
+reuses OciDeck's prepared GTK overlay; Windows opts into per-controller
+presentation keys and request-scoped autoplay permissions.
 See `third_party/webview_win_floating/MODIFICATIONS.md` and its retained `LICENSE`.
 
-The Windows backend links Microsoft Edge WebView2 loader **1.0.1418.22**
+The Windows backend links Microsoft Edge WebView2 loader **1.0.1661.34**
 (BSD-3-Clause) and uses Windows Implementation Library **1.0.220914.1** (MIT).
 Their full copyright/licence texts ship in `assets/licenses/webview2-sdk-LICENSE.txt`
 and `assets/licenses/wil-LICENSE.txt` and are registered in the app's licence
