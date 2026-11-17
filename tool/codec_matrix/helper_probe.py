@@ -62,6 +62,9 @@ with tempfile.TemporaryDirectory(prefix='ocideck-codec-') as directory:
         if negative == 'no-audio' and run.returncode != 3:
             row['incorrect_no_audio_status'] = True
             invalid = True
+        if negative in ('corrupt', 'empty') and run.returncode == 3:
+            row['incorrect_no_audio_status'] = True
+            invalid = True
         if source.read_bytes() != original:
             raise ValueError('Decoder modified source')
         report['results'].append(row)

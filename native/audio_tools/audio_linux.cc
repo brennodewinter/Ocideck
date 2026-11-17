@@ -119,7 +119,13 @@ int Decode(const char* input, const char* output) {
     for (guint i = 0; i < gst_caps_get_size(caps); ++i) {
       const char* name = gst_structure_get_name(gst_caps_get_structure(caps, i));
       if (g_str_has_prefix(name, "audio/")) state->source_audio = true;
-      if (g_str_has_prefix(name, "video/")) state->source_video = true;
+      // Container caps (video/quicktime, video/x-matroska, ...) do not
+      // establish a video track. Only known elementary video caps do.
+      if (std::strcmp(name, "video/x-h264") == 0 || std::strcmp(name, "video/x-h265") == 0 ||
+          std::strcmp(name, "video/x-vp8") == 0 || std::strcmp(name, "video/x-vp9") == 0 ||
+          std::strcmp(name, "video/x-av1") == 0 || std::strcmp(name, "video/x-theora") == 0) {
+        state->source_video = true;
+      }
     }
     return TRUE;
   }), &state);
