@@ -1094,16 +1094,39 @@ drawn as a rim with the trim line marked.
 §2.1's "no third render path" is not violated, and that is the load-bearing
 design point. `PagedDocumentView`
 ([`paged_document_view.dart`](../../lib/widgets/reader/paged_document_view.dart))
-renders the document through the **same** `DocumentMarkdownView` the other two
-views use, once, and then shows a window on that single continuous render per
-sheet (a `Transform.translate` inside a clip). A dedicated page renderer would be
-a second layout engine, and a second engine is precisely the thing that drifts
-away from the first without anyone noticing.
+uses the **same** `DocumentMarkdownView` as the other views. One warm offstage
+measurement tree provides block heights, search geometry and updates after
+asynchronous image loads. A lazy fixed-extent list mounts only the visible
+sheets and one sheet of scroll buffer on either side (#2961). Each mounted
+sheet clips its own continuous document render; sharing a widget instance does
+not share its element or render tree. The number of those trees therefore
+follows viewport size rather than total page count. Rendering only the blocks
+that intersect each sheet remains a further optimization.
+
+Heading and search jumps use measured block offsets and the fixed sheet stride,
+including the caption at the active text scale. They can reach an unmounted
+page directly, without first laying out all intervening sheets. Horizontal zoom
+and vertical page scrolling have separate viewports; the measured document
+stays at the same text width. The 10/40/100-page regression tests check mounted
+tree bounds, far links/search, reverse navigation, zoom and viewport changes.
 
 It is a **reading and checking** view: typing stays in Visueel or Bron. That is a
 deliberate scope limit rather than a missing feature — an editable paged surface
 would need a caret model that spans sheet boundaries, which is a different piece
 of work.
+
+For native before/after measurements, the existing
+`integration_test/document_navigation_profile_test.dart` also exercises
+10/40/100 sheets. It records initial load and jump latency, Flutter frame
+statistics, mounted tree count and process RSS; it does not pretend the RSS
+snapshots are per-widget allocations. Run it with `flutter drive --profile`,
+`test_driver/document_navigation_driver.dart` and `NAVIGATION_RESULT_FILE` set
+(the gate lock also applies). The Windows `navigation_only` dispatch compares
+baseline and changed code. The Linux gate's `pagination_profile` dispatch does
+the same under Xvfb: its virtual display must be reported when interpreting
+frame timings. Both copy the same harness into the full-SHA baseline checkout
+and preserve the separate JSON reports. These runs do not replace a physical
+GPU/display measurement when that distinction matters.
 
 ### 14.2 Page breaks are measured, not estimated
 

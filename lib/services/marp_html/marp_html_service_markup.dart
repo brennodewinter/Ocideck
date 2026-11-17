@@ -483,3 +483,35 @@ String _slideMarkingHtml(Slide? slide, TlpLevel deckTlp, String organization) {
 /// vendored en vast, geen inhoud uit een deck.
 String _guardScript(String s) =>
     s.replaceAllMapped(_scriptClose, (m) => '<\\/${m.group(1)}');
+
+String _htmlHeadMeta(
+  ExportDocumentMetadata meta, {
+  required String fallbackTitle,
+}) {
+  final buf = StringBuffer();
+  void tag(String name, String content) {
+    if (content.trim().isEmpty) return;
+    buf.write(
+      '<meta name="$name" content="${MarpHtmlService._htmlAttr(content)}">',
+    );
+  }
+
+  tag('author', meta.documentAuthor);
+  tag('keywords', meta.exportKeywords());
+  final desc = meta.htmlDescription;
+  if (desc != null) tag('description', desc);
+  final classification = meta.htmlClassification;
+  if (classification != null) {
+    tag('classification', classification);
+    tag('tlp', meta.tlp.key);
+  }
+  // AI-verordening art. 50: de markering moet machineleesbaar zijn. Een
+  // `<meta>` is dat; de balk hierboven is voor de lezer.
+  final aiMarking = meta.htmlAiMarking;
+  if (aiMarking != null) {
+    tag('ai-generated', aiMarking);
+    tag('ai-generated-slides', '${meta.unreviewedAiSlideCount}');
+  }
+  tag('generator', meta.producer);
+  return buf.toString();
+}

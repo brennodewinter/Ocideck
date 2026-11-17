@@ -1,26 +1,15 @@
-/// Maps Markdown heading fragments to the PDF's stable outline destinations.
+import '../../utils/heading_anchors.dart';
+
+/// Canonieke en historische fragmenten delen dezelfde PDF-bestemming.
 Map<String, String> pdfHeadingLinks(Iterable<String> titles) {
-  final links = <String, String>{};
-  var index = 0;
-  for (final title in titles) {
-    final base = pdfHeadingSlug(title);
-    var slug = base;
-    var suffix = 0;
-    while (links.containsKey(slug)) {
-      slug = '$base-${++suffix}';
-    }
-    links[slug] = 'ocideck-kop-${index++}';
-  }
-  return links;
+  final anchors = HeadingAnchorIndex(titles, plainText: true);
+  return {
+    for (final entry in anchors.targets.entries)
+      entry.key: 'ocideck-kop-${entry.value}',
+  };
 }
 
-/// Uses the same ASCII fragment convention as the Markdown contents service.
-String pdfHeadingSlug(String text) => text
-    .toLowerCase()
-    .replaceAll(RegExp(r'[^\w\s-]'), '')
-    .replaceAll(RegExp(r'\s+'), '-')
-    .replaceAll(RegExp(r'-+'), '-')
-    .replaceAll(RegExp(r'^-|-$'), '');
+String pdfHeadingSlug(String text) => headingAnchorBase(text);
 
 /// Returns null for malformed or unresolved fragments, without an external URL.
 String? pdfFragmentDestination(String href, Map<String, String> links) {

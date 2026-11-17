@@ -31,7 +31,10 @@ void main() {
   test('fragmentnamen volgen Markdown inclusief accenten en duplicaten', () {
     final names = pdfHeadingLinks(['Eén beeld!', 'Eén beeld!', 'En beeld-1']);
     expect(names['en-beeld'], 'ocideck-kop-0');
-    expect(names['en-beeld-1'], 'ocideck-kop-1');
+    expect(names['eén-beeld'], 'ocideck-kop-0');
+    expect(names['eén-beeld-1'], 'ocideck-kop-1');
+    // De echte canonieke kop gaat vóór een botsende historische alias.
+    expect(names['en-beeld-1'], 'ocideck-kop-2');
     expect(names['en-beeld-1-1'], 'ocideck-kop-2');
     expect(pdfFragmentDestination('#en%2Dbeeld', names), 'ocideck-kop-0');
     expect(pdfFragmentDestination('#%QQ', names), isNull);

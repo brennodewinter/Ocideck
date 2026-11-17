@@ -4320,6 +4320,18 @@ Facts that matter on disk:
   built afresh wherever it is needed, from the headings present at that moment —
   `H1` through `H3` (`generateTocMarkdown`, `maxDepth: 3`), as a GFM list with
   anchor links to the headings' slugs.
+- **Heading fragments use one document-wide index** (#2962). The index keeps
+  Unicode letters/numbers/combining marks and underscores, removes punctuation,
+  and collapses whitespace and hyphens. Repeated names get `-1`, `-2`, etc.,
+  avoiding already allocated names; an empty base becomes `section`. Filtering
+  TOC depth does not change that numbering. Readers and HTML/PDF/EPUB exports
+  resolve the same IDs. Previous ASCII reader/TOC names remain aliases to their
+  first unambiguous target; a canonical name takes precedence where an old alias
+  collides with another real heading. EPUB also retains its old `heading-N`
+  targets where they do not collide. Handwritten links keep working through
+  these aliases. Third-party Markdown renderers choose their own ID convention;
+  the exported HTML/EPUB includes explicit IDs and PDF maps fragments to its
+  internal destinations.
 - **On export it is generated after the privacy projection.** The list is built
   from the *projected* body, never from the source, so a contents page cannot
   name a heading the recipient is not allowed to see

@@ -16,6 +16,7 @@
 import 'package:markdown/markdown.dart' as md;
 
 import '../../utils/export_link.dart';
+import '../../utils/heading_anchors.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
 import '../../utils/xml_escape.dart';
@@ -86,7 +87,17 @@ String markdownToXhtml(
     extensionSet: md.ExtensionSet.gitHubFlavored,
   );
   final nodes = document.parse(preprocessed);
-  final visitor = _XhtmlNodeVisitor(chapterPageBreak: chapterPageBreak);
+  final visitor = _XhtmlNodeVisitor(
+    chapterPageBreak: chapterPageBreak,
+    headingNodes: nodes
+        .whereType<md.Element>()
+        .where((n) => RegExp(r'^h[1-6]$').hasMatch(n.tag))
+        .toSet(),
+    anchors: HeadingAnchorIndex(
+      markdownHeadings(preprocessed).map((h) => h.text),
+      plainText: true,
+    ),
+  );
   for (final node in nodes) {
     node.accept(visitor);
   }
@@ -172,7 +183,15 @@ String _renderTimelineXhtml(DocumentTimeline timeline) {
 }
 
 class _XhtmlNodeVisitor implements md.NodeVisitor {
-  _XhtmlNodeVisitor({this.chapterPageBreak = false});
+  _XhtmlNodeVisitor({
+    this.chapterPageBreak = false,
+    required this.anchors,
+    required this.headingNodes,
+  });
+
+  final HeadingAnchorIndex anchors;
+  final Set<md.Element> headingNodes;
+  int _headingCursor = 0;
 
   final StringBuffer output = StringBuffer();
 
@@ -199,34 +218,35 @@ class _XhtmlNodeVisitor implements md.NodeVisitor {
     _buf.write(text.text);
   }
 
+  void _openHeading(md.Element element) {
+    final tag = element.tag;
+    if (!headingNodes.contains(element)) {
+      output.write('<$tag>');
+      return;
+    }
+    final anchor = anchors.entries[_headingCursor++];
+    for (final alias in anchor.aliases) {
+      output.write('<span id="${xmlAttr(alias)}"></span>');
+    }
+    final pageBreak = tag == 'h1' && chapterPageBreak && _seenChapter;
+    output.write(
+      '<$tag id="${xmlAttr(anchor.id)}"'
+      '${pageBreak ? ' style="page-break-before:always;break-before:page"' : ''}>',
+    );
+    if (tag == 'h1') _seenChapter = true;
+  }
+
   @override
   bool visitElementBefore(md.Element element) {
     switch (element.tag) {
       // ── Koppen ──
       case 'h1':
-        if (chapterPageBreak && _seenChapter) {
-          output.write(
-            '<h1 style="page-break-before:always;break-before:page">',
-          );
-        } else {
-          output.write('<h1>');
-        }
-        _seenChapter = true;
-        _stack.add(_Ctx.heading);
       case 'h2':
-        output.write('<h2>');
-        _stack.add(_Ctx.heading);
       case 'h3':
-        output.write('<h3>');
-        _stack.add(_Ctx.heading);
       case 'h4':
-        output.write('<h4>');
-        _stack.add(_Ctx.heading);
       case 'h5':
-        output.write('<h5>');
-        _stack.add(_Ctx.heading);
       case 'h6':
-        output.write('<h6>');
+        _openHeading(element);
         _stack.add(_Ctx.heading);
 
       // ── Alinea's en blokken ──

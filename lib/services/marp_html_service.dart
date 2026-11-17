@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../utils/heading_anchors.dart';
 import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' show Locale;
@@ -297,7 +298,7 @@ class MarpHtmlService {
         '<main><h1 class="ocideck-sr-only">$h1Title</h1>'
         '$sections'
         '</main>'
-        '${inline(_renderScript(embedded.dataUris, theme: effectiveTheme))}'
+        '${inline(_renderScript(embedded.dataUris, theme: effectiveTheme, documentMarkdown: continuous ? _stripFrontMatter(renderMarkdown) : null))}'
         '${notices.html}'
         '</body></html>';
   }
@@ -966,35 +967,5 @@ class MarpHtmlService {
         .replaceAll('&', '&amp;')
         .replaceAll('"', '&quot;')
         .replaceAll('<', '&lt;');
-  }
-
-  static String _htmlHeadMeta(
-    ExportDocumentMetadata meta, {
-    required String fallbackTitle,
-  }) {
-    final buf = StringBuffer();
-    void tag(String name, String content) {
-      if (content.trim().isEmpty) return;
-      buf.write('<meta name="$name" content="${_htmlAttr(content)}">');
-    }
-
-    tag('author', meta.documentAuthor);
-    tag('keywords', meta.exportKeywords());
-    final desc = meta.htmlDescription;
-    if (desc != null) tag('description', desc);
-    final classification = meta.htmlClassification;
-    if (classification != null) {
-      tag('classification', classification);
-      tag('tlp', meta.tlp.key);
-    }
-    // AI-verordening art. 50: de markering moet machineleesbaar zijn. Een
-    // `<meta>` is dat; de balk hierboven is voor de lezer.
-    final aiMarking = meta.htmlAiMarking;
-    if (aiMarking != null) {
-      tag('ai-generated', aiMarking);
-      tag('ai-generated-slides', '${meta.unreviewedAiSlideCount}');
-    }
-    tag('generator', meta.producer);
-    return buf.toString();
   }
 }

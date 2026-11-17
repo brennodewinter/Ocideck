@@ -80,13 +80,13 @@ extension _DocumentEditorSearch on _DocumentEditorScreenState {
       _revealSignal++;
     });
 
-    if (_viewMode != _DocViewMode.source) return;
+    if (_viewMode != _DocViewMode.source || outlineIndex < 0) return;
     // headingBlockIndex op de body, niet op de source: de preview rendert de
     // body, en frontmatter-blokken (thematische ---, sleutelregels) tellen
     // anders mee en verschuiven het bloknummer (#1670).
     final index = DocumentMarkdownView.headingBlockIndex(
       body,
-      headingSlug(entry.title),
+      HeadingAnchorIndex(outline.map((e) => e.title)).entries[outlineIndex].id,
     );
     if (index < 0) return;
     _rebuild(() => _anchorBlockIndex = index);

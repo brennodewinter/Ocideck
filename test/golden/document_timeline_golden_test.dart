@@ -157,6 +157,17 @@ void main() {
           matching: find.byKey(const Key('document-sheet')),
         )
         .first;
+    // A lazy list gives every sheet its own repaint boundary. Capture the
+    // actual continuation sheet, rather than the former full document column.
+    await tester.ensureVisible(continuationSheet);
+    await tester.pumpAndSettle();
+    expect(
+      find.ancestor(
+        of: continuationSheet,
+        matching: find.byKey(const ValueKey('document-page-2')),
+      ),
+      findsOneWidget,
+    );
     await expectLater(
       continuationSheet,
       matchesGoldenFile('goldens/document_timeline_continuation.png'),
