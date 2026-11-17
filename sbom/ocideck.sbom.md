@@ -4,7 +4,7 @@
 
 This is **ocideck 0.7.7+49** (licence EUPL-1.2) and every third-party component it ships (246 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
 
-The JSON documents carry **875 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 12 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **876 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 12 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -149,7 +149,7 @@ The JSON documents carry **875 dependency relations** between these components: 
 | path_provider_android _(transitive)_ | 2.3.1 | BSD-3-Clause | flutter | `pkg:pub/path_provider_android@2.3.1` |
 | path_provider_foundation _(transitive)_ | 2.6.0 | BSD-3-Clause | flutter | `pkg:pub/path_provider_foundation@2.6.0` |
 | path_provider_linux _(transitive)_ | 2.2.2 | BSD-3-Clause | flutter | `pkg:pub/path_provider_linux@2.2.2` |
-| path_provider_platform_interface _(transitive)_ | 2.1.3 | BSD-3-Clause | flutter | `pkg:pub/path_provider_platform_interface@2.1.3` |
+| path_provider_platform_interface _(direct dev)_ | 2.1.3 | BSD-3-Clause | flutter | `pkg:pub/path_provider_platform_interface@2.1.3` |
 | path_provider_windows _(transitive)_ | 2.3.0 | BSD-3-Clause | flutter | `pkg:pub/path_provider_windows@2.3.0` |
 | pdf _(direct main)_ | 3.13.1 | Apache-2.0 | DavBfr | `pkg:pub/pdf@3.13.1` |
 | pdfium_dart _(transitive)_ | 0.4.1 | MIT | espresso3389 | `pkg:pub/pdfium_dart@0.4.1` |
