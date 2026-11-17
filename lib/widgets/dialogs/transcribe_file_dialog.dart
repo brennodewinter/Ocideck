@@ -24,6 +24,8 @@ import '../../l10n/app_localizations.dart';
 import '../../meetings/call_audio_manifest.dart';
 import '../../meetings/call_recording.dart';
 import '../../services/transcription/capture_source.dart';
+import '../../services/transcription/clip_recorded_audio.dart';
+import '../../services/media/youtube_transcript.dart';
 import '../../services/transcription/recording_staging.dart';
 import '../../services/web_asset_store.dart';
 import '../../services/transcription/file_capture_source.dart';
@@ -43,6 +45,7 @@ Future<void> showTranscribeFileDialog(
   BuildContext context, {
   required String sourcePath,
   required String displayName,
+  YoutubeTranscriptOrigin? youtubeOrigin,
 }) async {
   final lease = WebAssetStore.lease([
     sourcePath,
@@ -54,6 +57,7 @@ Future<void> showTranscribeFileDialog(
       builder: (_) => TranscribeFileDialog(
         sourcePath: sourcePath,
         displayName: displayName,
+        youtubeOrigin: youtubeOrigin,
       ),
     );
   } finally {
@@ -81,10 +85,12 @@ class TranscribeFileDialog extends ConsumerStatefulWidget {
     super.key,
     required this.sourcePath,
     required this.displayName,
+    this.youtubeOrigin,
   });
 
   final String sourcePath;
   final String displayName;
+  final YoutubeTranscriptOrigin? youtubeOrigin;
 
   @override
   ConsumerState<TranscribeFileDialog> createState() =>
@@ -237,6 +243,18 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
       }
       audio = await session.stop();
       _checkTaskActive();
+      final origin = widget.youtubeOrigin;
+      if (origin != null &&
+          (origin.start > Duration.zero || origin.end != null)) {
+        audio = await clipRecordedAudio(
+          audio,
+          start: origin.start,
+          end: origin.end,
+          stagingDir: stagingDir,
+          cancelled: () => _cancelRequested || !mounted,
+        );
+        _checkTaskActive();
+      }
       if (mounted) setState(() => _decoding = false);
 
       // De toestemming noemt host én bestand — de dialoog toonde beide en
@@ -352,14 +370,27 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
                 .replaceAll('{n}', '${gaps.$1}'),
       audioRelPath: null, // de bewaarkeuze landt bij Opslaan (§3.2)
     );
-    final markdown = buildTranscriptMarkdown(
-      provenance,
-      formatTranscriptBody(
-        result.segments,
-        speakerLabel: l10n.d('Spreker'),
-        unknownLabel: l10n.d('Onbekend'),
-      ),
-    );
+    final markdown = widget.youtubeOrigin != null
+        ? youtubeTranscriptMarkdown(
+            origin: widget.youtubeOrigin!,
+            segments: result.segments,
+            methodLabel: _engineLabel(engine, l10n) ?? '',
+            processedAtLabel: _formatNow(),
+            audioOffset: widget.youtubeOrigin!.start,
+            language: _language == 'auto' || _language == 'mixed'
+                ? null
+                : _language,
+            speakerLabel: l10n.d('Spreker'),
+            unknownLabel: l10n.d('Onbekend'),
+          )
+        : buildTranscriptMarkdown(
+            provenance,
+            formatTranscriptBody(
+              result.segments,
+              speakerLabel: l10n.d('Spreker'),
+              unknownLabel: l10n.d('Onbekend'),
+            ),
+          );
     await _discardStaging();
     _checkTaskActive();
     ref
@@ -369,7 +400,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           suggestedName: '$title transcript',
           // Web heeft geen `media/` bij een losse download — de checkbox
           // staat daar bewust uit, dus dit veld is daar altijd null.
-          pendingAudioPath: _keepAudio ? widget.sourcePath : null,
+          pendingAudioPath: _keepAudio && widget.youtubeOrigin == null
+              ? widget.sourcePath
+              : null,
         );
     if (mounted) Navigator.of(context).pop();
   }
@@ -549,7 +582,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
               value: _diarize,
               onChanged: (v) => setState(() => _diarize = v ?? false),
             ),
-          if (!kIsWeb) _keepAudioRow(l10n),
+          if (!kIsWeb && widget.youtubeOrigin == null) _keepAudioRow(l10n),
         ],
       ],
     );

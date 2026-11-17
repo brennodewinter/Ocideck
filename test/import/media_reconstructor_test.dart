@@ -46,7 +46,9 @@ void main() {
     final movie = fx.record(
       11,
       200,
-      fx.moviePayload(movieRemoteURL: 'https://www.youtube.com/watch?v=abc123'),
+      fx.moviePayload(
+        movieRemoteURL: 'https://www.youtube.com/watch?v=M7lc1UVf-VE',
+      ),
     );
     final doc = buildDoc([...movie]);
     final reconstructor = MediaReconstructor(doc);
@@ -54,7 +56,7 @@ void main() {
 
     expect(result.video, isNotNull);
     expect(result.video!.kind, SourceVideoKind.youtube);
-    expect(result.video!.ref, 'https://www.youtube.com/watch?v=abc123');
+    expect(result.video!.ref, 'https://www.youtube.com/watch?v=M7lc1UVf-VE');
   });
 
   test('extracts audio as an audioFileName', () {

@@ -42,7 +42,7 @@ class VideoSource {
   bool get isRemote =>
       kind != VideoSourceKind.localFile && kind != VideoSourceKind.none;
 
-  static final RegExp _youTubeId = RegExp(r'^[A-Za-z0-9_-]{6,20}$');
+  static final RegExp _youTubeId = RegExp(r'^[A-Za-z0-9_-]{11}$');
   static final RegExp _vimeoId = RegExp(r'^\d{6,12}$');
 
   factory VideoSource.parse(String videoPath) {
@@ -60,10 +60,16 @@ class VideoSource {
     }
 
     final host = uri.host.toLowerCase();
-    final yt = _youTubeIdOf(uri, host);
-    if (yt != null) return VideoSource._(VideoSourceKind.youtube, raw, yt);
-    final vimeo = _vimeoIdOf(uri, host);
-    if (vimeo != null) return VideoSource._(VideoSourceKind.vimeo, raw, vimeo);
+    try {
+      final yt = _youTubeIdOf(uri, host);
+      if (yt != null) return VideoSource._(VideoSourceKind.youtube, raw, yt);
+      final vimeo = _vimeoIdOf(uri, host);
+      if (vimeo != null) {
+        return VideoSource._(VideoSourceKind.vimeo, raw, vimeo);
+      }
+    } on FormatException {
+      // Malformed percent-encoded UTF-8 is not an extractable provider URL.
+    }
 
     return VideoSource._(VideoSourceKind.remoteFile, raw);
   }
@@ -82,7 +88,10 @@ class VideoSource {
       final segs = uri.pathSegments;
       // /embed/<id> or /shorts/<id> or /v/<id>
       if (segs.length >= 2 &&
-          (segs[0] == 'embed' || segs[0] == 'shorts' || segs[0] == 'v') &&
+          (segs[0] == 'embed' ||
+              segs[0] == 'shorts' ||
+              segs[0] == 'live' ||
+              segs[0] == 'v') &&
           _youTubeId.hasMatch(segs[1])) {
         return segs[1];
       }
