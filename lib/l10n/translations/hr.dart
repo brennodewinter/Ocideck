@@ -1548,6 +1548,40 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'één taal': 'jedan jezik',
   'Meerdere talen in deze opname': 'Više jezika u ovoj snimci',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Još nema praćenih feedova. Otvori feed podcasta putem Otvori putem URL-a da ga pratiš.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI je isključen; provjere i obrada su pauzirane dok se AI ponovno ne uključi.',
+  'Deze feed stond al in de lijst.': 'Ovaj feed već je bio na popisu.',
+  'Deze feed wordt gevolgd.': 'Ovaj se feed prati.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Ova stranica ne nudi prezentaciju, ali nudi feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Ovaj transkript je prazan ili nečitljiv.',
+  'Elk uur': 'Svaki sat',
+  'Elke 15 minuten': 'Svakih 15 minuta',
+  'Elke 30 minuten': 'Svakih 30 minuta',
+  'Elke 6 uur': 'Svakih 6 sati',
+  'Dagelijks': 'Svakodnevno',
+  'Feed gevonden': 'Feed pronađen',
+  'Feed volgen': 'Prati feed',
+  'Geen nieuwe afleveringen.': 'Nema novih epizoda.',
+  'Laatste controle': 'Zadnja provjera',
+  'Markeren als verwerkt': 'Označi kao obrađeno',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Automatski preuzmi nove epizode',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nove epizode podcasta — vidi Uvoz → Feedovi podcasta.',
+  'Nu vernieuwen': 'Osvježi sada',
+  'Podcastfeeds': 'Feedovi podcasta',
+  'Podcastfeeds…': 'Feedovi podcasta…',
+  'Stoppen met volgen': 'Prestani pratiti',
+  'Transcript ophalen': 'Dohvati transkript',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Uključi AI u postavkama za praćenje ovog feeda.',
+  'afleveringen': 'epizode',
+  'controles mislukt': 'neuspjele provjere',
+  'gepauzeerd': 'pauzirano',
   'Serverprotocol': 'Protokol poslužitelja',
   'Spreker': 'Govornik',
   'Automatisch afspelen is niet gestart.':

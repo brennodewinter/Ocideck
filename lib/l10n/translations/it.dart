@@ -613,6 +613,40 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'één taal': 'una lingua',
   'Meerdere talen in deze opname': 'Più lingue in questa registrazione',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Nessun feed seguito. Apri un feed podcast tramite Apri da URL per seguirlo.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'L’IA è disattivata; controlli ed elaborazione sono in pausa finché non viene riattivata.',
+  'Deze feed stond al in de lijst.': 'Questo feed era già nell’elenco.',
+  'Deze feed wordt gevolgd.': 'Questo feed è seguito.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Questa pagina non offre una presentazione, ma offre un feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Questa trascrizione è vuota o illeggibile.',
+  'Elk uur': 'Ogni ora',
+  'Elke 15 minuten': 'Ogni 15 minuti',
+  'Elke 30 minuten': 'Ogni 30 minuti',
+  'Elke 6 uur': 'Ogni 6 ore',
+  'Dagelijks': 'Ogni giorno',
+  'Feed gevonden': 'Feed trovato',
+  'Feed volgen': 'Segui feed',
+  'Geen nieuwe afleveringen.': 'Nessun nuovo episodio.',
+  'Laatste controle': 'Ultimo controllo',
+  'Markeren als verwerkt': 'Segna come gestito',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Scarica automaticamente i nuovi episodi',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nuovi episodi podcast — vedi Importa → Feed podcast.',
+  'Nu vernieuwen': 'Aggiorna ora',
+  'Podcastfeeds': 'Feed podcast',
+  'Podcastfeeds…': 'Feed podcast…',
+  'Stoppen met volgen': 'Smetti di seguire',
+  'Transcript ophalen': 'Recupera trascrizione',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Attiva l’IA nelle impostazioni per seguire questo feed.',
+  'afleveringen': 'episodi',
+  'controles mislukt': 'controlli non riusciti',
+  'gepauzeerd': 'in pausa',
   'Serverprotocol': 'Protocollo del server',
   'Spreker': 'Parlante',
   'Automatisch afspelen is niet gestart.':

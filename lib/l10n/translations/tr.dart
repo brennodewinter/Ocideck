@@ -2400,6 +2400,38 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'één taal': 'tek dil',
   'Meerdere talen in deze opname': 'Bu kayıtta birden fazla dil',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Henüz takip edilen akış yok. Takip etmek için URL ile aç üzerinden bir podcast akışı açın.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI kapalı; AI tekrar açılana kadar denetimler ve işleme duraklatıldı.',
+  'Deze feed stond al in de lijst.': 'Bu akış zaten listedeydi.',
+  'Deze feed wordt gevolgd.': 'Bu akış takip ediliyor.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Bu sayfa bir sunum sunmuyor, ancak bir akış sunuyor:',
+  'Dit transcript is leeg of onleesbaar.': 'Bu transkript boş veya okunamaz.',
+  'Elk uur': 'Saat başı',
+  'Elke 15 minuten': '15 dakikada bir',
+  'Elke 30 minuten': '30 dakikada bir',
+  'Elke 6 uur': '6 saatte bir',
+  'Dagelijks': 'Günlük',
+  'Feed gevonden': 'Akış bulundu',
+  'Feed volgen': 'Akışı takip et',
+  'Geen nieuwe afleveringen.': 'Yeni bölüm yok.',
+  'Laatste controle': 'Son denetim',
+  'Markeren als verwerkt': 'İşlendi olarak işaretle',
+  'Nieuwe afleveringen automatisch downloaden': 'Yeni bölümleri otomatik indir',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Yeni podcast bölümleri — bkz. İçe Aktar → Podcast akışları.',
+  'Nu vernieuwen': 'Şimdi yenile',
+  'Podcastfeeds': 'Podcast akışları',
+  'Podcastfeeds…': 'Podcast akışları…',
+  'Stoppen met volgen': 'Takibi bırak',
+  'Transcript ophalen': 'Transkripti getir',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Bu akışı takip etmek için ayarlarda AI’yı açın.',
+  'afleveringen': 'bölüm',
+  'controles mislukt': 'başarısız denetimler',
+  'gepauzeerd': 'duraklatıldı',
   'Serverprotocol': 'Sunucu protokolü',
   'Spreker': 'Konuşmacı',
   'Automatisch afspelen is niet gestart.': 'Otomatik oynatma başlamadı.',

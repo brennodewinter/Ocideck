@@ -1560,6 +1560,40 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'één taal': 'lingwa waħda',
   'Meerdere talen in deze opname': 'Diversi lingwi f’din ir-reġistrazzjoni',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'L-ebda feed segwit s\'issa. Iftaħ feed ta\' podcast permezz ta\' Iftaħ permezz ta\' URL biex issegwih.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'L-AI huwa mitfi; il-kontrolli u l-ipproċessar huma mwaqqfa sakemm l-AI jinxtegħel mill-ġdid.',
+  'Deze feed stond al in de lijst.': 'Dan il-feed kien diġà fil-lista.',
+  'Deze feed wordt gevolgd.': 'Dan il-feed qed jiġi segwit.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Din il-paġna ma toffrix preżentazzjoni, iżda toffri feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Dan it-traskrizzjoni hija vojta jew illegeibbli.',
+  'Elk uur': 'Kull siegħa',
+  'Elke 15 minuten': 'Kull 15-il minuta',
+  'Elke 30 minuten': 'Kull 30 minuta',
+  'Elke 6 uur': 'Kull 6 sigħat',
+  'Dagelijks': 'Kuljum',
+  'Feed gevonden': 'Feed misjub',
+  'Feed volgen': 'Segwi l-feed',
+  'Geen nieuwe afleveringen.': 'L-ebda episodju ġdid.',
+  'Laatste controle': 'L-aħħar kontroll',
+  'Markeren als verwerkt': 'Immarka bħala magħmula',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Niżżel awtomatikament episodji ġodda',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Episodji ġodda tal-podcast — ara Importa → Feeds tal-podcast.',
+  'Nu vernieuwen': 'Aġġorna issa',
+  'Podcastfeeds': 'Feeds tal-podcast',
+  'Podcastfeeds…': 'Feeds tal-podcast…',
+  'Stoppen met volgen': 'Waqaf issegwi',
+  'Transcript ophalen': 'Ġib it-traskrizzjoni',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Ixgħel l-AI fis-settings biex issegwi dan il-feed.',
+  'afleveringen': 'episodji',
+  'controles mislukt': 'kontrolli falluti',
+  'gepauzeerd': 'waqfa',
   'Serverprotocol': 'Protokoll tas-server',
   'Spreker': 'Kelliem',
   'Automatisch afspelen is niet gestart.': 'Id-daqq awtomatiku ma bediex.',

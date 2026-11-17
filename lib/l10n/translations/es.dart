@@ -612,6 +612,40 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'één taal': 'un idioma',
   'Meerdere talen in deze opname': 'Varios idiomas en esta grabación',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Aún no hay feeds seguidos. Abre un feed de podcast mediante Abrir desde URL para seguirlo.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'La IA está desactivada; las comprobaciones y el procesamiento están en pausa hasta que se reactive.',
+  'Deze feed stond al in de lijst.': 'Este feed ya estaba en la lista.',
+  'Deze feed wordt gevolgd.': 'Este feed está siendo seguido.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Esta página no ofrece una presentación, pero sí un feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Esta transcripción está vacía o es ilegible.',
+  'Elk uur': 'Cada hora',
+  'Elke 15 minuten': 'Cada 15 minutos',
+  'Elke 30 minuten': 'Cada 30 minutos',
+  'Elke 6 uur': 'Cada 6 horas',
+  'Dagelijks': 'Diariamente',
+  'Feed gevonden': 'Feed encontrado',
+  'Feed volgen': 'Seguir feed',
+  'Geen nieuwe afleveringen.': 'No hay episodios nuevos.',
+  'Laatste controle': 'Última comprobación',
+  'Markeren als verwerkt': 'Marcar como gestionado',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Descargar automáticamente los episodios nuevos',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nuevos episodios de podcast — consulta Importar → Feeds de podcast.',
+  'Nu vernieuwen': 'Actualizar ahora',
+  'Podcastfeeds': 'Feeds de podcast',
+  'Podcastfeeds…': 'Feeds de podcast…',
+  'Stoppen met volgen': 'Dejar de seguir',
+  'Transcript ophalen': 'Obtener transcripción',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Activa la IA en los ajustes para seguir este feed.',
+  'afleveringen': 'episodios',
+  'controles mislukt': 'comprobaciones fallidas',
+  'gepauzeerd': 'en pausa',
   'Serverprotocol': 'Protocolo del servidor',
   'Spreker': 'Hablante',
   'Automatisch afspelen is niet gestart.':

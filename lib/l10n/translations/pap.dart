@@ -614,6 +614,40 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'één taal': 'un idioma',
   'Meerdere talen in deze opname': 'Varios idioma den e grabashon aki',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Ainda no tin feed sigui. Habri un feed di podcast via Habri via URL pa siguié.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI ta apagá; kontrolnan i prosesamentu ta pausá te ora AI ta atrobe.',
+  'Deze feed stond al in de lijst.': 'E feed aki tabata kaba den e lista.',
+  'Deze feed wordt gevolgd.': 'E feed aki ta wòrdu sigui.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'E página aki no ta ofresé un presentashon, pero si un feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'E transkripshon aki ta bashí òf no ta lesabel.',
+  'Elk uur': 'Kada ora',
+  'Elke 15 minuten': 'Kada 15 minüt',
+  'Elke 30 minuten': 'Kada 30 minüt',
+  'Elke 6 uur': 'Kada 6 ora',
+  'Dagelijks': 'Diariamente',
+  'Feed gevonden': 'Feed hañá',
+  'Feed volgen': 'Sigui e feed',
+  'Geen nieuwe afleveringen.': 'No tin episodionan nobo.',
+  'Laatste controle': 'Último kontrol',
+  'Markeren als verwerkt': 'Marka komo atendí',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Baha episodionan nobo automátikamente',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Episodionan nobo di podcast — mira Importá → Feeds di podcast.',
+  'Nu vernieuwen': 'Rekordá awe',
+  'Podcastfeeds': 'Feeds di podcast',
+  'Podcastfeeds…': 'Feeds di podcast…',
+  'Stoppen met volgen': 'Para di sigui',
+  'Transcript ophalen': 'Traha e transkripshon',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Pone AI den e konfigurashon pa sigui e feed aki.',
+  'afleveringen': 'episodionan',
+  'controles mislukt': 'kontrolnan a faya',
+  'gepauzeerd': 'pausá',
   'Serverprotocol': 'Protokòl di servidor',
   'Spreker': 'Hende ku ta papia',
   'Automatisch afspelen is niet gestart.':

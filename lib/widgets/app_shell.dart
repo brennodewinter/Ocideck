@@ -12,6 +12,8 @@ import 'package:path/path.dart' as p;
 
 import 'dialogs/browser_storage_dialog.dart';
 import 'dialogs/paste_markdown_dialog.dart';
+import 'feeds/feed_dialog.dart';
+import 'feeds/feed_subscriptions_dialog.dart';
 import '../l10n/export_block_localization.dart';
 import '../platform/deep_link_cleanup.dart';
 import '../platform/launch_files.dart';
@@ -72,6 +74,7 @@ import '../services/export_readiness.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
 import '../services/file_recovery/file_recovery_service.dart';
+import '../services/feeds/feed_parser.dart';
 import '../services/file_service.dart';
 import '../services/template_content_service.dart';
 import '../services/image_service.dart';
@@ -122,6 +125,7 @@ import '../state/ociserve_provider.dart';
 import '../state/asset_rights_module_provider.dart';
 import '../state/procesverbetering_provider.dart';
 import '../state/editor_provider.dart';
+import '../state/feed_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/update_check_provider.dart';
 import '../state/storage_status_provider.dart';
@@ -219,6 +223,7 @@ part 'app_shell_menu.dart';
 part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';
 part 'shell/shell_actions_pickers.dart';
+part 'shell/shell_feed_route.dart';
 part 'shell/url_import_dialog.dart';
 part 'shell/web_wiring.dart';
 part 'shell/shell_actions_present.dart';
@@ -877,6 +882,8 @@ class _AppShellState extends ConsumerState<AppShell> {
     });
 
     _watchMarkdownTransferRequests(context, ref);
+
+    registerFeedListeners(ref, context);
 
     // Een instelling kon niet naar schijf worden weggeschreven: niet-blokkerend
     // melden. De wijziging geldt wel voor deze sessie (de state is al

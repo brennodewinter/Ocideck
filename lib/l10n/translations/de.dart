@@ -614,6 +614,40 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'één taal': 'eine Sprache',
   'Meerdere talen in deze opname': 'Mehrere Sprachen in dieser Aufnahme',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Noch keine verfolgten Feeds. Öffne einen Podcast-Feed über Öffnen via URL, um ihm zu folgen.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'KI ist aus; Prüfungen und Verarbeitung sind pausiert, bis KI wieder an ist.',
+  'Deze feed stond al in de lijst.': 'Dieser Feed stand bereits in der Liste.',
+  'Deze feed wordt gevolgd.': 'Dieser Feed wird verfolgt.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Diese Seite bietet keine Präsentation, aber einen Feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Dieses Transkript ist leer oder unlesbar.',
+  'Elk uur': 'Stündlich',
+  'Elke 15 minuten': 'Alle 15 Minuten',
+  'Elke 30 minuten': 'Alle 30 Minuten',
+  'Elke 6 uur': 'Alle 6 Stunden',
+  'Dagelijks': 'Täglich',
+  'Feed gevonden': 'Feed gefunden',
+  'Feed volgen': 'Feed folgen',
+  'Geen nieuwe afleveringen.': 'Keine neuen Folgen.',
+  'Laatste controle': 'Letzte Prüfung',
+  'Markeren als verwerkt': 'Als erledigt markieren',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Neue Folgen automatisch herunterladen',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Neue Podcast-Folgen — siehe Importieren → Podcast-Feeds.',
+  'Nu vernieuwen': 'Jetzt aktualisieren',
+  'Podcastfeeds': 'Podcast-Feeds',
+  'Podcastfeeds…': 'Podcast-Feeds…',
+  'Stoppen met volgen': 'Nicht mehr folgen',
+  'Transcript ophalen': 'Transkript abrufen',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Aktiviere KI in den Einstellungen, um diesem Feed zu folgen.',
+  'afleveringen': 'Folgen',
+  'controles mislukt': 'Prüfungen fehlgeschlagen',
+  'gepauzeerd': 'pausiert',
   'Serverprotocol': 'Serverprotokoll',
   'Spreker': 'Sprecher',
   'Automatisch afspelen is niet gestart.':

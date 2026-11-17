@@ -1544,6 +1544,40 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'één taal': 'satu bahasa',
   'Meerdere talen in deze opname': 'Beberapa bahasa dalam rekaman ini',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Belum ada feed yang diikuti. Buka feed podcast melalui Buka via URL untuk mengikutinya.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI nonaktif; pemeriksaan dan pemrosesan dijeda hingga AI aktif lagi.',
+  'Deze feed stond al in de lijst.': 'Feed ini sudah ada dalam daftar.',
+  'Deze feed wordt gevolgd.': 'Feed ini sedang diikuti.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Halaman ini tidak menawarkan presentasi, tetapi menawarkan feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Transkrip ini kosong atau tidak dapat dibaca.',
+  'Elk uur': 'Setiap jam',
+  'Elke 15 minuten': 'Setiap 15 menit',
+  'Elke 30 minuten': 'Setiap 30 menit',
+  'Elke 6 uur': 'Setiap 6 jam',
+  'Dagelijks': 'Harian',
+  'Feed gevonden': 'Feed ditemukan',
+  'Feed volgen': 'Ikuti feed',
+  'Geen nieuwe afleveringen.': 'Tidak ada episode baru.',
+  'Laatste controle': 'Pemeriksaan terakhir',
+  'Markeren als verwerkt': 'Tandai sebagai ditangani',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Unduh episode baru secara otomatis',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Episode podcast baru — lihat Impor → Feed podcast.',
+  'Nu vernieuwen': 'Segarkan sekarang',
+  'Podcastfeeds': 'Feed podcast',
+  'Podcastfeeds…': 'Feed podcast…',
+  'Stoppen met volgen': 'Berhenti mengikuti',
+  'Transcript ophalen': 'Ambil transkrip',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Aktifkan AI di pengaturan untuk mengikuti feed ini.',
+  'afleveringen': 'episode',
+  'controles mislukt': 'pemeriksaan gagal',
+  'gepauzeerd': 'dijeda',
   'Serverprotocol': 'Protokol server',
   'Spreker': 'Pembicara',
   'Automatisch afspelen is niet gestart.': 'Pemutaran otomatis tidak dimulai.',

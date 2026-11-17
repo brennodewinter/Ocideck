@@ -76,10 +76,18 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
     // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
     // en het deck wordt volledig in het geheugen geopend — het dart:io-
     // downloadpad hieronder bestaat op web niet.
-    final result = await _importUrlWeb(context, ref, url);
+    final outcome = await _importUrlWeb(
+      context,
+      ref,
+      url,
+      contentRouter: (bytes) => routeFeedUrlContent(context, ref, url, bytes),
+    );
     // Na een geslaagde open is de `?deck=`-deellink dé manier om de
-    // presentatie door te sturen — bieden we meteen aan (#2826).
-    if (result == OpenResult.opened && context.mounted) {
+    // presentatie door te sturen — bieden we meteen aan (#2826). Een
+    // gerouteerde feed is geen presentatie en krijgt die actie niet.
+    if (outcome.result == OpenResult.opened &&
+        !outcome.routed &&
+        context.mounted) {
       final messenger = ScaffoldMessenger.of(context);
       final l10n = context.l10n;
       messenger.showSnackBar(
@@ -109,7 +117,12 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   try {
     failure = await ref
         .read(tabsProvider.notifier)
-        .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
+        .importFromUrl(
+          url,
+          homeDir: ref.read(settingsProvider).homeDirectory,
+          contentRouter: (bytes) =>
+              routeFeedUrlContent(context, ref, url, bytes),
+        );
   } catch (e, s) {
     // Een platform- of IO-fout mag nooit als stilte eindigen: de gebruiker
     // heeft net een URL ingetikt en verwacht óf een tab óf een melding.

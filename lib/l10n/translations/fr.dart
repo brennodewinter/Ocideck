@@ -615,6 +615,40 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'één taal': 'une langue',
   'Meerdere talen in deze opname': 'Plusieurs langues dans cet enregistrement',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Aucun flux suivi pour le moment. Ouvrez un flux de podcast via Ouvrir via URL pour le suivre.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'L’IA est désactivée ; les vérifications et le traitement sont suspendus jusqu’à sa réactivation.',
+  'Deze feed stond al in de lijst.': 'Ce flux figurait déjà dans la liste.',
+  'Deze feed wordt gevolgd.': 'Ce flux est suivi.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Cette page ne propose pas de présentation, mais un flux :',
+  'Dit transcript is leeg of onleesbaar.':
+      'Cette transcription est vide ou illisible.',
+  'Elk uur': 'Toutes les heures',
+  'Elke 15 minuten': 'Toutes les 15 minutes',
+  'Elke 30 minuten': 'Toutes les 30 minutes',
+  'Elke 6 uur': 'Toutes les 6 heures',
+  'Dagelijks': 'Tous les jours',
+  'Feed gevonden': 'Flux trouvé',
+  'Feed volgen': 'Suivre le flux',
+  'Geen nieuwe afleveringen.': 'Aucun nouvel épisode.',
+  'Laatste controle': 'Dernière vérification',
+  'Markeren als verwerkt': 'Marquer comme traité',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Télécharger automatiquement les nouveaux épisodes',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nouveaux épisodes de podcast — voir Importer → Flux de podcasts.',
+  'Nu vernieuwen': 'Actualiser maintenant',
+  'Podcastfeeds': 'Flux de podcasts',
+  'Podcastfeeds…': 'Flux de podcasts…',
+  'Stoppen met volgen': 'Ne plus suivre',
+  'Transcript ophalen': 'Récupérer la transcription',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Activez l’IA dans les réglages pour suivre ce flux.',
+  'afleveringen': 'épisodes',
+  'controles mislukt': 'vérifications échouées',
+  'gepauzeerd': 'en pause',
   'Serverprotocol': 'Protocole du serveur',
   'Spreker': 'Intervenant',
   'Automatisch afspelen is niet gestart.':

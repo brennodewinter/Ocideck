@@ -1545,6 +1545,40 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'één taal': 'egy nyelv',
   'Meerdere talen in deze opname': 'Több nyelv ebben a felvételben',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Még nincsenek követett csatornák. Nyisson meg egy podcast-csatornát a Megnyitás URL-ből menüponttal a követéshez.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'Az AI ki van kapcsolva; az ellenőrzések és a feldolgozás szünetelnek, amíg újra be nem kapcsolják.',
+  'Deze feed stond al in de lijst.': 'Ez a csatorna már szerepelt a listán.',
+  'Deze feed wordt gevolgd.': 'Ez a csatorna követve van.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Ez az oldal nem kínál prezentációt, de csatornát igen:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Ez az átirat üres vagy olvashatatlan.',
+  'Elk uur': 'Óránként',
+  'Elke 15 minuten': '15 percenként',
+  'Elke 30 minuten': '30 percenként',
+  'Elke 6 uur': '6 óránként',
+  'Dagelijks': 'Naponta',
+  'Feed gevonden': 'Csatorna találva',
+  'Feed volgen': 'Csatorna követése',
+  'Geen nieuwe afleveringen.': 'Nincsenek új epizódok.',
+  'Laatste controle': 'Utolsó ellenőrzés',
+  'Markeren als verwerkt': 'Megjelölés kezeltként',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Új epizódok automatikus letöltése',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Új podcast-epizódok — lásd Importálás → Podcast-csatornák.',
+  'Nu vernieuwen': 'Frissítés most',
+  'Podcastfeeds': 'Podcast-csatornák',
+  'Podcastfeeds…': 'Podcast-csatornák…',
+  'Stoppen met volgen': 'Követés leállítása',
+  'Transcript ophalen': 'Átirat lekérése',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Kapcsolja be az AI-t a beállításokban a csatorna követéséhez.',
+  'afleveringen': 'epizód',
+  'controles mislukt': 'sikertelen ellenőrzések',
+  'gepauzeerd': 'szüneteltetve',
   'Serverprotocol': 'Kiszolgálóprotokoll',
   'Spreker': 'Beszélő',
   'Automatisch afspelen is niet gestart.':
