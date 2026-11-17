@@ -10,6 +10,8 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 import 'package:ocideck/services/transcription/local_whisper_engine.dart';
+import 'package:ocideck/services/transcription/file_capture_source_io.dart';
+import 'package:ocideck/services/transcription/capture_source.dart';
 import 'package:ocideck/services/transcription/local_whisper_engine_io.dart';
 import 'package:ocideck/services/transcription/model_store_io.dart';
 import 'package:ocideck/services/transcription/transcription_engine.dart';
@@ -116,6 +118,58 @@ void main() {
   );
 
   group('happy path', () {
+    for (final suffix in ['.wave', '.WAVE', '', '.mp3']) {
+      test(
+        'PCM-inhoud gaat van bestandsbron naar engine met suffix "$suffix"',
+        () async {
+          final original = File('${temp.path}/geluid 音声 met spaties$suffix')
+            ..writeAsBytesSync(wavBytes());
+          final info = await IoFileCaptureSource().describe(original.path);
+          expect(info.engineReadsDirectly, isTrue);
+          final session = await IoFileCaptureSource().start(
+            CaptureRequest(
+              kinds: const {CaptureSourceKind.file},
+              consent: const RecordingConsent(
+                participantNoticeAcknowledged: true,
+              ),
+              sourcePath: original.path,
+              stagingDir: workDir.path,
+            ),
+          );
+          final audio = await session.stop();
+          final r = runnerWriting(
+            () => {
+              'transcription': [
+                {'text': 'bron gelezen'},
+              ],
+            },
+          );
+          final result = await engine(r.runner).transcribe(
+            AudioRef(audio.durablePath),
+            const TranscriptionOptions(),
+          );
+          expect(result.text, 'bron gelezen');
+          expect(
+            r.argvs.single[r.argvs.single.indexOf('-f') + 1],
+            original.path,
+          );
+          expect(await original.readAsBytes(), wavBytes());
+        },
+      );
+    }
+
+    test('een .wav-naam zonder PCM-header start de helper niet', () async {
+      await wav.writeAsBytes([1, 2, 3, 4]);
+      final r = runnerWriting(() => {});
+      await expectLater(
+        engine(
+          r.runner,
+        ).transcribe(AudioRef(wav.path), const TranscriptionOptions()),
+        throwsA(isA<DecodeFailed>()),
+      );
+      expect(r.argvs, isEmpty);
+    });
+
     test(
       'start whisper-cli met de juiste argv en parseert de segmenten',
       () async {

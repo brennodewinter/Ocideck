@@ -596,8 +596,18 @@ segment (`timestamps`/`offsets`/`text`); whisper's leading segment spaces
 are preserved because they carry the word spacing.
 
 **Input.** WAV/PCM is the proven input — the same format `recording_staging`
-produces. Compressed containers return `DecodeFailed` until a decoder route
-is proven (#2515); the engine does not silently accept what it cannot read.
+produces. The engine checks the actual PCM-WAV header, including metadata chunks,
+rather than requiring a `.wav` suffix: `.wave`, uppercase, absent and conflicting
+extensions can carry the same valid input. A `.wav` name cannot validate bad bytes.
+Other containers pass through the file-source decoder first (#2515).
+The shared picker/open catalog includes WAVE/OGA/AIFF/AIFC/CAF/M4B/3GP aliases.
+The sniffer distinguishes ADTS/AAC from MPEG audio and recognizes FORM AIFF/AIFC
+and CAF; container recognition does not establish a particular codec's support.
+Previews retain the platform/browser codec note and a failed decoder attempt is
+explicit. Synthetic fixtures verify ADTS AAC, MP3 with/without ID3, Ogg Vorbis/Opus,
+AIFF/AIFC, CAF and MPEG-4; macOS afconvert and the WAV-alias CLI were exercised.
+This does not expand Windows/Linux/browser decoder claims: the remaining format
+and release-artifact matrix work is tracked separately in #2942 and #2947.
 
 **Model management.** Models are **never bundled** and never fetched
 implicitly. The catalog (`whisper_model.dart`) pins each model to a Hugging
@@ -668,6 +678,17 @@ the model download is a CORS fetch that COEP does not govern).
 **Storage and download.** Models live in IndexedDB (`ocideck-transcription`)
 as Blobs; downloads write a `.part` key first and promote to the real key
 only after a WebCrypto SHA-256 match — same semantics as `.part` on disk.
+Each download has its own random partial key. Cancellation is checked after
+quota lookup, partial storage and hashing, and can abort the final IndexedDB
+transaction. Only transaction-complete installs the model; an aborted replacement
+preserves the prior model. Cancellation after commit leaves success intact.
+Downloads enforce the catalog byte count before copying each chunk into one
+fixed Dart buffer, with a one-hour total network deadline and two-minute idle
+deadline. Readers/fetch are released or aborted on failure. Comparable
+Content-Length values provide an early check; hidden CORS encodings and encoded
+transport sizes do not override the byte cap. Quota is checked before buffering
+and again before storage. WebCrypto and browser Blob storage can still create
+additional large transient buffers; this is not streaming storage/hash.
 The browser may evict IndexedDB under storage pressure; that surfaces as
 `absent`, never as corruption, and the user re-downloads. `fetch` in CORS
 mode is the egress: the browser itself checks every redirect hop — our
