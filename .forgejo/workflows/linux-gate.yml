@@ -72,6 +72,15 @@ name: linux-gate
 
 on:
   workflow_dispatch:
+    inputs:
+      pagination_profile:
+        description: Only compare native document pagination before and after
+        type: boolean
+        default: false
+      baseline_ref:
+        description: Full baseline commit SHA for pagination comparison
+        type: string
+        required: false
   schedule:
     # 02:11 UTC. Ruim vóór de andere geplande controles (05:17 tap-mirror,
     # 05:33 tijdsvervallend), want deze run trekt de machine een uur lang leeg
@@ -94,6 +103,7 @@ concurrency:
 
 jobs:
   gate-linux:
+    if: ${{ inputs.pagination_profile != true && inputs.pagination_profile != 'true' }}
     # `linux-serial`: een tweede runner op pawprint met capacity 1, zodat er nooit
     # meer dan één zware gate tegelijk draait (zie de kop en docs/CHECKS.md).
     # `static-gate`/`scans` blijven op `docker` (capacity 4).
@@ -191,3 +201,92 @@ jobs:
           runuser --user ubuntu --preserve-environment -- env \
             HOME=/home/ubuntu \
             make check-no-coverage
+
+  pagination-profile:
+    if: ${{ inputs.pagination_profile == true || inputs.pagination_profile == 'true' }}
+    runs-on: linux-serial
+    timeout-minutes: 180
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: '4'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Baseline valideren
+        env:
+          BASELINE_REF: ${{ inputs.baseline_ref }}
+        run: |
+          set -eu
+          test "${#BASELINE_REF}" -eq 40
+          case "$BASELINE_REF" in *[!0-9a-f]*|'') exit 2;; esac
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.baseline_ref }}
+          path: baseline
+          persist-credentials: false
+      - name: Linux-profielomgeving
+        run: |
+          set -eu
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            python3 xvfb xauth fonts-dejavu-core liblzma-dev libsecret-1-dev \
+            libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev \
+            libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
+            gstreamer1.0-libav libmpv-dev
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/baseline"
+          git config --global --add safe.directory /opt/flutter
+          echo '/opt/flutter/bin' >> "$GITHUB_PATH"
+          mkdir -p "$RUNNER_TEMP/document-pagination"
+          uname -a > "$RUNNER_TEMP/document-pagination/environment.txt"
+          cat /etc/os-release >> "$RUNNER_TEMP/document-pagination/environment.txt"
+          flutter --version >> "$RUNNER_TEMP/document-pagination/environment.txt"
+      - name: Profielharnas en afhankelijkheden
+        run: |
+          set -eu
+          mkdir -p baseline/integration_test baseline/test/support baseline/test_driver
+          cp integration_test/document_navigation_profile_test.dart baseline/integration_test/
+          cp test/support/document_navigation_fixture.dart baseline/test/support/
+          cp test_driver/document_navigation_driver.dart baseline/test_driver/
+          flutter pub get --enforce-lockfile
+          (cd baseline && flutter pub get --enforce-lockfile)
+          mkdir -p .dart_tool/hooks_runner/shared baseline/.dart_tool/hooks_runner
+          if [ ! -e baseline/.dart_tool/hooks_runner/shared ]; then
+            ln -s "$GITHUB_WORKSPACE/.dart_tool/hooks_runner/shared" baseline/.dart_tool/hooks_runner/shared
+          fi
+      - name: Linux-regressieproeven
+        run: |
+          python3 tool/ci_gate.py --label pagination-regressions -- \
+            scripts/gate_lock.sh flutter test test/paged_document_scaling_test.dart \
+            test/heading_anchors_test.dart test/paged_document_view_test.dart \
+            test/paged_document_search_test.dart test/document_reader_test.dart
+      - name: Baselineprofiel onder virtueel display
+        run: |
+          set -eu
+          cd baseline
+          export NAVIGATION_RESULT_FILE="$RUNNER_TEMP/document-pagination/baseline.json"
+          python3 "$GITHUB_WORKSPACE/tool/ci_gate.py" --label pagination-baseline \
+            --directory "$RUNNER_TEMP/document-pagination/diagnostics" -- \
+            scripts/gate_lock.sh xvfb-run -a flutter drive --profile -d linux \
+            --driver=test_driver/document_navigation_driver.dart \
+            --target=integration_test/document_navigation_profile_test.dart
+      - name: Gewijzigd profiel onder virtueel display
+        run: |
+          set -eu
+          export NAVIGATION_RESULT_FILE="$RUNNER_TEMP/document-pagination/changed.json"
+          python3 tool/ci_gate.py --label pagination-changed \
+            --directory "$RUNNER_TEMP/document-pagination/diagnostics" -- \
+            scripts/gate_lock.sh xvfb-run -a flutter drive --profile -d linux \
+            --driver=test_driver/document_navigation_driver.dart \
+            --target=integration_test/document_navigation_profile_test.dart
+      - name: Profielbewijs bewaren
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: document-pagination-linux-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/document-pagination
+            build/ci-diagnostics
+          if-no-files-found: warn

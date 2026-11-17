@@ -55,43 +55,49 @@ extension _PagedDocumentNavigation on _PagedDocumentViewState {
     if (block < 0 || block >= heights.length) return false;
     final y = heights.take(block).fold<double>(0, (sum, h) => sum + h);
     final page = _PagedDocumentViewState._pageOf(y, _pageOffsets);
-    final pageContext = _pageKeys[page]?.currentContext;
-    if (pageContext == null || !_searchScroll.hasClients) return false;
-    final render = pageContext.findRenderObject();
-    if (render is! RenderBox) return false;
-    final viewport = context.findRenderObject();
-    if (viewport is! RenderBox) return false;
-    final headingTop = render
-        .localToGlobal(
-          Offset(
-            0,
-            (_contentTopPx +
-                    widget.margins.bleedMm * kPxPerMm +
-                    y -
-                    _pageOffsets[page]) *
-                _pageScale,
-          ),
-        )
-        .dy;
-    final viewportTop = viewport.localToGlobal(Offset.zero).dy;
+    return _jumpToPage(page, y - _pageOffsets[page]);
+  }
+
+  bool _jumpToPage(int page, double withinPage) {
+    if (!_searchScroll.hasClients ||
+        _pageStride <= 0 ||
+        !_searchScroll.position.hasContentDimensions)
+      return false;
     final position = _searchScroll.position;
-    // Direct springen voorkomt dat een verre hoofdstuksprong alle tussen-
-    // liggende pagina's tijdens een animatie moet schilderen.
+    // Een doel hoeft niet gemonteerd te zijn: de vaste velmaat en de gedeelde
+    // blokmeting bepalen zijn scrollpositie rechtstreeks.
+    final target =
+        16 +
+        page * _pageStride +
+        (_contentTopPx + widget.margins.bleedMm * kPxPerMm + withinPage) *
+            _pageScale -
+        position.viewportDimension * 0.08;
     _searchScroll.jumpTo(
-      (position.pixels +
-              headingTop -
-              viewportTop -
-              position.viewportDimension * 0.08)
-          .clamp(position.minScrollExtent, position.maxScrollExtent),
+      target.clamp(position.minScrollExtent, position.maxScrollExtent),
     );
     return true;
   }
+}
+
+/// De vaste itemmaat omvat ook het bijschrift op de actieve tekstschaal.
+double _pageCaptionHeight(BuildContext context) {
+  final painter = TextPainter(
+    text: TextSpan(text: 'Ag', style: Theme.of(context).textTheme.labelSmall),
+    textDirection: Directionality.of(context),
+    textScaler: MediaQuery.textScalerOf(context),
+    maxLines: 1,
+  )..layout();
+  final height = painter.height;
+  painter.dispose();
+  return height;
 }
 
 /// Het paginanummer onder het vel; de bovenliggende Semantics draagt het al.
 Widget _pageCaption(ThemeData theme, String label) => ExcludeSemantics(
   child: Text(
     label,
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
     style: theme.textTheme.labelSmall?.copyWith(
       color: theme.colorScheme.onSurfaceVariant,
     ),

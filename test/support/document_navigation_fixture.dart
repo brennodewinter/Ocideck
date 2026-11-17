@@ -19,3 +19,10 @@ String documentNavigationFixture({bool diagrams = true}) {
   }
   return source.toString();
 }
+
+/// Een vast aantal vellen met unieke koppen en zoekdoelen, zonder I/O.
+String documentPaginationFixture(int pages) => List.generate(
+  pages,
+  (i) =>
+      '## Hoofdstuk $i\n\nDit is de tekst van hoofdstuk $i met bewijsdoel-$i.',
+).join('\n\n---\n\n');

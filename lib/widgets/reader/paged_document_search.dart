@@ -87,6 +87,7 @@ extension _PagedDocumentSearch on _PagedDocumentViewState {
     caseSensitive: widget.searchCaseSensitive,
     geometry: _searchGeometry,
     revealSignal: widget.searchRevealSignal,
+    onActiveRect: (rect) => _revealMeasuredSearch(rect),
     child: child,
   );
 
@@ -98,6 +99,7 @@ extension _PagedDocumentSearch on _PagedDocumentViewState {
       activeIndex: _searchSelection.noteIndex,
       caseSensitive: widget.searchCaseSensitive,
       revealSignal: widget.searchRevealSignal,
+      onActiveRect: (rect) => _revealMeasuredSearch(rect, note: note.label),
       geometry: _noteGeometry.putIfAbsent(
         note.label,
         DocumentSearchGeometry.new,
@@ -105,6 +107,31 @@ extension _PagedDocumentSearch on _PagedDocumentViewState {
       child: child,
     ),
   );
+
+  void _revealMeasuredSearch(Rect? rect, {String? note}) {
+    final signal = widget.searchRevealSignal;
+    if (rect == null ||
+        signal == 0 ||
+        _handledSearchSignal == signal ||
+        _pageOffsets.isEmpty ||
+        _blockHeights == null)
+      return;
+    if (note != null && note != _searchSelection.noteLabel) return;
+    final int page;
+    final double within;
+    if (note == null) {
+      page = _PagedDocumentViewState._pageOf(rect.top, _pageOffsets);
+      within = rect.top - _pageOffsets[page];
+    } else {
+      page = _notesPerPage(
+        _pageOffsets,
+        _blockHeights!,
+      ).indexWhere((notes) => notes.any((n) => n.label == note));
+      if (page < 0) return;
+      within = 0;
+    }
+    if (_jumpToPage(page, within)) _handledSearchSignal = signal;
+  }
 
   Widget _paintSearchDocument(Widget child, double offset, double height) =>
       DocumentSearchOverlay(
