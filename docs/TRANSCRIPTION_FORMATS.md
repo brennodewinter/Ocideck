@@ -95,7 +95,7 @@ The current macOS system-decoder comparison passes all 19 ordinary-format
 combinations through the real file source and `/usr/bin/afconvert`. The four
 extended helper-only combinations are explicitly excluded from that comparison,
 not counted as system-decoder successes. The separately installed helper passes
-all 23 combinations and four negative cases; 43 targeted regressions pass.
+all 23 combinations and four negative cases; 44 targeted regressions pass against the freshly built release app copied to a clean installation path; its deep signature and bundled source-archive hash are verified.
 
 A limited real-speech pass additionally decodes WAV, Vorbis/Opus Ogg, MOV/AAC,
 WebM/Opus, MKV/Opus and AVI/PCM through the file source and then runs the

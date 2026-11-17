@@ -13,6 +13,8 @@ import wave
 
 helper = Path(sys.argv[1]).resolve(strict=True)
 output = Path(sys.argv[2])
+# A failed or interrupted rerun must never leave a previous green report.
+output.unlink(missing_ok=True)
 root = Path(__file__).resolve().parents[2]
 fixtures = root / 'integration_test/fixtures/audio_formats'
 manifest = json.loads((fixtures / 'manifest.json').read_text())

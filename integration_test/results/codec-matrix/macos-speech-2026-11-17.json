@@ -1,8 +1,18 @@
 {
   "metadata": {
-    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
-    "harness_revision": "committed with this evidence",
-    "scope": "Actual FileSource plus production IoLocalWhisperEngine and hash-verified catalog base model; no full UI claim"
+    "build_command": "scripts/gate_lock.sh make build-macos",
+    "build_start_commit": "71edbe6168dde203f4be126a9bbf1c40be13fa35",
+    "macos_runtime_source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
+    "later_changes": "Linux-only classification and evidence harness updates; no macOS runtime change",
+    "installation": "Release app copied to a clean path with spaces and Unicode; codesign --verify --deep --strict passed",
+    "artifact_sha256": {
+      "Contents/MacOS/OciDeck": "08a55e417fb72fac7fd2b622c9832da57ceb692a74483772b4a5f156e1d53be0",
+      "Contents/Frameworks/App.framework/Versions/A/App": "afe689e7e80b4defbeb3df15e9428c535bc15e78fdddd9555be8aec9a995274d",
+      "Contents/Helpers/ffmpeg": "67c267450ea9aafda20592be1f72dab51f3ab803376617aa12d0bbd423c535f7",
+      "Contents/Helpers/whisper-cli": "b66eda1ba3d83ee62bad30573b26440fcefbfd992502a13d13682c1dfacb4dbd",
+      "Contents/Resources/ffmpeg/ffmpeg-9.0.2.tar.xz": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e"
+    },
+    "scope": "Actual release-bundle helpers plus FileSource/local engine; no interactive UI certification"
   },
   "report": {
     "scope": "Real file source to production local ASR; limited English sample; no UI/release certification",
@@ -10,7 +20,7 @@
     "model": "base",
     "model_sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
     "decoder_sha256": "67c267450ea9aafda20592be1f72dab51f3ab803376617aa12d0bbd423c535f7",
-    "whisper_sha256": "6ca2ee23528bc80523f6842b5f92d1afbb4e5241252c76292d267b58b21a7e3b",
+    "whisper_sha256": "b66eda1ba3d83ee62bad30573b26440fcefbfd992502a13d13682c1dfacb4dbd",
     "results": [
       {
         "source": "jfk.wav",

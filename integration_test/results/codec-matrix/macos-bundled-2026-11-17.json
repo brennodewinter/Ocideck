@@ -1,13 +1,23 @@
 {
   "metadata": {
-    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
-    "harness_revision": "committed with this evidence",
-    "scope": "Signed helper installed by bundle_media_decoder.sh into app copy; actual FileSource; app copy itself predates this source change"
+    "build_command": "scripts/gate_lock.sh make build-macos",
+    "build_start_commit": "71edbe6168dde203f4be126a9bbf1c40be13fa35",
+    "macos_runtime_source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
+    "later_changes": "Linux-only classification and evidence harness updates; no macOS runtime change",
+    "installation": "Release app copied to a clean path with spaces and Unicode; codesign --verify --deep --strict passed",
+    "artifact_sha256": {
+      "Contents/MacOS/OciDeck": "08a55e417fb72fac7fd2b622c9832da57ceb692a74483772b4a5f156e1d53be0",
+      "Contents/Frameworks/App.framework/Versions/A/App": "afe689e7e80b4defbeb3df15e9428c535bc15e78fdddd9555be8aec9a995274d",
+      "Contents/Helpers/ffmpeg": "67c267450ea9aafda20592be1f72dab51f3ab803376617aa12d0bbd423c535f7",
+      "Contents/Helpers/whisper-cli": "b66eda1ba3d83ee62bad30573b26440fcefbfd992502a13d13682c1dfacb4dbd",
+      "Contents/Resources/ffmpeg/ffmpeg-9.0.2.tar.xz": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e"
+    },
+    "scope": "Actual release-bundle helpers plus FileSource/local engine; no interactive UI certification"
   },
   "report": {
     "platform": "macos",
     "os": "Version 27.0.1 (Build 26A434)",
-    "decoder": "/tmp/ocideck-media-decoder-bundle-proof/OciDeck.app/Contents/Helpers/ffmpeg",
+    "decoder": "/tmp/ocideck-codec-clean-install \u00fc/OciDeck.app/Contents/Helpers/ffmpeg",
     "decoder_sha256": "67c267450ea9aafda20592be1f72dab51f3ab803376617aa12d0bbd423c535f7",
     "scope": "Actual file source and decoder; no ASR or UI claim",
     "selection": "23 combinations and 4 negative cases",
@@ -17,7 +27,7 @@
         "container": "mpeg4",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 17805,
+        "elapsed_us": 697371,
         "offered_in_picker": true
       },
       {
@@ -25,7 +35,7 @@
         "container": "aac",
         "duration_ms": 640,
         "data_bytes": 20480,
-        "elapsed_us": 10449,
+        "elapsed_us": 8970,
         "offered_in_picker": true
       },
       {
@@ -33,7 +43,7 @@
         "container": "aiff",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 9177,
+        "elapsed_us": 8607,
         "offered_in_picker": true
       },
       {
@@ -41,7 +51,7 @@
         "container": "avi",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 9350,
+        "elapsed_us": 8308,
         "offered_in_picker": true
       },
       {
@@ -49,7 +59,7 @@
         "container": "caf",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8743,
+        "elapsed_us": 8622,
         "offered_in_picker": true
       },
       {
@@ -57,7 +67,7 @@
         "container": "flac",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 9137,
+        "elapsed_us": 8827,
         "offered_in_picker": true
       },
       {
@@ -65,7 +75,7 @@
         "container": "mpeg4",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8608,
+        "elapsed_us": 8118,
         "offered_in_picker": true
       },
       {
@@ -73,7 +83,7 @@
         "container": "mpeg4",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8953,
+        "elapsed_us": 8658,
         "offered_in_picker": true
       },
       {
@@ -81,7 +91,7 @@
         "container": "ebml",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8314,
+        "elapsed_us": 8452,
         "offered_in_picker": true
       },
       {
@@ -89,7 +99,7 @@
         "container": "mpeg4",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8294,
+        "elapsed_us": 8397,
         "offered_in_picker": true
       },
       {
@@ -97,7 +107,7 @@
         "container": "mpeg4",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8196,
+        "elapsed_us": 8153,
         "offered_in_picker": true
       },
       {
@@ -105,7 +115,7 @@
         "container": "mp3",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8044,
+        "elapsed_us": 7945,
         "offered_in_picker": true
       },
       {
@@ -113,7 +123,7 @@
         "container": "mpeg4",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8385,
+        "elapsed_us": 7570,
         "offered_in_picker": true
       },
       {
@@ -121,7 +131,7 @@
         "container": "ogg",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 7952,
+        "elapsed_us": 7999,
         "offered_in_picker": true
       },
       {
@@ -129,7 +139,7 @@
         "container": "ogg",
         "duration_ms": 618,
         "data_bytes": 19798,
-        "elapsed_us": 8298,
+        "elapsed_us": 8230,
         "offered_in_picker": true
       },
       {
@@ -137,7 +147,7 @@
         "container": "ogg",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 7301,
+        "elapsed_us": 7620,
         "offered_in_picker": true
       },
       {
@@ -145,7 +155,7 @@
         "container": "wav",
         "duration_ms": 614,
         "data_bytes": 19662,
-        "elapsed_us": 8285,
+        "elapsed_us": 8346,
         "offered_in_picker": true
       },
       {
@@ -153,7 +163,7 @@
         "container": "wav",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 7998,
+        "elapsed_us": 8495,
         "offered_in_picker": true
       },
       {
@@ -161,7 +171,7 @@
         "container": "wav",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8827,
+        "elapsed_us": 9800,
         "offered_in_picker": true
       },
       {
@@ -169,7 +179,7 @@
         "container": "wav",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8478,
+        "elapsed_us": 8724,
         "offered_in_picker": true
       },
       {
@@ -177,7 +187,7 @@
         "container": "wav",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 8725,
+        "elapsed_us": 8985,
         "offered_in_picker": true
       },
       {
@@ -185,7 +195,7 @@
         "container": "ebml",
         "duration_ms": 600,
         "data_bytes": 19200,
-        "elapsed_us": 7817,
+        "elapsed_us": 8672,
         "offered_in_picker": true
       },
       {
@@ -193,7 +203,7 @@
         "container": "unknown",
         "duration_ms": 597,
         "data_bytes": 19114,
-        "elapsed_us": 6948,
+        "elapsed_us": 8468,
         "offered_in_picker": false
       }
     ],

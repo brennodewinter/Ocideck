@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
+    "source_commit": "2b513e7cc2cc9c8d622f0f649e49f280c1eddd00",
     "environment": "Debian 12 amd64 under Docker emulation on macOS; GStreamer 1.22 base/good/libav; no installed Flatpak certification",
     "plugin_inventory": [
       "1394:  dv1394src: Firewire (1394) DV video source",
@@ -1245,13 +1245,12 @@
       "libgstreamer1.0-dev:amd64\t1.22.0-2+deb12u1",
       "libgtk-4-media-gstreamer\t",
       "totem-gstreamer\t"
-    ],
-    "later_attempt": "70ef07976 elementary-video-cap restriction timed out on video-without-audio fixture; these results remain the earlier successful revision, not that attempt"
+    ]
   },
   "report": {
     "scope": "Production helper sources; no installed-package/UI/ASR claim",
     "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.36",
-    "helper_sha256": "e95edf891ce192ed7f707bb6a5475b121271fcda26c963bb1e7ebdccf960b31d",
+    "helper_sha256": "6968b56dfe30939b606708c314cf312998217ce4a1193ef02bfb70328ef594d9",
     "results": [
       {
         "source": "3gp-aac.3gp",
@@ -1545,7 +1544,7 @@
         "negative_case": "empty",
         "source_sha256": "ba584a378b11d9e9c98736fd8c256fe1453a84ee4139416d24b07acff424f0fb",
         "exit_code": 1,
-        "error": "\n(ocideck-audio:291): GStreamer-WARNING **: 04:44:58.359: ../gst/gstpad.c:4705:gst_pad_push_data:<wavenc0:src> Got data flow before segment event\n\n(ocideck-audio:291): GStreamer-WARNING **: 04:44:58.361: ../gst/gstpad.c:4432:gst_pad_chain_data_unchecked:<output:sink> Got data flow before segment event\n"
+        "error": "\n(ocideck-audio:291): GStreamer-WARNING **: 04:52:17.809: ../gst/gstpad.c:4705:gst_pad_push_data:<wavenc0:src> Got data flow before segment event\n\n(ocideck-audio:291): GStreamer-WARNING **: 04:52:17.811: ../gst/gstpad.c:4432:gst_pad_chain_data_unchecked:<output:sink> Got data flow before segment event\n"
       }
     ]
   }
