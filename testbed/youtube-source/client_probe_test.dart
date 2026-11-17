@@ -92,7 +92,7 @@ void main() {
             reference: reference,
             title: meta.title,
           );
-          String createDocument() => mediaTranscriptMarkdown(
+          final markdown = mediaTranscriptMarkdown(
             origin: origin,
             segments: parsed,
             methodLabel: automatic ? 'Automatic captions' : 'Manual captions',
