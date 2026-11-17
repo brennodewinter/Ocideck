@@ -58,3 +58,48 @@ tracked in #2947. If an import reports an unavailable codec, convert the source
 to 16 kHz mono PCM16 WAV using a trusted local tool and import that copy. A
 missing codec, a missing audio track, corrupt input and empty audio are separate
 outcomes; a generic decoder failure is not evidence that a video has no audio.
+
+## Current synthetic decoder matrix — 17 November 2026
+
+The macOS column is the separately installed helper, tested through the real file source. The Windows/Linux columns test the exact production helper sources. Browser columns test the production bridge. **Decoded** means nonempty normalized PCM and duration within tolerance; it does not mean a full UI/ASR/release pass. **Limited** means this concrete environment rejected the fixture; use a local PCM-WAV copy.
+
+| Fixture (container/codec) | macOS bundled helper | Windows MF | Linux GST | Chromium | WebKit |
+| --- | --- | --- | --- | --- | --- |
+| 3gp-aac.3gp | Decoded | Decoded | Decoded | Decoded | Decoded |
+| aac-adts.aac | Decoded | Decoded | Decoded | Decoded | Decoded |
+| aiff.aiff | Decoded | Limited | Decoded | Limited | Decoded |
+| avi-pcm.avi | Decoded | Decoded | Decoded | Limited | Decoded |
+| caf.caf | Decoded | Limited | Limited | Limited | Decoded |
+| flac.flac | Decoded | Decoded | Decoded | Decoded | Decoded |
+| m4a-aac.m4a | Decoded | Decoded | Decoded | Decoded | Decoded |
+| m4a-alac.m4a | Decoded | Decoded | Decoded | Limited | Decoded |
+| mkv-opus.mkv | Decoded | Decoded | Decoded | Decoded | Limited |
+| mov-aac.mov | Decoded | Decoded | Decoded | Decoded | Limited |
+| mov-pcm.mov | Decoded | Decoded | Decoded | Decoded | Limited |
+| mp3.mp3 | Decoded | Decoded | Decoded | Decoded | Decoded |
+| mp4-aac.mp4 | Decoded | Decoded | Decoded | Decoded | Decoded |
+| ogg-opus.ogg | Decoded | Limited | Decoded | Decoded | Decoded |
+| ogg-vorbis.ogg | Decoded | Limited | Decoded | Decoded | Decoded |
+| opus.opus | Decoded | Limited | Decoded | Decoded | Decoded |
+| wav-adpcm.wav | Decoded | Limited | Limited | Limited | Decoded |
+| wav-float32.wav | Decoded | Decoded | Decoded | Decoded | Decoded |
+| wav-pcm16.wav | Decoded | Decoded | Decoded | Decoded | Decoded |
+| wav-pcm24.wav | Decoded | Decoded | Decoded | Decoded | Decoded |
+| wav-ulaw.wav | Decoded | Limited | Decoded | Decoded | Decoded |
+| webm-opus.webm | Decoded | Decoded | Decoded | Decoded | Decoded |
+| wma.wma | Decoded | Decoded | Limited | Limited | Limited |
+
+Raw results and provenance: [`integration_test/results/codec-matrix`](../integration_test/results/codec-matrix). Windows and Linux additionally exercise no-audio, truncated and empty inputs. The MS-ADPCM negative fixture deliberately targets the limited macOS build; a system decoder may legitimately support it (Linux does).
+
+The current macOS system-decoder comparison passes all 19 ordinary-format
+combinations through the real file source and `/usr/bin/afconvert`. The four
+extended helper-only combinations are explicitly excluded from that comparison,
+not counted as system-decoder successes. The separately installed helper passes
+all 23 combinations and four negative cases; 43 targeted regressions pass.
+
+A limited real-speech pass additionally decodes WAV, Vorbis/Opus Ogg, MOV/AAC,
+WebM/Opus, MKV/Opus and AVI/PCM through the file source and then runs the
+production local Whisper engine with the catalog-hash-verified `base` model.
+All seven produce the expected English speech and timestamped segments. The
+source sample and hashes are retained under `fixtures/codec_speech`. This is
+not a multilingual accuracy benchmark or full UI/release certification.

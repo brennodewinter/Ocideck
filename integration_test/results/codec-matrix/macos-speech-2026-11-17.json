@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
+    "harness_revision": "committed with this evidence",
+    "scope": "Actual FileSource plus production IoLocalWhisperEngine and hash-verified catalog base model; no full UI claim"
+  },
+  "report": {
+    "scope": "Real file source to production local ASR; limited English sample; no UI/release certification",
+    "platform": "Version 27.0.1 (Build 26A434)",
+    "model": "base",
+    "model_sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+    "decoder_sha256": "67c267450ea9aafda20592be1f72dab51f3ab803376617aa12d0bbd423c535f7",
+    "whisper_sha256": "6ca2ee23528bc80523f6842b5f92d1afbb4e5241252c76292d267b58b21a7e3b",
+    "results": [
+      {
+        "source": "jfk.wav",
+        "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+        "segments": [
+          {
+            "start_ms": 0,
+            "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+          }
+        ]
+      },
+      {
+        "source": "jfk-vorbis.ogg",
+        "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+        "segments": [
+          {
+            "start_ms": 0,
+            "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+          }
+        ]
+      },
+      {
+        "source": "jfk-opus.ogg",
+        "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+        "segments": [
+          {
+            "start_ms": 0,
+            "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country."
+          }
+        ]
+      },
+      {
+        "source": "jfk-aac.mov",
+        "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+        "segments": [
+          {
+            "start_ms": 0,
+            "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+          }
+        ]
+      },
+      {
+        "source": "jfk-opus.webm",
+        "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+        "segments": [
+          {
+            "start_ms": 0,
+            "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country."
+          }
+        ]
+      },
+      {
+        "source": "jfk-opus.mkv",
+        "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+        "segments": [
+          {
+            "start_ms": 0,
+            "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country."
+          }
+        ]
+      },
+      {
+        "source": "jfk-pcm.avi",
+        "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+        "segments": [
+          {
+            "start_ms": 0,
+            "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+          }
+        ]
+      }
+    ]
+  }
+}
