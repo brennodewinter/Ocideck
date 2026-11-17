@@ -210,6 +210,7 @@ jobs:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9
     env:
       CMAKE_BUILD_PARALLEL_LEVEL: '4'
+      LIBGL_ALWAYS_SOFTWARE: '1'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -231,7 +232,7 @@ jobs:
           set -eu
           apt-get update
           apt-get install -y --no-install-recommends \
-            python3 xvfb xauth fonts-dejavu-core liblzma-dev libsecret-1-dev \
+            python3 xvfb xauth fonts-dejavu-core libgl1-mesa-dri libegl-mesa0 mesa-utils liblzma-dev libsecret-1-dev \
             libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev \
             libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
             gstreamer1.0-libav libmpv-dev
@@ -243,6 +244,7 @@ jobs:
           uname -a > "$RUNNER_TEMP/document-pagination/environment.txt"
           cat /etc/os-release >> "$RUNNER_TEMP/document-pagination/environment.txt"
           flutter --version >> "$RUNNER_TEMP/document-pagination/environment.txt"
+          xvfb-run -a glxinfo -B >> "$RUNNER_TEMP/document-pagination/environment.txt"
       - name: Profielharnas en afhankelijkheden
         run: |
           set -eu
