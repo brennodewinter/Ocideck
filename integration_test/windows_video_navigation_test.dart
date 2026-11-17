@@ -33,6 +33,46 @@ class _Trace implements LogSink {
   Future<void> close() async {}
 }
 
+// Dart HttpServer adds X-Frame-Options: SAMEORIGIN by default. These
+// deliberately cross-origin test children must explicitly allow embedding;
+// production VideoEmbedHost keeps its secure default unchanged.
+class _CrossOriginFrameHost {
+  _CrossOriginFrameHost(this.server, this.uri);
+  final HttpServer server;
+  final Uri uri;
+  static Future<_CrossOriginFrameHost> start(String html) async {
+    final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+    final uri = Uri.http('127.0.0.1:${server.port}', '/frame');
+    server.listen((request) async {
+      final response = request.response;
+      if (request.uri.path != uri.path ||
+          request.method != 'GET' ||
+          request.headers.value(HttpHeaders.hostHeader) != uri.authority) {
+        response.statusCode = HttpStatus.notFound;
+      } else {
+        response.headers.removeAll('X-Frame-Options');
+        response.headers.contentType = ContentType.html;
+        response.write(html);
+      }
+      await response.close();
+    });
+    return _CrossOriginFrameHost(server, uri);
+  }
+
+  Future<void> close() async => server.close(force: true);
+}
+
+Future<Map<String, dynamic>> _documentState(
+  WebViewController controller,
+) async {
+  final value = await controller.runJavaScriptReturningResult(
+    '({visibility:document.visibilityState,focus:document.hasFocus(),'
+    'width:innerWidth,height:innerHeight,activeElement:document.activeElement.tagName,'
+    'activeId:document.activeElement.id})',
+  );
+  return Map<String, dynamic>.from(jsonDecode(value as String) as Map);
+}
+
 class _Keyboard {
   final _event = DynamicLibrary.open('user32.dll')
       .lookupFunction<
@@ -91,15 +131,16 @@ Future<void> _policyIsolation(
     List.generate(16000, (i) => math.sin(2 * math.pi * 440 * i / 16000) * .05),
   );
   final encoded = base64Encode(encodePcmWav(pcm));
-  final child = await VideoEmbedHost.start(
+  final child = await _CrossOriginFrameHost.start(
     '''<!doctype html><audio id="a" loop src="data:audio/wav;base64,$encoded"></audio>
-<script>var a=document.getElementById('a');a.play().then(function(){parent.postMessage('playing','*')}).catch(function(e){parent.postMessage('blocked:'+e.name,'*')});</script>''',
+<script>parent.postMessage('child-ready','*');var a=document.getElementById('a');a.onerror=function(){parent.postMessage('media-error:'+a.error.code,'*')};a.play().then(function(){parent.postMessage('playing','*')}).catch(function(e){parent.postMessage('blocked:'+e.name,'*')});</script>''',
   );
   final host = await VideoEmbedHost.start(
     '''<!doctype html><iframe id="f" allow="autoplay" src="${child.uri}"></iframe>
 <script>window.addEventListener('message',function(e){if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').contentWindow)Probe.postMessage(e.data)});</script>''',
   );
   final outcomes = <String, String>{};
+  final details = <String, dynamic>{};
   try {
     for (final mode in [
       ('ordinary-before', false),
@@ -114,6 +155,7 @@ Future<void> _policyIsolation(
         ),
       );
       String? outcome;
+      final messages = <String>[];
       try {
         _native(controller).controller.setOnPermissionRequest((request) {
           final allowed = videoEmbedAutoplayPermissionAllowed(
@@ -130,7 +172,13 @@ Future<void> _policyIsolation(
         await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
         await controller.addJavaScriptChannel(
           'Probe',
-          onMessageReceived: (message) => outcome = message.message,
+          onMessageReceived: (message) {
+            messages.add(message.message);
+            if (message.message == 'playing' ||
+                message.message.startsWith('blocked:')) {
+              outcome = message.message;
+            }
+          },
         );
         await tester.pumpWidget(
           MaterialApp(
@@ -141,6 +189,11 @@ Future<void> _policyIsolation(
         await _until(tester, () => outcome != null);
         outcomes[mode.$1] = outcome!;
       } finally {
+        details[mode.$1] = {
+          'outcome': outcome,
+          'messages': messages,
+          'document': await _documentState(controller),
+        };
         await tester.pumpWidget(const SizedBox());
         await _native(controller).controller.dispose();
       }
@@ -149,6 +202,7 @@ Future<void> _policyIsolation(
     expect(outcomes['ordinary-after'], outcomes['ordinary-before']);
   } finally {
     evidence['policyIsolation'] = outcomes;
+    evidence['policyDocuments'] = details;
     await host.close();
     await child.close();
   }
@@ -227,12 +281,15 @@ void main() {
       );
       platform =
           widget.platform.params.controller as WindowsPlatformWebViewController;
+      final creation = platform.controller.params;
+      evidence['autoplayEnvironment'] = creation.allowMediaAutoplay;
       Future<Map<String, dynamic>> snapshot() async {
         final value = await platform!.runJavaScriptReturningResult(
           '({ready:typeof ready!=="undefined"&&ready,playing:typeof playing!=="undefined"&&playing,'
           'hasPlayed:typeof hasPlayed!=="undefined"&&hasPlayed,'
           'position:typeof lastPosition!=="undefined"?lastPosition:null,'
-          'ended:typeof ended!=="undefined"&&ended,ua:navigator.userAgent})',
+          'ended:typeof ended!=="undefined"&&ended,ua:navigator.userAgent,'
+          'visibility:document.visibilityState,focus:document.hasFocus(),width:innerWidth,height:innerHeight})',
         );
         return Map<String, dynamic>.from(jsonDecode(value as String) as Map);
       }
@@ -272,7 +329,7 @@ void main() {
     final directory = await Directory.systemTemp.createTemp(
       'ocideck-key-profile-',
     );
-    final child = await VideoEmbedHost.start('''<!doctype html><body>
+    final child = await _CrossOriginFrameHost.start('''<!doctype html><body>
 <button id="b" autofocus>Focus target</button><script>
 var b=document.getElementById('b');
 b.addEventListener('focus',function(){parent.postMessage('focus','*')});
@@ -317,6 +374,7 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
       await native.requestFocus();
       await controller.runJavaScript("document.getElementById('f').focus()");
       final keyboard = _Keyboard();
+      evidence['keyDocument'] = await _documentState(controller);
       evidence['foregroundProcess'] = keyboard.foregroundProcess();
       evidence['appProcess'] = pid;
       expect(
