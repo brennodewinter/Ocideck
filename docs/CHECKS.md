@@ -2033,7 +2033,8 @@ that reaches beyond `build/test_cache`.
 
 **Diagnostics (#2969).** Dependency resolution, the gate and the Python source
 checks run through `tool/ci_gate.py`. Each command keeps redacted stdout/stderr,
-a 30-second heartbeat and an atomically updated status JSON under
+a configurable heartbeat (`--heartbeat-seconds`, default `30`) and an
+atomically updated status JSON under
 `build/ci-diagnostics/`. The status records child/wrapper exit codes, signals,
 last output and quiet time; no environment dump is collected. Known credential
 values from the environment and Authorization headers are masked before writing
