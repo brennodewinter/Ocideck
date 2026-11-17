@@ -361,7 +361,7 @@ void main() {
   ) async {
     const url = String.fromEnvironment(
       'VIDEO_PROBE_URL',
-      defaultValue: 'https://youtu.be/M7lc1UVf-VE',
+      defaultValue: 'https://youtu.be/aqz-KE-bpKQ',
     );
     final source = VideoSource.parse(url);
     expect(source.kind, VideoSourceKind.youtube);
@@ -436,6 +436,13 @@ void main() {
         final state = await snapshot();
         evidence['livePlayer'] = state;
         evidence['liveWin32Focus'] = _Keyboard().focusState();
+        final events = state['events'] as List? ?? const [];
+        final errors = events.whereType<Map<dynamic, dynamic>>().where(
+          (event) => event['event'] == 'onError',
+        );
+        if (errors.isNotEmpty) {
+          fail('YouTube refused playback: ${errors.last['code']}');
+        }
         return state['hasPlayed'] == true;
       }, seconds: 45);
       await _until(tester, () => ended == 1, seconds: 30);
