@@ -1780,7 +1780,18 @@ Windows video uses `video_player_win` (Media Foundation); YouTube/Vimeo uses
 GStreamer codecs. The Linux module manifest and build jobs list the development
 packages. `integration_test/desktop_media_test.dart` exercises native playback
 and the native JavaScript bridge in the same engine, without external network
-requests. Live YouTube still requires a manual check.
+requests. `integration_test/windows_video_navigation_test.dart` adds physical
+WebView2 child-frame key injection and a separate live YouTube probe through
+`test_driver/windows_video_driver.dart`; `video_only` on the Windows workflow
+retains evidence even on failure. This external-network test must distinguish
+an actual PLAYING event from readiness and record browser policy failures.
+Multi-display hardware remains a separate manual scenario.
+
+The vendored Windows plugin pins WebView2 SDK 1.0.1661.34 for
+`PermissionRequestedEventArgs3`: autoplay decisions opt out of profile storage.
+Old runtimes lacking this interface deny rather than persist the grant.
+Navigation interception is per controller and enabled only by the current
+presentation canvas. Editors and upcoming-slide previews do not opt in.
 Primary and audience Linux runners prepare a GTK overlay before realizing the
 Flutter view. The webview backend reuses that overlay; reparenting an active
 Flutter view stalls its renderer. Preparing the overlay creates no webview and
@@ -1830,3 +1841,15 @@ pass actual packaging/consumer checks; `make licenses` alone is insufficient.
 Independent release channels embed their build-specific source archive in each
 artifact. The full release candidate also publishes the standalone Ubuntu
 source archive; independent channels keep disjoint asset ownership.
+
+For Windows runtimes such as Edge/WebView2 131 that do not emit an autoplay
+permission request, video opt-in creates an isolated WebView2 environment with
+`--autoplay-policy=no-user-gesture-required`. Its user-data folder is separate
+from ordinary video previews and offline renderers. No environment variable or
+global browser option is changed. Turning the slide's autoplay option off
+recreates the controller with the default policy. Browser flags are a runtime
+compatibility mechanism; the player-level waiting/recovery action remains the
+fallback when the runtime or remote player still refuses playback. The Windows
+probe compares ordinary-before/video-opt-in/ordinary-after with a real local
+cross-origin audio frame, then the actual nocookie player without an earlier
+physical interaction, and finally real child-window keys with confirmed focus.

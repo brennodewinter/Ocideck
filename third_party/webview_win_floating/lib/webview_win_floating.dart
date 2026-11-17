@@ -47,7 +47,7 @@ class WinWebViewPermissionRequest extends PlatformWebViewPermissionRequest {
   final int _deferralId;
   final String url;
   final WinWebViewPermissionResourceType kind;
-  bool _isDone = false;
+  Future<void>? _response;
   late final PlatformWebViewPermissionRequest platform = this;
 
   WinWebViewPermissionRequest._(
@@ -55,45 +55,23 @@ class WinWebViewPermissionRequest extends PlatformWebViewPermissionRequest {
     this._deferralId,
     this.url,
     this.kind,
-  ) : super(
-          types: {
+  ) : super(types: {
+          if (kind == WinWebViewPermissionResourceType.camera)
             WebViewPermissionResourceType.camera,
+          if (kind == WinWebViewPermissionResourceType.microphone)
             WebViewPermissionResourceType.microphone,
-          },
-        );
+        });
+
+  Future<void> _respond(bool granted) =>
+      _response ??= _controller.grantPermission(_deferralId, granted);
 
   @override
-  Future<void> grant() async {
-    if (_isDone) {
-      log(
-        "[webview_win_floating] WinWebViewPermissionRequest: already called grant() or deny() before. ignored",
-      );
-      return;
-    }
-
-    _controller.grantPermission(_deferralId, true);
-    _isDone = true;
-  }
+  Future<void> grant() => _respond(true);
 
   @override
-  Future<void> deny() async {
-    if (_isDone) {
-      log(
-        "[webview_win_floating] WinWebViewPermissionRequest: already called grant() or deny() before. ignored",
-      );
-      return;
-    }
+  Future<void> deny() => _respond(false);
 
-    _controller.grantPermission(_deferralId, false);
-    _isDone = true;
-  }
-
-  Future<void> denyIfNoAction() async {
-    if (_isDone) return;
-    log("[webview_win_floating] onPermissionRequest() doesn't call grant() or deny()!");
-    _controller.grantPermission(_deferralId, false);
-    _isDone = true;
-  }
+  Future<void> denyIfNoAction() => _response ?? deny();
 }
 
 class WinSslAuthError extends PlatformSslAuthError {
@@ -113,14 +91,32 @@ class WinSslAuthError extends PlatformSslAuthError {
 }
 
 enum WinWebViewPermissionResourceType {
-  unknown,
-  microphone,
-  camera,
-  geoLocation,
-  notification,
-  otherSensors,
-  clipboardRead,
-} //mapping to COREWEBVIEW2_PERMISSION_KIND
+  unknown(0),
+  microphone(1),
+  camera(2),
+  geoLocation(3),
+  notification(4),
+  otherSensors(5),
+  clipboardRead(6),
+  multipleAutomaticDownloads(7),
+  fileReadWrite(8),
+  autoplay(9),
+  localFonts(10),
+  midiSystemExclusiveMessages(11),
+  windowManagement(12),
+  persistentStorage(13);
+
+  const WinWebViewPermissionResourceType(this.nativeId);
+  final int nativeId;
+
+  // Native IDs are an external protocol, not positions in this enum.
+  static WinWebViewPermissionResourceType fromNativeId(int id) {
+    for (final kind in values) {
+      if (kind.nativeId == id) return kind;
+    }
+    return unknown;
+  }
+}
 
 typedef WebViewCreatedCallback = void Function(
     WinWebViewController webViewController);
@@ -202,9 +198,22 @@ class _WinWebViewWidgetState extends State<WinWebViewWidget> {
 
 int _gLastWebViewId = 0;
 
+class WinWebViewPresentationKey {
+  const WinWebViewPresentationKey(
+      {required this.virtualKey,
+      this.control = false,
+      this.shift = false,
+      this.alt = false,
+      this.meta = false});
+  final int virtualKey;
+  final bool control, shift, alt, meta;
+}
+
 class WinWebViewController {
+  void Function(WinWebViewPresentationKey)? _presentationKeyHandler;
   final _webviewId = ++_gLastWebViewId;
   late Future<bool> _initFuture;
+  Future<void>? _disposeFuture;
   WinNavigationDelegate _navigationDelegate = WinNavigationDelegate();
   final _javaScriptMessageCallbacks = <String, JavaScriptMessageCallback>{};
   String? _currentUrl;
@@ -248,6 +257,7 @@ class WinWebViewController {
       userDataFolder: this.params.userDataFolder,
       profileName: this.params.profileName,
       offscreen: this.params.offscreen,
+      allowMediaAutoplay: this.params.allowMediaAutoplay,
     );
   }
 
@@ -398,24 +408,35 @@ class WinWebViewController {
     }
   }
 
+  /// Configure Windows-specific permissions, including autoplay.
+  void setOnPermissionRequest(
+    void Function(WinWebViewPermissionRequest request)? callback,
+  ) {
+    _onPermissionRequest = callback;
+  }
+
   void setOnPlatformPermissionRequest_(
     void Function(PlatformWebViewPermissionRequest request) onPermissionRequest,
   ) {
     _onPermissionRequest = onPermissionRequest;
   }
 
-  void notifyAskPermission_(
+  Future<void> notifyAskPermission_(
     String url,
     WinWebViewPermissionResourceType kind,
     int deferralId,
-  ) {
-    if (_onPermissionRequest != null) {
-      var req = WinWebViewPermissionRequest._(this, deferralId, url, kind);
-      _onPermissionRequest!(req);
-      req.denyIfNoAction();
-    } else {
-      // if user not listen to permission request, always deny
-      grantPermission(deferralId, false);
+  ) async {
+    final request = WinWebViewPermissionRequest._(this, deferralId, url, kind);
+    try {
+      // A future/unknown permission must not inherit a generic camera grant.
+      if (kind != WinWebViewPermissionResourceType.unknown) {
+        _onPermissionRequest?.call(request);
+      }
+    } catch (error, stack) {
+      log('[webview_win_floating] permission callback failed',
+          error: error, stackTrace: stack);
+    } finally {
+      await request.denyIfNoAction();
     }
   }
 
@@ -622,7 +643,27 @@ class WinWebViewController {
     await WebviewWinFloatingPlatform.instance.resume(_webviewId);
   }
 
-  Future<void> dispose() async {
+  /// Windows-only opt-in: native WebView2 consumes reserved navigation keys.
+  Future<void> setPresentationKeyHandler(
+    void Function(WinWebViewPresentationKey)? callback,
+  ) async {
+    _presentationKeyHandler = callback;
+    await _initFuture;
+    await WebviewWinFloatingPlatform.instance.setPresentationKeys(
+      _webviewId,
+      callback != null,
+    );
+  }
+
+  void notifyPresentationKey_(WinWebViewPresentationKey event) {
+    _presentationKeyHandler?.call(event);
+  }
+
+  Future<void> dispose() => _disposeFuture ??= _dispose();
+
+  Future<void> _dispose() async {
+    _presentationKeyHandler = null;
+    _onPermissionRequest = null;
     await _initFuture;
     _finalizer.detach(this);
     await _disposeById(_webviewId);

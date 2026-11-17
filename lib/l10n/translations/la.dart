@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Reproductio automatica non incepit.',
   'Audio- en videoformaten': 'Formae soni et imaginis mobilis',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'WAV ad PCM16 monophonicum 16 kHz normalizatur',

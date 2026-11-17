@@ -1546,6 +1546,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Automatska reprodukcija nije započela.',
   'Audio- en videoformaten': 'Audio i video formati',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'WAV se normalizira na 16 kHz mono PCM16',

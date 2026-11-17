@@ -152,12 +152,17 @@ class WindowsWebViewControllerCreationParams
 
   final bool suspendDuringDeactive;
 
+  /// Windows only. Requires a dedicated user-data directory; never changes the
+  /// environment of another WebView. The host must have explicit user opt-in.
+  final bool allowMediaAutoplay;
+
   /// Creates a new [WindowsPlatformWebViewControllerCreationParams] instance.
   const WindowsWebViewControllerCreationParams({
     this.userDataFolder,
     this.profileName,
     this.suspendDuringDeactive = true,
     this.offscreen = false,
+    this.allowMediaAutoplay = false,
   }) : super();
 
   /// Creates a [WindowsPlatformWebViewControllerCreationParams] instance based on [PlatformWebViewControllerCreationParams].

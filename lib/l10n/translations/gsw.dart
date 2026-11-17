@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'D automatischi Wiedergab isch nöd gstartet.',
   'Audio- en videoformaten': 'Audio- und Videoformat',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       's WAV wird uf 16 kHz Mono-PCM16 normalisiert',

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
 
@@ -15,9 +16,12 @@ import 'package:re_highlight/styles/github.dart';
 import 'package:video_player/video_player.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_win_floating/webview_plugin.dart';
+import 'package:webview_win_floating/webview.dart'
+    show WinWebViewPermissionResourceType;
 import 'package:path_provider/path_provider.dart';
 
 import '../../services/video_embed_host.dart';
+import '../presentation/presentation_key_scope.dart';
 import '../../platform/desktop_video.dart';
 import 'mermaid_diagram.dart';
 import 'chart_hover.dart';
@@ -135,6 +139,7 @@ part 'previews/table_preview.dart';
 part 'previews/media_previews.dart';
 part 'previews/gallery_preview.dart';
 part 'previews/media_previews_video.dart';
+part 'previews/video_embed_protocol.dart';
 part 'previews/media_previews_image.dart';
 part 'previews/code_preview.dart';
 part 'previews/chart_preview.dart';

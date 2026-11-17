@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Automaatne taasesitus ei käivitunud.',
   'Audio- en videoformaten': 'Heli- ja videovormingud',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'WAV normaliseeritakse 16 kHz mono PCM16 vormingusse',

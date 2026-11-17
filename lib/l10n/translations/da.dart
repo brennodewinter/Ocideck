@@ -1542,6 +1542,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Automatisk afspilning startede ikke.',
   'Audio- en videoformaten': 'Lyd- og videoformater',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'WAV normaliseres til 16 kHz mono PCM16',

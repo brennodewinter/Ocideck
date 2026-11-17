@@ -67,7 +67,8 @@ class _VideoPreviewState extends State<_VideoPreview>
   @override
   void didUpdateWidget(_VideoPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.slide.videoPath != widget.slide.videoPath ||
+    if (oldWidget.slide.id != widget.slide.id ||
+        oldWidget.slide.videoPath != widget.slide.videoPath ||
         oldWidget.slide.videoStartMs != widget.slide.videoStartMs ||
         oldWidget.slide.videoEndMs != widget.slide.videoEndMs ||
         oldWidget.slide.videoCaptions != widget.slide.videoCaptions ||
@@ -356,6 +357,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   VideoEmbedHost? _embedHost;
   bool _initializing = false;
   int _embedGeneration = 0;
+  PresentationKeyScope? _keyScope;
 
   bool get _desktopWebView =>
       !kIsWeb &&
@@ -383,15 +385,60 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _keyScope = PresentationKeyScope.maybeOf(context);
+    final controller = _controller;
+    if (controller != null) unawaited(_syncPresentationKeys(controller));
+  }
+
+  Future<void> _syncPresentationKeys(WebViewController controller) async {
+    final platform = controller.platform;
+    if (defaultTargetPlatform != TargetPlatform.windows ||
+        platform is! WindowsPlatformWebViewController) {
+      return;
+    }
+    final scope = _keyScope;
+    await platform.controller.setPresentationKeyHandler(
+      scope == null
+          ? null
+          : (event) {
+              if (!mounted ||
+                  _controller != controller ||
+                  _keyScope != scope ||
+                  !(ModalRoute.of(context)?.isCurrent ?? true)) {
+                return;
+              }
+              scope.dispatchWindowsKey(
+                event.virtualKey,
+                meta: event.meta,
+                control: event.control,
+                shift: event.shift,
+              );
+            },
+    );
+  }
+
+  @override
   void didUpdateWidget(_VideoEmbedPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
     final changed =
+        oldWidget.slide.id != widget.slide.id ||
         oldWidget.slide.videoPath != widget.slide.videoPath ||
         oldWidget.slide.videoStartMs != widget.slide.videoStartMs ||
         oldWidget.slide.videoEndMs != widget.slide.videoEndMs ||
         oldWidget.autoplay != widget.autoplay ||
         oldWidget.allowRemoteMedia != widget.allowRemoteMedia;
     if (!changed) return;
+    // Browser arguments belong to an environment, not to a loaded document.
+    // Recreate on a Windows policy change, keeping ordinary and autoplay views
+    // in different profiles rather than inheriting a stale environment.
+    if (defaultTargetPlatform == TargetPlatform.windows &&
+        oldWidget.autoplay != widget.autoplay &&
+        _controller != null) {
+      _stopPlayback();
+      _controller = null;
+    }
     if (widget.allowRemoteMedia) {
       if (_controller == null) {
         WidgetsBinding.instance.addPostFrameCallback((_) => _initWebView());
@@ -416,8 +463,12 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
       if (_desktopWebView) {
         final cache = await getApplicationCacheDirectory();
         if (!mounted || !widget.allowRemoteMedia) return;
+        final allowAutoplay =
+            defaultTargetPlatform == TargetPlatform.windows && widget.autoplay;
+        final suffix = allowAutoplay ? '-autoplay' : '';
         params = WindowsWebViewControllerCreationParams(
-          userDataFolder: '${cache.path}/video-webview',
+          userDataFolder: '${cache.path}/video-webview$suffix',
+          allowMediaAutoplay: allowAutoplay,
           // Presenter and audience windows must both keep playing.
           suspendDuringDeactive: false,
         );
@@ -463,6 +514,31 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           },
         ),
       );
+      final platform = controller.platform;
+      if (platform is WindowsPlatformWebViewController) {
+        platform.controller.setOnPermissionRequest((request) {
+          final allowed = videoEmbedAutoplayPermissionAllowed(
+            kind: request.kind.nativeId,
+            url: request.url,
+            player: widget.source.embedUri(
+              startMs: widget.slide.videoStartMs,
+              endMs: widget.slide.videoEndMs,
+              autoplay: widget.autoplay,
+            ),
+            document: _embedHost?.uri,
+            active:
+                mounted &&
+                _controller == controller &&
+                (ModalRoute.of(context)?.isCurrent ?? true),
+            allowRemoteMedia: widget.allowRemoteMedia,
+            autoplay: widget.autoplay,
+          );
+          if (request.kind == WinWebViewPermissionResourceType.autoplay) {
+            logInfo('Video autoplay permission: granted=$allowed');
+          }
+          allowed ? request.grant() : request.deny();
+        });
+      }
       await _setEmbedBackground(controller);
       if (!mounted || !widget.allowRemoteMedia) {
         await _disposeDesktopWebView(controller);
@@ -471,6 +547,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
       }
       _controller = controller;
       pending = null;
+      await _syncPresentationKeys(controller);
       await _loadEmbed();
       if (mounted) setState(() {});
     } catch (error) {
@@ -532,7 +609,9 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           return;
         }
         _embedHost = host;
-        host.update(html);
+        // De echte documentorigin is pas na het binden van de host bekend.
+        // Bouw vóór de enige navigatie de speler-URL met die clientidentiteit.
+        host.update(_buildEmbedHtml() ?? html);
         await controller.loadRequest(host.uri);
       } else {
         await controller.loadHtmlString(html, baseUrl: baseUrl);
@@ -546,7 +625,14 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   }
 
   void _onJsMessage(JavaScriptMessage message) {
-    final m = message.message;
+    if (!mounted || !widget.allowRemoteMedia) return;
+    final separator = message.message.indexOf('|');
+    if (separator < 1 ||
+        int.tryParse(message.message.substring(0, separator)) !=
+            _embedGeneration) {
+      return;
+    }
+    final m = message.message.substring(separator + 1);
     if (m.startsWith('pos:')) {
       final ms = int.tryParse(m.substring(4));
       if (ms != null) {
@@ -559,6 +645,8 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           ),
         );
       }
+    } else if (m.startsWith('playback:')) {
+      logInfo('Video embed $m');
     } else if (m == 'ok') {
       if (!_playerReady || _error != null) {
         setState(() {
@@ -595,12 +683,23 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           startMs: widget.slide.videoStartMs,
           endMs: widget.slide.videoEndMs,
           autoplay: widget.autoplay,
+          documentUri: _embedHost?.uri,
         )
         ?.toString();
     if (embed == null) return null;
     return widget.source.kind == VideoSourceKind.youtube
-        ? _youTubeHtml(embed, endMs)
-        : _vimeoHtml(embed, endMs);
+        ? _youTubeHtml(
+            embed,
+            widget.slide.videoStartMs,
+            endMs,
+            generation: _embedGeneration,
+            autoplay: widget.autoplay,
+            playLabel: context.l10n.d('Afspelen'),
+            waitingLabel: context.l10n.d(
+              'Automatisch afspelen is niet gestart.',
+            ),
+          )
+        : _vimeoHtml(embed, widget.slide.videoStartMs, endMs, _embedGeneration);
   }
 
   @override
@@ -626,6 +725,11 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
     host?.close();
     final controller = _controller;
     if (controller == null) return;
+    final platform = controller.platform;
+    if (defaultTargetPlatform == TargetPlatform.windows &&
+        platform is WindowsPlatformWebViewController) {
+      unawaited(platform.controller.setPresentationKeyHandler(null));
+    }
     controller
         .loadRequest(Uri.parse('about:blank'))
         .catchError((_) {})
@@ -748,88 +852,6 @@ bool vimeoPlayerNavigationAllowed(String url) {
     'vimeocdn.com', // miniaturen, speler-assets en de videostroom
   };
   return players.any((d) => host == d || host.endsWith('.$d'));
-}
-
-/// HTML voor een YouTube-embed: een kále `youtube-nocookie`-iframe, precies
-/// zoals de Vimeo-embed.
-///
-/// Er komt geen script meer van YouTube aan te pas. Dat was de vorige opzet
-/// (`www.youtube.com/iframe_api`) en die had twee gaten tegelijk: het script
-/// zelf kwam van de trackende oorsprong, én `YT.Player` bouwde daarmee een
-/// speler-iframe op `www.youtube.com` in plaats van op de nocookie-variant. De
-/// gebruiker die "online media" aanzette voor één video, gaf daarmee ongemerkt
-/// een bezoek aan het domein dat wél volgt.
-///
-/// Wat het script deed, kan de speler zelf: `start`, `end`, `autoplay` en
-/// `rel` zitten al in de embed-URL ([VideoSource.embedUri]), en de
-/// gebeurtenissen (klaar, fout, einde, positie) komen via het postMessage-kanaal
-/// dat de speler met `enablejsapi=1` opent — hetzelfde kanaal waar het
-/// IFrame-script zelf een omhulsel omheen is.
-///
-/// Drie meldpaden, in oplopende wanhoop:
-/// * de speler meldt zelf (`onReady`, `onError`, `infoDelivery`) — het normale
-///   geval, en de enige die `err:<code>` kan opleveren (101/150 = insluiten
-///   staat uit, verreweg de vaakste oorzaak van "hij laadt niet");
-/// * het iframe laadt wél maar de speler zwijgt: na een korte marge melden we
-///   `ok`, zodat er geen valse fout over een video komt die gewoon speelt;
-/// * er laadt niets: `err:noapi`, in plaats van een zwart vlak zonder reden.
-String _youTubeHtml(String embedUrl, int endMs) {
-  return '''<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">
-<style>html,body{margin:0;background:#000;height:100%}iframe{width:100%;height:100%;border:0}</style></head>
-<body><iframe id="f" src="$embedUrl" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-<script>
-var endMs=$endMs, ready=false, ended=false, f=document.getElementById('f');
-function post(m){try{OciDeck.postMessage(m)}catch(e){}}
-function send(o){try{f.contentWindow.postMessage(JSON.stringify(o),'$kYouTubeEmbedOrigin')}catch(e){}}
-// De speler stuurt pas gebeurtenissen zodra hij een luisteraar kent. Blijven
-// aankloppen tot dat lukt: het iframe kan nog bezig zijn.
-function listen(){send({event:'listening',id:1,channel:'ocideck'})}
-function markReady(){if(!ready){ready=true;post('ok')}}
-function finish(){if(!ended){ended=true;post('ended')}}
-var tries=0, poke=setInterval(function(){listen();if(++tries>40||ready){clearInterval(poke)}},250);
-f.addEventListener('load',function(){listen();setTimeout(markReady,3000)});
-window.addEventListener('message',function(e){
-  if(e.origin!=='$kYouTubeEmbedOrigin'){return}
-  var d;try{d=(typeof e.data==='string')?JSON.parse(e.data):e.data}catch(x){return}
-  if(!d||!d.event){return}
-  if(d.event==='onReady'||d.event==='initialDelivery'){markReady()}
-  else if(d.event==='onError'){post('err:'+d.info)}
-  else if(d.event==='onStateChange'&&d.info===0){finish()}
-  else if(d.event==='infoDelivery'&&d.info){
-    markReady();
-    if(typeof d.info.currentTime==='number'){
-      var ms=Math.round(d.info.currentTime*1000);
-      post('pos:'+ms);
-      if(endMs>0&&ms>=endMs){send({event:'command',func:'pauseVideo',args:[],id:1,channel:'ocideck'});finish()}
-    }
-    if(d.info.playerState===0){finish()}
-  }
-});
-// Laadt er helemaal niets (offline, geblokkeerd), dan komt de speler nooit
-// klaar. Meld dat na een royale marge in plaats van zwart te blijven.
-setTimeout(function(){if(!ready){post('err:noapi')}},8000);
-</script></body></html>''';
-}
-
-/// HTML voor een Vimeo-embed via player.js. Start gaat via de #t-fragment in
-/// [embedUrl]; het knip-einde ([endMs] > 0) wordt in JS bewaakt.
-String _vimeoHtml(String embedUrl, int endMs) {
-  return '''<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">
-<style>html,body{margin:0;background:#000;height:100%}iframe{width:100%;height:100%;border:0}</style></head>
-<body><iframe id="f" src="$embedUrl" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-<script src="https://player.vimeo.com/api/player.js"></script>
-<script>
-var endMs=$endMs, ready=false;
-function post(m){try{OciDeck.postMessage(m)}catch(e){}}
-if(window.Vimeo){
-  var player=new Vimeo.Player(document.getElementById('f'));
-  player.on('timeupdate',function(d){ready=true;var ms=Math.round(d.seconds*1000);post('pos:'+ms);if(endMs>0&&ms>=endMs){player.pause();post('ended')}});
-  player.on('loaded',function(){ready=true;post('ok')});
-  player.on('ended',function(){post('ended')});
-  player.on('error',function(e){post('err:'+((e&&e.name)||'vimeo'))});
-} else { post('err:noapi'); }
-setTimeout(function(){if(!ready){post('err:noapi')}},8000);
-</script></body></html>''';
 }
 
 /// Waaróm een online video niet speelt. Elke waarde krijgt een eigen icoon en

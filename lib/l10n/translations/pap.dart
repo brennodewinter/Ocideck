@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Automatisch afspelen is niet gestart.':
+      'Reprodukshon outomátiko no a kuminsá.',
   'Audio- en videoformaten': 'Formato di audio i video',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'e WAV ta wordu normalisá pa PCM16 mono di 16 kHz',

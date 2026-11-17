@@ -1565,6 +1565,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Η αυτόματη αναπαραγωγή δεν ξεκίνησε.',
   'Audio- en videoformaten': 'Μορφές ήχου και βίντεο',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'Το WAV κανονικοποιείται σε μονοφωνικό PCM16 στα 16 kHz',

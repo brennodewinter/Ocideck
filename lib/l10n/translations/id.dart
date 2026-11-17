@@ -1542,6 +1542,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Automatisch afspelen is niet gestart.': 'Pemutaran otomatis tidak dimulai.',
   'Audio- en videoformaten': 'Format audio dan video',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'WAV dinormalisasi menjadi PCM16 mono 16 kHz',

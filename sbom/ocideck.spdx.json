@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.7+49",
-  "documentNamespace": "https://ocideck.app/spdx/a629e5bf-c0f7-501a-86b9-f530e148a634",
+  "documentNamespace": "https://ocideck.app/spdx/fdc83cef-7961-5de8-89a0-502c5f150cdf",
   "creationInfo": {
-    "created": "2026-11-17T04:49:15.315583Z",
+    "created": "2026-11-17T05:57:41.064443Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -5027,23 +5027,23 @@
     {
       "SPDXID": "SPDXRef-226-Microsoft-Edge-WebView2-loader",
       "name": "Microsoft Edge WebView2 loader",
-      "versionInfo": "1.0.1418.22",
+      "versionInfo": "1.0.1661.34",
       "supplier": "Organization: Microsoft Corporation",
-      "downloadLocation": "https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1418.22/microsoft.web.webview2.1.0.1418.22.nupkg",
+      "downloadLocation": "https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1661.34/microsoft.web.webview2.1.0.1661.34.nupkg",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "51d2ef56196e2a9d768a6843385bcb9c6baf9ed34b2603ddb074fb4995543a99"
+          "checksumValue": "bad4c011c20ab68526c4c1448da05a6297586806123019ac89387fc62f46c3ce"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:nuget/Microsoft.Web.WebView2@1.0.1418.22"
+          "referenceLocator": "pkg:nuget/Microsoft.Web.WebView2@1.0.1661.34"
         }
       ],
       "comment": "Windows-only SDK loader linked statically by webview_win_floating. SHA-256 identifies the NuGet SDK archive. The separately installed WebView2 Runtime is an OS prerequisite."
@@ -5373,7 +5373,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f272bc67c0b206663a18c52adda773b56ea9a78bca88e5439d2267592998540d"
+          "checksumValue": "690c69e876f0ec519d7f527401904d1edffe232c099fadfe3fa793b800fccb1e"
         }
       ],
       "comment": "Vendored fork in third_party/webview_win_floating; the local changes are recorded in third_party/webview_win_floating/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."

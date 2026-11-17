@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:1dbadb75-205b-518b-88c3-8a8b321f6f70",
+  "serialNumber": "urn:uuid:fd54fdff-85a3-523a-88e5-d797f4b314d1",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-17T04:49:15.315583Z",
+    "timestamp": "2026-11-17T05:57:41.064443Z",
     "tools": {
       "components": [
         {
@@ -9404,7 +9404,7 @@
       ]
     },
     {
-      "bom-ref": "runtime:webview2-loader@1.0.1418.22",
+      "bom-ref": "runtime:webview2-loader@1.0.1661.34",
       "type": "library",
       "supplier": {
         "name": "Microsoft Corporation",
@@ -9413,8 +9413,8 @@
         ]
       },
       "name": "Microsoft Edge WebView2 loader",
-      "version": "1.0.1418.22",
-      "purl": "pkg:nuget/Microsoft.Web.WebView2@1.0.1418.22",
+      "version": "1.0.1661.34",
+      "purl": "pkg:nuget/Microsoft.Web.WebView2@1.0.1661.34",
       "licenses": [
         {
           "license": {
@@ -9425,13 +9425,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "51d2ef56196e2a9d768a6843385bcb9c6baf9ed34b2603ddb074fb4995543a99"
+          "content": "bad4c011c20ab68526c4c1448da05a6297586806123019ac89387fc62f46c3ce"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1418.22/microsoft.web.webview2.1.0.1418.22.nupkg"
+          "url": "https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.1661.34/microsoft.web.webview2.1.0.1661.34.nupkg"
         }
       ],
       "properties": [
@@ -10170,7 +10170,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "f272bc67c0b206663a18c52adda773b56ea9a78bca88e5439d2267592998540d"
+          "content": "690c69e876f0ec519d7f527401904d1edffe232c099fadfe3fa793b800fccb1e"
         }
       ],
       "properties": [
@@ -10277,7 +10277,7 @@
         "pkg:pub/yaml@3.1.4",
         "runtime:ffmpeg-macos@9.0.2",
         "runtime:pdfium@chromium-7811",
-        "runtime:webview2-loader@1.0.1418.22",
+        "runtime:webview2-loader@1.0.1661.34",
         "runtime:whisper.cpp@1.9.5",
         "runtime:wil@1.0.220914.1",
         "sdk:dart@^3.12.0",
@@ -12128,7 +12128,7 @@
       "dependsOn": []
     },
     {
-      "ref": "runtime:webview2-loader@1.0.1418.22",
+      "ref": "runtime:webview2-loader@1.0.1661.34",
       "dependsOn": []
     },
     {
@@ -12189,7 +12189,7 @@
         "pkg:pub/plugin_platform_interface@2.1.8",
         "pkg:pub/webview_flutter_platform_interface@2.15.1",
         "sdk:flutter@0.0.0",
-        "runtime:webview2-loader@1.0.1418.22",
+        "runtime:webview2-loader@1.0.1661.34",
         "runtime:wil@1.0.220914.1",
         "system:webkitgtk"
       ]

@@ -108,6 +108,7 @@ class VideoSource {
     required int startMs,
     required int endMs,
     required bool autoplay,
+    Uri? documentUri,
   }) {
     final id = embedId;
     if (id == null) return null;
@@ -123,6 +124,12 @@ class VideoSource {
           'modestbranding': '1',
           'playsinline': '1',
           'enablejsapi': '1',
+          if (documentUri != null &&
+              (documentUri.scheme == 'http' || documentUri.scheme == 'https') &&
+              documentUri.host.isNotEmpty) ...{
+            'origin': documentUri.origin,
+            'widgetid': '1',
+          },
         });
       case VideoSourceKind.vimeo:
         final base = Uri.https('player.vimeo.com', '/video/$id', {

@@ -612,6 +612,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Automatisch afspelen is niet gestart.':
+      'Die automatische Wiedergabe wurde nicht gestartet.',
   'Audio- en videoformaten': 'Audio- und Videoformate',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'Die WAV-Datei wird auf 16 kHz Mono-PCM16 normalisiert',

@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Automatisch afspelen is niet gestart.':
+      'Níor thosaigh an t-athsheinm uathoibríoch.',
   'Audio- en videoformaten': 'Formáidí fuaime agus físe',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'déantar an WAV a normalú go PCM16 mona ag 16 kHz',

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'presentation_key_scope.dart';
+
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
@@ -604,16 +606,30 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   KeyEventResult _handleKey(FocusNode _, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
     final keys = HardwareKeyboard.instance;
-    if ((keys.isMetaPressed || keys.isControlPressed) &&
-        event.logicalKey == LogicalKeyboardKey.keyW) {
+    return _handleLogicalKey(
+      event.logicalKey,
+      meta: keys.isMetaPressed,
+      control: keys.isControlPressed,
+      shift: keys.isShiftPressed,
+    );
+  }
+
+  KeyEventResult _handleLogicalKey(
+    LogicalKeyboardKey key, {
+    bool meta = false,
+    bool control = false,
+    bool shift = false,
+  }) {
+    if (!mounted) return KeyEventResult.ignored;
+    if ((meta || control) && key == LogicalKeyboardKey.keyW) {
       _send('exit');
       return KeyEventResult.handled;
     }
     _send('key', {
-      'keyId': event.logicalKey.keyId,
-      'meta': keys.isMetaPressed,
-      'control': keys.isControlPressed,
-      'shift': keys.isShiftPressed,
+      'keyId': key.keyId,
+      'meta': meta,
+      'control': control,
+      'shift': shift,
     });
     return KeyEventResult.handled;
   }
@@ -712,7 +728,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
 
   /// A slide in the deck's aspect letterboxed to fit the screen, mirroring the presenter's view.
   Widget _canvas(Slide slide) {
-    return LayoutBuilder(
+    return PresentationKeyScope.layout(
+      onKey: _handleLogicalKey,
       builder: (_, constraints) {
         final w = constraints.maxWidth;
         final h = constraints.maxHeight;
