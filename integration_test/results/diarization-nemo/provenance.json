@@ -1,0 +1,32 @@
+{
+  "source_commit": "660b57c5e94bf07fdbd5280e830a7f7d44b2472a",
+  "measured_at_utc": "2026-11-17T10:58:16.459842+00:00",
+  "source_sha256": {
+    "nemo_backend.py": "54cc37d990e1d9f7013bd97cb99a10c295840f244db769b8d1ce691b52b3f652",
+    "nemo_runtime.py": "0d0c6469933a0af72a9b785c9be8adc10b6379bbeef91d88ae48b332b6206103",
+    "nemo_worker.py": "43338a8da49577c57b721646bca3d0df87d7440e7d377fb33a7f13b10ba16c2b",
+    "nemo_word_alignment.py": "7d7c408bbab4c44d5094e0c72301641f696348509e4e5cb3b435830acf18fe63",
+    "nemo_server.py": "6a4e9576f2a92a2e34ec180b0100cfc155eca100fb1de98fe92bce2aaa9bf62d",
+    "nemo_model.json": "3edc95a7ebf6b2448e43aca31bf14607d2618a426d93d08818d35f7bd976738b"
+  },
+  "fixture_manifest_sha256": "e24088ac020482833c29a2c7fb10c1480e395a7d58489d1dd9d2a5c793c3cee4",
+  "runtime_scope": "fresh operator build; not an OciDeck release artifact",
+  "asr_model": "small, pinned MIT conversion in testbed/asr-multilingual/models.json",
+  "asr_compute": "CPU int8, four threads",
+  "diarization_compute": "native CPU, full-attention at <=360 s, stateful v3-offline after that",
+  "der_available": false,
+  "ui_scope": "native production transport/document rename-save-reopen; browser production transport/CORS/document-model only; not full release UI or browser file-save",
+  "physical_platform_scope": "native macOS arm64; Chromium/WebKit engines, not a universal hardware matrix",
+  "streaming_negative_control": "Known initial transition confusion retained; long clock/cancellation success does not assert zero speaker error",
+  "upstream_default_cli_control": "Separate initial native CLI build from the same pinned upstream revision; default v2-CallHome postprocessor. Not a paired speed comparison with configured server.",
+  "public_fixture_activity": {
+    "file": "streaming-activity.npz",
+    "shape": [
+      62557,
+      8
+    ],
+    "dtype": "float32",
+    "sha256": "e39f60d7938105021bc83e41d01317ec4dd5949fe20d6da11f1e68cdebecfd44",
+    "scope": "explicit public-fixture measurement only; operational requests delete activity and audio"
+  }
+}

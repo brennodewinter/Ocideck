@@ -1,0 +1,140 @@
+{
+  "scope": "real HTTP client and document model; not full release UI acceptance",
+  "fixture_sha256": "27b1730c35b0313a9a91db269427bdebc03b50c26b2b8d7df12130ce686d1b79",
+  "elapsed_ms": 6168,
+  "segments": [
+    {
+      "start": 0.92,
+      "end": 5.54,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 7.18,
+      "end": 7.46,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 7.46,
+      "end": 13.84,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 13.84,
+      "end": 15.06,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 16.68,
+      "end": 17.24,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 17.24,
+      "end": 19.54,
+      "speaker_ids": [
+        "nemo-2"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 20.66,
+      "end": 20.88,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 20.88,
+      "end": 24.9,
+      "speaker_ids": [
+        "nemo-2"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 24.9,
+      "end": 25.32,
+      "speaker_ids": [
+        "nemo-2"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 25.32,
+      "end": 25.56,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 25.56,
+      "end": 26.34,
+      "speaker_ids": [
+        "nemo-2"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 26.34,
+      "end": 27.04,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 27.04,
+      "end": 27.68,
+      "speaker_ids": [
+        "nemo-2"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 27.68,
+      "end": 27.92,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 27.92,
+      "end": 33.92,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 36.52,
+      "end": 41.18,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 42.8,
+      "end": 43.1,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 43.1,
+      "end": 50.7,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    }
+  ],
+  "document_rename_save_reopen": true,
+  "known_aba_ids_consistent": true,
+  "unknown_segments": 8,
+  "model_quality_claimed_by_client_probe": false,
+  "document_metadata_encoding": "plain-json"
+}

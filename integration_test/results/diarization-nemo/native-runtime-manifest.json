@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "purpose": "explicit operator reference server; not OciDeck release packaging",
+  "repository": "https://github.com/NVIDIA/NeMo-Speech.cpp.git",
+  "revision": "e790e463b2913cff9f989a3df224c587f14b4c5c",
+  "version": "0.3.0",
+  "toolchain": {
+    "clang": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+    "macos_sdk": "27.2",
+    "cmake": "cmake version 4.5.0",
+    "ninja": "1.13.2.git.kitware.jobserver-pipe-1"
+  },
+  "platform": "macos-arm64",
+  "preset": "metal-diar",
+  "cmake_flags": [
+    "-DNEMO_SPEECH_BUILD_CLI=OFF",
+    "-DNEMO_SPEECH_BUILD_MIC_CAPTURE=OFF",
+    "-DBUILD_SHARED_LIBS=OFF",
+    "-DGGML_OPENMP=OFF",
+    "-DCMAKE_C_COMPILER=/usr/bin/clang",
+    "-DCMAKE_CXX_COMPILER=/usr/bin/clang++"
+  ],
+  "source_patches": "Pinned upstream patches/ applied by its configure step",
+  "submodules": [
+    " bd4f514db14d87fded667787a7a963bfbaa98e89 llama.cpp (bd4f514)",
+    "-71df98266725320a6b6b3a9f32a6da832dc93691 proto/riva-common",
+    "-62d899feac3cf9215a55f2b43da250fdd98d2156 third_party/cpp-httplib",
+    "-b3602bef7d1f67521a61788a74fb5801a0e62cd3 third_party/cppjieba",
+    "-49e163ab1e7b8108922512c294ab8513b89f404c third_party/flashlight-text",
+    "-4cb443e60b7bf2c0ddf3c745378f76cb59e254e5 third_party/kenlm",
+    "-1e52154e6677d02dcb4b7f15453e65b5ca1cb6aa third_party/open_jtalk"
+  ],
+  "library": "lib/libnemo_speech_asr_c.2.dylib",
+  "files": [
+    {
+      "file": "lib/libnemo_speech_asr_c.2.dylib",
+      "bytes": 97504,
+      "sha256": "5dedba0ddc90e3fb14bb659196351623034224cebebc534afd340c3ac3d366d6",
+      "architectures": [
+        "arm64"
+      ],
+      "linked_libraries": [
+        "\t@rpath/libnemo_speech_asr_c.2.dylib (compatibility version 2.0.0, current version 0.0.0)",
+        "\t@rpath/libnemo_speech_asr.dylib (compatibility version 0.0.0, current version 0.0.0)",
+        "\t/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate (compatibility version 1.0.0, current version 4.0.0)",
+        "\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.40.3)",
+        "\t/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (compatibility version 300.0.0, current version 5027.1.8)",
+        "\t/System/Library/Frameworks/Metal.framework/Versions/A/Metal (compatibility version 1.0.0, current version 383.1.0)",
+        "\t/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit (compatibility version 1.0.0, current version 174.4.0)",
+        "\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.32.0)"
+      ]
+    },
+    {
+      "file": "lib/libnemo_speech_asr.dylib",
+      "bytes": 5788792,
+      "sha256": "3a743de750bfb1cb748435a9aa0fa4767650635027ebf530a94d80a7b5dbec84",
+      "architectures": [
+        "arm64"
+      ],
+      "linked_libraries": [
+        "\t@rpath/libnemo_speech_asr.dylib (compatibility version 0.0.0, current version 0.0.0)",
+        "\t/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate (compatibility version 1.0.0, current version 4.0.0)",
+        "\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.40.3)",
+        "\t/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (compatibility version 300.0.0, current version 5027.1.8)",
+        "\t/System/Library/Frameworks/Metal.framework/Versions/A/Metal (compatibility version 1.0.0, current version 383.1.0)",
+        "\t/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit (compatibility version 1.0.0, current version 174.4.0)",
+        "\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.32.0)",
+        "\t/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 5027.1.8)",
+        "\t/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 228.0.0)"
+      ]
+    }
+  ],
+  "notice_root": "share/licenses/nemo-speech",
+  "notice_sha256": {
+    "share/licenses/nemo-speech/LICENSE": "eaaca34b26b27c7be5a5099a0b9ddf9913f2db0aa96f6d5854435f2916d6fdc3",
+    "share/licenses/nemo-speech/NOTICE": "d5ea773d67035e676503579ecf7d5836a124649d7fe99d59ec3c50cd101e1a80",
+    "share/licenses/nemo-speech/THIRD_PARTY_NOTICES.md": "209012f6c9cef085efc58ebf3609d502eb8446db4580bd5267fa36b285b23d4f",
+    "share/licenses/nemo-speech/third_party/ggml/LICENSE": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+    "share/licenses/nemo-speech/third_party/miniaudio/LICENSE": "bde09ed161fef45da2194cba70601aab33ca6fdfe6eed2e3d95efd15b48561f9",
+    "share/licenses/nemo-speech/third_party/sentencepiece/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "share/licenses/nemo-speech/third_party/sentencepiece/absl-LICENSE": "d3e2f59e1d71176dfdb555ece6a41f7a5aa0f52ff21211010ace314f57695f6b",
+    "share/licenses/nemo-speech/third_party/sentencepiece/darts-clone-LICENSE": "155f59997298ee336602c49f9c1110f268ac394ca2197eb02647a3555935ad52",
+    "share/licenses/nemo-speech/third_party/sentencepiece/protobuf-lite-LICENSE": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d"
+  }
+}

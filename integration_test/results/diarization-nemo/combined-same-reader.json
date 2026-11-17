@@ -1,0 +1,425 @@
+{
+  "scope": "real language-switch/diarization composition on the same documented reader; synthetic splice, no general quality claim",
+  "fixture_sha256": "df4b6a92d7a8ef9b5ade82cddf7c4351421c7dfbd4c9782fe5f32ad9c1dc5190",
+  "language_mode_applied": true,
+  "diarization_applied": true,
+  "languages": [
+    "en",
+    "nl"
+  ],
+  "asr_text_preserved": true,
+  "speaker_ids": [
+    "nemo-1"
+  ],
+  "segments": [
+    {
+      "text": " Wie",
+      "start": 0.272,
+      "end": 0.752,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " moet er uitgenodigd worden, vroegt de nachttaal?",
+      "start": 0.752,
+      "end": 3.0519999999999996,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Op",
+      "start": 3.824,
+      "end": 4.284,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " het grote bal kan iedereen komen, zelfs mensen, wanneer zij slechts in een slaap spreken",
+      "start": 4.284,
+      "end": 8.844,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " om iets dergelijks kunnen doen, wat in onze geest valt.",
+      "start": 8.844,
+      "end": 11.424,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Maar bij het eerste feest moet er een strenge keuze gedaan worden.",
+      "start": 12.024,
+      "end": 15.064,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Wij willen alleen de allervoornaamste hebben.",
+      "start": 15.484,
+      "end": 17.404,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " This",
+      "start": 18.896,
+      "end": 19.476,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " is a picture of kids and cats.",
+      "start": 19.476,
+      "end": 21.496000000000002,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " They",
+      "start": 22.192,
+      "end": 22.652,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " are twins and they live in Holland.",
+      "start": 22.652,
+      "end": 24.492,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Kid",
+      "start": 25.2,
+      "end": 25.62,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " is de boy en cat is de girl.",
+      "start": 25.62,
+      "end": 27.72,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Of",
+      "start": 29.712,
+      "end": 30.212,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " course, their real names are not kid and cat at all.",
+      "start": 30.212,
+      "end": 33.052,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Their",
+      "start": 33.584,
+      "end": 34.024,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " real names are Christopher and Catwina.",
+      "start": 34.024,
+      "end": 37.004000000000005,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " But",
+      "start": 38.096,
+      "end": 38.57599999999999,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " you can see for yourself that such long names as that would never in a world fit such a short pair of twins.",
+      "start": 38.57599999999999,
+      "end": 45.035999999999994,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Dus",
+      "start": 45.728,
+      "end": 46.188,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " de Twins' moeder, fraf verder, zet.",
+      "start": 46.188,
+      "end": 48.348,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " They",
+      "start": 49.136,
+      "end": 49.596000000000004,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " cannot be called Christopher and Katrina until they are four and a half feet high.",
+      "start": 49.596000000000004,
+      "end": 54.416000000000004,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Now",
+      "start": 56.208,
+      "end": 56.788,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " it takes a long time to grow 4 and a half feet of boy and girl.",
+      "start": 56.788,
+      "end": 60.668,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " You",
+      "start": 61.296,
+      "end": 61.775999999999996,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " know, chickens and puppies and colts and kittens always grow up much faster than twins.",
+      "start": 61.775999999999996,
+      "end": 67.516,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Kit",
+      "start": 68.432,
+      "end": 68.892,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " and Kat ate a great many breakfasts and dinners and suppers",
+      "start": 68.892,
+      "end": 72.592,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " and played a great many plays and had a great many happy days",
+      "start": 72.592,
+      "end": 76.552,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " while they were growing up to their names.",
+      "start": 76.552,
+      "end": 78.632,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " I",
+      "start": 79.296,
+      "end": 79.736,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " will tell you about some of them.",
+      "start": 79.736,
+      "end": 81.256,
+      "language": "en",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Wie",
+      "start": 82.928,
+      "end": 83.408,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " moet er uitgenodigd worden? Vroeg de nachttaal.",
+      "start": 83.408,
+      "end": 85.708,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Op",
+      "start": 86.48,
+      "end": 86.92,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " het grote bal kan iedereen komen, zelfs mensen, wanneer zij slechts in een slaap spreken",
+      "start": 86.92,
+      "end": 91.5,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " of iets dergelijks kunnen doen, wat in onze geest valt.",
+      "start": 91.5,
+      "end": 94.08,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Maar bij het eerste feest moet een strenge keuze gedaan worden.",
+      "start": 94.68,
+      "end": 97.72,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "text": " Wij willen alleen de aller voortnaamste hebben.",
+      "start": 98.14,
+      "end": 100.06,
+      "language": "nl",
+      "language_uncertain": true,
+      "speaker_ids": [
+        "nemo-1"
+      ],
+      "speaker_uncertain": true
+    }
+  ],
+  "probe_pass": true
+}

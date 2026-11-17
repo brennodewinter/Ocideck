@@ -286,7 +286,7 @@ language switching. Available languages follow actual engine capabilities,
 including Polish where supported. Local whisper.cpp/WASM does not yet offer
 this mode; multilingual weights alone do not redetect each passage.
 
-The optional [local reference experiment](../testbed/asr-multilingual/README.md)
+The optional [local reference experiment](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/asr-multilingual/README.md)
 processes speech regions independently without a translation request. OciDeck
 installs/downloads nothing for it; existing consent for this file and destination
 still applies. Long later NL/EN and PL/EN blocks improve in the measured fixtures,
@@ -297,7 +297,7 @@ and language tags remain inspectable document metadata.
 
 ## Optional speaker diarization through a local server
 
-An explicitly installed [Nemotron/Whisper loopback server](../testbed/asr-diarization/NEMO_README.md)
+An explicitly installed [Nemotron/Whisper loopback server](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/asr-diarization/NEMO_README.md)
 has been tested on native macOS arm64. It needs no pre-existing ASR server,
 model account or gated pyannote access. OciDeck does not install/select it
 implicitly. Configure OciDeck ASR v1, wait for capabilities, then choose
@@ -308,5 +308,6 @@ Assigned speaker numbers remain stable on return in the small NL/EN fixtures.
 Uncertain passages stay unknown or carry `(?)`; roughly a quarter stays unknown
 in the hardest Dutch fixture. Overlap can carry multiple IDs. These are no
 person names or general accuracy guarantee. Visible labels can be renamed;
-original times/cluster IDs remain document metadata. The complete release-UI/
-hardware matrix is separate from these scoped client/model measurements.
+original times/cluster IDs remain document metadata. Long streaming input can misassign a few seconds at the first transition;
+review the labels. The complete release-UI/hardware matrix is separate from
+these scoped client/model measurements.

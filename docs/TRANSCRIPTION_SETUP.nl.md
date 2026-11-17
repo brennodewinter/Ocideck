@@ -299,7 +299,7 @@ mogelijkheden, waaronder Pools waar ondersteund. Lokale whisper.cpp/WASM biedt
 de taalwisselmodus nog niet; een meertalig model alleen herdetecteert niet
 vanzelf de taal bij elke passage.
 
-De optionele [lokale referentieproef](../testbed/asr-multilingual/README.md)
+De optionele [lokale referentieproef](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/asr-multilingual/README.md)
 verwerkt spraakregio's afzonderlijk zonder vertaalopdracht. Zij downloadt of
 installeert niets vanuit de app. De bestaande toestemming voor dit bestand
 en deze bestemming blijft vereist. Lange NL/EN- en PL/EN-blokken verbeteren
@@ -312,7 +312,7 @@ taaltags blijven als inspecteerbare documentmetadata behouden.
 ## Optionele sprekerdiarisatie via een lokale server
 
 Voor native macOS arm64 is een expliciet te installeren
-[Nemotron/Whisper-loopbackserver](../testbed/asr-diarization/NEMO_README.md)
+[Nemotron/Whisper-loopbackserver](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/asr-diarization/NEMO_README.md)
 beproefd. Er is geen bestaande ASR-server, modelaccount of gated pyannote-toegang
 voor nodig. De app installeert of kiest deze route niet vanzelf. Configureer
 OciDeck ASR v1, wacht op de capabilitycontrole en kies **Sprekers onderscheiden**;
@@ -323,4 +323,6 @@ Onzekere passages worden onbekend of krijgen `(?)`; in het moeilijkste NL-fragme
 blijft ongeveer een kwart onbekend. Overlap kan meerdere IDs krijgen. Dit zijn
 geen persoonsnamen of algemene nauwkeurigheidsgarantie. Je kunt zichtbare labels
 zelf hernoemen; oorspronkelijke tijden en cluster-IDs blijven documentmetadata.
-De volledige release-UI-/hardwarematrix staat los van deze beperkte client-/modelproeven.
+Bij lange streaminginvoer kan een eerste overgang enkele seconden verkeerd
+worden toegewezen; controleer de labels. De volledige release-UI-/hardwarematrix
+staat los van deze beperkte client-/modelproeven.

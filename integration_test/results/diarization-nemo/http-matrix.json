@@ -1,0 +1,1303 @@
+{
+  "scope": "real loopback HTTP, actual Whisper small and native Nemotron activity; not full release UI",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "device": "ASR CPU/int8/4 threads; diarizer native CPU",
+  "source_manifest": {
+    "license": "CC-BY-4.0 source corpora; original synthetic backing: CC0",
+    "nl_source": "https://huggingface.co/datasets/facebook/multilingual_librispeech/tree/2e83e61823b4c47dcbcb1980bb88601274127609",
+    "en_source": "https://www.openslr.org/12/",
+    "corpus_sha256": {
+      "nl-test.parquet": "feb88a282be746e7c14e1f09c017b4f69b07df9c25c94a3943eaac5ca7794ad5",
+      "en-test-clean.tar.gz": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23"
+    },
+    "selected": {
+      "nl": {
+        "3034": {
+          "id": "3034_2211_000000",
+          "path": "nl-3034.opus",
+          "sha256": "1d2db1334465ba4c53b1b49a47dfccb62b5e126ce2752337b16b82f50d68029e"
+        },
+        "3798": {
+          "id": "3798_2211_000000",
+          "path": "nl-3798.opus",
+          "sha256": "495fab7ced477fd47ffa7ddab5eff3c32f01af6269e8fbd7d3c92c2054d498e9"
+        },
+        "4429": {
+          "id": "4429_3478_000000",
+          "path": "nl-4429.opus",
+          "sha256": "0b9f2d947b355518ddcafd0dbd92c164a93f9bde2443eef06b17b41c8fb08fbf"
+        }
+      },
+      "en": {
+        "6930": {
+          "member": "LibriSpeech/test-clean/6930/75918/6930-75918-0000.flac",
+          "path": "en-6930.flac",
+          "sha256": "9ce35224156f071ab58eb7feb8a5ceae600f6f9f353da2a6cbf797b6b1ac8a23"
+        },
+        "1320": {
+          "member": "LibriSpeech/test-clean/1320/122617/1320-122617-0003.flac",
+          "path": "en-1320.flac",
+          "sha256": "bbe9ef85bbe228c73a414f064c9bd992c94135d73f9900b33104ad93c07d0594"
+        },
+        "5639": {
+          "member": "LibriSpeech/test-clean/5639/40744/5639-40744-0032.flac",
+          "path": "en-5639.flac",
+          "sha256": "ecba1c65406f3d2fdfe383a22385dfe19cc117b71b126817f5e20df791f22a50"
+        }
+      }
+    },
+    "cases": [
+      {
+        "file": "nl-single.wav",
+        "language": "nl",
+        "layout": "single",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          }
+        ],
+        "sha256": "bbc1a49504d61ffd68d0d220f457d2477fc959eb10a42e08960ae46d34b70116",
+        "duration_s": 16.49
+      },
+      {
+        "file": "nl-aba.wav",
+        "language": "nl",
+        "layout": "aba",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          },
+          {
+            "start": 16.49,
+            "end": 34.64,
+            "source_ids": [
+              "3798"
+            ]
+          },
+          {
+            "start": 35.64,
+            "end": 51.13,
+            "source_ids": [
+              "3034"
+            ]
+          }
+        ],
+        "sha256": "27b1730c35b0313a9a91db269427bdebc03b50c26b2b8d7df12130ce686d1b79",
+        "duration_s": 52.13
+      },
+      {
+        "file": "nl-three.wav",
+        "language": "nl",
+        "layout": "three",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          },
+          {
+            "start": 16.49,
+            "end": 34.64,
+            "source_ids": [
+              "3798"
+            ]
+          },
+          {
+            "start": 35.64,
+            "end": 45.75,
+            "source_ids": [
+              "4429"
+            ]
+          }
+        ],
+        "sha256": "bb6badd4b08937d1ec3be70df4166c3fb2e115fc6818ba46f1cdee6e1353d974",
+        "duration_s": 46.75
+      },
+      {
+        "file": "nl-overlap.wav",
+        "language": "nl",
+        "layout": "overlap",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 15.49,
+            "source_ids": [
+              "3034",
+              "3798"
+            ]
+          }
+        ],
+        "sha256": "47406cffd34d73737dae2e0e6cc2dad871a5dc01c6f34a824ab33da1810b3303",
+        "duration_s": 15.49
+      },
+      {
+        "file": "nl-stereo-downmix.wav",
+        "language": "nl",
+        "layout": "stereo-downmix",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 15.49,
+            "source_ids": [
+              "3034",
+              "3798"
+            ]
+          }
+        ],
+        "sha256": "47406cffd34d73737dae2e0e6cc2dad871a5dc01c6f34a824ab33da1810b3303",
+        "duration_s": 15.49
+      },
+      {
+        "file": "nl-music.wav",
+        "language": "nl",
+        "layout": "music",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          }
+        ],
+        "sha256": "17ca71209ac746d7d6b69e1aaf0d561008228c439fdfd81e2e37f43e4845424a",
+        "duration_s": 15.49
+      },
+      {
+        "file": "en-single.wav",
+        "language": "en",
+        "layout": "single",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          }
+        ],
+        "sha256": "f5ad2e4643741fabebdfc566efde7b91fc1454948fb1d4dc1661a9ca7e4ee560",
+        "duration_s": 4.505
+      },
+      {
+        "file": "en-aba.wav",
+        "language": "en",
+        "layout": "aba",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          },
+          {
+            "start": 4.505,
+            "end": 10.79,
+            "source_ids": [
+              "1320"
+            ]
+          },
+          {
+            "start": 11.79,
+            "end": 15.295,
+            "source_ids": [
+              "6930"
+            ]
+          }
+        ],
+        "sha256": "307084acd4d750042c94114ce684d65e278fdd3a0dedbfac390ce35f4053cf92",
+        "duration_s": 16.295
+      },
+      {
+        "file": "en-three.wav",
+        "language": "en",
+        "layout": "three",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          },
+          {
+            "start": 4.505,
+            "end": 10.79,
+            "source_ids": [
+              "1320"
+            ]
+          },
+          {
+            "start": 11.79,
+            "end": 29.22,
+            "source_ids": [
+              "5639"
+            ]
+          }
+        ],
+        "sha256": "e9643602096c01d7c071e06735404b844aa881dfe09fc9853378f97cb37bd661",
+        "duration_s": 30.22
+      },
+      {
+        "file": "en-overlap.wav",
+        "language": "en",
+        "layout": "overlap",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 3.505,
+            "source_ids": [
+              "6930",
+              "1320"
+            ]
+          }
+        ],
+        "sha256": "20e351628541594e3aca8f9901a5b837d0007c5d668bb79248221d13a3094304",
+        "duration_s": 3.505
+      },
+      {
+        "file": "en-stereo-downmix.wav",
+        "language": "en",
+        "layout": "stereo-downmix",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 3.505,
+            "source_ids": [
+              "6930",
+              "1320"
+            ]
+          }
+        ],
+        "sha256": "20e351628541594e3aca8f9901a5b837d0007c5d668bb79248221d13a3094304",
+        "duration_s": 3.505
+      },
+      {
+        "file": "en-music.wav",
+        "language": "en",
+        "layout": "music",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          }
+        ],
+        "sha256": "0b26250315ab3a226c9a72a778e50ae63baef1b52fd69de992ef922208a2ca25",
+        "duration_s": 3.505
+      }
+    ],
+    "reference_limit": "Source-span boundaries include natural pauses. No hand-aligned speech activity; do not report these as DER references."
+  },
+  "der": null,
+  "der_unavailable_reason": "No hand-aligned speech/overlap activity reference; source intervals include natural pauses.",
+  "memory_metric": "server process RSS snapshots, not peak or combined child memory",
+  "server_rss_before_bytes": 320716800,
+  "cases": [
+    {
+      "known_source_occurrences": {
+        "3034": [
+          [
+            "nemo-1"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1"
+      ],
+      "unknown_output_tokens": 1,
+      "total_output_tokens": 28,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "nl-single.wav",
+      "layout": "single",
+      "duration_seconds": 16.49,
+      "seconds": 2.3249294590000003,
+      "without_diarization_seconds": 2.2056158750000003,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Arm kleinhaft, zei de ijk, dat was toch een al te kort leven.",
+          "start": 0.8800000000000008,
+          "end": 5.54,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " En",
+          "start": 7.18,
+          "end": 7.46,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " op iedere zomerdag werd dezelfde dans, dezelfde toespraak, hetzelfde antwoord en hetzelfde inslapen herhaald.",
+          "start": 7.46,
+          "end": 15.06,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {
+        "3034": [
+          [
+            "nemo-1"
+          ],
+          [
+            "nemo-1"
+          ]
+        ],
+        "3798": [
+          [
+            "nemo-2"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2"
+      ],
+      "unknown_output_tokens": 28,
+      "total_output_tokens": 110,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "nl-aba.wav",
+      "layout": "aba",
+      "duration_seconds": 52.13,
+      "seconds": 6.594384874999999,
+      "without_diarization_seconds": 5.933770458,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Arm klein haft, zei de eik, dat was toch een al te kort leven.",
+          "start": 0.9199999999999977,
+          "end": 5.54,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " En",
+          "start": 7.18,
+          "end": 7.46,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " op iedere zomerdag werd dezelfde dans, dezelfde toespraak, hetzelfde antwoord en hetzelfde",
+          "start": 7.46,
+          "end": 13.84,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " inslaapen herhaald.",
+          "start": 13.84,
+          "end": 15.06,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Wie",
+          "start": 16.68,
+          "end": 17.24,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " moet er uitgenodigd worden, vroeg de nachttaal?",
+          "start": 17.24,
+          "end": 19.54,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Op het",
+          "start": 20.66,
+          "end": 20.88,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " grote bal kan iedereen komen, zelfs mensen, wanneer zij slechts in een slaap",
+          "start": 20.88,
+          "end": 24.9,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " spreken",
+          "start": 24.9,
+          "end": 25.32,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " of",
+          "start": 25.32,
+          "end": 25.56,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " iets dergelijks kunnen",
+          "start": 25.56,
+          "end": 26.34,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " doen, wat",
+          "start": 26.34,
+          "end": 27.04,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " in onze geest",
+          "start": 27.04,
+          "end": 27.68,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " valt.",
+          "start": 27.68,
+          "end": 27.92,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Maar wij het eerste feest moeten een strenge keuze gedaan worden. Wij willen alleen de alle voornaams te hebben.",
+          "start": 27.92,
+          "end": 33.92,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Arm kleinhaft, zei de eik, dat was toch een al te kort leven.",
+          "start": 36.52,
+          "end": 41.18,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " En",
+          "start": 42.8,
+          "end": 43.1,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " op iedere zomerdag werd dezelfde dans, dezelfde toespraak, hetzelfde antwoord en hetzelfde inslapen herhaald.",
+          "start": 43.1,
+          "end": 50.7,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {
+        "3034": [
+          [
+            "nemo-1"
+          ]
+        ],
+        "3798": [
+          [
+            "nemo-2"
+          ]
+        ],
+        "4429": [
+          [
+            "nemo-3"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2",
+        "nemo-3"
+      ],
+      "unknown_output_tokens": 3,
+      "total_output_tokens": 107,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "nl-three.wav",
+      "layout": "three",
+      "duration_seconds": 46.75,
+      "seconds": 6.043441040999998,
+      "without_diarization_seconds": 5.540262625,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Arm klein haft, zei de eik, dat was toch een al te kort leven.",
+          "start": 0.9199999999999977,
+          "end": 5.54,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " En",
+          "start": 7.18,
+          "end": 7.46,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " op iedere zomerdag werd dezelfde dans, dezelfde toespraak, hetzelfde antwoord en hetzelfde",
+          "start": 7.46,
+          "end": 13.84,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " inslaapen herhaald.",
+          "start": 13.84,
+          "end": 15.06,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Wie",
+          "start": 16.68,
+          "end": 17.24,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " moet er uitgenodigd worden, vroeg de nachttaal?",
+          "start": 17.24,
+          "end": 19.54,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Op het grote bal kan iedereen komen, zelfs mensen, wanneer zij slechts in een slaap",
+          "start": 20.66,
+          "end": 24.9,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " spreken of iets dergelijks kunnen doen, wat in onze geest valt.",
+          "start": 24.9,
+          "end": 27.92,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Maar bij het eerste feest moet er een strenge keuze gedaan worden.",
+          "start": 27.92,
+          "end": 31.56,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Wij willen alleen de allervoornaams te hebben.",
+          "start": 31.98,
+          "end": 33.9,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Ik",
+          "start": 36.38,
+          "end": 36.96,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " heb hier enige data en feiten uit het leven van de dodenman, kapitein Peter Cary.",
+          "start": 36.96,
+          "end": 41.54,
+          "speaker_ids": [
+            "nemo-3"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Hij werd in 45 geboren, was dus 50 jaar.",
+          "start": 42.36,
+          "end": 45.1,
+          "speaker_ids": [
+            "nemo-3"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {},
+      "assigned_ids_consistent": null,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2"
+      ],
+      "unknown_output_tokens": 1,
+      "total_output_tokens": 42,
+      "multi_id_segments": 5,
+      "overlap_detected": true,
+      "fixture_layout_pass": true,
+      "file": "nl-overlap.wav",
+      "layout": "overlap",
+      "duration_seconds": 15.49,
+      "seconds": 2.789379541999999,
+      "without_diarization_seconds": 2.375645042000002,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Wie",
+          "start": 0.0,
+          "end": 0.76,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " moet er",
+          "start": 0.76,
+          "end": 1.1,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " uitgenodigd worden, vroeg de nachttaal?",
+          "start": 1.1,
+          "end": 3.26,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Het grote",
+          "start": 3.76,
+          "end": 4.68,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " bal kan iedereen komen,",
+          "start": 4.68,
+          "end": 5.92,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " zelfs mensen, wanneer",
+          "start": 6.18,
+          "end": 7.4,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " ze slecht in de slaap vrekken",
+          "start": 7.4,
+          "end": 8.9,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " om het zeer geluks kunnen doen, op de ongegeven spraak, waarbij het eerste feest een strenge keuze",
+          "start": 8.9,
+          "end": 14.5,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " gedaan wordt.",
+          "start": 14.5,
+          "end": 15.04,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {},
+      "assigned_ids_consistent": null,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2"
+      ],
+      "unknown_output_tokens": 1,
+      "total_output_tokens": 42,
+      "multi_id_segments": 5,
+      "overlap_detected": true,
+      "fixture_layout_pass": true,
+      "file": "nl-stereo-downmix.wav",
+      "layout": "stereo-downmix",
+      "duration_seconds": 15.49,
+      "seconds": 2.891191124999999,
+      "without_diarization_seconds": 2.5452176669999957,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Wie",
+          "start": 0.0,
+          "end": 0.76,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " moet er",
+          "start": 0.76,
+          "end": 1.1,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " uitgenodigd worden, vroeg de nachttaal?",
+          "start": 1.1,
+          "end": 3.26,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Het grote",
+          "start": 3.76,
+          "end": 4.68,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " bal kan iedereen komen,",
+          "start": 4.68,
+          "end": 5.92,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " zelfs mensen, wanneer",
+          "start": 6.18,
+          "end": 7.4,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " ze slecht in de slaap vrekken",
+          "start": 7.4,
+          "end": 8.9,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " om het zeer geluks kunnen doen, op de ongegeven spraak, waarbij het eerste feest een strenge keuze",
+          "start": 8.9,
+          "end": 14.5,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " gedaan wordt.",
+          "start": 14.5,
+          "end": 15.04,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {
+        "3034": [
+          [
+            "nemo-1"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1"
+      ],
+      "unknown_output_tokens": 1,
+      "total_output_tokens": 28,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "nl-music.wav",
+      "layout": "music",
+      "duration_seconds": 15.49,
+      "seconds": 2.2444230000000047,
+      "without_diarization_seconds": 2.0601141249999984,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Arm kleinhaft, zei de eik, dat was toch een al te kort leven.",
+          "start": 0.8800000000000008,
+          "end": 5.56,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " En",
+          "start": 7.2,
+          "end": 7.46,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " op iedere zomerdag werd dezelfde dans, dezelfde toespraak, hetzelfde antwoord en hetzelfde inslapen herhaald.",
+          "start": 7.46,
+          "end": 15.04,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {
+        "6930": [
+          [
+            "nemo-1"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1"
+      ],
+      "unknown_output_tokens": 0,
+      "total_output_tokens": 8,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "en-single.wav",
+      "layout": "single",
+      "duration_seconds": 4.505,
+      "seconds": 1.3081402090000012,
+      "without_diarization_seconds": 1.132517374999999,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Concord returned to its place amidst the tents.",
+          "start": 0.0,
+          "end": 3.1,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {
+        "6930": [
+          [
+            "nemo-1"
+          ],
+          [
+            "nemo-1"
+          ]
+        ],
+        "1320": [
+          [
+            "nemo-2"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2"
+      ],
+      "unknown_output_tokens": 1,
+      "total_output_tokens": 38,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "en-aba.wav",
+      "layout": "aba",
+      "duration_seconds": 16.295,
+      "seconds": 2.000427416000001,
+      "without_diarization_seconds": 1.726519875000001,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Concorde returned to its place amidst the tents.",
+          "start": 0.0,
+          "end": 3.12,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " There",
+          "start": 4.36,
+          "end": 4.96,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " was something in his air and manner that betrayed to the scout the utter confusion of the state of his mind.",
+          "start": 4.96,
+          "end": 10.28,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " Concorde returned to its place amidst the tents.",
+          "start": 12.28,
+          "end": 14.9,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {
+        "6930": [
+          [
+            "nemo-1"
+          ]
+        ],
+        "1320": [
+          [
+            "nemo-2"
+          ]
+        ],
+        "5639": [
+          [
+            "nemo-3"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2",
+        "nemo-3"
+      ],
+      "unknown_output_tokens": 2,
+      "total_output_tokens": 85,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "en-three.wav",
+      "layout": "three",
+      "duration_seconds": 30.22,
+      "seconds": 4.048278083,
+      "without_diarization_seconds": 3.875017958000001,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Concord returned to its place amidst the tents.",
+          "start": 0.0,
+          "end": 3.12,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " There",
+          "start": 4.44,
+          "end": 4.96,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " was something in his air and manner that betrayed to the scout the utter confusion",
+          "start": 4.96,
+          "end": 9.08,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " of the state of his mind.",
+          "start": 9.08,
+          "end": 10.3,
+          "speaker_ids": [
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " For",
+          "start": 11.7,
+          "end": 12.06,
+          "speaker_ids": [],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " God's sake, my lady mother, give me a wife who would be an agreeable companion,",
+          "start": 12.06,
+          "end": 16.14,
+          "speaker_ids": [
+            "nemo-3"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " not one who will disgust me so that we may both bear evenly and with mutual goodwill",
+          "start": 16.76,
+          "end": 22.34,
+          "speaker_ids": [
+            "nemo-3"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " the yoke imposed on us by heaven, instead of pulling this way and that way and fretting",
+          "start": 22.34,
+          "end": 27.82,
+          "speaker_ids": [
+            "nemo-3"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " each other to death.",
+          "start": 27.82,
+          "end": 28.64,
+          "speaker_ids": [
+            "nemo-3"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {},
+      "assigned_ids_consistent": null,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2"
+      ],
+      "unknown_output_tokens": 0,
+      "total_output_tokens": 14,
+      "multi_id_segments": 1,
+      "overlap_detected": true,
+      "fixture_layout_pass": true,
+      "file": "en-overlap.wav",
+      "layout": "overlap",
+      "duration_seconds": 3.505,
+      "seconds": 1.3352118330000025,
+      "without_diarization_seconds": 1.136716333999999,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " There was",
+          "start": 0.0,
+          "end": 0.6,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " something in his air in the manner that betrayed to the scout",
+          "start": 0.6,
+          "end": 3.26,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {},
+      "assigned_ids_consistent": null,
+      "distinct_ids": [
+        "nemo-1",
+        "nemo-2"
+      ],
+      "unknown_output_tokens": 0,
+      "total_output_tokens": 14,
+      "multi_id_segments": 1,
+      "overlap_detected": true,
+      "fixture_layout_pass": true,
+      "file": "en-stereo-downmix.wav",
+      "layout": "stereo-downmix",
+      "duration_seconds": 3.505,
+      "seconds": 1.338167458000001,
+      "without_diarization_seconds": 1.1341981249999975,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " There was",
+          "start": 0.0,
+          "end": 0.6,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "text": " something in his air in the manner that betrayed to the scout",
+          "start": 0.6,
+          "end": 3.26,
+          "speaker_ids": [
+            "nemo-1",
+            "nemo-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "known_source_occurrences": {
+        "6930": [
+          [
+            "nemo-1"
+          ]
+        ]
+      },
+      "assigned_ids_consistent": true,
+      "distinct_ids": [
+        "nemo-1"
+      ],
+      "unknown_output_tokens": 0,
+      "total_output_tokens": 8,
+      "multi_id_segments": 0,
+      "overlap_detected": null,
+      "fixture_layout_pass": true,
+      "file": "en-music.wav",
+      "layout": "music",
+      "duration_seconds": 3.505,
+      "seconds": 1.3857021250000088,
+      "without_diarization_seconds": 1.1362824590000002,
+      "asr_text_unchanged": true,
+      "labels_absent_when_disabled": true,
+      "segments": [
+        {
+          "text": " Concord returned to its place amidst the tents.",
+          "start": 0.0,
+          "end": 3.08,
+          "speaker_ids": [
+            "nemo-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "server_rss_after_bytes": 997801984,
+  "fixture_matrix_pass": true,
+  "general_quality_guarantee": false
+}

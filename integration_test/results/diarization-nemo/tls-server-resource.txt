@@ -1,0 +1,21 @@
+time: command terminated abnormally
+     1614.73 real        44.89 user         5.26 sys
+           971735040  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              193161  page reclaims
+                8517  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  44  messages sent
+                 483  messages received
+                   0  signals received
+                 206  voluntary context switches
+              991986  involuntary context switches
+        580440369543  instructions retired
+        200602005675  cycles elapsed
+           967018248  peak memory footprint
+/opt/homebrew/Cellar/python@3.13/3.13.18/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:479: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-ykz9t5a1'}
+  warnings.warn(

@@ -31,6 +31,15 @@ ASR-modellen zijn niet bewezen. Het CLI-argument `--backend metal` is een
 experimentele operatoroptie; de end-to-end-matrix gebruikt CPU. Er is geen
 cloudfallback en de server bindt uitsluitend aan `127.0.0.1`.
 
+
+De lange streamingcontrole is afzonderlijk beoordeeld. In de eerste wissel van
+een herhaalde NL A–B–A-bron wordt circa 2,8 seconden modelactiviteit in het broninterval van de tweede
+stem nog aan het eerste cluster gekoppeld; latere herhalingen behouden de
+verwachte IDs. Dat is een concrete fout, niet meegerekend als onbekend of
+verborgen achter een gemiddelde. De korte fixturematrix gebruikt volledige
+aandacht; de lange proces-/klokproef bewijst geen gelijke streamingnauwkeurigheid.
+Alle labels blijven daarom onzekere modeluitvoer en verdienen menselijke controle.
+
 ## Bewuste installatie
 
 Vereist native Xcode-commandlinetools, Git, CMake ≥3.26 en Python 3.13. De gemeten
@@ -137,7 +146,8 @@ OUTPUT` aan (eventueel NODE_PATH). Geen fakeprovider of stille skip als de
 fixture/server/browser ontbreekt. Proeven voor lange invoer en annulering:
 `nemo_cancel_probe.py RUNTIME MODEL LANGE_WAV OUTPUT` en
 `nemo_http_cancel_probe.py LANGE_WAV EIGEN_SERVER_PID OUTPUT`.
-De herhaalde lange fixture dient proces-/klokcontrole, geen natuurlijke gespreksevaluatie.
+Maak de herhaalde controles met `nemo_process_fixtures.py FIXTURES OUTPUT`.
+Deze lange fixture dient proces-/klokcontrole, geen natuurlijke gespreksevaluatie.
 
 ## Exacte licentie- en distributiegrens
 
@@ -160,3 +170,8 @@ Dit alles is een **operatorinstallatie buiten de apprelease**. Er is geen nieuwe
 BundledLicenses-/SBOM-goedkeuring voor het meeleveren van willekeurige helpers.
 Voor toekomstige distributie in OciDeck blijft de volledige artefact-/noticegate
 uit [LICENSE_COMPLIANCE.md](../../docs/LICENSE_COMPLIANCE.md) vereist.
+
+De gecombineerde protocolproef `nemo_combined_probe.py SAME_READER_WAV OUTPUT`
+gebruikt de vastgelegde NL/EN/NL-fixture van één gedocumenteerde voorlezer uit
+`asr-multilingual`. Beide modusvlaggen, oorspronkelijke ASR-tekst en één cluster
+blijven daarin behouden. Dit is geen nieuwe algemene taal-/identiteitsgarantie.

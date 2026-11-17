@@ -1,0 +1,140 @@
+{
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "backend": "native CPU",
+  "scope": "separate worker process peaks; not combined server memory",
+  "cases": [
+    {
+      "file": "nl-single.wav",
+      "elapsed_seconds": 0.20831016707234085,
+      "native_result": {
+        "frames": 1650,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 235192320
+      }
+    },
+    {
+      "file": "nl-aba.wav",
+      "elapsed_seconds": 0.3858924580272287,
+      "native_result": {
+        "frames": 5214,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 262078464
+      }
+    },
+    {
+      "file": "nl-three.wav",
+      "elapsed_seconds": 0.35594183299690485,
+      "native_result": {
+        "frames": 4676,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 258113536
+      }
+    },
+    {
+      "file": "nl-overlap.wav",
+      "elapsed_seconds": 0.21854112506844103,
+      "native_result": {
+        "frames": 1550,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 235700224
+      }
+    },
+    {
+      "file": "nl-stereo-downmix.wav",
+      "elapsed_seconds": 0.20721179200336337,
+      "native_result": {
+        "frames": 1550,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 235061248
+      }
+    },
+    {
+      "file": "nl-music.wav",
+      "elapsed_seconds": 0.21209749998524785,
+      "native_result": {
+        "frames": 1550,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 238370816
+      }
+    },
+    {
+      "file": "en-single.wav",
+      "elapsed_seconds": 0.18098725005984306,
+      "native_result": {
+        "frames": 451,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 227180544
+      }
+    },
+    {
+      "file": "en-aba.wav",
+      "elapsed_seconds": 0.21177820803131908,
+      "native_result": {
+        "frames": 1630,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 235765760
+      }
+    },
+    {
+      "file": "en-three.wav",
+      "elapsed_seconds": 0.245707374997437,
+      "native_result": {
+        "frames": 3023,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 245841920
+      }
+    },
+    {
+      "file": "en-overlap.wav",
+      "elapsed_seconds": 0.1434042080072686,
+      "native_result": {
+        "frames": 351,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 226639872
+      }
+    },
+    {
+      "file": "en-stereo-downmix.wav",
+      "elapsed_seconds": 0.14534545794595033,
+      "native_result": {
+        "frames": 351,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 229064704
+      }
+    },
+    {
+      "file": "en-music.wav",
+      "elapsed_seconds": 0.1447372919647023,
+      "native_result": {
+        "frames": 351,
+        "speakers": 8,
+        "frame_seconds": 0.01,
+        "mode": "full-attention",
+        "worker_peak_rss_bytes": 225492992
+      }
+    }
+  ],
+  "complete": true
+}
