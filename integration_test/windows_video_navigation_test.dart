@@ -15,6 +15,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/video_source.dart';
 import 'package:ocideck/platform/native_window.dart';
 import 'package:ocideck/services/transcription/media_sniff.dart';
 import 'package:ocideck/services/video_embed_host.dart';
@@ -113,6 +114,45 @@ class _Keyboard {
 
   void down(int key) => _send(key);
   void up(int key) => _send(key, up: true);
+  Future<void> click(Offset logicalPosition, double scale) async {
+    final user = DynamicLibrary.open('user32.dll');
+    final window = user
+        .lookupFunction<Pointer<Void> Function(), Pointer<Void> Function()>(
+          'GetForegroundWindow',
+        )();
+    final point = calloc<Int32>(2);
+    final input = calloc<Uint8>(40);
+    try {
+      point[0] = (logicalPosition.dx * scale).round();
+      point[1] = (logicalPosition.dy * scale).round();
+      final converted = user
+          .lookupFunction<
+            Int32 Function(Pointer<Void>, Pointer<Int32>),
+            int Function(Pointer<Void>, Pointer<Int32>)
+          >('ClientToScreen')(window, point);
+      expect(converted, isNot(0));
+      final moved = user
+          .lookupFunction<Int32 Function(Int32, Int32), int Function(int, int)>(
+            'SetCursorPos',
+          )(point[0], point[1]);
+      expect(moved, isNot(0));
+      final bytes = ByteData.sublistView(input.asTypedList(40));
+      final send = user
+          .lookupFunction<
+            Uint32 Function(Uint32, Pointer<Void>, Int32),
+            int Function(int, Pointer<Void>, int)
+          >('SendInput');
+      bytes.setUint32(20, 2, Endian.little); // MOUSEEVENTF_LEFTDOWN
+      expect(send(1, input.cast(), 40), 1);
+      await Future<void>.delayed(const Duration(milliseconds: 60));
+      bytes.setUint32(20, 4, Endian.little); // MOUSEEVENTF_LEFTUP
+      expect(send(1, input.cast(), 40), 1);
+    } finally {
+      calloc.free(point);
+      calloc.free(input);
+    }
+  }
+
   int foregroundProcess() {
     final user = DynamicLibrary.open('user32.dll');
     final window = user
@@ -268,7 +308,14 @@ void main() {
   ) async {
     const url = String.fromEnvironment(
       'VIDEO_PROBE_URL',
-      defaultValue: 'https://youtu.be/M7lc1UVfVE',
+      defaultValue: 'https://youtu.be/M7lc1UVf-VE',
+    );
+    final source = VideoSource.parse(url);
+    expect(source.kind, VideoSourceKind.youtube);
+    expect(
+      RegExp(r'^[A-Za-z0-9_-]{11}$').hasMatch(source.embedId ?? ''),
+      isTrue,
+      reason: 'A ready iframe for an invalid video is not an autoplay probe',
     );
     final keys = <int>[];
     var ended = 0;
@@ -338,6 +385,13 @@ void main() {
       await native.requestFocus();
       await platform.runJavaScript("document.getElementById('f').focus()");
       final keyboard = _Keyboard();
+      await tester.runAsync(
+        () => keyboard.click(
+          tester.getCenter(find.byType(WebViewWidget).first),
+          tester.view.devicePixelRatio,
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 100));
       await tester.runAsync(() => keyboard.press(0x27));
       await _until(tester, () => keys.isNotEmpty);
       expect(keys, [LogicalKeyboardKey.arrowRight.keyId]);
@@ -423,6 +477,14 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
         contains('focus'),
         reason: 'Real cross-origin child must hold focus',
       );
+      await tester.runAsync(
+        () => keyboard.click(
+          tester.getTopLeft(find.byType(WebViewWidget).first) +
+              const Offset(40, 18),
+          tester.view.devicePixelRatio,
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 100));
       messages.clear();
       await tester.runAsync(() => keyboard.press(0x27));
       await _until(tester, () => messages.contains('key:ArrowRight'));
