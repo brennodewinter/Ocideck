@@ -114,6 +114,50 @@ class _Keyboard {
 
   void down(int key) => _send(key);
   void up(int key) => _send(key, up: true);
+  final observations = <Map<String, dynamic>>[];
+  Map<String, dynamic> focusState() {
+    final user = DynamicLibrary.open('user32.dll');
+    final window = user
+        .lookupFunction<Pointer<Void> Function(), Pointer<Void> Function()>(
+          'GetForegroundWindow',
+        )();
+    final process = calloc<Uint32>();
+    final info = calloc<Uint8>(72);
+    final name = calloc<Uint16>(128);
+    try {
+      final thread = user
+          .lookupFunction<
+            Uint32 Function(Pointer<Void>, Pointer<Uint32>),
+            int Function(Pointer<Void>, Pointer<Uint32>)
+          >('GetWindowThreadProcessId')(window, process);
+      final bytes = ByteData.sublistView(info.asTypedList(72));
+      bytes.setUint32(0, 72, Endian.little);
+      final ok = user
+          .lookupFunction<
+            Int32 Function(Uint32, Pointer<Void>),
+            int Function(int, Pointer<Void>)
+          >('GetGUIThreadInfo')(thread, info.cast());
+      if (ok == 0) return {'guiThreadInfo': false};
+      final focus = Pointer<Void>.fromAddress(
+        bytes.getUint64(16, Endian.little),
+      );
+      final count = user
+          .lookupFunction<
+            Int32 Function(Pointer<Void>, Pointer<Uint16>, Int32),
+            int Function(Pointer<Void>, Pointer<Uint16>, int)
+          >('GetClassNameW')(focus, name, 128);
+      return {
+        'foregroundProcess': process.value,
+        'focusClass': String.fromCharCodes(name.asTypedList(count)),
+        'flags': bytes.getUint32(4, Endian.little),
+      };
+    } finally {
+      calloc.free(process);
+      calloc.free(info);
+      calloc.free(name);
+    }
+  }
+
   Future<void> click(Offset logicalPosition, double scale) async {
     final user = DynamicLibrary.open('user32.dll');
     final window = user
@@ -174,6 +218,15 @@ class _Keyboard {
   Future<void> press(int key) async {
     down(key);
     await Future<void>.delayed(const Duration(milliseconds: 60));
+    final state = DynamicLibrary.open('user32.dll')
+        .lookupFunction<Int16 Function(Int32), int Function(int)>(
+          'GetAsyncKeyState',
+        )(key);
+    observations.add({
+      'key': key,
+      'osDown': state & 0x8000 != 0,
+      'focus': focusState(),
+    });
     up(key);
   }
 }
@@ -362,13 +415,17 @@ void main() {
           widget.platform.params.controller as WindowsPlatformWebViewController;
       final creation = platform.controller.params;
       evidence['autoplayEnvironment'] = creation.allowMediaAutoplay;
+      await platform.runJavaScript(
+        "window.__probeEvents=[];window.addEventListener('message',function(e){if(e.source!==document.getElementById('f').contentWindow)return;try{var d=typeof e.data==='string'?JSON.parse(e.data):e.data,i=d.info||{},v=i.videoData||{};window.__probeEvents.push({event:d.event,code:typeof d.info==='number'?d.info:null,state:i.playerState,time:i.currentTime,duration:i.duration,videoId:v.video_id,error:v.errorCode,playable:v.isPlayable});if(window.__probeEvents.length>60)window.__probeEvents.shift()}catch(x){}})",
+      );
       Future<Map<String, dynamic>> snapshot() async {
         final value = await platform!.runJavaScriptReturningResult(
           '({ready:typeof ready!=="undefined"&&ready,playing:typeof playing!=="undefined"&&playing,'
           'hasPlayed:typeof hasPlayed!=="undefined"&&hasPlayed,'
           'position:typeof lastPosition!=="undefined"?lastPosition:null,'
           'ended:typeof ended!=="undefined"&&ended,ua:navigator.userAgent,'
-          'visibility:document.visibilityState,focus:document.hasFocus(),width:innerWidth,height:innerHeight})',
+          'visibility:document.visibilityState,focus:document.hasFocus(),width:innerWidth,height:innerHeight,'
+          'framePath:new URL(document.getElementById("f").src).pathname,events:window.__probeEvents})',
         );
         return Map<String, dynamic>.from(jsonDecode(value as String) as Map);
       }
@@ -378,6 +435,7 @@ void main() {
       await _until(tester, () async {
         final state = await snapshot();
         evidence['livePlayer'] = state;
+        evidence['liveWin32Focus'] = _Keyboard().focusState();
         return state['hasPlayed'] == true;
       }, seconds: 45);
       await _until(tester, () => ended == 1, seconds: 30);
@@ -432,6 +490,7 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
     );
     final messages = <String>[];
     final events = <int>[];
+    final keyboard = _Keyboard();
     final controller = WebViewController.fromPlatformCreationParams(
       WindowsWebViewControllerCreationParams(
         userDataFolder: directory.path,
@@ -459,7 +518,6 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
       final native = _native(controller).controller;
       await native.requestFocus();
       await controller.runJavaScript("document.getElementById('f').focus()");
-      final keyboard = _Keyboard();
       evidence['keyDocument'] = await _documentState(controller);
       evidence['foregroundProcess'] = keyboard.foregroundProcess();
       evidence['appProcess'] = pid;
@@ -511,7 +569,12 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
       await native.setPresentationKeyHandler(null);
       await tester.runAsync(() => keyboard.press(0x27));
       await _until(tester, () => messages.contains('key:ArrowRight'));
-      evidence['nativeFocus'] = {'events': events, 'childMessages': messages};
+      evidence['nativeFocus'] = {
+        'events': events,
+        'childMessages': messages,
+        'input': keyboard.observations,
+        'win32': keyboard.focusState(),
+      };
     } finally {
       await tester.pumpWidget(const SizedBox());
       await _native(controller).controller.dispose();
@@ -519,7 +582,12 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
       await child.close();
       // WebView2 may release its profile after its browser process exits.
       evidence['keyProfile'] = directory.path;
-      evidence['nativeFocus'] = {'events': events, 'childMessages': messages};
+      evidence['nativeFocus'] = {
+        'events': events,
+        'childMessages': messages,
+        'input': keyboard.observations,
+        'win32': keyboard.focusState(),
+      };
     }
   }, skip: !Platform.isWindows);
 }
