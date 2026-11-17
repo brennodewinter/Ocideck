@@ -1,0 +1,84 @@
+{
+  "scope": "real production HTTP client and document roundtrip; not full release UI",
+  "fixture_sha256": "ea103686885f6811c9508902f77335ecad11f9aefd0448d6d4f7c31186eb8717",
+  "elapsed_ms": 18981,
+  "languages": [
+    "nl",
+    "en"
+  ],
+  "segments": [
+    {
+      "start": 0.816,
+      "end": 5.496,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 6.992,
+      "end": 15.072,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 16.528,
+      "end": 17.808,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 18.496,
+      "end": 25.756,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 27.76,
+      "end": 32.28,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 32.832,
+      "end": 34.292,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 35.132,
+      "end": 37.352,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 37.852,
+      "end": 39.792,
+      "language": "nl",
+      "language_uncertain": true
+    },
+    {
+      "start": 41.456,
+      "end": 45.876,
+      "language": "en",
+      "language_uncertain": true
+    },
+    {
+      "start": 46.476,
+      "end": 52.036,
+      "language": "en",
+      "language_uncertain": true
+    },
+    {
+      "start": 52.416,
+      "end": 58.336,
+      "language": "en",
+      "language_uncertain": true
+    },
+    {
+      "start": 60.208,
+      "end": 69.448,
+      "language": "nl",
+      "language_uncertain": true
+    }
+  ],
+  "edit_save_reopen": true
+}

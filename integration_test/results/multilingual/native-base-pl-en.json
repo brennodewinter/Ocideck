@@ -1,0 +1,142 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | MTL : EMBED_LIBRARY = 1 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | DOTPROD = 1 | ACCELERATE = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "base",
+		"multilingual": true,
+		"vocab": 51865,
+		"audio": {
+			"ctx": 1500,
+			"state": 512,
+			"head": 8,
+			"layer": 6
+		},
+		"text": {
+			"ctx": 448,
+			"state": 512,
+			"head": 8,
+			"layer": 6
+		},
+		"mels": 80,
+		"ftype": 1
+	},
+	"params": {
+		"model": "/tmp/ocideck-asr-ggml-base.bin",
+		"language": "auto",
+		"translate": false
+	},
+	"result": {
+		"language": "pl"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:07,100"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 7100
+			},
+			"text": " Staliśmy wszyscy bezradni w obecnej szalejącej furii złości, która sama siebie trafiła i porzerała."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,100",
+				"to": "00:00:11,100"
+			},
+			"offsets": {
+				"from": 7100,
+				"to": 11100
+			},
+			"text": " Z ubolewaniem patrzyliśmy na smutny przebieg tego paroksyzmu."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:11,100",
+				"to": "00:00:17,600"
+			},
+			"offsets": {
+				"from": 11100,
+				"to": 17600
+			},
+			"text": " I z pewną ulgą wróciliśmy do naszych zajęć, gdy żałosny ten proces dobiegł swego naturalnego końca."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:17,600",
+				"to": "00:00:26,300"
+			},
+			"offsets": {
+				"from": 17600,
+				"to": 26300
+			},
+			"text": " Nawet w obecności matki, leżącej z zawiązaną głową na sofię, nie mogły się powstrzymać, robiły perskie oczko,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:26,300",
+				"to": "00:00:34,600"
+			},
+			"offsets": {
+				"from": 26300,
+				"to": 34600
+			},
+			"text": " dawały sobie znaki, mówiły niemym kolorowym alfabetem pełnym sekretnych znaczeń i rytowało mnie to szydercze porozumienie,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:34,600",
+				"to": "00:00:39,100"
+			},
+			"offsets": {
+				"from": 34600,
+				"to": 39100
+			},
+			"text": " tam i gotliwa z mowa pozamymi plecami."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:39,100",
+				"to": "00:00:42,100"
+			},
+			"offsets": {
+				"from": 39100,
+				"to": 42100
+			},
+			"text": " Staliśmy pod drzwiami i nasłuchiwali."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:42,100",
+				"to": "00:00:47,900"
+			},
+			"offsets": {
+				"from": 42100,
+				"to": 47900
+			},
+			"text": " Blament tak w ich ru dawały się słyszeć wszelkie głosy, perswazję, nawoływania i gawędy."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:47,900",
+				"to": "00:00:52,900"
+			},
+			"offsets": {
+				"from": 47900,
+				"to": 52900
+			},
+			"text": " Zdawało się nam, że słyszymy wołanie o pomoc ojca zbłąganego w wychużę."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:52,900",
+				"to": "00:00:56,900"
+			},
+			"offsets": {
+				"from": 52900,
+				"to": 56900
+			},
+			"text": " To znowu, że brat z teorem gwarzą bez trosko pod drzwiami."
+		}
+	]
+}

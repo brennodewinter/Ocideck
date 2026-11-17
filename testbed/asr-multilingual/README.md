@@ -107,7 +107,9 @@ Niets uit deze venv of modelmap komt in OciDeck-releases. De manifesten identifi
 MIT-modelconversies van OpenAI Whisper; dit is geen overdraagbare goedkeuring van
 willekeurige helpers. Faster-whisper en CTranslate2 zijn MIT; ONNX Runtime is MIT,
 Silero VAD MIT; PyAV is BSD-3-Clause maar zijn concrete wheels bevatten FFmpeg en
-hebben eigen LGPL/GPL-bouwverplichtingen. `requirements-lock-macos-arm64.txt` legt
+hebben eigen LGPL/GPL-bouwverplichtingen. De gemeten macOS-wheel meldt
+LGPL-3.0-or-later; zijn concrete vlaggen en ingebedde dylibhashes staan in het
+bewaarde operatorlicentierapport. Dat rapport is geen distributiegoedkeuring. `requirements-lock-macos-arm64.txt` legt
 alleen de gemeten operatorinstallatie vast, geen gebundelde-artefactlicentiereview.
 Bij toekomstige appdistributie geldt eerst de volledige artefactreview/noticegate
 uit `docs/LICENSE_COMPLIANCE.md`; de experimentele installatie wijzigt die niet.
@@ -118,3 +120,21 @@ verschillend gebleken (42 van1.144.800 samples in NL→EN→NL); de scripts
 beloven daarom geen platformonafhankelijke bitidentieke Opus-decodering.
 Controleer bronhashes, lengtes en sampleverschillen voordat nieuwe metingen
 als rechtstreeks gepaard bewijs worden gebruikt.
+
+Verwerkingstijden zijn waarnemingen op een gedeelde ontwikkelmachine met
+ander testwerk, geen gecontroleerde snelheidsbenchmark. De native whisper.cpp-
+baseline gebruikt standaard Metal/ggml-f16; CTranslate2 gebruikt CPU/int8.
+Snelheidsverschillen tussen deze engines zijn daarom geen zuivere meting van
+alleen het segmentatie-algoritme.
+
+Een aparte echte TLS-annuleringsmeting wacht twee seconden met een bezette
+modeltaak, verbreekt de client en meet wanneer een nieuwe aanvraag geen429
+meer krijgt:
+
+```sh
+python3 testbed/asr-multilingual/cancel_probe.py /eigen/fixtures/nl-en-nl.wav /eigen/cancel.json
+```
+
+Deze proef is bewust op `127.0.0.1:8443` begrensd en accepteert daar alleen
+voor de proef het lokale certificaat. Zij bewijst vrijgave bij een volgende
+controlegrens, niet het onderbreken van een al lopende native decoderstap.

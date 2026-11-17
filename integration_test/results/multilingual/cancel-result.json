@@ -1,0 +1,14 @@
+{
+  "scope": "real TLS client disconnect during actual small-model inference; worker capacity becomes available",
+  "busy_seen": true,
+  "busy_wait_before_disconnect_seconds": 2,
+  "released_after_disconnect": true,
+  "release_seconds": 0.2168182500000002,
+  "statuses": [
+    429,
+    429,
+    429,
+    422
+  ],
+  "tls_certificate": "test-only self-signed loopback; verification bypass limited to this probe"
+}

@@ -1,0 +1,131 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | MTL : EMBED_LIBRARY = 1 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | DOTPROD = 1 | ACCELERATE = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "base",
+		"multilingual": true,
+		"vocab": 51865,
+		"audio": {
+			"ctx": 1500,
+			"state": 512,
+			"head": 8,
+			"layer": 6
+		},
+		"text": {
+			"ctx": 448,
+			"state": 512,
+			"head": 8,
+			"layer": 6
+		},
+		"mels": 80,
+		"ftype": 1
+	},
+	"params": {
+		"model": "/tmp/ocideck-asr-ggml-base.bin",
+		"language": "auto",
+		"translate": false
+	},
+	"result": {
+		"language": "nl"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:06,240"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 6240
+			},
+			"text": " Arm kleinhaft, zijde eik, dat was toch een altekort leven."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,240",
+				"to": "00:00:13,760"
+			},
+			"offsets": {
+				"from": 6240,
+				"to": 13760
+			},
+			"text": " En op iedere zomerdag werd dezelfde dans, dezelfde toespraak, hetzelfde antwoord en hetzelfde"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:13,760",
+				"to": "00:00:15,760"
+			},
+			"offsets": {
+				"from": 13760,
+				"to": 15760
+			},
+			"text": " inslapen herhaald."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:15,760",
+				"to": "00:00:23,460"
+			},
+			"offsets": {
+				"from": 15760,
+				"to": 23460
+			},
+			"text": " Dan zei de boomaltijd, arme kleine, slecht een enkele dag duurt u ge hele leven, wat"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:23,460",
+				"to": "00:00:24,460"
+			},
+			"offsets": {
+				"from": 23460,
+				"to": 24460
+			},
+			"text": " is dat kort?"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:24,460",
+				"to": "00:00:35,300"
+			},
+			"offsets": {
+				"from": 24460,
+				"to": 35300
+			},
+			"text": " Het is toch trurig."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:35,300",
+				"to": "00:00:39,900"
+			},
+			"offsets": {
+				"from": 35300,
+				"to": 39900
+			},
+			"text": " Hij is drie jaar getijden achter één wakker, eerst tegen de winter komt zijn slaap."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:54,460",
+				"to": "00:01:07,300"
+			},
+			"offsets": {
+				"from": 54460,
+				"to": 67300
+			},
+			"text": " Zijn hoogboven de wolken opgeschoten, die als donkere scharen van trekkvogels, of grote"
+		},
+		{
+			"timestamps": {
+				"from": "00:01:07,300",
+				"to": "00:01:09,460"
+			},
+			"offsets": {
+				"from": 67300,
+				"to": 69460
+			},
+			"text": " witte zwaanen onder hem het woord trokken."
+		}
+	]
+}

@@ -1,0 +1,339 @@
+{
+  "scope": "operator venv only; no app redistribution approval",
+  "packages": [
+    {
+      "name": "anyio",
+      "version": "4.16.0",
+      "declared_license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "av",
+      "version": "19.0.2",
+      "declared_license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.txt",
+        "AUTHORS.py",
+        "AUTHORS.rst"
+      ]
+    },
+    {
+      "name": "click",
+      "version": "8.5.1",
+      "declared_license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "ctranslate2",
+      "version": "4.9.0",
+      "declared_license": "MIT",
+      "license_files": []
+    },
+    {
+      "name": "faster-whisper",
+      "version": "1.2.1",
+      "declared_license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.11",
+      "declared_license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flatbuffers",
+      "version": "25.12.19",
+      "declared_license": "Apache 2.0",
+      "license_files": []
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "declared_license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "declared_license": "MIT",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.8.0",
+      "declared_license": "Apache-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.2",
+      "declared_license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.2",
+      "declared_license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "huggingface_hub",
+      "version": "2.4.0",
+      "declared_license": "Apache-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "declared_license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.5",
+      "declared_license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "license_files": [
+        "LICENSE.txt",
+        "numpy/_core/include/numpy/libdivide/LICENSE.txt",
+        "numpy/_core/src/common/pythoncapi-compat/COPYING",
+        "numpy/_core/src/highway/LICENSE",
+        "numpy/_core/src/multiarray/dragon4_LICENSE.txt",
+        "numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
+        "numpy/_core/src/umath/svml/LICENSE",
+        "numpy/fft/pocketfft/LICENSE.md",
+        "numpy/linalg/lapack_lite/LICENSE.txt",
+        "numpy/ma/LICENSE",
+        "numpy/random/LICENSE.md",
+        "numpy/random/src/distributions/LICENSE.md",
+        "numpy/random/src/mt19937/LICENSE.md",
+        "numpy/random/src/pcg64/LICENSE.md",
+        "numpy/random/src/philox/LICENSE.md",
+        "numpy/random/src/sfc64/LICENSE.md",
+        "numpy/random/src/splitmix64/LICENSE.md"
+      ]
+    },
+    {
+      "name": "onnxruntime",
+      "version": "1.32.0",
+      "declared_license": "MIT License",
+      "license_files": []
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "declared_license": "Apache-2.0 OR BSD-2-Clause",
+      "license_files": [
+        "LICENSE",
+        "LICENSE.APACHE",
+        "LICENSE.BSD"
+      ]
+    },
+    {
+      "name": "pip",
+      "version": "26.2.2",
+      "declared_license": "MIT",
+      "license_files": [
+        "AUTHORS.txt",
+        "LICENSE.txt",
+        "src/pip/_vendor/cachecontrol/LICENSE.txt",
+        "src/pip/_vendor/certifi/LICENSE",
+        "src/pip/_vendor/distlib/LICENSE.txt",
+        "src/pip/_vendor/distro/LICENSE",
+        "src/pip/_vendor/idna/LICENSE.md",
+        "src/pip/_vendor/msgpack/COPYING",
+        "src/pip/_vendor/packaging/LICENSE",
+        "src/pip/_vendor/packaging/LICENSE.APACHE",
+        "src/pip/_vendor/packaging/LICENSE.BSD",
+        "src/pip/_vendor/pkg_resources/LICENSE",
+        "src/pip/_vendor/platformdirs/LICENSE",
+        "src/pip/_vendor/pygments/LICENSE",
+        "src/pip/_vendor/pyproject_hooks/LICENSE",
+        "src/pip/_vendor/requests/LICENSE",
+        "src/pip/_vendor/resolvelib/LICENSE",
+        "src/pip/_vendor/rich/LICENSE",
+        "src/pip/_vendor/tomli/LICENSE",
+        "src/pip/_vendor/tomli_w/LICENSE",
+        "src/pip/_vendor/truststore/LICENSE",
+        "src/pip/_vendor/urllib3/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2",
+      "declared_license": "3-Clause BSD License",
+      "license_files": []
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "declared_license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3",
+      "declared_license": "",
+      "license_files": []
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1",
+      "declared_license": "MPL-2.0 AND MIT",
+      "license_files": [
+        "LICENCE"
+      ]
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5",
+      "declared_license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "declared_license": "PSF-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    }
+  ],
+  "pyav_ffmpeg": {
+    "libraries": {
+      "libavutil": [
+        61,
+        1,
+        102
+      ],
+      "libavcodec": [
+        63,
+        1,
+        102
+      ],
+      "libavformat": [
+        63,
+        1,
+        102
+      ],
+      "libavdevice": [
+        63,
+        1,
+        102
+      ],
+      "libavfilter": [
+        12,
+        1,
+        102
+      ],
+      "libswscale": [
+        10,
+        1,
+        102
+      ],
+      "libswresample": [
+        7,
+        1,
+        102
+      ]
+    },
+    "license": "LGPL version 3 or later",
+    "build_flags": "--disable-static --enable-shared --libdir=/tmp/vendor/lib --prefix=/tmp/vendor --disable-programs --disable-doc --disable-libxml2 --disable-lzma --disable-libtheora --disable-libfreetype --disable-libfontconfig --disable-libbluray --disable-libopenjpeg --disable-mediafoundation --enable-version3 --disable-alsa --disable-gnutls --enable-libdav1d --enable-libmp3lame --enable-libopus --enable-libsvtav1 --enable-libvmaf --enable-libvpx --enable-libwebp --disable-libxcb --enable-zlib --enable-libx265 --enable-libx264 --enable-videotoolbox --enable-audiotoolbox --extra-ldflags='-Wl,-ld_classic' --disable-encoder='avui,dca,mlp,opus,s302m,sonic,sonic_ls,truehd' --disable-decoder=sonic --disable-libjack --disable-indev=jack --disable-filter=gfxcapture",
+    "dylibs": [
+      {
+        "name": "libSvtAv1Enc.4.2.0.dylib",
+        "sha256": "1092eccdf556c719ea8b2e6ec1f6acd4514e60a8c399ec59e1cd0dfa9d3fa5d1"
+      },
+      {
+        "name": "libavcodec.63.1.102.dylib",
+        "sha256": "73e8a76623844d3c2a2c4221d82317efacbc64624ff4adbfcd930425fd514214"
+      },
+      {
+        "name": "libavdevice.63.1.102.dylib",
+        "sha256": "b96918ff87191bfc75efc74e2ea8c77dbe32cf9ba9cd27e02c44fe6f61e02ca4"
+      },
+      {
+        "name": "libavfilter.12.1.102.dylib",
+        "sha256": "15b742de24ebed508cfa63931020a298e5e79733f2f5f575603c1e2bea79d0d1"
+      },
+      {
+        "name": "libavformat.63.1.102.dylib",
+        "sha256": "42fbf1f7c9dfa36113d2dda11e34764719f91450a79423661567a16f105e2250"
+      },
+      {
+        "name": "libavutil.61.1.102.dylib",
+        "sha256": "fb093bb4c5cbb7252347f9220bfa8d93676a23837dfd47d7e28bd4e94a228301"
+      },
+      {
+        "name": "libdav1d.7.dylib",
+        "sha256": "f677e4cf794dc0d3561bb731137d539f50419052e566e244d766eab51333cb25"
+      },
+      {
+        "name": "libopus.0.dylib",
+        "sha256": "dca12b81b778f51dc5cecbc789fffaac472de09b102a164d5348b360b238a202"
+      },
+      {
+        "name": "libsharpyuv.0.1.2.dylib",
+        "sha256": "6ca31c87640662e5f6aef0460f3b824e192d01c5a19cb9ad10d458d8709719e4"
+      },
+      {
+        "name": "libswresample.7.1.102.dylib",
+        "sha256": "af52aedac8c99e0c9ca7021e1ed06eedb1381d00e9e10cb50a00651c7ece96da"
+      },
+      {
+        "name": "libswscale.10.1.102.dylib",
+        "sha256": "3334b4c00d9c7725bb2477df2f4357255721e433adc9a36fa4f33680f7d781c3"
+      },
+      {
+        "name": "libvmaf.3.dylib",
+        "sha256": "2825673497e24baf413bf8ac11709df3fa3a3663afab55f606daf4a45fcb7ea9"
+      },
+      {
+        "name": "libvpx.12.dylib",
+        "sha256": "e07470b1a2f2aadbe4ecdb39f008f22d9bd1fc19ef3d2636ba1338cb8cc3261a"
+      },
+      {
+        "name": "libwebp.7.2.0.dylib",
+        "sha256": "c6370143226449531c91631c941b850c537ff1c1862bbeb86a991bd76871420d"
+      },
+      {
+        "name": "libwebpmux.3.1.2.dylib",
+        "sha256": "6005d7cccf94139898f5c5e20f75af0a019050144cb6015d464b034f26fc7375"
+      },
+      {
+        "name": "libx264.165.dylib",
+        "sha256": "59553302c829a9bb3331d59cdc9c7b73379c461fc3926e1af9aed533e807a91b"
+      },
+      {
+        "name": "libx265.217.dylib",
+        "sha256": "fb6b78122839dda6c826974afd4f7be5082ba798c5dfbc61ba574acb4f2e3fbb"
+      }
+    ]
+  }
+}

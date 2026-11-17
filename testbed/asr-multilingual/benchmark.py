@@ -80,7 +80,8 @@ def main():
             report['cases'].append({'file': case['file'], 'sha256': case['sha256'],
                 'mode': 'speech-regions' if mixed else 'one-pass',
                 'seconds': time.monotonic() - start,
-                'peak_rss_bytes': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+                'peak_rss_bytes': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss *
+                                  (1 if platform.system() == 'Darwin' else 1024),
                 'scores': score(case, segments),
                 'non_speech_hallucination': bool(segments) if not case['reference'] else None,
                 'timestamp_order_valid': all(s['start'] >= 0 and s['end'] >= s['start']
