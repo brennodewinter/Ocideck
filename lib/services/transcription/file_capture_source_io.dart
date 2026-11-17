@@ -3,10 +3,10 @@
 // sessie-staging.
 //
 // Decoderkeuze, bewust smal:
-//  * macOS — bundled FFmpeg for WebM/MKV/AVI; `/usr/bin/afconvert` for
-//    proven Apple containers. Both are fixed paths, never PATH lookups.
-//    The separately licensed decoder ships its full corresponding source.
-//    afconvert is supplied by the OS, at a fixed absolute path
+//  * macOS — gebundelde FFmpeg voor WebM/MKV/AVI; `/usr/bin/afconvert`
+//    voor bewezen Apple-containers. Beide hebben een vast pad, buiten PATH.
+//    De apart gelicentieerde decoder levert zijn volledige broncode mee.
+//    afconvert wordt door het OS geleverd, op een vast absoluut pad
 //    (geen PATH-raadsel), dekt WAV/AIFF/CAF/AAC/MP3/M4A en de audiotrack
 //    van QuickTime/MP4-video;
 //  * Linux/Windows — bundled ocideck-audio (GStreamer/Media Foundation);
