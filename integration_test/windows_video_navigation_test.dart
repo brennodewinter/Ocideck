@@ -74,13 +74,45 @@ Future<Map<String, dynamic>> _documentState(
 }
 
 class _Keyboard {
-  final _event = DynamicLibrary.open('user32.dll')
-      .lookupFunction<
-        Void Function(Uint8, Uint8, Uint32, UintPtr),
-        void Function(int, int, int, int)
-      >('keybd_event');
-  void down(int key) => _event(key, 0, 0, 0);
-  void up(int key) => _event(key, 0, 2, 0);
+  void _send(int key, {bool up = false}) {
+    // INPUT is 40 bytes on the supported Windows x64 ABI. Arrow/navigation
+    // keys need their real scan code and extended-key flag; a zero scan code
+    // through keybd_event does not establish delivery to a child WebView.
+    expect(sizeOf<IntPtr>(), 8);
+    final user = DynamicLibrary.open('user32.dll');
+    final scan = user
+        .lookupFunction<
+          Uint32 Function(Uint32, Uint32),
+          int Function(int, int)
+        >('MapVirtualKeyW')(key, 4);
+    expect(scan, isNot(0));
+    final input = calloc<Uint8>(40);
+    try {
+      final bytes = ByteData.sublistView(input.asTypedList(40));
+      bytes.setUint32(0, 1, Endian.little); // INPUT_KEYBOARD
+      bytes.setUint16(10, scan & 0xff, Endian.little);
+      bytes.setUint32(
+        12,
+        8 | (scan > 0xff ? 1 : 0) | (up ? 2 : 0),
+        Endian.little,
+      );
+      final sent = user
+          .lookupFunction<
+            Uint32 Function(Uint32, Pointer<Void>, Int32),
+            int Function(int, Pointer<Void>, int)
+          >('SendInput')(1, input.cast(), 40);
+      expect(
+        sent,
+        1,
+        reason: 'The OS must accept the physical scan-code input',
+      );
+    } finally {
+      calloc.free(input);
+    }
+  }
+
+  void down(int key) => _send(key);
+  void up(int key) => _send(key, up: true);
   int foregroundProcess() {
     final user = DynamicLibrary.open('user32.dll');
     final window = user
