@@ -44,6 +44,7 @@ what you need.
 | [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md) | Independent release channels, stop/resume operations and publication evidence. |
 | [BUILD.md](BUILD.md) | Build targets and the version pin. |
 | [CHECKS.md](CHECKS.md) | The quality gates (`make check`) and what each enforces. |
+| [TRANSCRIPTION_RELEASE_MATRIX.md](TRANSCRIPTION_RELEASE_MATRIX.md) | Which transcription routes are proven on which platform, with reproduction commands. |
 | [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) | Enforced limits, measured sizes, and optimisation tips. |
 | [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) | What the app migrates by itself (settings), and the rules for adding the next one. |
 

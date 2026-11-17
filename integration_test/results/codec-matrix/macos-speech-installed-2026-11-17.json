@@ -1,0 +1,85 @@
+{
+  "scope": "Real file source to production local ASR; limited English sample; no UI/release certification",
+  "platform": "Version 27.0.1 (Build 26A434)",
+  "model": "base",
+  "model_sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+  "decoder_sha256": "7f6028378534aa10a2dfa07d807ddcc0d18c869bf5c2f64c89efcc18ee88c4ee",
+  "whisper_sha256": "b106266a60ff7470e0ad48c751877ac3de7e7c8262670115151b28ca5a6a0830",
+  "results": [
+    {
+      "source": "jfk.wav",
+      "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "segments": [
+        {
+          "start_ms": 0,
+          "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+        }
+      ]
+    },
+    {
+      "source": "jfk-vorbis.ogg",
+      "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "segments": [
+        {
+          "start_ms": 0,
+          "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+        }
+      ]
+    },
+    {
+      "source": "jfk-opus.ogg",
+      "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "segments": [
+        {
+          "start_ms": 0,
+          "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country."
+        }
+      ]
+    },
+    {
+      "source": "jfk-aac.mov",
+      "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "segments": [
+        {
+          "start_ms": 0,
+          "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+        }
+      ]
+    },
+    {
+      "source": "jfk-opus.webm",
+      "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "segments": [
+        {
+          "start_ms": 0,
+          "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country."
+        }
+      ]
+    },
+    {
+      "source": "jfk-opus.mkv",
+      "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "segments": [
+        {
+          "start_ms": 0,
+          "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country."
+        }
+      ]
+    },
+    {
+      "source": "jfk-pcm.avi",
+      "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "segments": [
+        {
+          "start_ms": 0,
+          "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "harness_source_commit": "9d54b381e",
+    "run_date": "2026-11-17",
+    "environment": "Installed OciDeck.app 0.7.10 whisper-cli helper on macOS 27.0.1 arm64; decoder /opt/homebrew/bin/ffmpeg (homebrew), model ggml-base.bin catalog-pinned and sha256-verified; reproduces the release-build result macos-speech-2026-11-17.json on different helper bytes"
+  }
+}

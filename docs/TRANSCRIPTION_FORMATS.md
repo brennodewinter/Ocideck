@@ -53,8 +53,8 @@ Earlier decoder-only probes for issue #2942 observed:
 | Firefox | Not established | Not established | The research browser failed to start; no product result |
 
 These historical probes do not certify the current release artifacts or every
-OS/browser combination. The release/UI and speech-recognition evidence remains
-tracked in #2947. If an import reports an unavailable codec, convert the source
+OS/browser combination. The release/UI and speech-recognition evidence lives
+in [TRANSCRIPTION_RELEASE_MATRIX.md](TRANSCRIPTION_RELEASE_MATRIX.md) (#2947). If an import reports an unavailable codec, convert the source
 to 16 kHz mono PCM16 WAV using a trusted local tool and import that copy. A
 missing codec, a missing audio track, corrupt input and empty audio are separate
 outcomes; a generic decoder failure is not evidence that a video has no audio.
