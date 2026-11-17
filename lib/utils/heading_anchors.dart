@@ -101,9 +101,17 @@ class HeadingAnchorIndex {
     for (var i = 0; i < entries.length; i++) {
       _targets[entries[i].id] = i;
     }
+    final legacyTaken = <String>{};
     for (var i = 0; i < entries.length; i++) {
       final entry = entries[i];
+      final legacyBase = _legacyTocSlug(entry.title);
+      var legacyUnique = legacyBase;
+      var suffix = 0;
+      while (!legacyTaken.add(legacyUnique)) {
+        legacyUnique = '$legacyBase-${++suffix}';
+      }
       for (final alias in {
+        legacyUnique,
         entry.legacyId,
         legacyHeadingSlug(entry.title),
         _legacyTocSlug(entry.title),

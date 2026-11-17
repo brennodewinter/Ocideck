@@ -466,7 +466,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       continuableBlocks: _timelinePagination.blocks,
     );
     double? cachedWidth;
-    double? cachedHeight;
     ThemeData? cachedTheme;
     Locale? cachedLocale;
     TextScaler? cachedScaler;
@@ -479,7 +478,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         // Zoekresultaten en rondloopfeedback veranderen alleen de viewport-
         // hoogte. Het papier past op breedte: behoud de dure vellenboom.
         if (cachedWidth == constraints.maxWidth &&
-            cachedHeight == constraints.maxHeight &&
             cachedTheme == theme &&
             cachedLocale == locale &&
             cachedScaler == scaler &&
@@ -487,7 +485,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           return cachedContent!;
         }
         cachedWidth = constraints.maxWidth;
-        cachedHeight = constraints.maxHeight;
         cachedTheme = theme;
         cachedLocale = locale;
         cachedScaler = scaler;
@@ -512,7 +509,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           primary: false,
           child: SizedBox(
             width: viewportWidth,
-            height: constraints.maxHeight,
             child: ListView.builder(
               key: const Key('document-page-list'),
               controller: _searchScroll,
