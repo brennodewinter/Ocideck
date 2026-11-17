@@ -14,7 +14,7 @@ import '../../services/document_footnote_setup.dart';
 import '../../state/settings_provider.dart'
     show kDocumentEditorZoomMax, kDocumentEditorZoomMin;
 import '../../services/document_pagination.dart';
-import '../../utils/doc_link.dart' show headingSlug;
+import '../../utils/heading_anchors.dart';
 import '../../utils/footnotes.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../utils/text_search.dart';
@@ -131,7 +131,8 @@ class PagedDocumentView extends StatefulWidget {
 
 class _PagedDocumentViewState extends State<PagedDocumentView> {
   final _searchScroll = ScrollController();
-  final _pageKeys = <int, GlobalKey>{};
+  double _pageStride = 0;
+  int? _handledSearchSignal;
   List<double> _pageOffsets = const [];
   double _pageScale = 1;
   int? _handledRevealSignal;
@@ -457,7 +458,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       reservedRoom: _reservedRoom(heights.length),
     );
     _pageOffsets = offsets;
-    _pageKeys.removeWhere((page, _) => page >= offsets.length);
     final notesPerPage = _notesPerPage(offsets, heights);
     final timelineContinuationPages = documentContinuationPageBlocks(
       blockHeights: heights,
@@ -497,48 +497,44 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         final room = constraints.maxWidth - 32;
         final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
         _pageScale = widget.scale * fit;
+        final (_, sheetH) = _sheetPx;
+        _pageStride =
+            sheetH * _pageScale + 4 + _pageCaptionHeight(context) + 16;
+        final paperWidth = sheetW * _pageScale + 32;
+        final viewportWidth = constraints.maxWidth > paperWidth
+            ? constraints.maxWidth
+            : paperWidth;
         return cachedContent = SingleChildScrollView(
-          controller: _searchScroll,
-          // Ingezoomd wordt het vel breder dan het venster. Zonder deze tweede,
-          // horizontale rol zou de rechterhelft niet alleen onbereikbaar zijn
-          // maar ook een overloopfout geven — de vellen staan in een verticale
-          // kolom, en die knijpt niets af.
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: ConstrainedBox(
-              // Minstens zo breed als het venster, zodat een vel dat er wél in
-              // past gewoon gecentreerd blijft staan.
-              constraints: BoxConstraints(minWidth: constraints.maxWidth),
-              child: Center(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    for (var i = 0; i < offsets.length; i++) ...[
-                      _sheet(
-                        context,
-                        document,
-                        offsets[i],
-                        // Waar dít vel ophoudt: bij het begin van het volgende, niet
-                        // een volle paginahoogte verder. Een blok dat niet meer paste
-                        // is doorgeschoven, en dan hoort de onderkant van dit vel wit
-                        // te blijven in plaats van de eerste regels van dat blok
-                        // doormidden te tonen.
-                        i + 1 < offsets.length
-                            ? offsets[i + 1] - offsets[i]
-                            : _contentHeightPx,
-                        i + 1,
-                        offsets.length,
-                        fit,
-                        notesPerPage[i],
-                        switch (timelineContinuationPages[i]) {
-                          final block? =>
-                            _timelinePagination.markerLabels[block] ?? '',
-                          null => null,
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                    ],
-                  ],
+          scrollDirection: Axis.horizontal,
+          primary: false,
+          child: SizedBox(
+            width: viewportWidth,
+            child: ListView.builder(
+              key: const Key('document-page-list'),
+              controller: _searchScroll,
+              itemExtent: _pageStride,
+              scrollCacheExtent: ScrollCacheExtent.pixels(_pageStride),
+              addAutomaticKeepAlives: false,
+              padding: const EdgeInsets.only(top: 16),
+              itemCount: offsets.length,
+              itemBuilder: (context, i) => Align(
+                alignment: Alignment.topCenter,
+                child: _sheet(
+                  context,
+                  document,
+                  offsets[i],
+                  i + 1 < offsets.length
+                      ? offsets[i + 1] - offsets[i]
+                      : _contentHeightPx,
+                  i + 1,
+                  offsets.length,
+                  fit,
+                  notesPerPage[i],
+                  switch (timelineContinuationPages[i]) {
+                    final block? =>
+                      _timelinePagination.markerLabels[block] ?? '',
+                    null => null,
+                  },
                 ),
               ),
             ),
@@ -705,12 +701,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
               child: OverflowBox(
                 alignment: Alignment.topLeft,
                 maxHeight: double.infinity,
-                // ponytail: ceiling — elk vel bouwt het volledige document
-                // op in de widgetboom (N × volledige layout). RepaintBoundary
-                // laat de compositor het gerasteriseerde vel cachen, zodat
-                // tenminste de paint-kost na de eerste frame meevalt. Een
-                // volledige oplossing (elk blok één keer renderen, per vel
-                // gesegmenteerd) vereist een andere paginaverdelingsarchitectuur.
+                // Alleen zichtbare vellen plus de viewportbuffer hebben een
+                // element-/renderboom. De gedeelde meetboom blijft de bron
+                // voor paginering, zoeken en asynchroon geladen afbeeldingen.
                 child: RepaintBoundary(
                   child: Transform.translate(
                     offset: Offset(0, -offset),
@@ -774,7 +767,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         .replaceAll('{n}', '$pageNumber')
         .replaceAll('{m}', '$pageCount');
     return Semantics(
-      key: _pageKeys.putIfAbsent(pageNumber - 1, GlobalKey.new),
+      key: ValueKey('document-page-$pageNumber'),
       label: label,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -802,8 +795,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     );
   }
 
-  /// Of vel [index] echt in de boom moet: binnen de viewport plus een vel
-  /// marge, of vóór de eerste meting (dan is alleen vel 0 zeker).
   /// Staat in de bovenmarge en verandert daardoor de gemeten documentstroom
   /// niet; de eerste kaart op het vel tekent de rail zelf opnieuw.
   Widget _timelineContinuationLabel(

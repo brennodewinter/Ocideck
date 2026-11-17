@@ -57,6 +57,7 @@ void main() {
 
     // Het vel met de noot: de doorgang-regel en de scrollbalk horen op het
     // beeld te staan.
+    // The lazy list captures this sheet without the outer top padding.
     await expectLater(
       find.byKey(const Key('document-sheet')).first,
       matchesGoldenFile('goldens/document_footnote_overflow.png'),

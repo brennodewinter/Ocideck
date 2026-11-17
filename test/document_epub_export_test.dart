@@ -109,8 +109,11 @@ void main() {
     expect(nav, contains('Hoofdstuk 1'));
     expect(nav, contains('Hoofdstuk 2'));
     expect(nav, contains('Subkop'));
-    // De nav-links wijzen naar document.xhtml#heading-N.
-    expect(nav, contains('document.xhtml#heading-'));
+    // Nieuwe nav-links gebruiken de gedeelde documentankers. Oude heading-N
+    // verwijzingen blijven als compatibiliteitsdoel in het content-document.
+    expect(nav, contains('document.xhtml#hoofdstuk-1'));
+    final doc = _readEntry(archive, 'OEBPS/document.xhtml');
+    expect(doc, contains('id="heading-0"'));
     expect(nav, contains('epub:type="toc"'));
   });
 

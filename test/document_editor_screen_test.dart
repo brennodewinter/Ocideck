@@ -1195,16 +1195,16 @@ void main() {
       expect(find.text('Treffer 1 van 2'), findsOneWidget);
       if (mode == "Pagina's") {
         expect(find.byType(PagedDocumentView), findsOneWidget);
-        final scroll = tester
-            .widgetList<SingleChildScrollView>(
-              find.descendant(
-                of: find.byType(PagedDocumentView),
-                matching: find.byType(SingleChildScrollView),
+        final scrollable = find
+            .descendant(
+              of: find.byType(PagedDocumentView),
+              matching: find.byWidgetPredicate(
+                (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
               ),
             )
-            .firstWhere((view) => view.controller != null)
-            .controller!;
-        expect(scroll.offset, greaterThan(100));
+            .first;
+        final position = tester.state<ScrollableState>(scrollable).position;
+        expect(position.pixels, greaterThan(100));
       } else {
         final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
         expect(quill.scrollController.offset, greaterThan(100));

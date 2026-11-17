@@ -121,7 +121,7 @@ jobs:
           BASELINE_REF: ${{ inputs.baseline_ref }}
         run: |
           [[ "$BASELINE_REF" =~ ^[0-9a-f]{40}$ ]] || { echo 'baseline_ref must be a full commit SHA'; exit 1; }
-          flutter test --concurrency=2 test/document_caret_across_modes_test.dart test/document_chapter_navigation_test.dart test/document_outline_caret_test.dart test/document_reader_test.dart test/paged_document_view_test.dart test/paged_document_search_test.dart
+          flutter test --concurrency=2 test/document_caret_across_modes_test.dart test/document_chapter_navigation_test.dart test/document_outline_caret_test.dart test/document_reader_test.dart test/paged_document_view_test.dart test/paged_document_search_test.dart test/paged_document_scaling_test.dart test/heading_anchors_test.dart
 
       - name: Checkout navigation baseline
         if: ${{ inputs.navigation_only }}

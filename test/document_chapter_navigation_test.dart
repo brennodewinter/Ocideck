@@ -40,7 +40,7 @@ void main() {
         );
         await tester.pumpAndSettle();
         final vertical = tester.state<ScrollableState>(
-          find.byType(Scrollable).first,
+          _verticalScrollables().first,
         );
         expect(vertical.position.pixels, 0);
         if (generated) {
@@ -97,7 +97,7 @@ void main() {
     expect(launcher.launched, ['mailto:jan@example.com']);
     expect(
       tester
-          .state<ScrollableState>(find.byType(Scrollable).first)
+          .state<ScrollableState>(_verticalScrollables().first)
           .position
           .pixels,
       0,
@@ -110,7 +110,7 @@ void main() {
     for (final href in ['#ontbreekt', '#bad%ZZ', '#']) {
       await _pumpPages(tester, _longSource(link: '[Ga naar slot]($href)'));
       final scroll = tester.state<ScrollableState>(
-        find.byType(Scrollable).first,
+        _verticalScrollables().first,
       );
       final before = scroll.position.pixels;
       await tester.tap(find.text('Ga naar slot').hitTestable().first);
@@ -129,7 +129,7 @@ void main() {
     final changed = _longSource(paragraphs: 55);
     await _pumpPages(tester, changed, scale: 1.5);
     tester
-        .state<ScrollableState>(find.byType(Scrollable).first)
+        .state<ScrollableState>(_verticalScrollables().first)
         .position
         .jumpTo(0);
     await tester.pumpAndSettle();
@@ -157,7 +157,7 @@ void main() {
       );
       expect(find.text('Slot').hitTestable(), findsOneWidget);
       final scroll = tester.state<ScrollableState>(
-        find.byType(Scrollable).first,
+        _verticalScrollables().first,
       );
       expect(scroll.position.pixels, greaterThan(200));
       await _pumpPages(tester, source, signal: 2, offset: 0);
@@ -174,7 +174,7 @@ void main() {
       await tester.pumpAndSettle();
       final pages = find.byType(PagedDocumentView);
       final scroll = tester.state<ScrollableState>(
-        find.descendant(of: pages, matching: find.byType(Scrollable)).first,
+        find.descendant(of: pages, matching: _verticalScrollables()).first,
       );
       final railTarget = find.descendant(
         of: find.byKey(const Key('document-outline-rail')),
@@ -215,6 +215,10 @@ void main() {
     expect(notifier.state.isDirty, isFalse);
   });
 }
+
+Finder _verticalScrollables() => find.byWidgetPredicate(
+  (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+);
 
 String _longSource({
   String link = '[Ga naar slot](#slot)',
