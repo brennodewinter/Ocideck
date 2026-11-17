@@ -78,3 +78,10 @@ Beide paden zijn verplicht; ontbrekende invoer faalt en wordt niet stil overgesl
 De proef is een echte netwerk-/documentintegratie, geen volledige release-UI-proef.
 De eerste volledige meetuitkomst staat in
 [`integration_test/results/diarization`](../../integration_test/results/diarization/README.md).
+
+## Native alternatief met woordtijden
+
+De afzonderlijke [Nemotron/Whisper-loopbackroute](NEMO_README.md) gebruikt een
+publiek gepind model en de officiële native C++-runtime. Zij vervangt deze
+Vosk-proef niet stilzwijgend. De eigen installatie-, licentie- en
+kwaliteitsgrenzen staan in die gids; onbekende toewijzingen blijven zichtbaar.

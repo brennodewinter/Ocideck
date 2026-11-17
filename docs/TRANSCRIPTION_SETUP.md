@@ -1,6 +1,6 @@
 # OciDeck — Transcription and recording: platform setup
 
-> **Status:** setup matrix and step-by-step guide for the released builds · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
+> **Status:** setup matrix and step-by-step guide for the released builds · **Status last reviewed:** 2026-11-17 · **Published by:** Stichting LibreKAT
 
 This page answers, per platform: what you must install or allow, how a
 recording becomes a transcript, where the files live, and what to do when
@@ -294,3 +294,19 @@ but short quotations or switches without a pause can remain wrong or worsen.
 This is no general quality guarantee. `[en?]` marks an uncertain region language.
 Transcript text and visible tags remain editable and saveable; original times
 and language tags remain inspectable document metadata.
+
+## Optional speaker diarization through a local server
+
+An explicitly installed [Nemotron/Whisper loopback server](../testbed/asr-diarization/NEMO_README.md)
+has been tested on native macOS arm64. It needs no pre-existing ASR server,
+model account or gated pyannote access. OciDeck does not install/select it
+implicitly. Configure OciDeck ASR v1, wait for capabilities, then choose
+**Distinguish speakers**; Start confirms this file and destination. Local CLI/WASM
+does not offer this capability.
+
+Assigned speaker numbers remain stable on return in the small NL/EN fixtures.
+Uncertain passages stay unknown or carry `(?)`; roughly a quarter stays unknown
+in the hardest Dutch fixture. Overlap can carry multiple IDs. These are no
+person names or general accuracy guarantee. Visible labels can be renamed;
+original times/cluster IDs remain document metadata. The complete release-UI/
+hardware matrix is separate from these scoped client/model measurements.

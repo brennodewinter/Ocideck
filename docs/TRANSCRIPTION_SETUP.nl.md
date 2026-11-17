@@ -1,6 +1,6 @@
 # OciDeck — Transcriptie en opname: platformsetup
 
-> **Status:** setupmatrix en stapsgewijze gids voor de vrijgegeven builds · **Status laatst nagekeken:** 2026-11-08 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** setupmatrix en stapsgewijze gids voor de vrijgegeven builds · **Status laatst nagekeken:** 2026-11-17 · **Uitgegeven door:** Stichting LibreKAT
 
 Deze pagina beantwoordt, per platform: wat je moet installeren of
 toestaan, hoe een opname een transcript wordt, waar de bestanden staan,
@@ -308,3 +308,19 @@ blijven of verslechteren; dit is geen algemene kwaliteitsgarantie. `[en?]`
 betekent een onzekere taaltoewijzing aan die regio. Je kunt transcripttekst
 en zichtbare tags gewoon corrigeren en opslaan. Oorspronkelijke tijden en
 taaltags blijven als inspecteerbare documentmetadata behouden.
+
+## Optionele sprekerdiarisatie via een lokale server
+
+Voor native macOS arm64 is een expliciet te installeren
+[Nemotron/Whisper-loopbackserver](../testbed/asr-diarization/NEMO_README.md)
+beproefd. Er is geen bestaande ASR-server, modelaccount of gated pyannote-toegang
+voor nodig. De app installeert of kiest deze route niet vanzelf. Configureer
+OciDeck ASR v1, wacht op de capabilitycontrole en kies **Sprekers onderscheiden**;
+Start bevestigt dit bestand en deze bestemming. Lokale CLI/WASM biedt dit niet aan.
+
+In de kleine NL/EN-proeven blijven toegekende sprekernummers bij terugkeer gelijk.
+Onzekere passages worden onbekend of krijgen `(?)`; in het moeilijkste NL-fragment
+blijft ongeveer een kwart onbekend. Overlap kan meerdere IDs krijgen. Dit zijn
+geen persoonsnamen of algemene nauwkeurigheidsgarantie. Je kunt zichtbare labels
+zelf hernoemen; oorspronkelijke tijden en cluster-IDs blijven documentmetadata.
+De volledige release-UI-/hardwarematrix staat los van deze beperkte client-/modelproeven.

@@ -1,0 +1,44 @@
+{
+  "repository": "nvidia/Nemotron-3-Diarization",
+  "revision": "52a432672732425e4c19765b9fec9b5810e6f4ba",
+  "license": "OpenMDW-1.1",
+  "license_url": "https://openmdw.ai/license/1-1/",
+  "license_file": "licenses/OpenMDW-1.1.txt",
+  "license_sha256": "0d6310df74aea1aa659ab43064de65c280824dc973b5440e7da4f1d1b1b22e8a",
+  "file": "Nemotron-3-Diarization.q8_0.gguf",
+  "bytes": 107012128,
+  "sha256": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+  "notices": [
+    {
+      "file": "README.md",
+      "bytes": 44081,
+      "sha256": "111370508eeeb0f397b13cef6c0d5c6cfa55a0f7089c8df7dd54dd2e8e597e86"
+    },
+    {
+      "file": "bias.md",
+      "bytes": 296,
+      "sha256": "94a85f2260ab9d825b11ff28c3686af668bfe44f6b3d0e4525f5c0de9d968a17"
+    },
+    {
+      "file": "explainability.md",
+      "bytes": 2330,
+      "sha256": "e3a4c7664d0c71cebcbff90ba1776316b37c6e445c20307bd5b8a1a622899d47"
+    },
+    {
+      "file": "privacy.md",
+      "bytes": 1283,
+      "sha256": "ce9c4820379a1a1a077c26ea8ae5b380cf1a2c200b121f9c6fc1fd552f49a109"
+    },
+    {
+      "file": "safety.md",
+      "bytes": 489,
+      "sha256": "c178dc56b306f33e7981267a8a73ad11dd0ded16336f62e8eb1452398af45cbf"
+    },
+    {
+      "file": "diarization_evaluation.md",
+      "bytes": 6898,
+      "sha256": "7bfbb965f50360f2fb261a81388448e0d2572aa4f77f1ec04995fed82ee68b71"
+    }
+  ],
+  "app_distribution": false
+}
