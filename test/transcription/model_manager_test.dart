@@ -66,6 +66,30 @@ void main() {
     expect(status.downloading, isFalse);
   });
 
+  test(
+    'download waits for startup sweep and refresh does not sweep again',
+    () async {
+      final gated = _GatedSweepStore(root: temp);
+      store = gated;
+      final c = container(downloaderServing(bytes));
+      addTearDown(c.dispose);
+      final manager = c.read(transcriptionModelManagerProvider.notifier);
+      final download = manager.download(model);
+      await gated.entered.future;
+      // Release before asserting so a regression cannot leave pending work.
+      final wroteBeforeSweep = gated.requestedPath;
+      gated.release.complete();
+      await download;
+      expect(wroteBeforeSweep, isFalse);
+      expect(
+        c.read(transcriptionModelManagerProvider)[model.id]!.install,
+        ModelInstallState.present,
+      );
+      await manager.refresh();
+      expect(gated.sweeps, 1);
+    },
+  );
+
   test('een mislukte download laat failure en absent achter', () async {
     final c = container(
       createTestModelDownloader(
@@ -207,4 +231,26 @@ void main() {
       ModelDownloadFailure.cancelled,
     );
   });
+}
+
+class _GatedSweepStore extends IoModelStore {
+  _GatedSweepStore({required super.root}) : super(candidateRoots: const []);
+  final entered = Completer<void>();
+  final release = Completer<void>();
+  bool requestedPath = false;
+  int sweeps = 0;
+
+  @override
+  Future<ModelStorePath> modelPath(WhisperModel model) {
+    requestedPath = true;
+    return super.modelPath(model);
+  }
+
+  @override
+  Future<void> sweepPartials() async {
+    sweeps++;
+    if (!entered.isCompleted) entered.complete();
+    await release.future;
+    await super.sweepPartials();
+  }
 }

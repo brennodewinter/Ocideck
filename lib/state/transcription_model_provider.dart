@@ -144,12 +144,15 @@ class TranscriptionModelManager
   /// De lopende download per model-id (hooguit één totaal, maar een map
   /// houdt de vorm eerlijk).
   final _active = <String, ModelDownload>{};
+  late Future<void> _ready;
 
   @override
   Map<String, TranscriptionModelStatus> build() {
     // `Future(...)` plant op de event loop: `state` bestaat pas ná deze
-    // return, dus de eerste refresh mag niet synchron uit build vertrekken.
-    unawaited(Future(_refreshAll));
+    // return. Download en overname wachten op de eenmalige opruiming;
+    // latere refreshes mogen geen actieve .part-bestanden verwijderen.
+    _ready = Future(_sweepPartials);
+    unawaited(_refreshAll());
     return const {};
   }
 
@@ -160,7 +163,7 @@ class TranscriptionModelManager
     state = {...state, id: status};
   }
 
-  Future<void> _refreshAll() async {
+  Future<void> _sweepPartials() async {
     if (!ref.mounted) return;
     // Afgebroken downloads mogen geen `.part`-rest achterlaten dat eeuwig
     // opslag vreet — op web is dat een heel model in IndexedDB.
@@ -169,6 +172,11 @@ class TranscriptionModelManager
     } catch (e, s) {
       logError('ModelManager: .part-resten vegen', e, s);
     }
+  }
+
+  Future<void> _refreshAll() async {
+    await _ready;
+    if (!ref.mounted) return;
     for (final model in ref.read(whisperModelCatalogProvider)) {
       final status = _statusOf(model.id);
       if (status.downloading || status.installing) continue;
@@ -220,6 +228,8 @@ class TranscriptionModelManager
   /// `download` terwijl er één loopt is een no-op — de UI biedt die knop
   /// dan ook niet aan.
   Future<void> download(WhisperModel model) async {
+    await _ready;
+    if (!ref.mounted) return;
     // De poort kijkt naar de `downloading`-/`installing`-vlaggen, niet
     // alleen naar _active: die map vult pas na de eerste awaits, dus wie
     // hem alleen bewaakt laat een tweede schrijver op `.part` in het
@@ -297,6 +307,8 @@ class TranscriptionModelManager
   /// tegelijk. Een geslaagde overname eindigt `verified` — zijn hash is
   /// net getoetst, er valt niets meer te raden.
   Future<void> adopt(WhisperModel model, ModelStorePath source) async {
+    await _ready;
+    if (!ref.mounted) return;
     if (_active.isNotEmpty ||
         state.values.any((s) => s.downloading || s.installing)) {
       return;

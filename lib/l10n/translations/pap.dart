@@ -612,6 +612,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Sprekers corrigeren': 'Korigí papiadónan',
+  'Fragment splitsen': 'Partí segmento',
+  'Doelspreker': 'Papiadó di destino',
+  'Toewijzen': 'Asigná',
+  'Nieuwe spreker': 'Papiadó nobo',
+  'Samenvoegen vanuit': 'Uni for di',
+  'Samenvoegen': 'Uni',
+  'Selecteer fragmenten.': 'Selektá segmentonan.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Pone e kursor na e kambio di papiadó. E di dos parti no ta haña marka di tempu.',
   'Ongeldige fragmentgrenzen.': 'Límitenan di fragmento inválido.',
   'Alleen dit fragment': 'Solamente e fragmento aki',
   'Audio downloaden en transcriberen…': 'Baha audio i transkribí…',

@@ -1543,6 +1543,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Sprekers corrigeren': 'Beszélők javítása',
+  'Fragment splitsen': 'Szakasz felosztása',
+  'Doelspreker': 'Célbeszélő',
+  'Toewijzen': 'Hozzárendelés',
+  'Nieuwe spreker': 'Új beszélő',
+  'Samenvoegen vanuit': 'Egyesítés innen',
+  'Samenvoegen': 'Egyesítés',
+  'Selecteer fragmenten.': 'Válasszon szakaszokat.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Helyezze a kurzort a beszélőváltáshoz. A második rész nem kap időbélyeget.',
   'Ongeldige fragmentgrenzen.': 'Érvénytelen részlethatárok.',
   'Alleen dit fragment': 'Csak ez a részlet',
   'Audio downloaden en transcriberen…': 'Hang letöltése és átírása…',

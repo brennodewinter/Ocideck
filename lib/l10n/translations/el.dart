@@ -1565,6 +1565,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Sprekers corrigeren': 'Διόρθωση ομιλητών',
+  'Fragment splitsen': 'Διαίρεση τμήματος',
+  'Doelspreker': 'Ομιλητής προορισμού',
+  'Toewijzen': 'Ανάθεση',
+  'Nieuwe spreker': 'Νέος ομιλητής',
+  'Samenvoegen vanuit': 'Συγχώνευση από',
+  'Samenvoegen': 'Συγχώνευση',
+  'Selecteer fragmenten.': 'Επιλέξτε τμήματα.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Τοποθετήστε τον δρομέα στην αλλαγή ομιλητή. Το δεύτερο μέρος δεν λαμβάνει χρονική σήμανση.',
   'Ongeldige fragmentgrenzen.': 'Μη έγκυρα όρια αποσπάσματος.',
   'Alleen dit fragment': 'Μόνο αυτό το απόσπασμα',
   'Audio downloaden en transcriberen…': 'Λήψη ήχου και μεταγραφή…',

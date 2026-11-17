@@ -1542,6 +1542,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Sprekers corrigeren': 'Sprecher korrigiere',
+  'Fragment splitsen': 'Abschnitt teile',
+  'Doelspreker': 'Ziilsprecher',
+  'Toewijzen': 'Zuewiise',
+  'Nieuwe spreker': 'Neue Sprecher',
+  'Samenvoegen vanuit': 'Zämefüere vo',
+  'Samenvoegen': 'Zämefüere',
+  'Selecteer fragmenten.': 'Abschnitt uuswähle.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Setz de Cursor bim Sprecherwächsel. De zweit Teil überchunnt kei Ziitstempel.',
   'Ongeldige fragmentgrenzen.': 'Ungültigi Usschnittsgränze.',
   'Alleen dit fragment': 'Nume dä Usschnitt',
   'Audio downloaden en transcriberen…': 'Audio abelade und transkribiere…',

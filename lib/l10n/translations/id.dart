@@ -1542,6 +1542,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Sprekers corrigeren': 'Koreksi pembicara',
+  'Fragment splitsen': 'Pisahkan segmen',
+  'Doelspreker': 'Pembicara tujuan',
+  'Toewijzen': 'Tetapkan',
+  'Nieuwe spreker': 'Pembicara baru',
+  'Samenvoegen vanuit': 'Gabungkan dari',
+  'Samenvoegen': 'Gabungkan',
+  'Selecteer fragmenten.': 'Pilih segmen.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Letakkan kursor pada pergantian pembicara. Bagian kedua tidak mendapat penanda waktu.',
   'Ongeldige fragmentgrenzen.': 'Batas cuplikan tidak valid.',
   'Alleen dit fragment': 'Hanya cuplikan ini',
   'Audio downloaden en transcriberen…': 'Unduh audio dan transkripsikan…',

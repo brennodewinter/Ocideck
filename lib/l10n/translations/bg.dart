@@ -1561,6 +1561,16 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Sprekers corrigeren': 'Коригиране на говорители',
+  'Fragment splitsen': 'Разделяне на сегмент',
+  'Doelspreker': 'Целеви говорител',
+  'Toewijzen': 'Задаване',
+  'Nieuwe spreker': 'Нов говорител',
+  'Samenvoegen vanuit': 'Обединяване от',
+  'Samenvoegen': 'Обединяване',
+  'Selecteer fragmenten.': 'Изберете сегменти.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Поставете курсора при смяната на говорителя. Втората част няма времеви маркер.',
   'Ongeldige fragmentgrenzen.': 'Невалидни граници на откъса.',
   'Alleen dit fragment': 'Само този откъс',
   'Audio downloaden en transcriberen…': 'Изтегляне на аудио и транскрибиране…',

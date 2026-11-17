@@ -1542,6 +1542,16 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Sprekers corrigeren': 'Opravit mluvčí',
+  'Fragment splitsen': 'Rozdělit segment',
+  'Doelspreker': 'Cílový mluvčí',
+  'Toewijzen': 'Přiřadit',
+  'Nieuwe spreker': 'Nový mluvčí',
+  'Samenvoegen vanuit': 'Sloučit z',
+  'Samenvoegen': 'Sloučit',
+  'Selecteer fragmenten.': 'Vyberte segmenty.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Umístěte kurzor ke změně mluvčího. Druhá část nedostane časovou značku.',
   'Ongeldige fragmentgrenzen.': 'Neplatné hranice úryvku.',
   'Alleen dit fragment': 'Pouze tento úryvek',
   'Audio downloaden en transcriberen…': 'Stáhnout zvuk a přepsat…',

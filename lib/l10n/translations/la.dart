@@ -1553,6 +1553,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Sprekers corrigeren': 'Oratores corrige',
+  'Fragment splitsen': 'Segmentum divide',
+  'Doelspreker': 'Orator destinatus',
+  'Toewijzen': 'Assigna',
+  'Nieuwe spreker': 'Novus orator',
+  'Samenvoegen vanuit': 'Coniunge ex',
+  'Samenvoegen': 'Coniunge',
+  'Selecteer fragmenten.': 'Segmenta elige.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Cursorem ad mutationem oratoris pone. Pars altera indicem temporis non accipit.',
   'Ongeldige fragmentgrenzen.': 'Fines fragmenti invalidi.',
   'Alleen dit fragment': 'Hoc fragmentum tantum',
   'Audio downloaden en transcriberen…': 'Sonum depone et transcribe…',

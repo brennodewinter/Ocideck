@@ -1556,6 +1556,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Sprekers corrigeren': 'Corectează vorbitorii',
+  'Fragment splitsen': 'Împarte segmentul',
+  'Doelspreker': 'Vorbitor țintă',
+  'Toewijzen': 'Atribuie',
+  'Nieuwe spreker': 'Vorbitor nou',
+  'Samenvoegen vanuit': 'Combină din',
+  'Samenvoegen': 'Combină',
+  'Selecteer fragmenten.': 'Selectați segmentele.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Plasați cursorul la schimbarea vorbitorului. A doua parte nu primește marcaj temporal.',
   'Ongeldige fragmentgrenzen.': 'Limite nevalide ale fragmentului.',
   'Alleen dit fragment': 'Doar acest fragment',
   'Audio downloaden en transcriberen…': 'Descarcă sunetul și transcrie…',

@@ -1545,6 +1545,16 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Sprekers corrigeren': 'Opraviť hovoriacich',
+  'Fragment splitsen': 'Rozdeliť segment',
+  'Doelspreker': 'Cieľový hovoriaci',
+  'Toewijzen': 'Priradiť',
+  'Nieuwe spreker': 'Nový hovoriaci',
+  'Samenvoegen vanuit': 'Zlúčiť z',
+  'Samenvoegen': 'Zlúčiť',
+  'Selecteer fragmenten.': 'Vyberte segmenty.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Umiestnite kurzor pri zmene hovoriaceho. Druhá časť nedostane časovú značku.',
   'Ongeldige fragmentgrenzen.': 'Neplatné hranice úryvku.',
   'Alleen dit fragment': 'Len tento úryvok',
   'Audio downloaden en transcriberen…': 'Stiahnuť zvuk a prepísať…',

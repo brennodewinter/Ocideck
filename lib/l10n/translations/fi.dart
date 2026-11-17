@@ -1542,6 +1542,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Sprekers corrigeren': 'Korjaa puhujat',
+  'Fragment splitsen': 'Jaa jakso',
+  'Doelspreker': 'Kohdepuhuja',
+  'Toewijzen': 'Määritä',
+  'Nieuwe spreker': 'Uusi puhuja',
+  'Samenvoegen vanuit': 'Yhdistä lähteestä',
+  'Samenvoegen': 'Yhdistä',
+  'Selecteer fragmenten.': 'Valitse jaksot.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Aseta kohdistin puhujan vaihtumiskohtaan. Toinen osa ei saa aikaleimaa.',
   'Ongeldige fragmentgrenzen.': 'Virheelliset katkelman rajat.',
   'Alleen dit fragment': 'Vain tämä katkelma',
   'Audio downloaden en transcriberen…': 'Lataa ääni ja litteroi…',

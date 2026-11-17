@@ -1534,6 +1534,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Sprekers corrigeren': 'Paranda kõnelejaid',
+  'Fragment splitsen': 'Jaga lõik',
+  'Doelspreker': 'Sihtkõneleja',
+  'Toewijzen': 'Määra',
+  'Nieuwe spreker': 'Uus kõneleja',
+  'Samenvoegen vanuit': 'Ühenda lähtekõneleja',
+  'Samenvoegen': 'Ühenda',
+  'Selecteer fragmenten.': 'Vali lõigud.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Aseta kursor kõneleja vahetuse kohale. Teine osa ei saa ajatemplit.',
   'Ongeldige fragmentgrenzen.': 'Vigased lõigupiirid.',
   'Alleen dit fragment': 'Ainult see lõik',
   'Audio downloaden en transcriberen…': 'Laadi heli alla ja transkribeeri…',

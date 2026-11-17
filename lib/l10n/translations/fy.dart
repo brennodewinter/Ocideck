@@ -613,6 +613,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Sprekers corrigeren': 'Sprekkers korrizjearje',
+  'Fragment splitsen': 'Fragmint splitse',
+  'Doelspreker': 'Doelsprekker',
+  'Toewijzen': 'Tawize',
+  'Nieuwe spreker': 'Nije sprekker',
+  'Samenvoegen vanuit': 'Gearfoegje fanút',
+  'Samenvoegen': 'Gearfoegje',
+  'Selecteer fragmenten.': 'Selektearje fragminten.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Set de rinnerke by de sprekkerswiksel. It twadde diel krijt gjin tiidstimpel.',
   'Ongeldige fragmentgrenzen.': 'Unjildige fragmintgrinzen.',
   'Alleen dit fragment': 'Allinnich dit fragmint',
   'Audio downloaden en transcriberen…': 'Audio downloade en transkribearje…',

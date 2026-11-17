@@ -1542,6 +1542,16 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Sprekers corrigeren': 'Ret talere',
+  'Fragment splitsen': 'Opdel segment',
+  'Doelspreker': 'Måltaler',
+  'Toewijzen': 'Tildel',
+  'Nieuwe spreker': 'Ny taler',
+  'Samenvoegen vanuit': 'Flet fra',
+  'Samenvoegen': 'Flet',
+  'Selecteer fragmenten.': 'Vælg segmenter.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Placer markøren ved talerskiftet. Anden del får intet tidsstempel.',
   'Ongeldige fragmentgrenzen.': 'Ugyldige grænser for uddrag.',
   'Alleen dit fragment': 'Kun dette uddrag',
   'Audio downloaden en transcriberen…': 'Hent lyd og transskriber…',

@@ -1546,6 +1546,16 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Sprekers corrigeren': 'Ispravi govornike',
+  'Fragment splitsen': 'Podijeli segment',
+  'Doelspreker': 'Ciljni govornik',
+  'Toewijzen': 'Dodijeli',
+  'Nieuwe spreker': 'Novi govornik',
+  'Samenvoegen vanuit': 'Spoji iz',
+  'Samenvoegen': 'Spoji',
+  'Selecteer fragmenten.': 'Odaberite segmente.',
+  'Plaats de cursor bij de sprekerwisseling. Het tweede deel krijgt geen tijdstip.':
+      'Postavite pokazivač na promjenu govornika. Drugi dio ne dobiva vremensku oznaku.',
   'Ongeldige fragmentgrenzen.': 'Nevažeće granice isječka.',
   'Alleen dit fragment': 'Samo ovaj isječak',
   'Audio downloaden en transcriberen…': 'Preuzmi zvuk i transkribiraj…',
