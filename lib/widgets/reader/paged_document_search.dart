@@ -114,8 +114,9 @@ extension _PagedDocumentSearch on _PagedDocumentViewState {
         signal == 0 ||
         _handledSearchSignal == signal ||
         _pageOffsets.isEmpty ||
-        _blockHeights == null)
+        _blockHeights == null) {
       return;
+    }
     if (note != null && note != _searchSelection.noteLabel) return;
     final int page;
     final double within;

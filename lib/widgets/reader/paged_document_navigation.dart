@@ -61,8 +61,9 @@ extension _PagedDocumentNavigation on _PagedDocumentViewState {
   bool _jumpToPage(int page, double withinPage) {
     if (!_searchScroll.hasClients ||
         _pageStride <= 0 ||
-        !_searchScroll.position.hasContentDimensions)
+        !_searchScroll.position.hasContentDimensions) {
       return false;
+    }
     final position = _searchScroll.position;
     // Een doel hoeft niet gemonteerd te zijn: de vaste velmaat en de gedeelde
     // blokmeting bepalen zijn scrollpositie rechtstreeks.

@@ -173,8 +173,12 @@ void main() {
         );
         await tester.pumpAndSettle();
         for (var i = 0; i < 19; i++) {
-          if (hasVisibleInstance(tester, find.textContaining('Gebeurtenis $i')))
+          if (hasVisibleInstance(
+            tester,
+            find.textContaining('Gebeurtenis $i'),
+          )) {
             seen.add(i);
+          }
         }
       }
       expect(seen, containsAll(List.generate(19, (i) => i)));
