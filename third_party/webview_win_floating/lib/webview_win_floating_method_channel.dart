@@ -147,6 +147,7 @@ class MethodChannelWebviewWinFloating extends WebviewWinFloatingPlatform {
     String? userDataFolder,
     String? profileName,
     bool offscreen = false,
+    bool allowMediaAutoplay = false,
   }) async {
     return await methodChannel.invokeMethod<bool>('create', {
           "webviewId": webviewId,
@@ -154,6 +155,7 @@ class MethodChannelWebviewWinFloating extends WebviewWinFloatingPlatform {
           "userDataFolder": userDataFolder ?? "",
           "profileName": profileName ?? "",
           "offscreen": offscreen,
+          "allowMediaAutoplay": allowMediaAutoplay,
         }) ??
         false;
   }

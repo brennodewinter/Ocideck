@@ -45,6 +45,7 @@ abstract class WebviewWinFloatingPlatform extends PlatformInterface {
     String? userDataFolder,
     String? profileName,
     bool offscreen = false,
+    bool allowMediaAutoplay = false,
   }) {
     throw UnimplementedError();
   }

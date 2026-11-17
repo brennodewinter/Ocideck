@@ -430,6 +430,15 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
         oldWidget.autoplay != widget.autoplay ||
         oldWidget.allowRemoteMedia != widget.allowRemoteMedia;
     if (!changed) return;
+    // Browser arguments belong to an environment, not to a loaded document.
+    // Recreate on a Windows policy change, keeping ordinary and autoplay views
+    // in different profiles rather than inheriting a stale environment.
+    if (defaultTargetPlatform == TargetPlatform.windows &&
+        oldWidget.autoplay != widget.autoplay &&
+        _controller != null) {
+      _stopPlayback();
+      _controller = null;
+    }
     if (widget.allowRemoteMedia) {
       if (_controller == null) {
         WidgetsBinding.instance.addPostFrameCallback((_) => _initWebView());
@@ -454,8 +463,12 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
       if (_desktopWebView) {
         final cache = await getApplicationCacheDirectory();
         if (!mounted || !widget.allowRemoteMedia) return;
+        final allowAutoplay =
+            defaultTargetPlatform == TargetPlatform.windows && widget.autoplay;
+        final suffix = allowAutoplay ? '-autoplay' : '';
         params = WindowsWebViewControllerCreationParams(
-          userDataFolder: '${cache.path}/video-webview',
+          userDataFolder: '${cache.path}/video-webview$suffix',
+          allowMediaAutoplay: allowAutoplay,
           // Presenter and audience windows must both keep playing.
           suspendDuringDeactive: false,
         );

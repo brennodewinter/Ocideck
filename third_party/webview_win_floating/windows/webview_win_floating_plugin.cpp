@@ -78,6 +78,8 @@ void WebviewWinFloatingPlugin::createWebview(const flutter::MethodCall<flutter::
   const auto& creation = std::get<flutter::EncodableMap>(*method_call.arguments());
   const auto hidden = creation.find(flutter::EncodableValue("offscreen"));
   params.offscreen = hidden != creation.end() && std::get<bool>(hidden->second);
+  const auto autoplay = creation.find(flutter::EncodableValue("allowMediaAutoplay"));
+  params.allowMediaAutoplay = autoplay != creation.end() && std::get<bool>(autoplay->second);
 
   params.onCreated = [=](HRESULT hr, MyWebView *webview) -> void {
     if (webview != NULL) {

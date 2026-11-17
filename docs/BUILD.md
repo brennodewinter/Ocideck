@@ -1841,3 +1841,15 @@ pass actual packaging/consumer checks; `make licenses` alone is insufficient.
 Independent release channels embed their build-specific source archive in each
 artifact. The full release candidate also publishes the standalone Ubuntu
 source archive; independent channels keep disjoint asset ownership.
+
+For Windows runtimes such as Edge/WebView2 131 that do not emit an autoplay
+permission request, video opt-in creates an isolated WebView2 environment with
+`--autoplay-policy=no-user-gesture-required`. Its user-data folder is separate
+from ordinary video previews and offline renderers. No environment variable or
+global browser option is changed. Turning the slide's autoplay option off
+recreates the controller with the default policy. Browser flags are a runtime
+compatibility mechanism; the player-level waiting/recovery action remains the
+fallback when the runtime or remote player still refuses playback. The Windows
+probe compares ordinary-before/video-opt-in/ordinary-after with a real local
+cross-origin audio frame, then the actual nocookie player without an earlier
+physical interaction, and finally real child-window keys with confirmed focus.

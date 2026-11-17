@@ -90,6 +90,24 @@ jobs:
           flutter-version: 3.47.9
           cache: true
 
+      - name: Identify native compiler image
+        if: ${{ inputs.video_only }}
+        id: video-build-context
+        shell: bash
+        run: echo "image=${ImageVersion:-unknown}" >> "$GITHUB_OUTPUT"
+
+      - name: Restore native video build cache
+        if: ${{ inputs.video_only }}
+        id: video-native-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner/shared
+            build/windows/x64
+          key: windows-video-native-${{ steps.video-build-context.outputs.image }}-${{ hashFiles('pubspec.lock', '.tool-versions', 'windows/**/CMakeLists.txt', 'third_party/**/CMakeLists.txt') }}-${{ github.sha }}
+          restore-keys: |
+            windows-video-native-${{ steps.video-build-context.outputs.image }}-${{ hashFiles('pubspec.lock', '.tool-versions', 'windows/**/CMakeLists.txt', 'third_party/**/CMakeLists.txt') }}-
+
       - name: Install dependencies
         run: flutter pub get --enforce-lockfile
 
@@ -168,6 +186,17 @@ jobs:
           mkdir -p "$RUNNER_TEMP/windows-video"
           export VIDEO_RESULT_FILE="$RUNNER_TEMP/windows-video/results.json"
           flutter drive --profile -d windows --driver=test_driver/windows_video_driver.dart --target=integration_test/windows_video_navigation_test.dart 2>&1 | tee build/ci-diagnostics/windows-video-native.log
+
+      # Cache compilation, never test outcomes. Save even when a real player
+      # assertion fails, so the next immutable source still runs all probes.
+      - name: Save native video build cache
+        if: ${{ always() && inputs.video_only && hashFiles('build/windows/x64/runner/Profile/ocideck.exe') != '' && steps.video-native-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner/shared
+            build/windows/x64
+          key: ${{ steps.video-native-cache.outputs.cache-primary-key }}
 
       - name: Windows video evidence
         if: ${{ always() && inputs.video_only }}

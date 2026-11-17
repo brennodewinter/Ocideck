@@ -17,6 +17,7 @@ void main() {
   late WinWebViewController controller;
   late int id;
   late List<MethodCall> replies;
+  late List<Map<Object?, Object?>> creations;
   Completer<void>? acknowledge;
 
   Future<void> permission(int kind, {int deferral = 1}) async {
@@ -45,10 +46,12 @@ void main() {
 
   setUp(() async {
     replies = [];
+    creations = [];
     acknowledge = null;
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, (call) async {
           if (call.method == 'create') {
+            creations.add(Map<Object?, Object?>.from(call.arguments as Map));
             id = (call.arguments as Map)['webviewId'] as int;
           }
           if (call.method == 'grantPermission') {
@@ -152,6 +155,34 @@ void main() {
     expect(allowed(player.toString(), online: false), isFalse);
     expect(allowed(player.toString(), autoplay: false), isFalse);
   });
+
+  test(
+    'creation opt-in travels only with the intended video controller',
+    () async {
+      final video = WinWebViewController(
+        params: const WindowsWebViewControllerCreationParams(
+          userDataFolder: '/private-video-autoplay',
+          allowMediaAutoplay: true,
+        ),
+      );
+      final ordinary = WinWebViewController(
+        params: const WindowsWebViewControllerCreationParams(
+          userDataFolder: '/offline-renderer',
+        ),
+      );
+      await video.setJavaScriptMode(JavaScriptMode.unrestricted);
+      await ordinary.setJavaScriptMode(JavaScriptMode.unrestricted);
+      expect(creations.map((entry) => entry['allowMediaAutoplay']), [
+        false,
+        true,
+        false,
+      ]);
+      expect(creations[1]['userDataFolder'], '/private-video-autoplay');
+      expect(creations[2]['userDataFolder'], '/offline-renderer');
+      await video.dispose();
+      await ordinary.dispose();
+    },
+  );
 
   test(
     'native autoplay ID 9 reaches callback and gets exactly one reply',

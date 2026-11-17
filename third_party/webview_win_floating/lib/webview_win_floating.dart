@@ -257,6 +257,7 @@ class WinWebViewController {
       userDataFolder: this.params.userDataFolder,
       profileName: this.params.profileName,
       offscreen: this.params.offscreen,
+      allowMediaAutoplay: this.params.allowMediaAutoplay,
     );
   }
 

@@ -10,6 +10,7 @@
 
 #include <windows.h>
 #include <WebView2.h>
+#include <WebView2EnvironmentOptions.h>
 
 #include <wrl.h>
 #include <wil/com.h>
@@ -118,7 +119,12 @@ private:
     wil::com_ptr<ICoreWebView2Settings> m_pSettings;
     RECT m_bounds = { 0,0,0,0 };
 };
-wil::com_ptr<ICoreWebView2Environment> g_env;
+using WebViewEnvironment = wil::com_ptr<ICoreWebView2Environment>;
+using EnvironmentKey = std::pair<std::wstring, bool>;
+// A video opt-in must never mutate an environment used by a normal browser or
+// the offline renderer. WebView2 also requires distinct user-data folders for
+// environments with different browser arguments.
+std::map<EnvironmentKey, WebViewEnvironment> g_environments;
 
 // --------------------------------------------------------------------------
 
@@ -130,22 +136,36 @@ MyWebView* MyWebView::Create(HWND hWnd,
     return new MyWebViewImpl(hWnd, params, pwUserDataFolder, pwProfileName);
 }
 
-HRESULT InitWebViewRuntime(PCWSTR pwUserDataFolder, std::function<void(HRESULT)> callback = nullptr)
+HRESULT InitWebViewRuntime(PCWSTR userDataFolder, bool allowMediaAutoplay,
+    std::function<void(HRESULT, WebViewEnvironment)> callback)
 {
-    if (g_env != NULL) {
-        if (callback != nullptr) callback(S_OK);
+    if (allowMediaAutoplay && (!userDataFolder || !*userDataFolder)) {
+        callback(E_INVALIDARG, WebViewEnvironment{});
+        return E_INVALIDARG;
+    }
+    const EnvironmentKey key(userDataFolder ? userDataFolder : L"", allowMediaAutoplay);
+    const auto existing = g_environments.find(key);
+    if (existing != g_environments.end()) {
+        callback(S_OK, existing->second);
         return S_OK;
     }
-
-    return CreateCoreWebView2EnvironmentWithOptions(nullptr, pwUserDataFolder, nullptr,
+    auto options = Microsoft::WRL::Make<CoreWebView2EnvironmentOptions>();
+    if (allowMediaAutoplay) {
+        const auto result = options->put_AdditionalBrowserArguments(
+            L"--autoplay-policy=no-user-gesture-required");
+        if (FAILED(result)) { callback(result, WebViewEnvironment{}); return result; }
+    }
+    const auto creationResult = CreateCoreWebView2EnvironmentWithOptions(nullptr, userDataFolder, options.Get(),
         Callback<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler>(
-            [callback](HRESULT result, ICoreWebView2Environment* env) -> HRESULT {
-                if (result == S_OK) {
-                    g_env = env;
-                }
-                if (callback != nullptr) callback(result);
+            [callback, key](HRESULT result, ICoreWebView2Environment* env) -> HRESULT {
+                WebViewEnvironment environment = env;
+                if (SUCCEEDED(result) && !env) result = E_POINTER;
+                if (SUCCEEDED(result)) g_environments[key] = environment;
+                callback(result, environment);
                 return result;
             }).Get());
+    if (FAILED(creationResult)) callback(creationResult, WebViewEnvironment{});
+    return creationResult;
 }
 
 HRESULT ReleaseWebViewRuntime()
@@ -160,7 +180,8 @@ MyWebViewImpl::MyWebViewImpl(HWND hWnd,
 {
     std::wstring profileName = (pwProfileName != NULL) ? pwProfileName : L"";
 
-    InitWebViewRuntime(pwUserDataFolder, [=](HRESULT hr) -> void {
+    InitWebViewRuntime(pwUserDataFolder, params.allowMediaAutoplay,
+        [=](HRESULT hr, WebViewEnvironment environment) -> void {
         if (hr != S_OK) {
             params.onCreated(hr, NULL);
             return;
@@ -463,7 +484,7 @@ MyWebViewImpl::MyWebViewImpl(HWND hWnd,
         // a controller with profile-based isolation (shared process, separate sessions).
         // See: https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/multi-profile-support
         if (!profileName.empty()) {
-            auto env10 = g_env.try_query<ICoreWebView2Environment10>();
+            auto env10 = environment.try_query<ICoreWebView2Environment10>();
             if (env10 != NULL) {
                 wil::com_ptr<ICoreWebView2ControllerOptions> options;
                 HRESULT optHr = env10->CreateCoreWebView2ControllerOptions(&options);
@@ -479,7 +500,7 @@ MyWebViewImpl::MyWebViewImpl(HWND hWnd,
         }
 
         // Standard path: no profile name, or profile API unavailable
-        g_env->CreateCoreWebView2Controller(hWnd, onControllerCreated.Get());
+        environment->CreateCoreWebView2Controller(hWnd, onControllerCreated.Get());
         });
 }
 
