@@ -15,6 +15,8 @@ import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/transcription/transcript_document.dart';
+import 'package:ocideck/services/transcription/transcription_engine.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
@@ -46,6 +48,34 @@ void main() {
     );
     return projectedDocumentBody(bundle);
   }
+
+  test(
+    'ruwe transcriptcluster-IDs blijven zichtbaar voor privacyredactie',
+    () async {
+      final source = formatTranscriptBody(const [
+        TranscriptSegment(
+          text: 'Openbare tekst.',
+          start: Duration.zero,
+          end: Duration(seconds: 1),
+          speakerIds: ['BSN-728398242'],
+        ),
+      ]);
+      expect(source, contains(bsn));
+      final bundle = await buildDocumentExportBundle(
+        source,
+        projectPath: null,
+        profile: PrivacyExportProfile.redacted,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      final projected = projectedDocumentBody(bundle);
+      expect(projected, isNot(contains(bsn)));
+      expect(projected, contains(kRedactionToken));
+      expect(source, contains(bsn), reason: 'bron blijft auteursbezit');
+    },
+  );
 
   test('het geredigeerde profiel haalt het BSN uit de documentbody', () async {
     final out = await projectedBodyFor(PrivacyExportProfile.redacted);

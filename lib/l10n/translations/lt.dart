@@ -1548,6 +1548,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Serverprotocol': 'Serverio protokolas',
+  'Spreker': 'Kalbėtojas',
   'Automatisch afspelen is niet gestart.': 'Automatinis atkūrimas neprasidėjo.',
   'Audio- en videoformaten': 'Garso ir vaizdo formatai',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':

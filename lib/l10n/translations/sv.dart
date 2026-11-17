@@ -1541,6 +1541,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Serverprotocol': 'Serverprotokoll',
+  'Spreker': 'Talare',
   'Automatisch afspelen is niet gestart.':
       'Automatisk uppspelning startade inte.',
   'Audio- en videoformaten': 'Ljud- och videoformat',

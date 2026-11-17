@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Serverprotocol': 'Protocollum ministri',
+  'Spreker': 'Loquens',
   'Automatisch afspelen is niet gestart.':
       'Reproductio automatica non incepit.',
   'Audio- en videoformaten': 'Formae soni et imaginis mobilis',

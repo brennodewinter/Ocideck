@@ -1545,6 +1545,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Serverprotocol': 'Protokol servera',
+  'Spreker': 'Hovoriaci',
   'Automatisch afspelen is niet gestart.':
       'Automatické prehrávanie sa nespustilo.',
   'Audio- en videoformaten': 'Zvukové a obrazové formáty',

@@ -1567,6 +1567,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Serverprotocol': 'Protocolo do servidor',
+  'Spreker': 'Falante',
   'Automatisch afspelen is niet gestart.':
       'A reprodução automática não começou.',
   'Audio- en videoformaten': 'Formatos de áudio e vídeo',

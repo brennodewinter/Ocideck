@@ -37,7 +37,9 @@ void main() {
   test(
     'POST bereikt de server met headers en body, antwoord komt terug',
     () async {
-      final t = await start((req) {
+      String? received;
+      final t = await start((req) async {
+        received = await utf8.decoder.bind(req).join();
         req.response.statusCode = 200;
         req.response.write('{"text":"goeiemorgen"}');
       });
@@ -55,6 +57,8 @@ void main() {
       expect(req.method, 'POST');
       expect(req.uri.path, '/inference');
       expect(req.headers.value('authorization'), 'Bearer geheim');
+      expect(req.contentLength, utf8.encode('--boundary-audio').length);
+      expect(received, '--boundary-audio');
     },
   );
 

@@ -1543,6 +1543,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Serverprotocol': 'Kiszolgálóprotokoll',
+  'Spreker': 'Beszélő',
   'Automatisch afspelen is niet gestart.':
       'Az automatikus lejátszás nem indult el.',
   'Audio- en videoformaten': 'Hang- és videoformátumok',

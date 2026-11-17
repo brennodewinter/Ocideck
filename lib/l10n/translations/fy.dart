@@ -613,6 +613,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Serverprotocol': 'Tsjinnerprotokol',
+  'Spreker': 'Sprekker',
   'Automatisch afspelen is niet gestart.': 'Automatysk ôfspyljen is net begûn.',
   'Audio- en videoformaten': 'Audio- en fideoformaten',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':

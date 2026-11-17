@@ -13,6 +13,7 @@ import 'dart:convert';
 import '../../utils/document_front_matter.dart';
 import 'transcript_marker.dart';
 import 'transcription_engine.dart' show TranscriptSegment;
+import 'transcription_errors.dart' show CapacityExceeded;
 
 /// Bovengrens voor de binnenkomende transcripttekst bij een toepassing
 /// (§-acceptatie "Begrens invoer-/uitvoergrootte"). 8 MiB platte tekst is
@@ -139,18 +140,65 @@ String buildTranscriptMarkdown(
 /// leverde (§2.4). Zonder tijdstempel geen `[…]`; zonder spreker geen
 /// `**…:**`. [speakerLabel] dekt `Spreker`, `microfoon` e.d. — de engine
 /// levert de naam, deze functie de plaats.
-String formatTranscriptBody(List<TranscriptSegment> segments) => segments
-    .map((segment) {
-      final prefix = StringBuffer();
-      if (segment.start != null) {
-        prefix.write('[${_formatTimecode(segment.start!)}] ');
-      }
-      if (segment.speaker != null) {
-        prefix.write('**${segment.speaker}:** ');
-      }
-      return '$prefix${segment.text}';
-    })
-    .join('\n');
+String formatTranscriptBody(
+  List<TranscriptSegment> segments, {
+  String speakerLabel = 'Spreker',
+  String unknownLabel = 'Onbekend',
+}) {
+  if (segments.every((s) => s.text.trim().isEmpty)) return '';
+  final names = <String, int>{};
+  final lines = <String>[];
+  for (final segment in segments) {
+    final prefix = StringBuffer();
+    if (segment.start != null) {
+      prefix.write('[${_formatTimecode(segment.start!)}] ');
+    }
+    var name = segment.speaker;
+    if (segment.speakerIds.isNotEmpty) {
+      name = segment.speakerIds
+          .map((id) {
+            final number = names.putIfAbsent(id, () => names.length + 1);
+            return '$speakerLabel $number';
+          })
+          .join(' + ');
+    } else if (segment.speakerUncertain) {
+      name = unknownLabel;
+    }
+    if (name != null) {
+      prefix.write('**$name${segment.speakerUncertain ? ' (?)' : ''}:** ');
+    }
+    lines.add('$prefix${segment.text}');
+  }
+  final metadata = _segmentMetadata(segments);
+  if (metadata.isNotEmpty) {
+    final json = jsonEncode(metadata)
+        .replaceAll('<', r'\u003c')
+        .replaceAll('>', r'\u003e')
+        .replaceAll('--', r'\u002d\u002d');
+    lines.add('\n<!-- ocideck:segments:v1 $json -->');
+  }
+  final body = lines.join('\n');
+  if (utf8.encode(body).length > maxTranscriptBodyBytes) {
+    throw const CapacityExceeded('transcript met tijdmetadata te groot');
+  }
+  return body;
+}
+
+// Alleen tijden en cluster-IDs; nooit stemvectoren of een persoonsidentiteit.
+List<Map<String, Object?>> _segmentMetadata(List<TranscriptSegment> segments) =>
+    [
+      for (var i = 0; i < segments.length; i++)
+        if (segments[i].end != null ||
+            segments[i].speakerIds.isNotEmpty ||
+            segments[i].speakerUncertain)
+          {
+            'segment': i,
+            'start_us': segments[i].start?.inMicroseconds,
+            'end_us': segments[i].end?.inMicroseconds,
+            'speaker_ids': segments[i].speakerIds,
+            'speaker_uncertain': segments[i].speakerUncertain,
+          },
+    ];
 
 String _formatTimecode(Duration d) {
   final h = d.inHours;

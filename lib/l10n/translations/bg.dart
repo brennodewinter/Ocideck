@@ -1561,6 +1561,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Serverprotocol': 'Сървърен протокол',
+  'Spreker': 'Говорител',
   'Automatisch afspelen is niet gestart.':
       'Автоматичното възпроизвеждане не започна.',
   'Audio- en videoformaten': 'Аудио и видео формати',

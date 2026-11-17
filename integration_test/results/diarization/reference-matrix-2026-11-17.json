@@ -1,0 +1,863 @@
+{
+  "scope": "experimental reference backend, not release UI acceptance",
+  "hardware": "Apple Silicon host; linux/amd64 Vosk image under Colima emulation; container limited to 2 CPUs/1 GiB",
+  "algorithm": "utterance x-vectors, cosine distance 0.3; no overlap detection; all assignments uncertain",
+  "der": null,
+  "der_unavailable_reason": "Public clips have speaker IDs but no hand-aligned activity/overlap reference. Synthetic source spans include natural pauses; not a DER denominator.",
+  "memory_metric": "Docker container working set before/after each request, not process peak RSS",
+  "backend_sha256": "c8de1b754509b4b54e8507dc8e45929968a362fe8d9d6565b81106e1ec59fb6f",
+  "fixture_manifest": {
+    "license": "CC-BY-4.0 source corpora; original synthetic backing: CC0",
+    "nl_source": "https://huggingface.co/datasets/facebook/multilingual_librispeech/tree/2e83e61823b4c47dcbcb1980bb88601274127609",
+    "en_source": "https://www.openslr.org/12/",
+    "corpus_sha256": {
+      "nl-test.parquet": "feb88a282be746e7c14e1f09c017b4f69b07df9c25c94a3943eaac5ca7794ad5",
+      "en-test-clean.tar.gz": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23"
+    },
+    "selected": {
+      "nl": {
+        "3034": {
+          "id": "3034_2211_000000",
+          "path": "nl-3034.opus",
+          "sha256": "1d2db1334465ba4c53b1b49a47dfccb62b5e126ce2752337b16b82f50d68029e"
+        },
+        "3798": {
+          "id": "3798_2211_000000",
+          "path": "nl-3798.opus",
+          "sha256": "495fab7ced477fd47ffa7ddab5eff3c32f01af6269e8fbd7d3c92c2054d498e9"
+        },
+        "4429": {
+          "id": "4429_3478_000000",
+          "path": "nl-4429.opus",
+          "sha256": "0b9f2d947b355518ddcafd0dbd92c164a93f9bde2443eef06b17b41c8fb08fbf"
+        }
+      },
+      "en": {
+        "6930": {
+          "member": "LibriSpeech/test-clean/6930/75918/6930-75918-0000.flac",
+          "path": "en-6930.flac",
+          "sha256": "9ce35224156f071ab58eb7feb8a5ceae600f6f9f353da2a6cbf797b6b1ac8a23"
+        },
+        "1320": {
+          "member": "LibriSpeech/test-clean/1320/122617/1320-122617-0003.flac",
+          "path": "en-1320.flac",
+          "sha256": "bbe9ef85bbe228c73a414f064c9bd992c94135d73f9900b33104ad93c07d0594"
+        },
+        "5639": {
+          "member": "LibriSpeech/test-clean/5639/40744/5639-40744-0032.flac",
+          "path": "en-5639.flac",
+          "sha256": "ecba1c65406f3d2fdfe383a22385dfe19cc117b71b126817f5e20df791f22a50"
+        }
+      }
+    },
+    "cases": [
+      {
+        "file": "nl-single.wav",
+        "language": "nl",
+        "layout": "single",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          }
+        ],
+        "sha256": "bbc1a49504d61ffd68d0d220f457d2477fc959eb10a42e08960ae46d34b70116",
+        "duration_s": 16.49
+      },
+      {
+        "file": "nl-aba.wav",
+        "language": "nl",
+        "layout": "aba",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          },
+          {
+            "start": 16.49,
+            "end": 34.64,
+            "source_ids": [
+              "3798"
+            ]
+          },
+          {
+            "start": 35.64,
+            "end": 51.13,
+            "source_ids": [
+              "3034"
+            ]
+          }
+        ],
+        "sha256": "27b1730c35b0313a9a91db269427bdebc03b50c26b2b8d7df12130ce686d1b79",
+        "duration_s": 52.13
+      },
+      {
+        "file": "nl-three.wav",
+        "language": "nl",
+        "layout": "three",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          },
+          {
+            "start": 16.49,
+            "end": 34.64,
+            "source_ids": [
+              "3798"
+            ]
+          },
+          {
+            "start": 35.64,
+            "end": 45.75,
+            "source_ids": [
+              "4429"
+            ]
+          }
+        ],
+        "sha256": "bb6badd4b08937d1ec3be70df4166c3fb2e115fc6818ba46f1cdee6e1353d974",
+        "duration_s": 46.75
+      },
+      {
+        "file": "nl-overlap.wav",
+        "language": "nl",
+        "layout": "overlap",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 15.49,
+            "source_ids": [
+              "3034",
+              "3798"
+            ]
+          }
+        ],
+        "sha256": "47406cffd34d73737dae2e0e6cc2dad871a5dc01c6f34a824ab33da1810b3303",
+        "duration_s": 15.49
+      },
+      {
+        "file": "nl-stereo-downmix.wav",
+        "language": "nl",
+        "layout": "stereo-downmix",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 15.49,
+            "source_ids": [
+              "3034",
+              "3798"
+            ]
+          }
+        ],
+        "sha256": "47406cffd34d73737dae2e0e6cc2dad871a5dc01c6f34a824ab33da1810b3303",
+        "duration_s": 15.49
+      },
+      {
+        "file": "nl-music.wav",
+        "language": "nl",
+        "layout": "music",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 15.49,
+            "source_ids": [
+              "3034"
+            ]
+          }
+        ],
+        "sha256": "17ca71209ac746d7d6b69e1aaf0d561008228c439fdfd81e2e37f43e4845424a",
+        "duration_s": 15.49
+      },
+      {
+        "file": "en-single.wav",
+        "language": "en",
+        "layout": "single",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          }
+        ],
+        "sha256": "f5ad2e4643741fabebdfc566efde7b91fc1454948fb1d4dc1661a9ca7e4ee560",
+        "duration_s": 4.505
+      },
+      {
+        "file": "en-aba.wav",
+        "language": "en",
+        "layout": "aba",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          },
+          {
+            "start": 4.505,
+            "end": 10.79,
+            "source_ids": [
+              "1320"
+            ]
+          },
+          {
+            "start": 11.79,
+            "end": 15.295,
+            "source_ids": [
+              "6930"
+            ]
+          }
+        ],
+        "sha256": "307084acd4d750042c94114ce684d65e278fdd3a0dedbfac390ce35f4053cf92",
+        "duration_s": 16.295
+      },
+      {
+        "file": "en-three.wav",
+        "language": "en",
+        "layout": "three",
+        "source_spans": [
+          {
+            "start": 0.0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          },
+          {
+            "start": 4.505,
+            "end": 10.79,
+            "source_ids": [
+              "1320"
+            ]
+          },
+          {
+            "start": 11.79,
+            "end": 29.22,
+            "source_ids": [
+              "5639"
+            ]
+          }
+        ],
+        "sha256": "e9643602096c01d7c071e06735404b844aa881dfe09fc9853378f97cb37bd661",
+        "duration_s": 30.22
+      },
+      {
+        "file": "en-overlap.wav",
+        "language": "en",
+        "layout": "overlap",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 3.505,
+            "source_ids": [
+              "6930",
+              "1320"
+            ]
+          }
+        ],
+        "sha256": "20e351628541594e3aca8f9901a5b837d0007c5d668bb79248221d13a3094304",
+        "duration_s": 3.505
+      },
+      {
+        "file": "en-stereo-downmix.wav",
+        "language": "en",
+        "layout": "stereo-downmix",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 3.505,
+            "source_ids": [
+              "6930",
+              "1320"
+            ]
+          }
+        ],
+        "sha256": "20e351628541594e3aca8f9901a5b837d0007c5d668bb79248221d13a3094304",
+        "duration_s": 3.505
+      },
+      {
+        "file": "en-music.wav",
+        "language": "en",
+        "layout": "music",
+        "source_spans": [
+          {
+            "start": 0,
+            "end": 3.505,
+            "source_ids": [
+              "6930"
+            ]
+          }
+        ],
+        "sha256": "0b26250315ab3a226c9a72a778e50ae63baef1b52fd69de992ef922208a2ca25",
+        "duration_s": 3.505
+      }
+    ],
+    "reference_limit": "Source-span boundaries include natural pauses. No hand-aligned speech activity; do not report these as DER references."
+  },
+  "cases": [
+    {
+      "file": "nl-single.wav",
+      "language": "nl",
+      "layout": "single",
+      "duration_s": 16.49,
+      "elapsed_s": 29.563845583,
+      "realtime_factor": 1.7928347836870833,
+      "memory_before": "471.2MiB / 1GiB",
+      "memory_after": "471.9MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 2,
+      "clusters_by_source_occurrence": {
+        "3034": [
+          [
+            "cluster-1",
+            "cluster-2"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": false,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 1.548239,
+          "end": 5.73,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 7.35,
+          "end": 15.15,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "nl-aba.wav",
+      "language": "nl",
+      "layout": "aba",
+      "duration_s": 52.13,
+      "elapsed_s": 74.20259425,
+      "realtime_factor": 1.4234144302704776,
+      "memory_before": "471.9MiB / 1GiB",
+      "memory_after": "474.6MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 4,
+      "clusters_by_source_occurrence": {
+        "3034": [
+          [
+            "cluster-1",
+            "cluster-2"
+          ],
+          [
+            "cluster-1",
+            "cluster-2"
+          ]
+        ],
+        "3798": [
+          [
+            "cluster-3",
+            "cluster-4"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": false,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 1.548294,
+          "end": 5.73,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 7.35,
+          "end": 15.15,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 17.16,
+          "end": 19.425663,
+          "speaker_ids": [
+            "cluster-3"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 20.64,
+          "end": 33.99,
+          "speaker_ids": [
+            "cluster-4"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 36.81,
+          "end": 41.362255,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 42.99,
+          "end": 50.79,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "nl-three.wav",
+      "language": "nl",
+      "layout": "three",
+      "duration_s": 46.75,
+      "elapsed_s": 68.985989292,
+      "realtime_factor": 1.4756361345882352,
+      "memory_before": "474.6MiB / 1GiB",
+      "memory_after": "482.6MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 5,
+      "clusters_by_source_occurrence": {
+        "3034": [
+          [
+            "cluster-1",
+            "cluster-2"
+          ]
+        ],
+        "3798": [
+          [
+            "cluster-3",
+            "cluster-4"
+          ]
+        ],
+        "4429": [
+          [
+            "cluster-5"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": false,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 1.548059,
+          "end": 5.73,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 7.35,
+          "end": 15.15,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 17.16,
+          "end": 19.424487,
+          "speaker_ids": [
+            "cluster-3"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 20.64,
+          "end": 33.99,
+          "speaker_ids": [
+            "cluster-4"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 36.87,
+          "end": 45.21,
+          "speaker_ids": [
+            "cluster-5"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "nl-overlap.wav",
+      "language": "nl",
+      "layout": "overlap",
+      "duration_s": 15.49,
+      "elapsed_s": 50.237643709,
+      "realtime_factor": 3.243230710716591,
+      "memory_before": "482.6MiB / 1GiB",
+      "memory_after": "484.3MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 2,
+      "clusters_by_source_occurrence": {},
+      "strict_known_speaker_layout": null,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.69,
+          "end": 8.43,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 9.90677,
+          "end": 15.15,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "nl-stereo-downmix.wav",
+      "language": "nl",
+      "layout": "stereo-downmix",
+      "duration_s": 15.49,
+      "elapsed_s": 50.937964541999975,
+      "realtime_factor": 3.2884418684312444,
+      "memory_before": "484.3MiB / 1GiB",
+      "memory_after": "486MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 2,
+      "clusters_by_source_occurrence": {},
+      "strict_known_speaker_layout": null,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.69,
+          "end": 8.43,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 9.906731,
+          "end": 15.15,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "nl-music.wav",
+      "language": "nl",
+      "layout": "music",
+      "duration_s": 15.49,
+      "elapsed_s": 32.245446042000026,
+      "realtime_factor": 2.081694386184637,
+      "memory_before": "486MiB / 1GiB",
+      "memory_after": "486.8MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 2,
+      "clusters_by_source_occurrence": {
+        "3034": [
+          [
+            "cluster-1",
+            "cluster-2"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": false,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 1.585505,
+          "end": 5.73,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 7.38,
+          "end": 15.15,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "en-single.wav",
+      "language": "en",
+      "layout": "single",
+      "duration_s": 4.505,
+      "elapsed_s": 9.309716709000043,
+      "realtime_factor": 2.066529791120986,
+      "memory_before": "486.8MiB / 1GiB",
+      "memory_after": "486.9MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 1,
+      "clusters_by_source_occurrence": {
+        "6930": [
+          [
+            "cluster-1"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": true,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.51,
+          "end": 3.39,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "en-aba.wav",
+      "language": "en",
+      "layout": "aba",
+      "duration_s": 16.295,
+      "elapsed_s": 23.297249833000024,
+      "realtime_factor": 1.4297176945688874,
+      "memory_before": "486.9MiB / 1GiB",
+      "memory_after": "487.2MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 2,
+      "clusters_by_source_occurrence": {
+        "6930": [
+          [
+            "cluster-1"
+          ],
+          [
+            "cluster-1"
+          ]
+        ],
+        "1320": [
+          [
+            "cluster-2"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": true,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.51,
+          "end": 3.39,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 4.86,
+          "end": 10.47,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 12.3,
+          "end": 15.18,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "en-three.wav",
+      "language": "en",
+      "layout": "three",
+      "duration_s": 30.22,
+      "elapsed_s": 37.255312167,
+      "realtime_factor": 1.2328031822303112,
+      "memory_before": "487.2MiB / 1GiB",
+      "memory_after": "487.9MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 3,
+      "clusters_by_source_occurrence": {
+        "6930": [
+          [
+            "cluster-1"
+          ]
+        ],
+        "1320": [
+          [
+            "cluster-2"
+          ]
+        ],
+        "5639": [
+          [
+            "cluster-3"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": true,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.51,
+          "end": 3.39,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 4.86,
+          "end": 10.47,
+          "speaker_ids": [
+            "cluster-2"
+          ],
+          "speaker_uncertain": true
+        },
+        {
+          "start": 11.91,
+          "end": 28.83,
+          "speaker_ids": [
+            "cluster-3"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "en-overlap.wav",
+      "language": "en",
+      "layout": "overlap",
+      "duration_s": 3.505,
+      "elapsed_s": 10.68633216699999,
+      "realtime_factor": 3.0488822159771725,
+      "memory_before": "487.9MiB / 1GiB",
+      "memory_after": "487.9MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 1,
+      "clusters_by_source_occurrence": {},
+      "strict_known_speaker_layout": null,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.36,
+          "end": 3.51,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "en-stereo-downmix.wav",
+      "language": "en",
+      "layout": "stereo-downmix",
+      "duration_s": 3.505,
+      "elapsed_s": 10.886310624999965,
+      "realtime_factor": 3.1059374108416447,
+      "memory_before": "487.9MiB / 1GiB",
+      "memory_after": "488MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 1,
+      "clusters_by_source_occurrence": {},
+      "strict_known_speaker_layout": null,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.36,
+          "end": 3.51,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    },
+    {
+      "file": "en-music.wav",
+      "language": "en",
+      "layout": "music",
+      "duration_s": 3.505,
+      "elapsed_s": 8.757669167000017,
+      "realtime_factor": 2.4986217309557825,
+      "memory_before": "488MiB / 1GiB",
+      "memory_after": "488MiB / 1GiB",
+      "transport_ok": true,
+      "cluster_count": 1,
+      "clusters_by_source_occurrence": {
+        "6930": [
+          [
+            "cluster-1"
+          ]
+        ]
+      },
+      "strict_known_speaker_layout": true,
+      "overlap_detection_supported": false,
+      "segments": [
+        {
+          "start": 0.54,
+          "end": 3.36,
+          "speaker_ids": [
+            "cluster-1"
+          ],
+          "speaker_uncertain": true
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "quality_acceptance": false,
+  "source_commit": "1c5a9f1bf74b37134d17898c469339ea80bbce9a",
+  "date": "2026-11-17",
+  "server_sha256": "a065bede18e0cb9af82e29fa79c84c961660743c4481dfa5e6cd532b67c3355a",
+  "models": {
+    "image": "alphacep/kaldi-vosk-server@sha256:381024347b954835c9c20adea2041377e7b55f50d4c5887eb42101bbf6e750a1",
+    "models": [
+      {
+        "name": "vosk-model-small-en-us-0.15",
+        "sha256": "30f26242c4eb449f948e42cb302dd7a686cb29a3423a8367f99ff41780942498",
+        "license": "Apache-2.0"
+      },
+      {
+        "name": "vosk-model-small-nl-0.22",
+        "sha256": "039811c3b829de64e4f123a9f684a53784005b212a346ac0b899dc7efce2ed0a",
+        "license": "Apache-2.0"
+      },
+      {
+        "name": "vosk-model-spk-0.4",
+        "sha256": "a74d8f51144484813e16af689bb0f916b7a111e2347f467c4933c1166097b5a7",
+        "license": "Apache-2.0"
+      }
+    ]
+  }
+}

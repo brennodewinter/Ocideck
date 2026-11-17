@@ -1556,6 +1556,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Serverprotocol': 'Протокол сервера',
+  'Spreker': 'Мовець',
   'Automatisch afspelen is niet gestart.':
       'Автоматичне відтворення не почалося.',
   'Audio- en videoformaten': 'Формати аудіо та відео',

@@ -1552,6 +1552,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Serverprotocol': 'Protokół serwera',
+  'Spreker': 'Mówca',
   'Automatisch afspelen is niet gestart.':
       'Automatyczne odtwarzanie nie rozpoczęło się.',
   'Audio- en videoformaten': 'Formaty audio i wideo',

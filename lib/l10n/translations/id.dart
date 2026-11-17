@@ -1542,6 +1542,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Serverprotocol': 'Protokol server',
+  'Spreker': 'Pembicara',
   'Automatisch afspelen is niet gestart.': 'Pemutaran otomatis tidak dimulai.',
   'Audio- en videoformaten': 'Format audio dan video',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':

@@ -612,6 +612,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Serverprotocol': 'Serverprotokoll',
+  'Spreker': 'Sprecher',
   'Automatisch afspelen is niet gestart.':
       'Die automatische Wiedergabe wurde nicht gestartet.',
   'Audio- en videoformaten': 'Audio- und Videoformate',

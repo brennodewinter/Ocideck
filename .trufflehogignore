@@ -50,6 +50,10 @@
 # geheim.
 ^testbed/vosk-asr/model/
 ^testbed/vosk-asr/proof-out/
+# Alleen gegenereerde modellen en bewijs-cache; broncode blijft gescand.
+^testbed/asr-diarization/model/
+^testbed/asr-diarization/proof-out/
+^testbed/asr-diarization/__pycache__/
 
 # Het detectiecorpus van OciWacht: bestaat om geheim-vormige waarden te dragen.
 ^lib/services/privacy/privacy_digital_rules\.dart$

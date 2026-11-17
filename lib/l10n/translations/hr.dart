@@ -1546,6 +1546,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Serverprotocol': 'Protokol poslužitelja',
+  'Spreker': 'Govornik',
   'Automatisch afspelen is niet gestart.':
       'Automatska reprodukcija nije započela.',
   'Audio- en videoformaten': 'Audio i video formati',

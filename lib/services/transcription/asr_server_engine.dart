@@ -24,6 +24,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../../models/asr_server_profile.dart';
+import 'asr_batch_protocol.dart';
 import 'asr_server_gate.dart';
 import 'asr_transport.dart';
 import 'capture_source.dart' show AudioChunk;
@@ -100,11 +101,48 @@ class AsrServerEngine implements TranscriptionEngine {
 
   @override
   Future<EngineCapabilities> capabilities() async {
+    if (profile.batchProtocol == AsrBatchProtocol.unsupported) {
+      return const EngineCapabilities();
+    }
+    if (profile.batchProtocol == AsrBatchProtocol.ocideckV1) {
+      try {
+        return await _v1Capabilities(_allowOrThrow());
+      } on TranscriptionError {
+        return const EngineCapabilities();
+      } on AsrRequestException {
+        return const EngineCapabilities();
+      }
+    }
     return const EngineCapabilities(
       // verbose_json levert segment-tijdstempels; sprekerlabels alleen als
       // de server diariseert, en dat claimen we niet (§2.4).
       timestamps: true,
     );
+  }
+
+  Future<EngineCapabilities> _v1Capabilities(
+    AsrGateAllow allow, {
+    _AsrTask? task,
+    Map<String, String>? headers,
+  }) async {
+    final auth = headers ?? await _headers(allow);
+    task?.throwIfCancelled();
+    final handle = transport.send(
+      method: 'GET',
+      url: _endpoint(allow.uri, '$asrBatchV1Path/capabilities'),
+      strategy: allow.strategy,
+      body: null,
+      headers: auth,
+      timeout: const Duration(seconds: 20),
+    );
+    if (task != null) {
+      task.handle = handle;
+      if (task.cancelled) task.cancel();
+    }
+    final response = await handle.done;
+    task?.throwIfCancelled();
+    if (!response.isOk) throw ServerRefused('HTTP ${response.statusCode}');
+    return parseAsrBatchCapabilities(response.body);
   }
 
   /// De poortuitslag voor dit profiel — zodat de UI kan uitleggen waarom
@@ -161,9 +199,9 @@ class AsrServerEngine implements TranscriptionEngine {
     TranscriptionOptions options,
   ) async {
     final allow = _allowOrThrow();
-    // Zolang het servercontract geen sprekerlabels kent is `diarize` een
-    // afwijzing, geen stil verlies van de keuze (#2935).
-    if (options.diarize) {
+    final versioned = profile.batchProtocol == AsrBatchProtocol.ocideckV1;
+    if (profile.batchProtocol == AsrBatchProtocol.unsupported ||
+        (options.diarize && !versioned)) {
       throw const EngineUnavailable(
         'diarisatie wordt door deze engine niet ondersteund',
       );
@@ -186,6 +224,22 @@ class AsrServerEngine implements TranscriptionEngine {
     try {
       final auth = await _headers(allow);
       task.throwIfCancelled();
+      if (versioned) {
+        final caps = await _v1Capabilities(allow, task: task, headers: auth);
+        task.throwIfCancelled();
+        if (options.diarize && !caps.diarization) {
+          throw const EngineUnavailable('server ondersteunt geen diarisatie');
+        }
+        if (options.language == null && !caps.automaticLanguage) {
+          throw const EngineUnavailable(
+            'kies een expliciete taal voor deze server',
+          );
+        }
+        if (options.language != null &&
+            !caps.languages.contains(options.language)) {
+          throw const EngineUnavailable('server ondersteunt deze taal niet');
+        }
+      }
       final bytes = await audioReader(audio.path);
       task.throwIfCancelled();
       if (bytes.length > maxUploadBytes) {
@@ -194,13 +248,20 @@ class AsrServerEngine implements TranscriptionEngine {
 
       final handle = transport.send(
         method: 'POST',
-        url: _endpoint(allow.uri, 'inference'),
+        url: _endpoint(
+          allow.uri,
+          versioned ? '$asrBatchV1Path/transcribe' : 'inference',
+        ),
         strategy: allow.strategy,
         headers: {
           'content-type': 'multipart/form-data; boundary=$_boundary',
           ...auth,
         },
-        body: buildMultipartBody(language: options.language, fileBytes: bytes),
+        body: buildMultipartBody(
+          language: options.language,
+          fileBytes: bytes,
+          diarize: versioned ? options.diarize : null,
+        ),
       );
       task.handle = handle;
       // Een transportdouble kan tijdens send() synchroon cancel() aanroepen.
@@ -210,7 +271,9 @@ class AsrServerEngine implements TranscriptionEngine {
       if (!response.isOk) {
         throw ServerRefused('HTTP ${response.statusCode}');
       }
-      return parseWhisperServerResponse(response.body);
+      return versioned
+          ? parseAsrBatchResponse(response.body, diarize: options.diarize)
+          : parseWhisperServerResponse(response.body);
     } on AsrRequestException catch (e) {
       if (e.message == 'afgebroken') {
         throw const Cancelled('upload afgebroken');
@@ -295,11 +358,19 @@ const _boundary = '----ocideck-asr-boundary';
 
 /// Bouwt uitsluitend het ASR-WAV-contract: vaste veldnamen, uploadnaam en
 /// MIME-type. Lokale bronpaden komen nooit in de multipartheaders terecht.
-Uint8List buildMultipartBody({String? language, required Uint8List fileBytes}) {
+Uint8List buildMultipartBody({
+  String? language,
+  required Uint8List fileBytes,
+  bool? diarize,
+}) {
   final out = BytesBuilder(copy: false);
   void line(String s) => out.add(utf8.encode('$s\r\n'));
 
-  final fields = {'response_format': 'verbose_json', 'language': ?language};
+  final fields = {
+    'response_format': 'verbose_json',
+    'language': ?language,
+    if (diarize != null) 'diarize': diarize.toString(),
+  };
   fields.forEach((name, value) {
     line('--$_boundary');
     line('Content-Disposition: form-data; name="$name"');
