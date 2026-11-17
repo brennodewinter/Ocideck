@@ -82,7 +82,11 @@ extension _PagedDocumentNavigation on _PagedDocumentViewState {
 /// De vaste itemmaat omvat ook het bijschrift op de actieve tekstschaal.
 double _pageCaptionHeight(BuildContext context) {
   final painter = TextPainter(
-    text: TextSpan(text: 'Ag', style: Theme.of(context).textTheme.labelSmall),
+    text: TextSpan(
+      text: context.l10n.d('Pagina {n} van {m}'),
+      style: Theme.of(context).textTheme.labelSmall,
+    ),
+    locale: Localizations.localeOf(context),
     textDirection: Directionality.of(context),
     textScaler: MediaQuery.textScalerOf(context),
     maxLines: 1,

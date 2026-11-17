@@ -47,7 +47,7 @@ class HeadingAnchor {
 class HeadingAnchorIndex {
   // Begrensde cache op de kopreeks, zodat herhaalde navigatie geen nieuwe
   // inline-/HTML-parse doet en een gewone bodybewerking de index niet ongeldig maakt.
-  static final _cache = LinkedHashMap<String, HeadingAnchorIndex>();
+  static final _cache = <String, HeadingAnchorIndex>{};
 
   factory HeadingAnchorIndex(
     Iterable<String> titles, {
