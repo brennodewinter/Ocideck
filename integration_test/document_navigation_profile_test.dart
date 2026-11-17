@@ -64,6 +64,9 @@ void main() {
           scrollable: scrollable,
           maxScrolls: 30,
         );
+        // ensureVisible wijzigt de scrollpositie vóór de volgende layout.
+        // Meet pas als de rail zijn doel ook werkelijk op die plek tekent.
+        await tester.pumpAndSettle(const Duration(milliseconds: 16));
         final clock = Stopwatch()..start();
         await tester.tap(target);
         var visible = false;
