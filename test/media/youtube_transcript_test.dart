@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/services/media/youtube_reference.dart';
-import 'package:ocideck/services/media/youtube_transcript.dart';
+import 'package:ocideck/services/media/media_transcript.dart';
 import 'package:ocideck/services/transcription/transcription_engine.dart';
 
 void main() {
@@ -12,7 +12,7 @@ void main() {
   test(
     'cut ASR retains the source clock, metadata and canonical links on reopen',
     () {
-      final markdown = youtubeTranscriptMarkdown(
+      final markdown = mediaTranscriptMarkdown(
         origin: YoutubeTranscriptOrigin(
           reference: reference,
           title: 'Fixture',
@@ -48,7 +48,7 @@ void main() {
   test(
     'caption range preserves a complete overlapping cue with its real time',
     () {
-      final markdown = youtubeTranscriptMarkdown(
+      final markdown = mediaTranscriptMarkdown(
         origin: YoutubeTranscriptOrigin(
           reference: reference,
           title: 'Fixture',
@@ -89,7 +89,7 @@ void main() {
   test(
     'provider content cannot insert Markdown images, HTML or new directives',
     () {
-      final markdown = youtubeTranscriptMarkdown(
+      final markdown = mediaTranscriptMarkdown(
         origin: YoutubeTranscriptOrigin(
           reference: reference,
           title: 'Title\n---\n<script>',

@@ -10,6 +10,8 @@ import 'audio_attachment_editor.dart';
 import '../../theme/app_theme.dart';
 import '../../platform/platform_features.dart';
 import 'editor_text_controller.dart';
+import '../../services/media/youtube_reference.dart';
+import '../media/youtube_source_dialog.dart';
 
 class VideoSlideEditor extends StatefulWidget {
   final Slide slide;
@@ -212,6 +214,25 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
           ],
         ),
         const SizedBox(height: 8),
+        if (source.kind == VideoSourceKind.youtube)
+          TextButton.icon(
+            onPressed: () {
+              final reference = YoutubeReference.parse(
+                widget.slide.videoPath,
+                startMs: widget.slide.videoStartMs,
+                endMs: widget.slide.videoEndMs,
+              );
+              if (reference != null) {
+                showYoutubeSourceDialog(
+                  context,
+                  reference,
+                  title: widget.slide.title,
+                );
+              }
+            },
+            icon: const Icon(Icons.transcribe_outlined),
+            label: Text(l10n.d('YouTube-video transcriberen…')),
+          ),
         Material(
           color: Colors.transparent,
           child: CheckboxListTile(

@@ -1543,6 +1543,46 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Érvénytelen részlethatárok.',
+  'Alleen dit fragment': 'Csak ez a részlet',
+  'Audio downloaden en transcriberen…': 'Hang letöltése és átírása…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'A hang letöltése megnyitja az átírási lehetőségeket. A részletet az ASR előtt vágja ki a rendszer. A letöltött forrást ezután törli.',
+  'Automatische ondertitels': 'Automatikus feliratok',
+  'Bronserver-URL': 'Forráskiszolgáló URL-címe',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'A forráskiszolgáló nem támogatott protokollt használ.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'A forráskiszolgáló foglalt. Próbálja újra később.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'A forráskiszolgáló nem érhető el. Ellenőrizze a címet, a TLS-t és a böngésző hozzáférését.',
+  'De bronserver mist de vereiste bronhelper.':
+      'A forráskiszolgálóról hiányzik a szükséges forrássegédprogram.',
+  'Deze bron is nog live of niet afgerond.':
+      'Ez a forrás még élő vagy nem fejeződött be.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Ehhez a videóhoz nincs használható hangsáv.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Ez a videó privát, eltávolították vagy hozzáférési engedélyt igényel.',
+  'Deze video transcriberen?': 'Átírja ezt a videót?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'A saját forráskiszolgálója lekéri a videót a YouTube-ról. A lekérés elküldi a videó hivatkozását ennek a kiszolgálónak. Kiszolgáló nélkül feliratokat importálhat.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Ebben a bemutatóban nem található YouTube-videó.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Nincs használható felirat. Válassza a hangot vagy importáljon fájlt.',
+  'Geïmporteerde ondertitels': 'Importált feliratok',
+  'Handmatige ondertitels': 'Kézi feliratok',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Válasszon HTTPS-forráskiszolgálót vagy ezen az eszközön futó kiszolgálót.',
+  'Ondertitels importeren…': 'Feliratok importálása…',
+  'Ondertitels overnemen': 'Feliratok használata',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'A podcast-hírcsatornákat és a YouTube-videóhivatkozásokat is felismeri.',
+  'Video-informatie ophalen': 'Videóadatok lekérése',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'A YouTube korlátozza a kéréseket. Próbálja újra később.',
+  'YouTube-video transcriberen…': 'YouTube-videó átírása…',
   'één taal': 'egy nyelv',
   'Meerdere talen in deze opname': 'Több nyelv ebben a felvételben',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

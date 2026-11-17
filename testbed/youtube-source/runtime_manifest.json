@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "host": "macos-arm64",
+  "python_version": "3.15.2",
+  "node": {
+    "version": "v22.23.5",
+    "source": "https://nodejs.org/dist/v22.23.5/node-v22.23.5-darwin-arm64.tar.xz",
+    "archive_sha256": "d0c68c321161bb2c6483efea9a343010dea8e5e7f60d73c6a7eba140016d662f",
+    "files": {
+      "LICENSE": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4",
+      "README.md": "597f168724807ea6f5d31585ae3bd360cff887212fdb01bf1eba3f5364586406",
+      "node": "ff9365ccf73e95b7ac69867418124973addde63043650c0db96bd6a722c53cd8"
+    }
+  },
+  "packages": [
+    {
+      "name": "yt-dlp",
+      "version": "2026.10.26",
+      "url": "https://files.pythonhosted.org/packages/7f/3d/16ea7d5638cf585991f2c5705e8083688dde633d32d0871f2404e0f4d827/yt_dlp-2026.10.26-py3-none-any.whl",
+      "filename": "yt_dlp-2026.10.26-py3-none-any.whl",
+      "sha256": "a05c5b5d8562f7e8a62f5334348b406af4930d56d3a65f8021d14af0e22339ae",
+      "size": 3186201
+    },
+    {
+      "name": "yt-dlp-ejs",
+      "version": "0.8.0",
+      "url": "https://files.pythonhosted.org/packages/e3/bd/520769863744b669440a924271a6159ddd82ad5ae26b4ac4d4b69e9f8d44/yt_dlp_ejs-0.8.0-py3-none-any.whl",
+      "filename": "yt_dlp_ejs-0.8.0-py3-none-any.whl",
+      "sha256": "79300e5fca7f937a1eeede11f0456862c1b41107ce1d726871e0207424f4bdb4",
+      "size": 53443
+    }
+  ]
+}

@@ -1542,6 +1542,46 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Batas cuplikan tidak valid.',
+  'Alleen dit fragment': 'Hanya cuplikan ini',
+  'Audio downloaden en transcriberen…': 'Unduh audio dan transkripsikan…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Mengunduh audio membuka pilihan transkripsi. Cuplikan dipotong sebelum ASR. Sumber yang diunduh kemudian dihapus.',
+  'Automatische ondertitels': 'Subtitel otomatis',
+  'Bronserver-URL': 'URL server sumber',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Server sumber menggunakan protokol yang tidak didukung.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Server sumber sedang sibuk. Coba lagi nanti.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Server sumber tidak dapat dijangkau. Periksa alamat, TLS, dan akses peramban.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Server sumber tidak memiliki alat bantu sumber yang diperlukan.',
+  'Deze bron is nog live of niet afgerond.':
+      'Sumber ini masih disiarkan langsung atau belum selesai.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Video ini tidak memiliki trek audio yang dapat digunakan.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Video ini bersifat pribadi, telah dihapus, atau memerlukan izin akses.',
+  'Deze video transcriberen?': 'Transkripsikan video ini?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Server sumber Anda sendiri mengambil video dari YouTube. Pengambilan mengirim tautan video ke server ini. Tanpa server, Anda dapat mengimpor subtitel.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Tidak ditemukan video YouTube dalam presentasi ini.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Tidak ada subtitel yang dapat digunakan. Pilih audio atau impor berkas.',
+  'Geïmporteerde ondertitels': 'Subtitel yang diimpor',
+  'Handmatige ondertitels': 'Subtitel manual',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Pilih server sumber HTTPS atau server pada perangkat ini.',
+  'Ondertitels importeren…': 'Impor subtitel…',
+  'Ondertitels overnemen': 'Gunakan subtitel',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Umpan podcast dan tautan video YouTube juga dikenali.',
+  'Video-informatie ophalen': 'Ambil informasi video',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube membatasi permintaan. Coba lagi nanti.',
+  'YouTube-video transcriberen…': 'Transkripsikan video YouTube…',
   'één taal': 'satu bahasa',
   'Meerdere talen in deze opname': 'Beberapa bahasa dalam rekaman ini',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

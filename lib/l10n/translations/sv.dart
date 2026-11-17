@@ -1541,6 +1541,46 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Ogiltiga gränser för utdraget.',
+  'Alleen dit fragment': 'Endast detta utdrag',
+  'Audio downloaden en transcriberen…': 'Hämta ljud och transkribera…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Ljudhämtningen öppnar transkriptionsalternativen. Ett utdrag klipps före ASR. Den hämtade källan raderas efteråt.',
+  'Automatische ondertitels': 'Automatiska undertexter',
+  'Bronserver-URL': 'Källserverns URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Källservern använder ett protokoll som inte stöds.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Källservern är upptagen. Försök igen senare.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Källservern kan inte nås. Kontrollera adress, TLS och webbläsaråtkomst.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Källservern saknar det nödvändiga källhjälpprogrammet.',
+  'Deze bron is nog live of niet afgerond.':
+      'Den här källan sänds fortfarande live eller är inte avslutad.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Den här videon har inget användbart ljudspår.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Den här videon är privat, borttagen eller kräver åtkomst.',
+  'Deze video transcriberen?': 'Transkribera den här videon?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Din egen källserver hämtar videon från YouTube. Hämtningen skickar videolänken till den här servern. Utan en server kan du importera undertexter.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Inga YouTube-videor hittades i den här presentationen.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Inga användbara undertexter. Välj ljud eller importera en fil.',
+  'Geïmporteerde ondertitels': 'Importerade undertexter',
+  'Handmatige ondertitels': 'Manuella undertexter',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Välj en HTTPS-källserver eller en server på den här enheten.',
+  'Ondertitels importeren…': 'Importera undertexter…',
+  'Ondertitels overnemen': 'Använd undertexter',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Även poddflöden och YouTube-videolänkar känns igen.',
+  'Video-informatie ophalen': 'Hämta videoinformation',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube begränsar förfrågningarna. Försök igen senare.',
+  'YouTube-video transcriberen…': 'Transkribera YouTube-video…',
   'één taal': 'ett språk',
   'Meerdere talen in deze opname': 'Flera språk i denna inspelning',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

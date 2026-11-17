@@ -126,6 +126,35 @@ void main() {
     );
   });
 
+  testWidgets(
+    'YouTube URL proposes transcription before deck fetch and rejection preserves the deck',
+    (tester) async {
+      await openUrlDialog(tester);
+      final before = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .state
+          .deck;
+      await type(tester, 'https://youtu.be/M7lc1UVf-VE?list=discarded');
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Ophalen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Deze video transcriberen?'), findsOneWidget);
+      expect(
+        find.text('https://www.youtube.com/watch?v=M7lc1UVf-VE'),
+        findsOneWidget,
+      );
+      expect(find.text('Instellingen openen'), findsOneWidget);
+      await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
+      await tester.pumpAndSettle();
+      expect(
+        container.read(tabsProvider).current!.deckNotifier.state.deck,
+        same(before),
+      );
+      expect(container.read(tabsProvider).tabs, hasLength(1));
+    },
+  );
+
   testWidgets('alleen een http(s)-adres met host zet de knop aan', (
     tester,
   ) async {

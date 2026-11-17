@@ -611,6 +611,46 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Ongeldige fragmentgrenzen.': 'Limiti dell’estratto non validi.',
+  'Alleen dit fragment': 'Solo questo estratto',
+  'Audio downloaden en transcriberen…': 'Scarica l’audio e trascrivi…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Il download dell’audio apre le opzioni di trascrizione. Un estratto viene tagliato prima dell’ASR. La fonte scaricata viene poi eliminata.',
+  'Automatische ondertitels': 'Sottotitoli automatici',
+  'Bronserver-URL': 'URL del server di origine',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Il server di origine usa un protocollo non supportato.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Il server di origine è occupato. Riprova più tardi.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Il server di origine non è raggiungibile. Controlla indirizzo, TLS e accesso del browser.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Al server di origine manca lo strumento di origine richiesto.',
+  'Deze bron is nog live of niet afgerond.':
+      'Questa fonte è ancora in diretta o non è terminata.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Questo video non ha una traccia audio utilizzabile.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Questo video è privato, rimosso o richiede l’autorizzazione all’accesso.',
+  'Deze video transcriberen?': 'Trascrivere questo video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Un tuo server di origine recupera il video da YouTube. Il recupero invia il link del video a questo server. Senza server puoi importare sottotitoli.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Nessun video YouTube trovato in questa presentazione.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Nessun sottotitolo utilizzabile. Scegli l’audio o importa un file.',
+  'Geïmporteerde ondertitels': 'Sottotitoli importati',
+  'Handmatige ondertitels': 'Sottotitoli manuali',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Scegli un server di origine HTTPS o un server su questo dispositivo.',
+  'Ondertitels importeren…': 'Importa sottotitoli…',
+  'Ondertitels overnemen': 'Usa sottotitoli',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Sono riconosciuti anche i feed podcast e i link ai video YouTube.',
+  'Video-informatie ophalen': 'Recupera informazioni sul video',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube sta limitando le richieste. Riprova più tardi.',
+  'YouTube-video transcriberen…': 'Trascrivi video YouTube…',
   'één taal': 'una lingua',
   'Meerdere talen in deze opname': 'Più lingue in questa registrazione',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

@@ -1538,6 +1538,46 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Nederīgas fragmenta robežas.',
+  'Alleen dit fragment': 'Tikai šis fragments',
+  'Audio downloaden en transcriberen…': 'Lejupielādēt audio un transkribēt…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Audio lejupielāde atver transkripcijas iespējas. Fragments tiek izgriezts pirms ASR. Lejupielādētais avots pēc tam tiek dzēsts.',
+  'Automatische ondertitels': 'Automātiskie subtitri',
+  'Bronserver-URL': 'Avotu servera URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Avotu serveris izmanto neatbalstītu protokolu.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Avotu serveris ir aizņemts. Mēģiniet vēlāk vēlreiz.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Avotu serveris nav sasniedzams. Pārbaudiet adresi, TLS un pārlūka piekļuvi.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Avotu serverī trūkst nepieciešamā avotu palīgrīka.',
+  'Deze bron is nog live of niet afgerond.':
+      'Šis avots joprojām ir tiešraidē vai nav pabeigts.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Šim video nav izmantojama audio celiņa.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Šis video ir privāts, noņemts vai tam vajadzīga piekļuves atļauja.',
+  'Deze video transcriberen?': 'Transkribēt šo video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Jūsu pašu avotu serveris iegūst video no YouTube. Iegūšana nosūta video saiti šim serverim. Bez servera varat importēt subtitrus.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Šajā prezentācijā nav atrasti YouTube video.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Nav izmantojamu subtitru. Izvēlieties audio vai importējiet failu.',
+  'Geïmporteerde ondertitels': 'Importētie subtitri',
+  'Handmatige ondertitels': 'Manuālie subtitri',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Izvēlieties HTTPS avotu serveri vai serveri šajā ierīcē.',
+  'Ondertitels importeren…': 'Importēt subtitrus…',
+  'Ondertitels overnemen': 'Izmantot subtitrus',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Tiek atpazītas arī aplāžu plūsmas un YouTube video saites.',
+  'Video-informatie ophalen': 'Iegūt informāciju par video',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube ierobežo pieprasījumus. Mēģiniet vēlāk vēlreiz.',
+  'YouTube-video transcriberen…': 'Transkribēt YouTube video…',
   'één taal': 'viena valoda',
   'Meerdere talen in deze opname': 'Vairākas valodas šajā ierakstā',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

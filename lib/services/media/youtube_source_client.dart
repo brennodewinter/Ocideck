@@ -7,6 +7,7 @@ import '../../models/asr_server_profile.dart';
 import '../../utils/json_depth_guard.dart';
 import '../transcription/asr_server_gate.dart';
 import '../transcription/asr_transport.dart';
+import '../transcription/media_sniff.dart';
 import 'youtube_reference.dart';
 
 enum YoutubeSourceFailure {
@@ -208,7 +209,7 @@ class YoutubeSourceClient {
     final extension = value['extension'];
     if (encoded is! String ||
         encoded.length > 12 * 1024 * 1024 ||
-        !const ['m4a', 'webm', 'wav'].contains(extension) ||
+        extension != 'wav' ||
         value['source_offset_ms'] != startMs) {
       _protocolError();
     }
@@ -220,6 +221,15 @@ class YoutubeSourceClient {
     }
     if (bytes.isEmpty || bytes.length > 8 * 1024 * 1024) {
       throw const YoutubeSourceException(YoutubeSourceFailure.tooLarge);
+    }
+    final wav = parseWavHeader(bytes, bytes.length);
+    if (wav == null ||
+        wav.formatTag != 1 ||
+        wav.sampleRate != 16000 ||
+        wav.channels != 1 ||
+        wav.bitsPerSample != 16 ||
+        wav.dataBytes == 0) {
+      _protocolError();
     }
     return YoutubeAudioBytes(
       bytes,
@@ -237,7 +247,8 @@ class YoutubeSourceClient {
     final value = await _request('capabilities', reference, consent, null);
     if (value['captions'] is! bool ||
         value['audio'] is! bool ||
-        value['audio_fragments'] is! bool) {
+        value['audio_fragments'] is! bool ||
+        (value['audio'] == true && value['audio_encoding'] != 'pcm16-wav')) {
       _protocolError();
     }
     _capabilities = value;

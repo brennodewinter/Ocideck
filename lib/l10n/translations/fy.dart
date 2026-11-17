@@ -613,6 +613,46 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Ongeldige fragmentgrenzen.': 'Unjildige fragmintgrinzen.',
+  'Alleen dit fragment': 'Allinnich dit fragmint',
+  'Audio downloaden en transcriberen…': 'Audio downloade en transkribearje…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Audio downloade iepenet de transkripsjekar. In fragmint wurdt foar ASR knipt. De downloade boarne wurdt dêrnei wiske.',
+  'Automatische ondertitels': 'Automatyske ûndertitels',
+  'Bronserver-URL': 'Boarneserver-URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'De boarneserver brûkt in net stipe protokol.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'De boarneserver is dwaande. Besykje it letter opnij.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'De boarneserver is net berikber. Kontrolearje it adres, TLS en browserta tagong.',
+  'De bronserver mist de vereiste bronhelper.':
+      'De boarneserver mist it fereaske boarnehelpprogramma.',
+  'Deze bron is nog live of niet afgerond.':
+      'Dizze boarne is noch live of net ôfrûne.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Dizze fideo hat gjin brûkber audiospoar.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Dizze fideo is privee, fuorthelle of freget tagongsrjochten.',
+  'Deze video transcriberen?': 'Dizze fideo transkribearje?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'In eigen boarneserver hellet de fideo by YouTube op. Opheljen stjoert de fideolink nei dizze server. Sûnder server kinne jo ûndertitels ymportearje.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Gjin YouTube-fideo’s fûn yn dizze presintaasje.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Gjin brûkbere ûndertitels beskikber. Kies audio of ymportearje in bestân.',
+  'Geïmporteerde ondertitels': 'Ymportearre ûndertitels',
+  'Handmatige ondertitels': 'Hânmjittige ûndertitels',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Kies in HTTPS-boarneserver of in server op dit apparaat.',
+  'Ondertitels importeren…': 'Ûndertitels ymportearje…',
+  'Ondertitels overnemen': 'Ûndertitels oernimme',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Ek podcastfeeds en YouTube-fideolinks wurde werkend.',
+  'Video-informatie ophalen': 'Fideo-ynformaasje ophelje',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube beheint it tal fersiken. Besykje it letter opnij.',
+  'YouTube-video transcriberen…': 'YouTube-fideo transkribearje…',
   'één taal': 'ien taal',
   'Meerdere talen in deze opname': 'Meardere talen yn dizze opname',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

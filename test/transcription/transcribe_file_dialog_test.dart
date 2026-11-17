@@ -243,15 +243,19 @@ void main() {
     (tester) async {
       final path = WebAssetStore.put(_wav(), name: 'bron.wav');
       final engine = _DelayedEngine();
+      var returnedToSourceOwner = false;
       await tester.pumpWidget(
         app(
           Builder(
             builder: (context) => TextButton(
-              onPressed: () => showTranscribeFileDialog(
-                context,
-                sourcePath: path,
-                displayName: 'bron.wav',
-              ),
+              onPressed: () async {
+                await showTranscribeFileDialog(
+                  context,
+                  sourcePath: path,
+                  displayName: 'bron.wav',
+                );
+                returnedToSourceOwner = true;
+              },
               child: const Text('open'),
             ),
           ),
@@ -286,6 +290,7 @@ void main() {
       await tester.tapAt(const Offset(5, 5));
       await tester.pumpAndSettle();
       expect(engine.cancelled, isTrue);
+      expect(returnedToSourceOwner, isFalse);
       expect(
         WebAssetStore.bytesFor(path),
         isNotNull,
@@ -296,6 +301,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(WebAssetStore.bytesFor(path), isNull);
+      expect(returnedToSourceOwner, isTrue);
       expect(
         container.read(tabsProvider).tabs.single.content,
         isA<DeckTabContent>(),

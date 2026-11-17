@@ -45,6 +45,34 @@ Teams or Jitsi client and does not claim it can record every protected
 audio channel: an operating system that excludes DRM-protected audio is
 obeyed, not bypassed.
 
+## YouTube and direct media URLs
+
+Opening a YouTube URL through **Open via URL** proposes transcription. Cancel
+keeps the presentation intact. Video-slide editors and the Import menu also
+provide an explicit action for YouTube references found locally in a deck;
+opening or playing that deck does not fetch them.
+
+Enable the transcription module first. Online extraction additionally needs
+online media enabled and a source server you enter explicitly in the proposal.
+This server is separate from your ASR destination. Fetching information sends
+the canonical video ID there; captions can then be copied with their language
+and manual/automatic origin, or audio processed through the existing ASR dialog.
+Without a server, import a local VTT/SRT file instead. There is no public fallback.
+
+Whole video is the default. **Only this fragment** offers editable start/end
+seconds, including a proposed URL/video-slide range. Captions retain complete
+overlapping cues; audio is cut before ASR. Both retain original source-clock
+links in the editable transcript. Direct media URLs similarly offer transcription
+before downloading audio; native redirects are revalidated and browser CORS
+still applies. These URL routes are limited to 8 MiB of source audio; use local
+file import for larger inputs.
+
+The separately installed reference source server is currently limited to macOS
+ARM64. Its [operator guide and pinned component/licence record](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/youtube-source/README.md)
+explain setup, source/ASR data boundaries and limits. Shared client code does not
+prove Windows/Linux or all browser release flows; the release matrix remains
+tracked in [#2947](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/2947).
+
 ## Models: what you download, what it costs
 
 The local engine is whisper.cpp v1.9.5 (MIT), run as a subprocess so a

@@ -5,7 +5,35 @@ import 'youtube_reference.dart';
 
 /// The chosen interval is explicit. Source offsets apply only to ASR of a
 /// cut audio file; imported/provider captions already use the video clock.
-class YoutubeTranscriptOrigin {
+abstract interface class MediaTranscriptOrigin {
+  String get title;
+  Duration get start;
+  Duration? get end;
+  Uri get sourceUrl;
+  String get sourceKind;
+  Uri sourceLink(Duration time);
+}
+
+class UrlTranscriptOrigin implements MediaTranscriptOrigin {
+  const UrlTranscriptOrigin(this._sourceUrl, {required this.title});
+  final Uri _sourceUrl;
+  @override
+  Uri get sourceUrl =>
+      _sourceUrl.replace(userInfo: '', query: '', fragment: '');
+  @override
+  final String title;
+  @override
+  Duration get start => Duration.zero;
+  @override
+  Duration? get end => null;
+  @override
+  String get sourceKind => 'URL · ${sourceUrl.host}';
+  @override
+  Uri sourceLink(Duration time) =>
+      sourceUrl.replace(fragment: 't=${time.inSeconds}');
+}
+
+class YoutubeTranscriptOrigin implements MediaTranscriptOrigin {
   const YoutubeTranscriptOrigin({
     required this.reference,
     required this.title,
@@ -14,13 +42,22 @@ class YoutubeTranscriptOrigin {
   });
 
   final YoutubeReference reference;
+  @override
   final String title;
+  @override
   final Duration start;
+  @override
   final Duration? end;
+  @override
+  Uri get sourceUrl => reference.canonicalUrl;
+  @override
+  String get sourceKind => 'YouTube · ${reference.videoId}';
+  @override
+  Uri sourceLink(Duration time) => reference.sourceLink(time);
 }
 
-String youtubeTranscriptMarkdown({
-  required YoutubeTranscriptOrigin origin,
+String mediaTranscriptMarkdown({
+  required MediaTranscriptOrigin origin,
   required List<TranscriptSegment> segments,
   required String methodLabel,
   required String processedAtLabel,
@@ -61,16 +98,16 @@ String youtubeTranscriptMarkdown({
   return buildTranscriptMarkdown(
     TranscriptProvenance(
       title: _literal(origin.title),
-      sourceLabel: origin.reference.canonicalUrl.toString(),
+      sourceLabel: origin.sourceUrl.toString(),
       recordedAt: _literal(processedAtLabel),
-      sourceKindLabel: 'YouTube · ${origin.reference.videoId}',
+      sourceKindLabel: origin.sourceKind,
       durationLabel: interval,
       engineLabel: _literal(methodLabel),
       languageCode: language == null ? null : _literal(language),
     ),
     formatTranscriptBody(
       shifted,
-      sourceLink: origin.reference.sourceLink,
+      sourceLink: origin.sourceLink,
       speakerLabel: speakerLabel,
       unknownLabel: unknownLabel,
     ),

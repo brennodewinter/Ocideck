@@ -612,6 +612,47 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Ongeldige fragmentgrenzen.': 'Ungültige Ausschnittsgrenzen.',
+  'Alleen dit fragment': 'Nur dieser Ausschnitt',
+  'Audio downloaden en transcriberen…':
+      'Audio herunterladen und transkribieren…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Der Audio-Download öffnet die Transkriptionsauswahl. Ein Ausschnitt wird vor ASR zugeschnitten. Die heruntergeladene Quelle wird danach gelöscht.',
+  'Automatische ondertitels': 'Automatische Untertitel',
+  'Bronserver-URL': 'Quellserver-URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Der Quellserver verwendet ein nicht unterstütztes Protokoll.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Der Quellserver ist beschäftigt. Versuchen Sie es später erneut.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Der Quellserver ist nicht erreichbar. Prüfen Sie Adresse, TLS und Browserzugriff.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Dem Quellserver fehlt das erforderliche Quellhilfsprogramm.',
+  'Deze bron is nog live of niet afgerond.':
+      'Diese Quelle ist noch live oder nicht abgeschlossen.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Dieses Video hat keine nutzbare Audiospur.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Dieses Video ist privat, wurde entfernt oder erfordert eine Zugriffsberechtigung.',
+  'Deze video transcriberen?': 'Dieses Video transkribieren?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Ein eigener Quellserver ruft das Video von YouTube ab. Beim Abrufen wird der Videolink an diesen Server gesendet. Ohne Server können Sie Untertitel importieren.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'In dieser Präsentation wurden keine YouTube-Videos gefunden.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Keine nutzbaren Untertitel verfügbar. Wählen Sie Audio oder importieren Sie eine Datei.',
+  'Geïmporteerde ondertitels': 'Importierte Untertitel',
+  'Handmatige ondertitels': 'Manuelle Untertitel',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Wählen Sie einen HTTPS-Quellserver oder einen Server auf diesem Gerät.',
+  'Ondertitels importeren…': 'Untertitel importieren…',
+  'Ondertitels overnemen': 'Untertitel übernehmen',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Auch Podcast-Feeds und YouTube-Videolinks werden erkannt.',
+  'Video-informatie ophalen': 'Videoinformationen abrufen',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube begrenzt die Anfragen. Versuchen Sie es später erneut.',
+  'YouTube-video transcriberen…': 'YouTube-Video transkribieren…',
   'één taal': 'eine Sprache',
   'Meerdere talen in deze opname': 'Mehrere Sprachen in dieser Aufnahme',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

@@ -1542,6 +1542,46 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Neveljavne meje izseka.',
+  'Alleen dit fragment': 'Samo ta izsek',
+  'Audio downloaden en transcriberen…': 'Prenesi zvok in prepiši…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Prenos zvoka odpre možnosti prepisa. Izsek se pred ASR izreže. Preneseni vir se nato izbriše.',
+  'Automatische ondertitels': 'Samodejni podnapisi',
+  'Bronserver-URL': 'URL izvornega strežnika',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Izvorni strežnik uporablja nepodprt protokol.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Izvorni strežnik je zaseden. Poskusite znova pozneje.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Izvorni strežnik ni dosegljiv. Preverite naslov, TLS in dostop brskalnika.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Izvornemu strežniku manjka zahtevano pomožno orodje za vir.',
+  'Deze bron is nog live of niet afgerond.':
+      'Ta vir še oddaja v živo ali ni končan.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Ta video nima uporabne zvočne sledi.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Ta video je zaseben, odstranjen ali zahteva dovoljenje za dostop.',
+  'Deze video transcriberen?': 'Prepišem ta video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Vaš lastni izvorni strežnik pridobi video iz YouTuba. Pridobivanje pošlje povezavo videa temu strežniku. Brez strežnika lahko uvozite podnapise.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'V tej predstavitvi ni bilo najdenih videov YouTube.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Ni uporabnih podnapisov. Izberite zvok ali uvozite datoteko.',
+  'Geïmporteerde ondertitels': 'Uvoženi podnapisi',
+  'Handmatige ondertitels': 'Ročni podnapisi',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Izberite izvorni strežnik HTTPS ali strežnik v tej napravi.',
+  'Ondertitels importeren…': 'Uvozi podnapise…',
+  'Ondertitels overnemen': 'Uporabi podnapise',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Prepoznani so tudi viri podkastov in povezave do videov YouTube.',
+  'Video-informatie ophalen': 'Pridobi podatke o videu',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube omejuje zahteve. Poskusite znova pozneje.',
+  'YouTube-video transcriberen…': 'Prepiši video YouTube…',
   'één taal': 'en jezik',
   'Meerdere talen in deze opname': 'Več jezikov v tem posnetku',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

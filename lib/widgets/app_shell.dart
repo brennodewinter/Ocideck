@@ -14,6 +14,12 @@ import 'dialogs/browser_storage_dialog.dart';
 import 'dialogs/paste_markdown_dialog.dart';
 import 'feeds/feed_dialog.dart';
 import 'feeds/feed_subscriptions_dialog.dart';
+import 'media/youtube_source_dialog.dart';
+import 'media/deck_youtube_actions.dart';
+import '../services/media/youtube_reference.dart';
+import '../services/media/media_url_client.dart';
+import '../services/transcription/transcription_errors.dart';
+import 'media/direct_media_url_dialog.dart';
 import '../l10n/export_block_localization.dart';
 import '../platform/deep_link_cleanup.dart';
 import '../platform/launch_files.dart';
@@ -246,6 +252,7 @@ part 'shell/welcome_recent_tile.dart';
 part 'shell/play_only_screen.dart';
 part 'shell/status_bar.dart';
 part 'shell/shell_overlays.dart';
+part 'shell/native_quit.dart';
 
 /// Keuze uit de "niet-opgeslagen wijzigingen"-dialoog bij het sluiten.
 enum _CloseChoice { cancel, discard, save }
@@ -1059,23 +1066,4 @@ class _AppShellState extends ConsumerState<AppShell> {
       canRedo: commands.canRedo,
     );
   }
-}
-
-/// Bouwt tijdelijke Flutter-oppervlakken af voordat het native venster sluit.
-///
-/// Een oorspronkelijke macOS-close vernietigt de renderboom onmiddellijk. Als
-/// er dan nog een exportdialoog, tooltipanimatie of scrollpositie aan hangt,
-/// krijgen die geen normaal dispose-frame meer en volgen assertions uit de
-/// semantics- en tickerlagen. Eerst terug naar de wortelroute en één frame
-/// laten landen geeft elk tijdelijk oppervlak zijn gewone afbouwpad.
-@visibleForTesting
-Future<void> settleUiBeforeNativeQuit(BuildContext context) async {
-  if (!context.mounted) return;
-  FocusManager.instance.primaryFocus?.unfocus();
-  Tooltip.dismissAllToolTips();
-  ScaffoldMessenger.maybeOf(context)?.clearSnackBars();
-  Navigator.of(context, rootNavigator: true).popUntil((route) => route.isFirst);
-  WidgetsBinding.instance.ensureVisualUpdate();
-  await WidgetsBinding.instance.endOfFrame;
-  await Future<void>.delayed(Duration.zero);
 }

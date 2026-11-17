@@ -55,7 +55,23 @@ final class WebAsrTransport implements AsrTransport {
             .fetch(url.toString().toJS, init)
             .toDart;
         final buf = await _readBody(response, controller);
-        completer.complete(AsrResponse(response.status, _decodeUtf8(buf)));
+        completer.complete(
+          AsrByteResponse(
+            response.status,
+            buf,
+            finalUrl: Uri.tryParse(response.url),
+            headers: {
+              for (final name in [
+                'content-type',
+                'content-length',
+                'location',
+                'etag',
+                'last-modified',
+              ])
+                name: ?response.headers.get(name),
+            },
+          ),
+        );
       } on AsrRequestException catch (e, s) {
         completer.completeError(e, s);
       } catch (e) {
@@ -63,7 +79,7 @@ final class WebAsrTransport implements AsrTransport {
         if (controller.signal.aborted) {
           completer.completeError(const AsrRequestException('afgebroken'));
         } else {
-          logError('WebAsrTransport.send: verzoek mislukt', e);
+          logWarning('WebAsrTransport.send: netwerkfout (${e.runtimeType})');
           completer.completeError(const AsrRequestException('netwerk'));
         }
       } finally {
@@ -126,9 +142,5 @@ final class WebAsrTransport implements AsrTransport {
   }
 }
 
-/// UTF-8 met vervanging bij kapotte tekens (`fatal` blijft uit) — de
-/// serverroute mag nooit op een byte stuklopen; de parser bepaalt daarna
-/// of de inhoud zinnig is.
-String _decodeUtf8(Uint8List buf) => web.TextDecoder().decode(buf.toJS);
-
-AsrTransport createAsrTransport() => const WebAsrTransport();
+AsrTransport createAsrTransport({int maxResponseBytes = 16 * 1024 * 1024}) =>
+    WebAsrTransport(maxResponseBytes: maxResponseBytes);

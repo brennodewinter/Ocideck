@@ -28,4 +28,5 @@ final class StubAsrTransport implements AsrTransport {
   }
 }
 
-AsrTransport createAsrTransport() => const StubAsrTransport();
+AsrTransport createAsrTransport({int maxResponseBytes = 16 * 1024 * 1024}) =>
+    const StubAsrTransport();

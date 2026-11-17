@@ -1534,6 +1534,46 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Vigased lõigupiirid.',
+  'Alleen dit fragment': 'Ainult see lõik',
+  'Audio downloaden en transcriberen…': 'Laadi heli alla ja transkribeeri…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Heli allalaadimine avab transkriptsioonivalikud. Lõik lõigatakse enne ASR-i. Allalaaditud allikas kustutatakse seejärel.',
+  'Automatische ondertitels': 'Automaatsed subtiitrid',
+  'Bronserver-URL': 'Allikaserveri URL',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Allikaserver kasutab toetamata protokolli.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Allikaserver on hõivatud. Proovi hiljem uuesti.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Allikaserver pole kättesaadav. Kontrolli aadressi, TLS-i ja brauseri juurdepääsu.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Allikaserveris puudub nõutav allikaabitööriist.',
+  'Deze bron is nog live of niet afgerond.':
+      'See allikas on veel otse-eetris või lõpetamata.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Sellel videol pole kasutatavat helirada.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'See video on privaatne, eemaldatud või vajab juurdepääsuõigust.',
+  'Deze video transcriberen?': 'Kas transkribeerida see video?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Sinu enda allikaserver hangib video YouTube’ist. Hankimine saadab videolingi sellele serverile. Serverita saad subtiitreid importida.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Sellest esitlusest ei leitud YouTube’i videoid.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Kasutatavad subtiitrid puuduvad. Vali heli või impordi fail.',
+  'Geïmporteerde ondertitels': 'Imporditud subtiitrid',
+  'Handmatige ondertitels': 'Käsitsi loodud subtiitrid',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Vali HTTPS-allikaserver või selles seadmes töötav server.',
+  'Ondertitels importeren…': 'Impordi subtiitrid…',
+  'Ondertitels overnemen': 'Kasuta subtiitreid',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Tuvastatakse ka taskuhäälinguvood ja YouTube’i videolingid.',
+  'Video-informatie ophalen': 'Hangi video teave',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube piirab päringuid. Proovi hiljem uuesti.',
+  'YouTube-video transcriberen…': 'Transkribeeri YouTube’i video…',
   'één taal': 'üks keel',
   'Meerdere talen in deze opname': 'Mitu keelt selles salvestises',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

@@ -62,6 +62,33 @@ void main() {
     },
   );
 
+  test(
+    'binary bytes and safe response metadata survive without a UTF-8 round trip',
+    () async {
+      final t = await start((request) {
+        request.response.headers.contentType = ContentType('audio', 'wav');
+        request.response.headers.set('set-cookie', 'not-exported');
+        request.response.add([0, 255, 128, 1]);
+      });
+      final response = await const IoAsrTransport()
+          .send(
+            method: 'GET',
+            url: t.base,
+            strategy: AiResolveStrategy.loopbackDirect,
+          )
+          .done;
+      expect(response.bytes, [0, 255, 128, 1]);
+      expect(response.finalUrl, t.base);
+      expect(response.headers['content-type'], startsWith('audio/wav'));
+      expect(response.headers.containsKey('set-cookie'), isFalse);
+      expect(() => response.bytes[0] = 3, throwsUnsupportedError);
+      expect(
+        response.body,
+        utf8.decode([0, 255, 128, 1], allowMalformed: true),
+      );
+    },
+  );
+
   test('localhost als naam resolveert en pinnt naar loopback', () async {
     final t = await start((req) {
       req.response.write('{"text":"ok"}');

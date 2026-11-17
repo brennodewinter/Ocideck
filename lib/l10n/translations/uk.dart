@@ -1556,6 +1556,46 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Недійсні межі уривка.',
+  'Alleen dit fragment': 'Лише цей уривок',
+  'Audio downloaden en transcriberen…': 'Завантажити аудіо й транскрибувати…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Завантаження аудіо відкриває параметри транскрипції. Уривок вирізається перед ASR. Завантажене джерело потім видаляється.',
+  'Automatische ondertitels': 'Автоматичні субтитри',
+  'Bronserver-URL': 'URL сервера джерел',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Сервер джерел використовує непідтримуваний протокол.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Сервер джерел зайнятий. Спробуйте пізніше.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Сервер джерел недоступний. Перевірте адресу, TLS і доступ браузера.',
+  'De bronserver mist de vereiste bronhelper.':
+      'На сервері джерел немає потрібного допоміжного інструмента джерел.',
+  'Deze bron is nog live of niet afgerond.':
+      'Це джерело ще транслюється наживо або не завершене.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Це відео не має придатної аудіодоріжки.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Це відео приватне, видалене або потребує дозволу на доступ.',
+  'Deze video transcriberen?': 'Транскрибувати це відео?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Власний сервер джерел отримує відео з YouTube. Отримання надсилає посилання на відео цьому серверу. Без сервера можна імпортувати субтитри.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'У цій презентації не знайдено відео YouTube.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Придатних субтитрів немає. Виберіть аудіо або імпортуйте файл.',
+  'Geïmporteerde ondertitels': 'Імпортовані субтитри',
+  'Handmatige ondertitels': 'Ручні субтитри',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Виберіть HTTPS-сервер джерел або сервер на цьому пристрої.',
+  'Ondertitels importeren…': 'Імпортувати субтитри…',
+  'Ondertitels overnemen': 'Використати субтитри',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Також розпізнаються подкаст-канали та посилання на відео YouTube.',
+  'Video-informatie ophalen': 'Отримати відомості про відео',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube обмежує запити. Спробуйте пізніше.',
+  'YouTube-video transcriberen…': 'Транскрибувати відео YouTube…',
   'één taal': 'одна мова',
   'Meerdere talen in deze opname': 'Кілька мов у цьому записі',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

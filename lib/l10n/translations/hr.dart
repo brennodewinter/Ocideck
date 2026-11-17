@@ -1546,6 +1546,46 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Nevažeće granice isječka.',
+  'Alleen dit fragment': 'Samo ovaj isječak',
+  'Audio downloaden en transcriberen…': 'Preuzmi zvuk i transkribiraj…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Preuzimanje zvuka otvara mogućnosti transkripcije. Isječak se prije ASR-a izrezuje. Preuzeti izvor zatim se briše.',
+  'Automatische ondertitels': 'Automatski titlovi',
+  'Bronserver-URL': 'URL izvornog poslužitelja',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Izvorni poslužitelj koristi nepodržani protokol.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Izvorni poslužitelj je zauzet. Pokušajte ponovno kasnije.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Izvorni poslužitelj nije dostupan. Provjerite adresu, TLS i pristup preglednika.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Izvornom poslužitelju nedostaje potreban pomoćni alat za izvor.',
+  'Deze bron is nog live of niet afgerond.':
+      'Ovaj izvor još emitira uživo ili nije dovršen.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Ovaj videozapis nema upotrebljiv zvučni zapis.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Ovaj videozapis je privatan, uklonjen ili zahtijeva dopuštenje za pristup.',
+  'Deze video transcriberen?': 'Transkribirati ovaj videozapis?',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Vaš vlastiti izvorni poslužitelj dohvaća videozapis s YouTubea. Dohvaćanje šalje poveznicu videozapisa tom poslužitelju. Bez poslužitelja možete uvesti titlove.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'U ovoj prezentaciji nisu pronađeni YouTube videozapisi.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Nema upotrebljivih titlova. Odaberite zvuk ili uvezite datoteku.',
+  'Geïmporteerde ondertitels': 'Uvezeni titlovi',
+  'Handmatige ondertitels': 'Ručni titlovi',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Odaberite HTTPS izvorni poslužitelj ili poslužitelj na ovom uređaju.',
+  'Ondertitels importeren…': 'Uvezi titlove…',
+  'Ondertitels overnemen': 'Upotrijebi titlove',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Prepoznaju se i izvori podcasta te poveznice na YouTube videozapise.',
+  'Video-informatie ophalen': 'Dohvati informacije o videozapisu',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'YouTube ograničava zahtjeve. Pokušajte ponovno kasnije.',
+  'YouTube-video transcriberen…': 'Transkribiraj YouTube videozapis…',
   'één taal': 'jedan jezik',
   'Meerdere talen in deze opname': 'Više jezika u ovoj snimci',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':

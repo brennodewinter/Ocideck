@@ -48,6 +48,36 @@ claimt niet dat elk beschermd audiokanaal op te nemen is: een
 besturingssysteem dat DRM-beschermde audio uitsluit wordt gehoorzaamd,
 niet omzeild.
 
+## YouTube en directe media-URL's
+
+Een YouTube-link via **Openen via URL** toont een transcriptievoorstel.
+Annuleren laat de presentatie intact. De videodia-editor en het importeermenu
+bieden ook een expliciete actie voor lokaal gevonden YouTube-verwijzingen.
+Het openen of afspelen van een presentatie haalt deze bronnen niet op.
+
+Schakel eerst de transcriptiemodule in. Online ophalen vereist daarnaast
+online media en een bronserver die u zelf in het voorstel invult. Deze staat
+los van de ASR-bestemming. Informatie ophalen stuurt de canonieke video-ID
+naar die bronserver. Daarna kunt u ondertitels overnemen, met taal en
+handmatige/automatische herkomst, of audio via het bestaande ASR-venster
+verwerken. Zonder server kunt u een lokaal VTT/SRT-bestand importeren.
+Er is geen publieke uitwijkdienst.
+
+Standaard wordt de hele video gekozen. **Alleen dit fragment** biedt
+bewerkbare begin-/eindtijden in seconden, ook bij een voorgesteld URL- of
+diafragment. Ondertitels behouden volledige overlappende regels; audio wordt
+voor ASR geknipt. Het bewerkbare transcript houdt bronlinks in de oorspronkelijke
+videotijd. Directe media-URL's bieden eveneens transcriptie aan voordat audio
+wordt gedownload. Native redirects worden opnieuw gecontroleerd; in browsers
+blijft CORS gelden. Deze URL-routes zijn begrensd tot 8 MiB bronaudio;
+gebruik lokale bestandsimport voor grotere invoer.
+
+De afzonderlijk te installeren referentiebronserver ondersteunt momenteel
+alleen macOS ARM64. De [operatorhandleiding met gepinde componenten en licenties](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/youtube-source/README.md)
+beschrijft installatie, gegevensstromen en grenzen. Gedeelde clientcode bewijst
+geen Windows-/Linux- of volledige browserwerking. De releasematrix blijft
+gevolgd in [#2947](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/2947).
+
 ## Modellen: wat je downloadt en wat het kost
 
 De lokale engine is whisper.cpp v1.9.5 (MIT), gedraaid als subproces

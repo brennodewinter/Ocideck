@@ -7,6 +7,7 @@ import 'package:ocideck/models/asr_server_profile.dart';
 import 'package:ocideck/services/media/youtube_reference.dart';
 import 'package:ocideck/services/media/youtube_source_client.dart';
 import 'package:ocideck/services/transcription/asr_transport.dart';
+import 'package:ocideck/services/transcription/media_sniff.dart';
 
 const _profile = AsrServerProfile(
   enabled: true,
@@ -39,6 +40,7 @@ class _Transport implements AsrTransport {
     'captions': true,
     'audio': true,
     'audio_fragments': false,
+    'audio_encoding': 'pcm16-wav',
   });
   Map<String, Object?> response = _envelope({
     'title': 'Public fixture',
@@ -242,10 +244,11 @@ void main() {
   test(
     'audio capability, bounds and original-clock offset are explicit',
     () async {
+      final wav = encodePcmWav(Float32List.fromList([-.5, .5]));
       final transport = _Transport()
         ..response = _envelope({
-          'base64': base64Encode([0, 255, 1]),
-          'extension': 'm4a',
+          'base64': base64Encode(wav),
+          'extension': 'wav',
           'source_offset_ms': 0,
         });
       final client = YoutubeSourceClient(
@@ -259,7 +262,7 @@ void main() {
       );
       expect(transport.paths, isEmpty);
       final result = await client.audio(reference, _consent);
-      expect(result.bytes, [0, 255, 1]);
+      expect(result.bytes, wav);
       expect(result.sourceOffset, Duration.zero);
       final before = transport.paths.length;
       await expectLater(

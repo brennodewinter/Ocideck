@@ -1565,6 +1565,46 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Ongeldige fragmentgrenzen.': 'Μη έγκυρα όρια αποσπάσματος.',
+  'Alleen dit fragment': 'Μόνο αυτό το απόσπασμα',
+  'Audio downloaden en transcriberen…': 'Λήψη ήχου και μεταγραφή…',
+  'Audio downloaden opent de transcriptiekeuze. Een fragment wordt vóór ASR geknipt. De gedownloade bron wordt daarna verwijderd.':
+      'Η λήψη ήχου ανοίγει τις επιλογές μεταγραφής. Το απόσπασμα κόβεται πριν από το ASR. Η ληφθείσα πηγή διαγράφεται στη συνέχεια.',
+  'Automatische ondertitels': 'Αυτόματοι υπότιτλοι',
+  'Bronserver-URL': 'URL διακομιστή πηγών',
+  'De bronserver gebruikt een niet-ondersteund protocol.':
+      'Ο διακομιστής πηγών χρησιμοποιεί μη υποστηριζόμενο πρωτόκολλο.',
+  'De bronserver is bezig. Probeer later opnieuw.':
+      'Ο διακομιστής πηγών είναι απασχολημένος. Δοκιμάστε αργότερα.',
+  'De bronserver is niet bereikbaar. Controleer adres, TLS en browsertoegang.':
+      'Ο διακομιστής πηγών δεν είναι προσβάσιμος. Ελέγξτε τη διεύθυνση, το TLS και την πρόσβαση του προγράμματος περιήγησης.',
+  'De bronserver mist de vereiste bronhelper.':
+      'Από τον διακομιστή πηγών λείπει το απαιτούμενο βοηθητικό εργαλείο πηγών.',
+  'Deze bron is nog live of niet afgerond.':
+      'Αυτή η πηγή μεταδίδεται ακόμη ζωντανά ή δεν έχει ολοκληρωθεί.',
+  'Deze video heeft geen bruikbare audiotrack.':
+      'Αυτό το βίντεο δεν έχει χρησιμοποιήσιμο κομμάτι ήχου.',
+  'Deze video is privé, verwijderd of vereist toegang.':
+      'Αυτό το βίντεο είναι ιδιωτικό, έχει καταργηθεί ή απαιτεί δικαίωμα πρόσβασης.',
+  'Deze video transcriberen?': 'Να μεταγραφεί αυτό το βίντεο;',
+  'Een eigen bronserver haalt de video bij YouTube op. Ophalen stuurt de videolink naar deze server. Zonder server kunt u ondertitels importeren.':
+      'Ο δικός σας διακομιστής πηγών ανακτά το βίντεο από το YouTube. Η ανάκτηση στέλνει τον σύνδεσμο του βίντεο σε αυτόν τον διακομιστή. Χωρίς διακομιστή μπορείτε να εισαγάγετε υπότιτλους.',
+  'Geen YouTube-video’s gevonden in deze presentatie.':
+      'Δεν βρέθηκαν βίντεο YouTube σε αυτή την παρουσίαση.',
+  'Geen bruikbare ondertitels beschikbaar. Kies audio of importeer een bestand.':
+      'Δεν υπάρχουν χρησιμοποιήσιμοι υπότιτλοι. Επιλέξτε ήχο ή εισαγάγετε αρχείο.',
+  'Geïmporteerde ondertitels': 'Εισηγμένοι υπότιτλοι',
+  'Handmatige ondertitels': 'Χειροκίνητοι υπότιτλοι',
+  'Kies een HTTPS-bronserver of een server op dit apparaat.':
+      'Επιλέξτε διακομιστή πηγών HTTPS ή διακομιστή σε αυτή τη συσκευή.',
+  'Ondertitels importeren…': 'Εισαγωγή υπότιτλων…',
+  'Ondertitels overnemen': 'Χρήση υπότιτλων',
+  'Ook podcastfeeds en YouTube-videolinks worden herkend.':
+      'Αναγνωρίζονται επίσης ροές podcast και σύνδεσμοι βίντεο YouTube.',
+  'Video-informatie ophalen': 'Ανάκτηση πληροφοριών βίντεο',
+  'YouTube beperkt het aantal verzoeken. Probeer later opnieuw.':
+      'Το YouTube περιορίζει τα αιτήματα. Δοκιμάστε αργότερα.',
+  'YouTube-video transcriberen…': 'Μεταγραφή βίντεο YouTube…',
   'één taal': 'μία γλώσσα',
   'Meerdere talen in deze opname': 'Πολλές γλώσσες σε αυτήν την εγγραφή',
   'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
