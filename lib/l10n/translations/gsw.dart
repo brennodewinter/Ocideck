@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'één taal': 'ei Sprach',
+  'Meerdere talen in deze opname': 'Mehri Sprache i dere Ufnahm',
   'Serverprotocol': 'Serverprotokoll',
   'Spreker': 'Sprächer',
   'Automatisch afspelen is niet gestart.':

@@ -1542,6 +1542,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'één taal': 'ét sprog',
+  'Meerdere talen in deze opname': 'Flere sprog i denne optagelse',
   'Serverprotocol': 'Serverprotokol',
   'Spreker': 'Taler',
   'Automatisch afspelen is niet gestart.':

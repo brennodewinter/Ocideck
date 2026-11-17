@@ -1556,6 +1556,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'één taal': 'o limbă',
+  'Meerdere talen in deze opname': 'Mai multe limbi în această înregistrare',
   'Serverprotocol': 'Protocolul serverului',
   'Spreker': 'Vorbitor',
   'Automatisch afspelen is niet gestart.': 'Redarea automată nu a pornit.',

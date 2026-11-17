@@ -1,0 +1,59 @@
+{
+  "source_commit": "dd41eda4bf38b470c3a519d3b1d137be8338e93c",
+  "measured_at_utc": "2026-11-17T09:11:13.818997+00:00",
+  "component_sha256": {
+    "lib/services/transcription/asr_server_engine.dart": "a329a3d1c2bc5393da8e57749b862eafdc99d88ca0b83501ac39d55b87e710ec",
+    "lib/services/transcription/asr_batch_protocol.dart": "aacaab9fb4280a8eec746aade1567362458e15d7b7fe8f51d4f9644146185065",
+    "lib/services/transcription/asr_server_gate.dart": "4dadd98a1cb1ad298ec9f24198ec1cf14dc316cf0f6a2e1b381e4d6a662e67e0",
+    "testbed/asr-multilingual/whisper_backend.py": "22261f8beca9fb23dbf350e09e19d42064de68d97d5950b23e9960ae79763f08",
+    "testbed/asr-diarization/server.py": "bc4b82ad533d2d05e6f5980c27ff211238e4987ab9d129ac7953ba6377b132a6",
+    "testbed/asr-multilingual/models.json": "94682f30c3529d65345ffe79fd502f27e9a7fc52522707611af5e23a490536a9"
+  },
+  "corpus_sha256": {
+    "nl-test.parquet": "feb88a282be746e7c14e1f09c017b4f69b07df9c25c94a3943eaac5ca7794ad5",
+    "polish-test.parquet": "43656b9106d1e8d8c5cd0a3e2a50ef5a29bc659a3cbccf3541f0c1359255ac3b",
+    "en-test-clean.tar.gz": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+    "bianca-en-introduction.mp3": "2f419d3c1b153c3ff1bf756dbd0e345c9c9759b5457e98d5e0f262671da08cad",
+    "dutch-twins.txt": "831767d39d0b17171687569658783aca01ccdec3d7459c196ca0a189dee8924d"
+  },
+  "native_baseline": {
+    "engine": "bundled whisper.cpp v1.9.5",
+    "model": "base ggml-f16",
+    "model_sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+    "helper_sha256": "b66eda1ba3d83ee62bad30573b26440fcefbfd992502a13d13682c1dfacb4dbd",
+    "argv": [
+      "-m",
+      "MODEL",
+      "-l",
+      "auto",
+      "-f",
+      "FIXTURE",
+      "-oj",
+      "-of",
+      "OUTPUT",
+      "-pp"
+    ],
+    "word_alignment_available": false,
+    "per_language_wer_claimed": false,
+    "comparison_limit": "native Metal/f16 versus CTranslate2 CPU/int8; shared host load, not controlled engine performance comparison"
+  },
+  "quality_accepted": false,
+  "missing_acceptance": [
+    "natural within-phrase code switching",
+    "representative music",
+    "Windows/Linux/Intel backend quality measurements",
+    "full release UI acceptance tracked separately in #2947"
+  ],
+  "vad_asset": {
+    "origin": "faster-whisper1.2.1 installed wheel, assets/silero_vad_v6.onnx",
+    "bytes": 1245151,
+    "sha256": "4cbf549b8326f60f80f2536d9eefeb450a9abe83365a098031c89719f1be17d2",
+    "declared_license": "MIT (Silero VAD)",
+    "app_distribution": false
+  },
+  "measurement_notes": [
+    "Benchmark RSS normalization follow-up changes only non-Darwin units; recorded runs are Darwin bytes.",
+    "New cancel_probe.py parameterizes the same measured loopback harness.",
+    "Compiled browser/client source and backend components were frozen at dd41eda4; later edits add reports/docs and normalize non-Darwin RSS units."
+  ]
+}

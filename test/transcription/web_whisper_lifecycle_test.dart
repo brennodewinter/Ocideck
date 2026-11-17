@@ -86,7 +86,7 @@ void main() {
           s.runs++;
           if(s.holdRun) await new Promise(r => s.finishRun = r);
           if(!s.contexts.has(i)) throw new Error('freed during run');
-          return {segments:[{text:'tekst', t0:0}], cancelled:false};
+          return {segments:[{text:'tekst', t0:0, t1:1000}], cancelled:false};
         },
         requestCancel: () => { nativeState.cancels++; },
         free: i => {
@@ -109,6 +109,28 @@ void main() {
 
   Future<TranscriptResult> run(WebWhisperEngine e) =>
       e.transcribe(audio, const TranscriptionOptions());
+
+  test(
+    'lokale WASM meldt geen taalwisselroute en start die niet stil',
+    () async {
+      final e = engine();
+      expect((await e.capabilities()).languageSwitching, isFalse);
+      await expectLater(
+        e.transcribe(
+          audio,
+          const TranscriptionOptions(languageSwitching: true),
+        ),
+        throwsA(isA<EngineUnavailable>()),
+      );
+      expect(_count('loads'), 0);
+      expect(_count('runs'), 0);
+    },
+  );
+
+  test('WASM bewaart de geleverde eindtijd', () async {
+    final result = await run(engine());
+    expect(result.segments.single.end, const Duration(seconds: 1));
+  });
 
   test(
     'provider invalidatie ruimt meer dan vier opeenvolgende modellen op',

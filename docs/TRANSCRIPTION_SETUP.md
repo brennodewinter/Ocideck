@@ -276,3 +276,21 @@ libpulse directly, so `parecord` and `pactl` are no longer required.
 Integration tests use synthetic MP3/M4A/MP4 fixtures, a video without audio,
 and the production C++ call-audio sink. They prove those routes, not a real
 two-person call with physical devices on every operating system.
+
+## Multiple languages in one recording
+
+The language selector distinguishes a fixed language, **Automatically detect
+(one language)** and **Multiple languages in this recording**. The last option
+appears only for an explicitly configured OciDeck ASR v1 server advertising
+language switching. Available languages follow actual engine capabilities,
+including Polish where supported. Local whisper.cpp/WASM does not yet offer
+this mode; multilingual weights alone do not redetect each passage.
+
+The optional [local reference experiment](../testbed/asr-multilingual/README.md)
+processes speech regions independently without a translation request. OciDeck
+installs/downloads nothing for it; existing consent for this file and destination
+still applies. Long later NL/EN and PL/EN blocks improve in the measured fixtures,
+but short quotations or switches without a pause can remain wrong or worsen.
+This is no general quality guarantee. `[en?]` marks an uncertain region language.
+Transcript text and visible tags remain editable and saveable; original times
+and language tags remain inspectable document metadata.

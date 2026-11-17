@@ -1567,6 +1567,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'één taal': 'um idioma',
+  'Meerdere talen in deze opname': 'Vários idiomas nesta gravação',
   'Serverprotocol': 'Protocolo do servidor',
   'Spreker': 'Falante',
   'Automatisch afspelen is niet gestart.':

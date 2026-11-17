@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'één taal': 'una lingua',
+  'Meerdere talen in deze opname': 'Plures linguae in hac inscriptione sonora',
   'Serverprotocol': 'Protocollum ministri',
   'Spreker': 'Loquens',
   'Automatisch afspelen is niet gestart.':

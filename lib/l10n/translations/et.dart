@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'één taal': 'üks keel',
+  'Meerdere talen in deze opname': 'Mitu keelt selles salvestises',
   'Serverprotocol': 'Serveri protokoll',
   'Spreker': 'Kõneleja',
   'Automatisch afspelen is niet gestart.':

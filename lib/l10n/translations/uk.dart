@@ -1556,6 +1556,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'één taal': 'одна мова',
+  'Meerdere talen in deze opname': 'Кілька мов у цьому записі',
   'Serverprotocol': 'Протокол сервера',
   'Spreker': 'Мовець',
   'Automatisch afspelen is niet gestart.':

@@ -200,6 +200,11 @@ class AsrServerEngine implements TranscriptionEngine {
   ) async {
     final allow = _allowOrThrow();
     final versioned = profile.batchProtocol == AsrBatchProtocol.ocideckV1;
+    if (options.languageSwitching && (!versioned || options.language != null)) {
+      throw const EngineUnavailable(
+        'kies een ondersteunde route voor taalwisselingen',
+      );
+    }
     if (profile.batchProtocol == AsrBatchProtocol.unsupported ||
         (options.diarize && !versioned)) {
       throw const EngineUnavailable(
@@ -227,10 +232,17 @@ class AsrServerEngine implements TranscriptionEngine {
       if (versioned) {
         final caps = await _v1Capabilities(allow, task: task, headers: auth);
         task.throwIfCancelled();
+        if (options.languageSwitching && !caps.languageSwitching) {
+          throw const EngineUnavailable(
+            'server ondersteunt geen taalwisselingen',
+          );
+        }
         if (options.diarize && !caps.diarization) {
           throw const EngineUnavailable('server ondersteunt geen diarisatie');
         }
-        if (options.language == null && !caps.automaticLanguage) {
+        if (options.language == null &&
+            !options.languageSwitching &&
+            !caps.automaticLanguage) {
           throw const EngineUnavailable(
             'kies een expliciete taal voor deze server',
           );
@@ -261,6 +273,7 @@ class AsrServerEngine implements TranscriptionEngine {
           language: options.language,
           fileBytes: bytes,
           diarize: versioned ? options.diarize : null,
+          languageSwitching: options.languageSwitching,
         ),
       );
       task.handle = handle;
@@ -272,7 +285,11 @@ class AsrServerEngine implements TranscriptionEngine {
         throw ServerRefused('HTTP ${response.statusCode}');
       }
       return versioned
-          ? parseAsrBatchResponse(response.body, diarize: options.diarize)
+          ? parseAsrBatchResponse(
+              response.body,
+              diarize: options.diarize,
+              languageSwitching: options.languageSwitching,
+            )
           : parseWhisperServerResponse(response.body);
     } on AsrRequestException catch (e) {
       if (e.message == 'afgebroken') {
@@ -362,6 +379,7 @@ Uint8List buildMultipartBody({
   String? language,
   required Uint8List fileBytes,
   bool? diarize,
+  bool languageSwitching = false,
 }) {
   final out = BytesBuilder(copy: false);
   void line(String s) => out.add(utf8.encode('$s\r\n'));
@@ -370,6 +388,7 @@ Uint8List buildMultipartBody({
     'response_format': 'verbose_json',
     'language': ?language,
     if (diarize != null) 'diarize': diarize.toString(),
+    if (languageSwitching) 'language_mode': 'mixed',
   };
   fields.forEach((name, value) {
     line('--$_boundary');

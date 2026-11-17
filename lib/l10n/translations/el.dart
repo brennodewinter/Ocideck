@@ -1565,6 +1565,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'één taal': 'μία γλώσσα',
+  'Meerdere talen in deze opname': 'Πολλές γλώσσες σε αυτήν την εγγραφή',
   'Serverprotocol': 'Πρωτόκολλο διακομιστή',
   'Spreker': 'Ομιλητής',
   'Automatisch afspelen is niet gestart.':

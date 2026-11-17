@@ -148,6 +148,11 @@ class WebWhisperEngine
         'lokale web-engine vereist cross-origin isolatie',
       );
     }
+    if (options.languageSwitching) {
+      throw const EngineUnavailable(
+        'deze lokale route detecteert één taal per opname',
+      );
+    }
     if (options.diarize) {
       throw const EngineUnavailable(
         'diarisatie wordt door deze engine niet ondersteund',
@@ -215,10 +220,14 @@ class WebWhisperEngine
     final segments = <TranscriptSegment>[];
     for (final item in (map['segments'] as List<Object?>? ?? const [])) {
       final s = item as Map<Object?, Object?>;
+      final t1 = s['t1'];
       segments.add(
         TranscriptSegment(
           text: '${s['text'] ?? ''}',
           start: Duration(milliseconds: (s['t0'] as num?)?.toInt() ?? 0),
+          end: t1 is num && t1.isFinite && t1 >= 0
+              ? Duration(milliseconds: t1.toInt())
+              : null,
         ),
       );
     }

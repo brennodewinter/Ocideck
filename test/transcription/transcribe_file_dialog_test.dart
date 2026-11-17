@@ -419,6 +419,50 @@ void main() {
     expect(language.items!.map((item) => item.value), ['auto']);
   });
 
+  testWidgets(
+    'meerdere talen blijft een expliciete capabilitygestuurde keuze',
+    (tester) async {
+      final engine = _FakeEngine(
+        const [TranscriptSegment(text: 'Hallo. Hello.')],
+        caps: const EngineCapabilities(
+          languages: {'nl', 'en', 'pl'},
+          languageSwitching: true,
+        ),
+      );
+      await tester.pumpWidget(
+        app(
+          TranscribeFileDialog(sourcePath: wavPath, displayName: 'clip.wav'),
+          overrides: [
+            captureSourcesProvider.overrideWithValue({
+              CaptureSourceKind.file: _FakeFileSource(wavPath),
+            }),
+            transcriptionEngineProvider.overrideWithValue(engine),
+            recordingStagingProvider.overrideWithValue(_NoopStaging()),
+          ],
+        ),
+      );
+      await tester.pumpAndSettle();
+      final dropdown = find.byType(DropdownButton<String>);
+      expect(tester.widget<DropdownButton<String>>(dropdown).value, 'auto');
+      expect(
+        tester
+            .widget<DropdownButton<String>>(dropdown)
+            .items!
+            .map((x) => x.value),
+        ['auto', 'mixed', 'en', 'nl', 'pl'],
+      );
+      await tester.ensureVisible(dropdown);
+      await tester.tap(dropdown);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Meerdere talen in deze opname').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Transcriberen'));
+      await tester.pumpAndSettle();
+      expect(engine.receivedOptions!.languageSwitching, isTrue);
+      expect(engine.receivedOptions!.language, isNull);
+    },
+  );
+
   testWidgets('Start loopt door en opent een nieuw transcriptdocument', (
     tester,
   ) async {

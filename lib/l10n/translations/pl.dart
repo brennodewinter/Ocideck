@@ -1552,6 +1552,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'één taal': 'jeden język',
+  'Meerdere talen in deze opname': 'Wiele języków w tym nagraniu',
   'Serverprotocol': 'Protokół serwera',
   'Spreker': 'Mówca',
   'Automatisch afspelen is niet gestart.':

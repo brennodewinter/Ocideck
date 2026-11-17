@@ -167,6 +167,11 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
     }
     // whisper-cli heeft geen diarisatievlag; `diarize` stilletjes negeren
     // zou een sprekerlabels-belofte doen die de uitvoer niet waarmaakt.
+    if (options.languageSwitching) {
+      throw const EngineUnavailable(
+        'deze lokale route detecteert één taal per opname',
+      );
+    }
     if (options.diarize) {
       throw const EngineUnavailable(
         'diarisatie wordt door deze engine niet ondersteund',
@@ -378,6 +383,8 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
       for (final raw in list) {
         final map = raw as Map<String, dynamic>;
         final offsets = map['offsets'] as Map<String, dynamic>?;
+        final from = offsets?['from'];
+        final to = offsets?['to'];
         // whisper begint elk segment met een spatie — die draagt de
         // woordafstand naar het vorige segment en mag daarom niet weg.
         // Alleen de allereerste trimmen we: een lopende koptekst begint
@@ -386,8 +393,13 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
         segments.add(
           TranscriptSegment(
             text: segments.isEmpty ? text.trimLeft() : text,
-            start: offsets?['from'] is num
-                ? Duration(milliseconds: (offsets!['from'] as num).toInt())
+            start: from is num ? Duration(milliseconds: from.toInt()) : null,
+            end:
+                to is num &&
+                    to.isFinite &&
+                    to >= 0 &&
+                    (from is! num || to >= from)
+                ? Duration(milliseconds: to.toInt())
                 : null,
           ),
         );

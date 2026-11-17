@@ -39,6 +39,7 @@ class EngineCapabilities {
   const EngineCapabilities({
     this.languages = const {},
     this.automaticLanguage = true,
+    this.languageSwitching = false,
     this.timestamps = false,
     this.diarization = false,
     this.streaming = false,
@@ -50,6 +51,9 @@ class EngineCapabilities {
 
   /// False als de route een expliciete taal vereist; geen fictieve detectie.
   final bool automaticLanguage;
+
+  /// Herhaalde taaldetectie op spraaksegmenten, niet alleen één taal bij start.
+  final bool languageSwitching;
   final bool timestamps;
   final bool diarization;
 
@@ -75,6 +79,8 @@ class TranscriptSegment {
     this.speaker,
     this.speakerIds = const [],
     this.speakerUncertain = false,
+    this.language,
+    this.languageUncertain = false,
   });
 
   final String text;
@@ -85,6 +91,10 @@ class TranscriptSegment {
   /// Opnamegebonden clusters, geen persoonsidentiteit. Meerdere = overlap.
   final List<String> speakerIds;
   final bool speakerUncertain;
+
+  /// Alleen een door de engine geleverde taal; null betekent onbekend.
+  final String? language;
+  final bool languageUncertain;
 }
 
 /// De uitslag van de definitieve pass: platte tekst plus — waar de engine
@@ -147,6 +157,7 @@ class TranscriptionOptions {
   const TranscriptionOptions({
     this.language,
     this.diarize = false,
+    this.languageSwitching = false,
     this.serverConsent,
     this.onProgress,
   });
@@ -159,6 +170,10 @@ class TranscriptionOptions {
   /// niet aangeboden; komt hij er tóch mee aan, dan beantwoordt hij hem
   /// met [EngineUnavailable] en niet met stil negeren (#2935).
   final bool diarize;
+
+  /// Expliciete gemengde-taalroute. Niet combineren met één vaste [language].
+  /// Zonder capability volgt een fout vóór verwerking, nooit stil één taal.
+  final bool languageSwitching;
 
   /// Verplicht voor een `batchServer`/`liveServer`-engine; een lokale
   /// engine negeert dit veld.

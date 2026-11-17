@@ -90,6 +90,145 @@ void main() {
     serverConsent: ServerConsent(host: '127.0.0.1', audioPath: 'local.wav'),
   );
 
+  test('taalwisselingen zijn expliciet onderhandeld en bevestigd', () async {
+    final t = _Transport()
+      ..capabilities = _caps.replaceFirst(
+        '"diarization":true',
+        '"diarization":true,"language_switching":true',
+      )
+      ..response = jsonEncode({
+        'protocol': 'ocideck-asr',
+        'version': 1,
+        'diarization_applied': false,
+        'language_switching_applied': true,
+        'segments': [
+          {
+            'text': 'Hallo.',
+            'start': 0,
+            'end': 1,
+            'language': 'nl',
+            'language_uncertain': true,
+          },
+          {
+            'text': 'Hello.',
+            'start': 1,
+            'end': 2,
+            'language': 'en',
+            'language_uncertain': true,
+          },
+        ],
+      });
+    final e = AsrServerEngine(
+      profile: profile,
+      transport: t,
+      audioReader: (_) async => Uint8List(44),
+    );
+    expect((await e.capabilities()).languageSwitching, isTrue);
+    final result = await e.transcribe(
+      const AudioRef('local.wav'),
+      const TranscriptionOptions(
+        languageSwitching: true,
+        serverConsent: ServerConsent(host: '127.0.0.1', audioPath: 'local.wav'),
+      ),
+    );
+    expect(result.segments.map((s) => s.language), ['nl', 'en']);
+    expect(result.segments.every((s) => s.languageUncertain), isTrue);
+    final body = utf8.decode(t.bodies.last!);
+    expect(body, contains('name="language_mode"\r\n\r\nmixed'));
+    expect(body, isNot(contains('name="language"\r\n')));
+    expect(formatTranscriptBody(result.segments), contains('[en?] Hello.'));
+  });
+
+  test(
+    'geen taalwisselcapability: geen audiobytes gelezen of verstuurd',
+    () async {
+      final t = _Transport();
+      final e = AsrServerEngine(
+        profile: profile,
+        transport: t,
+        audioReader: (_) async => throw StateError('niet lezen'),
+      );
+      await expectLater(
+        e.transcribe(
+          const AudioRef('local.wav'),
+          const TranscriptionOptions(
+            languageSwitching: true,
+            serverConsent: ServerConsent(
+              host: '127.0.0.1',
+              audioPath: 'local.wav',
+            ),
+          ),
+        ),
+        throwsA(isA<EngineUnavailable>()),
+      );
+      expect(t.methods, ['GET']);
+    },
+  );
+
+  test('legacyserver krijgt nooit een onbekende taalwisseloptie', () async {
+    final t = _Transport();
+    final e = AsrServerEngine(
+      profile: profile.copyWith(batchProtocol: AsrBatchProtocol.whisperCpp),
+      transport: t,
+      audioReader: (_) async => throw StateError('niet lezen'),
+    );
+    await expectLater(
+      e.transcribe(
+        const AudioRef('local.wav'),
+        const TranscriptionOptions(
+          languageSwitching: true,
+          serverConsent: ServerConsent(
+            host: '127.0.0.1',
+            audioPath: 'local.wav',
+          ),
+        ),
+      ),
+      throwsA(isA<EngineUnavailable>()),
+    );
+    expect(t.methods, isEmpty);
+  });
+
+  test('taalwisselmodus kan niet stil naar één taal terugvallen', () {
+    expect(
+      () => parseAsrBatchResponse(
+        _response([], applied: false),
+        diarize: false,
+        languageSwitching: true,
+      ),
+      throwsA(isA<ServerRefused>()),
+    );
+    expect(parseAsrBatchCapabilities(_caps).languageSwitching, isFalse);
+    expect(
+      () => parseAsrBatchCapabilities(
+        _caps.replaceFirst(
+          '"diarization":true',
+          '"diarization":true,"language_switching":"yes"',
+        ),
+      ),
+      throwsA(isA<ServerRefused>()),
+    );
+  });
+
+  test(
+    'segmenttaal is begrensd en onzeker als de server zekerheid niet levert',
+    () {
+      final result = parseAsrBatchResponse(
+        _response([_segment('tekst', [])..['language'] = 'nl'], applied: false),
+        diarize: false,
+      );
+      expect(result.segments.single.languageUncertain, isTrue);
+      expect(
+        () => parseAsrBatchResponse(
+          _response([
+            _segment('tekst', [])..['language'] = '<script>',
+          ], applied: false),
+          diarize: false,
+        ),
+        throwsA(isA<ServerRefused>()),
+      );
+    },
+  );
+
   test('oude profielen blijven whisper; onbekende versies blijven dicht', () {
     expect(
       AsrServerProfile.fromJson({}).batchProtocol,

@@ -153,6 +153,11 @@ String formatTranscriptBody(
     if (segment.start != null) {
       prefix.write('[${_formatTimecode(segment.start!)}] ');
     }
+    if (segment.language != null) {
+      prefix.write(
+        '[${segment.language}${segment.languageUncertain ? '?' : ''}] ',
+      );
+    }
     var name = segment.speaker;
     if (segment.speakerIds.isNotEmpty) {
       name = segment.speakerIds
@@ -184,19 +189,24 @@ String formatTranscriptBody(
   return body;
 }
 
-// Alleen tijden en cluster-IDs; nooit stemvectoren of een persoonsidentiteit.
+// Alleen tijden, taaltags en cluster-IDs; nooit stemvectoren of persoonsidentiteit.
 List<Map<String, Object?>> _segmentMetadata(List<TranscriptSegment> segments) =>
     [
       for (var i = 0; i < segments.length; i++)
         if (segments[i].end != null ||
             segments[i].speakerIds.isNotEmpty ||
-            segments[i].speakerUncertain)
+            segments[i].speakerUncertain ||
+            segments[i].language != null ||
+            segments[i].languageUncertain)
           {
             'segment': i,
             'start_us': segments[i].start?.inMicroseconds,
             'end_us': segments[i].end?.inMicroseconds,
             'speaker_ids': segments[i].speakerIds,
             'speaker_uncertain': segments[i].speakerUncertain,
+            if (segments[i].language != null) 'language': segments[i].language,
+            if (segments[i].language != null || segments[i].languageUncertain)
+              'language_uncertain': segments[i].languageUncertain,
           },
     ];
 

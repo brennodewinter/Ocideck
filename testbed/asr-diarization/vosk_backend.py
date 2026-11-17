@@ -31,7 +31,7 @@ class VoskBackend:
                          'diarization': self.speaker_model is not None},
         }
 
-    def transcribe(self, audio, language, diarize):
+    def transcribe(self, audio, language, diarize, *, cancelled=None):
         if language not in self.models:
             raise ValueError('Choose an installed language explicitly')
         if diarize and self.speaker_model is None:
@@ -48,6 +48,8 @@ class VoskBackend:
                 recognizer.SetSpkModel(self.speaker_model)
             results = []
             while True:
+                if cancelled and cancelled():
+                    raise ConnectionAbortedError('Request cancelled')
                 chunk = source.readframes(4000)
                 if not chunk:
                     break

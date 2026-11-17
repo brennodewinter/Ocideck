@@ -1,0 +1,59 @@
+{
+  "scope": "same corpus files, repeated FFmpeg decode; no new quality comparison",
+  "cases": [
+    {
+      "file": "nl-en-nl.wav",
+      "samples": 1144800,
+      "length_equal": true,
+      "different_samples": 42,
+      "max_abs_difference_pcm16_lsb": 1,
+      "measured_sha256": "ea103686885f6811c9508902f77335ecad11f9aefd0448d6d4f7c31186eb8717",
+      "reproduced_sha256": "30b4e92213f56b0cea1dd378fada10acf47f8d9ef411a43af3409981ba229b0a"
+    },
+    {
+      "file": "pl-en.wav",
+      "samples": 1222720,
+      "length_equal": true,
+      "different_samples": 60,
+      "max_abs_difference_pcm16_lsb": 1,
+      "measured_sha256": "e8e5e5a0c7e4ee0f53ed8e593062ed6a194d331ef2e28c25b869a719245fd275",
+      "reproduced_sha256": "960190d0c3069b4671438222f046aa9eb542865e631a00b6e5eb77f94626d4ae"
+    },
+    {
+      "file": "same-reader-nl-en-nl.wav",
+      "samples": 1628800,
+      "length_equal": true,
+      "different_samples": 0,
+      "max_abs_difference_pcm16_lsb": 0,
+      "measured_sha256": "df4b6a92d7a8ef9b5ade82cddf7c4351421c7dfbd4c9782fe5f32ad9c1dc5190",
+      "reproduced_sha256": "df4b6a92d7a8ef9b5ade82cddf7c4351421c7dfbd4c9782fe5f32ad9c1dc5190"
+    },
+    {
+      "file": "same-reader-short-quote.wav",
+      "samples": 633600,
+      "length_equal": true,
+      "different_samples": 0,
+      "max_abs_difference_pcm16_lsb": 0,
+      "measured_sha256": "b58fbfebefe571cd6c6294f7fff3e8d46807f27c613857d86fb0a5c26cd90e8e",
+      "reproduced_sha256": "b58fbfebefe571cd6c6294f7fff3e8d46807f27c613857d86fb0a5c26cd90e8e"
+    },
+    {
+      "file": "silence.wav",
+      "samples": 192000,
+      "length_equal": true,
+      "different_samples": 0,
+      "max_abs_difference_pcm16_lsb": 0,
+      "measured_sha256": "6e49db6ecc812f32cb043fb3c02e4aea55329fa8df27724c5b4e2a76ed57c360",
+      "reproduced_sha256": "6e49db6ecc812f32cb043fb3c02e4aea55329fa8df27724c5b4e2a76ed57c360"
+    },
+    {
+      "file": "instrumental-tone-control.wav",
+      "samples": 192000,
+      "length_equal": true,
+      "different_samples": 0,
+      "max_abs_difference_pcm16_lsb": 0,
+      "measured_sha256": "6ad87ed4368493c83c2022300fb82fd6008532da1c0f269c83ec9a354790360a",
+      "reproduced_sha256": "6ad87ed4368493c83c2022300fb82fd6008532da1c0f269c83ec9a354790360a"
+    }
+  ]
+}

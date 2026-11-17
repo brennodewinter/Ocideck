@@ -1,0 +1,168 @@
+{
+  "cases": [
+    {
+      "file": "nl-en-nl.wav",
+      "sha256": "ea103686885f6811c9508902f77335ecad11f9aefd0448d6d4f7c31186eb8717",
+      "duration": 71.55,
+      "reference": [
+        {
+          "id": "3034_2211_000000",
+          "language": "nl",
+          "text": "arm klein haft zei de eik dat was toch een al te kort leven en op iederen zomerdag werd dezelfde dans dezelfde toespraak hetzelfde antwoord en hetzelfde inslapen herhaald",
+          "source_sha256": "1d2db1334465ba4c53b1b49a47dfccb62b5e126ce2752337b16b82f50d68029e",
+          "start": 0.0,
+          "end": 15.49
+        },
+        {
+          "id": "3034_2211_000001",
+          "language": "nl",
+          "text": "dan zei de boom altijd arme kleine slechts een enkelen dag duurt uw geheele leven wat is dat kort het is toch treurig",
+          "source_sha256": "7708e803a94cba4162c5bf3f07be1da27c47b095096c38b0ae2eceade4093ce7",
+          "start": 16.49,
+          "end": 26.6
+        },
+        {
+          "id": "3034_2211_000002",
+          "language": "nl",
+          "text": "wij waken overdag slapen s nachts en hebben dan onze droomen met den boom gaat het anders hij is drie jaargetijden achtereen wakker eerst tegen den winter komt zijn slaap",
+          "source_sha256": "2b7721294f06be2526e7a9bae8aa16dfe9e1e8ab27f6ed64065dba1d8a5def72",
+          "start": 27.6,
+          "end": 40.47
+        },
+        {
+          "id": "en-5639",
+          "language": "en",
+          "text": "FOR GOD'S SAKE MY LADY MOTHER GIVE ME A WIFE WHO WOULD BE AN AGREEABLE COMPANION NOT ONE WHO WILL DISGUST ME SO THAT WE MAY BOTH BEAR EVENLY AND WITH MUTUAL GOOD WILL THE YOKE IMPOSED ON US BY HEAVEN INSTEAD OF PULLING THIS WAY AND THAT WAY AND FRETTING EACH OTHER TO DEATH",
+          "source_sha256": "ecba1c65406f3d2fdfe383a22385dfe19cc117b71b126817f5e20df791f22a50",
+          "start": 41.47,
+          "end": 58.9
+        },
+        {
+          "id": "3034_2211_000003",
+          "language": "nl",
+          "text": "reeds was hij hoog boven de wolken opgeschoten die als donkere scharen van trekvogels of groote witte zwanen onder hem",
+          "source_sha256": "40cb5755e8a50abd6ceac0bd0ede272f224f2f695088343fa8cbc6e0715b017a",
+          "start": 59.9,
+          "end": 70.55
+        }
+      ]
+    },
+    {
+      "file": "pl-en.wav",
+      "sha256": "e8e5e5a0c7e4ee0f53ed8e593062ed6a194d331ef2e28c25b869a719245fd275",
+      "duration": 76.42,
+      "reference": [
+        {
+          "id": "1889_1447_000000",
+          "language": "pl",
+          "text": "staliśmy wszyscy bezradni wobec tej szalejącej furii złości która sama siebie trawiła i pożerała z ubolewaniem patrzyliśmy na smutny przebieg tego paroksyzmu i z pewną ulgą wróciliśmy do naszych zajęć gdy żałosny ten proces dobiegł swego naturalnego końca",
+          "source_sha256": "53c842ad6b340fed9c0202e150a0e4de674edca25e9ede20c607c455835272fc",
+          "start": 0.0,
+          "end": 18.18
+        },
+        {
+          "id": "1889_1447_000001",
+          "language": "pl",
+          "text": "nawet w obecności matki leżącej z zawiązaną głową na sofie nie mogły się powstrzymać robiły perskie oczko dawały sobie znaki mówiły niemym kolorowym alfabetem pełnym sekretnych znaczeń irytowało mnie to szydercze porozumienie ta migotliwa zmowa poza mymi plecami",
+          "source_sha256": "27cb4e7b2fb77a664567665a11847c14690bb312930cf7fcd9b9b5377cd07cbf",
+          "start": 19.18,
+          "end": 37.67
+        },
+        {
+          "id": "1889_1447_000002",
+          "language": "pl",
+          "text": "staliśmy pod drzwiami i nasłuchiwali w lamentach wichru dawały się słyszeć wszelkie głosy perswazje nawoływania i gawędy zdawało się nam że słyszymy wołanie o pomoc ojca zbłąkanego w wichurze to znowu że brat z teodorem gwarzą beztrosko pod drzwiami",
+          "source_sha256": "eb80592b5d5759fbedde37ac01cd16816bd4d17fe24504401501db374c154330",
+          "start": 38.67,
+          "end": 56.99
+        },
+        {
+          "id": "en-5639",
+          "language": "en",
+          "text": "FOR GOD'S SAKE MY LADY MOTHER GIVE ME A WIFE WHO WOULD BE AN AGREEABLE COMPANION NOT ONE WHO WILL DISGUST ME SO THAT WE MAY BOTH BEAR EVENLY AND WITH MUTUAL GOOD WILL THE YOKE IMPOSED ON US BY HEAVEN INSTEAD OF PULLING THIS WAY AND THAT WAY AND FRETTING EACH OTHER TO DEATH",
+          "source_sha256": "ecba1c65406f3d2fdfe383a22385dfe19cc117b71b126817f5e20df791f22a50",
+          "start": 57.99,
+          "end": 75.42
+        }
+      ]
+    },
+    {
+      "file": "same-reader-nl-en-nl.wav",
+      "sha256": "df4b6a92d7a8ef9b5ade82cddf7c4351421c7dfbd4c9782fe5f32ad9c1dc5190",
+      "duration": 101.8,
+      "layout": "synthetic splice of the same documented reader Bianca Kramer (3798); not spontaneous code-switching",
+      "reference": [
+        {
+          "language": "nl",
+          "text": "wie moeten er uitgenoodigd worden vroeg de nachtuil op het groote bal kan iedereen komen zelfs menschen wanneer zij slechts in den slaap spreken of iets dergelijks kunnen doen wat in onzen geest valt maar bij het eerste feest moet er een strenge keuze gedaan worden wij willen alleen de allervoornaamsten hebben",
+          "start": 0.0,
+          "end": 18.15
+        },
+        {
+          "language": "en",
+          "text": "This is a picture of Kit and Kat. They are Twins, and they live in Holland. Kit is the boy, and Kat is the girl. Of course their real names are not Kit and Kat at all. Their real names are Christopher and Katrina. But you can see for yourself that such long names as that would never in the world fit such a short pair of Twins. So the Twins' Mother, Vrouw Vedder, said, \"They cannot be called Christopher and Katrina until they are four and a half feet high.\" Now it takes a long time to grow four and a half feet of Boy and Girl. You know, chickens and puppies and colts and kittens always grow up much faster than twins. Kit and Kat ate a great many breakfasts and dinners and suppers, and played a great many plays, and had a great many happy days while they were growing up to their names. I will tell you about some of them.",
+          "start": 19.15,
+          "end": 81.65
+        },
+        {
+          "language": "nl",
+          "text": "wie moeten er uitgenoodigd worden vroeg de nachtuil op het groote bal kan iedereen komen zelfs menschen wanneer zij slechts in den slaap spreken of iets dergelijks kunnen doen wat in onzen geest valt maar bij het eerste feest moet er een strenge keuze gedaan worden wij willen alleen de allervoornaamsten hebben",
+          "start": 82.65,
+          "end": 100.8
+        }
+      ]
+    },
+    {
+      "file": "same-reader-short-quote.wav",
+      "sha256": "b58fbfebefe571cd6c6294f7fff3e8d46807f27c613857d86fb0a5c26cd90e8e",
+      "duration": 39.6,
+      "layout": "synthetic splice of the same documented reader Bianca Kramer (3798); not spontaneous code-switching",
+      "reference": [
+        {
+          "language": "nl",
+          "text": "wie moeten er uitgenoodigd worden vroeg de nachtuil op het groote bal kan iedereen komen zelfs menschen wanneer zij slechts in den slaap spreken of iets dergelijks kunnen doen wat in onzen geest valt maar bij het eerste feest moet er een strenge keuze gedaan worden wij willen alleen de allervoornaamsten hebben",
+          "start": 0.0,
+          "end": 18.15
+        },
+        {
+          "language": "en",
+          "text": "Their real names are Christopher and Katrina.",
+          "start": 18.15,
+          "end": 21.45
+        },
+        {
+          "language": "nl",
+          "text": "wie moeten er uitgenoodigd worden vroeg de nachtuil op het groote bal kan iedereen komen zelfs menschen wanneer zij slechts in den slaap spreken of iets dergelijks kunnen doen wat in onzen geest valt maar bij het eerste feest moet er een strenge keuze gedaan worden wij willen alleen de allervoornaamsten hebben",
+          "start": 21.45,
+          "end": 39.6
+        }
+      ]
+    },
+    {
+      "file": "silence.wav",
+      "sha256": "6e49db6ecc812f32cb043fb3c02e4aea55329fa8df27724c5b4e2a76ed57c360",
+      "duration": 12.0,
+      "layout": "digital silence",
+      "reference": []
+    },
+    {
+      "file": "instrumental-tone-control.wav",
+      "sha256": "6ad87ed4368493c83c2022300fb82fd6008532da1c0f269c83ec9a354790360a",
+      "duration": 12.0,
+      "layout": "synthetic sustained three-tone chord; not representative music",
+      "reference": []
+    }
+  ],
+  "extra_source": {
+    "reader": "Bianca Kramer; ID3798 in MLS and LibriSpeech speaker metadata",
+    "nl_audio_sha256": "495fab7ced477fd47ffa7ddab5eff3c32f01af6269e8fbd7d3c92c2054d498e9",
+    "en_audio_sha256": "2f419d3c1b153c3ff1bf756dbd0e345c9c9759b5457e98d5e0f262671da08cad",
+    "english_audio": "https://archive.org/download/dutch_twins_1001_librivox/dutchtwins_00_perkins_64kb.mp3",
+    "english_catalogue": "https://librivox.org/the-dutch-twins-by-lucy-fitch-perkins/",
+    "dutch_catalogue": "https://librivox.org/andersens-sproken-en-vertellingen-door-hans-christian-andersen/",
+    "reference_text": "https://www.gutenberg.org/ebooks/4012",
+    "reference_download": "https://mirrors.xmission.com/gutenberg/4/0/1/4012/4012.txt",
+    "reference_sha256": "831767d39d0b17171687569658783aca01ccdec3d7459c196ca0a189dee8924d",
+    "license": "English LibriVox public-domain dedication; Dutch MLS CC-BY-4.0. No claim these edits are a natural bilingual conversation."
+  }
+}

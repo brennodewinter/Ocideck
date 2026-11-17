@@ -175,6 +175,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     final sorted = caps.languages.toList()..sort();
     sorted.remove('auto');
     if (caps.automaticLanguage) sorted.insert(0, 'auto');
+    if (caps.languageSwitching) {
+      sorted.insert(caps.automaticLanguage ? 1 : sorted.length, 'mixed');
+    }
     setState(() {
       if (sorted.isNotEmpty) {
         _languages = sorted;
@@ -240,7 +243,10 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
       // de Start-knop was de bevestiging (§4.3).
       final profile = ref.read(asrServerProfileProvider);
       final options = TranscriptionOptions(
-        language: _language == 'auto' ? null : _language,
+        language: _language == 'auto' || _language == 'mixed'
+            ? null
+            : _language,
+        languageSwitching: _language == 'mixed',
         diarize: _diarize,
         serverConsent: engine.kind == EngineKind.batchServer
             ? ServerConsent(host: profile.host, audioPath: audio.durablePath)
@@ -331,7 +337,11 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           ? _formatDuration(duration)
           : null,
       engineLabel: _engineLabel(engine, l10n),
-      languageCode: _language == 'auto' ? null : _language,
+      languageCode: _language == 'auto'
+          ? null
+          : _language == 'mixed'
+          ? l10n.d('Meerdere talen in deze opname')
+          : _language,
       gapsLabel: gaps == null
           ? null
           : l10n
@@ -585,18 +595,28 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   Widget _languageRow(AppLocalizations l10n) => Row(
     children: [
       Text('${l10n.d('Taal')}: ', style: const TextStyle(fontSize: 13)),
-      DropdownButton<String>(
-        value: _language,
-        items: [
-          for (final code in _languages)
-            DropdownMenuItem(
-              value: code,
-              child: Text(
-                code == 'auto' ? l10n.d('Automatisch detecteren') : code,
+      Expanded(
+        child: DropdownButton<String>(
+          value: _language,
+          isExpanded: true,
+          items: [
+            for (final code in _languages)
+              DropdownMenuItem(
+                value: code,
+                child: Text(
+                  switch (code) {
+                    'auto' =>
+                      '${l10n.d('Automatisch detecteren')} (${l10n.d('één taal')})',
+                    'mixed' => l10n.d('Meerdere talen in deze opname'),
+                    _ => code,
+                  },
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-        ],
-        onChanged: (v) => setState(() => _language = v ?? 'auto'),
+          ],
+          onChanged: (v) => setState(() => _language = v ?? 'auto'),
+        ),
       ),
     ],
   );

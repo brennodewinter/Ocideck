@@ -611,6 +611,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'één taal': 'una lingua',
+  'Meerdere talen in deze opname': 'Più lingue in questa registrazione',
   'Serverprotocol': 'Protocollo del server',
   'Spreker': 'Parlante',
   'Automatisch afspelen is niet gestart.':

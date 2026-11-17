@@ -1542,6 +1542,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'één taal': 'satu bahasa',
+  'Meerdere talen in deze opname': 'Beberapa bahasa dalam rekaman ini',
   'Serverprotocol': 'Protokol server',
   'Spreker': 'Pembicara',
   'Automatisch afspelen is niet gestart.': 'Pemutaran otomatis tidak dimulai.',

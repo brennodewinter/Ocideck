@@ -1558,6 +1558,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'één taal': 'lingwa waħda',
+  'Meerdere talen in deze opname': 'Diversi lingwi f’din ir-reġistrazzjoni',
   'Serverprotocol': 'Protokoll tas-server',
   'Spreker': 'Kelliem',
   'Automatisch afspelen is niet gestart.': 'Id-daqq awtomatiku ma bediex.',
