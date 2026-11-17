@@ -37,6 +37,7 @@ void main() {
     'docs/RELEASE_OPERATIONS.md',
     'docs/SECURITY_REVIEW_APT.md',
     'docs/SOURCE_MAP.md',
+    'docs/TRANSCRIPTION_RELEASE_MATRIX.md',
     'docs/API_DOCUMENTATION.md',
     'docs/CONTRIBUTING_GUIDELINES.md',
     'docs/DEVELOPMENT_SETUP_GUIDE.md',

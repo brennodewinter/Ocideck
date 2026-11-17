@@ -20,6 +20,16 @@ native builds run after relevant changes, time-degrading checks run on a
 schedule, a toolchain change rehearses all platforms, and a release candidate runs the full release gate before a tag exists. See [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
+### Transcription evidence (2026-11-17)
+
+The transcription release matrix — which routes are proven on which
+platform, with the reproduction command and artefact/model/server hashes
+per cell — lives in
+[TRANSCRIPTION_RELEASE_MATRIX.md](TRANSCRIPTION_RELEASE_MATRIX.md) (#2947).
+Changes under `lib/services/transcription/`, the transcription dialogs or
+`web/whisper/` must name which of its probes ran; a green `make check`
+alone is not ASR evidence.
+
 ### Browser-copy checks and host architecture (2026-11-08)
 
 The browser persistence roundtrip needs a real browser in addition to VM tests:
