@@ -1542,6 +1542,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'één taal': 'jeden jazyk',
+  'Meerdere talen in deze opname': 'Více jazyků v této nahrávce',
   'Serverprotocol': 'Serverový protokol',
   'Spreker': 'Mluvčí',
   'Automatisch afspelen is niet gestart.':

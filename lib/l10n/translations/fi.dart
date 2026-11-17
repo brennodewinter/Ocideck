@@ -1542,6 +1542,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'één taal': 'yksi kieli',
+  'Meerdere talen in deze opname': 'Useita kieliä tässä tallenteessa',
   'Serverprotocol': 'Palvelinprotokolla',
   'Spreker': 'Puhuja',
   'Automatisch afspelen is niet gestart.':

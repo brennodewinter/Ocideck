@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'één taal': 'un idioma',
+  'Meerdere talen in deze opname': 'Varios idioma den e grabashon aki',
   'Serverprotocol': 'Protokòl di servidor',
   'Spreker': 'Hende ku ta papia',
   'Automatisch afspelen is niet gestart.':

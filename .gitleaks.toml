@@ -73,6 +73,9 @@ paths = [
   '''^testbed/asr-diarization/model/''',
   '''^testbed/asr-diarization/proof-out/''',
   '''^testbed/asr-diarization/__pycache__/''',
+  '''^testbed/asr-multilingual/model/''',
+  '''^testbed/asr-multilingual/proof-out/''',
+  '''^testbed/asr-multilingual/__pycache__/''',
 
   # ── Het detectiecorpus van OciWacht ────────────────────────────────────────
   # Dit is de kern van de afweging. De privacyscanner moet geheimen kúnnen

@@ -1538,6 +1538,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'één taal': 'viena valoda',
+  'Meerdere talen in deze opname': 'Vairākas valodas šajā ierakstā',
   'Serverprotocol': 'Servera protokols',
   'Spreker': 'Runātājs',
   'Automatisch afspelen is niet gestart.': 'Automātiskā atskaņošana nesākās.',

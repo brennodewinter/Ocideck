@@ -767,6 +767,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'één taal': 'one language',
+  'Meerdere talen in deze opname': 'Multiple languages in this recording',
   'Serverprotocol': 'Server protocol',
   'Spreker': 'Speaker',
   'Automatisch afspelen is niet gestart.': 'Automatic playback did not start.',

@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'één taal': 'teanga amháin',
+  'Meerdere talen in deze opname': 'Ilteangacha sa taifeadadh seo',
   'Serverprotocol': 'Prótacal freastalaí',
   'Spreker': 'Cainteoir',
   'Automatisch afspelen is niet gestart.':

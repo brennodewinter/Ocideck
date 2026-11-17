@@ -1545,6 +1545,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'één taal': 'jeden jazyk',
+  'Meerdere talen in deze opname': 'Viac jazykov v tejto nahrávke',
   'Serverprotocol': 'Protokol servera',
   'Spreker': 'Hovoriaci',
   'Automatisch afspelen is niet gestart.':

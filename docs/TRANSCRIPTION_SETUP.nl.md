@@ -288,3 +288,23 @@ libpulse: `parecord` en `pactl` hoeven niet meer aanwezig te zijn.
 De code bevat integratieproeven met synthetische MP3/M4A/MP4-bestanden, een video
 zonder audiotrack, en de echte C++-callaudiosink. Deze bewijzen de betreffende
 paden; zij vervangen geen tweepersoonscall met echte apparaten op ieder OS.
+
+## Meerdere talen binnen één opname
+
+De taalkeuze maakt onderscheid tussen een vaste taal, **Automatisch detecteren
+(één taal)** en **Meerdere talen in deze opname**. Die laatste keuze verschijnt
+alleen bij een zelf ingesteld OciDeck ASR v1-serverprofiel dat taalwisselingen
+expliciet ondersteunt. De talenlijst volgt de werkelijk gerapporteerde
+mogelijkheden, waaronder Pools waar ondersteund. Lokale whisper.cpp/WASM biedt
+de taalwisselmodus nog niet; een meertalig model alleen herdetecteert niet
+vanzelf de taal bij elke passage.
+
+De optionele [lokale referentieproef](../testbed/asr-multilingual/README.md)
+verwerkt spraakregio's afzonderlijk zonder vertaalopdracht. Zij downloadt of
+installeert niets vanuit de app. De bestaande toestemming voor dit bestand
+en deze bestemming blijft vereist. Lange NL/EN- en PL/EN-blokken verbeteren
+in de proef, maar korte citaten of taalwisselingen zonder pauze kunnen fout
+blijven of verslechteren; dit is geen algemene kwaliteitsgarantie. `[en?]`
+betekent een onzekere taaltoewijzing aan die regio. Je kunt transcripttekst
+en zichtbare tags gewoon corrigeren en opslaan. Oorspronkelijke tijden en
+taaltags blijven als inspecteerbare documentmetadata behouden.

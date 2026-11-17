@@ -610,6 +610,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'één taal': 'un idioma',
+  'Meerdere talen in deze opname': 'Varios idiomas en esta grabación',
   'Serverprotocol': 'Protocolo del servidor',
   'Spreker': 'Hablante',
   'Automatisch afspelen is niet gestart.':

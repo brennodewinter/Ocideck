@@ -9,11 +9,13 @@ import hmac
 import json
 import os
 import threading
+import select
+import socket
+import ssl
 from email.parser import BytesParser
 from email.policy import default
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-from vosk_backend import VoskBackend
 
 MAX_BODY = 64 * 1024 * 1024
 BUSY = threading.BoundedSemaphore(1)
@@ -108,7 +110,7 @@ class Handler(BaseHTTPRequestHandler):
         fields = {}
         for part in message.iter_parts():
             name = part.get_param('name', header='content-disposition')
-            if name not in {'language', 'file', 'diarize', 'response_format'} or name in fields:
+            if name not in {'language', 'file', 'diarize', 'response_format', 'language_mode'} or name in fields:
                 raise ValueError('invalid field')
             fields[name] = part.get_payload(decode=True)
         audio = fields.get('file')
@@ -116,11 +118,38 @@ class Handler(BaseHTTPRequestHandler):
         diarize = fields.get('diarize')
         if not audio or diarize not in (b'true', b'false'):
             raise ValueError('missing options')
-        result = self.server.backend.transcribe(audio, language, diarize == b'true')
+        mode = fields.get('language_mode')
+        if mode not in (None, b'mixed'):
+            raise ValueError('Invalid language mode')
+        extra = {'cancelled': self._peer_closed}
+        if mode == b'mixed':
+            if not self.server.backend.capabilities().get('features', {}).get('language_switching', False):
+                raise ValueError('Language switching unavailable')
+            extra['language_switching'] = True
+        result = self.server.backend.transcribe(audio, language, diarize == b'true', **extra)
         self._reply(200, result)
+
+    def _peer_closed(self):
+        try:
+            readable, _, _ = select.select([self.connection], [], [], 0)
+            if readable and isinstance(self.connection, ssl.SSLSocket):
+                # SSLSocket rejects MSG_PEEK. HTTP/1.0 does not pipeline another
+                # request; a nonblocking read can consume TLS close_notify.
+                timeout = self.connection.gettimeout()
+                try:
+                    self.connection.setblocking(False)
+                    return not self.connection.recv(1)
+                except (ssl.SSLWantReadError, ssl.SSLWantWriteError):
+                    return False
+                finally:
+                    self.connection.settimeout(timeout)
+            return bool(readable) and not self.connection.recv(1, socket.MSG_PEEK)
+        except OSError:
+            return True
 
 
 if __name__ == '__main__':
+    from vosk_backend import VoskBackend
     parser = argparse.ArgumentParser()
     parser.add_argument('--model-nl')
     parser.add_argument('--model-en')

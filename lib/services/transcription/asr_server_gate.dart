@@ -114,7 +114,9 @@ final class AsrServerGate {
       case AsrServerMode.loopback:
         // `localhost` als naam telt ook — het transport resolveert zelf
         // en weigert elke treffer die geen loopback is.
-        if (!AiEgressGate.isLoopbackHost(uri.host)) {
+        if (!(isWeb
+            ? isLiteralLoopbackHost(uri.host)
+            : AiEgressGate.isLoopbackHost(uri.host))) {
           return const AsrGateDeny(AsrGateDenial.loopbackRequired);
         }
         return AsrGateAllow(uri, AiResolveStrategy.loopbackDirect);
@@ -162,7 +164,9 @@ final class AsrServerGate {
       case AsrServerMode.none:
         return const AsrGateDeny(AsrGateDenial.modeNone);
       case AsrServerMode.loopback:
-        if (!AiEgressGate.isLoopbackHost(uri.host)) {
+        if (!(isWeb
+            ? isLiteralLoopbackHost(uri.host)
+            : AiEgressGate.isLoopbackHost(uri.host))) {
           return const AsrGateDeny(AsrGateDenial.loopbackRequired);
         }
         return AsrGateAllow(uri, AiResolveStrategy.loopbackDirect);

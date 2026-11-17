@@ -1543,6 +1543,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'één taal': 'egy nyelv',
+  'Meerdere talen in deze opname': 'Több nyelv ebben a felvételben',
   'Serverprotocol': 'Kiszolgálóprotokoll',
   'Spreker': 'Beszélő',
   'Automatisch afspelen is niet gestart.':

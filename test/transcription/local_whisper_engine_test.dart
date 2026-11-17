@@ -208,6 +208,8 @@ void main() {
         expect(result.segments, hasLength(2));
         expect(result.segments.first.start, Duration.zero);
         expect(result.text, 'Hallo wereld en allemaal');
+        expect(result.segments.first.end, const Duration(milliseconds: 1500));
+        expect(result.segments.last.end, const Duration(seconds: 3));
         // De run-uitvoer is opgeruimd; de (gedeelde) runmap niet.
         expect(workDir.existsSync(), isTrue);
         expect(workDir.listSync().isEmpty, isTrue);
@@ -474,6 +476,20 @@ void main() {
       expect(caps.streaming, isFalse);
       expect(caps.diarization, isFalse);
       expect(caps.requiresModel, 'testmodel');
+    });
+
+    test('taalwisselmodus start nooit stil een één-taalproces', () async {
+      final run = runnerWriting(() => {});
+      final e = engine(run.runner);
+      expect((await e.capabilities()).languageSwitching, isFalse);
+      await expectLater(
+        e.transcribe(
+          AudioRef(wav.path),
+          const TranscriptionOptions(languageSwitching: true),
+        ),
+        throwsA(isA<EngineUnavailable>()),
+      );
+      expect(run.argvs, isEmpty);
     });
 
     test('status is ready met geldige helper, missingHelper zonder', () async {

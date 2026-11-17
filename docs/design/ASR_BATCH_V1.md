@@ -94,3 +94,30 @@ toewijzing als onzeker en is geen aanbevolen productiebackend. Een betrouwbare
 NL/EN-diari­satieroute blijft afhankelijk van gemeten kwaliteit van de gekozen
 backend; deze clientadapter rechtvaardigt op zichzelf geen kwaliteitsclaim of
 sluiting van #2935.
+
+## Optionele taalwisselingen (#2940)
+
+`features.language_switching: true` biedt naast vaste taal en automatische
+opnametaal de expliciete keuze **Meerdere talen in deze opname**. Ontbrekend of
+false betekent niet ondersteund; meertalige gewichten alleen zijn onvoldoende.
+De client controleert opnieuw vóór audiolezen/upload. Alleen in deze modus
+stuurt hij multipart `language_mode=mixed`, zonder `language`. Een gewone
+whisper.cpp-server krijgt dit veld nooit. De server moet
+`language_switching_applied: true` teruggeven; zonder de modus moet dit false
+of afwezig zijn. Een mismatch weigert het resultaat, zonder stille fallback.
+
+Segmenten mogen `language` (BCP-47 of `mixed`) en `language_uncertain` (bool)
+bevatten. Ontbrekende taal is onbekend; een tag zonder onzekerheidsvlag wordt
+voorzichtig als onzeker gelezen. Een tag beschrijft wat de engine onderbouwt,
+geen geconstrueerd percentage. Zichtbaar verschijnt bijvoorbeeld `[en?]`;
+de oorspronkelijke taal/onzekerheid en tijden blijven in de bestaande
+segmentmetadata behouden. Zichtbare tekst/tags blijven bewerkbaar.
+
+Lokale CLI/WASM biedt deze capability niet en weigert een expliciete aanvraag;
+bij werkelijk geleverde eindtijden bewaart de client die nu ook voor gewone
+transcripties. De experimentele CPU-loopbackbackend in
+`testbed/asr-multilingual/README.md` herdetecteert per echte VAD-spraakregio,
+zet vertalen uit en herstelt de oorspronkelijke sampleoffsets. Dat verbetert
+lange latere taalblokken in de gemeten fixtures, maar korte codewisseling
+binnen een regio kan verslechteren. De kwaliteitsacceptatie van #2940 blijft
+apart van de geslaagde client-/transportimplementatie.

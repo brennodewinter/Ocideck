@@ -1546,6 +1546,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'één taal': 'jedan jezik',
+  'Meerdere talen in deze opname': 'Više jezika u ovoj snimci',
   'Serverprotocol': 'Protokol poslužitelja',
   'Spreker': 'Govornik',
   'Automatisch afspelen is niet gestart.':

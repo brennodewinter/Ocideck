@@ -1561,6 +1561,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'één taal': 'един език',
+  'Meerdere talen in deze opname': 'Няколко езика в този запис',
   'Serverprotocol': 'Сървърен протокол',
   'Spreker': 'Говорител',
   'Automatisch afspelen is niet gestart.':

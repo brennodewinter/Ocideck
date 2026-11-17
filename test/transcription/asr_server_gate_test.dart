@@ -76,6 +76,31 @@ void main() {
   });
 
   group('loopback-tier', () {
+    test('web accepts only literal loopback for batch and live', () {
+      for (final host in ['127.0.0.1', '[::1]']) {
+        final profile = loopback.copyWith(
+          baseUrl: 'https://$host:8443',
+          liveUrl: 'wss://$host:8443/live',
+        );
+        expect(allow(profile, isWeb: true), isNotNull);
+        expect(
+          AsrServerGate.evaluateLive(profile, isWeb: true),
+          isA<AsrGateAllow>(),
+        );
+      }
+      for (final host in ['localhost', '192.168.1.20', 'asr.example.nl']) {
+        final profile = loopback.copyWith(
+          baseUrl: 'https://$host:8443',
+          liveUrl: 'wss://$host:8443/live',
+        );
+        expect(deny(profile, isWeb: true), AsrGateDenial.loopbackRequired);
+        expect(
+          AsrServerGate.evaluateLive(profile, isWeb: true),
+          isA<AsrGateDeny>(),
+        );
+      }
+    });
+
     test('loopback-literal mag', () {
       final a = allow(loopback);
       expect(a, isNotNull);

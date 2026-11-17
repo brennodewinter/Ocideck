@@ -36,12 +36,15 @@ EngineCapabilities parseAsrBatchCapabilities(String body) {
       features['timestamps'] is! bool ||
       features['diarization'] is! bool ||
       (features['language_detection'] != null &&
-          features['language_detection'] is! bool)) {
+          features['language_detection'] is! bool) ||
+      (features['language_switching'] != null &&
+          features['language_switching'] is! bool)) {
     throw const ServerRefused('ongeldige ASR-capabilities');
   }
   return EngineCapabilities(
     languages: Set.unmodifiable(languages.cast<String>()),
     automaticLanguage: features['language_detection'] == true,
+    languageSwitching: features['language_switching'] == true,
     timestamps: features['timestamps'] == true,
     diarization: features['diarization'] == true,
   );
@@ -50,10 +53,17 @@ EngineCapabilities parseAsrBatchCapabilities(String body) {
 final _language = RegExp(r'^[a-z]{2,3}(-[A-Za-z0-9]{2,8}){0,3}$');
 final _speakerId = RegExp(r'^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$');
 
-TranscriptResult parseAsrBatchResponse(String body, {required bool diarize}) {
+TranscriptResult parseAsrBatchResponse(
+  String body, {
+  required bool diarize,
+  bool languageSwitching = false,
+}) {
   final data = _object(body);
   if (data['diarization_applied'] != diarize) {
     throw const ServerRefused('diarisatiekeuze niet uitgevoerd');
+  }
+  if ((data['language_switching_applied'] ?? false) != languageSwitching) {
+    throw const ServerRefused('taalwisselkeuze niet uitgevoerd');
   }
   final segments = data['segments'];
   if (segments is! List || segments.length > 100000) {
@@ -82,6 +92,14 @@ TranscriptSegment _segment(Object? raw, {required bool diarize}) {
       (diarize && (start == null || end == null))) {
     throw const ServerRefused('ongeldig ASR-tijdvak');
   }
+  final language = raw['language'];
+  final languageUncertain = raw['language_uncertain'];
+  if ((language != null &&
+          (language is! String ||
+              (language != 'mixed' && !_language.hasMatch(language)))) ||
+      (languageUncertain != null && languageUncertain is! bool)) {
+    throw const ServerRefused('ongeldige segmenttaal');
+  }
   final ids = raw['speaker_ids'];
   final uncertain = raw['speaker_uncertain'];
   if (diarize &&
@@ -95,6 +113,8 @@ TranscriptSegment _segment(Object? raw, {required bool diarize}) {
   // Uitgeschakeld betekent geen labels, ook niet als een server ze meestuurt.
   return TranscriptSegment(
     text: raw['text'] as String,
+    language: language as String?,
+    languageUncertain: languageUncertain as bool? ?? (language != null),
     start: start,
     end: end,
     speakerIds: diarize

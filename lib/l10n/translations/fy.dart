@@ -613,6 +613,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'één taal': 'ien taal',
+  'Meerdere talen in deze opname': 'Meardere talen yn dizze opname',
   'Serverprotocol': 'Tsjinnerprotokol',
   'Spreker': 'Sprekker',
   'Automatisch afspelen is niet gestart.': 'Automatysk ôfspyljen is net begûn.',

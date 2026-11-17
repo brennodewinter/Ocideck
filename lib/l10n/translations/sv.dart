@@ -1541,6 +1541,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'één taal': 'ett språk',
+  'Meerdere talen in deze opname': 'Flera språk i denna inspelning',
   'Serverprotocol': 'Serverprotokoll',
   'Spreker': 'Talare',
   'Automatisch afspelen is niet gestart.':
