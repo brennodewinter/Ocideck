@@ -2031,6 +2031,38 @@ that reaches beyond `build/test_cache`.
 - The Linux suite remains in `linux-gate.yml`, nightly and on demand. The
   release script checks its exact `main` commit before preparing a release.
 
+**Diagnostics (#2969).** Dependency resolution, the gate and the Python source
+checks run through `tool/ci_gate.py`. Each command keeps redacted stdout/stderr,
+a configurable heartbeat (`--heartbeat-seconds`, default `30`) and an
+atomically updated status JSON under
+`build/ci-diagnostics/`. The status records child/wrapper exit codes, signals,
+last output and quiet time; no environment dump is collected. Known credential
+values from the environment and Authorization headers are masked before writing
+logs or status. Normal failures retain their nonzero exit; there are no retries.
+SIGTERM/SIGINT are forwarded to the command group and an unresponsive child is
+killed after ten seconds. Release-script tests use verbose unittest output, so
+the last started case is visible. The workflow uploads diagnostics with
+`if: always()`.
+
+A whole-host loss or SIGKILL cannot run cleanup or upload an artifact. In that
+case a retained `running` status/heartbeat without terminal status is evidence
+of an interrupted or incomplete run, not proof of a particular failing test.
+Recover the files from the runner workspace and correlate task/server logs;
+do not replace the original failure with a successful retry.
+
+The original unexplained run [6383](https://pawprint.vigilis.online/LibreKAT/Ocideck/actions/runs/6383)
+(API 14003, job 30078, task 17037) failed on
+`4f49137d851f3b94d36a3e16dd92a3b381eda59b`. Its 14,526-byte job log ends at
+18:01:11.972 UTC on 16 November 2026; the server records failure at 18:16:13 UTC.
+The available local main-runner log ends before that date, and the reserve log
+has no correlated entry for task 17037. Nearby DNS errors do not establish its
+cause. The separately retained [run 6384](https://pawprint.vigilis.online/LibreKAT/Ocideck/actions/runs/6384)
+(API 14011, job 30093, task 17056) completed successfully on the **same commit**
+at 21:38:05 UTC. These are two distinct observations; the first cause remains
+explicitly unexplained. Local subprocess regressions exercise success, failure,
+SIGTERM, forced termination, missing executables and secret redaction. They do
+not simulate a physical runner or server outage.
+
 ### `.forgejo/workflows/scans.yml` — secrets and SAST, on demand
 - **scans** — runs on the prebaked scan image
   (`pawprint.vigilis.online/librekat/ocideck-scans:<pins>`, see the

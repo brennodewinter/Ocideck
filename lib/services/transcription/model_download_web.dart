@@ -7,12 +7,13 @@
 //    ons equivalent van hop-voor-hop NetGuard. Een hop zonder toestemming
 //    (geen ACAO) strandt zichtbaar als netwerkfout, nooit als datalek;
 //  * voortgang via de streamreader; annuleren via AbortController;
-//  * bytes landen als `<sleutel>.part` in IndexedDB en pas na een geslaagde
+//  * bytes landen onder een eigen `.part`-sleutel en pas na een geslaagde
 //    SHA-256 (WebCrypto) onder de echte sleutel — dezelfde betekenis als
 //    `.part` op schijf;
 //  * quota- en opslagfouten zijn `ioFailed` — zichtbaar, niet stil.
 import 'dart:async';
 import 'dart:js_interop';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:web/web.dart' as web;
@@ -23,21 +24,37 @@ import 'model_store.dart';
 import 'model_store_web.dart'
     show
         deleteModelRecord,
+        installModelRecord,
+        ModelInstallCancellation,
         partialSuffix,
         sha256Web,
         storageFreeBytes,
         writeModelRecord;
+import 'transcription_errors.dart';
 import 'whisper_model.dart';
 
 class _WebModelDownload implements ModelDownload {
-  _WebModelDownload(this.model, this.destination) : _key = destination.path {
+  _WebModelDownload(
+    this.model,
+    this.destination,
+    this.totalTimeout,
+    this.idleTimeout,
+  ) : _key = destination.path {
+    _partialKey =
+        '$_key.${_random.nextInt(0x100000000).toRadixString(16)}-${_random.nextInt(0x100000000).toRadixString(16)}$partialSuffix';
     _progressCtrl = StreamController<ModelDownloadProgress>();
     _run();
   }
 
   final WhisperModel model;
   final ModelStorePath destination;
+  static final _random = Random.secure();
   final String _key;
+  late final String _partialKey;
+  ModelInstallCancellation? _install;
+  bool _committed = false;
+  final Duration totalTimeout;
+  final Duration idleTimeout;
   final _abort = web.AbortController();
   late final StreamController<ModelDownloadProgress> _progressCtrl;
   final _done = Completer<ModelStorePath>();
@@ -51,7 +68,9 @@ class _WebModelDownload implements ModelDownload {
 
   @override
   void cancel() {
+    if (_committed || _done.isCompleted) return;
     _cancelled = true;
+    _install?.cancel();
     _abort.abort();
   }
 
@@ -65,7 +84,7 @@ class _WebModelDownload implements ModelDownload {
   /// hangen eraan, en een mislukte cleanup mag `_done` niet doen hangen.
   Future<void> _dropPartial() async {
     try {
-      await deleteModelRecord('$_key$partialSuffix');
+      await deleteModelRecord(_partialKey);
     } on Object catch (e, s) {
       // IndexedDB weigerde — de sweep bij provider-start ruimt hem alsnog.
       logError('WebModelDownload: .part opruimen', e, s);
@@ -86,13 +105,104 @@ class _WebModelDownload implements ModelDownload {
 
   Future<void> _run() async {
     try {
-      _emit(ModelDownloadPhase.connecting, 0, model.downloadBytes);
-      final response = await web.window
-          .fetch(
-            model.url.toString().toJS,
-            web.RequestInit(signal: _abort.signal),
-          )
-          .toDart;
+      final merged = await _downloadBytes();
+      _throwIfCancelled();
+      final received = merged.length;
+      final total = model.downloadBytes;
+      _emit(ModelDownloadPhase.verifying, received, total);
+      await _ensureSpace(received);
+      _throwIfCancelled();
+
+      // Eerst .part parkeren, dan hashtoets, dan pas de echte sleutel —
+      // zelfde betekenis als het deelsbestand op schijf.
+      await writeModelRecord(_partialKey, merged);
+      _throwIfCancelled();
+      final hex = await sha256Web(merged);
+      _throwIfCancelled();
+      if (hex == null) {
+        throw const ModelDownloadException(
+          ModelDownloadFailure.refused,
+          'geen secure context voor de controlesom',
+        );
+      }
+      if (hex != model.sha256) {
+        throw const ModelDownloadException(
+          ModelDownloadFailure.invalidHash,
+          'sha256 wijkt af van de catalogus',
+        );
+      }
+      _throwIfCancelled();
+      final install = ModelInstallCancellation();
+      _install = install;
+      final installed = await installModelRecord(_key, merged, install);
+      if (!installed) throw _cancelledError();
+      _committed = true;
+      await _dropPartial();
+      _finish();
+    } on ModelDownloadException catch (e) {
+      await _stopWithFailure(e.failure, e.detail);
+    } on IoFailed catch (e) {
+      await _stopWithFailure(ModelDownloadFailure.ioFailed, e.message);
+    } on UnsupportedSource catch (e) {
+      await _stopWithFailure(ModelDownloadFailure.refused, e.message);
+    } catch (e) {
+      await _stopWithFailure(ModelDownloadFailure.networkFailed, '$e');
+    }
+  }
+
+  void _throwIfCancelled() {
+    if (_cancelled) throw _cancelledError();
+  }
+
+  Future<void> _stopWithFailure(
+    ModelDownloadFailure failure,
+    String detail,
+  ) async {
+    await _dropPartial();
+    if (_cancelled && !_committed) {
+      _fail(ModelDownloadFailure.cancelled, 'afgebroken door de gebruiker');
+    } else {
+      _fail(failure, detail);
+    }
+  }
+
+  Future<void> _ensureSpace(int size) async {
+    final free = await storageFreeBytes().timeout(
+      const Duration(seconds: 15),
+      onTimeout: () => null,
+    );
+    if (free != null && free < size * 2) {
+      throw const ModelDownloadException(
+        ModelDownloadFailure.ioFailed,
+        'onvoldoende browseropslagquota voor model + download',
+      );
+    }
+  }
+
+  Future<Uint8List> _downloadBytes() async {
+    _emit(ModelDownloadPhase.connecting, 0, model.downloadBytes);
+    await _ensureSpace(model.downloadBytes);
+    _throwIfCancelled();
+    final clock = Stopwatch()..start();
+    Future<T> waitFor<T>(Future<T> Function() operation) {
+      final remaining = totalTimeout - clock.elapsed;
+      if (remaining <= Duration.zero) throw TimeoutException('modeldownload');
+      return operation().timeout(
+        remaining < idleTimeout ? remaining : idleTimeout,
+      );
+    }
+
+    web.ReadableStreamDefaultReader? reader;
+    var complete = false;
+    try {
+      final response = await waitFor(
+        () => web.window
+            .fetch(
+              model.url.toString().toJS,
+              web.RequestInit(signal: _abort.signal),
+            )
+            .toDart,
+      );
       if (_cancelled) throw _cancelledError();
       if (!response.ok) {
         throw ModelDownloadException(
@@ -100,12 +210,28 @@ class _WebModelDownload implements ModelDownload {
           'HTTP ${response.status}',
         );
       }
-      // CORS-modus weigert ondoorzichtige antwoorden zelf; een verdediging
-      // extra kost hier niets.
       if (response.type != 'cors' && response.type != 'basic') {
         throw const ModelDownloadException(
           ModelDownloadFailure.refused,
           'antwoord is niet CORS-leesbaar',
+        );
+      }
+      // Fetch decodeert; bij CORS kan de transportencoding bovendien verborgen zijn.
+      // Vergelijk Content-Length alleen waar de representatie vaststaat.
+      final encoding = response.headers.get('content-encoding');
+      final comparable =
+          encoding == 'identity' ||
+          (encoding == null && response.type == 'basic');
+      final declared = int.tryParse(
+        response.headers.get('content-length') ?? '',
+      );
+      if (comparable &&
+          declared != null &&
+          declared >= 0 &&
+          declared != model.downloadBytes) {
+        throw const ModelDownloadException(
+          ModelDownloadFailure.networkFailed,
+          'modelgrootte wijkt af van de catalogus',
         );
       }
       final body = response.body;
@@ -115,23 +241,28 @@ class _WebModelDownload implements ModelDownload {
           'geen responsebody',
         );
       }
-      final declared = response.headers.get('content-length');
-      final total = int.tryParse(declared ?? '') ?? model.downloadBytes;
-
-      final reader = body.getReader() as web.ReadableStreamDefaultReader;
-      final chunks = <Uint8List>[];
+      final activeReader = body.getReader() as web.ReadableStreamDefaultReader;
+      reader = activeReader;
+      // Eén begrensde buffer; geen lijst met nog een volledige modelkopie.
+      final bytes = Uint8List(model.downloadBytes);
       var received = 0;
       while (true) {
         if (_cancelled) throw _cancelledError();
-        final step = await reader.read().toDart;
+        final step = await waitFor(() => activeReader.read().toDart);
+        _throwIfCancelled();
         if (step.done) break;
         final value = step.value;
-        if (value != null) {
-          final chunk = (value as JSUint8Array).toDart;
-          chunks.add(chunk);
-          received += chunk.length;
-          _emit(ModelDownloadPhase.downloading, received, total);
+        if (value == null) continue;
+        final chunk = (value as JSUint8Array).toDart;
+        if (chunk.length > model.downloadBytes - received) {
+          throw const ModelDownloadException(
+            ModelDownloadFailure.networkFailed,
+            'modeldownload overschrijdt de catalogusgrootte',
+          );
         }
+        bytes.setRange(received, received + chunk.length, chunk);
+        received += chunk.length;
+        _emit(ModelDownloadPhase.downloading, received, model.downloadBytes);
       }
       if (received != model.downloadBytes) {
         throw ModelDownloadException(
@@ -139,54 +270,21 @@ class _WebModelDownload implements ModelDownload {
           '$received van ${model.downloadBytes} bytes ontvangen',
         );
       }
-
-      final merged = Uint8List(received);
-      var at = 0;
-      for (final chunk in chunks) {
-        merged.setRange(at, at + chunk.length, chunk);
-        at += chunk.length;
+      complete = true;
+      return bytes;
+    } on TimeoutException {
+      throw const ModelDownloadException(
+        ModelDownloadFailure.networkFailed,
+        'modeldownload stopte niet op tijd',
+      );
+    } finally {
+      if (!complete) {
+        _abort.abort();
+        if (reader != null) {
+          unawaited(reader.cancel().toDart.catchError((Object _) => null));
+        }
       }
-
-      _emit(ModelDownloadPhase.verifying, received, total);
-      final freeBefore = await storageFreeBytes();
-      if (freeBefore != null && freeBefore < received * 2) {
-        throw const ModelDownloadException(
-          ModelDownloadFailure.ioFailed,
-          'onvoldoende browseropslagquota voor model + download',
-        );
-      }
-
-      // Eerst .part parkeren, dan hashtoets, dan pas de echte sleutel —
-      // zelfde betekenis als het deelsbestand op schijf.
-      await writeModelRecord('$_key$partialSuffix', merged);
-      final hex = await sha256Web(merged);
-      if (hex == null) {
-        await _dropPartial();
-        throw const ModelDownloadException(
-          ModelDownloadFailure.refused,
-          'geen secure context voor de controlesom',
-        );
-      }
-      if (hex != model.sha256) {
-        await _dropPartial();
-        throw const ModelDownloadException(
-          ModelDownloadFailure.invalidHash,
-          'sha256 wijkt af van de catalogus',
-        );
-      }
-      await writeModelRecord(_key, merged);
-      await _dropPartial();
-      _finish();
-    } on ModelDownloadException catch (e) {
-      await _dropPartial();
-      _fail(e.failure, e.detail);
-    } catch (e) {
-      await _dropPartial();
-      if (_cancelled) {
-        _fail(ModelDownloadFailure.cancelled, 'afgebroken door de gebruiker');
-      } else {
-        _fail(ModelDownloadFailure.networkFailed, '$e');
-      }
+      reader?.releaseLock();
     }
   }
 
@@ -197,11 +295,17 @@ class _WebModelDownload implements ModelDownload {
 }
 
 class WebModelDownloader implements ModelDownloader {
-  const WebModelDownloader();
+  const WebModelDownloader({
+    this.totalTimeout = const Duration(hours: 1),
+    this.idleTimeout = const Duration(minutes: 2),
+  });
+
+  final Duration totalTimeout;
+  final Duration idleTimeout;
 
   @override
   ModelDownload start(WhisperModel model, ModelStorePath destination) =>
-      _WebModelDownload(model, destination);
+      _WebModelDownload(model, destination, totalTimeout, idleTimeout);
 }
 
 ModelDownloader createModelDownloader() => const WebModelDownloader();
