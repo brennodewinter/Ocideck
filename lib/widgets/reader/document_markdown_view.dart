@@ -27,7 +27,7 @@ import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/spacer_embed_syntax.dart';
-import '../../utils/doc_link.dart' show headingSlug;
+import '../../utils/heading_anchors.dart';
 import '../../utils/footnotes.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/image_size_tokens.dart';
@@ -234,7 +234,7 @@ class DocumentMarkdownView extends StatelessWidget {
       _isHorizontalRule(line.trim());
 
   /// The absolute block index (into the same block list [build] renders) of the
-  /// first heading whose [headingSlug] equals [slug], or `-1` when this document
+  /// heading whose document-wide canonical ID or legacy alias equals [slug], or `-1` when this document
   /// has no such heading. The reader uses it to point [anchorBlockIndex] at the
   /// section an `#anchor` link names. First match wins, mirroring how the anchor
   /// key attaches to the first heading with a slug. [occurrence] selects a later
@@ -245,13 +245,13 @@ class DocumentMarkdownView extends StatelessWidget {
     int occurrence = 0,
   }) {
     final blocks = _parse(markdown);
-    for (var i = 0; i < blocks.length; i++) {
-      final b = blocks[i];
-      if (b.kind == _Kind.heading && headingSlug(b.text) == slug) {
-        if (occurrence-- == 0) return i;
-      }
-    }
-    return -1;
+    final indices = [
+      for (var i = 0; i < blocks.length; i++)
+        if (blocks[i].kind == _Kind.heading) i,
+    ];
+    final anchors = HeadingAnchorIndex(indices.map((i) => blocks[i].text));
+    final heading = anchors.resolve(slug, occurrence: occurrence);
+    return heading < 0 ? -1 : indices[heading];
   }
 
   /// De regel-reikwijdte `[start, eind)` van het `ordinal`-de GFM-tabelblok
@@ -420,8 +420,8 @@ class DocumentMarkdownView extends StatelessWidget {
   /// koppen in de huidige body en toont hem als een gestileerde nav-block.
   Widget _tocPreview(BuildContext context, _Theme t) {
     final l10n = context.l10n;
-    final toc = generateTocMarkdown(tocSource ?? markdown);
-    if (toc.isEmpty) {
+    final entries = documentTocEntries(tocSource ?? markdown);
+    if (entries.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -449,7 +449,6 @@ class DocumentMarkdownView extends StatelessWidget {
         ),
       );
     }
-    final lines = toc.split('\n');
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -475,17 +474,15 @@ class DocumentMarkdownView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          for (final line in lines) _tocLine(t, line),
+          for (final entry in entries) _tocLine(t, entry),
         ],
       ),
     );
   }
 
-  Widget _tocLine(_Theme t, String line) {
-    final match = RegExp(r'^(\s*)- \[(.*?)\]\(#(.*)\)$').firstMatch(line);
-    if (match == null) return const SizedBox.shrink();
-    final indent = match.group(1)!.length;
-    final text = match.group(2)!;
+  Widget _tocLine(_Theme t, DocumentTocEntry entry) {
+    final indent = (entry.level - 1) * 2;
+    final text = entry.text;
     return Padding(
       padding: EdgeInsets.only(left: indent * 8.0, top: 2, bottom: 2),
       child: Semantics(
@@ -493,7 +490,7 @@ class DocumentMarkdownView extends StatelessWidget {
         child: InkWell(
           onTap: onTapLink == null
               ? null
-              : () => onTapLink!('#${match.group(3)!}'),
+              : () => onTapLink!('#${entry.anchor}'),
           child: Text(
             text,
             style: t.body.copyWith(

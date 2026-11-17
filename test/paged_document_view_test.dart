@@ -160,15 +160,30 @@ void main() {
           lessThanOrEqualTo(tester.getTopLeft(window).dy),
         );
       }
-      for (var i = 0; i < 19; i++) {
-        final event = find.textContaining('Gebeurtenis $i');
-        expect(event, findsWidgets);
-        expect(
-          hasVisibleInstance(tester, event),
-          isTrue,
-          reason: 'Gebeurtenis $i moet in minstens één paginavenster staan',
+      // Alleen de viewport en zijn buffer zijn gemonteerd. Bezoek alle
+      // vellen en bewijs dat elke kaart nog in een echt paginavenster komt.
+      final list = tester.widget<ListView>(
+        find.byKey(const Key('document-page-list')),
+      );
+      final position = list.controller!.position;
+      final seen = <int>{};
+      for (var page = 0; page < list.semanticChildCount!; page++) {
+        position.jumpTo(
+          (16 + page * list.itemExtent!).clamp(0, position.maxScrollExtent),
         );
+        await tester.pumpAndSettle();
+        for (var i = 0; i < 19; i++) {
+          if (hasVisibleInstance(
+            tester,
+            find.textContaining('Gebeurtenis $i'),
+          )) {
+            seen.add(i);
+          }
+        }
       }
+      expect(seen, containsAll(List.generate(19, (i) => i)));
+      position.jumpTo(0);
+      await tester.pumpAndSettle();
       expect(
         find.descendant(
           of: continuations.first,
@@ -494,16 +509,14 @@ void main() {
     ).join('\n\n');
     await pumpDoc(tester, long);
 
-    final pages = find
-        .byWidgetPredicate(
-          (w) =>
-              w is Semantics &&
-              (w.properties.label ?? '').startsWith('Pagina '),
-        )
-        .evaluate()
-        .length;
+    final list = tester.widget<ListView>(
+      find.byKey(const Key('document-page-list')),
+    );
+    final pages = list.semanticChildCount!;
     expect(pages, greaterThan(1));
     expect(find.text('Pagina 1 van $pages'), findsOneWidget);
+    list.controller!.jumpTo(list.controller!.position.maxScrollExtent);
+    await tester.pumpAndSettle();
     expect(find.text('Pagina $pages van $pages'), findsOneWidget);
   });
 
@@ -664,6 +677,14 @@ Een zin met een noot [^1] erin.
           '[^1]: Korte noot.\n'
           '[^2]: $longNote\n',
         );
+
+        // De verwijzing staat op het laatste vel; monteer dat eerst door
+        // de documentrol te gebruiken, daarna is het eigen nootvlak aan de beurt.
+        final list = tester.widget<ListView>(
+          find.byKey(const Key('document-page-list')),
+        );
+        list.controller!.jumpTo(list.controller!.position.maxScrollExtent);
+        await tester.pumpAndSettle();
 
         // De korte noot staat gewoon in het vlak; de lange is scrollbaar met
         // een doorgang-regel — de hoofdtekst dekt de noten nooit.

@@ -1,6 +1,7 @@
-// Windows-profielproef op zowel de PR-basis als de gewijzigde commit.
+// Profielproef op native platforms en web, vóór/na met hetzelfde harnas.
 // De timings meten tik → juiste zichtbare caret; de bron blijft ongewijzigd.
-import 'dart:io';
+import 'support/profile_memory_io.dart'
+    if (dart.library.js_interop) 'support/profile_memory_web.dart';
 
 import 'package:flutter/foundation.dart' show kProfileMode;
 import 'package:material_ui/material_ui.dart';
@@ -10,6 +11,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
+import 'package:ocideck/models/page_size.dart';
+import 'package:ocideck/widgets/reader/paged_document_view.dart';
+import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
@@ -46,7 +50,7 @@ void main() {
     );
     await tester.pumpAndSettle(const Duration(milliseconds: 100));
     final times = <int>[];
-    await binding.watchPerformance(() async {
+    await profileWatchPerformance(binding, () async {
       // De eerste twee sprongen warmen de kaart en het scrollpad op.
       for (var attempt = 0; attempt < 18; attempt++) {
         final title = attempt.isEven ? 'Hoofdstuk 35' : 'Hoofdstuk 01';
@@ -61,6 +65,9 @@ void main() {
           scrollable: scrollable,
           maxScrolls: 30,
         );
+        // ensureVisible wijzigt de scrollpositie vóór de volgende layout.
+        // Meet pas als de rail zijn doel ook werkelijk op die plek tekent.
+        await tester.pumpAndSettle(const Duration(milliseconds: 16));
         final clock = Stopwatch()..start();
         await tester.tap(target);
         var visible = false;
@@ -94,7 +101,7 @@ void main() {
     expect(notifier.state.canUndo, isFalse);
     times.sort();
     binding.reportData!['chapter_navigation_latency'] = {
-      'platform': Platform.operatingSystem,
+      'platform': profilePlatform,
       'profile': kProfileMode,
       'source_bytes': source.length,
       'samples_us': times,
@@ -102,4 +109,86 @@ void main() {
       'p95_us': times[((times.length - 1) * .95).ceil()],
     };
   });
+  testWidgets(
+    'paginering bij 10, 40 en 100 vellen',
+    (tester) => _profilePagination(binding, tester),
+  );
+}
+
+/// Dezelfde harness draait vóór/na op native platforms. De baseline mag nog
+/// veel bomen monteren: de vergelijking registreert dat, de regressietest
+/// handhaaft de vaste bovengrens op de gewijzigde implementatie.
+Future<void> _profilePagination(
+  IntegrationTestWidgetsFlutterBinding binding,
+  WidgetTester tester,
+) async {
+  expect(kProfileMode, isTrue);
+  AppLocalizations.setActiveLanguageCode('nl');
+  final results = <Map<String, Object>>[];
+  for (final pages in [10, 40, 100]) {
+    final source = documentPaginationFixture(pages);
+    final samples = <int>[];
+    final beforeMemory = profileMemory('before');
+    var loadUs = 0;
+    var mountedMax = 0;
+    await profileWatchPerformance(binding, () async {
+      final load = Stopwatch()..start();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PagedDocumentView(
+              key: ValueKey('profile-$pages'),
+              markdown: source,
+              pageSize: PageSizeSpec.a4,
+              margins: const PageMargins(),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle(const Duration(milliseconds: 16));
+      load.stop();
+      loadUs = load.elapsedMicroseconds;
+      for (var attempt = 0; attempt < 10; attempt++) {
+        final last = attempt.isEven;
+        final body = tester
+            .widgetList<DocumentMarkdownView>(find.byType(DocumentMarkdownView))
+            .firstWhere((w) => w.onTapLink != null);
+        final clock = Stopwatch()..start();
+        body.onTapLink!('#hoofdstuk-${last ? pages - 1 : 0}');
+        await tester.pumpAndSettle(const Duration(milliseconds: 16));
+        clock.stop();
+        final trees = find
+            .byType(DocumentMarkdownView, skipOffstage: false)
+            .evaluate()
+            .length;
+        if (trees > mountedMax) mountedMax = trees;
+        final number = last ? pages : 1;
+        final sheet = find.byWidgetPredicate(
+          (w) =>
+              w is Semantics &&
+              w.properties.label == 'Pagina $number van $pages',
+        );
+        expect(sheet, findsOneWidget);
+        final paper = tester.getRect(sheet);
+        final viewport = tester.getRect(find.byType(PagedDocumentView));
+        expect(paper.overlaps(viewport), isTrue);
+        if (attempt >= 2) samples.add(clock.elapsedMicroseconds);
+      }
+    }, reportKey: 'pagination_${pages}_frames');
+    samples.sort();
+    results.add({
+      'platform': profilePlatform,
+      'profile': kProfileMode,
+      'pages': pages,
+      'source_bytes': source.length,
+      'load_us': loadUs,
+      'mounted_document_trees_max': mountedMax,
+      ...beforeMemory,
+      ...profileMemory('after'),
+      'jump_samples_us': samples,
+      'jump_median_us': samples[samples.length ~/ 2],
+      'jump_p95_us': samples[((samples.length - 1) * .95).ceil()],
+    });
+  }
+  binding.reportData!['pagination_scaling'] = results;
 }

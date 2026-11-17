@@ -54,6 +54,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    // The lazy list captures this sheet without the outer top padding.
     await expectLater(
       find.byKey(const Key('document-sheet')).first,
       matchesGoldenFile('goldens/document_spacer.png'),

@@ -26,9 +26,14 @@ String _renderScriptLabels() {
 /// naar verwijst. [theme] levert de Mermaid-themeVariables zodat diagrammen
 /// de stijlkleuren van het deck volgen; `null` laat mermaid op zijn standaard-
 /// thema draaien.
-String _renderScript(List<String> dataUris, {ThemeProfile? theme}) =>
+String _renderScript(
+  List<String> dataUris, {
+  ThemeProfile? theme,
+  String? documentMarkdown,
+}) =>
     'var OCIDECK_L=${_renderScriptLabels()};\n'
     'var OCIDECK_IMG=${jsonEncode(dataUris)};\n'
+    'var OCIDECK_HEADING_ANCHORS=${jsonEncode(documentMarkdown == null ? [] : HeadingAnchorIndex(markdownHeadings(documentMarkdown).map((h) => h.text), plainText: true).entries.map((e) => e.toJson()).toList())};\n'
     'var OCIDECK_MERMAID_THEME=${jsonEncode(theme == null ? <String, Object>{} : {'themeVariables': mermaidThemeVariablesFor(theme)})};\n'
     '$_renderScriptBody';
 
@@ -65,6 +70,24 @@ document.querySelectorAll('section.slide,section.document').forEach(function(sec
   // able to run script/onerror/javascript: payloads when the export is opened.
   // If the sanitiser somehow isn't present, fail closed to plain text.
   if(window.DOMPurify){div.innerHTML=DOMPurify.sanitize(html);}else{div.textContent=src;}
+  // De index komt uit Dart, dezelfde bron als TOC, lezer en PDF. Expliciete
+  // HTML-id's blijven staan; extra doelen worden als veilige DOM-nodes gezet.
+  if(sec.classList.contains('document')){
+    var usedIds=new Set(Array.from(div.querySelectorAll('[id]')).map(function(n){return n.id;}));
+    var cursor=0;
+    div.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(function(heading){
+      if(heading.closest('blockquote,li,td,th')||heading.id)return;
+      var entry=OCIDECK_HEADING_ANCHORS[cursor];
+      if(!entry||entry.title.trim()!==heading.textContent.trim())return;
+      cursor++;
+      if(!heading.id&&!usedIds.has(entry.id)){heading.id=entry.id;usedIds.add(entry.id);}
+      [entry.id].concat(entry.aliases).forEach(function(id){
+        if(usedIds.has(id))return;
+        var anchor=document.createElement('span');anchor.id=id;
+        heading.before(anchor);usedIds.add(id);
+      });
+    });
+  }
   sec.innerHTML='';sec.appendChild(div);
 });
 // Het afdrukraam (zie .print-frame in de CSS). Een doorlopend document dat je

@@ -1,6 +1,7 @@
 import 'package:path/path.dart' as p;
 
 import 'inline_markdown.dart' show stripInlineMarkdown;
+import 'heading_anchors.dart' show legacyHeadingSlug;
 
 /// De repository-boom op de standaardtak. Een niet-gebundeld doc waar een link
 /// naar wijst (architectuur, build, `../SECURITY.md`, …) opent hier in de
@@ -113,31 +114,10 @@ DocLinkTarget? resolveDocLink({
   return ExternalDocLink('$base/$resolved${anchor == null ? '' : '#$anchor'}');
 }
 
-/// De GitHub-stijl anker-slug van een kopje: kleine letters, spaties en
-/// bestaande koppeltekens worden `-`, alle overige leestekens vallen weg.
-/// Bewust géén samenvoegen of trimmen van koppeltekens — zo levert "… device
-/// — and …" net als de bron `device--and` op, zodat de slug de ankers matcht
-/// die de docs zelf gebruiken. Inline-opmaak wordt eerst tot platte tekst
-/// herleid, zodat backticks en vet in een kopje de slug niet vervuilen.
-///
-/// Pragmatisch ASCII: niet-ASCII letters (accenten) vallen weg. De gebundelde
-/// docs hebben geen ankers naar zulke kopjes, dus dat raakt geen echte link.
-String headingSlug(String heading) {
-  final plain = stripInlineMarkdown(heading).toLowerCase();
-  final buf = StringBuffer();
-  for (final unit in plain.codeUnits) {
-    final isLower = unit >= 0x61 && unit <= 0x7a; // a–z
-    final isDigit = unit >= 0x30 && unit <= 0x39; // 0–9
-    final isUnderscore = unit == 0x5f; // _
-    if (isLower || isDigit || isUnderscore) {
-      buf.writeCharCode(unit);
-    } else if (unit == 0x20 || unit == 0x2d) {
-      // spatie of koppelteken
-      buf.write('-');
-    }
-  }
-  return buf.toString();
-}
+/// De historische ASCII-lezerconventie, behouden voor bestaande doclinks.
+/// Nieuwe inhoudsopgaven en navigatie gebruiken de documentbrede
+/// `HeadingAnchorIndex`; deze namen blijven daar compatibiliteitsaliassen.
+String headingSlug(String heading) => legacyHeadingSlug(heading);
 
 /// De tekst van het eerste `# `-kopje in [markdown], tot platte tekst herleid —
 /// de natuurlijke titel voor een document dat via een link wordt geopend.

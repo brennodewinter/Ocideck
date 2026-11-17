@@ -69,6 +69,8 @@ Future<Uint8List> buildDocumentExportEpub(
     xhtml = await _processImages(xhtml, embedImage, images);
   }
 
+  xhtml = _withLegacyHeadingIds(xhtml);
+
   // 3. Navigatie-document (nav.xhtml) met koppen als inhoudsopgave.
   final nav = _buildNav(xhtml, title);
 
@@ -228,7 +230,9 @@ String _buildNav(String xhtml, String title) {
     final level = match.group(1)!;
     final text = _stripTags(match.group(2)!);
     if (text.trim().isEmpty) continue;
-    headings.add(_NavHeading(level, text, 'heading-$id'));
+    final attributes = match.group(0)!.split('>').first;
+    final anchor = RegExp(r'\bid="([^"]*)"').firstMatch(attributes)?.group(1);
+    headings.add(_NavHeading(level, text, anchor ?? 'heading-$id'));
     id++;
   }
 
@@ -258,20 +262,34 @@ String _buildNav(String xhtml, String title) {
   return buf.toString();
 }
 
+/// Behoudt de oude EPUB heading-N-doelen naast canonieke documentankers.
+String _withLegacyHeadingIds(String xhtml) {
+  final used = RegExp(
+    r'\bid="([^"]*)"',
+  ).allMatches(xhtml).map((m) => m.group(1)!).toSet();
+  var ordinal = 0;
+  return xhtml.replaceAllMapped(RegExp(r'<(h[12])([^>]*)>'), (m) {
+    final legacy = 'heading-${ordinal++}';
+    final existing = RegExp(r'\bid="([^"]*)"').firstMatch(m.group(2)!);
+    if (existing != null) {
+      if (!used.add(legacy)) return m.group(0)!;
+      return '<span id="$legacy"></span>${m.group(0)}';
+    }
+    var id = legacy;
+    var suffix = 0;
+    while (!used.add(id)) {
+      id = '$legacy-${++suffix}';
+    }
+    return '<${m.group(1)}${m.group(2)} id="$id">';
+  });
+}
+
 /// Het content-document (document.xhtml) met de volledige inhoud.
 String _buildDocumentXhtml(
   String xhtml,
   String title,
   ExportDocumentMetadata meta,
 ) {
-  // Voeg id's toe aan H1/H2-koppen voor de navigatie.
-  var id = 0;
-  final withIds = xhtml.replaceAllMapped(RegExp(r'<(h[12])([^>]*)>'), (m) {
-    final replacement = '<${m.group(1)}${m.group(2)} id="heading-$id">';
-    id++;
-    return replacement;
-  });
-
   final lang = meta.language.isNotEmpty ? meta.language : 'nl';
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8"?>')
@@ -284,7 +302,7 @@ String _buildDocumentXhtml(
     ..writeln('<title>${xmlEscape(title)}</title>')
     ..writeln('<link rel="stylesheet" type="text/css" href="style.css"/>')
     ..writeln('</head><body>')
-    ..write(withIds)
+    ..write(xhtml)
     ..writeln('</body></html>');
   return buf.toString();
 }

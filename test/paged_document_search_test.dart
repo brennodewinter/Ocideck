@@ -174,7 +174,8 @@ void main() {
           .where((w) => !w.measure)
           .map((w) => w.child)
           .toList();
-      expect(bodies, hasLength(25));
+      expect(bodies, isNotEmpty);
+      expect(bodies.length, lessThanOrEqualTo(3));
       expect(bodies.every((w) => identical(w, bodies.first)), isTrue);
       await tester.pumpWidget(surface('Pagina', 2));
       await tester.pumpAndSettle();

@@ -55,7 +55,7 @@ import '../state/settings_provider.dart'
         settingsProvider;
 import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
-import '../utils/doc_link.dart' show headingSlug;
+import '../utils/heading_anchors.dart';
 import '../utils/document_front_matter.dart';
 import '../utils/file_extension.dart';
 import '../utils/image_search_paths.dart';

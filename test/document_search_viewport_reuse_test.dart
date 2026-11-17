@@ -33,16 +33,21 @@ void main() {
       await tester.pumpWidget(surface());
       await tester.pumpAndSettle();
       final sheets = find.byKey(const Key('document-sheet'));
-      expect(sheets, findsNWidgets(25));
+      expect(sheets, findsWidgets);
+      expect(sheets.evaluate().length, lessThanOrEqualTo(4));
+      final pages = tester.widget<ListView>(
+        find.byKey(const Key('document-page-list')),
+      );
+      expect(pages.semanticChildCount, 25);
       final first = tester.widgetList(sheets).toList();
       await tester.pumpWidget(surface(height: 488));
       await tester.pumpAndSettle();
       final shorter = tester.widgetList(sheets).toList();
       expect(
-        List.generate(25, (i) => identical(first[i], shorter[i])),
-        everyElement(isTrue),
+        identical(first.first, shorter.first),
+        isTrue,
         reason:
-            'alleen de viewporthoogte verandert; geen vel hoeft opnieuw gebouwd',
+            'alleen de viewporthoogte verandert; bestaande vellen blijven dezelfde widgets',
       );
       await tester.binding.setSurfaceSize(const Size(700, 700));
       await tester.pumpAndSettle();
