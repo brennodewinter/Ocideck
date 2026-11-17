@@ -1,7 +1,11 @@
 // Na Stop kiest de gebruiker: nu transcriberen, zeven dagen bewaren,
 // of weggooien (#2516). Bronverlies en een volle schijf zeggen dat,
 // in plaats van de gewone bewaartekst.
+import 'dart:typed_data';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ocideck/services/web_asset_store.dart';
+import 'package:ocideck/services/download_delivery.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
@@ -63,9 +67,20 @@ void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
     staging = _Staging();
+    WebAssetStore.clear();
   });
 
-  Future<void> open(WidgetTester tester, RecordingEndReason reason) async {
+  tearDown(() {
+    WebAssetStore.clear();
+    debugDeliversByDownload = null;
+    debugDownloadSink = null;
+  });
+
+  Future<void> open(
+    WidgetTester tester,
+    RecordingEndReason reason, {
+    RecordedAudio? recording,
+  }) async {
     final container = ProviderContainer(
       overrides: [
         recordingStagingProvider.overrideWithValue(staging),
@@ -75,11 +90,13 @@ void main() {
       ],
     );
     addTearDown(container.dispose);
-    const audio = RecordedAudio(
-      durablePath: '/tmp/ocideck-mic/recording.wav',
-      duration: Duration(seconds: 3),
-      kinds: {CaptureSourceKind.microphone},
-    );
+    final audio =
+        recording ??
+        const RecordedAudio(
+          durablePath: '/tmp/ocideck-mic/recording.wav',
+          duration: Duration(seconds: 3),
+          kinds: {CaptureSourceKind.microphone},
+        );
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
@@ -110,6 +127,91 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
   }
+
+  RecordedAudio webAudio() {
+    final path = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3]),
+      name: 'opname.webm',
+    );
+    final lease = WebAssetStore.lease([path]);
+    return RecordedAudio(
+      durablePath: path,
+      duration: const Duration(seconds: 1),
+      kinds: const {CaptureSourceKind.microphone},
+      onRelease: lease.release,
+    );
+  }
+
+  testWidgets(
+    'web biedt audio aan als download en ruimt na weggooien gericht op',
+    (tester) async {
+      debugDeliversByDownload = true;
+      addTearDown(WebAssetStore.registerRoots(() => {}));
+      final audio = webAudio();
+      Uint8List? delivered;
+      debugDownloadSink = (name, bytes, mime) {
+        expect(name, 'opname.webm');
+        delivered = bytes;
+        return true;
+      };
+      await open(tester, RecordingEndReason.userStop, recording: audio);
+      expect(find.text('Bewaar voor later'), findsNothing);
+      expect(find.textContaining('zeven dagen'), findsNothing);
+      expect(find.textContaining('gaat de audio verloren'), findsOneWidget);
+      await tester.tap(find.text('Download'));
+      await tester.pump();
+      expect(delivered, [1, 2, 3]);
+      expect(find.textContaining('Aangeboden als download:'), findsOneWidget);
+      WebAssetStore.retain({});
+      expect(WebAssetStore.bytesFor(audio.durablePath), [1, 2, 3]);
+      await tester.tap(find.text('Opname weggooien'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(WebAssetStore.bytesFor(audio.durablePath), isNull);
+      expect(staging.discarded, isEmpty);
+    },
+  );
+
+  testWidgets(
+    'geweigerde download houdt de opname beschikbaar; sluiten geeft haar vrij',
+    (tester) async {
+      debugDeliversByDownload = true;
+      addTearDown(WebAssetStore.registerRoots(() => {}));
+      final audio = webAudio();
+      debugDownloadSink = (_, _, _) => false;
+      await open(tester, RecordingEndReason.userStop, recording: audio);
+      await tester.tap(find.text('Download'));
+      await tester.pump();
+      expect(
+        find.text('Het bestand kon niet worden opgeslagen.'),
+        findsOneWidget,
+      );
+      expect(WebAssetStore.bytesFor(audio.durablePath), [1, 2, 3]);
+      await tester.tapAt(const Offset(5, 5));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(WebAssetStore.bytesFor(audio.durablePath), isNull);
+    },
+  );
+
+  testWidgets('handoff naar transcriptie overleeft de gesloten bewaarkeuze', (
+    tester,
+  ) async {
+    debugDeliversByDownload = true;
+    addTearDown(WebAssetStore.registerRoots(() => {}));
+    final audio = webAudio();
+    await open(tester, RecordingEndReason.userStop, recording: audio);
+    await tester.tap(find.text('Nu transcriberen'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.byType(TranscribeFileDialog), findsOneWidget);
+    WebAssetStore.retain({});
+    expect(WebAssetStore.bytesFor(audio.durablePath), [1, 2, 3]);
+    await tester.tap(find.text('Annuleren'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(WebAssetStore.bytesFor(audio.durablePath), isNull);
+  });
 
   testWidgets('een gewone stop biedt transcriberen, bewaren en weggooien', (
     tester,

@@ -31,42 +31,29 @@ import 'transcription_engine.dart';
 import 'transcription_errors.dart';
 import 'whisper_model.dart';
 
-@JS('ocideckWhisper')
-external _JsWhisperBridge? get _bridge;
-
-extension type _JsWhisperBridge(JSObject _) implements JSObject {
-  external bool isSupported();
-  external JSPromise<JSNumber> loadModel(JSUint8Array bytes);
-  external JSPromise<JSObject> transcribe(
-    JSNumber ctxIndex,
-    JSFloat32Array pcm,
-    JSString lang,
-    JSNumber threads,
-    JSFunction? onSegment,
-  );
-  external JSPromise<JSFloat32Array> decodeAudio(JSUint8Array bytes);
-  external void requestCancel();
-  external void free(JSNumber ctxIndex);
-}
-
-class WebWhisperEngine implements LocalWhisperEngine {
+class WebWhisperEngine
+    implements LocalWhisperEngine, ManagedTranscriptionEngine {
   WebWhisperEngine({this.model});
 
   @override
   final WhisperModel? model;
 
-  int? _context;
+  final _runtime = WebWhisperRuntime();
+  bool _running = false;
+  bool _cancelRequested = false;
+  bool _nativeActive = false;
+  WhisperBridge? _activeBridge;
 
   @override
   EngineKind get kind => EngineKind.local;
 
   /// Wasm-runtime + pthreads vereisen cross-origin isolatie (COOP/COEP) —
   /// de proefmatrix in docs/design/TRANSCRIPTION.md §4.6 meet dit af.
-  bool get _supported => _bridge?.isSupported() ?? false;
+  bool get _supported => whisperBridge?.isSupported() ?? false;
 
   @override
   Future<LocalEngineStatus> status() {
-    if (_bridge == null) {
+    if (whisperBridge == null) {
       return Future.value(
         const LocalEngineStatus(
           LocalEngineSupport.missingHelper,
@@ -99,8 +86,8 @@ class WebWhisperEngine implements LocalWhisperEngine {
     return hc > 0 ? (hc < 4 ? hc : 4) : 4;
   }
 
-  Future<int> _ensureContext() async {
-    final ctx = _context;
+  Future<int> _ensureContext(WhisperBridge bridge) async {
+    final ctx = _runtime.cachedContext(bridge);
     if (ctx != null) return ctx;
     final m = model;
     if (m == null) {
@@ -118,12 +105,20 @@ class WebWhisperEngine implements LocalWhisperEngine {
     if (hex != m.sha256) {
       throw const EngineUnavailable('model-hash klopt niet met de catalogus');
     }
-    final idx = (await _bridge!.loadModel(bytes.toJS).toDart).toDartInt;
-    if (idx <= 0) {
-      throw const EngineUnavailable('model kon niet in de wasm-engine laden');
+    _checkCancelled();
+    final int ctxIndex;
+    try {
+      ctxIndex = await _runtime.load(bridge, bytes.toJS);
+    } on Object catch (e) {
+      _checkCancelled();
+      throw EngineUnavailable('wasm-model laden afgebroken: $e');
     }
-    _context = idx;
-    return idx;
+    _checkCancelled();
+    return ctxIndex;
+  }
+
+  void _checkCancelled() {
+    if (_cancelRequested) throw const Cancelled('transcriptie afgebroken');
   }
 
   @override
@@ -131,6 +126,23 @@ class WebWhisperEngine implements LocalWhisperEngine {
     AudioRef audio,
     TranscriptionOptions options,
   ) async {
+    if (_running) throw const EngineUnavailable('engine is al in gebruik');
+    _running = true;
+    _cancelRequested = false;
+    try {
+      return await _runtime.run(() => _transcribe(audio, options));
+    } finally {
+      _nativeActive = false;
+      _activeBridge = null;
+      _running = false;
+    }
+  }
+
+  Future<TranscriptResult> _transcribe(
+    AudioRef audio,
+    TranscriptionOptions options,
+  ) async {
+    _checkCancelled();
     if (!_supported) {
       throw const EngineUnavailable(
         'lokale web-engine vereist cross-origin isolatie',
@@ -149,8 +161,10 @@ class WebWhisperEngine implements LocalWhisperEngine {
         'audiobron niet in de tab aanwezig: ${audio.path}',
       );
     }
-    final ctx = await _ensureContext();
-    final bridge = _bridge!;
+    final bridge = whisperBridge!;
+    _activeBridge = bridge;
+    final ctx = await _ensureContext(bridge);
+    _checkCancelled();
     final Float32List pcm;
     try {
       // Een expliciete view: `mem:`-bytes kunnen op een grotere buffer liggen
@@ -161,15 +175,18 @@ class WebWhisperEngine implements LocalWhisperEngine {
       );
       pcm = (await bridge.decodeAudio(view.toJS).toDart).toDart;
     } on Object catch (e, s) {
+      _checkCancelled();
       logError('WebWhisperEngine: audiodecode', e, s);
       throw const DecodeFailed('audiocontainer niet te decoderen');
     }
+    _checkCancelled();
     // Elk segment dat valt is een stukje voortgang: eindtijd van het
     // segment gedeeld door de audioduur (#2515).
     final onProgress = options.onProgress;
     final durationMs = pcm.length / 16000 * 1000;
     final JSObject raw;
     try {
+      _nativeActive = true;
       raw = await bridge
           .transcribe(
             ctx.toJS,
@@ -185,8 +202,12 @@ class WebWhisperEngine implements LocalWhisperEngine {
           )
           .toDart;
     } catch (e) {
+      _checkCancelled();
       throw EngineUnavailable('wasm-run afgebroken: $e');
+    } finally {
+      _nativeActive = false;
     }
+    _checkCancelled();
     final map = raw.dartify() as Map<Object?, Object?>;
     if (map['cancelled'] == true) {
       throw const Cancelled('transcriptie afgebroken');
@@ -206,26 +227,18 @@ class WebWhisperEngine implements LocalWhisperEngine {
 
   @override
   void cancel() {
+    if (!_running) return;
+    _cancelRequested = true;
     try {
-      _bridge?.requestCancel();
+      // Een wachtende taak mag de native run van een andere engine niet stoppen.
+      if (_nativeActive) _activeBridge?.requestCancel();
     } on Object catch (e, s) {
-      // Een kapotte runtime hoeft niet ook nog een cancel-fout te geven.
       logError('WebWhisperEngine: cancel', e, s);
     }
   }
 
-  /// Wasm-modellen ontladen — roept de bridge `free` voor deze context.
-  void dispose() {
-    final ctx = _context;
-    if (ctx != null) {
-      _context = null;
-      try {
-        _bridge?.free(ctx.toJS);
-      } on Object catch (e, s) {
-        logError('WebWhisperEngine: context vrijgeven', e, s);
-      }
-    }
-  }
+  @override
+  void dispose() => _runtime.dispose();
 
   @override
   Stream<PartialTranscript>? transcribeLive(
@@ -236,3 +249,111 @@ class WebWhisperEngine implements LocalWhisperEngine {
 
 LocalWhisperEngine createLocalWhisperEngine({WhisperModel? model}) =>
     WebWhisperEngine(model: model);
+
+@JS('ocideckWhisper')
+external WhisperBridge? get whisperBridge;
+
+extension type WhisperBridge(JSObject _) implements JSObject {
+  external bool isSupported();
+  external JSNumber get runtimeGeneration;
+  external JSNumber contextGeneration(JSNumber index);
+  external JSPromise<JSNumber> loadModel(JSUint8Array bytes);
+  external JSPromise<JSObject> transcribe(
+    JSNumber index,
+    JSFloat32Array pcm,
+    JSString lang,
+    JSNumber threads,
+    JSFunction? onSegment,
+  );
+  external JSPromise<JSFloat32Array> decodeAudio(JSUint8Array bytes);
+  external void requestCancel();
+  external void free(JSNumber index);
+}
+
+/// Provider-dispose trekt het aanbod in, maar een reeds begonnen taak mag
+/// zijn context tot in zijn finally houden. De volgende taak wacht daarop.
+class WebWhisperRuntime {
+  static Future<void> _tail = Future.value();
+  bool _busy = false;
+  bool _retired = false;
+  int? _context;
+  int? _generation;
+  WhisperBridge? _loadedBridge;
+
+  Future<T> run<T>(Future<T> Function() body) async {
+    if (_retired || _busy) {
+      throw const EngineUnavailable('engine is vervangen of al in gebruik');
+    }
+    _busy = true;
+    final previous = _tail;
+    final turn = Completer<void>();
+    _tail = turn.future;
+    try {
+      await previous;
+      return await body();
+    } finally {
+      // Vrijgeven binnen deze beurt: ook bij veel snelle modelwissels mag
+      // de oude context geen extra plek in de native contexttabel innemen.
+      if (_retired) _free();
+      _busy = false;
+      turn.complete();
+    }
+  }
+
+  int? cachedContext(WhisperBridge bridge) {
+    final ctx = _context;
+    if (ctx == null) return null;
+    if (bridge != _loadedBridge ||
+        bridge.runtimeGeneration.toDartInt != _generation ||
+        bridge.contextGeneration(ctx.toJS).toDartInt != _generation) {
+      _context = null;
+      _loadedBridge = null;
+      return null;
+    }
+    return ctx;
+  }
+
+  Future<int> load(WhisperBridge bridge, JSUint8Array bytes) async {
+    final ctx = (await bridge.loadModel(bytes).toDart).toDartInt;
+    final generation = bridge.contextGeneration(ctx.toJS).toDartInt;
+    if (ctx <= 0 || generation != bridge.runtimeGeneration.toDartInt) {
+      throw const EngineUnavailable('model kon niet in de wasm-engine laden');
+    }
+    _context = ctx;
+    _generation = generation;
+    _loadedBridge = bridge;
+    return ctx;
+  }
+
+  void dispose() {
+    if (_retired) return;
+    _retired = true;
+    if (_busy) return;
+    final previous = _tail;
+    final turn = Completer<void>();
+    _tail = turn.future;
+    unawaited(() async {
+      try {
+        await previous;
+        _free();
+      } finally {
+        turn.complete();
+      }
+    }());
+  }
+
+  void _free() {
+    final bridge = _loadedBridge;
+    try {
+      // Een abort vernietigt de hele runtime. Dezelfde numerieke index in
+      // de volgende runtime is andermans model en mag nooit worden vrijgegeven.
+      final ctx = bridge == null ? null : cachedContext(bridge);
+      if (ctx != null && bridge == whisperBridge) bridge!.free(ctx.toJS);
+    } on Object catch (e, s) {
+      logError('WebWhisperRuntime: context vrijgeven', e, s);
+    } finally {
+      _context = null;
+      _loadedBridge = null;
+    }
+  }
+}

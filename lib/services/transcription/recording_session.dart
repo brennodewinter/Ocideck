@@ -206,7 +206,8 @@ class RecordingManager {
         ),
       );
       if (pending.stopReason != null) {
-        await capture.stop();
+        final audio = await capture.stop();
+        audio.releaseAssets();
         pending.throwIfStopped();
       }
       final handle = RecordingHandle._(

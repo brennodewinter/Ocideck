@@ -251,6 +251,8 @@ void main() {
       await _flush();
       final audio = await capture.stop();
 
+      addTearDown(WebAssetStore.registerRoots(() => {}));
+      WebAssetStore.retain({});
       expect(audio.durablePath, startsWith('mem:'));
       final wav = WebAssetStore.bytesFor(audio.durablePath)!;
       expect(String.fromCharCodes(wav.sublist(0, 4)), 'RIFF');
@@ -258,6 +260,9 @@ void main() {
       expect(_sample(wav, 0), 3000);
       // Geen bronfiles in het beperkte geheugen — alleen de mix plus het
       // manifest als tweede asset.
+      expect(WebAssetStore.totalBytes, greaterThan(wav.length));
+      audio.releaseAssets();
+      expect(WebAssetStore.totalBytes, 0);
     }),
   );
 

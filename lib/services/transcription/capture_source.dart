@@ -93,12 +93,18 @@ class RecordedAudio {
     required this.durablePath,
     required this.duration,
     required this.kinds,
+    this._onRelease,
   });
 
   /// Pad of `mem:`-sleutel van de voltooide opname. Leeg betekent: er is
   /// niets bewaard gebleven — bijvoorbeeld omdat de bron zelf al faalde
   /// voordat er bytes waren.
   final String durablePath;
+
+  final void Function()? _onRelease;
+
+  /// Geeft tijdelijke bron-/decodebytes vrij na gebruik; schijfaudio blijft staan.
+  void releaseAssets() => _onRelease?.call();
 
   final Duration duration;
 

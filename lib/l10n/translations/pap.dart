@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
+      'Download e grabashon aki pa warda e. Ora bo sera e bentana òf tab aki, e audio ta pèrdè.',
   'de WAV is geen 16-bit PCM — decode nodig':
       'e WAV no ta PCM di 16 bit — tin mester dekodifike',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':

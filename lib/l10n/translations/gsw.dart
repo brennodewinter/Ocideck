@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
+      'Lad die Ufnahm abe, zum si z bhalte. Wänn du das Fänschter oder de Tab zuemachsch, gaht de Ton verlore.',
   'de WAV is geen 16-bit PCM — decode nodig':
       's WAV isch kei 16-Bit-PCM — en Dekodierig isch nötig',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
