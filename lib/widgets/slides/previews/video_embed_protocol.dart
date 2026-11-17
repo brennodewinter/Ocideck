@@ -33,7 +33,7 @@ function listen(){send({event:'listening'})}
 function subscribe(){if(subscribed)return;subscribed=true;
   ['onReady','onStateChange','onError','onAutoplayBlocked'].forEach(function(name){command('addEventListener',[name])});
 }
-function markReady(){if(!ready){ready=true;post('ok')}}
+function markReady(){if(!ready){ready=true;post('ok');if(autoplay)command('playVideo')}}
 function markPlaying(){markReady();hasPlayed=true;recovery.style.display='none';if(!playing){playing=true;post('playback:playing')}}
 function recover(state){if(!autoplay||hasPlayed)return;recovery.style.display='flex';post('playback:'+state)}
 function finish(){if(!ended){ended=true;post('ended')}}

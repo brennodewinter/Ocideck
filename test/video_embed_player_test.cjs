@@ -5,7 +5,7 @@ const test = require('node:test');
 const html = fs.readFileSync(process.env.OCIDECK_VIDEO_HTML, 'utf8');
 const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
 const origin = 'https://www.youtube-nocookie.com';
-function player() {
+function player(autoplay = true) {
   const commands = [], messages = [], timers = [], elements = {};
   const frame = {postMessage: (text, target) => {
     assert.equal(target, origin); commands.push(JSON.parse(text));
@@ -15,7 +15,7 @@ function player() {
       addEventListener(name, callback) {this.events[name] = callback;}};
   }
   const window = {addEventListener(name, callback) {this[name] = callback;}};
-  vm.runInNewContext(script, {document: {getElementById: id => elements[id]},
+  vm.runInNewContext(script.replace('autoplay=true', 'autoplay='+autoplay), {document: {getElementById: id => elements[id]},
     window, OciDeck: {postMessage: message => (() => {assert.match(message, /^\d+\|/); messages.push(message.slice(message.indexOf('|') + 1));})()},
     setTimeout: (callback, delay) => timers.push({callback, delay}),
     setInterval: () => 1, clearInterval: () => {}});
@@ -32,6 +32,7 @@ test('handshake subscribes to real events; ready does not mean playing', () => {
   assert(p.commands.every(c => c.id === 1 && c.channel === 'widget'));
   p.event('onReady');
   assert.equal(p.commands.filter(c => c.func === 'addEventListener').length, 4);
+  assert.equal(p.commands.filter(c => c.func === 'playVideo').length, 1);
 });
 test('blocked autoplay exposes a real click action without reload or mute', () => {
   const p = player(); p.event('onAutoplayBlocked');
@@ -83,4 +84,11 @@ test('seek before clip start is corrected; seek progress is not playback proof',
   p.event('onStateChange', 1);
   assert(p.messages.includes('playback:playing'));
   assert(!p.messages.includes('ended'));
+});
+
+test('manual playback does not issue a play command on readiness', () => {
+  const p = player(false); p.event('initialDelivery', {playerState: 5, currentTime: 10});
+  p.event('onReady');
+  assert.equal(p.commands.filter(c => c.func === 'playVideo').length, 0);
+  assert(!p.messages.includes('playback:playing'));
 });
