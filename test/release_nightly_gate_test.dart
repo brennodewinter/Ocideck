@@ -124,6 +124,7 @@ git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
     required List<String> runs,
     List<String> ancestors = const ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
     String resumeTag = '',
+    String releaseBase = 'main',
     bool apiFails = false,
     String dispatchedStatus = 'success',
     bool runningBecomesSuccess = false,
@@ -147,6 +148,8 @@ git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
     harness.writeAsStringSync('''
 set -uo pipefail
 RESUME_TAG='$resumeTag'
+TAG=v9.9.9
+RELEASE_BASE='$releaseBase'
 GATE_TIMEOUT_MIN=1
 GATE_TIMEOUT_SECONDS=${delayedListGap ? '1000' : '2'}
 MAIN_GATE_LOCK_DIR='${dir.path}/main-gate.lock'
@@ -275,6 +278,46 @@ printf 'DOOR\\n'
   }
 
   group('bash gate harness', () {
+    test('een bronfreeze hergebruikt de main-poort op exact dezelfde SHA', () {
+      final dir = Directory.systemTemp.createTempSync('frozen-main-proof-');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final trace = File('${dir.path}/calls');
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
+        trace: trace,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect(trace.readAsStringSync(), isNot(contains('POST ')));
+      expect(r.stdout, contains('run 9718'));
+    });
+
+    test('een bronfreeze hergebruikt geen groene run op een andere SHA', () {
+      final dir = Directory.systemTemp.createTempSync('frozen-other-proof-');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final trace = File('${dir.path}/calls');
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: ['9718|bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb|success'],
+        trace: trace,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect(trace.readAsStringSync(), contains('POST /actions/workflows/'));
+      expect(r.stdout, isNot(contains('(run 9718)')));
+    });
+
+    test('een bronfreeze passeert geen nieuwere rode main-poort', () {
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: [
+          '9719|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|failure',
+          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success',
+        ],
+      );
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect(r.stdout, isNot(contains('DOOR')));
+    });
+
     test('een groene nachtrun op de tip laat de release door', () {
       final r = runGate(
         runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],

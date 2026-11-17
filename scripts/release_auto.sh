@@ -3400,6 +3400,11 @@ assert_nightly_main_gate() {
   local main_sha source_ref="${RELEASE_BASE:-main}"
   main_sha="$(git rev-parse --verify "origin/$source_ref" 2>/dev/null)" \
     || die_main_gate "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
+  # Een bronfreeze verandert alleen de refnaam, niet de getoetste inhoud.
+  # Hergebruik de main-poort voor exact dezelfde SHA; ontbrekend bewijs wordt
+  # nog steeds op de onveranderlijke releasebasis gestart.
+  local proof_ref="$source_ref"
+  if [ "$source_ref" = "codex/release-base-${TAG:-}" ]; then proof_ref=main; fi
   # De lijst-route geeft geen commit_sha; die staat op de detail-GET per run.
   # Alleen een run op exact de main-tip bewijst de kandidaatbasis. Een groene
   # voorouder kan tientallen ongetoetste commits achterlopen en verplaatst een
@@ -3412,7 +3417,7 @@ assert_nightly_main_gate() {
     polls=$((polls + 1))
     found=""; rsha=""; rstatus=""; rurl=""; lookup_failed=0
     ids="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs?limit=50&page=1&workflow_id=linux-gate.yml" 2>/dev/null \
-      | jq -r --arg ref "$source_ref" '
+      | jq -r --arg ref "$source_ref" --arg proof_ref "$proof_ref" '
           if (.workflow_runs | type) != "array" then error("workflow_runs is geen array")
           elif any(.workflow_runs[];
               type != "object"
@@ -3421,8 +3426,9 @@ assert_nightly_main_gate() {
               or (.prettyref | type) != "string")
           then error("ongeldige workflow-run")
           else [.workflow_runs[]
-            | select(.workflow_id == "linux-gate.yml" and .prettyref == $ref)
-            | .id] | sort | reverse | .[]
+            | select(.workflow_id == "linux-gate.yml"
+                and (.prettyref == $ref or .prettyref == $proof_ref))]
+            | sort_by([(.prettyref == $proof_ref), .id]) | reverse | .[].id
           end' 2>/dev/null)" \
       || lookup_failed=1
     if [ "$lookup_failed" -eq 0 ]; then
