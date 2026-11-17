@@ -113,7 +113,8 @@ abstract final class BundledLicenses {
     BundledLicense(
       component: 'YuNet face-detection model',
       license: 'MIT',
-      source: 'https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet',
+      source:
+          'https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet',
       licenseAsset: 'assets/models/YuNet-LICENSE.txt',
     ),
     BundledLicense(
