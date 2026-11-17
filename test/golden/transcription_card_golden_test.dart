@@ -106,11 +106,17 @@ Future<void> _match(
   // tussenstatus ("detecteren…", "controleren…") weg is; een vaste duur
   // vangt die soms nog en wijkt dan af onder een volle suite.
   final ctx = tester.element(find.byType(TranscriptionModuleCard));
-  await tester.runAsync(
-    () => ProviderScope.containerOf(
-      ctx,
-    ).read(transcriptionModelManagerProvider.notifier).refresh(),
+  var initialized = false;
+  final pending = ProviderScope.containerOf(ctx)
+      .read(transcriptionModelManagerProvider.notifier)
+      .refresh()
+      .whenComplete(() => initialized = true);
+  await pumpUntil(
+    tester,
+    () => initialized,
+    reason: 'modelstore initialisatie',
   );
+  await pending;
   await pumpUntil(tester, () {
     // De schakelaar start uitgeschakeld zolang de voorkeur nog laadt.
     // Een plaat van dat moment heeft een grijzere titel en wijkt af
