@@ -1558,6 +1558,40 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'één taal': 'одна мова',
   'Meerdere talen in deze opname': 'Кілька мов у цьому записі',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Поки немає стрічок, що відстежуються. Відкрийте стрічку подкасту через Відкрити за URL, щоб стежити за нею.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'ШІ вимкнено; перевірки та обробку призупинено, доки ШІ знову не ввімкнуть.',
+  'Deze feed stond al in de lijst.': 'Ця стрічка вже була у списку.',
+  'Deze feed wordt gevolgd.': 'Ця стрічка відстежується.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Ця сторінка не пропонує презентацію, але пропонує стрічку:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Ця транскрипція порожня або нечитабельна.',
+  'Elk uur': 'Щогодини',
+  'Elke 15 minuten': 'Кожні 15 хвилин',
+  'Elke 30 minuten': 'Кожні 30 хвилин',
+  'Elke 6 uur': 'Кожні 6 годин',
+  'Dagelijks': 'Щодня',
+  'Feed gevonden': 'Стрічку знайдено',
+  'Feed volgen': 'Стежити за стрічкою',
+  'Geen nieuwe afleveringen.': 'Немає нових епізодів.',
+  'Laatste controle': 'Остання перевірка',
+  'Markeren als verwerkt': 'Позначити як опрацьоване',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Автоматично завантажувати нові епізоди',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Нові епізоди подкастів — див. Імпортувати → Стрічки подкастів.',
+  'Nu vernieuwen': 'Оновити зараз',
+  'Podcastfeeds': 'Стрічки подкастів',
+  'Podcastfeeds…': 'Стрічки подкастів…',
+  'Stoppen met volgen': 'Припинити стеження',
+  'Transcript ophalen': 'Отримати транскрипцію',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Увімкніть ШІ в налаштуваннях, щоб стежити за цією стрічкою.',
+  'afleveringen': 'епізоди',
+  'controles mislukt': 'перевірки не вдалися',
+  'gepauzeerd': 'призупинено',
   'Serverprotocol': 'Протокол сервера',
   'Spreker': 'Мовець',
   'Automatisch afspelen is niet gestart.':

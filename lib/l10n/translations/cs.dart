@@ -1544,6 +1544,40 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'één taal': 'jeden jazyk',
   'Meerdere talen in deze opname': 'Více jazyků v této nahrávce',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Zatím žádné sledované kanály. Otevřete kanál podcastu přes Otevřít z URL pro jeho sledování.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI je vypnutá; kontroly a zpracování jsou pozastaveny, dokud nebude opět zapnutá.',
+  'Deze feed stond al in de lijst.': 'Tento kanál již byl v seznamu.',
+  'Deze feed wordt gevolgd.': 'Tento kanál je sledován.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Tato stránka nenabízí prezentaci, ale nabízí kanál:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Tento přepis je prázdný nebo nečitelný.',
+  'Elk uur': 'Každou hodinu',
+  'Elke 15 minuten': 'Každých 15 minut',
+  'Elke 30 minuten': 'Každých 30 minut',
+  'Elke 6 uur': 'Každých 6 hodin',
+  'Dagelijks': 'Denně',
+  'Feed gevonden': 'Kanál nalezen',
+  'Feed volgen': 'Sledovat kanál',
+  'Geen nieuwe afleveringen.': 'Žádné nové epizody.',
+  'Laatste controle': 'Poslední kontrola',
+  'Markeren als verwerkt': 'Označit jako vyřízené',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Automaticky stahovat nové epizody',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nové epizody podcastů — viz Importovat → Kanály podcastů.',
+  'Nu vernieuwen': 'Obnovit nyní',
+  'Podcastfeeds': 'Kanály podcastů',
+  'Podcastfeeds…': 'Kanály podcastů…',
+  'Stoppen met volgen': 'Přestat sledovat',
+  'Transcript ophalen': 'Stáhnout přepis',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Zapněte AI v nastavení pro sledování tohoto kanálu.',
+  'afleveringen': 'epizody',
+  'controles mislukt': 'neúspěšné kontroly',
+  'gepauzeerd': 'pozastaveno',
   'Serverprotocol': 'Serverový protokol',
   'Spreker': 'Mluvčí',
   'Automatisch afspelen is niet gestart.':

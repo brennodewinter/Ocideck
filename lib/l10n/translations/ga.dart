@@ -1572,6 +1572,40 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'één taal': 'teanga amháin',
   'Meerdere talen in deze opname': 'Ilteangacha sa taifeadadh seo',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Níl aon fhotha á leanúint go fóil. Oscail fotha podchraolacháin trí Oscail trí URL chun é a leanúint.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'Tá AI múchta; tá seiceálacha agus próiseáil ar sos go dtí go gcuirfear ar ais é.',
+  'Deze feed stond al in de lijst.': 'Bhí an fotha seo ar an liosta cheana.',
+  'Deze feed wordt gevolgd.': 'Tá an fotha seo á leanúint.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Ní thairgeann an leathanach seo cur i láthair, ach tairgeann sé fotha:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Tá an tras-scríobh seo folamh nó doléite.',
+  'Elk uur': 'Gach uair',
+  'Elke 15 minuten': 'Gach 15 nóiméad',
+  'Elke 30 minuten': 'Gach 30 nóiméad',
+  'Elke 6 uur': 'Gach 6 uair',
+  'Dagelijks': 'Gach lá',
+  'Feed gevonden': 'Fotha aimsithe',
+  'Feed volgen': 'Lean an fotha',
+  'Geen nieuwe afleveringen.': 'Gan eipeasóid nua.',
+  'Laatste controle': 'An seiceáil dheireanach',
+  'Markeren als verwerkt': 'Marcáil mar láimhseáilte',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Íoslódáil eipeasóid nua go huathoibríoch',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Eipeasóid phodchraolacháin nua — féach Iompórtáil → Fothaí podchraolacháin.',
+  'Nu vernieuwen': 'Athnuaigh anois',
+  'Podcastfeeds': 'Fothaí podchraolacháin',
+  'Podcastfeeds…': 'Fothaí podchraolacháin…',
+  'Stoppen met volgen': 'Stop ag leanúint',
+  'Transcript ophalen': 'Faigh an tras-scríobh',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Cas air AI sna socruithe chun an fotha seo a leanúint.',
+  'afleveringen': 'eipeasóid',
+  'controles mislukt': 'seiceálacha teipthe',
+  'gepauzeerd': 'ar sos',
   'Serverprotocol': 'Prótacal freastalaí',
   'Spreker': 'Cainteoir',
   'Automatisch afspelen is niet gestart.':

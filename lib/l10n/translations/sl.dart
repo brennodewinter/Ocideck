@@ -1544,6 +1544,39 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'één taal': 'en jezik',
   'Meerdere talen in deze opname': 'Več jezikov v tem posnetku',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Še ni spremljanih virov. Odprite vir podkasta prek Odpri prek URL, da ga spremljate.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI je izključen; pregledi in obdelava so začasno ustavljeni, dokler ni spet vključen.',
+  'Deze feed stond al in de lijst.': 'Ta vir je bil že na seznamu.',
+  'Deze feed wordt gevolgd.': 'Ta vir se spremlja.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Ta stran ne ponuja predstavitve, ponuja pa vir:',
+  'Dit transcript is leeg of onleesbaar.': 'Ta prepis je prazen ali neberljiv.',
+  'Elk uur': 'Vsako uro',
+  'Elke 15 minuten': 'Vsakih 15 minut',
+  'Elke 30 minuten': 'Vsakih 30 minut',
+  'Elke 6 uur': 'Vsakih 6 ur',
+  'Dagelijks': 'Vsak dan',
+  'Feed gevonden': 'Vir najden',
+  'Feed volgen': 'Spremljaj vir',
+  'Geen nieuwe afleveringen.': 'Ni novih epizod.',
+  'Laatste controle': 'Zadnji pregled',
+  'Markeren als verwerkt': 'Označi kot obdelano',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Samodejno prenesi nove epizode',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nove epizode podkastov — glej Uvozi → Viri podkastov.',
+  'Nu vernieuwen': 'Osveži zdaj',
+  'Podcastfeeds': 'Viri podkastov',
+  'Podcastfeeds…': 'Viri podkastov…',
+  'Stoppen met volgen': 'Prenehaj spremljati',
+  'Transcript ophalen': 'Pridobi prepis',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Vključi AI v nastavitvah za spremljanje tega vira.',
+  'afleveringen': 'epizode',
+  'controles mislukt': 'neuspeli pregledi',
+  'gepauzeerd': 'premor',
   'Serverprotocol': 'Protokol strežnika',
   'Spreker': 'Govorec',
   'Automatisch afspelen is niet gestart.':

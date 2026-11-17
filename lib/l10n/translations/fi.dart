@@ -1544,6 +1544,40 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'één taal': 'yksi kieli',
   'Meerdere talen in deze opname': 'Useita kieliä tässä tallenteessa',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Ei seurattuja syötteitä vielä. Avaa podcast-syöte kohdasta Avaa URL-osoitteesta seurataksesi sitä.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'Tekoäly on pois päältä; tarkistukset ja käsittely ovat tauolla, kunnes tekoäly on jälleen päällä.',
+  'Deze feed stond al in de lijst.': 'Tämä syöte oli jo luettelossa.',
+  'Deze feed wordt gevolgd.': 'Tätä syötettä seurataan.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Tämä sivu ei tarjoa esitystä, mutta tarjoaa syötteen:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Tämä litteraatio on tyhjä tai lukukelvoton.',
+  'Elk uur': 'Tunneittain',
+  'Elke 15 minuten': '15 minuutin välein',
+  'Elke 30 minuten': '30 minuutin välein',
+  'Elke 6 uur': '6 tunnin välein',
+  'Dagelijks': 'Päivittäin',
+  'Feed gevonden': 'Syöte löydetty',
+  'Feed volgen': 'Seuraa syötettä',
+  'Geen nieuwe afleveringen.': 'Ei uusia jaksoja.',
+  'Laatste controle': 'Viimeisin tarkistus',
+  'Markeren als verwerkt': 'Merkitse käsitellyksi',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Lataa uudet jaksot automaattisesti',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Uusia podcast-jaksoja — katso Tuo → Podcast-syötteet.',
+  'Nu vernieuwen': 'Päivitä nyt',
+  'Podcastfeeds': 'Podcast-syötteet',
+  'Podcastfeeds…': 'Podcast-syötteet…',
+  'Stoppen met volgen': 'Lopeta seuraaminen',
+  'Transcript ophalen': 'Hae litteraatio',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Ota tekoäly käyttöön asetuksissa seurataksesi tätä syötettä.',
+  'afleveringen': 'jaksoja',
+  'controles mislukt': 'epäonnistuneet tarkistukset',
+  'gepauzeerd': 'tauolla',
   'Serverprotocol': 'Palvelinprotokolla',
   'Spreker': 'Puhuja',
   'Automatisch afspelen is niet gestart.':

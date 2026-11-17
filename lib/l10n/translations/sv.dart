@@ -1543,6 +1543,39 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'één taal': 'ett språk',
   'Meerdere talen in deze opname': 'Flera språk i denna inspelning',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Inga följda flöden ännu. Öppna ett podcastflöde via Öppna via URL för att följa det.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI är avstängd; kontroller och bearbetning är pausade tills AI är på igen.',
+  'Deze feed stond al in de lijst.': 'Detta flöde fanns redan i listan.',
+  'Deze feed wordt gevolgd.': 'Detta flöde följs.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Den här sidan erbjuder ingen presentation, men ett flöde:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Detta transkript är tomt eller oläsligt.',
+  'Elk uur': 'Varje timme',
+  'Elke 15 minuten': 'Var 15:e minut',
+  'Elke 30 minuten': 'Var 30:e minut',
+  'Elke 6 uur': 'Var 6:e timme',
+  'Dagelijks': 'Dagligen',
+  'Feed gevonden': 'Flöde hittat',
+  'Feed volgen': 'Följ flöde',
+  'Geen nieuwe afleveringen.': 'Inga nya avsnitt.',
+  'Laatste controle': 'Senaste kontroll',
+  'Markeren als verwerkt': 'Markera som hanterat',
+  'Nieuwe afleveringen automatisch downloaden': 'Hämta nya avsnitt automatiskt',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nya podcastavsnitt — se Importera → Podcastflöden.',
+  'Nu vernieuwen': 'Uppdatera nu',
+  'Podcastfeeds': 'Podcastflöden',
+  'Podcastfeeds…': 'Podcastflöden…',
+  'Stoppen met volgen': 'Sluta följa',
+  'Transcript ophalen': 'Hämta transkript',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Slå på AI i inställningarna för att följa detta flöde.',
+  'afleveringen': 'avsnitt',
+  'controles mislukt': 'misslyckade kontroller',
+  'gepauzeerd': 'pausad',
   'Serverprotocol': 'Serverprotokoll',
   'Spreker': 'Talare',
   'Automatisch afspelen is niet gestart.':

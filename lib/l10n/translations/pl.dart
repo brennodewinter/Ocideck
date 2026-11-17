@@ -1554,6 +1554,40 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'één taal': 'jeden język',
   'Meerdere talen in deze opname': 'Wiele języków w tym nagraniu',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Brak obserwowanych kanałów. Otwórz kanał podcastu przez Otwórz z adresu URL, aby go obserwować.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI jest wyłączone; sprawdzanie i przetwarzanie są wstrzymane do ponownego włączenia.',
+  'Deze feed stond al in de lijst.': 'Ten kanał był już na liście.',
+  'Deze feed wordt gevolgd.': 'Ten kanał jest obserwowany.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Ta strona nie oferuje prezentacji, ale oferuje kanał:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Ta transkrypcja jest pusta lub nieczytelna.',
+  'Elk uur': 'Co godzinę',
+  'Elke 15 minuten': 'Co 15 minut',
+  'Elke 30 minuten': 'Co 30 minut',
+  'Elke 6 uur': 'Co 6 godzin',
+  'Dagelijks': 'Codziennie',
+  'Feed gevonden': 'Znaleziono kanał',
+  'Feed volgen': 'Obserwuj kanał',
+  'Geen nieuwe afleveringen.': 'Brak nowych odcinków.',
+  'Laatste controle': 'Ostatnie sprawdzenie',
+  'Markeren als verwerkt': 'Oznacz jako obsłużone',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Automatycznie pobieraj nowe odcinki',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Nowe odcinki podcastów — zobacz Importuj → Kanały podcastów.',
+  'Nu vernieuwen': 'Odśwież teraz',
+  'Podcastfeeds': 'Kanały podcastów',
+  'Podcastfeeds…': 'Kanały podcastów…',
+  'Stoppen met volgen': 'Przestań obserwować',
+  'Transcript ophalen': 'Pobierz transkrypcję',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Włącz AI w ustawieniach, aby obserwować ten kanał.',
+  'afleveringen': 'odcinki',
+  'controles mislukt': 'nieudane sprawdzenia',
+  'gepauzeerd': 'wstrzymane',
   'Serverprotocol': 'Protokół serwera',
   'Spreker': 'Mówca',
   'Automatisch afspelen is niet gestart.':

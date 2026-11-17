@@ -769,6 +769,40 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'één taal': 'one language',
   'Meerdere talen in deze opname': 'Multiple languages in this recording',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'No followed feeds yet. Open a podcast feed via Open via URL to follow it.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI is off; checks and processing are paused until AI is on again.',
+  'Deze feed stond al in de lijst.': 'This feed was already in the list.',
+  'Deze feed wordt gevolgd.': 'This feed is being followed.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'This page does not offer a presentation, but it does offer a feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'This transcript is empty or unreadable.',
+  'Elk uur': 'Hourly',
+  'Elke 15 minuten': 'Every 15 minutes',
+  'Elke 30 minuten': 'Every 30 minutes',
+  'Elke 6 uur': 'Every 6 hours',
+  'Dagelijks': 'Daily',
+  'Feed gevonden': 'Feed found',
+  'Feed volgen': 'Follow feed',
+  'Geen nieuwe afleveringen.': 'No new episodes.',
+  'Laatste controle': 'Last check',
+  'Markeren als verwerkt': 'Mark as handled',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Automatically download new episodes',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'New podcast episodes — see Import → Podcast feeds.',
+  'Nu vernieuwen': 'Refresh now',
+  'Podcastfeeds': 'Podcast feeds',
+  'Podcastfeeds…': 'Podcast feeds…',
+  'Stoppen met volgen': 'Stop following',
+  'Transcript ophalen': 'Fetch transcript',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Turn on AI in the settings to follow this feed.',
+  'afleveringen': 'episodes',
+  'controles mislukt': 'checks failed',
+  'gepauzeerd': 'paused',
   'Serverprotocol': 'Server protocol',
   'Spreker': 'Speaker',
   'Automatisch afspelen is niet gestart.': 'Automatic playback did not start.',

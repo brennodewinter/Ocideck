@@ -1536,6 +1536,40 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'één taal': 'üks keel',
   'Meerdere talen in deze opname': 'Mitu keelt selles salvestises',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Jälgitavaid vooge pole veel. Ava podcastivoog käsuga Ava URL-i kaudu, et seda jälgida.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI on väljas; kontrollid ja töötlemine on peatatud, kuni AI uuesti sisse lülitatakse.',
+  'Deze feed stond al in de lijst.': 'See voog oli juba nimekirjas.',
+  'Deze feed wordt gevolgd.': 'Seda voogu jälgitakse.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'See leht ei paku esitlust, kuid pakub voogu:',
+  'Dit transcript is leeg of onleesbaar.':
+      'See transkript on tühi või loetamatu.',
+  'Elk uur': 'Iga tund',
+  'Elke 15 minuten': 'Iga 15 minuti järel',
+  'Elke 30 minuten': 'Iga 30 minuti järel',
+  'Elke 6 uur': 'Iga 6 tunni järel',
+  'Dagelijks': 'Iga päev',
+  'Feed gevonden': 'Voog leitud',
+  'Feed volgen': 'Jälgi voogu',
+  'Geen nieuwe afleveringen.': 'Uusi osi pole.',
+  'Laatste controle': 'Viimane kontroll',
+  'Markeren als verwerkt': 'Märgi käsitletuks',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Laadi uued osad automaatselt alla',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Uued taskuhäälinguosad — vaata Impordi → Taskuhäälinguvood.',
+  'Nu vernieuwen': 'Värskenda kohe',
+  'Podcastfeeds': 'Taskuhäälinguvood',
+  'Podcastfeeds…': 'Taskuhäälinguvood…',
+  'Stoppen met volgen': 'Lõpeta jälgimine',
+  'Transcript ophalen': 'Too transkript',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Lülita AI seadetesse sisse, et seda voogu jälgida.',
+  'afleveringen': 'osi',
+  'controles mislukt': 'ebaõnnestunud kontrollid',
+  'gepauzeerd': 'peatatud',
   'Serverprotocol': 'Serveri protokoll',
   'Spreker': 'Kõneleja',
   'Automatisch afspelen is niet gestart.':

@@ -1544,6 +1544,40 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'één taal': 'ei Sprach',
   'Meerdere talen in deze opname': 'Mehri Sprache i dere Ufnahm',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'No kei verfolgsti Feeds. Öffne e Podcast-Feed über Öffne via URL zum z’verfolge.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'KI isch us; Kontrolle und Verarbeitig pausiert, bis KI wieder aa isch.',
+  'Deze feed stond al in de lijst.': 'Dees Feed isch scho i de Lischt gstande.',
+  'Deze feed wordt gevolgd.': 'Dees Feed wird verfolgt.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Die Siite bütet kei Präsentation, aber e Feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Des Transkript isch leer oder unleesbar.',
+  'Elk uur': 'Stündlich',
+  'Elke 15 minuten': 'Alli 15 Minute',
+  'Elke 30 minuten': 'Alli 30 Minute',
+  'Elke 6 uur': 'Alli 6 Stunde',
+  'Dagelijks': 'Täglich',
+  'Feed gevonden': 'Feed gfunde',
+  'Feed volgen': 'Feed verfolge',
+  'Geen nieuwe afleveringen.': 'Kei neui Folge.',
+  'Laatste controle': 'Letschti Kontroll',
+  'Markeren als verwerkt': 'Als erledigt markiere',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Neui Folge automatisch abelade',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Neui Podcast-Folge — lueg Importiere → Podcast-Feeds.',
+  'Nu vernieuwen': 'Jetz aktualisiere',
+  'Podcastfeeds': 'Podcast-Feeds',
+  'Podcastfeeds…': 'Podcast-Feeds…',
+  'Stoppen met volgen': 'Ufghöre verfolge',
+  'Transcript ophalen': 'Transkript abruefe',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Schalt KI i de Yystellige aa, zum dees Feed z’verfolge.',
+  'afleveringen': 'Folge',
+  'controles mislukt': 'Kontrolle fählgschlage',
+  'gepauzeerd': 'pausiert',
   'Serverprotocol': 'Serverprotokoll',
   'Spreker': 'Sprächer',
   'Automatisch afspelen is niet gestart.':

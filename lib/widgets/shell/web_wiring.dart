@@ -26,7 +26,9 @@ Future<void> _openDeckDeepLink(
   if (!isWebPlatform || !isMounted()) return;
   final deckUrl = deckDeepLinkFrom(Uri.base);
   if (deckUrl == null) return;
-  final result = await _importUrlWeb(context, ref, deckUrl);
+  // De deck-deeplink kent geen inhoudsrouter: een feed-URL is hier gewoon
+  // geen presentatie en krijgt de eerlijke misluk-melding.
+  final result = (await _importUrlWeb(context, ref, deckUrl)).result;
   // Besluit (#2826): bij een geopend deck wissen we `?deck=` uit de
   // adresbalk — anders haalt elke herlading het bestand opnieuw binnen
   // als extra tabblad. Bij een míslukte open blijft hij bewust staan:

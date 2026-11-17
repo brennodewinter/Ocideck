@@ -1558,6 +1558,40 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'één taal': 'o limbă',
   'Meerdere talen in deze opname': 'Mai multe limbi în această înregistrare',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Niciun flux urmărit încă. Deschide un flux de podcast prin Deschide prin URL pentru a-l urmări.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'AI este oprit; verificările și procesarea sunt întrerupte până când AI este pornit din nou.',
+  'Deze feed stond al in de lijst.': 'Acest flux era deja în listă.',
+  'Deze feed wordt gevolgd.': 'Acest flux este urmărit.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Această pagină nu oferă o prezentare, dar oferă un flux:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Această transcriere este goală sau ilizibilă.',
+  'Elk uur': 'La fiecare oră',
+  'Elke 15 minuten': 'La fiecare 15 minute',
+  'Elke 30 minuten': 'La fiecare 30 de minute',
+  'Elke 6 uur': 'La fiecare 6 ore',
+  'Dagelijks': 'Zilnic',
+  'Feed gevonden': 'Flux găsit',
+  'Feed volgen': 'Urmărește fluxul',
+  'Geen nieuwe afleveringen.': 'Niciun episod nou.',
+  'Laatste controle': 'Ultima verificare',
+  'Markeren als verwerkt': 'Marchează ca tratat',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Descarcă automat episoadele noi',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Episoade noi de podcast — vezi Importare → Fluxuri de podcast.',
+  'Nu vernieuwen': 'Reîmprospătează acum',
+  'Podcastfeeds': 'Fluxuri de podcast',
+  'Podcastfeeds…': 'Fluxuri de podcast…',
+  'Stoppen met volgen': 'Oprește urmărirea',
+  'Transcript ophalen': 'Preia transcrierea',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Activează AI în setări pentru a urmări acest flux.',
+  'afleveringen': 'episoade',
+  'controles mislukt': 'verificări eșuate',
+  'gepauzeerd': 'întrerupt',
   'Serverprotocol': 'Protocolul serverului',
   'Spreker': 'Vorbitor',
   'Automatisch afspelen is niet gestart.': 'Redarea automată nu a pornit.',

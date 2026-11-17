@@ -386,20 +386,27 @@ Future<void> _openPickedPaths(
 /// `?deck=`-deeplink waarmee een link OciDeck én een presentatie tegelijk
 /// opent. Geeft het [OpenResult] terug zodat de aanroeper er op kan
 /// reageren (de deellink wist zijn parameter, de dialoog biedt hem aan).
-Future<OpenResult> _importUrlWeb(
+Future<({OpenResult result, bool routed})> _importUrlWeb(
   BuildContext context,
   WidgetRef ref,
-  String url,
-) async {
+  String url, {
+  UrlContentRouter? contentRouter,
+}) async {
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   OpenResult result;
   ImportFailure? fetchFailure;
   try {
     ref.read(openFailureProvider.notifier).state = null;
-    final outcome = await ref.read(tabsProvider.notifier).importFromUrlWeb(url);
+    final outcome = await ref
+        .read(tabsProvider.notifier)
+        .importFromUrlWeb(url, contentRouter: contentRouter);
     result = outcome.result;
     fetchFailure = outcome.failure;
+    // De inhoudsrouter heeft de bytes zelf afgehandeld (feeddialoog,
+    // #2931): geen deck-open, geen melding — wel aan de aanroeper melden
+    // dat dit geen presentatie-open was (de deellink-actie slaat hem over).
+    if (outcome.routed) return (result: result, routed: true);
   } catch (e, s) {
     logError('_importUrlWeb: import failed', e, s);
     result = OpenResult.unreadable;
@@ -407,12 +414,12 @@ Future<OpenResult> _importUrlWeb(
   }
   if (result == OpenResult.notAPresentation) {
     _reportOpenFailure(messenger, l10n, result);
-    return result;
+    return (result: result, routed: false);
   }
   if (result == OpenResult.opened ||
       result == OpenResult.blocked ||
       result == OpenResult.passwordCancelled) {
-    return result;
+    return (result: result, routed: false);
   }
   // Een concrete ophaalreden (te groot, 404, geen http(s)-link, geweigerde
   // host, omleiding) is specifieker dan CORS: toon díe. Alleen de ondoorzichtige
@@ -428,14 +435,14 @@ Future<OpenResult> _importUrlWeb(
         limitBytes: FileService.maxPackageBytes,
       ),
     );
-    return result;
+    return (result: result, routed: false);
   }
   // Ophalen slaagde maar het openen niet (beschadigd deck, vol mediabudget):
   // openDeckFromBytes legde de reden vast, en die is specifieker dan CORS.
   final reason = ref.read(openFailureProvider);
   if (reason != null) {
     _reportOpenFailure(messenger, l10n, result, reason: reason);
-    return result;
+    return (result: result, routed: false);
   }
   // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
   // browser mag alleen lezen van servers die dat expliciet toestaan.
@@ -447,7 +454,7 @@ Future<OpenResult> _importUrlWeb(
       ),
     ),
   );
-  return result;
+  return (result: result, routed: false);
 }
 
 /// Kies een deck uit de git-repository, haal het op, door de security-gate en

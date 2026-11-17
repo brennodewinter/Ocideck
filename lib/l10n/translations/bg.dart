@@ -1563,6 +1563,40 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'één taal': 'един език',
   'Meerdere talen in deze opname': 'Няколко езика в този запис',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Все още няма следени емисии. Отворете емисия на подкаст чрез Отваряне чрез URL, за да я следите.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'ИИ е изключен; проверките и обработката са на пауза, докато ИИ не се включи отново.',
+  'Deze feed stond al in de lijst.': 'Тази емисия вече беше в списъка.',
+  'Deze feed wordt gevolgd.': 'Тази емисия се следи.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Тази страница не предлага презентация, но предлага емисия:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Тази транскрипция е празна или нечетлива.',
+  'Elk uur': 'Всеки час',
+  'Elke 15 minuten': 'На всеки 15 минути',
+  'Elke 30 minuten': 'На всеки 30 минути',
+  'Elke 6 uur': 'На всеки 6 часа',
+  'Dagelijks': 'Ежедневно',
+  'Feed gevonden': 'Намерена емисия',
+  'Feed volgen': 'Следване на емисията',
+  'Geen nieuwe afleveringen.': 'Няма нови епизоди.',
+  'Laatste controle': 'Последна проверка',
+  'Markeren als verwerkt': 'Маркирай като обработено',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Автоматично изтегляне на нови епизоди',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Нови епизоди на подкаст — вижте Импортиране → Емисии на подкасти.',
+  'Nu vernieuwen': 'Опресни сега',
+  'Podcastfeeds': 'Емисии на подкасти',
+  'Podcastfeeds…': 'Емисии на подкасти…',
+  'Stoppen met volgen': 'Спри следването',
+  'Transcript ophalen': 'Изтегли транскрипция',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Включете ИИ в настройките, за да следите тази емисия.',
+  'afleveringen': 'епизоди',
+  'controles mislukt': 'неуспешни проверки',
+  'gepauzeerd': 'на пауза',
   'Serverprotocol': 'Сървърен протокол',
   'Spreker': 'Говорител',
   'Automatisch afspelen is niet gestart.':

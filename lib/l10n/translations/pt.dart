@@ -1569,6 +1569,40 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'één taal': 'um idioma',
   'Meerdere talen in deze opname': 'Vários idiomas nesta gravação',
+  'Nog geen gevolgde feeds. Open een podcastfeed via Openen via URL om hem te volgen.':
+      'Ainda não há feeds seguidos. Abra um feed de podcast através de Abrir via URL para o seguir.',
+  'AI staat uit; controles en verwerking zijn gepauzeerd tot AI weer aanstaat.':
+      'A IA está desligada; as verificações e o processamento estão em pausa até a IA ser ligada novamente.',
+  'Deze feed stond al in de lijst.': 'Este feed já estava na lista.',
+  'Deze feed wordt gevolgd.': 'Este feed está a ser seguido.',
+  'Deze pagina biedt geen presentatie, maar wel een feed:':
+      'Esta página não oferece uma apresentação, mas oferece um feed:',
+  'Dit transcript is leeg of onleesbaar.':
+      'Esta transcrição está vazia ou é ilegível.',
+  'Elk uur': 'De hora em hora',
+  'Elke 15 minuten': 'A cada 15 minutos',
+  'Elke 30 minuten': 'A cada 30 minutos',
+  'Elke 6 uur': 'A cada 6 horas',
+  'Dagelijks': 'Diariamente',
+  'Feed gevonden': 'Feed encontrado',
+  'Feed volgen': 'Seguir feed',
+  'Geen nieuwe afleveringen.': 'Sem episódios novos.',
+  'Laatste controle': 'Última verificação',
+  'Markeren als verwerkt': 'Marcar como tratado',
+  'Nieuwe afleveringen automatisch downloaden':
+      'Transferir automaticamente os episódios novos',
+  'Nieuwe podcastafleveringen — zie Importeren → Podcastfeeds.':
+      'Novos episódios de podcast — ver Importar → Feeds de podcast.',
+  'Nu vernieuwen': 'Atualizar agora',
+  'Podcastfeeds': 'Feeds de podcast',
+  'Podcastfeeds…': 'Feeds de podcast…',
+  'Stoppen met volgen': 'Deixar de seguir',
+  'Transcript ophalen': 'Obter transcrição',
+  'Zet AI aan in de instellingen om deze feed te volgen.':
+      'Ative a IA nas definições para seguir este feed.',
+  'afleveringen': 'episódios',
+  'controles mislukt': 'verificações falhadas',
+  'gepauzeerd': 'em pausa',
   'Serverprotocol': 'Protocolo do servidor',
   'Spreker': 'Falante',
   'Automatisch afspelen is niet gestart.':
