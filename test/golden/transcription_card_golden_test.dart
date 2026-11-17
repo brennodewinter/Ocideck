@@ -21,8 +21,11 @@ import 'package:ocideck/state/transcription_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/settings/transcription_module_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../support/pump_until.dart';
+
+const _supportPath = '/tmp/ocideck-transcription-golden-support';
 
 const _surfaceKey = ValueKey('transcription-card-golden-surface');
 
@@ -49,6 +52,10 @@ Future<void> _match(
         (call) async => null,
       );
 
+  // Keep the storage row independent of the builder's home and temp paths.
+  final previousPaths = PathProviderPlatform.instance;
+  PathProviderPlatform.instance = _GoldenPaths();
+  addTearDown(() => PathProviderPlatform.instance = previousPaths);
   final temp = Directory.systemTemp.createTempSync('card_golden_');
   addTearDown(() => temp.deleteSync(recursive: true));
   final bytes = List<int>.generate(64, (i) => i);
@@ -126,7 +133,11 @@ Future<void> _match(
     if (tester.widget<SwitchListTile>(tiles.first).onChanged == null) {
       return false;
     }
-    return find.textContaining('detecteren').evaluate().isEmpty &&
+    return find
+            .textContaining('$_supportPath/transcription/models')
+            .evaluate()
+            .isNotEmpty &&
+        find.textContaining('detecteren').evaluate().isEmpty &&
         find.textContaining('controleren').evaluate().isEmpty;
   }, reason: 'de statusmatrix of de moduleschakelaar bleef laden');
   // De titel kleurt van grijs naar de gewone inkt zodra de schakelaar
@@ -166,4 +177,9 @@ void main() {
       moduleOn: true,
     );
   });
+}
+
+class _GoldenPaths extends PathProviderPlatform {
+  @override
+  Future<String?> getApplicationSupportPath() async => _supportPath;
 }
