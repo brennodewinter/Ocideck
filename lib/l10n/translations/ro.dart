@@ -1556,6 +1556,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Audio- en videoformaten': 'Formate audio și video',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'WAV-ul este normalizat la PCM16 mono de 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':

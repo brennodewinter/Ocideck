@@ -1565,6 +1565,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Audio- en videoformaten': 'Μορφές ήχου και βίντεο',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'Το WAV κανονικοποιείται σε μονοφωνικό PCM16 στα 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':

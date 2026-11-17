@@ -610,6 +610,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Audio- en videoformaten': 'Formatos de audio y vídeo',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'el WAV se normaliza a PCM16 mono de 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':

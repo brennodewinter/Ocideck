@@ -1558,6 +1558,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Audio- en videoformaten': 'Formati tal-awdjo u tal-vidjo',
   'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
       'il-WAV jiġi normalizzat għal PCM16 mono ta’ 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
