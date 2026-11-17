@@ -74,7 +74,11 @@ class SpeakerCorrections {
         }
       }
       return SpeakerCorrections(lines, metadata, names);
-    } catch (_) {
+    } on FormatException {
+      return null;
+    } on TypeError {
+      return null;
+    } on RangeError {
       return null;
     }
   }
