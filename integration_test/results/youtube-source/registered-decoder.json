@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "host": "macos-arm64",
+  "binary_sha256": "67c267450ea9aafda20592be1f72dab51f3ab803376617aa12d0bbd423c535f7",
+  "notice_sha256": {
+    "README.md": "f123cbb2ef20f4b6163ffc8ac234eb8f194fd644d596fc7886085da1ce2a5f96",
+    "binary.sha256": "2625cfd035c3652adf745c9fd306cb41d863eec836460a6ea0d57f54bfbb87f5",
+    "build_media_decoder.sh": "208bf2c12ee77da8a467069525894c0bd7bc4e06c9f1223582a29e1905f7a603",
+    "compiler.txt": "b8a2569d699eec50baaf1719096d0801d16fb28fbcb2df7ffd0a07cd26d9fd47",
+    "ffmpeg-9.0.2.tar.xz": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+    "ffmpeg-LGPL-2.1.txt": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30",
+    "license.txt": "a0abd25510978f275a835fce3f90affce1d580efdc7b37edc17b7a57b2e9e9fd",
+    "manifest.json": "2fa256f405ec22b691dca0881d1c16d18f4257323e10f9c80eb59adf667128c4",
+    "version.txt": "970305c024ef9c4190224fc29338ded1674286d3c5e08ce4beb8a9c668dee579"
+  },
+  "version_output": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.4.1.1)\nconfiguration: --disable-everything --disable-autodetect --disable-doc --disable-network --disable-gpl --disable-nonfree --disable-version3 --disable-shared --enable-static --enable-small --disable-programs --enable-ffmpeg --disable-avdevice --disable-swscale --disable-videotoolbox --disable-audiotoolbox --disable-securetransport --disable-asm --disable-debug --disable-iconv --enable-avfilter --enable-swresample --enable-filter='aresample,aformat,anull' --enable-protocol=file --enable-demuxer='matroska,avi,wav,ogg,mp3,mov,flac,aac,aiff,caf,asf' --enable-decoder='aac,aac_fixed,alac,flac,mp3,mp3float,opus,vorbis,wmav1,wmav2,adpcm_ima_wav,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,pcm_u8,pcm_mulaw,pcm_alaw,pcm_s16be,pcm_s24be,pcm_s32be,pcm_f32be,pcm_f64be,pcm_s8' --enable-parser='aac,mpegaudio,opus,vorbis,flac' --enable-encoder=pcm_s16le --enable-muxer=wav --cc=/usr/bin/clang --ld=/usr/bin/clang --extra-cflags='-mmacosx-version-min=12.0' --extra-ldflags='-mmacosx-version-min=12.0' --prefix=/Users/brennodewinter/.codex/worktrees/open-issues-transcription/ocideck/native/media_decoder/build/macos-arm64/install\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+  "system_links": "/private/tmp/ocideck-codec-clean-install \u00fc/OciDeck.app/Contents/Helpers/ffmpeg:\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.40.3)\n\t/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 5027.1.8)\n\t/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo (compatibility version 1.2.0, current version 776.2.0)\n\t/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia (compatibility version 1.0.0, current version 3385.14.5)\n",
+  "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e"
+}

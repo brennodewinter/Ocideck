@@ -1,0 +1,93 @@
+{
+  "scope": "compiled Flutter production web transport probe, not full release UI",
+  "fixture_sha256": "e4e99afbcdd4e018402c1c0c4e70b36c720c12273f83b23e13fdd3c80ab20717",
+  "compiled_js_sha256": "36a347558e97d35502acdf1954c41ff124e3bd2eda089316a06a071afda787c0",
+  "browsers": [
+    {
+      "name": "chromium",
+      "version": "156.0.8078.4",
+      "success": true,
+      "scope": "compiled production source/ASR web clients and document model, not full release UI",
+      "captions": [
+        {
+          "automatic": false,
+          "cues": 466,
+          "caption_sha256": "604400bffbf709a9577a22172c7ad728f42f9f986d29c175d956aafdf8adcd23"
+        },
+        {
+          "automatic": true,
+          "cues": 571,
+          "caption_sha256": "baa4f7770b610a43ed874a697169155d7a02d8003b0cab9b038853cc9478dd4b"
+        }
+      ],
+      "audio_sha256": "e4e99afbcdd4e018402c1c0c4e70b36c720c12273f83b23e13fdd3c80ab20717",
+      "audio_bytes": 800044,
+      "source_offset_ms": 10000,
+      "asr_segments": 4,
+      "segment_times": [
+        {
+          "start_ms": 10000,
+          "end_ms": 16020
+        },
+        {
+          "start_ms": 16360,
+          "end_ms": 24640
+        },
+        {
+          "start_ms": 25580,
+          "end_ms": 31880
+        },
+        {
+          "start_ms": 32280,
+          "end_ms": 34980
+        }
+      ],
+      "document_byte_roundtrip": true,
+      "text_sha256": "cf96991d5cfbdd7001d40e431186c80f6cc1540034e1cbd03423f5698ed376ee",
+      "leased_audio_released": true
+    },
+    {
+      "name": "webkit",
+      "version": "27.2",
+      "success": true,
+      "scope": "compiled production source/ASR web clients and document model, not full release UI",
+      "captions": [
+        {
+          "automatic": false,
+          "cues": 466,
+          "caption_sha256": "604400bffbf709a9577a22172c7ad728f42f9f986d29c175d956aafdf8adcd23"
+        },
+        {
+          "automatic": true,
+          "cues": 571,
+          "caption_sha256": "baa4f7770b610a43ed874a697169155d7a02d8003b0cab9b038853cc9478dd4b"
+        }
+      ],
+      "audio_sha256": "e4e99afbcdd4e018402c1c0c4e70b36c720c12273f83b23e13fdd3c80ab20717",
+      "audio_bytes": 800044,
+      "source_offset_ms": 10000,
+      "asr_segments": 4,
+      "segment_times": [
+        {
+          "start_ms": 10000,
+          "end_ms": 16020
+        },
+        {
+          "start_ms": 16360,
+          "end_ms": 24640
+        },
+        {
+          "start_ms": 25580,
+          "end_ms": 31880
+        },
+        {
+          "start_ms": 32280,
+          "end_ms": 34980
+        }
+      ],
+      "document_byte_roundtrip": true,
+      "text_sha256": "cf96991d5cfbdd7001d40e431186c80f6cc1540034e1cbd03423f5698ed376ee",
+      "leased_audio_released": true
+    }
+  ]
+}

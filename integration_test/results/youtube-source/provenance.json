@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-11-17T13:50:03.595360+00:00",
+  "production_and_probe_revision": "731152af2a880432c15fede314caa8b2909b8b33",
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "macos": "27.0.1"
+  },
+  "operator_manifest": "testbed/youtube-source/runtime_manifest.json",
+  "playwright_version": "1.64.1",
+  "flutter_version": "3.47.9",
+  "dart_version": "3.13.7",
+  "browser_build": "flutter build web --release --no-web-resources-cdn --target testbed/youtube-source/browser_probe.dart",
+  "source_files": {
+    "live_cancel_probe.py": "166aab6b7a160c56dfa1ba61f5d1eb3991ec2900b6e0b85a9c5708c023b62478",
+    "client_probe_test.dart": "b72441e41cc1798e8c3613ca3ac35a0b5520b411b286dc0fd01ed8c5a3b77e6d",
+    "source_runtime.py": "dc61f2725b7ea474123e15f1693427b89e3fb9073cd35dbf3ccfca030a63e9e0",
+    "egress_proxy.py": "8e403dfda35514c5f4c2ac41864f5f1c194ac373d05bdc5381882045dd6e7779",
+    "browser_probe.dart": "7107333ae36b339b8bc37e300352a34089730faa0c693e333e929c3268f09334",
+    "browser_probe.cjs": "a1bf88ea1860eee0de1528437188d177cd4f7086249ade1f59f7634664162cad",
+    "install_runtime.py": "2477136167581737f377a8529c89c6b0e2571d89325086f1ac74f378881ff75f",
+    "runtime_manifest.json": "a61b568e13d3f80500f234361863344902a1189dbb0e2b618a38750340bcfa88",
+    "ui_probe_test.dart": "78b64f4836aca0906c5f7eb127f22b78829477539b5bee2dd91960c03f048a90",
+    "source_server.py": "0339db37a3c32ec89db3979f22db897163dde7afa5ca99f6ba437c139247077b",
+    "register_decoder.py": "400d2f4e37f455b39224b5d13f9ae215838032e47c5c2753bdb1c6612f6a26fc"
+  },
+  "evidence": {
+    "compiled-browsers.json": "bcb1038844694a54ca4ee3036864b80e097ce6e461f72b1961d24ec09e86ec7d",
+    "live-cancellation.json": "354bc844c14a2be0f5937a4f70fd6d81263254ea50ab6761ce84c920c85562ff",
+    "fresh-install.json": "708393eeb17498ae54cfa7c31793243e35e2f6c00ce4edf89bd66b43e380863a",
+    "native-widgets.json": "12f2af6624228e66b84b97cb875160e4b52bd2545076645b9e6826e293e32863",
+    "native-client.json": "f18688a611b5770d814ea44a35afcba5279d85a4b2138dcfc139df98b7aad865",
+    "registered-decoder.json": "54082fd739ff086cb8d0ac6c7e2dab7025accb2fea7da7099cb79f3a16c3d9b7",
+    "provider-availability.json": "32a7f5208d878c9c343e825bba652bdae9df150b3e4c1d3c3dfd36c57ce736bd"
+  }
+}
