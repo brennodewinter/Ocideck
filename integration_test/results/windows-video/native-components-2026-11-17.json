@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "source_commit": "deb9d9a4a788f201881243b47c1180691c318c88",
+    "run": "https://github.com/brennodewinter/Ocideck/actions/runs/44026465349",
+    "artifact_id": 14303542073,
+    "artifact_sha256": "d95ed45127c58fdf547089789d1a4d6f200eaa577b2da010f89f151e16dadc6c",
+    "scope": "Autoplay environment isolation and physical cross-origin key routing passed; public YouTube fixture returned provider error 150, so this is NOT native YouTube playback proof"
+  },
+  "runtime": {
+    "installer_sha256": "D3CBE8FEDB104282D745FFF106993EFEAD51AE94F5595A4E75804446A974F9C3",
+    "versions": [
+      "157.0.4341.60"
+    ]
+  },
+  "report": {
+    "windows": "\"Windows Server 2022 Datacenter\" 10.0 (Build 20348)",
+    "policyIsolation": {
+      "ordinary-before": "blocked:NotAllowedError",
+      "video": "playing",
+      "ordinary-after": "blocked:NotAllowedError"
+    },
+    "policyDocuments": {
+      "ordinary-before": {
+        "outcome": "blocked:NotAllowedError",
+        "messages": [
+          "child-ready",
+          "blocked:NotAllowedError"
+        ],
+        "document": {
+          "activeElement": "BODY",
+          "activeId": "",
+          "focus": false,
+          "height": 681,
+          "visibility": "visible",
+          "width": 1028
+        }
+      },
+      "video": {
+        "outcome": "playing",
+        "messages": [
+          "child-ready",
+          "playing"
+        ],
+        "document": {
+          "activeElement": "BODY",
+          "activeId": "",
+          "focus": false,
+          "height": 681,
+          "visibility": "visible",
+          "width": 1028
+        }
+      },
+      "ordinary-after": {
+        "outcome": "blocked:NotAllowedError",
+        "messages": [
+          "child-ready",
+          "blocked:NotAllowedError"
+        ],
+        "document": {
+          "activeElement": "BODY",
+          "activeId": "",
+          "focus": false,
+          "height": 681,
+          "visibility": "visible",
+          "width": 1028
+        }
+      }
+    },
+    "autoplayEnvironment": true,
+    "livePlayer": {
+      "ended": false,
+      "events": [
+        {
+          "code": null,
+          "duration": 1344,
+          "error": null,
+          "event": "initialDelivery",
+          "playable": true,
+          "state": 3,
+          "time": 0,
+          "videoId": "M7lc1UVf-VE"
+        },
+        {
+          "code": null,
+          "event": "onReady"
+        },
+        {
+          "code": null,
+          "duration": 1344,
+          "error": null,
+          "event": "infoDelivery",
+          "playable": true,
+          "state": -1,
+          "time": 10,
+          "videoId": "M7lc1UVf-VE"
+        },
+        {
+          "code": -1,
+          "event": "onStateChange"
+        },
+        {
+          "code": null,
+          "event": "alreadyInitialized"
+        },
+        {
+          "code": null,
+          "event": "alreadyInitialized"
+        },
+        {
+          "code": null,
+          "event": "infoDelivery"
+        },
+        {
+          "code": 150,
+          "event": "onError"
+        },
+        {
+          "code": null,
+          "event": "infoDelivery"
+        }
+      ],
+      "focus": false,
+      "framePath": "/embed/M7lc1UVf-VE",
+      "hasPlayed": false,
+      "height": 450,
+      "playing": false,
+      "position": 10000,
+      "ready": true,
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+      "visibility": "visible",
+      "width": 800
+    },
+    "liveWin32Focus": {
+      "foregroundProcess": 7644,
+      "focusClass": "FLUTTERVIEW",
+      "flags": 0
+    },
+    "diagnostics": [
+      "2026-11-17T05:55:07.614005 INFO Video embed playback:requested\n",
+      "2026-11-17T05:55:13.614905 INFO Video embed playback:waiting\n"
+    ],
+    "userAgent": "\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0\"",
+    "keyDocument": {
+      "activeElement": "IFRAME",
+      "activeId": "f",
+      "focus": true,
+      "height": 681,
+      "visibility": "visible",
+      "width": 1028
+    },
+    "foregroundProcess": 7644,
+    "appProcess": 7644,
+    "nativeFocus": {
+      "events": [
+        39,
+        37,
+        33,
+        34,
+        27
+      ],
+      "childMessages": [
+        "key:ArrowRight"
+      ],
+      "input": [
+        {
+          "key": 39,
+          "osDown": true,
+          "focus": {
+            "foregroundProcess": 7644,
+            "focusClass": "Chrome_WidgetWin_1",
+            "flags": 0
+          }
+        },
+        {
+          "key": 37,
+          "osDown": true,
+          "focus": {
+            "foregroundProcess": 7644,
+            "focusClass": "Chrome_WidgetWin_1",
+            "flags": 0
+          }
+        },
+        {
+          "key": 33,
+          "osDown": true,
+          "focus": {
+            "foregroundProcess": 7644,
+            "focusClass": "Chrome_WidgetWin_1",
+            "flags": 0
+          }
+        },
+        {
+          "key": 34,
+          "osDown": true,
+          "focus": {
+            "foregroundProcess": 7644,
+            "focusClass": "Chrome_WidgetWin_1",
+            "flags": 0
+          }
+        },
+        {
+          "key": 27,
+          "osDown": true,
+          "focus": {
+            "foregroundProcess": 7644,
+            "focusClass": "Chrome_WidgetWin_1",
+            "flags": 0
+          }
+        },
+        {
+          "key": 39,
+          "osDown": true,
+          "focus": {
+            "foregroundProcess": 7644,
+            "focusClass": "Chrome_WidgetWin_1",
+            "flags": 0
+          }
+        }
+      ],
+      "win32": {
+        "foregroundProcess": 7644,
+        "focusClass": "FLUTTERVIEW",
+        "flags": 0
+      }
+    },
+    "keyProfile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\ocideck-key-profile-75d685f8"
+  }
+}

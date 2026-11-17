@@ -1,0 +1,211 @@
+{
+  "scope": "Supplemental production player-literal browser probe with fixed values, not a native app or Windows proof; autoplay and advancing position, not clip-end measurement",
+  "browser": "156.0.8078.4",
+  "video_id": "M7lc1UVf-VE",
+  "start_ms": 10000,
+  "end_ms": 30000,
+  "protocol_sha256": "9a72a575716a8c6a270afc7d874dc4077c25df49d619d6f068fe6e9f12d7c9ca",
+  "events": [
+    {
+      "message": "1|playback:requested"
+    },
+    {
+      "message": "1|ok"
+    },
+    {
+      "message": "1|pos:10000"
+    },
+    {
+      "message": "1|pos:10000"
+    },
+    {
+      "event": "onStateChange",
+      "value": -1
+    },
+    {
+      "message": "1|pos:10000"
+    },
+    {
+      "message": "1|pos:10000"
+    },
+    {
+      "event": "onStateChange",
+      "value": 3
+    },
+    {
+      "message": "1|playback:playing"
+    },
+    {
+      "message": "1|pos:10010"
+    },
+    {
+      "event": "onStateChange",
+      "value": 1
+    },
+    {
+      "message": "1|pos:10160"
+    },
+    {
+      "message": "1|pos:10425"
+    },
+    {
+      "message": "1|pos:10693"
+    },
+    {
+      "message": "1|pos:10957"
+    },
+    {
+      "message": "1|pos:11220"
+    },
+    {
+      "message": "1|pos:11493"
+    },
+    {
+      "message": "1|pos:11754"
+    },
+    {
+      "message": "1|pos:12017"
+    },
+    {
+      "message": "1|pos:12284"
+    },
+    {
+      "message": "1|pos:12550"
+    },
+    {
+      "message": "1|pos:12818"
+    },
+    {
+      "message": "1|pos:13079"
+    },
+    {
+      "message": "1|pos:13346"
+    },
+    {
+      "message": "1|pos:13616"
+    },
+    {
+      "message": "1|pos:13877"
+    },
+    {
+      "message": "1|pos:14143"
+    },
+    {
+      "message": "1|pos:14409"
+    },
+    {
+      "message": "1|pos:14674"
+    },
+    {
+      "message": "1|pos:14943"
+    },
+    {
+      "message": "1|pos:15207"
+    },
+    {
+      "message": "1|pos:15471"
+    },
+    {
+      "message": "1|pos:15743"
+    },
+    {
+      "message": "1|pos:16003"
+    },
+    {
+      "message": "1|pos:16267"
+    },
+    {
+      "message": "1|pos:16533"
+    },
+    {
+      "message": "1|pos:16799"
+    },
+    {
+      "message": "1|pos:17068"
+    },
+    {
+      "message": "1|pos:17330"
+    },
+    {
+      "message": "1|pos:17596"
+    },
+    {
+      "message": "1|pos:17867"
+    },
+    {
+      "message": "1|pos:18128"
+    },
+    {
+      "message": "1|pos:18393"
+    },
+    {
+      "message": "1|pos:18659"
+    },
+    {
+      "message": "1|pos:18924"
+    },
+    {
+      "message": "1|pos:19191"
+    },
+    {
+      "message": "1|pos:19455"
+    },
+    {
+      "message": "1|pos:19720"
+    },
+    {
+      "message": "1|pos:19993"
+    },
+    {
+      "message": "1|pos:20251"
+    },
+    {
+      "message": "1|pos:20517"
+    },
+    {
+      "message": "1|pos:20785"
+    },
+    {
+      "message": "1|pos:21048"
+    },
+    {
+      "message": "1|pos:21318"
+    },
+    {
+      "message": "1|pos:21580"
+    },
+    {
+      "message": "1|pos:21847"
+    },
+    {
+      "message": "1|pos:22117"
+    },
+    {
+      "message": "1|pos:22378"
+    },
+    {
+      "message": "1|pos:22643"
+    },
+    {
+      "message": "1|pos:22910"
+    },
+    {
+      "message": "1|pos:23175"
+    },
+    {
+      "message": "1|pos:23443"
+    },
+    {
+      "message": "1|pos:23707"
+    },
+    {
+      "message": "1|pos:23971"
+    },
+    {
+      "message": "1|pos:24243"
+    },
+    {
+      "message": "1|pos:24503"
+    }
+  ]
+}
