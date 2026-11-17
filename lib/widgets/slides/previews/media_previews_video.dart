@@ -67,7 +67,8 @@ class _VideoPreviewState extends State<_VideoPreview>
   @override
   void didUpdateWidget(_VideoPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.slide.videoPath != widget.slide.videoPath ||
+    if (oldWidget.slide.id != widget.slide.id ||
+        oldWidget.slide.videoPath != widget.slide.videoPath ||
         oldWidget.slide.videoStartMs != widget.slide.videoStartMs ||
         oldWidget.slide.videoEndMs != widget.slide.videoEndMs ||
         oldWidget.slide.videoCaptions != widget.slide.videoCaptions ||
@@ -422,6 +423,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   void didUpdateWidget(_VideoEmbedPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
     final changed =
+        oldWidget.slide.id != widget.slide.id ||
         oldWidget.slide.videoPath != widget.slide.videoPath ||
         oldWidget.slide.videoStartMs != widget.slide.videoStartMs ||
         oldWidget.slide.videoEndMs != widget.slide.videoEndMs ||

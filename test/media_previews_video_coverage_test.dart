@@ -861,6 +861,39 @@ void main() {
   );
 
   testWidgets(
+    'same slide rebuild keeps playback, next slide with same media reloads once',
+    (tester) async {
+      final first = _video(
+        path: 'https://youtu.be/dQw4w9WgXcQ',
+        autoplay: true,
+      );
+      await tester.pumpWidget(
+        _host(first, allowRemoteMedia: true, autoplayMedia: true),
+      );
+      await tester.pump();
+      final controller = fakeWeb.lastController!;
+      final generation = controller.generation;
+      await tester.pumpWidget(
+        _host(
+          first.copyWith(title: 'Title edit'),
+          allowRemoteMedia: true,
+          autoplayMedia: true,
+        ),
+      );
+      await tester.pump();
+      expect(controller.generation, generation);
+      final next = _video(path: first.videoPath, autoplay: true);
+      expect(next.id, isNot(first.id));
+      await tester.pumpWidget(
+        _host(next, allowRemoteMedia: true, autoplayMedia: true),
+      );
+      await tester.pump();
+      expect(fakeWeb.lastController, same(controller));
+      expect(controller.generation, generation + 1);
+    },
+  );
+
+  testWidgets(
     'a previous embed generation cannot complete the replacement clip',
     (tester) async {
       var completed = 0;
