@@ -16,6 +16,7 @@ import 'package:ocideck/services/transcription/asr_audio_source.dart';
 import 'package:ocideck/services/transcription/asr_server_engine.dart';
 import 'package:ocideck/services/transcription/asr_transport.dart';
 import 'package:ocideck/services/transcription/transcription_engine.dart';
+import 'package:ocideck/services/transcription/transcription_errors.dart';
 
 void main() {
   test(
@@ -91,7 +92,7 @@ void main() {
             reference: reference,
             title: meta.title,
           );
-          final markdown = mediaTranscriptMarkdown(
+          String createDocument() => mediaTranscriptMarkdown(
             origin: origin,
             segments: parsed,
             methodLabel: automatic ? 'Automatic captions' : 'Manual captions',
@@ -150,7 +151,7 @@ void main() {
             ),
           );
           if (id != 'aqz-KE-bpKQ') expect(result.segments, isNotEmpty);
-          final markdown = mediaTranscriptMarkdown(
+          String createDocument() => mediaTranscriptMarkdown(
             origin: YoutubeTranscriptOrigin(
               reference: reference,
               title: meta.title,
@@ -163,8 +164,13 @@ void main() {
             audioOffset: audio.sourceOffset,
             language: 'en',
           );
-          await roundtrip(markdown);
-          expect(markdown, contains('https://www.youtube.com/watch?v=$id'));
+          if (result.segments.isEmpty) {
+            expect(createDocument, throwsA(isA<SourceUnavailable>()));
+          } else {
+            final markdown = createDocument();
+            await roundtrip(markdown);
+            expect(markdown, contains('https://www.youtube.com/watch?v=$id'));
+          }
           (report['audio'] as List).add({
             'video_id': id,
             'start_ms': start,
@@ -173,6 +179,7 @@ void main() {
             'audio_sha256': sha256.convert(audio.bytes).toString(),
             'audio_bytes': audio.bytes.length,
             'asr_segments': result.segments.length,
+            'no_speech_document_refused': result.segments.isEmpty,
             'text_sha256': sha256
                 .convert(
                   utf8.encode(result.segments.map((s) => s.text).join('\n')),
@@ -186,7 +193,7 @@ void main() {
                 },
             ],
             'elapsed_ms': watch.elapsedMilliseconds,
-            'edit_save_reopen': true,
+            'edit_save_reopen': result.segments.isNotEmpty,
           });
         } finally {
           await staged.release();
