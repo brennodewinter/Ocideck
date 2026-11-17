@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:uuid/uuid.dart';
 import '../utils/content_hash.dart';
+import '../utils/log.dart';
 
 const _uuid = Uuid();
 
@@ -25,6 +26,42 @@ class WebAssetBudgetExceeded implements Exception {
   String toString() =>
       'WebAssetBudgetExceeded(used: $usedBytes, requested: $requestedBytes, '
       'maximum: $maximumBytes)';
+}
+
+/// Een expliciete eigenaar van tijdelijke webassets, los van tabbladen.
+/// Vrijgeven is idempotent; deduplicatie deelt bytes, nooit eigendom.
+class WebAssetLease {
+  WebAssetLease._(Iterable<String> paths) {
+    for (final path in paths) {
+      add(path);
+    }
+  }
+
+  final Set<String> _paths = {};
+  bool _released = false;
+
+  void add(String path) {
+    if (_released) throw StateError('webassetlease is al vrijgegeven');
+    if (!WebAssetStore.isMemPath(path) || !_paths.add(path)) return;
+    WebAssetStore._pins.update(path, (count) => count + 1, ifAbsent: () => 1);
+  }
+
+  void release() {
+    if (_released) return;
+    _released = true;
+    var becameUnowned = false;
+    for (final path in _paths) {
+      final count = WebAssetStore._pins[path] ?? 0;
+      if (count <= 1) {
+        WebAssetStore._pins.remove(path);
+        becameUnowned = true;
+      } else {
+        WebAssetStore._pins[path] = count - 1;
+      }
+    }
+    _paths.clear();
+    if (becameUnowned) WebAssetStore.collectGarbage();
+  }
 }
 
 /// In-memory opslag voor afbeeldingen in de webversie.
@@ -55,6 +92,21 @@ class WebAssetStore {
   static int _totalBytes = 0;
   static int? _totalBudgetOverride;
   static final List<Set<String>> _atomicScopes = [];
+  static final Map<String, int> _pins = {};
+  static final Map<Object, Set<String> Function()> _rootCollectors = {};
+
+  static WebAssetLease lease(Iterable<String> paths) => WebAssetLease._(paths);
+
+  /// De tablaag registreert actuele wortels; de store importeert geen state/UI.
+  /// Meerdere scopes houden elk hun eigen registratie en verwijderfunctie.
+  static void Function() registerRoots(Set<String> Function() collect) {
+    final token = Object();
+    _rootCollectors[token] = collect;
+    return () => _rootCollectors.remove(token);
+  }
+
+  /// Alleen met geregistreerde wortels is gerichte taakcleanup veilig.
+  static int collectGarbage() => _rootCollectors.isEmpty ? 0 : retain({});
 
   static bool isMemPath(String path) => path.startsWith(scheme);
 
@@ -152,7 +204,17 @@ class WebAssetStore {
   /// of op het diaklembord. De aanroeper ([TabsNotifier.sweepWebAssets]) stelt
   /// die verzameling samen; hier vertrouwen we erop dat hij volledig is.
   static int retain(Set<String> live) {
-    final dood = _bytes.keys.where((k) => !live.contains(k)).toList();
+    final roots = {...live, ..._pins.keys};
+    try {
+      for (final collect in _rootCollectors.values.toList()) {
+        roots.addAll(collect());
+      }
+    } on Object catch (error, stack) {
+      // Bij een onvolledig plaatje liever niet wissen dan levende audio verliezen.
+      logError('WebAssetStore: levende wortels verzamelen', error, stack);
+      return 0;
+    }
+    final dood = _bytes.keys.where((k) => !roots.contains(k)).toList();
     for (final k in dood) {
       _remove(k);
     }
@@ -227,6 +289,7 @@ class WebAssetStore {
     _pathsForHash.clear();
     _totalBytes = 0;
     _atomicScopes.clear();
+    _pins.clear();
   }
 
   /// Verlaag het budget voor snelle grensgevallen zonder honderden MiB te

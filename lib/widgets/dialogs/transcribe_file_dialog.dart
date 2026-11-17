@@ -24,6 +24,8 @@ import '../../l10n/app_localizations.dart';
 import '../../meetings/call_audio_manifest.dart';
 import '../../meetings/call_recording.dart';
 import '../../services/transcription/capture_source.dart';
+import '../../services/transcription/recording_staging.dart';
+import '../../services/web_asset_store.dart';
 import '../../services/transcription/file_capture_source.dart';
 import '../../services/transcription/local_whisper_engine.dart';
 import '../../services/transcription/media_sniff.dart';
@@ -35,6 +37,29 @@ import '../../state/transcription_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/file_extension.dart';
 import 'settings_dialog.dart';
+
+/// Houd de bron al vast tussen het openen van de route en initState.
+Future<void> showTranscribeFileDialog(
+  BuildContext context, {
+  required String sourcePath,
+  required String displayName,
+}) async {
+  final lease = WebAssetStore.lease([
+    sourcePath,
+    ?WebAssetStore.pathForName('$sourcePath.sources.json'),
+  ]);
+  try {
+    await showDialog<void>(
+      context: context,
+      builder: (_) => TranscribeFileDialog(
+        sourcePath: sourcePath,
+        displayName: displayName,
+      ),
+    );
+  } finally {
+    lease.release();
+  }
+}
 
 /// De fasen van de flow — één toestand, nooit twee schermen tegelijk.
 enum _Phase {
@@ -83,6 +108,11 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   FileCaptureSession? _session;
   TranscriptionEngine? _engine;
   String? _stagingDir;
+  RecordingStaging? _stagingOwner;
+  WebAssetLease? _sourceLease;
+  bool _taskRunning = false;
+  bool _cancelRequested = false;
+  bool _disposed = false;
 
   /// Herkomst van een callopname (#2530): ligt de duurzame wav in een
   /// sessiemap met `sources.json`, dan is dit geen "bestand" maar een
@@ -104,6 +134,10 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   @override
   void initState() {
     super.initState();
+    _sourceLease = WebAssetStore.lease([
+      widget.sourcePath,
+      ?WebAssetStore.pathForName('${widget.sourcePath}.sources.json'),
+    ]);
     _describe();
   }
 
@@ -165,16 +199,21 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
       return;
     }
     _engine = engine;
+    _cancelRequested = false;
+    _taskRunning = true;
+    RecordedAudio? audio;
     setState(() {
       _phase = _Phase.running;
       _decoding = !_info!.engineReadsDirectly;
       _progress = null;
     });
     try {
+      _stagingOwner = ref.read(recordingStagingProvider);
       final stagingDir = kIsWeb
           ? null
-          : await ref.read(recordingStagingProvider).createSessionDir();
+          : await _stagingOwner!.createSessionDir();
       _stagingDir = stagingDir;
+      _checkTaskActive();
       final session = await _fileSource().start(
         CaptureRequest(
           kinds: const {CaptureSourceKind.file},
@@ -186,7 +225,12 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
         ),
       );
       _session = session;
-      final audio = await session.stop();
+      if (_cancelRequested || !mounted) {
+        session.cancel();
+        _checkTaskActive();
+      }
+      audio = await session.stop();
+      _checkTaskActive();
       if (mounted) setState(() => _decoding = false);
 
       // De toestemming noemt host én bestand — de dialoog toonde beide en
@@ -207,6 +251,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
         options,
       );
 
+      _checkTaskActive();
       final body = formatTranscriptBody(result.segments);
       if (body.trim().isEmpty) {
         await _discardStaging();
@@ -230,7 +275,25 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
           _phase = _Phase.failed;
         });
       }
+    } finally {
+      audio?.releaseAssets();
+      _taskRunning = false;
+      if (_disposed) _sourceLease?.release();
     }
+  }
+
+  void _checkTaskActive() {
+    if (_cancelRequested || !mounted) {
+      throw const Cancelled('transcriptietaak gesloten');
+    }
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _stop();
+    if (!_taskRunning) _sourceLease?.release();
+    super.dispose();
   }
 
   /// De gedecodeerde WAV in staging is een tussenstap — de audio die de
@@ -240,7 +303,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     _stagingDir = null;
     if (dir == null) return;
     try {
-      await ref.read(recordingStagingProvider).discardDir(dir);
+      await _stagingOwner?.discardDir(dir);
     } on Object {
       // Opruimhulp mag de uitkomst nooit overschrijven.
     }
@@ -251,6 +314,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     Duration duration,
     TranscriptionEngine engine,
   ) async {
+    _checkTaskActive();
     final l10n = context.l10n;
     final title = stemOfFileName(widget.displayName);
     final call = _callManifest != null;
@@ -280,6 +344,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
       formatTranscriptBody(result.segments),
     );
     await _discardStaging();
+    _checkTaskActive();
     ref
         .read(tabsProvider.notifier)
         .newDocumentFromMarkdown(
@@ -302,6 +367,7 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   }
 
   void _stop() {
+    _cancelRequested = true;
     _session?.cancel();
     // De instantie die de run drijft — niet een vers gelezen die de
     // provider na een route- of modelwissel eventueel opnieuw bouwde.
@@ -315,22 +381,27 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     final route = ref.watch(transcriptionRouteProvider);
     final isServer = route == 'server' && profile.isConfigured;
     final engine = ref.watch(transcriptionEngineProvider);
-    return AlertDialog(
-      title: Text(l10n.d('Audio of video transcriberen')),
-      content: SizedBox(
-        width: 520,
-        child: switch (_phase) {
-          _Phase.ready => _readyContent(
-            l10n,
-            isServer,
-            profile.host,
-            engineAvailable: engine != null,
-          ),
-          _Phase.running => _runningContent(l10n),
-          _Phase.failed => _failedContent(l10n),
-        },
+    return PopScope<void>(
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) _stop();
+      },
+      child: AlertDialog(
+        title: Text(l10n.d('Audio of video transcriberen')),
+        content: SizedBox(
+          width: 520,
+          child: switch (_phase) {
+            _Phase.ready => _readyContent(
+              l10n,
+              isServer,
+              profile.host,
+              engineAvailable: engine != null,
+            ),
+            _Phase.running => _runningContent(l10n),
+            _Phase.failed => _failedContent(l10n),
+          },
+        ),
+        actions: _actions(l10n, isServer, engineAvailable: engine != null),
       ),
-      actions: _actions(l10n, isServer, engineAvailable: engine != null),
     );
   }
 

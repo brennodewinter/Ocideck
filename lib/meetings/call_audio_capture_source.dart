@@ -401,6 +401,7 @@ class _CallAudioSession implements CaptureSession {
         }
       }
     }
+    WebAssetLease? webLease;
     final mixWav = _mixWav;
     if (mixWav != null) {
       try {
@@ -415,16 +416,17 @@ class _CallAudioSession implements CaptureSession {
       // als tweede asset. Loopt het budget over, dan is dat een getypte
       // fout en geen stille leegte.
       try {
-        _storedPath = WebAssetStore.put(
-          _wavBytes(_mixMem.takeBytes()),
-          name: 'call.wav',
-        );
-        // De naam koppelt het manifest aan díe wav-sleutel, zodat de
-        // transcriptiepass het bij `readCallSources(wavPad)` terugvindt.
-        WebAssetStore.put(
-          utf8.encode(_manifestJson()),
-          name: '$_storedPath.sources.json',
-        );
+        WebAssetStore.atomic(() {
+          _storedPath = WebAssetStore.put(
+            _wavBytes(_mixMem.takeBytes()),
+            name: 'call.wav',
+          );
+          final sidecar = WebAssetStore.put(
+            utf8.encode(_manifestJson()),
+            name: '$_storedPath.sources.json',
+          );
+          webLease = WebAssetStore.lease([_storedPath, sidecar]);
+        });
       } on WebAssetBudgetExceeded {
         throw const CapacityExceeded(
           'de opname past niet in het browsergeheugen',
@@ -435,6 +437,7 @@ class _CallAudioSession implements CaptureSession {
     if (!_liveOut.isClosed) await _liveOut.close();
     final duration = mixWav?.duration ?? _emitted;
     return RecordedAudio(
+      onRelease: webLease?.release,
       durablePath: _storedPath,
       duration: duration,
       kinds: {CaptureSourceKind.callAudio},

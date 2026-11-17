@@ -1542,6 +1542,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
+      'Unduh rekaman ini untuk menyimpannya. Audio akan hilang saat jendela atau tab ini ditutup.',
   'de WAV is geen 16-bit PCM — decode nodig':
       'WAV bukan PCM 16-bit — perlu didekode',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':

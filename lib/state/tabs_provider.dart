@@ -125,6 +125,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final DuplicateService _duplicates = DuplicateService();
   Timer? _autosaveTimer;
   int _nextId = 0;
+  late final void Function() _unregisterMemoryRoots;
 
   /// State voor part-extensies; `state` zelf is protected binnen deze klasse.
   TabsState get currentState => state;
@@ -148,23 +149,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Op desktop is de store leeg (afbeeldingen staan op schijf), dus dan haakt
   /// hij meteen af.
   void sweepWebAssets() {
-    if (WebAssetStore.isEmpty) return;
-    final live = <String>{};
-    for (final tab in state.tabs) {
-      final dn = tab.deckNotifierOrNull;
-      if (dn != null && dn.mounted) {
-        dn.collectLiveMemoryAssetPaths(live);
-        continue;
-      }
-      // Documenttabbladen kennen sinds #2120 óók mem:-assets: de import legt
-      // afbeeldingen in de store totdat een opslag ze naar schijf schrijft.
-      final doc = tab.documentNotifier;
-      if (doc != null && doc.mounted) doc.collectLiveMemoryAssetPaths(live);
-    }
-    final clipboard = _ref.read(slideClipboardProvider);
-    if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
-    addOpenStyleMemoryPaths(_ref.read(settingsProvider).themeProfiles, live);
-    WebAssetStore.retain(live);
+    if (!mounted || WebAssetStore.isEmpty) return;
+    WebAssetStore.retain(_liveWebAssets(this));
   }
 
   /// UI-callback die het wachtwoord van een versleuteld pakket ophaalt.
@@ -187,6 +173,9 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Start with one empty tab
     final tab = _createTab();
     state = TabsState(tabs: [tab], selectedIndex: 0);
+    _unregisterMemoryRoots = WebAssetStore.registerRoots(
+      () => _liveWebAssets(this),
+    );
     // #1953: een schrijffout naar de herstelmap mag niet stil blijven. De
     // eerste fout in een sessie meldt zich één keer in de UI.
     _recovery.onWriteError = (_) {
@@ -204,6 +193,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   @override
   void dispose() {
+    _unregisterMemoryRoots();
     _autosaveTimer?.cancel();
     _cancelAllLearningExpiry(this);
     for (final sub in _subs.values) {
@@ -813,6 +803,29 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   /// Sluit een tabblad en ruim daarna alle niet meer gebruikte webassets op.
   void closeTab(int index) => _closeTab(this, index);
+}
+
+Set<String> _liveWebAssets(TabsNotifier notifier) {
+  if (!notifier.mounted) return {};
+  final live = <String>{};
+  for (final tab in notifier.currentState.tabs) {
+    final dn = tab.deckNotifierOrNull;
+    if (dn != null && dn.mounted) {
+      dn.collectLiveMemoryAssetPaths(live);
+      continue;
+    }
+    // Documenttabbladen kennen sinds #2120 óók mem:-assets: de import legt
+    // afbeeldingen in de store totdat een opslag ze naar schijf schrijft.
+    final doc = tab.documentNotifier;
+    if (doc != null && doc.mounted) doc.collectLiveMemoryAssetPaths(live);
+  }
+  final clipboard = notifier._ref.read(slideClipboardProvider);
+  if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
+  addOpenStyleMemoryPaths(
+    notifier._ref.read(settingsProvider).themeProfiles,
+    live,
+  );
+  return live;
 }
 
 void _selectTab(TabsNotifier notifier, int index) {

@@ -292,16 +292,19 @@ maps them; a label the engine cannot support is absent, never guessed.
   put it) and the keep-choice on save decides whether a copy is moved into
   `media/`. A transcript that references audio outside its own folder is
   never written — containment would make it a lie on every other machine.
-- **Web.** There is no project folder in the browser build; recorded audio
-  lives in the `mem:` asset store (`WebAssetStore`, 256 MiB app-wide budget —
-  a real constraint: a long WAV recording does not fit, so web recording
-  either stores a compressed container or caps recording length honestly,
-  decided by #2513/#2517's proof, not by this document's optimism). Saving the
-  transcript offers **two downloads**: the `.md` and the audio file; the
-  `.md`'s `media/` reference is honest about expecting the audio to be placed
-  beside it on a real filesystem. Reloading the page without downloading loses
-  the audio — the save flow says so before it happens, the same warning an
-  unsaved `mem:` image already gets.
+- **Web.** There is no project folder or seven-day recording archive.
+  Audio and call sidecars live in `WebAssetStore` within its 256 MiB encoded-byte
+  budget. Explicit leases protect preview sources, decode results and completed
+  recordings; tab/document/undo/clipboard/style roots and all other leases
+  participate in collection. Releasing one task never deletes shared bytes
+  still owned elsewhere. A closed transcription dialog cancels its task but
+  retains its source until outstanding work has settled, then frees temporary
+  bytes. The finished-recording dialog offers a user-triggered audio download
+  (one ZIP with `sources.json` for calls) and keeps the dialog open: offering a
+  browser download cannot prove it reached disk. Discard/close releases the
+  temporary recording. The web transcript contains no invented `media/` link;
+  its Markdown save is separate from the explicit audio download. Reloading
+  loses memory; disabling/cancelling a recording does not create a recovery copy.
 
 ### 3.3 Round-trip and migration requirements (acceptance as requirements)
 

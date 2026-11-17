@@ -31,10 +31,12 @@ standalone recording or transcription session. See [USER_GUIDE.md](USER_GUIDE.md
    audio…*, *Record microphone and system audio…*, *Record tab audio…*
    (browser-dependent), *Transcribe file…* for an existing file, or
    *Opnemen en transcriberen* in the call rail during a connected call.
-   Stopping offers the same three choices everywhere: transcribe now,
-   keep for seven days, or discard. The transcript is an ordinary,
-   editable Markdown document; the audio travels in the project's
-   `media/` folder.
+   On desktop, stopping offers transcribe now, keep for seven days, or
+   discard. On web, choose transcribe now, download the audio, or discard:
+   there is no seven-day browser recording archive. Download before closing
+   the recording window if you want to keep the audio. The transcript is an
+   ordinary, editable Markdown document; on desktop, retained audio travels
+   in the project's `media/` folder.
 
 Recording other people — in a room or in a call — can require their
 consent, and a meeting deployment may set its own recording policy. The
@@ -196,9 +198,14 @@ is not a claim that platform-level WebSocket buffering is bounded by OciDeck.
   days and many Linux systems on every restart, before the seven days
   are up. *(Corrected 2026-11-03, #2761: until then the staging sat in
   the temporary folder, and this line counted the days from *keep*.)*
-  On web there is no folder:
-  recording and manifest stay in the tab as `mem:` assets and a reload
-  loses them — the save flow warns before that happens.
+  On web there is no folder or seven-day retention. Recording and manifest
+  are temporary `mem:` assets, protected while a preview or transcription
+  task owns them. The finished-recording dialog offers an explicit audio
+  download (one ZIP when a call manifest accompanies it). The offer is not
+  confirmation that the browser saved the file; the dialog stays open.
+  Closing/discarding releases unreferenced audio, while document references
+  or another active task keep shared bytes alive. Reloading loses all such
+  memory. A cancelled/disabled recording has no browser recovery archive.
 - **Call provenance** rides along as `sources.json` next to the
   recording (as a `mem:` asset on web): which sources fed the mix, how
   much of each arrived, and how much went missing. A transcript names
@@ -251,9 +258,10 @@ dialog names it rather than pretending success:
 - **No record button in a call** — the platform reports no per-source
   call-audio tap. That is an honest absence, not a hidden switch.
 
-The staged seven-day folder is also the recovery path: a recording that
-outlived its dialog can still be transcribed or deleted from the staged
-list.
+On desktop the staged seven-day folder is also the recovery path: a
+recording that outlived its dialog can still be transcribed or deleted from
+the staged list. Browser recordings must be downloaded explicitly; closing
+their window or reloading does not create a recovery copy.
 
 ## Native helper on Windows and Linux
 

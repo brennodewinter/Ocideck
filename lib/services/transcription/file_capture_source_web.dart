@@ -122,9 +122,12 @@ class WebFileCaptureSource extends FileCaptureSource {
 }
 
 class WebFileCaptureSession extends FileCaptureSession {
-  WebFileCaptureSession._(this._info) : durablePath = _info.path;
+  WebFileCaptureSession._(this._info)
+    : durablePath = _info.path,
+      _lease = WebAssetStore.lease([_info.path]);
 
   final FileSourceInfo _info;
+  final WebAssetLease _lease;
 
   Future<RecordedAudio>? _stopping;
   var _cancelled = false;
@@ -144,18 +147,34 @@ class WebFileCaptureSession extends FileCaptureSession {
   /// `decodeAudioData` is niet af te breken; de vlag laat [stop] ná de
   /// decode alsnog in [Cancelled] eindigen, vóór de engine draait.
   @override
-  void cancel() => _cancelled = true;
+  void cancel() {
+    _cancelled = true;
+    if (_stopping == null) _lease.release();
+  }
 
   @override
   Future<RecordedAudio> stop() => _stopping ??= _run();
 
   Future<RecordedAudio> _run() async {
+    var handedOff = false;
+    try {
+      final audio = await _decode();
+      if (_cancelled) throw const Cancelled('de taak is afgebroken');
+      handedOff = true;
+      return audio;
+    } finally {
+      if (!handedOff) _lease.release();
+    }
+  }
+
+  Future<RecordedAudio> _decode() async {
     if (_cancelled) throw const Cancelled('de taak is afgebroken');
     if (_info.engineReadsDirectly) {
       return RecordedAudio(
         durablePath: durablePath,
         duration: _info.duration ?? Duration.zero,
         kinds: const {CaptureSourceKind.file},
+        onRelease: _lease.release,
       );
     }
     final bridge = _bridge;
@@ -204,11 +223,13 @@ class WebFileCaptureSession extends FileCaptureSession {
         'de gedecodeerde audio past niet in het geheugenbudget',
       );
     }
+    _lease.add(key);
     durablePath = key;
     return RecordedAudio(
       durablePath: key,
       duration: Duration(microseconds: (pcm.length / 16000 * 1e6).round()),
       kinds: const {CaptureSourceKind.file},
+      onRelease: _lease.release,
     );
   }
 }
