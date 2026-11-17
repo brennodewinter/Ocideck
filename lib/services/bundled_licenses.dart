@@ -113,9 +113,14 @@ abstract final class BundledLicenses {
     BundledLicense(
       component: 'YuNet face-detection model',
       license: 'MIT',
-      source:
-          'https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet',
+      source: 'https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet',
       licenseAsset: 'assets/models/YuNet-LICENSE.txt',
+    ),
+    BundledLicense(
+      component: 'FFmpeg macOS audio decoder (standalone LGPL build)',
+      license: 'LGPL-2.1-or-later',
+      source: 'https://ffmpeg.org',
+      licenseAsset: 'assets/licenses/ffmpeg-LGPL-2.1.txt',
     ),
     BundledLicense(
       component: 'whisper.cpp speech engine (whisper-cli / whisper-wasm)',

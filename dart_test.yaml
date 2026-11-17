@@ -16,5 +16,6 @@
 # in de parallelle suite. `make test` en `make coverage` voeren beide stappen uit.
 tags:
   benchmark:
+  codec-matrix:
   golden:
   integration:

@@ -609,6 +609,7 @@ and CAF; container recognition does not establish a particular codec's support.
 Previews retain the platform/browser codec note and a failed decoder attempt is
 explicit. Synthetic fixtures verify ADTS AAC, MP3 with/without ID3, Ogg Vorbis/Opus,
 AIFF/AIFC, CAF and MPEG-4; macOS afconvert and the WAV-alias CLI were exercised.
+See [the codec matrix and distribution limits](../TRANSCRIPTION_FORMATS.md).
 This does not expand Windows/Linux/browser decoder claims: the remaining format
 and release-artifact matrix work is tracked separately in #2942 and #2947.
 
