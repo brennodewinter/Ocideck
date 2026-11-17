@@ -171,9 +171,11 @@ String formatTranscriptBody(
   }
   final metadata = _segmentMetadata(segments);
   if (metadata.isNotEmpty) {
-    lines.add(
-      '\n<!-- ocideck:segments:v1 ${base64Url.encode(utf8.encode(jsonEncode(metadata)))} -->',
-    );
+    final json = jsonEncode(metadata)
+        .replaceAll('<', r'\u003c')
+        .replaceAll('>', r'\u003e')
+        .replaceAll('--', r'\u002d\u002d');
+    lines.add('\n<!-- ocideck:segments:v1 $json -->');
   }
   final body = lines.join('\n');
   if (utf8.encode(body).length > maxTranscriptBodyBytes) {

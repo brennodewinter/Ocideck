@@ -69,6 +69,10 @@ paths = [
   # geheim-vormige entropie trippen.
   '''^testbed/vosk-asr/model/''',
   '''^testbed/vosk-asr/proof-out/''',
+  # Alleen gegenereerde modellen en bewijs-cache; broncode blijft gescand.
+  '''^testbed/asr-diarization/model/''',
+  '''^testbed/asr-diarization/proof-out/''',
+  '''^testbed/asr-diarization/__pycache__/''',
 
   # ── Het detectiecorpus van OciWacht ────────────────────────────────────────
   # Dit is de kern van de afweging. De privacyscanner moet geheimen kúnnen

@@ -93,6 +93,7 @@ void main() {
           ],
           'document_rename_save_reopen': true,
           'quality_acceptance': false,
+          'document_metadata_encoding': 'plain-json',
         })}\n',
       );
     },

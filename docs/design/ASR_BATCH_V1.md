@@ -76,8 +76,10 @@ blijft 1-2-1. Zichtbare labels zijn gelokaliseerd en gewone Markdown: verander
 bijvoorbeeld Spreker 1 in Alice. `(?)` markeert onzekerheid, `+` overlap.
 
 De initiële segmentindex, ruwe start/eindtijd in microseconden, IDs en onzekerheid
-blijven in een `ocideck:segments:v1`-HTML-commentaar als base64url-JSON behouden.
-Dit is leesbare documentinhoud, **geen versleuteling**. Het is de oorspronkelijke
+blijven in een `ocideck:segments:v1`-HTML-commentaar als onversleuteld JSON behouden.
+Dit is direct inspecteerbare documentinhoud. IDs blijven platte tekst zodat de
+bestaande privacyscanner en redactie ze ook in metadata kunnen beoordelen; alleen
+HTML-commentaartekens worden veilig ge-escaped. Het is de oorspronkelijke
 engine-uitvoer, geen automatisch bijgewerkte koppeling na handmatige tekstwijziging;
 bij hergebruik moet een exporteur gewijzigde tekst opnieuw laten beoordelen.
 Stemvectoren, biometriemodellen en identiteitsprofielen horen nooit in het antwoord

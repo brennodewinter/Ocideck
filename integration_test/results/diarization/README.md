@@ -3,8 +3,11 @@
 Broncode van server/backend/proef: `1c5a9f1bf74b37134d17898c469339ea80bbce9a`.
 De JSON bevat daarnaast exacte server-/backendhashes, containerpin, modelhashes,
 broncorpushashes, geselecteerde publieke bron-IDs en hashes van alle WAV-fixtures.
-De appwijziging na deze broncommit betreft alleen accolades rond een bestaande
-return; geen gewijzigd protocol, parser, transport of serverinferentie.
+De serverinferentie blijft op die broncommit en die componenthashes. De herhaalde
+clientproef registreert afzonderlijk de formatter-/proefhash: metadata is nu direct
+inspecteerbaar JSON, getoetst tegen privacyredactie. Daarnaast zijn de vereiste
+cache-uitsluitingen en een accoladecorrectie toegevoegd; de ASR-uitvoer is niet
+gewijzigd en de twaalf backendmetingen zijn niet opnieuw op uitkomst afgestemd.
 
 `client-roundtrip-2026-11-17.json`: echte productie-I/O-transport naar de
 loopbackserver, capabilitycontrole en bewuste upload van NL A-B-A. Geleverde tijden,

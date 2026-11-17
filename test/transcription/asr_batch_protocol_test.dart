@@ -249,9 +249,9 @@ void main() {
     expect(body, contains('**Speaker 1 + Speaker 2:** samen'));
     expect(body, contains('**Unknown (?):** twijfel'));
     final encoded = RegExp(
-      r'ocideck:segments:v1 ([A-Za-z0-9_=-]+)',
+      r'ocideck:segments:v1 (\[.*\]) -->',
     ).firstMatch(body)![1]!;
-    final raw = jsonDecode(utf8.decode(base64Url.decode(encoded))) as List;
+    final raw = jsonDecode(encoded) as List;
     expect(raw[2]['speaker_ids'], ['a']);
     expect(raw[2]['end_us'], 3000000);
     expect(
@@ -269,6 +269,23 @@ void main() {
     );
     expect(result.segments.single.speakerIds, isEmpty);
     expect(formatTranscriptBody(result.segments), isNot(contains('**')));
+  });
+
+  test('ruwe IDs kunnen het metadata-commentaar niet afsluiten', () {
+    final body = formatTranscriptBody(const [
+      TranscriptSegment(
+        text: 'tekst',
+        end: Duration(seconds: 1),
+        speakerIds: ['raw--><script>'],
+      ),
+    ]);
+    expect(RegExp('-->').allMatches(body).length, 1);
+    expect(body, isNot(contains('<script>')));
+    final encoded = RegExp(
+      r'ocideck:segments:v1 (\[.*\]) -->',
+    ).firstMatch(body)![1]!;
+    final raw = jsonDecode(encoded) as List;
+    expect(raw.single['speaker_ids'], ['raw--><script>']);
   });
 
   test('server mag de diarisatiekeuze niet stil verliezen', () {
