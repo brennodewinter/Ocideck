@@ -14,7 +14,7 @@ import '../../services/document_footnote_setup.dart';
 import '../../state/settings_provider.dart'
     show kDocumentEditorZoomMax, kDocumentEditorZoomMin;
 import '../../services/document_pagination.dart';
-import '../../utils/doc_link.dart' show headingSlug;
+import '../../utils/heading_anchors.dart';
 import '../../utils/footnotes.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../utils/text_search.dart';

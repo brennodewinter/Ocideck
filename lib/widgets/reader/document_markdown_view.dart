@@ -27,7 +27,7 @@ import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/spacer_embed_syntax.dart';
-import '../../utils/doc_link.dart' show headingSlug;
+import '../../utils/heading_anchors.dart';
 import '../../utils/footnotes.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/image_size_tokens.dart';
@@ -234,7 +234,7 @@ class DocumentMarkdownView extends StatelessWidget {
       _isHorizontalRule(line.trim());
 
   /// The absolute block index (into the same block list [build] renders) of the
-  /// first heading whose [headingSlug] equals [slug], or `-1` when this document
+  /// heading whose document-wide canonical ID or legacy alias equals [slug], or `-1` when this document
   /// has no such heading. The reader uses it to point [anchorBlockIndex] at the
   /// section an `#anchor` link names. First match wins, mirroring how the anchor
   /// key attaches to the first heading with a slug. [occurrence] selects a later
@@ -245,13 +245,13 @@ class DocumentMarkdownView extends StatelessWidget {
     int occurrence = 0,
   }) {
     final blocks = _parse(markdown);
-    for (var i = 0; i < blocks.length; i++) {
-      final b = blocks[i];
-      if (b.kind == _Kind.heading && headingSlug(b.text) == slug) {
-        if (occurrence-- == 0) return i;
-      }
-    }
-    return -1;
+    final indices = [
+      for (var i = 0; i < blocks.length; i++)
+        if (blocks[i].kind == _Kind.heading) i,
+    ];
+    final anchors = HeadingAnchorIndex(indices.map((i) => blocks[i].text));
+    final heading = anchors.resolve(slug, occurrence: occurrence);
+    return heading < 0 ? -1 : indices[heading];
   }
 
   /// De regel-reikwijdte `[start, eind)` van het `ordinal`-de GFM-tabelblok

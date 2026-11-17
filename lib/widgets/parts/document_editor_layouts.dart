@@ -688,7 +688,7 @@ Future<void> _followEditorDocumentLink(
     return;
   }
   final outline = buildMarkdownOutline(source);
-  final index = outline.indexWhere((entry) => headingSlug(entry.title) == slug);
+  final index = HeadingAnchorIndex(outline.map((e) => e.title)).resolve(slug);
   if (index >= 0) onAnchor(outline[index]);
 }
 

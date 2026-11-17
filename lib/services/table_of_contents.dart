@@ -10,7 +10,7 @@
 // geprojecteerde body — zodat de TOC alleen koppen bevat die de ontvanger mag
 // zien.
 
-import 'package:markdown/markdown.dart' as md;
+import '../utils/heading_anchors.dart';
 
 /// De marker die de plek van de inhoudsopgave aangeeft in de `.md`.
 /// Een HTML-commentaar op een eigen regel — draagbaar, elke Markdown-lezer
@@ -30,17 +30,17 @@ final tocMarkerLinePattern = RegExp(r'^[ \t]*<!--\s*toc\s*-->[ \t]*$');
 ///
 /// Puur headless: geen I/O, geen widget-afhankelijkheden. Testbaar.
 String generateTocMarkdown(String body, {int maxDepth = 3}) {
-  final document = md.Document(
-    encodeHtml: false,
-    extensionSet: md.ExtensionSet.gitHubFlavored,
-  );
-  final nodes = document.parse(body);
-  final entries = <_TocEntry>[];
-  _collectHeadings(nodes, entries, maxDepth);
-  if (entries.isEmpty) return '';
+  final headings = markdownHeadings(body);
+  final anchors = HeadingAnchorIndex(headings.map((h) => h.text));
   final buf = StringBuffer();
-  for (final entry in entries) {
-    buf.write('${'  ' * (entry.level - 1)}- [${entry.text}](#${entry.slug})\n');
+  for (var i = 0; i < headings.length; i++) {
+    final h = headings[i];
+    if (h.level > maxDepth) continue;
+    final label = h.text
+        .replaceAll('\\', '\\\\')
+        .replaceAll('[', r'\[')
+        .replaceAll(']', r'\]');
+    buf.write('${'  ' * (h.level - 1)}- [$label](#${anchors.entries[i].id})\n');
   }
   return buf.toString().trimRight();
 }
@@ -98,62 +98,3 @@ String stripTocMarker(String body) {
 /// Of [body] de `<!-- toc -->`-marker bevat.
 bool hasTocMarker(String body) =>
     RegExp(r'^<!-- toc -->\s*$', multiLine: true).hasMatch(body);
-
-class _TocEntry {
-  final int level;
-  final String text;
-  final String slug;
-  _TocEntry(this.level, this.text, this.slug);
-}
-
-void _collectHeadings(
-  List<md.Node> nodes,
-  List<_TocEntry> entries,
-  int maxDepth,
-) {
-  for (final node in nodes) {
-    if (node is md.Element && node.tag == 'h1' && maxDepth >= 1) {
-      entries.add(_TocEntry(1, _text(node), _slug(_text(node))));
-    } else if (node is md.Element && node.tag == 'h2' && maxDepth >= 2) {
-      entries.add(_TocEntry(2, _text(node), _slug(_text(node))));
-    } else if (node is md.Element && node.tag == 'h3' && maxDepth >= 3) {
-      entries.add(_TocEntry(3, _text(node), _slug(_text(node))));
-    } else if (node is md.Element && node.tag == 'h4' && maxDepth >= 4) {
-      entries.add(_TocEntry(4, _text(node), _slug(_text(node))));
-    } else if (node is md.Element && node.tag == 'h5' && maxDepth >= 5) {
-      entries.add(_TocEntry(5, _text(node), _slug(_text(node))));
-    } else if (node is md.Element && node.tag == 'h6' && maxDepth >= 6) {
-      entries.add(_TocEntry(6, _text(node), _slug(_text(node))));
-    }
-  }
-}
-
-/// Haal de platte tekst uit een heading-element.
-String _text(md.Element el) {
-  final buf = StringBuffer();
-  void walk(md.Node n) {
-    if (n is md.Text) {
-      buf.write(n.text);
-    } else if (n is md.Element) {
-      for (final child in n.children ?? const <md.Node>[]) {
-        walk(child);
-      }
-    }
-  }
-
-  for (final child in el.children ?? const <md.Node>[]) {
-    walk(child);
-  }
-  return buf.toString().trim();
-}
-
-/// GFM-anchor-slug: lowercase, spaties → streepjes, leesteken gestript.
-/// Komt overeen met wat `marked` + `DOMPurify` in de HTML-export genereren.
-String _slug(String text) {
-  return text
-      .toLowerCase()
-      .replaceAll(RegExp(r'[^\w\s-]'), '')
-      .replaceAll(RegExp(r'\s+'), '-')
-      .replaceAll(RegExp(r'-+'), '-')
-      .replaceAll(RegExp(r'^-|-$'), '');
-}

@@ -39,15 +39,11 @@ extension _PagedDocumentNavigation on _PagedDocumentViewState {
         _handledRevealSignal = signal;
         return;
       }
-      final slug = headingSlug(selected.first.title);
-      final occurrence = outline
-          .takeWhile((entry) => entry.offset < offset)
-          .where((entry) => headingSlug(entry.title) == slug)
-          .length;
+      final anchors = HeadingAnchorIndex(outline.map((e) => e.title));
+      final ordinal = outline.indexOf(selected.first);
       final block = DocumentMarkdownView.headingBlockIndex(
         widget.markdown,
-        slug,
-        occurrence: occurrence,
+        anchors.entries[ordinal].id,
       );
       if (_revealPageBlock(block)) _handledRevealSignal = signal;
     });
