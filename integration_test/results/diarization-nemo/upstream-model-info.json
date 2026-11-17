@@ -1,0 +1,196 @@
+{
+  "_id": "6a96d0493a36c5ec985d2291",
+  "id": "nvidia/Nemotron-3-Diarization",
+  "private": false,
+  "pipeline_tag": "voice-activity-detection",
+  "library_name": "nemo",
+  "tags": [
+    "nemo",
+    "safetensors",
+    "gguf",
+    "nemotron3_diarization",
+    "audio-frame-classification",
+    "speaker-diarization",
+    "streaming-sortformer",
+    "speaker-tagging",
+    "transformers",
+    "voice-activity-detection",
+    "arxiv:2611.12246",
+    "arxiv:2409.06656",
+    "arxiv:2507.18446",
+    "arxiv:2605.15442",
+    "arxiv:2507.09226",
+    "arxiv:2408.13106",
+    "license:openmdw-1.1",
+    "region:us"
+  ],
+  "downloads": 225461,
+  "likes": 841,
+  "modelId": "nvidia/Nemotron-3-Diarization",
+  "author": "nvidia",
+  "sha": "52a432672732425e4c19765b9fec9b5810e6f4ba",
+  "lastModified": "2026-11-10T10:42:18.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {
+    "architectures": [
+      "Nemotron3DiarizationForAudioFrameClassification"
+    ],
+    "model_type": "nemotron3_diarization"
+  },
+  "cardData": {
+    "license": "openmdw-1.1",
+    "pipeline_tag": "voice-activity-detection",
+    "library_name": "nemo",
+    "tags": [
+      "speaker-diarization",
+      "streaming-sortformer",
+      "speaker-tagging",
+      "transformers"
+    ]
+  },
+  "transformersInfo": {
+    "auto_model": "AutoModelForAudioFrameClassification",
+    "pipeline_tag": "audio-frame-classification",
+    "processor": "AutoProcessor"
+  },
+  "gguf": {
+    "total": 99260363,
+    "architecture": "sortformer",
+    "totalFileSize": 107012128
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "ee93e73362f0b2ee47e8bf1f9dc207678b1b3eeb",
+      "size": 1896
+    },
+    {
+      "rfilename": "ASR_INTEGRATION_GUIDE.md",
+      "blobId": "6d86ea88c0eebed10bd7c161878d9eaea00a7c2a",
+      "size": 16331
+    },
+    {
+      "rfilename": "Nemotron-3-Diarization.nemo",
+      "blobId": "f542ad216e5600f52c15987246f699df698a02f2",
+      "size": 198676480,
+      "lfs": {
+        "sha256": "867c53f552998f772e5b5e5c082962ae85ee7ca5669c2bc17d7f615133d4e96d",
+        "size": 198676480,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "Nemotron-3-Diarization.q8_0.gguf",
+      "blobId": "03fe996f050dd23349a56ab53c8005a21957470d",
+      "size": 107012128,
+      "lfs": {
+        "sha256": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+        "size": 107012128,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "56ca97a940fd304f087dc86d7a1423c5c9f12bbd",
+      "size": 44081
+    },
+    {
+      "rfilename": "bias.md",
+      "blobId": "d2c93e0076af6c03d471a639da78b61f5c411afa",
+      "size": 296
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "d09665951c8d48abe9c74626cd39fbfd615297fe",
+      "size": 1458
+    },
+    {
+      "rfilename": "diarization_evaluation.md",
+      "blobId": "36730d2efccf177b817d216920cd1a9d5000962a",
+      "size": 6898
+    },
+    {
+      "rfilename": "explainability.md",
+      "blobId": "d86d18e42dc517aec857004ee47935ed6562ca65",
+      "size": 2330
+    },
+    {
+      "rfilename": "model.safetensors",
+      "blobId": "e6354d288eb56c3db0cd7a78774039e8d4967104",
+      "size": 396954592,
+      "lfs": {
+        "sha256": "c074d86335b3b794f8fa5edc25594558f128bdb3914d27806a3a5a2e44963cb6",
+        "size": 396954592,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "nemotron3_tts_8_open_voices.mp4",
+      "blobId": "635277618581de07cff071b537b224a226c8d865",
+      "size": 2453587,
+      "lfs": {
+        "sha256": "292668a8679eb27f039f7afb0ed938165b399762d2cd3ecef017b600e82457e7",
+        "size": 2453587,
+        "pointerSize": 132
+      }
+    },
+    {
+      "rfilename": "privacy.md",
+      "blobId": "6b55712fc47a40448a6e4900cb7e09f640f98226",
+      "size": 1283
+    },
+    {
+      "rfilename": "processor_config.json",
+      "blobId": "5779fbbbb8401983be84e0b4f09a236ad8227dfe",
+      "size": 623
+    },
+    {
+      "rfilename": "safety.md",
+      "blobId": "56a2cab67d7fa45dfeb8e3d79e9b034fcb426403",
+      "size": 489
+    },
+    {
+      "rfilename": "streaming_diarization_demo.gif",
+      "blobId": "e4734c92eb8966e520b926719d536968ad6d5012",
+      "size": 4604955,
+      "lfs": {
+        "sha256": "30eda66150b34e0140a9b92a761362450f8518b575c056211df6208362e2194b",
+        "size": 4604955,
+        "pointerSize": 132
+      }
+    },
+    {
+      "rfilename": "streaming_diarization_demo.png",
+      "blobId": "908ccb7d28e4457ad8fe3216d3ec51869344ed03",
+      "size": 78317,
+      "lfs": {
+        "sha256": "05dd18ddd1068dbfff5195f3a9bd8d8acb2c3002498fe35a9ebad96a45afbe8f",
+        "size": 78317,
+        "pointerSize": 130
+      }
+    }
+  ],
+  "spaces": [
+    "nvidia/nemotron-diarization",
+    "flozi00/parakeet-primeline",
+    "eustlb/vad-models-on-the-hub",
+    "nvidia/NeMo-Speech-Streaming-Multispeaker-ASR",
+    "kasper-cbx/danish-speech-diarization",
+    "rizar001/nemotron-3-diarization",
+    "ahmadw/nemotron-diarization-web",
+    "ankandrew/emotion2vec_plus_large",
+    "amira-ainia/nemotron-3-diarization-demo",
+    "hugging-apps/ediar",
+    "hugging-apps/pandemonium-multitalker-asr"
+  ],
+  "createdAt": "2026-09-01T13:16:57.000Z",
+  "safetensors": {
+    "parameters": {
+      "F32": 99226504
+    },
+    "total": 99226504
+  },
+  "usedStorage": 1116957691
+}

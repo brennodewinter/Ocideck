@@ -121,3 +121,10 @@ zet vertalen uit en herstelt de oorspronkelijke sampleoffsets. Dat verbetert
 lange latere taalblokken in de gemeten fixtures, maar korte codewisseling
 binnen een regio kan verslechteren. De kwaliteitsacceptatie van #2940 blijft
 apart van de geslaagde client-/transportimplementatie.
+
+De afzonderlijke native Nemotron/Whisper-referentiebackend en zijn gemeten
+onbekende toewijzingen staan in `testbed/asr-diarization/NEMO_README.md`. Hij
+combineert echte modelactiviteit met echte ASR-woordtijden; tekst die niet exact
+naar die woorden terugleidt blijft één ongewijzigd onbekend segment. Zonder
+diari­satie wordt geen native taak gestart. Deze operatorroute
+introduceert geen nieuwe velden of automatische installatie in de app.

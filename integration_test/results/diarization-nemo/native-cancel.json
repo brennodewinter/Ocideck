@@ -1,0 +1,12 @@
+{
+  "scope": "real native model worker cancellation; no ASR or full release UI assertion",
+  "fixture_sha256": "882baedcc51ec8477c98b9556b7419d0a6fd05bbd26ed9e56fac9b89037556ec",
+  "cancelled": true,
+  "elapsed_seconds": 0.4453873330494389,
+  "worker_returncodes": [
+    -15
+  ],
+  "all_children_reaped": true,
+  "temporary_audio_and_activity_removed": true,
+  "pass": true
+}

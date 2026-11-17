@@ -473,3 +473,32 @@ licence, which they are not.
 Independent release channels embed their build-specific source archive in each
 artifact. The full release candidate also publishes the standalone Ubuntu
 source archive; independent channels keep disjoint asset ownership.
+
+## Optional native diarization reference — 2026-11-17
+
+The operator-built **NeMo-Speech.cpp 0.3.0** reference is pinned to NVIDIA source
+`e790e463b2913cff9f989a3df224c587f14b4c5c`. Its narrowly selected build provides
+standalone diarization libraries (ASR/TTS/NMT/CLI/microphone/HTTP disabled) and
+statically includes the pinned ggml/SentencePiece code. The installed
+`ocideck-runtime.json` records concrete dylib hashes, native arm64 architecture,
+compiler/SDK, CMake flags, actual linked-library inventory and full upstream
+notice hashes. The measured two dylibs link each other and Apple system
+frameworks/libraries only. Runtime Apache-2.0, ggml MIT and the incorporated
+SentencePiece dependency notices remain distinct; no generic licence inference
+from the repository name is used.
+
+The official **Nemotron 3 Diarization Q8_0** weights are independently pinned at
+`52a432672732425e4c19765b9fec9b5810e6f4ba`, 107012128 bytes,
+SHA-256 `08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1`.
+They use **OpenMDW-1.1**, not Whisper's MIT or the runtime's Apache licence.
+`nemo_model.json` binds the model and original notices to sizes/hashes; the
+explicit installer includes the full agreement and original model documents.
+The optional server also uses the separately installed/pinned Whisper runtime
+and Python wheels reviewed in its operator inventory; this does not make
+PyAV's concrete FFmpeg payload generically BSD/MIT.
+
+**Distribution boundary:** these are explicit operator testbed installs, absent
+from the shipped OciDeck bundles and their SBOM. This review does not expand the
+app's package/helper allow-list. Shipping any such model/runtime with a future
+release still requires the per-artifact manifest and `BundledLicenses` gate
+above. Reproduction and measured limits: `testbed/asr-diarization/NEMO_README.md`.

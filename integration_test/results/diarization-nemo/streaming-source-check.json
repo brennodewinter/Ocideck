@@ -1,0 +1,469 @@
+{
+  "scope": "diagnostic native activity over repeated known source intervals; no ASR-word/activity-aligned DER",
+  "source_sha256": "27b1730c35b0313a9a91db269427bdebc03b50c26b2b8d7df12130ce686d1b79",
+  "native_frame_seconds": 0.01,
+  "evaluation_slot_mapping_by_source_arrival": {
+    "3034": 0,
+    "3798": 1
+  },
+  "cycles": [
+    {
+      "cycle": 0,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 306,
+            "0": 1243
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 852,
+            "0": 284,
+            "1": 679
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 304,
+            "0": 1245
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 232,
+            "1": 1583
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 2,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 304,
+            "0": 1245
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 229,
+            "1": 1586
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 304,
+            "0": 1245
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 3,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 231,
+            "1": 1584
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 4,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 228,
+            "1": 1587
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 304,
+            "0": 1245
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 5,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 230,
+            "1": 1585
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 303,
+            "0": 1246
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 6,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 303,
+            "0": 1246
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 229,
+            "1": 1586
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 304,
+            "0": 1245
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 7,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 230,
+            "1": 1585
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 303,
+            "0": 1246
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 8,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 229,
+            "1": 1586
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 9,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 302,
+            "0": 1247
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 231,
+            "1": 1584
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 306,
+            "0": 1243
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 10,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 305,
+            "0": 1244
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 230,
+            "1": 1585
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 304,
+            "0": 1245
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 11,
+      "sources": [
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 0.0,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 306,
+            "0": 1243
+          }
+        },
+        {
+          "source_ids": [
+            "3798"
+          ],
+          "source_start_seconds": 16.49,
+          "native_frames": 1815,
+          "assigned_slot_sets": {
+            "unknown": 230,
+            "1": 1585
+          }
+        },
+        {
+          "source_ids": [
+            "3034"
+          ],
+          "source_start_seconds": 35.64,
+          "native_frames": 1549,
+          "assigned_slot_sets": {
+            "unknown": 339,
+            "0": 1210
+          }
+        }
+      ]
+    }
+  ],
+  "diagnostic_only": true
+}

@@ -20,10 +20,11 @@ def memory(container):
     return result.stdout.strip()
 
 
-def infer(path, language):
+def infer(path, language, *, diarize=True):
     boundary = 'ocideck-diarization-matrix'
     body = bytearray()
-    for name, value in [('language', language.encode()), ('diarize', b'true'),
+    for name, value in [('language', language.encode()),
+                        ('diarize', b'true' if diarize else b'false'),
                         ('response_format', b'verbose_json'), ('file', path.read_bytes())]:
         body.extend(('--' + boundary + '\r\nContent-Disposition: form-data; name="' + name +
                      '"' + ('; filename="audio.wav"' if name == 'file' else '') + '\r\n\r\n').encode())

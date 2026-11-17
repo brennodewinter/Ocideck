@@ -1,6 +1,6 @@
 # OciDeck — Transcription and recording: platform setup
 
-> **Status:** setup matrix and step-by-step guide for the released builds · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
+> **Status:** setup matrix and step-by-step guide for the released builds · **Status last reviewed:** 2026-11-17 · **Published by:** Stichting LibreKAT
 
 This page answers, per platform: what you must install or allow, how a
 recording becomes a transcript, where the files live, and what to do when
@@ -286,7 +286,7 @@ language switching. Available languages follow actual engine capabilities,
 including Polish where supported. Local whisper.cpp/WASM does not yet offer
 this mode; multilingual weights alone do not redetect each passage.
 
-The optional [local reference experiment](../testbed/asr-multilingual/README.md)
+The optional [local reference experiment](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/asr-multilingual/README.md)
 processes speech regions independently without a translation request. OciDeck
 installs/downloads nothing for it; existing consent for this file and destination
 still applies. Long later NL/EN and PL/EN blocks improve in the measured fixtures,
@@ -294,3 +294,20 @@ but short quotations or switches without a pause can remain wrong or worsen.
 This is no general quality guarantee. `[en?]` marks an uncertain region language.
 Transcript text and visible tags remain editable and saveable; original times
 and language tags remain inspectable document metadata.
+
+## Optional speaker diarization through a local server
+
+An explicitly installed [Nemotron/Whisper loopback server](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/testbed/asr-diarization/NEMO_README.md)
+has been tested on native macOS arm64. It needs no pre-existing ASR server,
+model account or gated pyannote access. OciDeck does not install/select it
+implicitly. Configure OciDeck ASR v1, wait for capabilities, then choose
+**Distinguish speakers**; Start confirms this file and destination. Local CLI/WASM
+does not offer this capability.
+
+Assigned speaker numbers remain stable on return in the small NL/EN fixtures.
+Uncertain passages stay unknown or carry `(?)`; roughly a quarter stays unknown
+in the hardest Dutch fixture. Overlap can carry multiple IDs. These are no
+person names or general accuracy guarantee. Visible labels can be renamed;
+original times/cluster IDs remain document metadata. Long streaming input can misassign a few seconds at the first transition;
+review the labels. The complete release-UI/hardware matrix is separate from
+these scoped client/model measurements.

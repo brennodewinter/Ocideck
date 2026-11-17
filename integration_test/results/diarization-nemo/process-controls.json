@@ -1,0 +1,19 @@
+{
+  "scope": "repeated public source for native process/clock/cancellation controls only",
+  "source_file": "nl-aba.wav",
+  "source_sha256": "27b1730c35b0313a9a91db269427bdebc03b50c26b2b8d7df12130ce686d1b79",
+  "cases": [
+    {
+      "file": "process-control-12.wav",
+      "repeats": 12,
+      "duration_seconds": 625.5600000000001,
+      "sha256": "5568c8b16e77cc964591a9ee1f78f2b1f76b1927d10e77216bbf74d693f83785"
+    },
+    {
+      "file": "process-control-23.wav",
+      "repeats": 23,
+      "duration_seconds": 1198.99,
+      "sha256": "882baedcc51ec8477c98b9556b7419d0a6fd05bbd26ed9e56fac9b89037556ec"
+    }
+  ]
+}

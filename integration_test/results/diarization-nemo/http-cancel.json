@@ -1,0 +1,14 @@
+{
+  "scope": "real loopback HTTP disconnect with its actual native worker observed",
+  "fixture_sha256": "882baedcc51ec8477c98b9556b7419d0a6fd05bbd26ed9e56fac9b89037556ec",
+  "native_worker_seen": true,
+  "busy_before_disconnect": true,
+  "release_seconds": 0.11583137499999996,
+  "worker_disappeared": true,
+  "temporary_audio_and_activity_removed": true,
+  "statuses_after_disconnect": [
+    429,
+    422
+  ],
+  "pass": true
+}

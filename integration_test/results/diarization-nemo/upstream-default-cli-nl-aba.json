@@ -1,0 +1,9 @@
+{
+  "file": "/tmp/ocideck-diarization-2935/matrix/nl-aba.wav",
+  "segments": [
+    {"start": 0.941, "end": 5.829, "speaker": 1},
+    {"start": 7.131, "end": 15.269, "speaker": 1},
+    {"start": 36.571, "end": 41.479, "speaker": 1},
+    {"start": 42.771, "end": 50.909, "speaker": 1}
+  ]
+}

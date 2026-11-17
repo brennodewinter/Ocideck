@@ -1,0 +1,31 @@
+{
+  "scope": "compiled Flutter production web transport probe, not full release UI",
+  "fixture_sha256": "27b1730c35b0313a9a91db269427bdebc03b50c26b2b8d7df12130ce686d1b79",
+  "compiled_js_sha256": "f62c2623f1943f474c608d9f99e541068d3ed4d7db61881ced5f50f04159542c",
+  "browsers": [
+    {
+      "name": "chromium",
+      "version": "156.0.8078.4",
+      "success": true,
+      "scope": "compiled production web transport/CORS and document model; not full release UI or file-save proof",
+      "elapsed_ms": 6292,
+      "segments": 18,
+      "known_aba_ids_consistent": true,
+      "document_rename_model_roundtrip": true,
+      "unknown_segments": 8,
+      "file_save_reopen_proven": false
+    },
+    {
+      "name": "webkit",
+      "version": "27.2",
+      "success": true,
+      "scope": "compiled production web transport/CORS and document model; not full release UI or file-save proof",
+      "elapsed_ms": 5957,
+      "segments": 18,
+      "known_aba_ids_consistent": true,
+      "document_rename_model_roundtrip": true,
+      "unknown_segments": 8,
+      "file_save_reopen_proven": false
+    }
+  ]
+}
