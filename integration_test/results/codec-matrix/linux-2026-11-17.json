@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
+    "source_commit": "70ef0797695b10aa1f3d405be1f698b2d077d1f5",
     "environment": "Debian 12 amd64 under Docker emulation on macOS; GStreamer 1.22 base/good/libav; no installed Flatpak certification",
     "plugin_inventory": [
       "1394:  dv1394src: Firewire (1394) DV video source",
