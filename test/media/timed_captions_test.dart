@@ -64,4 +64,30 @@ Text
       );
     }
   });
+
+  test('contiguous automatic display cues remove repeated carried lines', () {
+    const input = '''WEBVTT
+
+00:00:01.000 --> 00:00:02.000
+Our<00:00:01.500><c> example</c>
+
+00:00:02.000 --> 00:00:02.010
+Our example
+
+00:00:02.010 --> 00:00:03.000
+Our example
+continues<00:00:02.500><c> here</c>
+
+00:00:04.000 --> 00:00:05.000
+here
+''';
+    final result = parseTimedCaptions(input, rolling: true);
+    expect(result.map((cue) => cue.text), [
+      'Our example',
+      'continues here',
+      'here',
+    ]);
+    expect(result[1].start, const Duration(milliseconds: 2010));
+    expect(parseTimedCaptions(input), hasLength(4));
+  });
 }

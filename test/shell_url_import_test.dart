@@ -113,6 +113,29 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  testWidgets('direct media URL proposes transcription before downloading', (
+    tester,
+  ) async {
+    await openUrlDialog(tester);
+    final before = container
+        .read(tabsProvider)
+        .current!
+        .deckNotifier
+        .state
+        .deck;
+    await type(tester, 'https://example.com/source.mp4?signature=private');
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Ophalen'));
+    await tester.pumpAndSettle();
+    expect(find.text('Audio of video transcriberen'), findsOneWidget);
+    expect(find.text('Instellingen openen'), findsOneWidget);
+    await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
+    await tester.pumpAndSettle();
+    expect(
+      container.read(tabsProvider).current!.deckNotifier.state.deck,
+      same(before),
+    );
+  });
+
   testWidgets('het venster begint met een uitgeschakelde Ophalen-knop', (
     tester,
   ) async {

@@ -94,7 +94,8 @@ language, diarisation and per-file destination consent.
   truncation. Whole long-video captions remain available within their own cap.
 - Provider captions are at most 2 MiB. HLS subtitle playlists are resolved by
   the downloader; a playlist is never treated as transcript text. Rolling
-  automatic cues are deduplicated only across overlapping suffix/prefix text.
+  automatic cues are deduplicated only across overlapping suffix/prefix text in overlapping or
+  contiguous display cues; a timing gap resets that chain.
   Caption fragments retain complete overlapping cues and their real times;
   word boundaries are not invented.
 - Private temporary directories are removed after success/failure/cancellation.
@@ -132,3 +133,35 @@ original time ranges and limitations. Keep public-provider audio/caption text
 local unless redistribution rights have been established; hashes/counts and
 protocol/control evidence suffice for repository reports. ASR text is model
 output that users must review, not a guarantee supplied by YouTube metadata.
+
+## Explicit live probes
+
+These targets are outside the default unit suite because they contact YouTube
+and require explicitly started source/ASR servers. They fail when configuration
+is absent. Reports contain hashes, sizes and timing/control assertions; provider
+text/audio stays local. Use `scripts/gate_lock.sh` for each Flutter operation.
+
+- `client_probe_test.dart`: production native clients against source port 8866
+  and ASR v1 port 8093. Set `OCIDECK_SOURCE_REVISION`,
+  `OCIDECK_YOUTUBE_RESULT`; run `flutter test` on that exact target. It measures
+  manual/automatic captions, whole short-video and original-clock fragment ASR,
+  a video without captions, document edit/save/reopen, and audio cleanup.
+- `ui_probe_test.dart`: production widgets using those real endpoints in the
+  Flutter test harness. Set `OCIDECK_SOURCE_REVISION` and
+  `OCIDECK_YOUTUBE_UI_RESULT`; run `flutter test` on that target. It opens the
+  URL proposal, a deck's Markdown-link action, and the video-slide editor,
+  checks identical caption documents apart from processing date and keeps
+  the original deck. Preferences/staging are isolated test data.
+- `browser_probe.dart` plus `browser_probe.cjs`: compile the explicit Dart target
+  with `flutter build web --release --target ... --output ...`. Start TLS source
+  port 8867 and TLS ASR port 8893, each allowing exactly
+  `http://localhost:7357`. Run the JS driver with the compiled directory, a local
+  WAV path and external JSON report path. Its isolated Chromium/WebKit contexts
+  accept the test certificate; production CSP/transport remains unchanged.
+  This proves compiled client CORS, captions, source-clock PCM ASR, document-byte
+  roundtrip and lease cleanup. It does not prove a browser download/save dialog
+  or a packaged native release workflow.
+
+The proposal deliberately retains a visible **Not tested** qualification until
+full release-flow testing is recorded. The operator runtime's macOS ARM64
+measurements do not qualify a Windows/Linux helper or every browser release.

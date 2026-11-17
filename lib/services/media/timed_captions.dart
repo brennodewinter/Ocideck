@@ -28,7 +28,9 @@ List<TranscriptSegment> parseTimedCaptions(
     if (cue == null) continue;
     var words = cue.text.split(RegExp(r'\s+'));
     final fullWords = words;
-    if (rolling && cue.start! < previousEnd) {
+    // YouTube rolling VTT also emits contiguous display cues, including a
+    // short repeat between two growing lines. A gap always resets the chain.
+    if (rolling && cue.start! <= previousEnd) {
       words = words.sublist(_repeatedPrefix(previousWords, words));
     }
     previousWords = fullWords;
