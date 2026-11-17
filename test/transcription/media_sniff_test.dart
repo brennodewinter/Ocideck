@@ -113,6 +113,57 @@ void main() {
       );
     });
 
+    test('ongeldige ADTS- en MPEG-headerbits zijn geen MP3-bewijs', () {
+      for (final bytes in [
+        [0xff, 0xf1], // onvolledige ADTS-header, layer=0
+        [0xff, 0xf1, 0xfc, 0, 0, 0xe0, 0], // gereserveerde sample-index
+        [0xff, 0xf1, 0x50, 0, 0, 0, 0], // frame korter dan header
+        [0xff, 0xfb, 0xf0, 0], // gereserveerde MPEG-bitrate
+        [0xff, 0xfb, 0x0c, 0], // gereserveerde MPEG-frequentie
+        [0xff, 0xeb, 0, 0], // gereserveerde MPEG-versie
+      ]) {
+        expect(
+          sniffContainer(Uint8List.fromList(bytes)),
+          MediaContainer.unknown,
+        );
+      }
+    });
+
+    test(
+      'gedeelde extensiecatalogus bevat gangbare aliases zonder codecbelofte',
+      () {
+        expect(
+          mediaFileExtensions,
+          containsAll([
+            'wave',
+            'oga',
+            'aif',
+            'aiff',
+            'aifc',
+            'caf',
+            'm4b',
+            '3gp',
+          ]),
+        );
+        expect(
+          sniffContainer(Uint8List(0), extension: '.AAC'),
+          MediaContainer.aac,
+        );
+        expect(
+          sniffContainer(Uint8List(0), extension: '.AIF'),
+          MediaContainer.aiff,
+        );
+        expect(
+          sniffContainer(Uint8List(0), extension: '.CAF'),
+          MediaContainer.caf,
+        );
+        expect(
+          sniffContainer(Uint8List(0), extension: '.M4B'),
+          MediaContainer.mpeg4,
+        );
+      },
+    );
+
     test('de extensie is een zwakke reserve, inhoud wint', () {
       expect(
         sniffContainer(Uint8List(16), extension: '.mp3'),

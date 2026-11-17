@@ -396,6 +396,9 @@ class IoFileCaptureSession extends FileCaptureSession {
     final canonical = switch (_info.container) {
       MediaContainer.mpeg4 => '.mp4',
       MediaContainer.mp3 => '.mp3',
+      MediaContainer.aac => '.aac',
+      MediaContainer.aiff => '.aiff',
+      MediaContainer.caf => '.caf',
       MediaContainer.flac => '.flac',
       MediaContainer.ogg => '.ogg',
       MediaContainer.wav => '.wav',

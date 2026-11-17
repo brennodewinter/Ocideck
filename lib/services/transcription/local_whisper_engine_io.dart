@@ -11,6 +11,7 @@ import '../../utils/log.dart';
 import 'capture_source.dart' show AudioChunk;
 import 'local_whisper_engine.dart';
 import 'model_store.dart';
+import 'media_sniff.dart' show WavInfo;
 import 'transcription_engine.dart';
 import 'transcription_errors.dart';
 import 'wav_reader_io.dart';
@@ -176,10 +177,10 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
     if (!await wav.exists()) {
       throw const IoFailed('het audiobestand bestaat niet (meer)');
     }
-    if (!wav.path.toLowerCase().endsWith('.wav')) {
-      // §5.1 noot 1: WAV/PCM is de eenduidige basis; de bestandsbron
-      // decodeert elke andere container vóór de engine (#2515) — komt er
-      // toch iets anders binnen, dan is dit het eerlijke antwoord.
+    final info = await _wavInfo(wav);
+    if (info == null || info.formatTag != 1 || info.dataBytes == 0) {
+      // De bytes bepalen PCM-WAV; ook .wave, een vreemde of ontbrekende
+      // extensie mag een geldige bron niet afwijzen (#2943).
       throw const DecodeFailed('de lokale engine leest alleen PCM-WAV');
     }
 
@@ -194,7 +195,7 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
       'run-${DateTime.now().millisecondsSinceEpoch}',
     );
 
-    final seconds = await _wavDurationSeconds(wav);
+    final seconds = info.duration.inMicroseconds / 1e6;
     final timeout = Duration(seconds: 90 + (seconds * 2).ceil());
 
     final run = _runner(
@@ -352,25 +353,17 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
     };
   }
 
-  /// De WAV-header vertelt hoe lang de audio is — de tijdslimiet hangt
-  /// eraan (RTF-metingen §7, met royale marge voor CPU-terugval). De
-  /// gedeelde chunklezer seekt over metadata/FLLR-vulling heen (#2933);
-  /// bij een onparseerbare header is de schatting op bestandsgrootte
-  /// (16 kHz mono 16-bit ≈ 32 kB/s).
-  static Future<double> _wavDurationSeconds(File wav) async {
+  /// De gedeelde chunklezer seekt over metadata/FLLR-vulling heen (#2933).
+  static Future<WavInfo?> _wavInfo(File wav) async {
     try {
       final ra = await wav.open();
       try {
-        final info = await readWavInfo(ra, await wav.length());
-        if (info != null && info.duration > Duration.zero) {
-          return info.duration.inMicroseconds / 1e6;
-        }
+        return await readWavInfo(ra, await wav.length());
       } finally {
         await ra.close();
       }
-      return wav.lengthSync() / 32000;
-    } on Object {
-      return wav.lengthSync() / 32000;
+    } on FileSystemException {
+      throw const IoFailed('het audiobestand kon niet worden gelezen');
     }
   }
 
