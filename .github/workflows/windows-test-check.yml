@@ -158,7 +158,8 @@ jobs:
         if: ${{ inputs.video_only }}
         shell: bash
         run: |
-          python tool/ci_gate.py --label windows-video-regressions -- flutter test --concurrency=2 test/windows_webview_permissions_test.dart test/windows_webview_native_contracts_test.dart test/presenter_native_keys_test.dart test/media_previews_video_coverage_test.dart test/video_features_test.dart test/video_embed_host_test.dart
+          mkdir -p build/ci-diagnostics
+          flutter test --concurrency=2 test/windows_webview_permissions_test.dart test/windows_webview_native_contracts_test.dart test/presenter_native_keys_test.dart test/media_previews_video_coverage_test.dart test/video_features_test.dart test/video_embed_host_test.dart 2>&1 | tee build/ci-diagnostics/windows-video-regressions.log
 
       - name: Native WebView2 and live YouTube probe
         if: ${{ inputs.video_only }}
@@ -166,7 +167,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/windows-video"
           export VIDEO_RESULT_FILE="$RUNNER_TEMP/windows-video/results.json"
-          python tool/ci_gate.py --label windows-video-native -- flutter drive --profile -d windows --driver=test_driver/windows_video_driver.dart --target=integration_test/windows_video_navigation_test.dart
+          flutter drive --profile -d windows --driver=test_driver/windows_video_driver.dart --target=integration_test/windows_video_navigation_test.dart 2>&1 | tee build/ci-diagnostics/windows-video-native.log
 
       - name: Windows video evidence
         if: ${{ always() && inputs.video_only }}
