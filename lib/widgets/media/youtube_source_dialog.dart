@@ -287,7 +287,7 @@ class _YoutubeSourceDialogState extends ConsumerState<YoutubeSourceDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SelectableText(widget.reference.canonicalUrl.toString()),
-              Text('YouTube · ${l10n.d('Niet getest')}'),
+              Text(l10n.d('Niet getest')),
               const SizedBox(height: 12),
               if (!enabled) ...[
                 Text(
