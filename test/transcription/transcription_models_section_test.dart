@@ -81,8 +81,12 @@ void main() {
     ).read(transcriptionModelManagerProvider.notifier);
   }
 
-  Future<void> refresh(WidgetTester tester) =>
-      tester.runAsync(() => manager(tester).refresh());
+  Future<void> refresh(WidgetTester tester) async {
+    var done = false;
+    final pending = manager(tester).refresh().whenComplete(() => done = true);
+    await pumpUntil(tester, () => done, reason: 'modelstore initialisatie');
+    await pending;
+  }
 
   testWidgets('een afwezig model toont rij, toestand en Binnenhalen-knop', (
     tester,
@@ -134,6 +138,7 @@ void main() {
     tester,
   ) async {
     await tester.pumpWidget(app());
+    await refresh(tester);
     await tester.runAsync(() => manager(tester).download(model));
     await tester.pumpAndSettle();
     expect(find.text('Geïnstalleerd'), findsOneWidget);

@@ -19,6 +19,7 @@ import 'package:ocideck/widgets/dialogs/settings/transcription_status_section.da
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'fakes/fake_capture_source.dart';
+import '../support/pump_until.dart';
 
 void main() {
   late Directory temp;
@@ -69,11 +70,13 @@ void main() {
     // De io-probe en modelstore doen echte dart:io-aanroepen — die horen
     // in de echte event loop, niet in de fake-async zone van pump.
     final ctx = tester.element(find.byType(TranscriptionStatusSection));
-    await tester.runAsync(
-      () => ProviderScope.containerOf(
-        ctx,
-      ).read(transcriptionModelManagerProvider.notifier).refresh(),
-    );
+    var done = false;
+    final pending = ProviderScope.containerOf(ctx)
+        .read(transcriptionModelManagerProvider.notifier)
+        .refresh()
+        .whenComplete(() => done = true);
+    await pumpUntil(tester, () => done, reason: 'modelstore initialisatie');
+    await pending;
     await tester.pumpAndSettle();
   }
 
