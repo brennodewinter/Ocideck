@@ -583,9 +583,7 @@ void main() {
     await tester.pump();
 
     // 101 = the owner disabled embedding (the most common cause).
-    fakeWeb.lastController!.jsChannel!(
-      const JavaScriptMessage(message: 'err:101'),
-    );
+    fakeWeb.lastController!.emit('err:101');
     await tester.pump();
 
     expect(find.text('De eigenaar staat insluiten niet toe'), findsOneWidget);
