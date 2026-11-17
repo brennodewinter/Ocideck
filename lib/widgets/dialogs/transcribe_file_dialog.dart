@@ -169,8 +169,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     final caps = await engine.capabilities();
     if (!mounted ||
         _phase != _Phase.ready ||
-        !identical(ref.read(transcriptionEngineProvider), engine))
+        !identical(ref.read(transcriptionEngineProvider), engine)) {
       return;
+    }
     final sorted = caps.languages.toList()..sort();
     sorted.remove('auto');
     if (caps.automaticLanguage) sorted.insert(0, 'auto');

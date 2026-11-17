@@ -1,0 +1,57 @@
+{
+  "scope": "real HTTP client and document model; not full release UI acceptance",
+  "fixture_sha256": "6511cd0265532edfe4042be5bdbedd86393c1220af65bc363425240217bf1d83",
+  "elapsed_ms": 72873,
+  "segments": [
+    {
+      "start": 1.548194,
+      "end": 5.73,
+      "speaker_ids": [
+        "cluster-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 7.35,
+      "end": 15.15,
+      "speaker_ids": [
+        "cluster-2"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 17.16,
+      "end": 19.42723,
+      "speaker_ids": [
+        "cluster-3"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 20.64,
+      "end": 33.99,
+      "speaker_ids": [
+        "cluster-4"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 36.81,
+      "end": 41.362251,
+      "speaker_ids": [
+        "cluster-1"
+      ],
+      "speaker_uncertain": true
+    },
+    {
+      "start": 42.99,
+      "end": 50.79,
+      "speaker_ids": [
+        "cluster-2"
+      ],
+      "speaker_uncertain": true
+    }
+  ],
+  "document_rename_save_reopen": true,
+  "quality_acceptance": false
+}
