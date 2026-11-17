@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "source_commit": "70ef0797695b10aa1f3d405be1f698b2d077d1f5",
+    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
     "environment": "Debian 12 amd64 under Docker emulation on macOS; GStreamer 1.22 base/good/libav; no installed Flatpak certification",
     "plugin_inventory": [
       "1394:  dv1394src: Firewire (1394) DV video source",
@@ -1245,7 +1245,8 @@
       "libgstreamer1.0-dev:amd64\t1.22.0-2+deb12u1",
       "libgtk-4-media-gstreamer\t",
       "totem-gstreamer\t"
-    ]
+    ],
+    "later_attempt": "70ef07976 elementary-video-cap restriction timed out on video-without-audio fixture; these results remain the earlier successful revision, not that attempt"
   },
   "report": {
     "scope": "Production helper sources; no installed-package/UI/ASR claim",

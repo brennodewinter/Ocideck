@@ -117,11 +117,16 @@ int Decode(const char* input, const char* output) {
   g_signal_connect(decoder, "autoplug-continue", G_CALLBACK(+[](GstElement*, GstPad*, GstCaps* caps, gpointer data) -> gboolean {
     auto* state = static_cast<DecodeState*>(data);
     for (guint i = 0; i < gst_caps_get_size(caps); ++i) {
-      const char* name = gst_structure_get_name(gst_caps_get_structure(caps, i));
+      const auto* structure = gst_caps_get_structure(caps, i);
+      const char* name = gst_structure_get_name(structure);
+      gboolean systemstream = TRUE;
+      const bool elementary_mpeg = std::strcmp(name, "video/mpeg") == 0 &&
+          gst_structure_get_boolean(structure, "systemstream", &systemstream) && !systemstream;
       if (g_str_has_prefix(name, "audio/")) state->source_audio = true;
       // Container caps (video/quicktime, video/x-matroska, ...) do not
       // establish a video track. Only known elementary video caps do.
-      if (std::strcmp(name, "video/x-h264") == 0 || std::strcmp(name, "video/x-h265") == 0 ||
+      if (elementary_mpeg || std::strcmp(name, "video/x-raw") == 0 ||
+          std::strcmp(name, "video/x-h264") == 0 || std::strcmp(name, "video/x-h265") == 0 ||
           std::strcmp(name, "video/x-vp8") == 0 || std::strcmp(name, "video/x-vp9") == 0 ||
           std::strcmp(name, "video/x-av1") == 0 || std::strcmp(name, "video/x-theora") == 0) {
         state->source_video = true;
@@ -133,9 +138,9 @@ int Decode(const char* input, const char* output) {
     auto* state = static_cast<DecodeState*>(data);
     auto* convert = gst_bin_get_by_name(GST_BIN(state->pipeline), "convert");
     auto* sink_pad = gst_element_get_static_pad(convert, "sink");
-    if (!gst_pad_is_linked(sink_pad) && state->source_video && !state->source_audio) {
-      state->no_audio = true;
-      GST_ELEMENT_ERROR(element, STREAM, TYPE_NOT_FOUND, ("No audio track"), (nullptr));
+    if (!gst_pad_is_linked(sink_pad)) {
+      state->no_audio = state->source_video && !state->source_audio;
+      GST_ELEMENT_ERROR(element, STREAM, TYPE_NOT_FOUND, ("No decodable audio pad"), (nullptr));
     }
     gst_object_unref(sink_pad);
     gst_object_unref(convert);
