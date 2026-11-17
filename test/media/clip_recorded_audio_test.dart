@@ -7,6 +7,8 @@ import 'package:ocideck/services/transcription/clip_recorded_audio_io.dart'
     as native;
 import 'package:ocideck/services/transcription/clip_recorded_audio_web.dart'
     as browser;
+import 'package:ocideck/services/transcription/clip_recorded_audio_stub.dart'
+    as unsupported;
 import 'package:ocideck/services/transcription/media_sniff.dart';
 import 'package:ocideck/services/transcription/transcription_errors.dart';
 import 'package:ocideck/services/web_asset_store.dart';
@@ -16,6 +18,31 @@ Uint8List _wav() => encodePcmWav(
 );
 
 void main() {
+  test(
+    'unsupported clipping refuses before I/O and retains caller ownership',
+    () async {
+      var released = 0;
+      final audio = RecordedAudio(
+        durablePath: 'unavailable:fixture',
+        duration: const Duration(seconds: 10),
+        kinds: const {CaptureSourceKind.file},
+        onRelease: () => released++,
+      );
+      await expectLater(
+        unsupported.clipRecordedAudio(
+          audio,
+          start: const Duration(seconds: 2),
+          end: const Duration(seconds: 3),
+          cancelled: () => false,
+        ),
+        throwsA(isA<UnsupportedSource>()),
+      );
+      expect(released, 0);
+      audio.releaseAssets();
+      expect(released, 1);
+    },
+  );
+
   test(
     'native clipping streams exact source frames and leaves padded source intact',
     () async {
