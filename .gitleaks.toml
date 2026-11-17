@@ -33,6 +33,12 @@ paths = [
   '''^native/whisper_cli/build/''',
   '''^native/whisper_cli/bin/''',
 
+  # Gepinde, gitignored FFmpeg-bron- en bouwcache (#2942). De detector
+  # leest filter-/TLS-C-code en compilerproeven als voorbeeld-API-sleutels.
+  # Het eigen manifest, bouwrecept en notices blijven volledig gescand.
+  '''^native/media_decoder/build/''',
+  '''^native/media_decoder/bin/''',
+
   # Lokale werkinstellingen, ook gitignored. Staan buiten de repo-inhoud.
   '''^\.claude/''',
 
