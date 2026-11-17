@@ -13,7 +13,7 @@ mkdir -p "$(dirname "$RESULT_FILE")"
 curl --fail --silent http://localhost:4444/status >/dev/null
 BACKUP=$(mktemp "${TMPDIR:-/tmp}/ocideck-browser-profile.XXXXXX")
 cp web/index.html "$BACKUP"
-restore_index() { cp "$BACKUP" web/index.html; rm -f "$BACKUP"; }
+restore_index() { if [[ -f "$BACKUP" ]]; then cp "$BACKUP" web/index.html; rm -f "$BACKUP"; fi; }
 trap restore_index EXIT HUP INT TERM
 # flutter drive requires an absolute base; deployments intentionally use ./.
 # Keep the production CSP unchanged and use the matching local renderer files.
