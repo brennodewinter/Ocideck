@@ -2,8 +2,7 @@
   "metadata": {
     "build_command": "scripts/gate_lock.sh make build-macos",
     "build_start_commit": "71edbe6168dde203f4be126a9bbf1c40be13fa35",
-    "macos_runtime_source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
-    "later_changes": "Linux-only classification and evidence harness updates; no macOS runtime change",
+    "later_changes": "Linux-only classification, evidence harness and translated normalization note; decoder and local engine unchanged",
     "installation": "Release app copied to a clean path with spaces and Unicode; codesign --verify --deep --strict passed",
     "artifact_sha256": {
       "Contents/MacOS/OciDeck": "08a55e417fb72fac7fd2b622c9832da57ceb692a74483772b4a5f156e1d53be0",
@@ -12,7 +11,8 @@
       "Contents/Helpers/whisper-cli": "b66eda1ba3d83ee62bad30573b26440fcefbfd992502a13d13682c1dfacb4dbd",
       "Contents/Resources/ffmpeg/ffmpeg-9.0.2.tar.xz": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e"
     },
-    "scope": "Actual release-bundle helpers plus FileSource/local engine; no interactive UI certification"
+    "scope": "Actual release-bundle helpers plus FileSource/local engine; no interactive UI certification",
+    "decoder_and_engine_source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10"
   },
   "report": {
     "scope": "Real file source to production local ASR; limited English sample; no UI/release certification",

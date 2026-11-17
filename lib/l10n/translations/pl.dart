@@ -1552,10 +1552,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'plik WAV jest normalizowany do mono PCM16 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Pobierz to nagranie, aby je zachować. Zamknięcie tego okna lub karty spowoduje utratę dźwięku.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'plik WAV nie jest 16-bitowym PCM — wymagane dekodowanie',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'plik WAV nie jest 16-bitowym PCM — przeglądarka dekoduje go mimo to',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

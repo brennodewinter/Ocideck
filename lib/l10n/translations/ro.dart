@@ -1556,10 +1556,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'WAV-ul este normalizat la PCM16 mono de 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Descărcați această înregistrare pentru a o păstra. La închiderea acestei ferestre sau file, sunetul se pierde.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'WAV-ul nu este PCM pe 16 biți — e nevoie de decodare',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'WAV-ul nu este PCM pe 16 biți — browserul îl decodifică oricum',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':
