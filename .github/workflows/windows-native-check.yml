@@ -39,6 +39,15 @@ on:
       - '.tool-versions'
       - '.github/workflows/windows-native-check.yml'
   workflow_dispatch:
+    inputs:
+      codec_matrix_only:
+        description: Compile and probe the production audio helper without the Flutter shell
+        default: false
+        type: boolean
+      operation_id:
+        description: Ownership marker for this explicit probe
+        required: false
+        type: string
 
 # Deze workflow leest alleen; hij publiceert niets.
 permissions:
@@ -52,6 +61,7 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ !inputs.codec_matrix_only }}
     name: Build Windows (controle)
     runs-on: windows-latest
     # De bouw duurt ~20-35 min. Ruim, maar begrensd: een stap die op een venster
@@ -93,3 +103,31 @@ jobs:
         run: |
           cmake --build build/windows/x64 --config Release --target ocideck_capture_startup_test
           build/windows/x64/native_audio_tests/Release/ocideck_capture_startup_test.exe
+
+  codecs:
+    if: ${{ inputs.codec_matrix_only }}
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Compile production Media Foundation helper
+        shell: pwsh
+        run: |
+          cmake -S native/audio_tools/probe -B build/codec-probe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --build build/codec-probe --config Release
+          exit $LASTEXITCODE
+      - name: Probe codecs without a developer PATH
+        shell: pwsh
+        run: |
+          python tool/codec_matrix/helper_probe.py build/codec-probe/Release/ocideck-audio.exe build/codec-probe/results.json
+          exit $LASTEXITCODE
+      - name: Preserve codec evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-codec-matrix
+          path: build/codec-probe/results.json
+          if-no-files-found: error

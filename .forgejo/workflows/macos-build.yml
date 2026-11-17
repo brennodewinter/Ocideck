@@ -56,6 +56,9 @@ jobs:
       - name: whisper-cli-helper in de bundel
         run: scripts/bundle_whisper_cli.sh macos
 
+      - name: Bundle source-pinned audio decoder and corresponding sources
+        run: scripts/bundle_media_decoder.sh
+
       # Deze runner is persistent (build/ blijft staan tussen runs), dus een
       # incrementele build zou verouderde doc-assets kunnen meenemen. Toets dat
       # de docs in de .app byte-voor-byte gelijk zijn aan docs/ op schijf.

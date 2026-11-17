@@ -614,10 +614,11 @@ const _dutchSourceFy = {
 
 const _dutchSourceAddFy = {
   'Automatisch afspelen is niet gestart.': 'Automatysk ôfspyljen is net begûn.',
+  'Audio- en videoformaten': 'Audio- en fideoformaten',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'de WAV wurdt normalisearre nei 16 kHz mono PCM16',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Download dizze opname om him te bewarjen. Nei it sluten fan dit finster of ljepblêd giet de audio ferlern.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'de WAV is gjin 16-bit PCM — dekodearjen nedich',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'de WAV is gjin 16-bit PCM — de browser dekodearret him dochs',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

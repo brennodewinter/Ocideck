@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:46aeb47a-68d1-5021-8673-609a04b007d7",
+  "serialNumber": "urn:uuid:fd54fdff-85a3-523a-88e5-d797f4b314d1",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-17T04:18:02.131501Z",
+    "timestamp": "2026-11-17T05:57:41.064443Z",
     "tools": {
       "components": [
         {
@@ -9358,6 +9358,52 @@
       ]
     },
     {
+      "bom-ref": "runtime:ffmpeg-macos@9.0.2",
+      "type": "application",
+      "supplier": {
+        "name": "FFmpeg developers",
+        "url": [
+          "https://ffmpeg.org"
+        ]
+      },
+      "name": "FFmpeg macOS audio decoder",
+      "version": "9.0.2",
+      "purl": "pkg:generic/ffmpeg@9.0.2",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz"
+        },
+        {
+          "type": "vcs",
+          "url": "https://git.ffmpeg.org/ffmpeg.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "native-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Standalone macOS helper, no OciDeck libav linking. Complete unmodified corresponding source and configure recipe ship inside Contents/Resources/ffmpeg. GPL/nonfree/version3, external library autodetection and network protocols are disabled. Exact configure flags: --disable-everything --disable-autodetect --disable-doc --disable-network --disable-gpl --disable-nonfree --disable-version3 --disable-shared --enable-static --enable-small --disable-programs --enable-ffmpeg --disable-avdevice --disable-swscale --disable-videotoolbox --disable-audiotoolbox --disable-securetransport --disable-asm --disable-debug --disable-iconv --enable-avfilter --enable-swresample --enable-filter=aresample,aformat,anull --enable-protocol=file --enable-demuxer=matroska,avi,wav,ogg,mp3,mov,flac,aac,aiff,caf,asf --enable-decoder=aac,aac_fixed,alac,flac,mp3,mp3float,opus,vorbis,wmav1,wmav2,adpcm_ima_wav,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,pcm_u8,pcm_mulaw,pcm_alaw,pcm_s16be,pcm_s24be,pcm_s32be,pcm_f32be,pcm_f64be,pcm_s8 --enable-parser=aac,mpegaudio,opus,vorbis,flac --enable-encoder=pcm_s16le --enable-muxer=wav --cc=/usr/bin/clang --ld=/usr/bin/clang --extra-cflags=-mmacosx-version-min=12.0 --extra-ldflags=-mmacosx-version-min=12.0"
+        }
+      ]
+    },
+    {
       "bom-ref": "runtime:webview2-loader@1.0.1661.34",
       "type": "library",
       "supplier": {
@@ -10229,6 +10275,7 @@
         "pkg:pub/webview_flutter_web@0.2.3+4",
         "pkg:pub/xml@7.0.1",
         "pkg:pub/yaml@3.1.4",
+        "runtime:ffmpeg-macos@9.0.2",
         "runtime:pdfium@chromium-7811",
         "runtime:webview2-loader@1.0.1661.34",
         "runtime:whisper.cpp@1.9.5",
@@ -12074,6 +12121,10 @@
     },
     {
       "ref": "font:assets/fonts/RobotoMono-Variable.ttf",
+      "dependsOn": []
+    },
+    {
+      "ref": "runtime:ffmpeg-macos@9.0.2",
       "dependsOn": []
     },
     {

@@ -9,6 +9,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/transcription/capture_source.dart';
+import 'package:ocideck/services/transcription/bundled_audio_helper_io.dart';
 import 'package:ocideck/services/transcription/file_capture_source_io.dart';
 import 'package:ocideck/services/transcription/media_sniff.dart';
 import 'package:ocideck/services/transcription/transcription_errors.dart';
@@ -22,9 +23,14 @@ List<int> _le32(int v) => [
   (v >> 24) & 0xff,
 ];
 
-Uint8List wavBytes({int seconds = 2}) {
-  const rate = 16000;
-  final dataLen = seconds * rate * 2;
+Uint8List wavBytes({
+  int seconds = 2,
+  int rate = 16000,
+  int channels = 1,
+  int bits = 16,
+}) {
+  final align = channels * bits ~/ 8;
+  final dataLen = seconds * rate * align;
   return Uint8List.fromList([
     ...'RIFF'.codeUnits,
     ..._le32(36 + dataLen),
@@ -32,11 +38,11 @@ Uint8List wavBytes({int seconds = 2}) {
     ...'fmt '.codeUnits,
     ..._le32(16),
     ..._le16(1),
-    ..._le16(1),
+    ..._le16(channels),
     ..._le32(rate),
-    ..._le32(rate * 2),
-    ..._le16(2),
-    ..._le16(16),
+    ..._le32(rate * align),
+    ..._le16(align),
+    ..._le16(bits),
     ...'data'.codeUnits,
     ..._le32(dataLen),
     ...List.filled(dataLen, 0),
@@ -138,6 +144,71 @@ void main() {
     stagingDir: staging.path,
     sourcePath: path,
   );
+
+  test(
+    'macOS decoder lookup uses the exact bundle helper, never a sibling/PATH',
+    () async {
+      final executable = p.join(
+        tmp.path,
+        'OciDeck ü.app',
+        'Contents',
+        'MacOS',
+        'ocideck',
+      );
+      final helper = File(
+        p.join(p.dirname(executable), '..', 'Helpers', 'ffmpeg'),
+      );
+      expect(
+        bundledMacMediaDecoder(executable: executable, macOS: true),
+        isNull,
+      );
+      await helper.parent.create(recursive: true);
+      await helper.writeAsString('test helper');
+      expect(
+        bundledMacMediaDecoder(executable: executable, macOS: true),
+        p.normalize(helper.path),
+      );
+      expect(
+        bundledMacMediaDecoder(executable: executable, macOS: false),
+        isNull,
+      );
+    },
+  );
+
+  for (final format in [(48000, 2, 16), (44100, 1, 24), (16000, 2, 16)]) {
+    test(
+      'WAV $format is normalized before being offered to an engine',
+      () async {
+        final original = wavBytes(
+          rate: format.$1,
+          channels: format.$2,
+          bits: format.$3,
+        );
+        final input = File(p.join(tmp.path, 'variant.wav'))
+          ..writeAsBytesSync(original);
+        var runs = 0;
+        final source = IoFileCaptureSource(
+          decoderOverride: 'ffmpeg',
+          decoderRunner: (exe, argv, {environment, required timeout}) {
+            runs++;
+            File(argv.last).writeAsBytesSync(wavBytes());
+            return DecodeRun(
+              done: Future.value(const DecodeResult(exitCode: 0, stderr: '')),
+              kill: () {},
+            );
+          },
+        );
+        final info = await source.describe(input.path);
+        expect(info.engineReadsDirectly, isFalse);
+        final session = await source.start(request(input.path));
+        final audio = await session.stop();
+        expect(runs, 1);
+        expect(audio.durablePath, isNot(input.path));
+        expect(audio.duration, const Duration(seconds: 2));
+        expect(input.readAsBytesSync(), original);
+      },
+    );
+  }
 
   group('describe', () {
     test('PCM-WAV gaat direct door, met duur uit de header', () async {
@@ -294,6 +365,34 @@ void main() {
       expect(argv, containsAllInOrder(['-ar', '16000']));
       expect(argv, containsAllInOrder(['-ac', '1']));
     });
+
+    test(
+      'een ontbrekende systeemcodec is geen ontbrekende audiotrack',
+      () async {
+        final mp3 = File(p.join(tmp.path, 'clip.mp3'))
+          ..writeAsBytesSync(
+            Uint8List.fromList([0x49, 0x44, 0x33, ...List.filled(40, 0)]),
+          );
+        final session = await IoFileCaptureSource(
+          decoderOverride: 'ocideck-audio.exe',
+          decoderRunner: (exe, argv, {environment, required timeout}) =>
+              DecodeRun(
+                done: Future.value(const DecodeResult(exitCode: 4, stderr: '')),
+                kill: () {},
+              ),
+        ).start(request(mp3.path));
+        await expectLater(
+          session.stop(),
+          throwsA(
+            isA<UnsupportedSource>().having(
+              (e) => e.message,
+              'uitweg',
+              contains('PCM-WAV'),
+            ),
+          ),
+        );
+      },
+    );
 
     test('"matches no streams" is DecodeFailed: geen audiotrack', () {
       expect(
@@ -460,6 +559,35 @@ void main() {
       expect(argvs.single, contains('--no-filler'));
     });
 
+    test(
+      'een decoder met niet-genormaliseerde uitvoer wordt geweigerd',
+      () async {
+        final mp3 = File(p.join(tmp.path, 'clip.mp3'))
+          ..writeAsBytesSync(
+            Uint8List.fromList([0x49, 0x44, 0x33, ...List.filled(40, 0)]),
+          );
+        final session = await IoFileCaptureSource(
+          decoderOverride: 'afconvert',
+          decoderRunner: wavWritingDecoder(
+            [],
+            wav: () => wavBytes(rate: 48000, channels: 2),
+          ),
+        ).start(request(mp3.path));
+        await expectLater(
+          session.stop(),
+          throwsA(
+            isA<DecodeFailed>().having(
+              (e) => e.message,
+              'melding',
+              contains('16 kHz mono PCM16'),
+            ),
+          ),
+        );
+        expect(await File(session.durablePath).exists(), isFalse);
+        expect(await mp3.exists(), isTrue);
+      },
+    );
+
     test('een geldige header met nul audiobytes is wél "lege audio"', () async {
       final mp3 = File(p.join(tmp.path, 'clip.mp3'))
         ..writeAsBytesSync(
@@ -561,7 +689,7 @@ void main() {
       expect(info.container, MediaContainer.wav);
       expect(info.engineReadsDirectly, isFalse);
       expect(info.decodable, isTrue);
-      expect(info.decodeNote, contains('geen 16-bit PCM'));
+      expect(info.decodeNote, contains('16 kHz mono PCM16'));
     });
   });
 

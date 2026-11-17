@@ -1544,10 +1544,11 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Automatisch afspelen is niet gestart.':
       'Automaattinen toisto ei käynnistynyt.',
+  'Audio- en videoformaten': 'Ääni- ja videomuodot',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'WAV muunnetaan 16 kHz:n mono-PCM16-muotoon',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Lataa tämä tallenne säilyttääksesi sen. Ääni katoaa, kun suljet tämän ikkunan tai välilehden.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'WAV ei ole 16-bittistä PCM:ää — tarvitaan dekoodaus',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'WAV ei ole 16-bittistä PCM:ää — selain dekoodaa sen silti',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

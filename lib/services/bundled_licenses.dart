@@ -125,6 +125,12 @@ abstract final class BundledLicenses {
       licenseAsset: 'assets/models/YuNet-LICENSE.txt',
     ),
     BundledLicense(
+      component: 'FFmpeg macOS audio decoder (standalone LGPL build)',
+      license: 'LGPL-2.1-or-later',
+      source: 'https://ffmpeg.org',
+      licenseAsset: 'assets/licenses/ffmpeg-LGPL-2.1.txt',
+    ),
+    BundledLicense(
       component: 'whisper.cpp speech engine (whisper-cli / whisper-wasm)',
       license: 'MIT',
       source: 'https://github.com/ggml-org/whisper.cpp',

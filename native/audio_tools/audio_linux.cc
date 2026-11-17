@@ -108,16 +108,39 @@ int Decode(const char* input, const char* output) {
   g_object_set(sink, "location", output, nullptr);
   gst_object_unref(source);
   gst_object_unref(sink);
-  struct DecodeState { GstElement* pipeline; std::atomic<bool> no_audio{false}; };
+  struct DecodeState {
+    GstElement* pipeline;
+    std::atomic<bool> no_audio{false}, source_audio{false}, source_video{false};
+  };
   DecodeState state{pipeline};
   auto* decoder = gst_bin_get_by_name(GST_BIN(pipeline), "decoder");
+  g_signal_connect(decoder, "autoplug-continue", G_CALLBACK(+[](GstElement*, GstPad*, GstCaps* caps, gpointer data) -> gboolean {
+    auto* state = static_cast<DecodeState*>(data);
+    for (guint i = 0; i < gst_caps_get_size(caps); ++i) {
+      const auto* structure = gst_caps_get_structure(caps, i);
+      const char* name = gst_structure_get_name(structure);
+      gboolean systemstream = TRUE;
+      const bool elementary_mpeg = std::strcmp(name, "video/mpeg") == 0 &&
+          gst_structure_get_boolean(structure, "systemstream", &systemstream) && !systemstream;
+      if (g_str_has_prefix(name, "audio/")) state->source_audio = true;
+      // Container caps (video/quicktime, video/x-matroska, ...) do not
+      // establish a video track. Only known elementary video caps do.
+      if (elementary_mpeg || std::strcmp(name, "video/x-raw") == 0 ||
+          std::strcmp(name, "video/x-h264") == 0 || std::strcmp(name, "video/x-h265") == 0 ||
+          std::strcmp(name, "video/x-vp8") == 0 || std::strcmp(name, "video/x-vp9") == 0 ||
+          std::strcmp(name, "video/x-av1") == 0 || std::strcmp(name, "video/x-theora") == 0) {
+        state->source_video = true;
+      }
+    }
+    return TRUE;
+  }), &state);
   g_signal_connect(decoder, "no-more-pads", G_CALLBACK(+[](GstElement* element, gpointer data) {
     auto* state = static_cast<DecodeState*>(data);
     auto* convert = gst_bin_get_by_name(GST_BIN(state->pipeline), "convert");
     auto* sink_pad = gst_element_get_static_pad(convert, "sink");
     if (!gst_pad_is_linked(sink_pad)) {
-      state->no_audio = true;
-      GST_ELEMENT_ERROR(element, STREAM, TYPE_NOT_FOUND, ("No audio track"), (nullptr));
+      state->no_audio = state->source_video && !state->source_audio;
+      GST_ELEMENT_ERROR(element, STREAM, TYPE_NOT_FOUND, ("No decodable audio pad"), (nullptr));
     }
     gst_object_unref(sink_pad);
     gst_object_unref(convert);
@@ -145,13 +168,24 @@ int Decode(const char* input, const char* output) {
   auto* message = changed == GST_STATE_CHANGE_FAILURE ? nullptr :
       gst_bus_timed_pop_filtered(bus, 10 * 60 * GST_SECOND,
           static_cast<GstMessageType>(GST_MESSAGE_ERROR | GST_MESSAGE_EOS));
-  int status = message && GST_MESSAGE_TYPE(message) == GST_MESSAGE_EOS ? 0 : 1;
+  int status = message && GST_MESSAGE_TYPE(message) == GST_MESSAGE_EOS && bytes > 0 ? 0 : 1;
+  if (message && GST_MESSAGE_TYPE(message) == GST_MESSAGE_ERROR) {
+    GError* error = nullptr;
+    gchar* debug = nullptr;
+    gst_message_parse_error(message, &error, &debug);
+    if (error && ((error->domain == GST_CORE_ERROR && error->code == GST_CORE_ERROR_MISSING_PLUGIN) ||
+                  (error->domain == GST_STREAM_ERROR && error->code == GST_STREAM_ERROR_CODEC_NOT_FOUND))) {
+      status = 4;
+    }
+    if (error) g_error_free(error);
+    g_free(debug);
+  }
   if (message) gst_message_unref(message);
   gst_element_set_state(pipeline, GST_STATE_NULL);
   gst_object_unref(bus);
   gst_object_unref(pipeline);
   if (status) std::remove(output);
-  return state.no_audio ? 3 : status;
+  return status == 4 ? 4 : (state.no_audio ? 3 : status);
 }
 }  // namespace
 int main(int argc, char** argv) {

@@ -1544,10 +1544,11 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Automatisch afspelen is niet gestart.':
       'D automatischi Wiedergab isch nöd gstartet.',
+  'Audio- en videoformaten': 'Audio- und Videoformat',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      's WAV wird uf 16 kHz Mono-PCM16 normalisiert',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Lad die Ufnahm abe, zum si z bhalte. Wänn du das Fänschter oder de Tab zuemachsch, gaht de Ton verlore.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      's WAV isch kei 16-Bit-PCM — en Dekodierig isch nötig',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       's WAV isch kei 16-Bit-PCM — de Browser dekodiert’n trotzdem',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

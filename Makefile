@@ -1337,6 +1337,7 @@ build-macos: prune-hook-cache sbom-verify
 	flutter build macos --release
 	@echo "== OciDeck helper: whisper-cli in de bundel =="
 	scripts/bundle_whisper_cli.sh macos
+	scripts/bundle_media_decoder.sh
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/macos
 

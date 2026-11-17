@@ -72,3 +72,7 @@
 # niet in de repo — `package.json`/`package-lock.json`/`run.sh` wél,
 # `node_modules/` niet.
 ^tool/marp-check/node_modules/
+
+# Gepinde FFmpeg-bron- en bouwcache; eigen manifest/recept blijven gescand.
+^native/media_decoder/build/
+^native/media_decoder/bin/

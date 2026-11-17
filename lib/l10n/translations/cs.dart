@@ -1544,10 +1544,11 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Automatisch afspelen is niet gestart.':
       'Automatické přehrávání se nespustilo.',
+  'Audio- en videoformaten': 'Zvukové a obrazové formáty',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'WAV se normalizuje na 16 kHz mono PCM16',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Chcete-li tuto nahrávku zachovat, stáhněte ji. Zavřením tohoto okna nebo panelu se zvuk ztratí.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'WAV není 16bitové PCM — je nutná konverze',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'WAV není 16bitové PCM — prohlížeč ho stejně dekóduje',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

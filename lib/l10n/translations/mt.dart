@@ -1559,10 +1559,11 @@ const _dutchSourceMt = {
 
 const _dutchSourceAddMt = <String, String>{
   'Automatisch afspelen is niet gestart.': 'Id-daqq awtomatiku ma bediex.',
+  'Audio- en videoformaten': 'Formati tal-awdjo u tal-vidjo',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'il-WAV jiġi normalizzat għal PCM16 mono ta’ 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Niżżel din ir-reġistrazzjoni biex iżżommha. Meta tagħlaq din it-tieqa jew din it-tab, l-awdjo jintilef.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'il-WAV mhuwiex PCM ta’ 16-bit — hemm bżonn dekodifikar',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'il-WAV mhuwiex PCM ta’ 16-bit — il-browser jikkodifika xorta',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

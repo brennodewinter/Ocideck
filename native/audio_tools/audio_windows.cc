@@ -52,7 +52,8 @@ HRESULT Decode(const wchar_t* input, FILE* output) {
     DWORD flags = 0;
     hr = reader->ReadSample(MF_SOURCE_READER_FIRST_AUDIO_STREAM, 0, nullptr,
                             &flags, nullptr, &sample);
-    if (FAILED(hr) || (flags & MF_SOURCE_READERF_ERROR)) return E_FAIL;
+    if (FAILED(hr)) return hr;
+    if (flags & MF_SOURCE_READERF_ERROR) return E_FAIL;
     if (sample) {
       ComPtr<IMFMediaBuffer> buffer;
       hr = sample->ConvertToContiguousBuffer(&buffer);
@@ -91,5 +92,10 @@ int wmain(int argc, wchar_t** argv) {
   if (FAILED(hr)) _wremove(argv[3]);
   if (SUCCEEDED(started)) MFShutdown();
   CoUninitialize();
-  return SUCCEEDED(hr) ? 0 : (hr == MF_E_INVALIDSTREAMNUMBER ? 3 : 1);
+  if (SUCCEEDED(hr)) return 0;
+  std::fprintf(stderr, "Media Foundation decode failed: HRESULT 0x%08lx\n",
+               static_cast<unsigned long>(hr));
+  if (hr == MF_E_INVALIDSTREAMNUMBER) return 3;
+  if (hr == MF_E_TOPO_CODEC_NOT_FOUND || hr == MF_E_UNSUPPORTED_BYTESTREAM_TYPE) return 4;
+  return 1;
 }

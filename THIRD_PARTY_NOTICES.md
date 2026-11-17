@@ -265,3 +265,22 @@ packaging. See `docs/LICENSE_COMPLIANCE.md` for the scoped review.
 user-supplied PE attendance example (`20250605-op-t-hof-peter.odt`). ISACA and its
 chapter mark belong to their respective owners; the application's software licence
 does not grant rights to the mark.
+
+## macOS audio decoding (FFmpeg)
+
+The macOS bundle includes a **standalone FFmpeg 9.0.2 executable** under
+LGPL-2.1-or-later, Copyright (c) 2000–2026 the FFmpeg developers.
+OciDeck invokes the program through argv and does not link against libav*.
+This specific source build disables GPL, nonfree and version3 components,
+external library autodetection and network protocols. It enables only the
+manifest's audio decoding, PCM16 output and resampling components.
+
+The full LGPL text ships in `assets/licenses/ffmpeg-LGPL-2.1.txt` and appears
+on the app's licence page. Complete corresponding, unmodified sources, the
+source hash, configure flags, version output and build/replacement instructions
+travel in the **same macOS download**, under `Contents/Resources/ffmpeg`.
+You may rebuild, modify, debug and replace the standalone LGPL component;
+`native/media_decoder/README.md` explains replacing and locally resealing it.
+These rights are not restricted by OciDeck's EUPL licence.
+Windows continues to use Media Foundation and Linux uses the separately
+inventoried GStreamer route; this helper is not a new Whisper dependency.

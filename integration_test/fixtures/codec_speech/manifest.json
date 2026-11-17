@@ -1,0 +1,34 @@
+{
+  "source": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/v1.9.5/samples/jfk.wav",
+  "scope": "Limited English speech decode-to-local-ASR probe, not multilingual quality or UI evidence",
+  "fixtures": [
+    {
+      "source": "jfk.wav",
+      "sha256": "59dfb9a4acb36fe2a2affc14bacbee2920ff435cb13cc314a08c13f66ba7860e"
+    },
+    {
+      "source": "jfk-vorbis.ogg",
+      "sha256": "ba49fcd0e09670ea068e9153f8dfa49276be75dce29b6c8d9fe9ad5c74a9973f"
+    },
+    {
+      "source": "jfk-opus.ogg",
+      "sha256": "d3273c7347797bcea4337500529ed5ab3bc353640b2ef07e3d8fa1c53b89ded3"
+    },
+    {
+      "source": "jfk-aac.mov",
+      "sha256": "28cd719ccc8972caf90d6e4dd5f8e17b735164bd3316f4e3fa2b084233ab36ed"
+    },
+    {
+      "source": "jfk-opus.webm",
+      "sha256": "5ea8b098c0a23d9a8bb9e6f9111becb72e13c1724ad863e89e4567e969cd396a"
+    },
+    {
+      "source": "jfk-opus.mkv",
+      "sha256": "db7c1dbe1646b4d4e98ef2661027ac037eea7921a8f1c0e8ed78c35a7c4ee864"
+    },
+    {
+      "source": "jfk-pcm.avi",
+      "sha256": "3219c501a435439836a9f465a91f0be2947381eda689df54332e15de9b55df08"
+    }
+  ]
+}

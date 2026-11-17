@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
+    "harness_revision": "committed with this evidence",
+    "scope": "19 ordinary-format combinations through actual FileSource and /usr/bin/afconvert"
+  },
+  "report": {
+    "platform": "macos",
+    "os": "Version 27.0.1 (Build 26A434)",
+    "decoder": "/usr/bin/afconvert",
+    "decoder_sha256": "beec8f2d64388e6d707ac8b4fe7477649ab93c0c66610faf0abe3cfbdfda871b",
+    "scope": "Actual file source and decoder; no ASR or UI claim",
+    "selection": "19 existing Apple-format combinations; extended formats/negative cases use bundled-helper probe",
+    "results": [
+      {
+        "source": "3gp-aac.3gp",
+        "container": "mpeg4",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 35142,
+        "offered_in_picker": true
+      },
+      {
+        "source": "aac-adts.aac",
+        "container": "aac",
+        "duration_ms": 640,
+        "data_bytes": 20480,
+        "elapsed_us": 19917,
+        "offered_in_picker": true
+      },
+      {
+        "source": "aiff.aiff",
+        "container": "aiff",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 19574,
+        "offered_in_picker": true
+      },
+      {
+        "source": "caf.caf",
+        "container": "caf",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 18664,
+        "offered_in_picker": true
+      },
+      {
+        "source": "flac.flac",
+        "container": "flac",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 20009,
+        "offered_in_picker": true
+      },
+      {
+        "source": "m4a-aac.m4a",
+        "container": "mpeg4",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 19472,
+        "offered_in_picker": true
+      },
+      {
+        "source": "m4a-alac.m4a",
+        "container": "mpeg4",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 19292,
+        "offered_in_picker": true
+      },
+      {
+        "source": "mov-aac.mov",
+        "container": "mpeg4",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 21060,
+        "offered_in_picker": true
+      },
+      {
+        "source": "mov-pcm.mov",
+        "container": "mpeg4",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 21075,
+        "offered_in_picker": true
+      },
+      {
+        "source": "mp3.mp3",
+        "container": "mp3",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 19512,
+        "offered_in_picker": true
+      },
+      {
+        "source": "mp4-aac.mp4",
+        "container": "mpeg4",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 17760,
+        "offered_in_picker": true
+      },
+      {
+        "source": "ogg-opus.ogg",
+        "container": "ogg",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 18085,
+        "offered_in_picker": true
+      },
+      {
+        "source": "ogg-vorbis.ogg",
+        "container": "ogg",
+        "duration_ms": 597,
+        "data_bytes": 19116,
+        "elapsed_us": 18846,
+        "offered_in_picker": true
+      },
+      {
+        "source": "opus.opus",
+        "container": "ogg",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 17849,
+        "offered_in_picker": true
+      },
+      {
+        "source": "wav-adpcm.wav",
+        "container": "wav",
+        "duration_ms": 614,
+        "data_bytes": 19662,
+        "elapsed_us": 18174,
+        "offered_in_picker": true
+      },
+      {
+        "source": "wav-float32.wav",
+        "container": "wav",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 18048,
+        "offered_in_picker": true
+      },
+      {
+        "source": "wav-pcm16.wav",
+        "container": "wav",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 17689,
+        "offered_in_picker": true
+      },
+      {
+        "source": "wav-pcm24.wav",
+        "container": "wav",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 17023,
+        "offered_in_picker": true
+      },
+      {
+        "source": "wav-ulaw.wav",
+        "container": "wav",
+        "duration_ms": 600,
+        "data_bytes": 19200,
+        "elapsed_us": 18423,
+        "offered_in_picker": true
+      }
+    ],
+    "negative_results": []
+  }
+}

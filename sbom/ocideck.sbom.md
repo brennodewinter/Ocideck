@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.7.7+49** (licence EUPL-1.2) and every third-party component it ships (245 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
+This is **ocideck 0.7.7+49** (licence EUPL-1.2) and every third-party component it ships (246 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
 
-The JSON documents carry **874 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 12 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **875 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 12 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -18,6 +18,7 @@ The JSON documents carry **874 dependency relations** between these components: 
 | NOASSERTION | 5 |
 | BSD | 3 |
 | MPL-2.0 | 1 |
+| LGPL-2.1-or-later | 1 |
 
 ## Components
 
@@ -285,10 +286,11 @@ The JSON documents carry **874 dependency relations** between these components: 
 | Roboto | — | OFL-1.1 | The Roboto Project Authors | `pkg:generic/Roboto` |
 | Roboto Mono | — | OFL-1.1 | The Roboto Mono Project Authors | `pkg:generic/Roboto%20Mono` |
 
-### Bundled native runtimes (4)
+### Bundled native runtimes (5)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
+| FFmpeg macOS audio decoder | 9.0.2 | LGPL-2.1-or-later | FFmpeg developers | `pkg:generic/ffmpeg@9.0.2` |
 | Microsoft Edge WebView2 loader | 1.0.1661.34 | BSD-3-Clause | Microsoft Corporation | `pkg:nuget/Microsoft.Web.WebView2@1.0.1661.34` |
 | PDFium | 144.0.7811.0 | BSD-3-Clause AND Apache-2.0 | The PDFium Authors | `pkg:generic/pdfium@144.0.7811.0` |
 | Windows Implementation Library | 1.0.220914.1 | MIT | Microsoft Corporation | `pkg:nuget/Microsoft.Windows.ImplementationLibrary@1.0.220914.1` |

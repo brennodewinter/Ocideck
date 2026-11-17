@@ -35,3 +35,18 @@ Gantt and formula). This isolates the real native renderer from Flutter.
 A VM's native-component checks do not establish physical device or real-call
 behaviour; the existing Jitsi two-client integration test remains required
 for that evidence on each OS.
+
+Codec support is established by concrete fixtures, not by the helper's presence.
+Exit 4 identifies a known unavailable container/codec decoder. Generic malformed
+or unreadable input remains a different failure; the app must not label it as a
+missing audio track. Linux's no-audio result requires an observed video stream
+without an observed audio stream; a missing audio decoder is not that evidence.
+Empty decodes fail and remove their output.
+
+The manual codec mode of `.github/workflows/windows-native-check.yml` compiles
+these exact helper sources on Windows without building the Flutter shell.
+`native/audio_tools/probe/CMakeLists.txt` offers the same narrow compilation on
+Linux. Run `python3 tool/codec_matrix/helper_probe.py HELPER OUTPUT.json` to
+record fixture hashes, duration, PCM format, nonzero signal, negative cases and
+source preservation under a stripped PATH. This is helper evidence, not a claim
+about an installed release, UI or speech recognition.

@@ -1,0 +1,401 @@
+{
+  "provenance": "Synthetic 600 ms tones at 48 kHz stereo; video sources contain a real video track. No user audio. Generated for the 2026-11-16 investigation; hashes and actual stream codecs verified with ffprobe. EUPL-1.2 project fixtures.",
+  "scope": "Codec normalization only, not ASR quality or physical recording. WMA is a helper probe outside the first offered picker set.",
+  "fixtures": [
+    {
+      "source": "3gp-aac.3gp",
+      "source_sha256": "6f3bebd4bcaac94cc0e43499be588918280971312f71ad344dfd3a80e261bf0b",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "mpeg4"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "aac-adts.aac",
+      "source_sha256": "d96d2d91bfad9a71968e3b505b5485c33222d9ce66b59d84b0caaec314cc4700",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "aiff.aiff",
+      "source_sha256": "9c06d87a055120f4a1cd1cace33a6c833a59e12aed757e4d3e102e54ebb87284",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_s16be",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "avi-pcm.avi",
+      "source_sha256": "82d653432341e8430fb30611c433df50b87482b125d6c6cbee8ed785b990df82",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "mpeg4"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "caf.caf",
+      "source_sha256": "27bb52354fe85cafae6565a358c7a5b7b176bf6e9d661c7f8736262d1f23d3cd",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "flac.flac",
+      "source_sha256": "0a4e10855f96f2cd96b25e3e624be7ae2355d54c071de5d28705ae17b6768efe",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "flac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "m4a-aac.m4a",
+      "source_sha256": "78310b711e36f133932d7e0b2f8090fb3a8e85f2e099974d5a863362d91fe11c",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "m4a-alac.m4a",
+      "source_sha256": "478db5bd446905c19ae2b0d1a5432d586368a8b72735214fe02dcd3b7c8ce6a8",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "alac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "mkv-opus.mkv",
+      "source_sha256": "2a7bd2591b818dff5d5b332123f2509a86b1bdc69f85e689bd346f73e41d4fbb",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "mpeg4"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "opus",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "mov-aac.mov",
+      "source_sha256": "0e0a13b2cd85dccc334f35199ec6888b7f813b9ffba739b553697574b7b19e68",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "mpeg4"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "mov-pcm.mov",
+      "source_sha256": "1ad5fc6b1bfbb949fee89485e3c189d4a0997b4986f47af2dd517ac357e45d39",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "mpeg4"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "mp3.mp3",
+      "source_sha256": "6a2735f8d4d85c9842ca1ed8c50a3187aa8014a8594a4b8a851dcfaa1ac12079",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "mp3",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "mp4-aac.mp4",
+      "source_sha256": "e8c9b04de58bc3e970bb19591462898c8b64b212180f0ef16b051764e737538c",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "mpeg4"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "ogg-opus.ogg",
+      "source_sha256": "caa9f330851ba1106e0d1d8595a2bad8bfe88793272a12070fb3aa7988abda40",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "opus",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "ogg-vorbis.ogg",
+      "source_sha256": "738738999723e85ec686fee0dc23a46043827c0b89b3e016c2f339a303f28414",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "vorbis",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "opus.opus",
+      "source_sha256": "004d6934bbd5d29b909224f1e8fd58eae4e8b7a8dfc90ab14307289f9484116f",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "opus",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "wav-adpcm.wav",
+      "source_sha256": "19fc8df87b83353a37e92f3a09e52110069dc937c4bdea6bef77613d61ad5567",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "adpcm_ima_wav",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "wav-float32.wav",
+      "source_sha256": "33665f73cb9d625783a5dd3d9217c8abf70c2b8f00c7e5671a3044e6974b86d4",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_f32le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "wav-pcm16.wav",
+      "source_sha256": "a0801d4c9c7c5e4d0503079d826a429120a13174b477739bea5466b412322527",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "wav-pcm24.wav",
+      "source_sha256": "845080b848f302554371917623dca54adea8ac79ad4384cff961e251d2697ea9",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_s24le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "wav-ulaw.wav",
+      "source_sha256": "cfcb25a7a3c7895a036a04b7cce6613864aed1efd82f48dbd445fab1d402161a",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "pcm_mulaw",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "webm-opus.webm",
+      "source_sha256": "6dfed8ceebe194eeac10f75e455554e89ae45efe4e26b94be3c337f553139da4",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "vp8"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "opus",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": true
+    },
+    {
+      "source": "wma.wma",
+      "source_sha256": "97964a59f158faadd1f0e8a669ff38f043dfb0f2dfce25853cce57660a4cccc0",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "wmav2",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "expected_duration_ms": 600,
+      "duration_tolerance_ms": 100,
+      "offered_in_picker": false
+    }
+  ],
+  "negative_fixtures": [
+    {
+      "source": "wav-ms-adpcm-unsupported.wav",
+      "source_sha256": "deadc077751dfbc7dc7f0523d46aa97402d21086f55efff3ba9ffa4d644f6210",
+      "expected": "unsupported-codec"
+    },
+    {
+      "source": "video-without-audio.mp4",
+      "source_sha256": "faada2b444874eae4863d93665ef1ee06ec9e0ae89df505fa9a6cdf97d451e9f",
+      "expected": "no-audio"
+    },
+    {
+      "source": "corrupt-matroska.mkv",
+      "source_sha256": "33486a111a96e5d9356bd8303f954e184346acf01cb74676a6170aea30a5a6e6",
+      "expected": "corrupt"
+    },
+    {
+      "source": "empty.wav",
+      "source_sha256": "ba584a378b11d9e9c98736fd8c256fe1453a84ee4139416d24b07acff424f0fb",
+      "expected": "empty"
+    }
+  ]
+}
