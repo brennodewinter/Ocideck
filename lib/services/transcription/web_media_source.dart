@@ -195,7 +195,9 @@ class _WebMediaSession implements CaptureSession {
       );
     }
     if (failure != null) throw failure;
+    final lease = WebAssetStore.lease([_storedPath!]);
     return RecordedAudio(
+      onRelease: lease.release,
       durablePath: _storedPath!,
       duration: DateTime.now().difference(_started),
       kinds: _kinds,

@@ -292,16 +292,19 @@ maps them; a label the engine cannot support is absent, never guessed.
   put it) and the keep-choice on save decides whether a copy is moved into
   `media/`. A transcript that references audio outside its own folder is
   never written — containment would make it a lie on every other machine.
-- **Web.** There is no project folder in the browser build; recorded audio
-  lives in the `mem:` asset store (`WebAssetStore`, 256 MiB app-wide budget —
-  a real constraint: a long WAV recording does not fit, so web recording
-  either stores a compressed container or caps recording length honestly,
-  decided by #2513/#2517's proof, not by this document's optimism). Saving the
-  transcript offers **two downloads**: the `.md` and the audio file; the
-  `.md`'s `media/` reference is honest about expecting the audio to be placed
-  beside it on a real filesystem. Reloading the page without downloading loses
-  the audio — the save flow says so before it happens, the same warning an
-  unsaved `mem:` image already gets.
+- **Web.** There is no project folder or seven-day recording archive.
+  Audio and call sidecars live in `WebAssetStore` within its 256 MiB encoded-byte
+  budget. Explicit leases protect preview sources, decode results and completed
+  recordings; tab/document/undo/clipboard/style roots and all other leases
+  participate in collection. Releasing one task never deletes shared bytes
+  still owned elsewhere. A closed transcription dialog cancels its task but
+  retains its source until outstanding work has settled, then frees temporary
+  bytes. The finished-recording dialog offers a user-triggered audio download
+  (one ZIP with `sources.json` for calls) and keeps the dialog open: offering a
+  browser download cannot prove it reached disk. Discard/close releases the
+  temporary recording. The web transcript contains no invented `media/` link;
+  its Markdown save is separate from the explicit audio download. Reloading
+  loses memory; disabling/cancelling a recording does not create a recovery copy.
 
 ### 3.3 Round-trip and migration requirements (acceptance as requirements)
 
@@ -663,6 +666,23 @@ and forwards cancel to whisper's `abort_callback` (patch:
 `native/whisper_wasm/emscripten-cancel.patch`). The artifacts are
 hash-pinned in `web/whisper/manifest.json`; a test fails the build if a
 binary is hand-edited.
+
+**Context ownership (#2945).** The engine provider retires its old instance
+when the selected model or route changes. An already accepted task keeps its
+context through model loading, decode and inference; cleanup runs after that
+task settles, before the next queued engine can load a model. Work across
+engine instances is serialized around the shared native worker. Cancelling a
+queued task cannot cancel another engine's native run. Cancellation during
+loading or decode is checked before inference and before accepting results.
+
+Each context is tied to the bridge's runtime generation. A runtime abort
+invalidates all context indices and rejects pending initialization/inference.
+A subsequent explicit attempt reloads the hash-verified model from IndexedDB;
+it does not silently download it again. Late callbacks from an old runtime
+are ignored, and disposal never frees an index reused by a newer runtime.
+The lifecycle tests use a controlled native bridge and small test model, and
+separately execute the production bridge callbacks in a module harness; they
+are ownership/recovery checks, not new speech-quality measurements.
 
 **The hard precondition.** The build uses WASM pthreads, which need
 `SharedArrayBuffer`, which exists only under cross-origin isolation:

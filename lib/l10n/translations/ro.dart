@@ -1556,6 +1556,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
+      'Descărcați această înregistrare pentru a o păstra. La închiderea acestei ferestre sau file, sunetul se pierde.',
   'de WAV is geen 16-bit PCM — decode nodig':
       'WAV-ul nu este PCM pe 16 biți — e nevoie de decodare',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':

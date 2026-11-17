@@ -193,3 +193,9 @@ abstract class TranscriptionEngine {
   /// [Cancelled]. Niets aan de hand als er niets liep.
   void cancel();
 }
+
+/// Optioneel resourcecontract voor engines met een eigen model/runtime.
+/// Retireert de instantie; reeds begonnen taken houden hun resources tot einde.
+abstract interface class ManagedTranscriptionEngine {
+  void dispose();
+}

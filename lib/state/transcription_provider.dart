@@ -228,7 +228,11 @@ final transcriptionEngineProvider = Provider<TranscriptionEngine?>((ref) {
   for (final m in catalog) {
     if (m.id == selectedId) model = m;
   }
-  return createLocalWhisperEngine(model: model ?? catalog.first);
+  final engine = createLocalWhisperEngine(model: model ?? catalog.first);
+  if (engine case final ManagedTranscriptionEngine managed) {
+    ref.onDispose(managed.dispose);
+  }
+  return engine;
 });
 
 /// Een verzoek aan het open transcriptdocument: pas deze binnenkomende tekst

@@ -41,10 +41,10 @@ Future<void> openMediaForTranscription(
   required String sourcePath,
   required String displayName,
 }) async {
-  await showDialog<void>(
-    context: context,
-    builder: (_) =>
-        TranscribeFileDialog(sourcePath: sourcePath, displayName: displayName),
+  await showTranscribeFileDialog(
+    context,
+    sourcePath: sourcePath,
+    displayName: displayName,
   );
 }
 

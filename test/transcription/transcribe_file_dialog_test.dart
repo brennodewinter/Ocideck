@@ -16,6 +16,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/recovery_service.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/services/transcription/capture_source.dart';
 import 'package:ocideck/services/transcription/file_capture_source.dart';
 import 'package:ocideck/services/transcription/media_sniff.dart';
@@ -154,6 +155,25 @@ class _FakeEngine implements TranscriptionEngine {
   void cancel() {}
 }
 
+class _DelayedEngine extends _FakeEngine {
+  _DelayedEngine() : super(const []);
+  final result = Completer<TranscriptResult>();
+  bool started = false;
+  bool cancelled = false;
+
+  @override
+  Future<TranscriptResult> transcribe(
+    AudioRef audio,
+    TranscriptionOptions options,
+  ) {
+    started = true;
+    return result.future;
+  }
+
+  @override
+  void cancel() => cancelled = true;
+}
+
 /// De staging-hulp die niks aanraakt — de dialoog hoeft geen echte map.
 class _NoopStaging implements RecordingStaging {
   @override
@@ -193,14 +213,82 @@ void main() {
   setUp(() async {
     AppLocalizations.setActiveLanguageCode('nl');
     SharedPreferences.setMockInitialValues({});
+    WebAssetStore.clear();
     tmp = await Directory.systemTemp.createTemp('dialog_test_');
     wavPath = '${tmp.path}/clip.wav';
     await File(wavPath).writeAsBytes(_wav(seconds: 2));
   });
 
   tearDown(() async {
+    WebAssetStore.clear();
     if (await tmp.exists()) await tmp.delete(recursive: true);
   });
+
+  testWidgets(
+    'sluiten tijdens ASR annuleert en bewaart audio tot de taak afrondt',
+    (tester) async {
+      final path = WebAssetStore.put(_wav(), name: 'bron.wav');
+      final engine = _DelayedEngine();
+      await tester.pumpWidget(
+        app(
+          Builder(
+            builder: (context) => TextButton(
+              onPressed: () => showTranscribeFileDialog(
+                context,
+                sourcePath: path,
+                displayName: 'bron.wav',
+              ),
+              child: const Text('open'),
+            ),
+          ),
+          overrides: [
+            captureSourcesProvider.overrideWithValue({
+              CaptureSourceKind.file: _FakeFileSource(path),
+            }),
+            transcriptionEngineProvider.overrideWithValue(engine),
+            recordingStagingProvider.overrideWithValue(_NoopStaging()),
+            recoveryServiceProvider.overrideWithValue(
+              RecoveryService(baseDir: tmp),
+            ),
+          ],
+        ),
+      );
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(Scaffold)),
+        listen: false,
+      );
+      final tabs = container.read(tabsProvider.notifier);
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      tabs.sweepWebAssets();
+      expect(
+        WebAssetStore.bytesFor(path),
+        isNotNull,
+        reason: 'voorbeschouwing bezit de bron',
+      );
+      await tester.tap(find.text('Transcriberen'));
+      await tester.pump();
+      expect(engine.started, isTrue);
+      await tester.tapAt(const Offset(5, 5));
+      await tester.pumpAndSettle();
+      expect(engine.cancelled, isTrue);
+      expect(
+        WebAssetStore.bytesFor(path),
+        isNotNull,
+        reason: 'de nog afrondende taak bezit de bron',
+      );
+      engine.result.complete(
+        const TranscriptResult(segments: [TranscriptSegment(text: 'te laat')]),
+      );
+      await tester.pumpAndSettle();
+      expect(WebAssetStore.bytesFor(path), isNull);
+      expect(
+        container.read(tabsProvider).tabs.single.content,
+        isA<DeckTabContent>(),
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('voorbeschouwing toont naam, formaat en duur vóór Start', (
     tester,

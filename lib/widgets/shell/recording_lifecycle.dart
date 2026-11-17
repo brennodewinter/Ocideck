@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/transcription/recording_session.dart';
+import '../../services/web_asset_store.dart';
 import '../../state/transcription_provider.dart';
 import '../../utils/log.dart';
 import '../dialogs/recording_finished_dialog.dart';
@@ -34,14 +35,20 @@ void listenRecordingFinished(BuildContext context, WidgetRef ref) {
     if (next == null) return;
     final handle = next;
     handle.events.listen((event) {
-      if (!context.mounted) return;
       final audio = handle.result;
+      if (!context.mounted) {
+        audio?.releaseAssets();
+        WebAssetStore.collectGarbage();
+        return;
+      }
       if (!wantsFinishedRecordingDialog(
         mounted: true,
         reason: event.reason,
         phase: event.phase,
         hasDurableAudio: audio != null && audio.durablePath.isNotEmpty,
       )) {
+        audio?.releaseAssets();
+        WebAssetStore.collectGarbage();
         return;
       }
       unawaited(

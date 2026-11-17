@@ -1548,6 +1548,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
+      'Atsisiųskite šį įrašą, kad jį išsaugotumėte. Uždarius šį langą ar kortelę, garsas bus prarastas.',
   'de WAV is geen 16-bit PCM — decode nodig':
       'WAV nėra 16 bitų PCM — reikia dekoduoti',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':

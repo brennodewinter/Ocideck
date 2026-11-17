@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
+      'Hanc inscriptionem sonoram depone ut serves. Hac fenestra vel tabella clausa, sonus amittitur.',
   'de WAV is geen 16-bit PCM — decode nodig':
       'WAV non est PCM sedecim bitum — decodatio necessaria est',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
