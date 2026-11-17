@@ -1,6 +1,7 @@
-// Windows-profielproef op zowel de PR-basis als de gewijzigde commit.
+// Profielproef op native platforms en web, vóór/na met hetzelfde harnas.
 // De timings meten tik → juiste zichtbare caret; de bron blijft ongewijzigd.
-import 'dart:io';
+import 'support/profile_memory_io.dart'
+    if (dart.library.js_interop) 'support/profile_memory_web.dart';
 
 import 'package:flutter/foundation.dart' show kProfileMode;
 import 'package:material_ui/material_ui.dart';
@@ -49,7 +50,7 @@ void main() {
     );
     await tester.pumpAndSettle(const Duration(milliseconds: 100));
     final times = <int>[];
-    await binding.watchPerformance(() async {
+    await profileWatchPerformance(binding, () async {
       // De eerste twee sprongen warmen de kaart en het scrollpad op.
       for (var attempt = 0; attempt < 18; attempt++) {
         final title = attempt.isEven ? 'Hoofdstuk 35' : 'Hoofdstuk 01';
@@ -100,7 +101,7 @@ void main() {
     expect(notifier.state.canUndo, isFalse);
     times.sort();
     binding.reportData!['chapter_navigation_latency'] = {
-      'platform': Platform.operatingSystem,
+      'platform': profilePlatform,
       'profile': kProfileMode,
       'source_bytes': source.length,
       'samples_us': times,
@@ -127,10 +128,10 @@ Future<void> _profilePagination(
   for (final pages in [10, 40, 100]) {
     final source = documentPaginationFixture(pages);
     final samples = <int>[];
-    final beforeRss = ProcessInfo.currentRss;
+    final beforeMemory = profileMemory('before');
     var loadUs = 0;
     var mountedMax = 0;
-    await binding.watchPerformance(() async {
+    await profileWatchPerformance(binding, () async {
       final load = Stopwatch()..start();
       await tester.pumpWidget(
         MaterialApp(
@@ -176,15 +177,14 @@ Future<void> _profilePagination(
     }, reportKey: 'pagination_${pages}_frames');
     samples.sort();
     results.add({
-      'platform': Platform.operatingSystem,
+      'platform': profilePlatform,
       'profile': kProfileMode,
       'pages': pages,
       'source_bytes': source.length,
       'load_us': loadUs,
       'mounted_document_trees_max': mountedMax,
-      'rss_before_bytes': beforeRss,
-      'rss_after_bytes': ProcessInfo.currentRss,
-      'process_max_rss_bytes': ProcessInfo.maxRss,
+      ...beforeMemory,
+      ...profileMemory('after'),
       'jump_samples_us': samples,
       'jump_median_us': samples[samples.length ~/ 2],
       'jump_p95_us': samples[((samples.length - 1) * .95).ceil()],
