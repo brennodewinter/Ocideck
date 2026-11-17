@@ -1656,4 +1656,4 @@ ci-image-scans-publish:
 
 .PHONY: check-release-channels
 check-release-channels:
-	@python3 -m unittest discover -s test -p 'release_*_test.py'
+	@python3 -m unittest discover -s test -p 'release_*_test.py' -v

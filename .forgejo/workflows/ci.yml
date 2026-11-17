@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: python3 tool/ci_gate.py --label dependencies -- flutter pub get
 
       # `check-no-coverage` en niet `check`: de volledige suite draait
       # onverkort, alleen zonder `--coverage`. Die instrumentatie houdt per test
@@ -53,7 +53,15 @@ jobs:
       # (#796). De dekkingsvloer en de per-bestandsvloer draaien daarom in
       # `make check`, op de machine van de committer, vóór main.
       - name: De poort
-        run: make check-no-coverage
+        run: python3 tool/ci_gate.py --label gate -- make check-no-coverage
 
       - name: Linux-broncode- en authenticatiecontroles
-        run: python3 -m unittest discover -s test/python -v
+        run: python3 tool/ci_gate.py --label python -- python3 -m unittest discover -s test/python -v
+
+      - name: Bewaar poortdiagnose, ook bij fouten
+        if: always()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: ci-gate-diagnostics
+          path: build/ci-diagnostics/
+          if-no-files-found: warn
