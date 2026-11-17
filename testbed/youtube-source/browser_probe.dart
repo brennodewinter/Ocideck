@@ -28,6 +28,8 @@ Future<void> main() async {
       child: Center(child: Text('Explicit source client probe')),
     ),
   );
+  final unregisterRoots = WebAssetStore.registerRoots(() => {});
+  var stage = 'metadata';
   try {
     const destination = AsrServerProfile(
       enabled: true,
@@ -49,6 +51,7 @@ Future<void> main() async {
       final track = meta.tracks.firstWhere(
         (t) => t.language == 'en' && t.automatic == automatic,
       );
+      stage = automatic ? 'automatic captions' : 'manual captions';
       final captions = await client.captions(reference, track, consent);
       final segments = parseTimedCaptions(captions.text, rolling: automatic);
       if (segments.isEmpty) throw StateError('No captions');
@@ -58,6 +61,7 @@ Future<void> main() async {
         'caption_sha256': sha256.convert(utf8.encode(captions.text)).toString(),
       });
     }
+    stage = 'audio';
     final audio = await client.audio(
       reference,
       consent,
@@ -90,6 +94,7 @@ Future<void> main() async {
         transport: createAsrTransport(),
         audioReader: readAsrAudio,
       );
+      stage = 'ASR';
       final result = await engine.transcribe(
         AudioRef(staged.path),
         TranscriptionOptions(
@@ -98,6 +103,7 @@ Future<void> main() async {
         ),
       );
       if (result.segments.isEmpty) throw StateError('No actual ASR segments');
+      stage = 'document';
       final markdown = mediaTranscriptMarkdown(
         origin: YoutubeTranscriptOrigin(
           reference: reference,
@@ -137,6 +143,7 @@ Future<void> main() async {
       client.cancel();
       WebAssetStore.collectGarbage();
     }
+    stage = 'cleanup';
     if (WebAssetStore.totalBytes != 0) {
       throw StateError('Leased audio retained');
     }
@@ -146,6 +153,11 @@ Future<void> main() async {
     _report = jsonEncode({
       'success': false,
       'error_type': error.runtimeType.toString(),
+      'stage': stage,
+      if (error is StateError) 'assertion': error.message.toString(),
+      if (error is YoutubeSourceException) 'source_failure': error.failure.name,
     }).toJS;
+  } finally {
+    unregisterRoots();
   }
 }

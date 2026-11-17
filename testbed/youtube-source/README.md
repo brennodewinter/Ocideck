@@ -153,7 +153,7 @@ text/audio stays local. Use `scripts/gate_lock.sh` for each Flutter operation.
   checks identical caption documents apart from processing date and keeps
   the original deck. Preferences/staging are isolated test data.
 - `browser_probe.dart` plus `browser_probe.cjs`: compile the explicit Dart target
-  with `flutter build web --release --target ... --output ...`. Start TLS source
+  with `flutter build web --release --no-web-resources-cdn --target ... --output ...`. Start TLS source
   port 8867 and TLS ASR port 8893, each allowing exactly
   `http://localhost:7357`. Run the JS driver with the compiled directory, a local
   WAV path and external JSON report path. Its isolated Chromium/WebKit contexts
