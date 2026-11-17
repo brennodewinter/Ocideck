@@ -502,6 +502,12 @@ class IoFileCaptureSession extends FileCaptureSession {
       }
       if (result.exitCode != 0) {
         await _deletePartial();
+        if (result.exitCode == 4 &&
+            p.basename(decoder).toLowerCase().startsWith('ocideck-audio')) {
+          throw const UnsupportedSource(
+            'de systeemdecoder ondersteunt deze container of codec niet; converteer naar PCM-WAV',
+          );
+        }
         if (result.exitCode == 3 &&
             p.basename(decoder).toLowerCase().startsWith('ocideck-audio')) {
           throw const DecodeFailed('de container bevat geen audiotrack');

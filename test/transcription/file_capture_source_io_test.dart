@@ -366,6 +366,34 @@ void main() {
       expect(argv, containsAllInOrder(['-ac', '1']));
     });
 
+    test(
+      'een ontbrekende systeemcodec is geen ontbrekende audiotrack',
+      () async {
+        final mp3 = File(p.join(tmp.path, 'clip.mp3'))
+          ..writeAsBytesSync(
+            Uint8List.fromList([0x49, 0x44, 0x33, ...List.filled(40, 0)]),
+          );
+        final session = await IoFileCaptureSource(
+          decoderOverride: 'ocideck-audio.exe',
+          decoderRunner: (exe, argv, {environment, required timeout}) =>
+              DecodeRun(
+                done: Future.value(const DecodeResult(exitCode: 4, stderr: '')),
+                kill: () {},
+              ),
+        ).start(request(mp3.path));
+        await expectLater(
+          session.stop(),
+          throwsA(
+            isA<UnsupportedSource>().having(
+              (e) => e.message,
+              'uitweg',
+              contains('PCM-WAV'),
+            ),
+          ),
+        );
+      },
+    );
+
     test('"matches no streams" is DecodeFailed: geen audiotrack', () {
       expect(
         () async {
