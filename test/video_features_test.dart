@@ -71,6 +71,32 @@ void main() {
       }
     });
 
+    test(
+      'YouTube receives the actual parent origin, not its path or query',
+      () {
+        final source = VideoSource.parse('https://youtu.be/aqz-KE-bpKQ');
+        final uri = source.embedUri(
+          startMs: 0,
+          endMs: 0,
+          autoplay: true,
+          documentUri: Uri.parse('http://127.0.0.1:34567/document?page=2'),
+        )!;
+        expect(uri.queryParameters['origin'], 'http://127.0.0.1:34567');
+        expect(uri.queryParameters['widgetid'], '1');
+        expect(uri.host, 'www.youtube-nocookie.com');
+      },
+    );
+    test('opaque documents do not claim an HTTP player origin', () {
+      final source = VideoSource.parse('https://youtu.be/aqz-KE-bpKQ');
+      final uri = source.embedUri(
+        startMs: 0,
+        endMs: 0,
+        autoplay: true,
+        documentUri: Uri.parse('file:///fixture'),
+      )!;
+      expect(uri.queryParameters, isNot(contains('origin')));
+    });
+
     test('embedUri folds trim and autoplay into provider params', () {
       final yt = VideoSource.parse('https://youtu.be/dQw4w9WgXcQ');
       final uri = yt.embedUri(startMs: 12000, endMs: 40000, autoplay: true)!;

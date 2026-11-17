@@ -609,7 +609,9 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           return;
         }
         _embedHost = host;
-        host.update(html);
+        // De echte documentorigin is pas na het binden van de host bekend.
+        // Bouw vóór de enige navigatie de speler-URL met die clientidentiteit.
+        host.update(_buildEmbedHtml() ?? html);
         await controller.loadRequest(host.uri);
       } else {
         await controller.loadHtmlString(html, baseUrl: baseUrl);
@@ -681,6 +683,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           startMs: widget.slide.videoStartMs,
           endMs: widget.slide.videoEndMs,
           autoplay: widget.autoplay,
+          documentUri: _embedHost?.uri,
         )
         ?.toString();
     if (embed == null) return null;
