@@ -3,7 +3,10 @@
 // sessie-staging.
 //
 // Decoderkeuze, bewust smal:
-//  * macOS — `/usr/bin/afconvert`: bij het OS geleverd, vast absoluut pad
+//  * macOS — gebundelde FFmpeg voor WebM/MKV/AVI; `/usr/bin/afconvert`
+//    voor bewezen Apple-containers. Beide hebben een vast pad, buiten PATH.
+//    De apart gelicentieerde decoder levert zijn volledige broncode mee.
+//    afconvert wordt door het OS geleverd, op een vast absoluut pad
 //    (geen PATH-raadsel), dekt WAV/AIFF/CAF/AAC/MP3/M4A en de audiotrack
 //    van QuickTime/MP4-video;
 //  * Linux/Windows — bundled ocideck-audio (GStreamer/Media Foundation);
@@ -46,14 +49,23 @@ class IoFileCaptureSource extends FileCaptureSource {
   /// De gepinde decoder voor dit platform, of null als er geen staat.
   /// Alleen zoeken, nooit uitvoeren — `probe()`/`describe()` blijven
   /// passief (§4.1).
-  Future<String?> findDecoder() async {
+  Future<String?> findDecoder({MediaContainer? container}) async {
     if (decoderOverride != null) return decoderOverride;
     final bundled = bundledAudioHelper();
     if (bundled != null) return bundled;
     if (Platform.isMacOS) {
+      final extended = bundledMacMediaDecoder();
+      // afconvert cannot demux the tested WebM/MKV and AVI inputs. Its mere
+      // presence must not advertise support for these containers.
+      if (container == MediaContainer.ebml || container == MediaContainer.avi) {
+        return extended;
+      }
+      if (container == MediaContainer.unknown && extended != null) {
+        return extended;
+      }
       const afconvert = '/usr/bin/afconvert';
       if (await File(afconvert).exists()) return afconvert;
-      return null;
+      return extended;
     }
     // ffmpeg via PATH — bewust geen uitvoering: alleen bestaanstoets.
     final pathVar = Platform.environment['PATH'] ?? '';
@@ -118,7 +130,10 @@ class IoFileCaptureSource extends FileCaptureSource {
       if (wav.dataBytes == 0) {
         throw const DecodeFailed('het bestand bevat geen audiodata');
       }
-      if (wav.formatTag == 1) {
+      if (wav.formatTag == 1 &&
+          wav.channels == 1 &&
+          wav.sampleRate == 16000 &&
+          wav.bitsPerSample == 16) {
         return FileSourceInfo(
           path: sourcePath,
           sizeBytes: stat.size,
@@ -131,7 +146,7 @@ class IoFileCaptureSource extends FileCaptureSource {
       // Geen PCM-WAV (float, extensible, gecomprimeerd): de engine
       // leest alleen PCM — via de decoder kan hij alsnog.
     }
-    final decoder = await findDecoder();
+    final decoder = await findDecoder(container: container);
     return FileSourceInfo(
       path: sourcePath,
       sizeBytes: stat.size,
@@ -157,11 +172,18 @@ class IoFileCaptureSource extends FileCaptureSource {
     required WavInfo? wav,
   }) {
     final parts = <String>[
-      if (wav != null && wav.formatTag != 1)
-        'de WAV is geen 16-bit PCM — decode nodig',
+      if (wav != null) 'de WAV wordt genormaliseerd naar 16 kHz mono PCM16',
       if (_extensionContradicts(container, extension))
         'de bestandsnaam wijkt af van de gedetecteerde inhoud',
-      if (decoder == null)
+      if (decoder == null &&
+          Platform.isMacOS &&
+          (container == MediaContainer.ebml || container == MediaContainer.avi))
+        'deze installatie mist de gebundelde decoder voor WebM/MKV/AVI; '
+            'gebruik een actuele appbundel of converteer naar PCM-WAV',
+      if (decoder == null &&
+          !(Platform.isMacOS &&
+              (container == MediaContainer.ebml ||
+                  container == MediaContainer.avi)))
         Platform.isMacOS
             ? 'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct'
             : 'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct',
@@ -339,11 +361,17 @@ class IoFileCaptureSession extends FileCaptureSession {
       '-v',
       'error',
       '-y',
+      '-protocol_whitelist',
+      'file',
       '-i',
       inputPath,
       '-map',
       '0:a:0',
       '-vn',
+      '-sn',
+      '-dn',
+      '-c:a',
+      'pcm_s16le',
       '-ac',
       '1',
       '-ar',
@@ -474,6 +502,12 @@ class IoFileCaptureSession extends FileCaptureSession {
       }
       if (result.exitCode != 0) {
         await _deletePartial();
+        if (result.exitCode == 4 &&
+            p.basename(decoder).toLowerCase().startsWith('ocideck-audio')) {
+          throw const UnsupportedSource(
+            'de systeemdecoder ondersteunt deze container of codec niet; converteer naar PCM-WAV',
+          );
+        }
         if (result.exitCode == 3 &&
             p.basename(decoder).toLowerCase().startsWith('ocideck-audio')) {
           throw const DecodeFailed('de container bevat geen audiotrack');
@@ -502,9 +536,18 @@ class IoFileCaptureSession extends FileCaptureSession {
       return const DecodeFailed('de container bevat geen audiotrack');
     }
     if (ffmpeg &&
+        (text.contains('no decoder found') ||
+            text.contains('decoder not found') ||
+            text.contains('unsupported codec'))) {
+      return const UnsupportedSource(
+        'deze decoder ondersteunt de audiocodec niet; converteer de bron naar PCM-WAV',
+      );
+    }
+    if (ffmpeg &&
         (text.contains('invalid data') ||
             text.contains('moov atom not found') ||
-            text.contains('end of file'))) {
+            text.contains('end of file') ||
+            text.contains('file ended prematurely'))) {
       return const DecodeFailed('het bestand is beschadigd of afgebroken');
     }
     // afconvert geeft geen onderscheidende fout: `Couldn't open input
@@ -568,9 +611,12 @@ class IoFileCaptureSession extends FileCaptureSession {
       await _deletePartial();
       throw const DecodeFailed('de decode leverde lege audio op');
     }
-    if (wav.formatTag != 1) {
+    if (wav.formatTag != 1 ||
+        wav.channels != 1 ||
+        wav.sampleRate != 16000 ||
+        wav.bitsPerSample != 16) {
       await _deletePartial();
-      throw const DecodeFailed('de decoder schreef geen PCM-WAV');
+      throw const DecodeFailed('de decoder schreef geen 16 kHz mono PCM16-WAV');
     }
     return RecordedAudio(
       durablePath: durablePath,
@@ -592,7 +638,8 @@ class IoFileCaptureSession extends FileCaptureSession {
 
   /// Losse zoektocht voor `stop()` — `describe` zocht al, maar de bron
   /// mag niet vertrouwen op wat een eerdere stap zag.
-  Future<String?> _findDecoderForRun() => IoFileCaptureSource().findDecoder();
+  Future<String?> _findDecoderForRun() =>
+      IoFileCaptureSource().findDecoder(container: _info.container);
 }
 
 /// De echte start van de decoder — hetzelfde patroon als

@@ -60,6 +60,11 @@ DocSection _userDocs(AppLocalizations l10n) => DocSection(
       assetBase: 'docs/TRANSCRIPTION_SETUP.md',
     ),
     DocEntry(
+      icon: Icons.movie_outlined,
+      title: l10n.d('Audio- en videoformaten'),
+      assetBase: 'docs/TRANSCRIPTION_FORMATS.md',
+    ),
+    DocEntry(
       icon: Icons.keyboard_outlined,
       title: l10n.d('Sneltoetsen'),
       assetBase: 'docs/SHORTCUTS.md',

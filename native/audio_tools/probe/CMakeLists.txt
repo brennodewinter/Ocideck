@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.14)
+project(ocideck_audio_codec_probe LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Compile the exact shipped helper sources without building the Flutter shell.
+# This is decoder evidence; package installation and UI remain separate probes.
+if(WIN32)
+  add_executable(ocideck_audio ../audio_windows.cc ../audio_windows.manifest)
+  target_link_libraries(ocideck_audio PRIVATE mfplat mfreadwrite mfuuid ole32)
+else()
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(GSTREAMER REQUIRED IMPORTED_TARGET gstreamer-1.0)
+  pkg_check_modules(PULSE REQUIRED IMPORTED_TARGET libpulse libpulse-simple)
+  add_executable(ocideck_audio ../audio_linux.cc)
+  target_link_libraries(ocideck_audio PRIVATE PkgConfig::GSTREAMER PkgConfig::PULSE)
+endif()
+set_target_properties(ocideck_audio PROPERTIES OUTPUT_NAME "ocideck-audio")

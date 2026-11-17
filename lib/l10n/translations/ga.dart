@@ -1570,10 +1570,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Audio- en videoformaten': 'Formáidí fuaime agus físe',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'déantar an WAV a normalú go PCM16 mona ag 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Íoslódáil an taifeadadh seo chun é a choinneáil. Caillfear an fhuaim má dhúnann tú an fhuinneog nó an cluaisín seo.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'ní PCM 16-giotán é an WAV — tá díchódáil de dhíth',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'ní PCM 16-giotán é an WAV — díchódálann an brabhsálaí é mar sin féin',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

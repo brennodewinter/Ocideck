@@ -1,0 +1,285 @@
+{
+  "metadata": {
+    "source_commit": "0faedf3aa0f607bb0c6127dbab517767d0799b10",
+    "run": "https://github.com/brennodewinter/Ocideck/actions/runs/44019184538",
+    "artifact_id": 14300291277,
+    "artifact_sha256": "ee62c8c0450349d0bd614580c389b577e812b45f48ab26a4e359f92bbe4e4ef7",
+    "environment": "Windows Server 2022 runner, stock Media Foundation, helper compiled from exact production source; no developer PATH"
+  },
+  "report": {
+    "scope": "Production helper sources; no installed-package/UI/ASR claim",
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "helper_sha256": "edcd5dfd9f35e80e15f557257adab73e8bab7511471b695fd0d2108aba9fb78e",
+    "results": [
+      {
+        "source": "3gp-aac.3gp",
+        "negative_case": null,
+        "source_sha256": "6f3bebd4bcaac94cc0e43499be588918280971312f71ad344dfd3a80e261bf0b",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 10240,
+        "duration_ms": 640.0,
+        "has_signal": true
+      },
+      {
+        "source": "aac-adts.aac",
+        "negative_case": null,
+        "source_sha256": "d96d2d91bfad9a71968e3b505b5485c33222d9ce66b59d84b0caaec314cc4700",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 10240,
+        "duration_ms": 640.0,
+        "has_signal": true
+      },
+      {
+        "source": "aiff.aiff",
+        "negative_case": null,
+        "source_sha256": "9c06d87a055120f4a1cd1cace33a6c833a59e12aed757e4d3e102e54ebb87284",
+        "exit_code": 4,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36c4\r\n"
+      },
+      {
+        "source": "avi-pcm.avi",
+        "negative_case": null,
+        "source_sha256": "82d653432341e8430fb30611c433df50b87482b125d6c6cbee8ed785b990df82",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9568,
+        "duration_ms": 598.0,
+        "has_signal": true
+      },
+      {
+        "source": "caf.caf",
+        "negative_case": null,
+        "source_sha256": "27bb52354fe85cafae6565a358c7a5b7b176bf6e9d661c7f8736262d1f23d3cd",
+        "exit_code": 4,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36c4\r\n"
+      },
+      {
+        "source": "flac.flac",
+        "negative_case": null,
+        "source_sha256": "0a4e10855f96f2cd96b25e3e624be7ae2355d54c071de5d28705ae17b6768efe",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9600,
+        "duration_ms": 600.0,
+        "has_signal": true
+      },
+      {
+        "source": "m4a-aac.m4a",
+        "negative_case": null,
+        "source_sha256": "78310b711e36f133932d7e0b2f8090fb3a8e85f2e099974d5a863362d91fe11c",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 10240,
+        "duration_ms": 640.0,
+        "has_signal": true
+      },
+      {
+        "source": "m4a-alac.m4a",
+        "negative_case": null,
+        "source_sha256": "478db5bd446905c19ae2b0d1a5432d586368a8b72735214fe02dcd3b7c8ce6a8",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9600,
+        "duration_ms": 600.0,
+        "has_signal": true
+      },
+      {
+        "source": "mkv-opus.mkv",
+        "negative_case": null,
+        "source_sha256": "2a7bd2591b818dff5d5b332123f2509a86b1bdc69f85e689bd346f73e41d4fbb",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9816,
+        "duration_ms": 613.5,
+        "has_signal": true
+      },
+      {
+        "source": "mov-aac.mov",
+        "negative_case": null,
+        "source_sha256": "0e0a13b2cd85dccc334f35199ec6888b7f813b9ffba739b553697574b7b19e68",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 10240,
+        "duration_ms": 640.0,
+        "has_signal": true
+      },
+      {
+        "source": "mov-pcm.mov",
+        "negative_case": null,
+        "source_sha256": "1ad5fc6b1bfbb949fee89485e3c189d4a0997b4986f47af2dd517ac357e45d39",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9600,
+        "duration_ms": 600.0,
+        "has_signal": true
+      },
+      {
+        "source": "mp3.mp3",
+        "negative_case": null,
+        "source_sha256": "6a2735f8d4d85c9842ca1ed8c50a3187aa8014a8594a4b8a851dcfaa1ac12079",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 10192,
+        "duration_ms": 637.0,
+        "has_signal": true
+      },
+      {
+        "source": "mp4-aac.mp4",
+        "negative_case": null,
+        "source_sha256": "e8c9b04de58bc3e970bb19591462898c8b64b212180f0ef16b051764e737538c",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 10240,
+        "duration_ms": 640.0,
+        "has_signal": true
+      },
+      {
+        "source": "ogg-opus.ogg",
+        "negative_case": null,
+        "source_sha256": "caa9f330851ba1106e0d1d8595a2bad8bfe88793272a12070fb3aa7988abda40",
+        "exit_code": 4,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36c4\r\n"
+      },
+      {
+        "source": "ogg-vorbis.ogg",
+        "negative_case": null,
+        "source_sha256": "738738999723e85ec686fee0dc23a46043827c0b89b3e016c2f339a303f28414",
+        "exit_code": 4,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36c4\r\n"
+      },
+      {
+        "source": "opus.opus",
+        "negative_case": null,
+        "source_sha256": "004d6934bbd5d29b909224f1e8fd58eae4e8b7a8dfc90ab14307289f9484116f",
+        "exit_code": 4,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36c4\r\n"
+      },
+      {
+        "source": "wav-adpcm.wav",
+        "negative_case": null,
+        "source_sha256": "19fc8df87b83353a37e92f3a09e52110069dc937c4bdea6bef77613d61ad5567",
+        "exit_code": 1,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36b4\r\n"
+      },
+      {
+        "source": "wav-float32.wav",
+        "negative_case": null,
+        "source_sha256": "33665f73cb9d625783a5dd3d9217c8abf70c2b8f00c7e5671a3044e6974b86d4",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9600,
+        "duration_ms": 600.0,
+        "has_signal": true
+      },
+      {
+        "source": "wav-pcm16.wav",
+        "negative_case": null,
+        "source_sha256": "a0801d4c9c7c5e4d0503079d826a429120a13174b477739bea5466b412322527",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9600,
+        "duration_ms": 600.0,
+        "has_signal": true
+      },
+      {
+        "source": "wav-pcm24.wav",
+        "negative_case": null,
+        "source_sha256": "845080b848f302554371917623dca54adea8ac79ad4384cff961e251d2697ea9",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9600,
+        "duration_ms": 600.0,
+        "has_signal": true
+      },
+      {
+        "source": "wav-ulaw.wav",
+        "negative_case": null,
+        "source_sha256": "cfcb25a7a3c7895a036a04b7cce6613864aed1efd82f48dbd445fab1d402161a",
+        "exit_code": 1,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36b4\r\n"
+      },
+      {
+        "source": "webm-opus.webm",
+        "negative_case": null,
+        "source_sha256": "6dfed8ceebe194eeac10f75e455554e89ae45efe4e26b94be3c337f553139da4",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9816,
+        "duration_ms": 613.5,
+        "has_signal": true
+      },
+      {
+        "source": "wma.wma",
+        "negative_case": null,
+        "source_sha256": "97964a59f158faadd1f0e8a669ff38f043dfb0f2dfce25853cce57660a4cccc0",
+        "exit_code": 0,
+        "channels": 1,
+        "sample_rate": 16000,
+        "sample_bytes": 2,
+        "frames": 9558,
+        "duration_ms": 597.375,
+        "has_signal": true
+      },
+      {
+        "source": "wav-ms-adpcm-unsupported.wav",
+        "negative_case": "unsupported-codec",
+        "source_sha256": "deadc077751dfbc7dc7f0523d46aa97402d21086f55efff3ba9ffa4d644f6210",
+        "exit_code": 1,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36b4\r\n"
+      },
+      {
+        "source": "video-without-audio.mp4",
+        "negative_case": "no-audio",
+        "source_sha256": "faada2b444874eae4863d93665ef1ee06ec9e0ae89df505fa9a6cdf97d451e9f",
+        "exit_code": 3,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d36b3\r\n"
+      },
+      {
+        "source": "corrupt-matroska.mkv",
+        "negative_case": "corrupt",
+        "source_sha256": "33486a111a96e5d9356bd8303f954e184346acf01cb74676a6170aea30a5a6e6",
+        "exit_code": 1,
+        "error": "Media Foundation decode failed: HRESULT 0xc00d3e8c\r\n"
+      },
+      {
+        "source": "empty.wav",
+        "negative_case": "empty",
+        "source_sha256": "ba584a378b11d9e9c98736fd8c256fe1453a84ee4139416d24b07acff424f0fb",
+        "exit_code": 1,
+        "error": "Media Foundation decode failed: HRESULT 0x80004005\r\n"
+      }
+    ]
+  }
+}

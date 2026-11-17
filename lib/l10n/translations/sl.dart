@@ -1542,10 +1542,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Audio- en videoformaten': 'Zvočni in video formati',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'WAV se normalizira v 16 kHz mono PCM16',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Prenesite ta posnetek, da ga ohranite. Če zaprete to okno ali zavihek, se zvok izgubi.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'WAV ni 16-bitni PCM — potrebno je dekodiranje',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'WAV ni 16-bitni PCM — brskalnik ga vseeno dekodira',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

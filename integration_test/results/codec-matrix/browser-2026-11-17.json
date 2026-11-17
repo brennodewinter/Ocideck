@@ -1,0 +1,329 @@
+{
+  "metadata": {
+    "harness_source_commit": "3310428cc",
+    "environment": "Playwright Chromium 156.0.8078.4 and WebKit 27.2 on macOS; local production bridge, no model needed; no full-app/release certification"
+  },
+  "report": {
+    "scope": "Production browser decoder; synthetic tones; no ASR/UI claim",
+    "platform": "darwin",
+    "bridge_sha256": "bff116fe85d15fd6d9dd05a0e6ab599e967bf474b3fcc22f910bf642f627a3df",
+    "browsers": [
+      {
+        "browser": "chromium",
+        "results": [
+          {
+            "source": "3gp-aac.3gp",
+            "source_sha256": "6f3bebd4bcaac94cc0e43499be588918280971312f71ad344dfd3a80e261bf0b",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 539.5356300416133
+          },
+          {
+            "source": "aac-adts.aac",
+            "source_sha256": "d96d2d91bfad9a71968e3b505b5485c33222d9ce66b59d84b0caaec314cc4700",
+            "samples": 10240,
+            "duration_ms": 640,
+            "energy": 539.8790133938359
+          },
+          {
+            "source": "aiff.aiff",
+            "source_sha256": "9c06d87a055120f4a1cd1cace33a6c833a59e12aed757e4d3e102e54ebb87284",
+            "error": "EncodingError: Unable to decode audio data"
+          },
+          {
+            "source": "avi-pcm.avi",
+            "source_sha256": "82d653432341e8430fb30611c433df50b87482b125d6c6cbee8ed785b990df82",
+            "error": "EncodingError: Unable to decode audio data"
+          },
+          {
+            "source": "caf.caf",
+            "source_sha256": "27bb52354fe85cafae6565a358c7a5b7b176bf6e9d661c7f8736262d1f23d3cd",
+            "error": "EncodingError: Unable to decode audio data"
+          },
+          {
+            "source": "flac.flac",
+            "source_sha256": "0a4e10855f96f2cd96b25e3e624be7ae2355d54c071de5d28705ae17b6768efe",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.0551150366664
+          },
+          {
+            "source": "m4a-aac.m4a",
+            "source_sha256": "78310b711e36f133932d7e0b2f8090fb3a8e85f2e099974d5a863362d91fe11c",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 539.5356300416133
+          },
+          {
+            "source": "m4a-alac.m4a",
+            "source_sha256": "478db5bd446905c19ae2b0d1a5432d586368a8b72735214fe02dcd3b7c8ce6a8",
+            "error": "EncodingError: Unable to decode audio data"
+          },
+          {
+            "source": "mkv-opus.mkv",
+            "source_sha256": "2a7bd2591b818dff5d5b332123f2509a86b1bdc69f85e689bd346f73e41d4fbb",
+            "samples": 9592,
+            "duration_ms": 599.5,
+            "energy": 540.4477539246436
+          },
+          {
+            "source": "mov-aac.mov",
+            "source_sha256": "0e0a13b2cd85dccc334f35199ec6888b7f813b9ffba739b553697574b7b19e68",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 539.5356300416133
+          },
+          {
+            "source": "mov-pcm.mov",
+            "source_sha256": "1ad5fc6b1bfbb949fee89485e3c189d4a0997b4986f47af2dd517ac357e45d39",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.0551150366664
+          },
+          {
+            "source": "mp3.mp3",
+            "source_sha256": "6a2735f8d4d85c9842ca1ed8c50a3187aa8014a8594a4b8a851dcfaa1ac12079",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 513.0951678796897
+          },
+          {
+            "source": "mp4-aac.mp4",
+            "source_sha256": "e8c9b04de58bc3e970bb19591462898c8b64b212180f0ef16b051764e737538c",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 539.5356300416133
+          },
+          {
+            "source": "ogg-opus.ogg",
+            "source_sha256": "caa9f330851ba1106e0d1d8595a2bad8bfe88793272a12070fb3aa7988abda40",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.8258022891823
+          },
+          {
+            "source": "ogg-vorbis.ogg",
+            "source_sha256": "738738999723e85ec686fee0dc23a46043827c0b89b3e016c2f339a303f28414",
+            "samples": 9558,
+            "duration_ms": 597.375,
+            "energy": 537.6674398866307
+          },
+          {
+            "source": "opus.opus",
+            "source_sha256": "004d6934bbd5d29b909224f1e8fd58eae4e8b7a8dfc90ab14307289f9484116f",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.8258022891823
+          },
+          {
+            "source": "wav-adpcm.wav",
+            "source_sha256": "19fc8df87b83353a37e92f3a09e52110069dc937c4bdea6bef77613d61ad5567",
+            "error": "EncodingError: Unable to decode audio data"
+          },
+          {
+            "source": "wav-float32.wav",
+            "source_sha256": "33665f73cb9d625783a5dd3d9217c8abf70c2b8f00c7e5671a3044e6974b86d4",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.0562465377152
+          },
+          {
+            "source": "wav-pcm16.wav",
+            "source_sha256": "a0801d4c9c7c5e4d0503079d826a429120a13174b477739bea5466b412322527",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.0551150366664
+          },
+          {
+            "source": "wav-pcm24.wav",
+            "source_sha256": "845080b848f302554371917623dca54adea8ac79ad4384cff961e251d2697ea9",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.0562791824341
+          },
+          {
+            "source": "wav-ulaw.wav",
+            "source_sha256": "cfcb25a7a3c7895a036a04b7cce6613864aed1efd82f48dbd445fab1d402161a",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.4945805668831
+          },
+          {
+            "source": "webm-opus.webm",
+            "source_sha256": "6dfed8ceebe194eeac10f75e455554e89ae45efe4e26b94be3c337f553139da4",
+            "samples": 9592,
+            "duration_ms": 599.5,
+            "energy": 540.4477539246436
+          },
+          {
+            "source": "wma.wma",
+            "source_sha256": "97964a59f158faadd1f0e8a669ff38f043dfb0f2dfce25853cce57660a4cccc0",
+            "error": "EncodingError: Unable to decode audio data"
+          }
+        ],
+        "version": "156.0.8078.4",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"
+      },
+      {
+        "browser": "webkit",
+        "results": [
+          {
+            "source": "3gp-aac.3gp",
+            "source_sha256": "6f3bebd4bcaac94cc0e43499be588918280971312f71ad344dfd3a80e261bf0b",
+            "samples": 9899,
+            "duration_ms": 618.6875,
+            "energy": 539.5621115062386
+          },
+          {
+            "source": "aac-adts.aac",
+            "source_sha256": "d96d2d91bfad9a71968e3b505b5485c33222d9ce66b59d84b0caaec314cc4700",
+            "samples": 9536,
+            "duration_ms": 596,
+            "energy": 518.9555771250994
+          },
+          {
+            "source": "aiff.aiff",
+            "source_sha256": "9c06d87a055120f4a1cd1cace33a6c833a59e12aed757e4d3e102e54ebb87284",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.046875
+          },
+          {
+            "source": "avi-pcm.avi",
+            "source_sha256": "82d653432341e8430fb30611c433df50b87482b125d6c6cbee8ed785b990df82",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.046875
+          },
+          {
+            "source": "caf.caf",
+            "source_sha256": "27bb52354fe85cafae6565a358c7a5b7b176bf6e9d661c7f8736262d1f23d3cd",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.046875
+          },
+          {
+            "source": "flac.flac",
+            "source_sha256": "0a4e10855f96f2cd96b25e3e624be7ae2355d54c071de5d28705ae17b6768efe",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.046875
+          },
+          {
+            "source": "m4a-aac.m4a",
+            "source_sha256": "78310b711e36f133932d7e0b2f8090fb3a8e85f2e099974d5a863362d91fe11c",
+            "samples": 9899,
+            "duration_ms": 618.6875,
+            "energy": 539.5621115062386
+          },
+          {
+            "source": "m4a-alac.m4a",
+            "source_sha256": "478db5bd446905c19ae2b0d1a5432d586368a8b72735214fe02dcd3b7c8ce6a8",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.046875
+          },
+          {
+            "source": "mkv-opus.mkv",
+            "source_sha256": "2a7bd2591b818dff5d5b332123f2509a86b1bdc69f85e689bd346f73e41d4fbb",
+            "error": "EncodingError: Decoding failed"
+          },
+          {
+            "source": "mov-aac.mov",
+            "source_sha256": "0e0a13b2cd85dccc334f35199ec6888b7f813b9ffba739b553697574b7b19e68",
+            "error": "EncodingError: Decoding failed"
+          },
+          {
+            "source": "mov-pcm.mov",
+            "source_sha256": "1ad5fc6b1bfbb949fee89485e3c189d4a0997b4986f47af2dd517ac357e45d39",
+            "error": "EncodingError: Decoding failed"
+          },
+          {
+            "source": "mp3.mp3",
+            "source_sha256": "6a2735f8d4d85c9842ca1ed8c50a3187aa8014a8594a4b8a851dcfaa1ac12079",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 513.0948181152344
+          },
+          {
+            "source": "mp4-aac.mp4",
+            "source_sha256": "e8c9b04de58bc3e970bb19591462898c8b64b212180f0ef16b051764e737538c",
+            "samples": 9899,
+            "duration_ms": 618.6875,
+            "energy": 539.5621115062386
+          },
+          {
+            "source": "ogg-opus.ogg",
+            "source_sha256": "caa9f330851ba1106e0d1d8595a2bad8bfe88793272a12070fb3aa7988abda40",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.8258028954733
+          },
+          {
+            "source": "ogg-vorbis.ogg",
+            "source_sha256": "738738999723e85ec686fee0dc23a46043827c0b89b3e016c2f339a303f28414",
+            "samples": 9558,
+            "duration_ms": 597.375,
+            "energy": 520.7495505114312
+          },
+          {
+            "source": "opus.opus",
+            "source_sha256": "004d6934bbd5d29b909224f1e8fd58eae4e8b7a8dfc90ab14307289f9484116f",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.8258028954733
+          },
+          {
+            "source": "wav-adpcm.wav",
+            "source_sha256": "19fc8df87b83353a37e92f3a09e52110069dc937c4bdea6bef77613d61ad5567",
+            "samples": 9831,
+            "duration_ms": 614.4375,
+            "energy": 537.917236328125
+          },
+          {
+            "source": "wav-float32.wav",
+            "source_sha256": "33665f73cb9d625783a5dd3d9217c8abf70c2b8f00c7e5671a3044e6974b86d4",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.0562465377152
+          },
+          {
+            "source": "wav-pcm16.wav",
+            "source_sha256": "a0801d4c9c7c5e4d0503079d826a429120a13174b477739bea5466b412322527",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.046875
+          },
+          {
+            "source": "wav-pcm24.wav",
+            "source_sha256": "845080b848f302554371917623dca54adea8ac79ad4384cff961e251d2697ea9",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.0562791824341
+          },
+          {
+            "source": "wav-ulaw.wav",
+            "source_sha256": "cfcb25a7a3c7895a036a04b7cce6613864aed1efd82f48dbd445fab1d402161a",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.486328125
+          },
+          {
+            "source": "webm-opus.webm",
+            "source_sha256": "6dfed8ceebe194eeac10f75e455554e89ae45efe4e26b94be3c337f553139da4",
+            "samples": 9600,
+            "duration_ms": 600,
+            "energy": 540.8258028954733
+          },
+          {
+            "source": "wma.wma",
+            "source_sha256": "97964a59f158faadd1f0e8a669ff38f043dfb0f2dfce25853cce57660a4cccc0",
+            "error": "EncodingError: Decoding failed"
+          }
+        ],
+        "version": "27.2",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Safari/605.1.15"
+      }
+    ]
+  }
+}

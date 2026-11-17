@@ -1565,10 +1565,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Audio- en videoformaten': 'Μορφές ήχου και βίντεο',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'Το WAV κανονικοποιείται σε μονοφωνικό PCM16 στα 16 kHz',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Κατεβάστε αυτή την εγγραφή για να τη διατηρήσετε. Αν κλείσετε αυτό το παράθυρο ή την καρτέλα, ο ήχος θα χαθεί.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'Το WAV δεν είναι PCM 16-bit — απαιτείται αποκωδικοποίηση',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'Το WAV δεν είναι PCM 16-bit — το πρόγραμμα περιήγησης το αποκωδικοποιεί έτσι κι αλλιώς',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

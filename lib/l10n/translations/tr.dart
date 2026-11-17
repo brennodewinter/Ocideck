@@ -2398,10 +2398,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Audio- en videoformaten': 'Ses ve video biçimleri',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'WAV, 16 kHz mono PCM16 biçimine normalleştirilir',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Bu kaydı saklamak için indirin. Bu pencere veya sekme kapatıldığında ses kaybolur.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'WAV 16 bit PCM değil — kod çözme gerekli',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'WAV 16 bit PCM değil — tarayıcı yine de kodunu çözer',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

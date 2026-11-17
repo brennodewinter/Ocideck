@@ -1553,10 +1553,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Audio- en videoformaten': 'Formae soni et imaginis mobilis',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'WAV ad PCM16 monophonicum 16 kHz normalizatur',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Hanc inscriptionem sonoram depone ut serves. Hac fenestra vel tabella clausa, sonus amittitur.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'WAV non est PCM sedecim bitum — decodatio necessaria est',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'WAV non est PCM sedecim bitum — navigatrum tamen decodat',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

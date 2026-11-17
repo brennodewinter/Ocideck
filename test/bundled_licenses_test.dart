@@ -136,6 +136,7 @@ void main() {
         'Apache-2.0 OR MPL-2.0': 'Apache License',
         'OFL-1.1': 'SIL OPEN FONT LICENSE',
         'Unlicense': 'free and unencumbered',
+        'LGPL-2.1-or-later': 'GNU LESSER GENERAL PUBLIC LICENSE',
       };
       for (final entry in BundledLicenses.all) {
         final text = File(entry.licenseAsset).readAsStringSync();

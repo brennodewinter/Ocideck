@@ -772,6 +772,7 @@ List<SbomComponent> _nativeMediaRequirements() => [
 /// wrapper licence from hiding the runtime that actually parses untrusted PDFs.
 List<SbomComponent> _nativeRuntimes() => [
   ..._whisperRuntime(),
+  ..._mediaDecoderRuntime(),
   SbomComponent(
     ref: 'runtime:webview2-loader@1.0.1418.22',
     group: 'native-runtime',
@@ -861,6 +862,37 @@ List<SbomComponent> _whisperRuntime() {
           'web/whisper/ ships inside the web bundle (#2513, hash-pinned by '
           'web/whisper/manifest.json). Model weights are never bundled — '
           'the user downloads them through the guarded catalog flow.',
+    ),
+  ];
+}
+
+/// Separately licensed, source-bundled macOS decoder; never part of Whisper.
+List<SbomComponent> _mediaDecoderRuntime() {
+  final file = File('native/media_decoder/manifest.json');
+  if (!file.existsSync()) return const [];
+  final m = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+  final version = m['version'] as String;
+  return [
+    SbomComponent(
+      ref: 'runtime:ffmpeg-macos@$version',
+      group: 'native-runtime',
+      type: 'application',
+      name: 'FFmpeg macOS audio decoder',
+      version: version,
+      purl: 'pkg:generic/ffmpeg@$version',
+      sha256: m['tarballSha256'] as String,
+      downloadUrl: m['tarball'] as String,
+      vcsUrl: 'https://git.ffmpeg.org/ffmpeg.git',
+      license: m['license'] as String,
+      supplier: 'FFmpeg developers',
+      supplierUrl: m['upstream'] as String,
+      dependsOn: const [],
+      note:
+          'Standalone macOS helper, no OciDeck libav linking. '
+          'Complete unmodified corresponding source and configure recipe ship '
+          'inside Contents/Resources/ffmpeg. GPL/nonfree/version3, external '
+          'library autodetection and network protocols are disabled. '
+          'Exact configure flags: ${(m["configureFlags"] as List).join(" ")}',
     ),
   ];
 }

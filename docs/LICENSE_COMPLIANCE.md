@@ -163,6 +163,38 @@ register the full notice text in `BundledLicenses` so it ships in the app.
 A GPLv3+ binary stays a separately justified decision with its own
 source-offer obligations, matching the existing Linux GPLv3+ route.
 
+## macOS decoder review — 2026-11-17
+
+This is a scoped review of the **FFmpeg 9.0.2 standalone macOS decoder**, not
+an expansion of the automatic package allow-list. The unmodified official
+source archive SHA-256 is
+`8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e`.
+Its release signature was verified against FFmpeg's published fingerprint
+`FCF986EA15E6E293A5644F10B4322F04D67658D8`. The actual configure output and
+executable's `-L` identify **LGPL version 2.1 or later**. The manifest disables
+GPL/nonfree/version3 components, external library autodetection, assembly
+optimizations and networking; the inspected binary links only Apple system
+libraries, which are not redistributed. It is called as a separate program;
+OciDeck does not link to FFmpeg libraries. The scoped distribution is accepted
+with the following build obligations, enforced by the bundle script:
+
+- Ship the **complete matching source archive in the same app download**, with
+  the manifest, configure recipe, upstream licence output and replacement
+  instructions under `Contents/Resources/ffmpeg`.
+- Register the full LGPL text in the app's notices/licence page and list the
+  separately licensed runtime in both SBOM formats.
+- Preserve modification, replacement, debugging and reverse-engineering rights
+  for this component, including instructions for locally resealing a modified
+  macOS app. Do not impose OciDeck's EUPL on the helper.
+- Record build inputs and the pre-signing executable hash. App signing changes
+  the whole-file hash; release archive hashes cover the final signed artifact.
+- Reject unexpected non-system linked libraries or a non-LGPL build. A change
+  in version, flags, external libraries or distribution form needs fresh review.
+
+The build/source and concrete 23-fixture decoding probe are separate from the
+release-platform ASR matrix in #2947. No Windows/Linux/browser parity is
+inferred from this macOS binary.
+
 ## Latest result
 
 Run on **2026-11-10** (`dart run tool/check_licenses.dart`). All **222** resolved

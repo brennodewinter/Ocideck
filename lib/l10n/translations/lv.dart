@@ -1538,10 +1538,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Audio- en videoformaten': 'Audio un video formāti',
+  'de WAV wordt genormaliseerd naar 16 kHz mono PCM16':
+      'WAV tiek normalizēts uz 16 kHz mono PCM16',
   'Download deze opname om hem te bewaren. Na het sluiten van dit venster of tabblad gaat de audio verloren.':
       'Lejupielādējiet šo ierakstu, lai to saglabātu. Aizverot šo logu vai cilni, audio tiks zaudēts.',
-  'de WAV is geen 16-bit PCM — decode nodig':
-      'WAV nav 16 bitu PCM — nepieciešama dekodēšana',
   'de WAV is geen 16-bit PCM — de browser decodeert hem alsnog':
       'WAV nav 16 bitu PCM — pārlūks to tik un tā dekodē',
   'De transcriptiemodule staat uit of is niet ingesteld. Schakel hem in via Instellingen → Modules.':

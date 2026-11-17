@@ -286,6 +286,7 @@ and it also indexes the design documents. The current-state documents:
 | [Security design](docs/SECURITY_DESIGN.md) | The security design principles and the concrete mechanisms that enforce them |
 | [Security review (APT)](docs/SECURITY_REVIEW_APT.md) | The APT-resilience review findings and their status |
 | [Transcription setup](docs/TRANSCRIPTION_SETUP.md) | Recording and transcription per platform — permissions, models, server routes and what was actually proven |
+| [Audio and video formats](docs/TRANSCRIPTION_FORMATS.md) | Tested container/codec matrix, bundled macOS decoder and explicit platform limits |
 | [Security policy](SECURITY.md) | How to report a vulnerability |
 | [Source availability](SOURCE.md) | The EUPL source indication shipped in the web build — where the source lives and how to build it |
 | [Source map](docs/SOURCE_MAP.md) | An index of the files under `lib/`, grouped per directory |

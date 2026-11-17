@@ -767,7 +767,7 @@ orchestrator that ties them together.
 
 ### `lib/services/transcription/` — recording & transcription boundary (design: `docs/design/TRANSCRIPTION.md`)
 
-- `bundled_audio_helper_io.dart` — Resolves the installed native audio helper beside OciDeck, without relying on PATH.
+- `bundled_audio_helper_io.dart` — Resolves the installed native audio helper beside OciDeck, without relying on PATH. Also locates the standalone, source-bundled macOS FFmpeg helper under Contents/Helpers.
 
 The provider-neutral edges of the *Transcriptie en opname* module (#2510) plus
 the first engine that implements them (#2512): what capturing audio and
