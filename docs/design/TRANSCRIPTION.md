@@ -678,6 +678,17 @@ the model download is a CORS fetch that COEP does not govern).
 **Storage and download.** Models live in IndexedDB (`ocideck-transcription`)
 as Blobs; downloads write a `.part` key first and promote to the real key
 only after a WebCrypto SHA-256 match — same semantics as `.part` on disk.
+Each download has its own random partial key. Cancellation is checked after
+quota lookup, partial storage and hashing, and can abort the final IndexedDB
+transaction. Only transaction-complete installs the model; an aborted replacement
+preserves the prior model. Cancellation after commit leaves success intact.
+Downloads enforce the catalog byte count before copying each chunk into one
+fixed Dart buffer, with a one-hour total network deadline and two-minute idle
+deadline. Readers/fetch are released or aborted on failure. Comparable
+Content-Length values provide an early check; hidden CORS encodings and encoded
+transport sizes do not override the byte cap. Quota is checked before buffering
+and again before storage. WebCrypto and browser Blob storage can still create
+additional large transient buffers; this is not streaming storage/hash.
 The browser may evict IndexedDB under storage pressure; that surfaces as
 `absent`, never as corruption, and the user re-downloads. `fetch` in CORS
 mode is the egress: the browser itself checks every redirect hop — our
