@@ -13,6 +13,7 @@ import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/document_page_chrome.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -404,9 +405,15 @@ void main() {
     final logoBytes = base64Decode(
       'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=',
     );
+    // pasteboard retourneert op Windows een tijdelijk bestand dat de Dart-
+    // laag leest en verwijdert; de overige desktopplugins leveren de bytes.
+    final clipboardImage = File(p.join(support.path, 'clipboard-logo.png'));
+    if (Platform.isWindows) clipboardImage.writeAsBytesSync(logoBytes);
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
       pasteboard,
-      (call) async => call.method == 'image' ? logoBytes : null,
+      (call) async => call.method == 'image'
+          ? (Platform.isWindows ? clipboardImage.path : logoBytes)
+          : null,
     );
     addTearDown(
       () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
@@ -429,8 +436,10 @@ void main() {
       reason: 'het geplakte logo werd niet in de pad-box getoond',
     );
 
-    final logos = Directory('${support.path}/style_logos').listSync();
+    final logos = Directory(p.join(support.path, 'style_logos')).listSync();
     expect(logos, hasLength(1));
+    expect(File(logos.single.path).readAsBytesSync(), logoBytes);
+    if (Platform.isWindows) expect(clipboardImage.existsSync(), isFalse);
     expect(find.textContaining('style_logos'), findsOneWidget);
   });
 
