@@ -3403,6 +3403,7 @@ assert_nightly_main_gate() {
   # Een bronfreeze verandert alleen de refnaam, niet de getoetste inhoud.
   # Hergebruik de main-poort voor exact dezelfde SHA; ontbrekend bewijs wordt
   # nog steeds op de onveranderlijke releasebasis gestart.
+  # De nieuwste poging op die SHA blijft leidend, ongeacht de refnaam.
   local proof_ref="$source_ref"
   if [ "$source_ref" = "codex/release-base-${TAG:-}" ]; then proof_ref=main; fi
   # De lijst-route geeft geen commit_sha; die staat op de detail-GET per run.
@@ -3428,7 +3429,7 @@ assert_nightly_main_gate() {
           else [.workflow_runs[]
             | select(.workflow_id == "linux-gate.yml"
                 and (.prettyref == $ref or .prettyref == $proof_ref))]
-            | sort_by([(.prettyref == $proof_ref), .id]) | reverse | .[].id
+            | sort_by(.id) | reverse | .[].id
           end' 2>/dev/null)" \
       || lookup_failed=1
     if [ "$lookup_failed" -eq 0 ]; then

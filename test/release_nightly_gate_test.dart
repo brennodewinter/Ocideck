@@ -117,7 +117,7 @@ git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
   );
 
   /// Draait de echte assert_nightly_main_gate met gemockte api/git.
-  /// [runs] is "id|sha|status" per regel (nieuw→oud, sha '' = geen);
+  /// [runs] is "id|sha|status|ref" per regel (ref standaard main);
   /// [ancestors] zijn de sha's die git merge-base als voorvader van
   /// origin/main erkent.
   ProcessResult runGate({
@@ -199,11 +199,11 @@ api() {
       fi''' : ''}
       { printf '{"workflow_runs":['
         first=1
-        while IFS='|' read -r rid rsha rstatus; do
+        while IFS='|' read -r rid rsha rstatus rref; do
           [ -n "\$rid" ] || continue
           [ "\$first" -eq 0 ] && printf ','
           first=0
-          printf '{"id":%s,"workflow_id":"$listWorkflowId","prettyref":"main","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\$rstatus" "\$rid"
+          printf '{"id":%s,"workflow_id":"$listWorkflowId","prettyref":"%s","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\${rref:-main}" "\$rstatus" "\$rid"
         done < '${runsFile.path}'
         if [ -f '${dir.path}/dispatched' ]; then
           [ "\$first" -eq 0 ] && printf ','
@@ -240,7 +240,7 @@ api() {
           'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' '$dispatchedStatus'
         return 0
       fi
-      while IFS='|' read -r r rsha rstatus; do
+      while IFS='|' read -r r rsha rstatus rref; do
         if [ "\$r" = "\$rid" ]; then
           if [ '${requireLockWhileRunning ? '1' : '0'}' -eq 1 ] && [ ! -f "\$MAIN_GATE_LOCK_DIR/pid" ]; then
             return 23
@@ -316,6 +316,33 @@ printf 'DOOR\\n'
       );
       expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
       expect(r.stdout, isNot(contains('DOOR')));
+    });
+
+    test('een nieuwere rode basisrun blokkeert oudere groene main', () {
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: [
+          '9719|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|failure|codex/release-base-v9.9.9',
+          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success|main',
+        ],
+      );
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect(r.stdout, isNot(contains('DOOR')));
+    });
+
+    test('een lopende basisrun wordt gevolgd zonder oudere main te kiezen', () {
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: [
+          '9719|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running|codex/release-base-v9.9.9',
+          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success|main',
+        ],
+        runningBecomesSuccess: true,
+        requireLockWhileRunning: true,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect(r.stdout, contains('run 9719'));
+      expect(r.stdout, isNot(contains('(run 9718)')));
     });
 
     test('een groene nachtrun op de tip laat de release door', () {
