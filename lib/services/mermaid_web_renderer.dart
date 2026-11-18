@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:js_interop';
+import 'dart:ui_web' as ui_web;
 
 import 'package:web/web.dart' as web;
 
@@ -81,7 +82,12 @@ Future<void> _ensureLoaded() {
   // dit zou één transiënte laadfout (netwerk, een korte hapering) mermaid voor de
   // hele sessie uitschakelen. Fail-closed blijft het per render — een render die
   // faalt valt terug op de brontekst — maar niet voor altijd.
-  final script = web.HTMLScriptElement()..src = kMermaidWebScriptUrl;
+  // Flutter lost inhoudshashes en assetBase op; een vaste URL geeft een 404
+  // na --web-content-hash, ook voor de pas later geladen stijl-inliner.
+  final script = web.HTMLScriptElement()
+    ..src = ui_web.assetManager.getAssetUrl(
+      kMermaidWebScriptUrl.substring('assets/'.length),
+    );
   script.addEventListener(
     'load',
     (web.Event _) {
@@ -121,7 +127,10 @@ void _loadInliner(Completer<void> completer) {
     completer.complete();
     return;
   }
-  final script = web.HTMLScriptElement()..src = kSvgStyleInlineScriptUrl;
+  final script = web.HTMLScriptElement()
+    ..src = ui_web.assetManager.getAssetUrl(
+      kSvgStyleInlineScriptUrl.substring('assets/'.length),
+    );
   script.addEventListener(
     'load',
     (web.Event _) {

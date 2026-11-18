@@ -211,11 +211,47 @@ List<String> pak(Directory bundel, Directory wortel) {
   // berekend door deploy_web.sh, maar dat is een handmatige route die niets
   // achterlaat. Dit bestand wél — het reist mee in de bundel en in SHA256SUMS.
   schrijfBuildInfo(bundel);
+  normaliseerPrecacheManifest(bundel);
 
   File(
     '${bundel.path}/$checksumBestand',
   ).writeAsStringSync(checksumLijst(bundel));
   return const [];
+}
+
+/// Werkt het Flutter-cachemanifest bij na het toevoegen van releasebestanden.
+/// Een incrementele bouw kan de oude SBOM en checksumlijst hebben opgenomen.
+/// De checksumlijst verwijst terug naar dit manifest en mag er dus niet in:
+/// dat zou een onoplosbare hashkring worden. Gehashte app-assets blijven intact.
+void normaliseerPrecacheManifest(Directory bundel) {
+  const naam = 'precache_manifest.json';
+  final bestand = File('${bundel.path}/$naam');
+  if (!bestand.existsSync()) return;
+  final manifest =
+      jsonDecode(bestand.readAsStringSync()) as Map<String, dynamic>;
+  if (manifest['version'] != 1) {
+    throw StateError('Onbekende versie van het Flutter-cachemanifest.');
+  }
+  final entries = <String, Map<String, dynamic>>{
+    for (final entry
+        in (manifest['entries'] as List<dynamic>).cast<Map<String, dynamic>>())
+      if (entry['url'] != checksumBestand && entry['url'] != naam)
+        entry['url'] as String: entry,
+  };
+  for (final pad in [...releaseArtefacten.values, 'build-info.json']) {
+    entries[pad] = {'url': pad, 'urlHashed': false};
+  }
+  for (final entry in entries.values) {
+    if (entry['urlHashed'] == true) continue;
+    final bytes = File('${bundel.path}/${entry['url']}').readAsBytesSync();
+    entry['hash'] = sha256.convert(bytes).toString().substring(0, 8);
+    entry['size'] = bytes.length;
+  }
+  final paden = entries.keys.toList()..sort();
+  manifest['entries'] = [for (final pad in paden) entries[pad]];
+  bestand.writeAsStringSync(
+    '${const JsonEncoder.withIndent('  ').convert(manifest)}\n',
+  );
 }
 
 /// Schrijft `build-info.json` in [bundel] met de commit-aanduiding.

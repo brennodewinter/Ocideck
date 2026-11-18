@@ -1269,10 +1269,15 @@ l10n-check: check-l10n-passthrough
 	dart format --output=none --set-exit-if-changed lib/l10n
 	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart test/l10n_untranslated_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
-# Build the hardened web bundle. Two flags do the security work:
+# Build a dual WASM/JS release with content-addressed assets. Runtime feature
+# detection selects skwasm on modern engines, retaining CanvasKit on old ones.
+# Keep Dart's default WASM O2: runtime type and bounds checks remain enabled.
+#   --web-content-hash      Stable deploys and immutable asset caches.
+#   --no-deprecated-js-interop  Reject legacy interop in both compiler targets.
+# Two flags retain the security boundary:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the
-#                           gstatic CDN, so the running app pulls ZERO third-party
-#                           origins (air-gappable, reproducible, fits the pinned
+#                           gstatic CDN, so engine resources stay first-party
+#                           rather than using a third-party origin (air-gappable, reproducible, fits the pinned
 #                           bundled-JS policy in deps-check).
 #   --csp                   Emit a CSP-compliant loader: no eval()/inline scripts
 #                           in the Flutter bootstrap, so script-src needs neither
@@ -1288,10 +1293,10 @@ deps-verify-offline:
 
 build-web: deps-verify-offline sbom-verify
 	@echo "== OciDeck build: hardened web bundle =="
-	@echo "Command: flutter build web --release --no-web-resources-cdn --csp"
+	@echo "Command: flutter build web --release --wasm --web-content-hash --no-deprecated-js-interop --no-web-resources-cdn --csp"
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
 	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
-	flutter build web --release --no-web-resources-cdn --csp
+	flutter build web --release --wasm --web-content-hash --no-deprecated-js-interop --no-web-resources-cdn --csp
 	@# Ship the artefacts that must travel with a downloaded bundle: the licence
 	@# and third-party notices (without them the bundle is not redistributable),
 	@# and the SBOM (the CRA inventory belongs to the exact build you hand out,

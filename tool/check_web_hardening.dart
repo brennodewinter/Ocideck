@@ -16,7 +16,12 @@
 //     .well-known/security.txt, and whatever is added next — is served and not
 //     merely present in the source (#1888).
 
+import 'dart:convert';
 import 'dart:io';
+
+import 'package:crypto/crypto.dart';
+
+import 'web_bundle_assets.dart';
 
 import 'pack_web_release.dart' show nietUitleveren;
 
@@ -271,9 +276,60 @@ void main() {
     'Loader is not pinned to local CanvasKit (useLocalCanvasKit must be true).',
   );
 
+  // Both compiler targets must ship: old browsers retain the JS fallback.
+  final loader = bootstrap.existsSync() ? bootstrap.readAsStringSync() : '';
+  for (final target in ['dart2wasm', 'dart2js']) {
+    require(
+      loader.contains('"compileTarget":"$target"'),
+      'Missing $target build (use --wasm).',
+    );
+  }
+  require(
+    File('build/web/canvaskit/skwasm.wasm').existsSync(),
+    'skwasm must be self-hosted beside the CanvasKit fallback.',
+  );
+  for (final engine in ['blink', 'webkit', 'gecko']) {
+    require(
+      RegExp('$engine: *true').hasMatch(loader),
+      'WASM must be enabled for $engine with runtime feature detection.',
+    );
+  }
+  final manifest = File('build/web/precache_manifest.json');
+  require(
+    manifest.existsSync(),
+    'Content-hash manifest missing (use --web-content-hash).',
+  );
+  if (manifest.existsSync()) {
+    final entries =
+        (jsonDecode(manifest.readAsStringSync()) as Map)['entries'] as List;
+    for (final entry in entries.cast<Map<String, dynamic>>()) {
+      final url = entry['url'] as String;
+      final file = File('build/web/$url');
+      require(file.existsSync(), 'Manifest resource missing: $url');
+      if (!file.existsSync()) continue;
+      require(
+        sha256
+            .convert(file.readAsBytesSync())
+            .toString()
+            .startsWith(entry['hash'] as String),
+        'Manifest digest differs: $url',
+      );
+      if (url.startsWith('canvaskit/')) {
+        require(
+          entry['urlHashed'] == false,
+          'Engine URL must revalidate: $url',
+        );
+      }
+    }
+  }
+
   // ── UI font is bundled (no fonts.gstatic.com fetch) ─────────────────────────
   require(
-    _findFile(webDir, 'Roboto-Variable.ttf') != null,
+    bundledAsset(
+          Directory('build/web/assets'),
+          'assets/fonts/Roboto-Variable.ttf',
+        ) !=
+        null,
     'Bundled Roboto UI font not found in build/web (would fall back to gstatic).',
   );
 
@@ -356,12 +412,4 @@ String? _extractReferrerPolicy(String html) {
     caseSensitive: false,
   ).firstMatch(html);
   return match?.group(1);
-}
-
-/// Recursively finds the first file named [name] under [dir], or null.
-File? _findFile(Directory dir, String name) {
-  for (final e in dir.listSync(recursive: true, followLinks: false)) {
-    if (e is File && e.uri.pathSegments.last == name) return e;
-  }
-  return null;
 }

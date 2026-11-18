@@ -23,6 +23,8 @@
 
 import 'dart:io';
 
+import 'web_bundle_assets.dart';
+
 /// The outcome of comparing the declared bundled docs against the copies found
 /// in a built artifact. Pure data, so the comparison is unit-testable without
 /// touching the filesystem.
@@ -95,6 +97,8 @@ const _sentinel = 'docs/USER_GUIDE.md';
 /// Returns null when no built docs are found (wrong directory, or no build).
 Directory? findAssetsDir(Directory root) {
   if (!root.existsSync()) return null;
+  final webAssets = Directory('${root.path}/assets');
+  if (bundledAsset(webAssets, _sentinel) != null) return webAssets;
   for (final entity in root.listSync(recursive: true, followLinks: false)) {
     if (entity is File &&
         entity.path.replaceAll('\\', '/').endsWith(_sentinel)) {
@@ -156,8 +160,7 @@ void main(List<String> args) {
       exit(2);
     }
     source[asset] = src.readAsBytesSync();
-    final built = File('${assetsDir.path}/$asset');
-    bundled[asset] = built.existsSync() ? built.readAsBytesSync() : null;
+    bundled[asset] = bundledAsset(assetsDir, asset)?.readAsBytesSync();
   }
 
   final result = compareDocs(source: source, bundled: bundled);
