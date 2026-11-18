@@ -175,7 +175,9 @@ const Map<String, int> fileSizeBaseline = {
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
   'lib/state/tabs_provider.dart':
-      1125, // +62 (sweep #2619–#2636): warm-up-haak na
+      1084, // -41 (#3000): _placeDocumentTab/_createDocumentTab naar
+  // tabs_provider_tab_info.dart — zelfde plaatsingslaag als _placeDeckInTab.
+  // +62 (sweep #2619–#2636): warm-up-haak na
   // _placeDeckInTab, per-tab scanvoortgang en de meegeleverde
   // privacybevindingen uit het openresultaat — de open-routes komen hier
   // allemaal langs; gedrag zit in de part-bestanden.
@@ -644,7 +646,9 @@ const Map<String, int> classSizeBaseline = {
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
   'lib/state/tabs_provider.dart#TabsNotifier':
-      2350, // +64 (sweep #2634/#2623): tabfeit-poort op
+      2311, // -39 (#3000): _placeDocumentTab/_createDocumentTab naar
+  // top-level in tabs_provider_tab_info.dart.
+  // +64 (sweep #2634/#2623): tabfeit-poort op
   // emissies, warm-up na deck-plaatsing en de meegeleverde
   // scanbevindingen — de extensies in de part-bestanden tellen mee.
   // +2 (#2515): pendingAudioPath-doorlus in

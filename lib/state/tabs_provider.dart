@@ -347,6 +347,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
           continue;
         }
         final tab = _createDocumentTab(
+          this,
           MarkdownDocument.parse(snap.markdown, hasUtf8Bom: snap.utf8Bom),
           filePath: snap.filePath,
           recoveryId: snap.id,
@@ -560,7 +561,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (document == null) {
       return _openFailureResult(_ref, mounted, result.failure);
     }
-    _placeDocumentTab(document, filePath: path);
+    _placeDocumentTab(this, document, filePath: path);
     await _settings.addRecentFile(path, kind: MarkdownKind.document);
     return OpenResult.opened;
   }
@@ -581,77 +582,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String? pendingAudioPath,
   }) {
     _placeDocumentTab(
+      this,
       MarkdownDocument.parse(source),
       projectPath: projectPath,
       suggestedName: suggestedName,
       pendingAudioPath: pendingAudioPath,
     );
-  }
-
-  /// Bouwt een documenttabblad rond [document] en zet het naast de bestaande
-  /// (geselecteerd). Een verse [DocumentNotifier] met een herstelabonnement dat
-  /// de kopie wist zodra het tabblad schoon is — gedeeld door het openen van een
-  /// `.md` en het maken van een nieuw document.
-  void _placeDocumentTab(
-    MarkdownDocument document, {
-    String? filePath,
-    String? projectPath,
-    String? suggestedName,
-    String? pendingAudioPath,
-  }) {
-    final tab = _createDocumentTab(
-      document,
-      filePath: filePath,
-      projectPath: projectPath,
-      suggestedName: suggestedName,
-      pendingAudioPath: pendingAudioPath,
-    );
-    state = state.copyWith(
-      tabs: [...state.tabs, tab],
-      selectedIndex: state.tabs.length,
-    );
-  }
-
-  /// Bouwt (zonder te plaatsen) een documenttabblad met zijn herstelabonnement
-  /// dat de kopie wist zodra het tabblad schoon is. [recoveryId] hergebruikt de
-  /// sleutel van een bestaande herstelkopie (zie [restoreRecovered]); zonder
-  /// krijgt het tabblad een verse. De deck-tegenhanger is [_createTab].
-  TabInfo _createDocumentTab(
-    MarkdownDocument document, {
-    String? filePath,
-    String? recoveryId,
-    String? projectPath,
-    String? suggestedName,
-    String? pendingAudioPath,
-  }) {
-    final id = _nextId++;
-    final key = recoveryId ?? _uuid.v4();
-    final notifier = DocumentNotifier()
-      ..loadDocument(
-        document,
-        filePath: filePath,
-        projectPath: projectPath,
-        suggestedName: suggestedName,
-        pendingAudioPath: pendingAudioPath,
-      );
-    // Een kopie met een voorgestelde naam bestaat nog nergens op schijf —
-    // precies wat de dirty-stip en de herstelkopie zichtbaar maken (#2468).
-    if (suggestedName != null) notifier.markDirty();
-    final tab = TabInfo(
-      id: id,
-      recoveryId: key,
-      content: DocumentTabContent(notifier),
-    );
-    _subs[id] = notifier.stream.listen((st) {
-      if (!mounted) return;
-      if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
-      // Zelfde tabfeit-poort als de deck-luisteraar hierboven (#2623).
-      final fact = (tab.label, tab.isDirty, st.isOpen, st.filePath);
-      if (fact == _lastTabFacts[id]) return;
-      _lastTabFacts[id] = fact;
-      state = state.copyWith(tabs: List.from(state.tabs));
-    });
-    return tab;
   }
 
   /// Zoek een byte-identieke kopie van het zojuist geopende bestand in de
@@ -746,6 +682,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
         if (!mounted) return OpenResult.unreadable;
         // De BOM is uit de tekst gedecodeerd; hier reist hij als vlag mee (§3.1).
         _placeDocumentTab(
+          this,
           MarkdownDocument.parse(decoded.text, hasUtf8Bom: decoded.hasBom),
         );
         return OpenResult.opened;

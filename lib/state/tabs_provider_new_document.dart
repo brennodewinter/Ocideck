@@ -23,7 +23,7 @@ extension TabsNotifierNewDocument on TabsNotifier {
   /// tabblad uit te komen.
   Future<bool> newDocument({String? filePath, String source = ''}) async {
     if (filePath == null || !supportsLocalProjectFolders) {
-      _placeDocumentTab(MarkdownDocument.parse(source));
+      _placeDocumentTab(this, MarkdownDocument.parse(source));
       return true;
     }
     if (!await _createDocumentFileAt(filePath, source)) return false;
@@ -31,7 +31,7 @@ extension TabsNotifierNewDocument on TabsNotifier {
       await _deleteOrphanedDocumentFile(filePath);
       return false;
     }
-    _placeDocumentTab(MarkdownDocument.parse(source), filePath: filePath);
+    _placeDocumentTab(this, MarkdownDocument.parse(source), filePath: filePath);
     await _settings.addRecentFile(filePath, kind: MarkdownKind.document);
     return true;
   }
