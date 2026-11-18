@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- AI-concepten worden strenger op volledigheid gecontroleerd: afgebroken,
+  geweigerde of als toolverzoek teruggegeven antwoorden overschrijven geen
+  bestaande tekst. Ongeldige provider-JSON komt zonder broninhoud in de
+  foutdiagnostiek. Oudere compatibele servers en lege onthoudingen blijven
+  ondersteund.
+
+### Changed
+
 - De standaardwebbouw levert nu WebAssembly met skwasm, met automatische
   JavaScript/CanvasKit-terugval. Moderne Chromium-, Safari- en Firefox-engines
   gebruiken WASM na featuredetectie. Inhoudshashes en passende cacheheaders

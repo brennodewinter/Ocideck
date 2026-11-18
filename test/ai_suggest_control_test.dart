@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/services/ai_client_service.dart';
 import 'package:ocideck/widgets/editors/ai_suggest_control.dart';
 
 Widget _host({
@@ -92,6 +93,33 @@ void main() {
     await tester.tap(find.text('Annuleren'));
     await tester.pumpAndSettle();
     expect(calls, 0);
+  });
+
+  testWidgets('een onvolledige respons overschrijft bestaande tekst niet', (
+    tester,
+  ) async {
+    var text = 'Mijn eigen tekst';
+    await tester.pumpWidget(
+      _host(
+        hasExistingText: true,
+        loadSuggestion: () async =>
+            throw const AiRequestException('AI response did not complete'),
+        onSuggested: (draft) => text = draft,
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Tekst voorstellen (AI)'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Vervangen'));
+    await tester.pumpAndSettle();
+    expect(text, 'Mijn eigen tekst');
+    expect(
+      find.text(
+        'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).',
+      ),
+      findsOneWidget,
+    );
+    expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 
   testWidgets('conceptmarkering blijft bruikbaar zonder AI-backend', (
