@@ -55,6 +55,7 @@ class MermaidRenderService {
   bool _bootstrapped = false;
   Completer<void>? _bootstrapCompleter;
   Timer? _bootstrapTimer;
+  Timer? _startupTimer;
   final List<_PendingRender> _queue = [];
   bool _busy = false;
 
@@ -93,6 +94,7 @@ class MermaidRenderService {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (!hostNeeded.value) hostNeeded.value = true;
     });
+    SchedulerBinding.instance.ensureVisualUpdate();
   }
 
   /// Attach the hidden [WebViewController] created by [MermaidRenderHost].
@@ -113,6 +115,8 @@ class MermaidRenderService {
     _bootstrapped = false;
     _bootstrapTimer?.cancel();
     _bootstrapTimer = null;
+    _startupTimer?.cancel();
+    _startupTimer = null;
     _bootstrapCompleter?.complete();
     _bootstrapCompleter = null;
     final active = _renderCompleter;
@@ -280,6 +284,8 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
   void _markBootstrapReady() {
     if (_bootstrapped) return;
     _bootstrapped = true;
+    _startupTimer?.cancel();
+    _startupTimer = null;
     _bootstrapTimer?.cancel();
     _bootstrapTimer = null;
     _bootstrapCompleter?.complete();
@@ -384,6 +390,19 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
     // Web rendert zonder WebView: geen controller en geen bootstrap om op te
     // wachten. Op IO blijft de oude voorwaarde staan.
     if (!kIsWeb) {
+      if (_controller == null || !_bootstrapped) {
+        // De JS-renderdeadline begint pas ná het koppelen van de host. Een
+        // ontbrekende host of vastgelopen bootstrap moet óók kunnen aflopen.
+        _startupTimer ??= Timer(const Duration(seconds: 20), () {
+          _startupTimer = null;
+          logWarning('MermaidRender: host niet op tijd beschikbaar');
+          for (final pending in _queue) {
+            pending.completer.complete(null);
+          }
+          _queue.clear();
+          if (_controller == null) hostNeeded.value = false;
+        });
+      }
       if (_controller == null) return;
       if (!_bootstrapped) {
         _bootstrapCompleter ??= Completer<void>();
@@ -403,7 +422,9 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
         // De JS-interop-renderer geeft de SVG rechtstreeks terug (geen
         // JSON-omhulsel zoals de WebView). Formules komen hier niet: die zijn
         // op web al bij [renderMath] afgevangen.
-        raw = await web_renderer.renderMermaid(job.source);
+        raw = await web_renderer
+            .renderMermaid(job.source)
+            .timeout(const Duration(seconds: 15));
       } else {
         // Vuur de render en wacht op het antwoord via het MermaidChannel (#882):
         // een Promise via runJavaScriptReturningResult marshalt niet op macOS.
@@ -414,7 +435,9 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
         final entry = job.kind == _RenderKind.math
             ? '__renderMath'
             : '__renderMermaid';
-        await _controller!.runJavaScript('window.$entry($encoded, $seq)');
+        await _controller!
+            .runJavaScript('window.$entry($encoded, $seq)')
+            .timeout(const Duration(seconds: 15));
         raw = await completer.future.timeout(
           const Duration(seconds: 15),
           onTimeout: () {

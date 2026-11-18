@@ -1567,6 +1567,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'O carregamento de uma imagem está a demorar demasiado. Disponibilize o ficheiro localmente e tente exportar novamente.',
   'Sprekers corrigeren': 'Corrigir falantes',
   'Fragment splitsen': 'Dividir segmento',
   'Doelspreker': 'Falante de destino',

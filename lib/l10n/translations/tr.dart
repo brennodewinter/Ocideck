@@ -2398,6 +2398,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Bir görüntünün yüklenmesi çok uzun sürüyor. Dosyayı yerel olarak kullanılabilir hâle getirip dışa aktarmayı yeniden deneyin.',
   'Sprekers corrigeren': 'Konuşmacıları düzelt',
   'Fragment splitsen': 'Bölümü ayır',
   'Doelspreker': 'Hedef konuşmacı',

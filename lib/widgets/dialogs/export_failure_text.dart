@@ -6,6 +6,8 @@
 import '../../l10n/app_localizations.dart';
 import '../../services/download_delivery.dart';
 import '../../services/export_service.dart' show ExportFailure;
+import '../../utils/image_preload.dart';
+import '../../utils/user_facing_error.dart';
 
 /// Het kopje boven de naam van wat er zojuist is opgeleverd.
 ///
@@ -48,21 +50,23 @@ String exportFailureText(
   ExportStage stage,
   Object error,
 ) {
-  final what = switch (stage) {
-    ExportStage.preparing => l10n.d(
-      'De export is gestopt tijdens het voorbereiden.',
-    ),
-    ExportStage.rendering => l10n.d(
-      'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.',
-    ),
-    // Bewust niet het woord uit de fase-tekst ("…samenstellen…"): die tekst is
-    // in export_dialog_error_test.dart de vlag voor "het dialoog hangt nog", en
-    // een foutmelding die hem herhaalt zou die toets stilletjes waardeloos
-    // maken.
-    ExportStage.writing => l10n.d(
-      'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.',
-    ),
-  };
+  final what = error is ImagePreloadTimeout
+      ? userFacingError(l10n, error)
+      : switch (stage) {
+          ExportStage.preparing => l10n.d(
+            'De export is gestopt tijdens het voorbereiden.',
+          ),
+          ExportStage.rendering => l10n.d(
+            'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.',
+          ),
+          // Bewust niet het woord uit de fase-tekst ("…samenstellen…"): die tekst is
+          // in export_dialog_error_test.dart de vlag voor "het dialoog hangt nog", en
+          // een foutmelding die hem herhaalt zou die toets stilletjes waardeloos
+          // maken.
+          ExportStage.writing => l10n.d(
+            'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.',
+          ),
+        };
   return '${l10n.d('De export is mislukt.')}\n$what\n\n'
       '${l10n.d('Technische melding:')} $error';
 }

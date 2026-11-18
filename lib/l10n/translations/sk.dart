@@ -1545,6 +1545,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Načítanie obrázka trvá príliš dlho. Sprístupnite súbor lokálne a skúste exportovať znova.',
   'Sprekers corrigeren': 'Opraviť hovoriacich',
   'Fragment splitsen': 'Rozdeliť segment',
   'Doelspreker': 'Cieľový hovoriaci',

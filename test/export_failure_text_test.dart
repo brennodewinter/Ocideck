@@ -5,6 +5,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/download_delivery.dart';
 import 'package:ocideck/services/export_result.dart';
 import 'package:ocideck/widgets/dialogs/export_failure_text.dart';
+import 'package:ocideck/utils/image_preload.dart';
 
 /// De tekst bij een mislukte export (#714).
 ///
@@ -15,6 +16,23 @@ import 'package:ocideck/widgets/dialogs/export_failure_text.dart';
 /// nietszeggend als hele melding, maar wél de enige aanwijzing die er was.
 void main() {
   const l10n = AppLocalizations(Locale('nl'));
+  setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+  test(
+    'een afbeeldingsdeadline noemt de oorzaak en hoe je opnieuw probeert',
+    () {
+      final text = exportFailureText(
+        l10n,
+        ExportStage.rendering,
+        const ImagePreloadTimeout('images/cloud.png', Duration(seconds: 20)),
+      );
+      expect(text, contains('afbeelding duurt te lang'));
+      expect(text, contains('lokaal beschikbaar'));
+      expect(text, contains('opnieuw te exporteren'));
+      expect(text, contains('images/cloud.png'));
+      expect(text, isNot(contains('Dit ligt aan een dia')));
+    },
+  );
 
   test('elke stap krijgt zijn eigen zin', () {
     final texts = {

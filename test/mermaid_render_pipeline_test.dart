@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -28,6 +29,7 @@ class _FakeController extends PlatformWebViewController {
   /// Wat de render teruggeeft (een SVG-string), of een `Exception` om een fout
   /// aan de JS-kant te simuleren.
   Object? Function(String script)? answer;
+  Future<void>? dispatchGate;
 
   @override
   Future<void> loadHtmlString(String html, {String? baseUrl}) async {
@@ -57,6 +59,7 @@ class _FakeController extends PlatformWebViewController {
         !javaScript.startsWith('window.__renderMath(')) {
       return;
     }
+    await dispatchGate;
     // De echte pagina rendert async en stuurt het resultaat via MermaidChannel
     // terug (#882). Hier bootsen we dat na: haal de seq uit de aanroep en lever
     // het door de test klaargezette antwoord op datzelfde kanaal.
@@ -362,5 +365,27 @@ void main() {
     final aantal = controller.scripts.length;
     expect(await MermaidRenderService.instance.render('   '), isNull);
     expect(controller.scripts.length, aantal);
+  });
+
+  testWidgets('een vastgelopen JS-aanroep geeft de wachtrij weer vrij', (
+    tester,
+  ) async {
+    final service = MermaidRenderService.instance;
+    final gate = Completer<void>();
+    controller.dispatchGate = gate.future;
+    final stalled = service.render(verseBron());
+    await tester.pump(const Duration(seconds: 15));
+    expect(await stalled, isNull);
+    expect(service.pendingRenders, 0);
+
+    controller.dispatchGate = null;
+    controller.answer = (_) => svgVoor('na-timeout');
+    final next = service.render(verseBron());
+    await tester.pump();
+    expect(await next, contains('id="na-timeout"'));
+    expect(service.pendingRenders, 0);
+    gate.complete();
+    await tester.pump();
+    expect(tester.takeException(), isNull);
   });
 }

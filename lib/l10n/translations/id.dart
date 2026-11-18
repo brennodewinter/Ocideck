@@ -1542,6 +1542,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Pemuatan gambar terlalu lama. Sediakan berkas secara lokal dan coba ekspor lagi.',
   'Sprekers corrigeren': 'Koreksi pembicara',
   'Fragment splitsen': 'Pisahkan segmen',
   'Doelspreker': 'Pembicara tujuan',

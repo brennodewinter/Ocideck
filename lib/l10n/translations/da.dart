@@ -1542,6 +1542,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Det tager for lang tid at indlæse et billede. Gør filen tilgængelig lokalt, og prøv at eksportere igen.',
   'Sprekers corrigeren': 'Ret talere',
   'Fragment splitsen': 'Opdel segment',
   'Doelspreker': 'Måltaler',

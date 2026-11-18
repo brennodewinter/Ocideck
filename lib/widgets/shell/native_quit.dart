@@ -8,13 +8,21 @@ part of '../app_shell.dart';
 /// semantics- en tickerlagen. Eerst terug naar de wortelroute en één frame
 /// laten landen geeft elk tijdelijk oppervlak zijn gewone afbouwpad.
 @visibleForTesting
-Future<void> settleUiBeforeNativeQuit(BuildContext context) async {
+Future<void> settleUiBeforeNativeQuit(
+  BuildContext context, {
+  Duration frameTimeout = const Duration(seconds: 2),
+}) async {
   if (!context.mounted) return;
   FocusManager.instance.primaryFocus?.unfocus();
   Tooltip.dismissAllToolTips();
   ScaffoldMessenger.maybeOf(context)?.clearSnackBars();
   Navigator.of(context, rootNavigator: true).popUntil((route) => route.isFirst);
-  WidgetsBinding.instance.ensureVisualUpdate();
-  await WidgetsBinding.instance.endOfFrame;
+  try {
+    await waitForUiFrame(timeout: frameTimeout);
+  } on TimeoutException catch (error) {
+    // Opslaan en netwerkopruiming zijn al voltooid. Een geminimaliseerd
+    // venster mag het afsluiten niet alsnog onbeperkt tegenhouden.
+    logWarning('Afsluiten: geen frame voor UI-opruiming', error);
+  }
   await Future<void>.delayed(Duration.zero);
 }

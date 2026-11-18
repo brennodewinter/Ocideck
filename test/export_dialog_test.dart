@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -52,9 +53,12 @@ ExportBundle _bundleOf(Deck deck, PrivacyExportProfile profile) => ExportBundle(
 );
 
 class _SuccessfulWebExport implements ExportService {
+  Completer<void>? invoked;
+
   @override
   dynamic noSuchMethod(Invocation invocation) {
     if (invocation.memberName == #export) {
+      if (invoked?.isCompleted == false) invoked!.complete();
       return Future<ExportResult>.value(ExportResult.ok('report.html.zip'));
     }
     return super.noSuchMethod(invocation);
@@ -62,6 +66,33 @@ class _SuccessfulWebExport implements ExportService {
 }
 
 void main() {
+  testWidgets('HTML-export bereikt de dienst zonder nieuwe schermframes', (
+    tester,
+  ) async {
+    final service = _SuccessfulWebExport();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ExportDialog(
+            deckPath: '/tmp/deck.md',
+            bundleFor: _emptyBundle,
+            exportService: service,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.runAsync(() async {
+      service.invoked = Completer<void>();
+      await tester.tap(find.text('HTML-bestand (werkt offline)'));
+      // Bewust geen pump na de tik: HTML heeft de renderengine niet nodig.
+      await service.invoked!.future.timeout(const Duration(seconds: 2));
+    });
+    expect(service.invoked!.isCompleted, isTrue);
+    expect(tester.takeException(), isNull);
+    await tester.pumpAndSettle();
+  });
+
   test('quality warnings require acknowledgement before export proceeds', () {
     final decision = const QualityExportPolicy().evaluate(_qualityWarning);
     expect(decision.allowed, isFalse);

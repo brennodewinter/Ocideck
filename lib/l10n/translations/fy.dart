@@ -613,6 +613,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'It laden fan in ôfbylding duorret te lang. Meitsje it bestân lokaal beskikber en besykje opnij te eksportearjen.',
   'Sprekers corrigeren': 'Sprekkers korrizjearje',
   'Fragment splitsen': 'Fragmint splitse',
   'Doelspreker': 'Doelsprekker',

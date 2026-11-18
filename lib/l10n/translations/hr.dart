@@ -1546,6 +1546,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Učitavanje slike traje predugo. Omogućite lokalni pristup datoteci i pokušajte ponovno izvesti.',
   'Sprekers corrigeren': 'Ispravi govornike',
   'Fragment splitsen': 'Podijeli segment',
   'Doelspreker': 'Ciljni govornik',

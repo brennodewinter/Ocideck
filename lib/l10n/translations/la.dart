@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Imago diutius quam oportet oneratur. Fac ut fasciculus in hoc computatro praesto sit et rursus exportare conare.',
   'Sprekers corrigeren': 'Oratores corrige',
   'Fragment splitsen': 'Segmentum divide',
   'Doelspreker': 'Orator destinatus',

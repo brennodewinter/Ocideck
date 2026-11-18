@@ -1558,6 +1558,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'It-tagħbija ta’ immaġni qed tieħu wisq żmien. Agħmel il-fajl disponibbli lokalment u erġa’ pprova tesporta.',
   'Sprekers corrigeren': 'Ikkoreġi l-kelliema',
   'Fragment splitsen': 'Aqsam is-segment',
   'Doelspreker': 'Kelliem fil-mira',

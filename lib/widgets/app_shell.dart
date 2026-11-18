@@ -34,6 +34,7 @@ import '../utils/display_path.dart';
 import '../utils/file_extension.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
+import '../utils/ui_frame.dart';
 import '../utils/physical_control_shortcut.dart';
 import '../utils/safe_filename.dart';
 import '../utils/atomic_file.dart';

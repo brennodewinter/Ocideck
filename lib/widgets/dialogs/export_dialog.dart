@@ -436,7 +436,8 @@ class _ExportDialogState extends State<ExportDialog> {
       _done = 0;
       _total = needsRaster ? _bundle.audience.slides.length : 0;
     });
-    await WidgetsBinding.instance.endOfFrame;
+    // Dit is alleen voortgangstekst. De export zelf mag niet afhangen van
+    // een frame dat een achtergrondvenster mogelijk niet krijgt.
     await Future<void>.delayed(Duration.zero);
     if (!mounted) return;
 
@@ -457,7 +458,6 @@ class _ExportDialogState extends State<ExportDialog> {
       _done = 0;
       _total = needsRaster ? _bundle.audience.slides.length : 0;
     });
-    await WidgetsBinding.instance.endOfFrame;
     await Future<void>.delayed(Duration.zero);
     if (!mounted) return;
 
@@ -499,7 +499,7 @@ class _ExportDialogState extends State<ExportDialog> {
       _phase = '${format.label} ${l10n.t('buildingExport')}';
       _done = needsRaster ? _bundle.audience.slides.length : 0;
     });
-    await WidgetsBinding.instance.endOfFrame;
+    await Future<void>.delayed(Duration.zero);
     if (!mounted) return;
 
     final r = await widget.exportService.export(

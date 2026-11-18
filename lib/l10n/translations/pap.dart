@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Kargamentu di un imágen ta dura muchu largu. Pone e archivo disponibel lokalmente i purba eksportá atrobe.',
   'Sprekers corrigeren': 'Korigí papiadónan',
   'Fragment splitsen': 'Partí segmento',
   'Doelspreker': 'Papiadó di destino',

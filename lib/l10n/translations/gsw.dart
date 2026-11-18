@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'S Lade von eme Bild duuret z lang. Stell d Datei lokal bereit und probier de Export nomal.',
   'Sprekers corrigeren': 'Sprecher korrigiere',
   'Fragment splitsen': 'Abschnitt teile',
   'Doelspreker': 'Ziilsprecher',

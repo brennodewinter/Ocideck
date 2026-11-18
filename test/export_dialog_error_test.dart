@@ -11,6 +11,9 @@ import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/widgets/dialogs/export_dialog.dart';
+import 'package:ocideck/utils/image_preload.dart';
+
+import 'support/pump_until.dart';
 
 /// Wat er gebeurt als een export mislukt met een *uitzondering* in plaats van
 /// een nette [ExportResult] met `success: false`.
@@ -27,6 +30,12 @@ import 'package:ocideck/widgets/dialogs/export_dialog.dart';
 /// recht naar de geïnjecteerde service, zodat de fout deterministisch te
 /// plaatsen is zonder een offscreen render in de testomgeving.
 class _ThrowingExportService extends ExportService {
+  _ThrowingExportService([
+    this.error = const FileSystemException('schijf vol'),
+  ]);
+
+  final Object error;
+
   @override
   Future<ExportResult> export(
     String deckPath,
@@ -52,7 +61,7 @@ class _ThrowingExportService extends ExportService {
     QuestionExport questions = QuestionExport.included,
     String interfaceLanguageCode = 'nl',
   }) async {
-    throw const FileSystemException('schijf vol');
+    throw error;
   }
 }
 
@@ -71,6 +80,37 @@ ExportBundle _bundleFor(
 );
 
 void main() {
+  testWidgets('een afbeeldingsdeadline wordt zichtbaar en stopt de laadstand', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ExportDialog(
+            deckPath: '/tmp/deck.md',
+            bundleFor: _bundleFor,
+            exportService: _ThrowingExportService(
+              const ImagePreloadTimeout(
+                'images/cloud.png',
+                Duration(seconds: 20),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('HTML-bestand (werkt offline)'));
+    await pumpUntil(
+      tester,
+      () => find.byIcon(Icons.error_outline).evaluate().isNotEmpty,
+    );
+    expect(find.textContaining('afbeelding duurt te lang'), findsOneWidget);
+    expect(find.textContaining('lokaal beschikbaar'), findsOneWidget);
+    expect(find.textContaining('images/cloud.png'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('een export die gooit toont een fout en blijft niet hangen', (
     tester,
   ) async {

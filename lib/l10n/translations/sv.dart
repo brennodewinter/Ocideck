@@ -1541,6 +1541,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Det tar för lång tid att läsa in en bild. Gör filen tillgänglig lokalt och försök exportera igen.',
   'Sprekers corrigeren': 'Korrigera talare',
   'Fragment splitsen': 'Dela segment',
   'Doelspreker': 'Måltalare',

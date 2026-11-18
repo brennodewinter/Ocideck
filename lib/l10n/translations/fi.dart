@@ -1542,6 +1542,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Kuvan lataaminen kestää liian kauan. Tuo tiedosto saataville paikallisesti ja yritä vientiä uudelleen.',
   'Sprekers corrigeren': 'Korjaa puhujat',
   'Fragment splitsen': 'Jaa jakso',
   'Doelspreker': 'Kohdepuhuja',
