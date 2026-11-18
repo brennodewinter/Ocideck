@@ -10,6 +10,7 @@ import '../../models/privacy_disposition.dart';
 import '../../models/findings_summary_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_style.dart';
 import '../../models/timeline.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
@@ -74,7 +75,10 @@ class _EditorPanelContent extends ConsumerWidget {
     final editorNotifier = ref.read(editorProvider.notifier);
     final imgService = ref.read(imageServiceProvider);
     final richTextPage = ref.watch(richTextPreviewPageProvider);
-    final richTextPages = richTextPageCount(slide, deck.themeProfile);
+    // Het effectieve profiel van déze dia (#2996): lettermaat en animatie
+    // volgen de lopende stijlwissel, niet alleen de deckstijl.
+    final slideProfile = deck.slideProfileAt(idx);
+    final richTextPages = richTextPageCount(slide, slideProfile);
     final multiPageNotes = richTextPages > 1;
 
     void update(Slide updated) => deckNotifier.updateSlide(idx, updated);
@@ -160,8 +164,7 @@ class _EditorPanelContent extends ConsumerWidget {
                     );
                     if (first >= 0) editorNotifier.select(first);
                   },
-                  themeAnimationDurationMs:
-                      deck.themeProfile.animationDurationMs,
+                  themeAnimationDurationMs: slideProfile.animationDurationMs,
                   previousSlideIsNumbered:
                       idx > 0 && isNumberedListSlide(deck.slides[idx - 1]),
                   canContinueSplit: canContinueSplitFrom(deck.slides, idx),
@@ -192,6 +195,7 @@ class _EditorPanelContent extends ConsumerWidget {
                   deckNotifier: deckNotifier,
                   imageService: imgService,
                   deck: deck,
+                  profiles: settings.themeProfiles,
                   richTextPage: richTextPage,
                   richTextPages: richTextPages,
                   multiPageNotes: multiPageNotes,
@@ -214,6 +218,7 @@ class _EditorPanelContent extends ConsumerWidget {
     required DeckNotifier deckNotifier,
     required ImageService imageService,
     required Deck deck,
+    required List<ThemeProfile> profiles,
     required int richTextPage,
     required int richTextPages,
     required bool multiPageNotes,
@@ -227,11 +232,17 @@ class _EditorPanelContent extends ConsumerWidget {
         onUpdate: update,
         imageService: imageService,
         deck: deck,
+        profiles: profiles,
         // De sprong-uit muteert twee dia's (deze en het doel), dus loopt hij via
         // de deck-notifier i.p.v. de enkel-dia [update] (#1162).
         onSetJump: (targetIndex) => deckNotifier.setSlideJump(
           deck.slides.indexWhere((s) => s.id == slide.id),
           targetIndex,
+        ),
+        // De stijlwissel resolveert zijn profiel in de notifier (#2996).
+        onSetStyle: (name) => deckNotifier.setSlideStyle(
+          deck.slides.indexWhere((s) => s.id == slide.id),
+          name,
         ),
       ),
       const Divider(height: 1),

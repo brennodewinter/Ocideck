@@ -60,8 +60,10 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/slides/image_crop_dialog.dart::_ImageCropDialogState.build': 153,
   // +8 (#2741): de verduidelijkte schermteksten (andere-scherm-zinnen en
   // de stille-fallback-meldingen) — ze horen bij dezelfde beslisboom.
+  // +4 (#2996): de slideStyles-parameter langs showDualScreen naar de
+  // beamerpayload — zelfde onherleidbare doorvoer als marpStyle/slideSize.
   'lib/widgets/presentation/fullscreen_presenter.dart::FullscreenPresenter.showDualScreen':
-      158,
+      162,
   // +1 (#2753): het clearbare documentPdfFontPath-paar op het bestaande
   // clearX-patroon — het veld zelf staat in het instellingenpakket.
   'lib/models/parts/app_settings.dart::AppSettings.copyWith': 151,
@@ -89,7 +91,9 @@ const Map<String, int> methodLengthBaseline = {
   // +9 (#2625, #2629): decodeMaxEdge-resolutie per dia en de
   // TransferableTypedData-overdracht richting de isolate — pure plumbing
   // in de per-dia-lus, geen logica om uit te tillen.
-  'lib/services/slide_rasterizer.dart::SlideRasterizer.rasterize': 160,
+  // +3 (#2996): het per-dia profiel in de lus — de lokale `slideProfile`-
+  // helper plus de chrome-precache over álle gebruikte stijlen.
+  'lib/services/slide_rasterizer.dart::SlideRasterizer.rasterize': 163,
   'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
   // -113 (#1859): build is opgeknipt in helpers _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; de vorige 154-regels versie is
@@ -103,7 +107,9 @@ const Map<String, int> methodLengthBaseline = {
   // botsingsvrije logo-benaming — de leden-assembly hoort bij de
   // archiefopbouw, niet in een losse helper.
   'lib/services/file/file_service_package.dart::FileServicePackage._buildPackageArchive':
-      175,
+      186, // +11 (#2996): het packedStyles-blok — per gebruikt diastijl
+  // assets pakken, het `_class`-token op de bereik-dia's en de
+  // meervoudige sidecar; assembly bij de archiefopbouw, zoals theme.json.
   // +1 (#1931): donkere logo-import in importStyleProfileBytes.
   'lib/services/file/file_service_style_profile.dart::FileServiceStyleProfile.importStyleProfileBytes':
       151,
@@ -118,7 +124,8 @@ const Map<String, int> methodLengthBaseline = {
   // +8 (#1162): de twee navigatie-takken (`ocideck_slide_anchor`/`ocideck_next`),
   // al gehalveerd via de top-level `_firstDirective`-helper.
   'lib/services/markdown_parse/markdown_service_parse_directives.dart::_MarkdownParseDirectives._parseBlockDirectives':
-      197,
+      204, // +7 (#2996): de `ocideck_style`-tak met veld en record-doorvoer —
+  // dezelfde onvermijdelijke vorm als elke directief hierboven.
   // +2 (#1162): `anchor`/`nextAnchor` doorgeven aan de Slide-constructor.
   // +15: tableDecoded/tableAlignments voor GFM-scheidingsrij-uitlijning.
   // +3: tableNumberColumns doorgeven aan Slide.
@@ -169,7 +176,9 @@ const Map<String, int> methodLengthBaseline = {
   // One more stored layout choice needs one parameter and one constructor field.
   // +2 (#2867): twoImagesLayout-parameter + doorvoer in copyWith — pure
   // plumbing, zoals elke opgeslagen layoutkeuze hierboven.
-  'lib/models/slide.dart::Slide.copyWith': 182,
+  'lib/models/slide.dart::Slide.copyWith': 184,
+  // +2 (#2996): de styleName-parameter met doorvoer — pure plumbing,
+  // hetzelfde patroon als de zeven copyWith-bumps hierboven.
   // +4 (#2838): galleryImages/galleryLayout-parameters — pure plumbing.
   // +2 (#2841): videoCaptions-parameter + doorvoer in copyWith — zelfde pure
   // plumbing als de vijf voorgaande copyWith-bumps hierboven.
@@ -179,7 +188,8 @@ const Map<String, int> methodLengthBaseline = {
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
-      183,
+      186, // +3 (#2996): het effectieve profiel van díe dia bepalen voor de
+  // logo-/footerschakelaars — deck.slideProfileAt i.p.v. deck.themeProfile.
   // +8: tabel-split actie bij tableDensityMinimum-warning.
   'lib/widgets/panels/slide_quality_actions.dart::buildSlideQualityActions':
       158,
@@ -197,13 +207,15 @@ const Map<String, int> methodLengthBaseline = {
   // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
   // +7 (#2867): de twoImagesLayout-case in de codec — één blok per veld,
   // onherleidbare plumbing zoals de rest.
-  'lib/collab/collab_codec.dart::slideFromJson': 159,
+  'lib/collab/collab_codec.dart::slideFromJson': 161,
+  // +2 (#2996): het styleName-veld — één regel in de codec zoals elk veld.
   // +2 (#2838): galleryImages/galleryLayout — twee nieuwe dia-velden in de
   // codec; één regel per veld, onherleidbare plumbing zoals de rest.
   // +3 (#2749): de tableRows-case — zelfde vorm, één regel per veld.
   // +3 (#2867): de twoImagesLayout-case — zelfde vorm als elke andere
   // veld-case in de switch, niet uit te tillen.
-  'lib/collab/deck_op.dart::_slideWithField': 215,
+  'lib/collab/deck_op.dart::_slideWithField': 219,
+  // +4 (#2996): de styleName-case — zelfde vorm als elke andere veld-case.
   // +6 (#2838): galleryImages/galleryLayout-cases — twee nieuwe velden.
   // +3 (#2841): de videoCaptions-case — zelfde vorm als elke andere
   // veld-case in de switch, niet uit te tillen.

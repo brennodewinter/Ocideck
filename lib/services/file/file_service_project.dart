@@ -443,6 +443,7 @@ extension _FileServiceProject on FileService {
     );
     updatedDeck = updatedDeck.copyWith(themeProfile: styled.profile);
     await refreshCarriedProjectStyle(dir, updatedDeck.themeProfile);
+    await refreshCarriedProjectStyles(dir, updatedDeck.slideStyles);
     await _writeImageCaptions(updatedDeck);
 
     final writtenTheme = await _writeTheme(
@@ -608,6 +609,22 @@ extension _FileServiceProject on FileService {
     String? logoUrl,
     String? brandStripUrl,
     PageSizeSpec? slideSize,
+  ) =>
+      '''
+$base
+${marpSizeDirective(slideSize)}
+/* OciDeck style profile */
+${_profileThemeCss(profile, logoUrl, brandStripUrl, slideSize)}''';
+
+  /// De profielregels van [_buildThemeCss] zonder basis-thema en diaafmeting:
+  /// de bouwsteen voor de gescope stijlvarianten van de stijlwissel (#2996),
+  /// die per gebruikt profiel een `section.<token>`-blok in het pakket-CSS
+  /// krijgen.
+  String _profileThemeCss(
+    ThemeProfile profile,
+    String? logoUrl,
+    String? brandStripUrl,
+    PageSizeSpec? slideSize,
   ) {
     // De strookhoogte is een fractie van de diahoogte, niet van 720px.
     final slideHeightPx = slideDesignHeight(slideSize);
@@ -646,9 +663,6 @@ section.no-logo::before {
 ''';
 
     return '''
-$base
-${marpSizeDirective(slideSize)}
-/* OciDeck style profile */
 section {
   background: ${profile.slideBackgroundColor};
   color: ${profile.textColor};

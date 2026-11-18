@@ -1542,6 +1542,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Vanaf deze dia': 'Ab däre Folie',
+  'Deckstijl': 'Deck-Stil',
+  'Geërfd vanaf dia': 'Gäerbt ab Folie',
+  'Geldt ook op de volgende dia\'s': 'Gilt au uf de nächste Folie',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Gilt ab däre Folie bis zum nächschte Stilwächsle. De Deck-Stil wäälsch im Chopf vum Editor.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'S Lade von eme Bild duuret z lang. Stell d Datei lokal bereit und probier de Export nomal.',
   'Sprekers corrigeren': 'Sprecher korrigiere',

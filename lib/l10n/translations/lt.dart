@@ -1548,6 +1548,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Vanaf deze dia': 'Nuo šios skaidrės',
+  'Deckstijl': 'Deko stilius',
+  'Geërfd vanaf dia': 'Paveldėta nuo skaidrės',
+  'Geldt ook op de volgende dia\'s': 'Galioja ir vėlesnėms skaidrėms',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Galioja nuo šios skaidrės iki kito stiliaus pakeitimo. Deko stilių parenkate redaktoriaus antraštėje.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Paveikslėlio įkėlimas trunka per ilgai. Padarykite failą pasiekiamą vietoje ir bandykite eksportuoti dar kartą.',
   'Sprekers corrigeren': 'Taisyti kalbėtojus',

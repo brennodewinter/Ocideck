@@ -241,6 +241,8 @@ enum SlideField {
   // — non-linear navigation (#1162) —
   anchor,
   nextAnchor,
+  // — stijlwissel (#2996) —
+  styleName,
   // — Gantt —
   ganttScale,
   ganttSections,
@@ -520,6 +522,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     SlideField.anchor => slide.copyWith(anchor: _cast<String>(value, field)),
     SlideField.nextAnchor => slide.copyWith(
       nextAnchor: _cast<String>(value, field),
+    ),
+    SlideField.styleName => slide.copyWith(
+      styleName: _cast<String>(value, field),
     ),
     SlideField.ganttScale => slide.copyWith(
       ganttScale: _cast<String>(value, field),

@@ -8,6 +8,23 @@ void _addCarriedStyleMember(Archive archive, ThemeProfile profile) {
   archive.add(ArchiveFile(carriedStyleFileName, bytes.length, bytes));
 }
 
+/// De meegedragen dia-stijlen (#2996): één record per gebruikte profielnaam.
+/// Alleen schrijven als er namen zijn — een pakket zonder wissels draagt geen
+/// leeg stijlregime.
+void _addCarriedStylesMember(
+  Archive archive,
+  Map<String, ThemeProfile> styles,
+) {
+  if (styles.isEmpty) return;
+  final bytes = utf8.encode(
+    jsonEncode({
+      for (final e in styles.entries)
+        e.key: portableCarriedStyle(e.value).toJson(),
+    }),
+  );
+  archive.add(ArchiveFile(carriedStylesFileName, bytes.length, bytes));
+}
+
 ThemeProfile portableCarriedStyle(ThemeProfile profile) {
   String? image(String? path, {required bool emptyWhenUnsafe}) {
     final trimmed = path?.trim();
@@ -65,6 +82,40 @@ Future<ThemeProfile> carriedProjectStyle(
   }
 }
 
+/// Leest de meegedragen dia-stijlen naast een uitgepakt project — de
+/// meervoudige tegenhanger van [carriedProjectStyle]. Ontbreekt of mislukt het
+/// bestand, dan is de map leeg; onleesbare leden vallen weg terwijl de rest
+/// blijft, dezelfde degradatie als elders.
+Future<Map<String, ThemeProfile>> carriedProjectStyles(
+  String? projectPath,
+) async {
+  if (kIsWeb || projectPath == null) return const {};
+  final file = File(p.join(projectPath, carriedStylesFileName));
+  try {
+    if (!await file.exists()) return const {};
+    final length = await file.length();
+    if (length <= 0 || length > _carriedStyleMaxBytes) return const {};
+    final decoded = jsonDecodeGuarded(await file.readAsString());
+    if (decoded is! Map) return const {};
+    final styles = <String, ThemeProfile>{};
+    for (final entry in Map<String, Object?>.from(decoded).entries) {
+      final member = entry.value;
+      if (member is! Map) continue;
+      styles[entry.key] = _styleInsideProject(
+        portableCarriedStyle(
+          ThemeProfile.fromJson(Map<String, Object?>.from(member)),
+        ),
+        projectPath,
+      );
+    }
+    return styles;
+  } on FormatException {
+    return const {};
+  } on FileSystemException {
+    return const {};
+  }
+}
+
 /// Herschrijft een bestaande sidecar na opslaan, zodat een bewerking van de
 /// meegekregen stijl het heropenen overleeft. Een gewoon project zonder
 /// sidecar krijgt er geen: dat blijft het lokale profiel volgen.
@@ -85,6 +136,29 @@ Future<void> refreshCarriedProjectStyle(
     // meenemen — de volgende open valt anders terug op de oude sidecar, nooit
     // op niets.
     logWarning('FileService.refreshCarriedProjectStyle', e);
+  }
+}
+
+/// De meervoudige variant van [refreshCarriedProjectStyle], voor de dia-
+/// stijlen. Zelfde grens: zonder bestaand bestand schrijft hij niets — een
+/// gewoon project lost zijn wisselnamen op in de eigen instellingen.
+Future<void> refreshCarriedProjectStyles(
+  String projectPath,
+  Map<String, ThemeProfile> styles,
+) async {
+  if (kIsWeb) return;
+  final file = File(p.join(projectPath, carriedStylesFileName));
+  try {
+    if (!await file.exists()) return;
+    await writeStringAtomic(
+      file,
+      jsonEncode({
+        for (final e in styles.entries)
+          e.key: portableCarriedStyle(e.value).toJson(),
+      }),
+    );
+  } on FileSystemException catch (e) {
+    logWarning('FileService.refreshCarriedProjectStyles', e);
   }
 }
 
@@ -131,21 +205,54 @@ ThemeProfile _styleInsideProject(ThemeProfile profile, String projectPath) {
 /// Zonder sidecar blijft het deck zoals het binnenkwam.
 Deck applyCarriedStyleMembers(Deck deck, List<PackageEntry> entries) {
   PackageEntry? style;
+  PackageEntry? styles;
   for (final entry in entries) {
-    if (p.posix.normalize(entry.name) == carriedStyleFileName) style = entry;
+    final name = p.posix.normalize(entry.name);
+    if (name == carriedStyleFileName) style = entry;
+    if (name == carriedStylesFileName) styles = entry;
   }
-  if (style == null || style.bytes.length > _carriedStyleMaxBytes) return deck;
-  try {
-    final text = utf8.decode(style.bytes);
-    final decoded = jsonDecodeGuarded(text);
-    if (decoded is! Map) return deck;
-    final profile = portableCarriedStyle(
-      ThemeProfile.fromJson(Map<String, Object?>.from(decoded)),
-    );
-    return deck.copyWith(themeProfile: _styleMembersToMemory(profile, entries));
-  } on FormatException {
-    return deck;
+  var styled = deck;
+  if (style != null && style.bytes.length <= _carriedStyleMaxBytes) {
+    try {
+      final decoded = jsonDecodeGuarded(utf8.decode(style.bytes));
+      if (decoded is Map) {
+        final profile = portableCarriedStyle(
+          ThemeProfile.fromJson(Map<String, Object?>.from(decoded)),
+        );
+        styled = styled.copyWith(
+          themeProfile: _styleMembersToMemory(profile, entries),
+        );
+      }
+    } on FormatException {
+      // De sidecar mag het openen niet meenemen; de deckstijl blijft staan.
+    }
   }
+  // De dia-stijlen (#2996): elk profiel uit `ocideck-styles.json` krijgt zijn
+  // logo's als `mem:`-pad, net als het basisprofiel.
+  if (styles != null && styles.bytes.length <= _carriedStyleMaxBytes) {
+    try {
+      final decoded = jsonDecodeGuarded(utf8.decode(styles.bytes));
+      if (decoded is Map) {
+        final carried = <String, ThemeProfile>{};
+        for (final e in Map<String, Object?>.from(decoded).entries) {
+          final member = e.value;
+          if (member is! Map) continue;
+          carried[e.key] = _styleMembersToMemory(
+            portableCarriedStyle(
+              ThemeProfile.fromJson(Map<String, Object?>.from(member)),
+            ),
+            entries,
+          );
+        }
+        if (carried.isNotEmpty) {
+          styled = styled.copyWith(slideStyles: carried);
+        }
+      }
+    } on FormatException {
+      // Zelfde grens: een corrupt lid degradeert naar de deckstijl.
+    }
+  }
+  return styled;
 }
 
 ThemeProfile _styleMembersToMemory(

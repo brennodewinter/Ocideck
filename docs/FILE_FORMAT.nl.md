@@ -525,6 +525,28 @@ Een niet-herkende waarde valt terug op `warn`, niet op `accept`. Een deck geschr
 nieuwere OciDeck mag een oudere nooit stilletjes bevindingen laten onderdrukken die hij niet
 begrijpt; in het ergste geval maakt de auteur de keuze opnieuw.
 
+### 3.1d Stijlwissel — `<!-- ocideck_style: … -->`
+
+Welk **stijlprofiel** *vanaf deze dia* geldt. Het deck heeft één deckstijl; een dia
+met deze markering opent een bereik dat doorloopt tot de volgende markering (#2996).
+
+```markdown
+<!-- ocideck_style: Donker -->
+```
+
+De waarde is een profiel**naam** uit de stijlprofielen van de app; het gereserveerde
+token `deck` beëindigt een bereik en keert terug naar de deckstijl. Een dia zonder
+markering erft wat de voorgaande dia's vastlegden. Een onbekende naam is nooit een
+fout: de dia rendert in de deckstijl en de ruwe naam blijft in het bestand, zodat de
+interface toont wat er was ingesteld.
+
+Alles wat de dia tekent — editor, miniaturen, presentator, publieksscherm en elke
+export — resolveert hetzelfde effectieve profiel. Het `.ocideck`-pakket draagt het
+bereik ook voor kale Marp: elke dia in een bereik krijgt een `stijl-<naam>`-token in
+zijn `_class`, de meegepakte thema-CSS krijgt per gebruikt profiel een
+`section.stijl-<naam>`-gescope variant, en `ocideck-styles.json` draagt de
+profieldefinities zodat herimport de namen weer resolveert.
+
 ### 3.1a Redactiemarkeringen — `[[…]]`
 
 Tekst tussen dubbele blokhaken wordt **geredigeerd**: vervangen door een vaste reeks

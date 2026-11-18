@@ -11,6 +11,7 @@ import '../../models/deck.dart';
 import '../../models/cvss_builder.dart' show CiaRating;
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_style.dart';
 import '../../models/slide_format.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
@@ -93,10 +94,17 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     final pages = slideUsesRichText(slide)
         ? richTextPageCountForSlide(
             slide: slide,
-            profile: deck.themeProfile,
+            profile: deck.slideProfileAt(
+              current.clamp(0, deck.slides.length - 1),
+            ),
             splitWithImage: slide.type.splitWithImage,
           )
-        : expandFindingsForRender([slide], profile: deck.themeProfile).length;
+        : expandFindingsForRender(
+            [slide],
+            profile: deck.slideProfileAt(
+              current.clamp(0, deck.slides.length - 1),
+            ),
+          ).length;
     if (pages > 1) {
       final page = ref.read(richTextPreviewPageProvider);
       if (delta > 0 && page < pages - 1) {
@@ -174,10 +182,12 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
       });
     }
 
+    // Het effectieve profiel van de getoonde dia (#2996).
+    final slideProfile = deck.slideProfileAt(idx);
     final richTextPages = slideUsesRichText(slide)
         ? richTextPageCountForSlide(
             slide: slide,
-            profile: deck.themeProfile,
+            profile: slideProfile,
             splitWithImage: slide.type.splitWithImage,
           )
         : 1;
@@ -186,7 +196,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     // arrow keys / the page indicator step through them.
     final findingPageSlides = expandFindingsForRender([
       slide,
-    ], profile: deck.themeProfile);
+    ], profile: slideProfile);
     final isPagedFinding = findingPageSlides.length > 1;
     final pageCount = isPagedFinding ? findingPageSlides.length : richTextPages;
     final hasRichTextPages = pageCount > 1;
@@ -461,7 +471,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   slideAspect: slideAspectRatio(deck.slideSize),
                   slide: slide,
                   projectPath: deck.projectPath,
-                  themeProfile: deck.themeProfile,
+                  themeProfile: deck.slideProfileAt(idx),
                   deckMarpStyle: deck.marpStyle,
                   cockpitColorScheme: settings.cockpitColorScheme,
                   onLinkTap: openExternalUrl,
@@ -474,8 +484,8 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   fitScaleOverride: sharedSplitFitScale(
                     deck.slides,
                     idx,
-                    deck.themeProfile,
-                    deck.themeProfile.fontFamily,
+                    deck.slideProfileAt(idx),
+                    deck.slideProfileAt(idx).fontFamily,
                     slideAspect: slideAspectRatio(deck.slideSize),
                   ),
                   splitRunPosition: splitRunPositionFor(deck.slides, idx),

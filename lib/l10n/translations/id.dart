@@ -1542,6 +1542,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Vanaf deze dia': 'Mulai dari slide ini',
+  'Deckstijl': 'Gaya deck',
+  'Geërfd vanaf dia': 'Diwarisi dari slide',
+  'Geldt ook op de volgende dia\'s': 'Berlaku juga pada slide berikutnya',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Berlaku mulai slide ini hingga pergantian gaya berikutnya. Gaya deck dipilih di kepala editor.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Pemuatan gambar terlalu lama. Sediakan berkas secara lokal dan coba ekspor lagi.',
   'Sprekers corrigeren': 'Koreksi pembicara',

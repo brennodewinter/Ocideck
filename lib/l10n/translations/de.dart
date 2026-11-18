@@ -612,6 +612,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Vanaf deze dia': 'Ab dieser Folie',
+  'Deckstijl': 'Deck-Stil',
+  'Geërfd vanaf dia': 'Geerbt ab Folie',
+  'Geldt ook op de volgende dia\'s': 'Gilt auch für die folgenden Folien',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Gilt ab dieser Folie bis zum nächsten Stilwechsel. Den Deck-Stil wählst du in der Kopfzeile des Editors.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Das Laden eines Bildes dauert zu lange. Stelle die Datei lokal bereit und versuche den Export erneut.',
   'Sprekers corrigeren': 'Sprecher korrigieren',

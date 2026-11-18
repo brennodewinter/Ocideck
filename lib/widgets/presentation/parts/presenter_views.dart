@@ -103,7 +103,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                     slideAspect: widget.slideAspect,
                     slide: slide,
                     projectPath: widget.projectPath,
-                    themeProfile: widget.themeProfile,
+                    themeProfile: _profileAt(_index),
                     deckMarpStyle: widget.marpStyle,
                     cockpitColorScheme: widget.cockpitColorScheme,
                     onLinkTap: openExternalUrl,
@@ -114,8 +114,8 @@ extension _PresenterViews on _FullscreenPresenterState {
                     fitScaleOverride: sharedSplitFitScale(
                       widget.slides,
                       _index,
-                      widget.themeProfile,
-                      widget.themeProfile.fontFamily,
+                      _profileAt(_index),
+                      _profileAt(_index).fontFamily,
                       slideAspect: widget.slideAspect,
                     ),
                     splitRunPosition: splitRunPositionFor(
@@ -388,7 +388,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                   slideAspect: widget.slideAspect,
                   slide: nextSlide,
                   projectPath: widget.projectPath,
-                  themeProfile: widget.themeProfile,
+                  themeProfile: _profileAt(_index + 1),
                   deckMarpStyle: widget.marpStyle,
                   cockpitColorScheme: widget.cockpitColorScheme,
                   allowRemoteMedia: widget.allowRemoteMedia,
@@ -401,8 +401,8 @@ extension _PresenterViews on _FullscreenPresenterState {
                   fitScaleOverride: sharedSplitFitScale(
                     widget.slides,
                     _index + 1,
-                    widget.themeProfile,
-                    widget.themeProfile.fontFamily,
+                    _profileAt(_index + 1),
+                    _profileAt(_index + 1).fontFamily,
                     slideAspect: widget.slideAspect,
                   ),
                   splitRunPosition: splitRunPositionFor(

@@ -612,6 +612,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Vanaf deze dia': 'For di e slide aki',
+  'Deckstijl': 'Estilo di deck',
+  'Geërfd vanaf dia': 'Herená for di slide',
+  'Geldt ook op de volgende dia\'s': 'Ta konta tambe pa e slidenan siguiente',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Ta konta for di e slide aki te un siguiente kambio di estilo. Bo skohe e estilo di deck den e kabes di e editor.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Kargamentu di un imágen ta dura muchu largu. Pone e archivo disponibel lokalmente i purba eksportá atrobe.',
   'Sprekers corrigeren': 'Korigí papiadónan',

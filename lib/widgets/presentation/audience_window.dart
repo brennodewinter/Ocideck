@@ -15,6 +15,7 @@ import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
 import '../../models/slide.dart';
 import '../../models/slide_format.dart';
+import '../../models/slide_style.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/presenter_palette.dart';
 import '../../services/markdown_service.dart';
@@ -40,6 +41,12 @@ import '../../models/presentation_cost.dart';
 /// De styling reist naast de markdown mee omdat ze er niet in hoort — zie
 /// `buildBeamerMarkdown`.
 const String beamerStyleProfileKey = 'styleProfile';
+
+/// De meegestuurde diastijlen van de stijlwissel (#2996): `{naam → profiel}`
+/// naast [beamerStyleProfileKey]. De markeringen (`ocideck_style`) zitten in
+/// de markdown; hun profielen reizen mee omdat dit venster geen
+/// instellingen heeft om ze op te zoeken.
+const String beamerStyleProfilesKey = 'styleProfiles';
 
 /// Channel the audience (beamer) window listens on for updates from the
 /// presenter (laptop) window.
@@ -115,6 +122,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   List<Slide> _slides = const [];
   String _reportLanguage = '';
   ThemeProfile _theme = const ThemeProfile();
+  Map<String, ThemeProfile> _styleProfiles = const {};
   MarpStyle _marpStyle = const MarpStyle();
   double _slideAspect = kScreenSlideAspect;
   CockpitColorScheme _scheme = CockpitColorScheme.standard;
@@ -211,6 +219,18 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _theme = profileJson is Map
         ? ThemeProfile.fromJson(Map<String, Object?>.from(profileJson))
         : const ThemeProfile();
+    // De diastijlen van de stijlwissel (#2996); een naam die niet meekwam
+    // degradeert per dia op de deckstijl, zoals elders.
+    final stylesJson = widget.args[beamerStyleProfilesKey];
+    if (stylesJson is Map) {
+      _styleProfiles = {
+        for (final e in stylesJson.entries)
+          if (e.value is Map)
+            e.key.toString(): ThemeProfile.fromJson(
+              Map<String, Object?>.from(e.value as Map),
+            ),
+      };
+    }
     if (widget.args['kind'] == 'document') {
       // Documentmodus (#2487): de pagina's staan als regelbereiken in de
       // envelop; updates leveren telkens de volledige pagina, dus een
@@ -726,6 +746,11 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     ),
   );
 
+  /// Het profiel dat op dia [index] wordt getoond — deckstijl of de actieve
+  /// stijlwissel (#2996), over dezelfde cascade als de presentator.
+  ThemeProfile _profileAt(int index) =>
+      resolveSlideStyle(_theme, _styleProfiles.values.toList(), _slides, index);
+
   /// A slide in the deck's aspect letterboxed to fit the screen, mirroring the presenter's view.
   Widget _canvas(Slide slide) {
     return PresentationKeyScope.layout(
@@ -757,7 +782,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     slideAspect: _slideAspect,
                     slide: slide,
                     projectPath: _projectPath,
-                    themeProfile: _theme,
+                    themeProfile: _profileAt(_index),
                     deckMarpStyle: _marpStyle,
                     cockpitColorScheme: _scheme,
                     onLinkTap: openExternalUrl,
@@ -769,8 +794,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     fitScaleOverride: sharedSplitFitScale(
                       _slides,
                       _index,
-                      _theme,
-                      _theme.fontFamily,
+                      _profileAt(_index),
+                      _profileAt(_index).fontFamily,
                       slideAspect: _slideAspect,
                     ),
                     splitRunPosition: splitRunPositionFor(_slides, _index),

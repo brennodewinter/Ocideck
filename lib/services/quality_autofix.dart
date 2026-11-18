@@ -265,7 +265,10 @@ Deck? _applyNextFix(Deck deck, SlideQualityAnalyzer analyzer) {
     final slide = _slideAt(deck, issue.slideIndex);
     if (slide == null) continue;
     if (!_shouldSplitFor(slide, issue.kind)) continue;
-    final pages = splitThemedBulletSlidePages(slide, deck.themeProfile);
+    final pages = splitThemedBulletSlidePages(
+      slide,
+      deck.slideProfileAt(issue.slideIndex),
+    );
     if (pages == null) continue;
     return _replaceSlide(deck, issue.slideIndex, pages);
   }

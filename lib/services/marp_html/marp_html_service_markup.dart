@@ -347,6 +347,50 @@ String _renderBodyBlocks(
   return out;
 }
 
+/// Eén stijlbereik van de stijlwissel (#2996) voor de export: het gebruikte
+/// profiel en het class-token waarop zijn gescope CSS bindt.
+typedef _SlideStyleRange = ({String name, ThemeProfile profile});
+
+/// De stijlwissel (#2996) in twee lijsten voor de export: [classes] is het
+/// `' stijl-…'`-attribuutdeel per diaindex (leeg buiten een bereik) en
+/// [ranges] de opgeloste profielen waarvoor [_slideStylesCss] een gescope
+/// variant bouwt. Alleen namen die in [slideStyles] oplossen tellen mee — een
+/// onbekende naam valt op de deckstijl terug en draagt dus ook geen token.
+({List<String> classes, List<_SlideStyleRange> ranges}) _slideStyleRanges(
+  List<Slide> slides,
+  Map<String, ThemeProfile> slideStyles,
+) => (
+  classes: [
+    for (var i = 0; i < slides.length; i++)
+      slideStyleNameAt(slides, i) != null &&
+              slideStyles.containsKey(slideStyleNameAt(slides, i))
+          ? ' ${slideStyleClassToken(slideStyleNameAt(slides, i)!)}'
+          : '',
+  ],
+  ranges: [
+    for (final name in usedSlideStyleNames(slides))
+      if (slideStyles[name] != null) (name: name, profile: slideStyles[name]!),
+  ],
+);
+
+/// De gescope CSS voor elke gebruikte diastijl (#2996): `.slide.stijl-…` wint
+/// op specificiteit van de kale `.slide`-regels van de deckstijl. De
+/// `body{…}`-regel hoort bij het omringende document en wordt niet
+/// meegescoped — een dia is nooit een voorouder van `body`.
+Future<String> _slideStylesCss(
+  MarpHtmlService service,
+  ({List<String> classes, List<_SlideStyleRange> ranges}) styleRanges,
+) async => [
+  for (final range in styleRanges.ranges)
+    scopeThemeCss(
+      (await service._themedCss(
+        range.profile,
+      )).replaceAll(RegExp('body\\{[^}]*\\}'), ''),
+      root: '.slide',
+      token: slideStyleClassToken(range.name),
+    ),
+].join('\n');
+
 /// Rendert [markdown] naar de `<section>`(s) met inerte markdown-payload.
 ///
 /// [continuous] false is het dia-pad: splits op `---`, elke dia een
@@ -364,6 +408,11 @@ String _renderSections(
   MarpStyle deckMarpStyle = const MarpStyle(),
   List<MarpStyle> slideMarpStyles = const [],
   List<Slide> slides = const [],
+
+  /// De effectieve stijlklasse per dia (#2996) — `''` of `' stijl-…'`,
+  /// parallel aan [slides]. Een dia buiten een bereik draagt geen token en
+  /// rendert op de deckstijl.
+  List<String> slideStyleClasses = const [],
 
   /// #2748: het deckniveau voor de per-dia TLP-badge en het watermerk —
   /// `effectiveTlp` lost de slide-override op zoals de app die toont.
@@ -423,10 +472,13 @@ String _renderSections(
     final splitClass = _splitSectionClass(slideMd);
     final twoEqClass = _twoImagesLayoutSectionClass(slideMd);
     final anchorId = _slideAnchorIdAttr(slideMd);
+    final styleClass = slideIndex - 1 < slideStyleClasses.length
+        ? slideStyleClasses[slideIndex - 1]
+        : '';
     final marpSection = _marpSectionStyle(slideMd, marpStyle);
     sections
       ..write(
-        '<section class="slide$markerClass$logoClass$occupyClass$splitClass$twoEqClass${marpSection.classes}"'
+        '<section class="slide$markerClass$logoClass$occupyClass$splitClass$twoEqClass$styleClass${marpSection.classes}"'
         '$anchorId${marpSection.attributes}>',
       )
       ..write('<script type="text/markdown">')

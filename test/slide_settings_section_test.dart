@@ -139,20 +139,24 @@ void main() {
       Offset labelAt(WidgetTester tester, String group) =>
           tester.getTopLeft(find.text(_l10n.d(group).toUpperCase()));
 
-      testWidgets('breed: de drie kaarten staan náást elkaar', (tester) async {
+      testWidgets('breed: de kaarten staan náást elkaar', (tester) async {
+        // Vijf groepen vragen ~1700px om allemaal op één rij te passen.
         await pump(
           tester,
           profile: (p) => p.copyWith(logoPath: 'logo.png'),
-          surface: const Size(1600, 1600),
+          surface: const Size(2000, 1600),
         );
         await expand(tester);
 
         final a = labelAt(tester, 'Op deze slide');
         final b = labelAt(tester, 'Tijdens presenteren');
         final c = labelAt(tester, 'Classificatie en privacy');
+        final d = labelAt(tester, 'Vanaf deze dia');
 
         expect(a.dy, b.dy, reason: 'zelfde rij');
         expect(b.dy, c.dy, reason: 'zelfde rij');
+        expect(c.dy, d.dy, reason: 'zelfde rij');
+        expect(d.dx, lessThan(a.dx));
         expect(a.dx, lessThan(b.dx));
         expect(b.dx, lessThan(c.dx));
       });

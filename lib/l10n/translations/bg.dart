@@ -1561,6 +1561,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Vanaf deze dia': 'От този слайд',
+  'Deckstijl': 'Стил на дека',
+  'Geërfd vanaf dia': 'Наследено от слайд',
+  'Geldt ook op de volgende dia\'s': 'Важи и за следващите слайдове',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Важи от този слайд до следващата смяна на стила. Стилът на дека се избира в заглавката на редактора.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Зареждането на изображение отнема твърде много време. Осигурете локален достъп до файла и опитайте да експортирате отново.',
   'Sprekers corrigeren': 'Коригиране на говорители',

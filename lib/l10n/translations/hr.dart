@@ -1546,6 +1546,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Vanaf deze dia': 'Od ovog slajda',
+  'Deckstijl': 'Stil decka',
+  'Geërfd vanaf dia': 'Naslijeđeno od slajda',
+  'Geldt ook op de volgende dia\'s': 'Vrijedi i na sljedećim slajdovima',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Vrijedi od ovog slajda do sljedeće promjene stila. Stil decka odabire se u zaglavlju uređivača.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Učitavanje slike traje predugo. Omogućite lokalni pristup datoteci i pokušajte ponovno izvesti.',
   'Sprekers corrigeren': 'Ispravi govornike',
