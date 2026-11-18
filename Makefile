@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 .PHONY: package-deps test-benchmarks
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
@@ -118,6 +118,7 @@ help:
 	@echo "  make release TAG=vX.Y.Z  Orchestrate a release: tag-guard + Phase 1 (validate/build/sign); guides the irreversible steps."
 	@echo "  make build-release   Build verified web + macOS release artifacts."
 	@echo "  make notarize-macos  Sign (Developer ID) + notarize + staple the macOS .app for distribution."
+	@echo "  make check-web-browser  Exercise the built WASM bundle, JS fallback and single-thread renderer (pinned Playwright)."
 	@echo "  make deploy-web      Put build/web live on the static host (atomic swap + verify)."
 
 # Install Flutter/Dart dependencies.
@@ -1330,6 +1331,14 @@ check-web: build-web
 	@echo "Covers: the docs inside the built bundle match docs/ on disk, byte for byte."
 	@echo "Failure means: an incremental build shipped stale documentation — clean-rebuild."
 	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/web
+
+# Requires an already built bundle and the pinned Playwright installation.
+# Install once: npm ci --prefix tool/web-wasm-check, then in that directory
+# npx playwright install --with-deps chromium (OS packages may need privileges).
+check-web-browser:
+	node tool/web-wasm-check/probe.cjs build/web chromium auto 1
+	node tool/web-wasm-check/probe.cjs build/web chromium fallback 1
+	node tool/web-wasm-check/probe.cjs build/web chromium single-thread 1
 
 # Native desktop release builds. Each target only works on its own OS — Flutter
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows

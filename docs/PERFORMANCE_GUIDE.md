@@ -277,8 +277,8 @@ frame** (`make build-web`, measured 2026-07-22). That is `main.dart.js`
 (13.8 MB / 3.8 MB), `canvaskit.wasm` (6.9 / 2.8), the eighteen fonts in
 `FontManifest.json` (2.7 / 1.4) and `assets/privacy/health_lexicon.json`
 (2.0 / 0.5), which `lib/main.dart` deliberately awaits before `runApp`. Serve
-it compressed — see [HOSTING.md](HOSTING.md) §2 — and expect a blank page while
-it arrives, because there is no loading indicator yet.
+it compressed — see [HOSTING.md](HOSTING.md) §2 — and keep the static loading splash visible while it arrives. This historical
+baseline predates the WASM measurements below.
 
 A single small test (`flutter test test/tlp_test.dart`, 15 cases) completes in
 **~4.7 s** wall-clock — dominated by the Flutter test harness warm-up, not the
@@ -300,6 +300,105 @@ start-up milestones (`opstart: …`, with milliseconds since `main`) say how lon
 each step before the first frame took. That is observation, not a budget: it
 tells you where a user's machine stalled, and the fix still needs a measurement
 here.
+
+## WebAssembly release (Flutter 3.50, 2026-11-18)
+
+The normal `make build-web` now produces both Dart WASM + skwasm and the
+JavaScript + CanvasKit fallback. The loader enables modern Blink, WebKit and
+Gecko after runtime feature detection. Cross-origin isolation moves skwasm
+rendering to a worker; the application's Dart work still runs on the UI thread.
+An import or privacy scan does not automatically become a worker task.
+
+A separate native-cache repair prevents a web AOT link (zero native calls)
+from leaving dartcv4's finalizer-only export list for a subsequent desktop
+build. Cache hygiene checks the scanner's required symbols and invalidates
+only the bad keep-list and hook results, preserving OpenCV downloads. The real
+scanner unit suite recovers 96/107 covered lines; the coverage floor is retained.
+
+Stability improvements include selecting the correct browser implementation
+under both compilers (`dart.library.html` is false under WASM), rejecting
+legacy JS interop at build time, retaining standard WASM O2 type/bounds checks,
+and using content-addressed app/assets with revalidation of unhashed loaders
+and engines. The deploy script retains N-1 hashes for open tabs. Mermaid's lazy
+scripts resolve through Flutter's asset manager, so hashing does not break them.
+The existing CSP remains strict and engine resources remain self-hosted.
+The unmodified Noto Color Emoji interface slice is bundled, attributed and
+hash-pinned too: Flutter otherwise fetched it from Google for the language
+flags at startup, despite `--no-web-resources-cdn`. The UI explicitly selects
+the local fallback. This prevents that startup request without changing the
+appearance or loading every Unicode font. Arbitrary deck text outside the
+bundled fonts can still trigger Flutter's existing dynamic font fallback; these
+startup probes do not establish offline coverage of every Unicode script.
+
+The shipped bootstrap records local User Timing marks and measures for engine
+initialization, application initialization and the actual `flutter-first-frame`
+event. The `runApp()` JavaScript promise only starts Dart main and is not itself
+a first-frame measurement. No measurements are transmitted to a service.
+
+Reproduce the actual release-bundle probes (Node 22+, pinned Playwright):
+
+```sh
+make check-web
+npm ci --prefix tool/web-wasm-check
+(cd tool/web-wasm-check && npx playwright install --with-deps chromium firefox webkit)
+node tool/web-wasm-check/probe.cjs build/web chromium,firefox,webkit auto 3
+node tool/web-wasm-check/probe.cjs build/web chromium,firefox,webkit fallback 3
+node tool/web-wasm-check/probe.cjs build/web chromium,firefox,webkit single-thread 1
+flutter test --platform chrome --wasm test/web_wasm_platform_test.dart
+flutter test --platform chrome test/web_wasm_platform_test.dart
+```
+
+The probes load a subdirectory deployment under the shipped CSP and verify
+actual compiler/renderer requests, worker creation, first paint, no HTTP errors,
+no uncaught exceptions and no third-party startup requests. Fallback mode
+changes only the loader's allow-list, exercising the JS build in the same bundle.
+Single-thread mode removes the isolation headers. Apache was also tested with
+the actual `.htaccess`: correct WASM/MJS MIME, gzip, immutable hashed resources
+and revalidation of the loaders and unhashed engines.
+
+Measurements are recorded in
+[`results-2026-11-18.json`](../tool/web-wasm-check/results-2026-11-18.json).
+Indicative medians for navigation to observed first app frame (three runs):
+
+| Engine | WASM + skwasm | JavaScript + CanvasKit | Encoded startup resources, WASM / JS |
+| --- | ---: | ---: | ---: |
+| Chromium 159 | 1.185 s | 2.188 s | 15.02 / 13.72 MB |
+| Firefox 159 | 1.364 s | 1.673 s | 15.81 / 14.61 MB |
+| WebKit 27.2 | 1.415 s | 1.684 s | 15.78 / 14.59 MB |
+
+WASM starts sooner in these samples while transferring about 1.2–1.3 MB more.
+This is a real tradeoff on slow connections; first-visit download size is not
+smaller. Content-addressed caching helps repeat visits and asset-only deploys.
+All 21 release probes passed, including isolated rendering with a worker,
+forced JavaScript fallback, and WASM without isolation or a worker.
+
+They are local headless browser probes on an ARM64 Mac, not a network or frame
+rate budget: three fresh HTTP cache contexts per engine, a shared browser
+process, gzip, no network throttling, and possible concurrent build load. They
+measure the first app frame (the consent screen), not a large deck interaction.
+No claim about OciDeck's FPS, long-session memory or crash rate follows from
+these startup probes. Flutter's published heavy-widget benchmark improvement
+is an upstream result and has not been reproduced as an OciDeck FPS result.
+
+Further options were considered deliberately:
+
+- Keep WASM O2. O3 drops implicit type checks; O4 additionally drops bounds
+  checks, making malformed imported data harder to diagnose safely.
+- Content hashing is currently incompatible with deferred imports. There are
+  no deferred imports in `lib/`; introducing lazy features would require
+  restructuring and a new cache/deploy strategy, rather than just another flag.
+- Browser-native WebParagraph text layout is a Chrome experimental preview.
+  It is not enabled for a release targeting all three engines.
+- The SIMD primitives in Dart 3.14 help explicitly vectorized code; they do not
+  automatically vectorize every Dart loop. No unmeasured SIMD rewrite is made.
+- WASM can support age crypto where dart2js cannot, but switching browser form
+  sealing on needs its own end-to-end export and key-persistence verification.
+  This change preserves the existing product availability policy.
+
+Sources: [Flutter 3.50 announcement](https://flutter.dev/blog/whats-new-in-flutter-3-50),
+[Flutter WASM support](https://docs.flutter.dev/platform-integration/web/wasm),
+[deployment and content hashing](https://docs.flutter.dev/deployment/web),
+[Dart WASM optimization levels](https://dart.dev/web/wasm).
 
 ## Best practices for users
 

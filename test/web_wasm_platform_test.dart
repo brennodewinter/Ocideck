@@ -6,6 +6,8 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/platform/platform_features.dart';
+import 'package:ocideck/services/import/pipeline/import_runner.dart';
+import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/ociserve/ociserve_auth_platform.dart';
 import 'package:ocideck/services/ociserve/ociserve_http_factory.dart';
 import 'package:ocideck/services/ociserve/ociserve_http_web.dart'
@@ -14,6 +16,8 @@ import 'package:ocideck/services/update_check_fetch.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/utils/mem_asset_blob.dart';
 import 'package:web/web.dart' as web;
+
+import 'import/helpers/pptx_fixture.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +46,21 @@ void main() {
         await defaultUpdateCheckFetch(Uri.parse('https://example.invalid')),
         isNull,
       );
+    },
+  );
+
+  test(
+    'presentation import uses the browser runner instead of spawning an isolate',
+    () async {
+      final result = await runImportTask(
+        ImportRequest(
+          bytes: pptxFixture(titel: 'WASM import'),
+          filename: 'deck.pptx',
+        ),
+      );
+      final parsed = (result as ImportTaskParsed).parsed;
+      expect(parsed.deck.slides.single.title, 'WASM import');
+      expect(parsed.classified, hasLength(1));
     },
   );
 

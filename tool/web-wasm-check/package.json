@@ -1,0 +1,8 @@
+{
+  "name": "ocideck-web-wasm-check",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Release-bundle browser smoke and startup measurements",
+  "scripts": { "check": "node probe.cjs" },
+  "devDependencies": { "playwright": "1.65.1" }
+}

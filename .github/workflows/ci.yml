@@ -405,6 +405,25 @@ jobs:
       - name: Build + assert web hardening (make check-web)
         run: make check-web
 
+      - name: Set up Node for pinned browser probes
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pinned browser probe
+        run: |
+          npm ci --prefix tool/web-wasm-check
+          cd tool/web-wasm-check
+          npx playwright install --with-deps chromium
+
+      - name: Exercise WASM, JavaScript fallback and single-thread rendering
+        run: make check-web-browser
+
+      - name: Browser platform contracts under both Dart compilers
+        run: |
+          flutter test --platform chrome --wasm test/web_wasm_platform_test.dart
+          flutter test --platform chrome test/web_wasm_platform_test.dart
+
   # Validate internal Markdown links (relative file links) across the repo.
   # --offline skips external URLs so the check can't flake on third-party sites.
   # --exclude-path third_party laat de vendored pakketten met rust: hun README's
