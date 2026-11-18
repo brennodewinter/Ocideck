@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.7+49",
-  "documentNamespace": "https://ocideck.app/spdx/a18abe38-1ba8-5e1a-8b90-b05ef677e86d",
+  "documentNamespace": "https://ocideck.app/spdx/b37a2b98-8e4f-5190-8d4b-5113398d188f",
   "creationInfo": {
-    "created": "2026-11-18T11:43:04.353155Z",
+    "created": "2026-11-18T12:50:21.254542Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4945,7 +4945,30 @@
       "comment": "Bundled font file assets/Lora-Variable.ttf."
     },
     {
-      "SPDXID": "SPDXRef-223-Noto-Sans-Math",
+      "SPDXID": "SPDXRef-223-Noto-Color-Emoji",
+      "name": "Noto Color Emoji",
+      "supplier": "Organization: Google Inc.",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "OFL-1.1",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1ea085e149cb9e5f1ac086f0580f7dc10d6cc06cb2e29caa8a7360064a7eadd6"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/Noto%20Color%20Emoji"
+        }
+      ],
+      "comment": "Bundled font file assets/NotoColorEmoji0.woff2."
+    },
+    {
+      "SPDXID": "SPDXRef-224-Noto-Sans-Math",
       "name": "Noto Sans Math",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
@@ -4967,7 +4990,7 @@
       "comment": "Bundled font file assets/NotoSansMath-subset.ttf."
     },
     {
-      "SPDXID": "SPDXRef-224-Roboto",
+      "SPDXID": "SPDXRef-225-Roboto",
       "name": "Roboto",
       "supplier": "Organization: The Roboto Project Authors",
       "downloadLocation": "NOASSERTION",
@@ -4990,7 +5013,7 @@
       "comment": "Bundled font file assets/Roboto-Variable.ttf."
     },
     {
-      "SPDXID": "SPDXRef-225-Roboto-Mono",
+      "SPDXID": "SPDXRef-226-Roboto-Mono",
       "name": "Roboto Mono",
       "supplier": "Organization: The Roboto Mono Project Authors",
       "downloadLocation": "NOASSERTION",
@@ -5013,7 +5036,7 @@
       "comment": "Bundled font file assets/RobotoMono-Variable.ttf."
     },
     {
-      "SPDXID": "SPDXRef-226-FFmpeg-macOS-audio-decoder",
+      "SPDXID": "SPDXRef-227-FFmpeg-macOS-audio-decoder",
       "name": "FFmpeg macOS audio decoder",
       "versionInfo": "9.0.2",
       "supplier": "Organization: FFmpeg developers",
@@ -5037,7 +5060,7 @@
       "comment": "Standalone macOS helper, no OciDeck libav linking. Complete unmodified corresponding source and configure recipe ship inside Contents/Resources/ffmpeg. GPL/nonfree/version3, external library autodetection and network protocols are disabled. Exact configure flags: --disable-everything --disable-autodetect --disable-doc --disable-network --disable-gpl --disable-nonfree --disable-version3 --disable-shared --enable-static --enable-small --disable-programs --enable-ffmpeg --disable-avdevice --disable-swscale --disable-videotoolbox --disable-audiotoolbox --disable-securetransport --disable-asm --disable-debug --disable-iconv --enable-avfilter --enable-swresample --enable-filter=aresample,aformat,anull --enable-protocol=file --enable-demuxer=matroska,avi,wav,ogg,mp3,mov,flac,aac,aiff,caf,asf --enable-decoder=aac,aac_fixed,alac,flac,mp3,mp3float,opus,vorbis,wmav1,wmav2,adpcm_ima_wav,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,pcm_u8,pcm_mulaw,pcm_alaw,pcm_s16be,pcm_s24be,pcm_s32be,pcm_f32be,pcm_f64be,pcm_s8 --enable-parser=aac,mpegaudio,opus,vorbis,flac --enable-encoder=pcm_s16le --enable-muxer=wav --cc=/usr/bin/clang --ld=/usr/bin/clang --extra-cflags=-mmacosx-version-min=12.0 --extra-ldflags=-mmacosx-version-min=12.0"
     },
     {
-      "SPDXID": "SPDXRef-227-Microsoft-Edge-WebView2-loader",
+      "SPDXID": "SPDXRef-228-Microsoft-Edge-WebView2-loader",
       "name": "Microsoft Edge WebView2 loader",
       "versionInfo": "1.0.1661.34",
       "supplier": "Organization: Microsoft Corporation",
@@ -5061,7 +5084,7 @@
       "comment": "Windows-only SDK loader linked statically by webview_win_floating. SHA-256 identifies the NuGet SDK archive. The separately installed WebView2 Runtime is an OS prerequisite."
     },
     {
-      "SPDXID": "SPDXRef-228-PDFium",
+      "SPDXID": "SPDXRef-229-PDFium",
       "name": "PDFium",
       "versionInfo": "144.0.7811.0",
       "supplier": "Organization: The PDFium Authors",
@@ -5079,7 +5102,7 @@
       "comment": "Platform-specific runtime bundled by pdfium_dart/pdfium_flutter. The web WASM in pdfrx 2.6.1 has SHA-256 5b2cbb18e9dc361dae375e971c7e75f7306d39b7749ad4fced475579e6a549df; the Darwin XCFramework archive is pinned upstream as 948d9257f53f01cbed74b81bb8adc8758e52ac9390751772de7889026d32d5a1. Other native targets are release-pinned by the upstream build hook."
     },
     {
-      "SPDXID": "SPDXRef-229-Windows-Implementation-Library",
+      "SPDXID": "SPDXRef-230-Windows-Implementation-Library",
       "name": "Windows Implementation Library",
       "versionInfo": "1.0.220914.1",
       "supplier": "Organization: Microsoft Corporation",
@@ -5103,7 +5126,7 @@
       "comment": "Windows-only C++ helper headers compiled into webview_win_floating. SHA-256 identifies the NuGet archive."
     },
     {
-      "SPDXID": "SPDXRef-230-whisper.cpp--whisper-cli---whisper-wasm-",
+      "SPDXID": "SPDXRef-231-whisper.cpp--whisper-cli---whisper-wasm-",
       "name": "whisper.cpp (whisper-cli / whisper-wasm)",
       "versionInfo": "1.9.5",
       "supplier": "Organization: Georgi Gerganov and contributors",
@@ -5127,7 +5150,7 @@
       "comment": "Local speech-recognition engine compiled from the pinned source tarball twice over: scripts/build_whisper_cli.sh ships whisper-cli inside the desktop bundles, and the Emscripten build in web/whisper/ ships inside the web bundle (#2513, hash-pinned by web/whisper/manifest.json). Model weights are never bundled — the user downloads them through the guarded catalog flow."
     },
     {
-      "SPDXID": "SPDXRef-231-dompurify",
+      "SPDXID": "SPDXRef-232-dompurify",
       "name": "dompurify",
       "versionInfo": "3.4.17",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/dompurify@3.4.17/dist/purify.min.js",
@@ -5150,7 +5173,7 @@
       "comment": "Vendored into purify.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-232-highlight.js",
+      "SPDXID": "SPDXRef-233-highlight.js",
       "name": "highlight.js",
       "versionInfo": "11.11.1",
       "downloadLocation": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js",
@@ -5173,7 +5196,7 @@
       "comment": "Vendored into highlight.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-233-marked",
+      "SPDXID": "SPDXRef-234-marked",
       "name": "marked",
       "versionInfo": "18.0.5",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js",
@@ -5196,7 +5219,7 @@
       "comment": "Vendored into marked.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-234-mathjax",
+      "SPDXID": "SPDXRef-235-mathjax",
       "name": "mathjax",
       "versionInfo": "3.2.2",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js",
@@ -5219,7 +5242,7 @@
       "comment": "Vendored into tex-svg.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-235-mermaid",
+      "SPDXID": "SPDXRef-236-mermaid",
       "name": "mermaid",
       "versionInfo": "11.16.1",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js",
@@ -5242,7 +5265,7 @@
       "comment": "Vendored into mermaid.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-236-dart",
+      "SPDXID": "SPDXRef-237-dart",
       "name": "dart",
       "versionInfo": "^3.12.0",
       "supplier": "Organization: dart-lang",
@@ -5253,7 +5276,7 @@
       "comment": "Dart SDK constraint from pubspec.yaml (environment.sdk)."
     },
     {
-      "SPDXID": "SPDXRef-237-flutter",
+      "SPDXID": "SPDXRef-238-flutter",
       "name": "flutter",
       "versionInfo": "3.50.0",
       "supplier": "Organization: flutter",
@@ -5264,7 +5287,7 @@
       "comment": "Pinned build SDK (.tool-versions)."
     },
     {
-      "SPDXID": "SPDXRef-238-FFmpeg",
+      "SPDXID": "SPDXRef-239-FFmpeg",
       "name": "FFmpeg",
       "downloadLocation": "https://ffmpeg.org/legal.html",
       "filesAnalyzed": false,
@@ -5273,7 +5296,7 @@
       "comment": "Linux media dependency. LGPL/GPL status depends on configure flags and linked codecs. Do not label this runtime MIT or assume an LGPL-only build. Flatpak copied binaries require matching source and full notices."
     },
     {
-      "SPDXID": "SPDXRef-239-GStreamer",
+      "SPDXID": "SPDXRef-240-GStreamer",
       "name": "GStreamer",
       "downloadLocation": "https://gstreamer.freedesktop.org/",
       "filesAnalyzed": false,
@@ -5282,7 +5305,7 @@
       "comment": "Linux native audio helper and WebKit media dependency. Codec plugins and exact versions depend on the distro/runtime. Native packages declare base/good/libav; copied Flatpak plugins carry matching notices and source records."
     },
     {
-      "SPDXID": "SPDXRef-240-PulseAudio-client-libraries",
+      "SPDXID": "SPDXRef-241-PulseAudio-client-libraries",
       "name": "PulseAudio client libraries",
       "downloadLocation": "https://www.freedesktop.org/wiki/Software/PulseAudio/",
       "filesAnalyzed": false,
@@ -5291,7 +5314,7 @@
       "comment": "Linux recording helper links libpulse and libpulse-simple, including on PipeWire through its PulseAudio compatibility server. Native packages require the system libraries; resolve exact build versions per artifact."
     },
     {
-      "SPDXID": "SPDXRef-241-WebKitGTK",
+      "SPDXID": "SPDXRef-242-WebKitGTK",
       "name": "WebKitGTK",
       "downloadLocation": "https://webkit.org/licensing-webkit/",
       "filesAnalyzed": false,
@@ -5300,7 +5323,7 @@
       "comment": "Linux webview runtime. Contains LGPL and BSD code. System-provided in native packages or supplied by the Flatpak GNOME runtime. Resolve exact runtime version and licence evidence per artifact."
     },
     {
-      "SPDXID": "SPDXRef-242-libmpv",
+      "SPDXID": "SPDXRef-243-libmpv",
       "name": "libmpv",
       "downloadLocation": "https://github.com/mpv-player/mpv",
       "filesAnalyzed": false,
@@ -5309,7 +5332,7 @@
       "comment": "Linux. Licence depends on build and linked libraries. Inspected Debian 12 libmpv2 0.35.1-4 declares GPL-3.0-or-later for its binaries. Resolve exact versions, licences and corresponding source per release artifact."
     },
     {
-      "SPDXID": "SPDXRef-243-desktop-multi-window",
+      "SPDXID": "SPDXRef-244-desktop-multi-window",
       "name": "desktop_multi_window",
       "versionInfo": "0.3.1",
       "supplier": "Organization: MixinNetwork",
@@ -5327,7 +5350,7 @@
       "comment": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
-      "SPDXID": "SPDXRef-244-flutter-webrtc",
+      "SPDXID": "SPDXRef-245-flutter-webrtc",
       "name": "flutter_webrtc",
       "versionInfo": "1.6.2+hotfix.4",
       "supplier": "Organization: pawprint.vigilis.online",
@@ -5345,7 +5368,7 @@
       "comment": "Vendored fork in third_party/flutter_webrtc; the local changes are recorded in third_party/flutter_webrtc/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
-      "SPDXID": "SPDXRef-245-markdown-quill",
+      "SPDXID": "SPDXRef-246-markdown-quill",
       "name": "markdown_quill",
       "versionInfo": "4.3.0",
       "supplier": "Organization: TarekkMA",
@@ -5363,7 +5386,7 @@
       "comment": "Vendored fork in third_party/markdown_quill; the local changes are recorded in third_party/markdown_quill/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
-      "SPDXID": "SPDXRef-246-media-kit-video",
+      "SPDXID": "SPDXRef-247-media-kit-video",
       "name": "media_kit_video",
       "versionInfo": "2.0.1",
       "supplier": "Organization: media-kit",
@@ -5374,7 +5397,7 @@
       "comment": "Vendored fork in third_party/media_kit_video; the local changes are recorded in third_party/media_kit_video/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
-      "SPDXID": "SPDXRef-247-webview-win-floating",
+      "SPDXID": "SPDXRef-248-webview-win-floating",
       "name": "webview_win_floating",
       "versionInfo": "3.0.3",
       "supplier": "Organization: jakky1",
@@ -5430,42 +5453,47 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-223-Noto-Sans-Math"
+      "relatedSpdxElement": "SPDXRef-223-Noto-Color-Emoji"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-224-Roboto"
+      "relatedSpdxElement": "SPDXRef-224-Noto-Sans-Math"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-225-Roboto-Mono"
+      "relatedSpdxElement": "SPDXRef-225-Roboto"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-243-desktop-multi-window"
+      "relatedSpdxElement": "SPDXRef-226-Roboto-Mono"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-244-flutter-webrtc"
+      "relatedSpdxElement": "SPDXRef-244-desktop-multi-window"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-245-markdown-quill"
+      "relatedSpdxElement": "SPDXRef-245-flutter-webrtc"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-246-media-kit-video"
+      "relatedSpdxElement": "SPDXRef-246-markdown-quill"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-247-webview-win-floating"
+      "relatedSpdxElement": "SPDXRef-247-media-kit-video"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-248-webview-win-floating"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5505,27 +5533,27 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-231-dompurify"
+      "relatedSpdxElement": "SPDXRef-232-dompurify"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-232-highlight.js"
+      "relatedSpdxElement": "SPDXRef-233-highlight.js"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-233-marked"
+      "relatedSpdxElement": "SPDXRef-234-marked"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-234-mathjax"
+      "relatedSpdxElement": "SPDXRef-235-mathjax"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-235-mermaid"
+      "relatedSpdxElement": "SPDXRef-236-mermaid"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5820,32 +5848,32 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-226-FFmpeg-macOS-audio-decoder"
+      "relatedSpdxElement": "SPDXRef-227-FFmpeg-macOS-audio-decoder"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-228-PDFium"
+      "relatedSpdxElement": "SPDXRef-229-PDFium"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-227-Microsoft-Edge-WebView2-loader"
+      "relatedSpdxElement": "SPDXRef-228-Microsoft-Edge-WebView2-loader"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-230-whisper.cpp--whisper-cli---whisper-wasm-"
+      "relatedSpdxElement": "SPDXRef-231-whisper.cpp--whisper-cli---whisper-wasm-"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-229-Windows-Implementation-Library"
+      "relatedSpdxElement": "SPDXRef-230-Windows-Implementation-Library"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-236-dart"
+      "relatedSpdxElement": "SPDXRef-237-dart"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5855,7 +5883,7 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-237-flutter"
+      "relatedSpdxElement": "SPDXRef-238-flutter"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5875,27 +5903,27 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-238-FFmpeg"
+      "relatedSpdxElement": "SPDXRef-239-FFmpeg"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-239-GStreamer"
+      "relatedSpdxElement": "SPDXRef-240-GStreamer"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-242-libmpv"
+      "relatedSpdxElement": "SPDXRef-243-libmpv"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-240-PulseAudio-client-libraries"
+      "relatedSpdxElement": "SPDXRef-241-PulseAudio-client-libraries"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-241-WebKitGTK"
+      "relatedSpdxElement": "SPDXRef-242-WebKitGTK"
     },
     {
       "spdxElementId": "SPDXRef-1--fe-analyzer-shared",
@@ -7740,7 +7768,7 @@
     {
       "spdxElementId": "SPDXRef-105-media-kit",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-242-libmpv"
+      "relatedSpdxElement": "SPDXRef-243-libmpv"
     },
     {
       "spdxElementId": "SPDXRef-106-media-kit-libs-linux",
@@ -8255,7 +8283,7 @@
     {
       "spdxElementId": "SPDXRef-128-pdfium-dart",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-228-PDFium"
+      "relatedSpdxElement": "SPDXRef-229-PDFium"
     },
     {
       "spdxElementId": "SPDXRef-129-pdfium-flutter",
@@ -9305,7 +9333,7 @@
     {
       "spdxElementId": "SPDXRef-195-video-player-media-kit",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-246-media-kit-video"
+      "relatedSpdxElement": "SPDXRef-247-media-kit-video"
     },
     {
       "spdxElementId": "SPDXRef-195-video-player-media-kit",
@@ -9683,139 +9711,139 @@
       "relatedSpdxElement": "SPDXRef-31-dartage"
     },
     {
-      "spdxElementId": "SPDXRef-243-desktop-multi-window",
+      "spdxElementId": "SPDXRef-244-desktop-multi-window",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-56-flutter"
     },
     {
-      "spdxElementId": "SPDXRef-244-flutter-webrtc",
+      "spdxElementId": "SPDXRef-245-flutter-webrtc",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-20-collection"
     },
     {
-      "spdxElementId": "SPDXRef-244-flutter-webrtc",
+      "spdxElementId": "SPDXRef-245-flutter-webrtc",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-30-dart-webrtc"
     },
     {
-      "spdxElementId": "SPDXRef-244-flutter-webrtc",
+      "spdxElementId": "SPDXRef-245-flutter-webrtc",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-99-logger"
     },
     {
-      "spdxElementId": "SPDXRef-244-flutter-webrtc",
+      "spdxElementId": "SPDXRef-245-flutter-webrtc",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-121-path-provider"
     },
     {
-      "spdxElementId": "SPDXRef-244-flutter-webrtc",
+      "spdxElementId": "SPDXRef-245-flutter-webrtc",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-203-web"
     },
     {
-      "spdxElementId": "SPDXRef-244-flutter-webrtc",
+      "spdxElementId": "SPDXRef-245-flutter-webrtc",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-205-webrtc-interface"
     },
     {
-      "spdxElementId": "SPDXRef-244-flutter-webrtc",
+      "spdxElementId": "SPDXRef-245-flutter-webrtc",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-56-flutter"
     },
     {
-      "spdxElementId": "SPDXRef-245-markdown-quill",
+      "spdxElementId": "SPDXRef-246-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-20-collection"
     },
     {
-      "spdxElementId": "SPDXRef-245-markdown-quill",
+      "spdxElementId": "SPDXRef-246-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-67-flutter-quill"
     },
     {
-      "spdxElementId": "SPDXRef-245-markdown-quill",
+      "spdxElementId": "SPDXRef-246-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-101-markdown"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-104-material-ui"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-105-media-kit"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-134-plugin-platform-interface"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-171-synchronized"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-177-universal-platform"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-200-wakelock-plus"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-203-web"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-56-flutter"
     },
     {
-      "spdxElementId": "SPDXRef-246-media-kit-video",
+      "spdxElementId": "SPDXRef-247-media-kit-video",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-242-libmpv"
+      "relatedSpdxElement": "SPDXRef-243-libmpv"
     },
     {
-      "spdxElementId": "SPDXRef-247-webview-win-floating",
+      "spdxElementId": "SPDXRef-248-webview-win-floating",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-80-fullscreen-window"
     },
     {
-      "spdxElementId": "SPDXRef-247-webview-win-floating",
+      "spdxElementId": "SPDXRef-248-webview-win-floating",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-134-plugin-platform-interface"
     },
     {
-      "spdxElementId": "SPDXRef-247-webview-win-floating",
+      "spdxElementId": "SPDXRef-248-webview-win-floating",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-208-webview-flutter-platform-interface"
     },
     {
-      "spdxElementId": "SPDXRef-247-webview-win-floating",
+      "spdxElementId": "SPDXRef-248-webview-win-floating",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-56-flutter"
     },
     {
-      "spdxElementId": "SPDXRef-247-webview-win-floating",
+      "spdxElementId": "SPDXRef-248-webview-win-floating",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-227-Microsoft-Edge-WebView2-loader"
+      "relatedSpdxElement": "SPDXRef-228-Microsoft-Edge-WebView2-loader"
     },
     {
-      "spdxElementId": "SPDXRef-247-webview-win-floating",
+      "spdxElementId": "SPDXRef-248-webview-win-floating",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-229-Windows-Implementation-Library"
+      "relatedSpdxElement": "SPDXRef-230-Windows-Implementation-Library"
     },
     {
-      "spdxElementId": "SPDXRef-247-webview-win-floating",
+      "spdxElementId": "SPDXRef-248-webview-win-floating",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-241-WebKitGTK"
+      "relatedSpdxElement": "SPDXRef-242-WebKitGTK"
     }
   ]
 }

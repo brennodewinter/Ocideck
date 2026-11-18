@@ -24,11 +24,12 @@ backend. *(Clarified 2026-11-08.)*
 make build-web
 ```
 
-This runs `flutter build web --release --no-web-resources-cdn --csp` plus the
+This runs the WASM + JavaScript fallback build with content hashes, modern JS
+interop checks, `--no-web-resources-cdn --csp`, plus the
 security prerequisites, and produces `build/web/`. What the flags buy you:
 
 - `--no-web-resources-cdn` — CanvasKit is served from **your** origin, not the
-  gstatic CDN, so the running app pulls **zero third-party origins**.
+  gstatic CDN. This flag controls engine resources, not all dynamic font fallback.
 - `--csp` — a CSP-safe loader (no inline/`eval` scripts).
 
 The build also:
@@ -144,7 +145,12 @@ version live by hand with `make deploy-web` until both secrets are set.
 
 ### Enable compression — this is not optional in practice
 
-Turn on brotli or gzip for `.js`, `.wasm`, `.json` and `.ttf`. Measured on this
+Turn on Brotli or gzip for `.mjs`, `.js`, `.wasm`, `.json` and `.ttf`. The
+shipped `.htaccess` enables gzip if `mod_deflate` is available; other hosts must
+configure compression explicitly. Serve `.wasm` as `application/wasm` and
+`.mjs` as `text/javascript` to enable streaming compilation and ES modules.
+
+Historical JavaScript-only baseline: Measured on this
 tree with `make build-web` on 2026-07-22, what a browser fetches **before the
 first paint**:
 
@@ -157,8 +163,33 @@ first paint**:
 | **Total before the first frame** | **~25 MB** | **~9 MB** |
 
 Uncompressed that is roughly 25 MB and tens of seconds of blank white on an
-ordinary connection. There is no loading indicator in `web/index.html` yet, so
-the visitor has nothing to look at while it arrives.
+ordinary connection. The static splash in `web/index.html` remains visible while loading. Current
+WASM/JavaScript measurements are in [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md).
+
+### Cache rules for Flutter 3.50 WASM builds
+
+Return `Cache-Control: no-cache` for `index.html`, `flutter_bootstrap.js`,
+`boot.js`, `precache_manifest.json`, `version.json`, and all unhashed engine
+resources under `canvaskit/` (including skwasm). Return
+`Cache-Control: public, max-age=31536000, immutable` only for content-addressed
+entrypoints (`main.dart.<hash>.js/.mjs/.wasm`) and assets. Engine filenames are
+not hashed by `--web-content-hash`; making them immutable can mix engine and
+app versions after an SDK upgrade. The supplied Apache rules implement this
+policy. Do not use a blanket immutable rule for all `.wasm` files.
+
+`deploy_web.sh` atomically swaps the completed release and retains the previous
+release's hashed app/assets for already-open tabs. Only the previous release's
+own manifest entries are retained, checked against its full `SHA256SUMS`;
+inherited files from N-2 are not carried forward. The current release manifest
+and checksum list continue to identify only the current release. A tab older
+than one deployment must reload before fetching an asset unique to that older
+release. For custom hosts, retain N-1 hashes too, and deploy the new loader last.
+Do not rewrite missing `.wasm`, `.mjs` or asset requests to `index.html`.
+
+The existing COOP `same-origin` and COEP `require-corp` headers also enable
+skwasm rendering on a worker. Without these headers the app still starts with
+single-thread rendering; local Whisper transcription still requires isolation.
+No third-party engine CDN or broader CSP is needed.
 
 ## 3. Set the Content-Security-Policy as an HTTP header
 

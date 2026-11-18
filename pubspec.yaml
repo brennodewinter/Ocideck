@@ -251,6 +251,7 @@ flutter:
     - assets/fonts/Roboto-OFL.txt
     - assets/fonts/RobotoMono-OFL.txt
     - assets/fonts/NotoSansMath-OFL.txt
+    - assets/fonts/NotoColorEmoji-OFL.txt
     # Aanvullend terugvalfont voor pijlen en wiskundige tekens in PDF-export
     # (#1968). Een subset van Noto Sans Math — alleen Arrows en Mathematical
     # Operators blocks, ~250 KB in plaats van de volledige 1 MB.
@@ -384,3 +385,7 @@ flutter:
     - family: Noto Sans Math
       fonts:
         - asset: assets/fonts/NotoSansMath-subset.ttf
+    # The unmodified emoji slice Flutter otherwise fetches for interface flags.
+    - family: Noto Color Emoji
+      fonts:
+        - asset: assets/fonts/NotoColorEmoji0.woff2

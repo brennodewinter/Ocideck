@@ -12,4 +12,4 @@
 library;
 
 export 'mem_asset_blob_stub.dart'
-    if (dart.library.html) 'mem_asset_blob_web.dart';
+    if (dart.library.js_interop) 'mem_asset_blob_web.dart';

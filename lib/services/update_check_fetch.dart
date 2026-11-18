@@ -1,6 +1,6 @@
 import 'update_check_service.dart';
 import 'update_check_fetch_io.dart'
-    if (dart.library.html) 'update_check_fetch_web.dart'
+    if (dart.library.js_interop) 'update_check_fetch_web.dart'
     as implementation;
 
 /// De platform-ophaalstap voor [UpdateCheckService]: gepind op desktop

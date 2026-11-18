@@ -1,0 +1,622 @@
+{
+  "date": "2026-11-18",
+  "baseCommit": "a054cff859d0247bad891692443880cf153e3409",
+  "flutter": "3.50.0",
+  "dart": "3.14.0",
+  "playwright": "1.65.1",
+  "node": "v22.22.1",
+  "host": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  },
+  "method": "Fresh HTTP-cache browser contexts, shared browser process per mode/engine, gzip, loopback, no throttling; concurrent full test suite. Observed readiness includes driver polling. First frame is the consent screen. These are indicative startup probes, not FPS/crash-rate benchmarks.",
+  "runs": [
+    {
+      "engine": "chromium",
+      "browser": "159.0.8154.6",
+      "mode": "auto",
+      "run": 0,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 2550.108666,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 2240.2549999952316
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 234.7849999666214
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 993.6999999284744
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15022079
+    },
+    {
+      "engine": "chromium",
+      "browser": "159.0.8154.6",
+      "mode": "auto",
+      "run": 1,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1117.2848750000003,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 972.6899999380112
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 130.87999999523163
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 616.0699999332428
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15022079
+    },
+    {
+      "engine": "chromium",
+      "browser": "159.0.8154.6",
+      "mode": "auto",
+      "run": 2,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1184.9849160000003,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1057.125
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 155.38999998569489
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 644.1050000190735
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15022079
+    },
+    {
+      "engine": "firefox",
+      "browser": "159.0",
+      "mode": "auto",
+      "run": 0,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1363.807417,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1147.78
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 245.5000000000001
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 197.07999999999993
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15809529
+    },
+    {
+      "engine": "firefox",
+      "browser": "159.0",
+      "mode": "auto",
+      "run": 1,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1262.4643749999996,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1124.5
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 235.89999999999998
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 217.96000000000004
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15809529
+    },
+    {
+      "engine": "firefox",
+      "browser": "159.0",
+      "mode": "auto",
+      "run": 2,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1566.8960000000006,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1333.02
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 272.0799999999999
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 233.44000000000005
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15809529
+    },
+    {
+      "engine": "webkit",
+      "browser": "27.2",
+      "mode": "auto",
+      "run": 0,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1578.4434580000016,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1283.04
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 348.64
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 444.29999999999995
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15780974
+    },
+    {
+      "engine": "webkit",
+      "browser": "27.2",
+      "mode": "auto",
+      "run": 1,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1356.7418340000004,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1130.78
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 253.94000000000005
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 393.70000000000005
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15780974
+    },
+    {
+      "engine": "webkit",
+      "browser": "27.2",
+      "mode": "auto",
+      "run": 2,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": true,
+      "observedReadyMs": 1414.8217500000028,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1165.52
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 264.82000000000005
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 395.1199999999999
+        }
+      ],
+      "workerCount": 1,
+      "encodedResourceBytes": 15780974
+    },
+    {
+      "engine": "chromium",
+      "browser": "159.0.8154.6",
+      "mode": "fallback",
+      "run": 0,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 3338.7925840000003,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 3201.139999985695
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 920.920000076294
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 997
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 13724173
+    },
+    {
+      "engine": "chromium",
+      "browser": "159.0.8154.6",
+      "mode": "fallback",
+      "run": 1,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 2188.239584,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 2129.039999961853
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 866.2400000095367
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 733.039999961853
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 13724173
+    },
+    {
+      "engine": "chromium",
+      "browser": "159.0.8154.6",
+      "mode": "fallback",
+      "run": 2,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 1992.614208,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1920.1399999856949
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 756.5549999475479
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 604.9650000333786
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 13724173
+    },
+    {
+      "engine": "firefox",
+      "browser": "159.0",
+      "mode": "fallback",
+      "run": 0,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 2044.5281669999986,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1803.96
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 278.76
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 336.79999999999995
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 14614007
+    },
+    {
+      "engine": "firefox",
+      "browser": "159.0",
+      "mode": "fallback",
+      "run": 1,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 1572.4316670000007,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1429.16
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 236.6199999999999
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 250.1400000000001
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 14614007
+    },
+    {
+      "engine": "firefox",
+      "browser": "159.0",
+      "mode": "fallback",
+      "run": 2,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 1673.2254170000015,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1544.3999999999999
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 261.9000000000001
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 310.52
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 14614007
+    },
+    {
+      "engine": "webkit",
+      "browser": "27.2",
+      "mode": "fallback",
+      "run": 0,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 1684.2122920000002,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1182.2400000000002
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 199.1400000000001
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 311.4200000000001
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 14585439
+    },
+    {
+      "engine": "webkit",
+      "browser": "27.2",
+      "mode": "fallback",
+      "run": 1,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 1071.0369580000006,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 903
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 157.36
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 244.17999999999995
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 14585439
+    },
+    {
+      "engine": "webkit",
+      "browser": "27.2",
+      "mode": "fallback",
+      "run": 2,
+      "wasm": false,
+      "skwasm": false,
+      "fallback": true,
+      "isolated": true,
+      "observedReadyMs": 1749.3869580000028,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1534.66
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 318.02
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 379.68000000000006
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 14585439
+    },
+    {
+      "engine": "chromium",
+      "browser": "159.0.8154.6",
+      "mode": "single-thread",
+      "run": 0,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": false,
+      "observedReadyMs": 2317.970125,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 2114.5
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 175.10000002384186
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 884
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 15022079
+    },
+    {
+      "engine": "firefox",
+      "browser": "159.0",
+      "mode": "single-thread",
+      "run": 0,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": false,
+      "observedReadyMs": 1440.0948750000007,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1271
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 250
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 354
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 15809529
+    },
+    {
+      "engine": "webkit",
+      "browser": "27.2",
+      "mode": "single-thread",
+      "run": 0,
+      "wasm": true,
+      "skwasm": true,
+      "fallback": false,
+      "isolated": false,
+      "observedReadyMs": 1460.5496249999997,
+      "marks": [
+        {
+          "name": "ocideck:startup",
+          "ms": 1224
+        },
+        {
+          "name": "ocideck:engine-init",
+          "ms": 280
+        },
+        {
+          "name": "ocideck:app-init",
+          "ms": 390
+        }
+      ],
+      "workerCount": 0,
+      "encodedResourceBytes": 15780974
+    }
+  ],
+  "medians": [
+    {
+      "engine": "chromium",
+      "autoReadyMs": 1185.0,
+      "autoEncodedBytes": 15022079,
+      "fallbackReadyMs": 2188.2,
+      "fallbackEncodedBytes": 13724173
+    },
+    {
+      "engine": "firefox",
+      "autoReadyMs": 1363.8,
+      "autoEncodedBytes": 15809529,
+      "fallbackReadyMs": 1673.2,
+      "fallbackEncodedBytes": 14614007
+    },
+    {
+      "engine": "webkit",
+      "autoReadyMs": 1414.8,
+      "autoEncodedBytes": 15780974,
+      "fallbackReadyMs": 1684.2,
+      "fallbackEncodedBytes": 14585439
+    }
+  ],
+  "compiledEntrypoints": [
+    {
+      "file": "main.dart.a7de4fef.js",
+      "sha256": "a7de4fef7af03ed5f00dbcba91be1a06ee6f637343a15a54a4c536840af1bbd3",
+      "bytes": 29488945
+    },
+    {
+      "file": "main.dart.d6ccd2b8.wasm",
+      "sha256": "d6ccd2b8267546d72802cbc59e1117234dd2aaa6e400c68848f52aeedbb7d4a0",
+      "bytes": 27604704
+    },
+    {
+      "file": "main.dart.e67ffc32.mjs",
+      "sha256": "e67ffc32ed17606adefecc343a35ab9487999b4f0a5fb7801a61bf049a10aea1",
+      "bytes": 55770
+    }
+  ]
+}

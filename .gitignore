@@ -91,3 +91,6 @@ native/whisper_cli/build/
 integration_test/jitsi_media_proof.png
 native/media_decoder/bin/
 native/media_decoder/build/
+
+# Pinned release-bundle browser probe dependencies.
+tool/web-wasm-check/node_modules/

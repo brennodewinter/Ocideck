@@ -8,6 +8,18 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- De standaardwebbouw levert nu WebAssembly met skwasm, met automatische
+  JavaScript/CanvasKit-terugval. Moderne Chromium-, Safari- en Firefox-engines
+  gebruiken WASM na featuredetectie. Inhoudshashes en passende cacheheaders
+  voorkomen verouderde assets; de deploy bewaart ook de hashes van de vorige
+  release voor open tabbladen. Browserpaden voor import, media en
+  platformmogelijkheden werken met beide Dart-compilers. De interfacevlaggen
+  gebruiken een lokaal, gepind emoji-font. Echte browserproeven en lokale
+  opstartmetingen bewaken de nieuwe bouw; de native-cache wordt hersteld als
+  een webbouw de OpenCV-exportlijst heeft vervuild.
+
 ### Added
 
 - **Markdown-bestand op de cursor invoegen (#2909).** Het Invoegen-palet van de documenteditor kent een nieuwe keuze *Markdown-bestand…*: kies een `.md`-, `.markdown`- of `.txt`-bestand en de inhoud landt als eigen blok op de cursorpositie — in de visuele stand én in de bron, als één ongedaan-maakbare bewerking. Werkt ook op web (bytes in plaats van pad). Inhoud die code kan uitvoeren wordt vóór de invoeging geweigerd met dezelfde veiligheidsscan en alarmdialoog als bij het openen van een presentatie; een bestand zonder leesbare tekst wordt netjes gemeld.

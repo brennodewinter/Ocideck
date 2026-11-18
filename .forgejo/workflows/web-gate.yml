@@ -1,7 +1,7 @@
 # Bouwt de webbundel op afroep en draait er de harding op.
 #
 # **Waarom deze workflow bestaat.** `make check-web` bouwt echt
-# (`flutter build web --release --no-web-resources-cdn --csp`) en controleert
+# (`make build-web`: WASM + JS fallback, content hashes and strict CSP) en controleert
 # daarna de gebouwde bundel. Dat is te duur voor elke PR, dus het zat alleen in
 # `check-full` op de machine van de committer en in `release.yml` op een
 # `v*`-tag. Tussen die twee zag niets een echte webbouw.
@@ -105,3 +105,17 @@ jobs:
       # `make check-static` aanroept.
       - name: De webbundel bouwen en controleren
         run: make check-web
+
+      - name: Node voor de gepinde browserproef
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Gepinde Chromium-proef installeren
+        run: |
+          npm ci --prefix tool/web-wasm-check
+          cd tool/web-wasm-check
+          npx playwright install --with-deps chromium
+
+      - name: WASM, JavaScript-terugval en rendering zonder isolatie
+        run: make check-web-browser

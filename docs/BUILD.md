@@ -62,7 +62,7 @@ flutter run -d macos     # or -d windows / -d linux / -d chrome
 OciDeck also builds for the browser. Use the hardened target:
 
 ```sh
-make build-web        # flutter build web --release --no-web-resources-cdn --csp
+make build-web        # WASM + JavaScript fallback, content hashes, strict CSP
 ```
 
 Note this target has prerequisites: it first runs `deps-verify-offline` (bundled-JS
@@ -71,16 +71,33 @@ fail the build *before* Flutter is invoked. Afterwards it runs
 `tool/pack_web_release.dart` (see [What travels with the bundle](#what-travels-with-the-bundle))
 and normalises file permissions.
 
-The two flags make the bundle **self-contained and CSP-safe**:
+The release uses `--wasm --web-content-hash --no-deprecated-js-interop` alongside
+`--no-web-resources-cdn --csp`. WASM uses skwasm in Chrome/Edge 137+, Safari
+26.2+ and Firefox 147+; the loader checks capabilities and retains the JavaScript
++ CanvasKit fallback for older browsers. The default WASM optimization level O2
+keeps runtime type and bounds checks. Browser platform choices use
+`dart.library.js_interop`, which is true for both web compilers.
+
+Content-addressed entrypoints and assets prevent mixed cached releases. The
+packer refreshes the precache manifest after adding the licence/SBOM/build
+metadata; `SHA256SUMS` is excluded from that manifest to avoid a hash cycle. Stable
+URLs (including the self-hosted engines) revalidate; hashed files may be cached
+for a year. The shipped Apache configuration supplies MIME types, gzip when
+mod_deflate is enabled, and these cache rules. See [HOSTING.md](HOSTING.md) for
+other hosts and the previous-release retention used by the deploy script.
+
+The following flags keep the bundle **self-contained and CSP-safe**:
 
 - `--no-web-resources-cdn` self-hosts CanvasKit instead of fetching it from the
-  gstatic CDN, so the running app pulls **zero third-party origins**.
+  gstatic CDN, so the renderer is served from the app's own origin.
 - `--csp` emits a loader with no `eval()`/inline scripts, so it runs under the
   strict Content-Security-Policy declared in `web/index.html` (`script-src 'self'
   'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`).
 
-The UI font (Roboto) is bundled too, so the engine never reaches out to
-`fonts.gstatic.com`. Remote deck media is blocked on web by that CSP by design;
+The UI font (Roboto) and interface-flag emoji slice are bundled. The browser
+probes verify no external requests at startup. Text outside the bundled fonts
+can still trigger Flutter's dynamic font fallback; air-gapped installations
+need local fonts covering the scripts used by their decks. Remote deck media is blocked on web by that CSP by design;
 to allow it, add `https:` to `img-src`/`media-src` in `web/index.html`.
 
 Serve `build/web/` from any static host. The web build supports editing, preview,
@@ -88,8 +105,7 @@ HTML export, and presenting in a single window. Dual-screen presenter mode and
 direct filesystem project folders are desktop-only; use **Open** / **Save** via
 the browser file picker on web.
 
-**Loading splash.** The CanvasKit build takes roughly ten seconds before it
-paints anything; without something on screen in the meantime, that reads as a
+**Loading splash.** Engine loading and application initialization take time; without something on screen in the meantime, that reads as a
 plain white page — "it's broken", not "please wait" (#589). `web/index.html`
 ships a static `#splash` layer under the app surface (`z-index: -1`) that
 Flutter's own painting covers once it starts, so nothing needs to remove it. It

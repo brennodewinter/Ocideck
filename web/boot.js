@@ -43,7 +43,7 @@
   // starts fetching immediately and runs when ready. Injected rather than
   // written as a tag so the file:// branch above can skip it entirely.
   var bootstrap = document.createElement('script');
-  bootstrap.src = 'flutter_bootstrap.js';
+  bootstrap.src = document.currentScript.dataset.flutterBootstrap;
   bootstrap.async = true;
   document.body.appendChild(bootstrap);
 })();

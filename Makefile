@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 .PHONY: package-deps test-benchmarks
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
@@ -118,6 +118,7 @@ help:
 	@echo "  make release TAG=vX.Y.Z  Orchestrate a release: tag-guard + Phase 1 (validate/build/sign); guides the irreversible steps."
 	@echo "  make build-release   Build verified web + macOS release artifacts."
 	@echo "  make notarize-macos  Sign (Developer ID) + notarize + staple the macOS .app for distribution."
+	@echo "  make check-web-browser  Exercise the built WASM bundle, JS fallback and single-thread renderer (pinned Playwright)."
 	@echo "  make deploy-web      Put build/web live on the static host (atomic swap + verify)."
 
 # Install Flutter/Dart dependencies.
@@ -1269,10 +1270,15 @@ l10n-check: check-l10n-passthrough
 	dart format --output=none --set-exit-if-changed lib/l10n
 	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart test/l10n_untranslated_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
-# Build the hardened web bundle. Two flags do the security work:
+# Build a dual WASM/JS release with content-addressed assets. Runtime feature
+# detection selects skwasm on modern engines, retaining CanvasKit on old ones.
+# Keep Dart's default WASM O2: runtime type and bounds checks remain enabled.
+#   --web-content-hash      Stable deploys and immutable asset caches.
+#   --no-deprecated-js-interop  Reject legacy interop in both compiler targets.
+# Two flags retain the security boundary:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the
-#                           gstatic CDN, so the running app pulls ZERO third-party
-#                           origins (air-gappable, reproducible, fits the pinned
+#                           gstatic CDN, so engine resources stay first-party
+#                           rather than using a third-party origin (air-gappable, reproducible, fits the pinned
 #                           bundled-JS policy in deps-check).
 #   --csp                   Emit a CSP-compliant loader: no eval()/inline scripts
 #                           in the Flutter bootstrap, so script-src needs neither
@@ -1288,10 +1294,10 @@ deps-verify-offline:
 
 build-web: deps-verify-offline sbom-verify
 	@echo "== OciDeck build: hardened web bundle =="
-	@echo "Command: flutter build web --release --no-web-resources-cdn --csp"
+	@echo "Command: flutter build web --release --wasm --web-content-hash --no-deprecated-js-interop --no-web-resources-cdn --csp"
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
 	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
-	flutter build web --release --no-web-resources-cdn --csp
+	flutter build web --release --wasm --web-content-hash --no-deprecated-js-interop --no-web-resources-cdn --csp
 	@# Ship the artefacts that must travel with a downloaded bundle: the licence
 	@# and third-party notices (without them the bundle is not redistributable),
 	@# and the SBOM (the CRA inventory belongs to the exact build you hand out,
@@ -1325,6 +1331,14 @@ check-web: build-web
 	@echo "Covers: the docs inside the built bundle match docs/ on disk, byte for byte."
 	@echo "Failure means: an incremental build shipped stale documentation — clean-rebuild."
 	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/web
+
+# Requires an already built bundle and the pinned Playwright installation.
+# Install once: npm ci --prefix tool/web-wasm-check, then in that directory
+# npx playwright install --with-deps chromium (OS packages may need privileges).
+check-web-browser:
+	node tool/web-wasm-check/probe.cjs build/web chromium auto 1
+	node tool/web-wasm-check/probe.cjs build/web chromium fallback 1
+	node tool/web-wasm-check/probe.cjs build/web chromium single-thread 1
 
 # Native desktop release builds. Each target only works on its own OS — Flutter
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows

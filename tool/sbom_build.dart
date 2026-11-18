@@ -913,6 +913,18 @@ List<SbomComponent> _mediaDecoderRuntime() {
 ({String name, String url})? _fontCopyrightHolder(String family) {
   final dir = Directory('assets/fonts');
   if (!dir.existsSync()) return null;
+  // Some OFL headers name the company instead of a "<family> Project".
+  // Their pinned source manifest records that supplier explicitly.
+  for (final file in dir.listSync().whereType<File>()) {
+    if (!file.path.endsWith('-MANIFEST.json')) continue;
+    final manifest =
+        jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+    if (manifest['family'] != family) continue;
+    final supplier = manifest['supplier'] as Map<String, dynamic>?;
+    if (supplier != null) {
+      return (name: supplier['name'] as String, url: supplier['url'] as String);
+    }
+  }
   final needle = '$family Project'.toLowerCase();
   for (final entity in dir.listSync()) {
     if (entity is! File || !entity.path.toLowerCase().endsWith('.txt')) {

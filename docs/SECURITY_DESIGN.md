@@ -221,7 +221,12 @@ treated as evidence of attention, presence or learning.
 
 ## 1. Web build hardening
 
-The web build is designed to pull **zero third-party origins** at runtime.
+The web build is designed to use first-party engines and fonts. Release-bundle
+browser probes verify zero third-party startup requests. A remaining exception
+is text outside the bundled fonts: Flutter can fetch a fallback font from Google
+using `fetch`, governed by `connect-src https:`, not `font-src`. The first-party
+goal is therefore not enforced for every Unicode script; strict offline
+installations need local font coverage for the scripts their decks use.
 
 - **Strict CSP.** `web/index.html` ships a `Content-Security-Policy` meta tag:
   `default-src 'self'`; `script-src 'self' 'wasm-unsafe-eval'` (no `unsafe-eval`
@@ -300,11 +305,12 @@ The web build is designed to pull **zero third-party origins** at runtime.
   the path of a deck link can itself be the sensitive part. See
   [`HOSTING.md`](HOSTING.md) for the companion HTTP header.
 - **Self-hosted engine.** `make build-web` builds with
-  `--no-web-resources-cdn --csp`, so CanvasKit is served from the same origin
-  (never the gstatic CDN) and the bootstrap needs no inline/eval scripts
-  (`Makefile:420-425`).
-- **Bundled fonts.** The UI font is bundled and registered as `Roboto`, so the
-  engine never fetches fonts from `fonts.gstatic.com`.
+  `--wasm --web-content-hash --no-deprecated-js-interop
+  --no-web-resources-cdn --csp`, so skwasm and the CanvasKit fallback are served
+  from the same origin and the bootstrap needs no inline/eval scripts.
+- **Bundled fonts.** Roboto and the pinned interface-flag emoji slice are local.
+  The startup probes reject external requests. This does not disable Flutter's
+  fallback for glyphs absent from the bundled fonts; see the exception above.
 - **Hardening verifier.** `tool/check_web_hardening.dart` parses the *built*
   bundle and fails the build if any invariant regresses (CSP strictness,
   self-hosted CanvasKit, bundled font). Wired via `make check-web`.
