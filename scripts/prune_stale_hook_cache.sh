@@ -100,6 +100,31 @@ physical() { # PAD → fysiek pad als de map bestaat, anders het pad zelf
 }
 
 stale=0
+# Een web-AOT-link bevat geen native aanroepen maar schrijft bij dartcv4 2.3.1
+# wel een keep-lijst met alleen finalizers. De volgende native configuratie
+# exporteert daardoor geen Mat.zeros/imdecode/YuNet meer. Bewaak de functies
+# die onze scanner altijd nodig heeft; wis alleen deze verkeerde lijst en de
+# bijbehorende hook-resultaten, niet OpenCV of de gedownloade _deps.
+keep="$shared_abs/dartcv4/dartcv_keep.txt"
+if [ -f "$keep" ] && { ! grep -qx 'cv_Mat_zeros' "$keep" \
+  || ! grep -qx 'cv_imdecode' "$keep" \
+  || ! grep -qx 'cv_FaceDetectorYN_create_1' "$keep"; }; then
+  stale=$((stale + 1))
+  if [ "$check" -eq 1 ]; then
+    echo "prune_stale_hook_cache: VEROUDERD dartcv4 — keep-lijst mist scannerfuncties (web-AOT)." >&2
+  else
+    rm -f "$keep"
+    if [ -d "$root/.dart_tool/hooks_runner/dartcv4" ]; then
+      find "$root/.dart_tool/hooks_runner/dartcv4" -type f \( \
+        -name output.json -o -name dependencies.dependencies_hash_file.json \) -delete
+    fi
+    if [ -d "$root/.dart_tool/flutter_build" ]; then
+      find "$root/.dart_tool/flutter_build" -type f \( \
+        -name build_hooks.stamp -o -name link_hooks.stamp \) -delete
+    fi
+    echo "prune_stale_hook_cache: onvolledige dartcv4-keep-lijst en hook-resultaten gewist; native scannerexports worden opnieuw opgebouwd." >&2
+  fi
+fi
 for cache in "$shared_abs"/*/build/*/CMakeCache.txt; do
   [ -f "$cache" ] || continue
   source_dir=$(sed -n 's/^CMAKE_HOME_DIRECTORY:INTERNAL=//p' "$cache" 2>/dev/null || true)

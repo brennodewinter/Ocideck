@@ -264,6 +264,40 @@ void main() {
     expect(result.stderr, isEmpty);
   }, skip: skipOnWindows);
 
+  test(
+    'web-AOT mag native scannerexports niet uit de volgende bouw wissen',
+    () async {
+      final source = package('dartcv4-2.3.1');
+      writePackageConfig({'dartcv4': Uri.directory(source).toString()});
+      final cache = writeCache('dartcv4', 'native', '$source/src');
+      final keep = File('${cache.parent.parent.path}/dartcv_keep.txt')
+        ..writeAsStringSync('cv_Mat_close\ncv_FaceDetectorYN_close\n');
+      final hook =
+          File('${tree()}/.dart_tool/hooks_runner/dartcv4/native/output.json')
+            ..createSync(recursive: true)
+            ..writeAsStringSync('stale native result');
+      final stamp = File(
+        '${tree()}/.dart_tool/flutter_build/native/build_hooks.stamp',
+      )..createSync(recursive: true);
+      final check = await run(['--check']);
+      expect(check.exitCode, 1);
+      expect(keep.existsSync(), isTrue);
+      expect(hook.existsSync(), isTrue);
+      final repair = await run([]);
+      expect(repair.exitCode, 0, reason: repair.stderr.toString());
+      expect(keep.existsSync(), isFalse);
+      expect(hook.existsSync(), isFalse);
+      expect(stamp.existsSync(), isFalse);
+      expect(cacheIntact(cache), isTrue);
+      keep.writeAsStringSync(
+        'cv_Mat_zeros\ncv_imdecode\ncv_FaceDetectorYN_create_1\n',
+      );
+      expect((await run(['--check'])).exitCode, 0);
+      expect(keep.existsSync(), isTrue);
+    },
+    skip: skipOnWindows,
+  );
+
   test('een onbekend argument is een gebruiksfout', () async {
     final result = await run(['--wis-alles']);
 
