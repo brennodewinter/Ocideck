@@ -20,6 +20,11 @@ apply_standard_settings(${BINARY_NAME})
 add_definitions(-DAPPLICATION_ID="${APPLICATION_ID}")
 
 # Add dependency libraries. Add any application-specific dependencies here.
+# Flutter 3.50 exports its private unwinder. Load the system unwinder first so
+# plugins can catch C++ exceptions, including unavailable-keyring errors.
+# Remove when the pinned engine fixes https://github.com/flutter/flutter/issues/196402.
+target_link_options(${BINARY_NAME} PRIVATE
+  "LINKER:--push-state,--no-as-needed,-lgcc_s,--pop-state")
 target_link_libraries(${BINARY_NAME} PRIVATE flutter)
 target_link_libraries(${BINARY_NAME} PRIVATE PkgConfig::GTK)
 
