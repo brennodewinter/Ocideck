@@ -290,6 +290,50 @@ sudo -n tar -C "$NEW" -xzf "$TARBALL"
 rm -f "$TARBALL"
 printf '%s\n' "$STAMP" | sudo -n tee "$NEW/.ocideck-deploy-id" >/dev/null
 
+# Keep the previous release's content-addressed files available for open tabs.
+# Its manifest only describes N-1, so inherited N-2 files are not copied again.
+# Validate full release digests and reject traversal/symlinks before copying.
+sudo -n python3 - "$WEBROOT" "$NEW" <<'PYRETAIN'
+import hashlib, json, pathlib, shutil, sys
+old, new = map(pathlib.Path, sys.argv[1:])
+manifest = old / 'precache_manifest.json'
+if manifest.exists():
+    if old.is_symlink() or manifest.is_symlink():
+        raise ValueError('previous release manifest must be a regular file')
+    sums = old / 'SHA256SUMS'
+    if sums.is_symlink():
+        raise ValueError('previous release checksums must be a regular file')
+    hashes = dict(line.rstrip('\n').split('  ', 1)[::-1]
+                  for line in sums.read_text().splitlines() if line)
+    digest = lambda file: hashlib.sha256(file.read_bytes()).hexdigest()
+    if digest(manifest) != hashes.get('precache_manifest.json'):
+        raise ValueError('previous release manifest differs from SHA256SUMS')
+    entries = json.loads(manifest.read_text())['entries']
+    for entry in entries:
+        if not entry.get('urlHashed'):
+            continue
+        relative = pathlib.PurePosixPath(entry['url'])
+        if relative.is_absolute() or '..' in relative.parts or not relative.parts:
+            raise ValueError('invalid previous asset path')
+        if not (str(relative).startswith('assets/') or str(relative).startswith('main.dart.')):
+            raise ValueError('unexpected previous hashed asset')
+        source, target = old / relative, new / relative
+        for base in (old, new):
+            part = base
+            for component in relative.parts:
+                part = part / component
+                if part.is_symlink():
+                    raise ValueError('symlink in previous asset path')
+        if digest(source) != hashes.get(str(relative)):
+            raise ValueError('previous asset differs from SHA256SUMS')
+        if target.exists():
+            if digest(target) != digest(source):
+                raise ValueError('content hash collision between releases')
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+PYRETAIN
+
 # Een geverifieerde bundel kan privé zijn uitgepakt; zet publieke rechten pas
 # in de nieuwe servermap, zonder de bronbundel te wijzigen.
 sudo -n find "$NEW" -type d -exec chmod 0755 {} +
