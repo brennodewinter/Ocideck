@@ -8,6 +8,9 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.13] — 2026-11-18
+
+
 ### Fixed
 
 - Linux: voorkom een opstartcrash zonder beschikbare sleutelbos onder Flutter
