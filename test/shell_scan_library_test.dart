@@ -9,6 +9,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/pump_until.dart';
@@ -26,7 +27,9 @@ void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
     tmp = Directory.systemTemp.createTempSync('ocideck_shell_scan');
-    demoPath = '${tmp.path}/demo.md';
+    // De scan levert het platformpad terug; gemengde scheidingstekens laten
+    // de tekstvergelijking op Windows onterecht op een time-out uitlopen.
+    demoPath = p.join(tmp.path, 'demo.md');
     File(demoPath).writeAsStringSync('# Bibliotheekdemo\n');
     SharedPreferences.setMockInitialValues({
       'app_consent_accepted': true,

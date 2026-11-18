@@ -117,13 +117,14 @@ git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
   );
 
   /// Draait de echte assert_nightly_main_gate met gemockte api/git.
-  /// [runs] is "id|sha|status" per regel (nieuw→oud, sha '' = geen);
+  /// [runs] is "id|sha|status|ref" per regel (ref standaard main);
   /// [ancestors] zijn de sha's die git merge-base als voorvader van
   /// origin/main erkent.
   ProcessResult runGate({
     required List<String> runs,
     List<String> ancestors = const ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
     String resumeTag = '',
+    String releaseBase = 'main',
     bool apiFails = false,
     String dispatchedStatus = 'success',
     bool runningBecomesSuccess = false,
@@ -147,6 +148,8 @@ git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
     harness.writeAsStringSync('''
 set -uo pipefail
 RESUME_TAG='$resumeTag'
+TAG=v9.9.9
+RELEASE_BASE='$releaseBase'
 GATE_TIMEOUT_MIN=1
 GATE_TIMEOUT_SECONDS=${delayedListGap ? '1000' : '2'}
 MAIN_GATE_LOCK_DIR='${dir.path}/main-gate.lock'
@@ -196,11 +199,11 @@ api() {
       fi''' : ''}
       { printf '{"workflow_runs":['
         first=1
-        while IFS='|' read -r rid rsha rstatus; do
+        while IFS='|' read -r rid rsha rstatus rref; do
           [ -n "\$rid" ] || continue
           [ "\$first" -eq 0 ] && printf ','
           first=0
-          printf '{"id":%s,"workflow_id":"$listWorkflowId","prettyref":"main","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\$rstatus" "\$rid"
+          printf '{"id":%s,"workflow_id":"$listWorkflowId","prettyref":"%s","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\${rref:-main}" "\$rstatus" "\$rid"
         done < '${runsFile.path}'
         if [ -f '${dir.path}/dispatched' ]; then
           [ "\$first" -eq 0 ] && printf ','
@@ -237,7 +240,7 @@ api() {
           'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' '$dispatchedStatus'
         return 0
       fi
-      while IFS='|' read -r r rsha rstatus; do
+      while IFS='|' read -r r rsha rstatus rref; do
         if [ "\$r" = "\$rid" ]; then
           if [ '${requireLockWhileRunning ? '1' : '0'}' -eq 1 ] && [ ! -f "\$MAIN_GATE_LOCK_DIR/pid" ]; then
             return 23
@@ -275,6 +278,73 @@ printf 'DOOR\\n'
   }
 
   group('bash gate harness', () {
+    test('een bronfreeze hergebruikt de main-poort op exact dezelfde SHA', () {
+      final dir = Directory.systemTemp.createTempSync('frozen-main-proof-');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final trace = File('${dir.path}/calls');
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
+        trace: trace,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect(trace.readAsStringSync(), isNot(contains('POST ')));
+      expect(r.stdout, contains('run 9718'));
+    });
+
+    test('een bronfreeze hergebruikt geen groene run op een andere SHA', () {
+      final dir = Directory.systemTemp.createTempSync('frozen-other-proof-');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final trace = File('${dir.path}/calls');
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: ['9718|bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb|success'],
+        trace: trace,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect(trace.readAsStringSync(), contains('POST /actions/workflows/'));
+      expect(r.stdout, isNot(contains('(run 9718)')));
+    });
+
+    test('een bronfreeze passeert geen nieuwere rode main-poort', () {
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: [
+          '9719|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|failure',
+          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success',
+        ],
+      );
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect(r.stdout, isNot(contains('DOOR')));
+    });
+
+    test('een nieuwere rode basisrun blokkeert oudere groene main', () {
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: [
+          '9719|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|failure|codex/release-base-v9.9.9',
+          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success|main',
+        ],
+      );
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect(r.stdout, isNot(contains('DOOR')));
+    });
+
+    test('een lopende basisrun wordt gevolgd zonder oudere main te kiezen', () {
+      final r = runGate(
+        releaseBase: 'codex/release-base-v9.9.9',
+        runs: [
+          '9719|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running|codex/release-base-v9.9.9',
+          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success|main',
+        ],
+        runningBecomesSuccess: true,
+        requireLockWhileRunning: true,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect(r.stdout, contains('run 9719'));
+      expect(r.stdout, isNot(contains('(run 9718)')));
+    });
+
     test('een groene nachtrun op de tip laat de release door', () {
       final r = runGate(
         runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
