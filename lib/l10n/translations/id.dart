@@ -1542,6 +1542,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Plak logo van klembord': 'Tempel logo dari papan klip',
+  'Plak donker logo van klembord': 'Tempel logo gelap dari papan klip',
+  'Afwijkend logo': 'Logo berbeda',
+  'Er staat geen afbeelding op het klembord': 'Tidak ada gambar di papan klip',
   'Vanaf deze dia': 'Mulai dari slide ini',
   'Deckstijl': 'Gaya deck',
   'Geërfd vanaf dia': 'Diwarisi dari slide',

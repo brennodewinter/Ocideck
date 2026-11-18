@@ -1553,6 +1553,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Plak logo van klembord': 'Glutina logo e tabula scribenda',
+  'Plak donker logo van klembord': 'Glutina logo obscurum e tabula scribenda',
+  'Afwijkend logo': 'Logo devians',
+  'Er staat geen afbeelding op het klembord':
+      'Nulla imago in tabula scribenda est',
   'Vanaf deze dia': 'Ab hac pagina',
   'Deckstijl': 'Stylus praesentationis',
   'Geërfd vanaf dia': 'Haereditatum a pagina',

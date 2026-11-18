@@ -1556,6 +1556,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Plak logo van klembord': 'Вставити логотип з буфера обміну',
+  'Plak donker logo van klembord': 'Вставити темний логотип з буфера обміну',
+  'Afwijkend logo': 'Інший логотип',
+  'Er staat geen afbeelding op het klembord':
+      'У буфері обміну немає зображення',
   'Vanaf deze dia': 'З цього слайда',
   'Deckstijl': 'Стиль деки',
   'Geërfd vanaf dia': 'Успадковано зі слайда',

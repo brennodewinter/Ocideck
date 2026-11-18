@@ -1542,6 +1542,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Plak logo van klembord': 'Liitä logo leikepöydältä',
+  'Plak donker logo van klembord': 'Liitä tumma logo leikepöydältä',
+  'Afwijkend logo': 'Poikkeava logo',
+  'Er staat geen afbeelding op het klembord': 'Leikepöydällä ei ole kuvaa',
   'Vanaf deze dia': 'Tästä diasta alkaen',
   'Deckstijl': 'Deckin tyyli',
   'Geërfd vanaf dia': 'Peritty diasta',

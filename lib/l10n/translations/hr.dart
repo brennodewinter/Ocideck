@@ -1546,6 +1546,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Plak logo van klembord': 'Zalijepi logo s međuspremnika',
+  'Plak donker logo van klembord': 'Zalijepi tamni logo s međuspremnika',
+  'Afwijkend logo': 'Drugačiji logo',
+  'Er staat geen afbeelding op het klembord': 'Na međuspremniku nema slike',
   'Vanaf deze dia': 'Od ovog slajda',
   'Deckstijl': 'Stil decka',
   'Geërfd vanaf dia': 'Naslijeđeno od slajda',

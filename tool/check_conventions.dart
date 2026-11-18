@@ -408,7 +408,8 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/panels/slide_list_panel.dart': 1030,
   // +7 (sweep #2648): de documentopmaak-sectie werkt op een bewerkkopie
   // zodat Annuleren niets wegschrijft — cohesief met de kleursectie.
-  'lib/widgets/dialogs/parts/settings_dialog_colors.dart': 1030,
+  'lib/widgets/dialogs/parts/settings_dialog_colors.dart':
+      835, // verlaagd na de logo-verhuizing naar settings_dialog_logo (#3003).
   // +2 (sweep #2621): de debounce-flush op MarkdownSourceController —
   // één listener plus dispose-cleanup.
   'lib/widgets/markdown_editor/markdown_editor.dart': 975,
@@ -475,7 +476,7 @@ const Map<String, int> classSizeBaseline = {
   // modulelijst; de kaart zelf is een losse widget.
   // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
-      6265, // +62 (sweep #2648/#2640): bewerkkopieën van
+      5880, // verlaagd na de logo-verhuizing naar settings_dialog_logo (#3003). // +62 (sweep #2648/#2640): bewerkkopieën van
   // profielen/documentopmaak en de web-logokiezer — extensies in de
   // part-bestanden tellen mee. De #2616-bulletmarkerrij staat top-level en
   // telt hier niet mee.

@@ -1542,6 +1542,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Plak logo van klembord': 'Sæt logo ind fra udklipsholder',
+  'Plak donker logo van klembord': 'Sæt mørkt logo ind fra udklipsholder',
+  'Afwijkend logo': 'Afvigende logo',
+  'Er staat geen afbeelding op het klembord':
+      'Der er ikke noget billede på udklipsholderen',
   'Vanaf deze dia': 'Fra dette slide',
   'Deckstijl': 'Deckstil',
   'Geërfd vanaf dia': 'Nedarvet fra slide',

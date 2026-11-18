@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:app_localizations/app_localizations.dart'
     show AppLanguageDropdown;
 import 'package:file_picker/file_picker.dart';
+import 'package:pasteboard/pasteboard.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -115,6 +116,7 @@ part 'parts/settings_dialog_document_fonts.dart';
 part 'parts/settings_dialog_style_preview.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
+part 'parts/settings_dialog_logo.dart';
 part 'parts/settings_dialog_bullet_marker.dart';
 part 'parts/settings_dialog_table_style.dart';
 part 'parts/settings_dialog_profile.dart';

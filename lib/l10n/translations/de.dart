@@ -612,6 +612,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Plak logo van klembord': 'Logo aus Zwischenablage einfügen',
+  'Plak donker logo van klembord': 'Dunkles Logo aus Zwischenablage einfügen',
+  'Afwijkend logo': 'Abweichendes Logo',
+  'Er staat geen afbeelding op het klembord':
+      'In der Zwischenablage ist kein Bild',
   'Vanaf deze dia': 'Ab dieser Folie',
   'Deckstijl': 'Deck-Stil',
   'Geërfd vanaf dia': 'Geerbt ab Folie',

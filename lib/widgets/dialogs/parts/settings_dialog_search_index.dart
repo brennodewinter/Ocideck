@@ -193,8 +193,14 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
-    label: 'Logo positie',
+    label: 'Logo',
     section: 'Logo',
+    keywords: ['logo', 'merk', 'plakken', 'kiezen', 'huisstijl'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
+    label: 'Logo positie',
+    section: 'Logo positie',
     keywords: ['logo', 'positie', 'merk'],
   ),
   SettingsSearchEntry(

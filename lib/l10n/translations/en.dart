@@ -767,6 +767,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Plak logo van klembord': 'Paste logo from clipboard',
+  'Plak donker logo van klembord': 'Paste dark logo from clipboard',
+  'Afwijkend logo': 'Deviating logo',
+  'Er staat geen afbeelding op het klembord':
+      'There is no image on the clipboard',
   'Vanaf deze dia': 'From this slide onward',
   'Deckstijl': 'Deck style',
   'Geërfd vanaf dia': 'Inherited from slide',

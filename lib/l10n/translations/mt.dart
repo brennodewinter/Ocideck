@@ -1558,6 +1558,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Plak logo van klembord': 'Waħħal il-logo mill-clipboard',
+  'Plak donker logo van klembord': 'Waħħal il-logo skur mill-clipboard',
+  'Afwijkend logo': 'Logo differenti',
+  'Er staat geen afbeelding op het klembord':
+      'M\'hemm l-ebda immaġni fuq il-clipboard',
   'Vanaf deze dia': 'Minn din is-slide',
   'Deckstijl': 'Stil tad-deck',
   'Geërfd vanaf dia': 'Wieret minn slide',

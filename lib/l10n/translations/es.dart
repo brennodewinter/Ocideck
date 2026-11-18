@@ -610,6 +610,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Plak logo van klembord': 'Pegar logotipo del portapapeles',
+  'Plak donker logo van klembord': 'Pegar logotipo oscuro del portapapeles',
+  'Afwijkend logo': 'Logotipo distinto',
+  'Er staat geen afbeelding op het klembord':
+      'No hay ninguna imagen en el portapapeles',
   'Vanaf deze dia': 'Desde esta diapositiva',
   'Deckstijl': 'Estilo del deck',
   'Geërfd vanaf dia': 'Heredado desde la diapositiva',

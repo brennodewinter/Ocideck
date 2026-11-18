@@ -1538,6 +1538,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Plak logo van klembord': 'Ielīmēt logotipu no starpliktuves',
+  'Plak donker logo van klembord': 'Ielīmēt tumšu logotipu no starpliktuves',
+  'Afwijkend logo': 'Atšķirīgs logotips',
+  'Er staat geen afbeelding op het klembord': 'Starpliktuves nav attēla',
   'Vanaf deze dia': 'Sākot ar šo slaidu',
   'Deckstijl': 'Deka stils',
   'Geërfd vanaf dia': 'Mantots no slaida',

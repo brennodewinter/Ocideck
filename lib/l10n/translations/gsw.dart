@@ -1542,6 +1542,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Plak logo van klembord': 'Logo us de Zwüscheablage iifüege',
+  'Plak donker logo van klembord': 'Dunkels Logo us de Zwüscheablage iifüege',
+  'Afwijkend logo': 'Abwichends Logo',
+  'Er staat geen afbeelding op het klembord':
+      'Uf de Zwüscheablage isch kei Bild',
   'Vanaf deze dia': 'Ab däre Folie',
   'Deckstijl': 'Deck-Stil',
   'Geërfd vanaf dia': 'Gäerbt ab Folie',

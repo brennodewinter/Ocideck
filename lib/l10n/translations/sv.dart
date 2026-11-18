@@ -1541,6 +1541,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Plak logo van klembord': 'Klistra in logotyp från urklipp',
+  'Plak donker logo van klembord': 'Klistra in mörk logotyp från urklipp',
+  'Afwijkend logo': 'Avvikande logotyp',
+  'Er staat geen afbeelding op het klembord':
+      'Det finns ingen bild på urklippet',
   'Vanaf deze dia': 'Från den här bilden',
   'Deckstijl': 'Deckstil',
   'Geërfd vanaf dia': 'Ärvt från bild',

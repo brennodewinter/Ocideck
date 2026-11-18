@@ -1556,6 +1556,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Plak logo van klembord': 'Lipește logo din clipboard',
+  'Plak donker logo van klembord': 'Lipește logo întunecat din clipboard',
+  'Afwijkend logo': 'Logo diferit',
+  'Er staat geen afbeelding op het klembord':
+      'Nu există nicio imagine în clipboard',
   'Vanaf deze dia': 'De la acest diapozitiv',
   'Deckstijl': 'Stil de deck',
   'Geërfd vanaf dia': 'Moștenit de la diapozitivul',

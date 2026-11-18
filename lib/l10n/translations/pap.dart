@@ -612,6 +612,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Plak logo van klembord': 'Pega logo di e portapapel',
+  'Plak donker logo van klembord': 'Pega logo skur di e portapapel',
+  'Afwijkend logo': 'Logo diferente',
+  'Er staat geen afbeelding op het klembord': 'No tin imágen na e portapapel',
   'Vanaf deze dia': 'For di e slide aki',
   'Deckstijl': 'Estilo di deck',
   'Geërfd vanaf dia': 'Herená for di slide',

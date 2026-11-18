@@ -1552,6 +1552,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Plak logo van klembord': 'Wklej logo ze schowka',
+  'Plak donker logo van klembord': 'Wklej ciemne logo ze schowka',
+  'Afwijkend logo': 'Odmienne logo',
+  'Er staat geen afbeelding op het klembord': 'W schowku nie ma obrazu',
   'Vanaf deze dia': 'Od tego slajdu',
   'Deckstijl': 'Styl decka',
   'Geërfd vanaf dia': 'Odziedziczone od slajdu',

@@ -1561,6 +1561,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Plak logo van klembord': 'Постави лого от клипборда',
+  'Plak donker logo van klembord': 'Постави тъмно лого от клипборда',
+  'Afwijkend logo': 'Различно лого',
+  'Er staat geen afbeelding op het klembord': 'В клипборда няма изображение',
   'Vanaf deze dia': 'От този слайд',
   'Deckstijl': 'Стил на дека',
   'Geërfd vanaf dia': 'Наследено от слайд',
