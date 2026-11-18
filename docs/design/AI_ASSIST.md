@@ -63,6 +63,10 @@
 
 ---
 
+For the SDK upgrade assessment and current integration decisions, see
+[§11 — Flutter 3.50](#11-flutter-350-assessment-2026-11-18). The earlier design
+sections retain their historical scope and review dates.
+
 ## 1. Purpose & scope
 
 AI assistance in OciDeck is a **single, optional, off-by-default capability** that
@@ -484,3 +488,100 @@ A **distinct** consent gate — *"an external application may read and modify th
 deck"* — separate from the §3 outbound consent, because here control of the model,
 the conversation and data-egress moves to the external host. Off by default, with
 a clear indicator while a server session is active.
+
+
+## 11. Flutter 3.50 assessment (2026-11-18)
+
+This section was checked against the shipped AI client and the upstream sources
+on 2026-11-18. Flutter's AI announcements cover development tooling, backend
+orchestration and local inference; upgrading the UI SDK does not itself speed
+up the selected model or provide new model weights.
+
+| Opportunity | Fit for OciDeck | Decision in this change |
+| --- | --- | --- |
+| Dart/Flutter MCP and agent skills | Better diagnostics, symbol lookup, tests and inspection when developing our Flutter UI. | Add the repository-owned `ocideck-ai-integration` skill and document the SDK tool. |
+| Genkit Dart | Typed flows, evaluations and retrieval could support an explicitly operated backend for grounding suggestions in approved sources. | Retain the existing client boundary; improve validation of completed drafts now. A flow endpoint needs an explicit adapter, not a URL change. |
+| MediaPipe local tasks | Candidate for optional semantic text/image search, language detection and local proofreading. | Evaluate per task and platform before adding a runtime/model dependency. |
+
+### Changes that apply immediately
+
+`AiClientService.chat` now checks the provider envelope before returning a draft.
+An explicit non-`stop` completion reason (including token exhaustion, content
+filtering or tool requests) is an error. Refusals, unexpected roles, tool calls
+and non-text output parts are also refused. This prevents incomplete or
+unsupported output from becoming a suggestion that looks finished. Empty
+completed answers remain an abstention; legacy compatible servers that omit
+`finish_reason` remain supported. The shared wire types are unchanged.
+
+Malformed JSON becomes a payload-free `AiRequestException`, so a decoder's
+exception cannot carry private response text into a consumer's logs. No prompt
+is retried automatically. Existing text is preserved on failure, including after
+the author agreed to replace it; successful drafts still use the existing
+review/provenance UI. These checks apply to translation, condensation, alt-text,
+image tags and the existing field-drafting consumers. They cannot establish
+that a completed model answer is factually correct.
+
+The behavioral tests use the injected transport: completed text/multipart text,
+legacy responses, abstention, truncation, refusal, tool calls, malformed data,
+no retry and preservation of human text. No private corpus was sent to a real
+model and no model-quality, inference-latency or memory improvement is claimed.
+The interpretation of completion reasons follows the
+[Chat Completions contract](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create).
+
+### Development tooling and app automation are different
+
+The project skill is at
+[`.agents/skills/ocideck-ai-integration/SKILL.md`](../../.agents/skills/ocideck-ai-integration/SKILL.md).
+It supplies the repository's actual client/gate/consumer boundaries and targeted
+tests to an assistant working on AI features. It contains no installer, network
+service or permission grant. Existing user instructions remain authoritative.
+
+The pinned SDK supplies `dart mcp-server`; locally its version/help commands
+were verified (server 1.2.2 with Flutter 3.50.0/Dart 3.14.0). A chosen MCP client
+can connect it to development diagnostics and a designated debug app. This does
+not make the OciDeck application an MCP server, grant an external agent control
+of documents, or connect an inference model. No global agent/plugin configuration
+was changed. Use the [official Flutter setup guide](https://docs.flutter.dev/ai/get-started)
+for the chosen client; attaching to an unrelated running app is not part of an
+ordinary code edit. Protocol logs are not ordinary diagnostics and can contain
+project/runtime data.
+
+### Genkit: optional backend orchestration
+
+The [Genkit Dart guide](https://genkit.dev/docs/dart/get-started/) places model
+calls, tools and flows in a standalone backend. For OciDeck a useful future flow
+could retrieve approved document passages and return a validated draft with
+source references. Such a backend must define its authentication, wire adapter,
+resource budgets and trace retention. Full prompt/response tracing must not
+silently become another off-device destination. The existing `/v1` request is
+non-streaming and tool-free; Genkit's flow API is not that wire contract.
+
+A localhost address is a transport boundary, not proof of on-device inference.
+For example, [Ollama's compatibility documentation](https://docs.ollama.com/api/openai-compatibility)
+allows a local server to use cloud models after sign-in. Operators must select
+and configure genuinely local models when that privacy guarantee is required;
+the application cannot attest the behavior of a separate server. Existing
+outbound consent and endpoint choices therefore remain relevant.
+
+### MediaPipe: choose and measure a concrete task first
+
+The [official package/platform matrix](https://github.com/google/flutter-mediapipe)
+includes local text/image embeddings, but does not list Intel macOS support;
+text proofreading and summarization are not available on web in that matrix.
+Browser retrieval/decision tasks require a hardware WebGPU adapter. These limits
+matter to OciDeck's desktop and browser distribution. The package provides
+capability queries and explicit model bundling/download controls.
+
+Before adoption, pick one user-facing task and verify Dutch quality, latency,
+peak memory, cancellation, model/source hashes, redistribution notices and the
+supported platform matrix on actual devices. Local image labels are not a
+substitute for a reviewed WCAG alt-description. Retain the existing YuNet
+face-counting and Whisper/transcription routes until a replacement is proven;
+face landmarks and meeting-derived AI also have different data/consent
+contracts. Do not enable runtime model downloads or import a native stack merely
+because the SDK announcement mentions it.
+
+This assessment uses the
+[Flutter 3.50 announcement](https://flutter.dev/blog/whats-new-in-flutter-3-50)
+as the starting point; SDK and ecosystem availability are separate from an
+OciDeck feature being implemented or evaluated.
