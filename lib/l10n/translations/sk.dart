@@ -1545,6 +1545,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Plak logo van klembord': 'Vložiť logo zo schránky',
+  'Plak donker logo van klembord': 'Vložiť tmavé logo zo schránky',
+  'Afwijkend logo': 'Odlišné logo',
+  'Er staat geen afbeelding op het klembord':
+      'V schránke nie je žiadny obrázok',
   'Vanaf deze dia': 'Od tejto snímky',
   'Deckstijl': 'Štýl decku',
   'Geërfd vanaf dia': 'Zdedené od snímky',

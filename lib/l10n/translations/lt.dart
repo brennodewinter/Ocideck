@@ -1548,6 +1548,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Plak logo van klembord': 'Įklijuoti logotipą iš iškarpinės',
+  'Plak donker logo van klembord': 'Įklijuoti tamsų logotipą iš iškarpinės',
+  'Afwijkend logo': 'Kitoks logotipas',
+  'Er staat geen afbeelding op het klembord': 'Iškarpinėje nėra paveikslėlio',
   'Vanaf deze dia': 'Nuo šios skaidrės',
   'Deckstijl': 'Deko stilius',
   'Geërfd vanaf dia': 'Paveldėta nuo skaidrės',

@@ -300,6 +300,69 @@ Future<void> _pickDocumentLogo(_SettingsDialogState state) => _pickStyleLogo(
   apply: (path) => state._themeProfile.copyWith(documentLogoPath: path),
 );
 
+Future<void> _pastePresentationLogo(_SettingsDialogState state) =>
+    _pasteStyleLogo(
+      state,
+      // Zelfde merkstrook-redenatie als bij kiezen: een bewuste wissel ruimt
+      // het ingesloten oude merk op.
+      apply: (path) =>
+          state._themeProfile.copyWith(logoPath: path, clearBrandStrip: true),
+    );
+
+Future<void> _pasteDarkPresentationLogo(_SettingsDialogState state) =>
+    _pasteStyleLogo(
+      state,
+      apply: (path) => state._themeProfile.copyWith(logoDarkPath: path),
+    );
+
+Future<void> _pasteDocumentLogo(_SettingsDialogState state) => _pasteStyleLogo(
+  state,
+  apply: (path) => state._themeProfile.copyWith(documentLogoPath: path),
+);
+
+/// Plak een logo rechtstreeks van het klembord (#3003). Anders dan bij
+/// "Kiezen" is er geen bronbestand om naar te verwijzen; de bytes gaan daarom
+/// door dezelfde duurzame route als een ingesloten logo uit een
+/// `.ocideckstyle`-import (`style_logos/` op desktop, `mem:` op web), zodat
+/// het pad in het opgeslagen profiel na een herstart nog klopt.
+Future<void> _pasteStyleLogo(
+  _SettingsDialogState state, {
+  required ThemeProfile Function(String path) apply,
+}) async {
+  Uint8List? bytes;
+  try {
+    bytes = await Pasteboard.image;
+  } catch (e) {
+    logWarning('SettingsDialog: afbeelding van klembord lezen mislukt', e);
+  }
+  if (!state.mounted) return;
+  final l10n = state.context.l10n;
+  if (bytes == null || bytes.isEmpty) {
+    showErrorSnackBar(
+      ScaffoldMessenger.of(state.context),
+      l10n,
+      l10n.d('Er staat geen afbeelding op het klembord'),
+    );
+    return;
+  }
+  final path = await state.ref
+      .read(fileServiceProvider)
+      .materializeImportedStyleLogo(
+        bytes,
+        profileName: state._themeProfile.name,
+      );
+  if (!state.mounted) return;
+  if (path == null) {
+    _reportRejectedStyleLogo(state);
+    return;
+  }
+  state._rebuild(() {
+    state._themeProfile = apply(path);
+    state._profileTouched = true;
+    rememberStyleEditorMemoryPins(state._themeProfile);
+  });
+}
+
 /// Desktop bewaart het pad. Web leest bytes: `PlatformFile.path` bestaat
 /// daar niet en een blob-adres zou na herladen nergens heen wijzen.
 /// [supportsLocalProjectFolders] is die grens.

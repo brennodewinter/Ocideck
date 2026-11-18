@@ -1534,6 +1534,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Plak logo van klembord': 'Kleebi logo lõikelaualt',
+  'Plak donker logo van klembord': 'Kleebi tume logo lõikelaualt',
+  'Afwijkend logo': 'Erinev logo',
+  'Er staat geen afbeelding op het klembord': 'Lõikelaual pole pilti',
   'Vanaf deze dia': 'Alates sellest slaidist',
   'Deckstijl': 'Deeki stiil',
   'Geërfd vanaf dia': 'Päritud slaidilt',

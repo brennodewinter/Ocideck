@@ -613,6 +613,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Plak logo van klembord': 'Coller le logo du presse-papiers',
+  'Plak donker logo van klembord': 'Coller le logo sombre du presse-papiers',
+  'Afwijkend logo': 'Logo différent',
+  'Er staat geen afbeelding op het klembord':
+      'Il n\'y a pas d\'image dans le presse-papiers',
   'Vanaf deze dia': 'À partir de cette diapositive',
   'Deckstijl': 'Style du deck',
   'Geërfd vanaf dia': 'Hérité depuis la diapositive',

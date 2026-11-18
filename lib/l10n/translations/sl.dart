@@ -1542,6 +1542,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Plak logo van klembord': 'Prilepi logotip iz odložišča',
+  'Plak donker logo van klembord': 'Prilepi temni logotip iz odložišča',
+  'Afwijkend logo': 'Drugačni logotip',
+  'Er staat geen afbeelding op het klembord': 'Na odložišču ni slike',
   'Vanaf deze dia': 'Od te prosojnice',
   'Deckstijl': 'Slog decka',
   'Geërfd vanaf dia': 'Podedovano od prosojnice',

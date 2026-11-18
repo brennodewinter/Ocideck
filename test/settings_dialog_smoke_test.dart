@@ -154,16 +154,19 @@ void main() {
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
 
+      // De logokeuze zelf (met de maat) staat op het algemene vlak: het logo
+      // deelt document en presentatie (#3003). Alleen de positie op de dia is
+      // slide-specifiek en hoort op het presentatievlak.
+      expect(find.text('Logo px'), findsOneWidget);
+
       await tester.tap(find.byKey(const Key('style-surface-presentation')));
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Logo positie'));
       await tester.pumpAndSettle();
 
-      // Positie en grootte horen bij de logokeuze. Het pad zelf is geen anker:
-      // standaard staat er al een logo ingesteld, dus de "geen logo"-tekst
-      // verschijnt nooit.
+      // Het pad zelf is geen anker: standaard staat er al een logo ingesteld,
+      // dus de "geen logo"-tekst verschijnt nooit.
       expect(find.text('Logo positie'), findsOneWidget);
-      expect(find.text('Logo px'), findsOneWidget);
 
       // De footer hoort er náást te staan: die heeft geen bestandssysteem nodig
       // en mag door de logo-poort niet zijn meegesleept.

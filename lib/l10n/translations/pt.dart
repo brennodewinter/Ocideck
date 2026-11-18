@@ -1567,6 +1567,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Plak logo van klembord': 'Colar logótipo da área de transferência',
+  'Plak donker logo van klembord':
+      'Colar logótipo escuro da área de transferência',
+  'Afwijkend logo': 'Logótipo diferente',
+  'Er staat geen afbeelding op het klembord':
+      'Não há nenhuma imagem na área de transferência',
   'Vanaf deze dia': 'A partir deste diapositivo',
   'Deckstijl': 'Estilo do deck',
   'Geërfd vanaf dia': 'Herdado do diapositivo',

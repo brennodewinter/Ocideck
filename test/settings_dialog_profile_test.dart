@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
@@ -12,8 +13,10 @@ import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/document_page_chrome.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
 import 'support/temp_dir.dart';
 
 /// Dekking voor `settings_dialog_profile.dart` — de stijlprofiel-kiezer en
@@ -268,15 +271,19 @@ void main() {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);
 
-    // Algemeen: lettertype, basiskleuren, checklist, tabel, broncode, severity.
+    // Algemeen: lettertype, basiskleuren, checklist, tabel, broncode, severity
+    // én het logo — dat deelt het document immers mee tenzij je afwijkt.
     expect(find.text('Opsommingsteken'), findsOneWidget);
     expect(find.text('Tabelstijl'), findsOneWidget);
     expect(find.text('Syntaxkleuring'), findsOneWidget);
+    expect(find.byKey(const Key('style-logo-preview')), findsOneWidget);
+    expect(find.byKey(const Key('style-logo-paste')), findsOneWidget);
     // …en niets dat maar op één vlak bestaat.
     expect(find.textContaining('Titelachtergrond'), findsNothing);
     expect(find.text('Activatieduur'), findsNothing);
     expect(find.byKey(const Key('document-logo-shared')), findsNothing);
     expect(find.byKey(const Key('document-body-font-size')), findsNothing);
+    expect(find.byKey(const Key('style-logo-position')), findsNothing);
 
     await openSurface(tester, 'document');
     expect(find.byKey(const Key('document-logo-shared')), findsOneWidget);
@@ -284,12 +291,16 @@ void main() {
     expect(find.text('Opsommingsteken'), findsNothing);
     expect(find.textContaining('Titelachtergrond'), findsNothing);
     expect(find.text('Activatieduur'), findsNothing);
+    expect(find.byKey(const Key('style-logo-preview')), findsNothing);
 
     await openSurface(tester, 'presentation');
     expect(find.textContaining('Titelachtergrond'), findsOneWidget);
     expect(find.text('Activatieduur'), findsOneWidget);
+    // Alleen wat écht slide-only is blijft: de positie van het logo op de dia.
+    expect(find.byKey(const Key('style-logo-position')), findsOneWidget);
     expect(find.text('Opsommingsteken'), findsNothing);
     expect(find.byKey(const Key('document-logo-shared')), findsNothing);
+    expect(find.byKey(const Key('style-logo-preview')), findsNothing);
   });
 
   // Een sprong vanuit het kwaliteitspaneel wijst een kleurveld aan, en dat
@@ -366,14 +377,61 @@ void main() {
     await tester.pump(const Duration(seconds: 4));
   });
 
+  // Het logo geldt voor document én presentatie, dus de kiezer staat op het
+  // algemene vlak — niet op het presentatievlak waar hij eerst stond (#3003).
   testWidgets('het gekozen logo staat naast de logokiezer', (tester) async {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);
 
     await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
-    await openSurface(tester, 'presentation');
 
     expect(find.byKey(const Key('style-logo-preview')), findsOneWidget);
+  });
+
+  // Naast "Kiezen" moet "Plakken" een logo rechtstreeks van het klembord
+  // overnemen en hetzelfde traject volgen als een geïmporteerd logo: een
+  // duurzaam bestand onder style_logos, geen tijdelijk pad (#3003).
+  testWidgets('logo plakken zet het klembordbeeld in het profiel', (
+    tester,
+  ) async {
+    final support = Directory.systemTemp.createTempSync('style_logo_paste');
+    addTearDown(() => deleteTempDir(support));
+    final previousPaths = PathProviderPlatform.instance;
+    PathProviderPlatform.instance = _StyleLogoPaths(support.path);
+    addTearDown(() => PathProviderPlatform.instance = previousPaths);
+
+    const pasteboard = MethodChannel('pasteboard');
+    final logoBytes = base64Decode(
+      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=',
+    );
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      pasteboard,
+      (call) async => call.method == 'image' ? logoBytes : null,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        pasteboard,
+        null,
+      ),
+    );
+
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    await tester.ensureVisible(find.byKey(const Key('style-logo-paste')));
+    await tester.tap(find.byKey(const Key('style-logo-paste')));
+    // De schrijfactie is echte schijf-IO (writeBytesAtomic legt eerst een
+    // .tmp neer): wachten op de uitkomst in de boom — het materialiseerde
+    // pad in de pad-box — en niet op een klokgok of een tussenstadium.
+    await pumpUntil(
+      tester,
+      () => find.textContaining('style_logos').evaluate().isNotEmpty,
+      reason: 'het geplakte logo werd niet in de pad-box getoond',
+    );
+
+    final logos = Directory('${support.path}/style_logos').listSync();
+    expect(logos, hasLength(1));
+    expect(find.textContaining('style_logos'), findsOneWidget);
   });
 
   testWidgets('document deelt standaard het presentatielogo en kan afwijken', (
@@ -569,4 +627,13 @@ void main() {
     );
     expect(narrowPreview.dy, greaterThan(narrowEditor.dy));
   });
+}
+
+class _StyleLogoPaths extends PathProviderPlatform {
+  _StyleLogoPaths(this.supportPath);
+
+  final String supportPath;
+
+  @override
+  Future<String?> getApplicationSupportPath() async => supportPath;
 }

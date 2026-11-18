@@ -47,9 +47,15 @@ Map<_StyleSurface, List<String>> _surfaceSections(AppLocalizations l10n) => {
     l10n.d('Tabel'),
     l10n.d('Broncode'),
     l10n.d('Severity (bevindingen)'),
+    l10n.d('Logo'),
   ],
-  _StyleSurface.document: [l10n.d('Tekst'), l10n.d('Logo'), l10n.d('Koptekst')],
+  _StyleSurface.document: [
+    l10n.d('Tekst'),
+    l10n.d('Afwijkend logo'),
+    l10n.d('Koptekst'),
+  ],
   _StyleSurface.presentation: [
+    l10n.d('Logo positie'),
     l10n.d('Footer'),
     l10n.d('Laatste slide'),
     l10n.d('Animatie'),
@@ -63,7 +69,6 @@ const _slideOnlyThemeFields = {
   'titleBackgroundColor',
   'titleTextColor',
   'sectionBackgroundColor',
-  'logoPath',
 };
 
 /// Dezelfde uitzonderingslijst, maar voor het documentvlak: de kopkleur van een
@@ -116,7 +121,9 @@ class _DocumentStyleBuilder {
     Map<String, SlideQualityIssue> contrast,
   ) => owner._colorWithContrastWarning(colorSetting, field, contrast);
   List<Widget> _animationSettings() => owner._animationSettings();
-  List<Widget> _slideLogoChildren() => owner._slideLogoChildren();
+  List<Widget> _sharedLogoChildren() => owner._sharedLogoChildren();
+  List<Widget> _slideLogoPositionChildren() =>
+      owner._slideLogoPositionChildren();
   List<Widget> _footerSettings() => owner._footerSettings();
   List<Widget> _closingSlideSettings() => owner._closingSlideSettings();
 
@@ -356,6 +363,10 @@ class _DocumentStyleBuilder {
           ),
           _presentationStyleDivider(l10n.d('Kleuren')),
           ..._generalColorChildren(),
+          // Het logo deelt het documentvlak mee — alleen een afwijkend
+          // documentlogo en de positie op de dia staan op de eigen vlakken.
+          _presentationStyleDivider(l10n.d('Logo')),
+          ..._sharedLogoChildren(),
         ],
       ),
     ),
@@ -413,8 +424,8 @@ class _DocumentStyleBuilder {
                 contrast,
               ),
             ),
-            _presentationStyleDivider(l10n.d('Logo')),
-            ..._documentLogoSettings(l10n),
+            _presentationStyleDivider(l10n.d('Afwijkend logo')),
+            ..._documentLogoSettings(this, l10n),
             _presentationStyleDivider(l10n.d('Koptekst')),
             ..._documentChromeSettings(l10n, contrast),
           ],
@@ -463,133 +474,6 @@ class _DocumentStyleBuilder {
           'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.',
         ),
         style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-      ),
-    ];
-  }
-
-  List<Widget> _documentLogoSettings(AppLocalizations l10n) {
-    final shared = _themeProfile.documentLogoPath == null;
-    return [
-      SwitchListTile(
-        key: const Key('document-logo-shared'),
-        value: shared,
-        onChanged: (value) => _rebuild(() {
-          _themeProfile = value
-              ? _themeProfile.copyWith(clearDocumentLogoOverride: true)
-              : _themeProfile.copyWith(
-                  documentLogoPath: _themeProfile.logoPath ?? '',
-                );
-          _profileTouched = true;
-        }),
-        title: Text(
-          '${l10n.d('Logo')}: ${l10n.d('Presentatie')} + ${l10n.d('Document')}',
-          style: const TextStyle(fontSize: 13),
-        ),
-        contentPadding: EdgeInsets.zero,
-        dense: true,
-      ),
-      if (!shared) ...[
-        Row(
-          children: [
-            Container(
-              key: const Key('document-logo-preview'),
-              width: 64,
-              height: 52,
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: AppTheme.slate100,
-                borderRadius: BorderRadius.circular(7),
-                border: Border.all(color: AppTheme.slate300),
-              ),
-              child: ThemeProfileLogo(
-                profile: _themeProfile,
-                logoPath: _themeProfile.documentLogoPath,
-                width: 54,
-                height: 42,
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: owner._pathBox(
-                _themeProfile.documentLogoPath?.isNotEmpty == true
-                    ? owner._profileImageLabel(_themeProfile.documentLogoPath!)
-                    : l10n.d('Geen logo ingesteld'),
-                muted: _themeProfile.documentLogoPath?.isNotEmpty != true,
-              ),
-            ),
-            const SizedBox(width: 8),
-            ElevatedButton.icon(
-              onPressed: () => _pickDocumentLogo(owner),
-              icon: const Icon(Icons.image_outlined, size: 16),
-              label: Text(l10n.d('Kiezen')),
-            ),
-            if (_themeProfile.documentLogoPath?.isNotEmpty == true)
-              IconButton(
-                onPressed: () => _rebuild(() {
-                  _themeProfile = _themeProfile.copyWith(documentLogoPath: '');
-                  _profileTouched = true;
-                }),
-                icon: const Icon(Icons.clear, size: 18),
-                tooltip: l10n.d('Verwijder logo'),
-              ),
-          ],
-        ),
-        const SizedBox(height: 14),
-      ],
-      DropdownButtonFormField<String>(
-        key: const Key('document-logo-position'),
-        isExpanded: true,
-        initialValue: _themeProfile.documentLogoPosition,
-        decoration: InputDecoration(
-          labelText: l10n.d('Logo positie'),
-          isDense: true,
-        ),
-        items: [
-          DropdownMenuItem(
-            value: 'top-left',
-            child: Text(l10n.d('Linksboven')),
-          ),
-          DropdownMenuItem(
-            value: 'top-right',
-            child: Text(l10n.d('Rechtsboven')),
-          ),
-          DropdownMenuItem(
-            value: 'bottom-left',
-            child: Text(l10n.d('Linksonder')),
-          ),
-          DropdownMenuItem(
-            value: 'bottom-right',
-            child: Text(l10n.d('Rechtsonder')),
-          ),
-        ],
-        onChanged: (value) {
-          if (value == null) return;
-          _rebuild(() {
-            _themeProfile = _themeProfile.copyWith(documentLogoPosition: value);
-            _profileTouched = true;
-          });
-        },
-      ),
-      const SizedBox(height: 12),
-      TextFormField(
-        key: Key('document-logo-size-${_themeProfile.name}'),
-        initialValue: _themeProfile.effectiveDocumentLogoSize.toString(),
-        decoration: InputDecoration(
-          labelText: l10n.d('Logo px'),
-          isDense: true,
-        ),
-        keyboardType: TextInputType.number,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        onChanged: (raw) {
-          final size = int.tryParse(raw);
-          if (size == null) return;
-          _rebuild(() {
-            _themeProfile = _themeProfile.copyWith(
-              documentLogoSize: size.clamp(32, 480),
-            );
-            _profileTouched = true;
-          });
-        },
       ),
     ];
   }
@@ -696,8 +580,8 @@ class _DocumentStyleBuilder {
           _sectionTitle(l10n.d('Kleuren')),
           const SizedBox(height: 8),
           ..._slideColorChildren(),
-          _presentationStyleDivider(l10n.d('Logo')),
-          ..._slideLogoChildren(),
+          _presentationStyleDivider(l10n.d('Logo positie')),
+          ..._slideLogoPositionChildren(),
           _presentationStyleDivider(l10n.d('Footer')),
           ..._footerSettings(),
           _presentationStyleDivider(l10n.d('Laatste slide')),
@@ -756,4 +640,157 @@ class _DocumentStyleBuilder {
       ),
     );
   }
+}
+
+/// Het afwijkende documentlogo: gedeeld-schakelaar plus, bij een eigen
+/// keuze, kiezer/plakker/verwijderaar en een eigen positie en maat.
+/// Top-level: houdt _DocumentStyleBuilder binnen zijn klasseplafond.
+List<Widget> _documentLogoSettings(
+  _DocumentStyleBuilder builder,
+  AppLocalizations l10n,
+) {
+  final shared = builder._themeProfile.documentLogoPath == null;
+  return [
+    SwitchListTile(
+      key: const Key('document-logo-shared'),
+      value: shared,
+      onChanged: (value) => builder._rebuild(() {
+        builder._themeProfile = value
+            ? builder._themeProfile.copyWith(clearDocumentLogoOverride: true)
+            : builder._themeProfile.copyWith(
+                documentLogoPath: builder._themeProfile.logoPath ?? '',
+              );
+        builder._profileTouched = true;
+      }),
+      title: Text(
+        '${l10n.d('Logo')}: ${l10n.d('Presentatie')} + ${l10n.d('Document')}',
+        style: const TextStyle(fontSize: 13),
+      ),
+      contentPadding: EdgeInsets.zero,
+      dense: true,
+    ),
+    if (!shared) ...[
+      Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                key: const Key('document-logo-preview'),
+                width: 64,
+                height: 52,
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: AppTheme.slate100,
+                  borderRadius: BorderRadius.circular(7),
+                  border: Border.all(color: AppTheme.slate300),
+                ),
+                child: ThemeProfileLogo(
+                  profile: builder._themeProfile,
+                  logoPath: builder._themeProfile.documentLogoPath,
+                  width: 54,
+                  height: 42,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: builder.owner._pathBox(
+                  builder._themeProfile.documentLogoPath?.isNotEmpty == true
+                      ? builder.owner._profileImageLabel(
+                          builder._themeProfile.documentLogoPath!,
+                        )
+                      : l10n.d('Geen logo ingesteld'),
+                  muted:
+                      builder._themeProfile.documentLogoPath?.isNotEmpty !=
+                      true,
+                ),
+              ),
+            ],
+          ),
+          OverflowBar(
+            alignment: MainAxisAlignment.end,
+            spacing: 4,
+            children: [
+              ElevatedButton.icon(
+                onPressed: () => _pickDocumentLogo(builder.owner),
+                icon: const Icon(Icons.image_outlined, size: 16),
+                label: Text(l10n.d('Kiezen')),
+              ),
+              Tooltip(
+                message: l10n.d('Plak logo van klembord'),
+                child: OutlinedButton.icon(
+                  key: const Key('document-logo-paste'),
+                  onPressed: () => _pasteDocumentLogo(builder.owner),
+                  icon: const Icon(Icons.content_paste, size: 16),
+                  label: Text(l10n.d('Plakken')),
+                ),
+              ),
+              if (builder._themeProfile.documentLogoPath?.isNotEmpty == true)
+                IconButton(
+                  onPressed: () => builder._rebuild(() {
+                    builder._themeProfile = builder._themeProfile.copyWith(
+                      documentLogoPath: '',
+                    );
+                    builder._profileTouched = true;
+                  }),
+                  icon: const Icon(Icons.clear, size: 18),
+                  tooltip: l10n.d('Verwijder logo'),
+                ),
+            ],
+          ),
+        ],
+      ),
+      const SizedBox(height: 14),
+    ],
+    DropdownButtonFormField<String>(
+      key: const Key('document-logo-position'),
+      isExpanded: true,
+      initialValue: builder._themeProfile.documentLogoPosition,
+      decoration: InputDecoration(
+        labelText: l10n.d('Logo positie'),
+        isDense: true,
+      ),
+      items: [
+        DropdownMenuItem(value: 'top-left', child: Text(l10n.d('Linksboven'))),
+        DropdownMenuItem(
+          value: 'top-right',
+          child: Text(l10n.d('Rechtsboven')),
+        ),
+        DropdownMenuItem(
+          value: 'bottom-left',
+          child: Text(l10n.d('Linksonder')),
+        ),
+        DropdownMenuItem(
+          value: 'bottom-right',
+          child: Text(l10n.d('Rechtsonder')),
+        ),
+      ],
+      onChanged: (value) {
+        if (value == null) return;
+        builder._rebuild(() {
+          builder._themeProfile = builder._themeProfile.copyWith(
+            documentLogoPosition: value,
+          );
+          builder._profileTouched = true;
+        });
+      },
+    ),
+    const SizedBox(height: 12),
+    TextFormField(
+      key: Key('document-logo-size-${builder._themeProfile.name}'),
+      initialValue: builder._themeProfile.effectiveDocumentLogoSize.toString(),
+      decoration: InputDecoration(labelText: l10n.d('Logo px'), isDense: true),
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      onChanged: (raw) {
+        final size = int.tryParse(raw);
+        if (size == null) return;
+        builder._rebuild(() {
+          builder._themeProfile = builder._themeProfile.copyWith(
+            documentLogoSize: size.clamp(32, 480),
+          );
+          builder._profileTouched = true;
+        });
+      },
+    ),
+  ];
 }

@@ -1565,6 +1565,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Plak logo van klembord': 'Επικόλληση λογότυπου από το πρόχειρο',
+  'Plak donker logo van klembord':
+      'Επικόλληση σκούρου λογότυπου από το πρόχειρο',
+  'Afwijkend logo': 'Διαφορετικό λογότυπο',
+  'Er staat geen afbeelding op het klembord': 'Δεν υπάρχει εικόνα στο πρόχειρο',
   'Vanaf deze dia': 'Από αυτή τη διαφάνεια',
   'Deckstijl': 'Στυλ deck',
   'Geërfd vanaf dia': 'Κληρονομήθηκε από τη διαφάνεια',

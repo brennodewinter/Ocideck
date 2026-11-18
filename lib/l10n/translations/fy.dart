@@ -613,6 +613,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Plak logo van klembord': 'Plak logo fan klamboerd',
+  'Plak donker logo van klembord': 'Plak tsjuster logo fan klamboerd',
+  'Afwijkend logo': 'Ofwijkend logo',
+  'Er staat geen afbeelding op het klembord':
+      'Der stiet gjin ôfbylding op it klamboerd',
   'Vanaf deze dia': 'Fanôf dizze dia',
   'Deckstijl': 'Deckstyl',
   'Geërfd vanaf dia': 'Oerfd fanôf dia',

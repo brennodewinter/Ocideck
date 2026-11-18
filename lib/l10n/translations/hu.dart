@@ -1543,6 +1543,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Plak logo van klembord': 'Logó beillesztése a vágólapról',
+  'Plak donker logo van klembord': 'Sötét logó beillesztése a vágólapról',
+  'Afwijkend logo': 'Eltérő logó',
+  'Er staat geen afbeelding op het klembord': 'Nincs kép a vágólapon',
   'Vanaf deze dia': 'Ettől a diától',
   'Deckstijl': 'Deck stílusa',
   'Geërfd vanaf dia': 'Örökölve a diától',

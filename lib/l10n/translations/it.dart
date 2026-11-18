@@ -611,6 +611,11 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Plak logo van klembord': 'Incolla logo dagli appunti',
+  'Plak donker logo van klembord': 'Incolla logo scuro dagli appunti',
+  'Afwijkend logo': 'Logo diverso',
+  'Er staat geen afbeelding op het klembord':
+      'Negli appunti non c\'è alcuna immagine',
   'Vanaf deze dia': 'Da questa diapositiva',
   'Deckstijl': 'Stile del deck',
   'Geërfd vanaf dia': 'Ereditato dalla diapositiva',

@@ -2398,6 +2398,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Plak logo van klembord': 'Logoyu panodan yapıştır',
+  'Plak donker logo van klembord': 'Koyu logoyu panodan yapıştır',
+  'Afwijkend logo': 'Farklı logo',
+  'Er staat geen afbeelding op het klembord': 'Panoda resim yok',
   'Vanaf deze dia': 'Bu slayttan itibaren',
   'Deckstijl': 'Deck stili',
   'Geërfd vanaf dia': 'Slayttan devralındı',

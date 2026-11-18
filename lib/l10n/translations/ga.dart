@@ -1570,6 +1570,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Plak logo van klembord': 'Greamaigh lógó ón ngearrthaisce',
+  'Plak donker logo van klembord': 'Greamaigh lógó dorcha ón ngearrthaisce',
+  'Afwijkend logo': 'Lógó difriúil',
+  'Er staat geen afbeelding op het klembord': 'Níl íomhá ar an ngearrthaisce',
   'Vanaf deze dia': 'Ón sleamhnán seo',
   'Deckstijl': 'Stíl deice',
   'Geërfd vanaf dia': 'Oidhreacht ón sleamhnán',
