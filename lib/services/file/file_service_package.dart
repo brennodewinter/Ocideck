@@ -12,7 +12,15 @@ Future<void> _addThemeCssArchiveMembers(
   ThemeProfile profile,
   String? logoRel,
   String? brandStripRel,
+  Map<String, _PackedThemeAssets> packedStyles,
 ) async {
+  // De stijl-sidecars hangen niet af van de thema-CSS: faalt die bundel
+  // (misbundelde asset), dan reist het stijlrecord nog steeds mee — bij
+  // herimport is dat het verschil tussen stijl terug en stijl weg.
+  _addCarriedStyleMember(archive, profile);
+  _addCarriedStylesMember(archive, {
+    for (final e in packedStyles.entries) e.key: e.value.profile,
+  });
   final css = await service._packageThemeCss(
     deck.theme,
     profile,
@@ -21,7 +29,18 @@ Future<void> _addThemeCssArchiveMembers(
     deck.slideSize,
   );
   if (css == null) return;
-  final cssBytes = utf8.encode(css);
+  // Per gebruikte diastijl een gescope variant (#2996): het stijltoken staat
+  // in de `_class` van elke dia in zijn bereik, dus `section.stijl-…` rendert
+  // onder dat profiel — ook in kale Marp. De basisregels blijven ongemoeid,
+  // want de gescope selectors winnen op specificiteit.
+  final buffer = StringBuffer(css);
+  for (final entry in packedStyles.entries) {
+    buffer.write(
+      '\n/* OciDeck style profile "${entry.key}" */\n'
+      '${scopeThemeCss(service._profileThemeCss(entry.value.profile, entry.value.logoRel == null ? null : '../${entry.value.logoRel}', entry.value.brandStripRel == null ? null : '../${entry.value.brandStripRel}', deck.slideSize), root: 'section', token: slideStyleClassToken(entry.key))}',
+    );
+  }
+  final cssBytes = utf8.encode(buffer.toString());
   final themeName = _safeThemeName(deck.theme);
   archive.add(ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes));
   final cfgBytes = utf8.encode(
@@ -33,7 +52,22 @@ Future<void> _addThemeCssArchiveMembers(
     '  - themes/$themeName.css\n',
   );
   archive.add(ArchiveFile('.marprc.yml', cfgBytes.length, cfgBytes));
-  _addCarriedStyleMember(archive, profile);
+}
+
+/// Voegt het stijltoken van [styleName] aan de `_class` van [slide] toe —
+/// alleen voor de pakket-markdown (#2996), niet voor de bron: in het `.md`
+/// is `ocideck_style` de drager, in het pakket is de `_class` het wat kale
+/// Marp aan de gescope CSS koppelt.
+Slide _slideWithStyleClassToken(Slide slide, String? styleName) {
+  if (styleName == null) return slide;
+  final base = slide.cssClass.isNotEmpty
+      ? slide.cssClass
+      : slide.type.marpClass;
+  final merged = [
+    if (base.isNotEmpty) base,
+    slideStyleClassToken(styleName),
+  ].join(' ');
+  return slide.copyWith(cssClass: merged);
 }
 
 ThemeProfile _profileWithPackageAssets(
@@ -65,6 +99,12 @@ class _PackedThemeAssets {
 
 /// Sidecar naast de markdown: de stijl van dit pakket, zonder lokale paden.
 const carriedStyleFileName = 'ocideck-style.json';
+
+/// De meegedragen dia-stijlen van de stijlwissel (#2996), als
+/// `{profielnaam → stijlrecord}` in dezelfde vorm als [carriedStyleFileName].
+/// Apart lid, niet een veld in het basisrecord: een oudere OciDeck leest
+/// `ocideck-style.json` als profielmap en zou een wrapper stil leeg trekken.
+const carriedStylesFileName = 'ocideck-styles.json';
 
 const _carriedStyleMaxBytes = 256 * 1024;
 
@@ -448,10 +488,32 @@ extension FileServicePackage on FileService {
     final themeAssets = await _packThemeAssets(deck.themeProfile, addAsset);
     final profile = themeAssets.profile;
 
+    // De dia-stijlen van de stijlwissel (#2996): elk gebruikt profiel pakt
+    // zijn eigen logo's/merkstrook mee en krijgt een gescope CSS-variant.
+    final packedStyles = <String, _PackedThemeAssets>{};
+    for (final name in usedSlideStyleNames(deck.slides)) {
+      final style = deck.slideStyles[name];
+      if (style != null) {
+        packedStyles[name] = await _packThemeAssets(style, addAsset);
+      }
+    }
+
     final packedDeckStyle = await _packDeckBackground(deck, addAsset);
     final packDeck = deck.copyWith(
-      slides: packedSlides,
+      // Kale Marp kent `ocideck_style` niet; elke dia in een bereik draagt
+      // daarom het stijltoken in zijn `_class`, zodat de gescope CSS hem raakt.
+      // De markering blijft óók staan — bij herimport herstelt ze de ranges.
+      slides: [
+        for (var i = 0; i < packedSlides.length; i++)
+          _slideWithStyleClassToken(
+            packedSlides[i],
+            slideStyleNameAt(packedSlides, i),
+          ),
+      ],
       themeProfile: profile,
+      slideStyles: {
+        for (final e in packedStyles.entries) e.key: e.value.profile,
+      },
       marpStyle: packedDeckStyle,
     );
 
@@ -477,6 +539,7 @@ extension FileServicePackage on FileService {
       profile,
       themeAssets.logoRel,
       themeAssets.brandStripRel,
+      packedStyles,
     );
 
     // Cumulative guard over every member (markdown, sidecars, theme CSS and

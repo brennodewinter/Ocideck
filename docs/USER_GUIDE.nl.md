@@ -2448,6 +2448,21 @@ Een deck op *accepteren* (de hele briefing is bekend) met één dia op *weglaten
 (dit ene detail is voor niemand) moet gewoon werken, en de auteur van die dia weet
 het het beste.
 
+### Stijl vanaf een dia (#2996)
+
+Naast de deckstijl — één profiel voor het hele deck, in de kop van de editor —
+staat in **Dia-instellingen** een aparte groep *Vanaf deze dia*. Kies daar een
+ander stijlprofiel en dat geldt **vanaf die dia tot een volgende wissel**: het
+hoort bewust niet onder *Op deze slide*, omdat de keuze voorwaarts werkt op
+elke volgende dia. *Deckstijl* in dezelfde keuze beëindigt een lopend bereik.
+Een dia zonder eigen keuze toont waar zijn stijl vandaan komt ("geërfd vanaf
+dia N"), en elke dia waar een bereik begint draagt de profielnaam als badge.
+Miniaturen, overzicht, presentator, zaalscherm en elke export tonen en
+bewaren de wissel; in de Markdown reist hij als
+`<!-- ocideck_style: <profielnaam> -->`, een commentaar dat andere Marp-tools
+rustig negeren. Noemt de markering een profiel dat hier niet bestaat, dan
+rendert de dia in de deckstijl — nooit een fout, nooit verlies van tekst.
+
 ### OpenKAT-rapporten importeren (desktop)
 
 *(Gewijzigd 2026-08-03, #1158: OpenKAT is nu een eigen integratie met een eigen

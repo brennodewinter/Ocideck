@@ -24,6 +24,8 @@ import '../models/slide.dart';
 import '../models/marp_style.dart';
 import '../models/page_size.dart';
 import '../models/slide_format.dart';
+import '../models/slide_style.dart';
+import 'theme_css_scope.dart';
 import '../platform/platform_features.dart';
 import '../utils/archive_limits.dart';
 import '../utils/asset_destination.dart';
@@ -351,6 +353,7 @@ class FileService {
   final MarkdownService _md;
   final ImageService _img;
   final ThemeProfile Function() _themeProfile;
+  final List<ThemeProfile> Function() _themeProfiles;
   final String Function() _languageCode;
   final String? Function() _homeDirectory;
   final List<String> Function() _libraryPaths;
@@ -384,10 +387,12 @@ class FileService {
     this._img,
     this._themeProfile, {
     String Function()? languageCode,
+    List<ThemeProfile> Function()? themeProfiles,
     String? Function()? homeDirectory,
     List<String> Function()? libraryPaths,
     SaveDestinationPicker? saveDestination,
   }) : _languageCode = languageCode ?? (() => 'nl'),
+       _themeProfiles = themeProfiles ?? (() => const []),
        _homeDirectory = homeDirectory ?? (() => null),
        _libraryPaths = libraryPaths ?? (() => const []),
        _saveDestination = saveDestination ?? _systemSaveDestination;
@@ -827,6 +832,13 @@ class FileService {
         carried,
         projectPath: parsed.projectPath,
       ),
+      // De stijlmarkeringen (#2996) wijzen naar profielnamen; los ze op tegen
+      // de meegedragen stijlen van een pakket en daarna de instellingenlijst.
+      slideStyles: resolveSlideStyles(
+        parsed.slides,
+        projectPath: parsed.projectPath,
+        seed: await carriedProjectStyles(parsed.projectPath),
+      ),
     );
     final chartWarnings = <String>[];
     final skipped = <String>[];
@@ -1063,7 +1075,10 @@ class FileService {
     // zijn eigen, keurig opgeslagen werk.
     // Inhoud draagt geen opmaak; pas het actieve stijlprofiel toe bij openen.
     return (
-      deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),
+      deck: parsed.copyWith(
+        themeProfile: activeProfileFor(projectPath: null),
+        slideStyles: resolveSlideStyles(parsed.slides),
+      ),
       failure: null,
       safetyFindings: null,
     );

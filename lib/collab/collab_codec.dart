@@ -235,6 +235,7 @@ Map<String, Object?> slideToJson(Slide s) => {
   'improvementLayout': s.improvementLayout,
   'anchor': s.anchor,
   'nextAnchor': s.nextAnchor,
+  'styleName': s.styleName,
   'ganttScale': s.ganttScale,
   'ganttSections': s.ganttSections,
   'menuLayout': s.menuLayout.name,
@@ -361,6 +362,7 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
   improvementLayout: _str(j, 'improvementLayout'),
   anchor: j['anchor'] == null ? '' : _str(j, 'anchor'),
   nextAnchor: j['nextAnchor'] == null ? '' : _str(j, 'nextAnchor'),
+  styleName: j['styleName'] == null ? '' : _str(j, 'styleName'),
   ganttScale: j['ganttScale'] == null ? ganttScaleAuto : _str(j, 'ganttScale'),
   ganttSections: j['ganttSections'] == null ? false : _bool(j, 'ganttSections'),
   menuLayout: j['menuLayout'] == null
@@ -542,6 +544,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.advanceDuration: _ValueKind.real,
   SlideField.anchor: _ValueKind.str,
   SlideField.nextAnchor: _ValueKind.str,
+  SlideField.styleName: _ValueKind.str,
   SlideField.ganttScale: _ValueKind.str,
   SlideField.ganttSections: _ValueKind.boolean,
   SlideField.menuLayout: _ValueKind.menuLayout,

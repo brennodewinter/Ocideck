@@ -29,6 +29,7 @@ import '../../models/presentation_timing.dart';
 import '../../models/playback.dart';
 import '../../models/slide.dart';
 import '../../models/slide_format.dart';
+import '../../models/slide_style.dart';
 import '../../models/page_size.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
@@ -158,6 +159,10 @@ class FullscreenPresenter extends StatefulWidget {
   final List<Slide> slides;
   final String? projectPath;
   final ThemeProfile themeProfile;
+
+  /// De opgeloste profielen van de stijlwissels (#2996), op naam uit
+  /// [Deck.slideStyles] — de beamer kan zelf niets opzoeken, dus ze reizen mee.
+  final Map<String, ThemeProfile> slideStyles;
   final MarpStyle marpStyle;
   final CockpitColorScheme cockpitColorScheme;
   final int initialIndex;
@@ -260,6 +265,7 @@ class FullscreenPresenter extends StatefulWidget {
     required this.slides,
     required this.projectPath,
     required this.themeProfile,
+    this.slideStyles = const {},
     this.marpStyle = const MarpStyle(),
     this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.initialIndex,
@@ -361,6 +367,7 @@ class FullscreenPresenter extends StatefulWidget {
         projectPath: projectPath,
         remoteAssetBase: remoteAssetBase,
         themeProfile: themeProfile,
+        slideStyles: deck.slideStyles,
         marpStyle: deck.marpStyle,
         cockpitColorScheme: cockpitColorScheme,
         initialIndex: initialIndex,
@@ -394,6 +401,7 @@ class FullscreenPresenter extends StatefulWidget {
         projectPath: projectPath,
         remoteAssetBase: remoteAssetBase,
         themeProfile: themeProfile,
+        slideStyles: deck.slideStyles,
         marpStyle: deck.marpStyle,
         cockpitColorScheme: cockpitColorScheme,
         initialIndex: initialIndex,
@@ -429,6 +437,7 @@ class FullscreenPresenter extends StatefulWidget {
     required String? projectPath,
     String? remoteAssetBase,
     required ThemeProfile themeProfile,
+    Map<String, ThemeProfile> slideStyles = const {},
     MarpStyle marpStyle = const MarpStyle(),
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
@@ -477,6 +486,7 @@ class FullscreenPresenter extends StatefulWidget {
                 slides: slides,
                 projectPath: projectPath,
                 themeProfile: themeProfile,
+                slideStyles: slideStyles,
                 marpStyle: marpStyle,
                 cockpitColorScheme: cockpitColorScheme,
                 initialIndex: initialIndex,
@@ -526,6 +536,7 @@ class FullscreenPresenter extends StatefulWidget {
     required String? projectPath,
     String? remoteAssetBase,
     required ThemeProfile themeProfile,
+    Map<String, ThemeProfile> slideStyles = const {},
     MarpStyle marpStyle = const MarpStyle(),
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
@@ -566,6 +577,7 @@ class FullscreenPresenter extends StatefulWidget {
       showClassificationWatermark: showClassificationWatermark,
       allowRemoteMedia: allowRemoteMedia,
       themeProfile: themeProfile,
+      slideStyles: slideStyles,
       marpStyle: marpStyle,
       cockpitColorScheme: cockpitColorScheme,
       slideSize: slideSize,
@@ -610,6 +622,7 @@ class FullscreenPresenter extends StatefulWidget {
           projectPath: projectPath,
           remoteAssetBase: remoteAssetBase,
           themeProfile: themeProfile,
+          slideStyles: slideStyles,
           marpStyle: marpStyle,
           cockpitColorScheme: cockpitColorScheme,
           initialIndex: initialIndex,
@@ -651,6 +664,7 @@ class FullscreenPresenter extends StatefulWidget {
       projectPath: projectPath,
       remoteAssetBase: remoteAssetBase,
       themeProfile: themeProfile,
+      slideStyles: slideStyles,
       marpStyle: marpStyle,
       cockpitColorScheme: cockpitColorScheme,
       initialIndex: initialIndex,

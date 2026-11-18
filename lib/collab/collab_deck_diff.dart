@@ -210,6 +210,7 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.advanceDuration => slide.advanceDuration,
     SlideField.anchor => slide.anchor,
     SlideField.nextAnchor => slide.nextAnchor,
+    SlideField.styleName => slide.styleName,
     SlideField.ganttScale => slide.ganttScale,
     SlideField.ganttSections => slide.ganttSections,
     SlideField.menuLayout => slide.menuLayout,

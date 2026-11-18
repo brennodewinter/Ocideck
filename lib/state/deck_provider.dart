@@ -73,6 +73,7 @@ final fileServiceProvider = Provider<FileService>((ref) {
     ref.read(markdownServiceProvider),
     ref.read(imageServiceProvider),
     () => ref.read(settingsProvider).themeProfile,
+    themeProfiles: () => ref.read(settingsProvider).themeProfiles,
     languageCode: () => ref.read(settingsProvider).languageCode,
     homeDirectory: () => ref.read(settingsProvider).homeDirectory,
     libraryPaths: () => ref.read(settingsProvider).libraryPaths,
@@ -770,11 +771,20 @@ class DeckNotifier extends StateNotifier<DeckState> {
   void applyCollabDeck(Deck deck, {bool bumpRevision = true}) {
     if (state.deck == null) return;
     state = state.copyWith(
-      deck: deck,
+      // Wisselnamen van een medeauteur resolven opnieuw (#2996).
+      deck: deck.copyWith(slideStyles: _resolvedSlideStyles(deck, deck.slides)),
       isDirty: true,
       revision: bumpRevision ? state.revision + 1 : state.revision,
     );
   }
+
+  /// Per-dia stijlprofielen herresolven na een markeringswijziging (#2996).
+  Map<String, ThemeProfile> _resolvedSlideStyles(Deck deck, List<Slide> s) =>
+      _file.resolveSlideStyles(
+        s,
+        projectPath: deck.projectPath,
+        seed: deck.slideStyles,
+      );
 
   void setUserNoteForSlide(
     String slideId,

@@ -191,6 +191,7 @@ String _audienceWindowArguments({
   required bool showClassificationWatermark,
   required bool allowRemoteMedia,
   required ThemeProfile themeProfile,
+  required Map<String, ThemeProfile> slideStyles,
   required MarpStyle marpStyle,
   required CockpitColorScheme cockpitColorScheme,
 }) => jsonEncode({
@@ -204,6 +205,11 @@ String _audienceWindowArguments({
   // Styling travels beside the readable Markdown because the audience window
   // has no other source for the active profiles.
   beamerStyleProfileKey: themeProfile.toJson(),
+  // De diastijlen van de stijlwissel (#2996): per naam het hele profiel — het
+  // publieksscherm heeft geen instellingen om ze zelf op te zoeken.
+  beamerStyleProfilesKey: {
+    for (final e in slideStyles.entries) e.key: e.value.toJson(),
+  },
   'marpStyle': marpStyle.toJson(),
   'cockpitColorScheme': cockpitColorScheme.toJson(),
 });
@@ -370,6 +376,7 @@ String _dualWindowArguments({
   required bool showClassificationWatermark,
   required bool allowRemoteMedia,
   required ThemeProfile themeProfile,
+  Map<String, ThemeProfile> slideStyles = const {},
   required MarpStyle marpStyle,
   required CockpitColorScheme cockpitColorScheme,
   PageSizeSpec? slideSize,
@@ -391,6 +398,7 @@ String _dualWindowArguments({
   showClassificationWatermark: showClassificationWatermark,
   allowRemoteMedia: allowRemoteMedia,
   themeProfile: themeProfile,
+  slideStyles: slideStyles,
   marpStyle: marpStyle,
   cockpitColorScheme: cockpitColorScheme,
 );
@@ -402,6 +410,7 @@ Future<String?> _runDualPresenter(
   required String? projectPath,
   required String? remoteAssetBase,
   required ThemeProfile themeProfile,
+  Map<String, ThemeProfile> slideStyles = const {},
   required MarpStyle marpStyle,
   required CockpitColorScheme cockpitColorScheme,
   required int initialIndex,
@@ -447,6 +456,7 @@ Future<String?> _runDualPresenter(
             slides: slides,
             projectPath: projectPath,
             themeProfile: themeProfile,
+            slideStyles: slideStyles,
             marpStyle: marpStyle,
             cockpitColorScheme: cockpitColorScheme,
             initialIndex: initialIndex,

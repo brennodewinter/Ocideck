@@ -388,6 +388,47 @@ Future<StyleProfileBytes> _buildStyleProfileBytes(
 }
 
 extension FileServiceStyleProfile on FileService {
+  /// De stijlprofielen uit de instellingen — de namen waarnaar een
+  /// stijlmarkering (`Slide.styleName`, #2996) kan wijzen.
+  List<ThemeProfile> get themeProfiles => _themeProfiles();
+
+  /// Resolveert de profielen waar de stijlmarkeringen van [slides] naar wijzen
+  /// — de [Deck.slideStyles]-map.
+  ///
+  /// [seed] zijn al opgeloste profielen: de meegedragen stijlen van een pakket
+  /// (`ocideck-styles.json`), of de map van het vorige deck na een herparse.
+  /// Zij winnen van de instellingenlijst — een deck dat zijn eigen stijl
+  /// meedroeg behoudt die, ook als hier geen gelijknamig profiel bestaat. Een
+  /// naam die niets raakt komt niet in de map; zijn dia's vallen bij het
+  /// renderen op de deckstijl terug, net als bij `resolveDocumentStyleProfile`.
+  Map<String, ThemeProfile> resolveSlideStyles(
+    List<Slide> slides, {
+    String? projectPath,
+    Map<String, ThemeProfile> seed = const {},
+  }) {
+    final names = usedSlideStyleNames(slides);
+    if (names.isEmpty) return const {};
+    final resolved = <String, ThemeProfile>{};
+    final available = _themeProfiles();
+    for (final name in names) {
+      final seeded = seed[name];
+      if (seeded != null) {
+        resolved[name] = seeded;
+        continue;
+      }
+      for (final profile in available) {
+        if (profile.name == name) {
+          resolved[name] = resolveThemeProfile(
+            profile,
+            projectPath: projectPath,
+          );
+          break;
+        }
+      }
+    }
+    return resolved;
+  }
+
   /// Bestandsnaam-veilige variant van een profielnaam. Gedeelde sanitizer uit
   /// `lib/utils/safe_filename.dart`; een profielnaam is vrije invoer, dus `/`
   /// en `..` moeten weg voordat hij een pad wordt.

@@ -1542,6 +1542,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Vanaf deze dia': 'Od te prosojnice',
+  'Deckstijl': 'Slog decka',
+  'Geërfd vanaf dia': 'Podedovano od prosojnice',
+  'Geldt ook op de volgende dia\'s': 'Velja tudi za naslednje prosojnice',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Velja od te prosojnice do naslednje menjave sloga. Slog decka izberete v glavi urejevalnika.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Nalaganje slike traja predolgo. Omogočite lokalni dostop do datoteke in poskusite znova izvoziti.',
   'Sprekers corrigeren': 'Popravi govorce',

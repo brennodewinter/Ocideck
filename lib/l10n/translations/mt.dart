@@ -1558,6 +1558,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Vanaf deze dia': 'Minn din is-slide',
+  'Deckstijl': 'Stil tad-deck',
+  'Geërfd vanaf dia': 'Wieret minn slide',
+  'Geldt ook op de volgende dia\'s': 'Japplika wkoll fuq is-slides li jmiss',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Japplika minn din is-slide sa tibdil ieħor fl-istil. L-istil tad-deck tagħżlu fl-intestatura tal-editur.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'It-tagħbija ta’ immaġni qed tieħu wisq żmien. Agħmel il-fajl disponibbli lokalment u erġa’ pprova tesporta.',
   'Sprekers corrigeren': 'Ikkoreġi l-kelliema',

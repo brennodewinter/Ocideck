@@ -94,6 +94,15 @@ void sendDeckReplaceToAudience(
 }
 
 extension _PresenterContent on _FullscreenPresenterState {
+  /// Het profiel dat op dia [index] getoond wordt — deckstijl of de actieve
+  /// stijlwissel (#2996), dezelfde cascade als editor, miniatuur en export.
+  ThemeProfile _profileAt(int index) => resolveSlideStyle(
+    widget.themeProfile,
+    widget.slideStyles.values.toList(),
+    widget.slides,
+    index,
+  );
+
   RichTextLayoutPlan? _richTextPlanFor(Slide slide) {
     if (!slideUsesRichText(slide)) return null;
     const w = kReferenceSlideWidth;
@@ -110,19 +119,20 @@ extension _PresenterContent on _FullscreenPresenterState {
         : w - hPad * 2;
     // Same body height the preview renders at (logo reserve + footer included),
     // so navigation and the on-screen page badge agree on the page count.
+    final profile = _profileAt(_index);
     final contentH = richTextBodyAvailH(
       w,
       slide,
-      widget.themeProfile,
+      profile,
       splitWithImage: split,
     );
     return planRichTextForSlide(
       slide: slide,
-      profile: widget.themeProfile,
+      profile: profile,
       w: w,
       availW: contentW,
       availH: contentH,
-      font: widget.themeProfile.fontFamily,
+      font: profile.fontFamily,
       splitWithImage: split,
     );
   }
@@ -247,7 +257,7 @@ extension _PresenterContent on _FullscreenPresenterState {
     final outcome = planLiveFix(
       slides: widget.slides,
       index: _index,
-      theme: widget.themeProfile,
+      theme: _profileAt(_index),
       projectPath: widget.projectPath,
       l10n: context.l10n,
       onSlideChanged: widget.onSlideChanged,

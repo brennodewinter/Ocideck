@@ -1545,6 +1545,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Vanaf deze dia': 'Od tejto snímky',
+  'Deckstijl': 'Štýl decku',
+  'Geërfd vanaf dia': 'Zdedené od snímky',
+  'Geldt ook op de volgende dia\'s': 'Platí aj na nasledujúcich snímkach',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Platí od tejto snímky do ďalšej zmeny štýlu. Štýl decku zvolíte v hlavičke editora.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Načítanie obrázka trvá príliš dlho. Sprístupnite súbor lokálne a skúste exportovať znova.',
   'Sprekers corrigeren': 'Opraviť hovoriacich',

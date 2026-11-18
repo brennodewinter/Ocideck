@@ -767,6 +767,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Vanaf deze dia': 'From this slide onward',
+  'Deckstijl': 'Deck style',
+  'Geërfd vanaf dia': 'Inherited from slide',
+  'Geldt ook op de volgende dia\'s': 'Also applies to the following slides',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Applies from this slide until the next style change. You choose the deck style in the editor header.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Loading an image is taking too long. Make the file available locally and try exporting again.',
   'Sprekers corrigeren': 'Correct speakers',

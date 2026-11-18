@@ -116,6 +116,7 @@ _slideCases = {
   SlideField.advanceDuration: (value: 5.0, read: (s) => s.advanceDuration),
   SlideField.anchor: (value: 'jump-here', read: (s) => s.anchor),
   SlideField.nextAnchor: (value: 'go-next', read: (s) => s.nextAnchor),
+  SlideField.styleName: (value: 'Donker', read: (s) => s.styleName),
   SlideField.ganttScale: (value: 'weekly', read: (s) => s.ganttScale),
   SlideField.ganttSections: (value: true, read: (s) => s.ganttSections),
   SlideField.menuLayout: (value: MenuLayout.list, read: (s) => s.menuLayout),

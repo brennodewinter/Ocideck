@@ -235,7 +235,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
       label: o.label(l10n),
       slide: o.slide,
       projectPath: o.pres.deck.projectPath,
-      themeProfile: o.pres.deck.themeProfile,
+      themeProfile: o.pres.deck.slideProfileAt(o.slideNumber - 1),
       deckMarpStyle: o.pres.deck.marpStyle,
       slideAspect: slideAspectRatio(o.pres.deck.slideSize),
     );
@@ -583,7 +583,7 @@ class _PresentationSection extends StatelessWidget {
                 _slideCardFor(
                   slide,
                   deck.projectPath,
-                  deck.themeProfile,
+                  deck.slideProfileAt(deck.slides.indexOf(slide)),
                   deck.marpStyle,
                   deck.slideSize,
                   presentation.modified,

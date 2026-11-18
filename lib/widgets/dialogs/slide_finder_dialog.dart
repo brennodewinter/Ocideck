@@ -297,7 +297,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       label: '${h.sourceName} · ${l10n.d('slide')} ${h.slideIndex + 1}',
       slide: h.slide,
       projectPath: h.source.deck.projectPath,
-      themeProfile: h.source.deck.themeProfile,
+      themeProfile: h.source.deck.slideProfileAt(h.slideIndex),
       deckMarpStyle: h.source.deck.marpStyle,
       slideAspect: slideAspectRatio(h.source.deck.slideSize),
     );
@@ -590,7 +590,7 @@ class _SlideHitCard extends StatelessWidget {
                         slideAspect: slideAspectRatio(deck.slideSize),
                         slide: hit.slide,
                         projectPath: deck.projectPath,
-                        themeProfile: deck.themeProfile,
+                        themeProfile: deck.slideProfileAt(hit.slideIndex),
                         deckMarpStyle: deck.marpStyle,
                         improvementY01: deck.improvementY01Metric,
                       ),

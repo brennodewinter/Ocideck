@@ -434,6 +434,7 @@ extension _MarkdownParse on MarkdownService {
       aiAssistedFields: link.aiAssistedFields,
       privacy: d.privacy,
       quality: d.quality,
+      styleName: d.styleName,
       preservedMarpLines: d.preservedMarpLines,
       marpStyle: d.marpStyle,
       anchor: d.anchor,
@@ -607,6 +608,7 @@ extension _MarkdownParse on MarkdownService {
       tlp: d.tlp,
       privacy: d.privacy,
       quality: d.quality,
+      styleName: d.styleName,
       tableRows: type.backedByTable ? tableRows : const [],
       tableColumnAlignments: type.backedByTable ? tableAlignments : const [],
       tableNumberColumns: type == SlideType.table

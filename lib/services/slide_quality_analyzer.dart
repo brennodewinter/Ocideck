@@ -194,6 +194,11 @@ class SlideQualityAnalyzer {
     slides: deck.slides,
     theme: deck.themeProfile,
     font: deck.themeProfile.fontFamily,
+    // Het effectieve profiel per dia (#2996): een donker bereik toetst op zijn
+    // eigen achtergrond, niet op die van de deckstijl.
+    slideProfiles: [
+      for (var i = 0; i < deck.slides.length; i++) deck.slideProfileAt(i),
+    ],
     projectPath: deck.projectPath,
     slideAspect: slideAspectRatio(deck.slideSize),
   );
@@ -202,18 +207,35 @@ class SlideQualityAnalyzer {
     required List<Slide> slides,
     required ThemeProfile theme,
     required String font,
+    // Het effectieve profiel per diaindex (#2996); leeg/null = alles op
+    // [theme] — de aanroepen die geen deck hebben veranderen niets.
+    List<ThemeProfile>? slideProfiles,
     String? projectPath,
     double slideAspect = kScreenSlideAspect,
   }) {
     final issues = <SlideQualityIssue>[];
-    _checkThemeContrast(theme, issues, minContrastRatio: minContrastRatio);
-    _checkFooterContrast(theme, issues);
-    _checkChecklistContrast(theme, slides, issues);
+    // Deckbrede controles gelden per gebruikt profiel: een bereik met eigen
+    // kleuren toetst op zijn eigen achtergrond.
+    for (final p in {theme, ...?slideProfiles}) {
+      _checkThemeContrast(p, issues, minContrastRatio: minContrastRatio);
+      _checkFooterContrast(p, issues);
+      _checkChecklistContrast(p, slides, issues);
+    }
     for (var i = 0; i < slides.length; i++) {
       final slide = slides[i];
       if (slide.skipped) continue;
+      final p = slideProfiles != null && i < slideProfiles.length
+          ? slideProfiles[i]
+          : theme;
       issues.addAll(
-        _memoizedSlideIssues(slide, i, theme, font, projectPath, slideAspect),
+        _memoizedSlideIssues(
+          slide,
+          i,
+          p,
+          p.fontFamily,
+          projectPath,
+          slideAspect,
+        ),
       );
     }
     // Bewust buiten de per-slide memo: of een slide klein rendert hangt af van
@@ -248,7 +270,14 @@ class SlideQualityAnalyzer {
       for (; i < end; i++) {
         final slide = slides[i];
         if (!slide.skipped) {
-          _memoizedSlideIssues(slide, i, theme, font, deck.projectPath, aspect);
+          _memoizedSlideIssues(
+            slide,
+            i,
+            deck.slideProfileAt(i),
+            deck.slideProfileAt(i).fontFamily,
+            deck.projectPath,
+            aspect,
+          );
         }
         // Alleen échte runleden laten een dure schaalmeting achter: een
         // vervolgdia of de pagina vlak vóór een vervolgdia — precies de set

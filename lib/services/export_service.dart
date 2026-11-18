@@ -234,6 +234,7 @@ class ExportService {
     String markdown, {
     required String deckPath,
     required ThemeProfile? themeProfile,
+    Map<String, ThemeProfile> slideStyles = const {},
     required CockpitColorScheme cockpitColorScheme,
     required ExportDocumentMetadata metadata,
     required String fallbackTitle,
@@ -264,6 +265,7 @@ class ExportService {
       final html = await _html.build(
         markdown,
         theme: themeProfile,
+        slideStyles: slideStyles,
         cockpitColorScheme: cockpitColorScheme,
         metadata: metadata,
         fallbackTitle: fallbackTitle,

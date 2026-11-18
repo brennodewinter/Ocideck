@@ -1553,6 +1553,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Vanaf deze dia': 'Ab hac pagina',
+  'Deckstijl': 'Stylus praesentationis',
+  'Geërfd vanaf dia': 'Haereditatum a pagina',
+  'Geldt ook op de volgende dia\'s': 'Valet quoque in paginis sequentibus',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Valet ab hac pagina usque ad proximam styli mutationem. Stylum praesentationis in capite editoris eligis.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Imago diutius quam oportet oneratur. Fac ut fasciculus in hoc computatro praesto sit et rursus exportare conare.',
   'Sprekers corrigeren': 'Oratores corrige',

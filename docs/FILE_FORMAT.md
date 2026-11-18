@@ -549,6 +549,30 @@ An unrecognised value falls back to `warn`, not to `accept`. A deck written by a
 newer OciDeck must never cause an older one to silently suppress findings it does
 not understand; at worst the author makes the choice again.
 
+### 3.1d Style switch — `<!-- ocideck_style: … -->`
+
+Which **style profile** applies *from this slide onwards*. The deck has one
+deck-wide style; a slide carrying this marker starts a range that runs until
+the next marker (#2996).
+
+```markdown
+<!-- ocideck_style: Dark -->
+```
+
+The value is a profile **name** from the app's style profiles; the reserved
+token `deck` ends a range and returns to the deck style. A slide without a
+marker inherits whatever the previous slides established. An unknown name is
+never an error: the slide renders in the deck style, and the raw name stays in
+the file so the interface can show what was set.
+
+Everything that renders the slide — editor, thumbnails, presenter, audience
+window and every export — resolves the same effective profile. The
+`.ocideck` package carries the range for plain Marp too: each slide in a range
+gets a `stijl-<name>` token in its `_class`, the bundled theme CSS gains a
+`section.stijl-<name>`-scoped variant per used profile, and
+`ocideck-styles.json` carries the profile definitions so re-import resolves
+the names again.
+
 ### 3.1a Redaction markers — `[[…]]`
 
 Text between double square brackets is **redacted**: replaced by a fixed run of

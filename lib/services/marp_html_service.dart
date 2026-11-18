@@ -20,6 +20,8 @@ import '../models/discoveries_spec.dart';
 import '../models/findings_summary_spec.dart';
 import '../models/question.dart';
 import '../models/deck.dart';
+import '../models/slide_style.dart';
+import 'theme_css_scope.dart';
 import '../models/privacy_disposition.dart';
 import '../models/improvement_y01.dart';
 import '../models/marp_style.dart';
@@ -161,6 +163,9 @@ class MarpHtmlService {
   Future<String> build(
     String deckMarkdown, {
     ThemeProfile? theme,
+    // De opgeloste stijlprofielen van de stijlwissel (#2996), op naam —
+    // dezelfde map als [Deck.slideStyles].
+    Map<String, ThemeProfile> slideStyles = const {},
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     ExportDocumentMetadata? metadata,
     Map<String, String> documentFields = const {},
@@ -216,15 +221,16 @@ class MarpHtmlService {
       documentFields,
       this,
     );
-    // De ondertekening komt van het deck mee (het zegelblok staat sinds 0.1.0
-    // niet meer in de front matter). Een `.md` van vóór die verhuizing draagt
-    // hem nog wél in de kop, en die blijft leesbaar: [signatureFields] is het
-    // terugvalpad, niet de hoofdroute.
-    final signature = docMeta.signature != null
-        ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
-        : signatureFields(embedded.markdown);
+    final signature = _htmlSignature(docMeta, embedded.markdown);
     final renderMarkdown = expandMarpEmojiShortcodes(embedded.markdown);
     final parsedDeck = MarkdownService().parseDeck(renderMarkdown);
+    // De stijlwissel (#2996): per dia het class-token en per gebruikt profiel
+    // een gescope CSS-variant, als het bereik in één stap.
+    final slideStyleRanges = _slideStyleRanges(
+      parsedDeck?.slides ?? const [],
+      slideStyles,
+    );
+    final slideStylesCss = await _slideStylesCss(this, slideStyleRanges);
     final sections = _renderSections(
       renderMarkdown,
       theme: effectiveTheme,
@@ -236,6 +242,7 @@ class MarpHtmlService {
           parsedDeck?.slides.map((slide) => slide.marpStyle).toList() ??
           const [],
       slides: parsedDeck?.slides ?? const [],
+      slideStyleClasses: slideStyleRanges.classes,
       deckTlp: docMeta.tlp,
       organization: docMeta.organization,
     );
@@ -283,7 +290,7 @@ class MarpHtmlService {
         '${_cspMeta(nonce)}'
         '<title>$title</title>'
         '$headMeta'
-        '<style>${exportBaseCss()}\n$css\n$hljsCss\n$_printCss'
+        '<style>${exportBaseCss()}\n$css\n$slideStylesCss\n$hljsCss\n$_printCss'
         '${chapterPageBreak ? _chapterPageBreakCss : ''}'
         '${_pageAtRuleCss(pageSize, pageMargins)}$logoCss'
         '${continuous ? '' : _slideAspectCss(parsedDeck?.slideSize)}</style>'
@@ -302,6 +309,17 @@ class MarpHtmlService {
         '${notices.html}'
         '</body></html>';
   }
+
+  /// De ondertekening voor één export. Hij komt van het deck mee (het
+  /// zegelblok staat sinds 0.1.0 niet meer in de front matter). Een `.md` van
+  /// vóór die verhuizing draagt hem nog wél in de kop, en die blijft leesbaar:
+  /// [signatureFields] is het terugvalpad, niet de hoofdroute.
+  Map<String, String> _htmlSignature(
+    ExportDocumentMetadata docMeta,
+    String markdown,
+  ) => docMeta.signature != null
+      ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
+      : signatureFields(markdown);
 
   /// De zes gevendorde webbundels en de themed CSS voor één export. Ze zijn
   /// onafhankelijk, dus ze laden samen. Uitgetild uit [build] zodat die methode

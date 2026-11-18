@@ -302,6 +302,17 @@ class Slide {
   /// één keer alle contrastfouten accepteert is geen keuze maar een uitschakelaar,
   /// en daar is de instelling voor.
   final QualityDisposition quality;
+
+  /// De stijlwissel: de naam van het stijlprofiel dat *vanaf deze dia* geldt.
+  ///
+  /// Anders dan een per-dia-eigenschap werkt deze markering voorwaarts: hij
+  /// geldt voor deze dia en elke volgende tot een nieuwe markering. `''` =
+  /// geen markering (erf wat er liep); `'deck'` = keer terug naar de
+  /// deckstijl; anders de naam van een profiel uit de instellingen. Een naam
+  /// die geen profiel raakt valt terug op de deckstijl — dezelfde afspraak als
+  /// `resolveDocumentStyleProfile`. Round-trips als
+  /// `<!-- ocideck_style: … -->`.
+  final String styleName;
   final List<List<String>> tableRows; // first row is the header
 
   /// Per-kolomuitlijning van een tabel (zie [TableAlign]). Eén entry per
@@ -518,6 +529,7 @@ class Slide {
     this.tlp = TlpLevel.none,
     this.privacy,
     this.quality = QualityDisposition.warn,
+    this.styleName = '',
     this.tableRows = const [],
     this.tableColumnAlignments = const [],
     this.tableNumberColumns = const [],
@@ -697,6 +709,7 @@ class Slide {
       tlp: src.tlp,
       privacy: src.privacy,
       quality: src.quality,
+      styleName: src.styleName,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableColumnAlignments: List<TableAlign>.from(src.tableColumnAlignments),
       tableNumberColumns: List<bool>.from(src.tableNumberColumns),
@@ -783,6 +796,7 @@ class Slide {
     PrivacyDisposition? privacy,
     bool clearPrivacy = false,
     QualityDisposition? quality,
+    String? styleName,
     List<List<String>>? tableRows,
     List<TableAlign>? tableColumnAlignments,
     List<bool>? tableNumberColumns,
@@ -874,6 +888,7 @@ class Slide {
     tlp: tlp ?? this.tlp,
     privacy: clearPrivacy ? null : (privacy ?? this.privacy),
     quality: quality ?? this.quality,
+    styleName: styleName ?? this.styleName,
     tableRows: tableRows ?? this.tableRows,
     tableColumnAlignments: tableColumnAlignments ?? this.tableColumnAlignments,
     tableNumberColumns: tableNumberColumns ?? this.tableNumberColumns,

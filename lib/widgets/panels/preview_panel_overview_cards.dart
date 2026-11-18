@@ -394,7 +394,10 @@ class _OverviewSlideCard extends StatelessWidget {
                                 slideAspect: slideAspectRatio(deck.slideSize),
                                 slide: slide,
                                 projectPath: deck.projectPath,
-                                themeProfile: deck.themeProfile,
+                                // Het effectieve profiel (#2996): in de
+                                // kaartweergave is het bereik van een
+                                // stijlwissel zichtbaar.
+                                themeProfile: deck.slideProfileAt(index),
                                 deckMarpStyle: deck.marpStyle,
                                 cockpitColorScheme: settings.cockpitColorScheme,
                                 allowRemoteMedia: settings.allowRemoteMedia,
@@ -403,8 +406,8 @@ class _OverviewSlideCard extends StatelessWidget {
                                 fitScaleOverride: sharedSplitFitScale(
                                   deck.slides,
                                   index,
-                                  deck.themeProfile,
-                                  deck.themeProfile.fontFamily,
+                                  deck.slideProfileAt(index),
+                                  deck.slideProfileAt(index).fontFamily,
                                   slideAspect: slideAspectRatio(deck.slideSize),
                                 ),
                                 splitRunPosition: splitRunPositionFor(

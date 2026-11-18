@@ -25,6 +25,7 @@ typedef _BlockDirectives = ({
   TlpLevel tlp,
   PrivacyDisposition? privacy,
   QualityDisposition quality,
+  String styleName,
   List<String> bullets,
   List<String> bullets2,
   ListStyle listStyle,
@@ -153,6 +154,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     TlpLevel slideTlp = TlpLevel.none;
     PrivacyDisposition? slidePrivacy;
     var slideQuality = QualityDisposition.warn;
+    var styleName = '';
     final bullets = <String>[];
     var bullets2 = <String>[];
     var listStyle = ListStyle.bullets;
@@ -195,6 +197,11 @@ extension _MarkdownParseDirectives on MarkdownService {
         slidePrivacy = PrivacyDispositionX.fromKey(content.substring(16));
       } else if (content.startsWith('ocideck_quality:')) {
         slideQuality = QualityDispositionX.fromKey(content.substring(16));
+      } else if (content.startsWith('ocideck_style:')) {
+        // De stijlwissel (#2996): eerste vondst wint zoals bij elk directief —
+        // de serialiser zet hem bovenaan, een gelijknamige regel in de
+        // dia-tekst hoort bij de inhoud.
+        styleName = _firstDirective(content, 'ocideck_style:', styleName);
       } else if (content.startsWith('_style:')) {
         final w = _reImageWidthStyle.firstMatch(content);
         if (w != null) styleImageWidth = int.tryParse(w.group(1)!) ?? 0;
@@ -309,6 +316,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       tlp: slideTlp,
       privacy: slidePrivacy,
       quality: slideQuality,
+      styleName: styleName,
       bullets: bullets,
       bullets2: bullets2,
       listStyle: listStyle,

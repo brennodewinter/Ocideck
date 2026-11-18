@@ -1543,6 +1543,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Vanaf deze dia': 'Ettől a diától',
+  'Deckstijl': 'Deck stílusa',
+  'Geërfd vanaf dia': 'Örökölve a diától',
+  'Geldt ook op de volgende dia\'s': 'A következő diákra is érvényes',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Ettől a diától a következő stílusváltásig érvényes. A deck stílusát a szerkesztő fejlécében választhatod.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Egy kép betöltése túl sokáig tart. Tegye helyileg elérhetővé a fájlt, majd próbálja újra az exportálást.',
   'Sprekers corrigeren': 'Beszélők javítása',

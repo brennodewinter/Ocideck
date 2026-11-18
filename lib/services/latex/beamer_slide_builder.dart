@@ -23,8 +23,24 @@ import 'markdown_to_latex.dart';
 /// `latex_preamble.dart`).
 String buildBeamerBody(Deck deck) {
   final buf = StringBuffer();
-  for (final slide in deck.slides) {
+  String? accent;
+  for (var i = 0; i < deck.slides.length; i++) {
+    final slide = deck.slides[i];
     if (slide.skipped) continue;
+    // De stijlwissel (#2996): binnen wat deze builder van het profiel
+    // gebruikt — de accentkleur van de callout-markeringen — herdefinieert
+    // een profielwissel de kleur vóór het eerste frame van het nieuwe
+    // bereik. `\definecolor` mag midden in het document opnieuw staan.
+    final hex = deck
+        .slideProfileAt(i)
+        .accentColor
+        .replaceFirst('#', '')
+        .toUpperCase();
+    final effective = RegExp('^[0-9A-F]{6}\$').hasMatch(hex) ? hex : '2E7D64';
+    if (effective != accent) {
+      accent = effective;
+      buf.write('\\definecolor{ocideckTableAccent}{HTML}{$effective}\n');
+    }
     buf.write(_slideToFrame(slide));
     buf.write('\n');
   }

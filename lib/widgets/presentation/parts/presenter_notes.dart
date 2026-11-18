@@ -103,7 +103,7 @@ extension _PresenterNotes on _FullscreenPresenterState {
   /// Lokaal paneel voor gebruikersnotities (ontvanger/cursist); nooit op beamer.
   Widget _buildUserNotesOverlay() {
     final l10n = context.l10n;
-    final profile = widget.themeProfile;
+    final profile = _profileAt(_index);
     final slide = _currentSlide;
     final pageCount = _richTextPageCountFor(slide);
     final showPageLabel = pageCount > 1;
