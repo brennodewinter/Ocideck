@@ -58,9 +58,62 @@ class AiClientService {
     if (result.statusCode != 200) {
       throw AiRequestException('HTTP ${result.statusCode}');
     }
-    final decoded = jsonDecode(result.body);
-    if (decoded is! Map) throw AiRequestException('unexpected response');
-    return AiChatResponse.fromJson(Map<String, Object?>.from(decoded));
+    return _draftResponse(result.body);
+  }
+
+  /// Accept only a completed draft. A tool request or truncated completion is
+  /// not text the author can safely mistake for the requested final answer.
+  AiChatResponse _draftResponse(String body) {
+    final Object? decoded;
+    try {
+      decoded = jsonDecode(body);
+    } on FormatException {
+      // Do not retain the response body in a FormatException/log entry: it
+      // can contain the author's source material or a provider's diagnostics.
+      throw const AiRequestException('invalid AI response');
+    }
+    if (decoded is! Map<String, dynamic>) {
+      throw const AiRequestException('unexpected AI response');
+    }
+    final choices = decoded['choices'];
+    if (choices is! List || choices.isEmpty || choices.first is! Map) {
+      throw const AiRequestException('unexpected AI response');
+    }
+    final choice = choices.first as Map;
+    final finish = choice['finish_reason'];
+    // Older compatible servers omit finish_reason; keep their text contract.
+    if (finish != null && finish != 'stop') {
+      throw const AiRequestException('AI response did not complete');
+    }
+    _validateDraftMessage(choice['message']);
+    return AiChatResponse.fromJson(decoded);
+  }
+
+  void _validateDraftMessage(Object? value) {
+    if (value is! Map ||
+        (value['role'] != null && value['role'] != 'assistant')) {
+      throw const AiRequestException('unexpected AI response');
+    }
+    final refusal = value['refusal'];
+    if (refusal != null && refusal != '') {
+      throw const AiRequestException('AI response refused');
+    }
+    final tools = value['tool_calls'];
+    if ((tools != null && (tools is! List || tools.isNotEmpty)) ||
+        value['function_call'] != null) {
+      throw const AiRequestException('AI tool calls are not supported');
+    }
+    final content = value['content'];
+    if (content != null && content is! String && content is! List) {
+      throw const AiRequestException('unexpected AI response');
+    }
+    if (content is List) {
+      for (final part in content) {
+        if (part is! Map || part['type'] != 'text' || part['text'] is! String) {
+          throw const AiRequestException('unexpected AI response');
+        }
+      }
+    }
   }
 
   /// Grounded, per-field suggestion scaffolding (AI_ASSIST §4). A consumer

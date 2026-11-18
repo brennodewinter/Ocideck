@@ -88,6 +88,26 @@ make setup            # flutter pub get
 flutter run -d macos  # or -d windows / -d linux
 ```
 
+## Developing AI features with an assistant
+
+Use the repository-owned
+[`ocideck-ai-integration` skill](.agents/skills/ocideck-ai-integration/SKILL.md)
+when changing model integrations or AI-assisted drafting. It points to the
+actual client, consent gate, consumers and regression tests rather than
+introducing a second AI backend.
+
+Flutter 3.50's bundled Dart supports `dart mcp-server`. A development client can
+launch that command over stdio for diagnostics, symbols, tests and inspection
+of a designated debug app. Resolve `dart` from the pinned Flutter SDK and use
+[the official setup guide](https://docs.flutter.dev/ai/get-started) for the chosen
+client. Global plugin configuration is a developer choice; this repository does
+not install plugins or start a model server. Hot reload/restart belongs to the
+debug app used for the task. Avoid ordinary protocol logging of project/runtime
+data. The application itself does not gain an MCP endpoint from this setup.
+
+The [Flutter 3.50 AI assessment](docs/design/AI_ASSIST.md#11-flutter-350-assessment-2026-11-18)
+records the Genkit/MediaPipe opportunities, platform limits and current decisions.
+
 ## The quality gate
 
 Run this on the exact commit before every merge — it is the enforced quality gate. The Forgejo remote

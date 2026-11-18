@@ -31,17 +31,24 @@ final class AiSecurityGate {
     required bool hasOutboundConsent,
     required bool cloudConfirmed,
     required bool isWeb,
-  }) => AiEgressGate.evaluate(
-    AiEgressPolicy(
-      enabled: settings.enabled,
-      mode: settings.mode,
-      endpoint: settings.baseUrl,
-      trustedInternal: settings.trustedInternal,
-    ),
-    hasOutboundConsent: hasOutboundConsent,
-    cloudConfirmed: cloudConfirmed,
-    isWeb: isWeb,
-  );
+  }) {
+    // OciDeck's network AI module is desktop-only. Refuse before the shared
+    // gate reaches InternetAddress.tryParse, which is unavailable in browsers.
+    if (isWeb && settings.enabled && settings.mode != AiBackendMode.none) {
+      return const AiGateDeny(AiGateDenial.cloudBlockedOnWeb);
+    }
+    return AiEgressGate.evaluate(
+      AiEgressPolicy(
+        enabled: settings.enabled,
+        mode: settings.mode,
+        endpoint: settings.baseUrl,
+        trustedInternal: settings.trustedInternal,
+      ),
+      hasOutboundConsent: hasOutboundConsent,
+      cloudConfirmed: cloudConfirmed,
+      isWeb: isWeb,
+    );
+  }
 
   /// Whether [host] denotes the loopback interface: `localhost`, `*.localhost`,
   /// or a loopback IP literal (`127.0.0.0/8`, `::1`).

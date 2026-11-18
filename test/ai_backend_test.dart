@@ -218,6 +218,164 @@ void main() {
     });
   });
 
+  group('AI draft completion contract', () {
+    Future<String> draft(Object? response) {
+      final fake = _FakeTransport()
+        ..result = AiHttpResult(200, jsonEncode(response));
+      return AiClientService(
+        settings: _localSettings,
+        hasOutboundConsent: false,
+        transport: fake,
+        isWeb: false,
+      ).suggest(context: 'Provided facts', instruction: 'Draft one line.');
+    }
+
+    Map<String, Object?> response(
+      Map<String, Object?> message, {
+      Object? finish = 'stop',
+    }) => {
+      'choices': [
+        {'finish_reason': finish, 'message': message},
+      ],
+    };
+
+    for (final reason in [
+      'length',
+      'content_filter',
+      'tool_calls',
+      'function_call',
+      'unknown',
+    ]) {
+      test('refuses $reason instead of returning a partial draft', () async {
+        await expectLater(
+          draft(
+            response({
+              'role': 'assistant',
+              'content': 'Incomplete or unsupported',
+            }, finish: reason),
+          ),
+          throwsA(isA<AiRequestException>()),
+        );
+      });
+    }
+
+    test('accepts completed multipart text without reasoning fields', () async {
+      expect(
+        await draft(
+          response({
+            'role': 'assistant',
+            'content': [
+              {'type': 'text', 'text': 'Final '},
+              {'type': 'text', 'text': 'draft'},
+            ],
+            'reasoning_content': 'Private model reasoning',
+            'tool_calls': [],
+            'refusal': '',
+          }),
+        ),
+        'Final draft',
+      );
+    });
+
+    test(
+      'keeps empty abstention and older compatible servers working',
+      () async {
+        expect(await draft(response({'content': ''})), isEmpty);
+        expect(await draft(response({'content': null})), isEmpty);
+        expect(
+          await draft(response({'content': 'Legacy draft'}, finish: null)),
+          'Legacy draft',
+        );
+      },
+    );
+
+    for (final message in <Object?>[
+      null,
+      {'role': 'tool', 'content': 'Not an assistant draft'},
+      {'content': 'Refusal preamble', 'refusal': 'Provider refused'},
+      {
+        'content': 'Draft beside tool',
+        'tool_calls': [
+          {
+            'function': {'name': 'write_file'},
+          },
+        ],
+      },
+      {'content': 'Draft', 'tool_calls': 'invalid'},
+      {'content': 'Draft', 'function_call': <String, Object?>{}},
+      {'content': 42},
+      {
+        'content': [
+          {'type': 'refusal', 'refusal': 'No'},
+        ],
+      },
+      {
+        'content': [
+          {'type': 'text', 'text': 42},
+        ],
+      },
+      {
+        'content': [null],
+      },
+    ]) {
+      test(
+        'refuses unsupported message shape ${jsonEncode(message)}',
+        () async {
+          await expectLater(
+            draft({
+              'choices': [
+                {'message': message},
+              ],
+            }),
+            throwsA(isA<AiRequestException>()),
+          );
+        },
+      );
+    }
+
+    for (final shape in <Object?>[
+      null,
+      <Object?>[],
+      <String, Object?>{},
+      {'choices': <Object?>[]},
+      {
+        'choices': [false],
+      },
+    ]) {
+      test(
+        'reports an invalid envelope as failure, not model abstention: $shape',
+        () async {
+          await expectLater(draft(shape), throwsA(isA<AiRequestException>()));
+        },
+      );
+    }
+
+    test(
+      'malformed provider JSON never enters an exception or an automatic retry',
+      () async {
+        final fake = _FakeTransport()
+          ..result = const AiHttpResult(200, '{private-source-material');
+        final client = AiClientService(
+          settings: _localSettings,
+          hasOutboundConsent: false,
+          transport: fake,
+          isWeb: false,
+        );
+        await expectLater(
+          client.suggest(context: 'Source', instruction: 'Draft'),
+          throwsA(
+            isA<AiRequestException>().having(
+              (error) => error.toString(),
+              'diagnostic',
+              isNot(contains('private-source-material')),
+            ),
+          ),
+        );
+        expect(fake.calls, 1);
+      },
+    );
+  });
+
   group('AiSecurityGate — three-tier egress gating', () {
     AiGateDecision gate(
       AiSettings s, {
