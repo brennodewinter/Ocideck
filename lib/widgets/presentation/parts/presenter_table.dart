@@ -107,7 +107,7 @@ extension _PresenterTable on _FullscreenPresenterState {
   /// Subtiel, klikbaar potlood-icoon dat op tabeldia's de bewerkmodus toont en
   /// schakelt. Gedimd = uit, accentkleur = aan — hetzelfde als de E-toets.
   Widget _buildTableEditToggle() {
-    final accent = AppTheme.parseHexColor(widget.themeProfile.accentColor);
+    final accent = AppTheme.parseHexColor(_profileAt(_index).accentColor);
     final active = _tableEditMode;
     return Tooltip(
       message: context.l10n.d('Tabel bewerken (E)'),
@@ -158,7 +158,7 @@ extension _PresenterTable on _FullscreenPresenterState {
 
   Widget _buildTableEditBanner() {
     final l10n = context.l10n;
-    final accent = AppTheme.parseHexColor(widget.themeProfile.accentColor);
+    final accent = AppTheme.parseHexColor(_profileAt(_index).accentColor);
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0.9, end: 1),
       duration: const Duration(milliseconds: 280),

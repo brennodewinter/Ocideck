@@ -127,7 +127,10 @@ class MarkdownService {
       buf.write(
         generateSlide(
           slides[i],
-          themeProfile: deck.themeProfile,
+          // Het effectieve profiel van díe dia (#2996): `logo-safe`/`no-logo`
+          // volgen de wissel mee. `indexOf` omdat de gefilterde lijst op zijn
+          // eigen index niet met `deck.slides` correspondeert.
+          themeProfile: deck.slideProfileAt(deck.slides.indexOf(slides[i])),
           inlineChartData: inlineChartData,
           forExport: forExport,
         ),
@@ -589,6 +592,12 @@ void _writeSlideDirectives(
   if (slide.type == SlideType.gantt && slide.ganttSections) {
     buf.writeln('<!-- ocideck_gantt_sections: true -->');
   }
+  // De stijlwissel (#2996): welke stijl *vanaf deze dia* geldt. Werkt voorwaarts
+  // tot een volgende markering; `deck` keert terug naar de deckstijl. Alleen
+  // schrijven als hij gezet is — een deck zonder wissels blijft byte-identiek.
+  if (slide.styleName.isNotEmpty) {
+    buf.writeln('<!-- ocideck_style: ${slide.styleName} -->');
+  }
   // Non-destructive view limit for data-driven slides.
   final viewComments = slide.viewLimit?.toComments() ?? const {};
   for (final entry in viewComments.entries) {
@@ -614,6 +623,7 @@ void _writeSlideDirectives(
       slide.improvementLayout.isNotEmpty ||
       (slide.type == SlideType.gantt && slide.ganttScale != 'auto') ||
       (slide.type == SlideType.gantt && slide.ganttSections) ||
+      slide.styleName.isNotEmpty ||
       viewComments.isNotEmpty ||
       mediaRedactedMarker) {
     buf.writeln();

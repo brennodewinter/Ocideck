@@ -564,12 +564,15 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     // signatuur dekt álle invoer mee (inclusief index en numberStart, die bij
     // een herschikking per dia verschillen), dus een stale kaart kan niet.
     final aspect = slideAspectRatio(deck.slideSize);
+    // De miniatuur rendert met het effectieve profiel van díe dia (#2996) —
+    // het bereik van een stijlwissel is zo direct in de strip zichtbaar.
+    final profile = deck.slideProfileAt(index);
     final sig = (
       slide,
       index,
       slideHasUserNotes(deck.userNotes, slide.id),
       deck.projectPath,
-      deck.themeProfile,
+      profile,
       deck.marpStyle,
       deck.slides.length,
       deck.tlp,
@@ -578,8 +581,8 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       sharedSplitFitScale(
         deck.slides,
         index,
-        deck.themeProfile,
-        deck.themeProfile.fontFamily,
+        profile,
+        profile.fontFamily,
         slideAspect: aspect,
       ),
       splitRunPositionFor(deck.slides, index),
@@ -597,7 +600,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         index: index,
         hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
         projectPath: deck.projectPath,
-        themeProfile: deck.themeProfile,
+        themeProfile: profile,
         deckMarpStyle: deck.marpStyle,
         slideCount: deck.slides.length,
         tlp: deck.tlp,

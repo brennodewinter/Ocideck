@@ -1556,6 +1556,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Vanaf deze dia': 'З цього слайда',
+  'Deckstijl': 'Стиль деки',
+  'Geërfd vanaf dia': 'Успадковано зі слайда',
+  'Geldt ook op de volgende dia\'s': 'Діє також на наступних слайдах',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Діє з цього слайда до наступної зміни стилю. Стиль деки обирають у заголовку редактора.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Завантаження зображення триває надто довго. Зробіть файл доступним локально та спробуйте експортувати знову.',
   'Sprekers corrigeren': 'Виправити мовців',

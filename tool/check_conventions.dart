@@ -240,7 +240,10 @@ const Map<String, int> fileSizeBaseline = {
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
   'lib/widgets/presentation/fullscreen_presenter.dart':
-      1165, // +6 (sweep #2633): voortgangsbalk met clock.now() in
+      1175, // +10 (#2996): `slideStyles` langs present ->
+  // show/showDualScreen -> widget — dezelfde onherleidbare plumbing
+  // als costConfig en slideSize, nu voor de diastijlen.
+  // +6 (sweep #2633): voortgangsbalk met clock.now() in
   // een Positioned+IgnorePointer zodat de dialaag onaangeraakt blijft.
   // +33 (#2436): het sessietarief van het aanwezigenscherm langs
   // present → show/showDualScreen → _runDualPresenter → widget — dezelfde
@@ -255,7 +258,10 @@ const Map<String, int> fileSizeBaseline = {
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
   'lib/services/slide_quality_analyzer.dart':
-      1076, // +1 (#2838): missing-file-case voor galleryImages — codec-vrije
+      1095, // +19 (#2996): het `slideProfiles`-kanaal — per-dia effectief
+  // profiel in analyze/analyzeSlides/analyzeWarmed en de deckbrede
+  // controles per gebruikt profiel. Cohesief met de analyzer-staat.
+  // +1 (#2838): missing-file-case voor galleryImages — codec-vrije
   // loodgieterij bij het nieuwe dia-veld. Eerdere verhoging:
   // +60 (sweep #2634/#2620/#2622): analyzeWarmed met
   // batch-verdeling over idle-frames, per-dia Expando-memo's en de
@@ -363,7 +369,11 @@ const Map<String, int> fileSizeBaseline = {
   // part-bestanden, de staat in deze klasse.
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
-      1110, // +15 (sweep #2875–#2887): existsSync-vangsten in de
+      1125, // +15 (#2996): de `_themeProfiles`-callback met zijn
+  // constructor-doorvoer en de twee `slideStyles`-bevolkingsplekken bij
+  // openen/importeren — pure doorvoer; de resolutie zelf staat in de
+  // part `file/file_service_style_profile.dart`.
+  // +15 (sweep #2875–#2887): existsSync-vangsten in de
   // logo-/documentlogo-kandidaatlussen en de zoekwortels van de
   // dossierscan — dezelfde "bestand verdwijnt tussen stat en lees"-klasse,
   // uitkomst is kandidaat of wortel overslaan.
@@ -532,7 +542,10 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3528, // +6 (#2838): stapel-stapplumbing — de zichtbaarhelper
+      3543, // +15 (#2996): de slideStyles-doorvoer naar beamerpayload
+  // en per-dia profielkeuze in de renderdelen — State-plumbing van deze
+  // klasse, zoals marpStyle en cockpitColorScheme dat al waren.
+  // +6 (#2838): stapel-stapplumbing — de zichtbaarhelper
   // delegeert naar galleryVisibleForSlide in het model; de
   // aankondigingsregel en views-doorgave blijven hier.
   // Eerdere verhoging: +17 (#2733/#2741): tegel-semantiek in het
@@ -567,7 +580,10 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2990, // +116 (sweep #2875–#2887): I/O-vangsten in het
+      3078, // +88 (#2996): de stijlwissel — meervoudige stylesidecar,
+  // per-profiel pakketassets + gescope CSS en de resolutie naar
+  // Deck.slideStyles; extensies in de file_service_*-parts tellen mee.
+  // +116 (sweep #2875–#2887): I/O-vangsten in het
   // open-/importpad — exists/stat/lees-fouten die voorheen ontsnapten
   // krijgen nu een uitkomst (waarschuwing, terugval, kandidaat
   // overslaan). Geen nieuw gedrag; verdediging aan de grens. Ook de
@@ -731,7 +747,11 @@ const Map<String, int> classSizeBaseline = {
   // _mutate-callsite; de permutatie-detectie staat in
   // table_row_permutation.dart.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1484, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
+      1523, // +39 (#2996): setSlideStyle — de dunne mutator achter de
+  // stijlwissel, zelfde vorm als setSlideJump — plus de
+  // slideStyles-resolutie in applyMarkdown. De berekening zit in
+  // resolveSlideStyles (FileService); de staatsovergang hoort hier.
+  // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
   // +15: identiteit van de bewust bewaarde browserkopie en het bevestigen
   // van een pakketopslag. Alleen een nog levende, ongewijzigde momentopname
   // mag schoon worden; die staatsovergang hoort bij de notifier.
@@ -780,7 +800,9 @@ const Map<String, int> classSizeBaseline = {
   // invalid geometry, missing anchor) met tekst-ref-telling en entry-vergelijking.
   // De klasse meet 1097.
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer':
-      1165, // +5 (#2838): alt-tekst- en missing-file-cases voor imageGallery —
+      1185, // +20 (#2996): het effectieve profiel per dia in de
+  // contrast-/dichtheidscontroles — de meting hoort bij deze klasse.
+  // +5 (#2838): alt-tekst- en missing-file-cases voor imageGallery —
   // onherleidbare veldplumbing; de gedeelde refs-lezer doet het padwerk.
   // Eerdere verhoging: +62 (sweep #2634/#2620/#2622): analyzeWarmed en de
   // per-dia Expando-memo's — de meting staat in de part-bestanden.

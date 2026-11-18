@@ -94,11 +94,15 @@ class ExportBundle {
 /// en de rest verdween geruisloos uit het bestand. Beide uitklappen laten het
 /// deck zelf ongemoeid, en omdat de voettekst zijn nummer uit de positie in
 /// deze lijst haalt, telt hij de pagina's nu vanzelf mee.
-List<Slide> _expandForExport(List<Slide> slides, Deck deck) =>
-    expandRichTextForRender(
-      expandFindingsForRender(slides, profile: deck.themeProfile),
-      deck.themeProfile,
-    );
+List<Slide> _expandForExport(List<Slide> slides, Deck deck) => [
+  // Per-dia uitklappen: beide splitsers meten met het effectieve profiel van
+  // de brondia, niet uitsluitend met de deckstijl (#2996).
+  for (var i = 0; i < slides.length; i++)
+    ...expandRichTextForRender(
+      expandFindingsForRender([slides[i]], profile: deck.slideProfileAt(i)),
+      deck.slideProfileAt(i),
+    ),
+];
 
 List<Slide> _slidesForQuestionExport(
   List<Slide> slides,

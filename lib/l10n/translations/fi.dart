@@ -1542,6 +1542,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Vanaf deze dia': 'Tästä diasta alkaen',
+  'Deckstijl': 'Deckin tyyli',
+  'Geërfd vanaf dia': 'Peritty diasta',
+  'Geldt ook op de volgende dia\'s': 'Pätee myös seuraavissa dioissa',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'Pätee tästä diasta seuraavaan tyylinvaihtoon. Deckin tyyli valitaan editorin yläpalkista.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Kuvan lataaminen kestää liian kauan. Tuo tiedosto saataville paikallisesti ja yritä vientiä uudelleen.',
   'Sprekers corrigeren': 'Korjaa puhujat',

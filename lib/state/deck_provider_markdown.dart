@@ -34,8 +34,12 @@ extension DeckNotifierMarkdown on DeckNotifier {
     // than resetting it to the default profile the parser returns.
     final current = currentState.deck;
     var deck = current == null
-        ? parsed
-        : parsed.copyWith(themeProfile: current.themeProfile);
+        ? parsed.copyWith(slideStyles: _file.resolveSlideStyles(parsed.slides))
+        : parsed.copyWith(
+            themeProfile: current.themeProfile,
+            // De wisselnamen komen uit de markdown (#2996).
+            slideStyles: _resolvedSlideStyles(current, parsed.slides),
+          );
     if (current != null && current.userNotes.isNotEmpty) {
       final encoded = UserNotesCodec.encode(current.slides, current.userNotes);
       final remapped = encoded != null

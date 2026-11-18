@@ -182,6 +182,9 @@ class SlideRasterizer {
     final themeProfile = deck.themeProfile;
     final projectPath = deck.projectPath;
     final signature = deck.signature;
+    // Elke dia rendert met zijn eigen effectieve profiel (#2996); de chrome-
+    // precache en de fit-meting nemen daarom álle gebruikte stijlen mee.
+    ThemeProfile slideProfile(int i) => deck.slideProfileAt(i);
 
     final overlay = Overlay.of(context, rootOverlay: true);
     final pixelRatio = targetWidth / logical.width;
@@ -203,7 +206,10 @@ class SlideRasterizer {
     // laden joeg de eerste tientallen beelden uit de cache nog vóór hun
     // vastlegging (64 × 16 MiB ≈ het hele plafond), waarna de capture ze
     // opnieuw decodéerde of na 12 vuile frames een leeg vlak vastlegde.
-    final chromePaths = _rasterChromePaths(themeProfile, projectPath);
+    final chromePaths = {
+      for (final profile in {themeProfile, ...deck.slideStyles.values})
+        ..._rasterChromePaths(profile, projectPath),
+    };
 
     final repaintKey = GlobalKey();
     final hostKey = GlobalKey<_RasterSlideHostState>();
@@ -260,12 +266,13 @@ class SlideRasterizer {
         hostKey.currentState!.showSlide(
           slides[i],
           i + 1,
+          profile: slideProfile(i),
           numberStart: numberStarts[i],
           fitScaleOverride: sharedSplitFitScale(
             slides,
             i,
-            themeProfile,
-            themeProfile.fontFamily,
+            slideProfile(i),
+            slideProfile(i).fontFamily,
             slideAspect: aspect,
           ),
           splitRunPosition: splitRunPositionFor(slides, i),
@@ -352,7 +359,7 @@ class SlideRasterizer {
           // basis hier expliciet mee zodat exports dezelfde beelden tekenen
           // als het scherm.
           remoteAssetBase: deck.remoteAssetBase,
-          themeProfile: deck.themeProfile,
+          themeProfile: deck.slideProfileAt(0),
           deckMarpStyle: deck.marpStyle,
           cockpitColorScheme: cockpitColorScheme,
           slideCount: slides.length,
@@ -676,6 +683,7 @@ class _RasterSlideHost extends StatefulWidget {
 class _RasterSlideHostState extends State<_RasterSlideHost> {
   late Slide _slide;
   late int _slideNumber;
+  late ThemeProfile _profile;
   int _numberStart = 1;
   double? _fitScaleOverride;
   ({int page, int total})? _splitRunPosition;
@@ -685,17 +693,20 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
     super.initState();
     _slide = widget.initialSlide;
     _slideNumber = 1;
+    _profile = widget.themeProfile;
   }
 
   void showSlide(
     Slide slide,
     int slideNumber, {
+    ThemeProfile? profile,
     int numberStart = 1,
     double? fitScaleOverride,
     ({int page, int total})? splitRunPosition,
   }) {
     if (_slide.id == slide.id &&
         _slideNumber == slideNumber &&
+        _profile == (profile ?? widget.themeProfile) &&
         _numberStart == numberStart &&
         _fitScaleOverride == fitScaleOverride &&
         _splitRunPosition == splitRunPosition) {
@@ -704,6 +715,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
     setState(() {
       _slide = slide;
       _slideNumber = slideNumber;
+      _profile = profile ?? widget.themeProfile;
       _numberStart = numberStart;
       _fitScaleOverride = fitScaleOverride;
       _splitRunPosition = splitRunPosition;
@@ -730,7 +742,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           slide: _slide,
           projectPath: widget.projectPath,
           remoteAssetBase: widget.remoteAssetBase,
-          themeProfile: widget.themeProfile,
+          themeProfile: _profile,
           deckMarpStyle: widget.deckMarpStyle,
           cockpitColorScheme: widget.cockpitColorScheme,
           slideNumber: _slideNumber,

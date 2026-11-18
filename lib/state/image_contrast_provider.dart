@@ -16,7 +16,6 @@ import 'deck_provider.dart';
 Future<List<SlideQualityIssue>> computeImageContrastIssues(Ref ref) async {
   final deck = ref.watch(deckProvider.select((s) => s.deck));
   if (deck == null) return const [];
-  final theme = deck.themeProfile;
 
   // Heading slides whose text actually sits on the background image; everything
   // else is irrelevant. Both the title and the tussentitel carry a full-slide
@@ -71,7 +70,7 @@ Future<List<SlideQualityIssue>> computeImageContrastIssues(Ref ref) async {
 
     final eval = evaluateTitleContrast(
       avgImage: avg,
-      theme: theme,
+      theme: deck.slideProfileAt(i),
       slide: slide,
     );
     if (eval.passes) continue;

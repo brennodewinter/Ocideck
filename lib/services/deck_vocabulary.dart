@@ -193,6 +193,9 @@ const kSupportedCommentDirectives = {
   // Per-slide kwaliteitsdispositie: accept. De tegenhanger van
   // `ocideck_privacy` voor contrast-, dichtheids- en alt-tekstmeldingen.
   'ocideck_quality',
+  // Stijlwissel vanaf deze dia (#2996): de naam van het profiel dat geldt tot
+  // een volgende markering, of `deck` voor terugkeer naar de deckstijl.
+  'ocideck_style',
   // Welk verbetersjabloon een engine-dia volgt (PROCESS_IMPROVEMENT §3.1).
   'ocideck_template',
   'ocideck_layout',

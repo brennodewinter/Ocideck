@@ -570,10 +570,14 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
 
   Widget _presentedDeck(Deck deck) {
     final settings = ref.watch(settingsProvider);
-    final renderSlides = expandFindingsForRender(
-      deck.slides,
-      profile: widget.themeProfile,
-    );
+    // Elke dia klappt uit met zijn eigen effectieve profiel (#2996): de
+    // paginering van een bevinding hangt van de lettermaat van het bereik af.
+    final renderSlides = [
+      for (var i = 0; i < deck.slides.length; i++)
+        ...expandFindingsForRender([
+          deck.slides[i],
+        ], profile: deck.slideProfileAt(i)),
+    ];
     final scopeCia = deckScopeCiaIndex(deck.slides);
     return ListView.builder(
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 40),
@@ -605,7 +609,15 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
                 slideAspect: slideAspectRatio(deck.slideSize),
                 slide: renderSlides[index],
                 projectPath: deck.projectPath,
-                themeProfile: widget.themeProfile,
+                // Het effectieve profiel over de uitgeklapte lijst: een
+                // uitgeklapte bevindingspagina erft de stijl van zijn
+                // brondia via dezelfde cascade.
+                themeProfile: resolveSlideStyle(
+                  widget.themeProfile,
+                  deck.slideStyles.values.toList(),
+                  renderSlides,
+                  index,
+                ),
                 deckMarpStyle: deck.marpStyle,
                 cockpitColorScheme: settings.cockpitColorScheme,
                 allowRemoteMedia: settings.allowRemoteMedia,

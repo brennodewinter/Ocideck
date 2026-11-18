@@ -10,9 +10,15 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   /// recording. Best-effort: decode errors are logged, not fatal.
   void _precacheNeighbours() {
     if (!mounted) return;
-    final logo = widget.themeProfile.logoPath;
-    if (logo != null && logo.isNotEmpty) {
-      _precachePath(logo, trusted: true);
+    // Alle gebruikte profielen (#2996): een logo van een lopende wissel mag
+    // op een volgende dia niet naderhand pas decoderen.
+    for (final logoPath in {
+      widget.themeProfile.logoPath,
+      for (final p in widget.slideStyles.values) p.logoPath,
+    }) {
+      if (logoPath != null && logoPath.isNotEmpty) {
+        _precachePath(logoPath, trusted: true);
+      }
     }
     // Current first, then the likely next/previous targets.
     for (final offset in const [0, 1, -1, 2]) {

@@ -10,6 +10,7 @@ import 'improvement_y01.dart';
 import 'seal_record.dart';
 import 'slide.dart';
 import 'marp_style.dart';
+import 'slide_style.dart';
 import 'used_tool.dart';
 import 'settings.dart';
 import '../services/miauw_codec.dart';
@@ -203,6 +204,15 @@ class Deck {
   /// (`images/foto.png`) op te lossen — zie `resolveDeckAssetUrl` (#2282).
   final String? remoteAssetBase;
   final ThemeProfile themeProfile;
+
+  /// De stijlprofielen waarnaar de stijlmarkeringen van de dia's wijzen
+  /// (`Slide.styleName`, #2996), op naam opgelost bij het openen en bij het
+  /// zetten van een wissel — net als [themeProfile] bij openen wordt opgelost.
+  /// Een markering die hier geen sleutel voor heeft (onbekend profiel, of een
+  /// deck dat elders is gemaakt) valt bij het renderen terug op
+  /// [themeProfile]; de naam blijft op de dia staan. Niet geserialiseerd: het
+  /// `.md` draagt alleen de namen.
+  final Map<String, ThemeProfile> slideStyles;
   final MarpStyle marpStyle;
 
   // ── General presentation metadata (stored in the markdown front matter) ──
@@ -303,6 +313,20 @@ class Deck {
 
   /// Vrije beschrijving van Y-01 — alias van [improvementY01Metric.name].
   String get improvementY01 => improvementY01Metric.name;
+
+  /// Het profiel dat op dia [index] gerenderd wordt: de actieve stijl-
+  /// markering, opgelost in [slideStyles]; de deckstijl als er geen bereik
+  /// loopt of de naam hier geen profiel voor heeft. Elke renderer en exporter
+  /// gebruikt deze — nooit rechtstreeks [themeProfile] voor een dia.
+  ThemeProfile slideProfileAt(int index) {
+    final name = slideStyleNameAt(slides, index);
+    return name == null ? themeProfile : (slideStyles[name] ?? themeProfile);
+  }
+
+  /// De naam van het stijlbereik waarin dia [index] ligt, of `null` bij de
+  /// deckstijl. Voor de interface: een dia ert een bereik dat op een eerdere
+  /// dia begon — zonder deze zou hij suggereren dat de stijl "hier" gezet is.
+  String? slideStyleNameAtIndex(int index) => slideStyleNameAt(slides, index);
 
   /// Documentintegriteit (§8 A1): is dit deck 'afgerond en verzegeld'? Een
   /// afgerond deck is bewust alleen-lezen — bekijken en exporteren kan, maar de
@@ -447,6 +471,7 @@ class Deck {
     this.projectPath,
     this.remoteAssetBase,
     this.themeProfile = const ThemeProfile(),
+    this.slideStyles = const {},
     this.marpStyle = const MarpStyle(),
     this.author = '',
     this.organization = '',
@@ -494,6 +519,7 @@ class Deck {
     String? projectPath,
     String? remoteAssetBase,
     ThemeProfile? themeProfile,
+    Map<String, ThemeProfile>? slideStyles,
     MarpStyle? marpStyle,
     bool clearProjectPath = false,
     String? author,
@@ -547,6 +573,7 @@ class Deck {
           ? null
           : (remoteAssetBase ?? this.remoteAssetBase),
       themeProfile: themeProfile ?? this.themeProfile,
+      slideStyles: slideStyles ?? this.slideStyles,
       marpStyle: marpStyle ?? this.marpStyle,
       author: author ?? this.author,
       organization: organization ?? this.organization,

@@ -613,6 +613,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Vanaf deze dia': 'À partir de cette diapositive',
+  'Deckstijl': 'Style du deck',
+  'Geërfd vanaf dia': 'Hérité depuis la diapositive',
+  'Geldt ook op de volgende dia\'s':
+      'S\'applique aussi aux diapositives suivantes',
+  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
+      'S\'applique à partir de cette diapositive jusqu\'au prochain changement de style. Le style du deck se choisit dans l\'en-tête de l\'éditeur.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Le chargement d’une image prend trop de temps. Rendez le fichier disponible localement et réessayez l’exportation.',
   'Sprekers corrigeren': 'Corriger les locuteurs',

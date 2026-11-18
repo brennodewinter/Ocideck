@@ -102,7 +102,10 @@ extension DeckNotifierSlides on DeckNotifier {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slide = deck.slides[index];
-    final pages = splitThemedBulletSlidePages(slide, deck.themeProfile);
+    final pages = splitThemedBulletSlidePages(
+      slide,
+      deck.slideProfileAt(index),
+    );
     if (pages == null) return;
     final slides = List<Slide>.from(deck.slides)
       ..removeAt(index)
@@ -339,6 +342,29 @@ extension DeckNotifierSlides on DeckNotifier {
     final slides = slidesWithJump(deck.slides, index, targetIndex);
     if (slides == null) return;
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
+  /// Zet de stijlmarkering van dia [index] (#2996): [styleName] `''` is geen
+  /// markering (erf wat er liep), `'deck'` keert terug naar de deckstijl,
+  /// anders de naam van een stijlprofiel.
+  ///
+  /// De wissel werkt voorwaarts: hij geldt voor deze dia en elke volgende tot
+  /// een nieuwe markering. Het profiel wordt meteen opgelost in
+  /// `Deck.slideStyles`, zodat ook een naam zonder instellingenprofiel — een
+  /// deck dat zijn stijl meedroeg — die behoudt. Een naam die niets meer
+  /// raakt valt uit de map.
+  void setSlideStyle(int index, String styleName) {
+    final deck = currentState.deck;
+    if (deck == null || index < 0 || index >= deck.slides.length) return;
+    final slides = List<Slide>.from(deck.slides);
+    slides[index] = slides[index].copyWith(styleName: styleName);
+    _mutate(
+      deck.copyWith(
+        slides: slides,
+        slideStyles: _resolvedSlideStyles(deck, slides),
+      ),
+      bumpRevision: true,
+    );
   }
 
   /// Laat menublok [blockIndex] van menudia [menuIndex] naar dia [targetIndex]

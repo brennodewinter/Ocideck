@@ -192,6 +192,9 @@ extension _ExportFormats on ExportService {
           markdown!,
           deckPath: deckPath,
           themeProfile: themeProfile,
+          // De diastijlen van de stijlwissel (#2996) reizen in hetzelfde
+          // geprojecteerde deck mee als de markers in de markdown.
+          slideStyles: audience?.audience.deck.slideStyles ?? const {},
           cockpitColorScheme: cockpitColorScheme,
           metadata: docMeta,
           fallbackTitle: fallbackTitle,
