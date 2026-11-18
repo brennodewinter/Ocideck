@@ -111,9 +111,11 @@ class _PresentationImportQueueDialogState
     // Zelfde poort als elke andere getDirectoryPath-aanroep: op web bestaat de
     // mapkiezer niet en geeft hij stil null terug (#150).
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map kiezen'),
-      initialDirectory: _directory ?? widget.initialDirectory,
+    final result = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: context.l10n.d('Map kiezen'),
+        initialDirectory: _directory ?? widget.initialDirectory,
+      ),
     );
     if (!mounted || result == null) return;
     setState(() => _directory = result);

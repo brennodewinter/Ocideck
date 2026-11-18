@@ -126,7 +126,7 @@ jobs:
     # `make check-no-coverage`) om — fail-closed. Alleen de repo-gekoppelde dingen
     # (pub + dartcv OpenCV-build) blijven op `actions/cache`.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0
     steps:
       - uses: actions/checkout@v4
 
@@ -207,7 +207,7 @@ jobs:
     runs-on: linux-serial
     timeout-minutes: 180
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.9
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0
     env:
       CMAKE_BUILD_PARALLEL_LEVEL: '4'
       LIBGL_ALWAYS_SOFTWARE: '1'

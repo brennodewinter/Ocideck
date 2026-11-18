@@ -123,9 +123,11 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     // bewijzen — en een garantie die elders staat, verdwijnt bij de
     // eerstvolgende nieuwe aanroeper.
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map met presentaties kiezen'),
-      initialDirectory: _directory,
+    final result = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: context.l10n.d('Map met presentaties kiezen'),
+        initialDirectory: _directory,
+      ),
     );
     if (!mounted) return;
     if (result != null) {

@@ -56,7 +56,7 @@ final FormInboxPickers systemFormInboxPickers = FormInboxPickers(
   // De werkmap zijn bestanden op schijf: in de browser bestaat `getDirectoryPath`
   // niet en geeft het stil null, en dan doet de knop zonder uitleg niets.
   folder: (title) async => supportsLocalProjectFolders
-      ? FilePicker.getDirectoryPath(dialogTitle: title)
+      ? localDirectoryPath(await FilePicker.pickDirectory(dialogTitle: title))
       : null,
   form: (title) async {
     final file = await FilePicker.pickFile(

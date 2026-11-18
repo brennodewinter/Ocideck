@@ -87,7 +87,7 @@ jobs:
           channel: stable
           # Letterlijk, en dat is met opzet: `make check-toolchain` leest deze
           # regel en faalt zodra hij afwijkt van de pin in .tool-versions.
-          flutter-version: 3.47.9
+          flutter-version: 3.50.0
           cache: true
 
       # The runner image still carries WebView2 131. Exercise the supported

@@ -230,11 +230,13 @@ class _DirectoryField extends ConsumerWidget {
 
   Future<void> _pick(BuildContext context, WidgetRef ref) async {
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map met OpenKAT-rapportages kiezen'),
-      initialDirectory:
-          ref.read(openKatDirectoryProvider) ??
-          ref.read(settingsProvider).homeDirectory,
+    final result = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: context.l10n.d('Map met OpenKAT-rapportages kiezen'),
+        initialDirectory:
+            ref.read(openKatDirectoryProvider) ??
+            ref.read(settingsProvider).homeDirectory,
+      ),
     );
     if (result == null) return;
     await ref.read(openKatProvider.notifier).setReportDirectory(result);

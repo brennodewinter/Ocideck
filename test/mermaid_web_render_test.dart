@@ -123,7 +123,7 @@ void main() {
       expect(service, contains('kIsWeb'));
       expect(
         service,
-        contains('web_renderer.renderMermaid'),
+        matches(RegExp(r'web_renderer\s*\.renderMermaid\s*\(')),
         reason: 'het web-pad moet de JS-interop-renderer gebruiken',
       );
     });

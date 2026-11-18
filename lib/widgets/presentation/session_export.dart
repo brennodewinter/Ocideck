@@ -30,6 +30,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
+import '../../platform/platform_features.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import '../../services/download_delivery.dart';
@@ -357,9 +358,11 @@ Future<_SessionExportOutcome> _downloadSessionSlides(
         ? _SessionExportOutcome.failed
         : _SessionExportOutcome.done;
   }
-  final dir = await FilePicker.getDirectoryPath(
-    dialogTitle: l10n.d('Map voor sessie-bestanden kiezen'),
-    initialDirectory: settings.homeDirectory,
+  final dir = localDirectoryPath(
+    await FilePicker.pickDirectory(
+      dialogTitle: l10n.d('Map voor sessie-bestanden kiezen'),
+      initialDirectory: settings.homeDirectory,
+    ),
   );
   // Geannuleerd — deck ongemoeid, en geen foutmelding: dit was een besluit.
   if (dir == null) return _SessionExportOutcome.cancelled;

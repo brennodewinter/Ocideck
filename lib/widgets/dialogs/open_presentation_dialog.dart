@@ -198,9 +198,11 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     // bewijzen — en een garantie die elders staat, verdwijnt bij de
     // eerstvolgende nieuwe aanroeper.
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map met presentaties kiezen'),
-      initialDirectory: _firstRootPath,
+    final result = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: context.l10n.d('Map met presentaties kiezen'),
+        initialDirectory: _firstRootPath,
+      ),
     );
     if (!mounted) return;
     if (result != null) {

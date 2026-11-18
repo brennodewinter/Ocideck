@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:path/path.dart' as p;
 
 import 'platform_features_io.dart'
     if (dart.library.html) 'platform_features_web.dart'
@@ -44,3 +45,11 @@ String? get osHomeDirectory => impl.osHomeDirectory;
 /// de browser (CORS + CSP `connect-src 'self' https: wss:`) met dezelfde
 /// security-gate als op desktop.
 bool get supportsNetworkDeckSources => impl.supportsNetworkDeckSources;
+
+/// Zet de URI van een desktop-mapkiezer om naar het bestaande padformaat.
+/// Uri.directory voegt een afsluitende scheiding toe; normalisatie voorkomt
+/// dubbele bibliotheken en zoekmappen na de overstap naar de URI-API.
+String? localDirectoryPath(Uri? directory) =>
+    directory == null || directory.scheme != 'file'
+    ? null
+    : p.normalize(directory.toFilePath());

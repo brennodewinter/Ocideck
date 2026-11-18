@@ -94,6 +94,7 @@ same answer `make licenses` and the SBOM give.
 | `app_localizations` | Shared product-neutral language registry, base translations and language selector from LibreKAT AppFoundation | EUPL-1.2 |
 | `secret_storage` | Shared product-neutral secure-storage contract and fail-closed native keychain adapter from LibreKAT AppFoundation | EUPL-1.2 |
 | `network_guard` | Shared product-neutral egress/SSRF gate, socket pinning, AI egress tiers and the OpenAI-compatible transport contract from LibreKAT AppFoundation | EUPL-1.2 |
+| `cupertino_ui` | Standalone Cupertino widgets and localisation delegates | BSD-3-Clause |
 | `material_ui` | Standalone Material Design widget library (decoupled from core Flutter in 3.47) | BSD-3-Clause |
 | `flutter_riverpod` | Application state | MIT |
 | `file_picker` | Open/save dialogs | MIT |

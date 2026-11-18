@@ -508,8 +508,10 @@ extension _CarouselActions on _ImageCarouselPickerState {
     final l10n = context.l10n;
     // Zelfde poort als elders: op web bestaat getDirectoryPath niet (#150).
     if (!supportsLocalProjectFolders) return;
-    final picked = await FilePicker.getDirectoryPath(
-      dialogTitle: l10n.d('Kies een map met afbeeldingen'),
+    final picked = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: l10n.d('Kies een map met afbeeldingen'),
+      ),
     );
     if (picked == null || !mounted) return;
     if (_extraRoots.contains(picked) || widget.searchPaths.contains(picked)) {
