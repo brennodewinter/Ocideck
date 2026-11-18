@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
 import 'platform_features_io.dart'
-    if (dart.library.html) 'platform_features_web.dart'
+    if (dart.library.js_interop) 'platform_features_web.dart'
     as impl;
 
 /// Whether the app runs in a browser (Flutter web).

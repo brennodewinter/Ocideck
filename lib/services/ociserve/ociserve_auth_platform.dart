@@ -1,5 +1,5 @@
 import 'ociserve_auth_platform_io.dart'
-    if (dart.library.html) 'ociserve_auth_platform_web.dart'
+    if (dart.library.js_interop) 'ociserve_auth_platform_web.dart'
     as implementation;
 
 abstract class OciServeAuthorizationReceiver {

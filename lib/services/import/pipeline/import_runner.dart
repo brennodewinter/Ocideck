@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
 import 'import_runner_io.dart'
-    if (dart.library.html) 'import_runner_web.dart'
+    if (dart.library.js_interop) 'import_runner_web.dart'
     as impl;
 import 'import_task.dart';
 
