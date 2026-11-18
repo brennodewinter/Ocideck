@@ -8,7 +8,7 @@ version in your browser. Your deck stays in the tab; nothing is uploaded.
 
 | Platform | File |
 | --- | --- |
-| macOS (Apple Silicon + Intel) | `ocideck-macos-@VERSIE@.zip` |
+| macOS (Apple Silicon, arm64) | `ocideck-macos-@VERSIE@.zip` |
 | Windows — installer | `ocideck-windows-x64-setup-@VERSIE@.exe` |
 | Windows — portable zip | `ocideck-windows-x64-@VERSIE@.zip` |
 | Linux — AppImage (most distributions) | `ocideck-linux-x86_64-@VERSIE@.AppImage` |
