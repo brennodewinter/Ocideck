@@ -72,6 +72,7 @@ assert_windows_merge_gate() { :; }
 wait_windows_merge_gate() { :; }
 assert_candidate_refs() { :; }
 release_candidate_run() { CANDIDATE_RUN_ID=123; }
+ensure_candidate_publication() { :; }
 git() {
   printf '%s\\n' "\$*" >> "\$GITCALLS"
   case "\$*" in

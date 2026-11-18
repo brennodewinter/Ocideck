@@ -32,6 +32,7 @@ void main() {
     'wrong-candidate-sha',
     'wrong-candidate-ref',
     'archive-mismatch',
+    'publication-failure',
   ]) {
     test(
       'pretag orchestration: $scenario',
@@ -107,8 +108,13 @@ assert_tag_commit() { [ "\$2" = "\$3" ] || die wrong-tag; }
 remote_tag_commit() {
   if [ -f "\$FIXTURE/tag-pushed" ]; then printf '%s\\n' "\$SHA"; else return 1; fi
 }
-ensure_mirror_tag() { :; }
-ensure_candidate_publication() { :; }
+ensure_mirror_tag() { touch "\$FIXTURE/mirror-checked"; }
+ensure_candidate_publication() {
+  [ -f "\$FIXTURE/tag-pushed" ] || die publication-before-tag
+  [ -f "\$FIXTURE/mirror-checked" ] || die publication-before-mirror
+  printf '%s|%s\\n' "\$1" "\$CANDIDATE_RUN_ID" > "\$FIXTURE/publication"
+  [ "\$SCENARIO" != publication-failure ] || die publication-failed-resume-same-tag
+}
 expected_release_assets() { printf 'payload.bin\\n'; }
 verify_release_manifest() { [ "\$(wc -l < "\$1" | tr -d ' ')" = 1 ]; }
 git() {
@@ -172,9 +178,18 @@ tag_and_push "\$SHA"
           expect(result.exitCode, 0, reason: output);
           expect(tagged, isTrue);
           expect(
+            File('${dir.path}/publication').readAsStringSync(),
+            '$sha|123\n',
+          );
+          expect(
             File('${dir.path}/tag-created').readAsStringSync(),
             endsWith('$sha\n'),
           );
+        } else if (scenario == 'publication-failure') {
+          expect(result.exitCode, 42, reason: output);
+          expect(tagged, isTrue, reason: output);
+          expect(output, contains('publication-failed-resume-same-tag'));
+          expect(File('${dir.path}/tag-created').existsSync(), isTrue);
         } else {
           expect(result.exitCode, 42, reason: output);
           expect(tagged, isFalse, reason: output);
