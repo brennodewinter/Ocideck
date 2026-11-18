@@ -421,8 +421,8 @@ jobs:
 
       - name: Browser platform contracts under both Dart compilers
         run: |
-          flutter test --platform chrome --wasm test/web_wasm_platform_test.dart
-          flutter test --platform chrome test/web_wasm_platform_test.dart
+          flutter test --platform chrome --wasm test/web_wasm_platform_test.dart test/ai_web_gate_test.dart
+          flutter test --platform chrome test/web_wasm_platform_test.dart test/ai_web_gate_test.dart
 
   # Validate internal Markdown links (relative file links) across the repo.
   # --offline skips external URLs so the check can't flake on third-party sites.

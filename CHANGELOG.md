@@ -14,7 +14,9 @@ All notable changes to OciDeck are documented in this file.
   geweigerde of als toolverzoek teruggegeven antwoorden overschrijven geen
   bestaande tekst. Ongeldige provider-JSON komt zonder broninhoud in de
   foutdiagnostiek. Oudere compatibele servers en lege onthoudingen blijven
-  ondersteund.
+  ondersteund. Op web wordt netwerk-AI voor alle backendkeuzes geweigerd vóór
+  native netwerkcode wordt aangeroepen; ook oude desktopinstellingen geven
+  daardoor een gewone melding in plaats van een browserfout.
 
 ### Changed
 

@@ -513,6 +513,12 @@ unsupported output from becoming a suggestion that looks finished. Empty
 completed answers remain an abstention; legacy compatible servers that omit
 `finish_reason` remain supported. The shared wire types are unchanged.
 
+The existing desktop-only network-AI policy is now enforced before entering
+native network-address parsing on web. A stored local/self-hosted/cloud profile
+is refused without touching transport, rather than reaching the native-only
+`InternetAddress.tryParse`. Dedicated browser tests cover JavaScript and WASM.
+This boundary does not claim to implement future in-process MediaPipe tasks.
+
 Malformed JSON becomes a payload-free `AiRequestException`, so a decoder's
 exception cannot carry private response text into a consumer's logs. No prompt
 is retried automatically. Existing text is preserved on failure, including after
