@@ -8,6 +8,11 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.12] — 2026-11-18
+
+Afzonderlijke webpublicatie met Flutter 3.50, WASM, dia-stijlwissels en de
+verbeterde AI-controles. Deze publicatie bouwt uitsluitend de webversie.
+
 ### Changed
 
 - AI-concepten worden strenger op volledigheid gecontroleerd: afgebroken,
