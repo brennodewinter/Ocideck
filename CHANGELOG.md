@@ -8,6 +8,12 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- Linux: voorkom een opstartcrash zonder beschikbare sleutelbos onder Flutter
+  3.50. De systeem-unwinder wordt vóór de engine geladen, zodat plugins hun
+  C++-fouten weer kunnen afvangen en als gewone opslagfout melden.
+
 ## [0.7.12] — 2026-11-18
 
 Afzonderlijke webpublicatie met Flutter 3.50, WASM, dia-stijlwissels en de
