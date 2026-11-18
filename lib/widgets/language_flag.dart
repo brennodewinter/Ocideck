@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../l10n/app_localizations.dart';
 
 /// A small flag for a language code, for the language pickers. Most languages
@@ -18,7 +19,13 @@ Widget languageFlag(String code, {double size = 15}) {
   }
   final flag = AppLocalizations.languageFlags[code];
   if (flag == null) return const SizedBox.shrink();
-  return Text(flag, style: TextStyle(fontSize: size));
+  return Text(
+    flag,
+    style: TextStyle(
+      fontSize: size,
+      fontFamily: kIsWeb ? 'Noto Color Emoji' : null,
+    ),
+  );
 }
 
 /// A dropdown row: the language's flag followed by its display name.

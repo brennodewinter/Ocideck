@@ -101,6 +101,12 @@ abstract final class BundledLicenses {
       licenseAsset: 'assets/fonts/RobotoMono-OFL.txt',
     ),
     BundledLicense(
+      component: 'Noto Color Emoji (font, interface slice)',
+      license: 'OFL-1.1',
+      source: 'https://github.com/googlefonts/noto-emoji',
+      licenseAsset: 'assets/fonts/NotoColorEmoji-OFL.txt',
+    ),
+    BundledLicense(
       component: 'Noto Sans Math (font, subset)',
       license: 'OFL-1.1',
       source: 'https://github.com/notofonts/math',

@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:8e735bae-d12c-5740-8722-a6efa8c16aba",
+  "serialNumber": "urn:uuid:d4199dde-f174-57da-8eaa-08f38566db83",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-18T11:43:04.353155Z",
+    "timestamp": "2026-11-18T12:50:21.254542Z",
     "tools": {
       "components": [
         {
@@ -9306,6 +9306,41 @@
       ]
     },
     {
+      "bom-ref": "font:assets/fonts/NotoColorEmoji0.woff2",
+      "type": "file",
+      "supplier": {
+        "name": "Google Inc.",
+        "url": [
+          "https://github.com/googlefonts/noto-emoji"
+        ]
+      },
+      "name": "Noto Color Emoji",
+      "purl": "pkg:generic/Noto%20Color%20Emoji",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1ea085e149cb9e5f1ac086f0580f7dc10d6cc06cb2e29caa8a7360064a7eadd6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/NotoColorEmoji0.woff2."
+        }
+      ]
+    },
+    {
       "bom-ref": "font:assets/fonts/NotoSansMath-subset.ttf",
       "type": "file",
       "name": "Noto Sans Math",
@@ -10246,6 +10281,7 @@
         "font:assets/fonts/EBGaramond-Variable.ttf",
         "font:assets/fonts/Inter-Variable.ttf",
         "font:assets/fonts/Lora-Variable.ttf",
+        "font:assets/fonts/NotoColorEmoji0.woff2",
         "font:assets/fonts/NotoSansMath-subset.ttf",
         "font:assets/fonts/Roboto-Variable.ttf",
         "font:assets/fonts/RobotoMono-Variable.ttf",
@@ -12169,6 +12205,10 @@
     },
     {
       "ref": "font:assets/fonts/Lora-Variable.ttf",
+      "dependsOn": []
+    },
+    {
+      "ref": "font:assets/fonts/NotoColorEmoji0.woff2",
       "dependsOn": []
     },
     {

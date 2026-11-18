@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.7.7+49** (licence EUPL-1.2) and every third-party component it ships (247 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
+This is **ocideck 0.7.7+49** (licence EUPL-1.2) and every third-party component it ships (248 in total), direct and transitive — the inventory as described in the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1).
 
-The JSON documents carry **884 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 12 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **885 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 12 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -13,7 +13,7 @@ The JSON documents carry **884 dependency relations** between these components: 
 | BSD-3-Clause | 132 |
 | MIT | 73 |
 | Apache-2.0 | 20 |
-| OFL-1.1 | 7 |
+| OFL-1.1 | 8 |
 | EUPL-1.2 | 5 |
 | NOASSERTION | 5 |
 | BSD | 3 |
@@ -275,7 +275,7 @@ The JSON documents carry **884 dependency relations** between these components: 
 | --- | --- | --- | --- | --- |
 | highlight.css | 11.11.1 | BSD-3-Clause | — | Hash-pinned export asset (no npm package). |
 
-### Bundled fonts (7)
+### Bundled fonts (8)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -283,6 +283,7 @@ The JSON documents carry **884 dependency relations** between these components: 
 | EB Garamond | — | OFL-1.1 | The EB Garamond Project Authors | `pkg:generic/EB%20Garamond` |
 | Inter | — | OFL-1.1 | The Inter Project Authors | `pkg:generic/Inter` |
 | Lora | — | OFL-1.1 | The Lora Project Authors | `pkg:generic/Lora` |
+| Noto Color Emoji | — | OFL-1.1 | Google Inc. | `pkg:generic/Noto%20Color%20Emoji` |
 | Noto Sans Math | — | OFL-1.1 | — | `pkg:generic/Noto%20Sans%20Math` |
 | Roboto | — | OFL-1.1 | The Roboto Project Authors | `pkg:generic/Roboto` |
 | Roboto Mono | — | OFL-1.1 | The Roboto Mono Project Authors | `pkg:generic/Roboto%20Mono` |

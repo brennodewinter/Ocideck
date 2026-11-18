@@ -1,0 +1,14 @@
+{
+  "family": "Noto Color Emoji",
+  "description": "Unmodified Flutter 3.50 fallback slice 0, used by the interface language flags. Other slices remain engine-managed.",
+  "source": "https://fonts.gstatic.com/s/notocoloremoji/v39/Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabsE4tq3luCC7p-aXxcn.0.woff2",
+  "sha256": "1ea085e149cb9e5f1ac086f0580f7dc10d6cc06cb2e29caa8a7360064a7eadd6",
+  "bytes": 709628,
+  "license": "OFL-1.1",
+  "licenseSource": "https://raw.githubusercontent.com/google/fonts/7af0d90b4d532ffa4b041937b560c6df4e7b1e95/ofl/notocoloremoji/OFL.txt",
+  "licenseSha256": "ac564676d10054a8445923dfc2dfb13c042d97888bd27c1b6ec6dfe89a9d8d62",
+  "supplier": {
+    "name": "Google Inc.",
+    "url": "https://github.com/googlefonts/noto-emoji"
+  }
+}
