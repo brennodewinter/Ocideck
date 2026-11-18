@@ -134,7 +134,13 @@ dependencies:
   logger: ^2.8.0
   shared_preferences_platform_interface: ^2.4.2
   # Desktop video backends: Media Foundation on Windows, libmpv on Linux.
-  video_player_win: ^3.3.1
+  # Official upstream fix: OpenURL's failure path must use shared_result after
+  # moving result. Pub 3.3.1 dereferences the moved pointer and crashes on an
+  # unsupported graphics adapter. Return to pub once a release contains this.
+  video_player_win:
+    git:
+      url: https://github.com/jakky1/video_player_win.git
+      ref: 017d394c1a6a4c721e7e67ad24eedf91e666d00f
   webview_win_floating: ^3.0.3
   video_player_media_kit: ^2.0.0
   media_kit_libs_linux: ^1.2.1

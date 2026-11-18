@@ -223,7 +223,7 @@ The JSON documents carry **884 dependency relations** between these components: 
 | video_player_media_kit _(direct main)_ | 2.0.0 | MIT | media-kit | `pkg:pub/video_player_media_kit@2.0.0` |
 | video_player_platform_interface _(direct dev)_ | 6.9.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_platform_interface@6.9.0` |
 | video_player_web _(transitive)_ | 2.4.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_web@2.4.0` |
-| video_player_win _(direct main)_ | 3.3.1 | BSD-3-Clause | jakky1 | `pkg:pub/video_player_win@3.3.1` |
+| video_player_win _(direct main)_ | 3.3.1 | BSD-3-Clause | jakky1 | https://github.com/jakky1/video_player_win.git @ `017d394c1a6a4c721e7e67ad24eedf91e666d00f` (.) |
 | vm_service _(transitive)_ | 15.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/vm_service@15.4.0` |
 | wakelock_plus _(direct main)_ | 1.8.0 | BSD-3-Clause | fluttercommunity | `pkg:pub/wakelock_plus@1.8.0` |
 | wakelock_plus_platform_interface _(transitive)_ | 1.7.0 | BSD-3-Clause | fluttercommunity | `pkg:pub/wakelock_plus_platform_interface@1.7.0` |

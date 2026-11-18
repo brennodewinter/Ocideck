@@ -139,7 +139,9 @@ All notable changes to OciDeck are documented in this file.
   tussenruimte. Desktop-mapkiezers gebruiken de URI-API; Material- en
   Cupertino-imports volgen de afgesplitste UI-packages. De Flutter-pins in
   documentatie, CI-images en vrijgaveroutes zijn gelijkgetrokken. Bewuste
-  fork- en cryptografie-pins blijven behouden.
+  fork- en cryptografie-pins blijven behouden. `video_player_win` volgt een
+  vastgezette officiële upstream-commit die een crash bij mislukte native
+  video-initialisatie herstelt; de fout kan zo worden afgehandeld.
 
 ## [0.7.7] — 2026-11-05
 

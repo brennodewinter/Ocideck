@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.7+49",
-  "documentNamespace": "https://ocideck.app/spdx/1759a69a-c29c-53d9-8364-15ce03a7caae",
+  "documentNamespace": "https://ocideck.app/spdx/a18abe38-1ba8-5e1a-8b90-b05ef677e86d",
   "creationInfo": {
-    "created": "2026-11-18T10:19:05.636383Z",
+    "created": "2026-11-18T11:43:04.353155Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4404,23 +4404,12 @@
       "name": "video_player_win",
       "versionInfo": "3.3.1",
       "supplier": "Organization: jakky1",
-      "downloadLocation": "https://pub.dev/packages/video_player_win/versions/3.3.1",
+      "downloadLocation": "https://github.com/jakky1/video_player_win.git",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "1616be414376aa142ca1b6360f5e1de2568c479bb14bed3d8e5011d92b112a8c"
-        }
-      ],
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:pub/video_player_win@3.3.1"
-        }
-      ]
+      "sourceInfo": "Resolved from https://github.com/jakky1/video_player_win.git at commit 017d394c1a6a4c721e7e67ad24eedf91e666d00f; package subpath ..",
+      "comment": "Source: git."
     },
     {
       "SPDXID": "SPDXRef-199-vm-service",
@@ -5511,6 +5500,11 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-198-video-player-win"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-231-dompurify"
     },
     {
@@ -5787,11 +5781,6 @@
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-196-video-player-platform-interface"
-    },
-    {
-      "spdxElementId": "SPDXRef-0-ocideck",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-198-video-player-win"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",

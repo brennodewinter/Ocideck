@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:13ce7090-781a-5026-888a-add3a193173b",
+  "serialNumber": "urn:uuid:8e735bae-d12c-5740-8722-a6efa8c16aba",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-18T10:19:05.636383Z",
+    "timestamp": "2026-11-18T11:43:04.353155Z",
     "tools": {
       "components": [
         {
@@ -8295,7 +8295,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/video_player_win@3.3.1",
+      "bom-ref": "git:video_player_win@3.3.1",
       "type": "library",
       "supplier": {
         "name": "jakky1",
@@ -8305,7 +8305,6 @@
       },
       "name": "video_player_win",
       "version": "3.3.1",
-      "purl": "pkg:pub/video_player_win@3.3.1",
       "licenses": [
         {
           "license": {
@@ -8313,16 +8312,10 @@
           }
         }
       ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "1616be414376aa142ca1b6360f5e1de2568c479bb14bed3d8e5011d92b112a8c"
-        }
-      ],
       "externalReferences": [
         {
-          "type": "distribution",
-          "url": "https://pub.dev/packages/video_player_win/versions/3.3.1"
+          "type": "vcs",
+          "url": "https://github.com/jakky1/video_player_win.git"
         }
       ],
       "properties": [
@@ -8333,6 +8326,18 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct main"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "017d394c1a6a4c721e7e67ad24eedf91e666d00f"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "."
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: git."
         }
       ]
     },
@@ -10255,6 +10260,7 @@
         "git:nativeapi@0.1.4",
         "git:network_guard@0.1.0",
         "git:secret_storage@0.1.0",
+        "git:video_player_win@3.3.1",
         "pkg:npm/dompurify@3.4.17",
         "pkg:npm/highlight.js@11.11.1",
         "pkg:npm/marked@18.0.5",
@@ -10311,7 +10317,6 @@
         "pkg:pub/video_player@2.14.1",
         "pkg:pub/video_player_media_kit@2.0.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
-        "pkg:pub/video_player_win@3.3.1",
         "pkg:pub/wakelock_plus@1.8.0",
         "pkg:pub/web@1.1.2",
         "pkg:pub/webview_flutter@4.14.1",
@@ -11989,7 +11994,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/video_player_win@3.3.1",
+      "ref": "git:video_player_win@3.3.1",
       "dependsOn": [
         "pkg:pub/plugin_platform_interface@2.1.8",
         "pkg:pub/video_player_platform_interface@6.9.0",
