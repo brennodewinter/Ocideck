@@ -156,9 +156,11 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
     // Zelfde poort als elders: op web bestaat getDirectoryPath niet en geeft
     // het stil null terug — dan doet de knop niets zonder uitleg (#150).
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map kiezen'),
-      initialDirectory: _dir,
+    final result = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: context.l10n.d('Map kiezen'),
+        initialDirectory: _dir,
+      ),
     );
     if (!mounted || result == null) return;
     setState(() {

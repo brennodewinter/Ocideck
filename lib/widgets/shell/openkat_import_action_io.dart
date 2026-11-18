@@ -55,11 +55,13 @@ Future<OpenKatImportOutcome?> importOpenKatReports(
     context,
     controller: controller,
     initialDirectory: initialDirectory,
-    chooseDirectory: () => FilePicker.getDirectoryPath(
-      dialogTitle: l10n.d('Map met OpenKAT-rapportages kiezen'),
-      initialDirectory:
-          ref.read(openKatDirectoryProvider) ??
-          ref.read(settingsProvider).homeDirectory,
+    chooseDirectory: () async => localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: l10n.d('Map met OpenKAT-rapportages kiezen'),
+        initialDirectory:
+            ref.read(openKatDirectoryProvider) ??
+            ref.read(settingsProvider).homeDirectory,
+      ),
     ),
     // Een keuze is nog geen geslaagde import. Pas na de bevestigde build
     // bewaren we de map, zodat annuleren of een bouwfout geen pad achterlaat.

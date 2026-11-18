@@ -130,12 +130,18 @@ All notable changes to OciDeck are documented in this file.
   bronarchief; de software-inventaris en consumentimages volgen de nieuwe
   multimedia-afhankelijkheden.
 
-- Flutter 3.47.9 (Dart 3.13.7) en de oplosbare pakketten zijn bijgewerkt:
-  `file_picker` 13.3.2, `pdfrx` 2.12.0 (met `pdfrx_engine` 0.9.1 en
-  `pdfium_dart`/`pdfium_flutter` 0.4.1), `flutter_riverpod` 3.5.0,
-  `material_ui` 1.10.0, `fl_chart` 1.3.0, `pasteboard` 0.6.0 en `flutter_svg`
-  2.3.2; de software-inventaris volgt. De CI-images en de vrijgaveroutes
-  draaien op dezelfde Flutter.
+- Flutter 3.50.0 (Dart 3.14.0) en de oplosbare pakketten zijn bijgewerkt:
+  `file_picker` 13.4.0, `pdfrx` 3.0.2 (met `pdfrx_engine` 0.9.5 en
+  `pdfium_dart`/`pdfium_flutter` 0.4.4), `archive` 4.7.1, `image` 4.13.1,
+  `material_ui` 1.11.1, `fl_chart` 1.3.1, `pasteboard` 0.6.1 en `flutter_svg`
+  2.4.0; ook de gedeelde formulierpackage en de software-inventaris volgen.
+  De PDF-viewer gebruikt de nieuwe layout-API met dezelfde paginamarges en
+  tussenruimte. Desktop-mapkiezers gebruiken de URI-API; Material- en
+  Cupertino-imports volgen de afgesplitste UI-packages. De Flutter-pins in
+  documentatie, CI-images en vrijgaveroutes zijn gelijkgetrokken. Bewuste
+  fork- en cryptografie-pins blijven behouden. `video_player_win` volgt een
+  vastgezette officiële upstream-commit die een crash bij mislukte native
+  video-initialisatie herstelt; de fout kan zo worden afgehandeld.
 
 ## [0.7.7] — 2026-11-05
 

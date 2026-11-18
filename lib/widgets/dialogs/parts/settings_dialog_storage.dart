@@ -23,9 +23,11 @@ Future<String?> _pickDirectoryGated({
   String? initialDirectory,
 }) async {
   if (!supportsLocalProjectFolders) return null;
-  return FilePicker.getDirectoryPath(
-    dialogTitle: dialogTitle,
-    initialDirectory: initialDirectory,
+  return localDirectoryPath(
+    await FilePicker.pickDirectory(
+      dialogTitle: dialogTitle,
+      initialDirectory: initialDirectory,
+    ),
   );
 }
 

@@ -46,6 +46,10 @@ void main() {
 
       // De gate laat het door, dus de "rendering…" snackbar verschijnt.
       expect(find.text('Slide renderen…'), findsOneWidget);
+      // De nep-engine rondt de afbeeldingsdecode niet af. Laat de deadline
+      // aflopen zodat de export zijn listener en timer opruimt vóór teardown.
+      await tester.pump(const Duration(seconds: 21));
+      await tester.pumpAndSettle();
     },
   );
 }

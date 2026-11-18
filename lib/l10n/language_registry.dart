@@ -4,7 +4,7 @@
 // `make translate-docs-check`) needs the list of interface languages and the
 // documentation's base language. It cannot get them from [AppLocalizations] or
 // [DocumentationService]: those live in libraries that import
-// `package:flutter/material.dart` and `dart:ui`, and the standalone VM cannot
+// `package:material_ui/material_ui.dart` and `dart:ui`, and the standalone VM cannot
 // compile that graph (under some toolchains it does not even fail cleanly — the
 // FFI use-site transformer crashes). So the data lives here, with no Flutter
 // dependency, and both the app and the tooling read the same single source.

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/call_audio_source.dart';
+import 'package:ocideck/platform/platform_features.dart';
 import 'package:ocideck/services/trash_service.dart';
 import 'package:ocideck/services/transcription/bundled_audio_helper_io.dart';
 import 'package:ocideck/services/transcription/linux_mic_recorder_io.dart';
@@ -10,6 +11,23 @@ import 'package:path/path.dart' as p;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  test(
+    'map-URI behoudt padidentiteit, spaties en de bestandssysteemwortel',
+    () {
+      final directory = p.join(Directory.systemTemp.path, 'Rapporten #1');
+      expect(
+        localDirectoryPath(Uri.directory(directory)),
+        p.normalize(directory),
+      );
+      final root = p.rootPrefix(Directory.systemTemp.absolute.path);
+      expect(localDirectoryPath(Uri.directory(root)), root);
+      expect(localDirectoryPath(null), isNull);
+      expect(
+        localDirectoryPath(Uri.parse('content://provider/tree/42')),
+        isNull,
+      );
+    },
+  );
   test(
     'each desktop has a per-track call binding; mobile remains unavailable',
     () {

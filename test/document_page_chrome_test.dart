@@ -2,7 +2,7 @@
 // De PDF deelt dezelfde maat (`documentLogoWidthPt`) en dezelfde begrenzing;
 // wat hier op het scherm staat, is wat de export op het vel zet.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/settings.dart';

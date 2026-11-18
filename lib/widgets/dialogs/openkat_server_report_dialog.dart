@@ -538,11 +538,13 @@ class _OpenKatServerReportDialogState
 
   Future<void> _pickFolder() async {
     if (!supportsLocalProjectFolders) return;
-    final dir = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map met OpenKAT-rapportages kiezen'),
-      initialDirectory:
-          ref.read(openKatDirectoryProvider) ??
-          ref.read(settingsProvider).homeDirectory,
+    final dir = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: context.l10n.d('Map met OpenKAT-rapportages kiezen'),
+        initialDirectory:
+            ref.read(openKatDirectoryProvider) ??
+            ref.read(settingsProvider).homeDirectory,
+      ),
     );
     if (dir == null || !mounted) return;
     setState(() => _importing = true);

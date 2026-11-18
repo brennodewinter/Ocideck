@@ -86,9 +86,11 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
     // bewijzen — en een garantie die elders staat, verdwijnt bij de
     // eerstvolgende nieuwe aanroeper.
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map kiezen'),
-      initialDirectory: _selectedPath,
+    final result = localDirectoryPath(
+      await FilePicker.pickDirectory(
+        dialogTitle: context.l10n.d('Map kiezen'),
+        initialDirectory: _selectedPath,
+      ),
     );
     if (!mounted || result == null) return;
     setState(() {

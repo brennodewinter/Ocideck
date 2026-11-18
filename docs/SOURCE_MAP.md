@@ -1167,6 +1167,9 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 
 ## `lib/utils/` — small shared helpers
 
+- `image_preload.dart` — Loads export images with a deadline and removes the image-stream listener on completion or timeout.
+- `ui_frame.dart` — Schedules and awaits a UI frame with a deadline, including idle windows.
+
 - `asset_destination.dart` — `resolveAssetDestination`: picks where an imported asset lands. On a name clash it compares contents — identical means reuse, different means a numbered suffix — so two pictures both called `screenshot.png` stay two pictures instead of silently becoming one.
 - `archive_limits.dart` — `ExtractionLimitException`: het gedeelde signaal dat een uitgepakte entry voorbij zijn byte-budget groeit (decompressiebom-detectie), gedeeld door `file_service_package` en `cve_bulk_ingest`. `CappedArchiveOutput` + `writeArchiveEntryCapped`: de begrensde directe inflater voor imports (elk platform) en pakketten op web, die zelf slotblok, grootte en CRC-32 toetst omdat de ruwe stroom de decodervlaggen omzeilt. `neutralZipTime`: de vaste lidtijd voor pakket, auditdossier en downloadbundel — archive 4.6 schrijft anders lokale DOS-tijd plus een UT-veld in de onversleutelde centrale map, en daarmee het exportmoment en de UTC-offset van de maker.
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash. `writeStringAtomicIfChanged` first compares exact UTF-8 bytes, so deterministic generated themes/configuration/sidecars keep their timestamp and avoid a durable flush when nothing changed.

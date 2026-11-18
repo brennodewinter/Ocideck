@@ -21,3 +21,6 @@ when the application can adopt its Apple plugin without changing build tooling.
 
 Upstream pub archive SHA-256:
 `afaa509e7b7e0bf247557a3a740cde903a52c34ace9810f94500e127bd7b043d`.
+
+Material imports use `material_ui` instead of the Flutter 3.50 deprecated
+`flutter/material.dart` re-export; the package declares that dependency.

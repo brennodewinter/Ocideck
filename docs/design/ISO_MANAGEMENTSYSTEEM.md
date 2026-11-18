@@ -249,8 +249,8 @@ te vullen voor wie hem niet nodig heeft.
 [`management_system_progress.dart`](../../lib/services/management_system_progress.dart)
 (`ManagementSystemProgress` / `ControlSectionProgress` +
 `deckManagementSystemProgress`), naar het patroon van
-[`MiauwComplianceAnalyzer`](../../lib/services/miauw_compliance_analyzer.dart) en
-[`management_summary.dart`](../../lib/services/management_summary.dart). Hij leest
+`MiauwComplianceAnalyzer` en `management_summary.dart` (historische, inmiddels
+verwijderde onderdelen). Hij leest
 alle `controlStatus`-dia's in dia-volgorde en telt per sectie het aantal
 controls, het aantal *van toepassing* (alles behalve `NotApplicable`), het aantal
 geïmplementeerd en het aantal deels, plus de deck-brede totalen. Het

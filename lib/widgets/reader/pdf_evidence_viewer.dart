@@ -146,7 +146,10 @@ class _PdfEvidenceViewerState extends State<PdfEvidenceViewer> {
               controller: _controller,
               passwordProvider: _requestPassword,
               params: PdfViewerParams(
-                margin: 24,
+                layoutStrategy: const SequentialPagesLayout(
+                  margin: 24,
+                  spacing: 24,
+                ),
                 backgroundColor: theme.colorScheme.surfaceContainerLow,
                 pageDropShadow: BoxShadow(
                   color: theme.colorScheme.shadow.withValues(alpha: 0.18),

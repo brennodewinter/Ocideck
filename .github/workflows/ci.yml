@@ -63,7 +63,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.47.9
+          flutter-version: 3.50.0
           cache: true
 
       - name: Flutter version
@@ -254,6 +254,9 @@ jobs:
           xvfb-run -a flutter test integration_test/desktop_media_test.dart -d linux
           xvfb-run -a flutter test integration_test/document_pdf_graphics_test.dart -d linux
           xvfb-run -a flutter test integration_test/desktop_audio_test.dart -d linux
+          # Flutter removes build/test/listener_0.dart after integration tests.
+          # Restore the persistent app entrypoint before a direct CMake build.
+          flutter build linux --debug
           cmake --build build/linux/x64/debug --target ocideck_track_capture_test -j2
           build/linux/x64/debug/native_audio_tests/ocideck_track_capture_test
           cmake --build build/linux/x64/debug --target ocideck_capture_startup_test -j2
@@ -319,7 +322,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.47.9
+          flutter-version: 3.50.0
           cache: true
 
       - name: Install dependencies
@@ -349,9 +352,11 @@ jobs:
         shell: bash
         run: |
           flutter test integration_test/native_face_scan_test.dart -d windows
-          flutter test integration_test/desktop_media_test.dart -d windows
+          flutter drive --driver=test_driver/native_integration_driver.dart --target=integration_test/desktop_media_test.dart -d windows
           flutter test integration_test/document_pdf_graphics_test.dart -d windows
           flutter test integration_test/desktop_audio_test.dart -d windows
+          # The integration-test listener is temporary; CMake needs main.dart.
+          flutter build windows --debug
           cmake --build build/windows/x64 --config Debug --target ocideck_track_capture_test
           build/windows/x64/native_audio_tests/Debug/ocideck_track_capture_test.exe
           cmake --build build/windows/x64 --config Debug --target ocideck_capture_startup_test
@@ -391,7 +396,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.47.9
+          flutter-version: 3.50.0
           cache: true
 
       - name: Install dependencies
