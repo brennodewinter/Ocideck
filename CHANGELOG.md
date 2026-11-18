@@ -10,17 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ## [0.7.13] — 2026-11-18
 
+Volledige release voor macOS, Windows, Linux en web. Vervangt de ongetagde
+voorbereiding van webversie 0.7.12; de wijzigingen daarvan zijn hieronder
+opgenomen. Nieuw zijn onder meer Flutter 3.50, WASM, dia-stijlwissels en
+verbeterde AI-controles.
 
 ### Fixed
 
 - Linux: voorkom een opstartcrash zonder beschikbare sleutelbos onder Flutter
   3.50. De systeem-unwinder wordt vóór de engine geladen, zodat plugins hun
   C++-fouten weer kunnen afvangen en als gewone opslagfout melden.
-
-## [0.7.12] — 2026-11-18
-
-Afzonderlijke webpublicatie met Flutter 3.50, WASM, dia-stijlwissels en de
-verbeterde AI-controles. Deze publicatie bouwt uitsluitend de webversie.
 
 ### Changed
 
