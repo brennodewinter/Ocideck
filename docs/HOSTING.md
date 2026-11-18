@@ -24,11 +24,12 @@ backend. *(Clarified 2026-11-08.)*
 make build-web
 ```
 
-This runs `flutter build web --release --no-web-resources-cdn --csp` plus the
+This runs the WASM + JavaScript fallback build with content hashes, modern JS
+interop checks, `--no-web-resources-cdn --csp`, plus the
 security prerequisites, and produces `build/web/`. What the flags buy you:
 
 - `--no-web-resources-cdn` — CanvasKit is served from **your** origin, not the
-  gstatic CDN, so the running app pulls **zero third-party origins**.
+  gstatic CDN. This flag controls engine resources, not all dynamic font fallback.
 - `--csp` — a CSP-safe loader (no inline/`eval` scripts).
 
 The build also:

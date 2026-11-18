@@ -94,8 +94,10 @@ The following flags keep the bundle **self-contained and CSP-safe**:
   strict Content-Security-Policy declared in `web/index.html` (`script-src 'self'
   'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`).
 
-The UI font (Roboto) is bundled too, so the engine never reaches out to
-`fonts.gstatic.com`. Remote deck media is blocked on web by that CSP by design;
+The UI font (Roboto) and interface-flag emoji slice are bundled. The browser
+probes verify no external requests at startup. Text outside the bundled fonts
+can still trigger Flutter's dynamic font fallback; air-gapped installations
+need local fonts covering the scripts used by their decks. Remote deck media is blocked on web by that CSP by design;
 to allow it, add `https:` to `img-src`/`media-src` in `web/index.html`.
 
 Serve `build/web/` from any static host. The web build supports editing, preview,
