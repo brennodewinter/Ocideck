@@ -1817,13 +1817,21 @@ PYWEB
 live_web_bundle_matches() {
   curl -fsSL --connect-timeout 10 --max-time 30 "$DEPLOY_URL/SHA256SUMS" \
     | cmp -s - "$1/SHA256SUMS" || return 1
-  python3 - "$1/SHA256SUMS" "$DEPLOY_URL" <<'PYLIVE'
-import concurrent.futures, hashlib, pathlib, sys, urllib.parse, urllib.request
-manifest, base_url = sys.argv[1:]
+  python3 - "$1/SHA256SUMS" "$DEPLOY_URL" "$ROOT_DIR/scripts/deploy_web.sh" <<'PYLIVE'
+import concurrent.futures, hashlib, pathlib, subprocess, sys, urllib.parse, urllib.request
+manifest, base_url, deploy_helper = sys.argv[1:]
 entries = []
 for line in pathlib.Path(manifest).read_text().splitlines():
     digest, name = line.split(maxsplit=1)
     entries.append((digest, name.removeprefix("*").removeprefix("./")))
+
+# Apache schermt zijn configuratie af. Verifieer diezelfde bytes via de
+# bestaande private deploycontrole; alle publieke bestanden blijven hieronder.
+if any(name == ".htaccess" for _, name in entries):
+    if subprocess.run(["bash", deploy_helper, "--verify-server-config-only",
+                       "--bundle-dir", str(pathlib.Path(manifest).parent)], timeout=120).returncode:
+        raise SystemExit("private webserverconfiguratie wijkt af of is onbereikbaar")
+    entries = [(digest, name) for digest, name in entries if name != ".htaccess"]
 
 def matches(entry):
     digest, name = entry
