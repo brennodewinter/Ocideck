@@ -1,0 +1,36 @@
+{
+  "additions": {
+    "Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.": {
+      "en": "Loading an image is taking too long. Make the file available locally and try exporting again.",
+      "it": "Il caricamento di un’immagine sta richiedendo troppo tempo. Rendi il file disponibile in locale e riprova a esportare.",
+      "de": "Das Laden eines Bildes dauert zu lange. Stelle die Datei lokal bereit und versuche den Export erneut.",
+      "fr": "Le chargement d’une image prend trop de temps. Rendez le fichier disponible localement et réessayez l’exportation.",
+      "es": "Una imagen está tardando demasiado en cargarse. Haz que el archivo esté disponible localmente e intenta exportar de nuevo.",
+      "fy": "It laden fan in ôfbylding duorret te lang. Meitsje it bestân lokaal beskikber en besykje opnij te eksportearjen.",
+      "pap": "Kargamentu di un imágen ta dura muchu largu. Pone e archivo disponibel lokalmente i purba eksportá atrobe.",
+      "la": "Imago diutius quam oportet oneratur. Fac ut fasciculus in hoc computatro praesto sit et rursus exportare conare.",
+      "id": "Pemuatan gambar terlalu lama. Sediakan berkas secara lokal dan coba ekspor lagi.",
+      "pl": "Wczytywanie obrazu trwa zbyt długo. Udostępnij plik lokalnie i spróbuj ponownie wyeksportować.",
+      "uk": "Завантаження зображення триває надто довго. Зробіть файл доступним локально та спробуйте експортувати знову.",
+      "gsw": "S Lade von eme Bild duuret z lang. Stell d Datei lokal bereit und probier de Export nomal.",
+      "el": "Η φόρτωση μιας εικόνας διαρκεί υπερβολικά πολύ. Κάντε το αρχείο διαθέσιμο τοπικά και δοκιμάστε ξανά την εξαγωγή.",
+      "da": "Det tager for lang tid at indlæse et billede. Gør filen tilgængelig lokalt, og prøv at eksportere igen.",
+      "sv": "Det tar för lång tid att läsa in en bild. Gör filen tillgänglig lokalt och försök exportera igen.",
+      "hr": "Učitavanje slike traje predugo. Omogućite lokalni pristup datoteci i pokušajte ponovno izvesti.",
+      "cs": "Načítání obrázku trvá příliš dlouho. Zpřístupněte soubor místně a zkuste exportovat znovu.",
+      "fi": "Kuvan lataaminen kestää liian kauan. Tuo tiedosto saataville paikallisesti ja yritä vientiä uudelleen.",
+      "bg": "Зареждането на изображение отнема твърде много време. Осигурете локален достъп до файла и опитайте да експортирате отново.",
+      "lv": "Attēla ielāde aizņem pārāk ilgu laiku. Nodrošiniet faila pieejamību lokāli un mēģiniet eksportēt vēlreiz.",
+      "lt": "Paveikslėlio įkėlimas trunka per ilgai. Padarykite failą pasiekiamą vietoje ir bandykite eksportuoti dar kartą.",
+      "mt": "It-tagħbija ta’ immaġni qed tieħu wisq żmien. Agħmel il-fajl disponibbli lokalment u erġa’ pprova tesporta.",
+      "et": "Pildi laadimine võtab liiga kaua aega. Tehke fail kohalikult kättesaadavaks ja proovige uuesti eksportida.",
+      "hu": "Egy kép betöltése túl sokáig tart. Tegye helyileg elérhetővé a fájlt, majd próbálja újra az exportálást.",
+      "ga": "Tá luchtú íomhá ag glacadh rófhada. Cuir an comhad ar fáil go logánta agus bain triail as easpórtáil arís.",
+      "pt": "O carregamento de uma imagem está a demorar demasiado. Disponibilize o ficheiro localmente e tente exportar novamente.",
+      "ro": "Încărcarea unei imagini durează prea mult. Faceți fișierul disponibil local și încercați din nou exportul.",
+      "sl": "Nalaganje slike traja predolgo. Omogočite lokalni dostop do datoteke in poskusite znova izvoziti.",
+      "sk": "Načítanie obrázka trvá príliš dlho. Sprístupnite súbor lokálne a skúste exportovať znova.",
+      "tr": "Bir görüntünün yüklenmesi çok uzun sürüyor. Dosyayı yerel olarak kullanılabilir hâle getirip dışa aktarmayı yeniden deneyin."
+    }
+  }
+}

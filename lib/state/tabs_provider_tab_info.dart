@@ -71,7 +71,7 @@ Future<void> warmDeckAnalysisBeforePlace(
   Deck deck,
 ) async {
   final ref = notifier._ref;
-  // Onder `flutter test` landen `Isolate.run` en `scheduleTask` nooit: de
+  // Onder `flutter test` landt `Isolate.run` niet: de
   // nep-async-klok voert geen echte event loop uit terwijl de aanroeper
   // await. Synchroon warmen geeft dezelfde memo's en eindstaat, zonder
   // deadlock. [isFlutterTest] dekt web-tests af — daar geldt `kIsWeb` en

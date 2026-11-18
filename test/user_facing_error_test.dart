@@ -12,6 +12,7 @@ import 'package:ocideck/services/import/importers/import_failure.dart' as pres;
 import 'package:ocideck/services/s3/s3_service.dart';
 import 'package:ocideck/services/webdav_service.dart';
 import 'package:ocideck/utils/user_facing_error.dart';
+import 'package:ocideck/utils/image_preload.dart';
 import 'package:ocideck/widgets/shell/open_failure_message.dart';
 
 /// Tests the caught-error → user-message mapping. With the active language set
@@ -22,6 +23,15 @@ void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   group('userFacingError', () {
+    test('een afbeeldingsdeadline geeft een specifieke herstelhint', () {
+      final text = userFacingError(
+        l10n,
+        const ImagePreloadTimeout('images/cloud.png', Duration(seconds: 20)),
+      );
+      expect(text, contains('afbeelding duurt te lang'));
+      expect(text, contains('lokaal beschikbaar'));
+      expect(text, isNot(contains('Netwerkfout')));
+    });
     test('webassetbudget benoemt alle media en veiligstellen eerst', () {
       final message = webAssetBudgetMessage(l10n);
       expect(message, contains('presentatiemedia'));

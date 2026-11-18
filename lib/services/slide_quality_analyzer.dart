@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/scheduler.dart';
 
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
@@ -235,12 +234,9 @@ class SlideQualityAnalyzer {
   /// pas vóóraf aan het tonen van een vers geopend deck serveert de eerste
   /// [analyze]-lezing daarna compleet uit de per-dia-memo's, in plaats van het
   /// hele deck in één synchrone blok te meten — honderden milliseconden stilte
-  /// bij een groot deck. De lege [scheduleTask]-taken zorgen dat frames tussen
-  /// de plakken blijven renderen (het opstartscherm schiet door), ook al is
-  /// `Priority.idle` zelf niet rendabeler dan direct doorgaan.
-  ///
-  /// Zonder scheduler — in een headless test, of op een plek zonder binding —
-  /// is dit gewoon [analyze] op een andere volgorde: de memo's eindigen hetzelfde.
+  /// bij een groot deck. Tussen de plakken geven we de event loop terug zonder
+  /// op een stilstaande animatie te wachten: tijdens openen kan juist een
+  /// laadindicator of een nog ladende documentafbeelding blijven animeren.
   Future<void> analyzeWarmed(Deck deck, {int batchSize = 20}) async {
     final slides = deck.slides;
     final theme = deck.themeProfile;
@@ -263,18 +259,12 @@ class SlideQualityAnalyzer {
         }
       }
       if (i < slides.length) {
-        // `SchedulerBinding` heeft geen `maybeInstance`; `instance` gooit in
-        // debug als er geen binding is en levert `null` in release. Beide
-        // betekenen hetzelfde: headless, dus de plakken lopen direct door.
-        SchedulerBinding? binding;
-        try {
-          binding = SchedulerBinding.instance;
-        } on Object {
-          binding = null;
-        }
-        if (binding != null) {
-          await binding.scheduleTask<void>(() {}, Priority.idle);
-        }
+        // Priority.idle-taken worden niet uitgevoerd zolang een ticker actief
+        // is. Een laadindicator wacht dan op openen, terwijl openen op die
+        // indicator wacht. De scheduler blijft bovendien Timer.run posten en
+        // kan daarmee ook andere laadcallbacks verdringen. Een gewone event-
+        // loop-yield laat zowel frames als I/O door en hervat ook met tickers.
+        await Future<void>.delayed(Duration.zero);
       }
     }
     // Deckbreed slot: met warme per-dia-memo's zijn ook `_checkSplitRuns` en

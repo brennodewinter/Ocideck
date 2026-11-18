@@ -1548,6 +1548,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Paveikslėlio įkėlimas trunka per ilgai. Padarykite failą pasiekiamą vietoje ir bandykite eksportuoti dar kartą.',
   'Sprekers corrigeren': 'Taisyti kalbėtojus',
   'Fragment splitsen': 'Skaidyti segmentą',
   'Doelspreker': 'Tikslinis kalbėtojas',

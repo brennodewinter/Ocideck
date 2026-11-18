@@ -1556,6 +1556,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Завантаження зображення триває надто довго. Зробіть файл доступним локально та спробуйте експортувати знову.',
   'Sprekers corrigeren': 'Виправити мовців',
   'Fragment splitsen': 'Розділити сегмент',
   'Doelspreker': 'Цільовий мовець',

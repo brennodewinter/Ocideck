@@ -612,6 +612,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Das Laden eines Bildes dauert zu lange. Stelle die Datei lokal bereit und versuche den Export erneut.',
   'Sprekers corrigeren': 'Sprecher korrigieren',
   'Fragment splitsen': 'Segment teilen',
   'Doelspreker': 'Zielsprecher',

@@ -1542,6 +1542,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Načítání obrázku trvá příliš dlouho. Zpřístupněte soubor místně a zkuste exportovat znovu.',
   'Sprekers corrigeren': 'Opravit mluvčí',
   'Fragment splitsen': 'Rozdělit segment',
   'Doelspreker': 'Cílový mluvčí',

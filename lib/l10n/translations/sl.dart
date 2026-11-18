@@ -1542,6 +1542,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Nalaganje slike traja predolgo. Omogočite lokalni dostop do datoteke in poskusite znova izvoziti.',
   'Sprekers corrigeren': 'Popravi govorce',
   'Fragment splitsen': 'Razdeli segment',
   'Doelspreker': 'Ciljni govorec',

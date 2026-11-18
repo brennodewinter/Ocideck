@@ -194,6 +194,21 @@ Targeted test groups for focused work:
   Dart `part` files of roughly 3,000 lines each, and that was the whole barrier
   — it pushed away exactly the contribution this project needs most, native
   review of 30 languages, and toward more machine translation.)*
+- **Loading must make progress while the UI animates or stops delivering frames.**
+  Yield between CPU batches with `Future<void>.delayed(Duration.zero)`; an idle
+  scheduler task can wait forever while a spinner or caret is active. The
+  conventions gate rejects scheduler tasks without an explicit `animation` or
+  `touch` priority. Work that needs an actual painted frame uses
+  `waitForUiFrame` (`lib/utils/ui_frame.dart`), which requests a frame and has a
+  deadline. Export reports a timeout; quitting can finish after saved work is
+  safe. Never use a timeout to bypass privacy or classification checks.
+  Raster image preloads use `preloadExportImage`, with a separate deadline per
+  image and listener cleanup on timeout; wrapping `precacheImage` in a timeout
+  leaves its listener behind. Report the image timeout and allow another export.
+  Regression tests must exercise the production worker with an active ticker,
+  including decks beyond the batch boundary (20/21/41 slides), and simulate
+  missing frames without pumping them. A test-mode shortcut or
+  `pumpAndSettle` alone does not establish that loading completes in production.
 - **Comment language: Dutch or English, but never both in one comment.**
   *(Gated since 2026-07-23, #518: `make check-comment-language`, a ratchet
   (`mixedCommentBaseline`). It covers plain `//` comments only — see below for

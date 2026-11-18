@@ -18,6 +18,8 @@ import 'privacy/privacy_projection.dart';
 import 'web_asset_store.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/image_limits.dart';
+import '../utils/image_preload.dart';
+import '../utils/ui_frame.dart';
 import '../utils/project_path.dart';
 import 'finding_context_score.dart';
 import 'slide_image_refs.dart';
@@ -128,9 +130,8 @@ class SlideRasterizer {
   ///    faalvorm die er is: de gebruiker ziet een export die niets doet en
   ///    niets zegt. Liever een nette fout die vertelt wat eraan scheelt.
   static Future<void> _awaitFrame(Duration timeout) async {
-    WidgetsBinding.instance.scheduleFrame();
     try {
-      await WidgetsBinding.instance.endOfFrame.timeout(timeout);
+      await waitForUiFrame(timeout: timeout);
     } on TimeoutException {
       throw SlideRasterizerNoFrameException(timeout);
     }
@@ -157,6 +158,8 @@ class SlideRasterizer {
     // Injecteerbaar zodat de blokkade-weg toetsbaar is: met de echte 20s zou
     // elke test die hem raakt twintig seconden stilstaan.
     Duration frameTimeout = SlideRasterizer.frameTimeout,
+    // Afzonderlijk budget voor het lezen en decoderen van iedere afbeelding.
+    Duration imageTimeout = imagePreloadTimeout,
     // Injecteerbaar zodat de budgetweigering toetsbaar is zonder een deck van
     // honderden dia's te hoeven bouwen.
     int maxExportBytes = kMaxRasterExportBytes,
@@ -194,23 +197,13 @@ class SlideRasterizer {
     imageCache.maximumSize = (slides.length * 4) + 64;
     imageCache.maximumSizeBytes = 1024 * 1024 * 1024; // 1 GB
 
-    // The logo is trusted style-profile config (not deck content), so it may
-    // live outside the project — unlike slide images, which stay contained.
-    // Een `asset:`-logo (ingebouwd profiel) heeft geen bestandsresolutie.
-    // #1931: effectiveSlideLogoPath kiest de donkere variant op een donkere
-    // dia-achtergrond (gebundeld merk-logo automatisch, eigen logo via
-    // logoDarkPath).
-    final rawLogo = effectiveSlideLogoPath(themeProfile) ?? '';
-    final logo = _resolvedRasterAsset(rawLogo, projectPath);
-    final rawBrandStrip = themeProfile.brandStripPath?.trim() ?? '';
-    final brandStrip = _resolvedRasterAsset(rawBrandStrip, projectPath);
     // Chrome-afbeeldingen (logo, merkstrook) komen in elke dia voor: die
     // precachen we eenmaal vooraf. De afbeeldingen van een dia zelf precachen
     // we per dia, vlak voor haar capture (#2726) — het hele deck vooraf
     // laden joeg de eerste tientallen beelden uit de cache nog vóór hun
     // vastlegging (64 × 16 MiB ≈ het hele plafond), waarna de capture ze
     // opnieuw decodéerde of na 12 vuile frames een leeg vlak vastlegde.
-    final chromePaths = <String>{?logo, ?brandStrip};
+    final chromePaths = _rasterChromePaths(themeProfile, projectPath);
 
     final repaintKey = GlobalKey();
     final hostKey = GlobalKey<_RasterSlideHostState>();
@@ -237,6 +230,7 @@ class SlideRasterizer {
         chromePaths,
         signature,
         frameTimeout,
+        imageTimeout,
         onStage,
       );
       if (!context.mounted) return results;
@@ -252,10 +246,13 @@ class SlideRasterizer {
         // Per dia precachen: alleen de beelden van díe dia leven nu in de
         // cache — bij 150 fotodia's is dat ~16 MiB in plaats van het volle
         // gibibyte (#2726).
-        await _precachePathsBatched(context, {
-          for (final path in slideImagePaths(slides[i]))
-            ?_resolveOrMem(path, projectPath),
-        }, onProgress: (done, total) => onStage?.call('precache', done, total));
+        await _precacheSlideImages(
+          context,
+          slides[i],
+          projectPath,
+          imageTimeout,
+          onStage,
+        );
         if (!context.mounted) break;
         // Meet vóór het tonen hoeveel renders al liepen: alleen renders die
         // deze dia zelf afvuurt mag de capture ophouden (#2358).
@@ -375,15 +372,40 @@ class SlideRasterizer {
     );
   }
 
-  /// Laadt vóór de eerste capture alles in wat de dia's tekenen: de
-  /// afbeeldingen van de dia's (logo, merkstrook, inline `![…](…)`) plus de
-  /// handtekening van de sign-off. Zonder precache staat er op de vastgelegde
-  /// frames een leeg vak waar een afbeelding had moeten staan.
+  /// Afbeeldingspaden van de gedeelde dia-opmaak.
+  static Set<String> _rasterChromePaths(
+    ThemeProfile profile,
+    String? projectPath,
+  ) => {
+    // Dit zijn vertrouwde stijlprofielpaden; asset:-logo's hoeven niet langs
+    // het bestandssysteem. De donkere logovariant volgt de dia-achtergrond.
+    ?_resolvedRasterAsset(effectiveSlideLogoPath(profile) ?? '', projectPath),
+    ?_resolvedRasterAsset(profile.brandStripPath?.trim() ?? '', projectPath),
+  };
+
+  static Future<void> _precacheSlideImages(
+    BuildContext context,
+    Slide slide,
+    String? projectPath,
+    Duration imageTimeout,
+    void Function(String phase, int done, int total)? onStage,
+  ) => _precachePathsBatched(
+    context,
+    {
+      for (final path in slideImagePaths(slide))
+        ?_resolveOrMem(path, projectPath),
+    },
+    imageTimeout: imageTimeout,
+    onProgress: (done, total) => onStage?.call('precache', done, total),
+  );
+
+  /// Laadt vóór de eerste capture de gedeelde dia-opmaak en de handtekening.
   static Future<void> _precacheForRaster(
     BuildContext context,
     Set<String> paths,
     DocumentSignature? signature,
     Duration frameTimeout,
+    Duration imageTimeout,
     void Function(String phase, int done, int total)? onStage,
   ) async {
     // De eerste melding staat vóór het eerste wachten, en dat is opzet.
@@ -397,6 +419,7 @@ class SlideRasterizer {
     await _precachePathsBatched(
       context,
       paths,
+      imageTimeout: imageTimeout,
       onProgress: (done, total) => onStage?.call('precache', done, total),
     );
     if (!context.mounted) return;
@@ -404,7 +427,7 @@ class SlideRasterizer {
     // The sign-off's drawn signature is a deck-level embedded image, not a
     // slide path — precache it so it paints on the first captured frame
     // instead of decoding a beat too late.
-    await _precacheSignatureImage(context, signature);
+    await _precacheSignatureImage(context, signature, imageTimeout);
   }
 
   /// Precache the deck's drawn sign-off signature (a deck-level embedded image,
@@ -413,14 +436,16 @@ class SlideRasterizer {
   static Future<void> _precacheSignatureImage(
     BuildContext context,
     DocumentSignature? signature,
+    Duration imageTimeout,
   ) async {
     if (signature == null) return;
     final sigBytes = decodeEmbeddedSignatureImage(signature.imagePath);
     if (sigBytes == null) return;
-    await precacheImage(
+    await preloadExportImage(
       cappedMemoryImage(sigBytes),
-      context,
-      onError: (_, _) {},
+      createLocalImageConfiguration(context),
+      source: 'signature',
+      timeout: imageTimeout,
     );
   }
 
@@ -541,6 +566,7 @@ class SlideRasterizer {
   static Future<void> _precachePathsBatched(
     BuildContext context,
     Iterable<String> paths, {
+    required Duration imageTimeout,
     void Function(int done, int total)? onProgress,
   }) async {
     // Op web zijn er geen lokale bestandspaden — alleen al het construeren
@@ -575,8 +601,12 @@ class SlideRasterizer {
       final batch = list.skip(i).take(batchSize);
       await Future.wait(
         batch.map(
-          (path) =>
-              precacheImage(providerFor(path), context, onError: (_, _) {}),
+          (path) => preloadExportImage(
+            providerFor(path),
+            createLocalImageConfiguration(context),
+            source: path,
+            timeout: imageTimeout,
+          ),
         ),
       );
       done += batch.length;

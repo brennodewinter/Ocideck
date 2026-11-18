@@ -1538,6 +1538,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Attēla ielāde aizņem pārāk ilgu laiku. Nodrošiniet faila pieejamību lokāli un mēģiniet eksportēt vēlreiz.',
   'Sprekers corrigeren': 'Labot runātājus',
   'Fragment splitsen': 'Sadalīt segmentu',
   'Doelspreker': 'Mērķa runātājs',

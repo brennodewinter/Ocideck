@@ -1556,6 +1556,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Încărcarea unei imagini durează prea mult. Faceți fișierul disponibil local și încercați din nou exportul.',
   'Sprekers corrigeren': 'Corectează vorbitorii',
   'Fragment splitsen': 'Împarte segmentul',
   'Doelspreker': 'Vorbitor țintă',

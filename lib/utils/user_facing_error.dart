@@ -14,11 +14,17 @@ import '../services/webdav_service.dart';
 import '../services/marp_html_service.dart';
 import '../services/slide_rasterizer.dart';
 import '../services/web_asset_store.dart';
+import 'image_preload.dart';
 
 /// Vertaal een gevangen [error] naar een korte melding met
 /// handelingsperspectief voor in een SnackBar of dialoog. De technische
 /// details horen in het log (logError/logWarning), niet bij de gebruiker.
 String userFacingError(AppLocalizations l10n, Object error) {
+  if (error is ImagePreloadTimeout) {
+    return l10n.d(
+      'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.',
+    );
+  }
   if (error is WebAssetBudgetExceeded) return webAssetBudgetMessage(l10n);
   if (error is PackageBudgetExceeded) return packageBudgetMessage(l10n);
   if (error is HtmlEmbedBudgetExceeded) return htmlEmbedBudgetMessage(l10n);

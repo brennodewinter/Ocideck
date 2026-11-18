@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Tá luchtú íomhá ag glacadh rófhada. Cuir an comhad ar fáil go logánta agus bain triail as easpórtáil arís.',
   'Sprekers corrigeren': 'Ceartaigh cainteoirí',
   'Fragment splitsen': 'Roinn mír',
   'Doelspreker': 'Spriocchainteoir',

@@ -1565,6 +1565,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Η φόρτωση μιας εικόνας διαρκεί υπερβολικά πολύ. Κάντε το αρχείο διαθέσιμο τοπικά και δοκιμάστε ξανά την εξαγωγή.',
   'Sprekers corrigeren': 'Διόρθωση ομιλητών',
   'Fragment splitsen': 'Διαίρεση τμήματος',
   'Doelspreker': 'Ομιλητής προορισμού',

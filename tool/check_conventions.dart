@@ -41,6 +41,8 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 
+import 'async_progress_rules.dart';
+
 /// Bare `catch (_)` sites allowed in lib/. Ratchet only downwards (now 0).
 const int catchUnderscoreBaseline = 0;
 
@@ -2077,10 +2079,14 @@ void main() {
   final serviceUiImports = <String>[];
   final layerViolations = <String>[];
   final modelUiImports = <String>[];
+  final asyncProgressHits = <String>[];
 
   for (final file in _dartFiles(Directory('lib'))) {
     controlByteHits.addAll(_controlBytesIn(file));
     final path = file.path.replaceAll(r'\', '/');
+    asyncProgressHits.addAll(
+      asyncProgressViolationsIn(file.readAsStringSync(), path: path),
+    );
     if (!_quoteScannerHomes.contains(path) &&
         file.readAsStringSync().contains("== '\"'")) {
       quoteScanners.add(path);
@@ -2172,6 +2178,14 @@ void main() {
   ];
 
   final failures = <String>[];
+
+  if (asyncProgressHits.isNotEmpty) {
+    failures.add(
+      'Laadvoortgang mag niet afhangen van een stilstaande animatie of een '
+      'onbegrensde framewacht. Zie lib/utils/ui_frame.dart:\n'
+      '    ${asyncProgressHits.join('\n    ')}',
+    );
+  }
 
   if (conflictHits.isNotEmpty) {
     failures.add(
@@ -2506,7 +2520,7 @@ void main() {
       'wachtpunten in '
       'test/ binnen de basislijn (${fixedDelayBaseline.length} bestand(en)); '
       'geen handgeplakte paden in expects; geen BSD-mktemp in scripts/; '
-      'open-/importpad I/O binnen vangst.',
+      'open-/importpad I/O binnen vangst; async-voortgang begrensd.',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
       stdout.writeln(

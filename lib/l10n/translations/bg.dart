@@ -1561,6 +1561,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Зареждането на изображение отнема твърде много време. Осигурете локален достъп до файла и опитайте да експортирате отново.',
   'Sprekers corrigeren': 'Коригиране на говорители',
   'Fragment splitsen': 'Разделяне на сегмент',
   'Doelspreker': 'Целеви говорител',

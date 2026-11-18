@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
+      'Pildi laadimine võtab liiga kaua aega. Tehke fail kohalikult kättesaadavaks ja proovige uuesti eksportida.',
   'Sprekers corrigeren': 'Paranda kõnelejaid',
   'Fragment splitsen': 'Jaga lõik',
   'Doelspreker': 'Sihtkõneleja',
