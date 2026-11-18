@@ -325,7 +325,8 @@ Future<OpenResult> _openPackageFromBytes(
           mdEntry.name,
         );
         if (!notifier.mounted) return OpenResult.unreadable;
-        notifier._placeDocumentTab(
+        _placeDocumentTab(
+          notifier,
           MarkdownDocument.parse(source, hasUtf8Bom: decoded.hasBom),
         );
         return OpenResult.opened;

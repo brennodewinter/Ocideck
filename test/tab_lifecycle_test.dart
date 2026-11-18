@@ -210,7 +210,10 @@ void main() {
     );
     final tabs = container.read(tabsProvider.notifier);
 
-    // Open een documenttabblad (wordt de tweede tab, na het welkomstscherm).
+    // Open een documenttabblad als tweede tab, na het welkomstscherm. Een
+    // extra leeg tabblad eerst, want sinds #3000 vervangt een document een
+    // ongeopend Nieuw-tabblad in plaats van ernaast te komen.
+    tabs.newEmptyTab();
     await tabs.newDocument();
     await tester.pumpAndSettle();
     expect(container.read(tabsProvider).tabs.length, 2);

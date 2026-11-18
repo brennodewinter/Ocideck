@@ -109,6 +109,98 @@ void openDeckCopyInTab(TabsNotifier notifier, Deck deck) {
   notifier.currentState.current?.deckNotifierOrNull?.markDirty();
 }
 
+/// Bouwt een documenttabblad rond [document] en zet het naast de bestaande
+/// (geselecteerd). Een verse [DocumentNotifier] met een herstelabonnement dat
+/// de kopie wist zodra het tabblad schoon is — gedeeld door het openen van een
+/// `.md` en het maken van een nieuw document.
+///
+/// Spiegel van [_placeDeckInTab]: staat er een ongeopend deck-tabblad voor
+/// (het Nieuw-scherm), dan wordt dat op zijn plek vervangen in plaats van er
+/// een tweede tabblad naast te zetten (#3000). Een open tabblad — deck of
+/// document — wordt nooit vervangen; dan komt het document er ernaast.
+void _placeDocumentTab(
+  TabsNotifier notifier,
+  MarkdownDocument document, {
+  String? filePath,
+  String? projectPath,
+  String? suggestedName,
+  String? pendingAudioPath,
+}) {
+  final state = notifier.currentState;
+  final current = state.current;
+  final replacesWelcome =
+      current != null && !current.isOpen && current.deckNotifierOrNull != null;
+  final tab = _createDocumentTab(
+    notifier,
+    document,
+    filePath: filePath,
+    projectPath: projectPath,
+    suggestedName: suggestedName,
+    pendingAudioPath: pendingAudioPath,
+    // De herstelsleutel van het vervangen Nieuw-tabblad gaat mee naar het
+    // documenttabblad — het slot blijft van dezelfde werkplek, precies wat
+    // _placeDeckInTab doet door het tabblad zelf te hergebruiken.
+    recoveryId: replacesWelcome ? current.recoveryId : null,
+  );
+  if (replacesWelcome) {
+    notifier._disposeTab(current);
+    notifier._replacementState = state.copyWith(
+      tabs: List<TabInfo>.from(state.tabs)..[state.clampedIndex] = tab,
+    );
+    return;
+  }
+  notifier._replacementState = state.copyWith(
+    tabs: [...state.tabs, tab],
+    selectedIndex: state.tabs.length,
+  );
+}
+
+/// Bouwt (zonder te plaatsen) een documenttabblad met zijn herstelabonnement
+/// dat de kopie wist zodra het tabblad schoon is. [recoveryId] hergebruikt de
+/// sleutel van een bestaande herstelkopie (zie [TabsNotifier.restoreRecovered]);
+/// zonder krijgt het tabblad een verse. De deck-tegenhanger is
+/// [TabsNotifier._createTab].
+TabInfo _createDocumentTab(
+  TabsNotifier notifier,
+  MarkdownDocument document, {
+  String? filePath,
+  String? recoveryId,
+  String? projectPath,
+  String? suggestedName,
+  String? pendingAudioPath,
+}) {
+  final id = notifier._nextId++;
+  final key = recoveryId ?? _uuid.v4();
+  final documentNotifier = DocumentNotifier()
+    ..loadDocument(
+      document,
+      filePath: filePath,
+      projectPath: projectPath,
+      suggestedName: suggestedName,
+      pendingAudioPath: pendingAudioPath,
+    );
+  // Een kopie met een voorgestelde naam bestaat nog nergens op schijf —
+  // precies wat de dirty-stip en de herstelkopie zichtbaar maken (#2468).
+  if (suggestedName != null) documentNotifier.markDirty();
+  final tab = TabInfo(
+    id: id,
+    recoveryId: key,
+    content: DocumentTabContent(documentNotifier),
+  );
+  notifier._subs[id] = documentNotifier.stream.listen((st) {
+    if (!notifier.mounted) return;
+    if (!(st.isOpen && st.isDirty)) notifier._recovery.discard(key);
+    // Zelfde tabfeit-poort als de deck-luisteraar hierboven (#2623).
+    final fact = (tab.label, tab.isDirty, st.isOpen, st.filePath);
+    if (fact == notifier._lastTabFacts[id]) return;
+    notifier._lastTabFacts[id] = fact;
+    notifier._replacementState = notifier.currentState.copyWith(
+      tabs: List.from(notifier.currentState.tabs),
+    );
+  });
+  return tab;
+}
+
 // ── Per-tab data ──────────────────────────────────────────────────────────────
 
 /// De inhoud van een tabblad: óf een presentatie (deck) óf een document.
