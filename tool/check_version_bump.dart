@@ -107,6 +107,10 @@ const Set<String> sanctionedTransitions = {
   '1.2.1->0.3.0',
   // v0.7.3 was merged but never tagged; v0.7.4 replaces that unpublished build.
   '0.7.2->0.7.4',
+  // On 2026-11-18 the maintainer chose v0.7.13 for all platforms, replacing
+  // the merged but untagged web-only v0.7.12 preparation. Neither remote has
+  // a v0.7.12 tag; the last public release remains v0.7.11.
+  '0.7.11->0.7.13',
 };
 
 /// Reads the `version:` line from pubspec.yaml at [path], returning the raw
