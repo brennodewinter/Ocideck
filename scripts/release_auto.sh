@@ -3095,6 +3095,7 @@ tag_and_push() { # tag_and_push MERGE_SHA
   TAG_PUSHED=1   # origin heeft de tag: de release-CI is gestart, ongeacht de mirror
   log "Tag $TAG gepusht naar origin."
   ensure_mirror_tag
+  ensure_candidate_publication "$mergesha"
 }
 
 # Volg de release-CI tot alle jobs klaar zijn. Zet 'snap' (globaal) voor phase3's
