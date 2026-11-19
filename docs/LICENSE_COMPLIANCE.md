@@ -519,3 +519,8 @@ from the shipped OciDeck bundles and their SBOM. This review does not expand the
 app's package/helper allow-list. Shipping any such model/runtime with a future
 release still requires the per-artifact manifest and `BundledLicenses` gate
 above. Reproduction and measured limits: `testbed/asr-diarization/NEMO_README.md`.
+
+The ISO 9001 index intentionally remains labelled **2015** after the 2026
+publication. The [edition review](design/ISO9001_2026_REVIEW.md) records the
+source, compatibility decision and conditions for a verified update; no 2026
+normative text is bundled.

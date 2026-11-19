@@ -11,7 +11,7 @@
 //   * The UI font is bundled, so text needs no fonts.gstatic.com fetch.
 //   * .htaccess ships next to the bundle and carries the header-form hardening
 //     (frame-ancestors/HSTS/X-Frame-Options/Permissions-Policy), with its CSP
-//     header mirroring the meta CSP (#849).
+//     header matching the meta policy plus header-only frame-ancestors (#3011).
 //   * every file in web/ reaches the bundle, so a promise that lives there —
 //     .well-known/security.txt, and whatever is added next — is served and not
 //     merely present in the source (#1888).
@@ -178,14 +178,28 @@ void main() {
       r'Header\s+always\s+set\s+Content-Security-Policy\s+"([^"]*)"',
       caseSensitive: false,
     ).firstMatch(conf)?.group(1);
-    // The header CSP must mirror the meta CSP byte-for-byte: they are enforced
-    // cumulatively, and a drift means the header stops covering what the page
-    // promises. test/web_htaccess_headers_test.dart guards the same invariant on
-    // the source files; this is the built-bundle end of it.
+    // Meta CSP cannot carry frame-ancestors. Preserve all shared directives
+    // and add clickjacking protection only in the HTTP header (#3011).
+    final metaCsp = _extractCsp(indexHtml.readAsStringSync());
     require(
-      headerCsp != null &&
-          headerCsp == _extractCsp(indexHtml.readAsStringSync()),
-      '.htaccess CSP header must mirror the index.html meta CSP (#849).',
+      metaCsp != null && headerCsp == "$metaCsp; frame-ancestors 'none'",
+      '.htaccess CSP must match meta CSP plus frame-ancestors (#3011).',
+    );
+    if (metaCsp != null) {
+      final directives = _parseCsp(metaCsp);
+      require(
+        ![
+          'frame-ancestors',
+          'sandbox',
+          'report-uri',
+          'report-to',
+        ].any(directives.containsKey),
+        'Meta CSP must not contain header-only directives (#3011).',
+      );
+    }
+    require(
+      conf.contains('ServerSignature Off'),
+      '.htaccess must suppress Apache error-page banners (#3009).',
     );
     for (final h in const [
       'X-Frame-Options',
@@ -199,6 +213,7 @@ void main() {
       // here would quietly drop web transcription.
       'Cross-Origin-Opener-Policy',
       'Cross-Origin-Embedder-Policy',
+      'Cross-Origin-Resource-Policy',
     ]) {
       require(conf.contains(h), '.htaccess must set $h (#849/#2513).');
     }

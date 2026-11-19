@@ -242,8 +242,8 @@ no-referrer`, a `Permissions-Policy`, and HSTS. It takes effect automatically �
 `FileInfo` (or `All`). Where `AllowOverride` is `Off`, Apache ignores the file
 silently; move the same directives into the vhost/server config. Non-Apache hosts
 ignore `.htaccess` entirely and still need the snippets above. The header CSP is
-kept byte-for-byte identical to the `<meta>` one by a test and the web-hardening
-check.
+checked against the `<meta>` policy by a test and the web-hardening check:
+all shared directives match, and only the HTTP header adds `frame-ancestors`.
 
 ### Cross-origin isolation (required for local transcription)
 
@@ -600,3 +600,75 @@ serving a static bundle.
 - [ ] If hosting a server-side deck library (§7): `ocideck-web-config.json`
       placed, autoindex enabled, and only public presentations in the decks
       directory
+
+## Release advisory follow-up (2026-11-19)
+
+The v0.7.13 preparation scan produced five advisory groups. They are tracked in
+Pawprint as [#3009](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3009),
+[#3010](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3010),
+[#3011](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3011),
+[#3012](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3012) and
+[#3013](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3013).
+
+### Public files and cache policy
+
+The HTML, manifest and bootstrap files are public static artefacts, not responses
+containing a user's deck, credentials or personalised session. Keep
+`Cache-Control: no-cache` on stable filenames: caches may store them but must
+revalidate before reuse. An ETag/304 is a valid revalidation. Blanket `no-store`
+is not required by the informational ZAP 10015 warning. User data in browser
+storage is a separate boundary; these HTTP headers do not control it.
+
+Content-addressed filenames retain `public, max-age=31536000, immutable`.
+Unhashed CanvasKit/WASM files must revalidate too. The deployment script retains
+older content-addressed files so open tabs can finish loading the matching
+application. Verify the actual headers, ETag revalidation, entrypoint bytes and
+referenced assets after deployment. A repeat ZAP 10015 informational warning is
+accepted for these public responses while this boundary holds; reassess if the
+host starts serving personalised or sensitive responses.
+
+### Error-page banners and Apache patch status
+
+The bundle sets `ServerSignature Off` for Apache-generated error pages. Host
+administrators must also set **`ServerTokens Prod` at server scope** (it cannot
+be set in `.htaccess`). Check the final configuration include order: a later
+`ServerTokens OS` or `ServerSignature On` overrides an earlier hardening file.
+Validate with `apache2ctl configtest`, reload gracefully, and inspect both a
+regular response and real 404 bodies/headers. Do not turn missing files into
+200 responses merely to remove an alert.
+
+A banner-only Apache version match is a patch-status investigation, not proof
+of an unpatched CVE. Check the distribution release, complete installed package
+revision, current security repository candidate and vendor backports. Record
+the package/advisory comparison separately from banner suppression; a hidden
+version is not evidence that the package is safe. Do not upgrade a shared host
+or unrelated services based solely on the upstream banner number.
+
+### CORP and supported resource consumers
+
+The bundled `Cross-Origin-Resource-Policy: same-origin` restricts other origins'
+`no-cors` consumption of OciDeck resources. OciDeck's HTML, bootstrap, manifest,
+icons and local WASM assets are intended to be consumed from the application's
+own origin, including when the whole app is hosted under a subdirectory.
+The app's outbound CORS requests and same-origin resources still work. CORP is
+separate from COEP (`require-corp`) and COOP (`same-origin`); keep those two
+headers for WASM cross-origin isolation.
+
+If a host deliberately publishes an icon or another file for external
+`no-cors` use, scope an explicit CORP `cross-origin` override to those shared
+files, rather than relaxing the application's whole origin. Review portal and
+embedding customisations together with the controls in §8; CORP is not an
+embedding allowlist or a replacement for CSP `frame-ancestors`.
+
+### Verification and delivery boundary
+
+Source and built-bundle checks require matching shared CSP directives, with
+`frame-ancestors 'none'` added only to the HTTP header. Meta CSP must never
+contain that header-only directive. Verify startup, module/WASM loads and the
+cross-origin isolation headers alongside a passive baseline. Keep detailed ZAP
+evidence rather than just warning counts.
+
+A source fix merged after v0.7.13 is delivered in a subsequent web build; it
+does not modify the signed v0.7.13 archive or move its tag. A server-only
+configuration change can take effect separately, with its own syntax check,
+rollback copy and live HTTP verification.

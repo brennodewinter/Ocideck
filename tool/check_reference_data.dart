@@ -248,9 +248,10 @@ void main(List<String> args) async {
     stdout.writeln(
       '\n${outcome.outdatedAdvisory} adviserende bron(nen) hebben een nieuwere '
       'uitgave.\n'
-      'Dat is geen defect: bij een detectielexicon vuurt elke term, dus een '
-      'verversing vraagt om de termdiff lezen en de vals-positievencorpus '
-      'opnieuw wegen. Doe dat bewust, niet reflexmatig.',
+      'Beoordeel de inhoudelijke wijziging vóór een verversing. Bij ISO-indexen '
+      'horen een clausulediff en een migratiebesluit; bij detectielexicons een '
+      'termdiff en herweging van de vals-positievencorpus. Verander niet alleen '
+      'het versielabel. Zie docs/design/ISO9001_2026_REVIEW.md.',
     );
   }
   if (outcome.outdated > 0) {
