@@ -224,21 +224,35 @@ class WebdavAsyncTransport implements CollabTransport {
     return done;
   }
 
+  final _appendJitter = math.Random();
+
   Future<void> _appendWithRetry(String record) async {
     var seq = _knownMaxSeq + 1;
-    while (true) {
+    const maxAttempts = 6;
+    for (var attempt = 0; attempt < maxAttempts; attempt++) {
       _ensureLive();
       if (await store.append(seq, record)) {
         _ownSeqs.add(seq);
         _knownMaxSeq = math.max(_knownMaxSeq, seq);
         return;
       }
-      // Someone else took this slot; refresh the high-water mark and retry
-      // above it. Each miss strictly raises seq, so this terminates.
+      if (attempt + 1 == maxAttempts) break;
+      // Give concurrent writers time to settle before reading the high-water
+      // mark again. Jitter prevents peers from retrying in lockstep.
+      final backoff = 50 << attempt;
+      await Future<void>.delayed(
+        Duration(milliseconds: backoff + _appendJitter.nextInt(backoff)),
+      );
+      _ensureLive();
       final present = await store.listSequences();
-      _knownMaxSeq = present.isEmpty ? 0 : present.reduce(math.max);
+      if (present.isNotEmpty) {
+        _knownMaxSeq = math.max(_knownMaxSeq, present.reduce(math.max));
+      }
       seq = _knownMaxSeq + 1;
     }
+    throw StateError(
+      'WebDAV collaboration log append exceeded $maxAttempts attempts',
+    );
   }
 
   Map<String, Object?> _asObject(Object? value) {
