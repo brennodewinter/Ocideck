@@ -12,7 +12,7 @@ import 'pptx_context.dart';
 /// scheme's major Latin typeface becomes the deck font family. Everything
 /// else (minor font, effect schemes, bevels) is dropped — OciDeck's fixed
 /// layouts do not carry them.
-SourceTheme parseTheme(String xml) {
+SourceTheme parseTheme(String xml, {String? titleTextColor}) {
   try {
     final doc = parseXmlSafe(xml);
     if (doc == null) return const SourceTheme();
@@ -23,6 +23,8 @@ SourceTheme parseTheme(String xml) {
       accentColor: _schemeColor(clrScheme, 'accent1'),
       textColor:
           _schemeColor(clrScheme, 'dk1') ?? _schemeColor(clrScheme, 'tx1'),
+      titleTextColor: titleTextColor,
+      slideBackgroundColor: _schemeColor(clrScheme, 'lt1'),
       fontFamily:
           _latinTypeface(fontScheme, 'majorFont') ??
           _latinTypeface(fontScheme, 'minorFont'),

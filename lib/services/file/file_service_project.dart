@@ -132,8 +132,18 @@ materializeProjectStyleImages(
     fallbackName: 'merkstrook.png',
   );
   if (strip.path != null) next = next.copyWith(brandStripPath: strip.path);
+  final backgrounds = <String, String>{};
+  for (final entry in next.slideBackgroundImages.entries) {
+    final stored = await _storeProjectStyleImage(
+      entry.value,
+      projectPath,
+      sourceProjectPath: sourceProjectPath,
+      fallbackName: 'achtergrond-${entry.key}.png',
+    );
+    backgrounds[entry.key] = stored.path ?? entry.value;
+  }
   return (
-    profile: next,
+    profile: next.copyWith(slideBackgroundImages: backgrounds),
     logoCssUrl: logo.path == null ? null : '../${logo.path}',
     brandCssUrl: strip.path == null ? null : '../${strip.path}',
   );
@@ -273,8 +283,20 @@ ThemeProfile _resolveProjectRelativeStylePaths(
   String? projectPath,
   String? Function() homeDirectory,
 ) {
+  var resolved = profile;
+  for (final entry in profile.slideBackgroundImages.entries) {
+    resolved = _resolveOneRelativeStylePath(
+      resolved,
+      entry.value,
+      projectPath,
+      homeDirectory,
+      (next, path) => next.copyWith(
+        slideBackgroundImages: {...next.slideBackgroundImages, entry.key: path},
+      ),
+    );
+  }
   final withStrip = _resolveOneRelativeStylePath(
-    profile,
+    resolved,
     profile.brandStripPath,
     projectPath,
     homeDirectory,
@@ -662,9 +684,19 @@ section.no-logo::before {
 }
 ''';
 
+    String backgroundCss({required bool title}) {
+      final path = profile.slideBackgroundImage(title: title);
+      // Project style assets have been copied next to the markdown.
+      if (path == null || !path.startsWith('logos/')) return '';
+      final url = Uri(path: '../$path').toString().replaceAll('"', '%22');
+      return 'background-image: url("$url"); background-size: cover; '
+          'background-position: center; background-repeat: no-repeat;';
+    }
+
     return '''
 section {
   background: ${profile.slideBackgroundColor};
+  ${backgroundCss(title: false)}
   color: ${profile.textColor};
   font-family: ${_cssFontFamily(profile.fontFamily)};
   position: relative;
@@ -683,6 +715,7 @@ section li::marker {
 
 section.title {
   background: ${profile.titleBackgroundColor};
+  ${backgroundCss(title: true)}
   color: ${profile.titleTextColor};
 }
 
@@ -693,6 +726,7 @@ section.title h2 {
 
 section.section {
   background: ${profile.sectionBackgroundColor};
+  ${backgroundCss(title: false)}
   color: ${profile.titleTextColor};
 }
 

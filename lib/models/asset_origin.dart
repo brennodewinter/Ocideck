@@ -88,7 +88,12 @@ bool assetOriginNeedsAttention(AssetOrigin origin) => switch (origin) {
 /// schijftoegang — dezelfde regel als [classifyAssetPath].
 bool deckCarriesMemoryAssets(Deck deck) {
   bool mem(String path) => WebAssetStore.isMemPath(path.trim());
-  if (_profileMemoryPaths(deck.themeProfile).isNotEmpty) return true;
+  if (_profileMemoryPaths(deck.themeProfile).isNotEmpty ||
+      deck.slideStyles.values.any(
+        (profile) => _profileMemoryPaths(profile).isNotEmpty,
+      )) {
+    return true;
+  }
   for (final s in deck.slides) {
     if (mem(s.videoPath) || mem(s.videoCaptions) || mem(s.audioPath)) {
       return true;
@@ -139,6 +144,9 @@ void forgetStyleEditorMemoryPins() => styleEditorMemoryPins.clear();
 Set<String> deckMemoryAssetPaths(Deck deck) {
   final paths = <String>{};
   paths.addAll(_profileMemoryPaths(deck.themeProfile));
+  for (final profile in deck.slideStyles.values) {
+    paths.addAll(_profileMemoryPaths(profile));
+  }
   for (final slide in deck.slides) {
     addSlideMemoryAssetPaths(slide, paths);
   }
@@ -164,6 +172,7 @@ Set<String> _profileMemoryPaths(ThemeProfile profile) {
     profile.logoDarkPath,
     profile.documentLogoPath,
     profile.brandStripPath,
+    ...profile.slideBackgroundImages.values,
   ]) {
     final trimmed = path?.trim() ?? '';
     if (WebAssetStore.isMemPath(trimmed)) paths.add(trimmed);

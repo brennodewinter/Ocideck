@@ -1353,6 +1353,7 @@ const _dutchSourceAddEn = {
   'Naam van stijl': 'Style name',
   'Deze stijlnaam bestaat al.': 'This style name already exists.',
   'Stijl bewaren': 'Save style',
+  'Geïmporteerde stijl opslaan': 'Save imported style',
   'Accentkleur': 'Accent color',
   'Tekstkleur': 'Text color',
   'Dia-achtergrond': 'Slide background',

@@ -3,7 +3,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -38,6 +41,85 @@ void main() {
 
   Uint8List envelopeBytes(Map<String, Object?> envelope) =>
       Uint8List.fromList(utf8.encode(jsonEncode(envelope)));
+
+  test('stijlprofiel hergebruikt en verpakt twee dia-achtergronden', () async {
+    final titleImage = File(p.join(tmp.path, 'title.png'))
+      ..writeAsBytesSync(_png);
+    final contentBytes = Uint8List.fromList([..._png, 9]);
+    final contentImage = File(p.join(tmp.path, 'content.png'))
+      ..writeAsBytesSync(contentBytes);
+    final original = ThemeProfile(
+      name: 'Huisstijl',
+      accentColor: '#4472C4',
+      titleTextColor: '#1B2E54',
+      slideBackgroundImages: {
+        'title': titleImage.path,
+        'content': contentImage.path,
+      },
+    );
+    final built = await file.buildStyleProfileBytes(original);
+    expect(built.logoOmitted, isFalse);
+    expect(utf8.decode(built.bytes), isNot(contains(tmp.path)));
+
+    final result = await file.importStyleProfileBytes(
+      built.bytes,
+      logoBaseDir: tmp,
+    );
+    final profile = result.profile!;
+    expect(profile.accentColor, '#4472C4');
+    expect(profile.titleTextColor, '#1B2E54');
+    expect(
+      File(profile.slideBackgroundImage(title: true)!).readAsBytesSync(),
+      _png,
+    );
+    expect(
+      File(profile.slideBackgroundImage(title: false)!).readAsBytesSync(),
+      contentBytes,
+    );
+
+    final deck = Deck(
+      title: 'Nieuw',
+      themeProfile: profile,
+      slides: [
+        Slide.create(SlideType.title),
+        Slide.create(SlideType.bullets),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(marpStyle: const MarpStyle(backgroundImage: 'none')),
+      ],
+    );
+    final md = MarkdownService();
+    final export = md.parseDeck(md.generateDeck(deck, forExport: true))!;
+    expect(export.slides.map((slide) => slide.marpStyle.backgroundImage), [
+      marpAssetUrl(profile.slideBackgroundImages['title']!),
+      marpAssetUrl(profile.slideBackgroundImages['content']!),
+      'none',
+    ]);
+    final members = await file.buildPackageMembers(deck);
+    final carried = ThemeProfile.fromJson(
+      Map<String, Object?>.from(
+        jsonDecode(utf8.decode(members['ocideck-style.json']!)) as Map,
+      ),
+    );
+    expect(members[carried.slideBackgroundImages['title']], _png);
+    expect(members[carried.slideBackgroundImages['content']], contentBytes);
+    final project = Directory(p.join(tmp.path, 'project'))..createSync();
+    final path = p.join(project.path, 'deck.md');
+    final saved = await file.saveDeck(deck, path);
+    expect(
+      saved.themeProfile.slideBackgroundImages.values,
+      everyElement(startsWith('logos/')),
+    );
+    final opened = (await file.openDeck(path))!;
+    for (final slot in ThemeProfile.slideBackgroundSlots) {
+      final image = opened.themeProfile.slideBackgroundImages[slot]!;
+      final landed = p.isAbsolute(image) ? image : p.join(project.path, image);
+      expect(
+        File(landed).readAsBytesSync(),
+        slot == 'title' ? _png : contentBytes,
+      );
+    }
+  });
 
   test(
     'een profiel zonder logo overleeft een export/import round-trip',

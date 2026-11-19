@@ -119,6 +119,32 @@ void main() {
     );
   });
 
+  testWidgets('een hergebruikt profiel toont de achtergrond achter de titel', (
+    tester,
+  ) async {
+    const asset = 'asset:assets/images/librekat-logo.png';
+    const profile = ThemeProfile(
+      slideBackgroundImages: {'title': asset, 'content': 'images/content.png'},
+    );
+    final preview = SlidePreviewWidget(
+      slide: Slide.create(SlideType.title),
+      themeProfile: profile,
+    );
+    expect(marpBackgroundAssetPath(preview.marpStyle.backgroundImage), asset);
+    await tester.pumpWidget(MaterialApp(home: preview));
+    await tester.pumpAndSettle();
+    expect(find.byType(Image), findsOneWidget);
+
+    final content = Slide.create(SlideType.bullets);
+    final overridden = SlidePreviewWidget(
+      slide: content.copyWith(
+        marpStyle: const MarpStyle(backgroundImage: 'none'),
+      ),
+      themeProfile: profile,
+    );
+    expect(overridden.marpStyle.backgroundImage, 'none');
+  });
+
   test('Flutter rejects the same unsupported CSS colour form as HTML', () {
     final preview = SlidePreviewWidget(
       slide: const Slide(

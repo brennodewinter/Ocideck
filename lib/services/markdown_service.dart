@@ -124,13 +124,27 @@ class MarkdownService {
         buf.writeln('---');
         buf.writeln();
       }
+      final slide = slides[i];
+      final profile = deck.slideProfileAt(deck.slides.indexOf(slide));
+      final background =
+          forExport &&
+              !slide.marpStyle.hasBackgroundImage &&
+              !deck.marpStyle.hasBackgroundImage
+          ? profile.slideBackgroundImage(title: slide.type == SlideType.title)
+          : null;
       buf.write(
         generateSlide(
-          slides[i],
+          background == null
+              ? slide
+              : slide.copyWith(
+                  marpStyle: slide.marpStyle.copyWith(
+                    backgroundImage: marpAssetUrl(background),
+                  ),
+                ),
           // Het effectieve profiel van díe dia (#2996): `logo-safe`/`no-logo`
           // volgen de wissel mee. `indexOf` omdat de gefilterde lijst op zijn
           // eigen index niet met `deck.slides` correspondeert.
-          themeProfile: deck.slideProfileAt(deck.slides.indexOf(slides[i])),
+          themeProfile: profile,
           inlineChartData: inlineChartData,
           forExport: forExport,
         ),

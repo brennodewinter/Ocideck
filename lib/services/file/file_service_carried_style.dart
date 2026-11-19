@@ -52,6 +52,9 @@ ThemeProfile portableCarriedStyle(ThemeProfile profile) {
     logoDarkPath: dark,
     clearBrandStrip: strip == null,
     brandStripPath: strip,
+    slideBackgroundImages: profile.mapSlideBackgroundImages(
+      (path) => image(path, emptyWhenUnsafe: false),
+    ),
     clearDocumentLogoOverride: document == null,
     documentLogoPath: document,
   );
@@ -116,9 +119,8 @@ Future<Map<String, ThemeProfile>> carriedProjectStyles(
   }
 }
 
-/// Herschrijft een bestaande sidecar na opslaan, zodat een bewerking van de
-/// meegekregen stijl het heropenen overleeft. Een gewoon project zonder
-/// sidecar krijgt er geen: dat blijft het lokale profiel volgen.
+/// Bewaart de meegedragen stijl en bindt stijlen met achtergrondafbeeldingen
+/// aan hun project, zodat de lokale profielkeuze ze bij heropenen niet wijzigt.
 Future<void> refreshCarriedProjectStyle(
   String projectPath,
   ThemeProfile profile,
@@ -126,7 +128,7 @@ Future<void> refreshCarriedProjectStyle(
   if (kIsWeb) return;
   final file = File(p.join(projectPath, carriedStyleFileName));
   try {
-    if (!await file.exists()) return;
+    if (profile.slideBackgroundImages.isEmpty && !await file.exists()) return;
     await writeStringAtomic(
       file,
       jsonEncode(portableCarriedStyle(profile).toJson()),
@@ -196,6 +198,9 @@ ThemeProfile _styleInsideProject(ThemeProfile profile, String projectPath) {
     logoDarkPath: dark,
     clearBrandStrip: strip == null,
     brandStripPath: strip,
+    slideBackgroundImages: profile.mapSlideBackgroundImages(
+      (path) => existing(path, emptyWhenMissing: false),
+    ),
     clearDocumentLogoOverride: document == null,
     documentLogoPath: document,
   );
@@ -292,6 +297,9 @@ ThemeProfile _styleMembersToMemory(
     logoDarkPath: dark,
     clearBrandStrip: strip == null,
     brandStripPath: strip,
+    slideBackgroundImages: profile.mapSlideBackgroundImages(
+      (path) => mem(path, emptyWhenMissing: false),
+    ),
     clearDocumentLogoOverride: document == null,
     documentLogoPath: document,
   );

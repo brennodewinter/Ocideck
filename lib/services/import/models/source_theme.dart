@@ -8,6 +8,7 @@ class SourceTheme {
   const SourceTheme({
     this.accentColor,
     this.textColor,
+    this.titleTextColor,
     this.titleBackgroundColor,
     this.sectionBackgroundColor,
     this.slideBackgroundColor,
@@ -19,6 +20,7 @@ class SourceTheme {
   /// Hex (`#RRGGBB`) accent colour, e.g. a theme's primary fill.
   final String? accentColor;
   final String? textColor;
+  final String? titleTextColor;
   final String? titleBackgroundColor;
   final String? sectionBackgroundColor;
   final String? slideBackgroundColor;

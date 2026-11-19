@@ -236,6 +236,11 @@ StyleProfileBytes _encodeStyleProfileEnvelope(
     logoOmitted = true;
     bytes = encode();
   }
+  if (bytes.length > FileService.maxStyleProfileBytes &&
+      envelope.remove('slideBackgroundImages') != null) {
+    logoOmitted = true;
+    bytes = encode();
+  }
   return StyleProfileBytes(bytes, logoOmitted: logoOmitted);
 }
 
@@ -342,6 +347,21 @@ Future<StyleProfileBytes> _buildStyleProfileBytes(
   String? projectPath,
 ) async {
   final json = profile.toJson();
+  final backgrounds = <String, Object?>{};
+  var backgroundOmitted = false;
+  for (final entry in profile.slideBackgroundImages.entries) {
+    final asset = await _encodeStyleLogo(entry.value, projectPath);
+    if (asset.embedded != null) backgrounds[entry.key] = asset.embedded;
+    backgroundOmitted = backgroundOmitted || asset.omitted;
+  }
+  final bundledBackgrounds = profile.mapSlideBackgroundImages(
+    (path) => isBundledAssetPath(path) ? path : null,
+  );
+  if (bundledBackgrounds.isEmpty) {
+    json.remove('slideBackgroundImages');
+  } else {
+    json['slideBackgroundImages'] = bundledBackgrounds;
+  }
   final logo = await _encodeStyleLogo(profile.logoPath, projectPath);
   final logoDark = await _encodeStyleLogo(profile.logoDarkPath, projectPath);
   final brandStrip = await _encodeStyleLogo(
@@ -376,6 +396,7 @@ Future<StyleProfileBytes> _buildStyleProfileBytes(
     'logoDark': ?logoDark.embedded,
     'documentLogo': ?documentLogo.embedded,
     'brandStrip': ?brandStrip.embedded,
+    if (backgrounds.isNotEmpty) 'slideBackgroundImages': backgrounds,
   };
   return _encodeStyleProfileEnvelope(
     envelope,
@@ -383,7 +404,52 @@ Future<StyleProfileBytes> _buildStyleProfileBytes(
         logo.omitted ||
         logoDark.omitted ||
         documentLogo.omitted ||
-        brandStrip.omitted,
+        brandStrip.omitted ||
+        backgroundOmitted,
+  );
+}
+
+Future<StyleProfileImportOutcome> _restoreStyleBackgrounds(
+  ThemeProfile profile,
+  Map envelope,
+  Directory? logoBaseDir,
+  bool logoOmitted,
+) async {
+  final rawBackgrounds = envelope['slideBackgroundImages'];
+  final backgrounds = profile.mapSlideBackgroundImages(
+    (path) => isBundledAssetPath(path) ? path : null,
+  );
+  if (rawBackgrounds is Map) {
+    for (final slot in ThemeProfile.slideBackgroundSlots) {
+      if (!rawBackgrounds.containsKey(slot)) continue;
+      final embedded = _embeddedLogo(rawBackgrounds[slot]);
+      if (embedded == null) {
+        logoOmitted = true;
+        continue;
+      }
+      final materialized = await _materializeStyleLogoSafely(
+        () => _materializeStyleLogo(
+          embedded.bytes,
+          embedded.mime,
+          '${profile.name} achtergrond $slot',
+          logoBaseDir,
+        ),
+      );
+      if (materialized.budgetExceeded) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.memoryBudgetExceeded,
+        );
+      }
+      if (materialized.path case final path?) {
+        backgrounds[slot] = path;
+      } else {
+        logoOmitted = true;
+      }
+    }
+  }
+  return StyleProfileImportOutcome.success(
+    profile.copyWith(slideBackgroundImages: backgrounds),
+    logoOmitted: logoOmitted,
   );
 }
 
@@ -646,7 +712,12 @@ extension FileServiceStyleProfile on FileService {
         profile = profile.copyWith(documentLogoPath: '');
       }
     }
-    return StyleProfileImportOutcome.success(profile, logoOmitted: logoOmitted);
+    return _restoreStyleBackgrounds(
+      profile,
+      envelope,
+      logoBaseDir,
+      logoOmitted,
+    );
   }
 
   /// Kies een `.ocideckstyle`-bestand en lees het uit. `readAsBytes` levert op

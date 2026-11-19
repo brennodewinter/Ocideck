@@ -8,6 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
+import '../../models/slide.dart';
+import '../../services/import/models/source_image.dart';
+import '../../services/import/models/source_slide.dart';
+import '../../services/import/pipeline/slide_classifier.dart';
 import '../../services/file_service.dart' hide ImportFailure;
 import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
@@ -202,6 +206,14 @@ Future<void> importPresentation(
     }
     return;
   }
+  await _offerPresentationStyle(
+    context,
+    ref,
+    prepared,
+    chosen.name,
+    alreadyOfferedWithLogo: logo?.profile != null,
+  );
+  if (!context.mounted) return;
   final templateTheme = _templateThemeFor(prepared, chosen.name, logo);
   final deck = templateTheme == null
       ? built.deck
@@ -215,6 +227,126 @@ Future<void> importPresentation(
     l10n: l10n,
     preserveThemeProfile: logo?.profile != null || templateTheme != null,
   );
+}
+
+Future<void> _offerPresentationStyle(
+  BuildContext context,
+  WidgetRef ref,
+  PreparedImport prepared,
+  String filename, {
+  required bool alreadyOfferedWithLogo,
+}) async {
+  if (!filename.toLowerCase().endsWith('.pptx')) return;
+  final backgrounds = kIsWeb
+      ? const <String, SourceImage>{}
+      : _presentationStyleBackgrounds(prepared.sourceDeck.slides);
+  final source = prepared.sourceDeck.theme;
+  final hasColors =
+      source?.accentColor != null ||
+      source?.textColor != null ||
+      source?.titleTextColor != null ||
+      source?.slideBackgroundColor != null;
+  if (backgrounds.isEmpty && (alreadyOfferedWithLogo || !hasColors)) return;
+  final name = stemOfFileName(filename);
+  final profile = importedThemeProfile(source, name: name).copyWith(
+    titleTextColor:
+        source?.titleTextColor ??
+        (backgrounds.isEmpty ? null : source?.textColor),
+    titleBackgroundColor: backgrounds.isEmpty
+        ? null
+        : source?.titleBackgroundColor ?? source?.slideBackgroundColor,
+    sectionBackgroundColor: backgrounds.containsKey('content')
+        ? source?.sectionBackgroundColor ?? source?.slideBackgroundColor
+        : null,
+  );
+  final settings = ref.read(settingsProvider.notifier);
+  final files = ref.read(fileServiceProvider);
+  final l10n = context.l10n;
+  final choice = await ImportTemplateStyleDialog.ask(
+    context,
+    profile: profile,
+    suggestedName: name,
+    importedDetails: [
+      if (backgrounds.containsKey('title')) l10n.d('Titelachtergrond'),
+      if (backgrounds.containsKey('content')) l10n.d('Dia-achtergrond'),
+      if (source?.accentColor != null) l10n.d('Accentkleur'),
+      if (source?.textColor != null) l10n.d('Tekstkleur'),
+      if (source?.titleTextColor != null) l10n.d('Titeltekstkleur'),
+      if (source?.fontFamily == profile.fontFamily) l10n.d('Lettertype'),
+    ],
+    omittedDetails: [
+      l10n.d('Vrije plaatsing en PowerPoint-layouts'),
+      if (kIsWeb &&
+          prepared.sourceDeck.slides.any(
+            (slide) => slide.backgroundImage != null,
+          ))
+        l10n.d('Achtergrondafbeelding'),
+    ],
+    existingNames: ref
+        .read(settingsProvider)
+        .themeProfiles
+        .map((p) => p.name)
+        .toSet(),
+    backgroundImages: backgrounds,
+    isPresentation: true,
+  );
+  if (choice == null || !context.mounted) return;
+  try {
+    final backgroundsByHash = <String, String>{};
+    final paths = <String, String>{};
+    for (final entry in backgrounds.entries) {
+      final image = entry.value;
+      final path =
+          backgroundsByHash[image.sha256] ??
+          await files.materializeImportedStyleLogo(
+            image.bytes,
+            profileName: '${choice.name} achtergrond ${entry.key}',
+          );
+      if (path == null) {
+        throw StateError('Achtergrond kon niet worden opgeslagen');
+      }
+      backgroundsByHash[image.sha256] = path;
+      paths[entry.key] = path;
+    }
+    await addThemeProfileWithoutSelection(
+      settings,
+      profile.copyWith(name: choice.name, slideBackgroundImages: paths),
+    );
+  } catch (error, stack) {
+    logError('saveImportedPresentationStyle', error, stack);
+    if (context.mounted) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        l10n.d('De stijl kon niet worden bewaard.'),
+      );
+    }
+  }
+}
+
+Map<String, SourceImage> _presentationStyleBackgrounds(
+  List<SourceSlide> slides,
+) {
+  SourceImage? title;
+  final content = <String, ({SourceImage image, int count})>{};
+  for (final slide in slides) {
+    final image = slide.backgroundImage;
+    if (image == null || slide.isHidden) continue;
+    if (classifySlide(slide).type == SlideType.title) {
+      title ??= image;
+    } else {
+      final count = content[image.sha256]?.count ?? 0;
+      content[image.sha256] = (image: image, count: count + 1);
+    }
+  }
+  SourceImage? common;
+  var highest = 0;
+  for (final entry in content.values) {
+    if (entry.count <= highest) continue;
+    highest = entry.count;
+    common = entry.image;
+  }
+  return {'title': ?title, 'content': ?common};
 }
 
 ThemeProfile? _templateThemeFor(
