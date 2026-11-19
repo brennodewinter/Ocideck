@@ -237,13 +237,15 @@ class WebdavAsyncTransport implements CollabTransport {
         return;
       }
       if (attempt + 1 == maxAttempts) break;
-      // Give concurrent writers time to settle before reading the high-water
-      // mark again. Jitter prevents peers from retrying in lockstep.
-      final backoff = 50 << attempt;
-      await Future<void>.delayed(
-        Duration(milliseconds: backoff + _appendJitter.nextInt(backoff)),
-      );
-      _ensureLive();
+      // Eén losse slotbotsing kan meteen boven de nieuwe logkop verder.
+      // Bij aanhoudende concurrentie voorkomt jitter gelijktijdige retries.
+      if (attempt > 0) {
+        final backoff = 50 << (attempt - 1);
+        await Future<void>.delayed(
+          Duration(milliseconds: backoff + _appendJitter.nextInt(backoff)),
+        );
+        _ensureLive();
+      }
       final present = await store.listSequences();
       if (present.isNotEmpty) {
         _knownMaxSeq = math.max(_knownMaxSeq, present.reduce(math.max));
