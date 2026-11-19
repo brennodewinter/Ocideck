@@ -282,6 +282,9 @@ void main() {
     // Extra bronlijst via de geïnstalleerde helper: vast argv, geen shell,
     // omgevingstoelatingslijst, Dart-time-out en native deadline van 2 s.
     'lib/services/transcription/linux_mic_recorder_io.dart': 5,
+    // Linux IPC: stat leest alleen uid en modus voor de privémappencheck.
+    // Vast pad, argumenten zonder shell, lege omgeving en korte kill-deadline.
+    'lib/services/single_instance.dart': 1,
   };
 
   test('een subproces blijft binnen de twee plekken die het mogen', () {

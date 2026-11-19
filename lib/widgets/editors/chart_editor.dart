@@ -1,15 +1,13 @@
-import 'dart:convert';
 import 'dart:math' as math;
-import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/improvement_y01.dart';
+import '../../services/chart_csv_import.dart';
 import '../../services/improvement/improvement_analysis_helpers.dart';
 import '../../services/improvement/chart_derivation.dart';
 import '../../state/procesverbetering_provider.dart';
@@ -33,21 +31,35 @@ import 'editor_text_controller.dart';
 part 'chart_editor_dialogs.dart';
 part 'chart_editor_grid.dart';
 
-const _maxChartCsvBytes = 2 * 1024 * 1024;
-const _maxChartCsvCells = 100000;
-
-Future<String> _readChartCsv(PlatformFile file) async {
-  if ((file.lengthSync() ?? 0) > _maxChartCsvBytes) {
-    throw const FormatException('CSV exceeds the byte limit');
-  }
-  final bytes = BytesBuilder(copy: false);
-  await for (final chunk in file.readAsByteStream()) {
-    if (chunk.length > _maxChartCsvBytes - bytes.length) {
-      throw const FormatException('CSV exceeds the byte limit');
+Future<ChartCsvData?> _pickChartCsv(BuildContext context) async {
+  final file = await FilePicker.pickFile(
+    type: FileType.custom,
+    allowedExtensions: ['csv'],
+  );
+  if (!context.mounted) return null;
+  if (file == null) return null;
+  try {
+    final text = await readChartCsv(file);
+    var parsed = await parseChartCsv(text);
+    if (!context.mounted) return null;
+    // Een onbesliste decimale notatie blijft een keuze van de gebruiker.
+    if (parsed.ambiguous.isNotEmpty) {
+      final convention = await askDecimalConvention(context, parsed.ambiguous);
+      if (convention == null || !context.mounted) return null;
+      parsed = await parseChartCsv(text, convention: convention);
     }
-    bytes.add(chunk);
+    return parsed;
+  } catch (error) {
+    logWarning('chart CSV import', error);
+    if (!context.mounted) return null;
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      context.l10n,
+      '${context.l10n.d('Het bestand kon niet worden gelezen.')} '
+      '(CSV UTF-8 · ≤ 2 MiB · ≤ 100 000)',
+    );
+    return null;
   }
-  return utf8.decode(bytes.takeBytes());
 }
 
 bool _revealProcesverbetering(BuildContext context) {
@@ -419,57 +431,8 @@ class _ChartEditorState extends State<ChartEditor> {
   }
 
   Future<void> _importCsv() async {
-    final file = await FilePicker.pickFile(
-      type: FileType.custom,
-      allowedExtensions: ['csv'],
-    );
-    if (!mounted) return;
-    if (file == null) return;
-    try {
-      final text = await _readChartCsv(file);
-      var parsed = await compute(
-        (csv) => parseCsv(csv, maxCells: _maxChartCsvCells),
-        text,
-      );
-      if (!mounted) return;
-      // Een onbesliste decimale notatie blijft een keuze van de gebruiker.
-      if (parsed.ambiguous.isNotEmpty) {
-        final convention = await askDecimalConvention(
-          context,
-          parsed.ambiguous,
-        );
-        if (convention == null || !mounted) return;
-        parsed = await compute(
-          (input) => parseCsv(
-            input.$1,
-            convention: input.$2,
-            maxCells: _maxChartCsvCells,
-          ),
-          (text, convention),
-        );
-      }
-      if (mounted) _applyImportedCsv(parsed);
-    } catch (error) {
-      logWarning('chart CSV import', error);
-      if (!mounted) return;
-      showErrorSnackBar(
-        ScaffoldMessenger.of(context),
-        context.l10n,
-        '${context.l10n.d('Het bestand kon niet worden gelezen.')} '
-        '(CSV UTF-8 · ≤ 2 MiB · ≤ 100 000)',
-      );
-    }
-  }
-
-  void _applyImportedCsv(
-    (
-      List<String>,
-      List<ChartSeries>, {
-      List<String> unreadable,
-      List<String> ambiguous,
-    })
-    parsed,
-  ) {
+    final parsed = await _pickChartCsv(context);
+    if (!mounted || parsed == null) return;
     setState(() {
       // Een import vervangt de cijfers, niet de bestemming: een grafiek die al
       // aan een bestand hangt blijft daaraan hangen en krijgt de nieuwe data

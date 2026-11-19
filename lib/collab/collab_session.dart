@@ -71,7 +71,7 @@ class CollabSession {
   final _lockChanges = StreamController<Map<String, String>>.broadcast();
   bool _disposed = false;
   final _unsent = Queue<DeckOp>();
-  Future<void> _sending = Future.value();
+  Future<void>? _sending;
   Timer? _retry;
   var _retryCount = 0;
 
@@ -149,23 +149,17 @@ class CollabSession {
   }
 
   Future<void> _sendThrough(int version) {
-    final done = _sending.then((_) async {
-      while (!_disposed &&
-          _unsent.isNotEmpty &&
-          _unsent.first.version <= version) {
-        final op = _unsent.first;
-        // Retry the same version after an uncertain write. Followers discard
-        // a duplicate and never see a later version before this one.
-        await transport.sendOp(op);
-        if (_unsent.isNotEmpty && identical(_unsent.first, op)) {
-          _unsent.removeFirst();
-          _retryCount = 0;
-        }
-      }
-    });
-    _sending = done.then<void>(
-      (_) {},
+    final previous = _sending;
+    final done = previous == null
+        ? _flushThrough(version)
+        : previous.then((_) => _flushThrough(version));
+    late final Future<void> tracked;
+    tracked = done.then<void>(
+      (_) {
+        if (identical(_sending, tracked)) _sending = null;
+      },
       onError: (Object error, StackTrace stack) {
+        if (identical(_sending, tracked)) _sending = null;
         logError('collab: authoritative operation not sent', error, stack);
         if (_disposed ||
             _unsent.isEmpty ||
@@ -183,7 +177,23 @@ class CollabSession {
         });
       },
     );
+    _sending = tracked;
     return done;
+  }
+
+  Future<void> _flushThrough(int version) async {
+    while (!_disposed &&
+        _unsent.isNotEmpty &&
+        _unsent.first.version <= version) {
+      final op = _unsent.first;
+      // Een onzekere schrijfpoging behoudt dezelfde versie. Een volger
+      // verwerpt een duplicaat en ziet deze op altijd vóór latere versies.
+      await transport.sendOp(op);
+      if (_unsent.isNotEmpty && identical(_unsent.first, op)) {
+        _unsent.removeFirst();
+        _retryCount = 0;
+      }
+    }
   }
 
   Future<void> _commitReceived(DeckOp op) async {

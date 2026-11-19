@@ -22,9 +22,11 @@ class SingleInstanceGuard {
   SingleInstanceGuard({
     String? socketPath,
     this.replyTimeout = const Duration(seconds: 2),
-  }) : socketPath = socketPath ?? defaultSocketPath();
+  }) : _socketPath = socketPath == null
+           ? defaultSocketPath()
+           : Future.value(socketPath);
 
-  final String? socketPath;
+  final Future<String?> _socketPath;
   static const _maxFrameBytes = 64 * 1024;
   static const _maxPaths = 128;
   static const _maxConnections = 16;
@@ -80,27 +82,40 @@ class SingleInstanceGuard {
 
   /// De Linux-runtime-directory hoort volgens de XDG-specificatie privé te
   /// zijn. Zonder die gebruikersgrens opent OciDeck een eigen venster.
-  static String? defaultSocketPath() {
+  static Future<String?> defaultSocketPath() async {
     final runtimeDir = Platform.environment['XDG_RUNTIME_DIR'];
     if (!Platform.isLinux || runtimeDir == null || !p.isAbsolute(runtimeDir)) {
       return null;
     }
     try {
-      final real = Directory(runtimeDir).resolveSymbolicLinksSync();
-      final uid = Process.runSync('/usr/bin/id', ['-u']);
-      final stat = Process.runSync('/usr/bin/stat', [
+      final real = await Directory(runtimeDir).resolveSymbolicLinks();
+      if (await FileSystemEntity.type(real, followLinks: false) !=
+          FileSystemEntityType.directory) {
+        return null;
+      }
+      // /proc/self hoort bij het stat-proces zelf, dat met onze uid draait.
+      // Het uitvoerformaat bestaat uit twee korte regels met uid en modus.
+      final stat = await Process.start('/usr/bin/stat', [
         '-Lc',
         '%u:%a',
         '--',
+        '/proc/self',
         real,
-      ]);
-      if (uid.exitCode == 0 &&
-          stat.exitCode == 0 &&
-          stat.stdout.toString().trim() ==
-              '${uid.stdout.toString().trim()}:700' &&
-          FileSystemEntity.typeSync(real, followLinks: false) ==
-              FileSystemEntityType.directory) {
-        return p.join(real, 'ocideck.sock');
+      ], includeParentEnvironment: false);
+      try {
+        final results = await Future.wait<Object>([
+          stat.exitCode,
+          utf8.decoder.bind(stat.stdout).join(),
+          stat.stderr.drain<void>().then((_) => ''),
+        ]).timeout(const Duration(seconds: 1));
+        if (results[0] != 0) return null;
+        final lines = (results[1] as String).trim().split('\n');
+        final uid = lines.first.split(':').first;
+        if (lines.length == 2 && lines[1] == '$uid:700') {
+          return p.join(real, 'ocideck.sock');
+        }
+      } on TimeoutException {
+        stat.kill(ProcessSignal.sigkill);
       }
     } catch (error) {
       logWarning('SingleInstanceGuard: privédirectory niet beschikbaar', error);
@@ -120,7 +135,7 @@ class SingleInstanceGuard {
   /// hangende primaire — dan `false`, zodat deze start niet stil verdwijnt.
   Future<bool> forwardToPrimary(List<String> paths) async {
     primaryDidNotAnswer = false;
-    final path = socketPath;
+    final path = await _socketPath;
     if (path == null) return false;
     final lines = paths.where(looksLikeDeckLaunchArg).toList();
     if (lines.length > _maxPaths ||
@@ -167,7 +182,7 @@ class SingleInstanceGuard {
   /// tweede bind, dan loopt de app onbewaakt door — de status quo vandaag,
   /// geen reden om een bruikbare start te weigeren.
   Future<void> becomePrimary() async {
-    final path = socketPath;
+    final path = await _socketPath;
     if (path == null || _server != null) return;
     _server = await _bind(path);
     if (_server == null) {
@@ -247,7 +262,7 @@ class SingleInstanceGuard {
     _server = null;
     await server.close();
     try {
-      await File(socketPath!).delete();
+      await File((await _socketPath)!).delete();
     } catch (e) {
       // Bestaat het niet meer, dan is het doel al bereikt; een volgende start
       // ruimt een eventueel restant alsnog via becomePrimary.
