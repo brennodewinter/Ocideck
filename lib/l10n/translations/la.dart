@@ -1553,6 +1553,46 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Titeldia': 'Scheda tituli',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Imagines servari non potuerunt. Iterum conare aut imagines omitte.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Pagina examinari non potuit. Paginam publicam cum textu visibili proba.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Haec imago importari non potest.',
+  'Dia-achtergrond overnemen': 'Fundum schedae adhibere',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Pars CSS praesto non erat. Propositum in scheda exempli inspice.',
+  'Gebaseerd op de kleur van de paginakop.': 'Ex colore capitis paginae.',
+  'Gebaseerd op de kleuren van knoppen.': 'Ex coloribus globulorum.',
+  'Gebaseerd op de kleuren van links.': 'Ex coloribus nexuum.',
+  'Geen datum bekend': 'Dies ignotus',
+  'Geïmporteerde stijl opslaan': 'Stilum importatum servare',
+  'Grootte miniaturen': 'Magnitudo imaginum parvarum',
+  'Inhoudsdia': 'Scheda argumenti',
+  'Jouw presentatie': 'Praesentatio tua',
+  'Kleuren en lettertype': 'Colores et typus litterarum',
+  'Kleuren van de website': 'Colores situs interretialis',
+  'Komt overeen met CSS-variabele {naam}.': 'Variabili CSS {naam} respondet.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck CSS legit et formam paginae examinat. Deinde propositum mutare potes.',
+  'Pagina en stylesheets ophalen…': 'Pagina et schedae stilorum accipiuntur…',
+  'Presentatiedatum': 'Dies praesentationis',
+  'Profiel overnemen': 'Formam adhibere',
+  'Ruimte voor je eigen inhoud': 'Spatium argumento tuo',
+  'Stijl overnemen van website': 'Stilum e situ interretiali importare',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stilus additus est. Preme Servare ut formam retineas.',
+  'Titelachtergrond overnemen': 'Fundum tituli adhibere',
+  'Toegepaste opmaak uitlezen…': 'Forma adhibita legitur…',
+  'Van website': 'E situ interretiali',
+  'Voorbeelddia': 'Scheda exempli',
+  'Vul een geldig HTTPS-webadres in.': 'Insere inscriptionem HTTPS validam.',
+  'Website analyseren': 'Situm interretialem examinare',
+  'Website-URL': 'URL situs interretialis',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Typus litterarum situs: {font}. Scheda typum substitutum electum ostendit.',
+  'Websitelogo overnemen': 'Insigne situs interretialis adhibere',
   'Plak logo van klembord': 'Glutina logo e tabula scribenda',
   'Plak donker logo van klembord': 'Glutina logo obscurum e tabula scribenda',
   'Afwijkend logo': 'Logo devians',

@@ -767,6 +767,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Titeldia': 'Title slide',
   'Plak logo van klembord': 'Paste logo from clipboard',
   'Plak donker logo van klembord': 'Paste dark logo from clipboard',
   'Afwijkend logo': 'Deviating logo',

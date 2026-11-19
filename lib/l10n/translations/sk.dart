@@ -1545,6 +1545,46 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Titeldia': 'Titulná snímka',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Obrázky sa nepodarilo uložiť. Skúste to znova alebo obrázky vynechajte.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Stránku sa nepodarilo analyzovať. Skúste verejnú stránku s viditeľným textom.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Tento obrázok nemožno importovať.',
+  'Dia-achtergrond overnemen': 'Použiť pozadie snímky',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Časť CSS nebola dostupná. Skontrolujte návrh v ukážkovej snímke.',
+  'Gebaseerd op de kleur van de paginakop.': 'Podľa farby hlavičky stránky.',
+  'Gebaseerd op de kleuren van knoppen.': 'Podľa farieb tlačidiel.',
+  'Gebaseerd op de kleuren van links.': 'Podľa farieb odkazov.',
+  'Geen datum bekend': 'Dátum nie je známy',
+  'Geïmporteerde stijl opslaan': 'Uložiť importovaný štýl',
+  'Grootte miniaturen': 'Veľkosť miniatúr',
+  'Inhoudsdia': 'Snímka s obsahom',
+  'Jouw presentatie': 'Vaša prezentácia',
+  'Kleuren en lettertype': 'Farby a písmo',
+  'Kleuren van de website': 'Farby webu',
+  'Komt overeen met CSS-variabele {naam}.': 'Zodpovedá premennej CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck číta CSS a skúma rozloženie stránky. Návrh potom môžete upraviť.',
+  'Pagina en stylesheets ophalen…': 'Načítava sa stránka a štýly…',
+  'Presentatiedatum': 'Dátum prezentácie',
+  'Profiel overnemen': 'Použiť profil',
+  'Ruimte voor je eigen inhoud': 'Priestor pre vlastný obsah',
+  'Stijl overnemen van website': 'Importovať štýl z webu',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Štýl pridaný. Kliknutím na Uložiť profil zachováte.',
+  'Titelachtergrond overnemen': 'Použiť pozadie titulku',
+  'Toegepaste opmaak uitlezen…': 'Číta sa použité formátovanie…',
+  'Van website': 'Z webu',
+  'Voorbeelddia': 'Ukážková snímka',
+  'Vul een geldig HTTPS-webadres in.': 'Zadajte platnú webovú adresu HTTPS.',
+  'Website analyseren': 'Analyzovať web',
+  'Website-URL': 'URL webu',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Písmo webu: {font}. Snímka zobrazuje zvolené náhradné písmo.',
+  'Websitelogo overnemen': 'Použiť logo webu',
   'Plak logo van klembord': 'Vložiť logo zo schránky',
   'Plak donker logo van klembord': 'Vložiť tmavé logo zo schránky',
   'Afwijkend logo': 'Odlišné logo',

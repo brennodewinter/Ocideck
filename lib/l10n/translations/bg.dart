@@ -1561,6 +1561,50 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Titeldia': 'Заглавен слайд',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Изображенията не можаха да бъдат запазени. Опитайте отново или пропуснете изображенията.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Страницата не можа да бъде анализирана. Опитайте публична страница с видим текст.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Това изображение не може да бъде импортирано.',
+  'Dia-achtergrond overnemen': 'Използване на фона на слайда',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Част от CSS не беше налична. Проверете предложението в примерния слайд.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Въз основа на цвета на заглавната част на страницата.',
+  'Gebaseerd op de kleuren van knoppen.':
+      'Въз основа на цветовете на бутоните.',
+  'Gebaseerd op de kleuren van links.': 'Въз основа на цветовете на връзките.',
+  'Geen datum bekend': 'Няма известна дата',
+  'Geïmporteerde stijl opslaan': 'Запазване на импортирания стил',
+  'Grootte miniaturen': 'Размер на миниатюрите',
+  'Inhoudsdia': 'Слайд със съдържание',
+  'Jouw presentatie': 'Вашата презентация',
+  'Kleuren en lettertype': 'Цветове и шрифт',
+  'Kleuren van de website': 'Цветове на уебсайта',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Съответства на CSS променливата {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck чете CSS и изследва оформлението на страницата. След това можете да коригирате предложението.',
+  'Pagina en stylesheets ophalen…':
+      'Извличане на страницата и стиловите таблици…',
+  'Presentatiedatum': 'Дата на презентацията',
+  'Profiel overnemen': 'Използване на профила',
+  'Ruimte voor je eigen inhoud': 'Място за вашето съдържание',
+  'Stijl overnemen van website': 'Импортиране на стил от уебсайт',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Стилът е добавен. Натиснете Запазване, за да запазите профила.',
+  'Titelachtergrond overnemen': 'Използване на фона на заглавието',
+  'Toegepaste opmaak uitlezen…': 'Четене на приложеното форматиране…',
+  'Van website': 'От уебсайт',
+  'Voorbeelddia': 'Примерен слайд',
+  'Vul een geldig HTTPS-webadres in.': 'Въведете валиден HTTPS уебадрес.',
+  'Website analyseren': 'Анализиране на уебсайт',
+  'Website-URL': 'URL на уебсайта',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Шрифт на уебсайта: {font}. Слайдът показва избрания заместващ шрифт.',
+  'Websitelogo overnemen': 'Използване на логото на уебсайта',
   'Plak logo van klembord': 'Постави лого от клипборда',
   'Plak donker logo van klembord': 'Постави тъмно лого от клипборда',
   'Afwijkend logo': 'Различно лого',

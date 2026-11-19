@@ -1542,6 +1542,48 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Titeldia': 'Titelfolie',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'D Bilder händ nöd chöne gspeicheret werde. Versuech es nomal oder lah d Bilder weg.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'D Siite hät nöd chöne analysiert werde. Versuech e öffentlichi Siite mit sichtbarem Text.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Das Bild cha nöd übernoh werde.',
+  'Dia-achtergrond overnemen': 'Foliehintergrund übernäh',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'En Teil vom CSS isch nöd verfügbar gsi. Prüef de Vorschlag i de Vorschaufolie.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Basiert uf de Farb vom Siitekopf.',
+  'Gebaseerd op de kleuren van knoppen.': 'Basiert uf de Chnopffarbe.',
+  'Gebaseerd op de kleuren van links.': 'Basiert uf de Linkfarbe.',
+  'Geen datum bekend': 'Keis Datum bekannt',
+  'Geïmporteerde stijl opslaan': 'Importierte Stil speichere',
+  'Grootte miniaturen': 'Miniaturgrössi',
+  'Inhoudsdia': 'Inhaltsfolie',
+  'Jouw presentatie': 'Dini Präsentation',
+  'Kleuren en lettertype': 'Farbe und Schriftart',
+  'Kleuren van de website': 'Farbe vo de Website',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Entspricht de CSS-Variable {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck liest s CSS und untersucht s Siitelayout. Nachher chasch de Vorschlag apasse.',
+  'Pagina en stylesheets ophalen…': 'Siite und Stylesheets abhole…',
+  'Presentatiedatum': 'Präsentationsdatum',
+  'Profiel overnemen': 'Profil übernäh',
+  'Ruimte voor je eigen inhoud': 'Platz für dini eigene Inhalt',
+  'Stijl overnemen van website': 'Stil vo Website übernäh',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stil dezuegfüegt. Klick uf Speichere, zum s Profil bhalte.',
+  'Titelachtergrond overnemen': 'Titelhintergrund übernäh',
+  'Toegepaste opmaak uitlezen…': 'Agwendeti Formatierig läse…',
+  'Van website': 'Vo Website',
+  'Voorbeelddia': 'Vorschaufolie',
+  'Vul een geldig HTTPS-webadres in.': 'Gib e gültigi HTTPS-Webadrässe ii.',
+  'Website analyseren': 'Website analysiere',
+  'Website-URL': 'Website-URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Website-Schriftart: {font}. D Folie zeigt di gwählti Ersatzschriftart.',
+  'Websitelogo overnemen': 'Website-Logo übernäh',
   'Plak logo van klembord': 'Logo us de Zwüscheablage iifüege',
   'Plak donker logo van klembord': 'Dunkels Logo us de Zwüscheablage iifüege',
   'Afwijkend logo': 'Abwichends Logo',

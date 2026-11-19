@@ -1541,6 +1541,46 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Titeldia': 'Titelbild',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Bilderna kunde inte sparas. Försök igen eller utelämna bilderna.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Sidan kunde inte analyseras. Prova en offentlig sida med synlig text.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Den här bilden kan inte importeras.',
+  'Dia-achtergrond overnemen': 'Använd bildbakgrund',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'En del CSS var inte tillgänglig. Kontrollera förslaget i förhandsvisningsbilden.',
+  'Gebaseerd op de kleur van de paginakop.': 'Baserat på sidhuvudets färg.',
+  'Gebaseerd op de kleuren van knoppen.': 'Baserat på knapparnas färger.',
+  'Gebaseerd op de kleuren van links.': 'Baserat på länkarnas färger.',
+  'Geen datum bekend': 'Inget känt datum',
+  'Geïmporteerde stijl opslaan': 'Spara importerad stil',
+  'Grootte miniaturen': 'Miniatyrstorlek',
+  'Inhoudsdia': 'Innehållsbild',
+  'Jouw presentatie': 'Din presentation',
+  'Kleuren en lettertype': 'Färger och teckensnitt',
+  'Kleuren van de website': 'Webbplatsens färger',
+  'Komt overeen met CSS-variabele {naam}.': 'Motsvarar CSS-variabeln {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck läser CSS och granskar sidans layout. Du kan justera förslaget efteråt.',
+  'Pagina en stylesheets ophalen…': 'Hämtar sida och formatmallar…',
+  'Presentatiedatum': 'Presentationsdatum',
+  'Profiel overnemen': 'Använd profil',
+  'Ruimte voor je eigen inhoud': 'Plats för ditt eget innehåll',
+  'Stijl overnemen van website': 'Importera stil från webbplats',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stil tillagd. Klicka på Spara för att behålla profilen.',
+  'Titelachtergrond overnemen': 'Använd titelbakgrund',
+  'Toegepaste opmaak uitlezen…': 'Läser tillämpad formatering…',
+  'Van website': 'Från webbplats',
+  'Voorbeelddia': 'Förhandsvisningsbild',
+  'Vul een geldig HTTPS-webadres in.': 'Ange en giltig HTTPS-webbadress.',
+  'Website analyseren': 'Analysera webbplats',
+  'Website-URL': 'Webbplatsens URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Webbplatsens teckensnitt: {font}. Bilden visar det valda ersättningsteckensnittet.',
+  'Websitelogo overnemen': 'Använd webbplatsens logotyp',
   'Plak logo van klembord': 'Klistra in logotyp från urklipp',
   'Plak donker logo van klembord': 'Klistra in mörk logotyp från urklipp',
   'Afwijkend logo': 'Avvikande logotyp',

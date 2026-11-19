@@ -1570,6 +1570,49 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Titeldia': 'Sleamhnán teidil',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Níorbh fhéidir na híomhánna a shábháil. Bain triail eile as nó fág na híomhánna ar lár.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Níorbh fhéidir an leathanach a anailísiú. Bain triail as leathanach poiblí le téacs infheicthe.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Ní féidir an íomhá seo a iompórtáil.',
+  'Dia-achtergrond overnemen': 'Úsáid cúlra an tsleamhnáin',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Ní raibh cuid den CSS ar fáil. Seiceáil an moladh sa sleamhnán réamhamhairc.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Bunaithe ar dhath cheanntásc an leathanaigh.',
+  'Gebaseerd op de kleuren van knoppen.': 'Bunaithe ar dhathanna na gcnaipí.',
+  'Gebaseerd op de kleuren van links.': 'Bunaithe ar dhathanna na nasc.',
+  'Geen datum bekend': 'Níl dáta ar eolas',
+  'Geïmporteerde stijl opslaan': 'Sábháil an stíl iompórtáilte',
+  'Grootte miniaturen': 'Méid na mionsamhlacha',
+  'Inhoudsdia': 'Sleamhnán ábhair',
+  'Jouw presentatie': 'Do chur i láthair',
+  'Kleuren en lettertype': 'Dathanna agus cló',
+  'Kleuren van de website': 'Dathanna an tsuímh gréasáin',
+  'Komt overeen met CSS-variabele {naam}.': 'Meaitseálann athróg CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'Léann OciDeck an CSS agus scrúdaíonn sé leagan amach an leathanaigh. Is féidir leat an moladh a choigeartú ina dhiaidh sin.',
+  'Pagina en stylesheets ophalen…':
+      'An leathanach agus na stílbhileoga á bhfáil…',
+  'Presentatiedatum': 'Dáta an chur i láthair',
+  'Profiel overnemen': 'Úsáid an phróifíl',
+  'Ruimte voor je eigen inhoud': 'Spás do d’ábhar féin',
+  'Stijl overnemen van website': 'Iompórtáil stíl ó shuíomh gréasáin',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stíl curtha leis. Cliceáil Sábháil chun an phróifíl a choinneáil.',
+  'Titelachtergrond overnemen': 'Úsáid cúlra an teidil',
+  'Toegepaste opmaak uitlezen…': 'An fhormáidiú feidhmithe á léamh…',
+  'Van website': 'Ó shuíomh gréasáin',
+  'Voorbeelddia': 'Sleamhnán réamhamhairc',
+  'Vul een geldig HTTPS-webadres in.':
+      'Cuir isteach seoladh gréasáin HTTPS bailí.',
+  'Website analyseren': 'Anailísigh an suíomh gréasáin',
+  'Website-URL': 'URL an tsuímh gréasáin',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Cló an tsuímh gréasáin: {font}. Taispeánann an sleamhnán an cló ionaid roghnaithe.',
+  'Websitelogo overnemen': 'Úsáid lógó an tsuímh gréasáin',
   'Plak logo van klembord': 'Greamaigh lógó ón ngearrthaisce',
   'Plak donker logo van klembord': 'Greamaigh lógó dorcha ón ngearrthaisce',
   'Afwijkend logo': 'Lógó difriúil',

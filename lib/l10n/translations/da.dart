@@ -1542,6 +1542,47 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Titeldia': 'Titeldias',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Billederne kunne ikke gemmes. Prøv igen, eller udelad billederne.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Siden kunne ikke analyseres. Prøv en offentlig side med synlig tekst.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Dette billede kan ikke importeres.',
+  'Dia-achtergrond overnemen': 'Brug diasbaggrund',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Noget CSS var ikke tilgængeligt. Kontrollér forslaget i eksempeldiaset.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Baseret på farven på sidens sidehoved.',
+  'Gebaseerd op de kleuren van knoppen.': 'Baseret på knappernes farver.',
+  'Gebaseerd op de kleuren van links.': 'Baseret på linkenes farver.',
+  'Geen datum bekend': 'Ingen kendt dato',
+  'Geïmporteerde stijl opslaan': 'Gem importeret stil',
+  'Grootte miniaturen': 'Miniaturestørrelse',
+  'Inhoudsdia': 'Indholdsdias',
+  'Jouw presentatie': 'Din præsentation',
+  'Kleuren en lettertype': 'Farver og skrifttype',
+  'Kleuren van de website': 'Webstedets farver',
+  'Komt overeen met CSS-variabele {naam}.': 'Svarer til CSS-variablen {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck læser CSS og undersøger sidens layout. Du kan tilpasse forslaget bagefter.',
+  'Pagina en stylesheets ophalen…': 'Henter side og typografiark…',
+  'Presentatiedatum': 'Præsentationsdato',
+  'Profiel overnemen': 'Brug profil',
+  'Ruimte voor je eigen inhoud': 'Plads til dit eget indhold',
+  'Stijl overnemen van website': 'Importer stil fra websted',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stil tilføjet. Klik på Gem for at beholde profilen.',
+  'Titelachtergrond overnemen': 'Brug titelbaggrund',
+  'Toegepaste opmaak uitlezen…': 'Læser anvendt formatering…',
+  'Van website': 'Fra websted',
+  'Voorbeelddia': 'Eksempeldias',
+  'Vul een geldig HTTPS-webadres in.': 'Indtast en gyldig HTTPS-webadresse.',
+  'Website analyseren': 'Analysér websted',
+  'Website-URL': 'Webstedets URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Webstedets skrifttype: {font}. Diaset viser den valgte erstatningsskrifttype.',
+  'Websitelogo overnemen': 'Brug webstedets logo',
   'Plak logo van klembord': 'Sæt logo ind fra udklipsholder',
   'Plak donker logo van klembord': 'Sæt mørkt logo ind fra udklipsholder',
   'Afwijkend logo': 'Afvigende logo',

@@ -1542,6 +1542,46 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Titeldia': 'Otsikkodia',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Kuvia ei voitu tallentaa. Yritä uudelleen tai jätä kuvat pois.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Sivua ei voitu analysoida. Kokeile julkista sivua, jolla on näkyvää tekstiä.',
+  'Deze afbeelding kan niet worden overgenomen.': 'Tätä kuvaa ei voi tuoda.',
+  'Dia-achtergrond overnemen': 'Käytä dian taustaa',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Osa CSS:stä ei ollut saatavilla. Tarkista ehdotus esikatseludiasta.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Perustuu sivun otsakealueen väriin.',
+  'Gebaseerd op de kleuren van knoppen.': 'Perustuu painikkeiden väreihin.',
+  'Gebaseerd op de kleuren van links.': 'Perustuu linkkien väreihin.',
+  'Geen datum bekend': 'Päivämäärä ei ole tiedossa',
+  'Geïmporteerde stijl opslaan': 'Tallenna tuotu tyyli',
+  'Grootte miniaturen': 'Pienoiskuvien koko',
+  'Inhoudsdia': 'Sisältödia',
+  'Jouw presentatie': 'Esityksesi',
+  'Kleuren en lettertype': 'Värit ja kirjasin',
+  'Kleuren van de website': 'Verkkosivuston värit',
+  'Komt overeen met CSS-variabele {naam}.': 'Vastaa CSS-muuttujaa {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck lukee CSS:n ja tarkastelee sivun asettelua. Voit muokata ehdotusta sen jälkeen.',
+  'Pagina en stylesheets ophalen…': 'Haetaan sivua ja tyylitiedostoja…',
+  'Presentatiedatum': 'Esityspäivämäärä',
+  'Profiel overnemen': 'Käytä profiilia',
+  'Ruimte voor je eigen inhoud': 'Tilaa omalle sisällöllesi',
+  'Stijl overnemen van website': 'Tuo tyyli verkkosivustolta',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Tyyli lisätty. Säilytä profiili napsauttamalla Tallenna.',
+  'Titelachtergrond overnemen': 'Käytä otsikon taustaa',
+  'Toegepaste opmaak uitlezen…': 'Luetaan käytettyä muotoilua…',
+  'Van website': 'Verkkosivustolta',
+  'Voorbeelddia': 'Esikatseludia',
+  'Vul een geldig HTTPS-webadres in.': 'Anna kelvollinen HTTPS-verkko-osoite.',
+  'Website analyseren': 'Analysoi verkkosivusto',
+  'Website-URL': 'Verkkosivuston URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Verkkosivuston kirjasin: {font}. Dia näyttää valitun korvaavan kirjasimen.',
+  'Websitelogo overnemen': 'Käytä verkkosivuston logoa',
   'Plak logo van klembord': 'Liitä logo leikepöydältä',
   'Plak donker logo van klembord': 'Liitä tumma logo leikepöydältä',
   'Afwijkend logo': 'Poikkeava logo',

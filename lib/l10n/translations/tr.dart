@@ -2398,6 +2398,45 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Titeldia': 'Başlık slaytı',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Görseller kaydedilemedi. Tekrar deneyin veya görselleri hariç tutun.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Sayfa analiz edilemedi. Görünür metin içeren herkese açık bir sayfa deneyin.',
+  'Deze afbeelding kan niet worden overgenomen.': 'Bu görsel içe aktarılamaz.',
+  'Dia-achtergrond overnemen': 'Slayt arka planını kullan',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'CSS’nin bir bölümü kullanılamıyordu. Öneriyi önizleme slaytında kontrol edin.',
+  'Gebaseerd op de kleur van de paginakop.': 'Sayfa başlığının rengine göre.',
+  'Gebaseerd op de kleuren van knoppen.': 'Düğme renklerine göre.',
+  'Gebaseerd op de kleuren van links.': 'Bağlantı renklerine göre.',
+  'Geen datum bekend': 'Tarih bilinmiyor',
+  'Geïmporteerde stijl opslaan': 'İçe aktarılan stili kaydet',
+  'Grootte miniaturen': 'Küçük resim boyutu',
+  'Inhoudsdia': 'İçerik slaytı',
+  'Jouw presentatie': 'Sunumunuz',
+  'Kleuren en lettertype': 'Renkler ve yazı tipi',
+  'Kleuren van de website': 'Web sitesinin renkleri',
+  'Komt overeen met CSS-variabele {naam}.': '{naam} CSS değişkeniyle eşleşir.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck CSS’yi okur ve sayfa düzenini inceler. Daha sonra öneriyi ayarlayabilirsiniz.',
+  'Pagina en stylesheets ophalen…': 'Sayfa ve stil sayfaları alınıyor…',
+  'Presentatiedatum': 'Sunum tarihi',
+  'Profiel overnemen': 'Profili kullan',
+  'Ruimte voor je eigen inhoud': 'Kendi içeriğiniz için alan',
+  'Stijl overnemen van website': 'Web sitesinden stil aktar',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stil eklendi. Profili saklamak için Kaydet’e tıklayın.',
+  'Titelachtergrond overnemen': 'Başlık arka planını kullan',
+  'Toegepaste opmaak uitlezen…': 'Uygulanan biçimlendirme okunuyor…',
+  'Van website': 'Web sitesinden',
+  'Voorbeelddia': 'Önizleme slaytı',
+  'Vul een geldig HTTPS-webadres in.': 'Geçerli bir HTTPS web adresi girin.',
+  'Website analyseren': 'Web sitesini analiz et',
+  'Website-URL': 'Web sitesi URL’si',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Web sitesi yazı tipi: {font}. Slayt, seçilen yedek yazı tipini gösterir.',
+  'Websitelogo overnemen': 'Web sitesi logosunu kullan',
   'Plak logo van klembord': 'Logoyu panodan yapıştır',
   'Plak donker logo van klembord': 'Koyu logoyu panodan yapıştır',
   'Afwijkend logo': 'Farklı logo',

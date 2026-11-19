@@ -1548,6 +1548,47 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Titeldia': 'Pavadinimo skaidrė',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Vaizdų nepavyko išsaugoti. Bandykite dar kartą arba praleiskite vaizdus.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Puslapio nepavyko išanalizuoti. Išbandykite viešą puslapį su matomu tekstu.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Šio vaizdo negalima importuoti.',
+  'Dia-achtergrond overnemen': 'Naudoti skaidrės foną',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Dalis CSS buvo nepasiekiama. Patikrinkite pasiūlymą peržiūros skaidrėje.',
+  'Gebaseerd op de kleur van de paginakop.': 'Pagal puslapio antraštės spalvą.',
+  'Gebaseerd op de kleuren van knoppen.': 'Pagal mygtukų spalvas.',
+  'Gebaseerd op de kleuren van links.': 'Pagal nuorodų spalvas.',
+  'Geen datum bekend': 'Data nežinoma',
+  'Geïmporteerde stijl opslaan': 'Išsaugoti importuotą stilių',
+  'Grootte miniaturen': 'Miniatiūrų dydis',
+  'Inhoudsdia': 'Turinio skaidrė',
+  'Jouw presentatie': 'Jūsų pateiktis',
+  'Kleuren en lettertype': 'Spalvos ir šriftas',
+  'Kleuren van de website': 'Svetainės spalvos',
+  'Komt overeen met CSS-variabele {naam}.': 'Atitinka CSS kintamąjį {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck nuskaito CSS ir nagrinėja puslapio išdėstymą. Vėliau galite koreguoti pasiūlymą.',
+  'Pagina en stylesheets ophalen…': 'Gaunamas puslapis ir stiliaus lapai…',
+  'Presentatiedatum': 'Pateikties data',
+  'Profiel overnemen': 'Naudoti profilį',
+  'Ruimte voor je eigen inhoud': 'Vieta jūsų turiniui',
+  'Stijl overnemen van website': 'Importuoti stilių iš svetainės',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stilius pridėtas. Spustelėkite Išsaugoti, kad profilį išlaikytumėte.',
+  'Titelachtergrond overnemen': 'Naudoti pavadinimo foną',
+  'Toegepaste opmaak uitlezen…': 'Nuskaitomas taikomas formatavimas…',
+  'Van website': 'Iš svetainės',
+  'Voorbeelddia': 'Peržiūros skaidrė',
+  'Vul een geldig HTTPS-webadres in.':
+      'Įveskite galiojantį HTTPS žiniatinklio adresą.',
+  'Website analyseren': 'Analizuoti svetainę',
+  'Website-URL': 'Svetainės URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Svetainės šriftas: {font}. Skaidrėje rodomas pasirinktas pakaitinis šriftas.',
+  'Websitelogo overnemen': 'Naudoti svetainės logotipą',
   'Plak logo van klembord': 'Įklijuoti logotipą iš iškarpinės',
   'Plak donker logo van klembord': 'Įklijuoti tamsų logotipą iš iškarpinės',
   'Afwijkend logo': 'Kitoks logotipas',

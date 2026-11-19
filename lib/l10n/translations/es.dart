@@ -610,6 +610,51 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Titeldia': 'Diapositiva de título',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'No se pudieron guardar las imágenes. Vuelve a intentarlo u omite las imágenes.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'No se pudo analizar la página. Prueba una página pública con texto visible.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'No se puede importar esta imagen.',
+  'Dia-achtergrond overnemen': 'Usar el fondo de la diapositiva',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Parte del CSS no estaba disponible. Revisa la propuesta en la diapositiva de vista previa.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Basado en el color de la cabecera de la página.',
+  'Gebaseerd op de kleuren van knoppen.':
+      'Basado en los colores de los botones.',
+  'Gebaseerd op de kleuren van links.': 'Basado en los colores de los enlaces.',
+  'Geen datum bekend': 'Fecha desconocida',
+  'Geïmporteerde stijl opslaan': 'Guardar estilo importado',
+  'Grootte miniaturen': 'Tamaño de las miniaturas',
+  'Inhoudsdia': 'Diapositiva de contenido',
+  'Jouw presentatie': 'Tu presentación',
+  'Kleuren en lettertype': 'Colores y fuente',
+  'Kleuren van de website': 'Colores del sitio web',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Coincide con la variable CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck lee el CSS y examina el diseño de la página. Después puedes ajustar la propuesta.',
+  'Pagina en stylesheets ophalen…':
+      'Obteniendo la página y las hojas de estilo…',
+  'Presentatiedatum': 'Fecha de presentación',
+  'Profiel overnemen': 'Usar perfil',
+  'Ruimte voor je eigen inhoud': 'Espacio para tu propio contenido',
+  'Stijl overnemen van website': 'Importar estilo de un sitio web',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Estilo añadido. Haz clic en Guardar para conservar el perfil.',
+  'Titelachtergrond overnemen': 'Usar el fondo del título',
+  'Toegepaste opmaak uitlezen…': 'Leyendo el formato aplicado…',
+  'Van website': 'Desde un sitio web',
+  'Voorbeelddia': 'Diapositiva de vista previa',
+  'Vul een geldig HTTPS-webadres in.':
+      'Introduce una dirección web HTTPS válida.',
+  'Website analyseren': 'Analizar sitio web',
+  'Website-URL': 'URL del sitio web',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Fuente del sitio web: {font}. La diapositiva muestra la fuente de sustitución elegida.',
+  'Websitelogo overnemen': 'Usar el logotipo del sitio web',
   'Plak logo van klembord': 'Pegar logotipo del portapapeles',
   'Plak donker logo van klembord': 'Pegar logotipo oscuro del portapapeles',
   'Afwijkend logo': 'Logotipo distinto',

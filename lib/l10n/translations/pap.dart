@@ -612,6 +612,48 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Titeldia': 'Diapositiva di título',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'No por a warda e imágennan. Purba atrobe òf laga e imágennan afó.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'No por a analisá e página. Purba un página públiko ku teksto visibel.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'No por importa e imágen aki.',
+  'Dia-achtergrond overnemen': 'Usa fondo di diapositiva',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Un parti di CSS no tabata disponibel. Kontrolá e proposishon den e diapositiva di ehèmpel.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Basá riba e koló di kabesera di página.',
+  'Gebaseerd op de kleuren van knoppen.': 'Basá riba e kolónan di boton.',
+  'Gebaseerd op de kleuren van links.': 'Basá riba e kolónan di link.',
+  'Geen datum bekend': 'No tin fecha konosí',
+  'Geïmporteerde stijl opslaan': 'Warda estilo importá',
+  'Grootte miniaturen': 'Tamaño di miniaturanan',
+  'Inhoudsdia': 'Diapositiva di kontenido',
+  'Jouw presentatie': 'Bo presentashon',
+  'Kleuren en lettertype': 'Koló i tipo di lèter',
+  'Kleuren van de website': 'Kolónan di wèbsait',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Ta korespondé ku variabel CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck ta lesa e CSS i wak kon e página ta organisá. Despues bo por adaptá e proposishon.',
+  'Pagina en stylesheets ophalen…': 'Buskando página i foyonan di estilo…',
+  'Presentatiedatum': 'Fecha di presentashon',
+  'Profiel overnemen': 'Usa perfil',
+  'Ruimte voor je eigen inhoud': 'Espasio pa bo mes kontenido',
+  'Stijl overnemen van website': 'Importa estilo di wèbsait',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Estilo agregá. Klik riba Warda pa konservá e perfil.',
+  'Titelachtergrond overnemen': 'Usa fondo di título',
+  'Toegepaste opmaak uitlezen…': 'Lesando formato apliká…',
+  'Van website': 'Di wèbsait',
+  'Voorbeelddia': 'Diapositiva di ehèmpel',
+  'Vul een geldig HTTPS-webadres in.': 'Yena un adrès HTTPS di wèb bálido.',
+  'Website analyseren': 'Analisá wèbsait',
+  'Website-URL': 'URL di wèbsait',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Tipo di lèter di wèbsait: {font}. E diapositiva ta mustra e tipo di lèter di remplaso skohe.',
+  'Websitelogo overnemen': 'Usa logo di wèbsait',
   'Plak logo van klembord': 'Pega logo di e portapapel',
   'Plak donker logo van klembord': 'Pega logo skur di e portapapel',
   'Afwijkend logo': 'Logo diferente',
