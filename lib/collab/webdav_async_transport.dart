@@ -30,6 +30,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math' as math;
 
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 import 'collab_codec.dart';
 import 'collab_log_store.dart';
@@ -195,7 +196,7 @@ class WebdavAsyncTransport implements CollabTransport {
     // than retrying a poison record forever. Well-formed writers never produce
     // one; this only fires on corruption or a record kind from a newer version.
     try {
-      final env = jsonDecode(record);
+      final env = jsonDecodeGuarded(record);
       if (env is! Map<String, Object?>) {
         throw FormatException('log record is not an object');
       }

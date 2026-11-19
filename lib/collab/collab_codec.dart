@@ -38,6 +38,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
 import '../services/improvement/gantt_dsl.dart';
+import '../utils/json_depth_guard.dart';
 import 'collab_transport.dart';
 import 'deck_op.dart';
 
@@ -757,7 +758,7 @@ LockEvent decodeLockEvent(String source) =>
 Map<String, Object?> _decodeObject(String source) {
   final Object? decoded;
   try {
-    decoded = jsonDecode(source);
+    decoded = jsonDecodeGuarded(source);
   } on FormatException catch (e) {
     throw FormatException('not JSON: ${e.message}');
   }
