@@ -400,7 +400,7 @@ class _IsolateImageFaceScanner implements ImageFaceScanner {
       // De worker start niet of is weggevallen: dan is de controle op deze
       // machine niet bruikbaar en zeggen we dat — geen stille nul, en zeker
       // geen terugval naar "maar dan draait de UI-thread het toch maar".
-      _nativeAvailable = false;
+      _dropWorker();
       logError('ImageFaceScanner.worker', e, s);
       return ImageFaceScanResult.unreadable;
     }
@@ -421,13 +421,28 @@ class _IsolateImageFaceScanner implements ImageFaceScanner {
     if (existing != null) return Future.value(existing);
     return _starting ??= () async {
       final handshake = ReceivePort();
-      _isolate = await Isolate.spawn(_faceScanWorkerMain, (
-        handshake.sendPort,
-        _modelBytes,
-      ));
-      final sendPort = await handshake.first as SendPort;
-      handshake.close();
-      return _toWorker = sendPort;
+      try {
+        final worker = await Isolate.spawn(
+          _faceScanWorkerMain,
+          (handshake.sendPort, _modelBytes),
+          onError: handshake.sendPort,
+          onExit: handshake.sendPort,
+        );
+        if (_disposed) {
+          worker.kill();
+          throw StateError('Face scan worker disposed during startup');
+        }
+        _isolate = worker;
+        final reply = await handshake.first.timeout(
+          const Duration(seconds: 15),
+        );
+        if (reply is! SendPort || _disposed) {
+          throw StateError('Face scan worker exited before handshake');
+        }
+        return _toWorker = reply;
+      } finally {
+        handshake.close();
+      }
     }();
   }
 
