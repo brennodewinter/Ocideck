@@ -2,7 +2,7 @@
 
 - De hoofdrepository is **LibreKAT/Ocideck op Pawprint**:
   https://pawprint.vigilis.online/LibreKAT/Ocideck.
-- Maak issues altijd aan in deze Pawprint-repository. Gebruik hiervoor de
+- Maak vóór een verbetering een issue aan in deze Pawprint-repository. Gebruik hiervoor de
   Pawprint/Forgejo-koppeling of `tea` met expliciet `--repo LibreKAT/Ocideck`
   en de login voor `https://pawprint.vigilis.online`.
 - De GitHub-repository `brennodewinter/Ocideck` is uitsluitend een spiegel

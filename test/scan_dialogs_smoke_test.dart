@@ -14,6 +14,7 @@ import 'package:ocideck/widgets/dialogs/dialog_shell.dart';
 import 'package:ocideck/widgets/dialogs/open_presentation_dialog.dart';
 import 'package:ocideck/widgets/dialogs/scan_library_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
+import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 import 'support/pump_until.dart';
 
@@ -109,6 +110,67 @@ void main() {
     expect(find.byType(OpenPresentationDialog), findsOneWidget);
   });
 
+  testWidgets(
+    'Openen sorteert op presentatiedatum en toont wijzigingsdatum als terugval',
+    (tester) async {
+      void writeDeck(String title, String date, DateTime modified) {
+        final file = File('${dir.path}/$title.md');
+        file.writeAsStringSync(
+          '---\nmarp: true\ntitle: $title\n'
+          '${date.isEmpty ? '' : 'date: $date\n'}---\n\n# Dia\n',
+        );
+        file.setLastModifiedSync(modified);
+      }
+
+      File('${dir.path}/demo.md').deleteSync();
+      writeDeck('A oudste', '2022-01-08', DateTime(2026, 2));
+      writeDeck('B nieuwste', '2025-04-17', DateTime(2021, 2));
+      writeDeck('C zonder datum', '', DateTime(2024, 2, 3, 12));
+      await tester.pumpWidget(
+        _host(
+          (context) => OpenPresentationDialog.show(
+            context,
+            fileService: _fileService(dir.path),
+            libraries: [LibraryFolder(name: 'Test', path: dir.path)],
+          ),
+        ),
+      );
+      await _openAndScan(tester);
+      expect(find.textContaining('2025-04-17'), findsOneWidget);
+      expect(find.text('Laatst gewijzigd op 2024-02-03'), findsOneWidget);
+
+      double y(String title) => tester.getTopLeft(find.text(title)).dy;
+
+      await tester.tap(find.byTooltip('Sorteren'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.ancestor(
+          of: find.text('Nieuwste eerst'),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is CheckedPopupMenuItem,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(y('B nieuwste'), lessThan(y('C zonder datum')));
+      expect(y('C zonder datum'), lessThan(y('A oudste')));
+
+      await tester.tap(find.byTooltip('Sorteren'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.ancestor(
+          of: find.text('Oudste eerst'),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is CheckedPopupMenuItem,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(y('A oudste'), lessThan(y('C zonder datum')));
+      expect(y('C zonder datum'), lessThan(y('B nieuwste')));
+    },
+  );
+
   testWidgets('Openen ziet een extern aangemaakt bestand na verversen', (
     tester,
   ) async {
@@ -195,6 +257,64 @@ void main() {
     expect(find.byType(ImportSlidesDialog), findsOneWidget);
     expect(find.byType(OciDialogShell), findsOneWidget);
   });
+
+  testWidgets(
+    'dia-import schaalt miniaturen zonder selectie of volgorde te verliezen',
+    (tester) async {
+      File('${dir.path}/demo.md').writeAsStringSync(
+        '---\nmarp: true\ntitle: Demo\n---\n\n# Eerste dia\n\n---\n\n# Tweede dia\n',
+      );
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(1800, 1200);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      List<Slide>? imported;
+      await tester.pumpWidget(
+        _host((context) async {
+          imported = await ImportSlidesDialog.show(
+            context,
+            fileService: _fileService(dir.path),
+            initialDirectory: dir.path,
+          );
+        }),
+      );
+      await _openAndScan(tester);
+
+      final surface = find.byKey(const Key('oci-dialog-surface'));
+      final cards = find.byType(SlidePreviewWidget);
+      expect(tester.getSize(surface).width, greaterThan(1000));
+      expect(cards, findsNWidgets(2));
+      final originalWidth = tester.getSize(cards.first).width;
+      await tester.tap(cards.last);
+      await tester.tap(cards.first);
+      await tester.pump();
+
+      final slider = find.byKey(const Key('import-thumbnail-size'));
+      await tester.tapAt(
+        tester.getRect(slider).centerRight - const Offset(25, 0),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.getSize(cards.first).width, greaterThan(originalWidth));
+      expect(find.text('Importeren (2)'), findsOneWidget);
+
+      tester.view.physicalSize = const Size(390, 640);
+      await tester.binding.setSurfaceSize(const Size(390, 640));
+      await tester.pumpAndSettle();
+      expect(tester.getSize(surface).width, lessThan(390));
+      expect(
+        tester.getSize(cards.first).width,
+        lessThan(tester.getSize(surface).width),
+      );
+      expect(tester.takeException(), isNull);
+
+      await tester.tap(find.text('Importeren (2)'));
+      await tester.pumpAndSettle();
+      expect(imported?.map((slide) => slide.title), [
+        'Eerste dia',
+        'Tweede dia',
+      ]);
+    },
+  );
 
   testWidgets('Slides importeren ziet een extern aangemaakt deck na verversen', (
     tester,
