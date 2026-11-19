@@ -404,7 +404,7 @@ _parseVideoLine(String t) {
     path: src,
     startMs: startMs,
     endMs: endMs,
-    autoplay: t.contains('autoplay'),
+    autoplay: _mediaAutoplays(t, 'video'),
     captions: _parseTrackSrc(t),
   );
 }
@@ -451,8 +451,16 @@ String _unescapeAttr(String s) => s
 /// repeating the regex.
 (String, bool) _parseAudioAttrs(String t) {
   final m = _reSrcAttr.firstMatch(t);
-  return (m?.group(1) ?? '', t.contains('autoplay'));
+  return (m?.group(1) ?? '', _mediaAutoplays(t, 'audio'));
 }
+
+bool _mediaAutoplays(String markup, String tag) =>
+    html
+        .parseFragment(markup)
+        .querySelector(tag)
+        ?.attributes
+        .containsKey('autoplay') ??
+    false;
 
 int _secToMs(String s) {
   final v = double.tryParse(s.trim());

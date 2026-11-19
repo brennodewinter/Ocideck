@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:characters/characters.dart';
+import 'package:html/parser.dart' as html;
 import 'package:uuid/uuid.dart';
 
 import '../models/gallery_layout.dart';
