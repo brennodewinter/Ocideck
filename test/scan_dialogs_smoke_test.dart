@@ -109,6 +109,67 @@ void main() {
     expect(find.byType(OpenPresentationDialog), findsOneWidget);
   });
 
+  testWidgets(
+    'Openen sorteert op presentatiedatum en toont wijzigingsdatum als terugval',
+    (tester) async {
+      void writeDeck(String title, String date, DateTime modified) {
+        final file = File('${dir.path}/$title.md');
+        file.writeAsStringSync(
+          '---\nmarp: true\ntitle: $title\n'
+          '${date.isEmpty ? '' : 'date: $date\n'}---\n\n# Dia\n',
+        );
+        file.setLastModifiedSync(modified);
+      }
+
+      File('${dir.path}/demo.md').deleteSync();
+      writeDeck('A oudste', '2022-01-08', DateTime(2026, 2));
+      writeDeck('B nieuwste', '2025-04-17', DateTime(2021, 2));
+      writeDeck('C zonder datum', '', DateTime(2024, 2, 3, 12));
+      await tester.pumpWidget(
+        _host(
+          (context) => OpenPresentationDialog.show(
+            context,
+            fileService: _fileService(dir.path),
+            libraries: [LibraryFolder(name: 'Test', path: dir.path)],
+          ),
+        ),
+      );
+      await _openAndScan(tester);
+      expect(find.textContaining('2025-04-17'), findsOneWidget);
+      expect(find.text('Laatst gewijzigd op 2024-02-03'), findsOneWidget);
+
+      double y(String title) => tester.getTopLeft(find.text(title)).dy;
+
+      await tester.tap(find.byTooltip('Sorteren'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.ancestor(
+          of: find.text('Nieuwste eerst'),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is CheckedPopupMenuItem,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(y('B nieuwste'), lessThan(y('C zonder datum')));
+      expect(y('C zonder datum'), lessThan(y('A oudste')));
+
+      await tester.tap(find.byTooltip('Sorteren'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.ancestor(
+          of: find.text('Oudste eerst'),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is CheckedPopupMenuItem,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(y('A oudste'), lessThan(y('C zonder datum')));
+      expect(y('C zonder datum'), lessThan(y('B nieuwste')));
+    },
+  );
+
   testWidgets('Openen ziet een extern aangemaakt bestand na verversen', (
     tester,
   ) async {

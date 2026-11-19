@@ -10,12 +10,15 @@ import '../../services/duplicate_service.dart';
 import '../../services/file_service.dart';
 import '../../utils/display_path.dart';
 import '../../utils/markdown_keywords.dart';
+import '../../utils/table_dates.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../duplicate_badges.dart';
 import '../resizable_dialog_box.dart';
 import 'open_kind_chrome.dart';
 import 'open_preview_pane.dart';
+
+part 'open_presentation_file_row.dart';
 
 /// What the open dialog returns: the chosen files and, optionally, the index of
 /// a slide to jump to (when the user picked a search hit).
@@ -102,6 +105,8 @@ class OpenPresentationDialog extends StatefulWidget {
   State<OpenPresentationDialog> createState() => _OpenPresentationDialogState();
 }
 
+enum _OpenSort { name, newest, oldest }
+
 class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// De te doorzoeken wortels. Start op de geconfigureerde bibliotheken; de
   /// mapkeuze-knop kan tijdelijk naar één specifieke map versmallen.
@@ -119,6 +124,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   String _query = '';
   String _tagQuery = '';
   OpenKindFilter _kind = OpenKindFilter.all;
+  _OpenSort _sort = _OpenSort.name;
 
   /// Het bestand waarvan het voorbeeld getoond wordt; null zolang er niets is
   /// aangewezen. Alleen in gebruik als [OpenPresentationDialog.showPreview].
@@ -307,12 +313,37 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     _scrollToIndex(clamped, visible.length);
   }
 
-  List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> _visibleList() {
-    final found = _matching();
-    return [
-      for (final entry in found)
+  List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> _visibleList([
+    List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)>? matches,
+  ]) {
+    final visible = [
+      for (final entry in matches ?? _matching())
         if (_kind.accepts(entry.$1.primary.kind)) entry,
     ];
+    if (_sort == _OpenSort.name) return visible;
+
+    final dates = {
+      for (final entry in visible)
+        entry.$1.primary.path: _sortDate(entry.$1.primary),
+    };
+    return visible..sort((a, b) {
+      final left = a.$1.primary;
+      final right = b.$1.primary;
+      final l = dates[left.path];
+      final r = dates[right.path];
+      if (l == null && r != null) return 1;
+      if (l != null && r == null) return -1;
+      if (l != null && r != null) {
+        final order = _sort == _OpenSort.newest
+            ? r.compareTo(l)
+            : l.compareTo(r);
+        if (order != 0) return order;
+      }
+      final titleOrder = left.displayTitle.toLowerCase().compareTo(
+        right.displayTitle.toLowerCase(),
+      );
+      return titleOrder == 0 ? left.path.compareTo(right.path) : titleOrder;
+    });
   }
 
   void _scrollToIndex(int index, int total) {
@@ -462,10 +493,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final found = _matching();
-    final visible = [
-      for (final entry in found)
-        if (_kind.accepts(entry.$1.primary.kind)) entry,
-    ];
+    final visible = _visibleList(found);
     final documents = found.where((e) => e.$1.primary.kind.isDocument).length;
 
     return AlertDialog(
@@ -616,6 +644,34 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           onPressed: _roots.isEmpty || _loading ? null : _scan,
           icon: const Icon(Icons.refresh),
         ),
+        PopupMenuButton<_OpenSort>(
+          tooltip: l10n.d('Sorteren'),
+          icon: const Icon(Icons.sort),
+          onSelected: (sort) {
+            setState(() {
+              _sort = sort;
+              _focusedIndex = null;
+            });
+            if (_scrollController.hasClients) _scrollController.jumpTo(0);
+          },
+          itemBuilder: (_) => [
+            CheckedPopupMenuItem(
+              value: _OpenSort.name,
+              checked: _sort == _OpenSort.name,
+              child: Text(l10n.d('Naam')),
+            ),
+            CheckedPopupMenuItem(
+              value: _OpenSort.newest,
+              checked: _sort == _OpenSort.newest,
+              child: Text(l10n.d('Nieuwste eerst')),
+            ),
+            CheckedPopupMenuItem(
+              value: _OpenSort.oldest,
+              checked: _sort == _OpenSort.oldest,
+              child: Text(l10n.d('Oudste eerst')),
+            ),
+          ],
+        ),
         Tooltip(
           message: _roots.isEmpty
               ? l10n.d('Geen bibliotheek')
@@ -719,248 +775,16 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   }
 }
 
+DateTime? _presentationDate(ScannedMarkdown file) =>
+    parseIsoDateCell(file.deck?.date ?? '');
+
+DateTime? _sortDate(ScannedMarkdown file) =>
+    _presentationDate(file) ?? file.modified;
+
 /// Eén treffer binnen een bestand: het fragment, en — alleen bij een
 /// presentatie — de dia waar het staat.
 class _Hit {
   final int? slideIndex;
   final String snippet;
   const _Hit(this.snippet, {this.slideIndex});
-}
-
-class _FileRow extends StatelessWidget {
-  final DuplicateInfo<ScannedMarkdown> info;
-
-  /// De gescande map; de rij toont de vindplaats relatief hieraan zodat in
-  /// een boom met submappen zichtbaar is wáár elk bestand staat.
-  final String? scanRoot;
-
-  /// Naam van de bibliotheek waaronder dit bestand valt; leeg wanneer er maar
-  /// één wortel in beeld is (dan voegt de naam niets toe).
-  final String rootName;
-  final List<_Hit> hits;
-
-  /// Of het soortlabel achter de titel staat; zie de aanroeper.
-  final bool showKind;
-  final bool showPreview;
-
-  /// Of dit bestand is aangewezen om samen met andere geopend te worden.
-  final bool selected;
-
-  /// Of deze rij de toetsenbordfocus draagt — de zichtbare focusrand, los
-  /// van de [selected]-achtergrond.
-  final bool focused;
-
-  /// Klik op de rij. De dialoog leest de modificatietoetsen: kaal openen,
-  /// met Ctrl/Cmd of Shift de selectie veranderen.
-  final VoidCallback onTap;
-  final ValueChanged<String> onPreview;
-
-  /// Open dit ene bestand meteen, buiten de selectie om — de identieke-kopie-
-  /// chip en een trefferregel in een document wijzen elk één bestand aan.
-  final ValueChanged<String> onOpen;
-  final ValueChanged<int> onOpenAt;
-
-  const _FileRow({
-    required this.info,
-    required this.scanRoot,
-    required this.rootName,
-    required this.hits,
-    required this.showKind,
-    required this.showPreview,
-    required this.selected,
-    required this.focused,
-    required this.onTap,
-    required this.onPreview,
-    required this.onOpen,
-    required this.onOpenAt,
-  });
-
-  ScannedMarkdown get file => info.primary;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final row = Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Semantics(
-            selected: selected,
-            child: InkWell(
-              onTap: onTap,
-              borderRadius: BorderRadius.circular(6),
-              child: Container(
-                decoration: BoxDecoration(
-                  // Aangewezen rijen krijgen dezelfde blauwe tint die de app
-                  // elders voor een info-vlak gebruikt; die schakelt mee met
-                  // licht en donker.
-                  color: selected ? AppTheme.infoBg : null,
-                  borderRadius: BorderRadius.circular(6),
-                  // Toetsenbordfocusrand: een blauwe contour los van de
-                  // selectie-achtergrond, zodat beide tegelijk zichtbaar zijn.
-                  border: focused
-                      ? Border.all(color: AppTheme.accentFg, width: 1.6)
-                      : null,
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-                child: Row(
-                  children: [
-                    Icon(
-                      markdownKindIcon(file.kind),
-                      size: 18,
-                      color: AppTheme.brandFg,
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(child: _titleAndPlace(l10n)),
-                    if (showPreview) ...[
-                      const SizedBox(width: 4),
-                      IconButton(
-                        icon: const Icon(Icons.visibility_outlined, size: 16),
-                        tooltip: l10n.d('Voorbeeld tonen'),
-                        visualDensity: VisualDensity.compact,
-                        onPressed: () => onPreview(file.path),
-                      ),
-                    ],
-                    const SizedBox(width: 8),
-                    // Het pijltje belooft "dit opent"; bij een aangewezen rij
-                    // is dat niet meer waar — die wacht op "Openen (n)".
-                    selected
-                        ? Icon(
-                            Icons.check_circle,
-                            size: 16,
-                            color: AppTheme.accentFg,
-                          )
-                        : Icon(
-                            Icons.north_east,
-                            size: 16,
-                            color: AppTheme.slate500,
-                          ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          if (hits.isNotEmpty) _hitList(l10n),
-        ],
-      ),
-    );
-    if (!showPreview) return row;
-    // Aanwijzen met de muis laat het voorbeeld meelopen; de knop hierboven doet
-    // hetzelfde voor wie met het toetsenbord of op een aanraakscherm werkt.
-    return MouseRegion(onEnter: (_) => onPreview(file.path), child: row);
-  }
-
-  Widget _titleAndPlace(AppLocalizations l10n) {
-    final deck = file.deck;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Flexible(
-              child: Text(
-                file.displayTitle,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: AppTheme.slate800,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            if (showKind) ...[
-              const SizedBox(width: 6),
-              MarkdownKindBadge(kind: file.kind),
-            ],
-            if (info.hasIdenticalCopies) ...[
-              const SizedBox(width: 6),
-              IdenticalCopiesChip(
-                otherPaths: [for (final copy in info.identical) copy.path],
-                homeDir: scanRoot,
-                onOpen: onOpen,
-              ),
-            ],
-          ],
-        ),
-        // Vindplaats relatief aan de gescande map, zodat bij submappen
-        // zichtbaar is wáár het bestand staat; het volledige pad zit in de
-        // tooltip.
-        Tooltip(
-          message: file.path,
-          waitDuration: const Duration(milliseconds: 400),
-          child: Text(
-            '${rootName.isEmpty ? '' : '$rootName  ·  '}'
-            '${displayFolder(file.path, homeDir: scanRoot, osHome: osHomeDirectory)}'
-            '  ·  ${file.fileName}'
-            '${deck == null ? '' : '  ·  ${deck.slides.length} ${l10n.t('slides')}'}',
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        if (info.hasTitleConflict) ...[
-          const SizedBox(height: 2),
-          TitleConflictMarker(modified: file.modified),
-        ],
-      ],
-    );
-  }
-
-  Widget _hitList(AppLocalizations l10n) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 34, top: 2, bottom: 2),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final hit in hits.take(4)) _hitRow(l10n, hit),
-          if (hits.length > 4)
-            Padding(
-              padding: const EdgeInsets.only(left: 4, top: 2),
-              child: Text(
-                '+ ${hits.length - 4} ${l10n.d('meer treffer(s)')}',
-                style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  /// Eén trefferregel. Bij een presentatie springt hij naar de dia; bij een
-  /// document opent hij het bestand — daar is geen dia om naartoe te gaan, en
-  /// een label dat een sprong belooft die niet bestaat, is erger dan geen label.
-  Widget _hitRow(AppLocalizations l10n, _Hit hit) {
-    final index = hit.slideIndex;
-    return InkWell(
-      onTap: () => index == null ? onOpen(file.path) : onOpenAt(index),
-      borderRadius: BorderRadius.circular(4),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (index != null) ...[
-              Text(
-                '${l10n.d('Slide')} ${index + 1}',
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: AppTheme.accentFg,
-                ),
-              ),
-              const SizedBox(width: 8),
-            ],
-            Expanded(
-              child: Text(
-                hit.snippet,
-                style: TextStyle(fontSize: 12, color: AppTheme.slate600),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

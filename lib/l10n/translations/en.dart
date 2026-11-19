@@ -1352,6 +1352,8 @@ const _dutchSourceAddEn = {
   'Dit beeld als vast logo gebruiken': 'Use this image as a permanent logo',
   'Naam van stijl': 'Style name',
   'Deze stijlnaam bestaat al.': 'This style name already exists.',
+  'Presentatiedatum': 'Presentation date',
+  'Geen datum bekend': 'No date available',
   'Stijl bewaren': 'Save style',
   'Stijl overnemen van website': 'Import style from website',
   'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
