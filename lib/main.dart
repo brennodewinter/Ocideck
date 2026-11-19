@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:ui' show AppExitResponse;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
