@@ -14,6 +14,7 @@
 import '../models/deck.dart';
 import '../models/redaction_manifest.dart';
 import '../models/slide.dart';
+import '../models/slide_style.dart';
 import 'finding_pagination.dart';
 import 'markdown_service.dart';
 import '../models/privacy_disposition.dart';
@@ -94,15 +95,50 @@ class ExportBundle {
 /// en de rest verdween geruisloos uit het bestand. Beide uitklappen laten het
 /// deck zelf ongemoeid, en omdat de voettekst zijn nummer uit de positie in
 /// deze lijst haalt, telt hij de pagina's nu vanzelf mee.
-List<Slide> _expandForExport(List<Slide> slides, Deck deck) => [
-  // Per-dia uitklappen: beide splitsers meten met het effectieve profiel van
-  // de brondia, niet uitsluitend met de deckstijl (#2996).
-  for (var i = 0; i < slides.length; i++)
-    ...expandRichTextForRender(
-      expandFindingsForRender([slides[i]], profile: deck.slideProfileAt(i)),
-      deck.slideProfileAt(i),
-    ),
-];
+List<Slide> _prepareExportSlides(
+  List<Slide> slides,
+  Deck deck, {
+  required bool expandPages,
+}) {
+  final sourceStyles = <String, String?>{};
+  String? active;
+  for (final slide in deck.slides) {
+    if (slide.styleName.isNotEmpty) {
+      active = slide.styleName == kDeckStyleToken ? null : slide.styleName;
+    }
+    sourceStyles[slide.id] = active;
+  }
+
+  final result = <Slide>[];
+  active = null;
+  for (final slide in slides) {
+    final marker = slide.styleName;
+    final style = sourceStyles.containsKey(slide.id)
+        ? sourceStyles[slide.id]
+        : marker.isEmpty
+        ? active
+        : marker == kDeckStyleToken
+        ? null
+        : marker;
+    // Een verwijderde dia kan de markering dragen die hier nog geldt.
+    final marked = marker.isEmpty && style != active
+        ? slide.copyWith(styleName: style ?? kDeckStyleToken)
+        : slide;
+    active = style;
+    if (expandPages) {
+      final profile = deck.slideStyles[style] ?? deck.themeProfile;
+      result.addAll(
+        expandRichTextForRender(
+          expandFindingsForRender([marked], profile: profile),
+          profile,
+        ),
+      );
+    } else {
+      result.add(marked);
+    }
+  }
+  return result;
+}
 
 List<Slide> _slidesForQuestionExport(
   List<Slide> slides,
@@ -159,7 +195,7 @@ ExportBundle buildExportBundle(
   // de rasterizer, de markdown voor de HTML-export, de PPTX-notities en de
   // documentmetadata worden allemaal uit dit ene object afgeleid.
   final source = deck.copyWith(
-    slides: expandPages ? _expandForExport(chosen, deck) : chosen,
+    slides: _prepareExportSlides(chosen, deck, expandPages: expandPages),
   );
 
   // Eén scan voor de hele bundel; het waren er drie, één per afnemer hieronder,
