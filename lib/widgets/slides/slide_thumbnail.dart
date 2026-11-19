@@ -312,7 +312,7 @@ class SlideThumbnail extends ConsumerWidget {
     // Dezelfde toets als de knop in het paneel: één [canSplitSlide], niet een
     // eigen kopie met een `_ => false` die een nieuw bullettype hier stil
     // onsplitsbaar zou maken.
-    final canSplit = canSplitSlide(slide);
+    final canSplit = canSplitSlide(slide, theme: themeProfile);
     final borderColor = isSelected
         ? AppTheme.accentFg
         : withheld

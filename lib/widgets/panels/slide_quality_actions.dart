@@ -279,8 +279,8 @@ List<SlideQualityAction> buildSlideQualityActions({
   // notities' het werk doen (#1164). Dezelfde grens als de fix-alles-motor.
   if (issue.category == SlideQualityCategory.textDensity &&
       slide != null &&
-      canSplitSlide(slide) &&
-      hasBulletsForFontEnlargingSplit(slide)) {
+      hasBulletsForFontEnlargingSplit(slide) &&
+      canSplitSlide(slide, theme: deck!.slideProfileAt(issue.slideIndex))) {
     final index = issue.slideIndex;
     actions.add(
       SlideQualityAction(

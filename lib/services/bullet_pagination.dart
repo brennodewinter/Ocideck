@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import '../models/slide.dart' show bulletLevel;
+
 /// Verdeelt een te volle bulletlijst over pagina's — de logica achter "Splits
 /// slide". Twee vormen, beide voorspelbaar en op volgorde:
 ///
@@ -61,6 +63,14 @@ List<List<String>> _spreadEvenly(List<String> bullets, int pages) {
 List<List<String>> splitBulletsIntoPages(List<String> bullets, int size) {
   if (bullets.isEmpty) return const [];
   final n = size < 1 ? 1 : size;
+  if (bullets.any((bullet) => bulletLevel(bullet) > 0)) {
+    if (bullets.length <= n) return _halveBulletGroups(bullets);
+    return _packBulletGroups(
+      bullets,
+      maxBullets: (_) => n,
+      fits: (_, _) => true,
+    );
+  }
   if (bullets.length <= n) {
     final half = (bullets.length + 1) ~/ 2;
     return [bullets.sublist(0, half), bullets.sublist(half)];
@@ -96,6 +106,9 @@ List<List<String>> packBulletsIntoPages(
   required bool Function(int pageIndex, List<String> candidate) fits,
   required int Function(int pageIndex) maxBullets,
 }) {
+  if (bullets.any((bullet) => bulletLevel(bullet) > 0)) {
+    return _packBulletGroups(bullets, fits: fits, maxBullets: maxBullets);
+  }
   final pages = <List<String>>[];
   var current = <String>[];
   for (final bullet in bullets) {
@@ -135,6 +148,86 @@ List<List<String>> packBulletsIntoPages(
     }
   }
   return pages;
+}
+
+/// Een hoofdbullet vormt samen met alle dieper ingesprongen regels één blok.
+Iterable<List<String>> _bulletGroups(List<String> bullets) sync* {
+  if (bullets.isEmpty) return;
+  var start = 0;
+  for (var i = 1; i < bullets.length; i++) {
+    if (bulletLevel(bullets[i]) > bulletLevel(bullets[start])) continue;
+    yield bullets.sublist(start, i);
+    start = i;
+  }
+  yield bullets.sublist(start);
+}
+
+List<List<String>> _halveBulletGroups(List<String> bullets) {
+  var boundary = 0;
+  var best = 0;
+  for (final group in _bulletGroups(bullets)) {
+    boundary += group.length;
+    if (boundary == bullets.length) break;
+    if ((bullets.length - 2 * boundary).abs() <
+        (bullets.length - 2 * best).abs()) {
+      best = boundary;
+    }
+  }
+  return best == 0
+      ? [bullets]
+      : [bullets.sublist(0, best), bullets.sublist(best)];
+}
+
+List<List<String>> _packBulletGroups(
+  List<String> bullets, {
+  required bool Function(int, List<String>) fits,
+  required int Function(int) maxBullets,
+}) {
+  final pages = <List<String>>[];
+  var current = <String>[];
+
+  bool canFit(int index, List<String> items) =>
+      items.length <= maxBullets(index) && fits(index, items);
+
+  for (final group in _bulletGroups(bullets)) {
+    final combined = [...current, ...group];
+    if (current.isNotEmpty && !canFit(pages.length, combined)) {
+      pages.add(current);
+      current = [];
+    }
+    if (current.isEmpty && group.length > 2 && !canFit(pages.length, group)) {
+      current = _packOversizedGroup(group, pages, canFit);
+    } else {
+      current.addAll(group);
+    }
+  }
+  if (current.isNotEmpty) pages.add(current);
+  return pages;
+}
+
+/// Alleen als een blok te groot is voor een eigen dia, mag het doorlopen.
+/// Herhaal de bovenliggende bullets van het eerste item op de vervolgpagina.
+List<String> _packOversizedGroup(
+  List<String> group,
+  List<List<String>> pages,
+  bool Function(int, List<String>) canFit,
+) {
+  var current = [group.first];
+  final parents = [group.first];
+  var hasNewChild = false;
+  for (final child in group.skip(1)) {
+    while (bulletLevel(parents.last) >= bulletLevel(child)) {
+      parents.removeLast();
+    }
+    if (hasNewChild && !canFit(pages.length, [...current, child])) {
+      pages.add(current);
+      current = [...parents];
+    }
+    current.add(child);
+    parents.add(child);
+    hasNewChild = true;
+  }
+  return current;
 }
 
 /// [left] en [right] over hetzelfde aantal pagina's, zodat een tweekoloms slide

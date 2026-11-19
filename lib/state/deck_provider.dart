@@ -153,19 +153,27 @@ class DeckState {
   }
 }
 
-/// Whether [DeckNotifier.splitSlide] would actually split [slide]: a bullet
-/// slide type with at least two bullets to divide. Mirrors the guards in
-/// `_splitSlide`, so the UI can offer a "split" action exactly when it works.
-///
-/// Welke types doorlopende bullets tonen staat in de registry naast de enum
-/// ([SlideTypeMeta.bulletColumns]) en niet meer als uitgeschreven lijst hier:
-/// een nieuw bullettype is dan overal tegelijk splitsbaar, in plaats van in de
-/// paneelknop wel en in de slidestrook niet.
-bool canSplitSlide(Slide slide) => switch (slide.type.bulletColumns) {
-  BulletColumns.none => false,
-  BulletColumns.one => slide.bullets.length >= 2,
-  BulletColumns.two => slide.bullets.length >= 2 || slide.bullets2.length >= 2,
-};
+/// Heeft de opsomming voldoende inhoud voor een vervolgdia?
+bool canSplitSlide(Slide slide, {ThemeProfile theme = const ThemeProfile()}) {
+  bool hasBoundary(List<String> bullets) =>
+      bullets.isNotEmpty &&
+      bullets
+          .skip(1)
+          .any((item) => bulletLevel(item) <= bulletLevel(bullets.first));
+
+  return switch (slide.type.bulletColumns) {
+    BulletColumns.none => false,
+    BulletColumns.one =>
+      hasBoundary(slide.bullets) ||
+          (slide.bullets.length > 2 &&
+              splitThemedBulletSlidePages(slide, theme) != null),
+    BulletColumns.two =>
+      hasBoundary(slide.bullets) ||
+          hasBoundary(slide.bullets2) ||
+          ((slide.bullets.length > 2 || slide.bullets2.length > 2) &&
+              splitThemedBulletSlidePages(slide, theme) != null),
+  };
+}
 
 // ── DeckNotifier ─────────────────────────────────────────────────────────────
 
