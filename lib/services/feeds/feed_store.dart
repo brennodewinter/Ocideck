@@ -32,6 +32,7 @@ class FeedEpisodeRecord {
     required this.enclosureType,
     this.transcripts = const [],
     this.status = FeedEpisodeStatus.seen,
+    this.autoDownloadFailed = false,
   });
 
   final String key;
@@ -41,6 +42,7 @@ class FeedEpisodeRecord {
   final String enclosureType;
   final List<FeedTranscriptLink> transcripts;
   FeedEpisodeStatus status;
+  bool autoDownloadFailed;
 
   /// Sessie-pad van een opgehaalde enclosure (tempbestand of `mem:`-
   /// sleutel). Wordt niet gepersisteerd; zie het veldcommentaar hierboven.
@@ -57,6 +59,7 @@ class FeedEpisodeRecord {
         {'url': t.url.toString(), 'type': t.type, 'language': t.language},
     ],
     'status': status.name,
+    if (autoDownloadFailed) 'autoDownloadFailed': true,
   };
 
   static FeedEpisodeRecord? fromJson(Map<String, Object?> json) {
@@ -81,6 +84,7 @@ class FeedEpisodeRecord {
                 language: t['language'] as String?,
               ),
       ],
+      autoDownloadFailed: json['autoDownloadFailed'] == true,
       status:
           FeedEpisodeStatus.values.asNameMap()[json['status']] ??
           FeedEpisodeStatus.seen,

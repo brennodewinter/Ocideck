@@ -171,6 +171,7 @@ Widget _episodeTile(
   required Uri feedUrl,
   required String feedTitle,
   FeedEpisodeStatus? queueStatus,
+  bool autoDownloadFailed = false,
 }) {
   final l10n = context.l10n;
   final record = FeedEpisodeRecord(
@@ -200,6 +201,7 @@ Widget _episodeTile(
       [
         if (date.isNotEmpty) date,
         episode.enclosureType,
+        if (autoDownloadFailed) l10n.d('Automatisch downloaden mislukt'),
       ].where((s) => s.isNotEmpty).join(' · '),
       style: TextStyle(fontSize: 11, color: AppTheme.slate500),
     ),
@@ -266,6 +268,7 @@ Widget feedQueueEpisodeTile(
     feedUrl: feedUrl,
     feedTitle: feedTitle,
     queueStatus: record.status,
+    autoDownloadFailed: record.autoDownloadFailed,
   );
 }
 
