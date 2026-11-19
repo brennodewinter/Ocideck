@@ -88,18 +88,25 @@ Uri _credentialsGuarded(Uri target, Uri origin) {
 /// Eén begrensde feed-GET, optioneel conditioneel op [etag]/
 /// [lastModified]. Desktop toetst elke omleidingshop opnieuw via
 /// NetGuard; [client] injecteert een testclient (web-pad) of omzeilt het
-/// pin-pad niet — de desktoproute blijft gepind.
+/// pin-pad niet — de desktoproute blijft gepind. Een opgegeven [allowUrl]
+/// geldt bij elke native omleiding; op web is de definitieve URL niet toetsbaar.
+/// [totalTimeout] begrenst op native ook trage, voortdurend druppelende bodies.
 Future<FeedFetchResult> fetchFeed(
   Uri url, {
   String? etag,
   String? lastModified,
   int maxBytes = maxFeedBytes,
   Duration timeout = const Duration(seconds: 30),
+  bool Function(Uri url)? allowUrl,
+  Duration? totalTimeout,
   @visibleForTesting http.Client? client,
 }) async {
   final scheme = url.scheme.toLowerCase();
-  if (scheme != 'http' && scheme != 'https') {
+  if ((scheme != 'http' && scheme != 'https') || allowUrl?.call(url) == false) {
     return const FeedFetchResult.failed(ImportFailure.insecureScheme);
+  }
+  if (kIsWeb && allowUrl != null) {
+    return const FeedFetchResult.failed(ImportFailure.blockedHost);
   }
   if (kIsWeb || client != null) {
     return _fetchFeedWeb(
@@ -117,6 +124,8 @@ Future<FeedFetchResult> fetchFeed(
     lastModified: lastModified,
     maxBytes: maxBytes,
     timeout: timeout,
+    allowUrl: allowUrl,
+    totalTimeout: totalTimeout,
   );
 }
 
@@ -190,16 +199,34 @@ Future<FeedFetchResult> _fetchFeedPinned(
   String? lastModified,
   required int maxBytes,
   required Duration timeout,
+  bool Function(Uri url)? allowUrl,
+  Duration? totalTimeout,
 }) async {
+  final elapsed = Stopwatch()..start();
+  Duration? remaining() =>
+      totalTimeout == null ? null : totalTimeout - elapsed.elapsed;
   var current = url;
   for (var hop = 0; hop <= _maxRedirectHops; hop++) {
-    if (NetGuard.isBlockedHost(current.host)) {
+    if (allowUrl?.call(current) == false ||
+        NetGuard.isBlockedHost(current.host)) {
       return const FeedFetchResult.failed(ImportFailure.blockedHost);
     }
-    final resolved = await NetGuard.resolveConfigured(
+    final dnsBudget = remaining();
+    if (dnsBudget != null && dnsBudget <= Duration.zero) {
+      return const FeedFetchResult.failed(ImportFailure.network);
+    }
+    final lookup = NetGuard.resolveConfigured(
       current.host,
       allowPrivate: false,
     );
+    final resolved = dnsBudget == null
+        ? await lookup
+        : await lookup
+              .then<HostResolution?>((value) => value)
+              .timeout(dnsBudget, onTimeout: () => null);
+    if (resolved == null) {
+      return const FeedFetchResult.failed(ImportFailure.network);
+    }
     if (!resolved.isOk) {
       return FeedFetchResult.failed(
         resolved.refusal == HostRefusal.unknownHost
@@ -208,6 +235,10 @@ Future<FeedFetchResult> _fetchFeedPinned(
       );
     }
     final client = buildPinnedClient(resolved.addresses!.first);
+    final budget = remaining();
+    final deadline = budget == null
+        ? null
+        : Timer(budget, () => client.close(force: true));
     try {
       final request = await client.getUrl(current);
       // Verplicht volgens de pinned-client-conventie: omleidingen gaan
@@ -267,6 +298,7 @@ Future<FeedFetchResult> _fetchFeedPinned(
             : ImportFailure.network,
       );
     } finally {
+      deadline?.cancel();
       client.close(force: true);
     }
   }
