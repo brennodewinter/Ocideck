@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:math' as math;
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
@@ -30,6 +32,23 @@ import 'editor_text_controller.dart';
 
 part 'chart_editor_dialogs.dart';
 part 'chart_editor_grid.dart';
+
+const _maxChartCsvBytes = 2 * 1024 * 1024;
+const _maxChartCsvCells = 100000;
+
+Future<String> _readChartCsv(PlatformFile file) async {
+  if ((file.lengthSync() ?? 0) > _maxChartCsvBytes) {
+    throw const FormatException('CSV exceeds the byte limit');
+  }
+  final bytes = BytesBuilder(copy: false);
+  await for (final chunk in file.readAsByteStream()) {
+    if (chunk.length > _maxChartCsvBytes - bytes.length) {
+      throw const FormatException('CSV exceeds the byte limit');
+    }
+    bytes.add(chunk);
+  }
+  return utf8.decode(bytes.takeBytes());
+}
 
 bool _revealProcesverbetering(BuildContext context) {
   try {
@@ -406,24 +425,52 @@ class _ChartEditorState extends State<ChartEditor> {
     );
     if (!mounted) return;
     if (file == null) return;
-    final bytes = await file.readAsBytes();
-    final text = utf8.decode(bytes);
-    if (!mounted) return;
-
-    // De import vult alleen het grid. Waar de data belandt is geen keuze meer
-    // die de gebruiker hier hoeft te maken: bij het opslaan verhuist ze sowieso
-    // naar een bestand naast de presentatie. Hier stond een dialoog "in de
-    // slide of als CSV-bestand?"; die vroeg om een beslissing waarvan het ene
-    // antwoord inmiddels niet meer waar te maken is.
-    var parsed = parseCsv(text);
-    // Values the file itself cannot settle: ask, rather than pick one and hope.
-    // Backing out of the question cancels the import — importing anyway would
-    // mean charting a reading the user declined to give.
-    if (parsed.ambiguous.isNotEmpty) {
-      final convention = await askDecimalConvention(context, parsed.ambiguous);
-      if (convention == null || !mounted) return;
-      parsed = parseCsv(text, convention: convention);
+    try {
+      final text = await _readChartCsv(file);
+      var parsed = await compute(
+        (csv) => parseCsv(csv, maxCells: _maxChartCsvCells),
+        text,
+      );
+      if (!mounted) return;
+      // Een onbesliste decimale notatie blijft een keuze van de gebruiker.
+      if (parsed.ambiguous.isNotEmpty) {
+        final convention = await askDecimalConvention(
+          context,
+          parsed.ambiguous,
+        );
+        if (convention == null || !mounted) return;
+        parsed = await compute(
+          (input) => parseCsv(
+            input.$1,
+            convention: input.$2,
+            maxCells: _maxChartCsvCells,
+          ),
+          (text, convention),
+        );
+      }
+      if (mounted) _applyImportedCsv(parsed);
+    } catch (error) {
+      logWarning('chart CSV import', error);
+      if (!mounted) return;
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        context.l10n.d(
+          'De CSV kon niet worden gelezen. Gebruik een UTF-8-bestand van maximaal 2 MiB en 100.000 cellen.',
+        ),
+      );
     }
+  }
+
+  void _applyImportedCsv(
+    (
+      List<String>,
+      List<ChartSeries>, {
+      List<String> unreadable,
+      List<String> ambiguous,
+    })
+    parsed,
+  ) {
     setState(() {
       // Een import vervangt de cijfers, niet de bestemming: een grafiek die al
       // aan een bestand hangt blijft daaraan hangen en krijgt de nieuwe data

@@ -824,7 +824,7 @@ String _detectDelimiter(List<String> lines) {
   List<String> unreadable,
   List<String> ambiguous,
 })
-parseCsv(String csv, {DecimalConvention? convention}) {
+parseCsv(String csv, {DecimalConvention? convention, int? maxCells}) {
   final lines = csv
       .replaceAll('\r\n', '\n')
       .split('\n')
@@ -839,6 +839,9 @@ parseCsv(String csv, {DecimalConvention? convention}) {
   final seriesNames = header.length > 1
       ? [for (final name in header.sublist(1)) _csvUnguard(name)]
       : <String>[];
+  if (maxCells != null && (lines.length - 1) * header.length > maxCells) {
+    throw const FormatException('CSV grid exceeds the cell limit');
+  }
   final rows = [
     for (final line in lines.skip(1)) parseCsvLine(line, delimiter: delimiter),
   ];
