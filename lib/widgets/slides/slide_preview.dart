@@ -284,7 +284,16 @@ class SlidePreviewWidget extends StatelessWidget {
   final ThemeProfile baseThemeProfile;
   final MarpStyle deckMarpStyle;
 
-  MarpStyle get marpStyle => slide.marpStyle.inherit(deckMarpStyle);
+  MarpStyle get marpStyle {
+    final style = slide.marpStyle.inherit(deckMarpStyle);
+    if (style.hasBackgroundImage) return style;
+    final path = baseThemeProfile.slideBackgroundImage(
+      title: slide.type == SlideType.title,
+    );
+    return path == null
+        ? style
+        : style.copyWith(backgroundImage: marpAssetUrl(path));
+  }
 
   late final ThemeProfile themeProfile = _themeWithMarpStyle(
     baseThemeProfile,

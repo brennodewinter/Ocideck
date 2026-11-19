@@ -380,6 +380,49 @@ void main() {
   group('splitBulletsIntoPages', () {
     List<String> gen(int n) => [for (var i = 0; i < n; i++) 'bullet $i'];
 
+    test('een tweekolomssplitsing houdt een bulletblok bijeen', () {
+      const group = ['Hoofdpunt', '\tSubpunt', '\t\tDetail'];
+      final pages = splitTwoColumnsIntoPages(
+        ['Intro', 'Context', ...group],
+        [],
+        4,
+      );
+      expect(pages.map((page) => page.$1), [
+        ['Intro', 'Context'],
+        group,
+      ]);
+    });
+
+    test(
+      'herhaalt de hoofdbullet en relevante subbullet als het blok te groot is',
+      () {
+        const group = [
+          'Hoofdpunt',
+          '\tSubpunt',
+          '\t\tDetail 1',
+          '\t\tDetail 2',
+          '\t\tDetail 3',
+          '\tSlot',
+        ];
+        expect(
+          packBulletsIntoPages(
+            group,
+            fits: (_, items) => items.length <= 4,
+            maxBullets: (_) => 8,
+          ),
+          [
+            ['Hoofdpunt', '\tSubpunt', '\t\tDetail 1', '\t\tDetail 2'],
+            ['Hoofdpunt', '\tSubpunt', '\t\tDetail 3', '\tSlot'],
+          ],
+        );
+      },
+    );
+
+    test('een passend blok zonder knippunt blijft op één pagina', () {
+      const group = ['Hoofdpunt', '\tSubpunt', '\t\tDetail'];
+      expect(splitBulletsIntoPages(group, 8), [group]);
+    });
+
     test("vult pagina's van size en zet de rest achteraan", () {
       expect(splitBulletsIntoPages(gen(11), 8).map((p) => p.length).toList(), [
         8,

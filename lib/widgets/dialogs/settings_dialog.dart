@@ -23,6 +23,7 @@ import '../../models/storage_connection.dart';
 import '../../models/slide_quality.dart';
 import '../../platform/platform_features.dart';
 import '../../models/reference_standard.dart';
+import '../../services/website_style/website_style_proposal.dart';
 import '../../services/privacy/privacy_regions.dart';
 import '../../services/reference_standards.dart';
 import '../../services/ai_client_service.dart';
@@ -104,6 +105,7 @@ import 'settings/webdav_panel.dart';
 import 'settings/set_aside_findings.dart';
 import 'settings/disabled_privacy_rules.dart';
 import 'ociserve_org_themes.dart';
+import 'website_style_dialog.dart';
 
 part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_chrome.dart';

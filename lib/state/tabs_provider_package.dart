@@ -25,6 +25,9 @@ ThemeProfile _safeLearningTheme(ThemeProfile profile) {
     clearLogo: !isSafe(profile.logoPath),
     clearLogoDark: !isSafe(profile.logoDarkPath),
     clearBrandStrip: !isSafe(profile.brandStripPath),
+    slideBackgroundImages: profile.mapSlideBackgroundImages(
+      (path) => isSafe(path) ? path : null,
+    ),
     clearDocumentLogoOverride: !isSafe(profile.documentLogoPath),
     // De Markdown van een afsluitdia kan zelf lokale afbeeldingspaden dragen.
     closingSlideEnabled: false,

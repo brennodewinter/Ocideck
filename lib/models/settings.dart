@@ -177,6 +177,22 @@ class ThemeProfile {
   /// presentatielaag haar in plaats van het losse logo, zodat vorm en verankering
   /// van een huisstijl niet tot een generiek hoeklogo worden afgevlakt.
   final String? brandStripPath;
+
+  /// Reusable background images for title and content slides.
+  final Map<String, String> slideBackgroundImages;
+
+  static const slideBackgroundSlots = ['content', 'title'];
+
+  String? slideBackgroundImage({required bool title}) =>
+      (title ? slideBackgroundImages['title'] : null) ??
+      slideBackgroundImages['content'];
+
+  Map<String, String> mapSlideBackgroundImages(
+    String? Function(String path) transform,
+  ) => {
+    for (final slot in slideBackgroundSlots)
+      if (slideBackgroundImages[slot] case final path?) slot: ?transform(path),
+  };
   final double brandStripHeight;
   final bool titleSubtitleInBrandStrip;
 
@@ -275,6 +291,7 @@ class ThemeProfile {
     this.logoPosition = 'bottom-right',
     this.logoSize = 96,
     this.brandStripPath,
+    this.slideBackgroundImages = const {},
     this.brandStripHeight = 0,
     this.titleSubtitleInBrandStrip = false,
     this.logoDarkPath,
@@ -448,6 +465,7 @@ class ThemeProfile {
     String? logoPosition,
     int? logoSize,
     String? brandStripPath,
+    Map<String, String>? slideBackgroundImages,
     double? brandStripHeight,
     bool? titleSubtitleInBrandStrip,
     String? logoDarkPath,
@@ -522,6 +540,8 @@ class ThemeProfile {
       logoPath: clearLogo ? null : (logoPath ?? this.logoPath),
       logoPosition: logoPosition ?? this.logoPosition,
       logoSize: logoSize ?? this.logoSize,
+      slideBackgroundImages:
+          slideBackgroundImages ?? this.slideBackgroundImages,
       brandStripPath: clearBrandStrip
           ? null
           : (brandStripPath ?? this.brandStripPath),
@@ -603,6 +623,8 @@ class ThemeProfile {
       'logoPosition': logoPosition,
       'logoSize': logoSize,
       'brandStripPath': brandStripPath,
+      if (slideBackgroundImages.isNotEmpty)
+        'slideBackgroundImages': slideBackgroundImages,
       'brandStripHeight': brandStripHeight,
       'titleSubtitleInBrandStrip': titleSubtitleInBrandStrip,
       'logoDarkPath': logoDarkPath,
@@ -725,6 +747,9 @@ class ThemeProfile {
       logoPosition: stringValue('logoPosition') ?? 'bottom-right',
       logoSize: numValue('logoSize')?.round() ?? 96,
       brandStripPath: stringValue('brandStripPath'),
+      slideBackgroundImages: _readSlideBackgroundImages(
+        json['slideBackgroundImages'],
+      ),
       brandStripHeight: (numValue('brandStripHeight')?.toDouble() ?? 0).clamp(
         0.0,
         0.25,
@@ -838,6 +863,15 @@ class ThemeProfile {
       preferredDocumentHeadingFontFamily ??
       documentHeadingFontFamily ??
       exportFontFamily;
+}
+
+Map<String, String> _readSlideBackgroundImages(Object? raw) {
+  if (raw is! Map) return const {};
+  return Map.unmodifiable({
+    for (final slot in ThemeProfile.slideBackgroundSlots)
+      if (raw[slot] case final String path when path.trim().isNotEmpty)
+        slot: path.trim(),
+  });
 }
 
 /// Verplaatst een hoeklogo uit de footerzone; een merkstrook blijft vast staan.

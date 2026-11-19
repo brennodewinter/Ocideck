@@ -208,6 +208,7 @@ Set<String> _referencedThemeLogoPaths(List<ThemeProfile> profiles) => {
       profile.logoDarkPath,
       profile.documentLogoPath,
       profile.brandStripPath,
+      ...profile.slideBackgroundImages.values,
     ])
       if ((path ?? '').trim().isNotEmpty) path!.trim(),
 };

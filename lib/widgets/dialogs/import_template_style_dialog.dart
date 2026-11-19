@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/settings.dart';
 import '../../services/import/logo_detection.dart';
+import '../../services/import/models/source_image.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/image_limits.dart';
 
@@ -16,6 +17,8 @@ class ImportTemplateStyleDialog extends StatefulWidget {
     required this.omittedDetails,
     required this.existingNames,
     this.logoCandidate,
+    this.backgroundImages = const {},
+    this.isPresentation = false,
   });
 
   final ThemeProfile profile;
@@ -24,6 +27,8 @@ class ImportTemplateStyleDialog extends StatefulWidget {
   final List<String> omittedDetails;
   final Set<String> existingNames;
   final ImportLogoCandidate? logoCandidate;
+  final Map<String, SourceImage> backgroundImages;
+  final bool isPresentation;
 
   static Future<({String name, bool useLogo})?> ask(
     BuildContext context, {
@@ -33,6 +38,8 @@ class ImportTemplateStyleDialog extends StatefulWidget {
     required List<String> omittedDetails,
     required Set<String> existingNames,
     ImportLogoCandidate? logoCandidate,
+    Map<String, SourceImage> backgroundImages = const {},
+    bool isPresentation = false,
   }) => showDialog<({String name, bool useLogo})>(
     context: context,
     builder: (context) => ImportTemplateStyleDialog(
@@ -42,6 +49,8 @@ class ImportTemplateStyleDialog extends StatefulWidget {
       omittedDetails: omittedDetails,
       existingNames: existingNames,
       logoCandidate: logoCandidate,
+      backgroundImages: backgroundImages,
+      isPresentation: isPresentation,
     ),
   );
 
@@ -76,7 +85,13 @@ class _ImportTemplateStyleDialogState extends State<ImportTemplateStyleDialog> {
     final l10n = context.l10n;
     final profile = widget.profile;
     return AlertDialog(
-      title: Text(l10n.d('PowerPoint-sjabloon als stijl importeren')),
+      title: Text(
+        l10n.d(
+          widget.isPresentation
+              ? 'Geïmporteerde stijl opslaan'
+              : 'PowerPoint-sjabloon als stijl importeren',
+        ),
+      ),
       content: SizedBox(
         width: 480,
         child: SingleChildScrollView(
@@ -88,21 +103,25 @@ class _ImportTemplateStyleDialogState extends State<ImportTemplateStyleDialog> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  for (final (background, foreground, label) in [
+                  for (final (background, foreground, label, image) in [
                     (
                       profile.titleBackgroundColor,
                       profile.titleTextColor,
                       l10n.d('Titel'),
+                      widget.backgroundImages['title'] ??
+                          widget.backgroundImages['content'],
                     ),
                     (
                       profile.slideBackgroundColor,
                       profile.textColor,
                       l10n.d('Inhoud'),
+                      widget.backgroundImages['content'],
                     ),
                     (
                       profile.sectionBackgroundColor,
                       profile.titleTextColor,
                       l10n.d('Sectie'),
+                      widget.backgroundImages['content'],
                     ),
                   ])
                     Expanded(
@@ -113,6 +132,12 @@ class _ImportTemplateStyleDialogState extends State<ImportTemplateStyleDialog> {
                         decoration: BoxDecoration(
                           color: AppTheme.parseHexColor(background),
                           border: Border.all(color: Colors.black26),
+                          image: image == null
+                              ? null
+                              : DecorationImage(
+                                  image: cappedMemoryImage(image.bytes),
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                         child: Text(
                           label,
@@ -169,7 +194,9 @@ class _ImportTemplateStyleDialogState extends State<ImportTemplateStyleDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text(l10n.d('Annuleren')),
+          child: Text(
+            l10n.d(widget.isPresentation ? 'Overslaan' : 'Annuleren'),
+          ),
         ),
         FilledButton(
           onPressed:

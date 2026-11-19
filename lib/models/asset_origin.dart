@@ -4,6 +4,7 @@ import '../services/asset_staging.dart';
 import '../services/slide_image_refs.dart';
 import '../services/web_asset_store.dart';
 import 'deck.dart';
+import 'marp_style.dart';
 import 'settings.dart';
 import 'slide.dart';
 
@@ -87,12 +88,20 @@ bool assetOriginNeedsAttention(AssetOrigin origin) => switch (origin) {
 /// schijftoegang — dezelfde regel als [classifyAssetPath].
 bool deckCarriesMemoryAssets(Deck deck) {
   bool mem(String path) => WebAssetStore.isMemPath(path.trim());
-  if (_profileMemoryPaths(deck.themeProfile).isNotEmpty) return true;
+  if (_profileMemoryPaths(deck.themeProfile).isNotEmpty ||
+      deck.slideStyles.values.any(
+        (profile) => _profileMemoryPaths(profile).isNotEmpty,
+      )) {
+    return true;
+  }
   for (final s in deck.slides) {
     if (mem(s.videoPath) || mem(s.videoCaptions) || mem(s.audioPath)) {
       return true;
     }
-    if (slideImagePaths(s).any(mem)) return true;
+    if (mem(marpBackgroundAssetPath(s.marpStyle.backgroundImage)) ||
+        slideImagePaths(s).any(mem)) {
+      return true;
+    }
   }
   return false;
 }
@@ -108,6 +117,7 @@ bool deckCarriesMemoryAssets(Deck deck) {
 void addSlideMemoryAssetPaths(Slide slide, Set<String> into) {
   for (final path in [
     ...slideImagePaths(slide),
+    marpBackgroundAssetPath(slide.marpStyle.backgroundImage),
     slide.videoPath,
     slide.videoCaptions,
     slide.audioPath,
@@ -134,6 +144,9 @@ void forgetStyleEditorMemoryPins() => styleEditorMemoryPins.clear();
 Set<String> deckMemoryAssetPaths(Deck deck) {
   final paths = <String>{};
   paths.addAll(_profileMemoryPaths(deck.themeProfile));
+  for (final profile in deck.slideStyles.values) {
+    paths.addAll(_profileMemoryPaths(profile));
+  }
   for (final slide in deck.slides) {
     addSlideMemoryAssetPaths(slide, paths);
   }
@@ -159,6 +172,7 @@ Set<String> _profileMemoryPaths(ThemeProfile profile) {
     profile.logoDarkPath,
     profile.documentLogoPath,
     profile.brandStripPath,
+    ...profile.slideBackgroundImages.values,
   ]) {
     final trimmed = path?.trim() ?? '';
     if (WebAssetStore.isMemPath(trimmed)) paths.add(trimmed);

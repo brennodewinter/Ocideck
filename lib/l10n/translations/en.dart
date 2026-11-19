@@ -1353,6 +1353,42 @@ const _dutchSourceAddEn = {
   'Naam van stijl': 'Style name',
   'Deze stijlnaam bestaat al.': 'This style name already exists.',
   'Stijl bewaren': 'Save style',
+  'Stijl overnemen van website': 'Import style from website',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck reads the CSS and checks how the page is styled. You can edit the proposal afterwards.',
+  'Van website': 'From website',
+  'Kleuren van de website': 'Website colors',
+  'Website-URL': 'Website URL',
+  'Website analyseren': 'Analyze website',
+  'Vul een geldig HTTPS-webadres in.': 'Enter a valid HTTPS website address.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'The page could not be analyzed. Try a public page with visible text.',
+  'Pagina en stylesheets ophalen…': 'Fetching page and stylesheets…',
+  'Toegepaste opmaak uitlezen…': 'Reading the applied styles…',
+  'Profiel overnemen': 'Use this profile',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Some CSS was unavailable. Check the proposal in the slide preview.',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Website font: {font}. The slide shows the selected fallback font.',
+  'Titelachtergrond overnemen': 'Include title background',
+  'Dia-achtergrond overnemen': 'Include slide background',
+  'Websitelogo overnemen': 'Include website logo',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'This image could not be imported.',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'The images could not be saved. Try again or leave out the images.',
+  'Komt overeen met CSS-variabele {naam}.': 'Matches CSS variable {naam}.',
+  'Gebaseerd op de kleuren van knoppen.': 'Based on button colors.',
+  'Gebaseerd op de kleuren van links.': 'Based on link colors.',
+  'Gebaseerd op de kleur van de paginakop.': 'Based on the page heading color.',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Style added. Click Save to keep the profile.',
+  'Inhoudsdia': 'Content slide',
+  'Jouw presentatie': 'Your presentation',
+  'Voorbeelddia': 'Sample slide',
+  'Kleuren en lettertype': 'Colors and font',
+  'Ruimte voor je eigen inhoud': 'Space for your own content',
+  'Geïmporteerde stijl opslaan': 'Save imported style',
   'Accentkleur': 'Accent color',
   'Tekstkleur': 'Text color',
   'Dia-achtergrond': 'Slide background',

@@ -307,8 +307,33 @@ class PptxImporter extends Importer {
         : ctx.firstRelatedPart(master, 'ppt/theme/');
     final themeXml = ctx.readPart(theme ?? 'ppt/theme/theme1.xml');
     if (themeXml == null) return null;
-    return parseTheme(themeXml);
+    return parseTheme(
+      themeXml,
+      titleTextColor: _explicitTitleColor(ctx.readXml(firstSlidePath)),
+    );
   }
+}
+
+String? _explicitTitleColor(XmlDocument? document) {
+  if (document == null) return null;
+  for (final shape in descendantsLocal(document, 'sp')) {
+    final role = descendantsLocal(
+      shape,
+      'ph',
+    ).firstOrNull?.getAttribute('type');
+    if (role != 'title' && role != 'ctrTitle') continue;
+    final colors = <String>{};
+    for (final run in descendantsLocal(shape, 'rPr')) {
+      final fill = childLocal(run, 'solidFill');
+      final rgb = fill == null ? null : childLocal(fill, 'srgbClr');
+      final value = rgb?.getAttribute('val');
+      if (value != null && RegExp(r'^[0-9a-fA-F]{6}$').hasMatch(value)) {
+        colors.add('#${value.toUpperCase()}');
+      }
+    }
+    return colors.length == 1 ? colors.single : null;
+  }
+  return null;
 }
 
 class _SlideRef {

@@ -174,6 +174,7 @@ List<Slide>? splitBulletSlidePages(
       if (pages.length < 2) {
         pages = splitBulletsIntoPages(slide.bullets, slide.bullets.length);
       }
+      if (pages.length < 2) return null;
       return [
         for (var i = 0; i < pages.length; i++)
           (i == 0 ? slide : _asContinuation(Slide.duplicate(slide))).copyWith(
@@ -185,9 +186,12 @@ List<Slide>? splitBulletSlidePages(
     case BulletColumns.two:
       if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
       const perColumn = kTwoColumnBulletWarningCount ~/ 2;
-      return build(
-        splitTwoColumnsIntoPages(slide.bullets, slide.bullets2, perColumn),
+      final pages = splitTwoColumnsIntoPages(
+        slide.bullets,
+        slide.bullets2,
+        perColumn,
       );
+      return pages.length < 2 ? null : build(pages);
   }
 }
 

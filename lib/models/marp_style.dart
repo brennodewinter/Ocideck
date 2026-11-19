@@ -247,6 +247,10 @@ final _backgroundUrl = RegExp(
   caseSensitive: false,
 );
 
+/// Wraps a local path using the same convention as slide backgrounds.
+String marpAssetUrl(String path) =>
+    path.contains('"') ? "url('$path')" : 'url("$path")';
+
 /// Extracts a single `url(...)` asset from a Marp background directive.
 /// Gradients and other CSS remain preserved in Markdown but are not treated as
 /// local files by Flutter's image resolver.

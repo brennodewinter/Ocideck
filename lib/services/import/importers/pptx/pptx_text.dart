@@ -14,7 +14,7 @@ class ParsedText {
   final List<BodyBlock> blocks;
   final List<({String text, String url})> links;
 
-  /// Largest font size found in this text body, in hundredths of a point.
+  /// Largest font size used by visible text, in hundredths of a point.
   /// `0` means no explicit size was found.
   final int maxFontSize;
 }
@@ -34,6 +34,11 @@ ParsedText parseTxBody(
   final blocks = <BodyBlock>[];
   final links = <({String text, String url})>[];
   var order = 0;
+  var maxFontSize = 0;
+  final listStyles = [
+    for (final body in [txBody, ...inheritedTxBodies])
+      ?childLocal(body, 'lstStyle'),
+  ];
 
   for (final p in descendantsLocal(txBody, 'p')) {
     final pPr = childLocal(p, 'pPr');
@@ -45,12 +50,19 @@ ParsedText parseTxBody(
       inheritedTxBodies,
     );
 
+    final defaultFontSize =
+        _fontSize(pPr == null ? null : childLocal(pPr, 'defRPr')) ??
+        _listFontSize(listStyles, level);
     final text = StringBuffer();
     final runLinks = <({String text, String rId})>[];
     for (final child in p.children.whereType<XmlElement>()) {
+      final t = childLocal(child, 't')?.innerText ?? '';
+      if (t.trim().isNotEmpty) {
+        final size = _fontSize(childLocal(child, 'rPr')) ?? defaultFontSize;
+        if (size > maxFontSize) maxFontSize = size;
+      }
       switch (child.name.local) {
         case 'r':
-          final t = childLocal(child, 't')?.innerText ?? '';
           text.write(t);
           final hlink = child.children
               .whereType<XmlElement>()
@@ -65,7 +77,6 @@ ParsedText parseTxBody(
         case 'br':
           text.write('\n');
         case 'fld':
-          final t = childLocal(child, 't')?.innerText ?? '';
           if (t.isNotEmpty) text.write(t);
       }
     }
@@ -88,18 +99,23 @@ ParsedText parseTxBody(
     }
   }
 
-  var maxFontSize = 0;
-  for (final el in txBody.descendants.whereType<XmlElement>()) {
-    if (const {'rPr', 'endParaRPr', 'defRPr'}.contains(el.name.local)) {
-      final s = el.getAttribute('sz');
-      if (s != null) {
-        final v = int.tryParse(s);
-        if (v != null && v > maxFontSize) maxFontSize = v;
-      }
+  return ParsedText(blocks: blocks, links: links, maxFontSize: maxFontSize);
+}
+
+int? _fontSize(XmlElement? properties) =>
+    int.tryParse(properties?.getAttribute('sz') ?? '');
+
+int _listFontSize(List<XmlElement> styles, int level) {
+  for (final style in styles) {
+    for (final name in ['lvl${level + 1}pPr', 'defPPr']) {
+      final props = childLocal(style, name);
+      final size = _fontSize(
+        props == null ? null : childLocal(props, 'defRPr'),
+      );
+      if (size != null) return size;
     }
   }
-
-  return ParsedText(blocks: blocks, links: links, maxFontSize: maxFontSize);
+  return 0;
 }
 
 bool _decideBullet(

@@ -150,6 +150,11 @@ Future<_PackedThemeAssets> _packThemeAssets(
     allowExternal: true,
   );
   final documentLogoRel = await _packDocumentLogo(profile, addAsset);
+  final backgrounds = <String, String>{};
+  for (final entry in profile.slideBackgroundImages.entries) {
+    final path = await addAsset(entry.value, 'logos', allowExternal: true);
+    if (path != null) backgrounds[entry.key] = path;
+  }
   return _PackedThemeAssets(
     _profileWithPackageAssets(
       profile,
@@ -157,7 +162,7 @@ Future<_PackedThemeAssets> _packThemeAssets(
       logoDarkRel,
       brandStripRel,
       documentLogoRel,
-    ),
+    ).copyWith(slideBackgroundImages: backgrounds),
     logoRel,
     brandStripRel,
   );

@@ -329,6 +329,25 @@ void main() {
     expect(pages.expand((p) => p.bullets).toList(), items);
   });
 
+  test('splitSlide verhuist een hoofdbullet en zijn subbullets samen', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final first = [for (var i = 1; i <= 6; i++) 'Punt $i'];
+    final group = ['Hoofdpunt', '\tSubpunt', '\t\tDetail', '\tNog een subpunt'];
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(bullets: [...first, ...group]),
+    );
+
+    n.splitSlide(1);
+
+    expect(n.state.deck!.slides.skip(1).map((slide) => slide.bullets), [
+      first,
+      group,
+    ]);
+  });
+
   test('splitSlide marks the second column-split half as a continuation', () {
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');

@@ -16,15 +16,24 @@ class HexColorDialog extends StatefulWidget {
   /// De kleur waarmee het veld begint, als hexwaarde.
   final String initial;
 
-  const HexColorDialog({super.key, required this.initial});
+  const HexColorDialog({
+    super.key,
+    required this.initial,
+    this.palette = const [],
+  });
+
+  final List<String> palette;
 
   /// Toont het venster en geeft de genormaliseerde kleur terug (`#RRGGBB`,
   /// hoofdletters), of `null` bij annuleren.
-  static Future<String?> show(BuildContext context, String initial) =>
-      showDialog<String>(
-        context: context,
-        builder: (_) => HexColorDialog(initial: initial),
-      );
+  static Future<String?> show(
+    BuildContext context,
+    String initial, {
+    List<String> palette = const [],
+  }) => showDialog<String>(
+    context: context,
+    builder: (_) => HexColorDialog(initial: initial, palette: palette),
+  );
 
   /// De ingetikte waarde als `#RRGGBB` in hoofdletters, of `null` wanneer het
   /// geen volledige hexkleur is.
@@ -103,6 +112,32 @@ class _HexColorDialogState extends State<HexColorDialog> {
               ),
             ],
           ),
+          if (widget.palette.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            Text(l10n.d('Kleuren van de website')),
+            const SizedBox(height: 4),
+            Wrap(
+              spacing: 6,
+              children: [
+                for (final color in widget.palette)
+                  IconButton(
+                    tooltip: color,
+                    onPressed: () => Navigator.pop(context, color),
+                    icon: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: AppTheme.parseHexColor(color),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ],
           const SizedBox(height: 8),
           Text(
             l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),

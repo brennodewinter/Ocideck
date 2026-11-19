@@ -29,6 +29,7 @@
 // oorspronkelijke markdown. Redactie geldt voor wat je *toont en exporteert*.
 
 import '../../models/deck.dart';
+import '../../models/marp_style.dart';
 import '../../models/image_callout.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
@@ -296,7 +297,10 @@ class PrivacyProjection {
         deck,
         deckField,
         projectedDocumentFields.renamedKeys,
-      ),
+      ).copyWith(slideBackgroundImages: external ? const {} : null),
+      slideStyles: external
+          ? _stylesWithoutBackgrounds(deck.slideStyles)
+          : null,
       documentFields: projectedDocumentFields.fields,
       marpStyle: projectedDeckMarpStyle,
       standardsUsed: [
@@ -669,11 +673,18 @@ _ProjectedSlides _projectSlides(
       scan.forSlide(i),
       active: active,
     );
+    final profileBackground = deck.marpStyle.hasBackgroundImage
+        ? null
+        : deck
+              .slideProfileAt(i)
+              .slideBackgroundImage(title: slide.type == SlideType.title);
     final projected = PrivacyProjection._projectSlide(
       slide,
       byFragment,
       active: active,
-      deckBackgroundImage: deck.marpStyle.backgroundImage,
+      deckBackgroundImage: profileBackground == null
+          ? deckBackgroundImage
+          : marpAssetUrl(profileBackground),
     );
     count += projected.count;
     var projectedSlide = projected.slide;
@@ -730,6 +741,13 @@ _projectDocumentFields(Deck deck, _DeckFieldProjector project) {
   }
   return (fields: result, renamedKeys: renamedKeys);
 }
+
+Map<String, ThemeProfile> _stylesWithoutBackgrounds(
+  Map<String, ThemeProfile> profiles,
+) => {
+  for (final entry in profiles.entries)
+    entry.key: entry.value.copyWith(slideBackgroundImages: const {}),
+};
 
 ThemeProfile _projectDocumentTheme(
   Deck deck,

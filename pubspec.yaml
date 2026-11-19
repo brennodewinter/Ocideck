@@ -236,6 +236,7 @@ dependency_overrides:
 flutter:
   uses-material-design: true
   assets:
+    - assets/website_style_probe.js
     # Het YuNet-gezichtsmodel (OpenCV Zoo, MIT). 232 KB, en bewust een asset in
     # plaats van een download: de privacycontrole mag geen netwerkuitgang hebben.
     # De MIT-tekst reist mee: een model verspreiden zonder zijn kennisgeving

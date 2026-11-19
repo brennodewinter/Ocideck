@@ -99,9 +99,45 @@ String? _linkTarget(
   return null;
 }
 
+/// Resolve the closest explicit background. A layout or slide with its own
+/// fill overrides the inherited picture, even if that fill is not an image.
+SourceImage? readBackgroundPicture(
+  PptxContext ctx,
+  XmlDocument slide,
+  String slidePath,
+) {
+  final layoutPath = ctx.firstRelatedPart(slidePath, 'ppt/slideLayouts/');
+  final masterPath = layoutPath == null
+      ? null
+      : ctx.firstRelatedPart(layoutPath, 'ppt/slideMasters/');
+  for (final path in [slidePath, ?layoutPath, ?masterPath]) {
+    final document = path == slidePath ? slide : ctx.readXml(path);
+    if (document == null) continue;
+    final common = childLocal(document.rootElement, 'cSld');
+    final background = common == null ? null : childLocal(common, 'bg');
+    if (background == null) continue;
+    final properties = childLocal(background, 'bgPr');
+    final fill = properties == null ? null : childLocal(properties, 'blipFill');
+    if (fill == null) return null;
+    final image = parsePic(
+      fill,
+      ctx,
+      ctx.relsFor(path),
+      path,
+      role: SourceImageRole.background,
+    );
+    if (image == null) {
+      throw const FormatException('Achtergrondafbeelding ontbreekt');
+    }
+    return image;
+  }
+  return null;
+}
+
 /// Parse a `p:pic` picture shape into a [SourceImage] by following its
 /// `a:blip` `r:embed` to the media part. Linked-only pictures (`r:link`)
-/// are dropped for now (M2) — the bytes are not in the package.
+/// are dropped for now (M2) — the bytes are not in the package. A background
+/// blip fill uses the same image relationship and source crop.
 ///
 /// De plaatsing reist mee voor deckbrede logoherkenning. Kleine afbeeldingen
 /// worden hier bewust niet meer weggegooid: pas herhaling over meerdere dia's

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:convert';
 
@@ -15,6 +16,7 @@ import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/shell/presentation_import_action.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import 'helpers/pptx_fixture.dart';
 
@@ -40,7 +42,7 @@ void main() {
   /// Een minimale, echte `.pptx`: één dia met een titel en twee opsommingen.
   /// Geen namaakimporter — dit gaat door de echte parser, want het pad dat de
   /// gebruiker loopt is precies wat hier op het spel staat.
-  Uint8List pptx({String titel = 'Plan'}) {
+  Uint8List pptx({String titel = 'Plan', bool background = false}) {
     final slide =
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:sld xmlns:a="$a" xmlns:p="$p" xmlns:r="$r"><p:cSld><p:spTree>'
@@ -54,6 +56,9 @@ void main() {
         '<a:p><a:r><a:t>Tweede</a:t></a:r></a:p>'
         '</p:txBody></p:sp>'
         '</p:spTree></p:cSld></p:sld>';
+    const fill =
+        '<p:bg><p:bgPr><a:blipFill><a:blip r:embed="rId1"/>'
+        '</a:blipFill></p:bgPr></p:bg>';
     final parts = <String, String>{
       'ppt/presentation.xml':
           '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
@@ -65,13 +70,34 @@ void main() {
           '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
           '<Relationships xmlns="$pkg"><Relationship Id="rId1" '
           'Type="$r/slide" Target="slides/slide1.xml"/></Relationships>',
-      'ppt/slides/slide1.xml': slide,
+      'ppt/slides/slide1.xml': background
+          ? slide.replaceFirst('<p:cSld>', '<p:cSld>$fill')
+          : slide,
+      if (background) ...{
+        'ppt/slides/_rels/slide1.xml.rels':
+            '<Relationships xmlns="$pkg">'
+            '<Relationship Id="rId1" Type="$r/image" Target="../media/bg.png"/>'
+            '</Relationships>',
+        'ppt/theme/theme1.xml':
+            '<a:theme xmlns:a="$a"><a:clrScheme>'
+            '<a:accent1><a:srgbClr val="4472C4"/></a:accent1></a:clrScheme></a:theme>',
+      },
     };
     final archive = Archive();
     parts.forEach((name, content) {
       final data = Uint8List.fromList(content.codeUnits);
       archive.addFile(ArchiveFile.bytes(name, data));
     });
+    if (background) {
+      archive.addFile(
+        ArchiveFile.bytes(
+          'ppt/media/bg.png',
+          base64Decode(
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+X8KkAAAAASUVORK5CYII=',
+          ),
+        ),
+      );
+    }
     return Uint8List.fromList(ZipEncoder().encode(archive));
   }
 
@@ -164,6 +190,50 @@ void main() {
 
     // De nieuwe tab startte een periodieke autosave-timer; ruim de container op
     // binnen de fake-async-test zodat die timer niet als "pending" blijft staan.
+    container.dispose();
+  });
+
+  testWidgets('PowerPoint-achtergrond wordt als herbruikbare stijl bewaard', (
+    tester,
+  ) async {
+    final support = Directory.systemTemp.createTempSync('pptx_style');
+    addTearDown(() => support.deleteSync(recursive: true));
+    final previousPaths = PathProviderPlatform.instance;
+    PathProviderPlatform.instance = _StylePaths(support.path);
+    addTearDown(() => PathProviderPlatform.instance = previousPaths);
+    final (container, ctx, ref) = await pump(tester);
+    final original = container.read(settingsProvider).selectedThemeProfileName;
+    final future = importPresentation(
+      ctx,
+      ref,
+      fileOverride: (bytes: pptx(background: true), name: 'Huisstijl.pptx'),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Geïmporteerde stijl opslaan'), findsOneWidget);
+    await tester.tap(find.text('Stijl bewaren'));
+    await tester.runAsync(() async {
+      for (var i = 0; i < 100; i++) {
+        if (find.text('Openen').evaluate().isNotEmpty) break;
+        await Future<void>.delayed(const Duration(milliseconds: 10));
+        await tester.pump();
+      }
+    });
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Openen'));
+    await tester.pumpAndSettle();
+    await future;
+    final settings = container.read(settingsProvider);
+    final saved = settings.themeProfiles.last;
+    expect(settings.selectedThemeProfileName, original);
+    expect(saved.name, 'Huisstijl');
+    expect(saved.accentColor, '#4472C4');
+    expect(File(saved.slideBackgroundImages['content']!).existsSync(), isTrue);
+    final prefs = await SharedPreferences.getInstance();
+    expect(
+      prefs.getString('themeProfiles'),
+      contains(saved.slideBackgroundImages['content']!),
+    );
+    expect(_openDeck(container)!.slides, hasLength(1));
     container.dispose();
   });
 
@@ -452,4 +522,13 @@ void main() {
     expect(label, isNotEmpty);
     expect(label.toLowerCase(), contains('importeren'));
   });
+}
+
+class _StylePaths extends PathProviderPlatform {
+  _StylePaths(this.supportPath);
+
+  final String supportPath;
+
+  @override
+  Future<String?> getApplicationSupportPath() async => supportPath;
 }
