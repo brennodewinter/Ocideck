@@ -16,9 +16,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// Deze poort draait onder `make check` (geen webbouw nodig) en bewaakt twee
 /// dingen die stil kunnen wegrotten:
 ///
-///  1. de header-CSP blijft **byte voor byte** gelijk aan de meta-CSP in
-///     index.html — anders lopen de twee policies uiteen en dekt de header niet
-///     meer wat de pagina belooft;
+///  1. de header-CSP blijft gelijk aan de meta-CSP plus de header-only
+///     frame-ancestors; de meta-policy bevat geen ongeldige directives;
 ///  2. elke hardening-header die alléén als header kan bestaan, staat er nog, en
 ///     met de bewuste conservatieve waarde (HSTS zonder `preload`).
 void main() {
@@ -44,12 +43,24 @@ void main() {
     );
   });
 
-  test('de header-CSP is byte voor byte gelijk aan de meta-CSP', () {
+  test('HTTP-CSP voegt alleen frame-ancestors toe aan de geldige meta-CSP', () {
     final metaCsp = RegExp(
       r'<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]*)"',
       caseSensitive: false,
     ).firstMatch(indexHtml)?.group(1);
     expect(metaCsp, isNotNull, reason: 'index.html moet een meta-CSP dragen');
+    for (final directive in [
+      'frame-ancestors',
+      'sandbox',
+      'report-uri',
+      'report-to',
+    ]) {
+      expect(
+        metaCsp,
+        isNot(contains(directive)),
+        reason: '$directive is niet geldig in een meta-CSP',
+      );
+    }
 
     final headerCsp = headerValue('Content-Security-Policy');
     expect(
@@ -59,10 +70,10 @@ void main() {
     );
     expect(
       headerCsp,
-      equals(metaCsp),
+      equals("$metaCsp; frame-ancestors 'none'"),
       reason:
-          'header-CSP en meta-CSP moeten identiek zijn, anders dekt de header '
-          'iets anders dan de pagina belooft (#849)',
+          'de gedeelde policy moet gelijk blijven; frame-ancestors hoort '
+          'uitsluitend in de HTTP-header (#3011)',
     );
   });
 
@@ -185,6 +196,14 @@ void main() {
       equals('require-corp'),
       reason: 'COEP is de tweede helft van crossOriginIsolated',
     );
+  });
+
+  test('CORP beschermt resources zonder COOP/COEP te vervangen', () {
+    expect(headerValue('Cross-Origin-Resource-Policy'), equals('same-origin'));
+  });
+
+  test('Apache-foutpagina’s tonen geen servervoetregel', () {
+    expect(htaccess, contains('ServerSignature Off'));
   });
 
   test('HSTS is conservatief: includeSubDomains, geen preload', () {

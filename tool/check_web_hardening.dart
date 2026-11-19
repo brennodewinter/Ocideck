@@ -5,13 +5,13 @@
 //
 // What it asserts about build/web:
 //   * index.html ships a CSP that locks scripts to 'self' + 'wasm-unsafe-eval'
-//     (NOT 'unsafe-eval'/'unsafe-inline') and keeps connect-src first-party.
+//     (NOT 'unsafe-eval'/'unsafe-inline') and limits connections to local/TLS URLs.
 //   * CanvasKit is self-hosted (local wasm + useLocalCanvasKit flag), so the
 //     engine never fetches it from the gstatic CDN.
 //   * The UI font is bundled, so text needs no fonts.gstatic.com fetch.
 //   * .htaccess ships next to the bundle and carries the header-form hardening
 //     (frame-ancestors/HSTS/X-Frame-Options/Permissions-Policy), with its CSP
-//     header mirroring the meta CSP (#849).
+//     header matching the meta policy plus header-only frame-ancestors (#3011).
 //   * every file in web/ reaches the bundle, so a promise that lives there —
 //     .well-known/security.txt, and whatever is added next — is served and not
 //     merely present in the source (#1888).
@@ -65,6 +65,12 @@ void main() {
       require(
         !scriptSrc.contains("'unsafe-inline'"),
         "CSP script-src must NOT allow 'unsafe-inline'.",
+      );
+      // Flutter injects runtime styles; retain that scoped exception without
+      // allowing remote stylesheets or extending it to script-src (#3017).
+      require(
+        _eq(directives['style-src'], ["'self'", "'unsafe-inline'"]),
+        "CSP style-src must be exactly 'self' 'unsafe-inline'.",
       );
       // No directive should ever permit the JS eval escape ('wasm-unsafe-eval'
       // is a distinct token and is fine).
@@ -178,14 +184,28 @@ void main() {
       r'Header\s+always\s+set\s+Content-Security-Policy\s+"([^"]*)"',
       caseSensitive: false,
     ).firstMatch(conf)?.group(1);
-    // The header CSP must mirror the meta CSP byte-for-byte: they are enforced
-    // cumulatively, and a drift means the header stops covering what the page
-    // promises. test/web_htaccess_headers_test.dart guards the same invariant on
-    // the source files; this is the built-bundle end of it.
+    // Meta CSP cannot carry frame-ancestors. Preserve all shared directives
+    // and add clickjacking protection only in the HTTP header (#3011).
+    final metaCsp = _extractCsp(indexHtml.readAsStringSync());
     require(
-      headerCsp != null &&
-          headerCsp == _extractCsp(indexHtml.readAsStringSync()),
-      '.htaccess CSP header must mirror the index.html meta CSP (#849).',
+      metaCsp != null && headerCsp == "$metaCsp; frame-ancestors 'none'",
+      '.htaccess CSP must match meta CSP plus frame-ancestors (#3011).',
+    );
+    if (metaCsp != null) {
+      final directives = _parseCsp(metaCsp);
+      require(
+        ![
+          'frame-ancestors',
+          'sandbox',
+          'report-uri',
+          'report-to',
+        ].any(directives.containsKey),
+        'Meta CSP must not contain header-only directives (#3011).',
+      );
+    }
+    require(
+      conf.contains('ServerSignature Off'),
+      '.htaccess must suppress Apache error-page banners (#3009).',
     );
     for (final h in const [
       'X-Frame-Options',
@@ -199,6 +219,7 @@ void main() {
       // here would quietly drop web transcription.
       'Cross-Origin-Opener-Policy',
       'Cross-Origin-Embedder-Policy',
+      'Cross-Origin-Resource-Policy',
     ]) {
       require(conf.contains(h), '.htaccess must set $h (#849/#2513).');
     }

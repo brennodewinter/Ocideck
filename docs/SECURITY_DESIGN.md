@@ -233,9 +233,10 @@ installations need local font coverage for the scripts their decks use.
   / `unsafe-inline`; the wasm token is only for CanvasKit); `style-src 'self'
   'unsafe-inline'` (the Flutter engine injects styles); `img-src`/`media-src`/
   `font-src` first-party plus `data:`/`blob:` only; `connect-src 'self'
-  https: wss: blob:`; `object-src 'none'`; `base-uri 'self'`; `frame-ancestors 'none'`
-  (in the `<head>`). Note a meta-delivered CSP cannot enforce
-  `frame-ancestors` — serve it as a real HTTP header to control embedding (see
+  https: wss: blob:`; `object-src 'none'`; `base-uri 'self'`; `form-action 'none'`.
+  The matching HTTP CSP adds `frame-ancestors 'none'`; that directive must not
+  appear in the meta policy, where browsers ignore it. Control embedding with
+  the HTTP header (see
   [`HOSTING.md`](HOSTING.md)).
 - **`img-src`/`media-src` block remote deck media by design.** On web there is
   no `net_guard` SSRF check (unlike desktop), so restricting these to
