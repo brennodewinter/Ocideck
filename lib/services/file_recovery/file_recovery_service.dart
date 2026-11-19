@@ -6,7 +6,9 @@ import 'package:path/path.dart' as p;
 
 import '../../models/settings.dart';
 import '../../utils/atomic_file.dart';
+import '../../utils/library_scan_limits.dart';
 import '../../utils/log.dart';
+import '../file_service.dart';
 
 /// Wat er met één projectlid in de herstelkopie is gebeurd (#2880).
 enum RecoveryDisposition {
@@ -87,6 +89,8 @@ class FileRecoveryService {
   /// Map binnen de kopie waar geweigerde leden, manifest en rapport staan.
   static const quarantineDir = '_herstel';
 
+  static const _maxMemberBytes = 64 * 1024 * 1024;
+
   static const _sidecarExtensions = [
     '.ink.json',
     '.user-notes.json',
@@ -110,13 +114,44 @@ class FileRecoveryService {
     final quarantine = Directory(p.join(dir.path, quarantineDir));
     final members = <RecoveredMember>[];
     final diagnoses = <String>[];
-    var quarantinedCount = 0;
+    var incomplete = false;
 
     Future<void> take(String relPath, File src) async {
       late final List<int> bytes;
       try {
-        bytes = await src.readAsBytes();
+        final maxBytes = switch (p.extension(relPath).toLowerCase()) {
+          '.md' => FileService.maxDeckMarkdownBytes,
+          '.json' => FileService.maxDeckSidecarBytes,
+          _ => _maxMemberBytes,
+        };
+        final handle = await src.open();
+        try {
+          final size = await handle.length();
+          if (size > maxBytes) {
+            incomplete = true;
+            members.add(
+              RecoveredMember(
+                relPath,
+                size,
+                '',
+                RecoveryDisposition.unreadable,
+                note: 'bestand te groot',
+              ),
+            );
+            diagnoses.add(
+              '$relPath: overgeslagen wegens de limiet van ${maxBytes ~/ (1024 * 1024)} MiB.',
+            );
+            return;
+          }
+          bytes = await handle.read(size + 1);
+          if (bytes.length != size) {
+            throw FileSystemException('bron gewijzigd tijdens lezen', src.path);
+          }
+        } finally {
+          await handle.close();
+        }
       } catch (e) {
+        incomplete = true;
         members.add(
           RecoveredMember(
             relPath,
@@ -142,6 +177,7 @@ class FileRecoveryService {
         await target.parent.create(recursive: true);
         await writeBytesAtomic(target, bytes);
       } catch (e) {
+        incomplete = true;
         members.add(
           RecoveredMember(
             relPath,
@@ -164,7 +200,7 @@ class FileRecoveryService {
           ),
         );
       } else {
-        quarantinedCount++;
+        incomplete = true;
         members.add(
           RecoveredMember(
             relPath,
@@ -195,24 +231,47 @@ class FileRecoveryService {
     if (await _existsQuietly(styleFile)) {
       await take('ocideck-style.json', styleFile);
     }
-    for (final sub in ['logos', 'data']) {
-      final subDir = Directory(p.join(p.dirname(sourceMdPath), sub));
-      if (await _existsQuietly(subDir)) {
-        await for (final entity in subDir.list(recursive: true)) {
-          if (entity is File) {
-            await take(
-              p.relative(entity.path, from: p.dirname(sourceMdPath)),
-              entity,
-            );
-          }
+    final sourceRoot = p.dirname(sourceMdPath);
+    var visited = 0;
+    Future<void> walk(Directory directory, int depth) async {
+      if (depth > kLibraryScanMaxDepth) {
+        incomplete = true;
+        diagnoses.add(
+          '${p.relative(directory.path, from: sourceRoot)}: maximale mapdiepte bereikt.',
+        );
+        return;
+      }
+      await for (final entity in directory.list(followLinks: false)) {
+        if (visited >= kLibraryScanMaxFiles) {
+          incomplete = true;
+          return;
+        }
+        visited++;
+        if (entity is File) {
+          await take(p.relative(entity.path, from: sourceRoot), entity);
+        } else if (entity is Directory) {
+          await walk(entity, depth + 1);
         }
       }
+    }
+
+    for (final sub in ['logos', 'data']) {
+      final subDir = Directory(p.join(sourceRoot, sub));
+      if (await FileSystemEntity.type(subDir.path, followLinks: false) ==
+          FileSystemEntityType.directory) {
+        await walk(subDir, 1);
+      }
+    }
+    if (visited >= kLibraryScanMaxFiles) {
+      diagnoses.add(
+        'De wandeling door logos/ en data/ bereikte de limiet van $kLibraryScanMaxFiles vermeldingen.',
+      );
     }
 
     // Zegel-integriteit: is er íets veranderd aan de kopie, dan mag de kopie
     // zich niet als verzegeld voordoen.
     final sealMoved =
-        quarantinedCount > 0 &&
+        incomplete &&
         await _quarantineSeal(dir, quarantine, members, diagnoses);
 
     final (manifestPath, reportPath) = await _writeManifest(
