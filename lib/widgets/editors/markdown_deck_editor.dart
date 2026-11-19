@@ -303,6 +303,17 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     _validationTimer = scheduleDeckChecks(
       args: args,
       current: () => mounted && _ctrl.text == args.source,
+      onFailure: () {
+        setState(() => _validationPending = false);
+        final messenger = ScaffoldMessenger.maybeOf(context);
+        messenger?.showSnackBar(
+          SnackBar(
+            content: Text(
+              context.l10n.d('De broncontrole kon niet worden uitgevoerd.'),
+            ),
+          ),
+        );
+      },
       onResult: (bundle) => setState(() {
         _validation = bundle.validation;
         _lastValidation = bundle.validation;
