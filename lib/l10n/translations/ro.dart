@@ -1556,6 +1556,47 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Titeldia': 'Diapozitiv de titlu',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Imaginile nu au putut fi salvate. Încercați din nou sau omiteți imaginile.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Pagina nu a putut fi analizată. Încercați o pagină publică cu text vizibil.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Această imagine nu poate fi importată.',
+  'Dia-achtergrond overnemen': 'Folosește fundalul diapozitivului',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'O parte din CSS nu a fost disponibilă. Verificați propunerea în diapozitivul de previzualizare.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Pe baza culorii antetului paginii.',
+  'Gebaseerd op de kleuren van knoppen.': 'Pe baza culorilor butoanelor.',
+  'Gebaseerd op de kleuren van links.': 'Pe baza culorilor legăturilor.',
+  'Geen datum bekend': 'Dată necunoscută',
+  'Geïmporteerde stijl opslaan': 'Salvează stilul importat',
+  'Grootte miniaturen': 'Dimensiunea miniaturilor',
+  'Inhoudsdia': 'Diapozitiv de conținut',
+  'Jouw presentatie': 'Prezentarea dvs.',
+  'Kleuren en lettertype': 'Culori și font',
+  'Kleuren van de website': 'Culorile site-ului',
+  'Komt overeen met CSS-variabele {naam}.': 'Corespunde variabilei CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck citește CSS și examinează aranjarea paginii. Puteți ajusta apoi propunerea.',
+  'Pagina en stylesheets ophalen…': 'Se preiau pagina și foile de stil…',
+  'Presentatiedatum': 'Data prezentării',
+  'Profiel overnemen': 'Folosește profilul',
+  'Ruimte voor je eigen inhoud': 'Spațiu pentru conținutul propriu',
+  'Stijl overnemen van website': 'Importă stilul de pe un site',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stil adăugat. Faceți clic pe Salvare pentru a păstra profilul.',
+  'Titelachtergrond overnemen': 'Folosește fundalul titlului',
+  'Toegepaste opmaak uitlezen…': 'Se citește formatarea aplicată…',
+  'Van website': 'De pe un site',
+  'Voorbeelddia': 'Diapozitiv de previzualizare',
+  'Vul een geldig HTTPS-webadres in.': 'Introduceți o adresă web HTTPS validă.',
+  'Website analyseren': 'Analizează site-ul',
+  'Website-URL': 'URL-ul site-ului',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Fontul site-ului: {font}. Diapozitivul arată fontul înlocuitor ales.',
+  'Websitelogo overnemen': 'Folosește sigla site-ului',
   'Plak logo van klembord': 'Lipește logo din clipboard',
   'Plak donker logo van klembord': 'Lipește logo întunecat din clipboard',
   'Afwijkend logo': 'Logo diferit',

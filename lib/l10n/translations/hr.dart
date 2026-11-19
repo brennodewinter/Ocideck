@@ -1546,6 +1546,47 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Titeldia': 'Naslovni slajd',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Slike nije bilo moguće spremiti. Pokušajte ponovno ili izostavite slike.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Stranicu nije bilo moguće analizirati. Pokušajte javnu stranicu s vidljivim tekstom.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Ovu sliku nije moguće uvesti.',
+  'Dia-achtergrond overnemen': 'Koristi pozadinu slajda',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Dio CSS-a nije bio dostupan. Provjerite prijedlog u pretpregledu slajda.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Na temelju boje zaglavlja stranice.',
+  'Gebaseerd op de kleuren van knoppen.': 'Na temelju boja gumba.',
+  'Gebaseerd op de kleuren van links.': 'Na temelju boja poveznica.',
+  'Geen datum bekend': 'Datum nije poznat',
+  'Geïmporteerde stijl opslaan': 'Spremi uvezeni stil',
+  'Grootte miniaturen': 'Veličina sličica',
+  'Inhoudsdia': 'Slajd sa sadržajem',
+  'Jouw presentatie': 'Vaša prezentacija',
+  'Kleuren en lettertype': 'Boje i font',
+  'Kleuren van de website': 'Boje web-mjesta',
+  'Komt overeen met CSS-variabele {naam}.': 'Odgovara CSS varijabli {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck čita CSS i pregledava raspored stranice. Nakon toga možete prilagoditi prijedlog.',
+  'Pagina en stylesheets ophalen…': 'Dohvaćanje stranice i stilskih listova…',
+  'Presentatiedatum': 'Datum prezentacije',
+  'Profiel overnemen': 'Koristi profil',
+  'Ruimte voor je eigen inhoud': 'Prostor za vlastiti sadržaj',
+  'Stijl overnemen van website': 'Uvezi stil s web-mjesta',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stil je dodan. Kliknite Spremi da zadržite profil.',
+  'Titelachtergrond overnemen': 'Koristi pozadinu naslova',
+  'Toegepaste opmaak uitlezen…': 'Čitanje primijenjenog oblikovanja…',
+  'Van website': 'S web-mjesta',
+  'Voorbeelddia': 'Pretpregled slajda',
+  'Vul een geldig HTTPS-webadres in.': 'Unesite valjanu HTTPS web-adresu.',
+  'Website analyseren': 'Analiziraj web-mjesto',
+  'Website-URL': 'URL web-mjesta',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Font web-mjesta: {font}. Slajd prikazuje odabrani zamjenski font.',
+  'Websitelogo overnemen': 'Koristi logotip web-mjesta',
   'Plak logo van klembord': 'Zalijepi logo s međuspremnika',
   'Plak donker logo van klembord': 'Zalijepi tamni logo s međuspremnika',
   'Afwijkend logo': 'Drugačiji logo',

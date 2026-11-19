@@ -1552,6 +1552,47 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Titeldia': 'Slajd tytułowy',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Nie udało się zapisać obrazów. Spróbuj ponownie lub pomiń obrazy.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Nie udało się przeanalizować strony. Wypróbuj publiczną stronę z widocznym tekstem.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Nie można zaimportować tego obrazu.',
+  'Dia-achtergrond overnemen': 'Użyj tła slajdu',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Część CSS była niedostępna. Sprawdź propozycję na slajdzie podglądu.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Na podstawie koloru nagłówka strony.',
+  'Gebaseerd op de kleuren van knoppen.': 'Na podstawie kolorów przycisków.',
+  'Gebaseerd op de kleuren van links.': 'Na podstawie kolorów odnośników.',
+  'Geen datum bekend': 'Brak znanej daty',
+  'Geïmporteerde stijl opslaan': 'Zapisz zaimportowany styl',
+  'Grootte miniaturen': 'Rozmiar miniatur',
+  'Inhoudsdia': 'Slajd treści',
+  'Jouw presentatie': 'Twoja prezentacja',
+  'Kleuren en lettertype': 'Kolory i czcionka',
+  'Kleuren van de website': 'Kolory witryny',
+  'Komt overeen met CSS-variabele {naam}.': 'Odpowiada zmiennej CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck odczytuje CSS i sprawdza układ strony. Następnie możesz dostosować propozycję.',
+  'Pagina en stylesheets ophalen…': 'Pobieranie strony i arkuszy stylów…',
+  'Presentatiedatum': 'Data prezentacji',
+  'Profiel overnemen': 'Użyj profilu',
+  'Ruimte voor je eigen inhoud': 'Miejsce na własną treść',
+  'Stijl overnemen van website': 'Importuj styl z witryny',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Dodano styl. Kliknij Zapisz, aby zachować profil.',
+  'Titelachtergrond overnemen': 'Użyj tła tytułu',
+  'Toegepaste opmaak uitlezen…': 'Odczytywanie zastosowanego formatowania…',
+  'Van website': 'Z witryny',
+  'Voorbeelddia': 'Slajd podglądu',
+  'Vul een geldig HTTPS-webadres in.': 'Wprowadź prawidłowy adres HTTPS.',
+  'Website analyseren': 'Analizuj witrynę',
+  'Website-URL': 'Adres URL witryny',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Czcionka witryny: {font}. Slajd pokazuje wybraną czcionkę zastępczą.',
+  'Websitelogo overnemen': 'Użyj logo witryny',
   'Plak logo van klembord': 'Wklej logo ze schowka',
   'Plak donker logo van klembord': 'Wklej ciemne logo ze schowka',
   'Afwijkend logo': 'Odmienne logo',

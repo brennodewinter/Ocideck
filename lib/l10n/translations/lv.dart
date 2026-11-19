@@ -1538,6 +1538,46 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Titeldia': 'Titulslaids',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Attēlus neizdevās saglabāt. Mēģiniet vēlreiz vai izlaidiet attēlus.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Lapu neizdevās analizēt. Izmēģiniet publisku lapu ar redzamu tekstu.',
+  'Deze afbeelding kan niet worden overgenomen.': 'Šo attēlu nevar importēt.',
+  'Dia-achtergrond overnemen': 'Izmantot slaida fonu',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Daļa CSS nebija pieejama. Pārbaudiet piedāvājumu priekšskatījuma slaidā.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Balstīts uz lapas galvenes krāsu.',
+  'Gebaseerd op de kleuren van knoppen.': 'Balstīts uz pogu krāsām.',
+  'Gebaseerd op de kleuren van links.': 'Balstīts uz saišu krāsām.',
+  'Geen datum bekend': 'Datums nav zināms',
+  'Geïmporteerde stijl opslaan': 'Saglabāt importēto stilu',
+  'Grootte miniaturen': 'Sīktēlu lielums',
+  'Inhoudsdia': 'Satura slaids',
+  'Jouw presentatie': 'Jūsu prezentācija',
+  'Kleuren en lettertype': 'Krāsas un fonts',
+  'Kleuren van de website': 'Vietnes krāsas',
+  'Komt overeen met CSS-variabele {naam}.': 'Atbilst CSS mainīgajam {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck nolasa CSS un pārbauda lapas izkārtojumu. Pēc tam varat pielāgot piedāvājumu.',
+  'Pagina en stylesheets ophalen…': 'Lapas un stila lapu iegūšana…',
+  'Presentatiedatum': 'Prezentācijas datums',
+  'Profiel overnemen': 'Izmantot profilu',
+  'Ruimte voor je eigen inhoud': 'Vieta jūsu saturam',
+  'Stijl overnemen van website': 'Importēt stilu no vietnes',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stils pievienots. Noklikšķiniet uz Saglabāt, lai paturētu profilu.',
+  'Titelachtergrond overnemen': 'Izmantot virsraksta fonu',
+  'Toegepaste opmaak uitlezen…': 'Lietotā formatējuma nolasīšana…',
+  'Van website': 'No vietnes',
+  'Voorbeelddia': 'Priekšskatījuma slaids',
+  'Vul een geldig HTTPS-webadres in.': 'Ievadiet derīgu HTTPS tīmekļa adresi.',
+  'Website analyseren': 'Analizēt vietni',
+  'Website-URL': 'Vietnes URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Vietnes fonts: {font}. Slaidā redzams izvēlētais aizstājējfonts.',
+  'Websitelogo overnemen': 'Izmantot vietnes logotipu',
   'Plak logo van klembord': 'Ielīmēt logotipu no starpliktuves',
   'Plak donker logo van klembord': 'Ielīmēt tumšu logotipu no starpliktuves',
   'Afwijkend logo': 'Atšķirīgs logotips',

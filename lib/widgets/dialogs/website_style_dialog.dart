@@ -243,7 +243,7 @@ class _WebsiteStyleDialogState extends State<WebsiteStyleDialog> {
                       onSubmitted: (_) => _analyse(),
                       decoration: InputDecoration(
                         labelText: l10n.d('Website-URL'),
-                        hintText: 'https://voorbeeld.nl',
+                        hintText: l10n.d('https://…'),
                         prefixIcon: const Icon(Icons.language),
                         border: const OutlineInputBorder(),
                       ),

@@ -639,6 +639,7 @@ deze velden (met standaardwaarden):
 | `codeFontFamily` | `monospace` | Lettertypefamilie voor broncodeslides (bijvoorbeeld `Courier New`). |
 | `logoPath` | `null` | Pad naar het logo (relatief pad in `logos/`). |
 | `logoDarkPath` | `null` | Donkere variant van het logo, getoond op donkere dia-achtergronden (#1931). `null` voor gebundelde merk-logo's (die schakelen automatisch). |
+| `slideBackgroundImages` | `{}` | **Presentaties.** Afbeeldingspaden onder `content` en optioneel `title`. De inhoudsafbeelding is standaard; de titelafbeelding vervangt deze op een titeldia. De paden worden net als het logo met de stijl opgelost en meegenomen. |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logogrootte in px. |
 | `documentLogoPath` | `null` | Afwijkend documentlogo. `null` deelt `logoPath`; `""` schakelt het logo voor documenten bewust uit. |
@@ -667,6 +668,13 @@ deze velden (met standaardwaarden):
 | `severityNoneColor` | `#475569` | Bevindings-/CVSS-kleur voor de band Informatief. |
 
 Onbekende of ontbrekende velden vallen terug op standaardwaarden, zodat oudere bestanden schoon migreren.
+
+In een los `.ocideckstyle`-bestand bevat de optionele envelopsleutel
+`slideBackgroundImages` de achtergronden onder `content` en `title`, elk met
+`mime` en base64-`data`. Eigen lokale paden worden uit `profile` weggelaten;
+bij import worden de afbeeldingen duurzaam bewaard en de paden hersteld.
+Gebundelde `asset:`-verwijzingen blijven in het profiel. Dezelfde
+afbeeldingsvalidatie en limieten gelden als voor logo's.
 
 *(Toegevoegd 2026-08-19: de drie `checklist…`-velden en de zes tabelhuisstijlvelden
 voor documenten zaten in het profiel — en dus ook in een `.ocideckstyle` (§3.3) —

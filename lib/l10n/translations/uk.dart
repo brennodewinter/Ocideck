@@ -1556,6 +1556,47 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Titeldia': 'Титульний слайд',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Не вдалося зберегти зображення. Спробуйте ще раз або пропустіть зображення.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Не вдалося проаналізувати сторінку. Спробуйте публічну сторінку з видимим текстом.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Це зображення неможливо імпортувати.',
+  'Dia-achtergrond overnemen': 'Використати тло слайда',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Частина CSS була недоступна. Перевірте пропозицію на слайді попереднього перегляду.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'На основі кольору шапки сторінки.',
+  'Gebaseerd op de kleuren van knoppen.': 'На основі кольорів кнопок.',
+  'Gebaseerd op de kleuren van links.': 'На основі кольорів посилань.',
+  'Geen datum bekend': 'Дата невідома',
+  'Geïmporteerde stijl opslaan': 'Зберегти імпортований стиль',
+  'Grootte miniaturen': 'Розмір мініатюр',
+  'Inhoudsdia': 'Слайд вмісту',
+  'Jouw presentatie': 'Ваша презентація',
+  'Kleuren en lettertype': 'Кольори та шрифт',
+  'Kleuren van de website': 'Кольори вебсайту',
+  'Komt overeen met CSS-variabele {naam}.': 'Відповідає змінній CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck читає CSS і перевіряє макет сторінки. Потім ви можете змінити пропозицію.',
+  'Pagina en stylesheets ophalen…': 'Отримання сторінки й таблиць стилів…',
+  'Presentatiedatum': 'Дата презентації',
+  'Profiel overnemen': 'Використати профіль',
+  'Ruimte voor je eigen inhoud': 'Місце для вашого вмісту',
+  'Stijl overnemen van website': 'Імпортувати стиль із вебсайту',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Стиль додано. Натисніть Зберегти, щоб зберегти профіль.',
+  'Titelachtergrond overnemen': 'Використати тло заголовка',
+  'Toegepaste opmaak uitlezen…': 'Читання застосованого форматування…',
+  'Van website': 'Із вебсайту',
+  'Voorbeelddia': 'Слайд попереднього перегляду',
+  'Vul een geldig HTTPS-webadres in.': 'Введіть дійсну вебадресу HTTPS.',
+  'Website analyseren': 'Проаналізувати вебсайт',
+  'Website-URL': 'URL вебсайту',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Шрифт вебсайту: {font}. На слайді показано вибраний шрифт заміни.',
+  'Websitelogo overnemen': 'Використати логотип вебсайту',
   'Plak logo van klembord': 'Вставити логотип з буфера обміну',
   'Plak donker logo van klembord': 'Вставити темний логотип з буфера обміну',
   'Afwijkend logo': 'Інший логотип',

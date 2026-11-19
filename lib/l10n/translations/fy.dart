@@ -613,6 +613,49 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Titeldia': 'Titeldia',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'De ôfbyldingen koene net bewarre wurde. Besykje it opnij of lit de ôfbyldingen fuort.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'De side koe net analysearre wurde. Besykje in iepenbiere side mei sichtbere tekst.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Dizze ôfbylding kin net oernommen wurde.',
+  'Dia-achtergrond overnemen': 'Dia-eftergrûn oernimme',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'In part fan de CSS wie net beskikber. Kontrolearje it foarstel yn de foarbylddia.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Basearre op de kleur fan de sidekop.',
+  'Gebaseerd op de kleuren van knoppen.': 'Basearre op de kleuren fan knoppen.',
+  'Gebaseerd op de kleuren van links.':
+      'Basearre op de kleuren fan keppelings.',
+  'Geen datum bekend': 'Gjin datum bekend',
+  'Geïmporteerde stijl opslaan': 'Ymportearre styl bewarje',
+  'Grootte miniaturen': 'Grutte fan miniatueren',
+  'Inhoudsdia': 'Ynhâldsdia',
+  'Jouw presentatie': 'Dyn presintaasje',
+  'Kleuren en lettertype': 'Lettertype en kleuren',
+  'Kleuren van de website': 'Kleuren fan de webside',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Komt oerien mei CSS-fariabele {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck lêst de CSS en besjocht hoe’t de side opmakke is. Do kinst it foarstel dêrnei oanpasse.',
+  'Pagina en stylesheets ophalen…': 'Side en stylblêden ophelje…',
+  'Presentatiedatum': 'Presintaasjedatum',
+  'Profiel overnemen': 'Profyl oernimme',
+  'Ruimte voor je eigen inhoud': 'Romte foar dyn eigen ynhâld',
+  'Stijl overnemen van website': 'Styl fan webside oernimme',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Styl tafoege. Klik op Bewarje om it profyl te bewarjen.',
+  'Titelachtergrond overnemen': 'Titeleftergrûn oernimme',
+  'Toegepaste opmaak uitlezen…': 'Tapaste opmaak útlêze…',
+  'Van website': 'Fan webside',
+  'Voorbeelddia': 'Foarbylddia',
+  'Vul een geldig HTTPS-webadres in.': 'Folje in jildich HTTPS-webadres yn.',
+  'Website analyseren': 'Webside analysearje',
+  'Website-URL': 'Webside-URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Websidelettertype: {font}. De dia lit it keazen ferfangende lettertype sjen.',
+  'Websitelogo overnemen': 'Websidelogo oernimme',
   'Plak logo van klembord': 'Plak logo fan klamboerd',
   'Plak donker logo van klembord': 'Plak tsjuster logo fan klamboerd',
   'Afwijkend logo': 'Ofwijkend logo',

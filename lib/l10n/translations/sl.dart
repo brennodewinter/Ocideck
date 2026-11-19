@@ -1542,6 +1542,45 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Titeldia': 'Naslovni diapozitiv',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Slik ni bilo mogoče shraniti. Poskusite znova ali izpustite slike.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Strani ni bilo mogoče analizirati. Poskusite javno stran z vidnim besedilom.',
+  'Deze afbeelding kan niet worden overgenomen.': 'Te slike ni mogoče uvoziti.',
+  'Dia-achtergrond overnemen': 'Uporabi ozadje diapozitiva',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Del CSS ni bil na voljo. Preverite predlog v predogledu diapozitiva.',
+  'Gebaseerd op de kleur van de paginakop.': 'Na podlagi barve glave strani.',
+  'Gebaseerd op de kleuren van knoppen.': 'Na podlagi barv gumbov.',
+  'Gebaseerd op de kleuren van links.': 'Na podlagi barv povezav.',
+  'Geen datum bekend': 'Datum ni znan',
+  'Geïmporteerde stijl opslaan': 'Shrani uvoženi slog',
+  'Grootte miniaturen': 'Velikost sličic',
+  'Inhoudsdia': 'Vsebinski diapozitiv',
+  'Jouw presentatie': 'Vaša predstavitev',
+  'Kleuren en lettertype': 'Barve in pisava',
+  'Kleuren van de website': 'Barve spletnega mesta',
+  'Komt overeen met CSS-variabele {naam}.': 'Ustreza spremenljivki CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck prebere CSS in pregleda postavitev strani. Nato lahko predlog prilagodite.',
+  'Pagina en stylesheets ophalen…': 'Pridobivanje strani in slogovnih predlog…',
+  'Presentatiedatum': 'Datum predstavitve',
+  'Profiel overnemen': 'Uporabi profil',
+  'Ruimte voor je eigen inhoud': 'Prostor za vašo vsebino',
+  'Stijl overnemen van website': 'Uvozi slog s spletnega mesta',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Slog je dodan. Kliknite Shrani, da obdržite profil.',
+  'Titelachtergrond overnemen': 'Uporabi ozadje naslova',
+  'Toegepaste opmaak uitlezen…': 'Branje uporabljenega oblikovanja…',
+  'Van website': 'S spletnega mesta',
+  'Voorbeelddia': 'Predogled diapozitiva',
+  'Vul een geldig HTTPS-webadres in.': 'Vnesite veljaven spletni naslov HTTPS.',
+  'Website analyseren': 'Analiziraj spletno mesto',
+  'Website-URL': 'URL spletnega mesta',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Pisava spletnega mesta: {font}. Diapozitiv prikazuje izbrano nadomestno pisavo.',
+  'Websitelogo overnemen': 'Uporabi logotip spletnega mesta',
   'Plak logo van klembord': 'Prilepi logotip iz odložišča',
   'Plak donker logo van klembord': 'Prilepi temni logotip iz odložišča',
   'Afwijkend logo': 'Drugačni logotip',

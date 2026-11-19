@@ -1534,6 +1534,46 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Titeldia': 'Tiitelslaid',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Pilte ei saanud salvestada. Proovi uuesti või jäta pildid välja.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Lehte ei saanud analüüsida. Proovi avalikku lehte, millel on nähtav tekst.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Seda pilti ei saa importida.',
+  'Dia-achtergrond overnemen': 'Kasuta slaidi tausta',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Osa CSS-ist polnud saadaval. Kontrolli ettepanekut eelvaateslaidil.',
+  'Gebaseerd op de kleur van de paginakop.': 'Põhineb lehe päise värvil.',
+  'Gebaseerd op de kleuren van knoppen.': 'Põhineb nuppude värvidel.',
+  'Gebaseerd op de kleuren van links.': 'Põhineb linkide värvidel.',
+  'Geen datum bekend': 'Kuupäev pole teada',
+  'Geïmporteerde stijl opslaan': 'Salvesta imporditud stiil',
+  'Grootte miniaturen': 'Pisipiltide suurus',
+  'Inhoudsdia': 'Sisuslaid',
+  'Jouw presentatie': 'Sinu esitlus',
+  'Kleuren en lettertype': 'Värvid ja font',
+  'Kleuren van de website': 'Veebisaidi värvid',
+  'Komt overeen met CSS-variabele {naam}.': 'Vastab CSS-muutujale {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck loeb CSS-i ja uurib lehe paigutust. Seejärel saad ettepanekut kohandada.',
+  'Pagina en stylesheets ophalen…': 'Lehe ja laadilehtede laadimine…',
+  'Presentatiedatum': 'Esitluse kuupäev',
+  'Profiel overnemen': 'Kasuta profiili',
+  'Ruimte voor je eigen inhoud': 'Ruum sinu enda sisule',
+  'Stijl overnemen van website': 'Impordi stiil veebisaidilt',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stiil lisatud. Profiili säilitamiseks klõpsa Salvesta.',
+  'Titelachtergrond overnemen': 'Kasuta pealkirja tausta',
+  'Toegepaste opmaak uitlezen…': 'Rakendatud vormingu lugemine…',
+  'Van website': 'Veebisaidilt',
+  'Voorbeelddia': 'Eelvaateslaid',
+  'Vul een geldig HTTPS-webadres in.': 'Sisesta kehtiv HTTPS-veebiaadress.',
+  'Website analyseren': 'Analüüsi veebisaiti',
+  'Website-URL': 'Veebisaidi URL',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Veebisaidi font: {font}. Slaid näitab valitud asendusfonti.',
+  'Websitelogo overnemen': 'Kasuta veebisaidi logo',
   'Plak logo van klembord': 'Kleebi logo lõikelaualt',
   'Plak donker logo van klembord': 'Kleebi tume logo lõikelaualt',
   'Afwijkend logo': 'Erinev logo',

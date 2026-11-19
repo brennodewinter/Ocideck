@@ -324,7 +324,7 @@ void main() {
     );
   });
 
-  test('een WebView blijft op de drie plekken die hem afschermen', () {
+  test('een WebView blijft in de afgeschermde onderdelen', () {
     scan(
       sink: RegExp(
         r'WebViewController(?:\.[A-Za-z]\w*)?\(|\.loadRequest\(|WebViewWidget\(',
@@ -336,6 +336,10 @@ void main() {
         // van het netwerk.
         'lib/widgets/mermaid_render_host.dart',
         'lib/services/mermaid_render_service.dart',
+        // The website-style probe loads one inert local snapshot with
+        // default-src 'none', denies later navigation and cancels HTTP auth.
+        // Desktop lacks the auth callback and relies on that offline CSP.
+        'lib/widgets/dialogs/website_style_renderer.dart',
         // De video-embed. De navigatiedelegate laat na de eerste lading alleen
         // navigatie binnen de speler-origin door, en die toets kijkt naar de
         // HOST — niet naar een `contains`, want `youtube.com.kwaadaardig.nl`

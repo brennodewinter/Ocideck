@@ -1543,6 +1543,47 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Titeldia': 'Címdia',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'A képeket nem sikerült menteni. Próbálja újra, vagy hagyja ki a képeket.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Az oldalt nem sikerült elemezni. Próbáljon nyilvános oldalt látható szöveggel.',
+  'Deze afbeelding kan niet worden overgenomen.': 'Ez a kép nem importálható.',
+  'Dia-achtergrond overnemen': 'Dia hátterének használata',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'A CSS egy része nem volt elérhető. Ellenőrizze a javaslatot az előnézeti dián.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Az oldal fejlécének színe alapján.',
+  'Gebaseerd op de kleuren van knoppen.': 'A gombok színei alapján.',
+  'Gebaseerd op de kleuren van links.': 'A hivatkozások színei alapján.',
+  'Geen datum bekend': 'Nincs ismert dátum',
+  'Geïmporteerde stijl opslaan': 'Importált stílus mentése',
+  'Grootte miniaturen': 'Bélyegképek mérete',
+  'Inhoudsdia': 'Tartalmi dia',
+  'Jouw presentatie': 'Az Ön bemutatója',
+  'Kleuren en lettertype': 'Színek és betűtípus',
+  'Kleuren van de website': 'A webhely színei',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Megfelel a(z) {naam} CSS-változónak.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'Az OciDeck beolvassa a CSS-t és megvizsgálja az oldal elrendezését. Ezután módosíthatja a javaslatot.',
+  'Pagina en stylesheets ophalen…': 'Oldal és stíluslapok letöltése…',
+  'Presentatiedatum': 'Bemutató dátuma',
+  'Profiel overnemen': 'Profil használata',
+  'Ruimte voor je eigen inhoud': 'Hely a saját tartalomnak',
+  'Stijl overnemen van website': 'Stílus importálása webhelyről',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stílus hozzáadva. A profil megtartásához kattintson a Mentés gombra.',
+  'Titelachtergrond overnemen': 'Cím hátterének használata',
+  'Toegepaste opmaak uitlezen…': 'Alkalmazott formázás beolvasása…',
+  'Van website': 'Webhelyről',
+  'Voorbeelddia': 'Előnézeti dia',
+  'Vul een geldig HTTPS-webadres in.': 'Adjon meg érvényes HTTPS-webcímet.',
+  'Website analyseren': 'Webhely elemzése',
+  'Website-URL': 'Webhely URL-je',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Webhely betűtípusa: {font}. A dia a kiválasztott helyettesítő betűtípust mutatja.',
+  'Websitelogo overnemen': 'Webhely emblémájának használata',
   'Plak logo van klembord': 'Logó beillesztése a vágólapról',
   'Plak donker logo van klembord': 'Sötét logó beillesztése a vágólapról',
   'Afwijkend logo': 'Eltérő logó',

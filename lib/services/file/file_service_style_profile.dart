@@ -411,7 +411,7 @@ Future<StyleProfileBytes> _buildStyleProfileBytes(
 
 Future<StyleProfileImportOutcome> _restoreStyleBackgrounds(
   ThemeProfile profile,
-  Map envelope,
+  Map<dynamic, dynamic> envelope,
   Directory? logoBaseDir,
   bool logoOmitted,
 ) async {
@@ -453,6 +453,35 @@ Future<StyleProfileImportOutcome> _restoreStyleBackgrounds(
   );
 }
 
+Map<String, ThemeProfile> _resolveSlideStyleProfiles(
+  FileService files,
+  List<Slide> slides, {
+  String? projectPath,
+  Map<String, ThemeProfile> seed = const {},
+}) {
+  final names = usedSlideStyleNames(slides);
+  if (names.isEmpty) return const {};
+  final resolved = <String, ThemeProfile>{};
+  final available = files._themeProfiles();
+  for (final name in names) {
+    final seeded = seed[name];
+    if (seeded != null) {
+      resolved[name] = seeded;
+      continue;
+    }
+    for (final profile in available) {
+      if (profile.name == name) {
+        resolved[name] = files.resolveThemeProfile(
+          profile,
+          projectPath: projectPath,
+        );
+        break;
+      }
+    }
+  }
+  return resolved;
+}
+
 extension FileServiceStyleProfile on FileService {
   /// De stijlprofielen uit de instellingen — de namen waarnaar een
   /// stijlmarkering (`Slide.styleName`, #2996) kan wijzen.
@@ -471,29 +500,12 @@ extension FileServiceStyleProfile on FileService {
     List<Slide> slides, {
     String? projectPath,
     Map<String, ThemeProfile> seed = const {},
-  }) {
-    final names = usedSlideStyleNames(slides);
-    if (names.isEmpty) return const {};
-    final resolved = <String, ThemeProfile>{};
-    final available = _themeProfiles();
-    for (final name in names) {
-      final seeded = seed[name];
-      if (seeded != null) {
-        resolved[name] = seeded;
-        continue;
-      }
-      for (final profile in available) {
-        if (profile.name == name) {
-          resolved[name] = resolveThemeProfile(
-            profile,
-            projectPath: projectPath,
-          );
-          break;
-        }
-      }
-    }
-    return resolved;
-  }
+  }) => _resolveSlideStyleProfiles(
+    this,
+    slides,
+    projectPath: projectPath,
+    seed: seed,
+  );
 
   /// Bestandsnaam-veilige variant van een profielnaam. Gedeelde sanitizer uit
   /// `lib/utils/safe_filename.dart`; een profielnaam is vrije invoer, dus `/`

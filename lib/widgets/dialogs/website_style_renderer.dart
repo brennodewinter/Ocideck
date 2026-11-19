@@ -8,6 +8,7 @@ import 'package:webview_win_floating/webview_plugin.dart';
 import '../../services/website_style/website_style_proposal.dart';
 import '../../services/website_style/website_style_source.dart';
 import '../../utils/log.dart';
+import '../../utils/ui_frame.dart';
 
 /// An offline browser used only to resolve CSS and measure the rendered DOM.
 class WebsiteStyleRenderer extends StatefulWidget {
@@ -57,17 +58,26 @@ class _WebsiteStyleRendererState extends State<WebsiteStyleRenderer> {
             : const PlatformWebViewControllerCreationParams(),
       );
       setState(() => _controller = controller);
-      await WidgetsBinding.instance.endOfFrame;
+      await waitForUiFrame();
       if (!mounted || _finished) return;
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       if (!mounted || _finished) return;
+      var initialLoadDone = false;
       await controller.setNavigationDelegate(
         NavigationDelegate(
-          onNavigationRequest: (request) =>
-              request.url == 'about:blank' ||
-                  request.url.startsWith('data:text/html')
-              ? NavigationDecision.navigate
-              : NavigationDecision.prevent,
+          onNavigationRequest: (request) {
+            final local =
+                request.url == 'about:blank' ||
+                request.url.startsWith('data:text/html');
+            if (!initialLoadDone && request.isMainFrame && local) {
+              initialLoadDone = true;
+              return NavigationDecision.navigate;
+            }
+            return NavigationDecision.prevent;
+          },
+          // The desktop delegate has no HTTP-auth callback; the snapshot CSP
+          // blocks network resources on every platform.
+          onHttpAuthRequest: windows ? null : (request) => request.onCancel(),
           onPageFinished: (_) => unawaited(_read(controller, script)),
         ),
       );

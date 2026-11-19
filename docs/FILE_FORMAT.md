@@ -665,6 +665,7 @@ these fields (with defaults):
 | `codeFontFamily` | `monospace` | Font family for source-code slides (for example `Courier New`). |
 | `logoPath` | `null` | Path to the logo (relative path in `logos/`). |
 | `logoDarkPath` | `null` | Dark variant of the logo, shown on dark slide backgrounds (#1931). `null` for bundled brand logos (they switch automatically). |
+| `slideBackgroundImages` | `{}` | **Presentations.** Image paths keyed by `content` and optional `title`. The content image is the default; the title image overrides it for a title slide. Paths are resolved and carried with the style like its logo. |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logo size in px. |
 | `brandStripPath` | `null` | **Presentations.** Optional full-width brand-strip image, copied beside the logo in `logos/`. The strip is anchored to the same top or bottom edge as `logoPosition` and replaces the separate logo drawing on slides. |
@@ -740,6 +741,7 @@ The file is plain UTF-8 JSON — an envelope around the same profile JSON as
 | `logo` | **Optional.** An embedded custom logo. `mime` is informational — the importer re-derives the type from the bytes themselves. |
 | `documentLogo` | **Optional.** The separately configured custom document logo, with the same validation and limits as `logo`. |
 | `brandStrip` | **Optional, version 2.** The full-width brand-strip image. It follows the same validation, embedding and path-restoration rules as `logo`. |
+| `slideBackgroundImages` | **Optional.** Embedded background images keyed by `content` or `title`, each containing `mime` and base64 `data`. Custom local paths are omitted from `profile`; import materializes the images and restores their paths. Bundled `asset:` references stay in the profile. The image validation and limits are shared with logos. |
 
 Import accepts the `.ocideckstyle` and `.json` extensions. Caps: 16 MiB per
 file, 8 MiB per embedded image.

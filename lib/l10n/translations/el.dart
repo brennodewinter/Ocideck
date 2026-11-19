@@ -1565,6 +1565,48 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Titeldia': 'Διαφάνεια τίτλου',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Δεν ήταν δυνατή η αποθήκευση των εικόνων. Δοκιμάστε ξανά ή παραλείψτε τις εικόνες.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Δεν ήταν δυνατή η ανάλυση της σελίδας. Δοκιμάστε μια δημόσια σελίδα με ορατό κείμενο.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Δεν είναι δυνατή η εισαγωγή αυτής της εικόνας.',
+  'Dia-achtergrond overnemen': 'Χρήση φόντου διαφάνειας',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Μέρος του CSS δεν ήταν διαθέσιμο. Ελέγξτε την πρόταση στη διαφάνεια προεπισκόπησης.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Με βάση το χρώμα της κεφαλίδας της σελίδας.',
+  'Gebaseerd op de kleuren van knoppen.': 'Με βάση τα χρώματα των κουμπιών.',
+  'Gebaseerd op de kleuren van links.': 'Με βάση τα χρώματα των συνδέσμων.',
+  'Geen datum bekend': 'Άγνωστη ημερομηνία',
+  'Geïmporteerde stijl opslaan': 'Αποθήκευση εισαγόμενου στυλ',
+  'Grootte miniaturen': 'Μέγεθος μικρογραφιών',
+  'Inhoudsdia': 'Διαφάνεια περιεχομένου',
+  'Jouw presentatie': 'Η παρουσίασή σας',
+  'Kleuren en lettertype': 'Χρώματα και γραμματοσειρά',
+  'Kleuren van de website': 'Χρώματα ιστοτόπου',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Αντιστοιχεί στη μεταβλητή CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'Το OciDeck διαβάζει το CSS και εξετάζει τη διάταξη της σελίδας. Έπειτα μπορείτε να προσαρμόσετε την πρόταση.',
+  'Pagina en stylesheets ophalen…': 'Λήψη σελίδας και φύλλων στυλ…',
+  'Presentatiedatum': 'Ημερομηνία παρουσίασης',
+  'Profiel overnemen': 'Χρήση προφίλ',
+  'Ruimte voor je eigen inhoud': 'Χώρος για το δικό σας περιεχόμενο',
+  'Stijl overnemen van website': 'Εισαγωγή στυλ από ιστότοπο',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Το στυλ προστέθηκε. Πατήστε Αποθήκευση για να διατηρήσετε το προφίλ.',
+  'Titelachtergrond overnemen': 'Χρήση φόντου τίτλου',
+  'Toegepaste opmaak uitlezen…': 'Ανάγνωση εφαρμοσμένης μορφοποίησης…',
+  'Van website': 'Από ιστότοπο',
+  'Voorbeelddia': 'Διαφάνεια προεπισκόπησης',
+  'Vul een geldig HTTPS-webadres in.': 'Εισαγάγετε μια έγκυρη διεύθυνση HTTPS.',
+  'Website analyseren': 'Ανάλυση ιστοτόπου',
+  'Website-URL': 'URL ιστοτόπου',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Γραμματοσειρά ιστοτόπου: {font}. Η διαφάνεια εμφανίζει την επιλεγμένη γραμματοσειρά αντικατάστασης.',
+  'Websitelogo overnemen': 'Χρήση λογότυπου ιστοτόπου',
   'Plak logo van klembord': 'Επικόλληση λογότυπου από το πρόχειρο',
   'Plak donker logo van klembord':
       'Επικόλληση σκούρου λογότυπου από το πρόχειρο',

@@ -239,6 +239,9 @@ a file under the app's `lib/`. Rules in
 
 ## `lib/services/` — business logic & IO
 
+- `website_style/website_style_source.dart` — Fetches a requested HTTPS page and bounded stylesheets into a snapshot for house-style analysis, with image loading kept explicit.
+- `website_style/website_style_proposal.dart` — Converts the rendered CSS probe into an editable theme proposal, including palette, font substitution, logo and slide-background choices.
+
 - `retired_miauw_cleanup.dart` — Platform facade for removing the retired app-owned CVE download cache on upgrade; leaves presentation files and sidecars untouched.
 
 - `chart_semantics_label.dart` — `chartSemanticsLabel`: one place that turns a `ChartSpec` into the Dutch text alternative (type, title, series, labels, values) for screen readers (#2732). Editor preview and HTML-export SVG both consume it, so the spoken description can never drift from what either surface draws.
@@ -1429,6 +1432,9 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `slide_quality_actions.dart` — `SlideQualityAction`: the concrete *do it* button beside a quality finding ("split this slide", "raise the contrast", "add alt text"), so the assistant does not only point at a problem but offers the fix.
 
 ### `lib/widgets/dialogs/`
+
+- `website_style_dialog.dart` — Website house-style import: URL, analysis, editable preview and explicit adoption of colours, fonts and selected images.
+- `website_style_renderer.dart` — Offline WebView for CSS measurement, with bounded frame waiting, a timeout and navigation restricted to the supplied snapshot.
 
 - `add_slide_dialog.dart` — Selects a slide type when adding a slide. Below the grid sits the help text (`slideTypeHelpText`) of whatever the mouse or the keyboard focus points at — the same sentence that used to appear only *after* inserting, behind a collapsed hint — and it rides along as the card's screen-reader hint, because the strip below the grid is not something a screen reader passes. Its height is bounded in line heights rather than pixels, so it grows with 200% interface text instead of making the dialog jump.
 - `command_palette.dart` — Searchable command overlay (Ctrl/Cmd+K); filters actions, keyboard-navigable.

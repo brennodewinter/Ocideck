@@ -1558,6 +1558,47 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Titeldia': 'Pjastra tat-titlu',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'L-immaġnijiet ma setgħux jiġu ssejvjati. Erġa’ pprova jew ħalli l-immaġnijiet barra.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Il-paġna ma setgħetx tiġi analizzata. Ipprova paġna pubblika b’test viżibbli.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Din l-immaġni ma tistax tiġi importata.',
+  'Dia-achtergrond overnemen': 'Uża l-isfond tal-pjastra',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Xi CSS ma kienx disponibbli. Iċċekkja l-proposta fil-pjastra tal-previżjoni.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Ibbażat fuq il-kulur tal-intestatura tal-paġna.',
+  'Gebaseerd op de kleuren van knoppen.': 'Ibbażat fuq il-kuluri tal-buttuni.',
+  'Gebaseerd op de kleuren van links.': 'Ibbażat fuq il-kuluri tal-links.',
+  'Geen datum bekend': 'Ebda data magħrufa',
+  'Geïmporteerde stijl opslaan': 'Issejvja l-istil importat',
+  'Grootte miniaturen': 'Daqs tal-minjaturi',
+  'Inhoudsdia': 'Pjastra tal-kontenut',
+  'Jouw presentatie': 'Il-preżentazzjoni tiegħek',
+  'Kleuren en lettertype': 'Kuluri u tipa',
+  'Kleuren van de website': 'Kuluri tas-sit web',
+  'Komt overeen met CSS-variabele {naam}.': 'Jaqbel mal-varjabbli CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck jaqra s-CSS u jeżamina t-tqassim tal-paġna. Tista’ taġġusta l-proposta wara.',
+  'Pagina en stylesheets ophalen…': 'Qed jinġabru l-paġna u l-folji tal-istil…',
+  'Presentatiedatum': 'Data tal-preżentazzjoni',
+  'Profiel overnemen': 'Uża l-profil',
+  'Ruimte voor je eigen inhoud': 'Spazju għall-kontenut tiegħek',
+  'Stijl overnemen van website': 'Importa stil minn sit web',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Stil miżjud. Ikklikkja Issejvja biex iżżomm il-profil.',
+  'Titelachtergrond overnemen': 'Uża l-isfond tat-titlu',
+  'Toegepaste opmaak uitlezen…': 'Qed jinqara l-ifformattjar applikat…',
+  'Van website': 'Minn sit web',
+  'Voorbeelddia': 'Pjastra tal-previżjoni',
+  'Vul een geldig HTTPS-webadres in.': 'Daħħal indirizz web HTTPS validu.',
+  'Website analyseren': 'Analizza s-sit web',
+  'Website-URL': 'URL tas-sit web',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Tipa tas-sit web: {font}. Il-pjastra turi t-tipa sostituttiva magħżula.',
+  'Websitelogo overnemen': 'Uża l-logo tas-sit web',
   'Plak logo van klembord': 'Waħħal il-logo mill-clipboard',
   'Plak donker logo van klembord': 'Waħħal il-logo skur mill-clipboard',
   'Afwijkend logo': 'Logo differenti',

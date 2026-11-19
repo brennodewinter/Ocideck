@@ -1542,6 +1542,48 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Titeldia': 'Slide judul',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Gambar tidak dapat disimpan. Coba lagi atau abaikan gambar.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Halaman tidak dapat dianalisis. Coba halaman publik dengan teks yang terlihat.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Gambar ini tidak dapat diimpor.',
+  'Dia-achtergrond overnemen': 'Gunakan latar belakang slide',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Sebagian CSS tidak tersedia. Periksa usulan pada slide pratinjau.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Berdasarkan warna kepala halaman.',
+  'Gebaseerd op de kleuren van knoppen.': 'Berdasarkan warna tombol.',
+  'Gebaseerd op de kleuren van links.': 'Berdasarkan warna tautan.',
+  'Geen datum bekend': 'Tanggal tidak diketahui',
+  'Geïmporteerde stijl opslaan': 'Simpan gaya yang diimpor',
+  'Grootte miniaturen': 'Ukuran gambar mini',
+  'Inhoudsdia': 'Slide konten',
+  'Jouw presentatie': 'Presentasi Anda',
+  'Kleuren en lettertype': 'Warna dan font',
+  'Kleuren van de website': 'Warna situs web',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Sesuai dengan variabel CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck membaca CSS dan memeriksa tata letak halaman. Anda dapat menyesuaikan usulan setelahnya.',
+  'Pagina en stylesheets ophalen…': 'Mengambil halaman dan lembar gaya…',
+  'Presentatiedatum': 'Tanggal presentasi',
+  'Profiel overnemen': 'Gunakan profil',
+  'Ruimte voor je eigen inhoud': 'Ruang untuk konten Anda sendiri',
+  'Stijl overnemen van website': 'Impor gaya dari situs web',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Gaya ditambahkan. Klik Simpan untuk menyimpan profil.',
+  'Titelachtergrond overnemen': 'Gunakan latar belakang judul',
+  'Toegepaste opmaak uitlezen…': 'Membaca pemformatan yang diterapkan…',
+  'Van website': 'Dari situs web',
+  'Voorbeelddia': 'Slide pratinjau',
+  'Vul een geldig HTTPS-webadres in.': 'Masukkan alamat web HTTPS yang valid.',
+  'Website analyseren': 'Analisis situs web',
+  'Website-URL': 'URL situs web',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Font situs web: {font}. Slide menampilkan font pengganti yang dipilih.',
+  'Websitelogo overnemen': 'Gunakan logo situs web',
   'Plak logo van klembord': 'Tempel logo dari papan klip',
   'Plak donker logo van klembord': 'Tempel logo gelap dari papan klip',
   'Afwijkend logo': 'Logo berbeda',

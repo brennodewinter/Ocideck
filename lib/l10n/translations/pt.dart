@@ -1567,6 +1567,49 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Titeldia': 'Diapositivo de título',
+  'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
+      'Não foi possível guardar as imagens. Tente novamente ou omita as imagens.',
+  'De pagina kon niet worden geanalyseerd. Probeer een openbare pagina met zichtbare tekst.':
+      'Não foi possível analisar a página. Experimente uma página pública com texto visível.',
+  'Deze afbeelding kan niet worden overgenomen.':
+      'Não é possível importar esta imagem.',
+  'Dia-achtergrond overnemen': 'Usar fundo do diapositivo',
+  'Een deel van de CSS was niet beschikbaar. Controleer het voorstel in de voorbeelddia.':
+      'Parte do CSS não estava disponível. Verifique a proposta no diapositivo de pré-visualização.',
+  'Gebaseerd op de kleur van de paginakop.':
+      'Com base na cor do cabeçalho da página.',
+  'Gebaseerd op de kleuren van knoppen.': 'Com base nas cores dos botões.',
+  'Gebaseerd op de kleuren van links.': 'Com base nas cores das ligações.',
+  'Geen datum bekend': 'Sem data conhecida',
+  'Geïmporteerde stijl opslaan': 'Guardar estilo importado',
+  'Grootte miniaturen': 'Tamanho das miniaturas',
+  'Inhoudsdia': 'Diapositivo de conteúdo',
+  'Jouw presentatie': 'A sua apresentação',
+  'Kleuren en lettertype': 'Cores e tipo de letra',
+  'Kleuren van de website': 'Cores do site',
+  'Komt overeen met CSS-variabele {naam}.':
+      'Corresponde à variável CSS {naam}.',
+  'OciDeck leest de CSS en bekijkt hoe de pagina is opgemaakt. Je kunt het voorstel daarna aanpassen.':
+      'OciDeck lê o CSS e examina a disposição da página. Pode ajustar a proposta depois.',
+  'Pagina en stylesheets ophalen…': 'A obter a página e as folhas de estilo…',
+  'Presentatiedatum': 'Data da apresentação',
+  'Profiel overnemen': 'Usar perfil',
+  'Ruimte voor je eigen inhoud': 'Espaço para o seu conteúdo',
+  'Stijl overnemen van website': 'Importar estilo de um site',
+  'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.':
+      'Estilo adicionado. Clique em Guardar para conservar o perfil.',
+  'Titelachtergrond overnemen': 'Usar fundo do título',
+  'Toegepaste opmaak uitlezen…': 'A ler a formatação aplicada…',
+  'Van website': 'De um site',
+  'Voorbeelddia': 'Diapositivo de pré-visualização',
+  'Vul een geldig HTTPS-webadres in.':
+      'Introduza um endereço web HTTPS válido.',
+  'Website analyseren': 'Analisar site',
+  'Website-URL': 'URL do site',
+  'Websitelettertype: {font}. De dia toont het gekozen vervangende lettertype.':
+      'Tipo de letra do site: {font}. O diapositivo mostra o tipo de letra de substituição escolhido.',
+  'Websitelogo overnemen': 'Usar logótipo do site',
   'Plak logo van klembord': 'Colar logótipo da área de transferência',
   'Plak donker logo van klembord':
       'Colar logótipo escuro da área de transferência',
