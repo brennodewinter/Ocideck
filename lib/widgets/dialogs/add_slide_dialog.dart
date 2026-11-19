@@ -6,9 +6,12 @@ import '../../l10n/app_localizations.dart';
 import '../editors/slide_type_help.dart';
 
 part 'add_slide_dialog_painter.dart';
-part 'add_slide_dialog_pills.dart';
+part 'add_slide_dialog_cards.dart';
 
 class AddSlideDialog extends StatefulWidget {
+  /// Het huidige type bij het wijzigen van een bestaande dia.
+  final SlideType? selectedType;
+
   /// Whether the Informatieveiligheid module is revealed (enabled + a matching
   /// pack provisioned). Gates the security slide types and their picker tab, so
   /// they stay hidden until the module is on (see `infoSafetyRevealProvider`,
@@ -31,6 +34,7 @@ class AddSlideDialog extends StatefulWidget {
 
   const AddSlideDialog({
     super.key,
+    this.selectedType,
     this.revealInfoSafety = false,
     this.revealProcesverbetering = false,
     this.revealManagementsysteem = false,
@@ -39,6 +43,7 @@ class AddSlideDialog extends StatefulWidget {
 
   static Future<SlideType?> show(
     BuildContext context, {
+    SlideType? selectedType,
     bool revealInfoSafety = false,
     bool revealProcesverbetering = false,
     bool revealManagementsysteem = false,
@@ -47,6 +52,7 @@ class AddSlideDialog extends StatefulWidget {
     return showDialog<SlideType>(
       context: context,
       builder: (_) => AddSlideDialog(
+        selectedType: selectedType,
         revealInfoSafety: revealInfoSafety,
         revealProcesverbetering: revealProcesverbetering,
         revealManagementsysteem: revealManagementsysteem,
@@ -130,14 +136,14 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
   @override
   void initState() {
     super.initState();
-    // Default to the first category tab when the tab bar is shown (≥2
-    // categories carry types); otherwise no tab bar and the value is unused.
-    // Computed without l10n — `context.l10n` is illegal in initState, and the
-    // labelled tabs are built later in [_tabs] (during build). This mirrors
-    // `_tabs`' first entry: the first present category in enum order.
+    // Begin bij de categorie van het huidige type, of bij de eerste zichtbare
+    // categorie als de kiezer een nieuwe dia toevoegt.
     final present = _categoriesPresent();
+    final selectedCategory = widget.selectedType?.category;
     _activeCategory = present.length < 2
         ? null
+        : present.contains(selectedCategory)
+        ? selectedCategory
         : SlideCategory.values.firstWhere(present.contains);
   }
 
@@ -360,19 +366,24 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
         ),
       );
     }
+    final focusType = types.contains(widget.selectedType)
+        ? widget.selectedType
+        : types.first;
     return SingleChildScrollView(
       child: Wrap(
         spacing: 10,
         runSpacing: 10,
         children: [
-          for (var i = 0; i < types.length; i++)
+          for (final type in types)
             _TypeCard(
-              type: types[i],
-              label: l10n.d(types[i].label),
-              help: slideTypeHelpText(l10n, types[i]),
-              autofocus: i == 0,
-              onTap: () => Navigator.pop(context, types[i]),
-              onHighlight: () => _highlight(types[i]),
+              key: ValueKey(type),
+              type: type,
+              label: l10n.d(type.label),
+              help: slideTypeHelpText(l10n, type),
+              selected: type == widget.selectedType,
+              autofocus: type == focusType,
+              onTap: () => Navigator.pop(context, type),
+              onHighlight: () => _highlight(type),
             ),
         ],
       ),
@@ -399,9 +410,11 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
     AppLocalizations l10n,
     List<SlideType> types,
   ) {
-    // Bij het openen wijst niets aan; het eerste kaartje heeft de focus, dus
-    // dat is ook wat de uitleg toont.
-    final shown = types.contains(_highlighted) ? _highlighted! : types.first;
+    final shown = types.contains(_highlighted)
+        ? _highlighted!
+        : types.contains(widget.selectedType)
+        ? widget.selectedType!
+        : types.first;
     final line = MediaQuery.textScalerOf(context).scale(12.5) * 1.45;
     return Container(
       width: double.infinity,
@@ -429,81 +442,6 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _TypeCard extends StatelessWidget {
-  final SlideType type;
-  final String label;
-
-  /// De uitleg bij dit type. Gaat als schermlezer-hint mee op het kaartje zelf,
-  /// zodat wie niet kijkt hem hoort op het moment van kiezen — niet pas in het
-  /// vak eronder, dat een schermlezer nooit passeert.
-  final String help;
-
-  final VoidCallback onTap;
-  final bool autofocus;
-
-  /// Aangewezen door muis of toetsenbordfocus: het vak onder het rooster toont
-  /// dan de uitleg van dit type.
-  final VoidCallback onHighlight;
-
-  const _TypeCard({
-    required this.type,
-    required this.label,
-    required this.help,
-    required this.onTap,
-    required this.onHighlight,
-    this.autofocus = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      hint: help,
-      child: InkWell(
-        onTap: onTap,
-        autofocus: autofocus,
-        onHover: (hovering) {
-          if (hovering) onHighlight();
-        },
-        onFocusChange: (focused) {
-          if (focused) onHighlight();
-        },
-        borderRadius: BorderRadius.circular(8),
-        focusColor: AppTheme.accent.withValues(alpha: 0.14),
-        hoverColor: AppTheme.accent.withValues(alpha: 0.06),
-        child: Container(
-          width: 100,
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(color: AppTheme.slate300),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // A stylised wireframe of the layout, so the card shows what
-              // the slide will look like instead of an abstract icon.
-              ExcludeSemantics(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: CustomPaint(
-                      painter: SlideTypePreviewPainter(type: type),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 6),
-              FittedTypeLabel(label: label),
             ],
           ),
         ),
