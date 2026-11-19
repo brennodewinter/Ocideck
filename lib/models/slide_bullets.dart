@@ -7,10 +7,12 @@ part of 'slide.dart';
 
 /// Hoe diep de inspringknoppen van de editors mogen komen.
 ///
-/// Dit is een grens van de *bediening*, niet van het formaat. Het formaat, de
-/// parser, de dia-render en de HTML-export kennen geen maximum: een niveau is
-/// gewoon een tab, en de inspringing schaalt lineair mee. Wat hier staat, is
-/// hoe ver je met de knop of met Tab komt.
+/// Dit is een grens van de *bediening*, niet van het formaat. Het formaat en
+/// de parser kennen geen maximum: een niveau is gewoon een tab, en de
+/// inspringing schaalt lineair mee. Alleen de boom-dialayout klemt de
+/// hiërarchiediepte bij het schilderen (`_maxTreeDepth`), omdat die per
+/// niveau recureert. Wat hier staat, is hoe ver je met de knop of met Tab
+/// komt.
 ///
 /// De editors klemden dit getal ook bij het *lezen*, en schreven het geklemde
 /// niveau weer terug. Eén letter typen in het eerste item liet daarmee het
