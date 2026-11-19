@@ -250,9 +250,13 @@ Future<FeedFetchResult> _fetchFeedPinned(
       }
       final response = await request.close().timeout(timeout);
       final status = response.statusCode;
+      // Elke hop heeft zijn eigen client, die we in finally geforceerd
+      // sluiten. Een ongebruikte body hoeven we daarom niet leeg te lezen.
+      if (status == HttpStatus.notModified) {
+        return FeedFetchResult.ok(statusCode: status, finalUrl: current);
+      }
       if (status >= 300 && status < 400) {
         final location = response.headers.value('location');
-        await response.drain<void>();
         if (location == null || hop == _maxRedirectHops) {
           return const FeedFetchResult.failed(ImportFailure.redirect);
         }
@@ -263,16 +267,10 @@ Future<FeedFetchResult> _fetchFeedPinned(
         current = next;
         continue;
       }
-      if (status == HttpStatus.notModified) {
-        await response.drain<void>();
-        return FeedFetchResult.ok(statusCode: status, finalUrl: current);
-      }
       if (status != HttpStatus.ok) {
-        await response.drain<void>();
         return FeedFetchResult.failed(_classifyFeedStatus(status));
       }
       if (response.contentLength > maxBytes) {
-        await response.drain<void>();
         return const FeedFetchResult.failed(ImportFailure.tooLarge);
       }
       final builder = BytesBuilder(copy: false);
@@ -357,7 +355,6 @@ Future<({String? path, ImportFailure? failure})> downloadFeedMedia(
       final status = response.statusCode;
       if (status >= 300 && status < 400) {
         final location = response.headers.value('location');
-        await response.drain<void>();
         if (location == null || hop == _maxRedirectHops) {
           return (path: null, failure: ImportFailure.redirect);
         }
@@ -369,11 +366,9 @@ Future<({String? path, ImportFailure? failure})> downloadFeedMedia(
         continue;
       }
       if (status != HttpStatus.ok) {
-        await response.drain<void>();
         return (path: null, failure: _classifyFeedStatus(status));
       }
       if (response.contentLength > maxBytes) {
-        await response.drain<void>();
         return (path: null, failure: ImportFailure.tooLarge);
       }
       final file = File(destPath);
