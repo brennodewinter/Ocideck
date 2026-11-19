@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:file_picker/file_picker.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/improvement_y01.dart';
+import '../../services/chart_csv_import.dart';
 import '../../services/improvement/improvement_analysis_helpers.dart';
 import '../../services/improvement/chart_derivation.dart';
 import '../../state/procesverbetering_provider.dart';
@@ -30,6 +30,36 @@ import 'editor_text_controller.dart';
 
 part 'chart_editor_dialogs.dart';
 part 'chart_editor_grid.dart';
+
+Future<ChartCsvData?> _pickChartCsv(BuildContext context) async {
+  final file = await FilePicker.pickFile(
+    type: FileType.custom,
+    allowedExtensions: ['csv'],
+  );
+  if (!context.mounted) return null;
+  if (file == null) return null;
+  try {
+    final text = await readChartCsv(file);
+    var parsed = await parseChartCsv(text);
+    if (!context.mounted) return null;
+    // Een onbesliste decimale notatie blijft een keuze van de gebruiker.
+    if (parsed.ambiguous.isNotEmpty) {
+      final convention = await askDecimalConvention(context, parsed.ambiguous);
+      if (convention == null || !context.mounted) return null;
+      parsed = await parseChartCsv(text, convention: convention);
+    }
+    return parsed;
+  } catch (error) {
+    logWarning('chart CSV import', error);
+    if (!context.mounted) return null;
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      context.l10n,
+      context.l10n.d('Het bestand kon niet worden gelezen.'),
+    );
+    return null;
+  }
+}
 
 bool _revealProcesverbetering(BuildContext context) {
   try {
@@ -400,30 +430,8 @@ class _ChartEditorState extends State<ChartEditor> {
   }
 
   Future<void> _importCsv() async {
-    final file = await FilePicker.pickFile(
-      type: FileType.custom,
-      allowedExtensions: ['csv'],
-    );
-    if (!mounted) return;
-    if (file == null) return;
-    final bytes = await file.readAsBytes();
-    final text = utf8.decode(bytes);
-    if (!mounted) return;
-
-    // De import vult alleen het grid. Waar de data belandt is geen keuze meer
-    // die de gebruiker hier hoeft te maken: bij het opslaan verhuist ze sowieso
-    // naar een bestand naast de presentatie. Hier stond een dialoog "in de
-    // slide of als CSV-bestand?"; die vroeg om een beslissing waarvan het ene
-    // antwoord inmiddels niet meer waar te maken is.
-    var parsed = parseCsv(text);
-    // Values the file itself cannot settle: ask, rather than pick one and hope.
-    // Backing out of the question cancels the import — importing anyway would
-    // mean charting a reading the user declined to give.
-    if (parsed.ambiguous.isNotEmpty) {
-      final convention = await askDecimalConvention(context, parsed.ambiguous);
-      if (convention == null || !mounted) return;
-      parsed = parseCsv(text, convention: convention);
-    }
+    final parsed = await _pickChartCsv(context);
+    if (!mounted || parsed == null) return;
     setState(() {
       // Een import vervangt de cijfers, niet de bestemming: een grafiek die al
       // aan een bestand hangt blijft daaraan hangen en krijgt de nieuwe data

@@ -200,5 +200,23 @@ void main() {
       expect(out, contains('Problem'));
       expect(out, isNot(contains('- Problem')));
     });
+
+    test(
+      'een pathologisch diepe boom klemt in plaats van de stack te laten vallen',
+      () {
+        // De traversals recureerden per inspringniveau terwijl het formaat
+        // geen maximum kent: ~40K steeds dieper geneste items gaven een
+        // StackOverflowError bij voorvertoning én HTML-export (#3035).
+        final bullets = [for (var i = 0; i < 40000; i++) '${'\t' * i}n$i'];
+        final scene = buildTreeScene(
+          bullets: bullets,
+          layout: TreeLayout.tree,
+          measurer: const ApproximateTextMeasurer(),
+        );
+        // De inhoud wordt niet weggegooid: alle geklemde knopen leggen
+        // kaartjes en verbindingen in de scene.
+        expect(scene.nodes.length, greaterThan(1000));
+      },
+    );
   });
 }

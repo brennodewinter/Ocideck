@@ -23,6 +23,15 @@ class _Laid {
 
 final RegExp _improvementIdMarkup = RegExp(r'\*\*[YX]-\d+\*\*');
 
+/// De diepgrens van de boomlay-out. Het formaat en de bulletparser kennen
+/// bewust geen maximum (`slide_bullets.dart`), maar de traversals
+/// hieronder recureren per niveau — zonder klem slaat invoer met
+/// tienduizenden tabs om in een `StackOverflowError` bij voorvertoning én
+/// HTML-export. Diepere items klemmen op het laatste niveau: ze verliezen
+/// hun extra inspringing, niet hun plek in de boom. 32 rangen is al ver
+/// voorbij de leesbaarheidsgrens van een 540px-dia.
+const _maxTreeDepth = 32;
+
 double _paintTreeHeader(
   List<SceneNode> nodes, {
   required String title,
@@ -119,7 +128,7 @@ List<_HNode> _parseHierarchy(List<String> bullets) {
         .trim();
     if (text.isEmpty) continue;
     final node = _HNode(text, _improvementIdMarkup.hasMatch(body));
-    final level = bulletLevel(raw);
+    final level = math.min(bulletLevel(raw), _maxTreeDepth - 1);
     while (stack.isNotEmpty && stack.last.level >= level) {
       stack.removeLast();
     }

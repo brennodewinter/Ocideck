@@ -102,7 +102,7 @@ Future<void> transcribeFeedEpisode(
       );
       return;
     }
-    notifier.noteDownloadedPath(feedUrl, episode.key, path);
+    await notifier.noteDownloadedPath(feedUrl, episode.key, path);
   }
   if (!context.mounted) return;
   await openMediaForTranscription(context, sourcePath: path, displayName: name);

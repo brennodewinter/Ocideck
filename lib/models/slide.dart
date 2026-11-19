@@ -652,8 +652,9 @@ class Slide {
   }
 
   factory Slide.duplicate(Slide src) {
+    final id = _uuid.v4();
     return Slide(
-      id: _uuid.v4(),
+      id: id,
       type: src.type,
       title: src.title,
       subtitle: src.subtitle,
@@ -730,6 +731,10 @@ class Slide {
       checklistScope: src.checklistScope,
       improvementTemplateId: src.improvementTemplateId,
       improvementLayout: src.improvementLayout,
+      // Front matter stores callouts by anchor. Use the copy's own identity
+      // so source and duplicate never write to the same entry.
+      anchor: src.callouts.isEmpty ? '' : 'dia-$id',
+      nextAnchor: src.nextAnchor,
       callouts: List<ImageCallout>.from(src.callouts),
       calloutPresentation: src.calloutPresentation,
       calloutReveal: src.calloutReveal,

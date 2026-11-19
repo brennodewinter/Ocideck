@@ -30,6 +30,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math' as math;
 
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 import 'collab_codec.dart';
 import 'collab_log_store.dart';
@@ -195,7 +196,7 @@ class WebdavAsyncTransport implements CollabTransport {
     // than retrying a poison record forever. Well-formed writers never produce
     // one; this only fires on corruption or a record kind from a newer version.
     try {
-      final env = jsonDecode(record);
+      final env = jsonDecodeGuarded(record);
       if (env is! Map<String, Object?>) {
         throw FormatException('log record is not an object');
       }
@@ -223,21 +224,37 @@ class WebdavAsyncTransport implements CollabTransport {
     return done;
   }
 
+  final _appendJitter = math.Random();
+
   Future<void> _appendWithRetry(String record) async {
     var seq = _knownMaxSeq + 1;
-    while (true) {
+    const maxAttempts = 6;
+    for (var attempt = 0; attempt < maxAttempts; attempt++) {
       _ensureLive();
       if (await store.append(seq, record)) {
         _ownSeqs.add(seq);
         _knownMaxSeq = math.max(_knownMaxSeq, seq);
         return;
       }
-      // Someone else took this slot; refresh the high-water mark and retry
-      // above it. Each miss strictly raises seq, so this terminates.
+      if (attempt + 1 == maxAttempts) break;
+      // Eén losse slotbotsing kan meteen boven de nieuwe logkop verder.
+      // Bij aanhoudende concurrentie voorkomt jitter gelijktijdige retries.
+      if (attempt > 0) {
+        final backoff = 50 << (attempt - 1);
+        await Future<void>.delayed(
+          Duration(milliseconds: backoff + _appendJitter.nextInt(backoff)),
+        );
+        _ensureLive();
+      }
       final present = await store.listSequences();
-      _knownMaxSeq = present.isEmpty ? 0 : present.reduce(math.max);
+      if (present.isNotEmpty) {
+        _knownMaxSeq = math.max(_knownMaxSeq, present.reduce(math.max));
+      }
       seq = _knownMaxSeq + 1;
     }
+    throw StateError(
+      'WebDAV collaboration log append exceeded $maxAttempts attempts',
+    );
   }
 
   Map<String, Object?> _asObject(Object? value) {

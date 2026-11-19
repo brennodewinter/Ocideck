@@ -27,6 +27,7 @@
 import 'dart:async';
 
 import '../models/deck.dart';
+import '../utils/log.dart';
 import 'collab_deck_diff.dart';
 import 'collab_session.dart';
 import 'deck_op.dart';
@@ -78,7 +79,25 @@ class CollabSessionController {
 
     for (final op in ops) {
       _rememberPending(op);
-      session.submit(op);
+      unawaited(_submit(op));
+    }
+  }
+
+  Future<void> _submit(DeckOp op) async {
+    final authority = session.isAuthority;
+    try {
+      await session.submit(op);
+    } catch (error, stack) {
+      logError('collab: local edit not sent', error, stack);
+      if (_disposed || authority || op is! SetSlideField) return;
+      final key = _fieldKey(op.slideId, op.field);
+      final pending = _inflight[key];
+      final index =
+          pending?.indexWhere((value) => collabValuesEqual(value, op.value)) ??
+          -1;
+      if (index < 0) return;
+      pending!.removeAt(index);
+      if (pending.isEmpty) _clearField(key);
     }
   }
 

@@ -28,6 +28,7 @@ import 'package:xml/xml.dart';
 
 import '../collab/collab_crypto.dart';
 import '../collab/collab_device_directory.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 import 'companion_demux.dart';
 import 'xmpp_session.dart';
@@ -139,7 +140,7 @@ class XmppPresenceBeacon {
     final child = stanza.childByNs(presenceType);
     if (child == null) return;
     try {
-      final decoded = jsonDecode(child.innerText);
+      final decoded = jsonDecodeGuarded(child.innerText);
       if (decoded is! Map<String, Object?>) {
         logWarning('xmpp.presence.notObject', decoded);
         return;

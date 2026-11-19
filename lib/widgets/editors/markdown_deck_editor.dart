@@ -303,6 +303,19 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     _validationTimer = scheduleDeckChecks(
       args: args,
       current: () => mounted && _ctrl.text == args.source,
+      onFailure: () {
+        setState(() => _validationPending = false);
+        final messenger = ScaffoldMessenger.maybeOf(context);
+        messenger?.showSnackBar(
+          SnackBar(
+            content: Text(
+              context.l10n.d(
+                'De controle is mislukt — probeer het later opnieuw.',
+              ),
+            ),
+          ),
+        );
+      },
       onResult: (bundle) => setState(() {
         _validation = bundle.validation;
         _lastValidation = bundle.validation;

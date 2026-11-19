@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' show AppExitResponse;
 
@@ -9,6 +8,7 @@ import 'theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
+import 'l10n/app_localizations.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart'
     show configureNativeWindow, hasAppExitHandler;
@@ -19,8 +19,41 @@ import 'services/asset_staging.dart';
 import 'services/diagnostics/diagnostics.dart';
 import 'services/disk_traces.dart';
 import 'services/single_instance.dart';
+import 'utils/json_depth_guard.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
+
+void _runAudienceWindow(String raw) {
+  try {
+    final parsed = raw.isEmpty
+        ? const <String, Object?>{}
+        : jsonDecodeGuarded(raw);
+    if (parsed is! Map<String, Object?>) {
+      throw const FormatException(
+        'Audience window arguments must be an object',
+      );
+    }
+    runApp(AudienceWindowApp(args: parsed));
+  } on FormatException catch (error) {
+    logWarning('publieksvenster: ongeldige startargumenten', error.message);
+    runApp(
+      MaterialApp(
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
+        home: Builder(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: Text(context.l10n.d('Kon dit bestand niet openen.')),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 void main(List<String> args) {
   // Run the whole app inside a guarded zone so that no uncaught error — from a
@@ -95,10 +128,7 @@ void main(List<String> args) {
     BundledLicenses.register();
 
     if (audience) {
-      final raw = args.length >= 3 ? args[2] : '';
-      final parsed = raw.isEmpty ? const <String, dynamic>{} : jsonDecode(raw);
-      final map = Map<String, dynamic>.from(parsed as Map);
-      runApp(AudienceWindowApp(args: map));
+      _runAudienceWindow(args.length >= 3 ? args[2] : '');
       return;
     }
 

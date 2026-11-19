@@ -6,9 +6,9 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/painting.dart' show FileImage;
 
 import '../../services/form/form_image_service.dart';
+import '../../utils/image_limits.dart';
 import '../../utils/project_path.dart';
 import 'form_image_support.dart';
 
@@ -60,7 +60,9 @@ FormImageSupport? formImageSupportFor({
     probe: (paths) => probeFormImages(paths, projectPath: projectPath),
     preview: (path) {
       final absolute = resolveSlideAssetPath(path, projectPath);
-      return absolute == null ? null : FileImage(File(absolute));
+      return absolute == null
+          ? null
+          : cappedFileImage(File(absolute), projectPath: projectPath);
     },
   );
 }

@@ -72,6 +72,8 @@ import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
 
+import '../utils/json_depth_guard.dart';
+
 // One instance of each algorithm; they are stateless and cheap to share.
 final _x25519 = X25519();
 final _ed25519 = Ed25519();
@@ -478,7 +480,7 @@ class CollabCrypto {
       aad,
       'bad-tag',
     );
-    final decoded = jsonDecode(utf8.decode(plain));
+    final decoded = jsonDecodeGuarded(utf8.decode(plain));
     if (decoded is! Map<String, Object?>) {
       throw const CollabCryptoException('bad-plaintext');
     }

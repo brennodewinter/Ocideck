@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../models/markdown_validation.dart';
 import '../models/markdown_writing_suggestion.dart';
 import '../models/marp_compatibility.dart';
+import '../utils/log.dart';
 import 'markdown_validator.dart';
 import 'marp_compatibility.dart';
 
@@ -58,12 +59,19 @@ Timer scheduleDeckChecks({
   required DeckCheckArgs args,
   required bool Function() current,
   required void Function(DeckCheckResult) onResult,
+  void Function()? onFailure,
 }) {
   return Timer(const Duration(milliseconds: 350), () {
     unawaited(
-      deckChecksRunner(args).then((bundle) {
-        if (current()) onResult(bundle);
-      }),
+      Future.sync(() => deckChecksRunner(args)).then(
+        (bundle) {
+          if (current()) onResult(bundle);
+        },
+        onError: (Object error, StackTrace stack) {
+          logError('deck source checks', error, stack);
+          if (current()) onFailure?.call();
+        },
+      ),
     );
   });
 }

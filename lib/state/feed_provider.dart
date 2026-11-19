@@ -27,6 +27,7 @@ import '../services/feeds/feed_models.dart';
 import '../services/feeds/feed_parser.dart';
 import '../services/feeds/feed_store.dart';
 import '../services/file_service.dart' show ImportFailure;
+import '../utils/log.dart';
 import 'settings_provider.dart';
 
 /// Ophaalfunctie achter de controles — testbaar maakbaar zonder het
@@ -215,13 +216,19 @@ class FeedStoreNotifier extends Notifier<List<FeedSubscription>> {
     await _persist();
   }
 
-  /// Onthoud het sessie-pad van een opgehaalde enclosure — vluchtig,
-  /// dus geen persist nodig (zie het veldcommentaar in de store).
-  void noteDownloadedPath(Uri feedUrl, String episodeKey, String path) {
+  /// Onthoud het sessiepad en wis een eerder vastgelegde downloadfout.
+  Future<void> noteDownloadedPath(
+    Uri feedUrl,
+    String episodeKey,
+    String path,
+  ) async {
     final ep = _find(feedUrl)?.episodes[episodeKey];
     if (ep == null) return;
+    final failed = ep.autoDownloadFailed;
     ep.downloadedPath = path;
+    ep.autoDownloadFailed = false;
     state = [...state];
+    if (failed) await _persist();
   }
 
   /// Controleer alles wat nu aan de beurt is. `force` slaat de interval-
@@ -304,15 +311,35 @@ class FeedStoreNotifier extends Notifier<List<FeedSubscription>> {
     FeedEpisodeRecord ep,
   ) async {
     if (!sub.autoDownload || kIsWeb || !ref.mounted) return;
-    final dir = await getTemporaryDirectory();
-    final path = '${dir.path}/ocideck-feed-${_uuid.v4()}.bin';
-    final outcome = await downloadFeedMedia(
-      ep.enclosureUrl,
-      path,
-      maxBytes: autoDownloadMaxBytes,
-    );
-    if (!ref.mounted || outcome.path == null) return;
-    noteDownloadedPath(sub.feedUrl, ep.key, outcome.path!);
+    try {
+      final dir = await getTemporaryDirectory();
+      final path = '${dir.path}/ocideck-feed-${_uuid.v4()}.bin';
+      final outcome = await downloadFeedMedia(
+        ep.enclosureUrl,
+        path,
+        maxBytes: autoDownloadMaxBytes,
+      );
+      if (!ref.mounted) return;
+      if (outcome.path case final downloaded?) {
+        await noteDownloadedPath(sub.feedUrl, ep.key, downloaded);
+        return;
+      }
+      logWarning('feed auto-download failed', outcome.failure?.name);
+    } catch (error, stack) {
+      logError('feed auto-download', error, stack);
+    }
+    if (!ref.mounted ||
+        _find(sub.feedUrl)?.episodes[ep.key] != ep ||
+        ep.downloadedPath != null) {
+      return;
+    }
+    ep.autoDownloadFailed = true;
+    state = [...state];
+    try {
+      await _persist();
+    } catch (error, stack) {
+      logError('feed auto-download status', error, stack);
+    }
   }
 }
 

@@ -455,6 +455,20 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('desktop direct video requests a local file', (tester) async {
+    await tester.pumpWidget(
+      _host(
+        _video(path: 'https://example.com/clip.mp4'),
+        allowRemoteMedia: true,
+      ),
+    );
+    await settle(tester);
+
+    expect(find.text('Lokaal bestand'), findsOneWidget);
+    expect(find.byType(VideoPlayer), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
   // ── Embeds: online media OFF ─────────────────────────────────────────────────
   testWidgets('YouTube embed with online media OFF shows the blocked notice', (
     tester,

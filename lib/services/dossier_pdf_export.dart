@@ -13,6 +13,7 @@ import 'classification_enforcement_policy.dart';
 import 'classification_policy.dart';
 import 'document_dossier_store.dart';
 import 'document_export_service.dart';
+import 'image_service.dart';
 import 'markdown_service.dart';
 import 'pdf/document_pdf_blocks.dart';
 import 'pdf/document_pdf_fonts.dart';
@@ -74,7 +75,7 @@ Future<Uint8List> buildDossierPdf(
         PdfSpan(entryTitles[i]),
       ]),
   ];
-  final images = <String, Uint8List>{};
+  final images = _DossierImages();
   for (var i = 0; i < verified.length; i++) {
     await _appendEntry(
       blocks,
@@ -101,7 +102,7 @@ Future<Uint8List> buildDossierPdf(
       PdfVerbatimKind.mermaid => 'Diagram',
       PdfVerbatimKind.chart => 'Grafiek',
     },
-    images: images,
+    images: images.bytes,
     chrome: const DocumentPdfChrome(showPageNumbers: true),
   );
 }
@@ -186,7 +187,7 @@ Future<void> _appendEntry(
   int index,
   String title,
   _DossierPdfProjection projection,
-  Map<String, Uint8List> images, {
+  _DossierImages images, {
   required bool includeInterleaves,
 }) async {
   final sourceBytes = await File(path).readAsBytes();
@@ -257,6 +258,36 @@ Future<List<PdfBlock>> _interleaf(
 
 String _safe(String value) => PrivacyProjection.redactText(value).text;
 
+class _DossierImages {
+  static const _maxTotalBytes = 128 * 1024 * 1024;
+  final bytes = <String, Uint8List>{};
+  var _total = 0;
+
+  Future<void> add(String key, File file) async {
+    final handle = await file.open();
+    try {
+      final size = await handle.length();
+      if (size > ImageService.maxImageBytes || size > _maxTotalBytes - _total) {
+        throw FileSystemException(
+          'Afbeeldingslimiet voor dossier-PDF overschreden',
+          file.path,
+        );
+      }
+      final data = await handle.read(size + 1);
+      if (data.length != size) {
+        throw FileSystemException(
+          'Afbeelding gewijzigd tijdens lezen',
+          file.path,
+        );
+      }
+      bytes[key] = data;
+      _total += size;
+    } finally {
+      await handle.close();
+    }
+  }
+}
+
 /// Give each image a dossier-unique key and read only files beside its source.
 /// Symlinks and escapes are rejected before their bytes can enter the PDF.
 Future<List<PdfBlock>> _embedLocalImages(
@@ -264,7 +295,7 @@ Future<List<PdfBlock>> _embedLocalImages(
   String sourcePath,
   String entryId,
   List<String> imageRefs,
-  Map<String, Uint8List> images,
+  _DossierImages images,
 ) async {
   final root = p.dirname(sourcePath);
   var next = 0;
@@ -307,7 +338,7 @@ Future<List<PdfBlock>> _embedLocalImages(
             );
           }
           final key = 'dossier-image:$entryId:${next++}';
-          images[key] = await File(path).readAsBytes();
+          await images.add(key, File(path));
           output.add(PdfImageBlock(key, alt: alt));
         case PdfQuoteBlock(:final blocks):
           output.add(PdfQuoteBlock(await visit(blocks)));

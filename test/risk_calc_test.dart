@@ -138,6 +138,26 @@ void main() {
     );
   });
 
+  group('begrenzing', () {
+    test('diep geneste expressies zijn ongeldig, geen stackoverflow', () {
+      // Parser en evaluator recureerden voorheen onbegrensd: duizenden
+      // unaire minnen of haakjes gaven een StackOverflowError die de
+      // `on Exception`-filters ontloopt.
+      expect(_eval('${'-' * 5000}1', 0).error, CalcErrors.invalid);
+      expect(_eval('${'(' * 5000}1${')' * 5000}', 0).error, CalcErrors.invalid);
+    });
+
+    test('een absurd lange platte expressie is ongeldig', () {
+      // De evaluator recureert over de linkertak van de boom; een keten
+      // van duizenden termen sloeg zonder lengtegrens ook om.
+      expect(_eval('${'1+' * 5000}1', 0).error, CalcErrors.invalid);
+    });
+
+    test('een eerlijke formule binnen de grens werkt nog', () {
+      expect(_eval('(((((s_n + o_n))))) * -d_n', 0).value, (8 + 2) * -3);
+    });
+  });
+
   group('schrijfroutes', () {
     test('addOciCalcToTable stapelt de marker en materialiseert de kolom', () {
       final t = _withCalc(

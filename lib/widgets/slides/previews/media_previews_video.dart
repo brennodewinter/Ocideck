@@ -111,11 +111,6 @@ class _VideoPreviewState extends State<_VideoPreview>
   }
 
   @override
-  bool mediaUrlIsDeckAsset(String url) =>
-      url ==
-      resolveDeckAssetUrl(widget.slide.videoPath, DeckAssetScope.read(context));
-
-  @override
   int get mediaStartMs => widget.slide.videoStartMs;
 
   @override
@@ -214,6 +209,12 @@ class _VideoPreviewState extends State<_VideoPreview>
             else if (widget.source.kind == VideoSourceKind.remoteFile &&
                 !widget.allowRemoteMedia)
               _remoteBlockedPlaceholder(context, widget.slide.videoPath)
+            else if (mediaLoadFailure == MediaLoadFailure.localFileRequired)
+              _mediaPlaceholder(
+                context,
+                Icons.movie_outlined,
+                context.l10n.d('Lokaal bestand'),
+              )
             else if (mediaLoadFailure == MediaLoadFailure.remoteRefused)
               // Online media staat aan, maar déze URL is door de SSRF-poort
               // geweigerd (privé/LAN/loopback). Zelfde melding als bij een
