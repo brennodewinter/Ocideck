@@ -92,6 +92,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
   final Set<String> _selectedIds = {};
   String _query = '';
   _SortMode _sortMode = _SortMode.name;
+  double _thumbnailScale = 100;
 
   @override
   void initState() {
@@ -254,10 +255,10 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     final selectedCount = _selectedIds.length;
 
     return OciDialogShell(
-      width: 860,
-      height: 700,
-      maxWidth: 980,
-      maxHeight: 780,
+      width: double.infinity,
+      height: double.infinity,
+      maxWidth: 1600,
+      maxHeight: 1080,
       child: OciDialogScaffold(
         title: l10n.d('Slides importeren'),
         leading: const Icon(Icons.library_add_outlined),
@@ -274,6 +275,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _toolbar(),
+            if (visible.isNotEmpty && !_loading) _thumbnailSizeControl(),
             const SizedBox(height: 12),
             Expanded(child: _body(visible)),
           ],
@@ -399,6 +401,40 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     );
   }
 
+  Widget _thumbnailSizeControl() {
+    final l10n = context.l10n;
+    final label = l10n.d('Grootte miniaturen');
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 370),
+        child: Row(
+          children: [
+            Flexible(
+              child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
+            ),
+            Expanded(
+              child: Semantics(
+                label: label,
+                child: Slider(
+                  key: const Key('import-thumbnail-size'),
+                  value: _thumbnailScale,
+                  min: 75,
+                  max: 250,
+                  divisions: 7,
+                  label: '${_thumbnailScale.round()}%',
+                  semanticFormatterCallback: (value) => '${value.round()}%',
+                  onChanged: (value) => setState(() => _thumbnailScale = value),
+                ),
+              ),
+            ),
+            SizedBox(width: 44, child: Text('${_thumbnailScale.round()}%')),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _body(List<(ScannedPresentation, List<Slide>)> visible) {
     final l10n = context.l10n;
     if (_loading) {
@@ -456,6 +492,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
         return _PresentationSection(
           presentation: pres,
           slides: slides,
+          thumbnailWidth: 224 * _thumbnailScale / 100,
           selectedIds: _selectedIds,
           groupByPrimaryId: groupByPrimaryId,
           similarByPrimaryId: similarByPrimaryId,
@@ -500,6 +537,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
 class _PresentationSection extends StatelessWidget {
   final ScannedPresentation presentation;
   final List<Slide> slides;
+  final double thumbnailWidth;
   final Set<String> selectedIds;
   final Map<String, SlideGroup<_Occ>> groupByPrimaryId;
   final Map<String, List<SlideGroup<_Occ>>> similarByPrimaryId;
@@ -510,6 +548,7 @@ class _PresentationSection extends StatelessWidget {
   const _PresentationSection({
     required this.presentation,
     required this.slides,
+    required this.thumbnailWidth,
     required this.selectedIds,
     required this.groupByPrimaryId,
     required this.similarByPrimaryId,
@@ -575,20 +614,23 @@ class _PresentationSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: [
-              for (final slide in slides)
-                _slideCardFor(
-                  slide,
-                  deck.projectPath,
-                  deck.slideProfileAt(deck.slides.indexOf(slide)),
-                  deck.marpStyle,
-                  deck.slideSize,
-                  presentation.modified,
-                ),
-            ],
+          LayoutBuilder(
+            builder: (context, constraints) => Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                for (final slide in slides)
+                  _slideCardFor(
+                    slide,
+                    deck.projectPath,
+                    deck.slideProfileAt(deck.slides.indexOf(slide)),
+                    deck.marpStyle,
+                    deck.slideSize,
+                    presentation.modified,
+                    thumbnailWidth.clamp(0.0, constraints.maxWidth),
+                  ),
+              ],
+            ),
           ),
         ],
       ),
@@ -602,11 +644,13 @@ class _PresentationSection extends StatelessWidget {
     MarpStyle deckMarpStyle,
     PageSizeSpec? slideSize,
     DateTime? modified,
+    double width,
   ) {
     final group = groupByPrimaryId[slide.id];
     final similar = similarByPrimaryId[slide.id] ?? const [];
     return _SlideCard(
       slide: slide,
+      width: width,
       projectPath: projectPath,
       themeProfile: theme,
       deckMarpStyle: deckMarpStyle,
@@ -626,6 +670,7 @@ class _PresentationSection extends StatelessWidget {
 
 class _SlideCard extends StatelessWidget {
   final Slide slide;
+  final double width;
   final String? projectPath;
   final ThemeProfile themeProfile;
   final MarpStyle deckMarpStyle;
@@ -641,6 +686,7 @@ class _SlideCard extends StatelessWidget {
 
   const _SlideCard({
     required this.slide,
+    required this.width,
     required this.projectPath,
     required this.themeProfile,
     required this.deckMarpStyle,
@@ -656,7 +702,7 @@ class _SlideCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return SizedBox(
-      width: 168,
+      width: width,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -14,6 +14,7 @@ import 'package:ocideck/widgets/dialogs/dialog_shell.dart';
 import 'package:ocideck/widgets/dialogs/open_presentation_dialog.dart';
 import 'package:ocideck/widgets/dialogs/scan_library_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
+import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 import 'support/pump_until.dart';
 
@@ -256,6 +257,64 @@ void main() {
     expect(find.byType(ImportSlidesDialog), findsOneWidget);
     expect(find.byType(OciDialogShell), findsOneWidget);
   });
+
+  testWidgets(
+    'dia-import schaalt miniaturen zonder selectie of volgorde te verliezen',
+    (tester) async {
+      File('${dir.path}/demo.md').writeAsStringSync(
+        '---\nmarp: true\ntitle: Demo\n---\n\n# Eerste dia\n\n---\n\n# Tweede dia\n',
+      );
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(1800, 1200);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      List<Slide>? imported;
+      await tester.pumpWidget(
+        _host((context) async {
+          imported = await ImportSlidesDialog.show(
+            context,
+            fileService: _fileService(dir.path),
+            initialDirectory: dir.path,
+          );
+        }),
+      );
+      await _openAndScan(tester);
+
+      final surface = find.byKey(const Key('oci-dialog-surface'));
+      final cards = find.byType(SlidePreviewWidget);
+      expect(tester.getSize(surface).width, greaterThan(1000));
+      expect(cards, findsNWidgets(2));
+      final originalWidth = tester.getSize(cards.first).width;
+      await tester.tap(cards.last);
+      await tester.tap(cards.first);
+      await tester.pump();
+
+      final slider = find.byKey(const Key('import-thumbnail-size'));
+      await tester.tapAt(
+        tester.getRect(slider).centerRight - const Offset(25, 0),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.getSize(cards.first).width, greaterThan(originalWidth));
+      expect(find.text('Importeren (2)'), findsOneWidget);
+
+      tester.view.physicalSize = const Size(390, 640);
+      await tester.binding.setSurfaceSize(const Size(390, 640));
+      await tester.pumpAndSettle();
+      expect(tester.getSize(surface).width, lessThan(390));
+      expect(
+        tester.getSize(cards.first).width,
+        lessThan(tester.getSize(surface).width),
+      );
+      expect(tester.takeException(), isNull);
+
+      await tester.tap(find.text('Importeren (2)'));
+      await tester.pumpAndSettle();
+      expect(imported?.map((slide) => slide.title), [
+        'Eerste dia',
+        'Tweede dia',
+      ]);
+    },
+  );
 
   testWidgets('Slides importeren ziet een extern aangemaakt deck na verversen', (
     tester,

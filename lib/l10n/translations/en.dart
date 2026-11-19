@@ -1352,6 +1352,7 @@ const _dutchSourceAddEn = {
   'Dit beeld als vast logo gebruiken': 'Use this image as a permanent logo',
   'Naam van stijl': 'Style name',
   'Deze stijlnaam bestaat al.': 'This style name already exists.',
+  'Grootte miniaturen': 'Thumbnail size',
   'Presentatiedatum': 'Presentation date',
   'Geen datum bekend': 'No date available',
   'Stijl bewaren': 'Save style',
