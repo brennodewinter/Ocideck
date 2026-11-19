@@ -64,6 +64,7 @@ class _EditorToolbar extends StatelessWidget {
         revealElearning || slide.type.category == SlideCategory.eLearning;
     final picked = await AddSlideDialog.show(
       context,
+      selectedType: slide.type,
       revealInfoSafety: revealSec,
       revealProcesverbetering: revealImp,
       revealManagementsysteem: revealMgmt,

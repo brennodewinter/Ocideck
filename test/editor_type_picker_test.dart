@@ -28,6 +28,7 @@ void main() {
     required bool reveal,
     SlideType initialType = SlideType.title,
     double width = 1000,
+    double height = 2200,
   }) async {
     final container = ProviderContainer(
       overrides: [infoSafetyRevealProvider.overrideWithValue(reveal)],
@@ -39,7 +40,7 @@ void main() {
       notifier.updateSlide(0, Slide.create(initialType));
     }
 
-    await tester.binding.setSurfaceSize(Size(width, 2200));
+    await tester.binding.setSurfaceSize(Size(width, height));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     await tester.pumpWidget(
@@ -75,19 +76,51 @@ void main() {
   testWidgets('the TYPE selector opens the visual picker and applies a type', (
     tester,
   ) async {
-    final container = await pump(tester, reveal: false);
+    final container = await pump(
+      tester,
+      reveal: false,
+      initialType: SlideType.table,
+      height: 600,
+    );
     expect(typeButton, findsOneWidget);
 
     await tester.tap(typeButton);
     await tester.pumpAndSettle();
-    expect(find.byType(AddSlideDialog), findsOneWidget);
+    final dialog = find.byType(AddSlideDialog);
+    Finder card(SlideType type) =>
+        find.descendant(of: dialog, matching: find.byKey(ValueKey(type)));
+    bool isSelected(SlideType type) => tester
+        .widgetList<Semantics>(
+          find.descendant(of: card(type), matching: find.byType(Semantics)),
+        )
+        .any((node) => node.properties.selected == true);
 
-    await tester.tap(find.text('Tabel'));
+    expect(card(SlideType.table).hitTestable(), findsOneWidget);
+    expect(isSelected(SlideType.table), isTrue);
+    expect(isSelected(SlideType.title), isFalse);
+    final ink = tester.widget<Ink>(
+      find.descendant(of: card(SlideType.table), matching: find.byType(Ink)),
+    );
+    final decoration = ink.decoration! as BoxDecoration;
+    expect(decoration.color, AppTheme.warningBg);
+    expect((decoration.border! as Border).top.color, AppTheme.amber600);
+
+    await tester.enterText(
+      find.descendant(of: dialog, matching: find.byType(TextField)),
+      'Titelpagina',
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(card(SlideType.title));
     await tester.pumpAndSettle();
     expect(
       container.read(deckProvider).deck!.slides.single.type,
-      SlideType.table,
+      SlideType.title,
     );
+
+    await tester.tap(typeButton);
+    await tester.pumpAndSettle();
+    expect(isSelected(SlideType.title), isTrue);
+    expect(isSelected(SlideType.table), isFalse);
   });
 
   testWidgets('de STIJL-keuze blijft na een herstart geselecteerd', (
