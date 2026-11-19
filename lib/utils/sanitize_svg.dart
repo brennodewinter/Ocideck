@@ -4,6 +4,7 @@ import 'dart:isolate';
 import 'package:flutter/foundation.dart';
 import 'package:xml/xml.dart';
 
+import '../services/import/utils/xml_utils.dart';
 import 'log.dart';
 
 /// Strip everything from Mermaid SVG output that the renderer does not read,
@@ -114,6 +115,7 @@ String? _sanitizeSvg(
 
   final XmlDocument document;
   try {
+    requireXmlDepth(svg);
     document = XmlDocument.parse(svg);
   } catch (e) {
     logWarning('$logName: SVG parse failed', e);
@@ -383,7 +385,10 @@ Uint8List? _decodeSafeEmbeddedPngDataUrl(String value) {
 Uint8List? extractSoleEmbeddedPng(String sanitizedSvg) {
   final XmlDocument document;
   try {
+    requireXmlDepth(sanitizedSvg);
     document = XmlDocument.parse(sanitizedSvg);
+  } on FormatException {
+    return null;
   } on XmlParserException {
     return null;
   }
