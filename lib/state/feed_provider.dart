@@ -330,8 +330,9 @@ class FeedStoreNotifier extends Notifier<List<FeedSubscription>> {
     }
     if (!ref.mounted ||
         _find(sub.feedUrl)?.episodes[ep.key] != ep ||
-        ep.downloadedPath != null)
+        ep.downloadedPath != null) {
       return;
+    }
     ep.autoDownloadFailed = true;
     state = [...state];
     try {

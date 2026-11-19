@@ -233,8 +233,9 @@ class XmppCollabLaunch {
     _timer ??= Timer.periodic(interval, (_) {
       final retryAfter = _retryAfter;
       if (_syncing != null ||
-          (retryAfter != null && DateTime.now().isBefore(retryAfter)))
+          (retryAfter != null && DateTime.now().isBefore(retryAfter))) {
         return;
+      }
       unawaited(_syncTick());
     });
   }

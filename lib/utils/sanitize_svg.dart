@@ -389,8 +389,6 @@ Uint8List? extractSoleEmbeddedPng(String sanitizedSvg) {
     document = XmlDocument.parse(sanitizedSvg);
   } on FormatException {
     return null;
-  } on XmlParserException {
-    return null;
   }
 
   XmlElement? image;

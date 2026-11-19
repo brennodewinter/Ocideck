@@ -178,7 +178,7 @@ class CollabSession {
           unawaited(
             _sendThrough(
               _unsent.last.version,
-            ).then<void>((_) {}, onError: (Object _, StackTrace __) {}),
+            ).then<void>((_) {}, onError: (Object _, StackTrace _) {}),
           );
         });
       },
@@ -214,10 +214,11 @@ class CollabSession {
   Future<void> acquireLock(String slideId) async {
     _ensureLive();
     await transport.setLock(slideId, held: true);
-    if (!_disposed)
+    if (!_disposed) {
       _onRemoteLock(
         LockEvent(slideId: slideId, participantId: participantId, held: true),
       );
+    }
   }
 
   /// Release a lock this session holds (release on blur / slide change).

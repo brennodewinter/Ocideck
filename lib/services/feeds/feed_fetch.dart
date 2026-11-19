@@ -78,7 +78,9 @@ class FeedFetchResult {
 Uri _credentialsGuarded(Uri target, Uri origin) {
   if (target.userInfo.isEmpty ||
       (NetGuard.maySendReusableSecret(target.scheme, host: target.host) &&
-          target.origin == origin.origin &&
+          target.scheme == origin.scheme &&
+          target.host == origin.host &&
+          target.port == origin.port &&
           target.userInfo == origin.userInfo)) {
     return target;
   }
