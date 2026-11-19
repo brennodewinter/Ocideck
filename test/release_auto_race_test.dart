@@ -193,6 +193,42 @@ cmd_status
     }
   }, skip: skipOnWindows);
 
+  test('website-sondes lezen een grote pagina helemaal onder pipefail', () {
+    final state = Directory.systemTemp.createTempSync('ocideck-website-pipe-');
+    addTearDown(() => state.deleteSync(recursive: true));
+    const assets = [
+      'ocideck-linux-amd64-9.9.9.deb',
+      'ocideck-linux-x86_64-9.9.9.AppImage',
+      'ocideck-linux-debian12-x86_64-9.9.9.tar.gz',
+      'ocideck-macos-9.9.9.zip',
+      'ocideck-windows-x64-setup-9.9.9.exe',
+    ];
+    final html =
+        assets
+            .map(
+              (asset) =>
+                  '<a href="https://forge.invalid/releases/download/v9.9.9/'
+                  '$asset">download</a>\n',
+            )
+            .join() +
+        List.filled(32768, 'padding for a real download page\n').join();
+    final complete = File('${state.path}/complete.html')
+      ..writeAsStringSync(html);
+    final missing = File('${state.path}/missing.html')
+      ..writeAsStringSync(html.replaceAll(assets.last, 'other.exe'));
+    final result = runReleaseHarness('''
+COMPLETE='${complete.path}'
+MISSING='${missing.path}'
+version="\$(cat "\$COMPLETE" | website_version_from_html)" || exit \$?
+[ "\$version" = 9.9.9 ] || exit 91
+cat "\$COMPLETE" | website_html_has_expected_downloads || exit \$?
+if cat "\$MISSING" | website_html_has_expected_downloads; then exit 92; fi
+printf 'verified\\n'
+''');
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+    expect(result.stdout, contains('verified'));
+  }, skip: skipOnWindows);
+
   // --status rapporteerde de webdemo niet; het advies zei "controleer nog de
   // live web-versie", en dat deed niemand. v0.6.5 en v0.6.6 stonden compleet in
   // het rapport terwijl de demo op 0.6.4 bleef staan.

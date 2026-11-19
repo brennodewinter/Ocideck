@@ -601,11 +601,12 @@ download_release_asset() { # download_release_asset URL DEST
 
 # De versie in de downloadlinks van een opgehaalde downloadpagina (stdin → html).
 website_version_from_html() {
-  awk 'match($0, /releases\/download\/v[0-9]+\.[0-9]+\.[0-9]+/) {
+  # Lees de hele pijp: vroeg stoppen kan de schrijver SIGPIPE geven onder pipefail.
+  awk '!found && match($0, /releases\/download\/v[0-9]+\.[0-9]+\.[0-9]+/) {
       version = substr($0, RSTART, RLENGTH)
       sub(/^.*\/v/, "", version)
       print version
-      exit
+      found = 1
     }'
 }
 
@@ -614,7 +615,7 @@ website_html_has_expected_downloads() {
   local html asset
   html="$(cat)"
   while IFS= read -r asset; do
-    printf '%s' "$html" | grep -Fq "/releases/download/$TAG/$asset" || return 1
+    printf '%s' "$html" | grep -F "/releases/download/$TAG/$asset" >/dev/null || return 1
   done < <(expected_release_assets \
     | grep -E 'linux-amd64.*\.deb$|linux-x86_64.*\.AppImage$|linux-debian12.*\.tar\.gz$|macos-.*\.zip$|windows-x64-setup-.*\.exe$')
 }
