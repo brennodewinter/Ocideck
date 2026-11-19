@@ -1,5 +1,5 @@
 // The authority state machine and lock table of the collaboration layer
-// (COLLABORATION.md §5.3–5.4). This is pure sync logic over a [CollabTransport];
+// (COLLABORATION.md §5.3–5.4). This is state logic over a [CollabTransport];
 // it has no network code of its own and is driven end-to-end in tests by a
 // [LoopbackHub].
 //
@@ -27,8 +27,10 @@
 // highest observed version continues the sequence without a gap or a collision.
 
 import 'dart:async';
+import 'dart:collection';
 
 import '../models/deck.dart';
+import '../utils/log.dart';
 import 'collab_transport.dart';
 import 'deck_op.dart';
 
@@ -68,6 +70,10 @@ class CollabSession {
   final _deckChanges = StreamController<Deck>.broadcast();
   final _lockChanges = StreamController<Map<String, String>>.broadcast();
   bool _disposed = false;
+  final _unsent = Queue<DeckOp>();
+  Future<void> _sending = Future.value();
+  Timer? _retry;
+  var _retryCount = 0;
 
   /// The current deck as this session sees it.
   Deck get deck => _deck;
@@ -102,6 +108,8 @@ class CollabSession {
   void stepDown() {
     if (_disposed) return;
     _authority = false;
+    _unsent.clear();
+    _retry?.cancel();
   }
 
   /// Jump forward to a re-baselined snapshot (§5.2 strand-recovery): adopt its
@@ -111,6 +119,7 @@ class CollabSession {
   /// re-reads the jumped-to state. Returns whether it jumped.
   bool rebaseTo(Deck deck, int version) {
     if (_disposed || version <= _version) return false;
+    _unsent.clear();
     _deck = deck;
     _version = version;
     _deckChanges.add(_deck);
@@ -124,25 +133,72 @@ class CollabSession {
   Future<void> submit(DeckOp op) async {
     _ensureLive();
     if (isAuthority) {
-      _commit(op);
+      await _commit(op);
     } else {
       await transport.sendOp(op); // version 0 = intent for the authority
     }
   }
 
-  void _commit(DeckOp intent) {
+  Future<void> _commit(DeckOp intent) async {
     final op = intent.copyWithVersion(_version + 1);
     _deck = applyOp(_deck, op); // throws on an invalid op — fail-closed (P3)
     _version = op.version;
     _deckChanges.add(_deck);
-    transport.sendOp(op); // authoritative, version >= 1
+    _unsent.addLast(op);
+    await _sendThrough(op.version);
+  }
+
+  Future<void> _sendThrough(int version) {
+    final done = _sending.then((_) async {
+      while (!_disposed &&
+          _unsent.isNotEmpty &&
+          _unsent.first.version <= version) {
+        final op = _unsent.first;
+        // Retry the same version after an uncertain write. Followers discard
+        // a duplicate and never see a later version before this one.
+        await transport.sendOp(op);
+        if (_unsent.isNotEmpty && identical(_unsent.first, op)) {
+          _unsent.removeFirst();
+          _retryCount = 0;
+        }
+      }
+    });
+    _sending = done.then<void>(
+      (_) {},
+      onError: (Object error, StackTrace stack) {
+        logError('collab: authoritative operation not sent', error, stack);
+        if (_disposed ||
+            _unsent.isEmpty ||
+            (_retry?.isActive ?? false) ||
+            _retryCount >= 3) {
+          return;
+        }
+        _retry = Timer(Duration(seconds: 1 << _retryCount++), () {
+          if (_unsent.isEmpty || _disposed) return;
+          unawaited(
+            _sendThrough(
+              _unsent.last.version,
+            ).then<void>((_) {}, onError: (Object _, StackTrace __) {}),
+          );
+        });
+      },
+    );
+    return done;
+  }
+
+  Future<void> _commitReceived(DeckOp op) async {
+    try {
+      await _commit(op);
+    } catch (error, stack) {
+      logError('collab: could not commit remote edit', error, stack);
+    }
   }
 
   void _onRemoteOp(DeckOp op) {
     if (isAuthority) {
       // Anything reaching the authority is a non-authority intent; commit it so
       // it gets an authoritative version and is rebroadcast in order.
-      _commit(op);
+      unawaited(_commitReceived(op));
     } else if (op.version == _version + 1) {
       // Authoritative ops from the owner, applied strictly in version order. The
       // loopback delivers in send order; a gap (duplicate or reordering) is
@@ -157,19 +213,21 @@ class CollabSession {
   /// Claim the slide [slideId]'s lock (acquire on focus, §5.4).
   Future<void> acquireLock(String slideId) async {
     _ensureLive();
-    _locks[slideId] = participantId;
-    _lockChanges.add(locks);
     await transport.setLock(slideId, held: true);
+    if (!_disposed)
+      _onRemoteLock(
+        LockEvent(slideId: slideId, participantId: participantId, held: true),
+      );
   }
 
   /// Release a lock this session holds (release on blur / slide change).
   Future<void> releaseLock(String slideId) async {
     _ensureLive();
-    if (_locks[slideId] == participantId) {
+    await transport.setLock(slideId, held: false);
+    if (!_disposed && _locks[slideId] == participantId) {
       _locks.remove(slideId);
       _lockChanges.add(locks);
     }
-    await transport.setLock(slideId, held: false);
   }
 
   /// Authority-only: force a slide's lock open regardless of its holder (§5.4).
@@ -179,9 +237,11 @@ class CollabSession {
     if (!isAuthority) {
       throw StateError('only the session authority may forceUnlock');
     }
-    _locks.remove(slideId);
-    _lockChanges.add(locks);
     await transport.setLock(slideId, held: false, forced: true);
+    if (!_disposed) {
+      _locks.remove(slideId);
+      _lockChanges.add(locks);
+    }
   }
 
   void _onRemoteLock(LockEvent event) {
@@ -201,6 +261,8 @@ class CollabSession {
   Future<void> dispose() async {
     if (_disposed) return;
     _disposed = true;
+    _retry?.cancel();
+    _unsent.clear();
     await _opSub.cancel();
     await _lockSub.cancel();
     await _deckChanges.close();
