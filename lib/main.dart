@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' show AppExitResponse;
 
@@ -19,6 +18,7 @@ import 'services/asset_staging.dart';
 import 'services/diagnostics/diagnostics.dart';
 import 'services/disk_traces.dart';
 import 'services/single_instance.dart';
+import 'utils/json_depth_guard.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
 
@@ -96,9 +96,30 @@ void main(List<String> args) {
 
     if (audience) {
       final raw = args.length >= 3 ? args[2] : '';
-      final parsed = raw.isEmpty ? const <String, dynamic>{} : jsonDecode(raw);
-      final map = Map<String, dynamic>.from(parsed as Map);
-      runApp(AudienceWindowApp(args: map));
+      try {
+        final parsed = raw.isEmpty
+            ? const <String, Object?>{}
+            : jsonDecodeGuarded(raw);
+        if (parsed is! Map<String, Object?>) {
+          throw const FormatException(
+            'Audience window arguments must be an object',
+          );
+        }
+        runApp(AudienceWindowApp(args: parsed));
+      } on FormatException catch (error) {
+        logWarning('publieksvenster: ongeldige startargumenten', error.message);
+        runApp(
+          const MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Text(
+                  'Het publieksvenster kon niet worden geopend. Start de presentatie opnieuw.',
+                ),
+              ),
+            ),
+          ),
+        );
+      }
       return;
     }
 
