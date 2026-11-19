@@ -8,6 +8,19 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.14] — 2026-11-19
+
+### Changed
+
+- Herstel releasepoorten voor import en websitehuisstijl (0.7.14)
+- Toon presentatiedatums en vergroot de dia-import
+- Verbeter PowerPoint-import, stijlprofielen en diasplitsing
+- Merge release advisory follow-up (#3015)
+
+### Fixed
+
+- fix(homebrew): beperk de cask tot Apple Silicon
+
 ## [0.7.13] — 2026-11-18
 
 Volledige release voor macOS, Windows, Linux en web. Vervangt de ongetagde
