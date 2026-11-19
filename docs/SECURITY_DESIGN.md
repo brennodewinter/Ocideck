@@ -450,6 +450,16 @@ SSRF-pinned transports.
   can still receive one oversized network chunk before Dart rejects it; the cap
   prevents buffering the complete attacker-controlled response in the app.
 
+### Inline audio and video (#3055)
+
+The desktop slide player accepts local files. Direct HTTP(S) audio and video
+URLs, including paths resolved alongside a deck opened from a URL, are refused.
+The native decoder manages DNS, redirects and manifest subresources itself.
+An initial DNS check cannot enforce the desktop egress policy across those
+requests. To play this media on desktop, add a local copy to the presentation.
+Browser builds keep their existing browser/CSP boundary. Embedded provider
+players use the separate, opt-in embed path.
+
 ## 4. Asset-path containment
 
 Asset references (images, video, CSS) are confined to the project folder by the
@@ -1077,7 +1087,7 @@ be any.
 | Risk | Mitigation | Residual risk | Accepted on |
 | --- | --- | --- | --- |
 | **Malicious deck or asset** | Structural validation (§6), asset-path containment (§4), HTML-export sanitization (§5), magic-byte image checks (§6), bounded image decoding | The render-path symlink cache is keyed by path for the session, so a symlink swapped *after* its first render is not re-checked — a narrow TOCTOU on an already-open deck (also stated in `SECURITY.md`) | 2026-07-22 |
-| **Network / SSRF** | NetGuard classification, resolve-then-pin, no redirect following, byte caps (§3); trusted-internal is opt-in (§10) | Live media rendering (`NetworkImage`, the video controller, the embed WebView) does its own DNS and cannot be socket-pinned, and a positive host resolution is cached for the session. This is why online media is **off by default** and scoped to sessions the user enables (§7 of `SECURITY.md`) | 2026-07-22 |
+| **Network / SSRF** | NetGuard classification, resolve-then-pin, no redirect following, byte caps (§3); trusted-internal is opt-in (§10) | Browser media and embedded provider players rely on their own network policies. Online media is **off by default** and scoped to sessions the user enables (§7 of `SECURITY.md`) | 2026-07-22 |
 | **Data exfiltration via AI** | Fail-closed egress gate, dual consent for a cloud backend, blocked on web (§7) | The gate governs what OciDeck sends. What the configured backend then does with it is outside this design entirely — a self-hosted model and a cloud API get the same bytes and offer different guarantees, and only the user knows which they configured | 2026-07-22 |
 | **Tampering with a finalised report** | SHA-512 seal over the file's bytes, in a `.seal.json` sidecar (§9, §12) — a recipient recomputes it with `sha512sum` alone | Tamper-**evidence**, not tamper-proofing: anyone who edits the deck can recompute the seal. It shows *that* something changed, never *who* sealed it — and the sign-off now sits beside the hash rather than under it, so the statement is worth what the channel that carried it is worth. An RFC 3161 token adds *when*, and only as far as the message imprint — the TSA's own signature is not verified | 2026-07-22 |
 | **Supply-chain drift** | Hashed and OSV-checked export bundles, SBOM staleness gate, licence and pinned-action gates (§2) | The Dart package graph is scanned only advisorily (`make trivy` never fails, by configuration), because pub advisory coverage is sparse. One bundled component carries a named, deferred item — MathJax 3.2.2 — recorded in `SECURITY.md` *(corrected 2026-07-22: this named mermaid 10.9.6 as a second; the pin is 11.16.0 and carries no advisory)* | 2026-07-22 |

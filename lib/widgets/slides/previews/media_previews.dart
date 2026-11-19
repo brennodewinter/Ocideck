@@ -23,6 +23,9 @@ enum MediaLoadFailure {
   /// Zelfde geval als bij een afbeelding: "door de beveiliging geweigerd".
   remoteRefused,
 
+  /// De desktopspeler krijgt alleen lokale mediabestanden.
+  localFileRequired,
+
   /// De media was toegestaan maar kon niet worden geladen: 404, time-out, een
   /// TLS-fout, of een codec die het platform niet aankan. Zonder dit onderscheid
   /// viel een mislukte remote-video stil terug op een leeg "Video"-vak, niet te
@@ -62,12 +65,6 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
   /// bestandspad; voor een live URL de URL zelf.
   String? resolveMediaPath();
 
-  /// Of [url] via `resolveDeckAssetUrl` uit de deck-URL zelf kwam (#2282).
-  /// Zo'n bron is al door de herkomstgrens (same-origin én binnen de deckmap);
-  /// de NetGuard-SSRF-controle hoeft niet nog eens — en zou op web sowieso
-  /// weigeren, want dart:io-DNS ontbreekt daar. Subklassen overschrijven dit.
-  bool mediaUrlIsDeckAsset(String url) => false;
-
   /// Of de media automatisch start.
   bool get mediaAutoplay;
 
@@ -97,7 +94,8 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
     final uri = Uri.tryParse(src);
     final scheme = uri?.scheme.toLowerCase();
     final captions = mediaClosedCaptionFile(src);
-    if (uri != null &&
+    if (kIsWeb &&
+        uri != null &&
         (scheme == 'http' || scheme == 'https' || scheme == 'blob')) {
       return VideoPlayerController.networkUrl(uri, closedCaptionFile: captions);
     }
@@ -135,17 +133,20 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
       if (mounted) setState(() {});
       return;
     }
-    // SSRF gate for a remote media URL: resolve the host and refuse an internal
-    // target before VideoPlayerController.networkUrl, which would otherwise
-    // resolve+connect with no host check (see NetGuard.isAllowedRemoteUrlResolved).
-    // A URL resolved from the deck URL itself (mediaUrlIsDeckAsset) was already
-    // inside that boundary — the user picked that host for the deck.
-    if (VideoSource.looksLikeUrl(path) &&
-        !await NetGuard.isAllowedRemoteUrlResolved(path)) {
-      if (gen != _initGen) return;
-      _loadFailure = MediaLoadFailure.remoteRefused;
-      if (mounted) setState(() {}); // keep the placeholder visible
-      return;
+    if (VideoSource.looksLikeUrl(path)) {
+      // Een desktopdecoder beheert zijn eigen DNS, redirects en eventuele
+      // vervolgbronnen. Geef hem uitsluitend lokale bestanden.
+      if (!kIsWeb) {
+        _loadFailure = MediaLoadFailure.localFileRequired;
+        if (mounted) setState(() {});
+        return;
+      }
+      if (!await NetGuard.isAllowedRemoteUrlResolved(path)) {
+        if (gen != _initGen) return;
+        _loadFailure = MediaLoadFailure.remoteRefused;
+        if (mounted) setState(() {});
+        return;
+      }
     }
     if (gen != _initGen) return; // superseded while resolving
     final controller = createMediaController(path);
@@ -278,11 +279,6 @@ class _AudioPlaybackState extends State<_AudioPlayback>
   }
 
   @override
-  bool mediaUrlIsDeckAsset(String url) =>
-      url ==
-      resolveDeckAssetUrl(widget.audioPath, DeckAssetScope.read(context));
-
-  @override
   bool get mediaAutoplay => widget.autoplay;
 
   @override
@@ -299,7 +295,9 @@ class _AudioPlaybackState extends State<_AudioPlayback>
       right: widget.w * 0.035,
       bottom: widget.w * 0.035,
       child: IconButton(
-        tooltip: context.l10n.d('Audio'),
+        tooltip: mediaLoadFailure == MediaLoadFailure.localFileRequired
+            ? context.l10n.d('Voeg de audio toe als lokaal bestand')
+            : context.l10n.d('Audio'),
         onPressed: controller == null || !controller.value.isInitialized
             ? null
             : () {
