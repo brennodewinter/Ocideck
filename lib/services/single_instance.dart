@@ -24,7 +24,12 @@ class SingleInstanceGuard {
     this.replyTimeout = const Duration(seconds: 2),
   }) : socketPath = socketPath ?? defaultSocketPath();
 
-  final String socketPath;
+  final String? socketPath;
+  static const _maxFrameBytes = 64 * 1024;
+  static const _maxPaths = 128;
+  static const _maxConnections = 16;
+  static const _maxPendingPaths = 256;
+  var _connections = 0;
 
   /// Hoe lang een tweede starter op `ok` van de primaire wacht. Langer dan
   /// dit is een hangende primaire, geen geslaagde overdracht (#2679).
@@ -73,18 +78,41 @@ class SingleInstanceGuard {
     handler();
   }
 
-  /// De socket waarop de primaire luistert. `$XDG_RUNTIME_DIR` is per
-  /// gebruiker en op tmpfs — precies de grens die de mutex op Windows ook
-  /// hanteert. Valt die weg (sommige servers/ssh zonder logind), dan
-  /// `$TMPDIR` met de gebruikersnaam in de bestandsnaam.
-  static String defaultSocketPath() {
+  /// De Linux-runtime-directory hoort volgens de XDG-specificatie privé te
+  /// zijn. Zonder die gebruikersgrens opent OciDeck een eigen venster.
+  static String? defaultSocketPath() {
     final runtimeDir = Platform.environment['XDG_RUNTIME_DIR'];
-    if (runtimeDir != null && runtimeDir.isNotEmpty) {
-      return p.join(runtimeDir, 'ocideck.sock');
+    if (!Platform.isLinux || runtimeDir == null || !p.isAbsolute(runtimeDir)) {
+      return null;
     }
-    final user = Platform.environment['USER'] ?? 'unknown';
-    return p.join(Directory.systemTemp.path, 'ocideck-$user.sock');
+    try {
+      final real = Directory(runtimeDir).resolveSymbolicLinksSync();
+      final uid = Process.runSync('/usr/bin/id', ['-u']);
+      final stat = Process.runSync('/usr/bin/stat', [
+        '-Lc',
+        '%u:%a',
+        '--',
+        real,
+      ]);
+      if (uid.exitCode == 0 &&
+          stat.exitCode == 0 &&
+          stat.stdout.toString().trim() ==
+              '${uid.stdout.toString().trim()}:700' &&
+          FileSystemEntity.typeSync(real, followLinks: false) ==
+              FileSystemEntityType.directory) {
+        return p.join(real, 'ocideck.sock');
+      }
+    } catch (error) {
+      logWarning('SingleInstanceGuard: privédirectory niet beschikbaar', error);
+    }
+    return null;
   }
+
+  Future<Socket> _connect(String path) => Socket.connect(
+    InternetAddress(path, type: InternetAddressType.unix),
+    0,
+    timeout: replyTimeout,
+  );
 
   /// `true` alleen als de primaire `ok` terugstuurde. Een lege [paths] is
   /// een echte start zonder bestand: de primaire haalt dan alleen het
@@ -92,34 +120,33 @@ class SingleInstanceGuard {
   /// hangende primaire — dan `false`, zodat deze start niet stil verdwijnt.
   Future<bool> forwardToPrimary(List<String> paths) async {
     primaryDidNotAnswer = false;
+    final path = socketPath;
+    if (path == null) return false;
+    final lines = paths.where(looksLikeDeckLaunchArg).toList();
+    if (lines.length > _maxPaths ||
+        lines.any((line) => line.contains('\n') || line.contains('\r'))) {
+      return false;
+    }
+    final payload = utf8.encode(
+      '${lines.length}\n${lines.map((line) => '$line\n').join()}',
+    );
+    if (payload.length > _maxFrameBytes) return false;
     final Socket socket;
     try {
-      socket = await Socket.connect(
-        InternetAddress(socketPath, type: InternetAddressType.unix),
-        0,
-        timeout: replyTimeout,
-      );
+      socket = await _connect(path);
     } catch (e) {
       // Connect geweigerd = het normale pad: geen primaire → deze starter
       // wordt zelf de primaire. Stil terugvallen is hier de bedoeling.
       return false;
     }
     try {
-      // Eerste regel is het aantal paden. De primaire weet dan wanneer het
-      // bericht af is en kan `ok` terugsturen zonder dat wij de socket
-      // eerst sluiten — die heeft geen halve sluiting.
-      final lines = paths.where(looksLikeDeckLaunchArg).toList();
-      final payload = StringBuffer('${lines.length}\n');
-      for (final line in lines) {
-        payload.writeln(line);
-      }
-      socket.write(payload.toString());
-      await socket.flush();
-      final reply = await utf8.decoder
-          .bind(socket)
-          .join()
-          .timeout(replyTimeout);
-      final ok = reply.contains('ok');
+      socket.add(payload);
+      await socket.flush().timeout(replyTimeout);
+      final reply = await _decodeLimited(
+        socket,
+        16,
+      ).join().timeout(replyTimeout);
+      final ok = reply == 'ok\n';
       if (!ok) primaryDidNotAnswer = true;
       return ok;
     } on TimeoutException {
@@ -140,14 +167,26 @@ class SingleInstanceGuard {
   /// tweede bind, dan loopt de app onbewaakt door — de status quo vandaag,
   /// geen reden om een bruikbare start te weigeren.
   Future<void> becomePrimary() async {
-    _server = await _bind();
+    final path = socketPath;
+    if (path == null || _server != null) return;
+    _server = await _bind(path);
     if (_server == null) {
       try {
-        await File(socketPath).delete();
+        // Een bereikbare listener kan traag zijn, maar bezit zijn socket.
+        final running = await _connect(path);
+        running.destroy();
+        return;
+      } on SocketException {
+        // Alleen een achtergebleven pad in de privédirectory opruimen.
+      } on TimeoutException {
+        return;
+      }
+      try {
+        await File(path).delete();
       } catch (e) {
         logWarning('SingleInstanceGuard: stale socket wissen mislukt', e);
       }
-      _server = await _bind();
+      _server = await _bind(path);
     }
     if (_server == null) {
       logWarning(
@@ -156,8 +195,17 @@ class SingleInstanceGuard {
       return;
     }
     _server!.listen((connection) async {
+      if (_connections >= _maxConnections) {
+        connection.destroy();
+        return;
+      }
+      _connections++;
       try {
-        final paths = await _readFramedPaths(connection);
+        final paths = await _readFramedPaths(connection).timeout(replyTimeout);
+        if (_onFiles == null &&
+            _pending.length + paths.length > _maxPendingPaths) {
+          throw const FormatException('Too many pending launch paths');
+        }
         // Elk bericht, ook een leeg, haalt het venster naar voren. Een
         // tweede start zonder bestand deed hiervoor niets zichtbaars.
         _requestActivate();
@@ -170,19 +218,20 @@ class SingleInstanceGuard {
           }
         }
         connection.write('ok\n');
-        await connection.flush();
+        await connection.flush().timeout(replyTimeout);
       } catch (e) {
         logWarning('SingleInstanceGuard: bericht van tweede starter', e);
       } finally {
-        await connection.close();
+        connection.destroy();
+        _connections--;
       }
     });
   }
 
-  Future<ServerSocket?> _bind() async {
+  Future<ServerSocket?> _bind(String path) async {
     try {
       return await ServerSocket.bind(
-        InternetAddress(socketPath, type: InternetAddressType.unix),
+        InternetAddress(path, type: InternetAddressType.unix),
         0,
       );
     } catch (e) {
@@ -193,9 +242,12 @@ class SingleInstanceGuard {
   /// Nette afsluiting: luisteraar dicht en het socketbestand weg. Een crash
   /// laat het bestand achter; [becomePrimary] ruimt dat bij de volgende start.
   Future<void> dispose() async {
-    await _server?.close();
+    final server = _server;
+    if (server == null) return;
+    _server = null;
+    await server.close();
     try {
-      await File(socketPath).delete();
+      await File(socketPath!).delete();
     } catch (e) {
       // Bestaat het niet meer, dan is het doel al bereikt; een volgende start
       // ruimt een eventueel restant alsnog via becomePrimary.
@@ -211,13 +263,16 @@ SingleInstanceGuard? activeSingleInstance;
 /// Leest één geframed bericht: `aantal\n` en daarna precies zoveel regels.
 Future<List<String>> _readFramedPaths(Socket connection) async {
   final buffer = StringBuffer();
-  final incoming = utf8.decoder.bind(connection);
+  final incoming = _decodeLimited(
+    connection,
+    SingleInstanceGuard._maxFrameBytes,
+  );
   await for (final chunk in incoming) {
     buffer.write(chunk);
     final parsed = _framedPaths(buffer.toString());
     if (parsed != null) return parsed;
   }
-  return _framedPaths(buffer.toString()) ?? const [];
+  throw const FormatException('Incomplete launch frame');
 }
 
 /// `null` zolang de kop of de beloofde regels er nog niet zijn.
@@ -225,7 +280,9 @@ List<String>? _framedPaths(String text) {
   final nl = text.indexOf('\n');
   if (nl < 0) return null;
   final count = int.tryParse(text.substring(0, nl));
-  if (count == null || count < 0) return null;
+  if (count == null || count < 0 || count > SingleInstanceGuard._maxPaths) {
+    throw const FormatException('Invalid launch path count');
+  }
   if (count == 0) return const [];
   final lines = text.substring(nl + 1).split('\n');
   if (lines.length < count + 1) return null;
@@ -233,4 +290,16 @@ List<String>? _framedPaths(String text) {
     for (final line in lines.take(count))
       if (looksLikeDeckLaunchArg(line.trim())) line.trim(),
   ];
+}
+
+Stream<String> _decodeLimited(Socket socket, int maxBytes) {
+  var used = 0;
+  return utf8.decoder.bind(
+    socket.map<List<int>>((chunk) {
+      used += chunk.length;
+      if (used > maxBytes)
+        throw const FormatException('Launch frame too large');
+      return chunk;
+    }),
+  );
 }
