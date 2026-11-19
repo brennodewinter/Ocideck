@@ -1,6 +1,7 @@
 import 'package:path/path.dart' as p;
 
 import '../models/deck.dart';
+import '../models/marp_style.dart';
 import '../models/slide.dart';
 import 'file_service.dart' show PackageEntry;
 import 'image_service.dart';
@@ -64,7 +65,15 @@ Deck _attachPackageAssetsToMem(
   }
 
   Slide rewriteMedia(Slide s) {
-    var out = s;
+    final background = rewriteMarpBackgroundAssetPath(
+      s.marpStyle.backgroundImage,
+      memPath,
+    );
+    var out = background == s.marpStyle.backgroundImage
+        ? s
+        : s.copyWith(
+            marpStyle: s.marpStyle.copyWith(backgroundImage: background),
+          );
     final mv = mediaMemPath(s.videoPath);
     if (mv != null) out = out.copyWith(videoPath: mv);
     // Ondertitels zijn media-bytes zoals de video zelf (#2841).

@@ -5,10 +5,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/pptx/pptx_importer.dart';
+import 'package:ocideck/models/asset_origin.dart';
+import 'package:ocideck/models/marp_style.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/import/deck_builder.dart';
 import 'package:ocideck/services/import/logo_detection.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_chart.dart';
 import 'package:ocideck/services/import/models/source_video.dart';
+import 'package:ocideck/services/import/pipeline/slide_classifier.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/utils/image_resize.dart';
 
 import 'helpers/pptx_fixture.dart';
@@ -199,6 +205,106 @@ List<int> _zip(Map<String, Object> parts) {
 }
 
 void main() {
+  test('chooses the title using the font size of visible text', () async {
+    final bytes = _zip({
+      'ppt/presentation.xml': _presentationXml(1),
+      'ppt/_rels/presentation.xml.rels': _presRels(1),
+      'ppt/slides/slide1.xml':
+          '<p:sld xmlns:p="$_p" xmlns:a="$_a"><p:cSld><p:spTree>'
+          '<p:sp><p:txBody><a:p><a:r><a:rPr sz="2400"/><a:t>Announcements</a:t>'
+          '</a:r></a:p></p:txBody></p:sp>'
+          '<p:sp><p:spPr><a:xfrm><a:off x="0" y="3000000"/></a:xfrm></p:spPr>'
+          '<p:txBody><a:lstStyle><a:lvl1pPr><a:defRPr sz="3200"/></a:lvl1pPr>'
+          '</a:lstStyle><a:p><a:r><a:rPr sz="1800"/><a:t>Parking is free</a:t>'
+          '</a:r></a:p></p:txBody></p:sp></p:spTree></p:cSld></p:sld>',
+    });
+    final result = await PptxImporter().importBytes(bytes);
+    expect(result.okValue!.slides.single.title, 'Announcements');
+  });
+
+  test('keeps PPTX picture fills as editable slide backgrounds', () async {
+    addTearDown(WebAssetStore.clear);
+    String background(String id) =>
+        '<p:bg><p:bgPr><a:blipFill><a:blip r:embed="$id"/>'
+        '</a:blipFill></p:bgPr></p:bg>';
+    String slideWith(String fill) =>
+        _slideXml().replaceFirst('<p:cSld>', '<p:cSld>$fill');
+    String rels(Map<String, String> targets) =>
+        '<Relationships xmlns="$_pkg">${targets.entries.map((entry) => '<Relationship Id="${entry.key}" Target="${entry.value}"/>').join()}'
+        '</Relationships>';
+    final bytes = _zip({
+      'ppt/presentation.xml': _presentationXml(5),
+      'ppt/_rels/presentation.xml.rels': _presRels(5),
+      'ppt/slides/slide1.xml': slideWith(''),
+      'ppt/slides/slide2.xml': slideWith(background('picture')),
+      'ppt/slides/slide3.xml': slideWith(
+        '<p:bg><p:bgPr><a:solidFill>'
+        '<a:srgbClr val="FFFFFF"/></a:solidFill></p:bgPr></p:bg>',
+      ),
+      'ppt/slides/slide4.xml': slideWith(''),
+      'ppt/slides/slide5.xml': slideWith(''),
+      for (final index in [1, 2, 3, 4, 5])
+        'ppt/slides/_rels/slide$index.xml.rels': rels({
+          'layout': '../slideLayouts/layout${index == 4 ? 2 : 1}.xml',
+          if (index == 2) 'picture': '../media/slide.png',
+        }),
+      for (final index in [1, 2])
+        'ppt/slideLayouts/layout$index.xml':
+            '<p:sldLayout xmlns:p="$_p" xmlns:a="$_a" xmlns:r="$_r" showMasterSp="0">'
+            '<p:cSld>${index == 1 ? background('picture') : ''}</p:cSld>'
+            '</p:sldLayout>',
+      for (final index in [1, 2])
+        'ppt/slideLayouts/_rels/layout$index.xml.rels': rels({
+          'master': '../slideMasters/master.xml',
+          if (index == 1) 'picture': '../media/layout.png',
+        }),
+      'ppt/slideMasters/master.xml':
+          '<p:sldMaster xmlns:p="$_p" xmlns:a="$_a" xmlns:r="$_r">'
+          '<p:cSld>${background('picture')}</p:cSld></p:sldMaster>',
+      'ppt/slideMasters/_rels/master.xml.rels': rels({
+        'picture': '../media/master.png',
+      }),
+      for (final (name, width) in [('slide', 2), ('layout', 3), ('master', 4)])
+        'ppt/media/$name.png': img.encodePng(
+          img.Image(width: width, height: 1),
+        ),
+    });
+
+    final source = (await PptxImporter().importBytes(bytes)).okValue!;
+    expect(source.slides.map((slide) => slide.backgroundImage?.name), [
+      'layout.png',
+      'slide.png',
+      null,
+      'master.png',
+      'layout.png',
+    ]);
+    expect(source.slides.every((slide) => slide.images.isEmpty), isTrue);
+    final built = DeckBuilder().build(
+      source,
+      classifySourceSlides(source.slides),
+      title: 'Test',
+    );
+    expect(built.problemSlides, isEmpty);
+    expect(built.safetyFindings, isEmpty);
+    expect(
+      built.deck.slides.map((slide) => slide.type),
+      everyElement(SlideType.bullets),
+    );
+    final paths = built.deck.slides
+        .map(
+          (slide) => marpBackgroundAssetPath(slide.marpStyle.backgroundImage),
+        )
+        .toList();
+    expect(paths[2], isEmpty);
+    expect(paths[4], paths[0]);
+    expect(paths.where(WebAssetStore.isMemPath).toSet(), hasLength(3));
+    expect(deckCarriesMemoryAssets(built.deck), isTrue);
+    expect(
+      deckMemoryAssetPaths(built.deck),
+      paths.where(WebAssetStore.isMemPath).toSet(),
+    );
+  });
+
   test(
     'leest effectieve afbeeldingen uit dia, indeling en model zonder dubbelen',
     () async {

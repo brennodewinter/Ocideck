@@ -45,6 +45,7 @@ class SourceSlide {
     this.subtitle = '',
     this.bodyBlocks = const [],
     this.images = const [],
+    this.backgroundImage,
     this.chart,
     this.table,
     this.video,
@@ -66,6 +67,7 @@ class SourceSlide {
   final String subtitle;
   final List<BodyBlock> bodyBlocks;
   final List<SourceImage> images;
+  final SourceImage? backgroundImage;
   final SourceChart? chart;
   final SourceTable? table;
   final SourceVideo? video;

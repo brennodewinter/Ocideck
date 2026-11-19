@@ -538,7 +538,7 @@ extension _MarkdownParse on MarkdownService {
           ? BulletRevealMode.steps
           : BulletRevealMode.all,
       title: body.h1,
-      subtitle: type == SlideType.section ? body.paragraph : body.h2,
+      subtitle: _subtitleFor(type, imageTitleAbove, body.h2, body.paragraph),
       bullets: bullets,
       bullets2: bullets2,
       // De zichtbare opmaak beslist over de lijststijl zodra ze er iets over
@@ -735,3 +735,17 @@ MiauwDisposition _legacyMiauwDisposition(_FrontMatter fm) =>
       fm.legacyMiauwWaivers,
       fm.legacyMiauwConfirmations,
     );
+
+String _subtitleFor(
+  SlideType type,
+  bool imageTitleAbove,
+  String heading,
+  String paragraph,
+) => switch (type) {
+  SlideType.section => paragraph,
+  SlideType.image when imageTitleAbove => [
+    heading,
+    paragraph,
+  ].where((text) => text.isNotEmpty).join('\n'),
+  _ => heading,
+};

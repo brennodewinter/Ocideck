@@ -2,6 +2,7 @@ import 'package:crypto/crypto.dart' as crypto;
 
 import '../../models/chart.dart';
 import '../../models/display_window_spec.dart';
+import '../../models/marp_style.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../web_asset_store.dart';
@@ -61,6 +62,7 @@ class SlideFactory {
       imagePath2: s.images.length >= 2 ? _memPathFor(s.images[1]) : null,
       imageCaption: _caption(s, 0),
       imageCaption2: s.images.length >= 2 ? _caption(s, 1) : null,
+      marpStyle: _backgroundStyle(base, s),
       notes: _notes(s),
       skipped: s.isHidden ? true : null,
     );
@@ -92,6 +94,15 @@ class SlideFactory {
       notes: _notes(s),
       skipped: s.isHidden ? true : null,
       viewLimit: _viewLimitFor(built),
+      marpStyle: _backgroundStyle(built, s),
+    );
+  }
+
+  MarpStyle _backgroundStyle(Slide slide, SourceSlide source) {
+    final image = source.backgroundImage;
+    if (image == null) return slide.marpStyle;
+    return slide.marpStyle.copyWith(
+      backgroundImage: 'url("${_memPathFor(image)}")',
     );
   }
 
@@ -393,6 +404,7 @@ class SlideFactory {
   String _freeMarkdownBody(SourceSlide s) {
     final buf = StringBuffer();
     if (s.title.isNotEmpty) buf.writeln('# ${_safe(s.title)}');
+    if (s.subtitle.isNotEmpty) buf.writeln('\n${_safe(s.subtitle)}');
     for (final block in s.bodyBlocks) {
       buf.writeln();
       switch (block.kind) {

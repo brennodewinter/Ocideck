@@ -4,6 +4,7 @@ import '../services/asset_staging.dart';
 import '../services/slide_image_refs.dart';
 import '../services/web_asset_store.dart';
 import 'deck.dart';
+import 'marp_style.dart';
 import 'settings.dart';
 import 'slide.dart';
 
@@ -92,7 +93,10 @@ bool deckCarriesMemoryAssets(Deck deck) {
     if (mem(s.videoPath) || mem(s.videoCaptions) || mem(s.audioPath)) {
       return true;
     }
-    if (slideImagePaths(s).any(mem)) return true;
+    if (mem(marpBackgroundAssetPath(s.marpStyle.backgroundImage)) ||
+        slideImagePaths(s).any(mem)) {
+      return true;
+    }
   }
   return false;
 }
@@ -108,6 +112,7 @@ bool deckCarriesMemoryAssets(Deck deck) {
 void addSlideMemoryAssetPaths(Slide slide, Set<String> into) {
   for (final path in [
     ...slideImagePaths(slide),
+    marpBackgroundAssetPath(slide.marpStyle.backgroundImage),
     slide.videoPath,
     slide.videoCaptions,
     slide.audioPath,

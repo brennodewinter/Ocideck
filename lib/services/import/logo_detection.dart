@@ -265,6 +265,7 @@ SourceDeck sourceDeckWithoutLogo(
           for (final image in slide.images)
             if (!candidate.matches(image)) image,
         ],
+        backgroundImage: slide.backgroundImage,
         chart: slide.chart,
         table: slide.table,
         video: slide.video,

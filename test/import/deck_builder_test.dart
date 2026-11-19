@@ -14,6 +14,7 @@ import 'package:ocideck/services/import/models/source_slide.dart';
 import 'package:ocideck/services/import/models/source_table.dart';
 import 'package:ocideck/services/import/models/source_video.dart';
 import 'package:ocideck/services/import/pipeline/slide_classifier.dart';
+import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 
 /// Classify [slides] and build a deck from them the way the pipeline does.
@@ -232,6 +233,7 @@ void main() {
         title: 'Verwachtingen',
         bodyBlocks: const [
           BodyBlock(kind: BodyBlockKind.paragraph, text: 'Wat verwacht je?'),
+          BodyBlock(kind: BodyBlockKind.paragraph, text: 'Wat is haalbaar?'),
         ],
         images: [
           _img([1]),
@@ -255,7 +257,11 @@ void main() {
         title: 'Toelichting',
       );
 
-      expect(built.deck.slides[0].subtitle, 'Wat verwacht je?');
+      const expected = 'Wat verwacht je?\nWat is haalbaar?';
+      expect(built.deck.slides[0].subtitle, expected);
+      final markdown = MarkdownService();
+      final reopened = markdown.parseDeck(markdown.generateDeck(built.deck))!;
+      expect(reopened.slides[0].subtitle, expected);
       expect(built.deck.slides[0].imageTitleAbove, isTrue);
       expect(built.deck.slides[1].subtitle, 'Welke procedures zijn er?');
       expect(built.problemSlides, isEmpty);

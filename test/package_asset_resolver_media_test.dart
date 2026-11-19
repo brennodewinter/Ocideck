@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/package_asset_resolver.dart';
 import 'package:ocideck/services/pdf_evidence_service.dart';
@@ -20,6 +22,24 @@ void main() {
   Uint8List fill(int v, int len) => Uint8List.fromList(List.filled(len, v));
 
   Deck deckWith(List<Slide> slides) => Deck(title: 'demo', slides: slides);
+
+  test('een dia-achtergrond uit een pakket wijst naar de beeldbytes', () {
+    final png = img.encodePng(img.Image(width: 1, height: 1));
+    final out = attachPackageAssetsToMem(
+      deckWith([
+        Slide.create(SlideType.bullets).copyWith(
+          marpStyle: const MarpStyle(backgroundImage: 'url("images/bg.png")'),
+        ),
+      ]),
+      [(name: 'images/bg.png', bytes: png)],
+      'demo.md',
+    );
+    final path = marpBackgroundAssetPath(
+      out.slides.single.marpStyle.backgroundImage,
+    );
+    expect(WebAssetStore.isMemPath(path), isTrue);
+    expect(WebAssetStore.bytesFor(path), png);
+  });
 
   test(
     'pakket-video en -audio gaan naar mem: en de bytes staan in de store',
