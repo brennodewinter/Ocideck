@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -100,6 +101,27 @@ void main() {
       hasLength(1),
     );
   });
+
+  test(
+    'een weggefilterde stijlmarkering blijft gelden voor de volgende dia',
+    () {
+      const profile = ThemeProfile(name: 'Groot');
+      final deck = Deck(
+        title: 'Rapport',
+        slideStyles: const {'Groot': profile},
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(isDetail: true, styleName: 'Groot'),
+          Slide.create(SlideType.bullets).copyWith(title: 'Hoofdlijn'),
+        ],
+      );
+
+      final exported = bundleVan(deck, includeDetail: false).audience.deck;
+      expect(exported.slides.single.title, 'Hoofdlijn');
+      expect(exported.slideProfileAt(0), profile);
+    },
+  );
 
   test('het geredigeerde profiel negeert de dispositie van de auteur', () {
     // "Deze zaal mag het zien" is niet hetzelfde als "iedereen mag het zien".

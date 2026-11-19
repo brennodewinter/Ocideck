@@ -296,7 +296,7 @@ class _AudioPlaybackState extends State<_AudioPlayback>
       bottom: widget.w * 0.035,
       child: IconButton(
         tooltip: mediaLoadFailure == MediaLoadFailure.localFileRequired
-            ? context.l10n.d('Voeg de audio toe als lokaal bestand')
+            ? context.l10n.d('Kies een audiobestand')
             : context.l10n.d('Audio'),
         onPressed: controller == null || !controller.value.isInitialized
             ? null

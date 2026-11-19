@@ -455,9 +455,8 @@ class _ChartEditorState extends State<ChartEditor> {
       showErrorSnackBar(
         ScaffoldMessenger.of(context),
         context.l10n,
-        context.l10n.d(
-          'De CSV kon niet worden gelezen. Gebruik een UTF-8-bestand van maximaal 2 MiB en 100.000 cellen.',
-        ),
+        '${context.l10n.d('Het bestand kon niet worden gelezen.')} '
+        '(CSV UTF-8 · ≤ 2 MiB · ≤ 100 000)',
       );
     }
   }

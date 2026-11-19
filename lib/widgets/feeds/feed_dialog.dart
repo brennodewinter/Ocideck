@@ -201,7 +201,8 @@ Widget _episodeTile(
       [
         if (date.isNotEmpty) date,
         episode.enclosureType,
-        if (autoDownloadFailed) l10n.d('Automatisch downloaden mislukt'),
+        if (autoDownloadFailed)
+          l10n.d('Downloaden mislukt:').replaceFirst(RegExp(r':$'), ''),
       ].where((s) => s.isNotEmpty).join(' · '),
       style: TextStyle(fontSize: 11, color: AppTheme.slate500),
     ),

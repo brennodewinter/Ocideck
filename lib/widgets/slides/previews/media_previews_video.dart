@@ -213,7 +213,7 @@ class _VideoPreviewState extends State<_VideoPreview>
               _mediaPlaceholder(
                 context,
                 Icons.movie_outlined,
-                context.l10n.d('Voeg de video toe als lokaal bestand'),
+                context.l10n.d('Lokaal bestand'),
               )
             else if (mediaLoadFailure == MediaLoadFailure.remoteRefused)
               // Online media staat aan, maar déze URL is door de SSRF-poort

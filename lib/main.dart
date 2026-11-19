@@ -8,6 +8,7 @@ import 'theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
+import 'l10n/app_localizations.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart'
     show configureNativeWindow, hasAppExitHandler;
@@ -109,11 +110,13 @@ void main(List<String> args) {
       } on FormatException catch (error) {
         logWarning('publieksvenster: ongeldige startargumenten', error.message);
         runApp(
-          const MaterialApp(
-            home: Scaffold(
-              body: Center(
-                child: Text(
-                  'Het publieksvenster kon niet worden geopend. Start de presentatie opnieuw.',
+          MaterialApp(
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: const [AppLocalizations.delegate],
+            home: Builder(
+              builder: (context) => Scaffold(
+                body: Center(
+                  child: Text(context.l10n.d('Kon dit bestand niet openen.')),
                 ),
               ),
             ),

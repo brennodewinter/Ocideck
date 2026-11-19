@@ -5,6 +5,39 @@ import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 
+class _TransientSendFailure implements CollabTransport {
+  _TransientSendFailure(this.delegate);
+
+  final CollabTransport delegate;
+  final attemptedVersions = <int>[];
+
+  @override
+  String get participantId => delegate.participantId;
+
+  @override
+  Stream<DeckOp> get ops => delegate.ops;
+
+  @override
+  Stream<LockEvent> get locks => delegate.locks;
+
+  @override
+  Future<void> sendOp(DeckOp op) async {
+    attemptedVersions.add(op.version);
+    if (attemptedVersions.length == 1) throw StateError('connection lost');
+    await delegate.sendOp(op);
+  }
+
+  @override
+  Future<void> setLock(
+    String slideId, {
+    required bool held,
+    bool forced = false,
+  }) => delegate.setLock(slideId, held: held, forced: forced);
+
+  @override
+  Future<void> dispose() => delegate.dispose();
+}
+
 void main() {
   Slide baseSlide() => Slide.create(SlideType.bullets).copyWith(title: 'start');
   Deck deckWith(Slide s) => Deck(title: 'deck', slides: [s]);
@@ -173,6 +206,55 @@ void main() {
       );
     });
   });
+
+  test(
+    'a failed authoritative send is retried before a later version',
+    () async {
+      final hub = LoopbackHub();
+      final slide = baseSlide();
+      final transport = _TransientSendFailure(hub.connect('owner'));
+      final owner = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: transport,
+        isAuthority: true,
+      );
+      final peer = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: hub.connect('peer'),
+        isAuthority: false,
+      );
+      addTearDown(owner.dispose);
+      addTearDown(peer.dispose);
+
+      await expectLater(
+        owner.submit(
+          SetSlideField(
+            version: 0,
+            authorId: 'owner',
+            slideId: slide.id,
+            field: SlideField.title,
+            value: 'first',
+          ),
+        ),
+        throwsStateError,
+      );
+      await owner.submit(
+        SetSlideField(
+          version: 0,
+          authorId: 'owner',
+          slideId: slide.id,
+          field: SlideField.subtitle,
+          value: 'second',
+        ),
+      );
+      await pumpEventQueue();
+
+      expect(transport.attemptedVersions, [1, 1, 2]);
+      expect(peer.version, owner.version);
+      expect(peer.deck.slides.single.title, 'first');
+      expect(peer.deck.slides.single.subtitle, 'second');
+    },
+  );
 
   group('CollabSession — locks', () {
     late LoopbackHub hub;

@@ -6,6 +6,28 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
 void main() {
+  test('media filenames do not enable autoplay on round trip', () {
+    final service = MarkdownService();
+    final deck = Deck(
+      title: 'Media',
+      slides: [
+        Slide.create(
+          SlideType.video,
+        ).copyWith(videoPath: 'videos/autoplay clip.mp4'),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(audioPath: 'audio/autoplay track.m4a'),
+        Slide.create(
+          SlideType.video,
+        ).copyWith(videoPath: 'clip.mp4', videoAutoplay: true),
+      ],
+    );
+    final slides = service.parseDeck(service.generateDeck(deck))!.slides;
+    expect(slides[0].videoAutoplay, isFalse);
+    expect(slides[1].audioAutoplay, isFalse);
+    expect(slides[2].videoAutoplay, isTrue);
+  });
+
   test('unknown underscore comment-directives do not become notes', () {
     // Marp-directives als `_paginate` zijn geen sprekersnotities; alleen
     // niet-directive-commentaren horen in notes te belanden.

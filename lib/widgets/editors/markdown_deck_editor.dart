@@ -309,7 +309,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         messenger?.showSnackBar(
           SnackBar(
             content: Text(
-              context.l10n.d('De broncontrole kon niet worden uitgevoerd.'),
+              context.l10n.d(
+                'De controle is mislukt — probeer het later opnieuw.',
+              ),
             ),
           ),
         );

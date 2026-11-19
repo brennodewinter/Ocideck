@@ -474,13 +474,8 @@ void main() {
         // alleen same-origin op (config-bestand + autoindex), en op desktop
         // returnt `kIsWeb` false vóór er een verbinding geopend wordt.
         'lib/services/web_deck_index.dart',
-        // Wisselkoers voor de kostenmodus (#2438). De host is een vaste
-        // constante in dit bestand (api.frankfurter.dev, https), geen door
-        // gebruiker of deck aangeleverde URL: er is geen SSRF-oppervlak om te
-        // pinnen. Redirects worden niet gevolgd, het antwoord is op 8 KB
-        // afgekapt en pas na een expliciete klik op *Ophalen* gaat er één
-        // verzoek met alleen de valutacode uit. Op web zijn de browser (CORS)
-        // en de pagina-CSP (`connect-src https:`) de gate.
+        // Frankfurter: desktop resolves and pins the fixed HTTPS host.
+        // The browser client is selected only on web; neither path follows redirects.
         'lib/services/exchange_rate_service.dart',
         // Enkel-exemplaar-doorgifte op Linux (#2656): `Socket.connect(` op een
         // AF_UNIX-adres (`InternetAddressType.unix`) — lokaal IPC naar een

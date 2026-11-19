@@ -297,8 +297,9 @@ Stream<String> _decodeLimited(Socket socket, int maxBytes) {
   return utf8.decoder.bind(
     socket.map<List<int>>((chunk) {
       used += chunk.length;
-      if (used > maxBytes)
+      if (used > maxBytes) {
         throw const FormatException('Launch frame too large');
+      }
       return chunk;
     }),
   );
