@@ -28,7 +28,7 @@ String _importFailureText(
 extension _SettingsProfile on _SettingsDialogState {
   Widget _profileSelector(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
-    final nameField = TextField(
+    Widget nameField({required bool websiteInMenu}) => TextField(
       controller: _profileName,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
@@ -55,6 +55,13 @@ extension _SettingsProfile on _SettingsDialogState {
                   ],
                 ),
               ),
+            if (websiteInMenu && WebsiteStyleDialog.supported) ...[
+              const PopupMenuDivider(),
+              PopupMenuItem(
+                onTap: _importWebsiteStyle,
+                child: Text(l10n.d('Stijl overnemen van website')),
+              ),
+            ],
           ],
         ),
       ),
@@ -112,16 +119,15 @@ extension _SettingsProfile on _SettingsDialogState {
           icon: const Icon(Icons.groups_outlined, size: 18),
         ),
     ];
-    // Op smal web (telefoonbreedte) passen vijf 48-px-knoppen niet naast het
-    // tekstveld — de Row liep 4 px over (#1885). Onder 400 px gaan de knoppen
-    // in een Wrap onder het veld; daarboven blijft de oorspronkelijke Row.
+    // Op een smal scherm gaan de acties onder het naamveld, zodat zowel
+    // de invoer als de knoppen genoeg ruimte houden (#1885).
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < 400) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              nameField,
+              nameField(websiteInMenu: true),
               const SizedBox(height: 8),
               Wrap(spacing: 4, runSpacing: 4, children: buttons),
             ],
@@ -130,12 +136,55 @@ extension _SettingsProfile on _SettingsDialogState {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: nameField),
+            Expanded(
+              child: nameField(websiteInMenu: constraints.maxWidth < 460),
+            ),
             const SizedBox(width: 8),
             ...buttons,
+            if (WebsiteStyleDialog.supported && constraints.maxWidth >= 460)
+              _websiteProfileAction(compact: constraints.maxWidth < 650),
           ],
         );
       },
+    );
+  }
+
+  Widget _websiteProfileAction({required bool compact}) {
+    final label = context.l10n.d('Stijl overnemen van website');
+    const icon = Icon(Icons.language, size: 18);
+    return compact
+        ? IconButton(tooltip: label, onPressed: _importWebsiteStyle, icon: icon)
+        : Tooltip(
+            message: label,
+            child: TextButton.icon(
+              onPressed: _importWebsiteStyle,
+              icon: icon,
+              label: Text(context.l10n.d('Van website')),
+            ),
+          );
+  }
+
+  Future<void> _importWebsiteStyle() async {
+    final files = ref.read(fileServiceProvider);
+    final imported = await WebsiteStyleDialog.show(
+      context,
+      save: (selection) => _storeWebsiteStyleImages(files, selection),
+    );
+    if (!mounted || imported == null) return;
+    _commitEditedStyleProfile(this);
+    final saved = imported.copyWith(
+      name: _uniqueStyleName(this, imported.name),
+    );
+    _styleProfiles = [..._styleProfiles, saved];
+    _adoptProfile(saved);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.',
+          ),
+        ),
+      ),
     );
   }
 
@@ -481,4 +530,28 @@ Future<void> _exportStyleProfileAndReport(
       l10n.d('Stijlprofiel exporteren mislukt'),
     );
   }
+}
+
+Future<ThemeProfile> _storeWebsiteStyleImages(
+  FileService files,
+  WebsiteStyleSelection selection,
+) async {
+  final profile = selection.profile;
+  final paths = <WebsiteStyleImage, String>{};
+  for (final entry in selection.images.entries) {
+    final path = await files.materializeImportedStyleLogo(
+      entry.value,
+      profileName: '${profile.name} ${entry.key.name}',
+    );
+    if (path == null)
+      throw const FormatException('Website image was not saved');
+    paths[entry.key] = path;
+  }
+  return profile.copyWith(
+    logoPath: paths[WebsiteStyleImage.logo],
+    slideBackgroundImages: {
+      'title': ?paths[WebsiteStyleImage.title],
+      'content': ?paths[WebsiteStyleImage.content],
+    },
+  );
 }
