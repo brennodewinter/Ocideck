@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import '../utils/atomic_file.dart';
 import '../utils/library_scan_limits.dart';
 import '../utils/log.dart';
 import '../utils/utf8_bom.dart';
+import 'file_service.dart';
 
 /// Vindt en herschrijft afbeeldingsverwijzingen (`![…](pad)`) in
 /// Marp-markdownbestanden op schijf. Zo gaan bij het opruimen van duplicaten
@@ -84,7 +86,9 @@ class ImageReferenceService {
     for (final deckFile in deckFiles) {
       String content;
       try {
-        content = await File(deckFile).readAsString();
+        final read = await _readDeck(deckFile);
+        if (read == null) continue;
+        content = read;
       } catch (e) {
         logWarning('ImageReferenceService.countReferences: read deck file', e);
         continue;
@@ -112,7 +116,9 @@ class ImageReferenceService {
     for (final deckFile in deckFiles) {
       String content;
       try {
-        content = await File(deckFile).readAsString();
+        final read = await _readDeck(deckFile);
+        if (read == null) continue;
+        content = read;
       } catch (e) {
         logWarning('ImageReferenceService.referencingFiles: read deck file', e);
         continue;
@@ -126,6 +132,22 @@ class ImageReferenceService {
       if (count > 0) result[deckFile] = count;
     }
     return result;
+  }
+
+  Future<String?> _readDeck(String path) async {
+    final file = await File(path).open();
+    try {
+      final size = await file.length();
+      if (size > FileService.maxDeckMarkdownBytes) {
+        logWarning('ImageReferenceService: deck exceeds size limit');
+        return null;
+      }
+      final bytes = await file.read(size + 1);
+      if (bytes.length != size) return null;
+      return utf8.decode(bytes);
+    } finally {
+      await file.close();
+    }
   }
 
   /// Herschrijf in [deckFile] elke verwijzing naar [fromAbsolute] zodat die
