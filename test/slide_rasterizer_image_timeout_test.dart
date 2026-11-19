@@ -75,14 +75,14 @@ void main() {
         Object? failure;
         List<Uint8List>? result;
         var captured = 0;
-        Future<void> run() async {
+        Future<void> run({required Duration imageTimeout}) async {
           await tester.runAsync(() async {
             unawaited(
               SlideRasterizer.rasterize(
                 context: context,
                 audience: audience,
                 targetWidth: 160,
-                imageTimeout: const Duration(milliseconds: 50),
+                imageTimeout: imageTimeout,
                 onProgress: (done, _) => captured = done,
               ).then(
                 (value) => result = value,
@@ -93,7 +93,7 @@ void main() {
           await pumpUntil(tester, () => result != null || failure != null);
         }
 
-        await run();
+        await run(imageTimeout: const Duration(milliseconds: 50));
         expect(
           failure,
           isA<ImagePreloadTimeout>().having(
@@ -112,9 +112,10 @@ void main() {
         expect(find.byType(SlidePreviewWidget), findsNothing);
 
         // De onderliggende bytes zijn gezond: na de time-out mag een nieuwe
-        // export niet dezelfde vastgelopen cache-entry overnemen.
+        // export niet dezelfde vastgelopen cache-entry overnemen. De gezonde
+        // decode krijgt de gewone begrensde laadtijd, ook op een drukke runner.
         failure = null;
-        await run();
+        await run(imageTimeout: imagePreloadTimeout);
         expect(failure, isNull);
         expect(result, hasLength(1));
         expect(result!.single.take(8), [137, 80, 78, 71, 13, 10, 26, 10]);
