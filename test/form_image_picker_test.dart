@@ -4,9 +4,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/painting.dart' show FileImage;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
+import 'package:ocideck/utils/image_limits.dart';
 import 'package:ocideck/widgets/forms/form_image_picker.dart';
 import 'package:path/path.dart' as p;
 
@@ -92,9 +92,9 @@ void main() {
       pick: (_) async => [],
     )!;
     final inside = support.preview('images/a-1.jpg');
-    expect(inside, isA<FileImage>());
+    expect(inside, isA<CappedImage>());
     expect(
-      (inside as FileImage).file.path,
+      (inside as CappedImage).cacheKey,
       p.join(dir.path, 'images', 'a-1.jpg'),
     );
     expect(support.preview('../buiten.jpg'), isNull);
