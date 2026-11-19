@@ -12,9 +12,8 @@
 //    conditionele header kan een preflight uitlokken — dat is dan een
 //    eerlijke netwerk-uitkomst, geen stille val.
 //
-// Credentials in de feed-URL gaan nooit mee naar een andere host: een
-// omleiding of enclosure die elders uitkomt wordt van zijn userInfo
-// ontdaan vóór er een byte heen gaat.
+// Herbruikbare inloggegevens blijven op dezelfde HTTPS-origin.
+// Verwijzingen of omleidingen kunnen die herkomstgrens niet wijzigen.
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
@@ -76,12 +75,13 @@ class FeedFetchResult {
   bool get ok => statusCode == HttpStatus.ok && bytes != null;
 }
 
-/// Strip credentials die per omleiding of verwijzing op een andere host
-/// zouden belanden. Zelfde host: behouden — daar stond de gebruiker ze
-/// zelf bij. Anders: weg, de server geeft geen toestemming voor andermans
-/// inloggegevens.
 Uri _credentialsGuarded(Uri target, Uri origin) {
-  if (target.userInfo.isEmpty || target.host == origin.host) return target;
+  if (target.userInfo.isEmpty ||
+      (NetGuard.maySendReusableSecret(target.scheme, host: target.host) &&
+          target.origin == origin.origin &&
+          target.userInfo == origin.userInfo)) {
+    return target;
+  }
   return target.replace(userInfo: '');
 }
 
@@ -110,7 +110,7 @@ Future<FeedFetchResult> fetchFeed(
   }
   if (kIsWeb || client != null) {
     return _fetchFeedWeb(
-      url,
+      _credentialsGuarded(url, url),
       etag: etag,
       lastModified: lastModified,
       maxBytes: maxBytes,
@@ -205,7 +205,7 @@ Future<FeedFetchResult> _fetchFeedPinned(
   final elapsed = Stopwatch()..start();
   Duration? remaining() =>
       totalTimeout == null ? null : totalTimeout - elapsed.elapsed;
-  var current = url;
+  var current = _credentialsGuarded(url, url);
   for (var hop = 0; hop <= _maxRedirectHops; hop++) {
     if (allowUrl?.call(current) == false ||
         NetGuard.isBlockedHost(current.host)) {
@@ -260,11 +260,11 @@ Future<FeedFetchResult> _fetchFeedPinned(
         if (location == null || hop == _maxRedirectHops) {
           return const FeedFetchResult.failed(ImportFailure.redirect);
         }
-        final next = _credentialsGuarded(current.resolve(location), url);
+        final next = current.resolve(location);
         if (next.scheme != 'http' && next.scheme != 'https') {
           return const FeedFetchResult.failed(ImportFailure.insecureScheme);
         }
-        current = next;
+        current = _credentialsGuarded(next, current);
         continue;
       }
       if (status != HttpStatus.ok) {
@@ -329,7 +329,7 @@ Future<({String? path, ImportFailure? failure})> downloadFeedMedia(
   if (scheme != 'http' && scheme != 'https') {
     return (path: null, failure: ImportFailure.insecureScheme);
   }
-  var current = url;
+  var current = _credentialsGuarded(url, url);
   for (var hop = 0; hop <= _maxRedirectHops; hop++) {
     if (NetGuard.isBlockedHost(current.host)) {
       return (path: null, failure: ImportFailure.blockedHost);
@@ -358,11 +358,11 @@ Future<({String? path, ImportFailure? failure})> downloadFeedMedia(
         if (location == null || hop == _maxRedirectHops) {
           return (path: null, failure: ImportFailure.redirect);
         }
-        final next = _credentialsGuarded(current.resolve(location), url);
+        final next = current.resolve(location);
         if (next.scheme != 'http' && next.scheme != 'https') {
           return (path: null, failure: ImportFailure.insecureScheme);
         }
-        current = next;
+        current = _credentialsGuarded(next, current);
         continue;
       }
       if (status != HttpStatus.ok) {
