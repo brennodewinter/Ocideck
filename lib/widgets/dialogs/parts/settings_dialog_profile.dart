@@ -149,44 +149,10 @@ extension _SettingsProfile on _SettingsDialogState {
     );
   }
 
-  Widget _websiteProfileAction({required bool compact}) {
-    final label = context.l10n.d('Stijl overnemen van website');
-    const icon = Icon(Icons.language, size: 18);
-    return compact
-        ? IconButton(tooltip: label, onPressed: _importWebsiteStyle, icon: icon)
-        : Tooltip(
-            message: label,
-            child: TextButton.icon(
-              onPressed: _importWebsiteStyle,
-              icon: icon,
-              label: Text(context.l10n.d('Van website')),
-            ),
-          );
-  }
+  Widget _websiteProfileAction({required bool compact}) =>
+      _websiteProfileActionFor(context, _importWebsiteStyle, compact: compact);
 
-  Future<void> _importWebsiteStyle() async {
-    final files = ref.read(fileServiceProvider);
-    final imported = await WebsiteStyleDialog.show(
-      context,
-      save: (selection) => _storeWebsiteStyleImages(files, selection),
-    );
-    if (!mounted || imported == null) return;
-    _commitEditedStyleProfile(this);
-    final saved = imported.copyWith(
-      name: _uniqueStyleName(this, imported.name),
-    );
-    _styleProfiles = [..._styleProfiles, saved];
-    _adoptProfile(saved);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.',
-          ),
-        ),
-      ),
-    );
-  }
+  Future<void> _importWebsiteStyle() => _importWebsiteStyleFor(this);
 
   void _loadDefaultProfile() {
     _adoptProfile(ref.read(settingsProvider).themeProfile);
@@ -530,6 +496,47 @@ Future<void> _exportStyleProfileAndReport(
       l10n.d('Stijlprofiel exporteren mislukt'),
     );
   }
+}
+
+Widget _websiteProfileActionFor(
+  BuildContext context,
+  VoidCallback onPressed, {
+  required bool compact,
+}) {
+  final label = context.l10n.d('Stijl overnemen van website');
+  const icon = Icon(Icons.language, size: 18);
+  return compact
+      ? IconButton(tooltip: label, onPressed: onPressed, icon: icon)
+      : Tooltip(
+          message: label,
+          child: TextButton.icon(
+            onPressed: onPressed,
+            icon: icon,
+            label: Text(context.l10n.d('Van website')),
+          ),
+        );
+}
+
+Future<void> _importWebsiteStyleFor(_SettingsDialogState state) async {
+  final files = state.ref.read(fileServiceProvider);
+  final imported = await WebsiteStyleDialog.show(
+    state.context,
+    save: (selection) => _storeWebsiteStyleImages(files, selection),
+  );
+  if (!state.mounted || imported == null) return;
+  _commitEditedStyleProfile(state);
+  final saved = imported.copyWith(name: _uniqueStyleName(state, imported.name));
+  state._styleProfiles = [...state._styleProfiles, saved];
+  state._adoptProfile(saved);
+  ScaffoldMessenger.of(state.context).showSnackBar(
+    SnackBar(
+      content: Text(
+        state.context.l10n.d(
+          'Stijl toegevoegd. Klik op Opslaan om het profiel te bewaren.',
+        ),
+      ),
+    ),
+  );
 }
 
 Future<ThemeProfile> _storeWebsiteStyleImages(

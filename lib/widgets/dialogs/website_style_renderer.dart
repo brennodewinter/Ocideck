@@ -8,6 +8,7 @@ import 'package:webview_win_floating/webview_plugin.dart';
 import '../../services/website_style/website_style_proposal.dart';
 import '../../services/website_style/website_style_source.dart';
 import '../../utils/log.dart';
+import '../../utils/ui_frame.dart';
 
 /// An offline browser used only to resolve CSS and measure the rendered DOM.
 class WebsiteStyleRenderer extends StatefulWidget {
@@ -57,7 +58,7 @@ class _WebsiteStyleRendererState extends State<WebsiteStyleRenderer> {
             : const PlatformWebViewControllerCreationParams(),
       );
       setState(() => _controller = controller);
-      await WidgetsBinding.instance.endOfFrame;
+      await waitForUiFrame();
       if (!mounted || _finished) return;
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       if (!mounted || _finished) return;

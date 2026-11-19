@@ -19,6 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import 'helpers/pptx_fixture.dart';
+import '../support/pump_until.dart';
 
 /// Het deck van het actieve tabblad, of `null` als er geen open staat.
 Deck? _openDeck(ProviderContainer container) =>
@@ -211,13 +212,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Geïmporteerde stijl opslaan'), findsOneWidget);
     await tester.tap(find.text('Stijl bewaren'));
-    await tester.runAsync(() async {
-      for (var i = 0; i < 100; i++) {
-        if (find.text('Openen').evaluate().isNotEmpty) break;
-        await Future<void>.delayed(const Duration(milliseconds: 10));
-        await tester.pump();
-      }
-    });
+    await pumpUntil(
+      tester,
+      () => find.text('Openen').evaluate().isNotEmpty,
+      reason: 'de stijl is bewaard en de importkeuze is zichtbaar',
+    );
     await tester.pumpAndSettle();
     await tester.tap(find.text('Openen'));
     await tester.pumpAndSettle();
