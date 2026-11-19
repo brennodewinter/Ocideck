@@ -1,9 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 
 import '../models/exchange_rate.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
+import '../utils/net_guard.dart';
+import '../utils/pinned_http_client.dart';
 
 /// De ECB-referentiekoersen, gepubliceerd via Frankfurter. Dit is dé
 /// enige plek waar de kostenmodus het netwerk op gaat, en alleen op
@@ -38,12 +43,26 @@ Future<ExchangeRate?> fetchEurRate(
   http.Client? client,
   String? baseUrl,
 }) async {
-  final uri = Uri.parse(
-    '${baseUrl ?? _kFrankfurterBase}/latest?base=$code&symbols=EUR',
-  );
+  if (!RegExp(r'^[A-Z]{3}$').hasMatch(code) || code.length != 3) return null;
   try {
+    final uri = Uri.parse(
+      '${baseUrl ?? _kFrankfurterBase}/latest',
+    ).replace(queryParameters: {'base': code, 'symbols': 'EUR'});
     final own = client == null;
-    final c = client ?? http.Client();
+    final http.Client c;
+    if (client != null) {
+      c = client;
+    } else if (kIsWeb) {
+      c = http.Client();
+    } else {
+      if (uri.scheme != 'https' || uri.userInfo.isNotEmpty) return null;
+      final resolved = await NetGuard.resolveConfigured(
+        uri.host,
+        allowPrivate: false,
+      );
+      if (!resolved.isOk) return null;
+      c = IOClient(buildPinnedClient(resolved.addresses!.first));
+    }
     try {
       // Geen redirects: de host is een vaste constante, en een doorverwijzing
       // naar een andere host is dan precies wat we niet willen volgen. Het
@@ -80,7 +99,7 @@ Future<ExchangeRate?> fetchEurRate(
 ExchangeRate? _parseRate(String code, String body) {
   final Object? decoded;
   try {
-    decoded = jsonDecode(body);
+    decoded = jsonDecodeGuarded(body);
   } on FormatException {
     return null;
   }
