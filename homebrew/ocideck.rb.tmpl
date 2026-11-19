@@ -7,6 +7,8 @@ cask "ocideck" do
   desc "Open-source presentation app for decks, notes, and collaborative sessions"
   homepage "https://ocideck.librekat.nl"
 
+  depends_on arch: :arm64
+
   app "OciDeck.app"
 
   # Zonder deze regel vervangt `brew upgrade` de bundel terwijl de app
