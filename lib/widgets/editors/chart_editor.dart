@@ -55,8 +55,7 @@ Future<ChartCsvData?> _pickChartCsv(BuildContext context) async {
     showErrorSnackBar(
       ScaffoldMessenger.of(context),
       context.l10n,
-      '${context.l10n.d('Het bestand kon niet worden gelezen.')} '
-      '(CSV UTF-8 · ≤ 2 MiB · ≤ 100 000)',
+      context.l10n.d('Het bestand kon niet worden gelezen.'),
     );
     return null;
   }

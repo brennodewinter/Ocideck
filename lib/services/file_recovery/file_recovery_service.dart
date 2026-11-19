@@ -117,104 +117,14 @@ class FileRecoveryService {
     var incomplete = false;
 
     Future<void> take(String relPath, File src) async {
-      late final List<int> bytes;
-      try {
-        final maxBytes = switch (p.extension(relPath).toLowerCase()) {
-          '.md' => FileService.maxDeckMarkdownBytes,
-          '.json' => FileService.maxDeckSidecarBytes,
-          _ => _maxMemberBytes,
-        };
-        final handle = await src.open();
-        try {
-          final size = await handle.length();
-          if (size > maxBytes) {
-            incomplete = true;
-            members.add(
-              RecoveredMember(
-                relPath,
-                size,
-                '',
-                RecoveryDisposition.unreadable,
-                note: 'bestand te groot',
-              ),
-            );
-            diagnoses.add(
-              '$relPath: overgeslagen wegens de limiet van ${maxBytes ~/ (1024 * 1024)} MiB.',
-            );
-            return;
-          }
-          bytes = await handle.read(size + 1);
-          if (bytes.length != size) {
-            throw FileSystemException('bron gewijzigd tijdens lezen', src.path);
-          }
-        } finally {
-          await handle.close();
-        }
-      } catch (e) {
-        incomplete = true;
-        members.add(
-          RecoveredMember(
-            relPath,
-            0,
-            '',
-            RecoveryDisposition.unreadable,
-            note: 'bron niet te lezen',
-          ),
-        );
-        diagnoses.add(
-          '$relPath: de bron was niet leesbaar — niets verloren, '
-          'niets gered.',
-        );
-        return;
-      }
-      final digest = sha256.convert(bytes).toString();
-      final broken = _diagnose(relPath, bytes);
-      final targetRel = broken == null
-          ? relPath
-          : p.join(quarantineDir, relPath);
-      final target = File(p.join(dir.path, targetRel));
-      try {
-        await target.parent.create(recursive: true);
-        await writeBytesAtomic(target, bytes);
-      } catch (e) {
-        incomplete = true;
-        members.add(
-          RecoveredMember(
-            relPath,
-            bytes.length,
-            digest,
-            RecoveryDisposition.unreadable,
-            note: 'schrijven naar de kopie mislukte',
-          ),
-        );
-        diagnoses.add('$relPath: wegschrijven in de kopie mislukt.');
-        return;
-      }
-      if (broken == null) {
-        members.add(
-          RecoveredMember(
-            relPath,
-            bytes.length,
-            digest,
-            RecoveryDisposition.copied,
-          ),
-        );
-      } else {
-        incomplete = true;
-        members.add(
-          RecoveredMember(
-            relPath,
-            bytes.length,
-            digest,
-            RecoveryDisposition.quarantined,
-            note: broken,
-          ),
-        );
-        diagnoses.add(
-          '$relPath: $broken — origineel bewaard in '
-          '$quarantineDir/.',
-        );
-      }
+      final copied = await _recoverMember(
+        relPath,
+        src,
+        dir,
+        members,
+        diagnoses,
+      );
+      if (!copied) incomplete = true;
     }
 
     // Het deck zelf, dan de sidecars en projectleden die het openpad leest.
@@ -231,41 +141,8 @@ class FileRecoveryService {
     if (await _existsQuietly(styleFile)) {
       await take('ocideck-style.json', styleFile);
     }
-    final sourceRoot = p.dirname(sourceMdPath);
-    var visited = 0;
-    Future<void> walk(Directory directory, int depth) async {
-      if (depth > kLibraryScanMaxDepth) {
-        incomplete = true;
-        diagnoses.add(
-          '${p.relative(directory.path, from: sourceRoot)}: maximale mapdiepte bereikt.',
-        );
-        return;
-      }
-      await for (final entity in directory.list(followLinks: false)) {
-        if (visited >= kLibraryScanMaxFiles) {
-          incomplete = true;
-          return;
-        }
-        visited++;
-        if (entity is File) {
-          await take(p.relative(entity.path, from: sourceRoot), entity);
-        } else if (entity is Directory) {
-          await walk(entity, depth + 1);
-        }
-      }
-    }
-
-    for (final sub in ['logos', 'data']) {
-      final subDir = Directory(p.join(sourceRoot, sub));
-      if (await FileSystemEntity.type(subDir.path, followLinks: false) ==
-          FileSystemEntityType.directory) {
-        await walk(subDir, 1);
-      }
-    }
-    if (visited >= kLibraryScanMaxFiles) {
-      diagnoses.add(
-        'De wandeling door logos/ en data/ bereikte de limiet van $kLibraryScanMaxFiles vermeldingen.',
-      );
+    if (!await _walkProjectAssets(p.dirname(sourceMdPath), take, diagnoses)) {
+      incomplete = true;
     }
 
     // Zegel-integriteit: is er íets veranderd aan de kopie, dan mag de kopie
@@ -296,6 +173,165 @@ class FileRecoveryService {
           ? p.join(dir.path, mdRel)
           : null,
     );
+  }
+
+  Future<bool> _recoverMember(
+    String relPath,
+    File src,
+    Directory dir,
+    List<RecoveredMember> members,
+    List<String> diagnoses,
+  ) async {
+    late final List<int> bytes;
+    try {
+      final rootMember = p.basename(relPath) == relPath;
+      final maxBytes = switch ((
+        rootMember,
+        p.extension(relPath).toLowerCase(),
+      )) {
+        (true, '.md') => FileService.maxDeckMarkdownBytes,
+        (true, '.json') => FileService.maxDeckSidecarBytes,
+        _ => _maxMemberBytes,
+      };
+      final handle = await src.open();
+      try {
+        final size = await handle.length();
+        if (size > maxBytes) {
+          members.add(
+            RecoveredMember(
+              relPath,
+              size,
+              '',
+              RecoveryDisposition.unreadable,
+              note: 'bestand te groot',
+            ),
+          );
+          diagnoses.add(
+            '$relPath: overgeslagen wegens de limiet van ${maxBytes ~/ (1024 * 1024)} MiB.',
+          );
+          return false;
+        }
+        bytes = await handle.read(size + 1);
+        if (bytes.length != size) {
+          throw FileSystemException('bron gewijzigd tijdens lezen', src.path);
+        }
+      } finally {
+        await handle.close();
+      }
+    } catch (e) {
+      members.add(
+        RecoveredMember(
+          relPath,
+          0,
+          '',
+          RecoveryDisposition.unreadable,
+          note: 'bron niet te lezen',
+        ),
+      );
+      diagnoses.add(
+        '$relPath: de bron was niet leesbaar — niets verloren, '
+        'niets gered.',
+      );
+      return false;
+    }
+    final digest = sha256.convert(bytes).toString();
+    final broken = _diagnose(relPath, bytes);
+    final targetRel = broken == null ? relPath : p.join(quarantineDir, relPath);
+    final target = File(p.join(dir.path, targetRel));
+    try {
+      await target.parent.create(recursive: true);
+      await writeBytesAtomic(target, bytes);
+    } catch (e) {
+      members.add(
+        RecoveredMember(
+          relPath,
+          bytes.length,
+          digest,
+          RecoveryDisposition.unreadable,
+          note: 'schrijven naar de kopie mislukte',
+        ),
+      );
+      diagnoses.add('$relPath: wegschrijven in de kopie mislukt.');
+      return false;
+    }
+    if (broken == null) {
+      members.add(
+        RecoveredMember(
+          relPath,
+          bytes.length,
+          digest,
+          RecoveryDisposition.copied,
+        ),
+      );
+    } else {
+      members.add(
+        RecoveredMember(
+          relPath,
+          bytes.length,
+          digest,
+          RecoveryDisposition.quarantined,
+          note: broken,
+        ),
+      );
+      diagnoses.add(
+        '$relPath: $broken — origineel bewaard in '
+        '$quarantineDir/.',
+      );
+    }
+    return broken == null;
+  }
+
+  Future<bool> _walkProjectAssets(
+    String sourceRoot,
+    Future<void> Function(String relPath, File source) take,
+    List<String> diagnoses,
+  ) async {
+    var complete = true;
+    var visited = 0;
+    Future<void> walk(Directory directory, int depth) async {
+      if (depth > kLibraryScanMaxDepth) {
+        complete = false;
+        diagnoses.add(
+          '${p.relative(directory.path, from: sourceRoot)}: maximale mapdiepte bereikt.',
+        );
+        return;
+      }
+      await for (final entity in directory.list(followLinks: false)) {
+        if (visited >= kLibraryScanMaxFiles) {
+          complete = false;
+          return;
+        }
+        visited++;
+        if (entity is File) {
+          await take(p.relative(entity.path, from: sourceRoot), entity);
+        } else if (entity is Directory) {
+          await walk(entity, depth + 1);
+        } else if (entity is Link) {
+          complete = false;
+          diagnoses.add(
+            '${p.relative(entity.path, from: sourceRoot)}: symbolische link overgeslagen.',
+          );
+        }
+      }
+    }
+
+    for (final sub in ['logos', 'data']) {
+      final subDir = Directory(p.join(sourceRoot, sub));
+      final type = await FileSystemEntity.type(subDir.path, followLinks: false);
+      if (type == FileSystemEntityType.directory) {
+        await walk(subDir, 1);
+      } else if (type == FileSystemEntityType.link) {
+        complete = false;
+        diagnoses.add('$sub: symbolische link overgeslagen.');
+      }
+    }
+    if (visited >= kLibraryScanMaxFiles && !complete) {
+      diagnoses.add(
+        'De wandeling door logos/ en data/ bereikte de limiet van $kLibraryScanMaxFiles vermeldingen.',
+      );
+    }
+
+    return complete;
   }
 
   /// Welk herstel hiervoor onderbouwd is: `null` = kopieer op zijn plek,

@@ -24,6 +24,38 @@ import 'utils/json_depth_guard.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
 
+void _runAudienceWindow(String raw) {
+  try {
+    final parsed = raw.isEmpty
+        ? const <String, Object?>{}
+        : jsonDecodeGuarded(raw);
+    if (parsed is! Map<String, Object?>) {
+      throw const FormatException(
+        'Audience window arguments must be an object',
+      );
+    }
+    runApp(AudienceWindowApp(args: parsed));
+  } on FormatException catch (error) {
+    logWarning('publieksvenster: ongeldige startargumenten', error.message);
+    runApp(
+      MaterialApp(
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
+        home: Builder(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: Text(context.l10n.d('Kon dit bestand niet openen.')),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 void main(List<String> args) {
   // Run the whole app inside a guarded zone so that no uncaught error — from a
   // build, a platform callback, or an async gap — can disappear without a trace
@@ -97,36 +129,7 @@ void main(List<String> args) {
     BundledLicenses.register();
 
     if (audience) {
-      final raw = args.length >= 3 ? args[2] : '';
-      try {
-        final parsed = raw.isEmpty
-            ? const <String, Object?>{}
-            : jsonDecodeGuarded(raw);
-        if (parsed is! Map<String, Object?>) {
-          throw const FormatException(
-            'Audience window arguments must be an object',
-          );
-        }
-        runApp(AudienceWindowApp(args: parsed));
-      } on FormatException catch (error) {
-        logWarning('publieksvenster: ongeldige startargumenten', error.message);
-        runApp(
-          MaterialApp(
-            supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              ...GlobalMaterialLocalizations.delegates,
-            ],
-            home: Builder(
-              builder: (context) => Scaffold(
-                body: Center(
-                  child: Text(context.l10n.d('Kon dit bestand niet openen.')),
-                ),
-              ),
-            ),
-          ),
-        );
-      }
+      _runAudienceWindow(args.length >= 3 ? args[2] : '');
       return;
     }
 
