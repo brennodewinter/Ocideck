@@ -99,10 +99,21 @@ class _Agg extends _Expr {
   const _Agg(this.fn, this.keys);
 }
 
+/// Begrenzing van de formuletaal. De parser recureert per `(` en per
+/// unaire `-`; de evaluator recureert over de resulterende boom —
+/// inclusief de linkertak van een platte keten, dus de lengtegrens
+/// begrenst die evaluatiediepte via de boomgrootte en de dieptegrens
+/// dekselt de parse-recursie zelf. Ruim boven elke realistische formule:
+/// overschrijding levert `calc-invalid`, nooit een `StackOverflowError`
+/// (die de `on Exception`-filters van de aanroepers ontloopt).
+const _maxCalcExprLen = 1024;
+const _maxCalcDepth = 128;
+
 /// `null` als [expr] geen geldige §3.7-expressie is — de marker blijft dan
 /// bewaard commentaar met een `calc-invalid`-bevinding, nooit stil
 /// genegeerd en nooit als `0` doorgeleverd.
 _Expr? _parseCalc(String expr) {
+  if (expr.length > _maxCalcExprLen) return null;
   final tokens = _tokenizeCalc(expr);
   if (tokens == null) return null;
   final parser = _CalcParser(tokens);
@@ -185,6 +196,7 @@ List<_Tok>? _tokenizeCalc(String s) {
 class _CalcParser {
   final List<_Tok> tokens;
   var _i = 0;
+  var _depth = 0;
   _CalcParser(this.tokens);
 
   bool get atEnd => _i >= tokens.length;
@@ -233,9 +245,20 @@ class _CalcParser {
     }
   }
 
+  /// Recursieve afdaling onder de dieptegrens — zonder hem groeit elke
+  /// `(` of `-` in de invoer één stackframe en kantelt de parser op
+  /// diepe geneste invoer.
+  _Expr? _descend(_Expr? Function() inner) {
+    if (_depth >= _maxCalcDepth) return null;
+    _depth++;
+    final r = inner();
+    _depth--;
+    return r;
+  }
+
   _Expr? factor() {
     if (_eat('-')) {
-      final e = factor();
+      final e = _descend(factor);
       return e == null ? null : _Neg(e);
     }
     return primary();
@@ -248,7 +271,7 @@ class _CalcParser {
       return _Num(t.v);
     }
     if (_eat('(')) {
-      final e = expr();
+      final e = _descend(expr);
       if (e == null || !_eat(')')) return null;
       return e;
     }
