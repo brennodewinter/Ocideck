@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
@@ -24,6 +26,41 @@ FileService _fileService(String homeDir) => FileService(
   () => const ThemeProfile(),
   homeDirectory: () => homeDir,
 );
+
+class _CountedPresentation extends ScannedPresentation {
+  _CountedPresentation(String title)
+    : super(
+        path: '/test/$title.md',
+        fileName: '$title.md',
+        deck: Deck(title: title),
+        content: '---\nmarp: true\ntitle: $title\n---\n\nGedeelde zoekterm',
+      );
+
+  int contentReads = 0;
+
+  @override
+  String get content {
+    contentReads++;
+    return super.content;
+  }
+}
+
+class _LibraryFileService extends FileService {
+  _LibraryFileService(this.files)
+    : super(MarkdownService(), ImageService(), () => const ThemeProfile());
+
+  final List<ScannedMarkdown> files;
+
+  @override
+  Future<List<ScannedMarkdown>> scanMarkdownFiles(
+    String directory, {
+    String? excludePath,
+    bool includeDocuments = true,
+    int maxDepth = 32,
+    int maxFilesVisited = 5000,
+    int maxScanBytes = 256 * 1024 * 1024,
+  }) async => files;
+}
 
 Widget _host(void Function(BuildContext context) onPressed) {
   AppLocalizations.setActiveLanguageCode('nl');
@@ -237,6 +274,55 @@ void main() {
     );
 
     expect(find.byType(SlidePreviewWidget), findsOneWidget);
+  });
+
+  testWidgets('scrolling rows under the mouse does not repeat the search', (
+    tester,
+  ) async {
+    final files = List.generate(
+      24,
+      (i) => _CountedPresentation('Deck ${i.toString().padLeft(2, '0')}'),
+    );
+    await tester.pumpWidget(
+      _host(
+        (context) => OpenPresentationDialog.show(
+          context,
+          fileService: _LibraryFileService(files),
+          libraries: [const LibraryFolder(name: 'Test', path: '/test')],
+          showPreview: true,
+        ),
+      ),
+    );
+    await _openAndScan(tester);
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).first, 'gedeelde zoekterm');
+    await tester.pump();
+    expect(find.text('Presentaties (24)'), findsOneWidget);
+
+    final mouse = TestPointer(50, PointerDeviceKind.mouse);
+    final position = tester.getCenter(find.text('Deck 01'));
+    final scrollDistance =
+        tester.getCenter(find.text('Deck 03')).dy - position.dy;
+    await tester.sendEventToBinding(mouse.addPointer(location: position));
+    await tester.pump();
+    await tester.pump();
+    String? previewPath() =>
+        tester.widget<OpenPreviewPane>(find.byType(OpenPreviewPane)).path;
+    final firstPath = previewPath();
+    expect(firstPath, isNotNull);
+    for (final file in files) {
+      file.contentReads = 0;
+    }
+
+    await tester.sendEventToBinding(mouse.scroll(Offset(0, scrollDistance)));
+    await tester.pump();
+    await tester.pump();
+
+    expect(previewPath(), isNotNull);
+    expect(previewPath(), isNot(firstPath));
+    expect(files.map((file) => file.contentReads), everyElement(0));
+    await tester.sendEventToBinding(mouse.removePointer());
+    await tester.pumpWidget(const SizedBox.shrink());
   });
 
   testWidgets('on a narrow window the preview and its button both step aside', (

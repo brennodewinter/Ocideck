@@ -107,6 +107,8 @@ class OpenPresentationDialog extends StatefulWidget {
 
 enum _OpenSort { name, newest, oldest }
 
+typedef _Match = (DuplicateInfo<ScannedMarkdown>, List<_Hit>);
+
 class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// De te doorzoeken wortels. Start op de geconfigureerde bibliotheken; de
   /// mapkeuze-knop kan tijdelijk naar één specifieke map versmallen.
@@ -125,6 +127,13 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   String _tagQuery = '';
   OpenKindFilter _kind = OpenKindFilter.all;
   _OpenSort _sort = _OpenSort.name;
+
+  // Scrollen kan via hover een ander voorbeeld aanwijzen. Hergebruik de
+  // zoekresultaten en de lijstvolgorde bij zulke herbouw van de dialoog.
+  List<_Match> _matches = const [];
+  int _documentCount = 0;
+  List<_Match> _visible = const [];
+  List<String> _visiblePaths = const [];
 
   /// Het bestand waarvan het voorbeeld getoond wordt; null zolang er niets is
   /// aangewezen. Alleen in gebruik als [OpenPresentationDialog.showPreview].
@@ -192,6 +201,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         ..clear()
         ..addAll(rootOf);
       _groups = DuplicateService().groupScanned(all);
+      _updateMatches();
       _loading = false;
     });
   }
@@ -272,7 +282,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// in het zoekveld bewegen de cursor en borrelen niet op, Enter wel.
   KeyEventResult _onDialogKey(FocusNode node, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
-    final visible = _visibleList();
+    final visible = _visible;
     if (visible.isEmpty) return KeyEventResult.ignored;
     switch (event.logicalKey) {
       case LogicalKeyboardKey.arrowDown:
@@ -299,10 +309,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     }
   }
 
-  void _focusIndex(
-    int i,
-    List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> visible,
-  ) {
+  void _focusIndex(int i, List<_Match> visible) {
     final clamped = i.clamp(0, visible.length - 1);
     setState(() {
       _focusedIndex = clamped;
@@ -313,11 +320,20 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     _scrollToIndex(clamped, visible.length);
   }
 
-  List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> _visibleList([
-    List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)>? matches,
-  ]) {
+  void _updateMatches() {
+    _matches = _matching();
+    _documentCount = _matches.where((e) => e.$1.primary.kind.isDocument).length;
+    _updateVisible();
+  }
+
+  void _updateVisible() {
+    _visible = _visibleList();
+    _visiblePaths = [for (final entry in _visible) entry.$1.primary.path];
+  }
+
+  List<_Match> _visibleList() {
     final visible = [
-      for (final entry in matches ?? _matching())
+      for (final entry in _matches)
         if (_kind.accepts(entry.$1.primary.kind)) entry,
     ];
     if (_sort == _OpenSort.name) return visible;
@@ -407,21 +423,20 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// Het soortfilter zit hier bewust niet in: het scherm heeft zowel de
   /// gefilterde lijst als de aantallen per soort nodig, en dat zijn twee kijken
   /// op één zoekactie — geen twee zoekacties.
-  List<String> get _requiredTags => [
-    for (final part in _tagQuery.split(','))
-      if (part.trim().isNotEmpty) part.trim(),
-  ];
-
-  bool _tagsMatch(String content) =>
-      markdownHasKeywords(content, _requiredTags);
-
-  List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> _matching() {
+  List<_Match> _matching() {
     final q = _query.trim().toLowerCase();
-    final out = <(DuplicateInfo<ScannedMarkdown>, List<_Hit>)>[];
+    final requiredTags = [
+      for (final part in _tagQuery.split(','))
+        if (part.trim().isNotEmpty) part.trim(),
+    ];
+    bool tagsMatch(ScannedMarkdown file) =>
+        requiredTags.isEmpty || markdownHasKeywords(file.content, requiredTags);
+
+    final out = <_Match>[];
     final groups = _groups;
     if (q.isEmpty) {
       for (final info in groups) {
-        if (_tagsMatch(info.primary.content)) out.add((info, const []));
+        if (tagsMatch(info.primary)) out.add((info, const []));
       }
       return out;
     }
@@ -446,7 +461,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           '$contentLower';
       final fileMatch = matchesAll(fileHay);
       final hits = _hitsIn(file, first, matchesAll, contentLower);
-      if ((fileMatch || hits.isNotEmpty) && _tagsMatch(file.content)) {
+      if ((fileMatch || hits.isNotEmpty) && tagsMatch(file)) {
         out.add((info, hits));
       }
     }
@@ -492,9 +507,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final found = _matching();
-    final visible = _visibleList(found);
-    final documents = found.where((e) => e.$1.primary.kind.isDocument).length;
+    final presentations = _matches.length - _documentCount;
 
     return AlertDialog(
       title: Row(
@@ -527,6 +540,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
                 onChanged: (v) => setState(() {
                   _tagQuery = v;
                   _focusedIndex = null;
+                  _updateMatches();
                 }),
               ),
               const SizedBox(height: 8),
@@ -535,9 +549,10 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
                 onChanged: (v) => setState(() {
                   _kind = v;
                   _focusedIndex = null;
+                  _updateVisible();
                 }),
-                presentationCount: found.length - documents,
-                documentCount: documents,
+                presentationCount: presentations,
+                documentCount: _documentCount,
               ),
               const SizedBox(height: 8),
               Expanded(
@@ -546,9 +561,8 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
                   // gevonden zijn: in een lijst waarin alles een presentatie is,
                   // zegt "Presentatie" bij elke regel niets meer.
                   (previewShown) => _body(
-                    visible,
                     previewShown,
-                    documents > 0 && documents < found.length,
+                    _documentCount > 0 && presentations > 0,
                   ),
                 ),
               ),
@@ -585,8 +599,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         // belooft maakt het scherm alleen drukker.
         if (_selected.isNotEmpty)
           FilledButton.icon(
-            onPressed: () =>
-                _openSelection([for (final e in visible) e.$1.primary.path]),
+            onPressed: () => _openSelection(_visiblePaths),
             icon: const Icon(Icons.folder_open_outlined, size: 16),
             label: Text('${l10n.d('Openen')} (${_selected.length})'),
           ),
@@ -635,6 +648,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
             onChanged: (v) => setState(() {
               _query = v;
               _focusedIndex = null;
+              _updateMatches();
             }),
           ),
         ),
@@ -651,6 +665,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
             setState(() {
               _sort = sort;
               _focusedIndex = null;
+              _updateVisible();
             });
             if (_scrollController.hasClients) _scrollController.jumpTo(0);
           },
@@ -689,11 +704,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
   }
 
-  Widget _body(
-    List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> visible,
-    bool previewShown,
-    bool showKind,
-  ) {
+  Widget _body(bool previewShown, bool showKind) {
     final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
@@ -719,14 +730,15 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         ),
       );
     }
-    if (visible.isEmpty) {
+    if (_visible.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
         '${l10n.d('Geen resultaten voor')} "$_query".',
       );
     }
 
-    final visiblePaths = [for (final e in visible) e.$1.primary.path];
+    final visible = _visible;
+    final visiblePaths = _visiblePaths;
     return ListView.separated(
       controller: _scrollController,
       itemCount: visible.length,
