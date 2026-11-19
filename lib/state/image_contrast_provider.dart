@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:ui' show Color;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/deck.dart';
 import '../models/markdown_validation.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
@@ -9,50 +13,69 @@ import '../utils/project_path.dart';
 import '../utils/title_contrast.dart';
 import 'deck_provider.dart';
 
-/// Computes the title-slide image-contrast issues for the deck in [ref]'s
-/// scope. Exposed as a function so it can back both the global provider and the
-/// per-tab [ProviderScope] override (where `deckProvider` is overridden) — see
-/// `AppShell`. Mirrors how `deckQualityProvider` is wired.
-Future<List<SlideQualityIssue>> computeImageContrastIssues(Ref ref) async {
-  final deck = ref.watch(deckProvider.select((s) => s.deck));
-  if (deck == null) return const [];
+// Alleen koppen die op het achtergrondbeeld liggen, hebben deze controle nodig.
+Iterable<int> _contrastIndices(Deck deck) sync* {
+  for (var i = 0; i < deck.slides.length; i++) {
+    final slide = deck.slides[i];
+    if (!slide.skipped &&
+        (slide.type == SlideType.title || slide.type == SlideType.section) &&
+        slide.titleColumnLayout == TitleColumnLayout.none &&
+        slide.imagePath.isNotEmpty &&
+        slide.imageSize == 0 &&
+        (slide.title.isNotEmpty || slide.subtitle.isNotEmpty)) {
+      yield i;
+    }
+  }
+}
 
-  // Heading slides whose text actually sits on the background image; everything
-  // else is irrelevant. Both the title and the tussentitel carry a full-slide
-  // background now, and both put the text straight on it when it fills the slide.
-  // A non-full-bleed image (imageSize != 0) is confined to the top zone with the
-  // heading in a solid band below it, so its text never crosses the picture and
-  // the image-contrast check does not apply.
-  final indices = [
-    for (var i = 0; i < deck.slides.length; i++)
-      if (!deck.slides[i].skipped &&
-          (deck.slides[i].type == SlideType.title ||
-              deck.slides[i].type == SlideType.section) &&
-          deck.slides[i].titleColumnLayout == TitleColumnLayout.none &&
-          deck.slides[i].imagePath.isNotEmpty &&
-          deck.slides[i].imageSize == 0 &&
-          (deck.slides[i].title.isNotEmpty ||
-              deck.slides[i].subtitle.isNotEmpty))
-        i,
+String? _contrastKey(Deck? deck) {
+  if (deck == null) return null;
+  return jsonEncode([
+    deck.projectPath,
+    for (final i in _contrastIndices(deck)) _contrastInput(deck, i),
+  ]);
+}
+
+List<Object?> _contrastInput(Deck deck, int index) {
+  final slide = deck.slides[index];
+  final profile = deck.slideProfileAt(index);
+  return [
+    index,
+    slide.imagePath,
+    slide.type.name,
+    slide.title.isNotEmpty,
+    slide.subtitle.isNotEmpty,
+    slide.titleImageOverlay,
+    slide.titleTextColorOverride,
+    imageOverlayStrengthFor(slide),
+    profile.titleTextColor,
+    profile.titleBackgroundColor,
+    profile.sectionBackgroundColor,
   ];
+}
 
-  // Decode the backgrounds in parallel so a deck with many title images
-  // doesn't pay the sum of every decode on a cold cache.
-  final averages = await Future.wait(
-    indices.map((i) async {
-      final resolved = resolveSlideAssetPath(
-        deck.slides[i].imagePath,
-        deck.projectPath,
-      );
-      return resolved == null ? null : await averageImageColor(resolved);
-    }),
-  );
+/// Computes the title-slide image-contrast issues for the deck in [ref]'s
+/// scope, including the per-tab override.
+Future<List<SlideQualityIssue>> computeImageContrastIssues(Ref ref) async {
+  final key = ref.watch(deckProvider.select((s) => _contrastKey(s.deck)));
+  if (key == null) return const [];
+  final deck = ref.read(deckProvider).deck!;
+  final averages = <String, Color?>{};
+  var cancelled = false;
+  ref.onDispose(() => cancelled = true);
 
   final issues = <SlideQualityIssue>[];
-  for (var k = 0; k < indices.length; k++) {
-    final i = indices[k];
+  for (final i in _contrastIndices(deck)) {
+    if (cancelled) break;
     final slide = deck.slides[i];
-    final avg = averages[k];
+    if (!averages.containsKey(slide.imagePath)) {
+      final resolved = resolveSlideAssetPath(slide.imagePath, deck.projectPath);
+      // Serieel lezen voorkomt een geheugenspiek bij meerdere grote foto's.
+      averages[slide.imagePath] = resolved == null
+          ? null
+          : await averageImageColor(resolved);
+    }
+    final avg = averages[slide.imagePath];
     if (avg == null) {
       // Couldn't decode — fall back to the "verify visually" informational
       // note instead of a confident pass/fail.
