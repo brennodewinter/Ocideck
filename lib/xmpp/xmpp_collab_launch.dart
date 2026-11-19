@@ -52,6 +52,7 @@ import '../collab/collab_participant.dart';
 import '../collab/collab_session.dart';
 import '../collab/collab_snapshot.dart';
 import '../models/deck.dart';
+import '../utils/log.dart';
 import 'companion_demux.dart';
 import 'xmpp_chat.dart';
 import 'xmpp_key_exchange.dart';
@@ -90,6 +91,9 @@ class XmppCollabLaunch {
 
   CollabSession? _session;
   Timer? _timer;
+  Future<void>? _syncing;
+  int _failedRounds = 0;
+  DateTime? _retryAfter;
   bool _disposed = false;
   final _ready = Completer<CollabSession>();
   StreamSubscription<CollabSnapshot>? _rebaselineSub;
@@ -164,8 +168,12 @@ class XmppCollabLaunch {
   /// newcomer (§6); the guest retries a buffered snapshot and, once one opens,
   /// starts its session on the authority's slide-id space (§5.5). Presence en
   /// chat retryen hun buffers elke ronde — een joiner ziet ze vóór zijn keyshare.
-  Future<void> syncNow() async {
-    if (_disposed) return;
+  Future<void> syncNow() {
+    if (_disposed) return Future.value();
+    return _syncing ??= _syncRound().whenComplete(() => _syncing = null);
+  }
+
+  Future<void> _syncRound() async {
     // Short-circuit: als geen brick pending-entries heeft, is er niets te
     // retryen — sla de retry-calls over en bespaar CPU-wakeups op een idle
     // sessie (#1423). De host's ensureKeyed + re-baseline logica loopt nog
@@ -185,17 +193,19 @@ class XmppCollabLaunch {
       // a MUC gives no `/sync`-achtergrond, so the snapshot comes after the
       // keyshare). Existing keyed devices see it as a forward-only re-
       // baseline and ignore it if their version is already ≥.
-      if (_session != null && keyExchange.keyedDeviceCount > _lastKeyed) {
-        _lastKeyed = keyExchange.keyedDeviceCount;
+      final keyed = keyExchange.keyedDeviceCount;
+      if (!_disposed && _session != null && keyed > _lastKeyed) {
         await snapshotChannel.sendSnapshot(
           CollabSnapshot.capture(_session!.deck, _session!.version, 0),
         );
+        _lastKeyed = keyed;
       }
       return;
     }
     if (snapshotChannel.hasPending) await snapshotChannel.retryPending();
     if (_session == null && snapshotChannel.hasSnapshot) {
       final snapshot = await snapshotChannel.firstSnapshot;
+      if (_disposed) return;
       _session = CollabSession(
         initialDeck: snapshot.applyTo(_localDeck),
         transport: transport,
@@ -208,7 +218,7 @@ class XmppCollabLaunch {
     // re-bases the session forward-only. De listener moet ook gezet worden als
     // de sessie al bestaat (bijv. na een reconnect) — anders gaat een re-
     // baseline snapshot stil verloren (#1428).
-    if (_session != null && _rebaselineSub == null) {
+    if (!_disposed && _session != null && _rebaselineSub == null) {
       _rebaselineSub = snapshotChannel.rebaselines.listen((snap) {
         if (_session != null) {
           _session!.rebaseTo(snap.applyTo(_session!.deck), snap.version);
@@ -220,7 +230,27 @@ class XmppCollabLaunch {
   /// Begin syncing on [interval]; the periodic driver of [syncNow]. Idempotent.
   void start({Duration interval = const Duration(seconds: 1)}) {
     if (_disposed) return;
-    _timer ??= Timer.periodic(interval, (_) => syncNow());
+    _timer ??= Timer.periodic(interval, (_) {
+      final retryAfter = _retryAfter;
+      if (_syncing != null ||
+          (retryAfter != null && DateTime.now().isBefore(retryAfter)))
+        return;
+      unawaited(_syncTick());
+    });
+  }
+
+  Future<void> _syncTick() async {
+    try {
+      await syncNow();
+      _failedRounds = 0;
+      _retryAfter = null;
+    } catch (error, stack) {
+      logError('XMPP collaboration sync', error, stack);
+      _retryAfter = DateTime.now().add(
+        Duration(seconds: 1 << _failedRounds.clamp(0, 5)),
+      );
+      _failedRounds++;
+    }
   }
 
   /// End the session locally: stop the loop, dispose the session (and with it
