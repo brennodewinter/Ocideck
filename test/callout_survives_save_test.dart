@@ -70,6 +70,27 @@ void main() {
     expect((dia.callouts.first.targets.first as CalloutPoint).x, 0.279);
   });
 
+  test('duplicaat bewaart zijn eigen calloutblok en springdoel', () {
+    final original = _madeInTheEditor().copyWith(
+      anchor: 'pomp',
+      nextAnchor: 'slot',
+    );
+    final duplicate = Slide.duplicate(original);
+    final destination = Slide.create(
+      SlideType.bullets,
+    ).copyWith(anchor: 'slot');
+    final deck = Deck(
+      title: 'Reis',
+      slides: [original, duplicate, destination],
+    );
+
+    final slides = svc.parseDeck(svc.generateDeck(deck))!.slides;
+    expect(slides[0].anchor, isNot(slides[1].anchor));
+    expect(slides[0].callouts.single.description, 'de regelaar');
+    expect(slides[1].callouts.single.description, 'de regelaar');
+    expect(slides[1].nextAnchor, 'slot');
+  });
+
   test('zonder anker valt de verwijzing weg — de fout die dit voorkomt', () {
     // Precies wat de app schreef vóór de reparatie: geen anker, geen `(A)`.
     final kapot = _madeInTheEditor().copyWith(
