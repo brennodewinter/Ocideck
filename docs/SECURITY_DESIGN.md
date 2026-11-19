@@ -460,6 +460,20 @@ requests. To play this media on desktop, add a local copy to the presentation.
 Browser builds keep their existing browser/CSP boundary. Embedded provider
 players use the separate, opt-in embed path.
 
+### Links opened in the system browser (#3056)
+
+Slide links open only after a user action. OciDeck checks the initial HTTP(S)
+address with NetGuard and resolves it afresh before handing it off. URLs with
+embedded credentials are refused. The browser then resolves names and follows
+redirects with its own cookies and policy. A public address can therefore lead
+to a private destination after handoff, including through a DNS change.
+
+This residual is accepted for explicit browser navigation. A separate HTTP
+preflight could make an extra network request to a document-supplied URL,
+and the real browser navigation could still receive a different response.
+The initial check protects the handoff from direct private addresses and policy
+violations. It cannot enforce a network policy inside another application.
+
 ## 4. Asset-path containment
 
 Asset references (images, video, CSS) are confined to the project folder by the
