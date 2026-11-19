@@ -83,9 +83,9 @@ void main() {
       final platform = _Platform();
       final previous = WebViewPlatform.instance;
       WebViewPlatform.instance = platform;
-    if (previous != null) {
-      addTearDown(() => WebViewPlatform.instance = previous);
-    }
+      if (previous != null) {
+        addTearDown(() => WebViewPlatform.instance = previous);
+      }
       final snapshot = WebsiteStyleSnapshot(
         url: Uri.parse('https://example.org'),
         html: '<html><body>Offline preview</body></html>',
