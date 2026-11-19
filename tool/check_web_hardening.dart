@@ -5,7 +5,7 @@
 //
 // What it asserts about build/web:
 //   * index.html ships a CSP that locks scripts to 'self' + 'wasm-unsafe-eval'
-//     (NOT 'unsafe-eval'/'unsafe-inline') and keeps connect-src first-party.
+//     (NOT 'unsafe-eval'/'unsafe-inline') and limits connections to local/TLS URLs.
 //   * CanvasKit is self-hosted (local wasm + useLocalCanvasKit flag), so the
 //     engine never fetches it from the gstatic CDN.
 //   * The UI font is bundled, so text needs no fonts.gstatic.com fetch.
@@ -65,6 +65,12 @@ void main() {
       require(
         !scriptSrc.contains("'unsafe-inline'"),
         "CSP script-src must NOT allow 'unsafe-inline'.",
+      );
+      // Flutter injects runtime styles; retain that scoped exception without
+      // allowing remote stylesheets or extending it to script-src (#3017).
+      require(
+        _eq(directives['style-src'], ["'self'", "'unsafe-inline'"]),
+        "CSP style-src must be exactly 'self' 'unsafe-inline'.",
       );
       // No directive should ever permit the JS eval escape ('wasm-unsafe-eval'
       // is a distinct token and is fine).

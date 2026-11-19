@@ -4,7 +4,7 @@
 # The web bundle ships a Content-Security-Policy and a Referrer-Policy as <meta>
 # tags inside index.html, but a browser ignores `frame-ancestors` (and
 # `sandbox`/`report-*`) unless the CSP arrives as a real HTTP response header —
-# see the long comment in web/index.html. Several hardening headers
+# see docs/HOSTING.md §3. Several hardening headers
 # (Strict-Transport-Security, X-Frame-Options, Permissions-Policy) have no <meta>
 # form at all. This file supplies the header form so those directives are
 # actually enforced, and it travels *with* the bundle: `flutter build web` copies

@@ -672,3 +672,38 @@ A source fix merged after v0.7.13 is delivered in a subsequent web build; it
 does not modify the signed v0.7.13 archive or move its tag. A server-only
 configuration change can take effect separately, with its own syntax check,
 rollback copy and live HTTP verification.
+
+### Separate CSP subalerts and accepted trade-offs
+
+The baseline groups by scan-rule ID. A single `10055` summary can contain
+several alert references; its displayed name is not a complete inventory.
+The detailed report separates `10055-11` (invalid meta directive), `10055-3`
+(the associated parser notice), `10055-4` (broad `connect-src`) and `10055-6`
+(inline style permission). The meta fix removes the first problem and its
+notice, without claiming to remove the other two policy trade-offs.
+
+For [#3016](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3016), retain
+`connect-src 'self' https: wss: blob:` for user-selected URL import, model/provider
+fetches, meeting signalling and local dropped files. A static fixed host list
+would remove the supported bring-your-own-provider/host workflow. This leaves
+outbound connection opportunities if trusted code is compromised; **CORS does
+not prevent sending all requests or act as an exfiltration firewall**. The
+controls are a restrictive first-party script policy without inline JavaScript
+or general eval, TLS-only external connections, and consent at the relevant
+integration boundary. See SECURITY_DESIGN.md §1 for the existing threat model.
+A deployment with a fixed set of providers may restrict both header and meta
+`connect-src` together. Reassess the generic policy if those workflows change.
+
+For [#3017](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3017), retain
+`style-src 'self' 'unsafe-inline'`: Flutter generates runtime styling and the
+loading splash uses a local style block. A fixed hash of the splash alone does
+not authorise the engine's dynamic styles. This permits injected CSS if markup
+injection is introduced; it does **not** authorise inline JavaScript, remote
+stylesheets or remote image/font/media loads. The built-bundle gate pins the
+style exception separately from the stricter `script-src`. Reassess when the
+renderer offers a viable nonce/hash policy for its runtime styles, or when the
+app begins rendering untrusted DOM markup.
+
+Both warnings remain enabled in ZAP and are consciously accepted for the
+current architecture. Keep the detailed alert references in subsequent scan
+reviews, even when the baseline still reports one combined CSP warning group.
