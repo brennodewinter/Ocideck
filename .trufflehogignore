@@ -77,6 +77,11 @@
 ^test/media/youtube_reference_test\.dart$
 ^test/media/media_url_client_test\.dart$
 
+# Websitehuisstijl: de opzettelijke user:secret@example.org-fixture bewijst
+# dat URL-invoer met credentials wordt geweigerd, ook aanwezig in de historie.
+# Alleen dit testbestand; Gitleaks blijft bestand en historie controleren.
+^test/website_style/website_style_test\.dart$
+
 # Bronbundeltest: de URL met user:secret@example.invalid is een opzettelijke
 # fixture die bewijst dat repositorycredentials uit openbaar bewijs verdwijnen.
 ^test/python/test_linux_source_bundle\.py$
@@ -88,6 +93,11 @@
 # niet in de repo — `package.json`/`package-lock.json`/`run.sh` wél,
 # `node_modules/` niet.
 ^tool/marp-check/node_modules/
+
+# De gepinde Playwright-browserproef bevat dezelfde soort proxyvoorbeelden
+# met user:password. Alleen gedownloade, gitignored Node-pakketten overslaan;
+# package.json, lockfile en eigen browserproef blijven volledig gescand.
+^tool/web-wasm-check/node_modules/
 
 # Gepinde FFmpeg-bron- en bouwcache; eigen manifest/recept blijven gescand.
 ^native/media_decoder/build/
