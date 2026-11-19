@@ -411,7 +411,7 @@ Future<StyleProfileBytes> _buildStyleProfileBytes(
 
 Future<StyleProfileImportOutcome> _restoreStyleBackgrounds(
   ThemeProfile profile,
-  Map envelope,
+  Map<dynamic, dynamic> envelope,
   Directory? logoBaseDir,
   bool logoOmitted,
 ) async {

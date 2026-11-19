@@ -543,8 +543,9 @@ Future<ThemeProfile> _storeWebsiteStyleImages(
       entry.value,
       profileName: '${profile.name} ${entry.key.name}',
     );
-    if (path == null)
+    if (path == null) {
       throw const FormatException('Website image was not saved');
+    }
     paths[entry.key] = path;
   }
   return profile.copyWith(
