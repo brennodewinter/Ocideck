@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import '../lib/services/recovery_process_io.dart';
+import 'package:ocideck/services/recovery_process_io.dart';
 
 void main() {
   final supported = Platform.isWindows || Platform.isMacOS || Platform.isLinux;
