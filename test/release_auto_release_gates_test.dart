@@ -365,6 +365,10 @@ select_repair_candidate "$RELEASE" "$CANDIDATE"
         );
         expect(result.stdout, isEmpty);
         const rejectedFor = {
+          'maintenance-base-advanced': 'exact origin/codex/maintenance-v9.9.9',
+          'wrong-pr-base': 'aantoonbaar gemergde',
+          'maintenance-wrong-pr-base': 'aantoonbaar gemergde',
+          'maintenance-product-change': 'buiten de toegestane',
           'only-origin-frozen': 'exact origin/main',
           'moved-frozen-ref': 'verschoof',
           'already-tagged': 'publieke tag',
