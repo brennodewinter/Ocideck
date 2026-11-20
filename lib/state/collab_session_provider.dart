@@ -179,6 +179,9 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   void _attachController(CollabSession session, DeckNotifier deckNotifier) {
     _controller = CollabSessionController(
       session: session,
+      onSubmitFailure: () {
+        if (!_disposed) state = state.copyWith(error: 'send-failed');
+      },
       readDeck: () => deckNotifier.currentState.deck ?? session.deck,
       writeDeck: (deck) {
         final before = deckNotifier.currentState.deck;

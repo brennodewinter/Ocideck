@@ -213,6 +213,11 @@ void listenCollabAuthorityChange(
   AppLocalizations l10n,
 ) {
   ref.listen(collabSessionProvider, (prev, next) {
+    if (next.error == 'send-failed' && prev?.error != next.error) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.d('Samenwerking mislukt.'))));
+    }
     if (prev?.isTemporaryAuthority == next.isTemporaryAuthority) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

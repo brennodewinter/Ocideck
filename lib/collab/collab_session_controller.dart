@@ -40,6 +40,7 @@ class CollabSessionController {
     required this.session,
     required this.readDeck,
     required this.writeDeck,
+    this.onSubmitFailure,
   }) {
     _sub = session.deckChanges.listen(_applySessionDeck);
     // Adopt whatever the session already holds (a joiner's caught-up baseline).
@@ -53,6 +54,9 @@ class CollabSessionController {
 
   /// Replace the tab's deck (with a merged result, never a raw session deck).
   final void Function(Deck deck) writeDeck;
+
+  /// Een transportfout moet ook buiten het logboek zichtbaar kunnen worden.
+  final void Function()? onSubmitFailure;
 
   late final StreamSubscription<Deck> _sub;
   bool _applyingRemote = false;
@@ -84,20 +88,15 @@ class CollabSessionController {
   }
 
   Future<void> _submit(DeckOp op) async {
-    final authority = session.isAuthority;
     try {
       await session.submit(op);
     } catch (error, stack) {
       logError('collab: local edit not sent', error, stack);
-      if (_disposed || authority || op is! SetSlideField) return;
-      final key = _fieldKey(op.slideId, op.field);
-      final pending = _inflight[key];
-      final index =
-          pending?.indexWhere((value) => collabValuesEqual(value, op.value)) ??
-          -1;
-      if (index < 0) return;
-      pending!.removeAt(index);
-      if (pending.isEmpty) _clearField(key);
+      // Bewaar de baseline-bescherming: een ongerelateerde remote wijziging
+      // mag een niet-verzonden lokale waarde niet terugzetten (#3071).
+      // Gast-intenties worden niet blind herhaald: een onzekere InsertSlide
+      // kan al ontvangen zijn en heeft nog geen deduplicatie-id.
+      if (!_disposed) onSubmitFailure?.call();
     }
   }
 
