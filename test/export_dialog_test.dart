@@ -115,6 +115,15 @@ void main() {
       ),
     );
 
+    final notes = find.widgetWithText(
+      CheckboxListTile,
+      'A4 · Sprekersnotities',
+    );
+    expect(tester.widget<CheckboxListTile>(notes).value, isFalse);
+    await tester.ensureVisible(notes);
+    await tester.tap(notes);
+    await tester.pumpAndSettle();
+    expect(tester.widget<CheckboxListTile>(notes).value, isTrue);
     expect(find.text('Afbeeldingskwaliteit (PDF)'), findsOneWidget);
     // De kwaliteitskeuze zit achter de inklapbare kop (progressive
     // disclosure); openklappen toont de segmentknop.

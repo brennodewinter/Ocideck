@@ -3555,6 +3555,14 @@ list so you can spot them without opening each slide.
 
 ## Exporting
 
+For a portrait A4 handout, enable **A4 · Speaker notes** below the PDF button.
+Each slide starts on a new page with a scaled image at the top and its speaker
+notes underneath. Long notes continue on following pages. The selected audience,
+redactions, detail level and question filter apply to both the image and the
+notes. The file name includes `-a4-notities`. Leave this option off for the usual
+slide-sized PDF; the choice does not affect PowerPoint or the other formats.
+
+
 Export to:
 
 - **PDF** and **PPTX** (PPTX includes speaker notes) — rendered from the in-app

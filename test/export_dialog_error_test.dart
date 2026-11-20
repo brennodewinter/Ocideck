@@ -42,6 +42,7 @@ class _ThrowingExportService extends ExportService {
     ExportFormat format,
     List<Uint8List> images, {
     bool compress = false,
+    bool pdfWithSpeakerNotes = false,
     Object? outputDirectory,
     Object? audience,
     Object? themeProfile,

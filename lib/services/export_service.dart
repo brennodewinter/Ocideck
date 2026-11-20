@@ -10,6 +10,9 @@ import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:flutter/services.dart' show rootBundle;
+
+import 'pdf/presentation_notes_pdf.dart';
 
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
@@ -101,6 +104,7 @@ class ExportService {
     ExportFormat format,
     List<Uint8List> images, {
     bool compress = false,
+    bool pdfWithSpeakerNotes = false,
     String? outputDirectory,
 
     ExportBundle? audience,
@@ -151,6 +155,14 @@ class ExportService {
     } else if (images.isEmpty) {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
+    if (pdfWithSpeakerNotes &&
+        format == ExportFormat.pdf &&
+        (audience == null ||
+            audience.audience.slides.length != images.length)) {
+      return ExportResult.fail(
+        'De dia’s en sprekersnotities komen niet overeen.',
+      );
+    }
     final fallbackTitle = p.basenameWithoutExtension(deckPath);
     final given =
         metadata ?? ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);
@@ -177,7 +189,9 @@ class ExportService {
         '$prefix${p.basenameWithoutExtension(deckPath)}'
         '${privacyProfile.fileSuffix}${includeDetail ? '' : '-beknopt'}'
         '${questions.fileSuffix}'
-        '${docMeta.fileSuffix}$compactSuffix${format.extension}';
+        '${docMeta.fileSuffix}'
+        '${pdfWithSpeakerNotes && format == ExportFormat.pdf ? '-a4-notities' : ''}'
+        '$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
       final bytes = await _encode(
@@ -192,6 +206,7 @@ class ExportService {
         cockpitColorScheme: cockpitColorScheme,
         interfaceLanguageCode: interfaceLanguageCode,
         compress: compress,
+        pdfWithSpeakerNotes: pdfWithSpeakerNotes,
       );
       // Web: geen bestandssysteem — de export vertrekt als browserdownload.
       if (deliversByDownload) {

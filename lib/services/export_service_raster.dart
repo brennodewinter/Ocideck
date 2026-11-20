@@ -100,8 +100,17 @@ Future<Uint8List> _buildPdf(
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
   bool compress = false,
+  bool withSpeakerNotes = false,
+  ExportBundle? audience,
   double slideAspect = kScreenSlideAspect,
-}) {
+}) async {
+  final fonts = withSpeakerNotes
+      ? await Future.wait([
+          rootBundle.load('assets/fonts/Roboto-Variable.ttf'),
+          rootBundle.load('assets/fonts/Inter-Variable.ttf'),
+          rootBundle.load('assets/fonts/NotoSansMath-subset.ttf'),
+        ])
+      : const <ByteData>[];
   final moved = _movedImages(images);
   return ExportService._offload(() async {
     final doc = pw.Document(
@@ -112,9 +121,19 @@ Future<Uint8List> _buildPdf(
       creator: metadata.creator,
       producer: metadata.producer,
     );
+    final received = _receivedImages(moved, images);
+    if (withSpeakerNotes) {
+      addPresentationNotesPages(
+        doc,
+        [for (final png in received) compress ? _toJpeg(png) : png],
+        audience: audience!.audience,
+        fallbackFonts: fonts,
+      );
+      return doc.save();
+    }
     // Page size in points; only the ratio matters for a full-bleed image.
     final format = PdfPageFormat(1280, 1280 / slideAspect, marginAll: 0);
-    for (final png in _receivedImages(moved, images)) {
+    for (final png in received) {
       // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
       // compressed (JPEG) slide embeds just like the lossless one.
       final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
@@ -162,6 +181,7 @@ extension _ExportFormats on ExportService {
     required CockpitColorScheme cockpitColorScheme,
     required String interfaceLanguageCode,
     required bool compress,
+    required bool pdfWithSpeakerNotes,
   }) async {
     final Uint8List bytes;
     switch (format) {
@@ -171,6 +191,8 @@ extension _ExportFormats on ExportService {
           metadata: docMeta,
           fallbackTitle: fallbackTitle,
           compress: compress,
+          withSpeakerNotes: pdfWithSpeakerNotes,
+          audience: audience,
           slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
         );
       case ExportFormat.pptx:
