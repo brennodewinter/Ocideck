@@ -7241,8 +7241,8 @@ const _dutchSourceAddTr = <String, String>{
       'Dışa aktarma hazırlık sırasında durdu.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Dosya oluşturulamadı veya yazılamadı. Diskte yer olup olmadığını ve dışa aktarma klasörünün yazılabilir olduğunu denetleyin.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Slaytların görüntüye dönüştürülmesi başarısız oldu. Bunun nedeni bir slayt, dosya biçimi değil: HTML dışa aktarma buradan geçmez ve bu durumda genellikle çalışır.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Slaytlar görüntü olarak oluşturulamadı. Sunuyu HTML olarak da dışa aktarabilirsin.',
   'Technische melding:': 'Teknik ileti:',
   'presentaties': 'sunumlar',
   '/Presentaties': '/Sunumlar',

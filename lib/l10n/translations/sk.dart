@@ -6418,8 +6418,8 @@ const _dutchSourceAddSk = <String, String>{
       'Export sa zastavil počas prípravy.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Súbor sa nepodarilo zostaviť ani zapísať. Skontrolujte, či je na disku miesto a či sa dá do priečinka pre export zapisovať.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Vykreslenie snímok do obrázkov zlyhalo. Príčinou je snímka, nie formát súboru: export do HTML tadiaľto neprechádza a v tomto prípade zvyčajne funguje.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Snímky sa nepodarilo vykresliť ako obrázky. Prezentáciu môžeš exportovať aj vo formáte HTML.',
   'Technische melding:': 'Technická správa:',
   'presentaties': 'prezentacie',
   '/Presentaties': '/Prezentácie',

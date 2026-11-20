@@ -6433,8 +6433,8 @@ const _dutchSourceAddId = <String, String>{
       'Ekspor berhenti saat persiapan.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Berkas tidak dapat dibuat atau ditulis. Periksa apakah ada ruang disk dan apakah folder ekspor dapat ditulisi.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Perenderan salindia menjadi gambar gagal. Ini karena salah satu salindia, bukan format berkas: ekspor HTML tidak melewati tahap ini dan biasanya tetap berhasil.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Slide gagal dirender sebagai gambar. Kamu juga bisa mengekspor presentasi sebagai HTML.',
   'Technische melding:': 'Pesan teknis:',
   'presentaties': 'presentasi',
   '/Presentaties': '/Presentasi',

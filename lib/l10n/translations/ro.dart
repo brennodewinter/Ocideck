@@ -6493,8 +6493,8 @@ const _dutchSourceAddRo = <String, String>{
       'Exportul s-a oprit în timpul pregătirii.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Fișierul nu a putut fi construit sau scris. Verificați dacă există spațiu pe disc și dacă folderul de export permite scrierea.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Randarea diapozitivelor în imagini a eșuat. Cauza este un diapozitiv, nu formatul fișierului: exportul HTML nu trece pe aici și în acest caz de obicei funcționează.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Diapozitivele nu au putut fi redate ca imagini. Poți exporta prezentarea și în format HTML.',
   'Technische melding:': 'Mesaj tehnic:',
   'presentaties': 'prezentari',
   '/Presentaties': '/Prezentări',

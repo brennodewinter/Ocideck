@@ -6451,8 +6451,8 @@ const _dutchSourceAddGsw = <String, String>{
       'De Export isch bim Vorbereite abbroche.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'S Datei het nöd chöne ufboue oder gschribe werde. Lueg, öb s no Platz het und öb de Exportordner beschriibbar isch.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'S Rendere vo de Folie zu Bilder isch fählgschlage. Das lit a ere Folie, nöd am Dateiformat: de HTML-Export chunnt da nöd verbii und funktioniert i dem Fall meischtens.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'D Folie händ nöd als Bilder grenderet werde chönne. Du chasch d Präsentation au als HTML exportiere.',
   'Technische melding:': 'Technischi Möldig:',
   'presentaties': 'praesentatione',
   '/Presentaties': '/Präsentatione',
