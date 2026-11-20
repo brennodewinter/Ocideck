@@ -29,6 +29,9 @@ final _errnoLocation = _libc
 bool? _windowsProcessIsAlive(int owner) {
   const synchronize = 0x00100000;
   const invalidParameter = 87;
+  // Resolve and warm the FFI error reader before an API can set its error.
+  // First-use initialization would otherwise overwrite that Windows error.
+  _getLastError();
   final handle = _openProcess(synchronize, 0, owner);
   if (handle == nullptr) {
     return _getLastError() == invalidParameter ? false : null;

@@ -36,6 +36,7 @@ import '../models/timeline.dart';
 import 'font_substitution.dart';
 import 'mermaid_theme.dart';
 import '../utils/log.dart';
+import '../utils/bullet_marker_svg.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/inline_markdown.dart';
