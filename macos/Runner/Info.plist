@@ -44,6 +44,10 @@
 	<string>OciDeck gebruikt systeemgeluid alleen als u dat zelf start, voor een opname die op dit apparaat blijft. Het beeld wordt niet bewaard en er wordt niets verstuurd.</string>
 	<key>FLTEnableMergedPlatformUIThread</key>
 	<true/>
+	<!-- #3076: use Skia until a pinned Flutter release fixes the macOS
+	     Impeller crash in Canvas::SetupRenderPass (flutter/flutter#185394). -->
+	<key>FLTEnableImpeller</key>
+	<false/>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
