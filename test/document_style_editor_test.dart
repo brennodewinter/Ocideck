@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/utils/bullet_marker_svg.dart';
 import 'package:ocideck/utils/document_front_matter.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
@@ -90,6 +92,62 @@ void main() {
     expect(n.currentState.document!.body, '# Kop\n\nTekst.');
     expect(find.text('Stijl: Security'), findsOneWidget);
     expect(n.currentState.isDirty, isTrue);
+  });
+
+  testWidgets('het stijlmenu opent het beheer van stijlprofielen', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('- Punt'));
+    await tester.pumpWidget(harness(n));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.textContaining('Stijl:'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Stijlprofielen beheren…'));
+    await tester.pumpAndSettle();
+
+    final marker = find.widgetWithIcon(
+      SegmentedButton<BulletMarker>,
+      Icons.pets,
+    );
+    expect(marker, findsOneWidget);
+  });
+
+  testWidgets('de documentstijl vervangt alleen gewone bullets door pootjes', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    const profile = ThemeProfile(
+      name: 'Pootjes',
+      bulletMarker: BulletMarker.paw,
+    );
+    SharedPreferences.setMockInitialValues({
+      'themeProfiles': jsonEncode([profile.toJson()]),
+    });
+    const body = '- Gewoon punt\n  - Genest punt\n\n1. Nummer\n\n- [x] Taak';
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(body));
+    await tester.pumpWidget(harness(n));
+    await tester.pumpAndSettle();
+    final paw = find.byWidgetPredicate(
+      (widget) =>
+          widget is SvgPicture &&
+          widget.bytesLoader ==
+              SvgStringLoader(pawBulletSvg(profile.accentColor)),
+    );
+    expect(paw, findsNothing);
+
+    await pickStyle(tester, profile.name);
+    await tester.pumpAndSettle();
+    expect(paw, findsNWidgets(2));
+
+    await tester.tap(find.text("Pagina's"));
+    await tester.pumpAndSettle();
+    expect(paw, findsAtLeastNWidgets(2));
+    expect(n.currentState.document!.body, body);
   });
 
   testWidgets("'Geen' kiezen haalt de stijl er byte-getrouw weer uit", (

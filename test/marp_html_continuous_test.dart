@@ -44,6 +44,18 @@ void main() {
       },
     );
 
+    test('het stijlprofiel kan pootjes tekenen bij gewone bullets', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        '- Punt\n- [x] Taak\n\n1. Nummer',
+        continuous: true,
+        theme: const ThemeProfile(bulletMarker: BulletMarker.paw),
+      );
+      expect(html, contains('.document ul > li:not(.task-list-item)'));
+      expect(html, contains('input[type=checkbox]'));
+      expect(html, contains('data:image/svg+xml,'));
+    });
+
     test('de payload draagt de HELE body, niet meerdere losse secties', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(_md, continuous: true);

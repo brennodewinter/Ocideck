@@ -69,6 +69,26 @@ void main() {
     expect(text, contains('nadruk'));
   });
 
+  test('pootjes worden als vector gezet bij gewone bullets', () async {
+    const markdown = '- Punt\n\n1. Nummer\n\n- [ ] Taak';
+    const theme = ThemeProfile(accentColor: '#FF00FF');
+    final dots = await render(markdown, theme: theme);
+    final paws = await render(
+      markdown,
+      theme: theme.copyWith(bulletMarker: BulletMarker.paw),
+    );
+    final accent = orderedEquals([1.0, 0.0, 1.0]);
+    expect(
+      pdfFillColors(dots).where((color) => accent.matches(color, {})),
+      isEmpty,
+    );
+    expect(
+      pdfFillColors(paws).where((color) => accent.matches(color, {})),
+      hasLength(5),
+    );
+    expect(pdfVisibleText(paws), pdfVisibleText(dots));
+  });
+
   test('accenten overleven het zetten', () async {
     final text = pdfVisibleText(await render('Café, naïve, größer, Zürich.'));
     expect(text, contains('Café'));
