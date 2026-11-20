@@ -169,6 +169,13 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   /// aanslag binnen het uitstelvenster in het bestand (#2621).
   final VisualMarkdownFlush visualFlush = VisualMarkdownFlush();
 
+  void Function()? onVisualEditPending;
+
+  void markVisualEditPending() {
+    markDirty();
+    onVisualEditPending?.call();
+  }
+
   void flushPendingVisualEdit() => visualFlush.flush();
 
   /// Documenten zijn immutable (withSource maakt een nieuw exemplaar), dus dit
@@ -216,13 +223,15 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
     String? projectPath,
     String? suggestedName,
     String? pendingAudioPath,
+    bool recovered = false,
   }) {
     _clearHistory();
     state = DocumentState(
       document: document,
       filePath: filePath,
-      isDirty: false,
-      savedSource: document.source,
+      isDirty: recovered,
+      // Een herstelkopie is nog niet de opgeslagen basis voor undo/redo.
+      savedSource: recovered ? null : document.source,
       visualEdited: false,
       savedFileHash: DocumentIntegrity.hashDocument(document),
       projectPath: projectPath,

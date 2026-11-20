@@ -319,6 +319,7 @@ String _themedDocumentCss(
   // `em`, dus ze schalen vanzelf mee — net als in de app. Zonder de omzetting
   // pt→px was 11 pt hier 11 px: een derde kleiner dan de PDF (#1947).
   final bodyFontSize = documentBodyFontSizeToCssPx(t.documentBodyFontSize);
+  final bulletSvg = documentBulletSvg(t);
   return '.document{max-width:46rem;margin:24px auto;padding:32px 40px;'
       'background:${t.slideBackgroundColor};color:${t.textColor};'
       '--ocideck-accent:${t.accentColor};'
@@ -337,6 +338,7 @@ String _themedDocumentCss(
       '.document h2,.document h3,.document h4,.document h5,.document h6'
       '{color:${t.effectiveDocumentSubheadingColor}}'
       '.document a{color:${t.accentColor}}'
+      '${bulletSvg == null ? '' : _documentBulletCss(bulletSvg)}'
       '.document pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
       'border:1px solid ${t.codeTextColor}38;border-radius:6px;padding:16px;'
       'font-family:$codeFamily}'
@@ -520,4 +522,14 @@ String _cssFontStack(String font, {String? preferred}) {
       ? 'serif'
       : 'sans-serif';
   return "$prefix'$font', $generic";
+}
+
+String _documentBulletCss(String svg) {
+  const item =
+      '.document ul > li:not(.task-list-item)'
+      ':not(:has(> input[type=checkbox], > p > input[type=checkbox]))';
+  return '$item{list-style:none;position:relative}'
+      '$item::before{content:"";position:absolute;'
+      'inset-inline-start:-1.25em;top:.43em;width:.78em;height:.78em;'
+      'background:url("${_customBulletSvgDataUri(svg)}") center/contain no-repeat}';
 }

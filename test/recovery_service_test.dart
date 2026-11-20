@@ -400,6 +400,39 @@ void main() {
       return file;
     }
 
+    test('een verse heartbeat verbergt een gecrasht document niet', () async {
+      final lock = foreignLock('gecrasht');
+      // A PID outside the OS allocation range, with a heartbeat from now.
+      lock.writeAsStringSync(jsonEncode({'pid': 0x7fffffff}));
+      final original = File(p.join(tempDir.path, 'memo.md'))
+        ..writeAsStringSync('# Origineel\n');
+      await foreignSnapshot('document', 'gecrasht').writeAsString(
+        jsonEncode({
+          ...snap('document').toJson(),
+          'session': 'gecrasht',
+          'filePath': original.path,
+          'kind': 'document',
+          'markdown': '# Memo\n\nNog niet opgeslagen.\n',
+        }),
+      );
+      foreignSnapshot('presentatie', 'gecrasht');
+      await service.save(snap('levende-sessie'));
+      final restarted = RecoveryService(baseDir: tempDir);
+      addTearDown(restarted.endSession);
+
+      final recovered = await restarted.loadAll();
+
+      expect(
+        recovered.map((s) => s.id),
+        unorderedEquals(['document', 'presentatie']),
+      );
+      final document = recovered.singleWhere((s) => s.kind.isDocument);
+      expect(document.markdown, '# Memo\n\nNog niet opgeslagen.\n');
+      expect(document.filePath, original.path);
+      expect(original.readAsStringSync(), '# Origineel\n');
+      expect(lock.existsSync(), isFalse);
+    });
+
     test(
       'een tweede exemplaar ziet de momentopnames van de eerste niet',
       () async {

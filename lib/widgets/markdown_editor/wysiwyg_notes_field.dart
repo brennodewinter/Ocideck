@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../utils/bullet_marker_svg.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/visual_selection_markdown.dart';
@@ -570,7 +572,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   onLaunchUrl: widget.onTapLink,
                   // De vastgepinde Quill-versie biedt alleen hier toegang tot lijstnummering.
                   // ignore: experimental_member_use
-                  customLeadingBlockBuilder: _searchLeading,
+                  customLeadingBlockBuilder: _listLeading,
                   // De tabelcellen verwerken hun eigen taps en tekstfocus.
                   // Quill ziet dezelfde tik; zijn caret voor de gehele embed
                   // zou een lang document anders naar een andere rij scrollen.
@@ -648,7 +650,25 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
     );
   }
 
-  Widget? _searchLeading(Node node, LeadingConfig config) {
+  Widget? _listLeading(Node node, LeadingConfig config) {
+    final theme = widget.editorTheme;
+    if (theme.documentTypography && config.attribute == Attribute.ul) {
+      final svg = documentBulletSvg(theme.profile);
+      if (svg == null) return null;
+      final fontSize = MediaQuery.textScalerOf(
+        context,
+      ).scale(config.style?.fontSize ?? theme.fontSize);
+      final size = fontSize * 0.66;
+      return ExcludeDocumentSearch(
+        child: Container(
+          alignment: AlignmentDirectional.centerEnd,
+          width: config.width!,
+          height: fontSize * theme.lineHeight,
+          padding: EdgeInsetsDirectional.only(end: config.padding!),
+          child: SvgPicture.string(svg, width: size, height: size),
+        ),
+      );
+    }
     if (config.index == null) return null;
     return ExcludeDocumentSearch(
       child: QuillNumberPoint(

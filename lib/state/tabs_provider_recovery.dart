@@ -78,25 +78,73 @@ String? _markdownDraftFor(TabInfo tab) {
   return editor.hasMarkdownDraft ? editor.markdownBuffer : null;
 }
 
-/// Bewaar een niet-opgeslagen documenttabblad naar zijn herstelbestand. Slaat een
-/// schoon of ongewijzigd document over; de discard-abonnee in [_createDocumentTab]
-/// wist het bestand zodra het tabblad schoon is. Top-level (bewaart alleen via de
-/// meegegeven [recovery] en [lastAutosaved]) om de klassenratchet niet te tarten;
-/// zie [TabsNotifier._autosaveTick]. De deck-tegenhanger staat inline in de tik.
-void _autosaveDocument(
-  TabInfo tab,
-  DocumentNotifier doc,
-  RecoveryService recovery,
-  Map<int, String> lastAutosaved,
-) {
-  if (!doc.mounted) return;
-  doc.flushPendingVisualEdit();
-  final st = doc.currentState;
-  if (!(st.isOpen && st.isDirty)) return;
-  final source = st.document!.source;
-  if (lastAutosaved[tab.id] == source) return; // niets nieuws
-  recovery.save(_documentRecoverySnapshot(tab, st));
-  lastAutosaved[tab.id] = source;
+/// Bundle edits for a short, fixed window. A continuous stream of visual edits
+/// can postpone the editor's own conversion, so flush that buffer here too.
+class _DocumentRecovery {
+  _DocumentRecovery(this._tab, this._doc, this._service);
+
+  final TabInfo _tab;
+  final DocumentNotifier _doc;
+  final RecoveryService _service;
+  Timer? _timer;
+  bool _stopped = false;
+  bool _writing = false;
+  int _generation = 0;
+  (String, String?, bool)? _lastSaved;
+
+  void schedule() {
+    if (_stopped || !_service.available) return;
+    _timer ??= Timer(const Duration(seconds: 2), save);
+  }
+
+  Future<void> save() async {
+    _timer?.cancel();
+    _timer = null;
+    if (_stopped || !_service.available || !_doc.mounted) return;
+    if (_writing) {
+      schedule();
+      return;
+    }
+    _doc.flushPendingVisualEdit();
+    final state = _doc.currentState;
+    final document = state.document;
+    if (document == null || !state.isDirty) return;
+    final version = (document.source, state.filePath, document.hasUtf8Bom);
+    if (_lastSaved == version) return;
+
+    final generation = _generation;
+    _writing = true;
+    try {
+      final saved = await _service.save(_documentRecoverySnapshot(_tab, state));
+      if (saved && _generation == generation) _lastSaved = version;
+    } finally {
+      _writing = false;
+    }
+  }
+
+  void discard() {
+    _timer?.cancel();
+    _timer = null;
+    _lastSaved = null;
+    _generation++;
+    unawaited(_service.discard(_tab.recoveryId));
+  }
+
+  void dispose() {
+    _stopped = true;
+    _timer?.cancel();
+    _doc.onVisualEditPending = null;
+  }
+}
+
+extension TabsRecoveryExit on TabsNotifier {
+  /// Prevent a pending write from recreating recovery files during clean quit.
+  void stopRecoveryForExit() {
+    _autosaveTimer?.cancel();
+    for (final recovery in _documentRecovery.values) {
+      recovery.dispose();
+    }
+  }
 }
 
 /// De inverse van [_deckRecoverySnapshot]: bouwt het deck terug uit een
