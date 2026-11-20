@@ -85,6 +85,9 @@ class ExportService {
   /// of being embedded as lossless PNG, and `-compact` is appended to the file
   /// name so it never overwrites a full-quality export.
   ///
+  /// [pdfWithSpeakerNotes] kiest een staande A4-handout met spreektekst uit
+  /// dezelfde projectie als de dia’s. De standaard blijft de gewone dia-PDF.
+  ///
   /// ── Waarom [audience] één bundel is en geen losse strings ──
   ///
   /// De HTML-markdown en de PPTX-sprekersnotities komen allebei uit [audience].
@@ -144,25 +147,13 @@ class ExportService {
     );
     if (refusal != null) return refusal;
     final markdown = audience?.markdown;
-    if (format == ExportFormat.html) {
-      if (markdown == null || markdown.trim().isEmpty) {
-        return ExportResult.fail('Geen inhoud om te exporteren.');
-      }
-    } else if (format == ExportFormat.latex) {
-      if (audience == null || audience.audience.slides.isEmpty) {
-        return ExportResult.fail('Geen inhoud om te exporteren.');
-      }
-    } else if (images.isEmpty) {
-      return ExportResult.fail('Geen slides om te exporteren.');
-    }
-    if (pdfWithSpeakerNotes &&
-        format == ExportFormat.pdf &&
-        (audience == null ||
-            audience.audience.slides.length != images.length)) {
-      return ExportResult.fail(
-        'De dia’s en sprekersnotities komen niet overeen.',
-      );
-    }
+    final inputError = _exportInputFailure(
+      format,
+      images.length,
+      audience,
+      pdfWithSpeakerNotes,
+    );
+    if (inputError != null) return ExportResult.fail(inputError);
     final fallbackTitle = p.basenameWithoutExtension(deckPath);
     final given =
         metadata ?? ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);

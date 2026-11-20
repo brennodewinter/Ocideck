@@ -1542,6 +1542,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Opombe govorca',
   'Titeldia': 'Naslovni diapozitiv',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Slik ni bilo mogoče shraniti. Poskusite znova ali izpustite slike.',

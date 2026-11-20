@@ -610,6 +610,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'A4 · Sprekersnotities': 'A4 · Notas del orador',
   'Titeldia': 'Diapositiva de título',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'No se pudieron guardar las imágenes. Vuelve a intentarlo u omite las imágenes.',

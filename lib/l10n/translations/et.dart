@@ -1534,6 +1534,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Esineja märkmed',
   'Titeldia': 'Tiitelslaid',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Pilte ei saanud salvestada. Proovi uuesti või jäta pildid välja.',

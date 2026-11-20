@@ -1542,6 +1542,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Puhujan muistiinpanot',
   'Titeldia': 'Otsikkodia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Kuvia ei voitu tallentaa. Yritä uudelleen tai jätä kuvat pois.',

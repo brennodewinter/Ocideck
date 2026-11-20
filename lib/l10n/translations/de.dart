@@ -612,6 +612,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'A4 · Sprekersnotities': 'A4 · Sprechernotizen',
   'Titeldia': 'Titelfolie',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Die Bilder konnten nicht gespeichert werden. Versuchen Sie es erneut oder lassen Sie die Bilder weg.',

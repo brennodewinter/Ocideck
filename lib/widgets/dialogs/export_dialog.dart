@@ -803,7 +803,7 @@ class _ExportDialogState extends State<ExportDialog> {
         ),
         CheckboxListTile(
           value: _pdfWithSpeakerNotes,
-          title: Text('A4 · ${l10n.d('Sprekersnotities')}'),
+          title: Text(l10n.d('A4 · Sprekersnotities')),
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
           onChanged: _loading

@@ -1542,6 +1542,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Talernoter',
   'Titeldia': 'Titeldias',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Billederne kunne ikke gemmes. Prøv igen, eller udelad billederne.',

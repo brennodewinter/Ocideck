@@ -8,6 +8,32 @@
 // staat daarom in export_service.dart.
 part of 'export_service.dart';
 
+/// Weiger lege inhoud of notities zonder één-op-één geprojecteerde beelden.
+String? _exportInputFailure(
+  ExportFormat format,
+  int imageCount,
+  ExportBundle? audience,
+  bool pdfWithSpeakerNotes,
+) {
+  if (format == ExportFormat.html) {
+    if (audience == null || audience.markdown.trim().isEmpty) {
+      return 'Geen inhoud om te exporteren.';
+    }
+  } else if (format == ExportFormat.latex) {
+    if (audience == null || audience.audience.slides.isEmpty) {
+      return 'Geen inhoud om te exporteren.';
+    }
+  } else if (imageCount == 0) {
+    return 'Geen slides om te exporteren.';
+  }
+  if (pdfWithSpeakerNotes &&
+      format == ExportFormat.pdf &&
+      (audience == null || audience.audience.slides.length != imageCount)) {
+    return 'De dia’s en sprekersnotities komen niet overeen.';
+  }
+  return null;
+}
+
 /// De sprekersnotities van de geprojecteerde slides, in dezelfde volgorde als
 /// de gerasterde beelden — het PPTX-notitiepaneel koppelt op index.
 List<String>? _notesOf(ExportBundle? audience) => audience == null

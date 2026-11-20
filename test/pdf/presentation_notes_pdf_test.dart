@@ -19,8 +19,8 @@ import 'package:ocideck/services/privacy/privacy_regions.dart';
 
 import 'pdf_text_probe.dart';
 
-Uint8List _image() {
-  final image = img.Image(width: 320, height: 180);
+Uint8List _image({int width = 320, int height = 180}) {
+  final image = img.Image(width: width, height: height);
   img.fill(image, color: img.ColorRgb8(30, 60, 100));
   return Uint8List.fromList(img.encodePng(image));
 }
@@ -42,11 +42,11 @@ ExportBundle _bundle(
   markdownService: MarkdownService(),
 );
 
-Future<Uint8List> _pdf(ExportBundle bundle) async {
+Future<Uint8List> _pdf(ExportBundle bundle, {List<Uint8List>? images}) async {
   final doc = pw.Document();
   addPresentationNotesPages(
     doc,
-    [for (final _ in bundle.audience.slides) _image()],
+    images ?? [for (final _ in bundle.audience.slides) _image()],
     audience: bundle.audience,
     fallbackFonts: [
       ByteData.sublistView(
@@ -140,6 +140,26 @@ void main() {
       throwsArgumentError,
     );
   });
+
+  test(
+    'staande en brede dia’s passen zonder overloop boven de notities',
+    () async {
+      final bundle = _bundle([
+        Slide.create(SlideType.title).copyWith(notes: 'STAAND'),
+        Slide.create(SlideType.title).copyWith(notes: 'BREED'),
+      ]);
+      final bytes = await _pdf(
+        bundle,
+        images: [
+          _image(width: 160, height: 900),
+          _image(width: 900, height: 160),
+        ],
+      );
+      expect(pdfPageCount(bytes), 2);
+      expect(pdfVisibleTextPerPage(bytes).first, contains('STAAND'));
+      expect(pdfVisibleTextPerPage(bytes).last, contains('BREED'));
+    },
+  );
 
   test('een ontbrekend letterteken verdwijnt niet stilzwijgend', () {
     final bundle = _bundle([

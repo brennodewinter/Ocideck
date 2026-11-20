@@ -1558,6 +1558,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Noti tal-kelliem',
   'Titeldia': 'Pjastra tat-titlu',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'L-immaġnijiet ma setgħux jiġu ssejvjati. Erġa’ pprova jew ħalli l-immaġnijiet barra.',
