@@ -621,6 +621,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         ? settings.documentDefaultStyle
         : null,
     onStyleChanged: (name) => _setDocumentStyle(ref, name),
+    onManageStyles: () => SettingsDialog.show(
+      context,
+      initialSection: SettingsSection.presentation,
+    ),
     tlp: documentTlp,
     onTlpChanged: (level) => unawaited(applyDocumentTlp(context, ref, level)),
     showPageBreaks: _showPageBreaks,
