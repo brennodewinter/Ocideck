@@ -124,24 +124,23 @@ void main() {
     expect(ids(deck, viaMemo), ids(deck, uit.scan(deck)));
   });
 
-  test('een deck van 1000 dia\'s blijft bij de tweede scan binnen 5 ms', () {
+  test('een deck van 1000 dia\'s hergebruikt iedere warme diascan', () {
+    final counting = _CountingScanner();
     final slides = [
       for (var i = 0; i < 1000; i++) bullets('dia $i zonder bijzonderheden'),
     ];
     final deck = deckOf(slides);
-    memoizedDeckScan(scanner, deck);
+    memoizedDeckScan(counting, deck);
     final missesAfterWarm = privacyScanMemoMisses;
+    final callsAfterWarm = counting.slideScanCalls;
 
-    final watch = Stopwatch()..start();
-    memoizedDeckScan(scanner, deck);
-    watch.stop();
+    final again = memoizedDeckScan(counting, deck);
 
+    expect(callsAfterWarm, slides.length);
+    expect(missesAfterWarm, slides.length);
+    expect(counting.slideScanCalls, callsAfterWarm);
     expect(privacyScanMemoMisses, missesAfterWarm);
-    expect(
-      watch.elapsedMilliseconds,
-      lessThan(5),
-      reason: 'een warme scan van 1000 dia\'s duurde ${watch.elapsed}',
-    );
+    expect(ids(deck, again), ids(deck, scanner.scan(deck)));
   });
 
   test('een dia bovenaan invoegen scant alleen die nieuwe dia opnieuw', () {

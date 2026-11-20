@@ -8,6 +8,8 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/privacy/privacy_scan_memo.dart';
+import 'package:ocideck/services/privacy/privacy_scanner.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:path/path.dart' as p;
 
@@ -25,7 +27,7 @@ import 'support/fastest_of.dart';
 ///     lineaire scan per slide over het hele document) is op 10 slides
 ///     onzichtbaar en op 500 slides fataal.
 ///
-/// De tijdsbudgetten staan bewust ruim: ze vangen alleen catastrofale
+/// De omzettingsbudgetten staan bewust ruim: ze vangen alleen catastrofale
 /// algoritmische regressies, geen micro-timing. Metingen nemen het *minimum*
 /// van meerdere runs, wat robuust is tegen planningsruis op een belaste
 /// machine — een trager gemiddelde zegt niets, een trager minimum wel.
@@ -34,6 +36,10 @@ import 'support/fastest_of.dart';
 /// veel werk. Alleen dan raakt een belaste machine beide even hard en blijft
 /// de verhouding een uitspraak over het algoritme in plaats van over de
 /// machine.
+///
+/// De warme privacyscan bewaakt daarnaast de bestaande 5 ms-norm. Die meting
+/// draait geïsoleerd, na JIT-opwarming, met de mediaan van vaste steekproeven;
+/// de gewone privacysuite controleert cachehergebruik zonder een stopwatch.
 
 /// Bouwt een realistisch deck van [slideCount] slides, met een mix van
 /// slidetypes zodat de meting niet op één serialiser-pad blijft hangen.
@@ -135,6 +141,47 @@ Slide _slideForIndex(int i) {
 }
 
 void main() {
+  test('warme privacyscan van 1000 dia\'s blijft binnen 5 ms', () {
+    clearPrivacyScanMemo();
+    addTearDown(clearPrivacyScanMemo);
+    const scanner = PrivacyScanner();
+    final deck = Deck(
+      title: 'D',
+      slides: [
+        for (var i = 0; i < 1000; i++)
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(bullets: ['dia $i zonder bijzonderheden']),
+      ],
+    );
+    memoizedDeckScan(scanner, deck);
+    final missesAfterWarm = privacyScanMemoMisses;
+    expect(missesAfterWarm, deck.slides.length);
+
+    // Meet de warme cacheweg, niet de eerste JIT-compilatie van die tak.
+    // Deze benchmark draait verplicht apart met concurrency=1 (#3088).
+    final warmup = Stopwatch()..start();
+    do {
+      memoizedDeckScan(scanner, deck);
+    } while (warmup.elapsedMilliseconds < 100);
+
+    final samples = <int>[];
+    for (var sample = 0; sample < 7; sample++) {
+      final watch = Stopwatch()..start();
+      final result = memoizedDeckScan(scanner, deck);
+      watch.stop();
+      samples.add(watch.elapsedMicroseconds);
+      expect(result.findings, isEmpty);
+    }
+    samples.sort();
+    final median = samples[samples.length ~/ 2];
+    expect(privacyScanMemoMisses, missesAfterWarm);
+    printOnFailure('PRIVACY_WARM samples_us=$samples median_us=$median');
+    // Dezelfde grens: 5 ms. De mediaan van zeven vaste steekproeven voorkomt
+    // dat een schedulerpauze of juist één gelukstreffer de uitkomst bepaalt.
+    expect(median, lessThan(5000));
+  }, tags: 'benchmark');
+
   TestWidgetsFlutterBinding.ensureInitialized();
   final service = MarkdownService();
 
