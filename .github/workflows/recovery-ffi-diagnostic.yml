@@ -1,0 +1,51 @@
+name: Windows recovery FFI cold-start diagnostic
+on:
+  push:
+    branches: [codex/diagnose-3083-windows-ffi]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@v2
+        id: flutter
+        with:
+          channel: stable
+          flutter-version: 3.50.0
+          cache: true
+      - name: Verify exact pinned SDK
+        id: pin
+        shell: pwsh
+        run: |
+          $v = (flutter --version --machine | Out-String | ConvertFrom-Json)
+          if ($v.frameworkVersion -ne '3.50.0' -or $v.frameworkRevision -ne 'ab2912035e160d9cad6306df307576da6128ebdb') {
+            throw 'Flutter differs from the reviewed repository pin'
+          }
+          $v | ConvertTo-Json
+          dart --version
+      - name: Cold JIT process query
+        shell: pwsh
+        run: |
+          dart --disable-dart-dev tool/ci_recovery_process_probe.dart
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Cold AOT process query without package build hooks
+        if: ${{ always() && steps.pin.outcome == 'success' }}
+        shell: pwsh
+        run: |
+          $dir = Join-Path $env:RUNNER_TEMP 'recovery-ffi-aot'
+          New-Item -ItemType Directory -Force $dir | Out-Null
+          $source = (Get-Content -Raw 'tool/ci_recovery_process_probe.dart')
+          $uri = ([System.Uri](Resolve-Path 'lib/services/recovery_process_io.dart').Path).AbsoluteUri
+          $source = $source.Replace('../lib/services/recovery_process_io.dart', $uri)
+          Set-Content (Join-Path $dir 'probe.dart') $source -Encoding utf8NoBOM
+          Push-Location $dir
+          dart compile exe probe.dart -o probe.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & .\probe.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Pop-Location
