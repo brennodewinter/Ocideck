@@ -276,7 +276,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     onVisualCaret: _syncOutlineToVisualCaret,
     pendingFlush: ref.read(documentProvider.notifier).visualFlush,
     onVisualContentPending: () =>
-        ref.read(documentProvider.notifier).markDirty(),
+        ref.read(documentProvider.notifier).markVisualEditPending(),
     tryConsumePaste: _smartPaste,
     onInsertImage: () => unawaited(_insertImage()),
   );

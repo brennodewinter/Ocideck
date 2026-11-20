@@ -284,9 +284,11 @@ class RecoveryService {
   /// een crash — stilzwijgen is daar een valstrik, want op desktop wérkt het.
   bool get available => !_unavailable;
 
-  Future<void> save(RecoverySnapshot snapshot) {
-    if (_unavailable) return Future.value();
-    return _enqueue(snapshot.id, () async {
+  /// Returns whether the snapshot reached disk, so a caller can retry failures.
+  Future<bool> save(RecoverySnapshot snapshot) async {
+    if (_unavailable) return false;
+    var saved = false;
+    await _enqueue(snapshot.id, () async {
       try {
         final dir = await _dir();
         await _ensureSession(dir);
@@ -298,6 +300,7 @@ class RecoveryService {
           _file(dir, snapshot.id),
           jsonEncode({...snapshot.toJson(), 'session': _sessionId}),
         );
+        saved = true;
         _lastWriteFailed = false;
       } catch (e) {
         logWarning('RecoveryService.save: write recovery snapshot', e);
@@ -310,6 +313,7 @@ class RecoveryService {
         // Autosave mag nooit de app verstoren.
       }
     });
+    return saved;
   }
 
   Future<void> discard(String id) {

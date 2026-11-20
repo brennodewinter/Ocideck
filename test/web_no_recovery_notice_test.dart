@@ -31,7 +31,7 @@ class _NoRecovery extends RecoveryService {
   bool get available => false;
 
   @override
-  Future<void> save(RecoverySnapshot snapshot) async {}
+  Future<bool> save(RecoverySnapshot snapshot) async => false;
 
   @override
   Future<void> discard(String id) async {}
