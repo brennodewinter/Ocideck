@@ -37,12 +37,18 @@ rules:
       wordt opgelegd; de whisper-cli-helper in
       lib/services/transcription/local_whisper_engine_io.dart is de tweede —
       een lokaal gebundlede inferentie-binary zonder netwerkcode, gestart
-      met een lege environment (#2512). Daarbuiten is een nieuw subproces
-      een gat.
-    pattern-either:
-      - pattern: Process.run(...)
-      - pattern: Process.start(...)
-      - pattern: Process.runSync(...)
+      met een lege environment (#2512). De vaste stat-aanroep voor numerieke
+      uid/modus is alleen met de exacte argv en zonder geërfde omgeving
+      toegelaten (#3068). Daarbuiten is een nieuw subproces een gat.
+    patterns:
+      - pattern-either:
+          - pattern: Process.run(...)
+          - pattern: Process.start(...)
+          - pattern: Process.runSync(...)
+      # Alleen lokale numerieke metadata: geen namen/NSS, shell of extra opties.
+      # De fixture naast deze regel bewaakt ook afwijkende named arguments.
+      - pattern-not: |
+          Process.start('/usr/bin/stat', ['-Lc', '%u:%a', '--', '/proc/self', $REAL], includeParentEnvironment: false)
     paths:
       # Alleen uitgeleverde code. tool/ is ontwikkelgereedschap dat per
       # definitie dart, flutter en git aanroept; daar gaat deze zorg niet over.

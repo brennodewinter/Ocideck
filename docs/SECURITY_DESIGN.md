@@ -785,6 +785,15 @@ model.
   for the lifetime of a `git` subprocess, passed via `GIT_CONFIG_*` so it reaches
   neither argv, nor the remote URL, nor `.git/config`
   (`lib/services/git/native_git_mirror_io.dart`).
+- **Linux runtime directory.** Single-instance forwarding requires a canonical
+  directory owned by the current uid with mode `0700`. Its fixed
+  `/usr/bin/stat -Lc %u:%a -- /proc/self <resolved-directory>` invocation reads
+  numeric metadata without user/group-name lookup, a shell or an inherited
+  environment. Exit and both output streams share a one-second deadline;
+  failure leaves forwarding disabled. Semgrep permits only that exact
+  `Process.start` argument shape. Positive and negative fixtures in
+  `semgrep/ocideck.dart`, run by `make sast`, keep other executables, formats,
+  arguments, shell options and environments blocked (#3068).
 - **Git working copies.** A native clone (`git_clone/<storageSlug>/`), a draft
   mirror (`git_mirror/<storageSlug>/`) and the pending-commit outbox hold full
   deck content under app-support. They are **not** encrypted and — unlike
