@@ -29,8 +29,9 @@ ExportBundle _bundle(
   List<Slide> slides, {
   bool includeDetail = true,
   QuestionExport questions = QuestionExport.included,
+  TlpLevel tlp = TlpLevel.none,
 }) => buildExportBundle(
-  Deck(title: 'Spreektekst', slides: slides),
+  Deck(title: 'Spreektekst', slides: slides, tlp: tlp),
   slides,
   profile: PrivacyExportProfile.redacted,
   includeDetail: includeDetail,
@@ -91,7 +92,7 @@ void main() {
             notes: 'BEGIN ${List.filled(15000, 'vervolg').join(' ')} EIND',
           ),
           Slide.create(SlideType.title).copyWith(notes: 'VOLGENDE'),
-        ]),
+        ], tlp: TlpLevel.amber),
       );
       expect(pdfPageCount(bytes), greaterThan(20));
       final text = pdfVisibleText(bytes);
@@ -99,6 +100,9 @@ void main() {
       expect(RegExp('vervolg').allMatches(text), hasLength(15000));
       expect(text.indexOf('EIND'), lessThan(text.indexOf('VOLGENDE')));
       expect(pdfVisibleTextPerPage(bytes).last, contains('VOLGENDE'));
+      for (final page in pdfVisibleTextPerPage(bytes)) {
+        expect(page, contains('TLP:AMBER'));
+      }
     },
   );
 
@@ -192,7 +196,7 @@ void main() {
               'Spreektekst: Łódź, Αθήνα, Москва.\n\n${paragraphs.join('\n\n')}',
         ),
         Slide.create(SlideType.title),
-      ]),
+      ], tlp: TlpLevel.amber),
     );
     expect(pdfPageCount(bytes), greaterThan(2));
     final proof = Platform.environment['OCIDECK_PDF_NOTES_PROOF'];

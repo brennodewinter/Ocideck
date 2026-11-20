@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../../models/deck.dart';
 import '../privacy/privacy_projection.dart';
 import 'document_pdf_fonts.dart';
 
@@ -25,6 +26,7 @@ void addPresentationNotesPages(
   const margin = 36.0;
   final width = format.width - 2 * margin;
   final maxImageHeight = (format.height - 2 * margin) * 0.45;
+  final tlp = audience.deck.tlp;
   for (var index = 0; index < images.length; index++) {
     final notes = audience.slides[index].notes;
     if (fonts.unsupportedRunes(notes).isNotEmpty) {
@@ -45,9 +47,29 @@ void addPresentationNotesPages(
         // Ook een lange alinea mag meer dan de standaard 20 pagina’s vullen.
         // Eén pagina per teken is een bovengrens, geen afkapgrens voor tekst.
         maxPages: notes.length + 20,
-        footer: (context) => pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text('${index + 1} · ${context.pageNumber}'),
+        footer: (context) => pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+          children: [
+            if (tlp != TlpLevel.none)
+              pw.Container(
+                color: PdfColors.black,
+                padding: const pw.EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 2,
+                ),
+                child: pw.Text(
+                  tlp.label,
+                  style: pw.TextStyle(
+                    font: fonts.mono,
+                    fontSize: 9,
+                    color: PdfColor.fromInt(tlp.foreground),
+                  ),
+                ),
+              )
+            else
+              pw.SizedBox(),
+            pw.Text('${index + 1} · ${context.pageNumber}'),
+          ],
         ),
         build: (_) => [
           pw.Image(image, width: width, height: height, fit: pw.BoxFit.contain),
