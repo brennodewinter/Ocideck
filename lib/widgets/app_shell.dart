@@ -522,6 +522,7 @@ class _AppShellState extends ConsumerState<AppShell> {
 
   /// Nette afsluiting: herstelbestanden opruimen (alles is opgeslagen) en sluiten.
   Future<void> _destroy() async {
+    ref.read(tabsProvider.notifier).stopRecoveryForExit();
     // Alleen de tabbladen van dít venster. Zie [RecoveryService.discardEach].
     final recovery = ref.read(recoveryServiceProvider);
     await recovery.discardEach(

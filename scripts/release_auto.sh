@@ -2489,20 +2489,33 @@ ensure_scans_image() {
 # nog in de runnerwachtrij staat, en de nieuwste run per workflow kan nooit met
 # een oudere poging versmelten (#2294).
 gate_task_snapshot() { # gate_task_snapshot SHA → "workflow|status|titel|run-id" per poort
-  local sha="$1"
-  # Forgejo negeert `limit` zonder expliciete `page`; de volledige runhistorie
-  # kan dan de 25s-poll afbreken met onvolledige JSON.
-  api GET '/actions/runs?limit=50&page=1' \
-    | jq -r --arg sha "$sha" '
-        [.workflow_runs[]?
-          | select(.commit_sha == $sha)
-          | select(.workflow_id == "static-gate.yml"
-              or .workflow_id == "scans.yml"
-              or .workflow_id == "linux-gate.yml"
-              or .workflow_id == "linux-build.yml")]
-        | group_by(.workflow_id)
-        | map(max_by(.id))[]
-        | "\(.workflow_id)|\(.status)|\(.title // "")|\(.id)"'
+  local sha="$1" page=1 response selected='[]' matches count oldest previous=''
+  # Filter op de exacte head, maar blijf pagineren bij veel herstarts. Een
+  # onleesbare of niet-voortgaande pagina is onbekend, nooit een lege historie.
+  while :; do
+    response="$(api GET "/actions/runs?limit=50&page=$page&head_sha=$sha")" || return 2
+    count="$(printf '%s' "$response" | jq -er '
+      if (.workflow_runs | type) == "array" then .workflow_runs | length
+      else error("ontbrekende workflow_runs") end')" || return 2
+    matches="$(printf '%s' "$response" | jq -ce --arg sha "$sha" '
+      [.workflow_runs[] | select(.commit_sha == $sha)
+        | select(.workflow_id == "static-gate.yml" or .workflow_id == "scans.yml"
+          or .workflow_id == "linux-gate.yml" or .workflow_id == "linux-build.yml")]
+      | if all(.[]; (.id | type) == "number" and (.status | type) == "string")
+        then . else error("ongeldige poortrun") end')" || return 2
+    selected="$(printf '%s\n%s\n' "$selected" "$matches" | jq -cs '
+      add | group_by(.workflow_id) | map(max_by(.id))')" || return 2
+    [ "$count" -lt 50 ] && break
+    oldest="$(printf '%s' "$response" | jq -er '[.workflow_runs[].id] | min')" || return 2
+    if [ -n "$previous" ] && [ "$oldest" -ge "$previous" ]; then return 2; fi
+    previous="$oldest"
+    # Forgejo levert nieuwste IDs eerst. Na vier gevonden poorten kunnen
+    # oudere pagina’s geen recentere poging meer toevoegen.
+    [ "$(printf '%s' "$selected" | jq length)" -eq 4 ] && break
+    page=$((page + 1))
+  done
+  printf '%s' "$selected" | jq -r '.[] |
+    "\(.workflow_id)|\(.status)|\(.title // "")|\(.id)"'
 }
 
 ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER

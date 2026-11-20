@@ -114,10 +114,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final Map<int, Deck> _lastAutosavedDeck = {};
   final Map<int, String?> _lastAutosavedMarkdownDraft = {};
 
-  /// Laatst weggeschreven documentbron per tabblad, zodat een tick die niets
-  /// nieuws vindt de schrijfbeurt overslaat — de documenttegenhanger van
-  /// [_lastAutosavedDeck].
-  final Map<int, String> _lastAutosavedDocument = {};
+  final Map<int, _DocumentRecovery> _documentRecovery = {};
 
   /// Duplicaat-melding maximaal één keer per paar per sessie, anders wordt
   /// elke her-open van hetzelfde bestand een herhaalde snackbar.
@@ -194,7 +191,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   @override
   void dispose() {
     _unregisterMemoryRoots();
-    _autosaveTimer?.cancel();
+    stopRecoveryForExit();
     _cancelAllLearningExpiry(this);
     for (final sub in _subs.values) {
       sub.cancel();
@@ -220,7 +217,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     _lastTabFacts.remove(tab.id);
     _lastAutosavedDeck.remove(tab.id);
     _lastAutosavedMarkdownDraft.remove(tab.id);
-    _lastAutosavedDocument.remove(tab.id);
+    _documentRecovery.remove(tab.id)?.dispose();
   }
 
   /// [recoveryId] hergebruikt de sleutel van een bestaande herstelkopie (zie
@@ -284,9 +281,9 @@ class TabsNotifier extends StateNotifier<TabsState> {
       // Een documenttabblad bewaart zijn eigen momentopname (byte-getrouwe bron,
       // geen deck-sidecars), zodat een crash óók niet-opgeslagen documenten
       // teruggeeft — net als een presentatie.
-      final doc = tab.documentNotifier;
-      if (doc != null) {
-        _autosaveDocument(tab, doc, _recovery, _lastAutosavedDocument);
+      final documentRecovery = _documentRecovery[tab.id];
+      if (documentRecovery != null) {
+        unawaited(documentRecovery.save());
         continue;
       }
       // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
@@ -351,8 +348,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
           MarkdownDocument.parse(snap.markdown, hasUtf8Bom: snap.utf8Bom),
           filePath: snap.filePath,
           recoveryId: snap.id,
+          recovered: true,
         );
-        tab.documentNotifier!.markDirty();
         restored.add(tab);
         continue;
       }

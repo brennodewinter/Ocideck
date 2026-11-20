@@ -59,7 +59,7 @@ $body
 TRACE=${trace.path}
 api() {
   local method="\$1" path="\$2"
-  if [ "\$method \$path" = 'GET /actions/runs?limit=50&page=1' ]; then
+  if [ "\$method \$path" = 'GET /actions/runs?limit=50&page=1&head_sha=abc123' ]; then
     printf '%s\n' '{"workflow_runs":[]}'
     return 0
   fi
@@ -93,7 +93,7 @@ ensure_gate_tasks abc123 2194
     final result = runHarness(r'''
 api() {
   local method="$1" path="$2"
-  if [ "$method $path" = 'GET /actions/runs?limit=50&page=1' ]; then
+  if [ "$method $path" = 'GET /actions/runs?limit=50&page=1&head_sha=abc123' ]; then
     printf '%s\n' '{"workflow_runs":[
       {"id":1,"workflow_id":"static-gate.yml","title":"static-gate","status":"success","commit_sha":"abc123"},
       {"id":2,"workflow_id":"scans.yml","title":"scans","status":"success","commit_sha":"abc123"},
@@ -118,7 +118,7 @@ wait_gate abc123 2194
 GATE_TIMEOUT_SECONDS=1
 api() {
   local method="$1" path="$2"
-  if [ "$method $path" = 'GET /actions/runs?limit=50&page=1' ]; then
+  if [ "$method $path" = 'GET /actions/runs?limit=50&page=1&head_sha=abc123' ]; then
     printf '%s\n' '{"workflow_runs":[
       {"id":1,"workflow_id":"static-gate.yml","status":"success","commit_sha":"abc123"},
       {"id":2,"workflow_id":"scans.yml","status":"success","commit_sha":"abc123"},
@@ -137,6 +137,61 @@ wait_gate abc123 2194
     expect(result.exitCode, 99, reason: '${result.stdout}\n${result.stderr}');
     expect(result.stderr, contains('poort werd niet groen'));
   }, skip: skipOnWindows);
+
+  test(
+    'oudere pagina voorkomt dubbele dispatch en behoudt nieuwste poging',
+    () {
+      final result = runHarness(r'''
+api() {
+  case "$1 $2" in
+    'GET /actions/runs?limit=50&page=1&head_sha=abc123')
+      jq -n '{workflow_runs: ([range(101;150) | {id:.,workflow_id:"other.yml"}]
+        + [{id:150,workflow_id:"scans.yml",commit_sha:"abc123",status:"failure"}])}' ;;
+    'GET /actions/runs?limit=50&page=2&head_sha=abc123')
+      jq -n '{workflow_runs:[
+        {id:100,workflow_id:"scans.yml",commit_sha:"abc123",status:"success"},
+        {id:99,workflow_id:"static-gate.yml",commit_sha:"abc123",status:"success"},
+        {id:98,workflow_id:"linux-gate.yml",commit_sha:"abc123",status:"running"},
+        {id:97,workflow_id:"linux-build.yml",commit_sha:"abc123",status:"waiting"}]}' ;;
+    *) echo "ONVERWACHT: $1 $2" >&2; return 1 ;;
+  esac
+}
+ensure_gate_tasks abc123 2194 || exit $?
+gate_task_snapshot abc123
+''');
+      expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+      expect(result.stdout, contains('scans.yml|failure||150'));
+      expect(result.stdout, contains('linux-build.yml|waiting||97'));
+      expect(result.stdout, isNot(contains('gestart')));
+    },
+    skip: skipOnWindows,
+  );
+
+  for (final broken in ['malformed', 'transport', 'repeated']) {
+    test('onbetrouwbare historie ($broken) start geen duplicaten', () {
+      final result = runHarness('''
+BROKEN=$broken
+api() {
+  if [ "\$1" != GET ]; then echo ONVERWACHTE_DISPATCH; return 1; fi
+  case "\$2" in
+    *page=1*)
+      jq -n '{workflow_runs:[range(101;151) | {id:.,workflow_id:"other.yml"}]}' ;;
+    *)
+      case "\$BROKEN" in
+        malformed) printf '%s' '{"workflow_runs":' ;;
+        transport) return 22 ;;
+        repeated) jq -n '{workflow_runs:[range(101;151) | {id:.,workflow_id:"other.yml"}]}' ;;
+      esac ;;
+  esac
+}
+die() { echo "DIE: \$1" >&2; exit 99; }
+ensure_gate_tasks abc123 2194
+''');
+      expect(result.exitCode, 99, reason: '${result.stdout}\n${result.stderr}');
+      expect(result.stdout, isNot(contains('ONVERWACHTE_DISPATCH')));
+      expect(result.stderr, contains('dispatch geen duplicaten'));
+    }, skip: skipOnWindows);
+  }
 
   test('nachtelijke main-poort keurt na een groene voorouder de tip zelf', () {
     final result = runHarness(r'''

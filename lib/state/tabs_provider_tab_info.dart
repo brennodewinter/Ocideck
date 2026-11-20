@@ -155,8 +155,9 @@ void _placeDocumentTab(
   );
 }
 
-/// Bouwt (zonder te plaatsen) een documenttabblad met zijn herstelabonnement
-/// dat de kopie wist zodra het tabblad schoon is. [recoveryId] hergebruikt de
+/// Bouwt (zonder te plaatsen) een documenttabblad met een herstelabonnement
+/// dat wijzigingen bewaart en de kopie wist zodra het tabblad schoon is.
+/// [recoveryId] hergebruikt de
 /// sleutel van een bestaande herstelkopie (zie [TabsNotifier.restoreRecovered]);
 /// zonder krijgt het tabblad een verse. De deck-tegenhanger is
 /// [TabsNotifier._createTab].
@@ -168,6 +169,7 @@ TabInfo _createDocumentTab(
   String? projectPath,
   String? suggestedName,
   String? pendingAudioPath,
+  bool recovered = false,
 }) {
   final id = notifier._nextId++;
   final key = recoveryId ?? _uuid.v4();
@@ -178,6 +180,7 @@ TabInfo _createDocumentTab(
       projectPath: projectPath,
       suggestedName: suggestedName,
       pendingAudioPath: pendingAudioPath,
+      recovered: recovered,
     );
   // Een kopie met een voorgestelde naam bestaat nog nergens op schijf —
   // precies wat de dirty-stip en de herstelkopie zichtbaar maken (#2468).
@@ -187,9 +190,17 @@ TabInfo _createDocumentTab(
     recoveryId: key,
     content: DocumentTabContent(documentNotifier),
   );
+  final recovery = _DocumentRecovery(tab, documentNotifier, notifier._recovery);
+  notifier._documentRecovery[id] = recovery;
+  documentNotifier.onVisualEditPending = recovery.schedule;
+  if (documentNotifier.currentState.isDirty) recovery.schedule();
   notifier._subs[id] = documentNotifier.stream.listen((st) {
     if (!notifier.mounted) return;
-    if (!(st.isOpen && st.isDirty)) notifier._recovery.discard(key);
+    if (st.isOpen && st.isDirty) {
+      recovery.schedule();
+    } else {
+      recovery.discard();
+    }
     // Zelfde tabfeit-poort als de deck-luisteraar hierboven (#2623).
     final fact = (tab.label, tab.isDirty, st.isOpen, st.filePath);
     if (fact == notifier._lastTabFacts[id]) return;
