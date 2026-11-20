@@ -1447,9 +1447,29 @@ have a tag deploy the web automatically again.
 
 ### Signing the macOS release on the runner (one-time)
 
-The `macos` job signs and notarises on `mac-brenno` using items already in that
-Mac's **login keychain** — nothing is exported into repository secrets, and the
-certificate never leaves the machine. Set it up once on the runner:
+Both macOS release routes (`release.yml` and `release-channel.yml`) select
+`ocideck-macos-release-local`, the dedicated runner on the local release Mac
+(#3096). They no longer depend on the other laptop, `mac-brenno`. General
+checks can still use the shared `macos` label. Signing uses this Mac's
+**file-based login keychain**; no private key or notary credential is exported
+into repository secrets.
+
+The local LaunchAgent uses the exact official Flutter SDK pinned by
+`.tool-versions`, ahead of other SDKs in `PATH`. Its runner configuration has
+`ocideck-macos-release-local:host` in `runner.labels`, with capacity 1 to avoid
+concurrent builds competing for the same machine. Restart the runner only while
+idle after changing its labels, and verify that Pawprint lists the local runner
+as online with that label. Do not add this dedicated label to the other laptop.
+
+Run the manual `macos-signing-preflight.yml` workflow on the intended source
+branch to check the pin, the Apple notary connection and an actual timestamped
+Developer ID signature **inside the runner process**, without publishing or
+submitting an app. The release itself still checks the complete signed app,
+Apple notarization, the stapled ticket and Gatekeeper before upload. Locally,
+`scripts/notarize_macos.sh --preflight` checks the identity and Apple connection;
+`make notarize-macos` performs the full chain without the other computer.
+
+One-time setup on this runner:
 
 1. **Developer ID certificate** — Xcode → *Settings → Accounts → Manage
    Certificates → + → Developer ID Application*. Confirm with

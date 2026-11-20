@@ -1,5 +1,6 @@
 """Phase-scoped readiness and bounded factual progress, without network mutations."""
 import sys
+import re
 from pathlib import Path
 from unittest import TestCase, main
 from unittest.mock import patch
@@ -21,6 +22,24 @@ class CapabilitiesTest(TestCase):
     def test_linux_needs_no_windows_or_mac_credentials(self):
         api, wanted = self.api()
         self.assertTrue(subject.inspect(api, wanted)['ready'])
+
+    def test_mac_requires_local_signing_runner_instead_of_other_laptop(self):
+        api, wanted = self.api('macos')
+        original = api.get
+        inventory = '/actions/runners?visible=true&limit=100&page=1'
+        api.get = lambda path: [{'status': 'idle', 'labels': ['macos', 'ocideck-macos-arm64']}] if path == inventory else original(path)
+        self.assertEqual(subject.inspect(api, wanted)['blockers'],
+                         ['no online runner with label ocideck-macos-release-local'])
+        api.get = lambda path: [{'status': 'idle', 'labels': ['ocideck-macos-release-local:host']}] if path == inventory else original(path)
+        self.assertTrue(subject.inspect(api, wanted)['ready'])
+
+    def test_both_mac_release_routes_select_the_capability_runner(self):
+        root = Path(__file__).resolve().parents[1]
+        for name, job in [('release.yml', 'macos'), ('release-channel.yml', 'build-macos'),
+                          ('macos-signing-preflight.yml', 'signing')]:
+            text = (root / '.forgejo/workflows' / name).read_text()
+            section = re.split(r'\n  [^ \n]', text.split('\n  ' + job + ':\n', 1)[1], maxsplit=1)[0]
+            self.assertIn('    runs-on: ocideck-macos-release-local', section)
 
     def test_windows_missing_secret_blocks(self):
         api, wanted = self.api('windows')
