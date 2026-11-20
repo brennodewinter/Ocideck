@@ -266,6 +266,11 @@ resume_tag_target old
 
   for (final scenario in [
     'current-main',
+    'current-maintenance',
+    'maintenance-base-advanced',
+    'wrong-pr-base',
+    'maintenance-wrong-pr-base',
+    'maintenance-product-change',
     'frozen-main-advanced',
     'only-origin-frozen',
     'moved-frozen-ref',
@@ -285,6 +290,9 @@ resume_tag_target old
 CANDIDATE=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 RELEASE=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 HEAD=cccccccccccccccccccccccccccccccccccccccc
+case "$SCENARIO" in
+  *maintenance*) RELEASE_BASE=codex/maintenance-v9.9.9 ;;
+esac
 git() {
   case "$1 $2" in
     'ls-remote '*)
@@ -293,6 +301,9 @@ git() {
         refs/heads/main)
           if [ "$SCENARIO" = current-main ]; then printf '%s %s\n' "$CANDIDATE" "$3"
           else printf '%s %s\n' "$RELEASE" "$3"; fi ;;
+        refs/heads/codex/maintenance-v9.9.9)
+          if [ "$SCENARIO" = maintenance-base-advanced ]; then printf '%s %s\n' "$RELEASE" "$3"
+          else printf '%s %s\n' "$CANDIDATE" "$3"; fi ;;
         refs/heads/codex/*)
           case "$SCENARIO" in
             frozen-main-advanced) printf '%s %s\n' "$CANDIDATE" "$3" ;;
@@ -313,17 +324,18 @@ git() {
           else printf 'same-tree\n'; fi ;;
       esac ;;
     'diff --name-only')
-      if [ "$SCENARIO" = product-change ]; then printf 'lib/main.dart\n'
+      if [ "$SCENARIO" = product-change ] || [ "$SCENARIO" = maintenance-product-change ]; then printf 'lib/main.dart\n'
       elif [ "$SCENARIO" = catalog-change ]; then printf 'lib/services/cwe_catalog.dart\n'
       else printf '.forgejo/workflows/linux-build.yml\n.forgejo/workflows/release.yml\n.github/workflows/release.yml\ntest/linux_packaging_test.dart\ndocs/BUILD.md\n'; fi ;;
     *) printf 'unexpected git %s\n' "$*" >&2; return 9 ;;
   esac
 }
 api() {
-  local merged=true head="$HEAD"
+  local merged=true head="$HEAD" base="${RELEASE_BASE:-main}"
   [ "$SCENARIO" != unmerged-pr ] || merged=false
   [ "$SCENARIO" != wrong-pr-head ] || head="$RELEASE"
-  printf '{"number":42,"merged":%s,"merge_commit_sha":"%s","head":{"sha":"%s"}}\n' "$merged" "$CANDIDATE" "$head"
+  case "$SCENARIO" in *wrong-pr-base) base=unrelated ;; esac
+  printf '{"number":42,"merged":%s,"merge_commit_sha":"%s","head":{"sha":"%s"},"base":{"ref":"%s"}}\n' "$merged" "$CANDIDATE" "$head" "$base"
 }
 select_repair_candidate "$RELEASE" "$CANDIDATE"
 ''',
@@ -333,7 +345,9 @@ select_repair_candidate "$RELEASE" "$CANDIDATE"
           'select_repair_candidate',
         ],
       );
-      if (scenario == 'current-main' || scenario == 'frozen-main-advanced') {
+      if (scenario == 'current-main' ||
+          scenario == 'current-maintenance' ||
+          scenario == 'frozen-main-advanced') {
         expect(
           result.exitCode,
           0,
@@ -351,6 +365,10 @@ select_repair_candidate "$RELEASE" "$CANDIDATE"
         );
         expect(result.stdout, isEmpty);
         const rejectedFor = {
+          'maintenance-base-advanced': 'exact origin/codex/maintenance-v9.9.9',
+          'wrong-pr-base': 'aantoonbaar gemergde',
+          'maintenance-wrong-pr-base': 'aantoonbaar gemergde',
+          'maintenance-product-change': 'buiten de toegestane',
           'only-origin-frozen': 'exact origin/main',
           'moved-frozen-ref': 'verschoof',
           'already-tagged': 'publieke tag',
