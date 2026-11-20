@@ -228,9 +228,15 @@ void main() {
     expect(saved.accentColor, '#4472C4');
     expect(File(saved.slideBackgroundImages['content']!).existsSync(), isTrue);
     final prefs = await SharedPreferences.getInstance();
+    final storedProfiles =
+        (jsonDecode(prefs.getString('themeProfiles')!) as List)
+            .cast<Map<String, dynamic>>();
+    final stored = storedProfiles.singleWhere(
+      (profile) => profile['name'] == saved.name,
+    );
     expect(
-      prefs.getString('themeProfiles'),
-      contains(saved.slideBackgroundImages['content']!),
+      (stored['slideBackgroundImages'] as Map)['content'],
+      saved.slideBackgroundImages['content'],
     );
     expect(_openDeck(container)!.slides, hasLength(1));
     container.dispose();

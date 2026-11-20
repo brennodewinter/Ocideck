@@ -411,6 +411,7 @@ sast:
 	@echo "Covers: shipped Dart in lib/, plus tool/ and test/ where the rule applies."
 	@echo "Failure means: a rule matched. Read it — every rule here is scoped to be quiet."
 	@command -v semgrep >/dev/null 2>&1 || { echo "semgrep not found — install it (macOS: brew install semgrep)"; exit 2; }
+	semgrep --test --metrics=off semgrep
 	semgrep scan --config semgrep/ocideck.yaml --metrics=off --error lib/ tool/ test/
 
 shellcheck:

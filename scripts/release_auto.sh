@@ -2718,6 +2718,7 @@ resume_tag_target() { # resume_tag_target RELEASE_MERGE_SHA
 # Een expliciet gekozen reparatie mag uitsluitend verpakkings- en poortbestanden raken.
 select_repair_candidate() { # select_repair_candidate RELEASE_MERGE_SHA CANDIDATE_SHA
   local release="$1" candidate="$2" remote refs ref actual current parents head proof file changed release_spec candidate_spec
+  local selected_base="${RELEASE_BASE:-main}"
   for remote in origin mirror; do
     refs="$(git ls-remote "$remote" "refs/tags/$TAG")" \
       || die "releasetag op $remote niet leesbaar; kandidaat niet geselecteerd."
@@ -2736,8 +2737,8 @@ select_repair_candidate() { # select_repair_candidate RELEASE_MERGE_SHA CANDIDAT
   head="$(awk '{print $2}' <<<"$parents")"
   proof="$(api GET "/commits/$candidate/pull")" \
     || die "gemergde reparatie-PR voor kandidaat niet aantoonbaar."
-  jq -e --arg sha "$candidate" --arg head "$head" \
-    '.merged == true and .merge_commit_sha == $sha and .head.sha == $head and (.number | type == "number")' <<<"$proof" >/dev/null \
+  jq -e --arg sha "$candidate" --arg head "$head" --arg base "$selected_base" \
+    '.merged == true and .merge_commit_sha == $sha and .head.sha == $head and .base.ref == $base and (.number | type == "number")' <<<"$proof" >/dev/null \
     || die "gekozen kandidaat is niet de exacte merge van een aantoonbaar gemergde reparatie-PR."
   changed="$(git diff --name-only "$release" "$candidate")" \
     || die "wijzigingen van de kandidaat niet leesbaar."
@@ -2759,9 +2760,9 @@ select_repair_candidate() { # select_repair_candidate RELEASE_MERGE_SHA CANDIDAT
     fi
   done
   if [ "$refs" -ne 2 ]; then
-    current="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
-      || die "origin/main niet leesbaar bij kandidaatselectie."
-    [ "$current" = "$candidate" ] || die "nieuwe kandidaat moet bij selectie exact origin/main zijn."
+    current="$(git ls-remote origin "refs/heads/$selected_base" | awk 'NR==1 {print $1}')" \
+      || die "origin/$selected_base niet leesbaar bij kandidaatselectie."
+    [ "$current" = "$candidate" ] || die "nieuwe kandidaat moet bij selectie exact origin/$selected_base zijn."
   fi
   printf '%s\n' "$candidate"
 }

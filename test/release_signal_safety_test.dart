@@ -1,6 +1,49 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+
+/// De tijdslimiet geldt voor proces én pijpen: een kind kan stderr nog openhouden
+/// nadat bash zelf is geëindigd (#3064).
+Future<({int code, String stderr})> _boundedProcessOutput(
+  Process process, {
+  Duration timeout = const Duration(seconds: 15),
+}) async {
+  final stderr = StringBuffer();
+  final stdoutClosed = Completer<void>();
+  final stderrClosed = Completer<void>();
+  final stdoutSubscription = process.stdout.listen(
+    (_) {},
+    onDone: stdoutClosed.complete,
+    onError: stdoutClosed.completeError,
+  );
+  final stderrSubscription = process.stderr
+      .transform(const SystemEncoding().decoder)
+      .listen(
+        stderr.write,
+        onDone: stderrClosed.complete,
+        onError: stderrClosed.completeError,
+      );
+  try {
+    final results =
+        await Future.wait<int>([
+          process.exitCode,
+          stdoutClosed.future.then((_) => 0),
+          stderrClosed.future.then((_) => 0),
+        ]).timeout(
+          timeout,
+          onTimeout: () => throw TimeoutException(
+            'Proces of uitvoerpijpen niet op tijd afgerond. Opgevangen stderr: $stderr',
+            timeout,
+          ),
+        );
+    return (code: results.first, stderr: stderr.toString());
+  } finally {
+    process.kill(ProcessSignal.sigkill);
+    await stdoutSubscription.cancel();
+    await stderrSubscription.cancel();
+  }
+}
 
 /// Regressie voor #2298: SIGINT/SIGTERM moeten dezelfde veilige afbreking
 /// doorlopen als een commandofout.
@@ -93,22 +136,13 @@ printf ready >"${ready.path}"
 sleep 60 </dev/null >/dev/null 2>&1 & wait
 ''');
     final proc = await Process.start('bash', [harness.path]);
+    addTearDown(() => proc.kill(ProcessSignal.sigkill));
     for (var i = 0; i < 200 && !ready.existsSync(); i++) {
       await Future<void>.delayed(const Duration(milliseconds: 25));
     }
     expect(ready.existsSync(), isTrue, reason: 'het harnas werd niet gereed');
     proc.kill(signal);
-    final stderr = await proc.stderr
-        .transform(const SystemEncoding().decoder)
-        .join();
-    final code = await proc.exitCode.timeout(
-      const Duration(seconds: 15),
-      onTimeout: () {
-        proc.kill(ProcessSignal.sigkill);
-        return -1;
-      },
-    );
-    return (code: code, stderr: stderr);
+    return _boundedProcessOutput(proc);
   }
 
   test(
@@ -239,16 +273,9 @@ esac
       if (pidFile.existsSync()) {
         Process.runSync('kill', ['-TERM', pidFile.readAsStringSync().trim()]);
       }
-      final stderr = await proc.stderr
-          .transform(const SystemEncoding().decoder)
-          .join();
-      final code = await proc.exitCode.timeout(
-        const Duration(seconds: 15),
-        onTimeout: () {
-          proc.kill(ProcessSignal.sigkill);
-          return -1;
-        },
-      );
+      final result = await _boundedProcessOutput(proc);
+      final code = result.code;
+      final stderr = result.stderr;
       expect(code, 143, reason: stderr);
       expect(
         sig.existsSync(),
@@ -257,6 +284,48 @@ esac
             'een ongeverifieerde handtekening mag niet blijven liggen.\n$stderr',
       );
       expect(stderr, contains('verwijderd'));
+    },
+    skip: skipOnWindows,
+  );
+
+  test(
+    'stderr van een achtergebleven kind valt ook onder de tijdslimiet',
+    () async {
+      final dir = Directory.systemTemp.createTempSync('ocideck-sig-pipe-');
+      final childPid = File('${dir.path}/child.pid');
+      final proc = await Process.start('bash', [
+        '-c',
+        'sleep 60 </dev/null >/dev/null & echo \$! >"${childPid.path}"; printf "shell klaar" >&2; exit 0',
+      ]);
+      try {
+        for (var i = 0; i < 200 && !childPid.existsSync(); i++) {
+          await Future<void>.delayed(const Duration(milliseconds: 25));
+        }
+        expect(childPid.existsSync(), isTrue);
+        expect(await proc.exitCode.timeout(const Duration(seconds: 5)), 0);
+        await expectLater(
+          _boundedProcessOutput(
+            proc,
+            timeout: const Duration(milliseconds: 250),
+          ),
+          throwsA(
+            isA<TimeoutException>().having(
+              (error) => error.message,
+              'opgevangen stderr',
+              contains('shell klaar'),
+            ),
+          ),
+        );
+      } finally {
+        proc.kill(ProcessSignal.sigkill);
+        if (childPid.existsSync()) {
+          Process.killPid(
+            int.parse(childPid.readAsStringSync().trim()),
+            ProcessSignal.sigkill,
+          );
+        }
+        dir.deleteSync(recursive: true);
+      }
     },
     skip: skipOnWindows,
   );
