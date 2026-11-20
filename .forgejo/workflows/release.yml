@@ -410,6 +410,7 @@ jobs:
           set -eu
           APP=$(find build/macos/Build/Products/Release -maxdepth 1 -type d -name '*.app' -print -quit)
           test -n "$APP" || { echo "Geen gebouwde macOS-app gevonden." >&2; exit 1; }
+          python3 tool/check_macos_architectures.py "$APP"
           if [ "${MACOS_SIGNED:-false}" != true ]; then
             case "$RELEASE_TAG" in
               *-*) echo "Ongetekende prerelease: signingcontroles niet van toepassing." ;;

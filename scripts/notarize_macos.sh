@@ -213,6 +213,9 @@ fi
   exit 1
 }
 
+# Ook --skip-build mag geen hostspecifieke ARM-only release laten tekenen.
+python3 "$ROOT_DIR/tool/check_macos_architectures.py" "$APP"
+
 # ---------------------------------------------------------------------------
 # PDFium-framework normaliseren, vóór het tekenen.
 #
