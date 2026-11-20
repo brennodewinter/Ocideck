@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/services/chart_csv_import.dart';
 import 'package:ocideck/utils/number_convention.dart';
 
@@ -135,5 +136,31 @@ void main() {
   test('de parse-isolate begrenst het aantal CSV-cellen', () async {
     final csv = 'Maand,Omzet\n${List.filled(50001, 'A,1').join('\n')}';
     await expectLater(parseChartCsv(csv), throwsFormatException);
+  });
+
+  test(
+    'een brede kop zonder datarijen kan het cellenbudget niet omzeilen',
+    () async {
+      final csv = List.filled(100001, 'x').join(',');
+      await expectLater(parseChartCsv(csv), throwsFormatException);
+    },
+  );
+
+  test('extra velden buiten de kop tellen ook mee', () async {
+    final csv = 'x,v\n${List.filled(100001, '1').join(',')}';
+    await expectLater(parseChartCsv(csv), throwsFormatException);
+  });
+
+  test('de celgrens telt kop, echte en aangevulde cellen', () {
+    expect(parseCsv('x,a,b\nA,1,2', maxCells: 6).$2, hasLength(2));
+    expect(() => parseCsv('x,a,b\nA,1,2', maxCells: 5), throwsFormatException);
+    expect(() => parseCsv('x,a,b\nA', maxCells: 5), throwsFormatException);
+    expect(parseCsv('x,a\nA,1,2', maxCells: 5).$2.single.data, [1.0]);
+    expect(() => parseCsv('x,a\nA,1,2', maxCells: 4), throwsFormatException);
+    expect(
+      () => parseCsv('x,a,b\nA,1,2,3,4\nB', maxCells: 10),
+      throwsFormatException,
+    );
+    expect(parseCsv('x,a,b\nA,1,2,3,4\nB', maxCells: 11).$1, ['A', 'B']);
   });
 }

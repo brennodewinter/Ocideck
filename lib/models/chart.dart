@@ -835,16 +835,41 @@ parseCsv(String csv, {DecimalConvention? convention, int? maxCells}) {
   }
 
   final delimiter = _detectDelimiter(lines);
-  final header = parseCsvLine(lines.first, delimiter: delimiter);
+  var cells = 0;
+  int? headerWidth;
+  List<String> readRow(String line) {
+    final parsed = parseCsvRows(
+      line,
+      delimiter: delimiter,
+      trimUnquoted: true,
+      checkBudget: (_, _, _) {
+        cells++;
+        if (maxCells != null && cells > maxCells) {
+          throw const FormatException('CSV grid exceeds the cell limit');
+        }
+      },
+    );
+    final row = parsed.first;
+    if (headerWidth != null && row.length < headerWidth) {
+      cells += headerWidth - row.length;
+      if (maxCells != null && cells > maxCells) {
+        throw const FormatException('CSV grid exceeds the cell limit');
+      }
+    }
+    return row;
+  }
+
+  final header = readRow(lines.first);
+  headerWidth = header.length;
+  // Ook de kop en ontbrekende waarden kosten geheugen. Tel daarnaast de
+  // echte velden: een rafelige rij kan breder zijn dan de kop (#3070).
+  if (maxCells != null && lines.length * header.length > maxCells) {
+    throw const FormatException('CSV grid exceeds the cell limit');
+  }
   final seriesNames = header.length > 1
       ? [for (final name in header.sublist(1)) _csvUnguard(name)]
       : <String>[];
-  if (maxCells != null && (lines.length - 1) * header.length > maxCells) {
-    throw const FormatException('CSV grid exceeds the cell limit');
-  }
-  final rows = [
-    for (final line in lines.skip(1)) parseCsvLine(line, delimiter: delimiter),
-  ];
+  final rows = [for (final line in lines.skip(1)) readRow(line)];
 
   // Every value cell, so the convention is settled by the file and not by
   // whichever row happens to come first.
