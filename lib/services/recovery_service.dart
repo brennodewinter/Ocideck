@@ -12,6 +12,8 @@ import '../utils/atomic_file.dart';
 import '../utils/chmod.dart';
 import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
+import 'recovery_process_stub.dart'
+    if (dart.library.ffi) 'recovery_process_io.dart';
 
 /// Eén automatisch bewaard herstelbestand voor een (nog) niet-opgeslagen deck of
 /// document.
@@ -158,26 +160,25 @@ class RecoveryService {
   /// en vaak genoeg dat [_lockGrace] drie gemiste tikken toelaat.
   static const _heartbeatInterval = Duration(seconds: 30);
 
-  /// Hoe vers een lock moet zijn om de eigenaar "levend" te rekenen. Ruimer
-  /// dan de tik-interval, zodat een uitgestelde timer (lapdesk-sleep, GC)
-  /// niet meteen doet alsof de eigenaar doodgevallen is.
-  ///
-  /// Waarom geen `kill(pid, 0)`/`tasklist`: een subproces is een verboden
-  /// uitzondering in deze repo (NetGuard-poort), en PID's worden hergebruikt.
-  /// ponytail: een langdurig gesuspendeerd exemplaar (>2,5 min) telt als dood
-  /// — zijn momentopnames worden dan aangeboden terwijl hij nog draait; de
-  /// veilige kant van de afweging, want verzwijgen is erger.
+  /// Een verouderde heartbeat kan van een vorige sessie met een intussen
+  /// hergebruikte PID zijn. Een verse heartbeat is slechts een terugval als
+  /// het besturingssysteem de processtatus niet kan bevestigen.
   static const _lockGrace = Duration(minutes: 2, seconds: 30);
 
   static bool _lockIsLive(File lock) {
     try {
       final age = DateTime.now().difference(lock.lastModifiedSync());
-      return age < _lockGrace;
+      if (age >= _lockGrace) return false;
     } catch (e) {
-      // stat faalt = lock onleesbaar; de veilige kant is "eigenaar dood"
-      // behandelen — de momentopname wordt dan aangeboden in plaats van
-      // verzwegen.
       return false;
+    }
+    try {
+      final data = jsonDecodeGuarded(lock.readAsStringSync());
+      final owner = data is Map ? data['pid'] : null;
+      return owner is int ? recoveryProcessIsAlive(owner) ?? true : true;
+    } catch (e) {
+      logWarning('RecoveryService: status van sessie-eigenaar onbekend', e);
+      return true;
     }
   }
 
@@ -214,8 +215,8 @@ class RecoveryService {
   }
 
   /// Duidt deze sessie als eigenaar van de eigen momentopnames (#2656). Het
-  /// lock draagt ons PID ter diagnose; het levensbewijs is de heartbeat op de
-  /// mtime. Een restart die [loadAll] draait kan daarmee onderscheiden welke
+  /// lock draagt ons PID; de heartbeat op de mtime begrenst de geldigheid.
+  /// Een restart die [loadAll] draait kan daarmee onderscheiden welke
   /// resten van een nog-draaiend exemplaar zijn (overslaan) en welke van een
   /// gestorvene (aanbieden). Schrijven is best-effort: zonder lock wordt ons
   /// werk door een gecrashte-parallele start vroeg aangeboden — de kwade kant
@@ -437,7 +438,7 @@ class RecoveryService {
     try {
       final dir = await _dir();
       await _ensureSession(dir);
-      // Levende eigenaren (#2656): welke sessielocks zijn recent ververst?
+      // Levende eigenaren (#2656): welke sessielocks zijn nog in gebruik?
       // Een momentopname van zo'n eigenaar is geen crash-rest — het andere
       // exemplaar beheert die zelf en veegt hem bij afsluiten weg. Locks van
       // een gestorven eigenaar gaan hier al mee weg.
@@ -527,8 +528,8 @@ class RecoveryService {
 
   /// Nette afsluiting: heartbeat stilleggen en het eigen sessielock weg
   /// (#2656). Restanten van andere exemplaren blijft [loadAll] zelf opruimen.
-  /// Een crash laat het lock achter; de vervallen mtime maakt het dan alsnog
-  /// dood bij de volgende start.
+  /// Een crash laat het lock achter; de procescontrole herkent dat bij de
+  /// volgende start, ook zolang de mtime nog vers is.
   Future<void> endSession() async {
     _heartbeat?.cancel();
     _heartbeat = null;
