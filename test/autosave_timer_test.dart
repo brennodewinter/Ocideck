@@ -23,9 +23,17 @@ class _RecordingRecovery extends RecoveryService {
 
   final List<RecoverySnapshot> saved = [];
   final List<String> discarded = [];
+  bool failNextWrite = false;
 
   @override
-  Future<void> save(RecoverySnapshot snapshot) async => saved.add(snapshot);
+  Future<bool> save(RecoverySnapshot snapshot) async {
+    if (failNextWrite) {
+      failNextWrite = false;
+      return false;
+    }
+    saved.add(snapshot);
+    return true;
+  }
 
   @override
   Future<void> discard(String id) async => discarded.add(id);
@@ -116,12 +124,9 @@ void main() {
       unawaited(tabs.newDocument());
       tabs.state.current!.documentNotifier!.edit('# Memo\n\nNiet opgeslagen.');
 
-      // De regressie: documenttabbladen werden overgeslagen bij autosave, dus een
-      // crash gooide niet-opgeslagen documenten weg. Nu belanden ze in een eigen
-      // momentopname (byte-getrouwe bron, gemarkeerd als document).
-      async.elapse(const Duration(seconds: 30));
-      expect(recovery.saved, isNotEmpty);
-      final snap = recovery.saved.last;
+      // De herstelkopie ligt al klaar ruim vóór de periodieke tik op 25 s.
+      async.elapse(const Duration(seconds: 2));
+      final snap = recovery.saved.single;
       expect(snap.kind, MarkdownKind.document);
       expect(snap.markdown, '# Memo\n\nNiet opgeslagen.');
 
@@ -133,6 +138,84 @@ void main() {
       expect(doc, isNotNull);
       expect(doc!.currentState.document!.source, '# Memo\n\nNiet opgeslagen.');
       expect(doc.currentState.isDirty, isTrue);
+      doc.edit('# Tijdelijke wijziging');
+      doc.undo();
+      expect(doc.currentState.document!.source, snap.markdown);
+      expect(doc.currentState.isDirty, isTrue);
+    });
+  });
+
+  test(
+    'autosave verwerkt visuele aanslagen zonder op een typ-pauze te wachten',
+    () {
+      fakeAsync((async) {
+        final recovery = _RecordingRecovery();
+        final tabs = _tabs(recovery);
+        addTearDown(tabs.dispose);
+        unawaited(tabs.newDocument());
+        final doc = tabs.state.current!.documentNotifier!;
+        var pendingSource = '';
+        doc.visualFlush.bind(() => doc.edit(pendingSource, visualEdit: true));
+
+        for (var keystroke = 0; keystroke < 10; keystroke++) {
+          pendingSource += 'x';
+          doc.markVisualEditPending();
+          async.elapse(const Duration(milliseconds: 190));
+        }
+        expect(recovery.saved, isEmpty);
+        async.elapse(const Duration(milliseconds: 100));
+        expect(recovery.saved.single.markdown, 'xxxxxxxxxx');
+      });
+    },
+  );
+
+  test('documentherstel probeert dezelfde bron opnieuw na een schrijffout', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery()..failNextWrite = true;
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+      unawaited(tabs.newDocument());
+      tabs.state.current!.documentNotifier!.edit('Niet opgeslagen.');
+
+      async.elapse(const Duration(seconds: 2));
+      expect(recovery.saved, isEmpty);
+      async.elapse(const Duration(seconds: 23));
+      expect(recovery.saved.single.markdown, 'Niet opgeslagen.');
+    });
+  });
+
+  test('na opslaan wordt opnieuw typen van dezelfde bron weer beschermd', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+      unawaited(tabs.newDocument());
+      final tab = tabs.state.current!;
+      final doc = tab.documentNotifier!;
+      doc.edit('Tekst');
+      async.elapse(const Duration(seconds: 2));
+      doc.markSaved();
+      async.flushMicrotasks();
+      expect(recovery.discarded, contains(tab.recoveryId));
+
+      doc.edit('Anders');
+      doc.edit('Tekst');
+      async.elapse(const Duration(seconds: 2));
+      expect(recovery.saved.map((s) => s.markdown), ['Tekst', 'Tekst']);
+    });
+  });
+
+  test('een geplande documentkopie wordt bij netjes afsluiten geannuleerd', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+      unawaited(tabs.newDocument());
+      tabs.state.current!.documentNotifier!.edit('Weggooien bij afsluiten.');
+      tabs.stopRecoveryForExit();
+
+      async.elapse(const Duration(seconds: 30));
+      expect(recovery.saved, isEmpty);
     });
   });
 
