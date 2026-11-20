@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/download_delivery.dart';
 import 'package:ocideck/services/export_result.dart';
+import 'package:ocideck/services/slide_rasterizer.dart';
 import 'package:ocideck/widgets/dialogs/export_failure_text.dart';
 import 'package:ocideck/utils/image_preload.dart';
 
@@ -48,6 +49,18 @@ void main() {
     // niet vertelde.
     final text = exportFailureText(l10n, ExportStage.rendering, 'x');
     expect(text, contains('HTML'));
+  });
+
+  test('een frametimeout verwijst naar het venster en HTML', () {
+    final text = exportFailureText(
+      l10n,
+      ExportStage.rendering,
+      const SlideRasterizerNoFrameException(Duration(seconds: 20)),
+    );
+    expect(text, contains('geen frame na 20s'));
+    expect(text, contains('naar de voorgrond'));
+    expect(text, contains('HTML'));
+    expect(text, isNot(contains('Dit ligt aan een dia')));
   });
 
   test('de technische melding blijft staan, maar niet als hele boodschap', () {

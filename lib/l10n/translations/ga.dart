@@ -6530,8 +6530,8 @@ const _dutchSourceAddGa = <String, String>{
       'Stop an t-easpórtáil le linn an ullmhúcháin.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Níorbh fhéidir an comhad a thógáil ná a scríobh. Deimhnigh go bhfuil spás diosca ann agus gur féidir scríobh chuig an bhfillteán easpórtála.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Theip ar rindreáil na sleamhnán ina n-íomhánna. Sleamhnán is cúis leis, ní hé formáid an chomhaid: ní théann an t-easpórtáil HTML an bealach seo agus oibríonn sé de ghnáth sa chás seo.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Níorbh fhéidir na sleamhnáin a rindreáil mar íomhánna. Is féidir an cur i láthair a easpórtáil mar HTML freisin.',
   'Technische melding:': 'Teachtaireacht theicniúil:',
   'presentaties': 'laithreoidi',
   '/Presentaties': '/Láithreoidí',

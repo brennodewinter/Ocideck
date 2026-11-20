@@ -6412,8 +6412,8 @@ const _dutchSourceAddEt = <String, String>{
       'Eksport peatus ettevalmistamise ajal.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Faili ei õnnestunud koostada ega kirjutada. Kontrolli, kas kettal on ruumi ja kas ekspordikausta saab kirjutada.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Slaidide renderdamine piltideks ebaõnnestus. Põhjus on mõni slaid, mitte failivorming: HTML-eksport siit läbi ei käi ja töötab sel juhul tavaliselt.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Slaidide piltidena renderdamine nurjus. Esitluse saad eksportida ka HTML-vormingus.',
   'Technische melding:': 'Tehniline teade:',
   'presentaties': 'esitlused',
   '/Presentaties': '/Esitlused',

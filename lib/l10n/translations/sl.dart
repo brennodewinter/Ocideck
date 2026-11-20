@@ -6421,8 +6421,8 @@ const _dutchSourceAddSl = <String, String>{
       'Izvoz se je ustavil med pripravo.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Datoteke ni bilo mogoče zgraditi ali zapisati. Preverite, ali je na disku prostor in ali je v mapo za izvoz mogoče pisati.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Upodabljanje prosojnic v sliko ni uspelo. Vzrok je prosojnica, ne oblika datoteke: izvoz v HTML ne gre tod mimo in v tem primeru običajno deluje.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Diapozitivov ni bilo mogoče upodobiti kot slike. Predstavitev lahko izvoziš tudi v obliki HTML.',
   'Technische melding:': 'Tehnično sporočilo:',
   'presentaties': 'predstavitve',
   '/Presentaties': '/Predstavitve',

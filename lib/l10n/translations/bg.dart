@@ -6480,8 +6480,8 @@ const _dutchSourceAddBg = <String, String>{
       'Експортът спря по време на подготовката.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Файлът не можа да бъде изграден или записан. Проверете дали има място на диска и дали папката за експорт е достъпна за запис.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Изобразяването на слайдовете като картини се провали. Причината е слайд, а не файловият формат: HTML експортът не минава оттук и в този случай обикновено работи.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Неуспешно преобразуване на слайдовете в изображения. Можете също да експортирате презентацията като HTML.',
   'Technische melding:': 'Техническо съобщение:',
   'presentaties': 'prezentatsii',
   '/Presentaties': '/Презентации',
