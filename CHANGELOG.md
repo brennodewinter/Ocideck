@@ -8,6 +8,18 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.15] — 2026-11-20
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Herstel regressies uit de analyse voor release 0.7.15
+- Integreer release 0.7.14 en herstel de main-kwaliteitspoort
+- Herstel 26 openstaande OciDeck-problemen
+- Markeer het huidige diatype geel in de inhoudseditor
+- Voorkom herhaald zoeken tijdens scrollen in Ctrl+O
+- Breng 0.7.14 en de herstelde releasecontroles terug naar main
+
 ## [0.7.14] — 2026-11-19
 
 ### Changed
