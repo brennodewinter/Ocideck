@@ -139,6 +139,20 @@ void main() {
   });
 
   group('begrenzing', () {
+    test('dieptegrens werkt onafhankelijk van de lengtegrens', () {
+      for (final depth in [128, 129]) {
+        final expected = depth == 128 ? null : CalcErrors.invalid;
+        final unary = _eval('${'-' * depth}1', 0);
+        final grouped = _eval('${'(' * depth}1${')' * depth}', 0);
+        expect(unary.error, expected, reason: 'unaire diepte $depth');
+        expect(grouped.error, expected, reason: 'haakjesdiepte $depth');
+        if (depth == 128) {
+          expect(unary.value, 1.0);
+          expect(grouped.value, 1.0);
+        }
+      }
+    });
+
     test('diep geneste expressies zijn ongeldig, geen stackoverflow', () {
       // Parser en evaluator recureerden voorheen onbegrensd: duizenden
       // unaire minnen of haakjes gaven een StackOverflowError die de

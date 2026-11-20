@@ -1,5 +1,7 @@
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/collab_session.dart';
+import 'package:ocideck/collab/collab_session_controller.dart';
 import 'package:ocideck/collab/collab_transport.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
@@ -10,6 +12,7 @@ class _TransientSendFailure implements CollabTransport {
 
   final CollabTransport delegate;
   final attemptedVersions = <int>[];
+  bool? available;
 
   @override
   String get participantId => delegate.participantId;
@@ -23,7 +26,10 @@ class _TransientSendFailure implements CollabTransport {
   @override
   Future<void> sendOp(DeckOp op) async {
     attemptedVersions.add(op.version);
-    if (attemptedVersions.length == 1) throw StateError('connection lost');
+    if (available == false ||
+        (available == null && attemptedVersions.length == 1)) {
+      throw StateError('connection lost');
+    }
     await delegate.sendOp(op);
   }
 
@@ -253,6 +259,111 @@ void main() {
       expect(peer.version, owner.version);
       expect(peer.deck.slides.single.title, 'first');
       expect(peer.deck.slides.single.subtitle, 'second');
+    },
+  );
+
+  test('an idle authority recovers after more than three failed retries', () {
+    final hub = LoopbackHub();
+    final slide = baseSlide();
+    final transport = _TransientSendFailure(hub.connect('owner'))
+      ..available = false;
+    late CollabSession owner;
+    late CollabSession peer;
+    fakeAsync((clock) {
+      owner = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: transport,
+        isAuthority: true,
+      );
+      peer = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: hub.connect('peer'),
+        isAuthority: false,
+      );
+      var failures = 0;
+      owner
+          .submit(
+            SetSlideField(
+              version: 0,
+              authorId: 'owner',
+              slideId: slide.id,
+              field: SlideField.title,
+              value: 'retained',
+            ),
+          )
+          .catchError((Object _) {
+            failures++;
+          });
+      clock.flushMicrotasks();
+      expect(failures, 1);
+      clock.elapse(const Duration(seconds: 8));
+      expect(transport.attemptedVersions, [1, 1, 1, 1]);
+      expect(peer.version, 0);
+      clock.elapse(const Duration(minutes: 1));
+      expect(transport.attemptedVersions, hasLength(7));
+      transport.available = true;
+      clock.elapse(const Duration(seconds: 30));
+      expect(peer.deck.slides.single.title, 'retained');
+      expect(peer.version, 1);
+      expect(transport.attemptedVersions, List.filled(8, 1));
+      owner.dispose();
+      peer.dispose();
+      clock.flushMicrotasks();
+      expect(clock.pendingTimers, isEmpty);
+    });
+  });
+
+  test(
+    'failed guest field survives unrelated remote edit and can be resent',
+    () async {
+      final hub = LoopbackHub();
+      final slide = baseSlide();
+      final owner = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: hub.connect('owner'),
+        isAuthority: true,
+      );
+      final transport = _TransientSendFailure(hub.connect('guest'));
+      final guest = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: transport,
+        isAuthority: false,
+      );
+      var local = guest.deck;
+      var failures = 0;
+      final controller = CollabSessionController(
+        session: guest,
+        readDeck: () => local,
+        writeDeck: (deck) => local = deck,
+        onSubmitFailure: () => failures++,
+      );
+      addTearDown(owner.dispose);
+      addTearDown(controller.dispose);
+      local = local.copyWith(slides: [slide.copyWith(title: 'unsent')]);
+      controller.onLocalEdit(local);
+      await pumpEventQueue();
+      expect(failures, 1);
+      await owner.submit(
+        SetSlideField(
+          version: 0,
+          authorId: 'owner',
+          slideId: slide.id,
+          field: SlideField.subtitle,
+          value: 'remote',
+        ),
+      );
+      await pumpEventQueue();
+      expect(local.slides.single.title, 'unsent');
+      expect(local.slides.single.subtitle, 'remote');
+      // De volgende echte bewerking dient ook de nog niet ontvangen waarde in.
+      local = local.copyWith(
+        slides: [local.slides.single.copyWith(notes: 'next')],
+      );
+      controller.onLocalEdit(local);
+      await pumpEventQueue();
+      expect(owner.deck.slides.single.title, 'unsent');
+      expect(owner.deck.slides.single.notes, 'next');
+      expect(local.slides.single.title, 'unsent');
     },
   );
 

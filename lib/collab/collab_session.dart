@@ -161,13 +161,13 @@ class CollabSession {
       onError: (Object error, StackTrace stack) {
         if (identical(_sending, tracked)) _sending = null;
         logError('collab: authoritative operation not sent', error, stack);
-        if (_disposed ||
-            _unsent.isEmpty ||
-            (_retry?.isActive ?? false) ||
-            _retryCount >= 3) {
+        if (_disposed || _unsent.isEmpty || (_retry?.isActive ?? false)) {
           return;
         }
-        _retry = Timer(Duration(seconds: 1 << _retryCount++), () {
+        // Een storing kan langer duren dan drie pogingen. Blijf herstellen
+        // zonder nieuwe toetsaanslag, met een begrensde frequentie (#3071).
+        final seconds = _retryCount < 5 ? 1 << _retryCount++ : 30;
+        _retry = Timer(Duration(seconds: seconds), () {
           if (_unsent.isEmpty || _disposed) return;
           unawaited(
             _sendThrough(

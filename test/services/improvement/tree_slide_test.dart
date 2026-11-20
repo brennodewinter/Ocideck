@@ -204,18 +204,27 @@ void main() {
     test(
       'een pathologisch diepe boom klemt in plaats van de stack te laten vallen',
       () {
-        // De traversals recureerden per inspringniveau terwijl het formaat
-        // geen maximum kent: ~40K steeds dieper geneste items gaven een
-        // StackOverflowError bij voorvertoning én HTML-export (#3035).
-        final bullets = [for (var i = 0; i < 40000; i++) '${'\t' * i}n$i'];
+        // Een kleine keten overschrijdt de 32 rangen; één extreem ingesprongen
+        // item dekt de rauwe invoer. Geen kwadratisch grote testinvoer (#3072).
+        final bullets = [
+          for (var i = 0; i < 64; i++) '${'\t' * i}n$i',
+          '${'\t' * 40000}deep',
+        ];
         final scene = buildTreeScene(
           bullets: bullets,
           layout: TreeLayout.tree,
           measurer: const ApproximateTextMeasurer(),
         );
-        // De inhoud wordt niet weggegooid: alle geklemde knopen leggen
-        // kaartjes en verbindingen in de scene.
-        expect(scene.nodes.length, greaterThan(1000));
+        final explicitlyClamped = buildTreeScene(
+          bullets: [
+            for (var i = 0; i < 64; i++) '${'\t' * (i < 32 ? i : 31)}n$i',
+            '${'\t' * 31}deep',
+          ],
+          layout: TreeLayout.tree,
+          measurer: const ApproximateTextMeasurer(),
+        );
+        expect(scene.nodes.whereType<SceneRect>(), hasLength(bullets.length));
+        expect(sceneToSvg(scene), sceneToSvg(explicitlyClamped));
       },
     );
   });
