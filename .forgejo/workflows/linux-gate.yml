@@ -200,7 +200,19 @@ jobs:
           chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE" "$PUB_CACHE"
           runuser --user ubuntu --preserve-environment -- env \
             HOME=/home/ubuntu \
-            make check-no-coverage
+            make check-no-coverage \
+              'SUITE_REPORT=--reporter=expanded --file-reporter json:build/test-report.json'
+
+      # #3086: een afgebroken suite kan zonder faaltest eindigen. Bewaar de
+      # afzonderlijke teststatussen ook wanneer de poort rood terugkomt.
+      - name: Testrapport bewaren
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-gate-report-${{ github.sha }}
+          path: build/test-report.json
+          if-no-files-found: warn
+          retention-days: 7
 
   pagination-profile:
     if: ${{ inputs.pagination_profile == true || inputs.pagination_profile == 'true' }}
