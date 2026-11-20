@@ -40,10 +40,9 @@ String? _resolvedRasterAsset(String rawPath, String? projectPath) {
 /// De export kon geen frame krijgen om de dia in te tekenen.
 ///
 /// Rasteren gebeurt door de échte voorvertoning te laten tekenen en het
-/// resultaat vast te leggen. Dat kan alleen als de engine frames aflevert, en
-/// dat doet ze niet wanneer het venster niet zichtbaar is — geminimaliseerd,
-/// achter een ander venster, of op een andere Space. Voorheen bleef de export
-/// daar oneindig in hangen zonder één teken van leven.
+/// resultaat vast te leggen. Een geminimaliseerd venster kan de normale
+/// framelevering stilleggen. Ook de terugval op een opwarmframe heeft een
+/// deadline.
 class SlideRasterizerNoFrameException implements Exception {
   const SlideRasterizerNoFrameException(this.waited);
 
@@ -53,8 +52,8 @@ class SlideRasterizerNoFrameException implements Exception {
   @override
   String toString() =>
       'SlideRasterizerNoFrameException: geen frame na ${waited.inSeconds}s. '
-      'Rasteren vereist een zichtbaar venster; houd het tijdens de export op '
-      'de voorgrond.';
+      'Breng het venster of browsertabblad naar de voorgrond en probeer de '
+      'export opnieuw.';
 }
 
 /// Bovengrens op de geschatte totale renderbytes van één raster-export.
@@ -117,21 +116,11 @@ class SlideRasterizer {
   /// niemand naar een bevroren balk zit te kijken zonder te weten waarom.
   static const Duration frameTimeout = Duration(seconds: 20);
 
-  /// Wacht op een getekend frame — met een grens.
-  ///
-  /// Twee dingen die [WidgetsBinding.endOfFrame] alléén niet geeft:
-  ///
-  /// 1. **Een frame wordt afgedwongen.** `endOfFrame` lost pas op als er een
-  ///    frame ís; het plant er zelf geen. Zonder `scheduleFrame` hangt het
-  ///    wachten af van of iets ánders toevallig om een frame vroeg.
-  /// 2. **Het wachten eindigt.** Levert de engine niets — venster onzichtbaar,
-  ///    door het besturingssysteem afgeknepen — dan komt `endOfFrame` nooit
-  ///    terug. Oneindig wachten zonder terugkoppeling is de slechtste
-  ///    faalvorm die er is: de gebruiker ziet een export die niets doet en
-  ///    niets zegt. Liever een nette fout die vertelt wat eraan scheelt.
+  /// Wacht begrensd op een getekend frame. Voor de capture volstaat een
+  /// opwarmframe, ook als het platform geen normale frames aanlevert.
   static Future<void> _awaitFrame(Duration timeout) async {
     try {
-      await waitForUiFrame(timeout: timeout);
+      await waitForUiFrame(timeout: timeout, allowWarmUpFrame: true);
     } on TimeoutException {
       throw SlideRasterizerNoFrameException(timeout);
     }
