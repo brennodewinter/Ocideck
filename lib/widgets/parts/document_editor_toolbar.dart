@@ -110,6 +110,7 @@ class _DocEditorToolbar extends StatelessWidget {
 
   /// Zet (of wist met `null`) de documentstijl.
   final ValueChanged<String?> onStyleChanged;
+  final VoidCallback onManageStyles;
 
   const _DocEditorToolbar({
     required this.mode,
@@ -159,6 +160,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.styleEnforced,
     required this.enforcedStyleName,
     required this.onStyleChanged,
+    required this.onManageStyles,
   });
 
   /// De stand-keuze: Invullen (alleen bij een formulier), Visueel, Bron, Pagina's.
@@ -522,6 +524,11 @@ class _DocEditorToolbar extends StatelessWidget {
         const PopupMenuDivider(),
         for (final name in styleNames)
           _styleItem(name, name, currentStyleName == name),
+        const PopupMenuDivider(),
+        PopupMenuItem<String>(
+          onTap: onManageStyles,
+          child: Text(l10n.d('Stijlprofielen beheren…')),
+        ),
       ],
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),

@@ -25,6 +25,7 @@ import '../../services/table_of_contents.dart';
 import '../../services/transcription/transcript_marker.dart';
 import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/bullet_marker_svg.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/spacer_embed_syntax.dart';
 import '../../utils/heading_anchors.dart';
@@ -391,7 +392,7 @@ class DocumentMarkdownView extends StatelessWidget {
   ) => switch (b.kind) {
     _Kind.heading => _bounded(_heading(t, b.level, b.text)),
     _Kind.paragraph => _bounded(_paragraph(t, b.text)),
-    _Kind.list => _bounded(_list(t, b.items)),
+    _Kind.list => _bounded(_list(context, t, b.items)),
     _Kind.quote => _bounded(_blockQuote(t, b.text)),
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
@@ -720,7 +721,7 @@ class DocumentMarkdownView extends StatelessWidget {
     child: _inline(text, t.body, t),
   );
 
-  Widget _list(_Theme t, List<_ListLine> items) {
+  Widget _list(BuildContext context, _Theme t, List<_ListLine> items) {
     // Track a running counter per indent depth so nested ordered lists restart.
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -728,7 +729,12 @@ class DocumentMarkdownView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (final it in items)
-            _documentListRow(t, it, (text) => _inline(text, t.body, t)),
+            _documentListRow(
+              context,
+              t,
+              it,
+              (text) => _inline(text, t.body, t),
+            ),
         ],
       ),
     );

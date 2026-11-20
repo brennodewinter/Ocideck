@@ -380,6 +380,7 @@ class _Theme {
          profile?.accentColor,
          AppPalette.of(theme).accentInk,
        ),
+       bulletSvg = documentBulletSvg(profile),
        checkboxEmpty = _profileColor(
          profile?.checklistUncheckedColor,
          theme.colorScheme.onSurfaceVariant,
@@ -487,6 +488,7 @@ class _Theme {
   final Color subheading;
   final String? headingFontFamily;
   final Color marker;
+  final String? bulletSvg;
   final Color checkboxEmpty;
   final Color checkboxChecked;
   final Color link;
@@ -703,18 +705,35 @@ final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\((.+)\)$');
 
 /// Het opsommingsteken of nummer vóór een lijstregel. Top-level, want het
 /// leest alleen het thema en de regel — niets van de weergave zelf.
-Widget _bulletMarker(_Theme t, _ListLine it) => ExcludeDocumentSearch(
-  child: SizedBox(
-    width: it.ordered ? 24 : 18,
-    child: Text(
-      it.ordered ? '${it.number}.' : '•',
-      style: t.body.copyWith(
-        fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
-        color: it.ordered ? t.body.color : t.marker,
+Widget _bulletMarker(BuildContext context, _Theme t, _ListLine it) {
+  final svg = t.bulletSvg;
+  if (svg != null && !it.ordered) {
+    final fontSize = MediaQuery.textScalerOf(context).scale(t.bodyFontSize);
+    final size = fontSize * 0.66;
+    return ExcludeDocumentSearch(
+      child: SizedBox(
+        width: 18,
+        height: fontSize * kDocumentBodyLineHeight,
+        child: Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: SvgPicture.string(svg, width: size, height: size),
+        ),
+      ),
+    );
+  }
+  return ExcludeDocumentSearch(
+    child: SizedBox(
+      width: it.ordered ? 24 : 18,
+      child: Text(
+        it.ordered ? '${it.number}.' : '•',
+        style: t.body.copyWith(
+          fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
+          color: it.ordered ? t.body.color : t.marker,
+        ),
       ),
     ),
-  ),
-);
+  );
+}
 
 /// The box of a GFM task item. Read-only on purpose: this renders bundled
 /// documentation shipped as an asset, so a tick here would have nowhere to be
@@ -765,6 +784,7 @@ class _TranscriptMarkerLine extends StatelessWidget {
 }
 
 Widget _documentListRow(
+  BuildContext context,
   _Theme t,
   _ListLine it,
   Widget Function(String text) buildText,
@@ -775,7 +795,7 @@ Widget _documentListRow(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         it.checked == null
-            ? _bulletMarker(t, it)
+            ? _bulletMarker(context, t, it)
             : _checkMarker(t, checked: it.checked!),
         Expanded(child: buildText(it.text)),
       ],
