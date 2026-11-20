@@ -675,7 +675,10 @@ Future<DocumentExportOutcome> _writeDocumentExport(
   final title = document.fields['title'] ?? _documentTitle(body, filePath);
   final effectiveTheme =
       resolveDocumentStyleProfile(settings, document.styleName) ??
-      ref.read(fileServiceProvider).activeProfileFor(projectPath: projectPath);
+      ref
+          .read(fileServiceProvider)
+          .activeProfileFor(projectPath: projectPath)
+          .copyWith(bulletMarker: BulletMarker.dot);
 
   // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
   // uitvoerpad de rauwe bron nog aan.

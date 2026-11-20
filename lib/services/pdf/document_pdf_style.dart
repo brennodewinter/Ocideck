@@ -11,7 +11,8 @@
 
 import 'package:pdf/pdf.dart';
 
-import '../../models/settings.dart' show TableBorderStyle, ThemeProfile;
+import '../../models/settings.dart'
+    show BulletMarker, TableBorderStyle, ThemeProfile;
 
 /// Millimeters naar PDF-punten. Een punt is 1/72 duim, een duim 25,4 mm.
 double mmToPt(double mm) => mm * PdfPageFormat.mm;
@@ -38,6 +39,7 @@ class DocumentPdfStyle {
     required this.showPageNumbers,
     required this.bandTextColor,
     required this.bandBackgroundColor,
+    this.bulletMarker = BulletMarker.dot,
   });
 
   /// Leidt de opmaak af uit het stijlprofiel van het document.
@@ -45,6 +47,7 @@ class DocumentPdfStyle {
     final text = _color(theme.textColor, const PdfColor(0.13, 0.13, 0.13));
     return DocumentPdfStyle(
       bodyFontSize: theme.documentBodyFontSize,
+      bulletMarker: theme.bulletMarker,
       textColor: text,
       accentColor: _color(theme.accentColor, PdfColors.teal700),
       headingColor: _color(theme.effectiveDocumentHeadingColor, text),
@@ -79,6 +82,7 @@ class DocumentPdfStyle {
   /// De grootte van de lopende tekst, in punten. Alles hieronder is hiervan
   /// afgeleid, zodat het document als geheel meeschaalt.
   final double bodyFontSize;
+  final BulletMarker bulletMarker;
 
   final PdfColor textColor;
   final PdfColor accentColor;

@@ -20,7 +20,8 @@ import 'dart:typed_data';
 
 import 'package:pdf/widgets.dart' as pw;
 
-import '../../models/settings.dart' show TableBorderStyle;
+import '../../models/settings.dart' show BulletMarker, TableBorderStyle;
+import '../../utils/bullet_marker_svg.dart';
 import '../../utils/log.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
@@ -481,6 +482,19 @@ class DocumentPdfWidgets {
         child: pw.Align(
           alignment: pw.Alignment.topRight,
           child: pw.Text(ordered, style: _baseStyle),
+        ),
+      );
+    }
+    if (style.bulletMarker == BulletMarker.paw) {
+      return pw.Padding(
+        padding: pw.EdgeInsets.only(top: size * 0.17, right: size * 0.4),
+        child: pw.Align(
+          alignment: pw.Alignment.topRight,
+          child: pw.SvgImage(
+            svg: pawBulletSvg(style.accentColor.toHex().substring(0, 7)),
+            width: size * 0.66,
+            height: size * 0.66,
+          ),
         ),
       );
     }
