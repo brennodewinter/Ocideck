@@ -2398,6 +2398,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Konuşmacı notları (PDF, A4)',
   'Titeldia': 'Başlık slaytı',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Görseller kaydedilemedi. Tekrar deneyin veya görselleri hariç tutun.',

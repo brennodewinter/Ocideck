@@ -14,6 +14,26 @@ List<String>? _notesOf(ExportBundle? audience) => audience == null
     ? null
     : [for (final s in audience.audience.slides) s.notes];
 
+/// Koppel paginanotities aan de bijbehorende rich-textpagina. Bij een
+/// uitgesplitste bevinding horen de hele dianotities bij de eerste pagina.
+List<String> _pdfNotesOf(ExportBundle audience) {
+  final slides = audience.audience.slides;
+  final paginated = {
+    for (final s in slides)
+      if (s.renderPage > 0) s.id,
+  };
+  final seen = <String>{};
+  return [
+    for (final slide in slides)
+      if (paginated.contains(slide.id))
+        parsePageScopedNotes(slide.notes)[slide.renderPage] ?? ''
+      else if (seen.add(slide.id))
+        parsePageScopedNotes(slide.notes).values.join('\n\n')
+      else
+        '',
+  ];
+}
+
 /// De alt-tekst per slide voor een raster-export (IMAGE_CALLOUTS.md §12.2):
 /// de bestaande alt-tekst van de afbeelding met de callout-beschrijvingen
 /// erachter. Een gerasterde slide blijft structureel ontoegankelijk; dit
@@ -101,7 +121,20 @@ Future<Uint8List> _buildPdf(
   required String fallbackTitle,
   bool compress = false,
   double slideAspect = kScreenSlideAspect,
-}) {
+  List<String>? notes,
+  required String languageCode,
+}) async {
+  if (notes != null && notes.length != images.length) {
+    throw ArgumentError('Het aantal notities komt niet overeen met de dia’s.');
+  }
+  final fallbackFonts = notes != null
+      ? await loadPdfFallbackFonts()
+      : const <ByteData>[];
+  final notesLabel = AppLocalizations.sourceFor(
+    languageCode,
+    'Sprekersnotities',
+  );
+  final slideLabel = AppLocalizations.sourceFor(languageCode, 'Slide');
   final moved = _movedImages(images);
   return ExportService._offload(() async {
     final doc = pw.Document(
@@ -114,20 +147,92 @@ Future<Uint8List> _buildPdf(
     );
     // Page size in points; only the ratio matters for a full-bleed image.
     final format = PdfPageFormat(1280, 1280 / slideAspect, marginAll: 0);
-    for (final png in _receivedImages(moved, images)) {
+    final fontFallback = [
+      for (final bytes in fallbackFonts) pw.Font.ttf(bytes),
+    ];
+    for (final (index, png) in _receivedImages(moved, images).indexed) {
       // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
       // compressed (JPEG) slide embeds just like the lossless one.
       final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
       doc.addPage(
-        pw.Page(
-          pageFormat: format,
-          build: (_) => pw.Image(image, fit: pw.BoxFit.fill),
-        ),
+        notes == null
+            ? pw.Page(
+                pageFormat: format,
+                build: (_) => pw.Image(image, fit: pw.BoxFit.fill),
+              )
+            : _pdfNotesPage(
+                image,
+                notes: notes[index],
+                notesLabel: notesLabel,
+                slideLabel: '$slideLabel ${index + 1}',
+                classification: metadata.tlp.label,
+                fontFallback: fontFallback,
+              ),
       );
     }
     return doc.save();
   });
 }
+
+pw.MultiPage _pdfNotesPage(
+  pw.MemoryImage image, {
+  required String notes,
+  required String notesLabel,
+  required String slideLabel,
+  required String classification,
+  required List<pw.Font> fontFallback,
+}) => pw.MultiPage(
+  pageFormat: PdfPageFormat.a4,
+  margin: const pw.EdgeInsets.all(20 * PdfPageFormat.mm),
+  // Net als bij document-PDF mag één tekstblok langer zijn dan twintig vellen.
+  maxPages: 1000000,
+  footer: (_) => pw.Padding(
+    padding: const pw.EdgeInsets.only(top: 12),
+    child: pw.Row(
+      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+      children: [
+        pw.Text(
+          slideLabel,
+          style: pw.TextStyle(fontSize: 9, fontFallback: fontFallback),
+        ),
+        if (classification.isNotEmpty)
+          pw.Text(classification, style: const pw.TextStyle(fontSize: 9)),
+      ],
+    ),
+  ),
+  build: (_) => [
+    pw.Center(
+      heightFactor: 1,
+      child: pw.Image(
+        image,
+        height: 125 * PdfPageFormat.mm,
+        fit: pw.BoxFit.contain,
+      ),
+    ),
+    if (notes.isNotEmpty) ...[
+      pw.SizedBox(height: 18),
+      pw.Text(
+        notesLabel,
+        style: pw.TextStyle(
+          fontSize: 12,
+          fontWeight: pw.FontWeight.bold,
+          fontFallback: fontFallback,
+        ),
+      ),
+      pw.SizedBox(height: 7),
+      pw.Text(
+        // De gebundelde fonts hebben een zwart vierkant maar geen vol blok.
+        notes.replaceAll(kRedactionToken, '■' * kRedactionBlockCount),
+        overflow: pw.TextOverflow.span,
+        style: pw.TextStyle(
+          fontSize: 11,
+          lineSpacing: 3,
+          fontFallback: fontFallback,
+        ),
+      ),
+    ],
+  ],
+);
 
 /// Downscale a rendered slide PNG to [ExportService._compressedMaxWidth] and re-encode it as
 /// JPEG at [ExportService._compressedJpegQuality]. Slides are full-bleed (no transparency),
@@ -162,6 +267,7 @@ extension _ExportFormats on ExportService {
     required CockpitColorScheme cockpitColorScheme,
     required String interfaceLanguageCode,
     required bool compress,
+    required bool includeSpeakerNotes,
   }) async {
     final Uint8List bytes;
     switch (format) {
@@ -172,6 +278,14 @@ extension _ExportFormats on ExportService {
           fallbackTitle: fallbackTitle,
           compress: compress,
           slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
+          notes: includeSpeakerNotes
+              ? (audience == null
+                    ? List.filled(images.length, '')
+                    : _pdfNotesOf(audience))
+              : null,
+          languageCode: docMeta.language.isEmpty
+              ? interfaceLanguageCode
+              : docMeta.language,
         );
       case ExportFormat.pptx:
         bytes = await _buildPptx(

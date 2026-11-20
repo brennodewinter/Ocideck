@@ -613,6 +613,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Sprekersnotities (PDF, A4)': 'Sprekkersnotysjes (PDF, A4)',
   'Titeldia': 'Titeldia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'De ôfbyldingen koene net bewarre wurde. Besykje it opnij of lit de ôfbyldingen fuort.',

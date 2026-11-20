@@ -1570,6 +1570,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Nótaí cainteora (PDF, A4)',
   'Titeldia': 'Sleamhnán teidil',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Níorbh fhéidir na híomhánna a shábháil. Bain triail eile as nó fág na híomhánna ar lár.',

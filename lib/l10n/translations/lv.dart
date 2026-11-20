@@ -1538,6 +1538,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Runātāja piezīmes (PDF, A4)',
   'Titeldia': 'Titulslaids',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Attēlus neizdevās saglabāt. Mēģiniet vēlreiz vai izlaidiet attēlus.',

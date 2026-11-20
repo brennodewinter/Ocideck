@@ -1556,6 +1556,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Note pentru vorbitor (PDF, A4)',
   'Titeldia': 'Diapozitiv de titlu',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Imaginile nu au putut fi salvate. Încercați din nou sau omiteți imaginile.',

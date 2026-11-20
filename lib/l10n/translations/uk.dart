@@ -1556,6 +1556,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Нотатки доповідача (PDF, A4)',
   'Titeldia': 'Титульний слайд',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Не вдалося зберегти зображення. Спробуйте ще раз або пропустіть зображення.',

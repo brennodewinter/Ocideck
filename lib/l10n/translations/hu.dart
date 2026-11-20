@@ -1543,6 +1543,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Előadói jegyzetek (PDF, A4)',
   'Titeldia': 'Címdia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'A képeket nem sikerült menteni. Próbálja újra, vagy hagyja ki a képeket.',

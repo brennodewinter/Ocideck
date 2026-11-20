@@ -1561,6 +1561,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Бележки за лектора (PDF, A4)',
   'Titeldia': 'Заглавен слайд',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Изображенията не можаха да бъдат запазени. Опитайте отново или пропуснете изображенията.',

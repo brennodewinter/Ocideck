@@ -1552,6 +1552,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Notatki prezentera (PDF, A4)',
   'Titeldia': 'Slajd tytułowy',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Nie udało się zapisać obrazów. Spróbuj ponownie lub pomiń obrazy.',

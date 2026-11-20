@@ -1565,6 +1565,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Σημειώσεις ομιλητή (PDF, A4)',
   'Titeldia': 'Διαφάνεια τίτλου',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Δεν ήταν δυνατή η αποθήκευση των εικόνων. Δοκιμάστε ξανά ή παραλείψτε τις εικόνες.',

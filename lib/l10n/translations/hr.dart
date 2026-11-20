@@ -1546,6 +1546,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Bilješke govornika (PDF, A4)',
   'Titeldia': 'Naslovni slajd',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Slike nije bilo moguće spremiti. Pokušajte ponovno ili izostavite slike.',

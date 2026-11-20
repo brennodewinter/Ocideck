@@ -1542,6 +1542,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Poznámky řečníka (PDF, A4)',
   'Titeldia': 'Titulní snímek',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Obrázky se nepodařilo uložit. Zkuste to znovu nebo obrázky vynechte.',

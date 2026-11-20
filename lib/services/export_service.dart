@@ -14,6 +14,7 @@ import 'package:pdf/widgets.dart' as pw;
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
 import '../utils/log.dart';
+import '../utils/page_scoped_notes.dart';
 import '../utils/user_facing_error.dart';
 import '../utils/atomic_file.dart';
 import '../models/deck.dart';
@@ -21,6 +22,8 @@ import '../models/image_callout.dart';
 import '../models/privacy_disposition.dart';
 import '../models/redaction_manifest.dart';
 import 'privacy/privacy_export_policy.dart';
+import 'privacy/privacy_projection.dart'
+    show kRedactionBlockCount, kRedactionToken;
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
 import 'download_delivery.dart';
@@ -37,6 +40,7 @@ import 'latex/latex_preamble.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
 import 'odp/deck_odp_export.dart';
+import 'pdf/pdf_fallback_fonts.dart';
 import 'pptx/deck_pptx_export.dart';
 
 part 'export_service_raster.dart';
@@ -81,10 +85,12 @@ class ExportService {
   /// When [compress] is set (PDF only), each slide is re-encoded as JPEG instead
   /// of being embedded as lossless PNG, and `-compact` is appended to the file
   /// name so it never overwrites a full-quality export.
+  /// [includeSpeakerNotes] gives PDF exports a portrait A4 layout and appends
+  /// `-notities` to the filename.
   ///
   /// ── Waarom [audience] één bundel is en geen losse strings ──
   ///
-  /// De HTML-markdown en de PPTX-sprekersnotities komen allebei uit [audience].
+  /// De HTML-markdown en de sprekersnotities komen uit [audience].
   /// Dat waren eerder een `String? markdown` en een `List<String>? notes`, en
   /// dáár verdunde de projectiegrens: de rasterizer en het presentatievenster
   /// eisen al een `AudienceDeck`, maar hier kon een aanroeper ongeredigeerde
@@ -101,6 +107,7 @@ class ExportService {
     ExportFormat format,
     List<Uint8List> images, {
     bool compress = false,
+    bool includeSpeakerNotes = false,
     String? outputDirectory,
 
     ExportBundle? audience,
@@ -165,6 +172,8 @@ class ExportService {
     final compactSuffix = compress && format == ExportFormat.pdf
         ? '-compact'
         : '';
+    final notesLayout = format == ExportFormat.pdf && includeSpeakerNotes;
+    final notesSuffix = notesLayout ? '-notities' : '';
     final dir = (outputDirectory != null && outputDirectory.isNotEmpty)
         ? outputDirectory
         : p.dirname(deckPath);
@@ -177,7 +186,7 @@ class ExportService {
         '$prefix${p.basenameWithoutExtension(deckPath)}'
         '${privacyProfile.fileSuffix}${includeDetail ? '' : '-beknopt'}'
         '${questions.fileSuffix}'
-        '${docMeta.fileSuffix}$compactSuffix${format.extension}';
+        '${docMeta.fileSuffix}$notesSuffix$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
       final bytes = await _encode(
@@ -192,6 +201,7 @@ class ExportService {
         cockpitColorScheme: cockpitColorScheme,
         interfaceLanguageCode: interfaceLanguageCode,
         compress: compress,
+        includeSpeakerNotes: notesLayout,
       );
       // Web: geen bestandssysteem — de export vertrekt als browserdownload.
       if (deliversByDownload) {

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
@@ -16,6 +17,7 @@ import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/widgets/dialogs/export_dialog.dart';
+import 'pdf/pdf_text_probe.dart';
 import 'support/pump_until.dart';
 
 /// De exportknop zoals een gebruiker hem indrukt — door de héle dialoog heen.
@@ -244,5 +246,68 @@ void main() {
       contains('-compact'),
       reason: 'de compacte export hoort zijn eigen naam te dragen',
     );
+  });
+
+  testWidgets('de notitieoptie exporteert A4 met de juiste paginanotities', (
+    tester,
+  ) async {
+    final paginated = Slide.create(SlideType.bullets).copyWith(
+      title: 'Dia met twee pagina’s',
+      notes: [
+        '<!-- ocideck_page:1 -->',
+        'Eerste paginanotitie [[vertrouwelijke brontekst]]',
+        for (var i = 0; i < 54; i++) 'Regel $i van de eerste notitie.',
+        'Einde van de lange notitie.',
+        '<!-- ocideck_page:2 -->',
+        'Tweede paginanotitie.',
+      ].join('\n'),
+    );
+    await pumpDialog(
+      tester,
+      Deck(
+        title: 'Briefing',
+        slides: [paginated, paginated.copyWith(renderPage: 1)],
+      ),
+    );
+
+    final checkbox = find.widgetWithText(
+      CheckboxListTile,
+      'Sprekersnotities (PDF, A4)',
+    );
+    await tester.ensureVisible(checkbox);
+    expect(tester.widget<CheckboxListTile>(checkbox).value, isFalse);
+    await tester.tap(checkbox);
+    await tester.pump();
+
+    final button = find.widgetWithText(OutlinedButton, 'PDF (plaatje per dia)');
+    await tester.ensureVisible(button);
+    await tester.tap(button);
+    await runExport(tester);
+
+    expect(failureTextIn(tester), isNull);
+    final pdf = pdfsIn(tmp).single;
+    expect(pdf.path, endsWith('-notities.pdf'));
+    final bytes = pdf.readAsBytesSync();
+    final box = RegExp(
+      r'/MediaBox\s*\[\s*0\s+0\s+([\d.]+)\s+([\d.]+)',
+    ).firstMatch(latin1.decode(bytes))!;
+    expect(double.parse(box.group(1)!), closeTo(595.3, 0.1));
+    expect(double.parse(box.group(2)!), closeTo(841.9, 0.1));
+
+    final pages = pdfVisibleTextPerPage(bytes);
+    expect(pdfPageCount(bytes), 3);
+    expect(pages, hasLength(3));
+    expect(pages.first, contains('Eerste paginanotitie'));
+    expect(pages[1], contains('Einde van de lange notitie.'));
+    expect(pages[2], contains('Tweede paginanotitie.'));
+    expect(pages[1], contains('Slide 1'));
+    expect(pages[2], contains('Slide 2'));
+    final text = pages.join(' ');
+    expect(
+      RegExp(r'Regel \d+ van de eerste notitie\.').allMatches(text),
+      hasLength(54),
+    );
+    expect(text, isNot(contains('vertrouwelijke brontekst')));
+    expect(text, isNot(contains('ocideck_page')));
   });
 }

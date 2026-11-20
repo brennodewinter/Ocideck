@@ -767,6 +767,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Sprekersnotities (PDF, A4)': 'Speaker notes (PDF, A4)',
   'Titeldia': 'Title slide',
   'Plak logo van klembord': 'Paste logo from clipboard',
   'Plak donker logo van klembord': 'Paste dark logo from clipboard',

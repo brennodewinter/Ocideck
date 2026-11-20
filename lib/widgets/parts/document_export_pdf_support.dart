@@ -1,86 +1,14 @@
-import 'dart:io' show File;
-// Wat de PDF-export van een document nodig heeft uit de schil: de gebundelde
-// lettersnede voor tekens buiten Latin-1, de vertaalde teksten, en de zin die de
-// gebruiker te zien krijgt als er iets níet gezet kon worden.
+// Wat de PDF-export van een document nodig heeft uit de schil: de vertaalde
+// teksten en de zin die de gebruiker te zien krijgt als er iets níet gezet kon worden.
 //
-// Staat los van `document_editor_screen.dart` omdat de PDF-lagen bewust
-// Flutter-vrij zijn (zie `lib/services/pdf/`): het laden van een asset en het
-// opzoeken van een vertaling zijn juist wél schilwerk, en horen dus hier.
-
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/services.dart' show ByteData, rootBundle;
+// Staat los van `document_editor_screen.dart`, zodat de editor en zijn
+// exportlogica de vertaalde labels en meldingen kunnen delen.
 
 import '../../l10n/app_localizations.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../services/pdf/document_pdf_export.dart';
 
-/// Het gebundelde lettertype waar tekens buiten Latin-1 op terugvallen.
-///
-/// De PDF zelf wordt gezet met de veertien standaardsneden die elke lezer heeft
-/// — die dragen een echte vette en cursieve snede en kosten geen bytes, maar ze
-/// reiken niet verder dan Latin-1. Roboto vangt de rest op: Latijns uitgebreid,
-/// Grieks, Cyrillisch. Zie de kop van `document_pdf_fonts.dart`.
-///
-/// Lukt het laden niet, dan gaat de export gewoon door: [DocumentPdfResult]
-/// De terugvalfonts voor de PDF-export, in de volgorde waarin ze geprobeerd
-/// worden.
-///
-/// De export zet de lopende tekst met de veertien standaardsneden van PDF —
-/// die dragen een echte vette en cursieve snede en kosten geen bytes, maar ze
-/// reiken niet verder dan Latin-1. Deze lijst vangt de rest op. Zie de kop van
-/// `document_pdf_fonts.dart`.
-///
-/// De volgorde is de bedoeling, niet toeval:
-///
-///  1. **Roboto** — Latijns uitgebreid, Grieks, Cyrillisch. Ook de
-///     interfaceletter, dus de PDF lijkt op wat de auteur zag.
-///  2. **Inter** — pijlen (`→ ← ↔ ⇒`), vinkjes (`✓ ✗`) en vormen (`★ ▪`) die
-///     Roboto níét dekt, mét alle letters erbij. Zat al in de app als
-///     interfaceletter, dus dit kost geen byte extra (#1987).
-///  3. **Noto Sans Math** — de diepere wiskunde (`∮ ⨁`) die de andere twee niet
-///     hebben. Een subset, beperkt tot de blokken die in diagrammen en formules
-///     voorkomen — ~250 KB in plaats van de volledige 1 MB (#1968).
-///
-/// Waarom Inter vóór het wiskundefont staat: een ingesloten tekening krijgt
-/// *één* snede voor al haar tekst, want de SVG-lezer ketent niet. Een font met
-/// pijlen maar zonder letters is daar de verkeerde keuze — en zonder spatie
-/// zelfs een afbreker (#1987).
-///
-/// Lukt het laden van een font niet, dan gaat de export gewoon door met wat er
-/// wél is: [DocumentPdfResult] meldt dan welke tekens ontbreken, en de schil
-/// zegt dat tegen de gebruiker.
-Future<List<ByteData>> loadPdfFallbackFonts({
-  /// #2753: een lettertypebestand dat de auteur zelf op de eigen machine
-  /// aanwees, voor tekens die de gebundelde snedes niet hebben. Alleen een
-  /// subset gaat mee in de PDF; de licentie van het bestand moet insluiten
-  /// toestaan — dat staat in het exportdialoog, OciDeck controleert het niet.
-  String? userFontPath,
-}) async {
-  const paths = [
-    'assets/fonts/Roboto-Variable.ttf',
-    'assets/fonts/Inter-Variable.ttf',
-    'assets/fonts/NotoSansMath-subset.ttf',
-  ];
-  final fonts = <ByteData>[];
-  for (final path in paths) {
-    try {
-      fonts.add(await rootBundle.load(path));
-    } on Exception {
-      // Eén font dat niet laadt mag de export niet kosten; de melding over
-      // ontbrekende tekens vertelt de gebruiker vanzelf wat er dan mist.
-      continue;
-    }
-  }
-  if (userFontPath != null && !kIsWeb) {
-    try {
-      fonts.add(ByteData.sublistView(await File(userFontPath).readAsBytes()));
-    } on Exception {
-      // Idem als een gebundeld font dat niet laadt: de export gaat door
-      // met wat er wél is en de ontbrekende-tekensmelding vertelt de rest.
-    }
-  }
-  return fonts;
-}
+export '../../services/pdf/pdf_fallback_fonts.dart' show loadPdfFallbackFonts;
 
 /// De teksten die de PDF-lagen zelf niet kennen, in de taal van de interface.
 DocumentPdfLabels documentPdfLabels(AppLocalizations l10n) => DocumentPdfLabels(

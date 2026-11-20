@@ -1553,6 +1553,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Notae oratoris (PDF, A4)',
   'Titeldia': 'Scheda tituli',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Imagines servari non potuerunt. Iterum conare aut imagines omitte.',

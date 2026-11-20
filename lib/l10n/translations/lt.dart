@@ -1548,6 +1548,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Sprekersnotities (PDF, A4)': 'Pranešėjo pastabos (PDF, A4)',
   'Titeldia': 'Pavadinimo skaidrė',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Vaizdų nepavyko išsaugoti. Bandykite dar kartą arba praleiskite vaizdus.',
