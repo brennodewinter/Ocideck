@@ -6446,8 +6446,8 @@ const _dutchSourceAddLa = <String, String>{
       'Exportatio in praeparatione destitit.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Fasciculus construi vel scribi non potuit. Inspice num spatium in disco sit et num plica exportationis scribi possit.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Diapositivae in imagines reddi non potuerunt. Hoc ex diapositiva pendet, non ex formato fasciculi: exportatio HTML hac via non transit et hoc casu plerumque valet.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Imagines paginarum confici non potuerunt. Praesentationem etiam in forma HTML exportare potes.',
   'Technische melding:': 'Nuntius technicus:',
   'presentaties': 'praesentationes',
   '/Presentaties': '/Praesentationes',

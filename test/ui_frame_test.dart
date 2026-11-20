@@ -49,6 +49,27 @@ void main() {
     await frame;
     await tester.pumpWidget(const SizedBox.shrink());
   });
+
+  testWidgets('een capture krijgt een opwarmframe terwijl frames uitstaan', (
+    tester,
+  ) async {
+    final binding = tester.binding;
+    binding.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+    try {
+      var complete = false;
+      final frame = waitForUiFrame(
+        allowWarmUpFrame: true,
+      ).then((_) => complete = true);
+      expect(binding.framesEnabled, isFalse);
+      expect(binding.hasScheduledFrame, isFalse);
+      // Voer timers uit zonder zelf een frame te pompen.
+      await tester.idle();
+      expect(complete, isTrue);
+      await frame;
+    } finally {
+      binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    }
+  });
 }
 
 class _Ticking extends StatefulWidget {

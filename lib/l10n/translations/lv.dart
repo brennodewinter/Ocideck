@@ -6416,8 +6416,8 @@ const _dutchSourceAddLv = <String, String>{
       'Eksports apstājās sagatavošanas laikā.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Failu neizdevās izveidot vai ierakstīt. Pārbaudiet, vai diskā ir vieta un vai eksporta mapē var rakstīt.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Neizdevās atveidot slaidus attēlos. Vaina ir slaidā, nevis faila formātā: HTML eksports šeit neiet cauri un šajā gadījumā parasti darbojas.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Slaidus neizdevās renderēt kā attēlus. Prezentāciju var arī eksportēt HTML formātā.',
   'Technische melding:': 'Tehnisks ziņojums:',
   'presentaties': 'prezentacijas',
   '/Presentaties': '/Prezentācijas',

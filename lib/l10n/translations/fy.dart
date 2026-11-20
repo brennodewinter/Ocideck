@@ -5512,8 +5512,8 @@ const _dutchSourceAddFy = {
       'De eksport is stoppe by it tarieden.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'It bestân koe net opboud of skreaun wurde. Kontrolearje oft der skiifromte is en oft de eksportmap beskriuwber is.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'It renderjen fan de dia\'s nei byld is mislearre. Dat leit oan in dia, net oan it bestânsformaat: de HTML-eksport komt hjir net lâns en wurket yn dit gefal meastal wol.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'It werjaan fan de dia\'s as ôfbyldings is mislearre. Do kinst de presintaasje ek eksportearje as HTML.',
   'Technische melding:': 'Technyske melding:',
   'presentaties': 'presintaasjes',
   '/Presentaties': '/Presintaasjes',

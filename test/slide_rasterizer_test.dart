@@ -583,18 +583,43 @@ void main() {
     );
   });
 
+  testWidgets('opwarmframes leveren een PNG terwijl normale frames uitstaan', (
+    tester,
+  ) async {
+    final context = await _hostContext(tester);
+    final deck = _deck();
+    final audience = PrivacyProjection.forAudience(
+      deck.copyWith(slides: [deck.slides.first]),
+    );
+
+    final binding = tester.binding;
+    binding.handleAppLifecycleStateChanged(ui.AppLifecycleState.hidden);
+    List<Uint8List>? images;
+    try {
+      expect(binding.framesEnabled, isFalse);
+      images = await tester.runAsync(
+        () => SlideRasterizer.rasterize(
+          context: context,
+          audience: audience,
+          targetWidth: 320,
+          frameTimeout: const Duration(seconds: 2),
+        ),
+      );
+    } finally {
+      binding.handleAppLifecycleStateChanged(ui.AppLifecycleState.resumed);
+    }
+
+    expect(tester.takeException(), isNull);
+    final image = await _decode(tester, images!.single);
+    expect((image.width, image.height), (320, 180));
+    expect(_distinctColours(image.rgba), greaterThan(1));
+  });
+
   testWidgets('zonder frames geeft de export op, en meldt dát hij begon', (
     tester,
   ) async {
-    // De faalvorm die dit vastlegt: rasteren laat de échte voorvertoning
-    // tekenen en wacht op `endOfFrame`. Levert de engine geen frames — venster
-    // geminimaliseerd, achter een ander venster, op een andere Space — dan
-    // kwam dat wachten nooit terug. Zes dia's, nul gerenderd, geen fout, geen
-    // teller: een export die stilstond en niets zei.
-    //
-    // Let op waarom de andere tests dit niet konden vangen: die pompen zelf
-    // frames, en leveren dus precies aan wat in productie ontbreekt. 97%
-    // regeldekking en de bug zat er gewoon in. Deze test pompt met opzet NIET.
+    // Pomp geen frames en laat de testdeadline verstrijken vóór de terugval.
+    // De export moet ook zonder getekend frame voortgang en een fout melden.
     final context = await _hostContext(tester);
     final audience = PrivacyProjection.forAudience(_deck());
 

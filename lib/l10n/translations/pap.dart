@@ -5515,8 +5515,8 @@ const _dutchSourceAddPap = {
       'E eksportashon a stòp durante e preparashon.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'No por a traha ni skirbi e archivo. Kontrolá si tin espasio riba disko i si e mapa di eksportashon ta permití skirbimentu.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'E rendering di e slides na imagen a faya. Esaki ta debí na un slide, no na e formato di archivo: e eksportashon HTML no ta pasa aki i generalmente ta funshoná den e kaso aki.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'No a logra render e slidenan komo imágen. Bo por eksportá e presentashon komo HTML tambe.',
   'Technische melding:': 'Mensahe tékniko:',
   'presentaties': 'presentashonnan',
   '/Presentaties': '/Presentashonnan',
