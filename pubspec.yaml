@@ -234,6 +234,8 @@ dependency_overrides:
       path: packages/cnativeapi
 
 flutter:
+  config:
+    enable-macos-arm64-only: false
   uses-material-design: true
   assets:
     - assets/website_style_probe.js

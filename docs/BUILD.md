@@ -350,8 +350,9 @@ make build-all       # web + this machine's native desktop target
 ```
 
 macOS releases retain both Intel (`x86_64`) and Apple Silicon (`arm64`).
-`make build-macos` overrides Flutter's host-specific ARM-only preference for
-that command, and the Release/Profile Xcode configuration selects both CPUs.
+The Flutter project configuration pins `enable-macos-arm64-only: false`, which
+takes precedence over host preferences and environment variables. The
+Release/Profile Xcode configuration selects both CPUs.
 The architecture gate rejects a thin main executable, startup framework or
 Whisper helper before signing; CI checks the packaged app again before upload.
 Debug builds keep their normal host-only setting. The existing host-specific

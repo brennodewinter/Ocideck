@@ -1347,9 +1347,9 @@ check-web-browser:
 # the matching machine, or use the release CI workflow to produce all at once.
 build-macos: prune-hook-cache sbom-verify
 	@echo "== OciDeck build: macOS app (.app) =="
-	@echo "Command: FLUTTER_MACOS_ARM64_ONLY=false flutter build macos --release"
+	@echo "Command: flutter build macos --release"
 	@echo "Output: build/macos/Build/Products/Release/*.app"
-	FLUTTER_MACOS_ARM64_ONLY=false flutter build macos --release
+	flutter build macos --release
 	@echo "== OciDeck helper: whisper-cli in de bundel =="
 	scripts/bundle_whisper_cli.sh macos
 	scripts/bundle_media_decoder.sh
