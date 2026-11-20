@@ -20,6 +20,15 @@ All notable changes to OciDeck are documented in this file.
 - Voorkom herhaald zoeken tijdens scrollen in Ctrl+O
 - Breng 0.7.14 en de herstelde releasecontroles terug naar main
 
+### Fixed
+
+- macOS: omzeil de gemelde Impeller-rendercrash met Skia/Metal (#3076).
+- Documenten: bewaar recente bewerkingen elke twee seconden voor crashherstel,
+  ook tijdens doorlopend typen, en bied herstel van beëindigde sessies direct aan (#3078).
+- Voorkom dat een onregelmatige CSV-tabel de importlimiet omzeilt (#3070).
+- Samenwerking: behoud niet-bevestigde wijzigingen na een synchronisatiefout
+  en probeer het herstel van de hostverbinding opnieuw (#3071).
+
 ## [0.7.14] — 2026-11-19
 
 ### Changed
