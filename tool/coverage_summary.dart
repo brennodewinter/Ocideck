@@ -460,6 +460,11 @@ const Set<String> uncoveredBaseline = {
   // io-helft wordt wél getest (shared_preferences_atomic_test.dart).
   'lib/services/shared_preferences_atomic.dart',
   'lib/services/shared_preferences_atomic_stub.dart',
+  // PLATFORM (#3078): the web half of session-owner liveness. Native tests
+  // select recovery_process_io.dart through dart.library.ffi; browser builds
+  // select this unknown-liveness fallback and have no native recovery store.
+  // The native implementation remains subject to coverage and its floor.
+  'lib/services/recovery_process_stub.dart',
 };
 
 /// The per-file coverage floor: a lib/ file below this fraction of executed
