@@ -349,6 +349,15 @@ make build-web       # hardened web bundle              → build/web
 make build-all       # web + this machine's native desktop target
 ```
 
+macOS releases retain both Intel (`x86_64`) and Apple Silicon (`arm64`).
+The Flutter project configuration pins `enable-macos-arm64-only: false`, which
+takes precedence over host preferences and environment variables. The
+Release/Profile Xcode configuration selects both CPUs.
+The architecture gate rejects a thin main executable, startup framework or
+Whisper helper before signing; CI checks the packaged app again before upload.
+Debug builds keep their normal host-only setting. The existing host-specific
+ffmpeg helper is outside this Universal startup/Whisper contract.
+
 `make package-linux` needs a bundle from `make build-linux` first (it is not a
 prerequisite, so the release job does not build twice) and the packaging tools
 on the machine — see [Linux packaging](#linux-packaging).
@@ -1438,9 +1447,29 @@ have a tag deploy the web automatically again.
 
 ### Signing the macOS release on the runner (one-time)
 
-The `macos` job signs and notarises on `mac-brenno` using items already in that
-Mac's **login keychain** — nothing is exported into repository secrets, and the
-certificate never leaves the machine. Set it up once on the runner:
+Both macOS release routes (`release.yml` and `release-channel.yml`) select
+`ocideck-macos-release-local`, the dedicated runner on the local release Mac
+(#3096). They no longer depend on the other laptop, `mac-brenno`. General
+checks can still use the shared `macos` label. Signing uses this Mac's
+**file-based login keychain**; no private key or notary credential is exported
+into repository secrets.
+
+The local LaunchAgent uses the exact official Flutter SDK pinned by
+`.tool-versions`, ahead of other SDKs in `PATH`. Its runner configuration has
+`ocideck-macos-release-local:host` in `runner.labels`, with capacity 1 to avoid
+concurrent builds competing for the same machine. Restart the runner only while
+idle after changing its labels, and verify that Pawprint lists the local runner
+as online with that label. Do not add this dedicated label to the other laptop.
+
+Run the manual `macos-signing-preflight.yml` workflow on the intended source
+branch to check the pin, the Apple notary connection and an actual timestamped
+Developer ID signature **inside the runner process**, without publishing or
+submitting an app. The release itself still checks the complete signed app,
+Apple notarization, the stapled ticket and Gatekeeper before upload. Locally,
+`scripts/notarize_macos.sh --preflight` checks the identity and Apple connection;
+`make notarize-macos` performs the full chain without the other computer.
+
+One-time setup on this runner:
 
 1. **Developer ID certificate** — Xcode → *Settings → Accounts → Manage
    Certificates → + → Developer ID Application*. Confirm with

@@ -6436,8 +6436,8 @@ const _dutchSourceAddLt = <String, String>{
       'Eksportas sustojo ruošiantis.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Nepavyko sukurti ar įrašyti failo. Patikrinkite, ar diske yra vietos ir ar į eksporto aplanką galima rašyti.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Nepavyko atvaizduoti skaidrių į paveikslėlius. Kalta skaidrė, o ne failo formatas: HTML eksportas čia nepraeina ir šiuo atveju paprastai veikia.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Nepavyko atvaizduoti skaidrių kaip paveikslėlių. Pristatymą taip pat gali eksportuoti HTML formatu.',
   'Technische melding:': 'Techninis pranešimas:',
   'presentaties': 'prezentacijos',
   '/Presentaties': '/Prezentacijos',

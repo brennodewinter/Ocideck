@@ -175,7 +175,7 @@ jobs:
   build-macos:
     name: build-macos
     if: ${{ inputs.channel == 'macos' && ((github.ref == 'refs/heads/main' && inputs.attempt_id == '') || (inputs.attempt_id != '' && inputs.previous_run_id != '' && github.ref == format('refs/heads/codex/release-build-lock-{0}-{1}', inputs.tag, inputs.channel))) }}
-    runs-on: ocideck-macos-arm64
+    runs-on: ocideck-macos-release-local
     timeout-minutes: 240
     outputs:
       completed: ${{ steps.macos.outputs.completed }}

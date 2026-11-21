@@ -6402,8 +6402,8 @@ const _dutchSourceAddCs = <String, String>{
       'Export se zastavil během přípravy.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Soubor se nepodařilo sestavit ani zapsat. Zkontrolujte, zda je místo na disku a zda lze do složky pro export zapisovat.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Vykreslení snímků do obrázků selhalo. Příčinou je snímek, ne formát souboru: export do HTML tudy neprochází a v tomto případě obvykle funguje.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Snímky se nepodařilo vykreslit jako obrázky. Prezentaci můžete také exportovat jako HTML.',
   'Technische melding:': 'Technická zpráva:',
   'presentaties': 'prezentace',
   '/Presentaties': '/Prezentace',

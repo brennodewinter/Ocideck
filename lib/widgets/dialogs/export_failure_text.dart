@@ -57,7 +57,7 @@ String exportFailureText(
             'De export is gestopt tijdens het voorbereiden.',
           ),
           ExportStage.rendering => l10n.d(
-            'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.',
+            'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.',
           ),
           // Bewust niet het woord uit de fase-tekst ("…samenstellen…"): die tekst is
           // in export_dialog_error_test.dart de vlag voor "het dialoog hangt nog", en

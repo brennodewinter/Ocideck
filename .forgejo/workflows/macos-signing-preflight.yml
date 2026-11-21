@@ -1,0 +1,31 @@
+# Read-only Apple authentication plus a disposable local signing probe (#3096).
+# No app is submitted, no credentials exported and no release published.
+name: macos-signing-preflight
+
+on:
+  workflow_dispatch:
+
+jobs:
+  signing:
+    runs-on: ocideck-macos-release-local
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Exacte Flutter-pin controleren
+        run: make check-toolchain
+      - name: Lokale identiteit en Apple-notaryverbinding controleren
+        run: scripts/notarize_macos.sh --preflight
+      - name: Niet-interactieve Developer ID-handtekening toetsen
+        run: |
+          set -eu
+          PROBE_DIR=$(mktemp -d)
+          trap 'rm -rf "$PROBE_DIR"' EXIT
+          printf 'int main(void) { return 0; }\n' > "$PROBE_DIR/probe.c"
+          xcrun clang "$PROBE_DIR/probe.c" -o "$PROBE_DIR/probe"
+          codesign --force --options runtime --timestamp \
+            --sign "${OCIDECK_SIGN_IDENTITY:-Developer ID Application: Brenno de Winter (AMT83P4B3L)}" \
+            "$PROBE_DIR/probe"
+          codesign --verify --strict --verbose=2 "$PROBE_DIR/probe"
+          echo 'Lokale runner kan zonder dialoog tekenen en Apple bereiken.'

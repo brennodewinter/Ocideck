@@ -6500,8 +6500,8 @@ const _dutchSourceAddPt = <String, String>{
       'A exportação parou durante a preparação.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'Não foi possível criar nem gravar o ficheiro. Verifique se há espaço em disco e se a pasta de exportação permite escrita.',
-  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      'Falhou a composição dos diapositivos em imagens. A causa é um diapositivo, não o formato do ficheiro: a exportação HTML não passa por aqui e neste caso costuma funcionar.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Je kunt de presentatie ook exporteren als HTML.':
+      'Não foi possível renderizar os diapositivos como imagens. Também podes exportar a apresentação em HTML.',
   'Technische melding:': 'Mensagem técnica:',
   'presentaties': 'apresentacoes',
   '/Presentaties': '/Apresentações',
