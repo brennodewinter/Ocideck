@@ -35,7 +35,7 @@ class CapabilitiesTest(TestCase):
 
     def test_both_mac_release_routes_select_the_capability_runner(self):
         root = Path(__file__).resolve().parents[1]
-        for name, job in [('release.yml', 'macos'), ('release-channel.yml', 'build-macos'),
+        for name, job in [('release.yml', 'gate'), ('release.yml', 'macos'), ('release-channel.yml', 'build-macos'),
                           ('macos-signing-preflight.yml', 'signing')]:
             text = (root / '.forgejo/workflows' / name).read_text()
             section = re.split(r'\n  [^ \n]', text.split('\n  ' + job + ':\n', 1)[1], maxsplit=1)[0]

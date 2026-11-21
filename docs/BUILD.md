@@ -1449,8 +1449,10 @@ have a tag deploy the web automatically again.
 
 Both macOS release routes (`release.yml` and `release-channel.yml`) select
 `ocideck-macos-release-local`, the dedicated runner on the local release Mac
-(#3096). They no longer depend on the other laptop, `mac-brenno`. General
-checks can still use the shared `macos` label. Signing uses this Mac's
+(#3096). They no longer depend on the other laptop, `mac-brenno`. The preceding
+full release gate selects that same dedicated runner, so the other laptop can
+remain off throughout the macOS release. General checks can still use the
+shared `macos` label. Signing uses this Mac's
 **file-based login keychain**; no private key or notary credential is exported
 into repository secrets.
 

@@ -62,7 +62,8 @@ jobs:
   # alleen het vastgelegde kandidaatbewijs gecontroleerd en gepubliceerd.
   gate:
     name: Poort (vóór het bouwen)
-    runs-on: macos
+    # Ook de volledige releasepoort moet zonder de andere laptop kunnen draaien.
+    runs-on: ocideck-macos-release-local
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
