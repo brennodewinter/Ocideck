@@ -1542,6 +1542,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Sprächernotize',
   'Titeldia': 'Titelfolie',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'D Bilder händ nöd chöne gspeicheret werde. Versuech es nomal oder lah d Bilder weg.',

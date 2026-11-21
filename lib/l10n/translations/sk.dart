@@ -1545,6 +1545,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Poznámky rečníka',
   'Titeldia': 'Titulná snímka',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Obrázky sa nepodarilo uložiť. Skúste to znova alebo obrázky vynechajte.',

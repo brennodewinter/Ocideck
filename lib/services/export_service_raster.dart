@@ -8,6 +8,32 @@
 // staat daarom in export_service.dart.
 part of 'export_service.dart';
 
+/// Weiger lege inhoud of notities zonder één-op-één geprojecteerde beelden.
+String? _exportInputFailure(
+  ExportFormat format,
+  int imageCount,
+  ExportBundle? audience,
+  bool pdfWithSpeakerNotes,
+) {
+  if (format == ExportFormat.html) {
+    if (audience == null || audience.markdown.trim().isEmpty) {
+      return 'Geen inhoud om te exporteren.';
+    }
+  } else if (format == ExportFormat.latex) {
+    if (audience == null || audience.audience.slides.isEmpty) {
+      return 'Geen inhoud om te exporteren.';
+    }
+  } else if (imageCount == 0) {
+    return 'Geen slides om te exporteren.';
+  }
+  if (pdfWithSpeakerNotes &&
+      format == ExportFormat.pdf &&
+      (audience == null || audience.audience.slides.length != imageCount)) {
+    return 'De dia’s en sprekersnotities komen niet overeen.';
+  }
+  return null;
+}
+
 /// De sprekersnotities van de geprojecteerde slides, in dezelfde volgorde als
 /// de gerasterde beelden — het PPTX-notitiepaneel koppelt op index.
 List<String>? _notesOf(ExportBundle? audience) => audience == null
@@ -100,8 +126,17 @@ Future<Uint8List> _buildPdf(
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
   bool compress = false,
+  bool withSpeakerNotes = false,
+  ExportBundle? audience,
   double slideAspect = kScreenSlideAspect,
-}) {
+}) async {
+  final fonts = withSpeakerNotes
+      ? await Future.wait([
+          rootBundle.load('assets/fonts/Roboto-Variable.ttf'),
+          rootBundle.load('assets/fonts/Inter-Variable.ttf'),
+          rootBundle.load('assets/fonts/NotoSansMath-subset.ttf'),
+        ])
+      : const <ByteData>[];
   final moved = _movedImages(images);
   return ExportService._offload(() async {
     final doc = pw.Document(
@@ -112,9 +147,19 @@ Future<Uint8List> _buildPdf(
       creator: metadata.creator,
       producer: metadata.producer,
     );
+    final received = _receivedImages(moved, images);
+    if (withSpeakerNotes) {
+      addPresentationNotesPages(
+        doc,
+        [for (final png in received) compress ? _toJpeg(png) : png],
+        audience: audience!.audience,
+        fallbackFonts: fonts,
+      );
+      return doc.save();
+    }
     // Page size in points; only the ratio matters for a full-bleed image.
     final format = PdfPageFormat(1280, 1280 / slideAspect, marginAll: 0);
-    for (final png in _receivedImages(moved, images)) {
+    for (final png in received) {
       // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
       // compressed (JPEG) slide embeds just like the lossless one.
       final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
@@ -162,6 +207,7 @@ extension _ExportFormats on ExportService {
     required CockpitColorScheme cockpitColorScheme,
     required String interfaceLanguageCode,
     required bool compress,
+    required bool pdfWithSpeakerNotes,
   }) async {
     final Uint8List bytes;
     switch (format) {
@@ -171,6 +217,8 @@ extension _ExportFormats on ExportService {
           metadata: docMeta,
           fallbackTitle: fallbackTitle,
           compress: compress,
+          withSpeakerNotes: pdfWithSpeakerNotes,
+          audience: audience,
           slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
         );
       case ExportFormat.pptx:

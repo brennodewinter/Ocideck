@@ -1567,6 +1567,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Notas do orador',
   'Titeldia': 'Diapositivo de título',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Não foi possível guardar as imagens. Tente novamente ou omita as imagens.',
