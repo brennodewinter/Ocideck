@@ -8,7 +8,7 @@ from urllib.parse import quote
 
 def inspect(api, wanted, phase='build'):
     """Check metadata only; credentials themselves never leave their owning service."""
-    label = 'ocideck-macos-arm64' if wanted['channel'] == 'macos' else 'docker'
+    label = 'ocideck-macos-release-local' if wanted['channel'] == 'macos' else 'docker'
     if phase not in ('build', 'assets', 'website'):
         raise ValueError('unknown capability phase')
     needed = {'GH_DISPATCH_TOKEN'} if phase == 'build' and wanted['channel'] == 'windows' else set()

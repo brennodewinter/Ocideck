@@ -8,6 +8,31 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.15] — 2026-11-20
+
+### Changed
+
+- Documenten: gebruik de opsommingstekens uit het stijlprofiel in de editor,
+  paginaweergave en HTML- en PDF-export, inclusief kattenpootjes (#3082).
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Herstel regressies uit de analyse voor release 0.7.15
+- Integreer release 0.7.14 en herstel de main-kwaliteitspoort
+- Herstel 26 openstaande OciDeck-problemen
+- Markeer het huidige diatype geel in de inhoudseditor
+- Voorkom herhaald zoeken tijdens scrollen in Ctrl+O
+- Breng 0.7.14 en de herstelde releasecontroles terug naar main
+
+### Fixed
+
+- macOS: omzeil de gemelde Impeller-rendercrash met Skia/Metal (#3076).
+- Documenten: bewaar recente bewerkingen elke twee seconden voor crashherstel,
+  ook tijdens doorlopend typen, en bied herstel van beëindigde sessies direct aan (#3078).
+- Windows: herken een beëindigde sessie ook bij de eerste procescontrole,
+  zodat crashherstel niet onnodig op de heartbeat hoeft te wachten (#3083).
+- Voorkom dat een onregelmatige CSV-tabel de importlimiet omzeilt (#3070).
+- Samenwerking: behoud niet-bevestigde wijzigingen na een synchronisatiefout
+  en probeer het herstel van de hostverbinding opnieuw (#3071).
+
 ## [0.7.14] — 2026-11-19
 
 ### Changed

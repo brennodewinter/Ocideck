@@ -1542,6 +1542,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'A4 · Sprekersnotities': 'A4 · Catatan pembicara',
   'Titeldia': 'Slide judul',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'Gambar tidak dapat disimpan. Coba lagi atau abaikan gambar.',

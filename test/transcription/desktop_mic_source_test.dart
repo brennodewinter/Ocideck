@@ -107,13 +107,6 @@ void main() {
     inputDeviceId: deviceId,
   );
 
-  Future<void> until(bool Function() done) async {
-    for (var i = 0; i < 50 && !done(); i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 10));
-    }
-    expect(done(), isTrue);
-  }
-
   test('probe beschrijft en opent niet', () async {
     final mic = source();
     expect(await mic.probe(), CaptureAvailability.available);
@@ -180,9 +173,11 @@ void main() {
       final ended = session.ended!.first;
       final pcm = Uint8List(3200);
       ByteData.sublistView(pcm).setInt16(0, 1600, Endian.little);
+      final written = session.liveChunks!.first;
       port.live.framesCtrl.add(MicPcmFrame(pcm));
+      expect((await written).bytes, pcm);
       final file = File(session.durablePath);
-      await until(() => file.existsSync() && file.lengthSync() >= 44 + 3200);
+      expect(await file.length(), 44 + pcm.length);
 
       port.live.endedCtrl.add(CaptureEndCause.sourceLost);
       expect(await ended, CaptureEndCause.sourceLost);
@@ -237,9 +232,13 @@ void main() {
       ),
     );
     final chunks = <AudioChunk>[];
-    final sub = session.liveChunks!.listen(chunks.add);
+    final firstChunk = Completer<void>();
+    final sub = session.liveChunks!.listen((chunk) {
+      chunks.add(chunk);
+      if (!firstChunk.isCompleted) firstChunk.complete();
+    });
     port.live.framesCtrl.add(MicPcmFrame(Uint8List(640)));
-    await until(() => chunks.length == 1);
+    await firstChunk.future;
     port.live.framesCtrl.add(MicPcmFrame(Uint8List(640)));
     final result = await session.stop();
     await sub.cancel();
@@ -276,13 +275,22 @@ void main() {
       ..writeAsBytesSync([9, 9, 9]);
     final session = await source(maxBytes: 32).start(request());
     final ended = session.ended!.first;
-    port.live.framesCtrl.add(MicPcmFrame(Uint8List(16)));
-    await until(() => File(session.durablePath).lengthSync() >= 44 + 16);
+    final pcm = Uint8List.fromList(List<int>.generate(16, (i) => i));
+    final written = session.liveChunks!.first;
+    port.live.framesCtrl.add(MicPcmFrame(pcm));
+    // Live chunks acknowledge the completed WAV write, including its flush.
+    expect((await written).bytes, pcm);
+    expect(await File(session.durablePath).length(), 44 + pcm.length);
     port.live.framesCtrl.add(MicPcmFrame(Uint8List(64)));
     expect(await ended, CaptureEndCause.storageFailed);
     expect(await sibling.readAsBytes(), [9, 9, 9]);
     expect(port.openCalls, 1);
-    await session.stop();
+    final audio = await session.stop();
+    final bytes = await File(audio.durablePath).readAsBytes();
+    expect(bytes.sublist(44), pcm);
+    expect(parseWavHeader(bytes, bytes.length)!.duration, audio.duration);
+    expect(await sibling.readAsBytes(), [9, 9, 9]);
+    expect(port.live.stops, 1);
     expect(gate.holder, isNull);
   });
 

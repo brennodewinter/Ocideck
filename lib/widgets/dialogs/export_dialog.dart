@@ -208,6 +208,7 @@ class _ExportDialogState extends State<ExportDialog> {
   /// Image quality for PDF export: false = full-resolution PNG, true = a smaller
   /// downscaled JPEG handout.
   bool _compress = false;
+  bool _pdfWithSpeakerNotes = false;
 
   /// Voor wie deze export bedoeld is. Volledig is de standaard: dat is het
   /// exemplaar waarmee een derde partij de bevindingen kan natrekken.
@@ -507,6 +508,7 @@ class _ExportDialogState extends State<ExportDialog> {
       format,
       images,
       compress: compress,
+      pdfWithSpeakerNotes: _pdfWithSpeakerNotes,
       outputDirectory: widget.exportDirectory,
       // De bundel draagt de markdown voor de HTML en de sprekersnotities voor
       // het PPTX-notitiepaneel — beide uit hetzelfde geprojecteerde deck.
@@ -838,6 +840,16 @@ class _ExportDialogState extends State<ExportDialog> {
         _manifestNotice(l10n),
         if (widget.hasDepthChoice) _depthSelector(),
         if (widget.hasQuestionChoice) _questionSelector(),
+        CheckboxListTile(
+          value: _pdfWithSpeakerNotes,
+          title: Text(l10n.d('A4 · Sprekersnotities')),
+          controlAffinity: ListTileControlAffinity.leading,
+          contentPadding: EdgeInsets.zero,
+          onChanged: _loading
+              ? null
+              : (value) =>
+                    setState(() => _pdfWithSpeakerNotes = value ?? false),
+        ),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
         // verfijning en staat daarom achter een inklapbare kop (open zodra
         // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).

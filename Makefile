@@ -1355,6 +1355,7 @@ build-macos: prune-hook-cache sbom-verify
 	scripts/bundle_media_decoder.sh
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart --disable-dart-dev tool/check_bundled_docs_fresh.dart build/macos
+	python3 tool/check_macos_architectures.py build/macos/Build/Products/Release/OciDeck.app
 
 build-windows: prune-hook-cache sbom-verify
 	@echo "== OciDeck build: Windows app (.exe) =="

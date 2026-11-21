@@ -612,6 +612,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'A4 · Sprekersnotities': 'A4 · Nota di presentadó',
   'Titeldia': 'Diapositiva di título',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
       'No por a warda e imágennan. Purba atrobe òf laga e imágennan afó.',

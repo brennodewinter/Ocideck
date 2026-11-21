@@ -62,7 +62,8 @@ jobs:
   # alleen het vastgelegde kandidaatbewijs gecontroleerd en gepubliceerd.
   gate:
     name: Poort (vóór het bouwen)
-    runs-on: macos
+    # Ook de volledige releasepoort moet zonder de andere laptop kunnen draaien.
+    runs-on: ocideck-macos-release-local
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -363,10 +364,10 @@ jobs:
     name: macOS bouwen
     needs: gate
     if: ${{ inputs.mode == 'candidate' }}
-    # Host-modus op de aangemelde Mac (mac-brenno): de toolchain van die
-    # machine, die `make check-toolchain` daar al bewaakt. Staat de Mac uit,
-    # dan wacht deze job tot hij er weer is.
-    runs-on: macos
+    # Alleen de zelfstandig ingerichte lokale release-Mac (#3096).
+    # Het gedeelde macos-label kan deze job naar de andere laptop sturen.
+    # Signing blijft in de lokale login-keychain; Flutter volgt de projectpin.
+    runs-on: ocideck-macos-release-local
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -410,6 +411,7 @@ jobs:
           set -eu
           APP=$(find build/macos/Build/Products/Release -maxdepth 1 -type d -name '*.app' -print -quit)
           test -n "$APP" || { echo "Geen gebouwde macOS-app gevonden." >&2; exit 1; }
+          python3 tool/check_macos_architectures.py "$APP"
           if [ "${MACOS_SIGNED:-false}" != true ]; then
             case "$RELEASE_TAG" in
               *-*) echo "Ongetekende prerelease: signingcontroles niet van toepassing." ;;
