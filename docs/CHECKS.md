@@ -2395,12 +2395,22 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   dispatch applies to `ci-image.yml`.
 
 ### `.forgejo/workflows/linux-build.yml` — on demand, **and after a merge that can break the native build**
-- **build-linux** — same official pinned toolchain as the gate, plus the GTK
-  build dependencies; `flutter build linux --release`, then
-  `check_bundled_docs_fresh.dart build/linux` (the same freshness gate
+- **build-linux** — the same digest-pinned CI image as the release builder,
+  with the official SDK verified when the image is built. `make check-toolchain`
+  checks the running SDK before package installation or dependency resolution;
+  a stale image fails against `.tool-versions`. Only the additional desktop and
+  packaging libraries are installed per run; the compiler, Node, GTK and Flutter
+  are already present. Pub resolution enforces the lockfile and the native
+  OpenCV cache is shared with the release builder. The existing
+  `scripts/run_release_linux_build.sh make build-linux` path limits the actual
+  Ninja invocation to two jobs, builds Whisper, verifies the SBOM and checks
+  `check_bundled_docs_fresh.dart build/linux` using direct Dart execution (the same freshness gate
   `check-web` runs — a persistent runner's incremental build must not ship docs
   older than `docs/`), and uploads the bundle as the `ocideck-linux-x64` run
-  artifact. This is a build, not a gate: it proves the Linux target compiles and
+  artifact. SBOM and documentation checks do not start native hooks; package
+  building and all four clean-distribution consumer probes remain required.
+  The build timeout remains 240 minutes; #3100 removes repeated toolchain setup
+  rather than extending that limit. This is a build, not a gate: it proves the Linux target compiles and
   packages, nothing more. #790 took it off every push to `main` — 17.5 minutes
   of runner time per merge. Historically, the mirror release built all three
   platforms only after a `v*` tag. That argument held for the *packaging* and

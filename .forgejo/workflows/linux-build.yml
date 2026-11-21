@@ -28,10 +28,10 @@
 # helft al in de PR zelf; deze job is er voor wat je alleen ziet door echt te
 # bouwen (find_library, een header, een build-script dat een tool aanroept).
 #
-# De Flutter-toolchain is dezelfde als in ci.yml: de officiële stable-release
-# volgens de pin in .tool-versions, sha256-geverifieerd. (Eerder stond hier het
-# cirruslabs-image; dat bleek kanaal "[user-branch]" uit onbekende bron te
-# bevatten — niet de toolchain waarmee dit project wil bouwen.)
+# De toolchain is dezelfde digest-gepinde CI-basis als de releasebouwer.
+# De officiële SDK is tijdens imagebouw sha256-gecontroleerd; de draaiende
+# versie/herkomst/het kanaal worden vóór pub en bouwen tegen .tool-versions
+# getoetst. Geen per-run SDK-installatie of SDK-cache die de pin kan vervangen.
 name: linux-build
 
 on:
@@ -56,72 +56,33 @@ on:
 jobs:
   build-linux:
     runs-on: docker
-    # Koude bouw + pakketten raakten na 90 min de upload; houd ruim
-    # meer dan tweemaal die gemeten duur vrij, inclusief cache-opslag.
+    # De grens blijft gelijk; herstel het koude voorwerk, niet de time-out.
     timeout-minutes: 240
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
     steps:
-      # Vóór de checkout: actions/checkout en upload-artifact zijn node-acties,
-      # en dit kale image brengt geen node mee.
-      - name: Gereedschap en Linux-buildafhankelijkheden installeren
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip zip rpm file flatpak python3 \
-            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
-            libsecret-1-dev libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv-dev \
-            build-essential
-          # build-essential (gcc/g++): dartcv4's native OpenCV-build (#870)
-          # zoekt de standaard gcc/g++, niet de aanwezige clang — zonder dit
-          # faalt de hook op "CMAKE_C_COMPILER: gcc ... not found".
-
-      - uses: actions/checkout@v4
-
-      # Zelfde cachelijn als ci.yml; de redenering staat daar, inclusief waarom
-      # dit geen controle vervangt.
-      - name: Gepinde Flutter-versie lezen
-        id: pin
-        run: |
-          set -eu
-          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
-          test -n "$VERSION"
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-
-      - name: Flutter uit de cache
-        id: flutter-cache
-        continue-on-error: true
-        uses: actions/cache@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          path: /opt/flutter
-          key: flutter-linux-${{ steps.pin.outputs.version }}-stable
+          persist-credentials: false
 
-      - name: Officiële Flutter volgens de pin
-        if: steps.flutter-cache.outputs.cache-hit != 'true'
+      - name: De werkkopie vertrouwen
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # Direct Dart-script: geen pub/native hooks vóór de SDK-controle.
+      - name: Draaiende Flutter tegen de pin toetsen
+        run: make check-toolchain
+
+      # Compiler, Node, GTK en de SDK zitten al in het CI-image. Alleen de
+      # aanvullende desktop-/verpakkingslibs zijn dezelfde als in release.yml.
+      - name: Ontbrekende Linux-buildlibs
         run: |
           set -eu
-          VERSION="${{ steps.pin.outputs.version }}"
-          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
-          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
-          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
-          SHA=$(jq -r --arg v "$VERSION" \
-            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
-            /tmp/releases.json)
-          test -n "$SHA"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
-          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
-          tar -xJf "/tmp/$ARCHIVE" -C /opt
-          rm "/tmp/$ARCHIVE"
-
-      - name: Flutter op het pad
-        run: |
-          set -eu
-          git config --global --add safe.directory /opt/flutter
-          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+          apt-get update
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv-dev rpm file flatpak python3
 
       - name: Pub-pakketten uit de cache
         continue-on-error: true
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.pub-cache
           key: pub-linux-${{ hashFiles('pubspec.lock') }}
@@ -129,23 +90,29 @@ jobs:
             pub-linux-
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
+      - name: dartcv4-versie uit pubspec.lock
+        id: dartcv
+        run: |
+          VERSIE="$(grep -A8 '^  dartcv4:' pubspec.lock | grep 'version:' | sed 's/.*version: "//;s/".*//')"
+          test -n "$VERSIE"
+          echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
+
+      - name: dartcv4 native OpenCV-build uit de cache
+        continue-on-error: true
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-${{ steps.dartcv.outputs.versie }}
+
+      # Het gedeelde doel bouwt ook Whisper en toetst verse documentatie met
+      # direct Dart, zonder na de app-build opnieuw native hooks te starten.
+      # De wrapper begrenst de echte Ninja-aanroep, ook Flutter's eigen -j.
       - name: Linux-release bouwen
-        run: flutter build linux --release
-
-      # whisper-cli-helper (#2512): uit de gepinde bron gebouwd en naast
-      # het hoofdbestand in de bundel gezet — dezelfde stap als
-      # `make build-linux`, hier los omdat de workflow flutter direct
-      # aanroept. cmake/clang zijn er al: `flutter build linux` eist ze.
-      - name: whisper-cli-helper in de bundel
-        run: scripts/bundle_whisper_cli.sh linux
-
-      # Toets dat de docs in de bundel byte-voor-byte gelijk zijn aan docs/ op
-      # schijf, zodat een incrementele build nooit verouderde documentatie
-      # meelevert.
-      - name: Gebundelde documentatie vers?
-        run: dart run tool/check_bundled_docs_fresh.dart build/linux
+        run: scripts/run_release_linux_build.sh make build-linux
 
       - name: Bundel inpakken
         run: |
@@ -172,7 +139,7 @@ jobs:
       # v4 van deze actie weigert elke niet-GitHub-server ("GHES not
       # supported"); v3 spreekt het artifact-API dat Forgejo implementeert.
       - name: Artifact bewaren
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: ocideck-linux
           path: dist/ocideck-linux-*

@@ -798,10 +798,10 @@ prune-hook-cache:
 # from silently going out of date. Wired into CI and check-full.
 sbom-verify: prune-hook-cache
 	@echo "== OciDeck check: SBOM up to date =="
-	@echo "Command: dart run tool/generate_sbom.dart --check"
+	@echo "Command: dart --disable-dart-dev tool/generate_sbom.dart --check"
 	@echo "Failure means: dependencies changed but the SBOM wasn't regenerated —"
 	@echo "        run 'make sbom' and commit sbom/ocideck.cdx.json + .spdx.json."
-	dart run tool/generate_sbom.dart --check
+	dart --disable-dart-dev tool/generate_sbom.dart --check
 
 # First-party packages under packages/ (docs/design/FORM_INTAKE.md §4.10). Two
 # targets, because the two halves belong to different gates: the static rules are
