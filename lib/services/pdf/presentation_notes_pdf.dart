@@ -29,7 +29,9 @@ void addPresentationNotesPages(
   final tlp = audience.deck.tlp;
   for (var index = 0; index < images.length; index++) {
     final notes = audience.slides[index].notes;
-    if (fonts.unsupportedRunes(notes).isNotEmpty) {
+    if (fonts
+        .unsupportedRunes(notes.replaceAll(kRedactionToken, ''))
+        .isNotEmpty) {
       throw const FormatException(
         'De sprekersnotities bevatten tekens die de PDF-lettertypen niet ondersteunen.',
       );
@@ -74,9 +76,30 @@ void addPresentationNotesPages(
         build: (_) => [
           pw.Image(image, width: width, height: height, fit: pw.BoxFit.contain),
           pw.SizedBox(height: 18),
-          if (notes.isNotEmpty) pw.Text(notes, overflow: pw.TextOverflow.span),
+          if (notes.isNotEmpty) _notesText(notes),
         ],
       ),
     );
   }
+}
+
+/// Het vaste redactietoken wordt getekend, niet aan fontdekking overgelaten.
+/// Zo blijven de acht blokken zichtbaar zonder een ontbrekende Unicode-glyph.
+pw.RichText _notesText(String notes) {
+  final parts = notes.split(kRedactionToken);
+  final spans = <pw.InlineSpan>[];
+  for (var i = 0; i < parts.length; i++) {
+    if (i > 0) {
+      spans.add(
+        pw.WidgetSpan(
+          child: pw.Container(width: 48, height: 11, color: PdfColors.black),
+        ),
+      );
+    }
+    if (parts[i].isNotEmpty) spans.add(pw.TextSpan(text: parts[i]));
+  }
+  return pw.RichText(
+    text: pw.TextSpan(children: spans),
+    overflow: pw.TextOverflow.span,
+  );
 }

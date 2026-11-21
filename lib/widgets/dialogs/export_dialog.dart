@@ -801,16 +801,6 @@ class _ExportDialogState extends State<ExportDialog> {
               ? null
               : () => _export(ExportFormat.pdf, compress: _compress),
         ),
-        CheckboxListTile(
-          value: _pdfWithSpeakerNotes,
-          title: Text(l10n.d('A4 · Sprekersnotities')),
-          controlAffinity: ListTileControlAffinity.leading,
-          contentPadding: EdgeInsets.zero,
-          onChanged: _loading
-              ? null
-              : (value) =>
-                    setState(() => _pdfWithSpeakerNotes = value ?? false),
-        ),
         _exportButton(
           icon: _formatIcon(ExportFormat.pptx),
           label: l10n.t('exportAsPptx'),
@@ -850,6 +840,16 @@ class _ExportDialogState extends State<ExportDialog> {
         _manifestNotice(l10n),
         if (widget.hasDepthChoice) _depthSelector(),
         if (widget.hasQuestionChoice) _questionSelector(),
+        CheckboxListTile(
+          value: _pdfWithSpeakerNotes,
+          title: Text(l10n.d('A4 · Sprekersnotities')),
+          controlAffinity: ListTileControlAffinity.leading,
+          contentPadding: EdgeInsets.zero,
+          onChanged: _loading
+              ? null
+              : (value) =>
+                    setState(() => _pdfWithSpeakerNotes = value ?? false),
+        ),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
         // verfijning en staat daarom achter een inklapbare kop (open zodra
         // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).

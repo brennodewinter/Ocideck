@@ -193,7 +193,8 @@ void main() {
       _bundle([
         Slide.create(SlideType.title).copyWith(
           notes:
-              'Spreektekst: Łódź, Αθήνα, Москва.\n\n${paragraphs.join('\n\n')}',
+              'Spreektekst: Łódź, Αθήνα, Москва.\n'
+              'Openbaar [[synthetisch-geheim]].\n\n${paragraphs.join('\n\n')}',
         ),
         Slide.create(SlideType.title),
       ], tlp: TlpLevel.amber),

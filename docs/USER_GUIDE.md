@@ -3555,7 +3555,7 @@ list so you can spot them without opening each slide.
 
 ## Exporting
 
-For a portrait A4 handout, enable **A4 · Speaker notes** below the PDF button.
+For a portrait A4 handout, enable **A4 · Speaker notes** below the format buttons.
 Each slide starts on a new page with a scaled image at the top and its speaker
 notes underneath. Long notes continue on following pages. The selected audience,
 redactions, detail level and question filter apply to both the image and the
