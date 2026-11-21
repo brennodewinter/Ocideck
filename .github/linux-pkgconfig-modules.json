@@ -19,9 +19,10 @@
     {
       "name": "Forgejo \u00b7 losse Linux-build",
       "files": [
+        ".forgejo/ci-image/Dockerfile",
         ".forgejo/workflows/linux-build.yml"
       ],
-      "why": "Kaal ubuntu:24.04-container: ook hier \u00e9\u00e9n apt-regel."
+      "why": "Voorgebakken CI-image plus aanvullende desktoplibs in de workflow; GTK komt uit het image."
     },
     {
       "name": "Ontwikkelmachine",
