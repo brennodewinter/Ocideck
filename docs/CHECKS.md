@@ -2404,13 +2404,15 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   OpenCV cache is shared with the release builder. The existing
   `scripts/run_release_linux_build.sh make build-linux` path limits the actual
   Ninja invocation to two jobs, builds Whisper, verifies the SBOM and checks
-  `check_bundled_docs_fresh.dart build/linux` using direct Dart execution (the same freshness gate
+  `check_bundled_docs_fresh.dart build/linux` using direct Dart execution (the
+  same freshness gate
   `check-web` runs — a persistent runner's incremental build must not ship docs
   older than `docs/`), and uploads the bundle as the `ocideck-linux-x64` run
   artifact. SBOM and documentation checks do not start native hooks; package
   building and all four clean-distribution consumer probes remain required.
-  The build timeout remains 240 minutes; #3100 removes repeated toolchain setup
-  rather than extending that limit. This is a build, not a gate: it proves the Linux target compiles and
+  The build keeps `timeout-minutes: 240`; #3100 removes repeated toolchain setup
+  rather than extending that limit. This is a build, not a gate: it proves the
+  Linux target compiles and
   packages, nothing more. #790 took it off every push to `main` — 17.5 minutes
   of runner time per merge. Historically, the mirror release built all three
   platforms only after a `v*` tag. That argument held for the *packaging* and
