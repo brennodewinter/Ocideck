@@ -112,7 +112,7 @@ jobs:
       # direct Dart, zonder na de app-build opnieuw native hooks te starten.
       # De wrapper begrenst de echte Ninja-aanroep, ook Flutter's eigen -j.
       - name: Linux-release bouwen
-        run: scripts/run_release_linux_build.sh make build-linux
+        run: bash scripts/run_release_linux_build.sh make build-linux
 
       - name: Bundel inpakken
         run: |

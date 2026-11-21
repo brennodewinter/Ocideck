@@ -2402,7 +2402,7 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   packaging libraries are installed per run; the compiler, Node, GTK and Flutter
   are already present. Pub resolution enforces the lockfile and the native
   OpenCV cache is shared with the release builder. The existing
-  `scripts/run_release_linux_build.sh make build-linux` path limits the actual
+  `bash scripts/run_release_linux_build.sh make build-linux` path limits the actual
   Ninja invocation to two jobs, builds Whisper, verifies the SBOM and checks
   `check_bundled_docs_fresh.dart build/linux` using direct Dart execution (the
   same freshness gate

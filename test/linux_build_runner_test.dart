@@ -83,10 +83,12 @@ exec ninja -C build install -j99
         ..writeAsStringSync(entry.value);
       Process.runSync('chmod', ['700', file.path]);
     }
-    Process.runSync('chmod', [
-      '700',
-      '${dir.path}/scripts/run_release_linux_build.sh',
-    ]);
+    // Preserve the tracked non-executable mode: the workflow needs Bash.
+    expect(
+      File('${dir.path}/scripts/run_release_linux_build.sh').statSync().mode &
+          0x49,
+      0,
+    );
     final calls = File('${dir.path}/calls');
     final environment = <String, String>{
       'PATH': '${dir.path}/bin:${Platform.environment['PATH']}',
