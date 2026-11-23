@@ -1828,6 +1828,18 @@ De rail aan de linkerkant somt elke slide op als een miniatuur.
   landen waar je aan het werk bent. Bulkacties (verwijderen, overslaan, naar een ander deck kopiëren)
   gelden voor de hele selectie.
 
+### Geselecteerde dia’s naar een andere presentatie kopiëren
+
+1. Open de bron- en doelpresentatie in aparte tabbladen in OciDeck.
+2. Houd in het brontabblad **Cmd** (macOS) of **Ctrl** (Windows en Linux)
+   ingedrukt en klik op de miniaturen van de gewenste dia’s. Met
+   **Shift**-klik selecteer je een aaneengesloten reeks.
+3. Kies in de actiebalk boven de dialijst **Kopiëren naar ander deck** en
+   selecteer de doelpresentatie.
+
+OciDeck zet de bewerkbare kopieën achteraan, in de volgorde van de
+bronpresentatie. Het doeltabblad opent bij de eerste gekopieerde dia.
+
 ## Afbeeldingen en media reizen mee met de presentatie
 
 Je kunt er niet van uitgaan dat wie je presentatie ontvangt dezelfde schijven,
