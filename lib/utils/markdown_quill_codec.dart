@@ -174,7 +174,10 @@ class MarkdownQuillCodec {
   );
 
   static Document documentFromMarkdown(String markdown) {
-    if (markdown.isEmpty) {
+    // Ook witruimte-alleen invoer is leeg: `_mdToDelta` levert daar een lege
+    // delta op en `Document.fromDelta` weigert die. Een body van `'\n'` —
+    // zoals een omgezet leeg deck die produceert (#3107) — crashte zo.
+    if (markdown.trim().isEmpty) {
       return Document();
     }
     noteWork('Markdown → visuele editor');
