@@ -23,7 +23,7 @@ jobs:
           $archive = 'ocideck-windows-x64-0.7.15.zip'
           Invoke-WebRequest "$release/$archive" -OutFile $archive
           $lines = (Invoke-WebRequest "$release/SHA256SUMS").Content -split "\r?\n"
-          $line = $lines | Where-Object { $_ -match "\s+$([regex]::Escape($archive))$" }
+          $line = $lines | Where-Object { $_ -match "\s+\*?(?:\./)?$([regex]::Escape($archive))$" }
           if (!$line -or ($line -split '\s+')[0] -ne (Get-FileHash $archive).Hash) {
             throw 'Published bundle checksum mismatch.'
           }
