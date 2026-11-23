@@ -7,13 +7,13 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
+import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
 import 'package:ocideck/widgets/panels/editor_panel.dart';
 
 // De 'Bron'-schakelaar in de editor-kopregel (#1160) is het per-dia
 // ontsnappingsluik: één klik brengt je van de gestructureerde editor naar de
 // rauwe markdown van díe ene dia. Mechanisch leunt hij op de bestaande
-// markdown-modus, dus deze test bewaakt alleen de bedrading van het instappunt:
-// dat de knop er is en dat hij de markdown-modus op slide-omvang zet.
+// markdown-modus, dus deze tests lopen via die knop de broneditor in.
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -81,5 +81,37 @@ void main() {
     // En de buffer opent schoon (buffer == baseline), zodat een schone editor
     // deck-wijzigingen als undo/redo blijft volgen.
     expect(editor.hasMarkdownDraft, isFalse);
+  });
+
+  testWidgets('dia-bron kan omschakelen naar de volledige bron (#3113)', (
+    tester,
+  ) async {
+    final container = await pump(tester);
+    container.read(deckProvider.notifier).insertSlides([
+      Slide.create(SlideType.bullets).copyWith(title: 'Tweede dia'),
+      Slide.create(SlideType.bullets).copyWith(title: 'Derde dia'),
+    ]);
+    await tester.pump();
+
+    final sourceField = find.descendant(
+      of: find.byType(MarkdownDeckEditor),
+      matching: find.byType(TextField),
+    );
+    await tester.tap(sourceButton);
+    await tester.pumpAndSettle();
+    expect(container.read(editorProvider).markdownScope, MarkdownScope.slide);
+    expect(
+      tester.widget<TextField>(sourceField).controller!.text,
+      isNot(contains('# Tweede dia')),
+    );
+
+    await tester.tap(find.text('Volledige presentatie'));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(container.read(editorProvider).markdownScope, MarkdownScope.deck);
+    final source = tester.widget<TextField>(sourceField).controller!.text;
+    expect(source, startsWith('---'));
+    expect(source, contains('# Tweede dia'));
+    expect(source, contains('# Derde dia'));
   });
 }
