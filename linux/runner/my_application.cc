@@ -134,6 +134,82 @@ static void clipboard_method_call_cb(FlMethodChannel* channel,
   fl_method_call_respond(method_call, response, nullptr);
 }
 
+// Workaround for Flutter #196476 (issue #3106): on Wayland, Flutter's
+// FlViewRendererSubsurface sets the subsurface's buffer scale once when it is
+// created and never updates it. GTK can change the widget's scale factor
+// later — the window lands on an output with a different scale, or maps at
+// one scale and settles on another — and the stale buffer scale leaves the
+// content at half or double size in a corner with misaligned input. Cycling
+// the renderer through unrealize/map on "notify::scale-factor" recreates the
+// subsurface at the current scale. Fails open on X11, the software renderer,
+// and Flutter builds without the subsurface type. Remove once the engine
+// applies scale changes itself.
+struct SubsurfaceSearch {
+  GType type;
+  GtkWidget* found;
+};
+
+static void find_widget_by_type(GtkWidget* widget, gpointer data) {
+  SubsurfaceSearch* search = static_cast<SubsurfaceSearch*>(data);
+  if (search->found != nullptr) {
+    return;
+  }
+  if (G_TYPE_CHECK_INSTANCE_TYPE(widget, search->type)) {
+    search->found = widget;
+    return;
+  }
+  if (GTK_IS_CONTAINER(widget)) {
+    gtk_container_forall(GTK_CONTAINER(widget), find_widget_by_type, data);
+  }
+}
+
+static GtkWidget* find_subsurface_renderer(FlView* view) {
+  GType type = g_type_from_name("FlViewRendererSubsurface");
+  if (type == 0) {
+    return nullptr;
+  }
+  SubsurfaceSearch search{type, nullptr};
+  find_widget_by_type(GTK_WIDGET(view), &search);
+  return search.found;
+}
+
+// Unrealizing the renderer drops its wl_subsurface and EGL surface; mapping
+// it again realizes it at the current scale factor and schedules a fresh
+// frame. FlView's own "realize" handler would restart the engine, so it is
+// blocked for the duration of the cycle.
+static gboolean rebuild_subsurface_cb(gpointer user_data) {
+  FlView* view = FL_VIEW(user_data);
+  GtkWidget* renderer = find_subsurface_renderer(view);
+  if (renderer != nullptr && gtk_widget_get_mapped(renderer)) {
+    guint realize = g_signal_lookup("realize", GTK_TYPE_WIDGET);
+    GSignalMatchType match = static_cast<GSignalMatchType>(
+        G_SIGNAL_MATCH_ID | G_SIGNAL_MATCH_DATA);
+    g_signal_handlers_block_matched(renderer, match, realize, 0, nullptr,
+                                    nullptr, view);
+    gtk_widget_unrealize(renderer);
+    gtk_widget_map(renderer);
+    g_signal_handlers_unblock_matched(renderer, match, realize, 0, nullptr,
+                                      nullptr, view);
+  }
+  g_object_unref(view);
+  return G_SOURCE_REMOVE;
+}
+
+// Deferred to the main loop: "notify::scale-factor" can fire deep inside a
+// size-allocation pass, where (un)realizing widgets is unsafe.
+static void follow_subsurface_scale(FlView* view) {
+  GtkWidget* renderer = find_subsurface_renderer(view);
+  if (renderer == nullptr) {
+    return;
+  }
+  g_signal_connect_swapped(
+      renderer, "notify::scale-factor",
+      G_CALLBACK(+[](FlView* v) {
+        g_idle_add(rebuild_subsurface_cb, g_object_ref(v));
+      }),
+      view);
+}
+
 // Implements GApplication::activate.
 static void my_application_activate(GApplication* application) {
   MyApplication* self = MY_APPLICATION(application);
@@ -205,6 +281,7 @@ static void my_application_activate(GApplication* application) {
   g_signal_connect_swapped(view, "first-frame", G_CALLBACK(first_frame_cb),
                            self);
   gtk_widget_realize(GTK_WIDGET(view));
+  follow_subsurface_scale(view);
 
   fl_register_plugins(FL_PLUGIN_REGISTRY(view));
   desktop_multi_window_plugin_set_window_created_callback(
