@@ -1,0 +1,43 @@
+name: Windows published release resize probe 3106
+
+on:
+  push:
+    branches: [codex/windows-resize-probe-3106]
+
+permissions:
+  contents: read
+
+jobs:
+  resize:
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts
+      - name: Download and verify the published Windows bundle
+        shell: pwsh
+        run: |
+          $release = 'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/v0.7.15'
+          $archive = 'ocideck-windows-x64-0.7.15.zip'
+          Invoke-WebRequest "$release/$archive" -OutFile $archive
+          $lines = (Invoke-WebRequest "$release/SHA256SUMS").Content -split "\r?\n"
+          $line = $lines | Where-Object { $_ -match "\s+$([regex]::Escape($archive))$" }
+          if (!$line -or ($line -split '\s+')[0] -ne (Get-FileHash $archive).Hash) {
+            throw 'Published bundle checksum mismatch.'
+          }
+          Expand-Archive $archive -DestinationPath release
+          $exe = Get-ChildItem release -Recurse -Filter ocideck.exe | Select-Object -First 1
+          if (!$exe) { throw 'OciDeck executable missing.' }
+          "OCIDECK_PROBE_EXE=$($exe.FullName)" >> $env:GITHUB_ENV
+      - name: Check the Flutter child and visible pixels after resizing
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force evidence | Out-Null
+          ./scripts/windows_resize_probe_3106.ps1 -Executable $env:OCIDECK_PROBE_EXE -EvidenceDirectory evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-resize-3106
+          path: evidence
