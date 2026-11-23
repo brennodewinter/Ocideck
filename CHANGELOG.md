@@ -8,6 +8,24 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.16] — 2026-11-23
+
+### Added
+
+- feat(tabs): consistentie voor lege bestanden tussen document en presentatie (#3107)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Leg uit hoe je losse dia’s naar een andere presentatie kopieert
+- chore(release): integreer gepubliceerde 0.7.15 in main
+
+### Fixed
+
+- fix(markdown): geef vrije Markdown een typetoken zodat hij rondreist (#3109)
+- fix(linux): herbouw de Wayland-subsurface bij een scale-factor-wijziging (#3108)
+- fix(ci): herstel de zelfstandige Linux-runner-time-out
+
 ## [0.7.15] — 2026-11-20
 
 ### Changed
