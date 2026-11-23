@@ -771,37 +771,17 @@ void _selectTab(TabsNotifier notifier, int index) {
 
 void _closeTab(TabsNotifier notifier, int index) {
   final current = notifier.currentState;
-  final session = current.tabs[index].learningSession;
-  _cancelLearningExpiry(notifier, session);
-  _flushClosingDocument(current.tabs[index].content);
-  if (current.tabs.length == 1) {
-    final tab = current.tabs.first;
-    tab.learningSession = null;
-    notifier._recovery.discard(tab.recoveryId);
-    // Het enige overblijvende tabblad wordt gereset (niet verwijderd), zodat de
-    // app altijd één tabblad houdt. Een presentatie reset via closeDeck(); een
-    // documenttabblad heeft geen deckNotifier en gooit daarop, dus routeer op
-    // soort (#1636).
-    switch (tab.content) {
-      case DeckTabContent(:final deckNotifier):
-        deckNotifier.closeDeck();
-      case DocumentTabContent(:final documentNotifier):
-        documentNotifier.closeDocument();
-    }
-    notifier.refreshTabs();
-    notifier.sweepWebAssets();
-    final closer = _learningSessionClosers[notifier];
-    if (session != null && closer != null) unawaited(closer(session));
-    return;
-  }
   final tab = current.tabs[index];
+  final session = tab.learningSession;
+  _cancelLearningExpiry(notifier, session);
+  _flushClosingDocument(tab.content);
   notifier._recovery.discard(tab.recoveryId);
   notifier._disposeTab(tab);
   final newTabs = List<TabInfo>.from(current.tabs)..removeAt(index);
-  final newSelected = index >= newTabs.length ? newTabs.length - 1 : index;
+  if (newTabs.isEmpty) newTabs.add(notifier._createTab());
   notifier._replacementState = current.copyWith(
     tabs: newTabs,
-    selectedIndex: newSelected,
+    selectedIndex: index.clamp(0, newTabs.length - 1),
   );
   notifier.sweepWebAssets();
   final closer = _learningSessionClosers[notifier];

@@ -230,10 +230,19 @@ void main() {
     tabs.closeTab(0);
     await tester.pumpAndSettle();
 
-    // Het tabblad blijft staan (als enige), maar is gereset naar leeg.
+    // De laatste plek in de tabbalk toont hetzelfde openingsscherm als bij
+    // het sluiten van een presentatie.
     expect(container.read(tabsProvider).tabs.length, 1);
+    expect(
+      container.read(tabsProvider).current?.kind,
+      MarkdownKind.presentation,
+    );
     expect(container.read(tabsProvider).current?.isOpen, isFalse);
     expect(container.read(tabsProvider).current?.isDirty, isFalse);
+    expect(
+      find.text(AppLocalizations.active.t('newPresentation')),
+      findsWidgets,
+    );
   });
 
   // #2623: de deck-luisteraar van TabsNotifier zendt alleen uit als een

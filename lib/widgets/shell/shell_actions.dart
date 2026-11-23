@@ -834,6 +834,7 @@ Future<void> requestCloseTab(
   final tabs = ref.read(tabsProvider).tabs;
   if (index < 0 || index >= tabs.length) return;
   final tab = tabs[index];
+  tab.documentNotifier?.flushPendingVisualEdit();
   if (tab.isDirty) {
     final l10n = context.l10n;
     // De melding noemt de soort: een document is geen presentatie. Vroeger
@@ -860,9 +861,11 @@ Future<void> requestCloseTab(
         // via zijn eigen pad, een presentatie via de deck-route. Vroeger ging
         // dit via tab.deckNotifier, dat voor een documenttabblad gooit.
         final saved = await saveTabWithDestination(context, ref, tab);
-        if (!saved) return;
+        if (!saved || !context.mounted) return;
     }
   }
+  final closeIndex = ref.read(tabsProvider).tabs.indexOf(tab);
+  if (closeIndex < 0) return;
   if (tab.learningSession != null) {
     unawaited(
       ref
@@ -871,5 +874,5 @@ Future<void> requestCloseTab(
           .catchError((_) {}),
     );
   }
-  ref.read(tabsProvider.notifier).closeTab(index);
+  ref.read(tabsProvider.notifier).closeTab(closeIndex);
 }
