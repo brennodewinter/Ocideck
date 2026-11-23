@@ -250,12 +250,18 @@ void _convertPre(Element node, StringBuffer buf) {
   while (text.contains(fence)) {
     fence = '$fence`';
   }
-  buf.writeln(fence);
-  buf.write(text.trimRight());
-  if (!text.endsWith('\n')) buf.write('\n');
+  final code = node.children.firstOrNull;
+  final language = code?.localName == 'code'
+      ? _codeLanguage.firstMatch(code!.className)?.group(1) ?? ''
+      : '';
+  buf.writeln('$fence$language');
+  final content = text.trimRight();
+  if (content.isNotEmpty) buf.writeln(content);
   buf.writeln(fence);
   _ensureBlankLine(buf);
 }
+
+final _codeLanguage = RegExp(r'(?:^|\s)language-([a-zA-Z0-9_+-]+)(?=\s|$)');
 
 void _writeInlineCode(StringBuffer buf, String raw) {
   final text = raw.replaceAll('\n', ' ').trim();

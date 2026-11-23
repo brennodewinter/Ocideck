@@ -30,7 +30,7 @@ final RegExp mermaidFenceOpenPattern = RegExp(
 );
 
 /// De sluitregel van diezelfde fence.
-final RegExp _mermaidFenceClosePattern = RegExp(r'^\s{0,3}```[ \t]*$');
+final RegExp _mermaidFenceClosePattern = RegExp(r'^ {0,3}`{3,}[ \t]*$');
 
 /// Herkent een volledige ```mermaid-fence en maakt er één [EmbeddableMermaid]
 /// van, vóórdat de standaard-fenceregel van de markdown-parser er een codeblok

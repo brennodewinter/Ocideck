@@ -96,6 +96,19 @@ Een alinea erna.
     expect(find.byType(DocMermaidView), findsOneWidget);
   });
 
+  test('een langer sluithek laat de volgende kop buiten het Mermaid-blok', () {
+    final document = MarkdownQuillCodec.documentFromMarkdown(
+      '```mermaid\ngraph TD; A-->B;\n````\n\n## Vervolg',
+    );
+    final operations = document.toDelta().operations;
+    final diagram = operations.first.data as Map;
+    expect(
+      diagram[EmbeddableMermaid.mermaidType],
+      '```mermaid\ngraph TD; A-->B;\n````',
+    );
+    expect(operations.last.attributes, containsPair('header', 2));
+  });
+
   testWidgets('typen naast het diagram laat de fence byte-gelijk', (
     tester,
   ) async {

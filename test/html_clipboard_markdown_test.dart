@@ -4,6 +4,8 @@ import 'package:ocideck/platform/clipboard_html.dart';
 import 'package:ocideck/platform/clipboard_html_io.dart';
 import 'package:ocideck/utils/clipboard_markdown.dart';
 import 'package:ocideck/utils/html_to_markdown.dart';
+import 'package:ocideck/utils/markdown_quill_codec.dart';
+import 'package:ocideck/utils/mermaid_embed_syntax.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -109,6 +111,36 @@ void main() {
         ),
         '**vet** en *schuin* en `x`',
       );
+    });
+
+    test('code met afsluitend regeleinde slokt de volgende kop niet op', () {
+      expect(
+        htmlClipboardToMarkdown(
+          '<pre><code>voorbeeld\n</code></pre><h2>Vervolg</h2>',
+        ),
+        '```\nvoorbeeld\n```\n\n## Vervolg',
+      );
+    });
+
+    test('slim plakken behoudt het Mermaid-diagram en de kop erna', () {
+      final pasted = resolveClipboardMarkdown(
+        plain: null,
+        html:
+            '<pre><code class="language-mermaid">flowchart TB\n'
+            '  A --&gt; B\n</code></pre><h2>Vervolg</h2>',
+      );
+      expect(
+        pasted?.text,
+        '```mermaid\nflowchart TB\n  A --> B\n```\n\n## Vervolg',
+      );
+      final delta = MarkdownQuillCodec.documentFromMarkdown(
+        pasted!.text,
+      ).toDelta();
+      expect(
+        delta.operations.first.data,
+        contains(EmbeddableMermaid.mermaidType),
+      );
+      expect(delta.operations.last.attributes, containsPair('header', 2));
     });
 
     test('te groot is niets, zodat de platte tekst de val blijft', () {
