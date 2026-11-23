@@ -191,15 +191,15 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     // Staat er iets ongetoepasts, dan wint dat. De inhoud loopt dan achter op
     // het deck, maar dat is precies wat een wachtruimte hoort te doen: bij
     // "Toepassen" schrijft hij toch het geheel.
-    if (widget.initialContent != oldWidget.initialContent) {
-      if (_ctrl.text != oldWidget.initialContent) return;
+    final scopeChanged = widget.scope != oldWidget.scope;
+    if (scopeChanged || widget.initialContent != oldWidget.initialContent) {
+      if (!scopeChanged && _ctrl.text != oldWidget.initialContent) return;
       _syncingExternalContent = true;
       _ctrl.text = widget.initialContent;
       _sourceDocument = _sourceDocument.reparse(widget.initialContent);
       _writingSuggestions = inspectMarkdownWriting(widget.initialContent);
       _observedText = widget.initialContent;
       _baselineContent = widget.baselineContent ?? widget.initialContent;
-      _syncingExternalContent = false;
       setState(() {
         _validation = null;
         _lastValidation = _validator.validate(widget.initialContent);
@@ -208,6 +208,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       });
       // De balk blijft staan; alleen de gevonden plekken slaan nergens meer op.
       _find.clearMatches();
+      _syncingExternalContent = false;
+      _lastReportedSlide = null;
+      _scheduleValidation();
     }
     // Een wissel van buiten (de diastrook, de navigatieknoppen) wijst de cursor
     // de nieuwe dia aan. Maar de wissel kán ook een echo van onszelf zijn: de
@@ -217,23 +220,22 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     // de eerste regel, en een selectie die over de `---` heen liep werd
     // platgeslagen tot een cursor op de diagrens.
     if (widget.scope == MarkdownScope.deck &&
-        widget.slideNumber != oldWidget.slideNumber &&
-        widget.slideNumber != _lastReportedSlide) {
-      MarkdownSourceBlock? target;
-      for (final block in _sourceDocument.blocks) {
-        if (block.slideNumber == widget.slideNumber) {
-          target = block;
-          break;
+        (scopeChanged ||
+            (widget.slideNumber != oldWidget.slideNumber &&
+                widget.slideNumber != _lastReportedSlide))) {
+      final slideNumber = widget.slideNumber;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted ||
+            widget.scope != MarkdownScope.deck ||
+            widget.slideNumber != slideNumber) {
+          return;
         }
-      }
-      if (target != null) {
-        final targetStart = target.start;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) {
-            _jumpToSourceRange(this, TextMatchRange(targetStart, targetStart));
-          }
-        });
-      }
+        if (slideNumber < 1 || slideNumber > _sourceDocument.blocks.length) {
+          return;
+        }
+        final start = _sourceDocument.blocks[slideNumber - 1].start;
+        _jumpToSourceRange(this, TextMatchRange(start, start));
+      });
     }
   }
 
@@ -278,13 +280,16 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
 
   void _reportActiveSourceSlide() {
     if (widget.scope != MarkdownScope.deck ||
+        !_ctrl.selection.isValid ||
         widget.onActiveSlideChanged == null) {
       return;
     }
     final block = _sourceDocument.blockAt(_ctrl.selection.extentOffset);
     if (block == null || block.slideNumber == _lastReportedSlide) return;
     _lastReportedSlide = block.slideNumber;
-    widget.onActiveSlideChanged!(block.slideNumber - 1);
+    if (block.slideNumber != widget.slideNumber) {
+      widget.onActiveSlideChanged!(block.slideNumber - 1);
+    }
   }
 
   void _scheduleValidation() {

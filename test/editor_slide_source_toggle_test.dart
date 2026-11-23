@@ -3,12 +3,15 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/markdown_source_document.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
 import 'package:ocideck/widgets/panels/editor_panel.dart';
+import 'package:ocideck/widgets/panels/slide_list_panel.dart';
+import 'package:ocideck/widgets/slides/slide_thumbnail.dart';
 
 // De 'Bron'-schakelaar in de editor-kopregel (#1160) is het per-dia
 // ontsnappingsluik: één klik brengt je van de gestructureerde editor naar de
@@ -43,7 +46,14 @@ void main() {
             FlutterQuillLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          home: const Scaffold(body: EditorPanel()),
+          home: const Scaffold(
+            body: Row(
+              children: [
+                SizedBox(width: 240, child: SlideListPanel()),
+                Expanded(child: EditorPanel()),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -52,6 +62,24 @@ void main() {
   }
 
   final sourceButton = find.byTooltip('Bewerk deze dia als markdown-bron');
+  final sourceField = find.descendant(
+    of: find.byType(MarkdownDeckEditor),
+    matching: find.byType(TextField),
+  );
+
+  Future<ProviderContainer> pumpThreeSlides(WidgetTester tester) async {
+    final container = await pump(tester);
+    container.read(deckProvider.notifier).insertSlides([
+      Slide.create(SlideType.bullets).copyWith(title: 'Tweede dia'),
+      Slide.create(SlideType.bullets).copyWith(title: 'Derde dia'),
+    ]);
+    await tester.pumpAndSettle();
+    return container;
+  }
+
+  Finder thumbnail(int index) => find.byWidgetPredicate(
+    (widget) => widget is SlideThumbnail && widget.index == index,
+  );
 
   testWidgets('the source toggle sits in the structured editor header', (
     tester,
@@ -86,17 +114,7 @@ void main() {
   testWidgets('dia-bron kan omschakelen naar de volledige bron (#3113)', (
     tester,
   ) async {
-    final container = await pump(tester);
-    container.read(deckProvider.notifier).insertSlides([
-      Slide.create(SlideType.bullets).copyWith(title: 'Tweede dia'),
-      Slide.create(SlideType.bullets).copyWith(title: 'Derde dia'),
-    ]);
-    await tester.pump();
-
-    final sourceField = find.descendant(
-      of: find.byType(MarkdownDeckEditor),
-      matching: find.byType(TextField),
-    );
+    final container = await pumpThreeSlides(tester);
     await tester.tap(sourceButton);
     await tester.pumpAndSettle();
     expect(container.read(editorProvider).markdownScope, MarkdownScope.slide);
@@ -113,5 +131,30 @@ void main() {
     expect(source, startsWith('---'));
     expect(source, contains('# Tweede dia'));
     expect(source, contains('# Derde dia'));
+  });
+
+  testWidgets('volledige bron houdt dia 2 geselecteerd (#3116)', (
+    tester,
+  ) async {
+    final container = await pumpThreeSlides(tester);
+    await tester.tap(sourceButton);
+    await tester.pumpAndSettle();
+    await tester.tap(thumbnail(1));
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<TextField>(sourceField).controller!.text,
+      contains('# Tweede dia'),
+    );
+
+    await tester.tap(find.text('Volledige presentatie'));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    final state = container.read(editorProvider);
+    expect(state.markdownScope, MarkdownScope.deck);
+    expect(state.selectedIndex, 1);
+    final controller = tester.widget<TextField>(sourceField).controller!;
+    final second = MarkdownSourceDocument.parse(controller.text).blocks[1];
+    expect(controller.selection.extentOffset, second.start);
   });
 }
