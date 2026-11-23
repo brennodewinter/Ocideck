@@ -1542,6 +1542,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Bloku kódu na řádku {n} chybí ukončovací značka. OciDeck čte zbytek jako kód.',
+  'losse of onvolledige tabelregels': 'samostatné nebo neúplné řádky tabulky',
+  'HTML-commentaar': 'komentáře HTML',
+  'leestekens met een backslash': 'interpunkce se zpětným lomítkem',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Diagram Mermaid se nepodařilo zobrazit. Níže je zobrazen jeho zdrojový kód.',
   'A4 · Sprekersnotities': 'A4 · Poznámky řečníka',
   'Titeldia': 'Titulní snímek',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

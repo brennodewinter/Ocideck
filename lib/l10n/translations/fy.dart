@@ -613,6 +613,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'It koadeblok op rigel {n} mist in ôfslutrigel. OciDeck lêst de rest as koade.',
+  'losse of onvolledige tabelregels': 'losse of ûnfolsleine tabelrigels',
+  'HTML-commentaar': 'HTML-kommentaar',
+  'leestekens met een backslash': 'lêstekens mei in omkearde skeanstreek',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'It Mermaid-diagram koe net werjûn wurde. Hjirûnder stiet de boarnekoade.',
   'A4 · Sprekersnotities': 'A4 · Sprekkersnotysjes',
   'Titeldia': 'Titeldia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

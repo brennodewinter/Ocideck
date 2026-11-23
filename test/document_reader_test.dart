@@ -294,6 +294,14 @@ void main() {
       );
       expect(find.byType(SvgPicture), findsNothing);
       expect(find.textContaining('graph TD'), findsOneWidget);
+      expect(
+        find.text(
+          AppLocalizations.active.d(
+            'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.',
+          ),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets('a non-mermaid fence stays a code block', (tester) async {

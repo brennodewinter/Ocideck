@@ -1,3 +1,5 @@
+import 'package:markdown/markdown.dart' as md;
+
 import '../services/table_of_contents.dart';
 import '../services/transcription/transcript_marker.dart';
 import 'spacer_embed_syntax.dart';
@@ -6,6 +8,7 @@ import '../services/markdown_table_lines.dart';
 import '../services/ocideck_markers.dart';
 import '../services/form_document_blocks.dart';
 import '../services/pentest_blocks.dart';
+import 'markdown_blocks.dart';
 
 /// Inline-code-spans: `` `…` `` op één regel. De inhoud reist als `code`-
 /// attribuut door Quill en is platte tekst — hoekhaakjes en backslash-escapes
@@ -74,15 +77,22 @@ final _escapedPunctuation = RegExp(r'\\[!-/:-@\[-`{-~]');
 /// als gewone tekst kan dragen — de detector achter [sourceFragmentRanges].
 /// Bewust geen echte Markdown-parse: de pas draait per toetsaanslag over de
 /// hele documenttekst.
-Set<int> _limitationLines(String markdown) {
-  final hits = <int>{};
+({Map<int, Set<SourceFragmentReason>> hits, int? openFenceLine})
+_scanLimitations(String markdown) {
+  final hits = <int, Set<SourceFragmentReason>>{};
+  void hit(int index, SourceFragmentReason reason) {
+    (hits[index] ??= {}).add(reason);
+  }
+
   final lines = markdown.split('\n');
   // Eén extra lineaire pas, dezelfde orde als de lus hieronder. Bewust geen
   // echte Markdown-parse: deze functie draait per toetsaanslag over de hele
   // documenttekst.
   final pentest = scanPentestBlocks(markdown);
   final forms = scanFormBlocks(markdown);
-  var fenced = false;
+  MarkdownFence? fence;
+  int? openFenceLine;
+  var inHtmlComment = false;
   var inTable = false;
   // Regels binnen een atomaire `<!-- ocideck:* -->`-envelop (markerblok +
   // witregels + contracttabel, RISK_FORMAT §5) reizen als één
@@ -95,12 +105,23 @@ Set<int> _limitationLines(String markdown) {
     // Wat als één embed reist, gaat nooit door de rijke-tekstconversie en kan
     // daar dus ook niet stukgaan.
     if (pentest.isAtomicLine(index) || forms.isAtomicLine(index)) continue;
-    if (RegExp(r'^\s*```').hasMatch(line)) {
-      fenced = !fenced;
+    if (fence != null) {
+      if (_fencePattern.hasMatch(line) && fence.closes(line.trim())) {
+        fence = null;
+        openFenceLine = null;
+      }
+      continue;
+    }
+    final trimmed = line.trimLeft();
+    if (!inHtmlComment && _fencePattern.hasMatch(line)) {
+      fence = markdownFenceOpen(trimmed);
+      openFenceLine = index + 1;
       inTable = false;
       continue;
     }
-    if (fenced) continue;
+    if (inHtmlComment || trimmed.startsWith('<!--')) {
+      inHtmlComment = !line.contains('-->');
+    }
     if (isOciTableMarkerLine(line)) {
       var j = index + 1;
       while (j < lines.length &&
@@ -147,7 +168,7 @@ Set<int> _limitationLines(String markdown) {
     // antwoord; stil doorgaan sloopt de tabel (zoals bij een kop en een
     // scheidingsrij die niet even breed zijn).
     if (isMarkdownTableLine(line)) {
-      hits.add(index);
+      hit(index, SourceFragmentReason.table);
       continue;
     }
     var supportedTimeline = false;
@@ -170,14 +191,25 @@ Set<int> _limitationLines(String markdown) {
         !transcriptMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&
         _rawHtml.hasMatch(lineWithoutCode)) {
-      hits.add(index);
+      hit(index, SourceFragmentReason.htmlComment);
     }
     if (_escapedPunctuation.hasMatch(lineWithoutCode)) {
-      hits.add(index);
+      hit(index, SourceFragmentReason.escapedPunctuation);
     }
   }
-  return hits;
+  return (hits: hits, openFenceLine: openFenceLine);
 }
+
+final _fencePattern = const md.FencedCodeBlockSyntax().pattern;
+
+enum SourceFragmentReason { table, htmlComment, escapedPunctuation }
+
+Set<SourceFragmentReason> sourceFragmentReasons(String fragment) =>
+    _scanLimitations(fragment).hits.values.expand((reasons) => reasons).toSet();
+
+/// Regel in de editorbron waar een codeblok zonder sluitregel begint.
+int? unclosedVisualFenceLine(String markdown) =>
+    _scanLimitations(markdown).openFenceLine;
 
 /// Een regel die een eigen blok opent en daarom een fragmentgrens is: bij
 /// een uitbreiding over zo'n regel zou het fragment een heel ander blok
@@ -209,7 +241,7 @@ bool _isFragmentBoundary(
 /// De regelbereiken `[start, end)` die als bronfragment reizen — zie
 /// [EmbeddableSourceFragment] (`x-embed-source-fragment`).
 ///
-/// Eén bereik per aaneengesloten brok om elke regel die [_limitationLines]
+/// Eén bereik per aaneengesloten brok om elke regel die [_scanLimitations]
 /// aanwijst: vanaf de probleemregel naar boven en beneden tot de eerste
 /// witregel of blokgrens. Witregel-begrensd is de enige grens die in beide
 /// richtingen byte-getrouw is — blok-embeds worden altijd met een witregel
@@ -224,7 +256,7 @@ bool _isFragmentBoundary(
 /// vervolgregels, dus uitknippen zou de rondreis breken.
 List<(int, int)> sourceFragmentRanges(String markdown) {
   final lines = markdown.split('\n');
-  final hits = _limitationLines(markdown);
+  final hits = _scanLimitations(markdown).hits.keys;
   if (hits.isEmpty) return const [];
   final pentest = scanPentestBlocks(markdown);
   final forms = scanFormBlocks(markdown);

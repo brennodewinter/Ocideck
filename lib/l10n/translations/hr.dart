@@ -1546,6 +1546,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Bloku koda u retku {n} nedostaje završni graničnik. OciDeck ostatak čita kao kod.',
+  'losse of onvolledige tabelregels': 'zasebni ili nepotpuni reci tablice',
+  'HTML-commentaar': 'HTML komentari',
+  'leestekens met een backslash':
+      'interpunkcijski znakovi s obrnutom kosom crtom ispred njih',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Mermaid dijagram nije bilo moguće prikazati. Izvorni kod prikazan je u nastavku.',
   'A4 · Sprekersnotities': 'A4 · Bilješke govornika',
   'Titeldia': 'Naslovni slajd',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

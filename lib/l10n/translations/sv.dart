@@ -1541,6 +1541,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Kodblocket på rad {n} saknar en avslutande avgränsare. OciDeck läser resten som kod.',
+  'losse of onvolledige tabelregels':
+      'fristående eller ofullständiga tabellrader',
+  'HTML-commentaar': 'HTML-kommentarer',
+  'leestekens met een backslash':
+      'skiljetecken som föregås av ett omvänt snedstreck',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Mermaid-diagrammet kunde inte visas. Källkoden visas nedan.',
   'A4 · Sprekersnotities': 'A4 · Talaranteckningar',
   'Titeldia': 'Titelbild',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

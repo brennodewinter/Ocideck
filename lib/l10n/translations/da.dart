@@ -1542,6 +1542,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Kodeblokken på linje {n} mangler en afsluttende afgrænsning. OciDeck læser resten som kode.',
+  'losse of onvolledige tabelregels': 'løse eller ufuldstændige tabelrækker',
+  'HTML-commentaar': 'HTML-kommentarer',
+  'leestekens met een backslash':
+      'tegnsætning med en indledende omvendt skråstreg',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Mermaid-diagrammet kunne ikke vises. Kildekoden vises nedenfor.',
   'A4 · Sprekersnotities': 'A4 · Talernoter',
   'Titeldia': 'Titeldias',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

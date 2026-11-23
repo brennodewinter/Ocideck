@@ -79,6 +79,7 @@ void main() {
       // geen documentbrede terugval op bronmodus.
       expect(find.byType(QuillEditor), findsOneWidget);
       expect(find.widgetWithText(TextField, geval.$2), findsOneWidget);
+      expect(find.text('Bron · leestekens met een backslash'), findsOneWidget);
       await tester.tap(find.text('wissel'));
       await tester.pumpAndSettle();
 

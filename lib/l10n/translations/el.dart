@@ -1565,6 +1565,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Λείπει το διαχωριστικό κλεισίματος του μπλοκ κώδικα στη γραμμή {n}. Το OciDeck διαβάζει το υπόλοιπο ως κώδικα.',
+  'losse of onvolledige tabelregels': 'μεμονωμένες ή ελλιπείς γραμμές πίνακα',
+  'HTML-commentaar': 'σχόλια HTML',
+  'leestekens met een backslash':
+      'σημεία στίξης με προηγούμενη ανάστροφη κάθετο',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Δεν ήταν δυνατή η εμφάνιση του διαγράμματος Mermaid. Ο πηγαίος κώδικάς του εμφανίζεται παρακάτω.',
   'A4 · Sprekersnotities': 'A4 · Σημειώσεις ομιλητή',
   'Titeldia': 'Διαφάνεια τίτλου',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

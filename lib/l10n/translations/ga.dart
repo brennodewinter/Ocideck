@@ -1570,6 +1570,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Tá teorantóir deiridh in easnamh ón mbloc cóid ar líne {n}. Léann OciDeck an chuid eile mar chód.',
+  'losse of onvolledige tabelregels':
+      'sraitheanna tábla scartha nó neamhiomlána',
+  'HTML-commentaar': 'tráchtanna HTML',
+  'leestekens met een backslash': 'comharthaí poncaíochta le cúlslais rompu',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Níorbh fhéidir an léaráid Mermaid a thaispeáint. Tá a cód foinse le feiceáil thíos.',
   'A4 · Sprekersnotities': 'A4 · Nótaí cainteora',
   'Titeldia': 'Sleamhnán teidil',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

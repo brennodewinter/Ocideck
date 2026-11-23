@@ -612,6 +612,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'E blòki di kódigo na liña {n} falta su delimitador di klousura. OciDeck ta lesa e resto komo kódigo.',
+  'losse of onvolledige tabelregels': 'liñanan di tabla suelto òf inkompleto',
+  'HTML-commentaar': 'komentario di HTML',
+  'leestekens met een backslash':
+      'signonan di puntuashon ku un bara invertí dilanti',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'No por a mustra e diagrama di Mermaid. Aki bou ta su kódigo fuente.',
   'A4 · Sprekersnotities': 'A4 · Nota di presentadó',
   'Titeldia': 'Diapositiva di título',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

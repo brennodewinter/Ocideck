@@ -1543,6 +1543,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'A(z) {n}. sorban kezdődő kódblokk záró jelölése hiányzik. Az OciDeck a további részt kódként olvassa.',
+  'losse of onvolledige tabelregels': 'önálló vagy hiányos táblázatsorok',
+  'HTML-commentaar': 'HTML-megjegyzések',
+  'leestekens met een backslash': 'fordított perjellel jelölt írásjelek',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'A Mermaid-diagramot nem sikerült megjeleníteni. A forráskódja alább látható.',
   'A4 · Sprekersnotities': 'A4 · Előadói jegyzetek',
   'Titeldia': 'Címdia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

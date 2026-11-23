@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../utils/markdown_visual_compatibility.dart';
 import '../../utils/source_fragment_embed_syntax.dart';
 import 'embedded_field_actions.dart';
 
@@ -33,7 +34,10 @@ class SourceFragmentEmbedBuilder extends EmbedBuilder {
     final source = embedContext.node.value.data as String? ?? '';
     final mono = _monoStyle(context);
     if (embedContext.readOnly) {
-      return _SourceFragmentBox(child: Text(source, style: mono));
+      return _SourceFragmentBox(
+        source: source,
+        child: Text(source, style: mono),
+      );
     }
     return _EditableSourceFragment(
       source: source,
@@ -53,17 +57,31 @@ TextStyle _monoStyle(BuildContext context) {
   );
 }
 
-/// De vaste vorm van een fragment: een subtiel afgezet vlak met het
-/// bijschrift "Bron", zodat je ziet dat dít stuk bewust als brontekst reist —
-/// niet als kapotte opmaak die je moet gaan fixen.
+/// Een bronvlak met de reden waarom dit fragment zijn Markdown-opmaak behoudt.
 class _SourceFragmentBox extends StatelessWidget {
-  const _SourceFragmentBox({required this.child});
+  const _SourceFragmentBox({required this.source, required this.child});
 
+  final String source;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = context.l10n;
+    final reasons = sourceFragmentReasons(source)
+        .map(
+          (reason) => switch (reason) {
+            SourceFragmentReason.table => l10n.d(
+              'losse of onvolledige tabelregels',
+            ),
+            SourceFragmentReason.htmlComment => l10n.d('HTML-commentaar'),
+            SourceFragmentReason.escapedPunctuation => l10n.d(
+              'leestekens met een backslash',
+            ),
+          },
+        )
+        .join(', ');
+    final label = l10n.d('Bron');
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -76,7 +94,7 @@ class _SourceFragmentBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            context.l10n.d('Bron'),
+            reasons.isEmpty ? label : '$label · $reasons',
             style: Theme.of(
               context,
             ).textTheme.labelSmall?.copyWith(color: scheme.onSurfaceVariant),
@@ -173,6 +191,7 @@ class _EditableSourceFragmentState extends State<_EditableSourceFragment> {
   @override
   Widget build(BuildContext context) {
     return _SourceFragmentBox(
+      source: widget.source,
       // Zonder deze wikkel voert Quill de tekstbewerking van dit veld uit, met
       // de inhoud van het hele document — zie [EmbeddedFieldActions] (#1565).
       child: EmbeddedFieldActions(

@@ -1538,6 +1538,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Koda blokam {n}. rindā trūkst beigu norobežotāja. OciDeck pārējo lasa kā kodu.',
+  'losse of onvolledige tabelregels':
+      'atsevišķas vai nepilnīgas tabulas rindas',
+  'HTML-commentaar': 'HTML komentāri',
+  'leestekens met een backslash': 'pieturzīmes ar atpakaļvērstu slīpsvītru',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Mermaid diagrammu neizdevās attēlot. Tās pirmkods ir redzams zemāk.',
   'A4 · Sprekersnotities': 'A4 · Runātāja piezīmes',
   'Titeldia': 'Titulslaids',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

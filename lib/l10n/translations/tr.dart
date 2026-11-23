@@ -2398,6 +2398,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      '{n}. satırdaki kod bloğunun kapanış ayracı eksik. OciDeck geri kalanını kod olarak okur.',
+  'losse of onvolledige tabelregels': 'bağımsız veya eksik tablo satırları',
+  'HTML-commentaar': 'HTML yorumları',
+  'leestekens met een backslash':
+      'ters eğik çizgiyle kaçırılmış noktalama işaretleri',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Mermaid diyagramı görüntülenemedi. Kaynak kodu aşağıda gösteriliyor.',
   'A4 · Sprekersnotities': 'A4 · Konuşmacı notları',
   'Titeldia': 'Başlık slaytı',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

@@ -453,6 +453,22 @@ Future<bool> _smartPasteDocument(
   return true;
 }
 
+Widget? _unclosedFenceNotice(BuildContext context, String source) {
+  final line = unclosedVisualFenceLine(source);
+  if (line == null) return null;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    child: Text(
+      context.l10n
+          .d(
+            'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.',
+          )
+          .replaceAll('{n}', '$line'),
+      style: Theme.of(context).textTheme.bodySmall,
+    ),
+  );
+}
+
 /// De live weergave naast de bron: hetzelfde document als de lezer tekent, in
 /// de documentstijl, met de anker- en bewerk-haken van de editor eraan.
 ///

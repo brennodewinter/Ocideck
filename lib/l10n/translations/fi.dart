@@ -1542,6 +1542,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Rivin {n} koodilohkosta puuttuu lopetusmerkintä. OciDeck lukee loput koodina.',
+  'losse of onvolledige tabelregels':
+      'irrallisia tai puutteellisia taulukkorivejä',
+  'HTML-commentaar': 'HTML-kommentteja',
+  'leestekens met een backslash': 'kenoviivalla suojattuja välimerkkejä',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Mermaid-kaaviota ei voitu näyttää. Sen lähdekoodi näkyy alla.',
   'A4 · Sprekersnotities': 'A4 · Puhujan muistiinpanot',
   'Titeldia': 'Otsikkodia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

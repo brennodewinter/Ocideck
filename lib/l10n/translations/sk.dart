@@ -1545,6 +1545,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Bloku kódu na riadku {n} chýba ukončovacia značka. OciDeck číta zvyšok ako kód.',
+  'losse of onvolledige tabelregels': 'samostatné alebo neúplné riadky tabuľky',
+  'HTML-commentaar': 'komentáre HTML',
+  'leestekens met een backslash': 'interpunkčné znamienka so spätnou lomkou',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Diagram Mermaid sa nepodarilo zobraziť. Jeho zdrojový kód je zobrazený nižšie.',
   'A4 · Sprekersnotities': 'A4 · Poznámky rečníka',
   'Titeldia': 'Titulná snímka',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

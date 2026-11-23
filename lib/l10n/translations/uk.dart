@@ -1556,6 +1556,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'У блоці коду в рядку {n} немає кінцевого роздільника. OciDeck читає решту як код.',
+  'losse of onvolledige tabelregels': 'окремі або неповні рядки таблиці',
+  'HTML-commentaar': 'коментарі HTML',
+  'leestekens met een backslash': 'розділові знаки зі зворотною косою рискою',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Не вдалося відобразити діаграму Mermaid. Нижче наведено її вихідний код.',
   'A4 · Sprekersnotities': 'A4 · Нотатки доповідача',
   'Titeldia': 'Титульний слайд',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

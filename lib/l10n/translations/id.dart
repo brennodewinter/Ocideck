@@ -1542,6 +1542,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Blok kode pada baris {n} tidak memiliki pembatas penutup. OciDeck membaca sisanya sebagai kode.',
+  'losse of onvolledige tabelregels': 'baris tabel lepas atau tidak lengkap',
+  'HTML-commentaar': 'komentar HTML',
+  'leestekens met een backslash':
+      'tanda baca yang diawali garis miring terbalik',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Diagram Mermaid tidak dapat ditampilkan. Kode sumbernya ditampilkan di bawah.',
   'A4 · Sprekersnotities': 'A4 · Catatan pembicara',
   'Titeldia': 'Slide judul',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

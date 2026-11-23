@@ -56,6 +56,7 @@ import '../state/settings_provider.dart'
 import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
 import '../utils/heading_anchors.dart';
+import '../utils/markdown_visual_compatibility.dart';
 import '../utils/document_front_matter.dart';
 import '../utils/file_extension.dart';
 import '../utils/image_search_paths.dart';
@@ -266,10 +267,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       onReveal: _jumpToMatch,
       searchMatches: _searchIndex.matches,
     );
-    // Bevat de body al bij het openen een constructie die de visuele editor niet
-    // verliesvrij aankan, dan start direct in de Bron-modus. De gebruiker hoeft
-    // niet eerst de visuele modus te zien falen om te begrijpen dat hij in de
-    // bron hoort te werken.
+    // Een formulier opent direct in de invulstand.
     if (!scanFormBlocks(initialBody).isEmpty) {
       _viewMode = _DocViewMode.fill;
     }
@@ -456,6 +454,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               color: theme.colorScheme.outlineVariant,
             ),
             if (_find.visible) _findBar(),
+            if (_viewMode == _DocViewMode.visual)
+              ?_unclosedFenceNotice(context, source),
             // Marker-melding + toepassingsverzoeken van de transcriptmodule
             // (#2511); voor een gewoon document rendert dit niets.
             const TranscriptDocumentExtras(),

@@ -1567,6 +1567,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Falta o delimitador de fecho no bloco de código da linha {n}. OciDeck lê o resto como código.',
+  'losse of onvolledige tabelregels':
+      'linhas de tabela isoladas ou incompletas',
+  'HTML-commentaar': 'comentários HTML',
+  'leestekens met een backslash':
+      'sinais de pontuação precedidos de uma barra invertida',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Não foi possível apresentar o diagrama Mermaid. O código-fonte é mostrado abaixo.',
   'A4 · Sprekersnotities': 'A4 · Notas do orador',
   'Titeldia': 'Diapositivo de título',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

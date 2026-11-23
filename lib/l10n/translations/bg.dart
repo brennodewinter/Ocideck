@@ -1561,6 +1561,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Кодовият блок на ред {n} няма затварящ разделител. OciDeck чете остатъка като код.',
+  'losse of onvolledige tabelregels':
+      'самостоятелни или непълни редове на таблица',
+  'HTML-commentaar': 'HTML коментари',
+  'leestekens met een backslash':
+      'пунктуационни знаци с предхождаща обратна наклонена черта',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Диаграмата Mermaid не можа да бъде показана. По-долу е показан изходният ѝ код.',
   'A4 · Sprekersnotities': 'A4 · Бележки за лектора',
   'Titeldia': 'Заглавен слайд',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

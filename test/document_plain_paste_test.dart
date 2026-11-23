@@ -12,6 +12,7 @@ import 'package:ocideck/state/deck_provider.dart' show imageServiceProvider;
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
+import 'package:ocideck/widgets/reader/doc_mermaid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/pump_until.dart';
@@ -30,6 +31,7 @@ void main() {
     WidgetTester tester, {
     required String clipboardText,
     String? clipboardHtml,
+    String source = 'Eerste zin.\n\nTweede zin.\n',
   }) async {
     await tester.binding.setSurfaceSize(const Size(1300, 900));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -49,7 +51,7 @@ void main() {
     addTearDown(() => debugClipboardHtmlReader = null);
 
     final notifier = DocumentNotifier()
-      ..loadDocument(MarkdownDocument.parse('Eerste zin.\n\nTweede zin.\n'));
+      ..loadDocument(MarkdownDocument.parse(source));
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -77,6 +79,23 @@ void main() {
     );
     return notifier;
   }
+
+  testWidgets('Visueel verklaart een onafgesloten codeblok met regelnummer', (
+    tester,
+  ) async {
+    await pumpEditor(
+      tester,
+      clipboardText: '',
+      source: '# Kop\n\n```\nvoorbeeld```\n\n## Vervolg',
+    );
+    final warning = find.text(
+      'Het codeblok op regel 3 mist een sluitregel. OciDeck leest de rest als code.',
+    );
+    expect(warning, findsOneWidget);
+    await tester.tap(find.text('Bron'));
+    await tester.pumpAndSettle();
+    expect(warning, findsNothing);
+  });
 
   Future<void> sendPlainPasteChord(WidgetTester tester) async {
     await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
@@ -106,6 +125,38 @@ void main() {
     await tester.tap(find.byType(TextField).first);
     await tester.pump();
   }
+
+  testWidgets('slim plakken houdt de kop na een Mermaid-diagram visueel', (
+    tester,
+  ) async {
+    final notifier = await pumpEditor(
+      tester,
+      source: '',
+      clipboardText: '```mermaid\nflowchart TB\nA --> B\n```\n\n## Vervolg',
+      clipboardHtml:
+          '<pre><code class="language-mermaid">'
+          'flowchart TB\nA --&gt; B\n</code></pre><h2>Vervolg</h2>',
+    );
+    await tester.tap(find.byType(QuillEditor));
+    await tester.pump();
+    await sendPasteChord(tester);
+    await pumpUntil(
+      tester,
+      () => notifier.currentState.document?.body.contains('Vervolg') ?? false,
+      reason: 'de geplakte tekst kwam niet in het document terecht',
+    );
+
+    final controller = tester
+        .widget<WysiwygNotesField>(find.byType(WysiwygNotesField))
+        .controller;
+    expect(find.byType(DocMermaidView), findsOneWidget);
+    expect(
+      controller.document.toDelta().operations.any(
+        (op) => op.attributes?['header'] == 2,
+      ),
+      isTrue,
+    );
+  });
 
   testWidgets(
     'slimme plak zet klembord-HTML om naar Markdown (contrastroute)',

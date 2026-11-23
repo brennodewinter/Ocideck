@@ -1548,6 +1548,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Kodo blokui {n} eilutėje trūksta uždarymo žymos. OciDeck likusią dalį skaito kaip kodą.',
+  'losse of onvolledige tabelregels':
+      'atskiros arba neišsamios lentelės eilutės',
+  'HTML-commentaar': 'HTML komentarai',
+  'leestekens met een backslash':
+      'skyrybos ženklai po atvirkštinio pasvirojo brūkšnio',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Nepavyko parodyti „Mermaid“ diagramos. Jos pradinis kodas rodomas toliau.',
   'A4 · Sprekersnotities': 'A4 · Pranešėjo pastabos',
   'Titeldia': 'Pavadinimo skaidrė',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../services/mermaid_theme.dart';
 import '../../theme/app_theme.dart';
@@ -129,7 +130,18 @@ class _DocMermaidViewState extends State<DocMermaidView> {
           }
         }
         if (snap.connectionState != ConnectionState.done) return _loading();
-        return widget.fallback;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.l10n.d(
+                'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.',
+              ),
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            widget.fallback,
+          ],
+        );
       },
     );
   }

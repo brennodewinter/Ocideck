@@ -1558,6 +1558,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Il-blokka tal-kodiċi fil-linja {n} m’għandhiex delimitatur tal-għeluq. OciDeck jaqra l-bqija bħala kodiċi.',
+  'losse of onvolledige tabelregels':
+      'ringieli tat-tabella separati jew mhux kompluti',
+  'HTML-commentaar': 'kummenti HTML',
+  'leestekens met een backslash':
+      'sinjali tal-punteġġjatura bi slash bil-maqlub qabilhom',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Id-dijagramma Mermaid ma setgħetx tintwera. Il-kodiċi sors tagħha jidher hawn taħt.',
   'A4 · Sprekersnotities': 'A4 · Noti tal-kelliem',
   'Titeldia': 'Pjastra tat-titlu',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

@@ -1556,6 +1556,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Blocului de cod de la linia {n} îi lipsește delimitatorul de închidere. OciDeck citește restul ca pe cod.',
+  'losse of onvolledige tabelregels': 'rânduri de tabel izolate sau incomplete',
+  'HTML-commentaar': 'comentarii HTML',
+  'leestekens met een backslash':
+      'semne de punctuație precedate de o bară oblică inversă',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Diagrama Mermaid nu a putut fi afișată. Codul său sursă este afișat mai jos.',
   'A4 · Sprekersnotities': 'A4 · Note pentru vorbitor',
   'Titeldia': 'Diapozitiv de titlu',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

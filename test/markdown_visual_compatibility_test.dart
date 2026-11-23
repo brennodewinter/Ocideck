@@ -3,6 +3,12 @@ import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/utils/markdown_visual_compatibility.dart';
 
 void main() {
+  test('meldt het openingsnummer van een onafgesloten codeblok', () {
+    expect(unclosedVisualFenceLine('# Kop\n\n~~~~\n~~~\n## Vervolg'), 3);
+    expect(unclosedVisualFenceLine('# Kop\n\n~~~\n~~~~\n## Vervolg'), isNull);
+    expect(unclosedVisualFenceLine('<!--\n```\n-->\n## Vervolg'), isNull);
+  });
+
   group('sourceFragmentRanges wijst de regels aan die als bronblok reizen', () {
     test('detecteert constructies die niet verliesvrij als tekst reizen', () {
       final ranges = sourceFragmentRanges(

@@ -1552,6 +1552,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'W bloku kodu w wierszu {n} brakuje znacznika zamykającego. OciDeck odczytuje resztę jako kod.',
+  'losse of onvolledige tabelregels': 'samodzielne lub niepełne wiersze tabeli',
+  'HTML-commentaar': 'komentarze HTML',
+  'leestekens met een backslash':
+      'znaki interpunkcyjne poprzedzone ukośnikiem odwrotnym',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Nie udało się wyświetlić diagramu Mermaid. Poniżej widać jego kod źródłowy.',
   'A4 · Sprekersnotities': 'A4 · Notatki prezentera',
   'Titeldia': 'Slajd tytułowy',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

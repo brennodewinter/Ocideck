@@ -1542,6 +1542,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Blok kode v vrstici {n} nima zaključnega ločila. OciDeck prebere preostanek kot kodo.',
+  'losse of onvolledige tabelregels': 'ločene ali nepopolne vrstice tabele',
+  'HTML-commentaar': 'komentarji HTML',
+  'leestekens met een backslash': 'ločila s predhodno poševnico nazaj',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Diagrama Mermaid ni bilo mogoče prikazati. Njegova izvorna koda je prikazana spodaj.',
   'A4 · Sprekersnotities': 'A4 · Opombe govorca',
   'Titeldia': 'Naslovni diapozitiv',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

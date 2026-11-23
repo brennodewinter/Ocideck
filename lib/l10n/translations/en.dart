@@ -6359,6 +6359,13 @@ const _dutchSourceAddEn = {
       'That need not be wrong — the test was carried out while that version applied. The report records what was actually used.',
   'geen versienummer': 'no version number',
   'Bron': 'Source',
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'The code block on line {n} is missing a closing fence. OciDeck reads the rest as code.',
+  'losse of onvolledige tabelregels': 'stray or incomplete table rows',
+  'HTML-commentaar': 'HTML comments',
+  'leestekens met een backslash': 'backslash-escaped punctuation',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'The Mermaid diagram could not be displayed. Its source code is shown below.',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'The versions in this copy. A pentest report should state what was tested against — and which version that was.',
   'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':

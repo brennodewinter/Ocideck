@@ -612,6 +612,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Dem Codeblock in Zeile {n} fehlt die Abschlusszeile. OciDeck liest den Rest als Code.',
+  'losse of onvolledige tabelregels':
+      'einzelne oder unvollständige Tabellenzeilen',
+  'HTML-commentaar': 'HTML-Kommentare',
+  'leestekens met een backslash': 'Satzzeichen mit vorangestelltem Backslash',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Das Mermaid-Diagramm konnte nicht angezeigt werden. Darunter steht der Quellcode.',
   'A4 · Sprekersnotities': 'A4 · Sprechernotizen',
   'Titeldia': 'Titelfolie',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

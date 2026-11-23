@@ -1542,6 +1542,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Em Codeblock i Zeile {n} fählt d Schlusszeile. OciDeck list de Räscht als Code.',
+  'losse of onvolledige tabelregels':
+      'einzelni oder unvollständigi Tabälleziile',
+  'HTML-commentaar': 'HTML-Kommentär',
+  'leestekens met een backslash': 'Satzzeiche mit emene Backslash',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'S Mermaid-Diagramm het nöd chöne aazeigt werde. De Quellcode stoht unde.',
   'A4 · Sprekersnotities': 'A4 · Sprächernotize',
   'Titeldia': 'Titelfolie',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

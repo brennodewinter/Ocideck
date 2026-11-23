@@ -1534,6 +1534,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Real {n} oleval koodiplokil puudub lõpetav eraldaja. OciDeck loeb ülejäänut koodina.',
+  'losse of onvolledige tabelregels': 'eraldiseisvad või puudulikud tabeliread',
+  'HTML-commentaar': 'HTML-i kommentaarid',
+  'leestekens met een backslash': 'kurakriipsuga varjestatud kirjavahemärgid',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Mermaid-diagrammi ei saanud kuvada. Selle lähtekood on allpool.',
   'A4 · Sprekersnotities': 'A4 · Esineja märkmed',
   'Titeldia': 'Tiitelslaid',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

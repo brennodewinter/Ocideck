@@ -1553,6 +1553,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'In linea {n} clausula segmenti codicis deest. OciDeck reliqua ut codicem legit.',
+  'losse of onvolledige tabelregels': 'ordines tabulae separati vel imperfecti',
+  'HTML-commentaar': 'commentaria HTML',
+  'leestekens met een backslash':
+      'signa interpungendi post lineolam obliquam inversam',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Diagramma Mermaid ostendi non potuit. Codex fontis infra ostenditur.',
   'A4 · Sprekersnotities': 'A4 · Notae oratoris',
   'Titeldia': 'Scheda tituli',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

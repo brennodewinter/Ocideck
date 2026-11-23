@@ -611,6 +611,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Het codeblok op regel {n} mist een sluitregel. OciDeck leest de rest als code.':
+      'Al blocco di codice alla riga {n} manca il delimitatore di chiusura. OciDeck legge il resto come codice.',
+  'losse of onvolledige tabelregels': 'righe di tabella isolate o incomplete',
+  'HTML-commentaar': 'commenti HTML',
+  'leestekens met een backslash':
+      'punteggiatura preceduta da una barra inversa',
+  'Het Mermaid-diagram kon niet worden weergegeven. Hieronder staat de broncode.':
+      'Impossibile visualizzare il diagramma Mermaid. Il codice sorgente è riportato qui sotto.',
   'A4 · Sprekersnotities': 'A4 · Note del relatore',
   'Titeldia': 'Diapositiva del titolo',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
