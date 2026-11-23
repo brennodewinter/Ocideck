@@ -17,6 +17,51 @@ SCRIPT_TIMEOUT_S = 90
 
 
 class ResourceToolchainTest(unittest.TestCase):
+    def test_macos_clean_restores_locked_packages_before_build_checks(self):
+        for reject_packages in (False, True):
+            with self.subTest(reject_packages=reject_packages), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                binaries = root / 'bin'
+                binaries.mkdir()
+                (root / '.dart_tool').mkdir()
+                (root / '.dart_tool/package_config.json').write_text('{}')
+                commands = {
+                    'uname': '#!/bin/sh\necho Darwin\n',
+                    'git': '#!/bin/sh\ncase "$*" in *--git-path*) echo .git/ocideck-notary;; *) echo ' + SHA + ';; esac\n',
+                    'security': '#!/bin/sh\necho "Developer ID Application: Brenno de Winter (AMT83P4B3L)"\n',
+                    'python3': '#!/bin/sh\nexit 0\n',
+                    'flutter': '''#!/bin/sh
+case "$*" in
+  clean) rm -rf .dart_tool;;
+  'pub get --enforce-lockfile')
+    [ "$REJECT_PACKAGES" = yes ] && exit 29
+    mkdir .dart_tool
+    echo '{}' > .dart_tool/package_config.json;;
+  *) exit 98;;
+esac
+''',
+                    'make': '''#!/bin/sh
+[ "$*" = build-macos ] || exit 99
+[ -f .dart_tool/package_config.json ] || exit 97
+touch build-entered
+exit 17
+''',
+                }
+                for name in ('xcrun', 'codesign', 'ditto', 'otool', 'install_name_tool'):
+                    commands[name] = '#!/bin/sh\nexit 0\n'
+                for name, source in commands.items():
+                    executable = binaries / name
+                    executable.write_text(source)
+                    executable.chmod(0o700)
+                result = subprocess.run(['bash', str(ROOT / 'scripts/notarize_macos.sh'),
+                    '--source-root', str(root)], env=dict(os.environ,
+                    PATH=str(binaries) + os.pathsep + os.environ['PATH'],
+                    REJECT_PACKAGES='yes' if reject_packages else 'no'),
+                    capture_output=True, text=True, timeout=SCRIPT_TIMEOUT_S)
+                self.assertEqual(result.returncode, 29 if reject_packages else 17,
+                                 result.stdout + result.stderr)
+                self.assertEqual((root / 'build-entered').exists(), not reject_packages)
+
     def test_pure_build_checks_do_not_start_native_hooks(self):
         targets = {
             'check-toolchain': ['--disable-dart-dev', 'tool/check_toolchain.dart'],
