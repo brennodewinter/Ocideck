@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:path/path.dart' as p;
 import '../../services/ai_client_service.dart';
+import '../../services/asset_staging.dart';
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
 import '../../services/download_delivery.dart';
@@ -28,6 +29,7 @@ import '../../platform/platform_features.dart';
 import '../../utils/asset_destination.dart';
 import '../../utils/atomic_file.dart';
 import '../../utils/log.dart';
+import '../../utils/user_facing_error.dart';
 import '../safe_svg_image.dart';
 import '../../theme/app_theme.dart';
 import 'ai_image_outbound_dialog.dart';
@@ -158,6 +160,8 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
   String _query = '';
   String? _descEditing; // path the description field currently edits
   bool _loading = true;
+  bool _pasting = false;
+  String? _pasteError;
   bool _justCopied = false; // korte feedback na kopiëren naar klembord
   bool _untaggedOnly = false; // toon alleen afbeeldingen zonder tags
   bool _deduping = false; // duplicaten-opruimactie bezig
@@ -183,6 +187,8 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
   final _descriptionController = TextEditingController();
   final _searchController = TextEditingController();
   final _focusNode = FocusNode();
+
+  bool get _supportsPaste => !widget.manageOnly || supportsLocalProjectFolders;
 
   @override
   void initState() {
@@ -223,13 +229,14 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
             _moveSelection(3),
         const SingleActivator(LogicalKeyboardKey.arrowUp): () =>
             _moveSelection(-3),
-        // Plakken voegt een klembordafbeelding aan het archief toe. Binnen de
-        // tekstvelden wint het veld zelf: zijn eigen plak-binding zit dichter
-        // bij de focus en handelt tekst af.
-        const SingleActivator(LogicalKeyboardKey.keyV, control: true): () =>
-            _pasteImageIntoArchive(),
-        const SingleActivator(LogicalKeyboardKey.keyV, meta: true): () =>
-            _pasteImageIntoArchive(),
+        // Tekstvelden houden hun eigen plakbinding. Met focus op de dialoog
+        // importeert dezelfde sneltoets een klembordafbeelding.
+        if (_supportsPaste) ...{
+          const SingleActivator(LogicalKeyboardKey.keyV, control: true):
+              _pasteClipboardImage,
+          const SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+              _pasteClipboardImage,
+        },
       },
       child: Focus(
         focusNode: _focusNode,
@@ -264,6 +271,8 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
                               ],
                             ),
                     ),
+                    if (_pasteError case final message?)
+                      _carouselPasteFeedback(message),
                     _buildFooter(),
                   ],
                 ),
@@ -275,6 +284,14 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
     );
   }
 }
+
+Widget _carouselPasteFeedback(String message) => Semantics(
+  liveRegion: true,
+  child: Padding(
+    padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+    child: Text(message, style: TextStyle(color: ImagePickerPalette.text)),
+  ),
+);
 
 // ── Bestandsgrootte widget ────────────────────────────────────────────────────
 

@@ -6,6 +6,12 @@ part of '../image_carousel_picker.dart';
 
 extension _CarouselActions on _ImageCarouselPickerState {
   Future<void> _loadImages() async {
+    // De webkiezer retourneert gekozen bestanden direct als mem:-sleutel.
+    // Zijn lokale bestandsraster kan zulke paden niet scannen of tonen.
+    if (!supportsLocalProjectFolders) {
+      _rebuild(() => _loading = false);
+      return;
+    }
     // Begrensd, gebatcht en annuleerbaar via een aparte service (#1049): een
     // grote of gemounte bibliotheek zou anders de interface lang blokkeren. Bij
     // sluiten van de dialoog stopt de scan doordat `mounted` false wordt.
@@ -729,51 +735,30 @@ extension _CarouselActions on _ImageCarouselPickerState {
     await _refreshAndSelect(added);
   }
 
-  /// Ctrl/Cmd+V: schrijf de klembordafbeelding als `pasted_<tijdstempel>.png`
-  /// in de eerste bereikbare zoekwortel — dezelfde naamconventie als
-  /// [ImageService.pasteImageDetailed]. Werkt in beide modi: in kiesmodus is
-  /// de eerste wortel de images/-map van het deck.
-  Future<void> _pasteImageIntoArchive() async {
-    if (!supportsLocalProjectFolders) return;
-    final l10n = context.l10n;
-    Uint8List? bytes;
+  Future<void> _pasteClipboardImage() async {
+    if (!_supportsPaste || _loading || _pasting) return;
+    _rebuild(() {
+      _pasting = true;
+      _pasteError = null;
+    });
     try {
-      bytes = await Pasteboard.image;
-    } catch (e) {
-      logWarning('ImageCarouselPicker._pasteImageIntoArchive', e);
-    }
-    if (!mounted) return;
-    if (bytes == null || bytes.isEmpty) {
-      _showSnack(l10n.d('Geen afbeelding op het klembord.'));
-      return;
-    }
-    if (bytes.length > ImageService.maxImageBytes ||
-        !ImageService.looksLikeImage(bytes)) {
-      _showSnack(
-        l10n.d(
-          'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.',
-        ),
+      final (:path, :error) = await _importCarouselClipboard(
+        roots: [...widget.searchPaths, ..._extraRoots],
+        manageOnly: widget.manageOnly,
+        l10n: context.l10n,
+        isActive: () => mounted,
       );
-      return;
+      if (!mounted) return;
+      if (error != null) _rebuild(() => _pasteError = error);
+      if (path == null) return;
+      if (supportsLocalProjectFolders) {
+        await _refreshAndSelect(path);
+      } else {
+        await _close(ImagePickResult(path, ''));
+      }
+    } finally {
+      if (mounted) _rebuild(() => _pasting = false);
     }
-    final roots = [...widget.searchPaths, ..._extraRoots];
-    final dest = await imageArchiveDestination(roots);
-    if (!mounted) return;
-    if (dest == null) {
-      _showSnack(
-        l10n.d(
-          'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.',
-        ),
-      );
-      return;
-    }
-    final added = await adoptImageBytesIntoArchive(bytes, dest: dest);
-    if (!mounted) return;
-    if (added == null) {
-      _showSnack(l10n.d('Kon de afbeelding niet opslaan.'));
-      return;
-    }
-    await _refreshAndSelect(added);
   }
 
   /// Rescan het archief en selecteer [path] — de afslag na elke toevoeging,
@@ -797,6 +782,72 @@ extension _CarouselActions on _ImageCarouselPickerState {
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
+}
+
+/// Lees één klembordafbeelding en sla haar op via het archief, staging of
+/// de geheugenopslag van de webkiezer.
+Future<({String? path, String? error})> _importCarouselClipboard({
+  required List<String> roots,
+  required bool manageOnly,
+  required AppLocalizations l10n,
+  required bool Function() isActive,
+}) async {
+  Uint8List? bytes;
+  try {
+    bytes = await Pasteboard.image;
+  } catch (error) {
+    logWarning('ImageCarouselPicker: read clipboard', error);
+  }
+  if (!isActive()) return (path: null, error: null);
+  if (bytes == null || bytes.isEmpty) {
+    return (path: null, error: l10n.d('Geen afbeelding op het klembord.'));
+  }
+  if (bytes.length > ImageService.maxImageBytes ||
+      !ImageService.looksLikeImage(bytes)) {
+    return (
+      path: null,
+      error: l10n.d(
+        'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.',
+      ),
+    );
+  }
+  if (!supportsLocalProjectFolders) {
+    final outcome = ImageService.storeWebImage(bytes, name: 'geplakt.png');
+    return (
+      path: outcome.path,
+      error: outcome.path == null ? webAssetBudgetMessage(l10n) : null,
+    );
+  }
+
+  Directory? dest;
+  try {
+    dest = await imageArchiveDestination(roots);
+  } on FileSystemException catch (error) {
+    logWarning('ImageCarouselPicker: paste destination', error);
+  }
+  if (!isActive()) return (path: null, error: null);
+  if (dest == null && manageOnly) {
+    return (
+      path: null,
+      error: l10n.d(
+        'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.',
+      ),
+    );
+  }
+  var path = dest == null
+      ? null
+      : await adoptImageBytesIntoArchive(bytes, dest: dest);
+  if (path == null && !manageOnly && isActive()) {
+    path = await AssetStaging.stageBytes(
+      bytes,
+      subdir: 'images',
+      filename: 'pasted_${DateTime.now().microsecondsSinceEpoch}.png',
+    );
+  }
+  return (
+    path: path,
+    error: path == null ? l10n.d('Kon de afbeelding niet opslaan.') : null,
+  );
 }
 
 /// De map waarin een toegevoegde afbeelding landt: de eerste bereikbare

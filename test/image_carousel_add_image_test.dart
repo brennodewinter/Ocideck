@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as p;
+import 'package:ocideck/services/asset_staging.dart';
 import 'package:ocideck/services/caption_service.dart';
 import 'package:ocideck/services/description_service.dart';
 import 'package:ocideck/services/image_service.dart';
@@ -211,7 +213,11 @@ void main() {
       while (tester.takeException() != null) {}
     }
 
-    Future<void> pumpPicker(WidgetTester tester, {required bool manage}) async {
+    Future<void> pumpPicker(
+      WidgetTester tester, {
+      required bool manage,
+      List<String>? searchPaths,
+    }) async {
       File('${tempDir.path}/alpha.png').writeAsBytesSync(_onePixelPng);
       await tester.binding.setSurfaceSize(const Size(1400, 900));
       addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -221,7 +227,7 @@ void main() {
             child: MaterialApp(
               home: Scaffold(
                 body: ImageCarouselPicker(
-                  searchPaths: [tempDir.path],
+                  searchPaths: searchPaths ?? [tempDir.path],
                   captionService: CaptionService(),
                   descriptionService: DescriptionService(),
                   manageOnly: manage,
@@ -251,6 +257,40 @@ void main() {
       await pumpPicker(tester, manage: false);
       expect(find.text('Bladeren…'), findsOneWidget);
       expect(find.text('Afbeelding toevoegen…'), findsNothing);
+    });
+
+    testWidgets('plakknop werkt vanuit zoeken zonder bibliotheekmap (#3120)', (
+      tester,
+    ) async {
+      final staging = p.join(tempDir.path, 'staging');
+      AssetStaging.overrideRootForTest(staging);
+      addTearDown(() => AssetStaging.overrideRootForTest(null));
+      const channel = MethodChannel('pasteboard');
+      final messenger = tester.binding.defaultBinaryMessenger;
+      messenger.setMockMethodCallHandler(channel, (call) async {
+        if (call.method != 'image') return null;
+        if (!Platform.isWindows) return _onePixelPng;
+        final file = File(p.join(tempDir.path, 'clipboard.png'))
+          ..writeAsBytesSync(_onePixelPng);
+        return file.path;
+      });
+      addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+
+      await pumpPicker(tester, manage: false, searchPaths: []);
+      await tester.tap(find.byType(TextField).first);
+      await tester.pump();
+      await tester.runAsync(() => tester.tap(find.text('Afbeelding plakken')));
+      final previewName = find.textContaining(RegExp(r'^pasted_\d+\.png$'));
+      await pumpUntil(tester, () => previewName.evaluate().isNotEmpty);
+
+      final files = Directory(
+        staging,
+      ).listSync(recursive: true).whereType<File>();
+      final image = files.single;
+      expect(AssetStaging.isStagedPath(image.path), isTrue);
+      expect(image.readAsBytesSync(), _onePixelPng);
+      expect(find.text(p.basename(image.path)), findsWidgets);
+      expect(find.text('Kiezen'), findsOneWidget);
     });
   });
 
