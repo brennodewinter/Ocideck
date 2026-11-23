@@ -334,7 +334,7 @@ Widget _tabScope(TabInfo tab) {
               documentNotifier.mounted ? documentNotifier : DocumentNotifier(),
         ),
       ],
-      child: const DocumentEditorScreen(),
+      child: _BlankFileEditor(tab: tab, child: const DocumentEditorScreen()),
     );
   }
   return ProviderScope(
@@ -378,14 +378,14 @@ Widget _tabScope(TabInfo tab) {
       ),
       privacyExportSummaryProvider.overrideWith(computePrivacyExportSummary),
     ],
-    child: _TabContent(isLearningSession: tab.learningSession != null),
+    child: _TabContent(tab: tab),
   );
 }
 
 class _TabContent extends ConsumerWidget {
-  const _TabContent({required this.isLearningSession});
+  const _TabContent({required this.tab});
 
-  final bool isLearningSession;
+  final TabInfo tab;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -403,12 +403,58 @@ class _TabContent extends ConsumerWidget {
     );
     // De URL waar een web-geopend deck vandaan kwam, als resolutiebasis voor
     // relatieve media in élke render in dit tabblad (#2282).
+    final isLearningSession = tab.learningSession != null;
     final Widget child = playOnly || isLearningSession
         ? _PlayOnlyScreen(resumeFromSelection: isLearningSession)
-        : _MainLayout(exportService: ExportService());
+        : _BlankFileEditor(
+            tab: tab,
+            child: _MainLayout(exportService: ExportService()),
+          );
     return DeckAssetScope(
       deckUrl: ref.watch(deckProvider.select((s) => s.deck?.remoteAssetBase)),
       child: child,
+    );
+  }
+}
+
+class _BlankFileEditor extends ConsumerWidget {
+  const _BlankFileEditor({required this.tab, required this.child});
+
+  final TabInfo tab;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (tab.kind.isDocument) {
+      ref.watch(documentProvider.select((_) => tab.canSwitchBlankKind));
+    } else {
+      ref.watch(deckProvider.select((_) => tab.canSwitchBlankKind));
+      ref.watch(editorProvider.select((state) => state.hasMarkdownDraft));
+    }
+    final l10n = context.l10n;
+    return Column(
+      children: [
+        Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: tab.canSwitchBlankKind
+              ? TextButton.icon(
+                  icon: const Icon(Icons.swap_horiz),
+                  label: Text(
+                    tab.kind.isDocument
+                        ? l10n.d('Wissel naar presentatie')
+                        : l10n.d('Wissel naar document'),
+                  ),
+                  onPressed: ref.watch(saveProgressProvider) != null
+                      ? null
+                      : () => switchBlankFileKind(
+                          ref.read(tabsProvider.notifier),
+                          tab.id,
+                        ),
+                )
+              : const SizedBox.shrink(),
+        ),
+        Expanded(child: child),
+      ],
     );
   }
 }

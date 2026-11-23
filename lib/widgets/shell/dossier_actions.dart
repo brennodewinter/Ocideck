@@ -22,6 +22,11 @@ class _DossierController {
   final Map<String, String> _entryOpenPaths = {};
   final Map<String, DossierIntegrityStatus> _dossierVerification = {};
 
+  void _newBlankFile() {
+    newBlankFile(ref.read(tabsProvider.notifier));
+    if (_showDossier) _refreshDossier(() => _showDossier = false);
+  }
+
   Widget _dossierWorkspace(TabsState tabsState) => Column(
     children: [
       _AppTabBar(

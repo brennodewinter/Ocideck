@@ -1561,6 +1561,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Wissel naar presentatie': 'Премини към презентация',
+  'Wissel naar document': 'Премини към документ',
   'A4 · Sprekersnotities': 'A4 · Бележки за лектора',
   'Titeldia': 'Заглавен слайд',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

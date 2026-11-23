@@ -319,6 +319,8 @@ class TabInfo {
   /// Credentials and learner profile data never live here.
   LearningSessionRef? learningSession;
 
+  Deck? _blankPresentation;
+
   TabInfo({
     required this.id,
     required this.recoveryId,

@@ -611,6 +611,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Wissel naar presentatie': 'Passa alla presentazione',
+  'Wissel naar document': 'Passa al documento',
   'A4 · Sprekersnotities': 'A4 · Note del relatore',
   'Titeldia': 'Diapositiva del titolo',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

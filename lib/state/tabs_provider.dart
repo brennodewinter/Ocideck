@@ -78,6 +78,7 @@ part 'tabs_provider_git_native.dart';
 part 'tabs_provider_git_review.dart';
 part 'tabs_provider_recovery.dart';
 part 'tabs_provider_new_document.dart';
+part 'tabs_provider_blank_file.dart';
 part 'tabs_provider_learning.dart';
 
 const _uuid = Uuid();

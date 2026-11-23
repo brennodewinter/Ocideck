@@ -644,6 +644,8 @@ class _AppShellState extends ConsumerState<AppShell> {
         _onlyWhenShellIsOnTop(_openActive),
     const SingleActivator(LogicalKeyboardKey.keyO, meta: true):
         _onlyWhenShellIsOnTop(_openActive),
+    for (final shortcut in _newBlankFileShortcuts)
+      shortcut: _onlyWhenShellIsOnTop(_dossierController._newBlankFile),
     const SingleActivator(LogicalKeyboardKey.keyF, control: true):
         _onlyWhenShellIsOnTop(() => _requestDocumentFind(showReplace: false)),
     const SingleActivator(LogicalKeyboardKey.keyF, meta: true):

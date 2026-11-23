@@ -1542,6 +1542,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Wissel naar presentatie': 'Vaihda esitykseen',
+  'Wissel naar document': 'Vaihda asiakirjaan',
   'A4 · Sprekersnotities': 'A4 · Puhujan muistiinpanot',
   'Titeldia': 'Otsikkodia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Wissel naar presentatie': 'Athraigh go cur i láthair',
+  'Wissel naar document': 'Athraigh go doiciméad',
   'A4 · Sprekersnotities': 'A4 · Nótaí cainteora',
   'Titeldia': 'Sleamhnán teidil',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

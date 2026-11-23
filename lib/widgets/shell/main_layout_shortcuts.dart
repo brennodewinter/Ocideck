@@ -3,6 +3,21 @@ part of '../app_shell.dart';
 // De sneltoetsbindingen van het hoofdscherm, als top-level helper zodat ze
 // niet meetellen voor _MainLayoutState. Alle imports staan in ../app_shell.dart.
 
+const _newBlankFileShortcuts = [
+  SingleActivator(
+    LogicalKeyboardKey.keyN,
+    control: true,
+    shift: true,
+    includeRepeats: false,
+  ),
+  SingleActivator(
+    LogicalKeyboardKey.keyN,
+    meta: true,
+    shift: true,
+    includeRepeats: false,
+  ),
+];
+
 /// Sneltoetsen van het hoofdscherm (opslaan, undo/redo, zoeken).
 Map<ShortcutActivator, VoidCallback> _shortcutBindings(
   _MainLayoutState state,

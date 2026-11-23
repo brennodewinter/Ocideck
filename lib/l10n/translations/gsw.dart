@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Wissel naar presentatie': 'Zur Präsentation wächsle',
+  'Wissel naar document': 'Zum Dokument wächsle',
   'A4 · Sprekersnotities': 'A4 · Sprächernotize',
   'Titeldia': 'Titelfolie',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

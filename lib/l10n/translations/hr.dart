@@ -1546,6 +1546,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Wissel naar presentatie': 'Prijeđi na prezentaciju',
+  'Wissel naar document': 'Prijeđi na dokument',
   'A4 · Sprekersnotities': 'A4 · Bilješke govornika',
   'Titeldia': 'Naslovni slajd',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

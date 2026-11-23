@@ -1565,6 +1565,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Wissel naar presentatie': 'Μετάβαση σε παρουσίαση',
+  'Wissel naar document': 'Μετάβαση σε έγγραφο',
   'A4 · Sprekersnotities': 'A4 · Σημειώσεις ομιλητή',
   'Titeldia': 'Διαφάνεια τίτλου',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

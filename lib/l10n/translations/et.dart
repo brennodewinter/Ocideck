@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Wissel naar presentatie': 'Lülitu esitlusele',
+  'Wissel naar document': 'Lülitu dokumendile',
   'A4 · Sprekersnotities': 'A4 · Esineja märkmed',
   'Titeldia': 'Tiitelslaid',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

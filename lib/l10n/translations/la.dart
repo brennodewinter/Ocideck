@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Wissel naar presentatie': 'Ad praesentationem transi',
+  'Wissel naar document': 'Ad documentum transi',
   'A4 · Sprekersnotities': 'A4 · Notae oratoris',
   'Titeldia': 'Scheda tituli',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
