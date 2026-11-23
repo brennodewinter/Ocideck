@@ -428,57 +428,19 @@ class MarkdownService {
   static List<String> splitSlideBlocks(String body) {
     final lines = body.split('\n');
     final blocks = <String>[];
-    final current = <String>[];
-    String? fenceChar; // '`' or '~' while inside a fence, else null.
-    var fenceLen = 0; // de lengte van de openende rij, zie [isBareFence].
-    for (final line in lines) {
-      final trimmed = line.trimLeft();
-      if (fenceChar == null) {
-        if (line == '---') {
-          blocks.add(current.join('\n'));
-          current.clear();
-          continue;
-        }
-        if (trimmed.startsWith('```')) {
-          fenceChar = '`';
-          fenceLen = _leadingRun(trimmed, '`');
-        } else if (trimmed.startsWith('~~~')) {
-          fenceChar = '~';
-          fenceLen = _leadingRun(trimmed, '~');
-        }
-      } else if (isBareFence(trimmed, fenceChar) &&
-          trimmed.length >= fenceLen) {
-        // Alleen een rij die minstens even lang is sluit het blok. Een kortere
-        // rij binnenin is inhoud — precies waarvoor CommonMark langere fences
-        // heeft — en mag de slide dus niet in tweeën scheuren.
-        fenceChar = null;
-        fenceLen = 0;
-      }
-      current.add(line);
+    var start = 0;
+    for (final separator in deckSlideSeparatorLines(lines)) {
+      blocks.add(lines.getRange(start, separator).join('\n'));
+      start = separator + 1;
     }
-    blocks.add(current.join('\n'));
+    blocks.add(lines.getRange(start, lines.length).join('\n'));
     return blocks;
   }
 
-  /// Hoeveel [char]s [trimmed] achter elkaar begint.
-  static int _leadingRun(String trimmed, String char) {
-    var n = 0;
-    while (n < trimmed.length && trimmed[n] == char) {
-      n++;
-    }
-    return n;
-  }
-
   /// True when [trimmed] is a bare fence line: three or more of [fenceChar] and
-  /// nothing else. An opening ```` ```dart ```` carries an info string, so it
-  /// never reads as a closing fence.
-  static bool isBareFence(String trimmed, String fenceChar) {
-    if (trimmed.length < 3) return false;
-    for (var i = 0; i < trimmed.length; i++) {
-      if (trimmed[i] != fenceChar) return false;
-    }
-    return true;
-  }
+  /// nothing else. An opening fence carrying an info string cannot close it.
+  static bool isBareFence(String trimmed, String fenceChar) =>
+      isBareDeckCodeFence(trimmed, fenceChar);
 
   /// Cheap frontmatter probe for the disk-wide presentation scan: reads only the
   /// `--- … ---` header (no slide body, no Deck construction) and reports whether

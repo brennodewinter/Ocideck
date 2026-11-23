@@ -1,3 +1,4 @@
+import '../utils/deck_markdown_dashes.dart';
 import 'markdown_outline.dart';
 
 class MarkdownSourceBlock {
@@ -122,9 +123,9 @@ class MarkdownSourceDocument {
   MarkdownSourceBlock? blockAt(int offset) {
     if (blocks.isEmpty) return null;
     final safe = offset.clamp(0, source.length);
-    if (safe < blocks.first.start) return blocks.first;
-    for (final block in blocks) {
-      if (safe >= block.start && safe <= block.end) return block;
+    // De scheidingsregel hoort bij de voorgaande dia tot de volgende begint.
+    for (var index = 1; index < blocks.length; index++) {
+      if (safe < blocks[index].start) return blocks[index - 1];
     }
     return blocks.last;
   }
@@ -149,20 +150,23 @@ List<(int, int)> _slideRanges(String source) {
   final lines = source.split('\n');
   var offset = 0;
   var blockStart = 0;
-  var fenced = false;
-  var frontMatter = lines.first.trim() == '---';
+  final hasFrontMatter = lines.first.trim() == '---';
+  final frontMatterEnd = hasFrontMatter
+      ? lines.indexWhere((line) => line.trim() == '---', 1)
+      : -1;
+  final bodyStart = hasFrontMatter && frontMatterEnd < 0
+      ? lines.length
+      : frontMatterEnd + 1;
+  final separators = deckSlideSeparatorLines(lines, start: bodyStart).iterator;
+  var hasSeparator = separators.moveNext();
   for (var index = 0; index < lines.length; index++) {
-    final line = lines[index];
-    final trimmed = line.trim();
-    final lineEnd = offset + line.length;
-    if (index > 0 && frontMatter && trimmed == '---') {
-      frontMatter = false;
+    final lineEnd = offset + lines[index].length;
+    if (index == frontMatterEnd) {
       blockStart = lineEnd < source.length ? lineEnd + 1 : lineEnd;
-    } else if (!frontMatter && RegExp(r'^\s*```').hasMatch(line)) {
-      fenced = !fenced;
-    } else if (!frontMatter && !fenced && trimmed == '---') {
+    } else if (hasSeparator && index == separators.current) {
       ranges.add((blockStart, offset));
       blockStart = lineEnd < source.length ? lineEnd + 1 : lineEnd;
+      hasSeparator = separators.moveNext();
     }
     offset = lineEnd + 1;
   }

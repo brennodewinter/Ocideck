@@ -36,6 +36,34 @@ Tekst
     ]);
   });
 
+  test('code fences keep separator lines in the same slide (#3115)', () {
+    for (final fenced in [
+      '~~~yaml\n---\nname: A\n~~~',
+      '````markdown\n```\n---\nname: A\n````',
+    ]) {
+      final text = '---\nmarp: true\n---\n\n# Eerste\n\n$fenced\n---\n# Tweede';
+      final document = MarkdownSourceDocument.parse(text);
+
+      expect(document.blocks.map((block) => block.textIn(text).trim()), [
+        '# Eerste\n\n$fenced',
+        '# Tweede',
+      ]);
+      expect(document.blockAt(text.indexOf('# Tweede'))?.slideNumber, 2);
+    }
+  });
+
+  test('cursor on a separator stays with the preceding slide (#3115)', () {
+    const text = '# Eerste\r\n---\r\n# Tweede\r\n---\r\n# Derde';
+    final document = MarkdownSourceDocument.parse(text);
+    final separator = text.indexOf('---');
+    final second = text.indexOf('# Tweede');
+
+    for (var offset = separator; offset < second; offset++) {
+      expect(document.blockAt(offset)?.slideNumber, 1);
+    }
+    expect(document.blockAt(second)?.slideNumber, 2);
+  });
+
   test('replaceBlock patches only that source range', () {
     final before = MarkdownSourceDocument.parse(source);
     final second = before.blocks.last;
