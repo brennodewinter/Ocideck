@@ -234,6 +234,13 @@ void main() {
     expect(container.read(tabsProvider).tabs.length, 1);
     expect(container.read(tabsProvider).current?.isOpen, isFalse);
     expect(container.read(tabsProvider).current?.isDirty, isFalse);
+    // #3107: de terugval is hetzelfde Nieuw-scherm als bij een presentatie —
+    // het overblijvende tabblad is daarom een ongeopend decktabblad, geen
+    // documenttabblad dat op een lege editor stuit.
+    expect(
+      container.read(tabsProvider).current?.kind,
+      MarkdownKind.presentation,
+    );
   });
 
   // #2623: de deck-luisteraar van TabsNotifier zendt alleen uit als een
