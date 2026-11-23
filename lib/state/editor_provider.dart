@@ -201,8 +201,9 @@ class EditorNotifier extends StateNotifier<EditorState> {
     );
   }
 
-  void loadMarkdownSource(String content) {
+  void loadMarkdownSource(String content, {MarkdownScope? scope}) {
     state = state.copyWith(
+      markdownScope: scope,
       markdownBuffer: content,
       markdownBaseline: content,
       parseError: false,

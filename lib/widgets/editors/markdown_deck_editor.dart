@@ -445,22 +445,34 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       },
     );
 
-    if (choice?.choice == _ApplyChoice.edit && choice?.focusLine != null) {
+    if (mounted &&
+        choice?.choice == _ApplyChoice.edit &&
+        choice?.focusLine != null) {
       _jumpToLine(choice!.focusLine!);
     }
     return choice?.choice == _ApplyChoice.applyAnyway;
   }
 
-  Future<void> _applyMarkdown() async {
+  Future<void> _applyMarkdown({MarkdownScope? nextScope}) async {
+    final source = _ctrl.text;
+    final scope = widget.scope;
+    final apply = widget.onApply;
     final result = _runValidation();
     if (result.hasIssues) {
       final proceed = await _confirmApplyWithIssues(context, result);
-      if (!proceed) return;
+      if (!proceed ||
+          !mounted ||
+          _ctrl.text != source ||
+          widget.scope != scope) {
+        return;
+      }
     }
-    final ok = widget.onApply(_ctrl.text);
-    if (ok) {
-      _baselineContent = _ctrl.text;
+    if (!apply(source) || !mounted) return;
+    _baselineContent = source;
+    if (nextScope == null) {
       widget.onExitMarkdown();
+    } else {
+      widget.onScopeChanged(nextScope);
     }
   }
 
@@ -501,7 +513,6 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       widget.onExitMarkdown();
     } else if (choice == 2) {
       await _applyMarkdown();
-      widget.onExitMarkdown();
     }
   }
 
@@ -562,8 +573,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               TextButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  _applyMarkdown();
-                  widget.onScopeChanged(scope);
+                  _applyMarkdown(nextScope: scope);
                 },
                 child: Text(l10n.d('Toepassen')),
               ),

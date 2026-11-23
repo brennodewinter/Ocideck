@@ -306,11 +306,16 @@ class _EditorPanelContent extends ConsumerWidget {
       slideNumber: idx + 1,
       slideCount: deck.slides.length,
       onScopeChanged: (nextScope) {
+        final current = deckNotifier.currentState.deck;
+        if (current == null || current.slides.isEmpty) return;
+        final selected = editorNotifier.currentState.selectedIndex.clamp(
+          0,
+          current.slides.length - 1,
+        );
         final nextMarkdown = nextScope == MarkdownScope.slide
-            ? deckNotifier.generateSlideMarkdown(idx)
+            ? deckNotifier.generateSlideMarkdown(selected)
             : deckNotifier.generateMarkdown();
-        editorNotifier.loadMarkdownSource(nextMarkdown);
-        editorNotifier.setMarkdownScope(nextScope);
+        editorNotifier.loadMarkdownSource(nextMarkdown, scope: nextScope);
       },
       onDraftChanged: editorNotifier.updateMarkdown,
       onActiveSlideChanged: isSlide ? null : editorNotifier.select,
