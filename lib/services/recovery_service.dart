@@ -39,6 +39,8 @@ class RecoverySnapshot {
   /// remain parseable so recovery can always reopen the last valid deck.
   final String? markdownDraft;
   final String? markdownDraftScope;
+
+  /// De doelindex in de bewaarde presentatie. Bij -1 ontbreekt de doeldia.
   final int? markdownDraftSlideIndex;
 
   /// JSON payload from [UserNotesCodec.encode], when the deck has user notes.

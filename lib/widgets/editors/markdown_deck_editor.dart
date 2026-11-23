@@ -74,6 +74,8 @@ class MarkdownDeckEditor extends ConsumerStatefulWidget {
 
   bool get isSlideScope => scope == MarkdownScope.slide;
 
+  bool get canApply => !isSlideScope || slideNumber > 0;
+
   @override
   ConsumerState<MarkdownDeckEditor> createState() => _MarkdownDeckEditorState();
 }
@@ -192,8 +194,12 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     // het deck, maar dat is precies wat een wachtruimte hoort te doen: bij
     // "Toepassen" schrijft hij toch het geheel.
     final scopeChanged = widget.scope != oldWidget.scope;
-    if (scopeChanged || widget.initialContent != oldWidget.initialContent) {
-      if (!scopeChanged && _ctrl.text != oldWidget.initialContent) return;
+    if (scopeChanged ||
+        widget.initialContent != oldWidget.initialContent ||
+        widget.baselineContent != oldWidget.baselineContent) {
+      if (!scopeChanged && _isDirty && _ctrl.text != oldWidget.initialContent) {
+        return;
+      }
       _syncingExternalContent = true;
       _ctrl.text = widget.initialContent;
       _sourceDocument = _sourceDocument.reparse(widget.initialContent);
@@ -454,6 +460,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   }
 
   Future<void> _applyMarkdown({MarkdownScope? nextScope}) async {
+    if (!widget.canApply) return;
     final source = _ctrl.text;
     final scope = widget.scope;
     final apply = widget.onApply;
@@ -463,7 +470,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       if (!proceed ||
           !mounted ||
           _ctrl.text != source ||
-          widget.scope != scope) {
+          widget.scope != scope ||
+          !widget.canApply) {
         return;
       }
     }
@@ -500,8 +508,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               child: Text(l10n.d('Terug zonder deze wijzigingen')),
             ),
             FilledButton(
-              autofocus: true,
-              onPressed: () => Navigator.pop(ctx, 2),
+              autofocus: widget.canApply,
+              onPressed: widget.canApply ? () => Navigator.pop(ctx, 2) : null,
               child: Text(l10n.d('Toepassen en terug')),
             ),
           ],
@@ -571,10 +579,12 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  _applyMarkdown(nextScope: scope);
-                },
+                onPressed: widget.canApply
+                    ? () {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        _applyMarkdown(nextScope: scope);
+                      }
+                    : null,
                 child: Text(l10n.d('Toepassen')),
               ),
               TextButton(
@@ -916,7 +926,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         icon: const Icon(Icons.rule, size: 16),
         label: Text(l10n.d('Controleren')),
       ),
-      TextButton(onPressed: _applyMarkdown, child: Text(l10n.d('Toepassen'))),
+      TextButton(
+        onPressed: widget.canApply ? _applyMarkdown : null,
+        child: Text(l10n.d('Toepassen')),
+      ),
       TextButton(
         onPressed: _requestExitMarkdown,
         child: Text(l10n.d('Terug naar de dia\'s')),
@@ -1042,9 +1055,11 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
           _MarkdownSourceStatusBar(
             text: _ctrl.text,
             selection: _ctrl.selection,
-            slideNumber: _sourceDocument
-                .blockAt(_ctrl.selection.extentOffset)
-                ?.slideNumber,
+            slideNumber: widget.isSlideScope
+                ? (widget.canApply ? widget.slideNumber : null)
+                : _sourceDocument
+                      .blockAt(_ctrl.selection.extentOffset)
+                      ?.slideNumber,
             writingSuggestionCount: _writingSuggestions.length,
             onWritingSuggestions: _writingSuggestions.isEmpty
                 ? null

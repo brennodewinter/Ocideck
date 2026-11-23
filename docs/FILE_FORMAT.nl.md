@@ -3428,6 +3428,13 @@ een bestand te wijzen dat de teksteditor niet kan openen. De `source` blijft in
 het blok, en het toepassen van de tekst schrijft de waarden bij het volgende
 opslaan terug naar het gegevensbestand.
 
+De lokale herstelmomentopname bewaart niet-toegepaste presentatiebron apart als
+`markdownDraft`, met `markdownDraftScope` op `deck` of `slide`. Voor een
+diaconcept bevat `markdownDraftSlideIndex` de positie van de doeldia in de
+bewaarde presentatie, geteld vanaf nul. Met `-1` blijft het concept beschikbaar
+om te kopiëren als de doeldia is verwijderd. Een ouder diaconcept zonder
+doelindex verwijst standaard naar de eerste dia.
+
 ### Zoeken en vervangen
 
 In de Markdown-modus doorzoekt een **zoekbalk in de editor** de live

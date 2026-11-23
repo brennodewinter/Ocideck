@@ -285,7 +285,11 @@ class _EditorPanelContent extends ConsumerWidget {
     final scope = editor.markdownScope;
     final isSlide = scope == MarkdownScope.slide;
     final idx = editor.selectedIndex.clamp(0, deck.slides.length - 1);
-    final generated = isSlide
+    final targetIndex = isSlide ? editor.markdownSlideIndex(deck.slides) : idx;
+    final targetId = targetIndex < 0 ? null : deck.slides[targetIndex].id;
+    final baseline = editor.hasMarkdownDraft
+        ? editor.markdownBaseline
+        : isSlide
         ? deckNotifier.generateSlideMarkdown(idx)
         : deckNotifier.generateMarkdown();
     return MarkdownDeckEditor(
@@ -298,12 +302,10 @@ class _EditorPanelContent extends ConsumerWidget {
       // as undo/redo instead of pinning the source buffer to an older snapshot.
       initialContent: editor.hasMarkdownDraft
           ? editor.markdownBuffer
-          : generated,
-      baselineContent: editor.hasMarkdownDraft
-          ? editor.markdownBaseline
-          : generated,
+          : baseline,
+      baselineContent: baseline,
       scope: scope,
-      slideNumber: idx + 1,
+      slideNumber: targetIndex + 1,
       slideCount: deck.slides.length,
       onScopeChanged: (nextScope) {
         final current = deckNotifier.currentState.deck;
@@ -317,11 +319,22 @@ class _EditorPanelContent extends ConsumerWidget {
             : deckNotifier.generateMarkdown();
         editorNotifier.loadMarkdownSource(nextMarkdown, scope: nextScope);
       },
-      onDraftChanged: editorNotifier.updateMarkdown,
+      onDraftChanged: (content) => editorNotifier.updateMarkdown(
+        content,
+        baseline: baseline,
+        slideId: isSlide ? targetId : null,
+      ),
       onActiveSlideChanged: isSlide ? null : editorNotifier.select,
       onApply: (md) {
+        final target = isSlide
+            ? deckNotifier.currentState.deck?.slides.indexWhere(
+                (slide) => slide.id == targetId,
+              )
+            : null;
         final ok = isSlide
-            ? deckNotifier.applySlideMarkdown(idx, md)
+            ? target != null &&
+                  target >= 0 &&
+                  deckNotifier.applySlideMarkdown(target, md)
             : deckNotifier.applyMarkdown(md);
         editorNotifier.setParseError(!ok);
         return ok;

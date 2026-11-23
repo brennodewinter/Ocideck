@@ -275,7 +275,9 @@ class _MarkdownScopeToggle extends StatelessWidget {
                   ),
                   _segment(
                     icon: Icons.crop_square_outlined,
-                    label: '${l10n.d('Deze slide')} · $slideNumber/$slideCount',
+                    label: slideNumber > 0
+                        ? '${l10n.d('Deze slide')} · $slideNumber/$slideCount'
+                        : l10n.d('Niet beschikbaar'),
                     active: isSlide,
                     onTap: () => onChanged(MarkdownScope.slide),
                   ),
@@ -741,7 +743,10 @@ String _searchResultContext(
       slideNumber = block.slideNumber;
     }
   }
-  return '${state.context.l10n.d('Dia')} $slideNumber — ${_sourceSearchIndex(state).context(match)}';
+  final context = _sourceSearchIndex(state).context(match);
+  return slideNumber > 0
+      ? '${state.context.l10n.d('Dia')} $slideNumber — $context'
+      : context;
 }
 
 DeckSourceSearchIndex _sourceSearchIndex(_MarkdownDeckEditorState state) {

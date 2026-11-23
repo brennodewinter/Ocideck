@@ -308,6 +308,47 @@ void main() {
     });
   });
 
+  for (final removeTarget in [false, true]) {
+    test('autosave houdt de doeldia van een concept vast ($removeTarget)', () {
+      fakeAsync((async) {
+        final recovery = _RecordingRecovery();
+        final tabs = _tabs(recovery);
+        addTearDown(tabs.dispose);
+        final tab = tabs.state.current!;
+        final deck = tab.deckNotifier;
+        deck.loadDeck(_deck());
+        deck.addSlide(SlideType.title);
+        final originalId = deck.currentState.deck!.slides.first.id;
+        final editor = tab.editorNotifier;
+        editor.setMarkdownScope(MarkdownScope.slide);
+        editor.setMode(
+          EditorMode.markdown,
+          initialMarkdown: deck.generateSlideMarkdown(0),
+        );
+        const draft = '# Concept voor de eerste dia';
+        editor.updateMarkdown(draft, slideId: originalId);
+        editor.select(1);
+        if (removeTarget) deck.removeSlide(0);
+
+        async.elapse(const Duration(seconds: 30));
+        final snapshot = recovery.saved.single;
+        expect(snapshot.markdownDraftSlideIndex, removeTarget ? -1 : 0);
+
+        final restored = _tabs(_RecordingRecovery());
+        addTearDown(restored.dispose);
+        expect(restored.restoreRecovered([snapshot]), 0);
+        final restoredTab = restored.state.current!;
+        final restoredEditor = restoredTab.editorNotifier.currentState;
+        final slides = restoredTab.deckNotifier.currentState.deck!.slides;
+        expect(restoredEditor.markdownBuffer, draft);
+        expect(
+          restoredEditor.markdownSlideIndex(slides),
+          removeTarget ? -1 : 0,
+        );
+      });
+    });
+  }
+
   test('disposing the notifier cancels the autosave timer', () {
     fakeAsync((async) {
       final recovery = _RecordingRecovery();

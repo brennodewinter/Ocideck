@@ -161,6 +161,74 @@ void main() {
   const invalidDraft = '# Concept\n\n```dart\nNog bezig.\n';
   const validDraft = '# Concept\n\nDit is een gewone zin.\n';
 
+  testWidgets('dia-concept volgt de oorspronkelijke dia-ID (#3118)', (
+    tester,
+  ) async {
+    final container = await pumpThreeSlides(tester);
+    await tester.tap(sourceButton);
+    await tester.pumpAndSettle();
+    await tester.enterText(sourceField, validDraft);
+    await tester.pumpAndSettle();
+    await tester.tap(thumbnail(1));
+    await tester.pumpAndSettle();
+    expect(container.read(editorProvider).selectedIndex, 1);
+    expect(find.text('Deze slide · 1/3'), findsOneWidget);
+
+    container.read(deckProvider.notifier).reorderSlides(0, 2);
+    await tester.pumpAndSettle();
+    expect(find.text('Deze slide · 3/3'), findsOneWidget);
+    await tester.tap(find.text('Toepassen'));
+    await tester.pumpAndSettle();
+
+    final slides = container.read(deckProvider).deck!.slides;
+    expect(slides.map((slide) => slide.title), [
+      'Tweede dia',
+      'Derde dia',
+      'Concept',
+    ]);
+  });
+
+  testWidgets('concept van verwijderde dia kan niet overschrijven (#3118)', (
+    tester,
+  ) async {
+    final container = await pumpThreeSlides(tester);
+    await tester.tap(sourceButton);
+    await tester.pumpAndSettle();
+    await tester.enterText(sourceField, validDraft);
+    await tester.pumpAndSettle();
+    container.read(deckProvider.notifier).removeSlide(0);
+    await tester.pumpAndSettle();
+
+    expect(tester.widget<TextField>(sourceField).controller!.text, validDraft);
+    expect(find.text('Niet beschikbaar'), findsOneWidget);
+    final apply = tester.widget<TextButton>(
+      find.widgetWithText(TextButton, 'Toepassen'),
+    );
+    expect(apply.onPressed, isNull);
+    expect(container.read(deckProvider).deck!.slides.first.title, 'Tweede dia');
+  });
+
+  testWidgets('herstel van originele bron geeft de selectie vrij (#3118)', (
+    tester,
+  ) async {
+    final container = await pumpThreeSlides(tester);
+    await tester.tap(sourceButton);
+    await tester.pumpAndSettle();
+    final original = tester.widget<TextField>(sourceField).controller!.text;
+    await tester.enterText(sourceField, validDraft);
+    await tester.pumpAndSettle();
+    await tester.tap(thumbnail(1));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(sourceField, original);
+    await tester.pumpAndSettle();
+    expect(container.read(editorProvider).hasMarkdownDraft, isFalse);
+    expect(
+      tester.widget<TextField>(sourceField).controller!.text,
+      contains('# Tweede dia'),
+    );
+  });
+
   for (final toDeck in [false, true]) {
     final destination = toDeck ? 'volledige bron' : 'visuele editor';
     testWidgets('pas toe vóór overgang naar $destination (#3117)', (
