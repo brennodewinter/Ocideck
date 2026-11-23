@@ -19,6 +19,8 @@ const kKnownClassTokens = {
   'quote',
   'video',
   'table',
+  // Vrije Markdown: het token bewaart het type over een rondgang (#3109).
+  'free-markdown',
   'code',
   'chart',
   'cockpit',

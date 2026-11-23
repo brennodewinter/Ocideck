@@ -151,6 +151,38 @@ SlideType? _declaredSlideType(Iterable<String> tokens) {
   );
 }
 
+/// Stript de class-richtlijn die de schrijver zelf boven een verbatim-bewaard
+/// blok zette (#3109): het `free-markdown`-typetoken plus gegenereerde tokens
+/// als `logo-safe`. Reisde die regel mee in [Slide.customMarkdown], dan
+/// schreef elke volgende opslag hem er opnieuw boven — een stapeling die per
+/// rondgang groeide. Alleen de eerste regel komt in aanmerking: de schrijver
+/// zet de richtlijn daar en `_class`-commentaren dieper in het blok zijn van
+/// de auteur. De tokens van de auteur in diezelfde richtlijn blijven staan.
+String _stripWrittenClassDirective(String block) {
+  final firstBreak = block.indexOf('\n');
+  final first = firstBreak == -1 ? block : block.substring(0, firstBreak);
+  final match = _reClassDirective.firstMatch(first);
+  // Alleen een eerste regel die uit niets dan de richtlijn bestaat kan de
+  // schrijver hebben gezet; commentaar inline achter inhoud is geschreven.
+  if (match == null || first.trim() != match.group(0)) return block;
+  final kept = match
+      .group(1)!
+      .split(_reWhitespace)
+      .where(
+        (token) =>
+            token.isNotEmpty &&
+            token != SlideType.freeMarkdown.marpClass &&
+            !isOcideckWrittenClassToken(token),
+      )
+      .join(' ');
+  if (kept.isNotEmpty) {
+    return '<!-- _class: $kept -->${firstBreak == -1 ? '' : block.substring(firstBreak)}';
+  }
+  // De regel droeg alleen geschreven tokens: laat ook de lege scheidingsregel
+  // weg die de schrijver tussen richtlijn en body plaatst.
+  return firstBreak == -1 ? '' : block.substring(firstBreak).trimLeft();
+}
+
 /// The stored body for a parsed slide: free-Markdown, the Informatieveiligheid
 /// scaffold types and the eLearning text types keep the whole remaining block;
 /// a richText bullet slide keeps its rich-text lines; every other type stores
@@ -448,7 +480,7 @@ extension _MarkdownParse on MarkdownService {
       return Slide(
         id: _uuid.v4(),
         type: SlideType.freeMarkdown,
-        customMarkdown: block,
+        customMarkdown: _stripWrittenClassDirective(block),
       );
     }
 

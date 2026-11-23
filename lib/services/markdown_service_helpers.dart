@@ -543,9 +543,14 @@ List<String> bulletRevealClassTokens(Slide slide) =>
 
 /// De opgeslagen class-tokens van een dia, los van het schrijven van de body.
 List<String> slideClassTokens(Slide slide, ThemeProfile? themeProfile) {
-  final cssClass = slide.cssClass.isNotEmpty
-      ? slide.cssClass
-      : slide.type.marpClass;
+  // Het typetoken vóór de eigen classes van de auteur: schreef enkel cssClass,
+  // dan verving een eigen class het typetoken en verloor de dia bij de volgende
+  // inlezing zijn type (#3109). `_declaredSlideType` pakt het eerste
+  // type-token, dus de volgorde is betekenisvol.
+  final cssClass = [
+    slide.type.marpClass,
+    slide.cssClass,
+  ].where((token) => token.isNotEmpty).join(' ');
   final hasLogo = themeProfile?.logoPath?.isNotEmpty == true;
   return [
     if (cssClass.isNotEmpty) cssClass,

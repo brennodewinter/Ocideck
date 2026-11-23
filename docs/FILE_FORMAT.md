@@ -833,7 +833,7 @@ The first class determines (together with the content) the **slide type**:
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |
-| Free Markdown | *(none)* | no heading/bullets/image/quote |
+| Free Markdown | `free-markdown` | no heading/bullets/image/quote |
 
 > `code`, `chart`, `cockpit`, and `question` slides contain fenced code blocks
 > that would confuse the generic line parser, so they are recognized separately
@@ -1297,7 +1297,10 @@ later marks itself. Only the strict ISO form is recognised; a cell that is not a
 bare date is never marked. Absent by default, so an existing table never changes
 appearance.
 
-**Free Markdown** (no class) — content is written verbatim.
+**Free Markdown** (`free-markdown`) — content is written verbatim. The token is
+what makes the slide reopen as free Markdown instead of whatever its body would
+parse as; decks written before the token existed still read back by content.
+*(Token added 2026-11-23, #3109.)*
 
 **Learning objective, module, feedback, assessment summary** (`objective`,
 `module`, `feedback`, `assessment-summary`) — the same shape as free Markdown,

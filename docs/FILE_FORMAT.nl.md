@@ -801,7 +801,7 @@ De eerste klasse bepaalt (samen met de inhoud) het **slidetype**:
 | Alleen opsomming | *(geen)* | opsomming aanwezig |
 | Twee afbeeldingen | *(geen)* | twee achtergrondafbeeldingen |
 | Grote afbeelding | *(geen)* | één afbeelding, geen opsomming |
-| Vrije Markdown | *(geen)* | geen kop/opsomming/afbeelding/citaat |
+| Vrije Markdown | `free-markdown` | geen kop/opsomming/afbeelding/citaat |
 
 > `code`-, `chart`-, `cockpit`- en `question`-slides bevatten afgebakende codeblokken
 > die de generieke regelparser in de war zouden brengen, dus ze worden apart herkend
@@ -1231,7 +1231,10 @@ later wordt gepresenteerd zichzelf markeert. Alleen de strikte ISO-vorm wordt he
 kale datum is, wordt nooit gemarkeerd. Standaard afwezig, zodat een bestaande tabel nooit van
 uiterlijk verandert.
 
-**Vrije Markdown** (geen class) — de inhoud wordt letterlijk geschreven.
+**Vrije Markdown** (`free-markdown`) — de inhoud wordt letterlijk geschreven.
+Het token is wat de dia laat heropenen als vrije Markdown in plaats van als wat
+de body zou opleveren; decks van vóór het token lezen nog terug op inhoud.
+*(Token toegevoegd 2026-11-23, #3109.)*
 
 **Leerdoel, module, feedback, assessment-samenvatting** (`objective`, `module`,
 `feedback`, `assessment-summary`) — dezelfde vorm als vrije Markdown, met het
