@@ -1790,6 +1790,18 @@ The rail on the left lists every slide as a thumbnail.
   land where you are working. Bulk actions (delete, skip, copy to another deck)
   apply to the whole selection.
 
+### Copy selected slides to another presentation
+
+1. Open the source and destination presentations in separate OciDeck tabs.
+2. In the source tab, hold **Cmd** on macOS or **Ctrl** on Windows and Linux
+   and click the thumbnails of the slides you want. Hold **Shift** and click
+   to select a consecutive range.
+3. In the action bar above the slide list, choose **Copy to another deck** and
+   select the destination presentation.
+
+OciDeck appends editable copies in the order they appear in the source
+presentation. The destination tab opens at the first copied slide.
+
 ## Images and media travel with the presentation
 
 You cannot assume that whoever receives your presentation has the same drives,
