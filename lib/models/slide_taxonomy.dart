@@ -191,7 +191,13 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     marpClass: 'table',
     backedByTable: true,
   ),
-  SlideType.freeMarkdown: SlideTypeMeta(label: 'Vrije Markdown', marpClass: ''),
+  // Vrije Markdown draagt sinds #3109 wél een token: zonder `_class` las de
+  // parser de body terug als bullets (of titel) en schreef de volgende
+  // opslag dat verlies weg — het type was onmogelijk rond te trippen.
+  SlideType.freeMarkdown: SlideTypeMeta(
+    label: 'Vrije Markdown',
+    marpClass: 'free-markdown',
+  ),
   SlideType.code: SlideTypeMeta(label: 'Broncode', marpClass: 'code'),
   SlideType.chart: SlideTypeMeta(label: 'Grafiek', marpClass: 'chart'),
   SlideType.cockpit: SlideTypeMeta(label: 'Cockpit', marpClass: 'cockpit'),
@@ -335,8 +341,8 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
 /// geschreven maar niet gelezen wordt, komt terug als iets anders — en dat is
 /// stil dataverlies, want de dia opent dan in de verkeerde editor.
 ///
-/// Types zonder token (bullets, image, twoImages, freeMarkdown) staan er niet
-/// in: die worden aan hun inhoud herkend.
+/// Types zonder token (bullets, image, twoImages) staan er niet in: die
+/// worden aan hun inhoud herkend.
 final Map<String, SlideType> slideTypeByMarpClass = {
   for (final entry in slideTypeMeta.entries)
     if (entry.value.marpClass.isNotEmpty) entry.value.marpClass: entry.key,
