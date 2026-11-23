@@ -1542,6 +1542,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Leeg bestand': 'Prazna datoteka',
+  'Wissel naar presentatie': 'Preklopi na predstavitev',
+  'Wissel naar document': 'Preklopi na dokument',
   'A4 · Sprekersnotities': 'A4 · Opombe govorca',
   'Titeldia': 'Naslovni diapozitiv',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

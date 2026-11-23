@@ -767,6 +767,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Leeg bestand': 'Empty file',
+  'Wissel naar presentatie': 'Switch to presentation',
+  'Wissel naar document': 'Switch to document',
   'A4 · Sprekersnotities': 'A4 · Speaker notes',
   'Titeldia': 'Title slide',
   'Plak logo van klembord': 'Paste logo from clipboard',

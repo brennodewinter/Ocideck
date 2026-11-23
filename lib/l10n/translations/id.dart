@@ -1542,6 +1542,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Leeg bestand': 'Berkas kosong',
+  'Wissel naar presentatie': 'Beralih ke presentasi',
+  'Wissel naar document': 'Beralih ke dokumen',
   'A4 · Sprekersnotities': 'A4 · Catatan pembicara',
   'Titeldia': 'Slide judul',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

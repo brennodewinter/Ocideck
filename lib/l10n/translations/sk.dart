@@ -1545,6 +1545,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Leeg bestand': 'Prázdny súbor',
+  'Wissel naar presentatie': 'Prepnúť na prezentáciu',
+  'Wissel naar document': 'Prepnúť na dokument',
   'A4 · Sprekersnotities': 'A4 · Poznámky rečníka',
   'Titeldia': 'Titulná snímka',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

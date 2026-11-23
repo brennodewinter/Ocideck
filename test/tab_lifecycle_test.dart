@@ -6,6 +6,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/document_deck_bridge.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/state/privacy_provider.dart';
@@ -292,4 +293,87 @@ void main() {
     await tester.pump();
     expect(emissions, greaterThan(baseline));
   });
+
+  // #3107: een leeg bestand biedt een wisselknop tussen document en
+  // presentatie. Beide richtingen lopen in hetzelfde tabblad en zijn alleen
+  // geldig zolang er niets te verliezen valt.
+  testWidgets('een leeg bestand wisselt in hetzelfde tabblad van soort (#3107)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+    final tabs = container.read(tabsProvider.notifier);
+
+    // Ctrl+Shift+N-pad: direct een leeg document, het Nieuw-tabblad vervangend.
+    await tabs.newDocument();
+    await tester.pumpAndSettle();
+    expect(container.read(tabsProvider).tabs.length, 1);
+    expect(container.read(tabsProvider).current?.kind, MarkdownKind.document);
+
+    // Document → presentatie: zelfde tabblad, kind wisselt, deck is leeg.
+    swapEmptyDocumentForDeck(tabs);
+    await tester.pumpAndSettle();
+    expect(container.read(tabsProvider).tabs.length, 1);
+    expect(
+      container.read(tabsProvider).current?.kind,
+      MarkdownKind.presentation,
+    );
+    final deck = container.read(tabsProvider).current!.deckNotifier.state.deck;
+    expect(deck, isNotNull);
+    expect(DocumentDeckBridge.deckIsEmpty(deck!), isTrue);
+
+    // Presentatie → document: terug naar een leeg document in hetzelfde tabblad.
+    swapEmptyDeckForDocument(tabs);
+    await tester.pumpAndSettle();
+    expect(container.read(tabsProvider).tabs.length, 1);
+    final content = container.read(tabsProvider).current!.content;
+    expect(content.kind, MarkdownKind.document);
+    expect(
+      (content as DocumentTabContent).documentNotifier.state.document!.body
+          .trim(),
+      isEmpty,
+    );
+  });
+
+  // #3107: de wissel weigert zodra er inhoud is — de knop is dan ook weg,
+  // dus dit bewaakt de grens waarbinnen hij aangeboden mag worden.
+  testWidgets(
+    'de type-wissel doet niets zodra het bestand inhoud heeft (#3107)',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1600, 1000));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+      await tester.pumpAndSettle();
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(AppShell)),
+      );
+      final tabs = container.read(tabsProvider.notifier);
+
+      // Document mét tekst mag niet wisselen.
+      tabs.newDocumentFromMarkdown('Al een zin tekst.');
+      await tester.pumpAndSettle();
+      swapEmptyDocumentForDeck(tabs);
+      await tester.pumpAndSettle();
+      expect(container.read(tabsProvider).current?.kind, MarkdownKind.document);
+
+      // Een deck mét titel mag niet wisselen.
+      tabs.newEmptyTab();
+      await tester.pumpAndSettle();
+      tabs.newDeckInCurrentTab('Titel met inhoud');
+      await tester.pumpAndSettle();
+      swapEmptyDeckForDocument(tabs);
+      await tester.pumpAndSettle();
+      expect(
+        container.read(tabsProvider).current?.kind,
+        MarkdownKind.presentation,
+      );
+    },
+  );
 }

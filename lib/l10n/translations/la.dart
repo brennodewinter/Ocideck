@@ -1553,6 +1553,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Leeg bestand': 'Fasciculus inanis',
+  'Wissel naar presentatie': 'Ad praesentationem muta',
+  'Wissel naar document': 'Ad documentum muta',
   'A4 · Sprekersnotities': 'A4 · Notae oratoris',
   'Titeldia': 'Scheda tituli',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

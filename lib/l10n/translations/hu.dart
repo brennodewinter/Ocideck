@@ -1543,6 +1543,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Leeg bestand': 'Üres fájl',
+  'Wissel naar presentatie': 'Váltás prezentációra',
+  'Wissel naar document': 'Váltás dokumentumra',
   'A4 · Sprekersnotities': 'A4 · Előadói jegyzetek',
   'Titeldia': 'Címdia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

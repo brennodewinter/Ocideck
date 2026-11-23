@@ -1552,6 +1552,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Leeg bestand': 'Pusty plik',
+  'Wissel naar presentatie': 'Przełącz na prezentację',
+  'Wissel naar document': 'Przełącz na dokument',
   'A4 · Sprekersnotities': 'A4 · Notatki prezentera',
   'Titeldia': 'Slajd tytułowy',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

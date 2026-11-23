@@ -1541,6 +1541,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Leeg bestand': 'Tom fil',
+  'Wissel naar presentatie': 'Byt till presentation',
+  'Wissel naar document': 'Byt till dokument',
   'A4 · Sprekersnotities': 'A4 · Talaranteckningar',
   'Titeldia': 'Titelbild',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

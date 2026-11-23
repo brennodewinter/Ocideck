@@ -1558,6 +1558,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Leeg bestand': 'Fajl vojt',
+  'Wissel naar presentatie': 'Aqleb għal preżentazzjoni',
+  'Wissel naar document': 'Aqleb għal dokument',
   'A4 · Sprekersnotities': 'A4 · Noti tal-kelliem',
   'Titeldia': 'Pjastra tat-titlu',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

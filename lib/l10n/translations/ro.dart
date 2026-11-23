@@ -1556,6 +1556,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Leeg bestand': 'Fișier gol',
+  'Wissel naar presentatie': 'Comută la prezentare',
+  'Wissel naar document': 'Comută la document',
   'A4 · Sprekersnotities': 'A4 · Note pentru vorbitor',
   'Titeldia': 'Diapozitiv de titlu',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

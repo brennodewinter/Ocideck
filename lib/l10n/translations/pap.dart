@@ -612,6 +612,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Leeg bestand': 'Archivo bashí',
+  'Wissel naar presentatie': 'Kambia pa presentación',
+  'Wissel naar document': 'Kambia pa dokumento',
   'A4 · Sprekersnotities': 'A4 · Nota di presentadó',
   'Titeldia': 'Diapositiva di título',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
