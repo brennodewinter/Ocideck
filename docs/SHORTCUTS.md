@@ -15,6 +15,7 @@ local disk is safer. This does not enable automatic saving. *(Updated 2026-11-08
 | `Ctrl/Cmd + K` | Open the command palette (searchable list of actions) |
 | `Ctrl/Cmd + O` | Open a presentation (in the dialog: `Ctrl/Cmd`-click or `Shift`-click rows to open several at once) |
 | `Ctrl/Cmd + W` | Close the active tab (asks first when it has unsaved work) |
+| `Ctrl/Cmd + Shift + N` | Open a new empty file as a document tab (*added 2026-11-24*) |
 | `Ctrl/Cmd + S` | Save the active tab — a presentation or a document (*corrected 2026-08-08: it saves a document too, in every mode, not only a deck*) |
 | `Ctrl/Cmd + Z` | Undo |
 | `Ctrl/Cmd + Shift + Z` | Redo |

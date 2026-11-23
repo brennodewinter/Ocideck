@@ -617,6 +617,11 @@ class _AppShellState extends ConsumerState<AppShell> {
     _openWithSearch(context, ref);
   }
 
+  /// Ctrl/Cmd+Shift+N (#3107): leeg bestand zonder dialoog; vandaar kan de
+  /// gebruiker alsnog naar presentatie wisselen.
+  void _newEmptyFile() =>
+      unawaited(ref.read(tabsProvider.notifier).newDocument());
+
   /// Wikkelt een app-brede sneltoets zodat hij niets doet zolang er iets boven
   /// de shell staat — een dialoog, de documentlezer, het presentatiescherm.
   ///
@@ -659,6 +664,10 @@ class _AppShellState extends ConsumerState<AppShell> {
         _onlyWhenShellIsOnTop(_closeActive),
     const SingleActivator(LogicalKeyboardKey.keyW, meta: true):
         _onlyWhenShellIsOnTop(_closeActive),
+    const SingleActivator(LogicalKeyboardKey.keyN, control: true, shift: true):
+        _onlyWhenShellIsOnTop(_newEmptyFile),
+    const SingleActivator(LogicalKeyboardKey.keyN, meta: true, shift: true):
+        _onlyWhenShellIsOnTop(_newEmptyFile),
   };
 
   void _requestDocumentFind({required bool showReplace}) {
