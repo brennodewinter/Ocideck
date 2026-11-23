@@ -80,7 +80,9 @@ class MarkdownSourceDocument {
         int? nearest;
         if (index < previous.blocks.length && !usedPrevious.contains(index)) {
           nearest = index;
-        } else if (index > 0 && !usedPrevious.contains(index - 1)) {
+        } else if (index > 0 &&
+            index - 1 < previous.blocks.length &&
+            !usedPrevious.contains(index - 1)) {
           nearest = index - 1;
         } else if (index + 1 < previous.blocks.length &&
             !usedPrevious.contains(index + 1)) {
