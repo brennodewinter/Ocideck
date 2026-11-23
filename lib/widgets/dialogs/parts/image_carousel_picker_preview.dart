@@ -309,6 +309,13 @@ extension _CarouselPreview on _ImageCarouselPickerState {
           label: Text(l10n.d('Afbeelding toevoegen…')),
           style: style,
         ),
+      if (_supportsPaste)
+        OutlinedButton.icon(
+          onPressed: _loading || _pasting ? null : _pasteClipboardImage,
+          icon: const Icon(Icons.content_paste, size: 16),
+          label: Text(l10n.d('Afbeelding plakken')),
+          style: style,
+        ),
       OutlinedButton.icon(
         onPressed: _loading ? null : _addLibraryFolder,
         icon: const Icon(Icons.create_new_folder_outlined, size: 16),
