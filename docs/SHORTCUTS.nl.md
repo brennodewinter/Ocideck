@@ -16,6 +16,7 @@ opslaan op de lokale schijf is veiliger. Dit is geen automatische opslag.
 | `Ctrl/Cmd + K` | Open het opdrachtenpalet (doorzoekbare lijst met acties) |
 | `Ctrl/Cmd + O` | Open een presentatie (in de dialoog: `Ctrl/Cmd`-klik of `Shift`-klik op rijen om er meerdere tegelijk te openen) |
 | `Ctrl/Cmd + W` | Sluit het actieve tabblad (vraagt eerst als er niet-opgeslagen werk is) |
+| `Ctrl/Cmd + Shift + N` | Open een nieuw leeg bestand als documenttabblad (*toegevoegd 2026-11-24*) |
 | `Ctrl/Cmd + S` | Sla het actieve tabblad op — een presentatie of een document (*gecorrigeerd 2026-08-08: slaat ook een document op, in elke modus, niet alleen een deck*) |
 | `Ctrl/Cmd + Z` | Ongedaan maken |
 | `Ctrl/Cmd + Shift + Z` | Opnieuw uitvoeren |

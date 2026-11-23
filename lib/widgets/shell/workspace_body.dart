@@ -9,10 +9,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/markdown_kind.dart';
 import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/error_snackbar.dart';
 import '../collab_verify_banner.dart';
+import '../empty_file_switch_banner.dart';
 import '../panels/call_panel.dart';
 import '../panels/call_recording_controls.dart';
 import '../panels/collab_chat_panel.dart';
@@ -143,6 +145,8 @@ class WorkspaceBody extends ConsumerWidget {
         const CallRecordingBanner(),
         const RecordingIndicator(),
         const CollabVerifyBanner(),
+        // Wisselknop van #3107: rendert alleen zolang het deck leeg is.
+        const EmptyFileSwitchBanner(toKind: MarkdownKind.document),
         if (deck.finalized) _finalizedBanner(context, l10n),
         Expanded(
           child: scrolls

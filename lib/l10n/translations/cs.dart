@@ -1542,6 +1542,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Leeg bestand': 'Prázdný soubor',
+  'Wissel naar presentatie': 'Přepnout na prezentaci',
+  'Wissel naar document': 'Přepnout na dokument',
   'A4 · Sprekersnotities': 'A4 · Poznámky řečníka',
   'Titeldia': 'Titulní snímek',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

@@ -1567,6 +1567,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Leeg bestand': 'Ficheiro vazio',
+  'Wissel naar presentatie': 'Mudar para apresentação',
+  'Wissel naar document': 'Mudar para documento',
   'A4 · Sprekersnotities': 'A4 · Notas do orador',
   'Titeldia': 'Diapositivo de título',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

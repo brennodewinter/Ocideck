@@ -59,6 +59,7 @@ import '../utils/heading_anchors.dart';
 import '../utils/document_front_matter.dart';
 import '../utils/file_extension.dart';
 import '../utils/image_search_paths.dart';
+import 'empty_file_switch_banner.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
@@ -455,6 +456,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               thickness: 1,
               color: theme.colorScheme.outlineVariant,
             ),
+            const EmptyFileSwitchBanner(toKind: MarkdownKind.presentation),
             if (_find.visible) _findBar(),
             // Marker-melding + toepassingsverzoeken van de transcriptmodule
             // (#2511); voor een gewoon document rendert dit niets.

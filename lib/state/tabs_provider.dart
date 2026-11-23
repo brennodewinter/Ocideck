@@ -20,6 +20,7 @@ import '../models/slide.dart';
 import '../models/storage_origin.dart';
 import '../services/annotation_codec.dart';
 import '../services/classification_enforcement_policy.dart';
+import '../services/document_deck_bridge.dart';
 import '../services/duplicate_service.dart';
 import '../services/document_integrity.dart';
 import '../services/file_service.dart';
@@ -78,6 +79,7 @@ part 'tabs_provider_git_native.dart';
 part 'tabs_provider_git_review.dart';
 part 'tabs_provider_recovery.dart';
 part 'tabs_provider_new_document.dart';
+part 'tabs_provider_empty_switch.dart';
 part 'tabs_provider_learning.dart';
 
 const _uuid = Uuid();
@@ -779,14 +781,19 @@ void _closeTab(TabsNotifier notifier, int index) {
     tab.learningSession = null;
     notifier._recovery.discard(tab.recoveryId);
     // Het enige overblijvende tabblad wordt gereset (niet verwijderd), zodat de
-    // app altijd één tabblad houdt. Een presentatie reset via closeDeck(); een
-    // documenttabblad heeft geen deckNotifier en gooit daarop, dus routeer op
-    // soort (#1636).
+    // app altijd één tabblad houdt. Een presentatie reset via closeDeck() en
+    // valt zo terug op het Nieuw-scherm; een documenttabblad heeft geen
+    // deckNotifier om dat scherm te dragen, dus het wordt vervangen door een
+    // vers Nieuw-tabblad — de omgekeerde beweging van _placeDocumentTab, dat
+    // zo'n tabblad juist door een document vervangt (#1636, #3107).
     switch (tab.content) {
       case DeckTabContent(:final deckNotifier):
         deckNotifier.closeDeck();
-      case DocumentTabContent(:final documentNotifier):
-        documentNotifier.closeDocument();
+      case DocumentTabContent():
+        notifier._disposeTab(tab);
+        notifier._replacementState = current.copyWith(
+          tabs: [notifier._createTab(recoveryId: tab.recoveryId)],
+        );
     }
     notifier.refreshTabs();
     notifier.sweepWebAssets();

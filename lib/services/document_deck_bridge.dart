@@ -181,6 +181,14 @@ class DocumentDeckBridge {
     );
   }
 
+  /// Of het deck nog geen eigen inhoud draagt (#3107): één dia die als
+  /// document niets zou opleveren. Dezelfde lezer als
+  /// [deckToDocumentMarkdown], zodat "leeg" en "er valt niets om te zetten"
+  /// niet uit elkaar kunnen lopen — precies de toestand waarin de
+  /// type-wisselknop getoond mag worden.
+  static bool deckIsEmpty(Deck deck) =>
+      deck.slides.length == 1 && deckToDocumentMarkdown(deck).trim().isEmpty;
+
   /// De omgekeerde weg: serialiseer de dia-lichamen tot één vloeiend document.
   ///
   /// Expliciet lossy op dia-*structuur* (§7): een tabel wordt weer een GFM-tabel,

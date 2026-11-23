@@ -1538,6 +1538,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Leeg bestand': 'Tukšs fails',
+  'Wissel naar presentatie': 'Pārslēgt uz prezentāciju',
+  'Wissel naar document': 'Pārslēgt uz dokumentu',
   'A4 · Sprekersnotities': 'A4 · Runātāja piezīmes',
   'Titeldia': 'Titulslaids',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

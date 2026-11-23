@@ -25,6 +25,20 @@ Dit is **vet** en *cursief* met `code`.
     expect(restored, contains('- item een'));
   });
 
+  // #3107: een omgezet leeg deck produceert `'\n'` als documentbody — die mocht
+  // de visuele editor niet op een lege delta laten vallen.
+  test('witruimte-alleen invoer is leeg voor de visuele editor', () {
+    expect(() => MarkdownQuillCodec.documentFromMarkdown(''), returnsNormally);
+    expect(
+      () => MarkdownQuillCodec.documentFromMarkdown('\n'),
+      returnsNormally,
+    );
+    expect(
+      () => MarkdownQuillCodec.documentFromMarkdown('  \n\t\n'),
+      returnsNormally,
+    );
+  });
+
   test('een GFM-tabel wordt een embed en round-trip\'t byte-getrouw', () {
     const source = '''# Rapport
 

@@ -1542,6 +1542,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Leeg bestand': 'Tom fil',
+  'Wissel naar presentatie': 'Skift til præsentation',
+  'Wissel naar document': 'Skift til dokument',
   'A4 · Sprekersnotities': 'A4 · Talernoter',
   'Titeldia': 'Titeldias',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':

@@ -613,6 +613,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Leeg bestand': 'Leech bestân',
+  'Wissel naar presentatie': 'Wikselje nei presintaasje',
+  'Wissel naar document': 'Wikselje nei dokumint',
   'A4 · Sprekersnotities': 'A4 · Sprekkersnotysjes',
   'Titeldia': 'Titeldia',
   'De afbeeldingen konden niet worden bewaard. Probeer opnieuw of laat de afbeeldingen weg.':
