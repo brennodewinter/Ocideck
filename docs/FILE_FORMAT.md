@@ -3517,6 +3517,13 @@ read and edited in place instead of pointing at a file the text editor cannot
 open. The `source` stays in the block, and applying the text writes the values
 back to the data file on the next save.
 
+The local recovery snapshot stores unapplied presentation source separately as
+`markdownDraft`, with `markdownDraftScope` set to `deck` or `slide`. For a
+slide draft, `markdownDraftSlideIndex` is the zero-based position of its target
+in the snapshot's saved presentation. A value of `-1` keeps the draft available
+for copying when its target slide has been removed. An older slide draft with
+no target index defaults to the first slide.
+
 ### Find and Replace
 
 In Markdown mode, an **in-editor find bar** searches the live Markdown text

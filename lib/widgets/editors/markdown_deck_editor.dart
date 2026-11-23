@@ -74,6 +74,8 @@ class MarkdownDeckEditor extends ConsumerStatefulWidget {
 
   bool get isSlideScope => scope == MarkdownScope.slide;
 
+  bool get canApply => !isSlideScope || slideNumber > 0;
+
   @override
   ConsumerState<MarkdownDeckEditor> createState() => _MarkdownDeckEditorState();
 }
@@ -191,15 +193,19 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     // Staat er iets ongetoepasts, dan wint dat. De inhoud loopt dan achter op
     // het deck, maar dat is precies wat een wachtruimte hoort te doen: bij
     // "Toepassen" schrijft hij toch het geheel.
-    if (widget.initialContent != oldWidget.initialContent) {
-      if (_ctrl.text != oldWidget.initialContent) return;
+    final scopeChanged = widget.scope != oldWidget.scope;
+    if (scopeChanged ||
+        widget.initialContent != oldWidget.initialContent ||
+        widget.baselineContent != oldWidget.baselineContent) {
+      if (!scopeChanged && _isDirty && _ctrl.text != oldWidget.initialContent) {
+        return;
+      }
       _syncingExternalContent = true;
       _ctrl.text = widget.initialContent;
       _sourceDocument = _sourceDocument.reparse(widget.initialContent);
       _writingSuggestions = inspectMarkdownWriting(widget.initialContent);
       _observedText = widget.initialContent;
       _baselineContent = widget.baselineContent ?? widget.initialContent;
-      _syncingExternalContent = false;
       setState(() {
         _validation = null;
         _lastValidation = _validator.validate(widget.initialContent);
@@ -208,6 +214,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       });
       // De balk blijft staan; alleen de gevonden plekken slaan nergens meer op.
       _find.clearMatches();
+      _syncingExternalContent = false;
+      _lastReportedSlide = null;
+      _scheduleValidation();
     }
     // Een wissel van buiten (de diastrook, de navigatieknoppen) wijst de cursor
     // de nieuwe dia aan. Maar de wissel kán ook een echo van onszelf zijn: de
@@ -217,23 +226,22 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     // de eerste regel, en een selectie die over de `---` heen liep werd
     // platgeslagen tot een cursor op de diagrens.
     if (widget.scope == MarkdownScope.deck &&
-        widget.slideNumber != oldWidget.slideNumber &&
-        widget.slideNumber != _lastReportedSlide) {
-      MarkdownSourceBlock? target;
-      for (final block in _sourceDocument.blocks) {
-        if (block.slideNumber == widget.slideNumber) {
-          target = block;
-          break;
+        (scopeChanged ||
+            (widget.slideNumber != oldWidget.slideNumber &&
+                widget.slideNumber != _lastReportedSlide))) {
+      final slideNumber = widget.slideNumber;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted ||
+            widget.scope != MarkdownScope.deck ||
+            widget.slideNumber != slideNumber) {
+          return;
         }
-      }
-      if (target != null) {
-        final targetStart = target.start;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) {
-            _jumpToSourceRange(this, TextMatchRange(targetStart, targetStart));
-          }
-        });
-      }
+        if (slideNumber < 1 || slideNumber > _sourceDocument.blocks.length) {
+          return;
+        }
+        final start = _sourceDocument.blocks[slideNumber - 1].start;
+        _jumpToSourceRange(this, TextMatchRange(start, start));
+      });
     }
   }
 
@@ -278,13 +286,16 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
 
   void _reportActiveSourceSlide() {
     if (widget.scope != MarkdownScope.deck ||
+        !_ctrl.selection.isValid ||
         widget.onActiveSlideChanged == null) {
       return;
     }
     final block = _sourceDocument.blockAt(_ctrl.selection.extentOffset);
     if (block == null || block.slideNumber == _lastReportedSlide) return;
     _lastReportedSlide = block.slideNumber;
-    widget.onActiveSlideChanged!(block.slideNumber - 1);
+    if (block.slideNumber != widget.slideNumber) {
+      widget.onActiveSlideChanged!(block.slideNumber - 1);
+    }
   }
 
   void _scheduleValidation() {
@@ -440,22 +451,36 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       },
     );
 
-    if (choice?.choice == _ApplyChoice.edit && choice?.focusLine != null) {
+    if (mounted &&
+        choice?.choice == _ApplyChoice.edit &&
+        choice?.focusLine != null) {
       _jumpToLine(choice!.focusLine!);
     }
     return choice?.choice == _ApplyChoice.applyAnyway;
   }
 
-  Future<void> _applyMarkdown() async {
+  Future<void> _applyMarkdown({MarkdownScope? nextScope}) async {
+    if (!widget.canApply) return;
+    final source = _ctrl.text;
+    final scope = widget.scope;
+    final apply = widget.onApply;
     final result = _runValidation();
     if (result.hasIssues) {
       final proceed = await _confirmApplyWithIssues(context, result);
-      if (!proceed) return;
+      if (!proceed ||
+          !mounted ||
+          _ctrl.text != source ||
+          widget.scope != scope ||
+          !widget.canApply) {
+        return;
+      }
     }
-    final ok = widget.onApply(_ctrl.text);
-    if (ok) {
-      _baselineContent = _ctrl.text;
+    if (!apply(source) || !mounted) return;
+    _baselineContent = source;
+    if (nextScope == null) {
       widget.onExitMarkdown();
+    } else {
+      widget.onScopeChanged(nextScope);
     }
   }
 
@@ -483,8 +508,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               child: Text(l10n.d('Terug zonder deze wijzigingen')),
             ),
             FilledButton(
-              autofocus: true,
-              onPressed: () => Navigator.pop(ctx, 2),
+              autofocus: widget.canApply,
+              onPressed: widget.canApply ? () => Navigator.pop(ctx, 2) : null,
               child: Text(l10n.d('Toepassen en terug')),
             ),
           ],
@@ -496,7 +521,6 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       widget.onExitMarkdown();
     } else if (choice == 2) {
       await _applyMarkdown();
-      widget.onExitMarkdown();
     }
   }
 
@@ -555,11 +579,12 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  _applyMarkdown();
-                  widget.onScopeChanged(scope);
-                },
+                onPressed: widget.canApply
+                    ? () {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        _applyMarkdown(nextScope: scope);
+                      }
+                    : null,
                 child: Text(l10n.d('Toepassen')),
               ),
               TextButton(
@@ -901,7 +926,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         icon: const Icon(Icons.rule, size: 16),
         label: Text(l10n.d('Controleren')),
       ),
-      TextButton(onPressed: _applyMarkdown, child: Text(l10n.d('Toepassen'))),
+      TextButton(
+        onPressed: widget.canApply ? _applyMarkdown : null,
+        child: Text(l10n.d('Toepassen')),
+      ),
       TextButton(
         onPressed: _requestExitMarkdown,
         child: Text(l10n.d('Terug naar de dia\'s')),
@@ -1027,9 +1055,11 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
           _MarkdownSourceStatusBar(
             text: _ctrl.text,
             selection: _ctrl.selection,
-            slideNumber: _sourceDocument
-                .blockAt(_ctrl.selection.extentOffset)
-                ?.slideNumber,
+            slideNumber: widget.isSlideScope
+                ? (widget.canApply ? widget.slideNumber : null)
+                : _sourceDocument
+                      .blockAt(_ctrl.selection.extentOffset)
+                      ?.slideNumber,
             writingSuggestionCount: _writingSuggestions.length,
             onWritingSuggestions: _writingSuggestions.isEmpty
                 ? null

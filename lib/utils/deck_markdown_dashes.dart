@@ -2,6 +2,44 @@
 /// user-authored dash lines as slide separators (`\n---\n`) or horizontal rules.
 const _zwsp = '\u200B';
 
+/// Regels die werkelijk dia's scheiden, buiten codeblokken. [start] wijst
+/// naar de eerste regel na eventuele front matter.
+Iterable<int> deckSlideSeparatorLines(
+  List<String> lines, {
+  int start = 0,
+}) sync* {
+  String? fence;
+  var fenceLength = 0;
+  for (var index = start; index < lines.length; index++) {
+    final raw = lines[index];
+    final line = raw.endsWith('\r') ? raw.substring(0, raw.length - 1) : raw;
+    final trimmed = line.trimLeft();
+    if (fence != null) {
+      if (trimmed.length >= fenceLength &&
+          isBareDeckCodeFence(trimmed, fence)) {
+        fence = null;
+      }
+    } else if (line == '---') {
+      yield index;
+    } else if (trimmed.startsWith('```') || trimmed.startsWith('~~~')) {
+      fence = trimmed[0];
+      fenceLength = 3;
+      while (fenceLength < trimmed.length && trimmed[fenceLength] == fence) {
+        fenceLength++;
+      }
+    }
+  }
+}
+
+/// Een sluitregel bevat minstens drie gelijke tekens en verder niets.
+bool isBareDeckCodeFence(String line, String fence) {
+  if (line.length < 3) return false;
+  for (var index = 0; index < line.length; index++) {
+    if (line[index] != fence) return false;
+  }
+  return true;
+}
+
 final _standaloneDashLine = RegExp(r'^\s*-{2,}\s*$');
 
 /// Escapes standalone lines of two or more hyphens before writing deck markdown.

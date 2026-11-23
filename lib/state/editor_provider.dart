@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/legacy.dart';
 
+import '../models/slide.dart';
 import '../models/slide_quality.dart';
 
 enum EditorMode { visual, markdown }
@@ -21,6 +22,10 @@ class EditorState {
   final MarkdownScope markdownScope;
   final String markdownBuffer;
   final String markdownBaseline;
+
+  /// ID van de dia waarvoor het concept is geschreven, ook na herordenen.
+  /// Een lege ID reserveert een hersteld concept waarvan de dia ontbreekt.
+  final String? markdownDraftSlideId;
   final bool parseError;
 
   /// When set, the active slide editor should focus this field once (see
@@ -49,6 +54,7 @@ class EditorState {
     this.markdownScope = MarkdownScope.deck,
     this.markdownBuffer = '',
     this.markdownBaseline = '',
+    this.markdownDraftSlideId,
     this.parseError = false,
     this.focusQualityField,
     this.focusQualitySpan,
@@ -60,6 +66,14 @@ class EditorState {
   bool get hasMarkdownDraft =>
       mode == EditorMode.markdown && markdownBuffer != markdownBaseline;
 
+  int markdownSlideIndex(List<Slide> slides) {
+    if (slides.isEmpty) return -1;
+    final id = hasMarkdownDraft ? markdownDraftSlideId : null;
+    return id == null
+        ? selectedIndex.clamp(0, slides.length - 1)
+        : slides.indexWhere((slide) => slide.id == id);
+  }
+
   EditorState copyWith({
     int? selectedIndex,
     Set<int>? selection,
@@ -67,6 +81,8 @@ class EditorState {
     MarkdownScope? markdownScope,
     String? markdownBuffer,
     String? markdownBaseline,
+    String? markdownDraftSlideId,
+    bool clearMarkdownDraftSlideId = false,
     bool? parseError,
     String? focusQualityField,
     SlideQualitySpan? focusQualitySpan,
@@ -81,6 +97,9 @@ class EditorState {
       markdownScope: markdownScope ?? this.markdownScope,
       markdownBuffer: markdownBuffer ?? this.markdownBuffer,
       markdownBaseline: markdownBaseline ?? this.markdownBaseline,
+      markdownDraftSlideId: clearMarkdownDraftSlideId
+          ? null
+          : markdownDraftSlideId ?? this.markdownDraftSlideId,
       parseError: parseError ?? this.parseError,
       focusQualityField: clearFocusQualityField
           ? null
@@ -197,26 +216,44 @@ class EditorNotifier extends StateNotifier<EditorState> {
       mode: mode,
       markdownBuffer: initialMarkdown ?? state.markdownBuffer,
       markdownBaseline: initialMarkdown ?? state.markdownBaseline,
+      clearMarkdownDraftSlideId:
+          mode == EditorMode.visual || initialMarkdown != null,
       parseError: false,
     );
   }
 
-  void loadMarkdownSource(String content) {
+  void loadMarkdownSource(String content, {MarkdownScope? scope}) {
     state = state.copyWith(
+      markdownScope: scope,
       markdownBuffer: content,
       markdownBaseline: content,
+      clearMarkdownDraftSlideId: true,
       parseError: false,
     );
   }
 
-  void updateMarkdown(String content) {
-    state = state.copyWith(markdownBuffer: content);
+  void updateMarkdown(String content, {String? baseline, String? slideId}) {
+    final original = baseline ?? state.markdownBaseline;
+    final target =
+        state.markdownScope == MarkdownScope.slide && content != original
+        ? state.markdownDraftSlideId ?? slideId
+        : null;
+    state = state.copyWith(
+      markdownBuffer: content,
+      markdownBaseline: original,
+      markdownDraftSlideId: target,
+      clearMarkdownDraftSlideId: target == null,
+    );
   }
 
   /// Wissel de markdown-modus tussen de hele presentatie en de actieve slide.
   void setMarkdownScope(MarkdownScope scope) {
     if (state.markdownScope == scope) return;
-    state = state.copyWith(markdownScope: scope, parseError: false);
+    state = state.copyWith(
+      markdownScope: scope,
+      clearMarkdownDraftSlideId: true,
+      parseError: false,
+    );
   }
 
   void setParseError(bool value) {

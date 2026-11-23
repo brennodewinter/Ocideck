@@ -36,7 +36,7 @@ RecoverySnapshot _deckRecoverySnapshot(
         : editor.markdownScope.name,
     markdownDraftSlideIndex:
         markdownDraft != null && editor.markdownScope == MarkdownScope.slide
-        ? editor.selectedIndex
+        ? editor.markdownSlideIndex(deck.slides)
         : null,
     userNotes: UserNotesCodec.encode(deck.slides, deck.userNotes),
     miauw: MiauwCodec.encodeDisposition(deck.miauw),
@@ -196,15 +196,20 @@ void _applyRecoveredMarkdownDraft(
   final scope = snap.markdownDraftScope == MarkdownScope.slide.name
       ? MarkdownScope.slide
       : MarkdownScope.deck;
-  final slideIndex = (snap.markdownDraftSlideIndex ?? 0).clamp(
-    0,
-    deck.slides.length - 1,
-  );
+  final savedIndex = snap.markdownDraftSlideIndex ?? 0;
+  final slideIndex = savedIndex.clamp(0, deck.slides.length - 1);
   tab.editorNotifier.select(slideIndex);
   tab.editorNotifier.setMarkdownScope(scope);
   final baseline = scope == MarkdownScope.slide
       ? tab.deckNotifier.generateSlideMarkdown(slideIndex)
       : tab.deckNotifier.generateMarkdown();
   tab.editorNotifier.setMode(EditorMode.markdown, initialMarkdown: baseline);
-  tab.editorNotifier.updateMarkdown(draft);
+  tab.editorNotifier.updateMarkdown(
+    draft,
+    slideId: scope != MarkdownScope.slide
+        ? null
+        : savedIndex == slideIndex
+        ? deck.slides[slideIndex].id
+        : '',
+  );
 }
