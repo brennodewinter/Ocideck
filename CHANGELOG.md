@@ -8,6 +8,28 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.17] — 2026-11-24
+
+### Fixed
+
+- macOS: verhelp de toegankelijkheidscrash met de upstream Flutter-correctie
+  voor de semantiekboom (#3128).
+- Documenten: houd tabelcellen op hun plek bij de eerste klik (#3127).
+- Broneditor: behoud de juiste dia, het concept en de cursor bij omschakelen;
+  wissel alleen na succesvol toepassen (#3116, #3117, #3118).
+- Afbeeldingen: laat plakken toe in de carrousel (#3120).
+- Releasebouw: herstel de vastgepinde pakketten na een schone macOS-bouw (#3135).
+
+### Added
+
+- Geef een afzonderlijke documenttabel blanco opmaak, met behoud van uitlijning
+  en celinhoud in Markdown, HTML en Word (#3126).
+
+### Changed
+
+- Werk de scanner-pins bij en vul de Nederlandse bestandsformaatbeschrijving aan.
+- Bedank Jos van Dongen in de credits (#3124).
+
 ## [0.7.15] — 2026-11-20
 
 ### Changed

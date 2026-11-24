@@ -4715,6 +4715,13 @@ onveranderd: die zitten om het archief, niet om de soort. Wat er niet bestaat is
 een *schrijfroute* — het exportmenu van het document biedt bewust geen
 `.ocideck` aan (§14.4).
 
+### 14.19 Blanco documenttabellen
+
+Een regel met `<!-- ocideck:plain_table v1 -->` direct boven een GFM-pijptabel
+geeft alleen die tabel de gewone documentopmaak. De marker is een normale
+HTML-opmerking. De tabel behoudt haar kolomuitlijning en celinhoud in
+verplaatsbare Markdown.
+
 ## 15. Documentdossiers
 
 Een documentdossier is een map met `dossier.json` en een afgeleid, leesbaar
