@@ -64,13 +64,21 @@ permissions:
 
 jobs:
   test:
-    name: Test (windows-2022)
+    # Deel 0 behoudt de naam die de kandidaatverificatie vereist. Die
+    # verificatie eist daarnaast terminaal succes van ALLE overige deeljobs.
+    name: ${{ matrix.shard == 0 && 'Test (windows-2022)' || format('Test (windows-2022, shard {0})', matrix.shard) }}
     # Zelfde pin als de matrix in ci.yml en release.yml (#788): dartcv4 haalt
     # een voorgebouwd OpenCV-Windows-pakket op dat niet samengaat met de MSVC
     # op windows-latest. `flutter test` bouwt die laag niet, maar `pub get`
     # resolveert hem wel — houd de pin gelijk, los hem pas mee op als upstream
     # een pakket voor nieuwere MSVC's uitbrengt.
     runs-on: windows-2022
+    # Een verloren hosted runner kost zo alleen zijn eigen deel van de suite.
+    # Navigatie- en videodiagnostiek blijven elk één job; niets wordt overgeslagen.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON((inputs.navigation_only || inputs.video_only) && '[0]' || '[0,1,2,3]') }}
     # Run 39179149143 had alle 13.741 tests afgerond maar werd op de oude
     # 75-minutengrens tijdens de afronding geannuleerd. Geef ook een koude
     # cache en post-job-opruiming tijd om terminaal succes te melden.
@@ -152,8 +160,10 @@ jobs:
           trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
           # Isoleer de terugkerende laatste testgroep vóór de volledige suite.
           flutter test --concurrency=1 test/shell_present_and_close_test.dart test/shell_s3_actions_test.dart
-          flutter test --concurrency=2 --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark'
-          flutter test --concurrency=1 test/large_deck_performance_test.dart --tags benchmark
+          flutter test --concurrency=2 --total-shards='${{ strategy.job-total }}' --shard-index='${{ matrix.shard }}' --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark'
+          if [ '${{ matrix.shard }}' = 0 ]; then
+            flutter test --concurrency=1 test/large_deck_performance_test.dart --tags benchmark
+          fi
 
       - name: Navigation regressions
         if: ${{ inputs.navigation_only }}
