@@ -35,6 +35,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
       // Geen potlood: je klikt in de cel. Hertekenen houdt de kolombreedtes bij.
       return TableEditScaffold(
         editor: editor,
+        stationaryToolbar: stationaryTableToolbar,
         onSort: onSortTableColumn,
         extraToolbarItems: tableToolbarExtras,
         builder: (_) => _tableBody(t, editor.rows, editor.alignments, editor),

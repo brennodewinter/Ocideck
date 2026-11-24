@@ -317,6 +317,7 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
         themeProfile: widget.profile,
         chartTheme: widget.profile,
         tableEditController: _editor,
+        stationaryTableToolbar: true,
         onSortTableColumn: _sort,
       );
     }

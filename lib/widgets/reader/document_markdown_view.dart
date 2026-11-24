@@ -89,6 +89,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.onSortTableColumn,
     this.tableToolbarExtras,
     this.tableEditorFor,
+    this.stationaryTableToolbar = false,
     this.hideRules = false,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
@@ -171,6 +172,7 @@ class DocumentMarkdownView extends StatelessWidget {
   /// Bron-weergave: elke GFM-tabel ter plekke invulbaar. Wint van
   /// [tableEditController].
   final TableEditController? Function(int ordinal)? tableEditorFor;
+  final bool stationaryTableToolbar;
 
   /// Tekent een `---` niet als streep.
   ///
