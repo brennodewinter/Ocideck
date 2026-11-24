@@ -80,6 +80,17 @@ Both are forks of upstream plugins with local source changes; see
 > fork's licence; it classifies both from the vendored LICENSE file with the same
 > classifier `make licenses` uses, so this cannot drift again.
 
+## Flutter framework backport
+
+`flutter_patches` contains the unmodified upstream Flutter patch
+[`b304cf18b6864d141cf08e26a07898901cddb4b5`](https://github.com/flutter/flutter/commit/b304cf18b6864d141cf08e26a07898901cddb4b5)
+for the macOS accessibility crash (Flutter #193372). It is applied only while
+building macOS with the pinned Flutter 3.50.0 SDK and reversed afterwards.
+Copyright 2014 The Flutter Authors. All rights reserved. Licence: **BSD-3-Clause**;
+the full text is retained in [`third_party/flutter_patches/LICENSE`](third_party/flutter_patches/LICENSE).
+See [`third_party/flutter_patches/MODIFICATIONS.md`](third_party/flutter_patches/MODIFICATIONS.md)
+for the upstream revision and the build integration.
+
 ## Dart & Flutter packages
 
 Every **direct** dependency (see `pubspec.yaml` for the exact version
