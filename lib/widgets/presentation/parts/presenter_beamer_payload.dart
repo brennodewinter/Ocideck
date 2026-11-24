@@ -175,7 +175,10 @@ class AudienceWindowHandle {
     if (_closed) return;
     _closed = true;
     try {
-      await _closeImpl(controller);
+      // Een vastzittende platform-thread (o.a. Wayland onder Hyprland, #3149)
+      // laat de kanaalreactie nooit terugkomen; zonder grens hing het hele
+      // afsluitpad en bleef de presentator "bevroren" volledig scherm staan.
+      await _closeImpl(controller).timeout(const Duration(seconds: 2));
     } catch (e) {
       logWarning('AudienceWindowHandle.close: audience window', e);
     }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/gestures.dart';
@@ -5,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
@@ -117,6 +119,24 @@ void main() {
 
     expect(closeCount, 1);
     expect(handle.isClosed, isTrue);
+  });
+
+  test('AudienceWindowHandle close returns on a wedged channel (#3149)', () {
+    fakeAsync((async) {
+      // A wedged platform thread never answers the window_close channel call
+      // (Wayland under Hyprland); the presenter exit must not hang on it.
+      var finished = false;
+      final handle = AudienceWindowHandle(
+        WindowController.fromWindowId('test'),
+        closeImpl: (_) => Completer<void>().future,
+      );
+
+      handle.close().then((_) => finished = true);
+      async.elapse(const Duration(seconds: 3));
+
+      expect(finished, isTrue);
+      expect(handle.isClosed, isTrue);
+    });
   });
 
   testWidgets('S swaps both windows without ending the presentation', (
