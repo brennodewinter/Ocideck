@@ -1421,4 +1421,48 @@ void main() {
       expect(onlyChecklist(n).rows.single.findingId, isEmpty);
     });
   });
+
+  group('stijl op alle dia\'s toepassen (#3143)', () {
+    Deck markedDeck() => Deck(
+      title: 'D',
+      slides: [
+        Slide.create(SlideType.title).copyWith(styleName: 'Donker'),
+        Slide.create(SlideType.bullets),
+        Slide.create(SlideType.bullets).copyWith(styleName: 'deck'),
+        Slide.create(SlideType.bullets),
+      ],
+      slideStyles: const {'Donker': ThemeProfile(name: 'Donker')},
+    );
+
+    test('wist alle markeringen en zet het profiel in één ongedaan-stap', () {
+      final n = _notifier()..loadDeck(markedDeck());
+
+      applyThemeProfileToAllSlides(n, const ThemeProfile(name: 'Nieuw'));
+
+      final deck = n.state.deck!;
+      expect(deck.themeProfile.name, 'Nieuw');
+      expect(deck.slides.map((s) => s.styleName), everyElement(isEmpty));
+      expect(deck.slideStyles, isEmpty);
+
+      // Eén Ctrl+Z herstelt profiel én markeringen tegelijk — het wissen was
+      // geen stille tweede bewerking.
+      n.undo();
+      final undone = n.state.deck!;
+      expect(undone.themeProfile.name, 'Standaard');
+      expect(undone.slides[0].styleName, 'Donker');
+      expect(undone.slides[2].styleName, 'deck');
+      expect(undone.slideStyles.keys, contains('Donker'));
+    });
+
+    test('laat het .md zonder ocideck_style-commentaar achter', () {
+      final n = _notifier()..loadDeck(markedDeck());
+      applyThemeProfileToAllSlides(n, const ThemeProfile(name: 'Nieuw'));
+
+      final md = MarkdownService().generateDeck(n.state.deck!);
+      expect(md.contains('ocideck_style'), isFalse);
+      // Ook na opslaan en heropenen is geen markering over.
+      final reparsed = MarkdownService().parseDeck(md)!;
+      expect(reparsed.slides.map((s) => s.styleName), everyElement(isEmpty));
+    });
+  });
 }
