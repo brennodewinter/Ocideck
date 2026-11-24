@@ -203,6 +203,9 @@ if [[ $SKIP_BUILD -eq 0 ]]; then
       | grep -v ' grep ' | cut -c1-140 | sed 's/^/   /' >&2 || true
     exit 1
   fi
+  # Herstel de pakketconfiguratie vóór de SBOM-controle van build-macos.
+  # flutter clean verwijdert die ook; de controle gebruikt directe Dart-aanroepen.
+  flutter pub get --enforce-lockfile
   make build-macos
 else
   section "Herbouw overgeslagen (--skip-build) — bestaande build/-uitvoer wordt gebruikt"
