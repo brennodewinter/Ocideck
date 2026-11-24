@@ -7,4 +7,9 @@
 # the real AppDir — following the symlink the AppImage runtime hands us as $0 —
 # and exec the binary from there, passing arguments straight through.
 HERE="$(dirname "$(readlink -f "$0")")"
+
+# The bundled lib/ also carries system libraries the AppImage packs itself
+# (the Ayatana tray chain, #3148). $ORIGIN/lib resolves only the binary's own
+# direct deps; their transitive deps need an explicit search path.
+export LD_LIBRARY_PATH="${HERE}/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 exec "${HERE}/ocideck" "$@"

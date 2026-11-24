@@ -525,6 +525,39 @@ void main() {
       );
     });
 
+    test('the AppImage bundles the Ayatana tray libraries (#3148)', () {
+      // The .deb declares libayatana-appindicator3-1 and the Flatpak carries
+      // the chain, but an AppImage must bring it: on a host without the
+      // package the process started and never showed a window.
+      final appImage = RegExp(
+        r'build_appimage\(\) \{(.*?)\n\}',
+        dotAll: true,
+      ).firstMatch(script)?.group(1);
+      expect(appImage, isNotNull, reason: 'No build_appimage function found.');
+      for (final soname in [
+        'libayatana-appindicator3.so.1',
+        'libayatana-indicator3.so.7',
+        'libayatana-ido3-0.4.so.0',
+        'libdbusmenu-glib.so.4',
+        'libdbusmenu-gtk3.so.4',
+      ]) {
+        expect(
+          appImage,
+          contains(soname),
+          reason: 'build_appimage no longer bundles `$soname` in the AppDir.',
+        );
+      }
+      // The bundled libs sit in lib/; their transitive deps only resolve if
+      // AppRun puts that directory on LD_LIBRARY_PATH.
+      expect(
+        appRun,
+        contains('LD_LIBRARY_PATH'),
+        reason:
+            'AppRun does not export LD_LIBRARY_PATH, so bundled transitive '
+            'libs (e.g. libayatana-indicator3) cannot be found (#3148).',
+      );
+    });
+
     test(
       'Flatpak carries Git and the Ayatana libraries absent from GNOME 50',
       () {

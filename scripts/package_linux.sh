@@ -236,6 +236,29 @@ build_appimage() {
   cp -a "$BUNDLE_DIR/." "$appdir/"                       # ocideck, lib/, data/
 
   install -m0755 "$REPO_ROOT/packaging/linux/AppRun" "$appdir/AppRun"
+
+  # cnativeapi links the Ayatana tray chain, but — unlike the .deb, which
+  # declares it, and the Flatpak, which carries it — an AppImage cannot rely
+  # on the host having it (jvdongen: process started, no window, #3148).
+  # Bundle the same sonames the Flatpak ships; AppRun adds lib/ to
+  # LD_LIBRARY_PATH so the transitive deps resolve too.
+  local soname library
+  for soname in libayatana-appindicator3.so.1 libayatana-indicator3.so.7 \
+      libayatana-ido3-0.4.so.0 libdbusmenu-glib.so.4 libdbusmenu-gtk3.so.4; do
+    library="$(ldconfig -p | awk -v name="$soname" '$1 == name { print $NF; exit }')"
+    if [ -z "$library" ]; then
+      echo "Required AppImage library '$soname' not found." >&2
+      exit 1
+    fi
+    install -m0644 "$library" "$appdir/lib/$soname"
+  done
+  local package
+  for package in libayatana-appindicator3-1 libayatana-indicator3-7 \
+      libayatana-ido3-0.4-0 libdbusmenu-glib4 libdbusmenu-gtk3-4; do
+    install -Dm0644 "/usr/share/doc/$package/copyright" \
+      "$appdir/usr/share/doc/$package/copyright"
+  done
+
   # appimagetool wants the .desktop and its Icon= file at the AppDir root.
   install -m0644 "$DESKTOP" "$appdir/$APP_ID.desktop"
   install -m0644 "$ICON_SRC" "$appdir/$APP_ID.png"
