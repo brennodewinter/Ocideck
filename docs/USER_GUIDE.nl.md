@@ -2475,6 +2475,12 @@ bewaren de wissel; in de Markdown reist hij als
 rustig negeren. Noemt de markering een profiel dat hier niet bestaat, dan
 rendert de dia in de deckstijl — nooit een fout, nooit verlies van tekst.
 
+De deckstijlkeuze in *Presentatie-eigenschappen* wijzigt alleen de
+*standaard*stijl: dia's onder een wissel behouden de hunne, en het dialoog
+toont hoeveel dat er zijn. Wil je het hele deck toch gelijk trekken, vink dan
+*Toepassen op alle dia's* aan — één ongedaan te maken stap die het gekozen
+profiel zet en de wissels van dit deck verwijdert (#3143).
+
 ### OpenKAT-rapporten importeren (desktop)
 
 *(Gewijzigd 2026-08-03, #1158: OpenKAT is nu een eigen integratie met een eigen
