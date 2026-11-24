@@ -53,6 +53,37 @@ void main() {
     expect(found, isEmpty);
   });
 
+  test('decks achter een symlinkmap verschijnen in de scan (#3145)', () async {
+    // Het echte bestand ligt in een dot-map die de scan overslaat, dus het is
+    // álleen via de symlink bereikbaar: bewijst dat de wandeling links volgt.
+    await write('.verborgen/deck.md', deckSource);
+    final link = Link(p.join(temp.path, 'gekoppeld'));
+    try {
+      await link.create(p.join(temp.path, '.verborgen'));
+    } on FileSystemException {
+      return; // Windows zonder ontwikkelaarsmodus kan geen symlinks maken.
+    }
+
+    final found = await service.scanMarkdownFiles(temp.path);
+
+    expect(found.map((f) => f.fileName), contains('deck.md'));
+  });
+
+  test('een symlinklus eindigt de wandeling in plaats van eindeloos', () async {
+    await write('map/deck.md', deckSource);
+    try {
+      await Link(
+        p.join(temp.path, 'map', 'lus'),
+      ).create(p.join(temp.path, 'map'));
+    } on FileSystemException {
+      return;
+    }
+
+    final found = await service.scanMarkdownFiles(temp.path);
+
+    expect(found.where((f) => f.fileName == 'deck.md').length, 1);
+  });
+
   test('finds presentations and documents in one list', () async {
     await write('deck.md', deckSource);
     await write('verslag.md', '# Kwartaalverslag\n\nlopende tekst\n');

@@ -371,7 +371,10 @@ const Map<String, int> fileSizeBaseline = {
   // part-bestanden, de staat in deze klasse.
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
-      1125, // +15 (#2996): de `_themeProfiles`-callback met zijn
+      1082, // -68 (#3145): `scanKnownLocations` verhuisde top-level naar de
+  // scan-part (klasse zat tegen het plafond); ~25 lucht boven de nieuwe
+  // telling (1057).
+  // +15 (#2996): de `_themeProfiles`-callback met zijn
   // constructor-doorvoer en de twee `slideStyles`-bevolkingsplekken bij
   // openen/importeren — pure doorvoer; de resolutie zelf staat in de
   // part `file/file_service_style_profile.dart`.
@@ -583,7 +586,9 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      3078, // +88 (#2996): de stijlwissel — meervoudige stylesidecar,
+      3035, // -68 (#3145): `scanKnownLocations` verhuisde top-level naar de
+  // scan-part; ~25 lucht boven de nieuwe telling (3010).
+  // +88 (#2996): de stijlwissel — meervoudige stylesidecar,
   // per-profiel pakketassets + gescope CSS en de resolutie naar
   // Deck.slideStyles; extensies in de file_service_*-parts tellen mee.
   // +116 (sweep #2875–#2887): I/O-vangsten in het

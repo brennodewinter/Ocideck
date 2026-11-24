@@ -584,84 +584,16 @@ class FileService {
     int maxDepth = 8,
     int maxFilesVisited = 20000,
     int maxMatches = 2000,
-  }) async {
-    final roots = _knownScanRoots(recentFiles);
-    final hits = <ScanHit>[];
-    final seen = <String>{};
-    var visited = 0;
-    var capped = false;
-    bool cancelled() => isCancelled?.call() ?? false;
-
-    Future<void> walk(Directory dir, int depth) async {
-      if (cancelled() || hits.length >= maxMatches || capped) return;
-      onProgress?.call(p.basename(dir.path), hits.length);
-      List<FileSystemEntity> entries;
-      try {
-        entries = await dir.list(followLinks: false).toList();
-      } catch (e) {
-        logWarning('FileService.scanKnownLocations: directory not readable', e);
-        return;
-      }
-      for (final entity in entries) {
-        if (cancelled() || hits.length >= maxMatches) return;
-        if (entity is File) {
-          if (!isEditableMarkdownFile(entity.path)) continue;
-          final normPath = p.normalize(entity.path);
-          if (!seen.add(normPath)) continue;
-          if (++visited > maxFilesVisited) {
-            capped = true;
-            logWarning(
-              'FileService.scanKnownLocations: visited cap reached '
-              '($maxFilesVisited files) — results truncated',
-            );
-            return;
-          }
-          final hit = await _probeMarkdown(
-            entity,
-            includeDocuments: includeDocuments,
-          );
-          if (hit != null) hits.add(hit);
-        } else if (entity is Directory && depth < maxDepth) {
-          final name = p.basename(entity.path);
-          if (name.startsWith('.') ||
-              _ignoredDirs.contains(name) ||
-              _scanDenylistDirs.contains(name)) {
-            continue;
-          }
-          await walk(entity, depth + 1);
-        }
-      }
-    }
-
-    for (final root in roots) {
-      if (cancelled() || hits.length >= maxMatches || capped) break;
-      final dir = Directory(root);
-      try {
-        if (!await dir.exists()) continue;
-      } on FileSystemException catch (e) {
-        // Zoals walk() bij een ondermap: een onleesbare wortel slaat de
-        // zoekopdracht niet over — meld hem en ga door met de volgende.
-        logWarning('FileService: zoekwortel niet leesbaar', e);
-        continue;
-      }
-      await walk(dir, 0);
-    }
-
-    // Presentaties eerst (OciDeck-thema vooraan), dan de documenten, elk op
-    // weergavetitel. Het is één lijst met twee soorten erin; op soort groeperen
-    // scheelt de gebruiker het uit elkaar houden van rijen die er anders om en
-    // om staan — en het filter in het scherm haalt de andere soort weg.
-    hits.sort((a, b) {
-      if (a.kind != b.kind) return a.kind.isPresentation ? -1 : 1;
-      if (a.isOcideckTheme != b.isOcideckTheme) {
-        return a.isOcideckTheme ? -1 : 1;
-      }
-      return a.displayTitle.toLowerCase().compareTo(
-        b.displayTitle.toLowerCase(),
-      );
-    });
-    return hits;
-  }
+  }) => _scanKnownLocations(
+    this,
+    recentFiles: recentFiles,
+    onProgress: onProgress,
+    isCancelled: isCancelled,
+    includeDocuments: includeDocuments,
+    maxDepth: maxDepth,
+    maxFilesVisited: maxFilesVisited,
+    maxMatches: maxMatches,
+  );
 
   Future<String?> pickMarkdownFile({String? initialDirectory}) async {
     // Geen extensiefilter op macOS: zie [_pickPathGated] (eigen NSOpenPanel die
