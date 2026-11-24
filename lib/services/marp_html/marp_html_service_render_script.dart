@@ -69,7 +69,7 @@ document.querySelectorAll('section.slide,section.document').forEach(function(sec
   if(window.marked&&window.DOMPurify&&sec.classList.contains('document')&&src.includes('<!-- ocideck:plain_table v1 -->')){
     var tokens=marked.lexer(src);
     for(var i=0;i+1<tokens.length;i++){
-      if(tokens[i].type!=='html'||tokens[i].raw.trim()!=='<!-- ocideck:plain_table v1 -->'||
+      if(tokens[i].type!=='html'||typeof tokens[i].raw!=='string'||tokens[i].raw.trim()!=='<!-- ocideck:plain_table v1 -->'||
          !tokens[i].raw.endsWith('\n')||tokens[i].raw.endsWith('\n\n')||
          tokens[i+1].type!=='table')continue;
       // Render just this table from its parsed token. The original content
