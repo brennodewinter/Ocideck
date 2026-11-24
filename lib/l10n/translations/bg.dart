@@ -1561,6 +1561,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Това е стилът по подразбиране: слайдовете със собствена смяна на стила го запазват.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} от {m} слайда запазват различен стил.',
+  'Toepassen op alle dia\'s': 'Приложи към всички слайдове',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Премахва {n} маркиране(я) на стил; всеки слайд получава избрания стил.',
   'Blanco tabel': 'Таблица без украса',
   'Tabel in huisstijl': 'Използвай стила за таблици на документа',
   'Leeg bestand': 'Празен файл',

@@ -1542,6 +1542,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'To je privzeti slog: diapozitivi z lastno menjavo sloga ga ohranijo.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} od {m} diapozitivov ohranja drugačen slog.',
+  'Toepassen op alle dia\'s': 'Uporabi za vse diapozitive',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Odstrani {n} oznak sloga; vsak diapozitiv dobi izbrani slog.',
   'Blanco tabel': 'Preprosta tabela',
   'Tabel in huisstijl': 'Uporabi slog tabel dokumenta',
   'Leeg bestand': 'Prazna datoteka',

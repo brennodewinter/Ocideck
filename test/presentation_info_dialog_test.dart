@@ -678,4 +678,86 @@ void main() {
     expect(info, isNotNull);
     expect(info!.presentationTargetSeconds, 100 * 60);
   });
+
+  // #3143: de stijlkeuze wijzigt alleen de standaard. Het dialoog toont daarom
+  // hoeveel dia's onder een eigen stijlmarkering lopen, en biedt de optie om
+  // de markeringen mee te wissen.
+  Deck markedDeck() => Deck(
+    title: 'Test',
+    slides: [
+      Slide.create(SlideType.title).copyWith(styleName: 'Donker'),
+      Slide.create(SlideType.bullets),
+      Slide.create(SlideType.bullets).copyWith(styleName: 'deck'),
+      Slide.create(SlideType.bullets),
+    ],
+  );
+
+  testWidgets('toont hoeveel dia\'s een afwijkende stijl behouden', (
+    tester,
+  ) async {
+    await pumpDialog(tester, reveal: false, deck: markedDeck());
+
+    // Twee dia's lopen onder 'Donker' (de wissel erft door), de 'deck'-
+    // markering en de dia erna volgen de standaard.
+    expect(
+      find.text('2 van de 4 dia\'s houden een afwijkende stijl.'),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey('style-apply-to-all-slides')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('zonder markeringen blijft de optie weg', (tester) async {
+    await pumpDialog(tester, reveal: false, deck: const Deck(title: 'Test'));
+
+    expect(
+      find.byKey(const ValueKey('style-apply-to-all-slides')),
+      findsNothing,
+    );
+    // De duiding dat dit alleen de standaard wijzigt staat er wél.
+    expect(
+      find.textContaining('dia\'s met een eigen stijlwissel behouden die'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets("'Toepassen op alle dia's' komt in het resultaat", (
+    tester,
+  ) async {
+    Future<PresentationInfo?>? result;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: ElevatedButton(
+                onPressed: () =>
+                    result = PresentationInfoDialog.show(context, markedDeck()),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('style-apply-to-all-slides')),
+    );
+    await tester.tap(find.byKey(const ValueKey('style-apply-to-all-slides')));
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('Opslaan'));
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    final info = await result!;
+    expect(info, isNotNull);
+    expect(info!.applyStyleToAllSlides, isTrue);
+  });
 }

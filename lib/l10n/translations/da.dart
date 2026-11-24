@@ -1542,6 +1542,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Dette er standardstilen: dias med eget stilskift beholder det.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} af de {m} dias beholder en afvigende stil.',
+  'Toepassen op alle dia\'s': 'Anvend på alle dias',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Fjerner de {n} stilmarkering(er); hvert dias får den valgte stil.',
   'Blanco tabel': 'Enkel tabel',
   'Tabel in huisstijl': 'Brug dokumentets tabeltypografi',
   'Leeg bestand': 'Tom fil',

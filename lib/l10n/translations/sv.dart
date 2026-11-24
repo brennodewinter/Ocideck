@@ -1541,6 +1541,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Detta är standardstilen: bilder med en egen stilväxling behåller den.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} av de {m} bilderna behåller en avvikande stil.',
+  'Toepassen op alle dia\'s': 'Tillämpa på alla bilder',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Tar bort de {n} stilmarkering(arna); varje bild får den valda stilen.',
   'Blanco tabel': 'Enkel tabell',
   'Tabel in huisstijl': 'Använd dokumentets tabellstil',
   'Leeg bestand': 'Tom fil',

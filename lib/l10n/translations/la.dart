@@ -1553,6 +1553,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Hic est stylus ordinarius: imagines suam mutationem styli propriam retinent.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} ex {m} imaginibus stylum diversum retinent.',
+  'Toepassen op alle dia\'s': 'Adhibe ad omnes imagines',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Tollit {n} styli notas; quaelibet imago stylum electum accipit.',
   'Blanco tabel': 'Tabula simplex',
   'Tabel in huisstijl': 'Utere stilo tabularum documenti',
   'Leeg bestand': 'Fasciculus inanis',

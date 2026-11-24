@@ -1538,6 +1538,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Šis ir noklusējuma stils: slaidi ar savu stila maiņu to saglabā.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} no {m} slaidiem saglabā atšķirīgu stilu.',
+  'Toepassen op alle dia\'s': 'Lietot visiem slaidiem',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Noņem {n} stila marķējumu(s); katrs slaids iegūst izvēlēto stilu.',
   'Blanco tabel': 'Vienkārša tabula',
   'Tabel in huisstijl': 'Lietot dokumenta tabulu stilu',
   'Leeg bestand': 'Tukšs fails',

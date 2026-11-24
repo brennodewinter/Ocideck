@@ -612,6 +612,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Dies ist die Standardvorlage: Folien mit einem eigenen Stilwechsel behalten ihn.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} der {m} Folien behalten einen abweichenden Stil.',
+  'Toepassen op alle dia\'s': 'Auf alle Folien anwenden',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Entfernt die {n} Stilmarkierung(en); jede Folie erhält den gewählten Stil.',
   'Blanco tabel': 'Schlichte Tabelle',
   'Tabel in huisstijl': 'Tabellenstil des Dokuments verwenden',
   'Leeg bestand': 'Leere Datei',

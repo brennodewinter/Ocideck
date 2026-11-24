@@ -1542,6 +1542,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Ini adalah gaya baku: slide dengan peralihan gaya sendiri mempertahankannya.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} dari {m} slide mempertahankan gaya yang berbeda.',
+  'Toepassen op alle dia\'s': 'Terapkan ke semua slide',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Menghapus {n} penanda gaya; setiap slide mendapatkan gaya yang dipilih.',
   'Blanco tabel': 'Tabel polos',
   'Tabel in huisstijl': 'Gunakan gaya tabel dokumen',
   'Leeg bestand': 'Berkas kosong',

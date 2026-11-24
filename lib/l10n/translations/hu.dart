@@ -1543,6 +1543,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Ez az alapértelmezett stílus: a saját stílusváltással rendelkező diák megtartják azt.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n}/{m} dia eltérő stílust tart meg.',
+  'Toepassen op alle dia\'s': 'Alkalmazás az összes diára',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Eltávolítja a(z) {n} stílusjelölést; minden dia a kiválasztott stílust kapja.',
   'Blanco tabel': 'Egyszerű táblázat',
   'Tabel in huisstijl': 'A dokumentum táblázatstílusának használata',
   'Leeg bestand': 'Üres fájl',

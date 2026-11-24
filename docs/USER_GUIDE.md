@@ -2407,6 +2407,11 @@ export show and carry the switch; in the Markdown it travels as
 ignore. A marker naming a profile that does not exist here renders in the deck
 style — never an error, never lost text.
 
+The deck-style choice in *Presentation properties* only changes the *default*
+style: slides under a switch keep theirs, and the dialog says how many that
+is. To unify the whole deck anyway, tick *Apply to all slides* — one undoable
+step that sets the chosen profile and removes this deck's switches (#3143).
+
 ### Importing OpenKAT reports (desktop)
 
 *(Changed 2026-08-03, #1158: OpenKAT is now its own integration with its own

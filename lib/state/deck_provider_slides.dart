@@ -441,3 +441,31 @@ Slide _withCalloutAnchor(Slide updated, List<Slide> slides, int index) {
     anchor: uniqueAnchor(slugifyAnchor(updated.title), taken),
   );
 }
+
+/// Zet de deckstijl én wist alle stijlmarkeringen in één ongedaan-stap —
+/// "Toepassen op alle dia's" in de presentatie-eigenschappen (#3143). Zonder
+/// markeringen erft elke dia [profile] weer en valt de opgeloste per-dia
+/// stijlmap (`slideStyles`) leeg. Een top-level functie zoals
+/// [applyPresentationTlpLevel]: het gedrag hoort hier, maar het is geen nieuw
+/// lid van de al grote notifier-klasse.
+void applyThemeProfileToAllSlides(DeckNotifier notifier, ThemeProfile profile) {
+  final deck = notifier.currentState.deck;
+  if (deck == null) return;
+  final slides = deck.slides.any((s) => s.styleName.isNotEmpty)
+      ? [
+          for (final s in deck.slides)
+            s.styleName.isEmpty ? s : s.copyWith(styleName: ''),
+        ]
+      : deck.slides;
+  notifier._mutate(
+    deck.copyWith(
+      themeProfile: notifier._file.resolveThemeProfile(
+        profile,
+        projectPath: deck.projectPath,
+      ),
+      slides: slides,
+      slideStyles: const {},
+    ),
+    bumpRevision: true,
+  );
+}

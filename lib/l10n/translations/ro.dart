@@ -1556,6 +1556,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Acesta este stilul implicit: diapozitivele cu propria schimbare de stil îl păstrează.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} dintre cele {m} diapozitive păstrează un stil diferit.',
+  'Toepassen op alle dia\'s': 'Aplică pe toate diapozitivele',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Elimină cele {n} marcaje de stil; fiecare diapozitiv primește stilul ales.',
   'Blanco tabel': 'Tabel simplu',
   'Tabel in huisstijl': 'Folosește stilul de tabel al documentului',
   'Leeg bestand': 'Fișier gol',

@@ -1534,6 +1534,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'See on vaikimisi stiil: slaidid, millel on oma stiilivahetus, säilitavad selle.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} {m} slaidist säilitab erineva stiili.',
+  'Toepassen op alle dia\'s': 'Rakenda kõigile slaididele',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Eemaldab {n} stiilimärgise(d); iga slaid saab valitud stiili.',
   'Blanco tabel': 'Lihtne tabel',
   'Tabel in huisstijl': 'Kasuta dokumendi tabelistiili',
   'Leeg bestand': 'Tühi fail',

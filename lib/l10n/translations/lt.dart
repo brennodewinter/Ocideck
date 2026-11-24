@@ -1548,6 +1548,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Tai numatytasis stilius: skaidrės su savo stiliaus pakeitimu jį išsaugo.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} iš {m} skaidrių išsaugo kitokį stilių.',
+  'Toepassen op alle dia\'s': 'Taikyti visas skaidres',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Pašalina {n} stiliaus žymę(ąs); kiekviena skaidrė gauna pasirinktą stilių.',
   'Blanco tabel': 'Paprasta lentelė',
   'Tabel in huisstijl': 'Taikyti dokumento lentelių stilių',
   'Leeg bestand': 'Tuščias failas',

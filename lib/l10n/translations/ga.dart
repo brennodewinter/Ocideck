@@ -1570,6 +1570,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Seo é an stíl réamhshocraithe: coinníonn sleamhnáin a bhfuil a n-athrú stíle féin acu é.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      'Coinníonn {n} den {m} shleamhnán stíl dhifriúil.',
+  'Toepassen op alle dia\'s': 'Cuir i bhfeidhm ar gach sleamhnán',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Baineann sé an/lá {n} marcálaí stíle; faigheann gach sleamhnán an stíl roghnaithe.',
   'Blanco tabel': 'Tábla simplí',
   'Tabel in huisstijl': 'Úsáid stíl tábla an doiciméid',
   'Leeg bestand': 'Comhad folamh',

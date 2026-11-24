@@ -767,6 +767,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'This is the default style: slides with their own style switch keep it.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} of the {m} slides keep a different style.',
+  'Toepassen op alle dia\'s': 'Apply to all slides',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Removes the {n} style marker(s); every slide gets the chosen style.',
   'Blanco tabel': 'Plain table',
   'Tabel in huisstijl': 'Use document table style',
   'Leeg bestand': 'Empty file',
