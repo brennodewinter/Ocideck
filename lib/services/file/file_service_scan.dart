@@ -18,6 +18,134 @@ class _ScanFileOutcome {
   final bool stop;
 }
 
+/// Lost een [Link]-entiteit op naar het File of Directory van zijn doel.
+/// `dir.list(followLinks: false)` rapporteert symlinks als Link — nooit als
+/// File of Directory — dus zonder deze stap staat alles achter een gekoppelde
+/// map (~/decks → ~/Nas/decks) stil buiten elke scan (#3145). Null bij een
+/// kapotte koppeling of geweigerde toegang: zo'n entiteit draagt dan niet
+/// bij, net als vóór deze resolve.
+Future<FileSystemEntity?> _derefEntity(FileSystemEntity entity) async {
+  if (entity is! Link) return entity;
+  try {
+    return switch (await FileSystemEntity.type(entity.path)) {
+      FileSystemEntityType.file => File(entity.path),
+      FileSystemEntityType.directory => Directory(entity.path),
+      _ => null,
+    };
+  } on FileSystemException {
+    return null;
+  }
+}
+
+/// Echte locatie van een map, als dedup-sleutel zodat een symlink-lus of twee
+/// koppelingen naar dezelfde map niet twee keer gewandeld wordt (#3145).
+/// Null bij een onoplosbare koppeling — die slaat de wandeling over.
+Future<String?> _realDirPath(String path) async {
+  try {
+    return await Directory(path).resolveSymbolicLinks();
+  } on FileSystemException {
+    return null;
+  }
+}
+
+/// De implementatie achter [FileService.scanKnownLocations]: wandelt de
+/// bekende wortels ([FileService._knownScanRoots]) en proeft elk bewerkbaar
+/// Markdown-bestand via [FileService._probeMarkdown]. Top-level zoals
+/// [walkMarkdownFiles]: de klasse zit tegen haar plafond.
+Future<List<ScanHit>> _scanKnownLocations(
+  FileService service, {
+  List<String> recentFiles = const [],
+  void Function(String phase, int found)? onProgress,
+  bool Function()? isCancelled,
+  bool includeDocuments = true,
+  int maxDepth = 8,
+  int maxFilesVisited = 20000,
+  int maxMatches = 2000,
+}) async {
+  final roots = service._knownScanRoots(recentFiles);
+  final hits = <ScanHit>[];
+  final seen = <String>{};
+  final seenDirs = <String>{};
+  var visited = 0;
+  var capped = false;
+  bool cancelled() => isCancelled?.call() ?? false;
+
+  Future<void> walk(Directory dir, int depth) async {
+    if (cancelled() || hits.length >= maxMatches || capped) return;
+    onProgress?.call(p.basename(dir.path), hits.length);
+    List<FileSystemEntity> entries;
+    try {
+      entries = await dir.list(followLinks: false).toList();
+    } catch (e) {
+      logWarning('FileService.scanKnownLocations: directory not readable', e);
+      return;
+    }
+    for (final entity in entries) {
+      if (cancelled() || hits.length >= maxMatches) return;
+      // Symlinks resolven eenmalig naar hun doeltype (#3145, zie
+      // [_derefEntity]); [seenDirs] houdt lussen en dubbele wandelingen uit.
+      final effective = await _derefEntity(entity);
+      if (effective is File) {
+        if (!isEditableMarkdownFile(effective.path)) continue;
+        final normPath = p.normalize(effective.path);
+        if (!seen.add(normPath)) continue;
+        if (++visited > maxFilesVisited) {
+          capped = true;
+          logWarning(
+            'FileService.scanKnownLocations: visited cap reached '
+            '($maxFilesVisited files) — results truncated',
+          );
+          return;
+        }
+        final hit = await service._probeMarkdown(
+          effective,
+          includeDocuments: includeDocuments,
+        );
+        if (hit != null) hits.add(hit);
+      } else if (effective is Directory && depth < maxDepth) {
+        final name = p.basename(effective.path);
+        if (name.startsWith('.') ||
+            FileService._ignoredDirs.contains(name) ||
+            FileService._scanDenylistDirs.contains(name)) {
+          continue;
+        }
+        final real = await _realDirPath(effective.path);
+        if (real == null || !seenDirs.add(real)) continue;
+        await walk(effective, depth + 1);
+      }
+    }
+  }
+
+  for (final root in roots) {
+    if (cancelled() || hits.length >= maxMatches || capped) break;
+    final dir = Directory(root);
+    try {
+      if (!await dir.exists()) continue;
+    } on FileSystemException catch (e) {
+      // Zoals walk() bij een ondermap: een onleesbare wortel slaat de
+      // zoekopdracht niet over — meld hem en ga door met de volgende.
+      logWarning('FileService: zoekwortel niet leesbaar', e);
+      continue;
+    }
+    final realDir = await _realDirPath(dir.path);
+    if (realDir != null) seenDirs.add(realDir);
+    await walk(dir, 0);
+  }
+
+  // Presentaties eerst (OciDeck-thema vooraan), dan de documenten, elk op
+  // weergavetitel. Het is één lijst met twee soorten erin; op soort groeperen
+  // scheelt de gebruiker het uit elkaar houden van rijen die er anders om en
+  // om staan — en het filter in het scherm haalt de andere soort weg.
+  hits.sort((a, b) {
+    if (a.kind != b.kind) return a.kind.isPresentation ? -1 : 1;
+    if (a.isOcideckTheme != b.isOcideckTheme) {
+      return a.isOcideckTheme ? -1 : 1;
+    }
+    return a.displayTitle.toLowerCase().compareTo(b.displayTitle.toLowerCase());
+  });
+  return hits;
+}
+
 /// De mapwandeling achter [FileService.scanMarkdownFiles]: loopt [directory]
 /// recursief af en leest elk bewerkbaar tekstbestand in.
 ///
@@ -43,6 +171,7 @@ Future<List<ScannedMarkdown>> walkMarkdownFiles(
   }
 
   final results = <ScannedMarkdown>[];
+  final seenDirs = <String>{};
   var visited = 0;
   var scannedBytes = 0;
   var capped = false;
@@ -57,9 +186,12 @@ Future<List<ScannedMarkdown>> walkMarkdownFiles(
     }
     for (final entity in entries) {
       if (capped) return;
-      if (entity is File) {
-        if (!isEditableMarkdownFile(entity.path)) continue;
-        if (excludePath != null && p.equals(entity.path, excludePath)) {
+      // Symlinks resolven eenmalig naar hun doeltype (#3145, zie
+      // [_derefEntity]); [seenDirs] houdt lussen en dubbele wandelingen uit.
+      final effective = await _derefEntity(entity);
+      if (effective is File) {
+        if (!isEditableMarkdownFile(effective.path)) continue;
+        if (excludePath != null && p.equals(effective.path, excludePath)) {
           continue;
         }
         if (++visited > maxFilesVisited) {
@@ -72,7 +204,7 @@ Future<List<ScannedMarkdown>> walkMarkdownFiles(
         }
         final outcome = await _scanOneFile(
           service,
-          entity,
+          effective,
           scannedBytes,
           maxScanBytes,
           includeDocuments: includeDocuments,
@@ -86,16 +218,20 @@ Future<List<ScannedMarkdown>> walkMarkdownFiles(
           scannedBytes += outcome.bytes;
           results.add(found);
         }
-      } else if (entity is Directory && depth < maxDepth) {
-        final name = p.basename(entity.path);
+      } else if (effective is Directory && depth < maxDepth) {
+        final name = p.basename(effective.path);
         if (FileService._ignoredDirs.contains(name) || name.startsWith('.')) {
           continue;
         }
-        await walk(entity, depth + 1);
+        final real = await _realDirPath(effective.path);
+        if (real == null || !seenDirs.add(real)) continue;
+        await walk(effective, depth + 1);
       }
     }
   }
 
+  final realRoot = await _realDirPath(root.path);
+  if (realRoot != null) seenDirs.add(realRoot);
   await walk(root, 0);
   // Sorteren op een vooraf berekende sleutel: `displayTitle` van een document
   // leest zijn eerste kop uit de bron, en een vergelijkingsfunctie roept dat
