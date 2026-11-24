@@ -1360,7 +1360,7 @@ build-macos: prune-hook-cache sbom-verify
 	@echo "== OciDeck build: macOS app (.app) =="
 	@echo "Command: flutter build macos --release"
 	@echo "Output: build/macos/Build/Products/Release/*.app"
-	flutter build macos --release
+	scripts/with_macos_flutter_semantics_fix.sh build macos --release
 	@echo "== OciDeck helper: whisper-cli in de bundel =="
 	scripts/bundle_whisper_cli.sh macos
 	scripts/bundle_media_decoder.sh

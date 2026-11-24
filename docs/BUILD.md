@@ -57,6 +57,14 @@ extra steps. See [`ARCHITECTURE.md`](ARCHITECTURE.md#vendored-forks).
 flutter run -d macos     # or -d windows / -d linux / -d chrome
 ```
 
+The macOS release target (`make build-macos`) temporarily applies the
+official [Flutter semantics fix](https://github.com/flutter/flutter/pull/193372)
+to the pinned stable SDK. This prevents orphaned accessibility nodes that can
+crash the macOS bridge. The build restores the SDK sources when it exits. Use
+`scripts/with_macos_flutter_semantics_fix.sh run -d macos` to debug with the
+same framework. Remove the backport after moving to a stable pin that includes
+the fix.
+
 ## Web
 
 OciDeck also builds for the browser. Use the hardened target:
