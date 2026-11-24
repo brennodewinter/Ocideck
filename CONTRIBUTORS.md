@@ -15,6 +15,7 @@ lifeblood of open source, and we do not take a single one of them for granted.
 
 - Martijn Aslander
 - Jeroen Baten
+- Jos van Dongen
 - Bas Eenhoorn
 - Mischa van Geelen
 - Heleen van de Groep
