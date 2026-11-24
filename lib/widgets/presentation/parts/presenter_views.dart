@@ -256,6 +256,10 @@ extension _PresenterViews on _FullscreenPresenterState {
         child: Stack(
           children: [
             SizedBox.expand(child: _slideCanvas(slide)),
+            // Voortgangsbalk onderaan het presentatiescherm (#3146): op één
+            // scherm ís dit de projectie, dus dezelfde balk als in de
+            // cockpit.
+            _progressBar(),
             // Bij een quiz is "we wachten op een antwoord" ook voor de zaal
             // zinvolle informatie; zonder badge lijkt auto-play vastgelopen.
             if (_showQuestionWaitBadge) _buildQuestionWaitBadge(context),
@@ -265,6 +269,14 @@ extension _PresenterViews on _FullscreenPresenterState {
       ),
     );
   }
+
+  /// De dunne voortgangsbalk onder de dia — cockpit én publieksweergave
+  /// (#3146). Tijdmodus en doorschakelen komen via hun notifiers (20×/s); een
+  /// doeltijd tikt 1×/s vanuit de repetitieklok — ook als die pas halverwege
+  /// via de cockpit wordt gezet, want elke tik leest `_rehearsal.target`
+  /// opnieuw. Alleen deze widget herbouwt mee, niet de dia eronder (#2633);
+  /// zonder bron blijft de balk onzichtbaar.
+  Widget _progressBar() => _TalkProgressBar(this);
 
   // ── Presenter view (slide + volgende + notities + tijd) ──────────────────
 
@@ -302,33 +314,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                         // notities en klok blijven zichtbaar.
                         if (_blank != _Blank.none)
                           Positioned.fill(child: _blankFill()),
-                        if (_blank == _Blank.none)
-                          // De balk tikt 20× per seconde; alleen deze
-                          // builder herbouwt mee, niet de dia eronder
-                          // (#2633). In tijdmodus komt de waarde van de
-                          // sessieklok, anders van de doorschakeltimer.
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            height: 3,
-                            child: IgnorePointer(
-                              child: ValueListenableBuilder<double>(
-                                valueListenable:
-                                    widget.presentationTiming.enabled
-                                    ? _timedSession.progress
-                                    : _progress,
-                                builder: (context, p, _) => p > 0
-                                    ? LinearProgressIndicator(
-                                        value: p,
-                                        backgroundColor: Colors.white12,
-                                        color: _muted,
-                                        minHeight: 3,
-                                      )
-                                    : const SizedBox.shrink(),
-                              ),
-                            ),
-                          ),
+                        if (_blank == _Blank.none) _progressBar(),
                         if (_showQuestionWaitBadge)
                           _buildQuestionWaitBadge(context),
                       ],
@@ -442,4 +428,79 @@ extension _PresenterViews on _FullscreenPresenterState {
       ),
     );
   }
+}
+
+/// De voortgangsbalk zelf (zie `_progressBar`). De doeltijd-bron heeft geen
+/// eigen notifier in de presentatiestaat — deze widget tikt zelf 1×/s en
+/// houdt daarmee ook zijn eigen timer en dispose bij (#3146).
+class _TalkProgressBar extends StatefulWidget {
+  const _TalkProgressBar(this._s);
+
+  final _FullscreenPresenterState _s;
+
+  @override
+  State<_TalkProgressBar> createState() => _TalkProgressBarState();
+}
+
+class _TalkProgressBarState extends State<_TalkProgressBar> {
+  Timer? _tick;
+  double _talk = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _tick = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (!mounted) return;
+      setState(() {
+        final target = widget._s._rehearsal.target;
+        if (target == null) return;
+        _talk =
+            (widget._s._rehearsal.elapsed.inMicroseconds /
+                    target.inMicroseconds)
+                .clamp(0.0, 1.0);
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _tick?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final s = widget._s;
+    // Sessieklok wint; met een doeltijd telt [_talk] (eigen tik); anders de
+    // doorschakeltimer. Elke tik herbouwt ook deze keuze, dus een doeltijd
+    // die halverwege via de cockpit wordt gezet verschijnt vanzelf.
+    final listenable = s.widget.presentationTiming.enabled
+        ? s._timedSession.progress
+        : s._rehearsal.target == null
+        ? s._progress
+        : null;
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: 3,
+      child: IgnorePointer(
+        child: listenable == null
+            ? _bar(_talk)
+            : ValueListenableBuilder<double>(
+                valueListenable: listenable,
+                builder: (_, p, _) => _bar(p),
+              ),
+      ),
+    );
+  }
+
+  Widget _bar(double p) => p > 0
+      ? LinearProgressIndicator(
+          value: p,
+          backgroundColor: Colors.white12,
+          color: _muted,
+          minHeight: 3,
+        )
+      : const SizedBox.shrink();
 }

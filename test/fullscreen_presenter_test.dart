@@ -24,6 +24,7 @@ Widget _host(
   List<Slide> slides, {
   Map<String, String> initialUserNotes = const {},
   void Function(Map<String, String>)? onUserNotesChanged,
+  Duration? targetDuration,
 }) {
   return MaterialApp(
     localizationsDelegates: const [
@@ -37,6 +38,7 @@ Widget _host(
       initialIndex: 0,
       initialUserNotes: initialUserNotes,
       onUserNotesChanged: onUserNotesChanged,
+      targetDuration: targetDuration,
     ),
   );
 }
@@ -2085,5 +2087,27 @@ void main() {
         expect(Focus.of(tester.element(close)).hasFocus, isTrue);
       },
     );
+  });
+
+  testWidgets('doeltijd vult de voortgangsbalk onder de dia (#3146)', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host([
+        Slide.create(SlideType.bullets).copyWith(title: 'Een', bullets: ['a']),
+      ], targetDuration: const Duration(seconds: 10)),
+    );
+    await tester.pump();
+    expect(find.byType(LinearProgressIndicator), findsNothing);
+
+    // `DateTime.now` loopt onder testWidgets op de echte klok, dus de
+    // fractie zelf is niet deterministisch — wel dat de balk áán staat en
+    // gevuld is: zonder doeltijd-bron zou `p == 0` hem verborgen houden.
+    await tester.pump(const Duration(seconds: 5));
+    final bar = tester.widget<LinearProgressIndicator>(
+      find.byType(LinearProgressIndicator),
+    );
+    expect(bar.value, greaterThan(0));
+    expect(bar.value, lessThan(1));
   });
 }
