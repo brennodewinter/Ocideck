@@ -1542,6 +1542,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Toto je výchozí styl: snímky s vlastní změnou stylu si ji ponechají.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} z {m} snímků si ponechává odlišný styl.',
+  'Toepassen op alle dia\'s': 'Použít na všechny snímky',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Odstraní {n} označení stylu; každý snímek získá zvolený styl.',
   'Blanco tabel': 'Jednoduchá tabulka',
   'Tabel in huisstijl': 'Použít styl tabulky dokumentu',
   'Leeg bestand': 'Prázdný soubor',

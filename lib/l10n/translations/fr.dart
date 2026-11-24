@@ -613,6 +613,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Il s\'agit du style par défaut : les diapositives ayant leur propre changement de style le conservent.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} des {m} diapositives conservent un style différent.',
+  'Toepassen op alle dia\'s': 'Appliquer à toutes les diapositives',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Supprime les {n} marqueur(s) de style ; chaque diapositive reçoit le style choisi.',
   'Blanco tabel': 'Tableau sans décoration',
   'Tabel in huisstijl': 'Utiliser le style de tableau du document',
   'Leeg bestand': 'Fichier vide',

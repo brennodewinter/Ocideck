@@ -1542,6 +1542,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Das isch de Standardstil: Folie mit ere eigene Stilwächsle bhalte die.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} vo de {m} Folie bhalte en abwichende Stil.',
+  'Toepassen op alle dia\'s': 'Uf alli Folie awände',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Entfernt d\'{n} Stilmarkierig(e); jedi Folie überchunnt de gwählti Stil.',
   'Blanco tabel': 'Schlichti Tabälle',
   'Tabel in huisstijl': 'Tabällestil vom Dokumänt bruuche',
   'Leeg bestand': 'Leeri Datei',

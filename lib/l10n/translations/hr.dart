@@ -1546,6 +1546,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Ovo je zadani stil: slajdovi s vlastitom promjenom stila zadržavaju je.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} od {m} slajdova zadržava odstupajući stil.',
+  'Toepassen op alle dia\'s': 'Primijeni na sve slajdove',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Uklanja {n} oznaka stila; svaki slajd dobiva odabrani stil.',
   'Blanco tabel': 'Jednostavna tablica',
   'Tabel in huisstijl': 'Upotrijebi stil tablice dokumenta',
   'Leeg bestand': 'Prazna datoteka',

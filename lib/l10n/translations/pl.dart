@@ -1552,6 +1552,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'To jest styl domyślny: slajdy z własną zmianą stylu zachowują go.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} z {m} slajdów zachowuje odmienny styl.',
+  'Toepassen op alle dia\'s': 'Zastosuj do wszystkich slajdów',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Usuwa {n} znacznik(ów) stylu; każdy slajd otrzymuje wybrany styl.',
   'Blanco tabel': 'Prosta tabela',
   'Tabel in huisstijl': 'Użyj stylu tabeli dokumentu',
   'Leeg bestand': 'Pusty plik',

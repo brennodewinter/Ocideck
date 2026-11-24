@@ -2398,6 +2398,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Bu varsayılan stildir: kendi stil değişikliği olan slaytlar onu korur.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{m} slayttan {n} tanesi farklı bir stili korur.',
+  'Toepassen op alle dia\'s': 'Tüm slaytlara uygula',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      '{n} stil işaretini kaldırır; her slayt seçilen stili alır.',
   'Blanco tabel': 'Düz tablo',
   'Tabel in huisstijl': 'Belgenin tablo stilini kullan',
   'Leeg bestand': 'Boş dosya',

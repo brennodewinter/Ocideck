@@ -1565,6 +1565,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Αυτό είναι το προεπιλεγμένο στυλ: οι διαφάνειες με δική τους αλλαγή στυλ το διατηρούν.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} από τις {m} διαφάνειες διατηρούν διαφορετικό στυλ.',
+  'Toepassen op alle dia\'s': 'Εφαρμογή σε όλες τις διαφάνειες',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Αφαιρεί τους/τις {n} δείκτη(ες) στυλ· κάθε διαφάνεια λαμβάνει το επιλεγμένο στυλ.',
   'Blanco tabel': 'Απλός πίνακας',
   'Tabel in huisstijl': 'Χρήση του στυλ πινάκων του εγγράφου',
   'Leeg bestand': 'Κενό αρχείο',

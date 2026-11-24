@@ -612,6 +612,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Esaki ta e stilo estandar: diapositivanan ku un kambio di stilo propio ta konserv\'é.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} di e {m} diapositivanan ta konservá un stilo diferente.',
+  'Toepassen op alle dia\'s': 'Apliká na tur diapositiva',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Ta eliminá e {n} marcador(nan) di stilo; kada diapositiva ta haña e stilo skohe.',
   'Blanco tabel': 'Tabla sin dekorashon',
   'Tabel in huisstijl': 'Usa e estilo di tabla di e dokumento',
   'Leeg bestand': 'Archivo bashí',

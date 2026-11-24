@@ -1556,6 +1556,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Це стиль за замовчуванням: слайди з власною зміною стилю зберігають його.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} із {m} слайдів зберігають інший стиль.',
+  'Toepassen op alle dia\'s': 'Застосувати до всіх слайдів',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Видаляє {n} позначок стилю; кожен слайд отримує вибраний стиль.',
   'Blanco tabel': 'Таблиця без оформлення',
   'Tabel in huisstijl': 'Застосувати стиль таблиць документа',
   'Leeg bestand': 'Порожній файл',

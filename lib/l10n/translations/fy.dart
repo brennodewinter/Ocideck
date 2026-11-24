@@ -613,6 +613,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Dit is de standertstyl: dia\'s mei in eigen stylwiksel hâlde dy.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} fan de {m} dia\'s hâlde in ôfwikende styl.',
+  'Toepassen op alle dia\'s': 'Tapasse op alle dia\'s',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Fuortsmiddet de {n} stylmarkering(en); eltse dia kriget de keazen styl.',
   'Blanco tabel': 'Tabel sûnder opmaak',
   'Tabel in huisstijl': 'Brûk de tabelstyl fan it dokumint',
   'Leeg bestand': 'Leech bestân',

@@ -1567,6 +1567,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Este é o estilo predefinido: os diapositivos com uma mudança de estilo própria mantêm-no.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} dos {m} diapositivos mantêm um estilo diferente.',
+  'Toepassen op alle dia\'s': 'Aplicar a todos os diapositivos',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Remove os/as {n} marcador(es) de estilo; cada diapositivo recebe o estilo escolhido.',
   'Blanco tabel': 'Tabela sem decoração',
   'Tabel in huisstijl': 'Usar o estilo de tabela do documento',
   'Leeg bestand': 'Ficheiro vazio',

@@ -1542,6 +1542,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Tämä on oletustyyli: diat, joilla on oma tyylinvaihto, säilyttävät sen.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n}/{m} diasta säilyttää poikkeavan tyylin.',
+  'Toepassen op alle dia\'s': 'Käytä kaikissa dioissa',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Poistaa {n} tyylimarkkeria; jokainen dia saa valitun tyylin.',
   'Blanco tabel': 'Pelkistetty taulukko',
   'Tabel in huisstijl': 'Käytä asiakirjan taulukkotyyliä',
   'Leeg bestand': 'Tyhjä tiedosto',

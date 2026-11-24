@@ -1558,6 +1558,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
+      'Dan huwa l-istil awtomatiku: is-slajds b\'bidla ta\' stil tagħhom stess iżommuh.',
+  '{n} van de {m} dia\'s houden een afwijkende stijl.':
+      '{n} mill-{m} slajds iżommu stil differenti.',
+  'Toepassen op alle dia\'s': 'Applika fuq is-slajds kollha',
+  'Verwijdert de {n} stijlmarkering(en); elke dia krijgt de gekozen stijl.':
+      'Ineħħi l-{n} immarkar tal-istil; kull slajd jikseb l-istil magħżul.',
   'Blanco tabel': 'Tabella sempliċi',
   'Tabel in huisstijl': 'Uża l-istil tat-tabelli tad-dokument',
   'Leeg bestand': 'Fajl vojt',
