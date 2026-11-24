@@ -234,6 +234,24 @@ class WindowsCandidateTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'native/build/suite'):
             windows.verify(self.api, ROOT, self.dist, TAG, SHA, REF)
 
+    def test_every_windows_suite_shard_must_be_terminal_success(self):
+        self.api.new_run('windows-test-check.yml')
+        run = self.api.runs['windows-test-check.yml'][0]
+        self.api.jobs[10].extend(
+            {'name': f'Test (windows-2022, shard {index})',
+             'status': 'completed', 'conclusion': 'success'}
+            for index in range(1, 4))
+        windows.successful(self.api, run)
+        for index in range(4):
+            for status, conclusion in [('in_progress', None), ('completed', 'failure'),
+                                       ('completed', 'skipped'), ('completed', 'cancelled')]:
+                with self.subTest(shard=index, status=status, conclusion=conclusion):
+                    job = self.api.jobs[10][index]
+                    job.update(status=status, conclusion=conclusion)
+                    with self.assertRaisesRegex(ValueError, 'native/build/suite'):
+                        windows.successful(self.api, run)
+                    job.update(status='completed', conclusion='success')
+
     def test_cohort_bytes_and_source_sbom_cannot_drift(self):
         self.api.payloads['ocideck-windows-x64-setup-0.7.7.exe'] = b'tampered'
         with self.assertRaisesRegex(ValueError, 'cohort bytes'):

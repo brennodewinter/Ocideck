@@ -124,8 +124,11 @@ void main() {
     expect(ids(deck, viaMemo), ids(deck, uit.scan(deck)));
   });
 
-  test('een deck van 1000 dia\'s hergebruikt iedere warme diascan', () {
+  test('1000 dia\'s hergebruiken de warme scans, ook na invoegen (#2622)', () {
     final counting = _CountingScanner();
+    // Boven de oude LRU-capaciteit van 512 mogen warme dia's geen echte scan
+    // meer uitvoeren. Tel dat werk; runnerbelasting is geen cache-eigenschap.
+    // De geïsoleerde benchmark bewaakt daarnaast de bestaande norm van 5 ms.
     final slides = [
       for (var i = 0; i < 1000; i++) bullets('dia $i zonder bijzonderheden'),
     ];
@@ -141,6 +144,12 @@ void main() {
     expect(counting.slideScanCalls, callsAfterWarm);
     expect(privacyScanMemoMisses, missesAfterWarm);
     expect(ids(deck, again), ids(deck, scanner.scan(deck)));
+
+    final inserted = deckOf([bullets('nieuw bovenaan'), ...slides]);
+    final shifted = memoizedDeckScan(counting, inserted);
+    expect(counting.slideScanCalls, callsAfterWarm + 1);
+    expect(privacyScanMemoMisses, missesAfterWarm + 1);
+    expect(ids(inserted, shifted), ids(inserted, scanner.scan(inserted)));
   });
 
   test('een dia bovenaan invoegen scant alleen die nieuwe dia opnieuw', () {
@@ -177,43 +186,6 @@ void main() {
     expect(twee, een);
     expect(twee, ids(deck, scanner.scan(deck)));
   });
-
-  test(
-    'groot deck: herhaalde scan is een lineaire gang zonder klif (#2622)',
-    () {
-      // De oude LRU(cap 512) verloor boven de capaciteit elke waarde net vóór
-      // het herlezen — een herhaalde scan kostte honderden ms. De Expando per
-      // dia kent die klif niet; de remmende factor is alleen de scan zelf.
-      final deck = deckOf([
-        for (var i = 0; i < 1000; i++) bullets('gewone bullet $i'),
-      ]);
-      memoizedDeckScan(scanner, deck); // warmt de memo
-
-      final watch = Stopwatch()..start();
-      final again = memoizedDeckScan(scanner, deck);
-      watch.stop();
-      expect(
-        watch.elapsedMilliseconds,
-        lessThan(50),
-        reason: 'een ongewijzigd deck opnieuw scannen mag geen meting kosten',
-      );
-      expect(again.findings, isEmpty);
-
-      // Eén nieuwe dia bóvenaan: alle volgende dia's schuiven een plek op maar
-      // hoeven niet opnieuw gemeten te worden — alleen de nieuwe mist.
-      final ingevoegd = deckOf([bullets('nieuw bovenaan'), ...deck.slides]);
-      watch
-        ..reset()
-        ..start();
-      memoizedDeckScan(scanner, ingevoegd);
-      watch.stop();
-      expect(
-        watch.elapsedMilliseconds,
-        lessThan(50),
-        reason: 'een invoeging hergebruikt alle ongemoeide scans',
-      );
-    },
-  );
 
   group('warmPrivacyScanMemo (#2634)', () {
     test(
