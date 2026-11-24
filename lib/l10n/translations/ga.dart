@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Blanco tabel': 'Tábla simplí',
+  'Tabel in huisstijl': 'Úsáid stíl tábla an doiciméid',
   'Leeg bestand': 'Comhad folamh',
   'Wissel naar presentatie': 'Athraigh go láthair',
   'Wissel naar document': 'Athraigh go cáipéis',

@@ -5457,6 +5457,13 @@ older package without that file follows the local profile. See
 [FILE_FORMAT](FILE_FORMAT.md). The writing surface, the preview, the HTML export and the LaTeX
 export draw whichever style applies.
 
+For a signature block or another table that should read like ordinary text,
+choose **Blanco tabel** above that table in the visual editor. OciDeck retains
+the table's alignment and uses the document's body text without borders,
+header fill or zebra striping. **Tabel in huisstijl** restores the document
+style for that table. The choice travels with the Markdown and applies to
+the document preview and exports.
+
 A table wider than the space it is given is neither cut off nor allowed to run
 off the page: the columns take their natural widths as long as they fit, and are
 otherwise scaled down proportionally until the table sits inside the measure.

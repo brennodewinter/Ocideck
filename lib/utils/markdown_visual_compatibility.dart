@@ -3,6 +3,7 @@ import '../services/transcription/transcript_marker.dart';
 import 'spacer_embed_syntax.dart';
 import '../services/document_timeline.dart';
 import '../services/markdown_table_lines.dart';
+import '../services/plain_document_table.dart';
 import '../services/ocideck_markers.dart';
 import '../services/form_document_blocks.dart';
 import '../services/pentest_blocks.dart';
@@ -148,6 +149,13 @@ Set<int> _limitationLines(String markdown) {
     // scheidingsrij die niet even breed zijn).
     if (isMarkdownTableLine(line)) {
       hits.add(index);
+      continue;
+    }
+    if (opensPlainDocumentTable(
+      line,
+      index + 1 < lines.length ? lines[index + 1] : null,
+      index + 2 < lines.length ? lines[index + 2] : null,
+    )) {
       continue;
     }
     var supportedTimeline = false;

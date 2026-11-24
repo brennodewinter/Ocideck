@@ -241,7 +241,14 @@ class PdfCodeBlock extends PdfBlock {
 
 /// Een tabel. De eerste rij is de koprij wanneer [hasHeader] geldt.
 class PdfTableBlock extends PdfBlock {
-  const PdfTableBlock(this.rows, {required this.hasHeader, this.alignments});
+  const PdfTableBlock(
+    this.rows, {
+    required this.hasHeader,
+    this.alignments,
+    this.plain = false,
+  });
+
+  final bool plain;
 
   /// Rijen → cellen → de opgemaakte stukken tekst in die cel.
   final List<List<List<PdfSpan>>> rows;

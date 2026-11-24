@@ -13,6 +13,7 @@
 // boolean attributen, en well-formed XML — een e-reader parseert strenger dan
 // een browser.
 
+import '../plain_document_table.dart';
 import 'package:markdown/markdown.dart' as md;
 
 import '../../utils/export_link.dart';
@@ -85,6 +86,7 @@ String markdownToXhtml(
   final document = md.Document(
     encodeHtml: true,
     extensionSet: md.ExtensionSet.gitHubFlavored,
+    blockSyntaxes: const [PlainDocumentTableSyntax()],
   );
   final nodes = document.parse(preprocessed);
   final visitor = _XhtmlNodeVisitor(
@@ -320,7 +322,10 @@ class _XhtmlNodeVisitor implements md.NodeVisitor {
       // ── Tabellen (GFM) ──
       case 'table':
         _stack.add(_Ctx.table);
-        output.write('<table>');
+        final plain = element.attributes.containsKey(
+          plainDocumentTableAttribute,
+        );
+        output.write(plain ? '<table class="ocideck-plain-table">' : '<table>');
         return true;
       case 'thead':
         output.write('<thead>');

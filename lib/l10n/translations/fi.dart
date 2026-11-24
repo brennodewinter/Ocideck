@@ -1542,6 +1542,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Blanco tabel': 'Pelkistetty taulukko',
+  'Tabel in huisstijl': 'Käytä asiakirjan taulukkotyyliä',
   'Leeg bestand': 'Tyhjä tiedosto',
   'Wissel naar presentatie': 'Vaihda esitykseen',
   'Wissel naar document': 'Vaihda dokumenttiin',

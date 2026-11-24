@@ -1542,6 +1542,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Blanco tabel': 'Preprosta tabela',
+  'Tabel in huisstijl': 'Uporabi slog tabel dokumenta',
   'Leeg bestand': 'Prazna datoteka',
   'Wissel naar presentatie': 'Preklopi na predstavitev',
   'Wissel naar document': 'Preklopi na dokument',

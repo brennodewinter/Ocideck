@@ -1561,6 +1561,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Blanco tabel': 'Таблица без украса',
+  'Tabel in huisstijl': 'Използвай стила за таблици на документа',
   'Leeg bestand': 'Празен файл',
   'Wissel naar presentatie': 'Премини към презентация',
   'Wissel naar document': 'Премини към документ',

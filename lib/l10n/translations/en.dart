@@ -767,6 +767,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Blanco tabel': 'Plain table',
+  'Tabel in huisstijl': 'Use document table style',
   'Leeg bestand': 'Empty file',
   'Wissel naar presentatie': 'Switch to presentation',
   'Wissel naar document': 'Switch to document',

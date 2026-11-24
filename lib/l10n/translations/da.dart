@@ -1542,6 +1542,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Blanco tabel': 'Enkel tabel',
+  'Tabel in huisstijl': 'Brug dokumentets tabeltypografi',
   'Leeg bestand': 'Tom fil',
   'Wissel naar presentatie': 'Skift til præsentation',
   'Wissel naar document': 'Skift til dokument',

@@ -65,7 +65,22 @@ document.querySelectorAll('section.slide,section.document').forEach(function(sec
   // te veranderen.
   src=src.split('<\\/').join('</').split('<\\!--').join('<!--');
   var div=document.createElement('div');div.className='content';
-  var html=window.marked?marked.parse(src):src;
+  var html;
+  if(window.marked&&window.DOMPurify&&sec.classList.contains('document')&&src.includes('<!-- ocideck:plain_table v1 -->')){
+    var tokens=marked.lexer(src);
+    for(var i=0;i+1<tokens.length;i++){
+      if(tokens[i].type!=='html'||tokens[i].raw.trim()!=='<!-- ocideck:plain_table v1 -->'||
+         !tokens[i].raw.endsWith('\n')||tokens[i].raw.endsWith('\n\n')||
+         tokens[i+1].type!=='table')continue;
+      // Render just this table from its parsed token. The original content
+      // has never entered the live DOM, and still goes through DOMPurify.
+      tokens[i+1]={type:'html',text:marked.parser([tokens[i+1]]).replace(
+        '<table>','<table class="ocideck-plain-table">')};
+    }
+    html=marked.parser(tokens);
+  }else{
+    html=window.marked?marked.parse(src):src;
+  }
   // Sanitise rendered Markdown before it touches the DOM: a deck must not be
   // able to run script/onerror/javascript: payloads when the export is opened.
   // If the sanitiser somehow isn't present, fail closed to plain text.

@@ -22,6 +22,7 @@
 // italic_**`) accumuleert properties in één run in plaats van runs te
 // nesten — WordprocessingML staat geneste runs niet toe.
 
+import '../plain_document_table.dart';
 import 'package:markdown/markdown.dart' as md;
 
 import '../../utils/export_link.dart';
@@ -139,6 +140,7 @@ DocxConversion markdownToDocxBody(
   final document = md.Document(
     encodeHtml: true,
     extensionSet: md.ExtensionSet.gitHubFlavored,
+    blockSyntaxes: const [PlainDocumentTableSyntax()],
   );
   final nodes = document.parse(source);
   final visitor = _DocxNodeVisitor(
@@ -221,22 +223,34 @@ int columnWidthTwips(int colCount, int contentWidthTwips) =>
 /// kolommen. De breedte staat vast (`w:tblLayout fixed`) omdat Word,
 /// LibreOffice en Pages `w:type="auto"` alle drie anders uitleggen; met een
 /// vaste opmaak toont het papier overal dezelfde tabel.
-String _tableOpenXml(int colCount, int contentWidthTwips) {
+String _tableOpenXml(
+  int colCount,
+  int contentWidthTwips, {
+  bool plain = false,
+}) {
   final col = columnWidthTwips(colCount, contentWidthTwips);
   final grid = StringBuffer();
   for (var i = 0; i < colCount; i++) {
     grid.write('<w:gridCol w:w="$col"/>');
   }
+  final borderXml = plain
+      ? '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/>'
+            '<w:bottom w:val="nil"/><w:right w:val="nil"/>'
+            '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
+      : _tableGridBorders;
   return '<w:tbl><w:tblPr><w:tblW w:w="${col * colCount}" w:type="dxa"/>'
-      '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '</w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr>'
+      '$borderXml<w:tblLayout w:type="fixed"/></w:tblPr>'
       '<w:tblGrid>$grid</w:tblGrid>';
 }
+
+const _tableGridBorders =
+    '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '</w:tblBorders>';
 
 String _renderTimelineDocx(
   DocumentTimeline timeline, {
@@ -352,6 +366,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
   /// De `RRGGBB`-vulling voor tabelkopcellen, of `null` voor geen vulling.
   final String? tableHeaderFill;
+  bool _plainTable = false;
 
   /// De breedte van de tekstkolom, waarover tabellen hun kolommen verdelen.
   final int contentWidthTwips;
@@ -584,11 +599,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
       // ── Tabellen (GFM) ──
       case 'table':
-        // Een tabel staat naast een alinea, nooit erin.
-        _closeParagraph();
-        _stack.add(_Ctx.table);
-        _tableColumns = _tableColumnCount(element);
-        output.write(_tableOpenXml(_tableColumns, contentWidthTwips));
+        _openTable(element);
         return true;
       case 'thead':
         _stack.add(_Ctx.tableHeader);
@@ -600,7 +611,8 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         _stack.add(_Ctx.tableRow);
         final inHeader = _stack.any((c) => c == _Ctx.tableHeader);
         output.write('<w:tr>');
-        if (inHeader) output.write('<w:trPr><w:tblHeader/></w:trPr>');
+        if (inHeader && !_plainTable)
+          output.write('<w:trPr><w:tblHeader/></w:trPr>');
         return true;
       case 'th':
         _openTableCell(element, header: true);
@@ -623,9 +635,20 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     _stack.add(_Ctx.heading);
   }
 
+  void _openTable(md.Element element) {
+    // Een tabel staat naast een alinea, nooit erin.
+    _closeParagraph();
+    _stack.add(_Ctx.table);
+    _plainTable = element.attributes.containsKey(plainDocumentTableAttribute);
+    _tableColumns = _tableColumnCount(element);
+    output.write(
+      _tableOpenXml(_tableColumns, contentWidthTwips, plain: _plainTable),
+    );
+  }
+
   void _openTableCell(md.Element element, {required bool header}) {
     _stack.add(_Ctx.tableCell);
-    final shd = header && tableHeaderFill != null
+    final shd = !_plainTable && header && tableHeaderFill != null
         ? '<w:shd w:val="clear" w:color="auto" w:fill="$tableHeaderFill"/>'
         : '';
     final width = columnWidthTwips(_tableColumns, contentWidthTwips);
@@ -634,8 +657,11 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     );
     // Vet en de koptekstkleur zitten in de TableHeading-stijl; hier blijft
     // alleen de uitlijning als alinea-eigenschap over.
+    final style = _plainTable
+        ? 'Normal'
+        : (header ? 'TableHeading' : 'TableContents');
     _openParagraph(
-      '<w:pPr><w:pStyle w:val="${header ? 'TableHeading' : 'TableContents'}"/>'
+      '<w:pPr><w:pStyle w:val="$style"/>'
       '<w:jc w:val="${_alignVal(element.attributes['align'])}"/></w:pPr>',
     );
   }

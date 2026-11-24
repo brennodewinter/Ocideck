@@ -1542,6 +1542,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Blanco tabel': 'Tabel polos',
+  'Tabel in huisstijl': 'Gunakan gaya tabel dokumen',
   'Leeg bestand': 'Berkas kosong',
   'Wissel naar presentatie': 'Beralih ke presentasi',
   'Wissel naar document': 'Beralih ke dokumen',

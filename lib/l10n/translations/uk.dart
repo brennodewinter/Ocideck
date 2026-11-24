@@ -1556,6 +1556,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Blanco tabel': 'Таблиця без оформлення',
+  'Tabel in huisstijl': 'Застосувати стиль таблиць документа',
   'Leeg bestand': 'Порожній файл',
   'Wissel naar presentatie': 'Перейти до презентації',
   'Wissel naar document': 'Перейти до документа',

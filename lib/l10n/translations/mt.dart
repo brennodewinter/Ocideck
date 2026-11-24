@@ -1558,6 +1558,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Blanco tabel': 'Tabella sempliċi',
+  'Tabel in huisstijl': 'Uża l-istil tat-tabelli tad-dokument',
   'Leeg bestand': 'Fajl vojt',
   'Wissel naar presentatie': 'Aqleb għal preżentazzjoni',
   'Wissel naar document': 'Aqleb għal dokument',

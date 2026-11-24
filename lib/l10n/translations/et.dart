@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Blanco tabel': 'Lihtne tabel',
+  'Tabel in huisstijl': 'Kasuta dokumendi tabelistiili',
   'Leeg bestand': 'Tühi fail',
   'Wissel naar presentatie': 'Vaheta esitluseks',
   'Wissel naar document': 'Vaheta dokumendiks',

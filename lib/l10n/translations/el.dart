@@ -1565,6 +1565,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Blanco tabel': 'Απλός πίνακας',
+  'Tabel in huisstijl': 'Χρήση του στυλ πινάκων του εγγράφου',
   'Leeg bestand': 'Κενό αρχείο',
   'Wissel naar presentatie': 'Αλλαγή σε παρουσίαση',
   'Wissel naar document': 'Αλλαγή σε έγγραφο',

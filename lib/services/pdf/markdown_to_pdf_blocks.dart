@@ -10,6 +10,7 @@
 // Tekst in, blokken uit. Daardoor is elke beslissing hier met een gewone
 // unit-test vast te leggen.
 
+import '../plain_document_table.dart';
 import 'package:markdown/markdown.dart' as md;
 
 import '../../utils/export_link.dart';
@@ -285,6 +286,7 @@ List<PdfSpan> _inlineOf(String markdown) {
 md.Document _pdfMarkdownDocument() => md.Document(
   encodeHtml: false,
   extensionSet: md.ExtensionSet.gitHubFlavored,
+  blockSyntaxes: const [PlainDocumentTableSyntax()],
   inlineSyntaxes: [_PdfInlineMathSyntax()],
 );
 
@@ -532,6 +534,7 @@ class _PdfBlockConverter {
   }
 
   void _table(md.Element node, List<PdfBlock> out) {
+    final plain = node.attributes.containsKey(plainDocumentTableAttribute);
     final rows = <List<List<PdfSpan>>>[];
     var hasHeader = false;
     List<PdfColumnAlignment>? alignments;
@@ -542,7 +545,7 @@ class _PdfBlockConverter {
       for (final cell in row.children ?? const <md.Node>[]) {
         if (cell is! md.Element) continue;
         if (cell.tag != 'th' && cell.tag != 'td') continue;
-        cells.add(_spansOf(cell, base: PdfSpan('', bold: header)));
+        cells.add(_spansOf(cell, base: PdfSpan('', bold: header && !plain)));
         rowAlignments.add(_alignmentOf(cell));
       }
       if (cells.isEmpty) return;
@@ -571,7 +574,14 @@ class _PdfBlockConverter {
       }
     }
     if (rows.isEmpty) return;
-    out.add(PdfTableBlock(rows, hasHeader: hasHeader, alignments: alignments));
+    out.add(
+      PdfTableBlock(
+        rows,
+        hasHeader: hasHeader && !plain,
+        alignments: alignments,
+        plain: plain,
+      ),
+    );
   }
 
   /// De uitlijning die de scheidingsrij van een GFM-tabel voorschrijft.

@@ -4,6 +4,7 @@ import 'package:markdown_quill/markdown_quill.dart';
 
 import '../services/form_document_blocks.dart';
 import '../services/pentest_blocks.dart';
+import '../services/plain_document_table.dart';
 import 'footnote_embed_syntax.dart';
 import 'form_block_embed_syntax.dart';
 import 'underline_tag_syntax.dart';
@@ -58,6 +59,7 @@ class MarkdownQuillCodec {
       // anders, maar de syntax moet vóór de standaard-alinearegel staan.
       SourceFragmentSyntax(),
       TimelineTableSyntax(),
+      PlainDocumentTableSyntax(embedTag: EmbeddableTable.tableType),
       // Het risicodossier-contract (RISK_FORMAT §5): een `<!-- ocideck:* -->
       // -markerblok plus de tabel eronder is één atomaire embed. Vóór de
       // HTML-blokregel, anders slokt die het commentaar op.

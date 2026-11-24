@@ -12,6 +12,7 @@
 // waar de noten als lijst achterin staan. Dat past bij het doel van ODT: een
 // bewerkbaar document waarin de ontvanger de noten kan aanpassen.
 
+import '../plain_document_table.dart';
 import 'package:markdown/markdown.dart' as md;
 
 import '../../utils/export_link.dart';
@@ -83,6 +84,7 @@ OdtConversion markdownToOdtBody(
   final document = md.Document(
     encodeHtml: true,
     extensionSet: md.ExtensionSet.gitHubFlavored,
+    blockSyntaxes: const [PlainDocumentTableSyntax()],
   );
   final nodes = document.parse(preprocessed);
   final visitor = _OdtNodeVisitor(chapterPageBreak: chapterPageBreak);
@@ -358,6 +360,9 @@ class _OdtNodeVisitor implements md.NodeVisitor {
 
       // ── Tabellen (GFM) ──
       case 'table':
+        _plainTable = element.attributes.containsKey(
+          plainDocumentTableAttribute,
+        );
         _stack.add(_Ctx.table);
         output.write('<table:table>');
         // Kolombreedtes: gelijkmatig verdeeld.
@@ -379,6 +384,10 @@ class _OdtNodeVisitor implements md.NodeVisitor {
         output.write('<table:table-row>');
         return true;
       case 'th':
+        if (_plainTable) {
+          _plainTableCell(element);
+          return true;
+        }
         _stack.add(_Ctx.tableCell);
         _buf.write(
           '<table:table-cell table:style-name="Table_Header_Cell" '
@@ -387,6 +396,10 @@ class _OdtNodeVisitor implements md.NodeVisitor {
         );
         return true;
       case 'td':
+        if (_plainTable) {
+          _plainTableCell(element);
+          return true;
+        }
         _stack.add(_Ctx.tableCell);
         final align = element.attributes['align'];
         final styleName = align != null
@@ -402,6 +415,18 @@ class _OdtNodeVisitor implements md.NodeVisitor {
         _stack.add(_Ctx.passThrough);
     }
     return true;
+  }
+
+  bool _plainTable = false;
+
+  void _plainTableCell(md.Element element) {
+    _stack.add(_Ctx.tableCell);
+    final align = element.attributes['align'];
+    final style = align == null ? 'Standard' : _alignStyleName(align);
+    _buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p text:style-name="$style">',
+    );
   }
 
   void _writeHeading(int level) {

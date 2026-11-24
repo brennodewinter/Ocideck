@@ -391,6 +391,7 @@ h4, h5, h6 { font-size: 1.1em; margin-top: 0.5em; }
 img { max-width: 100%; height: auto; }
 table { border-collapse: collapse; width: 100%; margin: 1em 0; }
 th, td { border: 1px solid #ccc; padding: 0.4em 0.6em; text-align: left; }
+.ocideck-plain-table th, .ocideck-plain-table td { border: 0; font-weight: normal; }
 th { background: #f0f0f0; font-weight: bold; }
 blockquote { margin: 1em 0; padding-left: 1em; border-left: 3px solid #ccc; color: #555; }
 code { font-family: monospace; font-size: 0.9em; }

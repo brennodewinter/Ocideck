@@ -1546,6 +1546,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Blanco tabel': 'Jednostavna tablica',
+  'Tabel in huisstijl': 'Upotrijebi stil tablice dokumenta',
   'Leeg bestand': 'Prazna datoteka',
   'Wissel naar presentatie': 'Prebaci na prezentaciju',
   'Wissel naar document': 'Prebaci na dokument',

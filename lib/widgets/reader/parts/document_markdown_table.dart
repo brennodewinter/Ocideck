@@ -25,8 +25,9 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     _Theme t,
     List<String> rows,
     List<TableAlign> sourceAligns,
-    int tableOrdinal,
-  ) {
+    int tableOrdinal, {
+    bool plain = false,
+  }) {
     // Controller loopt voor op de bron: die volgt pas ná de celwijziging.
     final editor =
         tableEditorFor?.call(tableOrdinal) ??
@@ -38,7 +39,8 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
         stationaryToolbar: stationaryTableToolbar,
         onSort: onSortTableColumn,
         extraToolbarItems: tableToolbarExtras,
-        builder: (_) => _tableBody(t, editor.rows, editor.alignments, editor),
+        builder: (_) =>
+            _tableBody(t, editor.rows, editor.alignments, editor, plain: plain),
       );
     }
     return _tableBody(
@@ -46,6 +48,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
       rows.map(splitMarkdownTableRow).toList(),
       sourceAligns,
       null,
+      plain: plain,
     );
   }
 
@@ -56,8 +59,9 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     _Theme t,
     List<List<String>> cells,
     List<TableAlign> aligns,
-    TableEditController? editor,
-  ) {
+    TableEditController? editor, {
+    required bool plain,
+  }) {
     final columns = cells.isEmpty
         ? 0
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
@@ -74,8 +78,8 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
           final avail = constraints.maxWidth;
           // Document-tabellen lezen op een vaste, leesbare celmaat (geen
           // slide-fitting): body 14px, kop 13px. Een document is geen 16:9-dia.
-          const cellSize = 14.0;
-          const headerCellSize = 13.0;
+          final cellSize = plain ? t.body.fontSize ?? 14.0 : 14.0;
+          final headerCellSize = plain ? cellSize : 13.0;
           final font = t.body.fontFamily ?? 'sans-serif';
           // De marge waarmee de cel écht getekend wordt (zie [_tableCell]).
           // Meten met de preview-marge rekende de kolom een paar pixels rijker
@@ -109,6 +113,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
             cellSize,
             headerCellSize,
             editor,
+            plain: plain,
           );
           // Past de tabel niet binnen de breedte, dan valt hij terug op
           // horizontale scroll met intrinsieke kolombreedtes — het bestaande
@@ -135,12 +140,14 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     List<double>? colWidths,
     double cellSize,
     double headerCellSize,
-    TableEditController? editor,
-  ) {
+    TableEditController? editor, {
+    required bool plain,
+  }) {
     final pad = t.tableCellPad;
     final border = t.tableBorder;
-    final hasBox = t.tableBorderStyle == TableBorderStyle.boxed;
-    final hasLines = t.tableBorderStyle == TableBorderStyle.lined;
+    final borderStyle = plain ? TableBorderStyle.none : t.tableBorderStyle;
+    final hasBox = borderStyle == TableBorderStyle.boxed;
+    final hasLines = borderStyle == TableBorderStyle.lined;
     // Buitenrand alleen bij boxed; lined en none leunen op binnenlijnen of
     // witruimte.
     final outer = hasBox
@@ -148,7 +155,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
         : hasLines
         ? Border(bottom: BorderSide(color: border))
         : null;
-    final inside = switch (t.tableBorderStyle) {
+    final inside = switch (borderStyle) {
       TableBorderStyle.boxed => TableBorder.symmetric(
         inside: BorderSide(color: border.withValues(alpha: 0.5)),
       ),
@@ -163,7 +170,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
         color: Colors.transparent,
       ),
     };
-    final accentHeaderLine = t.tableAccentHeaderBorder
+    final accentHeaderLine = !plain && t.tableAccentHeaderBorder
         ? Border(bottom: BorderSide(color: t.tableAccent, width: 2))
         : null;
     return Container(
@@ -185,7 +192,9 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
           for (var r = 0; r < cells.length; r++)
             TableRow(
               decoration: BoxDecoration(
-                color: r == 0
+                color: plain
+                    ? null
+                    : r == 0
                     ? t.tableHeaderBg
                     : t.tableZebraStriped && r.isEven
                     ? t.tableZebraBg
@@ -201,11 +210,13 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
                       column: c,
                       linkColor: t.link,
                       codeBackground: t.inlineCodeBg,
-                      style: _cellStyle(
-                        t,
-                        header: r == 0,
-                        cellSize: r == 0 ? headerCellSize : cellSize,
-                      ),
+                      style: plain
+                          ? t.body
+                          : _cellStyle(
+                              t,
+                              header: r == 0,
+                              cellSize: r == 0 ? headerCellSize : cellSize,
+                            ),
                       textAlign: _columnTextAlign(aligns, c),
                       pad: pad,
                       caretColor: t.tableAccent,
@@ -215,6 +226,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
                       t,
                       c < cells[r].length ? cells[r][c] : '',
                       header: r == 0,
+                      plain: plain,
                       textAlign: _columnTextAlign(aligns, c),
                       pad: pad,
                       cellSize: r == 0 ? headerCellSize : cellSize,
@@ -230,6 +242,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     _Theme t,
     String text, {
     required bool header,
+    bool plain = false,
     TextAlign textAlign = TextAlign.start,
     double pad = 8.0,
     double cellSize = 14.0,
@@ -237,7 +250,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     padding: EdgeInsets.symmetric(horizontal: pad + 4, vertical: pad * 0.6),
     child: _inline(
       text,
-      _cellStyle(t, header: header, cellSize: cellSize),
+      plain ? t.body : _cellStyle(t, header: header, cellSize: cellSize),
       t,
       textAlign: textAlign,
     ),
@@ -288,14 +301,17 @@ int _skipOciMarkers(List<String> lines, int i, List<_Block> blocks) {
       j + 1 < lines.length &&
       isMarkdownTableLine(lines[j]) &&
       isMarkdownTableDelimiterRow(lines[j + 1]);
-  if (carrier == OciMarkerKinds.bowtie && boundTable) {
+  final plain = j == i + 1 && lines[i].trim() == plainDocumentTableMarker;
+  if ((plain || carrier == OciMarkerKinds.bowtie) && boundTable) {
     final parsed = _parseTableAt(lines, j);
     blocks.add(
       _Block(
         _Kind.table,
         rows: parsed.block.rows,
         aligns: parsed.block.aligns,
-        source: lines.sublist(i, parsed.end).join('\n'),
+        source: plain
+            ? plainDocumentTableMarker
+            : lines.sublist(i, parsed.end).join('\n'),
       ),
     );
     return parsed.end;
@@ -317,7 +333,15 @@ Widget _tableOrBowtie(
   _Block b,
   int ordinal,
 ) {
-  if (b.source.isEmpty) return view._table(t, b.rows, b.aligns, ordinal);
+  if (b.source.isEmpty || b.source == plainDocumentTableMarker) {
+    return view._table(
+      t,
+      b.rows,
+      b.aligns,
+      ordinal,
+      plain: b.source == plainDocumentTableMarker,
+    );
+  }
   final editor =
       view.tableEditorFor?.call(ordinal) ??
       (ordinal == 0 ? view.tableEditController : null);

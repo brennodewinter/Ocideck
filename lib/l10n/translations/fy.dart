@@ -613,6 +613,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Blanco tabel': 'Tabel sûnder opmaak',
+  'Tabel in huisstijl': 'Brûk de tabelstyl fan it dokumint',
   'Leeg bestand': 'Leech bestân',
   'Wissel naar presentatie': 'Wikselje nei presintaasje',
   'Wissel naar document': 'Wikselje nei dokumint',

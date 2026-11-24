@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Blanco tabel': 'Tabula simplex',
+  'Tabel in huisstijl': 'Utere stilo tabularum documenti',
   'Leeg bestand': 'Fasciculus inanis',
   'Wissel naar presentatie': 'Ad praesentationem muta',
   'Wissel naar document': 'Ad documentum muta',

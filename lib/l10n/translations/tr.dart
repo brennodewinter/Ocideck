@@ -2398,6 +2398,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Blanco tabel': 'Düz tablo',
+  'Tabel in huisstijl': 'Belgenin tablo stilini kullan',
   'Leeg bestand': 'Boş dosya',
   'Wissel naar presentatie': 'Sunuma geç',
   'Wissel naar document': 'Belgeye geç',

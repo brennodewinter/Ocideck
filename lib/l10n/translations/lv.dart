@@ -1538,6 +1538,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Blanco tabel': 'Vienkārša tabula',
+  'Tabel in huisstijl': 'Lietot dokumenta tabulu stilu',
   'Leeg bestand': 'Tukšs fails',
   'Wissel naar presentatie': 'Pārslēgt uz prezentāciju',
   'Wissel naar document': 'Pārslēgt uz dokumentu',
