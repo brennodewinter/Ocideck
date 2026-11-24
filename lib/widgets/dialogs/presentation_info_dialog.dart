@@ -18,10 +18,9 @@ import '../../state/settings_provider.dart';
 import '../../models/used_tool.dart';
 import '../../services/reference_standards.dart';
 import '../../theme/app_theme.dart';
-import 'new_deck_dialog.dart' show ThemeProfileSwatch;
-import 'settings_dialog.dart';
 import 'presentation_cost_picker.dart';
 import 'slide_size_picker.dart';
+import 'style_profile_picker.dart';
 
 /// The editable general metadata of a presentation.
 class PresentationInfo {
@@ -59,6 +58,11 @@ class PresentationInfo {
   /// Naam van het gekozen stijlprofiel (null = ongewijzigd laten).
   final String? styleProfileName;
 
+  /// "Toepassen op alle dia's" (#3143): de stijlmarkeringen in het deck ook
+  /// wissen, zodat het gekozen profiel overal geldt en niet alleen waar geen
+  /// wissel loopt.
+  final bool applyStyleToAllSlides;
+
   const PresentationInfo({
     required this.title,
     required this.author,
@@ -76,6 +80,7 @@ class PresentationInfo {
     this.showRehearsalSummary = true,
     this.playOnly = false,
     this.styleProfileName,
+    this.applyStyleToAllSlides = false,
     this.slideSize,
     this.presentationCosts = PresentationCostConfig.off,
   });
@@ -114,8 +119,12 @@ Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
   // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal) en
   // wordt meteen op het open deck toegepast.
   final profileName = info.styleProfileName;
+  final currentProfileName = ref.read(deckProvider).deck?.themeProfile.name;
+  final applyToAll = info.applyStyleToAllSlides;
+  // Bij een ongewijzigd profiel is er normaal niets te doen — behalve wanneer
+  // "op alle dia's toepassen" alsnog de stijlmarkeringen moet wissen.
   if (profileName == null ||
-      profileName == ref.read(deckProvider).deck?.themeProfile.name) {
+      (profileName == currentProfileName && !applyToAll)) {
     return;
   }
   final profile = ref
@@ -124,8 +133,16 @@ Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
       .where((p) => p.name == profileName)
       .firstOrNull;
   if (profile == null) return;
-  await ref.read(settingsProvider.notifier).selectThemeProfile(profileName);
-  deckNotifier.updateThemeProfile(profile);
+  if (profileName != currentProfileName) {
+    await ref.read(settingsProvider.notifier).selectThemeProfile(profileName);
+  }
+  // De bewust gemengde presentatie blijft de standaardkeuze (#2996): alleen
+  // de expliciete optie wist de markeringen mee.
+  if (applyToAll) {
+    applyThemeProfileToAllSlides(deckNotifier, profile);
+  } else {
+    deckNotifier.updateThemeProfile(profile);
+  }
 }
 
 /// Dialog to view and edit a presentation's general metadata (author, version,
@@ -190,6 +207,7 @@ class _PresentationInfoDialogState
   late PresentationCostConfig _presentationCosts;
   MarpCompatReport? _marpCompat;
   late String _profileName;
+  bool _applyStyleToAllSlides = false;
 
   @override
   void initState() {
@@ -267,6 +285,7 @@ class _PresentationInfoDialogState
         slideSize: _slideSize,
         presentationCosts: _presentationCosts,
         styleProfileName: _profileName,
+        applyStyleToAllSlides: _applyStyleToAllSlides,
       ),
     );
   }
@@ -335,7 +354,15 @@ class _PresentationInfoDialogState
                   ),
                 ),
                 const SizedBox(height: 16),
-                _styleProfileControl(l10n),
+                StyleProfilePicker(
+                  deck: widget.deck,
+                  profileName: _profileName,
+                  applyToAll: _applyStyleToAllSlides,
+                  onProfileChanged: (name) =>
+                      setState(() => _profileName = name),
+                  onApplyToAllChanged: (v) =>
+                      setState(() => _applyStyleToAllSlides = v),
+                ),
                 const SizedBox(height: 16),
                 _targetTimeControl(l10n),
                 const SizedBox(height: 16),
@@ -690,75 +717,6 @@ class _PresentationInfoDialogState
 
   void _fillCurrentStandards() {
     setState(() => _standards.text = currentStandardEntries().join(', '));
-  }
-
-  /// Stijlprofielkeuze, hier zichtbaar naast de metadata: veel gebruikers
-  /// zoeken "de look" bij de presentatie-eigenschappen, niet in instellingen.
-  /// De beheerknop opent het instellingen-tabblad Presentatiestijl.
-  Widget _styleProfileControl(AppLocalizations l10n) {
-    final profiles = ref.watch(settingsProvider.select((s) => s.themeProfiles));
-    final value = profiles.any((p) => p.name == _profileName)
-        ? _profileName
-        : profiles.first.name;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: InputDecorator(
-                decoration: InputDecoration(
-                  labelText: l10n.t('styleProfile'),
-                  isDense: true,
-                  prefixIcon: const Icon(Icons.palette_outlined, size: 18),
-                  border: const OutlineInputBorder(),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: value,
-                    isExpanded: true,
-                    isDense: true,
-                    items: [
-                      for (final profile in profiles)
-                        DropdownMenuItem(
-                          value: profile.name,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ThemeProfileSwatch(profile: profile),
-                              const SizedBox(width: 8),
-                              Flexible(
-                                child: Text(
-                                  profile.name,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                    ],
-                    onChanged: (name) {
-                      if (name != null) setState(() => _profileName = name);
-                    },
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            IconButton(
-              tooltip: l10n.d('Stijlprofielen beheren…'),
-              icon: const Icon(Icons.tune, size: 18),
-              onPressed: () => SettingsDialog.show(
-                context,
-                initialSection: SettingsSection.presentation,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
   }
 
   /// De doeltijd-dropdown met toelichting (aftelling in de presenter).
