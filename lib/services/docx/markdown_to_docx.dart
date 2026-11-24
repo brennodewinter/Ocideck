@@ -611,8 +611,9 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         _stack.add(_Ctx.tableRow);
         final inHeader = _stack.any((c) => c == _Ctx.tableHeader);
         output.write('<w:tr>');
-        if (inHeader && !_plainTable)
+        if (inHeader && !_plainTable) {
           output.write('<w:trPr><w:tblHeader/></w:trPr>');
+        }
         return true;
       case 'th':
         _openTableCell(element, header: true);
