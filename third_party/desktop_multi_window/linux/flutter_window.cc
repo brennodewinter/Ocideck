@@ -160,9 +160,21 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
         }
       }
 
+      // A monitor can disappear between enumeration and this call (dock or
+      // cable pulled mid-presentation). gdk_monitor_get_geometry on a null
+      // monitor leaves bounds undefined; refuse instead of feeding that to
+      // fullscreen_on_monitor.
+      GdkMonitor* target =
+          gdk_display_get_monitor(display, target_monitor);
+      if (target == nullptr) {
+        response = FL_METHOD_RESPONSE(
+            fl_method_error_response_new("-1", "display no longer available",
+                                         nullptr));
+        fl_method_call_respond(method_call, response, nullptr);
+        return;
+      }
       GdkRectangle bounds;
-      gdk_monitor_get_geometry(gdk_display_get_monitor(display, target_monitor),
-                               &bounds);
+      gdk_monitor_get_geometry(target, &bounds);
       gtk_window_unfullscreen(window);
       gtk_window_set_decorated(window, FALSE);
       gtk_window_move(window, bounds.x, bounds.y);
