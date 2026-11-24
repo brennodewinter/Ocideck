@@ -14,6 +14,7 @@
 // bekende wiskundecommando's ongewijzigd terug; onbekende TeX-primitieven
 // worden zichtbare, geëscapete tekst.
 
+import '../plain_document_table.dart';
 import 'package:markdown/markdown.dart' as md;
 
 import '../../models/settings.dart' show TableBorderStyle, ThemeProfile;
@@ -84,6 +85,7 @@ String markdownToLatex(
   final document = md.Document(
     encodeHtml: false,
     extensionSet: md.ExtensionSet.gitHubFlavored,
+    blockSyntaxes: const [PlainDocumentTableSyntax()],
     // `<u>…</u>` (#2866) als element, net als in de visuele codec — de
     // visitor schrijft er \uline{…} voor weg.
     inlineSyntaxes: [UnderlineTagSyntax()],
@@ -211,8 +213,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   /// gedeelde converter geschikt voor Beamer en losse fragmenttests.
   final ThemeProfile? tableTheme;
 
-  TableBorderStyle get _tableBorderStyle =>
-      tableTheme?.tableBorderStyle ?? tableBorderStyle;
+  TableBorderStyle get _tableBorderStyle => _plainTable
+      ? TableBorderStyle.none
+      : tableTheme?.tableBorderStyle ?? tableBorderStyle;
 
   /// Of we al een hoofdstuk zijn tegengekomen — het eerste krijgt geen `\newpage`.
   bool _seenChapter = false;
@@ -391,6 +394,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
 
       // ── Tabellen (GFM) ──
       case 'table':
+        _plainTable = element.attributes.containsKey(
+          plainDocumentTableAttribute,
+        );
         _beginTable();
         return true;
       case 'thead':
@@ -407,6 +413,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
       case 'th':
       case 'td':
         _stack.add(_Ctx.tableCell);
+        if (_plainTable) return true;
         if (_inTableHead) {
           _rowBuf.write(
             tableTheme == null
@@ -550,7 +557,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
           TableBorderStyle.boxed => '|${_tableColumnAlignments.join('|')}|',
           _ => columns,
         };
-        if (tableTheme != null) _writeTableStyleStart();
+        if (!_plainTable && tableTheme != null) _writeTableStyleStart();
         output.write('\\begin{tabular}{$spec}\n');
         if (_tableBorderStyle == TableBorderStyle.boxed) {
           output.write('\\hline\n');
@@ -565,7 +572,8 @@ class _LatexNodeVisitor implements md.NodeVisitor {
           output.write('\\bottomrule\n');
         }
         output.write('\\end{tabular}\n');
-        if (tableTheme != null) output.write('}\n');
+        if (!_plainTable && tableTheme != null) output.write('}\n');
+        _plainTable = false;
       case 'thead':
         // Niets — de header/body-scheiding (\midrule) wordt bij de eerste
         // tbody-rij geplaatst.
@@ -596,7 +604,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
           _ => '',
         };
         final headerRule =
-            _inTableHead && tableTheme?.tableAccentHeaderBorder == true
+            !_plainTable &&
+                _inTableHead &&
+                tableTheme?.tableAccentHeaderBorder == true
             ? '\\arrayrulecolor{ocideckTableAccent}\n'
                   '\\specialrule{1.5pt}{0pt}{0pt}\n'
                   '\\arrayrulecolor{ocideckTableBorder}\n'
@@ -604,9 +614,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
         _tableRows.write('$cleaned \\\\\n$headerRule');
       case 'th':
       case 'td':
-        if (_inTableHead) {
+        if (!_plainTable && _inTableHead) {
           _rowBuf.write(tableTheme == null ? '}' : '}}');
-        } else if (tableTheme != null) {
+        } else if (!_plainTable && tableTheme != null) {
           _rowBuf.write('}');
         }
         _rowBuf.write(' & ');
@@ -621,6 +631,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   final List<String> _tableColumnAlignments = [];
   int _tableColCount = 0;
   bool _inTableHead = false;
+  bool _plainTable = false;
 
   void _writeTableStyleStart() {
     final rawPadding = tableTheme!.tableCellPaddingPx;

@@ -1545,6 +1545,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Blanco tabel': 'Jednoduchá tabuľka',
+  'Tabel in huisstijl': 'Použiť štýl tabuľky dokumentu',
   'Leeg bestand': 'Prázdny súbor',
   'Wissel naar presentatie': 'Prepnúť na prezentáciu',
   'Wissel naar document': 'Prepnúť na dokument',

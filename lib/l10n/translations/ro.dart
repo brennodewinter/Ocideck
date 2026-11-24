@@ -1556,6 +1556,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Blanco tabel': 'Tabel simplu',
+  'Tabel in huisstijl': 'Folosește stilul de tabel al documentului',
   'Leeg bestand': 'Fișier gol',
   'Wissel naar presentatie': 'Comută la prezentare',
   'Wissel naar document': 'Comută la document',

@@ -1548,6 +1548,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Blanco tabel': 'Paprasta lentelė',
+  'Tabel in huisstijl': 'Taikyti dokumento lentelių stilių',
   'Leeg bestand': 'Tuščias failas',
   'Wissel naar presentatie': 'Perjungti į pateiktį',
   'Wissel naar document': 'Perjungti į dokumentą',

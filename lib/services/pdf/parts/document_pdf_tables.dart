@@ -38,7 +38,11 @@ extension DocumentPdfTables on DocumentPdfWidgets {
       rows.add(
         pw.TableRow(
           decoration: pw.BoxDecoration(
-            color: isHeader ? style.tableHeaderBackground : zebra,
+            color: block.plain
+                ? null
+                : isHeader
+                ? style.tableHeaderBackground
+                : zebra,
           ),
           repeat: isHeader,
           children: [
@@ -58,7 +62,7 @@ extension DocumentPdfTables on DocumentPdfWidgets {
     // zichzelf over een bladovergang heen kan verdelen, en die eigenschap
     // verliest hij zodra er iets omheen zit.
     final table = OrphanSafeTable(
-      border: _tableBorder(),
+      border: block.plain ? null : _tableBorder(),
       columnWidths: pdfTableColumnWidths(
         rows: block.rows,
         colCount: _tableColCount(block),
@@ -158,7 +162,11 @@ extension DocumentPdfTables on DocumentPdfWidgets {
         },
         text: pw.TextSpan(
           style: _baseStyle.copyWith(
-            color: header ? style.tableHeaderText : style.tableText,
+            color: block.plain
+                ? style.textColor
+                : header
+                ? style.tableHeaderText
+                : style.tableText,
             fontSize: style.bodyFontSize * scale,
           ),
           children: _spans(block.rows[row][column], scale: scale),

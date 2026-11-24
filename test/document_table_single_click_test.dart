@@ -205,6 +205,38 @@ Onder de tabel.
     expect(state.document!.source, contains('| Peer | Banaan |'));
   });
 
+  testWidgets('blanco tabel wisselt terug en bewaart celbewerkingen', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1300, 850));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    AppLocalizations.setActiveLanguageCode('nl');
+    await pumpEditor(tester, document);
+    final toggle = find.text('Blanco tabel');
+    await tester.tap(toggle);
+    await tester.pumpAndSettle();
+    final table = tester.widget<Table>(find.byType(Table));
+    final header = table.children.first.decoration! as BoxDecoration;
+    expect(header.color, isNull);
+    expect(header.border, isNull);
+
+    final cell = find.widgetWithText(TextField, 'Appel');
+    await tester.enterText(cell, 'Peer');
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(DocumentEditorScreen)),
+    );
+    String source() => container.read(documentProvider).document!.source;
+    expect(source(), contains('<!-- ocideck:plain_table v1 -->\n| Naam |'));
+    expect(source(), contains('| Peer | Banaan |'));
+
+    await tester.tap(find.text('Tabel in huisstijl'));
+    await tester.pumpAndSettle();
+    expect(source(), isNot(contains('ocideck:plain_table')));
+    expect(source(), contains('| Peer | Banaan |'));
+  });
+
   testWidgets('tabel aan het documenteinde: één klik heen en terug', (
     tester,
   ) async {

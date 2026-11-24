@@ -1543,6 +1543,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Blanco tabel': 'Egyszerű táblázat',
+  'Tabel in huisstijl': 'A dokumentum táblázatstílusának használata',
   'Leeg bestand': 'Üres fájl',
   'Wissel naar presentatie': 'Váltás prezentációra',
   'Wissel naar document': 'Váltás dokumentumra',

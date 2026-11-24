@@ -611,6 +611,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Blanco tabel': 'Tabella semplice',
+  'Tabel in huisstijl': 'Usa lo stile tabella del documento',
   'Leeg bestand': 'File vuoto',
   'Wissel naar presentatie': 'Passa a presentazione',
   'Wissel naar document': 'Passa a documento',

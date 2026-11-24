@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Blanco tabel': 'Schlichti Tabälle',
+  'Tabel in huisstijl': 'Tabällestil vom Dokumänt bruuche',
   'Leeg bestand': 'Leeri Datei',
   'Wissel naar presentatie': 'Zur Präsentation wägsle',
   'Wissel naar document': 'Zum Dokumänt wägsle',

@@ -4774,6 +4774,13 @@ assets. Encryption and password protection apply unchanged: they wrap the
 archive, not its kind. What does not exist is a *write* route — the document
 export menu deliberately does not offer `.ocideck` (§14.4).
 
+### 14.19 Plain document tables
+
+A line containing `<!-- ocideck:plain_table v1 -->` directly above a GFM pipe
+table gives only that table the document body style. The marker is a regular
+HTML comment. The table retains its column alignment and cell contents in
+portable Markdown.
+
 ## 15. Document Dossiers
 
 A document dossier is a folder containing `dossier.json` and a derived,

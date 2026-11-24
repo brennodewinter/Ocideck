@@ -1542,6 +1542,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Blanco tabel': 'Jednoduchá tabulka',
+  'Tabel in huisstijl': 'Použít styl tabulky dokumentu',
   'Leeg bestand': 'Prázdný soubor',
   'Wissel naar presentatie': 'Přepnout na prezentaci',
   'Wissel naar document': 'Přepnout na dokument',

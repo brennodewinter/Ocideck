@@ -92,6 +92,7 @@ html,body{margin:0;padding:0}
 .document pre{overflow:auto}
 .document pre.mermaid{background:transparent;border:0;text-align:center}
 .document table{border-collapse:collapse;width:100%}
+.document table.ocideck-plain-table :is(thead,tbody,tr,th,td){background:none;border:0;color:inherit;font-weight:inherit;font-size:inherit}
 .document .ocideck-timeline{list-style:none;margin:1.2em 0 1.8em;padding:0}
 .document .ocideck-timeline li{display:grid;grid-template-columns:8rem 1fr;gap:1rem;position:relative;break-inside:avoid;page-break-inside:avoid;padding-bottom:.9rem}
 .document .ocideck-timeline li::before{content:"";position:absolute;left:7.3rem;top:1.05rem;bottom:-.2rem;width:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 28%,transparent)}

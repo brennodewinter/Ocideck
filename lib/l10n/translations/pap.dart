@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Blanco tabel': 'Tabla sin dekorashon',
+  'Tabel in huisstijl': 'Usa e estilo di tabla di e dokumento',
   'Leeg bestand': 'Archivo bashí',
   'Wissel naar presentatie': 'Kambia pa presentación',
   'Wissel naar document': 'Kambia pa dokumento',

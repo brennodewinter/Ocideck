@@ -15,6 +15,7 @@ import '../../models/settings.dart'
 import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
 import '../../services/markdown_table_codec.dart';
+import '../../services/plain_document_table.dart';
 import '../../services/document_timeline.dart';
 import '../../services/ocideck_marked_table.dart';
 import '../../services/ocideck_markers.dart';

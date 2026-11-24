@@ -1552,6 +1552,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Blanco tabel': 'Prosta tabela',
+  'Tabel in huisstijl': 'Użyj stylu tabeli dokumentu',
   'Leeg bestand': 'Pusty plik',
   'Wissel naar presentatie': 'Przełącz na prezentację',
   'Wissel naar document': 'Przełącz na dokument',

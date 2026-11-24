@@ -4,6 +4,7 @@ import 'package:markdown_quill/markdown_quill.dart';
 
 import '../../models/settings.dart' show ThemeProfile;
 import '../../services/markdown_table_codec.dart';
+import '../../services/plain_document_table.dart';
 import '../../services/document_timeline.dart';
 import '../../services/risk_dossier.dart';
 import '../../services/risk_dossier_scaffold.dart';
@@ -104,6 +105,20 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
 
   TableEditController get _editor => _binding.editor;
 
+  bool get _plain =>
+      _binding.currentSource.startsWith(plainDocumentTableMarker);
+
+  void _togglePlain() {
+    final table = _binding.tableSource;
+    _binding.clearPending();
+    _binding.replaceSource(
+      _plain ? table : '$plainDocumentTableMarker\n$table',
+      discrete: true,
+      preserveEditor: true,
+      onDiscreteEdit: widget.onDiscreteEdit,
+    );
+  }
+
   bool get _canBecomeTimeline =>
       _editor.rows.isNotEmpty && _editor.rows.first.length >= 2;
 
@@ -115,8 +130,9 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
       controllerStore: widget.controllerStore,
       embedContext: widget.embedContext,
       source: widget.gfm,
-      unwrapSource: _identity,
-      wrapTable: _identity,
+      unwrapSource: plainDocumentTableBody,
+      wrapTable: (table) =>
+          _plain ? '$plainDocumentTableMarker\n$table' : table,
       makeEmbed: EmbeddableTable.new,
       isMounted: () => mounted,
     );
@@ -280,25 +296,35 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     key: _boundsKey,
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      if (_canBecomeTimeline)
-        Align(
-          alignment: Alignment.centerRight,
-          child: Wrap(
-            spacing: 4,
-            children: [
+      Align(
+        alignment: Alignment.centerRight,
+        child: Wrap(
+          spacing: 4,
+          children: [
+            TextButton.icon(
+              onPressed: _togglePlain,
+              icon: Icon(_plain ? Icons.grid_on : Icons.grid_off),
+              label: Text(
+                _plain
+                    ? context.l10n.d('Tabel in huisstijl')
+                    : context.l10n.d('Blanco tabel'),
+              ),
+            ),
+            if (_canBecomeTimeline)
               TextButton.icon(
                 onPressed: () => _asRiskRegister(),
                 icon: const Icon(Icons.policy_outlined),
                 label: Text(context.l10n.d('Als risicoregister markeren…')),
               ),
+            if (_canBecomeTimeline)
               TextButton.icon(
                 onPressed: () => _asTimeline(),
                 icon: const Icon(Icons.timeline_outlined),
                 label: Text(context.l10n.d('Als tijdlijn weergeven')),
               ),
-            ],
-          ),
+          ],
         ),
+      ),
       _cachedTableView(),
     ],
   );
@@ -324,8 +350,6 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     return _tableView!;
   }
 }
-
-String _identity(String source) => source;
 
 enum _TimelineActivationChoice { keepOrder, sort }
 

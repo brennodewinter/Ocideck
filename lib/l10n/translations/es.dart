@@ -610,6 +610,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Blanco tabel': 'Tabla sin decoración',
+  'Tabel in huisstijl': 'Usar el estilo de tabla del documento',
   'Leeg bestand': 'Archivo vacío',
   'Wissel naar presentatie': 'Cambiar a presentación',
   'Wissel naar document': 'Cambiar a documento',

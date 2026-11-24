@@ -1567,6 +1567,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Blanco tabel': 'Tabela sem decoração',
+  'Tabel in huisstijl': 'Usar o estilo de tabela do documento',
   'Leeg bestand': 'Ficheiro vazio',
   'Wissel naar presentatie': 'Mudar para apresentação',
   'Wissel naar document': 'Mudar para documento',
