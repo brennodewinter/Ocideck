@@ -177,6 +177,34 @@ Onder de tabel.
     debugDefaultTargetPlatformOverride = null;
   });
 
+  testWidgets('de eerste klik laat de cel onder de aanwijzer staan', (
+    tester,
+  ) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+    addTearDown(() => debugDefaultTargetPlatformOverride = null);
+    await tester.binding.setSurfaceSize(const Size(1300, 700));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final source = [
+      for (var i = 0; i < 25; i++) 'Alinea $i. Tekst vóór de tabel.',
+      '| Naam | Functie |\n| --- | --- |\n| Appel | Banaan |',
+    ].join('\n\n');
+    await pumpEditor(tester, source);
+    final cell = find.widgetWithText(TextField, 'Appel');
+    await Scrollable.ensureVisible(tester.element(cell), alignment: 0.8);
+    await tester.pumpAndSettle();
+    final at = tester.getCenter(cell);
+    await realClick(tester, at);
+    expect(tester.getCenter(cell), at);
+    expect(tester.widget<TextField>(cell).focusNode!.hasPrimaryFocus, isTrue);
+    tester.testTextInput.enterText('Peer');
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    final state = ProviderScope.containerOf(
+      tester.element(find.byType(DocumentEditorScreen)),
+    ).read(documentProvider);
+    expect(state.document!.source, contains('| Peer | Banaan |'));
+  });
+
   testWidgets('tabel aan het documenteinde: één klik heen en terug', (
     tester,
   ) async {

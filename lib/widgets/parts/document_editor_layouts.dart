@@ -489,6 +489,7 @@ Widget _documentLivePreview(
         anchorKey: anchorKey,
         onEditChart: onEditChart,
         tableEditorFor: tableEditorFor,
+        stationaryTableToolbar: true,
         onTapLink: onTapLink,
       ),
       tlp: tlp,

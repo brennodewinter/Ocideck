@@ -27,6 +27,7 @@ class TableEditScaffold extends StatelessWidget {
     this.extraToolbarItems,
     this.allowColumnEdits = true,
     this.allowSort = true,
+    this.stationaryToolbar = false,
   });
 
   final TableEditController editor;
@@ -50,6 +51,12 @@ class TableEditScaffold extends StatelessWidget {
   /// Sorteerknoppen en -sneltoetsen. Staat dit aan zonder [onSort], dan sorteert
   /// de scaffold het raster zelf via de gedeelde sorteerhandeling.
   final bool allowSort;
+
+  /// Houdt een documentcel onder de aanwijzer als de werkbalk verschijnt.
+  /// De lege plaats kost geen opbouw van knoppen voor inactieve tabellen.
+  final bool stationaryToolbar;
+
+  static const _toolbarHeight = 38.0;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +115,13 @@ class TableEditScaffold extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (active != null) _toolbar(context, active),
+                if (stationaryToolbar)
+                  SizedBox(
+                    height: _toolbarHeight,
+                    child: active == null ? null : _toolbar(context, active),
+                  )
+                else if (active != null)
+                  _toolbar(context, active),
                 builder(context),
               ],
             ),
@@ -171,96 +184,101 @@ class TableEditScaffold extends StatelessWidget {
           // staat, en een smalle tabel liet de knoppen over de rand lopen
           // (14px, zichtbaar als de rood-gele streep). Nu vouwt hij naar een
           // tweede regel en houdt hij zich aan de breedte die er is.
-          child: Wrap(
-            spacing: 0,
-            runSpacing: 2,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              _button(
-                context,
-                Icons.keyboard_arrow_up,
-                l10n.d('Rij erboven'),
-                editor.lockHeader && at.row == 0
-                    ? null
-                    : () => editor.insertRowAt(at.row),
-              ),
-              _button(
-                context,
-                Icons.keyboard_arrow_down,
-                l10n.d('Rij eronder'),
-                () => editor.insertRowAt(at.row + 1),
-              ),
-              _button(
-                context,
-                Icons.remove,
-                l10n.d('Rij weghalen'),
-                // De koprij blijft staan: een GFM-tabel zonder kop bestaat niet.
-                at.row == 0 ? null : () => editor.removeRowAt(at.row),
-              ),
-              // Verplaatsen hoort hier thuis, niet alleen in de tabel-editor:
-              // een rij een plek omhoog schuiven is bij het schrijven net zo
-              // gewoon als er een bijmaken.
-              _button(
-                context,
-                Icons.arrow_upward,
-                l10n.d('Rij omhoog'),
-                // De koprij blijft boven; een body-rij komt er niet overheen.
-                at.row <= 1 ? null : () => editor.moveRow(at.row, -1),
-              ),
-              _button(
-                context,
-                Icons.arrow_downward,
-                l10n.d('Rij omlaag'),
-                at.row == 0 || at.row >= editor.rowCount - 1
-                    ? null
-                    : () => editor.moveRow(at.row, 1),
-              ),
+          child: _toolbarLayout([
+            _button(
+              context,
+              Icons.keyboard_arrow_up,
+              l10n.d('Rij erboven'),
+              editor.lockHeader && at.row == 0
+                  ? null
+                  : () => editor.insertRowAt(at.row),
+            ),
+            _button(
+              context,
+              Icons.keyboard_arrow_down,
+              l10n.d('Rij eronder'),
+              () => editor.insertRowAt(at.row + 1),
+            ),
+            _button(
+              context,
+              Icons.remove,
+              l10n.d('Rij weghalen'),
+              // De koprij blijft staan: een GFM-tabel zonder kop bestaat niet.
+              at.row == 0 ? null : () => editor.removeRowAt(at.row),
+            ),
+            // Verplaatsen hoort hier thuis, niet alleen in de tabel-editor:
+            // een rij een plek omhoog schuiven is bij het schrijven net zo
+            // gewoon als er een bijmaken.
+            _button(
+              context,
+              Icons.arrow_upward,
+              l10n.d('Rij omhoog'),
+              // De koprij blijft boven; een body-rij komt er niet overheen.
+              at.row <= 1 ? null : () => editor.moveRow(at.row, -1),
+            ),
+            _button(
+              context,
+              Icons.arrow_downward,
+              l10n.d('Rij omlaag'),
+              at.row == 0 || at.row >= editor.rowCount - 1
+                  ? null
+                  : () => editor.moveRow(at.row, 1),
+            ),
+            _divider(theme),
+            _button(
+              context,
+              Icons.sort_by_alpha,
+              l10n.d('Kolom oplopend sorteren'),
+              allowSort
+                  ? () => _dispatchSort(
+                      context,
+                      at.col,
+                      TableSortIntent.ascending,
+                    )
+                  : null,
+            ),
+            _button(
+              context,
+              Icons.sort_by_alpha,
+              l10n.d('Kolom aflopend sorteren'),
+              allowSort
+                  ? () => _dispatchSort(
+                      context,
+                      at.col,
+                      TableSortIntent.descending,
+                    )
+                  : null,
+              descending: true,
+            ),
+            _button(
+              context,
+              Icons.tune,
+              l10n.d('Sorteren als…'),
+              allowSort
+                  ? () => _dispatchSort(context, at.col, TableSortIntent.choose)
+                  : null,
+            ),
+            if (allowColumnEdits) ..._columnButtons(context, at),
+            if (extraToolbarItems != null) ...[
               _divider(theme),
-              _button(
-                context,
-                Icons.sort_by_alpha,
-                l10n.d('Kolom oplopend sorteren'),
-                allowSort
-                    ? () => _dispatchSort(
-                        context,
-                        at.col,
-                        TableSortIntent.ascending,
-                      )
-                    : null,
-              ),
-              _button(
-                context,
-                Icons.sort_by_alpha,
-                l10n.d('Kolom aflopend sorteren'),
-                allowSort
-                    ? () => _dispatchSort(
-                        context,
-                        at.col,
-                        TableSortIntent.descending,
-                      )
-                    : null,
-                descending: true,
-              ),
-              _button(
-                context,
-                Icons.tune,
-                l10n.d('Sorteren als…'),
-                allowSort
-                    ? () =>
-                          _dispatchSort(context, at.col, TableSortIntent.choose)
-                    : null,
-              ),
-              if (allowColumnEdits) ..._columnButtons(context, at),
-              if (extraToolbarItems != null) ...[
-                _divider(theme),
-                ...extraToolbarItems!(context, at),
-              ],
+              ...extraToolbarItems!(context, at),
             ],
-          ),
+          ]),
         ),
       ),
     );
   }
+
+  Widget _toolbarLayout(List<Widget> buttons) => stationaryToolbar
+      ? SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(mainAxisSize: MainAxisSize.min, children: buttons),
+        )
+      : Wrap(
+          runSpacing: 2,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: buttons,
+        );
 
   List<Widget> _columnButtons(BuildContext context, ({int row, int col}) at) {
     final l10n = context.l10n;
