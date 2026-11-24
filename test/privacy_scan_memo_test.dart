@@ -182,34 +182,34 @@ void main() {
     'groot deck: herhaalde scan is een lineaire gang zonder klif (#2622)',
     () {
       // De oude LRU(cap 512) verloor boven de capaciteit elke waarde net vóór
-      // het herlezen — een herhaalde scan kostte honderden ms. De Expando per
-      // dia kent die klif niet; de remmende factor is alleen de scan zelf.
+      // het herlezen — een herhaalde scan mat elke dia opnieuw. De Expando
+      // per dia kent die klif niet, en dat is deterministisch te toetsen:
+      // `privacyScanMemoMisses` telt de échte hermetingen, dus hoeft de
+      // wandklok er niet aan te pas te komen (#3147).
+      final counting = _CountingScanner();
       final deck = deckOf([
         for (var i = 0; i < 1000; i++) bullets('gewone bullet $i'),
       ]);
-      memoizedDeckScan(scanner, deck); // warmt de memo
+      memoizedDeckScan(counting, deck); // warmt de memo
 
-      final watch = Stopwatch()..start();
-      final again = memoizedDeckScan(scanner, deck);
-      watch.stop();
+      final missesAfterWarm = privacyScanMemoMisses;
+      final again = memoizedDeckScan(counting, deck);
+
       expect(
-        watch.elapsedMilliseconds,
-        lessThan(50),
-        reason: 'een ongewijzigd deck opnieuw scannen mag geen meting kosten',
+        privacyScanMemoMisses,
+        missesAfterWarm,
+        reason: 'een ongewijzigd deck opnieuw scannen mag geen dia meten',
       );
+      expect(counting.slideScanCalls, deck.slides.length);
       expect(again.findings, isEmpty);
 
       // Eén nieuwe dia bóvenaan: alle volgende dia's schuiven een plek op maar
       // hoeven niet opnieuw gemeten te worden — alleen de nieuwe mist.
       final ingevoegd = deckOf([bullets('nieuw bovenaan'), ...deck.slides]);
-      watch
-        ..reset()
-        ..start();
-      memoizedDeckScan(scanner, ingevoegd);
-      watch.stop();
+      memoizedDeckScan(counting, ingevoegd);
       expect(
-        watch.elapsedMilliseconds,
-        lessThan(50),
+        privacyScanMemoMisses - missesAfterWarm,
+        1,
         reason: 'een invoeging hergebruikt alle ongemoeide scans',
       );
     },
