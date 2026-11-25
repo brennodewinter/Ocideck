@@ -120,7 +120,7 @@ jobs:
             exit 1
           fi
           cat probe-evidence/wayland-regression.log
-          grep -E 'window-1: (Flutter content stops|Settings is not visible)' probe-evidence/wayland-regression.log
+          grep -E 'window-[12]: (Flutter content stops|Settings is not visible)' probe-evidence/wayland-regression.log
 
       - name: Regresstoets met geblokkeerde opstart
         if: ${{ inputs.startup_regression == true || inputs.startup_regression == 'true' }}

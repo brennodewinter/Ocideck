@@ -9,14 +9,21 @@ launcher=()
 if (( EUID == 0 )); then
   chown nobody "$evidence"
   launcher=(runuser -u nobody --)
+  if ! "${launcher[@]}" test -x "$executable"; then
+    staging=$(mktemp -d)
+    trap 'rm -rf -- "$staging"' EXIT
+    cp -a --reflink=auto -- "$(dirname -- "$executable")" "$staging/bundle"
+    chown -R nobody "$staging"
+    executable="$staging/bundle/$(basename -- "$executable")"
+  fi
 fi
 case "$backend" in
   x11)
-    exec "${launcher[@]}" xvfb-run -a -s '-screen 0 1800x1100x24' \
+    "${launcher[@]}" xvfb-run -a -s '-screen 0 1800x1100x24' \
       dbus-run-session -- /usr/bin/python3 "$script" x11 "$executable" "$evidence"
     ;;
   wayland)
-    exec "${launcher[@]}" dbus-run-session -- /usr/bin/python3 "$script" wayland "$executable" "$evidence"
+    "${launcher[@]}" dbus-run-session -- /usr/bin/python3 "$script" wayland "$executable" "$evidence"
     ;;
   *) exit 2 ;;
 esac
