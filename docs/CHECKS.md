@@ -2656,9 +2656,8 @@ environment failure, not a reason to suppress findings.
 ### Isolated scaling measurements (#2967)
 
 `make test` and `make coverage` run functional tests in parallel, then invoke
-`make test-benchmarks` as a separate required step. The tagged codec scaling
-measurement runs without coverage and with one test process; its threshold is
-unchanged. The 300-page content-preservation test remains in the parallel
+`make test-benchmarks` as a separate required step. It selects every test
+tagged `benchmark` under `test/` and runs them serially without coverage. The 300-page content-preservation test remains in the parallel
 instrumented suite. The GitHub Windows and platform-matrix test commands use the
 same separation. A benchmark failure still fails the gate; this is not a retry
 or an optional check. Invoke `make test-benchmarks` on its own for diagnosis.

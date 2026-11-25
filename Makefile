@@ -214,7 +214,7 @@ coverage:
 # grens en functionele 300-paginaproef blijven behouden.
 test-benchmarks:
 	@echo "== OciDeck check: isolated scaling benchmark =="
-	$(RAISE_FDS) flutter test test/large_deck_performance_test.dart --tags benchmark --concurrency=1 $(TEST_TIMEOUT_FLAG) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test test --tags benchmark --concurrency=1 $(TEST_TIMEOUT_FLAG) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # The per-file floor, over the report `coverage` just wrote (no second test run).
 #

@@ -378,7 +378,7 @@ jobs:
       - name: Test
         run: |
           flutter test --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark'
-          flutter test --concurrency=1 test/large_deck_performance_test.dart --tags benchmark
+          flutter test --concurrency=1 test --tags benchmark
 
   # Build the web bundle and assert it kept its hardening (strict CSP,
   # self-hosted CanvasKit, bundled UI font) — so a change can't silently

@@ -162,7 +162,7 @@ jobs:
           flutter test --concurrency=1 test/shell_present_and_close_test.dart test/shell_s3_actions_test.dart
           flutter test --concurrency=2 --total-shards='${{ strategy.job-total }}' --shard-index='${{ matrix.shard }}' --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark'
           if [ '${{ matrix.shard }}' = 0 ]; then
-            flutter test --concurrency=1 test/large_deck_performance_test.dart --tags benchmark
+            flutter test --concurrency=1 test --tags benchmark
           fi
 
       - name: Navigation regressions
