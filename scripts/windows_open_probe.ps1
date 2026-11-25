@@ -71,6 +71,11 @@ public sealed class OpenProbeAccessible {
   public bool IsOffscreen { get { return (State & 0x18000) != 0; } }
   public bool IsEnabled { get { return (State & 1) == 0; } }
   public bool IsChecked { get { return (State & 0x10) != 0; } }
+  public int[] Bounds() {
+    int x, y, width, height;
+    owner.accLocation(out x, out y, out width, out height, child);
+    return new[] { x, y, width, height };
+  }
   public void Invoke() { owner.accDoDefaultAction(child); }
 }
 public static class OpenProbeWindow {
@@ -85,6 +90,65 @@ public static class OpenProbeWindow {
   [DllImport("oleacc.dll")] private static extern int AccessibleChildren(
       IAccessible parent, int start, int count,
       [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)] object[] children, out int obtained);
+  [StructLayout(LayoutKind.Sequential)] private struct Rect { public int Left, Top, Right, Bottom; }
+  [StructLayout(LayoutKind.Sequential)] private struct Point { public int X, Y; }
+  [StructLayout(LayoutKind.Sequential)] private struct CursorInfo { public int Size, Flags; public IntPtr Cursor; public Point Position; }
+  [DllImport("user32.dll")] private static extern bool GetWindowRect(IntPtr hwnd, out Rect rect);
+  [DllImport("user32.dll")] private static extern bool GetClientRect(IntPtr hwnd, out Rect rect);
+  [DllImport("user32.dll", SetLastError = true)] private static extern bool GetCursorInfo(ref CursorInfo cursor);
+  [DllImport("user32.dll")] private static extern IntPtr GetCursor();
+  [DllImport("kernel32.dll")] private static extern uint GetCurrentThreadId();
+  [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr window, IntPtr processId);
+  [DllImport("user32.dll")] private static extern bool AttachThreadInput(uint left, uint right, bool attach);
+  [DllImport("user32.dll")] public static extern bool SetCursorPos(int x, int y);
+  [DllImport("user32.dll")] private static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extra);
+  [DllImport("user32.dll")] private static extern bool SetWindowPos(IntPtr hwnd, IntPtr after, int x, int y, int width, int height, uint flags);
+  [DllImport("user32.dll")] public static extern uint GetDpiForWindow(IntPtr hwnd);
+  [DllImport("user32.dll")] private static extern IntPtr SetThreadDpiAwarenessContext(IntPtr dpiContext);
+  public static void EnablePerMonitorDpi() { SetThreadDpiAwarenessContext(new IntPtr(-4)); }
+  public static bool ResizeClient(IntPtr hwnd, int x, int y, int width, int height) {
+    Rect frame, client;
+    if (!GetWindowRect(hwnd, out frame) || !GetClientRect(hwnd, out client)) return false;
+    return SetWindowPos(hwnd, IntPtr.Zero, x, y, width + frame.Right - frame.Left - client.Right,
+                        height + frame.Bottom - frame.Top - client.Bottom, 4);
+  }
+  public static int[] ClientGeometry(IntPtr hwnd) {
+    Rect client;
+    if (!GetClientRect(hwnd, out client)) return new int[0];
+    var dimensions = new List<int> { client.Right, client.Bottom };
+    EnumWindow callback = (child, state) => {
+      var name = new StringBuilder(32);
+      GetClassName(child, name, name.Capacity);
+      Rect view;
+      if (name.ToString() != "FLUTTERVIEW" || !GetClientRect(child, out view)) return true;
+      dimensions.Add(view.Right);
+      dimensions.Add(view.Bottom);
+      return false;
+    };
+    EnumChildWindows(hwnd, callback, IntPtr.Zero);
+    GC.KeepAlive(callback);
+    return dimensions.ToArray();
+  }
+  public static IntPtr Cursor(IntPtr window) {
+    var cursor = new CursorInfo { Size = Marshal.SizeOf(typeof(CursorInfo)) };
+    if (GetCursorInfo(ref cursor) && cursor.Cursor != IntPtr.Zero) return cursor.Cursor;
+    // The virtual desktop can suppress its global cursor. Read the input
+    // queue of the foreground window in that case.
+    uint owner = GetWindowThreadProcessId(window, IntPtr.Zero);
+    uint current = GetCurrentThreadId();
+    if (owner == current) return GetCursor();
+    if (!AttachThreadInput(current, owner, true)) return IntPtr.Zero;
+    try { return GetCursor(); }
+    finally { AttachThreadInput(current, owner, false); }
+  }
+  public static void MovePointer(int x, int y) {
+    if (!SetCursorPos(x - 1, y)) throw new InvalidOperationException("SetCursorPos failed");
+    mouse_event(1, 1, 0, 0, UIntPtr.Zero);
+  }
+  public static void Click() {
+    mouse_event(2, 0, 0, 0, UIntPtr.Zero);
+    mouse_event(4, 0, 0, 0, UIntPtr.Zero);
+  }
   public static OpenProbeAccessible[] Snapshot(IntPtr root) {
     var nodes = new List<OpenProbeAccessible>();
     var seen = new HashSet<string>();
@@ -200,6 +264,123 @@ function Find-Marker($Root, [string]$Marker) {
         if ($element.Value.Contains($Marker)) { return $element }
     }
     return $null
+}
+
+function Wait-WinRtOperation($Operation, [Type]$ResultType) {
+    $task = $script:winRtAsTask.MakeGenericMethod($ResultType).Invoke($null, @($Operation))
+    if (-not $task.Wait(5000)) { throw 'Native OCR did not return in time.' }
+    return $task.Result
+}
+
+function Get-SettingsSearchPosition($Bounds) {
+    # Flutter's Windows accessibility tree can still expose the welcome screen
+    # while the rendered modal is visible. Read the actual search field on screen.
+    $image = New-Object Drawing.Bitmap($Bounds.Width, $Bounds.Height)
+    $graphics = [Drawing.Graphics]::FromImage($image)
+    $path = Join-Path $EvidenceDirectory 'window-settings.png'
+    try {
+        $graphics.CopyFromScreen($Bounds.Location, [Drawing.Point]::Empty, $Bounds.Size)
+        $image.Save($path, [Drawing.Imaging.ImageFormat]::Png)
+    } finally {
+        $graphics.Dispose()
+        $image.Dispose()
+    }
+    $file = Wait-WinRtOperation ([Windows.Storage.StorageFile]::GetFileFromPathAsync($path)) ([Windows.Storage.StorageFile])
+    $stream = Wait-WinRtOperation ($file.OpenReadAsync()) ([Windows.Storage.Streams.IRandomAccessStreamWithContentType])
+    try {
+        $decoder = Wait-WinRtOperation ([Windows.Graphics.Imaging.BitmapDecoder]::CreateAsync($stream)) ([Windows.Graphics.Imaging.BitmapDecoder])
+        $bitmap = Wait-WinRtOperation ($decoder.GetSoftwareBitmapAsync()) ([Windows.Graphics.Imaging.SoftwareBitmap])
+        try {
+            $text = Wait-WinRtOperation ($script:ocr.RecognizeAsync($bitmap)) ([Windows.Media.Ocr.OcrResult])
+            foreach ($line in $text.Lines) {
+                if ($line.Text -notmatch 'Search a setting|Zoek een instelling') { continue }
+                foreach ($word in $line.Words) {
+                    if ($word.Text -notmatch '^(setting|instelling)$') { continue }
+                    $rect = $word.BoundingRect
+                    return [Drawing.Point]::new(($Bounds.X + [int]($rect.X + $rect.Width / 2)),
+                                                ($Bounds.Y + [int]($rect.Y + $rect.Height / 2)))
+                }
+            }
+        } finally { $bitmap.Dispose() }
+    } finally { $stream.Dispose() }
+}
+
+function Test-NativeWindow {
+    [OpenProbeWindow]::EnablePerMonitorDpi()
+    $handle = $script:app.MainWindowHandle
+    [void][OpenProbeWindow]::ShowWindow($handle, 9)
+    [void][OpenProbeWindow]::SetForegroundWindow($handle)
+    [void](Wait-Probe 'foreground app for mouse input' { [OpenProbeWindow]::GetForegroundWindow() -eq $handle })
+    $screen = [Windows.Forms.Screen]::FromHandle($handle).WorkingArea
+    $scale = [OpenProbeWindow]::GetDpiForWindow($handle) / 96.0
+    if ($scale -le 0) { throw 'Could not determine the window DPI.' }
+    $width = [int][Math]::Min(1280, [Math]::Floor(($screen.Width - 18) / $scale))
+    $height = [int][Math]::Min(850, [Math]::Floor(($screen.Height - 34) / $scale))
+    if ($width -lt 980 -or $height -lt 670) {
+        throw "Work area $($screen.Width)x$($screen.Height) at scale $scale leaves only ${width}x${height} for the client probe."
+    }
+    $snapshots = @()
+    foreach ($targetHeight in @([Math]::Max(650, $height - 100), $height)) {
+        $requestedWidth = [int]($width * $scale)
+        $requestedHeight = [int]($targetHeight * $scale)
+        if (-not [OpenProbeWindow]::ResizeClient($handle, $screen.X, $screen.Y, $requestedWidth, $requestedHeight)) {
+            throw 'Win32 could not request the new client size.'
+        }
+        [void](Wait-Probe "the native client and Flutter viewport at ${width}x${targetHeight}" {
+            $r = [OpenProbeWindow]::ClientGeometry($handle)
+            return ($r.Count -eq 4 -and [Math]::Abs($r[0] - $requestedWidth) -le 2 -and
+                [Math]::Abs($r[1] - $requestedHeight) -le 2 -and $r[0] -eq $r[2] -and $r[1] -eq $r[3])
+        })
+        $snapshots += [ordered]@{ logicalWidth = $width; logicalHeight = $targetHeight; scale = $scale }
+    }
+    $settings = Wait-Probe 'the visible Settings button' {
+        Find-Control (Get-AppRoot) '^(Settings|Instellingen)$' ([Windows.Automation.ControlType]::Button)
+    }
+    $bounds = $settings.Bounds()
+    if ($bounds[2] -le 0 -or $bounds[3] -le 0) { throw 'Settings has no visible mouse target.' }
+    $buttonX = $bounds[0] + [int]($bounds[2] / 2)
+    $buttonY = $bounds[1] + [int]($bounds[3] / 2)
+    if (-not [OpenProbeWindow]::SetCursorPos($buttonX, $buttonY)) {
+        throw 'Could not move the pointer over Settings.'
+    }
+    Start-Sleep -Milliseconds 120
+    [OpenProbeWindow]::Click()
+
+    Add-Type -AssemblyName System.Runtime.WindowsRuntime
+    $null = [Windows.Storage.StorageFile, Windows.Storage, ContentType=WindowsRuntime]
+    $null = [Windows.Storage.Streams.IRandomAccessStreamWithContentType, Windows.Storage.Streams, ContentType=WindowsRuntime]
+    $null = [Windows.Graphics.Imaging.BitmapDecoder, Windows.Graphics.Imaging, ContentType=WindowsRuntime]
+    $null = [Windows.Graphics.Imaging.SoftwareBitmap, Windows.Graphics.Imaging, ContentType=WindowsRuntime]
+    $null = [Windows.Media.Ocr.OcrEngine, Windows.Foundation, ContentType=WindowsRuntime]
+    $null = [Windows.Media.Ocr.OcrResult, Windows.Foundation, ContentType=WindowsRuntime]
+    $script:winRtAsTask = [System.WindowsRuntimeSystemExtensions].GetMethods() |
+        Where-Object { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and
+            $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' }
+    $script:ocr = [Windows.Media.Ocr.OcrEngine]::TryCreateFromUserProfileLanguages()
+    if (-not $script:ocr) { throw 'No native OCR language is available on this runner.' }
+    $display = [Windows.Forms.Screen]::FromHandle($handle).Bounds
+    $search = Wait-Probe 'visible Settings search after native mouse input' {
+        Get-SettingsSearchPosition $display
+    }
+    [OpenProbeWindow]::MovePointer($search.X, ($search.Y - [int](27 * $scale)))
+    Start-Sleep -Milliseconds 250
+    $before = Wait-Probe 'native cursor outside the search field' {
+        $cursor = [OpenProbeWindow]::Cursor($handle)
+        if ($cursor -ne [IntPtr]::Zero) { $cursor }
+    }
+    [OpenProbeWindow]::MovePointer($search.X, $search.Y)
+    [void](Wait-Probe 'native cursor changes over Settings search' {
+        $hover = [OpenProbeWindow]::Cursor($handle)
+        return ($hover -ne [IntPtr]::Zero -and $hover -ne $before)
+    })
+    Save-ProbeEvidence 'window-settings-clicked'
+    [Windows.Forms.SendKeys]::SendWait('{ESC}')
+    [void](Wait-Probe 'Settings dismissed' {
+        $null -eq (Get-SettingsSearchPosition $display)
+    })
+    [ordered]@{ sizes = $snapshots; cursorChanged = $true; settingsClicked = $true } |
+        ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory 'window.json')
+    [void][OpenProbeWindow]::ShowWindow($handle, 3)
 }
 
 function Get-NativePicker {
@@ -318,6 +499,8 @@ try {
     [void](Wait-Probe 'welcome screen' {
         Find-Control (Get-AppRoot) '^(New presentation|Nieuwe presentatie)(\s|$)' ([Windows.Automation.ControlType]::Button)
     })
+
+    Test-NativeWindow
 
     # Cancellation is followed by a new open, proving the app remains usable.
     $dialog = Open-NativePicker

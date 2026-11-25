@@ -85,8 +85,13 @@ void main() {
       final job = releaseYaml
           .split('  consumer-debian12:')[1]
           .split('  consumer-rpm:')[0];
-      expect(job, contains('libpulse0'));
-      expect(job, contains('xauth'));
+      expect(job, contains('probe_linux_package.sh debian12'));
+      final preparation = File(
+        'scripts/prepare_linux_probe.sh',
+      ).readAsStringSync();
+      final profile = preparation.split('  debian12)')[1].split('    ;;')[0];
+      expect(profile, contains('libpulse0'));
+      expect(preparation, contains('xvfb xauth'));
     });
 
     test('appimagetool is pinned by a 64-hex sha256, not floated', () {
@@ -293,84 +298,27 @@ void main() {
       }
     });
 
-    test('the .deb probe installs, link-checks and starts the package', () {
-      final section = releaseYaml.substring(
-        releaseYaml.indexOf('  consumer-deb:'),
-        releaseYaml.indexOf('  consumer-rpm:'),
-      );
-      expect(section, contains('ocideck-linux-amd64-'));
-      expect(section, contains('.deb'));
-      // Removing a runtime dependency from Depends must fail here: apt then
-      // leaves the lib uninstalled and `ldd` reports "not found", or the app
-      // fails to start under Xvfb.
-      expect(
-        section,
-        contains("ldd /usr/lib/ocideck/ocideck | grep 'not found'"),
-      );
-      expect(section, contains('xvfb-run -a ocideck'));
-      expect(section, contains('timeout 20'));
-    });
-
-    test('the .rpm probe installs, link-checks and starts the package', () {
-      final section = releaseYaml.substring(
-        releaseYaml.indexOf('  consumer-rpm:'),
-        releaseYaml.indexOf('  consumer-appimage:'),
-      );
-      expect(section, contains('ocideck-linux-x86_64-'));
-      expect(section, contains('.rpm'));
-      expect(section, contains('dnf install -y'));
-      expect(
-        section,
-        contains("ldd /usr/lib/ocideck/ocideck | grep 'not found'"),
-      );
-      expect(section, contains('xvfb-run -a ocideck'));
-    });
-
-    test('consumer package paths are explicit local paths', () {
+    test('candidate and post-merge jobs use shared package probes', () {
       for (final workflow in [releaseYaml, preTagYaml]) {
-        expect(workflow, matches(RegExp(r'apt-get install -y (?:")?\./dist/')));
-        expect(workflow, matches(RegExp(r'dnf install -y (?:")?\./dist/')));
+        expect(workflow, contains('probe_linux_package.sh deb'));
+        expect(workflow, contains('probe_linux_package.sh rpm'));
+        expect(workflow, contains('probe_linux_package.sh appimage'));
       }
+      expect(releaseYaml, contains('probe_linux_package.sh debian12'));
     });
 
-    test('the AppImage probe extracts, link-checks and starts it', () {
-      final section = releaseYaml.substring(
-        releaseYaml.indexOf('  consumer-appimage:'),
-        releaseYaml.indexOf('  consumer-flatpak:'),
-      );
-      expect(section, contains('--appimage-extract'));
-      expect(section, contains("ldd squashfs-root/ocideck | grep 'not found'"));
-      expect(section, contains('xvfb-run -a squashfs-root/AppRun'));
-    });
-
-    test('the AppImage consumer installs the GLES and EGL runtimes', () {
-      for (final workflow in [
-        (releaseYaml, '  consumer-flatpak:'),
-        (preTagYaml, '  consumer-flatpak:'),
-      ]) {
-        final start = workflow.$1.indexOf('  consumer-appimage:');
-        final section = workflow.$1.substring(
-          start,
-          workflow.$1.indexOf(workflow.$2, start),
-        );
-        expect(
-          RegExp(
-            r'apt-get install[\s\S]{0,300}?\blibgles2\b',
-          ).hasMatch(section),
-          isTrue,
-          reason:
-              'The extracted AppImage links libGLESv2 from the host; a bare '
-              'Ubuntu consumer must install that runtime before the link check.',
-        );
-        expect(
-          RegExp(r'apt-get install[\s\S]{0,350}?\blibegl1\b').hasMatch(section),
-          isTrue,
-          reason:
-              'Flutter loads libEGL dynamically; the AppImage consumer must '
-              'install it before the start probe.',
-        );
-      }
-    });
+    test(
+      'the AppImage host runtime provides EGL/GLES but excludes Ayatana',
+      () {
+        final policy = File(
+          'scripts/release_consumers/appimage-runtime.txt',
+        ).readAsLinesSync().where((line) => !line.startsWith('#')).join('\n');
+        expect(policy, contains('libgles2'));
+        expect(policy, contains('libegl1'));
+        expect(policy, isNot(contains('ayatana')));
+        expect(policy, isNot(contains('dbusmenu')));
+      },
+    );
 
     test('the Flatpak consumer installs and verifies bundle contents', () {
       for (final workflow in [releaseYaml, preTagYaml]) {

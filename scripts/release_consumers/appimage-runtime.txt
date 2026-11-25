@@ -1,0 +1,17 @@
+# External Ubuntu 24.04 runtime for the extracted AppImage.
+# This list deliberately excludes the Ayatana/dbusmenu chain shipped in AppDir.
+libgtk-3-0t64           # Flutter's GTK desktop embedding and windowing
+libsecret-1-0           # Desktop Secret Service client for credential storage
+liblzma5                # Native plugin compression runtime
+libxmu6                 # Native xclip clipboard helper
+libgomp1                # OpenMP runtime for whisper-cli
+libgles2                # Flutter renderer's GLES dispatch
+libegl1                 # Flutter renderer's EGL dispatch
+libgl1-mesa-dri         # Mesa software graphics on Xvfb
+libegl-mesa0            # Mesa EGL implementation on Xvfb
+libpulse0               # PulseAudio client for native audio capture
+libwebkit2gtk-4.1-0     # Native embedded webview
+libmpv2                 # Native video playback
+gstreamer1.0-plugins-base # Native audio pipeline and standard source elements
+gstreamer1.0-plugins-good # GStreamer playback and capture elements
+gstreamer1.0-libav      # GStreamer media codec support

@@ -10,6 +10,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILES = ('deb', 'rpm', 'tar', 'debian12', 'appimage', 'flatpak')
+IMAGE_PROFILES = tuple(profile for profile in PROFILES if profile != 'appimage')
 
 
 class ConsumerImagesTest(unittest.TestCase):
@@ -25,24 +26,22 @@ class ConsumerImagesTest(unittest.TestCase):
             with self.subTest(profile=profile):
                 section = re.search(r'  consumer-' + profile + r':\n(.*?)(?=\n  [a-z][a-z0-9-]*:|\Z)', workflow, re.S).group(1)
                 self.assertIn('image: ' + receipt['images'][profile], section)
-                self.assertRegex(receipt['images'][profile], r'^pawprint\.vigilis\.online/librekat/ocideck-consumer-' + profile + r'@sha256:[0-9a-f]{64}$')
-                recipe = (ROOT / 'scripts/release_consumers' / (profile + '.Dockerfile')).read_bytes()
-                self.assertEqual(hashlib.sha256(recipe).hexdigest(), receipt['provenance']['recipes_sha256'][profile])
+                base_profile = 'deb' if profile == 'appimage' else profile
+                self.assertEqual(receipt['images'][profile], receipt['images'][base_profile])
+                self.assertRegex(receipt['images'][profile],
+                                 rf'^pawprint\.vigilis\.online/librekat/ocideck-consumer-{base_profile}@sha256:[0-9a-f]{{64}}$')
+                recipe = (ROOT / 'scripts/release_consumers' / (base_profile + '.Dockerfile')).read_bytes()
+                self.assertEqual(hashlib.sha256(recipe).hexdigest(), receipt['provenance']['recipes_sha256'][base_profile])
                 self.assertNotIn('Node voor de artefactactie', section)
-                if profile in ('deb', 'rpm'):
-                    self.assertIn('install -y "./dist/ocideck-linux-', section)
-                else:
-                    self.assertNotIn('apt-get install', section)
                 if profile == 'flatpak':
                     self.assertIn('flatpak --system install -y --noninteractive --no-deps --no-related --bundle', section)
                     self.assertIn('FILES.sha256', section)
                     self.assertIn('components.cdx.json', section)
                 else:
-                    self.assertIn("grep 'not found'", section)
-                    self.assertIn('timeout 20 xvfb-run', section)
+                    self.assertIn(f'probe_linux_package.sh {profile}', section)
 
     def test_pinned_bases_and_captured_tool_versions(self):
-        for profile in PROFILES:
+        for profile in IMAGE_PROFILES:
             with self.subTest(profile=profile):
                 text = (ROOT / 'scripts/release_consumers' / (profile + '.Dockerfile')).read_text()
                 self.assertRegex(text, r'FROM [^\n]+@sha256:[0-9a-f]{64}\n')
@@ -77,9 +76,7 @@ class ConsumerImagesTest(unittest.TestCase):
             result = subprocess.run(command, env=env, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             probe = calls.read_text()
-            self.assertLess(probe.index('ldconfig -p'), probe.index('apt-get install'))
-            self.assertIn("grep 'not found'", probe)
-            self.assertIn('timeout 20 xvfb-run', probe)
+            self.assertLess(probe.index('ldconfig -p'), probe.index('probe_linux_package.sh'))
             self.assertIn('--no-deps --no-related --bundle', probe)
             self.assertIn('FILES.sha256', probe)
 
@@ -142,12 +139,13 @@ if sys.argv[1:3]==['image','inspect']:
             self.assertEqual(result.returncode, 0, result.stderr)
             receipt = json.loads(output.read_text())
             self.assertEqual(set(receipt['images']), set(PROFILES))
+            self.assertEqual(receipt['images']['appimage'], receipt['images']['deb'])
             self.assertTrue(all(re.fullmatch(r'registry.invalid/test/ocideck-consumer-[a-z0-9]+@sha256:a{64}', image) for image in receipt['images'].values()))
             self.assertEqual(receipt['source'], revision)
             self.assertIn('MUTATED', (source / 'scripts/release_consumers/rpm.Dockerfile').read_text())
             git('checkout', '--', 'scripts/release_consumers/rpm.Dockerfile')
             recorded = [json.loads(line) for line in calls.read_text().splitlines()]
-            self.assertEqual(sum(call[0] == 'push' for call in recorded), 6)
+            self.assertEqual(sum(call[0] == 'push' for call in recorded), len(IMAGE_PROFILES))
             for call in recorded:
                 if call[0] == 'build':
                     self.assertIn('--cpu-quota', call)
