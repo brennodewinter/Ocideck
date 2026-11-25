@@ -103,7 +103,7 @@ class _ChromeFontSizeSlider extends StatelessWidget {
       children: [
         Icon(Icons.format_size, size: 18, color: AppTheme.slate500),
         const SizedBox(width: 8),
-        Flexible(
+        Expanded(
           child: Text(
             label,
             style: TextStyle(
