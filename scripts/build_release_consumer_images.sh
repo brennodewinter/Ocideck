@@ -18,7 +18,7 @@ trap 'rm -rf -- "$WORK"' EXIT
 git -C "$ROOT" archive "$REVISION" scripts/release_consumers | tar -xf - -C "$WORK"
 CONTEXT="$WORK/scripts/release_consumers"
 [[ -z "$(find "$CONTEXT" -type l -print -quit)" ]] || { echo 'Consumer context contains symlinks' >&2; exit 1; }
-for profile in deb rpm tar debian12 appimage flatpak; do
+for profile in deb rpm tar debian12 flatpak; do
   image="$REGISTRY/ocideck-consumer-$profile:$REVISION"
   DOCKER_BUILDKIT=0 docker build --platform linux/amd64 \
     --cpu-period 100000 --cpu-quota 200000 --memory 4g --build-arg "SOURCE_REVISION=$REVISION" \
@@ -34,13 +34,15 @@ python3 - "$WORK" "$REGISTRY" "$REVISION" "$OUTPUT" <<'PY'
 import json,pathlib,re,sys
 work,registry,revision,output=sys.argv[1:]
 images={}
-for profile in ('deb','rpm','tar','debian12','appimage','flatpak'):
+for profile in ('deb','rpm','tar','debian12','flatpak'):
     prefix=f'{registry}/ocideck-consumer-{profile}@sha256:'
     values=json.loads((pathlib.Path(work)/(profile+'.json')).read_text())
     matches=[value for value in values if value.startswith(prefix) and re.fullmatch(r'[0-9a-f]{64}',value[len(prefix):])]
     if len(matches)!=1:
         raise SystemExit('missing or ambiguous pushed image digest')
     images[profile]=matches[0]
+# The AppImage test starts from the same clean Ubuntu tools image as deb.
+images['appimage']=images['deb']
 with pathlib.Path(output).open('x') as target:
     json.dump(dict(schema=1,source=revision,images=images),target,sort_keys=True,indent=2)
     target.write('\n')

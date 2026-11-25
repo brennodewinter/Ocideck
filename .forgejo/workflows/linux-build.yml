@@ -157,21 +157,21 @@ jobs:
       - name: Artefactactie voorbereiden
         run: |
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates git
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends xvfb fonts-dejavu-core
-          apt-get install -y ./dist/ocideck-linux-amd64-*.deb
-          ! ldd /usr/lib/ocideck/ocideck | grep 'not found'
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          test "$rc" -eq 124
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash scripts/probe_linux_package.sh deb ./dist/ocideck-linux-amd64-*.deb probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-deb
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-rpm:
     name: .rpm proef op een schone Fedora
@@ -182,20 +182,21 @@ jobs:
       image: fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814
     steps:
       - name: Artefactactie voorbereiden
-        run: dnf install -y --setopt=install_weak_deps=False nodejs ca-certificates
+        run: dnf install -y --setopt=install_weak_deps=False nodejs ca-certificates git
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          dnf install -y --setopt=install_weak_deps=False xorg-x11-server-Xvfb dejavu-sans-fonts
-          dnf install -y ./dist/ocideck-linux-x86_64-*.rpm
-          ! ldd /usr/lib/ocideck/ocideck | grep 'not found'
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          test "$rc" -eq 124
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash scripts/probe_linux_package.sh rpm ./dist/ocideck-linux-x86_64-*.rpm probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-rpm
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-appimage:
     name: AppImage proef op een schone Ubuntu
@@ -208,25 +209,21 @@ jobs:
       - name: Artefactactie voorbereiden
         run: |
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates git
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends xvfb fonts-dejavu-core \
-            libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1 \
-            libgles2 libegl1 libwebkit2gtk-4.1-0 libmpv2 gstreamer1.0-plugins-good gstreamer1.0-libav
-          cd dist
-          chmod +x ocideck-linux-x86_64-*.AppImage
-          ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
-          ! ldd squashfs-root/ocideck | grep 'not found'
-          set +e
-          timeout 20 xvfb-run -a squashfs-root/AppRun
-          rc=$?
-          set -e
-          test "$rc" -eq 124
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash scripts/probe_linux_package.sh appimage ./dist/ocideck-linux-x86_64-*.AppImage probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-appimage
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-flatpak:
     name: Flatpak installatie en inhoud op een schone Ubuntu
