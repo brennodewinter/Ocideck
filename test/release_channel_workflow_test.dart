@@ -32,8 +32,15 @@ void main() {
           workflow,
           contains("needs.consumer-$channel.result == 'success'"),
         );
+        if (channel != 'flatpak') {
+          expect(
+            workflow,
+            contains(
+              'bash controller/scripts/probe_linux_package.sh $channel ',
+            ),
+          );
+        }
       }
-      expect(workflow, contains('timeout 20 xvfb-run'));
       expect(
         workflow,
         contains(
