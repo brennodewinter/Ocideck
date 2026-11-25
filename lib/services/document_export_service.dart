@@ -12,6 +12,7 @@ import '../models/settings.dart' show ThemeProfile;
 import '../models/page_size.dart';
 import 'table_of_contents.dart';
 import '../utils/atomic_file.dart';
+import '../utils/document_blank_lines.dart';
 import '../utils/markdown_blocks.dart';
 import 'document_chart_hydration.dart';
 import 'classification_enforcement_policy.dart';
@@ -135,7 +136,7 @@ Future<ExportBundle> buildDocumentExportBundle(
     projectPath: projectPath,
   );
   final baseDeck = DocumentDeckBridge.documentToDeck(
-    hydrated,
+    withDocumentBlankLineSpacers(hydrated),
     projectPath: projectPath,
     title: title,
     tlp: tlp,

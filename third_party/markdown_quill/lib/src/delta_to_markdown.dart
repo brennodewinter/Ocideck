@@ -53,6 +53,7 @@ class DeltaToMarkdown extends Converter<Delta, String>
     Map<String, EmbedToMarkdown>? customEmbedHandlers,
     Map<String, CustomAttributeHandler>? customTextAttrsHandlers,
     this.visitLineHandleNewLine,
+    this.emptyParagraphMarkdown,
     this.customContentHandler = escapeSpecialCharacters,
   }) {
     if (customEmbedHandlers != null) {
@@ -71,6 +72,9 @@ class DeltaToMarkdown extends Converter<Delta, String>
 
   /// allows custom handling of adding new lines to quill Markdown string
   final DeltaToMarkdownVisitLineHandleNewLine? visitLineHandleNewLine;
+
+  /// Optional Markdown block for an explicitly empty paragraph.
+  final String? emptyParagraphMarkdown;
 
   /// allows overriding default behavior of the contentHandler in [_handleAttribute]
   /// which is responsible for special characters escaping, e.g.: `_` becomes `\_`
@@ -266,6 +270,13 @@ class DeltaToMarkdown extends Converter<Delta, String>
   StringSink visitLine(Line line, [StringSink? output]) {
     final out = output ??= StringBuffer();
     final style = line.style;
+    if (emptyParagraphMarkdown case final paragraph?
+        when line.isEmpty && style.isEmpty && line.nextLine != null) {
+      out
+        ..writeln(paragraph)
+        ..writeln();
+      return out;
+    }
     _handleAttribute(_lineAttrsHandlers, line, output, () {
       for (final leaf in line.children) {
         leaf.accept(this, out);

@@ -1,12 +1,26 @@
 // De `<!-- spacer -->`-marker (#2464): bewuste witruimte van één tekstregel,
 // atomair in de editor en ter hoogte van een regel in elke export.
+import 'dart:io';
+
+import 'package:archive/archive.dart';
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/services/document_export_service.dart';
+import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/marp_html_service.dart';
+import 'package:ocideck/services/privacy/privacy_own_identity.dart';
+import 'package:ocideck/services/privacy/privacy_regions.dart';
+import 'package:ocideck/utils/document_blank_lines.dart'
+    show withDocumentBlankLineSpacers;
 import 'package:ocideck/services/docx/markdown_to_docx.dart';
 import 'package:ocideck/services/epub/markdown_to_xhtml.dart';
 import 'package:ocideck/services/latex/markdown_to_latex.dart';
 import 'package:ocideck/services/odt/markdown_to_odt.dart';
 import 'package:ocideck/services/pdf/document_pdf_blocks.dart';
 import 'package:ocideck/services/pdf/markdown_to_pdf_blocks.dart';
+import 'package:ocideck/utils/markdown_caret_map.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/utils/markdown_visual_compatibility.dart';
 import 'package:ocideck/utils/spacer_embed_syntax.dart';
@@ -14,6 +28,96 @@ import 'package:ocideck/widgets/reader/document_markdown_view.dart'
     show DocumentMarkdownView, documentForcedPageBreaks;
 
 void main() {
+  group('extra lege regels tussen documentblokken', () {
+    test('de adressering krijgt twee extra regels vóór het onderwerp', () {
+      const source = 'Geadresseerde.\n\n\n\n**Onderwerp.**\n';
+      const expected =
+          'Geadresseerde.\n\n$spacerMarker\n\n$spacerMarker\n\n**Onderwerp.**\n';
+      expect(withDocumentBlankLineSpacers(source), expected);
+      expect(withDocumentBlankLineSpacers(expected), expected);
+      expect(DocumentMarkdownView.blockTexts(source), [
+        'Geadresseerde.',
+        '',
+        '',
+        '**Onderwerp.**',
+      ]);
+      expect(
+        withDocumentBlankLineSpacers(source.replaceAll('\n', '\r\n')),
+        expected.replaceAll('\n', '\r\n'),
+      );
+    });
+
+    test('omzetting bewaart lege regels binnen een blok', () {
+      const fenced = '~~~text\nA\n\n\nB\n~~~\n';
+      const indented = '    A\n\n\n    B\n';
+      const math = '\$\$\nA\n\n\nB\n\$\$\n';
+      const list = '- A\n\n\n- B\n';
+      const metadata =
+          '<!-- ocideck:plain_table v1 -->\n\n\n| A |\n| - |\n| B |\n';
+      for (final source in [fenced, indented, math, list, metadata]) {
+        expect(withDocumentBlankLineSpacers(source), source);
+      }
+    });
+
+    test('extra ruimte overleeft een kopgrens in alle exports', () async {
+      const source = 'Geadresseerde.\n\n\n\n# Onderwerp\n\nDe brief.\n';
+      final bundle = await buildDocumentExportBundle(
+        source,
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      expect(
+        markdownToPdfBlocks(
+          projectedDocumentBody(bundle),
+        ).whereType<PdfSpacerBlock>(),
+        hasLength(2),
+      );
+
+      final html = MarpHtmlService(
+        loadAsset: (path) => File(path).readAsString(),
+      );
+      for (final format in DocumentExportFormat.values) {
+        final bytes = await buildDocumentExportBytes(
+          bundle,
+          format,
+          html: html,
+        );
+        final archiveEntry = switch (format) {
+          DocumentExportFormat.epub => 'OEBPS/document.xhtml',
+          DocumentExportFormat.odt => 'content.xml',
+          DocumentExportFormat.docx => 'word/document.xml',
+          _ => null,
+        };
+        final text = archiveEntry == null
+            ? String.fromCharCodes(bytes)
+            : String.fromCharCodes(
+                ZipDecoder().decodeBytes(bytes).findFile(archiveEntry)!.content,
+              );
+        final pattern = switch (format) {
+          DocumentExportFormat.md => spacerMarker,
+          DocumentExportFormat.html =>
+            'Geadresseerde.\n\n&nbsp;\n\n&nbsp;\n\n# Onderwerp',
+          DocumentExportFormat.latex => r'\vspace{\baselineskip}',
+          DocumentExportFormat.epub => '<p>&#160;</p>',
+          DocumentExportFormat.odt =>
+            '<text:p text:style-name="Standard"></text:p>',
+          DocumentExportFormat.docx =>
+            '<w:p><w:r><w:t xml:space="preserve"></w:t></w:r></w:p>',
+          DocumentExportFormat.pdf => '%PDF-',
+        };
+        final count = switch (format) {
+          DocumentExportFormat.html || DocumentExportFormat.pdf => 1,
+          _ => 2,
+        };
+        expect(pattern.allMatches(text), hasLength(count), reason: format.name);
+      }
+    });
+  });
+
   group('codec', () {
     test('de marker wordt een embed en komt er byte-getrouw weer uit', () {
       const source = 'Eerste alinea.\n\n<!-- spacer -->\n\nTweede alinea.\n';
@@ -36,6 +140,41 @@ void main() {
 
       // Byte-getrouw: posities én hoeveelheid overleven opslaan en heropenen.
       expect(restored, source.trimRight());
+    });
+
+    test('een lege regel typen in de visuele editor blijft één lege regel', () {
+      final typed = Document.fromDelta(Delta()..insert('A.\n\nB.\n'));
+      const expected = 'A.\n\n$spacerMarker\n\nB.';
+      final markdown = MarkdownQuillCodec.markdownFromDocument(
+        typed,
+        preserveDocumentSpacing: true,
+      );
+      expect(markdown, expected);
+      for (final source in [markdown, 'A.\n\n\nB.']) {
+        final reopened = MarkdownQuillCodec.documentFromMarkdown(
+          source,
+          preserveDocumentSpacing: true,
+        );
+        final caret = MarkdownCaretMap.of(
+          source,
+          preserveDocumentSpacing: true,
+        );
+        final sourceOffset = source.indexOf('B.');
+        final visualOffset = reopened.toPlainText().indexOf('B.');
+        expect(caret.visualOffsetOf(sourceOffset), visualOffset);
+        expect(caret.sourceOffsetOf(visualOffset), sourceOffset);
+        expect(
+          MarkdownQuillCodec.markdownFromDocument(
+            reopened,
+            preserveDocumentSpacing: true,
+          ),
+          expected,
+        );
+      }
+      expect(
+        MarkdownQuillCodec.markdownFromDocument(typed),
+        isNot(contains(spacerMarker)),
+      );
     });
 
     test('meerdere markers geven meerdere regels ruimte', () {

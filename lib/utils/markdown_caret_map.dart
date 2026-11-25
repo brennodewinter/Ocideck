@@ -1,4 +1,5 @@
 import '../services/table_of_contents.dart' show tocMarkerLinePattern;
+import 'document_blank_lines.dart';
 import 'markdown_blocks.dart';
 import 'visible_markdown_search.dart';
 
@@ -29,21 +30,28 @@ class MarkdownCaretMap {
 
   // Eén bron bewaard: cursorbewegingen, zoeken en hoofdstuksprongen delen de
   // kaart, zonder een onbegrensde geschiedenis van documenten vast te houden.
-  static String? _cachedSource;
+  static (String, bool)? _cachedSource;
   static MarkdownCaretMap? _cachedMap;
 
   /// De kaart voor [source], de documentbody zonder frontmatter. Hergebruikt
   /// de laatste kaart zolang de tekst ongewijzigd is.
-  factory MarkdownCaretMap.of(String source) {
-    if (_cachedSource == source) return _cachedMap!;
-    final map = MarkdownCaretMap._build(source);
-    _cachedSource = source;
+  factory MarkdownCaretMap.of(
+    String source, {
+    bool preserveDocumentSpacing = false,
+  }) {
+    final key = (source, preserveDocumentSpacing);
+    if (_cachedSource == key) return _cachedMap!;
+    final map = MarkdownCaretMap._build(source, preserveDocumentSpacing);
+    _cachedSource = key;
     _cachedMap = map;
     return map;
   }
 
-  factory MarkdownCaretMap._build(String source) {
+  factory MarkdownCaretMap._build(String source, bool preserveDocumentSpacing) {
     final lines = source.split('\n');
+    final spacers = preserveDocumentSpacing
+        ? extraDocumentBlankLineIndices(source)
+        : const <int>{};
     final rows = <_Row>[];
     var sourceAt = 0;
     var visualAt = 0;
@@ -83,15 +91,17 @@ class MarkdownCaretMap {
         }
         continue;
       }
-      if (line.trim().isEmpty) {
-        rows.add(_Row.hidden(start, line.length, visualAt));
-        continue;
-      }
-      if (_rulePattern.hasMatch(line) ||
+      if (spacers.contains(i) ||
+          spacerMarkerLinePattern.hasMatch(line.trimRight()) ||
+          _rulePattern.hasMatch(line) ||
           _loneImagePattern.hasMatch(line) ||
           tocMarkerLinePattern.hasMatch(line)) {
         rows.add(_Row.object(start, line.length, visualAt));
         visualAt += 2; // het objectteken plus zijn regeleinde
+        continue;
+      }
+      if (line.trim().isEmpty) {
+        rows.add(_Row.hidden(start, line.length, visualAt));
         continue;
       }
       if (_tableRowPattern.hasMatch(line)) {

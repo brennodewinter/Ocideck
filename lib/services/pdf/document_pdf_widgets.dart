@@ -178,7 +178,7 @@ class DocumentPdfWidgets {
     PdfHeadingBlock() => style.headingSpaceAfter,
     PdfParagraphBlock() =>
       tight ? style.bodyFontSize * 0.15 : style.blockSpacing,
-    PdfPageBreakBlock() => 0,
+    PdfPageBreakBlock() || PdfSpacerBlock() => 0,
     _ => style.blockSpacing,
   };
 
