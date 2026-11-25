@@ -110,19 +110,15 @@ records the Genkit/MediaPipe opportunities, platform limits and current decision
 
 ## The quality gate
 
-Run this on the exact commit before every merge — it is the enforced quality gate. The Forgejo remote
-*has* an Actions runner, but since #790 it runs the *full* gate on a `v*` tag
-rather than per pull request: a CI run cost 22 minutes there against 2.5 minutes
-here. So the full gate — the test suite and the two coverage floors — runs
-nowhere for you between your branch and `main`. If it fails at tag time, the
-problem already landed.
-
-The maintainer records the tested commit in the pull request. Forgejo does not
-automatically repeat the static gates, secret/SAST scans or web build: all are
-already in `make check-full`. Their workflows remain manually startable for
-diagnosis. The fast Mac golden gate still runs after a merge, while Linux,
-native-build, scheduled-freshness and release jobs remain where they provide
-different evidence.
+Before merging, the maintainer runs `make check-full` on the exact commit and
+records the result in the pull request. This is a maintainer agreement.
+Pawprint blocks direct pushes and enforces an up-to-date branch, with no
+required status checks. Its independent PR scan checks incoming commits for
+secrets. The full secret/SAST, static and web workflows remain available on
+demand. Visual checks on `main`, the nightly Linux suite, platform build jobs
+and candidate checks provide additional results. In the historical comparison
+recorded in #790, the former per-PR gate took 22 minutes on the forge and
+2.5 minutes on the maintainer’s machine.
 
 ```sh
 make check-full       # complete pre-merge gate, including scans and web build
@@ -151,8 +147,7 @@ gets raised as coverage improves, so when a document and the `Makefile`
 disagree, the `Makefile` is the answer.)*
 
 See [`docs/CHECKS.md`](docs/CHECKS.md) for the full reference — what each check
-covers, what a failure means, and how the CI workflows (defined but not currently
-running) declare them.
+covers, when Pawprint runs it, and what the branch rule enforces.
 
 Targeted test groups for focused work:
 

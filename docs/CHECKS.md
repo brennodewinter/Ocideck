@@ -2,23 +2,18 @@
 
 > **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-11-08 · **Published by:** Stichting LibreKAT
 
-Every automated check OciDeck runs, what it covers, what a failure means, and how
-to fix it. The **`Makefile` is the single entry point** and the **real gate**.
-Before merging, the maintainer runs `make check-full` locally on the exact commit
-named in the pull request. That includes the static checks, full suite, coverage,
-goldens on macOS, secret and SAST scans, licences, SBOM and the real web build.
+The [Makefile](../Makefile) is the entry point for local checks. The maintainer
+runs `make check-full` on the exact pull-request commit and records the result
+before merging. This is a maintainer agreement. Pawprint's protection for
+`main` blocks direct pushes, restricts who can merge and requires an up-to-date
+branch. It has no required status checks.
 
-The former automatic `static-gate`, `scans` and `web-gate` workflows remain
-available through `workflow_dispatch`, but no longer repeat that same work on
-every pull request or merge. Branch protection still forbids direct pushes,
-limits merges to the maintainer and requires an up-to-date branch; it no longer
-waits for duplicated status checks.
-
-Server automation remains where it adds different evidence: the fast Mac golden
-gate checks the actual `main` after each merge, the Linux suite runs nightly,
-native builds run after relevant changes, time-degrading checks run on a
-schedule, a toolchain change rehearses all platforms, and a release candidate runs the full release gate before a tag exists. See [Continuous integration](#continuous-integration).
-Run `make help` for a one-line summary of every target.
+Pawprint runs a separate secret scan on incoming PR commits. The macOS golden
+suite runs on pushes to `main`. The Linux suite and freshness checks run on a
+schedule, and native builds run when matching paths change on `main`. The
+release candidate has its own checks before tagging. Run `make help` for
+available commands and see [Continuous integration](#continuous-integration)
+for the workflow triggers.
 
 ### Transcription evidence (2026-11-17)
 
@@ -144,8 +139,8 @@ on the main thread instead of throwing on `Isolate.run` after the debounce
 > lock whose holder process is gone is released automatically — an aborted run
 > does not block the machine.
 
-Run this before every push — it is the enforced gate. For the extended
-local sweep that also covers licences and dependency health:
+Run `make check` before pushing. For the maintainer's full pre-merge run,
+including licences and dependency health:
 
 ```sh
 make check-full   # check + licenses + sbom-verify + deps-check + check-web + deps-outdated
@@ -344,7 +339,7 @@ span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
 localization and security guards listed below. The release candidate runs `make check-no-coverage` and the Mac golden suite
-before any tag; your local `make check-full` remains the gate before a merge.
+before any tag. The maintainer records the local `make check-full` result before merging.
 
 ---
 
@@ -423,68 +418,61 @@ now the only passing state.
 
 ## All checks at a glance
 
-| Check | Verifies | In `make check` | In `check-full` | In CI workflow † | Blocks merge? |
-| --- | --- | :---: | :---: | :---: | --- |
-| [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size, FilePicker-gate & fixed-delay ratchets; `Isolate.run` web gate | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — | local (`check-full`) |
-| [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — | local (`check-full`) |
-| [`make check-dated-claims`](#make-check-dated-claims) | Every registered measurement in the docs still has its anchor, and no unregistered duration claim was added (`looptijdBasislijn` ratchet). Staleness itself runs daily, not here | ✅ | ✅ | — | local (`check-full`) |
-| [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — | local (`check-full`) |
-| [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — | local (`check-full`) |
-| [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-packages`](#make-check-packages) | Every package under `packages/` is unpublished, named like its directory, free of Flutter and of platform imports (`dart:io`/`ui`/`html`/`js`), on the root's SDK constraint, carries a copy of `LICENSE.md`, is used by the app, and stays under the file-size ceiling with no bare `catch (_)` | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make test-packages`](#make-test-packages) | The tests of every first-party package, in random order, plus its coverage floors (average, every `lib/` file in a test, per file) | ✅ | ✅ | — | local (`check`) |
-| [`make test-age-interop`](#make-test-age-interop) | Builds the pinned reference `age` (Go, network) and runs the interoperability test of the sealing layer against it | — | — | — | manual (phase 3 gate) |
-| [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ | local (`check-full`) |
-| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ | local only (nightly on `main`) |
-| [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) | local only |
-| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — | local only |
-| [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — | local (`check-full`) |
-| [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — | local only (`check-full`) |
-| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | ✅ | ✅ | — | local (`check-full`) |
-| [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ | local only (`check-full`) |
-| [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ | local only (`check-full`) |
-| [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ | local only (`check-full`) |
-| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ | local (`check-full`) |
-| [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — | advisory |
-| [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — | advisory |
-| [`make check-owasp-catalog-sources`](#make-check-owasp-catalog-sources) | Stable and development OWASP source layout, schema, commit identity and licence | — | — | ✅ | local release gate |
-| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ | local (`check-full`) |
-| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ | local (`check-full`) |
-| [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — | local only (`check-full`) |
-| [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — | advisory |
-| [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) | advisory |
-| [`make check-pins`](#make-check-pins-advisory) | Exact-pinned CI versions — actions *and* scanner binaries — vs their latest release (advisory) | — | — | — | advisory |
+| Check | Verifies | In `make check` | In `check-full` | Pawprint execution | Before merge |
+| --- | --- | :---: | :---: | --- | --- |
+| [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size, FilePicker-gate & fixed-delay ratchets; `Isolate.run` web gate | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-dated-claims`](#make-check-dated-claims) | Documented measurements, workflow triggers and assurance inventories match their sources | ✅ | ✅ | Nightly suite and daily freshness | Maintainer agreement |
+| `make check-rtl-inventory` | Source counts for LTR layout and both accessibility guides agree | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-packages`](#make-check-packages) | Every package under `packages/` is unpublished, named like its directory, free of Flutter and of platform imports (`dart:io`/`ui`/`html`/`js`), on the root's SDK constraint, carries a copy of `LICENSE.md`, is used by the app, and stays under the file-size ceiling with no bare `catch (_)` | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make test-packages`](#make-test-packages) | The tests of every first-party package, in random order, plus its coverage floors (average, every `lib/` file in a test, per file) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make test-age-interop`](#make-test-age-interop) | Builds the pinned reference `age` (Go, network) and runs the interoperability test of the sealing layer against it | — | — | — | Manual |
+| [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | Nightly suite | Maintainer agreement |
+| `make test-golden` | macOS visual regression suite | ✅ (macOS) | ✅ (macOS) | On push to `main` and for a release candidate | Maintainer agreement |
+| [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | — | Maintainer agreement |
+| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — | Maintainer agreement |
+| [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — | Maintainer agreement |
+| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | Daily freshness | Maintainer agreement |
+| [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | Release and native builds through their build targets | Maintainer agreement |
+| [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | Daily freshness | Maintainer agreement |
+| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | On demand and for a release candidate | Maintainer agreement |
+| [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — | Advisory |
+| [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — | Advisory |
+| [`make check-owasp-catalog-sources`](#make-check-owasp-catalog-sources) | Stable and development OWASP source layout, schema, commit identity and licence | — | — | — | Local release procedure |
+| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | Automatic on PRs to `main` (incoming history), full scan on demand | Automatic PR scan and maintainer agreement |
+| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | On demand | Maintainer agreement |
+| [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — | Maintainer agreement |
+| [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — | Advisory |
+| [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | — | Advisory |
+| [`make check-pins`](#make-check-pins-advisory) | Exact-pinned CI versions — actions *and* scanner binaries — vs their latest release (advisory) | — | — | Daily freshness | Advisory |
+| [`make check-branch-protection`](#main-branch-protection) | Live settings match the versioned Pawprint policy | — | — | — | Manual |
 
-† The **In CI workflow** column is what `.github/workflows/ci.yml` *declares* —
-not what runs. That workflow does not execute: Forgejo reads
-`.forgejo/workflows/` instead of `.github/workflows/` once the former exists
-(see [Continuous integration](#continuous-integration)). What *does* run in CI
-is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner for a release candidate before tagging. Before a merge the authoritative result is local
-`make check-full` on the named head commit. The static, scan and web workflows
-remain manually startable when a second environment is useful.
+The **Before merge** column describes the maintainer's agreement and the
+automatic PR scan. Pawprint can show failed PR jobs while still allowing a
+merge because the branch has no required status checks. **Nightly suite**
+means `linux-gate.yml` on `main`, using `make check-no-coverage`. **Daily
+freshness** means `time-degrading-checks.yml`. **On demand** means an explicit
+workflow dispatch. See the [workflow trigger table](#pawprint-workflow-triggers)
+for the definitions used by Forgejo.
 
-‡ The **Blocks merge?** column says where the decision is made. **local** means
-the maintainer records a green `make check-full` for the exact commit before
-merging; Forgejo does not repeat or attest it. **post-merge** = runs
-after the merge, as detection not prevention. **advisory** = never blocks.
-
-Note that `make
-check` alone does **not** include `licenses`, `sbom-verify`, `deps-check`, the
-security scans or `check-web` — those live in `check-full`. Run
-`make check-full` before every merge.
-
-The workflow additionally declares `flutter pub get --enforce-lockfile`
-(reproducible dependencies) and a **Markdown link check** (`lychee --offline`).
+`make check-full` adds licences, SBOM verification, dependency integrity,
+secret and SAST scans, and the web build to `make check`.
 
 Enforced inside `make test`: **localization in all 31 languages**, the
 **path/SSRF guards**, the **HTML-export sanitisation** invariants (strict
@@ -506,8 +494,7 @@ are subsets of `make test` for focused work — not separate gates.
 
 ## Quality gate
 
-These three are the core of `make check` — the enforced gate. (The CI workflow
-also declares them, but see the [CI note](#continuous-integration).)
+These checks form the static portion of the maintainer’s local validation.
 
 ### `make format-check`
 - **Runs:** `dart format --output=none --set-exit-if-changed .`
@@ -782,7 +769,7 @@ also declares them, but see the [CI note](#continuous-integration).)
 
 ### `make check-dated-claims`
 - **Runs:** `dart run tool/check_dated_claims.dart`, and with
-  `--tegen-de-klok` the staleness half on top
+  `--tegen-de-klok` adds the staleness checks.
 - **Covers:** claims about a *measured* quantity — how long something of ours
   takes. This document promised on two lines that a red `main` surfaces well
   under the time it actually takes; on 2026-09-03 the measured median from merge
@@ -817,7 +804,14 @@ also declares them, but see the [CI note](#continuous-integration).)
   reflow of a paragraph and get switched off within a week. The limit is written
   down here because a gate whose blind spot nobody knows gets taken for more
   proof than it delivers.
-- **Not covered on purpose — staleness, per PR.** Whether a measurement is past
+- **Workflow triggers.** The check compares the [workflow trigger table](#pawprint-workflow-triggers)
+  with the `on` definitions under `.forgejo/workflows/`. To update it after
+  changing a trigger, run `dart run tool/check_dated_claims.dart --write-workflows`
+  and review the affected enforcement description.
+- **Assurance inventory.** New raw HTTP clients, changes to allowed sink paths
+  and added service modules ask for review of the model and scope. The daily
+  freshness run checks the review dates of the ASVS and risk dossiers.
+- **Staleness.** Whether a measurement is past
   its shelf life changes without a commit, so it runs daily in
   `.forgejo/workflows/time-degrading-checks.yml` and not in this gate. Were it
   here, some unrelated pull request would one day fail on a claim its author
@@ -1239,10 +1233,12 @@ also declares them, but see the [CI note](#continuous-integration).)
   of the rule, and there is deliberately no number to raise to get past it.
 
 ### `make test`
-- **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
+- **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix'`
   — the full unit/widget suite under `test/`, in a randomised order so no test can
-  silently depend on another running first. The golden (visual-regression) tests
-  are excluded here and run separately via `make test-golden`.
+  silently depend on another running first. `make test-benchmarks` runs the scaling
+  benchmarks afterwards. Use `make test-golden` for visual regression tests. The
+  `codec-matrix` installation probes require explicit paths to installed tools and
+  fixtures. [Decoder probe](TRANSCRIPTION_FORMATS.md) · [Speech probe](TRANSCRIPTION_RELEASE_MATRIX.md)
 - **Covers:** Markdown round-trip, preview/rendering, export, providers/state,
   services, the presenter, localization, and more.
 - **Failure means:** inspect the named failing test file and case in the output.
@@ -1268,8 +1264,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   En `integration_test/diagnostics_log_test.dart` (#2618) draait het logbestand als echte app in de échte app-supportmap: mijlpalen, eerste frame, een kunstmatige blokkade van 800 ms die één stallregel oplevert, en een nette afsluiting die de sessiemarkering weghaalt. De unit-tests (`test/log_file_test.dart`, `test/log_sink_test.dart`, `test/ui_stall_watch_test.dart`) bewijzen rotatie, sanering en de melder in een tijdelijke map; wat ze niet zien, is Windows — `%APPDATA%`, de virusscanner, hernoemen over een bestaand bestand. Daarom draait de spiegel-CI hem op macOS en Windows. De Windows-rookproef in `release.yml` leunt erop: hij wacht tot 60 s op de mijlpaal `opstart: eerste frame` in het geïnstalleerde logbestand en zet het log bij een fout in het releaselog — een proces dat leeft maar nooit een frame tekent, is voor de gebruiker "de app start niet".
 
 ### `make coverage`
-- **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
-  then `dart run tool/coverage_summary.dart --min=80 --require-instrumented`.
+- **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix'`
+  then `dart run tool/coverage_summary.dart --min=80 --require-instrumented` and `make test-benchmarks`.
 - **Covers:** two things. (1) Line coverage across every `lib/` file a test
   imports. (2) That there **is** such a test for every `lib/` file.
 - **Failure means:** coverage dropped below the floor (`--min` in the Makefile
@@ -2013,25 +2009,65 @@ that reaches beyond `build/test_cache`.
 
 ## Continuous integration
 
-> **A runner exists since 2026-07-23, and since #751 it runs the gate.** The
-> Forgejo server has a registered Actions runner (docker-in-docker, on the
-> same machine that serves the repository). What it executes comes from
-> `.forgejo/workflows/` — Forgejo reads the first workflow directory that
-> exists, so that directory shadows `.github/workflows/`, whose files remain
-> reference definitions for a GitHub mirror — with three exceptions that really
-> run there: since 2026-07-24 `.github/workflows/release.yml`, because it
-> builds the Windows artifact the forge has no machine for;
-> `windows-native-check.yml`, a post-merge build check on the same platform
-> gap; and `windows-test-check.yml`, a weekly suite run over `main` for the
-> same reason. Most of
-> `make check-full` is the authoritative pre-merge gate and runs locally on the
-> exact commit recorded in the pull request. The static, scan and web workflows
-> are manual fallback and diagnosis routes; branch protection does not wait for
-> them.
-> Since #797 the release gate runs on a registered **Mac**
-> runner rather than on the server, and the Linux gate moved to an on-demand
-> workflow — see below for what that buys and what it costs. The sections below
-> describe the workflows that run, then what the remaining GitHub file *declares*.
+Pawprint’s registered Actions runners read `.forgejo/workflows/`. The GitHub
+mirror runs the Windows release/build and test jobs. The maintainer runs the
+full local checks as described in [CONTRIBUTING.md](../CONTRIBUTING.md).
+
+### Main branch protection
+
+The [versioned main rule](../.forgejo/main-branch-protection.json) records the
+expected settings. Use `make check-branch-protection` with a Pawprint
+administrator login in `tea`, `OCIDECK_FORGE_TOKEN`, or the configured
+`forgejo-pawprint-api` keychain entry. It reads the rule and reports differences.
+The repository keeps DCO sign-off and release-artifact signatures. Git commit
+signatures remain optional while there is no maintained set of verified
+contributor and automation signing keys. Review that decision when key
+management is in place for both.
+
+### Pawprint workflow triggers
+
+This table records when a workflow starts. The release workflow is dispatched
+by the release script, and candidate success gates tagging. Pull-request jobs
+report results before a merge. The main-branch rule determines whether their
+status is required.
+
+<!-- BEGIN PAWPRINT WORKFLOW TRIGGERS -->
+
+| Workflow | Trigger on Pawprint | When it runs |
+| --- | --- | --- |
+| [`ci-image-scans.yml`](../.forgejo/workflows/ci-image-scans.yml) | `workflow_dispatch` | On demand |
+| [`ci-image-scans.yml`](../.forgejo/workflows/ci-image-scans.yml) | `push` · `branches` `main` · `paths` `.forgejo/ci-image/scans.Dockerfile`, `.forgejo/workflows/ci-image-scans.yml`, `.github/pinned-ci-versions.json` | Automatic on push to main |
+| [`ci-image.yml`](../.forgejo/workflows/ci-image.yml) | `workflow_dispatch` | On demand |
+| [`ci-image.yml`](../.forgejo/workflows/ci-image.yml) | `push` · `branches` `main` · `paths` `.forgejo/ci-image/Dockerfile`, `.forgejo/workflows/ci-image.yml`, `.tool-versions` | Automatic on push to main |
+| [`ci.yml`](../.forgejo/workflows/ci.yml) | `workflow_dispatch` | On demand |
+| [`debian12-build.yml`](../.forgejo/workflows/debian12-build.yml) | `workflow_dispatch` | On demand |
+| [`debian12-build.yml`](../.forgejo/workflows/debian12-build.yml) | `push` · `branches` `main` · `paths` `.forgejo/workflows/debian12-build.yml`, `scripts/debian12_builder/**`, `scripts/build_debian12_release.sh`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions` | Automatic on push to main |
+| [`linux-build.yml`](../.forgejo/workflows/linux-build.yml) | `workflow_dispatch` | On demand |
+| [`linux-build.yml`](../.forgejo/workflows/linux-build.yml) | `push` · `branches` `main` · `paths` `pubspec.yaml`, `pubspec.lock`, `linux/**`, `third_party/**`, `native/audio_tools/**`, `.tool-versions`, `.forgejo/ci-image/**`, `.forgejo/workflows/linux-build.yml`, `scripts/package_linux.sh`, `scripts/flatpak*.py`, `scripts/linux_source_bundle.py`, `scripts/apt_source_download.py`, `packaging/linux/**` | Automatic on push to main |
+| [`linux-gate.yml`](../.forgejo/workflows/linux-gate.yml) | `workflow_dispatch` | On demand |
+| [`linux-gate.yml`](../.forgejo/workflows/linux-gate.yml) | `schedule` · `11 2 * * *` | Automatic on the default branch, on schedule |
+| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `workflow_dispatch` | On demand |
+| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `push` · `branches` `main` | Automatic on push to main |
+| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `pull_request` · `branches` `main` · `paths` `lib/**`, `linux/**`, `native/**`, `third_party/**`, `packaging/**`, `assets/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `.forgejo/ci-image/**`, `.forgejo/workflows/linux-start-smoke.yml`, `scripts/**` | Automatic before merge |
+| [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `workflow_dispatch` | On demand |
+| [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `push` · `branches` `main` · `paths` `pubspec.yaml`, `pubspec.lock`, `macos/**`, `third_party/**`, `.tool-versions`, `.forgejo/workflows/macos-build.yml`, `scripts/macos_window_probe.swift` | Automatic on push to main |
+| [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `workflow_dispatch` | On demand |
+| [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `push` · `branches` `main` | Automatic on push to main |
+| [`macos-signing-preflight.yml`](../.forgejo/workflows/macos-signing-preflight.yml) | `workflow_dispatch` | On demand |
+| [`release-channel.yml`](../.forgejo/workflows/release-channel.yml) | `workflow_dispatch` | On demand |
+| [`release.yml`](../.forgejo/workflows/release.yml) | `workflow_dispatch` | On demand |
+| [`scans.yml`](../.forgejo/workflows/scans.yml) | `workflow_dispatch` | On demand |
+| [`scans.yml`](../.forgejo/workflows/scans.yml) | `pull_request_target` · `branches` `main` | Automatic before merge |
+| [`static-gate.yml`](../.forgejo/workflows/static-gate.yml) | `workflow_dispatch` | On demand |
+| [`tap-mirror-check.yml`](../.forgejo/workflows/tap-mirror-check.yml) | `schedule` · `17 5 * * *` | Automatic on the default branch, on schedule |
+| [`tap-mirror-check.yml`](../.forgejo/workflows/tap-mirror-check.yml) | `workflow_dispatch` | On demand |
+| [`time-degrading-checks.yml`](../.forgejo/workflows/time-degrading-checks.yml) | `schedule` · `33 5 * * *` | Automatic on the default branch, on schedule |
+| [`time-degrading-checks.yml`](../.forgejo/workflows/time-degrading-checks.yml) | `workflow_dispatch` | On demand |
+| [`toolchain-rehearsal.yml`](../.forgejo/workflows/toolchain-rehearsal.yml) | `pull_request` · `paths` `.tool-versions` | Automatic before merge |
+| [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `workflow_dispatch` | On demand |
+| [`website-downloads.yml`](../.forgejo/workflows/website-downloads.yml) | `workflow_dispatch` | On demand |
+
+<!-- END PAWPRINT WORKFLOW TRIGGERS -->
 
 ### `.forgejo/workflows/ci.yml` — manual diagnostic gate
 - **gate** — available through `workflow_dispatch` on the registered Mac
@@ -2073,21 +2109,22 @@ explicitly unexplained. Local subprocess regressions exercise success, failure,
 SIGTERM, forced termination, missing executables and secret redaction. They do
 not simulate a physical runner or server outage.
 
-### `.forgejo/workflows/scans.yml` — secrets and SAST, on demand
-- **scans** — runs on the prebaked scan image
-  (`pawprint.vigilis.online/librekat/ocideck-scans:<pins>`, see the
-  `ci-image-scans.yml` section) with the three scanners baked in, then runs
-  [`make check-secrets`](#make-check-secrets) (gitleaks + trufflehog, working
-  tree *and* full history) and [`make sast`](#make-sast) (semgrep, local rules
-  only). The commands are the Makefile targets, not re-typed copies of what they
-  do — a contributor's local run and CI are then the same run by construction.
-- **Why it is its own workflow rather than a second job in `ci.yml`.** `on:` is
-  per workflow, and `ci.yml` is now available for manual diagnosis. A job there would first scan
-  once the secret was already on `main` with a tag around it.
-- **Why it is manual.** `make check-full` runs both scans locally before merge,
-  including full-history secret detection. Repeating them automatically on the
-  same commit adds cost rather than evidence. Manual dispatch remains useful
-  for incident investigation or a deliberately independent environment.
+### `.forgejo/workflows/scans.yml` — secret scan on PRs, full scan on demand
+
+- **Pull requests to `main`.** Forgejo runs the workflow from the target branch
+  on open, update and reopen. The runner fetches and verifies the event’s PR
+  head, then feeds the incoming git history to gitleaks and TruffleHog using
+  target-branch rules. The scan neither checks out nor executes PR code.
+  Raw scanner output stays out of the public log. A finding fails the job.
+- **On demand and locally.** Manual dispatch runs both `make check-secrets`
+  (working tree and full history) and `make sast`. The maintainer records the
+  full local result because `main` has no required status checks.
+- **Exposed credential.** If a real credential reached a branch, PR, log or
+  any other shared surface, treat it as exposed. Revoke and rotate it with
+  its owner, check the issuer’s usage records, remove it from the change and
+  rerun the scan. Report facts through the [private reporting route](../SECURITY.md#reporting-a-vulnerability)
+  and keep the value out of tickets and logs. Removing it from a later commit
+  leaves earlier copies in history.
 - **What it used to cost, and why it is now prebaked.** The first runs (#778)
   measured about three minutes, against 19 seconds of actual scanning — nearly
   all of it *installing* the scanners into a bare image. The obvious lever, an
@@ -2227,7 +2264,7 @@ not simulate a physical runner or server outage.
 - **When it runs:** nightly, when deliberately dispatched, and automatically by
   `release_auto.sh` when the current `main` tip has no run yet. Dispatch it
   yourself when a change touches paths, subprocesses or `git` invocations.
-- **Why it runs at all:** `static-gate.yml` runs the static gates per PR but
+- **Why it runs at all:** `static-gate.yml` is available for static diagnosis and
   **not** the test suite, so a registration gate that is *a test*
   (`source_map_coverage_test`, the docs-registration, SBOM and l10n invariants)
   could land red on `main` — and between releases nothing else runs the full
@@ -2252,7 +2289,7 @@ not simulate a physical runner or server outage.
   commits of that night instead of at one merge. That is cheap to recover — the
   failing test names itself and there are only a handful of commits — and it
   buys back the queue: this gate shares one host with the capacity-4 lane, so
-  while it runs the `static-gate` runs that *are* needed per PR wait behind it,
+  an actively dispatched diagnostic run can still wait behind it,
   and with `block_on_outdated_branch` on, a green PR base ages faster the longer
   that queue is.
 - **Concurrency.** Scoped by event, so a manual dispatch and the nightly run
@@ -2449,9 +2486,7 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
 - It uses the same `GH_DISPATCH_TOKEN` the release chain uses to start the
   Windows build. A pull request from a fork has no secrets: the job then warns
   and exits 0 rather than turning red for something the contributor cannot fix.
-- **Advisory, not a lock.** Branch protection on `main` requires
-  `static-gate` and `scans` (#1891). This run shows up as its own status and
-  fails visibly.
+- **Advisory.** This run shows as its own status. The main-branch rule has no required status checks.
 
 ### `.github/workflows/windows-native-check.yml` — after a merge that can break the native build
 - **build** — `flutter build windows --release` on the mirror, with the pinned
@@ -2561,7 +2596,7 @@ they do not substitute for the Windows execution and its evidence artifact.
   gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read
   *history*, and a one-commit clone lets them report green on almost nothing.
   Both were already right in
-  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-on-demand)
+  [`scans.yml`](#forgejoworkflowsscansyml--secret-scan-on-prs-full-scan-on-demand)
   (#799); only this mirror definition lagged.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch
@@ -2610,8 +2645,8 @@ actually runs on is listed here, deviations included.
 | Maintainer machine (macOS arm64) | `3.50.0 • stable • https://github.com/flutter/flutter.git` | matches |
 | CI (GitHub Actions, all jobs) | `3.50.0 • stable • https://github.com/flutter/flutter.git` | matches |
 
-**The maintainer machine is the one that matters**, because there is no CI
-runner: it is the only place the gate has ever run.
+The maintainer machine runs the complete local checks. Pawprint and the
+Windows mirror run the subsets listed under [Continuous integration](#continuous-integration).
 
 **Resolved 2026-07-23 (#598).** Until that day it reported
 `3.44.2 • [user-branch] • unknown source`, with binaries under
@@ -2656,9 +2691,8 @@ environment failure, not a reason to suppress findings.
 ### Isolated scaling measurements (#2967)
 
 `make test` and `make coverage` run functional tests in parallel, then invoke
-`make test-benchmarks` as a separate required step. The tagged codec scaling
-measurement runs without coverage and with one test process; its threshold is
-unchanged. The 300-page content-preservation test remains in the parallel
+`make test-benchmarks` as a separate required step. It selects every test
+tagged `benchmark` under `test/` and runs them serially without coverage. The 300-page content-preservation test remains in the parallel
 instrumented suite. The GitHub Windows and platform-matrix test commands use the
 same separation. A benchmark failure still fails the gate; this is not a retry
 or an optional check. Invoke `make test-benchmarks` on its own for diagnosis.

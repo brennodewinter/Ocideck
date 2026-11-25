@@ -91,7 +91,8 @@ class _EditorToolbar extends StatelessWidget {
           // Expanded-velden tot niets te pletten; dan stapelen we de trailing
           // eronder. De grens ligt boven de smalle-paneelbreedte (~680) sinds
           // de 'Bron'-chip (#1160) de trailing-groep breder maakte.
-          if (constraints.maxWidth < 700) {
+          final textScale = MediaQuery.textScalerOf(context).scale(12) / 12;
+          if (constraints.maxWidth < 700 * textScale) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -241,30 +242,52 @@ class _ToolbarField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Row(
-      children: [
-        Text(
-          l10n.d(label),
-          style: TextStyle(
-            fontSize: 9,
-            fontWeight: FontWeight.w700,
-            color: AppTheme.slate400,
-            letterSpacing: 1.0,
+    final caption = l10n.d(label);
+    final captionStyle = TextStyle(
+      fontSize: 9,
+      fontWeight: FontWeight.w700,
+      color: AppTheme.slate400,
+      letterSpacing: 1.0,
+    );
+    final captionWidget = Text(caption, style: captionStyle);
+    final control = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: AppTheme.slate100,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: AppTheme.slate200),
+      ),
+      child: child,
+    );
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final captionWidth = TextPainter.computeWidth(
+          text: TextSpan(
+            text: caption,
+            style: DefaultTextStyle.of(context).style.merge(captionStyle),
           ),
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            decoration: BoxDecoration(
-              color: AppTheme.slate100,
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: AppTheme.slate200),
-            ),
-            child: child,
-          ),
-        ),
-      ],
+          textDirection: Directionality.of(context),
+          textScaler: MediaQuery.textScalerOf(context),
+          locale: Localizations.localeOf(context),
+        );
+        // Reserveer ruimte voor de knop inclusief insets, iconen en tekst.
+        const minimumControlWidth = 88.0;
+        const gap = 8.0;
+        if (captionWidth + gap + minimumControlWidth > constraints.maxWidth) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [captionWidget, const SizedBox(height: 4), control],
+          );
+        }
+        return Row(
+          children: [
+            captionWidget,
+            const SizedBox(width: gap),
+            Expanded(child: control),
+          ],
+        );
+      },
     );
   }
 }
@@ -291,7 +314,7 @@ class _SlideStylePicker extends StatelessWidget {
     final names = {
       for (final profile in profiles) profile.name,
       ...deck.slideStyles.keys,
-      if (activeName != null) activeName,
+      ?activeName,
     }..remove(kDeckStyleToken);
 
     final scope = l10n.d(

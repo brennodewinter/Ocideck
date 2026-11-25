@@ -70,7 +70,8 @@ import '../dialogs/settings_dialog.dart';
 import '../markdown_editor/markdown_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_controls_bar.dart';
-import 'audience_window.dart';
+import 'audience_protocol.dart';
+import 'audience_window.dart' hide audienceChannel, presenterChannel;
 import 'cost_overlay.dart';
 import 'cost_session_start.dart';
 import 'rehearsal_summary.dart';
@@ -141,13 +142,8 @@ const _muted = PresenterPalette.textMuted;
       (view.fy - lastSent.fy).abs() < 0.005) {
     return lastSent;
   }
-  audienceChannel
-      .invokeMethod('mermaidView', {
-        'index': index,
-        'scale': view.scale,
-        'fx': view.fx,
-        'fy': view.fy,
-      })
+  AudienceMethod.mermaidView
+      .send({'index': index, 'scale': view.scale, 'fx': view.fx, 'fy': view.fy})
       .catchError((Object e) {
         logWarning('FullscreenPresenter: mermaid view sync failed', e);
         return null;
@@ -939,57 +935,52 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       // Navigation triggered on the beamer (clicks) and its audio-end events
       // come back over this channel.
       presenterChannel.setMethodCallHandler((call) async {
-        switch (call.method) {
-          case 'ready':
+        final message = PresenterMethod.decode(call);
+        if (message == null) return null;
+        final (:method, arguments: args) = message;
+        switch (method) {
+          case PresenterMethod.ready:
             // Het gereedsignaal wint van een mislukte, al onthouden beginupdate.
             _syncAudience(force: true);
             return true;
-          case 'next':
+          case PresenterMethod.next:
             _next();
-          case 'prev':
+          case PresenterMethod.prev:
             _prev();
-          case 'exit':
+          case PresenterMethod.exit:
             await _exit();
-          case 'key':
+          case PresenterMethod.key:
             // Een toets die op het beamervenster is ingetikt: afhandelen alsof
             // hij hier binnenkwam, zodat de presentatie bestuurbaar blijft
             // welk van de twee vensters ook de focus heeft.
-            final args = Map<String, dynamic>.from(call.arguments as Map);
-            final keyId = (args['keyId'] as num?)?.toInt();
-            if (keyId != null) {
-              _handleLogicalKey(
-                LogicalKeyboardKey(keyId),
-                meta: args['meta'] == true,
-                control: args['control'] == true,
-                shift: args['shift'] == true,
-              );
-            }
-          case 'audioComplete':
+            _handleLogicalKey(
+              LogicalKeyboardKey((args['keyId'] as num).toInt()),
+              meta: args['meta'] == true,
+              control: args['control'] == true,
+              shift: args['shift'] == true,
+            );
+          case PresenterMethod.audioComplete:
             _onMediaCompleted(kind: 'audio');
-          case 'mediaComplete':
-            final args = Map<String, dynamic>.from(call.arguments as Map);
+          case PresenterMethod.mediaComplete:
             _onMediaCompleted(
-              index: (args['index'] as num?)?.toInt(),
-              kind: args['kind']?.toString(),
+              index: (args['index'] as num).toInt(),
+              kind: args['kind'] as String,
             );
-          case 'checklistToggle':
-            final args = Map<String, dynamic>.from(call.arguments as Map);
+          case PresenterMethod.checklistToggle:
             _toggleChecklistItem(
-              slideIndex: (args['slideIndex'] as num?)?.toInt() ?? _index,
-              column: (args['column'] as num?)?.toInt() ?? 0,
-              itemIndex: (args['itemIndex'] as num?)?.toInt() ?? 0,
+              slideIndex: (args['slideIndex'] as num).toInt(),
+              column: (args['column'] as num).toInt(),
+              itemIndex: (args['itemIndex'] as num).toInt(),
             );
-          case 'answerSelected':
-            final args = Map<String, dynamic>.from(call.arguments as Map);
+          case PresenterMethod.answerSelected:
             _onAnswerSelected(
-              (args['optionIndex'] as num?)?.toInt() ?? 0,
-              slideIndex: (args['slideIndex'] as num?)?.toInt(),
+              (args['optionIndex'] as num).toInt(),
+              slideIndex: (args['slideIndex'] as num).toInt(),
             );
-          case 'answerSubmit':
-            final args = Map<String, dynamic>.from(call.arguments as Map);
-            _onAnswerSubmit(slideIndex: (args['slideIndex'] as num?)?.toInt());
-          case 'chartHover':
-            _applyBeamerChartHover(call.arguments);
+          case PresenterMethod.answerSubmit:
+            _onAnswerSubmit(slideIndex: (args['slideIndex'] as num).toInt());
+          case PresenterMethod.chartHover:
+            _applyBeamerChartHover(args);
         }
         return null;
       });

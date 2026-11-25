@@ -123,11 +123,12 @@ something has to move:
 | `make trivy` | **No, by configuration** | CVEs in the resolved Dart packages, plus a committed-secret sweep. [`trivy.yaml`](trivy.yaml) says so itself: it reports every severity and never fails the build, because Dart/pub advisory coverage is sparse enough that a gate would mostly teach people to skip it. Findings are triaged by hand. |
 | `make deps-outdated`, `make catalogs-outdated` | **No** | Freshness of packages and of the bundled standards. A newer upstream is not a defect in what you built. |
 
-**The rhythm.** `make check-full` — which is where the gates above live — is run
-on the exact commit before every merge. Forgejo does not automatically repeat
-its secret or SAST scans; their workflow remains available on demand. Scheduled
-freshness checks and release/platform jobs still run on the forge because they
-measure time drift or another environment. Whoever merges is the pre-merge scan.
+**The rhythm.** The maintainer runs `make check-full` on the exact commit by
+agreement before merging. Pawprint automatically scans incoming PR commits
+for secrets, and offers the full secret and SAST scans on demand. The main
+branch rule has no required status checks. Scheduled freshness checks and
+release and platform jobs provide additional results.
+See [Checks & CI](docs/CHECKS.md#continuous-integration).
 
 **How urgency is decided.** In descending order, and this is the whole of it:
 

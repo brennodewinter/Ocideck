@@ -31,6 +31,8 @@ onderdeel van wat het product over zichzelf beweert.
 | [`quality-boundaries-2026-11-11.md`](quality-boundaries-2026-11-11.md) | Gericht onderzoek naar JSON-/IO-/workerfouten na de Windows-openmelding, met reproductiebewijs, issueafweging en de geïnstalleerde Windows-openproef in de releasecontrole. |
 | [`ASVS-5.0.0-scope.md`](ASVS-5.0.0-scope.md) | Welke ASVS-hoofdstukken hier een onderwerp hebben en welke niet, mét de motivering. Het waardevolle deel. |
 | [`ASVS-5.0.0-afwijkingen.md`](ASVS-5.0.0-afwijkingen.md) | Eisen die bewust niet worden gehaald, en waarom dat de juiste keuze is. |
+| [`EN-301-549-scope.md`](EN-301-549-scope.md) | Toepasselijke toegankelijkheidseisen per oppervlak, bestaande deeltoetsen en nog ongemeten onderdelen. |
+| [`EN-301-549-afwijkingen.md`](EN-301-549-afwijkingen.md) | Bekende afwijkingen bij beeldexport en merkcontrast, met gevolgen en beschikbare alternatieven. |
 | [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) | Waarom de Cyberweerbaarheidsverordening hier geen verplichting is, en waarom we hem tóch als leidraad aanhouden. |
 | [`enisa-sbd-mapping.md`](enisa-sbd-mapping.md) | De 22 release gates van de ENISA Secure-by-Design-playbook afgebeeld op de poorten en tests die ze hier al afdwingen — mét de echte open punten (en de na weging geschrapte). De fijnmazige laag onder de CRA-map. |
 | [`reproduceerbare-builds.md`](reproduceerbare-builds.md) | Het onderzoek naar reproduceerbare builds en SLSA-provenance (#1027, ENISA-residu O1): empirisch getoetst per platform, de webbundel content-reproduceerbaar gemaakt binnen een vaste bouwomgeving, en de weging waarom macOS/Windows-bit-repro en een aparte SLSA-attestatie niet nu gebeuren. |

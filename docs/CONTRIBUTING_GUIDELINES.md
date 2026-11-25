@@ -33,7 +33,9 @@ When reporting bugs or requesting features:
 
 1. Fork the repository and create a feature branch
 2. Make your changes following project conventions
-3. Run `make check-full` before merging; see [CHECKS.md](CHECKS.md) for the gates
+3. Run `make check-full` and record the tested commit. The maintainer follows
+   this agreement before merging. See [CHECKS.md](CHECKS.md) for the automated
+   checks and branch rule.
 4. Add or update documentation as needed
 5. Create a descriptive pull request with:
    - Clear title and description

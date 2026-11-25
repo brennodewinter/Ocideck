@@ -6,7 +6,6 @@ import 'package:yaml/yaml.dart';
 void main() {
   const lokaleDoublures = [
     '.forgejo/workflows/static-gate.yml',
-    '.forgejo/workflows/scans.yml',
     '.forgejo/workflows/web-gate.yml',
   ];
 
@@ -18,6 +17,57 @@ void main() {
       expect(trekkers.keys, equals(['workflow_dispatch']));
     });
   }
+
+  test(
+    'PR-geheimenscan draait vertrouwde code uit main en leest git-objecten',
+    () {
+      final yaml =
+          loadYaml(File('.forgejo/workflows/scans.yml').readAsStringSync())
+              as YamlMap;
+      final triggers = yaml['on'] as YamlMap;
+      expect(
+        triggers.keys,
+        unorderedEquals(['workflow_dispatch', 'pull_request_target']),
+      );
+      expect((triggers['pull_request_target'] as YamlMap)['branches'], [
+        'main',
+      ]);
+
+      final steps =
+          ((yaml['jobs'] as YamlMap)['scans'] as YamlMap)['steps'] as YamlList;
+      final checkout = steps.cast<YamlMap>().singleWhere(
+        (step) => step.containsKey('uses'),
+      );
+      expect(checkout['with'], {
+        'fetch-depth': 0,
+        'persist-credentials': false,
+      });
+
+      final scan = steps.cast<YamlMap>().singleWhere(
+        (step) =>
+            (step['run'] as String?)?.contains('scripts/scan_pr_secrets.sh') ??
+            false,
+      );
+      expect(
+        scan['if'],
+        contains("github.event_name == 'pull_request_target'"),
+      );
+      expect(scan['run'], contains('unset FORGEJO_TOKEN GITHUB_TOKEN'));
+      expect(scan['run'], contains(r'refs/pull/$PR_NUMBER/head'));
+      expect(
+        scan['run'],
+        contains(r'test "$(git rev-parse FETCH_HEAD)" = "$PR_HEAD"'),
+      );
+      for (final step in steps.cast<YamlMap>()) {
+        if ((step['run'] as String?)?.startsWith('make ') ?? false) {
+          expect(
+            step['if'],
+            contains("github.event_name == 'workflow_dispatch'"),
+          );
+        }
+      }
+    },
+  );
 
   test('de Linux-poort draait de tests niet als root', () {
     final workflow = File(

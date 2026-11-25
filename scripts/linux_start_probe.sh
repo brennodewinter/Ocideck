@@ -22,6 +22,8 @@ snapshot_log() {
   done
 }
 
+# The EXIT trap calls this function.
+# shellcheck disable=SC2329
 finish() {
   local result=$?
   trap - EXIT

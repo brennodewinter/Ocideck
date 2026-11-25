@@ -354,18 +354,8 @@ extension DeckNotifierSlides on DeckNotifier {
   /// Latere stijlmarkeringen verdwijnen in dezelfde ongedaan-stap.
   void setSlideStyle(int index, String styleName) {
     final deck = currentState.deck;
-    if (deck == null || index < 0 || index >= deck.slides.length) return;
-    final inherited = deck.slideStyleNameAtIndex(index - 1) ?? kDeckStyleToken;
-    final marker = styleName == inherited ? '' : styleName;
-    List<Slide>? slides;
-    for (var i = index; i < deck.slides.length; i++) {
-      final slide = deck.slides[i];
-      final newMarker = i == index ? marker : '';
-      if (slide.styleName == newMarker) continue;
-      (slides ??= List<Slide>.of(deck.slides))[i] = slide.copyWith(
-        styleName: newMarker,
-      );
-    }
+    if (deck == null) return;
+    final slides = slidesWithStyleFrom(deck.slides, index, styleName);
     if (slides == null) return;
     _mutate(
       deck.copyWith(

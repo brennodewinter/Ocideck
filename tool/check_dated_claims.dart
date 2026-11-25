@@ -67,6 +67,9 @@
 
 import 'dart:io';
 
+import 'check_assurance_inventory.dart';
+import 'check_workflow_triggers.dart';
+
 /// Een bewering over een gemeten grootheid die in de documentatie staat.
 ///
 /// [anker] is de letterlijke tekst waaraan de bewering te herkennen is. Staat
@@ -173,10 +176,9 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
     '12 hours': 1,
     '16 hours': 1,
     '90 minutes': 1,
-    // Hervatbare workerbudgetten en de bestaande consumer-startproef.
+    // Hervatbare workerbudgetten.
     '175 minutes': 1,
     '20 minutes': 1,
-    '20 second': 1,
     '90 minute': 1,
     '17.5 minutes': 0,
     '2.5 minute': 0,
@@ -281,6 +283,16 @@ List<String> afwijkingen(Map<String, int> basislijn, Map<String, int> nu) {
 }
 
 void main(List<String> args) {
+  if (args.contains('--write-workflows')) {
+    exitCode = checkWorkflowTriggers(write: true) ? 1 : 0;
+    return;
+  }
+  if (args.contains('--write-assurance-inventory')) {
+    exitCode = checkAssuranceInventory(now: DateTime.now(), write: true)
+        ? 1
+        : 0;
+    return;
+  }
   final tegenDeKlok = args.contains('--tegen-de-klok');
   final nu = DateTime.now();
   var fout = false;
@@ -306,6 +318,8 @@ void main(List<String> args) {
   }
 
   fout = _meldBasislijn() || fout;
+  fout = checkWorkflowTriggers() || fout;
+  fout = checkAssuranceInventory(now: nu, checkAge: tegenDeKlok) || fout;
 
   if (!tegenDeKlok) {
     stdout.writeln(

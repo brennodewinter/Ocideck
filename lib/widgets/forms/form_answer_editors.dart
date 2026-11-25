@@ -592,7 +592,7 @@ class _ListAnswerState extends State<_ListAnswer> {
               ),
             ),
           Align(
-            alignment: AlignmentDirectional.centerStart,
+            alignment: Alignment.centerLeft,
             child: TextButton.icon(
               icon: const Icon(Icons.add, size: 18),
               label: Text(l10n.d('Punt toevoegen')),
@@ -786,7 +786,7 @@ class _TableAnswerState extends State<_TableAnswer> {
               ),
             ),
           Align(
-            alignment: AlignmentDirectional.centerStart,
+            alignment: Alignment.centerLeft,
             child: TextButton.icon(
               icon: const Icon(Icons.add, size: 18),
               label: Text(l10n.d('Rij toevoegen')),

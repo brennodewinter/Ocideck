@@ -233,7 +233,7 @@ class _ModelRow extends ConsumerWidget {
           // tekstschaal 200% heeft een knop in de trailing-positie geen
           // ruimte naast een drieregelige titel en faalt de tile-layout.
           Align(
-            alignment: AlignmentDirectional.centerEnd,
+            alignment: Alignment.centerRight,
             child: _action(context, manager, installed),
           ),
         ],

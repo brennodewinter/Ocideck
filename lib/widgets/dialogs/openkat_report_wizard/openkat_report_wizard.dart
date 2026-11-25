@@ -170,7 +170,7 @@ class _OpenKatReportWizardState extends State<OpenKatReportWizard> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
                     child: Align(
-                      alignment: AlignmentDirectional.centerStart,
+                      alignment: Alignment.centerLeft,
                       child: TextButton(
                         onPressed: controller.busy
                             ? null

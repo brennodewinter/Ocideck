@@ -1,6 +1,6 @@
 # Risicoafweging
 
-> **Status:** eerste opzet 2026-07-22 · Stichting LibreKAT · intern werkdocument
+> **Herzien:** 2026-11-25 · Stichting LibreKAT · intern werkdocument
 >
 > Geen conformiteitsclaim en geen auditrapport. Zie [`README.md`](README.md).
 
@@ -39,19 +39,25 @@ volgorde, niet de decimaal.
 |---|---|---|---|---|
 | R1 | Ongeredigeerde persoonsgegevens komen in een export of op het publieksscherm | **Hoog** — treft iemand die er niet om vroeg, en is niet terug te draaien | Laag | `AudienceDeck` is de enige weg naar een ontvangend oppervlak, en `check_audience_boundary` dwingt af dat elk uitvoerkanaal geclassificeerd is |
 | R2 | Een deck van een ander opent en leest bestanden buiten het project | Hoog | Laag | Padinsluiting (`resolveSlideAssetPath`), begrensde leesbewerkingen, geen padtraversal in pakketten |
-| R3 | Het product gaat het netwerk op zonder dat de gebruiker het aanwees | Hoog — het botst frontaal met de belofte | Laag | NetGuard met socket-pinning, `network_sink_guard_test` als poort over élke uitgang, inclusief subproces en WebView |
+| R3 | Het product gaat het netwerk op zonder dat de gebruiker het aanwees | Hoog — het botst frontaal met de belofte | Laag | NetGuard met socket-pinning op relevante native routes. `network_sink_guard_test` inventariseert bereikbare bronpatronen, waaronder subproces en WebView. Browser- en WebRTC-grenzen staan afzonderlijk in het dreigingsmodel |
 | R4 | Een kwaadaardige afbeelding sloopt de native decoder | Midden — procesverlies, geen gegevensverlies | Laag | Poort op omvang en afmetingen vóór de decode; **aanvaard**: een verminkte JPEG bereikt de C++-decoder, en een crash daarbinnen neemt het proces mee (§6.1) |
 | R5 | Werk van de gebruiker raakt kwijt bij opslaan | Midden — zijn eigen werk, meestal te herstellen | Midden | Atomair schrijven overal; wat niet is ingelezen wordt niet overschreven; crashherstel |
 | R6 | Een geheim lekt via een logregel of een subproces | Hoog | Laag | `log_no_content_test` verbiedt inhoud in logregels; `git` draait zonder geërfde omgeving zodat een `GIT_TRACE_*` het token niet wegschrijft |
 | R7 | Een afhankelijkheid draagt een bekende kwetsbaarheid | Midden | Midden | SBOM met verouderingspoort, `make deps-check` over de gebundelde JS; **aanvaard**: de Dart-graaf wordt alleen adviserend gescand, want pub-advisorydekking is dun |
 | R8 | Een verzegeld rapport wordt gewijzigd zonder dat het opvalt | Hoog voor de bewijswaarde | Laag | SHA-512-zegel over de canonieke inhoud; **aanvaard**: dit is bewijs van wijziging en niet van herkomst — er is geen echte ondertekening, en dat besluit staat in SECURITY_DESIGN §12 |
-| R9 | Het project valt stil en niemand merkt het | Midden — maar het raakt alles hierboven | **Hoog** | Dit is het grootste risico en het minst technische: één beheerder, zelf mergen. Zie `CONTRIBUTING.md`. Wat eraan gedaan is: alles wat te automatiseren valt zit in `make check`, en het einde-van-leven-beleid staat in `SECURITY.md` |
+| R9 | Het project valt stil en niemand merkt het | Midden — maar het raakt alles hierboven | **Hoog** | Dit is het grootste risico en het minst technische: één beheerder, zelf mergen. Zie `CONTRIBUTING.md`. Wat eraan gedaan is: de maintainer registreert de lokale poort. Pawprint draait losse controles. De uitfasering is gedocumenteerd in `SECURITY.md` |
 | R10 | Gegevens blijven op schijf achter na verwijderen | Midden | Midden | `DiskTraces` ruimt op één plek op; **aanvaard**: unlink, geen overschrijving — op moderne opslag is overschrijven geen garantie, en de suggestie ervan zou schadelijker zijn dan de eerlijke zin |
+| R11 | Opname van een deelnemer of vertrouwelijke audio komt bij een verkeerd gekozen of ongeschikt beheerde ASR-server terecht | Hoog | Afhankelijk van uitrol | Toestemming voor bestemming en bestand/sessie, lokaal alternatief, native limieten. Serverretentie en toestemming van opgenomen personen vormen een restrisico voor de uitrol |
+| R12 | Een vergader-, XMPP- of WebDAV-dienst onthult gesprek, metadata of gedeelde gegevens | Hoog | Afhankelijk van uitrol | Transportbescherming, verzegelde XMPP-companiondata en afzonderlijke opslag-ACL. Jitsi-media steunen op het vertrouwensmodel van de bridge |
+| R13 | Een insluitende pagina of feed levert misleidende of ongewenste inhoud | Midden | Afhankelijk van configuratie | Parent/origin-beleid en consent bij iframe-aanbiedingen, bytegrenzen en normale deckscan. Feedpolling en enclosures gebruiken afzonderlijke transportgrenzen |
+| R14 | Een verkeerde OciServe-identiteit krijgt toegang tot leerlinggegevens, of voortgang blijft ongewenst bewaard | Hoog | Afhankelijk van uitrol | OIDC/PKCE, actief lidmaatschap, accountbinding bij step-up, OS-sleutelbos en begrensde outbox. IdP en OciServe beheren autorisatie en serverretentie |
+
+R11–R14 zijn beoordeeld aan de hand van [het dreigingsmodel](../docs/SECURITY_DESIGN.md#threat-model).
+De acceptatie van de nieuwe restrisico’s is nog open.
 
 ## De aanvaarde risico's, bij elkaar
 
-Vijf, en ze staan hier bij elkaar omdat dat de enige manier is om ze samen te
-kunnen wegen: **R4** (de native decoder), **R7** (de Dart-graaf),
+De eerder aanvaarde risico’s zijn **R4** (de native decoder), **R7** (de Dart-graaf),
 **R8** (zegel zonder ondertekening), **R10** (geen overschrijving), plus de drie
 die al in [`ASVS-5.0.0-afwijkingen.md`](ASVS-5.0.0-afwijkingen.md) stonden
 (S3, loopback, PBKDF2).
@@ -100,5 +106,6 @@ de twee vragen die het stelt en wij niet, het opschrijven waard zijn.
 - Bij een afhankelijkheid erbij die niet-geheugenveilig is — dan verschuift R4.
 - Bij een tweede actieve beheerder — dan zakt R9, en dat is de enige regel in
   deze tabel die door mensen verandert in plaats van door code.
-- Bij releases met artefacten — dan komt er een risico bij dat er nu niet is:
-  distributie-integriteit.
+- Bij nieuwe gegevens, identiteit, retentie of mediatransport in een module.
+- Bij wijziging van de release- of ondertekenketen.
+- Bij het verlopen van de reviewtermijn van 180 dagen.

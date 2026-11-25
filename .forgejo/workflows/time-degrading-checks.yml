@@ -13,7 +13,7 @@ name: Tijdsvervallende controles
 #
 # Deze werkstroom draait ze dagelijks en bij handmatige dispatch. De zware
 # geheimen/SAST-scan zit er niet in — die reageren op code, niet op tijd, en
-# staan al in `scans.yml` per PR. Hier gaat het om de controles die rood worden
+# staan in `scans.yml` op afroep; inkomende PR-commits krijgen een aparte geheimenscan. Hier gaat het om de controles die rood worden
 # terwijl de boom stil staat.
 on:
   schedule:
@@ -70,7 +70,7 @@ jobs:
       # Onze eigen metingen, niet die van een ander. Een looptijdbelofte in de
       # documentatie verrot terwijl de boom stilstaat: `docs/CHECKS.md` beloofde
       # "within ~half an hour" terwijl de meting op 54 minuten stond, en geen
-      # poort kon dat zien. De structurele helft draait per PR in
+      # poort kon dat zien. De structurele helft draait lokaal en in
       # `make check-static`; alleen de houdbaarheid hoort hier, tegen de klok.
       - name: Gemeten beweringen in de documentatie tegen hun houdbaarheid
         if: always()

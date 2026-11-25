@@ -193,12 +193,14 @@ class SlideTypeHelpToggle extends StatelessWidget {
           children: [
             Icon(Icons.help_outline, size: 14, color: AppTheme.tealFg),
             const SizedBox(width: 5),
-            Text(
-              l10n.d('Wat kan ik hier?'),
-              style: TextStyle(
-                fontSize: 11.5,
-                color: AppTheme.tealFg,
-                fontWeight: FontWeight.w600,
+            Flexible(
+              child: Text(
+                l10n.d('Wat kan ik hier?'),
+                style: TextStyle(
+                  fontSize: 11.5,
+                  color: AppTheme.tealFg,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             Icon(

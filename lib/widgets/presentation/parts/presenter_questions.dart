@@ -317,8 +317,8 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     final aw = widget.audience?.controller;
     if (aw == null) return;
     final view = _currentQuestionView;
-    audienceChannel
-        .invokeMethod('question', {'index': _index, 'view': view?.toJson()})
+    AudienceMethod.question
+        .send({'index': _index, 'view': view?.toJson()})
         .catchError((Object e) {
           // Audience-window sync is best-effort, but a fully silent failure
           // left the beamer out of sync with no trace; make it observable.

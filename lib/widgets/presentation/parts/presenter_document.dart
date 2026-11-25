@@ -358,8 +358,8 @@ class _DocumentPresenterScreenState extends State<DocumentPresenterScreen> {
     final audience = widget.audience;
     if (audience == null || audience.isClosed) return;
     setState(() => _syncOk = null);
-    audienceChannel
-        .invokeMethod('docUpdate', {
+    AudienceMethod.docUpdate
+        .send({
           'seq': ++_seq,
           'index': _page,
           'markdown': _pageMarkdown,

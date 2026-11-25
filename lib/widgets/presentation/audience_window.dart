@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'presentation_key_scope.dart';
 
-import 'package:desktop_multi_window/desktop_multi_window.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart'
+    show WindowChannelException;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
@@ -34,6 +35,10 @@ import 'annotation_overlay.dart';
 import 'cost_overlay.dart';
 import '../../models/presentation_cost.dart';
 
+import 'audience_protocol.dart';
+
+export 'audience_protocol.dart' show audienceChannel, presenterChannel;
+
 /// Het veld waaronder het stijlprofiel in de openings-envelop van het
 /// publieksvenster zit. Eén constante, gedeeld door de verzender en de
 /// ontvanger: een typefout aan één kant zou het venster stilletjes op het
@@ -48,20 +53,6 @@ const String beamerStyleProfileKey = 'styleProfile';
 /// de markdown; hun profielen reizen mee omdat dit venster geen
 /// instellingen heeft om ze op te zoeken.
 const String beamerStyleProfilesKey = 'styleProfiles';
-
-/// Channel the audience (beamer) window listens on for updates from the
-/// presenter (laptop) window.
-const audienceChannel = WindowMethodChannel(
-  'ocideck/audience',
-  mode: ChannelMode.unidirectional,
-);
-
-/// Channel the presenter window listens on; the audience window uses it to
-/// forward navigation (clicks on the beamer) and audio-complete events.
-const presenterChannel = WindowMethodChannel(
-  'ocideck/presenter',
-  mode: ChannelMode.unidirectional,
-);
 
 /// True wanneer een 'update'-bericht met [seq] ouder is dan het laatst
 /// verwerkte nummer [lastSeq]. Berichten zonder nummer (oudere presenter)
@@ -144,7 +135,6 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// met hetzelfde volgnummer bewaakt als de dia-updates.
   bool _docMode = false;
   List<String> _docPages = const [];
-  int _docRev = 0;
   int _docLastSeq = -1;
 
   /// De categorie die de presentator open heeft op een keuze-menudia (#1162);
@@ -305,7 +295,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     }
     while (mounted) {
       try {
-        await presenterChannel.invokeMethod<void>('ready');
+        await PresenterMethod.ready.send();
         if (!_presenterReady.isCompleted) _presenterReady.complete(true);
         return;
       } catch (e) {
@@ -338,7 +328,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     final hover = _chartHover.local;
     final seq = _chartHoverStream.nextFor(hover);
     if (seq == null) return;
-    _send('chartHover', {
+    _send(PresenterMethod.chartHover, {
       'seq': seq,
       'index': _index,
       'hover': hover?.toJson(),
@@ -353,30 +343,27 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// Documentpresentatie (#2487): elke bevestigde edit én elke paginawissel
   /// duwt de volledige pagina met revisie — een gemiste update heelt met de
   /// volgende snapshot, een oude overschrijft nooit een nieuwere.
-  void _applyDocUpdate(Object? arguments) {
-    final m = Map<String, dynamic>.from(arguments as Map);
-    if (!mounted) return;
+  void _applyDocUpdate(Map<String, Object?> m) {
     final seq = (m['seq'] as num?)?.toInt();
     if (isStaleUpdateSeq(seq, _docLastSeq)) return;
+    final i = (m['index'] as num).toInt();
+    if (i < 0 || i >= _docPages.length) return;
     if (seq != null) _docLastSeq = seq;
-    final i = (m['index'] as num?)?.toInt();
-    final page = m['markdown'] as String?;
     setState(() {
-      if (i != null && i >= 0) _index = i.clamp(0, _docPages.length - 1);
-      if (page != null && i != null && i < _docPages.length) {
-        _docPages[i] = page;
-      }
-      _docRev = (m['rev'] as num?)?.toInt() ?? _docRev;
+      _index = i;
+      _docPages[i] = m['markdown'] as String;
     });
   }
 
   Future<dynamic> _onPresenterCall(MethodCall call) async {
-    switch (call.method) {
-      case 'docUpdate':
-        _applyDocUpdate(call.arguments);
-      case 'update':
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        if (!mounted) return null;
+    if (!mounted) return null;
+    final message = AudienceMethod.decode(call);
+    if (message == null) return null;
+    final (:method, arguments: m) = message;
+    switch (method) {
+      case AudienceMethod.docUpdate:
+        _applyDocUpdate(m);
+      case AudienceMethod.update:
         // Verwerp verouderde updates: aanroepen komen niet gegarandeerd in
         // volgorde binnen, en bij snel navigeren mag een oudere slide een
         // nieuwere nooit overschrijven.
@@ -384,7 +371,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         if (isStaleUpdateSeq(seq, _lastUpdateSeq)) return null;
         if (seq != null) _lastUpdateSeq = seq;
         setState(() {
-          _index = (m['index'] as num?)?.toInt() ?? _index;
+          _index = (m['index'] as num).toInt();
           _richTextPage = (m['richTextPage'] as num?)?.toInt() ?? 0;
           _menuCategory = (m['menuCategory'] as num?)?.toInt() ?? 0;
           _stepIndex = (m['stepIndex'] as num?)?.toInt() ?? 0;
@@ -402,40 +389,33 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         // vorige lag (zowel de eigen als de van de presentator ontvangen hover).
         _chartHover.setLocal(null);
         _chartHover.setExternal(null);
-      case 'videoPlayback':
-        final arguments = Map<String, dynamic>.from(call.arguments as Map);
-        await _setVideoPlaying(arguments);
-      case 'mermaidView':
+      case AudienceMethod.videoPlayback:
+        await _setVideoPlaying(m);
+      case AudienceMethod.mermaidView:
         // De presentator zoomt/scrolt een groot diagram; volg dezelfde kijkstand
         // (#930). Alleen als dit venster op dezelfde slide staat. De stand is
         // maat-onafhankelijk (zoomfactor + kind-fracties), dus rechtstreeks toe
         // te passen ondanks de andere pixelmaat.
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        if (!mounted) return null;
-        if ((m['index'] as num?)?.toInt() == _index) {
+        if ((m['index'] as num).toInt() == _index) {
           _mermaidView.set(
-            scale: (m['scale'] as num?)?.toDouble() ?? 1.0,
-            fx: (m['fx'] as num?)?.toDouble() ?? 0.0,
-            fy: (m['fy'] as num?)?.toDouble() ?? 0.0,
+            scale: (m['scale'] as num).toDouble(),
+            fx: (m['fx'] as num).toDouble(),
+            fy: (m['fy'] as num).toDouble(),
           );
         }
-      case 'timelineView':
+      case AudienceMethod.timelineView:
         // Handmatige of automatische scroll op de presenter wordt als fractie
         // gespiegeld, zodat een anders bemeten beamervenster hetzelfde deel van
         // de rail toont.
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        if (!mounted) return null;
-        if ((m['index'] as num?)?.toInt() == _index) {
-          _timelineView.setFraction((m['fraction'] as num?)?.toDouble() ?? 0);
+        if ((m['index'] as num).toInt() == _index) {
+          _timelineView.setFraction((m['fraction'] as num).toDouble());
         }
-      case 'costTick':
-        _applyCostTick(Map<String, dynamic>.from(call.arguments as Map));
-      case 'chartHover':
-        _applyChartHover(call.arguments);
-      case 'question':
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        if (!mounted) return null;
-        final i = (m['index'] as num?)?.toInt() ?? _index;
+      case AudienceMethod.costTick:
+        _applyCostTick(m);
+      case AudienceMethod.chartHover:
+        _applyChartHover(m);
+      case AudienceMethod.question:
+        final i = (m['index'] as num).toInt();
         final raw = m['view'];
         setState(() {
           _questionIndex = i;
@@ -443,61 +423,48 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
               ? QuestionView.fromJson(Map<String, dynamic>.from(raw))
               : null;
         });
-      case 'ink':
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        final i = (m['index'] as num?)?.toInt();
-        if (i == null || !mounted) return null;
-        setState(
-          () => _ink[i] = decodeStrokes((m['strokes'] as List?) ?? const []),
-        );
-      case 'inkLive':
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        final i = (m['index'] as num?)?.toInt();
+      case AudienceMethod.ink:
+        final i = (m['index'] as num).toInt();
+        setState(() => _ink[i] = decodeStrokes(m['strokes'] as List));
+      case AudienceMethod.inkLive:
+        final i = (m['index'] as num).toInt();
         final s = m['stroke'];
-        if (!mounted) return null;
         setState(() {
           _activeIndex = i;
           _activeStroke = s == null
               ? null
               : InkStroke.fromJson(Map<String, dynamic>.from(s as Map));
         });
-      case 'laser':
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        final i = (m['index'] as num?)?.toInt();
+      case AudienceMethod.laser:
+        final i = (m['index'] as num).toInt();
         final pt = m['point'] as List?;
-        if (!mounted) return null;
         setState(() {
           _laserIndex = i;
           _laserPoint = pt == null
               ? null
               : Offset((pt[0] as num).toDouble(), (pt[1] as num).toDouble());
         });
-      case 'checklistUpdate':
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        final i = (m['slideIndex'] as num?)?.toInt();
-        if (i == null || i < 0 || i >= _slides.length || !mounted) return null;
+      case AudienceMethod.checklistUpdate:
+        final i = (m['slideIndex'] as num).toInt();
+        if (i < 0 || i >= _slides.length) return null;
         if (_staleSnapshot('checklist', i, m['seq'])) return null;
         setState(() {
           _slides[i] = _slides[i].copyWith(
-            bullets: List<String>.from(m['bullets'] as List? ?? const []),
-            bullets2: List<String>.from(m['bullets2'] as List? ?? const []),
+            bullets: List<String>.from(m['bullets'] as List),
+            bullets2: List<String>.from(m['bullets2'] as List),
           );
           invalidateSplitRunLayout(_slides);
         });
-      case 'tableUpdate':
-        _applyTableUpdate(Map<String, dynamic>.from(call.arguments as Map));
-      case 'replaceDeck':
+      case AudienceMethod.tableUpdate:
+        _applyTableUpdate(m);
+      case AudienceMethod.replaceDeck:
         // Een live-fix tijdens presenteren (#914) kan het aantal dia's
         // veranderen (splitsen); de smalle bullet-/tabelkanalen volstaan dan
         // niet. De beamer krijgt de verse markdown en herrendert vanaf de
         // meegestuurde positie.
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        if (!mounted) return null;
-        final deck = MarkdownService().parseDeck(
-          m['markdown'] as String? ?? '',
-        );
+        final deck = MarkdownService().parseDeck(m['markdown'] as String);
         final next = deck?.slides ?? const <Slide>[];
-        final i = (m['index'] as num?)?.toInt() ?? _index;
+        final i = (m['index'] as num).toInt();
         final ink = m['ink'];
         setState(() {
           _slides = next;
@@ -510,11 +477,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     return null;
   }
 
-  Future<void> _setVideoPlaying(Map<String, dynamic> arguments) async {
-    final playing = arguments['playing'];
-    final index = arguments['index'];
-    final seq = arguments['seq'];
-    if (playing is! bool || index is! int || seq is! int) return;
+  Future<void> _setVideoPlaying(Map<String, Object?> arguments) async {
+    final playing = arguments['playing'] as bool;
+    final index = (arguments['index'] as num).toInt();
+    final seq = (arguments['seq'] as num).toInt();
 
     bool isCurrent() =>
         mounted &&
@@ -542,11 +508,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
 
   /// Een live tabelwijziging van de presentator: rijen én uitlijning, want
   /// beide zijn bewerkbaar en verhuizen mee met kolommen.
-  void _applyTableUpdate(Map<String, dynamic> m) {
-    final i = (m['slideIndex'] as num?)?.toInt();
-    if (i == null || i < 0 || i >= _slides.length || !mounted) return;
-    final raw = m['tableRows'] as List?;
-    if (raw == null || _staleSnapshot('table', i, m['seq'])) return;
+  void _applyTableUpdate(Map<String, Object?> m) {
+    final i = (m['slideIndex'] as num).toInt();
+    if (i < 0 || i >= _slides.length || _staleSnapshot('table', i, m['seq'])) {
+      return;
+    }
+    final raw = m['tableRows'] as List;
     final rows = raw
         .map(
           (row) =>
@@ -590,40 +557,38 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// teller loopt monotoon binnen een run; een vertraagd bericht kan alleen
   /// een oudere (kleinere) waarde dragen en wordt geweigerd — behalve bij een
   /// nieuwe run, want een reset van de presentator moet hier ook tellen.
-  void _applyCostTick(Map<String, dynamic> m) {
-    if (!mounted) return;
-    final minor = (m['minor'] as num?)?.toInt();
+  void _applyCostTick(Map<String, Object?> m) {
+    final minor = (m['minor'] as num).toInt();
     final run = (m['run'] as num?)?.toInt() ?? 0;
-    if (minor == null || run < _costRun) return;
+    if (run < _costRun) return;
     if (run == _costRun && _costMinor != null && minor < _costMinor!) return;
     setState(() {
       _costRun = run;
       _costMinor = minor;
-      _costCurrency = (m['currency'] as String?) ?? _costCurrency;
+      _costCurrency = m['currency'] as String;
       _costEurMinor = (m['eur'] as num?)?.toInt();
     });
   }
 
-  void _applyChartHover(Object? arguments) {
-    final m = Map<String, dynamic>.from(arguments as Map);
-    if (!mounted) return;
+  void _applyChartHover(Map<String, Object?> m) {
     if (!_chartHoverStream.accept((m['seq'] as num?)?.toInt())) return;
-    if ((m['index'] as num?)?.toInt() == _index) {
+    if ((m['index'] as num).toInt() == _index) {
       _chartHover.setExternal(ChartHover.fromJson(m['hover']));
     }
   }
 
-  void _send(String method, [Object? arguments]) {
+  void _send(PresenterMethod method, [Map<String, Object?>? arguments]) {
     unawaited(_sendWhenReady(method, arguments));
   }
 
-  Future<void> _sendWhenReady(String method, Object? arguments) async {
+  Future<void> _sendWhenReady(
+    PresenterMethod method,
+    Map<String, Object?>? arguments,
+  ) async {
     if (!await _presenterReady.future || !mounted) return;
     // De presenter kan intussen gesloten zijn; invoer naar een verdwenen
     // venster mag het beamerscherm niet laten vastlopen.
-    await presenterChannel
-        .invokeMethod<void>(method, arguments)
-        .catchError((_) => null);
+    await method.send(arguments).catchError((_) => null);
   }
 
   /// Reveal count for a timeline in step mode, mirroring the presenter so the
@@ -677,10 +642,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   }) {
     if (!mounted) return KeyEventResult.ignored;
     if ((meta || control) && key == LogicalKeyboardKey.keyW) {
-      _send('exit');
+      _send(PresenterMethod.exit);
       return KeyEventResult.handled;
     }
-    _send('key', {
+    _send(PresenterMethod.key, {
       'keyId': key.keyId,
       'meta': meta,
       'control': control,
@@ -718,8 +683,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     }
     final slide = _slides[_index.clamp(0, _slides.length - 1)];
     return GestureDetector(
-      onTap: () => _send('next'),
-      onSecondaryTap: () => _send('prev'),
+      onTap: () => _send(PresenterMethod.next),
+      onSecondaryTap: () => _send(PresenterMethod.prev),
       child: SizedBox.expand(child: _canvas(slide)),
     );
   }
@@ -856,7 +821,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     mermaidViewController: _mermaidView,
                     mermaidInteractive: false,
                     onChecklistItemToggle: (column, itemIndex) =>
-                        _send('checklistToggle', {
+                        _send(PresenterMethod.checklistToggle, {
                           'slideIndex': _index,
                           'column': column,
                           'itemIndex': itemIndex,
@@ -864,25 +829,26 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     questionView: _questionIndex == _index
                         ? _questionView
                         : null,
-                    onAnswerSelected: (i) => _send('answerSelected', {
+                    onAnswerSelected: (i) => _send(
+                      PresenterMethod.answerSelected,
+                      {'slideIndex': _index, 'optionIndex': i},
+                    ),
+                    onAnswerSubmit: () => _send(PresenterMethod.answerSubmit, {
                       'slideIndex': _index,
-                      'optionIndex': i,
                     }),
-                    onAnswerSubmit: () =>
-                        _send('answerSubmit', {'slideIndex': _index}),
                     enableMedia: true,
                     autoplayMedia: true,
                     videoPlayback: _videoPlayback,
                     allowRemoteMedia: _allowRemoteMedia,
                     // Media finishing on the beamer drives auto-advance.
-                    onAudioComplete: () => _send('mediaComplete', {
-                      'index': _index,
-                      'kind': 'audio',
-                    }),
-                    onVideoComplete: () => _send('mediaComplete', {
-                      'index': _index,
-                      'kind': 'video',
-                    }),
+                    onAudioComplete: () => _send(
+                      PresenterMethod.mediaComplete,
+                      {'index': _index, 'kind': 'audio'},
+                    ),
+                    onVideoComplete: () => _send(
+                      PresenterMethod.mediaComplete,
+                      {'index': _index, 'kind': 'video'},
+                    ),
                     improvementY01: _improvementY01,
                   ),
                 ),

@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-linux-wayland-scale check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-linux-wayland-scale check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 .PHONY: package-deps test-benchmarks
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
@@ -75,6 +75,7 @@ help:
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
 	@echo "  make sast            Semgrep over shipped Dart with the rules in semgrep/ (needs semgrep)."
+	@echo "  make check-branch-protection  Vergelijk de vastgelegde main-regel met Pawprint (beheerderstoegang)."
 	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
 	@echo "  make shellcheck      ShellCheck over the committed shell scripts (needs shellcheck)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
@@ -190,7 +191,7 @@ test:
 	@echo "Command: flutter test --test-randomize-ordering-seed random"
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
-	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 	$(MAKE) test-benchmarks
 
 # Run the full test suite with coverage and summarise line coverage. The floor
@@ -205,7 +206,7 @@ coverage:
 	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=80 --require-instrumented"
 	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
 	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
-	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --coverage --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --coverage --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 	dart run tool/coverage_summary.dart --min=80 --require-instrumented
 	$(MAKE) test-benchmarks
 
@@ -214,7 +215,7 @@ coverage:
 # grens en functionele 300-paginaproef blijven behouden.
 test-benchmarks:
 	@echo "== OciDeck check: isolated scaling benchmark =="
-	$(RAISE_FDS) flutter test test/large_deck_performance_test.dart --tags benchmark --concurrency=1 $(TEST_TIMEOUT_FLAG) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test test --tags benchmark --concurrency=1 $(TEST_TIMEOUT_FLAG) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # The per-file floor, over the report `coverage` just wrote (no second test run).
 #
@@ -996,6 +997,9 @@ check-comment-language:
 	@echo "        Volledige lijst: dart run tool/check_comment_language.dart --list"
 	dart run tool/check_comment_language.dart
 
+check-branch-protection:
+	@scripts/check_branch_protection.sh
+
 # Een bewering over een *gemeten* grootheid verrot terwijl de boom stilstaat.
 # `docs/CHECKS.md` beloofde op twee plekken "within ~half an hour" terwijl de
 # meting op 54 minuten stond; er zat geen datum bij, dus er viel niets tegen te
@@ -1010,13 +1014,18 @@ check-dated-claims:
 	@echo "Command: dart run tool/check_dated_claims.dart"
 	@echo "Covers: de ankers van de geregistreerde metingen in de documentatie,"
 	@echo "        en de basislijn van looptijduitdrukkingen in CHECKS.md,"
-	@echo "        CONTRIBUTING.md en BUILD.md."
+	@echo "        CONTRIBUTING.md en BUILD.md, de Pawprint-trekkers en de assurance-inventaris."
 	@echo "Failure means: er is een gemeten bewering herschreven zonder het"
 	@echo "        register bij te werken, of er staat een looptijdbelofte bij die"
 	@echo "        niet geregistreerd is. Meet hem en zet de datum erbij, of werk"
 	@echo "        looptijdBasislijn bij als het geschiedenis is."
 	@echo "        Houdbaarheid: dart run tool/check_dated_claims.dart --tegen-de-klok"
 	dart run tool/check_dated_claims.dart
+
+# De zes tellingen voor de bekende LTR-lay-outbeperking zijn afgeleid uit lib/.
+check-rtl-inventory:
+	@echo "== OciDeck check: RTL-inventaris =="
+	dart run tool/check_rtl_inventory.dart
 
 # Elke groene poort is een uitspraak over de toolchain die hem draaide (#598).
 # Eén Flutter per machine, de laatste stable uit het officiële kanaal, en de pin
@@ -1505,7 +1514,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := check-release-channels format-check analyze check-toolchain check-linux-deps check-linux-impeller check-linux-wayland-scale check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
+STATIC_GATES := check-release-channels format-check analyze check-toolchain check-linux-deps check-linux-impeller check-linux-wayland-scale check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus
@@ -1682,6 +1691,6 @@ ci-image-scans-publish:
 	  -f .forgejo/ci-image/scans.Dockerfile .forgejo/ci-image
 	@echo "== Gepubliceerd. Zet het package op publiek als dat nog niet zo is. =="
 
-.PHONY: check-release-channels
+.PHONY: check-release-channels check-branch-protection
 check-release-channels:
 	@python3 -m unittest discover -s test -p 'release_*_test.py' -v
