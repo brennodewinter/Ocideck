@@ -12,6 +12,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/utils/bullet_marker_svg.dart';
 import 'package:ocideck/utils/document_front_matter.dart';
+import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -94,7 +95,7 @@ void main() {
     expect(n.currentState.isDirty, isTrue);
   });
 
-  testWidgets('het stijlmenu opent het beheer van stijlprofielen', (
+  testWidgets('het stijlmenu opent het documentvlak van de stijlbouwer', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1400, 900));
@@ -109,11 +110,9 @@ void main() {
     await tester.tap(find.text('Stijlprofielen beheren…'));
     await tester.pumpAndSettle();
 
-    final marker = find.widgetWithIcon(
-      SegmentedButton<BulletMarker>,
-      Icons.pets,
-    );
-    expect(marker, findsOneWidget);
+    expect(find.byType(SettingsDialog), findsOneWidget);
+    expect(find.byKey(const Key('document-style-editor')), findsOneWidget);
+    expect(find.byKey(const Key('document-body-font-size')), findsOneWidget);
   });
 
   testWidgets('de documentstijl vervangt alleen gewone bullets door pootjes', (
