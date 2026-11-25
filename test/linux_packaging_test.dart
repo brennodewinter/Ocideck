@@ -432,7 +432,7 @@ void main() {
     });
 
     test(
-      'the .rpm declares the GLES and EGL sonames required by the bundle',
+      'the .rpm declares the GLES, EGL and xclip sonames required by the bundle',
       () {
         final rpmSpec = RegExp(
           r'cat > "\$top/SPECS/ocideck\.spec" <<EOF(.*?)\nEOF',
@@ -447,6 +447,16 @@ void main() {
               'bundled Flutter files do not provide libGLESv2.',
         );
         expect(rpmSpec, contains('libEGL.so.1'));
+        expect(
+          rpmSpec,
+          matches(
+            RegExp(
+              r'^Requires:\s+libXmu\.so\.6\(\)\(64bit\)$',
+              multiLine: true,
+            ),
+          ),
+          reason: 'The bundled xclip helper needs Fedora to install libXmu.',
+        );
       },
     );
 
