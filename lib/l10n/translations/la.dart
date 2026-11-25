@@ -1553,6 +1553,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Koptekst neemt ': 'Titulus superior occupat ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% altitudinis imaginis — contento paene nullus locus superest.',
   'Lettergrootte koptekst': 'Magnitudo litterarum capitis',
   'Lettergrootte voettekst': 'Magnitudo litterarum pedis',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

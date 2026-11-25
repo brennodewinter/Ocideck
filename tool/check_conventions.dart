@@ -548,7 +548,9 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3543, // +15 (#2996): de slideStyles-doorvoer naar beamerpayload
+      3547, // +4 (#3165): de deckHeader-doorvoer naar planLiveFix en
+  // sharedSplitFitScale — de kopband reserveert ook in de presentator.
+  // +15 (#2996): de slideStyles-doorvoer naar beamerpayload
   // en per-dia profielkeuze in de renderdelen — State-plumbing van deze
   // klasse, zoals marpStyle en cockpitColorScheme dat al waren.
   // +6 (#2838): stapel-stapplumbing — de zichtbaarhelper
@@ -757,7 +759,9 @@ const Map<String, int> classSizeBaseline = {
   // _mutate-callsite; de permutatie-detectie staat in
   // table_row_permutation.dart.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1523, // +39 (#2996): setSlideStyle — de dunne mutator achter de
+      1524, // +1 (#3165): de header-parameter op de splitshelper —
+  // de kopband telt mee in de pagina-inpassing.
+  // +39 (#2996): setSlideStyle — de dunne mutator achter de
   // stijlwissel, zelfde vorm als setSlideJump — plus de
   // slideStyles-resolutie in applyMarkdown. De berekening zit in
   // resolveSlideStyles (FileService); de staatsovergang hoort hier.
@@ -810,7 +814,10 @@ const Map<String, int> classSizeBaseline = {
   // invalid geometry, missing anchor) met tekst-ref-telling en entry-vergelijking.
   // De klasse meet 1097.
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer':
-      1185, // +20 (#2996): het effectieve profiel per dia in de
+      1208, // +23 (#3165): het deckHeader-kanaal door analyze/
+  // analyzeSlides/analyzeWarmed en de per-dia issues-memo — de kopband-
+  // controle hangt van decktekst die in dezelfde cachesleutel mee moet.
+  // +20 (#2996): het effectieve profiel per dia in de
   // contrast-/dichtheidscontroles — de meting hoort bij deze klasse.
   // +5 (#2838): alt-tekst- en missing-file-cases voor imageGallery —
   // onherleidbare veldplumbing; de gedeelde refs-lezer doet het padwerk.

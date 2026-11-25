@@ -446,14 +446,7 @@ class _MarpHeaderOverlay extends StatelessWidget {
       left: w * .04,
       right: w * .04,
       top: w * .02,
-      child: _md(
-        context,
-        text,
-        style,
-        linkColor: color,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
+      child: _md(context, text, style, linkColor: color),
     );
   }
 }

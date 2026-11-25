@@ -612,6 +612,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Koptekst neemt ': 'E header ta okupá ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% di e haltura di e slide — e kontenido kasi no tin lugá mas.',
   'Lettergrootte koptekst': 'Tamaño di lèter di e header',
   'Lettergrootte voettekst': 'Tamaño di lèter di e pia di página',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

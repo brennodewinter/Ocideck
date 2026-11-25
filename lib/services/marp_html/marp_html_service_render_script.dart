@@ -201,11 +201,21 @@ function renderMarpChrome(sec,position){
   var node=document.createElement(position);
   node.className='marp-'+position;
   var markdown=source.dataset.markdown||'';
-  var html=window.marked?marked.parseInline(markdown):markdown;
+  // Meerregelige kop/foot: parseInline laat de regeleinden vallen (#3165);
+  // de blok-parse levert <p>-regels en de css zet hun marge op nul.
+  var html=window.marked
+    ?(markdown.indexOf('\n')>=0?marked.parse(markdown):marked.parseInline(markdown))
+    :markdown;
   if(window.DOMPurify){node.innerHTML=DOMPurify.sanitize(html);}
   else{node.textContent=markdown;}
   if(source.parentElement===sec||sec.contains(source))source.replaceWith(node);
   else sec.appendChild(node);
+  // Een kop hoger dan de standaard padding duwt de inhoud omlaag — zelfde
+  // band als de app er voor de inhoud reserveert, hier na layout gemeten.
+  if(position==='header'){
+    var needed=18+node.offsetHeight+8;
+    if(needed>48)sec.style.paddingTop=needed+'px';
+  }
 }
 function fitMarpHeading(sec){
   var heading=sec.querySelector('h1,h2,h3,h4,h5,h6');

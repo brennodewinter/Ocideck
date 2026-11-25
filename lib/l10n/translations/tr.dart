@@ -2398,6 +2398,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Koptekst neemt ': 'Üst bilgi ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% slayt yüksekliği — içerik için neredeyse hiç yer kalmadı.',
   'Lettergrootte koptekst': 'Üstbilgi yazı tipi boyutu',
   'Lettergrootte voettekst': 'Altbilgi yazı tipi boyutu',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

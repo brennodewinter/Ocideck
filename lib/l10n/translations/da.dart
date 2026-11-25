@@ -1542,6 +1542,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Koptekst neemt ': 'Sidehovedet optager ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% af diasets højde — indholdet har næsten ingen plads tilbage.',
   'Lettergrootte koptekst': 'Skriftstørrelse sidehoved',
   'Lettergrootte voettekst': 'Skriftstørrelse sidefod',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

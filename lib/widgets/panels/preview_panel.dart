@@ -98,6 +98,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
               current.clamp(0, deck.slides.length - 1),
             ),
             splitWithImage: slide.type.splitWithImage,
+            header: slide.marpStyle.inherit(deck.marpStyle).header,
           )
         : expandFindingsForRender(
             [slide],
@@ -189,6 +190,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             slide: slide,
             profile: slideProfile,
             splitWithImage: slide.type.splitWithImage,
+            header: slide.marpStyle.inherit(deck.marpStyle).header,
           )
         : 1;
     // A long finding previews across multiple full-size pages (render-time
@@ -487,6 +489,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     deck.slideProfileAt(idx),
                     deck.slideProfileAt(idx).fontFamily,
                     slideAspect: slideAspectRatio(deck.slideSize),
+                    deckHeader: deck.marpStyle.header,
                   ),
                   splitRunPosition: splitRunPositionFor(deck.slides, idx),
                   menuCategory: slide.id == _menuCategorySlideId

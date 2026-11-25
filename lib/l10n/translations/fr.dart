@@ -613,6 +613,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Koptekst neemt ': 'L\'en-tête occupe ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% de la hauteur de la diapositive — il ne reste presque plus de place pour le contenu.',
   'Lettergrootte koptekst': 'Taille de police de l\'en-tête',
   'Lettergrootte voettekst': 'Taille de police du pied de page',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

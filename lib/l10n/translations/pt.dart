@@ -1567,6 +1567,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Koptekst neemt ': 'O cabeçalho ocupa ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% da altura do diapositivo — o conteúdo quase não tem espaço.',
   'Lettergrootte koptekst': 'Tamanho da fonte do cabeçalho',
   'Lettergrootte voettekst': 'Tamanho da fonte do rodapé',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

@@ -409,6 +409,7 @@ class _OverviewSlideCard extends StatelessWidget {
                                   deck.slideProfileAt(index),
                                   deck.slideProfileAt(index).fontFamily,
                                   slideAspect: slideAspectRatio(deck.slideSize),
+                                  deckHeader: deck.marpStyle.header,
                                 ),
                                 splitRunPosition: splitRunPositionFor(
                                   deck.slides,

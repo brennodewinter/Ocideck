@@ -613,6 +613,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Koptekst neemt ': 'De koptekst nimt ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% fan de dia-hichte yn — de ynhâld hat hast gjin romte mear.',
   'Lettergrootte koptekst': 'Letterjitte koptekst',
   'Lettergrootte voettekst': 'Letterjitte fuottekst',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

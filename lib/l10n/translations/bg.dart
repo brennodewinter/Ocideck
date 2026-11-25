@@ -1561,6 +1561,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Koptekst neemt ': 'Горният колонтитул заема ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% от височината на слайда — на съдържанието почти не остава място.',
   'Lettergrootte koptekst': 'Размер на шрифта на горния колонтитул',
   'Lettergrootte voettekst': 'Размер на шрифта на долния колонтитул',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

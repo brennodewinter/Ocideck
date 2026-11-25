@@ -117,6 +117,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                       _profileAt(_index),
                       _profileAt(_index).fontFamily,
                       slideAspect: widget.slideAspect,
+                      deckHeader: widget.marpStyle.header,
                     ),
                     splitRunPosition: splitRunPositionFor(
                       widget.slides,
@@ -390,6 +391,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                     _profileAt(_index + 1),
                     _profileAt(_index + 1).fontFamily,
                     slideAspect: widget.slideAspect,
+                    deckHeader: widget.marpStyle.header,
                   ),
                   splitRunPosition: splitRunPositionFor(
                     widget.slides,

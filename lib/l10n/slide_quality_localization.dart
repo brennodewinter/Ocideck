@@ -456,6 +456,9 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.emptySlide => l10n.d(
       'Deze dia is leeg: hij toont niets op het scherm en in de export.',
     ),
+    SlideQualityIssueKind.marpHeaderTooTall =>
+      '${l10n.d('Koptekst neemt ')}${issue.args['pct']}'
+          '${l10n.d('% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.')}',
     SlideQualityIssueKind.privacyIdentifier ||
     SlideQualityIssueKind.privacyFinancial ||
     SlideQualityIssueKind.privacyContact ||

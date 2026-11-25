@@ -1542,6 +1542,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Koptekst neemt ': 'Glava zavzema ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% višine diapozitiva — vsebini skoraj ne preostane prostora.',
   'Lettergrootte koptekst': 'Velikost pisave glave',
   'Lettergrootte voettekst': 'Velikost pisave noge',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

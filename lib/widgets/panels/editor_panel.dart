@@ -78,7 +78,11 @@ class _EditorPanelContent extends ConsumerWidget {
     // Het effectieve profiel van déze dia (#2996): lettermaat en animatie
     // volgen de lopende stijlwissel, niet alleen de deckstijl.
     final slideProfile = deck.slideProfileAt(idx);
-    final richTextPages = richTextPageCount(slide, slideProfile);
+    final richTextPages = richTextPageCount(
+      slide,
+      slideProfile,
+      header: slide.marpStyle.inherit(deck.marpStyle).header,
+    );
     final multiPageNotes = richTextPages > 1;
 
     void update(Slide updated) => deckNotifier.updateSlide(idx, updated);

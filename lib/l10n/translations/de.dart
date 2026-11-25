@@ -612,6 +612,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Koptekst neemt ': 'Die Kopfzeile nimmt ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% der Folienhöhe — für den Inhalt bleibt fast kein Platz mehr.',
   'Lettergrootte koptekst': 'Schriftgröße Kopfzeile',
   'Lettergrootte voettekst': 'Schriftgröße Fußzeile',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

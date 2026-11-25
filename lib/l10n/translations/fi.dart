@@ -1542,6 +1542,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Koptekst neemt ': 'Ylätunniste vie ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% dian korkeudesta — sisällölle ei jää enää juuri tilaa.',
   'Lettergrootte koptekst': 'Ylätunnisteen fonttikoko',
   'Lettergrootte voettekst': 'Alatunnisteen fonttikoko',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

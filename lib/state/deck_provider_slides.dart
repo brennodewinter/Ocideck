@@ -105,6 +105,7 @@ extension DeckNotifierSlides on DeckNotifier {
     final pages = splitThemedBulletSlidePages(
       slide,
       deck.slideProfileAt(index),
+      header: slide.marpStyle.inherit(deck.marpStyle).header,
     );
     if (pages == null) return;
     final slides = List<Slide>.from(deck.slides)

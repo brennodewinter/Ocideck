@@ -797,6 +797,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                       _profileAt(_index),
                       _profileAt(_index).fontFamily,
                       slideAspect: _slideAspect,
+                      deckHeader: _marpStyle.header,
                     ),
                     splitRunPosition: splitRunPositionFor(_slides, _index),
                     richTextPage: _richTextPage,

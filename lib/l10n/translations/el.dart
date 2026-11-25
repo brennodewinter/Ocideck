@@ -1565,6 +1565,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Koptekst neemt ': 'Η κεφαλίδα καταλαμβάνει ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% του ύψους της διαφάνειας — το περιεχόμενο δεν έχει σχεδόν χώρο πια.',
   'Lettergrootte koptekst': 'Μέγεθος γραμματοσειράς κεφαλίδας',
   'Lettergrootte voettekst': 'Μέγεθος γραμματοσειράς υποσέλιδου',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

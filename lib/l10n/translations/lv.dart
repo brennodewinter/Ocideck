@@ -1538,6 +1538,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Koptekst neemt ': 'Virsraksts aizņem ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% no slaida augstuma — saturam gandrīz vairs nav vietas.',
   'Lettergrootte koptekst': 'Galvenes fonta lielums',
   'Lettergrootte voettekst': 'Kājenes fonta lielums',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

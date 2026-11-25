@@ -655,6 +655,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                           _profileAt(i),
                           _profileAt(i).fontFamily,
                           slideAspect: widget.slideAspect,
+                          deckHeader: widget.marpStyle.header,
                         ),
                         splitRunPosition: splitRunPositionFor(widget.slides, i),
                         improvementY01: widget.improvementY01,

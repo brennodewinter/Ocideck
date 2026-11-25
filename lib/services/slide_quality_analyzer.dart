@@ -24,6 +24,7 @@ import '../utils/project_path.dart';
 import '../utils/title_contrast.dart' show kTitleSubtitleAlpha;
 import 'improvement/matrix_slide.dart';
 import 'image_viewport_geometry.dart';
+import 'rich_text_layout.dart';
 import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
@@ -194,6 +195,7 @@ class SlideQualityAnalyzer {
     slides: deck.slides,
     theme: deck.themeProfile,
     font: deck.themeProfile.fontFamily,
+    deckHeader: deck.marpStyle.header,
     // Het effectieve profiel per dia (#2996): een donker bereik toetst op zijn
     // eigen achtergrond, niet op die van de deckstijl.
     slideProfiles: [
@@ -212,6 +214,7 @@ class SlideQualityAnalyzer {
     List<ThemeProfile>? slideProfiles,
     String? projectPath,
     double slideAspect = kScreenSlideAspect,
+    String deckHeader = '',
   }) {
     final issues = <SlideQualityIssue>[];
     // Deckbrede controles gelden per gebruikt profiel: een bereik met eigen
@@ -235,13 +238,14 @@ class SlideQualityAnalyzer {
           p.fontFamily,
           projectPath,
           slideAspect,
+          deckHeader,
         ),
       );
     }
     // Bewust buiten de per-slide memo: of een slide klein rendert hangt af van
     // zijn buren, en die cache is op slide-identiteit gesleuteld. Binnen de memo
     // zou een melding blijven staan nadat de buurslide veranderde.
-    _checkSplitRuns(slides, theme, font, issues, slideAspect);
+    _checkSplitRuns(slides, theme, font, issues, slideAspect, deckHeader);
     // Ook deckbreed, en om dezelfde reden buiten de per-dia memo: of een sprong
     // ergens uitkomt hangt af van de ándere dia's.
     _checkDanglingJumps(slides, issues);
@@ -277,6 +281,7 @@ class SlideQualityAnalyzer {
             deck.slideProfileAt(i).fontFamily,
             deck.projectPath,
             aspect,
+            deck.marpStyle.header,
           );
         }
         // Alleen échte runleden laten een dure schaalmeting achter: een
@@ -284,7 +289,13 @@ class SlideQualityAnalyzer {
         // waar `_checkSplitRuns` straks `memoizedSplitRunMemberScale` op vraagt.
         if (slide.continuesSplit ||
             (i + 1 < slides.length && slides[i + 1].continuesSplit)) {
-          memoizedSplitRunMemberScale(slide, theme, font, slideAspect: aspect);
+          memoizedSplitRunMemberScale(
+            slide,
+            theme,
+            font,
+            slideAspect: aspect,
+            deckHeader: deck.marpStyle.header,
+          );
         }
       }
       if (i < slides.length) {
@@ -309,6 +320,7 @@ class SlideQualityAnalyzer {
     String font,
     String? projectPath,
     double slideAspect,
+    String deckHeader,
   ) {
     final memo = _slideIssuesCache[slide];
     if (memo != null &&
@@ -316,7 +328,8 @@ class SlideQualityAnalyzer {
         memo.font == font &&
         memo.projectPath == projectPath &&
         memo.minContrastRatio == minContrastRatio &&
-        memo.slideAspect == slideAspect) {
+        memo.slideAspect == slideAspect &&
+        memo.deckHeader == deckHeader) {
       if (memo.index == index) return memo.issues;
       // Slide is verschoven (invoegen/verwijderen elders): alleen de index in
       // de issues herschrijven, de analyse zelf blijft geldig.
@@ -343,6 +356,14 @@ class SlideQualityAnalyzer {
     _checkQuestionAnswerable(slide, index, issues);
     _checkFindingSections(slide, index, issues);
     _checkEmptySlide(slide, index, issues);
+    _checkMarpHeaderHeight(
+      slide,
+      index,
+      theme,
+      deckHeader,
+      issues,
+      slideAspect,
+    );
     _checkCallouts(slide, index, projectPath, issues);
     _slideIssuesCache[slide] = _SlideIssuesMemo(
       theme: theme,
@@ -350,6 +371,7 @@ class SlideQualityAnalyzer {
       projectPath: projectPath,
       minContrastRatio: minContrastRatio,
       slideAspect: slideAspect,
+      deckHeader: deckHeader,
       index: index,
       issues: issues,
     );
@@ -830,40 +852,6 @@ class _FitMemo {
   final double scale;
 
   const _FitMemo(this.font, this.slideAspect, this.scale);
-}
-
-/// Gememoiseerde per-slide issues plus alles waarvan de analyse afhangt, zodat
-/// een gewijzigd thema, lettertype, projectpad of contrastdrempel de cache
-/// laat missen. [theme] wordt op identiteit vergeleken (immutable model).
-class _SlideIssuesMemo {
-  final ThemeProfile theme;
-  final String font;
-  final String? projectPath;
-  final double minContrastRatio;
-  final double slideAspect;
-  final int index;
-  final List<SlideQualityIssue> issues;
-
-  const _SlideIssuesMemo({
-    required this.theme,
-    required this.font,
-    required this.projectPath,
-    required this.minContrastRatio,
-    required this.slideAspect,
-    required this.index,
-    required this.issues,
-  });
-
-  _SlideIssuesMemo withIndex(int newIndex, List<SlideQualityIssue> reindexed) =>
-      _SlideIssuesMemo(
-        theme: theme,
-        font: font,
-        projectPath: projectPath,
-        minContrastRatio: minContrastRatio,
-        slideAspect: slideAspect,
-        index: newIndex,
-        issues: reindexed,
-      );
 }
 
 /// Toetst elk voor-/achtergrondpaar dat een *thema* vastlegt, los van de

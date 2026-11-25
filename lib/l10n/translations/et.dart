@@ -1534,6 +1534,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Koptekst neemt ': 'Päis võtab ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% slaidi kõrgusest — sisule jääb peaaegu mitte ruumi.',
   'Lettergrootte koptekst': 'Päise kirja suurus',
   'Lettergrootte voettekst': 'Jaluse kirja suurus',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

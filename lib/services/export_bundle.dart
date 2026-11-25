@@ -131,6 +131,7 @@ List<Slide> _prepareExportSlides(
         expandRichTextForRender(
           expandFindingsForRender([marked], profile: profile),
           profile,
+          deckHeader: deck.marpStyle.header,
         ),
       );
     } else {

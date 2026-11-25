@@ -1556,6 +1556,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Koptekst neemt ': 'Верхній колонтитул займає ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% висоти слайда — для вмісту майже не лишається місця.',
   'Lettergrootte koptekst': 'Розмір шрифту верхнього колонтитула',
   'Lettergrootte voettekst': 'Розмір шрифту нижнього колонтитула',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

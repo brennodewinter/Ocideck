@@ -22,6 +22,7 @@ part of '../fullscreen_presenter.dart';
   required AppLocalizations l10n,
   required ValueChanged<Slide>? onSlideChanged,
   required ValueChanged<String>? onSlideSplit,
+  String deckHeader = '',
 }) {
   if (slides.isEmpty) return (flash: null, changed: false);
   final idx = index.clamp(0, slides.length - 1);
@@ -32,7 +33,12 @@ part of '../fullscreen_presenter.dart';
       changed: false,
     );
   }
-  final pages = safeFixForSlide(slide, theme, projectPath: projectPath);
+  final pages = safeFixForSlide(
+    slide,
+    theme,
+    projectPath: projectPath,
+    deckHeader: deckHeader,
+  );
   if (pages == null || pages.isEmpty) {
     return (
       flash: l10n.d('Geen probleem om hier op te lossen.'),
@@ -125,6 +131,7 @@ extension _PresenterContent on _FullscreenPresenterState {
       slide,
       profile,
       splitWithImage: split,
+      header: slide.marpStyle.inherit(widget.marpStyle).header,
     );
     return planRichTextForSlide(
       slide: slide,
@@ -262,6 +269,7 @@ extension _PresenterContent on _FullscreenPresenterState {
       l10n: context.l10n,
       onSlideChanged: widget.onSlideChanged,
       onSlideSplit: widget.onSlideSplit,
+      deckHeader: widget.marpStyle.header,
     );
     if (outcome.flash != null) {
       _flashFix(outcome.flash!);

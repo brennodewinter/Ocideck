@@ -1556,6 +1556,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Koptekst neemt ': 'Antetul ocupă ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% din înălțimea diapozitivului — conținutului nu-i mai rămâne aproape loc.',
   'Lettergrootte koptekst': 'Dimensiunea fontului antet',
   'Lettergrootte voettekst': 'Dimensiunea fontului subsol',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
