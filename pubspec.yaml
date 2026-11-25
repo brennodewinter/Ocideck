@@ -259,6 +259,8 @@ flutter:
     # (#1968). Een subset van Noto Sans Math — alleen Arrows en Mathematical
     # Operators blocks, ~250 KB in plaats van de volledige 1 MB.
     - assets/fonts/NotoSansMath-subset.ttf
+    # Statische EB Garamond- en Roboto-sneden voor de Unicode-PDF-export.
+    - assets/fonts/pdf/
     # Volledige licentieteksten van de gebundelde JavaScript/CSS uit
     # assets/web_export/. Die bestanden dragen hooguit een banner; MIT, BSD-3 en
     # Apache-2.0 vragen de hele tekst bij herdistributie, en de gebruiker die

@@ -44,6 +44,8 @@ String articlePreamble(
   );
   buf.write(
     r'\usepackage[T1]{fontenc}'
+    '\n'
+    r'\usepackage{textcomp}'
     '\n',
   );
   // Wiskunde
@@ -59,6 +61,8 @@ String articlePreamble(
   // Tabellen met booktabs
   buf.write(
     r'\usepackage{booktabs}'
+    '\n'
+    r'\usepackage{tabularx}'
     '\n',
   );
   buf.write(
@@ -103,11 +107,7 @@ String articlePreamble(
   // Pagina-marges (feature 3: instelbaar)
   // Met drukkersafloop is het vel groter dan het snijformaat; dan bepaalt
   // `geometry` de papiermaat in plaats van de papiernaam uit `documentclass`.
-  final paper = pageSize.latexPaperWith(pageMargins);
-  final geometry = paper == null
-      ? pageMargins.latexMargin
-      : '$paper,${pageMargins.latexMargin}';
-  buf.write('\\usepackage[$geometry]{geometry}\n');
+  buf.write(_articleGeometry(pageSize, pageMargins, chrome));
   _writeArticleChrome(buf, meta, chrome);
   // Snijtekens: alleen wanneer erom gevraagd is én er afloop is, want zonder
   // afloop wijzen ze nergens naar. `crop` tekent ze rond het snijformaat op het
@@ -176,13 +176,29 @@ String articlePreamble(
 }
 
 typedef _ArticleChrome = ({
-  String header,
-  String footer,
+  List<String> header,
+  List<String> footer,
   double? headerFontSize,
   double? footerFontSize,
   bool enabled,
   bool pageNumbers,
 });
+
+String _articleGeometry(
+  PageSizeSpec size,
+  PageMargins margins,
+  _ArticleChrome chrome,
+) {
+  final options = [
+    ?size.latexPaperWith(margins),
+    margins.latexMargin,
+    if (chrome.header.isNotEmpty)
+      'includehead,headheight=${_latexBandHeight(chrome.header, chrome.headerFontSize)}bp,headsep=8bp',
+    if (chrome.footer.isNotEmpty)
+      'includefoot,footskip=${_latexBandHeight(chrome.footer, chrome.footerFontSize) + 8}bp',
+  ];
+  return '\\usepackage[${options.join(',')}]{geometry}\n';
+}
 
 void _writeArticleColors(StringBuffer buf, ThemeProfile theme) {
   buf.write(
@@ -229,7 +245,6 @@ void _writeArticleChrome(
   buf.write('\\fancyhf{}\n');
   if (chrome.header.isNotEmpty) {
     final size = chrome.headerFontSize;
-    if (size != null) buf.write('\\setlength{\\headheight}{${size * 1.2}bp}\n');
     buf.write('\\fancyhead[L]{${_latexDocumentBand(chrome.header, size)}}\n');
   }
   if (chrome.footer.isNotEmpty) {
@@ -250,16 +265,22 @@ void _writeArticleChrome(
   if (chrome.pageNumbers) buf.write('\\fancyfoot[R]{\\thepage}\n');
 }
 
-String _latexDocumentChrome(String template, Map<String, String> fields) {
+List<String> _latexDocumentChrome(String template, Map<String, String> fields) {
   final resolved = resolveDocumentChromeTemplate(template.trim(), fields);
-  if (resolved.isEmpty) return '';
-  return markdownInlineToLatex(resolved);
+  if (resolved.isEmpty) return const [];
+  return resolved.split('\n').map(markdownInlineToLatex).toList();
 }
 
-String _latexDocumentBand(String content, double? size) {
+double _latexBandHeight(List<String> lines, double? size) =>
+    (size ?? 11) * 1.3 * lines.length + 6;
+
+String _latexDocumentBand(List<String> lines, double? size) {
   final font = size == null
       ? ''
       : '\\fontsize{${size}bp}{${size * 1.2}bp}\\selectfont ';
+  final content = lines.length == 1
+      ? lines.single
+      : '\\shortstack[l]{${lines.map((line) => '\\strut $line').join(r' \\ ')}}';
   return '\\colorbox{ocideckDocumentBandBackground}{'
       '\\textcolor{ocideckDocumentBandText}{$font$content}}';
 }
@@ -321,6 +342,8 @@ String beamerPreamble(
   // Tabellen
   buf.write(
     r'\usepackage{booktabs}'
+    '\n'
+    r'\usepackage{tabularx}'
     '\n',
   );
   buf.write(
@@ -470,7 +493,9 @@ String _escapeLatex(String s) {
       .replaceAll('{', r'\{')
       .replaceAll('}', r'\}')
       .replaceAll('~', r'\textasciitilde{}')
-      .replaceAll('^', r'\textasciicircum{}');
+      .replaceAll('^', r'\textasciicircum{}')
+      .replaceAll('€', r'\texteuro{}')
+      .replaceAll('·', r'\textperiodcentered{}');
 }
 
 /// Millimeters zonder overbodige nullen — `210` in plaats van `210.0`.

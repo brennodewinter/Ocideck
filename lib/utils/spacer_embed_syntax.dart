@@ -1,20 +1,9 @@
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:markdown/markdown.dart' as md;
 
-/// De bronnotatie voor een bewuste tussenruimte: `<!-- spacer -->` op een
-/// eigen regel.
-///
-/// Het is een HTML-commentaar — elke gewone Markdown-lezer laat het weg zonder
-/// iets kapot te maken (gedocumenteerde terugval: elders verdwijnt de ruimte
-/// gewoon). Een losse `<br>`-regel was geen optie: de Markdown-parser lijmt
-/// die als inline-HTML aan de volgende alinea, waardoor hij als letterlijke
-/// tekst terugkeert in plaats van als eigen blok. Meerdere markers onder
-/// elkaar geven meerdere regels ruimte — telbaar en voorspelbaar.
-const spacerMarker = '<!-- spacer -->';
+import 'document_blank_lines.dart';
 
-/// Een regel die alleen de [spacerMarker] bevat (inspringing en restwit
-/// toegestaan), zoals [tocMarkerLinePattern] voor de inhoudsopgave.
-final spacerMarkerLinePattern = RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$');
+export 'document_blank_lines.dart' show spacerMarker, spacerMarkerLinePattern;
 
 /// De `<!-- spacer -->`-marker als blok-embed in de rijke-tekstlaag.
 ///

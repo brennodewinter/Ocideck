@@ -150,7 +150,12 @@ void main() {
     );
     final tex = await File(out).readAsString();
 
-    expect(tex, contains(r'\textbf{Audit\_2026} · P-42 · P\_43'));
+    expect(
+      tex,
+      contains(
+        r'\textbf{Audit\_2026} \textperiodcentered{} P-42 \textperiodcentered{} P\_43',
+      ),
+    );
     expect(tex, contains(r'Ada \& Bob — R\&D 100\%'));
     expect(tex, isNot(contains('{project-id}')));
     expect(tex, isNot(contains('{project_id}')));

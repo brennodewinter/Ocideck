@@ -97,7 +97,7 @@ List<PdfBlock> markdownToPdfBlocks(
   ]);
 }
 
-/// Zet één regel Markdown om in stukken tekst met hun opmaak.
+/// Zet de regels van een kop- of voetband om in tekst met opmaak.
 ///
 /// Voor de kop- en voetband van het document. Die band dráágt Markdown — het
 /// instelvenster noemt het veld zo, de documentweergave in de app zet hem met
@@ -110,9 +110,14 @@ List<PdfSpan> markdownToPdfSpans(String markdown) {
   final trimmed = markdown.trim();
   if (trimmed.isEmpty) return const [];
   final document = _pdfMarkdownDocument();
-  return _PdfBlockConverter(
-    chapterPageBreak: false,
-  ).spans(document.parseInline(trimmed), const PdfSpan(''));
+  final converter = _PdfBlockConverter(chapterPageBreak: false);
+  final lines = trimmed.split('\n');
+  return [
+    for (var i = 0; i < lines.length; i++) ...[
+      if (i > 0) const PdfSpan('\n'),
+      ...converter.spans(document.parseInline(lines[i]), const PdfSpan('')),
+    ],
+  ];
 }
 
 /// De marker die `<!-- toc -->` vervangt tijdens de parse. Geen leestekens die

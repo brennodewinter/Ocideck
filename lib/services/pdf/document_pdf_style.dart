@@ -76,7 +76,7 @@ class DocumentPdfStyle {
       headerFontSize: theme.documentChromeFontSize(true),
       footerFontSize: theme.documentChromeFontSize(false),
       showPageNumbers: theme.documentShowPageNumbers,
-      bandTextColor: _color(theme.documentBandTextColor, PdfColors.grey600),
+      bandTextColor: _color(theme.effectiveDocumentBandTextColor, text),
       bandBackgroundColor: theme.documentBandBackgroundColor == null
           ? null
           : _color(theme.documentBandBackgroundColor, PdfColors.grey200),

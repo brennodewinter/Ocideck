@@ -5,6 +5,7 @@ import 'package:markdown_quill/markdown_quill.dart';
 import '../services/form_document_blocks.dart';
 import '../services/pentest_blocks.dart';
 import '../services/plain_document_table.dart';
+import 'document_blank_lines.dart' show withDocumentBlankLineSpacers;
 import 'footnote_embed_syntax.dart';
 import 'form_block_embed_syntax.dart';
 import 'underline_tag_syntax.dart';
@@ -125,7 +126,13 @@ class MarkdownQuillCodec {
           EmbeddableSourceFragment.fromMdSyntax,
     },
   );
-  static final _deltaToMd = DeltaToMarkdown(
+  static final _deltaToMd = _markdownWriter();
+  static final _documentDeltaToMd = _markdownWriter(spacerMarker);
+
+  static DeltaToMarkdown _markdownWriter([
+    String? emptyParagraph,
+  ]) => DeltaToMarkdown(
+    emptyParagraphMarkdown: emptyParagraph,
     customEmbedHandlers: {
       EmbeddableTimelineTable.timelineType: EmbeddableTimelineTable.toMdSyntax,
       EmbeddableOciMarkedTable.blockType: EmbeddableOciMarkedTable.toMdSyntax,
@@ -175,7 +182,10 @@ class MarkdownQuillCodec {
     },
   );
 
-  static Document documentFromMarkdown(String markdown) {
+  static Document documentFromMarkdown(
+    String markdown, {
+    bool preserveDocumentSpacing = false,
+  }) {
     // Ook witruimte-alleen invoer is leeg: `_mdToDelta` levert daar een lege
     // delta op en `Document.fromDelta` weigert die. Een body van `'\n'` —
     // zoals een omgezet leeg deck die produceert (#3107) — crashte zo.
@@ -189,14 +199,24 @@ class MarkdownQuillCodec {
     // `x-embed-source-fragment` met de bron verbatim (#2463). Zo blijft alleen
     // dát stuk bron — de rest van het document bewerk je gewoon visueel.
     return Document.fromDelta(
-      _mdToDelta.convert(wrapSourceFragments(markdown)),
+      _mdToDelta.convert(
+        wrapSourceFragments(
+          preserveDocumentSpacing
+              ? withDocumentBlankLineSpacers(markdown)
+              : markdown,
+        ),
+      ),
     );
   }
 
-  static String markdownFromDocument(Document document) {
+  static String markdownFromDocument(
+    Document document, {
+    bool preserveDocumentSpacing = false,
+  }) {
     noteWork('visuele editor → Markdown');
     // convertDocument: de boom bestaat al — de delta-weg bouwde hem opnieuw.
-    final raw = _deltaToMd.convertDocument(document).trimRight();
+    final writer = preserveDocumentSpacing ? _documentDeltaToMd : _deltaToMd;
+    final raw = writer.convertDocument(document).trimRight();
     return _normalizeQuillOutput(raw).replaceAll(_writtenOutRule, '---');
   }
 

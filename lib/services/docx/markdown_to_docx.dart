@@ -646,7 +646,9 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         _stack.add(_Ctx.tableRow);
         final inHeader = _stack.any((c) => c == _Ctx.tableHeader);
         output.write('<w:tr>');
-        if (inHeader && !_plainTable) {
+        if (_plainTable) {
+          output.write('<w:trPr><w:cantSplit/></w:trPr>');
+        } else if (inHeader) {
           output.write('<w:trPr><w:tblHeader/></w:trPr>');
         }
         return true;
@@ -696,8 +698,11 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     final style = _plainTable
         ? 'Normal'
         : (header ? 'TableHeading' : 'TableContents');
+    // Houd de koprij bij de eerste gegevensrij. Latere rijen kunnen nog naar
+    // de volgende bladzijde verhuizen.
+    final keepNext = _plainTable && header ? '<w:keepNext/>' : '';
     _openParagraph(
-      '<w:pPr><w:pStyle w:val="$style"/>'
+      '<w:pPr><w:pStyle w:val="$style"/>$keepNext'
       '<w:jc w:val="${_alignVal(element.attributes['align'])}"/></w:pPr>',
     );
   }

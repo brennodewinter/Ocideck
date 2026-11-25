@@ -30,7 +30,7 @@ import '../export_bundle.dart';
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver, MarpHtmlService;
 import 'document_pdf_blocks.dart';
-import 'document_pdf_fonts.dart';
+import 'document_pdf_font_assets.dart';
 import 'document_pdf_renderer.dart';
 import 'document_pdf_svg.dart';
 import 'document_pdf_style.dart';
@@ -180,7 +180,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
 
   // De klasse (schreef/schreefloos) volgt de letter die de huisstijl vraagt,
   // niet de plaatsvervanger op het scherm (#2119).
-  final fonts = DocumentPdfFonts.forFamily(
+  final fonts = await loadDocumentPdfTypefaces(
     theme.exportFontFamily,
     headingFamily: theme.exportDocumentHeadingFontFamily,
     fallbackFonts: fallbackFonts,
@@ -227,6 +227,14 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   );
 
   final fields = documentChromeFields(deck);
+  final headerText = resolveDocumentChromeTemplate(
+    theme.documentHeaderText.trim(),
+    fields,
+  );
+  final footerText = resolveDocumentChromeTemplate(
+    theme.documentFooterText.trim(),
+    fields,
+  );
   // De twee opmaakrondes plus `document.save()` zijn het zwaarste stuk van de
   // export — op een document van honderd pagina's seconden puur CPU. Alles wat
   // de UI-isolate zelf nodig had (afbeeldingen, grafieken, logo, lettertypen)
@@ -246,14 +254,8 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
       images: images,
       graphics: graphics,
       chrome: DocumentPdfChrome(
-        headerText: resolveDocumentChromeTemplate(
-          theme.documentHeaderText.trim(),
-          fields,
-        ),
-        footerText: resolveDocumentChromeTemplate(
-          theme.documentFooterText.trim(),
-          fields,
-        ),
+        headerText: headerText,
+        footerText: footerText,
         showPageNumbers: theme.documentShowPageNumbers,
         tlpLabel: deck.tlp == TlpLevel.none ? '' : deck.tlp.label,
         tlpColor: deck.tlp == TlpLevel.none
@@ -284,6 +286,8 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     unsupportedCharacters: fonts.unsupportedRunes(
       [
         _textOf(blocks),
+        for (final band in [headerText, footerText])
+          for (final span in markdownToPdfSpans(band)) span.text,
         for (final graphic in graphics.values)
           if (graphic.svg case final svg?) svgTextContent(svg),
       ].join(' '),

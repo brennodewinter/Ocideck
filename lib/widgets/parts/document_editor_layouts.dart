@@ -56,6 +56,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   void _applyVisualCaretToChrome(String plain, int plainOffset) {
     final sourceOffset = MarkdownCaretMap.of(
       _controller.text,
+      preserveDocumentSpacing: true,
     ).sourceOffsetOf(plainOffset).clamp(0, _controller.text.length);
     if (_controller.selection !=
         TextSelection.collapsed(offset: sourceOffset)) {

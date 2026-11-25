@@ -39,8 +39,13 @@ $plainDocumentTableMarker
       source,
       tableTheme: const ThemeProfile(tableAccentHeaderBorder: true),
     );
-    final plain = latex.substring(0, latex.indexOf(r'\end{tabular}'));
-    expect(plain, contains(r'\begin{tabular}{lr}'));
+    final plain = latex.substring(0, latex.indexOf(r'\end{tabularx}'));
+    expect(
+      plain,
+      contains(
+        r'\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}X@{}}',
+      ),
+    );
     expect(plain, contains('Naam & Functie'));
     expect(plain, isNot(contains(r'\textbf')));
     expect(plain, isNot(contains(r'\hline')));

@@ -1,24 +1,7 @@
-// De letters van de PDF-export.
-//
-// **Waarom niet het lettertype van het stijlprofiel?** Omdat de LaTeX-export dat
-// ook niet doet: die zet geen enkel font in de preamble en laat de compiler zijn
-// eigen letter kiezen. Een tekstlaag-export draagt de *structuur* en de
-// *paginaopmaak* van het document, niet de typografie van dít scherm — dat is
-// dezelfde grens als bij `theme:`, dat wél wordt opgelost maar niet als naam
-// meereist (FILE_FORMAT.md §14.5).
-//
-// **Waarom de standaardfonts van PDF?** De app bundelt alleen *variabele*
-// fonts, en die dragen precies één instantie in hun omtrekken: de gewone
-// snede. Wie daarmee vet zet, zet niets vet — er ís geen vette omtrek in het
-// bestand. De veertien standaardfonts die elke PDF-lezer zelf heeft (Times,
-// Helvetica, Courier) dragen wél een echte vette en cursieve snede, kosten geen
-// enkele byte in het bestand, en zijn in elke lezer identiek.
-//
-// **En de rest van Unicode dan?** Die standaardfonts reiken tot Latin-1. Alles
-// daarbuiten — Pools, Grieks, Cyrillisch — valt terug op een gebundeld font dat
-// de aanroeper meegeeft. [DocumentPdfFonts.unsupportedRunes] zegt eerlijk welke
-// tekens ook dáár niet in staan, zodat de export kan waarschuwen in plaats van
-// ze stil te laten verdwijnen.
+// De documentexport sluit Unicode-lettertypen met echte vette en cursieve
+// sneden in. Ze volgt de schreefklasse van het gekozen profiel. Aanroepers
+// zonder lettertypebestanden kunnen met forFamily de ingebouwde PDF-fonts
+// gebruiken. Beide paden ondersteunen aanvullende terugvalfonts per teken.
 
 import 'dart:typed_data';
 
@@ -26,6 +9,13 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import '../font_substitution.dart';
+
+typedef DocumentPdfTypeface = ({
+  ByteData regular,
+  ByteData bold,
+  ByteData italic,
+  ByteData boldItalic,
+});
 
 /// De lettersneden waarmee de PDF wordt gezet.
 class DocumentPdfFonts {
@@ -41,6 +31,7 @@ class DocumentPdfFonts {
     pw.Font? headingBoldItalic,
     this.fallback = const [],
     this.fallbackCoverages = const [],
+    this.embeddedCoverage,
   }) : headingBase = headingBase ?? base,
        headingBold = headingBold ?? bold,
        headingItalic = headingItalic ?? italic,
@@ -65,7 +56,7 @@ class DocumentPdfFonts {
   final pw.Font headingItalic;
   final pw.Font headingBoldItalic;
 
-  /// De fonts waar een teken op terugvalt dat de standaardsnede niet kent.
+  /// De fonts waar een teken op terugvalt dat de gekozen snede niet kent.
   final List<pw.Font> fallback;
 
   /// Wat élk terugvalfont dekt, in dezelfde volgorde als [fallback].
@@ -82,6 +73,47 @@ class DocumentPdfFonts {
   /// Wat de terugvalfonts sámen dekken — de vraag die voor de lopende tekst
   /// telt.
   final Map<int, int> fallbackCoverage;
+  final Set<int>? embeddedCoverage;
+
+  factory DocumentPdfFonts.embedded({
+    required DocumentPdfTypeface body,
+    required DocumentPdfTypeface heading,
+    required ByteData mono,
+    List<ByteData> fallbackFonts = const [],
+  }) {
+    final coverages = [
+      for (final face in {body, heading})
+        for (final bytes in [
+          face.regular,
+          face.bold,
+          face.italic,
+          face.boldItalic,
+        ])
+          TtfParser(bytes).charToGlyphIndexMap.keys.toSet(),
+    ];
+    final base = pw.Font.ttf(body.regular);
+    final bold = pw.Font.ttf(body.bold);
+    final italic = pw.Font.ttf(body.italic);
+    final boldItalic = pw.Font.ttf(body.boldItalic);
+    return DocumentPdfFonts(
+      base: base,
+      bold: bold,
+      italic: italic,
+      boldItalic: boldItalic,
+      headingBase: heading == body ? base : pw.Font.ttf(heading.regular),
+      headingBold: heading == body ? bold : pw.Font.ttf(heading.bold),
+      headingItalic: heading == body ? italic : pw.Font.ttf(heading.italic),
+      headingBoldItalic: heading == body
+          ? boldItalic
+          : pw.Font.ttf(heading.boldItalic),
+      mono: pw.Font.ttf(mono),
+      embeddedCoverage: coverages.reduce((a, b) => a.intersection(b)),
+      fallback: [for (final bytes in fallbackFonts) pw.Font.ttf(bytes)],
+      fallbackCoverages: [
+        for (final bytes in fallbackFonts) TtfParser(bytes).charToGlyphIndexMap,
+      ],
+    );
+  }
 
   /// Bouwt de sneden voor een document met een *schreefloze* of *schreef*-letter,
   /// afgeleid van [fontFamily] van het stijlprofiel.
@@ -197,8 +229,12 @@ class DocumentPdfFonts {
   /// de rest van het document ook heeft.
   SvgTypesetting svgTypesetting(String svg) {
     final runes = svg.runes.toSet();
-    if (!runes.any((rune) => rune > 0xFF)) {
+    final embedded = embeddedCoverage;
+    if (embedded == null && !runes.any((rune) => rune > 0xFF)) {
       return const SvgTypesetting.standard();
+    }
+    if (embedded != null && runes.every(embedded.contains)) {
+      return SvgTypesetting.withFont(base);
     }
     for (var index = 0; index < fallback.length; index++) {
       final coverage = index < fallbackCoverages.length
@@ -232,10 +268,10 @@ class DocumentPdfFonts {
   }
 
   bool _isCovered(int rune) {
-    // De standaardsneden zetten Latin-1; regelovergangen en tabs zijn geen
-    // letters maar horen hier evengoed niet in de klaagzang thuis.
-    if (rune < 0x100) return true;
-    return fallbackCoverage.containsKey(rune);
+    // Regelovergangen en tabs krijgen een opmaakfunctie, geen glyph.
+    if (rune == 9 || rune == 10 || rune == 13) return true;
+    return (embeddedCoverage?.contains(rune) ?? rune < 0x100) ||
+        fallbackCoverage.containsKey(rune);
   }
 }
 

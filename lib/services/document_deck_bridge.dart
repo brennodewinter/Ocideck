@@ -7,6 +7,7 @@ import 'markdown_table_codec.dart';
 import 'form_document_blocks.dart';
 import 'pentest_blocks.dart';
 import 'document_timeline.dart';
+import 'plain_document_table.dart';
 
 /// Converteert tussen een plat Markdown-**document** en een getypeerd
 /// [Deck]. Twee zuivere, headless functies — bewust hier en niet verspreid over
@@ -79,16 +80,15 @@ class DocumentDeckBridge {
       final line = lines[i];
       final trimmed = line.trim();
 
-      // De tijdlijnmarker en zijn direct volgende GFM-tabel zijn één atomair
+      // Een tijdlijn- of opmaakmarker en zijn direct volgende tabel zijn één atomair
       // blok. `customMarkdown` bewaart de rauwe bron voor de documentrondgang;
       // `tableRows` houdt dezelfde inhoud beschikbaar voor tabelweergave en
       // OciWacht-kolomcontext. De marker los in flow zetten zou bij terugkeer
       // een lege regel invoegen en daarmee zijn betekenis verliezen.
-      if (isDocumentTimelineEnvelope(
-        line,
-        i + 1 < lines.length ? lines[i + 1] : null,
-        i + 2 < lines.length ? lines[i + 2] : null,
-      )) {
+      final header = i + 1 < lines.length ? lines[i + 1] : null;
+      final delimiter = i + 2 < lines.length ? lines[i + 2] : null;
+      if (isDocumentTimelineEnvelope(line, header, delimiter) ||
+          opensPlainDocumentTable(line, header, delimiter)) {
         flushFlow();
         var j = i + 3;
         while (j < lines.length && isMarkdownTableLine(lines[j])) {

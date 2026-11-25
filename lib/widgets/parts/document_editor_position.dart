@@ -146,7 +146,7 @@ class _DocPosition {
   /// naar de bron.
   int _visualViewAnchor() {
     final text = _state._controller.text;
-    final map = MarkdownCaretMap.of(text);
+    final map = MarkdownCaretMap.of(text, preserveDocumentSpacing: true);
     int toSource(int visual) =>
         map.sourceOffsetOf(visual).clamp(0, text.length);
     final state = _state._visualEditorKey.currentState;
@@ -208,6 +208,7 @@ class _DocPosition {
         final render = state.renderEditor;
         final visual = MarkdownCaretMap.of(
           _state._controller.text,
+          preserveDocumentSpacing: true,
         ).visualOffsetOf(sel.baseOffset).clamp(0, render.document.length - 1);
         _scrollRectIntoView(
           sc,

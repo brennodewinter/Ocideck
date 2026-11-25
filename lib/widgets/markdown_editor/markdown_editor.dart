@@ -7,6 +7,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
 import '../../utils/footnote_embed_syntax.dart';
+import '../../utils/spacer_embed_syntax.dart' show EmbeddableSpacer;
 import '../editors/deck_search_target.dart';
 import '../editors/editor_text_controller.dart';
 import '../reader/document_search_overlay.dart';
@@ -450,9 +451,9 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       // (`**vet**`) of een titel die óók in de lopende tekst voorkomt,
       // landt op de kop zelf — niet op de eerste teksttreffer of op
       // positie 0 omdat `indexOf` de titel niet letterlijk vindt.
-      index = MarkdownCaretMap.of(
-        widget.controller.text,
-      ).visualOffsetOf(markdownOffset.clamp(0, widget.controller.text.length));
+      index = _caretMap.visualOffsetOf(
+        markdownOffset.clamp(0, widget.controller.text.length),
+      );
     } else if (title != null && title.isNotEmpty) {
       final found = plain.indexOf(title);
       if (found >= 0) index = found;
@@ -481,7 +482,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     }
     final quill = _quillController;
     if (quill == null) return;
-    final map = MarkdownCaretMap.of(widget.controller.text);
+    final map = _caretMap;
     final plain = quill.document.toPlainText();
     final vStart = map.visualOffsetOf(s).clamp(0, plain.length);
     final vEnd = map.visualOffsetOf(e).clamp(vStart, plain.length);
@@ -507,6 +508,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     _scrollController = ResumeScrollGuard(focusNode: _focusNode);
     final document = MarkdownQuillCodec.documentFromMarkdown(
       normalizeRichTextMarkdownForStorage(widget.controller.text),
+      preserveDocumentSpacing: widget.editorTheme.documentTypography,
     );
     _quillController = QuillController(
       document: document,
@@ -522,6 +524,18 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
           length < 0 ||
           index > quill.document.length ||
           (length > 0 && index + length >= quill.document.length)) {
+        return false;
+      }
+      if (widget.editorTheme.documentTypography &&
+          data == '' &&
+          _endsWithSpacerLine(quill.document, index, length)) {
+        quill.compose(
+          Delta()
+            ..retain(index)
+            ..delete(length + 1),
+          TextSelection.collapsed(offset: index),
+          ChangeSource.local,
+        );
         return false;
       }
       if (index < quill.document.length) return true;
@@ -541,14 +555,32 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     _quillController!.addListener(_onQuillChanged);
   }
 
+  // De spacer en zijn regelafsluiter vormen samen één verwijderbaar blok.
+  // Anders laat het wissen van de embed een lege alinea achter.
+  bool _endsWithSpacerLine(Document document, int index, int length) {
+    final end = index + length;
+    if (length == 0 || end >= document.length - 1) return false;
+    final line = document.queryChild(end - 1).node;
+    if (line is! Line || line.length != 2 || line.documentOffset != end - 1) {
+      return false;
+    }
+    return switch (line.first) {
+      Embed(value: Embeddable(type: EmbeddableSpacer.spacerType)) => true,
+      _ => false,
+    };
+  }
+
+  MarkdownCaretMap get _caretMap => MarkdownCaretMap.of(
+    widget.controller.text,
+    preserveDocumentSpacing: widget.editorTheme.documentTypography,
+  );
+
   /// De cursorpositie in het verse Quill-document die hoort bij de cursor van
   /// de bron. Buiten bereik of zonder geldige selectie: het begin.
   int _visualCaretFromSource(Document document) {
     final selection = widget.controller.selection;
     if (!selection.isValid) return 0;
-    final offset = MarkdownCaretMap.of(
-      widget.controller.text,
-    ).visualOffsetOf(selection.baseOffset);
+    final offset = _caretMap.visualOffsetOf(selection.baseOffset);
     // Het document sluit af met een regelafsluiter; de cursor mag daar niet
     // achter staan.
     return offset.clamp(0, document.length - 1);
@@ -558,9 +590,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// platte tekst van de visuele stand.
   void _placeSourceCaret(int visualOffset) {
     final text = widget.controller.text;
-    final offset = MarkdownCaretMap.of(
-      text,
-    ).sourceOffsetOf(visualOffset).clamp(0, text.length);
+    final offset = _caretMap.sourceOffsetOf(visualOffset).clamp(0, text.length);
     _syncingMarkdown = true;
     widget.controller.selection = TextSelection.collapsed(offset: offset);
     _syncingMarkdown = false;
@@ -593,6 +623,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     _markdownSnapshot = widget.controller.text;
     quill.document = MarkdownQuillCodec.documentFromMarkdown(
       normalizeRichTextMarkdownForStorage(_markdownSnapshot),
+      preserveDocumentSpacing: widget.editorTheme.documentTypography,
     );
     quill.updateSelection(
       TextSelection.collapsed(offset: _visualCaretFromSource(quill.document)),
@@ -672,7 +703,10 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     final quill = _quillController;
     if (quill == null || !_quillContentSyncPending) return;
     _quillContentSyncPending = false;
-    final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
+    final markdown = MarkdownQuillCodec.markdownFromDocument(
+      quill.document,
+      preserveDocumentSpacing: widget.editorTheme.documentTypography,
+    );
     if (markdown == _markdownSnapshot) return;
     _syncingMarkdown = true;
     _markdownSnapshot = markdown;

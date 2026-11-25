@@ -28,7 +28,7 @@ import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/bullet_marker_svg.dart';
 import '../../utils/bundled_asset.dart';
-import '../../utils/spacer_embed_syntax.dart';
+import '../../utils/document_blank_lines.dart';
 import '../../utils/heading_anchors.dart';
 import '../../utils/footnotes.dart';
 import '../../utils/image_limits.dart';
@@ -556,9 +556,8 @@ class DocumentMarkdownView extends StatelessWidget {
     // auteur ze parkeerde, en de noot hoort onderaan het vel of achterin.
     // Hier eruit, zodat élke ingang (weergave, zoektekst, pagina-einden,
     // koppen) dezelfde blokken ziet en de indices nooit uiteenlopen.
-    final lines = _readableSource(
-      markdown,
-    ).replaceAll('\r\n', '\n').split('\n');
+    final source = withDocumentBlankLineSpacers(_readableSource(markdown));
+    final lines = source.replaceAll('\r\n', '\n').split('\n');
     final blocks = <_Block>[];
 
     var i = 0;

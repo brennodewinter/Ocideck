@@ -400,6 +400,14 @@ pw.Widget _band(
     fontSize: style.bandSize,
     color: style.bandTextColor,
   );
+  final bandFontSize =
+      (top ? style.headerFontSize : style.footerFontSize) ?? style.bandSize;
+  // Keep room for body content even when a profile contains a very long band.
+  final maxLines = math.max(
+    1,
+    (context.page.pageFormat.availableHeight / (4 * bandFontSize * 1.5))
+        .floor(),
+  );
   final children = <pw.Widget>[
     if (showLogo && !chrome.logoAtRight)
       _logo(logo, logoWidth, logoHeight)
@@ -408,11 +416,8 @@ pw.Widget _band(
     pw.Expanded(
       child: builder.bandText(
         spans,
-        style: textStyle.copyWith(
-          fontSize:
-              (top ? style.headerFontSize : style.footerFontSize) ??
-              style.bandSize,
-        ),
+        style: textStyle.copyWith(fontSize: bandFontSize),
+        maxLines: maxLines,
       ),
     ),
     if (!top && chrome.showPageNumbers)

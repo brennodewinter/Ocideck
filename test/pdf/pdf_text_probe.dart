@@ -6,15 +6,8 @@
 // punt: de vraag is of het geredigeerde gegeven écht niet in het geleverde
 // bestand staat, niet of de laag ervoor hem netjes had weggehaald.
 //
-// Hoe het werkt: de tekst van de veertien standaardsneden wordt in een PDF als
-// gewone (WinAnsi-)tekens in de inhoudsstroom geschreven, tussen haakjes en
-// gevolgd door `Tj` of `TJ`. Die stromen zijn samengeperst met zlib; dit hulpje
-// pakt ze uit en haalt de letterlijke stukken eruit.
-//
-// Wat het NIET ziet: tekst die op het terugvalfont is gezet (alles buiten
-// Latin-1). Die staat als glyph-nummers in het bestand en is zonder de
-// font-tabellen niet terug te lezen. Tests die op de tekst zelf willen
-// controleren, gebruiken dus Latijnse tekst.
+// De standaardsneden schrijven letterlijke WinAnsi-tekst. Ingesloten fonts
+// schrijven hexadecimale glyph-codes die hun ToUnicode-tabel decodeert.
 
 import 'dart:convert';
 import 'dart:io';
@@ -22,33 +15,63 @@ import 'dart:typed_data';
 
 /// De letterlijke stukken tekst uit alle inhoudsstromen van [bytes],
 /// aaneengeregen met een spatie ertussen.
-String pdfVisibleText(Uint8List bytes) {
-  final text = StringBuffer();
-  for (final stream in _inflatedStreams(bytes)) {
-    for (final match in _literalString.allMatches(stream)) {
-      text
-        ..write(_unescape(match.group(1)!))
-        ..write(' ');
-    }
-  }
-  return text.toString();
+String pdfVisibleText(Uint8List bytes) =>
+    pdfVisibleTextPerPage(bytes).join(' ');
+
+/// De zichtbare tekst per pagina-inhoudsstroom, in documentvolgorde.
+List<String> pdfVisibleTextPerPage(Uint8List bytes) {
+  final source = latin1.decode(bytes);
+  final streams = Map.fromEntries(_pdfStreams(bytes));
+  final unicodeMaps = {
+    for (final font in _fontUnicodeRef.allMatches(source))
+      font.group(1)!: _unicodeMappings(streams[int.parse(font.group(2)!)]!),
+  };
+  return [
+    for (final stream in streams.values)
+      if (_textBlock.hasMatch(stream))
+        [
+          for (final block in _textBlock.allMatches(stream))
+            ..._textRuns(block.group(2)!, unicodeMaps[block.group(1)]),
+        ].join(' '),
+  ];
 }
 
-/// De zichtbare tekst per inhoudsstroom — voor een tekst-PDF is dat één
-/// stroom per bladzijde, in documentvolgorde.
-///
-/// Waarom naast [pdfVisibleText]: sommige vragen gaan over wát er op één blad
-/// staat en niet of het ergens in het bestand voorkomt. "Staat de kopregel van
-/// een tabel alleen op een blad, zonder een enkele inhoudsrij?" is er zo een
-/// (#1790).
-List<String> pdfVisibleTextPerPage(Uint8List bytes) => [
-  for (final stream in _inflatedStreams(bytes))
-    if (RegExp(r'\bBT\b').hasMatch(stream))
-      [
-        for (final match in _literalString.allMatches(stream))
-          _unescape(match.group(1)!),
-      ].join(' '),
-];
+final _fontUnicodeRef = RegExp(
+  r'/Name/(F\d+)(?:(?!endobj)[\s\S])*?/ToUnicode\s+(\d+) 0 R',
+);
+final _textBlock = RegExp(r'\bBT\s+/(F\d+)\s+([\s\S]*?)\bET\b');
+final _unicodePair = RegExp(
+  r'^<([0-9A-Fa-f]{4})> <([0-9A-Fa-f]+)>$',
+  multiLine: true,
+);
+final _hexString = RegExp(r'<([0-9A-Fa-f]+)>');
+final _utf16Hex = RegExp(r'[0-9A-Fa-f]{4}');
+
+Map<String, String> _unicodeMappings(String stream) => {
+  for (final section in RegExp(
+    r'beginbfchar\n([\s\S]*?)endbfchar',
+  ).allMatches(stream))
+    for (final pair in _unicodePair.allMatches(section.group(1)!))
+      pair.group(1)!.toUpperCase(): String.fromCharCodes(
+        _utf16Hex
+            .allMatches(pair.group(2)!)
+            .map((match) => int.parse(match.group(0)!, radix: 16)),
+      ),
+};
+
+Iterable<String> _textRuns(String text, Map<String, String>? unicode) {
+  if (unicode == null) {
+    return _literalString.allMatches(text).map((m) => _unescape(m.group(1)!));
+  }
+  return _hexString
+      .allMatches(text)
+      .map(
+        (run) => _utf16Hex
+            .allMatches(run.group(1)!)
+            .map((glyph) => unicode[glyph.group(0)!.toUpperCase()] ?? '\uFFFD')
+            .join(),
+      );
+}
 
 /// Baselines of matching literal text runs in the rendered PDF content.
 List<double> pdfTextBaselines(Uint8List bytes, String text) => [
@@ -166,24 +189,25 @@ final _outlineTitle = RegExp(r'/Title\s*\(((?:[^()\\]|\\.)*)\)');
 /// Alle uitgepakte inhoudsstromen. Een stroom die niet met zlib is samengeperst
 /// (of die niet uitpakt) wordt overgeslagen: die draagt dan geen tekst die dit
 /// hulpje kan lezen.
-Iterable<String> _inflatedStreams(Uint8List bytes) sync* {
+Iterable<String> _inflatedStreams(Uint8List bytes) =>
+    _pdfStreams(bytes).map((entry) => entry.value);
+
+final _streamStart = RegExp(
+  r'^(\d+) 0 obj\r?\n<<[^\n]*>>[ \r\n]*stream\r?\n',
+  multiLine: true,
+);
+
+Iterable<MapEntry<int, String>> _pdfStreams(Uint8List bytes) sync* {
   final raw = latin1.decode(bytes);
-  var index = 0;
-  while (true) {
-    final start = raw.indexOf('stream', index);
-    if (start < 0) return;
-    final end = raw.indexOf('endstream', start);
+  for (final stream in _streamStart.allMatches(raw)) {
+    final end = raw.indexOf('endstream', stream.end);
     if (end < 0) return;
-    index = end + 'endstream'.length;
-    // Achter `stream` staat een regelovergang die niet bij de gegevens hoort.
-    var from = start + 'stream'.length;
-    if (from < raw.length && raw.codeUnitAt(from) == 0x0D) from++;
-    if (from < raw.length && raw.codeUnitAt(from) == 0x0A) from++;
-    final data = bytes.sublist(from, end);
+    final data = bytes.sublist(stream.end, end);
+    final id = int.parse(stream.group(1)!);
     try {
-      yield latin1.decode(zlib.decode(data), allowInvalid: true);
+      yield MapEntry(id, latin1.decode(zlib.decode(data)));
     } on FormatException {
-      yield latin1.decode(data, allowInvalid: true);
+      yield MapEntry(id, latin1.decode(data));
     }
   }
 }
