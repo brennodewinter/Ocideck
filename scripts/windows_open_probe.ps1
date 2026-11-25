@@ -251,6 +251,45 @@ function Find-Marker($Root, [string]$Marker) {
     return $null
 }
 
+function Wait-WinRtOperation($Operation, [Type]$ResultType) {
+    $task = $script:winRtAsTask.MakeGenericMethod($ResultType).Invoke($null, @($Operation))
+    if (-not $task.Wait(5000)) { throw 'Native OCR did not return in time.' }
+    return $task.Result
+}
+
+function Get-SettingsSearchPosition($Bounds) {
+    # Flutter's Windows accessibility tree can still expose the welcome screen
+    # while the rendered modal is visible. Read the actual search field on screen.
+    $image = New-Object Drawing.Bitmap($Bounds.Width, $Bounds.Height)
+    $graphics = [Drawing.Graphics]::FromImage($image)
+    $path = Join-Path $EvidenceDirectory 'window-settings.png'
+    try {
+        $graphics.CopyFromScreen($Bounds.Location, [Drawing.Point]::Empty, $Bounds.Size)
+        $image.Save($path, [Drawing.Imaging.ImageFormat]::Png)
+    } finally {
+        $graphics.Dispose()
+        $image.Dispose()
+    }
+    $file = Wait-WinRtOperation ([Windows.Storage.StorageFile]::GetFileFromPathAsync($path)) ([Windows.Storage.StorageFile])
+    $stream = Wait-WinRtOperation ($file.OpenReadAsync()) ([Windows.Storage.Streams.IRandomAccessStreamWithContentType])
+    try {
+        $decoder = Wait-WinRtOperation ([Windows.Graphics.Imaging.BitmapDecoder]::CreateAsync($stream)) ([Windows.Graphics.Imaging.BitmapDecoder])
+        $bitmap = Wait-WinRtOperation ($decoder.GetSoftwareBitmapAsync()) ([Windows.Graphics.Imaging.SoftwareBitmap])
+        try {
+            $text = Wait-WinRtOperation ($script:ocr.RecognizeAsync($bitmap)) ([Windows.Media.Ocr.OcrResult])
+            foreach ($line in $text.Lines) {
+                if ($line.Text -notmatch 'Search a setting|Zoek een instelling') { continue }
+                foreach ($word in $line.Words) {
+                    if ($word.Text -notmatch '^(setting|instelling)$') { continue }
+                    $rect = $word.BoundingRect
+                    return [Drawing.Point]::new(($Bounds.X + [int]($rect.X + $rect.Width / 2)),
+                                                ($Bounds.Y + [int]($rect.Y + $rect.Height / 2)))
+                }
+            }
+        } finally { $bitmap.Dispose() }
+    } finally { $stream.Dispose() }
+}
+
 function Test-NativeWindow {
     [OpenProbeWindow]::EnablePerMonitorDpi()
     $handle = $script:app.MainWindowHandle
@@ -289,26 +328,32 @@ function Test-NativeWindow {
     if (-not [OpenProbeWindow]::SetCursorPos($buttonX, $buttonY)) {
         throw 'Could not move the pointer over Settings.'
     }
+    Start-Sleep -Milliseconds 120
     [OpenProbeWindow]::Click()
-    [void](Wait-Probe 'Settings opened by native mouse input' {
-        Find-Control (Get-AppRoot) '^(Appearance|Uiterlijk|Storage|Opslag)$'
-    })
-    $search = Wait-Probe 'Settings search field' {
-        $nodes = [OpenProbeWindow]::Snapshot($handle)
-        $edits = @($nodes | Where-Object { $_.Role -eq 42 -and -not $_.IsOffscreen })
-        $named = $edits | Where-Object { $_.Name -match '(Search a setting|Zoek een instelling)' } |
-            Select-Object -First 1
-        if ($named) { return $named }
-        $edits | Sort-Object { $_.Bounds()[1] } | Select-Object -First 1
+
+    Add-Type -AssemblyName System.Runtime.WindowsRuntime
+    $null = [Windows.Storage.StorageFile, Windows.Storage, ContentType=WindowsRuntime]
+    $null = [Windows.Storage.Streams.IRandomAccessStreamWithContentType, Windows.Storage.Streams, ContentType=WindowsRuntime]
+    $null = [Windows.Graphics.Imaging.BitmapDecoder, Windows.Graphics.Imaging, ContentType=WindowsRuntime]
+    $null = [Windows.Graphics.Imaging.SoftwareBitmap, Windows.Graphics.Imaging, ContentType=WindowsRuntime]
+    $null = [Windows.Media.Ocr.OcrEngine, Windows.Foundation, ContentType=WindowsRuntime]
+    $null = [Windows.Media.Ocr.OcrResult, Windows.Foundation, ContentType=WindowsRuntime]
+    $script:winRtAsTask = [System.WindowsRuntimeSystemExtensions].GetMethods() |
+        Where-Object { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and
+            $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' }
+    $script:ocr = [Windows.Media.Ocr.OcrEngine]::TryCreateFromUserProfileLanguages()
+    if (-not $script:ocr) { throw 'No native OCR language is available on this runner.' }
+    $display = [Windows.Forms.Screen]::FromHandle($handle).Bounds
+    $search = Wait-Probe 'visible Settings search after native mouse input' {
+        Get-SettingsSearchPosition $display
     }
-    $searchBounds = $search.Bounds()
-    if ($searchBounds[2] -le 0 -or $searchBounds[3] -le 0) { throw 'Settings search has no visible bounds.' }
+    [void][OpenProbeWindow]::SetCursorPos($search.X, ($search.Y - [int](27 * $scale)))
+    Start-Sleep -Milliseconds 250
     $before = Wait-Probe 'native cursor outside the search field' {
         $cursor = [OpenProbeWindow]::Cursor()
         if ($cursor -ne [IntPtr]::Zero) { $cursor }
     }
-    [void][OpenProbeWindow]::SetCursorPos(($searchBounds[0] + [int]($searchBounds[2] / 2)),
-                                         ($searchBounds[1] + [int]($searchBounds[3] / 2)))
+    [void][OpenProbeWindow]::SetCursorPos($search.X, $search.Y)
     [void](Wait-Probe 'native cursor changes over Settings search' {
         $hover = [OpenProbeWindow]::Cursor()
         return ($hover -ne [IntPtr]::Zero -and $hover -ne $before)
@@ -316,7 +361,7 @@ function Test-NativeWindow {
     Save-ProbeEvidence 'window-settings-clicked'
     [Windows.Forms.SendKeys]::SendWait('{ESC}')
     [void](Wait-Probe 'Settings dismissed' {
-        $null -eq (Find-Control (Get-AppRoot) '^(Appearance|Uiterlijk|Storage|Opslag)$')
+        $null -eq (Get-SettingsSearchPosition $display)
     })
     [ordered]@{ sizes = $snapshots; cursorChanged = $true; settingsClicked = $true } |
         ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory 'window.json')
