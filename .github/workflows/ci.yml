@@ -377,7 +377,7 @@ jobs:
 
       - name: Test
         run: |
-          flutter test --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark'
+          flutter test --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix'
           flutter test --concurrency=1 test --tags benchmark
 
   # Build the web bundle and assert it kept its hardening (strict CSP,

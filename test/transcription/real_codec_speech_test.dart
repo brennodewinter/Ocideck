@@ -1,4 +1,4 @@
-@Tags(['benchmark', 'codec-matrix'])
+@Tags(['codec-matrix'])
 library;
 
 import 'dart:convert';

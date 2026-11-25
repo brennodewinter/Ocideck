@@ -1,4 +1,4 @@
-@Tags(['benchmark', 'codec-matrix'])
+@Tags(['codec-matrix'])
 library;
 
 // Explicit installed-decoder/release probe, excluded from the ordinary VM gate.

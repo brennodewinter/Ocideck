@@ -14,6 +14,8 @@
 # `benchmark` loopt in de verplichte aparte meetstap, zonder andere test-
 # isolates of coverage-instrumentatie. De functionele schaaltest blijft gewoon
 # in de parallelle suite. `make test` en `make coverage` voeren beide stappen uit.
+# `codec-matrix` markeert installatieproeven die een expliciete decoder en
+# voor de spraakproef ook een geïnstalleerd model vereisen.
 tags:
   benchmark:
   codec-matrix:

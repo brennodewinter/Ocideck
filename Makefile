@@ -190,7 +190,7 @@ test:
 	@echo "Command: flutter test --test-randomize-ordering-seed random"
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
-	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 	$(MAKE) test-benchmarks
 
 # Run the full test suite with coverage and summarise line coverage. The floor
@@ -205,7 +205,7 @@ coverage:
 	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=80 --require-instrumented"
 	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
 	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
-	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --coverage --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --coverage --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix' $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 	dart run tool/coverage_summary.dart --min=80 --require-instrumented
 	$(MAKE) test-benchmarks
 

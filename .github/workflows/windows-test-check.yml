@@ -160,7 +160,7 @@ jobs:
           trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
           # Isoleer de terugkerende laatste testgroep vóór de volledige suite.
           flutter test --concurrency=1 test/shell_present_and_close_test.dart test/shell_s3_actions_test.dart
-          flutter test --concurrency=2 --total-shards='${{ strategy.job-total }}' --shard-index='${{ matrix.shard }}' --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark'
+          flutter test --concurrency=2 --total-shards='${{ strategy.job-total }}' --shard-index='${{ matrix.shard }}' --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix'
           if [ '${{ matrix.shard }}' = 0 ]; then
             flutter test --concurrency=1 test --tags benchmark
           fi
