@@ -160,6 +160,9 @@ BuildArch:      x86_64
 Requires:       libGLESv2.so.2()(64bit)
 Requires:       libEGL.so.1()(64bit)
 Requires:       libmpv.so.2()(64bit)
+# xclip ships under flutter_assets and automatic ELF dependency generation
+# does not pick up its libXmu requirement there.
+Requires:       libXmu.so.6()(64bit)
 
 # The payload is a prebuilt Flutter bundle — no sources, no compilation. Skip the
 # debuginfo split (nothing to attach) and the strip/brp post-install scripts that
