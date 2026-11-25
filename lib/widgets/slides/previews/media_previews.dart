@@ -2,6 +2,27 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../slide_preview.dart';
 
+/// Geeft het publieksvenster toegang tot de speler van de getoonde videodia.
+class SlideVideoPlayback {
+  final _key = GlobalKey<_VideoPreviewState>();
+
+  Future<void> setPlaying(
+    bool playing, {
+    required String slideId,
+    required bool Function() isCurrent,
+  }) async {
+    final state = _key.currentState;
+    if (state == null || state.widget.slide.id != slideId) return;
+    final initialization = state._initializing;
+    await initialization;
+    if (_key.currentState == state &&
+        state._initializing == initialization &&
+        isCurrent()) {
+      await state._setPlaying(playing);
+    }
+  }
+}
+
 /// Pauzeert een mediacontroller vóór dispose en breekt 'm dan af. Op desktop
 /// kan de audio anders blijven doorspelen nadat de controller al is opgeruimd:
 /// de dispose-melding reist los van de pauze-opdracht over het platformkanaal.
@@ -100,6 +121,21 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
       return VideoPlayerController.networkUrl(uri, closedCaptionFile: captions);
     }
     return VideoPlayerController.file(File(src), closedCaptionFile: captions);
+  }
+
+  Future<void> _setPlaying(bool playing) async {
+    final controller = _controller;
+    if (controller == null ||
+        !controller.value.isInitialized ||
+        controller.value.isPlaying == playing) {
+      return;
+    }
+    if (playing) {
+      await controller.play();
+    } else {
+      await controller.pause();
+    }
+    if (mounted && identical(_controller, controller)) setState(() {});
   }
 
   /// Extra controller-instelling vóór play (bv. setLooping). Standaard niets.

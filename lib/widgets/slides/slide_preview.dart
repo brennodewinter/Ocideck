@@ -353,6 +353,12 @@ class SlidePreviewWidget extends StatelessWidget {
   /// staat dit uit (handmatig starten); in de presenter aan.
   final bool autoplayMedia;
 
+  /// Toon de videodia als statische voorvertoning zonder speler.
+  final bool passiveVideo;
+
+  /// Bedient de lokale videospeler namens het presentatorvenster.
+  final SlideVideoPlayback? videoPlayback;
+
   /// Of online media (URL-afbeeldingen/-video's en YouTube/Vimeo-embeds) live
   /// geladen mag worden. Komt uit de instelling `allowRemoteMedia` (fail-closed:
   /// standaard uit). Staat dit uit, dan tonen de renderers een placeholder met
@@ -526,6 +532,8 @@ class SlidePreviewWidget extends StatelessWidget {
     this.sealedAt = '',
     this.enableMedia = false,
     this.autoplayMedia = false,
+    this.passiveVideo = false,
+    this.videoPlayback,
     this.allowRemoteMedia = false,
     this.slideAspect = kScreenSlideAspect,
     this.presentationMode = false,
@@ -1054,7 +1062,7 @@ class SlidePreviewWidget extends StatelessWidget {
 
   Widget _videoPreview(Slide slide, double w) {
     final source = VideoSource.parse(slide.videoPath);
-    if (source.isEmbed) {
+    if (source.isEmbed && !passiveVideo) {
       return _VideoEmbedPreview(
         slide: slide,
         source: source,
@@ -1067,6 +1075,7 @@ class SlidePreviewWidget extends StatelessWidget {
       );
     }
     return _VideoPreview(
+      key: videoPlayback?._key,
       slide: slide,
       source: source,
       w: w,
@@ -1074,6 +1083,7 @@ class SlidePreviewWidget extends StatelessWidget {
       font: fontFamily,
       profile: themeProfile,
       autoplay: autoplayMedia && slide.videoAutoplay,
+      passive: passiveVideo,
       allowRemoteMedia: allowRemoteMedia,
       onComplete: onVideoComplete,
     );

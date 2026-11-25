@@ -1,11 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/widgets/presentation/audience_window.dart';
+import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_player_platform_interface/video_player_platform_interface.dart';
@@ -19,6 +25,7 @@ import 'package:webview_flutter_platform_interface/webview_flutter_platform_inte
 class _FakeVideoPlayerPlatform extends VideoPlayerPlatform {
   final Map<int, StreamController<VideoEvent>> _events = {};
   int _nextId = 0;
+  final played = <int>[];
 
   @override
   Future<void> init() async {}
@@ -48,7 +55,7 @@ class _FakeVideoPlayerPlatform extends VideoPlayerPlatform {
   Future<void> setLooping(int playerId, bool looping) async {}
 
   @override
-  Future<void> play(int playerId) async {}
+  Future<void> play(int playerId) async => played.add(playerId);
 
   @override
   Future<void> pause(int playerId) async {}
@@ -243,6 +250,22 @@ Future<void> settle(WidgetTester tester) async {
   await tester.pump();
 }
 
+Widget _presenter(List<Slide> slides, {AudienceWindowHandle? audience}) {
+  return MaterialApp(
+    localizationsDelegates: const [
+      ...GlobalMaterialLocalizations.delegates,
+      FlutterQuillLocalizations.delegate,
+    ],
+    home: FullscreenPresenter(
+      slides: slides,
+      projectPath: _localProject.path,
+      themeProfile: const ThemeProfile(),
+      initialIndex: 0,
+      audience: audience,
+    ),
+  );
+}
+
 Future<void> _checkPlayerHtml(
   WidgetTester tester,
   String html,
@@ -276,6 +299,155 @@ void main() {
     _localProject = Directory.systemTemp.createTempSync('ocideck_video');
   });
   tearDown(() => _localProject.deleteSync(recursive: true));
+
+  testWidgets('laptop controls only the current audience video', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1600, 1000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    Map<dynamic, dynamic>? playMessage;
+    Future<void> deliverWindowMessage(Map<dynamic, dynamic> message) {
+      return messenger.handlePlatformMessage(
+        bridge.name,
+        bridge.codec.encodeMethodCall(MethodCall('methodCall', message)),
+        (_) {},
+      );
+    }
+
+    messenger.setMockMethodCallHandler(bridge, (call) async {
+      if (call.method == 'invokeMethod') {
+        final message = call.arguments as Map;
+        if (message['method'] == 'videoPlayback' &&
+            message['arguments']['playing'] == true) {
+          playMessage = message;
+        }
+        await Future.microtask(() => deliverWindowMessage(message));
+      }
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(bridge, null));
+
+    File('${_localProject.path}/clip.mp4').writeAsBytesSync([0]);
+    File('${_localProject.path}/next.mp4').writeAsBytesSync([0]);
+    final slides = [
+      _video(path: 'clip.mp4', title: 'Eerste video'),
+      _video(path: 'next.mp4', title: 'Tweede video', autoplay: true),
+    ];
+    final presenter = _presenter(
+      slides,
+      audience: AudienceWindowHandle(
+        WindowController.fromWindowId('test'),
+        closeImpl: (_) async {},
+      ),
+    );
+    final audience = AudienceWindowApp(
+      args: {
+        'markdown': buildBeamerMarkdown(
+          slides: slides,
+          projectPath: _localProject.path,
+          themeProfile: const ThemeProfile(),
+        ),
+        'projectPath': _localProject.path,
+      },
+    );
+    await tester.pumpWidget(
+      Row(
+        textDirection: TextDirection.ltr,
+        children: [
+          Expanded(child: presenter),
+          Expanded(child: audience),
+        ],
+      ),
+    );
+    await settle(tester);
+
+    final laptop = find.byType(FullscreenPresenter);
+    Finder laptopIcon(IconData icon) =>
+        find.descendant(of: laptop, matching: find.byIcon(icon));
+    final video = find.byType(VideoPlayer);
+    expect(find.descendant(of: laptop, matching: video), findsNothing);
+    expect(video, findsOneWidget);
+    expect(fakeVideo._nextId, 1);
+    final first = tester.widget<VideoPlayer>(video).controller;
+    expect(first.value.isPlaying, isFalse);
+
+    await tester.tap(laptopIcon(Icons.play_circle));
+    await settle(tester);
+    expect(first.value.isPlaying, isTrue);
+    expect(fakeVideo.played, [first.playerId]);
+
+    await tester.tap(laptopIcon(Icons.pause_circle));
+    await settle(tester);
+    expect(first.value.isPlaying, isFalse);
+
+    await tester.tap(laptopIcon(Icons.chevron_right));
+    await settle(tester);
+    final audienceSlide = find.descendant(
+      of: find.byType(AudienceWindowApp),
+      matching: find.byType(SlidePreviewWidget),
+    );
+    expect(
+      tester.widget<SlidePreviewWidget>(audienceSlide).slide.videoPath,
+      'next.mp4',
+    );
+    final next = tester.widget<VideoPlayer>(video).controller;
+    expect(next, isNot(same(first)));
+    expect(fakeVideo._nextId, 2);
+    expect(next.value.isPlaying, isTrue);
+    expect(fakeVideo.played, [first.playerId, next.playerId]);
+    await tester.tap(laptopIcon(Icons.pause_circle));
+    await settle(tester);
+    expect(next.value.isPlaying, isFalse);
+
+    // A delayed command for the previous slide must not start this one.
+    await deliverWindowMessage(playMessage!);
+    await settle(tester);
+    expect(next.value.isPlaying, isFalse);
+
+    // Returning to the same index must still reject the old command.
+    await tester.tap(laptopIcon(Icons.chevron_left));
+    await settle(tester);
+    final revisited = tester.widget<VideoPlayer>(video).controller;
+    expect(revisited, isNot(same(first)));
+    await deliverWindowMessage(playMessage!);
+    await settle(tester);
+    expect(revisited.value.isPlaying, isFalse);
+    expect(fakeVideo.played, [first.playerId, next.playerId]);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await settle(tester);
+  });
+
+  testWidgets('one-screen presentation still plays and pauses locally', (
+    tester,
+  ) async {
+    File('${_localProject.path}/clip.mp4').writeAsBytesSync([0]);
+    await tester.pumpWidget(_presenter([_video(path: 'clip.mp4')]));
+    await settle(tester);
+
+    final video = find.byType(VideoPlayer);
+    final controller = tester.widget<VideoPlayer>(video).controller;
+    final pointer = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await pointer.addPointer(location: tester.getCenter(video));
+    await tester.pump(const Duration(milliseconds: 200));
+
+    await tester.tap(find.byIcon(Icons.play_circle));
+    await tester.pump();
+    expect(controller.value.isPlaying, isTrue);
+    expect(fakeVideo.played, [controller.playerId]);
+
+    await tester.tap(find.byIcon(Icons.pause_circle));
+    await tester.pump();
+    expect(controller.value.isPlaying, isFalse);
+    await pointer.removePointer();
+    await tester.pumpWidget(const SizedBox.shrink());
+    await settle(tester);
+  });
 
   // ── Local file ─────────────────────────────────────────────────────────────
   testWidgets('local file renders a VideoPlayer and a play control', (

@@ -197,6 +197,36 @@ String _fmtRemaining(Duration d) {
   return d.isNegative ? '-$body' : body;
 }
 
+/// Opent Instellingen → Beveiliging vanuit de presenter (#865).
+void _openSettingsFromPresenter(BuildContext context) {
+  SettingsDialog.show(context, initialSection: SettingsSection.security);
+}
+
+List<Widget> _audienceVideoControls(_FullscreenPresenterState state) {
+  final slide = state._currentSlide;
+  if (!state._dual ||
+      slide.type != SlideType.video ||
+      VideoSource.parse(slide.videoPath).kind != VideoSourceKind.localFile) {
+    return const [];
+  }
+  final l10n = state.context.l10n;
+  final enabled = state._blank == _Blank.none;
+  return [
+    IconButton(
+      tooltip: l10n.d('Afspelen'),
+      icon: const Icon(Icons.play_circle),
+      color: Colors.white,
+      onPressed: enabled ? () => _setAudienceVideoPlaying(state, true) : null,
+    ),
+    IconButton(
+      tooltip: l10n.d('Pauzeren'),
+      icon: const Icon(Icons.pause_circle),
+      color: Colors.white,
+      onPressed: enabled ? () => _setAudienceVideoPlaying(state, false) : null,
+    ),
+  ];
+}
+
 extension _PresenterOverlays on _FullscreenPresenterState {
   /// Sneltoets-overzicht (cheatsheet).
   Widget _buildHelpOverlay() {
@@ -412,15 +442,6 @@ extension _PresenterOverlays on _FullscreenPresenterState {
     );
   }
 
-  /// Opent Instellingen → Beveiliging vanuit de presenter (#865).
-  ///
-  /// De knop "Aanzetten in instellingen" op een geblokkeerde-online-media-
-  /// placeholder bestond voorheen alleen in de editor-preview. Nu kan de
-  /// presentator online media aanzetten zonder de presentatie te verlaten.
-  void _openSettingsFromPresenter(BuildContext context) {
-    SettingsDialog.show(context, initialSection: SettingsSection.security);
-  }
-
   Widget _buildPresenterControls(int total) {
     final l10n = context.l10n;
     final richTextPlan = _richTextPlanFor(_currentSlide);
@@ -449,6 +470,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ? _next
               : null,
         ),
+        ..._audienceVideoControls(this),
         Tooltip(
           message: labelWithShortcut(l10n, 'Slide-overzicht', 'G'),
           child: _NavButton(icon: Icons.grid_view_rounded, onTap: _toggleGrid),
