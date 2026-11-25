@@ -75,6 +75,7 @@ help:
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
 	@echo "  make sast            Semgrep over shipped Dart with the rules in semgrep/ (needs semgrep)."
+	@echo "  make check-branch-protection  Vergelijk de vastgelegde main-regel met Pawprint (beheerderstoegang)."
 	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
 	@echo "  make shellcheck      ShellCheck over the committed shell scripts (needs shellcheck)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
@@ -996,6 +997,9 @@ check-comment-language:
 	@echo "        Volledige lijst: dart run tool/check_comment_language.dart --list"
 	dart run tool/check_comment_language.dart
 
+check-branch-protection:
+	@scripts/check_branch_protection.sh
+
 # Een bewering over een *gemeten* grootheid verrot terwijl de boom stilstaat.
 # `docs/CHECKS.md` beloofde op twee plekken "within ~half an hour" terwijl de
 # meting op 54 minuten stond; er zat geen datum bij, dus er viel niets tegen te
@@ -1687,6 +1691,6 @@ ci-image-scans-publish:
 	  -f .forgejo/ci-image/scans.Dockerfile .forgejo/ci-image
 	@echo "== Gepubliceerd. Zet het package op publiek als dat nog niet zo is. =="
 
-.PHONY: check-release-channels
+.PHONY: check-release-channels check-branch-protection
 check-release-channels:
 	@python3 -m unittest discover -s test -p 'release_*_test.py' -v
