@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/widgets/dialogs/settings/chrome_font_size_slider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/document_page_chrome.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
@@ -498,6 +499,33 @@ void main() {
       greaterThan(kDocumentDefaultBodyFontSize),
     );
     expect(find.textContaining('Basislettergrootte:'), findsOneWidget);
+  });
+
+  testWidgets('schuifbanen van documentkop en -voet zijn uitgelijnd', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 780,
+            child: ChromeFontSizeSliders(
+              profile: const ThemeProfile(
+                documentHeaderFontSize: 12,
+                documentFooterFontSize: 12,
+              ),
+              document: true,
+              onProfileChanged: (_) {},
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final header = find.byKey(const Key('document-header-font-size'));
+    final footer = find.byKey(const Key('document-footer-font-size'));
+    expect(tester.getRect(header).left, tester.getRect(footer).left);
+    expect(tester.getRect(header).right, tester.getRect(footer).right);
   });
 
   testWidgets('documentstijl opent direct en bewaart de kop- en voetmaat', (
