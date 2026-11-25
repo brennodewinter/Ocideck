@@ -3,6 +3,10 @@ name: Linux desktop start
 on:
   workflow_dispatch:
     inputs:
+      startup_regression:
+        description: Rebuild with a blocked production startup and require a failed start
+        type: boolean
+        default: false
       desktop_window:
         description: Measure the native X11 and Wayland window of this bundle
         type: boolean
@@ -117,6 +121,22 @@ jobs:
           fi
           cat probe-evidence/wayland-regression.log
           grep -E 'window-1: (Flutter content stops|Settings is not visible)' probe-evidence/wayland-regression.log
+
+      - name: Regresstoets met geblokkeerde opstart
+        if: ${{ inputs.startup_regression == true || inputs.startup_regression == 'true' }}
+        run: |
+          set -eu
+          # Rebuild from the real entry point and leave the existing watchdog active.
+          git restore -- linux/runner/my_application.cc
+          grep -Fx '    await configureNativeWindow();' lib/main.dart
+          sed -i 's/^    await configureNativeWindow();$/    await Completer<void>().future;/' lib/main.dart
+          bash scripts/run_release_linux_build.sh flutter build linux --release --no-pub
+          app=build/linux/x64/release/bundle/ocideck
+          if bash scripts/linux_start_probe.sh probe-evidence/startup-regression "$app"; then
+            echo 'De startproef accepteerde een app die bij het opstarten vastloopt.' >&2
+            exit 1
+          fi
+          grep -F 'WARN opstart: nog geen eerste frame na 10 s' probe-evidence/startup-regression/start.*/ocideck.log
 
       - name: Opstartbewijs bewaren
         if: always()

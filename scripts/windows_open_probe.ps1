@@ -261,8 +261,10 @@ function Test-NativeWindow {
     $scale = [OpenProbeWindow]::GetDpiForWindow($handle) / 96.0
     if ($scale -le 0) { throw 'Could not determine the window DPI.' }
     $width = [int][Math]::Min(1280, [Math]::Floor(($screen.Width - 18) / $scale))
-    $height = [int][Math]::Min(850, [Math]::Floor(($screen.Height - 42) / $scale))
-    if ($width -lt 980 -or $height -lt 694) { throw 'Work area too small for two client sizes.' }
+    $height = [int][Math]::Min(850, [Math]::Floor(($screen.Height - 34) / $scale))
+    if ($width -lt 980 -or $height -lt 670) {
+        throw "Work area $($screen.Width)x$($screen.Height) at scale $scale leaves only ${width}x${height} for the client probe."
+    }
     $snapshots = @()
     foreach ($targetHeight in @([Math]::Max(650, $height - 100), $height)) {
         $requestedWidth = [int]($width * $scale)
