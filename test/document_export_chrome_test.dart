@@ -52,6 +52,8 @@ void main() {
   const theme = ThemeProfile(
     documentHeaderText: 'OCIDECKPROEFKOP {title}',
     documentFooterText: 'OCIDECKPROEFVOET',
+    documentHeaderFontSize: 14,
+    documentFooterFontSize: 10.5,
   );
 
   Future<ExportBundle> buildBundle(String body) => buildDocumentExportBundle(
@@ -99,10 +101,14 @@ void main() {
     final html = await exportText(bundle, DocumentExportFormat.html);
     expect(html, contains('OCIDECKPROEFKOP Proeftitel'));
     expect(html, contains('OCIDECKPROEFVOET'));
+    expect(html, contains('.document-header-text{font-size:14.0pt}'));
+    expect(html, contains('.document-footer-text{font-size:10.5pt}'));
 
     final tex = await exportText(bundle, DocumentExportFormat.latex);
     expect(tex, contains('OCIDECKPROEFKOP Proeftitel'));
     expect(tex, contains('OCIDECKPROEFVOET'));
+    expect(tex, contains(r'\fontsize{14.0bp}'));
+    expect(tex, contains(r'\fontsize{10.5bp}'));
 
     // ODT: native paginastijl met kop- en voetband.
     final odtContent = zipText(
@@ -110,6 +116,8 @@ void main() {
       'content.xml',
     );
     expect(odtContent, contains('<office:master-styles>'));
+    expect(odtContent, contains('fo:font-size="14.0pt"'));
+    expect(odtContent, contains('fo:font-size="10.5pt"'));
     expect(odtContent, contains('<style:header>'));
     expect(odtContent, contains('<style:footer>'));
     expect(odtContent, contains('OCIDECKPROEFKOP Proeftitel'));
@@ -118,6 +126,9 @@ void main() {
     // DOCX: eigen header-/footerparts, verwijzing én relatie.
     final docx = await buildDocumentExportDocx(bundle);
     final documentXml = zipText(docx, 'word/document.xml');
+    final docxStyles = zipText(docx, 'word/styles.xml');
+    expect(docxStyles, contains('<w:sz w:val="28"/>'));
+    expect(docxStyles, contains('<w:sz w:val="21"/>'));
     expect(documentXml, contains('<w:headerReference'));
     expect(documentXml, contains('<w:footerReference'));
     expect(zipText(docx, 'word/header1.xml'), contains('OCIDECKPROEFKOP'));
@@ -132,10 +143,11 @@ void main() {
     );
 
     // ePub: eenmaal zichtbaar — herflowbaar kent geen herhaalband.
-    final epubDoc = zipText(
-      await buildDocumentExportEpub(bundle),
-      'OEBPS/document.xhtml',
-    );
+    final epub = await buildDocumentExportEpub(bundle);
+    final epubDoc = zipText(epub, 'OEBPS/document.xhtml');
+    final epubCss = zipText(epub, 'OEBPS/style.css');
+    expect(epubCss, contains('header.doc-chrome { font-size: 14.0pt; }'));
+    expect(epubCss, contains('footer.doc-chrome { font-size: 10.5pt; }'));
     expect(epubDoc, contains('<header class="doc-chrome">'));
     expect(epubDoc, contains('OCIDECKPROEFKOP Proeftitel'));
     expect(epubDoc, contains('<footer class="doc-chrome">'));

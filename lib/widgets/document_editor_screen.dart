@@ -626,6 +626,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onManageStyles: () => SettingsDialog.show(
       context,
       initialSection: SettingsSection.presentation,
+      openDocumentStyles: true,
     ),
     tlp: documentTlp,
     onTlpChanged: (level) => unawaited(applyDocumentTlp(context, ref, level)),

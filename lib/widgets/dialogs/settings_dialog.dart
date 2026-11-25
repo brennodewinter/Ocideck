@@ -139,6 +139,7 @@ part 'parts/settings_dialog_search_index.dart';
 class SettingsDialog extends ConsumerStatefulWidget {
   /// Het tabblad dat bij openen actief is.
   final SettingsSection initialSection;
+  final bool openDocumentStyles;
 
   /// Theme profile field to scroll to and briefly highlight on the Colours tab
   /// (e.g. `textColor`, `accentColor`). See [SlideQualityIssue.field].
@@ -147,18 +148,21 @@ class SettingsDialog extends ConsumerStatefulWidget {
   const SettingsDialog({
     super.key,
     this.initialSection = SettingsSection.general,
+    this.openDocumentStyles = false,
     this.highlightThemeField,
   });
 
   static Future<void> show(
     BuildContext context, {
     SettingsSection initialSection = SettingsSection.general,
+    bool openDocumentStyles = false,
     String? highlightThemeField,
   }) {
     return showDialog(
       context: context,
       builder: (_) => SettingsDialog(
         initialSection: initialSection,
+        openDocumentStyles: openDocumentStyles,
         highlightThemeField: highlightThemeField,
       ),
     );
@@ -335,6 +339,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _initLibreplanFields(settings.libreplanSettings);
     _highlightedThemeField = widget.highlightThemeField;
     _selectedTab = widget.initialSection;
+    if (widget.openDocumentStyles) _styleSurface = _StyleSurface.document;
     if (widget.highlightThemeField != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToThemeField(widget.highlightThemeField!);

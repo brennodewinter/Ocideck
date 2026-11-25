@@ -108,6 +108,10 @@ class DocumentChromeBand extends StatelessWidget {
     bool showPage,
     bool showTlp,
   ) {
+    final fontSize =
+        (profile.documentChromeFontSize(header) ??
+            kDocumentChromeScreenDefaultPt) *
+        (compact ? 1 : kCssPxPerPoint);
     final logoInBand =
         (profile.effectiveDocumentLogoPath?.trim() ?? '').isNotEmpty &&
         profile.documentLogoPosition.startsWith(header ? 'top' : 'bottom');
@@ -153,7 +157,7 @@ class DocumentChromeBand extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontFamily: profile.fontFamily,
-              fontSize: compact ? 9 : 12,
+              fontSize: fontSize,
               height: 1.3,
             ),
             linkColor: AppTheme.parseHexColor(profile.accentColor),

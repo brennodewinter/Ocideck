@@ -97,6 +97,16 @@ const double kSlideChromeFontSizeMax = 72.0;
 /// Begrenst een opgeslagen of gekozen kop-/voetmaat op het bruikbare bereik.
 double clampSlideChromeFontSize(double pt) =>
     pt.clamp(kSlideChromeFontSizeMin, kSlideChromeFontSizeMax);
+const double kDocumentChromeFontSizeMin = 6;
+const double kDocumentChromeFontSizeMax = 28;
+const double kDocumentChromeScreenDefaultPt = 9;
+
+/// A missing override keeps the existing size of each output format.
+double? normalizeDocumentChromeFontSize(double? pt) =>
+    pt == null || !pt.isFinite
+    ? null
+    : pt.clamp(kDocumentChromeFontSizeMin, kDocumentChromeFontSizeMax);
+
 const double kDocumentMinBodyFontSize = 9.0;
 const double kDocumentMaxBodyFontSize = 28.0;
 
@@ -228,6 +238,10 @@ class ThemeProfile {
   final String documentHeaderText;
   final String documentFooterText;
 
+  /// Optional page header and footer sizes in typographic points.
+  final double? documentHeaderFontSize;
+  final double? documentFooterFontSize;
+
   /// De kleur van de koppen ván een document. `null` houdt de verdeling die er
   /// altijd was: een hoofdstukkop volgt de tekstkleur, een subkop het accent.
   /// Wie hem zet, krijgt één kopkleur voor alle niveaus — het geval waarvoor
@@ -329,6 +343,8 @@ class ThemeProfile {
     this.documentBodyFontSize = kDocumentDefaultBodyFontSize,
     this.documentHeaderText = '',
     this.documentFooterText = '',
+    this.documentHeaderFontSize,
+    this.documentFooterFontSize,
     this.documentHeadingColor,
     this.documentBandTextColor,
     this.documentBandBackgroundColor,
@@ -505,6 +521,10 @@ class ThemeProfile {
     double? documentBodyFontSize,
     String? documentHeaderText,
     String? documentFooterText,
+    double? documentHeaderFontSize,
+    double? documentFooterFontSize,
+    bool clearDocumentHeaderFontSize = false,
+    bool clearDocumentFooterFontSize = false,
     String? documentHeadingColor,
     String? documentBandTextColor,
     String? documentBandBackgroundColor,
@@ -589,6 +609,12 @@ class ThemeProfile {
       documentBodyFontSize: documentBodyFontSize ?? this.documentBodyFontSize,
       documentHeaderText: documentHeaderText ?? this.documentHeaderText,
       documentFooterText: documentFooterText ?? this.documentFooterText,
+      documentHeaderFontSize: clearDocumentHeaderFontSize
+          ? null
+          : documentHeaderFontSize ?? this.documentHeaderFontSize,
+      documentFooterFontSize: clearDocumentFooterFontSize
+          ? null
+          : documentFooterFontSize ?? this.documentFooterFontSize,
       documentHeadingColor: documentHeadingColor ?? this.documentHeadingColor,
       documentBandTextColor:
           documentBandTextColor ?? this.documentBandTextColor,
@@ -668,6 +694,10 @@ class ThemeProfile {
       'documentBodyFontSize': documentBodyFontSize,
       'documentHeaderText': documentHeaderText,
       'documentFooterText': documentFooterText,
+      if (documentHeaderFontSize != null)
+        'documentHeaderFontSize': documentHeaderFontSize,
+      if (documentFooterFontSize != null)
+        'documentFooterFontSize': documentFooterFontSize,
       'documentHeadingColor': documentHeadingColor,
       'documentBandTextColor': documentBandTextColor,
       'documentBandBackgroundColor': documentBandBackgroundColor,
@@ -801,6 +831,12 @@ class ThemeProfile {
       ),
       documentHeaderText: stringValue('documentHeaderText') ?? '',
       documentFooterText: stringValue('documentFooterText') ?? '',
+      documentHeaderFontSize: normalizeDocumentChromeFontSize(
+        numValue('documentHeaderFontSize')?.toDouble(),
+      ),
+      documentFooterFontSize: normalizeDocumentChromeFontSize(
+        numValue('documentFooterFontSize')?.toDouble(),
+      ),
       documentHeadingColor: json['documentHeadingColor'] == null
           ? null
           : _color(json['documentHeadingColor'], '#222222'),
@@ -905,6 +941,12 @@ class ThemeProfile {
       preferredDocumentHeadingFontFamily ??
       documentHeadingFontFamily ??
       exportFontFamily;
+
+  /// De ingestelde puntmaat van de paginakop of -voet.
+  double? documentChromeFontSize(bool header) =>
+      normalizeDocumentChromeFontSize(
+        header ? documentHeaderFontSize : documentFooterFontSize,
+      );
 
   /// De koptekstmaat op een dia van breedte [w]: [headerFontSize] is in
   /// punten op een 1280-brede dia en schaalt mee met het kader.

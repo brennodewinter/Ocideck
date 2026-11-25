@@ -124,7 +124,7 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['thema', 'naam', 'profiel'],
   ),
 
-  // ── Uiterlijk van dia's ────────────────────────────────────────────────────
+  // ── Stijlen ────────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
     label: 'Stijlprofiel',
@@ -259,8 +259,20 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
+    label: 'Lettergrootte koptekst',
+    section: 'Koptekst',
+    keywords: ['header', 'koptekst', 'lettergrootte', 'document'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
+    label: 'Lettergrootte voettekst',
+    section: 'Koptekst',
+    keywords: ['footer', 'voettekst', 'lettergrootte', 'document'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
     label: 'Paginanummers tonen (rechtsonder)',
-    section: 'Footer',
+    section: 'Koptekst',
     keywords: ['paginanummer', 'nummering', 'footer'],
   ),
   SettingsSearchEntry(
@@ -270,7 +282,7 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['slotslide', 'afsluiting', 'laatste'],
   ),
 
-  // ── Cockpit (onder Uiterlijk van dia's, ingeklapt) ─────────────────────────
+  // ── Cockpit (onder Stijlen, ingeklapt) ─────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
     label: 'Cockpit-kleurschema',

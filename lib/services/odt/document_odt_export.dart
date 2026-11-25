@@ -482,6 +482,11 @@ String _odtBodyPoints(ThemeProfile theme) {
   return text.endsWith('.0') ? text.substring(0, text.length - 2) : text;
 }
 
+String _odtBandSize(ThemeProfile theme, bool header) {
+  final size = theme.documentChromeFontSize(header);
+  return size == null ? '80%' : '${size}pt';
+}
+
 String _odtStyles(ThemeProfile t) {
   final bodyFont = 'style:font-name="${xmlAttr(t.exportFontFamily)}"';
   final headingFont =
@@ -503,11 +508,11 @@ String _odtStyles(ThemeProfile t) {
 </style:style>
 <style:style style:name="Header" style:family="paragraph">
   <style:paragraph-properties fo:margin-bottom="0cm"/>
-  <style:text-properties fo:font-size="80%"/>
+  <style:text-properties fo:font-size="${_odtBandSize(t, true)}"/>
 </style:style>
 <style:style style:name="Footer" style:family="paragraph">
   <style:paragraph-properties fo:margin-bottom="0cm"/>
-  <style:text-properties fo:font-size="80%"/>
+  <style:text-properties fo:font-size="${_odtBandSize(t, false)}"/>
 </style:style>
 <style:style style:name="Heading_20_1" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.8cm" fo:margin-bottom="0.3cm" fo:keep-with-next="true"/>

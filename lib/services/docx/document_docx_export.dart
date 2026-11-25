@@ -684,12 +684,17 @@ String _buildStylesXml(ThemeProfile theme) {
       '<w:style w:type="paragraph" w:styleId="Header">'
       '<w:name w:val="header"/><w:basedOn w:val="Normal"/>'
       '<w:pPr><w:spacing w:after="0"/></w:pPr>'
-      '<w:rPr><w:sz w:val="${(_bodyHalfPoints(theme) * 0.8).round()}"/></w:rPr></w:style>'
+      '<w:rPr><w:sz w:val="${_bandHalfPoints(theme, true)}"/></w:rPr></w:style>'
       '<w:style w:type="paragraph" w:styleId="Footer">'
       '<w:name w:val="footer"/><w:basedOn w:val="Normal"/>'
       '<w:pPr><w:spacing w:after="0"/></w:pPr>'
-      '<w:rPr><w:sz w:val="${(_bodyHalfPoints(theme) * 0.8).round()}"/></w:rPr></w:style>'
+      '<w:rPr><w:sz w:val="${_bandHalfPoints(theme, false)}"/></w:rPr></w:style>'
       '</w:styles>';
+}
+
+int _bandHalfPoints(ThemeProfile theme, bool header) {
+  final size = theme.documentChromeFontSize(header);
+  return (size == null ? _bodyHalfPoints(theme) * 0.8 : size * 2).round();
 }
 
 /// Eén `w:rFonts` voor [family]; de naam is al gesaneerd door het profiel,
