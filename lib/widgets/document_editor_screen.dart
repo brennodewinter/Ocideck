@@ -326,15 +326,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     _find.refreshWhileTyping();
   }
 
-  void _setActiveOutlineIndex(int active) {
-    if (active == _activeOutlineIndex) return;
-    // Nooit setState vanuit een controller/Quill-listener tijdens build.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || active == _activeOutlineIndex) return;
-      setState(() => _activeOutlineIndex = active);
-    });
-  }
-
   void _refreshChrome() => setState(() {});
 
   /// Sla het document op. Cmd/Ctrl+S én de Opslaan-knop in de werkbalk, net als
