@@ -67,6 +67,7 @@
 
 import 'dart:io';
 
+import 'check_assurance_inventory.dart';
 import 'check_workflow_triggers.dart';
 
 /// Een bewering over een gemeten grootheid die in de documentatie staat.
@@ -287,6 +288,12 @@ void main(List<String> args) {
     exitCode = checkWorkflowTriggers(write: true) ? 1 : 0;
     return;
   }
+  if (args.contains('--write-assurance-inventory')) {
+    exitCode = checkAssuranceInventory(now: DateTime.now(), write: true)
+        ? 1
+        : 0;
+    return;
+  }
   final tegenDeKlok = args.contains('--tegen-de-klok');
   final nu = DateTime.now();
   var fout = false;
@@ -313,6 +320,7 @@ void main(List<String> args) {
 
   fout = _meldBasislijn() || fout;
   fout = checkWorkflowTriggers() || fout;
+  fout = checkAssuranceInventory(now: nu, checkAge: tegenDeKlok) || fout;
 
   if (!tegenDeKlok) {
     stdout.writeln(

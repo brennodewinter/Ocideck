@@ -428,7 +428,7 @@ now the only passing state.
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | Nightly suite | Maintainer agreement |
-| [`make check-dated-claims`](#make-check-dated-claims) | Documented measurements and workflow triggers match their sources | ✅ | ✅ | Nightly suite and daily freshness | Maintainer agreement |
+| [`make check-dated-claims`](#make-check-dated-claims) | Documented measurements, workflow triggers and assurance inventories match their sources | ✅ | ✅ | Nightly suite and daily freshness | Maintainer agreement |
 | `make check-rtl-inventory` | Source counts for LTR layout and both accessibility guides agree | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | Nightly suite | Maintainer agreement |
@@ -808,6 +808,9 @@ These checks form the static portion of the maintainer’s local validation.
   with the `on` definitions under `.forgejo/workflows/`. To update it after
   changing a trigger, run `dart run tool/check_dated_claims.dart --write-workflows`
   and review the affected enforcement description.
+- **Assurance inventory.** New raw HTTP clients, changes to allowed sink paths
+  and added service modules ask for review of the model and scope. The daily
+  freshness run checks the review dates of the ASVS and risk dossiers.
 - **Staleness.** Whether a measurement is past
   its shelf life changes without a commit, so it runs daily in
   `.forgejo/workflows/time-degrading-checks.yml` and not in this gate. Were it

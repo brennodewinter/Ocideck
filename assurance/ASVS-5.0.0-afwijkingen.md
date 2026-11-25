@@ -1,6 +1,6 @@
 # ASVS 5.0.0 — bewuste afwijkingen
 
-> **Status:** vastgesteld 2026-07-22 · Stichting LibreKAT · intern werkdocument
+> **Herzien:** 2026-11-25 · Stichting LibreKAT · intern werkdocument
 >
 > Geen conformiteitsclaim. Zie [`README.md`](README.md).
 
@@ -75,7 +75,9 @@ melding-plus-positie, juist omdat een `jsonDecode`-fout anders de geparste bron
 
 ## V6.2.4 en V6.2.12 — lijsten met gelekte en veelgebruikte wachtwoorden
 
-**Waarom niet.** Een controle tegen gelekte wachtwoorden vereist uitgaand
+**Reikwijdte.** Dit gaat over lokaal gemaakte pakketwachtwoorden. Voor OciServe-inlog beheert de IdP het wachtwoord- en passkeybeleid.
+
+**Waarom niet.** Een online controle tegen gelekte wachtwoorden vereist uitgaand
 verkeer met (een afgeleide van) een wachtwoordzin. Dat is precies wat dit
 product niet doet, en een lokale kopie van zo'n lijst is een terugkerende
 gegevensbron van honderden megabytes in een toepassing die offline hoort te
@@ -132,3 +134,29 @@ van een MinIO op het eigen netwerk zonder TLS.
 
 **Restrisico.** Deckinhoud is op zo'n verbinding leesbaar voor wie op dat
 netwerksegment meekijkt. De sleutel niet.
+
+## V7/V8 — asynchrone samenwerking met de WebDAV-ACL als grens
+
+De oudere asynchrone samenwerkingsroute gebruikt WebDAV-toegang tot de sidecar
+als toegangsgrens. De eigenaarsrol stuurt het gedrag van de client. Een
+opslag-ACL bepaalt en handhaaft de schrijfrechten op het gedeelde bestand. De
+XMPP-companionroute heeft afzonderlijke uitnodigings-, apparaatsleutel- en
+rolcontroles. Zie [het dreigingsmodel](../docs/SECURITY_DESIGN.md#threat-model)
+voor het bestaande geaccepteerde restrisico van fase 0.5.
+
+## V12/V14/V17 — uitrolafhankelijke grenzen
+
+- **Transcriptie.** Toestemming, transportgrenzen en serverresponslimieten worden
+  door de client bewaakt. Bij expliciet gekozen intern HTTP zonder API-sleutel
+  kan native ASR-audio onversleuteld gaan. Bewaring en toegang na ontvangst
+  blijven bij de ASR-beheerder.
+- **Vergadermedia.** DTLS-SRTP beschermt het transport naar de mediabridge.
+  Media-E2EE is uitgeschakeld. ICE-media volgen hun WebRTC-route buiten
+  NetGuard. Hardening van TURN, bridge en signalering vraagt uitrolbewijs.
+- **Browsertransport.** Voor XMPP, feeds en ASR gelden de browsergrenzen voor
+  DNS en TLS. De client heeft daar geen native socket-pinning. Feed- en
+  ASR-redirectgedrag hangt af van de browserroute en het ingestelde endpoint.
+
+Deze technische beperkingen staan in
+[het dreigingsmodel](../docs/SECURITY_DESIGN.md#threat-model). De aanvullende
+restrisico’s wachten op een expliciet acceptatiebesluit.

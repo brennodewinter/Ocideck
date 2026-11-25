@@ -1014,7 +1014,7 @@ check-dated-claims:
 	@echo "Command: dart run tool/check_dated_claims.dart"
 	@echo "Covers: de ankers van de geregistreerde metingen in de documentatie,"
 	@echo "        en de basislijn van looptijduitdrukkingen in CHECKS.md,"
-	@echo "        CONTRIBUTING.md en BUILD.md, en de Pawprint-trekkers."
+	@echo "        CONTRIBUTING.md en BUILD.md, de Pawprint-trekkers en de assurance-inventaris."
 	@echo "Failure means: er is een gemeten bewering herschreven zonder het"
 	@echo "        register bij te werken, of er staat een looptijdbelofte bij die"
 	@echo "        niet geregistreerd is. Meet hem en zet de datum erbij, of werk"
