@@ -297,11 +297,18 @@ def exercise(args, profile):
     (data / 'shared_preferences.json').write_text('{"flutter.app_consent_accepted":true}')
     runtime = profile / 'runtime'
     runtime.mkdir(mode=0o700)
+    (profile / 'cache').mkdir(mode=0o700)
     os.environ.update(HOME=str(profile), XDG_DATA_HOME=str(profile / 'data'),
                       XDG_CONFIG_HOME=str(profile / 'config'), XDG_CACHE_HOME=str(profile / 'cache'),
                       XDG_RUNTIME_DIR=str(runtime), LANG='C.UTF-8', LC_ALL='C.UTF-8',
                       LIBGL_ALWAYS_SOFTWARE='1', OMP_THREAD_LIMIT='1',
                       XCURSOR_THEME='Adwaita', XCURSOR_SIZE='24')
+    # dbus-run-session starts before the app profile exists. Give activated
+    # services the same private home and runtime directory as OciDeck.
+    run('dbus-update-activation-environment', 'HOME', 'XDG_DATA_HOME',
+        'XDG_CONFIG_HOME', 'XDG_CACHE_HOME', 'XDG_RUNTIME_DIR')
+    run('gdbus', 'call', '--session', '--timeout', '5', '--dest', 'org.freedesktop.secrets',
+        '--object-path', '/org/freedesktop/secrets', '--method', 'org.freedesktop.DBus.Peer.Ping')
     with (args.evidence / 'compositor.log').open('w') as compositor, (args.evidence / 'app.log').open('w') as app_log:
         if args.backend == 'x11':
             os.environ['GDK_BACKEND'] = 'x11'
