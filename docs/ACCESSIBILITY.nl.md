@@ -53,13 +53,12 @@ die hem bezit draagt dezelfde beschrijving, zodat het lezen van de bullet de
 betekenis één keer meeleest. De zichtbare letter op de markering blijft buiten
 de boom, want die staat al vooraan in de naam. Presenteer je met stapsgewijs
 onthullen, dan is een groep die nog niet onthuld is **afwezig uit de
-accessibility tree**, niet enkel doorzichtig, en wordt elke stap aangekondigd
-met de bullet en hoeveel markeringen meekwamen. De HTML-export draagt hetzelfde
-in ARIA: `role="img"` met dezelfde naam op elke markering, een visueel verborgen
-beschrijving met een vast id, en `aria-describedby` op de bullet. De
-HTML-export stapt niet — hij toont elke groep tegelijk — en heeft daarom geen
-live region. Het contract is `docs/design/IMAGE_CALLOUTS.md` §12; de poort is
-`test/callout_accessibility_test.dart`.
+accessibility tree**, niet enkel doorzichtig. De aankondiging noemt de positie
+van de bullet in de reeks en hoeveel markeringen erbij kwamen. De statische
+HTML-export toont alle groepen tegelijk. Elke markering heeft `role="img"` met
+dezelfde naam, en `aria-describedby` op de bullet verwijst naar een visueel
+verborgen beschrijving met een vast id. Het contract staat in
+`docs/design/IMAGE_CALLOUTS.md` §12. De test is `test/callout_accessibility_test.dart`.
 
 **Een test die de build laat falen — en precies hoeveel van de app hij ziet.**
 `test/accessibility_labels_test.dart` stelt vast dat elke knop een toegankelijke

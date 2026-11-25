@@ -44,13 +44,12 @@ several marks — and the bullet that owns it carries the same description, so
 reading the bullet reads the meaning once. The visible letter on the mark is
 kept out of the tree, because it is already the first word of the label. While
 presenting with step-by-step reveal, a group that has not been revealed yet is
-**absent from the accessibility tree**, not merely transparent, and every step
-is announced with the bullet and how many marks came with it. The HTML export
-carries the same thing in ARIA: `role="img"` with the same name on each mark, a
-visually hidden description with a stable id, and `aria-describedby` on the
-bullet. The HTML export does not step — it shows every group at once — so it has
-no live region. The contract is `docs/design/IMAGE_CALLOUTS.md` §12; the gate is
-`test/callout_accessibility_test.dart`.
+**absent from the accessibility tree**, not merely transparent. The announcement
+gives the bullet's position in the sequence and how many marks were revealed.
+The static HTML export shows every group at once. It uses `role="img"` with
+the same name on each mark and `aria-describedby` on the bullet, pointing to a
+visually hidden description with a stable id. The contract is in
+`docs/design/IMAGE_CALLOUTS.md` §12. The test is `test/callout_accessibility_test.dart`.
 
 **A test that fails the build — and exactly how much of the app it sees.**
 `test/accessibility_labels_test.dart` asserts that every button has an
