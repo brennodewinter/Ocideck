@@ -442,6 +442,79 @@ String withDocumentFrontMatterKey(String source, String key, String? value) {
   return _setKeyInBlock(block, key, scalar) + split.body;
 }
 
+/// Zet de opgeloste documentkop en -voet in de front matter van de
+/// geëxporteerde platte Markdown (#3166).
+///
+/// De sleutels `header:` en `footer:` zijn dezelfde als de deck-chrome:
+/// krijgt het bestand ooit `marp: true`, dan leest een deck ze meteen terug
+/// als dia-chrome. Als document zijn het vreemde front matter — de
+/// blokscalar-vorm (`|-`) garandeert dat: een meerregelige waarde is nooit
+/// een vrij documentveld en blijft byte-voor-byte staan. Lege waarden
+/// verwijderen de sleutel zodat een export zonder chrome geen lege sleutels
+/// achterlaat; een handgeschreven `header:`/`footer:` wordt vervangen — de
+/// export draagt de geldende stijl, niet de oude tekst.
+String withDocumentChrome(
+  String source, {
+  required String header,
+  required String footer,
+}) {
+  final eol = _detectEol(source);
+  final split = splitDocumentFrontMatter(source);
+  var block = _removeChromeKeys(split.block);
+  for (final (key, value) in [('header', header), ('footer', footer)]) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) continue;
+    block = _insertChromeKey(block, key, trimmed, eol);
+  }
+  return block + split.body;
+}
+
+/// Verwijdert de top-level `header:`- en `footer:`-sleutels uit [block],
+/// inclusief de ingesprongen vervolgregels van een blokscalar. Geeft `''`
+/// als er geen blok was of er niets dan fences en wit over blijft.
+String _removeChromeKeys(String block) {
+  if (block.isEmpty) return '';
+  final matcher = RegExp(r'^(?:header|footer)\s*:');
+  final out = <String>[];
+  var skipping = false;
+  for (final raw in block.split('\n')) {
+    final line = _stripCr(raw);
+    if (skipping &&
+        (line.startsWith(' ') || line.startsWith('\t') || line.isEmpty)) {
+      continue;
+    }
+    skipping = false;
+    if (matcher.hasMatch(line)) {
+      skipping = true;
+      continue;
+    }
+    out.add(raw);
+  }
+  final hasContent = out.any((l) {
+    final t = _stripCr(l).trim();
+    return t.isNotEmpty && t != _fence;
+  });
+  return hasContent ? out.join('\n') : '';
+}
+
+/// Voegt `key: |-` met per regel een ingesprongen regel in, vóór de
+/// slutfence; bij geen blok ontstaat een minimaal blok.
+String _insertChromeKey(String block, String key, String value, String eol) {
+  final keyLines = ['$key: |-', for (final l in value.split('\n')) '  $l'];
+  if (block.isEmpty) {
+    return '$_fence$eol${keyLines.join(eol)}$eol$_fence$eol$eol';
+  }
+  final lines = block.split('\n');
+  for (var i = lines.length - 1; i >= 0; i--) {
+    if (_stripCr(lines[i]) == _fence) {
+      final cr = _trailingCr(lines[i]);
+      lines.insertAll(i, [for (final l in keyLines) '$l$cr']);
+      return lines.join('\n');
+    }
+  }
+  return block;
+}
+
 // --- block editors -----------------------------------------------------------
 
 /// Replaces the `theme:` line in [block] with `theme: <value>`, or inserts one

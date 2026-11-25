@@ -4524,9 +4524,22 @@ continuous HTML and LaTeX. An unknown placeholder stays literally visible — a
 renamed or missing field must be noticeable, not turn into unexplained blank
 space. Values are inserted as literal text: they cannot introduce Markdown
 formatting, a link or HTML through a field value. The template belongs to the
-style profile; the values belong to the document. Consequently the projected
-Markdown export carries the fields but not a machine-local style reference,
-while HTML and LaTeX render the resolved header and footer.
+style profile; the values belong to the document. The projected Markdown
+export carries the fields but not a machine-local style reference; the
+*resolved* header and footer ride along per format instead, because the
+receiver does not have the sender's profile (#3166):
+
+| Format | Where the resolved chrome lands |
+| --- | --- |
+| PDF, HTML, LaTeX | Rendered in the repeating band, as before. |
+| ODT | `office:master-styles` → a master page with `style:header`/`style:footer`; the suite repeats the band on every page. |
+| DOCX | `word/header1.xml`/`word/footer1.xml`, referenced by `w:headerReference`/`w:footerReference` in the section properties. |
+| EPUB | Once, as `<header class="doc-chrome">`/`<footer class="doc-chrome">` at the top and bottom of `document.xhtml`. A reflowable book has no reliable repeating band. |
+| `.md` | `header:`/`footer:` in the front matter, written as `|-` block scalars. A block scalar is never a free document field, so the values stay verbatim foreign front matter on re-open; should the file ever gain `marp: true`, the same keys read straight back as deck chrome — the same convention as the deck `header:`/`footer:` (§3). |
+
+Inline Markdown in the chrome text survives as native markup: ODT `text:span`
+styles, DOCX run properties and EPUB inline elements. Links and unknown markup
+keep their text but lose the tag — a band is not navigation.
 
 All field values cross the same OciWacht audience boundary as the body. The
 standard three fields use the title/description/author privacy paths and custom

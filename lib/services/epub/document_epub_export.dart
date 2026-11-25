@@ -23,8 +23,10 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
+import 'package:markdown/markdown.dart' as md;
 
 import '../../models/deck.dart' show TlpLevelX;
+import '../document_chrome_template.dart';
 import '../export_bundle.dart';
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
@@ -74,8 +76,15 @@ Future<Uint8List> buildDocumentExportEpub(
   // 3. Navigatie-document (nav.xhtml) met koppen als inhoudsopgave.
   final nav = _buildNav(xhtml, title);
 
-  // 4. Content-document (document.xhtml).
-  final document = _buildDocumentXhtml(xhtml, title, meta);
+  // 4. Content-document (document.xhtml). De opgeloste kop- en voettekst
+  // staat eenmaal zichtbaar in het document — ePub is herflowbaar en kent
+  // geen betrouwbare herhaalband (#3166).
+  final document = _buildDocumentXhtml(
+    xhtml,
+    title,
+    meta,
+    resolveDocumentChrome(bundle.audience.deck),
+  );
 
   // 5. OPF (content.opf).
   final opf = _buildOpf(meta, title, images);
@@ -289,6 +298,7 @@ String _buildDocumentXhtml(
   String xhtml,
   String title,
   ExportDocumentMetadata meta,
+  ({String header, String footer}) chrome,
 ) {
   final lang = meta.language.isNotEmpty ? meta.language : 'nl';
   final buf = StringBuffer()
@@ -302,9 +312,35 @@ String _buildDocumentXhtml(
     ..writeln('<title>${xmlEscape(title)}</title>')
     ..writeln('<link rel="stylesheet" type="text/css" href="style.css"/>')
     ..writeln('</head><body>')
+    ..write(_epubChrome('header', chrome.header))
     ..write(xhtml)
+    ..write(_epubChrome('footer', chrome.footer))
     ..writeln('</body></html>');
   return buf.toString();
+}
+
+/// Eén chrome-blok voor het ePub-document: `<header>`/`<footer>` met per
+/// regel een alinea vol inline-markdown. Leeg schrijft niets — een band die
+/// er niet hoort te zijn neemt ook geen ruimte in (#3166).
+String _epubChrome(String tag, String text) {
+  if (text.isEmpty) return '';
+  final lines = text
+      .split('\n')
+      .map((line) => '<p>${_epubInline(line)}</p>')
+      .join('\n');
+  return '<$tag class="doc-chrome">\n$lines\n</$tag>\n';
+}
+
+/// Inline-markdown van één chrome-regel als XHTML-fragment. De bron wordt
+/// eerst geëscapet zodat rauwe `<html>` letterlijk rendert.
+String _epubInline(String text) {
+  final html = md.markdownToHtml(
+    xmlEscape(text),
+    inlineOnly: true,
+    extensionSet: md.ExtensionSet.gitHubFlavored,
+  );
+  // XHTML eist gesloten elementen; markdown emit `<br>` zonder slash.
+  return html.replaceAll('<br>', '<br/>');
 }
 
 /// De OPF (content.opf) met metadata, manifest en spine.
@@ -400,6 +436,10 @@ pre code { background: none; padding: 0; }
 .ocideck-footnotes { margin-top: 2em; border-top: 1px solid #ccc; padding-top: 1em; }
 .ocideck-fnback { text-decoration: none; }
 .ocideck-timeline th { white-space: nowrap; }
+.doc-chrome { font-size: 0.85em; color: #555; }
+header.doc-chrome { border-bottom: 1px solid #ccc; margin-bottom: 1.5em; padding-bottom: 0.5em; }
+footer.doc-chrome { border-top: 1px solid #ccc; margin-top: 1.5em; padding-top: 0.5em; }
+.doc-chrome p { margin: 0.2em 0; }
 ''';
 
 class _NavHeading {

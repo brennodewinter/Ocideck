@@ -24,6 +24,7 @@ import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 
 import '../../models/deck.dart' show TlpLevelX;
 import '../../models/settings.dart';
+import '../document_chrome_template.dart';
 import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import '../document_footnote_setup.dart';
 import '../docx/svg_to_png.dart';
@@ -87,7 +88,12 @@ Future<Uint8List> buildDocumentExportOdt(
   }
 
   // 3. content.xml (stijlen + body).
-  final content = _buildContentXml(odtBody, bundle.audience.deck.themeProfile);
+  final chrome = resolveDocumentChrome(bundle.audience.deck);
+  final content = _buildContentXml(
+    odtBody,
+    bundle.audience.deck.themeProfile,
+    chrome,
+  );
 
   // 4. meta.xml.
   final metaXml = _buildMetaXml(meta, title);
@@ -260,8 +266,12 @@ String _extensionForMediaType(String mediaType) => switch (mediaType) {
   _ => 'bin',
 };
 
-/// content.xml met automatic-styles en body.
-String _buildContentXml(String body, ThemeProfile theme) {
+/// content.xml met automatic-styles, master-styles en body.
+String _buildContentXml(
+  String body,
+  ThemeProfile theme,
+  ({String header, String footer}) chrome,
+) {
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8"?>')
     ..writeln(
@@ -284,7 +294,9 @@ String _buildContentXml(String body, ThemeProfile theme) {
     )
     ..writeln('<office:automatic-styles>')
     ..writeln(_odtStyles(theme))
+    ..writeln(_odtPageLayout(chrome))
     ..writeln('</office:automatic-styles>')
+    ..writeln(_odtMasterStyles(chrome))
     ..writeln('<office:body>')
     ..writeln('<office:text>')
     ..write(body)
@@ -366,6 +378,69 @@ String _buildManifest(List<_OdtImage> images) {
   return buf.toString();
 }
 
+/// De pagina-layout met de bandruimte voor kop en voet. Zonder
+/// `style:header-footer-properties` kapt LibreOffice de band af op haar
+/// minimale hoogte; met meerregelige chrome groeit hij mee (#3166).
+String _odtPageLayout(({String header, String footer}) chrome) {
+  final buf = StringBuffer()
+    ..writeln('<style:page-layout style:name="OciDeckPageLayout">')
+    ..writeln(
+      '<style:page-layout-properties fo:page-width="21cm" '
+      'fo:page-height="29.7cm" style:print-orientation="portrait" '
+      'fo:margin-top="2.5cm" fo:margin-bottom="2.5cm" '
+      'fo:margin-left="2cm" fo:margin-right="2cm"/>',
+    );
+  if (chrome.header.isNotEmpty) {
+    buf.writeln(
+      '<style:header-style><style:header-footer-properties '
+      'fo:min-height="0.5cm" fo:margin-bottom="0.5cm"/></style:header-style>',
+    );
+  }
+  if (chrome.footer.isNotEmpty) {
+    buf.writeln(
+      '<style:footer-style><style:header-footer-properties '
+      'fo:min-height="0.5cm" fo:margin-top="0.5cm"/></style:footer-style>',
+    );
+  }
+  buf.writeln('</style:page-layout>');
+  return buf.toString();
+}
+
+/// De master-page die elke pagina van het document een kop- en/of voetband
+/// geeft. ODF herhaalt `<style:header>`/`<style:footer>` vanzelf op elke
+/// pagina — de inhoud zit eenmaal in het bestand (#3166).
+String _odtMasterStyles(({String header, String footer}) chrome) {
+  if (chrome.header.isEmpty && chrome.footer.isEmpty) {
+    return '<office:master-styles>'
+        '<style:master-page style:name="Standard" '
+        'style:page-layout-name="OciDeckPageLayout"/>'
+        '</office:master-styles>';
+  }
+  final buf = StringBuffer()
+    ..writeln('<office:master-styles>')
+    ..writeln(
+      '<style:master-page style:name="Standard" '
+      'style:page-layout-name="OciDeckPageLayout">',
+    );
+  void band(String element, String styleName, String text) {
+    buf.writeln('<style:$element>');
+    for (final line in text.split('\n')) {
+      buf.writeln(
+        '<text:p text:style-name="$styleName">'
+        '${markdownToOdtInline(line)}</text:p>',
+      );
+    }
+    buf.writeln('</style:$element>');
+  }
+
+  if (chrome.header.isNotEmpty) band('header', 'Header', chrome.header);
+  if (chrome.footer.isNotEmpty) band('footer', 'Footer', chrome.footer);
+  buf
+    ..writeln('</style:master-page>')
+    ..writeln('</office:master-styles>');
+  return buf.toString();
+}
+
 /// De letterdeclaraties die `style:font-name` in de stijlen nodig heeft
 /// (#2119). Eén per unieke naam; de namen zijn al gesaneerd door het profiel.
 String _odtFontFaceDecls(Set<String> families) {
@@ -425,6 +500,14 @@ String _odtStyles(ThemeProfile t) {
 </style:default-style>
 <style:style style:name="Standard" style:family="paragraph" style:class="text">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%"/>
+</style:style>
+<style:style style:name="Header" style:family="paragraph">
+  <style:paragraph-properties fo:margin-bottom="0cm"/>
+  <style:text-properties fo:font-size="80%"/>
+</style:style>
+<style:style style:name="Footer" style:family="paragraph">
+  <style:paragraph-properties fo:margin-bottom="0cm"/>
+  <style:text-properties fo:font-size="80%"/>
 </style:style>
 <style:style style:name="Heading_20_1" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.8cm" fo:margin-bottom="0.3cm" fo:keep-with-next="true"/>

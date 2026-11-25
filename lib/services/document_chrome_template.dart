@@ -1,5 +1,6 @@
 library;
 
+import '../models/deck.dart';
 import '../utils/document_front_matter.dart' show kMaxDocumentFieldValueLength;
 
 final _documentChromePlaceholder = RegExp(r'\{([a-z][a-z0-9_-]*)\}');
@@ -89,4 +90,33 @@ class _BoundedChromeWriter {
     if (!_truncated || value.isEmpty) return value;
     return '${value.substring(0, value.length - 1)}…';
   }
+}
+
+/// De veldkaart die `{key}`-plaatsen in een chrome-sjabloon vult: de vrije
+/// documentvelden plus de drie vaste (titel, subtitel, auteur). Eén bron voor
+/// elke uitvoerder — PDF, HTML, LaTeX en de native banden van #3166 — zodat
+/// `{title}` overal hetzelfde oplost.
+Map<String, String> documentChromeFields(Deck deck) => {
+  ...deck.documentFields,
+  'title': deck.title,
+  'subtitle': deck.description,
+  'author': deck.author,
+};
+
+/// Lost de kop- en voettekst van het documentstijlprofiel op tot platte
+/// Markdown-regels. Lege sjablonen leveren lege strings; de uitvoerder
+/// schrijft dan géén band (#3166).
+({String header, String footer}) resolveDocumentChrome(Deck deck) {
+  final theme = deck.themeProfile;
+  final fields = documentChromeFields(deck);
+  return (
+    header: resolveDocumentChromeTemplate(
+      theme.documentHeaderText.trim(),
+      fields,
+    ),
+    footer: resolveDocumentChromeTemplate(
+      theme.documentFooterText.trim(),
+      fields,
+    ),
+  );
 }

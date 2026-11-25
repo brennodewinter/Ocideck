@@ -226,12 +226,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     ),
   );
 
-  final fields = {
-    ...deck.documentFields,
-    'title': deck.title,
-    'subtitle': deck.description,
-    'author': deck.author,
-  };
+  final fields = documentChromeFields(deck);
   // De twee opmaakrondes plus `document.save()` zijn het zwaarste stuk van de
   // export — op een document van honderd pagina's seconden puur CPU. Alles wat
   // de UI-isolate zelf nodig had (afbeeldingen, grafieken, logo, lettertypen)

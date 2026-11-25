@@ -28,6 +28,7 @@ import 'latex/markdown_to_latex.dart';
 import 'markdown_service.dart';
 import 'marp_html_service.dart';
 import 'mermaid_theme.dart';
+import 'document_chrome_template.dart';
 import 'pdf/document_pdf_export.dart';
 import 'epub/document_epub_export.dart';
 import 'odt/document_odt_export.dart';
@@ -258,7 +259,7 @@ Future<Uint8List> buildDocumentExportBytes(
       ? projectedMetadata
       : projectedMetadata.withLanguage(metadata.language);
   final documentFields = bundle.audience.deck.documentFields;
-  final chromeFields = _documentChromeFields(bundle.audience.deck);
+  final chromeFields = documentChromeFields(bundle.audience.deck);
   switch (format) {
     case DocumentExportFormat.md:
       final md = _projectedMarkdown(
@@ -788,16 +789,21 @@ String _projectedMarkdown(
       ? replaceTocMarker(body, generateTocMarkdown(body), keepMarker: false)
       : body;
   final tlp = bundle.audience.deck.tlp;
-  return withDocumentFields(
-    withDocumentFrontMatterKey(
-      withDocumentFootnotePlacement(
-        withDocumentPageSetup(withToc, size: pageSize, margins: pageMargins),
-        footnotePlacement,
+  final chrome = resolveDocumentChrome(bundle.audience.deck);
+  return withDocumentChrome(
+    withDocumentFields(
+      withDocumentFrontMatterKey(
+        withDocumentFootnotePlacement(
+          withDocumentPageSetup(withToc, size: pageSize, margins: pageMargins),
+          footnotePlacement,
+        ),
+        'tlp',
+        tlp == TlpLevel.none ? null : tlp.key,
       ),
-      'tlp',
-      tlp == TlpLevel.none ? null : tlp.key,
+      documentFields,
     ),
-    documentFields,
+    header: chrome.header,
+    footer: chrome.footer,
   );
 }
 
@@ -816,10 +822,3 @@ String _htmlBodyWithSpacers(String body) => body.replaceAll(
   RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$', multiLine: true),
   '&nbsp;',
 );
-
-Map<String, String> _documentChromeFields(Deck deck) => {
-  ...deck.documentFields,
-  'title': deck.title,
-  'subtitle': deck.description,
-  'author': deck.author,
-};
