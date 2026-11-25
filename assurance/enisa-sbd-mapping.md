@@ -105,8 +105,9 @@ Verwijzingen zijn naar **bestandsnaam plus symbool**, nooit naar een regelnummer
 
 O1 en O2 staan hieronder met hun uitkomst. De resterende onderwerpen in de
 matrix zijn adviescontrole van de Dart-graaf (#517), verificatiediepte (CRA-dossier)
-en het bewijs voor platformdistributie en cross-OS-bouw (#520). Voor de nieuwe
-grenzen staan de uitrolafhankelijke risico’s in de risicoafweging en volgt
+en het bewijs voor platformdistributie en cross-OS-bouw (#520). Het
+verificatievervolg staat in [#3247](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3247).
+Voor de nieuwe grenzen staan de uitrolafhankelijke risico’s in de risicoafweging en volgt
 dossierherziening via #3243.
 
 - **O1 — artefactondertekening: gedicht via een getekende release-manifest.**
