@@ -677,6 +677,8 @@ these fields (with defaults):
 | `documentBodyFontSize` | `11` | Base body-text size of a document, in typographic points (`9`–`28`) — the same unit as the PDF. Headings, footnotes and timeline cards are proportions of it. The visual editor, the reader, the page-break calculation and the HTML export convert that point size to CSS pixels at 96/72 (so 11 pt on screen is the same physical size as 11 pt in the PDF). A slide is unaffected: it scales its text to the 16:9 frame. |
 | `documentHeaderText` | `""` | Repeating, multi-line document header with inline Markdown. |
 | `documentFooterText` | `""` | Repeating, multi-line document footer with inline Markdown. |
+| `documentHeaderFontSize` | `null` | **Documents.** Optional page-header size in typographic points (`6`–`28`). Omitted when unset; `null` preserves each output format's existing default (9 pt on screen). Non-finite values become `null`; finite values are clamped to the supported range on read. |
+| `documentFooterFontSize` | `null` | **Documents.** Optional page-footer size, with the same unit, bounds and missing-value behavior as `documentHeaderFontSize`. |
 | `documentHeadingColor` | `null` | Colour of a document's headings, all levels. `null` keeps the split that was always there: a chapter heading follows `textColor` and a subheading `accentColor`. |
 | `documentBandTextColor` | `null` | Header/footer text colour. `null` follows `textColor`. |
 | `documentBandBackgroundColor` | `null` | Header/footer background colour. `null` follows `slideBackgroundColor`. |

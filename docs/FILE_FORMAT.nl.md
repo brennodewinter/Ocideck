@@ -642,12 +642,17 @@ deze velden (met standaardwaarden):
 | `slideBackgroundImages` | `{}` | **Presentaties.** Afbeeldingspaden onder `content` en optioneel `title`. De inhoudsafbeelding is standaard; de titelafbeelding vervangt deze op een titeldia. De paden worden net als het logo met de stijl opgelost en meegenomen. |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logogrootte in px. |
+| `brandStripPath` | `null` | **Presentaties.** Optionele merkstrook over de volle breedte, gekopieerd naast het logo in `logos/`. De strook volgt dezelfde boven- of onderrand als `logoPosition` en vervangt het afzonderlijke logo op dia's. |
+| `brandStripHeight` | `0` | **Presentaties.** Strookhoogte als fractie van de hoogte van een 16:9-dia, begrensd op `0`–`0.25`. `0` behoudt de klassieke titel- en logo-indeling. |
+| `titleSubtitleInBrandStrip` | `false` | **Presentaties.** Plaatst de ondertitel of auteursregel van een titeldia in de merkstrook. De titel en aanvullende informatie blijven erboven. |
 | `documentLogoPath` | `null` | Afwijkend documentlogo. `null` deelt `logoPath`; `""` schakelt het logo voor documenten bewust uit. |
 | `documentLogoPosition` | `top-right` | Positie van het effectieve documentlogo in de kop- of voettekst. |
 | `documentLogoSize` | `null` | Breedte van het documentlogo in px (`32`–`480`). `null` volgt `logoSize`. |
 | `documentBodyFontSize` | `11` | Basisgrootte van de broodtekst van een document, in typografische punten (`9`–`28`) — dezelfde eenheid als de PDF. Koppen, voetnoten en tijdlijnkaarten zijn verhoudingen daarvan. De visuele editor, de lezer, de pagina-eindeberekening en de HTML-export zetten die puntmaat om naar CSS-pixels met 96/72 (dus 11 pt op het scherm is dezelfde fysieke maat als 11 pt in de PDF). Een dia blijft onaangetast: die schaalt haar tekst naar het 16:9-kader. |
 | `documentHeaderText` | `""` | Herhalende meerregelige documentkop met inline Markdown. |
 | `documentFooterText` | `""` | Herhalende meerregelige documentfooter met inline Markdown. |
+| `documentHeaderFontSize` | `null` | **Documenten.** Optionele lettergrootte van de paginakop in typografische punten (`6`–`28`). De sleutel ontbreekt als er geen maat is ingesteld; `null` behoudt de bestaande standaard per uitvoerformaat (9 pt op het scherm). Niet-eindige waarden worden `null`; eindige waarden worden bij het lezen begrensd op het ondersteunde bereik. |
+| `documentFooterFontSize` | `null` | **Documenten.** Optionele lettergrootte van de paginavoet, met dezelfde eenheid, grenzen en afhandeling van ontbrekende waarden als `documentHeaderFontSize`. |
 | `documentHeadingColor` | `null` | Kleur van de koppen van een document, alle niveaus. `null` houdt de verdeling die er altijd was: een hoofdstukkop volgt `textColor`, een subkop `accentColor`. |
 | `documentBandTextColor` | `null` | Tekstkleur van kop en footer. `null` volgt `textColor`. |
 | `documentBandBackgroundColor` | `null` | Achtergrondkleur van kop en footer. `null` volgt `slideBackgroundColor`. |
@@ -659,6 +664,8 @@ deze velden (met standaardwaarden):
 | `footerText` | `""` | Vrije voettekst; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
 | `footerShowPageNumbers` | `false` | Toon "pagina / totaal" rechtsonder. |
 | `footerPosition` | `right` | `left`/`center`/`right`. |
+| `headerFontSize` | `18.56` | **Presentaties.** Grootte van de Marp-koptekst (`header:`) in punten op een dia van 1280 breed; de maat schaalt met het kader. `18.56` is exact de oude vaste `w × 0.0145`, zodat een profiel zonder dit veld gelijk blijft tekenen. |
+| `footerFontSize` | `18.56` | **Presentaties.** Grootte van `footerText` en het dianummer, in dezelfde eenheid als `headerFontSize`. |
 | `closingSlideEnabled` | `false` | Voeg automatisch een afsluitende slide toe tijdens presenteren/exporteren. |
 | `closingSlideMarkdown` | `"# Bedankt\n\nVragen?"` | Markdown voor die afsluitende slide. |
 | `severityCriticalColor` | `#B91C1C` | Bevindings-/CVSS-kleur voor de band Kritiek. |
