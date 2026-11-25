@@ -605,7 +605,6 @@ const _dutchSourceLa = {
   'Slide': 'Lamina',
   'TYPE': 'GENUS',
   'STIJL': 'STILUS',
-  'Terug naar standaardstijl': 'Ad stilum praedefinitum redire',
   'Sprekersnotities...': 'Notae oratoris...',
   'Sprekersnotities': 'Notae oratoris',
   'Notities voor tijdens het presenteren': 'Notae ad usum dum praesentas',
@@ -1619,9 +1618,8 @@ const _dutchSourceAddLa = <String, String>{
   'Vanaf deze dia': 'Ab hac pagina',
   'Deckstijl': 'Stylus praesentationis',
   'Geërfd vanaf dia': 'Haereditatum a pagina',
-  'Geldt ook op de volgende dia\'s': 'Valet quoque in paginis sequentibus',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Valet ab hac pagina usque ad proximam styli mutationem. Stylum praesentationis in capite editoris eligis.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Nova electio ab hac pagina usque ad finem valet.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Imago diutius quam oportet oneratur. Fac ut fasciculus in hoc computatro praesto sit et rursus exportare conare.',
   'Sprekers corrigeren': 'Oratores corrige',

@@ -79,7 +79,12 @@ extension DeckNotifierSlides on DeckNotifier {
     final slides = List<Slide>.from(deck.slides);
     final at = afterIndex != null ? afterIndex + 1 : slides.length;
     final clamped = at.clamp(0, slides.length);
-    slides.insertAll(clamped, newSlides.map(Slide.duplicate));
+    slides.insertAll(
+      clamped,
+      newSlides.map(
+        (slide) => Slide.duplicate(slide, preserveStyleSwitch: true),
+      ),
+    );
     _mutate(deck.copyWith(slides: slides), bumpRevision: newSlides.length > 1);
     return clamped;
   }
@@ -345,20 +350,23 @@ extension DeckNotifierSlides on DeckNotifier {
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
-  /// Zet de stijlmarkering van dia [index] (#2996): [styleName] `''` is geen
-  /// markering (erf wat er liep), `'deck'` keert terug naar de deckstijl,
-  /// anders de naam van een stijlprofiel.
-  ///
-  /// De wissel werkt voorwaarts: hij geldt voor deze dia en elke volgende tot
-  /// een nieuwe markering. Het profiel wordt meteen opgelost in
-  /// `Deck.slideStyles`, zodat ook een naam zonder instellingenprofiel — een
-  /// deck dat zijn stijl meedroeg — die behoudt. Een naam die niets meer
-  /// raakt valt uit de map.
+  /// Past [styleName] toe vanaf dia [index] tot het einde van het deck.
+  /// Latere stijlmarkeringen verdwijnen in dezelfde ongedaan-stap.
   void setSlideStyle(int index, String styleName) {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
-    final slides = List<Slide>.from(deck.slides);
-    slides[index] = slides[index].copyWith(styleName: styleName);
+    final inherited = deck.slideStyleNameAtIndex(index - 1) ?? kDeckStyleToken;
+    final marker = styleName == inherited ? '' : styleName;
+    List<Slide>? slides;
+    for (var i = index; i < deck.slides.length; i++) {
+      final slide = deck.slides[i];
+      final newMarker = i == index ? marker : '';
+      if (slide.styleName == newMarker) continue;
+      (slides ??= List<Slide>.of(deck.slides))[i] = slide.copyWith(
+        styleName: newMarker,
+      );
+    }
+    if (slides == null) return;
     _mutate(
       deck.copyWith(
         slides: slides,

@@ -118,9 +118,12 @@ class _EditorPanelContent extends ConsumerWidget {
           // ── Kopregel: type, stijl, hulp en slidekwaliteit op één regel ─────
           _EditorHeaderBar(
             slide: slide,
-            profiles: settings.themeProfiles,
-            activeProfile: deck.themeProfile,
-            defaultProfile: settings.themeProfile,
+            stylePicker: _SlideStylePicker(
+              deck: deck,
+              index: idx,
+              profiles: settings.themeProfiles,
+              onChanged: (name) => deckNotifier.setSlideStyle(idx, name),
+            ),
             revealInfoSafety: revealed,
             revealProcesverbetering: revealProcesverbetering,
             revealManagementsysteem: revealManagementsysteem,
@@ -129,14 +132,6 @@ class _EditorPanelContent extends ConsumerWidget {
               if (newType == slide.type) return;
               update(_convertSlideType(slide, newType));
             },
-            onProfileChanged: (profile) async {
-              deckNotifier.updateThemeProfile(profile);
-              await ref
-                  .read(settingsProvider.notifier)
-                  .selectThemeProfile(profile.name);
-            },
-            onDefaultProfileRequested: () =>
-                deckNotifier.updateThemeProfile(settings.themeProfile),
             // Rechtstreeks naar de rauwe markdown van déze dia: dezelfde
             // markdown-modus als de globale schakelaar, maar meteen op de
             // actieve slide gericht (het ontsnappingsluik uit #1160). De
@@ -199,7 +194,6 @@ class _EditorPanelContent extends ConsumerWidget {
                   deckNotifier: deckNotifier,
                   imageService: imgService,
                   deck: deck,
-                  profiles: settings.themeProfiles,
                   richTextPage: richTextPage,
                   richTextPages: richTextPages,
                   multiPageNotes: multiPageNotes,
@@ -222,7 +216,6 @@ class _EditorPanelContent extends ConsumerWidget {
     required DeckNotifier deckNotifier,
     required ImageService imageService,
     required Deck deck,
-    required List<ThemeProfile> profiles,
     required int richTextPage,
     required int richTextPages,
     required bool multiPageNotes,
@@ -236,17 +229,11 @@ class _EditorPanelContent extends ConsumerWidget {
         onUpdate: update,
         imageService: imageService,
         deck: deck,
-        profiles: profiles,
         // De sprong-uit muteert twee dia's (deze en het doel), dus loopt hij via
         // de deck-notifier i.p.v. de enkel-dia [update] (#1162).
         onSetJump: (targetIndex) => deckNotifier.setSlideJump(
           deck.slides.indexWhere((s) => s.id == slide.id),
           targetIndex,
-        ),
-        // De stijlwissel resolveert zijn profiel in de notifier (#2996).
-        onSetStyle: (name) => deckNotifier.setSlideStyle(
-          deck.slides.indexWhere((s) => s.id == slide.id),
-          name,
         ),
       ),
       const Divider(height: 1),
@@ -414,6 +401,7 @@ class _EditorPanelContent extends ConsumerWidget {
       imageSize: slide.imageSize,
       splitImageOnLeft:
           newType == SlideType.bulletsImage && slide.splitImageOnLeft,
+      styleName: slide.styleName,
       showLogo: slide.showLogo,
       showFooter: slide.showFooter,
       tlp: slide.tlp,

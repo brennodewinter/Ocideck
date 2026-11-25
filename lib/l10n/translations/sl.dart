@@ -599,7 +599,6 @@ const _dutchSourceSl = {
   'Slide': 'Diapozitiv',
   'TYPE': 'VRSTA',
   'STIJL': 'SLOG',
-  'Terug naar standaardstijl': 'Nazaj na privzeti slog',
   'Sprekersnotities...': 'Opombe govorca ...',
   'Sprekersnotities': 'Opombe govorca',
   'Notities voor tijdens het presenteren': 'Opombe za med predstavljanjem',
@@ -1606,9 +1605,8 @@ const _dutchSourceAddSl = <String, String>{
   'Vanaf deze dia': 'Od te prosojnice',
   'Deckstijl': 'Slog decka',
   'Geërfd vanaf dia': 'Podedovano od prosojnice',
-  'Geldt ook op de volgende dia\'s': 'Velja tudi za naslednje prosojnice',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Velja od te prosojnice do naslednje menjave sloga. Slog decka izberete v glavi urejevalnika.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Nova izbira velja od te prosojnice do konca.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Nalaganje slike traja predolgo. Omogočite lokalni dostop do datoteke in poskusite znova izvoziti.',
   'Sprekers corrigeren': 'Popravi govorce',

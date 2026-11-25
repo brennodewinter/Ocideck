@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
@@ -123,27 +124,134 @@ void main() {
     expect(isSelected(SlideType.table), isFalse);
   });
 
-  testWidgets('de STIJL-keuze blijft na een herstart geselecteerd', (
+  testWidgets('de stijlkeuze vervangt latere wissels tot het einde', (
     tester,
   ) async {
     final container = await pump(tester, reveal: false);
-
-    await tester.tap(find.byType(DropdownButton<String>));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Security').last);
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 100));
-
-    expect(container.read(deckProvider).deck!.themeProfile.name, 'Security');
-    expect(
-      container.read(settingsProvider).selectedThemeProfileName,
+    final notifier = container.read(deckProvider.notifier);
+    final editor = container.read(editorProvider.notifier);
+    final base = container.read(deckProvider).deck!.themeProfile.name;
+    final defaultStyle = container
+        .read(settingsProvider)
+        .selectedThemeProfileName;
+    const legacyStyles = [
+      'Vigilis',
       'Security',
+      'Vigilis',
+      'deck',
+      'Security',
+      'Vigilis',
+      'Security',
+    ];
+    final legacySlides = [
+      for (final (i, style) in legacyStyles.indexed)
+        '<!-- ocideck_style: $style -->\n\n# Dia ${i + 1}\n\n- Tekst',
+    ].join('\n\n---\n\n');
+    expect(
+      notifier.applyMarkdown('---\nmarp: true\n---\n\n$legacySlides'),
+      isTrue,
     );
 
-    final restarted = SettingsNotifier();
-    addTearDown(restarted.dispose);
-    await tester.pump(const Duration(milliseconds: 50));
-    expect(restarted.state.selectedThemeProfileName, 'Security');
+    final picker = find.byKey(const Key('slide-style-from-here'));
+    Future<void> select(int index) async {
+      editor.select(index);
+      await tester.pumpAndSettle();
+    }
+
+    Future<void> choose(String profile) async {
+      await tester.tap(picker);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(profile).last);
+      await tester.pumpAndSettle();
+    }
+
+    List<String> styles() {
+      final deck = container.read(deckProvider).deck!;
+      return List.generate(
+        deck.slides.length,
+        (i) => deck.slideProfileAt(i).name,
+      );
+    }
+
+    await select(1);
+    // Ook opnieuw kiezen van de actieve stijl vervangt alle latere wissels.
+    await choose('Security');
+    expect(styles(), ['Vigilis', ...List.filled(6, 'Security')]);
+
+    notifier.undo();
+    await tester.pumpAndSettle();
+    expect(styles(), [
+      'Vigilis',
+      'Security',
+      'Vigilis',
+      base,
+      'Security',
+      'Vigilis',
+      'Security',
+    ]);
+    await choose('Security');
+
+    await select(2);
+    expect(tester.widget<DropdownButton<String>>(picker).value, 'Security');
+    expect(
+      find.byTooltip(
+        'Geërfd vanaf dia 2\nEen nieuwe keuze geldt vanaf deze dia tot het einde.',
+      ),
+      findsOneWidget,
+    );
+
+    await select(1);
+    await tester.tap(typeButton);
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AddSlideDialog),
+        matching: find.byKey(const ValueKey(SlideType.title)),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(container.read(deckProvider).deck!.slides[1].type, SlideType.title);
+    expect(container.read(deckProvider).deck!.slides[1].styleName, 'Security');
+
+    await select(5);
+    await choose('Vigilis');
+    expect(styles(), [
+      'Vigilis',
+      ...List.filled(4, 'Security'),
+      'Vigilis',
+      'Vigilis',
+    ]);
+
+    await select(3);
+    await choose('Deckstijl ($base)');
+    expect(styles(), [
+      'Vigilis',
+      'Security',
+      'Security',
+      ...List.filled(4, base),
+    ]);
+
+    await select(5);
+    await choose('Vigilis');
+    final expected = [
+      'Vigilis',
+      'Security',
+      'Security',
+      base,
+      base,
+      'Vigilis',
+      'Vigilis',
+    ];
+    expect(styles(), expected);
+    expect(
+      container.read(settingsProvider).selectedThemeProfileName,
+      defaultStyle,
+    );
+
+    final markdown = notifier.generateMarkdown();
+    expect(RegExp('<!-- ocideck_style:').allMatches(markdown), hasLength(4));
+    expect(notifier.applyMarkdown(markdown), isTrue);
+    expect(styles(), expected);
   });
 
   testWidgets('module off: the picker hides the security types', (

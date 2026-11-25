@@ -5,12 +5,8 @@ part of 'editor_panel.dart';
 
 class _EditorToolbar extends StatelessWidget {
   final Slide slide;
-  final List<ThemeProfile> profiles;
-  final ThemeProfile activeProfile;
-  final ThemeProfile defaultProfile;
+  final Widget stylePicker;
   final ValueChanged<SlideType> onTypeChanged;
-  final ValueChanged<ThemeProfile> onProfileChanged;
-  final VoidCallback onDefaultProfileRequested;
 
   /// Of de informatieveiligheid-module onthuld is; gate de security-slidetypes
   /// in de kiezer net als 'Slide toevoegen' (zie [AddSlideDialog]).
@@ -31,12 +27,8 @@ class _EditorToolbar extends StatelessWidget {
 
   const _EditorToolbar({
     required this.slide,
-    required this.profiles,
-    required this.activeProfile,
-    required this.defaultProfile,
+    required this.stylePicker,
     required this.onTypeChanged,
-    required this.onProfileChanged,
-    required this.onDefaultProfileRequested,
     required this.revealInfoSafety,
     this.revealProcesverbetering = false,
     this.revealManagementsysteem = false,
@@ -75,13 +67,6 @@ class _EditorToolbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Make sure the active profile is always selectable, even when it was
-    // loaded from a file and is not part of the saved profile list.
-    final profileItems = <ThemeProfile>[
-      ...profiles,
-      if (!profiles.any((p) => p.name == activeProfile.name)) activeProfile,
-    ];
-
     final fields = <Widget>[
       Expanded(
         child: _ToolbarField(
@@ -93,70 +78,7 @@ class _EditorToolbar extends StatelessWidget {
         ),
       ),
       const SizedBox(width: 10),
-      Expanded(
-        child: _ToolbarField(
-          label: 'STIJL',
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: activeProfile.name,
-              isExpanded: true,
-              isDense: true,
-              borderRadius: BorderRadius.circular(6),
-              style: TextStyle(
-                fontSize: 12,
-                color: AppTheme.tealFg,
-                fontWeight: FontWeight.w600,
-              ),
-              items: [
-                for (final profile in profileItems)
-                  DropdownMenuItem(
-                    value: profile.name,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.palette_outlined,
-                          size: 14,
-                          color: AppTheme.tealFg,
-                        ),
-                        const SizedBox(width: 4),
-                        Flexible(
-                          child: Text(
-                            profile.name,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-              onChanged: (name) {
-                if (name == null) return;
-                final profile = profileItems.firstWhere(
-                  (p) => p.name == name,
-                  orElse: () => activeProfile,
-                );
-                onProfileChanged(profile);
-              },
-            ),
-          ),
-        ),
-      ),
-      // Alleen tonen wanneer de stijl afwijkt van de standaard — anders
-      // voegt het niets toe. Eén klik zet 'm terug op het standaardprofiel.
-      if (activeProfile.name != defaultProfile.name) ...[
-        const SizedBox(width: 2),
-        IconButton(
-          tooltip:
-              '${context.l10n.d('Terug naar standaardstijl')} ${defaultProfile.name}',
-          onPressed: onDefaultProfileRequested,
-          icon: const Icon(Icons.restart_alt, size: 16),
-          color: AppTheme.tealFg,
-          visualDensity: VisualDensity.compact,
-          padding: EdgeInsets.zero,
-          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-        ),
-      ],
+      Expanded(child: stylePicker),
     ];
 
     return Container(
@@ -197,12 +119,8 @@ class _EditorToolbar extends StatelessWidget {
 /// (zie [_SlideSettingsSection]).
 class _EditorHeaderBar extends StatefulWidget {
   final Slide slide;
-  final List<ThemeProfile> profiles;
-  final ThemeProfile activeProfile;
-  final ThemeProfile defaultProfile;
+  final Widget stylePicker;
   final ValueChanged<SlideType> onTypeChanged;
-  final ValueChanged<ThemeProfile> onProfileChanged;
-  final VoidCallback onDefaultProfileRequested;
 
   /// Opent de rauwe markdown-bron van de actieve dia (de schakelaar uit #1160).
   final VoidCallback onOpenSource;
@@ -213,12 +131,8 @@ class _EditorHeaderBar extends StatefulWidget {
 
   const _EditorHeaderBar({
     required this.slide,
-    required this.profiles,
-    required this.activeProfile,
-    required this.defaultProfile,
+    required this.stylePicker,
     required this.onTypeChanged,
-    required this.onProfileChanged,
-    required this.onDefaultProfileRequested,
     required this.onOpenSource,
     required this.revealInfoSafety,
     this.revealProcesverbetering = false,
@@ -241,12 +155,8 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
       children: [
         _EditorToolbar(
           slide: widget.slide,
-          profiles: widget.profiles,
-          activeProfile: widget.activeProfile,
-          defaultProfile: widget.defaultProfile,
+          stylePicker: widget.stylePicker,
           onTypeChanged: widget.onTypeChanged,
-          onProfileChanged: widget.onProfileChanged,
-          onDefaultProfileRequested: widget.onDefaultProfileRequested,
           revealInfoSafety: widget.revealInfoSafety,
           revealProcesverbetering: widget.revealProcesverbetering,
           revealManagementsysteem: widget.revealManagementsysteem,
@@ -355,6 +265,76 @@ class _ToolbarField extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// De gekozen stijl vervangt de stijl vanaf deze dia tot het einde.
+class _SlideStylePicker extends StatelessWidget {
+  final Deck deck;
+  final int index;
+  final List<ThemeProfile> profiles;
+  final ValueChanged<String> onChanged;
+
+  const _SlideStylePicker({
+    required this.deck,
+    required this.index,
+    required this.profiles,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final activeName = deck.slideStyleNameAtIndex(index);
+    final markerIndex = slideStyleMarkerIndex(deck.slides, index);
+    final names = {
+      for (final profile in profiles) profile.name,
+      ...deck.slideStyles.keys,
+      if (activeName != null) activeName,
+    }..remove(kDeckStyleToken);
+
+    final scope = l10n.d(
+      'Een nieuwe keuze geldt vanaf deze dia tot het einde.',
+    );
+    return Tooltip(
+      message: markerIndex != null && markerIndex < index
+          ? '${l10n.d('Geërfd vanaf dia')} ${markerIndex + 1}\n$scope'
+          : scope,
+      child: _ToolbarField(
+        label: 'Vanaf deze dia',
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            key: const Key('slide-style-from-here'),
+            value: activeName ?? kDeckStyleToken,
+            isExpanded: true,
+            isDense: true,
+            borderRadius: BorderRadius.circular(6),
+            style: TextStyle(
+              fontSize: 12,
+              color: AppTheme.tealFg,
+              fontWeight: FontWeight.w600,
+            ),
+            items: [
+              DropdownMenuItem(
+                value: kDeckStyleToken,
+                child: Text(
+                  '${l10n.d('Deckstijl')} (${deck.themeProfile.name})',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              for (final name in names)
+                DropdownMenuItem(
+                  value: name,
+                  child: Text(name, overflow: TextOverflow.ellipsis),
+                ),
+            ],
+            onChanged: (name) {
+              if (name != null) onChanged(name);
+            },
+          ),
+        ),
+      ),
     );
   }
 }

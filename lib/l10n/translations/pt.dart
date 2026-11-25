@@ -611,7 +611,6 @@ const _dutchSourcePt = {
   'Slide': 'Slide',
   'TYPE': 'TIPO',
   'STIJL': 'ESTILO',
-  'Terug naar standaardstijl': 'Voltar ao estilo predefinido',
   'Sprekersnotities...': 'Notas do orador...',
   'Sprekersnotities': 'Notas do orador',
   'Notities voor tijdens het presenteren':
@@ -1637,10 +1636,8 @@ const _dutchSourceAddPt = <String, String>{
   'Vanaf deze dia': 'A partir deste diapositivo',
   'Deckstijl': 'Estilo do deck',
   'Geërfd vanaf dia': 'Herdado do diapositivo',
-  'Geldt ook op de volgende dia\'s':
-      'Também se aplica aos diapositivos seguintes',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Aplica-se a partir deste diapositivo até à próxima mudança de estilo. O estilo do deck escolhe-se no cabeçalho do editor.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Uma nova escolha aplica-se a partir deste diapositivo até ao fim.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'O carregamento de uma imagem está a demorar demasiado. Disponibilize o ficheiro localmente e tente exportar novamente.',
   'Sprekers corrigeren': 'Corrigir falantes',

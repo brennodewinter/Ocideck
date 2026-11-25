@@ -601,7 +601,6 @@ const _dutchSourceLv = {
   'Slide': 'Slaids',
   'TYPE': 'TIPS',
   'STIJL': 'STILS',
-  'Terug naar standaardstijl': 'Atpakaļ uz noklusējuma stilu',
   'Sprekersnotities...': 'Runātāja piezīmes...',
   'Sprekersnotities': 'Runātāja piezīmes',
   'Notities voor tijdens het presenteren': 'Piezīmes prezentēšanas laikam',
@@ -1603,9 +1602,8 @@ const _dutchSourceAddLv = <String, String>{
   'Vanaf deze dia': 'Sākot ar šo slaidu',
   'Deckstijl': 'Deka stils',
   'Geërfd vanaf dia': 'Mantots no slaida',
-  'Geldt ook op de volgende dia\'s': 'Attiecas arī uz nākamajiem slaidiem',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Stājas spēkā no šī slaida līdz nākamajai stila maiņai. Deka stilu izvēlies redaktora galvenē.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Jaunā izvēle ir spēkā no šī slaida līdz beigām.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Attēla ielāde aizņem pārāk ilgu laiku. Nodrošiniet faila pieejamību lokāli un mēģiniet eksportēt vēlreiz.',
   'Sprekers corrigeren': 'Labot runātājus',
