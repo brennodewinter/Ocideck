@@ -433,10 +433,18 @@ and the defects it caught. OciDeck does not claim WCAG 2.1 conformance at any
 level, has no accessibility conformance report, and has not been tested with
 users of assistive technology.
 
-**Not verified with real screen readers.** The labels are asserted through
-Flutter's semantics tree in tests. Nobody has run OciDeck end to end under
-VoiceOver, NVDA, JAWS or Orca, so "carries a semantic label" is proven and
-"works well in practice" is not.
+**Screen-reader verification is open (#1844, #3237).** Automated tests cover
+the bullet-to-description link in the HTML DOM, the absence of unrevealed
+marks and the bullet descriptions in Flutter's semantics tree, and exactly
+one polite announcement per reveal step.
+
+On 2026-11-25 the callout test deck opened in a macOS 27.2.1 debug session.
+VoiceOver activation and spoken output could not be confirmed. A Windows
+session with NVDA was unavailable. Both checks are pending. To repeat the check,
+present a Bullets + Image slide with step-by-step reveal and two bullets, one
+linked to a single mark and one to two marks. At each step, check that only
+revealed marks are reachable, the bullet's description is read once and the
+step announcement reports the number of marks revealed at that step.
 
 **The privacy check's image scan is unavailable on the web build**, which is a
 capability gap rather than an accessibility one, but it lands in the same place:

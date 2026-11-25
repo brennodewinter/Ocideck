@@ -445,10 +445,19 @@ en de gebreken die hij ving. OciDeck claimt geen WCAG 2.1-conformiteit op enig
 niveau, heeft geen toegankelijkheidsconformiteitsrapport, en is niet getest met
 gebruikers van hulptechnologie.
 
-**Niet geverifieerd met echte schermlezers.** De labels worden in tests via de
-semantiekboom van Flutter vastgesteld. Niemand heeft OciDeck van begin tot eind
-gedraaid onder VoiceOver, NVDA, JAWS of Orca, dus "draagt een semantisch label"
-is bewezen en "werkt goed in de praktijk" niet.
+**De schermlezertoets staat open (#1844, #3237).** Automatische tests toetsen
+de koppeling tussen bullet en beschrijving in de HTML-DOM, de afwezigheid van
+nog niet onthulde markeringen en de bulletbeschrijvingen in de Flutter-
+semantiekboom, en precies één beleefde aankondiging per onthulstap.
+
+Op 2026-11-25 ging de testpresentatie open in een debugsessie op macOS 27.2.1.
+De activering en spraakuitvoer van VoiceOver konden niet worden bevestigd.
+Een Windows-sessie met NVDA was niet beschikbaar. Beide toetsen staan open.
+Presenteer voor de hertest een dia van het type Bullets + Afbeelding met
+stapsgewijs onthullen en twee bullets, één met één markering en één met twee
+markeringen. Controleer per stap of alleen onthulde markeringen bereikbaar
+zijn, of de beschrijving van de bullet één keer wordt voorgelezen en of de
+aankondiging het aantal markeringen noemt dat er in die stap bij komt.
 
 **De afbeeldingsscan van de privacycontrole is niet beschikbaar op de
 browserbuild**, wat een capaciteitshiaat is en geen toegankelijkheidshiaat, maar
