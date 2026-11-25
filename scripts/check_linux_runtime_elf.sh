@@ -49,20 +49,26 @@ while IFS= read -r -d '' file; do
     continue
   fi
   relative=${file#"$root"/}
-  if ! dynamic=$(readelf -d -- "$file" 2>&1); then
-    printf '%s: ELF inspection failed\n%s\n' "$relative" "$dynamic" >&2
+  if ! elf=$(readelf --wide --program-headers --dynamic -- "$file" 2>&1); then
+    printf '%s: ELF inspection failed\n%s\n' "$relative" "$elf" >&2
     result=1
     continue
   fi
-  if [[ "$dynamic" != *'(NEEDED)'* ]]; then continue; fi
+  if [[ "$elf" != *'(NEEDED)'* ]]; then continue; fi
   checked=$((checked + 1))
-  if ! resolved=$(ldd "$file" 2>&1); then
+  loader=(ldd)
+  if [[ "$profile" = standard && "$elf" != *$'\n  INTERP '* ]]; then
+    # A shared object probed outside the app cannot see its already loaded
+    # siblings. Executables still use their own runtime search paths.
+    loader=(env "LD_LIBRARY_PATH=$root/lib" ldd)
+  fi
+  if ! resolved=$("${loader[@]}" "$file" 2>&1); then
     printf '%s: loader inspection failed\n%s\n' "$relative" "$resolved" >&2
     result=1
   elif missing=$(grep -E '=> not found([[:space:]]|$)' <<< "$resolved"); then
     printf '%s: unresolved runtime dependencies\n%s\n' "$relative" "$missing" >&2
     result=1
-  elif [[ "$profile" = appimage ]] && ! check_appimage_host "$relative" "$dynamic" "$resolved"; then
+  elif [[ "$profile" = appimage ]] && ! check_appimage_host "$relative" "$elf" "$resolved"; then
     result=1
   fi
 done < "$inventory"
