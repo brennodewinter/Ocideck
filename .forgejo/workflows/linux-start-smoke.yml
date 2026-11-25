@@ -1,0 +1,93 @@
+name: Linux desktop start
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lib/**'
+      - 'linux/**'
+      - 'native/**'
+      - 'third_party/**'
+      - 'packaging/**'
+      - 'assets/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.tool-versions'
+      - '.forgejo/ci-image/**'
+      - '.forgejo/workflows/linux-start-smoke.yml'
+      - 'scripts/**'
+
+permissions:
+  contents: read
+
+jobs:
+  linux-start:
+    runs-on: docker
+    timeout-minutes: 60
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: De werkkopie vertrouwen
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # Direct Dart-script: geen pub/native hooks vóór de SDK-controle.
+      - name: Draaiende Flutter tegen de pin toetsen
+        run: make check-toolchain
+
+      - name: Ontbrekende Linux-buildlibs
+        run: |
+          set -eu
+          apt-get update
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv-dev libgl1-mesa-dri libegl-mesa0
+
+      - name: Pub-pakketten uit de cache
+        continue-on-error: true
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ~/.pub-cache
+          key: pub-linux-smoke-${{ github.event_name }}-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-smoke-${{ github.event_name }}-
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get --enforce-lockfile
+
+      - name: dartcv4-versie uit pubspec.lock
+        id: dartcv
+        run: |
+          VERSIE="$(grep -A8 '^  dartcv4:' pubspec.lock | grep 'version:' | sed 's/.*version: "//;s/".*//')"
+          test -n "$VERSIE"
+          echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
+
+      - name: dartcv4 native OpenCV-build uit de cache
+        continue-on-error: true
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-smoke-${{ github.event_name }}-${{ steps.dartcv.outputs.versie }}
+
+      - name: Proefgereedschap installeren
+        run: bash scripts/prepare_linux_probe.sh desktop
+
+      - name: Linux-releasebundel bouwen
+        run: bash scripts/run_release_linux_build.sh flutter build linux --release --no-pub
+
+      - name: De gebouwde app starten en het eerste frame toetsen
+        run: bash scripts/linux_start_probe.sh probe-evidence build/linux/x64/release/bundle/ocideck
+
+      - name: Opstartbewijs bewaren
+        if: always()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-start-probe
+          path: probe-evidence/
+          if-no-files-found: ignore
