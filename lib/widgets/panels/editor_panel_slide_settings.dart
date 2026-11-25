@@ -420,25 +420,16 @@ class _SlideSettingsSection extends StatefulWidget {
   final ImageService imageService;
   final Deck deck;
 
-  /// De stijlprofielen waar de stijlwissel (#2996) uit kiest.
-  final List<ThemeProfile> profiles;
-
   /// Zet de sprong-uit van deze dia (#1162): `null` = lineair, anders de
   /// deck-index van de doeldia.
   final ValueChanged<int?> onSetJump;
-
-  /// Zet de stijlmarkering van deze dia (#2996): `''` = erf wat er liep,
-  /// `'deck'` = terug naar de deckstijl, anders een profielnaam.
-  final ValueChanged<String> onSetStyle;
 
   const _SlideSettingsSection({
     required this.slide,
     required this.onUpdate,
     required this.imageService,
     required this.deck,
-    required this.profiles,
     required this.onSetJump,
-    required this.onSetStyle,
   });
 
   @override
@@ -496,9 +487,7 @@ class _SlideSettingsSectionState extends State<_SlideSettingsSection> {
               onUpdate: widget.onUpdate,
               imageService: widget.imageService,
               deck: widget.deck,
-              profiles: widget.profiles,
               onSetJump: widget.onSetJump,
-              onSetStyle: widget.onSetStyle,
             ),
             const SizedBox(height: 8),
           ],
@@ -518,18 +507,14 @@ class _SlideSettingsBody extends StatelessWidget {
   final ValueChanged<Slide> onUpdate;
   final ImageService imageService;
   final Deck deck;
-  final List<ThemeProfile> profiles;
   final ValueChanged<int?> onSetJump;
-  final ValueChanged<String> onSetStyle;
 
   const _SlideSettingsBody({
     required this.slide,
     required this.onUpdate,
     required this.imageService,
     required this.deck,
-    required this.profiles,
     required this.onSetJump,
-    required this.onSetStyle,
   });
 
   /// De kolombreedte waaronder een kaart niet meer fatsoenlijk uitlijnt: het
@@ -540,7 +525,6 @@ class _SlideSettingsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final groups = [
       _slideBackgroundGroup(context, slide, onUpdate, deck),
-      _slideStyleGroup(context),
       ..._groups(context),
     ];
 
@@ -663,86 +647,6 @@ class _SlideSettingsBody extends StatelessWidget {
               style: TextStyle(fontSize: 11, color: AppTheme.warningFg),
             )
           : null,
-    );
-  }
-
-  /// De stijlwissel (#2996): welke stijl *vanaf deze dia* geldt. Een eigen
-  /// groep — bewust níét onder "Op deze slide", want de keuze werkt
-  /// voorwaarts op alle volgende dia's; die reikwijdte moet anders voelen dan
-  /// een vinkje dat alleen deze dia raakt.
-  Widget _slideStyleGroup(BuildContext context) {
-    final l10n = context.l10n;
-    final index = deck.slides.indexWhere((s) => s.id == slide.id);
-    // Wat deze dia erft vóór zijn eigen markering: de laatste markering op de
-    // vorige dia's. `slideStyleNameAt` tot index−1 telt deze dia niet mee.
-    final inherited = index > 0
-        ? slideStyleNameAt(deck.slides, index - 1)
-        : null;
-    // Waar de erf verankerd ligt, voor "geërfd vanaf dia N".
-    final markerIndex = index > 0
-        ? slideStyleMarkerIndex(deck.slides, index - 1)
-        : null;
-    // Wat de keuzelijst toont is wat er geldt: de eigen markering, anders de
-    // erf, anders de deckstijl. 'deck' toont als Deckstijl.
-    final effective = slide.styleName.isNotEmpty
-        ? (slide.styleName == kDeckStyleToken ? null : slide.styleName)
-        : inherited;
-    final ownMarker = slide.styleName.isNotEmpty;
-
-    return _SettingsGroup(
-      label: l10n.d('Vanaf deze dia'),
-      children: [
-        _SettingRow(
-          icon: Icons.palette_outlined,
-          label: l10n.d('Stijl'),
-          help: l10n.d(
-            'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.',
-          ),
-          control: _SettingDropdown<String?>(
-            value: effective,
-            items: [
-              DropdownMenuItem(value: null, child: Text(l10n.d('Deckstijl'))),
-              for (final profile in profiles)
-                DropdownMenuItem(
-                  value: profile.name,
-                  child: Text(profile.name),
-                ),
-              // Een markering op een profiel dat hier niet bestaat moet
-              // toonbaar én herstelbaar blijven; weglaten zou de keuze
-              // onzichtbaar wegklikken.
-              if (ownMarker &&
-                  slide.styleName != kDeckStyleToken &&
-                  profiles.every((p) => p.name != slide.styleName))
-                DropdownMenuItem(
-                  value: slide.styleName,
-                  child: Text(slide.styleName),
-                ),
-            ],
-            onChanged: (choice) {
-              // 'Deckstijl' schrijft alleen een `deck`-markering als er een
-              // bereik loopt om te beëindigen; anders is géén markering de
-              // schone vorm. Dezelfde naam als de erf schrijft óók niets —
-              // een markering die niets verandert is ruis in het bestand.
-              onSetStyle(
-                choice == null
-                    ? (inherited == null ? '' : kDeckStyleToken)
-                    : (choice == inherited ? '' : choice),
-              );
-            },
-          ),
-          detail: !ownMarker && inherited != null && markerIndex != null
-              ? Text(
-                  '${l10n.d('Geërfd vanaf dia')} ${markerIndex + 1}',
-                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-                )
-              : ownMarker
-              ? Text(
-                  l10n.d('Geldt ook op de volgende dia\'s'),
-                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-                )
-              : null,
-        ),
-      ],
     );
   }
 

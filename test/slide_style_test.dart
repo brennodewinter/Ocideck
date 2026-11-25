@@ -101,6 +101,16 @@ marp: true
       expect(slideStyleMarkerIndex(slides, 4), isNull);
     });
 
+    test('een vervolgkopie erft de stijl zonder eigen wissel', () {
+      final original = _bulletSlide(styleName: 'Donker');
+      final continuation = Slide.duplicate(original);
+      expect(continuation.styleName, isEmpty);
+      expect(slideStyleNameAt([original, continuation], 1), 'Donker');
+
+      final copiedRange = Slide.duplicate(original, preserveStyleSwitch: true);
+      expect(copiedRange.styleName, 'Donker');
+    });
+
     test('usedSlideStyleNames verzamelt de echte profielnamen', () {
       expect(usedSlideStyleNames(slides), {'Donker', 'Licht'});
     });

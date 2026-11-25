@@ -601,7 +601,6 @@ const _dutchSourceEt = {
   'Slide': 'Slaid',
   'TYPE': 'TÜÜP',
   'STIJL': 'STIIL',
-  'Terug naar standaardstijl': 'Tagasi vaikestiili',
   'Sprekersnotities...': 'Esineja märkmed...',
   'Sprekersnotities': 'Esineja märkmed',
   'Notities voor tijdens het presenteren': 'Märkmed esitlemise ajaks',
@@ -1599,9 +1598,8 @@ const _dutchSourceAddEt = <String, String>{
   'Vanaf deze dia': 'Alates sellest slaidist',
   'Deckstijl': 'Deeki stiil',
   'Geërfd vanaf dia': 'Päritud slaidilt',
-  'Geldt ook op de volgende dia\'s': 'Kehtib ka järgmistel slaididel',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Kehtib sellest slaidist järgmise stiilivahetuseni. Deeki stiili valitakse redaktori päisest.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Kehtib sellest slaidist järgmise stiilivahetuseni.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Pildi laadimine võtab liiga kaua aega. Tehke fail kohalikult kättesaadavaks ja proovige uuesti eksportida.',
   'Sprekers corrigeren': 'Paranda kõnelejaid',

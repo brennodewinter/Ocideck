@@ -607,7 +607,6 @@ const _dutchSourceMt = {
   'Slide': 'Slide',
   'TYPE': 'TIP',
   'STIJL': 'STIL',
-  'Terug naar standaardstijl': 'Lura għall-istil awtomatiku',
   'Sprekersnotities...': 'Noti tal-kelliem...',
   'Sprekersnotities': 'Noti tal-kelliem',
   'Notities voor tijdens het presenteren': 'Noti għal waqt il-preżentazzjoni',
@@ -1625,9 +1624,8 @@ const _dutchSourceAddMt = <String, String>{
   'Vanaf deze dia': 'Minn din is-slide',
   'Deckstijl': 'Stil tad-deck',
   'Geërfd vanaf dia': 'Wieret minn slide',
-  'Geldt ook op de volgende dia\'s': 'Japplika wkoll fuq is-slides li jmiss',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Japplika minn din is-slide sa tibdil ieħor fl-istil. L-istil tad-deck tagħżlu fl-intestatura tal-editur.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Japplika minn din is-slide sa tibdil ieħor fl-istil.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'It-tagħbija ta’ immaġni qed tieħu wisq żmien. Agħmel il-fajl disponibbli lokalment u erġa’ pprova tesporta.',
   'Sprekers corrigeren': 'Ikkoreġi l-kelliema',

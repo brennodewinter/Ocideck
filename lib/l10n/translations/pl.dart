@@ -605,7 +605,6 @@ const _dutchSourcePl = {
   'Slide': 'Slajd',
   'TYPE': 'TYP',
   'STIJL': 'STYL',
-  'Terug naar standaardstijl': 'Powrót do stylu domyślnego',
   'Sprekersnotities...': 'Notatki prezentera...',
   'Sprekersnotities': 'Notatki prezentera',
   'Notities voor tijdens het presenteren': 'Notatki na czas prezentacji',
@@ -1618,9 +1617,8 @@ const _dutchSourceAddPl = <String, String>{
   'Vanaf deze dia': 'Od tego slajdu',
   'Deckstijl': 'Styl decka',
   'Geërfd vanaf dia': 'Odziedziczone od slajdu',
-  'Geldt ook op de volgende dia\'s': 'Obowiązuje także na kolejnych slajdach',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Obowiązuje od tego slajdu do następnej zmiany stylu. Styl decka wybiera się w nagłówku edytora.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Obowiązuje od tego slajdu do następnej zmiany stylu.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Wczytywanie obrazu trwa zbyt długo. Udostępnij plik lokalnie i spróbuj ponownie wyeksportować.',
   'Sprekers corrigeren': 'Popraw mówców',

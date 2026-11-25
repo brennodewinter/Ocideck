@@ -2394,14 +2394,12 @@ detail is for nobody) has to just work, and the author of that slide knows best.
 
 ### Style from a slide onward (#2996)
 
-Besides the deck style — one profile for the whole deck, in the editor header —
-**Slide settings** carries a separate *From this slide* group. Pick another
-style profile there and it applies **from that slide until the next switch**:
-deliberately not under *On this slide*, because the choice reaches forward over
-every following slide. *Deck style* in the same control ends a running range.
-A slide without its own choice shows where its style comes from ("inherited
-from slide N"), and every slide that opens a range wears the profile name as a
-badge. Thumbnails, the overview, the presenter, the audience window and every
+Use **From this slide onward** above the slide editor to choose a style
+profile. It applies **from the active slide until the next style switch**.
+Choose *Deck style* to return to the presentation’s default style from that
+slide. The control shows the current style. If it was set on an earlier
+slide, the tooltip shows the slide number. The slide that starts the switch
+has a badge. Thumbnails, the overview, the presenter, the audience window and every
 export show and carry the switch; in the Markdown it travels as
 `<!-- ocideck_style: <profile name> -->`, a comment other Marp tools quietly
 ignore. A marker naming a profile that does not exist here renders in the deck

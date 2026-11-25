@@ -607,7 +607,6 @@ const _dutchSourceBg = {
   'Slide': 'Слайд',
   'TYPE': 'ТИП',
   'STIJL': 'СТИЛ',
-  'Terug naar standaardstijl': 'Обратно към стил по подразбиране',
   'Sprekersnotities...': 'Бележки за лектора...',
   'Sprekersnotities': 'Бележки за лектора',
   'Notities voor tijdens het presenteren':
@@ -1630,9 +1629,8 @@ const _dutchSourceAddBg = <String, String>{
   'Vanaf deze dia': 'От този слайд',
   'Deckstijl': 'Стил на дека',
   'Geërfd vanaf dia': 'Наследено от слайд',
-  'Geldt ook op de volgende dia\'s': 'Важи и за следващите слайдове',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Важи от този слайд до следващата смяна на стила. Стилът на дека се избира в заглавката на редактора.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Важи от този слайд до следващата смяна на стила.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Зареждането на изображение отнема твърде много време. Осигурете локален достъп до файла и опитайте да експортирате отново.',
   'Sprekers corrigeren': 'Коригиране на говорители',

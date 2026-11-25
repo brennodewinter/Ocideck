@@ -605,7 +605,6 @@ const _dutchSourceRo = {
   'Slide': 'Slide',
   'TYPE': 'TIP',
   'STIJL': 'STIL',
-  'Terug naar standaardstijl': 'Înapoi la stilul implicit',
   'Sprekersnotities...': 'Note pentru vorbitor...',
   'Sprekersnotities': 'Note pentru vorbitor',
   'Notities voor tijdens het presenteren': 'Note pentru timpul prezentării',
@@ -1623,9 +1622,8 @@ const _dutchSourceAddRo = <String, String>{
   'Vanaf deze dia': 'De la acest diapozitiv',
   'Deckstijl': 'Stil de deck',
   'Geërfd vanaf dia': 'Moștenit de la diapozitivul',
-  'Geldt ook op de volgende dia\'s': 'Se aplică și pe diapozitivele următoare',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Se aplică de la acest diapozitiv până la următoarea schimbare de stil. Stilul de deck se alege în antetul editorului.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Se aplică de la acest diapozitiv până la următoarea schimbare de stil.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Încărcarea unei imagini durează prea mult. Faceți fișierul disponibil local și încercați din nou exportul.',
   'Sprekers corrigeren': 'Corectează vorbitorii',

@@ -19,6 +19,7 @@ import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
+import '../models/slide_style.dart';
 import '../models/used_tool.dart';
 import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';

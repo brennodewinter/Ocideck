@@ -600,7 +600,6 @@ const _dutchSourceSv = {
   'Slide': 'Bild',
   'TYPE': 'TYP',
   'STIJL': 'STIL',
-  'Terug naar standaardstijl': 'Tillbaka till standardstil',
   'Sprekersnotities...': 'Talaranteckningar...',
   'Sprekersnotities': 'Talaranteckningar',
   'Notities voor tijdens het presenteren':
@@ -1607,9 +1606,8 @@ const _dutchSourceAddSv = <String, String>{
   'Vanaf deze dia': 'Från den här bilden',
   'Deckstijl': 'Deckstil',
   'Geërfd vanaf dia': 'Ärvt från bild',
-  'Geldt ook op de volgende dia\'s': 'Gäller även på följande bilder',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Gäller från den här bilden till nästa stilbyte. Deckstilen väljer du i redigerarens huvud.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Gäller från den här bilden till nästa stilbyte.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Det tar för lång tid att läsa in en bild. Gör filen tillgänglig lokalt och försök exportera igen.',
   'Sprekers corrigeren': 'Korrigera talare',

@@ -651,7 +651,9 @@ class Slide {
     );
   }
 
-  factory Slide.duplicate(Slide src) {
+  /// Een kopie die direct op de bron volgt, erft de actieve stijl. Bij het
+  /// invoegen van bestaande dia’s kan de aanroeper hun wissels meenemen.
+  factory Slide.duplicate(Slide src, {bool preserveStyleSwitch = false}) {
     final id = _uuid.v4();
     return Slide(
       id: id,
@@ -710,7 +712,7 @@ class Slide {
       tlp: src.tlp,
       privacy: src.privacy,
       quality: src.quality,
-      styleName: src.styleName,
+      styleName: preserveStyleSwitch ? src.styleName : '',
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableColumnAlignments: List<TableAlign>.from(src.tableColumnAlignments),
       tableNumberColumns: List<bool>.from(src.tableNumberColumns),

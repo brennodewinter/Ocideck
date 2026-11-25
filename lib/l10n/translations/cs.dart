@@ -602,7 +602,6 @@ const _dutchSourceCs = {
   'Slide': 'Snímek',
   'TYPE': 'TYP',
   'STIJL': 'STYL',
-  'Terug naar standaardstijl': 'Zpět na výchozí styl',
   'Sprekersnotities...': 'Poznámky řečníka...',
   'Sprekersnotities': 'Poznámky řečníka',
   'Notities voor tijdens het presenteren': 'Poznámky pro prezentaci',
@@ -1607,9 +1606,8 @@ const _dutchSourceAddCs = <String, String>{
   'Vanaf deze dia': 'Od tohoto snímku',
   'Deckstijl': 'Styl decku',
   'Geërfd vanaf dia': 'Zděděno od snímku',
-  'Geldt ook op de volgende dia\'s': 'Platí i na následujících snímcích',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Platí od tohoto snímku do další změny stylu. Styl decku zvolíte v záhlaví editora.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Platí od tohoto snímku do další změny stylu.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Načítání obrázku trvá příliš dlouho. Zpřístupněte soubor místně a zkuste exportovat znovu.',
   'Sprekers corrigeren': 'Opravit mluvčí',

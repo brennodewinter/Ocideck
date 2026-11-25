@@ -79,7 +79,12 @@ extension DeckNotifierSlides on DeckNotifier {
     final slides = List<Slide>.from(deck.slides);
     final at = afterIndex != null ? afterIndex + 1 : slides.length;
     final clamped = at.clamp(0, slides.length);
-    slides.insertAll(clamped, newSlides.map(Slide.duplicate));
+    slides.insertAll(
+      clamped,
+      newSlides.map(
+        (slide) => Slide.duplicate(slide, preserveStyleSwitch: true),
+      ),
+    );
     _mutate(deck.copyWith(slides: slides), bumpRevision: newSlides.length > 1);
     return clamped;
   }
@@ -345,20 +350,17 @@ extension DeckNotifierSlides on DeckNotifier {
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
-  /// Zet de stijlmarkering van dia [index] (#2996): [styleName] `''` is geen
-  /// markering (erf wat er liep), `'deck'` keert terug naar de deckstijl,
-  /// anders de naam van een stijlprofiel.
-  ///
-  /// De wissel werkt voorwaarts: hij geldt voor deze dia en elke volgende tot
-  /// een nieuwe markering. Het profiel wordt meteen opgelost in
-  /// `Deck.slideStyles`, zodat ook een naam zonder instellingenprofiel — een
-  /// deck dat zijn stijl meedroeg — die behoudt. Een naam die niets meer
-  /// raakt valt uit de map.
+  /// Wisselt vanaf dia [index] naar [styleName] tot de volgende markering.
+  /// De keuze voor de al geërfde stijl laat de dia die stijl verder erven.
   void setSlideStyle(int index, String styleName) {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
+    final inherited = deck.slideStyleNameAtIndex(index - 1) ?? kDeckStyleToken;
+    final marker = styleName == inherited ? '' : styleName;
+    final slide = deck.slides[index];
+    if (slide.styleName == marker) return;
     final slides = List<Slide>.from(deck.slides);
-    slides[index] = slides[index].copyWith(styleName: styleName);
+    slides[index] = slide.copyWith(styleName: marker);
     _mutate(
       deck.copyWith(
         slides: slides,

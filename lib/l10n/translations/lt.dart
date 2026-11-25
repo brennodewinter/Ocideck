@@ -605,7 +605,6 @@ const _dutchSourceLt = {
   'Slide': 'Skaidrė',
   'TYPE': 'TIPAS',
   'STIJL': 'STILIUS',
-  'Terug naar standaardstijl': 'Atgal į numatytąjį stilių',
   'Sprekersnotities...': 'Pranešėjo pastabos...',
   'Sprekersnotities': 'Pranešėjo pastabos',
   'Notities voor tijdens het presenteren': 'Pastabos pristatymo metu',
@@ -1614,9 +1613,8 @@ const _dutchSourceAddLt = <String, String>{
   'Vanaf deze dia': 'Nuo šios skaidrės',
   'Deckstijl': 'Deko stilius',
   'Geërfd vanaf dia': 'Paveldėta nuo skaidrės',
-  'Geldt ook op de volgende dia\'s': 'Galioja ir vėlesnėms skaidrėms',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Galioja nuo šios skaidrės iki kito stiliaus pakeitimo. Deko stilių parenkate redaktoriaus antraštėje.',
+  'Geldt vanaf deze dia tot een volgende stijlwissel.':
+      'Galioja nuo šios skaidrės iki kito stiliaus pakeitimo.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Paveikslėlio įkėlimas trunka per ilgai. Padarykite failą pasiekiamą vietoje ir bandykite eksportuoti dar kartą.',
   'Sprekers corrigeren': 'Taisyti kalbėtojus',
