@@ -44,13 +44,12 @@ several marks — and the bullet that owns it carries the same description, so
 reading the bullet reads the meaning once. The visible letter on the mark is
 kept out of the tree, because it is already the first word of the label. While
 presenting with step-by-step reveal, a group that has not been revealed yet is
-**absent from the accessibility tree**, not merely transparent, and every step
-is announced with the bullet and how many marks came with it. The HTML export
-carries the same thing in ARIA: `role="img"` with the same name on each mark, a
-visually hidden description with a stable id, and `aria-describedby` on the
-bullet. The HTML export does not step — it shows every group at once — so it has
-no live region. The contract is `docs/design/IMAGE_CALLOUTS.md` §12; the gate is
-`test/callout_accessibility_test.dart`.
+**absent from the accessibility tree**, not merely transparent. The announcement
+gives the bullet's position in the sequence and how many marks were revealed.
+The static HTML export shows every group at once. It uses `role="img"` with
+the same name on each mark and `aria-describedby` on the bullet, pointing to a
+visually hidden description with a stable id. The contract is in
+`docs/design/IMAGE_CALLOUTS.md` §12. The test is `test/callout_accessibility_test.dart`.
 
 **A test that fails the build — and exactly how much of the app it sees.**
 `test/accessibility_labels_test.dart` asserts that every button has an
@@ -442,10 +441,18 @@ and the defects it caught. OciDeck does not claim WCAG 2.1 conformance at any
 level, has no accessibility conformance report, and has not been tested with
 users of assistive technology.
 
-**Not verified with real screen readers.** The labels are asserted through
-Flutter's semantics tree in tests. Nobody has run OciDeck end to end under
-VoiceOver, NVDA, JAWS or Orca, so "carries a semantic label" is proven and
-"works well in practice" is not.
+**Screen-reader verification is open (#1844, #3237).** Automated tests cover
+the bullet-to-description link in the HTML DOM, the absence of unrevealed
+marks and the bullet descriptions in Flutter's semantics tree, and exactly
+one polite announcement per reveal step.
+
+On 2026-11-25 the callout test deck opened in a macOS 27.2.1 debug session.
+VoiceOver activation and spoken output could not be confirmed. A Windows
+session with NVDA was unavailable. Both checks are pending. To repeat the check,
+present a Bullets + Image slide with step-by-step reveal and two bullets, one
+linked to a single mark and one to two marks. At each step, check that only
+revealed marks are reachable, the bullet's description is read once and the
+step announcement reports the number of marks revealed at that step.
 
 **The privacy check's image scan is unavailable on the web build**, which is a
 capability gap rather than an accessibility one, but it lands in the same place:

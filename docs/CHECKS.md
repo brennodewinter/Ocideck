@@ -1233,10 +1233,12 @@ These checks form the static portion of the maintainer’s local validation.
   of the rule, and there is deliberately no number to raise to get past it.
 
 ### `make test`
-- **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
+- **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix'`
   — the full unit/widget suite under `test/`, in a randomised order so no test can
-  silently depend on another running first. The golden (visual-regression) tests
-  are excluded here and run separately via `make test-golden`.
+  silently depend on another running first. `make test-benchmarks` runs the scaling
+  benchmarks afterwards. Use `make test-golden` for visual regression tests. The
+  `codec-matrix` installation probes require explicit paths to installed tools and
+  fixtures. [Decoder probe](TRANSCRIPTION_FORMATS.md) · [Speech probe](TRANSCRIPTION_RELEASE_MATRIX.md)
 - **Covers:** Markdown round-trip, preview/rendering, export, providers/state,
   services, the presenter, localization, and more.
 - **Failure means:** inspect the named failing test file and case in the output.
@@ -1262,8 +1264,8 @@ These checks form the static portion of the maintainer’s local validation.
   En `integration_test/diagnostics_log_test.dart` (#2618) draait het logbestand als echte app in de échte app-supportmap: mijlpalen, eerste frame, een kunstmatige blokkade van 800 ms die één stallregel oplevert, en een nette afsluiting die de sessiemarkering weghaalt. De unit-tests (`test/log_file_test.dart`, `test/log_sink_test.dart`, `test/ui_stall_watch_test.dart`) bewijzen rotatie, sanering en de melder in een tijdelijke map; wat ze niet zien, is Windows — `%APPDATA%`, de virusscanner, hernoemen over een bestaand bestand. Daarom draait de spiegel-CI hem op macOS en Windows. De Windows-rookproef in `release.yml` leunt erop: hij wacht tot 60 s op de mijlpaal `opstart: eerste frame` in het geïnstalleerde logbestand en zet het log bij een fout in het releaselog — een proces dat leeft maar nooit een frame tekent, is voor de gebruiker "de app start niet".
 
 ### `make coverage`
-- **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
-  then `dart run tool/coverage_summary.dart --min=80 --require-instrumented`.
+- **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags 'golden || benchmark || codec-matrix'`
+  then `dart run tool/coverage_summary.dart --min=80 --require-instrumented` and `make test-benchmarks`.
 - **Covers:** two things. (1) Line coverage across every `lib/` file a test
   imports. (2) That there **is** such a test for every `lib/` file.
 - **Failure means:** coverage dropped below the floor (`--min` in the Makefile
@@ -2689,9 +2691,8 @@ environment failure, not a reason to suppress findings.
 ### Isolated scaling measurements (#2967)
 
 `make test` and `make coverage` run functional tests in parallel, then invoke
-`make test-benchmarks` as a separate required step. The tagged codec scaling
-measurement runs without coverage and with one test process; its threshold is
-unchanged. The 300-page content-preservation test remains in the parallel
+`make test-benchmarks` as a separate required step. It selects every test
+tagged `benchmark` under `test/` and runs them serially without coverage. The 300-page content-preservation test remains in the parallel
 instrumented suite. The GitHub Windows and platform-matrix test commands use the
 same separation. A benchmark failure still fails the gate; this is not a retry
 or an optional check. Invoke `make test-benchmarks` on its own for diagnosis.

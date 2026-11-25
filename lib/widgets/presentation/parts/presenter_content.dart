@@ -85,8 +85,8 @@ void sendDeckReplaceToAudience(
     reportLanguage: reportLanguage,
     improvementY01: improvementY01,
   );
-  audienceChannel
-      .invokeMethod('replaceDeck', {
+  AudienceMethod.replaceDeck
+      .send({
         'markdown': markdown,
         'index': index,
         // De beamer houdt annotaties per index bij; na een splitsing schuiven
@@ -237,8 +237,8 @@ extension _PresenterContent on _FullscreenPresenterState {
     _rebuild(() => _replaceSlide(widget.slides, slideIndex, updated));
     widget.onSessionEdit?.call(updated);
     if (_dual) {
-      audienceChannel
-          .invokeMethod('checklistUpdate', {
+      AudienceMethod.checklistUpdate
+          .send({
             'seq': _audienceSync.nextContentSequence,
             'slideIndex': slideIndex,
             'bullets': updated.bullets,

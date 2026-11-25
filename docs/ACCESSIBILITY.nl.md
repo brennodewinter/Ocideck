@@ -53,13 +53,12 @@ die hem bezit draagt dezelfde beschrijving, zodat het lezen van de bullet de
 betekenis één keer meeleest. De zichtbare letter op de markering blijft buiten
 de boom, want die staat al vooraan in de naam. Presenteer je met stapsgewijs
 onthullen, dan is een groep die nog niet onthuld is **afwezig uit de
-accessibility tree**, niet enkel doorzichtig, en wordt elke stap aangekondigd
-met de bullet en hoeveel markeringen meekwamen. De HTML-export draagt hetzelfde
-in ARIA: `role="img"` met dezelfde naam op elke markering, een visueel verborgen
-beschrijving met een vast id, en `aria-describedby` op de bullet. De
-HTML-export stapt niet — hij toont elke groep tegelijk — en heeft daarom geen
-live region. Het contract is `docs/design/IMAGE_CALLOUTS.md` §12; de poort is
-`test/callout_accessibility_test.dart`.
+accessibility tree**, niet enkel doorzichtig. De aankondiging noemt de positie
+van de bullet in de reeks en hoeveel markeringen erbij kwamen. De statische
+HTML-export toont alle groepen tegelijk. Elke markering heeft `role="img"` met
+dezelfde naam, en `aria-describedby` op de bullet verwijst naar een visueel
+verborgen beschrijving met een vast id. Het contract staat in
+`docs/design/IMAGE_CALLOUTS.md` §12. De test is `test/callout_accessibility_test.dart`.
 
 **Een test die de build laat falen — en precies hoeveel van de app hij ziet.**
 `test/accessibility_labels_test.dart` stelt vast dat elke knop een toegankelijke
@@ -454,10 +453,19 @@ en de gebreken die hij ving. OciDeck claimt geen WCAG 2.1-conformiteit op enig
 niveau, heeft geen toegankelijkheidsconformiteitsrapport, en is niet getest met
 gebruikers van hulptechnologie.
 
-**Niet geverifieerd met echte schermlezers.** De labels worden in tests via de
-semantiekboom van Flutter vastgesteld. Niemand heeft OciDeck van begin tot eind
-gedraaid onder VoiceOver, NVDA, JAWS of Orca, dus "draagt een semantisch label"
-is bewezen en "werkt goed in de praktijk" niet.
+**De schermlezertoets staat open (#1844, #3237).** Automatische tests toetsen
+de koppeling tussen bullet en beschrijving in de HTML-DOM, de afwezigheid van
+nog niet onthulde markeringen en de bulletbeschrijvingen in de Flutter-
+semantiekboom, en precies één beleefde aankondiging per onthulstap.
+
+Op 2026-11-25 ging de testpresentatie open in een debugsessie op macOS 27.2.1.
+De activering en spraakuitvoer van VoiceOver konden niet worden bevestigd.
+Een Windows-sessie met NVDA was niet beschikbaar. Beide toetsen staan open.
+Presenteer voor de hertest een dia van het type Bullets + Afbeelding met
+stapsgewijs onthullen en twee bullets, één met één markering en één met twee
+markeringen. Controleer per stap of alleen onthulde markeringen bereikbaar
+zijn, of de beschrijving van de bullet één keer wordt voorgelezen en of de
+aankondiging het aantal markeringen noemt dat er in die stap bij komt.
 
 **De afbeeldingsscan van de privacycontrole is niet beschikbaar op de
 browserbuild**, wat een capaciteitshiaat is en geen toegankelijkheidshiaat, maar
