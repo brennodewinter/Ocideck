@@ -1570,6 +1570,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Lettergrootte koptekst': 'Méid cló an cheanntáisc',
+  'Lettergrootte voettekst': 'Méid cló an bhuntráisc',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Seo é an stíl réamhshocraithe: coinníonn sleamhnáin a bhfuil a n-athrú stíle féin acu é.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

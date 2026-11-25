@@ -1541,6 +1541,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Lettergrootte koptekst': 'Teckenstorlek sidhuvud',
+  'Lettergrootte voettekst': 'Teckenstorlek sidfot',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Detta är standardstilen: bilder med en egen stilväxling behåller den.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

@@ -767,6 +767,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Lettergrootte koptekst': 'Header font size',
+  'Lettergrootte voettekst': 'Footer font size',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'This is the default style: slides with their own style switch keep it.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Lettergrootte koptekst': 'Tamaño di lèter di e header',
+  'Lettergrootte voettekst': 'Tamaño di lèter di e pia di página',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Esaki ta e stilo estandar: diapositivanan ku un kambio di stilo propio ta konserv\'é.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

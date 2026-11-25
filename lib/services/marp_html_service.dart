@@ -943,6 +943,10 @@ class MarpHtmlService {
         '.slide code{font-family:$codeFamily}'
         '.slide pre.mermaid{background:transparent;border:0;text-align:center}'
         '.slide img{max-width:100%}'
+        // Kop- en voettekst volgen de ingestelde profielmaten (#3164); het
+        // ongethematiseerde stylesheet houdt zijn eigen 16px-standaard.
+        '.slide .marp-header{font-size:${t.headerFontSize}px}'
+        '.slide .marp-footer{font-size:${t.footerFontSize}px}'
         '.slide blockquote{border-left:4px solid ${t.accentColor};margin:.5em 0;'
         'padding-left:16px;opacity:.85}'
         '.slide table{border-collapse:collapse;width:100%}'

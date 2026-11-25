@@ -612,6 +612,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Lettergrootte koptekst': 'Schriftgröße Kopfzeile',
+  'Lettergrootte voettekst': 'Schriftgröße Fußzeile',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Dies ist die Standardvorlage: Folien mit einem eigenen Stilwechsel behalten ihn.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

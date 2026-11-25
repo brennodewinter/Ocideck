@@ -1561,6 +1561,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Lettergrootte koptekst': 'Размер на шрифта на горния колонтитул',
+  'Lettergrootte voettekst': 'Размер на шрифта на долния колонтитул',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Това е стилът по подразбиране: слайдовете със собствена смяна на стила го запазват.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

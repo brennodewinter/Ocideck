@@ -1556,6 +1556,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Lettergrootte koptekst': 'Розмір шрифту верхнього колонтитула',
+  'Lettergrootte voettekst': 'Розмір шрифту нижнього колонтитула',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Це стиль за замовчуванням: слайди з власною зміною стилю зберігають його.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

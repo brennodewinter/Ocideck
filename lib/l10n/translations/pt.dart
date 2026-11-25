@@ -1567,6 +1567,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Lettergrootte koptekst': 'Tamanho da fonte do cabeçalho',
+  'Lettergrootte voettekst': 'Tamanho da fonte do rodapé',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Este é o estilo predefinido: os diapositivos com uma mudança de estilo própria mantêm-no.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

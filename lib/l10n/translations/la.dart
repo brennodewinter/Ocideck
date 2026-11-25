@@ -1553,6 +1553,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Lettergrootte koptekst': 'Magnitudo litterarum capitis',
+  'Lettergrootte voettekst': 'Magnitudo litterarum pedis',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Hic est stylus ordinarius: imagines suam mutationem styli propriam retinent.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

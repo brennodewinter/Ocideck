@@ -1542,6 +1542,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Lettergrootte koptekst': 'Velikost pisave glave',
+  'Lettergrootte voettekst': 'Velikost pisave noge',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'To je privzeti slog: diapozitivi z lastno menjavo sloga ga ohranijo.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

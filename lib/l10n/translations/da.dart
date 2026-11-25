@@ -1542,6 +1542,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Lettergrootte koptekst': 'Skriftstørrelse sidehoved',
+  'Lettergrootte voettekst': 'Skriftstørrelse sidefod',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Dette er standardstilen: dias med eget stilskift beholder det.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

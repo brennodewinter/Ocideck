@@ -1542,6 +1542,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Lettergrootte koptekst': 'Ylätunnisteen fonttikoko',
+  'Lettergrootte voettekst': 'Alatunnisteen fonttikoko',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Tämä on oletustyyli: diat, joilla on oma tyylinvaihto, säilyttävät sen.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

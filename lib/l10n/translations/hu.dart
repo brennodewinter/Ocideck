@@ -1543,6 +1543,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Lettergrootte koptekst': 'Fejléc betűmérete',
+  'Lettergrootte voettekst': 'Lábléc betűmérete',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Ez az alapértelmezett stílus: a saját stílusváltással rendelkező diák megtartják azt.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

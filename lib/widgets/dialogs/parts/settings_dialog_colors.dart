@@ -476,6 +476,13 @@ extension _SettingsColors on _SettingsDialogState {
         },
       ),
       const SizedBox(height: 6),
+      ChromeFontSizeSliders(
+        profile: _themeProfile,
+        onProfileChanged: (p) => _rebuild(() {
+          _themeProfile = p;
+          _profileTouched = true;
+        }),
+      ),
       CheckboxListTile(
         value: _themeProfile.footerShowPageNumbers,
         onChanged: (v) => _rebuild(() {

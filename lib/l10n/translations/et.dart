@@ -1534,6 +1534,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Lettergrootte koptekst': 'Päise kirja suurus',
+  'Lettergrootte voettekst': 'Jaluse kirja suurus',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'See on vaikimisi stiil: slaidid, millel on oma stiilivahetus, säilitavad selle.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':
