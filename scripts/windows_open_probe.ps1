@@ -95,7 +95,11 @@ public static class OpenProbeWindow {
   [StructLayout(LayoutKind.Sequential)] private struct CursorInfo { public int Size, Flags; public IntPtr Cursor; public Point Position; }
   [DllImport("user32.dll")] private static extern bool GetWindowRect(IntPtr hwnd, out Rect rect);
   [DllImport("user32.dll")] private static extern bool GetClientRect(IntPtr hwnd, out Rect rect);
-  [DllImport("user32.dll")] private static extern bool GetCursorInfo(ref CursorInfo cursor);
+  [DllImport("user32.dll", SetLastError = true)] private static extern bool GetCursorInfo(ref CursorInfo cursor);
+  [DllImport("user32.dll")] private static extern IntPtr GetCursor();
+  [DllImport("kernel32.dll")] private static extern uint GetCurrentThreadId();
+  [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr window, IntPtr processId);
+  [DllImport("user32.dll")] private static extern bool AttachThreadInput(uint left, uint right, bool attach);
   [DllImport("user32.dll")] public static extern bool SetCursorPos(int x, int y);
   [DllImport("user32.dll")] private static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extra);
   [DllImport("user32.dll")] private static extern bool SetWindowPos(IntPtr hwnd, IntPtr after, int x, int y, int width, int height, uint flags);
@@ -125,10 +129,21 @@ public static class OpenProbeWindow {
     GC.KeepAlive(callback);
     return dimensions.ToArray();
   }
-  public static IntPtr Cursor() {
+  public static IntPtr Cursor(IntPtr window) {
     var cursor = new CursorInfo { Size = Marshal.SizeOf(typeof(CursorInfo)) };
-    if (!GetCursorInfo(ref cursor)) return IntPtr.Zero;
-    return cursor.Cursor;
+    if (GetCursorInfo(ref cursor) && cursor.Cursor != IntPtr.Zero) return cursor.Cursor;
+    // The virtual desktop can suppress its global cursor. Read the input
+    // queue of the foreground window in that case.
+    uint owner = GetWindowThreadProcessId(window, IntPtr.Zero);
+    uint current = GetCurrentThreadId();
+    if (owner == current) return GetCursor();
+    if (!AttachThreadInput(current, owner, true)) return IntPtr.Zero;
+    try { return GetCursor(); }
+    finally { AttachThreadInput(current, owner, false); }
+  }
+  public static void MovePointer(int x, int y) {
+    if (!SetCursorPos(x - 1, y)) throw new InvalidOperationException("SetCursorPos failed");
+    mouse_event(1, 1, 0, 0, UIntPtr.Zero);
   }
   public static void Click() {
     mouse_event(2, 0, 0, 0, UIntPtr.Zero);
@@ -347,15 +362,15 @@ function Test-NativeWindow {
     $search = Wait-Probe 'visible Settings search after native mouse input' {
         Get-SettingsSearchPosition $display
     }
-    [void][OpenProbeWindow]::SetCursorPos($search.X, ($search.Y - [int](27 * $scale)))
+    [OpenProbeWindow]::MovePointer($search.X, ($search.Y - [int](27 * $scale)))
     Start-Sleep -Milliseconds 250
     $before = Wait-Probe 'native cursor outside the search field' {
-        $cursor = [OpenProbeWindow]::Cursor()
+        $cursor = [OpenProbeWindow]::Cursor($handle)
         if ($cursor -ne [IntPtr]::Zero) { $cursor }
     }
-    [void][OpenProbeWindow]::SetCursorPos($search.X, $search.Y)
+    [OpenProbeWindow]::MovePointer($search.X, $search.Y)
     [void](Wait-Probe 'native cursor changes over Settings search' {
-        $hover = [OpenProbeWindow]::Cursor()
+        $hover = [OpenProbeWindow]::Cursor($handle)
         return ($hover -ne [IntPtr]::Zero -and $hover -ne $before)
     })
     Save-ProbeEvidence 'window-settings-clicked'
