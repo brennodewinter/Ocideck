@@ -176,10 +176,9 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
     '12 hours': 1,
     '16 hours': 1,
     '90 minutes': 1,
-    // Hervatbare workerbudgetten en de bestaande consumer-startproef.
+    // Hervatbare workerbudgetten.
     '175 minutes': 1,
     '20 minutes': 1,
-    '20 second': 1,
     '90 minute': 1,
     '17.5 minutes': 0,
     '2.5 minute': 0,

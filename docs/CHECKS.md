@@ -2044,8 +2044,11 @@ status is required.
 | [`linux-build.yml`](../.forgejo/workflows/linux-build.yml) | `push` · `branches` `main` · `paths` `pubspec.yaml`, `pubspec.lock`, `linux/**`, `third_party/**`, `native/audio_tools/**`, `.tool-versions`, `.forgejo/ci-image/**`, `.forgejo/workflows/linux-build.yml`, `scripts/package_linux.sh`, `scripts/flatpak*.py`, `scripts/linux_source_bundle.py`, `scripts/apt_source_download.py`, `packaging/linux/**` | Automatic on push to main |
 | [`linux-gate.yml`](../.forgejo/workflows/linux-gate.yml) | `workflow_dispatch` | On demand |
 | [`linux-gate.yml`](../.forgejo/workflows/linux-gate.yml) | `schedule` · `11 2 * * *` | Automatic on the default branch, on schedule |
+| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `workflow_dispatch` | On demand |
+| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `push` · `branches` `main` | Automatic on push to main |
+| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `pull_request` · `branches` `main` · `paths` `lib/**`, `linux/**`, `native/**`, `third_party/**`, `packaging/**`, `assets/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `.forgejo/ci-image/**`, `.forgejo/workflows/linux-start-smoke.yml`, `scripts/**` | Automatic before merge |
 | [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `workflow_dispatch` | On demand |
-| [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `push` · `branches` `main` · `paths` `pubspec.yaml`, `pubspec.lock`, `macos/**`, `third_party/**`, `.tool-versions`, `.forgejo/workflows/macos-build.yml` | Automatic on push to main |
+| [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `push` · `branches` `main` · `paths` `pubspec.yaml`, `pubspec.lock`, `macos/**`, `third_party/**`, `.tool-versions`, `.forgejo/workflows/macos-build.yml`, `scripts/macos_window_probe.swift` | Automatic on push to main |
 | [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `workflow_dispatch` | On demand |
 | [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `push` · `branches` `main` | Automatic on push to main |
 | [`macos-signing-preflight.yml`](../.forgejo/workflows/macos-signing-preflight.yml) | `workflow_dispatch` | On demand |
