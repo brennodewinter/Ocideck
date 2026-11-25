@@ -85,8 +85,13 @@ void main() {
       final job = releaseYaml
           .split('  consumer-debian12:')[1]
           .split('  consumer-rpm:')[0];
-      expect(job, contains('libpulse0'));
-      expect(job, contains('xauth'));
+      expect(job, contains('probe_linux_package.sh debian12'));
+      final preparation = File(
+        'scripts/prepare_linux_probe.sh',
+      ).readAsStringSync();
+      final profile = preparation.split('  debian12)')[1].split('    ;;')[0];
+      expect(profile, contains('libpulse0'));
+      expect(preparation, contains('xvfb xauth'));
     });
 
     test('appimagetool is pinned by a 64-hex sha256, not floated', () {

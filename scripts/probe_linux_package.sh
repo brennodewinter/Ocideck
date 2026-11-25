@@ -34,6 +34,7 @@ case "$profile" in
     launch=("$root/AppRun")
     ;;
   tar|debian12)
+    if [[ "$profile" = debian12 ]]; then "$helpers/prepare_linux_probe.sh" debian12; fi
     tar -xzf "$artifact" -C "$work"
     shopt -s nullglob
     roots=("$work"/ocideck-*/)
