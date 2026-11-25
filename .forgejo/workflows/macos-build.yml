@@ -27,6 +27,11 @@ name: macos-build
 # dan wacht de run; een volgende merge vervangt een wachtende run.
 on:
   workflow_dispatch:
+    inputs:
+      desktop_window:
+        description: Measure the built app in the interactive macOS session
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths:
@@ -36,6 +41,7 @@ on:
       - 'third_party/**'
       - '.tool-versions'
       - '.forgejo/workflows/macos-build.yml'
+      - 'scripts/macos_window_probe.swift'
 
 jobs:
   build-macos:
@@ -64,6 +70,22 @@ jobs:
       # de docs in de .app byte-voor-byte gelijk zijn aan docs/ op schijf.
       - name: Gebundelde documentatie vers?
         run: dart run tool/check_bundled_docs_fresh.dart build/macos
+
+      - name: Native macOS-vensterproef
+        if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' }}
+        run: |
+          set -eu
+          apps=(build/macos/Build/Products/Release/*.app)
+          test "${#apps[@]}" -eq 1
+          swift scripts/macos_window_probe.swift "${apps[0]}" build/window-probe
+
+      - name: Bewijs van de macOS-vensterproef bewaren
+        if: ${{ always() && (inputs.desktop_window == true || inputs.desktop_window == 'true') }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-window-probe
+          path: build/window-probe/
+          if-no-files-found: ignore
 
       - name: Bundel inpakken
         # ditto bewaart symlinks en resource forks — een .app die door een

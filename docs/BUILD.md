@@ -1134,7 +1134,7 @@ channel controller must separately follow deployment and check the selected
 public rows. Web-demo and Homebrew publication are separate follow-up phases;
 this updater does not implement them.
 Linux format selection includes `linux-debian12`, which invokes the existing
-Debian 12 builder and retains its own Debian 12 extract/link/20-second start
+Debian 12 builder and retains its own Debian 12 extract/link/first-frame
 consumer. It does not use Ubuntu native-hook caches. The Linux worker needs
 access to the same Docker builder daemon used by the existing complete-release
 Debian 12 job. Missing daemon access stops that selected channel.
@@ -1144,7 +1144,7 @@ a bare source archive cannot establish the revision label. Existing published
 digests remain usable without rebuilding when this admission check changes. Refresh them only
 on the infrastructure builder with `scripts/build_release_consumer_images.sh
 REGISTRY FULL_SOURCE_SHA NEW_RECEIPT.json`. That explicit command builds and
-pushes six amd64 profiles, checks tools and reads registry digests back. It is
+pushes five amd64 images, checks tools and reads registry digests back. It is
 never invoked by a release. Record actual image digests in the channel workflow
 before adopting a refresh; a locally successful image build is insufficient.
 Each image preserves installed package versions; Flatpak also records the exact
@@ -1153,8 +1153,13 @@ GNOME 50 runtime commit. Keep normal Flatpak signature verification enabled.
 The deb/rpm profiles deliberately contain test tools but no OciDeck runtime
 libraries: the package manager must resolve the artifact's declared runtime
 dependencies. Preinstalling those libraries could hide a broken Depends or
-Requires declaration. Tar and AppImage profiles explicitly supply the desktop
-runtime they require. Prepared images do not replace the artifact's installation,
+Requires declaration. The tar profiles explicitly supply their desktop runtime.
+The AppImage starts from the same pinned Ubuntu tools image as the deb
+profile and installs the external runtime documented in
+`scripts/release_consumers/appimage-runtime.txt`. Its probe rejects a host
+that supplies the bundled Ayatana or dbusmenu libraries. The ELF check also
+enforces `scripts/release_consumers/appimage-host-sonames.txt` for direct
+links from the package to host libraries, even when the host finds them. Prepared images do not replace the artifact's installation,
 link, start or Flatpak content checks. Cold/warm timings and actual refreshed
 image/install results must still be recorded on the Linux worker; no speedup is
 claimed from recipes alone.
@@ -1857,7 +1862,7 @@ Flatpak packaging needs an installed `org.gnome.Platform/x86_64/50` runtime, or
 libmpv and only dependencies absent from that runtime, recording package
 versions, licence texts and hashes in the existing component inventory.
 
-After changing the tar/AppImage consumer Dockerfiles, rebuild the consumer
+After changing a consumer Dockerfile, rebuild the consumer
 images with `scripts/build_release_consumer_images.sh` and update their immutable
 references in `scripts/release_consumers/images.json` before a release. Existing
 published images do not acquire the new video libraries automatically.

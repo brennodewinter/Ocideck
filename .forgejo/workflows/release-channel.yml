@@ -251,31 +251,15 @@ jobs:
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          # Alleen het echte pakket en zijn gedeclareerde dependencies installeren.
-          apt-get update
-          apt-get install -y "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb"
-          # Declares de control minder dan de binary linkt, dan toont ldd
-          # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
-          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
-            echo "Het .deb dekt niet alle runtimebibliotheken van de binary." >&2
-            exit 1
-          fi
-          # Startproef: onder Xvfb moet de app opkomen en draaien blijven.
-          # timeout geeft 124 als hij de volle 20 s overleefde; een crash of
-          # direct wegvallen geeft iets anders en is dus rood.
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash controller/scripts/probe_linux_package.sh deb "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-deb
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-debian12:
     name: Debian 12-archief proef op een schone Debian 12
@@ -302,26 +286,15 @@ jobs:
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          mkdir -p /tmp/ocideck-test
-          tar -xzf "dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
-          cd /tmp/ocideck-test/ocideck-linux-debian12-*
-          test -x ./ocideck
-          if ldd ./ocideck | grep 'not found'; then
-            echo "Het Debian 12-archief mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ./ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash controller/scripts/probe_linux_package.sh debian12 "./dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-debian12
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-rpm:
     name: .rpm proef op een schone Fedora
@@ -350,23 +323,15 @@ jobs:
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          dnf install -y "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm"
-          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
-            echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash controller/scripts/probe_linux_package.sh rpm "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-rpm
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-appimage:
     name: AppImage proef op een schone Ubuntu
@@ -376,7 +341,7 @@ jobs:
     timeout-minutes: 175
     container:
       options: --cpus 2 --memory 4g
-      image: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:f5ca300b004d7057f7e64b43212de18faf315638ff52c21a5797f492e6a1d755
+      image: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:9295c344d01f6f20bdea7b34fe9dbd6d8b2d9e2ed00bb0746c0b98274bf304b9
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -388,35 +353,20 @@ jobs:
         env:
           FORGEJO_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
-          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:f5ca300b004d7057f7e64b43212de18faf315638ff52c21a5797f492e6a1d755
+          EXPECTED_IMAGE: pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:9295c344d01f6f20bdea7b34fe9dbd6d8b2d9e2ed00bb0746c0b98274bf304b9
           EXPECTED_MEMORY_GIB: "4"
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          # De gepinde desktop-runtime staat al in het consumerimage.
-          cd dist
-          chmod +x ocideck-linux-x86_64-*.AppImage
-          ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
-          test -x squashfs-root/ocideck
-          # De binary vindt zijn eigen lib/ via $ORIGIN (zie packaging/linux/
-          # AppRun); wat ldd als "not found" toont, ontbreekt dus echt.
-          if ldd squashfs-root/ocideck | grep 'not found'; then
-            echo "De AppImage mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a squashfs-root/AppRun
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "De AppImage kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash controller/scripts/probe_linux_package.sh appimage "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.AppImage" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-appimage
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-flatpak:
     name: Flatpak installatie en inhoud op een schone Ubuntu
@@ -485,27 +435,15 @@ jobs:
         run: node controller/tool/enforce_release_cpu.cjs
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: channel-build, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          mkdir -p /tmp/ocideck-test
-          tar -xzf "dist/ocideck-linux-x64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
-          cd /tmp/ocideck-test/ocideck-*
-          test -x ./ocideck
-          if ldd ./ocideck | grep 'not found'; then
-            echo "Het Linux-tar-archief mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ./ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
-
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash controller/scripts/probe_linux_package.sh tar "./dist/ocideck-linux-x64-${RELEASE_TAG#v}.tar.gz" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-tar
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   evidence:
     needs: [build, build-macos, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage, consumer-flatpak, consumer-tar]

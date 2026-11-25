@@ -678,32 +678,22 @@ jobs:
         run: |
           set -eu
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates git
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends xvfb fonts-dejavu-core
-          apt-get install -y "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb"
-          # Declares de control minder dan de binary linkt, dan toont ldd
-          # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
-          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
-            echo "Het .deb dekt niet alle runtimebibliotheken van de binary." >&2
-            exit 1
-          fi
-          # Startproef: onder Xvfb moet de app opkomen en draaien blijven.
-          # timeout geeft 124 als hij de volle 20 s overleefde; een crash of
-          # direct wegvallen geeft iets anders en is dus rood.
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash scripts/probe_linux_package.sh deb "./dist/ocideck-linux-amd64-${RELEASE_TAG#v}.deb" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-deb
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-debian12:
     name: Debian 12-archief proef op een schone Debian 12
@@ -718,32 +708,22 @@ jobs:
         run: |
           set -eu
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates git
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux-debian12, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y --no-install-recommends \
-            xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
-            libayatana-appindicator3-1 libgles2 libegl1 libwebkit2gtk-4.1-0 libmpv2 gstreamer1.0-plugins-good gstreamer1.0-libav libpulse0
-          mkdir -p /tmp/ocideck-test
-          tar -xzf "dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" -C /tmp/ocideck-test
-          cd /tmp/ocideck-test/ocideck-linux-debian12-*
-          test -x ./ocideck
-          if ldd ./ocideck | grep 'not found'; then
-            echo "Het Debian 12-archief mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ./ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash scripts/probe_linux_package.sh debian12 "./dist/ocideck-linux-debian12-x86_64-${RELEASE_TAG#v}.tar.gz" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-debian12
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-rpm:
     name: .rpm proef op een schone Fedora
@@ -757,26 +737,22 @@ jobs:
       image: fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814
     steps:
       - name: Node voor de artefactactie
-        run: dnf install -y --setopt=install_weak_deps=False nodejs
+        run: dnf install -y --setopt=install_weak_deps=False nodejs ca-certificates git
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
-      - name: Installeren, linken en starten
-        run: |
-          set -eu
-          dnf install -y --setopt=install_weak_deps=False xorg-x11-server-Xvfb dejavu-sans-fonts
-          dnf install -y "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm"
-          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
-            echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a ocideck
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash scripts/probe_linux_package.sh rpm "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.rpm" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-rpm
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-appimage:
     name: AppImage proef op een schone Ubuntu
@@ -791,38 +767,22 @@ jobs:
         run: |
           set -eu
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates git
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.commit_sha || github.sha }}
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
-      - name: Uitpakken, linken en starten
-        run: |
-          set -eu
-          export DEBIAN_FRONTEND=noninteractive
-          # Een AppImage bundelt geen GTK: de runtimebibliotheken hieronder
-          # zijn wat een gewone desktop al heeft. Geen -dev-pakketten, geen
-          # toolchain — het beeld blijft consumentachtig.
-          apt-get install -y --no-install-recommends \
-            xvfb fonts-dejavu-core \
-            libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1 \
-            libgles2 libegl1 libwebkit2gtk-4.1-0 libmpv2 gstreamer1.0-plugins-good gstreamer1.0-libav
-          cd dist
-          chmod +x ocideck-linux-x86_64-*.AppImage
-          ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
-          test -x squashfs-root/ocideck
-          # De binary vindt zijn eigen lib/ via $ORIGIN (zie packaging/linux/
-          # AppRun); wat ldd als "not found" toont, ontbreekt dus echt.
-          if ldd squashfs-root/ocideck | grep 'not found'; then
-            echo "De AppImage mist een runtimebibliotheek." >&2
-            exit 1
-          fi
-          set +e
-          timeout 20 xvfb-run -a squashfs-root/AppRun
-          rc=$?
-          set -e
-          if [ "$rc" -ne 124 ]; then
-            echo "De AppImage kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
-            exit 1
-          fi
+      - name: Pakket installeren of uitpakken, linken en starten
+        run: bash scripts/probe_linux_package.sh appimage "./dist/ocideck-linux-x86_64-${RELEASE_TAG#v}.AppImage" probe-evidence
+      - name: Bewijs van de pakketproef bewaren
+        if: failure()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-probe-appimage
+          path: probe-evidence/
+          if-no-files-found: ignore
 
   consumer-flatpak:
     name: Flatpak installatie en inhoud op een schone Ubuntu

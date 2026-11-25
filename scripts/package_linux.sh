@@ -113,13 +113,14 @@ build_deb() {
   # (#1741): cnativeapi links it on Linux for the tray. It is a system library,
   # so the Flutter bundle does not carry it — without this line the package
   # installs and then fails to start on a machine that lacks it.
+  # The bundled xclip and whisper-cli helpers also have their own runtime needs.
   cat > "$root/DEBIAN/control" <<EOF
 Package: ocideck
 Version: $VERSION
 Architecture: amd64
 Maintainer: $MAINTAINER
 Installed-Size: $size_kb
-Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1, libgles2, libegl1, libpulse0, libgstreamer1.0-0, gstreamer1.0-plugins-base, libmpv2 | libmpv1, libwebkit2gtk-4.1-0, gstreamer1.0-plugins-good, gstreamer1.0-libav
+Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libxmu6, libgomp1, libayatana-appindicator3-1, libgles2, libegl1, libpulse0, libgstreamer1.0-0, gstreamer1.0-plugins-base, libmpv2 | libmpv1, libwebkit2gtk-4.1-0, gstreamer1.0-plugins-good, gstreamer1.0-libav
 Section: office
 Priority: optional
 Homepage: $HOMEPAGE

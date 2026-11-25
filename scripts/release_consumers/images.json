@@ -1,6 +1,6 @@
 {
   "images": {
-    "appimage": "pawprint.vigilis.online/librekat/ocideck-consumer-appimage@sha256:f5ca300b004d7057f7e64b43212de18faf315638ff52c21a5797f492e6a1d755",
+    "appimage": "pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:9295c344d01f6f20bdea7b34fe9dbd6d8b2d9e2ed00bb0746c0b98274bf304b9",
     "deb": "pawprint.vigilis.online/librekat/ocideck-consumer-deb@sha256:9295c344d01f6f20bdea7b34fe9dbd6d8b2d9e2ed00bb0746c0b98274bf304b9",
     "debian12": "pawprint.vigilis.online/librekat/ocideck-consumer-debian12@sha256:49a0879d7afbac18d6a160607de7273d0189c687a1839c8663cfb9c9b74506c1",
     "flatpak": "pawprint.vigilis.online/librekat/ocideck-consumer-flatpak@sha256:5c465f30d5a7019b953b4004c559436a4865bc280d6aef566fcf690f12b70012",
@@ -26,7 +26,6 @@
     "finished_at": "2026-11-10T21:55:14Z",
     "helper_sha256": "34d1687f9a21ddf94c43203f3f3c18e4e0c362432dffa13398e5b5d095ff8478",
     "recipes_sha256": {
-      "appimage": "7e832927ae08fb57dd2e00671478c6c12e59ced475a4b734b551fb816c9ff4be",
       "deb": "1de26d6cb085a13d31ebef400f913d14b4e7392a638993fb0454d55ccf5397f8",
       "debian12": "200c7b8c9c565af1804e251f58ac1fea4bab3aed6c0bc8bf79fc576b8ecf9fa3",
       "flatpak": "d27cb86da5f07c14c0001e7b0609c2afc06cc93c7a6489d712bdbfa2f493647c",

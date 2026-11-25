@@ -37,6 +37,12 @@ copy_verified(source,expected,target)
 if profile=='flatpak':
     copy_verified(sbom,sbom_hash,str(pathlib.Path(target).parent/'components.cdx.json'))
 PY
+ROOT=$(cd -- "$(dirname -- "$0")" && pwd)
+mkdir -p "$WORK/scripts/release_consumers"
+for helper in probe_linux_package prepare_linux_probe check_linux_runtime_elf linux_start_probe; do
+  cp "$ROOT/$helper.sh" "$WORK/scripts/"
+done
+cp "$ROOT"/release_consumers/{appimage-runtime,appimage-host-sonames}.txt "$WORK/scripts/release_consumers/"
 # This is an explicit infrastructure smoke test, not an automatic release retry.
 docker run --interactive --rm --platform linux/amd64 --cpus 2 --memory 4g \
   --mount "type=bind,source=$WORK,target=/dist,readonly" "$IMAGE" bash -s -- "$PROFILE" "$VERSION" <<'PROBE'
@@ -52,35 +58,11 @@ case "$profile" in
       echo 'Package consumer image preinstalls application runtime dependencies' >&2
       exit 1
     fi
-    if [ "$profile" = deb ]; then
-      apt-get update
-      cp /dist/artifact /tmp/ocideck.deb
-      DEBIAN_FRONTEND=noninteractive apt-get install -y /tmp/ocideck.deb
-    else
-      cp /dist/artifact /tmp/ocideck.rpm
-      dnf install -y /tmp/ocideck.rpm
-    fi
-    binary=/usr/lib/ocideck/ocideck
-    command=(ocideck)
+    cp /dist/artifact "/tmp/ocideck.$profile"
+    /dist/scripts/probe_linux_package.sh "$profile" "/tmp/ocideck.$profile" /tmp/probe-evidence
     ;;
-  tar|debian12)
-    mkdir /tmp/ocideck-test
-    tar -xzf /dist/artifact -C /tmp/ocideck-test
-    if [ "$profile" = debian12 ]; then
-      cd /tmp/ocideck-test/ocideck-linux-debian12-*
-    else
-      cd "/tmp/ocideck-test/ocideck-$version"
-    fi
-    binary=./ocideck
-    command=(./ocideck)
-    ;;
-  appimage)
-    cd /tmp
-    cp /dist/artifact ocideck.AppImage
-    chmod +x ocideck.AppImage
-    ./ocideck.AppImage --appimage-extract >/dev/null
-    binary=squashfs-root/ocideck
-    command=(squashfs-root/AppRun)
+  tar|debian12|appimage)
+    /dist/scripts/probe_linux_package.sh "$profile" /dist/artifact /tmp/probe-evidence
     ;;
   flatpak)
     test "$(flatpak --system info --show-commit org.gnome.Platform/x86_64/50)" = "$(cat /usr/share/ocideck-consumer/runtime-commit)"
@@ -97,15 +79,5 @@ case "$profile" in
     exit 0
     ;;
 esac
-test -x "$binary"
-if ldd "$binary" | grep 'not found'; then
-  echo 'Artifact misses a runtime dependency' >&2
-  exit 1
-fi
-set +e
-timeout 20 xvfb-run -a "${command[@]}"
-result=$?
-set -e
-test "$result" -eq 124 || { echo "Application did not survive the 20-second start probe: $result" >&2; exit 1; }
 PROBE
 printf 'Verified consumer profile=%s image=%s artifact_sha256=%s\n' "$PROFILE" "$IMAGE" "$EXPECTED_SHA"

@@ -1,0 +1,46 @@
+# Host SONAMEs allowed as direct DT_NEEDED entries of AppDir objects.
+# Transitive dependencies of these libraries are provided by the target OS.
+ld-linux-x86-64.so.2         # glibc ELF loader
+libc.so.6                    # glibc standard C library
+libdl.so.2                   # glibc dynamic loading ABI
+libm.so.6                    # glibc mathematics ABI
+libpthread.so.0              # glibc threading ABI
+libz.so.1                    # System zlib
+libgcc_s.so.1                # GCC runtime
+libgomp.so.1                 # OpenMP runtime for whisper-cli
+libstdc++.so.6               # C++ standard runtime
+libX11.so.6                  # X11 support in native windowing, WebRTC and xclip
+libXcomposite.so.1           # WebRTC X11 capture
+libXdamage.so.1              # WebRTC X11 capture
+libXext.so.6                 # WebRTC X11 capture
+libXfixes.so.3               # WebRTC X11 capture
+libXi.so.6                   # X11 native input
+libXmu.so.6                  # xclip clipboard helper
+libXrandr.so.2               # WebRTC X11 monitor geometry
+libatk-1.0.so.0              # GTK accessibility ABI
+libcairo-gobject.so.2        # GTK Cairo bindings
+libcairo.so.2                # GTK 2D drawing
+libdrm.so.2                  # WebRTC Linux graphics support
+libepoxy.so.0                # Flutter and video GL dispatch
+libfontconfig.so.1           # Flutter host fonts
+libgbm.so.1                  # WebRTC graphics buffers
+libgdk-3.so.0                # GTK display and input
+libgdk_pixbuf-2.0.so.0       # GTK pixbufs
+libgio-2.0.so.0              # GTK and WebRTC I/O and D-Bus
+libglib-2.0.so.0             # GLib runtime for GTK and native plugins
+libgmodule-2.0.so.0          # Dynamic modules for GTK plugins
+libgobject-2.0.so.0          # GLib object system
+libgstreamer-1.0.so.0        # Native audio pipeline
+libgtk-3.so.0                # Flutter GTK embedding and desktop widgets
+libharfbuzz.so.0             # GTK text shaping
+libjavascriptcoregtk-4.1.so.0 # Embedded WebKitGTK JavaScript engine
+libmpv.so.2                  # Native video playback
+libpango-1.0.so.0            # GTK text layout
+libpangocairo-1.0.so.0       # GTK text rendering
+libpulse-simple.so.0         # Native audio capture client
+libpulse.so.0                # Native audio capture client
+libsecret-1.so.0             # Linux secure storage client
+libsoup-3.0.so.0             # Embedded WebKitGTK HTTP stack
+libwayland-client.so.0       # Flutter native Wayland windowing
+libwayland-egl.so.1          # Flutter EGL surfaces on Wayland
+libwebkit2gtk-4.1.so.0       # Native embedded webview
