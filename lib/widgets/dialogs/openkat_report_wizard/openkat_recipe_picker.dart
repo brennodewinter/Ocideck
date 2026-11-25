@@ -285,14 +285,9 @@ class _RecipeOption extends StatelessWidget {
                 ),
                 if (!scenario.available)
                   Align(
-                    alignment: AlignmentDirectional.centerStart,
+                    alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                        16,
-                        0,
-                        16,
-                        8,
-                      ),
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                       child: TextButton.icon(
                         onPressed: inspectImport,
                         icon: const Icon(Icons.receipt_long_outlined),

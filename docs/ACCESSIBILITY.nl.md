@@ -421,22 +421,31 @@ leest is dat een toegankelijkheidsprobleem en geen cosmetisch, en het is het erg
 waar het het meest pijn doet: dit zijn de meldingen die je tegenhouden iets te
 doen. Bijgehouden in #576.
 
-**Alleen links-naar-rechts, en dat bepaalt ook je inhoud.** Er is nergens een
-richtinggevoelige layoutprimitief in gebruik — `EdgeInsetsDirectional`,
-`AlignmentDirectional` en `BorderDirectional` komen nul keer voor in `lib/`, tegen
-negenentwintig fysieke `EdgeInsets.only(left:`/`right:`. Van de dertien plekken
-die `TextDirection` noemen, hardcoderen er elf `TextDirection.ltr`, waaronder een
-`Directionality`-wrapper om het **hele diacanvas** in `slide_preview.dart`
-(geteld 2026-07-22).
+**Lay-out van links naar rechts.** De ondersteunde interfacetalen gebruiken
+een lay-out van links naar rechts. OciDeck gebruikt fysieke linker- en
+rechterposities voor de applicatielay-out en geeft het diacanvas in de preview
+een basisrichting van links naar rechts. Tekst die `InlineMarkdown` rendert,
+detecteert de richting per alinea. De HTML-export gebruikt de bidirectionele
+tekstverwerking van de browser voor alinea’s, lijstitems, koppen en tabelcellen.
+Controleer de afgewerkte dia’s bij een presentatie in het Arabisch of Hebreeuws,
+vooral op dia’s met tekst en elementen op vaste posities.
 
-Dat geen van de 32 interfacetalen rechts-naar-links is, is een scopekeuze. Het
-scherpere gevolg is het canvas: een auteur die een Arabische of Hebreeuwse alinea
-op een dia zet krijgt de verkeerde basisrichting — links uitgelijnd, leestekens
-aan de verkeerde kant — ongeacht de interfacetaal die hij koos. Niets waarschuwt
-hem, dus het wordt op de beamer ontdekt. Hier wordt nog niets voor gebouwd; het
-staat hier opgeschreven zodat het een bekende beperking is in plaats van een
-verrassing, en zodat op de dag dat iemand RTL wil het startpunt al in kaart is
-gebracht. *(Toegevoegd 2026-07-22.)*
+De inventaris hieronder telt Dart-tokens in `lib/` en aanroepen van
+`EdgeInsets.only` met een argument `left` of `right`. Werk beide gidsen bij met
+`dart run tool/check_rtl_inventory.dart --write`.
+
+<!-- BEGIN RTL INVENTORY -->
+
+| Dart-broncode | Aantal |
+| --- | ---: |
+| `EdgeInsetsDirectional` | 0 |
+| `AlignmentDirectional` | 0 |
+| `BorderDirectional` | 0 |
+| `EdgeInsets.only(left: / right:)` | 79 |
+| `TextDirection` | 24 |
+| `TextDirection.ltr` | 19 |
+
+<!-- END RTL INVENTORY -->
 
 **Bredere WCAG-conformiteit wordt niet geclaimd.** Contrastverhoudingen binnen de
 *applicatie-interface*, focusvolgorde over de hele app, en leesvolgorde zijn een
@@ -454,19 +463,6 @@ is bewezen en "werkt goed in de praktijk" niet.
 browserbuild**, wat een capaciteitshiaat is en geen toegankelijkheidshiaat, maar
 het landt op dezelfde plek: zie [PRIVACY.md](PRIVACY.md) en
 [HOSTING.md](HOSTING.md) §5.
-
-**De interface en het diacanvas zijn alleen links-naar-rechts.** Geen van de 32
-interfacetalen is rechts-naar-links, wat een scopekeuze is. Het scherpere punt is
-dat het ook de *inhoud* bepaalt: `lib/widgets/slides/slide_preview.dart` wikkelt
-het hele canvas in `Directionality(textDirection: TextDirection.ltr)`, zodat een
-auteur die een Hebreeuwse of Arabische alinea op een dia zet de verkeerde
-basisrichting krijgt — links uitgelijnd, met leestekens aan de verkeerde kant. Dat
-treft auteurs ongeacht de taal waarin ze de interface lezen. Er zijn ook geen
-richtingbewuste layoutprimitieven in gebruik (`EdgeInsetsDirectional`,
-`AlignmentDirectional` en `BorderDirectional` komen nul keer voor in `lib/`, tegen
-29 fysieke `EdgeInsets.only(left|right`), dus RTL later ondersteunen is een
-wijziging aan layoutcode en geen vertaalklus. *(Toegevoegd 2026-07-22: dit was
-waar maar nergens opgeschreven, dus het was iets wat je op de beamer ontdekte.)*
 
 ## Als je hierop steunt
 

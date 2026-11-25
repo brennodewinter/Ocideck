@@ -187,10 +187,7 @@ class OciDialogHeader extends StatelessWidget {
               children: [
                 titleBlock,
                 const SizedBox(height: 12),
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: trailing,
-                ),
+                Align(alignment: Alignment.centerRight, child: trailing),
               ],
             );
           }
@@ -229,24 +226,15 @@ class OciDialogFooter extends StatelessWidget {
             constraints.maxWidth < 460 ||
             MediaQuery.textScalerOf(context).scale(1) >= 1.5;
         if (leading == null) {
-          return Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: actionWrap,
-          );
+          return Align(alignment: Alignment.centerRight, child: actionWrap);
         }
         if (stacked) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: leading,
-              ),
+              Align(alignment: Alignment.centerLeft, child: leading),
               const SizedBox(height: 8),
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: actionWrap,
-              ),
+              Align(alignment: Alignment.centerRight, child: actionWrap),
             ],
           );
         }
