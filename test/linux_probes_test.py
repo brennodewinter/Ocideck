@@ -95,6 +95,14 @@ class ElfProbeTest(unittest.TestCase):
             self.assertEqual(result.returncode, 1, result.stderr)
             self.assertIn('lib/plugin.so', result.stderr)
             self.assertIn('libocideck_probe_fixture.so.1 => not found', result.stderr)
+
+            subprocess.run(
+                ['cc', '-shared', '-fPIC', str(source), str(dependency),
+                 f'-Wl,-rpath,{root}', '-o', str(libdir / 'plugin.so')], check=True,
+            )
+            result = subprocess.run(command, check=False, capture_output=True, text=True, timeout=15)
+            self.assertEqual(result.returncode, 1, result.stderr)
+            self.assertIn('undeclared host dependency libocideck_probe_fixture.so.1', result.stderr)
             shutil.move(dependency, libdir / dependency.name)
             result = subprocess.run(command, check=False, capture_output=True, text=True, timeout=15)
             self.assertEqual(result.returncode, 0, result.stderr)

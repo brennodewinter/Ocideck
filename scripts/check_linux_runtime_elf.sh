@@ -10,7 +10,31 @@ unset LD_PRELOAD LD_LIBRARY_PATH
 if [[ "$profile" = appimage ]]; then
   # Match packaging/linux/AppRun once the host environment has been cleared.
   export LD_LIBRARY_PATH="$root/lib"
+  helpers=$(cd -- "$(dirname -- "$0")" && pwd)
+  declare -A host_sonames=()
+  while read -r soname _; do
+    [[ -n "$soname" && "$soname" != \#* ]] || continue
+    host_sonames["$soname"]=1
+  done < "$helpers/release_consumers/appimage-host-sonames.txt"
 fi
+
+check_appimage_host() {
+  local soname path real
+  while IFS= read -r soname; do
+    if [[ -n "${host_sonames[$soname]:-}" ]]; then continue; fi
+    path=$(awk -v name="$soname" '$1 == name && $2 == "=>" {
+      sub(/^[[:space:]]*[^[:space:]]+[[:space:]]+=>[[:space:]]+/, "")
+      sub(/[[:space:]]+\(0x[[:xdigit:]]+\)$/, "")
+      print
+      exit
+    }' <<< "$resolved")
+    if [[ -n "$path" ]] && real=$(realpath -- "$path") && [[ "$real" = "$root/"* ]]; then
+      continue
+    fi
+    printf '%s: undeclared host dependency %s (%s)\n' "$relative" "$soname" "${path:-unknown provider}" >&2
+    result=1
+  done < <(sed -n 's/.*(NEEDED).*Shared library: \[\([^]]*\)\].*/\1/p' <<< "$dynamic")
+}
 
 inventory=$(mktemp)
 trap 'rm -f -- "$inventory"' EXIT
@@ -35,6 +59,8 @@ while IFS= read -r -d '' file; do
   elif missing=$(grep -E '=> not found([[:space:]]|$)' <<< "$resolved"); then
     printf '%s: unresolved runtime dependencies\n%s\n' "$relative" "$missing" >&2
     result=1
+  elif [[ "$profile" = appimage ]]; then
+    check_appimage_host
   fi
 done < "$inventory"
 

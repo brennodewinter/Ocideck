@@ -42,7 +42,7 @@ mkdir -p "$WORK/scripts/release_consumers"
 for helper in probe_linux_package prepare_linux_probe check_linux_runtime_elf linux_start_probe; do
   cp "$ROOT/$helper.sh" "$WORK/scripts/"
 done
-cp "$ROOT/release_consumers/appimage-runtime.txt" "$WORK/scripts/release_consumers/"
+cp "$ROOT"/release_consumers/{appimage-runtime,appimage-host-sonames}.txt "$WORK/scripts/release_consumers/"
 # This is an explicit infrastructure smoke test, not an automatic release retry.
 docker run --interactive --rm --platform linux/amd64 --cpus 2 --memory 4g \
   --mount "type=bind,source=$WORK,target=/dist,readonly" "$IMAGE" bash -s -- "$PROFILE" "$VERSION" <<'PROBE'

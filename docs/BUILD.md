@@ -1157,7 +1157,9 @@ Requires declaration. The tar profiles explicitly supply their desktop runtime.
 The AppImage starts from the same pinned Ubuntu tools image as the deb
 profile and installs the external runtime documented in
 `scripts/release_consumers/appimage-runtime.txt`. Its probe rejects a host
-that supplies the bundled Ayatana or dbusmenu libraries. Prepared images do not replace the artifact's installation,
+that supplies the bundled Ayatana or dbusmenu libraries. The ELF check also
+enforces `scripts/release_consumers/appimage-host-sonames.txt` for direct
+links from the package to host libraries, even when the host finds them. Prepared images do not replace the artifact's installation,
 link, start or Flatpak content checks. Cold/warm timings and actual refreshed
 image/install results must still be recorded on the Linux worker; no speedup is
 claimed from recipes alone.
