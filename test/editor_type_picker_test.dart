@@ -30,6 +30,7 @@ void main() {
     SlideType initialType = SlideType.title,
     double width = 1000,
     double height = 2200,
+    double textScale = 1,
   }) async {
     final container = ProviderContainer(
       overrides: [infoSafetyRevealProvider.overrideWithValue(reveal)],
@@ -49,6 +50,12 @@ void main() {
         container: container,
         child: MaterialApp(
           theme: AppTheme.light,
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(
+              context,
+            ).copyWith(textScaler: TextScaler.linear(textScale)),
+            child: child!,
+          ),
           localizationsDelegates: const [
             AppLocalizations.delegate,
             ...GlobalMaterialLocalizations.delegates,
@@ -72,6 +79,19 @@ void main() {
     await pump(tester, reveal: false, width: 420);
 
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('type and style remain reachable at 200% text scale', (
+    tester,
+  ) async {
+    await pump(tester, reveal: false, width: 420, textScale: 2);
+
+    expect(tester.takeException(), isNull);
+    expect(typeButton.hitTestable(), findsOneWidget);
+    expect(
+      find.byKey(const Key('slide-style-from-here')).hitTestable(),
+      findsOneWidget,
+    );
   });
 
   testWidgets('the TYPE selector opens the visual picker and applies a type', (
