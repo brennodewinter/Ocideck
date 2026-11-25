@@ -2591,7 +2591,7 @@ they do not substitute for the Windows execution and its evidence artifact.
   gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read
   *history*, and a one-commit clone lets them report green on almost nothing.
   Both were already right in
-  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-on-demand)
+  [`scans.yml`](#forgejoworkflowsscansyml--secret-scan-on-prs-full-scan-on-demand)
   (#799); only this mirror definition lagged.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch
