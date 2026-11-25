@@ -1558,6 +1558,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Koptekst neemt ': 'L-intestatura tieħu ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% tal-għoli tas-slide — il-kontenut m\'għadux għandu kważi l-ebda spazju.',
   'Lettergrootte koptekst': 'Daqs tat-tipa tar-ras tal-paġna',
   'Lettergrootte voettekst': 'Daqs tat-tipa tal-qiegħ tal-paġna',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

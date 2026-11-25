@@ -1542,6 +1542,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Koptekst neemt ': 'D Chopfzile nimmt ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% vo de Slidehöchi — de Inhalt het fascht kei Platz meh.',
   'Lettergrootte koptekst': 'Schriftgrössi Chopfzile',
   'Lettergrootte voettekst': 'Schriftgrössi Fuesszile',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

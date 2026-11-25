@@ -154,7 +154,11 @@ class DeckState {
 }
 
 /// Heeft de opsomming voldoende inhoud voor een vervolgdia?
-bool canSplitSlide(Slide slide, {ThemeProfile theme = const ThemeProfile()}) {
+bool canSplitSlide(
+  Slide slide, {
+  ThemeProfile theme = const ThemeProfile(),
+  String header = '',
+}) {
   bool hasBoundary(List<String> bullets) =>
       bullets.isNotEmpty &&
       bullets
@@ -166,12 +170,14 @@ bool canSplitSlide(Slide slide, {ThemeProfile theme = const ThemeProfile()}) {
     BulletColumns.one =>
       hasBoundary(slide.bullets) ||
           (slide.bullets.length > 2 &&
-              splitThemedBulletSlidePages(slide, theme) != null),
+              splitThemedBulletSlidePages(slide, theme, header: header) !=
+                  null),
     BulletColumns.two =>
       hasBoundary(slide.bullets) ||
           hasBoundary(slide.bullets2) ||
           ((slide.bullets.length > 2 || slide.bullets2.length > 2) &&
-              splitThemedBulletSlidePages(slide, theme) != null),
+              splitThemedBulletSlidePages(slide, theme, header: header) !=
+                  null),
   };
 }
 

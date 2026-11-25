@@ -610,6 +610,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Koptekst neemt ': 'El encabezado ocupa ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% de la altura de la diapositiva — el contenido casi no tiene espacio.',
   'Lettergrootte koptekst': 'Tamaño de fuente del encabezado',
   'Lettergrootte voettekst': 'Tamaño de fuente del pie de página',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

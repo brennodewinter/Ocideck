@@ -683,7 +683,12 @@ class _MarkdownPreview extends StatelessWidget {
     // (eigen shell, of de plan-geometrie aanpassen voor één type) breken de
     // gedeelde cache en de golden-pariteit voor korte dia's.
     final pad = w * 0.07;
-    final pageMarkdown = _freeMarkdownPage(slide, profile, richTextPage);
+    final pageMarkdown = richTextMarkdownForPage(
+      slide,
+      profile,
+      richTextPage,
+      header: SlideLinkScope.marpStyleOf(context).header,
+    );
 
     return _PreviewScaffold(
       width: w,
@@ -702,27 +707,6 @@ class _MarkdownPreview extends StatelessWidget {
       ),
     );
   }
-}
-
-/// De markdown voor pagina [pageIndex] van een free-markdown-dia, via dezelfde
-/// planRichTextForSlide-cache als de bullets-rich-text-path. Voor een korte
-/// body (1 pagina) is dat de volledige body — identiek aan het oude gedrag.
-String _freeMarkdownPage(Slide slide, ThemeProfile profile, int pageIndex) {
-  if (!slideUsesRichText(slide)) return slide.customMarkdown;
-  const w = kReferenceSlideWidth;
-  final hPad = w * 0.07;
-  final contentW = w - hPad * 2;
-  final contentH = richTextBodyAvailH(w, slide, profile, splitWithImage: false);
-  final plan = planRichTextForSlide(
-    slide: slide,
-    profile: profile,
-    w: w,
-    availW: contentW,
-    availH: contentH,
-    font: profile.fontFamily,
-    splitWithImage: false,
-  );
-  return plan.markdownForPage(pageIndex);
 }
 
 /// Shared markdown body renderer for free-markdown and bullets rich-text slides.

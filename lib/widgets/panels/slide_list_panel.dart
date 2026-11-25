@@ -584,6 +584,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         profile,
         profile.fontFamily,
         slideAspect: aspect,
+        deckHeader: deck.marpStyle.header,
       ),
       splitRunPositionFor(deck.slides, index),
       numberStarts[index],

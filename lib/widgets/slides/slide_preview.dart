@@ -656,9 +656,12 @@ class SlidePreviewWidget extends StatelessWidget {
                 slide: slide,
                 profile: themeProfile,
                 splitWithImage: splitImage,
+                header: marpStyle.header,
               )
             : 1;
         final showRichTextControls = richTextPages > 1;
+        // De kopband buiten de inhoud — [headerSafeInset] meet hem (#3165).
+        final inset = headerSafeInset(w, marpStyle.header, themeProfile);
         return AspectRatio(
           aspectRatio: slideAspect,
           child: ClipRect(
@@ -680,7 +683,7 @@ class SlidePreviewWidget extends StatelessWidget {
                     fit: BoxFit.cover,
                     applyMarpStyle: false,
                   ),
-                _buildContent(slide, w),
+                Positioned.fill(top: inset, child: _buildContent(slide, w)),
                 // Decoratieve overlays (watermerk, footer, TLP, logo)
                 // mogen geen muis/tikken afvangen: anders blokkeren ze de hover
                 // van de media-knoppen eronder en het tikken om door te

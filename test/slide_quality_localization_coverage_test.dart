@@ -173,6 +173,7 @@ void main() {
       },
       SlideQualityIssueKind.themeLogoMissing: {'path': 'asset:images/x.png'},
       SlideQualityIssueKind.themeLogoDarkMissing: {'background': '#0F172A'},
+      SlideQualityIssueKind.marpHeaderTooTall: {'pct': '34'},
       SlideQualityIssueKind.textDensityWarning: {'percent': '80%'},
       SlideQualityIssueKind.textDensityCritical: {'percent': '55%'},
       SlideQualityIssueKind.splitRunDragged: {

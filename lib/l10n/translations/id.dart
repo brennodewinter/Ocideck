@@ -1542,6 +1542,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Koptekst neemt ': 'Teks header memakai ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% dari tinggi slide — konten hampir tidak punya ruang lagi.',
   'Lettergrootte koptekst': 'Ukuran huruf header',
   'Lettergrootte voettekst': 'Ukuran huruf footer',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

@@ -54,6 +54,9 @@ enum SlideQualityIssueKind {
   questionAnswerCountHigh,
   questionNotAnswerable,
   emptySlide,
+  // Een (meerregelige) Marp-`header:` die boven een derde van de diahoogte
+  // uitkomt: de kopband duwt de inhoud dan vrijwel van de dia (#3165).
+  marpHeaderTooTall,
   // Non-lineaire navigatie (#1162): een keuze-menublok of een sprong-uit wijst
   // naar een anker dat geen enkele dia meer draagt. De presentator valt dan
   // stil terug op de gewone volgorde — een knop die niets doet, en dat merk je

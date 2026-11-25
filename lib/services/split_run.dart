@@ -142,12 +142,14 @@ double? sharedSplitFitScale(
   ThemeProfile profile,
   String font, {
   double slideAspect = kScreenSlideAspect,
+  String deckHeader = '',
 }) {
   return splitRunLayoutIndex(
     slides,
     profile,
     font,
     slideAspect: slideAspect,
+    deckHeader: deckHeader,
   ).fitScaleFor(index);
 }
 
@@ -171,9 +173,8 @@ class SplitRunLayoutIndex {
 }
 
 class _SplitRunLayoutMemo {
-  final indexes = LruCache<(ThemeProfile, String, double), SplitRunLayoutIndex>(
-    8,
-  );
+  final indexes =
+      LruCache<(ThemeProfile, String, double, String), SplitRunLayoutIndex>(8);
 }
 
 /// Zwak gekoppeld aan de slidelijst: normale deckbewerkingen leveren een verse
@@ -193,12 +194,14 @@ SplitRunLayoutIndex splitRunLayoutIndex(
   ThemeProfile profile,
   String font, {
   double slideAspect = kScreenSlideAspect,
+  String deckHeader = '',
 }) {
   final memo = _splitRunLayoutCache[slides] ?? _SplitRunLayoutMemo();
   _splitRunLayoutCache[slides] = memo;
   // De diaverhouding zit in de sleutel: een papierformaat verandert het
-  // hoogtebudget en dus elke gedeelde schaal.
-  final key = (profile, font, slideAspect);
+  // hoogtebudget en dus elke gedeelde schaal. De deck-koptekst hoort er óók
+  // bij: een (meerregelige) `header:` reserveert bovenruimte op elke runlid.
+  final key = (profile, font, slideAspect, deckHeader);
   final cached = memo.indexes[key];
   if (cached != null) return cached;
   noteWork('split-runindex');
@@ -207,6 +210,7 @@ SplitRunLayoutIndex splitRunLayoutIndex(
     profile,
     font,
     slideAspect: slideAspect,
+    deckHeader: deckHeader,
   );
   memo.indexes[key] = index;
   return index;
@@ -225,9 +229,16 @@ class _MemberScaleMemo {
   final ThemeProfile theme;
   final String font;
   final double slideAspect;
+  final String deckHeader;
   final double scale;
 
-  const _MemberScaleMemo(this.theme, this.font, this.slideAspect, this.scale);
+  const _MemberScaleMemo(
+    this.theme,
+    this.font,
+    this.slideAspect,
+    this.deckHeader,
+    this.scale,
+  );
 }
 
 /// Gememoiseerde lidmeting per dia (immutable, op identiteit). [ThemeProfile]
@@ -246,13 +257,15 @@ double _memoizedMemberScale(
   ThemeProfile profile,
   String font,
   double slideAspect,
+  String deckHeader,
   double Function(Slide slide, ThemeProfile profile, String font) measure,
 ) {
   final cached = _memberScaleCache[slide];
   if (cached != null &&
       identical(cached.theme, profile) &&
       cached.font == font &&
-      cached.slideAspect == slideAspect) {
+      cached.slideAspect == slideAspect &&
+      cached.deckHeader == deckHeader) {
     return cached.scale;
   }
   final scale = measure(slide, profile, font);
@@ -260,6 +273,7 @@ double _memoizedMemberScale(
     profile,
     font,
     slideAspect,
+    deckHeader,
     scale,
   );
   return scale;
@@ -271,12 +285,20 @@ double memoizedSplitRunMemberScale(
   ThemeProfile profile,
   String font, {
   double slideAspect = kScreenSlideAspect,
+  String deckHeader = '',
 }) => _memoizedMemberScale(
   slide,
   profile,
   font,
   slideAspect,
-  (s, p, f) => splitRunMemberScale(s, p, f, slideAspect: slideAspect),
+  deckHeader,
+  (s, p, f) => splitRunMemberScale(
+    s,
+    p,
+    f,
+    slideAspect: slideAspect,
+    deckHeader: deckHeader,
+  ),
 );
 
 /// Bouwt grenzen en gedeelde schalen in één lineaire gang door [slides].
@@ -290,14 +312,22 @@ SplitRunLayoutIndex buildSplitRunLayoutIndex(
   double Function(Slide slide, ThemeProfile profile, String font)?
   measureMember,
   double slideAspect = kScreenSlideAspect,
+  String deckHeader = '',
 }) {
   double measure(Slide slide, ThemeProfile p, String f) => _memoizedMemberScale(
     slide,
     p,
     f,
     slideAspect,
+    deckHeader,
     measureMember ??
-        (s, p2, f2) => splitRunMemberScale(s, p2, f2, slideAspect: slideAspect),
+        (s, p2, f2) => splitRunMemberScale(
+          s,
+          p2,
+          f2,
+          slideAspect: slideAspect,
+          deckHeader: deckHeader,
+        ),
   );
   final ranges = <(int, int)>[for (var i = 0; i < slides.length; i++) (i, i)];
   final fitScales = List<double?>.filled(slides.length, null);
@@ -349,6 +379,7 @@ double splitRunMemberScale(
   ThemeProfile profile,
   String font, {
   double slideAspect = kScreenSlideAspect,
+  String deckHeader = '',
 }) {
   // De smalle tekstkolom van een split-slide staat naast het beeld en volgt
   // daarom een eigen logoregel.
@@ -360,7 +391,14 @@ double splitRunMemberScale(
           slideAspect: slideAspect,
         )
       : (0.0, 0.0);
-  final vReserve = top + bottom;
+  // De kopband van de (meerregelige) Marp-header staat boven de inhoud en
+  // kost evenveel hoogte als de preview-inset laat zien — meerekenen anders
+  // meldt de gedeelde schaal ruimer dan er werkelijk is (#3165).
+  final header = slide.marpStyle.hasHeader
+      ? slide.marpStyle.header
+      : deckHeader;
+  final vReserve =
+      top + bottom + headerSafeInset(kReferenceSlideWidth, header, profile);
   return switch (slide.type) {
     SlideType.bulletsImage => bulletsImageSlideFitScale(
       slide: slide,

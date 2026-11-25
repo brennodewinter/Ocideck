@@ -1,7 +1,8 @@
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/bullet_pagination.dart';
-import '../services/rich_text_layout.dart' show logoSafeReserveEdges;
+import '../services/rich_text_layout.dart'
+    show headerSafeInset, logoSafeReserveEdges;
 import '../services/slide_layout_metrics.dart'
     show
         bulletsImageTextColumnFraction,
@@ -111,6 +112,7 @@ List<Slide>? splitBulletSlidePages(
   Slide slide, {
   required String font,
   ThemeProfile? theme,
+  String header = '',
 }) {
   List<Slide> build(List<(List<String>, List<String>)> pages) => [
     for (var i = 0; i < pages.length; i++)
@@ -146,13 +148,17 @@ List<Slide>? splitBulletSlidePages(
       // tegenaan zodat wat past ook echt past.
       final continuationProto = _asContinuation(slide);
       double vReserve(Slide pageSlide) {
-        if (theme == null || !pageSlide.showLogo) return 0;
+        // De kopband kost óók hoogte wanneer er geen logo-reserve is (#3165).
+        final headerInset = theme == null
+            ? 0.0
+            : headerSafeInset(kReferenceSlideWidth, header, theme);
+        if (theme == null || !pageSlide.showLogo) return headerInset;
         final (top, bottom) = logoSafeReserveEdges(
           kReferenceSlideWidth,
           theme,
           splitText: pageSlide.type == SlideType.bulletsImage,
         );
-        return top + bottom;
+        return top + bottom + headerInset;
       }
 
       var pages = packBulletsIntoPages(
@@ -196,8 +202,16 @@ List<Slide>? splitBulletSlidePages(
 }
 
 /// [splitBulletSlidePages] met de lettertype- en logo-inpassing van [theme].
-List<Slide>? splitThemedBulletSlidePages(Slide slide, ThemeProfile theme) =>
-    splitBulletSlidePages(slide, font: theme.fontFamily, theme: theme);
+List<Slide>? splitThemedBulletSlidePages(
+  Slide slide,
+  ThemeProfile theme, {
+  String header = '',
+}) => splitBulletSlidePages(
+  slide,
+  font: theme.fontFamily,
+  theme: theme,
+  header: header,
+);
 
 /// [slide] als vervolgpagina van een splitsing: een gewone bulletslide op volle
 /// breedte. De afbeelding en alles wat daarop betrekking heeft (bijschrift,

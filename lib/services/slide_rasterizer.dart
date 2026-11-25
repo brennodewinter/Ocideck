@@ -263,6 +263,7 @@ class SlideRasterizer {
             slideProfile(i),
             slideProfile(i).fontFamily,
             slideAspect: aspect,
+            deckHeader: deck.marpStyle.header,
           ),
           splitRunPosition: splitRunPositionFor(slides, i),
         );

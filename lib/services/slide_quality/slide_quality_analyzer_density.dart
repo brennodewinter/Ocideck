@@ -517,6 +517,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
     String font,
     List<SlideQualityIssue> issues,
     double slideAspect,
+    String deckHeader,
   ) {
     var i = 0;
     while (i < slides.length) {
@@ -532,6 +533,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
             theme,
             font,
             slideAspect: slideAspect,
+            deckHeader: deckHeader,
           ),
       ];
       final drag = splitRunDrag(scales, warningScale: kTextDensityWarningScale);
@@ -603,4 +605,80 @@ List<SlideQualityIssue> _tableDensityIssues(
       args: {'rows': '${rows.length}', 'cols': '$colCount'},
     ),
   ];
+}
+
+/// Gememoiseerde per-slide issues plus alles waarvan de analyse afhangt, zodat
+/// een gewijzigd thema, lettertype, projectpad, contrastdrempel of deck-
+/// koptekst (#3165) de cache laat missen. [theme] wordt op identiteit
+/// vergeleken (immutable model).
+class _SlideIssuesMemo {
+  final ThemeProfile theme;
+  final String font;
+  final String? projectPath;
+  final double minContrastRatio;
+  final double slideAspect;
+  final String deckHeader;
+  final int index;
+  final List<SlideQualityIssue> issues;
+
+  const _SlideIssuesMemo({
+    required this.theme,
+    required this.font,
+    required this.projectPath,
+    required this.minContrastRatio,
+    required this.slideAspect,
+    required this.deckHeader,
+    required this.index,
+    required this.issues,
+  });
+
+  _SlideIssuesMemo withIndex(int newIndex, List<SlideQualityIssue> reindexed) =>
+      _SlideIssuesMemo(
+        theme: theme,
+        font: font,
+        projectPath: projectPath,
+        minContrastRatio: minContrastRatio,
+        slideAspect: slideAspect,
+        deckHeader: deckHeader,
+        index: newIndex,
+        issues: reindexed,
+      );
+}
+
+/// Waarschuwingsgrens voor de Marp-`header:`-band als deel van de diahoogte
+/// (#3165). Een meerregelige kop is prima — die krijgt sinds #3165 gemeten
+/// ruimte boven de inhoud — maar boven een derde van de dia blijft er te
+/// weinig over om nog iets zinnigs te tonen.
+const double kMarpHeaderTooTallFraction = 1 / 3;
+
+/// Een Marp-`header:` krijgt sinds #3165 zijn gemeten band boven de inhoud —
+/// maar die band is onbegrensd: een kop van tien regels of op posterformaat
+/// duwt de inhoud er vrijwel helemaal af. Waarschuwen wanneer de reserve boven
+/// [kMarpHeaderTooTallFraction] van de diahoogte uitkomt; de meting komt uit
+/// [headerSafeInset], dezelfde die de preview-inset gebruikt.
+void _checkMarpHeaderHeight(
+  Slide slide,
+  int index,
+  ThemeProfile profile,
+  String deckHeader,
+  List<SlideQualityIssue> issues,
+  double slideAspect,
+) {
+  final header = slide.marpStyle.hasHeader
+      ? slide.marpStyle.header
+      : deckHeader;
+  if (header.trim().isEmpty) return;
+  final inset = headerSafeInset(kReferenceSlideWidth, header, profile);
+  final slideHeight = kReferenceSlideWidth / slideAspect;
+  if (inset <= slideHeight * kMarpHeaderTooTallFraction) return;
+  issues.add(
+    SlideQualityIssue(
+      slideIndex: index,
+      kind: SlideQualityIssueKind.marpHeaderTooTall,
+      category: SlideQualityCategory.content,
+      severity: MarkdownValidationSeverity.warning,
+      field: 'header',
+      args: {'pct': '${(inset / slideHeight * 100).round()}'},
+    ),
+  );
 }

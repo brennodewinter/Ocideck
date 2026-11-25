@@ -767,6 +767,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Koptekst neemt ': 'Header text takes up ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% of the slide height — the content has almost no room left.',
   'Lettergrootte koptekst': 'Header font size',
   'Lettergrootte voettekst': 'Footer font size',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

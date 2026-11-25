@@ -611,6 +611,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Koptekst neemt ': 'L\'intestazione occupa ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% dell\'altezza della diapositiva — il contenuto non ha quasi più spazio.',
   'Lettergrootte koptekst': 'Dimensione carattere intestazione',
   'Lettergrootte voettekst': 'Dimensione carattere piè di pagina',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

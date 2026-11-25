@@ -280,7 +280,11 @@ List<SlideQualityAction> buildSlideQualityActions({
   if (issue.category == SlideQualityCategory.textDensity &&
       slide != null &&
       hasBulletsForFontEnlargingSplit(slide) &&
-      canSplitSlide(slide, theme: deck!.slideProfileAt(issue.slideIndex))) {
+      canSplitSlide(
+        slide,
+        theme: deck!.slideProfileAt(issue.slideIndex),
+        header: slide.marpStyle.inherit(deck.marpStyle).header,
+      )) {
     final index = issue.slideIndex;
     actions.add(
       SlideQualityAction(

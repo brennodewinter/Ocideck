@@ -1542,6 +1542,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Koptekst neemt ': 'Záhlaví zabírá ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% výšky snímku — obsah už nemá skoro žádné místo.',
   'Lettergrootte koptekst': 'Velikost písma záhlaví',
   'Lettergrootte voettekst': 'Velikost písma zápatí',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

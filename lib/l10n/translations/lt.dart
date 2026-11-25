@@ -1548,6 +1548,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Koptekst neemt ': 'Antraštė užima ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% skaidrės aukščio — turiniui beveik nelieka vietos.',
   'Lettergrootte koptekst': 'Antraštės šrifto dydis',
   'Lettergrootte voettekst': 'Poraštės šrifto dydis',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

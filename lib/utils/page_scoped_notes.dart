@@ -53,12 +53,13 @@ String? userNoteForPage(
 }
 
 /// Rich-text page count for [slide] at reference layout (0 when not rich text).
-int richTextPageCount(Slide slide, ThemeProfile profile) {
+int richTextPageCount(Slide slide, ThemeProfile profile, {String header = ''}) {
   if (!slideUsesRichText(slide)) return 0;
   return richTextPageCountForSlide(
     slide: slide,
     profile: profile,
     splitWithImage: slide.type.splitWithImage,
+    header: header,
   );
 }
 

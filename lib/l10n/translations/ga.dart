@@ -1570,6 +1570,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Koptekst neemt ': 'Tógann an ceanntásc ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% d\'airde an tsleamhnáin — níl beagnach aon spás fágtha ag an ábhar.',
   'Lettergrootte koptekst': 'Méid cló an cheanntáisc',
   'Lettergrootte voettekst': 'Méid cló an bhuntráisc',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

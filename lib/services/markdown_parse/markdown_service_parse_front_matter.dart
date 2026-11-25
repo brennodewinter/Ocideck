@@ -94,7 +94,8 @@ extension _MarkdownParseFrontMatter on MarkdownService {
       if (end != -1) {
         final frontMatter = content.substring(4, end);
         fm.sourceLines = frontMatter.split('\n');
-        for (final rawLine in fm.sourceLines) {
+        for (var i = 0; i < fm.sourceLines.length; i++) {
+          final rawLine = fm.sourceLines[i];
           // Alleen een sleutel op kolom 0 telt — [frontMatterKeyOf] is dezelfde
           // toets die [mergeFrontMatter] gebruikt bij het terugschrijven, zodat
           // lezen en schrijven het over de grenzen van een blok eens zijn. Een
@@ -103,129 +104,19 @@ extension _MarkdownParseFrontMatter on MarkdownService {
           // dubbele punt houdt dubbele punten in de waarde heel (een ISO-datum).
           final key = frontMatterKeyOf(rawLine);
           if (key == null) continue;
-          final value = rawLine.substring(rawLine.indexOf(':') + 1).trim();
-          // Visual-signature fields share a prefix; fold them into the
-          // accumulator here so the switch below stays short.
-          if (key.startsWith('ocideck_sig_')) {
-            fm.signature = _applySignatureField(
-              fm.signature,
-              key,
-              parseMarkdownYamlScalar(value),
+          var value = rawLine.substring(rawLine.indexOf(':') + 1).trim();
+          // Een blokscalar (`header: |`, `footer: >-`) draagt zijn tekst in de
+          // ingesprongen vervolgregels, niet op de sleutelregel — zonder deze
+          // tak las de header letterlijk `|-` (#3165).
+          if (_reFrontMatterBlockScalar.hasMatch(value)) {
+            final (block, lastLine) = _readFrontMatterBlockScalar(
+              fm.sourceLines,
+              i,
             );
-            continue;
+            value = block;
+            i = lastLine;
           }
-          switch (key) {
-            case 'theme':
-              fm.theme = value;
-            case 'paginate':
-              fm.paginate = value == 'true';
-            case 'color':
-              fm.marpStyle = fm.marpStyle.copyWith(
-                color: parseMarkdownYamlScalar(value),
-              );
-            case 'backgroundColor':
-              fm.marpStyle = fm.marpStyle.copyWith(
-                backgroundColor: parseMarkdownYamlScalar(value),
-              );
-            case 'backgroundImage':
-              fm.marpStyle = fm.marpStyle.copyWith(
-                backgroundImage: parseMarkdownYamlScalar(value),
-              );
-            case 'header':
-              fm.marpStyle = fm.marpStyle.copyWith(
-                header: parseMarkdownYamlScalar(value),
-              );
-            case 'footer':
-              fm.marpStyle = fm.marpStyle.copyWith(
-                footer: parseMarkdownYamlScalar(value),
-              );
-            case 'title':
-              fm.presentationTitle = parseMarkdownYamlScalar(value);
-            case 'author':
-              fm.author = parseMarkdownYamlScalar(value);
-            case 'organization':
-              fm.organization = parseMarkdownYamlScalar(value);
-            case 'version':
-              fm.version = parseMarkdownYamlScalar(value);
-            case 'date':
-              fm.date = parseMarkdownYamlScalar(value);
-            case 'description':
-              fm.description = parseMarkdownYamlScalar(value);
-            case 'keywords':
-              fm.keywords = parseMarkdownYamlScalar(value);
-            case 'language':
-              fm.language = parseMarkdownYamlScalar(value);
-            case 'tool':
-              // Meerdere `tool:`-regels stapelen in plaats van elkaar te
-              // overschrijven — anders houdt een deck maar één hulpmiddel over.
-              final tool = UsedTool.parse(parseMarkdownYamlScalar(value));
-              if (tool != null) fm.toolsUsed.add(tool);
-            case 'standards':
-              fm.standardsUsed = parseMarkdownYamlScalar(value)
-                  .split(',')
-                  .map((e) => e.trim())
-                  .where((e) => e.isNotEmpty)
-                  .toList();
-            case 'tlp':
-              fm.tlp = TlpLevelX.fromKey(value);
-            case 'privacy':
-              fm.privacy = PrivacyDispositionX.fromKey(value);
-            case kFormatVersionKey:
-              fm.formatVersion = readFormatVersion(value);
-            case 'ocideck_target_seconds':
-              fm.presentationTargetSeconds = int.tryParse(value) ?? 0;
-            case 'ocideck_show_rehearsal_summary':
-              fm.showRehearsalSummary = value == 'true';
-            case 'ocideck_play_only':
-              fm.playOnly = value == 'true';
-            case 'ocideck_cost_mode' ||
-                'ocideck_cost_input' ||
-                'ocideck_cost_currency' ||
-                'ocideck_cost_rate':
-              fm.costKeys[key.substring('ocideck_cost_'.length)] = value;
-            // Het diaformaat deelt zijn sleutels met de documentpaginaopmaak
-            // (`papersize:`/`geometry:` — het Pandoc-vocabulaire).
-            case 'papersize' || 'geometry':
-              fm.formatKeys[key] = value;
-            case 'ocideck_improvement_framework':
-              fm.improvementFramework = parseMarkdownYamlScalar(value);
-            case 'ocideck_improvement_y01':
-              fm.improvementY01 = parseMarkdownYamlScalar(value);
-            case 'ocideck_improvement_y01_unit':
-              fm.improvementY01Unit = parseMarkdownYamlScalar(value);
-            case 'ocideck_improvement_y01_usl':
-              fm.improvementY01Usl = double.tryParse(value.trim());
-            case 'ocideck_improvement_y01_lsl':
-              fm.improvementY01Lsl = double.tryParse(value.trim());
-            case 'ocideck_improvement_y01_target':
-              fm.improvementY01Target = double.tryParse(value.trim());
-            case 'ocideck_improvement_y01_baseline':
-              fm.improvementY01Baseline = double.tryParse(value.trim());
-            case 'ocideck_improvement_y01_goal':
-              fm.improvementY01Goal = double.tryParse(value.trim());
-            case 'ocideck_finalized':
-              fm.finalized = value == 'true';
-            case 'ocideck_seal_hash':
-              fm.sealHash = parseMarkdownYamlScalar(value);
-            case 'ocideck_seal_algo':
-              fm.sealAlgo = parseMarkdownYamlScalar(value);
-            case 'ocideck_seal_at':
-              fm.sealAt = parseMarkdownYamlScalar(value);
-            case 'ocideck_seal_tsr':
-              fm.sealTsr = value;
-            // Alleen lezen, nooit meer schrijven: het opwaardeerpad voor een
-            // bestand van vóór 0.1.0.
-            case 'ocideck_miauw_waivers':
-              fm.legacyMiauwWaivers = MiauwCodec.legacyFrontMatterMap(
-                value,
-                key,
-              );
-            case 'ocideck_miauw_confirmations':
-              fm.legacyMiauwConfirmations = MiauwCodec.legacyFrontMatterMap(
-                value,
-                key,
-              );
-          }
+          _applyFrontMatterField(fm, key, value);
         }
         content = content.substring(end + 5).trim();
       }
@@ -244,33 +135,216 @@ extension _MarkdownParseFrontMatter on MarkdownService {
     fm.body = content;
     return fm;
   }
+}
 
-  /// Folds one `ocideck_sig_*` front-matter field into the running visual
-  /// signature (§8 A1). Unknown `ocideck_sig_*` keys are ignored so a future
-  /// field never breaks the parse.
-  DocumentSignature _applySignatureField(
-    DocumentSignature sig,
-    String key,
-    String value,
-  ) {
-    switch (key) {
-      case 'ocideck_sig_name':
-        return sig.copyWith(name: value);
-      case 'ocideck_sig_role':
-        return sig.copyWith(role: value);
-      case 'ocideck_sig_cert':
-        return sig.copyWith(certification: value);
-      case 'ocideck_sig_date':
-        return sig.copyWith(date: value);
-      case 'ocideck_sig_statement':
-        return sig.copyWith(statement: value);
-      case 'ocideck_sig_typed':
-        return sig.copyWith(typedSignature: value);
-      case 'ocideck_sig_image':
-        return sig.copyWith(imagePath: value);
-      default:
-        return sig;
+/// Folds one `ocideck_sig_*` front-matter field into the running visual
+/// signature (§8 A1). Unknown `ocideck_sig_*` keys are ignored so a future
+/// field never breaks the parse.
+DocumentSignature _applySignatureField(
+  DocumentSignature sig,
+  String key,
+  String value,
+) {
+  switch (key) {
+    case 'ocideck_sig_name':
+      return sig.copyWith(name: value);
+    case 'ocideck_sig_role':
+      return sig.copyWith(role: value);
+    case 'ocideck_sig_cert':
+      return sig.copyWith(certification: value);
+    case 'ocideck_sig_date':
+      return sig.copyWith(date: value);
+    case 'ocideck_sig_statement':
+      return sig.copyWith(statement: value);
+    case 'ocideck_sig_typed':
+      return sig.copyWith(typedSignature: value);
+    case 'ocideck_sig_image':
+      return sig.copyWith(imagePath: value);
+    default:
+      return sig;
+  }
+}
+
+/// Een YAML-blokscalar-indicator op de sleutelregel: `|` of `>`, gevolgd door
+/// hooguit de chompingvlaggen (`+`/`-`) en het expliciete inspringcijfer.
+final _reFrontMatterBlockScalar = RegExp(r'^[|>][0-9+-]{0,2}$');
+
+/// Leest de blokscalar uit de regels ná [keyIndex]: de ingesprongen
+/// vervolgregels zijn de inhoud en het blok eindigt bij de eerste regel die
+/// weer op kolom 0 staat. Geeft de waarde plus de index van de laatste
+/// bijbehorende regel, zodat de aanroepende lus daar verder kan.
+///
+/// `|` houdt de regels letterlijk; `>` vouwt doorlopende regels tot een spatie
+/// en laat alleen lege regels als regeleinde staan. De gezamenlijke
+/// inspringing — die van de eerste niet-lege regel, of het expliciete cijfer
+/// in de indicator — valt van elke regel af. De chompingvlag (`-`/`+`) wordt
+/// bewust niet uitgewerkt: de `trim` in [parseMarkdownYamlScalar] haalt
+/// afsluitende regeleinden hoe dan ook weg.
+(String, int) _readFrontMatterBlockScalar(List<String> lines, int keyIndex) {
+  final indicator = lines[keyIndex]
+      .substring(lines[keyIndex].indexOf(':') + 1)
+      .trim();
+  final digit = RegExp(r'[0-9]').firstMatch(indicator);
+  var indent = digit == null ? 0 : int.parse(digit.group(0)!);
+  final collected = <String>[];
+  var i = keyIndex + 1;
+  while (i < lines.length) {
+    final line = lines[i];
+    if (line.trim().isEmpty) {
+      collected.add('');
+      i++;
+      continue;
     }
+    final lead = line.length - line.trimLeft().length;
+    if (lead == 0) break;
+    if (indent == 0) indent = lead;
+    collected.add(lead >= indent ? line.substring(indent) : line.trimLeft());
+    i++;
+  }
+  var end = collected.length;
+  while (end > 0 && collected[end - 1].isEmpty) {
+    end--;
+  }
+  final contentLines = collected.sublist(0, end);
+  final String body;
+  if (indicator.startsWith('>')) {
+    final folded = StringBuffer();
+    var broken = false;
+    for (final line in contentLines) {
+      if (line.isEmpty) {
+        broken = true;
+        continue;
+      }
+      if (folded.isNotEmpty) folded.write(broken ? '\n' : ' ');
+      folded.write(line);
+      broken = false;
+    }
+    body = folded.toString();
+  } else {
+    body = contentLines.join('\n');
+  }
+  return (body, i - 1);
+}
+
+/// Vouwt één herkende front-matter-sleutel met zijn (eventueel uit een
+/// blokscalar opgeloste) [value] in de accumulator [fm]. Uit
+/// [_MarkdownParseFrontMatter._parseFrontMatter] getild zodat de leeslus kort
+/// genoeg blijft om in één oogopslag te zien wat er met regelgrenzen gebeurt —
+/// de sleutel-naar-veld-tabel hoef je daarvoor niet te doorgronden.
+void _applyFrontMatterField(_FrontMatter fm, String key, String value) {
+  // Visual-signature fields share a prefix; fold them into the
+  // accumulator here so the switch below stays short.
+  if (key.startsWith('ocideck_sig_')) {
+    fm.signature = _applySignatureField(
+      fm.signature,
+      key,
+      parseMarkdownYamlScalar(value),
+    );
+    return;
+  }
+  switch (key) {
+    case 'theme':
+      fm.theme = value;
+    case 'paginate':
+      fm.paginate = value == 'true';
+    case 'color':
+      fm.marpStyle = fm.marpStyle.copyWith(
+        color: parseMarkdownYamlScalar(value),
+      );
+    case 'backgroundColor':
+      fm.marpStyle = fm.marpStyle.copyWith(
+        backgroundColor: parseMarkdownYamlScalar(value),
+      );
+    case 'backgroundImage':
+      fm.marpStyle = fm.marpStyle.copyWith(
+        backgroundImage: parseMarkdownYamlScalar(value),
+      );
+    case 'header':
+      fm.marpStyle = fm.marpStyle.copyWith(
+        header: parseMarkdownYamlScalar(value),
+      );
+    case 'footer':
+      fm.marpStyle = fm.marpStyle.copyWith(
+        footer: parseMarkdownYamlScalar(value),
+      );
+    case 'title':
+      fm.presentationTitle = parseMarkdownYamlScalar(value);
+    case 'author':
+      fm.author = parseMarkdownYamlScalar(value);
+    case 'organization':
+      fm.organization = parseMarkdownYamlScalar(value);
+    case 'version':
+      fm.version = parseMarkdownYamlScalar(value);
+    case 'date':
+      fm.date = parseMarkdownYamlScalar(value);
+    case 'description':
+      fm.description = parseMarkdownYamlScalar(value);
+    case 'keywords':
+      fm.keywords = parseMarkdownYamlScalar(value);
+    case 'language':
+      fm.language = parseMarkdownYamlScalar(value);
+    case 'tool':
+      // Meerdere `tool:`-regels stapelen in plaats van elkaar te
+      // overschrijven — anders houdt een deck maar één hulpmiddel over.
+      final tool = UsedTool.parse(parseMarkdownYamlScalar(value));
+      if (tool != null) fm.toolsUsed.add(tool);
+    case 'standards':
+      fm.standardsUsed = parseMarkdownYamlScalar(
+        value,
+      ).split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
+    case 'tlp':
+      fm.tlp = TlpLevelX.fromKey(value);
+    case 'privacy':
+      fm.privacy = PrivacyDispositionX.fromKey(value);
+    case kFormatVersionKey:
+      fm.formatVersion = readFormatVersion(value);
+    case 'ocideck_target_seconds':
+      fm.presentationTargetSeconds = int.tryParse(value) ?? 0;
+    case 'ocideck_show_rehearsal_summary':
+      fm.showRehearsalSummary = value == 'true';
+    case 'ocideck_play_only':
+      fm.playOnly = value == 'true';
+    case 'ocideck_cost_mode' ||
+        'ocideck_cost_input' ||
+        'ocideck_cost_currency' ||
+        'ocideck_cost_rate':
+      fm.costKeys[key.substring('ocideck_cost_'.length)] = value;
+    // Het diaformaat deelt zijn sleutels met de documentpaginaopmaak
+    // (`papersize:`/`geometry:` — het Pandoc-vocabulaire).
+    case 'papersize' || 'geometry':
+      fm.formatKeys[key] = value;
+    case 'ocideck_improvement_framework':
+      fm.improvementFramework = parseMarkdownYamlScalar(value);
+    case 'ocideck_improvement_y01':
+      fm.improvementY01 = parseMarkdownYamlScalar(value);
+    case 'ocideck_improvement_y01_unit':
+      fm.improvementY01Unit = parseMarkdownYamlScalar(value);
+    case 'ocideck_improvement_y01_usl':
+      fm.improvementY01Usl = double.tryParse(value.trim());
+    case 'ocideck_improvement_y01_lsl':
+      fm.improvementY01Lsl = double.tryParse(value.trim());
+    case 'ocideck_improvement_y01_target':
+      fm.improvementY01Target = double.tryParse(value.trim());
+    case 'ocideck_improvement_y01_baseline':
+      fm.improvementY01Baseline = double.tryParse(value.trim());
+    case 'ocideck_improvement_y01_goal':
+      fm.improvementY01Goal = double.tryParse(value.trim());
+    case 'ocideck_finalized':
+      fm.finalized = value == 'true';
+    case 'ocideck_seal_hash':
+      fm.sealHash = parseMarkdownYamlScalar(value);
+    case 'ocideck_seal_algo':
+      fm.sealAlgo = parseMarkdownYamlScalar(value);
+    case 'ocideck_seal_at':
+      fm.sealAt = parseMarkdownYamlScalar(value);
+    case 'ocideck_seal_tsr':
+      fm.sealTsr = value;
+    // Alleen lezen, nooit meer schrijven: het opwaardeerpad voor een
+    // bestand van vóór 0.1.0.
+    case 'ocideck_miauw_waivers':
+      fm.legacyMiauwWaivers = MiauwCodec.legacyFrontMatterMap(value, key);
+    case 'ocideck_miauw_confirmations':
+      fm.legacyMiauwConfirmations = MiauwCodec.legacyFrontMatterMap(value, key);
   }
 }
 

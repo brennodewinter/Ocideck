@@ -209,6 +209,7 @@ List<Slide>? safeFixForSlide(
   Slide slide,
   ThemeProfile theme, {
   String? projectPath,
+  String deckHeader = '',
   SlideQualityAnalyzer analyzer = const SlideQualityAnalyzer(),
 }) {
   final issues = analyzer
@@ -217,6 +218,7 @@ List<Slide>? safeFixForSlide(
         theme: theme,
         font: theme.fontFamily,
         projectPath: projectPath,
+        deckHeader: deckHeader,
       )
       .forSlide(0);
   // 1. Meerzins-bullets → opknippen (blijft op de dia).
@@ -233,7 +235,11 @@ List<Slide>? safeFixForSlide(
     (i) =>
         _splitClearableKinds.contains(i.kind) && _shouldSplitFor(slide, i.kind),
   )) {
-    return splitThemedBulletSlidePages(slide, theme);
+    return splitThemedBulletSlidePages(
+      slide,
+      theme,
+      header: slide.marpStyle.hasHeader ? slide.marpStyle.header : deckHeader,
+    );
   }
   return null;
 }
@@ -268,6 +274,7 @@ Deck? _applyNextFix(Deck deck, SlideQualityAnalyzer analyzer) {
     final pages = splitThemedBulletSlidePages(
       slide,
       deck.slideProfileAt(issue.slideIndex),
+      header: slide.marpStyle.inherit(deck.marpStyle).header,
     );
     if (pages == null) continue;
     return _replaceSlide(deck, issue.slideIndex, pages);

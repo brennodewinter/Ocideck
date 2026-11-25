@@ -1545,6 +1545,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Koptekst neemt ': 'Hlavička zaberá ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% výšky snímky — obsahu nezostáva takmer žiadny priestor.',
   'Lettergrootte koptekst': 'Veľkosť písma hlavičky',
   'Lettergrootte voettekst': 'Veľkosť písma päty',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

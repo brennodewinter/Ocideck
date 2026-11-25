@@ -1541,6 +1541,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Koptekst neemt ': 'Sidhuvudet tar upp ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% av bildens höjd — innehållet har nästan ingen plats kvar.',
   'Lettergrootte koptekst': 'Teckenstorlek sidhuvud',
   'Lettergrootte voettekst': 'Teckenstorlek sidfot',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

@@ -1552,6 +1552,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Koptekst neemt ': 'Nagłówek zajmuje ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% wysokości slajdu — treść nie ma już prawie miejsca.',
   'Lettergrootte koptekst': 'Rozmiar czcionki nagłówka',
   'Lettergrootte voettekst': 'Rozmiar czcionki stopki',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

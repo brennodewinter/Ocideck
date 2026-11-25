@@ -93,7 +93,8 @@ const Map<String, int> methodLengthBaseline = {
   // in de per-dia-lus, geen logica om uit te tillen.
   // +3 (#2996): het per-dia profiel in de lus — de lokale `slideProfile`-
   // helper plus de chrome-precache over álle gebruikte stijlen.
-  'lib/services/slide_rasterizer.dart::SlideRasterizer.rasterize': 163,
+  // +1 (#3165): deckHeader doorgeven aan de paginatie-meting — plumbing.
+  'lib/services/slide_rasterizer.dart::SlideRasterizer.rasterize': 164,
   'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
   // -113 (#1859): build is opgeknipt in helpers _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; de vorige 154-regels versie is
@@ -101,7 +102,8 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/editors/callout_editor.dart::_CalloutEditorDialogState.build':
       41,
   // +1 (#1931): themeLogoDarkMissing case in formatSlideQualityIssue.
-  'lib/l10n/slide_quality_localization.dart::formatSlideQualityIssue': 151,
+  // +3 (#3165): marpHeaderTooTall case — één extra tak in de switch, plumbing.
+  'lib/l10n/slide_quality_localization.dart::formatSlideQualityIssue': 154,
   // +3 (#1931): logoDarkRel in _buildPackageArchive.
   // +22 (#2644, #2645): theme.json-lid (stijl reist mee) plus de
   // botsingsvrije logo-benaming — de leden-assembly hoort bij de
@@ -193,8 +195,10 @@ const Map<String, int> methodLengthBaseline = {
       186, // +3 (#2996): het effectieve profiel van díe dia bepalen voor de
   // logo-/footerschakelaars — deck.slideProfileAt i.p.v. deck.themeProfile.
   // +8: tabel-split actie bij tableDensityMinimum-warning.
+  // +4 (#3165): actieblok voor de marpHeaderTooTall-melding — dezelfde
+  // case-vorm als de bestaande acties, geen logica om uit te tillen.
   'lib/widgets/panels/slide_quality_actions.dart::buildSlideQualityActions':
-      158,
+      162,
   // +1 (#1769): de ODP-case in de formaat-switch. De methode stond al op de
   // limiet; één case extra is onherleidbare plumbing.
   'lib/services/export_service.dart::ExportService.export': 125,
@@ -231,6 +235,11 @@ const Map<String, int> methodLengthBaseline = {
   // +7 (#2636): de pathExists-naad die de import laat afvragen of een
   // bestemmingspad bezet is zonder dart:io in de servicelaag.
   'lib/widgets/shell/presentation_import_action.dart::importPresentation': 165,
+  // +1 (#3165): deckHeader meegeven aan de paginatelling — plumbing.
+  'lib/widgets/panels/editor_panel.dart::_EditorPanelContent.build': 151,
+  // +1 (#3165): deckHeader door de canvas-meting — plumbing.
+  'lib/widgets/presentation/parts/presenter_views.dart::_PresenterViews._slideCanvas':
+      151,
 };
 
 bool _isTranslationData(String path) =>

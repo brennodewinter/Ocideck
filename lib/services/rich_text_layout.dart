@@ -2,6 +2,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_format.dart';
 import '../utils/markdown_paste_cleanup.dart';
+import '../utils/marp_emoji.dart';
 import 'markdown_body_blocks.dart';
 import 'identity_slot_memo.dart';
 import 'slide_layout_metrics.dart';
@@ -61,6 +62,27 @@ double bulletsSlideBottomInset({
   }
   final reserved = footer + w * 0.004;
   return safeBottom > reserved ? safeBottom : reserved;
+}
+
+/// De ruimte die een Marp-`header:`-band aan de bovenkant van de dia opeist.
+///
+/// De tegenhanger van [footerSafeInset] voor `_MarpHeaderOverlay`: zijn
+/// top-offset plus de gemeten hoogte van de — mogelijk meerregelige — koptekst
+/// op kopformaat over de kopbreedte. Gedeeld door alles wat inhoud onder de
+/// kop moet houden (de inset van de preview, de body-hoogte hieronder, de
+/// split-run- en splitsreserve), zodat ze het eens zijn over waar de kop
+/// eindigt (#3165). Een afwezige of lege kop levert 0 — de overlay tekent dan
+/// ook niets.
+double headerSafeInset(double w, String header, ThemeProfile profile) {
+  final text = header.trim();
+  if (text.isEmpty) return 0;
+  return w * 0.02 +
+      measureTextHeight(
+        normalizeRichTextMarkdown(expandMarpEmojiShortcodes(text)),
+        profile.slideHeaderFontSizeAt(w),
+        w - 2 * w * 0.04,
+        fontFamily: profile.fontFamily,
+      );
 }
 
 double _richTextBudget(double availH, double footerInset) =>
@@ -487,6 +509,7 @@ double richTextBodyAvailH(
   ThemeProfile profile, {
   required bool splitWithImage,
   double slideAspect = kScreenSlideAspect,
+  String header = '',
 }) {
   final vPad = splitWithImage ? w * 0.042 : w * 0.05;
   final slideHeight = w / slideAspect;
@@ -500,7 +523,8 @@ double richTextBodyAvailH(
       ? 0.0
       : reserve;
   final isTop = profile.logoPosition.startsWith('top');
-  final topPad = vPad + (isTop ? effReserve : 0.0);
+  final topPad =
+      vPad + (isTop ? effReserve : 0.0) + headerSafeInset(w, header, profile);
   final bottomPad = bulletsSlideBottomInset(
     w: w,
     slide: slide,
@@ -517,6 +541,7 @@ int richTextPageCountForSlide({
   required ThemeProfile profile,
   bool splitWithImage = false,
   double slideAspect = kScreenSlideAspect,
+  String header = '',
 }) {
   if (!slideUsesRichText(slide)) return 1;
   const w = kReferenceSlideWidth;
@@ -536,6 +561,7 @@ int richTextPageCountForSlide({
     profile,
     splitWithImage: splitWithImage,
     slideAspect: slideAspect,
+    header: header,
   );
   return planRichTextForSlide(
     slide: slide,
@@ -546,6 +572,40 @@ int richTextPageCountForSlide({
     font: profile.fontFamily,
     splitWithImage: splitWithImage,
   ).pageCount;
+}
+
+/// De markdown voor pagina [pageIndex] van een free-markdown-dia, via dezelfde
+/// [planRichTextForSlide]-cache als de bullets-rich-text-path. Voor een korte
+/// body (1 pagina) is dat de volledige body. [header] is de effectieve Marp-
+/// koptekst: zijn band staat boven de inhoud en telt in [richTextBodyAvailH]
+/// mee (#3165).
+String richTextMarkdownForPage(
+  Slide slide,
+  ThemeProfile profile,
+  int pageIndex, {
+  String header = '',
+}) {
+  if (!slideUsesRichText(slide)) return slide.customMarkdown;
+  const w = kReferenceSlideWidth;
+  final hPad = w * 0.07;
+  final contentW = w - hPad * 2;
+  final contentH = richTextBodyAvailH(
+    w,
+    slide,
+    profile,
+    splitWithImage: false,
+    header: header,
+  );
+  final plan = planRichTextForSlide(
+    slide: slide,
+    profile: profile,
+    w: w,
+    availW: contentW,
+    availH: contentH,
+    font: profile.fontFamily,
+    splitWithImage: false,
+  );
+  return plan.markdownForPage(pageIndex);
 }
 
 /// Expand a deck's slides for surfaces that *enumerate* slides instead of
@@ -565,6 +625,7 @@ List<Slide> expandRichTextForRender(
   List<Slide> slides,
   ThemeProfile profile, {
   double slideAspect = kScreenSlideAspect,
+  String deckHeader = '',
 }) {
   final out = <Slide>[];
   for (final slide in slides) {
@@ -582,6 +643,7 @@ List<Slide> expandRichTextForRender(
       profile: profile,
       splitWithImage: slide.type.splitWithImage,
       slideAspect: slideAspect,
+      header: slide.marpStyle.hasHeader ? slide.marpStyle.header : deckHeader,
     );
     if (pages <= 1) {
       out.add(slide);

@@ -1543,6 +1543,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Koptekst neemt ': 'A fejléc elfoglal ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% a dia magasságából — a tartalomnak szinte nem marad helye.',
   'Lettergrootte koptekst': 'Fejléc betűmérete',
   'Lettergrootte voettekst': 'Lábléc betűmérete',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':

@@ -1546,6 +1546,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Koptekst neemt ': 'Zaglavlje zauzima ',
+  '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
+      '% visine slajda — sadržaju gotovo ne preostaje prostora.',
   'Lettergrootte koptekst': 'Veličina fonta zaglavlja',
   'Lettergrootte voettekst': 'Veličina fonta podnožja',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
