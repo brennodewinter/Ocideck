@@ -101,7 +101,7 @@ jobs:
         if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' || inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
         run: |
           set -eu
-          apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim
+          apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim libwayland-dev
           app=build/linux/x64/release/bundle/ocideck
           scripts/run_linux_window_probe.sh x11 "$app" probe-evidence/window-x11
           scripts/run_linux_window_probe.sh wayland "$app" probe-evidence/window-wayland

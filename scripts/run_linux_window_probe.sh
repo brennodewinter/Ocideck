@@ -9,10 +9,13 @@ launcher=()
 if (( EUID == 0 )); then
   chown nobody "$evidence"
   launcher=(runuser -u nobody --)
-  if ! "${launcher[@]}" test -x "$executable"; then
+  bundle=$(dirname -- "$executable")
+  if ! "${launcher[@]}" test -x "$executable" ||
+      ! "${launcher[@]}" test -x "$bundle/lib" ||
+      ! "${launcher[@]}" test -x "$bundle/data"; then
     staging=$(mktemp -d)
     trap 'rm -rf -- "$staging"' EXIT
-    cp -a --reflink=auto -- "$(dirname -- "$executable")" "$staging/bundle"
+    cp -a --reflink=auto -- "$bundle" "$staging/bundle"
     chown -R nobody "$staging"
     executable="$staging/bundle/$(basename -- "$executable")"
   fi
@@ -23,6 +26,14 @@ case "$backend" in
       dbus-run-session -- /usr/bin/python3 "$script" x11 "$executable" "$evidence"
     ;;
   wayland)
+    if [[ -z "${OCIDECK_WAYLAND_POINTER:-}" ]]; then
+      pointer_dir=$(mktemp -d)
+      trap 'rm -rf -- "$pointer_dir" "${staging:-}"' EXIT
+      chmod 755 "$pointer_dir"
+      cc -Wall -Wextra -Werror "$(dirname -- "$script")/wayland_probe_pointer.c" \
+        -o "$pointer_dir/pointer" $(pkg-config --cflags --libs wayland-client)
+      export OCIDECK_WAYLAND_POINTER="$pointer_dir/pointer"
+    fi
     "${launcher[@]}" dbus-run-session -- /usr/bin/python3 "$script" wayland "$executable" "$evidence"
     ;;
   *) exit 2 ;;

@@ -14,7 +14,7 @@ import subprocess
 import tempfile
 import time
 
-from PIL import Image, ImageChops, ImageGrab, ImageStat
+from PIL import Image, ImageGrab, ImageOps, ImageStat
 
 
 @dataclass(frozen=True)
@@ -95,7 +95,7 @@ class X11:
         run('xdotool', 'click', '1')
 
     @staticmethod
-    def cursor(_rect, _point):
+    def cursor():
         class CursorImage(C.Structure):
             _fields_ = [('x', C.c_short), ('y', C.c_short), ('width', C.c_ushort),
                         ('height', C.c_ushort), ('xhot', C.c_ushort), ('yhot', C.c_ushort),
@@ -127,7 +127,8 @@ class X11:
 class Wayland:
     outputs = ('HEADLESS-1', 'HEADLESS-2')
 
-    def __init__(self, profile, evidence):
+    def __init__(self, profile, evidence, trace):
+        self.trace = trace
         runtime = Path(os.environ['XDG_RUNTIME_DIR'])
         config = profile / 'sway.conf'
         config.write_text(
@@ -153,9 +154,19 @@ class Wayland:
                 if output['scale'] != scale or (output['rect']['width'], output['rect']['height']) != size:
                     raise RuntimeError(f'Sway output did not reach requested size/scale: {output}')
             self.msg('workspace', '1')
+            self.pointer = subprocess.Popen([os.environ['OCIDECK_WAYLAND_POINTER']],
+                                            stdout=evidence, stderr=subprocess.STDOUT)
+            try:
+                wait_for('virtual Wayland pointer', self.pointer_attached, self.pointer)
+            except BaseException:
+                stop(self.pointer)
+                raise
         except BaseException:
             stop(self.manager)
             raise
+
+    def pointer_attached(self):
+        return any(seat.get('capabilities', 0) & 1 for seat in self.msg('-t', 'get_seats'))
 
     @staticmethod
     def msg(*command):
@@ -179,10 +190,9 @@ class Wayland:
         self.msg(f'[con_id={window}]', 'focus')
 
     @staticmethod
-    def capture(rect, cursor=False):
+    def capture(rect):
         geometry = f'{rect.x},{rect.y} {rect.width}x{rect.height}'
-        options = ('-c',) if cursor else ()
-        return Image.open(io.BytesIO(run('grim', *options, '-g', geometry, '-s', '1', '-'))).convert('RGB')
+        return Image.open(io.BytesIO(run('grim', '-g', geometry, '-s', '1', '-'))).convert('RGB')
 
     def motion(self, x, y):
         self.msg('seat', 'seat0', 'cursor', 'set', str(x), str(y))
@@ -191,20 +201,44 @@ class Wayland:
         self.msg('seat', 'seat0', 'cursor', 'press', 'button1')
         self.msg('seat', 'seat0', 'cursor', 'release', 'button1')
 
-    def cursor(self, _rect, point):
-        x, y = point
-        patch = Rect(x - 20, y - 20, 40, 40)
-        without = self.capture(patch)
-        with_cursor = self.capture(patch, cursor=True)
-        return ImageChops.difference(without, with_cursor).convert('L').point(
-            lambda value: 255 if value >= 12 else 0).tobytes()
+    def cursor(self):
+        # Screencopy need not composite the cursor on a headless output.
+        # GTK sends the actual cursor surface, buffer and hotspot to Wayland.
+        cursor = None
+        buffers = {}
+        with self.trace.open() as stream:
+            for line in stream:
+                if match := re.search(
+                    r'wl_pointer@\d+\.set_cursor\(\d+, wl_surface@(\d+), (-?\d+), (-?\d+)\)',
+                    line,
+                ):
+                    cursor = match.groups()
+                if match := re.search(r'wl_surface@(\d+)\.attach\(wl_buffer@(\d+),', line):
+                    surface, buffer = match.groups()
+                    buffers[surface] = buffer
+        if cursor:
+            surface, x, y = cursor
+            return surface, buffers.get(surface), x, y
+        return None
 
 
-def recognized(image):
+def recognized(image, scale=1, faint=False):
     data = io.BytesIO()
-    image.save(data, 'PNG')
+    text_image = image.convert('L')
+    if faint:
+        text_image = text_image.point(lambda value: 255 if value >= 218 else 0)
+    else:
+        text_image = ImageOps.autocontrast(text_image)
+    if scale > 1:
+        text_image = text_image.resize((image.width * scale, image.height * scale), Image.Resampling.LANCZOS)
+    text_image.save(data, 'PNG')
     table = run('tesseract', 'stdin', 'stdout', '--psm', '11', 'tsv', data=data.getvalue()).decode()
-    return list(csv.DictReader(io.StringIO(table), delimiter='\t'))
+    rows = list(csv.DictReader(io.StringIO(table), delimiter='\t'))
+    if scale > 1:
+        for row in rows:
+            for field in ('left', 'top', 'width', 'height'):
+                row[field] = str(int(row[field]) // scale)
+    return rows
 
 
 def settings_button(image):
@@ -219,29 +253,41 @@ def settings_button(image):
 
 
 def settings_search(image):
-    rows = recognized(image)
+    left = image.width // 2
+    header = image.crop((left, 0, 9 * image.width // 10, image.height // 3))
+    rows = recognized(header, scale=3, faint=True)
     starts = {(row['block_num'], row['par_num'], row['line_num'])
               for row in rows if row['text'].lower() in ('search', 'zoek')}
     for row in rows:
         line = row['block_num'], row['par_num'], row['line_num']
         if line in starts and row['text'].lower() in ('setting', 'instelling'):
-            return (int(row['left']) + int(row['width']) // 2,
+            return (left + int(row['left']) + int(row['width']) // 2,
                     int(row['top']) + int(row['height']) // 2)
     return None
 
 
 def check_content(driver, rect, evidence, label):
-    image = driver.capture(rect)
-    image.save(evidence / f'{label}.png')
-    width, height = image.size
-    for area in ((width - 48, height // 2, width - 28, height // 2 + 20),
-                 (width // 2, height - 48, width // 2 + 20, height - 28)):
-        if ImageStat.Stat(image.crop(area).convert('L')).median[0] < 50:
-            raise RuntimeError(f'{label}: Flutter content stops before a window edge')
-    button = settings_button(image)
-    if not button:
-        raise RuntimeError(f'{label}: Settings is not visible in the Flutter footer')
-    return rect.x + button[0], rect.y + button[1]
+    # A compositor can report the new size before Flutter paints at that size.
+    # Poll the visible content, keeping the last frame as evidence on failure.
+    deadline = time.monotonic() + 12
+    reason = 'Flutter content stops before a window edge'
+    while time.monotonic() < deadline:
+        image = driver.capture(rect)
+        image.save(evidence / f'{label}.png')
+        width, height = image.size
+        probes = (
+            (width - 48, height // 2, width - 28, height // 2 + 20),
+            (width // 2, height - 48, width // 2 + 20, height - 28),
+        )
+        if all(ImageStat.Stat(image.crop(area).convert('L')).median[0] >= 50 for area in probes):
+            reason = 'Settings is not visible in the Flutter footer'
+            button = settings_button(image)
+            if button:
+                return rect.x + button[0], rect.y + button[1]
+        else:
+            reason = 'Flutter content stops before a window edge'
+        time.sleep(0.35)
+    raise RuntimeError(f'{label}: {reason}')
 
 
 def exercise(args, profile):
@@ -253,16 +299,22 @@ def exercise(args, profile):
     runtime.mkdir(mode=0o700)
     os.environ.update(HOME=str(profile), XDG_DATA_HOME=str(profile / 'data'),
                       XDG_CONFIG_HOME=str(profile / 'config'), XDG_CACHE_HOME=str(profile / 'cache'),
-                      XDG_RUNTIME_DIR=str(runtime), LANG='C.UTF-8', LC_ALL='C.UTF-8')
+                      XDG_RUNTIME_DIR=str(runtime), LANG='C.UTF-8', LC_ALL='C.UTF-8',
+                      LIBGL_ALWAYS_SOFTWARE='1', OMP_THREAD_LIMIT='1',
+                      XCURSOR_THEME='Adwaita', XCURSOR_SIZE='24')
     with (args.evidence / 'compositor.log').open('w') as compositor, (args.evidence / 'app.log').open('w') as app_log:
         if args.backend == 'x11':
             os.environ['GDK_BACKEND'] = 'x11'
             driver = X11(compositor)
         else:
-            driver = Wayland(profile, compositor)
+            driver = Wayland(profile, compositor, args.evidence / 'app.log')
         app = None
         try:
-            app = subprocess.Popen([args.executable], stdout=app_log, stderr=subprocess.STDOUT)
+            app_env = dict(os.environ)
+            if args.backend == 'wayland':
+                app_env['WAYLAND_DEBUG'] = 'client'
+            app = subprocess.Popen([args.executable], env=app_env, stdout=app_log,
+                                   stderr=subprocess.STDOUT)
             log = data / 'logs' / 'ocideck.log'
             wait_for('first rasterized frame', lambda: re.search(
                 r' INFO opstart: eerste frame \(\+\d+ ms\)', log.read_text()), app)
@@ -289,24 +341,32 @@ def exercise(args, profile):
                 time.sleep(0.75)
                 point = check_content(driver, rect, args.evidence, f'window-{index}')
                 results.append({'target': target, **asdict(rect)})
+                print(f'{args.backend} {target}: {rect.width}x{rect.height} with visible Flutter content', flush=True)
                 if index != 1:
                     continue
+                print(f'{args.backend}: clicking Settings at {point}', flush=True)
                 driver.motion(*point)
+                time.sleep(0.2)
                 driver.click()
-                search = wait_for('Settings search after a native mouse click',
-                                  lambda: settings_search(driver.capture(rect)), app)
-                driver.capture(rect).save(args.evidence / 'settings-after-click.png')
+
+                def search_after_click():
+                    image = driver.capture(rect)
+                    image.save(args.evidence / 'settings-after-click.png')
+                    return settings_search(image)
+
+                search = wait_for('Settings search after a native mouse click', search_after_click, app)
                 search_point = rect.x + search[0], rect.y + search[1]
                 empty = search_point[0], search_point[1] - 35
                 driver.motion(*empty)
                 time.sleep(0.30)
-                cursor_before = driver.cursor(rect, empty)
-                if not any(cursor_before):
-                    raise RuntimeError('Could not observe the initial native cursor')
+                cursor_before = wait_for('initial native cursor', driver.cursor, app)
                 driver.motion(*search_point)
-                cursor_after = wait_for('a changed native cursor over Settings search', lambda: (
-                    driver.cursor(rect, search_point) != cursor_before
-                ), app)
+
+                def cursor_changed():
+                    observed = driver.cursor()
+                    return observed is not None and observed != cursor_before
+
+                cursor_after = wait_for('a changed native cursor over Settings search', cursor_changed, app)
                 results[-1].update(cursor_changed=cursor_after, clicked=True)
                 if args.backend == 'x11':
                     run('xdotool', 'key', 'Escape')
@@ -322,6 +382,8 @@ def exercise(args, profile):
             (args.evidence / 'result.json').write_text(json.dumps(results, indent=2) + '\n')
         finally:
             stop(app)
+            if args.backend == 'wayland':
+                stop(driver.pointer)
             stop(driver.manager)
 
 
