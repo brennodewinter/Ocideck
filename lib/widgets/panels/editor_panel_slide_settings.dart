@@ -443,6 +443,14 @@ class _SlideSettingsSectionState extends State<_SlideSettingsSection> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final badges = slideSettingBadges(l10n, widget.slide);
+    final title = Text(
+      l10n.d('Slide-instellingen'),
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        color: AppTheme.slate600,
+      ),
+    );
 
     return Material(
       color: AppTheme.slate50,
@@ -454,32 +462,23 @@ class _SlideSettingsSectionState extends State<_SlideSettingsSection> {
           tilePadding: const EdgeInsets.symmetric(horizontal: 12),
           childrenPadding: EdgeInsets.zero,
           leading: Icon(Icons.tune, size: 18, color: AppTheme.slate500),
-          title: Row(
-            children: [
-              Text(
-                l10n.d('Slide-instellingen'),
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: AppTheme.slate600,
+          // Alleen ingeklapt zijn de badges nodig. De titel mag bij grote
+          // tekst over meer regels lopen en krijgt de hele breedte zonder badges.
+          title: _expanded || badges.isEmpty
+              ? title
+              : Row(
+                  children: [
+                    Flexible(child: title),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Wrap(
+                        alignment: WrapAlignment.end,
+                        runSpacing: 2,
+                        children: badges,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(width: 8),
-              // De badges vatten samen wat je níét ziet. Staat het blok open, dan
-              // zie je het wél — en dan zijn ze dubbelop: "3,0 s" in de kop én de
-              // stepper eronder. Dus alleen ingeklapt.
-              //
-              // De badges mogen wegvallen als de kolom smal wordt; de kop zelf
-              // niet. Vandaar Expanded om de badges heen, niet om de titel.
-              Expanded(
-                child: Wrap(
-                  alignment: WrapAlignment.end,
-                  runSpacing: 2,
-                  children: _expanded ? const [] : badges,
-                ),
-              ),
-            ],
-          ),
           children: [
             const Divider(height: 1),
             _SlideSettingsBody(
