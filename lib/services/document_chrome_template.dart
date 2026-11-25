@@ -14,10 +14,11 @@ const int kMaxResolvedDocumentChromeChars = kMaxDocumentFieldValueLength * 4;
 /// Een uitvoerder die zelf voor escaping zorgt kan dat met
 /// [escapeMarkdownValues] uitschakelen.
 String resolveDocumentChromeTemplate(
-  String template,
+  String rawTemplate,
   Map<String, String> fields, {
   bool escapeMarkdownValues = true,
 }) {
+  final template = rawTemplate.replaceAll(RegExp(r'\r\n?'), '\n');
   final out = _BoundedChromeWriter(kMaxResolvedDocumentChromeChars);
   var cursor = 0;
   for (final match in _documentChromePlaceholder.allMatches(template)) {

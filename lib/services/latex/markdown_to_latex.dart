@@ -551,13 +551,18 @@ class _LatexNodeVisitor implements md.NodeVisitor {
         if (ctx == _Ctx.link) _buf.write('}');
 
       case 'table':
-        // Spuit de tabel uit met de juiste kolomspecificatie en randstijl.
+        if (_plainTable) {
+          _writePlainTable();
+          _plainTable = false;
+          break;
+        }
+        // Schrijf de tabel met de juiste kolomspecificatie en randstijl.
         final columns = _tableColumnAlignments.join();
         final spec = switch (_tableBorderStyle) {
           TableBorderStyle.boxed => '|${_tableColumnAlignments.join('|')}|',
           _ => columns,
         };
-        if (!_plainTable && tableTheme != null) _writeTableStyleStart();
+        if (tableTheme != null) _writeTableStyleStart();
         output.write('\\begin{tabular}{$spec}\n');
         if (_tableBorderStyle == TableBorderStyle.boxed) {
           output.write('\\hline\n');
@@ -572,8 +577,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
           output.write('\\bottomrule\n');
         }
         output.write('\\end{tabular}\n');
-        if (!_plainTable && tableTheme != null) output.write('}\n');
-        _plainTable = false;
+        if (tableTheme != null) output.write('}\n');
       case 'thead':
         // Niets — de header/body-scheiding (\midrule) wordt bij de eerste
         // tbody-rij geplaatst.
@@ -632,6 +636,21 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   int _tableColCount = 0;
   bool _inTableHead = false;
   bool _plainTable = false;
+
+  void _writePlainTable() {
+    final columns = _tableColumnAlignments.map(
+      (align) => switch (align) {
+        'c' => r'>{\centering\arraybackslash}X',
+        'r' => r'>{\raggedleft\arraybackslash}X',
+        _ => r'>{\raggedright\arraybackslash}X',
+      },
+    );
+    output
+      ..writeln(r'\noindent')
+      ..writeln('\\begin{tabularx}{\\linewidth}{@{}${columns.join()}@{}}')
+      ..write(_tableRows)
+      ..writeln(r'\end{tabularx}');
+  }
 
   void _writeTableStyleStart() {
     final rawPadding = tableTheme!.tableCellPaddingPx;
@@ -890,6 +909,10 @@ String _escapeChar(String c) {
       return r'\textasciitilde{}';
     case '^':
       return r'\textasciicircum{}';
+    case '€':
+      return r'\texteuro{}';
+    case '·':
+      return r'\textperiodcentered{}';
     default:
       return c;
   }

@@ -225,7 +225,7 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .document-header,.document-footer{display:flex;align-items:center;gap:14px;min-height:42px;font-size:12px}
 .document-header{border-bottom:1px solid rgba(100,116,139,.55);margin-bottom:24px}
 .document-footer{border-top:1px solid rgba(100,116,139,.55);margin-top:24px}
-.document-header-text,.document-footer-text{flex:1;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.document-header-text,.document-footer-text{flex:1;min-width:0;overflow-wrap:anywhere}
 .document-tlp{display:inline-block;flex:0 0 auto;padding:3px 7px;border-radius:4px;background:#000;font:700 10px/1.2 monospace;letter-spacing:.025em;white-space:nowrap}
 
 /* De melding dat er ongecontroleerde AI-tekst in dit document staat.
@@ -370,8 +370,7 @@ String _themedDocumentCss(
       '.document-header{border-bottom:1px solid ${t.accentColor}8c;margin-bottom:24px}'
       '.document-footer{border-top:1px solid ${t.accentColor}8c;margin-top:24px}'
       '.document-header-text,.document-footer-text{flex:1;min-width:0;'
-      'display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;'
-      'overflow:hidden}'
+      'overflow-wrap:anywhere}'
       '${_documentBandSizeCss(t, true)}${_documentBandSizeCss(t, false)}'
       '.document-page-number{white-space:nowrap;font-variant-numeric:tabular-nums}'
       '.document-page-number::after{content:"1"}'

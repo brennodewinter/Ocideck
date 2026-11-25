@@ -31,10 +31,13 @@ import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/odt/document_odt_export.dart';
+import 'package:ocideck/services/plain_document_table.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:ocideck/utils/document_front_matter.dart';
 import 'package:path/path.dart' as p;
+
+import 'pdf/pdf_text_probe.dart';
 
 Future<String> _diskLoader(String asset) => File(asset).readAsString();
 
@@ -56,17 +59,18 @@ void main() {
     documentFooterFontSize: 10.5,
   );
 
-  Future<ExportBundle> buildBundle(String body) => buildDocumentExportBundle(
-    body,
-    projectPath: null,
-    profile: PrivacyExportProfile.full,
-    ownIdentity: OwnIdentity.empty,
-    regions: defaultPrivacyRegions,
-    disabledRules: const {},
-    markdownService: MarkdownService(),
-    title: 'Proeftitel',
-    theme: theme,
-  );
+  Future<ExportBundle> buildBundle(String body, {ThemeProfile style = theme}) =>
+      buildDocumentExportBundle(
+        body,
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+        title: 'Proeftitel',
+        theme: style,
+      );
 
   Future<String> exportText(
     ExportBundle bundle,
@@ -156,46 +160,117 @@ void main() {
     // PDF is de referentie-implementatie; diens tekstlaag is elders afgedekt.
   });
 
-  test('een meerregelige kop levert meerdere regels per formaat', () async {
-    final multiTheme = theme.copyWith(
-      documentHeaderText: 'Eerste kopregel\nTweede kopregel',
-    );
-    final bundle = await buildDocumentExportBundle(
+  test('vier kopregels blijven leesbaar in alle exportvormen', () async {
+    const lines = [
+      'Eerste kopregel',
+      'Tweede kopregel',
+      'Derde kopregel',
+      'Café € ·',
+    ];
+    final bundle = await buildBundle(
       'Een alinea.\n',
-      projectPath: null,
-      profile: PrivacyExportProfile.full,
-      ownIdentity: OwnIdentity.empty,
-      regions: defaultPrivacyRegions,
-      disabledRules: const {},
-      markdownService: MarkdownService(),
-      title: 'Proeftitel',
-      theme: multiTheme,
+      style: theme.copyWith(
+        fontFamily: 'EB Garamond',
+        documentHeaderText: lines.join('\r\n'),
+      ),
     );
 
     final md = await exportText(bundle, DocumentExportFormat.md);
-    expect(md, contains('header: |-\n  Eerste kopregel\n  Tweede kopregel'));
+    expect(md, contains('header: |-\n  ${lines.join('\n  ')}'));
+    final html = await exportText(bundle, DocumentExportFormat.html);
+    expect(
+      html,
+      contains('Eerste kopregel<br>Tweede kopregel<br>Derde kopregel'),
+    );
+    final tex = await exportText(bundle, DocumentExportFormat.latex);
+    expect(tex, contains(r'\strut Eerste kopregel \\ \strut Tweede kopregel'));
+    expect(tex, contains('includehead,headheight='));
+    expect(tex, contains(r'Café \texteuro{} \textperiodcentered{}'));
+
+    final pdf = await buildDocumentExportBytes(
+      bundle,
+      DocumentExportFormat.pdf,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      onPdfUnsupportedCharacters: (runes) => fail('Ontbrekende tekens: $runes'),
+    );
+    expect(pdfBaseFonts(pdf), contains('EBGaramond-Regular'));
+    expect(pdfBaseFonts(pdf), isNot(contains('Times-Roman')));
+    for (final line in lines) {
+      expect(pdfVisibleText(pdf), contains(line));
+    }
+    expect(pdfLineCountsPerPage(pdf).single, greaterThanOrEqualTo(6));
 
     final odtContent = zipText(
       await buildDocumentExportOdt(bundle),
       'content.xml',
     );
-    expect(
-      RegExp(
-        '<text:p text:style-name="Header">[^<]*Eerste kopregel</text:p>\n'
-        '<text:p text:style-name="Header">[^<]*Tweede kopregel</text:p>',
-      ).hasMatch(odtContent),
-      isTrue,
-    );
-
     final headerXml = zipText(
       await buildDocumentExportDocx(bundle),
       'word/header1.xml',
     );
-    expect(headerXml.split('<w:p>').length - 1, greaterThanOrEqualTo(2));
-    expect(
-      headerXml,
-      allOf(contains('Eerste kopregel'), contains('Tweede kopregel')),
+    final epubDoc = zipText(
+      await buildDocumentExportEpub(bundle),
+      'OEBPS/document.xhtml',
     );
+    for (final line in lines.take(3)) {
+      expect(
+        odtContent,
+        contains('<text:p text:style-name="Header">$line</text:p>'),
+      );
+      expect(headerXml, contains(line));
+      expect(epubDoc, contains('<p>$line</p>'));
+    }
+    expect(headerXml.split('<w:p>').length - 1, lines.length);
+  });
+
+  test('blanco tabel behoudt haar vormgeving via de exportbundel', () async {
+    const table = '| Naam | Functie |\n| --- | --- |\n| Ada | Voorzitter |';
+    final bundle = await buildBundle(
+      'Hoogachtend,\n\n$plainDocumentTableMarker\n$table\n',
+      style: theme.copyWith(tableHeaderBackgroundColor: '#FF00FF'),
+    );
+
+    final md = await exportText(bundle, DocumentExportFormat.md);
+    expect(md, contains('$plainDocumentTableMarker\n$table'));
+    final html = await exportText(bundle, DocumentExportFormat.html);
+    expect(
+      html,
+      contains('$plainDocumentTableMarker\n$table'.replaceFirst('<!', r'<\!')),
+    );
+    final tex = await exportText(bundle, DocumentExportFormat.latex);
+    expect(tex, contains('Ada & Voorzitter'));
+    expect(tex, isNot(contains(r'\cellcolor')));
+    expect(tex, isNot(contains(plainDocumentTableMarker)));
+
+    final pdf = await buildDocumentExportBytes(
+      bundle,
+      DocumentExportFormat.pdf,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+    );
+    expect(pdfVisibleText(pdf), contains('Ada Voorzitter'));
+    expect(pdfVisibleText(pdf), isNot(contains('ocideck:plain_table')));
+    expect(pdfFillColors(pdf), isNot(contains([1.0, 0.0, 1.0])));
+
+    final odt = zipText(await buildDocumentExportOdt(bundle), 'content.xml');
+    final odtTable = odt.split(RegExp(r'<table:table[ >]')).last;
+    expect(odtTable, contains('Ada'));
+    expect(odtTable, isNot(contains('Table_Header_Cell')));
+    final docx = zipText(
+      await buildDocumentExportDocx(bundle),
+      'word/document.xml',
+    );
+    expect(docx, contains('<w:top w:val="nil"/>'));
+    expect(docx, contains('<w:keepNext/>'));
+    expect(docx, contains('<w:cantSplit/>'));
+    expect(docx, isNot(contains('<w:shd')));
+    final epub = zipText(
+      await buildDocumentExportEpub(bundle),
+      'OEBPS/document.xhtml',
+    );
+    expect(epub, contains('<table class="ocideck-plain-table">'));
+    for (final output in [odt, docx, epub]) {
+      expect(output, isNot(contains('ocideck:plain_table')));
+    }
   });
 
   test(

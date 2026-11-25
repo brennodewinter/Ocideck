@@ -757,17 +757,19 @@ class DocumentPdfWidgets {
   ///
   /// Loopt met opzet langs dezelfde spanrenderer als de lopende tekst: de band
   /// draagt Markdown, en die hoort in de PDF hetzelfde te doen als op het scherm
-  /// en in de HTML-export. Eén regel hoog — een band die uitdijt duwt de
-  /// tekstspiegel weg — en wat er niet in past valt er stil af.
-  pw.Widget bandText(List<PdfSpan> spans, {required pw.TextStyle style}) =>
-      pw.RichText(
-        maxLines: 1,
-        overflow: pw.TextOverflow.clip,
-        text: pw.TextSpan(
-          style: _baseStyle.merge(style),
-          children: _spans(spans, size: style.fontSize ?? this.style.bandSize),
-        ),
-      );
+  /// en in de HTML-export. De band kan omslaan binnen de beschikbare breedte.
+  pw.Widget bandText(
+    List<PdfSpan> spans, {
+    required pw.TextStyle style,
+    required int maxLines,
+  }) => pw.RichText(
+    maxLines: maxLines,
+    overflow: pw.TextOverflow.clip,
+    text: pw.TextSpan(
+      style: _baseStyle.merge(style),
+      children: _spans(spans, size: style.fontSize ?? this.style.bandSize),
+    ),
+  );
 
   List<pw.InlineSpan> _spans(
     List<PdfSpan> spans, {

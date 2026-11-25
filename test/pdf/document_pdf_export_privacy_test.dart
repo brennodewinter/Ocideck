@@ -17,6 +17,7 @@ import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/pdf/document_pdf_export.dart';
+import 'package:ocideck/services/plain_document_table.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 
@@ -34,7 +35,12 @@ void main() {
       '\n'
       '| Naam | BSN |\n'
       '| --- | --- |\n'
-      '| Jan Jansen | $bsn |\n';
+      '| Jan Jansen | $bsn |\n'
+      '\n'
+      '$plainDocumentTableMarker\n'
+      '| Naam | BSN |\n'
+      '| --- | --- |\n'
+      '| Ada Jansen | $bsn |\n';
 
   const labels = DocumentPdfLabels(
     footnotesTitle: 'Noten',
@@ -67,6 +73,8 @@ void main() {
     expect(text, isNot(contains(bsn)));
     // Ook niet in de tabelcel, die langs een andere tak van de bridge gaat.
     expect(text, contains('Jan Jansen'));
+    expect(text, contains('Ada Jansen'));
+    expect(text, isNot(contains('ocideck:plain_table')));
   });
 
   test(
