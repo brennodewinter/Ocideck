@@ -300,6 +300,13 @@ String _tableCell(
       '</w:p></w:tc>';
 }
 
+/// De inline-markdown van één chrome-regel (documentkop/-voet, #3166) als
+/// WordprocessingML-runs: vet, cursief, doorgehaald en code worden echte
+/// `w:r`-opmaak. Links en onbekende opmaak houden hun tekst maar verliezen
+/// de tag — een kopband is geen navigatie en kent geen eigen relatiepart.
+String markdownToDocxInline(String text) =>
+    _inlineDocx(text).replaceAll(RegExp('</?OCIDECKLINK[^>]*>'), '');
+
 /// De inline-markdown van een noot als WordprocessingML-runs — vet, cursief,
 /// code en links, maar geen alinea's.
 String _inlineDocx(String text) {
@@ -312,46 +319,74 @@ String _inlineDocx(String text) {
 }
 
 /// Vertaalt eenvoudige inline-HTML (van de markdown-package) naar
-/// WordprocessingML-runs.
+/// WordprocessingML-runs — één scan, zodat tekst buiten tags één run wordt
+/// en geneste opmaak zijn eigenschappen in dezelfde run accumuleert.
+///
+/// De vorige reeks losse `replaceAll`-passes pakte de zelf gegenereerde
+/// `</w:…>`-sluittags opnieuw als kale tekst en wikkelde die in een tweede
+/// run — de output stond daardoor vol met `<w:t>w:r&gt;</w:t>`-fragmenten
+/// (#3166). Onbekende tags vallen weg maar houden hun tekst; de tekst is
+/// al entity-veilig uit de markdown-package en wordt niet dubbel geëscapet.
 String _htmlInlineToDocx(String html) {
-  var result = html;
-  result = result.replaceAllMapped(
-    RegExp(r'<strong>(.*?)</strong>', dotAll: true),
-    (m) =>
-        '<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
-  );
-  result = result.replaceAllMapped(
-    RegExp(r'<em>(.*?)</em>', dotAll: true),
-    (m) =>
-        '<w:r><w:rPr><w:i/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
-  );
-  result = result.replaceAllMapped(
-    RegExp(r'<del>(.*?)</del>', dotAll: true),
-    (m) =>
-        '<w:r><w:rPr><w:strike/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
-  );
-  result = result.replaceAllMapped(
-    RegExp(r'<code>(.*?)</code>', dotAll: true),
-    (m) =>
-        '<w:r><w:rPr><w:rStyle w:val="SourceText"/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
-  );
-  result = result.replaceAllMapped(
-    RegExp(r'<a href="([^"]*)">(.*?)</a>', dotAll: true),
-    (m) =>
-        '<OCIDECKLINK href="${xmlAttr(m.group(1)!)}">'
-        '<w:r><w:rPr><w:rStyle w:val="Hyperlink"/></w:rPr>'
-        '<w:t xml:space="preserve">${xmlEscape(m.group(2)!)}</w:t></w:r>'
-        '</OCIDECKLINK>',
-  );
-  result = result.replaceAll('<br>', '<w:r><w:br/></w:r>');
-  result = result.replaceAll('<br/>', '<w:r><w:br/></w:r>');
-  // Overgebleven kale tekst → een run.
-  result = result.replaceAllMapped(RegExp(r'(?<![>])[^<]+'), (m) {
-    final t = m.group(0)!;
-    if (t.trim().isEmpty) return t;
-    return '<w:r><w:t xml:space="preserve">${xmlEscape(t)}</w:t></w:r>';
-  });
-  return result;
+  final buf = StringBuffer();
+  var cursor = 0;
+  var bold = false, italic = false, strike = false, code = false, link = false;
+
+  void run(String text) {
+    if (text.isEmpty) return;
+    final props = StringBuffer()
+      ..write(bold ? '<w:b/>' : '')
+      ..write(italic ? '<w:i/>' : '')
+      ..write(strike ? '<w:strike/>' : '')
+      ..write(
+        code || link
+            ? '<w:rStyle w:val="${link ? 'Hyperlink' : 'SourceText'}"/>'
+            : '',
+      );
+    buf.write(
+      props.isEmpty
+          ? '<w:r><w:t xml:space="preserve">$text</w:t></w:r>'
+          : '<w:r><w:rPr>$props</w:rPr>'
+                '<w:t xml:space="preserve">$text</w:t></w:r>',
+    );
+  }
+
+  for (final match in RegExp('<[^>]+>').allMatches(html)) {
+    run(html.substring(cursor, match.start));
+    switch (match.group(0)!) {
+      case '<strong>':
+        bold = true;
+      case '</strong>':
+        bold = false;
+      case '<em>':
+        italic = true;
+      case '</em>':
+        italic = false;
+      case '<del>':
+        strike = true;
+      case '</del>':
+        strike = false;
+      case '<code>':
+        code = true;
+      case '</code>':
+        code = false;
+      case '<br>' || '<br/>':
+        buf.write('<w:r><w:br/></w:r>');
+      case '</a>':
+        buf.write('</OCIDECKLINK>');
+        link = false;
+      default:
+        final tag = match.group(0)!;
+        final href = RegExp('href="([^"]*)"').firstMatch(tag);
+        if (tag.startsWith('<a') && href != null) {
+          buf.write('<OCIDECKLINK href="${xmlAttr(href.group(1)!)}">');
+          link = true;
+        }
+    }
+    cursor = match.end;
+  }
+  run(html.substring(cursor));
+  return buf.toString();
 }
 
 class _DocxNodeVisitor implements md.NodeVisitor {

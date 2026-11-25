@@ -147,6 +147,32 @@ class OdtConversion {
   final List<String> mermaidSources;
 }
 
+/// De inline-markdown van één chrome-regel (documentkop/-voet, #3166) als
+/// ODT-fragment mét spans: vet, cursief, doorgehaald en code worden
+/// `text:span`s met de gelijknamige stijl. De bron wordt eerst geëscapet,
+/// zodat rauwe `<html>` in de tekst letterlijk rendert en geen mark-up kan
+/// injecteren. Links en onbekende opmaak houden hun tekst maar verliezen de
+/// tag — een kopband is geen navigatie.
+String markdownToOdtInline(String text) {
+  final html = md.markdownToHtml(
+    xmlEscape(text),
+    inlineOnly: true,
+    extensionSet: md.ExtensionSet.gitHubFlavored,
+  );
+  return html
+      .replaceAll('<strong>', '<text:span text:style-name="Strong">')
+      .replaceAll('</strong>', '</text:span>')
+      .replaceAll('<em>', '<text:span text:style-name="Emphasis">')
+      .replaceAll('</em>', '</text:span>')
+      .replaceAll('<del>', '<text:span text:style-name="Strike">')
+      .replaceAll('</del>', '</text:span>')
+      .replaceAll('<code>', '<text:span text:style-name="Source_Text">')
+      .replaceAll('</code>', '</text:span>')
+      .replaceAll('<br>', '<text:line-break/>')
+      .replaceAll('<br/>', '<text:line-break/>')
+      .replaceAll(RegExp('</?(?!text:)[a-zA-Z!][^>]*>'), '');
+}
+
 /// De inline-markdown van een noot als ODT-fragment — vet, cursief, code en
 /// links, maar geen alinea's.
 String _inlineOdt(String text) {

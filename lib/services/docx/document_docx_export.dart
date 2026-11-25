@@ -34,6 +34,7 @@ import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import '../document_footnote_setup.dart';
+import '../document_chrome_template.dart';
 import '../export_bundle.dart';
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
@@ -100,7 +101,14 @@ Future<Uint8List> buildDocumentExportDocx(
   );
 
   // 5. XML-onderdelen bouwen.
-  final documentXml = _buildDocumentXml(prepared.body, pageSize, pageMargins);
+  final chrome = resolveDocumentChrome(bundle.audience.deck);
+  final documentXml = _buildDocumentXml(
+    prepared.body,
+    pageSize,
+    pageMargins,
+    hasHeader: chrome.header.isNotEmpty,
+    hasFooter: chrome.footer.isNotEmpty,
+  );
   final stylesXml = _buildStylesXml(theme);
   final numberingXml = _buildNumberingXml();
   final footnotesXml = conversion.footnotes.isNotEmpty
@@ -118,6 +126,8 @@ Future<Uint8List> buildDocumentExportDocx(
     hasEndnotes:
         footnotePlacement == FootnotePlacement.document &&
         conversion.footnotes.isNotEmpty,
+    hasHeader: chrome.header.isNotEmpty,
+    hasFooter: chrome.footer.isNotEmpty,
   );
   final relsXml = _buildRelsXml();
   final docRelsXml = _buildDocumentRelsXml(
@@ -128,6 +138,8 @@ Future<Uint8List> buildDocumentExportDocx(
     hasEndnotes:
         conversion.footnotes.isNotEmpty &&
         footnotePlacement == FootnotePlacement.document,
+    hasHeader: chrome.header.isNotEmpty,
+    hasFooter: chrome.footer.isNotEmpty,
   );
 
   // 6. ZIP samenstellen.
@@ -146,6 +158,12 @@ Future<Uint8List> buildDocumentExportDocx(
         ? 'word/endnotes.xml'
         : 'word/footnotes.xml';
     addText(name, footnotesXml);
+  }
+  if (chrome.header.isNotEmpty) {
+    addText('word/header1.xml', _buildBandXml('hdr', chrome.header));
+  }
+  if (chrome.footer.isNotEmpty) {
+    addText('word/footer1.xml', _buildBandXml('ftr', chrome.footer));
   }
   addText('word/_rels/document.xml.rels', docRelsXml);
   addText('docProps/core.xml', coreXml);
@@ -560,10 +578,17 @@ int _mmToTwips(double mm) => (mm * 1440 / 25.4).round();
 String _buildDocumentXml(
   String body,
   ({int w, int h}) pageSize,
-  ({int top, int bottom, int left, int right}) margins,
-) {
+  ({int top, int bottom, int left, int right}) margins, {
+  required bool hasHeader,
+  required bool hasFooter,
+}) {
+  // De referenties staan vóór pgSz: EG_HdrFtrReferences is het eerste
+  // kind dat CT_SectPr toestaat, en Word weigert de band stil als de
+  // volgorde niet klopt (#3166).
   final sectPr =
       '<w:sectPr>'
+      '${hasHeader ? '<w:headerReference w:type="default" r:id="headerRel"/>' : ''}'
+      '${hasFooter ? '<w:footerReference w:type="default" r:id="footerRel"/>' : ''}'
       '<w:pgSz w:w="${pageSize.w}" w:h="${pageSize.h}"/>'
       '<w:pgMar w:top="${margins.top}" w:right="${margins.right}" '
       'w:bottom="${margins.bottom}" w:left="${margins.left}" '
@@ -653,6 +678,17 @@ String _buildStylesXml(ThemeProfile theme) {
       '<w:style w:type="character" w:styleId="FootnoteReference">'
       '<w:name w:val="Footnote Reference"/><w:rPr>'
       '<w:vertAlign w:val="superscript"/></w:rPr></w:style>'
+      // De bandstijlen voor de documentkop/-voet (#3166): iets kleiner dan
+      // de broodtekst, geen extra witregel — Word koppelt ze bovendien aan
+      // zijn eigen Header/Footer-conventie.
+      '<w:style w:type="paragraph" w:styleId="Header">'
+      '<w:name w:val="header"/><w:basedOn w:val="Normal"/>'
+      '<w:pPr><w:spacing w:after="0"/></w:pPr>'
+      '<w:rPr><w:sz w:val="${(_bodyHalfPoints(theme) * 0.8).round()}"/></w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="Footer">'
+      '<w:name w:val="footer"/><w:basedOn w:val="Normal"/>'
+      '<w:pPr><w:spacing w:after="0"/></w:pPr>'
+      '<w:rPr><w:sz w:val="${(_bodyHalfPoints(theme) * 0.8).round()}"/></w:rPr></w:style>'
       '</w:styles>';
 }
 
@@ -792,6 +828,8 @@ String _buildAppXml() =>
 String _buildContentTypesXml({
   required bool hasFootnotes,
   required bool hasEndnotes,
+  required bool hasHeader,
+  required bool hasFooter,
 }) {
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
@@ -821,6 +859,16 @@ String _buildContentTypesXml({
       '<Override PartName="/word/endnotes.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.endnotes+xml"/>',
     );
   }
+  if (hasHeader) {
+    buf.writeln(
+      '<Override PartName="/word/header1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>',
+    );
+  }
+  if (hasFooter) {
+    buf.writeln(
+      '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>',
+    );
+  }
   buf
     ..writeln(
       '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>',
@@ -834,6 +882,23 @@ String _buildContentTypesXml({
     ..writeln('<Default Extension="gif" ContentType="image/gif"/>')
     ..writeln('</Types>');
   return buf.toString();
+}
+
+/// `word/header1.xml` of `word/footer1.xml`: elke chrome-regel een alinea
+/// in de bandstijl, met inline-markdown als runs (#3166).
+String _buildBandXml(String tag, String text) {
+  final lines = text
+      .split('\n')
+      .map(
+        (line) =>
+            '<w:p><w:pPr><w:pStyle w:val="${tag == 'hdr' ? 'Header' : 'Footer'}"/></w:pPr>'
+            '${markdownToDocxInline(line)}</w:p>',
+      )
+      .join();
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
+      '<w:$tag xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+      '$lines'
+      '</w:$tag>';
 }
 
 String _buildRelsXml() =>
@@ -854,6 +919,8 @@ String _buildDocumentRelsXml(
   List<_DocxRelation> relations, {
   required bool hasFootnotes,
   required bool hasEndnotes,
+  required bool hasHeader,
+  required bool hasFooter,
 }) {
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
@@ -884,6 +951,20 @@ String _buildDocumentRelsXml(
     'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering" '
     'Target="numbering.xml"/>',
   );
+  if (hasHeader) {
+    buf.writeln(
+      '<Relationship Id="headerRel" '
+      'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" '
+      'Target="header1.xml"/>',
+    );
+  }
+  if (hasFooter) {
+    buf.writeln(
+      '<Relationship Id="footerRel" '
+      'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" '
+      'Target="footer1.xml"/>',
+    );
+  }
   for (final r in relations) {
     final mode = r.targetMode != null ? ' TargetMode="${r.targetMode}"' : '';
     buf.writeln(
