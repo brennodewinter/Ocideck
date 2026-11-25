@@ -5504,8 +5504,8 @@ Saving the original remains available.
   export's filename, so a mix-up between the two is visible. If the privacy check
   is switched off (under Beveiliging), the dialog says so plainly: a redacted
   copy has then not actually been checked for personal data.
-- **Which format** — **Markdown (`.md`)** is a redacted copy of the plain text
-  that opens in any Markdown reader; **HTML** is one self-contained
+- **Which format** — use **Save** for the Markdown source. The export dialog offers
+  six output formats. **HTML** is one self-contained
   HTML file with real text, headings and alt texts that opens in any browser
   without internet, with its tables, maths, Mermaid diagrams and charts
   rendered in place — the file has not been audited for accessibility, so the
@@ -5538,13 +5538,6 @@ Saving the original remains available.
   column width. When one fails to render, its source text lands in a code block
   rather than leaving a gap — the same arrangement as the PDF export.
   *(Added 2026-09-10, #1918.)*
-
-  *(Corrected 2026-08-30: this list named four formats while the export dialog
-  has offered six since 2026-08-24. ePub had been written into the Dutch variant
-  only, where the next `make translate-docs` run would have overwritten it — a
-  new format belongs in this English source first. Corrected again 2026-09-10:
-  the list then said six while the dialog had offered seven since #1918 — Word
-  had never reached either variant, and only the CHANGELOG carried it.)*
 
 #### The PDF
 
@@ -5731,15 +5724,10 @@ geometry: paperwidth=216mm,paperheight=303mm,top=28mm,bottom=28mm,left=23mm,righ
 That is A4 (210 × 297 mm) with 3 mm on every side. When OciDeck opens such a file
 again it recognises the enlarged sheet and shows it as *A4 · +3mm*.
 
-**Exporting to `.md` always takes the page setup along.** *(Added 2026-08-17.)*
-The exported copy — a new file, your own document is never touched — opens with
-these same two lines, filled in with the setup that applies at that moment. You
-do not have to pin the document first: if the size and margins came from your
-settings, they are written into the export anyway, because the person receiving
-it does not have your settings. What you saw is what they print. The **style** is
-the one thing that does not travel this way — a style is a profile living on your
-machine, so instead of sending its name OciDeck renders the style into the
-exported HTML or `.tex` itself.
+**Sharing the Markdown source.** Pin the page setup in the document before
+sharing it when the recipient needs the same page size and margins. Style
+profiles live on your machine. HTML and LaTeX exports render the selected style
+into the output.
 
 Two limitations worth knowing before you rely on it. **Only what is in the file
 travels** — pinning a document does not pin the writing width, the chapter page

@@ -211,7 +211,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
   /// Voor de opdrachtgever is volledig de standaard: alleen wat je zelf op
   /// "weglaten" zette gaat eruit. Dezelfde standaard als de deck-export.
   PrivacyExportProfile _profile = PrivacyExportProfile.full;
-  DocumentExportFormat _format = DocumentExportFormat.md;
+  DocumentExportFormat _format = DocumentExportFormat.pdf;
 
   bool _busy = false;
   bool _cancelRequested = false;
@@ -506,13 +506,8 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 8),
-        // Een rooster van tegels, geen keuzechips: zeven formaten worden zo
-        // gelijkmatige kaarten met icoon en naam die netjes afbreken naar
-        // meerdere regels. De tegels hebben een vaste breedte en de label
-        // breekt erin af, dus een langere vertaling of 200% tekstgrootte maakt
-        // de tegel hoger in plaats van breder — geen vaste breedte die ergens
-        // knelt. `Wrap` centreert de tegels, zodat een onvolutte laatste regel
-        // (zeven is oneven) er niet uitzakt.
+        // Labels kunnen binnen de tegel over meerdere regels lopen.
+        // Wrap houdt het rooster bruikbaar bij grote tekst en smalle vensters.
         Wrap(
           alignment: WrapAlignment.center,
           spacing: 8,
@@ -529,9 +524,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
         ),
         const SizedBox(height: 6),
         Text(switch (_format) {
-          DocumentExportFormat.md => l10n.d(
-            'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.',
-          ),
+          DocumentExportFormat.md => '',
           DocumentExportFormat.html => l10n.d(
             'Eén HTML-bestand met echte tekst, koppen en alt-teksten, dat in elke browser opent zonder internet — met tabellen, wiskunde, mermaid en grafieken.',
           ),
@@ -776,17 +769,10 @@ class _FormatTile extends StatelessWidget {
   }
 }
 
-/// De formaten in de volgorde waarin ze worden aangeboden: eerst de platte
-/// tekst waar het hele product op staat, dan wat een ontvanger leest — HTML,
-/// PDF, ePub, ODT — dan de zetweg voor wie zelf verder wil.
+/// De uitvoerformaten die de documenteditor aanbiedt.
 const _formatOptions = [
-  _FormatOption(
-    DocumentExportFormat.md,
-    'Markdown (.md)',
-    Icons.description_outlined,
-  ),
-  _FormatOption(DocumentExportFormat.html, 'HTML', Icons.public_outlined),
   _FormatOption(DocumentExportFormat.pdf, 'PDF', Icons.picture_as_pdf_outlined),
+  _FormatOption(DocumentExportFormat.html, 'HTML', Icons.public_outlined),
   _FormatOption(
     DocumentExportFormat.epub,
     'ePub (.epub)',

@@ -24,7 +24,7 @@ Widget _app(Widget home) => MaterialApp(
 
 void main() {
   group('DocumentExportDialog', () {
-    testWidgets('toont de eerlijke bewoording en biedt PDF aan', (
+    testWidgets('gebruikt PDF als standaard en biedt zes uitvoerformaten aan', (
       tester,
     ) async {
       await tester.pumpWidget(
@@ -50,15 +50,25 @@ void main() {
         find.textContaining('Je byte-getrouwe origineel bewaar je met Opslaan'),
         findsOneWidget,
       );
-      // PDF is een eigen formaat geworden, geen verwijzing naar de browser meer.
-      expect(find.text('PDF'), findsOneWidget);
+      for (final label in [
+        'PDF',
+        'HTML',
+        'ePub (.epub)',
+        'ODT (.odt)',
+        'Word (.docx)',
+        'LaTeX (.tex)',
+      ]) {
+        expect(find.text(label), findsOneWidget);
+      }
+      expect(find.text('Markdown (.md)'), findsNothing);
+      expect(find.textContaining('Een PDF met echte tekst'), findsOneWidget);
       expect(
         find.textContaining('open de HTML en print via je browser'),
         findsNothing,
       );
     });
 
-    testWidgets('geeft PDF door als gekozen formaat', (tester) async {
+    testWidgets('geeft PDF door zonder een formaat te kiezen', (tester) async {
       DocumentExportFormat? gotFormat;
       await tester.pumpWidget(
         _app(
@@ -81,10 +91,6 @@ void main() {
       );
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('PDF'));
-      await tester.pumpAndSettle();
-      // De toelichting hoort eerlijk te zeggen wat de PDF wél en niet draagt.
-      expect(find.textContaining('Een PDF met echte tekst'), findsOneWidget);
       await tester.tap(find.text('Exporteren…'));
       await tester.pumpAndSettle();
 
