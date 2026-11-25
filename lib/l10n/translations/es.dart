@@ -681,10 +681,8 @@ const _dutchSourceAddEs = {
   'Vanaf deze dia': 'Desde esta diapositiva',
   'Deckstijl': 'Estilo del deck',
   'Geërfd vanaf dia': 'Heredado desde la diapositiva',
-  'Geldt ook op de volgende dia\'s':
-      'También se aplica a las diapositivas siguientes',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Se aplica desde esta diapositiva hasta el siguiente cambio de estilo. El estilo del deck se elige en la cabecera del editor.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'La nueva selección se aplica desde esta diapositiva hasta el final.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Una imagen está tardando demasiado en cargarse. Haz que el archivo esté disponible localmente e intenta exportar de nuevo.',
   'Sprekers corrigeren': 'Corregir hablantes',
@@ -7231,7 +7229,6 @@ const _dutchSourceAddEs = {
       'Clasificación TLP (Traffic Light Protocol)',
   'Tabel koptekst': 'Texto del encabezado de tabla',
   'Tabeltekst': 'Texto de tabla',
-  'Terug naar standaardstijl': 'Volver al estilo predeterminado',
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Restablecer (imagen completa visible)',
   'Tijd resetten (R)': 'Restablecer tiempo (R)',

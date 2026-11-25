@@ -598,7 +598,6 @@ const _dutchSourceTr = {
   'Slide': 'Slayt',
   'TYPE': 'TÜR',
   'STIJL': 'STİL',
-  'Terug naar standaardstijl': 'Varsayılan stile dön',
   'Sprekersnotities...': 'Sunucu notları...',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown işlenemedi. Söz dizimini denetleyin.',
@@ -2462,9 +2461,8 @@ const _dutchSourceAddTr = <String, String>{
   'Vanaf deze dia': 'Bu slayttan itibaren',
   'Deckstijl': 'Deck stili',
   'Geërfd vanaf dia': 'Slayttan devralındı',
-  'Geldt ook op de volgende dia\'s': 'Sonraki slaytlarda da geçerlidir',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Bu slayttan bir sonraki stil değişikliğine kadar geçerlidir. Deck stilini düzenleyicinin başlığından seçersiniz.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Yeni seçim bu slayttan sunumun sonuna kadar geçerlidir.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Bir görüntünün yüklenmesi çok uzun sürüyor. Dosyayı yerel olarak kullanılabilir hâle getirip dışa aktarmayı yeniden deneyin.',
   'Sprekers corrigeren': 'Konuşmacıları düzelt',

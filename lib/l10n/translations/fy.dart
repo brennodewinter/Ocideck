@@ -682,9 +682,8 @@ const _dutchSourceAddFy = {
   'Vanaf deze dia': 'Fanôf dizze dia',
   'Deckstijl': 'Deckstyl',
   'Geërfd vanaf dia': 'Oerfd fanôf dia',
-  'Geldt ook op de volgende dia\'s': 'Jildt ek op de folgjende dia\'s',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Jildt fanôf dizze dia oant in folgjende stylwiksel. De deckstyl kiesto yn de kop fan de bewurker.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'In nije kar jildt fanôf dizze dia oant de ein.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'It laden fan in ôfbylding duorret te lang. Meitsje it bestân lokaal beskikber en besykje opnij te eksportearjen.',
   'Sprekers corrigeren': 'Sprekkers korrizjearje',
@@ -7156,7 +7155,6 @@ const _dutchSourceAddFy = {
       'TLP-klassifikaasje (Traffic Light Protocol)',
   'Tabel koptekst': 'Tabel koptekst',
   'Tabeltekst': 'Tabeltekst',
-  'Terug naar standaardstijl': 'Werom nei standertstyl',
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Weromsette (folsleine ôfbylding sichtber)',
   'Tijd resetten (R)': 'Tiid resette (R)',

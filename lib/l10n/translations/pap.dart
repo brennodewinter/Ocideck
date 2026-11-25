@@ -679,9 +679,8 @@ const _dutchSourceAddPap = {
   'Vanaf deze dia': 'For di e slide aki',
   'Deckstijl': 'Estilo di deck',
   'Geërfd vanaf dia': 'Herená for di slide',
-  'Geldt ook op de volgende dia\'s': 'Ta konta tambe pa e slidenan siguiente',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Ta konta for di e slide aki te un siguiente kambio di estilo. Bo skohe e estilo di deck den e kabes di e editor.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Un selekshon nobo ta konta for di e slide aki te na final.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Kargamentu di un imágen ta dura muchu largu. Pone e archivo disponibel lokalmente i purba eksportá atrobe.',
   'Sprekers corrigeren': 'Korigí papiadónan',
@@ -7171,7 +7170,6 @@ const _dutchSourceAddPap = {
       'Klasifikashon TLP (Traffic Light Protocol)',
   'Tabel koptekst': 'Teksto di enkabesamentu di tabel',
   'Tabeltekst': 'Teksto di tabel',
-  'Terug naar standaardstijl': 'Bèk na stil standard',
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Restorá (henter imágen visibel)',
   'Tijd resetten (R)': 'Resetiá tempu (R)',

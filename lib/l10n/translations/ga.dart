@@ -612,7 +612,6 @@ const _dutchSourceGa = {
   'Slide': 'Sleamhnán',
   'TYPE': 'CINEÁL',
   'STIJL': 'STÍL',
-  'Terug naar standaardstijl': 'Ar ais go dtí an stíl réamhshocraithe',
   'Sprekersnotities...': 'Nótaí cainteora...',
   'Sprekersnotities': 'Nótaí cainteora',
   'Notities voor tijdens het presenteren': 'Nótaí le haghaidh cur i láthair',
@@ -1638,10 +1637,8 @@ const _dutchSourceAddGa = <String, String>{
   'Vanaf deze dia': 'Ón sleamhnán seo',
   'Deckstijl': 'Stíl deice',
   'Geërfd vanaf dia': 'Oidhreacht ón sleamhnán',
-  'Geldt ook op de volgende dia\'s':
-      'Baineann sé leis na sleamhnáin ina dhiaidh freisin',
-  'Geldt vanaf deze dia tot een volgende stijlwissel. De deckstijl kies je in de kop van de editor.':
-      'Baineann sé ón sleamhnán seo go dtí an chéad athrú stíle eile. Roghnaítear stíl deice i gceanntásc an eagarthóra.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Baineann rogha nua leis an sleamhnán seo agus gach sleamhnán ina dhiaidh go dtí an deireadh.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Tá luchtú íomhá ag glacadh rófhada. Cuir an comhad ar fáil go logánta agus bain triail as easpórtáil arís.',
   'Sprekers corrigeren': 'Ceartaigh cainteoirí',

@@ -2462,13 +2462,13 @@ het het beste.
 
 ### Stijl vanaf een dia (#2996)
 
-Naast de deckstijl — één profiel voor het hele deck, in de kop van de editor —
-staat in **Dia-instellingen** een aparte groep *Vanaf deze dia*. Kies daar een
-ander stijlprofiel en dat geldt **vanaf die dia tot een volgende wissel**: het
-hoort bewust niet onder *Op deze slide*, omdat de keuze voorwaarts werkt op
-elke volgende dia. *Deckstijl* in dezelfde keuze beëindigt een lopend bereik.
-Een dia zonder eigen keuze toont waar zijn stijl vandaan komt ("geërfd vanaf
-dia N"), en elke dia waar een bereik begint draagt de profielnaam als badge.
+Kies boven de dia-editor onder **Vanaf deze dia** een stijlprofiel. Iedere
+keuze geldt **vanaf de actieve dia tot het einde** en vervangt stijlwissels
+verderop. Wil je daarna weer wisselen, kies dan een stijl op die latere dia.
+Met *Deckstijl* gebruik je vanaf de actieve dia de standaardstijl van de
+presentatie.
+De keuze toont de geldende stijl. Als die op een eerdere dia is ingesteld,
+vermeldt de tooltip het dianummer. De dia waar de wissel begint draagt een badge.
 Miniaturen, overzicht, presentator, zaalscherm en elke export tonen en
 bewaren de wissel; in de Markdown reist hij als
 `<!-- ocideck_style: <profielnaam> -->`, een commentaar dat andere Marp-tools
