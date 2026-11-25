@@ -71,6 +71,11 @@ public sealed class OpenProbeAccessible {
   public bool IsOffscreen { get { return (State & 0x18000) != 0; } }
   public bool IsEnabled { get { return (State & 1) == 0; } }
   public bool IsChecked { get { return (State & 0x10) != 0; } }
+  public int[] Bounds() {
+    int x, y, width, height;
+    owner.accLocation(out x, out y, out width, out height, child);
+    return new[] { x, y, width, height };
+  }
   public void Invoke() { owner.accDoDefaultAction(child); }
 }
 public static class OpenProbeWindow {
@@ -85,6 +90,50 @@ public static class OpenProbeWindow {
   [DllImport("oleacc.dll")] private static extern int AccessibleChildren(
       IAccessible parent, int start, int count,
       [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)] object[] children, out int obtained);
+  [StructLayout(LayoutKind.Sequential)] private struct Rect { public int Left, Top, Right, Bottom; }
+  [StructLayout(LayoutKind.Sequential)] private struct Point { public int X, Y; }
+  [StructLayout(LayoutKind.Sequential)] private struct CursorInfo { public int Size, Flags; public IntPtr Cursor; public Point Position; }
+  [DllImport("user32.dll")] private static extern bool GetWindowRect(IntPtr hwnd, out Rect rect);
+  [DllImport("user32.dll")] private static extern bool GetClientRect(IntPtr hwnd, out Rect rect);
+  [DllImport("user32.dll")] private static extern bool GetCursorInfo(ref CursorInfo cursor);
+  [DllImport("user32.dll")] public static extern bool SetCursorPos(int x, int y);
+  [DllImport("user32.dll")] private static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extra);
+  [DllImport("user32.dll")] private static extern bool SetWindowPos(IntPtr hwnd, IntPtr after, int x, int y, int width, int height, uint flags);
+  [DllImport("user32.dll")] public static extern uint GetDpiForWindow(IntPtr hwnd);
+  [DllImport("user32.dll")] private static extern IntPtr SetThreadDpiAwarenessContext(IntPtr dpiContext);
+  public static void EnablePerMonitorDpi() { SetThreadDpiAwarenessContext(new IntPtr(-4)); }
+  public static bool ResizeClient(IntPtr hwnd, int x, int y, int width, int height) {
+    Rect frame, client;
+    if (!GetWindowRect(hwnd, out frame) || !GetClientRect(hwnd, out client)) return false;
+    return SetWindowPos(hwnd, IntPtr.Zero, x, y, width + frame.Right - frame.Left - client.Right,
+                        height + frame.Bottom - frame.Top - client.Bottom, 4);
+  }
+  public static int[] ClientGeometry(IntPtr hwnd) {
+    Rect client;
+    if (!GetClientRect(hwnd, out client)) return new int[0];
+    var dimensions = new List<int> { client.Right, client.Bottom };
+    EnumWindow callback = (child, state) => {
+      var name = new StringBuilder(32);
+      GetClassName(child, name, name.Capacity);
+      Rect view;
+      if (name.ToString() != "FLUTTERVIEW" || !GetClientRect(child, out view)) return true;
+      dimensions.Add(view.Right);
+      dimensions.Add(view.Bottom);
+      return false;
+    };
+    EnumChildWindows(hwnd, callback, IntPtr.Zero);
+    GC.KeepAlive(callback);
+    return dimensions.ToArray();
+  }
+  public static IntPtr Cursor() {
+    var cursor = new CursorInfo { Size = Marshal.SizeOf(typeof(CursorInfo)) };
+    if (!GetCursorInfo(ref cursor) || cursor.Flags != 1) return IntPtr.Zero;
+    return cursor.Cursor;
+  }
+  public static void Click() {
+    mouse_event(2, 0, 0, 0, UIntPtr.Zero);
+    mouse_event(4, 0, 0, 0, UIntPtr.Zero);
+  }
   public static OpenProbeAccessible[] Snapshot(IntPtr root) {
     var nodes = new List<OpenProbeAccessible>();
     var seen = new HashSet<string>();
@@ -200,6 +249,62 @@ function Find-Marker($Root, [string]$Marker) {
         if ($element.Value.Contains($Marker)) { return $element }
     }
     return $null
+}
+
+function Test-NativeWindow {
+    [OpenProbeWindow]::EnablePerMonitorDpi()
+    $handle = $script:app.MainWindowHandle
+    [void][OpenProbeWindow]::ShowWindow($handle, 9)
+    [void][OpenProbeWindow]::SetForegroundWindow($handle)
+    [void](Wait-Probe 'foreground app for mouse input' { [OpenProbeWindow]::GetForegroundWindow() -eq $handle })
+    $screen = [Windows.Forms.Screen]::FromHandle($handle).WorkingArea
+    $scale = [OpenProbeWindow]::GetDpiForWindow($handle) / 96.0
+    if ($scale -le 0) { throw 'Could not determine the window DPI.' }
+    $width = [int][Math]::Min(1280, [Math]::Floor(($screen.Width - 18) / $scale))
+    $height = [int][Math]::Min(850, [Math]::Floor(($screen.Height - 42) / $scale))
+    if ($width -lt 980 -or $height -lt 694) { throw 'Work area too small for two client sizes.' }
+    $snapshots = @()
+    foreach ($targetHeight in @([Math]::Max(650, $height - 100), $height)) {
+        $requestedWidth = [int]($width * $scale)
+        $requestedHeight = [int]($targetHeight * $scale)
+        if (-not [OpenProbeWindow]::ResizeClient($handle, $screen.X, $screen.Y, $requestedWidth, $requestedHeight)) {
+            throw 'Win32 could not request the new client size.'
+        }
+        [void](Wait-Probe "the native client and Flutter viewport at ${width}x${targetHeight}" {
+            $r = [OpenProbeWindow]::ClientGeometry($handle)
+            return ($r.Count -eq 4 -and [Math]::Abs($r[0] - $requestedWidth) -le 2 -and
+                [Math]::Abs($r[1] - $requestedHeight) -le 2 -and $r[0] -eq $r[2] -and $r[1] -eq $r[3])
+        })
+        $snapshots += [ordered]@{ logicalWidth = $width; logicalHeight = $targetHeight; scale = $scale }
+    }
+    $settings = Wait-Probe 'the visible Settings button' {
+        Find-Control (Get-AppRoot) '^(Settings|Instellingen)$' ([Windows.Automation.ControlType]::Button)
+    }
+    $bounds = $settings.Bounds()
+    if ($bounds[2] -le 0 -or $bounds[3] -le 0) { throw 'Settings has no visible mouse target.' }
+    [void][OpenProbeWindow]::SetCursorPos(($screen.Right - 2), ($screen.Bottom - 2))
+    Start-Sleep -Milliseconds 250
+    $before = [OpenProbeWindow]::Cursor()
+    if ($before -eq [IntPtr]::Zero) { throw 'Could not observe the initial cursor.' }
+    if (-not [OpenProbeWindow]::SetCursorPos(($bounds[0] + [int]($bounds[2] / 2)), ($bounds[1] + [int]($bounds[3] / 2)))) {
+        throw 'Could not move the pointer over Settings.'
+    }
+    [void](Wait-Probe 'native cursor change over Settings' {
+        $hover = [OpenProbeWindow]::Cursor()
+        return ($hover -ne [IntPtr]::Zero -and $hover -ne $before)
+    })
+    [OpenProbeWindow]::Click()
+    [void](Wait-Probe 'Settings opened by native mouse input' {
+        Find-Control (Get-AppRoot) '^(Appearance|Uiterlijk|Storage|Opslag)$'
+    })
+    Save-ProbeEvidence 'window-settings-clicked'
+    [Windows.Forms.SendKeys]::SendWait('{ESC}')
+    [void](Wait-Probe 'Settings dismissed' {
+        $null -eq (Find-Control (Get-AppRoot) '^(Appearance|Uiterlijk|Storage|Opslag)$')
+    })
+    [ordered]@{ sizes = $snapshots; cursorChanged = $true; settingsClicked = $true } |
+        ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 (Join-Path $EvidenceDirectory 'window.json')
+    [void][OpenProbeWindow]::ShowWindow($handle, 3)
 }
 
 function Get-NativePicker {
@@ -318,6 +423,8 @@ try {
     [void](Wait-Probe 'welcome screen' {
         Find-Control (Get-AppRoot) '^(New presentation|Nieuwe presentatie)(\s|$)' ([Windows.Automation.ControlType]::Button)
     })
+
+    Test-NativeWindow
 
     # Cancellation is followed by a new open, proving the app remains usable.
     $dialog = Open-NativePicker

@@ -2,6 +2,15 @@ name: Linux desktop start
 
 on:
   workflow_dispatch:
+    inputs:
+      desktop_window:
+        description: Measure the native X11 and Wayland window of this bundle
+        type: boolean
+        default: false
+      wayland_regression:
+        description: Also rebuild without the workaround and require the Wayland probe to fail
+        type: boolean
+        default: false
   push:
     branches: [main]
   pull_request:
@@ -83,6 +92,31 @@ jobs:
 
       - name: De gebouwde app starten en het eerste frame toetsen
         run: bash scripts/linux_start_probe.sh probe-evidence build/linux/x64/release/bundle/ocideck
+
+      - name: Native vensterproeven op X11 en Wayland
+        if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' || inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
+        run: |
+          set -eu
+          apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim
+          app=build/linux/x64/release/bundle/ocideck
+          scripts/run_linux_window_probe.sh x11 "$app" probe-evidence/window-x11
+          scripts/run_linux_window_probe.sh wayland "$app" probe-evidence/window-wayland
+
+      - name: Wayland-regressie zonder schaalworkaround
+        if: ${{ inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
+        run: |
+          set -eu
+          runner=linux/runner/my_application.cc
+          grep -Fx '  follow_subsurface_scale(view);' "$runner"
+          sed -i 's/^  follow_subsurface_scale(view);$/  if (false) follow_subsurface_scale(view);/' "$runner"
+          bash scripts/run_release_linux_build.sh flutter build linux --release --no-pub
+          if scripts/run_linux_window_probe.sh wayland build/linux/x64/release/bundle/ocideck \
+            probe-evidence/window-wayland-regression >probe-evidence/wayland-regression.log 2>&1; then
+            echo 'De Wayland-proef accepteerde de bundel zonder workaround.' >&2
+            exit 1
+          fi
+          cat probe-evidence/wayland-regression.log
+          grep -E 'window-1: (Flutter content stops|Settings is not visible)' probe-evidence/wayland-regression.log
 
       - name: Opstartbewijs bewaren
         if: always()
