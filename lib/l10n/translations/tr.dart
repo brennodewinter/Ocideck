@@ -2461,8 +2461,8 @@ const _dutchSourceAddTr = <String, String>{
   'Vanaf deze dia': 'Bu slayttan itibaren',
   'Deckstijl': 'Deck stili',
   'Geërfd vanaf dia': 'Slayttan devralındı',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Bu slayttan bir sonraki stil değişikliğine kadar geçerlidir.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Yeni seçim bu slayttan sunumun sonuna kadar geçerlidir.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Bir görüntünün yüklenmesi çok uzun sürüyor. Dosyayı yerel olarak kullanılabilir hâle getirip dışa aktarmayı yeniden deneyin.',
   'Sprekers corrigeren': 'Konuşmacıları düzelt',

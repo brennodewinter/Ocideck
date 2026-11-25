@@ -1602,8 +1602,8 @@ const _dutchSourceAddLv = <String, String>{
   'Vanaf deze dia': 'Sākot ar šo slaidu',
   'Deckstijl': 'Deka stils',
   'Geërfd vanaf dia': 'Mantots no slaida',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Stājas spēkā no šī slaida līdz nākamajai stila maiņai.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Jaunā izvēle ir spēkā no šī slaida līdz beigām.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Attēla ielāde aizņem pārāk ilgu laiku. Nodrošiniet faila pieejamību lokāli un mēģiniet eksportēt vēlreiz.',
   'Sprekers corrigeren': 'Labot runātājus',

@@ -1624,8 +1624,8 @@ const _dutchSourceAddMt = <String, String>{
   'Vanaf deze dia': 'Minn din is-slide',
   'Deckstijl': 'Stil tad-deck',
   'Geërfd vanaf dia': 'Wieret minn slide',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Japplika minn din is-slide sa tibdil ieħor fl-istil.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Għażla ġdida tapplika minn din is-slide sal-aħħar.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'It-tagħbija ta’ immaġni qed tieħu wisq żmien. Agħmel il-fajl disponibbli lokalment u erġa’ pprova tesporta.',
   'Sprekers corrigeren': 'Ikkoreġi l-kelliema',

@@ -1611,8 +1611,8 @@ const _dutchSourceAddHr = <String, String>{
   'Vanaf deze dia': 'Od ovog slajda',
   'Deckstijl': 'Stil decka',
   'Geërfd vanaf dia': 'Naslijeđeno od slajda',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Vrijedi od ovog slajda do sljedeće promjene stila.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Novi odabir vrijedi od ovog slajda do kraja.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Učitavanje slike traje predugo. Omogućite lokalni pristup datoteci i pokušajte ponovno izvesti.',
   'Sprekers corrigeren': 'Ispravi govornike',

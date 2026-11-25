@@ -2395,9 +2395,10 @@ detail is for nobody) has to just work, and the author of that slide knows best.
 ### Style from a slide onward (#2996)
 
 Use **From this slide onward** above the slide editor to choose a style
-profile. It applies **from the active slide until the next style switch**.
-Choose *Deck style* to return to the presentation’s default style from that
-slide. The control shows the current style. If it was set on an earlier
+profile. Each choice applies **from the active slide to the end** and replaces
+any later style switches. To switch again, select a style on the later slide.
+Choose *Deck style* to use the presentation’s default style from the active
+slide onward. The control shows the current style. If it was set on an earlier
 slide, the tooltip shows the slide number. The slide that starts the switch
 has a badge. Thumbnails, the overview, the presenter, the audience window and every
 export show and carry the switch; in the Markdown it travels as

@@ -681,8 +681,8 @@ const _dutchSourceAddEs = {
   'Vanaf deze dia': 'Desde esta diapositiva',
   'Deckstijl': 'Estilo del deck',
   'Geërfd vanaf dia': 'Heredado desde la diapositiva',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Se aplica desde esta diapositiva hasta el siguiente cambio de estilo.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'La nueva selección se aplica desde esta diapositiva hasta el final.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Una imagen está tardando demasiado en cargarse. Haz que el archivo esté disponible localmente e intenta exportar de nuevo.',
   'Sprekers corrigeren': 'Corregir hablantes',

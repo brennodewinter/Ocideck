@@ -1606,8 +1606,8 @@ const _dutchSourceAddSv = <String, String>{
   'Vanaf deze dia': 'Från den här bilden',
   'Deckstijl': 'Deckstil',
   'Geërfd vanaf dia': 'Ärvt från bild',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Gäller från den här bilden till nästa stilbyte.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Ett nytt val gäller från den här bilden till slutet.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Det tar för lång tid att läsa in en bild. Gör filen tillgänglig lokalt och försök exportera igen.',
   'Sprekers corrigeren': 'Korrigera talare',

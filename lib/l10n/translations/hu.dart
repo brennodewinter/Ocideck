@@ -1608,8 +1608,8 @@ const _dutchSourceAddHu = <String, String>{
   'Vanaf deze dia': 'Ettől a diától',
   'Deckstijl': 'Deck stílusa',
   'Geërfd vanaf dia': 'Örökölve a diától',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Ettől a diától a következő stílusváltásig érvényes.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Az új választás ettől a diától a bemutató végéig érvényes.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Egy kép betöltése túl sokáig tart. Tegye helyileg elérhetővé a fájlt, majd próbálja újra az exportálást.',
   'Sprekers corrigeren': 'Beszélők javítása',

@@ -1606,8 +1606,8 @@ const _dutchSourceAddFi = <String, String>{
   'Vanaf deze dia': 'Tästä diasta alkaen',
   'Deckstijl': 'Deckin tyyli',
   'Geërfd vanaf dia': 'Peritty diasta',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Pätee tästä diasta seuraavaan tyylinvaihtoon.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Uusi valinta pätee tästä diasta loppuun asti.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Kuvan lataaminen kestää liian kauan. Tuo tiedosto saataville paikallisesti ja yritä vientiä uudelleen.',
   'Sprekers corrigeren': 'Korjaa puhujat',

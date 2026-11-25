@@ -269,7 +269,7 @@ class _ToolbarField extends StatelessWidget {
   }
 }
 
-/// De gekozen stijl loopt vanaf de huidige dia tot de volgende wissel.
+/// De gekozen stijl vervangt de stijl vanaf deze dia tot het einde.
 class _SlideStylePicker extends StatelessWidget {
   final Deck deck;
   final int index;
@@ -294,10 +294,13 @@ class _SlideStylePicker extends StatelessWidget {
       if (activeName != null) activeName,
     }..remove(kDeckStyleToken);
 
+    final scope = l10n.d(
+      'Een nieuwe keuze geldt vanaf deze dia tot het einde.',
+    );
     return Tooltip(
       message: markerIndex != null && markerIndex < index
-          ? '${l10n.d('Geërfd vanaf dia')} ${markerIndex + 1}'
-          : l10n.d('Geldt vanaf deze dia tot een volgende stijlwissel.'),
+          ? '${l10n.d('Geërfd vanaf dia')} ${markerIndex + 1}\n$scope'
+          : scope,
       child: _ToolbarField(
         label: 'Vanaf deze dia',
         child: DropdownButtonHideUnderline(

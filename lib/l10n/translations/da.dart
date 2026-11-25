@@ -1608,8 +1608,8 @@ const _dutchSourceAddDa = <String, String>{
   'Vanaf deze dia': 'Fra dette slide',
   'Deckstijl': 'Deckstil',
   'Geërfd vanaf dia': 'Nedarvet fra slide',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Gælder fra dette slide til næste stilskift.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Et nyt valg gælder fra dette dias til slutningen.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Det tager for lang tid at indlæse et billede. Gør filen tilgængelig lokalt, og prøv at eksportere igen.',
   'Sprekers corrigeren': 'Ret talere',

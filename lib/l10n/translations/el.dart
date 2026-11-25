@@ -1632,8 +1632,8 @@ const _dutchSourceAddEl = <String, String>{
   'Vanaf deze dia': 'Από αυτή τη διαφάνεια',
   'Deckstijl': 'Στυλ deck',
   'Geërfd vanaf dia': 'Κληρονομήθηκε από τη διαφάνεια',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Ισχύει από αυτή τη διαφάνεια έως την επόμενη αλλαγή στυλ.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Η νέα επιλογή ισχύει από αυτή τη διαφάνεια έως το τέλος.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Η φόρτωση μιας εικόνας διαρκεί υπερβολικά πολύ. Κάντε το αρχείο διαθέσιμο τοπικά και δοκιμάστε ξανά την εξαγωγή.',
   'Sprekers corrigeren': 'Διόρθωση ομιλητών',

@@ -350,17 +350,23 @@ extension DeckNotifierSlides on DeckNotifier {
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
-  /// Wisselt vanaf dia [index] naar [styleName] tot de volgende markering.
-  /// De keuze voor de al geërfde stijl laat de dia die stijl verder erven.
+  /// Past [styleName] toe vanaf dia [index] tot het einde van het deck.
+  /// Latere stijlmarkeringen verdwijnen in dezelfde ongedaan-stap.
   void setSlideStyle(int index, String styleName) {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
     final inherited = deck.slideStyleNameAtIndex(index - 1) ?? kDeckStyleToken;
     final marker = styleName == inherited ? '' : styleName;
-    final slide = deck.slides[index];
-    if (slide.styleName == marker) return;
-    final slides = List<Slide>.from(deck.slides);
-    slides[index] = slide.copyWith(styleName: marker);
+    List<Slide>? slides;
+    for (var i = index; i < deck.slides.length; i++) {
+      final slide = deck.slides[i];
+      final newMarker = i == index ? marker : '';
+      if (slide.styleName == newMarker) continue;
+      (slides ??= List<Slide>.of(deck.slides))[i] = slide.copyWith(
+        styleName: newMarker,
+      );
+    }
+    if (slides == null) return;
     _mutate(
       deck.copyWith(
         slides: slides,

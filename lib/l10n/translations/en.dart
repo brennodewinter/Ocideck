@@ -793,8 +793,8 @@ const _dutchSourceAddEn = {
   'Vanaf deze dia': 'From this slide onward',
   'Deckstijl': 'Deck style',
   'Geërfd vanaf dia': 'Inherited from slide',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Applies from this slide until the next style change.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'A new choice applies from this slide to the end.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Loading an image is taking too long. Make the file available locally and try exporting again.',
   'Sprekers corrigeren': 'Correct speakers',

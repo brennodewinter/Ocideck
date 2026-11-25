@@ -1617,8 +1617,8 @@ const _dutchSourceAddPl = <String, String>{
   'Vanaf deze dia': 'Od tego slajdu',
   'Deckstijl': 'Styl decka',
   'Geërfd vanaf dia': 'Odziedziczone od slajdu',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Obowiązuje od tego slajdu do następnej zmiany stylu.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Nowy wybór obowiązuje od tego slajdu do końca.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Wczytywanie obrazu trwa zbyt długo. Udostępnij plik lokalnie i spróbuj ponownie wyeksportować.',
   'Sprekers corrigeren': 'Popraw mówców',

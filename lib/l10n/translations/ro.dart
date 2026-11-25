@@ -1622,8 +1622,8 @@ const _dutchSourceAddRo = <String, String>{
   'Vanaf deze dia': 'De la acest diapozitiv',
   'Deckstijl': 'Stil de deck',
   'Geërfd vanaf dia': 'Moștenit de la diapozitivul',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Se aplică de la acest diapozitiv până la următoarea schimbare de stil.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Noua alegere se aplică de la acest diapozitiv până la final.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Încărcarea unei imagini durează prea mult. Faceți fișierul disponibil local și încercați din nou exportul.',
   'Sprekers corrigeren': 'Corectează vorbitorii',

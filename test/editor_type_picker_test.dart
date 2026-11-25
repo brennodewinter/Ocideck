@@ -124,7 +124,7 @@ void main() {
     expect(isSelected(SlideType.table), isFalse);
   });
 
-  testWidgets('de stijl loopt van de gekozen dia tot de volgende wissel', (
+  testWidgets('de stijlkeuze vervangt latere wissels tot het einde', (
     tester,
   ) async {
     final container = await pump(tester, reveal: false);
@@ -134,14 +134,23 @@ void main() {
     final defaultStyle = container
         .read(settingsProvider)
         .selectedThemeProfileName;
-    for (var i = 1; i < 7; i++) {
-      notifier.addSlide(SlideType.bullets);
-      final slide = container.read(deckProvider).deck!.slides[i];
-      notifier.updateSlide(
-        i,
-        slide.copyWith(title: 'Dia ${i + 1}', bullets: const ['Tekst']),
-      );
-    }
+    const legacyStyles = [
+      'Vigilis',
+      'Security',
+      'Vigilis',
+      'deck',
+      'Security',
+      'Vigilis',
+      'Security',
+    ];
+    final legacySlides = [
+      for (final (i, style) in legacyStyles.indexed)
+        '<!-- ocideck_style: $style -->\n\n# Dia ${i + 1}\n\n- Tekst',
+    ].join('\n\n---\n\n');
+    expect(
+      notifier.applyMarkdown('---\nmarp: true\n---\n\n$legacySlides'),
+      isTrue,
+    );
 
     final picker = find.byKey(const Key('slide-style-from-here'));
     Future<void> select(int index) async {
@@ -156,11 +165,6 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    await select(5);
-    await choose('Vigilis');
-    await select(1);
-    await choose('Security');
-
     List<String> styles() {
       final deck = container.read(deckProvider).deck!;
       return List.generate(
@@ -169,20 +173,32 @@ void main() {
       );
     }
 
+    await select(1);
+    // Ook opnieuw kiezen van de actieve stijl vervangt alle latere wissels.
+    await choose('Security');
+    expect(styles(), ['Vigilis', ...List.filled(6, 'Security')]);
+
+    notifier.undo();
+    await tester.pumpAndSettle();
     expect(styles(), [
+      'Vigilis',
+      'Security',
+      'Vigilis',
       base,
       'Security',
-      'Security',
-      'Security',
-      'Security',
       'Vigilis',
-      'Vigilis',
+      'Security',
     ]);
+    await choose('Security');
 
     await select(2);
     expect(tester.widget<DropdownButton<String>>(picker).value, 'Security');
-    expect(find.byTooltip('Geërfd vanaf dia 2'), findsOneWidget);
-    await choose('Security');
+    expect(
+      find.byTooltip(
+        'Geërfd vanaf dia 2\nEen nieuwe keuze geldt vanaf deze dia tot het einde.',
+      ),
+      findsOneWidget,
+    );
 
     await select(1);
     await tester.tap(typeButton);
@@ -197,10 +213,28 @@ void main() {
     expect(container.read(deckProvider).deck!.slides[1].type, SlideType.title);
     expect(container.read(deckProvider).deck!.slides[1].styleName, 'Security');
 
+    await select(5);
+    await choose('Vigilis');
+    expect(styles(), [
+      'Vigilis',
+      ...List.filled(4, 'Security'),
+      'Vigilis',
+      'Vigilis',
+    ]);
+
     await select(3);
     await choose('Deckstijl ($base)');
+    expect(styles(), [
+      'Vigilis',
+      'Security',
+      'Security',
+      ...List.filled(4, base),
+    ]);
+
+    await select(5);
+    await choose('Vigilis');
     final expected = [
-      base,
+      'Vigilis',
       'Security',
       'Security',
       base,
@@ -215,7 +249,7 @@ void main() {
     );
 
     final markdown = notifier.generateMarkdown();
-    expect(RegExp('<!-- ocideck_style:').allMatches(markdown), hasLength(3));
+    expect(RegExp('<!-- ocideck_style:').allMatches(markdown), hasLength(4));
     expect(notifier.applyMarkdown(markdown), isTrue);
     expect(styles(), expected);
   });

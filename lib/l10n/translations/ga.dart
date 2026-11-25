@@ -1637,8 +1637,8 @@ const _dutchSourceAddGa = <String, String>{
   'Vanaf deze dia': 'Ón sleamhnán seo',
   'Deckstijl': 'Stíl deice',
   'Geërfd vanaf dia': 'Oidhreacht ón sleamhnán',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Baineann sé ón sleamhnán seo go dtí an chéad athrú stíle eile.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Baineann rogha nua leis an sleamhnán seo agus gach sleamhnán ina dhiaidh go dtí an deireadh.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Tá luchtú íomhá ag glacadh rófhada. Cuir an comhad ar fáil go logánta agus bain triail as easpórtáil arís.',
   'Sprekers corrigeren': 'Ceartaigh cainteoirí',

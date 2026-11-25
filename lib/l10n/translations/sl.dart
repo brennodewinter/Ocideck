@@ -1605,8 +1605,8 @@ const _dutchSourceAddSl = <String, String>{
   'Vanaf deze dia': 'Od te prosojnice',
   'Deckstijl': 'Slog decka',
   'Geërfd vanaf dia': 'Podedovano od prosojnice',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Velja od te prosojnice do naslednje menjave sloga.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Nova izbira velja od te prosojnice do konca.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Nalaganje slike traja predolgo. Omogočite lokalni dostop do datoteke in poskusite znova izvoziti.',
   'Sprekers corrigeren': 'Popravi govorce',

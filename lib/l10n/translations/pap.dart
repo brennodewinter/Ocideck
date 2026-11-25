@@ -679,8 +679,8 @@ const _dutchSourceAddPap = {
   'Vanaf deze dia': 'For di e slide aki',
   'Deckstijl': 'Estilo di deck',
   'Geërfd vanaf dia': 'Herená for di slide',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Ta konta for di e slide aki te un siguiente kambio di estilo.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Un selekshon nobo ta konta for di e slide aki te na final.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Kargamentu di un imágen ta dura muchu largu. Pone e archivo disponibel lokalmente i purba eksportá atrobe.',
   'Sprekers corrigeren': 'Korigí papiadónan',

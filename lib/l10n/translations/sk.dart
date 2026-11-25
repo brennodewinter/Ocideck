@@ -1610,8 +1610,8 @@ const _dutchSourceAddSk = <String, String>{
   'Vanaf deze dia': 'Od tejto snímky',
   'Deckstijl': 'Štýl decku',
   'Geërfd vanaf dia': 'Zdedené od snímky',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Platí od tejto snímky do ďalšej zmeny štýlu.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Nová voľba platí od tejto snímky až do konca.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Načítanie obrázka trvá príliš dlho. Sprístupnite súbor lokálne a skúste exportovať znova.',
   'Sprekers corrigeren': 'Opraviť hovoriacich',

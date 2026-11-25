@@ -1613,8 +1613,8 @@ const _dutchSourceAddLt = <String, String>{
   'Vanaf deze dia': 'Nuo šios skaidrės',
   'Deckstijl': 'Deko stilius',
   'Geërfd vanaf dia': 'Paveldėta nuo skaidrės',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Galioja nuo šios skaidrės iki kito stiliaus pakeitimo.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Naujas pasirinkimas galioja nuo šios skaidrės iki pabaigos.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Paveikslėlio įkėlimas trunka per ilgai. Padarykite failą pasiekiamą vietoje ir bandykite eksportuoti dar kartą.',
   'Sprekers corrigeren': 'Taisyti kalbėtojus',

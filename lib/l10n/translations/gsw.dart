@@ -1609,8 +1609,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Vanaf deze dia': 'Ab däre Folie',
   'Deckstijl': 'Deck-Stil',
   'Geërfd vanaf dia': 'Gäerbt ab Folie',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Gilt ab däre Folie bis zum nächschte Stilwächsle.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'E neui Uswahl gilt ab däre Folie bis zum Änd.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'S Lade von eme Bild duuret z lang. Stell d Datei lokal bereit und probier de Export nomal.',
   'Sprekers corrigeren': 'Sprecher korrigiere',

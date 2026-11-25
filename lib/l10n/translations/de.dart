@@ -682,8 +682,8 @@ const _dutchSourceAddDe = {
   'Vanaf deze dia': 'Ab dieser Folie',
   'Deckstijl': 'Deck-Stil',
   'Geërfd vanaf dia': 'Geerbt ab Folie',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Gilt ab dieser Folie bis zum nächsten Stilwechsel.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Eine neue Auswahl gilt ab dieser Folie bis zum Ende.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Das Laden eines Bildes dauert zu lange. Stelle die Datei lokal bereit und versuche den Export erneut.',
   'Sprekers corrigeren': 'Sprecher korrigieren',

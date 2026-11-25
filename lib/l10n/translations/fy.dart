@@ -682,8 +682,8 @@ const _dutchSourceAddFy = {
   'Vanaf deze dia': 'Fanôf dizze dia',
   'Deckstijl': 'Deckstyl',
   'Geërfd vanaf dia': 'Oerfd fanôf dia',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Jildt fanôf dizze dia oant in folgjende stylwiksel.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'In nije kar jildt fanôf dizze dia oant de ein.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'It laden fan in ôfbylding duorret te lang. Meitsje it bestân lokaal beskikber en besykje opnij te eksportearjen.',
   'Sprekers corrigeren': 'Sprekkers korrizjearje',

@@ -1608,8 +1608,8 @@ const _dutchSourceAddId = <String, String>{
   'Vanaf deze dia': 'Mulai dari slide ini',
   'Deckstijl': 'Gaya deck',
   'Geërfd vanaf dia': 'Diwarisi dari slide',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Berlaku mulai slide ini hingga pergantian gaya berikutnya.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Pilihan baru berlaku mulai dari slide ini hingga akhir.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Pemuatan gambar terlalu lama. Sediakan berkas secara lokal dan coba ekspor lagi.',
   'Sprekers corrigeren': 'Koreksi pembicara',

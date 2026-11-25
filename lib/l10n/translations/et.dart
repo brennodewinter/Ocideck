@@ -1598,8 +1598,8 @@ const _dutchSourceAddEt = <String, String>{
   'Vanaf deze dia': 'Alates sellest slaidist',
   'Deckstijl': 'Deeki stiil',
   'Geërfd vanaf dia': 'Päritud slaidilt',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Kehtib sellest slaidist järgmise stiilivahetuseni.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Uus valik kehtib sellest slaidist lõpuni.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Pildi laadimine võtab liiga kaua aega. Tehke fail kohalikult kättesaadavaks ja proovige uuesti eksportida.',
   'Sprekers corrigeren': 'Paranda kõnelejaid',

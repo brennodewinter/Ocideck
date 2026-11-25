@@ -1606,8 +1606,8 @@ const _dutchSourceAddCs = <String, String>{
   'Vanaf deze dia': 'Od tohoto snímku',
   'Deckstijl': 'Styl decku',
   'Geërfd vanaf dia': 'Zděděno od snímku',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Platí od tohoto snímku do další změny stylu.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Nová volba platí od tohoto snímku až do konce.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'Načítání obrázku trvá příliš dlouho. Zpřístupněte soubor místně a zkuste exportovat znovu.',
   'Sprekers corrigeren': 'Opravit mluvčí',

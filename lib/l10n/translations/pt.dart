@@ -1636,8 +1636,8 @@ const _dutchSourceAddPt = <String, String>{
   'Vanaf deze dia': 'A partir deste diapositivo',
   'Deckstijl': 'Estilo do deck',
   'Geërfd vanaf dia': 'Herdado do diapositivo',
-  'Geldt vanaf deze dia tot een volgende stijlwissel.':
-      'Aplica-se a partir deste diapositivo até à próxima mudança de estilo.',
+  'Een nieuwe keuze geldt vanaf deze dia tot het einde.':
+      'Uma nova escolha aplica-se a partir deste diapositivo até ao fim.',
   'Het laden van een afbeelding duurt te lang. Maak het bestand lokaal beschikbaar en probeer opnieuw te exporteren.':
       'O carregamento de uma imagem está a demorar demasiado. Disponibilize o ficheiro localmente e tente exportar novamente.',
   'Sprekers corrigeren': 'Corrigir falantes',
