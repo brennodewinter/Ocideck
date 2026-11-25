@@ -209,6 +209,9 @@ $sample
         child: SlidePreviewWidget(
           slide: slide,
           themeProfile: profile,
+          // Een vaste koptekst in het voorbeeld, zodat de instelling
+          // 'Lettergrootte koptekst' er meteen zichtbaar op is (#3164).
+          deckMarpStyle: MarpStyle(header: l10n.d('Koptekst')),
           slideNumber: 2,
           slideCount: 8,
         ),

@@ -78,6 +78,25 @@ int clampThemeAnimationDuration(int ms) =>
 /// De ondergrens is de kleinste maat die op papier nog leest, de bovengrens de
 /// grootste waarbij een A4 nog een alinea draagt in plaats van een zin.
 const double kDocumentDefaultBodyFontSize = 11.0;
+
+/// De lettergrootte van de koptekst (Marp `header:`) en de voettekst van een
+/// dia, in typografische punten op een 1280-brede dia — dezelfde eenheid als
+/// [ThemeProfile.logoSize]. De dia schaalt alles mee met zijn breedte, dus de
+/// render rekent `w × punten / 1280`.
+///
+/// [kSlideChromeFontSizeDefault] is exact de maat die er altijd stond
+/// (`w × 0,0145` → 18,56 pt op 1280), zodat een profiel zonder ingestelde maat
+/// er onveranderd uitziet.
+const double kSlideChromeFontSizeDefault = 18.56;
+
+/// De grenzen waarbinnen een kop-/voetmaat zinvol is: kleiner wordt
+/// onleesbaar op een beamer, groter vraagt een halve dia voor één regel.
+const double kSlideChromeFontSizeMin = 6.0;
+const double kSlideChromeFontSizeMax = 72.0;
+
+/// Begrenst een opgeslagen of gekozen kop-/voetmaat op het bruikbare bereik.
+double clampSlideChromeFontSize(double pt) =>
+    pt.clamp(kSlideChromeFontSizeMin, kSlideChromeFontSizeMax);
 const double kDocumentMinBodyFontSize = 9.0;
 const double kDocumentMaxBodyFontSize = 28.0;
 
@@ -248,6 +267,15 @@ class ThemeProfile {
   final bool footerShowPageNumbers;
   final String footerPosition;
 
+  /// Lettergrootte van de Marp-koptekst (`header:`) bovenop de dia, in punten
+  /// op een 1280-brede dia; schaalt mee met het kader. Zie
+  /// [kSlideChromeFontSizeDefault].
+  final double headerFontSize;
+
+  /// Lettergrootte van [footerText] en het dianummer onderaan, in dezelfde
+  /// eenheid als [headerFontSize].
+  final double footerFontSize;
+
   /// Optionele afsluitslide bij presenteren en exporteren.
   final bool closingSlideEnabled;
   final String closingSlideMarkdown;
@@ -312,6 +340,8 @@ class ThemeProfile {
     this.footerText = '',
     this.footerShowPageNumbers = false,
     this.footerPosition = 'right',
+    this.headerFontSize = kSlideChromeFontSizeDefault,
+    this.footerFontSize = kSlideChromeFontSizeDefault,
     this.closingSlideEnabled = false,
     this.closingSlideMarkdown = '# Bedankt\n\nVragen?',
     this.animationDurationMs = kThemeDefaultAnimationDurationMs,
@@ -486,6 +516,8 @@ class ThemeProfile {
     String? footerText,
     bool? footerShowPageNumbers,
     String? footerPosition,
+    double? headerFontSize,
+    double? footerFontSize,
     bool? closingSlideEnabled,
     String? closingSlideMarkdown,
     int? animationDurationMs,
@@ -580,6 +612,8 @@ class ThemeProfile {
       footerShowPageNumbers:
           footerShowPageNumbers ?? this.footerShowPageNumbers,
       footerPosition: footerPosition ?? this.footerPosition,
+      headerFontSize: headerFontSize ?? this.headerFontSize,
+      footerFontSize: footerFontSize ?? this.footerFontSize,
       closingSlideEnabled: closingSlideEnabled ?? this.closingSlideEnabled,
       closingSlideMarkdown: closingSlideMarkdown ?? this.closingSlideMarkdown,
       animationDurationMs: animationDurationMs ?? this.animationDurationMs,
@@ -645,6 +679,8 @@ class ThemeProfile {
       'footerText': footerText,
       'footerShowPageNumbers': footerShowPageNumbers,
       'footerPosition': footerPosition,
+      'headerFontSize': headerFontSize,
+      'footerFontSize': footerFontSize,
       'closingSlideEnabled': closingSlideEnabled,
       'closingSlideMarkdown': closingSlideMarkdown,
       'animationDurationMs': animationDurationMs,
@@ -791,6 +827,12 @@ class ThemeProfile {
       footerText: stringValue('footerText') ?? '',
       footerShowPageNumbers: boolValue('footerShowPageNumbers', false),
       footerPosition: stringValue('footerPosition') ?? 'right',
+      headerFontSize: clampSlideChromeFontSize(
+        numValue('headerFontSize')?.toDouble() ?? kSlideChromeFontSizeDefault,
+      ),
+      footerFontSize: clampSlideChromeFontSize(
+        numValue('footerFontSize')?.toDouble() ?? kSlideChromeFontSizeDefault,
+      ),
       closingSlideEnabled: boolValue('closingSlideEnabled', false),
       closingSlideMarkdown:
           stringValue('closingSlideMarkdown') ?? '# Bedankt\n\nVragen?',
@@ -863,6 +905,14 @@ class ThemeProfile {
       preferredDocumentHeadingFontFamily ??
       documentHeadingFontFamily ??
       exportFontFamily;
+
+  /// De koptekstmaat op een dia van breedte [w]: [headerFontSize] is in
+  /// punten op een 1280-brede dia en schaalt mee met het kader.
+  double slideHeaderFontSizeAt(double w) => w * headerFontSize / 1280;
+
+  /// De voettekstmaat op een dia van breedte [w], zelfde eenheid als
+  /// [slideHeaderFontSizeAt].
+  double slideFooterFontSizeAt(double w) => w * footerFontSize / 1280;
 }
 
 Map<String, String> _readSlideBackgroundImages(Object? raw) {

@@ -613,6 +613,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Lettergrootte koptekst': 'Letterjitte koptekst',
+  'Lettergrootte voettekst': 'Letterjitte fuottekst',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Dit is de standertstyl: dia\'s mei in eigen stylwiksel hâlde dy.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

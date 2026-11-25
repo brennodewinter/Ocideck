@@ -184,7 +184,9 @@ const Map<String, int> methodLengthBaseline = {
   // plumbing als de vijf voorgaande copyWith-bumps hierboven.
   // +3 (#2616): customBulletSvg-parameter plus clear-vlag in copyWith — pure
   // plumbing, hetzelfde patroon als Slide.copyWith hierboven.
-  'lib/models/settings.dart::ThemeProfile.copyWith': 158,
+  // +4 (#3164): headerFontSize/footerFontSize-parameters + doorvoer in
+  // copyWith — pure plumbing, zelfde patroon als de eerdere bumps.
+  'lib/models/settings.dart::ThemeProfile.copyWith': 162,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':

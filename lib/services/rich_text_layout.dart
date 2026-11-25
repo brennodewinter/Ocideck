@@ -41,7 +41,7 @@ double footerSafeInset({
   final showPages = profile.footerShowPageNumbers;
   if (footerText.isEmpty && !showPages) return 0;
   // Match [_FooterOverlay]: bottom offset + one line of footer text.
-  return w * 0.02 + w * 0.0145 * 1.35;
+  return w * 0.02 + profile.slideFooterFontSizeAt(w) * 1.35;
 }
 
 /// Bottom padding for bullets / rich-text slides.

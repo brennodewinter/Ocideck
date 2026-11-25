@@ -307,7 +307,7 @@ class _FooterOverlay extends StatelessWidget {
     if (footerText.isEmpty && !showPages) return const SizedBox.shrink();
 
     // Iets kleiner dan voorheen, zodat 'ie niet tegen het logo aan drukt.
-    final fontSize = w * 0.0145;
+    final fontSize = profile.slideFooterFontSizeAt(w);
     final style = TextStyle(
       color: AppTheme.parseHexColor(profile.textColor).withValues(alpha: 0.7),
       fontSize: fontSize,
@@ -437,7 +437,7 @@ class _MarpHeaderOverlay extends StatelessWidget {
     ).withValues(alpha: .7);
     final style = TextStyle(
       color: color,
-      fontSize: w * .0145,
+      fontSize: profile.slideHeaderFontSizeAt(w),
       shadows: [
         Shadow(color: Colors.white.withValues(alpha: .5), blurRadius: w * .003),
       ],

@@ -1538,6 +1538,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Lettergrootte koptekst': 'Galvenes fonta lielums',
+  'Lettergrootte voettekst': 'Kājenes fonta lielums',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Šis ir noklusējuma stils: slaidi ar savu stila maiņu to saglabā.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

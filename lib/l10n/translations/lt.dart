@@ -1548,6 +1548,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Lettergrootte koptekst': 'Antraštės šrifto dydis',
+  'Lettergrootte voettekst': 'Poraštės šrifto dydis',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Tai numatytasis stilius: skaidrės su savo stiliaus pakeitimu jį išsaugo.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

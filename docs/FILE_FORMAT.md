@@ -688,6 +688,8 @@ these fields (with defaults):
 | `footerText` | `""` | Free footer text; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
 | `footerShowPageNumbers` | `false` | Show "page / total" at the bottom right. |
 | `footerPosition` | `right` | `left`/`center`/`right`. |
+| `headerFontSize` | `18.56` | **Presentations.** Marp `header:` text size in points on a 1280-wide slide; it scales with the frame. `18.56` is exactly the old fixed `w × 0.0145`, so a profile without the field renders identically. *(Added 2026-11-25, #3164.)* |
+| `footerFontSize` | `18.56` | **Presentations.** Size of `footerText` and the slide number, same unit as `headerFontSize`. *(Added 2026-11-25, #3164.)* |
 | `closingSlideEnabled` | `false` | Automatically add a closing slide during presenting/exporting. |
 | `closingSlideMarkdown` | `"# Bedankt\n\nVragen?"` | Markdown for that closing slide. |
 | `severityCriticalColor` | `#B91C1C` | Finding/CVSS colour for the Critical band. |

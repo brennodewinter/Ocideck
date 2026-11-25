@@ -611,6 +611,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Lettergrootte koptekst': 'Dimensione carattere intestazione',
+  'Lettergrootte voettekst': 'Dimensione carattere piè di pagina',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Questo è lo stile predefinito: le diapositive con un proprio cambio di stile lo mantengono.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

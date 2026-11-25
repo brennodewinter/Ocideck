@@ -1542,6 +1542,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Lettergrootte koptekst': 'Ukuran huruf header',
+  'Lettergrootte voettekst': 'Ukuran huruf footer',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Ini adalah gaya baku: slide dengan peralihan gaya sendiri mempertahankannya.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

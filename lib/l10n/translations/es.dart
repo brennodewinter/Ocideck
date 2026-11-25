@@ -610,6 +610,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Lettergrootte koptekst': 'Tamaño de fuente del encabezado',
+  'Lettergrootte voettekst': 'Tamaño de fuente del pie de página',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Este es el estilo predeterminado: las diapositivas con un cambio de estilo propio lo conservan.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

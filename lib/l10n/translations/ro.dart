@@ -1556,6 +1556,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Lettergrootte koptekst': 'Dimensiunea fontului antet',
+  'Lettergrootte voettekst': 'Dimensiunea fontului subsol',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Acesta este stilul implicit: diapozitivele cu propria schimbare de stil îl păstrează.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

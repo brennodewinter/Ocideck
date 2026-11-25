@@ -1558,6 +1558,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Lettergrootte koptekst': 'Daqs tat-tipa tar-ras tal-paġna',
+  'Lettergrootte voettekst': 'Daqs tat-tipa tal-qiegħ tal-paġna',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Dan huwa l-istil awtomatiku: is-slajds b\'bidla ta\' stil tagħhom stess iżommuh.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

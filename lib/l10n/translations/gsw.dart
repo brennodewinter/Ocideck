@@ -1542,6 +1542,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Lettergrootte koptekst': 'Schriftgrössi Chopfzile',
+  'Lettergrootte voettekst': 'Schriftgrössi Fuesszile',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Das isch de Standardstil: Folie mit ere eigene Stilwächsle bhalte die.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

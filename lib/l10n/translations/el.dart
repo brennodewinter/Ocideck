@@ -1565,6 +1565,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Lettergrootte koptekst': 'Μέγεθος γραμματοσειράς κεφαλίδας',
+  'Lettergrootte voettekst': 'Μέγεθος γραμματοσειράς υποσέλιδου',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Αυτό είναι το προεπιλεγμένο στυλ: οι διαφάνειες με δική τους αλλαγή στυλ το διατηρούν.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

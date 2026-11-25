@@ -613,6 +613,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Lettergrootte koptekst': 'Taille de police de l\'en-tête',
+  'Lettergrootte voettekst': 'Taille de police du pied de page',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Il s\'agit du style par défaut : les diapositives ayant leur propre changement de style le conservent.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

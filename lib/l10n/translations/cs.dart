@@ -1542,6 +1542,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Lettergrootte koptekst': 'Velikost písma záhlaví',
+  'Lettergrootte voettekst': 'Velikost písma zápatí',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'Toto je výchozí styl: snímky s vlastní změnou stylu si ji ponechají.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':

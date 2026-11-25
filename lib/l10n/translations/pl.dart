@@ -1552,6 +1552,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Lettergrootte koptekst': 'Rozmiar czcionki nagłówka',
+  'Lettergrootte voettekst': 'Rozmiar czcionki stopki',
   'Dit is de standaardstijl: dia\'s met een eigen stijlwissel behouden die.':
       'To jest styl domyślny: slajdy z własną zmianą stylu zachowują go.',
   '{n} van de {m} dia\'s houden een afwijkende stijl.':
