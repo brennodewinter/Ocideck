@@ -8,6 +8,40 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.18] — 2026-11-25
+
+### Added
+
+- feat(document): kop- en voettekst meenemen in ODT, DOCX, ePub en Markdown (#3166)
+- feat(presentatie): instelbare lettergrootte voor kop- en voettekst (#3164)
+- feat(presentatie): voortgangsbalk talktijd onder het presentatiescherm (#3146)
+- feat: stijl op alle dia's toepassen vanuit Presentatie-eigenschappen (#3143) (#3144)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Toets documentstijlbeheer op het juiste stijlvlak
+- Actualiseer profiel-IO-test voor het stijlenmenu
+- Documenteer alle stijlprofielmaten voor release 0.7.18
+- Ververs SBOM-boomhash voor release 0.7.18
+- Herstel documentomvang en broncodekaart voor 0.7.18
+- Herstel documentexport en behoud extra witregels
+- Lijn lettergrootteschuifjes voor kop en voet uit
+- Maak documentkop- en voettekst instelbaar en hernoem Stijlen
+- test(privacy): maak de memoregressietest tijdsonafhankelijk (#3147)
+- docs: neem releaseherstel voor broncodekaart en Flutter-licentie over
+- docs: vul bestandsformaatsectie 14.19 in het Nederlands aan
+
+### Fixed
+
+- fix(presentatie): meerregelige koptekst lezen en ruimte reserveren (#3165)
+- fix: multi-engine- en schermraces in beamerpad (#3160, #3161, #3162) (#3163)
+- fix(ci): neem geslaagde Windows-testshards over uit 0.7.17 (#3151)
+- fix(scan): volg symlinks bij het zoeken naar decks (#3145)
+- fix(presentatie): begrens het sluiten van het beamervenster (#3149)
+- fix(linux): weiger coverScreen op een weggevallen monitor (#3150)
+- fix(appimage): bundel de Ayatana-trayketen in de AppDir (#3148)
+
 ## [0.7.15] — 2026-11-20
 
 ### Changed

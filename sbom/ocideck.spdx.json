@@ -2,10 +2,10 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "ocideck-0.7.15+57",
-  "documentNamespace": "https://ocideck.app/spdx/89f88445-9f98-588c-84e6-4e3560dc3864",
+  "name": "ocideck-0.7.18+60",
+  "documentNamespace": "https://ocideck.app/spdx/a3889fc6-dcfc-5c84-8a33-9bd55948d343",
   "creationInfo": {
-    "created": "2026-11-25T12:23:29.852447Z",
+    "created": "2026-11-25T15:40:34.416923Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -15,7 +15,7 @@
     {
       "SPDXID": "SPDXRef-0-ocideck",
       "name": "ocideck",
-      "versionInfo": "0.7.15+57",
+      "versionInfo": "0.7.18+60",
       "supplier": "Organization: Stichting LibreKAT",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
@@ -25,7 +25,7 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:generic/ocideck@0.7.15+57"
+          "referenceLocator": "pkg:generic/ocideck@0.7.18+60"
         }
       ],
       "comment": "Marp Presentation Builder for Desktop and Web"
