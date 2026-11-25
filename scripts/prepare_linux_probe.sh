@@ -15,7 +15,7 @@ case "$mode" in
   elf) "${install[@]}" binutils ;;
   desktop) "${install[@]}" "${desktop[@]}" ;;
   debian12)
-    "${install[@]}" libgtk-3-0 libsecret-1-0 liblzma5 libayatana-appindicator3-1 \
+    "${install[@]}" libgtk-3-0 libsecret-1-0 liblzma5 libxmu6 libgomp1 libayatana-appindicator3-1 \
       libgles2 libegl1 libgl1-mesa-dri libegl-mesa0 libpulse0 libwebkit2gtk-4.1-0 libmpv2 \
       gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav
     ;;

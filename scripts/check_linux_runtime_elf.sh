@@ -19,7 +19,9 @@ if [[ "$profile" = appimage ]]; then
 fi
 
 check_appimage_host() {
+  local relative=$1 dynamic=$2 resolved=$3
   local soname path real
+  local result=0
   while IFS= read -r soname; do
     if [[ -n "${host_sonames[$soname]:-}" ]]; then continue; fi
     path=$(awk -v name="$soname" '$1 == name && $2 == "=>" {
@@ -34,6 +36,7 @@ check_appimage_host() {
     printf '%s: undeclared host dependency %s (%s)\n' "$relative" "$soname" "${path:-unknown provider}" >&2
     result=1
   done < <(sed -n 's/.*(NEEDED).*Shared library: \[\([^]]*\)\].*/\1/p' <<< "$dynamic")
+  return "$result"
 }
 
 inventory=$(mktemp)
@@ -59,8 +62,8 @@ while IFS= read -r -d '' file; do
   elif missing=$(grep -E '=> not found([[:space:]]|$)' <<< "$resolved"); then
     printf '%s: unresolved runtime dependencies\n%s\n' "$relative" "$missing" >&2
     result=1
-  elif [[ "$profile" = appimage ]]; then
-    check_appimage_host
+  elif [[ "$profile" = appimage ]] && ! check_appimage_host "$relative" "$dynamic" "$resolved"; then
+    result=1
   fi
 done < "$inventory"
 
