@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 
@@ -388,15 +390,20 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     final logoInBand =
         path.isNotEmpty &&
         profile.documentLogoPosition.startsWith(header ? 'top' : 'bottom');
-    if (!logoInBand) return _documentChromeMinHeightPx;
+    final fontSize = profile.documentChromeFontSize(header);
+    final text = header
+        ? profile.documentHeaderText
+        : profile.documentFooterText;
+    final minHeight = fontSize == null || text.trim().isEmpty
+        ? _documentChromeMinHeightPx
+        : math.max(_documentChromeMinHeightPx, fontSize * 1.3 * 3 + 13);
+    if (!logoInBand) return minHeight;
     final logoWidth = (profile.effectiveDocumentLogoSize * 0.45).clamp(
       36.0,
       144.0,
     );
     final logoHeight = (logoWidth * 0.5).clamp(22.0, 72.0) + 13;
-    return logoHeight > _documentChromeMinHeightPx
-        ? logoHeight
-        : _documentChromeMinHeightPx;
+    return math.max(logoHeight, minHeight);
   }
 
   @override

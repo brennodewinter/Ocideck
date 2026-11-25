@@ -5621,7 +5621,7 @@ const _dutchSourceAddTr = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Sürekli metin, sayfalar, PDF veya Word\'e aktar',
   'Uiterlijk van de app': 'Uygulama görünümü',
-  'Uiterlijk van dia\'s': 'Slayt görünümü',
+  'Stijlen': 'Stiller',
   'Privacy en classificatie': 'Gizlilik ve sınıflandırma',
   'Uiterlijk van documenten': 'Belge görünümü',
   'Exportkwaliteit': 'Dışa aktarma kalitesi',

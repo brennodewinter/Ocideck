@@ -188,7 +188,8 @@ const Map<String, int> methodLengthBaseline = {
   // plumbing, hetzelfde patroon als Slide.copyWith hierboven.
   // +4 (#3164): headerFontSize/footerFontSize-parameters + doorvoer in
   // copyWith — pure plumbing, zelfde patroon als de eerdere bumps.
-  'lib/models/settings.dart::ThemeProfile.copyWith': 162,
+  // +8 (#3170): puntmaten en resetvlaggen voor documentkop en -voet.
+  'lib/models/settings.dart::ThemeProfile.copyWith': 170,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':

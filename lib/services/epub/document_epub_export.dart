@@ -90,7 +90,16 @@ Future<Uint8List> buildDocumentExportEpub(
   final opf = _buildOpf(meta, title, images);
 
   // 6. CSS.
-  const css = _epubCss;
+  final theme = bundle.audience.deck.themeProfile;
+  final css = StringBuffer(_epubCss);
+  final headerSize = theme.documentChromeFontSize(true);
+  final footerSize = theme.documentChromeFontSize(false);
+  if (headerSize != null) {
+    css.writeln('header.doc-chrome { font-size: ${headerSize}pt; }');
+  }
+  if (footerSize != null) {
+    css.writeln('footer.doc-chrome { font-size: ${footerSize}pt; }');
+  }
 
   // 7. ZIP samenstellen.
   final archive = Archive();
@@ -110,7 +119,7 @@ Future<Uint8List> buildDocumentExportEpub(
   addText('OEBPS/content.opf', opf);
   addText('OEBPS/nav.xhtml', nav);
   addText('OEBPS/document.xhtml', document);
-  addText('OEBPS/style.css', css);
+  addText('OEBPS/style.css', css.toString());
 
   for (final image in images) {
     archive.add(ArchiveFile.bytes('OEBPS/images/${image.name}', image.bytes));

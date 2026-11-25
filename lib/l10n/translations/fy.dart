@@ -3878,7 +3878,7 @@ const _dutchSourceAddFy = {
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Trochrinnende tekst, siden, eksportearje nei PDF of Word',
   'Uiterlijk van de app': 'Uterlik fan de app',
-  'Uiterlijk van dia\'s': 'Uterlik fan \'e slides',
+  'Stijlen': 'Stilen',
   'Privacy en classificatie': 'Privacy en klassifikaasje',
   'Uiterlijk van documenten': 'Uterlik fan dokuminten',
   'Exportkwaliteit': 'Eksportkwaliteit',

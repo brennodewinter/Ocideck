@@ -4838,7 +4838,7 @@ const _dutchSourceAddBg = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Непрекъснат текст, страници, експортирай в PDF или Word',
   'Uiterlijk van de app': 'Външен вид на приложението',
-  'Uiterlijk van dia\'s': 'Външен вид на слайдовете',
+  'Stijlen': 'Стилове',
   'Privacy en classificatie': 'Поверителност и класификация',
   'Uiterlijk van documenten': 'Външен вид на документите',
   'Exportkwaliteit': 'Качество на експорта',

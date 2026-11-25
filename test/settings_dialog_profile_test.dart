@@ -31,6 +31,7 @@ void main() {
     WidgetTester tester, {
     Size surfaceSize = const Size(1500, 1100),
     Map<String, Object> prefs = const {},
+    bool openDocumentStyles = false,
   }) async {
     SharedPreferences.setMockInitialValues(prefs);
     await tester.binding.setSurfaceSize(surfaceSize);
@@ -50,6 +51,7 @@ void main() {
                   onPressed: () => SettingsDialog.show(
                     context,
                     initialSection: SettingsSection.presentation,
+                    openDocumentStyles: openDocumentStyles,
                   ),
                   child: const Text('open'),
                 );
@@ -496,6 +498,41 @@ void main() {
       greaterThan(kDocumentDefaultBodyFontSize),
     );
     expect(find.textContaining('Basislettergrootte:'), findsOneWidget);
+  });
+
+  testWidgets('documentstijl opent direct en bewaart de kop- en voetmaat', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester, openDocumentStyles: true);
+    addTearDown(container.dispose);
+
+    expect(find.text('Stijlen'), findsWidgets);
+    await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
+    await tester.pumpAndSettle();
+    final header = find.byKey(const Key('document-header-font-size'));
+    final footer = find.byKey(const Key('document-footer-font-size'));
+    expect(tester.widget<Slider>(header).value, kDocumentChromeScreenDefaultPt);
+
+    tester.widget<Slider>(header).onChanged!(16);
+    await tester.pumpAndSettle();
+    tester.widget<Slider>(footer).onChanged!(12.5);
+    await tester.pumpAndSettle();
+
+    final heading = tester.widget<InlineMarkdownText>(
+      find.byKey(const Key('document-header-text')),
+    );
+    expect(heading.style.fontSize, 16);
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan'));
+    await tester.pumpAndSettle();
+
+    final saved = container
+        .read(settingsProvider)
+        .themeProfiles
+        .singleWhere((profile) => profile.name == 'Vigilis');
+    final restored = ThemeProfile.fromJson(saved.toJson());
+    expect(restored.documentHeaderFontSize, 16);
+    expect(restored.documentFooterFontSize, 12.5);
+    expect(restored.headerFontSize, kSlideChromeFontSizeDefault);
   });
 
   testWidgets('document biedt koptekst, voettekst en paginanummers aan', (

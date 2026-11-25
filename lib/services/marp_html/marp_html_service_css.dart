@@ -372,11 +372,18 @@ String _themedDocumentCss(
       '.document-header-text,.document-footer-text{flex:1;min-width:0;'
       'display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;'
       'overflow:hidden}'
+      '${_documentBandSizeCss(t, true)}${_documentBandSizeCss(t, false)}'
       '.document-page-number{white-space:nowrap;font-variant-numeric:tabular-nums}'
       '.document-page-number::after{content:"1"}'
       '.document-logo{display:inline-flex;align-items:center;flex:0 0 auto}'
       '.document-logo img{display:block;width:${logoSize}px;max-width:70%;'
       'max-height:${logoHeight}px;height:auto;object-fit:contain}';
+}
+
+String _documentBandSizeCss(ThemeProfile theme, bool header) {
+  final size = theme.documentChromeFontSize(header);
+  if (size == null) return '';
+  return '.document-${header ? 'header' : 'footer'}-text{font-size:${size}pt}';
 }
 
 /// De vorm van de drie keuze-menu-indelingen (#1162). Thema-onafhankelijk, net

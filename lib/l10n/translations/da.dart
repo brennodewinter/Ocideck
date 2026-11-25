@@ -4794,7 +4794,7 @@ const _dutchSourceAddDa = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Løbende tekst, sider, eksporter til PDF eller Word',
   'Uiterlijk van de app': 'App-udseende',
-  'Uiterlijk van dia\'s': 'Slide-udseende',
+  'Stijlen': 'Typografier',
   'Privacy en classificatie': 'Privatliv og klassifikation',
   'Uiterlijk van documenten': 'Dokumentudseende',
   'Exportkwaliteit': 'Eksportkvalitet',

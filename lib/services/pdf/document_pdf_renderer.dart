@@ -405,7 +405,16 @@ pw.Widget _band(
       _logo(logo, logoWidth, logoHeight)
     else
       pw.SizedBox(),
-    pw.Expanded(child: builder.bandText(spans, style: textStyle)),
+    pw.Expanded(
+      child: builder.bandText(
+        spans,
+        style: textStyle.copyWith(
+          fontSize:
+              (top ? style.headerFontSize : style.footerFontSize) ??
+              style.bandSize,
+        ),
+      ),
+    ),
     if (!top && chrome.showPageNumbers)
       pw.Text('${context.pageNumber}', style: textStyle),
     if (!top && chrome.tlpLabel.trim().isNotEmpty)

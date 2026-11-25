@@ -513,6 +513,14 @@ class _DocumentStyleBuilder {
         _profileTouched = true;
       }),
     ),
+    ChromeFontSizeSliders(
+      profile: _themeProfile,
+      document: true,
+      onProfileChanged: (profile) => _rebuild(() {
+        _themeProfile = profile;
+        _profileTouched = true;
+      }),
+    ),
     _themeColorAnchor(
       'documentBandTextColor',
       _colorWithContrastWarning(

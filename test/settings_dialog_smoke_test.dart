@@ -104,7 +104,7 @@ void main() {
     // Security tab (shield) and the branded footer that opens "Over OciDeck".
     for (final icon in const [
       Icons.format_paint_outlined,
-      Icons.slideshow_outlined,
+      Icons.palette_outlined,
       Icons.speed_outlined,
       Icons.privacy_tip_outlined,
       Icons.shield_outlined,

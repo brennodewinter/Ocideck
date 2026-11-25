@@ -3873,7 +3873,7 @@ const _dutchSourceAddPap = {
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Teksto kontínuo, páginanan, eksportá pa PDF of Word',
   'Uiterlijk van de app': 'Aparensia di e app',
-  'Uiterlijk van dia\'s': 'Aparensia di e slidenan',
+  'Stijlen': 'Stilonan',
   'Privacy en classificatie': 'Privasidat i klasifikashon',
   'Uiterlijk van documenten': 'Aparensia di e dokumentonan',
   'Exportkwaliteit': 'Kalidat di eksportashon',

@@ -4799,7 +4799,7 @@ const _dutchSourceAddHr = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Neprekinuti tekst, stranice, izvezi u PDF ili Word',
   'Uiterlijk van de app': 'Izgled aplikacije',
-  'Uiterlijk van dia\'s': 'Izgled slajdova',
+  'Stijlen': 'Stilovi',
   'Privacy en classificatie': 'Privatnost i klasifikacija',
   'Uiterlijk van documenten': 'Izgled dokumenata',
   'Exportkwaliteit': 'Kvaliteta izvoza',

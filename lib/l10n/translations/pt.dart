@@ -4854,7 +4854,7 @@ const _dutchSourceAddPt = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Texto contínuo, páginas, exportar para PDF ou Word',
   'Uiterlijk van de app': 'Aspeto da aplicação',
-  'Uiterlijk van dia\'s': 'Aspeto dos slides',
+  'Stijlen': 'Estilos',
   'Privacy en classificatie': 'Privacidade e classificação',
   'Uiterlijk van documenten': 'Aspeto dos documentos',
   'Exportkwaliteit': 'Qualidade de exportação',

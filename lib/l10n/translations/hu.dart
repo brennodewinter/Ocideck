@@ -4811,7 +4811,7 @@ const _dutchSourceAddHu = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Folyamatos szöveg, oldalak, exportálás PDF-be vagy Word-be',
   'Uiterlijk van de app': 'Alkalmazás megjelenése',
-  'Uiterlijk van dia\'s': 'Diák megjelenése',
+  'Stijlen': 'Stílusok',
   'Privacy en classificatie': 'Adatvédelem és besorolás',
   'Uiterlijk van documenten': 'Dokumentumok megjelenése',
   'Exportkwaliteit': 'Exportálás minősége',

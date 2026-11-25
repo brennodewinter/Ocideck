@@ -36,6 +36,8 @@ class DocumentPdfStyle {
     required this.tableCellPadding,
     required this.headerText,
     required this.footerText,
+    this.headerFontSize,
+    this.footerFontSize,
     required this.showPageNumbers,
     required this.bandTextColor,
     required this.bandBackgroundColor,
@@ -71,6 +73,8 @@ class DocumentPdfStyle {
       tableCellPadding: theme.tableCellPaddingPx * 0.75,
       headerText: theme.documentHeaderText,
       footerText: theme.documentFooterText,
+      headerFontSize: theme.documentChromeFontSize(true),
+      footerFontSize: theme.documentChromeFontSize(false),
       showPageNumbers: theme.documentShowPageNumbers,
       bandTextColor: _color(theme.documentBandTextColor, PdfColors.grey600),
       bandBackgroundColor: theme.documentBandBackgroundColor == null
@@ -111,6 +115,8 @@ class DocumentPdfStyle {
   /// staat. Leeg betekent: geen band.
   final String headerText;
   final String footerText;
+  final double? headerFontSize;
+  final double? footerFontSize;
   final bool showPageNumbers;
   final PdfColor bandTextColor;
   final PdfColor? bandBackgroundColor;

@@ -178,6 +178,8 @@ String articlePreamble(
 typedef _ArticleChrome = ({
   String header,
   String footer,
+  double? headerFontSize,
+  double? footerFontSize,
   bool enabled,
   bool pageNumbers,
 });
@@ -205,6 +207,8 @@ _ArticleChrome _articleChrome(
   return (
     header: header,
     footer: footer,
+    headerFontSize: theme?.documentChromeFontSize(true),
+    footerFontSize: theme?.documentChromeFontSize(false),
     pageNumbers:
         theme?.documentShowPageNumbers == true || meta.tlp != TlpLevel.none,
     enabled:
@@ -224,10 +228,14 @@ void _writeArticleChrome(
   buf.write('\\pagestyle{fancy}\n');
   buf.write('\\fancyhf{}\n');
   if (chrome.header.isNotEmpty) {
-    buf.write('\\fancyhead[L]{${_latexDocumentBand(chrome.header)}}\n');
+    final size = chrome.headerFontSize;
+    if (size != null) buf.write('\\setlength{\\headheight}{${size * 1.2}bp}\n');
+    buf.write('\\fancyhead[L]{${_latexDocumentBand(chrome.header, size)}}\n');
   }
   if (chrome.footer.isNotEmpty) {
-    buf.write('\\fancyfoot[L]{${_latexDocumentBand(chrome.footer)}}\n');
+    buf.write(
+      '\\fancyfoot[L]{${_latexDocumentBand(chrome.footer, chrome.footerFontSize)}}\n',
+    );
   }
   if (meta.tlp != TlpLevel.none) {
     final color = (meta.tlp.foreground & 0xFFFFFF)
@@ -248,9 +256,13 @@ String _latexDocumentChrome(String template, Map<String, String> fields) {
   return markdownInlineToLatex(resolved);
 }
 
-String _latexDocumentBand(String content) =>
-    '\\colorbox{ocideckDocumentBandBackground}{'
-    '\\textcolor{ocideckDocumentBandText}{$content}}';
+String _latexDocumentBand(String content, double? size) {
+  final font = size == null
+      ? ''
+      : '\\fontsize{${size}bp}{${size * 1.2}bp}\\selectfont ';
+  return '\\colorbox{ocideckDocumentBandBackground}{'
+      '\\textcolor{ocideckDocumentBandText}{$font$content}}';
+}
 
 /// Sluit een article-document af.
 const articlePostamble = r'\end{document}';

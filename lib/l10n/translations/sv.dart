@@ -4793,7 +4793,7 @@ const _dutchSourceAddSv = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Löpande text, sidor, exportera till PDF eller Word',
   'Uiterlijk van de app': 'Apputseende',
-  'Uiterlijk van dia\'s': 'Bildutseende',
+  'Stijlen': 'Stilar',
   'Privacy en classificatie': 'Integritet och klassificering',
   'Uiterlijk van documenten': 'Dokumentutseende',
   'Exportkwaliteit': 'Exportkvalitet',

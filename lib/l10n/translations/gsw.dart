@@ -4818,7 +4818,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Fortlaufende Text, Sitte, als PDF oder Word exportiere',
   'Uiterlijk van de app': 'Ussgseh vo de App',
-  'Uiterlijk van dia\'s': 'Ussgseh vo de Slides',
+  'Stijlen': 'Stil',
   'Privacy en classificatie': 'Dateschutz und Klassifizierig',
   'Uiterlijk van documenten': 'Ussgseh vo de Dokumänt',
   'Exportkwaliteit': 'Exportqualität',

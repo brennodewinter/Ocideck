@@ -4786,7 +4786,7 @@ const _dutchSourceAddLv = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Nepārtraukts teksts, lapas, eksportēt uz PDF vai Word',
   'Uiterlijk van de app': 'Lietotnes izskats',
-  'Uiterlijk van dia\'s': 'Slaidu izskats',
+  'Stijlen': 'Stili',
   'Privacy en classificatie': 'Privātums un klasifikācija',
   'Uiterlijk van documenten': 'Dokumentu izskats',
   'Exportkwaliteit': 'Eksporta kvalitāte',

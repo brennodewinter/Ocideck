@@ -4799,7 +4799,7 @@ const _dutchSourceAddFi = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Jatkuva teksti, sivut, vie PDF- tai Word-muotoon',
   'Uiterlijk van de app': 'Sovelluksen ulkoasu',
-  'Uiterlijk van dia\'s': 'Dian ulkoasu',
+  'Stijlen': 'Tyylit',
   'Privacy en classificatie': 'Tietosuoja ja luokittelu',
   'Uiterlijk van documenten': 'Asiakirjojen ulkoasu',
   'Exportkwaliteit': 'Viennin laatu',

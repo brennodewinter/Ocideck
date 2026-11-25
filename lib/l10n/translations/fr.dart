@@ -3934,7 +3934,7 @@ const _dutchSourceAddFr = {
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Texte continu, pages, exporter en PDF ou Word',
   'Uiterlijk van de app': 'Apparence de l\'application',
-  'Uiterlijk van dia\'s': 'Apparence des diapositives',
+  'Stijlen': 'Styles',
   'Privacy en classificatie': 'Confidentialité et classification',
   'Uiterlijk van documenten': 'Apparence des documents',
   'Exportkwaliteit': 'Qualité d\'exportation',

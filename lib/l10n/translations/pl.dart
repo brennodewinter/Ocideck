@@ -4823,7 +4823,7 @@ const _dutchSourceAddPl = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Tekst ciągły, strony, eksportuj do PDF lub Word',
   'Uiterlijk van de app': 'Wygląd aplikacji',
-  'Uiterlijk van dia\'s': 'Wygląd slajdów',
+  'Stijlen': 'Style',
   'Privacy en classificatie': 'Prywatność i klasyfikacja',
   'Uiterlijk van documenten': 'Wygląd dokumentów',
   'Exportkwaliteit': 'Jakość eksportu',
