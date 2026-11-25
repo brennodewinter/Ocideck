@@ -3,9 +3,22 @@
 
 #include "flutter_webrtc/flutter_web_r_t_c_plugin.h"
 
+#include <mutex>
+
 namespace flutter_webrtc_plugin {
 
-static EventChannelProxy* eventChannelProxy = nullptr;
+namespace {
+// The libwebrtc log sink is process-global and can fire from a WebRTC worker
+// thread at any time — including while the engine that owns the target event
+// channel is being torn down. The mutex makes the liveness check and the
+// Success() call atomic against teardown; ~FlutterWebRTC nulls the channel
+// before the channel itself dies. The last engine to enable logging wins the
+// sink; a dead engine's pointer can never be delivered to.
+struct {
+  std::mutex mutex;
+  EventChannelProxy* channel = nullptr;
+} g_log_sink;
+}  // namespace
 
 FlutterWebRTC::FlutterWebRTC(FlutterWebRTCPlugin* plugin)
     : FlutterWebRTCBase::FlutterWebRTCBase(plugin->messenger(),
@@ -19,7 +32,15 @@ FlutterWebRTC::FlutterWebRTC(FlutterWebRTCPlugin* plugin)
       FlutterFrameCryptor::FlutterFrameCryptor(this),
       FlutterDataPacketCryptor::FlutterDataPacketCryptor(this) {}
 
-FlutterWebRTC::~FlutterWebRTC() { audio_captures_.clear(); }
+FlutterWebRTC::~FlutterWebRTC() {
+  {
+    std::lock_guard<std::mutex> lock(g_log_sink.mutex);
+    if (g_log_sink.channel == event_channel()) {
+      g_log_sink.channel = nullptr;
+    }
+  }
+  audio_captures_.clear();
+}
 
 void FlutterWebRTC::HandleMethodCall(
     const MethodCallProxy& method_call,
@@ -1347,15 +1368,20 @@ void FlutterWebRTC::HandleMethodCall(
 }
 
 void FlutterWebRTC::initLoggerCallback(RTCLoggingSeverity severity) {
-  if (eventChannelProxy == nullptr) {
-    eventChannelProxy = event_channel();
+  {
+    std::lock_guard<std::mutex> lock(g_log_sink.mutex);
+    g_log_sink.channel = event_channel();
   }
 
   libwebrtc::LibWebRTCLogging::setLogSink(severity, [](const string& message) {
+    std::lock_guard<std::mutex> lock(g_log_sink.mutex);
+    if (!g_log_sink.channel) {
+      return;
+    }
     EncodableMap info;
     info[EncodableValue("event")] = "onLogData";
     info[EncodableValue("data")] = message.c_string();
-    eventChannelProxy->Success(EncodableValue(info), false);
+    g_log_sink.channel->Success(EncodableValue(info), false);
   });
 }
 

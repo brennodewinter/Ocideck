@@ -130,7 +130,6 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
         }
       }
 
-      gint target_monitor = current_monitor;
       // Prefer the screen the presenter is NOT on, when told which one that is
       // (index in gdk_display monitor order). The `external` heuristic below
       // picks the non-primary screen, which is only right when the presenter
@@ -139,9 +138,25 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
       FlValue* presenter_screen =
           arguments ? fl_value_lookup_string(arguments, "presenterScreen")
                     : nullptr;
-      if (presenter_screen != nullptr &&
-          fl_value_get_type(presenter_screen) == FL_VALUE_TYPE_INT &&
-          monitor_count > 1) {
+      const bool presenter_given =
+          presenter_screen != nullptr &&
+          fl_value_get_type(presenter_screen) == FL_VALUE_TYPE_INT;
+
+      // Every caller asks for the screen the presenter is NOT on. With one
+      // monitor left — the beamer unplugged between the Dart-side display
+      // check and this call — covering would take over the presenter's own
+      // screen; refuse so Dart can fall back to single-screen (#3162).
+      if (monitor_count < 2 &&
+          (ReadExternalArgument(arguments) || presenter_given)) {
+        response = FL_METHOD_RESPONSE(
+            fl_method_error_response_new("-1", "no other display available",
+                                         nullptr));
+        fl_method_call_respond(method_call, response, nullptr);
+        return;
+      }
+
+      gint target_monitor = current_monitor;
+      if (presenter_given && monitor_count > 1) {
         gint presenter = fl_value_get_int(presenter_screen);
         if (presenter >= 0 && presenter < monitor_count) {
           for (gint i = 0; i < monitor_count; ++i) {

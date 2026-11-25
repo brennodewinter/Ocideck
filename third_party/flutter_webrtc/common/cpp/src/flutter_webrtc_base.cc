@@ -3,12 +3,22 @@
 #include "flutter_data_channel.h"
 #include "flutter_peerconnection.h"
 
+#include <mutex>
 #include <vector>
 
 #include "helper.h"
 #include "rtc_field_trials.h"
 
 namespace flutter_webrtc_plugin {
+
+namespace {
+// LibWebRTC::Initialize/Terminate are process-global, but in a multi-window
+// app every engine runs this class independently. Without a user count, the
+// audience engine's teardown would Terminate() the library out from under the
+// still-running main engine — and vice versa.
+std::mutex g_libwebrtc_mutex;
+int g_libwebrtc_users = 0;
+}  // namespace
 
 const char* kEventChannelName = "FlutterWebRTC.Event";
 
@@ -41,8 +51,20 @@ FlutterWebRTCBase::FlutterWebRTCBase(BinaryMessenger* messenger,
 }
 
 FlutterWebRTCBase::~FlutterWebRTCBase() {
+  // The device-change callback captures this; replace it so an event fired
+  // during libwebrtc's own teardown cannot reach a dying object.
+  if (audio_device_) {
+    audio_device_->OnDeviceChange([] {});
+  }
   if (webrtc_initialized_) {
-    LibWebRTC::Terminate();
+    bool last_user;
+    {
+      std::lock_guard<std::mutex> lock(g_libwebrtc_mutex);
+      last_user = --g_libwebrtc_users == 0;
+    }
+    if (last_user) {
+      LibWebRTC::Terminate();
+    }
   }
 }
 
@@ -71,11 +93,21 @@ void FlutterWebRTCBase::EnsureWebRTCInitialized(bool enable_warp,
                                       kFieldTrialZeroPlayoutDelayValue));
   }
 
-  if (field_trials.empty()) {
-    LibWebRTC::Initialize();
-  } else {
-    LibWebRTC::InitializeWithFieldTrials(
-        libwebrtc::vector<libwebrtc::string>(field_trials));
+  {
+    std::lock_guard<std::mutex> lock(g_libwebrtc_mutex);
+    // Only the first engine to initialize runs the global init; field trials
+    // are process-global, so a later engine's options could not take effect
+    // anyway. Every initialized engine counts as a user so ~FlutterWebRTCBase
+    // can Terminate() only when the last one is gone.
+    if (g_libwebrtc_users == 0) {
+      if (field_trials.empty()) {
+        LibWebRTC::Initialize();
+      } else {
+        LibWebRTC::InitializeWithFieldTrials(
+            libwebrtc::vector<libwebrtc::string>(field_trials));
+      }
+    }
+    ++g_libwebrtc_users;
   }
 
   factory_ = LibWebRTC::CreateRTCPeerConnectionFactory();

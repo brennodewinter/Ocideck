@@ -242,6 +242,99 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets(
+    'S does nothing when the second display vanished mid-talk (#3162)',
+    (tester) async {
+      tester.view.physicalSize = const Size(1280, 800);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      var displays = [
+        const DisplayInfo(x: 0, y: 0, width: 1280, height: 800),
+        const DisplayInfo(x: 1280, y: 0, width: 1280, height: 800),
+      ];
+      final moved = <int>[];
+      debugGetAllDisplays = () => displays;
+      debugGetCurrentWindowCenter = () => const Offset(640, 400);
+      debugMoveToDisplay = (index, _) {
+        moved.add(index);
+      };
+      debugIsPresenterFullscreen = () => true;
+      addTearDown(() {
+        debugGetAllDisplays = null;
+        debugGetCurrentWindowCenter = null;
+        debugMoveToDisplay = null;
+        debugIsPresenterFullscreen = null;
+      });
+
+      const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+      const windows = MethodChannel('mixin.one/desktop_multi_window');
+      final covers = <Map<String, dynamic>>[];
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        (call) async => null,
+      );
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(windows, (
+        call,
+      ) async {
+        if (call.method == 'window_coverScreen') {
+          covers.add(Map<String, dynamic>.from(call.arguments as Map));
+        }
+        return null;
+      });
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          bridge,
+          null,
+        ),
+      );
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          windows,
+          null,
+        ),
+      );
+
+      await tester.pumpWidget(
+        _presenterOverLauncher(
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.byIcon(Icons.screen_share_outlined), findsOneWidget);
+
+      // The beamer is unplugged after the display list was captured: the stale
+      // list must not steer the move.
+      displays = [const DisplayInfo(x: 0, y: 0, width: 1280, height: 800)];
+      await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
+        bridge.name,
+        bridge.codec.encodeMethodCall(
+          MethodCall('methodCall', {
+            'channel': 'ocideck/presenter',
+            'method': 'key',
+            'arguments': {
+              'keyId': LogicalKeyboardKey.keyS.keyId,
+              'meta': false,
+              'control': false,
+              'shift': false,
+            },
+          }),
+        ),
+        (_) {},
+      );
+      await tester.pumpAndSettle();
+      expect(moved, isEmpty);
+      expect(covers, isEmpty);
+      expect(find.byIcon(Icons.screen_share_outlined), findsNothing);
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+
   testWidgets('a key forwarded from the beamer window drives the presenter', (
     tester,
   ) async {

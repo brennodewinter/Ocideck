@@ -34,7 +34,9 @@ class FlutterWebRTCPluginImpl : public FlutterWebRTCPlugin {
     registrar->AddPlugin(std::move(plugin));
   }
 
-  virtual ~FlutterWebRTCPluginImpl() {}
+  virtual ~FlutterWebRTCPluginImpl() {
+    ClearEventChannelHostMessenger(messenger_);
+  }
 
   BinaryMessenger* messenger() { return messenger_; }
 
@@ -76,15 +78,21 @@ class FlutterWebRTCPluginImpl : public FlutterWebRTCPlugin {
 
 void FlutterWebRTCPluginRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar) {
+  auto* plugin_registrar =
+      flutter::PluginRegistrarManager::GetInstance()
+          ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar);
   // Capture the host messenger before creating the plugin, so that the event
   // channels can check whether the engine is still running before they
   // unregister their stream handlers; see ~EventChannelProxyImpl in
-  // common/cpp/src/flutter_common.cc.
+  // common/cpp/src/flutter_common.cc. Keyed by the engine's own C++ messenger:
+  // the audience window registers a second plugin instance in the same
+  // process, and a single global handle would make that engine's event
+  // channels test (and unregister on) the wrong messenger (#3160).
   SetEventChannelHostMessenger(
+      plugin_registrar->messenger(),
       FlutterDesktopPluginRegistrarGetMessenger(registrar));
   flutter_webrtc_plugin::FlutterWebRTCPluginImpl::RegisterWithRegistrar(
-      flutter::PluginRegistrarManager::GetInstance()
-          ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
+      plugin_registrar);
 }
 
 flutter_webrtc_plugin::FlutterWebRTC* FlutterWebRTCPluginSharedInstance() {

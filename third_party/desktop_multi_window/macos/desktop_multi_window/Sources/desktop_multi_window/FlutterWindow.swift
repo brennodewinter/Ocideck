@@ -130,13 +130,26 @@ class FlutterWindow: NSObject {
             // main (presenter) window stays on the laptop. We deliberately do not
             // make it the key window, so the keyboard stays with the presenter.
             let screens = NSScreen.screens
+            let presenterIndex = args?["presenterScreen"] as? Int
+            let external = (args?["external"] as? Bool) ?? true
+            // Every caller asks for the screen the presenter is NOT on. With
+            // one display left — the beamer unplugged between the Dart-side
+            // display check and this call — covering would take over the
+            // presenter's own screen; refuse so Dart can fall back to
+            // single-screen (#3162).
+            if screens.count < 2, external || presenterIndex != nil {
+                result(
+                    FlutterError(
+                        code: "-1", message: "no other display available", details: nil))
+                return
+            }
             var target: NSScreen? = nil
             // Prefer the screen the presenter is NOT on, when told which one that
             // is. The `external` heuristic below picks the non-primary screen,
             // which is only right when the presenter sits on the primary screen;
             // in a reversed setup it would pile both windows on the external
             // display (#1913).
-            if let presenterIndex = args?["presenterScreen"] as? Int,
+            if let presenterIndex = presenterIndex,
                 presenterIndex >= 0, presenterIndex < screens.count,
                 screens.count > 1
             {
@@ -144,13 +157,26 @@ class FlutterWindow: NSObject {
                 target = screens.first(where: { $0 != presenterScreen })
             }
             if target == nil {
-                let external = (args?["external"] as? Bool) ?? true
                 target = NSScreen.main
                 if external, let ext = screens.first(where: { $0 != NSScreen.main }) {
                     target = ext
                 }
             }
             if let screen = target ?? screens.first {
+                // A display can vanish between enumeration and use. A detached
+                // NSScreen object persists but reports stale geometry, so the
+                // window would land on a display that no longer exists while
+                // this call reports success; verify it is still online
+                // instead (#3161).
+                if let displayID = screen.deviceDescription[
+                    NSDeviceDescriptionKey("NSScreenNumber")
+                ] as? CGDirectDisplayID, CGDisplayIsOnline(displayID) == 0 {
+                    result(
+                        FlutterError(
+                            code: "-1", message: "display no longer available",
+                            details: nil))
+                    return
+                }
                 // AppKit raises NSGenericException (and aborts the process)
                 // when code clears NSWindowStyleMaskFullScreen outside a
                 // fullscreen transition. A newly created hidden audience

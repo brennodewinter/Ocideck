@@ -186,12 +186,19 @@ class EventChannelProxy {
                        bool cache_event = true) = 0;
 };
 
-// Records the host (embedder) messenger handle captured at plugin
-// registration. It is used to check that the engine is still running before
-// an event channel unregisters its stream handler during teardown, see
-// ~EventChannelProxyImpl. The handle is opaque here so this shared header
-// stays platform-neutral; platforms without the FlutterDesktopMessenger C API
-// never call this and keep the unguarded behaviour.
-void SetEventChannelHostMessenger(void* messenger_ref);
+// Records, per engine, the host (embedder) messenger handle captured at
+// plugin registration, keyed by the C++ messenger pointer the engine's
+// channels are built with. It is used to check that the engine is still
+// running before an event channel unregisters its stream handler during
+// teardown, see ~EventChannelProxyImpl. Multi-window apps register the plugin
+// once per engine, so a single global handle cannot work: an event channel of
+// engine A would test the liveness of engine B's messenger and then unregister
+// on a detached messenger — the access violation the check exists to prevent.
+// The handles are opaque here so this shared header stays platform-neutral;
+// platforms without the FlutterDesktopMessenger C API never call these and
+// keep the unguarded behaviour.
+void SetEventChannelHostMessenger(void* messenger_key, void* messenger_ref);
+void ClearEventChannelHostMessenger(void* messenger_key);
+void* EventChannelHostMessenger(void* messenger_key);
 
 #endif  // FLUTTER_WEBRTC_COMMON_HXX

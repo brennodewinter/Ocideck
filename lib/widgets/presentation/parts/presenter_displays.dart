@@ -29,16 +29,22 @@ class _DisplayTransitionGuard {
 Future<void> _movePresenterToDisplay(
   _FullscreenPresenterState state,
   int index,
+  List<DisplayInfo> displays,
 ) async {
-  if (state._displays.length < 2 || state._displayGuard.switching) return;
+  if (displays.length < 2 || state._displayGuard.switching) return;
   state._displayGuard.switching = true;
   final previous = state._displayIndex;
   try {
     // Leave the main fullscreen Space untouched if the audience cannot move.
     await state.widget.audience?.controller.coverScreen(presenterScreen: index);
     state._displayGuard.arm();
-    moveToDisplay(index, state._displays);
-    if (state.mounted) state._rebuild(() => state._displayIndex = index);
+    moveToDisplay(index, displays);
+    if (state.mounted) {
+      state._rebuild(() {
+        state._displays = displays;
+        state._displayIndex = index;
+      });
+    }
   } catch (e) {
     try {
       await state.widget.audience?.controller.coverScreen(
@@ -88,8 +94,21 @@ extension _PresenterDisplays on _FullscreenPresenterState {
 
   Future<void> _cycleDisplay() async {
     if (_displays.isEmpty) await _loadDisplays();
-    if (_displays.length < 2) return;
+    // Enumerate again right before use: _displays was captured earlier and a
+    // screen can have vanished since (dock/cable). A stale list would move the
+    // window onto the geometry of a dead display (#3162).
+    final displays = getAllDisplays();
+    if (displays.length < 2) {
+      if (displays.length != _displays.length && mounted) {
+        _rebuild(() => _displays = displays);
+      }
+      return;
+    }
     _onLaserMove(null);
-    await _movePresenterToDisplay(this, (_displayIndex + 1) % _displays.length);
+    await _movePresenterToDisplay(
+      this,
+      (_displayIndex + 1) % displays.length,
+      displays,
+    );
   }
 }

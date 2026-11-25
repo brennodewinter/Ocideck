@@ -1,19 +1,35 @@
 #include "flutter_common.h"
 #include "task_runner.h"
 
+#include <map>
 #include <memory>
+#include <mutex>
 
 #if defined(_WIN32)
 #include <flutter_messenger.h>
 #endif
 
-// See SetEventChannelHostMessenger() in flutter_common.h. Only ever written
-// from plugin registration, which happens on the platform thread before any
-// event channel exists.
-static void* g_host_messenger = nullptr;
+// See SetEventChannelHostMessenger() in flutter_common.h. Written once per
+// engine from plugin registration, cleared at plugin teardown, and read at
+// each event channel construction — the mutex covers teardown racing a
+// registration on the other engine's platform thread.
+static std::mutex g_host_messengers_mutex;
+static std::map<void*, void*> g_host_messengers;
 
-void SetEventChannelHostMessenger(void* messenger_ref) {
-  g_host_messenger = messenger_ref;
+void SetEventChannelHostMessenger(void* messenger_key, void* messenger_ref) {
+  std::lock_guard<std::mutex> lock(g_host_messengers_mutex);
+  g_host_messengers[messenger_key] = messenger_ref;
+}
+
+void ClearEventChannelHostMessenger(void* messenger_key) {
+  std::lock_guard<std::mutex> lock(g_host_messengers_mutex);
+  g_host_messengers.erase(messenger_key);
+}
+
+void* EventChannelHostMessenger(void* messenger_key) {
+  std::lock_guard<std::mutex> lock(g_host_messengers_mutex);
+  const auto it = g_host_messengers.find(messenger_key);
+  return it == g_host_messengers.end() ? nullptr : it->second;
 }
 
 class MethodCallProxyImpl : public MethodCallProxy {
@@ -137,10 +153,12 @@ class EventChannelProxyImpl : public EventChannelProxy {
              task_runner_(task_runner) {
 #if defined(_WIN32)
      // Each proxy keeps its own reference so that the handle outlives the
-     // engine it belongs to and the Release() below stays balanced.
-     if (g_host_messenger) {
-       host_messenger_ = FlutterDesktopMessengerAddRef(
-           static_cast<FlutterDesktopMessengerRef>(g_host_messenger));
+     // engine it belongs to and the Release() below stays balanced. The ref is
+     // looked up by this channel's own messenger — not a process-global — so a
+     // second engine's registration cannot redirect the liveness check.
+     if (auto* ref = static_cast<FlutterDesktopMessengerRef>(
+             EventChannelHostMessenger(messenger))) {
+       host_messenger_ = FlutterDesktopMessengerAddRef(ref);
      }
 #endif
      auto handler = std::make_unique<

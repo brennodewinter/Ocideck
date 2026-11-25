@@ -26,3 +26,22 @@ Native binary downloads/extraction live in the CMake build directory, not the
 vendored source directory. This keeps source hashes and source kits stable
 after a native build. The native test target reads the same resolved library
 directory from the production plugin target.
+
+# Multi-engine hardening (#3160)
+
+OciDeck opens a second Flutter engine in the same process for the audience
+window, so plugin registration — and every process-global in the native layer
+— runs twice. The fork now guards the spots where engine B's global would
+betray engine A:
+
+- `SetEventChannelHostMessenger` keys the host messenger by the engine's own
+  C++ `BinaryMessenger*` instead of one process-global handle. A single
+  global made engine A's event channels test engine B's liveness and then
+  unregister on a detached messenger — the access violation the check exists
+  to prevent. Cleared at plugin teardown.
+- `LibWebRTC::Initialize`/`Terminate` are user-counted: the last engine to go
+  away terminates, so one window closing cannot kill WebRTC for the other.
+- The libwebrtc log sink target is mutex-guarded and nulled before its event
+  channel dies; the sink may fire from a WebRTC worker thread at any time.
+- The `OnDeviceChange` callback is replaced with a no-op before teardown, so a
+  device event during libwebrtc shutdown cannot reach a dying object.

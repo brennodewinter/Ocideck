@@ -138,32 +138,44 @@ class FlutterWindowWrapper {
           nullptr, nullptr, FindPresentationMonitor,
           reinterpret_cast<LPARAM>(&search));
 
+      int presenter_index = -1;
+      if (arguments) {
+        const auto it =
+            arguments->find(flutter::EncodableValue("presenterScreen"));
+        if (it != arguments->end()) {
+          // The standard codec may deliver the index as int32 or int64.
+          if (const auto* i32 = std::get_if<int>(&it->second)) {
+            presenter_index = *i32;
+          } else if (const auto* i64 = std::get_if<int64_t>(&it->second)) {
+            presenter_index = static_cast<int>(*i64);
+          }
+        }
+      }
+
+      // Every caller asks for the screen the presenter is NOT on. With one
+      // monitor left — the beamer unplugged between the Dart-side display
+      // check and this call — covering would take over the presenter's own
+      // screen; refuse so Dart can fall back to single-screen (#3162).
+      if (search.monitors.size() < 2 &&
+          (ReadExternalArgument(arguments) || presenter_index >= 0)) {
+        result->Error("-1", "no other display available");
+        return;
+      }
+
       HMONITOR target = nullptr;
       // Prefer the screen the presenter is NOT on, when told which one that is
       // (index in the same EnumDisplayMonitors order). The `external` heuristic
       // below picks the non-primary screen, which is only right when the
       // presenter sits on the primary screen; in a reversed setup it would pile
       // both windows on the external display (#1913).
-      if (arguments) {
-        const auto it = arguments->find(flutter::EncodableValue("presenterScreen"));
-        if (it != arguments->end()) {
-          // The standard codec may deliver the index as int32 or int64.
-          int presenter_index = -1;
-          if (const auto* i32 = std::get_if<int>(&it->second)) {
-            presenter_index = *i32;
-          } else if (const auto* i64 = std::get_if<int64_t>(&it->second)) {
-            presenter_index = static_cast<int>(*i64);
-          }
-          if (presenter_index >= 0 &&
-              presenter_index < static_cast<int>(search.monitors.size()) &&
-              search.monitors.size() > 1) {
-            HMONITOR presenter = search.monitors[presenter_index];
-            for (HMONITOR m : search.monitors) {
-              if (m != presenter) {
-                target = m;
-                break;
-              }
-            }
+      if (presenter_index >= 0 &&
+          presenter_index < static_cast<int>(search.monitors.size()) &&
+          search.monitors.size() > 1) {
+        HMONITOR presenter = search.monitors[presenter_index];
+        for (HMONITOR m : search.monitors) {
+          if (m != presenter) {
+            target = m;
+            break;
           }
         }
       }
