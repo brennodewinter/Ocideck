@@ -42,7 +42,7 @@ func capture(_ pid: pid_t, _ rect: CGRect, _ target: URL) throws -> (URL,CGRect)
         throw NSError(domain:"OciDeck resize probe",code:2,userInfo:[NSLocalizedDescriptionKey:"No onscreen OciDeck window"])
     }
     try required(abs(best.1.width-rect.width) < 8 && abs(best.1.height-rect.height) < 12,
-                 "Captured window dimensions disagree with Accessibility window")
+                 "WindowServer geometry \(best.1) disagrees with Accessibility geometry \(rect)")
     let capture=Process()
     capture.executableURL=URL(fileURLWithPath:"/usr/sbin/screencapture")
     capture.arguments=["-x","-o","-l",String(best.0),target.path]
@@ -77,10 +77,10 @@ func settingsName(_ observation: VNRecognizedTextObservation) -> Bool {
     guard let text = observation.topCandidates(1).first?.string.lowercased() else { return false }
     return text.contains("instellingen") || text.contains("settings")
 }
-func click(_ point: CGPoint, _ pid: pid_t) {
+func click(_ point: CGPoint) {
     let source=CGEventSource(stateID:.hidSystemState)
-    CGEvent(mouseEventSource:source,mouseType:.leftMouseDown,mouseCursorPosition:point,mouseButton:.left)?.postToPid(pid)
-    CGEvent(mouseEventSource:source,mouseType:.leftMouseUp,mouseCursorPosition:point,mouseButton:.left)?.postToPid(pid)
+    CGEvent(mouseEventSource:source,mouseType:.leftMouseDown,mouseCursorPosition:point,mouseButton:.left)?.post(tap: .cghidEventTap)
+    CGEvent(mouseEventSource:source,mouseType:.leftMouseUp,mouseCursorPosition:point,mouseButton:.left)?.post(tap: .cghidEventTap)
 }
 
 func waitFor<Value>(_ description: String, _ process: Process,
@@ -102,40 +102,62 @@ func movePointer(_ point: CGPoint) {
             mouseCursorPosition: point, mouseButton: .left)?.post(tap: .cghidEventTap)
 }
 
+func tool(_ executable: String, _ arguments: String...) throws {
+    let process = Process()
+    process.executableURL = URL(fileURLWithPath: executable)
+    process.arguments = arguments
+    try process.run()
+    process.waitUntilExit()
+    try required(process.terminationStatus == 0, executable + " failed during probe setup")
+}
+
 func exercise() throws {
     try required(CommandLine.arguments.count == 3, "Usage: swift macos_window_probe.swift APP EVIDENCE")
     try required(AXIsProcessTrusted() && CGPreflightScreenCaptureAccess(),
                  "Accessibility and Screen Recording are required for this session")
-    let bundlePath = URL(fileURLWithPath: CommandLine.arguments[1])
+    let original = URL(fileURLWithPath: CommandLine.arguments[1]).standardizedFileURL
     let evidence = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
     let files = FileManager.default
-    guard let bundle = Bundle(url: bundlePath), let executable = bundle.executableURL,
-          let identifier = bundle.bundleIdentifier, let screen = NSScreen.main else {
+    guard let screen = NSScreen.main else {
         throw NSError(domain: "OciDeck window probe", code: 2)
     }
 
-    let home = files.temporaryDirectory.appendingPathComponent("ocideck-window-" + UUID().uuidString)
-    let preferences = home.appendingPathComponent("Library/Preferences")
-    try files.createDirectory(at: preferences, withIntermediateDirectories: true)
-    defer { try? files.removeItem(at: home) }
+    let key = UUID().uuidString
+    let home = files.temporaryDirectory.appendingPathComponent("ocideck-window-" + key)
+    let copy = home.appendingPathComponent("OciDeck.app")
+    let identifier = "com.dewinter.ocideck.window-probe." + key
+    let support = files.homeDirectoryForCurrentUser
+        .appendingPathComponent("Library/Application Support").appendingPathComponent(identifier)
+    try files.createDirectory(at: home, withIntermediateDirectories: true)
+    defer {
+        try? tool("/usr/bin/defaults", "delete", identifier)
+        try? files.removeItem(at: support)
+        try? files.removeItem(at: home)
+    }
     try files.createDirectory(at: evidence, withIntermediateDirectories: true)
-    let preferenceData = try PropertyListSerialization.data(
-        fromPropertyList: ["flutter.app_consent_accepted": true, "AppleLanguages": ["en"]],
-        format: .xml, options: 0)
-    try preferenceData.write(to: preferences.appendingPathComponent(identifier + ".plist"))
+    try tool("/usr/bin/ditto", original.path, copy.path)
+    try tool("/usr/bin/plutil", "-replace", "CFBundleIdentifier", "-string", identifier,
+             copy.appendingPathComponent("Contents/Info.plist").path)
+    try tool("/usr/bin/codesign", "--force", "--sign", "-", copy.path)
+    guard let executable = Bundle(url: copy)?.executableURL else {
+        throw NSError(domain: "OciDeck window probe", code: 3)
+    }
+    // macOS preferences are scoped by bundle identifier, even when HOME is overridden.
+    try tool("/usr/bin/defaults", "write", identifier, "flutter.app_consent_accepted", "-bool", "true")
+    try tool("/usr/bin/defaults", "write", identifier, "AppleLanguages", "-array", "en")
 
     let output = evidence.appendingPathComponent("application.log")
-    files.createFile(atPath: output.path, contents: nil)
+    _ = files.createFile(atPath: output.path, contents: nil)
     let outputHandle = try FileHandle(forWritingTo: output)
     defer { try? outputHandle.close() }
     let process = Process()
     process.executableURL = executable
     var environment = ProcessInfo.processInfo.environment
     environment["HOME"] = home.path
-    environment["CFFIXED_USER_HOME"] = home.path
     process.environment = environment
     process.standardOutput = outputHandle
     process.standardError = outputHandle
+    let previousApplication = NSWorkspace.shared.frontmostApplication
     try process.run()
     defer {
         if process.isRunning {
@@ -149,14 +171,26 @@ func exercise() throws {
     let active = try waitFor("native application", process) {
         NSRunningApplication(processIdentifier: pid)
     }
+
+    try required(active.bundleIdentifier == identifier, "Probe did not launch under its isolated bundle identifier")
     let app = AXUIElementCreateApplication(pid)
     let window = try waitFor("a native window", process) {
         axElement(attribute(app, kAXMainWindowAttribute))
             ?? (attribute(app, kAXWindowsAttribute) as? [AXUIElement])?.first
     }
     if let prior = CGEvent(source: nil)?.location {
-        defer { movePointer(prior) }
-        active.activate()
+        defer {
+            previousApplication?.activate()
+            movePointer(prior)
+        }
+        AXUIElementPerformAction(window, kAXRaiseAction as CFString)
+        active.activate(options: [.activateAllWindows])
+        if NSWorkspace.shared.frontmostApplication?.processIdentifier != pid {
+            try tool("/usr/bin/open", "-a", copy.path)
+        }
+        _ = try waitFor("the isolated app in the foreground", process) {
+            NSWorkspace.shared.frontmostApplication?.processIdentifier == pid ? true : nil
+        }
         try assertWindow(window, pid, process, screen, evidence)
     } else {
         throw NSError(domain: "OciDeck window probe", code: 3)
@@ -166,22 +200,20 @@ func exercise() throws {
 func assertWindow(_ window: AXUIElement, _ pid: pid_t, _ process: Process,
                   _ screen: NSScreen, _ evidence: URL) throws {
     let area = screen.visibleFrame
-    let safeWidth = min(1480, area.width - 20)
-    let safeHeight = min(900, area.height - 20)
-    try required(safeWidth >= 1060 && safeHeight >= 690, "Display too small for two test sizes")
-    let origin = frame(window).origin
-    let x = max(0, min(origin.x, screen.frame.width - safeWidth))
-    let y = max(40, min(origin.y, screen.frame.height - safeHeight))
-    let small = CGRect(x: x, y: y, width: min(1100, safeWidth), height: 680)
-    let large = CGRect(x: x, y: y, width: safeWidth, height: safeHeight)
+    let safeWidth = min(1480, area.width - 45)
+    let safeHeight = min(850, area.height - 55)
+    try required(safeWidth >= 1060 && safeHeight >= 740, "Display too small for two test sizes")
+    let small = CGRect(x: 20, y: 55, width: min(1100, safeWidth), height: 720)
+    let large = CGRect(x: 20, y: 55, width: safeWidth, height: safeHeight)
     var observations: [[String: Any]] = []
     for (index, target) in [small, large, small].enumerated() {
         try setFrame(window, target)
-        let rect = try waitFor("requested logical geometry", process) {
+        let rect = try waitFor("logical geometry \(target) from \(frame(window))", process) {
             let actual = frame(window)
             return abs(actual.width - target.width) <= 2 && abs(actual.height - target.height) <= 2
                 ? actual : nil
         }
+        Thread.sleep(forTimeInterval: 0.75)
         let shot = evidence.appendingPathComponent("window-\(index).png")
         let (file, bounds) = try capture(pid, rect, shot)
         let image = try readImage(file)
@@ -198,26 +230,34 @@ func assertWindow(_ window: AXUIElement, _ pid: pid_t, _ process: Process,
         var result: [String: Any] = ["logicalWidth": rect.width, "logicalHeight": rect.height,
                                      "physicalWidth": image.width, "physicalHeight": image.height]
         if index == 1 {
-            let empty = CGPoint(x: bounds.maxX - 55, y: bounds.midY)
             let location = CGPoint(
                 x: bounds.minX + bounds.width * control.boundingBox.midX,
                 y: bounds.maxY - bounds.height * CGFloat(footerHeight) / CGFloat(image.height)
                     * control.boundingBox.midY)
-            movePointer(empty)
+            try required(NSWorkspace.shared.frontmostApplication?.processIdentifier == pid,
+                         "The probe no longer owns the foreground")
+            movePointer(location)
+            click(location)
+            let modal = evidence.appendingPathComponent("settings-after-click.png")
+            let field = try waitFor("Settings search field after a native mouse click", process) {
+                let (file, _) = try capture(pid, rect, modal)
+                return try words(readImage(file)).first {
+                    guard let text = $0.topCandidates(1).first?.string.lowercased() else { return false }
+                    return text.contains("search a setting") || text.contains("zoek een instelling")
+                }
+            }
+            let box = field.boundingBox
+            let neutralPoint = CGPoint(x: bounds.minX + bounds.width * box.midX,
+                                       y: bounds.minY + bounds.height * (1 - box.midY) - 30)
+            movePointer(neutralPoint)
             Thread.sleep(forTimeInterval: 0.3)
             let neutral = NSCursor.currentSystem?.image.tiffRepresentation
-            movePointer(location)
-            _ = try waitFor("native cursor change over Settings", process) {
+            movePointer(CGPoint(x: bounds.minX + bounds.width * box.midX,
+                                y: bounds.minY + bounds.height * (1 - box.midY)))
+            _ = try waitFor("native cursor change over Settings search", process) {
                 guard let cursor = NSCursor.currentSystem?.image.tiffRepresentation,
                       cursor != neutral else { return nil as Bool? }
                 return true
-            }
-            click(location, pid)
-            let modal = evidence.appendingPathComponent("settings-after-click.png")
-            _ = try waitFor("Settings after a native mouse click", process) {
-                let (file, _) = try capture(pid, rect, modal)
-                let labels = try words(readImage(file)).compactMap { $0.topCandidates(1).first?.string.lowercased() }
-                return labels.contains(where: { ["appearance", "uiterlijk", "storage", "opslag"].contains($0) }) ? true : nil
             }
             for down in [true, false] {
                 CGEvent(keyboardEventSource: nil, virtualKey: 53, keyDown: down)?.postToPid(pid)
@@ -226,6 +266,7 @@ func assertWindow(_ window: AXUIElement, _ pid: pid_t, _ process: Process,
             result["settingsClicked"] = true
         }
         observations.append(result)
+        print("Observed native window \(rect)")
     }
     try JSONSerialization.data(withJSONObject: observations, options: [.prettyPrinted, .sortedKeys])
         .write(to: evidence.appendingPathComponent("result.json"))

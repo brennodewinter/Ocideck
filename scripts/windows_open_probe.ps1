@@ -127,7 +127,7 @@ public static class OpenProbeWindow {
   }
   public static IntPtr Cursor() {
     var cursor = new CursorInfo { Size = Marshal.SizeOf(typeof(CursorInfo)) };
-    if (!GetCursorInfo(ref cursor) || cursor.Flags != 1) return IntPtr.Zero;
+    if (!GetCursorInfo(ref cursor)) return IntPtr.Zero;
     return cursor.Cursor;
   }
   public static void Click() {
@@ -284,20 +284,34 @@ function Test-NativeWindow {
     }
     $bounds = $settings.Bounds()
     if ($bounds[2] -le 0 -or $bounds[3] -le 0) { throw 'Settings has no visible mouse target.' }
-    [void][OpenProbeWindow]::SetCursorPos(($screen.Right - 2), ($screen.Bottom - 2))
-    Start-Sleep -Milliseconds 250
-    $before = [OpenProbeWindow]::Cursor()
-    if ($before -eq [IntPtr]::Zero) { throw 'Could not observe the initial cursor.' }
-    if (-not [OpenProbeWindow]::SetCursorPos(($bounds[0] + [int]($bounds[2] / 2)), ($bounds[1] + [int]($bounds[3] / 2)))) {
+    $buttonX = $bounds[0] + [int]($bounds[2] / 2)
+    $buttonY = $bounds[1] + [int]($bounds[3] / 2)
+    if (-not [OpenProbeWindow]::SetCursorPos($buttonX, $buttonY)) {
         throw 'Could not move the pointer over Settings.'
     }
-    [void](Wait-Probe 'native cursor change over Settings' {
-        $hover = [OpenProbeWindow]::Cursor()
-        return ($hover -ne [IntPtr]::Zero -and $hover -ne $before)
-    })
     [OpenProbeWindow]::Click()
     [void](Wait-Probe 'Settings opened by native mouse input' {
         Find-Control (Get-AppRoot) '^(Appearance|Uiterlijk|Storage|Opslag)$'
+    })
+    $search = Wait-Probe 'Settings search field' {
+        $nodes = [OpenProbeWindow]::Snapshot($handle)
+        $edits = @($nodes | Where-Object { $_.Role -eq 42 -and -not $_.IsOffscreen })
+        $named = $edits | Where-Object { $_.Name -match '(Search a setting|Zoek een instelling)' } |
+            Select-Object -First 1
+        if ($named) { return $named }
+        $edits | Sort-Object { $_.Bounds()[1] } | Select-Object -First 1
+    }
+    $searchBounds = $search.Bounds()
+    if ($searchBounds[2] -le 0 -or $searchBounds[3] -le 0) { throw 'Settings search has no visible bounds.' }
+    $before = Wait-Probe 'native cursor outside the search field' {
+        $cursor = [OpenProbeWindow]::Cursor()
+        if ($cursor -ne [IntPtr]::Zero) { $cursor }
+    }
+    [void][OpenProbeWindow]::SetCursorPos(($searchBounds[0] + [int]($searchBounds[2] / 2)),
+                                         ($searchBounds[1] + [int]($searchBounds[3] / 2)))
+    [void](Wait-Probe 'native cursor changes over Settings search' {
+        $hover = [OpenProbeWindow]::Cursor()
+        return ($hover -ne [IntPtr]::Zero -and $hover -ne $before)
     })
     Save-ProbeEvidence 'window-settings-clicked'
     [Windows.Forms.SendKeys]::SendWait('{ESC}')

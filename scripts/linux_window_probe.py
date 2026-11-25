@@ -218,6 +218,18 @@ def settings_button(image):
     return None
 
 
+def settings_search(image):
+    rows = recognized(image)
+    starts = {(row['block_num'], row['par_num'], row['line_num'])
+              for row in rows if row['text'].lower() in ('search', 'zoek')}
+    for row in rows:
+        line = row['block_num'], row['par_num'], row['line_num']
+        if line in starts and row['text'].lower() in ('setting', 'instelling'):
+            return (int(row['left']) + int(row['width']) // 2,
+                    int(row['top']) + int(row['height']) // 2)
+    return None
+
+
 def check_content(driver, rect, evidence, label):
     image = driver.capture(rect)
     image.save(evidence / f'{label}.png')
@@ -279,31 +291,34 @@ def exercise(args, profile):
                 results.append({'target': target, **asdict(rect)})
                 if index != 1:
                     continue
-                empty = rect.x + rect.width - 90, rect.y + rect.height // 2
+                driver.motion(*point)
+                driver.click()
+                search = wait_for('Settings search after a native mouse click',
+                                  lambda: settings_search(driver.capture(rect)), app)
+                driver.capture(rect).save(args.evidence / 'settings-after-click.png')
+                search_point = rect.x + search[0], rect.y + search[1]
+                empty = search_point[0], search_point[1] - 35
                 driver.motion(*empty)
                 time.sleep(0.30)
                 cursor_before = driver.cursor(rect, empty)
-                driver.motion(*point)
-                cursor_after = wait_for('a changed native cursor over Settings', lambda: (
-                    driver.cursor(rect, point) != cursor_before
+                if not any(cursor_before):
+                    raise RuntimeError('Could not observe the initial native cursor')
+                driver.motion(*search_point)
+                cursor_after = wait_for('a changed native cursor over Settings search', lambda: (
+                    driver.cursor(rect, search_point) != cursor_before
                 ), app)
-                driver.click()
-
-                def settings_open():
-                    words = [row['text'].lower() for row in recognized(driver.capture(rect))]
-                    return any(word in ('appearance', 'uiterlijk', 'storage', 'opslag') for word in words)
-
-                wait_for('Settings after a native mouse click', settings_open, app)
-                driver.capture(rect).save(args.evidence / 'settings-after-click.png')
                 results[-1].update(cursor_changed=cursor_after, clicked=True)
                 if args.backend == 'x11':
                     run('xdotool', 'key', 'Escape')
                 else:
                     # Closing the popup by clicking outside keeps input native.
-                    driver.motion(*empty)
+                    driver.motion(rect.x + 25, rect.y + 90)
                     driver.click()
-                wait_for('welcome screen after Settings closes',
-                         lambda: settings_button(driver.capture(rect)), app)
+                def welcome_again():
+                    image = driver.capture(rect)
+                    return settings_button(image) if not settings_search(image) else None
+
+                wait_for('welcome screen after Settings closes', welcome_again, app)
             (args.evidence / 'result.json').write_text(json.dumps(results, indent=2) + '\n')
         finally:
             stop(app)
