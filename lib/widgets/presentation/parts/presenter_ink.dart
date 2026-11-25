@@ -6,11 +6,8 @@ extension _PresenterInk on _FullscreenPresenterState {
   /// Send the current slide's strokes to the beamer (keyed by index there).
   void _pushInk() {
     if (widget.audience == null) return;
-    audienceChannel
-        .invokeMethod('ink', {
-          'index': _index,
-          'strokes': encodeStrokes(_currentStrokes),
-        })
+    AudienceMethod.ink
+        .send({'index': _index, 'strokes': encodeStrokes(_currentStrokes)})
         .catchError((Object e) {
           // Audience-window sync is best-effort, but a fully silent failure
           // left the beamer out of sync with no trace; make it observable.
@@ -41,8 +38,8 @@ extension _PresenterInk on _FullscreenPresenterState {
       return;
     }
     _lastLaserSent = now;
-    audienceChannel
-        .invokeMethod('laser', {
+    AudienceMethod.laser
+        .send({
           'index': _index,
           'point': point == null ? null : [point.dx, point.dy],
         })
@@ -68,8 +65,8 @@ extension _PresenterInk on _FullscreenPresenterState {
       return;
     }
     _lastInkLiveSent = now;
-    audienceChannel
-        .invokeMethod('inkLive', {'index': _index, 'stroke': stroke?.toJson()})
+    AudienceMethod.inkLive
+        .send({'index': _index, 'stroke': stroke?.toJson()})
         .catchError((Object e) {
           // Audience-window sync is best-effort, but a fully silent failure
           // left the beamer out of sync with no trace; make it observable.

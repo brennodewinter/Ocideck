@@ -18,7 +18,7 @@ Future<void> _setAudienceVideoPlaying(
   bool playing,
 ) async {
   try {
-    await audienceChannel.invokeMethod<void>('videoPlayback', {
+    await AudienceMethod.videoPlayback.send({
       'index': state._index,
       'seq': state._audienceSync.sequence,
       'playing': playing,
@@ -47,8 +47,8 @@ void _syncPresenterAudience(
   );
   final indexChanged = state._audienceSync.indexChanged(snapshot);
   if (!state._audienceSync.begin(snapshot, force: force)) return;
-  audienceChannel
-      .invokeMethod('update', {
+  AudienceMethod.update
+      .send({
         'seq': state._audienceSync.nextSequence,
         'index': snapshot.index,
         'blank': snapshot.blank,
@@ -159,8 +159,8 @@ class _TimelineViewSync {
     final fraction = controller.fraction;
     if (_lastSent != null && (fraction - _lastSent!).abs() < 0.005) return;
     _lastSent = fraction;
-    audienceChannel
-        .invokeMethod('timelineView', {'index': index(), 'fraction': fraction})
+    AudienceMethod.timelineView
+        .send({'index': index(), 'fraction': fraction})
         .catchError((Object e) {
           logWarning('FullscreenPresenter: timeline view sync failed', e);
           return null;
@@ -307,10 +307,9 @@ extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
   /// Een 'chartHover' van het beamervenster: toon dezelfde markering op de
   /// presenter-dia, mits het venster nog op onze dia staat (een late hover mag
   /// nooit op een andere dia belanden).
-  void _applyBeamerChartHover(Object? arguments) {
-    final args = Map<String, dynamic>.from(arguments as Map);
+  void _applyBeamerChartHover(Map<String, Object?> args) {
     if (!_chartHoverStream.accept((args['seq'] as num?)?.toInt())) return;
-    if ((args['index'] as num?)?.toInt() == _index) {
+    if ((args['index'] as num).toInt() == _index) {
       _chartHover.setExternal(ChartHover.fromJson(args['hover']));
     }
   }
@@ -331,12 +330,8 @@ void _sendChartHover({
   required int sequence,
 }) {
   if (audience?.controller == null) return;
-  audienceChannel
-      .invokeMethod('chartHover', {
-        'seq': sequence,
-        'index': index,
-        'hover': hover?.toJson(),
-      })
+  AudienceMethod.chartHover
+      .send({'seq': sequence, 'index': index, 'hover': hover?.toJson()})
       .catchError((Object e) {
         logWarning('FullscreenPresenter: chart hover sync failed', e);
         return null;
@@ -353,8 +348,8 @@ void _sendCostTick(
   int run,
 ) {
   if (session == null || audience?.controller == null) return;
-  audienceChannel
-      .invokeMethod('costTick', {
+  AudienceMethod.costTick
+      .send({
         'minor': session.currentCostMinor,
         'currency': session.currency.code,
         'eur': session.eurMinorOf(session.currentCostMinor),
