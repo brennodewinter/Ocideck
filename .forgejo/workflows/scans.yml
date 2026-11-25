@@ -1,17 +1,9 @@
 # De geheimen- en SAST-scan van OciDeck (#778). Zelfde doelen als lokaal:
 # `make check-secrets` (gitleaks + trufflehog) en `make sast` (semgrep).
 #
-# **Waarom dit een eigen workflow is en geen job in `ci.yml`.** Het issue vroeg
-# om een tweede job náást `gate`, en dat kan niet meer: `on:` geldt per
-# workflow, en `ci.yml` is sinds #790 de uitbrengpoort die alleen op een
-# `v*`-tag vuurt. Een job daarin zou pas scannen als het geheim al op main
-# staat en er een tag omheen zit — precies te laat. Een eigen bestand is de
-# enige manier om deze scans op een ander moment te laten draaien dan de poort.
-#
-# **Waarom alleen handmatig.** `make check-full` draait `make check-secrets` en
-# `make sast` lokaal vóór de commit wordt gemerged. De automatische PR-run las
-# dus dezelfde commit en dezelfde historie nogmaals. `workflow_dispatch` blijft
-# beschikbaar voor een bewuste tweede scanomgeving of incidentonderzoek.
+# De PR-scan draait vanuit de doelbranch (#3204). Hij leest de toegevoegde
+# git-commits, zonder checkout, bouw of Makefile uit de PR. Handmatige dispatch
+# houdt de bestaande volledige geheimen- en SAST-diagnose beschikbaar.
 #
 # **Waarom op het voorgebakken scan-image en niet meer op een kaal ubuntu.** Deze
 # workflow vuurde bij élke PR en bouwde de omgeving voorheen per run opnieuw op:
@@ -46,9 +38,11 @@ name: scans
 
 on:
   workflow_dispatch:
+  pull_request_target:
+    branches: [main]
 
 concurrency:
-  group: scans-${{ github.ref }}
+  group: scans-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -102,6 +96,7 @@ jobs:
           # daarna "verwijderd" staat er nog steeds — dat is nu juist het geval
           # dat deze scan moet vinden.
           fetch-depth: 0
+          persist-credentials: false
 
       # De repo is van een andere uid dan root; zonder dit weigert git elke
       # bewerking en falen de historie-scans op iets dat niets met een geheim te
@@ -109,20 +104,26 @@ jobs:
       - name: De werkkopie vertrouwen
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      # De commando's zelf staan bewust niet hier maar in de Makefile: `make
-      # check-secrets` en `make sast` zijn precies wat een bijdrager lokaal
-      # draait. Ze hier overtypen zou twee waarheden opleveren die uit elkaar
-      # gaan lopen.
-      #
-      # `--no-verification` zit in het doel zelf en moet daar blijven: zonder
-      # die vlag stuurt trufflehog kandidaat-sleutels naar de uitgevende dienst
-      # om te zien of ze leven. Dat is uitgaand verkeer met een mogelijk echt
-      # geheim erin, vanaf een buildmachine.
+      - name: Nieuwe PR-commits op geheimen scannen
+        if: ${{ github.event_name == 'pull_request_target' }}
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PR_BASE: ${{ github.sha }}
+          GIT_TERMINAL_PROMPT: '0'
+        run: |
+          set -eu
+          unset FORGEJO_TOKEN GITHUB_TOKEN
+          case "$PR_NUMBER" in ''|*[!0-9]*) exit 2 ;; esac
+          git fetch --no-tags --no-recurse-submodules origin "refs/pull/$PR_NUMBER/head"
+          test "$(git rev-parse FETCH_HEAD)" = "$PR_HEAD"
+          bash scripts/scan_pr_secrets.sh "$PR_BASE" "$PR_HEAD"
+
+      # Handmatige diagnose gebruikt dezelfde doelen als de lokale poort.
       - name: Geheimen
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: make check-secrets
 
-      # `make sast` gebruikt de lokale regels uit semgrep/ocideck.yaml en
-      # `--metrics=off`. Nooit `--config auto`: dat haalt regels over het
-      # netwerk tijdens het scannen en stuurt telemetrie mee.
       - name: SAST
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: make sast
