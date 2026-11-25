@@ -167,10 +167,8 @@ extension _PresenterViews on _FullscreenPresenterState {
                         _tableEditMode && slide.type == SlideType.table
                         ? _tableEditor
                         : null,
-                    // Tijdens het presenteren speelt media en starten audio/video
-                    // vanzelf; het media-einde stuurt auto-advance aan. In dual-
-                    // schermmodus speelt de media op het beamervenster, niet hier,
-                    // anders zou het geluid dubbel klinken.
+                    // Bij twee schermen speelt alleen het publieksvenster media.
+                    // Het media-einde kan de presentatie laten doorschakelen.
                     enableMedia: !_dual,
                     autoplayMedia: !_dual,
                     passiveVideo: _dual,

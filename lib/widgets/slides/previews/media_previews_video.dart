@@ -1,29 +1,4 @@
-// Part of the slide_preview library — see ../slide_preview.dart.
-// Split out for navigability (video & embed previews (YouTube/Vimeo)); all imports live in the main
-// library file. These top-level preview classes/helpers relocate verbatim
-// from media_previews.dart — same library, no behaviour change.
 part of '../slide_preview.dart';
-
-/// Geeft het publieksvenster toegang tot de speler van de getoonde videodia.
-class SlideVideoPlayback {
-  final _key = GlobalKey<_VideoPreviewState>();
-
-  Future<void> setPlaying(
-    bool playing, {
-    required String slideId,
-    required bool Function() isCurrent,
-  }) async {
-    final state = _key.currentState;
-    if (state == null || state.widget.slide.id != slideId) return;
-    final initialization = state._initializing;
-    await initialization;
-    if (_key.currentState == state &&
-        state._initializing == initialization &&
-        isCurrent()) {
-      await state._setPlaying(playing);
-    }
-  }
-}
 
 class _VideoPreview extends StatefulWidget {
   final Slide slide;
@@ -157,21 +132,6 @@ class _VideoPreviewState extends State<_VideoPreview>
 
   @override
   void onMediaComplete() => widget.onComplete?.call();
-
-  Future<void> _setPlaying(bool playing) async {
-    final controller = _controller;
-    if (controller == null ||
-        !controller.value.isInitialized ||
-        controller.value.isPlaying == playing) {
-      return;
-    }
-    if (playing) {
-      await controller.play();
-    } else {
-      await controller.pause();
-    }
-    if (mounted && identical(_controller, controller)) setState(() {});
-  }
 
   @override
   void onPositionTick(int positionMs, int durationMs) {

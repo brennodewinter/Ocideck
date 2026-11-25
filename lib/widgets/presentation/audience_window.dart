@@ -23,6 +23,7 @@ import '../mermaid_render_host.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../utils/log.dart';
+import '../../utils/ui_frame.dart';
 import '../../utils/url_launcher_util.dart';
 import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
@@ -530,7 +531,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     if (!isCurrent()) return;
     final slide = _slides[index];
     // An index update can arrive before the matching video widget is mounted.
-    await WidgetsBinding.instance.endOfFrame;
+    await waitForUiFrame();
     if (!isCurrent() || !identical(_slides[index], slide)) return;
     await _videoPlayback.setPlaying(
       playing,

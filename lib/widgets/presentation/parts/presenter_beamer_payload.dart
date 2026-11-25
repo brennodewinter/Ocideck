@@ -13,17 +13,18 @@ typedef _AudienceSyncSnapshot = ({
   int countdown,
 });
 
-extension _PresenterVideoControls on _FullscreenPresenterState {
-  Future<void> _setAudienceVideoPlaying(bool playing) async {
-    try {
-      await audienceChannel.invokeMethod<void>('videoPlayback', {
-        'index': _index,
-        'seq': _audienceSync.sequence,
-        'playing': playing,
-      });
-    } catch (error) {
-      logWarning('FullscreenPresenter: audience video command failed', error);
-    }
+Future<void> _setAudienceVideoPlaying(
+  _FullscreenPresenterState state,
+  bool playing,
+) async {
+  try {
+    await audienceChannel.invokeMethod<void>('videoPlayback', {
+      'index': state._index,
+      'seq': state._audienceSync.sequence,
+      'playing': playing,
+    });
+  } catch (error) {
+    logWarning('FullscreenPresenter: audience video command failed', error);
   }
 }
 
