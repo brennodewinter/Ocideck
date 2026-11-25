@@ -39,6 +39,15 @@ class _DocumentEditorChromeCoordinator {
     if (historyAvailability.value != next) historyAvailability.value = next;
   }
 
+  void setActiveOutlineIndex(int active) {
+    if (active == owner._activeOutlineIndex) return;
+    // Nooit setState vanuit een controller/Quill-listener tijdens build.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!owner.mounted || active == owner._activeOutlineIndex) return;
+      owner._rebuild(() => owner._activeOutlineIndex = active);
+    });
+  }
+
   void _refresh() {
     if (!owner.mounted) return;
     final plain = _visualPlain;

@@ -7,7 +7,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
 import '../../utils/footnote_embed_syntax.dart';
-import '../../utils/spacer_embed_syntax.dart' show EmbeddableSpacer;
+import '../../utils/spacer_embed_syntax.dart' show endsWithSpacerLine;
 import '../editors/deck_search_target.dart';
 import '../editors/editor_text_controller.dart';
 import '../reader/document_search_overlay.dart';
@@ -21,6 +21,7 @@ import 'markdown_editor_theme.dart';
 import 'markdown_editor_toolbar.dart';
 import 'notes_editor_mode.dart';
 import 'notes_mode_toggle.dart';
+import 'notes_document_page.dart';
 import 'resume_scroll_guard.dart';
 import 'wysiwyg_notes_field.dart';
 import 'wysiwyg_notes_toolbar.dart';
@@ -528,7 +529,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       }
       if (widget.editorTheme.documentTypography &&
           data == '' &&
-          _endsWithSpacerLine(quill.document, index, length)) {
+          endsWithSpacerLine(quill.document, index, length)) {
         quill.compose(
           Delta()
             ..retain(index)
@@ -553,21 +554,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     _markdownSnapshot = widget.controller.text;
     _lastQuillDelta = _quillController!.document.toDelta();
     _quillController!.addListener(_onQuillChanged);
-  }
-
-  // De spacer en zijn regelafsluiter vormen samen één verwijderbaar blok.
-  // Anders laat het wissen van de embed een lege alinea achter.
-  bool _endsWithSpacerLine(Document document, int index, int length) {
-    final end = index + length;
-    if (length == 0 || end >= document.length - 1) return false;
-    final line = document.queryChild(end - 1).node;
-    if (line is! Line || line.length != 2 || line.documentOffset != end - 1) {
-      return false;
-    }
-    return switch (line.first) {
-      Embed(value: Embeddable(type: EmbeddableSpacer.spacerType)) => true,
-      _ => false,
-    };
   }
 
   MarkdownCaretMap get _caretMap => MarkdownCaretMap.of(
@@ -953,38 +939,16 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
             ],
           ),
         ),
-        Expanded(child: _buildDocumentPage()),
-      ],
-    );
-  }
-
-  Widget _buildDocumentPage() {
-    final field = _requestedMode == NotesEditorMode.visual
-        ? _buildVisualField()
-        : _buildMarkdownField();
-    final maxW = widget.documentMaxWidth;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(6, 12, 6, 6),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: maxW ?? double.infinity),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: widget.editorTheme.surface,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: widget.editorTheme.border),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.10),
-                  blurRadius: 12,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: field,
+        Expanded(
+          child: NotesDocumentPage(
+            theme: widget.editorTheme,
+            maxWidth: widget.documentMaxWidth,
+            child: _requestedMode == NotesEditorMode.visual
+                ? _buildVisualField()
+                : _buildMarkdownField(),
           ),
         ),
-      ),
+      ],
     );
   }
 }

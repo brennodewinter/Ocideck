@@ -5,6 +5,21 @@ import 'document_blank_lines.dart';
 
 export 'document_blank_lines.dart' show spacerMarker, spacerMarkerLinePattern;
 
+/// De spacer en zijn regelafsluiter vormen samen één verwijderbaar blok.
+/// Anders laat het wissen van de embed een lege alinea achter.
+bool endsWithSpacerLine(Document document, int index, int length) {
+  final end = index + length;
+  if (length == 0 || end >= document.length - 1) return false;
+  final line = document.queryChild(end - 1).node;
+  if (line is! Line || line.length != 2 || line.documentOffset != end - 1) {
+    return false;
+  }
+  return switch (line.first) {
+    Embed(value: Embeddable(type: EmbeddableSpacer.spacerType)) => true,
+    _ => false,
+  };
+}
+
 /// De `<!-- spacer -->`-marker als blok-embed in de rijke-tekstlaag.
 ///
 /// Zonder deze embed was rauwe HTML-commentaar een reden om de héle visuele

@@ -41,6 +41,7 @@ import '../marp_html_service.dart' show HtmlImageResolver;
 import '../pdf/document_pdf_export.dart'
     show MathSvgResolver, MermaidSvgResolver;
 import 'markdown_to_docx.dart';
+import 'document_docx_chrome.dart';
 import 'svg_to_png.dart';
 import '../../utils/hex_color.dart';
 import '../../utils/xml_escape.dart';
@@ -160,10 +161,10 @@ Future<Uint8List> buildDocumentExportDocx(
     addText(name, footnotesXml);
   }
   if (chrome.header.isNotEmpty) {
-    addText('word/header1.xml', _buildBandXml('hdr', chrome.header));
+    addText('word/header1.xml', buildDocxBandXml('hdr', chrome.header));
   }
   if (chrome.footer.isNotEmpty) {
-    addText('word/footer1.xml', _buildBandXml('ftr', chrome.footer));
+    addText('word/footer1.xml', buildDocxBandXml('ftr', chrome.footer));
   }
   addText('word/_rels/document.xml.rels', docRelsXml);
   addText('docProps/core.xml', coreXml);
@@ -887,23 +888,6 @@ String _buildContentTypesXml({
     ..writeln('<Default Extension="gif" ContentType="image/gif"/>')
     ..writeln('</Types>');
   return buf.toString();
-}
-
-/// `word/header1.xml` of `word/footer1.xml`: elke chrome-regel een alinea
-/// in de bandstijl, met inline-markdown als runs (#3166).
-String _buildBandXml(String tag, String text) {
-  final lines = text
-      .split('\n')
-      .map(
-        (line) =>
-            '<w:p><w:pPr><w:pStyle w:val="${tag == 'hdr' ? 'Header' : 'Footer'}"/></w:pPr>'
-            '${markdownToDocxInline(line)}</w:p>',
-      )
-      .join();
-  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
-      '<w:$tag xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
-      '$lines'
-      '</w:$tag>';
 }
 
 String _buildRelsXml() =>

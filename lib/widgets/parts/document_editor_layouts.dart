@@ -40,7 +40,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   void _syncOutlineToMarkdownCaret() {
     final sel = _controller.selection;
     if (!sel.isValid) return;
-    _setActiveOutlineIndex(
+    _chrome.setActiveOutlineIndex(
       activeOutlineIndexForOffset(
         buildMarkdownOutline(_controller.text),
         sel.baseOffset,
@@ -64,7 +64,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
       _controller.selection = TextSelection.collapsed(offset: sourceOffset);
       _applyingExternal = false;
     }
-    _setActiveOutlineIndex(
+    _chrome.setActiveOutlineIndex(
       activeOutlineIndexInPlainText(
         buildMarkdownOutline(_controller.text),
         plain,
