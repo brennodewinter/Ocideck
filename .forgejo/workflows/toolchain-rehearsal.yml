@@ -18,7 +18,7 @@
 # drie de platformen tegelijk. Een uur wachten is dan goedkoop; het alternatief
 # is een tag die niets oplevert.
 #
-# **Advies, geen slot.** De takbescherming op `main` eist alleen `static-gate`.
+# **Advies, geen slot.** De takbescherming op `main` eist geen statuschecks.
 # Deze run verschijnt als eigen status en faalt zichtbaar; wil je hem
 # blokkerend, zet hem dan bij de vereiste checks.
 #

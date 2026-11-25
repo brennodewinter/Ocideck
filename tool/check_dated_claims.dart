@@ -67,6 +67,8 @@
 
 import 'dart:io';
 
+import 'check_workflow_triggers.dart';
+
 /// Een bewering over een gemeten grootheid die in de documentatie staat.
 ///
 /// [anker] is de letterlijke tekst waaraan de bewering te herkennen is. Staat
@@ -281,6 +283,10 @@ List<String> afwijkingen(Map<String, int> basislijn, Map<String, int> nu) {
 }
 
 void main(List<String> args) {
+  if (args.contains('--write-workflows')) {
+    exitCode = checkWorkflowTriggers(write: true) ? 1 : 0;
+    return;
+  }
   final tegenDeKlok = args.contains('--tegen-de-klok');
   final nu = DateTime.now();
   var fout = false;
@@ -306,6 +312,7 @@ void main(List<String> args) {
   }
 
   fout = _meldBasislijn() || fout;
+  fout = checkWorkflowTriggers() || fout;
 
   if (!tegenDeKlok) {
     stdout.writeln(

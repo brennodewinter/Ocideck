@@ -22,7 +22,8 @@ Copyright © 2026 Stichting LibreKAT
 >
 > **Status:** revised · 2026-09-01 · reflects the default branch on that date.
 > First issued 2026-07-22; revised 2026-09-01 (#1889) to reflect that the
-> project now has releases, a CI runner, and per-PR secret/SAST scanning.
+> project gained releases and CI. The current check procedures were reviewed
+> on 2026-11-25.
 
 **Two boxes below are not ticked.** That is the point of the document. A
 checklist with a quiet yes in a row that deserves a no teaches the reader to
@@ -143,9 +144,10 @@ attestation is not evidence for an unbuilt artifact. See [the review](docs/LICEN
       [`SECURITY.md`](SECURITY.md)
 - [x] **QA.04 — Repeatable test procedures.**
       [`docs/CHECKS.md`](docs/CHECKS.md) and the [`Makefile`](Makefile). They run
-      locally and on the forge: `static-gate` and `scans` per PR (`static-gate`
-      also on every push to `main`), `linux-gate` nightly on the tip of `main`,
-      and `ci.yml` on tag pushes (see QA.06 for the contributor gap).
+      locally by agreement. The incoming-history secret scan runs automatically
+      on PRs to `main`. Pawprint requires no status checks for merge. The nightly
+      Linux suite and post-merge macOS goldens provide additional results. The
+      candidate workflow runs before release tagging.
 - [x] **QA.05 — Memory-safety mitigations.** One dependency is not memory-safe:
       `opencv_core` → `dartcv` (C++), which decodes untrusted image data. The
       mitigations, and — measured, not assumed — exactly which malformed inputs
@@ -249,9 +251,9 @@ v2.2.0). It is guarded against drifting from `SECURITY.md` — see
 Read this section first if you are deciding whether to depend on the project.
 
 1. **One maintainer, self-merge** (QA.06/QA.07). Everything else on this page
-   rests on one person continuing to care. There IS a CI runner since
-   23-07-2026 (per-PR scans, post-merge gate, tag-push gate), but it does not
-   replace a second reviewer.
+   rests on one person continuing to care. Pawprint runs the secret scan,
+   scheduled checks, post-merge jobs and the candidate workflow. Independent
+   review of the maintainer’s changes remains a gap.
 2. **One non-memory-safe dependency on the image path** (QA.05), mitigated and
    documented, not fuzzed.
 3. **Linux and Windows artefacts are unsigned** (BR.03). The macOS build is

@@ -113,7 +113,11 @@ naleving maar over of het werk goed genoeg is.
    verschil echt is.
    *Deels uitgevoerd (#539):* `test/docs_claims_match_code_test.dart` houdt de
    mechanische helft tegen de code aan — de ratchetwaarden in `CHECKS.md`, de
-   dekkingsvloeren en de taaltellingen. De menselijke helft (valt het te volgen)
+   dekkingsvloeren en de taaltellingen. `make check-dated-claims` vergelijkt de
+   documentatie met de Pawprint-workflowtrekkers. De lokale pre-mergecontrole
+   berust op een beheerdersafspraak. De branchregel heeft geen verplichte
+   statuschecks. Zie [Checks & CI](../docs/CHECKS.md#continuous-integration).
+   De menselijke helft (valt het te volgen)
    is bewust niet geautomatiseerd: een test die doet alsof, verplaatst het
    probleem alleen.
 

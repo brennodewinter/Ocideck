@@ -314,9 +314,10 @@ list is maintained in one place so it cannot go stale in two.
 
 The forge has Actions runners (since 2026-07-23). Before a merge, the maintainer
 runs `make check-full` locally on the exact commit recorded in the pull request.
-Forgejo does not automatically repeat its static checks, scans or web build;
-those workflows remain available on demand. Branch protection still prevents
-direct pushes, restricts merges and requires an up-to-date branch. The fast Mac
+This is a maintainer agreement. Pawprint runs an incoming-history secret scan
+on PRs to `main`. Full scans, static checks and the web build are available on
+demand. Branch protection prevents direct pushes, restricts merges and requires
+an up-to-date branch. It has no required status checks. The fast Mac
 golden gate runs after each merge. The Linux gate
 (`.forgejo/workflows/linux-gate.yml`) runs nightly on the tip of `main` and on
 demand; the desktop bundles (`linux-build.yml`, `macos-build.yml`) run after a
