@@ -177,6 +177,27 @@ void main() {
       );
     });
 
+    test('blok-embeds voegen geen lege regels toe in documentmodus', () {
+      const blocks = [
+        '| Naam |\n| --- |\n| Afzender |',
+        '<!-- ocideck:plain_table v1 -->\n| Naam |\n| --- |\n| Afzender |',
+        '```mermaid\ngraph TD\n```',
+        '---',
+      ];
+      for (final block in blocks) {
+        final source = 'Aanhef.\n\n$block\n\nSlot.';
+        final document = MarkdownQuillCodec.documentFromMarkdown(
+          source,
+          preserveDocumentSpacing: true,
+        );
+        final markdown = MarkdownQuillCodec.markdownFromDocument(
+          document,
+          preserveDocumentSpacing: true,
+        );
+        expect(markdown, source, reason: block);
+      }
+    });
+
     test('meerdere markers geven meerdere regels ruimte', () {
       const source =
           'A.\n\n<!-- spacer -->\n\n<!-- spacer -->\n\n<!-- spacer -->\n\nB.\n';

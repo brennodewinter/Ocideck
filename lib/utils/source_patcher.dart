@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'document_blank_lines.dart';
+
 /// Past bewerkingen uit de visuele editor toe op de originele bron, in plaats
 /// van de hele round-trip-uitvoer te overschrijven.
 ///
@@ -32,6 +34,7 @@ String patchVisualEdits({
   required String original,
   required String baseline,
   required String current,
+  Set<int> originalSpacerLines = const {},
 }) {
   if (baseline == current) return original;
 
@@ -41,18 +44,33 @@ String patchVisualEdits({
 
   // Stroop \r van regeleinden voor vergelijking — Quill normaliseert naar LF.
   final origLines = original.split('\n').map(_stripCr).toList();
+  // Match synthetische spacers aan de precieze bronregels waar ze uit
+  // ontstonden. Ongewijzigde regels houden hun eigen spelling en regeleinde.
+  final originalKeys = originalSpacerLines.isEmpty
+      ? origLines
+      : [
+          for (var i = 0; i < origLines.length; i++)
+            originalSpacerLines.contains(i) ? spacerMarker : origLines[i],
+        ];
   final baseLines = baseline.split('\n');
   final currLines = current.split('\n');
 
   // Stap 1: mappen baseline-regel → original-regel via LCS.
-  final align = _alignLines(origLines, baseLines);
+  final align = _alignLines(originalKeys, baseLines);
 
   // Stap 2: diff baseline → current (gebruikersbewerkingen).
   final hunks = _lcsDiff(baseLines, currLines);
 
   // Stap 3: bouw het resultaat op basis van original, met bewerkingen
   // toegepast op de overeenkomende posities.
-  return _applyEdits(origLines, baseLines, currLines, align, hunks).join(sep);
+  return _applyEdits(
+    origLines,
+    originalKeys,
+    baseLines,
+    currLines,
+    align,
+    hunks,
+  ).join(sep);
 }
 
 /// Verwijdert een achterblijvende `\r` van een regel na `split('\n')`.
@@ -329,6 +347,7 @@ List<_Hunk> _lcsHunks(List<String> a, List<String> b) {
 /// maar niet de tekst van ongewijzigde regels.
 List<String> _applyEdits(
   List<String> origLines,
+  List<String> originalKeys,
   List<String> baseLines,
   List<String> currLines,
   List<int> align,
@@ -337,7 +356,7 @@ List<String> _applyEdits(
   // Inhoudskaart voor fallback: regeltekst → ongebruikte posities in original.
   final origByContent = <String, List<int>>{};
   for (var i = 0; i < origLines.length; i++) {
-    origByContent.putIfAbsent(origLines[i], () => []).add(i);
+    origByContent.putIfAbsent(originalKeys[i], () => []).add(i);
   }
 
   // Originele regels die al via LCS zijn toegewezen — niet hergebruiken.
@@ -362,8 +381,9 @@ List<String> _applyEdits(
     for (var bi = h.baselineStart; bi < h.baselineEnd; bi++) {
       if (align[bi] >= 0) {
         origIndices.add(align[bi]);
-      } else {
-        // Fallback: zoek op inhoud in original.
+      } else if (baseLines[bi].trim().isNotEmpty) {
+        // Een ongemapte witregel kan door de serializer zijn toegevoegd.
+        // Gebruik daarvoor geen witregel op een andere plek in de bron.
         final line = baseLines[bi];
         final positions = origByContent[line];
         if (positions != null) {
