@@ -173,6 +173,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                     // anders zou het geluid dubbel klinken.
                     enableMedia: !_dual,
                     autoplayMedia: !_dual,
+                    passiveVideo: _dual,
                     allowRemoteMedia: widget.allowRemoteMedia,
                     // Single-screen: de knop "Aanzetten in instellingen" mag op
                     // de dia zelf verschijnen — er is geen apart privéscherm (#865).
@@ -379,6 +380,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                   deckMarpStyle: widget.marpStyle,
                   cockpitColorScheme: widget.cockpitColorScheme,
                   allowRemoteMedia: widget.allowRemoteMedia,
+                  passiveVideo: _dual,
                   tlp: widget.tlp,
                   organization: widget.organization,
                   showClassificationWatermark:

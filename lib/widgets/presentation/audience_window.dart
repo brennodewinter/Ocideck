@@ -135,6 +135,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   ImprovementY01Metric _improvementY01 = ImprovementY01Metric.empty;
   int _index = 0;
   int _richTextPage = 0;
+  final _videoPlayback = SlideVideoPlayback();
 
   /// Documentpresentatie (#2487): `kind: 'document'` in de openings-envelop
   /// schakelt dit venster naar de documentmodus — geen dia's maar
@@ -400,6 +401,9 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         // vorige lag (zowel de eigen als de van de presentator ontvangen hover).
         _chartHover.setLocal(null);
         _chartHover.setExternal(null);
+      case 'videoPlayback':
+        final arguments = Map<String, dynamic>.from(call.arguments as Map);
+        await _setVideoPlaying(arguments);
       case 'mermaidView':
         // De presentator zoomt/scrolt een groot diagram; volg dezelfde kijkstand
         // (#930). Alleen als dit venster op dezelfde slide staat. De stand is
@@ -503,6 +507,36 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         });
     }
     return null;
+  }
+
+  Future<void> _setVideoPlaying(Map<String, dynamic> arguments) async {
+    final playing = arguments['playing'];
+    final index = arguments['index'];
+    final seq = arguments['seq'];
+    if (playing is! bool || index is! int || seq is! int) return;
+
+    bool isCurrent() =>
+        mounted &&
+        !_docMode &&
+        index == _index &&
+        seq == _lastUpdateSeq &&
+        _blank == 0 &&
+        _timedPhase != 0 &&
+        _timedPhase != 1 &&
+        _timedPhase != 4 &&
+        index >= 0 &&
+        index < _slides.length;
+
+    if (!isCurrent()) return;
+    final slide = _slides[index];
+    // An index update can arrive before the matching video widget is mounted.
+    await WidgetsBinding.instance.endOfFrame;
+    if (!isCurrent() || !identical(_slides[index], slide)) return;
+    await _videoPlayback.setPlaying(
+      playing,
+      slideId: slide.id,
+      isCurrent: () => isCurrent() && identical(_slides[index], slide),
+    );
   }
 
   /// Een live tabelwijziging van de presentator: rijen én uitlijning, want
@@ -837,6 +871,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                         _send('answerSubmit', {'slideIndex': _index}),
                     enableMedia: true,
                     autoplayMedia: true,
+                    videoPlayback: _videoPlayback,
                     allowRemoteMedia: _allowRemoteMedia,
                     // Media finishing on the beamer drives auto-advance.
                     onAudioComplete: () => _send('mediaComplete', {

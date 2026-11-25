@@ -13,6 +13,20 @@ typedef _AudienceSyncSnapshot = ({
   int countdown,
 });
 
+extension _PresenterVideoControls on _FullscreenPresenterState {
+  Future<void> _setAudienceVideoPlaying(bool playing) async {
+    try {
+      await audienceChannel.invokeMethod<void>('videoPlayback', {
+        'index': _index,
+        'seq': _audienceSync.sequence,
+        'playing': playing,
+      });
+    } catch (error) {
+      logWarning('FullscreenPresenter: audience video command failed', error);
+    }
+  }
+}
+
 void _syncPresenterAudience(
   _FullscreenPresenterState state, {
   bool force = false,
@@ -72,6 +86,7 @@ class _AudienceSyncTracker {
   bool _retrying = false;
   int _sequence = 0;
 
+  int get sequence => _sequence;
   int get nextSequence => ++_sequence;
 
   /// Eigen teller voor de momentopnamen van tabel en checklist: die zijn niet

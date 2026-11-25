@@ -426,6 +426,11 @@ extension _PresenterOverlays on _FullscreenPresenterState {
     final richTextPlan = _richTextPlanFor(_currentSlide);
     final richTextPages = richTextPlan?.pageCount ?? 1;
     final hasRichTextPages = richTextPages > 1;
+    final slide = _currentSlide;
+    final controlsAudienceVideo =
+        _dual &&
+        slide.type == SlideType.video &&
+        VideoSource.parse(slide.videoPath).kind == VideoSourceKind.localFile;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -449,6 +454,24 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ? _next
               : null,
         ),
+        if (controlsAudienceVideo) ...[
+          IconButton(
+            tooltip: l10n.d('Afspelen'),
+            icon: const Icon(Icons.play_circle),
+            color: Colors.white,
+            onPressed: _blank == _Blank.none
+                ? () => _setAudienceVideoPlaying(true)
+                : null,
+          ),
+          IconButton(
+            tooltip: l10n.d('Pauzeren'),
+            icon: const Icon(Icons.pause_circle),
+            color: Colors.white,
+            onPressed: _blank == _Blank.none
+                ? () => _setAudienceVideoPlaying(false)
+                : null,
+          ),
+        ],
         Tooltip(
           message: labelWithShortcut(l10n, 'Slide-overzicht', 'G'),
           child: _NavButton(icon: Icons.grid_view_rounded, onTap: _toggleGrid),

@@ -4,6 +4,27 @@
 // from media_previews.dart — same library, no behaviour change.
 part of '../slide_preview.dart';
 
+/// Geeft het publieksvenster toegang tot de speler van de getoonde videodia.
+class SlideVideoPlayback {
+  final _key = GlobalKey<_VideoPreviewState>();
+
+  Future<void> setPlaying(
+    bool playing, {
+    required String slideId,
+    required bool Function() isCurrent,
+  }) async {
+    final state = _key.currentState;
+    if (state == null || state.widget.slide.id != slideId) return;
+    final initialization = state._initializing;
+    await initialization;
+    if (_key.currentState == state &&
+        state._initializing == initialization &&
+        isCurrent()) {
+      await state._setPlaying(playing);
+    }
+  }
+}
+
 class _VideoPreview extends StatefulWidget {
   final Slide slide;
   final VideoSource source;
@@ -12,10 +33,12 @@ class _VideoPreview extends StatefulWidget {
   final String font;
   final ThemeProfile profile;
   final bool autoplay;
+  final bool passive;
   final bool allowRemoteMedia;
   final VoidCallback? onComplete;
 
   const _VideoPreview({
+    super.key,
     required this.slide,
     required this.source,
     required this.w,
@@ -23,6 +46,7 @@ class _VideoPreview extends StatefulWidget {
     required this.font,
     required this.profile,
     this.autoplay = false,
+    this.passive = false,
     this.allowRemoteMedia = false,
     this.onComplete,
   });
@@ -36,6 +60,7 @@ class _VideoPreviewState extends State<_VideoPreview>
   // De afspeel-/pauzeknop blijft verborgen tot de muis boven de video hangt,
   // zodat hij de dia niet ontsiert tijdens het presenteren.
   bool _hovering = false;
+  late Future<void> _initializing;
 
   /// Ondertitels staan aan zodra er een bestand is (#2841); de gebruiker kan
   /// ze per dia uitzetten met de CC-knop in dezelfde hover-rij.
@@ -61,7 +86,7 @@ class _VideoPreviewState extends State<_VideoPreview>
   @override
   void initState() {
     super.initState();
-    initMedia();
+    _initializing = initMedia();
   }
 
   @override
@@ -72,14 +97,16 @@ class _VideoPreviewState extends State<_VideoPreview>
         oldWidget.slide.videoStartMs != widget.slide.videoStartMs ||
         oldWidget.slide.videoEndMs != widget.slide.videoEndMs ||
         oldWidget.slide.videoCaptions != widget.slide.videoCaptions ||
+        oldWidget.passive != widget.passive ||
         oldWidget.allowRemoteMedia != widget.allowRemoteMedia ||
         oldWidget.autoplay != widget.autoplay) {
-      initMedia();
+      _initializing = initMedia();
     }
   }
 
   @override
   String? resolveMediaPath() {
+    if (widget.passive) return null;
     switch (widget.source.kind) {
       case VideoSourceKind.localFile:
         // Web: een pakket-video leeft als `mem:`-bytes ([WebAssetStore]);
@@ -130,6 +157,21 @@ class _VideoPreviewState extends State<_VideoPreview>
 
   @override
   void onMediaComplete() => widget.onComplete?.call();
+
+  Future<void> _setPlaying(bool playing) async {
+    final controller = _controller;
+    if (controller == null ||
+        !controller.value.isInitialized ||
+        controller.value.isPlaying == playing) {
+      return;
+    }
+    if (playing) {
+      await controller.play();
+    } else {
+      await controller.pause();
+    }
+    if (mounted && identical(_controller, controller)) setState(() {});
+  }
 
   @override
   void onPositionTick(int positionMs, int durationMs) {
@@ -206,8 +248,7 @@ class _VideoPreviewState extends State<_VideoPreview>
                   ),
                 ),
               )
-            else if (widget.source.kind == VideoSourceKind.remoteFile &&
-                !widget.allowRemoteMedia)
+            else if (widget.source.isRemote && !widget.allowRemoteMedia)
               _remoteBlockedPlaceholder(context, widget.slide.videoPath)
             else if (mediaLoadFailure == MediaLoadFailure.localFileRequired)
               _mediaPlaceholder(
@@ -253,68 +294,67 @@ class _VideoPreviewState extends State<_VideoPreview>
                   linkColor: AppTheme.parseHexColor(widget.profile.accentColor),
                 ),
               ),
-            Positioned(
-              left: widget.w * 0.04,
-              bottom: widget.w * 0.035,
-              // Verborgen tot je over de video hovert; dan vloeit hij in. Als hij
-              // verborgen is laat IgnorePointer tikken door (doorbladeren blijft
-              // werken) en is hij niet bereikbaar.
-              child: IgnorePointer(
-                ignoring: !_hovering,
-                child: AnimatedOpacity(
-                  opacity: _hovering ? 1 : 0,
-                  duration: const Duration(milliseconds: 160),
-                  curve: Curves.easeOut,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        tooltip: controller?.value.isPlaying == true
-                            ? context.l10n.d('Pauzeren')
-                            : context.l10n.d('Afspelen'),
-                        onPressed:
-                            controller == null ||
-                                !controller.value.isInitialized
-                            ? null
-                            : () {
-                                setState(() {
-                                  controller.value.isPlaying
-                                      ? controller.pause()
-                                      : controller.play();
-                                });
-                              },
-                        icon: Icon(
-                          controller?.value.isPlaying == true
-                              ? Icons.pause_circle
-                              : Icons.play_circle,
-                        ),
-                        iconSize: widget.w * 0.045,
-                      ),
-                      // Ondertitels aan/uit (#2841): alleen aanbieden wanneer
-                      // de dia een bestand aanwijst; standaard aan.
-                      if (widget.slide.videoCaptions.isNotEmpty)
+            if (!widget.passive)
+              Positioned(
+                left: widget.w * 0.04,
+                bottom: widget.w * 0.035,
+                // Verborgen tot je over de video hovert; dan vloeit hij in. Als hij
+                // verborgen is laat IgnorePointer tikken door (doorbladeren blijft
+                // werken) en is hij niet bereikbaar.
+                child: IgnorePointer(
+                  ignoring: !_hovering,
+                  child: AnimatedOpacity(
+                    opacity: _hovering ? 1 : 0,
+                    duration: const Duration(milliseconds: 160),
+                    curve: Curves.easeOut,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
                         IconButton(
-                          tooltip: _captionsOn
-                              ? context.l10n.d('Ondertitels uit')
-                              : context.l10n.d('Ondertitels aan'),
-                          onPressed: () {
-                            final c = controller;
-                            if (c == null || !c.value.isInitialized) return;
-                            setState(() => _captionsOn = !_captionsOn);
-                            c.setClosedCaptionFile(
-                              mediaClosedCaptionFile(c.dataSource),
-                            );
-                          },
+                          tooltip: controller?.value.isPlaying == true
+                              ? context.l10n.d('Pauzeren')
+                              : context.l10n.d('Afspelen'),
+                          onPressed:
+                              controller == null ||
+                                  !controller.value.isInitialized
+                              ? null
+                              : () => unawaited(
+                                  _setPlaying(!controller.value.isPlaying),
+                                ),
                           icon: Icon(
-                            _captionsOn ? Icons.subtitles : Icons.subtitles_off,
+                            controller?.value.isPlaying == true
+                                ? Icons.pause_circle
+                                : Icons.play_circle,
                           ),
-                          iconSize: widget.w * 0.04,
+                          iconSize: widget.w * 0.045,
                         ),
-                    ],
+                        // Ondertitels aan/uit (#2841): alleen aanbieden wanneer
+                        // de dia een bestand aanwijst; standaard aan.
+                        if (widget.slide.videoCaptions.isNotEmpty)
+                          IconButton(
+                            tooltip: _captionsOn
+                                ? context.l10n.d('Ondertitels uit')
+                                : context.l10n.d('Ondertitels aan'),
+                            onPressed: () {
+                              final c = controller;
+                              if (c == null || !c.value.isInitialized) return;
+                              setState(() => _captionsOn = !_captionsOn);
+                              c.setClosedCaptionFile(
+                                mediaClosedCaptionFile(c.dataSource),
+                              );
+                            },
+                            icon: Icon(
+                              _captionsOn
+                                  ? Icons.subtitles
+                                  : Icons.subtitles_off,
+                            ),
+                            iconSize: widget.w * 0.04,
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
