@@ -1,6 +1,6 @@
 # ASVS 5.0.0 — scopebepaling
 
-> **Status:** vastgesteld 2026-07-22 · Stichting LibreKAT · intern werkdocument
+> **Herzien:** 2026-11-25 · Stichting LibreKAT · intern werkdocument
 >
 > Geen conformiteitsclaim. Zie [`README.md`](README.md) voor waarom dit niet in
 > `docs/` staat.
@@ -13,42 +13,52 @@ voor webapplicaties en API's; OciDeck is een lokaal-eerst bureaubladtoepassing.
 **De motivering waaróm iets buiten scope valt, is daarom het waardevolle deel
 van dit document** — niet de telling.
 
-## Eén correctie op de aanname vooraf
+## Product en grenzen
 
-"Geen backend" klopt voor het bureaublad en niet voor het hele product.
-`server/fetch-proxy/ocideck_fetch_proxy.py` is een echte HTTP-dienst — een
-`ThreadingHTTPServer` met één `do_GET` — waar de webbouw op terugvalt wanneer
-CORS een directe lezing blokkeert (`FileServiceNet.fetchUrlBytes`,
-`BrowserGitTransport`). Hij is optioneel en wordt door de beheerder uitgerold,
-maar hij zit in deze repository en hij is onderdeel van het webverhaal. Dat
-trekt V4 en delen van V3, V13 en V16 terug in scope.
-
-Wie de scope bepaalt zonder die map te openen, komt tot een te gunstig antwoord.
+OciDeck is lokaal-eerst. De optionele fetch-proxy, OciServe, ASR, WebDAV, S3,
+git, feeds, LibrePlan, XMPP en Jitsi voegen elk een eigen grens toe. De tabel
+volgt de huidige client en de meegeleverde fetch-proxy. IdP, OciServe- en
+ASR-backends, feedhosts, opslagservers en de Jitsi/XMPP-uitrol worden apart
+beheerd. Hun eisen worden aan de juiste partij toegedeeld. Zie
+[het dreigingsmodel](../docs/SECURITY_DESIGN.md#threat-model) en de
+[OWASP ASVS 5.0.0-uitgave](https://github.com/OWASP/ASVS/releases/tag/v5.0.0).
 
 ## Per hoofdstuk
 
-| Hoofdstuk | L1+L2 | Oordeel | Motivering |
-|---|---:|---|---|
-| **V1** Encoding and Sanitization | 27 | **In scope** | De app leest Markdown, HTML en SVG van buiten, geeft HTML uit (`MarpHtmlService`), bouwt JS-strings voor een offscreen WebView (`MermaidRenderService`) en start een subproces (`GitCliIo`). Ongeveer de helft is echt van toepassing; LDAP, XPath, JNDI, memcache, SMTP en LaTeX hebben hier geen interpreter. |
-| **V2** Validation and Business Logic | 11 | **Deels** | V2.1/V2.2 (invoervalidatie en de documentatie ervan) gelden: `MarkdownValidator`, `ThemeProfile.fromJson`, `ImageService.imageMimeFromBytes`. V2.3 (opeenvolgende stappen, transacties, resourcelocking) en V2.4 (anti-automatisering) veronderstellen meerdere gebruikers op een server. |
-| **V3** Web Frontend Security | 19 | **Deels** | Er is een webbundel (`web/index.html`, bewaakt door `tool/check_web_hardening.dart`). **V3.3 Cookie Setup valt eruit:** de app zet nergens een cookie, dus Secure/SameSite/HttpOnly hebben geen onderwerp. V3.4 (koppen) geldt wel, maar wordt grotendeels door de beheerder geleverd, niet door het artefact. |
-| **V4** API and Web Service | 10 | **Deels** | Uitsluitend vanwege de fetch-proxy. V4.1/V4.2 gelden daarvoor. V4.3 (GraphQL) en V4.4 (WebSocket) vallen eruit: geen van beide bestaat in `lib/` of `server/`. |
-| **V5** File Handling | 9 | **In scope** | Dit is het kernaanvalsoppervlak: zip-uitpakken en zip-slip (`FileServiceImport`), begrensde uitvoer (`_CappedOutputStream`), magic bytes (`ImageService`). |
-| **V6** Authentication | 35 | **Deels in scope** | De optionele OciServe-koppeling heeft een externe identity provider en accepteert een sessie pas na een geslaagde `/me`; wachtwoord, MFA en herstel blijven bij de provider. Daarnaast gelden de bestaande pakketwachtwoordeisen. |
-| **V7** Session Management | 18 | **Deels in scope** | OciDeck bewaart een OciServe access-token in geheugen en optioneel een roterend refresh-token in de OS-sleutelbos. Uitloggen, serverwissel en lokaal herstel wissen token en outbox; cookies worden niet door de native client gebruikt. |
-| **V8** Authorization | 7 | **Deels in scope** | OciServe handhaaft self-scoped cursistroutes; OciDeck staat alleen organisaties toe die `/me` als actief lidmaatschap retourneert. De server blijft het gezaghebbende handhavingspunt. |
-| **V9** Self-contained Tokens | 7 | **Deels in scope** | De OciServe/IdP-keten kan JWT-access- en ID-tokens leveren. OciDeck ontleent identiteit niet aan een lokaal gedecodeerde claim maar bevestigt toegang via de API. SAML blijft buiten scope. |
-| **V10** OAuth and OIDC | 29 | **In scope voor OciServe** | Native Authorization Code + PKCE via de systeembrowser, een eigen loopbackredirect, discovery, issuercontrole en roterende refresh-tokens. De webbouw faalt dicht wegens het ontbreken van een veilige sleutelbos. |
-| **V11** Cryptography | 14 | **In scope** | Pakketversleuteling, het SHA-512-zegel, de SHA-256-certificaatpin, CSPRNG-nonces, RFC 3161. |
-| **V12** Secure Communication | 9 | **In scope** | WebDAV, S3, git-REST, native git, AI, CVE-inname en OciServe/OIDC. De native OciServe-route vereist HTTPS, `NetGuard`-resolutie, adrespinning, begrensde antwoorden en geen redirects. |
-| **V13** Configuration | 13 | **Deels** | V13.3 (geheimenbeheer) en V13.4 (informatielekkage) gelden rechtstreeks. V13.2 geldt alleen voor de uitrol van de proxy. |
-| **V14** Data Protection | 9 | **In scope** | De hele OciWacht-laag (`lib/services/privacy/`) is een gegevensclassificatie-implementatie, en de webbouw raakt browseropslag. |
-| **V15** Secure Coding and Architecture | 13 | **In scope** | Toeleveringsketen (`tool/generate_sbom.dart`, `tool/check_bundled_js.dart`), begrenzingen, verdedigend programmeren. |
-| **V16** Logging and Error Handling | 16 | **Deels** | Foutafhandeling (V16.5) geldt volledig. Voor logging is er één afvoer — `dart:developer` via `lib/utils/log.dart` — dus V16.4.2/16.4.3 (logbescherming, logs wegsturen) missen hun onderwerp; V16.1–16.3 gelden in verkleinde vorm. |
-| **V17** WebRTC | 7 | **Buiten scope** | Geen peerverbinding, geen STUN of TURN. Video is een `<video>`-element plus host-beperkte iframes (`VideoSource`); er is geen `RTCPeerConnection`. |
+| Hoofdstuk | Afbakening na herziening | Reden en bronanker |
+| --- | --- | --- |
+| **V1** Encoding and Sanitization | Deels | Markdown en export blijven in scope. Nieuwe tekstinvoer omvat XML-stanza’s, RSS/Atom, iframe-aanbiedingen en serverberichten. Zie `XmppStanza`, `parsePodcastFeed` en `MarkdownTransferBridge`. LDAP, XPath en SQL hebben hier geen interpreter. |
+| **V2** Validation and Business Logic | In scope voor invoer en toestandovergangen | Invoercontroles gelden ook voor ASR, feeds en OciServe. Relevante toestandovergangen omvatten deelnemersrollen, afspeelsessies, revisies en outbox. De eigenlijke authenticatie hoort bij V6. Server-side anti-automatisering en transactievergrendeling horen bij de dienstbeheerder. |
+| **V3** Web Frontend Security | Deels | De webbundel, CSP en browseropslag blijven relevant. `MarkdownTransferBridge` en `markdown_transfer_web.dart` voegen parent/origin-, toestemming- en limietgrenzen toe. De uitrol moet `frame-ancestors` leveren. OciDeck stelt geen eigen browserauthenticatiecookie in. |
+| **V4** API and Web Service | Deels | De fetch-proxy heeft een HTTP-endpoint. De ASR- en XMPP-clients verwerken HTTP/WebSocket-berichten en begrenzen invoer. Server-side instellingen voor ASR, XMPP en OciServe zitten bij die diensten. GraphQL heeft geen bekende route. |
+| **V5** File Handling | In scope | Pakketten, bestanden en afbeeldingen blijven onbetrouwbare invoer. Daar komen OciServe-lespakketten, ASR-audio, opnamestaging en gedownloade feed-enclosures bij. Zie `FileServiceImport`, `recording_staging_io.dart` en `FeedStoreNotifier`. |
+| **V6** Authentication | Deels | Native OciServe valideert OIDC en lidmaatschap. Het IdP beheert wachtwoorden, MFA, passkeys en herstel. XMPP onderhandelt SASL. Bij WebDAV-samenwerking fase 0.5 bepaalt de opslag-ACL wie kan deelnemen. De pakketwachtwoordeisen blijven relevant. |
+| **V7** Session Management | Deels | OciServe bewaart access-tokens in geheugen en kan refresh-tokens in de sleutelbos bewaren. Uitloggen en volledige reset hebben verschillende gevolgen voor de outbox. XMPP en vergaderingen brengen afzonderlijke sessies en deelnemersidentiteiten mee. |
+| **V8** Authorization | Deels | OciServe-API bepaalt toegang per organisatie en deelnemer. OciDeck controleert actief lidmaatschap en houdt accountbinding bij step-up vast. Rollen van `XmppTransport` en de WebDAV-eigenaarsrol vereisen afzonderlijke toetsing. De WebDAV-ACL bepaalt externe schrijfbevoegdheden. |
+| **V9** Self-contained Tokens | Deels | OciServe valideert het OIDC-ID-token en bevestigt toegang via `/me`. Claimuitgifte en autorisatie van API-tokens blijven serververantwoordelijkheid. SAML heeft geen route. |
+| **V10** OAuth and OIDC | In scope voor OciServe | `OciServePkceAuthenticator` gebruikt native Authorization Code + PKCE, loopbackcallback, discovery en issuerpoort. Step-up bindt de nieuwe sessie aan dezelfde gebruiker. De webbouw weigert deze route. |
+| **V11** Cryptography | In scope | Pakketten, SHA-512-zegel, RFC 3161, pins en nonces houden hun onderwerp. `XmppKeyExchange` en verzegelde companion-events voegen sleuteluitwisseling en gegevensversleuteling toe. WebRTC gebruikt DTLS-SRTP. |
+| **V12** Secure Communication | In scope | WebDAV, S3, git, LibrePlan, feeds, XMPP, Jitsi, OciServe, AI en ASR hebben elk een transportbeleid. Native pinning geldt op de daarvoor ingerichte routes. Web gebruikt browsergrenzen en WebRTC-media volgt het ICE-pad. Zie het dreigingsmodel en de afwijkingen. |
+| **V13** Configuration | Deels | Clientgeheimen, opt-ins, ASR-bestemming, OciServe-issuer en web-embedding zijn relevante instellingen. De beheerder van een fetch-proxy, IdP of vergaderserver heeft een eigen uitrolverantwoordelijkheid. |
+| **V14** Data Protection | In scope | OciWacht, deck- en browseropslag blijven relevant. Microfoonaudio, ASR-serververwerking, leerlinggegevens en voortgang, XMPP-metadata en tijdelijke pakketten voegen gevoelige gegevens toe. Retentie verschilt per route. |
+| **V15** Secure Coding and Architecture | In scope | SBOM, parsers en begrensde invoer blijven onderwerp. WebRTC, decoders en externe diensten brengen nieuwe afhankelijkheden en vertrouwensgrenzen mee. De inventaris hieronder signaleert nieuwe servicemodules. |
+| **V16** Logging and Error Handling | Deels | Clientlogs, geredigeerde foutmeldingen en diagnose komen ook voor in ASR en OciServe. Logretentie, logtoegang en centrale analyse van externe diensten horen bij de beheerder. |
+| **V17** WebRTC | Deels, client en uitrol apart | `JitsiMeetingSession` en `WebrtcMediaCore` onderhandelen over mediaverbindingen. De client verwerkt DTLS-fingerprints en ICE-kandidaten. TURN-beleid, configuratie van DTLS-SRTP en signaleringscapaciteit van een bridge moeten per uitrol beoordeeld worden. |
 
-**Netto: ongeveer 95 eisen met een echt onderwerp.** De overige ~158 vallen weg
-om de redenen hierboven.
+De oude schatting van ongeveer 95 toepasselijke eisen is vervallen. Deze
+herziening beoordeelt hoofdstukken en grenzen. Een actuele telling per eis
+vraagt een afzonderlijke beoordeling.
+
+## Herziening bij nieuwe modules
+
+De inventaris hieronder volgt de directe mappen en zelfstandige Dart-bestanden
+in `lib/services/`. Een wijziging vraagt om herziening van de geraakte
+hoofdstukken en het restrisico. Draai daarna
+`dart run tool/check_dated_claims.dart --write-assurance-inventory`.
+De dagelijkse controle meldt ook dossiers waarvan de review ouder dan
+180 dagen is.
+
+<!-- assurance-inventory service-modules: 205 549fd50fb82573a4d61d1876b0b37d7a86e83290d2dcbf6e81fa261add763f09 -->
 
 ## Waar het product strenger is dan de lat vraagt
 
@@ -60,7 +70,7 @@ Dit hoort erbij, anders leest een scopebepaling als een tekortenlijst.
 - `NetGuard.connectPinned` combineert resolve-then-pin met TLS die tegen de
   hóstnaam blijft valideren, zodat pinning geen certificaat op een IP vereist.
 - `tool/check_conventions.dart` bevat met `audienceBoundary` een
-  privacygrens die bij de bouw faalt — een compile-time grens, geen afspraak.
+  privacygrens die de uitgevoerde conventiecontrole laat falen.
 - De basislijn voor kale `catch (_)` staat op nul.
 - Het git-subproces draait met `includeParentEnvironment: false`, een lege
   `HOME`, een lege `hooksPath` en weigert operanden die met een streepje

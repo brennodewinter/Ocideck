@@ -30,8 +30,10 @@ case "$backend" in
       pointer_dir=$(mktemp -d)
       trap 'rm -rf -- "$pointer_dir" "${staging:-}"' EXIT
       chmod 755 "$pointer_dir"
+      flags=$(pkg-config --cflags --libs wayland-client)
+      read -r -a wayland_flags <<< "$flags"
       cc -Wall -Wextra -Werror "$(dirname -- "$script")/wayland_probe_pointer.c" \
-        -o "$pointer_dir/pointer" $(pkg-config --cflags --libs wayland-client)
+        -o "$pointer_dir/pointer" "${wayland_flags[@]}"
       export OCIDECK_WAYLAND_POINTER="$pointer_dir/pointer"
     fi
     "${launcher[@]}" dbus-run-session -- /usr/bin/python3 "$script" wayland "$executable" "$evidence"

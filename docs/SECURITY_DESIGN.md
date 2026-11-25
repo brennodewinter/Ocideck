@@ -102,14 +102,13 @@ all sensitive content has been found.
 
 ## Overview
 
-OciDeck has a strong client-side security model with **no required application backend**.
-The app runs locally on the user's machine (desktop) or in a browser tab (web);
-presentation content never leaves the device during editing, previewing,
-presenting, or exporting. The only network traffic is explicit and
-user-initiated (URL import, WebDAV/Nextcloud, S3, git storage, optional AI), and
-each path is individually gated. The optional OciServe learning extension adds
-an authenticated backend chosen by the user; it is disabled by default and
-unavailable in the web build because that build has no safe token store.
+OciDeck runs on the user’s desktop or in a browser tab without a required
+application backend. Core editing, rendering and export are local. Configured
+features can move data across their own boundaries, including storage,
+collaboration, feeds, transcription, meetings, AI and the OciServe learning
+extension. Feed polling and progress synchronisation can follow explicit
+feature setup. The threat model below describes the controls and residual risk
+for the major routes.
 
 ### OciServe trust boundary
 
@@ -1103,11 +1102,11 @@ networks are usable but not trusted; files from third parties are untrusted.
 **Primary vectors, mitigations and what is left.** The table gained its last two
 columns on 2026-07-22. Before that it listed risks and controls but no residual
 and no owner, which reads as if every risk were closed — and none of these is.
-The date in the last column is when the residual was accepted in the form stated
-here; a residual with no date is one nobody has looked at, and there should not
-be any.
+The last column records acceptance or the date of review when acceptance is
+pending. The new boundaries below were reviewed against the client source on
+2026-11-25. Service-side configuration and retention depend on the deployment.
 
-| Risk | Mitigation | Residual risk | Accepted on |
+| Risk | Mitigation | Residual risk | Decision |
 | --- | --- | --- | --- |
 | **Malicious deck or asset** | Structural validation (§6), asset-path containment (§4), HTML-export sanitization (§5), magic-byte image checks (§6), bounded image decoding | The render-path symlink cache is keyed by path for the session, so a symlink swapped *after* its first render is not re-checked — a narrow TOCTOU on an already-open deck (also stated in `SECURITY.md`) | 2026-07-22 |
 | **Network / SSRF** | NetGuard classification, resolve-then-pin, no redirect following, byte caps (§3); trusted-internal is opt-in (§10) | Browser media and embedded provider players rely on their own network policies. Online media is **off by default** and scoped to sessions the user enables (§7 of `SECURITY.md`) | 2026-07-22 |
@@ -1117,11 +1116,19 @@ be any.
 | **Deck content at rest on the machine** | Recovery snapshots are pruned after 7 days; the app-support directory carries OS user permissions | Snapshots and git working copies are **unencrypted**, and a git clone additionally keeps full history with no expiry. Removing the connection does not remove them. Encrypting snapshots at rest is a known, unimplemented improvement | 2026-07-22 |
 | **Async collaboration handover** — a participant grabbing authority or persistence it should not have | The collab sidecar (op log, snapshot, beacon) lives on the user's own WebDAV; every record is treated as data and decoded fail-closed (§5.3, §5.6). Handover is fail-closed — a stalled session the owner can revive beats a split brain — and **only the owner persists**, gated on the launch role, never on the beacon. Log compaction (§5.2) is the client's only data-mutating outbound verb: it deletes **only numbered record files** (the path is built by `_pathFor(seq)` from an integer, so it can never reach the snapshot, the beacon or the `.md`), through the same NetGuard-pinned, `followRedirects=false` path as upload, and a failed delete leaves the record in place | Fase 0.5 has **no participant authentication**: WebDAV write access to the sidecar is the only gate (cryptographic identity is Fase 2 / Matrix, §9.1). The beacon is advisory, last-write-wins with no integrity — a participant with write access can misdirect version assignment. "Only the owner saves" is a *client-side coordination gate* in OciDeck, not a server-enforced permission: in the common shared-folder setup the `.md` sits beside the sidecar, so anyone who can write the sidecar can typically overwrite the shared `.md` with another tool. The shared file is therefore only as protected as the user's own WebDAV ACL makes it — OciDeck's gate keeps honest co-authors from clobbering it, not a determined one. During a failover window the shared state can briefly diverge for a *losing* authority, and the heartbeat reveals "owner online" at poll resolution — all stated in `COLLABORATION.md` §5.3 | 2026-07-31 |
 | **A compromised or hostile operating-system account** | Out of scope, by the assumption above | Everything. The keychain, the snapshots, the working copies and the preferences all trust the OS account. On macOS the App Sandbox is deliberately **off**, so there is no OS-level process isolation either (`SECURITY.md`, *Platform sandboxing*) | 2026-07-22 |
+| **Microphone capture and ASR processing** | Recording is user-started. `AsrServerGate`, `AsrServerEngine` and `AsrLiveServerEngine` require consent bound to the destination and file or session. Native transport pins the destination and native batch rejects redirects. API keys require TLS or loopback. Responses are bounded. | Native staging uses app-support storage and is swept at startup after seven days. The browser uses in-memory staging and its own network policy. A selected server receives audio. Its retention and use depend on its operator. Opted-in LAN audio can travel over plain HTTP without a key. Voices may belong to people who never interact with OciDeck. | Reviewed 2026-11-25, acceptance pending |
+| **Markdown from the embedding page** | The web bridge verifies parent, origin policy, handshake and byte limit. Opening requires explicit consent and the regular deck safety scan. See [PostMessage Markdown transfer](#postmessage-markdown-transfer-browser-coupling-2827). | A deployment that enables framing must set its `frame-ancestors` policy. With an empty app origin list, each allowed embedding page can make an offer. The user still has to trust the sender. | Reviewed 2026-11-25, acceptance pending |
+| **Jitsi / WebRTC media** | `JitsiMeetingProvider` uses the configured signaling endpoint. Native HTTPS/WSS is resolved and pinned. The browser handles DNS, TLS and CSP. `JitsiMeetingSession` and `WebrtcMediaCore` negotiate WebRTC with a SHA-256 DTLS fingerprint and DTLS-SRTP transport. | Media follows ICE candidates supplied by Jitsi beyond the HTTP NetGuard boundary. Transport encryption terminates at the media bridge and media E2EE is disabled. Provider configuration, participant behavior and retention remain deployment risks. | Reviewed 2026-11-25, acceptance pending |
+| **XMPP collaboration and chat** | `openXmppFrameTransport` pins native WSS and `XmppSession` negotiates SASL. `XmppKeyExchange` binds invitations and gates device approval. `XmppTransport` seals companion-room events. | Browser connections use browser network enforcement. The server sees room and presence metadata and controls availability. Ordinary conference chat and the older WebDAV handover use separate trust models. | Reviewed 2026-11-25, acceptance pending |
+| **Feed response and enclosures** | `fetchFeed` caps feed responses at 8 MiB. Native redirects are capped and revalidated per hop. `parsePodcastFeed` handles RSS, Atom and RDF as data. Native enclosure auto-download has a separate opt-in. | The feed operator controls the returned content. Browser CORS, DNS and redirects are browser-managed. Opted-in polling and enclosure downloads can reveal subscriptions and activity to configured hosts. | Reviewed 2026-11-25, acceptance pending |
+| **OciServe account and learner data** | Native OIDC Code + PKCE and ID-token validation in `OciServePkceAuthenticator`, pinned bounded HTTPS, active membership checked through `/me`, same-account step-up and OS-keychain storage for refresh and progress. See [OciServe trust boundary](#ociserve-trust-boundary). | OciServe owns tenant and learner authorization and the IdP owns login policy, including any passkeys. The server can retain learner data and progress. Logout preserves unsent progress until explicit reset. The browser build does not enable this route. | Reviewed 2026-11-25, acceptance pending |
 
-Every row's mitigation cites a section that names the code; every residual is
-stated somewhere else in this repository too, and the wording here is meant to
-match it. Where this table and the section it points at disagree, the section is
-the more detailed one and wins.
+The network inventory records raw `HttpClient` call counts and the approved
+paths in `network_sink_guard_test.dart`. A change asks for a model review.
+After reviewing the boundary, run
+`dart run tool/check_dated_claims.dart --write-assurance-inventory`.
+
+<!-- assurance-inventory network-sinks: 38 c284fe3e4233d7ef98757fd26de8c213fb5caa5e9b2d096c3752cd90053a2b0c -->
 
 ## PostMessage Markdown transfer (browser coupling, #2827)
 

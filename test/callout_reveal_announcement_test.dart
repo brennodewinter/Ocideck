@@ -68,6 +68,7 @@ void main() {
         final map = message as Map<Object?, Object?>;
         if (map['type'] == 'announce') {
           final data = map['data'] as Map<Object?, Object?>;
+          expect(data['assertiveness'], isNull, reason: 'default polite');
           announced.add(data['message'] as String);
         }
         return null;
@@ -108,7 +109,11 @@ void main() {
     // ook niets over markeringen gemeld — vroeger herhaalde deze stap het
     // totaal van de vorige.
     await next();
-    expect(announced.last, 'Punt 3/3');
+    expect(announced, [
+      'Punt 1/3, 1 markering',
+      'Punt 2/3, 2 markeringen',
+      'Punt 3/3',
+    ]);
   });
 
   group('stepAnnouncement — de bewoording, zonder presenter', () {

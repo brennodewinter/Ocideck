@@ -715,7 +715,7 @@ Widget _bulletMarker(BuildContext context, _Theme t, _ListLine it) {
         width: 18,
         height: fontSize * kDocumentBodyLineHeight,
         child: Align(
-          alignment: AlignmentDirectional.centerStart,
+          alignment: Alignment.centerLeft,
           child: SvgPicture.string(svg, width: size, height: size),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:html/parser.dart' as html;
 import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/marp_html_service.dart';
@@ -135,12 +136,18 @@ void main() {
           ),
         ],
       );
-      final result = renderImageCallouts(body, slide);
-      // The bullet list becomes an HTML <ul> with aria-describedby.
-      expect(result, contains('<ul>'));
-      expect(result, contains('aria-describedby="ocideck-callout-slide-1-A"'));
-      // The bullet without a reference has no aria-describedby.
-      expect(result, contains('<li>Tweede punt</li>'));
+      final fragment = html.parseFragment(renderImageCallouts(body, slide));
+      final items = fragment.querySelectorAll('ul > li');
+      expect(items.map((item) => item.text), [
+        'Eerste punt (A)',
+        'Tweede punt',
+      ]);
+      final descriptionId = items.first.attributes['aria-describedby'];
+      expect(descriptionId, 'ocideck-callout-slide-1-A');
+      final descriptions = fragment.querySelectorAll('#$descriptionId');
+      expect(descriptions, hasLength(1));
+      expect(descriptions.single.text, 'referentie');
+      expect(items.last.attributes, isNot(contains('aria-describedby')));
     });
 
     test('zoom mode emits zoom wrapper', () {

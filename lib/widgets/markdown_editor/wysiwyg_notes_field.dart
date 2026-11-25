@@ -248,7 +248,7 @@ class _ThemedCheckboxBuilder extends QuillCheckboxBuilder {
       child: GestureDetector(
         onTap: () => onChanged(!isChecked),
         child: Padding(
-          padding: EdgeInsetsDirectional.only(end: size / 2),
+          padding: EdgeInsets.only(right: size / 2),
           child: Icon(
             isChecked
                 ? Icons.check_box_outlined
@@ -661,10 +661,10 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
       final size = fontSize * 0.66;
       return ExcludeDocumentSearch(
         child: Container(
-          alignment: AlignmentDirectional.centerEnd,
+          alignment: Alignment.centerRight,
           width: config.width!,
           height: fontSize * theme.lineHeight,
-          padding: EdgeInsetsDirectional.only(end: config.padding!),
+          padding: EdgeInsets.only(right: config.padding!),
           child: SvgPicture.string(svg, width: size, height: size),
         ),
       );

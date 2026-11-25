@@ -53,13 +53,12 @@ die hem bezit draagt dezelfde beschrijving, zodat het lezen van de bullet de
 betekenis één keer meeleest. De zichtbare letter op de markering blijft buiten
 de boom, want die staat al vooraan in de naam. Presenteer je met stapsgewijs
 onthullen, dan is een groep die nog niet onthuld is **afwezig uit de
-accessibility tree**, niet enkel doorzichtig, en wordt elke stap aangekondigd
-met de bullet en hoeveel markeringen meekwamen. De HTML-export draagt hetzelfde
-in ARIA: `role="img"` met dezelfde naam op elke markering, een visueel verborgen
-beschrijving met een vast id, en `aria-describedby` op de bullet. De
-HTML-export stapt niet — hij toont elke groep tegelijk — en heeft daarom geen
-live region. Het contract is `docs/design/IMAGE_CALLOUTS.md` §12; de poort is
-`test/callout_accessibility_test.dart`.
+accessibility tree**, niet enkel doorzichtig. De aankondiging noemt de positie
+van de bullet in de reeks en hoeveel markeringen erbij kwamen. De statische
+HTML-export toont alle groepen tegelijk. Elke markering heeft `role="img"` met
+dezelfde naam, en `aria-describedby` op de bullet verwijst naar een visueel
+verborgen beschrijving met een vast id. Het contract staat in
+`docs/design/IMAGE_CALLOUTS.md` §12. De test is `test/callout_accessibility_test.dart`.
 
 **Een test die de build laat falen — en precies hoeveel van de app hij ziet.**
 `test/accessibility_labels_test.dart` stelt vast dat elke knop een toegankelijke
@@ -421,22 +420,31 @@ leest is dat een toegankelijkheidsprobleem en geen cosmetisch, en het is het erg
 waar het het meest pijn doet: dit zijn de meldingen die je tegenhouden iets te
 doen. Bijgehouden in #576.
 
-**Alleen links-naar-rechts, en dat bepaalt ook je inhoud.** Er is nergens een
-richtinggevoelige layoutprimitief in gebruik — `EdgeInsetsDirectional`,
-`AlignmentDirectional` en `BorderDirectional` komen nul keer voor in `lib/`, tegen
-negenentwintig fysieke `EdgeInsets.only(left:`/`right:`. Van de dertien plekken
-die `TextDirection` noemen, hardcoderen er elf `TextDirection.ltr`, waaronder een
-`Directionality`-wrapper om het **hele diacanvas** in `slide_preview.dart`
-(geteld 2026-07-22).
+**Lay-out van links naar rechts.** De ondersteunde interfacetalen gebruiken
+een lay-out van links naar rechts. OciDeck gebruikt fysieke linker- en
+rechterposities voor de applicatielay-out en geeft het diacanvas in de preview
+een basisrichting van links naar rechts. Tekst die `InlineMarkdown` rendert,
+detecteert de richting per alinea. De HTML-export gebruikt de bidirectionele
+tekstverwerking van de browser voor alinea’s, lijstitems, koppen en tabelcellen.
+Controleer de afgewerkte dia’s bij een presentatie in het Arabisch of Hebreeuws,
+vooral op dia’s met tekst en elementen op vaste posities.
 
-Dat geen van de 32 interfacetalen rechts-naar-links is, is een scopekeuze. Het
-scherpere gevolg is het canvas: een auteur die een Arabische of Hebreeuwse alinea
-op een dia zet krijgt de verkeerde basisrichting — links uitgelijnd, leestekens
-aan de verkeerde kant — ongeacht de interfacetaal die hij koos. Niets waarschuwt
-hem, dus het wordt op de beamer ontdekt. Hier wordt nog niets voor gebouwd; het
-staat hier opgeschreven zodat het een bekende beperking is in plaats van een
-verrassing, en zodat op de dag dat iemand RTL wil het startpunt al in kaart is
-gebracht. *(Toegevoegd 2026-07-22.)*
+De inventaris hieronder telt Dart-tokens in `lib/` en aanroepen van
+`EdgeInsets.only` met een argument `left` of `right`. Werk beide gidsen bij met
+`dart run tool/check_rtl_inventory.dart --write`.
+
+<!-- BEGIN RTL INVENTORY -->
+
+| Dart-broncode | Aantal |
+| --- | ---: |
+| `EdgeInsetsDirectional` | 0 |
+| `AlignmentDirectional` | 0 |
+| `BorderDirectional` | 0 |
+| `EdgeInsets.only(left: / right:)` | 79 |
+| `TextDirection` | 24 |
+| `TextDirection.ltr` | 19 |
+
+<!-- END RTL INVENTORY -->
 
 **Bredere WCAG-conformiteit wordt niet geclaimd.** Contrastverhoudingen binnen de
 *applicatie-interface*, focusvolgorde over de hele app, en leesvolgorde zijn een
@@ -445,28 +453,24 @@ en de gebreken die hij ving. OciDeck claimt geen WCAG 2.1-conformiteit op enig
 niveau, heeft geen toegankelijkheidsconformiteitsrapport, en is niet getest met
 gebruikers van hulptechnologie.
 
-**Niet geverifieerd met echte schermlezers.** De labels worden in tests via de
-semantiekboom van Flutter vastgesteld. Niemand heeft OciDeck van begin tot eind
-gedraaid onder VoiceOver, NVDA, JAWS of Orca, dus "draagt een semantisch label"
-is bewezen en "werkt goed in de praktijk" niet.
+**De schermlezertoets staat open (#1844, #3237).** Automatische tests toetsen
+de koppeling tussen bullet en beschrijving in de HTML-DOM, de afwezigheid van
+nog niet onthulde markeringen en de bulletbeschrijvingen in de Flutter-
+semantiekboom, en precies één beleefde aankondiging per onthulstap.
+
+Op 2026-11-25 ging de testpresentatie open in een debugsessie op macOS 27.2.1.
+De activering en spraakuitvoer van VoiceOver konden niet worden bevestigd.
+Een Windows-sessie met NVDA was niet beschikbaar. Beide toetsen staan open.
+Presenteer voor de hertest een dia van het type Bullets + Afbeelding met
+stapsgewijs onthullen en twee bullets, één met één markering en één met twee
+markeringen. Controleer per stap of alleen onthulde markeringen bereikbaar
+zijn, of de beschrijving van de bullet één keer wordt voorgelezen en of de
+aankondiging het aantal markeringen noemt dat er in die stap bij komt.
 
 **De afbeeldingsscan van de privacycontrole is niet beschikbaar op de
 browserbuild**, wat een capaciteitshiaat is en geen toegankelijkheidshiaat, maar
 het landt op dezelfde plek: zie [PRIVACY.md](PRIVACY.md) en
 [HOSTING.md](HOSTING.md) §5.
-
-**De interface en het diacanvas zijn alleen links-naar-rechts.** Geen van de 32
-interfacetalen is rechts-naar-links, wat een scopekeuze is. Het scherpere punt is
-dat het ook de *inhoud* bepaalt: `lib/widgets/slides/slide_preview.dart` wikkelt
-het hele canvas in `Directionality(textDirection: TextDirection.ltr)`, zodat een
-auteur die een Hebreeuwse of Arabische alinea op een dia zet de verkeerde
-basisrichting krijgt — links uitgelijnd, met leestekens aan de verkeerde kant. Dat
-treft auteurs ongeacht de taal waarin ze de interface lezen. Er zijn ook geen
-richtingbewuste layoutprimitieven in gebruik (`EdgeInsetsDirectional`,
-`AlignmentDirectional` en `BorderDirectional` komen nul keer voor in `lib/`, tegen
-29 fysieke `EdgeInsets.only(left|right`), dus RTL later ondersteunen is een
-wijziging aan layoutcode en geen vertaalklus. *(Toegevoegd 2026-07-22: dit was
-waar maar nergens opgeschreven, dus het was iets wat je op de beamer ontdekte.)*
 
 ## Als je hierop steunt
 

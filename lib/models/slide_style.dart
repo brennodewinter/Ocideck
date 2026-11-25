@@ -43,6 +43,28 @@ int? slideStyleMarkerIndex(List<Slide> slides, int index) {
   return active;
 }
 
+/// Vervangt de markeringen vanaf [index] voor één doorlopend stijlbereik.
+/// Geeft null terug voor een ongeldige index of ongewijzigde markeringen.
+List<Slide>? slidesWithStyleFrom(
+  List<Slide> slides,
+  int index,
+  String styleName,
+) {
+  if (index < 0 || index >= slides.length) return null;
+  final inherited = slideStyleNameAt(slides, index - 1) ?? kDeckStyleToken;
+  final marker = styleName == inherited ? '' : styleName;
+  List<Slide>? result;
+  for (var i = index; i < slides.length; i++) {
+    final slide = slides[i];
+    final newMarker = i == index ? marker : '';
+    if (slide.styleName == newMarker) continue;
+    (result ??= List<Slide>.of(slides))[i] = slide.copyWith(
+      styleName: newMarker,
+    );
+  }
+  return result;
+}
+
 /// Alle profielnamen waar een markering naar wijst — de set waarvoor exports
 /// stijlregels moeten meenemen. `deck` telt niet: dat is géén profiel.
 Set<String> usedSlideStyleNames(List<Slide> slides) => {

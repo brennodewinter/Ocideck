@@ -76,8 +76,8 @@ extension _PresenterTable on _FullscreenPresenterState {
   /// Spiegel een tabelwijziging naar het publieksscherm (alleen bij dual).
   void _pushTableToAudience(int slideIndex, Slide updated) {
     if (!_dual) return;
-    audienceChannel
-        .invokeMethod('tableUpdate', {
+    AudienceMethod.tableUpdate
+        .send({
           'seq': _audienceSync.nextContentSequence,
           'slideIndex': slideIndex,
           'tableRows': updated.tableRows,
