@@ -40,10 +40,10 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
-    // Het stijlprofiel woont op de Presentatie-tab. Die moet echt geopend
+    // Het stijlprofiel woont op de Stijlen-tab. Die moet echt geopend
     // worden: een IndexedStack zet de andere tabs offstage en finders slaan
     // offstage widgets standaard over.
-    await tester.tap(find.byIcon(Icons.slideshow_outlined));
+    await tester.tap(find.byIcon(SettingsSection.presentation.icon));
     await tester.pumpAndSettle();
 
     // Op icoon, niet op tooltip: die is vertaald en de test draait niet
