@@ -74,6 +74,41 @@ log="$logdir/ocideck.log"
 @unittest.skipUnless(sys.platform.startswith('linux') and shutil.which('cc')
                      and shutil.which('readelf'), 'requires the Linux ELF toolchain')
 class ElfProbeTest(unittest.TestCase):
+    def test_standard_probe_uses_bundle_for_plugins_and_preserves_executable_search(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work)
+            libdir = root / 'lib'
+            libdir.mkdir()
+            source = root / 'fixture.c'
+            source.write_text('int fixture_dependency(void) { return 0; }\n')
+            soname = 'libocideck_probe_fixture.so.1'
+            dependency = libdir / soname
+            subprocess.run(['cc', '-shared', '-fPIC', f'-Wl,-soname,{soname}',
+                            str(source), '-o', str(dependency)], check=True)
+            source.write_text('extern int fixture_dependency(void);\n'
+                              'int main(void) { return fixture_dependency(); }\n')
+            plugin = libdir / 'plugin.so'
+            subprocess.run(['cc', '-shared', '-fPIC', str(source), str(dependency),
+                            '-o', str(plugin)], check=True)
+            command = ['bash', str(SCRIPTS / 'check_linux_runtime_elf.sh'), str(root)]
+            result = subprocess.run(command, check=False, capture_output=True, text=True, timeout=15)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            executable = root / 'standalone'
+            subprocess.run(['cc', '-fPIE', '-pie', str(source), str(dependency),
+                            '-o', str(executable)], check=True)
+            result = subprocess.run(command, check=False, capture_output=True, text=True, timeout=15)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn('standalone: unresolved runtime dependencies', result.stderr)
+            self.assertNotIn('lib/plugin.so:', result.stderr)
+
+            executable.unlink()
+            dependency.unlink()
+            result = subprocess.run(command, check=False, capture_output=True, text=True, timeout=15)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn('lib/plugin.so: unresolved runtime dependencies', result.stderr)
+            self.assertIn(f'{soname} => not found', result.stderr)
+
     def test_standalone_plugin_is_checked_and_bundled_dependency_can_resolve(self):
         with tempfile.TemporaryDirectory() as work:
             root = Path(work)
