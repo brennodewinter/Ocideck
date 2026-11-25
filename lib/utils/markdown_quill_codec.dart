@@ -150,6 +150,12 @@ class MarkdownQuillCodec {
       EmbeddableListBlock.listBlockType: EmbeddableListBlock.toMdSyntax,
       EmbeddableSourceFragment.fragmentType:
           EmbeddableSourceFragment.toMdSyntax,
+      if (emptyParagraph != null) ...{
+        // De omringende Quill-regel schrijft de alineascheiding. Schrijft
+        // de embed die ook, dan leest de documenteditor extra witruimte in.
+        for (final type in _documentBlockTypes) type: _writeBlockData,
+        'divider': (embed, out) => out.write('---'),
+      },
     },
     customTextAttrsHandlers: {
       // `underline` krijgt de <u>-conventie mee terug (#2866): het
@@ -181,6 +187,20 @@ class MarkdownQuillCodec {
       ),
     },
   );
+
+  static const _documentBlockTypes = [
+    EmbeddableTable.tableType,
+    EmbeddableTimelineTable.timelineType,
+    EmbeddableOciMarkedTable.blockType,
+    EmbeddablePentestBlock.blockType,
+    EmbeddableFormBlock.blockType,
+    EmbeddableMermaid.mermaidType,
+    EmbeddableChart.chartType,
+  ];
+
+  static void _writeBlockData(Embed embed, StringSink out) {
+    out.write(embed.value.data);
+  }
 
   static Document documentFromMarkdown(
     String markdown, {

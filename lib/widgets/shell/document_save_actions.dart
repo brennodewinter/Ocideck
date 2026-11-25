@@ -20,6 +20,7 @@ import '../../state/settings_provider.dart'
 import '../../utils/document_front_matter.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/markdown_paste_cleanup.dart';
+import '../../utils/document_blank_lines.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/source_patcher.dart';
 import '../dialogs/document_conflict_dialog.dart';
@@ -284,28 +285,34 @@ MarkdownDocument _patchVisualSave(
   // óók alleen over de body te lopen, met het frontmatter-blok erbuiten.
   final savedSplit = splitDocumentFrontMatter(savedSource);
   final currSplit = splitDocumentFrontMatter(currentSource);
-  final baseline = MarkdownQuillCodec.markdownFromDocument(
-    MarkdownQuillCodec.documentFromMarkdown(
-      normalizeRichTextMarkdownForStorage(savedSplit.body),
-    ),
-  );
+  final normalized = normalizeRichTextMarkdownForStorage(savedSplit.body);
+  final baseline = _visualDocumentRoundTrip(normalized);
   final patched = patchVisualEdits(
     original: savedSplit.body,
     baseline: baseline,
     current: currSplit.body,
+    originalSpacerLines: extraDocumentBlankLineIndices(savedSplit.body),
   );
-  // Een gewijzigde alinea kan door de round-trip over meerdere bronregels
-  // verdeeld zijn. Als de byte-getrouwe patch daardoor tekst laat terugkomen,
-  // bewaar dan de tekst die de gebruiker daadwerkelijk in de editor ziet.
-  // Alleen in dit ambigue geval gaat de oorspronkelijke Markdown-opmaak verloren.
-  final verified = MarkdownQuillCodec.markdownFromDocument(
-    MarkdownQuillCodec.documentFromMarkdown(normalizeRichTextMarkdown(patched)),
+  // Een gewijzigde alinea kan op schijf over meerdere regels verdeeld zijn.
+  // Controleer met dezelfde codec als de editor of de bronpatch de zichtbare
+  // bewerking weergeeft, inclusief ingevoegde en verwijderde witruimte.
+  final verified = _visualDocumentRoundTrip(
+    normalizeRichTextMarkdownForStorage(patched),
   );
   final sourceToSave = verified == currSplit.body ? patched : currSplit.body;
   // Neem het huidige blok terug, niet het opgeslagen: zo overleeft een
   // tussentijdse stijl-/TLP-wijziging de opslag.
   return document.withSource(currSplit.block + sourceToSave);
 }
+
+String _visualDocumentRoundTrip(String body) =>
+    MarkdownQuillCodec.markdownFromDocument(
+      MarkdownQuillCodec.documentFromMarkdown(
+        body,
+        preserveDocumentSpacing: true,
+      ),
+      preserveDocumentSpacing: true,
+    );
 
 /// Wat de conflictlus teruggeeft aan [saveDocumentWithDestination].
 enum _DocSaveOutcome { proceed, saved, abort }

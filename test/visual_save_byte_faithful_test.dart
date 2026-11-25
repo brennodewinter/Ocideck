@@ -14,6 +14,7 @@ import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/utils/markdown_paste_cleanup.dart';
 import 'package:ocideck/utils/source_patcher.dart';
+import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/shell/document_save_actions.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,7 +36,11 @@ void main() {
   /// Markdown. Dit is de baseline — wat de codec produceert zónder
   /// bewerkingen.
   String roundTrip(String source) => MarkdownQuillCodec.markdownFromDocument(
-    MarkdownQuillCodec.documentFromMarkdown(normalizeRichTextMarkdown(source)),
+    MarkdownQuillCodec.documentFromMarkdown(
+      normalizeRichTextMarkdownForStorage(source),
+      preserveDocumentSpacing: true,
+    ),
+    preserveDocumentSpacing: true,
   );
 
   group('patchVisualEdits met echte round-trip', () {
@@ -113,6 +118,70 @@ void main() {
   });
 
   group('saveDocumentWithDestination vanuit Visueel', () {
+    testWidgets('verwijderde witruimte blijft weg na opslaan en heropenen', (
+      tester,
+    ) async {
+      final temp = Directory.systemTemp.createTempSync('visual_save_spacing');
+      addTearDown(() => temp.deleteSync(recursive: true));
+      final file = File(p.join(temp.path, 'brief.md'));
+      const unchanged =
+          'Hoogachtend,\n\n\n'
+          '<!-- ocideck:plain_table v1 -->\n'
+          '| Naam |\n| --- |\n| Afzender |\n\nBijlage.\n';
+      const source = 'Adres\n\n\n\n**Onderwerp**\n\n$unchanged';
+      file.writeAsStringSync(source);
+      final notifier = DocumentNotifier()
+        ..loadDocument(MarkdownDocument.parse(source), filePath: file.path);
+
+      late WidgetRef ref;
+      late BuildContext saveContext;
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [documentProvider.overrideWith((_) => notifier)],
+          child: MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+              FlutterQuillLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Consumer(
+              builder: (context, r, _) {
+                ref = r;
+                saveContext = context;
+                return const DocumentEditorScreen();
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      for (final gap in ['\n\n\n', '\n\n']) {
+        final expected = 'Adres$gap**Onderwerp**\n\n$unchanged';
+        final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+        const spacerOffset = 'Adres\n'.length;
+        expect(quill.controller.document.toPlainText()[spacerOffset], '\uFFFC');
+        quill.controller.replaceText(
+          spacerOffset,
+          1,
+          '',
+          const TextSelection.collapsed(offset: spacerOffset),
+        );
+
+        final saved = await tester.runAsync(
+          () => saveDocumentWithDestination(saveContext, ref, notifier),
+        );
+        expect(saved, isTrue);
+        expect(file.readAsStringSync(), expected);
+        notifier.loadDocument(
+          MarkdownDocument.parse(file.readAsStringSync()),
+          filePath: file.path,
+        );
+        await tester.pumpAndSettle();
+      }
+    });
+
     testWidgets('ambigue regeleinde bewaart de zichtbare tekst', (
       tester,
     ) async {
