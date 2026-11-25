@@ -36,10 +36,16 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  # Iedere push naar main behoudt zijn eigen proef. Voor PR’s volstaat de laatste revisie.
+  group: linux-desktop-start-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   linux-start:
     runs-on: docker
-    timeout-minutes: 60
+    # Een koude native build kan op een drukke runner langer dan een uur duren.
+    timeout-minutes: 120
     container:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
     steps:
@@ -68,6 +74,7 @@ jobs:
           key: pub-linux-smoke-${{ github.event_name }}-${{ hashFiles('pubspec.lock') }}
           restore-keys: |
             pub-linux-smoke-${{ github.event_name }}-
+            pub-linux-${{ hashFiles('pubspec.lock') }}
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get --enforce-lockfile
@@ -87,6 +94,8 @@ jobs:
             .dart_tool/hooks_runner
             build/native_assets
           key: dartcv-linux-smoke-${{ github.event_name }}-${{ steps.dartcv.outputs.versie }}
+          restore-keys: |
+            dartcv-linux-${{ steps.dartcv.outputs.versie }}
 
       - name: Proefgereedschap installeren
         run: bash scripts/prepare_linux_probe.sh desktop
