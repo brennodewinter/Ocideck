@@ -4793,7 +4793,7 @@ const _dutchSourceAddId = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Teks berkelanjutan, halaman, ekspor ke PDF atau Word',
   'Uiterlijk van de app': 'Tampilan aplikasi',
-  'Uiterlijk van dia\'s': 'Tampilan slide',
+  'Stijlen': 'Gaya',
   'Privacy en classificatie': 'Privasi dan klasifikasi',
   'Uiterlijk van documenten': 'Tampilan dokumen',
   'Exportkwaliteit': 'Kualitas ekspor',

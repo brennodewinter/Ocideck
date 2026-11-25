@@ -4799,7 +4799,7 @@ const _dutchSourceAddLt = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Ištisinis tekstas, puslapiai, eksportuoti į PDF arba Word',
   'Uiterlijk van de app': 'Programos išvaizda',
-  'Uiterlijk van dia\'s': 'Skaidrių išvaizda',
+  'Stijlen': 'Stiliai',
   'Privacy en classificatie': 'Privatumas ir klasifikacija',
   'Uiterlijk van documenten': 'Dokumentų išvaizda',
   'Exportkwaliteit': 'Eksporto kokybė',

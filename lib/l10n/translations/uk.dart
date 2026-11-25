@@ -4804,7 +4804,7 @@ const _dutchSourceAddUk = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Неперервний текст, сторінки, експорт у PDF або Word',
   'Uiterlijk van de app': 'Вигляд застосунку',
-  'Uiterlijk van dia\'s': 'Вигляд слайдів',
+  'Stijlen': 'Стилі',
   'Privacy en classificatie': 'Конфіденційність та класифікація',
   'Uiterlijk van documenten': 'Вигляд документів',
   'Exportkwaliteit': 'Якість експорту',

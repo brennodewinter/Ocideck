@@ -4023,7 +4023,7 @@ const _dutchSourceAddEn = {
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Continuous text, pages, export to PDF or Word',
   'Uiterlijk van de app': 'App appearance',
-  'Uiterlijk van dia\'s': 'Slide appearance',
+  'Stijlen': 'Styles',
   'Privacy en classificatie': 'Privacy and classification',
   'Uiterlijk van documenten': 'Document appearance',
   'Exportkwaliteit': 'Export quality',

@@ -4810,7 +4810,7 @@ const _dutchSourceAddLa = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Textus continuus, paginae, in PDF vel Word exportare',
   'Uiterlijk van de app': 'Aspectus applicationis',
-  'Uiterlijk van dia\'s': 'Aspectus diapositivarum',
+  'Stijlen': 'Styli',
   'Privacy en classificatie': 'Privatitas et Classificatio',
   'Uiterlijk van documenten': 'Aspectus documentorum',
   'Exportkwaliteit': 'Qualitas exportationis',

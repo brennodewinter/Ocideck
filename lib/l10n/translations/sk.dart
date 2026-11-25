@@ -4790,7 +4790,7 @@ const _dutchSourceAddSk = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Súvislý text, strany, exportovať do PDF alebo Word',
   'Uiterlijk van de app': 'Vzhľad aplikácie',
-  'Uiterlijk van dia\'s': 'Vzhľad snímok',
+  'Stijlen': 'Štýly',
   'Privacy en classificatie': 'Súkromie a klasifikácia',
   'Uiterlijk van documenten': 'Vzhľad dokumentov',
   'Exportkwaliteit': 'Kvalita exportu',

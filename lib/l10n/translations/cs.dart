@@ -4777,7 +4777,7 @@ const _dutchSourceAddCs = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Souvislý text, stránky, exportovat do PDF nebo Word',
   'Uiterlijk van de app': 'Vzhled aplikace',
-  'Uiterlijk van dia\'s': 'Vzhled snímků',
+  'Stijlen': 'Styly',
   'Privacy en classificatie': 'Soukromí a klasifikace',
   'Uiterlijk van documenten': 'Vzhled dokumentů',
   'Exportkwaliteit': 'Kvalita exportu',

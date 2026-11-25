@@ -4783,7 +4783,7 @@ const _dutchSourceAddEt = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Pidev tekst, leheküljed, ekspordi PDF-i või Wordi',
   'Uiterlijk van de app': 'Rakenduse välimus',
-  'Uiterlijk van dia\'s': 'Slaidide välimus',
+  'Stijlen': 'Stiilid',
   'Privacy en classificatie': 'Privaatsus ja klassifikatsioon',
   'Uiterlijk van documenten': 'Dokumentide välimus',
   'Exportkwaliteit': 'Ekspordi kvaliteet',

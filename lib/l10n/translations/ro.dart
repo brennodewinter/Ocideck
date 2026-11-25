@@ -4850,7 +4850,7 @@ const _dutchSourceAddRo = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Text continuu, pagini, exportă în PDF sau Word',
   'Uiterlijk van de app': 'Aspectul aplicației',
-  'Uiterlijk van dia\'s': 'Aspectul diapozitivelor',
+  'Stijlen': 'Stiluri',
   'Privacy en classificatie': 'Confidențialitate și clasificare',
   'Uiterlijk van documenten': 'Aspectul documentelor',
   'Exportkwaliteit': 'Calitatea exportului',

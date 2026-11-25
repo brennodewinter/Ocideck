@@ -4875,7 +4875,7 @@ const _dutchSourceAddGa = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Téacs leanúnach, leathanaigh, onnmhairigh go PDF nó Word',
   'Uiterlijk van de app': 'Cuma na haipe',
-  'Uiterlijk van dia\'s': 'Cuma na sleamhnán',
+  'Stijlen': 'Stíleanna',
   'Privacy en classificatie': 'Príobháideacht agus Aicmiú',
   'Uiterlijk van documenten': 'Cuma na gcáipéisí',
   'Exportkwaliteit': 'Cáilíocht easpórtála',

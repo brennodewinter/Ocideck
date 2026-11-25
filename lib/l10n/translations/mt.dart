@@ -4856,7 +4856,7 @@ const _dutchSourceAddMt = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Test kontinwu, paġni, esporta għal PDF jew Word',
   'Uiterlijk van de app': 'Dehra tal-app',
-  'Uiterlijk van dia\'s': 'Dehra tas-slajds',
+  'Stijlen': 'Stili',
   'Privacy en classificatie': 'Privatezza u klassifikazzjoni',
   'Uiterlijk van documenten': 'Dehra tad-dokumenti',
   'Exportkwaliteit': 'Kwalità tal-esportazzjoni',

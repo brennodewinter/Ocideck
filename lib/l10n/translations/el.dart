@@ -4879,7 +4879,7 @@ const _dutchSourceAddEl = <String, String>{
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Συνεχές κείμενο, σελίδες, εξαγωγή σε PDF ή Word',
   'Uiterlijk van de app': 'Εμφάνιση εφαρμογής',
-  'Uiterlijk van dia\'s': 'Εμφάνιση διαφανειών',
+  'Stijlen': 'Στυλ',
   'Privacy en classificatie': 'Απόρρητο και Ταξινόμηση',
   'Uiterlijk van documenten': 'Εμφάνιση εγγράφων',
   'Exportkwaliteit': 'Ποιότητα εξαγωγής',
