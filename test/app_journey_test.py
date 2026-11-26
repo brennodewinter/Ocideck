@@ -1,6 +1,8 @@
 """Executable failure propagation and immutable mirror matching for #3214."""
 import importlib.util
 import json
+import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -20,6 +22,40 @@ def module(name, relative):
 
 journey = module('app_journey', 'tool/app_journey.py')
 mirror = module('windows_journey', 'scripts/wait_windows_app_journey.py')
+
+
+def semantics_fixture(directory):
+    root = Path(directory)
+    sdk = root / 'SDK with spaces'
+    (sdk / 'bin/cache').mkdir(parents=True)
+    subprocess.run(['git', 'init', '-q', str(sdk)], check=True)
+    (sdk / 'seed.txt').write_text('original\n')
+    subprocess.run(['git', '-C', str(sdk), 'add', 'seed.txt'], check=True)
+    subprocess.run(['git', '-C', str(sdk), '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', 'commit', '-qm', 'fixture'], check=True)
+    fake = sdk / 'bin/flutter'
+    fake.write_text('#!' + sys.executable + '\n' + """import json,sys
+from pathlib import Path
+sdk=Path(__file__).resolve().parents[1]
+if sys.argv[1:]==['--version','--machine']:
+ print(json.dumps(dict(frameworkRevision='ab2912035e160d9cad6306df307576da6128ebdb',flutterRoot=str(sdk))))
+else:
+ assert (sdk/'seed.txt').read_text()=='patched\\n'
+ (sdk/'built').write_text('done')
+""")
+    fake.chmod(0o755)
+    project = root / 'project'
+    (project / 'scripts').mkdir(parents=True)
+    script = project / 'scripts/with_macos_flutter_semantics_fix.sh'
+    shutil.copyfile(ROOT / 'scripts/with_macos_flutter_semantics_fix.sh', script)
+    patches = project / 'third_party/flutter_patches'
+    patches.mkdir(parents=True)
+    (patches / '3.50.0-semantics-b304cf1.patch').write_text(
+        '--- a/seed.txt\n+++ b/seed.txt\n@@ -1 +1 @@\n-original\n+patched\n')
+    lock = sdk / 'bin/cache/ocideck-macos-semantics.lock'
+    lock.mkdir()
+    environment = dict(os.environ, PATH=str(sdk / 'bin') + os.pathsep + os.environ['PATH'],
+                       OCIDECK_MACOS_SEMANTICS_LOCK_TIMEOUT='5')
+    return sdk, script, lock, environment
 
 
 class AppJourneyTest(unittest.TestCase):
@@ -87,6 +123,35 @@ class AppJourneyTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory, patch.object(mirror, 'get', side_effect=responses):
             with self.assertRaisesRegex(RuntimeError, 'Missing or unsuccessful'):
                 mirror.wait(sha, 'main', True, Path(directory), timeout=1)
+
+
+    @unittest.skipIf(os.name == 'nt', 'The macOS SDK copy uses Bash')
+    def test_macos_journey_isolates_an_already_patched_and_locked_shared_sdk(self):
+        with tempfile.TemporaryDirectory() as directory:
+            sdk, wrapper, lock, environment = semantics_fixture(directory)
+            prepare = wrapper.parent / 'prepare_macos_app_journey_sdk.sh'
+            shutil.copyfile(ROOT / 'scripts/prepare_macos_app_journey_sdk.sh', prepare)
+            patch_file = wrapper.parent.parent / 'third_party/flutter_patches/3.50.0-semantics-b304cf1.patch'
+            subprocess.run(['git', '-C', str(sdk), 'apply', str(patch_file)], check=True)
+            runner_temp = Path(directory) / 'runner-temp'
+            runner_temp.mkdir()
+            environment.update(RUNNER_TEMP=str(runner_temp),
+                               GITHUB_ENV=str(runner_temp / 'env'), GITHUB_PATH=str(runner_temp / 'path'))
+            prepared = subprocess.run(['bash', str(prepare)], env=environment,
+                                      capture_output=True, text=True, timeout=15)
+            self.assertEqual(prepared.returncode, 0, prepared.stdout + prepared.stderr)
+            isolated = Path((runner_temp / 'env').read_text().strip().split('=', 1)[1])
+            self.assertNotEqual(sdk, isolated)
+            self.assertEqual((isolated / 'seed.txt').read_text(), 'original\n')
+            self.assertFalse((isolated / 'bin/cache/ocideck-macos-semantics.lock').exists())
+            environment['PATH'] = str(isolated / 'bin') + os.pathsep + environment['PATH']
+            built = subprocess.run(['bash', str(wrapper), 'build', 'macos'], env=environment,
+                                   capture_output=True, text=True, timeout=15)
+            self.assertEqual(built.returncode, 0, built.stdout + built.stderr)
+            self.assertTrue((isolated / 'built').exists())
+            self.assertEqual((isolated / 'seed.txt').read_text(), 'original\n')
+            self.assertEqual((sdk / 'seed.txt').read_text(), 'patched\n')
+            self.assertTrue(lock.is_dir())
 
 
 if __name__ == '__main__':

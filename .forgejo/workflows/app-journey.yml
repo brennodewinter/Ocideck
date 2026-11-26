@@ -94,6 +94,8 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+      - name: Geïsoleerde SDK voor de native reis
+        run: bash scripts/prepare_macos_app_journey_sdk.sh
       - name: Gepinde SDK en afhankelijkheden
         run: |
           make check-toolchain
@@ -115,6 +117,17 @@ jobs:
           path: build/app-journey/
           if-no-files-found: warn
           retention-days: 7
+      - name: Alleen de tijdelijke reis-SDK opruimen
+        if: always()
+        run: |
+          set -eu
+          if [ -n "${APP_JOURNEY_SDK:-}" ]; then
+            journey_temp="$(cd "$RUNNER_TEMP" && pwd -P)"
+            case "$APP_JOURNEY_SDK" in
+              "$journey_temp"/flutter-app-journey.*) rm -rf -- "$APP_JOURNEY_SDK" ;;
+              *) echo 'Unexpected app-journey SDK cleanup path' >&2; exit 1 ;;
+            esac
+          fi
   windows:
     name: app-reis Windows (spiegel)
     runs-on: docker

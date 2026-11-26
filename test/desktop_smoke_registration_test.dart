@@ -38,6 +38,17 @@ void main() {
       expect(artifact['if'], 'always()');
       expect(artifact['with']['path'], 'build/app-journey/');
     }
+    final macosSteps = steps(forge['jobs']['macos'] as YamlMap);
+    expect(macosSteps, contains('prepare_macos_app_journey_sdk.sh'));
+    expect(macosSteps, contains('flutter-app-journey.*'));
+    final cleanup = (forge['jobs']['macos']['steps'] as YamlList)
+        .whereType<YamlMap>()
+        .singleWhere(
+          (step) => '${step['run']}'.contains(
+            'Unexpected app-journey SDK cleanup path',
+          ),
+        );
+    expect(cleanup['if'], 'always()');
     final mirror = workflow('.github/workflows/windows-app-journey.yml');
     expect(mirror['on']['push']['branches'], contains('**'));
     expect(mirror['on']['schedule'], isNotEmpty);
