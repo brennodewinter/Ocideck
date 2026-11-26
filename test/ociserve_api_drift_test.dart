@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  1a8e8cdbd0a663dfe59874b5bf702b54ed345569
+// OciServe commit:  fe6594a15c64b217adf7bff50683e40da06d7972
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -16,12 +16,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = '1a8e8cdbd0a663dfe59874b5bf702b54ed345569';
+const pinnedOciServeCommit = 'fe6594a15c64b217adf7bff50683e40da06d7972';
 
 /// SHA-256 of the pinned spec file itself — a spec silently replaced or
 /// hand-edited shows up here, not in a subtle field rename.
 const pinnedOciServeSpecSha256 =
-    'cee649bdb8ca612a5e2831ace86917dff763016c5052a3447f9868eb0d2ae100';
+    'a87dc3f76818c62a2046f9037d0679d62c400e98d1f551f77b6a4a982c43e461';
 
 /// The capability catalogue the pinned spec declares (`info.x-capability-
 /// catalog-version`) and the intake capabilities OciDeck may rely on.
@@ -64,6 +64,29 @@ class GatewayRoute {
 const gatewayRoutes = <GatewayRoute>[
   GatewayRoute(
     method: 'GET',
+    path: '/api/v1/auth/web/login',
+    responseFields: [],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/auth/web/logout',
+    responseFields: [],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/auth/web/ocideck-session',
+    responseSchema: 'OciDeckWebSession',
+    responseFields: [
+      'session_id',
+      'csrf_token',
+      'login_request_id',
+      'issuer',
+      'expires_at',
+      'idle_expires_at',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
     path: '/api/v1/organizations/{}/files',
     responseFields: ['folder', 'breadcrumbs', 'items', 'next_cursor'],
     responseSchema: 'FileCatalogPage',
@@ -85,6 +108,10 @@ const gatewayRoutes = <GatewayRoute>[
     responseFields: [
       'id',
       'root_id',
+      'target_name',
+      'target_kind',
+      'snapshot_items',
+      'snapshot_bytes',
       'expires_at',
       'status',
       'password_protected',
@@ -137,7 +164,11 @@ const gatewayRoutes = <GatewayRoute>[
     security: 'none',
     responseSchema: 'InstallationStatus',
     // OciDeck reads these from the top level (with an oidc.* fallback).
-    responseFields: ['ocideck_native_client_id', 'oidc_issuer'],
+    responseFields: [
+      'ocideck_native_client_id',
+      'oidc_issuer',
+      'ocideck_web_session',
+    ],
   ),
   GatewayRoute(
     method: 'GET',
@@ -815,11 +846,11 @@ const unusedSpecRoutes = <String, String>{
       'gedetailleerde examenreview voor beheerders, buiten deze bestandsintegratie',
 
   // Browserflows van Keiko, niet van OciDeck.
-  'GET /api/v1/auth/web/login': 'browseraanmelding van Keiko',
-  'GET /api/v1/auth/web/callback': 'browseraanmelding van Keiko',
+  'GET /api/v1/auth/web/callback': 'OIDC redirect afgehandeld door de server',
+  'GET /api/v1/auth/web/ocideck-complete':
+      'statische completionpagina in aanmeldvenster',
   'GET /api/v1/auth/web/me': 'browseraanmelding van Keiko',
   'GET /api/v1/auth/web/provider-logout': 'browseraanmelding van Keiko',
-  'POST /api/v1/auth/web/logout': 'browseraanmelding van Keiko',
   'POST /api/v1/auth/web/backchannel-logout': 'browseraanmelding van Keiko',
   'POST /api/v1/auth/keiko-login': 'auditpunt van Keiko, niet van OciDeck',
   'POST /api/v1/auth/logout':

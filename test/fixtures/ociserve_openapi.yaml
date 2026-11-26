@@ -726,6 +726,9 @@ paths:
         parameters. When the server requires an ACR, it is sent as
         `acr_values`. Rate-limited per client IP.
       parameters:
+        - { name: application, in: query, schema: { type: string, enum: [ocideck] }, description: Optional configured OciDeck BFF flow. Omit for the existing Keiko flow. }
+        - { name: request_id, in: query, schema: { type: string, pattern: '^[a-zA-Z0-9_-]{20,80}$' }, description: Required for OciDeck. Correlates an interactive login without carrying credentials. }
+
         - name: login_hint
           in: query
           required: false
@@ -831,6 +834,43 @@ paths:
           $ref: '#/components/responses/ProblemResponse'
         "500":
           $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/auth/web/ocideck-session:
+    get:
+      tags: [WebAuth]
+      security: []
+      summary: Restore an OciDeck browser session without exposing OAuth tokens
+      description: |
+        Requires an OciDeck HttpOnly session cookie, the configured OciDeck
+        Host, Sec-Fetch-Site same-origin, and X-OciServe-Client ocideck.
+        Origin, when present, must exactly match the configured HTTPS origin.
+        Returns CSRF material and a non-credential session binding in no-store
+        JSON. OAuth tokens stay in the encrypted server-side envelope.
+        Authenticated OciDeck API requests send X-OciServe-Session with this
+        binding; a replaced cookie is rejected before the operation executes.
+      parameters:
+        - { name: X-OciServe-Client, in: header, required: true, schema: { type: string, enum: [ocideck] } }
+      responses:
+        "200":
+          description: Session metadata and CSRF token.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OciDeckWebSession' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/auth/web/ocideck-complete:
+    get:
+      tags: [WebAuth]
+      security: []
+      summary: Credential-free completion page for the OciDeck login window
+      responses:
+        "200":
+          description: Static HTML telling the user to return to the existing OciDeck window.
+          content:
+            text/html: { schema: { type: string } }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
 
   /api/v1/auth/web/me:
     get:
@@ -12127,6 +12167,10 @@ components:
       type: object
       required: [id, root_id, created_at, expires_at, password_protected, revision, status]
       properties:
+        target_name: { type: string, description: Root name from the immutable snapshot; absent after snapshot erasure. }
+        target_kind: { type: string, enum: [file, directory] }
+        snapshot_items: { type: integer, format: int64, description: Snapshot nodes including the root and empty folders. }
+        snapshot_bytes: { type: integer, format: int64 }
         id: { type: string, format: uuid }
         root_id: { type: string, format: uuid }
         created_at: { type: string, format: date-time }
@@ -14973,10 +15017,22 @@ components:
           type: string
           format: date-time
 
+    OciDeckWebSession:
+      type: object
+      required: [session_id, csrf_token, login_request_id, issuer, expires_at, idle_expires_at]
+      properties:
+        session_id: { type: string, format: uuid, description: Session binding identifier, not a bearer credential. }
+        csrf_token: { type: string, description: Synchronizer token for same-origin cookie mutations; keep only in memory. }
+        login_request_id: { type: string }
+        issuer: { type: string, format: uri }
+        expires_at: { type: string, format: date-time }
+        idle_expires_at: { type: string, format: date-time }
+
     InstallationStatus:
       type: object
       required: [status, oidc_issuer]
       properties:
+        ocideck_web_session: { type: boolean, default: false, description: The OciDeck same-origin BFF flow is explicitly configured and enabled. }
         status:
           type: string
           enum: [setup_required, ready]
