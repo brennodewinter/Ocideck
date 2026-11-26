@@ -93,4 +93,82 @@ void main() {
     expect(result.slides.single.type, SlideType.freeMarkdown);
     expect(result.slides.single.cssClass, contains('eigenklasse'));
   });
+
+  // #3278: de gedeelde schrijver plaatst de audiobijlage achter élke diabody —
+  // ook achter een verbatim bewaarde vrije-Markdown-body. Las die regel terug
+  // als bodytekst, dan groeide `customMarkdown` met elke opslag rond één
+  // bijlage. De interactie tussen `customMarkdown` en `audioPath` moet
+  // stabiel zijn: de gegenereerde regel gaat weer in het veld, de body van
+  // de auteur blijft ongemoeid.
+  test('een audiobijlage landt niet in de bewaarde vrije-Markdown-body', () {
+    const body = 'Een **vrije** tekst';
+    var deck = Deck(
+      title: 'Demo',
+      slides: [
+        Slide.create(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: body, audioPath: 'audio/base.mp3'),
+      ],
+    );
+
+    for (var save = 0; save < 2; save++) {
+      final markdown = md.generateDeck(deck);
+      expect(
+        '<audio'.allMatches(markdown).length,
+        1,
+        reason: 'opslag ${save + 1}: precies één bijlageregel',
+      );
+      deck = md.parseDeck(markdown)!;
+      final slide = deck.slides.single;
+      expect(slide.customMarkdown, body);
+      expect(slide.audioPath, 'audio/base.mp3');
+    }
+  });
+
+  test('door de auteur getypte audio-HTML blijft in de body staan', () {
+    const authored = '<audio controls src="audio/eigen.mp3"></audio>';
+    const body = 'Een tekst\n\n$authored\n\nNog een regel';
+    var deck = Deck(
+      title: 'Demo',
+      slides: [
+        Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: body),
+      ],
+    );
+
+    for (var save = 0; save < 2; save++) {
+      deck = roundTrip(deck);
+      expect(deck.slides.single.customMarkdown, body);
+    }
+  });
+
+  test('broedertypes met bewaarde body liften de bijlage óók', () {
+    for (final type in [
+      SlideType.title,
+      SlideType.finding,
+      SlideType.objective,
+    ]) {
+      const body = 'De bewaarde tekst';
+      var deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            type,
+          ).copyWith(customMarkdown: body, audioPath: 'audio/a.mp3'),
+        ],
+      );
+      for (var save = 0; save < 2; save++) {
+        deck = roundTrip(deck);
+        expect(
+          deck.slides.single.customMarkdown,
+          isNot(contains('<audio')),
+          reason: '${type.name} na opslag ${save + 1}',
+        );
+        expect(
+          deck.slides.single.audioPath,
+          'audio/a.mp3',
+          reason: '${type.name} na opslag ${save + 1}',
+        );
+      }
+    }
+  });
 }
