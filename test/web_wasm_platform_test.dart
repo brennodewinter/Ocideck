@@ -11,7 +11,8 @@ import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/ociserve/ociserve_auth_platform.dart';
 import 'package:ocideck/services/ociserve/ociserve_http_factory.dart';
 import 'package:ocideck/services/ociserve/ociserve_public_http_web.dart'
-    show OciServeBrowserHttpTransport;
+    show OciServeBrowserHttpTransport, ociServeBrowserResponseHeaders;
+import 'package:ocideck/services/ociserve/ociserve_step_up.dart';
 import 'package:ocideck/services/update_check_fetch.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/utils/mem_asset_blob.dart';
@@ -52,6 +53,25 @@ void main() {
       );
     },
   );
+
+  test('browser responses retain step-up and package integrity contracts', () {
+    final headers = web.Headers()
+      ..set(
+        'WWW-Authenticate',
+        'Bearer error="insufficient_user_authentication", acr_values="mfa", max_age="60"',
+      )
+      ..set('Digest', 'sha-256=package-digest-canary')
+      ..set('Cache-Control', 'no-store')
+      ..set('X-OciServe-Package-Profile', 'ae2');
+    final received = ociServeBrowserResponseHeaders(headers);
+    final need = parseOciServeStepUpChallenge(received);
+    expect(need?.acrValues, ['mfa']);
+    expect(need?.maxAge, const Duration(seconds: 60));
+    expect(received['digest'], 'sha-256=package-digest-canary');
+    expect(received['cache-control'], 'no-store');
+    expect(received['x-ociserve-package-profile'], 'ae2');
+    expect(received.containsKey('set-cookie'), isFalse);
+  });
 
   test(
     'presentation import uses the browser runner instead of spawning an isolate',

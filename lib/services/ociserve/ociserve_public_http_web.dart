@@ -99,15 +99,7 @@ class OciServeBrowserHttpTransport
       return OciServeHttpResponse(
         statusCode: response.status,
         body: bytes.takeBytes(),
-        headers: {
-          for (final key in [
-            'content-type',
-            'content-length',
-            'etag',
-            'retry-after',
-          ])
-            key: ?response.headers.get(key),
-        },
+        headers: ociServeBrowserResponseHeaders(response.headers),
       );
     } on OciServeTransportException {
       rethrow;
@@ -129,3 +121,19 @@ class OciServeBrowserHttpTransport
     }
   }
 }
+
+/// Preserve the gateway's authentication and authenticated-package contracts.
+/// Fetch itself filters forbidden response headers, including Set-Cookie.
+Map<String, String> ociServeBrowserResponseHeaders(web.Headers headers) => {
+  for (final key in const [
+    'content-type',
+    'content-length',
+    'etag',
+    'retry-after',
+    'www-authenticate',
+    'cache-control',
+    'digest',
+    'x-ociserve-package-profile',
+  ])
+    key: ?headers.get(key),
+};
