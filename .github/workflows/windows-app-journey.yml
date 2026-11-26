@@ -1,0 +1,70 @@
+# Bouwspiegel: een push van iedere Pawprint-werkbranch toetst de PR-commit.
+# Er worden hier geen GitHub-issues of PRs gemaakt.
+name: app-reis Windows
+on:
+  push:
+    branches: ['**']
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      full:
+        description: Run the full nightly scenario set
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: windows-app-journey-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
+jobs:
+  journey:
+    name: app-reis Windows (${{ (github.event_name == 'schedule' || inputs.full) && 'full' || 'short' }})
+    runs-on: windows-2022
+    timeout-minutes: 145
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          channel: stable
+          flutter-version: 3.50.0
+          cache: true
+      - name: Native compiler-image vastleggen
+        id: compiler
+        shell: bash
+        run: echo "image=${ImageVersion:-unknown}" >> "$GITHUB_OUTPUT"
+      - name: Native compilatie hergebruiken, nooit testresultaten
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            .dart_tool/hooks_runner/shared
+            build/windows/x64
+          key: windows-app-journey-${{ github.event_name }}-${{ steps.compiler.outputs.image }}-${{ hashFiles('pubspec.lock', '.tool-versions', 'windows/**/CMakeLists.txt', 'third_party/**/CMakeLists.txt') }}-${{ github.sha }}
+          restore-keys: |
+            windows-app-journey-${{ github.event_name }}-${{ steps.compiler.outputs.image }}-${{ hashFiles('pubspec.lock', '.tool-versions', 'windows/**/CMakeLists.txt', 'third_party/**/CMakeLists.txt') }}-
+      - name: Afhankelijkheden
+        run: flutter pub get --enforce-lockfile
+      - name: Ondersteunde WebView2 voor de volledige videoreis
+        if: ${{ github.event_name == 'schedule' || inputs.full }}
+        shell: pwsh
+        run: '& ./scripts/prepare_windows_video.ps1 -EvidenceDirectory build/app-journey/video-runtime'
+      - name: Korte PR-reis of volledige nachtreis
+        shell: bash
+        env:
+          FULL: ${{ github.event_name == 'schedule' || inputs.full }}
+        run: |
+          set -eu
+          python -m unittest discover -s test -p app_journey_test.py
+          full_arg=''
+          if [ "$FULL" = true ]; then full_arg=--full; fi
+          python tool/app_journey.py $full_arg
+      - name: Bewijs bewaren, ook als een scenario faalt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: app-journey-windows-${{ github.sha }}
+          path: build/app-journey/
+          if-no-files-found: warn
+          retention-days: 7

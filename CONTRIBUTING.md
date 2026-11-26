@@ -148,6 +148,7 @@ Individual steps:
 | `make analyze` | `flutter analyze --fatal-infos` (analyzer + lints + strict type checks). |
 | `make check-conventions` | No `print()`; no raw control bytes; the bare `catch (_)`, raw-colour, layering, file-size and class-size ratchets may not grow. |
 | `make check-roundtrip-field-parity` | Every Slide/ThemeProfile field has a non-default storage assertion or a reasoned transient exclusion; includes document style selection. |
+| `make test-app-journey` | Shared short native PR journey; `FULL=true` runs the nightly persistence, navigation and Windows video set. |
 | `make test-desktop-roundtrip` | All slide types and persistent fields through Markdown/package storage and rename/move/Save as in six app processes. Run for storage/file-operation changes. |
 | `make test-desktop-smoke` | Two real app processes: open/add/save/close/reopen; native Cmd+Q dirty-work guard on macOS. Run for desktop lifecycle changes. |
 | `make test` | The full test suite (randomised order). |

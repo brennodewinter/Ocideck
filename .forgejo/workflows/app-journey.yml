@@ -1,0 +1,156 @@
+# Eén vaste native reis per platform. Windows draait op de bestaande bouwspiegel.
+name: app-reis
+on:
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '27 3 * * *'
+  workflow_dispatch:
+    inputs:
+      full:
+        description: Full set (also dispatch windows-app-journey.yml with full=true on the mirror)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: app-journey-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  linux:
+    name: app-reis Linux
+    runs-on: docker
+    timeout-minutes: 150
+    env:
+      PUB_CACHE: /home/ubuntu/.pub-cache
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Gepinde SDK en werkkopie
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory /opt/flutter
+          make check-toolchain
+      - name: Native desktopomgeving
+        run: |
+          apt-get update
+          bash scripts/prepare_linux_probe.sh desktop
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv-dev libgl1-mesa-dri libegl-mesa0
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: /home/ubuntu/.pub-cache
+          key: pub-app-journey-${{ github.event_name }}-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-
+      - name: Afhankelijkheden voor de gewone desktopgebruiker
+        run: |
+          set -eu
+          install -d -o ubuntu -g ubuntu "$PUB_CACHE"
+          chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE" "$PUB_CACHE" /opt/flutter/packages/flutter_tools/.dart_tool
+          runuser --user ubuntu --preserve-environment -- env HOME=/home/ubuntu flutter pub get --enforce-lockfile
+      - name: dartcv4-versie uit de lockfile
+        id: dartcv
+        run: |
+          VERSIE="$(grep -A8 '^  dartcv4:' pubspec.lock | grep 'version:' | sed 's/.*version: "//;s/".*//')"
+          test -n "$VERSIE"
+          echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        continue-on-error: true
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-app-journey-${{ github.event_name }}-${{ steps.dartcv.outputs.versie }}
+      - name: Korte PR-reis of volledige nachtreis
+        env:
+          FULL: ${{ github.event_name == 'schedule' || inputs.full == true || inputs.full == 'true' }}
+        run: |
+          set -eu
+          python3 -m unittest discover -s test -p app_journey_test.py
+          full_arg=''
+          if [ "$FULL" = true ]; then full_arg=--full; fi
+          chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE"
+          runuser --user ubuntu --preserve-environment -- env HOME=/home/ubuntu \
+            xvfb-run -a scripts/gate_lock.sh python3 tool/app_journey.py $full_arg
+      - name: Bewijs bewaren, ook als een scenario faalt
+        if: always()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: app-journey-linux-${{ github.sha }}
+          path: build/app-journey/
+          if-no-files-found: warn
+          retention-days: 7
+  macos:
+    name: app-reis macOS
+    # Een persistente desktophost voert alleen eigen repo-takken uit. Een fork
+    # moet eerst op een maintainerbranch worden gezet, niet stil groen overslaan.
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: macos
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Gepinde SDK en afhankelijkheden
+        run: |
+          make check-toolchain
+          flutter pub get --enforce-lockfile
+      - name: Korte PR-reis of volledige nachtreis
+        env:
+          FULL: ${{ github.event_name == 'schedule' || inputs.full == true || inputs.full == 'true' }}
+        run: |
+          set -eu
+          python3 -m unittest discover -s test -p app_journey_test.py
+          full_arg=''
+          if [ "$FULL" = true ]; then full_arg=--full; fi
+          scripts/gate_lock.sh python3 tool/app_journey.py $full_arg
+      - name: Bewijs bewaren, ook als een scenario faalt
+        if: always()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: app-journey-macos-${{ github.sha }}
+          path: build/app-journey/
+          if-no-files-found: warn
+          retention-days: 7
+  windows:
+    name: app-reis Windows (spiegel)
+    runs-on: docker
+    timeout-minutes: 155
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: De automatische Windows-reis van dezelfde bron afwachten
+        env:
+          JOURNEY_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          JOURNEY_BRANCH: ${{ github.head_ref || github.ref_name }}
+          FULL: ${{ github.event_name == 'schedule' || inputs.full == true || inputs.full == 'true' }}
+          EVENT: ${{ github.event_name }}
+          FORK: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        run: |
+          set -eu
+          if [ "$FORK" = true ]; then
+            echo 'Fork commits need a maintainer branch on Pawprint for Windows mirroring and the trusted Mac host.' >&2
+            exit 1
+          fi
+          full_arg=''
+          if [ "$FULL" = true ]; then full_arg=--full; fi
+          event=push
+          if [ "$FULL" = true ]; then
+            event=schedule
+            if [ "$EVENT" = workflow_dispatch ]; then event=workflow_dispatch; fi
+          fi
+          python3 scripts/wait_windows_app_journey.py --event "$event" $full_arg
+      - name: Windows-runidentiteit bewaren, ook bij fouten
+        if: always()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: app-journey-windows-link-${{ github.sha }}
+          path: build/app-journey/windows/
+          if-no-files-found: warn
+          retention-days: 7

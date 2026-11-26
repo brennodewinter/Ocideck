@@ -128,24 +128,3 @@ jobs:
           path: build/golden-diagnose/
           if-no-files-found: warn
           retention-days: 30
-
-  desktop-lifecycle:
-    runs-on: macos
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v4
-      - name: Afhankelijkheden ophalen
-        run: flutter pub get --enforce-lockfile
-      - name: Echte macOS-app en Cmd+Q-sluitbewaking
-        run: |
-          set -euo pipefail
-          mkdir -p build/desktop-roundtrip
-          make test-desktop-roundtrip DEVICE=macos 2>&1 | tee build/desktop-roundtrip/run.log
-      - name: Bewijs van alle zes appstarts bewaren
-        if: ${{ always() }}
-        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
-        with:
-          name: desktop-lifecycle-macos-${{ github.sha }}
-          path: build/desktop-roundtrip/
-          if-no-files-found: warn
-          retention-days: 7

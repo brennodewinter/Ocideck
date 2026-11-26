@@ -439,8 +439,9 @@ now the only passing state.
 | [`make test-age-interop`](#make-test-age-interop) | Builds the pinned reference `age` (Go, network) and runs the interoperability test of the sealing layer against it | — | — | — | Manual |
 | [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-roundtrip-field-parity`](#make-check-roundtrip-field-parity) | Every Slide and ThemeProfile field has an executable storage case or a reasoned transient exclusion; includes document style selection | ✅ | ✅ | Nightly suite | Maintainer agreement |
-| [`make test-desktop-smoke`](#make-test-desktop-smoke) | Real desktop app processes: open/add/save/native close/reopen, plus the macOS Cmd+Q dirty-work guard | — | — | macOS main/manual; Linux nightly/manual; Windows weekly/manual | Required for desktop lifecycle changes |
-| [`make test-desktop-roundtrip`](#make-test-desktop-roundtrip) | Every slide type, all persistent fields, Markdown/package reopen, rename/move/Save as, six native processes | — | — | macOS main/manual; Linux nightly/manual; Windows weekly/manual | Required for storage and file-operation changes |
+| [`make test-app-journey`](#make-test-app-journey) | Shared native short PR and full nightly scenario set, exact-source Windows mirror bridge | — | — | All PRs; nightly on Linux, macOS and Windows | Required for app-journey changes |
+| [`make test-desktop-smoke`](#make-test-desktop-smoke) | Real desktop app processes: open/add/save/native close/reopen, plus the macOS Cmd+Q dirty-work guard | — | — | Short PR journey on all platforms; full set nightly | Required for desktop lifecycle changes |
+| [`make test-desktop-roundtrip`](#make-test-desktop-roundtrip) | Every slide type, all persistent fields, Markdown/package reopen, rename/move/Save as, six native processes | — | — | Short PR journey on all platforms; full set nightly | Required for storage and file-operation changes |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | Nightly suite | Maintainer agreement |
@@ -1165,6 +1166,42 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
   hervormd die OciDeck aanroept. Werk de pin bij (hierboven) of pas de
   gateway aan.
 
+### `make test-app-journey`
+
+- **Runs:** `python3 tool/app_journey.py` under the native gate lock. The short
+  PR set runs the existing lifecycle harness in two separate app processes.
+  `FULL=true` adds the six-process roundtrip and the existing document-navigation
+  profile on every platform; Windows also runs the existing WebView2 focus,
+  keyboard and live-player scenario. The baseline-ref comparison remains a
+  separate manual diagnostic; automatic navigation needs no baseline.
+- **Automatic lanes:** `.forgejo/workflows/app-journey.yml` runs one journey per
+  platform for PRs to main and nightly at 03:27 UTC. Linux uses the pinned build
+  image and an ordinary desktop user under Xvfb; macOS uses the registered Mac
+  host and its pinned semantics-build wrapper. Windows runs on the GitHub build
+  mirror at every branch push (short) and nightly at 03:17 UTC (full).
+  Pawprint reads the public mirror API and accepts only the same SHA, branch,
+  trigger, workflow and successful mode-specific job. No dispatch credential
+  is passed to PR code. Missing, cancelled or failed runs fail the lane after
+  a bounded wait; an old green run cannot substitute.
+- **Manual full diagnostics:** run `make test-app-journey FULL=true` locally.
+  For the full cross-platform CI set on a workbranch, first dispatch the mirror's
+  `windows-app-journey.yml` with `full=true`, then dispatch Pawprint's
+  `app-journey.yml` on that branch with `full=true`. A normal manual Pawprint
+  dispatch waits for the automatic short Windows branch-push run.
+- **Evidence:** `build/app-journey/journey.json` records the source SHA, dirty
+  state, selected mode, each scenario result and duration. Scenario logs,
+  per-process persistence/exit results, navigation measurements and Windows
+  video/runtime evidence are retained for seven days, including on failure.
+  A non-zero child exit, timeout, missing new driver report or failed mirror job
+  fails the lane. `test/app_journey_test.py` exercises those failure boundaries
+  with a real failing child process and a stale evidence counterexample.
+- **Trust and availability:** the persistent Mac runs same-repository PR heads;
+  fork commits first need a maintainer branch on Pawprint. The Windows bridge
+  reports that requirement as a failure rather than a green skip. An offline
+  Mac queues the PR check. The video journey intentionally retains the existing
+  live YouTube acceptance dependency; its failure remains visible. These native
+  lanes complement the local `make check-full` and do not replace it.
+
 ### `make test-desktop-smoke`
 
 - **Runs:** `tool/run_desktop_smoke.dart` with `flutter drive --profile`,
@@ -1191,10 +1228,10 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
   forced stop. Removing the production exit listener must make this probe fail.
   AppKit event dispatch needs no Accessibility permission; physical keyboard
   delivery and logout remain separate OS-level acceptance work.
-- **CI:** the expanded `test-desktop-roundtrip` scenario below runs on each macOS push to `main` and manual dispatch in
-  `macos-gate.yml`; Linux uses the same scenario in the nightly/manual
-  `linux-gate.yml`; the Windows mirror runs it once in the weekly/manual
-  default `windows-test-check.yml` run. Reports upload even on failure. The
+- **CI:** the short lifecycle scenario runs per PR in `app-journey.yml`;
+  the expanded roundtrip runs nightly on all three platforms. Windows uses the
+  build mirror's automatic branch-push workflow, and Pawprint waits for the run
+  of the exact PR-head SHA. Reports upload even on failure. The
   macOS build uses the existing pinned semantics backport wrapper once, then
   both driver launches use the same prebuilt profile app. After Flutter
   unmounts the test tree, the harness reattaches the real shell around its same
@@ -2197,6 +2234,9 @@ status is required.
 
 | Workflow | Trigger on Pawprint | When it runs |
 | --- | --- | --- |
+| [`app-journey.yml`](../.forgejo/workflows/app-journey.yml) | `pull_request` · `branches` `main` | Automatic before merge |
+| [`app-journey.yml`](../.forgejo/workflows/app-journey.yml) | `schedule` · `27 3 * * *` | Automatic on the default branch, on schedule |
+| [`app-journey.yml`](../.forgejo/workflows/app-journey.yml) | `workflow_dispatch` | On demand |
 | [`ci-image-scans.yml`](../.forgejo/workflows/ci-image-scans.yml) | `workflow_dispatch` | On demand |
 | [`ci-image-scans.yml`](../.forgejo/workflows/ci-image-scans.yml) | `push` · `branches` `main` · `paths` `.forgejo/ci-image/scans.Dockerfile`, `.forgejo/workflows/ci-image-scans.yml`, `.github/pinned-ci-versions.json` | Automatic on push to main |
 | [`ci-image.yml`](../.forgejo/workflows/ci-image.yml) | `workflow_dispatch` | On demand |

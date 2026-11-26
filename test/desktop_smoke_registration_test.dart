@@ -14,54 +14,88 @@ String steps(YamlMap job) => (job['steps'] as YamlList)
     .join('\n');
 
 void main() {
-  test(
-    'macOS drives the real app on main and manual dispatch, with failure evidence',
-    () {
-      final yaml = workflow('.forgejo/workflows/macos-gate.yml');
-      final on = yaml['on'] as YamlMap;
-      expect(on.containsKey('workflow_dispatch'), isTrue);
-      expect(on['push']['branches'], contains('main'));
-      final native = yaml['jobs']['desktop-lifecycle'] as YamlMap;
-      expect(native['runs-on'], 'macos');
-      expect(native['timeout-minutes'], lessThanOrEqualTo(30));
-      expect(
-        steps(native),
-        contains('make test-desktop-roundtrip DEVICE=macos'),
+  test('one automatic short PR and nightly full journey per platform', () {
+    final forge = workflow('.forgejo/workflows/app-journey.yml');
+    final triggers = forge['on'] as YamlMap;
+    expect(triggers['pull_request']['branches'], contains('main'));
+    expect(triggers['schedule'], isNotEmpty);
+    expect(triggers.containsKey('workflow_dispatch'), isTrue);
+    for (final platform in ['linux', 'macos']) {
+      final job = forge['jobs'][platform] as YamlMap;
+      expect(job['runs-on'], platform == 'linux' ? 'docker' : 'macos');
+      final commands = steps(job);
+      expect(commands, contains('tool/app_journey.py'));
+      expect(commands, contains('scripts/gate_lock.sh'));
+      expect(commands, contains('full_arg=--full'));
+      final run = (job['steps'] as YamlList).whereType<YamlMap>().singleWhere(
+        (step) => '${step['run']}'.contains('tool/app_journey.py'),
       );
-      final artifact = (native['steps'] as YamlList)
+      expect(run['env']['FULL'], contains("github.event_name == 'schedule'"));
+      expect(run['continue-on-error'], isNull);
+      final artifact = (job['steps'] as YamlList)
           .whereType<YamlMap>()
           .singleWhere((step) => '${step['uses']}'.contains('upload-artifact'));
-      expect(artifact['if'], contains('always()'));
-      expect(artifact['with']['path'], 'build/desktop-roundtrip/');
-    },
-  );
-
-  test('Linux and Windows execute the same lifecycle harness', () {
-    final linux = workflow('.forgejo/workflows/linux-gate.yml');
-    final linuxSteps = steps(linux['jobs']['gate-linux'] as YamlMap);
+      expect(artifact['if'], 'always()');
+      expect(artifact['with']['path'], 'build/app-journey/');
+    }
+    final mirror = workflow('.github/workflows/windows-app-journey.yml');
+    expect(mirror['on']['push']['branches'], contains('**'));
+    expect(mirror['on']['schedule'], isNotEmpty);
+    final windows = mirror['jobs']['journey'] as YamlMap;
+    expect(windows['runs-on'], 'windows-2022');
+    expect(steps(windows), contains('python tool/app_journey.py'));
+    expect(steps(windows), contains('full_arg=--full'));
     expect(
-      linuxSteps,
-      contains('xvfb-run -a make test-desktop-roundtrip DEVICE=linux'),
-    );
-    final windows = workflow('.github/workflows/windows-test-check.yml');
-    final winSteps = (windows['jobs']['test']['steps'] as YamlList)
-        .whereType<YamlMap>();
-    final native = winSteps.singleWhere(
-      (step) => '${step['run']}'.contains(
-        'tool/run_desktop_smoke.dart windows --roundtrip',
-      ),
-    );
-    expect(native['if'], contains('matrix.shard == 0'));
-    expect(native['if'], contains('!inputs.navigation_only'));
-    expect(native['if'], contains('!inputs.video_only'));
-    final makefile = File('Makefile').readAsStringSync();
-    expect(
-      makefile,
-      contains(
-        r'scripts/gate_lock.sh dart run tool/run_desktop_smoke.dart $(DEVICE)',
-      ),
+      steps(forge['jobs']['windows'] as YamlMap),
+      contains('wait_windows_app_journey.py'),
     );
   });
+
+  test(
+    'manual baseline comparisons stay separate from the automatic journey',
+    () {
+      final linux = workflow('.forgejo/workflows/linux-gate.yml');
+      expect(
+        linux['on']['workflow_dispatch']['inputs'].containsKey('baseline_ref'),
+        isTrue,
+      );
+      expect(
+        steps(linux['jobs']['pagination-profile'] as YamlMap),
+        contains('baseline'),
+      );
+      final windows = workflow('.github/workflows/windows-test-check.yml');
+      expect(
+        windows['on']['workflow_dispatch']['inputs'].containsKey(
+          'baseline_ref',
+        ),
+        isTrue,
+      );
+      expect(
+        steps(windows['jobs']['test'] as YamlMap),
+        contains('baseline.json'),
+      );
+      for (final path in [
+        '.forgejo/workflows/macos-gate.yml',
+        '.forgejo/workflows/linux-gate.yml',
+        '.github/workflows/windows-test-check.yml',
+      ]) {
+        expect(
+          File(path).readAsStringSync(),
+          isNot(contains('run_desktop_smoke.dart')),
+        );
+        expect(
+          File(path).readAsStringSync(),
+          isNot(contains('make test-desktop-roundtrip')),
+        );
+      }
+      expect(
+        File('Makefile').readAsStringSync(),
+        contains(
+          r'scripts/gate_lock.sh dart run tool/run_desktop_smoke.dart $(DEVICE)',
+        ),
+      );
+    },
+  );
 
   test(
     'the native probe keeps real exit dispatch and separates fixture state',
