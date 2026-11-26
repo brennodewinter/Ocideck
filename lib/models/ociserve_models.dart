@@ -109,16 +109,18 @@ class OciServeAccount {
     final rawMemberships = json['memberships'] is List
         ? json['memberships']! as List
         : const <Object?>[];
+    final managementUrl =
+        (json['provider_features'] as Map?)?['passkey_management_url']
+            as String?;
     return OciServeAccount(
       id: id,
       passwordlessEnrollable:
           (json['provider_features'] as Map?)?['passwordless_enrollable'] ==
           true,
-      passkeyManagementUrl: Uri.tryParse(
-        (json['provider_features'] as Map?)?['passkey_management_url']
-                as String? ??
-            '',
-      ),
+      passkeyManagementUrl:
+          managementUrl == null || managementUrl.trim().isEmpty
+          ? null
+          : Uri.tryParse(managementUrl.trim()),
       displayName:
           (rawAccount['display_name'] as String? ??
                   rawAccount['name'] as String? ??

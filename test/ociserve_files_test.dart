@@ -344,6 +344,13 @@ void main() {
           },
         ],
       });
+      expect(
+        OciServeAccount.fromJson({
+          'id': 'old',
+          'provider_features': {'passwordless_enrollable': true},
+        }).passkeyManagementUrl,
+        isNull,
+      );
       expect(account.passwordlessEnrollable, true);
       expect(account.passkeyManagementUrl!.host, 'id.example');
       expect(account.memberships.single.canShareFiles, true);
