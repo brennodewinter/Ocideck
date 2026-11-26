@@ -14,13 +14,13 @@ SCRIPTS = ROOT / 'scripts'
 
 @unittest.skipUnless(shutil.which('timeout'), 'requires the desktop supervisor timeout')
 class StartupProbeTest(unittest.TestCase):
-    def launch(self, fixture):
+    def launch(self, fixture, *, session_setup='exit 0'):
         with tempfile.TemporaryDirectory() as work:
             directory = Path(work)
             for tool, code in {
                 'xvfb-run': 'shift; exec "$@"',
                 'dbus-run-session': 'shift; exec "$@"',
-                'gdbus': 'exit 0',
+                'gdbus': session_setup,
             }.items():
                 command = directory / tool
                 command.write_text('#!/bin/sh\n' + code + '\n')
@@ -46,6 +46,14 @@ log="$logdir/ocideck.log"
     def test_frame_from_current_run_and_stays_alive(self):
         result, log = self.launch(
             "echo '2026-01-01T00:00:00 INFO opstart: eerste frame (+100 ms)' > \"$log\"\nsleep 7"
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('eerste frame', log)
+
+    def test_desktop_session_setup_does_not_consume_the_first_frame_budget(self):
+        result, log = self.launch(
+            "echo '2026-01-01T00:00:00 INFO opstart: eerste frame (+100 ms)' > \"$log\"\nsleep 7",
+            session_setup='sleep 4',
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn('eerste frame', log)
