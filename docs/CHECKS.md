@@ -438,6 +438,7 @@ now the only passing state.
 | [`make test-packages`](#make-test-packages) | The tests of every first-party package, in random order, plus its coverage floors (average, every `lib/` file in a test, per file) | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make test-age-interop`](#make-test-age-interop) | Builds the pinned reference `age` (Go, network) and runs the interoperability test of the sealing layer against it | — | — | — | Manual |
 | [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make check-roundtrip-field-parity`](#make-check-roundtrip-field-parity) | Every Slide and ThemeProfile field has an executable storage case or a reasoned transient exclusion; includes document style selection | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | Nightly suite | Maintainer agreement |
@@ -1155,6 +1156,31 @@ These checks form the static portion of the maintainer’s local validation.
   `test/deck_op_test.dart`), or record in `tool/check_collab_field_parity.dart`
   why it is excluded. Choosing to leave debt is allowed; leaving the choice
   unmade is not.
+
+### `make check-roundtrip-field-parity`
+- **Runs:** `dart run tool/check_roundtrip_field_parity.dart` and the inventory
+  and real storage assertions in `roundtrip_field_parity_test.dart` and
+  `persistence_field_roundtrip_test.dart`. Part of the shared `STATIC_GATES`.
+- **Covers:** every instance field declared on `Slide` and `ThemeProfile`,
+  including initialized and mutable fields. The AST inventory reads the same
+  typed fixture/getter map that the tests execute; mentioning a field in a
+  comment or asserting a default does not count. Each case must set and read
+  its named property, differ from its baseline, and survive actual storage.
+  Slide cases save/reopen twice; profile cases use JSON and the portable
+  `.ocideckstyle` codec, then reopen a document and resolve its named style.
+  Document style properties live on `ThemeProfile`; Markdown documents store
+  the profile selection rather than embedding its properties.
+- **Deliberate exclusions:** parse-time `id`, the two privacy projection flags,
+  and render-only `renderPage`. Dedicated tests prove their reset/filtering
+  behavior while retaining authored content. The explained exclusions are in
+  the tool. The accepted debt baseline starts at zero and cannot grow.
+- **Failure means:** add a meaningful non-default case and its serializer/parser
+  support, or explain a deliberately transient field. Stale entries, duplicate
+  cases and conflicting classifications also fail. Adding an unsaved model
+  field is covered by a regression test of the inventory itself (#3217).
+- **Scope:** per-field persistence in a valid context, not every combination of
+  field values, slide types, or profile settings. Existing content-loss and
+  fuzz tests remain necessary for interactions and boundary values.
 
 ### `make check-translated-mermaid`
 - **Runs:** `dart run tool/check_translated_mermaid.dart`

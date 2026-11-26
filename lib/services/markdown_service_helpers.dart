@@ -507,13 +507,20 @@ String _decodeCaption(String caption) => caption
     // decode correctly.
     .replaceAll(_captionLiteralSentinel, _captionPipeSentinel);
 
-String _joinTwoCaptions(String first, String second) => [first, second]
-    .where((caption) => caption.trim().isNotEmpty)
-    .map((caption) => _encodeCaption(caption.trim()))
-    .join(_captionSeparator);
+String _joinTwoCaptions(String first, String second) {
+  // Keep the empty left slot when only the right image has a caption.
+  // Omitting it moves the right caption to the left on reopening (#3217).
+  if (second.trim().isEmpty) return _encodeCaption(first.trim());
+  return [
+    first,
+    second,
+  ].map((caption) => _encodeCaption(caption.trim())).join(_captionSeparator);
+}
 
-List<String> _splitTwoCaptions(String decoded) =>
-    decoded.split(_captionSeparator).map(_decodeCaption).toList();
+List<String> _splitTwoCaptions(String decoded) => decoded
+    .split(_captionSeparator)
+    .map((part) => _decodeCaption(part.trim()))
+    .toList();
 
 /// An HTML comment cannot contain `-->`; a speaker note that does would be
 /// truncated there on parse (the comment closes early and the tail leaks into
@@ -531,7 +538,7 @@ String _decodeImageCaption(String line) {
     line
         .replaceFirst('<div class="image-caption">', '')
         .replaceFirst('</div>', ''),
-  ).trim();
+  );
 }
 
 /// Eén class-token voor de opgeslagen bulletkeuze, ook zonder callouts/anker.
@@ -556,8 +563,8 @@ List<String> slideClassTokens(Slide slide, ThemeProfile? themeProfile) {
     if (cssClass.isNotEmpty) cssClass,
     // Reserve logo space only when the logo is actually shown on this slide.
     if (hasLogo && slide.showLogo) 'logo-safe',
-    // Mark slides that opt out of the logo so the theme can hide it.
-    if (hasLogo && !slide.showLogo) 'no-logo',
+    // Preserve the author’s opt-out even when the current profile has no logo.
+    if (!slide.showLogo) 'no-logo',
     // Mark slides that opt out of the footer. Older presentations lack this
     // token and therefore keep the existing default: footer shown.
     if (!slide.showFooter) 'no-footer',

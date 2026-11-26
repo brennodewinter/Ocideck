@@ -140,6 +140,7 @@ Individual steps:
 | `make format-check` | Fails if any file needs formatting. |
 | `make analyze` | `flutter analyze --fatal-infos` (analyzer + lints + strict type checks). |
 | `make check-conventions` | No `print()`; no raw control bytes; the bare `catch (_)`, raw-colour, layering, file-size and class-size ratchets may not grow. |
+| `make check-roundtrip-field-parity` | Every Slide/ThemeProfile field has a non-default storage assertion or a reasoned transient exclusion; includes document style selection. |
 | `make test` | The full test suite (randomised order). |
 | `make coverage` | The suite with coverage: enforces the 80% floor **and** that every `lib/` file is in some test. Part of `make check`. |
 | `make licenses` | Verify every dependency uses an open-source licence. |
