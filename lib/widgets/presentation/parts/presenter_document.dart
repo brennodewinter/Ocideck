@@ -52,6 +52,7 @@ Future<AudienceWindowHandle?> openDocumentAudience({
   required ThemeProfile? themeProfile,
   bool chapterBreaks = false,
 }) async {
+  AudienceWindowHandle? handle;
   try {
     final controller = await WindowController.create(
       WindowConfiguration(
@@ -65,10 +66,11 @@ Future<AudienceWindowHandle?> openDocumentAudience({
         hiddenAtLaunch: true,
       ),
     );
-    final handle = AudienceWindowHandle(controller);
-    await controller.coverScreen(presenterScreen: presenterScreenIndex());
+    handle = AudienceWindowHandle(controller);
+    await handle.cover(captureDisplaySnapshot());
     return handle;
   } catch (e) {
+    await handle?.close();
     logWarning('DocumentPresenter: publieksvenster niet geopend', e);
     return null;
   }

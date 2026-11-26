@@ -178,14 +178,35 @@ class _TimelineViewSync {
 class AudienceWindowHandle {
   AudienceWindowHandle(
     this.controller, {
+    this.displayId,
     Future<void> Function(WindowController controller)? closeImpl,
   }) : _closeImpl = closeImpl ?? ((c) => c.close());
 
   final WindowController controller;
+
+  /// Last successfully placed audience identity; session-only, never an index.
+  String? displayId;
   final Future<void> Function(WindowController controller) _closeImpl;
   bool _closed = false;
 
   bool get isClosed => _closed;
+
+  /// Records a new audience identity only after native placement succeeds.
+  Future<void> cover(
+    DisplaySnapshot snapshot, {
+    DisplayInfo? presenter,
+    DisplayInfo? target,
+  }) async {
+    if (_closed) throw StateError('Audience window is closed');
+    final display = await coverAudienceDisplay(
+      controller,
+      snapshot,
+      presenter: presenter,
+      target: target,
+    );
+    if (_closed) throw StateError('Audience closed during display placement');
+    displayId = display.nativeId;
+  }
 
   Future<void> close() async {
     if (_closed) return;

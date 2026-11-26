@@ -6,4 +6,4 @@ List<DisplayInfo> getAllDisplays() => [];
 
 Offset? getCurrentWindowCenter() => null;
 
-void moveToDisplay(int index, List<DisplayInfo> displays) {}
+void moveToDisplay(DisplayInfo display) {}

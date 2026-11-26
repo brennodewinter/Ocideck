@@ -11,6 +11,7 @@ List<DisplayInfo> getAllDisplays() {
         .getAll()
         .map(
           (d) => DisplayInfo(
+            nativeId: d.nativeObject.address.toString(),
             x: d.position.dx,
             y: d.position.dy,
             width: d.size.width,
@@ -35,14 +36,18 @@ Offset? getCurrentWindowCenter() {
   }
 }
 
-void moveToDisplay(int index, List<DisplayInfo> displays) {
-  if (displays.length < 2) return;
-  final d = displays[index.clamp(0, displays.length - 1)];
+void moveToDisplay(DisplayInfo display) {
+  if (!display.hasValidBounds) throw StateError('Invalid display bounds');
   try {
     final window = WindowManager.instance.getCurrent();
-    if (window == null) return;
+    if (window == null) throw StateError('Presenter window is not available');
     window.isFullScreen = false;
-    window.bounds = Rect.fromLTWH(d.x, d.y, d.width, d.height);
+    window.bounds = Rect.fromLTWH(
+      display.x,
+      display.y,
+      display.width,
+      display.height,
+    );
     window.isFullScreen = true;
   } catch (e) {
     logError('display_info_io.moveToDisplay: failed', e);

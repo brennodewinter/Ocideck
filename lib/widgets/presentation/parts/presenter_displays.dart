@@ -28,28 +28,44 @@ class _DisplayTransitionGuard {
 
 Future<void> _movePresenterToDisplay(
   _FullscreenPresenterState state,
-  int index,
-  List<DisplayInfo> displays,
+  DisplaySnapshot snapshot,
+  DisplayInfo target,
 ) async {
-  if (displays.length < 2 || state._displayGuard.switching) return;
+  if (!snapshot.canPresentAudience || state._displayGuard.switching) return;
   state._displayGuard.switching = true;
-  final previous = state._displayIndex;
+  final previous = snapshot.presenter!;
+  final audience = state.widget.audience;
+  final originalAudienceId = audience?.displayId;
   try {
     // Leave the main fullscreen Space untouched if the audience cannot move.
-    await state.widget.audience?.controller.coverScreen(presenterScreen: index);
+    if (audience != null) {
+      await audience.cover(snapshot, presenter: target);
+    }
+    if (!state.mounted) {
+      throw StateError('Presenter closed during display move');
+    }
     state._displayGuard.arm();
-    moveToDisplay(index, displays);
+    moveToDisplay(target, previous: previous);
     if (state.mounted) {
       state._rebuild(() {
-        state._displays = displays;
-        state._displayIndex = index;
+        state._displays = snapshot.displays;
       });
     }
   } catch (e) {
     try {
-      await state.widget.audience?.controller.coverScreen(
-        presenterScreen: previous,
-      );
+      if (audience != null) {
+        final live = captureDisplaySnapshot();
+        final original = live.find(previous.nativeId);
+        final originalAudience = live.find(originalAudienceId);
+        if (original == null || originalAudience == null) {
+          throw StateError('Original display disappeared');
+        }
+        await audience.cover(
+          live,
+          presenter: original,
+          target: originalAudience,
+        );
+      }
     } catch (restoreError) {
       logWarning(
         '_FullscreenPresenterState: audience restore failed',
@@ -75,40 +91,27 @@ Future<void> _movePresenterToDisplay(
 
 extension _PresenterDisplays on _FullscreenPresenterState {
   Future<void> _loadDisplays() async {
-    try {
-      final displays = getAllDisplays();
-      if (!mounted || displays.isEmpty) return;
-      final center = getCurrentWindowCenter();
-      final current = screenIndexContaining(displays, center) ?? 0;
-      _rebuild(() {
-        _displays = displays;
-        _displayIndex = current;
-      });
-    } catch (e) {
-      logWarning(
-        '_FullscreenPresenterState._loadDisplays: screen detection failed',
-        e,
-      );
-    }
+    final snapshot = captureDisplaySnapshot();
+    if (!mounted) return;
+    _rebuild(
+      () => _displays = snapshot.canPresentAudience
+          ? snapshot.displays
+          : const [],
+    );
   }
 
   Future<void> _cycleDisplay() async {
-    if (_displays.isEmpty) await _loadDisplays();
-    // Enumerate again right before use: _displays was captured earlier and a
-    // screen can have vanished since (dock/cable). A stale list would move the
-    // window onto the geometry of a dead display (#3162).
-    final displays = getAllDisplays();
-    if (displays.length < 2) {
-      if (displays.length != _displays.length && mounted) {
-        _rebuild(() => _displays = displays);
-      }
-      return;
-    }
-    _onLaserMove(null);
-    await _movePresenterToDisplay(
-      this,
-      (_displayIndex + 1) % displays.length,
-      displays,
+    if (_displayGuard.switching) return;
+    final snapshot = captureDisplaySnapshot();
+    if (!mounted) return;
+    _rebuild(
+      () => _displays = snapshot.canPresentAudience
+          ? snapshot.displays
+          : const [],
     );
+    final target = snapshot.next();
+    if (target == null) return;
+    _onLaserMove(null);
+    await _movePresenterToDisplay(this, snapshot, target);
   }
 }

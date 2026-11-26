@@ -141,6 +141,137 @@ void main() {
     });
   });
 
+  for (final remove in [false, true]) {
+    testWidgets(
+      'S revalidates identity after audience await (remove=$remove)',
+      (tester) async {
+        const laptop = DisplayInfo(
+          nativeId: 'laptop',
+          x: 0,
+          y: 0,
+          width: 1280,
+          height: 800,
+        );
+        const beamer = DisplayInfo(
+          nativeId: 'beamer',
+          x: 1280,
+          y: 0,
+          width: 1280,
+          height: 800,
+        );
+        const extra = DisplayInfo(
+          nativeId: 'extra',
+          x: 2560,
+          y: 0,
+          width: 1280,
+          height: 800,
+        );
+        const resized = DisplayInfo(
+          nativeId: 'beamer',
+          x: -1920,
+          y: 0,
+          width: 1920,
+          height: 1080,
+        );
+        var displays = [laptop, beamer, extra];
+        final moved = <DisplayInfo>[];
+        debugGetAllDisplays = () => displays;
+        debugGetCurrentWindowCenter = () => const Offset(640, 400);
+        debugMoveToDisplay = (index, live) => moved.add(live[index]);
+        debugIsPresenterFullscreen = () => true;
+        addTearDown(() {
+          debugGetAllDisplays = null;
+          debugGetCurrentWindowCenter = null;
+          debugMoveToDisplay = null;
+          debugIsPresenterFullscreen = null;
+        });
+        const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+        const windows = MethodChannel('mixin.one/desktop_multi_window');
+        final messenger = tester.binding.defaultBinaryMessenger;
+        messenger.setMockMethodCallHandler(bridge, (_) async => null);
+        var covers = 0;
+        final coverTargets = <String>[];
+        messenger.setMockMethodCallHandler(windows, (call) async {
+          if (call.method == 'window_coverScreen') {
+            coverTargets.add(
+              (call.arguments as Map)['targetDisplay'] as String,
+            );
+          }
+          if (call.method == 'window_coverScreen' && ++covers == 1) {
+            // Topology changes while the native audience placement is pending.
+            await Future<void>.delayed(Duration.zero);
+            displays = remove ? [laptop, extra] : [resized, laptop, extra];
+          }
+          return null;
+        });
+        addTearDown(() {
+          messenger.setMockMethodCallHandler(bridge, null);
+          messenger.setMockMethodCallHandler(windows, null);
+        });
+        await tester.pumpWidget(
+          _presenterOverLauncher(
+            audience: AudienceWindowHandle(
+              WindowController.fromWindowId('test'),
+              displayId: 'extra',
+              closeImpl: (_) async {},
+            ),
+          ),
+        );
+        await tester.tap(find.text('open'));
+        await tester.pumpAndSettle();
+        ScaffoldMessenger.of(
+          tester.element(find.byType(FullscreenPresenter)),
+        ).removeCurrentSnackBar();
+        await tester.pump();
+        await tester.sendKeyEvent(LogicalKeyboardKey.keyS);
+        await tester.pumpAndSettle();
+        expect(moved, remove ? isEmpty : [resized]);
+        expect(coverTargets, remove ? ['laptop', 'extra'] : ['laptop']);
+        if (remove) {
+          expect(
+            find.text(
+              'De schermen zijn niet gewisseld. De notities staan nog hier.',
+            ),
+            findsOneWidget,
+          );
+        }
+        expect(find.text('Eerste'), findsWidgets);
+        await tester.pumpWidget(const SizedBox());
+      },
+    );
+  }
+
+  testWidgets(
+    'document audience setup closes hidden window after display loss',
+    (tester) async {
+      debugGetAllDisplays = () => [];
+      addTearDown(() => debugGetAllDisplays = null);
+      const channel = MethodChannel('mixin.one/desktop_multi_window');
+      final methods = <String>[];
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (
+        call,
+      ) async {
+        methods.add(call.method);
+        return call.method == 'createWindow' ? 'document-test' : null;
+      });
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          channel,
+          null,
+        ),
+      );
+      final audience = await openDocumentAudience(
+        markdown: '# Test',
+        projectPath: null,
+        initialIndex: 0,
+        themeProfile: null,
+      );
+      expect(audience, isNull);
+      expect(methods, contains('window_close'));
+      expect(methods, isNot(contains('window_coverScreen')));
+    },
+  );
+
   testWidgets('S swaps both windows without ending the presentation', (
     tester,
   ) async {
@@ -149,8 +280,20 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     final displays = [
-      const DisplayInfo(x: 0, y: 0, width: 1280, height: 800),
-      const DisplayInfo(x: 1280, y: 0, width: 1280, height: 800),
+      const DisplayInfo(
+        nativeId: 'laptop',
+        x: 0,
+        y: 0,
+        width: 1280,
+        height: 800,
+      ),
+      const DisplayInfo(
+        nativeId: 'beamer',
+        x: 1280,
+        y: 0,
+        width: 1280,
+        height: 800,
+      ),
     ];
     var fullscreen = true;
     final moved = <int>[];
@@ -228,7 +371,11 @@ void main() {
     expect(
       covers,
       contains(
-        predicate<Map<String, dynamic>>((args) => args['presenterScreen'] == 1),
+        predicate<Map<String, dynamic>>(
+          (args) =>
+              args['presenterDisplay'] == 'beamer' &&
+              args['targetDisplay'] == 'laptop',
+        ),
       ),
     );
     // AppKit can still report true before its fullscreen Space starts moving.
@@ -250,8 +397,20 @@ void main() {
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
       var displays = [
-        const DisplayInfo(x: 0, y: 0, width: 1280, height: 800),
-        const DisplayInfo(x: 1280, y: 0, width: 1280, height: 800),
+        const DisplayInfo(
+          nativeId: 'laptop',
+          x: 0,
+          y: 0,
+          width: 1280,
+          height: 800,
+        ),
+        const DisplayInfo(
+          nativeId: 'beamer',
+          x: 1280,
+          y: 0,
+          width: 1280,
+          height: 800,
+        ),
       ];
       final moved = <int>[];
       debugGetAllDisplays = () => displays;
@@ -310,7 +469,15 @@ void main() {
 
       // The beamer is unplugged after the display list was captured: the stale
       // list must not steer the move.
-      displays = [const DisplayInfo(x: 0, y: 0, width: 1280, height: 800)];
+      displays = [
+        const DisplayInfo(
+          nativeId: 'laptop',
+          x: 0,
+          y: 0,
+          width: 1280,
+          height: 800,
+        ),
+      ];
       await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
         bridge.name,
         bridge.codec.encodeMethodCall(

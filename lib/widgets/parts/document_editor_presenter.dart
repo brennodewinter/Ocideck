@@ -25,9 +25,10 @@ Future<void> _presentDocumentSession(_DocumentEditorScreenState s) async {
   final doc = ref.read(documentProvider);
   // Dezelfde tweede-scherm-grens als de diapresentatie: op één scherm is er
   // geen beamer — een publieksvenster zou dan het enige scherm dekken.
-  // getAllDisplays faalt intern fail-closed (logt + lege lijst).
+  // De gedeelde snapshot valt bij mislukte detectie terug op enkelscherm.
   final dualScreen =
-      supportsDualScreenPresenter && getAllDisplays().length >= 2;
+      supportsDualScreenPresenter &&
+      captureDisplaySnapshot().canPresentAudience;
   final result = await presentDocument(
     context,
     body: body,
