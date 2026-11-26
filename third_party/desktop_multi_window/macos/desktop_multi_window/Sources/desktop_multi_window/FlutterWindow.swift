@@ -41,6 +41,7 @@ class FlutterWindow: NSObject {
     private var willBecomeActiveObserver: NSObjectProtocol?
     private var didResignActiveObserver: NSObjectProtocol?
     private var closeObserver: NSObjectProtocol?
+    private var pendingDisplayMove: (() -> Void)?
 
     init(windowId: WindowId, windowArgument: String, window: NSWindow) {
         self.windowId = windowId
@@ -66,7 +67,8 @@ class FlutterWindow: NSObject {
 
         closeObserver = NotificationCenter.default.addObserver(
             forName: NSWindow.willCloseNotification, object: window, queue: .main
-        ) { [windowId] _ in
+        ) { [weak self, windowId] _ in
+            self?.cancelPendingDisplayMove()
             MultiWindowManager.shared.removeWindow(windowId: windowId)
         }
     }
@@ -101,7 +103,14 @@ class FlutterWindow: NSObject {
         }
     }
 
+    private func cancelPendingDisplayMove() {
+        let cancel = pendingDisplayMove
+        pendingDisplayMove = nil
+        cancel?()
+    }
+
     private func movePresenterDisplay(_ args: [String: Any?]?, result: @escaping FlutterResult) {
+        cancelPendingDisplayMove()
         let screens = NSScreen.screens
         let identities = screens.map {
             String(UInt(bitPattern: Unmanaged.passUnretained($0).toOpaque()))
@@ -148,13 +157,22 @@ class FlutterWindow: NSObject {
         // Wait for AppKit to exit its Space before applying geometry. Recheck
         // the same hardware identities after that asynchronous transition.
         let completion = DisplayTransitionCompletion()
+        pendingDisplayMove = {
+            completion.finish {
+                result(FlutterError(code: "-1", message: "display move cancelled", details: nil))
+            }
+        }
         completion.observer = NotificationCenter.default.addObserver(
             forName: NSWindow.didExitFullScreenNotification, object: window, queue: .main
         ) { _ in
-            completion.finish(apply)
+            completion.finish {
+                self.pendingDisplayMove = nil
+                apply()
+            }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             completion.finish {
+                self.pendingDisplayMove = nil
                 result(FlutterError(code: "-1", message: "fullscreen transition timed out", details: nil))
             }
         }
@@ -173,6 +191,7 @@ class FlutterWindow: NSObject {
             window.orderOut(nil)
             result(nil)
         case "window_close":
+            cancelPendingDisplayMove()
             window.close()
             result(nil)
         case "window_setFrame":
@@ -183,6 +202,9 @@ class FlutterWindow: NSObject {
             {
                 window.setFrame(NSRect(x: x, y: y, width: w, height: h), display: true)
             }
+            result(nil)
+        case "window_cancelDisplayMove":
+            cancelPendingDisplayMove()
             result(nil)
         case "window_moveToDisplay":
             movePresenterDisplay(args, result: result)

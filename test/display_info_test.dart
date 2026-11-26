@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:ocideck/widgets/presentation/display_info.dart';
 import 'package:ocideck/widgets/presentation/display_info_io.dart' as native;
+import 'package:ocideck/platform/presenter_fullscreen_io.dart' as fullscreen;
 
 const laptop = DisplayInfo(
   nativeId: 'laptop',
@@ -183,6 +186,92 @@ void main() {
           native.moveToDisplay(beamer, previous: laptop),
           throwsA(isA<PlatformException>()),
         );
+      },
+    );
+
+    test('presentation exit cancels the already-bound native window', () async {
+      const channel = MethodChannel('mixin.one/desktop_multi_window');
+      final messenger =
+          TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+      final methods = <String>[];
+      final pending = Completer<void>();
+      messenger.setMockMethodCallHandler(channel, (call) async {
+        methods.add(call.method);
+        if (call.method == 'getWindowDefinition') {
+          return {'windowId': 'presenter', 'windowArgument': ''};
+        }
+        if (call.method == 'window_moveToDisplay') {
+          await pending.future;
+        }
+        if (call.method == 'window_cancelDisplayMove') {
+          pending.complete();
+        }
+        return null;
+      });
+      addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+      final move = native.moveToDisplay(beamer, previous: laptop);
+      final cancelled = expectLater(move, throwsStateError);
+      await Future<void>.delayed(Duration.zero);
+      await fullscreen.setPresenterFullscreen(false);
+      await cancelled;
+      expect(methods, [
+        'getWindowDefinition',
+        'window_moveToDisplay',
+        'window_cancelDisplayMove',
+      ]);
+    });
+
+    test(
+      'exit before window-definition reply prevents a late native move',
+      () async {
+        const channel = MethodChannel('mixin.one/desktop_multi_window');
+        final messenger =
+            TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+        final definition = Completer<Map<String, String>>();
+        final methods = <String>[];
+        messenger.setMockMethodCallHandler(channel, (call) async {
+          methods.add(call.method);
+          if (call.method == 'getWindowDefinition') return definition.future;
+          return null;
+        });
+        addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+        final move = native.moveToDisplay(beamer, previous: laptop);
+        final cancelled = expectLater(move, throwsStateError);
+        await Future<void>.delayed(Duration.zero);
+        await fullscreen.setPresenterFullscreen(false);
+        definition.complete({'windowId': 'presenter', 'windowArgument': ''});
+        await cancelled;
+        expect(methods, ['getWindowDefinition']);
+      },
+    );
+
+    test(
+      'unavailable cancellation does not prevent best-effort exit',
+      () async {
+        const channel = MethodChannel('mixin.one/desktop_multi_window');
+        final messenger =
+            TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+        final pending = Completer<void>();
+        var cancellationAttempted = false;
+        messenger.setMockMethodCallHandler(channel, (call) async {
+          if (call.method == 'getWindowDefinition') {
+            return {'windowId': 'presenter', 'windowArgument': ''};
+          }
+          if (call.method == 'window_moveToDisplay') {
+            await pending.future;
+            return null;
+          }
+          cancellationAttempted = true;
+          throw PlatformException(code: 'window-gone');
+        });
+        addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+        final move = native.moveToDisplay(beamer, previous: laptop);
+        final cancelled = expectLater(move, throwsStateError);
+        await Future<void>.delayed(Duration.zero);
+        await fullscreen.setPresenterFullscreen(false);
+        expect(cancellationAttempted, isTrue);
+        pending.complete();
+        await cancelled;
       },
     );
 

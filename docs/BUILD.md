@@ -85,7 +85,7 @@ audience move, the presenter revalidates both identities and uses fresh bounds.
 The main-window move also carries both identities into a native UI-thread
 operation, so queued platform calls cannot apply unvalidated Dart geometry.
 macOS waits for its fullscreen-exit event, then revalidates the same selected
-Core Graphics IDs and uses current bounds; the transition has a deadline.
+Core Graphics IDs and uses current bounds; the transition has a deadline. Leaving presentation mode cancels a pending native move before restoring the window, so a late fullscreen-exit event cannot move it after cancellation.
 Native identity values are temporary and never persisted.
 
 The original search included data-view limits as well as physical displays.
@@ -104,6 +104,7 @@ disappearance between read/use, and changed enumeration order.
 | `display_info_io.dart`: enumeration, center and move | This is the sole nativeapi display adapter. It exposes native object identity; movement sends identities to the native UI-thread operation, without queued Dart geometry, index clamping or a vanished display's saved bounds. Window absence throws into the existing recovery path. |
 | `document_editor_presenter.dart`: eligibility | Same snapshot-based eligibility; no stored display index or geometry is passed into the document route. |
 | `presenter_document.dart`: audience creation | Same identity-based native placement; closes the newly created hidden window on failure and returns single-screen mode. |
+| `platform/presenter_fullscreen_io.dart`: native move and exit | Tracks the native window for each move; exit cancels it before restoring fullscreen, with a bounded wait. A cancelled window-definition lookup cannot start a new move later. Cancellation and window close complete the Mac transition once and remove its observer, preventing a late geometry write. This path does not enumerate or choose a screen. |
 | `display_info_web.dart` | Returns no physical displays; browser presentation remains single-window and move is a no-op. |
 | `display_window_service.dart`, `editor_panel_view_limit.dart`, `display_window_spec.dart` | False positives: limit data rows/bullets/chart categories. They never enumerate or position physical monitors, so hot-plug and display-index drift cannot occur here. |
 | Vendored `window_coverScreen` on macOS, Windows and GTK | Resolve both requested identities in the current native list; reject missing/equal identities or invalid bounds. macOS additionally checks the display is online; Windows checks `GetMonitorInfo`; GTK verifies the selected monitor object still matches at use. |

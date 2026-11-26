@@ -139,6 +139,10 @@ class WindowController {
         'targetDisplay': targetDisplay,
       });
 
+  /// Cancel an unfinished presenter transition before leaving presentation mode.
+  Future<void> cancelDisplayMove() =>
+      _callWindowMethod('window_cancelDisplayMove');
+
   @optionalTypeArgs
   Future<T?> invokeMethod<T>(String method, [dynamic arguments]) =>
       _windowChannel.invokeMethod<T>(method, arguments);

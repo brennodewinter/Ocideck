@@ -4,7 +4,7 @@ import XCTest
 @testable import DesktopMultiWindowSupport
 
 final class CoverScreenStyleTests: XCTestCase {
-    func testTransitionNotificationAndDeadlineCompleteOnlyOnce() {
+    func testCancelledOrTimedOutTransitionCannotApplyLateGeometry() {
         let completion = DisplayTransitionCompletion()
         var calls = 0
         completion.finish { calls += 1 }

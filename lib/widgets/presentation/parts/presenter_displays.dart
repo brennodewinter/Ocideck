@@ -52,6 +52,7 @@ Future<void> _movePresenterToDisplay(
       });
     }
   } catch (e) {
+    if (state._exiting || !state.mounted) return;
     try {
       if (audience != null) {
         final live = captureDisplaySnapshot();

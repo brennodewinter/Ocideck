@@ -47,7 +47,10 @@ Bounds are read at use and invalid/empty bounds are refused. The new
 `window_moveToDisplay` uses the same identity validation for the main presenter
 on the native UI thread. macOS waits for its native fullscreen-exit event and
 revalidates the already selected Core Graphics display IDs before moving and
-re-entering fullscreen; a three-second deadline bounds that transition. Windows uses the
+re-entering fullscreen; a three-second deadline bounds that transition.
+`window_cancelDisplayMove` cancels pending Mac transitions on presentation exit
+or window close, removes their observer, and prevents late placement. GTK and
+Win32 acknowledge cancellation after their synchronous UI-thread moves. Windows uses the
 `HMONITOR` value, GTK the `GdkMonitor` object, and AppKit the `NSScreen` object
 address already exposed by nativeapi. These identities are scoped to one
 configuration/action, never saved or used as persistent hardware identifiers.

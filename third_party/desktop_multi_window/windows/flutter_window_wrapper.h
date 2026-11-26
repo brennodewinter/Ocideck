@@ -127,6 +127,9 @@ class FlutterWindowWrapper {
         }
       }
       result->Success();
+    } else if (method == "window_cancelDisplayMove") {
+      // Win32 moves finish synchronously on this UI thread.
+      result->Success();
     } else if (method == "window_coverScreen" || method == "window_moveToDisplay") {
       const bool moving = method == "window_moveToDisplay";
       if (!hwnd_) {

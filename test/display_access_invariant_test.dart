@@ -30,6 +30,7 @@ void main() {
         offenders.add('$path: independent native enumeration');
       }
       if (!adapters.contains(path) &&
+          path != 'lib/platform/presenter_fullscreen_io.dart' &&
           RegExp(r'\.moveToDisplay\s*\(').hasMatch(code)) {
         offenders.add('$path: native movement bypasses snapshot identity');
       }

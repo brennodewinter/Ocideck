@@ -242,6 +242,86 @@ void main() {
   }
 
   testWidgets(
+    'exit cancels an in-flight native move without restoring a closed audience',
+    (tester) async {
+      debugGetAllDisplays = () => [
+        const DisplayInfo(
+          nativeId: 'laptop',
+          x: 0,
+          y: 0,
+          width: 1280,
+          height: 800,
+        ),
+        const DisplayInfo(
+          nativeId: 'beamer',
+          x: 1280,
+          y: 0,
+          width: 1280,
+          height: 800,
+        ),
+      ];
+      debugGetCurrentWindowCenter = () => const Offset(640, 400);
+      debugIsPresenterFullscreen = () => true;
+      addTearDown(() {
+        debugGetAllDisplays = null;
+        debugGetCurrentWindowCenter = null;
+        debugIsPresenterFullscreen = null;
+      });
+      const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+      const windows = MethodChannel('mixin.one/desktop_multi_window');
+      final messenger = tester.binding.defaultBinaryMessenger;
+      final move = Completer<void>();
+      final methods = <String>[];
+      messenger.setMockMethodCallHandler(bridge, (_) async => null);
+      messenger.setMockMethodCallHandler(windows, (call) async {
+        methods.add(call.method);
+        if (call.method == 'getWindowDefinition') {
+          return {'windowId': 'presenter', 'windowArgument': ''};
+        }
+        if (call.method == 'window_moveToDisplay') {
+          await move.future;
+          return null;
+        }
+        if (call.method == 'window_cancelDisplayMove') {
+          move.completeError(PlatformException(code: 'move-cancelled'));
+        }
+        return null;
+      });
+      addTearDown(() {
+        messenger.setMockMethodCallHandler(bridge, null);
+        messenger.setMockMethodCallHandler(windows, null);
+      });
+      await tester.pumpWidget(
+        _presenterOverLauncher(
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            displayId: 'beamer',
+            closeImpl: (_) async {},
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyS);
+      await tester.pumpAndSettle();
+      expect(methods, contains('window_moveToDisplay'));
+      expect(move.isCompleted, isFalse);
+      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+      await tester.pumpAndSettle();
+      expect(methods, contains('window_cancelDisplayMove'));
+      expect(move.isCompleted, isTrue);
+      expect(methods.where((m) => m == 'window_coverScreen'), hasLength(1));
+      expect(find.text('open'), findsOneWidget);
+      expect(
+        find.text(
+          'De schermen zijn niet gewisseld. De notities staan nog hier.',
+        ),
+        findsNothing,
+      );
+    },
+  );
+
+  testWidgets(
     'document audience setup closes hidden window after display loss',
     (tester) async {
       debugGetAllDisplays = () => [];

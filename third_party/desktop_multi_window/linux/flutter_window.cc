@@ -104,6 +104,9 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
               FL_METHOD_RESPONSE(fl_method_success_response_new(nullptr));
         }
       }
+    } else if (strcmp(method, "window_cancelDisplayMove") == 0) {
+      // GTK moves finish synchronously on this UI thread.
+      response = FL_METHOD_RESPONSE(fl_method_success_response_new(nullptr));
     } else if (strcmp(method, "window_coverScreen") == 0 ||
              strcmp(method, "window_moveToDisplay") == 0) {
     const bool moving = strcmp(method, "window_moveToDisplay") == 0;

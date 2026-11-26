@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:nativeapi/nativeapi.dart';
-import 'package:desktop_multi_window/desktop_multi_window.dart';
+import '../../platform/presenter_fullscreen_io.dart' as presenter;
 
 import '../../utils/log.dart';
 import 'display_info_data.dart';
@@ -41,8 +41,7 @@ Future<void> moveToDisplay(
   DisplayInfo display, {
   required DisplayInfo previous,
 }) async {
-  final window = await WindowController.fromCurrentEngine();
-  await window.moveToDisplay(
+  await presenter.movePresenterToDisplay(
     presenterDisplay: previous.nativeId!,
     targetDisplay: display.nativeId!,
   );
