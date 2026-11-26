@@ -21,6 +21,7 @@ import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/utils/image_limits.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_exam_dialog.dart';
+import 'package:ocideck/widgets/dialogs/ociserve_file_browser.dart';
 import 'package:ocideck/widgets/dialogs/settings/integration_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings/ociserve_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings/integrations_panel.dart';
@@ -472,7 +473,7 @@ void main() {
     expect(find.text('Ingelogd blijven op dit apparaat'), findsOneWidget);
     expect(find.text('Vertrouwde interne server'), findsOneWidget);
     expect(find.text('Vul een geldig eLearning-adres in.'), findsOneWidget);
-    expect(find.text('Inloggen'), findsOneWidget);
+    expect(find.text('Inloggen met passkey of andere methode'), findsOneWidget);
     expect(find.textContaining('aanmelden.example.org'), findsOneWidget);
     expect(
       find.text('Nog niet verstuurde voortgang is op dit apparaat bewaard.'),
@@ -602,6 +603,23 @@ void main() {
       isNull,
     );
   });
+
+  testWidgets(
+    'the welcome file source opens the file browser independently of the courses entry',
+    (tester) async {
+      final notifier = _FixedOciServeNotifier(
+        const OciServeState(
+          settings: OciServeSettings(enabled: true),
+          status: OciServeStatus.signedOut,
+        ),
+      );
+      await _pumpApp(tester, notifier);
+      await tester.tap(find.text('OciServe-bestanden'));
+      await tester.pumpAndSettle();
+      expect(find.byType(OciServeFileBrowser), findsOneWidget);
+      expect(notifier.loginCalled, false);
+    },
+  );
 
   testWidgets('welkomstscherm meldt aan en opent daarna Mijn cursussen', (
     tester,

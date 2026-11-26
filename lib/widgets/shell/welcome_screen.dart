@@ -460,7 +460,7 @@ class _WelcomeScreen extends ConsumerWidget {
           unavailable: ociServeState.serverUnavailable,
           unavailableLabel: l10n.d('Geen verbinding'),
         ),
-        onPressed: () => openOciServeFiles(context, ref),
+        onPressed: () => _openOciServe(context, ref),
       ),
       const SizedBox(height: 10),
       if (ociServeState.errorCode != null) ...[
@@ -476,7 +476,7 @@ class _WelcomeScreen extends ConsumerWidget {
     ];
   }
 
-  Future<void> openOciServeFiles(BuildContext context, WidgetRef ref) async {
+  Future<void> _openOciServe(BuildContext context, WidgetRef ref) async {
     if (ref.read(ociServeProvider).status == OciServeStatus.authenticating) {
       return;
     }
