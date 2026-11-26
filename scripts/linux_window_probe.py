@@ -155,11 +155,18 @@ class Wayland:
                 (entry for entry in runtime.glob('wayland-*') if entry.is_socket()), None
             ), self.manager)
             os.environ.update(SWAYSOCK=str(socket), WAYLAND_DISPLAY=display.name, GDK_BACKEND='wayland')
-            outputs = {item['name']: item for item in self.msg('-t', 'get_outputs')}
-            for name, scale, size in zip(self.outputs, (1, 2), ((1600, 1000), (1440, 900))):
-                output = outputs[name]
-                if output['scale'] != scale or (output['rect']['width'], output['rect']['height']) != size:
-                    raise RuntimeError(f'Sway output did not reach requested size/scale: {output}')
+
+            def outputs_ready():
+                outputs = {item['name']: item for item in self.msg('-t', 'get_outputs')}
+                for name, scale, size in zip(self.outputs, (1, 2), ((1600, 1000), (1440, 900))):
+                    output = outputs.get(name)
+                    if not output or output['scale'] != scale:
+                        return False
+                    if (output['rect']['width'], output['rect']['height']) != size:
+                        return False
+                return True
+
+            wait_for('Sway outputs at the requested sizes and scales', outputs_ready, self.manager)
             self.msg('workspace', '1')
             self.pointer = subprocess.Popen([os.environ['OCIDECK_WAYLAND_POINTER']],
                                             stdout=evidence, stderr=subprocess.STDOUT)
@@ -330,10 +337,14 @@ def exercise(args, profile):
             app = subprocess.Popen([args.executable], env=app_env, stdout=app_log,
                                    stderr=subprocess.STDOUT)
             log = data / 'logs' / 'ocideck.log'
+            # Allow GTK and the software renderer to initialize on a busy runner.
+            launch_timeout = 90
             wait_for('first rasterized frame', lambda: re.search(
-                r' INFO opstart: eerste frame \(\+\d+ ms\)', log.read_text()), app)
+                r' INFO opstart: eerste frame \(\+\d+ ms\)', log.read_text()), app,
+                seconds=launch_timeout)
             try:
-                window = wait_for('visible native window', lambda: driver.window(app.pid), app)
+                window = wait_for('visible native window', lambda: driver.window(app.pid), app,
+                                  seconds=launch_timeout)
             except RuntimeError:
                 if args.backend == 'x11':
                     with (args.evidence / 'x11-window-tree.log').open('w') as tree:
