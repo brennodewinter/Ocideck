@@ -41,6 +41,7 @@ class FlutterWindow: NSObject {
     private var willBecomeActiveObserver: NSObjectProtocol?
     private var didResignActiveObserver: NSObjectProtocol?
     private var closeObserver: NSObjectProtocol?
+    private var pendingDisplayMove: (() -> Void)?
 
     init(windowId: WindowId, windowArgument: String, window: NSWindow) {
         self.windowId = windowId
@@ -66,7 +67,8 @@ class FlutterWindow: NSObject {
 
         closeObserver = NotificationCenter.default.addObserver(
             forName: NSWindow.willCloseNotification, object: window, queue: .main
-        ) { [windowId] _ in
+        ) { [weak self, windowId] _ in
+            self?.cancelPendingDisplayMove()
             MultiWindowManager.shared.removeWindow(windowId: windowId)
         }
     }
@@ -101,6 +103,82 @@ class FlutterWindow: NSObject {
         }
     }
 
+    private func cancelPendingDisplayMove() {
+        let cancel = pendingDisplayMove
+        pendingDisplayMove = nil
+        cancel?()
+    }
+
+    private func movePresenterDisplay(_ args: [String: Any?]?, result: @escaping FlutterResult) {
+        cancelPendingDisplayMove()
+        let screens = NSScreen.screens
+        let identities = screens.map {
+            String(UInt(bitPattern: Unmanaged.passUnretained($0).toOpaque()))
+        }
+        guard let presenter = args?["presenterDisplay"] as? String,
+            let target = args?["targetDisplay"] as? String,
+            let index = audienceDisplayIndex(identities, presenter: presenter, target: target),
+            let presenterIndex = identities.firstIndex(of: presenter),
+            let targetID = screens[index].deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID,
+            let presenterID = screens[presenterIndex].deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID,
+            CGDisplayIsOnline(targetID) != 0, CGDisplayIsOnline(presenterID) != 0
+        else {
+            result(FlutterError(code: "-1", message: "display snapshot is stale", details: nil))
+            return
+        }
+        // AppKit can replace NSScreen objects during the fullscreen transition.
+        // Keep the already-validated hardware IDs for this native transaction.
+        let apply = {
+            let live = NSScreen.screens
+            guard CGDisplayIsOnline(targetID) != 0, CGDisplayIsOnline(presenterID) != 0,
+                live.contains(where: { ($0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID) == presenterID }),
+                let screen = live.first(where: { ($0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID) == targetID })
+            else {
+                result(FlutterError(code: "-1", message: "display disappeared during move", details: nil))
+                return
+            }
+            let frame = screen.frame
+            guard frame.width > 0, frame.height > 0,
+                frame.origin.x.isFinite, frame.origin.y.isFinite,
+                frame.width.isFinite, frame.height.isFinite else {
+                result(FlutterError(code: "-1", message: "invalid display bounds", details: nil))
+                return
+            }
+            self.window.setFrame(frame, display: true)
+            if !self.window.styleMask.contains(.fullScreen) {
+                self.window.toggleFullScreen(nil)
+            }
+            result(nil)
+        }
+        guard window.styleMask.contains(.fullScreen) else {
+            apply()
+            return
+        }
+        // Wait for AppKit to exit its Space before applying geometry. Recheck
+        // the same hardware identities after that asynchronous transition.
+        let completion = DisplayTransitionCompletion()
+        pendingDisplayMove = {
+            completion.finish {
+                result(FlutterError(code: "-1", message: "display move cancelled", details: nil))
+            }
+        }
+        completion.observer = NotificationCenter.default.addObserver(
+            forName: NSWindow.didExitFullScreenNotification, object: window, queue: .main
+        ) { _ in
+            completion.finish {
+                self.pendingDisplayMove = nil
+                apply()
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            completion.finish {
+                self.pendingDisplayMove = nil
+                result(FlutterError(code: "-1", message: "fullscreen transition timed out", details: nil))
+            }
+        }
+        window.toggleFullScreen(nil)
+    }
+
     func handleWindowMethod(method: String, arguments: Any?, result: @escaping FlutterResult) {
         let args = arguments as? [String: Any?]
         switch method {
@@ -113,6 +191,7 @@ class FlutterWindow: NSObject {
             window.orderOut(nil)
             result(nil)
         case "window_close":
+            cancelPendingDisplayMove()
             window.close()
             result(nil)
         case "window_setFrame":
@@ -124,6 +203,11 @@ class FlutterWindow: NSObject {
                 window.setFrame(NSRect(x: x, y: y, width: w, height: h), display: true)
             }
             result(nil)
+        case "window_cancelDisplayMove":
+            cancelPendingDisplayMove()
+            result(nil)
+        case "window_moveToDisplay":
+            movePresenterDisplay(args, result: result)
         case "window_coverScreen":
             // Make this window a borderless surface that fills an entire screen —
             // used to show the audience slide fullscreen on the beamer while the
@@ -144,12 +228,32 @@ class FlutterWindow: NSObject {
                 return
             }
             var target: NSScreen? = nil
+            let presenterID = args?["presenterDisplay"] as? String
+            let targetID = args?["targetDisplay"] as? String
+            if presenterID != nil || targetID != nil {
+                let identities = screens.map {
+                    String(UInt(bitPattern: Unmanaged.passUnretained($0).toOpaque()))
+                }
+                guard let presenterID = presenterID, let targetID = targetID,
+                    let index = audienceDisplayIndex(identities, presenter: presenterID, target: targetID)
+                else {
+                    result(FlutterError(code: "-1", message: "display snapshot is stale", details: nil))
+                    return
+                }
+                target = screens[index]
+            }
+            if let presenterIndex = presenterIndex,
+                presenterIndex < 0 || presenterIndex >= screens.count {
+                result(FlutterError(code: "-1", message: "invalid display index", details: nil))
+                return
+            }
+
             // Prefer the screen the presenter is NOT on, when told which one that
             // is. The `external` heuristic below picks the non-primary screen,
             // which is only right when the presenter sits on the primary screen;
             // in a reversed setup it would pile both windows on the external
             // display (#1913).
-            if let presenterIndex = presenterIndex,
+            if target == nil, let presenterIndex = presenterIndex,
                 presenterIndex >= 0, presenterIndex < screens.count,
                 screens.count > 1
             {
@@ -168,13 +272,20 @@ class FlutterWindow: NSObject {
                 // window would land on a display that no longer exists while
                 // this call reports success; verify it is still online
                 // instead (#3161).
-                if let displayID = screen.deviceDescription[
+                guard let displayID = screen.deviceDescription[
                     NSDeviceDescriptionKey("NSScreenNumber")
-                ] as? CGDirectDisplayID, CGDisplayIsOnline(displayID) == 0 {
+                ] as? CGDirectDisplayID, CGDisplayIsOnline(displayID) != 0 else {
                     result(
                         FlutterError(
                             code: "-1", message: "display no longer available",
                             details: nil))
+                    return
+                }
+                let frame = screen.frame
+                guard frame.width > 0, frame.height > 0,
+                    frame.origin.x.isFinite, frame.origin.y.isFinite,
+                    frame.width.isFinite, frame.height.isFinite else {
+                    result(FlutterError(code: "-1", message: "invalid display bounds", details: nil))
                     return
                 }
                 // AppKit raises NSGenericException (and aborts the process)
@@ -195,9 +306,12 @@ class FlutterWindow: NSObject {
                 // stealing keyboard focus from the presenter window.
                 window.collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary]
                 window.isOpaque = true
-                window.setFrame(screen.frame, display: true)
+                window.setFrame(frame, display: true)
                 window.orderFrontRegardless()
                 window.setIsVisible(true)
+            } else {
+                result(FlutterError(code: "-1", message: "no display available", details: nil))
+                return
             }
             result(nil)
         default:

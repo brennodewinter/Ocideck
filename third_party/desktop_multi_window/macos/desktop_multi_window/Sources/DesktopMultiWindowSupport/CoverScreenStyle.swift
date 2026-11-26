@@ -12,3 +12,29 @@ import AppKit
 public func coverScreenStyleMask(from current: NSWindow.StyleMask) -> NSWindow.StyleMask {
     current.contains(.fullScreen) ? current : [.borderless]
 }
+
+/// Resolves identities within one live enumeration; stale indices never apply.
+public func audienceDisplayIndex(_ identities: [String], presenter: String, target: String) -> Int? {
+    guard identities.count >= 2, !presenter.isEmpty, !target.isEmpty,
+        presenter != target, Set(identities).count == identities.count,
+        identities.contains(presenter)
+    else { return nil }
+    return identities.firstIndex(of: target)
+}
+
+/// One completion for a native UI-thread transition, including observer cleanup.
+/// Notification and deadline callbacks both run on the main queue.
+public final class DisplayTransitionCompletion {
+    public var observer: NSObjectProtocol?
+    private var completed = false
+
+    public init() {}
+
+    public func finish(_ action: () -> Void) {
+        guard !completed else { return }
+        completed = true
+        if let observer = observer { NotificationCenter.default.removeObserver(observer) }
+        observer = nil
+        action()
+    }
+}

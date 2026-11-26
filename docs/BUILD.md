@@ -72,6 +72,52 @@ Impeller fix (#192522) and framework semantics fix (#193372) are merged upstream
 but absent from the pinned `3.50.0` framework revision; their workarounds remain
 until a stable SDK includes the fixes and the recorded native checks pass.
 
+### Physical-display audit (#3216)
+
+`captureDisplaySnapshot()` is the application entry point for display access.
+It copies one enumeration and the current window center into an immutable
+snapshot. Empty/failed detection, invalid bounds, duplicate identities and an
+unknown or geometrically ambiguous presenter fail closed. Placement sends
+opaque identities, never indices, to the native cover bridge. The bridge's live
+lookup only validates those same identities and obtains current bounds; it
+cannot reinterpret an old index as a different monitor. After an asynchronous
+audience move, the presenter revalidates both identities and uses fresh bounds.
+The main-window move also carries both identities into a native UI-thread
+operation, so queued platform calls cannot apply unvalidated Dart geometry.
+macOS waits for its fullscreen-exit event, then revalidates the same selected
+Core Graphics IDs and uses current bounds; the transition has a deadline. Leaving presentation mode cancels a pending native move before restoring the window, so a late fullscreen-exit event cannot move it after cancellation.
+Native identity values are temporary and never persisted.
+
+The original search included data-view limits as well as physical displays.
+The complete call-site sweep is recorded below; each row covers empty lists,
+disappearance between read/use, and changed enumeration order.
+
+| Location / operation | Guard or reason it cannot access a physical screen |
+| --- | --- |
+| `display_info.dart`: enumeration and window center | Shared capture; empty lists skip window-geometry access; failures/invalid identities or bounds become an empty snapshot. |
+| `display_info.dart`: containment, presenter and next-screen selection | Pure operations on one immutable snapshot; no indexing without a match; unknown/overlapping geometry cannot select a presenter. Next-screen choice uses the current window position, never a saved index. |
+| `display_info.dart`: audience placement and presenter movement | Both audience/presenter identities come from that snapshot. After an await, resolve the same identities again or refuse; use the new geometry without changing target. |
+| `presenter_displays.dart`: initial loading and cycling | Refresh once per action; clear the cached button state on empty detection. The cache only drives button visibility. Busy moves cannot overlap. |
+| `presenter_displays.dart`: move and rollback | Audience placement must succeed before moving the main window. Revalidate after the await. Restoration resolves the original presenter identity and the last confirmed audience identity in a fresh snapshot; neither may be replaced by another index or a new first-other-screen guess. Failure is logged and shown. |
+| `fullscreen_presenter.dart`: eligibility | A snapshot is only an initial eligibility hint; it does not authorize later placement. Failed/unknown detection selects single-screen mode. |
+| `fullscreen_presenter.dart`: audience creation | Capture at use, after asynchronous creation. Native refusal closes the hidden audience window and starts the existing single-screen fallback. |
+| `display_info_io.dart`: enumeration, center and move | This is the sole nativeapi display adapter. It exposes native object identity; movement sends identities to the native UI-thread operation, without queued Dart geometry, index clamping or a vanished display's saved bounds. Window absence throws into the existing recovery path. |
+| `document_editor_presenter.dart`: eligibility | Same snapshot-based eligibility; no stored display index or geometry is passed into the document route. |
+| `presenter_document.dart`: audience creation | Same identity-based native placement; closes the newly created hidden window on failure and returns single-screen mode. |
+| `platform/presenter_fullscreen_io.dart`: native move and exit | Tracks the native window for each move; exit cancels it before restoring fullscreen, with a bounded wait. A cancelled window-definition lookup cannot start a new move later. Cancellation and window close complete the Mac transition once and remove its observer, preventing a late geometry write. This path does not enumerate or choose a screen. |
+| `display_info_web.dart` | Returns no physical displays; browser presentation remains single-window and move is a no-op. |
+| `display_window_service.dart`, `editor_panel_view_limit.dart`, `display_window_spec.dart` | False positives: limit data rows/bullets/chart categories. They never enumerate or position physical monitors, so hot-plug and display-index drift cannot occur here. |
+| Vendored `window_coverScreen` on macOS, Windows and GTK | Resolve both requested identities in the current native list; reject missing/equal identities or invalid bounds. macOS additionally checks the display is online; Windows checks `GetMonitorInfo`; GTK verifies the selected monitor object still matches at use. |
+
+Regressions cover empty lists, removal while at least two other screens remain,
+reordering, changed geometry after an await, failure cleanup and native identity
+resolution. Run `flutter test test/display_info_test.dart
+ test/fullscreen_presenter_test.dart test/native_display_selection_test.dart`
+and, on macOS, `OCIDECK_STYLE_TESTS=1 swift test --package-path
+third_party/desktop_multi_window/macos/desktop_multi_window`. These tests are a
+code sweep; a physical two-monitor hot-plug trial is a separate acceptance task.
+OS reconfiguration is not an atomic transaction across two windows.
+
 ## Web
 
 OciDeck also builds for the browser. Use the hardened target:

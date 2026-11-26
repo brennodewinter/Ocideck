@@ -8,6 +8,7 @@
 #define DESKTOP_MULTI_WINDOW_WINDOWS_FLUTTER_WINDOW_WRAPPER_H_
 
 #include <Windows.h>
+#include "../display_selection.h"
 #include <flutter/encodable_value.h>
 #include <flutter/method_channel.h>
 #include <flutter/method_result.h>
@@ -126,7 +127,11 @@ class FlutterWindowWrapper {
         }
       }
       result->Success();
-    } else if (method == "window_coverScreen") {
+    } else if (method == "window_cancelDisplayMove") {
+      // Win32 moves finish synchronously on this UI thread.
+      result->Success();
+    } else if (method == "window_coverScreen" || method == "window_moveToDisplay") {
+      const bool moving = method == "window_moveToDisplay";
       if (!hwnd_) {
         result->Error("-1", "window is not available");
         return;
@@ -163,12 +168,41 @@ class FlutterWindowWrapper {
       }
 
       HMONITOR target = nullptr;
+      bool identity_given = false;
+      if (arguments) {
+        const auto p = arguments->find(flutter::EncodableValue("presenterDisplay"));
+        const auto t = arguments->find(flutter::EncodableValue("targetDisplay"));
+        if (p != arguments->end() || t != arguments->end()) {
+          identity_given = true;
+          const auto* presenter = p != arguments->end() ? std::get_if<std::string>(&p->second) : nullptr;
+          const auto* requested = t != arguments->end() ? std::get_if<std::string>(&t->second) : nullptr;
+          std::vector<std::string> identities;
+          for (auto monitor : search.monitors) {
+            identities.push_back(std::to_string(reinterpret_cast<UINT_PTR>(monitor)));
+          }
+          const int index = presenter && requested ? FindAudienceDisplay(identities, *presenter, *requested) : -1;
+          if (index < 0) {
+            result->Error("-1", "display snapshot is stale");
+            return;
+          }
+          target = search.monitors[index];
+        }
+      }
+      if (moving && !identity_given) {
+        result->Error("-1", "display identities are required");
+        return;
+      }
+      if (presenter_index >= static_cast<int>(search.monitors.size())) {
+        result->Error("-1", "invalid display index");
+        return;
+      }
+
       // Prefer the screen the presenter is NOT on, when told which one that is
       // (index in the same EnumDisplayMonitors order). The `external` heuristic
       // below picks the non-primary screen, which is only right when the
       // presenter sits on the primary screen; in a reversed setup it would pile
       // both windows on the external display (#1913).
-      if (presenter_index >= 0 &&
+      if (!target && presenter_index >= 0 &&
           presenter_index < static_cast<int>(search.monitors.size()) &&
           search.monitors.size() > 1) {
         HMONITOR presenter = search.monitors[presenter_index];
@@ -195,6 +229,20 @@ class FlutterWindowWrapper {
       }
 
       const RECT bounds = monitor_info.rcMonitor;
+      if (bounds.right <= bounds.left || bounds.bottom <= bounds.top) {
+        result->Error("-1", "invalid display bounds");
+        return;
+      }
+      if (moving) {
+        if (!::SetWindowPos(hwnd_, nullptr, bounds.left, bounds.top,
+                           bounds.right - bounds.left, bounds.bottom - bounds.top,
+                           SWP_NOZORDER | SWP_NOACTIVATE | SWP_SHOWWINDOW)) {
+          result->Error("-1", "unable to move presenter window");
+          return;
+        }
+        result->Success();
+        return;
+      }
       ::SetWindowLongPtr(hwnd_, GWL_STYLE, WS_POPUP | WS_VISIBLE);
       ::SetWindowLongPtr(hwnd_, GWL_EXSTYLE,
                          (::GetWindowLongPtr(hwnd_, GWL_EXSTYLE) &

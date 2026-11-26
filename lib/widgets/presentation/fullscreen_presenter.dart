@@ -341,16 +341,12 @@ class FullscreenPresenter extends StatefulWidget {
     if (costStart.cancelled) return null;
     final costSeed = costStart.seed;
 
-    var displayCount = 0;
-    if (supportsDualScreenPresenter) {
-      try {
-        final displays = getAllDisplays();
-        displayCount = displays.length;
-      } catch (e) {
-        logWarning('FullscreenPresenter.present: display detection failed', e);
-        displayCount = 0;
-      }
-    }
+    final snapshot = supportsDualScreenPresenter
+        ? captureDisplaySnapshot()
+        : null;
+    final displayCount = snapshot?.canPresentAudience == true
+        ? snapshot!.displays.length
+        : 0;
     final dual = shouldUseDualScreen(
       isDesktopNative: supportsDualScreenPresenter,
       displayCount: displayCount,
@@ -587,7 +583,7 @@ class FullscreenPresenter extends StatefulWidget {
       audienceHandle = AudienceWindowHandle(audience);
       // `coverScreen` also reveals the window. Showing it first could make the
       // fresh macOS window join the fullscreen Space before becoming borderless.
-      await audience.coverScreen(presenterScreen: presenterScreenIndex());
+      await audienceHandle.cover(captureDisplaySnapshot());
     } catch (e) {
       logError(
         'FullscreenPresenter.showDualScreen: audience window setup failed',
@@ -815,7 +811,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// a second presenter window; it keeps the current output movable between
   /// screens with S or the presenter-view button.
   List<DisplayInfo> _displays = const [];
-  int _displayIndex = 0;
 
   /// True when this presenter drives a separate audience (beamer) window.
   bool get _dual => widget.audience != null;

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:nativeapi/nativeapi.dart';
+import '../../platform/presenter_fullscreen_io.dart' as presenter;
 
 import '../../utils/log.dart';
 import 'display_info_data.dart';
@@ -11,6 +12,7 @@ List<DisplayInfo> getAllDisplays() {
         .getAll()
         .map(
           (d) => DisplayInfo(
+            nativeId: d.nativeObject.address.toString(),
             x: d.position.dx,
             y: d.position.dy,
             width: d.size.width,
@@ -35,17 +37,12 @@ Offset? getCurrentWindowCenter() {
   }
 }
 
-void moveToDisplay(int index, List<DisplayInfo> displays) {
-  if (displays.length < 2) return;
-  final d = displays[index.clamp(0, displays.length - 1)];
-  try {
-    final window = WindowManager.instance.getCurrent();
-    if (window == null) return;
-    window.isFullScreen = false;
-    window.bounds = Rect.fromLTWH(d.x, d.y, d.width, d.height);
-    window.isFullScreen = true;
-  } catch (e) {
-    logError('display_info_io.moveToDisplay: failed', e);
-    rethrow;
-  }
+Future<void> moveToDisplay(
+  DisplayInfo display, {
+  required DisplayInfo previous,
+}) async {
+  await presenter.movePresenterToDisplay(
+    presenterDisplay: previous.nativeId!,
+    targetDisplay: display.nativeId!,
+  );
 }
