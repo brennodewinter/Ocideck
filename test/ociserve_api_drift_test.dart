@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  3c7c40f39456c71259b5958204de405b9dbd35af
+// OciServe commit:  1a8e8cdbd0a663dfe59874b5bf702b54ed345569
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -16,12 +16,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = '3c7c40f39456c71259b5958204de405b9dbd35af';
+const pinnedOciServeCommit = '1a8e8cdbd0a663dfe59874b5bf702b54ed345569';
 
 /// SHA-256 of the pinned spec file itself — a spec silently replaced or
 /// hand-edited shows up here, not in a subtle field rename.
 const pinnedOciServeSpecSha256 =
-    'c94de1dd15b6d384997652e6844d2e8a6c14b82e53529058d87a7cf1981e5c27';
+    'cee649bdb8ca612a5e2831ace86917dff763016c5052a3447f9868eb0d2ae100';
 
 /// The capability catalogue the pinned spec declares (`info.x-capability-
 /// catalog-version`) and the intake capabilities OciDeck may rely on.
@@ -64,6 +64,75 @@ class GatewayRoute {
 const gatewayRoutes = <GatewayRoute>[
   GatewayRoute(
     method: 'GET',
+    path: '/api/v1/organizations/{}/files',
+    responseFields: ['folder', 'breadcrumbs', 'items', 'next_cursor'],
+    responseSchema: 'FileCatalogPage',
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/files/{}/content',
+    responseFields: [],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/file-shares',
+    responseFields: ['items', 'next_cursor'],
+    responseSchema: 'FileSharePage',
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/file-shares',
+    responseFields: [
+      'id',
+      'root_id',
+      'expires_at',
+      'status',
+      'password_protected',
+      'revision',
+      'link',
+    ],
+    responseSchema: 'FileShare',
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/organizations/{}/file-shares/{}',
+    responseFields: ['revision'],
+    responseSchema: 'FileShare',
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/organizations/{}/file-shares/{}',
+    responseFields: [],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/public/file-shares/{}/unlock',
+    responseFields: ['grant', 'expires_at'],
+    responseSchema: 'FileShareGrant',
+    security: 'none',
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/public/file-shares/{}',
+    responseFields: ['node', 'items', 'next_cursor'],
+    responseSchema: 'PublicFileShareNode',
+    security: 'none',
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/public/file-shares/{}/nodes/{}',
+    responseFields: ['node', 'items'],
+    responseSchema: 'PublicFileShareNode',
+    security: 'none',
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/public/file-shares/{}/nodes/{}/content',
+    responseFields: [],
+    security: 'none',
+  ),
+  GatewayRoute(
+    method: 'GET',
     path: '/api/v1/installation',
     security: 'none',
     responseSchema: 'InstallationStatus',
@@ -80,6 +149,8 @@ const gatewayRoutes = <GatewayRoute>[
       'account.email',
       'account.avatar_hash',
       'memberships',
+      'provider_features.passwordless_enrollable',
+      'provider_features.passkey_management_url',
     ],
   ),
   GatewayRoute(
@@ -736,6 +807,13 @@ bool inOciDeckSurface(String normalisedPath) =>
 /// blijven: zodra de gateway hem gaat gebruiken, verdwijnt de regel —
 /// precies zoals de omgekeerde poort bedoeld is (#2430, naar Keiko #372).
 const unusedSpecRoutes = <String, String>{
+  'GET /api/v1/public/file-shares/open':
+      'HTML-browserlanding; OciDeck gebruikt het afzonderlijke JSON-contract',
+  'GET /api/v1/public/certificates/verify':
+      'publieke certificaatverificatie; de app gebruikt haar eigen certificaatweergave',
+  'GET /api/v1/organizations/{}/participants/{}/attempts/{}/review':
+      'gedetailleerde examenreview voor beheerders, buiten deze bestandsintegratie',
+
   // Browserflows van Keiko, niet van OciDeck.
   'GET /api/v1/auth/web/login': 'browseraanmelding van Keiko',
   'GET /api/v1/auth/web/callback': 'browseraanmelding van Keiko',

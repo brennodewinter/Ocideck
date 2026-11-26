@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:28b5d1ec-2eec-57f9-8b76-3d2c03e1216d",
+  "serialNumber": "urn:uuid:46a7b541-ade7-5898-8a40-f93d115bdeba",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-25T12:23:29.852447Z",
+    "timestamp": "2026-11-26T07:45:16.820979Z",
     "tools": {
       "components": [
         {
@@ -9166,6 +9166,39 @@
       ]
     },
     {
+      "bom-ref": "first-party:ociserve_file_contract@1.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "Stichting LibreKAT",
+        "url": [
+          "https://librekat.nl"
+        ]
+      },
+      "name": "ociserve_file_contract",
+      "version": "1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "EUPL-1.2"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "first-party"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "First-party package in packages/ociserve_file_contract, part of this repository and released with it; it has no archive hash of its own."
+        }
+      ]
+    },
+    {
       "bom-ref": "font:assets/fonts/EBGaramond-Italic-Variable.ttf",
       "type": "file",
       "supplier": {
@@ -10277,6 +10310,7 @@
       "dependsOn": [
         "export-asset:highlight.css",
         "first-party:ocideck_form_core@0.0.1",
+        "first-party:ociserve_file_contract@1.0.0",
         "font:assets/fonts/EBGaramond-Italic-Variable.ttf",
         "font:assets/fonts/EBGaramond-Variable.ttf",
         "font:assets/fonts/Inter-Variable.ttf",
@@ -12190,6 +12224,10 @@
         "pkg:pub/cryptography@2.9.0",
         "pkg:pub/dartage@0.3.0"
       ]
+    },
+    {
+      "ref": "first-party:ociserve_file_contract@1.0.0",
+      "dependsOn": []
     },
     {
       "ref": "font:assets/fonts/EBGaramond-Italic-Variable.ttf",

@@ -29,6 +29,10 @@ class PinnedOciServeHttpTransport implements OciServeHttpTransport {
         maxResponseBytes > absoluteMaxResponseBytes) {
       throw const OciServeTransportException('request_refused');
     }
+    final scope = OciServeRequestScope.current;
+    if (scope?.cancelled == true) {
+      throw const OciServeTransportException('cancelled');
+    }
     final addresses = await NetGuard.safeResolveTrusted(
       url.host,
       allowPrivate: trustedInternal,
@@ -36,7 +40,12 @@ class PinnedOciServeHttpTransport implements OciServeHttpTransport {
     if (addresses == null || addresses.isEmpty) {
       throw const OciServeTransportException('host_refused');
     }
+    if (scope?.cancelled == true) {
+      throw const OciServeTransportException('cancelled');
+    }
     final client = buildPinnedClient(addresses.first);
+    void abort() => client.close(force: true);
+    scope?.add(abort);
     try {
       final request = await client.openUrl(method, url).timeout(timeout);
       request.followRedirects = false;
@@ -65,8 +74,11 @@ class PinnedOciServeHttpTransport implements OciServeHttpTransport {
       throw const OciServeTransportException('timeout');
     } catch (error, stack) {
       logError('OciServe: netwerkverzoek', error.runtimeType, stack);
-      throw const OciServeTransportException('network');
+      throw OciServeTransportException(
+        scope?.cancelled == true ? 'cancelled' : 'network',
+      );
     } finally {
+      scope?.remove(abort);
       client.close(force: true);
     }
   }

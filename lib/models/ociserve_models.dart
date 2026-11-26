@@ -80,6 +80,8 @@ class OciServeAccount {
     this.email = '',
     this.avatarHash = '',
     this.memberships = const [],
+    this.passwordlessEnrollable = false,
+    this.passkeyManagementUrl,
   });
 
   final String id;
@@ -87,6 +89,8 @@ class OciServeAccount {
   final String email;
   final String avatarHash;
   final List<OciServeMembership> memberships;
+  final bool passwordlessEnrollable;
+  final Uri? passkeyManagementUrl;
 
   List<OciServeMembership> get activeMemberships => memberships
       .where((membership) => membership.isActive)
@@ -107,6 +111,14 @@ class OciServeAccount {
         : const <Object?>[];
     return OciServeAccount(
       id: id,
+      passwordlessEnrollable:
+          (json['provider_features'] as Map?)?['passwordless_enrollable'] ==
+          true,
+      passkeyManagementUrl: Uri.tryParse(
+        (json['provider_features'] as Map?)?['passkey_management_url']
+                as String? ??
+            '',
+      ),
       displayName:
           (rawAccount['display_name'] as String? ??
                   rawAccount['name'] as String? ??
@@ -131,11 +143,16 @@ class OciServeMembership {
     required this.organizationId,
     this.name = '',
     this.status = 'active',
+    this.capabilities = const [],
   });
 
   final String organizationId;
   final String name;
   final String status;
+  final List<String> capabilities;
+  bool get canBrowseFiles => capabilities.contains('content:create');
+  bool get canShareFiles =>
+      canBrowseFiles && capabilities.contains('content:edit');
 
   bool get isActive => status.isEmpty || status.toLowerCase() == 'active';
 
@@ -144,7 +161,14 @@ class OciServeMembership {
     if (id.isEmpty) throw const FormatException('incomplete membership');
     return OciServeMembership(
       organizationId: id,
-      name: (json['name'] as String? ?? '').trim(),
+      name:
+          (json['organization_name'] as String? ??
+                  json['name'] as String? ??
+                  '')
+              .trim(),
+      capabilities: (json['effective_capabilities'] as List? ?? [])
+          .whereType<String>()
+          .toList(),
       status: (json['status'] as String? ?? 'active').trim(),
     );
   }
