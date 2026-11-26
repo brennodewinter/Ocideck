@@ -106,14 +106,17 @@ jobs:
       - name: De gebouwde app starten en het eerste frame toetsen
         run: bash scripts/linux_start_probe.sh probe-evidence build/linux/x64/release/bundle/ocideck
 
-      - name: Native vensterproeven op X11 en Wayland
+      - name: Gereedschap voor de native vensterproeven installeren
         if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' || inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
-        run: |
-          set -eu
-          apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim libwayland-dev
-          app=build/linux/x64/release/bundle/ocideck
-          scripts/run_linux_window_probe.sh x11 "$app" probe-evidence/window-x11
-          scripts/run_linux_window_probe.sh wayland "$app" probe-evidence/window-wayland
+        run: apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim libwayland-dev
+
+      - name: Native vensterproef op X11
+        if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' }}
+        run: scripts/run_linux_window_probe.sh x11 build/linux/x64/release/bundle/ocideck probe-evidence/window-x11
+
+      - name: Native vensterproef op Wayland
+        if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' || inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
+        run: scripts/run_linux_window_probe.sh wayland build/linux/x64/release/bundle/ocideck probe-evidence/window-wayland
 
       - name: Wayland-regressie zonder schaalworkaround
         if: ${{ inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}

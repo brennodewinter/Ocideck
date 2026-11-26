@@ -65,6 +65,13 @@ class X11:
     def __init__(self, evidence):
         self.manager = subprocess.Popen(['openbox', '--sm-disable'],
                                         stdout=evidence, stderr=subprocess.STDOUT)
+        try:
+            wait_for('Openbox to manage the X11 display', lambda: re.search(
+                rb'window id # 0x[1-9a-f][0-9a-f]*',
+                run('xprop', '-root', '_NET_SUPPORTING_WM_CHECK')), self.manager)
+        except (RuntimeError, subprocess.TimeoutExpired):
+            stop(self.manager)
+            raise
 
     def window(self, pid):
         ids = run('xdotool', 'search', '--onlyvisible', '--pid', str(pid)).split()
@@ -325,7 +332,14 @@ def exercise(args, profile):
             log = data / 'logs' / 'ocideck.log'
             wait_for('first rasterized frame', lambda: re.search(
                 r' INFO opstart: eerste frame \(\+\d+ ms\)', log.read_text()), app)
-            window = wait_for('visible native window', lambda: driver.window(app.pid), app)
+            try:
+                window = wait_for('visible native window', lambda: driver.window(app.pid), app)
+            except RuntimeError:
+                if args.backend == 'x11':
+                    with (args.evidence / 'x11-window-tree.log').open('w') as tree:
+                        subprocess.run(['timeout', '5s', 'xwininfo', '-root', '-tree'],
+                                       stdout=tree, stderr=subprocess.STDOUT, check=False)
+                raise
             sizes = ((1060, 700), (1420, 900), (1060, 700))
             targets = sizes if args.backend == 'x11' else ('HEADLESS-1', 'HEADLESS-2', 'HEADLESS-1')
             results = []
