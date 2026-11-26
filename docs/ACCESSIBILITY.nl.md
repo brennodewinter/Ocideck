@@ -467,7 +467,7 @@ en de gebreken die hij ving. OciDeck claimt geen WCAG 2.1-conformiteit op enig
 niveau, heeft geen toegankelijkheidsconformiteitsrapport, en is niet getest met
 gebruikers van hulptechnologie.
 
-**De schermlezertoets staat open (#1844, #3237).** Automatische tests toetsen
+**De schermlezertoets staat open (#1844).** Automatische tests toetsen
 de koppeling tussen bullet en beschrijving in de HTML-DOM, de afwezigheid van
 nog niet onthulde markeringen en de bulletbeschrijvingen in de Flutter-
 semantiekboom, en precies één beleefde aankondiging per onthulstap.

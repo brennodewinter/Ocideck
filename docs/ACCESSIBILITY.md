@@ -455,7 +455,7 @@ and the defects it caught. OciDeck does not claim WCAG 2.1 conformance at any
 level, has no accessibility conformance report, and has not been tested with
 users of assistive technology.
 
-**Screen-reader verification is open (#1844, #3237).** Automated tests cover
+**Screen-reader verification is open (#1844).** Automated tests cover
 the bullet-to-description link in the HTML DOM, the absence of unrevealed
 marks and the bullet descriptions in Flutter's semantics tree, and exactly
 one polite announcement per reveal step.
