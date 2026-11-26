@@ -6,6 +6,7 @@ import csv
 import ctypes as C
 from dataclasses import asdict, dataclass
 import io
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,8 @@ import tempfile
 import time
 
 from PIL import Image, ImageGrab, ImageOps, ImageStat
+
+from linux_startup_log import startup_frame
 
 
 @dataclass(frozen=True)
@@ -317,6 +320,10 @@ def exercise(args, profile):
                       XDG_RUNTIME_DIR=str(runtime), LANG='C.UTF-8', LC_ALL='C.UTF-8',
                       LIBGL_ALWAYS_SOFTWARE='1', OMP_THREAD_LIMIT='1',
                       XCURSOR_THEME='Adwaita', XCURSOR_SIZE='24')
+    x11_display = os.environ.get('DISPLAY')
+    os.environ['XDG_SESSION_TYPE'] = args.backend
+    for key in ('DISPLAY', 'WAYLAND_DISPLAY', 'SWAYSOCK'):
+        os.environ.pop(key, None)
     # dbus-run-session starts before the app profile exists. Give activated
     # services the same private home and runtime directory as OciDeck.
     run('dbus-update-activation-environment', 'HOME', 'XDG_DATA_HOME',
@@ -325,12 +332,24 @@ def exercise(args, profile):
         '--object-path', '/org/freedesktop/secrets', '--method', 'org.freedesktop.DBus.Peer.Ping')
     with (args.evidence / 'compositor.log').open('w') as compositor, (args.evidence / 'app.log').open('w') as app_log:
         if args.backend == 'x11':
-            os.environ['GDK_BACKEND'] = 'x11'
+            if not x11_display:
+                raise RuntimeError('X11 probe requires its private Xvfb display')
+            os.environ.update(DISPLAY=x11_display, GDK_BACKEND='x11')
             driver = X11(compositor)
         else:
             driver = Wayland(profile, compositor, args.evidence / 'app.log')
         app = None
         try:
+            session = {
+                'backend': args.backend,
+                'compositor': 'sway-headless' if args.backend == 'wayland' else 'openbox-xvfb',
+                'source_commit': os.environ.get('OCIDECK_PROBE_SOURCE_COMMIT'),
+                'executable_sha256': hashlib.sha256(args.executable.read_bytes()).hexdigest(),
+                'gdk_backend': os.environ['GDK_BACKEND'],
+                'display': os.environ.get('DISPLAY'),
+                'wayland_display': os.environ.get('WAYLAND_DISPLAY'),
+            }
+            (args.evidence / 'session.json').write_text(json.dumps(session, indent=2) + '\n')
             app_env = dict(os.environ)
             if args.backend == 'wayland':
                 app_env['WAYLAND_DEBUG'] = 'client'
@@ -339,9 +358,13 @@ def exercise(args, profile):
             log = data / 'logs' / 'ocideck.log'
             # Allow GTK and the software renderer to initialize on a busy runner.
             launch_timeout = 90
-            wait_for('first rasterized frame', lambda: re.search(
-                r' INFO opstart: eerste frame \(\+\d+ ms\)', log.read_text()), app,
+            wait_for('first rasterized frame', lambda: startup_frame(log), app,
                 seconds=launch_timeout)
+            time.sleep(3)
+            if app.poll() is not None or not startup_frame(log):
+                raise RuntimeError('OciDeck did not stay running after its first frame')
+            session.update(first_frame=True, stayed_running=True)
+            (args.evidence / 'session.json').write_text(json.dumps(session, indent=2) + '\n')
             try:
                 window = wait_for('visible native window', lambda: driver.window(app.pid), app,
                                   seconds=launch_timeout)
@@ -369,10 +392,11 @@ def exercise(args, profile):
                         return rect
                     return None
 
+                startup_frame(log)
                 rect = wait_for(f'logical geometry {target}', configured, app)
                 time.sleep(0.75)
                 point = check_content(driver, rect, args.evidence, f'window-{index}')
-                results.append({'target': target, **asdict(rect)})
+                results.append({'target': target, 'scale': (2 if target == 'HEADLESS-2' else 1), **asdict(rect)})
                 print(f'{args.backend} {target}: {rect.width}x{rect.height} with visible Flutter content', flush=True)
                 if index != 1:
                     continue
@@ -411,8 +435,12 @@ def exercise(args, profile):
                     return settings_button(image) if not settings_search(image) else None
 
                 wait_for('welcome screen after Settings closes', welcome_again, app)
+            startup_frame(log)
             (args.evidence / 'result.json').write_text(json.dumps(results, indent=2) + '\n')
         finally:
+            log = data / 'logs' / 'ocideck.log'
+            if log.exists():
+                (args.evidence / 'startup.log').write_bytes(log.read_bytes())
             stop(app)
             if args.backend == 'wayland':
                 stop(driver.pointer)
