@@ -1564,6 +1564,91 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Openen in browser': 'Άνοιγμα στο πρόγραμμα περιήγησης',
+  'Aanpassen': 'Προσαρμογή',
+  'Hoofdmap': 'Κύριος φάκελος',
+  'Lokale tijdzone': 'Τοπική ζώνη ώρας',
+  'Map': 'Φάκελος',
+  'Vastgelegde versie': 'Διορθωμένη έκδοση',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Η προσαρμογή θα ακυρώσει τα υπάρχοντα ξεκλειδώματα. Οι παραλήπτες πρέπει να ανοίξουν ξανά τον σύνδεσμο.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Μόνο για ανάγνωση. Χωρίς ώρα λήξης, ένας νέος σύνδεσμος ισχύει για επτά ημέρες. το πολύ ενενήντα ημέρες.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Στιγμιότυπο μόνο για ανάγνωση. Απαιτείται εκ νέου ξεκλείδωμα μετά το κλείσιμο ή τη λήξη.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Ο παλιός σύνδεσμος και τα υπάρχοντα ξεκλειδώματα δεν θα λειτουργούν πλέον μετά από αυτό.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Ο διακομιστής καθορίζει εάν επιτρέπεται να διαβάζετε αρχεία. Θα εμφανιστεί ένα μήνυμα εάν λείπουν δικαιώματα.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Ο διακομιστής μοιράζεται τη δημοσιευμένη έκδοση. Οι τοπικές αλλαγές δεν μεταφορτώνονται.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Ο διακομιστής καταγράφει αυτόν τον φάκελο και έως και 2.000 στοιχεία ως στιγμιότυπο μόνο για ανάγνωση. Οι επόμενες αλλαγές εξαιρούνται από αυτόν τον σύνδεσμο.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Η συνεδρία έχει αλλάξει. Ανοίξτε ξανά την πηγή.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Η έκδοση έχει αλλάξει. Ανανεώστε την επισκόπηση και δοκιμάστε ξανά.',
+  'Deellink aanpassen': 'Προσαρμογή συνδέσμου κοινής χρήσης',
+  'Deellink beheren': 'Διαχείριση συνδέσμου κοινής χρήσης',
+  'Deellink intrekken?': 'Ανάκληση συνδέσμου κοινής χρήσης;',
+  'Deellink maken': 'Δημιουργία συνδέσμου κοινής χρήσης',
+  'Deellinks beheren': 'Διαχείριση συνδέσμων κοινής χρήσης',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Η κοινή χρήση απαιτεί ένα δημοσιευμένο αρχείο OciServe. Πρώτα αποθηκεύστε συνειδητά ένα τοπικό αρχείο στον οργανισμό και ανοίξτε το μέσω του OciServe.',
+  'Delen via OciServe…': 'Κοινοποίηση μέσω OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Αυτός ο σύνδεσμος κοινής χρήσης δεν είναι διαθέσιμος ή έχει λήξει ή έχει ανακληθεί.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Αυτή η εγκατάσταση υποστηρίζει τη σύνδεση OciServe μόνο στην εφαρμογή επιφάνειας εργασίας.',
+  'Deze map is leeg.': 'Αυτός ο φάκελος είναι κενός.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Αυτός ο διακομιστής δεν υποστηρίζει αυτόν τον πόρο ή ο στόχος δεν υπάρχει πλέον.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Αυτό το αρχείο είναι πολύ μεγάλο για να ανοίξει (μέγιστο 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Αυτός ο τύπος αρχείου δεν υποστηρίζεται.',
+  'Einddatum en tijd': 'Ημερομηνία και ώρα λήξης',
+  'Inloggen met passkey of andere methode':
+      'Συνδεθείτε με κωδικό πρόσβασης ή άλλη μέθοδο',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Επιλέξτε μια ώρα εντός 90 ημερών και έναν κωδικό πρόσβασης από 8 έως 256 byte ή αφήστε τον κωδικό πρόσβασης κενό.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Η αντιγραφή απέτυχε. Επιλέξτε και αντιγράψτε τον σύνδεσμο με μη αυτόματο τρόπο.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Οι σύνδεσμοι είναι ορατοί μόνο όταν δημιουργούνται ή περιστρέφονται. Η προσαρμογή διακόπτει τα υπάρχοντα ξεκλειδώματα.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Άνοιξε το τοπικό αντίγραφο. Η αποθήκευση δεν τροποποιεί το αρχείο OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Συνδεθείτε στον αρχικό διακομιστή OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Αρχικά, συνδεθείτε στο OciServe μέσω των Ρυθμίσεων → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Συνδεθείτε ξανά στο OciServe.',
+  'Niet ondersteund': 'Δεν υποστηρίζεται',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Νέος κωδικός πρόσβασης (κενός = αμετάβλητος)',
+  'Nieuwe link uitgeven': 'Έκδοση νέου συνδέσμου',
+  'Nieuwe link uitgeven?': 'Έκδοση νέου συνδέσμου;',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'Το OciServe δεν μπόρεσε να ολοκληρώσει το αίτημα. Ελέγξτε τη σύνδεση και δοκιμάστε ξανά.',
+  'OciServe-deellink openen': 'Ανοίξτε τον σύνδεσμο κοινής χρήσης OciServe',
+  'OciServe-deellinks beheren': 'Διαχείριση συνδέσμων κοινής χρήσης OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Οι παραλήπτες δεν θα μπορούν πλέον να ανακτούν αρχεία στη συνέχεια. Τα αντίγραφα που έχουν ήδη ληφθεί θα συνεχίσουν να υπάρχουν.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Το Open δημιουργεί ένα τοπικό αντίγραφο. Η αποθήκευση δεν αλλάζει το αρχείο διακομιστή.',
+  'Optioneel wachtwoord': 'Προαιρετικός κωδικός πρόσβασης',
+  'Passkeys beheren': 'Διαχείριση κλειδιών πρόσβασης',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Πάρα πολλές προσπάθειες. Περιμένετε τουλάχιστον ένα λεπτό και δοκιμάστε ξανά.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Δεν έχετε πρόσβαση σε αυτά τα αρχεία ή σε αυτήν την ενέργεια.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Ανανεώστε τη λίστα εάν το αποτέλεσμα είναι αβέβαιο. Έκδοση νέου συνδέσμου από την υπάρχουσα κοινή χρήση. μην δημιουργήσετε δεύτερο μερίδιο.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Εισαγάγετε τον κωδικό πρόσβασης ή δοκιμάστε ξανά.',
+  'Wachtwoord (indien vereist)': 'Κωδικός πρόσβασης (αν απαιτείται)',
+  'Wachtwoord verwijderen': 'Κατάργηση κωδικού πρόσβασης',
+  'OciServe-bestanden': 'Αρχεία OciServe',
   'Koptekst neemt ': 'Η κεφαλίδα καταλαμβάνει ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% του ύψους της διαφάνειας — το περιεχόμενο δεν έχει σχεδόν χώρο πια.',

@@ -308,6 +308,13 @@ class _WelcomeScreen extends ConsumerWidget {
       Divider(color: scheme.outlineVariant),
       const SizedBox(height: 16),
       ..._elearningEntry(context, ref, l10n, scheme, secondaryStyle),
+      _wideSecondaryButton(
+        style: secondaryStyle,
+        icon: Icons.cloud_outlined,
+        label: Text(l10n.d('OciServe-bestanden')),
+        onPressed: () => openOciServeFiles(context, ref),
+      ),
+      const SizedBox(height: 10),
       ..._formsEntry(context, ref, l10n, secondaryStyle),
       _wideSecondaryButton(
         style: secondaryStyle,
@@ -453,7 +460,7 @@ class _WelcomeScreen extends ConsumerWidget {
           unavailable: ociServeState.serverUnavailable,
           unavailableLabel: l10n.d('Geen verbinding'),
         ),
-        onPressed: () => _openOciServe(context, ref),
+        onPressed: () => openOciServeFiles(context, ref),
       ),
       const SizedBox(height: 10),
       if (ociServeState.errorCode != null) ...[
@@ -469,7 +476,7 @@ class _WelcomeScreen extends ConsumerWidget {
     ];
   }
 
-  Future<void> _openOciServe(BuildContext context, WidgetRef ref) async {
+  Future<void> openOciServeFiles(BuildContext context, WidgetRef ref) async {
     if (ref.read(ociServeProvider).status == OciServeStatus.authenticating) {
       return;
     }

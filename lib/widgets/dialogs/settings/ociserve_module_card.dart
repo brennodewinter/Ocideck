@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../models/ociserve_settings.dart';
 import '../../../services/secret_store.dart';
+import '../ociserve_passkeys_button.dart';
 import '../../../state/ociserve_provider.dart';
 import '../ociserve_invitation_dialog.dart';
 import '../../../theme/app_theme.dart';
@@ -195,6 +196,7 @@ class _OciServeIntegrationBodyState
               ),
             ],
           ),
+          OciServePasskeysButton(enabled: !busy),
           if (state.pendingReports > 0)
             Text(
               l10n
@@ -219,7 +221,7 @@ class _OciServeIntegrationBodyState
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : const Icon(Icons.login, size: 18),
-          label: Text(l10n.d('Inloggen')),
+          label: Text(l10n.d('Inloggen met passkey of andere methode')),
         ),
         TextButton(
           onPressed: busy ? null : () => OciServeInvitationDialog.show(context),

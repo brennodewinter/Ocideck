@@ -199,6 +199,7 @@ import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
 import 'shell/document_save_actions.dart';
 import 'shell/open_failure_message.dart';
+import 'shell/ociserve_file_actions.dart';
 import '../services/import/document_import_service.dart'
     show isImportableDocumentName;
 import 'forms/form_inbox_dialog.dart';

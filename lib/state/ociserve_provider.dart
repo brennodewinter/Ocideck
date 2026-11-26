@@ -417,6 +417,43 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     }
   }
 
+  /// Executes within a captured session; a refresh may happen, a tenant or
+  /// account switch must never deliver the previous result to a new session.
+  Future<T> fileOperation<T>(
+    String organizationId,
+    Future<T> Function(OciServeApi api, String token) operation, {
+    OciServeRequestScope? scope,
+  }) async {
+    final generation = _generation;
+    final settings = state.settings;
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    if (_generation != generation) throw const OciServeException('cancelled');
+    if (scope?.cancelled == true) throw const OciServeException('cancelled');
+    final result = await (scope == null
+        ? operation(_gatewayFactory(settings), access)
+        : scope.run(() => operation(_gatewayFactory(settings), access)));
+    if (_generation != generation) throw const OciServeException('cancelled');
+    _requireMembership(organizationId);
+    return result;
+  }
+
+  Future<bool> managePasskeys() async {
+    final uri = state.account?.passkeyManagementUrl;
+    final issuer = _installation?.issuer;
+    if (!state.authenticated ||
+        state.account?.passwordlessEnrollable != true ||
+        uri == null ||
+        issuer == null ||
+        uri.scheme != 'https' ||
+        uri.userInfo.isNotEmpty ||
+        uri.origin != issuer.origin ||
+        uri.hasFragment) {
+      throw const OciServeException('passkey_management_unavailable');
+    }
+    return ref.read(ociServeAccountBrowserProvider).open(uri);
+  }
+
   Future<void> acceptIdentityProvider(String host) async {
     final normalized = host.trim().toLowerCase();
     if (normalized.isEmpty || normalized != state.identityProviderHost) {

@@ -1541,6 +1541,90 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Openen in browser': 'Åbn i browser',
+  'Aanpassen': 'Juster',
+  'Hoofdmap': 'Hovedmappe',
+  'Lokale tijdzone': 'Lokal tidszone',
+  'Map': 'Mappe',
+  'Vastgelegde versie': 'Fast version',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Justering vil ugyldiggøre eksisterende oplåsninger. Modtagere skal genåbne linket.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Læsebeskyttet. Uden et sluttidspunkt er et nyt link gyldigt i syv dage; højst halvfems dage.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Skrivebeskyttet øjebliksbillede. Genoplåsning er påkrævet efter lukning eller udløb.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Det gamle link og eksisterende oplåsninger vil ikke længere virke efter dette.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Serveren bestemmer, om du må læse filer. Der vises en meddelelse, hvis tilladelser mangler.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Serveren deler den offentliggjorte version. Lokale ændringer uploades ikke.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Serveren fanger denne mappe og op til 2.000 elementer som et skrivebeskyttet øjebliksbillede. Efterfølgende ændringer er udelukket fra dette link.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sessionen er blevet ændret. Åbn kilden igen.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Udgaven er blevet ændret. Opdater oversigten, og prøv igen.',
+  'Deellink aanpassen': 'Juster delelink',
+  'Deellink beheren': 'Administrer delelink',
+  'Deellink intrekken?': 'Vil du tilbagekalde delelink?',
+  'Deellink maken': 'Opret delelink',
+  'Deellinks beheren': 'Administrer delingslinks',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Deling kræver en publiceret OciServe-fil. Gem først bevidst en lokal fil i organisationen og åbn den via OciServe.',
+  'Delen via OciServe…': 'Del via OciServe...',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Dette delingslink er ikke tilgængeligt eller er udløbet eller blevet tilbagekaldt.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Denne installation understøtter kun OciServe-login i desktop-appen.',
+  'Deze map is leeg.': 'Denne mappe er tom.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Denne server understøtter ikke denne ressource, eller målet eksisterer ikke længere.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Denne fil er for stor til at åbne (maks. 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Denne filtype understøttes ikke.',
+  'Einddatum en tijd': 'Slutdato og klokkeslæt',
+  'Inloggen met passkey of andere methode':
+      'Log ind med adgangsnøgle eller anden metode',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Vælg et tidspunkt inden for 90 dage og en adgangskode fra 8 til 256 bytes, eller lad adgangskoden stå tom.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopiering mislykkedes. Vælg og kopier linket manuelt.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Links er kun synlige, når de oprettes eller roteres. Justering bryder eksisterende oplåsninger.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Lokal kopi åbnet. At gemme ændrer ikke OciServe-filen.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Log ind på den originale OciServe-server.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Først skal du logge ind på OciServe via Indstillinger → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Log ind på OciServe igen.',
+  'Niet ondersteund': 'Ikke understøttet',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Ny adgangskode (tom = uændret)',
+  'Nieuwe link uitgeven': 'Udsted nyt link',
+  'Nieuwe link uitgeven?': 'Vil du udstede nyt link?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe kunne ikke fuldføre anmodningen. Kontroller forbindelsen, og prøv igen.',
+  'OciServe-deellink openen': 'Åbn OciServe-delingslinket',
+  'OciServe-deellinks beheren': 'Administrer OciServe-delelinks',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Modtagere vil ikke længere kunne hente filer efterfølgende. Kopier, der allerede er downloadet, vil fortsat eksistere.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open laver en lokal kopi. At gemme ændrer ikke serverfilen.',
+  'Optioneel wachtwoord': 'Valgfri adgangskode',
+  'Passkeys beheren': 'Administrer adgangsnøgler',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'For mange forsøg. Vent mindst et minut, og prøv igen.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Du har ikke adgang til disse filer eller denne handling.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Opdater listen, hvis resultatet er usikkert. Udsted et nyt link fra den eksisterende share; opret ikke en anden share.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Indtast adgangskoden, eller prøv igen.',
+  'Wachtwoord (indien vereist)': 'Adgangskode (hvis påkrævet)',
+  'Wachtwoord verwijderen': 'Fjern adgangskode',
+  'OciServe-bestanden': 'OciServe filer',
   'Koptekst neemt ': 'Sidehovedet optager ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% af diasets højde — indholdet har næsten ingen plads tilbage.',

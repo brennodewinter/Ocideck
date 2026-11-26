@@ -1569,6 +1569,90 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Openen in browser': 'Oscail sa bhrabhsálaí',
+  'Aanpassen': 'Coigeartaigh',
+  'Hoofdmap': 'Príomhfhillteán',
+  'Lokale tijdzone': 'Crios ama áitiúil',
+  'Map': 'Fillteán',
+  'Vastgelegde versie': 'Leagan seasta',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Déanfaidh coigeartú díghlasáil reatha neamhbhailí. Ní mór d’fhaighteoirí an nasc a athoscailt.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Léigh amháin. Gan am críochnaithe, tá nasc nua bailí ar feadh seacht lá; nócha lá ar a mhéad.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Léiriú inléite amháin. Tá gá le hathdhíghlasáil tar éis dúnadh nó dul in éag.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Ní oibreoidh an seannasc agus na díghlasálacha atá ann cheana ina dhiaidh seo a thuilleadh.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Cinneann an freastalaí cibé an bhfuil cead agat comhaid a léamh. Taispeánfar teachtaireacht má tá ceadanna in easnamh.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Roinneann an freastalaí an leagan foilsithe. Ní uaslódáiltear athruithe áitiúla.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Gabhann an freastalaí an fillteán seo agus suas le 2,000 mír mar ghrianghraf inléite amháin. Tá athruithe ina dhiaidh sin eisiata ón nasc seo.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Athraíodh an seisiún. Oscail an fhoinse arís.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Tá an leagan athraithe. Athnuaigh an forbhreathnú agus bain triail eile as.',
+  'Deellink aanpassen': 'Coigeartaigh nasc comhroinnte',
+  'Deellink beheren': 'Bainistigh nasc comhroinnte',
+  'Deellink intrekken?': 'An bhfuil fonn ort nasc comhroinnte a chúlghairm?',
+  'Deellink maken': 'Cruthaigh nasc comhroinnte',
+  'Deellinks beheren': 'Bainistigh naisc chomhroinnte',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Teastaíonn comhad OciServe foilsithe chun é a chomhroinnt. Ar dtús sábháil comhad áitiúil go comhfhiosach ag an eagraíocht agus oscail trí OciServe é.',
+  'Delen via OciServe…': 'Roinn trí OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Níl an nasc comhroinnte seo ar fáil nó tá sé imithe in éag nó cúlghairthe.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Tacaíonn an tsuiteáil seo le logáil isteach OciServe san aip deisce amháin.',
+  'Deze map is leeg.': 'Tá an fillteán seo folamh.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Ní thacaíonn an freastalaí seo leis an acmhainn seo, nó níl an sprioc ann a thuilleadh.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Tá an comhad seo rómhór le hoscailt (32 MB ar a mhéad).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Ní thacaítear leis an gcineál comhaid seo.',
+  'Einddatum en tijd': 'Dáta deiridh agus am',
+  'Inloggen met passkey of andere methode':
+      'Logáil isteach le pasfhocal nó modh eile',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Roghnaigh am laistigh de 90 lá agus pasfhocal ó 8 go 256 beart, nó fág an focal faire bán.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Theip ar an gcóipeáil. Roghnaigh agus cóipeáil an nasc de láimh.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Níl naisc le feiceáil ach amháin nuair a chruthaítear nó nuair a rothlaíonn siad. Má dhéantar é a choigeartú, briseann sé na díghlasálacha atá ann cheana féin.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Osclaíodh cóip áitiúil. Ní athraíonn an sábháil an comhad OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Logáil isteach ar an bhfreastalaí OciServe bunaidh.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Ar dtús, logáil isteach in OciServe trí Socruithe → ríomhfhoghlaim.',
+  'Meld u opnieuw aan bij OciServe.': 'Logáil isteach in OciServe arís.',
+  'Niet ondersteund': 'Ní thacaítear leis',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Pasfhocal nua (folamh = gan athrú)',
+  'Nieuwe link uitgeven': 'Eisigh nasc nua',
+  'Nieuwe link uitgeven?': 'An eisiúint nasc nua?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'Ní raibh OciServe in ann an t-iarratas a chomhlánú. Seiceáil an nasc agus bain triail eile as.',
+  'OciServe-deellink openen': 'Oscail nasc comhroinnte OciServe',
+  'OciServe-deellinks beheren': 'Bainistigh naisc scaireanna OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Ní bheidh faighteoirí in ann comhaid a aisghabháil ina dhiaidh sin. Leanfaidh cóipeanna a íoslódáladh cheana de bheith ann.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Déanann Oscailte cóip áitiúil. Ní athraíonn an sábháil an comhad freastalaí.',
+  'Optioneel wachtwoord': 'Focal faire roghnach',
+  'Passkeys beheren': 'Bainistigh pasfhocail',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'An iomarca iarrachtaí. Fan nóiméad ar a laghad agus bain triail eile as.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Níl rochtain agat ar na comhaid seo ná ar an ngníomh seo.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Athnuaigh an liosta mura bhfuil an toradh cinnte. Nasc nua a eisiúint ón sciar reatha; ná cruthaigh an dara sciar.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Cuir isteach an pasfhocal nó bain triail eile as.',
+  'Wachtwoord (indien vereist)': 'Pasfhocal (má theastaíonn)',
+  'Wachtwoord verwijderen': 'Bain pasfhocal',
+  'OciServe-bestanden': 'Comhaid OciServe',
   'Koptekst neemt ': 'Tógann an ceanntásc ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% d\'airde an tsleamhnáin — níl beagnach aon spás fágtha ag an ábhar.',

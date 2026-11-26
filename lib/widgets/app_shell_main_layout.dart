@@ -310,6 +310,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _openCommandPalette();
             case 'open':
               _openWithSearch(context, ref);
+            case 'open_ociserve':
+              openOciServeFiles(context, ref);
+            case 'share_ociserve':
+              shareOciServeCurrent(context, ref);
             case 'open_remote':
               _openFromConnection(context, ref);
             case 'save_remote':

@@ -1541,6 +1541,90 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Openen in browser': 'Buka di peramban',
+  'Aanpassen': 'Sesuaikan',
+  'Hoofdmap': 'Folder utama',
+  'Lokale tijdzone': 'Zona waktu lokal',
+  'Map': 'Map',
+  'Vastgelegde versie': 'Versi tetap',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Penyesuaian akan membatalkan pembukaan kunci yang ada. Penerima harus membuka kembali tautan tersebut.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Hanya baca. Tanpa batas waktu, tautan baru berlaku selama tujuh hari; maksimal sembilan puluh hari.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Cuplikan hanya-baca. Membuka kembali diperlukan setelah penutupan atau kedaluwarsa.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Tautan lama dan pembukaan kunci yang ada tidak akan berfungsi lagi setelah ini.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Server menentukan apakah Anda diperbolehkan membaca file. Sebuah pesan akan muncul jika izin tidak ada.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Server membagikan versi yang diterbitkan. Perubahan lokal tidak diunggah.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Server menangkap folder ini dan hingga 2.000 item sebagai snapshot baca-saja. Perubahan selanjutnya dikecualikan dari tautan ini.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sesi telah diubah. Buka sumbernya lagi.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versi telah diubah. Segarkan ikhtisar dan coba lagi.',
+  'Deellink aanpassen': 'Sesuaikan tautan berbagi',
+  'Deellink beheren': 'Kelola tautan berbagi',
+  'Deellink intrekken?': 'Cabut tautan berbagi?',
+  'Deellink maken': 'Buat tautan berbagi',
+  'Deellinks beheren': 'Kelola tautan berbagi',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Berbagi memerlukan file OciServe yang diterbitkan. Pertama-tama simpan file lokal di organisasi dan buka melalui OciServe.',
+  'Delen via OciServe…': 'Bagikan melalui OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Tautan berbagi ini tidak tersedia atau telah kedaluwarsa atau telah dicabut.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Instalasi ini hanya mendukung login OciServe di aplikasi desktop.',
+  'Deze map is leeg.': 'Folder ini kosong.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Server ini tidak mendukung sumber daya ini, atau targetnya sudah tidak ada.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'File ini terlalu besar untuk dibuka (maksimum 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Jenis file ini tidak didukung.',
+  'Einddatum en tijd': 'Tanggal dan waktu berakhir',
+  'Inloggen met passkey of andere methode':
+      'Masuk dengan kunci sandi atau metode lain',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Pilih waktu dalam 90 hari dan kata sandi dari 8 hingga 256 byte, atau biarkan kata sandi kosong.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Penyalinan gagal. Pilih dan salin tautan secara manual.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Tautan hanya terlihat saat dibuat atau diputar. Menyesuaikan jeda pembukaan kunci yang ada.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Salinan lokal dibuka. Menyimpan tidak mengubah file OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Masuk ke server OciServe asli.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Pertama, masuk ke OciServe melalui Pengaturan → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Masuk ke OciServe lagi.',
+  'Niet ondersteund': 'Tidak didukung',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Kata sandi baru (kosong = tidak diubah)',
+  'Nieuwe link uitgeven': 'Keluarkan tautan baru',
+  'Nieuwe link uitgeven?': 'Keluarkan tautan baru?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe tidak dapat menyelesaikan permintaan tersebut. Periksa koneksi dan coba lagi.',
+  'OciServe-deellink openen': 'Buka tautan berbagi OciServe',
+  'OciServe-deellinks beheren': 'Kelola tautan berbagi OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Penerima tidak lagi dapat mengambil file setelahnya. Salinan yang sudah diunduh akan terus ada.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open membuat salinan lokal. Menyimpan tidak mengubah file server.',
+  'Optioneel wachtwoord': 'Kata sandi opsional',
+  'Passkeys beheren': 'Kelola kunci sandi',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Terlalu banyak upaya. Tunggu setidaknya satu menit dan coba lagi.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Anda tidak memiliki akses ke file-file ini atau tindakan ini.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Segarkan daftar jika hasilnya tidak pasti. Menerbitkan tautan baru dari share yang ada; jangan membuat bagian kedua.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Masukkan kata sandi atau coba lagi.',
+  'Wachtwoord (indien vereist)': 'Kata sandi (jika diperlukan)',
+  'Wachtwoord verwijderen': 'Hapus kata sandi',
+  'OciServe-bestanden': 'File OciServe',
   'Koptekst neemt ': 'Teks header memakai ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% dari tinggi slide — konten hampir tidak punya ruang lagi.',

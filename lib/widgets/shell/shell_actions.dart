@@ -231,6 +231,10 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
     showPreview: settings.showOpenPreview,
   );
   if (result == null || !context.mounted) return;
+  if (result.ociServeRequested) {
+    await openOciServeFiles(context, ref);
+    return;
+  }
   // Bladeren… sluit het dialoog eerst; daarna pas de native kiezer — anders
   // blijft .md grijs onder een geneste Flutter-modal (macOS).
   final List<String> paths;

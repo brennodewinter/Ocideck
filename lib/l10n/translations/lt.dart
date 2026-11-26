@@ -1547,6 +1547,90 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Openen in browser': 'Atidaryti naršyklėje',
+  'Aanpassen': 'Sureguliuoti',
+  'Hoofdmap': 'Pagrindinis aplankas',
+  'Lokale tijdzone': 'Vietinė laiko juosta',
+  'Map': 'Aplankas',
+  'Vastgelegde versie': 'Fiksuota versija',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Pakoreguojant esami atrakinti bus negaliojantys. Gavėjai turi iš naujo atidaryti nuorodą.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Tik skaityti. Be pabaigos laiko nauja nuoroda galioja septynias dienas; daugiausia devyniasdešimt dienų.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Tik skaitoma momentinė nuotrauka. Uždarius arba pasibaigus galiojimo laikui, reikia iš naujo atrakinti.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Po to senoji nuoroda ir esami atrakinimo būdai nebeveiks.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Serveris nustato, ar jums leidžiama skaityti failus. Jei trūksta leidimų, pasirodys pranešimas.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Serveris bendrina paskelbtą versiją. Vietiniai pakeitimai neįkeliami.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Serveris užfiksuoja šį aplanką ir iki 2 000 elementų kaip tik skaitomą momentinę nuotrauką. Vėlesni pakeitimai neįtraukiami į šią nuorodą.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sesija pakeista. Dar kartą atidarykite šaltinį.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versija buvo pakeista. Atnaujinkite apžvalgą ir bandykite dar kartą.',
+  'Deellink aanpassen': 'Koreguokite bendrinimo nuorodą',
+  'Deellink beheren': 'Tvarkyti bendrinimo nuorodą',
+  'Deellink intrekken?': 'Atšaukti bendrinimo nuorodą?',
+  'Deellink maken': 'Sukurti bendrinimo nuorodą',
+  'Deellinks beheren': 'Tvarkykite bendrinimo nuorodas',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Norint bendrinti, reikalingas paskelbtas OciServe failas. Pirmiausia sąmoningai išsaugokite vietinį failą organizacijoje ir atidarykite jį naudodami „OciServe“.',
+  'Delen via OciServe…': 'Bendrinkite per OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Ši bendrinimo nuoroda nepasiekiama arba pasibaigė arba atšaukta.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Šis diegimas palaiko OciServe prisijungimą tik darbalaukio programoje.',
+  'Deze map is leeg.': 'Šis aplankas tuščias.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Šis serveris nepalaiko šio šaltinio arba taikinys nebėra.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Šis failas per didelis, kad jį būtų galima atidaryti (maks. 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Šis failo tipas nepalaikomas.',
+  'Einddatum en tijd': 'Pabaigos data ir laikas',
+  'Inloggen met passkey of andere methode':
+      'Prisijunkite naudodami prieigos raktą ar kitą būdą',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Pasirinkite laiką per 90 dienų ir slaptažodį nuo 8 iki 256 baitų arba palikite slaptažodį tuščią.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopijuoti nepavyko. Pasirinkite ir nukopijuokite nuorodą rankiniu būdu.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Nuorodos matomos tik sukurtos arba pasuktos. Reguliuojant sulaužomi esami atrakinti.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Vietinė kopija atidaryta. Įrašant OciServe failas nepakeičiamas.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Prisijunkite prie pradinio OciServe serverio.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Pirmiausia prisijunkite prie „OciServe“ per „Nustatymai“ → „eLearning“.',
+  'Meld u opnieuw aan bij OciServe.': 'Dar kartą prisijunkite prie „OciServe“.',
+  'Niet ondersteund': 'Nepalaikoma',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Naujas slaptažodis (tuščias = nepakeistas)',
+  'Nieuwe link uitgeven': 'Išduoti naują nuorodą',
+  'Nieuwe link uitgeven?': 'Išduoti naują nuorodą?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      '„OciServe“ negalėjo įvykdyti užklausos. Patikrinkite ryšį ir bandykite dar kartą.',
+  'OciServe-deellink openen': 'Atidarykite „OciServe“ bendrinimo nuorodą',
+  'OciServe-deellinks beheren': 'Tvarkykite „OciServe“ bendrinimo nuorodas',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Vėliau gavėjai nebegalės nuskaityti failų. Jau atsisiųstos kopijos išliks.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open sukuria vietinę kopiją. Išsaugojimas nepakeičia serverio failo.',
+  'Optioneel wachtwoord': 'Neprivalomas slaptažodis',
+  'Passkeys beheren': 'Tvarkyti prieigos raktus',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Per daug bandymų. Palaukite bent minutę ir bandykite dar kartą.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Neturite prieigos prie šių failų ar šio veiksmo.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Atnaujinkite sąrašą, jei rezultatas neaiškus. Išduokite naują nuorodą iš esamos dalies; nekurti antros dalies.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Įveskite slaptažodį arba bandykite dar kartą.',
+  'Wachtwoord (indien vereist)': 'Slaptažodis (jei reikia)',
+  'Wachtwoord verwijderen': 'Pašalinti slaptažodį',
+  'OciServe-bestanden': 'OciServe failus',
   'Koptekst neemt ': 'Antraštė užima ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% skaidrės aukščio — turiniui beveik nelieka vietos.',

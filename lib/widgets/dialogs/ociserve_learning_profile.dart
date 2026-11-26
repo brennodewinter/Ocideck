@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_models.dart';
 import '../../theme/app_theme.dart';
 import 'ociserve_account_avatar.dart';
+import 'ociserve_passkeys_button.dart';
 import 'ociserve_course_summary.dart';
 
 class OciServeLearningProfile extends StatelessWidget {
@@ -49,15 +50,7 @@ class OciServeLearningProfile extends StatelessWidget {
             children: [
               _hero(context, completedCourses),
               const SizedBox(height: 12),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: OutlinedButton.icon(
-                  key: const Key('ociserve-show-data-button'),
-                  onPressed: onShowData,
-                  icon: const Icon(Icons.manage_search_outlined),
-                  label: Text(l10n.d('Bekijk mijn gegevens')),
-                ),
-              ),
+              _accountActions(context),
               const SizedBox(height: 18),
               LayoutBuilder(
                 builder: (context, constraints) {
@@ -172,6 +165,19 @@ class OciServeLearningProfile extends StatelessWidget {
       ],
     );
   }
+
+  Widget _accountActions(BuildContext context) => Wrap(
+    spacing: 8,
+    children: [
+      OutlinedButton.icon(
+        key: const Key('ociserve-show-data-button'),
+        onPressed: onShowData,
+        icon: const Icon(Icons.manage_search_outlined),
+        label: Text(context.l10n.d('Bekijk mijn gegevens')),
+      ),
+      const OciServePasskeysButton(),
+    ],
+  );
 
   Widget _hero(BuildContext context, int completedCourses) {
     final theme = Theme.of(context);

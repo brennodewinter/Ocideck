@@ -1551,6 +1551,90 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Openen in browser': 'Otwórz w przeglądarce',
+  'Aanpassen': 'Dostosuj',
+  'Hoofdmap': 'Główny folder',
+  'Lokale tijdzone': 'Lokalna strefa czasowa',
+  'Map': 'Folder',
+  'Vastgelegde versie': 'Wersja naprawiona',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Dostosowanie unieważni istniejące odblokowania. Odbiorcy muszą ponownie otworzyć łącze.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Tylko do odczytu. Bez czasu zakończenia nowe łącze jest ważne przez siedem dni; maksymalnie dziewięćdziesiąt dni.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Zrzut ekranu tylko do odczytu. Po zamknięciu lub wygaśnięciu wymagane jest ponowne odblokowanie.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Po tym stary link i istniejące odblokowania nie będą już działać.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Serwer sprawdza, czy możesz czytać pliki. Jeśli brakuje uprawnień, pojawi się komunikat.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Serwer udostępnia opublikowaną wersję. Zmiany lokalne nie są przesyłane.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Serwer przechwytuje ten folder i maksymalnie 2000 elementów jako migawkę tylko do odczytu. Późniejsze zmiany są wyłączone z tego łącza.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sesja została zmieniona. Otwórz ponownie źródło.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Wersja została zmieniona. Odśwież przegląd i spróbuj ponownie.',
+  'Deellink aanpassen': 'Dostosuj łącze udostępniania',
+  'Deellink beheren': 'Zarządzaj łączem udostępniania',
+  'Deellink intrekken?': 'Unieważnić link do udostępniania?',
+  'Deellink maken': 'Utwórz link do udostępniania',
+  'Deellinks beheren': 'Zarządzaj udostępnianiem linków',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Udostępnianie wymaga opublikowanego pliku OciServe. Najpierw świadomie zapisz plik lokalny w organizacji i otwórz go za pomocą OciServe.',
+  'Delen via OciServe…': 'Udostępnij przez OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Ten link do udostępniania jest niedostępny, wygasł lub został unieważniony.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Ta instalacja obsługuje logowanie OciServe wyłącznie w aplikacji komputerowej.',
+  'Deze map is leeg.': 'Ten folder jest pusty.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Ten serwer nie obsługuje tego zasobu lub cel już nie istnieje.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Ten plik jest zbyt duży, aby go otworzyć (maksymalnie 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Ten typ pliku nie jest obsługiwany.',
+  'Einddatum en tijd': 'Data i godzina zakończenia',
+  'Inloggen met passkey of andere methode':
+      'Zaloguj się za pomocą hasła lub w inny sposób',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Wybierz czas w ciągu 90 dni i hasło od 8 do 256 bajtów lub pozostaw hasło puste.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopiowanie nie powiodło się. Wybierz i skopiuj łącze ręcznie.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Linki są widoczne tylko po utworzeniu lub obróceniu. Dostosowanie przerywa istniejące odblokowania.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Kopia lokalna została otwarta. Zapisanie nie modyfikuje pliku OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Zaloguj się do oryginalnego serwera OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Najpierw zaloguj się do OciServe poprzez Ustawienia → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Zaloguj się ponownie do OciServe.',
+  'Niet ondersteund': 'Nieobsługiwane',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Nowe hasło (puste = niezmienione)',
+  'Nieuwe link uitgeven': 'Wydaj nowy link',
+  'Nieuwe link uitgeven?': 'Wydać nowy link?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe nie mógł zrealizować żądania. Sprawdź połączenie i spróbuj ponownie.',
+  'OciServe-deellink openen': 'Otwórz łącze udostępniania OciServe',
+  'OciServe-deellinks beheren': 'Zarządzaj łączami udostępniania OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Odbiorcy nie będą już mogli później odzyskać plików. Kopie już pobrane będą nadal istnieć.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open tworzy kopię lokalną. Zapisanie nie powoduje zmiany pliku serwerowego.',
+  'Optioneel wachtwoord': 'Opcjonalne hasło',
+  'Passkeys beheren': 'Zarządzaj kluczami',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Zbyt wiele prób. Poczekaj co najmniej minutę i spróbuj ponownie.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Nie masz dostępu do tych plików ani tej akcji.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Odśwież listę, jeśli wynik jest niepewny. Wydaj nowy link z istniejącego udziału; nie twórz drugiego udziału.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Wprowadź hasło lub spróbuj ponownie.',
+  'Wachtwoord (indien vereist)': 'Hasło (jeśli wymagane)',
+  'Wachtwoord verwijderen': 'Usuń hasło',
+  'OciServe-bestanden': 'Pliki OciServe',
   'Koptekst neemt ': 'Nagłówek zajmuje ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% wysokości slajdu — treść nie ma już prawie miejsca.',

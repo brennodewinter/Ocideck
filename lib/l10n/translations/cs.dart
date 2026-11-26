@@ -1541,6 +1541,90 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Openen in browser': 'Otevřít v prohlížeči',
+  'Aanpassen': 'Upravte',
+  'Hoofdmap': 'Hlavní složka',
+  'Lokale tijdzone': 'Místní časové pásmo',
+  'Map': 'Složka',
+  'Vastgelegde versie': 'Opravená verze',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Úprava zruší stávající odemknutí. Příjemci musí odkaz znovu otevřít.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Pouze pro čtení. Bez času ukončení je nový odkaz platný sedm dní; maximálně devadesát dní.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Snímek pouze pro čtení. Po uzavření nebo vypršení platnosti je nutné opětovné odemknutí.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Poté již starý odkaz a stávající odemknutí nebudou fungovat.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Server určuje, zda máte povoleno číst soubory. Pokud chybí oprávnění, zobrazí se zpráva.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Server sdílí publikovanou verzi. Místní změny se neodesílají.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Server zachytí tuto složku a až 2 000 položek jako snímek pouze pro čtení. Pozdější změny jsou z tohoto odkazu vyloučeny.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Relace byla změněna. Znovu otevřete zdroj.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Verze byla změněna. Obnovte přehled a zkuste to znovu.',
+  'Deellink aanpassen': 'Upravit odkaz na sdílení',
+  'Deellink beheren': 'Spravovat odkaz na sdílení',
+  'Deellink intrekken?': 'Zrušit odkaz na sdílení?',
+  'Deellink maken': 'Vytvořit odkaz pro sdílení',
+  'Deellinks beheren': 'Správa odkazů pro sdílení',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Sdílení vyžaduje publikovaný soubor OciServe. Nejprve vědomě uložte místní soubor v organizaci a otevřete jej přes OciServe.',
+  'Delen via OciServe…': 'Sdílet přes OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Tento odkaz pro sdílení je nedostupný nebo jeho platnost vypršela nebo byl odvolán.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Tato instalace podporuje přihlášení OciServe pouze v desktopové aplikaci.',
+  'Deze map is leeg.': 'Tato složka je prázdná.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Tento server nepodporuje tento prostředek nebo cíl již neexistuje.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Tento soubor je pro otevření příliš velký (maximálně 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Tento typ souboru není podporován.',
+  'Einddatum en tijd': 'Datum a čas ukončení',
+  'Inloggen met passkey of andere methode':
+      'Přihlaste se pomocí přístupového klíče nebo jiným způsobem',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Zvolte čas do 90 dnů a heslo od 8 do 256 bajtů, nebo ponechte heslo prázdné.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopírování se nezdařilo. Vyberte a zkopírujte odkaz ručně.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Odkazy jsou viditelné pouze při vytvoření nebo otočení. Úprava přeruší stávající odemknutí.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Místní kopie otevřena. Uložením se soubor OciServe nezmění.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Přihlaste se k původnímu serveru OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Nejprve se přihlaste do OciServe přes Nastavení → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Znovu se přihlaste k OciServe.',
+  'Niet ondersteund': 'Není podporováno',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Nové heslo (prázdné = nezměněno)',
+  'Nieuwe link uitgeven': 'Vydat nový odkaz',
+  'Nieuwe link uitgeven?': 'Vydat nový odkaz?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe nemohl dokončit požadavek. Zkontrolujte připojení a zkuste to znovu.',
+  'OciServe-deellink openen': 'Otevřete odkaz sdílení OciServe',
+  'OciServe-deellinks beheren': 'Spravujte odkazy sdílení OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Příjemci již poté nebudou moci načíst soubory. Již stažené kopie budou nadále existovat.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Otevřít vytvoří místní kopii. Uložením se nezmění soubor serveru.',
+  'Optioneel wachtwoord': 'Volitelné heslo',
+  'Passkeys beheren': 'Spravujte přístupové klíče',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Příliš mnoho pokusů. Počkejte alespoň minutu a zkuste to znovu.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'K těmto souborům nebo této akci nemáte přístup.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Pokud je výsledek nejistý, seznam obnovte. Vydat nový odkaz ze stávající sdílené položky; nevytvářejte druhé sdílení.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Zadejte heslo nebo to zkuste znovu.',
+  'Wachtwoord (indien vereist)': 'Heslo (je-li požadováno)',
+  'Wachtwoord verwijderen': 'Odebrat heslo',
+  'OciServe-bestanden': 'Soubory OciServe',
   'Koptekst neemt ': 'Záhlaví zabírá ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% výšky snímku — obsah už nemá skoro žádné místo.',

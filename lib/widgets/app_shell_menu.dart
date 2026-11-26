@@ -391,6 +391,16 @@ extension _MainLayoutMenu on _MainLayoutState {
       // dialoog-in-nieuw-tabblad bereikbaar. Drie keer hetzelfde in beeld maakt
       // het menu alleen langer.
       shellMenuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
+      shellMenuItem(
+        'open_ociserve',
+        Icons.cloud_outlined,
+        l10n.d('OciServe-bestanden'),
+      ),
+      shellMenuItem(
+        'share_ociserve',
+        Icons.share_outlined,
+        l10n.d('Delen via OciServe…'),
+      ),
       // Eén ingang per richting, ongeacht de soort opslag. De vraag is "waar
       // staat mijn presentatie", niet "welk protocol draait daar" — en met
       // precies één verbinding stelt de kiezer de vraag helemaal niet.

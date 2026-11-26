@@ -1542,6 +1542,90 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Openen in browser': 'Nyissa meg a böngészőben',
+  'Aanpassen': 'Állítsa be',
+  'Hoofdmap': 'Fő mappa',
+  'Lokale tijdzone': 'Helyi időzóna',
+  'Map': 'Mappa',
+  'Vastgelegde versie': 'Fix verzió',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'A módosítás érvényteleníti a meglévő feloldásokat. A címzetteknek újra meg kell nyitniuk a linket.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Csak olvasható. Befejezési idő nélkül az új hivatkozás hét napig érvényes; legfeljebb kilencven nap.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Csak olvasható pillanatkép. Zárás vagy lejárat után újra fel kell oldani.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'A régi link és a meglévő feloldások ezután már nem működnek.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'A szerver határozza meg, hogy jogosult-e fájlok olvasására. Egy üzenet jelenik meg, ha hiányoznak az engedélyek.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'A szerver megosztja a közzétett verziót. A helyi módosítások nem töltődnek fel.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'A szerver ezt a mappát és legfeljebb 2000 elemet csak olvasható pillanatképként rögzíti. A későbbi módosítások nem jelennek meg ezen a linken.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Az ülés megváltozott. Nyissa meg újra a forrást.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'A verzió megváltozott. Frissítse az áttekintést, és próbálja újra.',
+  'Deellink aanpassen': 'A megosztási link beállítása',
+  'Deellink beheren': 'Megosztási hivatkozás kezelése',
+  'Deellink intrekken?': 'Visszavonja a megosztási linket?',
+  'Deellink maken': 'Megosztási hivatkozás létrehozása',
+  'Deellinks beheren': 'Megosztási linkek kezelése',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'A megosztáshoz közzétett OciServe fájl szükséges. Először tudatosan mentsen el egy helyi fájlt a szervezetben, és nyissa meg az OciServe-en keresztül.',
+  'Delen via OciServe…': 'Megosztás az OciServe-n keresztül…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Ez a megosztási link nem érhető el, lejárt vagy visszavonták.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Ez a telepítés csak az asztali alkalmazásban támogatja az OciServe bejelentkezést.',
+  'Deze map is leeg.': 'Ez a mappa üres.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Ez a kiszolgáló nem támogatja ezt az erőforrást, vagy a cél már nem létezik.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Ez a fájl túl nagy a megnyitáshoz (maximum 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Ez a fájltípus nem támogatott.',
+  'Einddatum en tijd': 'Befejezés dátuma és időpontja',
+  'Inloggen met passkey of andere methode':
+      'Jelentkezzen be jelszóval vagy más módszerrel',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Válasszon egy 90 napon belüli időt és egy 8 és 256 bájt közötti jelszót, vagy hagyja üresen a jelszót.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'A másolás nem sikerült. Válassza ki és másolja ki a hivatkozást manuálisan.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'A hivatkozások csak létrehozva vagy elforgatva láthatók. A beállítás megszakítja a meglévő feloldásokat.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Helyi másolat megnyitva. A mentés nem módosítja az OciServe fájlt.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Jelentkezzen be az eredeti OciServe szerverre.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Először jelentkezzen be az OciServe-be a Beállítások → eLearning menüpontban.',
+  'Meld u opnieuw aan bij OciServe.': 'Jelentkezzen be újra az OciServe-be.',
+  'Niet ondersteund': 'Nem támogatott',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Új jelszó (üres = változatlan)',
+  'Nieuwe link uitgeven': 'Új link kiadása',
+  'Nieuwe link uitgeven?': 'Új linket ad ki?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'Az OciServe nem tudta teljesíteni a kérést. Ellenőrizze a kapcsolatot, és próbálja újra.',
+  'OciServe-deellink openen': 'Nyissa meg az OciServe megosztási hivatkozását',
+  'OciServe-deellinks beheren':
+      'Az OciServe megosztási hivatkozásainak kezelése',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'A címzettek ezután már nem tudják letölteni a fájlokat. A már letöltött másolatok továbbra is léteznek.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Az Open helyi másolatot készít. A mentés nem módosítja a szerverfájlt.',
+  'Optioneel wachtwoord': 'Választható jelszó',
+  'Passkeys beheren': 'Hozzáadási kulcsok kezelése',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Túl sok próbálkozás. Várjon legalább egy percet, és próbálja újra.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Nincs hozzáférése ezekhez a fájlokhoz vagy ehhez a művelethez.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Frissítse a listát, ha az eredmény bizonytalan. Új hivatkozás kiadása a meglévő megosztásból; ne hozzon létre második megosztást.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Írja be a jelszót, vagy próbálja újra.',
+  'Wachtwoord (indien vereist)': 'Jelszó (ha szükséges)',
+  'Wachtwoord verwijderen': 'Jelszó eltávolítása',
+  'OciServe-bestanden': 'OciServe fájlokat',
   'Koptekst neemt ': 'A fejléc elfoglal ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% a dia magasságából — a tartalomnak szinte nem marad helye.',

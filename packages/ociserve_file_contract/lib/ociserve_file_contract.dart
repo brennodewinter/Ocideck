@@ -19,6 +19,8 @@ class FileShareLink {
   final Uri origin;
   final String id;
   final String secret;
+  Uri get browserUri =>
+      origin.replace(path: shareLandingPath, fragment: '$id.$secret');
   static bool resembles(Uri uri) =>
       uri.path.startsWith('/api/v1/public/file-shares');
   static FileShareLink parse(String value) {

@@ -72,6 +72,8 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
 Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   final url = await _showUrlDialog(context);
   if (url == null || url.trim().isEmpty || !context.mounted) return;
+  if (await tryOpenOciServeShare(context, ref, url)) return;
+  if (!context.mounted) return;
   final youtube = YoutubeReference.parse(url);
   if (youtube != null) {
     await showYoutubeSourceDialog(context, youtube);

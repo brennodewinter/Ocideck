@@ -1552,6 +1552,88 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Openen in browser': 'Apertum in pasco',
+  'Aanpassen': 'Adjust',
+  'Hoofdmap': 'Principalis folder',
+  'Lokale tijdzone': 'Locus temporis zona',
+  'Map': 'Folder',
+  'Vastgelegde versie': 'Certa versio',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Adaptans infirmare reserat existentium. Receptores nexum recludere debet.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Lege tantum. Sine fine temporis, nova ligatio per septem dies valet; maximam nonaginta dies.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Legere solum snapshot. Re- reserans non requiritur post claudendo vel exspirando.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Vetus nexus et reclusio existentia ultra hoc opus non erunt.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Servus determinat num documenta legere liceat. Nuntius apparebit si permissiones desint.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Servo versionem editorum communicat. Loci mutationes non sunt uploaded.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Servus hunc folder prehendit et usque ad 2,000 items ut solum snapshot legere. Sequentes mutationes ab hac pagina excluduntur.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sessionis mutata est. Aperi fontem denuo.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versio mutata est. Renovare visum et iterum conare.',
+  'Deellink aanpassen': 'Adjust participes link',
+  'Deellink beheren': 'Curo participes link',
+  'Deellink intrekken?': 'Nexum participes novis?',
+  'Deellink maken': 'Create participes link',
+  'Deellinks beheren': 'Curo communionis nexus',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Socius tabellam OciServe divulgatam requirit. Primum scienter serva limam localem in ordine et per OciServe aperi.',
+  'Delen via OciServe…': 'Share per OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Haec communicatio nexus unavailable vel transactus vel revocatus est.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Hanc institutionem login in escritorio app tantum OciServe sustinet.',
+  'Deze map is leeg.': 'Hoc folder inanis est.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Hic ministrator hanc subsidio non sustinet, vel scopus iam non exstat.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Scapus nimis magnus est ad aperiendum (maximum 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Hoc genus lima non valet.',
+  'Einddatum en tijd': 'Finis date and time',
+  'Inloggen met passkey of andere methode': 'Log in in passkey vel modum',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Elige tempus intra 90 dies et tesseram ab 8 ad 256 bytes, vel tesseram blank relinque.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Exemplar defuit. Lego et effingo nexum manually.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Vincula tantum visibilia sunt, quando creata vel rotata sunt. Adjusting reserat existentium reserat.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Exemplar loci aperui. Servans tabellam OciServe non mutat.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Log in servo originali OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Primum, aperi ad OciServe per Occasus → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Log ad OciServe iterum.',
+  'Niet ondersteund': 'Non praebetur',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Nova password (inanis = immutata)',
+  'Nieuwe link uitgeven': 'Exitus novus nexus',
+  'Nieuwe link uitgeven?': 'Novam quaestionem?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe petitionem perficere potuit. Reprehendo nexum et iterum conare.',
+  'OciServe-deellink openen': 'Open OciServe participes link',
+  'OciServe-deellinks beheren': 'Curo OciServe participes nexus',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Receptores imaginum postea recuperare amplius non poterunt. Codices iam receptae subsistent.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Apertum facit exemplum loci. Servans file servo non mutat.',
+  'Optioneel wachtwoord': 'Libitum password',
+  'Passkeys beheren': 'Curo passkeys',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Nimis multi inceptis. Exspecta saltem minutam et iterum conare.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Accessum ad has tabulas aut ad hanc actionem non habes.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Refice album si incertum evenit. Novam edunt nexum ex participe exsistente; non efficiunt secundam partem.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Ingressus signum vel iterum conare.',
+  'Wachtwoord (indien vereist)': 'Password (si opus fuerit)',
+  'Wachtwoord verwijderen': 'Aufer password',
+  'OciServe-bestanden': 'OciServe files',
   'Koptekst neemt ': 'Titulus superior occupat ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% altitudinis imaginis — contento paene nullus locus superest.',

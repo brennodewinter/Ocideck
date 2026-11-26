@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show InternetAddress;
 import 'dart:typed_data';
 
 import '../../utils/net_guard.dart';
@@ -33,10 +34,16 @@ class PinnedOciServeHttpTransport implements OciServeHttpTransport {
     if (scope?.cancelled == true) {
       throw const OciServeTransportException('cancelled');
     }
-    final addresses = await NetGuard.safeResolveTrusted(
-      url.host,
-      allowPrivate: trustedInternal,
-    );
+    final elapsed = Stopwatch()..start();
+    final List<InternetAddress>? addresses;
+    try {
+      addresses = await NetGuard.safeResolveTrusted(
+        url.host,
+        allowPrivate: trustedInternal,
+      ).timeout(timeout);
+    } on TimeoutException {
+      throw const OciServeTransportException('timeout');
+    }
     if (addresses == null || addresses.isEmpty) {
       throw const OciServeTransportException('host_refused');
     }
@@ -46,6 +53,12 @@ class PinnedOciServeHttpTransport implements OciServeHttpTransport {
     final client = buildPinnedClient(addresses.first);
     void abort() => client.close(force: true);
     scope?.add(abort);
+    var timedOut = false;
+    final remaining = timeout - elapsed.elapsed;
+    final timer = Timer(remaining.isNegative ? Duration.zero : remaining, () {
+      timedOut = true;
+      abort();
+    });
     try {
       final request = await client.openUrl(method, url).timeout(timeout);
       request.followRedirects = false;
@@ -75,9 +88,14 @@ class PinnedOciServeHttpTransport implements OciServeHttpTransport {
     } catch (error, stack) {
       logError('OciServe: netwerkverzoek', error.runtimeType, stack);
       throw OciServeTransportException(
-        scope?.cancelled == true ? 'cancelled' : 'network',
+        scope?.cancelled == true
+            ? 'cancelled'
+            : timedOut
+            ? 'timeout'
+            : 'network',
       );
     } finally {
+      timer.cancel();
       scope?.remove(abort);
       client.close(force: true);
     }

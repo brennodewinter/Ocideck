@@ -44,6 +44,15 @@ const _account = OciServeAccount(
   memberships: [OciServeMembership(organizationId: 'org')],
 );
 
+class _AccountBrowser implements OciServeBrowserLauncher {
+  final opened = <Uri>[];
+  @override
+  Future<bool> open(Uri uri) async {
+    opened.add(uri);
+    return true;
+  }
+}
+
 class _FakeAuth implements OciServeAuthenticator {
   Completer<OciServeTokens>? loginCompleter;
   int refreshes = 0;
@@ -618,8 +627,11 @@ ProviderContainer _container(
   SecretStore secrets, {
   _FakeAuth? auth,
   OciServeGatewayFactory? gatewayFactory,
+  OciServeBrowserLauncher? accountBrowser,
 }) => ProviderContainer(
   overrides: [
+    if (accountBrowser != null)
+      ociServeAccountBrowserProvider.overrideWithValue(accountBrowser),
     secretStoreProvider.overrideWithValue(secrets),
     ociServeGatewayFactoryProvider.overrideWithValue(
       gatewayFactory ?? (_) => api,
@@ -672,6 +684,77 @@ void main() {
     );
     api = _FakeApi();
   });
+
+  test(
+    'passkey management only opens an announced HTTPS page on the bound issuer',
+    () async {
+      final browser = _AccountBrowser();
+      final container = _container(api, secrets, accountBrowser: browser);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      for (final url in [
+        'http://learn.example/account',
+        'https://other.example/account',
+        'https://u:p@learn.example/account',
+        'https://learn.example/account#secret',
+      ]) {
+        api.account = OciServeAccount(
+          id: 'user',
+          memberships: _account.memberships,
+          passwordlessEnrollable: true,
+          passkeyManagementUrl: Uri.parse(url),
+        );
+        expect(await notifier.login(forceLogin: true), true);
+        await expectLater(
+          notifier.managePasskeys(),
+          throwsA(isA<OciServeException>()),
+        );
+      }
+      expect(browser.opened, isEmpty);
+      api.account = OciServeAccount(
+        id: 'user',
+        memberships: _account.memberships,
+        passwordlessEnrollable: true,
+        passkeyManagementUrl: Uri.parse('https://learn.example/account'),
+      );
+      expect(await notifier.login(forceLogin: true), true);
+      expect(await notifier.managePasskeys(), true);
+      expect(browser.opened.single.toString(), 'https://learn.example/account');
+      await notifier.logout();
+      await expectLater(
+        notifier.managePasskeys(),
+        throwsA(isA<OciServeException>()),
+      );
+    },
+  );
+
+  test(
+    'a file operation never delivers a response from a signed-out session',
+    () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      expect(await notifier.login(), true);
+      final started = Completer<void>();
+      final response = Completer<String>();
+      final request = notifier.fileOperation('org', (_, token) {
+        started.complete();
+        return response.future;
+      });
+      await started.future;
+      final expectation = expectLater(
+        request,
+        throwsA(
+          isA<OciServeException>().having((e) => e.code, 'code', 'cancelled'),
+        ),
+      );
+      await notifier.logout();
+      response.complete('tenant metadata');
+      await expectation;
+    },
+  );
 
   test('exposes authenticated only after /me succeeds', () async {
     api.meCompleter = Completer<OciServeAccount>();
