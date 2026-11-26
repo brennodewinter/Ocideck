@@ -29,6 +29,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'check_upstream_workarounds.dart';
+
 /// De officiële herkomst. Alles daarbuiten is een fork of een onbekende bron.
 const officialRepository = 'https://github.com/flutter/flutter.git';
 
@@ -185,6 +187,10 @@ List<VersionClaim> disagreeingClaims(List<VersionClaim> claims, String pin) => [
 ];
 
 void main(List<String> args) async {
+  if (args.any((arg) => arg != '--offline-upstream')) {
+    stderr.writeln('Usage: check_toolchain.dart [--offline-upstream]');
+    exit(2);
+  }
   final checks = File('docs/CHECKS.md');
   final pins = File('.tool-versions');
 
@@ -319,6 +325,13 @@ void main(List<String> args) async {
       '`code-geciteerde` versie in een historische zin hoort niet mee te '
       'veranderen — die zou er onwaar van worden.',
     );
+    exit(1);
+  }
+
+  if (!await checkUpstreamWorkarounds(
+    running.version,
+    offline: args.contains('--offline-upstream'),
+  )) {
     exit(1);
   }
 

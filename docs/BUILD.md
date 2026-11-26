@@ -65,6 +65,13 @@ crash the macOS bridge. The build restores the SDK sources when it exits. Use
 same framework. Remove the backport after moving to a stable pin that includes
 the fix.
 
+The four active Flutter workarounds and their removal tests are recorded in
+`tool/upstream_workarounds.json`. `make check-toolchain` reports closed upstream
+issues and requires a recorded review for every new Flutter pin. The macOS
+Impeller fix (#192522) and framework semantics fix (#193372) are merged upstream
+but absent from the pinned `3.50.0` framework revision; their workarounds remain
+until a stable SDK includes the fixes and the recorded native checks pass.
+
 ## Web
 
 OciDeck also builds for the browser. Use the hardened target:

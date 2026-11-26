@@ -69,6 +69,14 @@ architecture: an x64 SDK under Rosetta can hang subprocess-based checks. Inspect
   symptom, and it shows up as `make format-check` failing on files you never
   touched.
 
+  Every bump also reviews `tool/upstream_workarounds.json`. For each active
+  workaround, check the linked upstream issues, confirm whether the fix is in
+  the new stable SDK, run the recorded reproduction without the workaround,
+  and record the decision, review date and `reviewed_flutter`. Remove obsolete
+  workarounds and their pins together. `make check-toolchain` rejects an older
+  review version and reports closed upstream issues; closure alone is not proof
+  that a stable release contains the fix.
+
   *Tightened 2026-07-23 (#598). Between 22 and 23 July this read "3.44.x", on
   the reasoning that demanding an exact version was stricter than the
   maintainer's own machine met. That was solving the wrong problem: the answer
