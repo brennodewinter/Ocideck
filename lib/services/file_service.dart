@@ -358,6 +358,7 @@ class FileService {
   final String? Function() _homeDirectory;
   final List<String> Function() _libraryPaths;
   final SaveDestinationPicker _saveDestination;
+  final bool _hasCustomSaveDestination;
   final CaptionService _captions = CaptionService();
 
   /// Deck (zijn eigen `.md`, via [_deckChartKey]) → { absoluut pad van een
@@ -395,7 +396,8 @@ class FileService {
        _themeProfiles = themeProfiles ?? (() => const []),
        _homeDirectory = homeDirectory ?? (() => null),
        _libraryPaths = libraryPaths ?? (() => const []),
-       _saveDestination = saveDestination ?? _systemSaveDestination;
+       _saveDestination = saveDestination ?? _systemSaveDestination,
+       _hasCustomSaveDestination = saveDestination != null;
 
   ThemeProfile get currentThemeProfile => resolveThemeProfile(_themeProfile());
 
@@ -820,6 +822,7 @@ class FileService {
         .replaceAll(' ', '_');
     final result = await _saveDestinationGated(
       picker: _saveDestination,
+      useNativePicker: !_hasCustomSaveDestination,
       dialogTitle: _d('Opslaan als'),
       fileName: '$safeName.md',
       initialDirectory: initialDirectory,
