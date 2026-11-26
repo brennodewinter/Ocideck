@@ -439,6 +439,7 @@ now the only passing state.
 | [`make test-age-interop`](#make-test-age-interop) | Builds the pinned reference `age` (Go, network) and runs the interoperability test of the sealing layer against it | — | — | — | Manual |
 | [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-roundtrip-field-parity`](#make-check-roundtrip-field-parity) | Every Slide and ThemeProfile field has an executable storage case or a reasoned transient exclusion; includes document style selection | ✅ | ✅ | Nightly suite | Maintainer agreement |
+| [`make test-desktop-smoke`](#make-test-desktop-smoke) | Real desktop app processes: open/add/save/native close/reopen, plus the macOS Cmd+Q dirty-work guard | — | — | macOS main/manual; Linux nightly/manual; Windows weekly/manual | Required for desktop lifecycle changes |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | Nightly suite | Maintainer agreement |
@@ -1132,6 +1133,46 @@ These checks form the static portion of the maintainer’s local validation.
 - **Failure means:** OciServe heeft een route verwijderd, hernoemd of
   hervormd die OciDeck aanroept. Werk de pin bij (hierboven) of pas de
   gateway aan.
+
+### `make test-desktop-smoke`
+
+- **Runs:** `tool/run_desktop_smoke.dart` with `flutter drive --profile`,
+  `integration_test/desktop_lifecycle_test.dart` and
+  `test_driver/desktop_lifecycle_driver.dart` on the host desktop platform.
+  `DEVICE=macos`, `DEVICE=linux` or `DEVICE=windows` makes the intended host
+  explicit. Linux needs a display; CI uses `xvfb-run -a`.
+- **Covers:** open a real Markdown fixture in `OciDeckApp`, add and edit a slide
+  through the production notifier, save to disk, close the first app process,
+  start another app process and reopen the same file. After collecting the
+  assertions, the driver asks for native shutdown through
+  Cmd+Q on macOS or the native close hook on Linux/Windows. It checks distinct
+  PIDs and that the first process actually stopped; JSON reports are retained in
+  `build/desktop-smoke/`, with source SHA and working-tree state. Successful
+  fixture directories are removed; a failed run logs its retained synthetic
+  fixture path for diagnosis. Settings and support paths are isolated to a temporary
+  directory; the window, codecs and disk IO are real. This does not exercise
+  native open/save file choosers or the full production startup sequence.
+- **macOS close guard:** a test-only Objective-C dylib dispatches the real
+  Cmd+Q key equivalent through the AppKit menu on its main thread. No Flutter
+  exit callback is mocked and no quit bypass is enabled. Dirty work must show
+  the save warning; Cancel must retain both slides and the dirty state.
+  A native `atexit` marker distinguishes clean termination from a crash or a
+  forced stop. Removing the production exit listener must make this probe fail.
+  AppKit event dispatch needs no Accessibility permission; physical keyboard
+  delivery and logout remain separate OS-level acceptance work.
+- **CI:** macOS runs on each push to `main` and manual dispatch in
+  `macos-gate.yml`; Linux uses the same scenario in the nightly/manual
+  `linux-gate.yml`; the Windows mirror runs it once in the weekly/manual
+  default `windows-test-check.yml` run. Reports upload even on failure. The
+  macOS build uses the existing pinned semantics backport wrapper once, then
+  both driver launches use the same prebuilt profile app. After Flutter
+  unmounts the test tree, the harness reattaches the real shell around its same
+  live provider state; this keeps the production exit listener present for the
+  driver’s post-result native shutdown.
+- **Scope:** this builds and drives real app engines, so it is a separate native
+  gate, not part of the widget-only `make check-full`. Run it locally before
+  merging changes to desktop lifecycle behavior. A successful unit suite or
+  golden run cannot replace it (#3207).
 
 ### `make check-collab-field-parity`
 - **Runs:** `dart run tool/check_collab_field_parity.dart`

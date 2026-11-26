@@ -1,4 +1,4 @@
-# De golden-gate op de Mac-runner (mac-brenno, label macos, host-modus).
+# Goldens en de draaiende app op de Mac-runner (mac-brenno, label macos, host-modus).
 #
 # **Waarom deze workflow bestaat.** De golden-tests (`make test-golden`) zijn
 # pixel-specifiek en draaien alleen op macOS — `static-gate.yml` draait op Linux
@@ -8,7 +8,7 @@
 # sub-promille renderlaag-verschuiving onopgemerkt blijft tot iemand de poort
 # nodig heeft en dan aantreft dat ze "altijd al rood was".
 #
-# **Wat hij doet.** Eén job, één stap: `make test-golden`. Dat draait de 51
+# **De golden-job** draait `make test-golden`. Dat draait de 51
 # golden-tests (~2 minuten op de Mac-runner) en vergelijkt tegen de committed
 # PNGs. Faalt hij, dan staat de diff in `test/golden/failures/` — met eigen ogen
 # bevestigen vóór `UPDATE=1`, want blind regenereren maakt de poort groen en
@@ -128,3 +128,24 @@ jobs:
           path: build/golden-diagnose/
           if-no-files-found: warn
           retention-days: 30
+
+  desktop-lifecycle:
+    runs-on: macos
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get --enforce-lockfile
+      - name: Echte macOS-app en Cmd+Q-sluitbewaking
+        run: |
+          set -euo pipefail
+          mkdir -p build/desktop-smoke
+          make test-desktop-smoke DEVICE=macos 2>&1 | tee build/desktop-smoke/run.log
+      - name: Bewijs van beide appstarts bewaren
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: desktop-lifecycle-macos-${{ github.sha }}
+          path: build/desktop-smoke/
+          if-no-files-found: warn
+          retention-days: 7

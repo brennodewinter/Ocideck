@@ -25,7 +25,8 @@
 # bij de merge, alleen ruim vóór de volgende tag. `workflow_dispatch` blijft
 # voor een tak die het eerder wil weten.
 #
-# **Geen artefact.** Een rode wekelijkse run blokkeert geen merge; het
+# **Bewijs.** De native rookproef bewaart JSON en uitvoer, ook bij fouten.
+# Een rode wekelijkse run blokkeert geen merge; het
 # releasescript eist dezelfde suite op de exacte mergecommit vóór de tag.
 name: Windows test suite (weekly)
 
@@ -164,6 +165,22 @@ jobs:
           if [ '${{ matrix.shard }}' = 0 ]; then
             flutter test --concurrency=1 test --tags benchmark
           fi
+
+      - name: Native desktop open save and reopen
+        if: ${{ !inputs.navigation_only && !inputs.video_only && matrix.shard == 0 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/desktop-smoke
+          dart run tool/run_desktop_smoke.dart windows 2>&1 | tee build/desktop-smoke/run.log
+      - name: Native desktop evidence
+        if: ${{ always() && !inputs.navigation_only && !inputs.video_only && matrix.shard == 0 }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-lifecycle-windows-${{ github.sha }}
+          path: build/desktop-smoke/
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Navigation regressions
         if: ${{ inputs.navigation_only }}
