@@ -7,10 +7,6 @@ on:
         description: Rebuild with a blocked production startup and require a failed start
         type: boolean
         default: false
-      desktop_window:
-        description: Measure the native X11 and Wayland window of this bundle
-        type: boolean
-        default: false
       wayland_regression:
         description: Also rebuild without the workaround and require the Wayland probe to fail
         type: boolean
@@ -32,6 +28,8 @@ on:
       - '.forgejo/ci-image/**'
       - '.forgejo/workflows/linux-start-smoke.yml'
       - 'scripts/**'
+      - 'test/linux_session_workflow_test.dart'
+      - 'test/release_linux_sessions_test.py'
 
 permissions:
   contents: read
@@ -103,19 +101,21 @@ jobs:
       - name: Linux-releasebundel bouwen
         run: bash scripts/run_release_linux_build.sh flutter build linux --release --no-pub
 
-      - name: De gebouwde app starten en het eerste frame toetsen
-        run: bash scripts/linux_start_probe.sh probe-evidence build/linux/x64/release/bundle/ocideck
+      - name: Dezelfde releasebundel voor beide sessies bewaren
+        run: tar -C build/linux/x64/release -czf linux-desktop-bundle.tar.gz bundle
 
-      - name: Gereedschap voor de native vensterproeven installeren
-        if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' || inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
+      - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-desktop-bundle
+          path: linux-desktop-bundle.tar.gz
+          retention-days: 2
+
+      - name: Gereedschap voor de optionele schaalregressie installeren
+        if: ${{ inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
         run: apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim libwayland-dev
 
-      - name: Native vensterproef op X11
-        if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' }}
-        run: scripts/run_linux_window_probe.sh x11 build/linux/x64/release/bundle/ocideck probe-evidence/window-x11
-
-      - name: Native vensterproef op Wayland
-        if: ${{ inputs.desktop_window == true || inputs.desktop_window == 'true' || inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
+      - name: Wayland-basis vóór de tegenproef
+        if: ${{ inputs.wayland_regression == true || inputs.wayland_regression == 'true' }}
         run: scripts/run_linux_window_probe.sh wayland build/linux/x64/release/bundle/ocideck probe-evidence/window-wayland
 
       - name: Wayland-regressie zonder schaalworkaround
@@ -157,3 +157,42 @@ jobs:
           name: linux-start-probe
           path: probe-evidence/
           if-no-files-found: ignore
+
+  desktop-session:
+    name: Linux start en venster (${{ matrix.backend }})
+    needs: linux-start
+    runs-on: docker
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [x11, wayland]
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with:
+          name: linux-desktop-bundle
+          path: desktop-bundle
+      - name: Runtime en sessiegereedschap installeren
+        run: |
+          apt-get update
+          bash scripts/prepare_linux_probe.sh desktop
+          apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim libwayland-dev libsecret-1-0 libayatana-appindicator3-1 libwebkit2gtk-4.1-0 libpulse0 libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv2 libgl1-mesa-dri libegl-mesa0
+      - name: De gedeelde releasebundel uitpakken
+        run: tar -C desktop-bundle -xzf desktop-bundle/linux-desktop-bundle.tar.gz
+      - name: Start, venster, schaal en muis op ${{ matrix.backend }}
+        env:
+          OCIDECK_PROBE_SOURCE_COMMIT: ${{ github.sha }}
+        run: scripts/run_linux_window_probe.sh '${{ matrix.backend }}' desktop-bundle/bundle/ocideck probe-evidence/${{ matrix.backend }}
+      - name: Sessiebewijs bewaren, ook bij fouten
+        if: always()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: linux-desktop-${{ matrix.backend }}-${{ github.sha }}
+          path: probe-evidence/${{ matrix.backend }}/
+          if-no-files-found: warn
+          retention-days: 7
