@@ -440,6 +440,7 @@ now the only passing state.
 | [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-roundtrip-field-parity`](#make-check-roundtrip-field-parity) | Every Slide and ThemeProfile field has an executable storage case or a reasoned transient exclusion; includes document style selection | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make test-desktop-smoke`](#make-test-desktop-smoke) | Real desktop app processes: open/add/save/native close/reopen, plus the macOS Cmd+Q dirty-work guard | — | — | macOS main/manual; Linux nightly/manual; Windows weekly/manual | Required for desktop lifecycle changes |
+| [`make test-desktop-roundtrip`](#make-test-desktop-roundtrip) | Every slide type, all persistent fields, Markdown/package reopen, rename/move/Save as, six native processes | — | — | macOS main/manual; Linux nightly/manual; Windows weekly/manual | Required for storage and file-operation changes |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | Nightly suite | Maintainer agreement |
 | [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | Nightly suite | Maintainer agreement |
@@ -1160,7 +1161,7 @@ These checks form the static portion of the maintainer’s local validation.
   forced stop. Removing the production exit listener must make this probe fail.
   AppKit event dispatch needs no Accessibility permission; physical keyboard
   delivery and logout remain separate OS-level acceptance work.
-- **CI:** macOS runs on each push to `main` and manual dispatch in
+- **CI:** the expanded `test-desktop-roundtrip` scenario below runs on each macOS push to `main` and manual dispatch in
   `macos-gate.yml`; Linux uses the same scenario in the nightly/manual
   `linux-gate.yml`; the Windows mirror runs it once in the weekly/manual
   default `windows-test-check.yml` run. Reports upload even on failure. The
@@ -1173,6 +1174,49 @@ These checks form the static portion of the maintainer’s local validation.
   gate, not part of the widget-only `make check-full`. Run it locally before
   merging changes to desktop lifecycle behavior. A successful unit suite or
   golden run cannot replace it (#3207).
+
+### `make test-desktop-roundtrip`
+
+- **Runs:** the shared desktop driver with `--roundtrip` on macOS, Linux or
+  Windows. It builds one real app and uses six separate processes for authoring,
+  reopening Markdown, reopening a renamed file, reopening a moved project,
+  reopening the Save-as copy and importing the portable `.ocideck` package.
+- **Authored input:** start with an empty deck and add every `SlideType`, with
+  filled, type-appropriate content, notes, custom classes and anchors. Capture
+  expected values from the app model before saving or exporting. The comparison
+  reads every persistent field through the same typed getter inventory as
+  `check-roundtrip-field-parity`; transient IDs/projection flags/render pages
+  retain the exclusions documented there. New fixture types and fields cannot
+  silently disappear from the comparison.
+- **Assets:** images, gallery order/alt text, audio, video and captions are
+  compared by content SHA-256, allowing the path changes required by package
+  import. Linked charts compare the hydrated spec and the CSV bytes. Fixtures
+  use canonical storage values for derived editor metadata and CSV formatting;
+  expected values are never obtained by serializing/reparsing the fixture.
+- **File operations:** rename the actual `.md` to a name with spaces and `.MD`,
+  then move that file and its project companions to another directory. Each
+  restart discovers the new path through the production library scan and opens
+  it through `TabsNotifier`. Save as uses `DeckNotifier.saveAs`, checks the new
+  origin and preserves the original file bytes. The package is opened only
+  after both source projects have been deleted from the synthetic test root;
+  missing package assets cannot be rescued by the original files.
+- **Boundary:** the test selects the Save-as destination through FileService's
+  existing injected picker; writing, asset relocation, rereading and native
+  shutdown are real. This includes the macOS correction that honors an explicit
+  picker while preserving the default native picker. Physical file-dialog
+  interaction and full `main()` bootstrap remain separate acceptance work.
+- **Save-as regression:** the native run exposed skipped relative media and
+  images. They now travel from the original project into the destination using
+  the existing containment, size and collision guards. Relative paths in the
+  same project retain the ordinary-save fast path.
+- **Evidence:** `build/desktop-roundtrip/` contains per-process JSON with source
+  commit, working-tree state, field comparison count and native exit evidence.
+  The CI platform jobs use this expanded scenario, including the macOS dirty
+  Cmd+Q guard from the basic smoke test. The basic two-process target remains
+  available for focused lifecycle work.
+- **Regression:** removing the free-Markdown type token introduced by
+  `a81f4c37d` must fail this real app journey on the reopened slide's type/body
+  (#3109, #3208). A green codec-only test does not replace this native run.
 
 ### `make check-collab-field-parity`
 - **Runs:** `dart run tool/check_collab_field_parity.dart`

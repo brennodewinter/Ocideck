@@ -216,17 +216,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p build/desktop-smoke
+          mkdir -p build/desktop-roundtrip
           chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE"
           runuser --user ubuntu --preserve-environment -- env \
-            HOME=/home/ubuntu xvfb-run -a make test-desktop-smoke DEVICE=linux \
-            2>&1 | tee build/desktop-smoke/run.log
+            HOME=/home/ubuntu xvfb-run -a make test-desktop-roundtrip DEVICE=linux \
+            2>&1 | tee build/desktop-roundtrip/run.log
       - name: Native desktopbewijs bewaren
         if: ${{ always() }}
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: desktop-lifecycle-linux-${{ github.sha }}
-          path: build/desktop-smoke/
+          path: build/desktop-roundtrip/
           if-no-files-found: warn
           retention-days: 7
 

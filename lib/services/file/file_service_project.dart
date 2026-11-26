@@ -24,11 +24,13 @@ part of '../file_service.dart';
 /// oude build zonder native handler (`MissingPluginException`) valt terug.
 Future<String?> _saveDestinationGated({
   required SaveDestinationPicker picker,
+  bool useNativePicker = true,
   required String dialogTitle,
   required String fileName,
   String? initialDirectory,
 }) async {
-  if (!kIsWeb && Platform.isMacOS) {
+  // An injected picker owns destination selection on every platform.
+  if (useNativePicker && !kIsWeb && Platform.isMacOS) {
     try {
       return await saveMacFile(
         dialogTitle: dialogTitle,

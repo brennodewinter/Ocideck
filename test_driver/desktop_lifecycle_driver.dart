@@ -5,6 +5,7 @@ import 'package:integration_test/integration_test_driver.dart';
 import 'package:path/path.dart' as p;
 
 import 'desktop_smoke_process.dart';
+import 'desktop_roundtrip_plan.dart';
 
 Future<void> main() => integrationDriver(
   timeout: const Duration(minutes: 5),
@@ -20,7 +21,7 @@ Future<void> main() => integrationDriver(
       // Ask the app to finish its production shutdown path before starting again.
       if (data?['ready_to_close'] == true) {
         final phase = data!['phase'] as String;
-        if (!{'write', 'reopen'}.contains(phase)) {
+        if (!{'write', 'reopen', ...nativeRoundtripPhases}.contains(phase)) {
           throw StateError('Invalid phase');
         }
         await File(p.join(root, 'close-$phase.request')).writeAsString('close');

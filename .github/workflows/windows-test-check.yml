@@ -171,14 +171,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p build/desktop-smoke
-          dart run tool/run_desktop_smoke.dart windows 2>&1 | tee build/desktop-smoke/run.log
+          mkdir -p build/desktop-roundtrip
+          dart run tool/run_desktop_smoke.dart windows --roundtrip 2>&1 | tee build/desktop-roundtrip/run.log
       - name: Native desktop evidence
         if: ${{ always() && !inputs.navigation_only && !inputs.video_only && matrix.shard == 0 }}
         uses: actions/upload-artifact@v4
         with:
           name: desktop-lifecycle-windows-${{ github.sha }}
-          path: build/desktop-smoke/
+          path: build/desktop-roundtrip/
           if-no-files-found: warn
           retention-days: 7
 

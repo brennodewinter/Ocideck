@@ -24,12 +24,15 @@ void main() {
       final native = yaml['jobs']['desktop-lifecycle'] as YamlMap;
       expect(native['runs-on'], 'macos');
       expect(native['timeout-minutes'], lessThanOrEqualTo(30));
-      expect(steps(native), contains('make test-desktop-smoke DEVICE=macos'));
+      expect(
+        steps(native),
+        contains('make test-desktop-roundtrip DEVICE=macos'),
+      );
       final artifact = (native['steps'] as YamlList)
           .whereType<YamlMap>()
           .singleWhere((step) => '${step['uses']}'.contains('upload-artifact'));
       expect(artifact['if'], contains('always()'));
-      expect(artifact['with']['path'], 'build/desktop-smoke/');
+      expect(artifact['with']['path'], 'build/desktop-roundtrip/');
     },
   );
 
@@ -38,14 +41,15 @@ void main() {
     final linuxSteps = steps(linux['jobs']['gate-linux'] as YamlMap);
     expect(
       linuxSteps,
-      contains('xvfb-run -a make test-desktop-smoke DEVICE=linux'),
+      contains('xvfb-run -a make test-desktop-roundtrip DEVICE=linux'),
     );
     final windows = workflow('.github/workflows/windows-test-check.yml');
     final winSteps = (windows['jobs']['test']['steps'] as YamlList)
         .whereType<YamlMap>();
     final native = winSteps.singleWhere(
-      (step) =>
-          '${step['run']}'.contains('tool/run_desktop_smoke.dart windows'),
+      (step) => '${step['run']}'.contains(
+        'tool/run_desktop_smoke.dart windows --roundtrip',
+      ),
     );
     expect(native['if'], contains('matrix.shard == 0'));
     expect(native['if'], contains('!inputs.navigation_only'));

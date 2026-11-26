@@ -23,6 +23,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import 'support/desktop_smoke_paths.dart';
+import 'support/desktop_roundtrip_scenario.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -66,7 +67,16 @@ void main() {
       }
     }
     await configureNativeWindow();
-    container = ProviderContainer();
+    final roundtrip =
+        Platform.environment['DESKTOP_SMOKE_SCENARIO'] == 'roundtrip';
+    container = ProviderContainer(
+      overrides: [
+        if (roundtrip)
+          fileServiceProvider.overrideWithValue(
+            roundtripFileService(root, phase),
+          ),
+      ],
+    );
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
@@ -78,60 +88,23 @@ void main() {
       const Duration(seconds: 30),
     );
     expect(find.byType(AppShell), findsOneWidget);
-    final tabs = container.read(tabsProvider.notifier);
-    final file = File(p.join(root, 'journey.md'));
-    expect(await tabs.openFileByPath(file.path), OpenResult.opened);
-    await tester.pumpAndSettle();
-    final deck = container.read(tabsProvider).current!.deckNotifier;
-    expect(deck.currentState.isDirty, isFalse);
-    if (phase == 'write') {
-      expect(deck.currentState.deck!.slides, hasLength(1));
-      deck.addSlide(SlideType.bullets);
-      deck.updateSlide(
-        1,
-        deck.currentState.deck!.slides[1].copyWith(
-          title: 'Native lifecycle probe',
-          bullets: ['Saved across app processes'],
-        ),
+    final Map<String, Object?> result;
+    if (roundtrip) {
+      result = await runNativeRoundtripScenario(
+        tester,
+        container,
+        root,
+        phase,
+        sendMacosQuit: sendQuit,
       );
-      await tester.pumpAndSettle();
-      expect(deck.currentState.isDirty, isTrue);
-      expect(find.text('Native lifecycle probe'), findsWidgets);
-      if (Platform.isMacOS) {
-        expect(
-          sendQuit!(),
-          1,
-          reason: 'AppKit must handle the actual Cmd+Q menu equivalent',
-        );
-        await tester.pumpAndSettle();
-        expect(find.text('Niet-opgeslagen wijzigingen'), findsOneWidget);
-        await tester.tap(find.text('Annuleren'));
-        await tester.pumpAndSettle();
-        expect(find.text('Niet-opgeslagen wijzigingen'), findsNothing);
-        expect(deck.currentState.isDirty, isTrue);
-        expect(deck.currentState.deck!.slides, hasLength(2));
-      }
-      expect(await deck.save(), isTrue);
-      await tester.pumpAndSettle();
-      expect(deck.currentState.isDirty, isFalse);
-      expect(file.readAsStringSync(), contains('Saved across app processes'));
     } else {
-      expect(phase, 'reopen');
-      expect(deck.currentState.deck!.slides, hasLength(2));
-      expect(deck.currentState.deck!.slides[1].title, 'Native lifecycle probe');
-      expect(find.text('Native lifecycle probe'), findsWidgets);
-      expect(deck.currentState.deck!.slides[1].bullets, [
-        'Saved across app processes',
-      ]);
-      expect(deck.currentState.isDirty, isFalse);
+      result = await _basicScenario(tester, container, root, phase, sendQuit);
     }
     binding.reportData = {
       'phase': phase,
       'pid': pid,
       'platform': Platform.operatingSystem,
-      'slides': deck.currentState.deck!.slides.length,
-      'dirty': deck.currentState.isDirty,
-      'cmd_q_guard': Platform.isMacOS && phase == 'write',
+      ...result,
       'ready_to_close': true,
     };
   }, timeout: const Timeout(Duration(minutes: 3)));
@@ -164,4 +137,65 @@ void main() {
       });
     });
   });
+}
+
+Future<Map<String, Object?>> _basicScenario(
+  WidgetTester tester,
+  ProviderContainer container,
+  String root,
+  String phase,
+  int Function()? sendQuit,
+) async {
+  final tabs = container.read(tabsProvider.notifier);
+  final file = File(p.join(root, 'journey.md'));
+  expect(await tabs.openFileByPath(file.path), OpenResult.opened);
+  await tester.pumpAndSettle();
+  final deck = container.read(tabsProvider).current!.deckNotifier;
+  expect(deck.currentState.isDirty, isFalse);
+  if (phase == 'write') {
+    expect(deck.currentState.deck!.slides, hasLength(1));
+    deck.addSlide(SlideType.bullets);
+    deck.updateSlide(
+      1,
+      deck.currentState.deck!.slides[1].copyWith(
+        title: 'Native lifecycle probe',
+        bullets: ['Saved across app processes'],
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(deck.currentState.isDirty, isTrue);
+    expect(find.text('Native lifecycle probe'), findsWidgets);
+    if (Platform.isMacOS) {
+      expect(
+        sendQuit!(),
+        1,
+        reason: 'AppKit must handle the actual Cmd+Q menu equivalent',
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Niet-opgeslagen wijzigingen'), findsOneWidget);
+      await tester.tap(find.text('Annuleren'));
+      await tester.pumpAndSettle();
+      expect(find.text('Niet-opgeslagen wijzigingen'), findsNothing);
+      expect(deck.currentState.isDirty, isTrue);
+      expect(deck.currentState.deck!.slides, hasLength(2));
+    }
+    expect(await deck.save(), isTrue);
+    await tester.pumpAndSettle();
+    expect(deck.currentState.isDirty, isFalse);
+    expect(file.readAsStringSync(), contains('Saved across app processes'));
+  } else {
+    expect(phase, 'reopen');
+    expect(deck.currentState.deck!.slides, hasLength(2));
+    expect(deck.currentState.deck!.slides[1].title, 'Native lifecycle probe');
+    expect(find.text('Native lifecycle probe'), findsWidgets);
+    expect(deck.currentState.deck!.slides[1].bullets, [
+      'Saved across app processes',
+    ]);
+    expect(deck.currentState.isDirty, isFalse);
+  }
+  return {
+    'slides': deck.currentState.deck!.slides.length,
+    'dirty': deck.currentState.isDirty,
+    'cmd_q_guard': Platform.isMacOS && phase == 'write',
+  };
 }

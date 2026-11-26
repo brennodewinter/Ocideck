@@ -802,9 +802,8 @@ class ImageService {
         existingByHash: existingByHash,
       );
     }
-    if (sourcePath.isEmpty ||
-        sourcePath.startsWith('images/') ||
-        !p.isAbsolute(sourcePath)) {
+    if (sourcePath.isEmpty) return null;
+    if (_isStoredInProject(sourcePath, sourceProjectPath, imagesDir)) {
       return null;
     }
     final trustedSource = AssetStaging.isStagedPath(sourcePath)

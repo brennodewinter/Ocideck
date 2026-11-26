@@ -51,10 +51,10 @@ extension ImageServiceMediaTransport on ImageService {
   }
 
   /// Het projectrelatieve mediapad voor [path], of `null` als er niets te doen
-  /// is (leeg, al projectrelatief, of een URL die geen bestand is).
+  /// is (leeg of een URL die geen bestand is).
   ///
   /// Twee bronnen: een `mem:`-pad draagt zijn bytes mee (een geïmporteerde of
-  /// remote presentatie), een absoluut pad wijst naar schijf.
+  /// remote presentatie), een absoluut of projectrelatief pad wijst naar schijf.
   Future<String?> _mediaToProject(
     String path,
     Directory mediaDir, {
@@ -77,7 +77,11 @@ extension ImageServiceMediaTransport on ImageService {
         fallbackExtension: fallbackExtension,
       );
     }
-    if (!_shouldCopy(path)) return null;
+    if (path.isEmpty ||
+        Uri.tryParse(path)?.hasScheme == true && !p.isAbsolute(path)) {
+      return null;
+    }
+    if (_isStoredInProject(path, sourceProjectPath, mediaDir)) return null;
     final root = AssetStaging.isStagedPath(path)
         ? AssetStaging.rootPath
         : sourceProjectPath;
@@ -87,16 +91,17 @@ extension ImageServiceMediaTransport on ImageService {
       logWarning('ImageService.copyMedia: rejected (exceeds size cap)');
       return null;
     }
-    return _copyToDir(trusted, mediaDir);
+    return _copyInto(trusted, mediaDir, 'media');
   }
-
-  bool _shouldCopy(String path) {
-    return path.isNotEmpty &&
-        !path.startsWith('media/') &&
-        !path.startsWith('images/') &&
-        p.isAbsolute(path);
-  }
-
-  Future<String?> _copyToDir(String sourcePath, Directory destDir) async =>
-      _copyInto(sourcePath, destDir, 'media');
 }
+
+/// Relative assets stay in place on ordinary saves. Save as instead reads them
+/// from the original project, preserving the fast path without losing bytes.
+bool _isStoredInProject(
+  String path,
+  String? sourceProject,
+  Directory assetDir,
+) =>
+    !p.isAbsolute(path) &&
+    sourceProject != null &&
+    p.equals(p.normalize(sourceProject), p.dirname(assetDir.path));

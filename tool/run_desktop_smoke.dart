@@ -1,20 +1,26 @@
-// Two independent flutter-drive launches, sharing only an isolated disk fixture.
+// Independent flutter-drive launches sharing only an isolated disk fixture.
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
 import '../test_driver/desktop_smoke_process.dart';
+import '../test_driver/desktop_roundtrip_plan.dart';
 
 Future<void> main(List<String> args) async {
-  final device = args.isEmpty ? Platform.operatingSystem : args.single;
+  final roundtrip = args.contains('--roundtrip');
+  final positional = args.where((arg) => arg != '--roundtrip').toList();
+  final device = positional.isEmpty
+      ? Platform.operatingSystem
+      : positional.single;
   if (!{'macos', 'linux', 'windows'}.contains(device) ||
       device != Platform.operatingSystem) {
     throw ArgumentError('Run on the matching macos, linux or windows host');
   }
   final root = Directory.systemTemp.createTempSync('ocideck-desktop-smoke-');
-  final evidence = Directory(p.join('build', 'desktop-smoke'))
-    ..createSync(recursive: true);
+  final evidence = Directory(
+    p.join('build', roundtrip ? 'desktop-roundtrip' : 'desktop-smoke'),
+  )..createSync(recursive: true);
   final revision = await Process.run('git', ['rev-parse', 'HEAD']);
   final status = await Process.run('git', ['status', '--porcelain']);
   if (revision.exitCode != 0 || status.exitCode != 0) {
@@ -26,6 +32,7 @@ Future<void> main(List<String> args) async {
   stderr.writeln('Native lifecycle fixture: ${root.path}');
   var completed = false;
   try {
+    if (roundtrip) prepareRoundtripAssets(root.path);
     File(p.join(root.path, 'journey.md')).writeAsStringSync('''---
 marp: true
 title: Native lifecycle
@@ -49,7 +56,7 @@ title: Native lifecycle
       ]);
     }
     // Build macOS once with the existing framework fix, then launch precisely
-    // that app twice. The isolated runtime path is not a compile-time define.
+    // that app for every phase. The isolated runtime path is not a compile-time define.
     const target = 'integration_test/desktop_lifecycle_test.dart';
     const macosApp = 'build/macos/Build/Products/Profile/OciDeck.app';
     if (device == 'macos') {
@@ -61,7 +68,9 @@ title: Native lifecycle
       ]);
     }
     final results = <String, Map<String, dynamic>>{};
-    for (final phase in ['write', 'reopen']) {
+    for (final phase
+        in roundtrip ? nativeRoundtripPhases : ['write', 'reopen']) {
+      if (roundtrip) prepareRoundtripPhase(root.path, phase);
       File(p.join(root.path, 'phase.txt')).writeAsStringSync(phase);
       final resultPath = p.absolute(evidence.path, '$phase.json');
       final oldResult = File(resultPath);
@@ -80,6 +89,7 @@ title: Native lifecycle
         environment: {
           'DESKTOP_SMOKE_RESULT': resultPath,
           'DESKTOP_SMOKE_ROOT': root.path,
+          'DESKTOP_SMOKE_SCENARIO': roundtrip ? 'roundtrip' : 'basic',
         },
       );
       final result = Map<String, dynamic>.from(
@@ -87,7 +97,9 @@ title: Native lifecycle
       );
       if (result['phase'] != phase ||
           result['dirty'] != false ||
-          result['slides'] != 2 ||
+          (roundtrip
+              ? (result['slides'] as int) <= 0
+              : result['slides'] != 2) ||
           result['ready_to_close'] != true ||
           result['process_exited'] != true) {
         throw StateError('Incomplete $phase evidence: $result');
@@ -108,12 +120,31 @@ title: Native lifecycle
       ).writeAsString(const JsonEncoder.withIndent('  ').convert(result));
       results[phase] = result;
     }
-    if (results['write']!['pid'] == results['reopen']!['pid']) {
+    if (results.values.map((result) => result['pid']).toSet().length !=
+        results.length) {
       throw StateError('Reopen must use a new app process');
+    }
+    if (roundtrip) {
+      final authored =
+          jsonDecode(
+                File(p.join(root.path, 'expected.json')).readAsStringSync(),
+              )
+              as List;
+      for (final entry in results.entries) {
+        if (entry.value['slides'] != authored.length ||
+            (entry.key != 'write' &&
+                entry.value['fields_compared'] !=
+                    authored.fold<int>(
+                      0,
+                      (n, row) => n + (row as Map).length,
+                    ))) {
+          throw StateError('Incomplete field-by-field evidence: ${entry.key}');
+        }
+      }
     }
     completed = true;
     stderr.writeln(
-      'PASS: native open/add/save/close/reopen ($device), two app processes.',
+      'PASS: native open/add/save/close/reopen ($device), ${results.length} app processes; roundtrip=$roundtrip.',
     );
   } finally {
     if (completed) {
