@@ -80,6 +80,15 @@ class AppJourneyTest(unittest.TestCase):
             self.assertFalse(report['scenarios'][0]['success'])
             self.assertEqual(len(report['source_commit']), 40)
 
+    def test_automatic_windows_video_explicitly_uses_local_media(self):
+        commands = []
+        def finished(command, log, environment=None, timeout=3600):
+            commands.append(command)
+            Path(environment['VIDEO_RESULT_FILE']).write_text('{"owned_media": true}')
+        with tempfile.TemporaryDirectory() as directory, patch.object(journey, 'run_command', side_effect=finished):
+            journey.drive('windows', 'windows_video_navigation_test', 'windows_video_driver', Path(directory))
+        self.assertIn('--dart-define=OCIDECK_LIVE_VIDEO_PROBE=false', commands[0])
+
     def test_missing_new_driver_evidence_cannot_reuse_old_success(self):
         with tempfile.TemporaryDirectory() as directory:
             evidence = Path(directory)

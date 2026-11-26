@@ -48,6 +48,8 @@ def drive(device, target, driver, evidence):
                      'build', 'macos', '--profile', f'--target={target}'],
                     evidence / 'build.log')
         args.append('--use-application-binary=build/macos/Build/Products/Profile/OciDeck.app')
+    if device == 'windows' and 'windows_video_navigation_test.dart' in target:
+        args.append('--dart-define=OCIDECK_LIVE_VIDEO_PROBE=false')
     environment = os.environ.copy()
     report = str((evidence / 'result.json').resolve())
     environment['NAVIGATION_RESULT_FILE'] = report

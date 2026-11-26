@@ -36,7 +36,9 @@ jobs:
         shell: bash
         run: echo "image=${ImageVersion:-unknown}" >> "$GITHUB_OUTPUT"
       - name: Native compilatie hergebruiken, nooit testresultaten
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        id: native-cache
+        continue-on-error: true
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: |
             .dart_tool/hooks_runner/shared
@@ -44,6 +46,7 @@ jobs:
           key: windows-app-journey-${{ github.event_name }}-${{ steps.compiler.outputs.image }}-${{ hashFiles('pubspec.lock', '.tool-versions', 'windows/**/CMakeLists.txt', 'third_party/**/CMakeLists.txt') }}-${{ github.sha }}
           restore-keys: |
             windows-app-journey-${{ github.event_name }}-${{ steps.compiler.outputs.image }}-${{ hashFiles('pubspec.lock', '.tool-versions', 'windows/**/CMakeLists.txt', 'third_party/**/CMakeLists.txt') }}-
+            windows-app-journey-push-${{ steps.compiler.outputs.image }}-${{ hashFiles('pubspec.lock', '.tool-versions', 'windows/**/CMakeLists.txt', 'third_party/**/CMakeLists.txt') }}-
       - name: Afhankelijkheden
         run: flutter pub get --enforce-lockfile
       - name: Ondersteunde WebView2 voor de volledige videoreis
@@ -60,6 +63,15 @@ jobs:
           full_arg=''
           if [ "$FULL" = true ]; then full_arg=--full; fi
           python tool/app_journey.py $full_arg
+      - name: Compilatie bewaren, ook na een rode app-assertie
+        if: ${{ always() && hashFiles('build/windows/x64/runner/Profile/ocideck.exe') != '' && steps.native-cache.outputs.cache-primary-key != '' && steps.native-cache.outputs.cache-hit != 'true' }}
+        continue-on-error: true
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            .dart_tool/hooks_runner/shared
+            build/windows/x64
+          key: ${{ steps.native-cache.outputs.cache-primary-key }}
       - name: Bewijs bewaren, ook als een scenario faalt
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
