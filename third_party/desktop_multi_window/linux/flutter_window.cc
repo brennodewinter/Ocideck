@@ -5,6 +5,7 @@
 // Modification notice per Apache-2.0 section 4(b); see ../MODIFICATIONS.md.
 
 #include "flutter_window.h"
+#include "../display_selection.h"
 
 #include <cstring>
 #include <iostream>
@@ -156,7 +157,30 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
       }
 
       gint target_monitor = current_monitor;
-      if (presenter_given && monitor_count > 1) {
+      FlValue* presenter_id = arguments ? fl_value_lookup_string(arguments, "presenterDisplay") : nullptr;
+      FlValue* target_id = arguments ? fl_value_lookup_string(arguments, "targetDisplay") : nullptr;
+      const bool identity_given = presenter_id != nullptr || target_id != nullptr;
+      if (identity_given) {
+        std::vector<std::string> identities;
+        for (gint i = 0; i < monitor_count; ++i) {
+          auto* monitor = gdk_display_get_monitor(display, i);
+          identities.push_back(std::to_string(reinterpret_cast<guintptr>(monitor)));
+        }
+        target_monitor = presenter_id && target_id &&
+            fl_value_get_type(presenter_id) == FL_VALUE_TYPE_STRING &&
+            fl_value_get_type(target_id) == FL_VALUE_TYPE_STRING
+            ? FindAudienceDisplay(identities, fl_value_get_string(presenter_id), fl_value_get_string(target_id)) : -1;
+      }
+      if ((identity_given && target_monitor < 0) ||
+          (presenter_given && (fl_value_get_int(presenter_screen) < 0 ||
+                              fl_value_get_int(presenter_screen) >= monitor_count))) {
+        response = FL_METHOD_RESPONSE(fl_method_error_response_new(
+            "-1", "display snapshot is stale", nullptr));
+        fl_method_call_respond(method_call, response, nullptr);
+        return;
+      }
+
+      if (!identity_given && presenter_given && monitor_count > 1) {
         gint presenter = fl_value_get_int(presenter_screen);
         if (presenter >= 0 && presenter < monitor_count) {
           for (gint i = 0; i < monitor_count; ++i) {
@@ -166,7 +190,7 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
             }
           }
         }
-      } else if (ReadExternalArgument(arguments) && monitor_count > 1) {
+      } else if (!identity_given && ReadExternalArgument(arguments) && monitor_count > 1) {
         for (gint i = 0; i < monitor_count; ++i) {
           if (i != current_monitor) {
             target_monitor = i;
@@ -181,7 +205,8 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
       // fullscreen_on_monitor.
       GdkMonitor* target =
           gdk_display_get_monitor(display, target_monitor);
-      if (target == nullptr) {
+      if (target == nullptr || (identity_given &&
+          std::to_string(reinterpret_cast<guintptr>(target)) != fl_value_get_string(target_id))) {
         response = FL_METHOD_RESPONSE(
             fl_method_error_response_new("-1", "display no longer available",
                                          nullptr));
@@ -190,6 +215,12 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
       }
       GdkRectangle bounds;
       gdk_monitor_get_geometry(target, &bounds);
+      if (bounds.width <= 0 || bounds.height <= 0) {
+        response = FL_METHOD_RESPONSE(fl_method_error_response_new(
+            "-1", "invalid display bounds", nullptr));
+        fl_method_call_respond(method_call, response, nullptr);
+        return;
+      }
       gtk_window_unfullscreen(window);
       gtk_window_set_decorated(window, FALSE);
       gtk_window_move(window, bounds.x, bounds.y);

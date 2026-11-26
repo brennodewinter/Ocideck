@@ -36,6 +36,26 @@ be positioned, and the presenter's keyboard focus cannot be kept on the laptop.
 | `linux/flutter_window.cc` | Implemented `window_close` (destroying the GTK window on idle), `window_setFrame` and `window_coverScreen` with GDK monitor selection. `window_coverScreen` honours an optional `presenterScreen` index (#1913), refuses the call when the target monitor disappeared between enumeration and use (#3150), and refuses when the caller asked for a different screen but only one monitor remains (#3162). |
 | `linux/multi_window_manager.cc` | Stopped removing the `FlView` from its container on window destroy; letting GTK tear the view down with the window avoids `FlutterEngineRemoveView` errors. |
 
+## Display snapshot identity (#3216)
+
+`window_controller.dart` now also accepts `presenterDisplay` and `targetDisplay`.
+OciDeck sends both opaque native identities from the same immutable snapshot,
+rather than passing an index into a separately enumerated native list. The
+macOS, Windows and Linux cover handlers resolve both identities in their live
+list and refuse missing/equal identities; they never guess another screen.
+Bounds are read at use and invalid/empty bounds are refused. Windows uses the
+`HMONITOR` value, GTK the `GdkMonitor` object, and AppKit the `NSScreen` object
+address already exposed by nativeapi. These identities are scoped to one
+configuration/action, never saved or used as persistent hardware identifiers.
+AppKit replacing its screen objects invalidates the old snapshot safely.
+
+`display_selection.h` is an added, portable identity resolver shared by Windows
+and Linux. `CoverScreenStyle.swift` contains the equivalent AppKit resolver;
+its existing Swift test file now exercises empty, removed and reordered lists.
+`test/native_display_selection_test.dart` compiles and runs the actual shared
+C++ helper on macOS/Linux. Legacy `presenterScreen` remains for compatibility;
+OciDeck's callers no longer use it.
+
 ## Keeping it honest
 
 `tool/sbom_build.dart` records the upstream URL, this commit and a SHA-256 tree

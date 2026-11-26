@@ -113,9 +113,19 @@ class WindowController {
   /// only when the presenter itself is on the primary screen. In a reversed
   /// setup (presenter on the external display) the heuristic would put both
   /// windows on the same screen; [presenterScreen] fixes that (#1913).
-  Future<void> coverScreen({bool external = true, int? presenterScreen}) =>
+  /// [presenterDisplay] and [targetDisplay] are opaque native display identities
+  /// from one snapshot. When provided, missing/equal identities fail instead
+  /// of falling back to an index or primary-screen heuristic.
+  Future<void> coverScreen({
+    bool external = true,
+    int? presenterScreen,
+    String? presenterDisplay,
+    String? targetDisplay,
+  }) =>
       _callWindowMethod('window_coverScreen', {
         'external': external,
+        if (presenterDisplay != null) 'presenterDisplay': presenterDisplay,
+        if (targetDisplay != null) 'targetDisplay': targetDisplay,
         if (presenterScreen != null) 'presenterScreen': presenterScreen,
       });
 

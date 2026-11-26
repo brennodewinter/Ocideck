@@ -12,3 +12,12 @@ import AppKit
 public func coverScreenStyleMask(from current: NSWindow.StyleMask) -> NSWindow.StyleMask {
     current.contains(.fullScreen) ? current : [.borderless]
 }
+
+/// Resolves identities within one live enumeration; stale indices never apply.
+public func audienceDisplayIndex(_ identities: [String], presenter: String, target: String) -> Int? {
+    guard identities.count >= 2, !presenter.isEmpty, !target.isEmpty,
+        presenter != target, Set(identities).count == identities.count,
+        identities.contains(presenter)
+    else { return nil }
+    return identities.firstIndex(of: target)
+}

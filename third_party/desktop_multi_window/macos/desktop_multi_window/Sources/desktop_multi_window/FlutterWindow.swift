@@ -144,12 +144,32 @@ class FlutterWindow: NSObject {
                 return
             }
             var target: NSScreen? = nil
+            let presenterID = args?["presenterDisplay"] as? String
+            let targetID = args?["targetDisplay"] as? String
+            if presenterID != nil || targetID != nil {
+                let identities = screens.map {
+                    String(UInt(bitPattern: Unmanaged.passUnretained($0).toOpaque()))
+                }
+                guard let presenterID = presenterID, let targetID = targetID,
+                    let index = audienceDisplayIndex(identities, presenter: presenterID, target: targetID)
+                else {
+                    result(FlutterError(code: "-1", message: "display snapshot is stale", details: nil))
+                    return
+                }
+                target = screens[index]
+            }
+            if let presenterIndex = presenterIndex,
+                presenterIndex < 0 || presenterIndex >= screens.count {
+                result(FlutterError(code: "-1", message: "invalid display index", details: nil))
+                return
+            }
+
             // Prefer the screen the presenter is NOT on, when told which one that
             // is. The `external` heuristic below picks the non-primary screen,
             // which is only right when the presenter sits on the primary screen;
             // in a reversed setup it would pile both windows on the external
             // display (#1913).
-            if let presenterIndex = presenterIndex,
+            if target == nil, let presenterIndex = presenterIndex,
                 presenterIndex >= 0, presenterIndex < screens.count,
                 screens.count > 1
             {
@@ -168,13 +188,20 @@ class FlutterWindow: NSObject {
                 // window would land on a display that no longer exists while
                 // this call reports success; verify it is still online
                 // instead (#3161).
-                if let displayID = screen.deviceDescription[
+                guard let displayID = screen.deviceDescription[
                     NSDeviceDescriptionKey("NSScreenNumber")
-                ] as? CGDirectDisplayID, CGDisplayIsOnline(displayID) == 0 {
+                ] as? CGDirectDisplayID, CGDisplayIsOnline(displayID) != 0 else {
                     result(
                         FlutterError(
                             code: "-1", message: "display no longer available",
                             details: nil))
+                    return
+                }
+                let frame = screen.frame
+                guard frame.width > 0, frame.height > 0,
+                    frame.origin.x.isFinite, frame.origin.y.isFinite,
+                    frame.width.isFinite, frame.height.isFinite else {
+                    result(FlutterError(code: "-1", message: "invalid display bounds", details: nil))
                     return
                 }
                 // AppKit raises NSGenericException (and aborts the process)
@@ -195,9 +222,12 @@ class FlutterWindow: NSObject {
                 // stealing keyboard focus from the presenter window.
                 window.collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary]
                 window.isOpaque = true
-                window.setFrame(screen.frame, display: true)
+                window.setFrame(frame, display: true)
                 window.orderFrontRegardless()
                 window.setIsVisible(true)
+            } else {
+                result(FlutterError(code: "-1", message: "no display available", details: nil))
+                return
             }
             result(nil)
         default:
