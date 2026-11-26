@@ -4,10 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaml/yaml.dart';
 
 void main() {
-  const lokaleDoublures = [
-    '.forgejo/workflows/static-gate.yml',
-    '.forgejo/workflows/web-gate.yml',
-  ];
+  // The browser gate is automatic under #3212; web_gate_triggers_test guards it.
+  const lokaleDoublures = ['.forgejo/workflows/static-gate.yml'];
 
   for (final pad in lokaleDoublures) {
     test('$pad draait alleen bewust op afroep', () {
