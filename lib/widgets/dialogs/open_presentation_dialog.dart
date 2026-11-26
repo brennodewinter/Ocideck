@@ -15,6 +15,7 @@ import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../duplicate_badges.dart';
 import '../resizable_dialog_box.dart';
+import '../text_input_focus.dart';
 import 'open_kind_chrome.dart';
 import 'open_preview_pane.dart';
 
@@ -287,12 +288,13 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     Navigator.pop(context, OpenSearchResult.browse(kind: _kind));
   }
 
-  /// Pijltje/Enter/Home/End op de dialoog. Deze handler zit op een `Focus`
-  /// om de hele dialoog-content, dus hij krijgt alleen toetsen die het
-  /// gefocuste widget (bijv. het zoekveld) niet zelf consumeert — pijltjes
-  /// in het zoekveld bewegen de cursor en borrelen niet op, Enter wel.
+  /// Enter opent het gekozen resultaat, ook vanuit het zoekveld.
+  /// De navigatietoetsen blijven bij het tekstveld zolang dat focus heeft.
   KeyEventResult _onDialogKey(FocusNode node, KeyEvent event) {
-    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    if (event is! KeyDownEvent ||
+        (event.logicalKey != LogicalKeyboardKey.enter && textInputHasFocus)) {
+      return KeyEventResult.ignored;
+    }
     final visible = _visible;
     if (visible.isEmpty) return KeyEventResult.ignored;
     switch (event.logicalKey) {

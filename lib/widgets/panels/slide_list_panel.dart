@@ -45,6 +45,7 @@ import '../../services/slide_layout_metrics.dart';
 import '../slides/slide_preview.dart';
 import '../../state/collab_session_provider.dart';
 import '../slides/slide_thumbnail.dart';
+import '../text_input_focus.dart';
 import 'slide_overview_button.dart';
 import 'slide_presence_dots.dart';
 
@@ -132,12 +133,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       if (!mounted) return;
       _scrollSlideToTop(ref.read(editorProvider).selectedIndex);
     });
-  }
-
-  bool get _textInputHasFocus {
-    final context = FocusManager.instance.primaryFocus?.context;
-    return context?.widget is EditableText ||
-        context?.findAncestorWidgetOfExactType<EditableText>() != null;
   }
 
   GlobalKey _keyForSlide(Slide slide) {
@@ -294,7 +289,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   }
 
   KeyEventResult _onKey(FocusNode node, KeyEvent event) {
-    if (event is! KeyDownEvent || _textInputHasFocus) {
+    if (event is! KeyDownEvent || textInputHasFocus) {
       return KeyEventResult.ignored;
     }
     final KeyEventResult result;
