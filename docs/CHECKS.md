@@ -849,6 +849,27 @@ These checks form the static portion of the maintainer’s local validation.
   translation gate then wants it in every language.
 
 ### `make check-toolchain`
+- **Upstream workaround review (#3219):** the register
+  `tool/upstream_workarounds.json` records the Linux Impeller and Wayland scale
+  workarounds, macOS Impeller opt-out and macOS semantics backport. Each entry
+  names the upstream issues, locally observed Flutter version, files that pin
+  the workaround, removal reproduction, and the decision/date for the reviewed
+  Flutter pin. The gate rejects an empty/invalid register, missing pin files,
+  or a `reviewed_flutter` that differs from the current pin.
+- **Live closure report:** public GitHub issue states are fetched concurrently
+  with an eight-second deadline and no credentials. Every closed issue is
+  reported with the retained-workaround decision and removal test; closures
+  since the recorded review are marked explicitly. A timeout, rate limit or
+  malformed reply is reported as unknown and falls back to the recorded state,
+  preserving warnings for known closures. This advisory network failure does
+  not invalidate an otherwise reproducible local toolchain. For an explicit
+  offline run use `dart --disable-dart-dev tool/check_toolchain.dart
+  --offline-upstream`; this cannot establish current upstream status.
+- **Removal:** review the actual stable SDK contents and run the recorded
+  reproduction without the workaround. A closed issue can mean a fix on master,
+  an inactivity closure or a duplicate. When the stable fix and reproduction
+  justify removal, remove the workaround, its guard and register entry together;
+  otherwise update the recorded issue states and review decision for the new pin.
 - **Runs:** `dart --disable-dart-dev tool/check_toolchain.dart`
 - **Covers:** that the Flutter actually executing the gate — version, channel
   and repository — appears in [Toolchains of record](#toolchains-of-record).

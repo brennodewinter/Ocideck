@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "workarounds": [
+    {
+      "id": "linux-impeller",
+      "issue": 2058,
+      "observed_flutter": "3.47.2",
+      "upstream": [
+        {
+          "number": 191775,
+          "state": "open"
+        }
+      ],
+      "pins": [
+        "tool/check_linux_impeller.dart",
+        "linux/runner/my_application.cc"
+      ],
+      "verification": "Build a temporary Linux runner without the Impeller opt-out. On NVIDIA/Wayland and X11 maximize, resize and restore repeatedly; no EGL/GDK crash or stalled frame is allowed.",
+      "decision": "Keep: upstream #191775 remains open; native Wayland reproduction is required before removal.",
+      "reviewed_flutter": "3.50.0",
+      "reviewed_at": "2026-11-26"
+    },
+    {
+      "id": "linux-wayland-scale",
+      "issue": 3106,
+      "observed_flutter": "3.50.0",
+      "upstream": [
+        {
+          "number": 196476,
+          "state": "open"
+        }
+      ],
+      "pins": [
+        "tool/check_linux_wayland_scale.dart",
+        "linux/runner/my_application.cc"
+      ],
+      "verification": "Without follow_subsurface_scale, move a Linux/Wayland window between 100% and 200% monitors in both directions and change a monitor scale while running. Content must fill the window and pointer coordinates must match.",
+      "decision": "Keep: upstream #196476 remains open; static wiring tests cannot establish correct compositor behavior.",
+      "reviewed_flutter": "3.50.0",
+      "reviewed_at": "2026-11-26"
+    },
+    {
+      "id": "macos-impeller",
+      "issue": 3076,
+      "observed_flutter": "3.50.0",
+      "upstream": [
+        {
+          "number": 185394,
+          "state": "closed"
+        }
+      ],
+      "pins": [
+        "macos/Runner/Info.plist"
+      ],
+      "verification": "Verify the pinned SDK contains the engine fix from Flutter PR #192522 (cf75578ba90fbbc9571c653ba5a0ed79c73fee8a). In a temporary macOS release build enable Impeller; exercise A/B/A resize, native fullscreen with video, idle/foreground and display hot-plug without Canvas::SetupRenderPass crashes.",
+      "decision": "Keep: #185394 closed on 2026-11-23 through #192522, but cf75578ba90fbbc9571c653ba5a0ed79c73fee8a is not an ancestor of the pinned framework ab2912035e160d9cad6306df307576da6128ebdb. Closure alone does not fix Flutter 3.50.0.",
+      "reviewed_flutter": "3.50.0",
+      "reviewed_at": "2026-11-26"
+    },
+    {
+      "id": "macos-semantics",
+      "issue": 3128,
+      "observed_flutter": "3.50.0",
+      "upstream": [
+        {
+          "number": 196872,
+          "state": "open"
+        },
+        {
+          "number": 193372,
+          "state": "closed"
+        }
+      ],
+      "pins": [
+        "scripts/with_macos_flutter_semantics_fix.sh",
+        "third_party/flutter_patches/3.50.0-semantics-b304cf1.patch",
+        "Makefile"
+      ],
+      "verification": "Verify the unpatched pinned SDK contains b304cf18b6864d141cf08e26a07898901cddb4b5 or an equivalent fix. Run the upstream semantics_update_test.dart orphan/traversal-parent regressions and a macOS release with VoiceOver/AX queries, route transitions and pointer movement. Remove the wrapper, patch, build invocation and modification notice together after validation.",
+      "decision": "Keep: the merged #193372 fix b304cf18b6864d141cf08e26a07898901cddb4b5 is not an ancestor of Flutter 3.50.0 revision ab2912035e160d9cad6306df307576da6128ebdb; engine recovery report #196872 remains open.",
+      "reviewed_flutter": "3.50.0",
+      "reviewed_at": "2026-11-26"
+    }
+  ]
+}
