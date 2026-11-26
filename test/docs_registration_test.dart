@@ -39,6 +39,8 @@ void main() {
     'docs/SOURCE_MAP.md',
     'docs/TRANSCRIPTION_RELEASE_MATRIX.md',
     'docs/API_DOCUMENTATION.md',
+    // Maintainer integration notes: API contracts, BFF deployment and tests.
+    'docs/OCISERVE_FILES_AND_PASSKEYS.md',
     'docs/CONTRIBUTING_GUIDELINES.md',
     'docs/DEVELOPMENT_SETUP_GUIDE.md',
   };

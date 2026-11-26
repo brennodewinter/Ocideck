@@ -280,6 +280,7 @@ and it also indexes the design documents. The current-state documents:
 | [Known limitations](docs/KNOWN_LIMITATIONS.md) | What this alpha does not do yet, in one place |
 | [Licence compliance](docs/LICENSE_COMPLIANCE.md) | Open-source policy and the `make licenses` check |
 | [Migration guide](docs/MIGRATION_GUIDE.md) | Moving between versions — no breaking changes between releases yet |
+| [OciServe files and passkeys](docs/OCISERVE_FILES_AND_PASSKEYS.md) | Integration contracts, self-hosted web sessions, sharing and platform validation |
 | [Performance](docs/PERFORMANCE_GUIDE.md) | Performance characteristics and the hard limits enforced in code |
 | [Privacy](docs/PRIVACY.md) | What stays local, what leaves, and on whose action |
 | [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |
