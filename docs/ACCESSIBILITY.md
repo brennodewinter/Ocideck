@@ -141,10 +141,10 @@ One exception stands today: the Vigilis brand yellow as a link colour (#1819).
 
 ## What is not in place
 
-**PDF and PPTX exports are images.** This is the largest limitation in this
-document and the one most likely to matter. `export_service.dart` renders each
-slide to a bitmap and then wraps it: the PDF is one full-bleed `pw.Image` per
-page, and the PPTX is one `<p:pic>` per slide. Consequences, stated plainly:
+**PDF and PPTX export slide content as images.** This is the largest limitation
+in this document and the one most likely to matter. The export uses the app's
+slide renderer. In the standard PDF each slide fills a page as a `pw.Image`,
+and in PPTX it is a `<p:pic>`. The slide images have these limitations:
 
 - there is **no text layer**, so nothing can be selected, searched, or read by a
   screen reader;
@@ -159,10 +159,24 @@ page, and the PPTX is one `<p:pic>` per slide. Consequences, stated plainly:
   table semantics;
 - a chart's data alternative, which the editor exposes, does not survive.
 
-If the recipient needs an accessible document, the honest routes today are the
-**Markdown** (which is text, keeps its headings and carries the alt-text) or the
-**HTML export** (real text in a browser, though it was not built against WCAG
-either). PPTX speaker notes are real text and do travel.
+The **A4 PDF with speaker notes** and the **PPTX speaker notes** include
+selectable notes text. The slide content in both formats is still an image.
+
+**Export decision (2026-11-26).** Keep the raster slide export for PDF and PPTX.
+It uses the app's slide renderer to preserve the visual layout, including
+footers and page numbers. A native text layer with a logical reading order
+would require changes to the rendering pipeline and checks for visual parity. Per-page alt text would describe a slide as a
+whole. An embedded Markdown file would leave the PDF page without selectable
+slide text or navigation by heading. Revisit the decision when recipients
+require an accessible PDF or PPTX as the deliverable.
+([Pawprint #3235](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3235))
+
+For a text version, share **Markdown** with its headings and image alt text
+after checking what the intended audience may receive. To provide a browser
+version with selectable text, choose **HTML** in the export dialog. If you
+also need the visual layout, send that version alongside the PDF or PPTX.
+HTML accessibility testing is tracked in
+[Pawprint #3236](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3236).
 
 **The interactive parts of a choice-menu slide are keyboard-operable.** *(Fixed
 2026-08-18; listed as a known gap before that.)* While presenting, a menu block
@@ -462,10 +476,10 @@ see [PRIVACY.md](PRIVACY.md) and [HOSTING.md](HOSTING.md) §5.
 
 - Author in the editor with text scaling turned up if you need it; the deck is
   unaffected by that setting.
-- Fill in **Alt-tekst** for every image even though PDF and PPTX drop it — the
-  Markdown keeps it, and that is where an accessible version would start.
-- Hand over the **Markdown** or the **HTML** when the recipient needs to read
-  rather than look.
+- Fill in **Alt-tekst** for every image. Markdown preserves it, and PPTX
+  includes it in the description of the slide image.
+- Share **Markdown** or export **HTML** when the recipient needs selectable
+  slide text.
 - Report what does not work. The issue tracker is in
   [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md); an accessibility defect
   is an ordinary defect here, not a feature request.
