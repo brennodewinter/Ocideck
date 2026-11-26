@@ -16,8 +16,15 @@
 # in de parallelle suite. `make test` en `make coverage` voeren beide stappen uit.
 # `codec-matrix` markeert installatieproeven die een expliciete decoder en
 # voor de spraakproef ook een geïnstalleerd model vereisen.
+# `registration` markeert de snelle registratie-/invariantentests die
+# `make check-registrations` draait (#1123). De set wordt uit deze tag afgeleid
+# — er is geen Makefile-lijst meer die kan verouderen (#3218). Een nieuwe
+# invariantentest markeert zichzelf met `@Tags(['registration'])` boven
+# `library;`; test/registration_tag_test.dart bewaakt dat een test die zich
+# 'registration'/'invariant' noemt de tag ook echt draagt.
 tags:
   benchmark:
   codec-matrix:
   golden:
   integration:
+  registration:

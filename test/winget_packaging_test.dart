@@ -1,6 +1,7 @@
 // The generator uses bash/awk/sed and exists for the Windows package catalog,
 // so Windows validates the generated manifest itself rather than this shell test.
 @TestOn('vm && !windows')
+@Tags(['registration'])
 library;
 
 import 'dart:io';
