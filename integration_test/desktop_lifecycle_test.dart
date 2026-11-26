@@ -67,6 +67,11 @@ void main() {
       }
     }
     await configureNativeWindow();
+    expect(
+      WindowManager.instance.hasWillCloseHook(),
+      isTrue,
+      reason: 'The native close guard must exist before the first app frame',
+    );
     final roundtrip =
         Platform.environment['DESKTOP_SMOKE_SCENARIO'] == 'roundtrip';
     container = ProviderContainer(

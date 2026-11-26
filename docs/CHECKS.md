@@ -1248,7 +1248,10 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
 - **Linux final exit:** after the saved-work guard and cleanup, `quitApp` uses
   Flutter's GTK application-exit platform call. The pinned nativeapi close
   implementation confuses a GdkWindow with a GtkWidget (#3287). The driver
-  still requires the actual process to end before another process starts.
+  still requires the actual process to end before another process starts. The
+  native close guard is registered even when there is no current window, because
+  the GTK window is not yet visible before the first frame; the real app probe
+  asserts that the native hook exists at that point.
 - **Scope:** this builds and drives real app engines, so it is a separate native
   gate, not part of the widget-only `make check-full`. Run it locally before
   merging changes to desktop lifecycle behavior. A successful unit suite or

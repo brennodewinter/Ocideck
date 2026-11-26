@@ -115,6 +115,17 @@ void main() {
         'integration_test/desktop_lifecycle_test.dart',
       ).readAsStringSync();
       expect(probe, contains('configureNativeWindow()'));
+      expect(probe, contains('hasWillCloseHook()'));
+      final native = File(
+        'lib/platform/native_window_io.dart',
+      ).readAsStringSync();
+      final configure = native.substring(
+        native.indexOf('Future<void> configureNativeWindow()'),
+      );
+      expect(
+        configure.indexOf('setWillCloseHook('),
+        lessThan(configure.indexOf('if (window == null)')),
+      );
       expect(probe, contains('desktop_smoke_paths.dart'));
       for (final bypass in [
         'debugQuitAppSkipsNative',
