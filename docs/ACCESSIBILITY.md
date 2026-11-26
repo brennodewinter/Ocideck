@@ -460,13 +460,23 @@ the bullet-to-description link in the HTML DOM, the absence of unrevealed
 marks and the bullet descriptions in Flutter's semantics tree, and exactly
 one polite announcement per reveal step.
 
-On 2026-11-25 the callout test deck opened in a macOS 27.2.1 debug session.
-VoiceOver activation and spoken output could not be confirmed. A Windows
-session with NVDA was unavailable. Both checks are pending. To repeat the check,
-present a Bullets + Image slide with step-by-step reveal and two bullets, one
-linked to a single mark and one to two marks. At each step, check that only
-revealed marks are reachable, the bullet's description is read once and the
-step announcement reports the number of marks revealed at that step.
+On 2026-11-26 a real VoiceOver session ran against a macOS 27.2.1 debug
+build presenting the callout test deck (a Bullets + Image slide with
+step-by-step reveal and two bullets, one linked to a single mark and one to
+two marks). The presenter opened fullscreen, each step keypress advanced the
+reveal, and the marks appeared visually at the right step. VoiceOver
+announced the application name on activation, but its cursor never reached
+the slide content: navigating inside the app produced no output, and the
+step announcement was not heard. The app's stderr logged
+`Failed to update ui::AXTree` on every semantics update, including each
+reveal step — Flutter's accessibility bridge was rejecting the tree changes
+the automated tests verify, so on macOS the tested semantics may never reach
+a real reader (#3268). A Windows session with NVDA remains unavailable.
+Until #3268 is resolved, real-reader verification of the points above is
+blocked rather than passed. To repeat the check once the bridge works:
+present the same slide and, at each step, confirm that only revealed marks
+are reachable, the bullet's description is read once, and the step
+announcement reports the number of marks revealed at that step.
 
 **The privacy check's image scan is unavailable on the web build**, which is a
 capability gap rather than an accessibility one, but it lands in the same place:
