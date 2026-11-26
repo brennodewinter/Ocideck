@@ -86,7 +86,7 @@ void main() {
     },
   );
 
-  test('relative media cannot escape the source project', () async {
+  test('relative assets cannot escape the source project', () async {
     final root = Directory.systemTemp.createTempSync('relative-media-escape-');
     addTearDown(() => root.deleteSync(recursive: true));
     final source = Directory(p.join(root.path, 'source'))..createSync();
@@ -103,5 +103,14 @@ void main() {
       expect(output.single.audioPath, path);
     }
     expect(Directory(p.join(target.path, 'media')).listSync(), isEmpty);
+    for (final path in ['../secret.wav', 'link.wav']) {
+      final output = await ImageService().copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: path)],
+        target.path,
+        sourceProjectPath: source.path,
+      );
+      expect(output.single.imagePath, path);
+    }
+    expect(Directory(p.join(target.path, 'images')).listSync(), isEmpty);
   }, skip: Platform.isWindows);
 }
