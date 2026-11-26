@@ -1376,6 +1376,7 @@ check-web: build-web
 # Install once: npm ci --prefix tool/web-wasm-check, then in that directory
 # npx playwright install --with-deps chromium (OS packages may need privileges).
 check-web-browser:
+	node --test tool/web-wasm-check/probe.test.cjs
 	node tool/web-wasm-check/probe.cjs build/web chromium auto 1
 	node tool/web-wasm-check/probe.cjs build/web chromium fallback 1
 	node tool/web-wasm-check/probe.cjs build/web chromium single-thread 1
@@ -1626,7 +1627,7 @@ check-registrations:
 check-full:
 	@scripts/gate_lock.sh $(MAKE) check-full-locked
 
-check-full-locked: shellcheck check-locked check-l10n-orphans check-secrets sast licenses sbom-verify deps-check check-web deps-outdated check-marp
+check-full-locked: shellcheck check-locked check-l10n-orphans check-secrets sast licenses sbom-verify deps-check check-web check-web-browser deps-outdated check-marp
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, dependency freshness, and real-Marp theme loading."
 

@@ -116,6 +116,13 @@ data. The application itself does not gain an MCP endpoint from this setup.
 The [Flutter 3.50 AI assessment](docs/design/AI_ASSIST.md#11-flutter-350-assessment-2026-11-18)
 records the Genkit/MediaPipe opportunities, platform limits and current decisions.
 
+## Browser acceptance prerequisites
+
+Install the locked browser tools once with `npm ci --prefix tool/web-wasm-check`,
+then run `npx playwright install chromium` in that directory. On Linux use
+`--with-deps` when installing into a CI image. `make check-full` now runs the real
+browser journey after building the web bundle; missing browser tools are fatal.
+
 ## The quality gate
 
 Before merging, the maintainer runs `make check-full` on the exact commit and
@@ -129,7 +136,7 @@ recorded in #790, the former per-PR gate took 22 minutes on the forge and
 2.5 minutes on the maintainer’s machine.
 
 ```sh
-make check-full       # complete pre-merge gate, including scans and web build
+make check-full       # complete pre-merge gate, including scans, web build and browser acceptance
 ```
 
 Individual steps:
