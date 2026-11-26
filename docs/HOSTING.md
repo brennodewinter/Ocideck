@@ -465,8 +465,9 @@ no backend, no API, no application server.
 
 ### Configuration file
 
-Create `ocideck-web-config.json` at the root of the app (the same directory as
-`index.html`):
+The bundle ships an empty `ocideck-web-config.json` (`{}`), so optional
+configuration reads do not produce browser-console 404 errors. Edit that file at
+the root of the app (the same directory as `index.html`) to enable the library:
 
 ```json
 {"decksPath": "/decks/"}
