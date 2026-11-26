@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 import 'dart:ui' show AppExitResponse, Size;
 
 import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/services.dart' show SystemNavigator;
 import 'package:nativeapi/nativeapi.dart';
 
 import '../utils/log.dart';
@@ -128,6 +129,13 @@ Future<void> quitApp() async {
     return;
   }
   if (!Platform.isMacOS && !Platform.isWindows && !Platform.isLinux) return;
+  if (Platform.isLinux) {
+    // nativeapi behandelt hier een GdkWindow als GtkWidget. Flutter heeft
+    // zelf de GtkApplication en sluit die via zijn officiële platformroute.
+    await closeLog();
+    await SystemNavigator.pop();
+    return;
+  }
   final window = WindowManager.instance.getCurrent();
   if (window == null) return;
   await closeLog();

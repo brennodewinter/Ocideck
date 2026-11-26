@@ -1172,12 +1172,18 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
   PR set runs the existing lifecycle harness in two separate app processes.
   `FULL=true` adds the six-process roundtrip and the existing document-navigation
   profile on every platform; Windows also runs the existing WebView2 focus,
-  keyboard and live-player scenario. The baseline-ref comparison remains a
+  keyboard scenario and a local MP4 decode/play/pause/seek probe. Live provider
+  acceptance remains an explicit separate diagnostic. The baseline-ref comparison remains a
   separate manual diagnostic; automatic navigation needs no baseline.
 - **Automatic lanes:** `.forgejo/workflows/app-journey.yml` runs one journey per
   platform for PRs to main and nightly at 03:27 UTC. Linux uses the pinned build
-  image and an ordinary desktop user under Xvfb; macOS uses the registered Mac
-  host and its pinned semantics-build wrapper. Windows runs on the GitHub build
+  image and an ordinary desktop user under Xvfb with a D-Bus session; macOS uses the registered Mac
+  host and its pinned semantics-build wrapper. Each macOS job copies the SDK
+  into its own temporary directory (copy-on-write on APFS), restores the known
+  backport files from the pinned Git objects there, and removes only the copied
+  SDK lock. Cache/worktree containment and a clean SDK diff are checked. The
+  shared SDK and its owner lock are untouched; the job copy is always removed.
+  Windows runs on the GitHub build
   mirror at every branch push (short) and nightly at 03:17 UTC (full).
   Pawprint reads the public mirror API and accepts only the same SHA, branch,
   trigger, workflow and successful mode-specific job. No dispatch credential
@@ -1198,8 +1204,10 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
 - **Trust and availability:** the persistent Mac runs same-repository PR heads;
   fork commits first need a maintainer branch on Pawprint. The Windows bridge
   reports that requirement as a failure rather than a green skip. An offline
-  Mac queues the PR check. The video journey intentionally retains the existing
-  live YouTube acceptance dependency; its failure remains visible. These native
+  Mac queues the PR check. Automatic video uses synthetic local media and real
+  WebView2 input; `OCIDECK_LIVE_VIDEO_PROBE=false` explicitly omits the external
+  YouTube test. The existing manual `video_only=true` diagnostic keeps live
+  YouTube enabled by default and retains provider refusals as failures. These native
   lanes complement the local `make check-full` and do not replace it.
 
 ### `make test-desktop-smoke`
@@ -1237,6 +1245,10 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
   unmounts the test tree, the harness reattaches the real shell around its same
   live provider state; this keeps the production exit listener present for the
   driver’s post-result native shutdown.
+- **Linux final exit:** after the saved-work guard and cleanup, `quitApp` uses
+  Flutter's GTK application-exit platform call. The pinned nativeapi close
+  implementation confuses a GdkWindow with a GtkWidget (#3287). The driver
+  still requires the actual process to end before another process starts.
 - **Scope:** this builds and drives real app engines, so it is a separate native
   gate, not part of the widget-only `make check-full`. Run it locally before
   merging changes to desktop lifecycle behavior. A successful unit suite or

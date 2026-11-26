@@ -74,7 +74,7 @@ jobs:
           if [ "$FULL" = true ]; then full_arg=--full; fi
           chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE"
           runuser --user ubuntu --preserve-environment -- env HOME=/home/ubuntu \
-            xvfb-run -a scripts/gate_lock.sh python3 tool/app_journey.py $full_arg
+            xvfb-run -a dbus-run-session -- scripts/gate_lock.sh python3 tool/app_journey.py $full_arg
       - name: Bewijs bewaren, ook als een scenario faalt
         if: always()
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
