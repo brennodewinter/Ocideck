@@ -8,6 +8,9 @@
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
+@Tags(['registration'])
+library;
+
 import 'dart:io';
 
 import 'package:crypto/crypto.dart';

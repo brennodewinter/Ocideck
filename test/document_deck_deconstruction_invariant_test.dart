@@ -9,6 +9,9 @@
 // Deze poort neemt een set representatieve documenten (kop-geleid, gemengd
 // prosa+tabel, chart, mermaid) door `documentToDeck` en bewijst dat een
 // toekomstige regressie die drop niet stil kan herintroduceren.
+@Tags(['registration'])
+library;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_deck_bridge.dart';

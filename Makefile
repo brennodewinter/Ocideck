@@ -1580,29 +1580,27 @@ check-static: $(STATIC_GATES)
 # op main kon landen. Het zijn platte tests (geen widget-render), dus seconden per
 # stuk; de volle suite en de dekkingsvloer blijven bewust in `make check`.
 #
-# LET OP — dit is een handmatige lijst, geen automatische. Komt er een nieuwe
-# registratie-/invariantpoort bij als test, voeg hem hier toe; een gemiste test is
-# opnieuw een stil gat. De zeven hieronder dekken: lib-bestand → SOURCE_MAP, docs
-# → registratie, pubspec → SBOM, nieuwe `l10n.d`-string → vertaald, en de
-# Windows-installer en de WinGet-verwijzing die niet uit de pas mogen lopen met
-# wat zij verpakken. Die twee horen hier omdat niets anders vóór de merge naar
-# deze Windows-distributieketen kijkt: de volle suite draait pas ná de merge op
-# `linux-gate`.
-REGISTRATION_TESTS := \
-	test/source_map_coverage_test.dart \
-	test/docs_registration_test.dart \
-	test/sbom_test.dart \
-	test/l10n_untranslated_test.dart \
-	test/windows_packaging_test.dart \
-	test/winget_packaging_test.dart \
-	test/ociserve_api_drift_test.dart
-
+# De set is afgeleid, niet bijgehouden (#3218): een invariantentest markeert
+# zichzelf met `@Tags(['registration'])` boven `library;` — zoals `golden` en
+# `benchmark` dat al doen — en dit doel draait alles met die tag. Er is dus geen
+# tweede lijst meer die kan verouderen: wie de tag zet, draait mee. De kant die
+# de tag niet kan zien bewaakt `test/registration_tag_test.dart`: een
+# `*_test.dart` die zich `registration`/`invariant` noemt zonder de tag laat die
+# poort vallen, dus een vergeten markering wordt geen stil gat.
+#
+# De tag dekt momenteel: lib-bestand → SOURCE_MAP, docs → registratie, pubspec →
+# SBOM, nieuwe `l10n.d`-string → vertaald, de Windows-installer en de
+# WinGet-verwijzing die niet uit de pas mogen lopen met wat zij verpakken (die
+# twee horen hier omdat niets anders vóór de merge naar deze
+# Windows-distributieketen kijkt: de volle suite draait pas ná de merge op
+# `linux-gate`), de OciServe-routes tegen de gepinde OpenAPI-spec, en deze
+# tag-waarborg zelf.
 check-registrations:
 	@echo "== OciDeck registration invariants =="
-	@echo "Command: flutter test $(REGISTRATION_TESTS)"
-	@echo "Covers: new lib file in SOURCE_MAP, new docs registered, SBOM fresh vs pubspec, new l10n.d string translated, Windows packaging and WinGet manifests in step with releases, OciServe routes match pinned OpenAPI spec."
-	@echo "Failure means: something new landed without its registration — the class of drift that is a *test*, not a static gate."
-	flutter test $(REGISTRATION_TESTS) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	@echo "Command: flutter test test --tags registration"
+	@echo "Covers: every test tagged 'registration' — new lib file in SOURCE_MAP, new docs registered, SBOM fresh vs pubspec, new l10n.d string translated, Windows packaging and WinGet manifests in step with releases, OciServe routes match pinned OpenAPI spec, and the tag guard itself."
+	@echo "Failure means: something new landed without its registration — the class of drift that is a *test*, not a static gate. A new invariant test marks itself with @Tags(['registration'])."
+	flutter test test --tags registration $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
