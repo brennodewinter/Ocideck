@@ -10,6 +10,7 @@ import '../../l10n/app_localizations.dart';
 import '../../utils/display_path.dart';
 import '../duplicate_badges.dart';
 import '../resizable_dialog_box.dart';
+import '../text_input_focus.dart';
 import 'duplicate_cleanup_dialog.dart';
 import 'open_kind_chrome.dart';
 import 'open_preview_pane.dart';
@@ -135,9 +136,13 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     }).toList();
   }
 
-  /// Pijltje/Enter/Home/End op de dialoog — zie [OpenPresentationDialog].
+  /// Enter opent het gekozen resultaat, ook vanuit het zoekveld.
+  /// De navigatietoetsen blijven bij het tekstveld zolang dat focus heeft.
   KeyEventResult _onDialogKey(FocusNode node, KeyEvent event) {
-    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    if (event is! KeyDownEvent ||
+        (event.logicalKey != LogicalKeyboardKey.enter && textInputHasFocus)) {
+      return KeyEventResult.ignored;
+    }
     final visible = _visibleList();
     if (visible.isEmpty) return KeyEventResult.ignored;
     switch (event.logicalKey) {

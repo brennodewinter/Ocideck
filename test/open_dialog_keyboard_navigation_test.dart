@@ -10,15 +10,13 @@ import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/widgets/dialogs/open_presentation_dialog.dart';
+import 'package:ocideck/widgets/dialogs/scan_library_dialog.dart';
 
 import 'support/pump_until.dart';
 
-/// Toetsenbordbediering van de openen-dialoog (#1934): pijltje omlaag kiest
-/// de eerste rij, Enter opent hem, en de geselecteerde rij draagt een
-/// zichtbare focusrand. De toetsen werken vanuit het zoekveld — pijltjes
-/// in het zoekveld bewegen de cursor en worden niet afgevangen, maar
-/// pijltjes vanaf een knop of Enter vanuit het zoekveld bereiken de
-/// dialoog-handler.
+/// In de bestandsdialogen werken navigatietoetsen volgens de focus.
+/// Buiten de velden kiezen ze een rij (#1934). Enter opent het gekozen
+/// resultaat, ook vanuit het zoekveld.
 FileService _fileService(String homeDir) => FileService(
   MarkdownService(),
   ImageService(),
@@ -46,13 +44,16 @@ Widget _host(void Function(BuildContext context) onPressed) {
 }
 
 Future<void> _openAndScan(WidgetTester tester) async {
-  await tester.binding.setSurfaceSize(const Size(1800, 1200));
-  addTearDown(() => tester.binding.setSurfaceSize(null));
+  tester.view.physicalSize = const Size(1800, 1200);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
   await tester.tap(find.text('open'));
   await tester.pump();
   await pumpUntil(
     tester,
-    () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+    () =>
+        find.byType(CircularProgressIndicator).evaluate().isEmpty &&
+        find.byType(LinearProgressIndicator).evaluate().isEmpty,
     reason: 'de mapscan bleef laden',
   );
 }
@@ -98,6 +99,66 @@ void main() {
     expect(result!.browseRequested, isFalse);
     expect(result!.paths, isNotEmpty);
     expect(result!.paths.first, endsWith('alpha.md'));
+  });
+
+  testWidgets('arrows keep both Open dialog fields in text editing', (
+    tester,
+  ) async {
+    final service = _fileService(dir.path);
+    OpenSearchResult? result;
+    await tester.pumpWidget(
+      _host((context) async {
+        result = await OpenPresentationDialog.show(
+          context,
+          fileService: service,
+          libraries: [LibraryFolder(name: 'Test', path: dir.path)],
+        );
+      }),
+    );
+    await _openAndScan(tester);
+
+    final search = find.byType(TextField).first;
+    await tester.enterText(search, 'a');
+    final editable = find.descendant(
+      of: search,
+      matching: find.byType(EditableText),
+    );
+    final controller = tester.widget<EditableText>(editable).controller;
+    controller.selection = const TextSelection.collapsed(offset: 0);
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    expect(controller.selection, const TextSelection.collapsed(offset: 1));
+
+    await tester.tap(find.byKey(const Key('open-tag-filter')));
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    expect(result?.paths.single, endsWith('alpha.md'));
+  });
+
+  testWidgets('End in the Scan Library query keeps the result unchanged', (
+    tester,
+  ) async {
+    String? result;
+    await tester.pumpWidget(
+      _host((context) async {
+        result = await ScanLibraryDialog.show(
+          context,
+          fileService: _fileService(dir.path),
+          recentFiles: ['${dir.path}/alpha.md'],
+        );
+      }),
+    );
+    await _openAndScan(tester);
+    expect(find.text('Alpha'), findsOneWidget);
+    expect(find.text('Bravo'), findsOneWidget);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.end);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    expect(result, endsWith('alpha.md'));
   });
 
   testWidgets('Tab to a button, then arrow down selects the first row', (
