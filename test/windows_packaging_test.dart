@@ -1,4 +1,5 @@
 @TestOn('vm')
+@Tags(['registration'])
 library;
 
 import 'dart:convert';
