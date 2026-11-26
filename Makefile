@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-linux-wayland-scale check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-linux-wayland-scale check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-roundtrip-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 .PHONY: package-deps test-benchmarks
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
@@ -1095,6 +1095,12 @@ check-collab-field-parity:
 	@echo "        tool/check_collab_field_parity.dart."
 	dart run tool/check_collab_field_parity.dart
 
+# Inventory and assertions share the typed case map; neither alone is sufficient.
+check-roundtrip-field-parity:
+	@echo "== OciDeck check: persistent field roundtrip parity =="
+	dart run tool/check_roundtrip_field_parity.dart
+	flutter test test/roundtrip_field_parity_test.dart test/persistence_field_roundtrip_test.dart --reporter expanded
+
 # A machine-translated doc must not carry an English mermaid diagram (#1278). The
 # translator leaves code blocks — and so mermaid — untouched, so a diagram's
 # labels stay in the source language while the prose around it is translated. This
@@ -1516,7 +1522,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := check-release-channels format-check analyze check-toolchain check-linux-deps check-linux-impeller check-linux-wayland-scale check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
+STATIC_GATES := check-release-channels format-check analyze check-toolchain check-linux-deps check-linux-impeller check-linux-wayland-scale check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-roundtrip-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus
