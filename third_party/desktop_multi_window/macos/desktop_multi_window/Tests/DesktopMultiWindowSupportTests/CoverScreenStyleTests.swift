@@ -4,6 +4,26 @@ import XCTest
 @testable import DesktopMultiWindowSupport
 
 final class CoverScreenStyleTests: XCTestCase {
+    func testTransitionNotificationAndDeadlineCompleteOnlyOnce() {
+        let completion = DisplayTransitionCompletion()
+        var calls = 0
+        completion.finish { calls += 1 }
+        completion.finish { calls += 100 }
+        XCTAssertEqual(calls, 1)
+    }
+
+    func testTransitionCompletionRemovesItsObserver() {
+        let completion = DisplayTransitionCompletion()
+        let name = Notification.Name("OciDeckDisplayTransitionTest")
+        var calls = 0
+        completion.observer = NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil) { _ in calls += 1 }
+        NotificationCenter.default.post(name: name, object: nil)
+        completion.finish {}
+        NotificationCenter.default.post(name: name, object: nil)
+        XCTAssertEqual(calls, 1)
+        XCTAssertNil(completion.observer)
+    }
+
     func testIdentitySelectionRejectsEmptyRemovedAndShiftedDisplays() {
         XCTAssertNil(audienceDisplayIndex([], presenter: "a", target: "b"))
         XCTAssertNil(audienceDisplayIndex(["a"], presenter: "a", target: "b"))

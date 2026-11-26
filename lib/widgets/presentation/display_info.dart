@@ -131,7 +131,10 @@ Future<DisplayInfo> coverAudienceDisplay(
 
 /// Revalidates identities after the asynchronous audience move. This fresh
 /// snapshot is validation of the same target, never another index selection.
-void moveToDisplay(DisplayInfo target, {required DisplayInfo previous}) {
+Future<void> moveToDisplay(
+  DisplayInfo target, {
+  required DisplayInfo previous,
+}) async {
   final live = captureDisplaySnapshot();
   final display = live.find(target.nativeId);
   if (target.nativeId == previous.nativeId ||
@@ -144,6 +147,6 @@ void moveToDisplay(DisplayInfo target, {required DisplayInfo previous}) {
   if (debug != null) {
     debug(live.displays.indexOf(display), live.displays);
   } else {
-    impl.moveToDisplay(display);
+    await impl.moveToDisplay(display, previous: previous);
   }
 }

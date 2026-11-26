@@ -129,6 +129,16 @@ class WindowController {
         if (presenterScreen != null) 'presenterScreen': presenterScreen,
       });
 
+  /// Move the presenter on the native UI thread after validating both identities.
+  Future<void> moveToDisplay({
+    required String presenterDisplay,
+    required String targetDisplay,
+  }) =>
+      _callWindowMethod('window_moveToDisplay', {
+        'presenterDisplay': presenterDisplay,
+        'targetDisplay': targetDisplay,
+      });
+
   @optionalTypeArgs
   Future<T?> invokeMethod<T>(String method, [dynamic arguments]) =>
       _windowChannel.invokeMethod<T>(method, arguments);

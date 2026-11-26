@@ -127,7 +127,8 @@ class FlutterWindowWrapper {
         }
       }
       result->Success();
-    } else if (method == "window_coverScreen") {
+    } else if (method == "window_coverScreen" || method == "window_moveToDisplay") {
+      const bool moving = method == "window_moveToDisplay";
       if (!hwnd_) {
         result->Error("-1", "window is not available");
         return;
@@ -164,10 +165,12 @@ class FlutterWindowWrapper {
       }
 
       HMONITOR target = nullptr;
+      bool identity_given = false;
       if (arguments) {
         const auto p = arguments->find(flutter::EncodableValue("presenterDisplay"));
         const auto t = arguments->find(flutter::EncodableValue("targetDisplay"));
         if (p != arguments->end() || t != arguments->end()) {
+          identity_given = true;
           const auto* presenter = p != arguments->end() ? std::get_if<std::string>(&p->second) : nullptr;
           const auto* requested = t != arguments->end() ? std::get_if<std::string>(&t->second) : nullptr;
           std::vector<std::string> identities;
@@ -181,6 +184,10 @@ class FlutterWindowWrapper {
           }
           target = search.monitors[index];
         }
+      }
+      if (moving && !identity_given) {
+        result->Error("-1", "display identities are required");
+        return;
       }
       if (presenter_index >= static_cast<int>(search.monitors.size())) {
         result->Error("-1", "invalid display index");
@@ -221,6 +228,16 @@ class FlutterWindowWrapper {
       const RECT bounds = monitor_info.rcMonitor;
       if (bounds.right <= bounds.left || bounds.bottom <= bounds.top) {
         result->Error("-1", "invalid display bounds");
+        return;
+      }
+      if (moving) {
+        if (!::SetWindowPos(hwnd_, nullptr, bounds.left, bounds.top,
+                           bounds.right - bounds.left, bounds.bottom - bounds.top,
+                           SWP_NOZORDER | SWP_NOACTIVATE | SWP_SHOWWINDOW)) {
+          result->Error("-1", "unable to move presenter window");
+          return;
+        }
+        result->Success();
         return;
       }
       ::SetWindowLongPtr(hwnd_, GWL_STYLE, WS_POPUP | WS_VISIBLE);

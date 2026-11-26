@@ -45,7 +45,7 @@ Future<void> _movePresenterToDisplay(
       throw StateError('Presenter closed during display move');
     }
     state._displayGuard.arm();
-    moveToDisplay(target, previous: previous);
+    await moveToDisplay(target, previous: previous);
     if (state.mounted) {
       state._rebuild(() {
         state._displays = snapshot.displays;

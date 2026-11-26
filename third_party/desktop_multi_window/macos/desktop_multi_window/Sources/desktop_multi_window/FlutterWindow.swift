@@ -101,6 +101,66 @@ class FlutterWindow: NSObject {
         }
     }
 
+    private func movePresenterDisplay(_ args: [String: Any?]?, result: @escaping FlutterResult) {
+        let screens = NSScreen.screens
+        let identities = screens.map {
+            String(UInt(bitPattern: Unmanaged.passUnretained($0).toOpaque()))
+        }
+        guard let presenter = args?["presenterDisplay"] as? String,
+            let target = args?["targetDisplay"] as? String,
+            let index = audienceDisplayIndex(identities, presenter: presenter, target: target),
+            let presenterIndex = identities.firstIndex(of: presenter),
+            let targetID = screens[index].deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID,
+            let presenterID = screens[presenterIndex].deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID,
+            CGDisplayIsOnline(targetID) != 0, CGDisplayIsOnline(presenterID) != 0
+        else {
+            result(FlutterError(code: "-1", message: "display snapshot is stale", details: nil))
+            return
+        }
+        // AppKit can replace NSScreen objects during the fullscreen transition.
+        // Keep the already-validated hardware IDs for this native transaction.
+        let apply = {
+            let live = NSScreen.screens
+            guard CGDisplayIsOnline(targetID) != 0, CGDisplayIsOnline(presenterID) != 0,
+                live.contains(where: { ($0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID) == presenterID }),
+                let screen = live.first(where: { ($0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID) == targetID })
+            else {
+                result(FlutterError(code: "-1", message: "display disappeared during move", details: nil))
+                return
+            }
+            let frame = screen.frame
+            guard frame.width > 0, frame.height > 0,
+                frame.origin.x.isFinite, frame.origin.y.isFinite,
+                frame.width.isFinite, frame.height.isFinite else {
+                result(FlutterError(code: "-1", message: "invalid display bounds", details: nil))
+                return
+            }
+            self.window.setFrame(frame, display: true)
+            if !self.window.styleMask.contains(.fullScreen) {
+                self.window.toggleFullScreen(nil)
+            }
+            result(nil)
+        }
+        guard window.styleMask.contains(.fullScreen) else {
+            apply()
+            return
+        }
+        // Wait for AppKit to exit its Space before applying geometry. Recheck
+        // the same hardware identities after that asynchronous transition.
+        let completion = DisplayTransitionCompletion()
+        completion.observer = NotificationCenter.default.addObserver(
+            forName: NSWindow.didExitFullScreenNotification, object: window, queue: .main
+        ) { _ in
+            completion.finish(apply)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            completion.finish {
+                result(FlutterError(code: "-1", message: "fullscreen transition timed out", details: nil))
+            }
+        }
+        window.toggleFullScreen(nil)
+    }
+
     func handleWindowMethod(method: String, arguments: Any?, result: @escaping FlutterResult) {
         let args = arguments as? [String: Any?]
         switch method {
@@ -124,6 +184,8 @@ class FlutterWindow: NSObject {
                 window.setFrame(NSRect(x: x, y: y, width: w, height: h), display: true)
             }
             result(nil)
+        case "window_moveToDisplay":
+            movePresenterDisplay(args, result: result)
         case "window_coverScreen":
             // Make this window a borderless surface that fills an entire screen —
             // used to show the audience slide fullscreen on the beamer while the

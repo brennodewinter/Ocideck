@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:ocideck/widgets/presentation/display_info.dart';
+import 'package:ocideck/widgets/presentation/display_info_io.dart' as native;
 
 const laptop = DisplayInfo(
   nativeId: 'laptop',
@@ -114,7 +115,7 @@ void main() {
 
     test(
       'move rejects empty, removed and shifted targets without native writes',
-      () {
+      () async {
         final moved = <int>[];
         debugMoveToDisplay = (index, _) => moved.add(index);
         debugGetCurrentWindowCenter = () => const Offset(700, 400);
@@ -125,8 +126,8 @@ void main() {
           [beamer, extra],
         ]) {
           debugGetAllDisplays = () => source;
-          expect(
-            () => moveToDisplay(beamer, previous: laptop),
+          await expectLater(
+            moveToDisplay(beamer, previous: laptop),
             throwsStateError,
           );
         }
@@ -136,7 +137,7 @@ void main() {
 
     test(
       'same identity after reorder uses fresh geometry, not the old index',
-      () {
+      () async {
         const resized = DisplayInfo(
           nativeId: 'beamer',
           x: -1920,
@@ -148,8 +149,40 @@ void main() {
         debugGetCurrentWindowCenter = () => const Offset(700, 400);
         final moved = <DisplayInfo>[];
         debugMoveToDisplay = (index, displays) => moved.add(displays[index]);
-        moveToDisplay(beamer, previous: laptop);
+        await moveToDisplay(beamer, previous: laptop);
         expect(moved, [resized]);
+      },
+    );
+
+    test(
+      'main-window native action gets identities and propagates disappearance',
+      () async {
+        const channel = MethodChannel('mixin.one/desktop_multi_window');
+        final messenger =
+            TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+        final calls = <MethodCall>[];
+        var disappeared = false;
+        messenger.setMockMethodCallHandler(channel, (call) async {
+          if (call.method == 'getWindowDefinition') {
+            return {'windowId': 'presenter', 'windowArgument': ''};
+          }
+          calls.add(call);
+          if (disappeared) throw PlatformException(code: 'display-gone');
+          return null;
+        });
+        addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+        await native.moveToDisplay(beamer, previous: laptop);
+        expect(calls.single.method, 'window_moveToDisplay');
+        expect(calls.single.arguments, {
+          'windowId': 'presenter',
+          'presenterDisplay': 'laptop',
+          'targetDisplay': 'beamer',
+        });
+        disappeared = true;
+        await expectLater(
+          native.moveToDisplay(beamer, previous: laptop),
+          throwsA(isA<PlatformException>()),
+        );
       },
     );
 

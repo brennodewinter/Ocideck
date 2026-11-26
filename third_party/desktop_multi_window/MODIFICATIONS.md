@@ -43,7 +43,11 @@ OciDeck sends both opaque native identities from the same immutable snapshot,
 rather than passing an index into a separately enumerated native list. The
 macOS, Windows and Linux cover handlers resolve both identities in their live
 list and refuse missing/equal identities; they never guess another screen.
-Bounds are read at use and invalid/empty bounds are refused. Windows uses the
+Bounds are read at use and invalid/empty bounds are refused. The new
+`window_moveToDisplay` uses the same identity validation for the main presenter
+on the native UI thread. macOS waits for its native fullscreen-exit event and
+revalidates the already selected Core Graphics display IDs before moving and
+re-entering fullscreen; a three-second deadline bounds that transition. Windows uses the
 `HMONITOR` value, GTK the `GdkMonitor` object, and AppKit the `NSScreen` object
 address already exposed by nativeapi. These identities are scoped to one
 configuration/action, never saved or used as persistent hardware identifiers.
@@ -51,7 +55,7 @@ AppKit replacing its screen objects invalidates the old snapshot safely.
 
 `display_selection.h` is an added, portable identity resolver shared by Windows
 and Linux. `CoverScreenStyle.swift` contains the equivalent AppKit resolver;
-its existing Swift test file now exercises empty, removed and reordered lists.
+its existing Swift test file now exercises empty, removed and reordered lists, plus single completion and observer cleanup for the native fullscreen transition.
 `test/native_display_selection_test.dart` compiles and runs the actual shared
 C++ helper on macOS/Linux. Legacy `presenterScreen` remains for compatibility;
 OciDeck's callers no longer use it.

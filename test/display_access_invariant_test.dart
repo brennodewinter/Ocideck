@@ -29,6 +29,10 @@ void main() {
           RegExp(r'\bDisplayManager\s*\.').hasMatch(code)) {
         offenders.add('$path: independent native enumeration');
       }
+      if (!adapters.contains(path) &&
+          RegExp(r'\.moveToDisplay\s*\(').hasMatch(code)) {
+        offenders.add('$path: native movement bypasses snapshot identity');
+      }
       if (RegExp(r'\bpresenterScreen\s*:').hasMatch(code)) {
         offenders.add('$path: a display index crosses the native boundary');
       }

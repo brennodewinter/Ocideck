@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:nativeapi/nativeapi.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 
 import '../../utils/log.dart';
 import 'display_info_data.dart';
@@ -36,21 +37,13 @@ Offset? getCurrentWindowCenter() {
   }
 }
 
-void moveToDisplay(DisplayInfo display) {
-  if (!display.hasValidBounds) throw StateError('Invalid display bounds');
-  try {
-    final window = WindowManager.instance.getCurrent();
-    if (window == null) throw StateError('Presenter window is not available');
-    window.isFullScreen = false;
-    window.bounds = Rect.fromLTWH(
-      display.x,
-      display.y,
-      display.width,
-      display.height,
-    );
-    window.isFullScreen = true;
-  } catch (e) {
-    logError('display_info_io.moveToDisplay: failed', e);
-    rethrow;
-  }
+Future<void> moveToDisplay(
+  DisplayInfo display, {
+  required DisplayInfo previous,
+}) async {
+  final window = await WindowController.fromCurrentEngine();
+  await window.moveToDisplay(
+    presenterDisplay: previous.nativeId!,
+    targetDisplay: display.nativeId!,
+  );
 }

@@ -82,6 +82,10 @@ opaque identities, never indices, to the native cover bridge. The bridge's live
 lookup only validates those same identities and obtains current bounds; it
 cannot reinterpret an old index as a different monitor. After an asynchronous
 audience move, the presenter revalidates both identities and uses fresh bounds.
+The main-window move also carries both identities into a native UI-thread
+operation, so queued platform calls cannot apply unvalidated Dart geometry.
+macOS waits for its fullscreen-exit event, then revalidates the same selected
+Core Graphics IDs and uses current bounds; the transition has a deadline.
 Native identity values are temporary and never persisted.
 
 The original search included data-view limits as well as physical displays.
@@ -97,7 +101,7 @@ disappearance between read/use, and changed enumeration order.
 | `presenter_displays.dart`: move and rollback | Audience placement must succeed before moving the main window. Revalidate after the await. Restoration resolves the original presenter identity and the last confirmed audience identity in a fresh snapshot; neither may be replaced by another index or a new first-other-screen guess. Failure is logged and shown. |
 | `fullscreen_presenter.dart`: eligibility | A snapshot is only an initial eligibility hint; it does not authorize later placement. Failed/unknown detection selects single-screen mode. |
 | `fullscreen_presenter.dart`: audience creation | Capture at use, after asynchronous creation. Native refusal closes the hidden audience window and starts the existing single-screen fallback. |
-| `display_info_io.dart`: enumeration, center and move | This is the sole nativeapi display adapter. It exposes native object identity and reads validated fresh bounds; no index clamping or fallback to a vanished display's saved geometry. Window absence throws into the existing recovery path. |
+| `display_info_io.dart`: enumeration, center and move | This is the sole nativeapi display adapter. It exposes native object identity; movement sends identities to the native UI-thread operation, without queued Dart geometry, index clamping or a vanished display's saved bounds. Window absence throws into the existing recovery path. |
 | `document_editor_presenter.dart`: eligibility | Same snapshot-based eligibility; no stored display index or geometry is passed into the document route. |
 | `presenter_document.dart`: audience creation | Same identity-based native placement; closes the newly created hidden window on failure and returns single-screen mode. |
 | `display_info_web.dart` | Returns no physical displays; browser presentation remains single-window and move is a no-op. |

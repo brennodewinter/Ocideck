@@ -104,7 +104,9 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
               FL_METHOD_RESPONSE(fl_method_success_response_new(nullptr));
         }
       }
-    } else if (strcmp(method, "window_coverScreen") == 0) {
+    } else if (strcmp(method, "window_coverScreen") == 0 ||
+             strcmp(method, "window_moveToDisplay") == 0) {
+    const bool moving = strcmp(method, "window_moveToDisplay") == 0;
     if (!window_) {
       response = FL_METHOD_RESPONSE(
           fl_method_error_response_new("-1", "window is not available",
@@ -171,7 +173,7 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
             fl_value_get_type(target_id) == FL_VALUE_TYPE_STRING
             ? FindAudienceDisplay(identities, fl_value_get_string(presenter_id), fl_value_get_string(target_id)) : -1;
       }
-      if ((identity_given && target_monitor < 0) ||
+      if ((moving && !identity_given) || (identity_given && target_monitor < 0) ||
           (presenter_given && (fl_value_get_int(presenter_screen) < 0 ||
                               fl_value_get_int(presenter_screen) >= monitor_count))) {
         response = FL_METHOD_RESPONSE(fl_method_error_response_new(
@@ -222,7 +224,7 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
         return;
       }
       gtk_window_unfullscreen(window);
-      gtk_window_set_decorated(window, FALSE);
+      if (!moving) gtk_window_set_decorated(window, FALSE);
       gtk_window_move(window, bounds.x, bounds.y);
       gtk_window_resize(window, bounds.width, bounds.height);
       gtk_window_fullscreen_on_monitor(window, screen, target_monitor);
