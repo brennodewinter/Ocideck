@@ -213,6 +213,13 @@ class _OciServeFileSharesState extends ConsumerState<OciServeFileShares> {
     });
   }
 
+  String _status(String value) => context.l10n.d(switch (value) {
+    'active' => 'Actief',
+    'expired' => 'Verlopen',
+    'revoked' => 'Ingetrokken',
+    _ => 'Onbekend',
+  });
+
   Future<void> _copy() async {
     final link = _link;
     if (link == null) return;
@@ -312,7 +319,7 @@ class _OciServeFileSharesState extends ConsumerState<OciServeFileShares> {
                             : share.targetName,
                       ),
                       subtitle: Text(
-                        '${share.status} · ${share.expiresAt.toLocal()} (${share.expiresAt.toLocal().timeZoneName})\n${share.expiresAt.toIso8601String()} · ${l10n.d(share.passwordProtected ? 'Met wachtwoord' : 'Zonder wachtwoord')} · ${l10n.d('Momentopname: {items} onderdelen, {bytes} bytes').replaceAll('{items}', '${share.snapshotItems}').replaceAll('{bytes}', '${share.snapshotBytes}')}',
+                        '${_status(share.status)} · ${share.expiresAt.toLocal()} (${share.expiresAt.toLocal().timeZoneName})\n${share.expiresAt.toIso8601String()} · ${l10n.d(share.passwordProtected ? 'Met wachtwoord' : 'Zonder wachtwoord')} · ${l10n.d('Momentopname: {items} onderdelen, {bytes} bytes').replaceAll('{items}', '${share.snapshotItems}').replaceAll('{bytes}', '${share.snapshotBytes}')}',
                       ),
                       trailing: share.status == 'active'
                           ? PopupMenuButton<String>(
