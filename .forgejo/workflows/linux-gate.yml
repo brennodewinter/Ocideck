@@ -203,6 +203,33 @@ jobs:
             make check-no-coverage \
               'SUITE_REPORT=--reporter=expanded --file-reporter json:build/test-report.json'
 
+      - name: Native desktopomgeving
+        run: |
+          set -eu
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            xvfb xauth fonts-dejavu-core libgl1-mesa-dri libegl-mesa0 liblzma-dev libsecret-1-dev \
+            libayatana-appindicator3-dev libwebkit2gtk-4.1-dev libpulse-dev \
+            libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
+            gstreamer1.0-libav libmpv-dev
+      - name: Echte Linux-app opslaan en heropenen
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/desktop-smoke
+          chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE"
+          runuser --user ubuntu --preserve-environment -- env \
+            HOME=/home/ubuntu xvfb-run -a make test-desktop-smoke DEVICE=linux \
+            2>&1 | tee build/desktop-smoke/run.log
+      - name: Native desktopbewijs bewaren
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: desktop-lifecycle-linux-${{ github.sha }}
+          path: build/desktop-smoke/
+          if-no-files-found: warn
+          retention-days: 7
+
       # #3086: een afgebroken suite kan zonder faaltest eindigen. Bewaar de
       # afzonderlijke teststatussen ook wanneer de poort rood terugkomt.
       - name: Testrapport bewaren
