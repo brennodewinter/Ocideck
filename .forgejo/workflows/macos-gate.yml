@@ -139,13 +139,13 @@ jobs:
       - name: Echte macOS-app en Cmd+Q-sluitbewaking
         run: |
           set -euo pipefail
-          mkdir -p build/desktop-smoke
-          make test-desktop-smoke DEVICE=macos 2>&1 | tee build/desktop-smoke/run.log
-      - name: Bewijs van beide appstarts bewaren
+          mkdir -p build/desktop-roundtrip
+          make test-desktop-roundtrip DEVICE=macos 2>&1 | tee build/desktop-roundtrip/run.log
+      - name: Bewijs van alle zes appstarts bewaren
         if: ${{ always() }}
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: desktop-lifecycle-macos-${{ github.sha }}
-          path: build/desktop-smoke/
+          path: build/desktop-roundtrip/
           if-no-files-found: warn
           retention-days: 7
