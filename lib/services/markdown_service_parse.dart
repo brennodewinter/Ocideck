@@ -40,6 +40,12 @@ final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 final _reSplitImageSide = RegExp(
   r'^<!--\s*ocideck_split_image_side:\s*(left|right)\s*-->$',
 );
+// De exacte bijlageregel die de gedeelde schrijver achter élke diabody zet
+// (`_generateSlideImpl`): dia-niveau-state, geen bodytekst. Alleen deze vorm
+// is van de schrijver — elke anders getypte `<audio>` is van de auteur.
+final _reGeneratedAudioAttachment = RegExp(
+  r'^<audio src="([^"]*)" controls( autoplay)? style="width:100%;"></audio>$',
+);
 
 /// Lifts the `ocideck_two_images_layout` comment out of [block] (#2867) —
 /// same reason as `_parseImageFocus`: stripped before the generic scan would
@@ -183,6 +189,36 @@ String _stripWrittenClassDirective(String block) {
   return firstBreak == -1 ? '' : block.substring(firstBreak).trimLeft();
 }
 
+/// Til de geschreven audiobijlage uit [remaining]: de gedeelde schrijver
+/// plaatst achter élke diabody één `<audio>`-regel — dat is
+/// [Slide.audioPath]-state, geen bodytekst. Voor de types die hun rauwe body
+/// in [Slide.customMarkdown] bewaren moet die regel er weer uit, anders landt
+/// de bijlage ín de bewaarde tekst en schrijft elke volgende opslag er nog één
+/// bij (#3278). De meegeleefde `(path, autoplay)` is van de laatste match —
+/// dezelfde laatste-wint als de `<audio>`-lezing van `_parseBodyLines`. Een
+/// `<audio>` in een ándere vorm is door de auteur getypt en blijft staan.
+({String remaining, String audioPath, bool audioAutoplay}) _liftAudioAttachment(
+  String remaining,
+) {
+  var path = '';
+  var autoplay = false;
+  final kept = <String>[];
+  for (final line in remaining.split('\n')) {
+    final match = _reGeneratedAudioAttachment.firstMatch(line.trim());
+    if (match == null) {
+      kept.add(line);
+    } else {
+      path = match.group(1)!;
+      autoplay = match.group(2) != null;
+      // De schrijver scheidt de bijlage van de body met één lege regel; die
+      // hoort bij de bijlageregel en gaat mee, anders houdt de bewaarde body
+      // een valse lege staart over.
+      if (kept.isNotEmpty && kept.last.trim().isEmpty) kept.removeLast();
+    }
+  }
+  return (remaining: kept.join('\n'), audioPath: path, audioAutoplay: autoplay);
+}
+
 /// The stored body for a parsed slide: free-Markdown, the Informatieveiligheid
 /// scaffold types and the eLearning text types keep the whole remaining block;
 /// a richText bullet slide keeps its rich-text lines; every other type stores
@@ -207,7 +243,7 @@ String _parsedCustomMarkdown(
       type.usesScaffoldMarkdownBody ||
       type.usesFreeMarkdownBody) {
     var body = normalizeRichTextMarkdownForStorage(
-      unescapeDeckMarkdownDashLines(remaining),
+      unescapeDeckMarkdownDashLines(_liftAudioAttachment(remaining).remaining),
     );
     // Canvas writes `#` title separately from `##` regions; strip a leading
     // heading so it does not round-trip twice into customMarkdown.
@@ -228,7 +264,7 @@ String _parsedTitleMarkdown(String remaining) {
   final lines = <String>[];
   var skippedTitle = false;
   var skippedSubtitle = false;
-  for (final line in remaining.split('\n')) {
+  for (final line in _liftAudioAttachment(remaining).remaining.split('\n')) {
     final trimmed = line.trim();
     if ((!skippedTitle && trimmed.startsWith('# ')) ||
         (!skippedSubtitle && trimmed.startsWith('## ')) ||

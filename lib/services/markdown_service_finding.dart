@@ -111,8 +111,12 @@ extension _MarkdownFindingParse on MarkdownService {
   }) {
     final tokens = cssClass.split(_reWhitespace);
     if (!tokens.contains('finding')) return null;
+    // De gedeelde schrijver plaatst de audiobijlage óók achter deze body;
+    // zonder de lift landde hij ín `customMarkdown` en verdween `audioPath`
+    // stilletjes — dezelfde #3278-interactie als bij vrije Markdown.
+    final audio = _liftAudioAttachment(remaining);
     final body = normalizeRichTextMarkdownForStorage(
-      unescapeDeckMarkdownDashLines(remaining),
+      unescapeDeckMarkdownDashLines(audio.remaining),
     );
     final effectiveClass = tokens
         .where(
@@ -129,6 +133,8 @@ extension _MarkdownFindingParse on MarkdownService {
       type: SlideType.finding,
       title: FindingSpec.parse(body).heading,
       customMarkdown: body,
+      audioPath: audio.audioPath,
+      audioAutoplay: audio.audioAutoplay,
       cssClass: effectiveClass,
       notes: notes,
       advanceDuration: advanceDuration,
