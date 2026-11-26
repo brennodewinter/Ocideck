@@ -953,7 +953,15 @@ flattening the composition into incomplete typed fields.
 
 The generated form for each type is shown below. Image captions (§6) are written,
 where applicable, as `<div class="image-caption">...</div>` directly below the
-image.
+image. For two-image and title-column slides the left and right captions share
+one div with ` | ` between them. An empty left slot is retained when only the
+right image has a caption; a missing right caption needs no separator. The
+parser splits before trimming each slot, so the leading space in ` | Right`
+is significant. Literal pipes inside a caption are encoded before joining.
+
+The `no-logo` class records a slide's explicit logo opt-out even when the
+current profile has no logo. Reopening with another profile must retain that
+choice.
 
 **Alt text.** OciDeck writes an image's accessibility description as
 `<!-- ocideck_image_alt: … -->` (§8) and leaves the brackets empty (`![](…)`,
