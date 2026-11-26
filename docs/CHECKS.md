@@ -2200,11 +2200,16 @@ not simulate a physical runner or server outage.
   Windows installer still packaging what it claims to, and (since #2042) the
   OciServe routes matching the pinned OpenAPI spec — **are tests**, so they
   ran nowhere before the merge and that class (e.g. `source_map_coverage_test`)
-  could still land red. These six are plain tests (no widget render), seconds
-  each, in the same job — so the required-check context stays
-  `static-gate / static-gate`.
-  The list in `REGISTRATION_TESTS` is hand-maintained: a new invariant *test*
-  must be added there or it is a silent gap again. The full suite and the
+  could still land red. These are plain tests (no widget render), seconds
+  each, in the same job.
+  The set is derived, not maintained (#3218): an invariant *test* marks itself
+  with `@Tags(['registration'])` above `library;` — the same mechanism the
+  suite uses for `golden` and `benchmark` — and `check-registrations` runs
+  `flutter test test --tags registration`. There is no second list that can go
+  stale. The direction a tag cannot see is guarded by
+  `test/registration_tag_test.dart`: a `*_test.dart` *naming* itself
+  `registration`/`invariant` without the tag fails it, so a forgotten marking
+  does not become a silent gap again. The full suite and the
   coverage floors still stay in `make check`.
 - **Why it remains.** It is a reproducible second environment for diagnosing a
   local/static discrepancy without copying commands out of the Makefile. Normal
