@@ -56,6 +56,36 @@ void main() {
     },
   );
 
+  test(
+    'Save as carries relative images and keeps same-project paths',
+    () async {
+      final root = Directory.systemTemp.createTempSync('relative-images-');
+      addTearDown(() => root.deleteSync(recursive: true));
+      final source = Directory(p.join(root.path, 'source'))..createSync();
+      final target = Directory(p.join(root.path, 'target'))..createSync();
+      final file = File(p.join(source.path, 'images/photo.png'));
+      file.parent.createSync(recursive: true);
+      file.writeAsBytesSync([1, 2, 3]);
+      final output = await ImageService().copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: 'images/photo.png')],
+        target.path,
+        sourceProjectPath: source.path,
+      );
+      expect(
+        File(p.join(target.path, output.single.imagePath)).readAsBytesSync(),
+        [1, 2, 3],
+      );
+      source.deleteSync(recursive: true);
+      final again = await ImageService().copyImagesToProject(
+        output,
+        target.path,
+        sourceProjectPath: target.path,
+      );
+      expect(again.single.imagePath, output.single.imagePath);
+      expect(Directory(p.join(target.path, 'images')).listSync(), hasLength(1));
+    },
+  );
+
   test('relative media cannot escape the source project', () async {
     final root = Directory.systemTemp.createTempSync('relative-media-escape-');
     addTearDown(() => root.deleteSync(recursive: true));
