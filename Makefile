@@ -1099,7 +1099,7 @@ check-collab-field-parity:
 check-roundtrip-field-parity:
 	@echo "== OciDeck check: persistent field roundtrip parity =="
 	dart run tool/check_roundtrip_field_parity.dart
-	flutter test test/roundtrip_field_parity_test.dart test/persistence_field_roundtrip_test.dart --reporter expanded
+	$(RAISE_FDS) flutter test test/roundtrip_field_parity_test.dart test/persistence_field_roundtrip_test.dart $(TEST_JOBS_FLAG) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # A machine-translated doc must not carry an English mermaid diagram (#1278). The
 # translator leaves code blocks — and so mermaid — untouched, so a diagram's
