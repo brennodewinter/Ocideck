@@ -1541,6 +1541,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Momentufnahm: {items} Elemänt, {bytes} Bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Im Web verwaltet de Server s Sitzigscookie. Nöd verschickte Fortschritt bliibt nur i dem Tab.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

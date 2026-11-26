@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Kopia fiho: {items} elemento, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Riba web, e servidor ta maneha e cookie di seshon. Progreso ku no ta mandá ta keda solamente den e pestaña aki.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

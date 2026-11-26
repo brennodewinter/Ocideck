@@ -1564,6 +1564,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Στιγμιότυπο: {items} στοιχεία, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Στον ιστό, ο διακομιστής διαχειρίζεται το cookie συνεδρίας. Η μη απεσταλμένη πρόοδος παραμένει μόνο σε αυτήν την καρτέλα.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

@@ -1551,6 +1551,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Migawka: {items} elementów, {bytes} bajtów',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'W przeglądarce serwer zarządza ciasteczkiem sesji. Niewysłany postęp pozostaje tylko na tej karcie.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

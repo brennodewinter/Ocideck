@@ -1547,6 +1547,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Momentinė kopija: {items} elementai, {bytes} baitai',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Žiniatinklyje seanso slapuką tvarko serveris. Neišsiųsta pažanga lieka tik šiame skirtuke.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

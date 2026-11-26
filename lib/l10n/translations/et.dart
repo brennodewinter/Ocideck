@@ -1533,6 +1533,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Hetktõmmis: {items} üksust, {bytes} baiti',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Veebis haldab seansiküpsist server. Saatmata edenemine jääb ainult sellele vahelehele.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

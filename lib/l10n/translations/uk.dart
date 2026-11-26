@@ -1555,6 +1555,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Знімок: {items} елементів, {bytes} байтів',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'У вебверсії сервер керує файлом cookie сеансу. Ненадісланий прогрес зберігається лише в цій вкладці.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

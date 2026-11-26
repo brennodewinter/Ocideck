@@ -1555,6 +1555,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Instantaneu: {items} elemente, {bytes} octeți',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Pe web, serverul gestionează cookie-ul sesiunii. Progresul netrimis rămâne doar în această filă.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

@@ -1545,6 +1545,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Snimka: {items} stavki, {bytes} bajtova',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Na webu poslužitelj upravlja kolačićem sesije. Neposlani napredak ostaje samo u ovoj kartici.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

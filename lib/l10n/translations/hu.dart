@@ -1542,6 +1542,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Pillanatkép: {items} elem, {bytes} bájt',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'A weben a munkamenet sütijét a kiszolgáló kezeli. Az el nem küldött haladás csak ezen a lapon marad meg.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

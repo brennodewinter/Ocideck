@@ -1540,6 +1540,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Ögonblicksbild: {items} objekt, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'På webben hanterar servern sessionscookien. Framsteg som inte skickats finns bara kvar på den här fliken.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

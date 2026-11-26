@@ -766,6 +766,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Snapshot: {items} items, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'On the web, the server manages the session cookie. Unsent progress stays only in this tab.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

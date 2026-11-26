@@ -1537,6 +1537,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Momentuzņēmums: {items} vienumi, {bytes} baiti',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Tīmeklī sesijas sīkdatni pārvalda serveris. Nenosūtītais progress paliek tikai šajā cilnē.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

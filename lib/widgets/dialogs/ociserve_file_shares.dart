@@ -8,6 +8,7 @@ import '../../utils/log.dart';
 import '../../services/ociserve/ociserve_gateway.dart';
 import '../../state/ociserve_provider.dart';
 import 'ociserve_file_browser.dart' show ociServeFileError;
+import 'ociserve_passkeys_button.dart';
 
 class OciServeFileShares extends ConsumerStatefulWidget {
   const OciServeFileShares({
@@ -311,7 +312,7 @@ class _OciServeFileSharesState extends ConsumerState<OciServeFileShares> {
                             : share.targetName,
                       ),
                       subtitle: Text(
-                        '${share.status} · ${share.expiresAt.toLocal()} (${share.expiresAt.toLocal().timeZoneName})\n${share.expiresAt.toIso8601String()} · ${l10n.d(share.passwordProtected ? 'Met wachtwoord' : 'Zonder wachtwoord')} · ${share.snapshotItems} / ${share.snapshotBytes} B',
+                        '${share.status} · ${share.expiresAt.toLocal()} (${share.expiresAt.toLocal().timeZoneName})\n${share.expiresAt.toIso8601String()} · ${l10n.d(share.passwordProtected ? 'Met wachtwoord' : 'Zonder wachtwoord')} · ${l10n.d('Momentopname: {items} onderdelen, {bytes} bytes').replaceAll('{items}', '${share.snapshotItems}').replaceAll('{bytes}', '${share.snapshotBytes}')}',
                       ),
                       trailing: share.status == 'active'
                           ? PopupMenuButton<String>(
@@ -357,6 +358,8 @@ class _OciServeFileSharesState extends ConsumerState<OciServeFileShares> {
         ),
       ),
       actions: [
+        if (state.errorCode == 'web_step_up_required')
+          OciServePasskeysButton(enabled: !_busy),
         if (widget.target != null)
           FilledButton(
             onPressed: _busy || _invalidated || _uncertainCreate

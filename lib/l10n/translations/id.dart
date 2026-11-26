@@ -1541,6 +1541,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Snapshot: {items} item, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Di web, server mengelola cookie sesi. Progres yang belum terkirim hanya disimpan di tab ini.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

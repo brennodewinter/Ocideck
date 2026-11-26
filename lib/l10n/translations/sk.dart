@@ -1544,6 +1544,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Snímka: {items} položiek, {bytes} bajtov',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Na webe spravuje súbor cookie relácie server. Neodoslaný priebeh zostáva iba na tejto karte.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

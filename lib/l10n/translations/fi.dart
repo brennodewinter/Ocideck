@@ -1541,6 +1541,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Tilannekuva: {items} kohdetta, {bytes} tavua',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Verkossa palvelin hallitsee istuntoevästettä. Lähettämätön edistyminen säilyy vain tässä välilehdessä.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

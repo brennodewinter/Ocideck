@@ -1557,6 +1557,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Kopja fissa: {items} elementi, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Fuq il-web, is-server jimmaniġġja l-cookie tas-sessjoni. Il-progress li ma ntbagħatx jibqa’ biss f’din it-tab.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

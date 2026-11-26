@@ -1541,6 +1541,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Øjebliksbillede: {items} elementer, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'På nettet administrerer serveren sessionscookien. Ikke sendt fremdrift bliver kun i denne fane.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

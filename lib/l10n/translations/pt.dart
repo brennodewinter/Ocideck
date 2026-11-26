@@ -1566,6 +1566,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Snapshot: {items} itens, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'Na web, o servidor gere o cookie de sessão. O progresso por enviar permanece apenas neste separador.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

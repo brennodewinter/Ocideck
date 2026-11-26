@@ -1552,6 +1552,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Exemplar fixum: {items} res, {bytes} octeti',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'In interrete, minister crustulum sessionis administrat. Progressus nondum missus in hac tantum scheda manet.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':

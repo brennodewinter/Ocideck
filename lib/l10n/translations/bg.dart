@@ -1560,6 +1560,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Моментна снимка: {items} елемента, {bytes} байта',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
       'В уебверсията сървърът управлява бисквитката на сесията. Неизпратеният напредък остава само в този раздел.',
   'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
