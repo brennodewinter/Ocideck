@@ -10,8 +10,8 @@ import 'package:ocideck/services/import/pipeline/import_runner.dart';
 import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/ociserve/ociserve_auth_platform.dart';
 import 'package:ocideck/services/ociserve/ociserve_http_factory.dart';
-import 'package:ocideck/services/ociserve/ociserve_http_web.dart'
-    show WebRefusingOciServeHttpTransport;
+import 'package:ocideck/services/ociserve/ociserve_public_http_web.dart'
+    show OciServeBrowserHttpTransport;
 import 'package:ocideck/services/update_check_fetch.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/utils/mem_asset_blob.dart';
@@ -23,7 +23,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test(
-    'both web compilers select browser capabilities and refusal paths',
+    'both web compilers select the BFF transport and native refusal paths',
     () async {
       expect(isWebPlatform, isTrue);
       expect(isDesktopNative, isFalse);
@@ -36,7 +36,11 @@ void main() {
       expect(osHomeDirectory, isNull);
       expect(
         createOciServeHttpTransport(),
-        isA<WebRefusingOciServeHttpTransport>(),
+        isA<OciServeBrowserHttpTransport>().having(
+          (transport) => transport.accountSession,
+          'same-origin account session',
+          isTrue,
+        ),
       );
       expect(
         () => createOciServeAuthorizationReceiver(),
