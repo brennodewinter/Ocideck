@@ -373,9 +373,17 @@ class ImageZoomControl extends StatelessWidget {
       children: [
         Row(
           children: [
-            Tooltip(
-              message: l10n.d('Uitzoomen (meer van de foto zichtbaar)'),
-              child: Icon(Icons.zoom_out, size: 16, color: AppTheme.slate500),
+            // Eigen semantieknode per tooltip: kale `Icon`s vormen er geen,
+            // dus beide `traversalParentIdentifier`s mergen anders op dezelfde
+            // bovenliggende node — `absorb` bewaart er maar één en de andere
+            // bubble blijft een wees die `ui::AXTree` laat falen (#3268,
+            // flutter/flutter#197194).
+            Semantics(
+              container: true,
+              child: Tooltip(
+                message: l10n.d('Uitzoomen (meer van de foto zichtbaar)'),
+                child: Icon(Icons.zoom_out, size: 16, color: AppTheme.slate500),
+              ),
             ),
             Expanded(
               child: Slider(
@@ -393,9 +401,12 @@ class ImageZoomControl extends StatelessWidget {
                 },
               ),
             ),
-            Tooltip(
-              message: l10n.d('Inzoomen (minder van de foto zichtbaar)'),
-              child: Icon(Icons.zoom_in, size: 16, color: AppTheme.slate500),
+            Semantics(
+              container: true,
+              child: Tooltip(
+                message: l10n.d('Inzoomen (minder van de foto zichtbaar)'),
+                child: Icon(Icons.zoom_in, size: 16, color: AppTheme.slate500),
+              ),
             ),
             const SizedBox(width: 8),
             SizedBox(

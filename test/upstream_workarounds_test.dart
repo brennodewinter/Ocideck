@@ -153,13 +153,14 @@ void main() {
     expect(() => parseWorkarounds(jsonEncode(data)), throwsFormatException);
   });
 
-  test('register accounts for all four workarounds and current pin', () {
+  test('register accounts for all five workarounds and current pin', () {
     final rows = parseWorkarounds(File(workaroundRegister).readAsStringSync());
     expect(rows.map((w) => w.id).toSet(), {
       'linux-impeller',
       'linux-wayland-scale',
       'macos-impeller',
       'macos-semantics',
+      'tooltip-traversal-parent-merge',
     });
     final pin = parsePin(File('.tool-versions').readAsStringSync());
     for (final w in rows) {
@@ -174,6 +175,7 @@ void main() {
       185394,
       196872,
       193372,
+      197194,
     });
   });
 }
