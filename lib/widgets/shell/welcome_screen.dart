@@ -308,6 +308,13 @@ class _WelcomeScreen extends ConsumerWidget {
       Divider(color: scheme.outlineVariant),
       const SizedBox(height: 16),
       ..._elearningEntry(context, ref, l10n, scheme, secondaryStyle),
+      _wideSecondaryButton(
+        style: secondaryStyle,
+        icon: Icons.cloud_outlined,
+        label: Text(l10n.d('OciServe-bestanden')),
+        onPressed: () => openOciServeFiles(context, ref),
+      ),
+      const SizedBox(height: 10),
       ..._formsEntry(context, ref, l10n, secondaryStyle),
       _wideSecondaryButton(
         style: secondaryStyle,

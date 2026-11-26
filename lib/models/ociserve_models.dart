@@ -3,27 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'learning_session.dart';
 
-@immutable
-class OciServeInstallation {
-  const OciServeInstallation({required this.clientId, required this.issuer});
-
-  final String clientId;
-  final Uri issuer;
-
-  factory OciServeInstallation.fromJson(Map<String, Object?> json) {
-    final oidc = json['oidc'] is Map
-        ? Map<String, Object?>.from(json['oidc']! as Map)
-        : const <String, Object?>{};
-    String field(String key) =>
-        ((json[key] ?? oidc[key]) as String? ?? '').trim();
-    final clientId = field('ocideck_native_client_id');
-    final issuer = Uri.tryParse(field('oidc_issuer'));
-    if (clientId.isEmpty || issuer == null) {
-      throw const FormatException('incomplete OciServe installation');
-    }
-    return OciServeInstallation(clientId: clientId, issuer: issuer);
-  }
-}
+part 'ociserve_installation.dart';
 
 @immutable
 class OciServeOidcConfiguration {
@@ -80,6 +60,8 @@ class OciServeAccount {
     this.email = '',
     this.avatarHash = '',
     this.memberships = const [],
+    this.passwordlessEnrollable = false,
+    this.passkeyManagementUrl,
   });
 
   final String id;
@@ -87,6 +69,8 @@ class OciServeAccount {
   final String email;
   final String avatarHash;
   final List<OciServeMembership> memberships;
+  final bool passwordlessEnrollable;
+  final Uri? passkeyManagementUrl;
 
   List<OciServeMembership> get activeMemberships => memberships
       .where((membership) => membership.isActive)
@@ -105,8 +89,18 @@ class OciServeAccount {
     final rawMemberships = json['memberships'] is List
         ? json['memberships']! as List
         : const <Object?>[];
+    final managementUrl =
+        (json['provider_features'] as Map?)?['passkey_management_url']
+            as String?;
     return OciServeAccount(
       id: id,
+      passwordlessEnrollable:
+          (json['provider_features'] as Map?)?['passwordless_enrollable'] ==
+          true,
+      passkeyManagementUrl:
+          managementUrl == null || managementUrl.trim().isEmpty
+          ? null
+          : Uri.tryParse(managementUrl.trim()),
       displayName:
           (rawAccount['display_name'] as String? ??
                   rawAccount['name'] as String? ??
@@ -131,11 +125,16 @@ class OciServeMembership {
     required this.organizationId,
     this.name = '',
     this.status = 'active',
+    this.capabilities = const [],
   });
 
   final String organizationId;
   final String name;
   final String status;
+  final List<String> capabilities;
+  bool get canBrowseFiles => capabilities.contains('content:create');
+  bool get canShareFiles =>
+      canBrowseFiles && capabilities.contains('content:edit');
 
   bool get isActive => status.isEmpty || status.toLowerCase() == 'active';
 
@@ -144,7 +143,14 @@ class OciServeMembership {
     if (id.isEmpty) throw const FormatException('incomplete membership');
     return OciServeMembership(
       organizationId: id,
-      name: (json['name'] as String? ?? '').trim(),
+      name:
+          (json['organization_name'] as String? ??
+                  json['name'] as String? ??
+                  '')
+              .trim(),
+      capabilities: (json['effective_capabilities'] as List? ?? [])
+          .whereType<String>()
+          .toList(),
       status: (json['status'] as String? ?? 'active').trim(),
     );
   }

@@ -726,6 +726,9 @@ paths:
         parameters. When the server requires an ACR, it is sent as
         `acr_values`. Rate-limited per client IP.
       parameters:
+        - { name: application, in: query, schema: { type: string, enum: [ocideck] }, description: Optional configured OciDeck BFF flow. Omit for the existing Keiko flow. }
+        - { name: request_id, in: query, schema: { type: string, pattern: '^[a-zA-Z0-9_-]{20,80}$' }, description: Required for OciDeck. Correlates an interactive login without carrying credentials. }
+
         - name: login_hint
           in: query
           required: false
@@ -738,7 +741,25 @@ paths:
           required: false
           schema:
             type: boolean
-          description: Request fresh provider authentication with `prompt=login` and `max_age=0`.
+          description: Request fresh provider authentication with `prompt=login` and `max_age=0` unless `max_age` is given explicitly.
+        - name: acr_values
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 256
+          description: |
+            A single ACR value from an RFC 9470 challenge, forwarded to the
+            IdP. Printable ASCII without spaces, quotes or backslashes;
+            overrides the server's configured fallback ACR.
+        - name: max_age
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 31622400
+          description: Maximum authentication age in seconds, forwarded to the IdP.
       responses:
         "303":
           description: Redirect to the IdP authorization endpoint.
@@ -754,6 +775,8 @@ paths:
                 Short-lived HttpOnly state cookie (`ociserve_state`) containing
                 the state, PKCE verifier, and nonce. SameSite=Lax, Secure in
                 production. Deleted after callback.
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
         "429":
           $ref: '#/components/responses/ProblemResponse'
 
@@ -811,6 +834,43 @@ paths:
           $ref: '#/components/responses/ProblemResponse'
         "500":
           $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/auth/web/ocideck-session:
+    get:
+      tags: [WebAuth]
+      security: []
+      summary: Restore an OciDeck browser session without exposing OAuth tokens
+      description: |
+        Requires an OciDeck HttpOnly session cookie, the configured OciDeck
+        Host, Sec-Fetch-Site same-origin, and X-OciServe-Client ocideck.
+        Origin, when present, must exactly match the configured HTTPS origin.
+        Returns CSRF material and a non-credential session binding in no-store
+        JSON. OAuth tokens stay in the encrypted server-side envelope.
+        Authenticated OciDeck API requests send X-OciServe-Session with this
+        binding; a replaced cookie is rejected before the operation executes.
+      parameters:
+        - { name: X-OciServe-Client, in: header, required: true, schema: { type: string, enum: [ocideck] } }
+      responses:
+        "200":
+          description: Session metadata and CSRF token.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OciDeckWebSession' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/auth/web/ocideck-complete:
+    get:
+      tags: [WebAuth]
+      security: []
+      summary: Credential-free completion page for the OciDeck login window
+      responses:
+        "200":
+          description: Static HTML telling the user to return to the existing OciDeck window.
+          content:
+            text/html: { schema: { type: string } }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
 
   /api/v1/auth/web/me:
     get:
@@ -1226,6 +1286,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
 
+  /api/v1/organizations/{organization_id}/memberships/{membership_id}/access-expiry:
+    put:
+      tags: [Memberships]
+      summary: Set or clear the end date for organization access
+      description: Requires member:remove and, when configured, step-up. Owners cannot expire.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: membership_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MembershipExpiryRequest' }
+      responses:
+        "200":
+          description: Success.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MembershipItem' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "412": { $ref: '#/components/responses/ProblemResponse' }
+
   /api/v1/organizations/{organization_id}/memberships/{membership_id}/suspend:
     post:
       tags: [Members]
@@ -1440,7 +1530,9 @@ paths:
       description: |
         Lists at most 100 active OciServe web sessions without token, address
         or user-agent data. Own sessions are always allowed; another member
-        requires `session:revoke`.
+        requires `session:revoke`, configured step-up and the owner hierarchy.
+        Other-person administration is refused for accounts with an active
+        membership in another organization.
       parameters:
         - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
         - { name: membership_id, in: path, required: true, schema: { type: string, format: uuid } }
@@ -1461,7 +1553,9 @@ paths:
       summary: Revoke one managed web session
       description: |
         Revokes one OciServe web session and records an audit event. Own
-        sessions are always allowed; another member requires `session:revoke`.
+        sessions are always allowed; another member requires `session:revoke`,
+        configured step-up and the owner hierarchy. Other-person administration
+        is refused for accounts active in another organization.
       parameters:
         - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
         - { name: membership_id, in: path, required: true, schema: { type: string, format: uuid } }
@@ -1625,6 +1719,44 @@ paths:
           $ref: '#/components/responses/ProblemResponse'
 
   /api/v1/organizations/{organization_id}/registration-policy:
+    get:
+      tags: [AccessPolicy]
+      summary: Read the organization registration policy
+      description: |
+        Returns the current `closed`, `invitation`, or `self_service` policy
+        with a strong ETag over the serialized response. Requires the
+        owner-only `auth:policy` capability.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: If-None-Match
+          in: header
+          required: false
+          schema: { type: string }
+          description: ETag from a previous response; returns 304 if unchanged.
+      responses:
+        "200":
+          description: Current registration policy.
+          headers:
+            ETag:
+              schema: { type: string }
+              description: Strong validator over the response body.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [registration_policy]
+                properties:
+                  registration_policy:
+                    type: string
+                    enum: [closed, invitation, self_service]
+        "304":
+          description: Unchanged since the provided ETag.
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
     put:
       tags: [AccessPolicy]
       summary: Update the organization registration policy
@@ -1852,7 +1984,9 @@ paths:
         `Idempotency-Key` is required. The secret is returned exactly once
         in this response and never persisted in replay storage — store it
         securely. Repeating the same request key returns `409` because the
-        one-time secret cannot safely be replayed.
+        one-time secret cannot safely be replayed. While the organization's
+        registration policy is `closed`, creation fails with
+        `registration-closed` (409).
       parameters:
         - name: organization_id
           in: path
@@ -1880,6 +2014,8 @@ paths:
         "401":
           $ref: '#/components/responses/ProblemResponse'
         "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
           $ref: '#/components/responses/ProblemResponse'
     get:
       tags: [Invitations]
@@ -2057,6 +2193,344 @@ paths:
           $ref: '#/components/responses/ProblemResponse'
         "409":
           $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/self-registrations:
+    post:
+      tags: [Invitations]
+      summary: Request self-service registration
+      description: |
+        Public endpoint. When exactly one organization allows self-service
+        registration, creates a participant invitation for the given address
+        and mails the invitation number and one-time code to it — the mail
+        doubles as e-mail verification. Registration is completed through
+        POST /api/v1/invitation-registrations. Always answers 202 so the
+        response reveals nothing about organizations or existing accounts.
+        Rate-limited per client and path.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+                display_name: { type: string, maxLength: 200 }
+      responses:
+        "202":
+          description: Accepted; any invitation mail is on its way.
+          headers:
+            Cache-Control: { schema: { type: string, const: 'no-store' } }
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status: { type: string, const: accepted }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+        "503": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/file-shares:
+    post:
+      tags: [Assets]
+      summary: Share a file or directory snapshot
+      description: Requires content:create and content:edit. The HTTPS link is returned once. A repeated key does not create another share. Locate the previous share in the list and rotate it if the response was lost.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/FileShareCreate' }
+      responses:
+        "201":
+          description: Success.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileShare' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+        "503": { $ref: '#/components/responses/ProblemResponse' }
+
+    get:
+      tags: [Assets]
+      summary: List shares available for management
+      description: A share creator or organization administrator with the required file capabilities can manage a share.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, schema: { type: string } }
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileSharePage' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+
+
+  /api/v1/organizations/{organization_id}/file-shares/{share_id}:
+    get:
+      tags: [Assets]
+      summary: Read managed share metadata
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: share_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Success.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileShare' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+    put:
+      tags: [Assets]
+      summary: Change share expiry, password or link
+      description: Applies supplied changes to an active share. Invalidates existing grants. Rotation returns the new link once.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: share_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/FileShareUpdate' }
+      responses:
+        "200":
+          description: Success.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileShare' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "412": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+
+    delete:
+      tags: [Assets]
+      summary: Revoke a share
+      description: Idempotently revokes the link and discards its grants and snapshot.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: share_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "204": { description: Share revoked. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/public/file-shares/open:
+    get:
+      tags: [Assets]
+      summary: Open the browser landing page for a file share
+      description: The issued fragment is share UUID, dot, and a URL-safe share token. The fragment is read locally and is not sent in the opening HTTP request.
+      security: []
+      responses:
+        "200":
+          description: Browser landing page.
+          content:
+            text/html: {}
+
+  /api/v1/public/file-shares/{share_id}/unlock:
+    post:
+      tags: [Assets]
+      summary: Exchange a share link and optional password for a limited grant
+      security: []
+      parameters:
+        - { name: share_id, in: path, required: true, schema: { type: string, format: uuid } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/FileShareUnlock' }
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileShareGrant' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/public/file-shares/{share_id}:
+    get:
+      tags: [Assets]
+      summary: Open the root of a shared snapshot
+      description: Supply the share grant as an Authorization Bearer token or the cookie set by browser unlock.
+      security: []
+      parameters:
+        - { name: share_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, schema: { type: string } }
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PublicFileShareNode' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/public/file-shares/{share_id}/nodes/{node_id}:
+    get:
+      tags: [Assets]
+      summary: Browse or inspect a node in a shared snapshot
+      description: Requires the share grant from unlock.
+      security: []
+      parameters:
+        - { name: share_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: node_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, schema: { type: string } }
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PublicFileShareNode' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/public/file-shares/{share_id}/nodes/{node_id}/content:
+    get:
+      tags: [Assets]
+      summary: Download a file from a shared snapshot
+      description: Requires the share grant from unlock, including for Range and HEAD requests.
+      security: []
+      parameters:
+        - { name: share_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: node_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: File bytes with the recorded media type.
+          content:
+            application/octet-stream: {}
+        "206":
+          description: Partial content.
+          content:
+            application/octet-stream: {}
+        "304": { description: File unchanged. }
+        "416": { description: Requested range is unsatisfiable. }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/files:
+    get:
+      tags: [FileCatalog]
+      summary: Browse an organization folder
+      description: Requires content:create. A successful request also discovers support for the file catalog.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: folder_id, in: query, schema: { type: string, default: root } }
+        - { name: cursor, in: query, schema: { type: string }, description: next_cursor from the preceding page }
+      responses:
+        "200":
+          description: Folder listing with at most 100 entries.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileCatalogPage' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/files/folders:
+    post:
+      tags: [FileCatalog]
+      summary: Create an organization folder
+      description: Requires content:create. The new folder is also visible over WebDAV.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string }
+                parent_id: { type: string, default: root }
+      responses:
+        "201":
+          description: Folder created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileCatalogEntry' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/files/{file_id}:
+    get:
+      tags: [FileCatalog]
+      summary: Get organization file metadata
+      description: Requires content:create.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: file_id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: File or directory metadata.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileCatalogEntry' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/files/{file_id}/content:
+    get:
+      tags: [FileCatalog]
+      summary: Download an organization file by catalog ID
+      description: Requires content:create. Accepts HTTP range and conditional requests.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: file_id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Original file bytes with the recorded media type.
+          content:
+            application/octet-stream: {}
+        "206":
+          description: Partial content.
+          content:
+            application/octet-stream: {}
+        "304": { description: File unchanged. }
+        "416": { description: Requested range is unsatisfiable. }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
 
   /api/v1/organizations/{organization_id}/assets:
     post:
@@ -2942,6 +3416,14 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: status
+          in: query
+          required: false
+          description: Filter on lifecycle status. Archived entries are hidden unless this parameter is given.
+          schema:
+            type: string
+            enum: [draft, published, archived]
+
       responses:
         "200":
           description: A list of PE rules.
@@ -3176,6 +3658,99 @@ paths:
         "404":
           $ref: '#/components/responses/ProblemResponse'
 
+  /api/v1/organizations/{organization_id}/pe-rules/{rule_id}/archive:
+    post:
+      tags: [PE]
+      summary: Archive a PE rule
+      description: |
+        Marks the PE rule as `archived`: it disappears from list endpoints
+        unless `?status=archived` is given, and draft changes and publication
+        are refused. Published versions and historical records stay untouched.
+        Idempotent — archiving an already archived PE rule succeeds. The actor
+        must hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: rule_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The PE rule is archived.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          description: The PE rule cannot be archived because an active dependency exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/pe-rules/{rule_id}/restore:
+    post:
+      tags: [PE]
+      summary: Restore an archived PE rule
+      description: |
+        Returns an archived PE rule to `published` when a published version
+        exists, otherwise to `draft`. Idempotent — restoring a non-archived
+        PE rule is a no-op that returns its current status. The actor must
+        hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: rule_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The PE rule was restored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
   /api/v1/organizations/{organization_id}/pe-rules/{rule_id}/versions:
     get:
       tags: [PE]
@@ -3385,6 +3960,21 @@ paths:
                 $ref: '#/components/schemas/Problem'
 
   /api/v1/public/certificates/verify:
+    get:
+      tags: [Certificates]
+      summary: Certificate verification page
+      description: |
+        Serves a minimal HTML form so a third party without an app can check
+        a certificate. Strict CSP, `Cache-Control: no-store`, rate-limited.
+      security: []
+      responses:
+        "200":
+          description: HTML verification form.
+          headers:
+            Cache-Control: { schema: { type: string, const: 'no-store' } }
+          content:
+            text/html: {}
+        "429": { description: Rate limit exceeded. }
     post:
       tags: [Certificates]
       summary: Public certificate verification
@@ -3392,6 +3982,8 @@ paths:
         Public, unauthenticated verification by public certificate number and
         an independent secret in the request body. Returns only non-personal
         data: title, status and issue date. Rate-limited and never logs input.
+        A `application/x-www-form-urlencoded` body (the HTML form) answers
+        with an HTML result page instead of JSON.
       security: []
       requestBody:
         required: true
@@ -3399,13 +3991,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CertificateVerifyRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [certificate_number, verification_secret]
+              properties:
+                certificate_number: { type: string }
+                verification_secret: { type: string }
       responses:
         "200":
-          description: The certificate's public verification state.
+          description: The certificate's public verification state (JSON, or an HTML result page for form posts).
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CertificateVerifyResponse'
+            text/html: {}
         "400":
           $ref: '#/components/responses/ProblemResponse'
         "404":
@@ -3453,6 +4053,14 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: status
+          in: query
+          required: false
+          description: Filter on lifecycle status. Archived entries are hidden unless this parameter is given.
+          schema:
+            type: string
+            enum: [draft, published, archived]
+
       responses:
         "200":
           description: A list of skills.
@@ -3680,6 +4288,99 @@ paths:
         "404":
           $ref: '#/components/responses/ProblemResponse'
 
+  /api/v1/organizations/{organization_id}/skills/{skill_id}/archive:
+    post:
+      tags: [Skills]
+      summary: Archive a skill
+      description: |
+        Marks the skill as `archived`: it disappears from list endpoints
+        unless `?status=archived` is given, and draft changes and publication
+        are refused. Published versions and historical records stay untouched.
+        Idempotent — archiving an already archived skill succeeds. The actor
+        must hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: skill_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The skill is archived.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          description: The skill cannot be archived because an active dependency exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/skills/{skill_id}/restore:
+    post:
+      tags: [Skills]
+      summary: Restore an archived skill
+      description: |
+        Returns an archived skill to `published` when a published version
+        exists, otherwise to `draft`. Idempotent — restoring a non-archived
+        skill is a no-op that returns its current status. The actor must
+        hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: skill_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The skill was restored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
   /api/v1/organizations/{organization_id}/skills/{skill_id}/versions:
     get:
       tags: [Skills]
@@ -3728,6 +4429,14 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: status
+          in: query
+          required: false
+          description: Filter on lifecycle status. Archived entries are hidden unless this parameter is given.
+          schema:
+            type: string
+            enum: [draft, published, archived]
+
       responses:
         "200":
           description: A list of evidence types.
@@ -3947,6 +4656,99 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvidenceTypeVersionResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/evidence-types/{evidence_type_id}/archive:
+    post:
+      tags: [Evidence]
+      summary: Archive a evidence type
+      description: |
+        Marks the evidence type as `archived`: it disappears from list endpoints
+        unless `?status=archived` is given, and draft changes and publication
+        are refused. Published versions and historical records stay untouched.
+        Idempotent — archiving an already archived evidence type succeeds. The actor
+        must hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The evidence type is archived.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          description: The evidence type cannot be archived because an active dependency exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/evidence-types/{evidence_type_id}/restore:
+    post:
+      tags: [Evidence]
+      summary: Restore an archived evidence type
+      description: |
+        Returns an archived evidence type to `published` when a published version
+        exists, otherwise to `draft`. Idempotent — restoring a non-archived
+        evidence type is a no-op that returns its current status. The actor must
+        hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The evidence type was restored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
         "400":
           $ref: '#/components/responses/ProblemResponse'
         "401":
@@ -4283,8 +5085,9 @@ paths:
       summary: List evidence expiring within a window
       description: |
         Returns geaccepteerde bewijsstukken waarvan de vastgestelde geldigheid
-        binnen `within_days` dagen afloopt. The actor must hold `content:create`
-        or `assess:review`.
+        binnen `within_days` dagen afloopt. Ordinary members receive only their
+        own items. Broader access requires `privacy:manage` or `assess:review`;
+        every other-person read is recorded in the access audit.
       parameters:
         - name: organization_id
           in: path
@@ -4712,7 +5515,8 @@ paths:
       description: |
         Het leesmodel voor een badge (S14, #529): wat een deelnemer nog nodig
         heeft. Per eis staat of die al is voldaan, en of de badge klaar staat.
-        Een deelnemer mag zijn eigen leesmodel zien; anders content:view.
+        Een deelnemer mag zijn eigen leesmodel zien. Inzage in andermans dossier
+        vereist privacy:manage of assess:review en wordt verplicht geaudit.
       parameters:
         - name: organization_id
           in: path
@@ -4751,7 +5555,9 @@ paths:
       tags: [Skill]
       summary: List qualifications for a skill
       description: |
-        Lijst van kwalificaties per vaardigheid (#514). Vereist content:view.
+        Lijst van kwalificaties per vaardigheid (#514). Gewone leden ontvangen
+        alleen hun eigen kwalificaties. Ruimere inzage vereist privacy:manage of
+        assess:review; iedere lezing van andermans dossier wordt geaudit.
       parameters:
         - name: organization_id
           in: path
@@ -4800,6 +5606,14 @@ paths:
             minimum: 1
             maximum: 100
             default: 50
+        - name: status
+          in: query
+          required: false
+          description: Filter on lifecycle status. Archived entries are hidden unless this parameter is given.
+          schema:
+            type: string
+            enum: [draft, published, archived]
+
       responses:
         "200":
           description: A list of blueprints.
@@ -5098,6 +5912,99 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/blueprints/{blueprint_id}/archive:
+    post:
+      tags: [Blueprints]
+      summary: Archive a blueprint
+      description: |
+        Marks the blueprint as `archived`: it disappears from list endpoints
+        unless `?status=archived` is given, and draft changes and publication
+        are refused. Published versions and historical records stay untouched.
+        Idempotent — archiving an already archived blueprint succeeds. The actor
+        must hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: blueprint_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The blueprint is archived.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          description: The blueprint cannot be archived because an active dependency exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/blueprints/{blueprint_id}/restore:
+    post:
+      tags: [Blueprints]
+      summary: Restore an archived blueprint
+      description: |
+        Returns an archived blueprint to `published` when a published version
+        exists, otherwise to `draft`. Idempotent — restoring a non-archived
+        blueprint is a no-op that returns its current status. The actor must
+        hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: blueprint_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The blueprint was restored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
 
   /api/v1/organizations/{organization_id}/blueprints/{blueprint_id}/versions/latest:
     get:
@@ -5460,6 +6367,99 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
 
+  /api/v1/organizations/{organization_id}/courses/{course_id}/archive:
+    post:
+      tags: [Courses]
+      summary: Archive a course
+      description: |
+        Marks the course as `archived`: it disappears from list endpoints
+        unless `?status=archived` is given, and draft changes and publication
+        are refused. Published versions and historical records stay untouched.
+        Idempotent — archiving an already archived course succeeds. The actor
+        must hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The course is archived.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          description: The course cannot be archived because an active dependency exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/courses/{course_id}/restore:
+    post:
+      tags: [Courses]
+      summary: Restore an archived course
+      description: |
+        Returns an archived course to `published` when a published version
+        exists, otherwise to `draft`. Idempotent — restoring a non-archived
+        course is a no-op that returns its current status. The actor must
+        hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The course was restored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
   /api/v1/organizations/{organization_id}/courses/{course_id}/versions/latest:
     get:
       tags: [Courses]
@@ -5724,6 +6724,14 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: status
+          in: query
+          required: false
+          description: Filter on lifecycle status. Archived entries are hidden unless this parameter is given.
+          schema:
+            type: string
+            enum: [draft, published, archived]
+
       responses:
         "200":
           description: A list of items.
@@ -5953,6 +6961,99 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/items/{item_id}/archive:
+    post:
+      tags: [Itembank]
+      summary: Archive a item
+      description: |
+        Marks the item as `archived`: it disappears from list endpoints
+        unless `?status=archived` is given, and draft changes and publication
+        are refused. Published versions and historical records stay untouched.
+        Idempotent — archiving an already archived item succeeds. The actor
+        must hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The item is archived.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          description: The item cannot be archived because an active dependency exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/items/{item_id}/restore:
+    post:
+      tags: [Itembank]
+      summary: Restore an archived item
+      description: |
+        Returns an archived item to `published` when a published version
+        exists, otherwise to `draft`. Idempotent — restoring a non-archived
+        item is a no-op that returns its current status. The actor must
+        hold `author:publish`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The item was restored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleStatusResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
 
   /api/v1/organizations/{organization_id}/items/{item_id}/versions/latest:
     get:
@@ -6848,6 +7949,50 @@ paths:
         "404":
           $ref: '#/components/responses/ProblemResponse'
         "409":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/attempts/{attempt_id}/review:
+    get:
+      tags: [Participants]
+      summary: Manual review read-model for an attempt
+      description: |
+        Returns per attempt item the immutable presentation snapshot the
+        candidate saw (question, prompt, options, media — never the answer
+        model or answer key), the candidate's latest answer, the staff-only
+        rubric from the item version, and any recorded human decision.
+        The actor must hold `assess:review` or `content:create`; every read
+        is written to the participant access audit.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: attempt_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The review sheet for this attempt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttemptReviewResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
           $ref: '#/components/responses/ProblemResponse'
 
   /api/v1/organizations/{organization_id}/participants/{participant_id}/attempts/{attempt_id}/release:
@@ -9315,6 +10460,202 @@ paths:
         "403": { $ref: '#/components/responses/ProblemResponse' }
         "404": { $ref: '#/components/responses/ProblemResponse' }
 
+  /api/v1/organizations/{organization_id}/retention-policies:
+    get:
+      tags: [Privacy]
+      summary: List retention policies
+      description: |
+        Returns the configured retention policies for the organization plus
+        the supported category → action matrix. The actor must hold
+        `privacy:manage`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The retention policies and supported actions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionPolicyList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/retention-policies/{category}:
+    put:
+      tags: [Privacy]
+      summary: Create or update a retention policy
+      description: |
+        Sets the retention period, legal ground and expiry action for a
+        data category. The category and action must be supported — see
+        `supported_actions` in the list endpoint. Setting a policy is
+        destructive (records may be deleted earlier), so step-up
+        authentication is required. An `Idempotency-Key` is required. A
+        policy update never clears an active legal hold. The actor must
+        hold `privacy:manage`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [evidence]
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionPolicyPutRequest'
+      responses:
+        "200":
+          description: The stored policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionPolicyResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/retention-policies/{category}/legal-hold:
+    put:
+      tags: [Privacy]
+      summary: Set a legal hold on a category
+      description: |
+        Pauses retention expiry for the category. The retention worker skips
+        held categories even when records are past their retention period.
+        An `Idempotency-Key` is required. The actor must hold
+        `privacy:manage`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [evidence]
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LegalHoldRequest'
+      responses:
+        "200":
+          description: The policy with the hold applied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionPolicyResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+    delete:
+      tags: [Privacy]
+      summary: Clear a legal hold on a category
+      description: |
+        Removes the legal hold, re-enabling expiry for the category. This
+        is destructive, so step-up authentication is required. The actor
+        must hold `privacy:manage`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [evidence]
+      responses:
+        "200":
+          description: The policy with the hold cleared.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionPolicyResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/retention-policies/{category}/preview:
+    get:
+      tags: [Privacy]
+      summary: Preview retention expiry for a category
+      description: |
+        Counts how many records in the category are currently past the
+        configured retention period — the same predicate the retention
+        worker uses. The actor must hold `privacy:manage`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [evidence]
+      responses:
+        "200":
+          description: The expiry preview.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionPreviewResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
 components:
   schemas:
     SelfPrivacyDataResponse:
@@ -10795,6 +12136,109 @@ components:
         rooms:
           type: array
           items: { $ref: '#/components/schemas/RoomResponse' }
+        next_cursor: { type: string }
+
+    MembershipExpiryRequest:
+      type: object
+      required: [access_end_date, reason]
+      properties:
+        access_end_date: { type: [string, 'null'], format: date }
+        access_timezone: { type: string, description: Explicit IANA zone required when setting a date. }
+        reason: { type: string, minLength: 1, maxLength: 240 }
+      description: The selected date is inclusive in the supplied zone. Send null and omit the zone to clear the date.
+
+    FileShareCreate:
+      type: object
+      required: [file_id]
+      properties:
+        file_id: { type: string, format: uuid }
+        expires_at: { type: string, format: date-time, description: Defaults to seven days and can be at most ninety days away. }
+        password: { type: string, writeOnly: true, description: Optional password of 8 to 256 bytes. }
+
+    FileShareUpdate:
+      type: object
+      properties:
+        expires_at: { type: string, format: date-time }
+        password: { type: string, writeOnly: true }
+        clear_password: { type: boolean }
+        rotate_link: { type: boolean }
+
+    FileShare:
+      type: object
+      required: [id, root_id, created_at, expires_at, password_protected, revision, status]
+      properties:
+        target_name: { type: string, description: Root name from the immutable snapshot; absent after snapshot erasure. }
+        target_kind: { type: string, enum: [file, directory] }
+        snapshot_items: { type: integer, format: int64, description: Snapshot nodes including the root and empty folders. }
+        snapshot_bytes: { type: integer, format: int64 }
+        id: { type: string, format: uuid }
+        root_id: { type: string, format: uuid }
+        created_at: { type: string, format: date-time }
+        expires_at: { type: string, format: date-time }
+        revoked_at: { type: string, format: date-time }
+        password_protected: { type: boolean }
+        revision: { type: integer, format: int64 }
+        status: { type: string, enum: [active, expired, revoked] }
+        link: { type: string, format: uri, description: Sensitive HTTPS URL returned on first creation or rotation only. }
+
+    FileSharePage:
+      type: object
+      required: [items]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/FileShare' } }
+        next_cursor: { type: string }
+
+    FileShareUnlock:
+      type: object
+      required: [token]
+      properties:
+        token: { type: string, writeOnly: true }
+        password: { type: string, writeOnly: true }
+        browser: { type: boolean, description: Issue the grant as a Secure HttpOnly cookie instead of returning it in JSON. }
+
+    FileShareGrant:
+      type: object
+      required: [expires_at]
+      properties:
+        grant: { type: string, description: Short-lived credential for this share returned only in native mode. }
+        expires_at: { type: string, format: date-time }
+
+    PublicFileShareNode:
+      type: object
+      required: [node, items]
+      properties:
+        node: { $ref: '#/components/schemas/FileCatalogEntry' }
+        items: { type: array, items: { $ref: '#/components/schemas/FileCatalogEntry' } }
+        next_cursor: { type: string }
+
+    FileCatalogEntry:
+      type: object
+      required: [id, name, kind, size]
+      properties:
+        id: { type: string, description: UUID or the virtual root identifier }
+        name: { type: string }
+        kind: { type: string, enum: [file, directory] }
+        size: { type: integer, format: int64 }
+        content_type: { type: string }
+        etag: { type: string }
+        modified_at: { type: string, format: date-time }
+
+    FileCatalogPage:
+      type: object
+      required: [folder, breadcrumbs, items]
+      properties:
+        folder: { $ref: '#/components/schemas/FileCatalogEntry' }
+        breadcrumbs:
+          type: array
+          items:
+            type: object
+            required: [id, name]
+            properties:
+              id: { type: string }
+              name: { type: string }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/FileCatalogEntry' }
         next_cursor: { type: string }
 
     AssetUploadResponse:
@@ -12383,13 +13827,16 @@ components:
         slide_count:
           type: integer
           minimum: 1
+          maximum: 10000
         from_slide:
           type: integer
           minimum: 1
+          maximum: 10000
           description: First slide in the lesson, inclusive and one-based.
         through_slide:
           type: integer
           minimum: 1
+          maximum: 10000
           description: Last slide in the lesson, inclusive and one-based.
 
     CourseVersionResponse:
@@ -12521,6 +13968,85 @@ components:
           type: string
           format: date-time
 
+    RetentionPolicyResponse:
+      type: object
+      required: [category, retention_days, ground, action_on_expiry, legal_hold, created_at, updated_at]
+      properties:
+        category:
+          type: string
+        retention_days:
+          type: integer
+          description: Retention period in days.
+        ground:
+          type: string
+          description: Legal ground for the retention period.
+        action_on_expiry:
+          type: string
+          enum: [delete, anonymize, archive]
+        legal_hold:
+          type: boolean
+        legal_hold_reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    RetentionPolicyPutRequest:
+      type: object
+      required: [retention_days, ground, action_on_expiry]
+      properties:
+        retention_days:
+          type: integer
+          minimum: 1
+          maximum: 36500
+        ground:
+          type: string
+          maxLength: 512
+          description: Legal ground for the retention period (AVG art. 5(1)(e) accountability).
+        action_on_expiry:
+          type: string
+          enum: [delete]
+
+    LegalHoldRequest:
+      type: object
+      required: [reason]
+      properties:
+        reason:
+          type: string
+          maxLength: 512
+
+    RetentionPolicyList:
+      type: object
+      required: [policies, supported_actions]
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetentionPolicyResponse'
+        supported_actions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Category → supported expiry actions.
+
+    RetentionPreviewResponse:
+      type: object
+      required: [category, expired_count, cutoff]
+      properties:
+        category:
+          type: string
+        expired_count:
+          type: integer
+          format: int64
+        cutoff:
+          type: string
+          format: date-time
+
     ItemList:
       type: object
       required: [items]
@@ -12529,6 +14055,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ItemResponse'
+
+    LifecycleStatusResponse:
+      type: object
+      required: [id, status]
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [draft, published, archived]
+          description: Lifecycle status after the archive/restore operation.
 
     ItemDraftResponse:
       type: object
@@ -13078,6 +14616,61 @@ components:
           type: string
           minLength: 1
 
+    AttemptReviewResponse:
+      type: object
+      required: [attempt_id, status, items]
+      properties:
+        attempt_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [in_progress, submitted, scored, released]
+        items:
+          type: array
+          items:
+            type: object
+            required: [attempt_item_id, position, interaction_type, content, needs_manual_review]
+            properties:
+              attempt_item_id:
+                type: string
+                format: uuid
+              position:
+                type: integer
+              interaction_type:
+                type: string
+              content:
+                type: object
+                description: |
+                  Immutable presentation snapshot the candidate saw
+                  (question, prompt, options, media). Never contains the
+                  answer model or an answer key.
+              rubric:
+                type: string
+                description: Staff-only scoring guidance from the item version's answer model.
+              answer_data:
+                type: object
+                description: The candidate's latest answer for this item.
+              correct:
+                type: boolean
+                description: Scoring outcome when known — automatic or human-decided.
+              needs_manual_review:
+                type: boolean
+              decision:
+                type: object
+                required: [correct, decided_by_display_name, decided_at, reason]
+                description: Present only for items a human decided via manual scoring.
+                properties:
+                  correct:
+                    type: boolean
+                  decided_by_display_name:
+                    type: string
+                  decided_at:
+                    type: string
+                    format: date-time
+                  reason:
+                    type: string
+
     EvidenceList:
       type: object
       required: [uploads]
@@ -13220,6 +14813,10 @@ components:
         - available_actions
         - catalog_version
       properties:
+        access_end_date: { type: string, format: date }
+        access_timezone: { type: string }
+        access_expires_at: { type: string, format: date-time }
+        access_expired: { type: boolean }
         id:
           type: string
           format: uuid
@@ -13420,10 +15017,22 @@ components:
           type: string
           format: date-time
 
+    OciDeckWebSession:
+      type: object
+      required: [session_id, csrf_token, login_request_id, issuer, expires_at, idle_expires_at]
+      properties:
+        session_id: { type: string, format: uuid, description: Session binding identifier, not a bearer credential. }
+        csrf_token: { type: string, description: Synchronizer token for same-origin cookie mutations; keep only in memory. }
+        login_request_id: { type: string }
+        issuer: { type: string, format: uri }
+        expires_at: { type: string, format: date-time }
+        idle_expires_at: { type: string, format: date-time }
+
     InstallationStatus:
       type: object
       required: [status, oidc_issuer]
       properties:
+        ocideck_web_session: { type: boolean, default: false, description: The OciDeck same-origin BFF flow is explicitly configured and enabled. }
         status:
           type: string
           enum: [setup_required, ready]
@@ -13447,6 +15056,17 @@ components:
           type: string
           description: The independently configured OAuth 2.0 client_id for native OciDeck.
           examples: [ocideck-native]
+        self_registration:
+          type: object
+          nullable: true
+          description: |
+            Present only when the installation is ready and exactly one
+            organization allows self-service registration — the supported
+            single-organization profile. Null otherwise, so the endpoint
+            never enumerates organizations.
+          properties:
+            organization_id: { type: string, format: uuid }
+            organization_name: { type: string }
 
     SelfLearningFeed:
       type: object
@@ -13630,6 +15250,10 @@ components:
               - status
               - effective_capabilities
             properties:
+              access_end_date: { type: string, format: date }
+              access_timezone: { type: string }
+              access_expires_at: { type: string, format: date-time }
+              access_expired: { type: boolean }
               id:
                 type: string
                 format: uuid
@@ -13661,6 +15285,13 @@ components:
                   Capabilities this membership grants, derived from the role
                   via the capability catalog. Empty when the membership is
                   not active.
+              participant_id:
+                type: string
+                format: uuid
+                description: |
+                  The participant record linked to the caller's account in
+                  this organization. Present so clients need not detour via
+                  `me/privacy-data` to find it (issue #660).
                 items:
                   type: string
                 examples: [[org:admin, member:invite, content:view]]
@@ -13727,7 +15358,11 @@ components:
             Derived from the configured required AMR.
         passwordless_enrollable:
           type: boolean
-          description: Passkey-only login. Requires the provider adapter (#70).
+          description: Passkey enrollment is supported by the managed provider.
+        passkey_management_url:
+          type: string
+          format: uri
+          description: Optional HTTPS account page of the configured identity provider.
         session_revocation:
           type: boolean
           description: Server-side session revocation. Requires #72.
@@ -13739,6 +15374,8 @@ components:
       type: object
       required: [display_name, email, password, role]
       properties:
+        access_end_date: { type: string, format: date }
+        access_timezone: { type: string }
         display_name:
           type: string
           minLength: 1
@@ -13772,6 +15409,10 @@ components:
         - created_at
         - effective_capabilities
       properties:
+        access_end_date: { type: string, format: date }
+        access_timezone: { type: string }
+        access_expires_at: { type: string, format: date-time }
+        access_expired: { type: boolean }
         id:
           type: string
           format: uuid
@@ -13858,6 +15499,10 @@ components:
         - catalog_version
         - history
       properties:
+        access_end_date: { type: string, format: date }
+        access_timezone: { type: string }
+        access_expires_at: { type: string, format: date-time }
+        access_expired: { type: boolean }
         id:
           type: string
           format: uuid

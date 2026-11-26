@@ -1533,6 +1533,97 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Hetktõmmis: {items} üksust, {bytes} baiti',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Veebis haldab seansiküpsist server. Saatmata edenemine jääb ainult sellele vahelehele.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Veebis sisselogimine nõuab OciServe BFF-i selle OciDecki paigaldusega samal HTTPS-päritolul.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Luba sisselogimisaken ja klõpsa uuesti Logi sisse.',
+  'Openen in browser': 'Ava brauseris',
+  'Aanpassen': 'Kohandage',
+  'Hoofdmap': 'Peakaust',
+  'Lokale tijdzone': 'Kohalik ajavöönd',
+  'Map': 'Kaust',
+  'Vastgelegde versie': 'Fikseeritud versioon',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Reguleerimine muudab olemasolevad avamised kehtetuks. Saajad peavad lingi uuesti avama.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Ainult lugemiseks. Without an end time, a new link is valid for seven days; maksimaalselt üheksakümmend päeva.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Kirjutuskaitstud hetktõmmis. Re-unlocking is required after closing or expiring.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Vana link ja olemasolevad juurdepääsuload ei tööta seejärel enam.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Server määrab, kas sul on failide lugemise õigus. Puuduvate õiguste korral kuvatakse teade.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Server jagab avaldatud versiooni. Kohalikke muudatusi ei laadita üles.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'The server captures this folder and up to 2,000 items as a read-only snapshot. Hilisemad muudatused on sellelt lingilt välja jäetud.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Seanss on muudetud. Avage allikas uuesti.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versiooni on muudetud. Värskendage ülevaadet ja proovige uuesti.',
+  'Deellink aanpassen': 'Muuda jagamislinki',
+  'Deellink beheren': 'Halda jagamislinki',
+  'Deellink intrekken?': 'Tühistada jagamislink?',
+  'Deellink maken': 'Loo jagamislink',
+  'Deellinks beheren': 'Halda jagamislinke',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Jagamiseks on vaja avaldatud OciServe faili. Esmalt salvestage teadlikult organisatsioonis kohalik fail ja avage see OciServe\'i kaudu.',
+  'Delen via OciServe…': 'Jaga OciServe’i kaudu…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'See jagamislink pole saadaval või on aegunud või tühistatud.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'See installimine toetab OciServe\'i sisselogimist ainult töölauarakenduses.',
+  'Deze map is leeg.': 'See kaust on tühi.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'See server ei toeta seda ressurssi või sihtmärki pole enam olemas.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'See fail on avamiseks liiga suur (maksimaalselt 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Seda failitüüpi ei toetata.',
+  'Einddatum en tijd': 'Lõpu kuupäev ja kellaaeg',
+  'Inloggen met passkey of andere methode':
+      'Logi sisse pääsuvõtme või muu meetodiga',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Valige aeg 90 päeva jooksul ja parool vahemikus 8 kuni 256 baiti või jätke parool tühjaks.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopeerimine ebaõnnestus. Valige ja kopeerige link käsitsi.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Lingid on nähtavad ainult loomisel või pööramisel. Reguleerimine katkestab olemasolevad lukud.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Avatud kohalik koopia. Salvestamine ei muuda OciServe\'i faili.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Logige sisse algsesse OciServe serverisse.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Esmalt logige OciServe\'i sisse menüükäsuga Seaded → e-õpe.',
+  'Meld u opnieuw aan bij OciServe.': 'Logige uuesti OciServe\'i sisse.',
+  'Niet ondersteund': 'Ei toetata',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Uus parool (tühi = muutmata)',
+  'Nieuwe link uitgeven': 'Väljasta uus link',
+  'Nieuwe link uitgeven?': 'Kas väljastada uus link?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe ei saanud taotlust täita. Kontrollige ühendust ja proovige uuesti.',
+  'OciServe-deellink openen': 'Avage OciServe\'i jagamise link',
+  'OciServe-deellinks beheren': 'Hallake OciServe\'i jagamise linke',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Pärast seda ei saa saajad enam faile alla laadida. Juba allalaaditud koopiad jäävad alles.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open teeb kohaliku koopia. Salvestamine ei muuda serveri faili.',
+  'Optioneel wachtwoord': 'Valikuline parool',
+  'Passkeys beheren': 'Halda pääsuvõtmeid',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Liiga palju katseid. Oodake vähemalt minut ja proovige uuesti.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Teil pole neile failidele ega sellele toimingule juurdepääsu.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Kui tulemus pole kindel, värskendage loendit. Väljastada olemasolevast jagamisest uus link; ära loo teist aktsiat.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Sisestage parool või proovige uuesti.',
+  'Wachtwoord (indien vereist)': 'Parool (vajadusel)',
+  'Wachtwoord verwijderen': 'Eemalda parool',
+  'OciServe-bestanden': 'OciServe failid',
   'Koptekst neemt ': 'Päis võtab ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% slaidi kõrgusest — sisule jääb peaaegu mitte ruumi.',

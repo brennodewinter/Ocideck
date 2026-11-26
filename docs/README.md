@@ -229,3 +229,5 @@ which are not bundled.
 
 OciDeck is released under the **EUPL-1.2**. Contributions are accepted under the
 same licence.
+
+- [OciServe files and passkeys](OCISERVE_FILES_AND_PASSKEYS.md): maintainer integration contracts, BFF configuration and platform validation.

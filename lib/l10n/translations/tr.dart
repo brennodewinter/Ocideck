@@ -2397,6 +2397,97 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Anlık görüntü: {items} öğe, {bytes} bayt',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Web’de oturum çerezini sunucu yönetir. Gönderilmemiş ilerleme yalnızca bu sekmede kalır.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Web oturumu açmak için bu OciDeck kurulumuyla aynı HTTPS kaynağında bir OciServe BFF gerekir.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Oturum açma penceresine izin verin ve yeniden Oturum aç’a tıklayın.',
+  'Openen in browser': 'Tarayıcıda aç',
+  'Aanpassen': 'Ayarla',
+  'Hoofdmap': 'Ana klasör',
+  'Lokale tijdzone': 'Yerel saat dilimi',
+  'Map': 'Klasör',
+  'Vastgelegde versie': 'Sabit versiyon',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Ayarlama mevcut kilit açma işlemlerini geçersiz kılacaktır. Alıcıların bağlantıyı yeniden açması gerekir.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Salt okunur. Bitiş zamanı olmadığında yeni bağlantı yedi gün boyunca geçerlidir; maksimum doksan gün.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Salt okunur anlık görüntü. Kapandıktan veya süresi dolduktan sonra yeniden kilit açma işlemi yapılması gerekir.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Eski bağlantı ve mevcut kilit açma işlemleri bundan sonra artık çalışmayacaktır.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Sunucu, dosyaları okumanıza izin verilip verilmeyeceğini belirler. İzinler eksikse bir mesaj görünecektir.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Sunucu yayınlanan sürümü paylaşır. Yerel değişiklikler yüklenmez.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Sunucu, bu klasörü ve 2.000\'e kadar öğeyi salt okunur anlık görüntü olarak yakalar. Daha sonraki değişiklikler bu bağlantının dışında bırakılır.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Oturum değiştirildi. Kaynağı tekrar açın.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Sürüm değiştirildi. Genel bakışı yenileyin ve tekrar deneyin.',
+  'Deellink aanpassen': 'Paylaşım bağlantısını ayarla',
+  'Deellink beheren': 'Paylaşım bağlantısını yönet',
+  'Deellink intrekken?': 'Paylaşım bağlantısı iptal edilsin mi?',
+  'Deellink maken': 'Paylaşım bağlantısı oluştur',
+  'Deellinks beheren': 'Paylaşım bağlantılarını yönetin',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Paylaşım, yayınlanmış bir OciServe dosyası gerektirir. Öncelikle kuruluşta yerel bir dosyayı bilinçli olarak kaydedin ve OciServe aracılığıyla açın.',
+  'Delen via OciServe…': 'OciServe aracılığıyla paylaşın…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Bu paylaşım bağlantısı kullanılamıyor veya süresi dolmuş ya da iptal edilmiş.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Bu kurulum yalnızca masaüstü uygulamasında OciServe oturum açmayı destekler.',
+  'Deze map is leeg.': 'Bu klasör boş.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Bu sunucu bu kaynağı desteklemiyor veya hedef artık mevcut değil.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Bu dosya açılamayacak kadar büyük (en fazla 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Bu dosya türü desteklenmiyor.',
+  'Einddatum en tijd': 'Bitiş tarihi ve saati',
+  'Inloggen met passkey of andere methode':
+      'Geçiş anahtarıyla veya başka bir yöntemle oturum aç',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      '90 gün içinde bir süre ve 8 ila 256 bayt arasında bir şifre seçin veya şifreyi boş bırakın.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopyalama başarısız oldu. Bağlantıyı manuel olarak seçip kopyalayın.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Bağlantılar yalnızca oluşturulduğunda veya döndürüldüğünde görünür. Ayarlama mevcut kilidi açar.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Yerel kopya açıldı. Kaydetme OciServe dosyasını değiştirmez.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Orijinal OciServe sunucusunda oturum açın.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Öncelikle Ayarlar → e-Öğrenim yoluyla OciServe\'de oturum açın.',
+  'Meld u opnieuw aan bij OciServe.': 'OciServe\'de tekrar oturum açın.',
+  'Niet ondersteund': 'Desteklenmiyor',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Yeni şifre (boş = değişmedi)',
+  'Nieuwe link uitgeven': 'Yeni bağlantı yayınla',
+  'Nieuwe link uitgeven?': 'Yeni bağlantı verilsin mi?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe isteği tamamlayamadı. Bağlantıyı kontrol edip tekrar deneyin.',
+  'OciServe-deellink openen': 'OciServe paylaşım bağlantısını açın',
+  'OciServe-deellinks beheren': 'OciServe paylaşım bağlantılarını yönetin',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Alıcılar artık dosyaları daha sonra alamayacaktır. Halihazırda indirilmiş olan kopyalar mevcut olmaya devam edecektir.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open yerel bir kopya oluşturur. Kaydetmek sunucu dosyasını değiştirmez.',
+  'Optioneel wachtwoord': 'İsteğe bağlı şifre',
+  'Passkeys beheren': 'Geçiş anahtarlarını yönet',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Çok fazla deneme. En az bir dakika bekleyin ve tekrar deneyin.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Bu dosyalara veya bu eyleme erişiminiz yok.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Sonuç belirsizse listeyi yenileyin. Mevcut paylaşımdan yeni bir bağlantı verin; ikinci bir paylaşım oluşturmayın.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Şifreyi girin veya tekrar deneyin.',
+  'Wachtwoord (indien vereist)': 'Şifre (gerekiyorsa)',
+  'Wachtwoord verwijderen': 'Şifreyi kaldır',
+  'OciServe-bestanden': 'OciServe dosyaları',
   'Koptekst neemt ': 'Üst bilgi ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% slayt yüksekliği — içerik için neredeyse hiç yer kalmadı.',

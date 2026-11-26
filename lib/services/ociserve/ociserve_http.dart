@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -47,6 +48,38 @@ class OciServeHttpResponse {
   final int statusCode;
   final Uint8List body;
   final Map<String, String> headers;
+}
+
+/// A user operation owns network cancellation without exposing credentials.
+class OciServeRequestScope {
+  static const zoneKey = #ociServeRequestScope;
+  static OciServeRequestScope? get current =>
+      Zone.current[zoneKey] as OciServeRequestScope?;
+  bool cancelled = false;
+  final _callbacks = <void Function()>{};
+  void add(void Function() abort) {
+    if (cancelled) {
+      abort();
+    } else {
+      _callbacks.add(abort);
+    }
+  }
+
+  void remove(void Function() abort) => _callbacks.remove(abort);
+  void cancel() {
+    cancelled = true;
+    for (final abort in _callbacks.toList()) {
+      abort();
+    }
+    _callbacks.clear();
+  }
+
+  Future<T> run<T>(Future<T> Function() body) =>
+      runZoned(body, zoneValues: {zoneKey: this});
+}
+
+abstract interface class OciServeClosableTransport {
+  void close();
 }
 
 abstract class OciServeHttpTransport {

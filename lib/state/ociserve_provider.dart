@@ -19,6 +19,7 @@ import '../models/ociserve_settings.dart';
 import '../models/ociserve_theme.dart';
 import '../models/playback.dart';
 import '../services/ociserve/ociserve_auth.dart';
+import '../services/ociserve/ociserve_web_session.dart';
 import '../services/ociserve/ociserve_exam_outbox.dart';
 import '../services/ociserve/ociserve_gateway.dart';
 import '../services/ociserve/ociserve_http.dart';
@@ -28,6 +29,7 @@ import '../utils/log.dart';
 import 'secret_store_provider.dart';
 
 part 'ociserve_activation.dart';
+part 'ociserve_provider_web.dart';
 part 'ociserve_provider_step_up.dart';
 part 'ociserve_state.dart';
 part 'ociserve_provider_planning.dart';
@@ -71,6 +73,32 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   OciServeAuthenticatorFactory get _authFactory =>
       ref.read(ociServeAuthenticatorFactoryProvider);
 
+  OciServeWebSessionClient get _web =>
+      ref.read(ociServeWebSessionClientProvider);
+  OciServeStepUpRequired? _pendingWebStepUp;
+  final List<Map<String, Object?>> _webOutbox = [];
+  void prepareBrowserLogin() {
+    if (_web.available) _web.prepareLogin();
+  }
+
+  void cancelBrowserLogin() {
+    if (!_web.available) return;
+    ++_generation;
+    _web.cancel();
+    _tokens = null;
+    state = state.copyWith(
+      status: OciServeStatus.signedOut,
+      clearAccount: true,
+      clearError: true,
+    );
+  }
+
+  Future<bool> _loginWeb({String? loginHint, bool forceLogin = false});
+  Future<void> _activateWebSession(OciServeSettings settings, int generation);
+  Future<String> _webAccessToken();
+  Future<String> _completeWebStepUp(OciServeStepUpRequired need);
+  Future<bool> _logoutWeb();
+
   OciServeTokens? _tokens;
   OciServeInstallation? _installation;
   OciServeOidcConfiguration? _configuration;
@@ -88,7 +116,11 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
 
   @override
   OciServeState build() {
-    ref.onDispose(() => ++_generation);
+    final web = _web;
+    ref.onDispose(() {
+      ++_generation;
+      web.cancel();
+    });
     _initialize(++_generation);
     return const OciServeState();
   }
@@ -120,6 +152,10 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   /// herstellen of de bereikbaarheid testen — implementatie in
   /// ociserve_activation.dart.
   Future<void> _activateSession(OciServeSettings settings, int generation);
+  Future<void> _probeServerAvailability(
+    OciServeSettings settings,
+    int generation,
+  );
 
   /// Auditregistraties — implementaties in ociserve_provider_account.dart.
   /// Staan abstract op de basis omdat `login()` en `openLessonPackage()` ze
@@ -147,6 +183,12 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     OciServeSettings settings, {
     bool discardPendingReports = false,
   }) async {
+    if (_web.available &&
+        settings.baseUrl.trim().isEmpty &&
+        _web.origin != null) {
+      settings = settings.copyWith(baseUrl: _web.origin);
+    }
+    if (_web.available && state.authenticating) _web.cancel();
     ++_generation;
     final old = state.settings;
     final serverChanged = old.normalizedBaseUrl != settings.normalizedBaseUrl;
@@ -232,6 +274,9 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   /// hergebruikt. Een herstelde sessie slaat dat bewust over — dat zou juist
   /// de inlog van de uitnodiger terugpakken.
   Future<bool> login({String? loginHint, bool forceLogin = false}) async {
+    if (_web.available) {
+      return _loginWeb(loginHint: loginHint, forceLogin: forceLogin);
+    }
     // Bij een uitnodiging slaan we de herstelde sessie over: die zou juist
     // een bestaande inlog (bijv. van de uitnodiger) kunnen terugpakken.
     if (loginHint == null &&
@@ -346,6 +391,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   }
 
   Future<bool> logout() async {
+    if (_web.available) return _logoutWeb();
     ++_generation;
     final settings = state.settings;
     await _finishLearningSessions(
@@ -384,6 +430,20 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   /// versleutelde voortgangswachtrij. Zo blijft deze notifier de enige eigenaar
   /// van OciServe-opslag.
   Future<bool> resetLocalData() async {
+    if (_web.available && state.settings.isConfigured) {
+      try {
+        await _web.logout(state.settings, sessionMarker: _tokens?.accessToken);
+      } catch (error, stack) {
+        logError(
+          'OciServe: websessie bij reset afmelden',
+          error.runtimeType,
+          stack,
+        );
+      }
+      _web.cancel();
+      _webOutbox.clear();
+    }
+
     ++_generation;
     var settings = state.settings;
     await _finishLearningSessions(
@@ -417,11 +477,64 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     }
   }
 
+  /// Executes within a captured session; a refresh may happen, a tenant or
+  /// account switch must never deliver the previous result to a new session.
+  Future<T> fileOperation<T>(
+    String organizationId,
+    Future<T> Function(OciServeApi api, String token) operation, {
+    OciServeRequestScope? scope,
+  }) async {
+    final generation = _generation;
+    final settings = state.settings;
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    if (_generation != generation) throw const OciServeException('cancelled');
+    if (scope?.cancelled == true) throw const OciServeException('cancelled');
+    final T result;
+    try {
+      result = await (scope == null
+          ? operation(_gatewayFactory(settings), access)
+          : scope.run(() => operation(_gatewayFactory(settings), access)));
+    } on OciServeException catch (error) {
+      if (_web.available &&
+          error.statusCode == 401 &&
+          generation == _generation) {
+        _tokens = null;
+        state = state.copyWith(
+          status: OciServeStatus.signedOut,
+          clearAccount: true,
+          errorCode: 'session_expired',
+        );
+      }
+      rethrow;
+    }
+    if (_generation != generation) throw const OciServeException('cancelled');
+    _requireMembership(organizationId);
+    return result;
+  }
+
+  Future<bool> managePasskeys() async {
+    final uri = state.account?.passkeyManagementUrl;
+    final issuer = _installation?.issuer;
+    if (!state.authenticated ||
+        state.account?.passwordlessEnrollable != true ||
+        uri == null ||
+        issuer == null ||
+        uri.scheme != 'https' ||
+        uri.userInfo.isNotEmpty ||
+        uri.origin != issuer.origin ||
+        uri.hasFragment) {
+      throw const OciServeException('passkey_management_unavailable');
+    }
+    return ref.read(ociServeAccountBrowserProvider).open(uri);
+  }
+
   Future<void> acceptIdentityProvider(String host) async {
     final normalized = host.trim().toLowerCase();
     if (normalized.isEmpty || normalized != state.identityProviderHost) {
       throw const OciServeException('identity_provider_mismatch');
     }
+    if (_web.available) _web.prepareLogin();
     await saveSettings(
       state.settings.copyWith(acceptedIdentityProviderHost: normalized),
     );
@@ -725,6 +838,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   }
 
   Future<String> _accessToken() async {
+    if (_web.available) return _webAccessToken();
     final current = _tokens;
     if (!state.authenticated || current == null) {
       throw const OciServeException('not_authenticated');
@@ -863,6 +977,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
 class OciServeNotifier extends OciServeNotifierBase
     with
         _OciServeActivationMethods,
+        _OciServeWebMethods,
         _OciServeStepUpMethods,
         _OciServePlanningMethods,
         _OciServeExamMethods,

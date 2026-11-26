@@ -611,6 +611,99 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Istantanea: {items} elementi, {bytes} byte',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Sul web, il server gestisce il cookie di sessione. I progressi non inviati restano solo in questa scheda.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'L’accesso web richiede un BFF OciServe sulla stessa origine HTTPS di questa installazione OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Consenti la finestra di accesso e premi di nuovo Accedi.',
+  'Openen in browser': 'Apri nel browser',
+  'Aanpassen': 'Regolare',
+  'Hoofdmap': 'Cartella principale',
+  'Lokale tijdzone': 'Fuso orario locale',
+  'Map': 'Cartella',
+  'Vastgelegde versie': 'Versione fissa',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'La modifica invaliderà gli sblocchi esistenti. I destinatari devono riaprire il collegamento.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Sola lettura. Senza un\'ora di fine, un nuovo collegamento è valido per sette giorni; massimo novanta giorni.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Istantanea di sola lettura. È necessario ri-sbloccare dopo la chiusura o la scadenza.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Successivamente il vecchio collegamento e gli sblocchi esistenti non funzioneranno più.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Il server determina se sei autorizzato a leggere i file. Verrà visualizzato un messaggio se mancano le autorizzazioni.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Il server condivide la versione pubblicata. Le modifiche locali non vengono caricate.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Il server acquisisce questa cartella e fino a 2.000 elementi come snapshot di sola lettura. Eventuali modifiche successive sono escluse da questo collegamento.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'La sessione è stata modificata. Apri di nuovo la fonte.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'La versione è stata cambiata. Aggiorna la panoramica e riprova.',
+  'Deellink aanpassen': 'Modifica il collegamento di condivisione',
+  'Deellink beheren': 'Gestisci il collegamento di condivisione',
+  'Deellink intrekken?': 'Revocare il collegamento di condivisione?',
+  'Deellink maken': 'Crea collegamento di condivisione',
+  'Deellinks beheren': 'Gestisci i collegamenti di condivisione',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'La condivisione richiede un file OciServe pubblicato. Per prima cosa salva consapevolmente un file locale presso l\'organizzazione e aprilo tramite OciServe.',
+  'Delen via OciServe…': 'Condividi tramite OciServe...',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Questo collegamento di condivisione non è disponibile oppure è scaduto o è stato revocato.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Questa installazione supporta l\'accesso OciServe solo nell\'app desktop.',
+  'Deze map is leeg.': 'Questa cartella è vuota.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Questo server non supporta questa risorsa oppure la destinazione non esiste più.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Questo file è troppo grande per essere aperto (massimo 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Questo tipo di file non è supportato.',
+  'Einddatum en tijd': 'Data e ora di fine',
+  'Inloggen met passkey of andere methode':
+      'Accedi con una passkey o un altro metodo',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Scegli un periodo compreso tra 90 giorni e una password compresa tra 8 e 256 byte oppure lascia vuota la password.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Copia non riuscita. Seleziona e copia il collegamento manualmente.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'I collegamenti sono visibili solo quando vengono creati o ruotati. La regolazione interrompe gli sblocchi esistenti.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Copia locale aperta. Il salvataggio non modifica il file OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Accedere al server OciServe originale.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Innanzitutto, accedi a OciServe tramite Impostazioni → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Accedere nuovamente a OciServe.',
+  'Niet ondersteund': 'Non supportato',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Nuova password (vuota = invariata)',
+  'Nieuwe link uitgeven': 'Emettere un nuovo collegamento',
+  'Nieuwe link uitgeven?': 'Emettere un nuovo collegamento?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe non è stato in grado di completare la richiesta. Controlla la connessione e riprova.',
+  'OciServe-deellink openen': 'Aprire il collegamento di condivisione OciServe',
+  'OciServe-deellinks beheren':
+      'Gestire i collegamenti di condivisione OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'I destinatari non saranno più in grado di recuperare i file in seguito. Le copie già scaricate continueranno ad esistere.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open crea una copia locale. Il salvataggio non modifica il file del server.',
+  'Optioneel wachtwoord': 'Password facoltativa',
+  'Passkeys beheren': 'Gestisci le passkey',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Troppi tentativi. Attendi almeno un minuto e riprova.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Non hai accesso a questi file o a questa azione.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Aggiorna l\'elenco se il risultato è incerto. Emettere un nuovo collegamento dalla condivisione esistente; non creare una seconda condivisione.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Inserisci la password o riprova.',
+  'Wachtwoord (indien vereist)': 'Password (se richiesta)',
+  'Wachtwoord verwijderen': 'Rimuovi la password',
+  'OciServe-bestanden': 'File Ociserve',
   'Koptekst neemt ': 'L\'intestazione occupa ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% dell\'altezza della diapositiva — il contenuto non ha quasi più spazio.',

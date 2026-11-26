@@ -17,6 +17,7 @@ import 'package:ocideck/services/ociserve/ociserve_auth.dart';
 import 'package:ocideck/services/ociserve/ociserve_gateway.dart';
 import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/services/ociserve/ociserve_step_up.dart';
+import 'package:ocideck/services/ociserve/ociserve_web_session.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/secret_store_provider.dart';
 import 'package:ocideck/services/secret_store.dart';
@@ -43,6 +44,61 @@ const _account = OciServeAccount(
   id: 'user',
   memberships: [OciServeMembership(organizationId: 'org')],
 );
+
+class _FakeWebSession implements OciServeWebSessionClient {
+  OciServeBrowserSession? restored;
+  Completer<OciServeBrowserSession>? gate;
+  int logins = 0, logouts = 0, cancellations = 0;
+  @override
+  bool get available => true;
+  @override
+  String get origin => 'https://learn.example';
+  @override
+  void prepareLogin() {}
+  @override
+  void cancel() {
+    cancellations++;
+  }
+
+  @override
+  Future<OciServeBrowserSession?> restore(OciServeSettings settings) async =>
+      restored;
+  @override
+  Future<OciServeBrowserSession> login(
+    OciServeSettings settings, {
+    OciServeStepUpRequired? stepUp,
+    String? loginHint,
+    bool forceLogin = false,
+  }) async {
+    logins++;
+    return gate?.future ??
+        Future.value(
+          OciServeBrowserSession(
+            issuer: Uri.parse(origin),
+            expiresAt: DateTime.now().toUtc().add(const Duration(hours: 1)),
+            binding: '12345678-1234-4234-8234-123456789abc',
+          ),
+        );
+  }
+
+  @override
+  Future<void> logout(
+    OciServeSettings settings, {
+    String? sessionMarker,
+  }) async {
+    logouts++;
+    restored = null;
+  }
+}
+
+class _AccountBrowser implements OciServeBrowserLauncher {
+  final opened = <Uri>[];
+  @override
+  Future<bool> open(Uri uri) async {
+    opened.add(uri);
+    return true;
+  }
+}
 
 class _FakeAuth implements OciServeAuthenticator {
   Completer<OciServeTokens>? loginCompleter;
@@ -618,8 +674,14 @@ ProviderContainer _container(
   SecretStore secrets, {
   _FakeAuth? auth,
   OciServeGatewayFactory? gatewayFactory,
+  OciServeBrowserLauncher? accountBrowser,
+  OciServeWebSessionClient? webSession,
 }) => ProviderContainer(
   overrides: [
+    if (webSession != null)
+      ociServeWebSessionClientProvider.overrideWithValue(webSession),
+    if (accountBrowser != null)
+      ociServeAccountBrowserProvider.overrideWithValue(accountBrowser),
     secretStoreProvider.overrideWithValue(secrets),
     ociServeGatewayFactoryProvider.overrideWithValue(
       gatewayFactory ?? (_) => api,
@@ -672,6 +734,127 @@ void main() {
     );
     api = _FakeApi();
   });
+
+  test(
+    'web login uses a cookie session marker and never persists OAuth credentials',
+    () async {
+      final web = _FakeWebSession();
+      api.installationValue = OciServeInstallation(
+        clientId: '',
+        issuer: _installation.issuer,
+        webSession: true,
+      );
+      final container = _container(api, secrets, webSession: web);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      expect(await notifier.login(), true);
+      expect(container.read(ociServeProvider).authenticated, true);
+      expect(web.logins, 1);
+      expect(await secrets.readOciServeRefreshToken(_settings.baseUrl), isNull);
+      expect(await notifier.logout(), true);
+      expect(web.logouts, 1);
+      expect(container.read(ociServeProvider).authenticated, false);
+    },
+  );
+  test(
+    'cancelled browser login cannot restore a session after its callback',
+    () async {
+      final web = _FakeWebSession()..gate = Completer<OciServeBrowserSession>();
+      api.installationValue = OciServeInstallation(
+        clientId: '',
+        issuer: _installation.issuer,
+        webSession: true,
+      );
+      final container = _container(api, secrets, webSession: web);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      final pending = notifier.login();
+      await Future<void>.delayed(Duration.zero);
+      notifier.cancelBrowserLogin();
+      web.gate!.complete(
+        OciServeBrowserSession(
+          issuer: _installation.issuer,
+          expiresAt: DateTime.now().toUtc().add(const Duration(hours: 1)),
+          binding: '12345678-1234-4234-8234-123456789abc',
+        ),
+      );
+      expect(await pending, false);
+      expect(container.read(ociServeProvider).authenticated, false);
+    },
+  );
+
+  test(
+    'passkey management only opens an announced HTTPS page on the bound issuer',
+    () async {
+      final browser = _AccountBrowser();
+      final container = _container(api, secrets, accountBrowser: browser);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      for (final url in [
+        'http://learn.example/account',
+        'https://other.example/account',
+        'https://u:p@learn.example/account',
+        'https://learn.example/account#secret',
+      ]) {
+        api.account = OciServeAccount(
+          id: 'user',
+          memberships: _account.memberships,
+          passwordlessEnrollable: true,
+          passkeyManagementUrl: Uri.parse(url),
+        );
+        expect(await notifier.login(forceLogin: true), true);
+        await expectLater(
+          notifier.managePasskeys(),
+          throwsA(isA<OciServeException>()),
+        );
+      }
+      expect(browser.opened, isEmpty);
+      api.account = OciServeAccount(
+        id: 'user',
+        memberships: _account.memberships,
+        passwordlessEnrollable: true,
+        passkeyManagementUrl: Uri.parse('https://learn.example/account'),
+      );
+      expect(await notifier.login(forceLogin: true), true);
+      expect(await notifier.managePasskeys(), true);
+      expect(browser.opened.single.toString(), 'https://learn.example/account');
+      await notifier.logout();
+      await expectLater(
+        notifier.managePasskeys(),
+        throwsA(isA<OciServeException>()),
+      );
+    },
+  );
+
+  test(
+    'a file operation never delivers a response from a signed-out session',
+    () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      expect(await notifier.login(), true);
+      final started = Completer<void>();
+      final response = Completer<String>();
+      final request = notifier.fileOperation('org', (_, token) {
+        started.complete();
+        return response.future;
+      });
+      await started.future;
+      final expectation = expectLater(
+        request,
+        throwsA(
+          isA<OciServeException>().having((e) => e.code, 'code', 'cancelled'),
+        ),
+      );
+      await notifier.logout();
+      response.complete('tenant metadata');
+      await expectation;
+    },
+  );
 
   test('exposes authenticated only after /me succeeds', () async {
     api.meCompleter = Completer<OciServeAccount>();

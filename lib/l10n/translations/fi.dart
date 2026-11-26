@@ -1541,6 +1541,98 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Tilannekuva: {items} kohdetta, {bytes} tavua',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Verkossa palvelin hallitsee istuntoevästettä. Lähettämätön edistyminen säilyy vain tässä välilehdessä.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Verkkokirjautuminen edellyttää OciServe-BFF:ää samassa HTTPS-alkuperässä kuin tämä OciDeck-asennus.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Salli kirjautumisikkuna ja napsauta Kirjaudu sisään uudelleen.',
+  'Openen in browser': 'Avaa selaimessa',
+  'Aanpassen': 'Säädä',
+  'Hoofdmap': 'Pääkansio',
+  'Lokale tijdzone': 'Paikallinen aikavyöhyke',
+  'Map': 'Kansio',
+  'Vastgelegde versie': 'Kiinteä versio',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Säätäminen mitätöi olemassa olevat lukituksen avaukset. Vastaanottajien on avattava linkki uudelleen.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Vain luku. Ilman päättymisaikaa uusi linkki on voimassa seitsemän päivää; enintään yhdeksänkymmentä päivää.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Vain luku -tilanne. Lukitus on avattava uudelleen sulkemisen tai vanhenemisen jälkeen.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Vanha linkki ja olemassa olevat lukituksen avaukset eivät enää toimi tämän jälkeen.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Palvelin määrittää, voitko lukea tiedostoja. Näkyviin tulee viesti, jos käyttöoikeudet puuttuvat.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Palvelin jakaa julkaistun version. Paikallisia muutoksia ei ladata.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Palvelin tallentaa tämän kansion ja jopa 2 000 kohdetta vain luku -vedoksena. Myöhemmät muutokset jätetään pois tästä linkistä.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Istunto on muutettu. Avaa lähde uudelleen.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versio on muutettu. Päivitä yleiskatsaus ja yritä uudelleen.',
+  'Deellink aanpassen': 'Säädä jakolinkkiä',
+  'Deellink beheren': 'Hallinnoi jakolinkkiä',
+  'Deellink intrekken?': 'Perutaanko jakolinkki?',
+  'Deellink maken': 'Luo jakolinkki',
+  'Deellinks beheren': 'Hallinnoi jakolinkkejä',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Jakamiseen tarvitaan julkaistu OciServe-tiedosto. Tallenna ensin tietoisesti paikallinen tiedosto organisaatiossa ja avaa se OciServen kautta.',
+  'Delen via OciServe…': 'Jaa OciServen kautta…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Tämä jakolinkki ei ole käytettävissä tai se on vanhentunut tai peruutettu.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Tämä asennus tukee OciServe-kirjautumista vain työpöytäsovelluksessa.',
+  'Deze map is leeg.': 'Tämä kansio on tyhjä.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Tämä palvelin ei tue tätä resurssia tai kohdetta ei ole enää olemassa.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Tämä tiedosto on liian suuri avattavaksi (enintään 32 Mt).',
+  'Dit bestandstype wordt niet ondersteund.': 'Tätä tiedostotyyppiä ei tueta.',
+  'Einddatum en tijd': 'Päättymispäivämäärä ja -aika',
+  'Inloggen met passkey of andere methode':
+      'Kirjaudu pääsyavaimella tai muulla menetelmällä',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Valitse aika 90 päivän sisällä ja salasana 8 - 256 tavua tai jätä salasana tyhjäksi.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopiointi epäonnistui. Valitse ja kopioi linkki manuaalisesti.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Linkit näkyvät vain luotuina tai kierrettyinä. Säätäminen katkaisee olemassa olevat lukitukset.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Paikallinen kopio avattu. Tallentaminen ei muuta OciServe-tiedostoa.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Kirjaudu sisään alkuperäiseen OciServe-palvelimeen.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Kirjaudu ensin OciServeen valitsemalla Asetukset → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Kirjaudu uudelleen OciServeen.',
+  'Niet ondersteund': 'Ei tuettu',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Uusi salasana (tyhjä = muuttumaton)',
+  'Nieuwe link uitgeven': 'Anna uusi linkki',
+  'Nieuwe link uitgeven?': 'Onko uusi linkki ongelma?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe ei voinut suorittaa pyyntöä loppuun. Tarkista yhteys ja yritä uudelleen.',
+  'OciServe-deellink openen': 'Avaa OciServe-jakolinkki',
+  'OciServe-deellinks beheren': 'Hallinnoi OciServe-jakolinkkejä',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Vastaanottajat eivät voi enää hakea tiedostoja jälkeenpäin. Jo ladatut kopiot ovat edelleen olemassa.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open tekee paikallisen kopion. Tallentaminen ei muuta palvelintiedostoa.',
+  'Optioneel wachtwoord': 'Valinnainen salasana',
+  'Passkeys beheren': 'Hallitse pääsyavaimia',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Liikaa yrityksiä. Odota vähintään minuutti ja yritä uudelleen.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Sinulla ei ole pääsyä näihin tiedostoihin tai tähän toimintoon.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Päivitä luettelo, jos tulos on epävarma. Anna uusi linkki olemassa olevasta osuudesta; älä luo toista jakoa.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Anna salasana tai yritä uudelleen.',
+  'Wachtwoord (indien vereist)': 'Salasana (tarvittaessa)',
+  'Wachtwoord verwijderen': 'Poista salasana',
+  'OciServe-bestanden': 'OciServe-tiedostot',
   'Koptekst neemt ': 'Ylätunniste vie ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% dian korkeudesta — sisällölle ei jää enää juuri tilaa.',

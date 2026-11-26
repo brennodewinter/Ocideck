@@ -35,22 +35,33 @@ class OpenSearchResult {
   final List<String> paths;
   final int? slideIndex;
   final bool browseRequested;
+  final bool ociServeRequested;
+
+  const OpenSearchResult.ociServe()
+    : paths = const [],
+      slideIndex = null,
+      browseRequested = false,
+      ociServeRequested = true,
+      kind = OpenKindFilter.all;
 
   OpenSearchResult(String path, {this.slideIndex})
     : paths = [path],
       browseRequested = false,
+      ociServeRequested = false,
       kind = OpenKindFilter.all;
 
   /// Meerdere bestanden tegelijk, in de volgorde waarin de lijst ze toonde.
   OpenSearchResult.multiple(this.paths)
     : slideIndex = null,
       browseRequested = false,
+      ociServeRequested = false,
       kind = OpenKindFilter.all;
 
   const OpenSearchResult.browse({this.kind = OpenKindFilter.all})
     : paths = const [],
       slideIndex = null,
-      browseRequested = true;
+      browseRequested = true,
+      ociServeRequested = false;
 
   /// Het soortfilter op het moment van Bladeren, zodat de native kiezer in
   /// de startmap van dát soort opent (#2394).
@@ -585,6 +596,12 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         ),
       ),
       actions: [
+        TextButton.icon(
+          onPressed: () =>
+              Navigator.pop(context, const OpenSearchResult.ociServe()),
+          icon: const Icon(Icons.cloud_outlined),
+          label: Text(l10n.d('OciServe-bestanden')),
+        ),
         OutlinedButton.icon(
           onPressed: _browse,
           icon: const Icon(Icons.insert_drive_file_outlined, size: 16),

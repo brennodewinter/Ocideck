@@ -1555,6 +1555,98 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Instantaneu: {items} elemente, {bytes} octeți',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Pe web, serverul gestionează cookie-ul sesiunii. Progresul netrimis rămâne doar în această filă.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Autentificarea web necesită un BFF OciServe la aceeași origine HTTPS ca această instalare OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Permiteți fereastra de autentificare și apăsați din nou Autentificare.',
+  'Openen in browser': 'Deschideți în browser',
+  'Aanpassen': 'Ajustați',
+  'Hoofdmap': 'Dosarul principal',
+  'Lokale tijdzone': 'Fus orar local',
+  'Map': 'Folder',
+  'Vastgelegde versie': 'Versiune fixă',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Ajustarea va invalida deblocările existente. Destinatarii trebuie să redeschidă linkul.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Numai citire. Fără oră de încheiere, un nou link este valabil timp de șapte zile; maxim nouăzeci de zile.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Instantaneu numai pentru citire. Re-deblocarea este necesară după închidere sau expirare.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Linkul vechi și deblocările existente nu vor mai funcționa după aceasta.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Serverul stabilește dacă aveți voie să citiți fișiere. Va apărea un mesaj dacă lipsesc permisiunile.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Serverul partajează versiunea publicată. Modificările locale nu sunt încărcate.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Serverul captează acest folder și până la 2.000 de articole ca instantaneu numai pentru citire. Modificările ulterioare sunt excluse din acest link.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sesiunea a fost schimbată. Deschideți din nou sursa.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versiunea a fost schimbată. Actualizați prezentarea generală și încercați din nou.',
+  'Deellink aanpassen': 'Ajustați linkul de distribuire',
+  'Deellink beheren': 'Gestionați linkul de distribuire',
+  'Deellink intrekken?': 'Revocați linkul de distribuire?',
+  'Deellink maken': 'Creați un link de distribuire',
+  'Deellinks beheren': 'Gestionați linkurile de partajare',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Partajarea necesită un fișier OciServe publicat. Mai întâi salvați în mod conștient un fișier local la organizație și deschideți-l prin OciServe.',
+  'Delen via OciServe…': 'Distribuie prin OciServe...',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Acest link de partajare nu este disponibil sau a expirat sau a fost revocat.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Această instalare acceptă autentificarea OciServe numai în aplicația desktop.',
+  'Deze map is leeg.': 'Acest folder este gol.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Acest server nu acceptă această resursă sau ținta nu mai există.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Acest fișier este prea mare pentru a fi deschis (maximum 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Acest tip de fișier nu este acceptat.',
+  'Einddatum en tijd': 'Data și ora de încheiere',
+  'Inloggen met passkey of andere methode':
+      'Autentificare cu o cheie de acces sau altă metodă',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Alegeți o oră în 90 de zile și o parolă de la 8 la 256 de octeți sau lăsați parola goală.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Copierea eșuată. Selectați și copiați manual linkul.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Linkurile sunt vizibile numai atunci când sunt create sau rotite. Ajustarea întrerupe deblochările existente.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Copie locală deschisă. Salvarea nu modifică fișierul OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Conectați-vă la serverul original OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Mai întâi, conectați-vă la OciServe prin Setări → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Conectați-vă din nou la OciServe.',
+  'Niet ondersteund': 'Nu este acceptat',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Parolă nouă (goală = neschimbată)',
+  'Nieuwe link uitgeven': 'Emite un nou link',
+  'Nieuwe link uitgeven?': 'Emiteți un link nou?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe nu a putut finaliza solicitarea. Verificați conexiunea și încercați din nou.',
+  'OciServe-deellink openen': 'Deschideți linkul de partajare OciServe',
+  'OciServe-deellinks beheren': 'Gestionați linkurile de partajare OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Destinatarii nu vor mai putea prelua fișierele ulterior. Copiile deja descărcate vor continua să existe.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open face o copie locală. Salvarea nu modifică fișierul serverului.',
+  'Optioneel wachtwoord': 'Parolă opțională',
+  'Passkeys beheren': 'Gestionează cheile de acces',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Prea multe încercări. Așteptați cel puțin un minut și încercați din nou.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Nu aveți acces la aceste fișiere sau la această acțiune.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Reîmprospătați lista dacă rezultatul este incert. Emite un nou link de la partajarea existentă; nu creați o a doua cotă.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Introduceți parola sau încercați din nou.',
+  'Wachtwoord (indien vereist)': 'Parola (daca este necesar)',
+  'Wachtwoord verwijderen': 'Eliminați parola',
+  'OciServe-bestanden': 'fișiere OciServe',
   'Koptekst neemt ': 'Antetul ocupă ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% din înălțimea diapozitivului — conținutului nu-i mai rămâne aproape loc.',

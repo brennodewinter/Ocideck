@@ -35,6 +35,7 @@ mixin _OciServeStepUpMethods on OciServeNotifierBase {
   }
 
   Future<String> _completeStepUp(OciServeStepUpRequired need) async {
+    if (_web.available) return _completeWebStepUp(need);
     final installation = _installation;
     final configuration = _configuration;
     final accountId = state.account?.id;

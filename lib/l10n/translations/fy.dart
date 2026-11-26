@@ -613,6 +613,98 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Momintopname: {items} ûnderdielen, {bytes} bytes',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Op it web beheart de tsjinner it sesjekoekje. Net ferstjoerde fuortgong bliuwt allinnich yn dit ljepblêd.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Weboanmelding fereasket in OciServe-BFF ûnder deselde HTTPS-origin as dizze OciDeck-ynstallaasje.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Stean it oanmeldfinster ta en klik opnij op Oanmelde.',
+  'Openen in browser': 'Iepenje yn browser',
+  'Aanpassen': 'Oanpasse',
+  'Hoofdmap': 'Haadmap',
+  'Lokale tijdzone': 'Lokale tiidsône',
+  'Map': 'Folder',
+  'Vastgelegde versie': 'Fêste ferzje',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Oanpassing sil besteande ûntsluten ûnjildich meitsje. Untfangers moatte de keppeling opnij iepenje.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Allinnich lêze. Sûnder in eintiid is in nije keppeling jildich foar sân dagen; maksimum njoggentich dagen.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Allinnich lêzen momintopname. Re-ûntskoatteljen is nedich nei it sluten of ferrinnen.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'De âlde keppeling en besteande ûntsluten sille nei dit net mear wurkje.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'De tsjinner bepaalt oft jo bestannen lêze meie. In berjocht sil ferskine as tagongsrjochten ûntbrekke.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'De tsjinner dielt de publisearre ferzje. Lokale feroarings wurde net upload.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'De tsjinner vangt dizze map en maksimaal 2.000 items as in read-allinnich momintopname. Folgjende feroarings binne útsletten fan dizze keppeling.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'De sesje is feroare. Iepenje de boarne wer.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'De ferzje is feroare. Ferfarskje it oersjoch en besykje it nochris.',
+  'Deellink aanpassen': 'Diele keppeling oanpasse',
+  'Deellink beheren': 'Behear diele keppeling',
+  'Deellink intrekken?': 'Diele keppeling ynlûke?',
+  'Deellink maken': 'Meitsje diel keppeling',
+  'Deellinks beheren': 'Beheare dielen keppelings',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Diele fereasket in publisearre OciServe-bestân. Bewarje earst bewust in lokaal bestân by de organisaasje en iepenje it fia OciServe.',
+  'Delen via OciServe…': 'Diele fia OciServe...',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Dizze diellink is net beskikber of is ferrûn of ynlutsen.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Dizze ynstallaasje stipet OciServe-oanmelding allinich yn \'e buroblêd-app.',
+  'Deze map is leeg.': 'Dizze map is leech.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Dizze tsjinner stipet dizze boarne net, of it doel bestiet net mear.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Dizze triem is te grut om te iepenjen (maksimaal 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Dit triemtype wurdt net stipe.',
+  'Einddatum en tijd': 'Eindatum en tiid',
+  'Inloggen met passkey of andere methode':
+      'Oanmelde mei in passkey of in oare metoade',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Kies in tiid binnen 90 dagen en in wachtwurd fan 8 oant 256 bytes, of lit it wachtwurd leech.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopiearje mislearre. Selektearje en kopiearje de keppeling manuell.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Keppelings binne allinnich sichtber as oanmakke of rotearre. It oanpassen brekt besteande ûntsluten.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Lokale kopy iepene. It bewarjen feroaret it OciServe-bestân net.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Oanmelde by de orizjinele OciServe-tsjinner.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Meld jo earst oan by OciServe fia Ynstellings → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Oanmelde by OciServe wer.',
+  'Niet ondersteund': 'Net stipe',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Nij wachtwurd (leech = net feroare)',
+  'Nieuwe link uitgeven': 'Nije keppeling útjaan',
+  'Nieuwe link uitgeven?': 'Nije keppeling útjaan?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe koe it fersyk net foltôgje. Kontrolearje de ferbining en besykje it nochris.',
+  'OciServe-deellink openen': 'Iepenje OciServe share keppeling',
+  'OciServe-deellinks beheren': 'Behear OciServe share keppelings',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Untfangers kinne dêrnei gjin bestannen mear ophelje. Al ynladen kopyen sille bestean bliuwe.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open makket in lokale kopy. Opslaan feroaret de tsjinner triem net.',
+  'Optioneel wachtwoord': 'Opsjoneel wachtwurd',
+  'Passkeys beheren': 'Passkeys beheare',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Tefolle besykjen. Wachtsje op syn minst in minút en besykje it nochris.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Jo hawwe gjin tagong ta dizze triemmen of dizze aksje.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Ferfarskje de list as it resultaat ûnwis is. In nije keppeling útjaan fan it besteande diel; meitsje gjin twadde oandiel.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Fier it wachtwurd yn of besykje it nochris.',
+  'Wachtwoord (indien vereist)': 'Wachtwurd (as nedich)',
+  'Wachtwoord verwijderen': 'Wachtwurd fuortsmite',
+  'OciServe-bestanden': 'OciServe triemmen',
   'Koptekst neemt ': 'De koptekst nimt ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% fan de dia-hichte yn — de ynhâld hat hast gjin romte mear.',

@@ -19,6 +19,10 @@ mixin _OciServeActivationMethods on OciServeNotifierBase {
       _configuration = null;
       return;
     }
+    if (_web.available) {
+      await _activateWebSession(settings, generation);
+      return;
+    }
     final storedRefresh = settings.rememberLogin && _secrets.canStore
         ? await _secrets.readOciServeRefreshToken(settings.normalizedBaseUrl)
         : null;
@@ -114,6 +118,7 @@ mixin _OciServeActivationMethods on OciServeNotifierBase {
   /// credentials. Draait als "eLearning volgen" aan staat en er geen
   /// bewaarde aanmelding is om te herstellen: zo kleurt een dode server
   /// eerlijk rood in plaats van eeuwig oranje "ingesteld".
+  @override
   Future<void> _probeServerAvailability(
     OciServeSettings settings,
     int generation,

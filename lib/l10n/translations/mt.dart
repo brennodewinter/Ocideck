@@ -1557,6 +1557,99 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Kopja fissa: {items} elementi, {bytes} bytes',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Fuq il-web, is-server jimmaniġġja l-cookie tas-sessjoni. Il-progress li ma ntbagħatx jibqa’ biss f’din it-tab.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Id-dħul fuq il-web jeħtieġ BFF ta’ OciServe fuq l-istess oriġini HTTPS bħal din l-installazzjoni ta’ OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Ħalli t-tieqa tad-dħul u erġa’ agħfas Idħol.',
+  'Openen in browser': 'Iftaħ fil-browser',
+  'Aanpassen': 'Aġġusta',
+  'Hoofdmap': 'Fowlder prinċipali',
+  'Lokale tijdzone': 'Żona tal-ħin lokali',
+  'Map': 'Folder',
+  'Vastgelegde versie': 'Verżjoni fissa',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'L-aġġustament jinvalida l-unlocks eżistenti. Ir-riċevituri jridu jerġgħu jiftħu l-link.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Aqra biss. Mingħajr ħin tat-tmiem, rabta ġdida hija valida għal sebat ijiem; massimu disgħin jum.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Snapshot għall-qari biss. Il-ftuħ mill-ġdid huwa meħtieġ wara li jagħlaq jew jiskadi.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Il-link l-antik u l-unlocks eżistenti ma jibqgħux jaħdmu wara dan.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Is-server jiddetermina jekk intix permess li taqra l-fajls. Jidher messaġġ jekk il-permessi jkunu neqsin.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Is-server jaqsam il-verżjoni ppubblikata. Il-bidliet lokali ma jittellgħux.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Is-server jaqbad dan il-folder u sa 2,000 oġġett bħala snapshot li jinqara biss. Bidliet sussegwenti huma esklużi minn din il-link.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Is-sessjoni nbidlet. Iftaħ is-sors mill-ġdid.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Il-verżjoni nbidlet. Aġġorna l-ħarsa ġenerali u erġa\' pprova.',
+  'Deellink aanpassen': 'Aġġusta rabta tal-ishma',
+  'Deellink beheren': 'Immaniġġja l-link tal-ishma',
+  'Deellink intrekken?': 'Irrevoka l-link tal-ishma?',
+  'Deellink maken': 'Oħloq sehem link',
+  'Deellinks beheren': 'Immaniġġja links tal-qsim',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Il-qsim jeħtieġ fajl OciServe ippubblikat. L-ewwel issalva konxjament fajl lokali fl-organizzazzjoni u iftaħ permezz ta\' OciServe.',
+  'Delen via OciServe…': 'Aqsam permezz ta\' OciServe...',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Din il-link tal-qsim mhix disponibbli jew skadiet jew ġiet revokata.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Din l-installazzjoni tappoġġja l-login OciServe fl-app tad-desktop biss.',
+  'Deze map is leeg.': 'Dan il-folder huwa vojt.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Dan is-server ma jappoġġjax din ir-riżorsa, jew il-mira m\'għadhiex teżisti.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Dan il-fajl huwa kbir wisq biex jinfetaħ (massimu ta\' 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Dan it-tip ta\' fajl mhuwiex appoġġjat.',
+  'Einddatum en tijd': 'Data u ħin tat-tmiem',
+  'Inloggen met passkey of andere methode':
+      'Idħol b’ċavetta tal-aċċess jew b’metodu ieħor',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Agħżel ħin fi żmien 90 jum u password minn 8 sa 256 bytes, jew ħalli l-password vojta.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Il-kopja falliet. Agħżel u kkopja l-link manwalment.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Il-links huma viżibbli biss meta maħluqa jew imdawra. Aġġustament waqfiet unlocks eżistenti.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Kopja lokali miftuħa. L-iffrankar ma jimmodifikax il-fajl OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Idħol fis-server oriġinali ta\' OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'L-ewwel, idħol f\'OciServe permezz ta\' Settings → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Erġa\' illoggja ma\' OciServe.',
+  'Niet ondersteund': 'Mhux appoġġjat',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Password ġdida (vojta = mhux mibdula)',
+  'Nieuwe link uitgeven': 'Ħruġ link ġdida',
+  'Nieuwe link uitgeven?': 'Ħruġ link ġdida?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe ma setax ilesti t-talba. Iċċekkja l-konnessjoni u erġa\' pprova.',
+  'OciServe-deellink openen': 'Iftaħ il-link tal-ishma ta\' OciServe',
+  'OciServe-deellinks beheren': 'Immaniġġja l-links tal-ishma ta\' OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Ir-riċevituri mhux se jkunu jistgħu aktar jirkupraw fajls wara. Kopji diġà mniżżla se jkomplu jeżistu.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Miftuħ jagħmel kopja lokali. L-iffrankar ma jbiddilx il-fajl tas-server.',
+  'Optioneel wachtwoord': 'Password fakultattiva',
+  'Passkeys beheren': 'Immaniġġja ċ-ċwievet tal-aċċess',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Wisq tentattivi. Stenna mill-inqas minuta u erġa\' pprova.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'M\'għandekx aċċess għal dawn il-fajls jew għal din l-azzjoni.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Aġġorna l-lista jekk ir-riżultat ikun inċert. Ħruġ rabta ġdida mis-sehem eżistenti; toħloqx it-tieni sehem.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Daħħal il-password jew erġa\' pprova.',
+  'Wachtwoord (indien vereist)': 'Password (jekk meħtieġ)',
+  'Wachtwoord verwijderen': 'Neħħi l-password',
+  'OciServe-bestanden': 'Fajls OciServe',
   'Koptekst neemt ': 'L-intestatura tieħu ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% tal-għoli tas-slide — il-kontenut m\'għadux għandu kważi l-ebda spazju.',

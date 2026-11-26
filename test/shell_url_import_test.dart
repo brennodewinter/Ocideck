@@ -1,5 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:ociserve_file_contract/ociserve_file_contract.dart';
+import 'package:ocideck/models/ociserve_file_origin.dart';
+import 'package:ocideck/widgets/dialogs/ociserve_file_browser.dart';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -112,6 +116,76 @@ void main() {
     );
     await tester.pumpAndSettle();
   }
+
+  testWidgets(
+    'OciServe opens through the validated bytes gate and preserves safe provenance',
+    (tester) async {
+      await pumpShell(tester);
+      await tester.tap(appBarIcon(Icons.more_vert));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('OciServe-bestanden'));
+      await tester.pumpAndSettle();
+      expect(find.byType(OciServeFileBrowser), findsOneWidget);
+      final bytes = Uint8List.fromList(
+        utf8.encode('---\nmarp: true\n---\n# Organisatiebron\n'),
+      );
+      Navigator.of(tester.element(find.byType(OciServeFileBrowser))).pop(
+        OciServeFileSelection(
+          bytes,
+          const CatalogEntry(
+            id: '12345678-1234-4234-8234-123456789abc',
+            name: 'Bron.md',
+            directory: false,
+          ),
+          const OciServeFileOrigin(
+            server: 'https://files.example',
+            organizationId: 'org',
+            fileId: '12345678-1234-4234-8234-123456789abc',
+            name: 'Bron.md',
+            etag: '"v1"',
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final origin = container.read(tabsProvider).current!.ociServeOrigin;
+      expect(origin?.etag, '"v1"');
+      expect(origin?.organizationId, 'org');
+      expect(container.read(tabsProvider).current!.origin, isNull);
+    },
+  );
+
+  testWidgets('sharing a local file explains the deliberate publication step', (
+    tester,
+  ) async {
+    await pumpShell(tester);
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Delen via OciServe…'));
+    await tester.pumpAndSettle();
+    expect(
+      find.textContaining('Delen vereist een gepubliceerd OciServe-bestand.'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets(
+    'a malformed OciServe share never becomes a generic import or recent source',
+    (tester) async {
+      await openUrlDialog(tester);
+      await type(
+        tester,
+        'https://files.example/api/v1/public/file-shares/open#canary-share-secret',
+      );
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Ophalen'));
+      await tester.pumpAndSettle();
+      expect(
+        find.textContaining('OciServe kon het verzoek niet afronden.'),
+        findsOneWidget,
+      );
+      expect(container.read(tabsProvider).current!.ociServeOrigin, isNull);
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('direct media URL proposes transcription before downloading', (
     tester,

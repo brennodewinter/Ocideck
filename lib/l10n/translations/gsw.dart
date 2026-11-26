@@ -1541,6 +1541,99 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Momentufnahm: {items} Elemänt, {bytes} Bytes',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Im Web verwaltet de Server s Sitzigscookie. Nöd verschickte Fortschritt bliibt nur i dem Tab.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'D Webaamäldig bruucht es OciServe-BFF under de gliiche HTTPS-Origin wie die OciDeck-Installation.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Erlaubed Si s Aamäldifänschter und klicked Si nomal uf Aamälde.',
+  'Openen in browser': 'Im Browser öffne',
+  'Aanpassen': 'Ändere',
+  'Hoofdmap': 'Hauptordner',
+  'Lokale tijdzone': 'Lokali Ziitzone',
+  'Map': 'Ordner',
+  'Vastgelegde versie': 'Feschtgleiti Version',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Änderige mache bestehendi Freischaltige ungültig. Empfänger müend de Link nomal öffne.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Nur läse. Ohni Ändziit gilt en nöie Link sibe Täg, höchstens nüünzg Täg.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Snapshot zum Läse. Nach em Schlüüsse oder Ablauf mues er nomal freigschaltet werde.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'De alti Link und bestehendi Freischaltige funktioniered nachher nümme.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'De Server bestimmt, öb Si Dateie läse dörfed. Wenn d Rächt fähled, chunnt e Mäldig.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'De Server teilt die veröffentlichte Version. Lokali Änderige werded nöd ufeglade.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'De Server hält de Ordner und höchstens 2.000 Iiträg als Snapshot zum Läse fescht. Spöteri Änderige ghöred nöd zu dem Link.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'D Sitzig het sich gänderet. Öffned Si d Quälle nomal.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'D Version het sich gänderet. Aktualisiered Si d Übersicht und versueched Si s nomal.',
+  'Deellink aanpassen': 'Freigabelink ändere',
+  'Deellink beheren': 'Freigabelink verwalte',
+  'Deellink intrekken?': 'Freigabelink zruggzieh?',
+  'Deellink maken': 'Freigabelink erstelle',
+  'Deellinks beheren': 'Freigabelinks verwalte',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Zum Teile bruucht s e veröffentlichte OciServe-Datei. Speichered Si e lokali Datei zerscht bewusst bi de Organisation und öffned Si si über OciServe.',
+  'Delen via OciServe…': 'Über OciServe teile…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'De Freigabelink isch nöd verfüegbar, abgloffe oder zruggzoge.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Die Installation unterstützt d OciServe-Aamäldig nur i de Desktop-App.',
+  'Deze map is leeg.': 'De Ordner isch läär.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'De Server unterstützt die Quälle nöd, oder s Ziil existiert nümme.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Die Datei isch z gross zum Öffne (höchstens 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'De Dateityp wird nöd unterstützt.',
+  'Einddatum en tijd': 'Änddatum und Ziit',
+  'Inloggen met passkey of andere methode':
+      'Mit Passkey oder ere andere Methode aamälde',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Wähled Si en Ziitpunkt innerhalb vo 90 Täg und es Passwort mit 8 bis 256 Bytes, oder lönd Si s Passwort läär.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopiere isch fehlgschlage. Wähled Si de Link uus und kopiered Si en vo Hand.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Links sind nur bim Erstelle oder Erneuere sichtbar. Änderige hebe bestehendi Freischaltige uf.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Lokali Kopie göffnet. Speichere änderet d OciServe-Datei nöd.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Mälded Si sich bim ursprüngliche OciServe-Server aa.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Mälded Si sich zerscht bi OciServe unter Iistellige → eLearning aa.',
+  'Meld u opnieuw aan bij OciServe.': 'Mälded Si sich nomal bi OciServe aa.',
+  'Niet ondersteund': 'Nöd unterstützt',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Nöis Passwort (läär = unveränderet)',
+  'Nieuwe link uitgeven': 'Nöie Link uusgäh',
+  'Nieuwe link uitgeven?': 'Nöie Link uusgäh?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe het d Aafrag nöd chöne abschlüüsse. Prüefed Si d Verbindig und versueched Si s nomal.',
+  'OciServe-deellink openen': 'OciServe-Freigabelink öffne',
+  'OciServe-deellinks beheren': 'OciServe-Freigabelinks verwalte',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Empfänger chönd nachher kei Dateie meh abrüefe. Scho abeglade Kopie bliibed erhalte.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Öffne erstellt e lokali Kopie. Speichere änderet d Serverdatei nöd.',
+  'Optioneel wachtwoord': 'Optionales Passwort',
+  'Passkeys beheren': 'Passkeys verwalte',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Z vill Versüech. Warted Si mindestens e Minute und versueched Si s nomal.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Si händ kei Zuegriff uf die Dateie oder die Aktion.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Aktualisiered Si d Lischt, wenn s Ergebnis unklar isch. Gäbed Si für d bestehendi Freigab en nöie Link uus; erstelled Si kei zweiti Freigab.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Gäbed Si s Passwort ii oder versueched Si s nomal.',
+  'Wachtwoord (indien vereist)': 'Passwort (wenn nötig)',
+  'Wachtwoord verwijderen': 'Passwort entferne',
+  'OciServe-bestanden': 'OciServe-Dateie',
   'Koptekst neemt ': 'D Chopfzile nimmt ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% vo de Slidehöchi — de Inhalt het fascht kei Platz meh.',

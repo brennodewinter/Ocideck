@@ -1537,6 +1537,98 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Momentuzņēmums: {items} vienumi, {bytes} baiti',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Tīmeklī sesijas sīkdatni pārvalda serveris. Nenosūtītais progress paliek tikai šajā cilnē.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Lai pieteiktos tīmeklī, vajadzīgs OciServe BFF tajā pašā HTTPS izcelsmē kā šī OciDeck instalācija.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Atļaujiet pieteikšanās logu un vēlreiz noklikšķiniet uz Pieteikties.',
+  'Openen in browser': 'Atvērt pārlūkprogrammā',
+  'Aanpassen': 'Pielāgot',
+  'Hoofdmap': 'Galvenais direktorijs',
+  'Lokale tijdzone': 'Vietējā laika josla',
+  'Map': 'Mape',
+  'Vastgelegde versie': 'Fiksētā versija',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Pielāgošana padarīs spēkā esošās atbloķēšanas nederīgas. Adresātiem ir atkārtoti jāatver saite.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Tikai lasāms. Bez beigu laika jauna saite ir derīga septiņas dienas; maksimāli deviņdesmit dienas.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Tikai lasāms momentuzņēmums. Pēc aizvēršanas vai derīguma termiņa beigām ir nepieciešama atkārtota atbloķēšana.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Pēc tam vecā saite un esošās atbloķēšanas vairs nedarbosies.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Serveris nosaka, vai jums ir atļauts lasīt failus. Ja atļauju trūkst, tiks parādīts ziņojums.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Serveris koplieto publicēto versiju. Vietējās izmaiņas netiek augšupielādētas.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Serveris tver šo mapi un līdz 2000 vienumiem kā tikai lasāmu momentuzņēmumu. Turpmākās izmaiņas tiek izslēgtas no šīs saites.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sesija ir mainīta. Atkal atveriet avotu.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versija ir mainīta. Atsvaidziniet pārskatu un mēģiniet vēlreiz.',
+  'Deellink aanpassen': 'Pielāgojiet kopīgošanas saiti',
+  'Deellink beheren': 'Pārvaldīt kopīgošanas saiti',
+  'Deellink intrekken?': 'Vai atsaukt kopīgošanas saiti?',
+  'Deellink maken': 'Izveidojiet kopīgošanas saiti',
+  'Deellinks beheren': 'Pārvaldiet koplietošanas saites',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Kopīgošanai nepieciešams publicēts OciServe fails. Vispirms apzināti saglabājiet lokālo failu organizācijā un atveriet to, izmantojot OciServe.',
+  'Delen via OciServe…': 'Kopīgojiet, izmantojot OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Šī koplietošanas saite nav pieejama, tās derīguma termiņš ir beidzies vai tā ir atsaukta.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Šī instalācija atbalsta OciServe pieteikšanos tikai darbvirsmas lietotnē.',
+  'Deze map is leeg.': 'Šī mape ir tukša.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Šis serveris neatbalsta šo resursu, vai arī mērķis vairs nepastāv.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Šis fails ir pārāk liels, lai to atvērtu (maksimums 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Šis faila veids netiek atbalstīts.',
+  'Einddatum en tijd': 'Beigu datums un laiks',
+  'Inloggen met passkey of andere methode':
+      'Pieteikties ar piekļuves atslēgu vai citu metodi',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Izvēlieties laiku 90 dienu laikā un paroli no 8 līdz 256 baitiem vai atstājiet paroli tukšu.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopēšana neizdevās. Atlasiet un manuāli kopējiet saiti.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Saites ir redzamas tikai tad, kad tās ir izveidotas vai pagrieztas. Pielāgošana pārtrauc esošās atbloķēšanas iespējas.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Vietējā kopija ir atvērta. Saglabāšana nemaina OciServe failu.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Piesakieties oriģinālajā OciServe serverī.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Vispirms piesakieties OciServe, izmantojot Iestatījumi → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Piesakieties OciServe vēlreiz.',
+  'Niet ondersteund': 'Nav atbalstīts',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Jauna parole (tukšs = nemainīts)',
+  'Nieuwe link uitgeven': 'Izdot jaunu saiti',
+  'Nieuwe link uitgeven?': 'Vai radāt jaunu saiti?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe nevarēja pabeigt pieprasījumu. Pārbaudiet savienojumu un mēģiniet vēlreiz.',
+  'OciServe-deellink openen': 'Atveriet OciServe koplietošanas saiti',
+  'OciServe-deellinks beheren': 'Pārvaldiet OciServe koplietošanas saites',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Pēc tam adresāti vairs nevarēs izgūt failus. Jau lejupielādētās kopijas turpinās pastāvēt.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open izveido lokālu kopiju. Saglabāšana nemaina servera failu.',
+  'Optioneel wachtwoord': 'Izvēles parole',
+  'Passkeys beheren': 'Pārvaldīt piekļuves atslēgas',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Pārāk daudz mēģinājumu. Uzgaidiet vismaz minūti un mēģiniet vēlreiz.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Jums nav piekļuves šiem failiem vai šai darbībai.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Atsvaidziniet sarakstu, ja rezultāts nav skaidrs. Izdot jaunu saiti no esošās koplietošanas; neveidojiet otru kopīgošanu.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Ievadiet paroli vai mēģiniet vēlreiz.',
+  'Wachtwoord (indien vereist)': 'Parole (ja nepieciešams)',
+  'Wachtwoord verwijderen': 'Noņemt paroli',
+  'OciServe-bestanden': 'OciServe faili',
   'Koptekst neemt ': 'Virsraksts aizņem ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% no slaida augstuma — saturam gandrīz vairs nav vietas.',

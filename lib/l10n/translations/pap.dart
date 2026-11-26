@@ -612,6 +612,99 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Kopia fiho: {items} elemento, {bytes} byte',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Riba web, e servidor ta maneha e cookie di seshon. Progreso ku no ta mandá ta keda solamente den e pestaña aki.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Pa drenta via web mester tin un BFF di OciServe riba e mesun origen HTTPS ku e instalashon di OciDeck aki.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Permití e bentana di entrada i primi Drenta atrobe.',
+  'Openen in browser': 'Habri den e browser',
+  'Aanpassen': 'Ahustá',
+  'Hoofdmap': 'Map prinsipal',
+  'Lokale tijdzone': 'Zona di ora lokal',
+  'Map': 'Map',
+  'Vastgelegde versie': 'Vershon fiho',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Ahustashon lo invalidá e desblokeonan eksistente. E destinatarionan mester habri e link bèk.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Lesa so. Sin un tempu di fin, un link nobo ta bálido pa shete dia; máksimo nobenta dia.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Instantánea pa lesamentu so. Re-desblokeo ta nesesario despues di sera òf kaduká.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'E link bieu i e desblokeonan eksistente lo no funshoná mas despues di esaki.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'E servidor ta determiná si bo tin mag di lesa archivonan. Un mensahe lo aparesé si pèrmitnan ta falta.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'E servidor ta kompartí e vershon publiká. Kambionan lokal no ta wòrdu subi.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'E servidor ta kapturá e map aki i te ku 2.000 artíkulo komo un snapshot pa lesamentu so. Kambionan siguiente ta wòrdu ekskluí for di e link aki.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'E sesion a wordo cambia. Habri e fuente atrobe.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'E vershon a wòrdu kambia. Refreská e bista general i purba atrobe.',
+  'Deellink aanpassen': 'Ahustá e link di kompartí',
+  'Deellink beheren': 'Manehá link di kompartí',
+  'Deellink intrekken?': 'Revoká link di kompartí?',
+  'Deellink maken': 'Krea un link di kompartí',
+  'Deellinks beheren': 'Manehá linknan di kompartí',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Pa kompartí ta rekerí un archivo di OciServe publiká. Promé konsientemente warda un archivo lokal na e organisashon i habri esaki via OciServe.',
+  'Delen via OciServe…': 'Kompartí via OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'E link di kompartí aki no ta disponibel òf a kaduká òf a wòrdu revoká.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'E instalashon aki ta sostené login di OciServe den e app di desktop so.',
+  'Deze map is leeg.': 'E map aki ta bashi.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'E servidor aki no ta sostené e rekurso aki, òf e meta no ta eksistí mas.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'E archivo aki ta muchu grandi pa habri (máksimo 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'E tipo di archivo aki no ta wòrdu sostené.',
+  'Einddatum en tijd': 'Fecha i ora di fin',
+  'Inloggen met passkey of andere methode':
+      'Drenta ku un passkey òf un otro método',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Skohe un tempu denter di 90 dia i un kontraseña di 8 pa 256 byte, òf laga e kontraseña blanku.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopia no a logra. Selektá i kopia e link manualmente.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Linknan ta visibel solamente ora nan ta wòrdu kreá òf rotá. Ahustando ta kibra e desblokeonan eksistente.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Kopia lokal a habri. Warda no ta modifiká e archivo OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Log in na e servidor original di OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Promé, drenta den OciServe via Settings → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Log in na OciServe atrobe.',
+  'Niet ondersteund': 'No ta sostené',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Password nobo (bashi = no a kambia)',
+  'Nieuwe link uitgeven': 'Emiti un link nobo',
+  'Nieuwe link uitgeven?': 'Emiti un link nobo?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe no por a kompletá e petishon. Kontrolá e konekshon i purba atrobe.',
+  'OciServe-deellink openen': 'Habri e link di kompartí OciServe',
+  'OciServe-deellinks beheren': 'Manehá linknan di kompartí OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'E destinatarionan lo no por rekuperá archivonan mas despues. Kopianan ku a wòrdu download kaba lo sigui eksistí.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Habri ta traha un kopia lokal. Warda no ta kambia e archivo di e servidor.',
+  'Optioneel wachtwoord': 'Kontraseña opshonal',
+  'Passkeys beheren': 'Gestioná passkeynan',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Demasiado intento. Warda por lo ménos un minüt i purba atrobe.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Bo no tin akseso na e archivonan aki òf e akshon aki.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Refreská e lista si e resultado ta insigur. Emiti un link nobo for di e parti eksistente; no krea un di dos parti.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Introdusí e kontraseña òf purba atrobe.',
+  'Wachtwoord (indien vereist)': 'Kontraseña (si ta nesesario)',
+  'Wachtwoord verwijderen': 'Kita kontraseña',
+  'OciServe-bestanden': 'Archivonan di OciServe',
   'Koptekst neemt ': 'E header ta okupá ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% di e haltura di e slide — e kontenido kasi no tin lugá mas.',

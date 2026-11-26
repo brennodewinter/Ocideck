@@ -1540,6 +1540,97 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Ögonblicksbild: {items} objekt, {bytes} byte',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'På webben hanterar servern sessionscookien. Framsteg som inte skickats finns bara kvar på den här fliken.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Webbinloggning kräver en OciServe-BFF på samma HTTPS-ursprung som denna OciDeck-installation.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Tillåt inloggningsfönstret och klicka på Logga in igen.',
+  'Openen in browser': 'Öppna i webbläsaren',
+  'Aanpassen': 'Justera',
+  'Hoofdmap': 'Huvudmapp',
+  'Lokale tijdzone': 'Lokal tidszon',
+  'Map': 'Mapp',
+  'Vastgelegde versie': 'Fast version',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Justering kommer att ogiltigförklara befintliga upplåsningar. Mottagarna måste öppna länken igen.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Endast läs. Utan en sluttid är en ny länk giltig i sju dagar; högst nittio dagar.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Skrivskyddad ögonblicksbild. Återupplåsning krävs efter stängning eller utgång.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Den gamla länken och befintliga upplåsningar kommer inte längre att fungera efter detta.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Servern avgör om du får läsa filer. Ett meddelande visas om behörigheter saknas.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Servern delar den publicerade versionen. Lokala ändringar laddas inte upp.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Servern fångar den här mappen och upp till 2 000 objekt som en skrivskyddad ögonblicksbild. Efterföljande ändringar exkluderas från denna länk.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sessionen har ändrats. Öppna källan igen.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Versionen har ändrats. Uppdatera översikten och försök igen.',
+  'Deellink aanpassen': 'Justera delningslänken',
+  'Deellink beheren': 'Hantera delningslänk',
+  'Deellink intrekken?': 'Återkalla delningslänken?',
+  'Deellink maken': 'Skapa delningslänk',
+  'Deellinks beheren': 'Hantera delningslänkar',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Delning kräver en publicerad OciServe-fil. Spara först medvetet en lokal fil på organisationen och öppna den via OciServe.',
+  'Delen via OciServe…': 'Dela via OciServe...',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Den här delningslänken är inte tillgänglig eller har löpt ut eller återkallats.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Den här installationen stöder endast OciServe-inloggning i skrivbordsappen.',
+  'Deze map is leeg.': 'Den här mappen är tom.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Den här servern stöder inte den här resursen, eller så finns målet inte längre.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Den här filen är för stor för att öppnas (max 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Denna filtyp stöds inte.',
+  'Einddatum en tijd': 'Slutdatum och tid',
+  'Inloggen met passkey of andere methode':
+      'Logga in med en inloggningsnyckel eller en annan metod',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Välj en tid inom 90 dagar och ett lösenord från 8 till 256 byte, eller lämna lösenordet tomt.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopieringen misslyckades. Välj och kopiera länken manuellt.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Länkar är bara synliga när de skapas eller roteras. Justering bryter befintliga upplåsningar.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Lokal kopia öppnad. Att spara ändrar inte OciServe-filen.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Logga in på den ursprungliga OciServe-servern.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Logga först in på OciServe via Inställningar → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Logga in på OciServe igen.',
+  'Niet ondersteund': 'Stöds inte',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Nytt lösenord (tomt = oförändrat)',
+  'Nieuwe link uitgeven': 'Utfärda ny länk',
+  'Nieuwe link uitgeven?': 'Utfärda ny länk?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe kunde inte slutföra begäran. Kontrollera anslutningen och försök igen.',
+  'OciServe-deellink openen': 'Öppna OciServe delningslänk',
+  'OciServe-deellinks beheren': 'Hantera OciServe-dellänkar',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Mottagarna kommer inte längre att kunna hämta filer efteråt. Redan nedladdade kopior kommer att fortsätta att finnas.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open gör en lokal kopia. Att spara ändrar inte serverfilen.',
+  'Optioneel wachtwoord': 'Valfritt lösenord',
+  'Passkeys beheren': 'Hantera inloggningsnycklar',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'För många försök. Vänta minst en minut och försök igen.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Du har inte åtkomst till dessa filer eller den här åtgärden.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Uppdatera listan om resultatet är osäkert. Utfärda en ny länk från den befintliga resursen; skapa inte en andra delning.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Ange lösenordet eller försök igen.',
+  'Wachtwoord (indien vereist)': 'Lösenord (om nödvändigt)',
+  'Wachtwoord verwijderen': 'Ta bort lösenordet',
+  'OciServe-bestanden': 'OciServe-filer',
   'Koptekst neemt ': 'Sidhuvudet tar upp ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% av bildens höjd — innehållet har nästan ingen plats kvar.',

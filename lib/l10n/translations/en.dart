@@ -766,6 +766,98 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Snapshot: {items} items, {bytes} bytes',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'On the web, the server manages the session cookie. Unsent progress stays only in this tab.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Web sign-in requires an OciServe BFF on the same HTTPS origin as this OciDeck installation.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Allow the sign-in window and click Sign in again.',
+  'Openen in browser': 'Open in browser',
+  'Aanpassen': 'Adjust',
+  'Hoofdmap': 'Main folder',
+  'Lokale tijdzone': 'Local time zone',
+  'Map': 'Folder',
+  'Vastgelegde versie': 'Pinned version',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Adjusting will invalidate existing unlocks. Recipients must reopen the link.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Read only. Without an end time, a new link is valid for seven days; maximum ninety days.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Read-only snapshot. Re-unlocking is required after closing or expiring.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'The old link and existing unlocks will no longer work after this.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'The server determines whether you are allowed to read files. A message will appear if permissions are missing.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'The server shares the published version. Local changes are not uploaded.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'The server captures this folder and up to 2,000 items as a read-only snapshot. Subsequent changes are excluded from this link.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'The session has been changed. Open the source again.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'The version has been changed. Refresh the overview and try again.',
+  'Deellink aanpassen': 'Adjust share link',
+  'Deellink beheren': 'Manage share link',
+  'Deellink intrekken?': 'Revoke share link?',
+  'Deellink maken': 'Create share link',
+  'Deellinks beheren': 'Manage sharing links',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Sharing requires a published OciServe file. First consciously save a local file at the organization and open it via OciServe.',
+  'Delen via OciServe…': 'Share via OciServe…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'This sharing link is unavailable or has expired or been revoked.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'This installation supports OciServe login in the desktop app only.',
+  'Deze map is leeg.': 'This folder is empty.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'This server does not support this resource, or the target no longer exists.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'This file is too large to open (maximum 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'This file type is not supported.',
+  'Einddatum en tijd': 'End date and time',
+  'Inloggen met passkey of andere methode':
+      'Sign in with a passkey or another method',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Choose a time within 90 days and a password from 8 to 256 bytes, or leave the password blank.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Copy failed. Select and copy the link manually.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Links are only visible when created or rotated. Adjusting breaks existing unlocks.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Local copy opened. Saving does not modify the OciServe file.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Log in to the original OciServe server.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'First, log in to OciServe via Settings → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Log in to OciServe again.',
+  'Niet ondersteund': 'Not supported',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'New password (empty = unchanged)',
+  'Nieuwe link uitgeven': 'Issue new link',
+  'Nieuwe link uitgeven?': 'Issue new link?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe was unable to complete the request. Check the connection and try again.',
+  'OciServe-deellink openen': 'Open OciServe share link',
+  'OciServe-deellinks beheren': 'Manage OciServe share links',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Recipients will no longer be able to retrieve files afterwards. Copies already downloaded will continue to exist.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open makes a local copy. Saving does not change the server file.',
+  'Optioneel wachtwoord': 'Optional password',
+  'Passkeys beheren': 'Manage passkeys',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Too many attempts. Wait at least a minute and try again.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'You do not have access to these files or this action.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Refresh the list if the result is uncertain. Issue a new link from the existing share; do not create a second share.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Enter the password or try again.',
+  'Wachtwoord (indien vereist)': 'Password (if required)',
+  'Wachtwoord verwijderen': 'Remove password',
+  'OciServe-bestanden': 'OciServe files',
   'Koptekst neemt ': 'Header text takes up ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% of the slide height — the content has almost no room left.',

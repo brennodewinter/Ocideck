@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ociserve_file_contract/ociserve_file_contract.dart';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
@@ -20,9 +21,11 @@ import '../../utils/log.dart';
 import '../../utils/zip_encryption.dart';
 import 'ociserve_http.dart';
 import 'ociserve_http_factory.dart';
+import 'ociserve_public_http_factory.dart';
 import 'ociserve_step_up.dart';
 import '../../utils/content_hash.dart';
 
+part 'ociserve_gateway_files.dart';
 part 'ociserve_gateway_planning.dart';
 part 'ociserve_gateway_exams.dart';
 part 'ociserve_gateway_intake.dart';
@@ -52,6 +55,7 @@ const int _evidenceCap = 64 * 1024 * 1024;
 /// Typed, bounded gateway for OciServe's learner-facing API.
 abstract class OciServeApi extends OciServePlanningApi
     implements
+        OciServeFilesApi,
         OciServeExamApi,
         OciServeIntakeApi,
         OciServeEvidenceItemApi,
@@ -221,6 +225,9 @@ abstract class OciServeGatewayBase implements OciServeApi, OciServeStepUpAware {
       var token = accessToken;
       var retried = false;
       while (true) {
+        if (OciServeRequestScope.current?.cancelled == true) {
+          throw const OciServeException('cancelled');
+        }
         final response = await _transport.send(
           method: method,
           url: url,
@@ -892,6 +899,7 @@ bool _hasMatchingImageSignature(List<int> bytes, String contentType) {
 /// [OciServeGatewayBase] plus de planning-methoden uit [_OciServePlanning].
 class OciServeGateway extends OciServeGatewayBase
     with
+        _OciServeFiles,
         _OciServePlanning,
         _OciServeExams,
         _OciServeIntake,

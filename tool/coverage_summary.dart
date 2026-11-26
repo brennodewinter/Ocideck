@@ -37,6 +37,15 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // PLATFORM HALF: browser Fetch + AbortController cannot load in the VM.
+  // Public grant protocol is covered in ociserve_files_test; build-web checks
+  // the browser binding. Native transport remains tested, with no exemption.
+  'lib/services/ociserve/ociserve_public_http_web.dart',
+  // PLATFORM HALF: popup, Fetch Metadata and cookie session binding require
+  // browser APIs. Pure header policy and provider transitions have VM tests;
+  // the wasm build verifies this conditional browser implementation.
+  'lib/services/ociserve/ociserve_web_session_browser.dart',
+
   // NO EXECUTABLE LINES: a const enum and language list; the template loader
   // and translation tests exercise its values, but lcov emits no file record.
   'lib/models/document_template.dart',

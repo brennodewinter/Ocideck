@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../models/ociserve_settings.dart';
 import '../../../services/secret_store.dart';
+import '../ociserve_passkeys_button.dart';
 import '../../../state/ociserve_provider.dart';
 import '../ociserve_invitation_dialog.dart';
 import '../../../theme/app_theme.dart';
@@ -61,7 +62,10 @@ class _OciServeIntegrationBodyState
   ) {
     final colors = Theme.of(context).colorScheme;
     final settings = state.settings;
-    if (!platformCanStoreSecrets) {
+    final browserSession = ref
+        .watch(ociServeWebSessionClientProvider)
+        .available;
+    if (!platformCanStoreSecrets && !browserSession) {
       return Text(
         l10n.d(
           'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.',
@@ -73,6 +77,12 @@ class _OciServeIntegrationBodyState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (browserSession)
+          Text(
+            l10n.d(
+              'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.',
+            ),
+          ),
         TextField(
           controller: _server,
           focusNode: _serverFocus,
@@ -85,36 +95,38 @@ class _OciServeIntegrationBodyState
           ),
         ),
         const SizedBox(height: 8),
-        CheckboxListTile(
-          contentPadding: EdgeInsets.zero,
-          dense: true,
-          value: settings.rememberLogin,
-          onChanged: busy
-              ? null
-              : (value) =>
-                    _save(settings.copyWith(rememberLogin: value ?? false)),
-          title: Text(l10n.d('Ingelogd blijven op dit apparaat')),
-          subtitle: Text(
-            l10n.d(
-              'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.',
+        if (!browserSession) ...[
+          CheckboxListTile(
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            value: settings.rememberLogin,
+            onChanged: busy
+                ? null
+                : (value) =>
+                      _save(settings.copyWith(rememberLogin: value ?? false)),
+            title: Text(l10n.d('Ingelogd blijven op dit apparaat')),
+            subtitle: Text(
+              l10n.d(
+                'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.',
+              ),
             ),
           ),
-        ),
-        CheckboxListTile(
-          contentPadding: EdgeInsets.zero,
-          dense: true,
-          value: settings.trustedInternal,
-          onChanged: busy || state.authenticated
-              ? null
-              : (value) =>
-                    _save(settings.copyWith(trustedInternal: value ?? false)),
-          title: Text(l10n.d('Vertrouwde interne server')),
-          subtitle: Text(
-            l10n.d(
-              'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.',
+          CheckboxListTile(
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            value: settings.trustedInternal,
+            onChanged: busy || state.authenticated
+                ? null
+                : (value) =>
+                      _save(settings.copyWith(trustedInternal: value ?? false)),
+            title: Text(l10n.d('Vertrouwde interne server')),
+            subtitle: Text(
+              l10n.d(
+                'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.',
+              ),
             ),
           ),
-        ),
+        ],
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(10),
@@ -195,6 +207,7 @@ class _OciServeIntegrationBodyState
               ),
             ],
           ),
+          OciServePasskeysButton(enabled: !busy),
           if (state.pendingReports > 0)
             Text(
               l10n
@@ -211,6 +224,13 @@ class _OciServeIntegrationBodyState
       spacing: 8,
       runSpacing: 8,
       children: [
+        if (busy && ref.watch(ociServeWebSessionClientProvider).available)
+          TextButton(
+            onPressed: () =>
+                ref.read(ociServeProvider.notifier).cancelBrowserLogin(),
+            child: Text(l10n.t('cancel')),
+          ),
+
         FilledButton.icon(
           onPressed: busy ? null : () => _login(settings),
           icon: busy
@@ -219,7 +239,7 @@ class _OciServeIntegrationBodyState
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : const Icon(Icons.login, size: 18),
-          label: Text(l10n.d('Inloggen')),
+          label: Text(l10n.d('Inloggen met passkey of andere methode')),
         ),
         TextButton(
           onPressed: busy ? null : () => OciServeInvitationDialog.show(context),
@@ -269,12 +289,19 @@ class _OciServeIntegrationBodyState
   );
 
   Future<void> _login(OciServeSettings current) async {
+    ref.read(ociServeProvider.notifier).prepareBrowserLogin();
     await _save(current);
     if (!mounted) return;
     await ref.read(ociServeProvider.notifier).login();
   }
 
   String _errorText(AppLocalizations l10n, String code) => switch (code) {
+    'web_origin_required' || 'web_session_unavailable' => l10n.d(
+      'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.',
+    ),
+    'browser_refused' => l10n.d(
+      'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.',
+    ),
     'https_required' => l10n.d('Gebruik een HTTPS-adres voor eLearning.'),
     'invalid_url' => l10n.d('Vul een geldig eLearning-adres in.'),
     'no_active_membership' => l10n.d(

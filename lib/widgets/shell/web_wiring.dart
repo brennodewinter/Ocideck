@@ -26,6 +26,11 @@ Future<void> _openDeckDeepLink(
   if (!isWebPlatform || !isMounted()) return;
   final deckUrl = deckDeepLinkFrom(Uri.base);
   if (deckUrl == null) return;
+  if (isOciServeShareUrl(deckUrl)) {
+    replaceAddressBar(withoutDeckParam(Uri.base));
+    await tryOpenOciServeShare(context, ref, deckUrl);
+    return;
+  }
   // De deck-deeplink kent geen inhoudsrouter: een feed-URL is hier gewoon
   // geen presentatie en krijgt de eerlijke misluk-melding.
   final result = (await _importUrlWeb(context, ref, deckUrl)).result;

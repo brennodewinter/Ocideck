@@ -1545,6 +1545,99 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Snimka: {items} stavki, {bytes} bajtova',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Na webu poslužitelj upravlja kolačićem sesije. Neposlani napredak ostaje samo u ovoj kartici.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Web prijava zahtijeva OciServe BFF na istom HTTPS izvoru kao ova instalacija OciDecka.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Dopustite prozor za prijavu i ponovno kliknite Prijava.',
+  'Openen in browser': 'Otvori u pregledniku',
+  'Aanpassen': 'prilagoditi',
+  'Hoofdmap': 'Glavna mapa',
+  'Lokale tijdzone': 'Lokalna vremenska zona',
+  'Map': 'Mapa',
+  'Vastgelegde versie': 'Fiksna verzija',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Podešavanje će poništiti postojeća otključavanja. Primatelji moraju ponovno otvoriti vezu.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Samo za čitanje. Bez vremena završetka, nova poveznica vrijedi sedam dana; maksimalno devedeset dana.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Snimka samo za čitanje. Potrebno je ponovno otključavanje nakon zatvaranja ili isteka.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Stara veza i postojeća otključavanja nakon ovoga više neće raditi.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Poslužitelj određuje smijete li čitati datoteke. Poruka će se pojaviti ako nedostaju dopuštenja.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Poslužitelj dijeli objavljenu verziju. Lokalne promjene se ne učitavaju.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Poslužitelj snima ovu mapu i do 2000 stavki kao snimku samo za čitanje. Naknadne izmjene su isključene s ove poveznice.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Sjednica je promijenjena. Ponovno otvorite izvor.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Verzija je promijenjena. Osvježite pregled i pokušajte ponovno.',
+  'Deellink aanpassen': 'Podesite vezu za dijeljenje',
+  'Deellink beheren': 'Upravljanje dijeljenjem veze',
+  'Deellink intrekken?': 'Opozvati vezu za dijeljenje?',
+  'Deellink maken': 'Stvorite vezu za dijeljenje',
+  'Deellinks beheren': 'Upravljanje vezama za dijeljenje',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Dijeljenje zahtijeva objavljenu OciServe datoteku. Prvo svjesno spremite lokalnu datoteku u organizaciji i otvorite je putem OciServea.',
+  'Delen via OciServe…': 'Dijeli putem OciServea…',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Ova veza za dijeljenje nije dostupna ili je istekla ili je opozvana.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Ova instalacija podržava prijavu na OciServe samo u aplikaciji za stolna računala.',
+  'Deze map is leeg.': 'Ova mapa je prazna.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Ovaj poslužitelj ne podržava ovaj resurs ili cilj više ne postoji.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Ova je datoteka prevelika za otvaranje (maksimalno 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.':
+      'Ova vrsta datoteke nije podržana.',
+  'Einddatum en tijd': 'Datum i vrijeme završetka',
+  'Inloggen met passkey of andere methode':
+      'Prijava pristupnim ključem ili drugom metodom',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Odaberite vrijeme unutar 90 dana i lozinku od 8 do 256 bajtova ili ostavite lozinku praznom.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Kopiranje nije uspjelo. Ručno odaberite i kopirajte vezu.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Linkovi su vidljivi samo kada su kreirani ili rotirani. Podešavanjem se prekidaju postojeća otključavanja.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Otvorena lokalna kopija. Spremanjem se ne mijenja datoteka OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Prijavite se na izvorni OciServe poslužitelj.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Prvo se prijavite na OciServe preko Postavke → eUčenje.',
+  'Meld u opnieuw aan bij OciServe.': 'Ponovno se prijavite na OciServe.',
+  'Niet ondersteund': 'Nije podržano',
+  'Nieuw wachtwoord (leeg = ongewijzigd)':
+      'Nova lozinka (prazna = nepromijenjena)',
+  'Nieuwe link uitgeven': 'Izdaj novi link',
+  'Nieuwe link uitgeven?': 'Izdati novu vezu?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe nije mogao ispuniti zahtjev. Provjerite vezu i pokušajte ponovno.',
+  'OciServe-deellink openen': 'Otvorite OciServe link za dijeljenje',
+  'OciServe-deellinks beheren': 'Upravljajte vezama za dijeljenje OciServea',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Primatelji nakon toga više neće moći dohvatiti datoteke. Kopije koje su već preuzete i dalje će postojati.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open radi lokalnu kopiju. Spremanjem se ne mijenja datoteka poslužitelja.',
+  'Optioneel wachtwoord': 'Neobavezna lozinka',
+  'Passkeys beheren': 'Upravljanje pristupnim ključevima',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Previše pokušaja. Pričekajte barem minutu i pokušajte ponovno.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Nemate pristup ovim datotekama ili ovoj radnji.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Osvježite popis ako je rezultat nesiguran. Izdajte novu vezu iz postojećeg dijeljenja; nemojte kreirati drugu dionicu.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Unesite lozinku ili pokušajte ponovo.',
+  'Wachtwoord (indien vereist)': 'Lozinka (ako je potrebna)',
+  'Wachtwoord verwijderen': 'Ukloni lozinku',
+  'OciServe-bestanden': 'OciServe datoteke',
   'Koptekst neemt ': 'Zaglavlje zauzima ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% visine slajda — sadržaju gotovo ne preostaje prostora.',

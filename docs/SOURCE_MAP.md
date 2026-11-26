@@ -7,6 +7,14 @@ complements [`ARCHITECTURE.md`](ARCHITECTURE.md) (the *why* and the cross-cuttin
 flows) with a *what-is-this-file* lookup. For the on-disk file format see
 [`FILE_FORMAT.md`](FILE_FORMAT.md).
 
+## OciServe files, sharing and passkeys
+
+- `lib/models/ociserve_file_origin.dart` — credential-free, session-only provenance for a local copy of an organization file or public snapshot.
+- `lib/widgets/dialogs/ociserve_file_browser.dart` — tenant catalog and isolated public snapshot browser, with paging, breadcrumbs and cancellation.
+- `lib/widgets/dialogs/ociserve_file_shares.dart` — explicit link issue/copy, password and expiry options, conflict recovery, rotation and revocation.
+- `lib/widgets/dialogs/ociserve_passkeys_button.dart` — provider-capability-driven account action; the notifier binds its destination to the authenticated issuer.
+- `lib/widgets/shell/ociserve_file_actions.dart` — file-opening and share-URL routing before generic import; safe provenance after the existing bytes gate.
+
 ## Extension consent and browser storage
 
 - `lib/services/browser_deck_store.dart` — bounded package storage in the browser, independent keys per presentation, and preservation during settings reset.

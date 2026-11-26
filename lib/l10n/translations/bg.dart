@@ -1560,6 +1560,98 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Momentopname: {items} onderdelen, {bytes} bytes':
+      'Моментна снимка: {items} елемента, {bytes} байта',
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'В уебверсията сървърът управлява бисквитката на сесията. Неизпратеният напредък остава само в този раздел.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Уебвходът изисква OciServe BFF на същия HTTPS произход като тази инсталация на OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Разрешете прозореца за вход и натиснете Вход отново.',
+  'Openen in browser': 'Отворете в браузъра',
+  'Aanpassen': 'Настройте',
+  'Hoofdmap': 'Основна папка',
+  'Lokale tijdzone': 'Местна часова зона',
+  'Map': 'Папка',
+  'Vastgelegde versie': 'Фиксирана версия',
+  'Aanpassen maakt bestaande ontgrendelingen ongeldig. Ontvangers moeten de link opnieuw openen.':
+      'Корекцията ще обезсили съществуващите отключвания. Получателите трябва да отворят отново връзката.',
+  'Alleen lezen. Zonder eindtijd is een nieuwe link zeven dagen geldig; maximaal negentig dagen.':
+      'Само за четене. Без краен час нова връзка е валидна седем дни; максимум деветдесет дни.',
+  'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
+      'Моментна снимка само за четене. Необходимо е повторно отключване след затваряне или изтичане.',
+  'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
+      'Старата връзка и съществуващите отключвания вече няма да работят след това.',
+  'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
+      'Сървърът определя дали имате право да четете файлове. Ще се появи съобщение, ако липсват разрешения.',
+  'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
+      'Сървърът споделя публикуваната версия. Локалните промени не се качват.',
+  'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
+      'Сървърът улавя тази папка и до 2000 елемента като моментна снимка само за четене. Последващите промени са изключени от тази връзка.',
+  'De sessie is gewijzigd. Open de bron opnieuw.':
+      'Сесията е променена. Отворете източника отново.',
+  'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
+      'Версията е сменена. Обновете прегледа и опитайте отново.',
+  'Deellink aanpassen': 'Коригирайте връзката за споделяне',
+  'Deellink beheren': 'Управление на връзката за споделяне',
+  'Deellink intrekken?': 'Да се отмени линк за споделяне?',
+  'Deellink maken': 'Създайте връзка за споделяне',
+  'Deellinks beheren': 'Управление на връзките за споделяне',
+  'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
+      'Споделянето изисква публикуван OciServe файл. Първо съзнателно запазете локален файл в организацията и го отворете чрез OciServe.',
+  'Delen via OciServe…': 'Споделете чрез OciServe...',
+  'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
+      'Тази връзка за споделяне не е достъпна или е изтекла или е отменена.',
+  'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':
+      'Тази инсталация поддържа влизане в OciServe само в настолното приложение.',
+  'Deze map is leeg.': 'Тази папка е празна.',
+  'Deze server ondersteunt deze bron niet, of het doel bestaat niet meer.':
+      'Този сървър не поддържа този ресурс или целта вече не съществува.',
+  'Dit bestand is te groot om te openen (maximaal 32 MB).':
+      'Този файл е твърде голям за отваряне (максимум 32 MB).',
+  'Dit bestandstype wordt niet ondersteund.': 'Този тип файл не се поддържа.',
+  'Einddatum en tijd': 'Крайна дата и час',
+  'Inloggen met passkey of andere methode':
+      'Вход с ключ за достъп или друг метод',
+  'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
+      'Изберете време в рамките на 90 дни и парола от 8 до 256 байта или оставете паролата празна.',
+  'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
+      'Неуспешно копиране. Изберете и копирайте връзката ръчно.',
+  'Links zijn alleen bij aanmaak of rotatie zichtbaar. Aanpassen verbreekt bestaande ontgrendelingen.':
+      'Връзките се виждат само когато са създадени или завъртани. Регулирането прекъсва съществуващите отключвания.',
+  'Lokale kopie geopend. Opslaan wijzigt het OciServe-bestand niet.':
+      'Отворено локално копие. Запазването не променя файла OciServe.',
+  'Meld u aan bij de oorspronkelijke OciServe-server.':
+      'Влезте в оригиналния сървър на OciServe.',
+  'Meld u eerst aan bij OciServe via Instellingen → eLearning.':
+      'Първо, влезте в OciServe чрез Settings → eLearning.',
+  'Meld u opnieuw aan bij OciServe.': 'Влезте отново в OciServe.',
+  'Niet ondersteund': 'Не се поддържа',
+  'Nieuw wachtwoord (leeg = ongewijzigd)': 'Нова парола (празна = непроменена)',
+  'Nieuwe link uitgeven': 'Издаване на нова връзка',
+  'Nieuwe link uitgeven?': 'Издаване на нова връзка?',
+  'OciServe kon het verzoek niet afronden. Controleer de verbinding en probeer opnieuw.':
+      'OciServe не успя да изпълни заявката. Проверете връзката и опитайте отново.',
+  'OciServe-deellink openen': 'Отворете връзката за споделяне на OciServe',
+  'OciServe-deellinks beheren':
+      'Управление на връзките за споделяне на OciServe',
+  'Ontvangers kunnen daarna geen bestanden meer ophalen. Reeds gedownloade kopieën blijven bestaan.':
+      'Получателите вече няма да могат да извличат файлове след това. Вече изтеглените копия ще продължат да съществуват.',
+  'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
+      'Open прави локално копие. Запазването не променя сървърния файл.',
+  'Optioneel wachtwoord': 'Парола по избор',
+  'Passkeys beheren': 'Управление на ключове за достъп',
+  'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
+      'Твърде много опити. Изчакайте поне минута и опитайте отново.',
+  'U hebt geen toegang tot deze bestanden of deze actie.':
+      'Нямате достъп до тези файлове или това действие.',
+  'Vernieuw de lijst als het resultaat onzeker is. Geef vanuit de bestaande share een nieuwe link uit; maak geen tweede share.':
+      'Обновете списъка, ако резултатът е несигурен. Издаване на нова връзка от съществуващия дял; не създавайте второ споделяне.',
+  'Voer het wachtwoord in of probeer opnieuw.':
+      'Въведете паролата или опитайте отново.',
+  'Wachtwoord (indien vereist)': 'Парола (ако е необходима)',
+  'Wachtwoord verwijderen': 'Премахнете паролата',
+  'OciServe-bestanden': 'OciServe файлове',
   'Koptekst neemt ': 'Горният колонтитул заема ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% от височината на слайда — на съдържанието почти не остава място.',

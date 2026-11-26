@@ -272,6 +272,9 @@ class TabInfo {
   /// opslaan de herkomst volgt, moet die vraag één antwoord hebben.
   StorageOrigin? origin;
 
+  /// Session-only provenance; saving a local copy never writes to this source.
+  OciServeFileOrigin? ociServeOrigin;
+
   /// De herkomst als die van WebDAV komt, anders `null`. De backends werken met
   /// hun eigen type; deze accessors houden dat leesbaar zonder het ene veld op
   /// te geven. Iets toekennen vervangt een herkomst van een andere soort — dat
