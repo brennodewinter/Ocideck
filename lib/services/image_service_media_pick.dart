@@ -81,13 +81,7 @@ extension ImageServiceMediaTransport on ImageService {
         Uri.tryParse(path)?.hasScheme == true && !p.isAbsolute(path)) {
       return null;
     }
-    // Already-relative media stay in place on ordinary saves; only a new
-    // destination needs to copy their bytes from the original project.
-    if (!p.isAbsolute(path) &&
-        sourceProjectPath != null &&
-        p.equals(p.normalize(sourceProjectPath), p.dirname(mediaDir.path))) {
-      return null;
-    }
+    if (_isStoredInProject(path, sourceProjectPath, mediaDir)) return null;
     final root = AssetStaging.isStagedPath(path)
         ? AssetStaging.rootPath
         : sourceProjectPath;
@@ -97,9 +91,17 @@ extension ImageServiceMediaTransport on ImageService {
       logWarning('ImageService.copyMedia: rejected (exceeds size cap)');
       return null;
     }
-    return _copyToDir(trusted, mediaDir);
+    return _copyInto(trusted, mediaDir, 'media');
   }
-
-  Future<String?> _copyToDir(String sourcePath, Directory destDir) async =>
-      _copyInto(sourcePath, destDir, 'media');
 }
+
+/// Relative assets stay in place on ordinary saves. Save as instead reads them
+/// from the original project, preserving the fast path without losing bytes.
+bool _isStoredInProject(
+  String path,
+  String? sourceProject,
+  Directory assetDir,
+) =>
+    !p.isAbsolute(path) &&
+    sourceProject != null &&
+    p.equals(p.normalize(sourceProject), p.dirname(assetDir.path));

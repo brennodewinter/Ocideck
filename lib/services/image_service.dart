@@ -803,14 +803,7 @@ class ImageService {
       );
     }
     if (sourcePath.isEmpty) return null;
-    // Relative paths already stored in this project need no I/O on ordinary
-    // saves. Save as must instead read them from the original project.
-    if (!p.isAbsolute(sourcePath) &&
-        (sourceProjectPath == null ||
-            p.equals(
-              p.normalize(sourceProjectPath),
-              p.dirname(imagesDir.path),
-            ))) {
+    if (_isStoredInProject(sourcePath, sourceProjectPath, imagesDir)) {
       return null;
     }
     final trustedSource = AssetStaging.isStagedPath(sourcePath)
