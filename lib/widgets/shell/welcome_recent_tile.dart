@@ -68,7 +68,7 @@ class _RecentFileTile extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 2),
                 // Presentatie of document: hetzelfde onderscheid als in de
                 // openschermen, zodat je vóór het klikken weet wat je opent.
-                child: Tooltip(
+                child: _tooltipNode(
                   message: markdownKindLabel(l10n, file.kind),
                   child: Icon(
                     markdownKindIcon(file.kind),
@@ -100,7 +100,7 @@ class _RecentFileTile extends StatelessWidget {
                           // Remote opgehaald (Nextcloud/URL): de tooltip
                           // toont de bron zelf, dus die heeft geen vertaling
                           // nodig.
-                          Tooltip(
+                          _tooltipNode(
                             message: origin!,
                             child: Icon(
                               Icons.cloud_outlined,
@@ -176,6 +176,19 @@ class _RecentFileTile extends StatelessWidget {
     );
   }
 }
+
+/// Eigen semantieknode om een [Tooltip] op een kind dat er zelf geen vormt
+/// (zoals een kale `Icon`). Zonder eigen node meermerged de
+/// `traversalParentIdentifier` van de tooltip op de ouder-node met die van
+/// andere tooltip-ankers — en `SemanticsConfiguration.absorb` bewaart er
+/// maar één. De bubble van de verloren identifier graft daarna nooit en
+/// blijft voorgoed als wees in elke semantiekupdate, wat `ui::AXTree` laat
+/// verwerpen (#3268, flutter/flutter#197194).
+Widget _tooltipNode({required String message, required Widget child}) =>
+    Semantics(
+      container: true,
+      child: Tooltip(message: message, child: child),
+    );
 
 /// Klein badge-blokje in de metadataregel (TLP in officiële kleuren op
 /// zwart, exportformaat in neutrale tint).

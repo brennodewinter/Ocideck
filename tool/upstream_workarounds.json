@@ -80,6 +80,26 @@
       "decision": "Keep: the merged #193372 fix b304cf18b6864d141cf08e26a07898901cddb4b5 is not an ancestor of Flutter 3.50.0 revision ab2912035e160d9cad6306df307576da6128ebdb; engine recovery report #196872 remains open.",
       "reviewed_flutter": "3.50.0",
       "reviewed_at": "2026-11-26"
+    },
+    {
+      "id": "tooltip-traversal-parent-merge",
+      "issue": 3268,
+      "observed_flutter": "3.50.0",
+      "upstream": [
+        {
+          "number": 197194,
+          "state": "open"
+        }
+      ],
+      "pins": [
+        "lib/widgets/shell/welcome_recent_tile.dart",
+        "lib/widgets/editors/_editor_field.dart",
+        "test/axtree_consistency_test.dart"
+      ],
+      "verification": "Verify the pinned SDK's SemanticsConfiguration.isCompatibleWith guards _traversalParentIdentifier like _traversalChildIdentifier. Without the Semantics(container: true) wrappers run test/axtree_consistency_test.dart: the tooltip sweep must not report 'will not be in the tree' orphans. Remove each container wrap with its register pins together after validation.",
+      "decision": "Keep: upstream #197194 remains open on Flutter 3.50.0; absorb() drops a second merged traversalParentIdentifier, leaving the tooltip bubble a permanent orphan that fails every AXTree update.",
+      "reviewed_flutter": "3.50.0",
+      "reviewed_at": "2026-11-26"
     }
   ]
 }
