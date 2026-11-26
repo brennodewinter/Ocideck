@@ -1554,9 +1554,9 @@ const _dutchSourceAddEt = <String, String>{
   'Alleen-lezen snapshot. Na sluiten of verlopen is opnieuw ontgrendelen nodig.':
       'Kirjutuskaitstud hetktõmmis. Re-unlocking is required after closing or expiring.',
   'De oude link en bestaande ontgrendelingen werken daarna niet meer.':
-      'The old link and existing unlocks will no longer work after this.',
+      'Vana link ja olemasolevad juurdepääsuload ei tööta seejärel enam.',
   'De server bepaalt of u bestanden mag lezen. Bij ontbrekende rechten verschijnt een melding.':
-      'The server determines whether you are allowed to read files. A message will appear if permissions are missing.',
+      'Server määrab, kas sul on failide lugemise õigus. Puuduvate õiguste korral kuvatakse teade.',
   'De server deelt de gepubliceerde versie. Lokale wijzigingen worden niet geüpload.':
       'Server jagab avaldatud versiooni. Kohalikke muudatusi ei laadita üles.',
   'De server legt deze map en maximaal 2.000 items vast als alleen-lezen snapshot. Latere wijzigingen vallen buiten deze link.':
@@ -1565,14 +1565,14 @@ const _dutchSourceAddEt = <String, String>{
       'Seanss on muudetud. Avage allikas uuesti.',
   'De versie is gewijzigd. Vernieuw het overzicht en probeer opnieuw.':
       'Versiooni on muudetud. Värskendage ülevaadet ja proovige uuesti.',
-  'Deellink aanpassen': 'Adjust share link',
-  'Deellink beheren': 'Manage share link',
-  'Deellink intrekken?': 'Revoke share link?',
-  'Deellink maken': 'Create share link',
-  'Deellinks beheren': 'Manage sharing links',
+  'Deellink aanpassen': 'Muuda jagamislinki',
+  'Deellink beheren': 'Halda jagamislinki',
+  'Deellink intrekken?': 'Tühistada jagamislink?',
+  'Deellink maken': 'Loo jagamislink',
+  'Deellinks beheren': 'Halda jagamislinke',
   'Delen vereist een gepubliceerd OciServe-bestand. Sla een lokaal bestand eerst bewust op bij de organisatie en open het via OciServe.':
       'Jagamiseks on vaja avaldatud OciServe faili. Esmalt salvestage teadlikult organisatsioonis kohalik fail ja avage see OciServe\'i kaudu.',
-  'Delen via OciServe…': 'Share via OciServe…',
+  'Delen via OciServe…': 'Jaga OciServe’i kaudu…',
   'Deze deellink is niet beschikbaar of is verlopen of ingetrokken.':
       'See jagamislink pole saadaval või on aegunud või tühistatud.',
   'Deze installatie ondersteunt OciServe-aanmelding alleen in de desktopapp.':

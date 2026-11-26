@@ -1642,7 +1642,7 @@ const _dutchSourceAddLa = <String, String>{
       'Ingressus signum vel iterum conare.',
   'Wachtwoord (indien vereist)': 'Password (si opus fuerit)',
   'Wachtwoord verwijderen': 'Aufer password',
-  'OciServe-bestanden': 'OciServe files',
+  'OciServe-bestanden': 'Fasciculi OciServe',
   'Koptekst neemt ': 'Titulus superior occupat ',
   '% van de diahoogte in — de inhoud heeft bijna geen ruimte meer.':
       '% altitudinis imaginis — contento paene nullus locus superest.',
