@@ -136,7 +136,11 @@ class _OciServeFileSharesState extends ConsumerState<OciServeFileShares> {
     final options = rotate
         ? null
         : await _ShareOptions.show(context, share: share);
-    if (!rotate && options == null || !mounted || _invalidated) return;
+    if (!rotate && options == null) return;
+    if (!mounted || _invalidated) {
+      options?.clear();
+      return;
+    }
     await _run(() async {
       try {
         final result = await _call(
@@ -397,9 +401,9 @@ class _ShareOptions extends StatefulWidget {
 
 class _ShareOptionsState extends State<_ShareOptions> {
   final _password = TextEditingController();
-  late final _expiry = TextEditingController(
-    text: widget.share?.expiresAt.toLocal().toIso8601String() ?? '',
-  );
+  late final _initialExpiry =
+      widget.share?.expiresAt.toLocal().toIso8601String() ?? '';
+  late final _expiry = TextEditingController(text: _initialExpiry);
   bool _clear = false;
   String? _error;
   @override
@@ -413,7 +417,11 @@ class _ShareOptionsState extends State<_ShareOptions> {
   void _submit() {
     try {
       final value = _expiry.text.trim();
-      final expiry = value.isEmpty ? null : DateTime.parse(value);
+      final expiry = value.isEmpty
+          ? null
+          : widget.share != null && value == _initialExpiry
+          ? widget.share!.expiresAt
+          : parseShareExpiryInput(value);
       if (value.isNotEmpty && !value.contains('T')) {
         throw const FormatException();
       }

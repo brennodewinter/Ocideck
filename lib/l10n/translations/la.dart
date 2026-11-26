@@ -1595,7 +1595,8 @@ const _dutchSourceAddLa = <String, String>{
       'Scapus nimis magnus est ad aperiendum (maximum 32 MB).',
   'Dit bestandstype wordt niet ondersteund.': 'Hoc genus lima non valet.',
   'Einddatum en tijd': 'Finis date and time',
-  'Inloggen met passkey of andere methode': 'Log in in passkey vel modum',
+  'Inloggen met passkey of andere methode':
+      'Clave accessus vel alia ratione inire',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Elige tempus intra 90 dies et tesseram ab 8 ad 256 bytes, vel tesseram blank relinque.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1622,7 +1623,7 @@ const _dutchSourceAddLa = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Apertum facit exemplum loci. Servans file servo non mutat.',
   'Optioneel wachtwoord': 'Libitum password',
-  'Passkeys beheren': 'Curo passkeys',
+  'Passkeys beheren': 'Claves accessus administrare',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Nimis multi inceptis. Exspecta saltem minutam et iterum conare.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

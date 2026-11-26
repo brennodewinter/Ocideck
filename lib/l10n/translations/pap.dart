@@ -656,7 +656,8 @@ const _dutchSourceAddPap = {
   'Dit bestandstype wordt niet ondersteund.':
       'E tipo di archivo aki no ta wòrdu sostené.',
   'Einddatum en tijd': 'Fecha i ora di fin',
-  'Inloggen met passkey of andere methode': 'Log in ku passkey òf otro método',
+  'Inloggen met passkey of andere methode':
+      'Drenta ku un passkey òf un otro método',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Skohe un tempu denter di 90 dia i un kontraseña di 8 pa 256 byte, òf laga e kontraseña blanku.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

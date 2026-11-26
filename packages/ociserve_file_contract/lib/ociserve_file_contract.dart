@@ -185,3 +185,42 @@ void validateSharePassword(String value) {
     throw const FormatException('password must contain eight to 256 bytes');
   }
 }
+
+/// Rejects normalized invalid calendar values and nonexistent local wall times.
+DateTime parseShareExpiryInput(String value) {
+  final match = RegExp(
+    r'^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d{1,6})?)?(Z|[+-]\d{2}:\d{2})?$',
+  ).firstMatch(value);
+  if (match == null) throw const FormatException('invalid expiry format');
+  final fields = [
+    for (var i = 1; i <= 6; i++) int.parse(match.group(i) ?? '0'),
+  ];
+  final normalized = DateTime.utc(
+    fields[0],
+    fields[1],
+    fields[2],
+    fields[3],
+    fields[4],
+    fields[5],
+  );
+  bool matches(DateTime date) =>
+      date.year == fields[0] &&
+      date.month == fields[1] &&
+      date.day == fields[2] &&
+      date.hour == fields[3] &&
+      date.minute == fields[4] &&
+      date.second == fields[5];
+  if (!matches(normalized))
+    throw const FormatException('invalid calendar value');
+  final offset = match.group(7);
+  if (offset != null &&
+      offset != 'Z' &&
+      (int.parse(offset.substring(1, 3)) > 23 ||
+          int.parse(offset.substring(4)) > 59)) {
+    throw const FormatException('invalid UTC offset');
+  }
+  final date = DateTime.parse(value);
+  if (offset == null && !matches(date))
+    throw const FormatException('nonexistent local time');
+  return date;
+}

@@ -1589,7 +1589,7 @@ const _dutchSourceAddSk = <String, String>{
       'Tento typ súboru nie je podporovaný.',
   'Einddatum en tijd': 'Dátum a čas ukončenia',
   'Inloggen met passkey of andere methode':
-      'Prihláste sa pomocou prístupového kľúča alebo iným spôsobom',
+      'Prihlásiť sa prístupovým kľúčom alebo iným spôsobom',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Zvoľte si čas do 90 dní a heslo od 8 do 256 bajtov, alebo nechajte heslo prázdne.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1616,7 +1616,7 @@ const _dutchSourceAddSk = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open vytvorí lokálnu kópiu. Uložením sa nezmení súbor servera.',
   'Optioneel wachtwoord': 'Voliteľné heslo',
-  'Passkeys beheren': 'Spravujte prístupové kľúče',
+  'Passkeys beheren': 'Spravovať prístupové kľúče',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Príliš veľa pokusov. Počkajte aspoň minútu a skúste to znova.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

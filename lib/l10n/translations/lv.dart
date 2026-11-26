@@ -1582,7 +1582,7 @@ const _dutchSourceAddLv = <String, String>{
       'Šis faila veids netiek atbalstīts.',
   'Einddatum en tijd': 'Beigu datums un laiks',
   'Inloggen met passkey of andere methode':
-      'Piesakieties ar ieejas atslēgu vai citu metodi',
+      'Pieteikties ar piekļuves atslēgu vai citu metodi',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Izvēlieties laiku 90 dienu laikā un paroli no 8 līdz 256 baitiem vai atstājiet paroli tukšu.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

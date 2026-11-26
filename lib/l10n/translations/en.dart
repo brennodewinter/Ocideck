@@ -811,7 +811,7 @@ const _dutchSourceAddEn = {
       'This file type is not supported.',
   'Einddatum en tijd': 'End date and time',
   'Inloggen met passkey of andere methode':
-      'Log in with passkey or other method',
+      'Sign in with a passkey or another method',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Choose a time within 90 days and a password from 8 to 256 bytes, or leave the password blank.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

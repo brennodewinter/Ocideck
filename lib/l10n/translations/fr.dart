@@ -658,7 +658,7 @@ const _dutchSourceAddFr = {
       'Ce type de fichier n\'est pas pris en charge.',
   'Einddatum en tijd': 'Date et heure de fin',
   'Inloggen met passkey of andere methode':
-      'Connectez-vous avec un mot de passe ou une autre méthode',
+      'Se connecter avec une clé d’accès ou une autre méthode',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Choisissez un délai dans les 90 jours et un mot de passe de 8 à 256 octets, ou laissez le mot de passe vide.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

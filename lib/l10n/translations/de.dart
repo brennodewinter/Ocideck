@@ -657,7 +657,7 @@ const _dutchSourceAddDe = {
       'Dieser Dateityp wird nicht unterstützt.',
   'Einddatum en tijd': 'Enddatum und -uhrzeit',
   'Inloggen met passkey of andere methode':
-      'Melden Sie sich mit dem Passwort oder einer anderen Methode an',
+      'Mit Passkey oder einer anderen Methode anmelden',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Wählen Sie einen Zeitraum innerhalb von 90 Tagen und ein Passwort zwischen 8 und 256 Bytes oder lassen Sie das Passwort leer.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

@@ -1600,7 +1600,7 @@ const _dutchSourceAddRo = <String, String>{
       'Acest tip de fișier nu este acceptat.',
   'Einddatum en tijd': 'Data și ora de încheiere',
   'Inloggen met passkey of andere methode':
-      'Conectați-vă cu cheia de acces sau altă metodă',
+      'Autentificare cu o cheie de acces sau altă metodă',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Alegeți o oră în 90 de zile și o parolă de la 8 la 256 de octeți sau lăsați parola goală.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1627,7 +1627,7 @@ const _dutchSourceAddRo = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open face o copie locală. Salvarea nu modifică fișierul serverului.',
   'Optioneel wachtwoord': 'Parolă opțională',
-  'Passkeys beheren': 'Gestionați cheile de acces',
+  'Passkeys beheren': 'Gestionează cheile de acces',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Prea multe încercări. Așteptați cel puțin un minut și încercați din nou.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

@@ -657,7 +657,7 @@ const _dutchSourceAddFy = {
   'Dit bestandstype wordt niet ondersteund.': 'Dit triemtype wurdt net stipe.',
   'Einddatum en tijd': 'Eindatum en tiid',
   'Inloggen met passkey of andere methode':
-      'Oanmelde mei wachtwurd of oare metoade',
+      'Oanmelde mei in passkey of in oare metoade',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Kies in tiid binnen 90 dagen en in wachtwurd fan 8 oant 256 bytes, of lit it wachtwurd leech.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

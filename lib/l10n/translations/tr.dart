@@ -2441,7 +2441,7 @@ const _dutchSourceAddTr = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Bu dosya türü desteklenmiyor.',
   'Einddatum en tijd': 'Bitiş tarihi ve saati',
   'Inloggen met passkey of andere methode':
-      'Şifre veya başka bir yöntemle giriş yapın',
+      'Geçiş anahtarıyla veya başka bir yöntemle oturum aç',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       '90 gün içinde bir süre ve 8 ila 256 bayt arasında bir şifre seçin veya şifreyi boş bırakın.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -2468,7 +2468,7 @@ const _dutchSourceAddTr = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open yerel bir kopya oluşturur. Kaydetmek sunucu dosyasını değiştirmez.',
   'Optioneel wachtwoord': 'İsteğe bağlı şifre',
-  'Passkeys beheren': 'Şifre anahtarlarını yönet',
+  'Passkeys beheren': 'Geçiş anahtarlarını yönet',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Çok fazla deneme. En az bir dakika bekleyin ve tekrar deneyin.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

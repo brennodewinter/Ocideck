@@ -1590,7 +1590,7 @@ const _dutchSourceAddHr = <String, String>{
       'Ova vrsta datoteke nije podržana.',
   'Einddatum en tijd': 'Datum i vrijeme završetka',
   'Inloggen met passkey of andere methode':
-      'Prijavite se šifrom ili nekom drugom metodom',
+      'Prijava pristupnim ključem ili drugom metodom',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Odaberite vrijeme unutar 90 dana i lozinku od 8 do 256 bajtova ili ostavite lozinku praznom.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1618,7 +1618,7 @@ const _dutchSourceAddHr = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open radi lokalnu kopiju. Spremanjem se ne mijenja datoteka poslužitelja.',
   'Optioneel wachtwoord': 'Neobavezna lozinka',
-  'Passkeys beheren': 'Upravljanje šiframa',
+  'Passkeys beheren': 'Upravljanje pristupnim ključevima',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Previše pokušaja. Pričekajte barem minutu i pokušajte ponovno.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

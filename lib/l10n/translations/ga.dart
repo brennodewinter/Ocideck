@@ -1614,7 +1614,7 @@ const _dutchSourceAddGa = <String, String>{
       'Ní thacaítear leis an gcineál comhaid seo.',
   'Einddatum en tijd': 'Dáta deiridh agus am',
   'Inloggen met passkey of andere methode':
-      'Logáil isteach le pasfhocal nó modh eile',
+      'Sínigh isteach le heochair rochtana nó le modh eile',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Roghnaigh am laistigh de 90 lá agus pasfhocal ó 8 go 256 beart, nó fág an focal faire bán.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1641,7 +1641,7 @@ const _dutchSourceAddGa = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Déanann Oscailte cóip áitiúil. Ní athraíonn an sábháil an comhad freastalaí.',
   'Optioneel wachtwoord': 'Focal faire roghnach',
-  'Passkeys beheren': 'Bainistigh pasfhocail',
+  'Passkeys beheren': 'Bainistigh eochracha rochtana',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'An iomarca iarrachtaí. Fan nóiméad ar a laghad agus bain triail eile as.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

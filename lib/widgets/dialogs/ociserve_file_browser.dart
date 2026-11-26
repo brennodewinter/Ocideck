@@ -143,6 +143,7 @@ class _OciServeFileBrowserState extends ConsumerState<OciServeFileBrowser> {
     _password.clear();
     try {
       await widget.publicFiles!.unlock(password: password);
+      _password.clear();
       if (!mounted || epoch != _epoch) {
         return;
       }

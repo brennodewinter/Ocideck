@@ -1585,7 +1585,7 @@ const _dutchSourceAddFi = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Tätä tiedostotyyppiä ei tueta.',
   'Einddatum en tijd': 'Päättymispäivämäärä ja -aika',
   'Inloggen met passkey of andere methode':
-      'Kirjaudu sisään salasanalla tai muulla tavalla',
+      'Kirjaudu pääsyavaimella tai muulla menetelmällä',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Valitse aika 90 päivän sisällä ja salasana 8 - 256 tavua tai jätä salasana tyhjäksi.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1613,7 +1613,7 @@ const _dutchSourceAddFi = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open tekee paikallisen kopion. Tallentaminen ei muuta palvelintiedostoa.',
   'Optioneel wachtwoord': 'Valinnainen salasana',
-  'Passkeys beheren': 'Hallinnoi salasanoja',
+  'Passkeys beheren': 'Hallitse pääsyavaimia',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Liikaa yrityksiä. Odota vähintään minuutti ja yritä uudelleen.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

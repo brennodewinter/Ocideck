@@ -1596,7 +1596,7 @@ const _dutchSourceAddPl = <String, String>{
       'Ten typ pliku nie jest obsługiwany.',
   'Einddatum en tijd': 'Data i godzina zakończenia',
   'Inloggen met passkey of andere methode':
-      'Zaloguj się za pomocą hasła lub w inny sposób',
+      'Zaloguj się kluczem dostępu lub inną metodą',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Wybierz czas w ciągu 90 dni i hasło od 8 do 256 bajtów lub pozostaw hasło puste.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1623,7 +1623,7 @@ const _dutchSourceAddPl = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open tworzy kopię lokalną. Zapisanie nie powoduje zmiany pliku serwerowego.',
   'Optioneel wachtwoord': 'Opcjonalne hasło',
-  'Passkeys beheren': 'Zarządzaj kluczami',
+  'Passkeys beheren': 'Zarządzaj kluczami dostępu',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Zbyt wiele prób. Poczekaj co najmniej minutę i spróbuj ponownie.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

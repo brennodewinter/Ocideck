@@ -1599,7 +1599,7 @@ const _dutchSourceAddUk = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Цей тип файлу не підтримується.',
   'Einddatum en tijd': 'Дата й час закінчення',
   'Inloggen met passkey of andere methode':
-      'Увійдіть за допомогою ключа доступу або іншим способом',
+      'Увійти за ключем доступу або іншим способом',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Виберіть час у межах 90 днів і пароль від 8 до 256 байт або залиште пароль пустим.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1629,7 +1629,7 @@ const _dutchSourceAddUk = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open створює локальну копію. Збереження не змінює файл сервера.',
   'Optioneel wachtwoord': 'Додатковий пароль',
-  'Passkeys beheren': 'Керуйте ключами доступу',
+  'Passkeys beheren': 'Керування ключами доступу',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Забагато спроб. Зачекайте принаймні хвилину та повторіть спробу.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

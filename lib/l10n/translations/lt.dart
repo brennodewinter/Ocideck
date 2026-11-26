@@ -1591,7 +1591,7 @@ const _dutchSourceAddLt = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Šis failo tipas nepalaikomas.',
   'Einddatum en tijd': 'Pabaigos data ir laikas',
   'Inloggen met passkey of andere methode':
-      'Prisijunkite naudodami prieigos raktą ar kitą būdą',
+      'Prisijungti prieigos raktu arba kitu būdu',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Pasirinkite laiką per 90 dienų ir slaptažodį nuo 8 iki 256 baitų arba palikite slaptažodį tuščią.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

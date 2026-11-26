@@ -1586,7 +1586,7 @@ const _dutchSourceAddHu = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Ez a fájltípus nem támogatott.',
   'Einddatum en tijd': 'Befejezés dátuma és időpontja',
   'Inloggen met passkey of andere methode':
-      'Jelentkezzen be jelszóval vagy más módszerrel',
+      'Bejelentkezés hozzáférési kulccsal vagy más módszerrel',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Válasszon egy 90 napon belüli időt és egy 8 és 256 bájt közötti jelszót, vagy hagyja üresen a jelszót.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1614,7 +1614,7 @@ const _dutchSourceAddHu = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Az Open helyi másolatot készít. A mentés nem módosítja a szerverfájlt.',
   'Optioneel wachtwoord': 'Választható jelszó',
-  'Passkeys beheren': 'Hozzáadási kulcsok kezelése',
+  'Passkeys beheren': 'Hozzáférési kulcsok kezelése',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Túl sok próbálkozás. Várjon legalább egy percet, és próbálja újra.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

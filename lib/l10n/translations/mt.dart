@@ -1601,7 +1601,8 @@ const _dutchSourceAddMt = <String, String>{
   'Dit bestandstype wordt niet ondersteund.':
       'Dan it-tip ta\' fajl mhuwiex appoġġjat.',
   'Einddatum en tijd': 'Data u ħin tat-tmiem',
-  'Inloggen met passkey of andere methode': 'Idħol b\'passkey jew metodu ieħor',
+  'Inloggen met passkey of andere methode':
+      'Idħol b’ċavetta tal-aċċess jew b’metodu ieħor',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Agħżel ħin fi żmien 90 jum u password minn 8 sa 256 bytes, jew ħalli l-password vojta.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1629,7 +1630,7 @@ const _dutchSourceAddMt = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Miftuħ jagħmel kopja lokali. L-iffrankar ma jbiddilx il-fajl tas-server.',
   'Optioneel wachtwoord': 'Password fakultattiva',
-  'Passkeys beheren': 'Immaniġġja passkeys',
+  'Passkeys beheren': 'Immaniġġja ċ-ċwievet tal-aċċess',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Wisq tentattivi. Stenna mill-inqas minuta u erġa\' pprova.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

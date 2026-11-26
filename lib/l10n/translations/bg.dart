@@ -1603,7 +1603,8 @@ const _dutchSourceAddBg = <String, String>{
       'Този файл е твърде голям за отваряне (максимум 32 MB).',
   'Dit bestandstype wordt niet ondersteund.': 'Този тип файл не се поддържа.',
   'Einddatum en tijd': 'Крайна дата и час',
-  'Inloggen met passkey of andere methode': 'Влезте с парола или друг метод',
+  'Inloggen met passkey of andere methode':
+      'Вход с ключ за достъп или друг метод',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Изберете време в рамките на 90 дни и парола от 8 до 256 байта или оставете паролата празна.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1631,7 +1632,7 @@ const _dutchSourceAddBg = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open прави локално копие. Запазването не променя сървърния файл.',
   'Optioneel wachtwoord': 'Парола по избор',
-  'Passkeys beheren': 'Управление на пароли',
+  'Passkeys beheren': 'Управление на ключове за достъп',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Твърде много опити. Изчакайте поне минута и опитайте отново.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

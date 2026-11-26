@@ -1585,7 +1585,7 @@ const _dutchSourceAddSl = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Ta vrsta datoteke ni podprta.',
   'Einddatum en tijd': 'Končni datum in ura',
   'Inloggen met passkey of andere methode':
-      'Prijavite se z geslom ali drugo metodo',
+      'Prijava s ključem za dostop ali drugo metodo',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Izberite čas v 90 dneh in geslo od 8 do 256 bajtov ali pustite geslo prazno.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1613,7 +1613,7 @@ const _dutchSourceAddSl = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open naredi lokalno kopijo. Shranjevanje ne spremeni datoteke strežnika.',
   'Optioneel wachtwoord': 'Neobvezno geslo',
-  'Passkeys beheren': 'Upravljanje gesel',
+  'Passkeys beheren': 'Upravljanje ključev za dostop',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Preveč poskusov. Počakajte vsaj minuto in poskusite znova.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

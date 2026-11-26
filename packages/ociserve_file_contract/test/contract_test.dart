@@ -4,6 +4,24 @@ import 'package:ociserve_file_contract/ociserve_file_contract.dart';
 
 void main() {
   test(
+    'expiry text rejects invalid dates and preserves explicit UTC offsets',
+    () {
+      expect(
+        parseShareExpiryInput('2026-12-01T18:00:00+01:00').toUtc(),
+        DateTime.utc(2026, 12, 1, 17),
+      );
+      for (final value in [
+        '2026-02-30T12:00:00',
+        '2026-12-01T25:00:00',
+        '2026-12-01T12:60:00',
+        '2026-12-01T12:00:00+01:99',
+      ]) {
+        expect(() => parseShareExpiryInput(value), throwsFormatException);
+      }
+    },
+  );
+
+  test(
     'public links separate origin, ID and secret without serializing credentials',
     () {
       final secret = base64Url.encode(List.filled(32, 42)).replaceAll('=', '');

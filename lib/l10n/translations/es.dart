@@ -655,7 +655,7 @@ const _dutchSourceAddEs = {
       'Este tipo de archivo no es compatible.',
   'Einddatum en tijd': 'Fecha y hora de finalización',
   'Inloggen met passkey of andere methode':
-      'Inicie sesión con clave de acceso u otro método',
+      'Iniciar sesión con una clave de acceso u otro método',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Elija una fecha dentro de los 90 días y una contraseña de 8 a 256 bytes, o deje la contraseña en blanco.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

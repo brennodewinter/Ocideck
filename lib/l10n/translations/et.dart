@@ -1577,7 +1577,7 @@ const _dutchSourceAddEt = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Seda failitüüpi ei toetata.',
   'Einddatum en tijd': 'Lõpu kuupäev ja kellaaeg',
   'Inloggen met passkey of andere methode':
-      'Logige sisse pääsukoodiga või muul viisil',
+      'Logi sisse pääsuvõtme või muu meetodiga',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Valige aeg 90 päeva jooksul ja parool vahemikus 8 kuni 256 baiti või jätke parool tühjaks.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1604,7 +1604,7 @@ const _dutchSourceAddEt = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open teeb kohaliku koopia. Salvestamine ei muuda serveri faili.',
   'Optioneel wachtwoord': 'Valikuline parool',
-  'Passkeys beheren': 'Paroolide haldamine',
+  'Passkeys beheren': 'Halda pääsuvõtmeid',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'Liiga palju katseid. Oodake vähemalt minut ja proovige uuesti.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

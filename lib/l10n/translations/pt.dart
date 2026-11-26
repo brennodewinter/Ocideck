@@ -1611,7 +1611,7 @@ const _dutchSourceAddPt = <String, String>{
       'Este tipo de arquivo não é compatível.',
   'Einddatum en tijd': 'Data e hora de término',
   'Inloggen met passkey of andere methode':
-      'Faça login com senha ou outro método',
+      'Iniciar sessão com uma chave de acesso ou outro método',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Escolha um prazo de 90 dias e uma senha de 8 a 256 bytes ou deixe a senha em branco.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

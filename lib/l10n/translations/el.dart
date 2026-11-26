@@ -1609,7 +1609,7 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτός ο τύπος αρχείου δεν υποστηρίζεται.',
   'Einddatum en tijd': 'Ημερομηνία και ώρα λήξης',
   'Inloggen met passkey of andere methode':
-      'Συνδεθείτε με κωδικό πρόσβασης ή άλλη μέθοδο',
+      'Σύνδεση με κλειδί πρόσβασης ή άλλη μέθοδο',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Επιλέξτε μια ώρα εντός 90 ημερών και έναν κωδικό πρόσβασης από 8 έως 256 byte ή αφήστε τον κωδικό πρόσβασης κενό.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':

@@ -1584,7 +1584,7 @@ const _dutchSourceAddSv = <String, String>{
   'Dit bestandstype wordt niet ondersteund.': 'Denna filtyp stöds inte.',
   'Einddatum en tijd': 'Slutdatum och tid',
   'Inloggen met passkey of andere methode':
-      'Logga in med lösenord eller annan metod',
+      'Logga in med en inloggningsnyckel eller en annan metod',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Välj en tid inom 90 dagar och ett lösenord från 8 till 256 byte, eller lämna lösenordet tomt.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
@@ -1611,7 +1611,7 @@ const _dutchSourceAddSv = <String, String>{
   'Openen maakt een lokale kopie. Opslaan wijzigt het serverbestand niet.':
       'Open gör en lokal kopia. Att spara ändrar inte serverfilen.',
   'Optioneel wachtwoord': 'Valfritt lösenord',
-  'Passkeys beheren': 'Hantera lösenord',
+  'Passkeys beheren': 'Hantera inloggningsnycklar',
   'Te veel pogingen. Wacht minstens een minuut en probeer opnieuw.':
       'För många försök. Vänta minst en minut och försök igen.',
   'U hebt geen toegang tot deze bestanden of deze actie.':

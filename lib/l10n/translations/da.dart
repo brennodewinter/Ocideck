@@ -1586,7 +1586,7 @@ const _dutchSourceAddDa = <String, String>{
       'Denne filtype understøttes ikke.',
   'Einddatum en tijd': 'Slutdato og klokkeslæt',
   'Inloggen met passkey of andere methode':
-      'Log ind med adgangsnøgle eller anden metode',
+      'Log ind med adgangsnøgle eller en anden metode',
   'Kies een tijdstip binnen 90 dagen en een wachtwoord van 8 tot 256 bytes, of laat het wachtwoord leeg.':
       'Vælg et tidspunkt inden for 90 dage og en adgangskode fra 8 til 256 bytes, eller lad adgangskoden stå tom.',
   'Kopiëren is mislukt. Selecteer en kopieer de link handmatig.':
