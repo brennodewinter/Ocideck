@@ -156,11 +156,10 @@ Vandaag staat er één: het Vigilis-merkgeel als linkkleur (#1819).
 
 ## Wat er niet staat
 
-**PDF- en PPTX-exports zijn afbeeldingen.** Dit is de grootste beperking in dit
-document en de beperking die er het waarschijnlijkst toe doet.
-`export_service.dart` rendert elke dia naar een bitmap en verpakt die dan: de PDF
-is één full-bleed `pw.Image` per pagina, en de PPTX is één `<p:pic>` per dia.
-Gevolgen, ronduit gezegd:
+**PDF en PPTX exporteren de dia-inhoud als afbeeldingen.** Dit is de grootste
+beperking in deze gids. De export gebruikt de diaweergave van de app. In de
+standaard-PDF vult elke dia een pagina als `pw.Image`, en in PPTX is elke dia
+een `<p:pic>`. De dia-afbeeldingen hebben deze beperkingen:
 
 - er is **geen tekstlaag**, dus er is niets te selecteren, te doorzoeken of door
   een schermlezer te lezen;
@@ -176,10 +175,25 @@ Gevolgen, ronduit gezegd:
   tabelsemantiek;
 - het gegevensalternatief van een grafiek, dat de editor toont, overleeft niet.
 
-Als de ontvanger een toegankelijk document nodig heeft, zijn de eerlijke routes
-vandaag de **Markdown** (die tekst is, zijn koppen behoudt en de alt-tekst draagt)
-of de **HTML-export** (echte tekst in een browser, al is die evenmin tegen WCAG
-gebouwd). PPTX-sprekernotities zijn echte tekst en reizen wél mee.
+De **A4-PDF met sprekersnotities** en de **PPTX-sprekersnotities** bevatten
+selecteerbare notitietekst. De dia-inhoud is in beide formaten een afbeelding.
+
+**Exportbesluit (2026-11-26).** Behoud dia-afbeeldingen in PDF en PPTX. De
+diaweergave van de app behoudt de opmaak, inclusief voetteksten en
+paginanummers. Een echte tekstlaag met een logische leesvolgorde vraagt om
+aanpassingen aan de exportweergave en controles op visuele overeenstemming.
+Alt-tekst per pagina zou een dia als geheel beschrijven. Met een ingesloten
+Markdown-bestand heeft de PDF-pagina zelf nog steeds geen selecteerbare
+diatekst of navigatie op koppen. Herzie het besluit zodra ontvangers een
+toegankelijke PDF of PPTX als eindbestand nodig hebben.
+([Pawprint #3235](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3235))
+
+Deel voor een tekstversie **Markdown** met koppen en alt-tekst nadat je hebt
+gecontroleerd wat de beoogde ontvangers mogen krijgen. Kies **HTML** in het
+exportvenster voor een browserversie met selecteerbare tekst. Als de ontvanger
+ook de visuele opmaak nodig heeft, stuur die versie dan mee met de PDF of PPTX.
+De toegankelijkheidstoets voor HTML staat in
+[Pawprint #3236](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3236).
 
 **De interactieve onderdelen van een keuzemenu-slide zijn met het toetsenbord te
 bedienen.** *(Opgelost 2026-08-18; stond hiervoor als bekend gat.)* Tijdens het
@@ -453,7 +467,7 @@ en de gebreken die hij ving. OciDeck claimt geen WCAG 2.1-conformiteit op enig
 niveau, heeft geen toegankelijkheidsconformiteitsrapport, en is niet getest met
 gebruikers van hulptechnologie.
 
-**De schermlezertoets staat open (#1844, #3237).** Automatische tests toetsen
+**De schermlezertoets staat open (#1844).** Automatische tests toetsen
 de koppeling tussen bullet en beschrijving in de HTML-DOM, de afwezigheid van
 nog niet onthulde markeringen en de bulletbeschrijvingen in de Flutter-
 semantiekboom, en precies één beleefde aankondiging per onthulstap.
@@ -476,10 +490,10 @@ het landt op dezelfde plek: zie [PRIVACY.md](PRIVACY.md) en
 
 - Werk in de editor met tekstschaling omhoog als je die nodig hebt; het deck
   wordt niet beïnvloed door die instelling.
-- Vul **Alt-tekst** in voor elke afbeelding, ook al laten PDF en PPTX die vallen —
-  de Markdown behoudt hem, en dat is waar een toegankelijke versie zou beginnen.
-- Overhandig de **Markdown** of de **HTML** wanneer de ontvanger moet lezen in
-  plaats van kijken.
+- Vul **Alt-tekst** in voor elke afbeelding. Markdown bewaart die tekst en PPTX
+  neemt hem op in de beschrijving van de dia-afbeelding.
+- Deel **Markdown** of exporteer **HTML** als de ontvanger de diatekst moet kunnen
+  selecteren.
 - Meld wat niet werkt. De issuetracker staat in
   [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md); een
   toegankelijkheidsgebrek is hier een gewoon gebrek, geen functieverzoek.
