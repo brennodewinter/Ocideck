@@ -851,6 +851,36 @@ These checks form the static portion of the maintainer’s local validation.
 - **Failure means:** route the string through `l10n.d('…')` — and remember the
   translation gate then wants it in every language.
 
+### Linux X11 and Wayland session probes (#3210)
+
+`linux-start-smoke.yml` builds one release bundle and fans it out to two named
+`desktop-session` matrix jobs: `x11` and `wayland`. Both run automatically on
+matching pull requests and every push to `main`, and on manual dispatch. A
+failure in one session does not cancel the other. The default run no longer
+requires a `desktop_window` input to exercise native windows.
+
+Both jobs use `scripts/run_linux_window_probe.sh BACKEND APP EVIDENCE`. X11
+runs in private Xvfb with Openbox. Wayland runs Sway's headless compositor with
+XWayland disabled and two outputs at scales 1 and 2. Each app gets a disposable
+home, runtime and Secret Service session. The selected GTK backend and session
+are explicit; the other display protocol is removed from the app environment.
+
+The shared probe requires a recorded first rasterized frame, rejects startup
+errors and the startup watchdog, and requires the process to remain alive.
+It then checks native geometry and visible Flutter content over A/B/A changes,
+clicks Settings with native input and observes a cursor change over search.
+Wayland moves the window between 100% and 200% outputs in both directions.
+`session.json` records the backend, display, app hash, source commit and startup
+result; screenshots, startup/app/compositor logs and `result.json` are uploaded
+per backend even after a failure. This is software-rendered headless coverage;
+it does not establish compatibility with every GPU or desktop compositor.
+
+Manual dispatch with `wayland_regression=true` additionally builds without the
+`follow_subsurface_scale(view)` connection. A green baseline must precede it,
+and it is accepted only when the native probe fails on visible content/geometry
+after moving to the other-scale output. A static pin failure or startup crash
+cannot satisfy that counterfactual. The ordinary static workaround checks remain.
+
 ### `make check-toolchain`
 - **Upstream workaround review (#3219):** the register
   `tool/upstream_workarounds.json` records the Linux Impeller and Wayland scale
@@ -2180,7 +2210,7 @@ status is required.
 | [`linux-gate.yml`](../.forgejo/workflows/linux-gate.yml) | `schedule` · `11 2 * * *` | Automatic on the default branch, on schedule |
 | [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `workflow_dispatch` | On demand |
 | [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `push` · `branches` `main` | Automatic on push to main |
-| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `pull_request` · `branches` `main` · `paths` `lib/**`, `linux/**`, `native/**`, `third_party/**`, `packaging/**`, `assets/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `.forgejo/ci-image/**`, `.forgejo/workflows/linux-start-smoke.yml`, `scripts/**` | Automatic before merge |
+| [`linux-start-smoke.yml`](../.forgejo/workflows/linux-start-smoke.yml) | `pull_request` · `branches` `main` · `paths` `lib/**`, `linux/**`, `native/**`, `third_party/**`, `packaging/**`, `assets/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `.forgejo/ci-image/**`, `.forgejo/workflows/linux-start-smoke.yml`, `scripts/**`, `test/linux_session_workflow_test.dart`, `test/release_linux_sessions_test.py` | Automatic before merge |
 | [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `workflow_dispatch` | On demand |
 | [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `push` · `branches` `main` · `paths` `pubspec.yaml`, `pubspec.lock`, `macos/**`, `third_party/**`, `.tool-versions`, `.forgejo/workflows/macos-build.yml`, `scripts/macos_window_probe.swift` | Automatic on push to main |
 | [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `workflow_dispatch` | On demand |
