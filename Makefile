@@ -1,5 +1,5 @@
 .PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-linux-wayland-scale check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-roundtrip-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
-.PHONY: package-deps test-benchmarks
+.PHONY: package-deps test-benchmarks test-desktop-smoke
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -53,6 +53,7 @@ ON_SUITE_FAILURE := || { dart run tool/explain_suite_failure.dart $(TEST_REPORT)
 
 help:
 	@echo "OciDeck quality targets:"
+	@echo "  make test-desktop-smoke  Real desktop open/add/save/close/reopen; native Cmd+Q guard on macOS."
 	@echo "  make test-age-interop  Build the reference age (Go, network) and run the interoperability test (phase 3 gate)."
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
 	@echo "  make check-full      make check + secrets + SAST + licences, SBOM, deps, web hardening."
@@ -216,6 +217,11 @@ coverage:
 test-benchmarks:
 	@echo "== OciDeck check: isolated scaling benchmark =="
 	$(RAISE_FDS) flutter test test --tags benchmark --concurrency=1 $(TEST_TIMEOUT_FLAG) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+
+# Real app engines and disk, outside the widget-test quality gate (#3207).
+# DEVICE may be omitted to use the host platform.
+test-desktop-smoke:
+	@scripts/gate_lock.sh dart run tool/run_desktop_smoke.dart $(DEVICE)
 
 # The per-file floor, over the report `coverage` just wrote (no second test run).
 #
