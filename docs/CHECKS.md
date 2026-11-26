@@ -2227,7 +2227,7 @@ status is required.
 | [`time-degrading-checks.yml`](../.forgejo/workflows/time-degrading-checks.yml) | `workflow_dispatch` | On demand |
 | [`toolchain-rehearsal.yml`](../.forgejo/workflows/toolchain-rehearsal.yml) | `pull_request` · `paths` `.tool-versions` | Automatic before merge |
 | [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `workflow_dispatch` | On demand |
-| [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `push` · `branches` `main` · `paths` `lib/**`, `web/**`, `assets/**`, `packages/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `Makefile`, `tool/web-wasm-check/**`, `tool/*web*.dart`, `test/web_gate_triggers_test.dart`, `.forgejo/workflows/web-gate.yml` | Automatic browser acceptance |
+| [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `push` · `branches` `main` · `paths` `lib/**`, `web/**`, `assets/**`, `packages/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `Makefile`, `tool/web-wasm-check/**`, `tool/*web*.dart`, `test/web_gate_triggers_test.dart`, `.forgejo/workflows/web-gate.yml` | Automatic on push to main |
 | [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `pull_request` · `branches` `main` · `paths` `lib/**`, `web/**`, `assets/**`, `packages/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `Makefile`, `tool/web-wasm-check/**`, `tool/*web*.dart`, `test/web_gate_triggers_test.dart`, `.forgejo/workflows/web-gate.yml` | Automatic before merge |
 | [`website-downloads.yml`](../.forgejo/workflows/website-downloads.yml) | `workflow_dispatch` | On demand |
 
