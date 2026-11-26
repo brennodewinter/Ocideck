@@ -1694,7 +1694,7 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
   green precisely because its own test used a
   hand-built bundle that happened to contain none of the files it broke.
   `make check-full` runs the whole target — a real `flutter build web` — locally;
-  [`web-gate.yml`](#forgejoworkflowsweb-gateyml--the-web-bundle-on-demand)
+  [`web-gate.yml`](#forgejoworkflowsweb-gateyml--automatic-browser-acceptance-3212)
   can repeat it on Linux when deliberately requested.
 
 ### `make deps-outdated` (advisory)
@@ -2227,6 +2227,8 @@ status is required.
 | [`time-degrading-checks.yml`](../.forgejo/workflows/time-degrading-checks.yml) | `workflow_dispatch` | On demand |
 | [`toolchain-rehearsal.yml`](../.forgejo/workflows/toolchain-rehearsal.yml) | `pull_request` · `paths` `.tool-versions` | Automatic before merge |
 | [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `workflow_dispatch` | On demand |
+| [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `push` · `branches` `main` · `paths` `lib/**`, `web/**`, `assets/**`, `packages/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `Makefile`, `tool/web-wasm-check/**`, `tool/*web*.dart`, `test/web_gate_triggers_test.dart`, `.forgejo/workflows/web-gate.yml` | Automatic on push to main |
+| [`web-gate.yml`](../.forgejo/workflows/web-gate.yml) | `pull_request` · `branches` `main` · `paths` `lib/**`, `web/**`, `assets/**`, `packages/**`, `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `Makefile`, `tool/web-wasm-check/**`, `tool/*web*.dart`, `test/web_gate_triggers_test.dart`, `.forgejo/workflows/web-gate.yml` | Automatic before merge |
 | [`website-downloads.yml`](../.forgejo/workflows/website-downloads.yml) | `workflow_dispatch` | On demand |
 
 <!-- END PAWPRINT WORKFLOW TRIGGERS -->
@@ -2390,32 +2392,41 @@ not simulate a physical runner or server outage.
   reads the whole tree at the newest commit, so a later run covers everything an
   aborted one would have seen.
 
-### `.forgejo/workflows/web-gate.yml` — the web bundle, on demand
-- **web-gate** — on the prebaked CI image, same container and same two caches as
-  `static-gate.yml`: `flutter pub get`, then [`make check-web`](#make-check-web).
-  That is a real `flutter build web --release --no-web-resources-cdn --csp`
-  followed by the three checks on the built bundle. The web engine artifacts are
-  *not* baked into the image (`--no-web`) and are fetched during the build; that
-  is a small download.
-- **Why it exists (#1888-tail).** `make check-web` is the only check that looks
-  at a *built* bundle, and it lived in `check-full` on the committer's machine
-  and in the pre-tag candidate in `release.yml`. Historically, nothing
-  built the web between a local check and a tag. #1888's dotfile sweep kept only what `releaseArtefacten` names — a list
-  describing what the packing step *adds*, not what the bundle *contains* — and
-  the two dotfiles that belong there come from `web/`, copied by `flutter build
-  web`. So `build/web/.htaccess` (header-form hardening, #849) and
-  `build/web/.well-known/security.txt` (the RFC 9116 reporting address) stopped
-  being shipped. The first machine to notice was phase 1 of the release chain,
-  weeks after the merge, and it aborted the v0.5.0 release. Every gate was green
-  the whole time.
-- **Two layers, on purpose.** `test/pack_web_release_test.dart` mirrors the real
-  `web/` tree into a stand-in bundle and runs in `make check` — cheap, per
-  commit, but still a simulation of building. This workflow does the real thing
-  in local `make check-full`; the workflow offers the same real build on the
-  Linux runner when deliberately requested. Neither replaces the release build.
-- **A superseded run cancels** (`concurrency`, `cancel-in-progress`): it builds
-  the whole bundle at the newest commit, so a later run covers everything an
-  aborted one would have seen.
+### `.forgejo/workflows/web-gate.yml` — automatic browser acceptance (#3212)
+
+- Runs on matching pull requests and pushes to `main`, and on manual dispatch.
+  Inputs include `lib/`, `web/`, assets/packages, pubspec/lock, Flutter pin,
+  Makefile, the browser harness and its workflow. The trigger inventory test
+  prevents the gate silently becoming manual-only again.
+- Builds and hardens the real release bundle with `make check-web`, then runs
+  `make check-web-browser` using the exact Playwright/Chromium pin in
+  `tool/web-wasm-check/package-lock.json`. Browser acceptance also belongs to
+  `make check-full`, after the web build. Install its local prerequisites once:
+  `npm ci --prefix tool/web-wasm-check`, then from that directory
+  `npx playwright install chromium` (Linux CI uses `--with-deps`).
+- Each compiler/renderer mode (auto WASM, JavaScript fallback, single-thread)
+  opens a local Markdown file through the real chooser, loads a nested URL deck
+  and its relative image, downloads Markdown and reopens those bytes beside the
+  image, then changes the style logo through Design, saves the profile and
+  verifies the embedded image bytes in real style downloads before and after
+  reopening the menu. Flutter's accessibility entry point supplies selectors;
+  normal pointer/file-chooser/download operations exercise the product.
+- The app is served only under `/ocideck/`; root-relative bootstrap/asset paths
+  fail. The server uses the shipped CSP, isolation and MIME rules. Startup and
+  the complete journey reject every `console.error`, uncaught page error and
+  HTTP error. No error allowlist is used. The empty shipped optional config
+  avoids two real startup 404s that the expanded probe exposed.
+- Opening the shipped `index.html` with `file://` must explain HTTP hosting,
+  produce no console errors and never start Flutter. A real-browser countertest
+  removes the protocol guard from a temporary copy of the bundle: CORS/module
+  console errors must then make the same check fail (#2661). A separate live
+  browser test verifies that a standalone `console.error` fails even without a
+  thrown exception or crashed page.
+- CI retains screenshots and logs in `build/web-browser/` on success and failure.
+  The browser uses fresh contexts and synthetic decks/logos; it never reads a
+  user's project. Compiler, renderer, worker and zero-third-party-startup-request checks
+  retain their startup scope. Later journey requests are recorded separately;
+  the existing dynamic-font fallback exception in SECURITY_DESIGN still applies.
 
 ### `.forgejo/workflows/linux-gate.yml` — nightly `schedule` **and on demand** (`workflow_dispatch`)
 - **gate-linux** — the gate that `ci.yml` used to be, now on the prebaked CI

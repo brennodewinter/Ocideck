@@ -1,63 +1,56 @@
-# Bouwt de webbundel op afroep en draait er de harding op.
-#
-# **Waarom deze workflow bestaat.** `make check-web` bouwt echt
-# (`make build-web`: WASM + JS fallback, content hashes and strict CSP) en controleert
-# daarna de gebouwde bundel. Dat is te duur voor elke PR, dus het zat alleen in
-# `check-full` op de machine van de committer en in `release.yml` op een
-# `v*`-tag. Tussen die twee zag niets een echte webbouw.
-#
-# Dat kostte de release van v0.5.0. De dotfile-opruiming uit #1888 hield als
-# "bewust meegenomen" alleen aan wat `releaseArtefacten` noemt — een lijst die
-# beschrijft wat de inpakstap er zélf bij legt, niet wat de bundel bevat. De
-# twee dotfiles die er wél horen komen uit `web/`, en `flutter build web`
-# kopieert die. Weg waren `build/web/.htaccess` (de header-vorm-harding van
-# #849) en `build/web/.well-known/security.txt` (het meldadres uit RFC 9116).
-# Fase 1 van de releaseketen was de eerste machine die het merkte, wekenlang na
-# de merge. Alle poorten stonden intussen groen: #1888 voegde zelf een test toe,
-# maar die draaide op een met de hand gebouwde bundel die precies de bestanden
-# miste die de wijziging brak.
-#
-# Er staat nu twee keer iets tegen die faalklasse, met opzet op verschillende
-# hoogte. `pack_web_release_test.dart` spiegelt de échte `web/`-boom in een
-# nagebouwde bundel en draait in `make check` — goedkoop, per commit, maar het
-# blijft een nabootsing van het bouwen. Deze workflow doet het echte werk: één
-# `flutter build web`, en dan dezelfde controle die de tag straks ook krijgt.
-#
-# **Waarom een padfilter en geen onvoorwaardelijke poort.** De bouw kost
-# minuten, en een gewone Dart-wijziging kan de bundel niet raken. Hij gaat
-# daarom alleen af op de invoeren die dat wél kunnen; die lijst staat met de
-# reden per ingang in `test/web_gate_triggers_test.dart`, want een poort die
-# niet afgaat bewaakt niets en dat is precies hoe deze bescherming stil kan
-# verdwijnen (zoals `.tool-versions` ooit uit het filter van `linux-build.yml`
-# ontbrak).
-#
-# **Waarom alleen handmatig.** `make check-full` bouwt en controleert dezelfde
-# webbundel lokaal op de commit die de maintainer in de PR vastlegt. Een tweede
-# automatische bouw voegt dan geen bewijs toe. De handmatige trekker blijft voor
-# diagnose op de Linux-runner en voor een bewust onafhankelijke herbouwing.
-#
-# **Waarom op het voorgebakken CI-image.** Zelfde redenering als `static-gate`:
-# OS, node, de build-toolchain en de gepinde, sha256-geverifieerde Flutter zitten
-# er al in. Het tag ís de Flutter-pin; loopt het achter op `.tool-versions`, dan
-# valt `check-toolchain` elders om — fail-closed, geen stille drift. De
-# web-engine-artefacten zitten er níet in (`--no-web` in het image) en worden bij
-# `flutter build web` opgehaald; dat is een kleine download.
+# Automatic release-bundle browser acceptance (#3212).
 name: web-gate
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/**'
+      - 'web/**'
+      - 'assets/**'
+      - 'packages/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.tool-versions'
+      - 'Makefile'
+      - 'tool/web-wasm-check/**'
+      - 'tool/*web*.dart'
+      - 'test/web_gate_triggers_test.dart'
+      - '.forgejo/workflows/web-gate.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lib/**'
+      - 'web/**'
+      - 'assets/**'
+      - 'packages/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.tool-versions'
+      - 'Makefile'
+      - 'tool/web-wasm-check/**'
+      - 'tool/*web*.dart'
+      - 'test/web_gate_triggers_test.dart'
+      - '.forgejo/workflows/web-gate.yml'
+
+permissions:
+  contents: read
 
 concurrency:
-  group: web-gate-${{ github.ref }}
+  group: web-gate-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   web-gate:
     runs-on: docker
+    timeout-minutes: 60
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
       # De werkkopie is van een andere uid dan root; zonder dit weigert git
       # bewerkingen. `/opt/flutter` (ingebakken) heeft dezelfde behandeling
@@ -69,6 +62,9 @@ jobs:
           git config --global --add safe.directory /opt/flutter
           echo "/opt/flutter/bin" >> "$GITHUB_PATH"
 
+      - name: Gepinde Flutter controleren
+        run: make check-toolchain
+
       - name: Pub-pakketten uit de cache
         continue-on-error: true
         uses: actions/cache@v4
@@ -79,7 +75,7 @@ jobs:
             pub-linux-
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       # Zelfde sleutel als static-gate/linux-gate/release, met opzet: één cache
       # bedient alle poorten. Op versie alleen, geen `hashFiles` en geen
@@ -107,7 +103,7 @@ jobs:
         run: make check-web
 
       - name: Node voor de gepinde browserproef
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
 
@@ -118,4 +114,18 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: WASM, JavaScript-terugval en rendering zonder isolatie
-        run: make check-web-browser
+        env:
+          OCIDECK_WASM_SCREENSHOT_DIR: build/web-browser
+        run: |
+          mkdir -p build/web-browser
+          make check-web-browser > build/web-browser/run.log 2>&1 || { cat build/web-browser/run.log; exit 1; }
+          cat build/web-browser/run.log
+
+      - name: Browserbewijs bewaren, ook bij fouten
+        if: always()
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: web-browser-${{ github.sha }}
+          path: build/web-browser/
+          if-no-files-found: warn
+          retention-days: 7
